@@ -1,0 +1,179 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<PLAYER>
+<Name>"Gunther Krieg"</Name>
+<Specie>"RULES-RACE_HUM"</Specie>
+  <!-- Humains (Reikland) -->
+<Career>"RULES-WORK17"</Career>
+  <!-- Débardeur  -->
+<Level>"1"</Level>
+<Xp>"550"</Xp>
+<Xp25>"22"</Xp25>
+<CurrentXp>"5"</CurrentXp>
+<CHAPTER_CREATION>
+<SUBCHAPTER_ATTR>
+<Attribut name="RULES-ATTR_WS">"20"</Attribut>
+  <!-- Capacité de Combat -->
+<Attribut name="RULES-ATTR_BS">"5"</Attribut>
+  <!-- Capacité de Tir -->
+<Attribut name="RULES-ATTR_S">"20"</Attribut>
+  <!-- Force -->
+<Attribut name="RULES-ATTR_T">"20"</Attribut>
+  <!-- Endurance -->
+<Attribut name="RULES-ATTR_I">"20"</Attribut>
+  <!-- Initiative -->
+<Attribut name="RULES-ATTR_Ag">"5"</Attribut>
+  <!-- Agilité -->
+<Attribut name="RULES-ATTR_Dex">"5"</Attribut>
+  <!-- Dextérité -->
+<Attribut name="RULES-ATTR_Int">"5"</Attribut>
+  <!-- Intelligence -->
+<Attribut name="RULES-ATTR_WP">"20"</Attribut>
+  <!-- Force Mentale -->
+<Attribut name="RULES-ATTR_Fel">"0"</Attribut>
+  <!-- Sociabilité -->
+<Attribut name="RULES-ATTR_Fate">"2"</Attribut>
+  <!-- Points de Destin -->
+<Attribut name="RULES-ATTR_Resil">"1"</Attribut>
+  <!-- Résilience -->
+</SUBCHAPTER_ATTR>
+<SUBCHAPTER_SKILLSPECIE>
+<Skill name="RULES-COMPCALM">"5"</Skill>
+  <!-- Calme -->
+<Skill name="RULES-COMPATHL">"5"</Skill>
+  <!-- Athlétisme -->
+<Skill name="RULES-COMPCOMB_BASE">"5"</Skill>
+  <!-- Corps à corps (Base) -->
+<Skill name="RULES-COMPESQU">"5"</Skill>
+  <!-- Esquive -->
+<Skill name="RULES-COMPSAVOIR_REG">"5"</Skill>
+  <!-- Savoir (Région)  -->
+<Skill name="RULES-COMPPRECEP">"5"</Skill>
+  <!-- Perception  -->
+</SUBCHAPTER_SKILLSPECIE>
+<SUBCHAPTER_SKILLCREATION>
+<Skill name="RULES-COMPRAGOT">"5"</Skill>
+  <!-- Ragot  -->
+<Skill name="RULES-COMPCOMB_BASE">"10"</Skill>
+  <!-- Corps à corps (Base) -->
+<Skill name="RULES-COMPPRECEP">"5"</Skill>
+  <!-- Perception  -->
+<Skill name="RULES-COMPNATA">"5"</Skill>
+  <!-- Natation -->
+<Skill name="RULES-COMPRESIST">"10"</Skill>
+  <!-- Résistance  -->
+<Skill name="RULES-COMPESQU">"5"</Skill>
+  <!-- Esquive -->
+</SUBCHAPTER_SKILLCREATION>
+<SUBCHAPTER_TALENT>
+<Talent name="RULES-T0002">"1"</Talent>
+  <!-- Affable -->
+<Talent name="RULES-T0171">"1"</Talent>
+  <!-- Destinée -->
+<Talent name="RULES-T0047">"1"</Talent>
+  <!-- Dur à cuire -->
+<Talent name="RULES-T0139_OUIE">"1"</Talent>
+  <!-- Sens aiguisé (Ouïe) -->
+<Talent name="RULES-T0141">"1"</Talent>
+  <!-- Sixième sens -->
+<Talent name="RULES-T0158">"1"</Talent>
+  <!-- Très fort -->
+</SUBCHAPTER_TALENT>
+</CHAPTER_CREATION>
+<CHAPTER_INCREASE>
+<SUBCHAPTER_ATTR>
+<Attribut name="ATTR_T">"5"</Attribut>
+  <!-- Endurance -->
+<Attribut name="ATTR_I">"5"</Attribut>
+  <!-- Initiative -->
+</SUBCHAPTER_ATTR>
+<SUBCHAPTER_SKILLCAREER>
+</SUBCHAPTER_SKILLCAREER>
+<SUBCHAPTER_TALENT>
+</SUBCHAPTER_TALENT>
+</CHAPTER_INCREASE>
+<CHAPTER_SKILL>
+<SUBCHAPTER_SKILLCAREER>
+<Skill name="RULES-COMPATHL">"1"</Skill>
+  <!-- Athlétisme -->
+<Skill name="RULES-COMPCOMB_BASE">"1"</Skill>
+  <!-- Corps à corps (Base) -->
+<Skill name="RULES-COMPCALM">"1"</Skill>
+  <!-- Calme -->
+<Skill name="RULES-COMPESCAL">"1"</Skill>
+  <!-- Escalade  -->
+<Skill name="RULES-COMPESQU">"1"</Skill>
+  <!-- Esquive -->
+<Skill name="RULES-COMPNATA">"1"</Skill>
+  <!-- Natation -->
+<Skill name="RULES-COMPPRECEP">"1"</Skill>
+  <!-- Perception  -->
+<Skill name="RULES-COMPRAGOT">"1"</Skill>
+  <!-- Ragot  -->
+<Skill name="RULES-COMPRESIST">"1"</Skill>
+  <!-- Résistance  -->
+<Skill name="RULES-COMPINTUI">"1"</Skill>
+  <!-- Intuition  -->
+<Skill name="RULES-COMPDISC_URB">"2"</Skill>
+  <!-- Discrétion (Urbaine) -->
+<Skill name="RULES-COMPDIVERT_NARRA">"2"</Skill>
+  <!-- Divertissement (Narration)  -->
+<Skill name="RULES-COMPINTIM">"2"</Skill>
+  <!-- Intimidation  -->
+<Skill name="RULES-COMPPARI">"2"</Skill>
+  <!-- Pari  -->
+<Skill name="RULES-COMPPRECEP">"2"</Skill>
+  <!-- Perception  -->
+<Skill name="RULES-COMPSUBOR">"2"</Skill>
+  <!-- Subornation  -->
+<Skill name="RULES-COMPCALM">"3"</Skill>
+  <!-- Calme -->
+<Skill name="RULES-COMPCOMM">"3"</Skill>
+  <!-- Commandement  -->
+<Skill name="RULES-COMPEVAL">"3"</Skill>
+  <!-- Évaluation  -->
+<Skill name="RULES-COMPINTUI">"3"</Skill>
+  <!-- Intuition  -->
+<Skill name="RULES-COMPCHARM">"4"</Skill>
+  <!-- Charme  -->
+<Skill name="RULES-COMPSAVOIR_TAXE">"4"</Skill>
+  <!-- Savoir (Taxes)  -->
+</SUBCHAPTER_SKILLCAREER>
+</CHAPTER_SKILL>
+<CHAPTER_OLDCAREER>
+<Career name="RULES-WORK17/1">"0"</Career>
+  <!-- Débardeur  -->
+</CHAPTER_OLDCAREER>
+<CHAPTER_ITEM>
+<SUBCHAPTER_WEAPON>
+<Item name="RULES-COMB_BASE_02">""</Item>
+  <!-- Gaffe -->
+<Item name="RULES-COMB_BASE_10">""</Item>
+  <!-- Dague -->
+<Item name="RULES-COMB_BASE_07">""</Item>
+  <!-- Bouclier -->
+</SUBCHAPTER_WEAPON>
+<SUBCHAPTER_ARMOR>
+<Item name="RULES-ARMO_04">""</Item>
+  <!-- Veste de cuir -->
+</SUBCHAPTER_ARMOR>
+<SUBCHAPTER_ARMOR_SET>
+</SUBCHAPTER_ARMOR_SET>
+<SUBCHAPTER_MISC>
+<Item name="leather gloves">""</Item>
+</SUBCHAPTER_MISC>
+<SUBCHAPTER_SPELL>
+</SUBCHAPTER_SPELL>
+</CHAPTER_ITEM>
+<BOOK>"[BOOK RULESBOOK]"</BOOK>
+<RULES>"[BOOK RULESBOOK]"</RULES>
+<CHAPTER_XP>
+<SUBCHAPTER_ATTR>
+<Attribut name="E:0-5">"0"</Attribut>
+</SUBCHAPTER_ATTR>
+<SUBCHAPTER_SKILL>
+</SUBCHAPTER_SKILL>
+<SUBCHAPTER_TALENT>
+</SUBCHAPTER_TALENT>
+</CHAPTER_XP>
+<OPTIONS>"[XpDiv25][PdfFeldo2P]"</OPTIONS>
+</PLAYER>

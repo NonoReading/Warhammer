@@ -1,0 +1,175 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<PLAYER>
+<Name>"Friderich Wickler"</Name>
+<Specie>"RACE_HUM"</Specie>
+  <!-- Humans (Reikland) -->
+<Career>"WORK24"</Career>
+  <!-- Spy -->
+<Level>"1"</Level>
+<Xp>"1395"</Xp>
+<CurrentXp>"40"</CurrentXp>
+<CHAPTER_CREATION>
+<SUBCHAPTER_ATTR>
+<Attribut name="ATTR_WS">"7"</Attribut>
+  <!-- Weapon Skill -->
+<Attribut name="ATTR_BS">"11"</Attribut>
+  <!-- Ballistic Skill -->
+<Attribut name="ATTR_S">"5"</Attribut>
+  <!-- Strength -->
+<Attribut name="ATTR_T">"14"</Attribut>
+  <!-- Toughness -->
+<Attribut name="ATTR_I">"6"</Attribut>
+  <!-- Initiative -->
+<Attribut name="ATTR_Ag">"15"</Attribut>
+  <!-- Agility -->
+<Attribut name="ATTR_Dex">"11"</Attribut>
+  <!-- Dexterity -->
+<Attribut name="ATTR_Int">"7"</Attribut>
+  <!-- Intelligence -->
+<Attribut name="ATTR_WP">"10"</Attribut>
+  <!-- Willpower -->
+<Attribut name="ATTR_Fel">"13"</Attribut>
+  <!-- Fellowship -->
+<Attribut name="ATTR_Fate">"1"</Attribut>
+  <!-- Fate -->
+<Attribut name="ATTR_Resil">"2"</Attribut>
+  <!-- Resilience -->
+</SUBCHAPTER_ATTR>
+<SUBCHAPTER_SKILLSPECIE>
+<Skill name="COMPCHARM">"5"</Skill>
+  <!-- Charm -->
+<Skill name="COMPCOMM">"5"</Skill>
+  <!-- Leadership -->
+<Skill name="COMPEVAL">"5"</Skill>
+  <!-- Evaluate -->
+<Skill name="COMPMARCH">"5"</Skill>
+  <!-- Haggle -->
+<Skill name="COMPRAGOT">"5"</Skill>
+  <!-- Gossip -->
+<Skill name="COMPSAVOIR_REG">"5"</Skill>
+  <!-- Lore (Region) -->
+</SUBCHAPTER_SKILLSPECIE>
+<SUBCHAPTER_SKILLCREATION>
+<Skill name="COMPART_PEINT">"5"</Skill>
+  <!-- Art (Painting) -->
+<Skill name="COMPCALM">"5"</Skill>
+  <!-- Cool -->
+<Skill name="COMPDISC_URB">"5"</Skill>
+  <!-- Stealth (Urban) -->
+<Skill name="COMPEVAL">"5"</Skill>
+  <!-- Evaluate -->
+<Skill name="COMPPRECEP">"5"</Skill>
+  <!-- Perception  -->
+<Skill name="COMPRESIST">"5"</Skill>
+  <!-- Endurance -->
+<Skill name="COMPRESALC">"5"</Skill>
+  <!-- Consume Alcohol -->
+</SUBCHAPTER_SKILLCREATION>
+<SUBCHAPTER_TALENT>
+<Talent name="T0002">"1"</Talent>
+  <!-- Suave -->
+<Talent name="T0171">"1"</Talent>
+  <!-- Doomed -->
+<Talent name="T0073">"1"</Talent>
+  <!-- Mimic -->
+<Talent name="T0045">"1"</Talent>
+  <!-- Nimble Fingered -->
+<Talent name="T0110">"1"</Talent>
+  <!-- Perfect Pitch -->
+</SUBCHAPTER_TALENT>
+</CHAPTER_CREATION>
+<CHAPTER_INCREASE>
+<SUBCHAPTER_ATTR>
+<Attribut name="ATTR_S">"5"</Attribut>
+  <!-- Strength -->
+<Attribut name="ATTR_I">"5"</Attribut>
+  <!-- Initiative -->
+<Attribut name="ATTR_Ag">"5"</Attribut>
+  <!-- Agility -->
+<Attribut name="ATTR_Dex">"5"</Attribut>
+  <!-- Dexterity -->
+<Attribut name="ATTR_WP">"5"</Attribut>
+  <!-- Willpower -->
+<Attribut name="ATTR_Fel">"5"</Attribut>
+  <!-- Fellowship -->
+</SUBCHAPTER_ATTR>
+<SUBCHAPTER_SKILLCAREER>
+<Skill name="COMPART_PEINT">"5"</Skill>
+  <!-- Art (Painting) -->
+</SUBCHAPTER_SKILLCAREER>
+<SUBCHAPTER_TALENT>
+<Talent name="T0007">"1"</Talent>
+  <!-- Artistic -->
+<Talent name="T0010">"1"</Talent>
+  <!-- Blather -->
+<Talent name="T0166">"1"</Talent>
+  <!-- Sharp -->
+</SUBCHAPTER_TALENT>
+</CHAPTER_INCREASE>
+<CHAPTER_SKILL>
+<SUBCHAPTER_SKILLCAREER>
+<Skill name="COMPART_PEINT">"1"</Skill>
+  <!-- Art (Painting) -->
+<Skill name="COMPCALM">"1"</Skill>
+  <!-- Cool -->
+<Skill name="COMPDISC_URB">"1"</Skill>
+  <!-- Stealth (Urban) -->
+<Skill name="COMPEVAL">"1"</Skill>
+  <!-- Evaluate -->
+<Skill name="COMPPRECEP">"1"</Skill>
+  <!-- Perception  -->
+<Skill name="COMPRAGOT">"1"</Skill>
+  <!-- Gossip -->
+<Skill name="COMPRESIST">"1"</Skill>
+  <!-- Endurance -->
+<Skill name="COMPRESALC">"1"</Skill>
+  <!-- Consume Alcohol -->
+<Skill name="COMPESCAL">"2"</Skill>
+  <!-- Climb -->
+<Skill name="COMPINTUI">"2"</Skill>
+  <!-- Intuition  -->
+<Skill name="COMPLANG_CLASS">"2"</Skill>
+  <!-- Language (Classic) -->
+<Skill name="COMPMARCH">"2"</Skill>
+  <!-- Haggle -->
+<Skill name="COMPMETIER_MATART">"2"</Skill>
+  <!-- Trade (artistic material) -->
+<Skill name="COMPPARI">"2"</Skill>
+  <!-- Gamble -->
+<Skill name="COMPCHARM">"3"</Skill>
+  <!-- Charm -->
+<Skill name="COMPCOMM">"3"</Skill>
+  <!-- Leadership -->
+<Skill name="COMPSAVOIR_ART">"3"</Skill>
+  <!-- Lore (Art) -->
+<Skill name="COMPSAVOIR_HERAL">"3"</Skill>
+  <!-- Lore (Heraldry) -->
+<Skill name="COMPCHEV_CHEVAL">"4"</Skill>
+  <!-- Ride (Horse) -->
+<Skill name="COMPRECH">"4"</Skill>
+  <!-- Research -->
+</SUBCHAPTER_SKILLCAREER>
+</CHAPTER_SKILL>
+<CHAPTER_OLDCAREER>
+<Career name="WORK04/1">"100"</Career>
+  <!-- Spy -->
+<Career name="WORK24/1">"0"</Career>
+  <!-- Spy -->
+</CHAPTER_OLDCAREER>
+<CHAPTER_ITEM>
+<SUBCHAPTER_WEAPON>
+</SUBCHAPTER_WEAPON>
+<SUBCHAPTER_ARMOR>
+</SUBCHAPTER_ARMOR>
+<SUBCHAPTER_MISC>
+<Item name="brosse">""</Item>
+<Item name="bâtonnet de fusain">""</Item>
+<Item name="besace contenant 2 tenues vestimentaires différentes">""</Item>
+<Item name="cape à capuchon">""</Item>
+</SUBCHAPTER_MISC>
+<SUBCHAPTER_SPELL>
+</SUBCHAPTER_SPELL>
+</CHAPTER_ITEM>
+<BOOK>"[BOOK RULESBOOK]"</BOOK>
+<RULES>"[BOOK RULESBOOK]"</RULES>
+</PLAYER>

@@ -1,0 +1,33 @@
+object WinFabrications: TWinFabrications
+  Left = 1084
+  Height = 445
+  Top = 224
+  Width = 904
+  Caption = 'Fabrication'
+  ClientHeight = 445
+  ClientWidth = 904
+  Color = clBlack
+  DesignTimePPI = 120
+  OnCreate = FormCreate
+  LCLVersion = '3.0.0.1'
+  object TabFabrication: TStringGrid
+    Left = 23
+    Height = 344
+    Top = 24
+    Width = 681
+    ColCount = 1
+    RowCount = 1
+    TabOrder = 0
+    OnSelectEditor = TabFabricationSelectEditor
+    OnValidateEntry = TabFabricationValidateEntry
+  end
+  object ButtonOk: TButton
+    Left = 23
+    Height = 45
+    Top = 384
+    Width = 176
+    Caption = 'Ok'
+    OnClick = ButtonOkClick
+    TabOrder = 1
+  end
+end

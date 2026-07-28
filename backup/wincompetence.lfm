@@ -1,0 +1,234 @@
+object WinCompetence: TWinCompetence
+  Left = 769
+  Height = 874
+  Top = 277
+  Width = 1700
+  Caption = 'Compétence'
+  ClientHeight = 874
+  ClientWidth = 1700
+  Color = clBlack
+  DesignTimePPI = 120
+  OnClose = FormClose
+  OnCreate = FormCreate
+  OnKeyPress = FormKeyPress
+  LCLVersion = '3.8.0.0'
+  object TabCompetence: TStringGrid
+    Left = 9
+    Height = 742
+    Top = 112
+    Width = 607
+    Anchors = [akTop, akLeft, akBottom]
+    Color = cl3DLight
+    ColCount = 1
+    ColumnClickSorts = True
+    TabOrder = 0
+    OnDblClick = TabCompetenceDblClick
+    OnSelection = TabCompetenceAfterSelection
+  end
+  object AffCode: TEdit
+    Left = 648
+    Height = 28
+    Top = 40
+    Width = 185
+    Color = cl3DLight
+    ReadOnly = True
+    TabOrder = 1
+    Text = 'AffCode'
+  end
+  object LabCode: TLabel
+    Left = 648
+    Height = 20
+    Top = 16
+    Width = 121
+    Caption = 'Code compétence'
+    Font.CharSet = ANSI_CHARSET
+    Font.Color = clWhite
+    Font.Pitch = fpVariable
+    Font.Quality = fqDraft
+    ParentColor = False
+    ParentFont = False
+  end
+  object LabLib: TLabel
+    Left = 648
+    Height = 20
+    Top = 80
+    Width = 130
+    Caption = 'Libellé compérence'
+    Font.CharSet = ANSI_CHARSET
+    Font.Color = clWhite
+    Font.Pitch = fpVariable
+    Font.Quality = fqDraft
+    ParentColor = False
+    ParentFont = False
+  end
+  object AffLib: TEdit
+    Left = 649
+    Height = 28
+    Top = 112
+    Width = 955
+    Anchors = [akTop, akLeft, akRight]
+    Color = cl3DLight
+    ReadOnly = True
+    TabOrder = 2
+    Text = 'AffLib'
+  end
+  object LabAttribut: TLabel
+    Left = 912
+    Height = 20
+    Top = 16
+    Width = 51
+    Caption = 'Attribut'
+    Font.CharSet = ANSI_CHARSET
+    Font.Color = clWhite
+    Font.Pitch = fpVariable
+    Font.Quality = fqDraft
+    ParentColor = False
+    ParentFont = False
+  end
+  object AffAttribut: TEdit
+    Left = 912
+    Height = 28
+    Top = 40
+    Width = 128
+    Color = cl3DLight
+    ReadOnly = True
+    TabOrder = 3
+    Text = 'Attribut'
+  end
+  object LabDescription: TLabel
+    Left = 649
+    Height = 20
+    Top = 224
+    Width = 162
+    Caption = 'Description compétence'
+    Font.CharSet = ANSI_CHARSET
+    Font.Color = clWhite
+    Font.Pitch = fpVariable
+    Font.Quality = fqDraft
+    ParentColor = False
+    ParentFont = False
+  end
+  object AffDescription: TMemo
+    Left = 648
+    Height = 590
+    Top = 264
+    Width = 438
+    Anchors = [akTop, akLeft, akRight, akBottom]
+    Color = cl3DLight
+    Lines.Strings = (
+      'AffDescription'
+    )
+    ReadOnly = True
+    ScrollBars = ssAutoVertical
+    TabOrder = 4
+  end
+  object LabSpecialisation: TLabel
+    Left = 648
+    Height = 20
+    Top = 152
+    Width = 163
+    Caption = 'Spécialisations possibles'
+    Font.CharSet = ANSI_CHARSET
+    Font.Color = clWhite
+    Font.Pitch = fpVariable
+    Font.Quality = fqDraft
+    ParentColor = False
+    ParentFont = False
+  end
+  object AffSpecialisation: TEdit
+    Left = 648
+    Height = 28
+    Top = 176
+    Width = 960
+    Anchors = [akTop, akLeft, akRight]
+    Color = cl3DLight
+    ReadOnly = True
+    TabOrder = 5
+    Text = 'AffSpecialisation'
+  end
+  object ImageWar: TImage
+    AnchorSideLeft.Side = asrCenter
+    AnchorSideTop.Side = asrCenter
+    AnchorSideRight.Side = asrCenter
+    AnchorSideBottom.Side = asrCenter
+    Left = 33
+    Height = 86
+    Top = 2
+    Width = 354
+    Anchors = []
+    Center = True
+    Proportional = True
+    Stretch = True
+  end
+  object TabMetierCompetence: TStringGrid
+    Left = 1112
+    Height = 184
+    Top = 264
+    Width = 258
+    Anchors = [akTop, akRight]
+    ColCount = 1
+    TabOrder = 6
+    OnDblClick = TabMetierCompetenceDblClick
+  end
+  object LabMetierCompetence: TLabel
+    Left = 1112
+    Height = 20
+    Top = 232
+    Width = 43
+    Caption = 'Métier'
+    Font.CharSet = ANSI_CHARSET
+    Font.Color = clWhite
+    Font.Pitch = fpVariable
+    Font.Quality = fqDraft
+    ParentColor = False
+    ParentFont = False
+  end
+  object LabLivre: TLabel
+    Left = 1112
+    Height = 20
+    Top = 16
+    Width = 31
+    Caption = 'Livre'
+    Font.CharSet = ANSI_CHARSET
+    Font.Color = clWhite
+    Font.Pitch = fpVariable
+    Font.Quality = fqDraft
+    ParentColor = False
+    ParentFont = False
+  end
+  object AffLivre: TEdit
+    Left = 1112
+    Height = 28
+    Top = 40
+    Width = 241
+    Color = cl3DLight
+    ReadOnly = True
+    TabOrder = 7
+    Text = 'AffLivre'
+  end
+  object LabSpe: TLabel
+    Left = 1416
+    Height = 20
+    Top = 224
+    Width = 98
+    Anchors = [akTop, akRight]
+    Caption = 'Spécialisations'
+    Font.CharSet = ANSI_CHARSET
+    Font.Color = clWhite
+    Font.Pitch = fpVariable
+    Font.Quality = fqDraft
+    ParentColor = False
+    ParentFont = False
+  end
+  object TabSpe: TStringGrid
+    Left = 1416
+    Height = 591
+    Top = 264
+    Width = 216
+    Anchors = [akTop, akRight]
+    ColCount = 1
+    ColumnClickSorts = True
+    TabOrder = 8
+    OnDblClick = TabSpeDblClick
+  end
+end

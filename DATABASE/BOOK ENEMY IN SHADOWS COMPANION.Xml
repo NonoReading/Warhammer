@@ -1,0 +1,178 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<DATA_BOOK>
+<CODE_BOOK>"ENEMY"</CODE_BOOK>
+<BOOK>"BOOK ENEMY IN SHADOWS COMPANION"</BOOK>
+<language>"ENGLISH"</language>
+<VERSION>"20250623"</VERSION>
+<OFFICIAL>"1"</OFFICIAL>
+<COMPLETE>"1"</COMPLETE>
+<DATA_TALENT>
+<Talent id="ENEMY-T0179">
+<Attribut>""</Attribut>
+<Description language="ENGLISH">"Disciple of Change"</Description>
+<Short language="ENGLISH">""</Short>
+<Explanation language="ENGLISH">"When you gain a mutation, roll twice and choose one of the two results."</Explanation>
+<Skill>""</Skill>
+<Max>"1"</Max>
+<PDF>""</PDF>
+<Test language="ENGLISH">""</Test>
+</Talent>
+<Talent id="ENEMY-T0180">
+<Attribut>""</Attribut>
+<Description language="ENGLISH">"Double Life"</Description>
+<Short language="ENGLISH">""</Short>
+<Explanation language="ENGLISH">"So adept are yoy at maintaining your Secret Identity, that you are able to live two completely separate lives.
+When you purchase this Talent, you may enter into a second Career alongside your Chaos Career.
+You now count as belonging to both Careers, and may purchase Advances and Talents in either one, as well as enter and leave new Careers from either.
+As always, any changes in Career need approval from your GM so they best fit any campaign plans and properly reflect your double life.
+"</Explanation>
+<Skill>""</Skill>
+<Max>"1"</Max>
+<PDF>""</PDF>
+<Test language="ENGLISH">""</Test>
+</Talent>
+<Talent id="ENEMY-T0181">
+<Attribut>""</Attribut>
+<Description language="ENGLISH">"Tzeentch s Blessing"</Description>
+<Short language="ENGLISH">""</Short>
+<Explanation language="ENGLISH">"Tzeentch, the Chaos God of Magic, has gifted you with a worming parasite within your mind.
+When you purchase this Talent, a single Spell wriggles free into your head where it takes residence, occasionally whispering to you as you sleep.
+The Spell can be chosen from any Colour Magic lore.
+After this, you may purchase one more Colour Magic spell for 100 XP for every spell you have memorised from the Lore of Tzeentch.
+Mutants and Beastmen of the Empire’s forests and spur them into a campaign of violent conquest, have much in common with the Purple Hand.
+However, their differing visions of the Empire’s fate ensure that for all their similarities the two cults are bitterly opposed."</Explanation>
+<Skill>""</Skill>
+<Max>"1"</Max>
+<PDF>""</PDF>
+<Test language="ENGLISH">""</Test>
+</Talent>
+</DATA_TALENT>
+<DATA_CAREER>
+<Career id="ENEMY-WORK106">
+<Description language="ENGLISH">"Cult Magus of Tzeentch"</Description>
+<Explanation language="ENGLISH">"A scheming manipulator, master of deception, and wielder of the Sfoulest sorcery, you have given yourself to Tzeentch and debased your soul upon ifs altar. A most favoured servant of the Great Mutator, a Cult Magus can manipulate Tzeentch’s greatest gift: magic. They use their fell powers to subvert the ambitious, tempt the greedy, and convert the great and good of the Old World to their dark plans. Whether in a position of authority or not, the Magus is the locus of a Tzeentch cult. They pull at the strings of the other cultists as they lead bloody rituals and utter blasphemous prayer, all whilst following a diabolical plan that none fully grasp. And at the appointed time we shall rise from our secret places and throw down the towns and cities of The Empire. Our brethren shall pour forth from the forests to slay and bunt. Chaos will cover the land and we, the chosen servants, shall be exalted in HIS eyes. Hail to Tzeentch, Changer of the Ways — Njawrr’thakh Lzimbarr Tzeentch!. — Excerpt from The Book of Transmutation"</Explanation>
+<Skill>"RULES-COMPLANG_MAG"</Skill>
+<Class>"CLASS_ACAD"</Class>
+<SUBCHAPTER_LEVEL>
+<Level id="1">
+<Description language="ENGLISH">"Cult Acolyte"</Description>
+<Salary>"TIERS_BRASS 1"</Salary>
+</Level>
+<Level id="2">
+<Description language="ENGLISH">"Cult Magus"</Description>
+<Salary>"TIERS_SILVER 4"</Salary>
+</Level>
+<Level id="3">
+<Description language="ENGLISH">"Chosen of Tzeentch"</Description>
+<Salary>"TIERS_GOLD 1"</Salary>
+</Level>
+<Level id="4">
+<Description language="ENGLISH">"Master Magus"</Description>
+<Salary>"TIERS_GOLD 2"</Salary>
+</Level>
+</SUBCHAPTER_LEVEL>
+<SUBCHAPTER_ATTR>
+<Attribut name="RULES-ATTR_WS">"0"</Attribut>
+<Attribut name="RULES-ATTR_BS">"0"</Attribut>
+<Attribut name="RULES-ATTR_S">"0"</Attribut>
+<Attribut name="RULES-ATTR_T">"4"</Attribut>
+<Attribut name="RULES-ATTR_I">"1"</Attribut>
+<Attribut name="RULES-ATTR_Ag">"3"</Attribut>
+<Attribut name="RULES-ATTR_Dex">"0"</Attribut>
+<Attribut name="RULES-ATTR_Int">"1"</Attribut>
+<Attribut name="RULES-ATTR_WP">"1"</Attribut>
+<Attribut name="RULES-ATTR_Fel">"2"</Attribut>
+</SUBCHAPTER_ATTR>
+<SUBCHAPTER_SKILL>
+<Skill name="RULES-COMPFOCAL_NECRO">"1"</Skill>
+  <!-- Channelling (Dhar) -->
+<Skill name="RULES-COMPDIVERT_ACTING">"1"</Skill>
+  <!-- Entertain (Acting) -->
+<Skill name="RULES-COMPINTUI">"1"</Skill>
+  <!-- Intuition  -->
+<Skill name="RULES-COMPLANG_MAG">"1"</Skill>
+  <!-- Language (Magick) -->
+<Skill name="RULES-COMPSIGNES_TZEENTCH">"1"</Skill>
+  <!-- Lore (Tzeentch) -->
+<Skill name="RULES-COMPPRECEP">"1"</Skill>
+  <!-- Perception  -->
+<Skill name="RULES-COMPSIGNES_CULTIST">"1"</Skill>
+  <!-- Secret Signs (Cultist) -->
+<Skill name="RULES-COMPDISC_URB">"1"</Skill>
+  <!-- Stealth (Urban) -->
+<Skill name="RULES-COMPCHARM">"2"</Skill>
+  <!-- Charm -->
+<Skill name="RULES-COMPCALM">"2"</Skill>
+  <!-- Cool -->
+<Skill name="RULES-COMPESQU">"2"</Skill>
+  <!-- Dodge -->
+<Skill name="RULES-COMPRESIST">"2"</Skill>
+  <!-- Endurance -->
+<Skill name="RULES-COMPRECH">"2"</Skill>
+  <!-- Research -->
+<Skill name="RULES-COMPESCAM">"2"</Skill>
+  <!-- Sleight if Hand -->
+<Skill name="RULES-COMPDIVERT_NARRA">"3"</Skill>
+  <!-- Entertainment (Storytelling) -->
+<Skill name="RULES-COMPINTIM">"3"</Skill>
+  <!-- Intimidate -->
+<Skill name="RULES-COMPCOMM">"3"</Skill>
+  <!-- Leadership -->
+<Skill name="RULES-COMPCOMB_BASE">"3"</Skill>
+  <!-- Melee (Basic) -->
+<Skill name="RULES-COMPLANG_DARKTOUNGE">"4"</Skill>
+  <!-- Language (Dark Tongue) -->
+<Skill name="RULES-COMPSAVOIR_*">"4"</Skill>
+  <!-- Lore (Anyl) -->
+</SUBCHAPTER_SKILL>
+<SUBCHAPTER_TALENT>
+<Talent name="RULES-T0078">"1"</Talent>
+  <!-- Beneath Notice -->
+<Talent name="RULES-T0072">"1"</Talent>
+  <!-- Secret Identity -->
+<Talent name="ENEMY-T0181">"1"</Talent>
+  <!-- Tzeentch s Blessing -->
+<Talent name="RULES-T0115">"1"</Talent>
+  <!-- Magical Sense -->
+<Talent name="RULES-T0089">"1"</Talent>
+  <!-- Petty Magic -->
+<Talent name="RULES-T0099">"2"</Talent>
+  <!-- Cat-tongued -->
+<Talent name="RULES-T0088_TZEENTCH">"2"</Talent>
+  <!-- Arcane Magic (Tzeentch) -->
+<Talent name="ENEMY-T0180">"2"</Talent>
+  <!-- Double Life -->
+<Talent name="RULES-T0109">"2"</Talent>
+  <!-- Public Speaker -->
+<Talent name="RULES-T0088_DEMON">"3"</Talent>
+  <!-- Arcane Lore (Demonology) -->
+<Talent name="ENEMY-T0179">"3"</Talent>
+  <!-- Disciple of Change -->
+<Talent name="RULES-T0093">"3"</Talent>
+  <!-- Master of Disguise -->
+<Talent name="RULES-T0065">"3"</Talent>
+  <!-- Master Orator -->
+<Talent name="RULES-T0122">"4"</Talent>
+  <!-- Commanding Presence -->
+<Talent name="RULES-T0049">"4"</Talent>
+  <!-- Frightening -->
+<Talent name="RULES-T0056">"4"</Talent>
+  <!-- Impassioned Zeal -->
+<Talent name="RULES-T0134_TZEENTCH">"4"</Talent>
+  <!-- Savant (Tzeentch) -->
+</SUBCHAPTER_TALENT>
+<SUBCHAPTER_ITEM>
+<Item name="Cult Insignia">"1"</Item>
+<Item name="Ritual Vestments">"1"</Item>
+<Item name="Secret Tattoo">"1"</Item>
+<Item name="Chaos Grimoire">"2"</Item>
+<Item name="Good Quality Ritual">"2"</Item>
+<Item name="Cell of Cultists">"3"</Item>
+<Item name="Magic Item">"3"</Item>
+<Item name="Sacrificial Dagger">"3"</Item>
+<Item name="Chaos Cult">"4"</Item>
+<Item name="Terrible Destiny">"4"</Item>
+</SUBCHAPTER_ITEM>
+</Career>
+</DATA_CAREER>
+</DATA_BOOK>

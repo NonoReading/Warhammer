@@ -1,0 +1,19 @@
+object Competence: TCompetence
+  Left = 586
+  Height = 965
+  Top = 238
+  Width = 1295
+  Caption = 'FenCompetence'
+  ClientHeight = 965
+  ClientWidth = 1295
+  DesignTimePPI = 120
+  LCLVersion = '2.2.6.0'
+  object TableCompetence: TListBox
+    Left = 13
+    Height = 944
+    Top = 10
+    Width = 251
+    ItemHeight = 0
+    TabOrder = 0
+  end
+end

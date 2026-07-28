@@ -1,0 +1,446 @@
+object WinWeapons: TWinWeapons
+  Left = 549
+  Height = 861
+  Top = 325
+  Width = 1469
+  Caption = 'WinWeapons'
+  ClientHeight = 861
+  ClientWidth = 1469
+  Color = clBlack
+  DesignTimePPI = 120
+  OnCreate = FormCreate
+  OnKeyPress = FormKeyPress
+  object TabWeapon: TStringGrid
+    Left = 9
+    Height = 694
+    Top = 160
+    Width = 591
+    Anchors = [akTop, akLeft, akBottom]
+    Color = cl3DLight
+    ColCount = 1
+    ColumnClickSorts = True
+    Options = [goFixedVertLine, goFixedHorzLine, goVertLine, goHorzLine, goRangeSelect, goRowSelect, goSmoothScroll]
+    TabOrder = 0
+    OnDblClick = TabWeaponDblClick
+    OnSelection = TabWeaponAfterSelection
+  end
+  object AffCode: TEdit
+    Left = 616
+    Height = 28
+    Top = 48
+    Width = 121
+    Color = cl3DLight
+    ReadOnly = True
+    TabOrder = 1
+    Text = 'AffCode'
+  end
+  object LabCode: TLabel
+    Left = 616
+    Height = 20
+    Top = 24
+    Width = 75
+    Caption = 'Code Arme'
+    Font.CharSet = ANSI_CHARSET
+    Font.Color = clWhite
+    Font.Pitch = fpVariable
+    Font.Quality = fqDraft
+    ParentColor = False
+    ParentFont = False
+  end
+  object LabLib: TLabel
+    Left = 616
+    Height = 20
+    Top = 96
+    Width = 82
+    Caption = 'Libellé arme'
+    Font.CharSet = ANSI_CHARSET
+    Font.Color = clWhite
+    Font.Pitch = fpVariable
+    Font.Quality = fqDraft
+    ParentColor = False
+    ParentFont = False
+  end
+  object AffLib: TEdit
+    Left = 616
+    Height = 28
+    Top = 128
+    Width = 817
+    Anchors = [akTop, akLeft, akRight]
+    Color = cl3DLight
+    ReadOnly = True
+    TabOrder = 2
+    Text = 'AffLib'
+  end
+  object ImageWar: TImage
+    AnchorSideLeft.Side = asrCenter
+    AnchorSideTop.Side = asrCenter
+    AnchorSideRight.Side = asrCenter
+    AnchorSideBottom.Side = asrCenter
+    Left = 8
+    Height = 86
+    Top = 2
+    Width = 354
+    Center = True
+    Proportional = True
+    Stretch = True
+  end
+  object LabCompetence: TLabel
+    Left = 616
+    Height = 20
+    Top = 176
+    Width = 121
+    Caption = 'Code compétence'
+    Font.CharSet = ANSI_CHARSET
+    Font.Color = clWhite
+    Font.Pitch = fpVariable
+    Font.Quality = fqDraft
+    ParentColor = False
+    ParentFont = False
+  end
+  object AffCompetence: TEdit
+    Left = 616
+    Height = 28
+    Top = 208
+    Width = 817
+    Anchors = [akTop, akLeft, akRight]
+    Color = cl3DLight
+    ReadOnly = True
+    TabOrder = 3
+    Text = 'AffCompetence'
+  end
+  object LabMain: TLabel
+    Left = 762
+    Height = 20
+    Top = 24
+    Width = 63
+    Caption = 'Nb Mains'
+    Font.CharSet = ANSI_CHARSET
+    Font.Color = clWhite
+    Font.Pitch = fpVariable
+    Font.Quality = fqDraft
+    ParentColor = False
+    ParentFont = False
+    OnClick = LabMainClick
+  end
+  object AffMain: TEdit
+    Left = 762
+    Height = 28
+    Top = 48
+    Width = 65
+    Color = cl3DLight
+    ReadOnly = True
+    TabOrder = 4
+    Text = 'AffMain'
+  end
+  object LabPrix: TLabel
+    Left = 874
+    Height = 20
+    Top = 24
+    Width = 24
+    Caption = 'Prix'
+    Font.CharSet = ANSI_CHARSET
+    Font.Color = clWhite
+    Font.Pitch = fpVariable
+    Font.Quality = fqDraft
+    ParentColor = False
+    ParentFont = False
+  end
+  object AffPrix: TEdit
+    Left = 874
+    Height = 28
+    Top = 48
+    Width = 65
+    Color = cl3DLight
+    ReadOnly = True
+    TabOrder = 5
+    Text = 'AffPrix'
+  end
+  object LabEncombrement: TLabel
+    Left = 978
+    Height = 20
+    Top = 24
+    Width = 101
+    Caption = 'Encombrement'
+    Font.CharSet = ANSI_CHARSET
+    Font.Color = clWhite
+    Font.Pitch = fpVariable
+    Font.Quality = fqDraft
+    ParentColor = False
+    ParentFont = False
+  end
+  object AffEncombrement: TEdit
+    Left = 978
+    Height = 28
+    Top = 48
+    Width = 65
+    Color = cl3DLight
+    ReadOnly = True
+    TabOrder = 6
+    Text = 'AffEncombrement'
+  end
+  object LabPortee: TLabel
+    Left = 616
+    Height = 20
+    Top = 256
+    Width = 42
+    Caption = 'Portée'
+    Font.CharSet = ANSI_CHARSET
+    Font.Color = clWhite
+    Font.Pitch = fpVariable
+    Font.Quality = fqDraft
+    ParentColor = False
+    ParentFont = False
+  end
+  object AffPortee: TEdit
+    Left = 616
+    Height = 28
+    Top = 288
+    Width = 233
+    Color = cl3DLight
+    ReadOnly = True
+    TabOrder = 7
+    Text = 'AffPortee'
+  end
+  object LabDisponibilite: TLabel
+    Left = 616
+    Height = 20
+    Top = 336
+    Width = 85
+    Caption = 'Disponibilité'
+    Font.CharSet = ANSI_CHARSET
+    Font.Color = clWhite
+    Font.Pitch = fpVariable
+    Font.Quality = fqDraft
+    ParentColor = False
+    ParentFont = False
+  end
+  object AffDisponbilite: TEdit
+    Left = 616
+    Height = 28
+    Top = 368
+    Width = 233
+    Color = cl3DLight
+    ReadOnly = True
+    TabOrder = 8
+    Text = 'AffDisponbilite'
+  end
+  object LabDegat: TLabel
+    Left = 617
+    Height = 20
+    Top = 416
+    Width = 41
+    Caption = 'Dégat'
+    Font.CharSet = ANSI_CHARSET
+    Font.Color = clWhite
+    Font.Pitch = fpVariable
+    Font.Quality = fqDraft
+    ParentColor = False
+    ParentFont = False
+  end
+  object AffDegat: TEdit
+    Left = 617
+    Height = 28
+    Top = 448
+    Width = 233
+    Color = cl3DLight
+    ReadOnly = True
+    TabOrder = 9
+    Text = 'AffDegat'
+  end
+  object LabMunition: TLabel
+    Left = 1106
+    Height = 20
+    Top = 24
+    Width = 89
+    Caption = 'Nb Munitions'
+    Font.CharSet = ANSI_CHARSET
+    Font.Color = clWhite
+    Font.Pitch = fpVariable
+    Font.Quality = fqDraft
+    ParentColor = False
+    ParentFont = False
+  end
+  object AffMunition: TEdit
+    Left = 1106
+    Height = 28
+    Top = 48
+    Width = 65
+    Color = cl3DLight
+    ReadOnly = True
+    TabOrder = 10
+    Text = 'AffMunition'
+  end
+  object TabBonus: TStringGrid
+    Left = 616
+    Height = 310
+    Top = 544
+    Width = 465
+    Anchors = [akTop, akLeft, akBottom]
+    ColCount = 1
+    TabOrder = 11
+    OnSelection = TabBonusSelection
+  end
+  object AffDescription: TMemo
+    Left = 1096
+    Height = 310
+    Top = 544
+    Width = 351
+    Anchors = [akTop, akLeft, akRight, akBottom]
+    Color = cl3DLight
+    Lines.Strings = (
+      'AffDescription'
+    )
+    ReadOnly = True
+    ScrollBars = ssAutoVertical
+    TabOrder = 12
+  end
+  object LabBonus: TLabel
+    Left = 616
+    Height = 20
+    Top = 504
+    Width = 40
+    Caption = 'Bonus'
+    Font.CharSet = ANSI_CHARSET
+    Font.Color = clWhite
+    Font.Pitch = fpVariable
+    Font.Quality = fqDraft
+    ParentColor = False
+    ParentFont = False
+  end
+  object LabLivre: TLabel
+    Left = 1212
+    Height = 20
+    Top = 24
+    Width = 31
+    Anchors = [akTop, akRight]
+    Caption = 'Livre'
+    Font.CharSet = ANSI_CHARSET
+    Font.Color = clWhite
+    Font.Pitch = fpVariable
+    Font.Quality = fqDraft
+    ParentColor = False
+    ParentFont = False
+  end
+  object AffLivre: TEdit
+    Left = 1212
+    Height = 28
+    Top = 48
+    Width = 219
+    Anchors = [akTop, akRight]
+    Color = cl3DLight
+    ReadOnly = True
+    TabOrder = 13
+    Text = 'AffLivre'
+  end
+  object Image2: TImage
+    AnchorSideRight.Side = asrBottom
+    Left = 863
+    Height = 288
+    Top = 248
+    Width = 288
+    Anchors = [akTop, akRight]
+    Proportional = True
+    Stretch = True
+  end
+  object Image1: TImage
+    AnchorSideRight.Side = asrBottom
+    Left = 1159
+    Height = 288
+    Top = 248
+    Width = 288
+    Anchors = [akTop, akRight]
+    Proportional = True
+    Stretch = True
+  end
+  object ButtonFiltre: TBCButton
+    Left = 8
+    Height = 64
+    Top = 88
+    Width = 600
+    StateClicked.Background.Gradient1.StartColor = 8404992
+    StateClicked.Background.Gradient1.EndColor = 4194304
+    StateClicked.Background.Gradient1.GradientType = gtRadial
+    StateClicked.Background.Gradient1.Point1XPercent = 50
+    StateClicked.Background.Gradient1.Point1YPercent = 100
+    StateClicked.Background.Gradient1.Point2XPercent = 0
+    StateClicked.Background.Gradient1.Point2YPercent = 0
+    StateClicked.Background.Gradient2.StartColor = clWhite
+    StateClicked.Background.Gradient2.EndColor = clBlack
+    StateClicked.Background.Gradient2.GradientType = gtLinear
+    StateClicked.Background.Gradient2.Point1XPercent = 0
+    StateClicked.Background.Gradient2.Point1YPercent = 0
+    StateClicked.Background.Gradient2.Point2XPercent = 0
+    StateClicked.Background.Gradient2.Point2YPercent = 100
+    StateClicked.Background.Gradient1EndPercent = 100
+    StateClicked.Background.Style = bbsGradient
+    StateClicked.Border.Style = bboNone
+    StateClicked.FontEx.Color = 16770790
+    StateClicked.FontEx.FontQuality = fqSystemClearType
+    StateClicked.FontEx.Shadow = True
+    StateClicked.FontEx.ShadowRadius = 2
+    StateClicked.FontEx.ShadowOffsetX = 1
+    StateClicked.FontEx.ShadowOffsetY = 1
+    StateClicked.FontEx.Style = [fsBold]
+    StateHover.Background.Gradient1.StartColor = 16744448
+    StateHover.Background.Gradient1.EndColor = 8404992
+    StateHover.Background.Gradient1.GradientType = gtRadial
+    StateHover.Background.Gradient1.Point1XPercent = 50
+    StateHover.Background.Gradient1.Point1YPercent = 100
+    StateHover.Background.Gradient1.Point2XPercent = 0
+    StateHover.Background.Gradient1.Point2YPercent = 0
+    StateHover.Background.Gradient2.StartColor = clWhite
+    StateHover.Background.Gradient2.EndColor = clBlack
+    StateHover.Background.Gradient2.GradientType = gtLinear
+    StateHover.Background.Gradient2.Point1XPercent = 0
+    StateHover.Background.Gradient2.Point1YPercent = 0
+    StateHover.Background.Gradient2.Point2XPercent = 0
+    StateHover.Background.Gradient2.Point2YPercent = 100
+    StateHover.Background.Gradient1EndPercent = 100
+    StateHover.Background.Style = bbsGradient
+    StateHover.Border.Style = bboNone
+    StateHover.FontEx.Color = clWhite
+    StateHover.FontEx.FontQuality = fqSystemClearType
+    StateHover.FontEx.Shadow = True
+    StateHover.FontEx.ShadowRadius = 2
+    StateHover.FontEx.ShadowOffsetX = 1
+    StateHover.FontEx.ShadowOffsetY = 1
+    StateHover.FontEx.Style = [fsBold]
+    StateNormal.Background.Gradient1.StartColor = 4194304
+    StateNormal.Background.Gradient1.EndColor = 8405056
+    StateNormal.Background.Gradient1.GradientType = gtLinear
+    StateNormal.Background.Gradient1.Point1XPercent = 0
+    StateNormal.Background.Gradient1.Point1YPercent = 0
+    StateNormal.Background.Gradient1.Point2XPercent = 0
+    StateNormal.Background.Gradient1.Point2YPercent = 100
+    StateNormal.Background.Gradient2.StartColor = 8405056
+    StateNormal.Background.Gradient2.EndColor = 4194304
+    StateNormal.Background.Gradient2.GradientType = gtRadial
+    StateNormal.Background.Gradient2.Point1XPercent = 50
+    StateNormal.Background.Gradient2.Point1YPercent = 100
+    StateNormal.Background.Gradient2.Point2XPercent = 0
+    StateNormal.Background.Gradient2.Point2YPercent = 0
+    StateNormal.Background.Gradient1EndPercent = 60
+    StateNormal.Background.Style = bbsGradient
+    StateNormal.Border.Style = bboNone
+    StateNormal.FontEx.Color = 16770790
+    StateNormal.FontEx.FontQuality = fqSystemClearType
+    StateNormal.FontEx.Shadow = True
+    StateNormal.FontEx.ShadowRadius = 2
+    StateNormal.FontEx.ShadowOffsetX = 1
+    StateNormal.FontEx.ShadowOffsetY = 1
+    StateNormal.FontEx.Style = [fsBold]
+    Caption = 'Filtre'
+    Color = clNone
+    DropDownWidth = 16
+    DropDownArrowSize = 8
+    GlobalOpacity = 255
+    OnClick = ButtonFiltreClick
+    ParentColor = False
+    Rounding.RoundX = 12
+    Rounding.RoundY = 12
+    RoundingDropDown.RoundX = 1
+    RoundingDropDown.RoundY = 1
+    TextApplyGlobalOpacity = False
+    MemoryUsage = bmuHigh
+  end
+end

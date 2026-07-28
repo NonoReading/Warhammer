@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<PLAYER>
+<Name>"Markus Hönigbergs"</Name>
+<Specie>"RACE_HUM"</Specie>
+<Career>"WORK23"</Career>
+<Level>"1"</Level>
+<Xp>"50"</Xp>
+<CHAPTER_CREATION>
+<SUBCHAPTER_ATTR>
+<Attribut name="ATTR_WS">"13"</Attribut>
+<Attribut name="ATTR_BS">"14"</Attribut>
+<Attribut name="ATTR_S">"8"</Attribut>
+<Attribut name="ATTR_T">"11"</Attribut>
+<Attribut name="ATTR_I">"14"</Attribut>
+<Attribut name="ATTR_Ag">"9"</Attribut>
+<Attribut name="ATTR_Dex">"10"</Attribut>
+<Attribut name="ATTR_Int">"12"</Attribut>
+<Attribut name="ATTR_WP">"11"</Attribut>
+<Attribut name="ATTR_Fel">"15"</Attribut>
+<Attribut name="ATTR_Fate">"1"</Attribut>
+<Attribut name="ATTR_Resil">"2"</Attribut>
+</SUBCHAPTER_ATTR>
+<SUBCHAPTER_SKILLSPECIE>
+<Skill name="COMPCALM">"5"</Skill>
+<Skill name="COMPCHARM">"5"</Skill>
+<Skill name="COMPLANG_BRET">"5"</Skill>
+<Skill name="COMPLANG_WEST">"3"</Skill>
+<Skill name="COMPRAGOT">"3"</Skill>
+<Skill name="COMPSAVOIR_REG">"3"</Skill>
+</SUBCHAPTER_SKILLSPECIE>
+<SUBCHAPTER_SKILLCREATION>
+<Skill name="COMPDIVERT_NARRA">"5"</Skill>
+<Skill name="COMPLANG_CLASS">"5"</Skill>
+<Skill name="COMPMARCH">"5"</Skill>
+<Skill name="COMPPARI">"5"</Skill>
+<Skill name="COMPRAGOT">"5"</Skill>
+<Skill name="COMPRESALC">"5"</Skill>
+<Skill name="COMPRECH">"5"</Skill>
+<Skill name="COMPSAVOIR_GEOG">"5"</Skill>
+</SUBCHAPTER_SKILLCREATION>
+<SUBCHAPTER_TALENT>
+<Talent name="T0117">"1"</Talent>
+<Talent name="T0171">"1"</Talent>
+<Talent name="T0129_MAGI">"1"</Talent>
+<Talent name="T0007">"1"</Talent>
+<Talent name="T0092_CARTO">"1"</Talent>
+</SUBCHAPTER_TALENT>
+</CHAPTER_CREATION>
+<CHAPTER_INCREASE>
+<SUBCHAPTER_ATTR>
+</SUBCHAPTER_ATTR>
+<SUBCHAPTER_SKILLCAREER>
+</SUBCHAPTER_SKILLCAREER>
+<SUBCHAPTER_TALENT>
+</SUBCHAPTER_TALENT>
+</CHAPTER_INCREASE>
+<CHAPTER_SKILL>
+<SUBCHAPTER_SKILLCAREER>
+<Skill name="COMPDIVERT_NARRA">"1"</Skill>
+<Skill name="COMPLANG_CLASS">"1"</Skill>
+<Skill name="COMPMARCH">"1"</Skill>
+<Skill name="COMPPARI">"1"</Skill>
+<Skill name="COMPRAGOT">"1"</Skill>
+<Skill name="COMPRESALC">"1"</Skill>
+<Skill name="COMPRECH">"1"</Skill>
+<Skill name="COMPSAVOIR_GEOG">"1"</Skill>
+<Skill name="COMPART_ECR">"2"</Skill>
+<Skill name="COMPINTUI">"2"</Skill>
+<Skill name="COMPLANG_*">"2"</Skill>
+<Skill name="COMPMETIER_*">"2"</Skill>
+<Skill name="COMPPRECEP">"2"</Skill>
+<Skill name="COMPSAVOIR_*">"2"</Skill>
+<Skill name="COMPDIVERT_CONF">"3"</Skill>
+<Skill name="COMPINTIM">"3"</Skill>
+<Skill name="COMPLANG_*">"3"</Skill>
+<Skill name="COMPSAVOIR_*">"3"</Skill>
+<Skill name="COMPDIVERT_RHETOR">"4"</Skill>
+<Skill name="COMPSAVOIR_*">"4"</Skill>
+</SUBCHAPTER_SKILLCAREER>
+</CHAPTER_SKILL>
+<CHAPTER_OLDCAREER>
+<Career name="WORK23/1">"0"</Career>
+</CHAPTER_OLDCAREER>
+<CHAPTER_ITEM>
+<SUBCHAPTER_WEAPON>
+</SUBCHAPTER_WEAPON>
+<SUBCHAPTER_ARMOR>
+</SUBCHAPTER_ARMOR>
+<SUBCHAPTER_MISC>
+<Item name="alcool">""</Item>
+<Item name="livre">""</Item>
+<Item name="lettre de recommandation">""</Item>
+<Item name="nécessaire d’écriture">""</Item>
+</SUBCHAPTER_MISC>
+<SUBCHAPTER_SPELL>
+</SUBCHAPTER_SPELL>
+</CHAPTER_ITEM>
+</PLAYER>

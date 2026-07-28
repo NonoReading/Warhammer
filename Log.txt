@@ -1,0 +1,170 @@
+04/08/2023 : gestion des qualités d'armes (bonus / malus)
+06/08/2023 : problèmes des panels qui se multipliaient
+06/08/2023 : mise en place de l'interception de ESC (compétence, talent, métier) depuis Personnage
+11/08/2023 : abandonner le pointeur pour des listes spécialisée
+12/08/2023 : faire les traductions en anglais
+12/08/2023 : possibilité de changer de langue dans le menu
+13/08/2023 : faire double click dans la plus part des champs
+13/08/2023 : les champs en affichages seul (texte et memo) ont un fond noir sur écriture blanc
+13/08/2023 : ajouter les description des races et métiers et les affiches dans les fenêtres races et métiers
+14/08/2023 : gestion de la portée et affichages des modificateurs de distance
+15/08/2023 : prendre en comptes les compétences dans l'édition du PDF (chance, détermination, dégats, ...)
+15/08/2023 : Dans les talents, afficher les métiers avec niveau qui ont ce talent
+16/08/2023 : refonte de l'arborescence de la base de données pour ajouter les livres
+17/08/2023 : gestion des livres (rulesbook et up in arms pour l'instant)
+18/08/2023 : ajout des premiers nouveaux personnages de Up in Arms
+19/08/2023 : finaliser les nouveaux personnages et compléter le système de livres
+20/08/2023 : ajout les livres dans les affichages
+20/08/2023 : ajout les nouveaux miracles de Up In Arms
+20/08/2023 : gérer les métiers possibles ajoutés par Up In Arms
+20/08/2023 : gérer le livre Winds of Magic
+20/08/2023 : ajouter les personnages de Winds of Magic
+21/08/2023 : gérer les doubles lancé de dés des mages de Wings of Magic
+21/08/2023 : gérer le sauvegarde et le chargement des livres 
+22/08/2023 : ajouter la race ogre des archives 2
+22/08/2023 : ajoutes les métiers spéciaux des ogres des archives 2
+23/08/2023 : gérer les métiers possibles  des archives 1
+23/08/2023 : gérer les choix de métiers alternatif lié à archives 1
+24/08/2023 : ajouter les sorts de Wings of magic (presque 200 >_< )
+24/08/2023 : ajouter les métiers de archive 3
+25/08/2023 : ajouter des images pour les armes, armures, sorts
+25/08/2023 : gérer l'ajout des bénédiction dans les nouvelles prêtres
+25/08/2023 : ajouter les informations de compétences des talents pour les PDF
+26/08/2023 : remplacer les liste déroulantes par un double click dans le tableau (compétence, talent, équipement)
+26/08/2023 : créer un unit pour gérer la fiche de personnages avec un record composé d'array
+26/08/2023 : ajouter les données dans le record de personnage avant enregistrement.
+29/08/2023 : remplacer la table de création par le record de personnage
+30/08/2023 : Lecture du XML pour remplir le record personnage
+31/08/2023 : Utiliser les record Personnage dans la feuille de personnage
+01/09/2023 : Utiliser les record Personnage dans la feuille de personnage
+14/09/2023 : ajouter les bonus et armes de UP IN ARMS
+15/09/2023 : mettre à jours les équipements des métiers de UP IN ARMS et WINDS
+15/09/2023 : ajouter les armes d'ARCHIVE I
+16/09/2023 : ajouter les armes, armures et sorts d'ARCHIVE II
+17/09/2023 : ajouter les armures d'ARCHIVE III
+17/09/2023 : mettre à jours les équipement des profession de ARCHIVE I II et III
+17/09/2023 : refonte des affichages des fenêtres pour autofit les colonnes et afficher les codes et le livre dans les différentes fenêtres
+17/09/2023 : ajouter les 3 races de familier
+22/09/2023 : ajoute deux champs pour les XP théoriquement nécessaire et ceux accepté par le MJ et conserver les XP correspondant lors de l'évolution
+09/10/2023 : débug des tables d'augmentation (ne plus bloquer en saisie mais en sortie)
+09/10/2023 : débug du choix multiple dans les équipements en création de personnage
+02/12/2023 : ajout des filtres dans les fenêtre des races, métiers et sorts
+03/12/2023 : changement de présentation du menu
+03/12/2023 : ajout du Gnome
+03/12/2023 : ajout des commentaires dans les XML (pour connaitre les libellés liés aux codes)
+04/12/2023 : refonte de la fonction d'ajustement des tableaux
+04/12/2023 : ajout les données générales des des races et métiers dans la table des Livres
+04/12/2023 : ajout les données de métier, niveau et expérience dans la table des Personnages
+10/12/2023 : faire une version PDF générique avec dessin des lignes
+11/12/2023 : faire une version PDF générique avec texte et modification des compétences
+12/12/2023 : finaliser les modifications sur le PDF et abandonner l'ancienne méthode
+15/12/2023 : gérer les polices pour rapetisser les données trop grandes à afficher dans le PDF
+17/12/2023 : livre DEATH ON THE REIK COMPANION
+17/12/2023 : livre Enemy in Shadows Companion
+17/12/2023 : livre MODDENHEIM CITY OF THE WHITE WOLF
+17/12/2023 : livre Salzenmund - City Of Salt & Silver
+17/12/2023 : livre Sea of Claws
+17/12/2023 : THE HORNED RAT COMPANION
+19/12/2023 : quand on appuie sur un livre, il détail les ajouts (race, métier, compétence, talent)
+20/12/2023 : dans les compétences et talents, afficher une table avec les spé possibles
+20/12/2023 : ajouter l'expérience restante dans le XML (pour info)
+28/12/2023 : T0145 : sprinteur : +1 mouvement sur courrir
+05/01/2024 : remplacer la gestion de talent aléatoire en un pourcentage par talent puis le trier par ordre alphabétique de talent
+26/01/2024 : ajout des fond et de couleurs
+26/01/2024 : Livre GREEN IZ BEST
+27/01/2024 : remplacement des TButton par TBCButton et TLabel par TBCLabel
+28/01/2024 : diverses changement de couleurs sur les TBCLabel et TBCButton
+29/01/2024 : corriger le problème des Pourcentages (il prenait en compte les X pour augmenter le min)
+29/01/2024 : gérer les talents aléatoires par races (avec une race par défaut x si on ne trouve rien)
+29/01/2024 : gérer les régles de % dans un fichier à part
+30/01/2024 : ajout des trois races de Middenheim (Middenheim, Middenland, Nordland)
+30/01/2024 : ajout des sorts de Sea of claws ainsi que le pretre de Stromfels
+31/01/2024 : Livre LORDS OF NAGGAROTH
+01/02/2024 : dans le personnages, calculer les livres nécessaires
+02/02/2024 : dans le chargement des personnages depuis le menu, conserver les livres manquants et bloquer avant d'ouvrir s'il en manque
+03/02/2024 ! ajouter les livres souhaité dans la XML et la création. Les prendre en compte dans les sélections
+03/02/2024 : ajouter les filtres dans les fenêtres des races, armes, armures
+03/02/2024 : calculer les ascenseurs d'après la tailles des Ttables
+04/02/2024 : séparer les talents et les compétences des spécialités (dans un autre fichiers _SPE)
+04/02/2024 : fabrication est maintenant lié aux livre (pour pouvoir en ajouter d'autres)
+04/02/2024 : option de pouvoir donner des points 3 et 5 différences (pour gérer les vampires)
+04/02/2024 : livre des vampires : races, attributs, compétences de races, talents de race
+06/02/2024 ! ajouter une race génaral (humain, elf, goblinoid, ...)
+07/02/2024 : si on ne trouve pas le nom du livre, mettre (F) et le reste en 1ère lettre majuscule
+07/02/2024 : problème de l'affichage de la table des bonus d'armes dans la fiches armes
+07/02/2024 : faire le chargement des livres en directe sans fermer le programme
+09/02/2024 : refonte graphique
+10/02/2024 : refonte graphique
+11/02/2024 : gestion des tableaux avec centrage
+11/02/2024 : ajout la table des livres acceptés dans la mise à jour du personnage
+12/02/2024 : table des bonus de carac dans les races
+13/02/2024 : table des niveaux de carac dans les métiers
+14/02/2024 : renseigner le texte court des talents en français
+15/02/2024 : renseigner le texte court des talents en français
+16/02/2024 : ajouter le texte court des talent
+17/02/2024 : pouvoir scinder une libellé en deux lignes dans le PDF
+18/02/2024 : faire un fonction pour ajouter un colonne dans un TStringGrid (numéro, taille, titre, centrage)
+19/02/2024 : modifier les fiches pour utiliser cette fonction
+02/03/2024 : ajout des structures de cout différent
+03/03/2024 : gérer le cout différent des attributs
+04/03/2024 : gérer le cout différent des compétences et talents
+05/03/2024 : afficher les attributs hors carrière et gérent le double prix d'augmentation
+06/03/2024 : afficher les compétences hors carrière et gérent le double prix d'augmentation
+08/03/2024 : pouvoir ajouter une compétence hors carrière dans les augmentations (choix spé si besoin)
+08/03/2024 : pouvoir ajouter une talents hors carrière dans les augmentations (choix spé si besoin)
+09/03/2024 : gérer les compétences liées à des talents et le coût moindre en XP (chant pour oreille absolue et langue magique pour sorcier ! )
+09/03/2024 : ajouter la competences principale du métier
+09/03/2024 : mettre à jour les métier par livre et afficher la compétence principale dans l'arbre des métiers
+09/03/2024 : mettre en gras la compétence de métier dans le PDF
+10/03/2024 : PDF métier : ajouter un bouton PDF dans le métier
+11/03/2024 : PDF métier : ajout les images de fond, de la feuille et du métier
+12/03/2024 : PDF métier : gestion de la transparence des images
+13/03/2024 : PDF métier : ajout de la table des attributs et ajout des images de niveau
+14/03/2024 : PDF métier : gestion du remplissage du tableau d'après la couleur de l'image de niveau
+15/03/2024 : PDF métier : ajouter compétences, talents et équipement
+22/03/2024 : gérer les 100 ou 200 XP si on change de carrière mais que l'on reste dans la classe
+23/03/2024 : PDF métier : ajout de la partie détaillant les talents, les armes et armures
+23/03/2024 : PDF personnage : faire un unit à part qui se base sur la structure Personnage et non l'affichage de WinPersonnage
+26/03/2024 : PDF Métier : gérer les choix multiples des équipements
+27/03/2024 : PDF Métier : si nécessaire, ajouter la transparence pour les images de profession
+28/03/2024 : PDF Race : génération PDF de race
+29/03/2024 : si l'image n'a pas de transparence, faire une copie avec _TRANS et l'utiliser par défaut
+01/04/2024 : transformer la base de donnée en fichier XML
+02/04/2024 : importer le XML (talent, talent spé, competence, competence spé)
+03/04/2024 : importer le XML (Race et éléments liés)
+04/04/2024 : importer le XML (Métier et éléments liés, Arme, bonus arme, Armures, bonus armure, fabrication, sous métier, choix métier)
+05/04/2024 : ajout de la structure de traduction et mis à jour depuis l'import du XML
+06/04/2024 : terminer refonte gestion de la base en XML
+07/04/2024 : refonte calcul des ajustement de texte entre borne X et Y
+26/05/2024 : PDF Métier : ajouter les caractéristiques et le fait que c'est une compétence avancée
+07/06/2024 : PDF Métier : ajouter le livre
+07/06/2024 : PDF Race : ajouter le livre et les caractères et le faut que c'est une compétence avancée
+07/06/2024 : PDF Métier : pouvoir générer une PDF avec l'ensemble des métier afficher dans la table
+08/06/2024 : PDF Métier : modifier la gestion du PDF global pour ajouter les images au document et non à chaque page.
+08/06/2024 : PDF Métier : corriger la gestion des équipement de qualité
+10/06/2024 : Nettoyer le programme des éléments liés aux anciens fichiers TXT de data
+10/06/2024 : WIN LIVRE: Création de la fenêtre de gestion des livres
+10/06/2024 : WIN LIVRE: faire les différentes tables de donnée
+11/06/2024 : WIN LIVRE: Pages des races
+12/06/2024 : WIN LIVRE: Pages des métiers
+13/06/2024 : WIN LIVRE: reste des pages
+15/06/2024 : WIN LIVRE: Page des text
+31/01/2025 : Filtre : refonte
+02/02/2025 : Sorts : corriger les coûts
+03/02/2025 : Corriger Impression des sorts
+03/02/2025 : ajout du schéma de carrière
+04/02/2025 : calcul du couts des sorts mineurs (le cout est par bonus de FM sorts)
+10/02/2025 : option à /25 (partie XP)
+13/02/2025 : ajouter les boutons -5/+5 dans la tables des augmentations d'attributs
+14/02/2025 : ajouter les boutons -5/+5 dans la tables des augmentations de compétence
+15/02/2025 : PDF Feldo : une partie de la première page
+16/02/2025 : PDF Feldo : une partie de la première page
+18/02/2025 : ajouter le calcul du max pour les talents 
+14/03/2025 ! Gestion des sets d'armures
+15/03/2025 ! PDF : déplacement XP dans première page
+15/03/2025 ! PDF : regrouper destin et résilience
+15/03/2025 ! PDF : ajout calcul corruption
+15/03/2025 ! PDF : ajouter niveau des talents
+13/06/2025 : Livre :refonte de l'export pour que les codes soient de type <Livre>-<Code>
+13/06/2026 : données génériques (age, taille, cheveux, yeux) + ajout dans PDF
+14/06/2026 : ajout des % de corruption physique et mental par race.

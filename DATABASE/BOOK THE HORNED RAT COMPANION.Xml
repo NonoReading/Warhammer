@@ -1,0 +1,144 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<DATA_BOOK>
+<CODE_BOOK>"HORNE"</CODE_BOOK>
+<BOOK>"BOOK THE HORNED RAT COMPANION"</BOOK>
+<language>"ENGLISH"</language>
+<VERSION>"20250623"</VERSION>
+<OFFICIAL>"1"</OFFICIAL>
+<COMPLETE>"1"</COMPLETE>
+<DATA_CAREER>
+<Career id="HORNE-WORK117">
+<Description language="ENGLISH">"Ironbreaker"</Description>
+<Explanation language="ENGLISH">"The Ironbreakers are a uniquely Dwarfen class of warriors, specialising in underground combat. Some Humans call them ‘Tunnel Fighters’, and they take no exception to this name, but ‘Tronbreaker’ is a more literal translation of the Khazalid Angthragor. Ironbreaker is a Warrior Career. If Careers are being determined randomly, then any Dwarf Character who rolls Guard or Soldier on the Random Class and Career Table (WFRP, pages 30-31) may choose to become an Ironbreaker instead."</Explanation>
+<Skill>"RULES-COMPCOMB_BASE"</Skill>
+<Class>"CLASS_WARR"</Class>
+<SUBCHAPTER_LEVEL>
+<Level id="1">
+<Description language="ENGLISH">"Tunnel Fighter"</Description>
+<Salary>"TIERS_BRASS 4"</Salary>
+</Level>
+<Level id="2">
+<Description language="ENGLISH">"Ironbreaker"</Description>
+<Salary>"TIERS_SILVER 3"</Salary>
+</Level>
+<Level id="3">
+<Description language="ENGLISH">"Ironbeard"</Description>
+<Salary>"TIERS_GOLD 1"</Salary>
+</Level>
+<Level id="4">
+<Description language="ENGLISH">"Old Guard"</Description>
+<Salary>"TIERS_GOLD 3"</Salary>
+</Level>
+</SUBCHAPTER_LEVEL>
+<SUBCHAPTER_ATTR>
+<Attribut name="RULES-ATTR_WS">"1"</Attribut>
+<Attribut name="RULES-ATTR_BS">"0"</Attribut>
+<Attribut name="RULES-ATTR_S">"2"</Attribut>
+<Attribut name="RULES-ATTR_T">"1"</Attribut>
+<Attribut name="RULES-ATTR_I">"3"</Attribut>
+<Attribut name="RULES-ATTR_Ag">"0"</Attribut>
+<Attribut name="RULES-ATTR_Dex">"0"</Attribut>
+<Attribut name="RULES-ATTR_Int">"0"</Attribut>
+<Attribut name="RULES-ATTR_WP">"1"</Attribut>
+<Attribut name="RULES-ATTR_Fel">"4"</Attribut>
+</SUBCHAPTER_ATTR>
+<SUBCHAPTER_SKILL>
+<Skill name="RULES-COMPATHL">"1"</Skill>
+  <!-- Athletics -->
+<Skill name="RULES-COMPESCAL">"1"</Skill>
+  <!-- Climb -->
+<Skill name="RULES-COMPCALM">"1"</Skill>
+  <!-- Cool -->
+<Skill name="RULES-COMPESQU">"1"</Skill>
+  <!-- Dodge -->
+<Skill name="RULES-COMPRESIST">"1"</Skill>
+  <!-- Endurance -->
+<Skill name="RULES-COMPDIVERT_CHANT">"1"</Skill>
+  <!-- Entertainment (Singing) -->
+<Skill name="RULES-COMPINTIM">"1"</Skill>
+  <!-- Intimidate -->
+<Skill name="RULES-COMPLANG_BATAIL">"1"</Skill>
+  <!-- Language (Battle) -->
+<Skill name="RULES-COMPCOMB_BASE">"1"</Skill>
+  <!-- Melee (Basic) -->
+<Skill name="RULES-COMPDISC_*">"1"</Skill>
+  <!-- Stealth (Any) -->
+<Skill name="RULES-COMPRESALC">"2"</Skill>
+  <!-- Consume Alcohol -->
+<Skill name="RULES-COMPRAGOT">"2"</Skill>
+  <!-- Gossip -->
+<Skill name="RULES-COMPCOMM">"2"</Skill>
+  <!-- Leadership -->
+<Skill name="RULES-COMPSAVOIR_GEOL">"2"</Skill>
+  <!-- Lore (Geology) -->
+<Skill name="RULES-COMPCOMB_PARAD">"2"</Skill>
+  <!-- Melee (Parry) -->
+<Skill name="RULES-COMPPROJ_EXPLO">"2"</Skill>
+  <!-- Ranged (Explosive) -->
+<Skill name="RULES-COMPINTUI">"3"</Skill>
+  <!-- Intuition  -->
+<Skill name="RULES-COMPCOMM">"3"</Skill>
+  <!-- Leadership -->
+<Skill name="RULES-COMPCOMB_2M">"3"</Skill>
+  <!-- Melee (Two hands) -->
+<Skill name="RULES-COMPPRECEP">"3"</Skill>
+  <!-- Perception  -->
+<Skill name="RULES-COMPSAVOIR_GUERRE">"4"</Skill>
+  <!-- Lore (War) -->
+<Skill name="RULES-COMPORIENT">"4"</Skill>
+  <!-- Navigation -->
+</SUBCHAPTER_SKILL>
+<SUBCHAPTER_TALENT>
+<Talent name="RULES-T0036">"1"</Talent>
+  <!-- Drilled -->
+<Talent name="RULES-T0027">"1"</Talent>
+  <!-- Enclosed Fighter -->
+<Talent name="RULES-T0037">"1"</Talent>
+  <!-- Strike Mighty Blow -->
+<Talent name="RULES-T0067">"1"</Talent>
+  <!-- Warrior Born -->
+<Talent name="RULES-T0011">"2"</Talent>
+  <!-- Beat Blade -->
+<Talent name="RULES-T0163">"2"</Talent>
+  <!-- Combat Aware -->
+<Talent name="RULES-T0121">"2"</Talent>
+  <!-- Shieldsman -->
+<Talent name="RULES-T0076">"2"</Talent>
+  <!-- Unshakable -->
+<Talent name="RULES-T0061">"3"</Talent>
+  <!-- Careful Strike -->
+<Talent name="RULES-T0095">"3"</Talent>
+  <!-- Combat Master -->
+<Talent name="RULES-T0062">"3"</Talent>
+  <!-- Reaction Strike -->
+<Talent name="RULES-T0138">"3"</Talent>
+  <!-- War Leader -->
+<Talent name="RULES-T0122">"4"</Talent>
+  <!-- Commanding Presence -->
+<Talent name="RULES-T0050">"4"</Talent>
+  <!-- Implacable -->
+<Talent name="RULES-T0053">"4"</Talent>
+  <!-- Inspiring -->
+<Talent name="RULES-T0025">"4"</Talent>
+  <!-- Stout-hearted -->
+</SUBCHAPTER_TALENT>
+<SUBCHAPTER_ITEM>
+<Item name="RULES-ARMO_14">"1"</Item>
+<Item name="RULES-ARMO_12">"1"</Item>
+<Item name="RULES-ARMO_10">"1"</Item>
+<Item name="RULES-ARMO_13">"1"</Item>
+<Item name="RULES-COMB_BASE_08">"1"</Item>
+<Item name="UPINA-COMB_BASE_11">"1"</Item>
+<Item name="ARCH1-PROJ_EXPLO_03">"2"</Item>
+<Item name="ARCH1-COMB_BASE_* (Q)">"2"</Item>
+<Item name="RULES-COMB_2M_02">"3"</Item>
+<Item name="RULES-ARMO_14(Q)">"3"</Item>
+<Item name="RULES-ARMO_12(Q)">"3"</Item>
+<Item name="RULES-ARMO_10(Q)">"3"</Item>
+<Item name="RULES-ARMO_13(Q)">"3"</Item>
+<Item name="Unit of Ironbreakers">"4"</Item>
+<Item name="Weapon Bearing a Master Rune">"4"</Item>
+</SUBCHAPTER_ITEM>
+</Career>
+</DATA_CAREER>
+</DATA_BOOK>

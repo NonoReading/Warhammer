@@ -1,0 +1,185 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<PLAYER>
+<Name>"Ernold Niefhaus"</Name>
+<Specie>"RACE_HUM"</Specie>
+  <!-- Humains (Reikland) -->
+<Career>"WORK02"</Career>
+  <!-- Apothicaire  -->
+<Level>"2"</Level>
+<Xp>"3075"</Xp>
+<CurrentXp>"630"</CurrentXp>
+<CHAPTER_CREATION>
+<SUBCHAPTER_ATTR>
+<Attribut name="ATTR_WS">"7"</Attribut>
+  <!-- Capacité de Combat -->
+<Attribut name="ATTR_BS">"5"</Attribut>
+  <!-- Capacité de Tir -->
+<Attribut name="ATTR_S">"4"</Attribut>
+  <!-- Force -->
+<Attribut name="ATTR_T">"11"</Attribut>
+  <!-- Endurance -->
+<Attribut name="ATTR_I">"19"</Attribut>
+  <!-- Initiative -->
+<Attribut name="ATTR_Ag">"14"</Attribut>
+  <!-- Agilité -->
+<Attribut name="ATTR_Dex">"11"</Attribut>
+  <!-- Dextérité -->
+<Attribut name="ATTR_Int">"9"</Attribut>
+  <!-- Intelligence -->
+<Attribut name="ATTR_WP">"13"</Attribut>
+  <!-- Force Mentale -->
+<Attribut name="ATTR_Fel">"15"</Attribut>
+  <!-- Sociabilité -->
+<Attribut name="ATTR_Fate">"2"</Attribut>
+  <!-- Points de Destin -->
+<Attribut name="ATTR_Resil">"1"</Attribut>
+  <!-- Résilience -->
+</SUBCHAPTER_ATTR>
+<SUBCHAPTER_SKILLSPECIE>
+<Skill name="COMPCHARM">"5"</Skill>
+  <!-- Charme  -->
+<Skill name="COMPEVAL">"5"</Skill>
+  <!-- Évaluation  -->
+<Skill name="COMPMARCH">"5"</Skill>
+  <!-- Marchandage  -->
+<Skill name="COMPRAGOT">"5"</Skill>
+  <!-- Ragot  -->
+<Skill name="COMPSAVOIR_REG">"5"</Skill>
+  <!-- Savoir (Région)  -->
+<Skill name="COMPSOINANI">"5"</Skill>
+  <!-- Soin aux animaux  -->
+</SUBCHAPTER_SKILLSPECIE>
+<SUBCHAPTER_SKILLCREATION>
+<Skill name="COMPGUERI">"5"</Skill>
+  <!-- Guérison  -->
+<Skill name="COMPLANG_CLASS">"5"</Skill>
+  <!-- Langue (Classique)  -->
+<Skill name="COMPMETIER_APOTH">"5"</Skill>
+  <!-- Métier (Apothicaire) -->
+<Skill name="COMPMETIER_EMPOI">"5"</Skill>
+  <!-- Métier (Empoisonneur) -->
+<Skill name="COMPRESALC">"5"</Skill>
+  <!-- Résistance à l’alcool  -->
+<Skill name="COMPSAVOIR_CHIM">"5"</Skill>
+  <!-- Savoir (Chimie)  -->
+<Skill name="COMPSAVOIR_REMED">"5"</Skill>
+  <!-- Savoir (Remèdes)  -->
+<Skill name="COMPSAVOIR_PLANT">"5"</Skill>
+  <!-- Savoir (Plantes)  -->
+</SUBCHAPTER_SKILLCREATION>
+<SUBCHAPTER_TALENT>
+<Talent name="T0117">"1"</Talent>
+  <!-- Perspicace -->
+<Talent name="T0171">"1"</Talent>
+  <!-- Destinée -->
+<Talent name="T0159">"1"</Talent>
+  <!-- Très résistant -->
+<Talent name="T0046">"1"</Talent>
+  <!-- Doué en calcul -->
+<Talent name="T0020">"1"</Talent>
+  <!-- Chanceux -->
+</SUBCHAPTER_TALENT>
+</CHAPTER_CREATION>
+<CHAPTER_INCREASE>
+<SUBCHAPTER_ATTR>
+<Attribut name="ATTR_T">"5"</Attribut>
+  <!-- Endurance -->
+<Attribut name="ATTR_Dex">"5"</Attribut>
+  <!-- Dextérité -->
+<Attribut name="ATTR_Int">"10"</Attribut>
+  <!-- Intelligence -->
+<Attribut name="ATTR_Fel">"5"</Attribut>
+  <!-- Sociabilité -->
+</SUBCHAPTER_ATTR>
+<SUBCHAPTER_SKILLCAREER>
+<Skill name="COMPMETIER_APOTH">"5"</Skill>
+  <!-- Métier (Apothicaire) -->
+<Skill name="COMPSAVOIR_PLANT">"5"</Skill>
+  <!-- Savoir (Plantes)  -->
+<Skill name="COMPSAVOIR_REMED">"5"</Skill>
+  <!-- Savoir (Remèdes)  -->
+</SUBCHAPTER_SKILLCAREER>
+<SUBCHAPTER_TALENT>
+<Talent name="T0031">"1"</Talent>
+  <!-- Concocter -->
+<Talent name="T0084">"1"</Talent>
+  <!-- Lire/Écrire -->
+</SUBCHAPTER_TALENT>
+</CHAPTER_INCREASE>
+<CHAPTER_SKILL>
+<SUBCHAPTER_SKILLCAREER>
+<Skill name="COMPGUERI">"1"</Skill>
+  <!-- Guérison  -->
+<Skill name="COMPLANG_CLASS">"1"</Skill>
+  <!-- Langue (Classique)  -->
+<Skill name="COMPMETIER_APOTH">"1"</Skill>
+  <!-- Métier (Apothicaire) -->
+<Skill name="COMPMETIER_EMPOI">"1"</Skill>
+  <!-- Métier (Empoisonneur) -->
+<Skill name="COMPRESALC">"1"</Skill>
+  <!-- Résistance à l’alcool  -->
+<Skill name="COMPSAVOIR_CHIM">"1"</Skill>
+  <!-- Savoir (Chimie)  -->
+<Skill name="COMPSAVOIR_REMED">"1"</Skill>
+  <!-- Savoir (Remèdes)  -->
+<Skill name="COMPSAVOIR_PLANT">"1"</Skill>
+  <!-- Savoir (Plantes)  -->
+<Skill name="COMPCHARM">"2"</Skill>
+  <!-- Charme  -->
+<Skill name="COMPLANG_GUILD">"2"</Skill>
+  <!-- Langue (Guilde)  -->
+<Skill name="COMPMARCH">"2"</Skill>
+  <!-- Marchandage  -->
+<Skill name="COMPPRECEP">"2"</Skill>
+  <!-- Perception  -->
+<Skill name="COMPRAGOT">"2"</Skill>
+  <!-- Ragot  -->
+<Skill name="COMPSAVOIR_SCIENC">"2"</Skill>
+  <!-- Savoir (Science)  -->
+<Skill name="COMPCOMM">"3"</Skill>
+  <!-- Commandement  -->
+<Skill name="COMPINTUI">"3"</Skill>
+  <!-- Intuition  -->
+<Skill name="COMPRECH">"3"</Skill>
+  <!-- Recherche  -->
+<Skill name="COMPSIGNES_GUILD">"3"</Skill>
+  <!-- Signes secrets (guilde)  -->
+<Skill name="COMPCHEV_CHEVAL">"4"</Skill>
+  <!-- Chevaucher (Cheval) -->
+<Skill name="COMPINTIM">"4"</Skill>
+  <!-- Intimidation  -->
+</SUBCHAPTER_SKILLCAREER>
+</CHAPTER_SKILL>
+<CHAPTER_OLDCAREER>
+<Career name="WORK02/1">"100"</Career>
+  <!-- Apothicaire  -->
+<Career name="WORK02/2">"0"</Career>
+  <!-- Apothicaire  -->
+</CHAPTER_OLDCAREER>
+<CHAPTER_ITEM>
+<SUBCHAPTER_WEAPON>
+</SUBCHAPTER_WEAPON>
+<SUBCHAPTER_ARMOR>
+</SUBCHAPTER_ARMOR>
+<SUBCHAPTER_MISC>
+<Item name="livre (vierge)">""</Item>
+<Item name="décoction de guérison">""</Item>
+<Item name="pourpoint en cuir">""</Item>
+<Item name="pilon et mortier.">""</Item>
+<Item name="licence de guilde">""</Item>
+<Item name="outils de la profession">""</Item>
+</SUBCHAPTER_MISC>
+<SUBCHAPTER_SPELL>
+</SUBCHAPTER_SPELL>
+</CHAPTER_ITEM>
+<BOOK>"[BOOK RULESBOOK]"</BOOK>
+<RULES>"[BOOK RULESBOOK][BOOK UP IN ARMS][BOOK WINDS OF MAGIC]"</RULES>
+<CHAPTER_XP>
+<SUBCHAPTER_ATTR>
+</SUBCHAPTER_ATTR>
+<SUBCHAPTER_SKILL>
+</SUBCHAPTER_SKILL>
+<SUBCHAPTER_TALENT>
+</SUBCHAPTER_TALENT>
+</CHAPTER_XP>
+</PLAYER>

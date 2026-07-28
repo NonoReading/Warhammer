@@ -1,0 +1,682 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<DATA_BOOK>
+<CODE_BOOK>"MIDDE"</CODE_BOOK>
+<BOOK>"BOOK MIDDENHEIM CITY OF THE WHITE WOLF"</BOOK>
+<language>"ENGLISH"</language>
+<VERSION>"20250623"</VERSION>
+<OFFICIAL>"1"</OFFICIAL>
+<COMPLETE>"1"</COMPLETE>
+<DATA_SPECIE>
+<Specie id="MIDDE-RACE_HMIDH">
+<Description language="ENGLISH">"Humans (Middenheimer)"</Description>
+<Explanation language="ENGLISH">"Citizens of Middenheim have grown up within a big cosmopolitan city, with strong links to trade, entertainment, and criminal life. Skills and Talents reflect the likelihood that such Characters have either learned how to earn a living working, or are good at networking with at least one section of the city’s complex society"</Explanation>
+<Ethnic>"SPECIE_HUMAN"</Ethnic>
+<SUBCHAPTER_ATTR>
+<Attribut name="RULES-ATTR_WS">"2d10+20"</Attribut>
+<Attribut name="RULES-ATTR_BS">"2d10+20"</Attribut>
+<Attribut name="RULES-ATTR_S">"2d10+20"</Attribut>
+<Attribut name="RULES-ATTR_T">"2d10+20"</Attribut>
+<Attribut name="RULES-ATTR_I">"2d10+20"</Attribut>
+<Attribut name="RULES-ATTR_Ag">"2d10+20"</Attribut>
+<Attribut name="RULES-ATTR_Dex">"2d10+20"</Attribut>
+<Attribut name="RULES-ATTR_Int">"2d10+20"</Attribut>
+<Attribut name="RULES-ATTR_WP">"2d10+20"</Attribut>
+<Attribut name="RULES-ATTR_Fel">"2d10+20"</Attribut>
+<Attribut name="RULES-ATTR_Fate">"2"</Attribut>
+<Attribut name="RULES-ATTR_Resil">"1"</Attribut>
+<Attribut name="RULES-ATTR_Wound">"1xBATTR_S+2xBATTR_T+1xBATTR_WP"</Attribut>
+<Attribut name="RULES-ATTR_Supp">"3"</Attribut>
+<Attribut name="RULES-ATTR_Move">"4"</Attribut>
+</SUBCHAPTER_ATTR>
+<SUBCHAPTER_SKILL>
+<Skill>"RULES-COMPSUBOR"</Skill>
+  <!-- Bribery -->
+<Skill>"RULES-COMPCHARM"</Skill>
+  <!-- Charm -->
+<Skill>"RULES-COMPCALM"</Skill>
+  <!-- Cool -->
+<Skill>"RULES-COMPDIVERT_*"</Skill>
+  <!-- Entertainment (Any) -->
+<Skill>"RULES-COMPEVAL"</Skill>
+  <!-- Evaluate -->
+<Skill>"RULES-COMPRAGOT"</Skill>
+  <!-- Gossip -->
+<Skill>"RULES-COMPMARCH"</Skill>
+  <!-- Haggle -->
+<Skill>"RULES-COMPCOMM"</Skill>
+  <!-- Leadership -->
+<Skill>"RULES-COMPSAVOIR_MIDDENHEIM"</Skill>
+  <!-- Lore (Middenheim) -->
+<Skill>"RULES-COMPCOMB_BASE"</Skill>
+  <!-- Melee (Basic) -->
+<Skill>"RULES-COMPPROJ_ARC"</Skill>
+  <!-- Ranged (Bow) -->
+<Skill>"RULES-COMPMETIER_*"</Skill>
+  <!-- Trade (Any) -->
+</SUBCHAPTER_SKILL>
+<SUBCHAPTER_TALENT>
+<Talent>"RULES-T0171"</Talent>
+  <!-- Doomed -->
+<Talent>"RULES-T0136_*/T0077"</Talent>
+  <!-- Etiquette (Any)/Strong Back -->
+<Talent>"RULES-T*"</Talent>
+  <!-- Random Talent -->
+<Talent>"RULES-T*"</Talent>
+  <!-- Random Talent -->
+<Talent>"RULES-T*"</Talent>
+  <!-- Random Talent -->
+</SUBCHAPTER_TALENT>
+<SUBCHAPTER_CAREER>
+<Career name="RULES-WORK02">"01"</Career>
+  <!-- Apothecary -->
+<Career name="RULES-WORK31">"02"</Career>
+  <!-- Engineer -->
+<Career name="RULES-WORK33">"03"</Career>
+  <!-- Lawyer -->
+<Career name="RULES-WORK45">"04-05"</Career>
+  <!-- Nun -->
+<Career name="RULES-WORK36">"06"</Career>
+  <!-- Physician -->
+<Career name="RULES-WORK49">"07-11"</Career>
+  <!-- Priest -->
+<Career name="RULES-WORK23">"12-13"</Career>
+  <!-- Scholar -->
+<Career name="RULES-WORK58">"14"</Career>
+  <!-- Wizard -->
+<Career name="RULES-WORK01">"15"</Career>
+  <!-- Agitator -->
+<Career name="RULES-WORK03">"16-18"</Career>
+  <!-- Artisan -->
+<Career name="RULES-WORK37">"19-21"</Career>
+  <!-- Beggar -->
+<Career name="RULES-WORK21">"22"</Career>
+  <!-- Inverstigator -->
+<Career name="RULES-WORK34">"23-24"</Career>
+  <!-- Merchant -->
+<Career name="RULES-WORK52">"25-26"</Career>
+  <!-- Rat Catcher -->
+<Career name="RULES-WORK07">"27-28"</Career>
+  <!-- Townsman -->
+<Career name="RULES-WORK39">"29-31"</Career>
+  <!-- Watchman -->
+<Career name="RULES-WORK15">"32"</Career>
+  <!-- Advisor -->
+<Career name="RULES-WORK04">"33"</Career>
+  <!-- Artist -->
+<Career name="RULES-WORK18">"34"</Career>
+  <!-- Duellist -->
+<Career name="RULES-WORK20">"35"</Career>
+  <!-- Envoy -->
+<Career name="RULES-WORK44">"36"</Career>
+  <!-- Noble -->
+<Career name="RULES-WORK56">"37-39"</Career>
+  <!-- Servant -->
+<Career name="RULES-WORK24">"40"</Career>
+  <!-- Spy -->
+<Career name="RULES-WORK32">"41"</Career>
+  <!-- Warden -->
+<Career name="RULES-WORK05">"42"</Career>
+  <!-- Bailif -->
+<Career name="RULES-WORK59">"43"</Career>
+  <!-- Hedge Witch -->
+<Career name="RULES-WORK29">"44"</Career>
+  <!-- Herbalist -->
+<Career name="RULES-WORK10">"45"</Career>
+  <!-- Hunter -->
+<Career name="RULES-WORK40">"46-47"</Career>
+  <!-- Miner -->
+<Career name="RULES-WORK41">"48"</Career>
+  <!-- Mystic -->
+<Career name="RULES-WORK19">"49"</Career>
+  <!-- Scout -->
+<Career name="RULES-WORK63">"50-54"</Career>
+  <!-- Villager -->
+<Career name="RULES-WORK11">"55"</Career>
+  <!-- Bounty Hunter -->
+<Career name="RULES-WORK13">"56-57"</Career>
+  <!-- Coachman -->
+<Career name="RULES-WORK55">"58-60"</Career>
+  <!-- Entertainer -->
+<Career name="RULES-WORK38">"61"</Career>
+  <!-- Messenger -->
+<Career name="RULES-WORK14">"62-63"</Career>
+  <!-- Pedlar -->
+<Career name="RULES-WORK47">"64"</Career>
+  <!-- Road Warden -->
+<Career name="RULES-WORK54">"65"</Career>
+  <!-- Witch Hunter -->
+<Career name="RULES-WORK16">"66"</Career>
+  <!-- Smuggler -->
+<Career name="RULES-WORK17">"67-68"</Career>
+  <!-- Stevedor -->
+<Career name="RULES-WORK22">"69-70"</Career>
+  <!-- Bawl -->
+<Career name="RULES-WORK09">"71"</Career>
+  <!-- Charlatan -->
+<Career name="RULES-WORK53">"72-73"</Career>
+  <!-- Fence -->
+<Career name="RULES-WORK48">"74"</Career>
+  <!-- Grave Robber -->
+<Career name="RULES-WORK30">"75-76"</Career>
+  <!-- Outlaw -->
+<Career name="RULES-WORK51">"77-79"</Career>
+  <!-- Racketeer -->
+<Career name="RULES-WORK64">"80-83"</Career>
+  <!-- Thief -->
+<Career name="RULES-WORK60">"84"</Career>
+  <!-- Witch -->
+<Career name="RULES-WORK08">"85-86"</Career>
+  <!-- Cavalryman -->
+<Career name="RULES-WORK27">"87-89"</Career>
+  <!-- Guard -->
+<Career name="RULES-WORK12">"90"</Career>
+  <!-- Knight -->
+<Career name="RULES-WORK28">"91"</Career>
+  <!-- Pit Fighter -->
+<Career name="RULES-WORK61">"92"</Career>
+  <!-- Protagonist -->
+<Career name="RULES-WORK57">"93-96"</Career>
+  <!-- Soldier -->
+<Career name="RULES-WORK50">"97"</Career>
+  <!-- Warrior Priest -->
+<Career name="MIDDE-WORK107">"98-100"</Career>
+  <!-- Wolf Kin -->
+</SUBCHAPTER_CAREER>
+</Specie>
+<Specie id="MIDDE-RACE_HMIDL">
+<Description language="ENGLISH">"Humans (Middenlander)"</Description>
+<Explanation language="ENGLISH">"The folk of Middenland arguably have more in common with their Teutogen ancestors than Middenheimers. Many of them lead a hardscrabble existence in farming communities or villages near the edges of the Drakwald. Skills and Talents reflect a need for such Characters to have learned how to live within the wild."</Explanation>
+<Ethnic>"SPECIE_HUMAN"</Ethnic>
+<SUBCHAPTER_ATTR>
+<Attribut name="RULES-ATTR_WS">"2d10+20"</Attribut>
+<Attribut name="RULES-ATTR_BS">"2d10+20"</Attribut>
+<Attribut name="RULES-ATTR_S">"2d10+20"</Attribut>
+<Attribut name="RULES-ATTR_T">"2d10+20"</Attribut>
+<Attribut name="RULES-ATTR_I">"2d10+20"</Attribut>
+<Attribut name="RULES-ATTR_Ag">"2d10+20"</Attribut>
+<Attribut name="RULES-ATTR_Dex">"2d10+20"</Attribut>
+<Attribut name="RULES-ATTR_Int">"2d10+20"</Attribut>
+<Attribut name="RULES-ATTR_WP">"2d10+20"</Attribut>
+<Attribut name="RULES-ATTR_Fel">"2d10+20"</Attribut>
+<Attribut name="RULES-ATTR_Fate">"2"</Attribut>
+<Attribut name="RULES-ATTR_Resil">"1"</Attribut>
+<Attribut name="RULES-ATTR_Wound">"1xBATTR_S+2xBATTR_T+1xBATTR_WP"</Attribut>
+<Attribut name="RULES-ATTR_Supp">"3"</Attribut>
+<Attribut name="RULES-ATTR_Move">"4"</Attribut>
+</SUBCHAPTER_ATTR>
+<SUBCHAPTER_SKILL>
+<Skill>"RULES-COMPSOINANI"</Skill>
+  <!-- Animal Care -->
+<Skill>"RULES-COMPCALM"</Skill>
+  <!-- Cool -->
+<Skill>"RULES-COMPEVAL"</Skill>
+  <!-- Evaluate -->
+<Skill>"RULES-COMPRAGOT"</Skill>
+  <!-- Gossip -->
+<Skill>"RULES-COMPMARCH"</Skill>
+  <!-- Haggle -->
+<Skill>"RULES-COMPINTIM"</Skill>
+  <!-- Intimidate -->
+<Skill>"RULES-COMPLANG_WEST"</Skill>
+  <!-- Language (wastellander) -->
+<Skill>"RULES-COMPCOMM"</Skill>
+  <!-- Leadership -->
+<Skill>"RULES-COMPSAVOIR_MIDDENLAND"</Skill>
+  <!-- Lore (Middenland) -->
+<Skill>"RULES-COMPCOMB_BASE"</Skill>
+  <!-- Melee (Basic) -->
+<Skill>"RULES-COMPSURVEXT"</Skill>
+  <!-- Outdoor Survival -->
+<Skill>"RULES-COMPPROJ_ARC"</Skill>
+  <!-- Ranged (Bow) -->
+</SUBCHAPTER_SKILL>
+<SUBCHAPTER_TALENT>
+<Talent>"RULES-T0171/T*"</Talent>
+  <!-- Doomed/Random Talent -->
+<Talent>"RULES-T0098/T0067"</Talent>
+  <!-- Menacing/Warrior Born -->
+<Talent>"RULES-T*"</Talent>
+  <!-- Random Talent -->
+<Talent>"RULES-T*"</Talent>
+  <!-- Random Talent -->
+<Talent>"RULES-T*"</Talent>
+  <!-- Random Talent -->
+</SUBCHAPTER_TALENT>
+<SUBCHAPTER_CAREER>
+<Career name="RULES-WORK02">"01"</Career>
+  <!-- Apothecary -->
+<Career name="RULES-WORK31">"02"</Career>
+  <!-- Engineer -->
+<Career name="RULES-WORK33">"03"</Career>
+  <!-- Lawyer -->
+<Career name="RULES-WORK45">"04-05"</Career>
+  <!-- Nun -->
+<Career name="RULES-WORK36">"06"</Career>
+  <!-- Physician -->
+<Career name="RULES-WORK49">"07-11"</Career>
+  <!-- Priest -->
+<Career name="RULES-WORK23">"12-13"</Career>
+  <!-- Scholar -->
+<Career name="RULES-WORK58">"14"</Career>
+  <!-- Wizard -->
+<Career name="RULES-WORK01">"15"</Career>
+  <!-- Agitator -->
+<Career name="RULES-WORK03">"16-17"</Career>
+  <!-- Artisan -->
+<Career name="RULES-WORK37">"18-19"</Career>
+  <!-- Beggar -->
+<Career name="RULES-WORK21">"20"</Career>
+  <!-- Inverstigator -->
+<Career name="RULES-WORK34">"21"</Career>
+  <!-- Merchant -->
+<Career name="RULES-WORK52">"22-23"</Career>
+  <!-- Rat Catcher -->
+<Career name="RULES-WORK07">"24-26"</Career>
+  <!-- Townsman -->
+<Career name="RULES-WORK39">"27"</Career>
+  <!-- Watchman -->
+<Career name="RULES-WORK15">"28"</Career>
+  <!-- Advisor -->
+<Career name="RULES-WORK04">"29"</Career>
+  <!-- Artist -->
+<Career name="RULES-WORK18">"30"</Career>
+  <!-- Duellist -->
+<Career name="RULES-WORK20">"31"</Career>
+  <!-- Envoy -->
+<Career name="RULES-WORK44">"32"</Career>
+  <!-- Noble -->
+<Career name="RULES-WORK56">"33-35"</Career>
+  <!-- Servant -->
+<Career name="RULES-WORK24">"36"</Career>
+  <!-- Spy -->
+<Career name="RULES-WORK32">"37"</Career>
+  <!-- Warden -->
+<Career name="RULES-WORK05">"38"</Career>
+  <!-- Bailif -->
+<Career name="RULES-WORK59">"39"</Career>
+  <!-- Hedge Witch -->
+<Career name="RULES-WORK29">"40"</Career>
+  <!-- Herbalist -->
+<Career name="RULES-WORK10">"41-42"</Career>
+  <!-- Hunter -->
+<Career name="RULES-WORK40">"43"</Career>
+  <!-- Miner -->
+<Career name="RULES-WORK41">"44"</Career>
+  <!-- Mystic -->
+<Career name="RULES-WORK19">"45"</Career>
+  <!-- Scout -->
+<Career name="RULES-WORK63">"46-50"</Career>
+  <!-- Villager -->
+<Career name="RULES-WORK11">"51"</Career>
+  <!-- Bounty Hunter -->
+<Career name="RULES-WORK13">"52"</Career>
+  <!-- Coachman -->
+<Career name="RULES-WORK55">"53-54"</Career>
+  <!-- Entertainer -->
+<Career name="RULES-WORK38">"55"</Career>
+  <!-- Messenger -->
+<Career name="RULES-WORK14">"56"</Career>
+  <!-- Pedlar -->
+<Career name="RULES-WORK47">"57"</Career>
+  <!-- Road Warden -->
+<Career name="RULES-WORK54">"58"</Career>
+  <!-- Witch Hunter -->
+<Career name="RULES-WORK06">"59-60"</Career>
+  <!-- Boatman -->
+<Career name="RULES-WORK43">"61"</Career>
+  <!-- Huffer -->
+<Career name="RULES-WORK46">"62-63"</Career>
+  <!-- Riverwarden -->
+<Career name="RULES-WORK25">"64-66"</Career>
+  <!-- Riverwoman -->
+<Career name="RULES-WORK35">"67-68"</Career>
+  <!-- Seaman -->
+<Career name="RULES-WORK16">"69"</Career>
+  <!-- Smuggler -->
+<Career name="RULES-WORK17">"70-71"</Career>
+  <!-- Stevedor -->
+<Career name="RULES-WORK42">"72"</Career>
+  <!-- Wrecker -->
+<Career name="RULES-WORK22">"73-74"</Career>
+  <!-- Bawl -->
+<Career name="RULES-WORK09">"75"</Career>
+  <!-- Charlatan -->
+<Career name="RULES-WORK53">"76"</Career>
+  <!-- Fence -->
+<Career name="RULES-WORK48">"77"</Career>
+  <!-- Grave Robber -->
+<Career name="RULES-WORK30">"78-81"</Career>
+  <!-- Outlaw -->
+<Career name="RULES-WORK51">"82"</Career>
+  <!-- Racketeer -->
+<Career name="RULES-WORK64">"83-85"</Career>
+  <!-- Thief -->
+<Career name="RULES-WORK60">"86"</Career>
+  <!-- Witch -->
+<Career name="RULES-WORK08">"87-88"</Career>
+  <!-- Cavalryman -->
+<Career name="RULES-WORK27">"89-90"</Career>
+  <!-- Guard -->
+<Career name="RULES-WORK12">"91"</Career>
+  <!-- Knight -->
+<Career name="RULES-WORK28">"92"</Career>
+  <!-- Pit Fighter -->
+<Career name="RULES-WORK61">"93"</Career>
+  <!-- Protagonist -->
+<Career name="RULES-WORK57">"94-97"</Career>
+  <!-- Soldier -->
+<Career name="RULES-WORK50">"98"</Career>
+  <!-- Warrior Priest -->
+<Career name="MIDDE-WORK107">"99-100"</Career>
+  <!-- Wolf Kin -->
+</SUBCHAPTER_CAREER>
+</Specie>
+<Specie id="MIDDE-RACE_HNORD">
+<Description language="ENGLISH">"Humans (Nordlander)"</Description>
+<Explanation language="ENGLISH">"Most outsiders view the archetypal Nordlander as a grogsoaked sea dog, though in truth only a small minority of them live by the coast. The town of Salzenmund has the hallmarks of urban sophistication, though swathes of Nordland’s baronies are isolated backwaters. Skills and Talents reflect either a familiarity with the sea, or a need to cope with life in the country."</Explanation>
+<Ethnic>"SPECIE_HUMAN"</Ethnic>
+<SUBCHAPTER_ATTR>
+<Attribut name="RULES-ATTR_WS">"2d10+20"</Attribut>
+<Attribut name="RULES-ATTR_BS">"2d10+20"</Attribut>
+<Attribut name="RULES-ATTR_S">"2d10+20"</Attribut>
+<Attribut name="RULES-ATTR_T">"2d10+20"</Attribut>
+<Attribut name="RULES-ATTR_I">"2d10+20"</Attribut>
+<Attribut name="RULES-ATTR_Ag">"2d10+20"</Attribut>
+<Attribut name="RULES-ATTR_Dex">"2d10+20"</Attribut>
+<Attribut name="RULES-ATTR_Int">"2d10+20"</Attribut>
+<Attribut name="RULES-ATTR_WP">"2d10+20"</Attribut>
+<Attribut name="RULES-ATTR_Fel">"2d10+20"</Attribut>
+<Attribut name="RULES-ATTR_Fate">"2"</Attribut>
+<Attribut name="RULES-ATTR_Resil">"1"</Attribut>
+<Attribut name="RULES-ATTR_Wound">"1xBATTR_S+2xBATTR_T+1xBATTR_WP"</Attribut>
+<Attribut name="RULES-ATTR_Supp">"3"</Attribut>
+<Attribut name="RULES-ATTR_Move">"4"</Attribut>
+</SUBCHAPTER_ATTR>
+<SUBCHAPTER_SKILL>
+<Skill>"RULES-COMPRESALC"</Skill>
+  <!-- Consume Alcohol -->
+<Skill>"RULES-COMPEVAL"</Skill>
+  <!-- Evaluate -->
+<Skill>"RULES-COMPRAGOT"</Skill>
+  <!-- Gossip -->
+<Skill>"RULES-COMPMARCH"</Skill>
+  <!-- Haggle -->
+<Skill>"RULES-COMPLANG_NORSE"</Skill>
+  <!-- Language (Norse) -->
+<Skill>"RULES-COMPLANG_WEST"</Skill>
+  <!-- Language (wastellander) -->
+<Skill>"RULES-COMPSAVOIR_NORDLAND"</Skill>
+  <!-- Lore (Nordland) -->
+<Skill>"RULES-COMPCOMB_BASE"</Skill>
+  <!-- Melee (Basic) -->
+<Skill>"RULES-COMPPROJ_ARC"</Skill>
+  <!-- Ranged (Bow) -->
+<Skill>"RULES-COMPVOILE"</Skill>
+  <!-- Sail -->
+<Skill>"RULES-COMPNATA"</Skill>
+  <!-- Swim -->
+<Skill>"RULES-COMPMETIER_*"</Skill>
+  <!-- Trade (Any) -->
+</SUBCHAPTER_SKILL>
+<SUBCHAPTER_TALENT>
+<Talent>"RULES-T0171/T*"</Talent>
+  <!-- Doomed/Random Talent -->
+<Talent>"RULES-T0113/T0105"</Talent>
+  <!-- Fisherman/Rover -->
+<Talent>"RULES-T0025/T0159"</Talent>
+  <!-- Stout-hearted/Very Resilient -->
+<Talent>"RULES-T*"</Talent>
+  <!-- Random Talent -->
+<Talent>"RULES-T*"</Talent>
+  <!-- Random Talent -->
+</SUBCHAPTER_TALENT>
+<SUBCHAPTER_CAREER>
+<Career name="RULES-WORK02">"01"</Career>
+  <!-- Apothecary -->
+<Career name="RULES-WORK31">"02"</Career>
+  <!-- Engineer -->
+<Career name="RULES-WORK33">"03"</Career>
+  <!-- Lawyer -->
+<Career name="RULES-WORK45">"04-05"</Career>
+  <!-- Nun -->
+<Career name="RULES-WORK36">"06"</Career>
+  <!-- Physician -->
+<Career name="RULES-WORK49">"07-10"</Career>
+  <!-- Priest -->
+<Career name="RULES-WORK23">"11-12"</Career>
+  <!-- Scholar -->
+<Career name="RULES-WORK58">"13"</Career>
+  <!-- Wizard -->
+<Career name="RULES-WORK01">"14"</Career>
+  <!-- Agitator -->
+<Career name="RULES-WORK03">"15-16"</Career>
+  <!-- Artisan -->
+<Career name="RULES-WORK37">"17-18"</Career>
+  <!-- Beggar -->
+<Career name="RULES-WORK21">"19"</Career>
+  <!-- Inverstigator -->
+<Career name="RULES-WORK34">"20"</Career>
+  <!-- Merchant -->
+<Career name="RULES-WORK52">"21-22"</Career>
+  <!-- Rat Catcher -->
+<Career name="RULES-WORK07">"23-24"</Career>
+  <!-- Townsman -->
+<Career name="RULES-WORK39">"25"</Career>
+  <!-- Watchman -->
+<Career name="RULES-WORK15">"26"</Career>
+  <!-- Advisor -->
+<Career name="RULES-WORK04">"27"</Career>
+  <!-- Artist -->
+<Career name="RULES-WORK18">"28"</Career>
+  <!-- Duellist -->
+<Career name="RULES-WORK20">"29"</Career>
+  <!-- Envoy -->
+<Career name="RULES-WORK44">"30"</Career>
+  <!-- Noble -->
+<Career name="RULES-WORK56">"31-33"</Career>
+  <!-- Servant -->
+<Career name="RULES-WORK24">"34"</Career>
+  <!-- Spy -->
+<Career name="RULES-WORK32">"35"</Career>
+  <!-- Warden -->
+<Career name="RULES-WORK05">"36"</Career>
+  <!-- Bailif -->
+<Career name="RULES-WORK59">"37"</Career>
+  <!-- Hedge Witch -->
+<Career name="RULES-WORK29">"38"</Career>
+  <!-- Herbalist -->
+<Career name="RULES-WORK10">"39-40"</Career>
+  <!-- Hunter -->
+<Career name="RULES-WORK40">"41"</Career>
+  <!-- Miner -->
+<Career name="RULES-WORK41">"42"</Career>
+  <!-- Mystic -->
+<Career name="RULES-WORK19">"43"</Career>
+  <!-- Scout -->
+<Career name="RULES-WORK63">"44-48"</Career>
+  <!-- Villager -->
+<Career name="RULES-WORK11">"49"</Career>
+  <!-- Bounty Hunter -->
+<Career name="RULES-WORK13">"50"</Career>
+  <!-- Coachman -->
+<Career name="RULES-WORK55">"51-52"</Career>
+  <!-- Entertainer -->
+<Career name="RULES-WORK38">"53"</Career>
+  <!-- Messenger -->
+<Career name="RULES-WORK14">"54"</Career>
+  <!-- Pedlar -->
+<Career name="RULES-WORK47">"55"</Career>
+  <!-- Road Warden -->
+<Career name="RULES-WORK54">"56"</Career>
+  <!-- Witch Hunter -->
+<Career name="RULES-WORK06">"57-58"</Career>
+  <!-- Boatman -->
+<Career name="RULES-WORK43">"59"</Career>
+  <!-- Huffer -->
+<Career name="RULES-WORK46">"60-61"</Career>
+  <!-- Riverwarden -->
+<Career name="RULES-WORK25">"62-64"</Career>
+  <!-- Riverwoman -->
+<Career name="RULES-WORK35">"65-68"</Career>
+  <!-- Seaman -->
+<Career name="RULES-WORK16">"69-70"</Career>
+  <!-- Smuggler -->
+<Career name="RULES-WORK17">"71-72"</Career>
+  <!-- Stevedor -->
+<Career name="RULES-WORK42">"73"</Career>
+  <!-- Wrecker -->
+<Career name="RULES-WORK22">"74-75"</Career>
+  <!-- Bawl -->
+<Career name="RULES-WORK09">"76"</Career>
+  <!-- Charlatan -->
+<Career name="RULES-WORK53">"77"</Career>
+  <!-- Fence -->
+<Career name="RULES-WORK48">"78"</Career>
+  <!-- Grave Robber -->
+<Career name="RULES-WORK30">"79-82"</Career>
+  <!-- Outlaw -->
+<Career name="RULES-WORK51">"83"</Career>
+  <!-- Racketeer -->
+<Career name="RULES-WORK64">"84-85"</Career>
+  <!-- Thief -->
+<Career name="RULES-WORK60">"86"</Career>
+  <!-- Witch -->
+<Career name="RULES-WORK08">"87-88"</Career>
+  <!-- Cavalryman -->
+<Career name="RULES-WORK27">"89-90"</Career>
+  <!-- Guard -->
+<Career name="RULES-WORK12">"91"</Career>
+  <!-- Knight -->
+<Career name="RULES-WORK28">"92"</Career>
+  <!-- Pit Fighter -->
+<Career name="RULES-WORK61">"93"</Career>
+  <!-- Protagonist -->
+<Career name="RULES-WORK57">"94-97"</Career>
+  <!-- Soldier -->
+<Career name="RULES-WORK50">"98"</Career>
+  <!-- Warrior Priest -->
+<Career name="MIDDE-WORK107">"99-100"</Career>
+  <!-- Wolf Kin -->
+</SUBCHAPTER_CAREER>
+</Specie>
+</DATA_SPECIE>
+<DATA_CAREER>
+<Career id="MIDDE-WORK107">
+<Description language="ENGLISH">"Wolf Kin"</Description>
+<Explanation language="ENGLISH">"Looking to Ulric for inspiration, you have decided to deal with life s difficulties by practising a form of extreme self-reliance. Flagellants are rarely seen in the north of the Empire. Zealots who follow Sigmar find it hard here, as they are not taken seriously and find it difficult to find fellow travellers. The few Flagellants who walk the roads of the northern provinces are often jeered, rather than seen as figures of awe. But Ulric has his own zealots. They adopt no uniform and preach no creed, for they are quiet and private in their fervour. They seek to embody the virtues espoused by their god by testing themselves against the wild, living amongst the wolves even in the depths of winter. In the wilds of the north, many people are left homeless and bereaved by Beastmen, sea raiding Norscans, or bands of Forest Goblins. Reasoning that, according to Ulrican"</Explanation>
+<Skill>"RULES-COMPSURVEXT"</Skill>
+<Class>"CLASS_WARR"</Class>
+<SUBCHAPTER_LEVEL>
+<Level id="1">
+<Description language="ENGLISH">"Survivor"</Description>
+<Salary>"TIERS_BRASS 1"</Salary>
+</Level>
+<Level id="2">
+<Description language="ENGLISH">"Wolf Club"</Description>
+<Salary>"TIERS_BRASS 1"</Salary>
+</Level>
+<Level id="3">
+<Description language="ENGLISH">"Wolf Kin"</Description>
+<Salary>"TIERS_BRASS 1"</Salary>
+</Level>
+<Level id="4">
+<Description language="ENGLISH">"Wolf Brother"</Description>
+<Salary>"TIERS_BRASS 2"</Salary>
+</Level>
+</SUBCHAPTER_LEVEL>
+<SUBCHAPTER_ATTR>
+<Attribut name="RULES-ATTR_WS">"1"</Attribut>
+<Attribut name="RULES-ATTR_BS">"0"</Attribut>
+<Attribut name="RULES-ATTR_S">"1"</Attribut>
+<Attribut name="RULES-ATTR_T">"1"</Attribut>
+<Attribut name="RULES-ATTR_I">"3"</Attribut>
+<Attribut name="RULES-ATTR_Ag">"4"</Attribut>
+<Attribut name="RULES-ATTR_Dex">"0"</Attribut>
+<Attribut name="RULES-ATTR_Int">"0"</Attribut>
+<Attribut name="RULES-ATTR_WP">"2"</Attribut>
+<Attribut name="RULES-ATTR_Fel">"0"</Attribut>
+</SUBCHAPTER_ATTR>
+<SUBCHAPTER_SKILL>
+<Skill name="RULES-COMPESCAL">"1"</Skill>
+  <!-- Climb -->
+<Skill name="RULES-COMPCALM">"1"</Skill>
+  <!-- Cool -->
+<Skill name="RULES-COMPRESIST">"1"</Skill>
+  <!-- Endurance -->
+<Skill name="RULES-COMPGUERI">"1"</Skill>
+  <!-- Heal -->
+<Skill name="RULES-COMPINTIM">"1"</Skill>
+  <!-- Intimidate -->
+<Skill name="RULES-COMPINTUI">"1"</Skill>
+  <!-- Intuition  -->
+<Skill name="RULES-COMPSAVOIR_ULRIC">"1"</Skill>
+  <!-- Lore (Ulric) -->
+<Skill name="RULES-COMPCOMB_BASE">"1"</Skill>
+  <!-- Melee (Basic) -->
+<Skill name="RULES-COMPCOMB_BAGARRE">"1"</Skill>
+  <!-- Melee (Brawling) -->
+<Skill name="RULES-COMPSURVEXT">"1"</Skill>
+  <!-- Outdoor Survival -->
+<Skill name="RULES-COMPATHL">"2"</Skill>
+  <!-- Athletics -->
+<Skill name="RULES-COMPESQU">"2"</Skill>
+  <!-- Dodge -->
+<Skill name="RULES-COMPSAVOIR_BETE">"2"</Skill>
+  <!-- Lore (Beasts) -->
+<Skill name="RULES-COMPSAVOIR_HERB">"2"</Skill>
+  <!-- Lore (Herbs) -->
+<Skill name="RULES-COMPDISC_RURAL">"2"</Skill>
+  <!-- Stealth (Rural) -->
+<Skill name="RULES-COMPORIENT">"3"</Skill>
+  <!-- Navigation -->
+<Skill name="RULES-COMPPRECEP">"3"</Skill>
+  <!-- Perception  -->
+<Skill name="RULES-COMPPIST">"3"</Skill>
+  <!-- Track -->
+<Skill name="RULES-COMPSOINANI">"4"</Skill>
+  <!-- Animal Care -->
+<Skill name="RULES-COMPNATA">"4"</Skill>
+  <!-- Swim -->
+</SUBCHAPTER_SKILL>
+<SUBCHAPTER_TALENT>
+<Talent name="RULES-T0021">"1"</Talent>
+  <!-- Berserk Charge -->
+<Talent name="RULES-T0063">"1"</Talent>
+  <!-- Frenzy -->
+<Talent name="RULES-T0105">"1"</Talent>
+  <!-- Rover -->
+<Talent name="RULES-T0016">"1"</Talent>
+  <!-- Stone Soup -->
+<Talent name="RULES-T0139_*">"2"</Talent>
+  <!-- Acute Sense (Any) -->
+<Talent name="RULES-T0047">"2"</Talent>
+  <!-- Hardy -->
+<Talent name="RULES-T0050">"2"</Talent>
+  <!-- Implacable -->
+<Talent name="RULES-T0013_*">"2"</Talent>
+  <!-- Strider (Any) -->
+<Talent name="RULES-T0111">"3"</Talent>
+  <!-- Field Dressing -->
+<Talent name="RULES-T0008">"3"</Talent>
+  <!-- Furious Assault -->
+<Talent name="RULES-T0140">"3"</Talent>
+  <!-- Orientation -->
+<Talent name="RULES-T0168">"3"</Talent>
+  <!-- Seasoned Traveller -->
+<Talent name="RULES-T0033">"4"</Talent>
+  <!-- Battle Rage -->
+<Talent name="RULES-T0132_HOMBET">"4"</Talent>
+  <!-- Fearless (Beastmen) -->
+<Talent name="RULES-T0049">"4"</Talent>
+  <!-- Frightening -->
+<Talent name="RULES-T0056">"4"</Talent>
+  <!-- Impassioned Zeal -->
+</SUBCHAPTER_TALENT>
+<SUBCHAPTER_ITEM>
+<Item name="RULES-COMB_BASE_*">"1"</Item>
+<Item name="the Clothes on your Back">"1"</Item>
+<Item name="the Respect of other Wolf Kin">"4"</Item>
+</SUBCHAPTER_ITEM>
+</Career>
+</DATA_CAREER>
+</DATA_BOOK>

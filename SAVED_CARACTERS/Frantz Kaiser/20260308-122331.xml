@@ -1,0 +1,159 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<PLAYER>
+<Name>"Frantz Kaiser"</Name>
+<Specie>"RULES-RACE_HUM"</Specie>
+  <!-- Humains (Reikland) -->
+<Career>"RULES-WORK28"</Career>
+  <!-- Gladiateur  -->
+<Level>"1"</Level>
+<Xp>"120"</Xp>
+<CurrentXp>"120"</CurrentXp>
+<CHAPTER_CREATION>
+<SUBCHAPTER_ATTR>
+<Attribut name="RULES-ATTR_WS">"18"</Attribut>
+  <!-- Capacité de Combat -->
+<Attribut name="RULES-ATTR_BS">"9"</Attribut>
+  <!-- Capacité de Tir -->
+<Attribut name="RULES-ATTR_S">"15"</Attribut>
+  <!-- Force -->
+<Attribut name="RULES-ATTR_T">"13"</Attribut>
+  <!-- Endurance -->
+<Attribut name="RULES-ATTR_I">"13"</Attribut>
+  <!-- Initiative -->
+<Attribut name="RULES-ATTR_Ag">"7"</Attribut>
+  <!-- Agilité -->
+<Attribut name="RULES-ATTR_Dex">"14"</Attribut>
+  <!-- Dextérité -->
+<Attribut name="RULES-ATTR_Int">"8"</Attribut>
+  <!-- Intelligence -->
+<Attribut name="RULES-ATTR_WP">"14"</Attribut>
+  <!-- Force Mentale -->
+<Attribut name="RULES-ATTR_Fel">"5"</Attribut>
+  <!-- Sociabilité -->
+</SUBCHAPTER_ATTR>
+<SUBCHAPTER_SKILLSPECIE>
+<Skill name="RULES-COMPCALM">"3"</Skill>
+  <!-- Calme -->
+<Skill name="RULES-COMPCHARM">"3"</Skill>
+  <!-- Charme  -->
+<Skill name="RULES-COMPCOMB_BASE">"3"</Skill>
+  <!-- Corps à corps (Base) -->
+<Skill name="RULES-COMPMARCH">"5"</Skill>
+  <!-- Marchandage  -->
+<Skill name="RULES-COMPPROJ_ARC">"5"</Skill>
+  <!-- Projectiles (Arc) -->
+<Skill name="RULES-COMPRAGOT">"5"</Skill>
+  <!-- Ragot  -->
+</SUBCHAPTER_SKILLSPECIE>
+<SUBCHAPTER_SKILLCREATION>
+<Skill name="RULES-COMPATHL">"5"</Skill>
+  <!-- Athlétisme -->
+<Skill name="RULES-COMPCALM">"10"</Skill>
+  <!-- Calme -->
+<Skill name="RULES-COMPCOMB_BASE">"10"</Skill>
+  <!-- Corps à corps (Base) -->
+<Skill name="RULES-COMPESQU">"5"</Skill>
+  <!-- Esquive -->
+<Skill name="RULES-COMPINTIM">"5"</Skill>
+  <!-- Intimidation  -->
+<Skill name="RULES-COMPRESIST">"5"</Skill>
+  <!-- Résistance  -->
+</SUBCHAPTER_SKILLCREATION>
+<SUBCHAPTER_TALENT>
+<Talent name="RULES-T0002">"1"</Talent>
+  <!-- Affable -->
+<Talent name="RULES-T0171">"1"</Talent>
+  <!-- Destinée -->
+<Talent name="RULES-T0003">"1"</Talent>
+  <!-- Affinité avec les animaux -->
+<Talent name="RULES-T0020">"1"</Talent>
+  <!-- Chanceux -->
+<Talent name="RULES-T0110">"1"</Talent>
+  <!-- Oreille absolue -->
+</SUBCHAPTER_TALENT>
+</CHAPTER_CREATION>
+<CHAPTER_INCREASE>
+<SUBCHAPTER_ATTR>
+</SUBCHAPTER_ATTR>
+<SUBCHAPTER_SKILLCAREER>
+</SUBCHAPTER_SKILLCAREER>
+<SUBCHAPTER_TALENT>
+</SUBCHAPTER_TALENT>
+</CHAPTER_INCREASE>
+<CHAPTER_SKILL>
+<SUBCHAPTER_SKILLCAREER>
+<Skill name="RULES-COMPATHL">"1"</Skill>
+  <!-- Athlétisme -->
+<Skill name="RULES-COMPCALM">"1"</Skill>
+  <!-- Calme -->
+<Skill name="RULES-COMPCOMB_BASE">"1"</Skill>
+  <!-- Corps à corps (Base) -->
+<Skill name="RULES-COMPCOMB_BAGAR">"1"</Skill>
+  <!-- Corps à corps (Bagarre) -->
+<Skill name="RULES-COMPESQU">"1"</Skill>
+  <!-- Esquive -->
+<Skill name="RULES-COMPINTIM">"1"</Skill>
+  <!-- Intimidation  -->
+<Skill name="RULES-COMPPARI">"1"</Skill>
+  <!-- Pari  -->
+<Skill name="RULES-COMPRESIST">"1"</Skill>
+  <!-- Résistance  -->
+<Skill name="RULES-COMPCOMB_BASE">"2"</Skill>
+  <!-- Corps à corps (Base) -->
+<Skill name="RULES-COMPCOMB_2M/COMPCOMB_FLEAU">"2"</Skill>
+  <!-- Corps à corps (Fléau ou Deux mains) -->
+<Skill name="RULES-COMPINTUI">"2"</Skill>
+  <!-- Intuition  -->
+<Skill name="RULES-COMPMARCH">"2"</Skill>
+  <!-- Marchandage  -->
+<Skill name="RULES-COMPPRECEP">"2"</Skill>
+  <!-- Perception  -->
+<Skill name="RULES-COMPPROJ_ENTRAV">"2"</Skill>
+  <!-- Projectiles (Entraves) -->
+<Skill name="RULES-COMPRAGOT">"3"</Skill>
+  <!-- Ragot  -->
+<Skill name="RULES-COMPREPRES_COMB">"3"</Skill>
+  <!-- Représentation (Combat) -->
+<Skill name="RULES-COMPRESALC">"3"</Skill>
+  <!-- Résistance à l’alcool  -->
+<Skill name="RULES-COMPSAVOIR_ANAT">"3"</Skill>
+  <!-- Savoir (Anatomie)  -->
+<Skill name="RULES-COMPCHARM">"4"</Skill>
+  <!-- Charme  -->
+<Skill name="RULES-COMPPROJ_*">"4"</Skill>
+  <!-- Projectiles (au choix) -->
+</SUBCHAPTER_SKILLCAREER>
+</CHAPTER_SKILL>
+<CHAPTER_OLDCAREER>
+<Career name="RULES-WORK28/1">"0"</Career>
+  <!-- Gladiateur  -->
+</CHAPTER_OLDCAREER>
+<CHAPTER_ITEM>
+<SUBCHAPTER_WEAPON>
+<Item name="RULES-COMB_BAGAR_01">""</Item>
+  <!-- Coup-de-poing -->
+</SUBCHAPTER_WEAPON>
+<SUBCHAPTER_ARMOR>
+<Item name="RULES-ARMO_04">""</Item>
+  <!-- Veste de cuir -->
+</SUBCHAPTER_ARMOR>
+<SUBCHAPTER_ARMOR_SET>
+</SUBCHAPTER_ARMOR_SET>
+<SUBCHAPTER_MISC>
+<Item name="bandages">""</Item>
+</SUBCHAPTER_MISC>
+<SUBCHAPTER_SPELL>
+</SUBCHAPTER_SPELL>
+</CHAPTER_ITEM>
+<BOOK>"[BOOK RULESBOOK]"</BOOK>
+<RULES>"[BOOK ARCHIVES OF THE EMPIRE I][BOOK ARCHIVES OF THE EMPIRE II][BOOK ARCHIVES OF THE EMPIRE III][BOOK DEATH ON THE REIK COMPANION][BOOK ENEMY IN SHADOWS COMPANION][BOOK MIDDENHEIM CITY OF THE WHITE WOLF][BOOK ROUGH NIGHTS AND HARD DAYS][BOOK RULESBOOK][BOOK SALZENMUND CITY OF SALT AND SILVER][BOOK SEA OF CLAWS][BOOK THE HORNED RAT COMPANION][BOOK UP IN ARMS][BOOK WINDS OF MAGIC]"</RULES>
+<CHAPTER_XP>
+<SUBCHAPTER_ATTR>
+</SUBCHAPTER_ATTR>
+<SUBCHAPTER_SKILL>
+</SUBCHAPTER_SKILL>
+<SUBCHAPTER_TALENT>
+</SUBCHAPTER_TALENT>
+</CHAPTER_XP>
+<OPTIONS>""</OPTIONS>
+</PLAYER>

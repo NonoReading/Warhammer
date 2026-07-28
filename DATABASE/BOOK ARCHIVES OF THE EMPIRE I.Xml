@@ -1,0 +1,732 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<DATA_BOOK>
+<CODE_BOOK>"ARCH1"</CODE_BOOK>
+<BOOK>"BOOK ARCHIVES OF THE EMPIRE I"</BOOK>
+<language>"ENGLISH"</language>
+<VERSION>"20250623"</VERSION>
+<OFFICIAL>"1"</OFFICIAL>
+<COMPLETE>"1"</COMPLETE>
+<DATA_CAREER>
+<Career id="ARCH1-WORK95">
+<Description language="ENGLISH">"Ghost Strider"</Description>
+<Explanation language="ENGLISH">"The forests are ancient and deadly, a haven for bandits and dangerous outcasts. They teem with natural predators such as bears, wolves and giant spiders. If, somehow, these threats weren’t enough to hurry a traveller on their way, there is no shortage of wholly unnatural creatures either, such as foul trolls, Beastman herds, or the walking dead. But perhaps the deadliest threat of all is the Ghost Strider. Even the city-born High Elves respect the beauty of nature, and Wood Elves are renowned for the ferocity with which they defend their lands. The Ghost Strider epitomises this defence. Master archers, they hunt all threats to the natural world with a determination and skill that would be terrifying to behold, if not for their almost supernatural speed and silence. Ghost Striders are so attuned to the natural world that nature itself seems to hide their passage from prying eyes. Indeed, so devoted are they to their task that even other Wood Elves consider them intimidating, perhaps skirting closer to obsession than is healthy for an intensely emotional people."</Explanation>
+<Skill>"RULES-COMPPROJ_ARC"</Skill>
+<Class>"CLASS_RANG"</Class>
+<SUBCHAPTER_LEVEL>
+<Level id="1">
+<Description language="ENGLISH">"Forest Ranger"</Description>
+<Salary>"TIERS_BRASS 3"</Salary>
+</Level>
+<Level id="2">
+<Description language="ENGLISH">"Ghost Strider"</Description>
+<Salary>"TIERS_BRASS 5"</Salary>
+</Level>
+<Level id="3">
+<Description language="ENGLISH">"Windwraith"</Description>
+<Salary>"TIERS_SILVER 1"</Salary>
+</Level>
+<Level id="4">
+<Description language="ENGLISH">"Forest’s Wrath"</Description>
+<Salary>"TIERS_SILVER 3"</Salary>
+</Level>
+</SUBCHAPTER_LEVEL>
+<SUBCHAPTER_ATTR>
+<Attribut name="RULES-ATTR_WS">"3"</Attribut>
+<Attribut name="RULES-ATTR_BS">"1"</Attribut>
+<Attribut name="RULES-ATTR_S">"4"</Attribut>
+<Attribut name="RULES-ATTR_T">"0"</Attribut>
+<Attribut name="RULES-ATTR_I">"0"</Attribut>
+<Attribut name="RULES-ATTR_Ag">"1"</Attribut>
+<Attribut name="RULES-ATTR_Dex">"2"</Attribut>
+<Attribut name="RULES-ATTR_Int">"1"</Attribut>
+<Attribut name="RULES-ATTR_WP">"0"</Attribut>
+<Attribut name="RULES-ATTR_Fel">"0"</Attribut>
+</SUBCHAPTER_ATTR>
+<SUBCHAPTER_SKILL>
+<Skill name="RULES-COMPESCAL">"1"</Skill>
+  <!-- Climb -->
+<Skill name="RULES-COMPSAVOIR_BETE">"1"</Skill>
+  <!-- Lore (Beasts) -->
+<Skill name="RULES-COMPORIENT">"1"</Skill>
+  <!-- Navigation -->
+<Skill name="RULES-COMPSURVEXT">"1"</Skill>
+  <!-- Outdoor Survival -->
+<Skill name="RULES-COMPPRECEP">"1"</Skill>
+  <!-- Perception  -->
+<Skill name="RULES-COMPPROJ_ARC">"1"</Skill>
+  <!-- Ranged (Bow) -->
+<Skill name="RULES-COMPDISC_*">"1"</Skill>
+  <!-- Stealth (Any) -->
+<Skill name="RULES-COMPMETIER_BOWYER">"1"</Skill>
+  <!-- Trade (Bowyer) -->
+<Skill name="RULES-COMPATHL">"2"</Skill>
+  <!-- Athletics -->
+<Skill name="RULES-COMPANIM">"2"</Skill>
+  <!-- Charm Animal -->
+<Skill name="RULES-COMPCOMB_BASE">"2"</Skill>
+  <!-- Melee (Basic) -->
+<Skill name="RULES-COMPSIGNES_RANGER">"2"</Skill>
+  <!-- Secret Signs (Ranger) -->
+<Skill name="RULES-COMPPIEG">"2"</Skill>
+  <!-- Set Trap -->
+<Skill name="RULES-COMPNATA">"2"</Skill>
+  <!-- Swim -->
+<Skill name="RULES-COMPPIST">"2"</Skill>
+  <!-- Track -->
+<Skill name="RULES-COMPCALM">"3"</Skill>
+  <!-- Cool -->
+<Skill name="RULES-COMPRESIST">"3"</Skill>
+  <!-- Endurance -->
+<Skill name="RULES-COMPESQU">"3"</Skill>
+  <!-- Dodge -->
+<Skill name="RULES-COMPINTIM">"4"</Skill>
+  <!-- Intimidate -->
+<Skill name="RULES-COMPLANG_*">"4"</Skill>
+  <!-- Language (Any) -->
+</SUBCHAPTER_SKILL>
+<SUBCHAPTER_TALENT>
+<Talent name="RULES-T0149">"1"</Talent>
+  <!-- Accurate Shot -->
+<Talent name="RULES-T0162">"1"</Talent>
+  <!-- Fleet Footed -->
+<Talent name="RULES-T0043">"1"</Talent>
+  <!-- Shadow -->
+<Talent name="RULES-T0013_BOID">"1"</Talent>
+  <!-- Strider (Woodedlands) -->
+<Talent name="RULES-T0003">"2"</Talent>
+  <!-- Animal Affinity -->
+<Talent name="RULES-T0150">"2"</Talent>
+  <!-- Fast Shot -->
+<Talent name="RULES-T0140">"2"</Talent>
+  <!-- Orientation -->
+<Talent name="RULES-T0066">"2"</Talent>
+  <!-- Scale Sheer Surface -->
+<Talent name="RULES-T0144">"3"</Talent>
+  <!-- Catfall -->
+<Talent name="RULES-T0163">"3"</Talent>
+  <!-- Combat Aware -->
+<Talent name="RULES-T0037">"3"</Talent>
+  <!-- Strike Mighty Blow -->
+<Talent name="RULES-T0152">"3"</Talent>
+  <!-- Sharpshooter -->
+<Talent name="RULES-T0148">"4"</Talent>
+  <!-- Deadeye Shot -->
+<Talent name="RULES-T0069_*">"4"</Talent>
+  <!-- Hatred (Any) -->
+<Talent name="RULES-T0154">"4"</Talent>
+  <!-- Sniper -->
+<Talent name="RULES-T0060">"4"</Talent>
+  <!-- Strike to Injure -->
+</SUBCHAPTER_TALENT>
+<SUBCHAPTER_ITEM>
+<Item name="Backpack">"1"</Item>
+<Item name="Hooded Cloak">"1"</Item>
+<Item name="RULES-PROJ_ARC_03">"1"</Item>
+<Item name="RULES-MUNI_02">"1"</Item>
+<Item name="Trade tools (Bowyer)">"1"</Item>
+<Item name="RULES-PROJ_ARC_02 (Q)">"2"</Item>
+<Item name="RULES-MUNI_02">"2"</Item>
+<Item name="Selection of Traps">"2"</Item>
+<Item name="RULES-ARMO_04">"2"</Item>
+<Item name="RULES-PROJ_ARC_02 (Q)">"3"</Item>
+<Item name="RULES-ARMO_05 (Q)">"3"</Item>
+<Item name="RULES-MUNI_03">"3"</Item>
+<Item name="Trophy of a Legendary Enemy">"4"</Item>
+<Item name="Signature Eif">"4"</Item>
+<Item name="Arrow (For Worthy Prey)">"4"</Item>
+<Item name="Fearsome reputation">"4"</Item>
+</SUBCHAPTER_ITEM>
+</Career>
+<Career id="ARCH1-WORK96">
+<Description language="ENGLISH">"Fieldwarden"</Description>
+<Explanation language="ENGLISH">"Halflings prefer militias to standing armies, and have little apparent military strength to those unfamiliar with their ways. Visitors to the Moot often wonder at how the countryside and villages remain so peaceful and idyllic despite sharing a border with dread Sylvania where the dead never rest, with no obvious armies to repel them. A large part of the credit for this goes to the Field Wardens. These brave halflings patrol the borders of the Moot, using their intimate knowledge of the terrain and cunning guerrilla tactics to deter unwanted visitors. A Field Warden is first and foremost a Halfling of the people, a friendly face to reassure the public that all is well. They know every family in their area (and which baked treats they are likely to serve a Field Warden who happens to be passing by around tea time). It is a highly respected position, and any Field Warden can expect a busy off-duty calendar as families invite them to Bakeday meals, wedding feasts, funeral remembrance dinners or pie eating competitions."</Explanation>
+<Skill>"RULES-COMPPROJ_FROND"</Skill>
+<Class>"CLASS_RANG"</Class>
+<SUBCHAPTER_LEVEL>
+<Level id="1">
+<Description language="ENGLISH">"Novice Warden"</Description>
+<Salary>"TIERS_BRASS 4"</Salary>
+</Level>
+<Level id="2">
+<Description language="ENGLISH">"Field Warden"</Description>
+<Salary>"TIERS_SILVER 1"</Salary>
+</Level>
+<Level id="3">
+<Description language="ENGLISH">"Field Warden Sergeant"</Description>
+<Salary>"TIERS_SILVER 3"</Salary>
+</Level>
+<Level id="4">
+<Description language="ENGLISH">"Field Warden Captain"</Description>
+<Salary>"TIERS_SILVER 5"</Salary>
+</Level>
+</SUBCHAPTER_LEVEL>
+<SUBCHAPTER_ATTR>
+<Attribut name="RULES-ATTR_WS">"3"</Attribut>
+<Attribut name="RULES-ATTR_BS">"1"</Attribut>
+<Attribut name="RULES-ATTR_S">"0"</Attribut>
+<Attribut name="RULES-ATTR_T">"4"</Attribut>
+<Attribut name="RULES-ATTR_I">"0"</Attribut>
+<Attribut name="RULES-ATTR_Ag">"1"</Attribut>
+<Attribut name="RULES-ATTR_Dex">"0"</Attribut>
+<Attribut name="RULES-ATTR_Int">"2"</Attribut>
+<Attribut name="RULES-ATTR_WP">"1"</Attribut>
+<Attribut name="RULES-ATTR_Fel">"0"</Attribut>
+</SUBCHAPTER_ATTR>
+<SUBCHAPTER_SKILL>
+<Skill name="RULES-COMPRAGOT">"1"</Skill>
+  <!-- Gossip -->
+<Skill name="RULES-COMPINTUI">"1"</Skill>
+  <!-- Intuition  -->
+<Skill name="RULES-COMPSAVOIR_MOOT">"1"</Skill>
+  <!-- Lore (Moot) -->
+<Skill name="RULES-COMPORIENT">"1"</Skill>
+  <!-- Navigation -->
+<Skill name="RULES-COMPPRECEP">"1"</Skill>
+  <!-- Perception  -->
+<Skill name="RULES-COMPPROJ_FROND">"1"</Skill>
+  <!-- Ranged (Slingshot) -->
+<Skill name="RULES-COMPMETIER_*">"1"</Skill>
+  <!-- Trade (Any) -->
+<Skill name="RULES-COMPDISC_RURAL">"1"</Skill>
+  <!-- Stealth (Rural) -->
+<Skill name="RULES-COMPCHARM">"2"</Skill>
+  <!-- Charm -->
+<Skill name="RULES-COMPRESALC">"2"</Skill>
+  <!-- Consume Alcohol -->
+<Skill name="RULES-COMPESQU">"2"</Skill>
+  <!-- Dodge -->
+<Skill name="RULES-COMPCOMB_BASE">"2"</Skill>
+  <!-- Melee (Basic) -->
+<Skill name="RULES-COMPSURVEXT">"2"</Skill>
+  <!-- Outdoor Survival -->
+<Skill name="RULES-COMPSIGNES_SCOUT">"2"</Skill>
+  <!-- Secret Signs (Scout) -->
+<Skill name="RULES-COMPCALM">"3"</Skill>
+  <!-- Cool -->
+<Skill name="RULES-COMPRESIST">"3"</Skill>
+  <!-- Endurance -->
+<Skill name="RULES-COMPSAVOIR_NECROMANCY">"3"</Skill>
+  <!-- Lore (Necromancy) -->
+<Skill name="RULES-COMPPIEG">"3"</Skill>
+  <!-- Set Trap -->
+<Skill name="RULES-COMPCOMM">"4"</Skill>
+  <!-- Leadership -->
+<Skill name="RULES-COMPSAVOIR_GUERRE">"4"</Skill>
+  <!-- Lore (War) -->
+</SUBCHAPTER_SKILL>
+<SUBCHAPTER_TALENT>
+<Talent name="RULES-T0061">"1"</Talent>
+  <!-- Careful Strike -->
+<Talent name="RULES-T0044">"1"</Talent>
+  <!-- Distract -->
+<Talent name="RULES-T0150">"1"</Talent>
+  <!-- Fast Shot -->
+<Talent name="RULES-T0025">"1"</Talent>
+  <!-- Stout-hearted -->
+<Talent name="RULES-T0149">"2"</Talent>
+  <!-- Accurate Shot -->
+<Talent name="RULES-T0036">"2"</Talent>
+  <!-- Drilled -->
+<Talent name="RULES-T0058">"2"</Talent>
+  <!-- Nose for Trouble -->
+<Talent name="RULES-T0140">"2"</Talent>
+  <!-- Orientation -->
+<Talent name="RULES-T0162">"3"</Talent>
+  <!-- Fleet Footed -->
+<Talent name="RULES-T0047">"3"</Talent>
+  <!-- Hardy -->
+<Talent name="RULES-T0164">"3"</Talent>
+  <!-- Night Vision -->
+<Talent name="RULES-T0105">"3"</Talent>
+  <!-- Rover -->
+<Talent name="RULES-T0132_TOUT">"4"</Talent>
+  <!-- Fearless (Any) -->
+<Talent name="RULES-T0069_MVIVAN">"4"</Talent>
+  <!-- Hatred (undead) -->
+<Talent name="RULES-T0053">"4"</Talent>
+  <!-- Inspiring -->
+<Talent name="RULES-T0131">"4"</Talent>
+  <!-- Robust -->
+<Talent name="RULES-T0032_MOOT">"4"</Talent>
+  <!-- Savant (Moot terrain) -->
+</SUBCHAPTER_TALENT>
+<SUBCHAPTER_ITEM>
+<Item name="Backpack">"1"</Item>
+<Item name="Tent">"1"</Item>
+<Item name="Map of local area">"1"</Item>
+<Item name="RULES-PROJ_FROND_02">"1"</Item>
+<Item name="RULES-MUNI_05">"1"</Item>
+<Item name="Trade Tools (as Trade)">"1"</Item>
+<Item name="RULES-ARMO_04">"2"</Item>
+<Item name="RULES-COMB_BASE_*">"2"</Item>
+<Item name="Lantern with Oil">"2"</Item>
+<Item name="RULES-ARMO_07 (Q)">"3"</Item>
+<Item name="Squad of Novice Wardens">"3"</Item>
+<Item name="Garrison of Experienced Field Wardens">"4"</Item>
+<Item name="Respect of the Community">"4"</Item>
+</SUBCHAPTER_ITEM>
+</Career>
+<Career id="ARCH1-WORK97">
+<Description language="ENGLISH">"Karak Ranger"</Description>
+<Explanation language="ENGLISH">"The remote mountain strongholds of the dwarfs are protected by all manner of dangerous terrain both above and below ground. A landslide might render a surface route impassable, and every year more underground territory is lost to the greenskins, or a once-safe bridge is torn down by the relentless gnawing of the Raki. It is the duty of the Karak Ranger to patrol these routes and keep them safe, or establish new paths where an old one has become too dangerous. A Karak Rangers survival hinges on preparedness; there is little company or comfort to be found along the ancient dark tunnels or secret mountain passes, and even less chance of help should he encounter danger. One must be prepared to leap large chasms, climb sheer surfaces, or cross large bodies of water (or sewage, or even lava), depending on the route. Every bush, every shadow, may contain dangers, waiting to pounce. A Karak Ranger must be tough and adaptable to survive, by turns able to hunt, scout, and fight, or even repair a bridge mid-expedition."</Explanation>
+<Skill>"RULES-COMPMETIER_CARTO"</Skill>
+<Class>"CLASS_RANG"</Class>
+<SUBCHAPTER_LEVEL>
+<Level id="1">
+<Description language="ENGLISH">"Hold Runner"</Description>
+<Salary>"TIERS_BRASS 3"</Salary>
+</Level>
+<Level id="2">
+<Description language="ENGLISH">"Karak Ranger"</Description>
+<Salary>"TIERS_SILVER 1"</Salary>
+</Level>
+<Level id="3">
+<Description language="ENGLISH">"Karak Pathkeeper"</Description>
+<Salary>"TIERS_SILVER 2"</Salary>
+</Level>
+<Level id="4">
+<Description language="ENGLISH">"Karak Mountain Strider"</Description>
+<Salary>"TIERS_SILVER 4"</Salary>
+</Level>
+</SUBCHAPTER_LEVEL>
+<SUBCHAPTER_ATTR>
+<Attribut name="RULES-ATTR_WS">"1"</Attribut>
+<Attribut name="RULES-ATTR_BS">"2"</Attribut>
+<Attribut name="RULES-ATTR_S">"1"</Attribut>
+<Attribut name="RULES-ATTR_T">"1"</Attribut>
+<Attribut name="RULES-ATTR_I">"0"</Attribut>
+<Attribut name="RULES-ATTR_Ag">"3"</Attribut>
+<Attribut name="RULES-ATTR_Dex">"0"</Attribut>
+<Attribut name="RULES-ATTR_Int">"4"</Attribut>
+<Attribut name="RULES-ATTR_WP">"0"</Attribut>
+<Attribut name="RULES-ATTR_Fel">"0"</Attribut>
+</SUBCHAPTER_ATTR>
+<SUBCHAPTER_SKILL>
+<Skill name="RULES-COMPESCAL">"1"</Skill>
+  <!-- Climb -->
+<Skill name="RULES-COMPESQU">"1"</Skill>
+  <!-- Dodge -->
+<Skill name="RULES-COMPRESIST">"1"</Skill>
+  <!-- Endurance -->
+<Skill name="RULES-COMPMETIER_CARTO">"1"</Skill>
+  <!-- Trade (Cartographer) -->
+<Skill name="RULES-COMPCOMB_BASE">"1"</Skill>
+  <!-- Melee (Basic) -->
+<Skill name="RULES-COMPSURVEXT">"1"</Skill>
+  <!-- Outdoor Survival -->
+<Skill name="RULES-COMPPRECEP">"1"</Skill>
+  <!-- Perception  -->
+<Skill name="RULES-COMPRAMER">"1"</Skill>
+  <!-- Row -->
+<Skill name="RULES-COMPANIM">"2"</Skill>
+  <!-- Charm Animal -->
+<Skill name="RULES-COMPINTUI">"2"</Skill>
+  <!-- Intuition  -->
+<Skill name="RULES-COMPPROJ_POUDRE">"2"</Skill>
+  <!-- Ranged (Black Powder) -->
+<Skill name="RULES-COMPSIGNES_SCOUT">"2"</Skill>
+  <!-- Secret Signs (Scout) -->
+<Skill name="RULES-COMPSIGNES_RANGER">"2"</Skill>
+  <!-- Secret Signs (Ranger) -->
+<Skill name="RULES-COMPPIST">"2"</Skill>
+  <!-- Track -->
+<Skill name="RULES-COMPSAVOIR_ING">"3"</Skill>
+  <!-- Lore (Engineering) -->
+<Skill name="RULES-COMPDISC_SOUTER">"3"</Skill>
+  <!-- Stealth (Underground) -->
+<Skill name="RULES-COMPCALM">"4"</Skill>
+  <!-- Cool -->
+<Skill name="RULES-COMPLANG_*">"4"</Skill>
+  <!-- Language (Any) -->
+</SUBCHAPTER_SKILL>
+<SUBCHAPTER_TALENT>
+<Talent name="RULES-T0050">"1"</Talent>
+  <!-- Implacable -->
+<Talent name="RULES-T0140">"1"</Talent>
+  <!-- Orientation -->
+<Talent name="RULES-T0013_*">"1"</Talent>
+  <!-- Strider (Any) -->
+<Talent name="RULES-T0077">"1"</Talent>
+  <!-- Strong Back -->
+<Talent name="RULES-T0037">"2"</Talent>
+  <!-- Strike Mighty Blow -->
+<Talent name="RULES-T0066">"2"</Talent>
+  <!-- Scale Sheer Surface -->
+<Talent name="RULES-T0058">"2"</Talent>
+  <!-- Nose for Trouble -->
+<Talent name="RULES-T0105">"2"</Talent>
+  <!-- Rover -->
+<Talent name="RULES-T0149">"3"</Talent>
+  <!-- Accurate Shot -->
+<Talent name="RULES-T0027">"3"</Talent>
+  <!-- Enclosed Fighter -->
+<Talent name="RULES-T0068">"3"</Talent>
+  <!-- River Guide -->
+<Talent name="RULES-T0006">"3"</Talent>
+  <!-- Gunner -->
+<Talent name="RULES-T0014">"3"</Talent>
+  <!-- Strong Legs -->
+<Talent name="RULES-T0015">"4"</Talent>
+  <!-- Tinker -->
+<Talent name="RULES-T0032_DWARFHOLD">"4"</Talent>
+  <!-- Savant (Dwarf Holds and Routes) -->
+<Talent name="RULES-T0131">"4"</Talent>
+  <!-- Robust -->
+<Talent name="RULES-T0116">"4"</Talent>
+  <!-- Tenacious -->
+</SUBCHAPTER_TALENT>
+<SUBCHAPTER_ITEM>
+<Item name="Backpack">"1"</Item>
+<Item name="RULES-COMB_BASE_*">"1"</Item>
+<Item name="RULES-ARMO_04">"1"</Item>
+<Item name="Trade tools (Cartographer)">"1"</Item>
+<Item name="RULES-PROJ_POUDRE_*">"2"</Item>
+<Item name="RULES-MUNI_06">"2"</Item>
+<Item name="Grappling Hook">"2"</Item>
+<Item name="Rope">"2"</Item>
+<Item name="Tools (Masonry)">"3"</Item>
+<Item name="4 Apprentice Hold Runners">"4"</Item>
+<Item name="Maps">"4"</Item>
+<Item name="Souvenirs from many Travels.">"4"</Item>
+</SUBCHAPTER_ITEM>
+</Career>
+<Career id="ARCH1-WORK98">
+<Description language="ENGLISH">"Badger Rider"</Description>
+<Explanation language="ENGLISH">"The origin of the Badger Rider is puzzled over by the few scholars that have been told of them by trustworthy Halfling sources. Perhaps a Halfling was inspired by the noble knights of Bretonnia on their magnificent war horses. Some argue that it was a counter to savage Orcs riding upon their equally fearsome (and, it is often agreed, equally smelly) war-boars. Others still claim the whole thing began as a drunken bet that got completely out of hand. The truth of the matter may never be known, but those same scholars all agree — their reported effectiveness in battle is quite literally incredible. Badgers are highly social and share underground homes which they keep impeccably tidy, virtues greatly respected by Halflings. Observers might add that when threatened, both species become astonishingly ferocious, capable of taking on much larger opponents."</Explanation>
+<Skill>"RULES-COMPDRESS_BADGERS"</Skill>
+<Class>"CLASS_WARR"</Class>
+<SUBCHAPTER_LEVEL>
+<Level id="1">
+<Description language="ENGLISH">"Badger Botherer"</Description>
+<Salary>"TIERS_SILVER 1"</Salary>
+</Level>
+<Level id="2">
+<Description language="ENGLISH">"Badger Rider"</Description>
+<Salary>"TIERS_SILVER 3"</Salary>
+</Level>
+<Level id="3">
+<Description language="ENGLISH">"Badger Sergeant"</Description>
+<Salary>"TIERS_SILVER 5"</Salary>
+</Level>
+<Level id="4">
+<Description language="ENGLISH">"Badger Master"</Description>
+<Salary>"TIERS_GOLD 1"</Salary>
+</Level>
+</SUBCHAPTER_LEVEL>
+<SUBCHAPTER_ATTR>
+<Attribut name="RULES-ATTR_WS">"2"</Attribut>
+<Attribut name="RULES-ATTR_BS">"1"</Attribut>
+<Attribut name="RULES-ATTR_S">"3"</Attribut>
+<Attribut name="RULES-ATTR_T">"0"</Attribut>
+<Attribut name="RULES-ATTR_I">"0"</Attribut>
+<Attribut name="RULES-ATTR_Ag">"1"</Attribut>
+<Attribut name="RULES-ATTR_Dex">"0"</Attribut>
+<Attribut name="RULES-ATTR_Int">"1"</Attribut>
+<Attribut name="RULES-ATTR_WP">"0"</Attribut>
+<Attribut name="RULES-ATTR_Fel">"4"</Attribut>
+</SUBCHAPTER_ATTR>
+<SUBCHAPTER_SKILL>
+<Skill name="RULES-COMPDRESS_BADGERS">"1"</Skill>
+  <!-- Dressage (Badgers)  -->
+<Skill name="RULES-COMPANIM">"1"</Skill>
+  <!-- Charm Animal -->
+<Skill name="RULES-COMPESQU">"1"</Skill>
+  <!-- Dodge -->
+<Skill name="RULES-COMPRAGOT">"1"</Skill>
+  <!-- Gossip -->
+<Skill name="RULES-COMPPRECEP">"1"</Skill>
+  <!-- Perception  -->
+<Skill name="RULES-COMPPROJ_FROND">"1"</Skill>
+  <!-- Ranged (Slingshot) -->
+<Skill name="RULES-COMPCHEV_BADGERS">"1"</Skill>
+  <!-- Ranged (Slingshot) -->
+<Skill name="RULES-COMPMETIER_*">"1"</Skill>
+  <!-- Trade (Any) -->
+<Skill name="RULES-COMPSOINANI">"2"</Skill>
+  <!-- Animal Care -->
+<Skill name="RULES-COMPCHARM">"2"</Skill>
+  <!-- Charm -->
+<Skill name="RULES-COMPCALM">"2"</Skill>
+  <!-- Cool -->
+<Skill name="RULES-COMPRESIST">"2"</Skill>
+  <!-- Endurance -->
+<Skill name="RULES-COMPCOMB_BASE">"2"</Skill>
+  <!-- Melee (Basic) -->
+<Skill name="RULES-COMPORIENT">"2"</Skill>
+  <!-- Navigation -->
+<Skill name="RULES-COMPPROJ_ENTRAV">"2"</Skill>
+  <!-- Ranged (Hindrances) -->
+<Skill name="RULES-COMPINTIM">"3"</Skill>
+  <!-- Intimidate -->
+<Skill name="RULES-COMPCOMB_CAVAL">"3"</Skill>
+  <!-- Melee (Cavalry) -->
+<Skill name="RULES-COMPSURVEXT">"3"</Skill>
+  <!-- Outdoor Survival -->
+<Skill name="RULES-COMPPIST">"3"</Skill>
+  <!-- Track -->
+<Skill name="RULES-COMPRESALC">"4"</Skill>
+  <!-- Consume Alcohol -->
+<Skill name="RULES-COMPCOMM">"4"</Skill>
+  <!-- Leadership -->
+</SUBCHAPTER_SKILL>
+<SUBCHAPTER_TALENT>
+<Talent name="RULES-T0150">"1"</Talent>
+  <!-- Fast Shot -->
+<Talent name="RULES-T0064">"1"</Talent>
+  <!-- Flee! -->
+<Talent name="RULES-T0153">"1"</Talent>
+  <!-- Marksman -->
+<Talent name="RULES-T0019">"1"</Talent>
+  <!-- Roughrider -->
+<Talent name="RULES-T0149">"2"</Talent>
+  <!-- Accurate Shot -->
+<Talent name="RULES-T0105">"2"</Talent>
+  <!-- Rover -->
+<Talent name="RULES-T0168">"2"</Talent>
+  <!-- Seasoned Traveller -->
+<Talent name="RULES-T0025">"2"</Talent>
+  <!-- Stout-hearted -->
+<Talent name="RULES-T0044">"3"</Talent>
+  <!-- Distract -->
+<Talent name="RULES-T0041">"3"</Talent>
+  <!-- Resolute -->
+<Talent name="RULES-T0001">"3"</Talent>
+  <!-- Trick Riding -->
+<Talent name="RULES-T0124">"3"</Talent>
+  <!-- Tunnel Rat -->
+<Talent name="RULES-T0104">"4"</Talent>
+  <!-- Carouser -->
+<Talent name="RULES-T0049">"4"</Talent>
+  <!-- Frightening -->
+<Talent name="RULES-T0053">"4"</Talent>
+  <!-- Inspiring -->
+<Talent name="RULES-T0060">"4"</Talent>
+  <!-- Strike to Injure -->
+</SUBCHAPTER_TALENT>
+<SUBCHAPTER_ITEM>
+<Item name="Backpack">"1"</Item>
+<Item name="RULES-ARMO_04">"1"</Item>
+<Item name="RULES-PROJ_FROND_02">"1"</Item>
+<Item name="Tamed Badger with Saddle/Tack">"1"</Item>
+<Item name="Saddlebags">"2"</Item>
+<Item name="RULES-ARMO_05">"2"</Item>
+<Item name="RULES-COMB_ENTRA_*/RULES-PROJ_LANC_*">"2"</Item>
+<Item name="Badger Barding (2AP on head and torso)">"3"</Item>
+<Item name="RULES-COMB_BASE_*/RULES-COMB_CAVAL_*">"3"</Item>
+<Item name="Large Tame Badger (Mootland Spotted Pony-Badger)">"4"</Item>
+<Item name="A Squire (Badger Botherer)">"4"</Item>
+<Item name="RULES-ARMO_14">"4"</Item>
+<Item name="Sense of Humour">"4"</Item>
+</SUBCHAPTER_ITEM>
+</Career>
+</DATA_CAREER>
+<DATA_WEAPON>
+<Weapon id="ARCH1-COMB_BASE_25">
+<Description language="ENGLISH">"Eonir War Blade"</Description>
+<Skill>"RULES-COMPCOMB_BASE"</Skill>
+<Damage>"+(BATTR_S)+3"</Damage>
+<Availability>"DISPO_LIMITED"</Availability>
+<Reach>"WEAPR_MID"</Reach>
+<Price>"3co"</Price>
+<Encumbrance>"0"</Encumbrance>
+<Quality>"WEAPB16"</Quality>
+<Hand>"1"</Hand>
+<Ammunition>"0"</Ammunition>
+</Weapon>
+<Weapon id="ARCH1-COMB_HAST_14">
+<Description language="ENGLISH">"Eonir Spear"</Description>
+<Skill>"RULES-COMPCOMB_HAST"</Skill>
+<Damage>"+(BATTR_S)+4"</Damage>
+<Availability>"DISPO_COMMON"</Availability>
+<Reach>"WEAPR_LONG"</Reach>
+<Price>"26c"</Price>
+<Encumbrance>"1"</Encumbrance>
+<Quality>"WEAPB22"</Quality>
+<Hand>"2"</Hand>
+<Ammunition>"0"</Ammunition>
+</Weapon>
+<Weapon id="ARCH1-COMB_2M_12">
+<Description language="ENGLISH">"Wildwood Sword"</Description>
+<Skill>"RULES-COMPCOMB_2M"</Skill>
+<Damage>"+(BATTR_S)+4"</Damage>
+<Availability>"DISPO_LIMITED"</Availability>
+<Reach>"WEAPR_LONG"</Reach>
+<Price>"10GC"</Price>
+<Encumbrance>"2"</Encumbrance>
+<Quality>"WEAPB10,WEAPB20"</Quality>
+<Hand>"2"</Hand>
+<Ammunition>"0"</Ammunition>
+</Weapon>
+<Weapon id="ARCH1-COMB_BASE_26">
+<Description language="ENGLISH">"Bearded Axe"</Description>
+<Skill>"RULES-COMPCOMB_BASE"</Skill>
+<Damage>"+(BATTR_S)+4"</Damage>
+<Availability>"DISPO_COMMON"</Availability>
+<Reach>"WEAPR_MID"</Reach>
+<Price>"1GC"</Price>
+<Encumbrance>"2"</Encumbrance>
+<Quality>"WEAPB04"</Quality>
+<Hand>"1"</Hand>
+<Ammunition>"0"</Ammunition>
+</Weapon>
+<Weapon id="ARCH1-COMB_BASE_27">
+<Description language="ENGLISH">"Dwarf Hammer"</Description>
+<Skill>"RULES-COMPCOMB_BASE"</Skill>
+<Damage>"+(BATTR_S)+4"</Damage>
+<Availability>"DISPO_LIMITED"</Availability>
+<Reach>"WEAPR_MID"</Reach>
+<Price>"3GC"</Price>
+<Encumbrance>"2"</Encumbrance>
+<Quality>"WEAPB04"</Quality>
+<Hand>"1"</Hand>
+<Ammunition>"0"</Ammunition>
+</Weapon>
+<Weapon id="ARCH1-COMB_2M_13">
+<Description language="ENGLISH">"Slayer’s Axe"</Description>
+<Skill>"RULES-COMPCOMB_2M"</Skill>
+<Damage>"+(BATTR_S)e6"</Damage>
+<Availability>"DISPO_LIMITED"</Availability>
+<Reach>"WEAPR_LONG"</Reach>
+<Price>"12Gc"</Price>
+<Encumbrance>"4"</Encumbrance>
+<Quality>"WEAPB21,WEAPB22"</Quality>
+<Hand>"2"</Hand>
+<Ammunition>"0"</Ammunition>
+</Weapon>
+<Weapon id="ARCH1-COMB_BASE_28">
+<Description language="ENGLISH">"Nan’s Cleaver"</Description>
+<Skill>"RULES-COMPCOMB_BASE"</Skill>
+<Damage>"+(BATTR_S)+3"</Damage>
+<Availability>"DISPO_COMMON"</Availability>
+<Reach>"WEAPR_MID"</Reach>
+<Price>"1GC"</Price>
+<Encumbrance>"1"</Encumbrance>
+<Quality>"WEAPB30"</Quality>
+<Hand>"1"</Hand>
+<Ammunition>"0"</Ammunition>
+</Weapon>
+<Weapon id="ARCH1-COMB_BASE_29">
+<Description language="ENGLISH">"Iron Skillet"</Description>
+<Skill>"RULES-COMPCOMB_BASE"</Skill>
+<Damage>"+(BATTR_S)+3"</Damage>
+<Availability>"DISPO_COMMON"</Availability>
+<Reach>"WEAPR_MID"</Reach>
+<Price>"1GC"</Price>
+<Encumbrance>"1"</Encumbrance>
+<Quality>"WEAPB08"</Quality>
+<Hand>"1"</Hand>
+<Ammunition>"0"</Ammunition>
+</Weapon>
+<Weapon id="ARCH1-PROJ_POUDRE_16">
+<Description language="ENGLISH">"Dwarf Handgun"</Description>
+<Skill>"RULES-COMPPROJ_POUDRE"</Skill>
+<Damage>"+8"</Damage>
+<Availability>"DISPO_RARE"</Availability>
+<Reach>"30"</Reach>
+<Price>"9GC"</Price>
+<Encumbrance>"2"</Encumbrance>
+<Quality>"WEAPB22,WEAPB23 3"</Quality>
+<Hand>"2"</Hand>
+<Ammunition>"0"</Ammunition>
+</Weapon>
+<Weapon id="ARCH1-PROJ_POUDRE_17">
+<Description language="ENGLISH">"Dwarf Pistol"</Description>
+<Skill>"RULES-COMPPROJ_POUDRE"</Skill>
+<Damage>"+8"</Damage>
+<Availability>"DISPO_RARE"</Availability>
+<Reach>"30"</Reach>
+<Price>"18GC"</Price>
+<Encumbrance>"1"</Encumbrance>
+<Quality>"WEAPB22,WEAPB13,WEAPB23 1"</Quality>
+<Hand>"1"</Hand>
+<Ammunition>"0"</Ammunition>
+</Weapon>
+<Weapon id="ARCH1-PROJ_ARB_03">
+<Description language="ENGLISH">"Dwarf Crossbow"</Description>
+<Skill>"RULES-COMPPROJ_ARB"</Skill>
+<Damage>"+9"</Damage>
+<Availability>"DISPO_RARE"</Availability>
+<Reach>"80"</Reach>
+<Price>"9GC"</Price>
+<Encumbrance>"3"</Encumbrance>
+<Quality>"WEAPB16,WEAPB10,WEAPB23 2"</Quality>
+<Hand>"2"</Hand>
+<Ammunition>"0"</Ammunition>
+</Weapon>
+<Weapon id="ARCH1-PROJ_ING_08">
+<Description language="ENGLISH">"Drakefire Pistol"</Description>
+<Skill>"RULES-COMPPROJ_ING"</Skill>
+<Damage>"+8"</Damage>
+<Availability>"DISPO_EXOTIC"</Availability>
+<Reach>"20"</Reach>
+<Price>"25GC"</Price>
+<Encumbrance>"1"</Encumbrance>
+<Quality>"WEAPB24,WEAPB13,WEAPB35"</Quality>
+<Hand>"1"</Hand>
+<Ammunition>"0"</Ammunition>
+</Weapon>
+<Weapon id="ARCH1-PROJ_EXPLO_03">
+<Description language="ENGLISH">"Cinderblast Bomb"</Description>
+<Skill>"RULES-COMPPROJ_EXPLO"</Skill>
+<Damage>"+14"</Damage>
+<Availability>"DISPO_EXOTIC"</Availability>
+<Reach>"(BATTR_S)"</Reach>
+<Price>"3GC"</Price>
+<Encumbrance>"0"</Encumbrance>
+<Quality>"WEAPB15 3,WEAPB24,WEAPB21,WEAPB22"</Quality>
+<Hand>"1"</Hand>
+<Ammunition>"0"</Ammunition>
+</Weapon>
+<Weapon id="ARCH1-PROJ_LANC_07">
+<Description language="ENGLISH">"Blackbriar Javelin"</Description>
+<Skill>"RULES-COMPPROJ_LANC"</Skill>
+<Damage>"+(BATTR_S)+3"</Damage>
+<Availability>"DISPO_EXOTIC"</Availability>
+<Reach>"(BATTR_S)x3"</Reach>
+<Price>"2GC"</Price>
+<Encumbrance>"1"</Encumbrance>
+<Quality>"WEAPB12,WEAPB36"</Quality>
+<Hand>"1"</Hand>
+<Ammunition>"0"</Ammunition>
+</Weapon>
+</DATA_WEAPON>
+<DATA_WEAPON_BONUS>
+<BonusMalus id="ARCH1-WEAPB35">
+<Description language="ENGLISH">"Ablaze"</Description>
+<Explanation language="ENGLISH">"On critical, add ablaze.
+The condition is normally only applied if target is flammable but this weapon can set someone alight even is it is not normally combustible."</Explanation>
+<Short language="ENGLISH">"Add Ablaze status on critical"</Short>
+<Modifier>"+"</Modifier>
+</BonusMalus>
+<BonusMalus id="ARCH1-WEAPB36">
+<Description language="ENGLISH">"Fertile earth"</Description>
+<Explanation language="ENGLISH">"So long as it is allowed to rest in fertile earth each night, a Blackbriar Javelin inflicts 1 Poisoned condition on any target which looses at least 1 Wound from the attack.
+This may be resisted with a Challenging (+0) Endurance Test.
+"</Explanation>
+<Short language="ENGLISH">"add Poisoned condition"</Short>
+<Modifier>"+"</Modifier>
+</BonusMalus>
+</DATA_WEAPON_BONUS>
+<DATA_SPECIE_CAREER_CHOICE>
+<Choice>
+<Specie>"RULES-RACE_WELF"</Specie>
+<Career>"RULES-WORK11"</Career>
+<Alternative>"ARCH1-WORK95"</Alternative>
+</Choice>
+<Choice>
+<Specie>"RULES-RACE_HALF"</Specie>
+<Career>"RULES-WORK47"</Career>
+<Alternative>"ARCH1-WORK96"</Alternative>
+</Choice>
+<Choice>
+<Specie>"RULES-RACE_DWAR"</Specie>
+<Career>"RULES-WORK38"</Career>
+<Alternative>"ARCH1-WORK97"</Alternative>
+</Choice>
+<Choice>
+<Specie>"RULES-RACE_HALF"</Specie>
+<Career>"RULES-WORK57"</Career>
+<Alternative>"ARCH1-WORK98"</Alternative>
+</Choice>
+</DATA_SPECIE_CAREER_CHOICE>
+</DATA_BOOK>

@@ -1,0 +1,21 @@
+{ This is an automatically generated lazarus resource file }
+
+LazarusResources.Add('TMenu','FORMDATA',[
+  'TPF0'#5'TMenu'#4'Menu'#18'AnchorSideTop.Side'#7#9'asrCenter'#20'AnchorSideRi'
+  +'ght.Side'#7#9'asrCenter'#4'Left'#3#20#1#6'Height'#3#232#3#3'Top'#3#225#0#5
+  +'Width'#3#8#7#7'Anchors'#11#0#7'Caption'#6#4'Menu'#12'ClientHeight'#3#232#3
+  +#11'ClientWidth'#3#8#7#5'Color'#7#12'clBackground'#21'Constraints.MinHeight'
+  +#3#232#3#20'Constraints.MinWidth'#3#8#7#13'DesignTimePPI'#2'x'#8'OnCreate'#7
+  +#10'FormCreate'#10'LCLVersion'#6#7'2.2.6.0'#0#6'TImage'#5'Crane'#4'Left'#2#9
+  +#6'Height'#3#203#0#3'Top'#2#5#5'Width'#3#233#0#0#0#6'TImage'#4'LOGO'#18'Anch'
+  +'orSideTop.Side'#7#9'asrCenter'#20'AnchorSideRight.Side'#7#9'asrCenter'#4'Le'
+  +'ft'#3#138#3#6'Height'#3#204#0#3'Top'#2#4#5'Width'#3'z'#3#7'Anchors'#11#5'ak'
+  +'Top'#7'akRight'#0#8'AutoSize'#9#6'Center'#9#21'Constraints.MaxHeight'#3#204
+  +#0#21'Constraints.MinHeight'#3#204#0#7'Enabled'#8#17'StretchOutEnabled'#8#16
+  +'StretchInEnabled'#8#0#0#6'TImage'#4'BACK'#4'Left'#3#248#0#6'Height'#3' '#3#3
+  +'Top'#3#208#0#5'Width'#3#13#6#8'AutoSize'#9#6'Center'#9#22'KeepOriginXWhenCl'
+  +'ipped'#9#22'KeepOriginYWhenClipped'#9#7'Enabled'#8#12'Proportional'#9#7'Str'
+  +'etch'#9#0#0#7'TButton'#16'ButtonCompetence'#4'Left'#3#3#1#6'Height'#2'&'#3
+  +'Top'#2#10#5'Width'#3#166#0#7'Caption'#6#11'Comp'#195#169'tence'#7'OnClick'#7
+  +#21'ButtonCompetenceClick'#8'TabOrder'#2#0#0#0#0
+]);

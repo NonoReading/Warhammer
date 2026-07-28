@@ -1,0 +1,25 @@
+-------------------------
+       WARHAMMER
+-------------------------
+
+le 100 points de la création des attributs
+gérer les malus de discrétion
+ - T0070 : haine sacrée : miracle + 1 dégât
+ - voyageur aguerri : savoir région (une fois par talent)
+ - Tir précis (dégats supp)
+UP IN ARMS : gérer les mises à jour des compétences
+UP IN ARMS : mettre une option pour compétences ?
+faire des options pour les personnages (surtout lier au PDF)
+vérifier les "au choix" dans la création, surtout les races
+afficher les "au choix" dans une couleur différentes pour aider à les voir
+calculer les changements entre deux versions
+mettre de explications dans le logiciel
+création de compétence
+création de talent
+création de race
+création de métier
+attention, les 5Xp de réduction ne sont valable que si cette compétence est dans la carrière
+gérer des versions et attention à traduction qui a une version par langue
+faire des colonnes pour les niveaux liés aux talents, compétences, et les ajouter pour les attributs ?
+faire les lézards des LUCIA
+gérer les ABOUT pour les lires facultatifs

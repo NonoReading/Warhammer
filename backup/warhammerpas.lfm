@@ -1,0 +1,19 @@
+object Form1: TForm1
+  Left = 642
+  Height = 935
+  Top = 220
+  Width = 1981
+  Caption = 'Warhammer Help'
+  ClientHeight = 935
+  ClientWidth = 1981
+  DesignTimePPI = 120
+  OnCreate = FormCreate
+  LCLVersion = '2.2.6.0'
+  object Image1: TImage
+    Left = 3
+    Height = 262
+    Top = 0
+    Width = 309
+    OnClick = Image1Click
+  end
+end

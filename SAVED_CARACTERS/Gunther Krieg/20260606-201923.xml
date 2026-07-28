@@ -1,0 +1,199 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<PLAYER>
+<Name>"Gunther Krieg"</Name>
+<Specie>"RULES-RACE_HUM"</Specie>
+  <!-- Humains (Reikland) -->
+<Career>"RULES-WORK27"</Career>
+  <!-- Garde  -->
+<Level>"2"</Level>
+<Xp>"1950"</Xp>
+<Xp25>"78"</Xp25>
+<CurrentXp>"1"</CurrentXp>
+<CHAPTER_CREATION>
+<SUBCHAPTER_ATTR>
+<Attribut name="RULES-ATTR_WS">"20"</Attribut>
+  <!-- Capacité de Combat -->
+<Attribut name="RULES-ATTR_BS">"0"</Attribut>
+  <!-- Capacité de Tir -->
+<Attribut name="RULES-ATTR_S">"20"</Attribut>
+  <!-- Force -->
+<Attribut name="RULES-ATTR_T">"20"</Attribut>
+  <!-- Endurance -->
+<Attribut name="RULES-ATTR_I">"20"</Attribut>
+  <!-- Initiative -->
+<Attribut name="RULES-ATTR_Ag">"5"</Attribut>
+  <!-- Agilité -->
+<Attribut name="RULES-ATTR_Dex">"0"</Attribut>
+  <!-- Dextérité -->
+<Attribut name="RULES-ATTR_Int">"0"</Attribut>
+  <!-- Intelligence -->
+<Attribut name="RULES-ATTR_WP">"20"</Attribut>
+  <!-- Force Mentale -->
+<Attribut name="RULES-ATTR_Fel">"0"</Attribut>
+  <!-- Sociabilité -->
+<Attribut name="RULES-ATTR_Fate">"2"</Attribut>
+  <!-- Points de Destin -->
+<Attribut name="RULES-ATTR_Resil">"1"</Attribut>
+  <!-- Résilience -->
+</SUBCHAPTER_ATTR>
+<SUBCHAPTER_SKILLSPECIE>
+<Skill name="RULES-COMPCALM">"5"</Skill>
+  <!-- Calme -->
+<Skill name="RULES-COMPATHL">"5"</Skill>
+  <!-- Athlétisme -->
+<Skill name="RULES-COMPCOMB_BASE">"5"</Skill>
+  <!-- Corps à corps (Base) -->
+<Skill name="RULES-COMPESQU">"5"</Skill>
+  <!-- Esquive -->
+<Skill name="RULES-COMPSAVOIR_REG">"5"</Skill>
+  <!-- Savoir (Région)  -->
+<Skill name="RULES-COMPPRECEP">"5"</Skill>
+  <!-- Perception  -->
+</SUBCHAPTER_SKILLSPECIE>
+<SUBCHAPTER_SKILLCREATION>
+<Skill name="RULES-COMPRAGOT">"5"</Skill>
+  <!-- Ragot  -->
+<Skill name="RULES-COMPCOMB_BASE">"10"</Skill>
+  <!-- Corps à corps (Base) -->
+<Skill name="RULES-COMPPRECEP">"5"</Skill>
+  <!-- Perception  -->
+<Skill name="RULES-COMPNATA">"5"</Skill>
+  <!-- Natation -->
+<Skill name="RULES-COMPRESIST">"10"</Skill>
+  <!-- Résistance  -->
+<Skill name="RULES-COMPESQU">"5"</Skill>
+  <!-- Esquive -->
+</SUBCHAPTER_SKILLCREATION>
+<SUBCHAPTER_TALENT>
+<Talent name="RULES-T0002">"1"</Talent>
+  <!-- Affable -->
+<Talent name="RULES-T0171">"1"</Talent>
+  <!-- Destinée -->
+<Talent name="RULES-T0047">"1"</Talent>
+  <!-- Dur à cuire -->
+<Talent name="RULES-T0139_OUIE">"1"</Talent>
+  <!-- Sens aiguisé (Ouïe) -->
+<Talent name="RULES-T0141">"1"</Talent>
+  <!-- Sixième sens -->
+<Talent name="RULES-T0158">"1"</Talent>
+  <!-- Très fort -->
+</SUBCHAPTER_TALENT>
+</CHAPTER_CREATION>
+<CHAPTER_INCREASE>
+<SUBCHAPTER_ATTR>
+<Attribut name="ATTR_WS">"10"</Attribut>
+  <!-- Capacité de Combat -->
+<Attribut name="ATTR_S">"5"</Attribut>
+  <!-- Force -->
+<Attribut name="ATTR_T">"15"</Attribut>
+  <!-- Endurance -->
+<Attribut name="ATTR_I">"10"</Attribut>
+  <!-- Initiative -->
+<Attribut name="ATTR_Ag">"10"</Attribut>
+  <!-- Agilité -->
+</SUBCHAPTER_ATTR>
+<SUBCHAPTER_SKILLCAREER>
+<Skill name="RULES-COMPCALM">"5"</Skill>
+  <!-- Calme -->
+<Skill name="RULES-COMPINTIM">"10"</Skill>
+  <!-- Intimidation  -->
+<Skill name="RULES-COMPINTUI">"10"</Skill>
+  <!-- Intuition  -->
+</SUBCHAPTER_SKILLCAREER>
+<SUBCHAPTER_TALENT>
+<Talent name="RULES-T0037">"1"</Talent>
+  <!-- Coup puissant -->
+<Talent name="RULES-T0059">"1"</Talent>
+  <!-- Frappe assommante -->
+<Talent name="RULES-T0159">"1"</Talent>
+  <!-- Très résistant -->
+</SUBCHAPTER_TALENT>
+</CHAPTER_INCREASE>
+<CHAPTER_SKILL>
+<SUBCHAPTER_SKILLCAREER>
+<Skill name="RULES-COMPCOMB_BASE">"1"</Skill>
+  <!-- Corps à corps (Base) -->
+<Skill name="RULES-COMPDIVERT_NARRA">"1"</Skill>
+  <!-- Divertissement (Narration)  -->
+<Skill name="RULES-COMPINTUI">"1"</Skill>
+  <!-- Intuition  -->
+<Skill name="RULES-COMPPARI">"2"</Skill>
+  <!-- Pari  -->
+<Skill name="RULES-COMPPRECEP">"1"</Skill>
+  <!-- Perception  -->
+<Skill name="RULES-COMPRAGOT">"1"</Skill>
+  <!-- Ragot  -->
+<Skill name="RULES-COMPRESIST">"1"</Skill>
+  <!-- Résistance  -->
+<Skill name="RULES-COMPRESALC">"2"</Skill>
+  <!-- Résistance à l’alcool  -->
+<Skill name="RULES-COMPATHL">"2"</Skill>
+  <!-- Athlétisme -->
+<Skill name="RULES-COMPCALM">"1"</Skill>
+  <!-- Calme -->
+<Skill name="RULES-COMPCOMB_HAST">"2"</Skill>
+  <!-- Corps à corps (Arme d’hast) -->
+<Skill name="RULES-COMPESQU">"1"</Skill>
+  <!-- Esquive -->
+<Skill name="RULES-COMPINTIM">"1"</Skill>
+  <!-- Intimidation  -->
+<Skill name="RULES-COMPPROJ_ARC">"2"</Skill>
+  <!-- Projectiles (Arc) -->
+<Skill name="RULES-COMPCOMB_2M">"3"</Skill>
+  <!-- Corps à corps (Deux mains) -->
+<Skill name="RULES-COMPGUERI">"3"</Skill>
+  <!-- Guérison  -->
+<Skill name="RULES-COMPLANG_BATAIL">"3"</Skill>
+  <!-- Langue (Bataille)  -->
+<Skill name="RULES-COMPSAVOIR_SAVVIV">"3"</Skill>
+  <!-- Savoir (Savoir-vivre)  -->
+<Skill name="RULES-COMPCOMM">"4"</Skill>
+  <!-- Commandement  -->
+<Skill name="RULES-COMPSAVOIR_GUERRE">"4"</Skill>
+  <!-- Savoir (Guerre)  -->
+</SUBCHAPTER_SKILLCAREER>
+</CHAPTER_SKILL>
+<CHAPTER_OLDCAREER>
+<Career name="RULES-WORK17/1">"0"</Career>
+  <!-- Garde  -->
+<Career name="RULES-WORK27/1">"4"</Career>
+  <!-- Garde  -->
+<Career name="RULES-WORK27/2">"0"</Career>
+  <!-- Garde  -->
+</CHAPTER_OLDCAREER>
+<CHAPTER_ITEM>
+<SUBCHAPTER_WEAPON>
+<Item name="RULES-COMB_BASE_02">""</Item>
+  <!-- Gaffe -->
+<Item name="RULES-COMB_BASE_10">""</Item>
+  <!-- Dague -->
+<Item name="RULES-COMB_BASE_07">""</Item>
+  <!-- Bouclier -->
+</SUBCHAPTER_WEAPON>
+<SUBCHAPTER_ARMOR>
+<Item name="RULES-ARMO_99">""</Item>
+  <!-- Cotte de maille -->
+<Item name="RULES-ARMO_98">""</Item>
+  <!-- Coiffe de maille -->
+</SUBCHAPTER_ARMOR>
+<SUBCHAPTER_ARMOR_SET>
+</SUBCHAPTER_ARMOR_SET>
+<SUBCHAPTER_MISC>
+<Item name="hurricane lamp with oil">""</Item>
+</SUBCHAPTER_MISC>
+<SUBCHAPTER_SPELL>
+</SUBCHAPTER_SPELL>
+</CHAPTER_ITEM>
+<BOOK>"[BOOK RULESBOOK]"</BOOK>
+<RULES>"[BOOK RULESBOOK]"</RULES>
+<CHAPTER_XP>
+<SUBCHAPTER_ATTR>
+<Attribut name="E:0-5">"0"</Attribut>
+</SUBCHAPTER_ATTR>
+<SUBCHAPTER_SKILL>
+</SUBCHAPTER_SKILL>
+<SUBCHAPTER_TALENT>
+</SUBCHAPTER_TALENT>
+</CHAPTER_XP>
+<OPTIONS>"[XpDiv25][PdfFeldo2P]"</OPTIONS>
+</PLAYER>

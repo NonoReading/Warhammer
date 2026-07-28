@@ -1,0 +1,853 @@
+object WinLivres: TWinLivres
+  Left = 597
+  Height = 1010
+  Top = 137
+  Width = 2133
+  Caption = 'Livre'
+  ClientHeight = 1010
+  ClientWidth = 2133
+  Color = clSilver
+  DesignTimePPI = 120
+  OnCreate = FormCreate
+  LCLVersion = '3.8.0.0'
+  object Livre: TEdit
+    Left = 128
+    Height = 28
+    Top = 24
+    Width = 823
+    AutoSelect = False
+    TabOrder = 1
+    Text = 'Livre'
+  end
+  object PageEtapes: TPageControl
+    Left = 8
+    Height = 936
+    Top = 64
+    Width = 2247
+    ActivePage = TabSheetCompetenceSpe
+    Anchors = [akTop, akLeft, akRight, akBottom]
+    Font.CharSet = ANSI_CHARSET
+    Font.Color = clWhite
+    Font.Pitch = fpVariable
+    Font.Quality = fqDraft
+    ParentFont = False
+    TabIndex = 3
+    TabOrder = 3
+    object TabSheetRace: TTabSheet
+      HelpContext = 4
+      Caption = 'Race'
+      ClientHeight = 903
+      ClientWidth = 2239
+      object TabRace: TStringGrid
+        Left = 0
+        Height = 888
+        Top = 8
+        Width = 360
+        Anchors = [akTop, akLeft, akBottom]
+        AutoEdit = False
+        ColCount = 1
+        Font.CharSet = ANSI_CHARSET
+        Font.Color = clBlack
+        Font.Pitch = fpVariable
+        Font.Quality = fqDraft
+        Options = [goFixedVertLine, goFixedHorzLine, goVertLine, goHorzLine, goRangeSelect, goRowSelect, goSmoothScroll]
+        ParentFont = False
+        TabOrder = 0
+        OnClick = TabRaceClick
+      end
+      object TabRaceAttribut: TStringGrid
+        Left = 376
+        Height = 272
+        Top = 272
+        Width = 360
+        Anchors = [akTop, akLeft, akBottom]
+        AutoEdit = False
+        ColCount = 1
+        Font.CharSet = ANSI_CHARSET
+        Font.Color = clBlack
+        Font.Pitch = fpVariable
+        Font.Quality = fqDraft
+        Options = [goFixedVertLine, goFixedHorzLine, goVertLine, goHorzLine, goRangeSelect, goRowSelect, goSmoothScroll]
+        ParentFont = False
+        TabOrder = 1
+      end
+      object RaceCode: TEdit
+        Left = 504
+        Height = 28
+        Top = 8
+        Width = 320
+        ReadOnly = True
+        TabOrder = 2
+      end
+      object RaceLib: TEdit
+        Left = 504
+        Height = 28
+        Top = 40
+        Width = 320
+        ReadOnly = True
+        TabOrder = 3
+      end
+      object TabRaceAttributSupp: TStringGrid
+        Left = 376
+        Height = 288
+        Top = 600
+        Width = 360
+        Anchors = [akTop, akLeft, akBottom]
+        AutoEdit = False
+        ColCount = 1
+        Font.CharSet = ANSI_CHARSET
+        Font.Color = clBlack
+        Font.Pitch = fpVariable
+        Font.Quality = fqDraft
+        Options = [goFixedVertLine, goFixedHorzLine, goVertLine, goHorzLine, goRangeSelect, goRowSelect, goSmoothScroll]
+        ParentFont = False
+        TabOrder = 4
+      end
+      object RaceBlessureForce: TEdit
+        Left = 600
+        Height = 28
+        Top = 112
+        Width = 120
+        ReadOnly = True
+        TabOrder = 5
+      end
+      object RaceBlessureEndurance: TEdit
+        Left = 600
+        Height = 28
+        Top = 144
+        Width = 120
+        ReadOnly = True
+        TabOrder = 6
+      end
+      object RaceBlessureForceMentale: TEdit
+        Left = 600
+        Height = 28
+        Top = 176
+        Width = 120
+        ReadOnly = True
+        TabOrder = 7
+      end
+      object TabRaceCompetence: TStringGrid
+        Left = 848
+        Height = 272
+        Top = 40
+        Width = 360
+        Anchors = [akTop, akLeft, akBottom]
+        AutoEdit = False
+        ColCount = 1
+        Font.CharSet = ANSI_CHARSET
+        Font.Color = clBlack
+        Font.Pitch = fpVariable
+        Font.Quality = fqDraft
+        Options = [goFixedVertLine, goFixedHorzLine, goVertLine, goHorzLine, goRangeSelect, goRowSelect, goSmoothScroll]
+        ParentFont = False
+        TabOrder = 8
+      end
+      object TabRaceTalent: TStringGrid
+        Left = 848
+        Height = 272
+        Top = 496
+        Width = 360
+        Anchors = [akTop, akLeft, akBottom]
+        AutoEdit = False
+        ColCount = 1
+        Font.CharSet = ANSI_CHARSET
+        Font.Color = clBlack
+        Font.Pitch = fpVariable
+        Font.Quality = fqDraft
+        Options = [goFixedVertLine, goFixedHorzLine, goVertLine, goHorzLine, goRangeSelect, goRowSelect, goSmoothScroll]
+        ParentFont = False
+        TabOrder = 9
+      end
+      object TabRaceMetier: TStringGrid
+        Left = 1240
+        Height = 272
+        Top = 40
+        Width = 360
+        Anchors = [akTop, akLeft, akBottom]
+        AutoEdit = False
+        ColCount = 1
+        Font.CharSet = ANSI_CHARSET
+        Font.Color = clBlack
+        Font.Pitch = fpVariable
+        Font.Quality = fqDraft
+        Options = [goFixedVertLine, goFixedHorzLine, goVertLine, goHorzLine, goRangeSelect, goRowSelect, goSmoothScroll]
+        ParentFont = False
+        TabOrder = 10
+      end
+      object LabRaceBlessure: TEdit
+        Left = 376
+        Height = 28
+        Top = 80
+        Width = 344
+        Alignment = taCenter
+        Enabled = False
+        TabOrder = 11
+        Text = 'Points supplémentaires'
+      end
+      object LabRaceLib: TEdit
+        Left = 376
+        Height = 28
+        Top = 40
+        Width = 128
+        Alignment = taCenter
+        Enabled = False
+        TabOrder = 12
+      end
+      object LabRaceCode: TEdit
+        Left = 376
+        Height = 28
+        Top = 8
+        Width = 128
+        Alignment = taCenter
+        Enabled = False
+        TabOrder = 13
+      end
+      object LabRaceBlessureForce: TEdit
+        Left = 376
+        Height = 28
+        Top = 112
+        Width = 224
+        Alignment = taCenter
+        Enabled = False
+        TabOrder = 14
+      end
+      object LabRaceBlessureEndurance: TEdit
+        Left = 376
+        Height = 28
+        Top = 144
+        Width = 224
+        Alignment = taCenter
+        Enabled = False
+        TabOrder = 15
+      end
+      object LabRaceBlessureForceMentale: TEdit
+        Left = 376
+        Height = 28
+        Top = 176
+        Width = 224
+        Alignment = taCenter
+        Enabled = False
+        TabOrder = 16
+      end
+      object LabRaceAttribut: TEdit
+        Left = 376
+        Height = 28
+        Top = 240
+        Width = 344
+        Alignment = taCenter
+        Enabled = False
+        TabOrder = 17
+        Text = 'Points supplémentaires'
+      end
+      object LabRaceCompetence: TEdit
+        Left = 848
+        Height = 28
+        Top = 8
+        Width = 344
+        Alignment = taCenter
+        Enabled = False
+        TabOrder = 18
+        Text = 'Points supplémentaires'
+      end
+      object LabRaceTalent: TEdit
+        Left = 848
+        Height = 28
+        Top = 464
+        Width = 344
+        Alignment = taCenter
+        Enabled = False
+        TabOrder = 19
+        Text = 'Points supplémentaires'
+      end
+      object LabRaceMetier: TEdit
+        Left = 1240
+        Height = 28
+        Top = 8
+        Width = 344
+        Alignment = taCenter
+        Enabled = False
+        TabOrder = 20
+        Text = 'Points supplémentaires'
+      end
+    end
+    object TabSheetMetier: TTabSheet
+      Caption = 'Metier'
+      ClientHeight = 903
+      ClientWidth = 2239
+      object TabMetier: TStringGrid
+        Left = 0
+        Height = 890
+        Top = 8
+        Width = 360
+        Anchors = [akTop, akLeft, akBottom]
+        ColCount = 1
+        Font.CharSet = ANSI_CHARSET
+        Font.Color = clBlack
+        Font.Pitch = fpVariable
+        Font.Quality = fqDraft
+        Options = [goFixedVertLine, goFixedHorzLine, goVertLine, goHorzLine, goRangeSelect, goRowSelect, goSmoothScroll]
+        ParentFont = False
+        TabOrder = 0
+        OnClick = TabMetierClick
+      end
+      object LabMetierCode: TEdit
+        Left = 376
+        Height = 28
+        Top = 8
+        Width = 128
+        Alignment = taCenter
+        Enabled = False
+        TabOrder = 1
+      end
+      object LabMetierLib: TEdit
+        Left = 376
+        Height = 28
+        Top = 40
+        Width = 128
+        Alignment = taCenter
+        Enabled = False
+        TabOrder = 2
+      end
+      object MetierLib: TEdit
+        Left = 504
+        Height = 28
+        Top = 40
+        Width = 320
+        ReadOnly = True
+        TabOrder = 3
+      end
+      object MetierCode: TEdit
+        Left = 504
+        Height = 28
+        Top = 8
+        Width = 320
+        ReadOnly = True
+        TabOrder = 4
+      end
+      object LabMetierAttribut: TEdit
+        Left = 376
+        Height = 28
+        Top = 80
+        Width = 344
+        Alignment = taCenter
+        Enabled = False
+        TabOrder = 5
+        Text = 'Points supplémentaires'
+      end
+      object TabMetierAttribut: TStringGrid
+        Left = 376
+        Height = 272
+        Top = 112
+        Width = 360
+        Anchors = [akTop, akLeft, akBottom]
+        AutoEdit = False
+        ColCount = 1
+        Font.CharSet = ANSI_CHARSET
+        Font.Color = clBlack
+        Font.Pitch = fpVariable
+        Font.Quality = fqDraft
+        Options = [goFixedVertLine, goFixedHorzLine, goVertLine, goHorzLine, goRangeSelect, goRowSelect, goSmoothScroll]
+        ParentFont = False
+        TabOrder = 6
+      end
+      object LabMetierCompetence: TEdit
+        Left = 856
+        Height = 28
+        Top = 208
+        Width = 344
+        Alignment = taCenter
+        Enabled = False
+        TabOrder = 7
+        Text = 'Points supplémentaires'
+      end
+      object TabMetierCompetence: TStringGrid
+        Left = 856
+        Height = 272
+        Top = 240
+        Width = 360
+        Anchors = [akTop, akLeft, akBottom]
+        AutoEdit = False
+        ColCount = 1
+        Font.CharSet = ANSI_CHARSET
+        Font.Color = clBlack
+        Font.Pitch = fpVariable
+        Font.Quality = fqDraft
+        Options = [goFixedVertLine, goFixedHorzLine, goVertLine, goHorzLine, goRangeSelect, goRowSelect, goSmoothScroll]
+        ParentFont = False
+        TabOrder = 8
+      end
+      object LabMetierTalent: TEdit
+        Left = 376
+        Height = 28
+        Top = 408
+        Width = 344
+        Alignment = taCenter
+        Enabled = False
+        TabOrder = 9
+        Text = 'Points supplémentaires'
+      end
+      object TabMetierTalent: TStringGrid
+        Left = 376
+        Height = 272
+        Top = 440
+        Width = 360
+        Anchors = [akTop, akLeft, akBottom]
+        AutoEdit = False
+        ColCount = 1
+        Font.CharSet = ANSI_CHARSET
+        Font.Color = clBlack
+        Font.Pitch = fpVariable
+        Font.Quality = fqDraft
+        Options = [goFixedVertLine, goFixedHorzLine, goVertLine, goHorzLine, goRangeSelect, goRowSelect, goSmoothScroll]
+        ParentFont = False
+        TabOrder = 10
+      end
+      object LabMetierEquipement: TEdit
+        Left = 1264
+        Height = 28
+        Top = 8
+        Width = 344
+        Alignment = taCenter
+        Enabled = False
+        TabOrder = 11
+        Text = 'Points supplémentaires'
+      end
+      object TabMetierEquipement: TStringGrid
+        Left = 1264
+        Height = 272
+        Top = 40
+        Width = 360
+        Anchors = [akTop, akLeft, akBottom]
+        AutoEdit = False
+        ColCount = 1
+        Font.CharSet = ANSI_CHARSET
+        Font.Color = clBlack
+        Font.Pitch = fpVariable
+        Font.Quality = fqDraft
+        Options = [goFixedVertLine, goFixedHorzLine, goVertLine, goHorzLine, goRangeSelect, goRowSelect, goSmoothScroll]
+        ParentFont = False
+        TabOrder = 12
+      end
+      object LabMetierNiveau: TEdit
+        Left = 856
+        Height = 28
+        Top = 8
+        Width = 344
+        Alignment = taCenter
+        Enabled = False
+        TabOrder = 13
+        Text = 'Points supplémentaires'
+      end
+      object TabMetierNiveau: TStringGrid
+        Left = 856
+        Height = 144
+        Top = 40
+        Width = 360
+        Anchors = [akTop, akLeft, akBottom]
+        AutoEdit = False
+        ColCount = 1
+        Font.CharSet = ANSI_CHARSET
+        Font.Color = clBlack
+        Font.Pitch = fpVariable
+        Font.Quality = fqDraft
+        Options = [goFixedVertLine, goFixedHorzLine, goVertLine, goHorzLine, goRangeSelect, goRowSelect, goSmoothScroll]
+        ParentFont = False
+        TabOrder = 14
+      end
+    end
+    object TabSheetCompetence: TTabSheet
+      Caption = 'Competence'
+      ClientHeight = 903
+      ClientWidth = 2239
+      object TabCompetence: TStringGrid
+        Left = 0
+        Height = 890
+        Top = 8
+        Width = 360
+        Anchors = [akTop, akLeft, akBottom]
+        ColCount = 1
+        Font.CharSet = ANSI_CHARSET
+        Font.Color = clBlack
+        Font.Pitch = fpVariable
+        Font.Quality = fqDraft
+        Options = [goFixedVertLine, goFixedHorzLine, goVertLine, goHorzLine, goRangeSelect, goRowSelect, goSmoothScroll]
+        ParentFont = False
+        TabOrder = 0
+      end
+    end
+    object TabSheetCompetenceSpe: TTabSheet
+      Caption = 'Compétence Spécilisation'
+      ClientHeight = 903
+      ClientWidth = 2239
+      object TabCompetenceSpe: TStringGrid
+        Left = 0
+        Height = 890
+        Top = 8
+        Width = 360
+        Anchors = [akTop, akLeft, akBottom]
+        ColCount = 1
+        Font.CharSet = ANSI_CHARSET
+        Font.Color = clBlack
+        Font.Pitch = fpVariable
+        Font.Quality = fqDraft
+        Options = [goFixedVertLine, goFixedHorzLine, goVertLine, goHorzLine, goRangeSelect, goRowSelect, goSmoothScroll]
+        ParentFont = False
+        TabOrder = 0
+      end
+    end
+    object TabSheetTalent: TTabSheet
+      Caption = 'Talent'
+      ClientHeight = 903
+      ClientWidth = 2239
+      object TabTalent: TStringGrid
+        Left = 0
+        Height = 890
+        Top = 8
+        Width = 360
+        Anchors = [akTop, akLeft, akBottom]
+        ColCount = 1
+        Font.CharSet = ANSI_CHARSET
+        Font.Color = clBlack
+        Font.Pitch = fpVariable
+        Font.Quality = fqDraft
+        Options = [goFixedVertLine, goFixedHorzLine, goVertLine, goHorzLine, goRangeSelect, goRowSelect, goSmoothScroll]
+        ParentFont = False
+        TabOrder = 0
+      end
+    end
+    object TabSheetTalentSpe: TTabSheet
+      Caption = 'Talent Spécialisation'
+      ClientHeight = 903
+      ClientWidth = 2239
+      object TabTalentSpe: TStringGrid
+        Left = 0
+        Height = 890
+        Top = 8
+        Width = 360
+        Anchors = [akTop, akLeft, akBottom]
+        ColCount = 1
+        Font.CharSet = ANSI_CHARSET
+        Font.Color = clBlack
+        Font.Pitch = fpVariable
+        Font.Quality = fqDraft
+        Options = [goFixedVertLine, goFixedHorzLine, goVertLine, goHorzLine, goRangeSelect, goRowSelect, goSmoothScroll]
+        ParentFont = False
+        TabOrder = 0
+      end
+    end
+    object TabSheetArme: TTabSheet
+      Caption = 'Arme'
+      ClientHeight = 903
+      ClientWidth = 2239
+      object TabArme: TStringGrid
+        Left = 0
+        Height = 890
+        Top = 8
+        Width = 360
+        Anchors = [akTop, akLeft, akBottom]
+        ColCount = 1
+        Font.CharSet = ANSI_CHARSET
+        Font.Color = clBlack
+        Font.Pitch = fpVariable
+        Font.Quality = fqDraft
+        Options = [goFixedVertLine, goFixedHorzLine, goVertLine, goHorzLine, goRangeSelect, goRowSelect, goSmoothScroll]
+        ParentFont = False
+        TabOrder = 0
+      end
+    end
+    object TabSheetArmure: TTabSheet
+      Caption = 'Armure'
+      ClientHeight = 903
+      ClientWidth = 2239
+      object TabArmure: TStringGrid
+        Left = 0
+        Height = 890
+        Top = 8
+        Width = 360
+        Anchors = [akTop, akLeft, akBottom]
+        ColCount = 1
+        Font.CharSet = ANSI_CHARSET
+        Font.Color = clBlack
+        Font.Pitch = fpVariable
+        Font.Quality = fqDraft
+        Options = [goFixedVertLine, goFixedHorzLine, goVertLine, goHorzLine, goRangeSelect, goRowSelect, goSmoothScroll]
+        ParentFont = False
+        TabOrder = 0
+      end
+    end
+    object TabSheetSort: TTabSheet
+      Caption = 'Sort'
+      ClientHeight = 903
+      ClientWidth = 2239
+      object TabSort: TStringGrid
+        Left = 0
+        Height = 890
+        Top = 8
+        Width = 360
+        Anchors = [akTop, akLeft, akBottom]
+        ColCount = 1
+        Font.CharSet = ANSI_CHARSET
+        Font.Color = clBlack
+        Font.Pitch = fpVariable
+        Font.Quality = fqDraft
+        Options = [goFixedVertLine, goFixedHorzLine, goVertLine, goHorzLine, goRangeSelect, goRowSelect, goSmoothScroll]
+        ParentFont = False
+        TabOrder = 0
+      end
+    end
+    object TabSheetTexte: TTabSheet
+      Caption = 'Texte'
+      ClientHeight = 903
+      ClientWidth = 2239
+      object TabTexte: TStringGrid
+        Left = 0
+        Height = 890
+        Top = 8
+        Width = 360
+        Anchors = [akTop, akLeft, akBottom]
+        ColCount = 1
+        Font.CharSet = ANSI_CHARSET
+        Font.Color = clBlack
+        Font.Pitch = fpVariable
+        Font.Quality = fqDraft
+        Options = [goFixedVertLine, goFixedHorzLine, goVertLine, goHorzLine, goRangeSelect, goRowSelect, goSmoothScroll]
+        ParentFont = False
+        TabOrder = 0
+      end
+    end
+  end
+  object CodeLivre: TEdit
+    Left = 16
+    Height = 28
+    Top = 24
+    Width = 104
+    AutoSelect = False
+    TabOrder = 0
+    Text = 'CodeLivre'
+  end
+  object RadioTypeBook: TRadioGroup
+    Left = 1064
+    Height = 87
+    Top = -8
+    Width = 152
+    AutoFill = True
+    ChildSizing.LeftRightSpacing = 6
+    ChildSizing.EnlargeHorizontal = crsHomogenousChildResize
+    ChildSizing.EnlargeVertical = crsHomogenousChildResize
+    ChildSizing.ShrinkHorizontal = crsScaleChilds
+    ChildSizing.ShrinkVertical = crsScaleChilds
+    ChildSizing.Layout = cclLeftToRightThenTopToBottom
+    ChildSizing.ControlsPerLine = 1
+    ClientHeight = 62
+    ClientWidth = 148
+    ParentBackground = False
+    TabOrder = 2
+    object RadioRulebook: TRadioButton
+      Left = 6
+      Height = 20
+      Top = 0
+      Width = 136
+      Caption = 'Livre de règle'
+      TabOrder = 0
+    end
+    object RadioOfficial: TRadioButton
+      Left = 6
+      Height = 21
+      Top = 20
+      Width = 136
+      Caption = 'Officiel'
+      TabOrder = 1
+    end
+    object RadioUnofficial: TRadioButton
+      Left = 6
+      Height = 21
+      Top = 41
+      Width = 136
+      Caption = 'Non officiel'
+      TabOrder = 2
+    end
+  end
+  object ButtonSauvegarde: TBCButton
+    Left = 1600
+    Height = 64
+    Top = 15
+    Width = 240
+    StateClicked.Background.Gradient1.StartColor = 8404992
+    StateClicked.Background.Gradient1.EndColor = 4194304
+    StateClicked.Background.Gradient1.GradientType = gtRadial
+    StateClicked.Background.Gradient1.Point1XPercent = 50
+    StateClicked.Background.Gradient1.Point1YPercent = 100
+    StateClicked.Background.Gradient1.Point2XPercent = 0
+    StateClicked.Background.Gradient1.Point2YPercent = 0
+    StateClicked.Background.Gradient2.StartColor = clWhite
+    StateClicked.Background.Gradient2.EndColor = clBlack
+    StateClicked.Background.Gradient2.GradientType = gtLinear
+    StateClicked.Background.Gradient2.Point1XPercent = 0
+    StateClicked.Background.Gradient2.Point1YPercent = 0
+    StateClicked.Background.Gradient2.Point2XPercent = 0
+    StateClicked.Background.Gradient2.Point2YPercent = 100
+    StateClicked.Background.Gradient1EndPercent = 100
+    StateClicked.Background.Style = bbsGradient
+    StateClicked.Border.Style = bboNone
+    StateClicked.FontEx.Color = 16770790
+    StateClicked.FontEx.FontQuality = fqSystemClearType
+    StateClicked.FontEx.Shadow = True
+    StateClicked.FontEx.ShadowRadius = 2
+    StateClicked.FontEx.ShadowOffsetX = 1
+    StateClicked.FontEx.ShadowOffsetY = 1
+    StateClicked.FontEx.Style = [fsBold]
+    StateHover.Background.Gradient1.StartColor = 16744448
+    StateHover.Background.Gradient1.EndColor = 8404992
+    StateHover.Background.Gradient1.GradientType = gtRadial
+    StateHover.Background.Gradient1.Point1XPercent = 50
+    StateHover.Background.Gradient1.Point1YPercent = 100
+    StateHover.Background.Gradient1.Point2XPercent = 0
+    StateHover.Background.Gradient1.Point2YPercent = 0
+    StateHover.Background.Gradient2.StartColor = clWhite
+    StateHover.Background.Gradient2.EndColor = clBlack
+    StateHover.Background.Gradient2.GradientType = gtLinear
+    StateHover.Background.Gradient2.Point1XPercent = 0
+    StateHover.Background.Gradient2.Point1YPercent = 0
+    StateHover.Background.Gradient2.Point2XPercent = 0
+    StateHover.Background.Gradient2.Point2YPercent = 100
+    StateHover.Background.Gradient1EndPercent = 100
+    StateHover.Background.Style = bbsGradient
+    StateHover.Border.Style = bboNone
+    StateHover.FontEx.Color = clWhite
+    StateHover.FontEx.FontQuality = fqSystemClearType
+    StateHover.FontEx.Shadow = True
+    StateHover.FontEx.ShadowRadius = 2
+    StateHover.FontEx.ShadowOffsetX = 1
+    StateHover.FontEx.ShadowOffsetY = 1
+    StateHover.FontEx.Style = [fsBold]
+    StateNormal.Background.Gradient1.StartColor = 4194304
+    StateNormal.Background.Gradient1.EndColor = 8405056
+    StateNormal.Background.Gradient1.GradientType = gtLinear
+    StateNormal.Background.Gradient1.Point1XPercent = 0
+    StateNormal.Background.Gradient1.Point1YPercent = 0
+    StateNormal.Background.Gradient1.Point2XPercent = 0
+    StateNormal.Background.Gradient1.Point2YPercent = 100
+    StateNormal.Background.Gradient2.StartColor = 8405056
+    StateNormal.Background.Gradient2.EndColor = 4194304
+    StateNormal.Background.Gradient2.GradientType = gtRadial
+    StateNormal.Background.Gradient2.Point1XPercent = 50
+    StateNormal.Background.Gradient2.Point1YPercent = 100
+    StateNormal.Background.Gradient2.Point2XPercent = 0
+    StateNormal.Background.Gradient2.Point2YPercent = 0
+    StateNormal.Background.Gradient1EndPercent = 60
+    StateNormal.Background.Style = bbsGradient
+    StateNormal.Border.Style = bboNone
+    StateNormal.FontEx.Color = 16770790
+    StateNormal.FontEx.FontQuality = fqSystemClearType
+    StateNormal.FontEx.Shadow = True
+    StateNormal.FontEx.ShadowRadius = 2
+    StateNormal.FontEx.ShadowOffsetX = 1
+    StateNormal.FontEx.ShadowOffsetY = 1
+    StateNormal.FontEx.Style = [fsBold]
+    Caption = 'Sauve Fiche'
+    Color = clNone
+    DropDownWidth = 16
+    DropDownArrowSize = 8
+    GlobalOpacity = 255
+    ParentColor = False
+    Rounding.RoundX = 12
+    Rounding.RoundY = 12
+    RoundingDropDown.RoundX = 1
+    RoundingDropDown.RoundY = 1
+    TextApplyGlobalOpacity = False
+    Visible = False
+    MemoryUsage = bmuHigh
+  end
+  object ButtonAugmentation: TBCButton
+    Left = 1336
+    Height = 64
+    Top = 15
+    Width = 248
+    StateClicked.Background.Gradient1.StartColor = 8404992
+    StateClicked.Background.Gradient1.EndColor = 4194304
+    StateClicked.Background.Gradient1.GradientType = gtRadial
+    StateClicked.Background.Gradient1.Point1XPercent = 50
+    StateClicked.Background.Gradient1.Point1YPercent = 100
+    StateClicked.Background.Gradient1.Point2XPercent = 0
+    StateClicked.Background.Gradient1.Point2YPercent = 0
+    StateClicked.Background.Gradient2.StartColor = clWhite
+    StateClicked.Background.Gradient2.EndColor = clBlack
+    StateClicked.Background.Gradient2.GradientType = gtLinear
+    StateClicked.Background.Gradient2.Point1XPercent = 0
+    StateClicked.Background.Gradient2.Point1YPercent = 0
+    StateClicked.Background.Gradient2.Point2XPercent = 0
+    StateClicked.Background.Gradient2.Point2YPercent = 100
+    StateClicked.Background.Gradient1EndPercent = 100
+    StateClicked.Background.Style = bbsGradient
+    StateClicked.Border.Style = bboNone
+    StateClicked.FontEx.Color = 16770790
+    StateClicked.FontEx.FontQuality = fqSystemClearType
+    StateClicked.FontEx.Shadow = True
+    StateClicked.FontEx.ShadowRadius = 2
+    StateClicked.FontEx.ShadowOffsetX = 1
+    StateClicked.FontEx.ShadowOffsetY = 1
+    StateClicked.FontEx.Style = [fsBold]
+    StateHover.Background.Gradient1.StartColor = 16744448
+    StateHover.Background.Gradient1.EndColor = 8404992
+    StateHover.Background.Gradient1.GradientType = gtRadial
+    StateHover.Background.Gradient1.Point1XPercent = 50
+    StateHover.Background.Gradient1.Point1YPercent = 100
+    StateHover.Background.Gradient1.Point2XPercent = 0
+    StateHover.Background.Gradient1.Point2YPercent = 0
+    StateHover.Background.Gradient2.StartColor = clWhite
+    StateHover.Background.Gradient2.EndColor = clBlack
+    StateHover.Background.Gradient2.GradientType = gtLinear
+    StateHover.Background.Gradient2.Point1XPercent = 0
+    StateHover.Background.Gradient2.Point1YPercent = 0
+    StateHover.Background.Gradient2.Point2XPercent = 0
+    StateHover.Background.Gradient2.Point2YPercent = 100
+    StateHover.Background.Gradient1EndPercent = 100
+    StateHover.Background.Style = bbsGradient
+    StateHover.Border.Style = bboNone
+    StateHover.FontEx.Color = clWhite
+    StateHover.FontEx.FontQuality = fqSystemClearType
+    StateHover.FontEx.Shadow = True
+    StateHover.FontEx.ShadowRadius = 2
+    StateHover.FontEx.ShadowOffsetX = 1
+    StateHover.FontEx.ShadowOffsetY = 1
+    StateHover.FontEx.Style = [fsBold]
+    StateNormal.Background.Gradient1.StartColor = 4194304
+    StateNormal.Background.Gradient1.EndColor = 8405056
+    StateNormal.Background.Gradient1.GradientType = gtLinear
+    StateNormal.Background.Gradient1.Point1XPercent = 0
+    StateNormal.Background.Gradient1.Point1YPercent = 0
+    StateNormal.Background.Gradient1.Point2XPercent = 0
+    StateNormal.Background.Gradient1.Point2YPercent = 100
+    StateNormal.Background.Gradient2.StartColor = 8405056
+    StateNormal.Background.Gradient2.EndColor = 4194304
+    StateNormal.Background.Gradient2.GradientType = gtRadial
+    StateNormal.Background.Gradient2.Point1XPercent = 50
+    StateNormal.Background.Gradient2.Point1YPercent = 100
+    StateNormal.Background.Gradient2.Point2XPercent = 0
+    StateNormal.Background.Gradient2.Point2YPercent = 0
+    StateNormal.Background.Gradient1EndPercent = 60
+    StateNormal.Background.Style = bbsGradient
+    StateNormal.Border.Style = bboNone
+    StateNormal.FontEx.Color = 16770790
+    StateNormal.FontEx.FontQuality = fqSystemClearType
+    StateNormal.FontEx.Shadow = True
+    StateNormal.FontEx.ShadowRadius = 2
+    StateNormal.FontEx.ShadowOffsetX = 1
+    StateNormal.FontEx.ShadowOffsetY = 1
+    StateNormal.FontEx.Style = [fsBold]
+    Caption = 'Maj Fiche'
+    Color = clNone
+    DropDownWidth = 16
+    DropDownArrowSize = 8
+    GlobalOpacity = 255
+    OnClick = ButtonAugmentationClick
+    ParentColor = False
+    Rounding.RoundX = 12
+    Rounding.RoundY = 12
+    RoundingDropDown.RoundX = 1
+    RoundingDropDown.RoundY = 1
+    TextApplyGlobalOpacity = False
+    MemoryUsage = bmuHigh
+  end
+end

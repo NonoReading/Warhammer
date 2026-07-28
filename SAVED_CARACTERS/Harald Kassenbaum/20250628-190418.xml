@@ -1,0 +1,235 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<PLAYER>
+<Name>"Harald Kassenbaum"</Name>
+<Specie>"RACE_HUM"</Specie>
+  <!-- Humans (Reikland) -->
+<Career>"WORK10"</Career>
+  <!-- Hunter -->
+<Level>"1"</Level>
+<Xp>"4475"</Xp>
+<Xp25>"179"</Xp25>
+<CurrentXp>"0"</CurrentXp>
+<CHAPTER_CREATION>
+<SUBCHAPTER_ATTR>
+<Attribut name="ATTR_WS">"17"</Attribut>
+  <!-- Weapon Skill -->
+<Attribut name="ATTR_BS">"16"</Attribut>
+  <!-- Ballistic Skill -->
+<Attribut name="ATTR_S">"12"</Attribut>
+  <!-- Strength -->
+<Attribut name="ATTR_T">"11"</Attribut>
+  <!-- Toughness -->
+<Attribut name="ATTR_I">"15"</Attribut>
+  <!-- Initiative -->
+<Attribut name="ATTR_Ag">"16"</Attribut>
+  <!-- Agility -->
+<Attribut name="ATTR_Dex">"3"</Attribut>
+  <!-- Dexterity -->
+<Attribut name="ATTR_Int">"5"</Attribut>
+  <!-- Intelligence -->
+<Attribut name="ATTR_WP">"15"</Attribut>
+  <!-- Willpower -->
+<Attribut name="ATTR_Fel">"11"</Attribut>
+  <!-- Fellowship -->
+<Attribut name="ATTR_Fate">"2"</Attribut>
+  <!-- Fate -->
+<Attribut name="ATTR_Resil">"1"</Attribut>
+  <!-- Resilience -->
+</SUBCHAPTER_ATTR>
+<SUBCHAPTER_SKILLSPECIE>
+<Skill name="COMPCALM">"5"</Skill>
+  <!-- Cool -->
+<Skill name="COMPCOMB_BASE">"5"</Skill>
+  <!-- Melee (Basic) -->
+<Skill name="COMPMARCH">"5"</Skill>
+  <!-- Haggle -->
+<Skill name="COMPPROJ_ARC">"5"</Skill>
+  <!-- Ranged (Bow) -->
+<Skill name="COMPRAGOT">"5"</Skill>
+  <!-- Gossip -->
+<Skill name="COMPSAVOIR_REG">"5"</Skill>
+  <!-- Lore (Region) -->
+</SUBCHAPTER_SKILLSPECIE>
+<SUBCHAPTER_SKILLCREATION>
+<Skill name="COMPCOMB_BASE">"10"</Skill>
+  <!-- Melee (Basic) -->
+<Skill name="COMPPRECEP">"10"</Skill>
+  <!-- Perception  -->
+<Skill name="COMPRAGOT">"5"</Skill>
+  <!-- Gossip -->
+<Skill name="COMPRESIST">"10"</Skill>
+  <!-- Endurance -->
+<Skill name="COMPANIM">"5"</Skill>
+  <!-- Charm Animal -->
+</SUBCHAPTER_SKILLCREATION>
+<SUBCHAPTER_TALENT>
+<Talent name="T0117">"1"</Talent>
+  <!-- Savvy -->
+<Talent name="T0171">"1"</Talent>
+  <!-- Doomed -->
+<Talent name="T0103">"1"</Talent>
+  <!-- Noble Blood -->
+<Talent name="T0166">"1"</Talent>
+  <!-- Sharp -->
+<Talent name="T0164">"1"</Talent>
+  <!-- Night Vision -->
+</SUBCHAPTER_TALENT>
+</CHAPTER_CREATION>
+<CHAPTER_INCREASE>
+<SUBCHAPTER_ATTR>
+<Attribut name="ATTR_WS">"10"</Attribut>
+  <!-- Weapon Skill -->
+<Attribut name="ATTR_BS">"10"</Attribut>
+  <!-- Ballistic Skill -->
+<Attribut name="ATTR_S">"10"</Attribut>
+  <!-- Strength -->
+<Attribut name="ATTR_T">"10"</Attribut>
+  <!-- Toughness -->
+<Attribut name="ATTR_I">"10"</Attribut>
+  <!-- Initiative -->
+<Attribut name="ATTR_Ag">"10"</Attribut>
+  <!-- Agility -->
+<Attribut name="ATTR_WP">"15"</Attribut>
+  <!-- Willpower -->
+<Attribut name="ATTR_Fel">"10"</Attribut>
+  <!-- Fellowship -->
+</SUBCHAPTER_ATTR>
+<SUBCHAPTER_SKILLCAREER>
+<Skill name="COMPESCAL">"10"</Skill>
+  <!-- Climb -->
+<Skill name="COMPCALM">"5"</Skill>
+  <!-- Cool -->
+<Skill name="COMPESQU">"10"</Skill>
+  <!-- Dodge -->
+<Skill name="COMPINTIM">"5"</Skill>
+  <!-- Intimidate -->
+<Skill name="COMPINTUI">"10"</Skill>
+  <!-- Intuition  -->
+<Skill name="COMPSAVOIR_BETE">"5"</Skill>
+  <!-- Lore (Beasts) -->
+<Skill name="COMPSAVOIR_REG">"5"</Skill>
+  <!-- Lore (Region) -->
+<Skill name="COMPSURVEXT">"5"</Skill>
+  <!-- Outdoor Survival -->
+<Skill name="COMPPROJ_ARC">"5"</Skill>
+  <!-- Ranged (Bow) -->
+<Skill name="COMPPROJ_FROND">"5"</Skill>
+  <!-- Ranged (Slingshot) -->
+<Skill name="COMPPIEG">"5"</Skill>
+  <!-- Set Trap -->
+<Skill name="COMPPIST">"10"</Skill>
+  <!-- Track -->
+</SUBCHAPTER_SKILLCAREER>
+<SUBCHAPTER_TALENT>
+<Talent name="T0047">"2"</Talent>
+  <!-- Hardy -->
+<Talent name="T0058">"1"</Talent>
+  <!-- Nose for Trouble -->
+<Talent name="T0059">"1"</Talent>
+  <!-- Strike to Stun -->
+<Talent name="T0116">"1"</Talent>
+  <!-- Tenacious -->
+</SUBCHAPTER_TALENT>
+</CHAPTER_INCREASE>
+<CHAPTER_SKILL>
+<SUBCHAPTER_SKILLCAREER>
+<Skill name="COMPANIM">"1"</Skill>
+  <!-- Charm Animal -->
+<Skill name="COMPESCAL">"1"</Skill>
+  <!-- Climb -->
+<Skill name="COMPPIEG">"1"</Skill>
+  <!-- Set Trap -->
+<Skill name="COMPPRECEP">"1"</Skill>
+  <!-- Perception  -->
+<Skill name="COMPPROJ_FROND">"1"</Skill>
+  <!-- Ranged (Slingshot) -->
+<Skill name="COMPRESIST">"1"</Skill>
+  <!-- Endurance -->
+<Skill name="COMPSAVOIR_BETE">"1"</Skill>
+  <!-- Lore (Beasts) -->
+<Skill name="COMPSURVEXT">"1"</Skill>
+  <!-- Outdoor Survival -->
+<Skill name="COMPCALM">"2"</Skill>
+  <!-- Cool -->
+<Skill name="COMPCOMB_BASE">"2"</Skill>
+  <!-- Melee (Basic) -->
+<Skill name="COMPDISC_RURAL">"2"</Skill>
+  <!-- Stealth (Rural) -->
+<Skill name="COMPINTUI">"2"</Skill>
+  <!-- Intuition  -->
+<Skill name="COMPPROJ_ARC">"2"</Skill>
+  <!-- Ranged (Bow) -->
+<Skill name="COMPSIGNES_CHASS">"2"</Skill>
+  <!-- Secret Signs (Hunter) -->
+<Skill name="COMPCHEV_CHEVAL">"3"</Skill>
+  <!-- Ride (Horse) -->
+<Skill name="COMPNATA">"3"</Skill>
+  <!-- Swim -->
+<Skill name="COMPORIENT">"3"</Skill>
+  <!-- Navigation -->
+<Skill name="COMPPIST">"3"</Skill>
+  <!-- Track -->
+<Skill name="COMPDRESS_*">"4"</Skill>
+  <!-- Animal Training (Any) -->
+<Skill name="COMPSOINANI">"4"</Skill>
+  <!-- Animal Care -->
+</SUBCHAPTER_SKILLCAREER>
+</CHAPTER_SKILL>
+<CHAPTER_OLDCAREER>
+<Career name="WORK19/1">"100"</Career>
+  <!-- Hunter -->
+<Career name="WORK19/2">"100"</Career>
+  <!-- Hunter -->
+<Career name="WORK05/1">"100"</Career>
+  <!-- Hunter -->
+<Career name="WORK05/2">"100"</Career>
+  <!-- Hunter -->
+<Career name="WORK10/1">"0"</Career>
+  <!-- Hunter -->
+</CHAPTER_OLDCAREER>
+<CHAPTER_ITEM>
+<SUBCHAPTER_WEAPON>
+<Item name="COMB_BASE_09">""</Item>
+  <!-- Shield (Buckler) -->
+<Item name="COMB_BASE_04">""</Item>
+  <!-- Sword -->
+<Item name="PROJ_ARC_03">""</Item>
+  <!-- Longbow -->
+<Item name="COMB_BASE_14">""</Item>
+  <!-- Dagger -->
+<Item name="PROJ_FROND_02">""</Item>
+  <!-- Sling -->
+</SUBCHAPTER_WEAPON>
+<SUBCHAPTER_ARMOR>
+<Item name="ARMO_04">""</Item>
+  <!-- Leather Jack -->
+<Item name="ARMO_07">""</Item>
+  <!-- Chainmail Shirt -->
+<Item name="ARMO_03">""</Item>
+  <!-- Leather Jerkin -->
+<Item name="ARMO_01">""</Item>
+  <!-- Leather Skullcap -->
+<Item name="ARMO_02">""</Item>
+  <!-- Leather Leggings -->
+</SUBCHAPTER_ARMOR>
+<SUBCHAPTER_ARMOR_SET>
+<Item name="ARMO_02_SIMP">""</Item>
+  <!-- Medium Armour -->
+</SUBCHAPTER_ARMOR_SET>
+<SUBCHAPTER_MISC>
+</SUBCHAPTER_MISC>
+<SUBCHAPTER_SPELL>
+</SUBCHAPTER_SPELL>
+</CHAPTER_ITEM>
+<BOOK>"[BOOK RULESBOOK][BOOK UP IN ARMS]"</BOOK>
+<RULES>"[BOOK RULESBOOK][BOOK ARCHIVES OF THE EMPIRE I][BOOK ARCHIVES OF THE EMPIRE II][BOOK ARCHIVES OF THE EMPIRE III][BOOK DEATH ON THE REIK COMPANION][BOOK ENEMY IN SHADOWS COMPANION][BOOK MIDDENHEIM CITY OF THE WHITE WOLF][BOOK ROUGH NIGHTS AND HARD DAYS][BOOK SALZENMUND CITY OF SALT AND SILVER][BOOK SEA OF CLAWS][BOOK THE HORNED RAT COMPANION][BOOK UP IN ARMS][BOOK WINDS OF MAGIC]"</RULES>
+<CHAPTER_XP>
+<SUBCHAPTER_ATTR>
+</SUBCHAPTER_ATTR>
+<SUBCHAPTER_SKILL>
+</SUBCHAPTER_SKILL>
+<SUBCHAPTER_TALENT>
+</SUBCHAPTER_TALENT>
+</CHAPTER_XP>
+<OPTIONS>"[XpDiv25][PdfFeldo2P][QuickArmor]"</OPTIONS>
+</PLAYER>

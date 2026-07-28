@@ -1,0 +1,432 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CONFIG>
+  <ProjectOptions>
+    <Version Value="12"/>
+    <PathDelim Value="\"/>
+    <General>
+      <SessionStorage Value="InProjectDir"/>
+      <Title Value="WarhammerHelp"/>
+      <Scaled Value="True"/>
+      <ResourceType Value="res"/>
+      <UseXPManifest Value="True"/>
+      <XPManifest>
+        <DpiAware Value="True/PM_V2"/>
+      </XPManifest>
+      <Icon Value="0"/>
+    </General>
+    <BuildModes>
+      <Item Name="Default" Default="True"/>
+    </BuildModes>
+    <PublishOptions>
+      <Version Value="2"/>
+      <UseFileFilters Value="True"/>
+    </PublishOptions>
+    <RunParams>
+      <FormatVersion Value="2"/>
+    </RunParams>
+    <RequiredPackages>
+      <Item>
+        <PackageName Value="pack_powerpdf"/>
+      </Item>
+      <Item>
+        <PackageName Value="KControlsLaz"/>
+      </Item>
+      <Item>
+        <PackageName Value="bgracontrols"/>
+      </Item>
+      <Item>
+        <PackageName Value="BGRABitmapPack"/>
+      </Item>
+      <Item>
+        <PackageName Value="LazControls"/>
+      </Item>
+      <Item>
+        <PackageName Value="LCL"/>
+      </Item>
+    </RequiredPackages>
+    <Units>
+      <Unit>
+        <Filename Value="WarhammerHelp.lpr"/>
+        <IsPartOfProject Value="True"/>
+      </Unit>
+      <Unit>
+        <Filename Value="warhammersource.pas"/>
+        <IsPartOfProject Value="True"/>
+        <ComponentName Value="Menu"/>
+        <HasResources Value="True"/>
+        <ResourceBaseClass Value="Form"/>
+        <UnitName Value="WarhammerSource"/>
+      </Unit>
+      <Unit>
+        <Filename Value="wincompetence.pas"/>
+        <IsPartOfProject Value="True"/>
+        <ComponentName Value="WinCompetence"/>
+        <HasResources Value="True"/>
+        <ResourceBaseClass Value="Form"/>
+        <UnitName Value="WinCompetence"/>
+      </Unit>
+      <Unit>
+        <Filename Value="chargecompetence.pas"/>
+        <IsPartOfProject Value="True"/>
+        <UnitName Value="ChargeCompetence"/>
+      </Unit>
+      <Unit>
+        <Filename Value="chargeconstantes.pas"/>
+        <IsPartOfProject Value="True"/>
+        <UnitName Value="ChargeConstantes"/>
+      </Unit>
+      <Unit>
+        <Filename Value="chargeattribut.pas"/>
+        <IsPartOfProject Value="True"/>
+        <UnitName Value="ChargeAttribut"/>
+      </Unit>
+      <Unit>
+        <Filename Value="chargetalent.pas"/>
+        <IsPartOfProject Value="True"/>
+        <UnitName Value="ChargeTalent"/>
+      </Unit>
+      <Unit>
+        <Filename Value="wintalent.pas"/>
+        <IsPartOfProject Value="True"/>
+        <ComponentName Value="WintTalent"/>
+        <HasResources Value="True"/>
+        <ResourceBaseClass Value="Form"/>
+        <UnitName Value="WinTalent"/>
+      </Unit>
+      <Unit>
+        <Filename Value="chargemetier.pas"/>
+        <IsPartOfProject Value="True"/>
+        <UnitName Value="ChargeMetier"/>
+      </Unit>
+      <Unit>
+        <Filename Value="chargemetierniveau.pas"/>
+        <IsPartOfProject Value="True"/>
+        <UnitName Value="ChargeMetierNiveau"/>
+      </Unit>
+      <Unit>
+        <Filename Value="chargemetierattribut.pas"/>
+        <IsPartOfProject Value="True"/>
+        <UnitName Value="ChargeMetierAttribut"/>
+      </Unit>
+      <Unit>
+        <Filename Value="chargemetiercompetence.pas"/>
+        <IsPartOfProject Value="True"/>
+        <UnitName Value="ChargeMetierCompetence"/>
+      </Unit>
+      <Unit>
+        <Filename Value="chargemetiertalent.pas"/>
+        <IsPartOfProject Value="True"/>
+        <UnitName Value="ChargeMetierTalent"/>
+      </Unit>
+      <Unit>
+        <Filename Value="winmetier.pas"/>
+        <IsPartOfProject Value="True"/>
+        <ComponentName Value="WinMetiers"/>
+        <HasResources Value="True"/>
+        <ResourceBaseClass Value="Form"/>
+        <UnitName Value="WinMetier"/>
+      </Unit>
+      <Unit>
+        <Filename Value="chargeracemetier.pas"/>
+        <IsPartOfProject Value="True"/>
+        <UnitName Value="ChargeRaceMetier"/>
+      </Unit>
+      <Unit>
+        <Filename Value="chargerace.pas"/>
+        <IsPartOfProject Value="True"/>
+        <UnitName Value="ChargeRace"/>
+      </Unit>
+      <Unit>
+        <Filename Value="winraces.pas"/>
+        <IsPartOfProject Value="True"/>
+        <ComponentName Value="WinRace"/>
+        <HasResources Value="True"/>
+        <ResourceBaseClass Value="Form"/>
+        <UnitName Value="WinRaces"/>
+      </Unit>
+      <Unit>
+        <Filename Value="chargeraceattribut.pas"/>
+        <IsPartOfProject Value="True"/>
+        <UnitName Value="ChargeRaceAttribut"/>
+      </Unit>
+      <Unit>
+        <Filename Value="chargeracecompetence.pas"/>
+        <IsPartOfProject Value="True"/>
+        <UnitName Value="ChargeRaceCompetence"/>
+      </Unit>
+      <Unit>
+        <Filename Value="chargeracetalent.pas"/>
+        <IsPartOfProject Value="True"/>
+        <UnitName Value="ChargeRaceTalent"/>
+      </Unit>
+      <Unit>
+        <Filename Value="globalfonts.pas"/>
+        <IsPartOfProject Value="True"/>
+        <UnitName Value="GlobalFonts"/>
+      </Unit>
+      <Unit>
+        <Filename Value="wincreation.pas"/>
+        <IsPartOfProject Value="True"/>
+        <ComponentName Value="WinCreations"/>
+        <HasResources Value="True"/>
+        <ResourceBaseClass Value="Form"/>
+        <UnitName Value="WinCreation"/>
+      </Unit>
+      <Unit>
+        <Filename Value="unitcalcul.pas"/>
+        <IsPartOfProject Value="True"/>
+        <UnitName Value="UnitCalcul"/>
+      </Unit>
+      <Unit>
+        <Filename Value="chargetalentcreation.pas"/>
+        <IsPartOfProject Value="True"/>
+        <UnitName Value="ChargeTalentCreation"/>
+      </Unit>
+      <Unit>
+        <Filename Value="winpersonnage.pas"/>
+        <IsPartOfProject Value="True"/>
+        <ComponentName Value="WinPersonnages"/>
+        <HasResources Value="True"/>
+        <ResourceBaseClass Value="Form"/>
+        <UnitName Value="WinPersonnage"/>
+      </Unit>
+      <Unit>
+        <Filename Value="chargeattributaugmentation.pas"/>
+        <IsPartOfProject Value="True"/>
+        <UnitName Value="ChargeAttributAugmentation"/>
+      </Unit>
+      <Unit>
+        <Filename Value="chargecompetenceaugmentation.pas"/>
+        <IsPartOfProject Value="True"/>
+        <UnitName Value="ChargeCompetenceAugmentation"/>
+      </Unit>
+      <Unit>
+        <Filename Value="chargearme.pas"/>
+        <IsPartOfProject Value="True"/>
+        <UnitName Value="ChargeArme"/>
+      </Unit>
+      <Unit>
+        <Filename Value="winweapon.pas"/>
+        <IsPartOfProject Value="True"/>
+        <ComponentName Value="WinWeapons"/>
+        <HasResources Value="True"/>
+        <ResourceBaseClass Value="Form"/>
+        <UnitName Value="WinWeapon"/>
+      </Unit>
+      <Unit>
+        <Filename Value="chargearmebonus.pas"/>
+        <IsPartOfProject Value="True"/>
+        <UnitName Value="ChargeArmeBonus"/>
+      </Unit>
+      <Unit>
+        <Filename Value="chargemetierequipement.pas"/>
+        <IsPartOfProject Value="True"/>
+        <UnitName Value="ChargeMetierEquipement"/>
+      </Unit>
+      <Unit>
+        <Filename Value="chargearmuresimplifie.pas"/>
+        <IsPartOfProject Value="True"/>
+        <UnitName Value="ChargeArmureSimplifie"/>
+      </Unit>
+      <Unit>
+        <Filename Value="chargearmurebonus.pas"/>
+        <IsPartOfProject Value="True"/>
+        <UnitName Value="ChargeArmureBonus"/>
+      </Unit>
+      <Unit>
+        <Filename Value="winarmor.pas"/>
+        <IsPartOfProject Value="True"/>
+        <ComponentName Value="WinArmors"/>
+        <HasResources Value="True"/>
+        <ResourceBaseClass Value="Form"/>
+        <UnitName Value="WinArmor"/>
+      </Unit>
+      <Unit>
+        <Filename Value="chargesort.pas"/>
+        <IsPartOfProject Value="True"/>
+        <UnitName Value="ChargeSort"/>
+      </Unit>
+      <Unit>
+        <Filename Value="winspell.pas"/>
+        <IsPartOfProject Value="True"/>
+        <ComponentName Value="WinSpells"/>
+        <HasResources Value="True"/>
+        <ResourceBaseClass Value="Form"/>
+        <UnitName Value="WinSpell"/>
+      </Unit>
+      <Unit>
+        <Filename Value="chargetexte.pas"/>
+        <IsPartOfProject Value="True"/>
+        <UnitName Value="ChargeTexte"/>
+      </Unit>
+      <Unit>
+        <Filename Value="chargefabrication.pas"/>
+        <IsPartOfProject Value="True"/>
+        <UnitName Value="ChargeFabrication"/>
+      </Unit>
+      <Unit>
+        <Filename Value="winfabrication.pas"/>
+        <IsPartOfProject Value="True"/>
+        <ComponentName Value="WinFabrications"/>
+        <HasResources Value="True"/>
+        <ResourceBaseClass Value="Form"/>
+        <UnitName Value="WinFabrication"/>
+      </Unit>
+      <Unit>
+        <Filename Value="chargemetiersousmetier.pas"/>
+        <IsPartOfProject Value="True"/>
+        <UnitName Value="ChargeMetierSousMetier"/>
+      </Unit>
+      <Unit>
+        <Filename Value="chargemetierracechoixmetier.pas"/>
+        <IsPartOfProject Value="True"/>
+        <UnitName Value="ChargeMetierRaceChoixMetier"/>
+      </Unit>
+      <Unit>
+        <Filename Value="winspecialisation.pas"/>
+        <IsPartOfProject Value="True"/>
+        <ComponentName Value="WinSpecialisations"/>
+        <HasResources Value="True"/>
+        <ResourceBaseClass Value="Form"/>
+        <UnitName Value="WinSpecialisation"/>
+      </Unit>
+      <Unit>
+        <Filename Value="chargepersonnage.pas"/>
+        <IsPartOfProject Value="True"/>
+        <UnitName Value="ChargePersonnage"/>
+      </Unit>
+      <Unit>
+        <Filename Value="winfiltre.pas"/>
+        <IsPartOfProject Value="True"/>
+        <ComponentName Value="WinFiltre"/>
+        <HasResources Value="True"/>
+        <ResourceBaseClass Value="Form"/>
+        <UnitName Value="WinFiltre"/>
+      </Unit>
+      <Unit>
+        <Filename Value="chargeracecreation.pas"/>
+        <IsPartOfProject Value="True"/>
+        <UnitName Value="ChargeRaceCreation"/>
+      </Unit>
+      <Unit>
+        <Filename Value="picslib.pas"/>
+        <IsPartOfProject Value="True"/>
+        <UnitName Value="PicsLib"/>
+      </Unit>
+      <Unit>
+        <Filename Value="streamhelper.pas"/>
+        <IsPartOfProject Value="True"/>
+        <UnitName Value="StreamHelper"/>
+      </Unit>
+      <Unit>
+        <Filename Value="pdfutils.pas"/>
+        <IsPartOfProject Value="True"/>
+        <UnitName Value="PdfUtils"/>
+      </Unit>
+      <Unit>
+        <Filename Value="pdfmetier.pas"/>
+        <IsPartOfProject Value="True"/>
+        <UnitName Value="PdfMetier"/>
+      </Unit>
+      <Unit>
+        <Filename Value="pdfpersonnage.pas"/>
+        <IsPartOfProject Value="True"/>
+        <UnitName Value="PdfPersonnage"/>
+      </Unit>
+      <Unit>
+        <Filename Value="pdfrace.pas"/>
+        <IsPartOfProject Value="True"/>
+        <UnitName Value="PdfRace"/>
+      </Unit>
+      <Unit>
+        <Filename Value="xmlexportimport.pas"/>
+        <IsPartOfProject Value="True"/>
+        <UnitName Value="XmlExportImport"/>
+      </Unit>
+      <Unit>
+        <Filename Value="chargetraduction.pas"/>
+        <IsPartOfProject Value="True"/>
+        <UnitName Value="ChargeTraduction"/>
+      </Unit>
+      <Unit>
+        <Filename Value="winlivre.pas"/>
+        <IsPartOfProject Value="True"/>
+        <ComponentName Value="WinLivres"/>
+        <HasResources Value="True"/>
+        <ResourceBaseClass Value="Form"/>
+        <UnitName Value="WinLivre"/>
+      </Unit>
+      <Unit>
+        <Filename Value="chargelivre.pas"/>
+        <IsPartOfProject Value="True"/>
+        <UnitName Value="ChargeLivre"/>
+      </Unit>
+      <Unit>
+        <Filename Value="chargeracecorruptioncreation.pas"/>
+        <IsPartOfProject Value="True"/>
+        <UnitName Value="ChargeRaceCorruptionCreation"/>
+      </Unit>
+      <Unit>
+        <Filename Value="chargetalentattributmodif.pas"/>
+        <IsPartOfProject Value="True"/>
+        <UnitName Value="ChargeTalentAttributModif"/>
+      </Unit>
+      <Unit>
+        <Filename Value="chargetalentcompetencemodif.pas"/>
+        <IsPartOfProject Value="True"/>
+        <UnitName Value="ChargeTalentCompetenceModif"/>
+      </Unit>
+      <Unit>
+        <Filename Value="chargetalentcompetenceajoute.pas"/>
+        <IsPartOfProject Value="True"/>
+        <UnitName Value="ChargeTalentCompetenceAjoute"/>
+      </Unit>
+    </Units>
+  </ProjectOptions>
+  <CompilerOptions>
+    <Version Value="11"/>
+    <PathDelim Value="\"/>
+    <Target>
+      <Filename Value="WarhammerHelp"/>
+    </Target>
+    <SearchPaths>
+      <IncludeFiles Value="$(ProjOutDir)"/>
+      <UnitOutputDirectory Value="lib\$(TargetCPU)-$(TargetOS)"/>
+    </SearchPaths>
+    <Linking>
+      <Debugging>
+        <DebugInfoType Value="dsDwarf2Set"/>
+      </Debugging>
+      <Options>
+        <Win32>
+          <GraphicApplication Value="True"/>
+        </Win32>
+      </Options>
+    </Linking>
+    <Other>
+      <CompilerMessages>
+        <IgnoredMessages idx5091="True"/>
+      </CompilerMessages>
+      <CompilerPath Value="C:\lazarus\fpc\3.2.2\bin\x86_64-win64\fpc.exe"/>
+    </Other>
+  </CompilerOptions>
+  <Debugging>
+    <Exceptions>
+      <Item>
+        <Name Value="EAbort"/>
+      </Item>
+      <Item>
+        <Name Value="ECodetoolError"/>
+      </Item>
+      <Item>
+        <Name Value="EFOpenError"/>
+      </Item>
+      <Item>
+        <Name Value="EReadError"/>
+      </Item>
+      <Item>
+        <Name Value="EStringListError"/>
+      </Item>
+    </Exceptions>
+  </Debugging>
+</CONFIG>
