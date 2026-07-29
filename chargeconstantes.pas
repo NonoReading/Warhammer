@@ -138,6 +138,10 @@ Const
       ConstXmlModifieAttribut           = 'ModifyCarac';
       ConstXmlModifieCompetence         = 'ModifySkill';
       ConstXmlAjouteCompetence          = 'AddSkill';
+      ConstXmlOpinions                  = 'OPINIONS';
+      ConstXmlOpinion                   = 'Opinion';
+      ConstXmlTarget                    = 'target';
+      ConstXmlSource                    = 'source';
 
       // constantes de passage d'étapes de création de personnages
       ConstSuivant			= 1;
