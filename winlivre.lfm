@@ -8,6 +8,7 @@ object WinLivres: TWinLivres
   ClientWidth = 2133
   Color = clSilver
   DesignTimePPI = 120
+  LCLVersion = '4.8.0.0'
   OnCreate = FormCreate
   object Livre: TEdit
     Left = 128
@@ -23,14 +24,14 @@ object WinLivres: TWinLivres
     Height = 936
     Top = 64
     Width = 2247
-    ActivePage = TabSheetCompetenceSpe
+    ActivePage = TabSheetRace
     Anchors = [akTop, akLeft, akRight, akBottom]
     Font.CharSet = ANSI_CHARSET
     Font.Color = clWhite
     Font.Pitch = fpVariable
     Font.Quality = fqDraft
     ParentFont = False
-    TabIndex = 3
+    TabIndex = 0
     TabOrder = 3
     object TabSheetRace: TTabSheet
       HelpContext = 4

@@ -209,8 +209,7 @@
         <HasResources Value="True"/>
         <ResourceBaseClass Value="Form"/>
         <UnitName Value="WinCreation"/>
-        <TopLine Value="2766"/>
-        <CursorPos X="15" Y="2770"/>
+        <CursorPos X="65" Y="12"/>
         <UsageCount Value="200"/>
         <Loaded Value="True"/>
         <LoadedDesigner Value="True"/>
@@ -436,10 +435,10 @@
         <Filename Value="chargeracecreation.pas"/>
         <IsPartOfProject Value="True"/>
         <UnitName Value="ChargeRaceCreation"/>
-        <EditorIndex Value="-1"/>
-        <TopLine Value="4"/>
-        <CursorPos X="45" Y="27"/>
+        <EditorIndex Value="3"/>
+        <CursorPos X="24"/>
         <UsageCount Value="200"/>
+        <Loaded Value="True"/>
       </Unit>
       <Unit>
         <Filename Value="picslib.pas"/>
@@ -499,10 +498,11 @@
         <Filename Value="xmlexportimport.pas"/>
         <IsPartOfProject Value="True"/>
         <UnitName Value="XmlExportImport"/>
-        <EditorIndex Value="-1"/>
-        <TopLine Value="1162"/>
-        <CursorPos X="48" Y="1168"/>
+        <EditorIndex Value="2"/>
+        <TopLine Value="119"/>
+        <CursorPos X="24" Y="137"/>
         <UsageCount Value="200"/>
+        <Loaded Value="True"/>
       </Unit>
       <Unit>
         <Filename Value="chargetraduction.pas"/>
@@ -522,7 +522,7 @@
         <UnitName Value="WinLivre"/>
         <IsVisibleTab Value="True"/>
         <EditorIndex Value="1"/>
-        <CursorPos X="57" Y="183"/>
+        <CursorPos X="18"/>
         <UsageCount Value="200"/>
         <Loaded Value="True"/>
         <LoadedDesigner Value="True"/>
@@ -533,7 +533,7 @@
         <UnitName Value="ChargeLivre"/>
         <EditorIndex Value="-1"/>
         <CursorPos X="13" Y="49"/>
-        <UsageCount Value="134"/>
+        <UsageCount Value="136"/>
       </Unit>
       <Unit>
         <Filename Value="chargeracecorruptioncreation.pas"/>
@@ -542,7 +542,7 @@
         <EditorIndex Value="-1"/>
         <TopLine Value="5"/>
         <CursorPos X="34" Y="11"/>
-        <UsageCount Value="48"/>
+        <UsageCount Value="50"/>
       </Unit>
       <Unit>
         <Filename Value="chargetalentattributmodif.pas"/>
@@ -551,7 +551,7 @@
         <EditorIndex Value="-1"/>
         <TopLine Value="3"/>
         <CursorPos X="43" Y="13"/>
-        <UsageCount Value="42"/>
+        <UsageCount Value="44"/>
       </Unit>
       <Unit>
         <Filename Value="chargetalentcompetencemodif.pas"/>
@@ -559,7 +559,7 @@
         <UnitName Value="ChargeTalentCompetenceModif"/>
         <EditorIndex Value="-1"/>
         <CursorPos X="31" Y="17"/>
-        <UsageCount Value="39"/>
+        <UsageCount Value="41"/>
       </Unit>
       <Unit>
         <Filename Value="chargetalentcompetenceajoute.pas"/>
@@ -567,7 +567,7 @@
         <UnitName Value="ChargeTalentCompetenceAjoute"/>
         <EditorIndex Value="-1"/>
         <CursorPos X="43" Y="14"/>
-        <UsageCount Value="38"/>
+        <UsageCount Value="40"/>
       </Unit>
       <Unit>
         <Filename Value="unitcreationrace.pas"/>
@@ -1063,7 +1063,36 @@
         <UsageCount Value="10"/>
       </Unit>
     </Units>
-    <JumpHistory HistoryIndex="-1"/>
+    <JumpHistory HistoryIndex="6">
+      <Position>
+        <Filename Value="chargeracecreation.pas"/>
+        <Caret Column="24"/>
+      </Position>
+      <Position>
+        <Filename Value="xmlexportimport.pas"/>
+        <Caret Line="1175" Column="61" TopLine="1163"/>
+      </Position>
+      <Position>
+        <Filename Value="xmlexportimport.pas"/>
+        <Caret Line="22" Column="20" TopLine="16"/>
+      </Position>
+      <Position>
+        <Filename Value="xmlexportimport.pas"/>
+        <Caret Line="818" Column="20" TopLine="890"/>
+      </Position>
+      <Position>
+        <Filename Value="xmlexportimport.pas"/>
+        <Caret Line="21" Column="24" TopLine="11"/>
+      </Position>
+      <Position>
+        <Filename Value="xmlexportimport.pas"/>
+        <Caret Line="224" Column="34" TopLine="200"/>
+      </Position>
+      <Position>
+        <Filename Value="xmlexportimport.pas"/>
+        <Caret Line="21" Column="24" TopLine="11"/>
+      </Position>
+    </JumpHistory>
     <RunParams>
       <FormatVersion Value="2"/>
       <Modes ActiveMode=""/>

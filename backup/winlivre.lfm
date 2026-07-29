@@ -9,7 +9,6 @@ object WinLivres: TWinLivres
   Color = clSilver
   DesignTimePPI = 120
   OnCreate = FormCreate
-  LCLVersion = '3.8.0.0'
   object Livre: TEdit
     Left = 128
     Height = 28
@@ -645,7 +644,7 @@ object WinLivres: TWinLivres
     TabOrder = 2
     object RadioRulebook: TRadioButton
       Left = 6
-      Height = 20
+      Height = 21
       Top = 0
       Width = 136
       Caption = 'Livre de règle'
@@ -653,8 +652,8 @@ object WinLivres: TWinLivres
     end
     object RadioOfficial: TRadioButton
       Left = 6
-      Height = 21
-      Top = 20
+      Height = 20
+      Top = 21
       Width = 136
       Caption = 'Officiel'
       TabOrder = 1
@@ -671,7 +670,7 @@ object WinLivres: TWinLivres
   object ButtonSauvegarde: TBCButton
     Left = 1600
     Height = 64
-    Top = 15
+    Top = 0
     Width = 240
     StateClicked.Background.Gradient1.StartColor = 8404992
     StateClicked.Background.Gradient1.EndColor = 4194304
@@ -762,7 +761,7 @@ object WinLivres: TWinLivres
   object ButtonAugmentation: TBCButton
     Left = 1336
     Height = 64
-    Top = 15
+    Top = 0
     Width = 248
     StateClicked.Background.Gradient1.StartColor = 8404992
     StateClicked.Background.Gradient1.EndColor = 4194304

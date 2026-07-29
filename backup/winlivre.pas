@@ -538,7 +538,7 @@ procedure TWinLivres.ChargeLivreTexte();
     GridAjouteColonne(TabTexte,GetTexteLibelle('LAB_002'),220);
 
     TabTexte.ColWidths[0]  := 20;
-    for PTexte in ListeTexte do
+    for PTexte in ListTexte do
       if (NomLivre = ConstRulesBook) then
         begin
           Inc(IndTab);
