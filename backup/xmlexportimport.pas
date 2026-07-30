@@ -15,7 +15,7 @@ uses
   ChargeAttributAugmentation, ChargeCompetenceAugmentation, ChargeTexte,
   ChargeMetierSousMetier, ChargeTraduction, ChargeArmureSimplifie, ChargeLivre,
   ChargeRaceCorruptionCreation, ChargeTalentAttributModif,
-  ChargeTalentCompetenceModif, ChargeTalentCompetenceAjoute,
+  ChargeTalentCompetenceModif, ChargeTalentCompetenceAjoute, ChargeRaceOpinion,
   XMLRead, DOM, Unitcalcul,  Dialogs, strutils;
 
 Procedure XmlExportBook(Livre: String; Langue: String);
@@ -151,6 +151,7 @@ Procedure XmlExportBook(Livre: String; Langue: String);
     PMetierTalent:            StructureMetierTalent;
     PMetierEquipement:        StructureMetierEquipement;
     PMetierNiveau:            StructureMetierNiveau;
+    PRaceOpinion:             StructureRaceOpinion;  // ✨ NOUVEAU
     PTalentCreation:          StructureTalentCreation;
     PRaceCreation:            StructureRaceCreation;
     PArme:                    StructureArme;
@@ -1200,7 +1201,7 @@ Procedure XmlImport(FileName: String; OnlyPrimary: Boolean; OnlyCode: Boolean);
                               begin
                                 PTalentCompetenceAjoute.Livre          := Livre;
                                 PTalentCompetenceAjoute.CodeTalent     := PTalent.CodeTalent;
-                                PTalentCompetenceAjoute.CodeCompetence := RemoveQuotes(UTF8Encode(Node.Attributes.GetNamedItem(ConstXmlData).NodeValue));
+                                PTalentCompetenceAjoute.CodeCompetence := RemoveQuotes(UTF8Encode(Node.TextContent));
                                 if LangueDef = ConstAnglais then
                                    begin
                                     ListTalentCompetenceAjoute.add(PTalentCompetenceAjoute);
@@ -1414,6 +1415,29 @@ Procedure XmlImport(FileName: String; OnlyPrimary: Boolean; OnlyCode: Boolean);
                                               begin
                                                ListRaceMetier.add(PRaceMetier);
                                                inc(NbRaceMetier);
+                                              end;
+                                         end;
+                                    end;
+                                    Node := Node.NextSibling;
+                                  end;
+                              end;
+                            ConstXmlOpinions:  // ✨ NOUVEAU - Traiter les opinions
+                              begin
+                                Node := NodeNv3.FirstChild;
+                                while Assigned(Node) do
+                                  begin
+                                    case Node.NodeName of
+                                       ConstXmlOpinion:
+                                         begin
+                                           PRaceOpinion.Livre      := Livre;
+                                           PRaceOpinion.CodeRace   := PRace.CodeRace;
+                                           PRaceOpinion.TargetRace := RemoveQuotes(UTF8Encode(Node.Attributes.GetNamedItem(ConstXmlTarget).NodeValue));
+                                           PRaceOpinion.Source     := RemoveQuotes(UTF8Encode(Node.Attributes.GetNamedItem(ConstXmlSource).NodeValue));
+                                           PRaceOpinion.Citation   := RemoveQuotes(UTF8Encode(Node.TextContent));
+                                            if LangueDef = ConstAnglais then
+                                              begin
+                                               ListRaceOpinion.add(PRaceOpinion);
+                                               inc(NbRaceOpinion);
                                               end;
                                          end;
                                     end;

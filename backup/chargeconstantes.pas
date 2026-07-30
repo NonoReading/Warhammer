@@ -137,6 +137,7 @@ Const
       ConstXmlEyeColors                 = 'EyeColors';
       ConstXmlModifieAttribut           = 'ModifyCarac';
       ConstXmlModifieCompetence         = 'ModifySkill';
+      ConstXmlAjouteCompetence          = 'AddSkill';
 
       // constantes de passage d'étapes de création de personnages
       ConstSuivant			= 1;

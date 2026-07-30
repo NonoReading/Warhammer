@@ -12,7 +12,8 @@ uses
   ChargeConstantes, ChargeRaceCompetence, ChargeCompetence, UnitCalcul,
   ChargeRaceTalent, ChargeTalent, ChargeMetier, ChargeRaceMetier,
   GlobalFonts, ChargeTexte, ChargeMetierSousMetier, ChargeMetierRaceChoixMetier,
-  ChargeRaceCorruptionCreation, WinFiltre, ChargeTalentCreation, PdfRace;
+  ChargeRaceCorruptionCreation, WinFiltre, ChargeTalentCreation, PdfRace,
+  ChargeRaceOpinion;  // ✨ AJOUTER OPINIONS
 
 type
   TMyNodeData = class
@@ -495,6 +496,50 @@ var
         end;
 end;
 
+// ========== AFFICHER LES OPINIONS D'UNE RACE ==========
+function AfficherOpinionsRace(CodeRace: String): String;
+var
+  i: Integer;
+  PRaceOpinion: StructureRaceOpinion;
+  PRaceTarget: StructureRace;
+  TargetLibelle: String;
+  Citation: String;
+  Texte: String;
+begin
+  Texte := '';
+  
+  for i := 0 to ListRaceOpinion.Count - 1 do
+    begin
+      PRaceOpinion := ListRaceOpinion[i];
+      
+      if PRaceOpinion.CodeRace = CodeRace then
+        begin
+          Texte := Texte + #13#10 + #13#10;
+          
+          // ✨ Chercher le libellé direct dans ListRace
+          PRaceTarget := ChercheRace(PRaceOpinion.TargetRace);
+          
+          // Vérifier que on a un libellé valide (pas vide, pas "(F)")
+          if (PRaceTarget.CodeRace <> '') and (PRaceTarget.Libelle <> '') and 
+             (PRaceTarget.Libelle <> '(F)') then
+            TargetLibelle := Trim(PRaceTarget.Libelle)
+          else
+            TargetLibelle := PRaceOpinion.TargetRace;  // Fallback au code
+          
+          Texte := Texte + ' [' + TargetLibelle + '] [' + PRaceOpinion.Source + ']' + #13#10;
+          
+          // ✨ Supprimer les guillemets de la citation
+          Citation := PRaceOpinion.Citation;
+          if (Length(Citation) > 0) and (Citation[1] = '"') then
+            Citation := Copy(Citation, 2, Length(Citation) - 2);
+          
+          Texte := Texte + Citation;
+        end;
+    end;
+  
+  Result := Texte;
+end;
+
 procedure TWinRace.TabRaceSelection(Sender: TObject; aCol, aRow: Integer);
 begin
   DeleteData(TreeViewRace,TreeViewRace.Items.GetFirstNode);
@@ -582,6 +627,7 @@ Begin
       AffCode.Text         := '';
       AffAttribut.Text     := '';
       AffDescription.Text  := TabRace.Cells[4, TabRace.Row];
+      AffDescription.Text  := AffDescription.Text + AfficherOpinionsRace(RaceEnCours);  // ✨ AJOUTER OPINIONS
       // Obtenez le texte du nœud sélectionné
       if Node <> TreeViewRace.Items.GetFirstNode then
         begin

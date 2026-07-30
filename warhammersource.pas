@@ -21,6 +21,7 @@ uses
   ChargeTraduction, ChargeArmureSimplifie, ChargeLivre,
   ChargeTalentAttributModif, ChargeTalentCompetenceModif,
   ChargeTalentCompetenceAjoute, ChargeRaceCorruptionCreation,
+  ChargeRaceOpinion,
   CustomDrawn_Common, BCButton, BCLabel, fpTTF,
   PdfPersonnage, XmlExportImport, fppdf, WinLivre;
 
@@ -339,6 +340,7 @@ procedure TMenu.ChargerLivre(ForceMaJ: Boolean; ForceLivre: String);
         NbTalentAttributModif       := 0;
         NbTalentCompetenceModif     := 0;
         NbTalentCompetenceAjoute    := 0;
+        NbRaceOpinion               := 0;
 
         // vider les données
         ListRace.Clear;
@@ -368,6 +370,7 @@ procedure TMenu.ChargerLivre(ForceMaJ: Boolean; ForceLivre: String);
         ListTalentAttributModif.Clear;
         ListTalentCompetenceModif.Clear;
         ListTalentCompetenceAjoute.Clear;
+        ListRaceOpinion.Clear;
       end;
 
     // chercher les livres
@@ -578,6 +581,7 @@ procedure TMenu.FormCreate(Sender: TObject);
        ListTalentAttributModif      := TListTalentAttributModif.Create;
        ListTalentCompetenceModif    := TListTalentCompetenceModif.Create;
        ListTalentCompetenceAjoute   := TListTalentCompetenceAjoute.Create;
+       ListRaceOpinion              := TListRaceOpinion.Create;
 
        // chercher les livres
        directoryPath := GetCurrentDir + ConstCheminLivre;

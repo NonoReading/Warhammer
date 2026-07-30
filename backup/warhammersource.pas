@@ -18,8 +18,11 @@ uses
   ChargeArmureBonus, WinArmor, ChargeSort, WinSpell, ChargeTexte,
   ChargeFabrication, Unitcalcul, ChargeMetierSousMetier,
   ChargeMetierRaceChoixMetier, ChargePersonnage, ChargeRaceCreation,
-  ChargeTraduction, ChargeArmureSimplifie, ChargeLivre, ChargeTalentAttributModif,
-  ChargeRaceCorruptionCreation, CustomDrawn_Common, BCButton, BCLabel, fpTTF,
+  ChargeTraduction, ChargeArmureSimplifie, ChargeLivre,
+  ChargeTalentAttributModif, ChargeTalentCompetenceModif,
+  ChargeTalentCompetenceAjoute, ChargeRaceCorruptionCreation,
+  ChargeRaceOpinion,
+  CustomDrawn_Common, BCButton, BCLabel, fpTTF,
   PdfPersonnage, XmlExportImport, fppdf, WinLivre;
 
 type
@@ -335,6 +338,9 @@ procedure TMenu.ChargerLivre(ForceMaJ: Boolean; ForceLivre: String);
         NbTraduction                := 0;
         NbRaceCorruptionCreation    := 0;
         NbTalentAttributModif       := 0;
+        NbTalentCompetenceModif     := 0;
+        NbTalentCompetenceAjoute    := 0;
+        NbRaceOpinion               := 0;
 
         // vider les données
         ListRace.Clear;
@@ -362,6 +368,9 @@ procedure TMenu.ChargerLivre(ForceMaJ: Boolean; ForceLivre: String);
         ListMetierRaceChoixMetier.Clear;
         ListRaceCorruptionCreation.Clear;
         ListTalentAttributModif.Clear;
+        ListTalentCompetenceModif.Clear;
+        ListTalentCompetenceAjoute.Clear;
+        ListRaceOpinion.Clear;
       end;
 
     // chercher les livres
@@ -570,6 +579,9 @@ procedure TMenu.FormCreate(Sender: TObject);
        ListTexte                    := TListTexte.Create;
        ListRaceCorruptionCreation   := TListRaceCorruptionCreation.Create;
        ListTalentAttributModif      := TListTalentAttributModif.Create;
+       ListTalentCompetenceModif    := TListTalentCompetenceModif.Create;
+       ListTalentCompetenceAjoute   := TListTalentCompetenceAjoute.Create;
+       ListRaceOpinion              := TListRaceOpition.Create;
 
        // chercher les livres
        directoryPath := GetCurrentDir + ConstCheminLivre;
@@ -675,8 +687,6 @@ procedure TMenu.FormCreate(Sender: TObject);
 
        // Appeler la procédure SetGlobalFonts au démarrage du formulaire
        MiseEnFormeDesChamp(self);
-
-
 
        ConstArbreAttribut          := GetTexteLibelle('LAB_008');
        ConstArbreCompetence        := GetTexteLibelle('LAB_009');
