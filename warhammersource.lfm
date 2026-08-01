@@ -1269,7 +1269,6 @@ object Menu: TMenu
     Font.Quality = fqDraft
     ParentFont = False
     TabOrder = 12
-    OnClick = TabLivreClick
     OnDblClick = TabLivreDblClick
     ColWidths = (
       0

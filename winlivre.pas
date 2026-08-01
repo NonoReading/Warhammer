@@ -13,8 +13,8 @@ type
   // Structure pour stocker les données du XML
   TRaceData = record
     Code: String;
+    Libelle: String;
     Description: String;
-    Explanation: String;
   end;
   
   PRaceData = ^TRaceData;
@@ -70,7 +70,8 @@ type
     procedure ButtonFormValiderClick(Sender: TObject);
     procedure ButtonFormAnnulerClick(Sender: TObject);
     procedure ButtonFormSupprimerClick(Sender: TObject);
-    
+    procedure ChargerXMLFile(AFilePath: String);
+
   private
     // Variables
     XMLDoc: TXMLDocument;
@@ -80,7 +81,7 @@ type
     CodeDonneeSelectionnee: String;
     
     // Procédures privées
-    procedure ChargerXMLFile(AFilePath: String);
+    function GetBookLabel(BookCode: String): String;
     procedure AfficherDonneeRace(ACode: String);
     procedure NettoyerForm();
     procedure MasquerForm();
@@ -121,7 +122,7 @@ end;
 procedure TWinLivres.FormShow(Sender: TObject);
 begin
   // Afficher le bouton de chargement XML
-  ShowMessage('Bienvenue! Appuyez sur le bouton pour charger un fichier XML.');
+  // (Message supprimé pour l'instant)
 end;
 
 procedure TWinLivres.InitialiserControles();
@@ -149,12 +150,44 @@ begin
   OpenDialog := TOpenDialog.Create(Self);
   try
     OpenDialog.Filter := 'XML Files (*.xml)|*.xml|All Files (*.*)|*.*';
-    OpenDialog.InitialDir := ExtractFilePath(Application.ExeName);
+    OpenDialog.InitialDir := ExtractFilePath(Application.ExeName) + 'DATABASE';
     
     if OpenDialog.Execute then
       ChargerXMLFile(OpenDialog.FileName);
   finally
     OpenDialog.Free;
+  end;
+end;
+
+// ========== HELPER FUNCTION ==========
+function TWinLivres.GetBookLabel(BookCode: String): String;
+var
+  TextElements: TDOMNodeList;
+  I: Integer;
+  XMLElement: TDOMElement;
+  SearchCode: String;
+begin
+  Result := BookCode;  // Fallback si pas trouvé
+  
+  if XMLDoc = nil then Exit;
+  
+  // Construire le code de traduction
+  SearchCode := 'RULES-' + BookCode;
+  
+  // Chercher dans DATA_LABEL
+  TextElements := XMLDoc.GetElementsByTagName('Text');
+  
+  for I := 0 to TextElements.Count - 1 do
+  begin
+    XMLElement := TDOMElement(TextElements.Item[I]);
+    if XMLElement.GetAttribute('name') = SearchCode then
+    begin
+      // Récupérer le texte et enlever les guillemets
+      Result := XMLElement.TextContent;
+      if (Length(Result) > 0) and (Result[1] = '"') and (Result[Length(Result)] = '"') then
+        Result := Copy(Result, 2, Length(Result) - 2);
+      Exit;
+    end;
   end;
 end;
 
@@ -179,7 +212,7 @@ begin
     
     if XMLDoc = nil then
       begin
-        ShowMessage('Erreur: Impossible de charger le XML');
+        // ShowMessage('Erreur: Impossible de charger le XML');
         Exit;
       end;
     
@@ -188,9 +221,12 @@ begin
     if RacesDataList <> nil then
       RacesDataList.Clear;
     
-    // Créer le nœud racine = nom du fichier
+    // Créer le nœud racine avec le nom traduit du livre
     FileName := ExtractFileName(AFilePath);
-    NodeRoot := TreeViewLivre.Items.Add(nil, FileName);
+    // Enlever l'extension .Xml pour construire le code de traduction
+    FileName := Copy(FileName, 1, Length(FileName) - 4);
+    // Récupérer le label traduit depuis DATA_LABEL
+    NodeRoot := TreeViewLivre.Items.Add(nil, GetBookLabel(FileName));
     NodeRoot.Data := Pointer(PtrInt(0));  // 0 = chapitre
     
     // ========== RACES ==========
@@ -228,8 +264,8 @@ begin
             
             // Stocker dans la liste
             RaceData.Code := Code;
-            RaceData.Description := Description;
-            RaceData.Explanation := Explanation;
+            RaceData.Libelle := Description;
+            RaceData.Description := Explanation;
             
             New(PRaceData);
             PRaceData^ := RaceData;
@@ -268,12 +304,14 @@ begin
     NodeRoot.Expand(False);
     
     LabelFormTitle.Caption := 'XML chargé: ' + FileName;
-    ShowMessage('✅ ' + IntToStr(SpecieElements.Count) + ' races + ' + IntToStr(CareerElements.Count) + ' carrières chargées!');
+    // Message de succès supprimé pour l'instant
+    // ShowMessage('✅ ' + IntToStr(SpecieElements.Count) + ' races + ' + IntToStr(CareerElements.Count) + ' carrières chargées!');
     
   except
     on E: Exception do
-      ShowMessage('Erreur: ' + E.Message);
+      // ShowMessage('Erreur: ' + E.Message);
   end;
+
 end;
 
 // ✨ ÉVÉNEMENTS TREEVIEW
@@ -353,9 +391,9 @@ begin
           RaceData := RacesDataList.Data[I];
           if RaceData <> nil then
             begin
-              LabelFormTitle.Caption := 'Race: ' + ACode;
+              LabelFormTitle.Caption := 'Race: ' + RaceData^.Code;
               EditFormCode.Text := RaceData^.Code;
-              EditFormLib.Text := ACode;
+              EditFormLib.Text := RaceData^.Libelle;
               MemoFormDesc.Text := RaceData^.Description;
               CodeDonneeSelectionnee := ACode;
               GroupBoxForm.Visible := True;
@@ -386,7 +424,7 @@ end;
 
 procedure TWinLivres.ButtonFormValiderClick(Sender: TObject);
 begin
-  ShowMessage('Fonctionnalité d''édition non disponible en phase affichage');
+  // ShowMessage('Fonctionnalité d''édition non disponible en phase affichage');
 end;
 
 procedure TWinLivres.ButtonFormAnnulerClick(Sender: TObject);
@@ -398,7 +436,7 @@ end;
 
 procedure TWinLivres.ButtonFormSupprimerClick(Sender: TObject);
 begin
-  ShowMessage('Fonctionnalité d''édition non disponible en phase affichage');
+  // ShowMessage('Fonctionnalité d''édition non disponible en phase affichage');
 end;
 
 end.

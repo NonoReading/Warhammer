@@ -149,7 +149,6 @@ object WinLivres: TWinLivres
       Top = 90
       Width = 400
       Align = alClient
-      DefaultItemHeight = 18
       PopupMenu = PopupMenuTree
       RightClickSelect = True
       TabOrder = 1
@@ -257,7 +256,7 @@ object WinLivres: TWinLivres
           Left = 20
           Height = 375
           Top = 200
-          Width = 1049
+          Width = 850
           Font.Color = clBlack
           ParentFont = False
           ScrollBars = ssVertical

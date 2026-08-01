@@ -97,7 +97,6 @@ type
     procedure ChargerPersonnages();
     Procedure ChargeIni();
     procedure ChargerLivre(ForceMaJ: Boolean; ForceLivre: String);
-    procedure TabLivreClick({%H-}Sender: TObject);
     procedure TabLivreDblClick({%H-}Sender: TObject);
     procedure SauveIni();
     procedure TabPersonnagePrepareCanvas(Sender: TObject; {%H-}aCol, aRow: Integer;
@@ -425,105 +424,49 @@ procedure TMenu.ChargerLivre(ForceMaJ: Boolean; ForceLivre: String);
     Traduit(ValLangue, '');
   end;
 
-procedure TMenu.TabLivreClick(Sender: TObject);
-  Var
-    PRace:               StructureRace;
-    PMetier:             StructureMetier;
-    PCompetence:         StructureCompetence;
-    PTalent:             StructureTalent;
-    MessageRace:         String = '';
-    MessageMetier:       String = '';
-    MessageCompetence:   String = '';
-    MessageTalent:       String = '';
-    Message:             String = '';
-  begin
-  if (TabLivre.Row > 0) and (TabLivre.Col = ColLivreLib) then
-    begin
-      // Race du livre
-        for PRace in ListRace do
-          Begin
-            if CompareRechercheValeur(PRace.Livre, TabLivre.Cells[ColLivreCod, TabLivre.Row]) then
-              begin
-                if (MessageRace = '') then
-                  MessageRace := GetTexteLibelle('LAB_042');
-                MessageRace := MessageRace + SeparateurRetourLigne+' - '+PRace.Libelle;
-              end;
-          end;
-        if MessageRace <> '' then
-          begin
-            if Message <> '' then
-              Message := Message + SeparateurRetourLigne;
-            Message := Message + MessageRace;
-          end;
-      // Métier du livre
-        for PMetier in ListMetier do
-          Begin
-            if CompareRechercheValeur(PMetier.Livre, TabLivre.Cells[ColLivreCod, TabLivre.Row]) then
-              begin
-                if (MessageMetier = '') then
-                  MessageMetier := GetTexteLibelle('LAB_006');
-                MessageMetier := MessageMetier + SeparateurRetourLigne+' - '+PMetier.Libelle;
-              end;
-          end;
-        if MessageMetier <> '' then
-          begin
-            if Message <> '' then
-              Message := Message + SeparateurRetourLigne;
-            Message := Message + MessageMetier;
-          end;
-      // compétences du livre
-        for PCompetence in ListCompetence do
-          Begin
-            if CompareRechercheValeur(PCompetence.Livre, TabLivre.Cells[ColLivreCod, TabLivre.Row]) and (PCompetence.SousCompetence = false) then
-              begin
-                if (MessageCompetence = '') then
-                  MessageCompetence := GetTexteLibelle('LAB_009');
-                MessageCompetence := MessageCompetence + SeparateurRetourLigne+' - '+PCompetence.Libelle;
-              end;
-          end;
-        if MessageCompetence <> '' then
-          begin
-            if Message <> '' then
-              Message := Message + SeparateurRetourLigne;
-            Message := Message + MessageCompetence;
-          end;
-      // talents du livre
-        for PTalent in ListTalent do
-          Begin
-            if CompareRechercheValeur(PTalent.Livre, TabLivre.Cells[ColLivreCod, TabLivre.Row]) and (PTalent.SousTalent = false) then
-              begin
-                if (MessageTalent = '') then
-                  MessageTalent := GetTexteLibelle('LAB_007');
-                MessageTalent := MessageTalent + SeparateurRetourLigne+' - '+PTalent.Libelle;
-              end;
-          end;
-        if MessageTalent <> '' then
-          begin
-            if Message <> '' then
-              Message := Message + SeparateurRetourLigne;
-            Message := Message + MessageTalent;
-          end;
-      // Message global
-        if Message <> '' then
-          ShowMessage(Message);
-    end;
-end;
-
 procedure TMenu.TabLivreDblClick(Sender: TObject);
+var
+  BookName: String;
+  BookPath: String;
+begin
+  if (TabLivre.Row > 1) and (TabLivre.Cells[ColLivreLib, TabLivre.Row] <> '') then
   begin
-   if (TabLivre.Row > 1) then
-     if TabLivre.Cells[ColLivreLib, TabLivre.Row] <> '' then
-       if TabLivre.Cells[ColLivreSel, TabLivre.Row] <> ConstSelectionne then
-         TabLivre.Cells[ColLivreSel, TabLivre.Row] := ConstSelectionne
-       else
-         begin
-           TabLivre.Cells[ColLivreSel, TabLivre.Row] := '';
-           TabLivre.Cells[ColLivreRac, TabLivre.Row] := '';
-           TabLivre.Cells[ColLivreWor, TabLivre.Row] := '';
-         end;
-   ChargerLivre(true, '');
-   ChargerPersonnages();
-   SauveIni();
+    // Si double-click sur la PREMIÈRE colonne (sélection) → toggle + charger
+    if TabLivre.Col = ColLivreSel then
+    begin
+      // Comportement actuel : toggle sélection
+      if TabLivre.Cells[ColLivreSel, TabLivre.Row] <> ConstSelectionne then
+        TabLivre.Cells[ColLivreSel, TabLivre.Row] := ConstSelectionne
+      else
+      begin
+        TabLivre.Cells[ColLivreSel, TabLivre.Row] := '';
+        TabLivre.Cells[ColLivreRac, TabLivre.Row] := '';
+        TabLivre.Cells[ColLivreWor, TabLivre.Row] := '';
+      end;
+      ChargerLivre(true, '');
+      ChargerPersonnages();
+      SauveIni();
+    end
+
+    // Si double-click sur une AUTRE colonne → ouvrir WinLivre avec le livre
+    else
+    begin
+      // Récupérer le code du livre
+      BookName := TabLivre.Cells[ColLivreCod, TabLivre.Row];
+
+      // Construire le chemin : DATABASE\BOOK RULESBOOK.Xml
+      BookPath := 'DATABASE' + PathDelim + BookName + '.Xml';
+
+      // Créer/Ouvrir WinLivre et charger le livre
+      if not Assigned(FenLivre) then
+        FenLivre := TWinLivres.Create(Application);
+
+      FenLivre.Position := poOwnerFormCenter;
+      FenLivre.ChargerXMLFile(BookPath);  // ← Charge le livre automatiquement!
+      FenLivre.Show;
+      FenLivre.BringToFront;
+    end;
+  end;
 end;
 
 procedure TMenu.FormCreate(Sender: TObject);

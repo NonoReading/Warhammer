@@ -97,7 +97,6 @@ type
     procedure ChargerPersonnages();
     Procedure ChargeIni();
     procedure ChargerLivre(ForceMaJ: Boolean; ForceLivre: String);
-    procedure TabLivreClick({%H-}Sender: TObject);
     procedure TabLivreDblClick({%H-}Sender: TObject);
     procedure SauveIni();
     procedure TabPersonnagePrepareCanvas(Sender: TObject; {%H-}aCol, aRow: Integer;
@@ -425,90 +424,6 @@ procedure TMenu.ChargerLivre(ForceMaJ: Boolean; ForceLivre: String);
     Traduit(ValLangue, '');
   end;
 
-procedure TMenu.TabLivreClick(Sender: TObject);
-  Var
-    PRace:               StructureRace;
-    PMetier:             StructureMetier;
-    PCompetence:         StructureCompetence;
-    PTalent:             StructureTalent;
-    MessageRace:         String = '';
-    MessageMetier:       String = '';
-    MessageCompetence:   String = '';
-    MessageTalent:       String = '';
-    Message:             String = '';
-  begin
-  if (TabLivre.Row > 0) and (TabLivre.Col = ColLivreLib) then
-    begin
-      // Race du livre
-        for PRace in ListRace do
-          Begin
-            if CompareRechercheValeur(PRace.Livre, TabLivre.Cells[ColLivreCod, TabLivre.Row]) then
-              begin
-                if (MessageRace = '') then
-                  MessageRace := GetTexteLibelle('LAB_042');
-                MessageRace := MessageRace + SeparateurRetourLigne+' - '+PRace.Libelle;
-              end;
-          end;
-        if MessageRace <> '' then
-          begin
-            if Message <> '' then
-              Message := Message + SeparateurRetourLigne;
-            Message := Message + MessageRace;
-          end;
-      // Métier du livre
-        for PMetier in ListMetier do
-          Begin
-            if CompareRechercheValeur(PMetier.Livre, TabLivre.Cells[ColLivreCod, TabLivre.Row]) then
-              begin
-                if (MessageMetier = '') then
-                  MessageMetier := GetTexteLibelle('LAB_006');
-                MessageMetier := MessageMetier + SeparateurRetourLigne+' - '+PMetier.Libelle;
-              end;
-          end;
-        if MessageMetier <> '' then
-          begin
-            if Message <> '' then
-              Message := Message + SeparateurRetourLigne;
-            Message := Message + MessageMetier;
-          end;
-      // compétences du livre
-        for PCompetence in ListCompetence do
-          Begin
-            if CompareRechercheValeur(PCompetence.Livre, TabLivre.Cells[ColLivreCod, TabLivre.Row]) and (PCompetence.SousCompetence = false) then
-              begin
-                if (MessageCompetence = '') then
-                  MessageCompetence := GetTexteLibelle('LAB_009');
-                MessageCompetence := MessageCompetence + SeparateurRetourLigne+' - '+PCompetence.Libelle;
-              end;
-          end;
-        if MessageCompetence <> '' then
-          begin
-            if Message <> '' then
-              Message := Message + SeparateurRetourLigne;
-            Message := Message + MessageCompetence;
-          end;
-      // talents du livre
-        for PTalent in ListTalent do
-          Begin
-            if CompareRechercheValeur(PTalent.Livre, TabLivre.Cells[ColLivreCod, TabLivre.Row]) and (PTalent.SousTalent = false) then
-              begin
-                if (MessageTalent = '') then
-                  MessageTalent := GetTexteLibelle('LAB_007');
-                MessageTalent := MessageTalent + SeparateurRetourLigne+' - '+PTalent.Libelle;
-              end;
-          end;
-        if MessageTalent <> '' then
-          begin
-            if Message <> '' then
-              Message := Message + SeparateurRetourLigne;
-            Message := Message + MessageTalent;
-          end;
-      // Message global
-        if Message <> '' then
-          ShowMessage(Message);
-    end;
-end;
-
 procedure TMenu.TabLivreDblClick(Sender: TObject);
   begin
    if (TabLivre.Row > 1) then
@@ -581,7 +496,7 @@ procedure TMenu.FormCreate(Sender: TObject);
        ListTalentAttributModif      := TListTalentAttributModif.Create;
        ListTalentCompetenceModif    := TListTalentCompetenceModif.Create;
        ListTalentCompetenceAjoute   := TListTalentCompetenceAjoute.Create;
-       ListRaceOpinion              := TListRaceOpition.Create;
+       ListRaceOpinion              := TListRaceOpinion.Create;
 
        // chercher les livres
        directoryPath := GetCurrentDir + ConstCheminLivre;
