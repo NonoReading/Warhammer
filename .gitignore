@@ -11,9 +11,12 @@ node_modules/
 *.doc
 *.docx
 .git/
-lib/x86_64-win64/*.ppu
-*.o
-*.ppu
 
-backup/           # ← AJOUTER
-BACKUP/           # ← AJOUTER
+# Lazarus cache - REMPLACER lib/x86_64-win64/*.ppu PAR:
+lib/
+*.lps
+*.bak
+
+# Backups
+backup/
+BACKUP/
