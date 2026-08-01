@@ -149,7 +149,6 @@ object WinLivres: TWinLivres
       Top = 90
       Width = 400
       Align = alClient
-      DefaultItemHeight = 18
       PopupMenu = PopupMenuTree
       RightClickSelect = True
       TabOrder = 1
@@ -261,14 +260,13 @@ object WinLivres: TWinLivres
           Font.Color = clBlack
           ParentFont = False
           ScrollBars = ssVertical
-          WordWrap = True
           TabOrder = 2
         end
         object LabelFormAttrName: TLabel
           Left = 20
           Height = 20
           Top = 200
-          Width = 100
+          Width = 69
           Caption = 'Attribute:'
           Font.Color = clBlack
           Font.Style = [fsBold]
@@ -284,14 +282,14 @@ object WinLivres: TWinLivres
           Font.Color = clBlack
           ParentFont = False
           ReadOnly = True
-          TabOrder = 10
+          TabOrder = 7
           Visible = False
         end
         object LabelFormAttrDices: TLabel
           Left = 20
           Height = 20
           Top = 260
-          Width = 50
+          Width = 39
           Caption = 'Dices:'
           Font.Color = clBlack
           ParentColor = False
@@ -306,14 +304,14 @@ object WinLivres: TWinLivres
           Font.Color = clBlack
           ParentFont = False
           ReadOnly = True
-          TabOrder = 11
+          TabOrder = 9
           Visible = False
         end
         object LabelFormAttrBaseValue: TLabel
           Left = 150
           Height = 20
           Top = 260
-          Width = 80
+          Width = 74
           Caption = 'Base Value:'
           Font.Color = clBlack
           ParentColor = False
@@ -328,14 +326,14 @@ object WinLivres: TWinLivres
           Font.Color = clBlack
           ParentFont = False
           ReadOnly = True
-          TabOrder = 12
+          TabOrder = 11
           Visible = False
         end
         object LabelFormAttrFormula: TLabel
           Left = 20
           Height = 20
           Top = 320
-          Width = 80
+          Width = 57
           Caption = 'Formula:'
           Font.Color = clBlack
           ParentColor = False
@@ -357,7 +355,7 @@ object WinLivres: TWinLivres
           Left = 20
           Height = 20
           Top = 380
-          Width = 100
+          Width = 93
           Caption = 'Component 1:'
           Font.Color = clBlack
           ParentColor = False
@@ -372,7 +370,7 @@ object WinLivres: TWinLivres
           Font.Color = clBlack
           ParentFont = False
           ReadOnly = True
-          TabOrder = 20
+          TabOrder = 4
           Visible = False
         end
         object EditFormComponent1Coeff: TEdit
@@ -383,14 +381,14 @@ object WinLivres: TWinLivres
           Font.Color = clBlack
           ParentFont = False
           ReadOnly = True
-          TabOrder = 21
+          TabOrder = 5
           Visible = False
         end
         object LabelFormComponent2: TLabel
           Left = 20
           Height = 20
           Top = 440
-          Width = 100
+          Width = 93
           Caption = 'Component 2:'
           Font.Color = clBlack
           ParentColor = False
@@ -405,7 +403,7 @@ object WinLivres: TWinLivres
           Font.Color = clBlack
           ParentFont = False
           ReadOnly = True
-          TabOrder = 22
+          TabOrder = 6
           Visible = False
         end
         object EditFormComponent2Coeff: TEdit
@@ -416,14 +414,14 @@ object WinLivres: TWinLivres
           Font.Color = clBlack
           ParentFont = False
           ReadOnly = True
-          TabOrder = 23
+          TabOrder = 8
           Visible = False
         end
         object LabelFormComponent3: TLabel
           Left = 20
           Height = 20
           Top = 500
-          Width = 100
+          Width = 93
           Caption = 'Component 3:'
           Font.Color = clBlack
           ParentColor = False
@@ -438,7 +436,7 @@ object WinLivres: TWinLivres
           Font.Color = clBlack
           ParentFont = False
           ReadOnly = True
-          TabOrder = 24
+          TabOrder = 10
           Visible = False
         end
         object EditFormComponent3Coeff: TEdit
@@ -449,7 +447,17 @@ object WinLivres: TWinLivres
           Font.Color = clBlack
           ParentFont = False
           ReadOnly = True
-          TabOrder = 25
+          TabOrder = 12
+          Visible = False
+        end
+        object LabelFormSkills: TLabel
+          Left = 20
+          Height = 1
+          Top = 20
+          Width = 1
+          Font.Color = clBlack
+          ParentColor = False
+          ParentFont = False
           Visible = False
         end
         object PanelFormButtons: TPanel
@@ -737,6 +745,34 @@ object WinLivres: TWinLivres
           end
         end
       end
+    end
+    object StringGridSkills: TStringGrid
+      Left = 20
+      Height = 500
+      Top = 45
+      Width = 820
+      Columns = <      
+        item
+          Title.Caption = 'Code'
+          Width = 0
+        end      
+        item
+          Title.Caption = 'Libellé'
+          Width = 500
+        end      
+        item
+          Title.Caption = 'Spécialisation'
+          Width = 200
+        end      
+        item
+          Title.Caption = 'Sélectionné'
+          Width = 80
+        end>
+      Font.Color = clBlack
+      ParentFont = False
+      RowCount = 1
+      TabOrder = 1
+      Visible = False
     end
   end
   object PopupMenuTree: TPopupMenu

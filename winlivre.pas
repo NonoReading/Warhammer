@@ -6,7 +6,7 @@ interface
 
 uses
   Classes, SysUtils, Forms, Controls, StdCtrls, ComCtrls, ExtCtrls, Menus,
-  Dialogs, Graphics, BCButton, ChargeConstantes, ChargeTexte,
+  Dialogs, Graphics, BCButton, ChargeConstantes, ChargeTexte, ChargeCompetence, UnitCalcul, Grids,
   Generics.Collections, DOM, XMLRead, XMLWrite, FGL;
 
 type
@@ -46,6 +46,7 @@ type
     SplitterMain: TSplitter;
     
     // Left Side - TreeView
+    PanelTopButtons: TPanel;
     LabelLivre: TLabel;
     ButtonChargerXML: TBCButton;
     TreeViewLivre: TTreeView;
@@ -84,6 +85,10 @@ type
     EditFormComponent3Attr: TEdit;
     EditFormComponent3Coeff: TEdit;
     
+    // Skills Grid (hidden until skills section selected)
+    LabelFormSkills: TLabel;
+    StringGridSkills: TStringGrid;
+    
     // Buttons
     PanelFormButtons: TPanel;
     ButtonFormValider: TBCButton;
@@ -118,6 +123,7 @@ type
     AttributesDataList: TAttributDataMap;  // Attributs de la race actuelle
     AttributeValuesMap: TStringList;  // Map attribute codes to raw values
     RaceLibelleToCodeMap: TStringList;  // Map race label to code
+    RaceSkillsData: TStringList;        // Compétences de la race sélectionnée
     NodeSelectionnee: TTreeNode;
     TypeNodeSelectionnee: String;  // 'CHAPITRE', 'DONNEE' ou 'ATTRIBUT'
     CodeDonneeSelectionnee: String;
@@ -133,6 +139,9 @@ type
     function TranslateBATTRCode(BATTRCode: String): String;
     function ParseFormulaComponents(Formula: String): TFormulaComponentArray;
     procedure LoadAttributesForRace(RaceElement: TDOMElement; RaceNode: TTreeNode; RaceCode: String);
+    procedure LoadSkillsForRaceTree(RaceElement: TDOMElement; RaceNode: TTreeNode; RaceCode: String);
+    procedure LoadSkillsForRace(RaceElement: TDOMElement; RaceCode: String);
+    procedure AfficherSkillsForRace(RaceCode: String);
     procedure ShowComponentControl(Index: Integer; AttrLabel: String; Coefficient: String);
     procedure HideComponentControls(Index: Integer);
     procedure NettoyerForm();
@@ -158,6 +167,7 @@ begin
   AttributesDataList := TAttributDataMap.Create;
   AttributeValuesMap := TStringList.Create;
   RaceLibelleToCodeMap := TStringList.Create;
+  RaceSkillsData := TStringList.Create;
   NodeSelectionnee := nil;
   TypeNodeSelectionnee := '';
   CodeDonneeSelectionnee := '';
@@ -195,6 +205,7 @@ begin
   LabelFormAttrDices.Caption := GetTexteLibelle('LAB_161'); // 'Dices'
   LabelFormAttrBaseValue.Caption := GetTexteLibelle('LAB_025'); // 'Value'
   LabelFormAttrFormula.Caption := GetTexteLibelle('LAB_020'); // 'Calculation'
+  LabelFormSkills.Caption := GetTexteLibelle('LAB_087');  // 'Specie's Skills'
   
   // Mettre à jour les captions pour Composants
   LabelFormComponent1.Caption := 'Component 1:';
@@ -448,6 +459,61 @@ begin
   end;
 end;
 
+// ========== LOAD SKILLS FOR RACE IN TREE ==========
+procedure TWinLivres.LoadSkillsForRaceTree(RaceElement: TDOMElement; RaceNode: TTreeNode; RaceCode: String);
+var
+  SkillChapter: TDOMNode;
+  SkillElements: TDOMNodeList;
+  I: Integer;
+  SkillCode, SkillDesc: String;
+  NodeSkills, NodeSkill: TTreeNode;
+  SkillNode: TDOMNode;
+  Competence: StructureCompetence;
+begin
+  SkillChapter := RaceElement.FindNode('SUBCHAPTER_SKILL');
+  
+  if SkillChapter = nil then Exit;
+  
+  // Créer la branche "Compétences" (traduite)
+  NodeSkills := TreeViewLivre.Items.AddChild(RaceNode, GetTexteLibelle('LAB_087'));
+  NodeSkills.Data := Pointer(PtrInt(3));  // 3 = skills chapter
+  
+  // Récupérer les enfants directs de SUBCHAPTER_SKILL (pas récursif!)
+  SkillElements := SkillChapter.ChildNodes;
+  
+  if SkillElements.Count > 0 then
+  begin
+    for I := 0 to SkillElements.Count - 1 do
+    begin
+      SkillNode := SkillElements[I];
+      if SkillNode.NodeName = 'Skill' then
+      begin
+        SkillCode := Trim(SkillNode.TextContent);
+        // Enlever les guillemets
+        if (Length(SkillCode) > 0) and (SkillCode[1] = '"') then
+          SkillCode := Copy(SkillCode, 2, Length(SkillCode) - 2);
+        if (Length(SkillCode) > 0) and (SkillCode[Length(SkillCode)] = '"') then
+          SkillCode := Copy(SkillCode, 1, Length(SkillCode) - 1);
+        
+        if SkillCode = '' then Continue;
+        
+        // Chercher dans ListCompetence
+        Competence := ChercheCompetence(SkillCode);
+        if Competence.CodeCompetence <> '' then
+        begin
+          SkillDesc := Competence.Libelle;
+          
+          // Créer un nœud pour cette compétence
+          NodeSkill := TreeViewLivre.Items.AddChild(NodeSkills, SkillDesc);
+          NodeSkill.Data := Pointer(PtrInt(4));  // 4 = skill item
+          // Store code in ImageIndex for retrieval (not in Text which would overwrite the label)
+          // NodeSkill.ImageIndex not used, safe to use for storage
+        end;
+      end;
+    end;
+  end;
+end;
+
 // ========== AFFICHER DONNÉE ATTRIBUT ==========
 procedure TWinLivres.AfficherDonneeAttribut(ACode: String);
 var
@@ -674,10 +740,13 @@ begin
             NodeRace := TreeViewLivre.Items.AddChild(NodeRaces, RaceData.Libelle);
             NodeRace.Data := Pointer(PtrInt(1));  // 1 = donnée
             // Store mapping of label to code
-            RaceLibelleToCodeMap.Values[RaceData.Libelle] := Code;
+            RaceLibelleToCodeMap.Values[RemoveQuotes(RaceData.Libelle)] := Code;
             
             // ========== CHARGER LES ATTRIBUTS DE CETTE RACE ==========
             LoadAttributesForRace(XMLElement, NodeRace, Code);
+            
+            // ========== CHARGER LES COMPÉTENCES DE CETTE RACE DANS L'ARBRE ==========
+            LoadSkillsForRaceTree(XMLElement, NodeRace, Code);
           end;
       end;
     
@@ -720,6 +789,9 @@ end;
 // ✨ ÉVÉNEMENTS TREEVIEW
 
 procedure TWinLivres.TreeViewLivreChange(Sender: TObject; Node: TTreeNode);
+var
+  CleanedLabel: String;
+  RaceCodeFound: String;
 begin
   if Node = nil then Exit;
   
@@ -747,6 +819,31 @@ begin
          // Display attribute name in title
          LabelFormTitle.Caption := Copy(Node.Text, 1, Pos(': ', Node.Text) - 1);
          AfficherDonneeAttribut(CurrentAttributeValue);
+       end;
+    3: begin
+         // C'est une branche "Compétences de race"
+         TypeNodeSelectionnee := 'CHAPITRE';
+         // Afficher toutes les compétences de la race parente
+         if Node.Parent <> nil then
+         begin
+           // Remove quotes from Node.Parent.Text to match RaceLibelleToCodeMap keys
+           CleanedLabel := StringReplace(Node.Parent.Text, '"', '', [rfReplaceAll]);
+           RaceCodeFound := RaceLibelleToCodeMap.Values[CleanedLabel];
+           
+           LabelFormTitle.Caption := GetTexteLibelle('LAB_087') + ': ' + Node.Parent.Text;
+           
+           if RaceCodeFound <> '' then
+             AfficherSkillsForRace(RaceCodeFound);
+         end
+         else
+           MasquerForm();
+       end;
+    4: begin
+         // C'est un item "Compétence"
+         TypeNodeSelectionnee := 'COMPETENCE';
+         LabelFormTitle.Caption := Node.Text;
+         // Pour l'instant, juste afficher le nom
+         MasquerForm();
        end;
   else
     MasquerForm();
@@ -787,6 +884,125 @@ end;
 procedure TWinLivres.MenuItemSupprimerClick(Sender: TObject);
 begin
   // À implémenter
+end;
+
+// ========== LOAD SKILLS FOR RACE ==========
+procedure TWinLivres.LoadSkillsForRace(RaceElement: TDOMElement; RaceCode: String);
+var
+  SkillChapter: TDOMNode;
+  SkillElements: TDOMNodeList;
+  I: Integer;
+  SkillCode: String;
+  SkillNode: TDOMNode;
+begin
+  RaceSkillsData.Clear;
+  
+  // Trouver SUBCHAPTER_SKILL
+  SkillChapter := RaceElement.FindNode('SUBCHAPTER_SKILL');
+  if SkillChapter = nil then Exit;
+  
+  if SkillChapter <> nil then
+  begin
+    SkillElements := SkillChapter.ChildNodes;
+    
+    for I := 0 to SkillElements.Count - 1 do
+    begin
+      SkillNode := SkillElements[I];
+      if SkillNode.NodeName = 'Skill' then
+      begin
+        // Récupérer le code de la compétence (le texte du nœud)
+        SkillCode := Trim(SkillNode.TextContent);
+        // Enlever les guillemets si présents
+        if (Length(SkillCode) > 0) and (SkillCode[1] = '"') then
+          SkillCode := Copy(SkillCode, 2, Length(SkillCode) - 2);
+        if (Length(SkillCode) > 0) and (SkillCode[Length(SkillCode)] = '"') then
+          SkillCode := Copy(SkillCode, 1, Length(SkillCode) - 1);
+        
+        if SkillCode <> '' then
+          RaceSkillsData.Add(SkillCode);
+      end;
+    end;
+  end;
+end;
+
+// ========== AFFICHER SKILLS FOR RACE ==========
+procedure TWinLivres.AfficherSkillsForRace(RaceCode: String);
+var
+  RaceElement: TDOMElement;
+  SpecieElements: TDOMNodeList;
+  I, RowIdx: Integer;
+  SkillCode: String;
+  Competence: StructureCompetence;
+begin
+
+  // Masquer les contrôles de race et attributs
+  LabelFormCode.Visible := False;
+  EditFormCode.Visible := False;
+  LabelFormLib.Visible := False;
+  EditFormLib.Visible := False;
+  LabelFormDesc.Visible := False;
+  MemoFormDesc.Visible := False;
+  LabelFormAttrName.Visible := False;
+  EditFormAttrName.Visible := False;
+  
+  // Vider le StringGrid
+  StringGridSkills.RowCount := 1;
+  
+  // Chercher la race dans le XML
+  SpecieElements := XMLDoc.GetElementsByTagName('Specie');
+  RaceElement := nil;
+  
+  for I := 0 to SpecieElements.Count - 1 do
+  begin
+    if TDOMElement(SpecieElements[I]).GetAttribute('id') = RaceCode then
+    begin
+      RaceElement := TDOMElement(SpecieElements[I]);
+      Break;
+    end;
+  end;
+  
+  if RaceElement = nil then
+    Exit;
+  
+  // Charger les compétences de cette race
+  LoadSkillsForRace(RaceElement, RaceCode);
+  
+  // Afficher dans le StringGrid
+  // Boucler sur TOUTES les compétences de ListCompetence
+  if ListCompetence.Count > 0 then
+  begin
+    StringGridSkills.RowCount := ListCompetence.Count + 1;
+    
+    for I := 0 to ListCompetence.Count - 1 do
+    begin
+      RowIdx := I + 1;
+      Competence := ListCompetence[I];
+      
+      // Col 0: Code (invisible)
+      StringGridSkills.Cells[0, RowIdx] := Competence.CodeCompetence;
+      // Col 1: Libellé
+      StringGridSkills.Cells[1, RowIdx] := Competence.Libelle;
+      // Col 2: Spécialisation (vide pour maintenant)
+      StringGridSkills.Cells[2, RowIdx] := '';
+      
+      // Vérifier si cette compétence est dans la race
+      if RaceSkillsData.IndexOf(Competence.CodeCompetence) >= 0 then
+        StringGridSkills.Cells[3, RowIdx] := '✓'  // Ou 'Oui'
+      else
+        StringGridSkills.Cells[3, RowIdx] := '';   // Ou 'Non'
+    end;
+
+    LabelFormSkills.Visible := True;
+    StringGridSkills.Visible := True;
+    StringGridSkills.BringToFront;
+  end
+  else
+  begin
+    LabelFormSkills.Visible := False;
+    StringGridSkills.Visible := False;
+  end;
+  
+  GroupBoxForm.Visible := False;
 end;
 
 // ✨ AFFICHAGE DYNAMIQUE
@@ -873,6 +1089,10 @@ begin
   LabelFormComponent3.Visible := False;
   EditFormComponent3Attr.Visible := False;
   EditFormComponent3Coeff.Visible := False;
+  
+  // Hide skills grid
+  LabelFormSkills.Visible := False;
+  StringGridSkills.Visible := False;
 end;
 
 procedure TWinLivres.MasquerForm();

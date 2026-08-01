@@ -256,11 +256,209 @@ object WinLivres: TWinLivres
           Left = 20
           Height = 375
           Top = 200
-          Width = 850
+          Width = 900
           Font.Color = clBlack
           ParentFont = False
           ScrollBars = ssVertical
           TabOrder = 2
+        end
+        object LabelFormAttrName: TLabel
+          Left = 20
+          Height = 20
+          Top = 200
+          Width = 69
+          Caption = 'Attribute:'
+          Font.Color = clBlack
+          Font.Style = [fsBold]
+          ParentColor = False
+          ParentFont = False
+          Visible = False
+        end
+        object EditFormAttrName: TEdit
+          Left = 20
+          Height = 28
+          Top = 220
+          Width = 375
+          Font.Color = clBlack
+          ParentFont = False
+          ReadOnly = True
+          TabOrder = 7
+          Visible = False
+        end
+        object LabelFormAttrDices: TLabel
+          Left = 20
+          Height = 20
+          Top = 260
+          Width = 39
+          Caption = 'Dices:'
+          Font.Color = clBlack
+          ParentColor = False
+          ParentFont = False
+          Visible = False
+        end
+        object EditFormAttrDices: TEdit
+          Left = 20
+          Height = 28
+          Top = 280
+          Width = 100
+          Font.Color = clBlack
+          ParentFont = False
+          ReadOnly = True
+          TabOrder = 9
+          Visible = False
+        end
+        object LabelFormAttrBaseValue: TLabel
+          Left = 150
+          Height = 20
+          Top = 260
+          Width = 74
+          Caption = 'Base Value:'
+          Font.Color = clBlack
+          ParentColor = False
+          ParentFont = False
+          Visible = False
+        end
+        object EditFormAttrBaseValue: TEdit
+          Left = 150
+          Height = 28
+          Top = 280
+          Width = 100
+          Font.Color = clBlack
+          ParentFont = False
+          ReadOnly = True
+          TabOrder = 11
+          Visible = False
+        end
+        object LabelFormAttrFormula: TLabel
+          Left = 20
+          Height = 20
+          Top = 320
+          Width = 57
+          Caption = 'Formula:'
+          Font.Color = clBlack
+          ParentColor = False
+          ParentFont = False
+          Visible = False
+        end
+        object EditFormAttrFormula: TEdit
+          Left = 20
+          Height = 28
+          Top = 340
+          Width = 600
+          Font.Color = clBlack
+          ParentFont = False
+          ReadOnly = True
+          TabOrder = 13
+          Visible = False
+        end
+        object LabelFormComponent1: TLabel
+          Left = 20
+          Height = 20
+          Top = 380
+          Width = 93
+          Caption = 'Component 1:'
+          Font.Color = clBlack
+          ParentColor = False
+          ParentFont = False
+          Visible = False
+        end
+        object EditFormComponent1Attr: TEdit
+          Left = 20
+          Height = 28
+          Top = 400
+          Width = 200
+          Font.Color = clBlack
+          ParentFont = False
+          ReadOnly = True
+          TabOrder = 4
+          Visible = False
+        end
+        object EditFormComponent1Coeff: TEdit
+          Left = 230
+          Height = 28
+          Top = 400
+          Width = 50
+          Font.Color = clBlack
+          ParentFont = False
+          ReadOnly = True
+          TabOrder = 5
+          Visible = False
+        end
+        object LabelFormComponent2: TLabel
+          Left = 20
+          Height = 20
+          Top = 440
+          Width = 93
+          Caption = 'Component 2:'
+          Font.Color = clBlack
+          ParentColor = False
+          ParentFont = False
+          Visible = False
+        end
+        object EditFormComponent2Attr: TEdit
+          Left = 20
+          Height = 28
+          Top = 460
+          Width = 200
+          Font.Color = clBlack
+          ParentFont = False
+          ReadOnly = True
+          TabOrder = 6
+          Visible = False
+        end
+        object EditFormComponent2Coeff: TEdit
+          Left = 230
+          Height = 28
+          Top = 460
+          Width = 50
+          Font.Color = clBlack
+          ParentFont = False
+          ReadOnly = True
+          TabOrder = 8
+          Visible = False
+        end
+        object LabelFormComponent3: TLabel
+          Left = 20
+          Height = 20
+          Top = 500
+          Width = 93
+          Caption = 'Component 3:'
+          Font.Color = clBlack
+          ParentColor = False
+          ParentFont = False
+          Visible = False
+        end
+        object EditFormComponent3Attr: TEdit
+          Left = 20
+          Height = 28
+          Top = 520
+          Width = 200
+          Font.Color = clBlack
+          ParentFont = False
+          ReadOnly = True
+          TabOrder = 10
+          Visible = False
+        end
+        object EditFormComponent3Coeff: TEdit
+          Left = 230
+          Height = 28
+          Top = 520
+          Width = 50
+          Font.Color = clBlack
+          ParentFont = False
+          ReadOnly = True
+          TabOrder = 12
+          Visible = False
+        end
+        object LabelFormSkills: TLabel
+          Left = 20
+          Height = 1
+          Top = 20
+          Width = 1
+          Font.Color = clBlack
+          ParentColor = False
+          ParentFont = False
+          Visible = False
         end
         object PanelFormButtons: TPanel
           Left = 20
@@ -547,6 +745,34 @@ object WinLivres: TWinLivres
           end
         end
       end
+    end
+    object StringGridSkills: TStringGrid
+      Left = 20
+      Height = 500
+      Top = 45
+      Width = 820
+      Columns = <      
+        item
+          Title.Caption = 'Code'
+          Width = 0
+        end      
+        item
+          Title.Caption = 'Libellé'
+          Width = 500
+        end      
+        item
+          Title.Caption = 'Spécialisation'
+          Width = 200
+        end      
+        item
+          Title.Caption = 'Sélectionné'
+          Width = 80
+        end>
+      Font.Color = clBlack
+      ParentFont = False
+      RowCount = 1
+      TabOrder = 1
+      Visible = False
     end
   end
   object PopupMenuTree: TPopupMenu
