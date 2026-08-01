@@ -436,6 +436,10 @@ ifically your Strength, Endurance and Mental Strength Bonuses (abbreviations BF,
 <Text name="RULES-LAB_154">"New book"</Text>
 <Text name="RULES-LAB_155">"Open book"</Text>
 <Text name="RULES-LAB_156">"Corruption"</Text>
+<Text name="RULES-LAB_157">"Description"</Text>
+<Text name="RULES-LAB_158">"5 Levels"</Text>
+<Text name="RULES-LAB_159">"Damage"</Text>
+<Text name="RULES-LAB_160">"Protection"</Text>
 <Text name="RULES-PDF_MAIN1_NAME">"Name"</Text>
 <Text name="RULES-PDF_MAIN1_SPECIES">"Species"</Text>
 <Text name="RULES-PDF_MAIN1_CLASS">"Class"</Text>
