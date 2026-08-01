@@ -6,7 +6,7 @@ interface
 
 uses
   Classes, SysUtils, Forms, Controls, StdCtrls, ComCtrls, ExtCtrls, Menus,
-  Dialogs, Graphics, BCButton, ChargeConstantes,
+  Dialogs, Graphics, BCButton, ChargeConstantes, ChargeTexte,
   Generics.Collections, DOM, XMLRead, XMLWrite, FGL;
 
 type
@@ -19,6 +19,25 @@ type
   
   PRaceData = ^TRaceData;
   TRaceDataMap = specialize TFPGMap<String, PRaceData>;
+  
+  // Structure pour les attributs
+  TAttributData = record
+    Code: String;
+    Libelle: String;
+    Valeur: String;  // "2d10+20" ou "1xBATTR_S+2xBATTR_T..."
+  end;
+  
+  PAttributData = ^TAttributData;
+  TAttributDataMap = specialize TFPGMap<String, PAttributData>;
+  
+  // Structure pour les composants d'une formule calculée
+  TFormulaComponent = record
+    Coefficient: Integer;     // 1, 2, 0, etc.
+    AttrCode: String;         // BATTR_S, BATTR_T, BATTR_WP
+    AttrLabel: String;        // "Strength", "Toughness", etc.
+  end;
+  
+  TFormulaComponentArray = array of TFormulaComponent;
   
   TWinLivres = class(TForm)
     // Panels
@@ -43,6 +62,27 @@ type
     EditFormLib: TEdit;
     LabelFormDesc: TLabel;
     MemoFormDesc: TMemo;
+    
+    // Attribute Controls (hidden until attribute selected)
+    LabelFormAttrName: TLabel;
+    EditFormAttrName: TEdit;
+    LabelFormAttrDices: TLabel;
+    EditFormAttrDices: TEdit;
+    LabelFormAttrBaseValue: TLabel;
+    EditFormAttrBaseValue: TEdit;
+    LabelFormAttrFormula: TLabel;
+    EditFormAttrFormula: TEdit;
+    
+    // Component Controls for calculated attributes (up to 3 components)
+    LabelFormComponent1: TLabel;
+    EditFormComponent1Attr: TEdit;
+    EditFormComponent1Coeff: TEdit;
+    LabelFormComponent2: TLabel;
+    EditFormComponent2Attr: TEdit;
+    EditFormComponent2Coeff: TEdit;
+    LabelFormComponent3: TLabel;
+    EditFormComponent3Attr: TEdit;
+    EditFormComponent3Coeff: TEdit;
     
     // Buttons
     PanelFormButtons: TPanel;
@@ -70,25 +110,37 @@ type
     procedure ButtonFormValiderClick(Sender: TObject);
     procedure ButtonFormAnnulerClick(Sender: TObject);
     procedure ButtonFormSupprimerClick(Sender: TObject);
-    procedure ChargerXMLFile(AFilePath: String);
-
+    
   private
     // Variables
     XMLDoc: TXMLDocument;
     RacesDataList: TRaceDataMap;
+    AttributesDataList: TAttributDataMap;  // Attributs de la race actuelle
+    AttributeValuesMap: TStringList;  // Map attribute codes to raw values
+    RaceLibelleToCodeMap: TStringList;  // Map race label to code
     NodeSelectionnee: TTreeNode;
-    TypeNodeSelectionnee: String;  // 'CHAPITRE' ou 'DONNEE'
+    TypeNodeSelectionnee: String;  // 'CHAPITRE', 'DONNEE' ou 'ATTRIBUT'
     CodeDonneeSelectionnee: String;
+    CurrentRaceCode: String;        // Store code of selected race
+    CurrentAttributeValue: String;  // Store raw attribute value for display
     
     // Procédures privées
     function GetBookLabel(BookCode: String): String;
     procedure AfficherDonneeRace(ACode: String);
+    procedure AfficherDonneeAttribut(ACode: String);
+    procedure ParseAttributValue(Valeur: String; out AttrType: String; out Dices: String; out BaseValue: String; out SimpleValue: String; out Formula: String);
+    function GetAttributLabel(CodeAttribut: String): String;
+    function TranslateBATTRCode(BATTRCode: String): String;
+    function ParseFormulaComponents(Formula: String): TFormulaComponentArray;
+    procedure LoadAttributesForRace(RaceElement: TDOMElement; RaceNode: TTreeNode; RaceCode: String);
+    procedure ShowComponentControl(Index: Integer; AttrLabel: String; Coefficient: String);
+    procedure HideComponentControls(Index: Integer);
     procedure NettoyerForm();
     procedure MasquerForm();
     procedure InitialiserControles();
     
   public
-
+    procedure ChargerXMLFile(AFilePath: String);
   end;
 
 var
@@ -103,9 +155,14 @@ implementation
 procedure TWinLivres.FormCreate(Sender: TObject);
 begin
   RacesDataList := TRaceDataMap.Create;
+  AttributesDataList := TAttributDataMap.Create;
+  AttributeValuesMap := TStringList.Create;
+  RaceLibelleToCodeMap := TStringList.Create;
   NodeSelectionnee := nil;
   TypeNodeSelectionnee := '';
   CodeDonneeSelectionnee := '';
+  CurrentRaceCode := '';
+  CurrentAttributeValue := '';
   XMLDoc := nil;
   
   // Initialiser les contrôles
@@ -127,16 +184,37 @@ end;
 
 procedure TWinLivres.InitialiserControles();
 begin
-  // Mettre à jour les captions
+  // Mettre à jour les captions pour Races
   LabelLivre.Caption := 'Fichier XML:';
   LabelFormCode.Caption := 'Code:';
   LabelFormLib.Caption := 'Libelle:';
   LabelFormDesc.Caption := 'Description:';
   
+  // Mettre à jour les captions pour Attributs
+  LabelFormAttrName.Caption := GetTexteLibelle('LAB_008');  // 'Attribute'
+  LabelFormAttrDices.Caption := GetTexteLibelle('LAB_161'); // 'Dices'
+  LabelFormAttrBaseValue.Caption := GetTexteLibelle('LAB_025'); // 'Value'
+  LabelFormAttrFormula.Caption := GetTexteLibelle('LAB_020'); // 'Calculation'
+  
+  // Mettre à jour les captions pour Composants
+  LabelFormComponent1.Caption := 'Component 1:';
+  LabelFormComponent2.Caption := 'Component 2:';
+  LabelFormComponent3.Caption := 'Component 3:';
+  
   // Rendre READ-ONLY pour l'affichage
   EditFormCode.ReadOnly := True;
   EditFormLib.ReadOnly := True;
   MemoFormDesc.ReadOnly := True;
+  EditFormAttrName.ReadOnly := True;
+  EditFormAttrDices.ReadOnly := True;
+  EditFormAttrBaseValue.ReadOnly := True;
+  EditFormAttrFormula.ReadOnly := True;
+  EditFormComponent1Attr.ReadOnly := True;
+  EditFormComponent1Coeff.ReadOnly := True;
+  EditFormComponent2Attr.ReadOnly := True;
+  EditFormComponent2Coeff.ReadOnly := True;
+  EditFormComponent3Attr.ReadOnly := True;
+  EditFormComponent3Coeff.ReadOnly := True;
   
   MasquerForm();
 end;
@@ -187,6 +265,327 @@ begin
       if (Length(Result) > 0) and (Result[1] = '"') and (Result[Length(Result)] = '"') then
         Result := Copy(Result, 2, Length(Result) - 2);
       Exit;
+    end;
+  end;
+end;
+
+// ========== PARSE ATTRIBUTE VALUE ==========
+procedure TWinLivres.ParseAttributValue(Valeur: String; out AttrType: String; out Dices: String; out BaseValue: String; out SimpleValue: String; out Formula: String);
+var
+  PosD10: Integer;
+  PosPlus: Integer;
+  DicesPart: String;
+begin
+  Dices := '';
+  BaseValue := '';
+  SimpleValue := '';
+  Formula := '';
+  AttrType := '';
+  
+  // Enlever les guillemets si présents
+  if (Length(Valeur) > 0) and (Valeur[1] = '"') then
+    Valeur := Copy(Valeur, 2, Length(Valeur) - 2);
+  if (Length(Valeur) > 0) and (Valeur[Length(Valeur)] = '"') then
+    Valeur := Copy(Valeur, 1, Length(Valeur) - 1);
+  
+  PosD10 := Pos('d10', Valeur);
+  
+  if PosD10 > 0 then
+  begin
+    // Type 1: Format simple avec dés: "2d10+20"
+    AttrType := 'DICES';
+    DicesPart := Copy(Valeur, 1, PosD10 - 1);
+    Dices := DicesPart;
+    
+    // Chercher la partie +X après d10
+    PosPlus := Pos('+', Valeur);
+    if PosPlus > 0 then
+      BaseValue := Copy(Valeur, PosPlus + 1, Length(Valeur))
+    else
+      BaseValue := '0';
+  end
+  else if Pos('xBATTR_', Valeur) > 0 then
+  begin
+    // Type 2: Format complexe avec références à attributs: "1xBATTR_S+2xBATTR_T..."
+    AttrType := 'FORMULA';
+    Formula := Valeur;
+  end
+  else
+  begin
+    // Type 3: Valeur fixe simple: "2", "1", "3", "4"
+    AttrType := 'SIMPLE';
+    SimpleValue := Valeur;
+  end;
+end;
+
+// ========== TRANSLATE BATTR CODE ==========
+function TWinLivres.TranslateBATTRCode(BATTRCode: String): String;
+var
+  AttrCode: String;
+begin
+  // BATTR_S → RULES-ATTR_S, etc.
+  AttrCode := 'RULES-ATTR_' + Copy(BATTRCode, 7, Length(BATTRCode));
+  Result := GetAttributLabel(AttrCode);
+end;
+
+// ========== PARSE FORMULA COMPONENTS ==========
+function TWinLivres.ParseFormulaComponents(Formula: String): TFormulaComponentArray;
+var
+  Parts: TStringList;
+  I: Integer;
+  Part: String;
+  PosX: Integer;
+  Coefficient: String;
+  AttrCode: String;
+  Component: TFormulaComponent;
+begin
+  SetLength(Result, 0);
+  
+  // Enlever les guillemets
+  if (Length(Formula) > 0) and (Formula[1] = '"') then
+    Formula := Copy(Formula, 2, Length(Formula) - 2);
+  if (Length(Formula) > 0) and (Formula[Length(Formula)] = '"') then
+    Formula := Copy(Formula, 1, Length(Formula) - 1);
+  
+  // Remplacer les '+' par des séparateurs
+  Formula := StringReplace(Formula, '+', '|', [rfReplaceAll]);
+  Formula := StringReplace(Formula, '|', '+', [rfReplaceAll]);
+  
+  Parts := TStringList.Create;
+  try
+    ExtractStrings(['+'], [], PChar(Formula), Parts);
+    
+    for I := 0 to Parts.Count - 1 do
+    begin
+      Part := Trim(Parts[I]);
+      if Part = '' then Continue;
+      
+      // Parser "1xBATTR_S"
+      PosX := Pos('x', Part);
+      if PosX > 0 then
+      begin
+        Coefficient := Copy(Part, 1, PosX - 1);
+        AttrCode := Copy(Part, PosX + 1, Length(Part));
+        
+        Component.Coefficient := StrToIntDef(Coefficient, 0);
+        Component.AttrCode := AttrCode;
+        Component.AttrLabel := TranslateBATTRCode(AttrCode);
+        
+        SetLength(Result, Length(Result) + 1);
+        Result[Length(Result) - 1] := Component;
+      end;
+    end;
+  finally
+    Parts.Free;
+  end;
+end;
+
+// ========== GET ATTRIBUTE LABEL ==========
+function TWinLivres.GetAttributLabel(CodeAttribut: String): String;
+var
+  TextElements: TDOMNodeList;
+  I: Integer;
+  XMLElement: TDOMElement;
+begin
+  Result := CodeAttribut;  // Fallback
+  
+  if XMLDoc = nil then Exit;
+  
+  // Chercher dans DATA_LABEL
+  TextElements := XMLDoc.GetElementsByTagName('Text');
+  
+  for I := 0 to TextElements.Count - 1 do
+  begin
+    XMLElement := TDOMElement(TextElements.Item[I]);
+    if XMLElement.GetAttribute('name') = CodeAttribut then
+    begin
+      Result := XMLElement.TextContent;
+      if (Length(Result) > 0) and (Result[1] = '"') and (Result[Length(Result)] = '"') then
+        Result := Copy(Result, 2, Length(Result) - 2);
+      Exit;
+    end;
+  end;
+end;
+
+// ========== LOAD ATTRIBUTES FOR RACE ==========
+procedure TWinLivres.LoadAttributesForRace(RaceElement: TDOMElement; RaceNode: TTreeNode; RaceCode: String);
+var
+  AttrChapter: TDOMNode;
+  AttrElements: TDOMNodeList;
+  I: Integer;
+  AttrElement: TDOMElement;
+  AttrCode, AttrValue: String;
+  NodeAttributes, NodeAttr: TTreeNode;
+  AttrData: TAttributData;
+  PAttrData: PAttributData;
+begin
+  // Chercher la section SUBCHAPTER_ATTR
+  AttrChapter := RaceElement.FindNode('SUBCHAPTER_ATTR');
+  
+  if AttrChapter = nil then Exit;
+  
+  // Créer la branche "Attributs"
+  NodeAttributes := TreeViewLivre.Items.AddChild(RaceNode, GetAttributLabel('RULES-LAB_008'));
+  NodeAttributes.Data := Pointer(PtrInt(0));  // 0 = chapitre
+  
+  // Récupérer tous les éléments Attribut
+  AttrElements := TDOMElement(AttrChapter).GetElementsByTagName('Attribut');
+  
+  if AttrElements.Count > 0 then
+  begin
+    for I := 0 to AttrElements.Count - 1 do
+    begin
+      AttrElement := TDOMElement(AttrElements.Item[I]);
+      AttrCode := AttrElement.GetAttribute('name');
+      AttrValue := AttrElement.TextContent;
+      
+      if AttrCode = '' then Continue;
+      
+      // Créer un nœud pour cet attribut
+      NodeAttr := TreeViewLivre.Items.AddChild(NodeAttributes, GetAttributLabel(AttrCode) + ': ' + AttrValue);
+      NodeAttr.Data := Pointer(PtrInt(2));  // 2 = attribut
+    end;
+  end;
+end;
+
+// ========== AFFICHER DONNÉE ATTRIBUT ==========
+procedure TWinLivres.AfficherDonneeAttribut(ACode: String);
+var
+  AttrType: String;
+  Dices, BaseValue, SimpleValue, Formula: String;
+  FormulaComponents: TFormulaComponentArray;
+  I: Integer;
+begin
+  NettoyerForm();
+  
+  // Parser la valeur de l'attribut
+  ParseAttributValue(ACode, AttrType, Dices, BaseValue, SimpleValue, Formula);
+  
+  // Masquer tous les contrôles de race
+  LabelFormCode.Visible := False;
+  EditFormCode.Visible := False;
+  LabelFormLib.Visible := False;
+  EditFormLib.Visible := False;
+  LabelFormDesc.Visible := False;
+  MemoFormDesc.Visible := False;
+  
+  // Afficher selon le type d'attribut
+  case AttrType of
+    'SIMPLE': begin
+      // Type 3: Valeur fixe (ex: "2", "1", "3", "4")
+      LabelFormAttrName.Visible := False;
+      EditFormAttrName.Visible := False;
+      
+      LabelFormAttrDices.Visible := False;
+      EditFormAttrDices.Visible := False;
+      LabelFormAttrBaseValue.Visible := True;
+      EditFormAttrBaseValue.Visible := True;
+      EditFormAttrBaseValue.Text := SimpleValue;
+      LabelFormAttrBaseValue.Caption := GetTexteLibelle('LAB_025'); // 'Value'
+      LabelFormAttrFormula.Visible := False;
+      EditFormAttrFormula.Visible := False;
+      
+      for I := 1 to 3 do
+        HideComponentControls(I);
+    end;
+    
+    'DICES': begin
+      // Type 1: Format avec dés (ex: "2d10+20")
+      LabelFormAttrName.Visible := False;
+      EditFormAttrName.Visible := False;
+      
+      LabelFormAttrDices.Visible := True;
+      EditFormAttrDices.Visible := True;
+      EditFormAttrDices.Text := Dices;
+      LabelFormAttrDices.Caption := GetTexteLibelle('LAB_161'); // 'Dices'
+      
+      LabelFormAttrBaseValue.Visible := True;
+      EditFormAttrBaseValue.Visible := True;
+      EditFormAttrBaseValue.Text := BaseValue;
+      LabelFormAttrBaseValue.Caption := GetTexteLibelle('LAB_025'); // 'Value'
+      
+      LabelFormAttrFormula.Visible := False;
+      EditFormAttrFormula.Visible := False;
+      
+      for I := 1 to 3 do
+        HideComponentControls(I);
+    end;
+    
+    'FORMULA': begin
+      // Type 2: Format calculé (ex: "1xBATTR_S+2xBATTR_T+1xBATTR_WP")
+      // Afficher les composants avec label = attribut, champ = coefficient
+      LabelFormAttrName.Visible := False;
+      EditFormAttrName.Visible := False;
+      
+      // Masquer les champs simples/dices
+      LabelFormAttrDices.Visible := False;
+      EditFormAttrDices.Visible := False;
+      LabelFormAttrBaseValue.Visible := False;
+      EditFormAttrBaseValue.Visible := False;
+      LabelFormAttrFormula.Visible := False;
+      EditFormAttrFormula.Visible := False;
+      
+      // Parser et afficher les composants
+      FormulaComponents := ParseFormulaComponents(Formula);
+      for I := 0 to Length(FormulaComponents) - 1 do
+      begin
+        if I < 3 then
+          ShowComponentControl(I + 1, FormulaComponents[I].AttrLabel, IntToStr(FormulaComponents[I].Coefficient));
+      end;
+      
+      // Masquer les composants inutilisés
+      for I := Length(FormulaComponents) + 1 to 3 do
+        HideComponentControls(I);
+    end;
+  end;
+  
+  GroupBoxForm.Visible := True;
+end;
+
+procedure TWinLivres.ShowComponentControl(Index: Integer; AttrLabel: String; Coefficient: String);
+begin
+  case Index of
+    1: begin
+      LabelFormComponent1.Visible := True;
+      EditFormComponent1Coeff.Visible := True;
+      LabelFormComponent1.Caption := AttrLabel + ':';  // Label = Attribute name
+      EditFormComponent1Coeff.Text := Coefficient;     // Field = just the number
+      EditFormComponent1Attr.Visible := False;         // Hide the attribute field
+    end;
+    2: begin
+      LabelFormComponent2.Visible := True;
+      EditFormComponent2Coeff.Visible := True;
+      LabelFormComponent2.Caption := AttrLabel + ':';
+      EditFormComponent2Coeff.Text := Coefficient;
+      EditFormComponent2Attr.Visible := False;
+    end;
+    3: begin
+      LabelFormComponent3.Visible := True;
+      EditFormComponent3Coeff.Visible := True;
+      LabelFormComponent3.Caption := AttrLabel + ':';
+      EditFormComponent3Coeff.Text := Coefficient;
+      EditFormComponent3Attr.Visible := False;
+    end;
+  end;
+end;
+
+procedure TWinLivres.HideComponentControls(Index: Integer);
+begin
+  case Index of
+    1: begin
+      LabelFormComponent1.Visible := False;
+      EditFormComponent1Attr.Visible := False;
+      EditFormComponent1Coeff.Visible := False;
+    end;
+    2: begin
+      LabelFormComponent2.Visible := False;
+      EditFormComponent2Attr.Visible := False;
+      EditFormComponent2Coeff.Visible := False;
+    end;
+    3: begin
+      LabelFormComponent3.Visible := False;
+      EditFormComponent3Attr.Visible := False;
+      EditFormComponent3Coeff.Visible := False;
     end;
   end;
 end;
@@ -272,8 +671,13 @@ begin
             RacesDataList.Add(Code, PRaceData);
             
             // Ajouter dans l'arbre
-            NodeRace := TreeViewLivre.Items.AddChild(NodeRaces, Code);
+            NodeRace := TreeViewLivre.Items.AddChild(NodeRaces, RaceData.Libelle);
             NodeRace.Data := Pointer(PtrInt(1));  // 1 = donnée
+            // Store mapping of label to code
+            RaceLibelleToCodeMap.Values[RaceData.Libelle] := Code;
+            
+            // ========== CHARGER LES ATTRIBUTS DE CETTE RACE ==========
+            LoadAttributesForRace(XMLElement, NodeRace, Code);
           end;
       end;
     
@@ -311,7 +715,6 @@ begin
     on E: Exception do
       // ShowMessage('Erreur: ' + E.Message);
   end;
-
 end;
 
 // ✨ ÉVÉNEMENTS TREEVIEW
@@ -322,19 +725,32 @@ begin
   
   NodeSelectionnee := Node;
   
-  // Vérifier si c'est un chapitre ou une donnée
-  if PtrInt(Node.Data) = 0 then
-    begin
-      // C'est un chapitre (Races)
-      TypeNodeSelectionnee := 'CHAPITRE';
-      MasquerForm();
-    end
+  // Vérifier le type de nœud basé sur Node.Data
+  case PtrInt(Node.Data) of
+    0: begin
+         // C'est un chapitre (Races, Attributes, Careers, etc.)
+         TypeNodeSelectionnee := 'CHAPITRE';
+         MasquerForm();
+       end;
+    1: begin
+         // C'est une race
+         TypeNodeSelectionnee := 'DONNEE';
+         CurrentRaceCode := RaceLibelleToCodeMap.Values[Node.Text];
+         LabelFormTitle.Caption := 'Race: ' + Node.Text;
+         AfficherDonneeRace(CurrentRaceCode);
+       end;
+    2: begin
+         // C'est un attribut
+         TypeNodeSelectionnee := 'ATTRIBUT';
+         // Extract raw value from "Label: Value" format
+         CurrentAttributeValue := Copy(Node.Text, Pos(': ', Node.Text) + 2, Length(Node.Text));
+         // Display attribute name in title
+         LabelFormTitle.Caption := Copy(Node.Text, 1, Pos(': ', Node.Text) - 1);
+         AfficherDonneeAttribut(CurrentAttributeValue);
+       end;
   else
-    begin
-      // C'est une race
-      TypeNodeSelectionnee := 'DONNEE';
-      AfficherDonneeRace(Node.Text);  // Node.Text = le Code de la race
-    end;
+    MasquerForm();
+  end;
 end;
 
 procedure TWinLivres.TreeViewLivreDblClick(Sender: TObject);
@@ -396,6 +812,15 @@ begin
               EditFormLib.Text := RaceData^.Libelle;
               MemoFormDesc.Text := RaceData^.Description;
               CodeDonneeSelectionnee := ACode;
+              
+              // Afficher les contrôles de race
+              LabelFormCode.Visible := True;
+              EditFormCode.Visible := True;
+              LabelFormLib.Visible := True;
+              EditFormLib.Visible := True;
+              LabelFormDesc.Visible := True;
+              MemoFormDesc.Visible := True;
+              
               GroupBoxForm.Visible := True;
               Exit;
             end;
@@ -410,7 +835,44 @@ begin
   EditFormCode.Clear;
   EditFormLib.Clear;
   MemoFormDesc.Clear;
+  EditFormAttrName.Clear;
+  EditFormAttrDices.Clear;
+  EditFormAttrBaseValue.Clear;
+  EditFormAttrFormula.Clear;
+  EditFormComponent1Attr.Clear;
+  EditFormComponent1Coeff.Clear;
+  EditFormComponent2Attr.Clear;
+  EditFormComponent2Coeff.Clear;
+  EditFormComponent3Attr.Clear;
+  EditFormComponent3Coeff.Clear;
   CodeDonneeSelectionnee := '';
+  
+  // Hide all controls by default
+  LabelFormCode.Visible := False;
+  EditFormCode.Visible := False;
+  LabelFormLib.Visible := False;
+  EditFormLib.Visible := False;
+  LabelFormDesc.Visible := False;
+  MemoFormDesc.Visible := False;
+  LabelFormAttrName.Visible := False;
+  EditFormAttrName.Visible := False;
+  LabelFormAttrDices.Visible := False;
+  EditFormAttrDices.Visible := False;
+  LabelFormAttrBaseValue.Visible := False;
+  EditFormAttrBaseValue.Visible := False;
+  LabelFormAttrFormula.Visible := False;
+  EditFormAttrFormula.Visible := False;
+  
+  // Hide component controls
+  LabelFormComponent1.Visible := False;
+  EditFormComponent1Attr.Visible := False;
+  EditFormComponent1Coeff.Visible := False;
+  LabelFormComponent2.Visible := False;
+  EditFormComponent2Attr.Visible := False;
+  EditFormComponent2Coeff.Visible := False;
+  LabelFormComponent3.Visible := False;
+  EditFormComponent3Attr.Visible := False;
+  EditFormComponent3Coeff.Visible := False;
 end;
 
 procedure TWinLivres.MasquerForm();
