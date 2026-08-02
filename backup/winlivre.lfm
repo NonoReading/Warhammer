@@ -266,7 +266,7 @@ object WinLivres: TWinLivres
           Left = 20
           Height = 20
           Top = 200
-          Width = 69
+          Width = 100
           Caption = 'Attribute:'
           Font.Color = clBlack
           Font.Style = [fsBold]
@@ -289,7 +289,7 @@ object WinLivres: TWinLivres
           Left = 20
           Height = 20
           Top = 260
-          Width = 39
+          Width = 50
           Caption = 'Dices:'
           Font.Color = clBlack
           ParentColor = False
@@ -311,7 +311,7 @@ object WinLivres: TWinLivres
           Left = 150
           Height = 20
           Top = 260
-          Width = 74
+          Width = 80
           Caption = 'Base Value:'
           Font.Color = clBlack
           ParentColor = False
@@ -333,7 +333,7 @@ object WinLivres: TWinLivres
           Left = 20
           Height = 20
           Top = 320
-          Width = 57
+          Width = 80
           Caption = 'Formula:'
           Font.Color = clBlack
           ParentColor = False
@@ -355,7 +355,7 @@ object WinLivres: TWinLivres
           Left = 20
           Height = 20
           Top = 380
-          Width = 93
+          Width = 100
           Caption = 'Component 1:'
           Font.Color = clBlack
           ParentColor = False
@@ -388,7 +388,7 @@ object WinLivres: TWinLivres
           Left = 20
           Height = 20
           Top = 440
-          Width = 93
+          Width = 100
           Caption = 'Component 2:'
           Font.Color = clBlack
           ParentColor = False
@@ -421,7 +421,7 @@ object WinLivres: TWinLivres
           Left = 20
           Height = 20
           Top = 500
-          Width = 93
+          Width = 100
           Caption = 'Component 3:'
           Font.Color = clBlack
           ParentColor = False
@@ -452,12 +452,40 @@ object WinLivres: TWinLivres
         end
         object LabelFormSkills: TLabel
           Left = 20
-          Height = 1
+          Height = 20
           Top = 20
-          Width = 1
+          Width = 100
           Font.Color = clBlack
           ParentColor = False
           ParentFont = False
+          Visible = False
+        end
+        object StringGridSkills: TStringGrid
+          Left = 20
+          Height = 500
+          Top = 45
+          Width = 900
+          Columns = <          
+            item
+              Title.Caption = 'Code'
+              Width = 0
+            end          
+            item
+              Title.Caption = 'Libellé'
+              Width = 500
+            end          
+            item
+              Title.Caption = 'Spécialisation'
+              Width = 200
+            end          
+            item
+              Title.Caption = 'Sélectionné'
+              Width = 80
+            end>
+          Font.Color = clBlack
+          ParentFont = False
+          RowCount = 1
+          TabOrder = 14
           Visible = False
         end
         object PanelFormButtons: TPanel
@@ -745,34 +773,6 @@ object WinLivres: TWinLivres
           end
         end
       end
-    end
-    object StringGridSkills: TStringGrid
-      Left = 20
-      Height = 500
-      Top = 45
-      Width = 820
-      Columns = <      
-        item
-          Title.Caption = 'Code'
-          Width = 0
-        end      
-        item
-          Title.Caption = 'Libellé'
-          Width = 500
-        end      
-        item
-          Title.Caption = 'Spécialisation'
-          Width = 200
-        end      
-        item
-          Title.Caption = 'Sélectionné'
-          Width = 80
-        end>
-      Font.Color = clBlack
-      ParentFont = False
-      RowCount = 1
-      TabOrder = 1
-      Visible = False
     end
   end
   object PopupMenuTree: TPopupMenu

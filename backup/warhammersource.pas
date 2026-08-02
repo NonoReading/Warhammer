@@ -425,20 +425,49 @@ procedure TMenu.ChargerLivre(ForceMaJ: Boolean; ForceLivre: String);
   end;
 
 procedure TMenu.TabLivreDblClick(Sender: TObject);
+var
+  BookName: String;
+  BookPath: String;
+begin
+  if (TabLivre.Cells[ColLivreLib, TabLivre.Row] <> '') then
   begin
-   if (TabLivre.Row > 1) then
-     if TabLivre.Cells[ColLivreLib, TabLivre.Row] <> '' then
-       if TabLivre.Cells[ColLivreSel, TabLivre.Row] <> ConstSelectionne then
-         TabLivre.Cells[ColLivreSel, TabLivre.Row] := ConstSelectionne
-       else
-         begin
-           TabLivre.Cells[ColLivreSel, TabLivre.Row] := '';
-           TabLivre.Cells[ColLivreRac, TabLivre.Row] := '';
-           TabLivre.Cells[ColLivreWor, TabLivre.Row] := '';
-         end;
-   ChargerLivre(true, '');
-   ChargerPersonnages();
-   SauveIni();
+    // Si double-click sur la PREMIÈRE colonne (sélection) → toggle + charger
+    if TabLivre.Col = ColLivreSel then
+      if (TabLivre.Row > 1) then
+        begin
+          // Comportement actuel : toggle sélection
+          if TabLivre.Cells[ColLivreSel, TabLivre.Row] <> ConstSelectionne then
+            TabLivre.Cells[ColLivreSel, TabLivre.Row] := ConstSelectionne
+          else
+          begin
+            TabLivre.Cells[ColLivreSel, TabLivre.Row] := '';
+            TabLivre.Cells[ColLivreRac, TabLivre.Row] := '';
+            TabLivre.Cells[ColLivreWor, TabLivre.Row] := '';
+          end;
+          ChargerLivre(true, '');
+          ChargerPersonnages();
+          SauveIni();
+        end
+
+    // Si double-click sur une AUTRE colonne → ouvrir WinLivre avec le livre
+    else
+    begin
+      // Récupérer le code du livre
+      BookName := TabLivre.Cells[ColLivreCod, TabLivre.Row];
+
+      // Construire le chemin : DATABASE\BOOK RULESBOOK.Xml
+      BookPath := 'DATABASE' + PathDelim + BookName + '.Xml';
+
+      // Créer/Ouvrir WinLivre et charger le livre
+      if not Assigned(FenLivre) then
+        FenLivre := TWinLivres.Create(Application);
+
+      FenLivre.Position := poOwnerFormCenter;
+      FenLivre.ChargerXMLFile(BookPath);  // ← Charge le livre automatiquement!
+      FenLivre.Show;
+      FenLivre.BringToFront;
+    end;
+  end;
 end;
 
 procedure TMenu.FormCreate(Sender: TObject);

@@ -429,25 +429,27 @@ var
   BookName: String;
   BookPath: String;
 begin
-  if (TabLivre.Row > 1) and (TabLivre.Cells[ColLivreLib, TabLivre.Row] <> '') then
+  if (TabLivre.Cells[ColLivreLib, TabLivre.Row] <> '') then
   begin
     // Si double-click sur la PREMIÈRE colonne (sélection) → toggle + charger
     if TabLivre.Col = ColLivreSel then
-    begin
-      // Comportement actuel : toggle sélection
-      if TabLivre.Cells[ColLivreSel, TabLivre.Row] <> ConstSelectionne then
-        TabLivre.Cells[ColLivreSel, TabLivre.Row] := ConstSelectionne
-      else
       begin
-        TabLivre.Cells[ColLivreSel, TabLivre.Row] := '';
-        TabLivre.Cells[ColLivreRac, TabLivre.Row] := '';
-        TabLivre.Cells[ColLivreWor, TabLivre.Row] := '';
-      end;
-      ChargerLivre(true, '');
-      ChargerPersonnages();
-      SauveIni();
-    end
-
+        if (TabLivre.Row > 1) then
+          begin
+          // Comportement actuel : toggle sélection
+          if TabLivre.Cells[ColLivreSel, TabLivre.Row] <> ConstSelectionne then
+            TabLivre.Cells[ColLivreSel, TabLivre.Row] := ConstSelectionne
+          else
+          begin
+            TabLivre.Cells[ColLivreSel, TabLivre.Row] := '';
+            TabLivre.Cells[ColLivreRac, TabLivre.Row] := '';
+            TabLivre.Cells[ColLivreWor, TabLivre.Row] := '';
+          end;
+          ChargerLivre(true, '');
+          ChargerPersonnages();
+          SauveIni();
+        end
+      end
     // Si double-click sur une AUTRE colonne → ouvrir WinLivre avec le livre
     else
     begin

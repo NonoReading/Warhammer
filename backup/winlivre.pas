@@ -933,9 +933,9 @@ var
   I, RowIdx: Integer;
   SkillCode: String;
   Competence: StructureCompetence;
+  SkillCount, J: Integer;
+  SpecList, BaseCode, SpecCode, SpecBase: String;
 begin
-  ShowMessage('DEBUG: ListCompetence.Count = ' + IntToStr(ListCompetence.Count));
-
   // Masquer les contrôles de race et attributs
   LabelFormCode.Visible := False;
   EditFormCode.Visible := False;
@@ -969,40 +969,72 @@ begin
   LoadSkillsForRace(RaceElement, RaceCode);
   
   // Afficher dans le StringGrid
-  // Boucler sur TOUTES les compétences de ListCompetence
-  if ListCompetence.Count > 0 then
+  // PASS 1: Compter les compétences NON spécialisées (SousCompetence = False)
+  SkillCount := 0;
+  for I := 0 to ListCompetence.Count - 1 do
   begin
-    StringGridSkills.RowCount := ListCompetence.Count + 1;
+    if not ListCompetence[I].SousCompetence then
+      Inc(SkillCount);
+  end;
+  
+  if SkillCount > 0 then
+  begin
+    StringGridSkills.RowCount := SkillCount + 1;
     
+    // PASS 2: Remplir le StringGrid avec les compétences NON spécialisées
+    RowIdx := 1;
     for I := 0 to ListCompetence.Count - 1 do
     begin
-      RowIdx := I + 1;
       Competence := ListCompetence[I];
       
-      // Col 0: Code (invisible)
-      StringGridSkills.Cells[0, RowIdx] := Competence.CodeCompetence;
-      // Col 1: Libellé
-      StringGridSkills.Cells[1, RowIdx] := Competence.Libelle;
-      // Col 2: Spécialisation (vide pour maintenant)
-      StringGridSkills.Cells[2, RowIdx] := '';
-      
-      // Vérifier si cette compétence est dans la race
-      if RaceSkillsData.IndexOf(Competence.CodeCompetence) >= 0 then
-        StringGridSkills.Cells[3, RowIdx] := '✓'  // Ou 'Oui'
-      else
-        StringGridSkills.Cells[3, RowIdx] := '';   // Ou 'Non'
+      // Ne garder que les compétences non-spécialisées
+      if not Competence.SousCompetence then
+      begin
+        // Col 1: Code
+        StringGridSkills.Cells[1, RowIdx] := Competence.CodeCompetence;
+        // Col 2: Libellé
+        StringGridSkills.Cells[2, RowIdx] := Competence.Libelle;
+        
+        // Col 3: Spécialisation - créer PickList des spécialisations disponibles
+        SpecList := '';
+        BaseCode := Competence.CodeCompetence;  // ex: RULES-COMPART_*
+        
+        for J := 0 to ListCompetence.Count - 1 do
+        begin
+          // Chercher les spécialisations de cette compétence générique
+          if ListCompetence[J].SousCompetence then
+          begin
+            // Vérifier si c'est une spécialisation de cette compétence générique
+            // Ex: RULES-COMPART_PEINT est spécialisation de RULES-COMPART_*
+            SpecCode := ListCompetence[J].CodeCompetence;
+            // Extraire la base: enlever la partie après le dernier _
+            SpecBase := Copy(SpecCode, 1, Pos('_', SpecCode) - 1) + '_*';
+            
+            if SpecBase = BaseCode then
+            begin
+              if SpecList <> '' then
+                SpecList := SpecList + '|';
+              SpecList := SpecList + ListCompetence[J].Libelle;
+            end;
+          end;
+        end;
+        
+        // Ajouter à PickList de la colonne
+        StringGridSkills.Columns[2].PickList.Text := SpecList;
+        StringGridSkills.Cells[3, RowIdx] := '';
+        
+        // Col 4: Vérifier si cette compétence est dans la race
+        if RaceSkillsData.IndexOf(Competence.CodeCompetence) >= 0 then
+          StringGridSkills.Cells[4, RowIdx] := '✓'
+        else
+          StringGridSkills.Cells[4, RowIdx] := '';
+        
+        Inc(RowIdx);
+      end;
     end;
-    ShowMessage('DEBUG: About to show StringGrid. RowCount = ' + IntToStr(StringGridSkills.RowCount));
     
     LabelFormSkills.Visible := True;
     StringGridSkills.Visible := True;
-    StringGridSkills.BringToFront;
-    ShowMessage('DEBUG: StringGrid - Left=' + IntToStr(StringGridSkills.Left) +
-            ' Top=' + IntToStr(StringGridSkills.Top) +
-            ' Width=' + IntToStr(StringGridSkills.Width) +
-            ' Height=' + IntToStr(StringGridSkills.Height) +
-            ' Parent=' + StringGridSkills.Parent.Name);
-    ShowMessage('DEBUG: StringGrid should now be visible');
   end
   else
   begin
