@@ -142,6 +142,7 @@ type
     procedure LoadSkillsForRaceTree(RaceElement: TDOMElement; RaceNode: TTreeNode; RaceCode: String);
     procedure LoadSkillsForRace(RaceElement: TDOMElement; RaceCode: String);
     procedure AfficherSkillsForRace(RaceCode: String);
+    procedure SortSkillsGrid();
     procedure ShowComponentControl(Index: Integer; AttrLabel: String; Coefficient: String);
     procedure HideComponentControls(Index: Integer);
     procedure NettoyerForm();
@@ -934,7 +935,7 @@ var
   SkillCode: String;
   Competence: StructureCompetence;
   SkillCount, J: Integer;
-  SpecList, BaseCode, SpecCode, SpecBase: String;
+  SpecList, BaseCode, SpecCode, SpecBase, FoundSkill: String;
 begin
   // Masquer les contrôles de race et attributs
   LabelFormCode.Visible := False;
@@ -996,7 +997,7 @@ begin
         StringGridSkills.Cells[2, RowIdx] := Competence.Libelle;
         
         // Col 3: Spécialisation - créer PickList des spécialisations disponibles
-        SpecList := '';
+        SpecList := Competence.Libelle + '|';  // Ajouter la générique en premier
         BaseCode := Competence.CodeCompetence;  // ex: RULES-COMPART_*
         
         for J := 0 to ListCompetence.Count - 1 do
@@ -1012,19 +1013,50 @@ begin
             
             if SpecBase = BaseCode then
             begin
-              if SpecList <> '' then
-                SpecList := SpecList + '|';
-              SpecList := SpecList + ListCompetence[J].Libelle;
+              SpecList := SpecList + ListCompetence[J].Libelle + '|';
             end;
           end;
         end;
         
-        // Ajouter à PickList de la colonne
-        StringGridSkills.Columns[2].PickList.Text := SpecList;
-        StringGridSkills.Cells[3, RowIdx] := '';
+        // Retirer le dernier |
+        if SpecList[Length(SpecList)] = '|' then
+          SpecList := Copy(SpecList, 1, Length(SpecList) - 1);
         
-        // Col 4: Vérifier si cette compétence est dans la race
-        if RaceSkillsData.IndexOf(Competence.CodeCompetence) >= 0 then
+        // Assigner la PickList à cette colonne
+        StringGridSkills.Columns[2].PickList.Text := SpecList;
+        
+        // Chercher si la race a cette compétence générique OU une de ses spécialisations
+        FoundSkill := '';
+        
+        // D'abord chercher la compétence générique
+        if RaceSkillsData.IndexOf(BaseCode) >= 0 then
+          FoundSkill := Competence.Libelle
+        else
+        begin
+          // Sinon chercher une spécialisation
+          for J := 0 to ListCompetence.Count - 1 do
+          begin
+            if ListCompetence[J].SousCompetence then
+            begin
+              SpecCode := ListCompetence[J].CodeCompetence;
+              SpecBase := Copy(SpecCode, 1, Pos('_', SpecCode) - 1) + '_*';
+              
+              if SpecBase = BaseCode then
+              begin
+                if RaceSkillsData.IndexOf(SpecCode) >= 0 then
+                begin
+                  FoundSkill := ListCompetence[J].Libelle;
+                  Break;
+                end;
+              end;
+            end;
+          end;
+        end;
+        
+        StringGridSkills.Cells[3, RowIdx] := FoundSkill;
+        
+        // Col 4: Checkbox - Afficher ✓ si quelque chose est sélectionné
+        if FoundSkill <> '' then
           StringGridSkills.Cells[4, RowIdx] := '✓'
         else
           StringGridSkills.Cells[4, RowIdx] := '';
@@ -1032,6 +1064,9 @@ begin
         Inc(RowIdx);
       end;
     end;
+    
+    // Trier le StringGrid: Sélectionnées en premier, puis alphabétique
+    SortSkillsGrid();
     
     LabelFormSkills.Visible := True;
     StringGridSkills.Visible := True;
@@ -1043,6 +1078,75 @@ begin
   end;
   
   GroupBoxForm.Visible := False;
+end;
+
+// ========== SORT SKILLS GRID ==========
+procedure TWinLivres.SortSkillsGrid();
+type
+  TSkillRow = record
+    Code: String;
+    Label_: String;
+    Specialization: String;
+    Selected: String;
+  end;
+  
+var
+  Rows: array of TSkillRow;
+  I, J, LastRow: Integer;
+  Temp: TSkillRow;
+  IsSorted: Boolean;
+  NeedSwap: Boolean;
+begin
+  // Obtenir le nombre de lignes (sauf l'en-tête)
+  LastRow := StringGridSkills.RowCount - 1;
+  
+  if LastRow <= 1 then Exit;  // Rien à trier
+  
+  // Charger les données dans le tableau
+  SetLength(Rows, LastRow);
+  for I := 1 to LastRow do
+  begin
+    Rows[I - 1].Code := StringGridSkills.Cells[1, I];
+    Rows[I - 1].Label_ := StringGridSkills.Cells[2, I];
+    Rows[I - 1].Specialization := StringGridSkills.Cells[3, I];
+    Rows[I - 1].Selected := StringGridSkills.Cells[4, I];
+  end;
+  
+  // Tri à bulles: Sélectionnées (✓) en premier, puis alphabétique
+  repeat
+    IsSorted := True;
+    for I := 0 to Length(Rows) - 2 do
+    begin
+      // Comparer: d'abord par Selected (✓ avant vide), puis par Label_ (alphabétique)
+      NeedSwap := False;
+      
+      if Rows[I].Selected < Rows[I + 1].Selected then
+        NeedSwap := True  // ✓ après vide = besoin swap
+      else if Rows[I].Selected = Rows[I + 1].Selected then
+      begin
+        // Même status, comparer par label alphabétiquement
+        if AnsiCompareText(Rows[I].Label_, Rows[I + 1].Label_) > 0 then
+          NeedSwap := True;
+      end;
+      
+      if NeedSwap then
+      begin
+        Temp := Rows[I];
+        Rows[I] := Rows[I + 1];
+        Rows[I + 1] := Temp;
+        IsSorted := False;
+      end;
+    end;
+  until IsSorted;
+  
+  // Réafficher les données triées dans le StringGrid
+  for I := 1 to LastRow do
+  begin
+    StringGridSkills.Cells[1, I] := Rows[I - 1].Code;
+    StringGridSkills.Cells[2, I] := Rows[I - 1].Label_;
+    StringGridSkills.Cells[3, I] := Rows[I - 1].Specialization;
+    StringGridSkills.Cells[4, I] := Rows[I - 1].Selected;
+  end;
 end;
 
 // ✨ AFFICHAGE DYNAMIQUE
