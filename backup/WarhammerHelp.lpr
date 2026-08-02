@@ -10,7 +10,7 @@ uses
   athreads,
   {$ENDIF}
   Interfaces, // this includes the LCL widgetset
-  Forms, pack_powerpdf,
+  Forms, pack_powerpdf,  VirtualTrees,
   lazcontrols, WarhammerSource;
 
 {$R *.res}

@@ -89,6 +89,10 @@ type
     LabelFormSkills: TLabel;
     StringGridSkills: TStringGrid;
     
+    // Talents (to be created in code)
+    LabelTalentsRandom: TLabel;
+    TreeViewTalents: TTreeView;
+    
     // Buttons
     PanelFormButtons: TPanel;
     ButtonFormValider: TBCButton;
@@ -103,6 +107,7 @@ type
     
     // Événements
     procedure FormCreate(Sender: TObject);
+    procedure InitTalentsUI();
     procedure FormShow(Sender: TObject);
     procedure ButtonChargerXMLClick(Sender: TObject);
     procedure TreeViewLivreChange(Sender: TObject; Node: TTreeNode);
@@ -143,6 +148,7 @@ type
     procedure LoadTalentsForRaceTree(RaceElement: TDOMElement; RaceNode: TTreeNode);
     procedure LoadSkillsForRace(RaceElement: TDOMElement; RaceCode: String);
     procedure AfficherSkillsForRace(RaceCode: String);
+    procedure AfficherTalentsForRace();
     procedure SortSkillsGrid();
     procedure ShowComponentControl(Index: Integer; AttrLabel: String; Coefficient: String);
     procedure HideComponentControls(Index: Integer);
@@ -181,12 +187,38 @@ begin
   // Initialiser les contrôles
   InitialiserControles();
   
+  // Initialiser l'UI des talents
+  InitTalentsUI();
+  
   // Style
   try
     { MiseEnFormeDesChamp(Self); }  // À implémenter plus tard
   except
     // GlobalFonts non disponible, continuer sans
   end;
+end;
+
+// ========== INITIALISER L'UI DES TALENTS ==========
+procedure TWinLivres.InitTalentsUI();
+begin
+  // Créer le label "Talents aléatoires"
+  LabelTalentsRandom := TLabel.Create(Self);
+  LabelTalentsRandom.Parent := Self;
+  LabelTalentsRandom.Left := 430;
+  LabelTalentsRandom.Top := 350;
+  LabelTalentsRandom.Width := 300;
+  LabelTalentsRandom.Height := 20;
+  LabelTalentsRandom.Caption := '';
+  LabelTalentsRandom.Visible := False;
+  
+  // Créer le TTreeView pour les talents
+  TreeViewTalents := TTreeView.Create(Self);
+  TreeViewTalents.Parent := Self;
+  TreeViewTalents.Left := 430;
+  TreeViewTalents.Top := 120;
+  TreeViewTalents.Width := 600;
+  TreeViewTalents.Height := 220;
+  TreeViewTalents.Visible := False;
 end;
 
 procedure TWinLivres.FormShow(Sender: TObject);
@@ -948,6 +980,12 @@ begin
          // Pour l'instant, juste afficher le nom
          MasquerForm();
        end;
+    5: begin
+         // C'est la branche "Talents"
+         TypeNodeSelectionnee := 'CHAPITRE';
+         LabelFormTitle.Caption := GetTexteLibelle('LAB_007');
+         AfficherTalentsForRace();
+       end;
   else
     MasquerForm();
   end;
@@ -1182,6 +1220,109 @@ begin
   GroupBoxForm.Visible := False;
 end;
 
+// ========== AFFICHER TALENTS POUR RACE ==========
+procedure TWinLivres.AfficherTalentsForRace();
+var
+  TalentNode, ChildNode, NodeTalent, ChildChoice, NodeChoice: TTreeNode;
+  RandomCount, I, J: Integer;
+begin
+  // Chercher le nœud "Talent" sélectionné ou parent
+  TalentNode := nil;
+  
+  if NodeSelectionnee <> nil then
+  begin
+    // Si on a cliqué sur "Talent", c'est directement
+    if Pos('Talent', NodeSelectionnee.Text) > 0 then
+      TalentNode := NodeSelectionnee
+    // Sinon, chercher le parent "Talent"
+    else if NodeSelectionnee.Parent <> nil then
+      TalentNode := NodeSelectionnee.Parent;
+  end;
+  
+  if TalentNode = nil then
+  begin
+    // Pas de talents trouvés
+    if LabelTalentsRandom <> nil then
+      LabelTalentsRandom.Visible := False;
+    if TreeViewTalents <> nil then
+      TreeViewTalents.Items.Clear;
+    Exit;
+  end;
+  
+  // Masquer les compétences
+  LabelFormSkills.Visible := False;
+  StringGridSkills.Visible := False;
+  
+  // Compter les talents aléatoires et remplir l'arbre
+  RandomCount := 0;
+  
+  if TreeViewTalents <> nil then
+  begin
+    TreeViewTalents.Items.BeginUpdate;
+    try
+      TreeViewTalents.Items.Clear;
+      
+      // Boucler sur les enfants du nœud Talent (TTreeView source)
+      for I := 0 to TalentNode.Count - 1 do
+      begin
+        ChildNode := TalentNode.Items[I];
+        
+        if ChildNode <> nil then
+        begin
+          // CASE 1: Nœud "Choix" - afficher avec enfants
+          if Pos(GetTexteLibelle('LAB_127'), ChildNode.Text) > 0 then
+          begin
+            NodeTalent := TreeViewTalents.Items.Add(nil, ChildNode.Text);
+            NodeTalent.Data := Pointer(PtrInt(11));  // 11 = choice node
+            
+            // Ajouter les enfants du choix
+            for J := 0 to ChildNode.Count - 1 do
+            begin
+              ChildChoice := ChildNode.Items[J];
+              if ChildChoice <> nil then
+              begin
+                NodeChoice := TreeViewTalents.Items.AddChild(NodeTalent, ChildChoice.Text);
+                NodeChoice.Data := Pointer(PtrInt(12));  // 12 = choice item
+              end;
+            end;
+          end
+          // CASE 2: Talent aléatoire - compter seulement (vérifier par Data)
+          else if PtrInt(ChildNode.Data) = 6 then
+            Inc(RandomCount)
+          // CASE 3: Talent fixe - ajouter directement
+          else
+          begin
+            NodeTalent := TreeViewTalents.Items.Add(nil, ChildNode.Text);
+            NodeTalent.Data := Pointer(PtrInt(10));  // 10 = talent node
+          end;
+        end;
+      end;
+    finally
+      TreeViewTalents.Items.EndUpdate;
+    end;
+  end;
+  
+  // Afficher le nombre de talents aléatoires
+  if LabelTalentsRandom <> nil then
+  begin
+    if RandomCount > 0 then
+    begin
+      LabelTalentsRandom.Caption := GetTexteLibelle('LAB_085') + ': ' + IntToStr(RandomCount);
+      LabelTalentsRandom.BringToFront;
+      LabelTalentsRandom.Visible := True;
+    end
+    else
+      LabelTalentsRandom.Visible := False;
+  end;
+  
+  // Afficher le TreeViewTalents
+  if TreeViewTalents <> nil then
+  begin
+    TreeViewTalents.BringToFront;
+    TreeViewTalents.Visible := True;
+  end;
+end;
+
 // ========== SORT SKILLS GRID ==========
 procedure TWinLivres.SortSkillsGrid();
 type
@@ -1344,6 +1485,15 @@ end;
 procedure TWinLivres.MasquerForm();
 begin
   GroupBoxForm.Visible := False;
+  LabelFormSkills.Visible := False;
+  StringGridSkills.Visible := False;
+  
+  // Vérifier avant d'accéder aux contrôles talents
+  if LabelTalentsRandom <> nil then
+    LabelTalentsRandom.Visible := False;
+  if TreeViewTalents <> nil then
+    TreeViewTalents.Visible := False;
+    
   LabelFormTitle.Caption := GetTexteLibelle('LAB_004');
   NettoyerForm();
 end;

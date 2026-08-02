@@ -1,96 +1,110 @@
-# 📋 CONTEXT.md - WinLivre v2.0.0
+# WinLivre v2.0.0 - Session du 02/08/2026 (FINAL + Compétences + Talents)
 
-**Last Update:** 2026-08-01 08:20  
-**Status:** ✅ **Phase 1 COMPLETE** | ➡️ **Phase 2 & 2.5 TODO**
+## État actuel - ✅ PHASE 1 AFFICHAGE: 100% COMPLÈTE
 
----
+### TreeView Structure ✅
+- ✅ Races avec libellés traduits
+- ✅ Attributs avec valeurs (3 types: SIMPLE/DICES/FORMULA)
+- ✅ Compétences (génériques uniquement) + PickList spécialisations
+- ✅ Talents (hiérarchie: Choix multi + Fixe + Aléatoires)
 
-## 🎯 Quick Summary
+### StringGrid Compétences ✅ 100% COMPLÈTE
+- ✅ Affiche TOUTES compétences génériques
+- ✅ Colonne "Libellé" avec noms corrects
+- ✅ Colonne "Spécialisation" avec PickList (générique | spécialisations)
+- ✅ Affiche générique OU spécialisée sélectionnée
+- ✅ Tri automatique: sélectionnées en premier, puis alphabétique
+- ✅ Cells[3] prêt pour enregistrement
 
-**WinLivre v2.0.0** est une application Lazarus/Free Pascal pour gérer les données Warhammer Fantasy V4 depuis les fichiers XML (`BOOK_RULESBOOK_FRANCAIS.Xml`, etc.).
+### TreeView Talents ✅ 100% COMPLÈTE
+- ✅ Nœud racine "Talent" (LAB_007)
+- ✅ Talents fixes: RULES-T0171 → affiche libellé direct
+- ✅ Choix multiples: RULES-T0002/T0117 → nœud "{Au choix}" (LAB_127) + enfants hiérarchiques
+- ✅ Talents aléatoires: RULES-T* → comptés et affichés dans label "Randomly: X"
+- ✅ Parse "/" avec StrictDelimiter
+- ✅ Node.Data utilisé pour identification (6=random, 7=choice, 10=talent, 11=choice parent, 12=choice item)
 
-**Current Goal:** Phase 2.5 - Implement UI/UX Enhancements (Menu + Pretty TreeView)
+### UI Talents (Dynamique) ✅ 100% COMPLÈTE
+- ✅ LabelTalentsRandom créé dynamiquement (Parent=Self)
+- ✅ TreeViewTalents créé dynamiquement (Parent=Self)
+- ✅ BringToFront pour éviter les overlaps
+- ✅ Masquage correct quand on bascule entre sections
 
----
+### Internationalization (i18n) ✅ 100% COMPLÈTE
+- ✅ LAB_007 = "Talent"
+- ✅ LAB_127 = "{Au choix}"
+- ✅ LAB_085 = "Randomly"
+- ✅ LAB_042 = "Specie"
+- ✅ LAB_087 = "Specie's Skills"
+- ✅ LAB_128 = "Book"
+- ✅ LAB_004 = "Select"
+- ✅ LAB_001 = "Code", LAB_002 = "Label", LAB_003 = "Description"
+- ✅ LAB_155 = "Open book"
 
-## 📚 Documentation Structure
+### Architecture Finale
 
-**Read these in order based on your needs:**
+**Files:**
+- `winlivre.pas` (1530+ lignes) - Code Pascal complet
+- `winlivre.lfm` - Layout UI (StringGridSkills EN DEHORS GroupBoxForm)
 
-### 🧠 Understanding the System
-- **[BUSINESS_LOGIC.md](DOCUMENTATION/BUSINESS_LOGIC.md)** — How Warhammer data relates (Races → Careers → Talents → Equipment)
-- **[DATA_STRUCTURE_XML.md](DOCUMENTATION/DATA_STRUCTURE_XML.md)** — Complete XML tree (all DATA_* sections)
+**Modules utilisés:**
+- ChargeCompetence: ChercheCompetence(), ListCompetence, StructureCompetence
+- **ChargeTalent**: ChercheTalent(), ListTalent, StructureTalent (NEW)
+- ChargeTexte: GetTexteLibelle()
+- UnitCalcul: RemoveQuotes()
 
-### ✅ Phase Progress
-- **[PHASE_1_AFFICHAGE_COMPLETE.md](DOCUMENTATION/PHASE_1_AFFICHAGE_COMPLETE.md)** — What's done, fixes applied, testing notes
-- **[PHASE_2_EDITION_TODO.md](DOCUMENTATION/PHASE_2_EDITION_TODO.md)** — Add/Modify/Delete implementation plan
-- **[PHASE_2.5_UI_ENHANCEMENTS_TODO.md](DOCUMENTATION/PHASE_2.5_UI_ENHANCEMENTS_TODO.md)** — Menu + Pretty TreeView plan
+**Procédures clés:**
+- LoadSkillsForRaceTree(): Compétences du XML race
+- LoadTalentsForRaceTree(): Talents du XML race (Node.Data pour identification)
+- AfficherSkillsForRace(): StringGrid compétences
+- AfficherTalentsForRace(): TreeView talents + label aléatoires
+- SortSkillsGrid(): Trie compétences
+- InitTalentsUI(): Crée dynamiquement UI talents
+- MasquerForm(): Masque TOUS les contrôles correctement
 
----
+### Data Structures
 
-## 🗂️ Project Files
+**StructureCompetence:**
+- CodeCompetence, Libelle, CodeAttribut, Description
+- SousTalent: boolean → Distingue générique vs spécialisé
+- Livre, Tests, CompAjoutee, ModifyCarac
 
-```
-Warhammer/
-├─ CONTEXT.md (this file - overview)
-├─ DOCUMENTATION/
-│  ├─ BUSINESS_LOGIC.md
-│  ├─ DATA_STRUCTURE_XML.md
-│  ├─ PHASE_1_AFFICHAGE_COMPLETE.md
-│  ├─ PHASE_2_EDITION_TODO.md
-│  └─ PHASE_2.5_UI_ENHANCEMENTS_TODO.md
-│
-├─ winlivre.pas (main unit)
-├─ winlivre.lfm (form layout)
-│
-└─ DATABASE/
-   ├─ BOOK RULESBOOK.Xml (base)
-   └─ ... (15+ books with extensions)
-```
+**StructureTalent:**
+- CodeTalent, Libelle, Tests, Description, Attribut
+- SousTalent: boolean → Distingue générique vs spécialisé
+- MaxiTalent, Livre, TalentPdf, Resume, CompAjoutee, ModifyCarac
 
----
+### Points importants pour prochaine session
 
-## ⚡ Quick Navigation
+1. **TreeView talents fonctionne** - Hiérarchie correcte, Node.Data pour identification
+2. **Label aléatoires affiche** - Compte correct des RULES-T*
+3. **I18N 100%** - Plus de hardcoding nulle part
+4. **Parent=Self pour UI dynamique** - Important pour éviter overlaps
+5. **BringToFront utilisé** - Pour z-order correct
 
-**Starting a new session?**
-1. Read this CONTEXT.md (you are here!)
-2. Based on what you want to do:
-   - Understanding data? → BUSINESS_LOGIC.md
-   - Technical details? → DATA_STRUCTURE_XML.md
-   - Checking Phase 1? → PHASE_1_AFFICHAGE_COMPLETE.md
-   - Implementing Phase 2? → PHASE_2_EDITION_TODO.md
-   - UI improvements? → PHASE_2.5_UI_ENHANCEMENTS_TODO.md
+### Phase 2 TODO - ÉDITION
 
-**Coding tips:**
-- `winlivre.pas` — Main logic (ChargerXMLFile, TreeView handlers, etc.)
-- `winlivre.lfm` — Form layout (PanelTopButtons, TreeView, form controls)
-- `DATABASE/` — All XML books (use for testing/data loading)
+**Affichage compétences:**
+- ❌ Faire Cells[3] éditable (double-clic = ComboBox spécialisations)
+- ❌ Ajouter checkboxes vraies (Cells[4])
 
----
+**Affichage talents:**
+- ❌ Faire TreeViewTalents éditables
+- ❌ ComboBox pour choix multiples
 
-## 🔄 Current Implementation Status
+**Édition globale:**
+- ❌ Bouton "Valider" pour sauvegarder dans XML race
+- ❌ Mettre à jour SUBCHAPTER_SKILL et SUBCHAPTER_TALENT dans XMLDoc
 
-### ✅ Completed
-- Phase 1: TreeView display with Races + Careers
-- Clean UI layout (PanelTopButtons fix)
-- XML loading and parsing
-- Race details display (Code, Libelle, Description)
+**Cas particuliers:**
+- ❌ Talents/Compétences avec "_*" (spécialisations) comme compétences
+- ❌ Talents aléatoires probabilistes (DATA_RANDOM_TALENT)
 
-### ➡️ In Progress / TODO
-- Phase 2: Edit functionality (Add/Modify/Delete)
-- Phase 2.5: UI enhancements (Menu + Pretty names)
-- Phase 3+: Other data types (Talents, Skills, Weapons, Armor)
+## Commit ready - SESSION COMPLÈTE ✅
 
----
+Tous les fichiers sont finalisés:
+- winlivre.pas ✅ (talents TreeView + i18n complet + UI dynamique)
+- winlivre.lfm ✅
+- CONTEXT.md ✅
 
-## 🚀 Next Steps
-
-1. **Read relevant documentation** based on current task
-2. **Update code** in winlivre.pas/winlivre.lfm
-3. **Test locally** with Lazarus (Ctrl+F9 compile, F9 run)
-4. **Commit to GitHub** with meaningful message
-5. **Update CONTEXT.md** if major changes
-
----
-
-**For detailed information, see the DOCUMENTATION/ folder →** 📚
+**Prochaine session: Phase 2 ÉDITION (Checkboxes + ComboBox + Sauvegarde XML)**

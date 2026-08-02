@@ -26,6 +26,9 @@
     </RunParams>
     <RequiredPackages>
       <Item>
+        <PackageName Value="virtualtreeview_package"/>
+      </Item>
+      <Item>
         <PackageName Value="pack_powerpdf"/>
       </Item>
       <Item>

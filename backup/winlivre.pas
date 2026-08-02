@@ -6,7 +6,7 @@ interface
 
 uses
   Classes, SysUtils, Forms, Controls, StdCtrls, ComCtrls, ExtCtrls, Menus,
-  Dialogs, Graphics, BCButton, ChargeConstantes, ChargeTexte, ChargeCompetence, UnitCalcul, Grids,
+  Dialogs, Graphics, BCButton, ChargeConstantes, ChargeTexte, ChargeCompetence, ChargeTalent, UnitCalcul, Grids,
   Generics.Collections, DOM, XMLRead, XMLWrite, FGL;
 
 type
@@ -89,6 +89,10 @@ type
     LabelFormSkills: TLabel;
     StringGridSkills: TStringGrid;
     
+    // Talents (to be created in code)
+    LabelTalentsRandom: TLabel;
+    TreeViewTalents: TTreeView;
+    
     // Buttons
     PanelFormButtons: TPanel;
     ButtonFormValider: TBCButton;
@@ -103,6 +107,7 @@ type
     
     // Événements
     procedure FormCreate(Sender: TObject);
+    procedure InitTalentsUI();
     procedure FormShow(Sender: TObject);
     procedure ButtonChargerXMLClick(Sender: TObject);
     procedure TreeViewLivreChange(Sender: TObject; Node: TTreeNode);
@@ -140,8 +145,10 @@ type
     function ParseFormulaComponents(Formula: String): TFormulaComponentArray;
     procedure LoadAttributesForRace(RaceElement: TDOMElement; RaceNode: TTreeNode; RaceCode: String);
     procedure LoadSkillsForRaceTree(RaceElement: TDOMElement; RaceNode: TTreeNode; RaceCode: String);
+    procedure LoadTalentsForRaceTree(RaceElement: TDOMElement; RaceNode: TTreeNode);
     procedure LoadSkillsForRace(RaceElement: TDOMElement; RaceCode: String);
     procedure AfficherSkillsForRace(RaceCode: String);
+    procedure AfficherTalentsForRace();
     procedure SortSkillsGrid();
     procedure ShowComponentControl(Index: Integer; AttrLabel: String; Coefficient: String);
     procedure HideComponentControls(Index: Integer);
@@ -180,12 +187,38 @@ begin
   // Initialiser les contrôles
   InitialiserControles();
   
+  // Initialiser l'UI des talents
+  InitTalentsUI();
+  
   // Style
   try
     { MiseEnFormeDesChamp(Self); }  // À implémenter plus tard
   except
     // GlobalFonts non disponible, continuer sans
   end;
+end;
+
+// ========== INITIALISER L'UI DES TALENTS ==========
+procedure TWinLivres.InitTalentsUI();
+begin
+  // Créer le label "Talents aléatoires"
+  LabelTalentsRandom := TLabel.Create(Self);
+  LabelTalentsRandom.Parent := PanelRight;
+  LabelTalentsRandom.Left := 420;
+  LabelTalentsRandom.Top := 45;
+  LabelTalentsRandom.Width := 300;
+  LabelTalentsRandom.Height := 20;
+  LabelTalentsRandom.Caption := '';
+  LabelTalentsRandom.Visible := False;
+  
+  // Créer le TTreeView pour les talents
+  TreeViewTalents := TTreeView.Create(Self);
+  TreeViewTalents.Parent := PanelRight;
+  TreeViewTalents.Left := 420;
+  TreeViewTalents.Top := 75;
+  TreeViewTalents.Width := 600;
+  TreeViewTalents.Height := 350;
+  TreeViewTalents.Visible := False;
 end;
 
 procedure TWinLivres.FormShow(Sender: TObject);
@@ -516,6 +549,98 @@ begin
   end;
 end;
 
+// ========== CHARGER TALENTS POUR RACE ==========
+procedure TWinLivres.LoadTalentsForRaceTree(RaceElement: TDOMElement; RaceNode: TTreeNode);
+var
+  TalentChapter: TDOMNode;
+  TalentElements: TDOMNodeList;
+  I: Integer;
+  TalentCode, TalentDesc: String;
+  NodeTalents, NodeTalent, NodeChoice: TTreeNode;
+  TalentNode: TDOMNode;
+  Talent: StructureTalent;
+  TalentParts: TStringList;
+  J: Integer;
+begin
+  TalentChapter := RaceElement.FindNode('SUBCHAPTER_TALENT');
+  
+  if TalentChapter = nil then Exit;
+  
+  // Créer la branche "Talents" (traduite)
+  NodeTalents := TreeViewLivre.Items.AddChild(RaceNode, GetTexteLibelle('LAB_007'));
+  NodeTalents.Data := Pointer(PtrInt(5));  // 5 = talents chapter
+  
+  // Récupérer les enfants directs de SUBCHAPTER_TALENT
+  TalentElements := TalentChapter.ChildNodes;
+  
+  if TalentElements.Count > 0 then
+  begin
+    TalentParts := TStringList.Create;
+    try
+      for I := 0 to TalentElements.Count - 1 do
+      begin
+        TalentNode := TalentElements[I];
+        if TalentNode.NodeName = 'Talent' then
+        begin
+          TalentCode := Trim(TalentNode.TextContent);
+          
+          // Enlever les guillemets
+          if (Length(TalentCode) > 0) and (TalentCode[1] = '"') then
+            TalentCode := Copy(TalentCode, 2, Length(TalentCode) - 2);
+          if (Length(TalentCode) > 0) and (TalentCode[Length(TalentCode)] = '"') then
+            TalentCode := Copy(TalentCode, 1, Length(TalentCode) - 1);
+          
+          if TalentCode = '' then Continue;
+          
+          // CASE 1: Talent aléatoire (RULES-T*)
+          if TalentCode = 'RULES-T*' then
+          begin
+            NodeTalent := TreeViewLivre.Items.AddChild(NodeTalents, GetTexteLibelle('LAB_085'));  // "Randomly"
+            NodeTalent.Data := Pointer(PtrInt(6));  // 6 = random talent
+          end
+          
+          // CASE 2: Choix multiple (contient "/")
+          else if Pos('/', TalentCode) > 0 then
+          begin
+            // Créer nœud "{Au choix}"
+            NodeChoice := TreeViewLivre.Items.AddChild(NodeTalents, GetTexteLibelle('LAB_127'));
+            NodeChoice.Data := Pointer(PtrInt(7));  // 7 = choice node
+            
+            // Scinder par "/" et ajouter chaque talent
+            TalentParts.Clear;
+            TalentParts.StrictDelimiter := True;
+            TalentParts.Delimiter := '/';
+            TalentParts.DelimitedText := TalentCode;
+            
+            for J := 0 to TalentParts.Count - 1 do
+            begin
+              Talent := ChercheTalent(Trim(TalentParts[J]));
+              if Talent.CodeTalent <> '' then
+              begin
+                NodeTalent := TreeViewLivre.Items.AddChild(NodeChoice, Talent.Libelle);
+                NodeTalent.Data := Pointer(PtrInt(8));  // 8 = talent choice item
+              end;
+            end;
+          end
+          
+          // CASE 3: Talent fixe (simple)
+          else
+          begin
+            Talent := ChercheTalent(TalentCode);
+            if Talent.CodeTalent <> '' then
+            begin
+              NodeTalent := TreeViewLivre.Items.AddChild(NodeTalents, Talent.Libelle);
+              NodeTalent.Data := Pointer(PtrInt(8));  // 8 = talent item
+            end;
+          end;
+        end;
+      end;
+    finally
+      TalentParts.Free;
+    end;
+  end;
+end;
+
 // ========== AFFICHER DONNÉE ATTRIBUT ==========
 procedure TWinLivres.AfficherDonneeAttribut(ACode: String);
 var
@@ -692,7 +817,7 @@ begin
     FileCode := Copy(FileName, 1, Length(FileName) - 4);  // "BOOK RULESBOOK"
 
     // Récupérer le label traduit
-    NodeRoot := TreeViewLivre.Items.Add(nil, GetTexteLibelle(GetBookLabel(FileCode)));
+    NodeRoot := TreeViewLivre.Items.Add(nil, GetBookLabel(FileCode));
 
     // Afficher le nom complet dans LabelLivre
     LabelLivre.Caption := GetTexteLibelle('LAB_128') + ': ' + FileName;
@@ -754,6 +879,9 @@ begin
             
             // ========== CHARGER LES COMPÉTENCES DE CETTE RACE DANS L'ARBRE ==========
             LoadSkillsForRaceTree(XMLElement, NodeRace, Code);
+            
+            // ========== CHARGER LES TALENTS DE CETTE RACE DANS L'ARBRE ==========
+            LoadTalentsForRaceTree(XMLElement, NodeRace);
           end;
       end;
     
@@ -851,6 +979,12 @@ begin
          LabelFormTitle.Caption := Node.Text;
          // Pour l'instant, juste afficher le nom
          MasquerForm();
+       end;
+    5: begin
+         // C'est la branche "Talents"
+         TypeNodeSelectionnee := 'CHAPITRE';
+         LabelFormTitle.Caption := GetTexteLibelle('LAB_007');
+         AfficherTalentsForRace();
        end;
   else
     MasquerForm();
@@ -1086,6 +1220,113 @@ begin
   GroupBoxForm.Visible := False;
 end;
 
+// ========== AFFICHER TALENTS POUR RACE ==========
+procedure TWinLivres.AfficherTalentsForRace();
+var
+  TalentNode, ChildNode, NodeTalent, ChildChoice, NodeChoice: TTreeNode;
+  RandomCount, I, J: Integer;
+begin
+  // Chercher le nœud "Talent" sélectionné ou parent
+  TalentNode := nil;
+  
+  if NodeSelectionnee <> nil then
+  begin
+    // Si on a cliqué sur "Talent", c'est directement
+    if Pos('Talent', NodeSelectionnee.Text) > 0 then
+      TalentNode := NodeSelectionnee
+    // Sinon, chercher le parent "Talent"
+    else if NodeSelectionnee.Parent <> nil then
+      TalentNode := NodeSelectionnee.Parent;
+  end;
+  
+  if TalentNode = nil then
+  begin
+    // Pas de talents trouvés
+    if LabelTalentsRandom <> nil then
+      LabelTalentsRandom.Visible := False;
+    if TreeViewTalents <> nil then
+      TreeViewTalents.Items.Clear;
+    Exit;
+  end;
+  
+  // Masquer les compétences
+  LabelFormSkills.Visible := False;
+  StringGridSkills.Visible := False;
+  
+  // Compter les talents aléatoires et remplir l'arbre
+  RandomCount := 0;
+  
+  if TreeViewTalents <> nil then
+  begin
+    TreeViewTalents.Items.BeginUpdate;
+    try
+      TreeViewTalents.Items.Clear;
+      
+      // Boucler sur les enfants du nœud Talent (TTreeView source)
+      for I := 0 to TalentNode.Count - 1 do
+      begin
+        ChildNode := TalentNode.Items[I];
+        
+        if ChildNode <> nil then
+        begin
+          // CASE 1: Nœud "Choix" - afficher avec enfants
+          if Pos(GetTexteLibelle('LAB_127'), ChildNode.Text) > 0 then
+          begin
+            NodeTalent := TreeViewTalents.Items.Add(nil, ChildNode.Text);
+            NodeTalent.Data := Pointer(PtrInt(11));  // 11 = choice node
+            
+            // Ajouter les enfants du choix
+            for J := 0 to ChildNode.Count - 1 do
+            begin
+              ChildChoice := ChildNode.Items[J];
+              if ChildChoice <> nil then
+              begin
+                NodeChoice := TreeViewTalents.Items.AddChild(NodeTalent, ChildChoice.Text);
+                NodeChoice.Data := Pointer(PtrInt(12));  // 12 = choice item
+              end;
+            end;
+          end
+          // CASE 2: Talent aléatoire - compter seulement (vérifier par Data)
+          else if PtrInt(ChildNode.Data) = 6 then
+            Inc(RandomCount)
+          // CASE 3: Talent fixe - ajouter directement
+          else
+          begin
+            NodeTalent := TreeViewTalents.Items.Add(nil, ChildNode.Text);
+            NodeTalent.Data := Pointer(PtrInt(10));  // 10 = talent node
+          end;
+        end;
+      end;
+    finally
+      TreeViewTalents.Items.EndUpdate;
+    end;
+  end;
+  
+  // Afficher le nombre de talents aléatoires
+  if LabelTalentsRandom <> nil then
+  begin
+    if RandomCount > 0 then
+    begin
+      LabelTalentsRandom.Caption := GetTexteLibelle('LAB_085') + ': ' + IntToStr(RandomCount);
+      LabelTalentsRandom.Top := 50;  // Réajuste la position
+      LabelTalentsRandom.Left := 430;  // Au cas où
+      LabelTalentsRandom.BringToFront;
+      LabelTalentsRandom.Visible := True;
+      ShowMessage('Label position: Top=' + IntToStr(LabelTalentsRandom.Top) +
+            ' Left=' + IntToStr(LabelTalentsRandom.Left) +
+            ' Height=' + IntToStr(LabelTalentsRandom.Height) +
+            ' Width=' + IntToStr(LabelTalentsRandom.Width));
+      LabelTalentsRandom.BringToFront;
+    end
+    else
+      LabelTalentsRandom.Visible := False;
+  end;
+  
+  // Afficher le TreeViewTalents
+  if TreeViewTalents <> nil then
+    TreeViewTalents.Visible := True;
+end;
+
 // ========== SORT SKILLS GRID ==========
 procedure TWinLivres.SortSkillsGrid();
 type
@@ -1248,6 +1489,15 @@ end;
 procedure TWinLivres.MasquerForm();
 begin
   GroupBoxForm.Visible := False;
+  LabelFormSkills.Visible := False;
+  StringGridSkills.Visible := False;
+  
+  // Vérifier avant d'accéder aux contrôles talents
+  if LabelTalentsRandom <> nil then
+    LabelTalentsRandom.Visible := False;
+  if TreeViewTalents <> nil then
+    TreeViewTalents.Visible := False;
+    
   LabelFormTitle.Caption := GetTexteLibelle('LAB_004');
   NettoyerForm();
 end;
