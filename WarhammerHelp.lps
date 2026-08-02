@@ -526,8 +526,8 @@
         <ResourceBaseClass Value="Form"/>
         <UnitName Value="WinLivre"/>
         <IsVisibleTab Value="True"/>
-        <TopLine Value="1302"/>
-        <CursorPos X="50" Y="1317"/>
+        <TopLine Value="1304"/>
+        <CursorPos X="38" Y="1316"/>
         <UsageCount Value="200"/>
         <Loaded Value="True"/>
         <LoadedDesigner Value="True"/>

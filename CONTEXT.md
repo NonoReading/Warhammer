@@ -1,4 +1,4 @@
-# WinLivre v2.0.0 - Session du 02/08/2026 (FINAL + Compétences + Talents)
+# WinLivre v2.0.0 - Session du 02/08/2026 (FINAL + Compétences + Talents + BugFix)
 
 ## État actuel - ✅ PHASE 1 AFFICHAGE: 100% COMPLÈTE
 
@@ -49,14 +49,14 @@
 
 **Modules utilisés:**
 - ChargeCompetence: ChercheCompetence(), ListCompetence, StructureCompetence
-- **ChargeTalent**: ChercheTalent(), ListTalent, StructureTalent (NEW)
+- **ChargeTalent**: ChercheTalent(), ListTalent, StructureTalent
 - ChargeTexte: GetTexteLibelle()
 - UnitCalcul: RemoveQuotes()
 
 **Procédures clés:**
 - LoadSkillsForRaceTree(): Compétences du XML race
 - LoadTalentsForRaceTree(): Talents du XML race (Node.Data pour identification)
-- AfficherSkillsForRace(): StringGrid compétences
+- AfficherSkillsForRace(): StringGrid compétences + MASQUE talents
 - AfficherTalentsForRace(): TreeView talents + label aléatoires
 - SortSkillsGrid(): Trie compétences
 - InitTalentsUI(): Crée dynamiquement UI talents
@@ -81,6 +81,7 @@
 3. **I18N 100%** - Plus de hardcoding nulle part
 4. **Parent=Self pour UI dynamique** - Important pour éviter overlaps
 5. **BringToFront utilisé** - Pour z-order correct
+6. **AfficherSkillsForRace masque talents** - Bug fixé!
 
 ### Phase 2 TODO - ÉDITION
 
@@ -100,10 +101,10 @@
 - ❌ Talents/Compétences avec "_*" (spécialisations) comme compétences
 - ❌ Talents aléatoires probabilistes (DATA_RANDOM_TALENT)
 
-## Commit ready - SESSION COMPLÈTE ✅
+## Commit ready - SESSION COMPLÈTE + BUG FIX ✅
 
 Tous les fichiers sont finalisés:
-- winlivre.pas ✅ (talents TreeView + i18n complet + UI dynamique)
+- winlivre.pas ✅ (talents TreeView + i18n complet + UI dynamique + BUG FIX)
 - winlivre.lfm ✅
 - CONTEXT.md ✅
 

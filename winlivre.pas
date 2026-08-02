@@ -1077,6 +1077,12 @@ var
   SkillCount, J: Integer;
   SpecList, BaseCode, SpecCode, SpecBase, FoundSkill: String;
 begin
+  // Masquer les talents
+  if LabelTalentsRandom <> nil then
+    LabelTalentsRandom.Visible := False;
+  if TreeViewTalents <> nil then
+    TreeViewTalents.Visible := False;
+  
   // Masquer les contrôles de race et attributs
   LabelFormCode.Visible := False;
   EditFormCode.Visible := False;
