@@ -8,8 +8,7 @@
       <Unit>
         <Filename Value="WarhammerHelp.lpr"/>
         <IsPartOfProject Value="True"/>
-        <EditorIndex Value="1"/>
-        <CursorPos X="27" Y="17"/>
+        <CursorPos X="38" Y="11"/>
         <UsageCount Value="200"/>
         <Loaded Value="True"/>
       </Unit>
@@ -20,9 +19,9 @@
         <HasResources Value="True"/>
         <ResourceBaseClass Value="Form"/>
         <UnitName Value="WarhammerSource"/>
-        <EditorIndex Value="11"/>
-        <TopLine Value="490"/>
-        <CursorPos X="28" Y="506"/>
+        <EditorIndex Value="12"/>
+        <TopLine Value="544"/>
+        <CursorPos X="38" Y="561"/>
         <UsageCount Value="200"/>
         <Loaded Value="True"/>
         <LoadedDesigner Value="True"/>
@@ -43,7 +42,7 @@
         <Filename Value="chargecompetence.pas"/>
         <IsPartOfProject Value="True"/>
         <UnitName Value="ChargeCompetence"/>
-        <EditorIndex Value="8"/>
+        <EditorIndex Value="9"/>
         <CursorPos X="23" Y="16"/>
         <UsageCount Value="200"/>
         <Loaded Value="True"/>
@@ -52,9 +51,9 @@
         <Filename Value="chargeconstantes.pas"/>
         <IsPartOfProject Value="True"/>
         <UnitName Value="ChargeConstantes"/>
-        <EditorIndex Value="10"/>
-        <TopLine Value="67"/>
-        <CursorPos X="29" Y="77"/>
+        <EditorIndex Value="11"/>
+        <TopLine Value="837"/>
+        <CursorPos X="20" Y="853"/>
         <UsageCount Value="200"/>
         <Loaded Value="True"/>
       </Unit>
@@ -71,7 +70,7 @@
         <Filename Value="chargetalent.pas"/>
         <IsPartOfProject Value="True"/>
         <UnitName Value="ChargeTalent"/>
-        <EditorIndex Value="4"/>
+        <EditorIndex Value="5"/>
         <CursorPos X="23" Y="13"/>
         <UsageCount Value="200"/>
         <Loaded Value="True"/>
@@ -83,19 +82,22 @@
         <HasResources Value="True"/>
         <ResourceBaseClass Value="Form"/>
         <UnitName Value="WinTalent"/>
-        <EditorIndex Value="-1"/>
-        <TopLine Value="128"/>
-        <CursorPos X="15" Y="146"/>
+        <EditorIndex Value="15"/>
+        <TopLine Value="64"/>
+        <CursorPos X="22" Y="77"/>
         <UsageCount Value="200"/>
+        <Loaded Value="True"/>
+        <LoadedDesigner Value="True"/>
       </Unit>
       <Unit>
         <Filename Value="chargemetier.pas"/>
         <IsPartOfProject Value="True"/>
         <UnitName Value="ChargeMetier"/>
-        <EditorIndex Value="-1"/>
-        <TopLine Value="45"/>
-        <CursorPos X="39" Y="63"/>
+        <EditorIndex Value="1"/>
+        <TopLine Value="4"/>
+        <CursorPos X="47" Y="20"/>
         <UsageCount Value="200"/>
+        <Loaded Value="True"/>
       </Unit>
       <Unit>
         <Filename Value="chargemetierniveau.pas"/>
@@ -146,10 +148,11 @@
         <Filename Value="chargeracemetier.pas"/>
         <IsPartOfProject Value="True"/>
         <UnitName Value="ChargeRaceMetier"/>
-        <EditorIndex Value="-1"/>
-        <TopLine Value="25"/>
-        <CursorPos X="79" Y="81"/>
+        <EditorIndex Value="13"/>
+        <TopLine Value="63"/>
+        <CursorPos X="32" Y="92"/>
         <UsageCount Value="201"/>
+        <Loaded Value="True"/>
       </Unit>
       <Unit>
         <Filename Value="chargerace.pas"/>
@@ -213,7 +216,7 @@
         <HasResources Value="True"/>
         <ResourceBaseClass Value="Form"/>
         <UnitName Value="WinCreation"/>
-        <EditorIndex Value="2"/>
+        <EditorIndex Value="3"/>
         <TopLine Value="1001"/>
         <CursorPos X="25" Y="980"/>
         <UsageCount Value="200"/>
@@ -224,7 +227,7 @@
         <Filename Value="unitcalcul.pas"/>
         <IsPartOfProject Value="True"/>
         <UnitName Value="UnitCalcul"/>
-        <EditorIndex Value="7"/>
+        <EditorIndex Value="8"/>
         <UsageCount Value="200"/>
         <Loaded Value="True"/>
       </Unit>
@@ -232,7 +235,7 @@
         <Filename Value="chargetalentcreation.pas"/>
         <IsPartOfProject Value="True"/>
         <UnitName Value="ChargeTalentCreation"/>
-        <EditorIndex Value="3"/>
+        <EditorIndex Value="4"/>
         <TopLine Value="37"/>
         <CursorPos X="27" Y="44"/>
         <UsageCount Value="201"/>
@@ -503,7 +506,7 @@
         <Filename Value="xmlexportimport.pas"/>
         <IsPartOfProject Value="True"/>
         <UnitName Value="XmlExportImport"/>
-        <EditorIndex Value="9"/>
+        <EditorIndex Value="10"/>
         <TopLine Value="1269"/>
         <CursorPos X="68" Y="1276"/>
         <UsageCount Value="200"/>
@@ -526,8 +529,9 @@
         <ResourceBaseClass Value="Form"/>
         <UnitName Value="WinLivre"/>
         <IsVisibleTab Value="True"/>
-        <TopLine Value="1304"/>
-        <CursorPos X="38" Y="1316"/>
+        <EditorIndex Value="14"/>
+        <TopLine Value="1628"/>
+        <CursorPos X="32" Y="1641"/>
         <UsageCount Value="200"/>
         <Loaded Value="True"/>
         <LoadedDesigner Value="True"/>
@@ -536,9 +540,11 @@
         <Filename Value="chargelivre.pas"/>
         <IsPartOfProject Value="True"/>
         <UnitName Value="ChargeLivre"/>
-        <EditorIndex Value="-1"/>
-        <CursorPos X="13" Y="49"/>
-        <UsageCount Value="146"/>
+        <EditorIndex Value="2"/>
+        <TopLine Value="30"/>
+        <CursorPos X="29" Y="44"/>
+        <UsageCount Value="147"/>
+        <Loaded Value="True"/>
       </Unit>
       <Unit>
         <Filename Value="chargeracecorruptioncreation.pas"/>
@@ -547,7 +553,7 @@
         <EditorIndex Value="-1"/>
         <TopLine Value="5"/>
         <CursorPos X="34" Y="11"/>
-        <UsageCount Value="60"/>
+        <UsageCount Value="61"/>
       </Unit>
       <Unit>
         <Filename Value="chargetalentattributmodif.pas"/>
@@ -556,7 +562,7 @@
         <EditorIndex Value="-1"/>
         <TopLine Value="3"/>
         <CursorPos X="43" Y="13"/>
-        <UsageCount Value="54"/>
+        <UsageCount Value="55"/>
       </Unit>
       <Unit>
         <Filename Value="chargetalentcompetencemodif.pas"/>
@@ -564,7 +570,7 @@
         <UnitName Value="ChargeTalentCompetenceModif"/>
         <EditorIndex Value="-1"/>
         <CursorPos X="31" Y="17"/>
-        <UsageCount Value="51"/>
+        <UsageCount Value="52"/>
       </Unit>
       <Unit>
         <Filename Value="chargetalentcompetenceajoute.pas"/>
@@ -572,7 +578,7 @@
         <UnitName Value="ChargeTalentCompetenceAjoute"/>
         <EditorIndex Value="-1"/>
         <CursorPos X="43" Y="14"/>
-        <UsageCount Value="50"/>
+        <UsageCount Value="51"/>
       </Unit>
       <Unit>
         <Filename Value="unitcreationrace.pas"/>
@@ -660,10 +666,11 @@
       <Unit>
         <Filename Value="C:\lazarus\lcl\grids.pas"/>
         <UnitName Value="Grids"/>
-        <EditorIndex Value="-1"/>
-        <TopLine Value="10334"/>
-        <CursorPos X="20" Y="10339"/>
+        <EditorIndex Value="16"/>
+        <TopLine Value="3179"/>
+        <CursorPos X="25" Y="3197"/>
         <UsageCount Value="77"/>
+        <Loaded Value="True"/>
       </Unit>
       <Unit>
         <Filename Value="C:\lazarus\lcl\lclmessageglue.pas"/>
@@ -1096,7 +1103,7 @@
         <ResourceBaseClass Value="Form"/>
         <UnitName Value="WinLivre"/>
         <EditorIndex Value="-1"/>
-        <TopLine Value="1227"/>
+        <TopLine Value="1229"/>
         <CursorPos X="41" Y="1238"/>
         <UsageCount Value="11"/>
       </Unit>
@@ -1154,7 +1161,7 @@
       </Unit>
       <Unit>
         <Filename Value="C:\lazarus\lcl\include\treeview.inc"/>
-        <EditorIndex Value="5"/>
+        <EditorIndex Value="6"/>
         <TopLine Value="4481"/>
         <CursorPos Y="4496"/>
         <UsageCount Value="11"/>
@@ -1163,7 +1170,7 @@
       <Unit>
         <Filename Value="C:\lazarus\lcl\customtimer.pas"/>
         <UnitName Value="CustomTimer"/>
-        <EditorIndex Value="6"/>
+        <EditorIndex Value="7"/>
         <TopLine Value="172"/>
         <CursorPos X="17" Y="180"/>
         <UsageCount Value="11"/>
@@ -1178,122 +1185,126 @@
         <DefaultSyntaxHighlighter Value="LFM"/>
       </Unit>
     </Units>
-    <JumpHistory HistoryIndex="28">
+    <JumpHistory HistoryIndex="29">
       <Position>
         <Filename Value="winlivre.pas"/>
-        <Caret Line="1279" TopLine="1268"/>
+        <Caret Line="690" TopLine="676"/>
       </Position>
       <Position>
         <Filename Value="winlivre.pas"/>
-        <Caret Line="1266" TopLine="1253"/>
+        <Caret Line="687" TopLine="676"/>
       </Position>
       <Position>
         <Filename Value="winlivre.pas"/>
-        <Caret Line="1268" TopLine="1263"/>
+        <Caret Line="690" TopLine="676"/>
       </Position>
       <Position>
         <Filename Value="winlivre.pas"/>
-        <Caret Line="1270" TopLine="1263"/>
+        <Caret Line="691" Column="63" TopLine="678"/>
       </Position>
       <Position>
         <Filename Value="winlivre.pas"/>
-        <Caret Line="1273" TopLine="1263"/>
+        <Caret Line="687" TopLine="678"/>
       </Position>
       <Position>
         <Filename Value="winlivre.pas"/>
-        <Caret Line="1290" TopLine="1277"/>
+        <Caret Line="690" TopLine="678"/>
       </Position>
       <Position>
         <Filename Value="winlivre.pas"/>
-        <Caret Line="1295" TopLine="1277"/>
+        <Caret Line="691" TopLine="678"/>
       </Position>
       <Position>
         <Filename Value="winlivre.pas"/>
-        <Caret Line="1296" TopLine="1277"/>
+        <Caret Line="702" Column="35" TopLine="684"/>
       </Position>
       <Position>
         <Filename Value="winlivre.pas"/>
-        <Caret Line="1268" TopLine="1256"/>
+        <Caret Line="1523" Column="26" TopLine="1509"/>
       </Position>
       <Position>
         <Filename Value="winlivre.pas"/>
-        <Caret Line="1270" TopLine="1256"/>
+        <Caret Line="1521" Column="19" TopLine="1509"/>
+      </Position>
+      <Position>
+        <Filename Value="warhammersource.pas"/>
+        <Caret Line="379" Column="31" TopLine="336"/>
+      </Position>
+      <Position>
+        <Filename Value="chargeconstantes.pas"/>
+        <Caret Line="679" Column="25" TopLine="665"/>
+      </Position>
+      <Position>
+        <Filename Value="chargeconstantes.pas"/>
+        <Caret Line="606" Column="25" TopLine="592"/>
+      </Position>
+      <Position>
+        <Filename Value="chargeconstantes.pas"/>
+        <Caret Line="575" Column="35" TopLine="568"/>
       </Position>
       <Position>
         <Filename Value="winlivre.pas"/>
-        <Caret Line="1273" TopLine="1256"/>
+        <Caret Line="1525" Column="19" TopLine="1509"/>
+      </Position>
+      <Position>
+        <Filename Value="warhammersource.pas"/>
+        <Caret Line="445" Column="21" TopLine="432"/>
+      </Position>
+      <Position>
+        <Filename Value="warhammersource.pas"/>
+        <Caret Line="558" Column="30" TopLine="544"/>
       </Position>
       <Position>
         <Filename Value="winlivre.pas"/>
-        <Caret Line="1290" TopLine="1277"/>
+        <Caret Line="1520" Column="48" TopLine="1509"/>
       </Position>
       <Position>
         <Filename Value="winlivre.pas"/>
-        <Caret Line="1291" TopLine="1277"/>
+        <Caret Line="687" TopLine="675"/>
+      </Position>
+      <Position>
+        <Filename Value="C:\lazarus\lcl\grids.pas"/>
+        <Caret Line="3193" TopLine="3179"/>
       </Position>
       <Position>
         <Filename Value="winlivre.pas"/>
-        <Caret Line="1266" TopLine="1253"/>
+        <Caret Line="1521" TopLine="1506"/>
       </Position>
       <Position>
         <Filename Value="winlivre.pas"/>
-        <Caret Line="1268" TopLine="1253"/>
+        <Caret Line="1522" Column="27" TopLine="1516"/>
       </Position>
       <Position>
         <Filename Value="winlivre.pas"/>
-        <Caret Line="1270" TopLine="1253"/>
+        <Caret Line="1525" Column="35" TopLine="1509"/>
+      </Position>
+      <Position>
+        <Filename Value="wintalent.pas"/>
+        <Caret Line="77" Column="22" TopLine="64"/>
       </Position>
       <Position>
         <Filename Value="winlivre.pas"/>
-        <Caret Line="1273" TopLine="1253"/>
+        <Caret Line="1529" Column="16" TopLine="1519"/>
       </Position>
       <Position>
         <Filename Value="winlivre.pas"/>
-        <Caret Line="1290" TopLine="1277"/>
+        <Caret Line="1609" Column="17" TopLine="1601"/>
       </Position>
       <Position>
         <Filename Value="winlivre.pas"/>
-        <Caret Line="1291" Column="28" TopLine="1283"/>
+        <Caret Line="1480" Column="18" TopLine="1466"/>
       </Position>
       <Position>
         <Filename Value="winlivre.pas"/>
-        <Caret Line="1227" Column="14" TopLine="1213"/>
+        <Caret Line="1479" Column="28" TopLine="1461"/>
       </Position>
       <Position>
         <Filename Value="winlivre.pas"/>
-        <Caret Line="1257" Column="14" TopLine="1236"/>
+        <Caret Line="156" Column="37" TopLine="143"/>
       </Position>
       <Position>
         <Filename Value="winlivre.pas"/>
-        <Caret Line="1291" Column="28" TopLine="1270"/>
-      </Position>
-      <Position>
-        <Filename Value="winlivre.pas"/>
-        <Caret Line="1306" TopLine="1297"/>
-      </Position>
-      <Position>
-        <Filename Value="winlivre.pas"/>
-        <Caret Line="1273" TopLine="1260"/>
-      </Position>
-      <Position>
-        <Filename Value="winlivre.pas"/>
-        <Caret Line="1306" TopLine="1293"/>
-      </Position>
-      <Position>
-        <Filename Value="winlivre.pas"/>
-        <Caret Line="1308" TopLine="1293"/>
-      </Position>
-      <Position>
-        <Filename Value="winlivre.pas"/>
-        <Caret Line="1310" TopLine="1293"/>
-      </Position>
-      <Position>
-        <Filename Value="winlivre.pas"/>
-        <Caret Line="1311" TopLine="1293"/>
-      </Position>
-      <Position>
-        <Filename Value="winlivre.pas"/>
-        <Caret Line="1312" Column="39" TopLine="1300"/>
+        <Caret Line="1073" Column="36" TopLine="1051"/>
       </Position>
     </JumpHistory>
     <RunParams>
@@ -1309,6 +1320,13 @@
         <WatchKind Value="wpkWrite"/>
         <Source Value="pdfutils.pas"/>
         <Line Value="364"/>
+      </Item>
+      <Item>
+        <Kind Value="bpkSource"/>
+        <WatchScope Value="wpsLocal"/>
+        <WatchKind Value="wpkWrite"/>
+        <Source Value="chargelivre.pas"/>
+        <Line Value="36"/>
       </Item>
     </BreakPoints>
     <Watches>

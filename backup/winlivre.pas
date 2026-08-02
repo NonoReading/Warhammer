@@ -6,7 +6,7 @@ interface
 
 uses
   Classes, SysUtils, Forms, Controls, StdCtrls, ComCtrls, ExtCtrls, Menus,
-  Dialogs, Graphics, BCButton, ChargeConstantes, ChargeTexte, ChargeCompetence, ChargeTalent, UnitCalcul, Grids,
+  Dialogs, Graphics, BCButton, ChargeConstantes, ChargeTexte, ChargeCompetence, ChargeTalent, ChargeMetier, ChargeLivre, UnitCalcul, Grids,
   Generics.Collections, DOM, XMLRead, XMLWrite, FGL;
 
 type
@@ -88,6 +88,7 @@ type
     // Skills Grid (hidden until skills section selected)
     LabelFormSkills: TLabel;
     StringGridSkills: TStringGrid;
+    StringGridCareers: TStringGrid;
     
     // Talents (to be created in code)
     LabelTalentsRandom: TLabel;
@@ -129,6 +130,7 @@ type
     AttributeValuesMap: TStringList;  // Map attribute codes to raw values
     RaceLibelleToCodeMap: TStringList;  // Map race label to code
     RaceSkillsData: TStringList;        // Compétences de la race sélectionnée
+    RaceCareersData: TStringList;       // Carrières de la race sélectionnée (Code|Valeur)
     NodeSelectionnee: TTreeNode;
     TypeNodeSelectionnee: String;  // 'CHAPITRE', 'DONNEE' ou 'ATTRIBUT'
     CodeDonneeSelectionnee: String;
@@ -146,9 +148,12 @@ type
     procedure LoadAttributesForRace(RaceElement: TDOMElement; RaceNode: TTreeNode; RaceCode: String);
     procedure LoadSkillsForRaceTree(RaceElement: TDOMElement; RaceNode: TTreeNode; RaceCode: String);
     procedure LoadTalentsForRaceTree(RaceElement: TDOMElement; RaceNode: TTreeNode);
+    procedure LoadCareersForRaceTree(RaceElement: TDOMElement; RaceNode: TTreeNode);
     procedure LoadSkillsForRace(RaceElement: TDOMElement; RaceCode: String);
+    procedure LoadCareersForRace(RaceElement: TDOMElement);
     procedure AfficherSkillsForRace(RaceCode: String);
     procedure AfficherTalentsForRace();
+    procedure AfficherCareersForRace(RaceCode: String);
     procedure SortSkillsGrid();
     procedure ShowComponentControl(Index: Integer; AttrLabel: String; Coefficient: String);
     procedure HideComponentControls(Index: Integer);
@@ -177,6 +182,7 @@ begin
   AttributeValuesMap := TStringList.Create;
   RaceLibelleToCodeMap := TStringList.Create;
   RaceSkillsData := TStringList.Create;
+  RaceCareersData := TStringList.Create;
   NodeSelectionnee := nil;
   TypeNodeSelectionnee := '';
   CodeDonneeSelectionnee := '';
@@ -203,9 +209,9 @@ procedure TWinLivres.InitTalentsUI();
 begin
   // Créer le label "Talents aléatoires"
   LabelTalentsRandom := TLabel.Create(Self);
-  LabelTalentsRandom.Parent := PanelRight;
-  LabelTalentsRandom.Left := 420;
-  LabelTalentsRandom.Top := 45;
+  LabelTalentsRandom.Parent := Self;
+  LabelTalentsRandom.Left := 430;
+  LabelTalentsRandom.Top := 350;
   LabelTalentsRandom.Width := 300;
   LabelTalentsRandom.Height := 20;
   LabelTalentsRandom.Caption := '';
@@ -213,11 +219,11 @@ begin
   
   // Créer le TTreeView pour les talents
   TreeViewTalents := TTreeView.Create(Self);
-  TreeViewTalents.Parent := PanelRight;
-  TreeViewTalents.Left := 420;
-  TreeViewTalents.Top := 75;
+  TreeViewTalents.Parent := Self;
+  TreeViewTalents.Left := 430;
+  TreeViewTalents.Top := 120;
   TreeViewTalents.Width := 600;
-  TreeViewTalents.Height := 350;
+  TreeViewTalents.Height := 220;
   TreeViewTalents.Visible := False;
 end;
 
@@ -641,6 +647,70 @@ begin
   end;
 end;
 
+// ========== CHARGER CARRIÈRES POUR RACE ==========
+procedure TWinLivres.LoadCareersForRaceTree(RaceElement: TDOMElement; RaceNode: TTreeNode);
+var
+  CareerChapter: TDOMNode;
+  CareerElements: TDOMNodeList;
+  I: Integer;
+  CareerCode, CareerDesc, DisplayText: String;
+  NodeCareers, NodeCareer: TTreeNode;
+  CareerNode: TDOMNode;
+  Metier: StructureMetier;
+  Livre: StructureLivre;
+begin
+  CareerChapter := RaceElement.FindNode('SUBCHAPTER_CAREER');
+  
+  if CareerChapter = nil then Exit;
+  
+  // Créer la branche "Career" (traduite)
+  NodeCareers := TreeViewLivre.Items.AddChild(RaceNode, GetTexteLibelle('LAB_006'));
+  NodeCareers.Data := Pointer(PtrInt(9));  // 9 = careers chapter
+  
+  // Récupérer les enfants directs de SUBCHAPTER_CAREER
+  CareerElements := CareerChapter.ChildNodes;
+  
+  if CareerElements.Count > 0 then
+  begin
+    for I := 0 to CareerElements.Count - 1 do
+    begin
+      CareerNode := CareerElements[I];
+      if CareerNode.NodeName = 'Career' then
+      begin
+        CareerCode := TDOMElement(CareerNode).GetAttribute('name');
+        
+        if CareerCode = '' then Continue;
+        
+        // Chercher la carrière dans ListMetier (charge tous les livres)
+        Metier := ChercheMetier(CareerCode);
+        
+        if Metier.CodeMetier <> '' then
+        begin
+          CareerDesc := Metier.Libelle;
+          
+          // Chercher le nom du livre via le code du livre
+          Livre := ChercheLivreLibelle(Metier.Livre);
+          
+          // Afficher: "Nom Métier (Nom Livre)"
+          if Livre.CodeLivre <> '' then
+            DisplayText := CareerDesc + ' (' + GetTexteLibelle(Livre.Libelle) + ')'
+          else
+            DisplayText := CareerDesc + ' (' + Metier.Livre + ')';  // Fallback avec code livre
+        end
+        else
+        begin
+          CareerDesc := CareerCode;  // Fallback si métier pas trouvé
+          DisplayText := CareerDesc;
+        end;
+        
+        // Créer un nœud pour cette carrière
+        NodeCareer := TreeViewLivre.Items.AddChild(NodeCareers, DisplayText);
+        NodeCareer.Data := Pointer(PtrInt(13));  // 13 = career item
+      end;
+    end;
+  end;
+end;
+
 // ========== AFFICHER DONNÉE ATTRIBUT ==========
 procedure TWinLivres.AfficherDonneeAttribut(ACode: String);
 var
@@ -882,6 +952,9 @@ begin
             
             // ========== CHARGER LES TALENTS DE CETTE RACE DANS L'ARBRE ==========
             LoadTalentsForRaceTree(XMLElement, NodeRace);
+            
+            // ========== CHARGER LES CARRIÈRES DE CETTE RACE DANS L'ARBRE ==========
+            LoadCareersForRaceTree(XMLElement, NodeRace);
           end;
       end;
     
@@ -986,6 +1059,29 @@ begin
          LabelFormTitle.Caption := GetTexteLibelle('LAB_007');
          AfficherTalentsForRace();
        end;
+    9: begin
+         // C'est la branche "Carrières de race"
+         TypeNodeSelectionnee := 'CHAPITRE';
+         LabelFormTitle.Caption := GetTexteLibelle('LAB_006');
+         
+         if Node.Parent <> nil then
+         begin
+           CleanedLabel := StringReplace(Node.Parent.Text, '"', '', [rfReplaceAll]);
+           RaceCodeFound := RaceLibelleToCodeMap.Values[CleanedLabel];
+           
+           if RaceCodeFound <> '' then
+             AfficherCareersForRace(RaceCodeFound);
+         end
+         else
+           MasquerForm();
+       end;
+    13: begin
+         // C'est un item "Carrière"
+         TypeNodeSelectionnee := 'CARRIERE';
+         LabelFormTitle.Caption := Node.Text;
+         // Pour l'instant, juste afficher le nom
+         MasquerForm();
+       end;
   else
     MasquerForm();
   end;
@@ -1066,6 +1162,50 @@ begin
   end;
 end;
 
+// ========== LOAD CAREERS FOR RACE ==========
+procedure TWinLivres.LoadCareersForRace(RaceElement: TDOMElement);
+var
+  CareerChapter: TDOMNode;
+  CareerElements: TDOMNodeList;
+  I: Integer;
+  CareerCode, CareerValue: String;
+  CareerNode: TDOMNode;
+  CareerElement: TDOMElement;
+begin
+  RaceCareersData.Clear;
+  
+  // Trouver SUBCHAPTER_CAREER
+  CareerChapter := RaceElement.FindNode('SUBCHAPTER_CAREER');
+  if CareerChapter = nil then Exit;
+  
+  if CareerChapter <> nil then
+  begin
+    CareerElements := CareerChapter.ChildNodes;
+    
+    for I := 0 to CareerElements.Count - 1 do
+    begin
+      CareerNode := CareerElements[I];
+      if CareerNode.NodeName = 'Career' then
+      begin
+        // Récupérer le code de la carrière (attribut name)
+        CareerElement := TDOMElement(CareerNode);
+        CareerCode := CareerElement.GetAttribute('name');
+        
+        // Récupérer la valeur (le texte du nœud)
+        CareerValue := Trim(CareerNode.TextContent);
+        // Enlever les guillemets si présents
+        if (Length(CareerValue) > 0) and (CareerValue[1] = '"') then
+          CareerValue := Copy(CareerValue, 2, Length(CareerValue) - 2);
+        if (Length(CareerValue) > 0) and (CareerValue[Length(CareerValue)] = '"') then
+          CareerValue := Copy(CareerValue, 1, Length(CareerValue) - 1);
+        
+        if CareerCode <> '' then
+          RaceCareersData.Add(CareerCode + '|' + CareerValue);  // Format: Code|Valeur
+      end;
+    end;
+  end;
+end;
+
 // ========== AFFICHER SKILLS FOR RACE ==========
 procedure TWinLivres.AfficherSkillsForRace(RaceCode: String);
 var
@@ -1077,6 +1217,12 @@ var
   SkillCount, J: Integer;
   SpecList, BaseCode, SpecCode, SpecBase, FoundSkill: String;
 begin
+  // Masquer les talents
+  if LabelTalentsRandom <> nil then
+    LabelTalentsRandom.Visible := False;
+  if TreeViewTalents <> nil then
+    TreeViewTalents.Visible := False;
+  
   // Masquer les contrôles de race et attributs
   LabelFormCode.Visible := False;
   EditFormCode.Visible := False;
@@ -1209,11 +1355,13 @@ begin
     SortSkillsGrid();
     
     LabelFormSkills.Visible := True;
+    StringGridCareers.Visible := False;
     StringGridSkills.Visible := True;
   end
   else
   begin
     LabelFormSkills.Visible := False;
+    StringGridCareers.Visible := False;
     StringGridSkills.Visible := False;
   end;
   
@@ -1308,15 +1456,8 @@ begin
     if RandomCount > 0 then
     begin
       LabelTalentsRandom.Caption := GetTexteLibelle('LAB_085') + ': ' + IntToStr(RandomCount);
-      LabelTalentsRandom.Top := 50;  // Réajuste la position
-      LabelTalentsRandom.Left := 430;  // Au cas où
       LabelTalentsRandom.BringToFront;
       LabelTalentsRandom.Visible := True;
-      ShowMessage('Label position: Top=' + IntToStr(LabelTalentsRandom.Top) +
-            ' Left=' + IntToStr(LabelTalentsRandom.Left) +
-            ' Height=' + IntToStr(LabelTalentsRandom.Height) +
-            ' Width=' + IntToStr(LabelTalentsRandom.Width));
-      LabelTalentsRandom.BringToFront;
     end
     else
       LabelTalentsRandom.Visible := False;
@@ -1324,7 +1465,184 @@ begin
   
   // Afficher le TreeViewTalents
   if TreeViewTalents <> nil then
+  begin
+    TreeViewTalents.BringToFront;
     TreeViewTalents.Visible := True;
+  end;
+end;
+
+// ========== AFFICHER CAREERS FOR RACE ==========
+procedure TWinLivres.AfficherCareersForRace(RaceCode: String);
+var
+  RowIdx, I, J: Integer;
+  Metier: StructureMetier;
+  Livre: StructureLivre;
+  CareerFound: Boolean;
+  CareerValue: String;
+  CodeLivre: String;
+  TempCareersData: TStringList;
+  Parts: TStringList;
+  RaceElement: TDOMElement;
+  SpecieElements: TDOMNodeList;
+  Line: String;
+  PipePos: Integer;
+  Selected, Libelle, Code, LivreStr, Chance: String;
+begin
+  // Masquer compétences et talents
+  LabelFormSkills.Visible := False;
+  StringGridSkills.Visible := False;
+  if LabelTalentsRandom <> nil then
+    LabelTalentsRandom.Visible := False;
+  if TreeViewTalents <> nil then
+    TreeViewTalents.Visible := False;
+  
+  // Masquer les contrôles de race et attributs
+  LabelFormCode.Visible := False;
+  EditFormCode.Visible := False;
+  LabelFormLib.Visible := False;
+  EditFormLib.Visible := False;
+  LabelFormDesc.Visible := False;
+  MemoFormDesc.Visible := False;
+  
+  // Chercher l'élément race dans le XML
+  if XMLDoc = nil then Exit;
+  
+  RaceElement := nil;
+  SpecieElements := XMLDoc.GetElementsByTagName('Specie');
+  
+  for I := 0 to SpecieElements.Count - 1 do
+  begin
+    if TDOMElement(SpecieElements[I]).GetAttribute('id') = RaceCode then
+    begin
+      RaceElement := TDOMElement(SpecieElements[I]);
+      Break;
+    end;
+  end;
+  
+  if RaceElement = nil then Exit;
+  
+  // Charger les carrières de cette race
+  LoadCareersForRace(RaceElement);
+  
+  if ListMetier = nil then Exit;
+  
+  // Créer le StringGrid pour les carrières
+  StringGridCareers.RowCount := 1;
+  
+  // Ajouter les colonnes (Lazarus nécessite Columns.Add, pas ColumnCount)
+  StringGridCareers.Columns.Clear;
+  StringGridCareers.Columns.Add;  // Col 0 - Code
+  StringGridCareers.Columns.Add;  // Col 1 - Libellé
+  StringGridCareers.Columns.Add;  // Col 2 - Livre
+  StringGridCareers.Columns.Add;  // Col 3 - Sélectionné
+  StringGridCareers.Columns.Add;  // Col 4 - Chance
+  
+  // En-têtes traduits via GetTexteLibelle
+  StringGridCareers.Columns[0].Title.Caption := GetTexteLibelle('LAB_001');  // Code
+  StringGridCareers.Columns[1].Title.Caption := GetTexteLibelle('LAB_002');  // Libellé
+  StringGridCareers.Columns[2].Title.Caption := GetTexteLibelle('LAB_128');  // Livre (Book)
+  StringGridCareers.Columns[3].Title.Caption := GetTexteLibelle('LAB_004');  // Sélectionné
+  StringGridCareers.Columns[4].Title.Caption := GetTexteLibelle('LAB_023');  // Chance du métier
+  
+  // Préparer les données dans une liste temporaire pour tri
+  TempCareersData := TStringList.Create;
+  try
+    for I := 0 to ListMetier.Count - 1 do
+    begin
+      Metier := ListMetier[I];
+      
+      // Chercher dans RaceCareersData
+      CareerFound := False;
+      CareerValue := '';
+      for J := 0 to RaceCareersData.Count - 1 do
+      begin
+        if Pos(Metier.CodeMetier + '|', RaceCareersData[J]) = 1 then
+        begin
+          CareerFound := True;
+          CareerValue := Copy(RaceCareersData[J], Length(Metier.CodeMetier) + 2, Length(RaceCareersData[J]));
+          Break;
+        end;
+      end;
+      
+      // Chercher le livre
+      Livre := ChercheLivreLibelle(Metier.Livre);
+      if Livre.CodeLivre <> '' then
+        CodeLivre := GetTexteLibelle(Livre.Libelle)
+      else
+        CodeLivre := Metier.Livre;
+      
+      // Format stockage pour tri: "Selected|Libelle|Code|Livre|CareerValue"
+      // Selected = "0" pour sélectionné (viendra en premier), "1" pour non-sélectionné
+      if CareerFound then
+        TempCareersData.Add('0|' + Metier.Libelle + '|' + Metier.CodeMetier + '|' + CodeLivre + '|' + CareerValue)
+      else
+        TempCareersData.Add('1|' + Metier.Libelle + '|' + Metier.CodeMetier + '|' + CodeLivre + '|');
+    end;
+    
+    // TRIER: D'abord sélectionnés (1 avant 0), puis alphabétique par Libellé
+    TempCareersData.Sort;
+    
+    // Remplir le grid avec les données triées
+    StringGridCareers.RowCount := TempCareersData.Count + 1;
+    
+    RowIdx := 1;
+    for I := 0 to TempCareersData.Count - 1 do
+    begin
+      // Parser la ligne: "Selected|Libelle|Code|Livre|CareerValue"
+      // Parsing manuel robuste (évite les problèmes avec DelimitedText)
+      Line := TempCareersData[I];
+      
+      // Extraire Selected (premier pipe)
+      PipePos := Pos('|', Line);
+      Selected := Copy(Line, 1, PipePos - 1);
+      Line := Copy(Line, PipePos + 1, Length(Line));
+      
+      // Extraire Libelle (deuxième pipe)
+      PipePos := Pos('|', Line);
+      Libelle := Copy(Line, 1, PipePos - 1);
+      Line := Copy(Line, PipePos + 1, Length(Line));
+      
+      // Extraire Code (troisième pipe)
+      PipePos := Pos('|', Line);
+      Code := Copy(Line, 1, PipePos - 1);
+      Line := Copy(Line, PipePos + 1, Length(Line));
+      
+      // Extraire Livre (quatrième pipe)
+      PipePos := Pos('|', Line);
+      LivreStr := Copy(Line, 1, PipePos - 1);
+      Chance := Copy(Line, PipePos + 1, Length(Line));
+      
+      // Col 0: Code
+      StringGridCareers.Cells[0, RowIdx] := Code;
+      
+      // Col 1: Libellé
+      StringGridCareers.Cells[1, RowIdx] := Libelle;
+      
+      // Col 2: Livre
+      StringGridCareers.Cells[2, RowIdx] := LivreStr;
+      
+      // Col 3: Sélectionné (afficher ✓ si "0" - sélectionné)
+      if Selected = '0' then
+        StringGridCareers.Cells[3, RowIdx] := '✓'
+      else
+        StringGridCareers.Cells[3, RowIdx] := '';
+      
+      // Col 4: Chance
+      StringGridCareers.Cells[4, RowIdx] := Chance;
+      
+      Inc(RowIdx);
+    end;
+    
+  finally
+    TempCareersData.Free;
+  end;
+  
+  // Ajuster automatiquement les dimensions du grid
+  AdjustGridColumnsWidth(StringGridCareers, 0, False, False, true, 10, 10, ssAutoBoth);
+  
+  LabelFormSkills.Visible := True;
+  StringGridCareers.Visible := True;
+  GroupBoxForm.Visible := False;
 end;
 
 // ========== SORT SKILLS GRID ==========
@@ -1345,7 +1663,7 @@ var
   NeedSwap: Boolean;
 begin
   // Obtenir le nombre de lignes (sauf l'en-tête)
-  LastRow := StringGridSkills.RowCount - 1;
+  LastRow := StringGridCareers.RowCount - 1;
   
   if LastRow <= 1 then Exit;  // Rien à trier
   
@@ -1353,10 +1671,10 @@ begin
   SetLength(Rows, LastRow);
   for I := 1 to LastRow do
   begin
-    Rows[I - 1].Code := StringGridSkills.Cells[1, I];
-    Rows[I - 1].Label_ := StringGridSkills.Cells[2, I];
-    Rows[I - 1].Specialization := StringGridSkills.Cells[3, I];
-    Rows[I - 1].Selected := StringGridSkills.Cells[4, I];
+    Rows[I - 1].Code := StringGridCareers.Cells[1, I];
+    Rows[I - 1].Label_ := StringGridCareers.Cells[2, I];
+    Rows[I - 1].Specialization := StringGridCareers.Cells[3, I];
+    Rows[I - 1].Selected := StringGridCareers.Cells[4, I];
   end;
   
   // Tri à bulles: Sélectionnées (✓) en premier, puis alphabétique
@@ -1389,10 +1707,10 @@ begin
   // Réafficher les données triées dans le StringGrid
   for I := 1 to LastRow do
   begin
-    StringGridSkills.Cells[1, I] := Rows[I - 1].Code;
-    StringGridSkills.Cells[2, I] := Rows[I - 1].Label_;
-    StringGridSkills.Cells[3, I] := Rows[I - 1].Specialization;
-    StringGridSkills.Cells[4, I] := Rows[I - 1].Selected;
+    StringGridCareers.Cells[1, I] := Rows[I - 1].Code;
+    StringGridCareers.Cells[2, I] := Rows[I - 1].Label_;
+    StringGridCareers.Cells[3, I] := Rows[I - 1].Specialization;
+    StringGridCareers.Cells[4, I] := Rows[I - 1].Selected;
   end;
 end;
 
@@ -1483,14 +1801,14 @@ begin
   
   // Hide skills grid
   LabelFormSkills.Visible := False;
-  StringGridSkills.Visible := False;
+  StringGridCareers.Visible := False;
 end;
 
 procedure TWinLivres.MasquerForm();
 begin
   GroupBoxForm.Visible := False;
   LabelFormSkills.Visible := False;
-  StringGridSkills.Visible := False;
+  StringGridCareers.Visible := False;
   
   // Vérifier avant d'accéder aux contrôles talents
   if LabelTalentsRandom <> nil then
