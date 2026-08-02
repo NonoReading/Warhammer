@@ -433,8 +433,9 @@ begin
   begin
     // Si double-click sur la PREMIÈRE colonne (sélection) → toggle + charger
     if TabLivre.Col = ColLivreSel then
-      if (TabLivre.Row > 1) then
-        begin
+      begin
+        if (TabLivre.Row > 1) then
+          begin
           // Comportement actuel : toggle sélection
           if TabLivre.Cells[ColLivreSel, TabLivre.Row] <> ConstSelectionne then
             TabLivre.Cells[ColLivreSel, TabLivre.Row] := ConstSelectionne
@@ -448,7 +449,7 @@ begin
           ChargerPersonnages();
           SauveIni();
         end
-
+      end
     // Si double-click sur une AUTRE colonne → ouvrir WinLivre avec le livre
     else
     begin

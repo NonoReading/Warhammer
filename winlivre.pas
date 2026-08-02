@@ -6,7 +6,7 @@ interface
 
 uses
   Classes, SysUtils, Forms, Controls, StdCtrls, ComCtrls, ExtCtrls, Menus,
-  Dialogs, Graphics, BCButton, ChargeConstantes, ChargeTexte, ChargeCompetence, UnitCalcul, Grids,
+  Dialogs, Graphics, BCButton, ChargeConstantes, ChargeTexte, ChargeCompetence, ChargeTalent, UnitCalcul, Grids,
   Generics.Collections, DOM, XMLRead, XMLWrite, FGL;
 
 type
@@ -140,6 +140,7 @@ type
     function ParseFormulaComponents(Formula: String): TFormulaComponentArray;
     procedure LoadAttributesForRace(RaceElement: TDOMElement; RaceNode: TTreeNode; RaceCode: String);
     procedure LoadSkillsForRaceTree(RaceElement: TDOMElement; RaceNode: TTreeNode; RaceCode: String);
+    procedure LoadTalentsForRaceTree(RaceElement: TDOMElement; RaceNode: TTreeNode);
     procedure LoadSkillsForRace(RaceElement: TDOMElement; RaceCode: String);
     procedure AfficherSkillsForRace(RaceCode: String);
     procedure SortSkillsGrid();
@@ -155,7 +156,8 @@ type
 
 var
   WinLivres: TWinLivres;
-
+  FileName: String;        // Nom complet du fichier (ex: "BOOK RULESBOOK.Xml")
+  FileCode: String;        // Nom sans extension (ex: "BOOK RULESBOOK")
 implementation
 
 {$R *.lfm}
@@ -196,10 +198,10 @@ end;
 procedure TWinLivres.InitialiserControles();
 begin
   // Mettre à jour les captions pour Races
-  LabelLivre.Caption := 'Fichier XML:';
-  LabelFormCode.Caption := 'Code:';
-  LabelFormLib.Caption := 'Libelle:';
-  LabelFormDesc.Caption := 'Description:';
+  LabelLivre.Caption := GetTexteLibelle('LAB_155');        // 'Open book'
+  LabelFormCode.Caption := GetTexteLibelle('LAB_001');      // 'Code'
+  LabelFormLib.Caption := GetTexteLibelle('LAB_002');       // 'Label'
+  LabelFormDesc.Caption := GetTexteLibelle('LAB_003');      // 'Description'
   
   // Mettre à jour les captions pour Attributs
   LabelFormAttrName.Caption := GetTexteLibelle('LAB_008');  // 'Attribute'
@@ -515,6 +517,98 @@ begin
   end;
 end;
 
+// ========== CHARGER TALENTS POUR RACE ==========
+procedure TWinLivres.LoadTalentsForRaceTree(RaceElement: TDOMElement; RaceNode: TTreeNode);
+var
+  TalentChapter: TDOMNode;
+  TalentElements: TDOMNodeList;
+  I: Integer;
+  TalentCode, TalentDesc: String;
+  NodeTalents, NodeTalent, NodeChoice: TTreeNode;
+  TalentNode: TDOMNode;
+  Talent: StructureTalent;
+  TalentParts: TStringList;
+  J: Integer;
+begin
+  TalentChapter := RaceElement.FindNode('SUBCHAPTER_TALENT');
+  
+  if TalentChapter = nil then Exit;
+  
+  // Créer la branche "Talents" (traduite)
+  NodeTalents := TreeViewLivre.Items.AddChild(RaceNode, GetTexteLibelle('LAB_007'));
+  NodeTalents.Data := Pointer(PtrInt(5));  // 5 = talents chapter
+  
+  // Récupérer les enfants directs de SUBCHAPTER_TALENT
+  TalentElements := TalentChapter.ChildNodes;
+  
+  if TalentElements.Count > 0 then
+  begin
+    TalentParts := TStringList.Create;
+    try
+      for I := 0 to TalentElements.Count - 1 do
+      begin
+        TalentNode := TalentElements[I];
+        if TalentNode.NodeName = 'Talent' then
+        begin
+          TalentCode := Trim(TalentNode.TextContent);
+          
+          // Enlever les guillemets
+          if (Length(TalentCode) > 0) and (TalentCode[1] = '"') then
+            TalentCode := Copy(TalentCode, 2, Length(TalentCode) - 2);
+          if (Length(TalentCode) > 0) and (TalentCode[Length(TalentCode)] = '"') then
+            TalentCode := Copy(TalentCode, 1, Length(TalentCode) - 1);
+          
+          if TalentCode = '' then Continue;
+          
+          // CASE 1: Talent aléatoire (RULES-T*)
+          if TalentCode = 'RULES-T*' then
+          begin
+            NodeTalent := TreeViewLivre.Items.AddChild(NodeTalents, GetTexteLibelle('LAB_085'));  // "Randomly"
+            NodeTalent.Data := Pointer(PtrInt(6));  // 6 = random talent
+          end
+          
+          // CASE 2: Choix multiple (contient "/")
+          else if Pos('/', TalentCode) > 0 then
+          begin
+            // Créer nœud "{Au choix}"
+            NodeChoice := TreeViewLivre.Items.AddChild(NodeTalents, GetTexteLibelle('LAB_127'));
+            NodeChoice.Data := Pointer(PtrInt(7));  // 7 = choice node
+            
+            // Scinder par "/" et ajouter chaque talent
+            TalentParts.Clear;
+            TalentParts.StrictDelimiter := True;
+            TalentParts.Delimiter := '/';
+            TalentParts.DelimitedText := TalentCode;
+            
+            for J := 0 to TalentParts.Count - 1 do
+            begin
+              Talent := ChercheTalent(Trim(TalentParts[J]));
+              if Talent.CodeTalent <> '' then
+              begin
+                NodeTalent := TreeViewLivre.Items.AddChild(NodeChoice, Talent.Libelle);
+                NodeTalent.Data := Pointer(PtrInt(8));  // 8 = talent choice item
+              end;
+            end;
+          end
+          
+          // CASE 3: Talent fixe (simple)
+          else
+          begin
+            Talent := ChercheTalent(TalentCode);
+            if Talent.CodeTalent <> '' then
+            begin
+              NodeTalent := TreeViewLivre.Items.AddChild(NodeTalents, Talent.Libelle);
+              NodeTalent.Data := Pointer(PtrInt(8));  // 8 = talent item
+            end;
+          end;
+        end;
+      end;
+    finally
+      TalentParts.Free;
+    end;
+  end;
+end;
+
 // ========== AFFICHER DONNÉE ATTRIBUT ==========
 procedure TWinLivres.AfficherDonneeAttribut(ACode: String);
 var
@@ -687,16 +781,21 @@ begin
     if RacesDataList <> nil then
       RacesDataList.Clear;
     
-    // Créer le nœud racine avec le nom traduit du livre
-    FileName := ExtractFileName(AFilePath);
-    // Enlever l'extension .Xml pour construire le code de traduction
-    FileName := Copy(FileName, 1, Length(FileName) - 4);
-    // Récupérer le label traduit depuis DATA_LABEL
-    NodeRoot := TreeViewLivre.Items.Add(nil, GetBookLabel(FileName));
+    FileName := ExtractFileName(AFilePath);  // "BOOK RULESBOOK.Xml"
+    FileCode := Copy(FileName, 1, Length(FileName) - 4);  // "BOOK RULESBOOK"
+
+    // Récupérer le label traduit
+    NodeRoot := TreeViewLivre.Items.Add(nil, GetBookLabel(FileCode));
+
+    // Afficher le nom complet dans LabelLivre
+    LabelLivre.Caption := GetTexteLibelle('LAB_128') + ': ' + FileName;
+
+    // Afficher dans LabelFormTitle
+    LabelFormTitle.Caption := GetTexteLibelle('LAB_128') + ': ' + FileName;
     NodeRoot.Data := Pointer(PtrInt(0));  // 0 = chapitre
     
     // ========== RACES ==========
-    NodeRaces := TreeViewLivre.Items.AddChild(NodeRoot, 'Races');
+    NodeRaces := TreeViewLivre.Items.AddChild(NodeRoot, GetTexteLibelle('LAB_042'));
     NodeRaces.Data := Pointer(PtrInt(0));
     
     SpecieElements := XMLDoc.GetElementsByTagName('Specie');
@@ -748,11 +847,14 @@ begin
             
             // ========== CHARGER LES COMPÉTENCES DE CETTE RACE DANS L'ARBRE ==========
             LoadSkillsForRaceTree(XMLElement, NodeRace, Code);
+            
+            // ========== CHARGER LES TALENTS DE CETTE RACE DANS L'ARBRE ==========
+            LoadTalentsForRaceTree(XMLElement, NodeRace);
           end;
       end;
     
     // ========== CARRIÈRES ==========
-    NodeCareers := TreeViewLivre.Items.AddChild(NodeRoot, 'Carrières');
+    NodeCareers := TreeViewLivre.Items.AddChild(NodeRoot, GetTexteLibelle('LAB_006'));
     NodeCareers.Data := Pointer(PtrInt(0));
     
     CareerElements := XMLDoc.GetElementsByTagName('Career');
@@ -777,7 +879,7 @@ begin
     // Expand les branches principales
     NodeRoot.Expand(False);
     
-    LabelFormTitle.Caption := 'XML chargé: ' + FileName;
+    LabelFormTitle.Caption := GetTexteLibelle('LAB_128') + ': ' + FileName;
     // Message de succès supprimé pour l'instant
     // ShowMessage('✅ ' + IntToStr(SpecieElements.Count) + ' races + ' + IntToStr(CareerElements.Count) + ' carrières chargées!');
     
@@ -809,7 +911,7 @@ begin
          // C'est une race
          TypeNodeSelectionnee := 'DONNEE';
          CurrentRaceCode := RaceLibelleToCodeMap.Values[Node.Text];
-         LabelFormTitle.Caption := 'Race: ' + Node.Text;
+         LabelFormTitle.Caption := GetTexteLibelle('LAB_042') + ': ' + Node.Text;
          AfficherDonneeRace(CurrentRaceCode);
        end;
     2: begin
@@ -1167,7 +1269,7 @@ begin
           RaceData := RacesDataList.Data[I];
           if RaceData <> nil then
             begin
-              LabelFormTitle.Caption := 'Race: ' + RaceData^.Code;
+              LabelFormTitle.Caption := GetTexteLibelle('LAB_042') + ': ' + RaceData^.Code;
               EditFormCode.Text := RaceData^.Code;
               EditFormLib.Text := RaceData^.Libelle;
               MemoFormDesc.Text := RaceData^.Description;
@@ -1242,7 +1344,7 @@ end;
 procedure TWinLivres.MasquerForm();
 begin
   GroupBoxForm.Visible := False;
-  LabelFormTitle.Caption := 'Sélectionnez une donnée';
+  LabelFormTitle.Caption := GetTexteLibelle('LAB_004');
   NettoyerForm();
 end;
 

@@ -460,34 +460,6 @@ object WinLivres: TWinLivres
           ParentFont = False
           Visible = False
         end
-        object StringGridSkills: TStringGrid
-          Left = 20
-          Height = 500
-          Top = 45
-          Width = 900
-          Columns = <          
-            item
-              Title.Caption = 'Code'
-              Width = 0
-            end          
-            item
-              Title.Caption = 'Libellé'
-              Width = 500
-            end          
-            item
-              Title.Caption = 'Spécialisation'
-              Width = 200
-            end          
-            item
-              Title.Caption = 'Sélectionné'
-              Width = 80
-            end>
-          Font.Color = clBlack
-          ParentFont = False
-          RowCount = 1
-          TabOrder = 14
-          Visible = False
-        end
         object PanelFormButtons: TPanel
           Left = 20
           Height = 62
@@ -773,6 +745,34 @@ object WinLivres: TWinLivres
           end
         end
       end
+    end
+    object StringGridSkills: TStringGrid
+      Left = 20
+      Height = 500
+      Top = 45
+      Width = 900
+      Columns = <      
+        item
+          Title.Caption = 'Code'
+          Width = 0
+        end      
+        item
+          Title.Caption = 'Libellé'
+          Width = 500
+        end      
+        item
+          Title.Caption = 'Spécialisation'
+          Width = 200
+        end      
+        item
+          Title.Caption = 'Sélectionné'
+          Width = 80
+        end>
+      Font.Color = clBlack
+      ParentFont = False
+      RowCount = 1
+      TabOrder = 1
+      Visible = False
     end
   end
   object PopupMenuTree: TPopupMenu
