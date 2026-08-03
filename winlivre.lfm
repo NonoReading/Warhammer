@@ -779,6 +779,7 @@ object WinLivres: TWinLivres
       Height = 500
       Top = 45
       Width = 900
+      ColCount = 6
       Columns = <      
         item
           Title.Caption = 'Code'

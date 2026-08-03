@@ -6,7 +6,7 @@ interface
 
 uses
   Classes, SysUtils, Forms, Controls, StdCtrls, ComCtrls, ExtCtrls, Menus,
-  Dialogs, Graphics, BCButton, ChargeConstantes, ChargeTexte, ChargeCompetence, ChargeTalent, ChargeMetier, ChargeLivre, UnitCalcul, Grids,
+  Dialogs, Graphics, BCButton, ChargeConstantes, ChargeTexte, ChargeCompetence, ChargeTalent, ChargeMetier, ChargeLivre, ChargeArme, ChargeArmure, UnitCalcul, Grids,
   Generics.Collections, DOM, XMLRead, XMLWrite, FGL;
 
 type
@@ -38,6 +38,21 @@ type
   end;
   
   TFormulaComponentArray = array of TFormulaComponent;
+
+const
+  // Préfixes d'affichage de l'équipement dans l'arbre (comme dans WinMetier)
+  EquipArme   = '(W) ';
+  EquipArmure = '(P) ';
+
+type
+  
+  // Information portée par chaque noeud du TreeView.
+  // Remplace l'ancien Node.Data := Pointer(PtrInt(type)) : on garde le type
+  // ET le code de l'élément, ce qui permettra de remonter vers le XML.
+  TNodeInfo = class
+    TypeNode: Integer;
+    Code:     String;
+  end;
   
   TWinLivres = class(TForm)
     // Panels
@@ -128,7 +143,7 @@ type
     RacesDataList: TRaceDataMap;
     AttributesDataList: TAttributDataMap;  // Attributs de la race actuelle
     AttributeValuesMap: TStringList;  // Map attribute codes to raw values
-    RaceLibelleToCodeMap: TStringList;  // Map race label to code
+    MetierRacesMap: TStringList;  // CODE_METIER=CodeRace1|CodeRace2|...
     RaceSkillsData: TStringList;        // Compétences de la race sélectionnée
     RaceCareersData: TStringList;       // Carrières de la race sélectionnée (Code|Valeur)
     NodeSelectionnee: TTreeNode;
@@ -147,8 +162,17 @@ type
     function ParseFormulaComponents(Formula: String): TFormulaComponentArray;
     procedure LoadAttributesForRace(RaceElement: TDOMElement; RaceNode: TTreeNode; RaceCode: String);
     procedure LoadSkillsForRaceTree(RaceElement: TDOMElement; RaceNode: TTreeNode; RaceCode: String);
-    procedure LoadTalentsForRaceTree(RaceElement: TDOMElement; RaceNode: TTreeNode);
-    procedure LoadCareersForRaceTree(RaceElement: TDOMElement; RaceNode: TTreeNode);
+    procedure LoadTalentsForRaceTree(RaceElement: TDOMElement; RaceNode: TTreeNode; RaceCode: String);
+    procedure LoadCareersForRaceTree(RaceElement: TDOMElement; RaceNode: TTreeNode; RaceCode: String);
+    // Branche Métier de niveau 1
+    procedure ConstruireMetierRacesMap();
+    procedure LoadMetierRacesPossibles(CareerCode: String; MetierNode: TTreeNode);
+    procedure LoadMetierNiveaux(CareerElement: TDOMElement; CareerCode: String; MetierNode: TTreeNode);
+    procedure LoadMetierNiveauAttributs(CareerElement: TDOMElement; Niveau: Integer; NodeBase: TTreeNode);
+    procedure LoadMetierNiveauCompetences(CareerElement: TDOMElement; Niveau: Integer; SkillPrincipal: String; NodeBase: TTreeNode);
+    procedure LoadMetierNiveauTalents(CareerElement: TDOMElement; Niveau: Integer; NodeBase: TTreeNode);
+    procedure LoadMetierNiveauEquipement(CareerElement: TDOMElement; Niveau: Integer; NodeBase: TTreeNode);
+    procedure AjouterFeuilleEquipement(NomItem: String; NodeBase: TTreeNode);
     procedure LoadSkillsForRace(RaceElement: TDOMElement; RaceCode: String);
     procedure LoadCareersForRace(RaceElement: TDOMElement);
     procedure AfficherSkillsForRace(RaceCode: String);
@@ -174,6 +198,69 @@ implementation
 
 {$R *.lfm}
 
+// ✨ HELPERS TREEVIEW - gestion du TNodeInfo porté par chaque noeud
+
+// Attache un TNodeInfo au noeud. Libère l'ancien s'il y en avait un.
+procedure SetNodeInfo(Node: TTreeNode; AType: Integer; ACode: String = '');
+var
+  Info: TNodeInfo;
+begin
+  if Node = nil then Exit;
+  
+  if Node.Data <> nil then
+    TNodeInfo(Node.Data).Free;
+  
+  Info          := TNodeInfo.Create;
+  Info.TypeNode := AType;
+  Info.Code     := ACode;
+  Node.Data     := Info;
+end;
+
+// Type du noeud, ou -1 si le noeud est nil / sans info
+function GetNodeType(Node: TTreeNode): Integer;
+begin
+  if (Node = nil) or (Node.Data = nil) then
+    Result := -1
+  else
+    Result := TNodeInfo(Node.Data).TypeNode;
+end;
+
+// Code du noeud, ou '' si le noeud est nil / sans info
+function GetNodeCode(Node: TTreeNode): String;
+begin
+  if (Node = nil) or (Node.Data = nil) then
+    Result := ''
+  else
+    Result := TNodeInfo(Node.Data).Code;
+end;
+
+// Libère tous les TNodeInfo de l'arbre. À appeler AVANT Items.Clear,
+// sinon les objets restent en mémoire (fuite).
+procedure LibererNodesData(Tree: TTreeView);
+var
+  I: Integer;
+begin
+  if Tree = nil then Exit;
+  
+  for I := 0 to Tree.Items.Count - 1 do
+    if Tree.Items[I].Data <> nil then
+    begin
+      TNodeInfo(Tree.Items[I].Data).Free;
+      Tree.Items[I].Data := nil;
+    end;
+end;
+
+// Lit le contenu texte d'un noeud XML : trim + suppression des guillemets.
+// Le XML stocke ses valeurs sous la forme "1" ou "Agitator", guillemets compris.
+// Même convention que XmlExportImport, qui fait RemoveQuotes(UTF8Encode(...)).
+function ValeurXML(Node: TDOMNode): String;
+begin
+  Result := '';
+  if Node = nil then Exit;
+  
+  Result := RemoveQuotes(Trim(Node.TextContent));
+end;
+
 // ✨ ÉVÉNEMENTS FORM
 
 procedure TWinLivres.FormCreate(Sender: TObject);
@@ -181,7 +268,7 @@ begin
   RacesDataList := TRaceDataMap.Create;
   AttributesDataList := TAttributDataMap.Create;
   AttributeValuesMap := TStringList.Create;
-  RaceLibelleToCodeMap := TStringList.Create;
+  MetierRacesMap := TStringList.Create;
   RaceSkillsData := TStringList.Create;
   RaceCareersData := TStringList.Create;
   NodeSelectionnee := nil;
@@ -479,7 +566,7 @@ begin
   
   // Créer la branche "Attributs"
   NodeAttributes := TreeViewLivre.Items.AddChild(RaceNode, GetAttributLabel('RULES-LAB_008'));
-  NodeAttributes.Data := Pointer(PtrInt(0));  // 0 = chapitre
+  SetNodeInfo(NodeAttributes, 0, RaceCode);  // 0 = chapitre
   
   // Récupérer tous les éléments Attribut
   AttrElements := TDOMElement(AttrChapter).GetElementsByTagName('Attribut');
@@ -496,7 +583,7 @@ begin
       
       // Créer un nœud pour cet attribut
       NodeAttr := TreeViewLivre.Items.AddChild(NodeAttributes, GetAttributLabel(AttrCode) + ': ' + AttrValue);
-      NodeAttr.Data := Pointer(PtrInt(2));  // 2 = attribut
+      SetNodeInfo(NodeAttr, 2);  // 2 = attribut
     end;
   end;
 end;
@@ -518,7 +605,7 @@ begin
   
   // Créer la branche "Compétences" (traduite)
   NodeSkills := TreeViewLivre.Items.AddChild(RaceNode, GetTexteLibelle('LAB_087'));
-  NodeSkills.Data := Pointer(PtrInt(3));  // 3 = skills chapter
+  SetNodeInfo(NodeSkills, 3, RaceCode);  // 3 = skills chapter
   
   // Récupérer les enfants directs de SUBCHAPTER_SKILL (pas récursif!)
   SkillElements := SkillChapter.ChildNodes;
@@ -547,7 +634,7 @@ begin
           
           // Créer un nœud pour cette compétence
           NodeSkill := TreeViewLivre.Items.AddChild(NodeSkills, SkillDesc);
-          NodeSkill.Data := Pointer(PtrInt(4));  // 4 = skill item
+          SetNodeInfo(NodeSkill, 4);  // 4 = skill item
           // Store code in ImageIndex for retrieval (not in Text which would overwrite the label)
           // NodeSkill.ImageIndex not used, safe to use for storage
         end;
@@ -557,7 +644,7 @@ begin
 end;
 
 // ========== CHARGER TALENTS POUR RACE ==========
-procedure TWinLivres.LoadTalentsForRaceTree(RaceElement: TDOMElement; RaceNode: TTreeNode);
+procedure TWinLivres.LoadTalentsForRaceTree(RaceElement: TDOMElement; RaceNode: TTreeNode; RaceCode: String);
 var
   TalentChapter: TDOMNode;
   TalentElements: TDOMNodeList;
@@ -575,7 +662,7 @@ begin
   
   // Créer la branche "Talents" (traduite)
   NodeTalents := TreeViewLivre.Items.AddChild(RaceNode, GetTexteLibelle('LAB_007'));
-  NodeTalents.Data := Pointer(PtrInt(5));  // 5 = talents chapter
+  SetNodeInfo(NodeTalents, 5, RaceCode);  // 5 = talents chapter
   
   // Récupérer les enfants directs de SUBCHAPTER_TALENT
   TalentElements := TalentChapter.ChildNodes;
@@ -603,7 +690,7 @@ begin
           if TalentCode = 'RULES-T*' then
           begin
             NodeTalent := TreeViewLivre.Items.AddChild(NodeTalents, GetTexteLibelle('LAB_085'));  // "Randomly"
-            NodeTalent.Data := Pointer(PtrInt(6));  // 6 = random talent
+            SetNodeInfo(NodeTalent, 6);  // 6 = random talent
           end
           
           // CASE 2: Choix multiple (contient "/")
@@ -611,7 +698,7 @@ begin
           begin
             // Créer nœud "{Au choix}"
             NodeChoice := TreeViewLivre.Items.AddChild(NodeTalents, GetTexteLibelle('LAB_127'));
-            NodeChoice.Data := Pointer(PtrInt(7));  // 7 = choice node
+            SetNodeInfo(NodeChoice, 7);  // 7 = choice node
             
             // Scinder par "/" et ajouter chaque talent
             TalentParts.Clear;
@@ -625,7 +712,7 @@ begin
               if Talent.CodeTalent <> '' then
               begin
                 NodeTalent := TreeViewLivre.Items.AddChild(NodeChoice, Talent.Libelle);
-                NodeTalent.Data := Pointer(PtrInt(8));  // 8 = talent choice item
+                SetNodeInfo(NodeTalent, 8);  // 8 = talent choice item
               end;
             end;
           end
@@ -637,7 +724,7 @@ begin
             if Talent.CodeTalent <> '' then
             begin
               NodeTalent := TreeViewLivre.Items.AddChild(NodeTalents, Talent.Libelle);
-              NodeTalent.Data := Pointer(PtrInt(8));  // 8 = talent item
+              SetNodeInfo(NodeTalent, 8);  // 8 = talent item
             end;
           end;
         end;
@@ -649,7 +736,7 @@ begin
 end;
 
 // ========== CHARGER CARRIÈRES POUR RACE ==========
-procedure TWinLivres.LoadCareersForRaceTree(RaceElement: TDOMElement; RaceNode: TTreeNode);
+procedure TWinLivres.LoadCareersForRaceTree(RaceElement: TDOMElement; RaceNode: TTreeNode; RaceCode: String);
 var
   CareerChapter: TDOMNode;
   CareerElements: TDOMNodeList;
@@ -666,7 +753,7 @@ begin
   
   // Créer la branche "Career" (traduite)
   NodeCareers := TreeViewLivre.Items.AddChild(RaceNode, GetTexteLibelle('LAB_006'));
-  NodeCareers.Data := Pointer(PtrInt(9));  // 9 = careers chapter
+  SetNodeInfo(NodeCareers, 9, RaceCode);  // 9 = careers chapter
   
   // Récupérer les enfants directs de SUBCHAPTER_CAREER
   CareerElements := CareerChapter.ChildNodes;
@@ -706,7 +793,7 @@ begin
         
         // Créer un nœud pour cette carrière
         NodeCareer := TreeViewLivre.Items.AddChild(NodeCareers, DisplayText);
-        NodeCareer.Data := Pointer(PtrInt(13));  // 13 = career item
+        SetNodeInfo(NodeCareer, 13);  // 13 = career item
       end;
     end;
   end;
@@ -854,6 +941,360 @@ begin
   end;
 end;
 
+// ========== BRANCHE MÉTIER (niveau 1) ==========
+
+// Sous-branche "Races possibles" : les races dont le SUBCHAPTER_CAREER
+// référence ce métier. On lit la map pré-calculée pour éviter de rebalayer
+// toutes les races pour chaque métier.
+procedure TWinLivres.LoadMetierRacesPossibles(CareerCode: String; MetierNode: TTreeNode);
+var
+  NodeBranche, NodeFeuille: TTreeNode;
+  ListeCodes: TStringList;
+  I, Idx: Integer;
+  CodeRace, LibelleRace: String;
+  PRace: PRaceData;
+begin
+  if MetierRacesMap = nil then Exit;
+  
+  // Rien à afficher si aucune race ne propose ce métier
+  if MetierRacesMap.Values[CareerCode] = '' then Exit;
+  
+  NodeBranche := TreeViewLivre.Items.AddChild(MetierNode, ConstArbreRacePossible);
+  SetNodeInfo(NodeBranche, 15, CareerCode);  // 15 = branche races possibles
+  
+  ListeCodes := TStringList.Create;
+  try
+    ListeCodes.Delimiter     := '|';
+    ListeCodes.StrictDelimiter := True;
+    ListeCodes.DelimitedText := MetierRacesMap.Values[CareerCode];
+    
+    for I := 0 to ListeCodes.Count - 1 do
+    begin
+      CodeRace := ListeCodes[I];
+      if CodeRace = '' then Continue;
+      
+      // Libellé de la race depuis les données déjà chargées
+      LibelleRace := CodeRace;  // fallback
+      if RacesDataList <> nil then
+      begin
+        Idx := RacesDataList.IndexOf(CodeRace);
+        if Idx >= 0 then
+        begin
+          PRace := RacesDataList.Data[Idx];
+          if PRace <> nil then
+            LibelleRace := PRace^.Libelle;
+        end;
+      end;
+      
+      NodeFeuille := TreeViewLivre.Items.AddChild(NodeBranche, LibelleRace);
+      SetNodeInfo(NodeFeuille, 16, CodeRace);  // 16 = race possible
+    end;
+  finally
+    ListeCodes.Free;
+  end;
+end;
+
+// Sous-branche "Attribut" d'un niveau de métier
+procedure TWinLivres.LoadMetierNiveauAttributs(CareerElement: TDOMElement; Niveau: Integer; NodeBase: TTreeNode);
+var
+  Chapitre: TDOMNode;
+  Elements: TDOMNodeList;
+  I: Integer;
+  NodeBranche, NodeFeuille: TTreeNode;
+  CodeAttr: String;
+begin
+  Chapitre := CareerElement.FindNode('SUBCHAPTER_ATTR');
+  if Chapitre = nil then Exit;
+  
+  NodeBranche := TreeViewLivre.Items.AddChild(NodeBase, ConstArbreAttribut);
+  SetNodeInfo(NodeBranche, 18);  // 18 = branche attributs du niveau
+  
+  Elements := TDOMElement(Chapitre).GetElementsByTagName('Attribut');
+  
+  for I := 0 to Elements.Count - 1 do
+  begin
+    // On ne garde que les attributs dont la valeur correspond au niveau
+    if ValeurXML(Elements.Item[I]) <> IntToStr(Niveau) then Continue;
+    
+    CodeAttr := TDOMElement(Elements.Item[I]).GetAttribute('name');
+    if CodeAttr = '' then Continue;
+    
+    NodeFeuille := TreeViewLivre.Items.AddChild(NodeBranche, GetAttributLabel(CodeAttr));
+    SetNodeInfo(NodeFeuille, 19, CodeAttr);  // 19 = attribut du niveau
+  end;
+end;
+
+// Sous-branche "Compétence" d'un niveau de métier.
+// SkillPrincipal = le <Skill> racine du <Career>, marqué d'une étoile.
+procedure TWinLivres.LoadMetierNiveauCompetences(CareerElement: TDOMElement; Niveau: Integer; SkillPrincipal: String; NodeBase: TTreeNode);
+var
+  Chapitre: TDOMNode;
+  Elements: TDOMNodeList;
+  I: Integer;
+  NodeBranche, NodeFeuille: TTreeNode;
+  CodeComp, LibComp: String;
+  Competence: StructureCompetence;
+begin
+  Chapitre := CareerElement.FindNode('SUBCHAPTER_SKILL');
+  if Chapitre = nil then Exit;
+  
+  NodeBranche := TreeViewLivre.Items.AddChild(NodeBase, ConstArbreCompetence);
+  SetNodeInfo(NodeBranche, 20);  // 20 = branche compétences du niveau
+  
+  Elements := TDOMElement(Chapitre).GetElementsByTagName('Skill');
+  
+  for I := 0 to Elements.Count - 1 do
+  begin
+    if ValeurXML(Elements.Item[I]) <> IntToStr(Niveau) then Continue;
+    
+    CodeComp := TDOMElement(Elements.Item[I]).GetAttribute('name');
+    if CodeComp = '' then Continue;
+    
+    Competence := ChercheCompetence(CodeComp);
+    if Competence.CodeCompetence <> '' then
+      LibComp := Competence.Libelle
+    else
+      LibComp := CodeComp;  // fallback si la compétence est inconnue
+    
+    // Étoile sur la compétence principale du métier
+    if CodeComp = SkillPrincipal then
+      LibComp := LibComp + ' *';
+    
+    NodeFeuille := TreeViewLivre.Items.AddChild(NodeBranche, LibComp);
+    SetNodeInfo(NodeFeuille, 21, CodeComp);  // 21 = compétence du niveau
+  end;
+end;
+
+// Sous-branche "Talent" d'un niveau de métier
+procedure TWinLivres.LoadMetierNiveauTalents(CareerElement: TDOMElement; Niveau: Integer; NodeBase: TTreeNode);
+var
+  Chapitre: TDOMNode;
+  Elements: TDOMNodeList;
+  I: Integer;
+  NodeBranche, NodeFeuille: TTreeNode;
+  CodeTal, LibTal: String;
+  Talent: StructureTalent;
+begin
+  Chapitre := CareerElement.FindNode('SUBCHAPTER_TALENT');
+  if Chapitre = nil then Exit;
+  
+  NodeBranche := TreeViewLivre.Items.AddChild(NodeBase, ConstArbreTalent);
+  SetNodeInfo(NodeBranche, 22);  // 22 = branche talents du niveau
+  
+  Elements := TDOMElement(Chapitre).GetElementsByTagName('Talent');
+  
+  for I := 0 to Elements.Count - 1 do
+  begin
+    if ValeurXML(Elements.Item[I]) <> IntToStr(Niveau) then Continue;
+    
+    CodeTal := TDOMElement(Elements.Item[I]).GetAttribute('name');
+    if CodeTal = '' then Continue;
+    
+    Talent := ChercheTalent(CodeTal);
+    if Talent.CodeTalent <> '' then
+      LibTal := Talent.Libelle
+    else
+      LibTal := CodeTal;  // fallback
+    
+    NodeFeuille := TreeViewLivre.Items.AddChild(NodeBranche, LibTal);
+    SetNodeInfo(NodeFeuille, 23, CodeTal);  // 23 = talent du niveau
+  end;
+end;
+
+// Ajoute une feuille d'équipement sous NodeBase, en résolvant le code
+// en arme ou armure selon son préfixe. Les entrées en texte libre
+// ("writing set") sont affichées telles quelles.
+procedure TWinLivres.AjouterFeuilleEquipement(NomItem: String; NodeBase: TTreeNode);
+var
+  NodeFeuille: TTreeNode;
+  CodeItem, Qualite, Libelle: String;
+  Arme: StructureArme;
+  Armure: StructureArmure;
+begin
+  CodeItem := Trim(NomItem);
+  if CodeItem = '' then Exit;
+  
+  // Suffixe de qualité "(Q)"
+  if Pos(EquipementQualite, CodeItem) > 0 then
+  begin
+    CodeItem := Copy(CodeItem, 1, Length(CodeItem) - Length(EquipementQualite));
+    Qualite  := GetTexteLibelle('LAB_038');
+  end
+  else
+    Qualite := '';
+  
+  if (Pos(EquipementCC, CodeItem) > 0) or
+     (Pos(EquipementCT, CodeItem) > 0) or
+     (Pos(EquipementMU, CodeItem) > 0) then
+  begin
+    // Arme (corps à corps, projectile ou munition)
+    Arme := ChercheArme(CodeItem);
+    if Arme.CodeArme <> '' then
+      Libelle := EquipArme + Arme.Libelle + Qualite
+    else
+      Libelle := EquipArme + CodeItem + Qualite;  // fallback
+    
+    NodeFeuille := TreeViewLivre.Items.AddChild(NodeBase, Libelle);
+    SetNodeInfo(NodeFeuille, 25, CodeItem);
+  end
+  else if Pos(EquipementAR, CodeItem) > 0 then
+  begin
+    // Armure
+    Armure := ChercheArmure(CodeItem);
+    if Armure.CodeArmure <> '' then
+      Libelle := EquipArmure + Armure.Libelle + Qualite
+    else
+      Libelle := EquipArmure + CodeItem + Qualite;  // fallback
+    
+    NodeFeuille := TreeViewLivre.Items.AddChild(NodeBase, Libelle);
+    SetNodeInfo(NodeFeuille, 25, CodeItem);
+  end
+  else
+  begin
+    // Texte libre : "writing set", "impressive hat", "patron"...
+    NodeFeuille := TreeViewLivre.Items.AddChild(NodeBase, NomItem);
+    SetNodeInfo(NodeFeuille, 25, NomItem);
+  end;
+end;
+
+// Sous-branche "Equipement" d'un niveau de métier.
+// Le XML mélange du texte libre ("writing set") et des codes
+// ("RULES-ARMO_04"), le type se déduit du préfixe du code.
+procedure TWinLivres.LoadMetierNiveauEquipement(CareerElement: TDOMElement; Niveau: Integer; NodeBase: TTreeNode);
+var
+  Chapitre: TDOMNode;
+  Elements: TDOMNodeList;
+  I, J: Integer;
+  NodeBranche, NodeChoix: TTreeNode;
+  NomItem: String;
+  Choix: TStringList;
+begin
+  Chapitre := CareerElement.FindNode('SUBCHAPTER_ITEM');
+  if Chapitre = nil then Exit;
+  
+  NodeBranche := TreeViewLivre.Items.AddChild(NodeBase, ConstArbreEquipement);
+  SetNodeInfo(NodeBranche, 24);  // 24 = branche équipement du niveau
+  
+  Elements := TDOMElement(Chapitre).GetElementsByTagName('Item');
+  
+  for I := 0 to Elements.Count - 1 do
+  begin
+    if ValeurXML(Elements.Item[I]) <> IntToStr(Niveau) then Continue;
+    
+    NomItem := TDOMElement(Elements.Item[I]).GetAttribute('name');
+    if NomItem = '' then Continue;
+    
+    if Pos(SeparateurMulti, NomItem) > 0 then
+    begin
+      // Choix multiple : "A/B" -> sous-branche "au choix"
+      NodeChoix := TreeViewLivre.Items.AddChild(NodeBranche, ConstArbreAuChoix);
+      SetNodeInfo(NodeChoix, 24);
+      
+      Choix := TStringList.Create;
+      try
+        Choix.Delimiter       := SeparateurMulti;
+        Choix.StrictDelimiter := True;
+        Choix.DelimitedText   := NomItem;
+        
+        for J := 0 to Choix.Count - 1 do
+          AjouterFeuilleEquipement(Choix[J], NodeChoix);
+      finally
+        Choix.Free;
+      end;
+    end
+    else
+      AjouterFeuilleEquipement(NomItem, NodeBranche);
+  end;
+end;
+
+// Sous-branches "niveau" d'un métier : 1.Pamphleteer - Bronze 1, etc.
+procedure TWinLivres.LoadMetierNiveaux(CareerElement: TDOMElement; CareerCode: String; MetierNode: TTreeNode);
+var
+  Chapitre: TDOMNode;
+  Elements: TDOMNodeList;
+  I, Niveau: Integer;
+  LevelElement: TDOMElement;
+  NodeNiveau: TTreeNode;
+  LibNiveau, Salaire, TexteNiveau, SkillPrincipal: String;
+begin
+  Chapitre := CareerElement.FindNode('SUBCHAPTER_LEVEL');
+  if Chapitre = nil then Exit;
+  
+  // Compétence principale du métier : le <Skill> direct du <Career>
+  SkillPrincipal := ValeurXML(CareerElement.FindNode('Skill'));
+  
+  Elements := TDOMElement(Chapitre).GetElementsByTagName('Level');
+  
+  for I := 0 to Elements.Count - 1 do
+  begin
+    LevelElement := TDOMElement(Elements.Item[I]);
+    
+    Niveau := StrToIntDef(LevelElement.GetAttribute('id'), 0);
+    if Niveau = 0 then Continue;
+    
+    LibNiveau := ValeurXML(LevelElement.FindNode('Description'));
+    Salaire   := ValeurXML(LevelElement.FindNode('Salary'));
+    
+    // "1.Pamphleteer - Bronze 1"
+    TexteNiveau := IntToStr(Niveau) + '.' + LibNiveau;
+    if Salaire <> '' then
+      TexteNiveau := TexteNiveau + ' - ' + GetTexteLibelle(Salaire, '', ' ');
+    
+    NodeNiveau := TreeViewLivre.Items.AddChild(MetierNode, TexteNiveau);
+    // Code = "CODEMETIER|niveau" pour retrouver l'élément XML plus tard
+    SetNodeInfo(NodeNiveau, 17, CareerCode + '|' + IntToStr(Niveau));  // 17 = niveau
+    
+    LoadMetierNiveauAttributs(CareerElement, Niveau, NodeNiveau);
+    LoadMetierNiveauCompetences(CareerElement, Niveau, SkillPrincipal, NodeNiveau);
+    LoadMetierNiveauTalents(CareerElement, Niveau, NodeNiveau);
+    LoadMetierNiveauEquipement(CareerElement, Niveau, NodeNiveau);
+  end;
+end;
+
+// Construit la table métier -> races qui le proposent, en un seul balayage
+// des <Specie>. Évite de rebalayer toutes les races pour chaque métier.
+procedure TWinLivres.ConstruireMetierRacesMap();
+var
+  SpecieElements, CareerElements: TDOMNodeList;
+  I, J: Integer;
+  SpecieElement: TDOMElement;
+  Chapitre: TDOMNode;
+  CodeRace, CodeMetier, Actuel: String;
+begin
+  if MetierRacesMap = nil then
+    MetierRacesMap := TStringList.Create;
+  
+  MetierRacesMap.Clear;
+  
+  if XMLDoc = nil then Exit;
+  
+  SpecieElements := XMLDoc.GetElementsByTagName('Specie');
+  
+  for I := 0 to SpecieElements.Count - 1 do
+  begin
+    SpecieElement := TDOMElement(SpecieElements.Item[I]);
+    CodeRace := SpecieElement.GetAttribute('id');
+    if CodeRace = '' then Continue;
+    
+    Chapitre := SpecieElement.FindNode('SUBCHAPTER_CAREER');
+    if Chapitre = nil then Continue;
+    
+    CareerElements := TDOMElement(Chapitre).GetElementsByTagName('Career');
+    
+    for J := 0 to CareerElements.Count - 1 do
+    begin
+      CodeMetier := TDOMElement(CareerElements.Item[J]).GetAttribute('name');
+      if CodeMetier = '' then Continue;
+      
+      Actuel := MetierRacesMap.Values[CodeMetier];
+      if Actuel = '' then
+        MetierRacesMap.Values[CodeMetier] := CodeRace
+      else
+        MetierRacesMap.Values[CodeMetier] := Actuel + '|' + CodeRace;
+    end;
+  end;
+end;
+
 procedure TWinLivres.ChargerXMLFile(AFilePath: String);
 var
   XMLElement: TDOMElement;
@@ -879,7 +1320,8 @@ begin
         Exit;
       end;
     
-    // Effacer l'arbre
+    // Effacer l'arbre (libérer les TNodeInfo AVANT le Clear)
+    LibererNodesData(TreeViewLivre);
     TreeViewLivre.Items.Clear;
     if RacesDataList <> nil then
       RacesDataList.Clear;
@@ -895,11 +1337,11 @@ begin
 
     // Afficher dans LabelFormTitle
     LabelFormTitle.Caption := GetTexteLibelle('LAB_128') + ': ' + FileName;
-    NodeRoot.Data := Pointer(PtrInt(0));  // 0 = chapitre
+    SetNodeInfo(NodeRoot, 0);  // 0 = chapitre
     
     // ========== RACES ==========
     NodeRaces := TreeViewLivre.Items.AddChild(NodeRoot, GetTexteLibelle('LAB_042'));
-    NodeRaces.Data := Pointer(PtrInt(0));
+    SetNodeInfo(NodeRaces, 0);
     
     SpecieElements := XMLDoc.GetElementsByTagName('Specie');
     
@@ -917,19 +1359,14 @@ begin
               Continue;
             
             // Chercher Description et Explanation
+            // Chercher Description et Explanation
             DescNode := XMLElement.FindNode('Description');
             ExplNode := XMLElement.FindNode('Explanation');
-            
-            if DescNode <> nil then
-              Description := DescNode.TextContent
-            else
-              Description := '';
-            
-            if ExplNode <> nil then
-              Explanation := ExplNode.TextContent
-            else
-              Explanation := '';
-            
+
+            // ValeurXML gère le cas nil, le trim et les guillemets
+            Description := ValeurXML(DescNode);
+            Explanation := ValeurXML(ExplNode);
+
             // Stocker dans la liste
             RaceData.Code := Code;
             RaceData.Libelle := Description;
@@ -941,9 +1378,7 @@ begin
             
             // Ajouter dans l'arbre
             NodeRace := TreeViewLivre.Items.AddChild(NodeRaces, RaceData.Libelle);
-            NodeRace.Data := Pointer(PtrInt(1));  // 1 = donnée
-            // Store mapping of label to code
-            RaceLibelleToCodeMap.Values[RemoveQuotes(RaceData.Libelle)] := Code;
+            SetNodeInfo(NodeRace, 1, Code);  // 1 = donnée
             
             // ========== CHARGER LES ATTRIBUTS DE CETTE RACE ==========
             LoadAttributesForRace(XMLElement, NodeRace, Code);
@@ -952,16 +1387,19 @@ begin
             LoadSkillsForRaceTree(XMLElement, NodeRace, Code);
             
             // ========== CHARGER LES TALENTS DE CETTE RACE DANS L'ARBRE ==========
-            LoadTalentsForRaceTree(XMLElement, NodeRace);
+            LoadTalentsForRaceTree(XMLElement, NodeRace, Code);
             
             // ========== CHARGER LES CARRIÈRES DE CETTE RACE DANS L'ARBRE ==========
-            LoadCareersForRaceTree(XMLElement, NodeRace);
+            LoadCareersForRaceTree(XMLElement, NodeRace, Code);
           end;
       end;
     
     // ========== CARRIÈRES ==========
+    // Table métier -> races possibles, construite avant la boucle
+    ConstruireMetierRacesMap();
+    
     NodeCareers := TreeViewLivre.Items.AddChild(NodeRoot, GetTexteLibelle('LAB_006'));
-    NodeCareers.Data := Pointer(PtrInt(0));
+    SetNodeInfo(NodeCareers, 0);
     
     CareerElements := XMLDoc.GetElementsByTagName('Career');
     
@@ -970,15 +1408,31 @@ begin
         for I := 0 to CareerElements.Count - 1 do
           begin
             XMLElement := TDOMElement(CareerElements.Item[I]);
+            
+            // GetElementsByTagName ramène AUSSI les <Career name="..."> des
+            // SUBCHAPTER_CAREER des races. On ne garde que les métiers racine.
+            if (XMLElement.ParentNode <> nil) and
+               (XMLElement.ParentNode.NodeName = 'SUBCHAPTER_CAREER') then
+              Continue;
+            
             Code := XMLElement.GetAttribute('id');
             
             // Ignorer les éléments sans Code valide
             if Code = '' then
               Continue;
             
+            // Libellé du métier depuis le XML du livre courant
+            Description := ValeurXML(XMLElement.FindNode('Description'));
+            if Description = '' then
+              Description := Code;  // fallback
+            
             // Ajouter dans l'arbre
-            NodeCareer := TreeViewLivre.Items.AddChild(NodeCareers, Code);
-            NodeCareer.Data := Pointer(PtrInt(1));
+            NodeCareer := TreeViewLivre.Items.AddChild(NodeCareers, Description);
+            SetNodeInfo(NodeCareer, 14, Code);  // 14 = métier racine
+            
+            // Sous-branches
+            LoadMetierRacesPossibles(Code, NodeCareer);
+            LoadMetierNiveaux(XMLElement, Code, NodeCareer);
           end;
       end;
     
@@ -999,7 +1453,6 @@ end;
 
 procedure TWinLivres.TreeViewLivreChange(Sender: TObject; Node: TTreeNode);
 var
-  CleanedLabel: String;
   RaceCodeFound: String;
 begin
   if Node = nil then Exit;
@@ -1007,7 +1460,7 @@ begin
   NodeSelectionnee := Node;
   
   // Vérifier le type de nœud basé sur Node.Data
-  case PtrInt(Node.Data) of
+  case GetNodeType(Node) of
     0: begin
          // C'est un chapitre (Races, Attributes, Careers, etc.)
          TypeNodeSelectionnee := 'CHAPITRE';
@@ -1017,7 +1470,7 @@ begin
     1: begin
          // C'est une race
          TypeNodeSelectionnee := 'DONNEE';
-         CurrentRaceCode := RaceLibelleToCodeMap.Values[Node.Text];
+         CurrentRaceCode := GetNodeCode(Node);
          LabelFormTitle.Caption := GetTexteLibelle('LAB_042') + ': ' + Node.Text;
          MasquerAfficherElements('');  // Masquer tous les grids
          AfficherDonneeRace(CurrentRaceCode);
@@ -1036,16 +1489,14 @@ begin
          // C'est une branche "Compétences de race"
          TypeNodeSelectionnee := 'CHAPITRE';
          // Afficher toutes les compétences de la race parente
-         if Node.Parent <> nil then
+         RaceCodeFound := GetNodeCode(Node);
+         
+         if RaceCodeFound <> '' then
          begin
-           // Remove quotes from Node.Parent.Text to match RaceLibelleToCodeMap keys
-           CleanedLabel := StringReplace(Node.Parent.Text, '"', '', [rfReplaceAll]);
-           RaceCodeFound := RaceLibelleToCodeMap.Values[CleanedLabel];
+           if Node.Parent <> nil then
+             LabelFormTitle.Caption := GetTexteLibelle('LAB_087') + ': ' + Node.Parent.Text;
            
-           LabelFormTitle.Caption := GetTexteLibelle('LAB_087') + ': ' + Node.Parent.Text;
-           
-           if RaceCodeFound <> '' then
-             AfficherSkillsForRace(RaceCodeFound);  // Appelle MasquerAfficherElements('COMPETENCE')
+           AfficherSkillsForRace(RaceCodeFound);  // Appelle MasquerAfficherElements('COMPETENCE')
          end
          else
          begin
@@ -1072,14 +1523,10 @@ begin
          TypeNodeSelectionnee := 'CHAPITRE';
          LabelFormTitle.Caption := GetTexteLibelle('LAB_006');
          
-         if Node.Parent <> nil then
-         begin
-           CleanedLabel := StringReplace(Node.Parent.Text, '"', '', [rfReplaceAll]);
-           RaceCodeFound := RaceLibelleToCodeMap.Values[CleanedLabel];
-           
-           if RaceCodeFound <> '' then
-             AfficherCareersForRace(RaceCodeFound);  // Appelle MasquerAfficherElements('CARRIERE')
-         end
+         RaceCodeFound := GetNodeCode(Node);
+         
+         if RaceCodeFound <> '' then
+           AfficherCareersForRace(RaceCodeFound)  // Appelle MasquerAfficherElements('CARRIERE')
          else
          begin
            MasquerAfficherElements('');  // Masquer tous les grids
@@ -1091,6 +1538,21 @@ begin
          TypeNodeSelectionnee := 'CARRIERE';
          LabelFormTitle.Caption := Node.Text;
          // Pour l'instant, juste afficher le nom
+         MasquerAfficherElements('');  // Masquer tous les grids
+         MasquerForm();
+       end;
+    14: begin
+         // C'est un métier de niveau 1
+         TypeNodeSelectionnee := 'METIER';
+         LabelFormTitle.Caption := GetTexteLibelle('LAB_006') + ': ' + Node.Text;
+         MasquerAfficherElements('');  // Masquer tous les grids
+         MasquerForm();
+       end;
+    15..25: begin
+         // Sous-branches d'un métier : races possibles, niveaux et leur contenu.
+         // Affichage seul pour l'instant, la saisie viendra plus tard.
+         TypeNodeSelectionnee := 'METIER';
+         LabelFormTitle.Caption := Node.Text;
          MasquerAfficherElements('');  // Masquer tous les grids
          MasquerForm();
        end;
@@ -1452,7 +1914,10 @@ begin
     if LabelTalentsRandom <> nil then
       LabelTalentsRandom.Visible := False;
     if TreeViewTalents <> nil then
+    begin
+      LibererNodesData(TreeViewTalents);
       TreeViewTalents.Items.Clear;
+    end;
     Exit;
   end;
   
@@ -1467,6 +1932,7 @@ begin
   begin
     TreeViewTalents.Items.BeginUpdate;
     try
+      LibererNodesData(TreeViewTalents);
       TreeViewTalents.Items.Clear;
       
       // Boucler sur les enfants du nœud Talent (TTreeView source)
@@ -1480,7 +1946,7 @@ begin
           if Pos(GetTexteLibelle('LAB_127'), ChildNode.Text) > 0 then
           begin
             NodeTalent := TreeViewTalents.Items.Add(nil, ChildNode.Text);
-            NodeTalent.Data := Pointer(PtrInt(11));  // 11 = choice node
+            SetNodeInfo(NodeTalent, 11);  // 11 = choice node
             
             // Ajouter les enfants du choix
             for J := 0 to ChildNode.Count - 1 do
@@ -1489,18 +1955,18 @@ begin
               if ChildChoice <> nil then
               begin
                 NodeChoice := TreeViewTalents.Items.AddChild(NodeTalent, ChildChoice.Text);
-                NodeChoice.Data := Pointer(PtrInt(12));  // 12 = choice item
+                SetNodeInfo(NodeChoice, 12);  // 12 = choice item
               end;
             end;
           end
           // CASE 2: Talent aléatoire - compter seulement (vérifier par Data)
-          else if PtrInt(ChildNode.Data) = 6 then
+          else if GetNodeType(ChildNode) = 6 then
             Inc(RandomCount)
           // CASE 3: Talent fixe - ajouter directement
           else
           begin
             NodeTalent := TreeViewTalents.Items.Add(nil, ChildNode.Text);
-            NodeTalent.Data := Pointer(PtrInt(10));  // 10 = talent node
+            SetNodeInfo(NodeTalent, 10);  // 10 = talent node
           end;
         end;
       end;
