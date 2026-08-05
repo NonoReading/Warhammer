@@ -95,6 +95,7 @@ Type
      CreationTalent:             array of StructurePersonnageTalent;
      MetierAncien:               array of StructurePersonnageMetier;
      MetierCompetence:           array of StructurePersonnageCompetence;
+     MetierTalent:               array of StructurePersonnageTalent;
      AugmentationAttribut:       array of StructurePersonnageAttribut;
      AugmentationCompetence:     array of StructurePersonnageCompetence;
      AugmentationTalent:         array of StructurePersonnageTalent;
@@ -316,6 +317,19 @@ begin
             end;
           XMLContent.Add(XmlFin(ConstXmlSousChapitreCompMetier));
         XMLContent.Add(XmlFin(ConstXmlChapitreCompetence));
+
+        // Talents de Metier en cours
+        XMLContent.Add(XmlDebut(ConstXmlChapitreTalent));
+          XMLContent.Add(XmlDebut(ConstXmlSousChapitreTalMetier));
+          for PersonnageTalent in Personnage.MetierTalent do
+            begin
+              XMLContent.Add(XmlLigneDonnee(ConstXmlTalent, PersonnageTalent.CodeTalent, IntToStr(PersonnageTalent.Valeur)));
+              PTalent     := ChercheTalent(PersonnageTalent.CodeTalent);
+              ListeLivres := PersonnageLivre(ListeLivres, PTalent.livre);
+              XMLContent.Add(XmlCommentaire(PTalent.Libelle));
+            end;
+          XMLContent.Add(XmlFin(ConstXmlSousChapitreTalMetier));
+        XMLContent.Add(XmlFin(ConstXmlChapitreTalent));
 
         // anciens métiers
         XMLContent.Add(XmlDebut(ConstXmlChapitreOldWork));
@@ -786,6 +800,26 @@ begin
                       PersonnageCompetence.CodeCompetence := RemoveQuotes(UTF8Encode(Node.Attributes.GetNamedItem(ConstXmlData).NodeValue));
                       PersonnageCompetence.Valeur         := StrToIntDef(RemoveQuotes(UTF8Encode(Node.TextContent)),0);
                       Personnage.MetierCompetence         += [PersonnageCompetence];
+                    end;
+                  Node := Node.NextSibling;
+                end;
+            end;
+        end;
+
+      ChapterRaceNode := PlayerNode.FindNode(ConstXmlChapitreTalent);
+      if Assigned(ChapterRaceNode) then
+        begin
+          SubChapterNode := ChapterRaceNode.FindNode(ConstXmlSousChapitreTalMetier);
+          if Assigned(SubChapterNode) then
+            begin
+              Node := SubChapterNode.FirstChild;
+              while Assigned(Node) do
+                begin
+                  if (Node.NodeType = ELEMENT_NODE) then
+                    begin
+                      PersonnageTalent.CodeTalent := RemoveQuotes(UTF8Encode(Node.Attributes.GetNamedItem(ConstXmlData).NodeValue));
+                      PersonnageTalent.Valeur     := StrToIntDef(RemoveQuotes(UTF8Encode(Node.TextContent)),0);
+                      Personnage.MetierTalent     += [PersonnageTalent];
                     end;
                   Node := Node.NextSibling;
                 end;

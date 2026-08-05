@@ -41,6 +41,7 @@ Const
       ConstXmlSousChapitreTalent	= 'SUBCHAPTER_TALENT';
       ConstXmlSousChapitreCompetence    = 'SUBCHAPTER_SKILL';
       ConstXmlSousChapitreCompMetier    = 'SUBCHAPTER_SKILLCAREER';
+      ConstXmlSousChapitreTalMetier     = 'SUBCHAPTER_TALENTCAREER';
       ConstXmlSousChapitreCompSpecie    = 'SUBCHAPTER_SKILLSPECIE';
       ConstXmlSousChapitreCompCreation  = 'SUBCHAPTER_SKILLCREATION';
       ConstXmlChapitreOldWork		= 'CHAPTER_OLDCAREER';
@@ -138,6 +139,10 @@ Const
       ConstXmlModifieAttribut           = 'ModifyCarac';
       ConstXmlModifieCompetence         = 'ModifySkill';
       ConstXmlAjouteCompetence          = 'AddSkill';
+      ConstXmlOpinions                  = 'OPINIONS';
+      ConstXmlOpinion                   = 'Opinion';
+      ConstXmlTarget                    = 'target';
+      ConstXmlSource                    = 'source';
 
       // constantes de passage d'étapes de création de personnages
       ConstSuivant			= 1;

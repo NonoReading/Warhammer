@@ -10,10 +10,10 @@ object WinCreations: TWinCreations
   Constraints.MinHeight = 843
   Constraints.MinWidth = 1458
   DesignTimePPI = 120
+  Position = poDesktopCenter
+  LCLVersion = '4.8.0.0'
   OnCloseQuery = FormCloseQuery
   OnCreate = FormCreate
-  Position = poDesktopCenter
-  LCLVersion = '3.8.0.0'
   object ImageScroll: TImage
     Left = 0
     Height = 913
@@ -1552,8 +1552,8 @@ object WinCreations: TWinCreations
         Height = 32
         Top = 216
         Width = 216
-        OnChange = TrackBarPointSuppChange
         Position = 0
+        OnChange = TrackBarPointSuppChange
         TabOrder = 3
       end
       object LabDestin: TEdit

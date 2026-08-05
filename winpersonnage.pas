@@ -1384,7 +1384,7 @@ begin
   TabAugmentationTalent.Cells[ColAugmTalSpe, 0]     := GetTexteLibelle('LAB_078');
   TabAugmentationTalent.ColWidths[ColAugmTalSpe]    := 200;
   TabAugmentationTalent.Cells[ColAugmTalSpeSel, 0]  := 'Spé Choisie';
-  TabAugmentationTalent.ColWidths[ColAugmTalSpe]    := 0;
+  TabAugmentationTalent.ColWidths[ColAugmTalSpeSel] := 0;
   TabAugmentationTalent.Cells[ColAugmTalWork, 0]    := 'Work';
   TabAugmentationTalent.ColWidths[ColAugmTalWork]   := 0;
   TabAugmentationTalent.Cells[ColAugmTalSort, 0]    := 'Sort';
@@ -2050,9 +2050,10 @@ procedure TWinPersonnages.TabAugmentationTalentDblClick(Sender: TObject);
   var
     PTalent: StructureTalent;
     Ind:     Integer;
+    Ind2:    Integer;
     Trouve:  Boolean = false;
   begin
-    if (TabAugmentationTalent.Col = ColAugmTalSpeSel) and (TabAugmentationTalent.Cells[ColAugmTalSpe, TabAugmentationTalent.Row] = GetTexteLibelle(ConstLabSelSpe))  then
+    if (TabAugmentationTalent.Col = ColAugmTalSpe) and (TabAugmentationTalent.Cells[ColAugmTalSpe, TabAugmentationTalent.Row] = GetTexteLibelle(ConstLabSelSpe))  then
       begin
         ChoixWinTypeFichier         := ConstXmlSousChapitreTalent;
         ChoixWinTalent              := TabAugmentationTalent.Cells[ColAugmTalCode, TabAugmentationTalent.Row];
@@ -2065,6 +2066,27 @@ procedure TWinPersonnages.TabAugmentationTalentDblClick(Sender: TObject);
             TabAugmentationTalent.Cells[ColAugmTalSpeSel, TabAugmentationTalent.Row] := SelectWinTalent;
             PTalent := ChercheTalent(SelectWinTalent);
             TabAugmentationTalent.Cells[ColAugmTalLib, TabAugmentationTalent.Row] := PTalent.Libelle;
+
+            // A - récupérer la valeur si le talent choisi existe déjà dans la fiche
+            for Ind := 1 to TabTalent.RowCount - 1 do
+              if TabTalent.Cells[ColTalCode, Ind] = SelectWinTalent then
+                begin
+                  TabAugmentationTalent.Cells[ColAugmTalActuel, TabAugmentationTalent.Row]  := TabTalent.Cells[ColTalNb, Ind];
+                  if TabAugmentationTalent.Cells[ColAugmTalNouveau, TabAugmentationTalent.Row] = '' then
+                    TabAugmentationTalent.Cells[ColAugmTalNouveau, TabAugmentationTalent.Row] := TabTalent.Cells[ColTalNb, Ind];
+                  break;
+                end;
+
+            // B - le choix devient le code de référence de la ligne
+            TabAugmentationTalent.Cells[ColAugmTalCode, TabAugmentationTalent.Row] := SelectWinTalent;
+
+            // C - propager au tableau métier (persistance)
+            for Ind2 := 0 to High(Personnage.MetierTalent) do
+              if Personnage.MetierTalent[Ind2].CodeTalent = ChoixWinTalent then
+                begin
+                  Personnage.MetierTalent[Ind2].CodeTalent := SelectWinTalent;
+                  break;
+                end;
           end;
       end
     else if (TabAugmentationTalent.Col = ColCompLib) and (TabAugmentationTalent.Cells[ColAugmCompLib, TabAugmentationTalent.Row] = GetTexteLibelle(ConstLabAdd))  then
@@ -3601,7 +3623,6 @@ Procedure TWinPersonnages.ChargeAugmentation();
   Var
     Ind:               Integer;
     NbC:               Integer;
-    PMetierTalent:     StructureMetierTalent;
     PTalent:           StructureTalent;
     IndT:              Integer;
     PCompetence:       StructureCompetence;
@@ -3722,29 +3743,28 @@ Procedure TWinPersonnages.ChargeAugmentation();
 
     // Talents
     NbC := 0;
-    TabAugmentationTalent.RowCount := 1;
-    For PMetierTalent in ListMetierTalent do
-      if CompareRechercheValeur(PMetierTalent.CodeMetier, MetierEnCours) and (PMetierTalent.NiveauMetier = StrToInt(MetierNvEnCours)) then
+    For PersonnageTalent in Personnage.MetierTalent do
+      if PersonnageTalent.Valeur = StrToInt(MetierNvEnCours) then
         begin
-         ListComp := ListeTalent(PMetierTalent.CodeTalent);
+         ListComp := ListeTalent(PersonnageTalent.CodeTalent);
          NbC := NbC + 1;
          TabAugmentationTalent.rowCount      := TabAugmentationTalent.rowCount + 1;
-         TabAugmentationTalent.Cells[ColAugmTalCode, NbC] := PMetierTalent.CodeTalent;
-         PTalent                             := ChercheTalent(PMetierTalent.CodeTalent);
+         TabAugmentationTalent.Cells[ColAugmTalCode, NbC] := PersonnageTalent.CodeTalent;
+         PTalent                             := ChercheTalent(PersonnageTalent.CodeTalent);
          TabAugmentationTalent.Cells[ColAugmTalLib, NbC] := PTalent.Libelle;
-         if ListComp.Count > 1 then
+         if (ListComp.Count > 1) or (Pos(ValeurGenerique, PersonnageTalent.CodeTalent) > 0) then
            TabAugmentationTalent.Cells[ColAugmTalSpe, NbC]:= GetTexteLibelle(ConstLabSelSpe);
-         TabAugmentationTalent.Cells[ColAugmTalWork, NbC]  := PMetierTalent.CodeTalent;
+         TabAugmentationTalent.Cells[ColAugmTalWork, NbC]  := PersonnageTalent.CodeTalent;
 
          for IndT := 1 to TabTalent.RowCount - 1 do
            begin
-             if CompareRechercheValeur(PMetierTalent.CodeTalent, TabTalent.Cells[ColTalCode, IndT]) then
+             if CompareRechercheValeur(PersonnageTalent.CodeTalent, TabTalent.Cells[ColTalCode, IndT]) then
                begin
                  TabAugmentationTalent.Cells[ColAugmTalActuel, NbC]  := TabTalent.Cells[ColTalNb, IndT];
                  TabAugmentationTalent.Cells[ColAugmTalNouveau, NbC] := TabTalent.Cells[ColTalNb, IndT];
                  break;
                end
-             else if (copy(TabTalent.Cells[ColTalCode, IndT],1,12) = copy(PMetierTalent.CodeTalent,1,12)) then
+             else if (copy(TabTalent.Cells[ColTalCode, IndT],1,12) = copy(PersonnageTalent.CodeTalent,1,12)) then
                begin
                  TabAugmentationTalent.Cells[ColAugmTalCode, NbC]   := TabTalent.Cells[ColTalCode, IndT];
                  TabAugmentationTalent.Cells[ColAugmTalLib, NbC]    := TabTalent.Cells[ColTalLib, IndT];
@@ -3766,7 +3786,6 @@ Procedure TWinPersonnages.ChargeAugmentation();
             end;
         if Trouve = false then
           begin
-            ListComp := ListeTalent(PMetierTalent.CodeTalent);
             NbC := NbC + 1;
             TabAugmentationTalent.rowCount := TabAugmentationTalent.rowCount + 1;
             TabAugmentationTalent.Cells[ColAugmTalCode, NbC]   := TabTalent.Cells[ColTalCode, Ind2];
@@ -3804,6 +3823,7 @@ Procedure TWinPersonnages.MajTables();
     PAttribut:         StructureAttribut;
     PSort:             StructureSort;
     PMetierCompetence: StructureMetierCompetence;
+    PMetierTalent:     StructureMetierTalent;
     CodEquip:          String;
     TypEquip:          String;
     Ind:               Integer;
@@ -3901,9 +3921,6 @@ Procedure TWinPersonnages.MajTables();
                                                                       StrToIntDef(TabTalent.Cells[ColTalNbCrea, IndActu],0));
                 TabTalent.Cells[ColTalNb, IndActu] := IntToStr(StrToIntDef(TabTalent.Cells[ColTalNbCrea, IndActu],0) +
                                                                       StrToIntDef(TabTalent.Cells[ColTalNbAugm, IndActu],0));
-                if TabAugmentationTalent.Cells[ColAugmTalSpeSel, indAugm] <> '' then
-                  // remplacer la compétence général par la compétence choisie
-                  TabTalent.Cells[2, IndActu] := TabAugmentationTalent.Cells[ColAugmTalSpeSel, indAugm];
                 Trouve := True;
                 break;
               end;
@@ -3997,6 +4014,14 @@ Procedure TWinPersonnages.MajTables();
                     Personnage.MetierCompetence         += [PersonnageCompetence];
                   end;
 
+              Personnage.MetierTalent := [];
+              for PMetierTalent in ListMetierTalent do
+                if CompareRechercheValeur(PMetierTalent.CodeMetier, NvMetier) then
+                  begin
+                    PersonnageTalent.CodeTalent := PMetierTalent.CodeTalent;
+                    PersonnageTalent.Valeur     := PMetierTalent.NiveauMetier;
+                    Personnage.MetierTalent     += [PersonnageTalent];
+                  end;
             end;
         end;
 

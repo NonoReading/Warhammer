@@ -13,7 +13,7 @@ uses
   ChargeMetierCompetence, ChargeArme, ChargeArmure, ChargeMetierEquipement,
   WinMetier, WinRaces, ChargeTexte, WinTalent, WinCompetence, ChargeLivre,
   ChargeMetierSousMetier, ChargeMetierRaceChoixMetier, WinSpecialisation,
-  ChargePersonnage, BGRABitmap, BGRABitmapTypes, BCButton, BCLabel;
+  ChargeMetierTalent, ChargePersonnage, BGRABitmap, BGRABitmapTypes, BCButton, BCLabel;
 
 type
   { TWinCreations }
@@ -915,6 +915,7 @@ procedure TWinCreations.PhaseSave(NouvellePhase: Integer);
     PTalent:               StructureTalent;
     PCompetence:           StructureCompetence;
     PMetierCompetence:     StructureMetierCompetence;
+    PMetierTalent:         StructureMetierTalent;
     Xp:                    Integer;
     PRace:                 StructureRace;
   Begin
@@ -929,6 +930,7 @@ procedure TWinCreations.PhaseSave(NouvellePhase: Integer);
            Personnage.Equipement                        := [];
            Personnage.MetierAncien                      := [];
            Personnage.MetierCompetence                  := [];
+           Personnage.MetierTalent                      := [];
            ChargeTabMetier();
          end;
 
@@ -1090,19 +1092,28 @@ procedure TWinCreations.PhaseSave(NouvellePhase: Integer);
 
            IndTab := 0;
            For PersonnageCompetence in Personnage.CreationCompetence40 do
-              Begin
-                PCompetence := ChercheCompetence(PersonnageCompetence.CodeCompetence);
-                Row         := FindRowByText(RecapComp, PCompetence.CodeCompetence, 4);
-                if Row = -1 then
-                  begin
-                    Row     := DebMetierRec + NbAdd;
-                    NbAdd   := NbAdd + 1;
-                    RecapComp.Cells[1, Row] := PCompetence.Libelle;
-                    RecapComp.Cells[3, Row] := IntToStr(PersonnageCompetence.Valeur);
-                    RecapComp.Cells[5, Row] := PCompetence.CodeCompetence;
-                    Inc(IndTab);
-                  end;
-              end;
+             Begin
+               PCompetence := ChercheCompetence(PersonnageCompetence.CodeCompetence);
+               Row         := FindRowByText(RecapComp, PCompetence.CodeCompetence, 4);
+               if Row = -1 then
+                 begin
+                   Row     := DebMetierRec + NbAdd;
+                   NbAdd   := NbAdd + 1;
+                   RecapComp.Cells[1, Row] := PCompetence.Libelle;
+                   RecapComp.Cells[3, Row] := IntToStr(PersonnageCompetence.Valeur);
+                   RecapComp.Cells[5, Row] := PCompetence.CodeCompetence;
+                   Inc(IndTab);
+                 end;
+             end;
+
+           // liste des talents de ce métier (tous niveaux)
+           for PMetierTalent in ListMetierTalent do
+              if (PMetierTalent.CodeMetier = MetierEnCours) then
+                begin
+                  PersonnageTalent.CodeTalent := PMetierTalent.CodeTalent;
+                  PersonnageTalent.Valeur     := PMetierTalent.NiveauMetier;
+                  Personnage.MetierTalent     += [PersonnageTalent];
+                end;
          end;
 
       7: Begin

@@ -36,11 +36,13 @@ Const
       ConstXmlChapitreCreation		= 'CHAPTER_CREATION';
       ConstXmlChapitreAugmentation	= 'CHAPTER_INCREASE';
       ConstXmlChapitreCompetence	= 'CHAPTER_SKILL';
+      ConstXmlChapitreTalent            = 'CHAPTER_TALENT';
       ConstXmlChapitreCoutXp            = 'CHAPTER_XP';
       ConstXmlSousChapitreCarac	        = 'SUBCHAPTER_ATTR';
       ConstXmlSousChapitreTalent	= 'SUBCHAPTER_TALENT';
       ConstXmlSousChapitreCompetence    = 'SUBCHAPTER_SKILL';
       ConstXmlSousChapitreCompMetier    = 'SUBCHAPTER_SKILLCAREER';
+      ConstXmlSousChapitreTalMetier     = 'SUBCHAPTER_TALENTCAREER';
       ConstXmlSousChapitreCompSpecie    = 'SUBCHAPTER_SKILLSPECIE';
       ConstXmlSousChapitreCompCreation  = 'SUBCHAPTER_SKILLCREATION';
       ConstXmlChapitreOldWork		= 'CHAPTER_OLDCAREER';
