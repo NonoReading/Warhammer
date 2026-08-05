@@ -1962,6 +1962,7 @@ procedure TWinPersonnages.TabAugmentationCompetenceDblClick(Sender: TObject);
     Trouve:      Boolean = false;
     PCompetence: StructureCompetence;
     Value:       String;
+    Ind2:        Integer;
   begin
     if (TabAugmentationCompetence.Col = ColAugmCompSpe) and (TabAugmentationCompetence.Cells[ColAugmCompSpe, TabAugmentationCompetence.Row] = GetTexteLibelle(ConstLabSelSpe))  then
       begin
@@ -1976,19 +1977,42 @@ procedure TWinPersonnages.TabAugmentationCompetenceDblClick(Sender: TObject);
             TabAugmentationCompetence.Cells[ColAugmCompSpe, TabAugmentationCompetence.Row]    := GetTexteLibelle('LAB_130');
             TabAugmentationCompetence.Cells[ColAugmCompSpeSel, TabAugmentationCompetence.Row] := SelectWinCompetence;
             PCompetence                                                                       := ChercheCompetence(SelectWinCompetence);
-            TabAugmentationCompetence.Cells[ColAugmCompLib, TabAugmentationCompetence.Row]    := PCompetence.Libelle;
-            for Ind := 1 to TabCompetence.RowCount - 1 do
-              begin
-                if TabCompetence.Cells[ColCompCode, ind] = SelectWinCompetence then
-                  begin
-                    Value := TabCompetence.Cells[ColCompBonus, ind];
-                    TabAugmentationCompetence.Cells[ColAugmCompActuel, TabAugmentationCompetence.Row]   := Value;
-                    TabAugmentationCompetence.Cells[ColAugmCompNouveau, TabAugmentationCompetence.Row]  := Value;
 
-                    TabAugmentationCompetenceCalcul(TabAugmentationCompetence.Row, Value);
-                    break;
-                  end;
-              end;
+            TabAugmentationCompetence.Cells[ColAugmCompLib, TabAugmentationCompetence.Row] := PCompetence.Libelle;
+
+            // A - récupérer la valeur si la spécialisation existe déjà (AVANT tout renommage)
+            for Ind := 1 to TabCompetence.RowCount - 1 do
+              if TabCompetence.Cells[ColCompCode, Ind] = SelectWinCompetence then
+                begin
+                  Value := TabCompetence.Cells[ColCompBonus, Ind];
+                  if TabAugmentationCompetence.Cells[ColAugmCompNouveau, TabAugmentationCompetence.Row]
+                     = TabAugmentationCompetence.Cells[ColAugmCompActuel, TabAugmentationCompetence.Row] then
+                    TabAugmentationCompetence.Cells[ColAugmCompNouveau, TabAugmentationCompetence.Row] := Value;
+                  TabAugmentationCompetence.Cells[ColAugmCompActuel, TabAugmentationCompetence.Row] := Value;
+                  Value := TabAugmentationCompetence.Cells[ColAugmCompNouveau, TabAugmentationCompetence.Row];
+                  TabAugmentationCompetenceCalcul(TabAugmentationCompetence.Row, Value);
+                  break;
+                end;
+
+            // B - renommer la ligne générique dans la fiche (APRÈS A)
+            Trouve := False;
+            for Ind := 1 to TabCompetence.RowCount - 1 do
+              if TabCompetence.Cells[ColCompCode, Ind] = ChoixWinCompetence then
+                begin
+                  TabCompetence.Cells[ColCompCode, Ind] := SelectWinCompetence;
+                  TabCompetence.Cells[ColCompLib, Ind]  := PCompetence.Libelle;
+                  Trouve := True;
+                  break;
+                end;
+            ShowMessage('B cherche [' + ChoixWinCompetence + '] trouve=' + BoolToStr(Trouve, True));
+
+            // C - propager au tableau métier (persistance)
+            for Ind2 := 0 to High(Personnage.MetierCompetence) do
+              if Personnage.MetierCompetence[Ind2].CodeCompetence = ChoixWinCompetence then
+                begin
+                  Personnage.MetierCompetence[Ind2].CodeCompetence := SelectWinCompetence;
+                  break;
+                end;
           end;
       end
     else if (TabAugmentationCompetence.Col = ColCompLib) and (TabAugmentationCompetence.Cells[ColAugmCompLib, TabAugmentationCompetence.Row] = GetTexteLibelle(ConstLabAdd))  then
@@ -3835,11 +3859,12 @@ Procedure TWinPersonnages.MajTables();
               begin
                 // mettre à jour le total
                 TabCompetence.Cells[ColCompWork, IndActu] := IntToStr(StrToIntDef(TabCompetence.Cells[ColCompWork, IndActu],0) +
-                                                                      StrToIntDef(TabAugmentationCompetence.Cells[ColAugmCompNouveau, indAugm],0) -
                                                                       StrToIntDef(TabAugmentationCompetence.Cells[ColAugmCompActuel, indAugm],0));
                 if TabAugmentationCompetence.Cells[ColAugmCompSpeSel, indAugm] <> '' then
-                  // remplacer la compétence général par la compétence choisie
-                  TabCompetence.Cells[ColCompActuel, IndActu] := TabAugmentationCompetence.Cells[ColAugmCompSpeSel, indAugm];
+                  begin
+                    TabCompetence.Cells[ColCompCode, IndActu] := TabAugmentationCompetence.Cells[ColAugmCompSpeSel, indAugm];
+                    TabCompetence.Cells[ColCompLib, IndActu]  := TabAugmentationCompetence.Cells[ColAugmCompLib, indAugm];
+                  end;
                 PCompetence := chercheCompetence(TabAugmentationCompetence.Cells[ColAugmCompCode,indAugm]);
 
                 trouve := true;
