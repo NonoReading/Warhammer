@@ -9,7 +9,7 @@
         <Filename Value="WarhammerHelp.lpr"/>
         <IsPartOfProject Value="True"/>
         <IsVisibleTab Value="True"/>
-        <CursorPos X="12" Y="11"/>
+        <CursorPos X="16" Y="17"/>
         <UsageCount Value="200"/>
         <Loaded Value="True"/>
       </Unit>
@@ -508,8 +508,8 @@
         <IsPartOfProject Value="True"/>
         <UnitName Value="XmlExportImport"/>
         <EditorIndex Value="10"/>
-        <TopLine Value="1269"/>
-        <CursorPos X="68" Y="1276"/>
+        <TopLine Value="864"/>
+        <CursorPos Y="878"/>
         <UsageCount Value="200"/>
         <Loaded Value="True"/>
       </Unit>
@@ -530,8 +530,8 @@
         <ResourceBaseClass Value="Form"/>
         <UnitName Value="WinLivre"/>
         <EditorIndex Value="14"/>
-        <TopLine Value="1316"/>
-        <CursorPos X="22" Y="1300"/>
+        <TopLine Value="3337"/>
+        <CursorPos X="51" Y="3323"/>
         <UsageCount Value="200"/>
         <Loaded Value="True"/>
         <LoadedDesigner Value="True"/>
@@ -543,7 +543,7 @@
         <EditorIndex Value="2"/>
         <TopLine Value="30"/>
         <CursorPos X="29" Y="44"/>
-        <UsageCount Value="147"/>
+        <UsageCount Value="148"/>
         <Loaded Value="True"/>
       </Unit>
       <Unit>
@@ -553,7 +553,7 @@
         <EditorIndex Value="-1"/>
         <TopLine Value="5"/>
         <CursorPos X="34" Y="11"/>
-        <UsageCount Value="61"/>
+        <UsageCount Value="62"/>
       </Unit>
       <Unit>
         <Filename Value="chargetalentattributmodif.pas"/>
@@ -562,7 +562,7 @@
         <EditorIndex Value="-1"/>
         <TopLine Value="3"/>
         <CursorPos X="43" Y="13"/>
-        <UsageCount Value="55"/>
+        <UsageCount Value="56"/>
       </Unit>
       <Unit>
         <Filename Value="chargetalentcompetencemodif.pas"/>
@@ -570,7 +570,7 @@
         <UnitName Value="ChargeTalentCompetenceModif"/>
         <EditorIndex Value="-1"/>
         <CursorPos X="31" Y="17"/>
-        <UsageCount Value="52"/>
+        <UsageCount Value="53"/>
       </Unit>
       <Unit>
         <Filename Value="chargetalentcompetenceajoute.pas"/>
@@ -578,7 +578,7 @@
         <UnitName Value="ChargeTalentCompetenceAjoute"/>
         <EditorIndex Value="-1"/>
         <CursorPos X="43" Y="14"/>
-        <UsageCount Value="51"/>
+        <UsageCount Value="52"/>
       </Unit>
       <Unit>
         <Filename Value="unitcreationrace.pas"/>
@@ -1103,8 +1103,8 @@
         <ResourceBaseClass Value="Form"/>
         <UnitName Value="WinLivre"/>
         <EditorIndex Value="-1"/>
-        <TopLine Value="1232"/>
-        <CursorPos X="41" Y="1238"/>
+        <TopLine Value="1240"/>
+        <CursorPos X="48" Y="1251"/>
         <UsageCount Value="11"/>
       </Unit>
       <Unit>
@@ -1184,24 +1184,14 @@
         <UsageCount Value="11"/>
         <DefaultSyntaxHighlighter Value="LFM"/>
       </Unit>
+      <Unit>
+        <Filename Value="..\..\..\Downloads\winlivre_1.pas"/>
+        <UnitName Value="WinLivre"/>
+        <EditorIndex Value="-1"/>
+        <UsageCount Value="10"/>
+      </Unit>
     </Units>
-    <JumpHistory HistoryIndex="29">
-      <Position>
-        <Filename Value="winlivre.pas"/>
-        <Caret Line="691" Column="63" TopLine="678"/>
-      </Position>
-      <Position>
-        <Filename Value="winlivre.pas"/>
-        <Caret Line="687" TopLine="678"/>
-      </Position>
-      <Position>
-        <Filename Value="winlivre.pas"/>
-        <Caret Line="690" TopLine="678"/>
-      </Position>
-      <Position>
-        <Filename Value="winlivre.pas"/>
-        <Caret Line="691" TopLine="678"/>
-      </Position>
+    <JumpHistory HistoryIndex="28">
       <Position>
         <Filename Value="winlivre.pas"/>
         <Caret Line="702" Column="35" TopLine="684"/>
@@ -1305,6 +1295,18 @@
       <Position>
         <Filename Value="winlivre.pas"/>
         <Caret Line="190" Column="15" TopLine="177"/>
+      </Position>
+      <Position>
+        <Filename Value="WarhammerHelp.lpr"/>
+        <Caret Line="8" Column="10"/>
+      </Position>
+      <Position>
+        <Filename Value="WarhammerHelp.lpr"/>
+        <Caret Line="14" Column="16"/>
+      </Position>
+      <Position>
+        <Filename Value="winlivre.pas"/>
+        <Caret Line="3310" Column="46" TopLine="3297"/>
       </Position>
     </JumpHistory>
     <RunParams>

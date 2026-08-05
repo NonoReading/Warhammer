@@ -4018,10 +4018,10 @@ See page 190 for Fear rules"</Explanation>
 <Talent id="RULES-T0025/T0159">
 <Description language="FRANCAIS">"Stout-hearted or Very Resilient"</Description>
 </Talent>
-<Talent id="RULES-T0032_DWARFHOLD">
+<Talent id="RULES-T0134_DWARFHOLD">
 <Description language="FRANCAIS">"Savant (Dwarf Holds and Routes)"</Description>
 </Talent>
-<Talent id="RULES-T0032_MOOT">
+<Talent id="RULES-T0134_MOOT">
 <Description language="FRANCAIS">"Savant (Moot terrain)"</Description>
 </Talent>
 <Talent id="RULES-T0069_BAND">

@@ -247,7 +247,7 @@
   <!-- Inspiring -->
 <Talent name="RULES-T0131">"4"</Talent>
   <!-- Robust -->
-<Talent name="RULES-T0032_MOOT">"4"</Talent>
+<Talent name="RULES-T0134_MOOT">"4"</Talent>
   <!-- Savant (Moot terrain) -->
 </SUBCHAPTER_TALENT>
 <SUBCHAPTER_ITEM>
@@ -368,7 +368,7 @@
   <!-- Strong Legs -->
 <Talent name="RULES-T0015">"4"</Talent>
   <!-- Tinker -->
-<Talent name="RULES-T0032_DWARFHOLD">"4"</Talent>
+<Talent name="RULES-T0134_DWARFHOLD">"4"</Talent>
   <!-- Savant (Dwarf Holds and Routes) -->
 <Talent name="RULES-T0131">"4"</Talent>
   <!-- Robust -->
