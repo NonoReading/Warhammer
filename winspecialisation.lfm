@@ -8,8 +8,8 @@ object WinSpecialisations: TWinSpecialisations
   ClientWidth = 526
   Color = clBlack
   DesignTimePPI = 120
+  LCLVersion = '4.8.0.0'
   OnCreate = FormCreate
-  LCLVersion = '3.0.0.1'
   object TabSpecialisation: TStringGrid
     Left = 19
     Height = 317

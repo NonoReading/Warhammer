@@ -66,34 +66,40 @@ end;
 
 function ListeTalent(CodeTalent :String): TStringList;
   var
-    Liste:             TStringList;
-    Code1:             String;
-    Code2:             String;
-    PTalent:           StructureTalent;
-    Deb:               String;
+    Liste:      TStringList;
+    Branches:   TStringList;
+    SousListe:  TStringList;
+    Ind:        Integer;
+    PTalent:    StructureTalent;
+    Deb:        String;
   begin
     Liste := TStringList.Create;
-    if Pos(SeparateurMulti,CodeTalent) > 0 then
-      // compétence à choisir entre deux options
+    if Pos(SeparateurMulti, CodeTalent) > 0 then
+      // choix entre plusieurs options : on aplatit chaque branche
       begin
-        code1 := ExtractStringBefore(CodeTalent, SeparateurMulti);
-        Liste.Add(code1);
-        code2 := ExtractStringAfter(CodeTalent, SeparateurMulti);
-        Liste.Add(code2);
+        Branches                 := TStringList.Create;
+        Branches.StrictDelimiter := True;
+        Branches.Delimiter       := SeparateurMulti;
+        Branches.DelimitedText   := CodeTalent;
+        for Ind := 0 to Branches.Count - 1 do
+          if Pos(ValeurGenerique, Branches[Ind]) > 0 then
+            begin
+              SousListe := ListeTalent(Branches[Ind]);
+              Liste.AddStrings(SousListe);
+              SousListe.Free;
+            end
+          else
+            Liste.Add(Branches[Ind]);
+        Branches.Free;
       end
-    else if Pos(ValeurGenerique,CodeTalent) > 0 then
+    else if Pos(ValeurGenerique, CodeTalent) > 0 then
       begin
-        // compétence avec des spécialités
-        Deb   := Copy(CodeTalent,1,Pos(ValeurGenerique, CodeTalent));
+        // talent avec des spécialités
+        Deb := Copy(CodeTalent, 1, Pos(ValeurGenerique, CodeTalent));
         For PTalent in ListTalent do
           if (pos(Deb, PTalent.CodeTalent) = 1) and (pos(SeparateurMulti, PTalent.codeTalent) < 1) and (PTalent.CodeTalent <> CodeTalent) then
             Liste.Add(PTalent.CodeTalent);
-        end
-    else
-      // compétence normale
-      Liste.Add(CodeTalent);
-
-    // Renvoyer la liste
+      end;
     Result := Liste;
   end;
 

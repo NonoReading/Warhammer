@@ -36,6 +36,7 @@ Const
       ConstXmlChapitreCreation		= 'CHAPTER_CREATION';
       ConstXmlChapitreAugmentation	= 'CHAPTER_INCREASE';
       ConstXmlChapitreCompetence	= 'CHAPTER_SKILL';
+      ConstXmlChapitreTalent            = 'CHAPTER_TALENT';
       ConstXmlChapitreCoutXp            = 'CHAPTER_XP';
       ConstXmlSousChapitreCarac	        = 'SUBCHAPTER_ATTR';
       ConstXmlSousChapitreTalent	= 'SUBCHAPTER_TALENT';

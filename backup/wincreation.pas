@@ -13,7 +13,7 @@ uses
   ChargeMetierCompetence, ChargeArme, ChargeArmure, ChargeMetierEquipement,
   WinMetier, WinRaces, ChargeTexte, WinTalent, WinCompetence, ChargeLivre,
   ChargeMetierSousMetier, ChargeMetierRaceChoixMetier, WinSpecialisation,
-  ChargePersonnage, BGRABitmap, BGRABitmapTypes, BCButton, BCLabel;
+  ChargeMetierTalent, ChargePersonnage, BGRABitmap, BGRABitmapTypes, BCButton, BCLabel;
 
 type
   { TWinCreations }
@@ -33,34 +33,15 @@ type
     ButtonRaceSelectionner: TBCButton;
     ButtonRaceValider: TBCButton;
     ButtonTalentHasard: TBCButton;
-    ButtonTalentResult1: TBCButton;
-    ButtonTalentResult2: TBCButton;
-    ButtonTalentResult3: TBCButton;
     ButtonTotalMetierCompetence: TButton;
-    CodeTalentLib1: TEdit;
-    CodeTalentLib2: TEdit;
-    CodeTalentLib3: TEdit;
-    CodeTalentResult1: TEdit;
-    CodeTalentResult2: TEdit;
-    CodeTalentResult3: TEdit;
-    ComboBoxTalentSpe1: TComboBox;
-    ComboBoxTalentSpe2: TComboBox;
-    ComboBoxTalentSpe3: TComboBox;
     ComboRaceCreation: TComboBox;
     EditMetierResultat: TSpinEdit;
     EditMetierSousMetierResultat: TSpinEdit;
     EditNomPersonnag: TEdit;
     EditRaceResultat: TSpinEdit;
-    EditTalentResultat1: TSpinEdit;
-    EditTalentResultat2: TSpinEdit;
-    EditTalentResultat3: TSpinEdit;
     GroupBoxAttribut: TGroupBox;
     GroupBoxMetier: TGroupBox;
     GroupBoxRace: TGroupBox;
-    GroupBoxTalentChoix1: TGroupBox;
-    GroupBoxTalentChoix2: TGroupBox;
-    GroupBoxTalentChoix3: TGroupBox;
-    GroupBoxTalentChoix4: TGroupBox;
     ImageScroll: TImage;
     LabDestin: TEdit;
     LabelAttribut: TBCLabel;
@@ -90,19 +71,13 @@ type
     RadioButtonRaceChoix: TRadioButton;
     RadioButtonRaceHasard: TRadioButton;
     RadioButtonRaceResultat: TRadioButton;
-    RadioButtonTalentChoix11: TRadioButton;
-    RadioButtonTalentChoix12: TRadioButton;
-    RadioButtonTalentChoix21: TRadioButton;
-    RadioButtonTalentChoix22: TRadioButton;
-    RadioButtonTalentChoix31: TRadioButton;
-    RadioButtonTalentChoix32: TRadioButton;
-    RadioButtonTalentChoix41: TRadioButton;
-    RadioButtonTalentChoix42: TRadioButton;
     RecapTalent: TStringGrid;
     RecapComp: TStringGrid;
     RecapAttribut: TStringGrid;
+    TabCreationChoix: TStringGrid;
     TabAttribut: TStringGrid;
     TabAttributLanceDe: TStringGrid;
+    TabCreationHasard: TStringGrid;
     TabLivre: TStringGrid;
     TabMetier: TStringGrid;
     TabMetierCompetence: TStringGrid;
@@ -140,6 +115,8 @@ type
     procedure RecapTalentDblClick({%H-}Sender: TObject);
     procedure RecapTalentSelectEditor({%H-}Sender: TObject; {%H-}aCol, {%H-}aRow: Integer;
       var Editor: TWinControl);
+    procedure TabCreationChoixDblClick(Sender: TObject);
+    procedure TabCreationHasardDblClick(Sender: TObject);
     procedure TabLivreDblClick({%H-}Sender: TObject);
     procedure TabMetierCompetenceDblClick({%H-}Sender: TObject);
     procedure TabMetierEquipementDblClick({%H-}Sender: TObject);
@@ -150,6 +127,9 @@ type
     Procedure RaceFenetre(CodeRace: String);
     Procedure MetierFenetre(CodeMetier: String);
     procedure ChargerLivre();
+    Procedure InitGrillesTalent();
+    Procedure ReconstruitChoixCreation();
+    Procedure AfficheChoixCreation();
 
     // Phases
     procedure ButtonPhaseSuivanteClick({%H-}Sender: TObject);
@@ -213,14 +193,6 @@ type
       CodeTalentResult: TEdit; CodeTalentLib: TEdit; ComboBoxTalentSpe: TComboBox): Boolean;
     function TalentTest(Num: Integer; Code: String; Hasard: Boolean): Boolean;
     procedure TalentSpecialisation(ComboBoxTalentSpe: TComboBox; CodeTalent: String);
-    procedure ButtonTalentHasardClick({%H-}Sender: TObject);
-    procedure ButtonTalentResult1Click({%H-}Sender: TObject);
-    procedure ButtonTalentResult2Click({%H-}Sender: TObject);
-    procedure ButtonTalentResult3Click({%H-}Sender: TObject);
-    procedure GroupBoxTalentChoix1Click({%H-}Sender: TObject);
-    procedure GroupBoxTalentChoix2Click({%H-}Sender: TObject);
-    procedure GroupBoxTalentChoix3Click({%H-}Sender: TObject);
-    procedure GroupBoxTalentChoix4Click({%H-}Sender: TObject);
     procedure RadioButtonTalentChoix11MouseUp({%H-}Sender: TObject;
       {%H-}Button: TMouseButton; {%H-}Shift: TShiftState; {%H-}X, {%H-}Y: Integer);
     procedure RadioButtonTalentChoix12MouseUp({%H-}Sender: TObject;
@@ -240,6 +212,10 @@ type
     procedure CodeTalentResult1DblClick({%H-}Sender: TObject);
     procedure CodeTalentResult2DblClick({%H-}Sender: TObject);
     procedure CodeTalentResult3DblClick({%H-}Sender: TObject);
+    Function LibelleChoixMultiple(Code: String): String;
+    Function ChoixCreationComplet(): Boolean;
+    Function IntervalleChance(Chance: String; out Deb, Fin: Integer): Boolean;
+    Function RangSuivant(Source, ParentLigne: String): Integer;
 
     // Compétences de race
     procedure TabRaceCompetenceDrawCell({%H-}Sender: TObject; aCol, aRow: Integer;
@@ -249,6 +225,8 @@ type
     procedure ButtonRaceCompetenceHasardClick({%H-}Sender: TObject);
     procedure ClickRaceCompetence(aCol, aRow: Integer);
     procedure CalculNbRaceCompetence();
+    Function TalentAleatoire(Jet: Integer; CodeRace: String): String;
+    Function TalentDejaPossede(Code: String): Boolean;
 
     // Compétence de métier
     procedure TabMetierCompetenceDrawCell({%H-}Sender: TObject; aCol, aRow: Integer;
@@ -271,6 +249,7 @@ type
   private
     FEditingCol: Integer;
     FEditingRow: Integer;
+
 
   public
 
@@ -355,6 +334,27 @@ var
   // Livres
   LivresPersonnages:           String;
 
+  // Tableau CHOIX
+  ColChoixOrigine: Integer = 1;
+  ColChoixLib:     Integer = 2;   // libellé du code source
+  ColChoixLibSel:  Integer = 3;   // libellé du choix retenu
+  ColChoixSource:  Integer = 4;   // caché
+  ColChoixSel:     Integer = 5;   // caché
+  ColChoixParent:  Integer = 6;   // caché
+  ColChoixRang:    Integer = 7;   // caché
+
+  // Tableau ALÉATOIRE
+  ColHasOrigine:   Integer = 1;
+  ColHasLib:       Integer = 2;
+  ColHasJet:       Integer = 3;
+  ColHasLibSel:    Integer = 4;
+  ColHasSource:    Integer = 5;   // caché
+  ColHasSel:       Integer = 6;   // caché
+  ColHasRang:      Integer = 7;   // caché
+  ColHasParent:    Integer = 8;   // caché
+
+  ListeChoixCreation: array of StructureChoixCreation;
+
 implementation
 
 {$R *.lfm}
@@ -378,12 +378,12 @@ procedure TWinCreations.FormCreate(Sender: TObject);
     EditRaceResultat.MaxValue    := 100;
     EditMetierResultat.MinValue  := 0;
     EditMetierResultat.MaxValue  := 100;
-    EditTalentResultat1.MinValue := 0;
-    EditTalentResultat1.MaxValue := 100;
-    EditTalentResultat2.MinValue := 0;
-    EditTalentResultat2.MaxValue := 100;
-    EditTalentResultat3.MinValue := 0;
-    EditTalentResultat3.MaxValue := 100;
+    //EditTalentResultat1.MinValue := 0;
+    //EditTalentResultat1.MaxValue := 100;
+    //EditTalentResultat2.MinValue := 0;
+    //EditTalentResultat2.MaxValue := 100;
+    //EditTalentResultat3.MinValue := 0;
+    //EditTalentResultat3.MaxValue := 100;
 
     // charges les images des niveaux
     SetLength(ColorList, 5);
@@ -407,9 +407,9 @@ procedure TWinCreations.FormCreate(Sender: TObject);
     LastCheckMetierResultat             := 0;
     LastCheckMetierSousMetierResul      := 0;
 
-    ComboBoxTalentSpe1.Style           := csDropDownList;
-    ComboBoxTalentSpe2.Style           := csDropDownList;
-    ComboBoxTalentSpe3.Style           := csDropDownList;
+    //ComboBoxTalentSpe1.Style           := csDropDownList;
+    //ComboBoxTalentSpe2.Style           := csDropDownList;
+    //ComboBoxTalentSpe3.Style           := csDropDownList;
 
     LabelRace.Caption                          := GetTexteLibelle('LAB_042');
     LabelMetier.Caption                        := GetTexteLibelle('LAB_006');
@@ -420,8 +420,8 @@ procedure TWinCreations.FormCreate(Sender: TObject);
     GroupBoxRace.Caption                       := GetTexteLibelle('LAB_084');
     GroupBoxAttribut.Caption                   := GetTexteLibelle('LAB_084');
     GroupBoxMetier.Caption                     := GetTexteLibelle('LAB_084');
-    GroupBoxTalentChoix1.Caption               := GetTexteLibelle('LAB_084');
-    GroupBoxTalentChoix2.Caption               := GetTexteLibelle('LAB_084');
+    //GroupBoxTalentChoix1.Caption               := GetTexteLibelle('LAB_084');
+    //GroupBoxTalentChoix2.Caption               := GetTexteLibelle('LAB_084');
     ButtonAttributHasard .Caption              := GetTexteLibelle('LAB_085');
     ButtonRaceHasard.Caption                   := GetTexteLibelle('LAB_085');
     ButtonTalentHasard.Caption                 := GetTexteLibelle('LAB_085');
@@ -453,9 +453,9 @@ procedure TWinCreations.FormCreate(Sender: TObject);
     LabPointSupp.Caption                       := GetTexteLibelle('LAB_092');
     LabDestin.Caption                          := GetTexteLibelle('LAB_093');
     LabResilience.Caption                      := GetTexteLibelle('LAB_094');
-    ButtonTalentResult1.Caption                := GetTexteLibelle('LAB_086');
-    ButtonTalentResult2.Caption                := GetTexteLibelle('LAB_086');
-    ButtonTalentResult3.Caption                := GetTexteLibelle('LAB_086');
+    //ButtonTalentResult1.Caption                := GetTexteLibelle('LAB_086');
+    //ButtonTalentResult2.Caption                := GetTexteLibelle('LAB_086');
+    //ButtonTalentResult3.Caption                := GetTexteLibelle('LAB_086');
     LabNomPersonnage.Caption                   := GetTexteLibelle('LAB_095');
     ButtonMetierSousMetierSelectionner.Caption := GetTexteLibelle('LAB_004');
     ButtonPhaseSuivante.Caption                := GetTexteLibelle('LAB_134');
@@ -464,6 +464,8 @@ procedure TWinCreations.FormCreate(Sender: TObject);
 
     ButtonRaceCompetenceHasard.BringToFront;
     ButtonMetierCompetenceHasard.BringToFront;
+
+    InitGrillesTalent();
 
     KeyPreview := true;
 
@@ -586,20 +588,20 @@ procedure TWinCreations.ComboRaceCreationSelect(Sender: TObject);
     ChargeTabRaces(ComboRaceCreation.Text);
   end;
 
-procedure TWinCreations.CodeTalentResult1DblClick(Sender: TObject);
-  begin
-    TalentFenetre(0, CodeTalentResult1.Text);
-  end;
-
-procedure TWinCreations.CodeTalentResult2DblClick(Sender: TObject);
-  begin
-    TalentFenetre(0, CodeTalentResult2.Text);
-  end;
-
-procedure TWinCreations.CodeTalentResult3DblClick(Sender: TObject);
-  begin
-    TalentFenetre(0, CodeTalentResult3.Text);
-  end;
+//procedure TWinCreations.CodeTalentResult1DblClick(Sender: TObject);
+//  begin
+//    TalentFenetre(0, CodeTalentResult1.Text);
+//  end;
+//
+//procedure TWinCreations.CodeTalentResult2DblClick(Sender: TObject);
+//  begin
+//    TalentFenetre(0, CodeTalentResult2.Text);
+//  end;
+//
+//procedure TWinCreations.CodeTalentResult3DblClick(Sender: TObject);
+//  begin
+//    TalentFenetre(0, CodeTalentResult3.Text);
+//  end;
 
 procedure TWinCreations.ChargerImage();
   var
@@ -900,6 +902,21 @@ procedure TWinCreations.RadioButtonTalentChoix42MouseUp(Sender: TObject;
     TalentFenetre(4, RadiobuttonTalentChoix42Val);
   end;
 
+procedure TWinCreations.CodeTalentResult1DblClick(Sender: TObject);
+begin
+
+end;
+
+procedure TWinCreations.CodeTalentResult2DblClick(Sender: TObject);
+begin
+
+end;
+
+procedure TWinCreations.CodeTalentResult3DblClick(Sender: TObject);
+begin
+
+end;
+
 ////////////////////////////////////////////////////////////////////////////////
 //                               PHASES                                       //
 ////////////////////////////////////////////////////////////////////////////////
@@ -992,34 +1009,34 @@ procedure TWinCreations.PhaseSave(NouvellePhase: Integer);
                     Personnage.CreationTalent                    += [PersonnageTalent];
                   end;
               end;
-            if CodeTalentResult1.visible then
-              begin
-                if ComboBoxTalentSpe1.Visible then
-                  PersonnageTalent.CodeTalent                  := String(ComboBoxTalentSpe1.Items.Objects[ComboBoxTalentSpe1.ItemIndex])
-                else
-                  PersonnageTalent.CodeTalent                  := CodeTalentResult1.Text;
-                PersonnageTalent.Valeur                        := 1;
-                Personnage.CreationTalent                      += [PersonnageTalent];
-
-              end;
-            if CodeTalentResult2.visible then
-              begin
-                if ComboBoxTalentSpe2.Visible then
-                  PersonnageTalent.CodeTalent                  := String(ComboBoxTalentSpe2.Items.Objects[ComboBoxTalentSpe2.ItemIndex])
-                else
-                  PersonnageTalent.CodeTalent                  := CodeTalentResult2.Text;
-                PersonnageTalent.Valeur                        := 1;
-                Personnage.CreationTalent                      += [PersonnageTalent];
-              end;
-            if CodeTalentResult3.visible then
-              begin
-                if ComboBoxTalentSpe3.Visible then
-                  PersonnageTalent.CodeTalent                  := String(ComboBoxTalentSpe3.Items.Objects[ComboBoxTalentSpe3.ItemIndex])
-                else
-                  PersonnageTalent.CodeTalent                  := CodeTalentResult3.Text;
-                PersonnageTalent.Valeur                        := 1;
-                Personnage.CreationTalent                      += [PersonnageTalent];
-              end;
+            //if CodeTalentResult1.visible then
+            //  begin
+            //    if ComboBoxTalentSpe1.Visible then
+            //      PersonnageTalent.CodeTalent                  := String(ComboBoxTalentSpe1.Items.Objects[ComboBoxTalentSpe1.ItemIndex])
+            //    else
+            //      PersonnageTalent.CodeTalent                  := CodeTalentResult1.Text;
+            //    PersonnageTalent.Valeur                        := 1;
+            //    Personnage.CreationTalent                      += [PersonnageTalent];
+            //
+            //  end;
+            //if CodeTalentResult2.visible then
+            //  begin
+            //    if ComboBoxTalentSpe2.Visible then
+            //      PersonnageTalent.CodeTalent                  := String(ComboBoxTalentSpe2.Items.Objects[ComboBoxTalentSpe2.ItemIndex])
+            //    else
+            //      PersonnageTalent.CodeTalent                  := CodeTalentResult2.Text;
+            //    PersonnageTalent.Valeur                        := 1;
+            //    Personnage.CreationTalent                      += [PersonnageTalent];
+            //  end;
+            //if CodeTalentResult3.visible then
+            //  begin
+            //    if ComboBoxTalentSpe3.Visible then
+            //      PersonnageTalent.CodeTalent                  := String(ComboBoxTalentSpe3.Items.Objects[ComboBoxTalentSpe3.ItemIndex])
+            //    else
+            //      PersonnageTalent.CodeTalent                  := CodeTalentResult3.Text;
+            //    PersonnageTalent.Valeur                        := 1;
+            //    Personnage.CreationTalent                      += [PersonnageTalent];
+            //  end;
 
             IndTab := 0;
             For PersonnageTalent in Personnage.CreationTalent do
@@ -1240,6 +1257,82 @@ procedure TWinCreations.RecapTalentSelectEditor(Sender: TObject; aCol,
     Editor := nil;
   end;
 
+procedure TWinCreations.TabCreationHasardDblClick(Sender: TObject);
+  var
+    Ind:      Integer;
+    Source:   String;
+    CodeParentLigne:   String;
+    Jet:      Integer;
+    CodeTire: String;
+    NbEssai:  Integer = 0;
+  begin
+    if TabCreationHasard.Row < 1 then Exit;
+    Source := TabCreationHasard.Cells[ColHasSource, TabCreationHasard.Row];
+    CodeParentLigne := TabCreationHasard.Cells[ColHasSel, TabCreationHasard.Row];
+
+    ShowMessage('Row=' + IntToStr(TabCreationHasard.Row)
+          + ' Source=[' + Source + ']'
+          + ' Parent=[' + CodeParentLigne + ']'
+          + ' Rang=[' + TabCreationHasard.Cells[ColHasRang, TabCreationHasard.Row] + ']');
+
+    // relance tant que le talent est déjà possédé (max 100 essais par sécurité)
+    repeat
+      Jet      := Random(100) + 1;
+      CodeTire := TalentAleatoire(Jet, RaceEnCours);
+      NbEssai  := NbEssai + 1;
+    until (CodeTire <> '') and (not TalentDejaPossede(CodeTire)) or (NbEssai >= 100);
+
+    if (CodeTire = '') or (NbEssai >= 100) then
+      begin
+        ShowMessage(GetTexteLibelle('MESS_xxx'));   // tirage impossible
+        Exit;
+      end;
+
+    for Ind := 0 to High(ListeChoixCreation) do
+          if (ListeChoixCreation[Ind].CodeSource = Source)
+             and (ListeChoixCreation[Ind].CodeParent = CodeParentLigne)
+               and (ListeChoixCreation[Ind].Rang = StrToIntDef(TabCreationHasard.Cells[ColHasRang, TabCreationHasard.Row], 0)) then
+        begin
+          ShowMessage('Source=[' + Source + '] Parent=[' + CodeParentLigne + '] Rang=' + TabCreationHasard.Cells[ColHasRang, TabCreationHasard.Row]);
+          ListeChoixCreation[Ind].Jet        := Jet;
+          ListeChoixCreation[Ind].CodeChoisi := CodeTire;
+          break;
+        end;
+
+    ReconstruitChoixCreation();
+  end;
+
+procedure TWinCreations.TabCreationChoixDblClick(Sender: TObject);
+  var
+    Ind:    Integer;
+    Source: String;
+    CodeParentLigne: String;
+  begin
+    if TabCreationChoix.Row < 1 then Exit;
+    Source := TabCreationChoix.Cells[ColChoixSource, TabCreationChoix.Row];
+    CodeParentLigne := TabCreationChoix.Cells[ColChoixParent, TabCreationChoix.Row];
+
+    ChoixWinTypeFichier        := ConstXmlSousChapitreTalent;
+    ChoixWinTalent             := Source;
+    SelectWinTalent            := '';
+    FenSpecialisation          := TWinSpecialisations.Create(Application);
+    FenSpecialisation.Position := poOwnerFormCenter;
+    FenSpecialisation.ShowModal;
+
+    if SelectWinTalent <> '' then
+      begin
+        for Ind := 0 to High(ListeChoixCreation) do
+          if (ListeChoixCreation[Ind].CodeSource = Source)
+             and (ListeChoixCreation[Ind].CodeParent = CodeParentLigne) then
+            begin
+              ListeChoixCreation[Ind].CodeChoisi := SelectWinTalent;
+              break;
+            end;
+        ReconstruitChoixCreation();
+      end;
+    SelectWinTalent := '';
+  end;
+
 procedure TWinCreations.TabLivreDblClick(Sender: TObject);
   var
     ind:  Integer;
@@ -1391,58 +1484,58 @@ Function TWinCreations.PageEtapesChange(): boolean;
           begin
             Ok := True;
             // choix
-            if (GroupBoxTalentChoix1.visible) and (Ok) and (TalentRaceChoix1 = '') then
-              begin
-                ShowMessage(GetTexteLibelle('MESS_005'));
-                Ok := False;
-              end;
-            if (GroupBoxTalentChoix2.visible) and (Ok) and (TalentRaceChoix2 = '') then
-              begin
-                ShowMessage(GetTexteLibelle('MESS_006'));
-                Ok := False;
-              end;
-            if (GroupBoxTalentChoix3.visible) and (Ok) and (TalentRaceChoix3 = '') then
-              begin
-                ShowMessage(GetTexteLibelle('MESS_044'));
-                Ok := False;
-              end;
-            if (GroupBoxTalentChoix4.visible) and (Ok) and (TalentRaceChoix4 = '') then
-              begin
-                ShowMessage(GetTexteLibelle('MESS_045'));
-                Ok := False;
-              end;
-            // aléatoire
-            If (CodeTalentResult1.visible) and (Ok) and (CodeTalentResult1.Text = '') then
-              begin
-                ShowMessage(GetTexteLibelle('MESS_007'));
-                Ok := False;
-              end;
-            If (CodeTalentResult2.visible) and (Ok) and (CodeTalentResult2.Text = '') then
-              begin
-                ShowMessage(GetTexteLibelle('MESS_008'));
-                Ok := False;
-              end;
-            If (CodeTalentResult3.visible) and (Ok) and (CodeTalentResult3.Text = '') then
-              begin
-                ShowMessage(GetTexteLibelle('MESS_009'));
-                Ok := False;
-              end;
-            // spécialisations
-            if (ComboBoxTalentSpe1.visible) and (Ok) and (ComboBoxTalentSpe1.ItemIndex = -1) then
-              begin
-                ShowMessage(GetTexteLibelle('MESS_010'));
-                Ok := False;
-              end;
-            if (ComboBoxTalentSpe2.visible) and (Ok) and (ComboBoxTalentSpe2.ItemIndex = -1) then
-              begin
-                ShowMessage(GetTexteLibelle('MESS_011'));
-                Ok := False;
-              end;
-            if (ComboBoxTalentSpe3.visible) and (Ok) and (ComboBoxTalentSpe3.ItemIndex = -1) then
-              begin
-                ShowMessage(GetTexteLibelle('MESS_012'));
-                Ok := False;
-              end;
+            //if (GroupBoxTalentChoix1.visible) and (Ok) and (TalentRaceChoix1 = '') then
+            //  begin
+            //    ShowMessage(GetTexteLibelle('MESS_005'));
+            //    Ok := False;
+            //  end;
+            //if (GroupBoxTalentChoix2.visible) and (Ok) and (TalentRaceChoix2 = '') then
+            //  begin
+            //    ShowMessage(GetTexteLibelle('MESS_006'));
+            //    Ok := False;
+            //  end;
+            //if (GroupBoxTalentChoix3.visible) and (Ok) and (TalentRaceChoix3 = '') then
+            //  begin
+            //    ShowMessage(GetTexteLibelle('MESS_044'));
+            //    Ok := False;
+            //  end;
+            //if (GroupBoxTalentChoix4.visible) and (Ok) and (TalentRaceChoix4 = '') then
+            //  begin
+            //    ShowMessage(GetTexteLibelle('MESS_045'));
+            //    Ok := False;
+            //  end;
+            //// aléatoire
+            //If (CodeTalentResult1.visible) and (Ok) and (CodeTalentResult1.Text = '') then
+            //  begin
+            //    ShowMessage(GetTexteLibelle('MESS_007'));
+            //    Ok := False;
+            //  end;
+            //If (CodeTalentResult2.visible) and (Ok) and (CodeTalentResult2.Text = '') then
+            //  begin
+            //    ShowMessage(GetTexteLibelle('MESS_008'));
+            //    Ok := False;
+            //  end;
+            //If (CodeTalentResult3.visible) and (Ok) and (CodeTalentResult3.Text = '') then
+            //  begin
+            //    ShowMessage(GetTexteLibelle('MESS_009'));
+            //    Ok := False;
+            //  end;
+            //// spécialisations
+            //if (ComboBoxTalentSpe1.visible) and (Ok) and (ComboBoxTalentSpe1.ItemIndex = -1) then
+            //  begin
+            //    ShowMessage(GetTexteLibelle('MESS_010'));
+            //    Ok := False;
+            //  end;
+            //if (ComboBoxTalentSpe2.visible) and (Ok) and (ComboBoxTalentSpe2.ItemIndex = -1) then
+            //  begin
+            //    ShowMessage(GetTexteLibelle('MESS_011'));
+            //    Ok := False;
+            //  end;
+            //if (ComboBoxTalentSpe3.visible) and (Ok) and (ComboBoxTalentSpe3.ItemIndex = -1) then
+            //  begin
+            //    ShowMessage(GetTexteLibelle('MESS_012'));
+            //    Ok := False;
+            //  end;
             result := Ok;
           end;
 
@@ -1739,22 +1832,22 @@ Procedure TWinCreations.AfficheImageRace();
                       begin
                         If NbMulti = 1 then
                           begin
-                            RadiobuttonTalentChoix11.Caption := PTalent.Libelle;
+ //                            RadiobuttonTalentChoix11.Caption := PTalent.Libelle;
                             RadiobuttonTalentChoix11Val      := PTalent.CodeTalent;
                           end
                         else if NbMulti = 2 then
                           begin
-                            RadiobuttonTalentChoix21.Caption := PTalent.Libelle;
+//                            RadiobuttonTalentChoix21.Caption := PTalent.Libelle;
                             RadiobuttonTalentChoix21Val      := PTalent.CodeTalent;
                           end
                         else if NbMulti = 3 then
                           begin
-                            RadiobuttonTalentChoix31.Caption := PTalent.Libelle;
+//                            RadiobuttonTalentChoix31.Caption := PTalent.Libelle;
                             RadiobuttonTalentChoix31Val      := PTalent.CodeTalent;
                           end
                         else if NbMulti = 4 then
                           begin
-                            RadiobuttonTalentChoix41.Caption := PTalent.Libelle;
+//                            RadiobuttonTalentChoix41.Caption := PTalent.Libelle;
                             RadiobuttonTalentChoix41Val      := PTalent.CodeTalent;
                           end;
                       end
@@ -1769,45 +1862,46 @@ Procedure TWinCreations.AfficheImageRace();
                 Begin
                   if NbMulti = 1 then
                     begin
-                      RadiobuttonTalentChoix12.Caption := PTalent.Libelle;
+//                      RadiobuttonTalentChoix12.Caption := PTalent.Libelle;
                       RadiobuttonTalentChoix12Val      := PTalent.CodeTalent;
                     end
                   else if NbMulti = 2 then
                     begin
-                      RadiobuttonTalentChoix22.Caption := PTalent.Libelle;
+//                      RadiobuttonTalentChoix22.Caption := PTalent.Libelle;
                       RadiobuttonTalentChoix22Val      := PTalent.CodeTalent;
                     end
                   else if NbMulti = 3 then
                     begin
-                      RadiobuttonTalentChoix32.Caption := PTalent.Libelle;
+//                      RadiobuttonTalentChoix32.Caption := PTalent.Libelle;
                       RadiobuttonTalentChoix32Val      := PTalent.CodeTalent;
                     end
                   else if NbMulti = 4 then
                     begin
-                      RadiobuttonTalentChoix42.Caption := PTalent.Libelle;
+//                      RadiobuttonTalentChoix42.Caption := PTalent.Libelle;
                       RadiobuttonTalentChoix42Val      := PTalent.CodeTalent;
                     end;
                 end;
         end;
-    GroupBoxTalentChoix1.visible := (NbMulti > 0);
-    GroupBoxTalentChoix2.visible := (NbMulti > 1);
-    GroupBoxTalentChoix3.visible := (NbMulti > 2);
-    GroupBoxTalentChoix4.visible := (NbMulti > 3);
-    EditTalentResultat1.visible  := (NbGenerique > 0);
-    ButtonTalentResult1.visible  := (NbGenerique > 0);
-    ButtonTalentResult1.BringToFront;
-    CodeTalentResult1.visible    := (NbGenerique > 0);
-    CodeTalentLib1.visible       := (NbGenerique > 0);
-    EditTalentResultat2.visible  := (NbGenerique > 1);
-    ButtonTalentResult2.visible  := (NbGenerique > 1);
-    ButtonTalentResult2.BringToFront;
-    CodeTalentResult2.visible    := (NbGenerique > 1);
-    CodeTalentLib2.visible       := (NbGenerique > 1);
-    EditTalentResultat3.visible  := (NbGenerique > 2);
-    ButtonTalentResult3.visible  := (NbGenerique > 2);
-    ButtonTalentResult3.BringToFront;
-    CodeTalentResult3.visible    := (NbGenerique > 2);
-    CodeTalentLib3.visible       := (NbGenerique > 2);
+    //GroupBoxTalentChoix1.visible := (NbMulti > 0);
+    //GroupBoxTalentChoix2.visible := (NbMulti > 1);
+    //GroupBoxTalentChoix3.visible := (NbMulti > 2);
+    //GroupBoxTalentChoix4.visible := (NbMulti > 3);
+    //EditTalentResultat1.visible  := (NbGenerique > 0);
+    //ButtonTalentResult1.visible  := (NbGenerique > 0);
+    //ButtonTalentResult1.BringToFront;
+    //CodeTalentResult1.visible    := (NbGenerique > 0);
+    //CodeTalentLib1.visible       := (NbGenerique > 0);
+    //EditTalentResultat2.visible  := (NbGenerique > 1);
+    //ButtonTalentResult2.visible  := (NbGenerique > 1);
+    //ButtonTalentResult2.BringToFront;
+    //CodeTalentResult2.visible    := (NbGenerique > 1);
+    //CodeTalentLib2.visible       := (NbGenerique > 1);
+    //EditTalentResultat3.visible  := (NbGenerique > 2);
+    //ButtonTalentResult3.visible  := (NbGenerique > 2);
+    //ButtonTalentResult3.BringToFront;
+    //CodeTalentResult3.visible    := (NbGenerique > 2);
+    //CodeTalentLib3.visible       := (NbGenerique > 2);
+    ReconstruitChoixCreation();
     ButtonTalentHasard.visible   := (NbGenerique > 0) or (NbMulti > 0);
     ButtonTalentHasard.BringToFront;
   end;
@@ -2554,51 +2648,6 @@ end;
 //                              TALENTS                                       //
 ////////////////////////////////////////////////////////////////////////////////
 
-
-procedure TWinCreations.GroupBoxTalentChoix1Click(Sender: TObject);
-  begin
-    if RadioButtonTalentChoix11.checked then
-      TalentRaceChoix1 := RadiobuttonTalentChoix11Val
-    else if RadioButtonTalentChoix12.checked then
-      TalentRaceChoix1 := RadiobuttonTalentChoix12Val
-    else
-      TalentRaceChoix1 := '';
-    FirstClick1 := true;
-  end;
-
-procedure TWinCreations.GroupBoxTalentChoix2Click(Sender: TObject);
-  begin
-    if RadioButtonTalentChoix21.checked then
-      TalentRaceChoix2 := RadiobuttonTalentChoix21Val
-    else if RadioButtonTalentChoix22.checked then
-      TalentRaceChoix2 := RadiobuttonTalentChoix22Val
-    else
-      TalentRaceChoix2 := '';
-    FirstClick2 := true;
-  end;
-
-procedure TWinCreations.GroupBoxTalentChoix3Click(Sender: TObject);
-  begin
-    if RadioButtonTalentChoix31.checked then
-      TalentRaceChoix3 := RadiobuttonTalentChoix31Val
-    else if RadioButtonTalentChoix32.checked then
-      TalentRaceChoix3 := RadiobuttonTalentChoix32Val
-    else
-      TalentRaceChoix3 := '';
-    FirstClick3 := true;
-  end;
-
-procedure TWinCreations.GroupBoxTalentChoix4Click(Sender: TObject);
-  begin
-    if RadioButtonTalentChoix41.checked then
-      TalentRaceChoix4 := RadiobuttonTalentChoix41Val
-    else if RadioButtonTalentChoix42.checked then
-      TalentRaceChoix4 := RadiobuttonTalentChoix42Val
-    else
-      TalentRaceChoix4 := '';
-    FirstClick4 := true;
-  end;
-
 procedure TWinCreations.TabMetierResultat(Resul: Integer);
   var
     IndTab:   Integer;
@@ -2693,12 +2742,12 @@ Function TWinCreations.TalentTest(Num: Integer; Code: String; Hasard: Boolean): 
           R := false;
       end;
     // talents aléatoires
-    if (Num <> 1) and (Code = CodeTalentResult1.Text) then
-       R := false;
-    if (Num <> 2) and (Code = CodeTalentResult2.Text) then
-       R := false;
-    if (Num <> 3) and (Code = CodeTalentResult3.Text) then
-       R := false;
+    //if (Num <> 1) and (Code = CodeTalentResult1.Text) then
+    //   R := false;
+    //if (Num <> 2) and (Code = CodeTalentResult2.Text) then
+    //   R := false;
+    //if (Num <> 3) and (Code = CodeTalentResult3.Text) then
+    //   R := false;
     if (not Hasard) and (Not R) then
       ShowMessage(GetTexteLibelle('MESS_021'));
     Result := R;
@@ -2864,61 +2913,14 @@ procedure TWinCreations.UpdateSheetTalent(Hasard: boolean);
     If Hasard then
       begin
         ButtonTalentHasard.enabled := false;
-        EditTalentResultat1.enabled:= false;
-        EditTalentResultat2.enabled:= false;
-        EditTalentResultat3.enabled:= false;
-        ButtonTalentResult1.enabled:= false;
-        ButtonTalentResult2.enabled:= false;
-        ButtonTalentResult3.enabled:= false;
+        //EditTalentResultat1.enabled:= false;
+        //EditTalentResultat2.enabled:= false;
+        //EditTalentResultat3.enabled:= false;
+        //ButtonTalentResult1.enabled:= false;
+        //ButtonTalentResult2.enabled:= false;
+        //ButtonTalentResult3.enabled:= false;
       end;
   end;
-
-procedure TWinCreations.ButtonTalentResult1Click(Sender: TObject);
-begin
-  // calculé talent par rapport à la valeur saisie
-  TalentCalcul(1, false, EditTalentResultat1, CodeTalentResult1, CodeTalentLib1, ComboBoxTalentSpe1);
-end;
-
-procedure TWinCreations.ButtonTalentHasardClick(Sender: TObject);
-  var
-    Res:  Boolean;
-  begin
-    // faire les lancé pour les Talents
-    Res := false;
-    if GroupBoxTalentChoix1.visible then
-      RadioButtonTalentChoix11.checked := true;
-    if GroupBoxTalentChoix2.visible then
-      RadioButtonTalentChoix21.checked := true;
-    if GroupBoxTalentChoix3.visible then
-      RadioButtonTalentChoix31.checked := true;
-    if GroupBoxTalentChoix4.visible then
-      RadioButtonTalentChoix41.checked := true;
-    if NbGenerique > 0 then
-      while not Res do
-        res := TalentCalcul(1, true, EditTalentResultat1, CodeTalentResult1, CodeTalentLib1, ComboBoxTalentSpe1);
-    Res := false;
-    if NbGenerique > 1 then
-      while not Res do
-        res := TalentCalcul(2, true, EditTalentResultat2, CodeTalentResult2, CodeTalentLib2, ComboBoxTalentSpe2);
-    Res := false;
-    if NbGenerique > 2 then
-      while not Res do
-        res := TalentCalcul(3, true, EditTalentResultat3, CodeTalentResult3, CodeTalentLib3, ComboBoxTalentSpe3);
-    UpdateSheetTalent(true);
-  end;
-
-procedure TWinCreations.ButtonTalentResult2Click(Sender: TObject);
-  begin
-    // calculé talent par rapport à la valeur saisie
-    TalentCalcul(2, false, EditTalentResultat2, CodeTalentResult2, CodeTalentLib2, ComboBoxTalentSpe2);
-  end;
-
-procedure TWinCreations.ButtonTalentResult3Click(Sender: TObject);
-  begin
-    // calculé talent par rapport à la valeur saisie
-    TalentCalcul(3, false, EditTalentResultat3, CodeTalentResult3, CodeTalentLib3, ComboBoxTalentSpe3);
-  end;
-
 
 ////////////////////////////////////////////////////////////////////////////////
 //                          COMPETENCES DE RACE                               //
@@ -3352,6 +3354,304 @@ procedure TWinCreations.ChargerLivre();
     Strings.Free;
     TabLivre.SortColRow(true,4);
     AdjustGridColumnsWidth(TabLivre, PageEtapes.Height, false, true);
+  end;
+
+Procedure TWinCreations.InitGrillesTalent();
+  begin
+    // --- Tableau CHOIX
+    TabCreationChoix.RowCount := 1;
+    TabCreationChoix.ColCount := 8;
+    TabCreationChoix.FixedRows := 1;
+    TabCreationChoix.Options := TabCreationChoix.Options + [goRowSelect];
+    TabCreationChoix.Cells[ColChoixOrigine, 0] := GetTexteLibelle('LAB_xxx');  // Origine
+    TabCreationChoix.Cells[ColChoixLib, 0]     := GetTexteLibelle('LAB_xxx');  // Élément
+    TabCreationChoix.Cells[ColChoixLibSel, 0]  := GetTexteLibelle('LAB_xxx');  // Choix
+    TabCreationChoix.ColWidths[ColChoixOrigine] := 120;
+    TabCreationChoix.ColWidths[ColChoixLib]     := 200;
+    TabCreationChoix.ColWidths[ColChoixLibSel]  := 200;
+    TabCreationChoix.ColWidths[ColChoixSource]  := 0;
+    TabCreationChoix.ColWidths[ColChoixSel]     := 0;
+    TabCreationChoix.ColWidths[ColChoixParent]  := 0;
+    TabCreationChoix.ColWidths[ColChoixRang]    := 0;
+
+    // --- Tableau ALÉATOIRE
+    TabCreationHasard.RowCount := 1;
+    TabCreationHasard.ColCount := 9;
+    TabCreationHasard.FixedRows := 1;
+    TabCreationHasard.Options := TabCreationChoix.Options + [goRowSelect];
+    //TabCreationHasard.Cells[ColChoixOrigine, 0] := GetTexteLibelle('LAB_xxx');  // Origine
+    //TabCreationHasard.Cells[ColChoixLib, 0]     := GetTexteLibelle('LAB_xxx');  // Élément
+    //TabCreationHasard.Cells[ColChoixLibSel, 0]  := GetTexteLibelle('LAB_xxx');  // Choix
+    TabCreationHasard.ColWidths[ColHasOrigine] := 100;
+    TabCreationHasard.ColWidths[ColHasLib] := 100;
+    TabCreationHasard.ColWidths[ColHasJet] := 100;
+    TabCreationHasard.ColWidths[ColHasLibSel] := 100;
+    TabCreationHasard.ColWidths[ColHasSource] := 0;
+    TabCreationHasard.ColWidths[ColHasSel] := 0;
+    TabCreationHasard.ColWidths[ColHasRang] := 0;
+    TabCreationHasard.ColWidths[ColHasParent] := 0;
+
+  end;
+
+Procedure TWinCreations.ReconstruitChoixCreation();
+  var
+    Sauve:      array of StructureChoixCreation;
+    Nouvelle:   StructureChoixCreation;
+    PRaceTalent:StructureRaceTalent;
+    Ind, Ind2:  Integer;
+    ListOpt:    TStringList;
+    Msg:        String;
+  begin
+    // 1 - sauver l'état courant (choix faits et jets obtenus)
+    Sauve := Copy(ListeChoixCreation, 0, Length(ListeChoixCreation));
+    ListeChoixCreation := [];
+
+    // 2 - racines : talents de race
+    For PRaceTalent in ListRaceTalent do
+      if CompareRechercheValeur(PRaceTalent.CodeRace, RaceEnCours) then
+        begin
+          ListOpt := ListeTalent(PRaceTalent.CodeTalent);
+          if ListOpt.Count > 1 then
+            begin
+              Nouvelle.Origine    := ConstOrigineRace;
+              Nouvelle.CodeSource := PRaceTalent.CodeTalent;
+              Nouvelle.CodeParent := '';
+              Nouvelle.CodeChoisi := '';
+              Nouvelle.Aleatoire  := False;
+              Nouvelle.Jet        := 0;
+              Nouvelle.Rang := RangSuivant(Nouvelle.CodeSource, Nouvelle.CodeParent);
+              ListeChoixCreation  += [Nouvelle];
+            end
+          else if CompareRechercheValeur(PRaceTalent.CodeTalent, TalentGenerique) then
+            begin
+              Nouvelle.Origine    := ConstOrigineRace;
+              Nouvelle.CodeSource := PRaceTalent.CodeTalent;
+              Nouvelle.CodeParent := '';
+              Nouvelle.CodeChoisi := '';
+              Nouvelle.Aleatoire  := True;
+              Nouvelle.Jet        := 0;
+              Nouvelle.Rang := RangSuivant(Nouvelle.CodeSource, Nouvelle.CodeParent);
+              ListeChoixCreation  += [Nouvelle];
+            end;
+          ListOpt.Free;
+        end;
+
+    // 3 - réinjecter les choix et jets mémorisés
+    for Ind := 0 to High(ListeChoixCreation) do
+      for Ind2 := 0 to High(Sauve) do
+        if (Sauve[Ind2].CodeSource = ListeChoixCreation[Ind].CodeSource)
+          and (Sauve[Ind2].CodeParent = ListeChoixCreation[Ind].CodeParent)
+            and (Sauve[Ind2].Rang = ListeChoixCreation[Ind].Rang) then
+          begin
+            ListeChoixCreation[Ind].CodeChoisi := Sauve[Ind2].CodeChoisi;
+            ListeChoixCreation[Ind].Jet        := Sauve[Ind2].Jet;
+            break;
+          end;
+
+    // 4 - lignes filles engendrées par les choix retenus
+    Ind := 0;
+    while Ind <= High(ListeChoixCreation) do
+      begin
+        if (ListeChoixCreation[Ind].CodeChoisi <> '')
+           and CompareRechercheValeur(ListeChoixCreation[Ind].CodeChoisi, TalentGenerique) then
+          begin
+            Nouvelle.Origine    := ListeChoixCreation[Ind].Origine;
+            Nouvelle.CodeSource := ListeChoixCreation[Ind].CodeChoisi;
+            Nouvelle.CodeParent := ListeChoixCreation[Ind].CodeSource;
+            Nouvelle.CodeChoisi := '';
+            Nouvelle.Aleatoire  := True;
+            Nouvelle.Jet        := 0;
+            Nouvelle.Rang := RangSuivant(Nouvelle.CodeSource, Nouvelle.CodeParent);
+            ListeChoixCreation  += [Nouvelle];
+            // réinjecter aussi son jet éventuel
+            for Ind2 := 0 to High(Sauve) do
+              if (Sauve[Ind2].CodeSource = Nouvelle.CodeSource)
+                 and (Sauve[Ind2].CodeParent = Nouvelle.CodeParent)
+                   and (Sauve[Ind2].Rang = Nouvelle.Rang) then
+                begin
+                  ListeChoixCreation[High(ListeChoixCreation)].CodeChoisi := Sauve[Ind2].CodeChoisi;
+                  ListeChoixCreation[High(ListeChoixCreation)].Jet        := Sauve[Ind2].Jet;
+                  break;
+                end;
+          end;
+        Ind := Ind + 1;
+      end;
+
+    Msg := '';
+        for Ind := 0 to High(ListeChoixCreation) do
+          Msg := Msg + IntToStr(Ind) + ' src=' + ListeChoixCreation[Ind].CodeSource
+                     + ' rang=' + IntToStr(ListeChoixCreation[Ind].Rang)
+                     + ' choisi=[' + ListeChoixCreation[Ind].CodeChoisi + ']'
+                     + ' jet=' + IntToStr(ListeChoixCreation[Ind].Jet) + SeparateurRetourLigne;
+        ShowMessage(Msg);
+
+    AfficheChoixCreation();
+  end;
+
+Procedure TWinCreations.AfficheChoixCreation();
+  var
+    Ind:      Integer;
+    LigChoix: Integer = 0;
+    LigHasard:Integer = 0;
+    PTalent:  StructureTalent;
+    Lib:      String;
+  begin
+    TabCreationChoix.RowCount  := 1;
+    TabCreationHasard.RowCount := 1;
+
+    for Ind := 0 to High(ListeChoixCreation) do
+      begin
+        // libellé du code source
+        PTalent := ChercheTalent(ListeChoixCreation[Ind].CodeSource);
+        Lib     := PTalent.Libelle;
+        if Lib = '' then
+          Lib := LibelleChoixMultiple(ListeChoixCreation[Ind].CodeSource);
+
+        if ListeChoixCreation[Ind].Aleatoire then
+          begin
+            LigHasard := LigHasard + 1;
+            TabCreationHasard.RowCount := LigHasard + 1;
+            TabCreationHasard.Cells[ColHasOrigine, LigHasard] := ListeChoixCreation[Ind].Origine;
+            TabCreationHasard.Cells[ColHasLib, LigHasard]     := Lib;
+            TabCreationHasard.Cells[ColHasSource, LigHasard]  := ListeChoixCreation[Ind].CodeSource;
+            TabCreationHasard.Cells[ColHasSel, LigHasard]     := ListeChoixCreation[Ind].CodeChoisi;
+            if ListeChoixCreation[Ind].Jet > 0 then
+              begin
+                TabCreationHasard.Cells[ColHasJet, LigHasard] := IntToStr(ListeChoixCreation[Ind].Jet);
+                PTalent := ChercheTalent(ListeChoixCreation[Ind].CodeChoisi);
+                TabCreationHasard.Cells[ColHasLibSel, LigHasard] := PTalent.Libelle;
+              end
+            else
+              begin
+                TabCreationHasard.Cells[ColHasJet, LigHasard]    := '';
+                TabCreationHasard.Cells[ColHasLibSel, LigHasard] := GetTexteLibelle(ConstLabSelSpe);
+              end;
+          end
+        else
+          begin
+            LigChoix := LigChoix + 1;
+            TabCreationChoix.RowCount := LigChoix + 1;
+            TabCreationChoix.Cells[ColChoixOrigine, LigChoix] := ListeChoixCreation[Ind].Origine;
+            TabCreationChoix.Cells[ColChoixLib, LigChoix]     := Lib;
+            TabCreationChoix.Cells[ColChoixSource, LigChoix]  := ListeChoixCreation[Ind].CodeSource;
+            TabCreationChoix.Cells[ColChoixSel, LigChoix]     := ListeChoixCreation[Ind].CodeChoisi;
+            TabCreationChoix.Cells[ColChoixParent, LigChoix]  := ListeChoixCreation[Ind].CodeParent;
+            if ListeChoixCreation[Ind].CodeChoisi = '' then
+              TabCreationChoix.Cells[ColChoixLibSel, LigChoix] := GetTexteLibelle(ConstLabSelSpe)
+            else
+              begin
+                PTalent := ChercheTalent(ListeChoixCreation[Ind].CodeChoisi);
+                TabCreationChoix.Cells[ColChoixLibSel, LigChoix] := PTalent.Libelle;
+              end;
+          end;
+      end;
+  end;
+
+Function TWinCreations.ChoixCreationComplet(): Boolean;
+  var Ind: Integer;
+  begin
+    Result := True;
+    for Ind := 0 to High(ListeChoixCreation) do
+      if ListeChoixCreation[Ind].CodeChoisi = '' then
+        begin
+          Result := False;
+          Break;
+        end;
+  end;
+
+Function TWinCreations.LibelleChoixMultiple(Code: String): String;
+  var
+    Liste:   TStringList;
+    Ind:     Integer;
+    PTalent: StructureTalent;
+  begin
+    Result := '';
+    Liste  := ListeTalent(Code);
+    for Ind := 0 to Liste.Count - 1 do
+      begin
+        PTalent := ChercheTalent(Liste[Ind]);
+        if Result <> '' then
+          Result := Result + ' ' + GetTexteLibelle('LAB_xxx') + ' ';   // "ou"
+        Result := Result + PTalent.Libelle;
+      end;
+    Liste.Free;
+  end;
+
+Function TWinCreations.TalentAleatoire(Jet: Integer; CodeRace: String): String;
+  var
+    PTalentCreation: StructureTalentCreation;
+    Deb, Fin:        Integer;
+    Trouve:          Boolean = False;
+  begin
+    Result := '';
+    // 1 - table spécifique à la race
+    For PTalentCreation in ListTalentCreation do
+      if CompareRechercheValeur(PTalentCreation.CodeRace, CodeRace) then
+        begin
+          Trouve := True;
+          if IntervalleChance(PTalentCreation.Chance, Deb, Fin) and (Jet >= Deb) and (Jet <= Fin) then
+            begin
+              Result := PTalentCreation.CodeTalent;
+              Exit;
+            end;
+        end;
+    // 2 - repli sur la table générique du RULESBOOK
+    if not Trouve then
+      For PTalentCreation in ListTalentCreation do
+        if CompareRechercheValeur(PTalentCreation.CodeRace, ConstCodeRaceCreationGenerique) then
+          if IntervalleChance(PTalentCreation.Chance, Deb, Fin) and (Jet >= Deb) and (Jet <= Fin) then
+            begin
+              Result := PTalentCreation.CodeTalent;
+              Exit;
+            end;
+  end;
+
+Function TWinCreations.IntervalleChance(Chance: String; out Deb, Fin: Integer): Boolean;
+  begin
+    Chance := Trim(Chance);
+    if Pos('-', Chance) > 0 then
+      begin
+        Deb := StrToIntDef(ExtractStringBefore(Chance, '-'), 0);
+        Fin := StrToIntDef(ExtractStringAfter(Chance, '-'), 0);
+      end
+    else
+      begin
+        Deb := StrToIntDef(Chance, 0);
+        Fin := Deb;
+      end;
+    Result := (Deb > 0) and (Fin >= Deb);
+  end;
+
+Function TWinCreations.TalentDejaPossede(Code: String): Boolean;
+  var
+    Ind: Integer;
+  begin
+    Result := False;
+    // 1 - talents déjà acquis (race, métier...)
+    for Ind := 1 to TabTalent.RowCount - 1 do
+      if CompareRechercheValeur(Code, TabTalent.Cells[1, Ind]) then
+        begin
+          Result := True;
+          Exit;
+        end;
+    // 2 - talents déjà retenus par un choix ou un tirage en cours
+    for Ind := 0 to High(ListeChoixCreation) do
+      if (ListeChoixCreation[Ind].CodeChoisi <> '')
+         and CompareRechercheValeur(Code, ListeChoixCreation[Ind].CodeChoisi) then
+        begin
+          Result := True;
+          Exit;
+        end;
+  end;
+
+Function TWinCreations.RangSuivant(Source, ParentLigne: String): Integer;
+  var Ind: Integer;
+  begin
+    Result := 0;
+    for Ind := 0 to High(ListeChoixCreation) do
+      if (ListeChoixCreation[Ind].CodeSource = Source)
+         and (ListeChoixCreation[Ind].CodeParent = ParentLigne) then
+        Result := Result + 1;
   end;
 
 end.

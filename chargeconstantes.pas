@@ -356,6 +356,9 @@ Const
       ConstCompetenceInverseDe              = 'ChooseDice';
       ConstCompetenceBonus                  = 'Bonus';
 
+      ConstOrigineRace                      = 'RACE';
+      ConstOrigineMetier                    = 'METIER';
+
 Var
   NomPersonnage:       String;
   CodeLivre:           String;

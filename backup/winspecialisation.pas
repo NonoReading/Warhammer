@@ -86,9 +86,9 @@ Procedure TWinSpecialisations.ChargeSpecialisation(CodeGenerique: String);
             AjouteLigne(CodeGenerique, PArmure.CodeArmure, PArmure.Libelle, '', false);
 
       ConstXmlSousChapitreArmureSimp: // Set d'armure
-        for PArmure in ListArmure do
-          if VerifieFiltre(PArmure.Livre, FiltreLivre) then
-            AjouteLigne(CodeGenerique, PArmure.CodeArmure, PArmure.Libelle, '', false);
+        for PArmureSimplifiee in ListArmureSimplifiee do
+          if VerifieFiltre(PArmureSimplifiee.Livre, FiltreLivre) then
+            AjouteLigne(CodeGenerique, PArmureSimplifiee.CodeArmure, PArmureSimplifiee.Libelle, '', false);
 
       ConstXmlChapitreEquipement:   // Equipements
         begin
@@ -138,11 +138,12 @@ procedure TWinSpecialisations.FormCreate(Sender: TObject);
     FiltreLivre := SelectWinLivre;
 
     case ChoixWinTypeFichier of
-      ConstXmlSousChapitreTalent:     ChargeSpecialisation(ChoixWinTalent);
-      ConstXmlSousChapitreCompetence: ChargeSpecialisation(ChoixWinCompetence);
-      ConstXmlSousChapitreArme:       ChargeSpecialisation(ChoixWinArme);
-      ConstXmlSousChapitreArmure:     ChargeSpecialisation(ChoixWinArmure);
-      ConstXmlChapitreEquipement:     ChargeSpecialisation(ChoixWinEquipement);
+      ConstXmlSousChapitreTalent:       ChargeSpecialisation(ChoixWinTalent);
+      ConstXmlSousChapitreCompetence:   ChargeSpecialisation(ChoixWinCompetence);
+      ConstXmlSousChapitreArme:         ChargeSpecialisation(ChoixWinArme);
+      ConstXmlSousChapitreArmure:       ChargeSpecialisation(ChoixWinArmure);
+      ConstXmlSousChapitreArmureSimp:   ChargeSpecialisation(ChoixWinArmureSimp);
+      ConstXmlChapitreEquipement:       ChargeSpecialisation(ChoixWinEquipement);
     end;
 
   end;
@@ -164,6 +165,7 @@ procedure TWinSpecialisations.TabSpecialisationDblClick(Sender: TObject);
           ConstXmlSousChapitreCompetence: SelectWinCompetence := Val;
           ConstXmlSousChapitreArme:       SelectWinArme       := Val;
           ConstXmlSousChapitreArmure:     SelectWinArmure     := Val;
+          ConstXmlSousChapitreArmureSimp: SelectWinArmureSimp := Val;
           ConstXmlChapitreEquipement:     SelectWinEquipement := Val;
         end;
         SelWinLibelle  := Lib;

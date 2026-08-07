@@ -2053,7 +2053,7 @@ procedure TWinPersonnages.TabAugmentationTalentDblClick(Sender: TObject);
     Ind2:    Integer;
     Trouve:  Boolean = false;
   begin
-    if (TabAugmentationTalent.Col = ColAugmTalSpeSel) and (TabAugmentationTalent.Cells[ColAugmTalSpe, TabAugmentationTalent.Row] = GetTexteLibelle(ConstLabSelSpe))  then
+    if (TabAugmentationTalent.Col = ColAugmTalSpe) and (TabAugmentationTalent.Cells[ColAugmTalSpe, TabAugmentationTalent.Row] = GetTexteLibelle(ConstLabSelSpe))  then
       begin
         ChoixWinTypeFichier         := ConstXmlSousChapitreTalent;
         ChoixWinTalent              := TabAugmentationTalent.Cells[ColAugmTalCode, TabAugmentationTalent.Row];

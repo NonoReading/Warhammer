@@ -20,6 +20,7 @@ Type
         TalentPdf:            String;
         Resume:               String;
         CompAjoutee:          String;
+        ModifyCarac:          String;
 end;
 
   TListTalent = Specialize TList<StructureTalent>;
