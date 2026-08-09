@@ -1,0 +1,56 @@
+object WinLanceDes: TWinLanceDes
+  Left = 921
+  Height = 240
+  Top = 32
+  Width = 320
+  Caption = 'WinLanceDes'
+  ClientHeight = 240
+  ClientWidth = 320
+  DesignTimePPI = 120
+  LCLVersion = '4.8.0.0'
+  OnCreate = FormCreate
+  object LabelInfo: TLabel
+    Left = 19
+    Height = 20
+    Top = 14
+    Width = 208
+    Caption = 'Entrez le résultat de votre D100'
+  end
+  object SpinEditJet: TSpinEdit
+    Left = 24
+    Height = 28
+    Top = 48
+    Width = 63
+    MaxValue = 100
+    MinValue = 1
+    TabOrder = 0
+    Value = 1
+  end
+  object ButtonLancer: TButton
+    Left = 144
+    Height = 31
+    Top = 45
+    Width = 94
+    Caption = 'Lancer'
+    TabOrder = 1
+    OnClick = ButtonLancerClick
+  end
+  object ButtonValider: TButton
+    Left = 208
+    Height = 31
+    Top = 168
+    Width = 94
+    Caption = 'Valider'
+    TabOrder = 2
+    OnClick = ButtonValiderClick
+  end
+  object ButtonAnnuler: TButton
+    Left = 208
+    Height = 31
+    Top = 200
+    Width = 94
+    Caption = 'Annuler'
+    TabOrder = 3
+    OnClick = ButtonAnnulerClick
+  end
+end

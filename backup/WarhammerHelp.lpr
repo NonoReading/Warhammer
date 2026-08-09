@@ -20,7 +20,6 @@ begin
   Application.Scaled:=True;
   Application.Initialize;
   Application.CreateForm(TMenu, Menu);
-  Application.CreateForm(TWinLanceDes, Form1);
   Application.Run;
 end.
 

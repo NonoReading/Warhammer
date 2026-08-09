@@ -13,7 +13,8 @@ uses
   ChargeMetierCompetence, ChargeArme, ChargeArmure, ChargeMetierEquipement,
   WinMetier, WinRaces, ChargeTexte, WinTalent, WinCompetence, ChargeLivre,
   ChargeMetierSousMetier, ChargeMetierRaceChoixMetier, WinSpecialisation,
-  ChargeMetierTalent, ChargePersonnage, BGRABitmap, BGRABitmapTypes, BCButton, BCLabel;
+  ChargeMetierTalent, ChargePersonnage, BGRABitmap, BGRABitmapTypes, BCButton,
+  BCLabel, WinLanceDe;
 
 type
   { TWinCreations }
@@ -220,7 +221,7 @@ type
     Function LibelleChoixMultiple(Code: String): String;
     Function ChoixCreationComplet(): Boolean;
     Function RangSuivant(Source, ParentLigne: String): Integer;
-    Function ListeTalentsDejaPris(): TStringList;
+    Function ListeTalentsDejaPris(Exclu: String): TStringList;
     Procedure AjouteTalentsResolus();
 
     // Compétences de race
@@ -320,6 +321,7 @@ var
   FenTalent:                   TWintTalent;
   FenCompetence:               TWinCompetence;
   FenSpecialisation:           TWinSpecialisations;
+  FenLanceDe:                  TWinLanceDes;
 
   // gérer click sur les choix de talents multiples
   FirstClick1:                 Boolean = true;
@@ -357,7 +359,7 @@ var
   ColHasRang:      Integer = 7;   // caché
   ColHasParent:    Integer = 8;   // caché
 
-  ChoixWinJetDeja: TStringList;
+;  ChoixWinJetDeja: TStringList;
 
   ListeChoixCreation: array of StructureChoixCreation;
 
@@ -615,7 +617,7 @@ procedure TWinCreations.ButtonTalentHasardClick(Sender: TObject);
       for Ind := 0 to High(ListeChoixCreation) do
         if (ListeChoixCreation[Ind].CodeChoisi = '') and ListeChoixCreation[Ind].Aleatoire then
           begin
-            Deja    := ListeTalentsDejaPris();
+            Deja := ListeTalentsDejaPris('');
             NbEssai := 0;
             repeat
               Jet      := Random(100) + 1;
@@ -1264,8 +1266,6 @@ procedure TWinCreations.TabCreationHasardDblClick(Sender: TObject);
     CodeParentLigne:   String;
     Jet:      Integer;
     CodeTire: String;
-    NbEssai:  Integer = 0;
-    Deja: TStringList;
   begin
     if TabCreationHasard.Row < 1 then Exit;
     Source := TabCreationHasard.Cells[ColHasSource, TabCreationHasard.Row];
@@ -1277,31 +1277,18 @@ procedure TWinCreations.TabCreationHasardDblClick(Sender: TObject);
     //          + ' Rang=[' + TabCreationHasard.Cells[ColHasSel, TabCreationHasard.Row] + ']');
 
     // relance tant que le talent est déjà possédé (max 100 essais par sécurité)
-    // vider la ligne courante avant de relancer
-    // vider la ligne courante avant de relancer
-    for Ind := 0 to High(ListeChoixCreation) do
-      if (ListeChoixCreation[Ind].CodeSource = Source)
-         and (ListeChoixCreation[Ind].CodeParent = CodeParentLigne)
-         and (ListeChoixCreation[Ind].Rang = StrToIntDef(TabCreationHasard.Cells[ColHasRang, TabCreationHasard.Row], 0)) then
-        begin
-          ListeChoixCreation[Ind].CodeChoisi := '';
-          ListeChoixCreation[Ind].Jet        := 0;
-          break;
-        end;
 
-    Deja := ListeTalentsDejaPris();
-    repeat
-      Jet      := Random(100) + 1;
-      CodeTire := TalentAleatoire(Jet, RaceEnCours);
-      NbEssai  := NbEssai + 1;
-    until ((CodeTire <> '') and (not TalentDejaPossede(CodeTire, Deja))) or (NbEssai >= 100);
-    Deja.Free;
-
-    if (CodeTire = '') or (NbEssai >= 100) then
-      begin
-        ShowMessage(GetTexteLibelle('MESS_xxx'));   // tirage impossible
-        Exit;
-      end;
+    ChoixWinJetRace := RaceEnCours;
+    ChoixWinJetValeur := StrToIntDef(TabCreationHasard.Cells[ColHasJet, TabCreationHasard.Row], 0);
+    ChoixWinJetDeja := ListeTalentsDejaPris(TabCreationHasard.Cells[ColHasSel, TabCreationHasard.Row]);
+    FenLanceDe                 := TWinLanceDes.Create(Application);
+    FenLanceDe.Position        := poOwnerFormCenter;
+    FenLanceDe.ShowModal;
+    ChoixWinJetDeja.Free;
+    ChoixWinJetDeja := nil;
+    if SelectWinJetTalent = '' then Exit;
+    Jet      := SelectWinJet;
+    CodeTire := SelectWinJetTalent;
 
     for Ind := 0 to High(ListeChoixCreation) do
           if (ListeChoixCreation[Ind].CodeSource = Source)
@@ -1321,7 +1308,7 @@ procedure TWinCreations.TabCreationHasardPrepareCanvas(Sender: TObject; aCol, aR
   begin
     if aRow < 1 then Exit;
     if TabCreationHasard.Cells[ColHasSel, aRow] = '' then
-      TabCreationHasard.Canvas.Brush.Color := CouleurFondKo;
+      TabCreationHasard.Canvas.Brush.Color := CouleurFondNot;
   end;
 
 procedure TWinCreations.TabCreationChoixDblClick(Sender: TObject);
@@ -1365,7 +1352,7 @@ procedure TWinCreations.TabCreationChoixPrepareCanvas(Sender: TObject; aCol, aRo
   begin
     if aRow < 1 then Exit;
     if TabCreationChoix.Cells[ColChoixSel, aRow] = '' then
-      TabCreationChoix.Canvas.Brush.Color := CouleurKo;
+      TabCreationChoix.Canvas.Brush.Color := CouleurFondNot;
   end;
 
 procedure TWinCreations.TabLivreDblClick(Sender: TObject);
@@ -3579,16 +3566,16 @@ Function TWinCreations.RangSuivant(Source, ParentLigne: String): Integer;
         Result := Result + 1;
   end;
 
-Function TWinCreations.ListeTalentsDejaPris(): TStringList;
+Function TWinCreations.ListeTalentsDejaPris(Exclu: String): TStringList;
   var
     Ind: Integer;
   begin
     Result := TStringList.Create;
     for Ind := 1 to TabTalent.RowCount - 1 do
-      if TabTalent.Cells[1, Ind] <> '' then
+      if (TabTalent.Cells[1, Ind] <> '') and (TabTalent.Cells[1, Ind] <> Exclu) then
         Result.Add(TabTalent.Cells[1, Ind]);
     for Ind := 0 to High(ListeChoixCreation) do
-      if ListeChoixCreation[Ind].CodeChoisi <> '' then
+      if (ListeChoixCreation[Ind].CodeChoisi <> '') and (ListeChoixCreation[Ind].CodeChoisi <> Exclu) then
         Result.Add(ListeChoixCreation[Ind].CodeChoisi);
   end;
 

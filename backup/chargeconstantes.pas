@@ -490,7 +490,9 @@ Var
   CouleurOk:      String = '6';
   CouleurNot:     String = '5';
   CouleurKo:      String = '7';
-
+  CouleurFondNot: TColor = TColor($8487F0);   // rouge saumon (5.png) - action requise
+  CouleurFondOk:  TColor = TColor($57ED71);   // vert (6.png)
+  CouleurFondKo:  TColor = TColor($7F7F7F);   // gris (7.png)
 
 procedure NettoyerElementsFenetre(Fenetre: TWinControl);
 procedure AdjustGridColumnsWidth(Grid: TStringGrid; MaxHeight: Integer; ForceMax: Boolean; MaxWidth: boolean; AutoSizeCol: Boolean = true; AddHeight: Integer = 0; AddWidth: Integer = 0; ForceScroll: TScrollStyle = ssautoboth);
