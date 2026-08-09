@@ -326,6 +326,8 @@ var
   ColHasSel:       Integer = 6;   // caché
   ColHasRang:      Integer = 7;   // caché
   ColHasParent:    Integer = 8;   // caché
+  ColHasLibSpe:    Integer = 9;   // libellé de la spécialisation retenue
+  ColHasSpe:       Integer = 10;  // caché
 
 //  ChoixWinJetDeja: TStringList;
 
@@ -550,6 +552,15 @@ procedure TWinCreations.ButtonTalentHasardClick(Sender: TObject);
     CodeTire: String;
     NbEssai:  Integer;
   begin
+    // repartir de zéro pour permettre plusieurs tirages successifs
+    for Ind := 0 to High(ListeChoixCreation) do
+      begin
+        ListeChoixCreation[Ind].CodeChoisi     := '';
+        ListeChoixCreation[Ind].CodeSpecialise := '';
+        ListeChoixCreation[Ind].Jet            := 0;
+      end;
+    ReconstruitChoixCreation();
+
     repeat
       // 1 - resoudre les choix
       for Ind := 0 to High(ListeChoixCreation) do
@@ -579,6 +590,18 @@ procedure TWinCreations.ButtonTalentHasardClick(Sender: TObject);
                 ListeChoixCreation[Ind].Jet        := Jet;
                 ListeChoixCreation[Ind].CodeChoisi := CodeTire;
               end;
+          end;
+      ReconstruitChoixCreation();
+
+      // 3 - resoudre les specialisations
+      for Ind := 0 to High(ListeChoixCreation) do
+        if (Pos(ValeurGenerique, ListeChoixCreation[Ind].CodeChoisi) > 0)
+           and (ListeChoixCreation[Ind].CodeSpecialise = '') then
+          begin
+            ListOpt := ListeTalent(ListeChoixCreation[Ind].CodeChoisi);
+            if ListOpt.Count > 0 then
+              ListeChoixCreation[Ind].CodeSpecialise := ListOpt[Random(ListOpt.Count)];
+            ListOpt.Free;
           end;
       ReconstruitChoixCreation();
 
@@ -770,7 +793,7 @@ procedure TWinCreations.ChargerImage();
 
     // --- Tableau ALÉATOIRE
     TabCreationHasard.RowCount := 1;
-    TabCreationHasard.ColCount := 9;
+    TabCreationHasard.ColCount := 11;
     TabCreationHasard.FixedRows := 1;
     TabCreationHasard.Options := TabCreationChoix.Options + [goRowSelect];
     TabCreationHasard.ColWidths[0]             := 0;
@@ -782,6 +805,8 @@ procedure TWinCreations.ChargerImage();
     TabCreationHasard.ColWidths[ColHasSel] := 0;
     TabCreationHasard.ColWidths[ColHasRang] := 0;
     TabCreationHasard.ColWidths[ColHasParent] := 0;
+    TabCreationHasard.ColWidths[ColHasLibSpe] := 250;
+    TabCreationHasard.ColWidths[ColHasSpe] := 0;
     TabCreationHasard.Width:= 2000;
 
   // 5 - COMPETENCES DE RACES
@@ -1174,6 +1199,36 @@ procedure TWinCreations.TabCreationHasardDblClick(Sender: TObject);
     CodeTire: String;
   begin
     if TabCreationHasard.Row < 1 then Exit;
+
+    // colonne spécialisation : choisir la spécialité du talent tiré
+        if TabCreationHasard.Col = ColHasLibSpe then
+          begin
+            if Pos(ValeurGenerique, TabCreationHasard.Cells[ColHasSel, TabCreationHasard.Row]) = 0 then Exit;
+            ChoixWinTypeFichier := ConstXmlSousChapitreTalent;
+            ChoixWinTalent      := TabCreationHasard.Cells[ColHasSel, TabCreationHasard.Row];
+            SelectWinTalent     := '';
+            FenSpecialisation           := TWinSpecialisations.Create(Application);
+            FenSpecialisation.Position  := poOwnerFormCenter;
+            FenSpecialisation.ShowModal;
+            if SelectWinTalent = '' then Exit;
+
+            ShowMessage('sel=[' + SelectWinTalent + ']'
+                          + ' src=[' + TabCreationHasard.Cells[ColHasSource, TabCreationHasard.Row] + ']'
+                          + ' par=[' + TabCreationHasard.Cells[ColHasParent, TabCreationHasard.Row] + ']'
+                          + ' rang=[' + TabCreationHasard.Cells[ColHasRang, TabCreationHasard.Row] + ']');
+
+            for Ind := 0 to High(ListeChoixCreation) do
+              if (ListeChoixCreation[Ind].CodeSource = TabCreationHasard.Cells[ColHasSource, TabCreationHasard.Row])
+                 and (ListeChoixCreation[Ind].CodeParent = TabCreationHasard.Cells[ColHasParent, TabCreationHasard.Row])
+                   and (ListeChoixCreation[Ind].Rang = StrToIntDef(TabCreationHasard.Cells[ColHasRang, TabCreationHasard.Row], 0)) then
+                begin
+                  ListeChoixCreation[Ind].CodeSpecialise := SelectWinTalent;
+                  break;
+                end;
+            ReconstruitChoixCreation();
+            Exit;
+          end;
+
     Source := TabCreationHasard.Cells[ColHasSource, TabCreationHasard.Row];
     CodeParentLigne := TabCreationHasard.Cells[ColHasParent, TabCreationHasard.Row];
 
@@ -1196,6 +1251,7 @@ procedure TWinCreations.TabCreationHasardDblClick(Sender: TObject);
         begin
           ListeChoixCreation[Ind].Jet        := Jet;
           ListeChoixCreation[Ind].CodeChoisi := CodeTire;
+          ListeChoixCreation[Ind].CodeSpecialise := '';
           break;
         end;
 
@@ -3023,19 +3079,20 @@ Procedure TWinCreations.ReconstruitChoixCreation();
         if (Sauve[Ind2].CodeSource = ListeChoixCreation[Ind].CodeSource)
           and (Sauve[Ind2].CodeParent = ListeChoixCreation[Ind].CodeParent)
             and (Sauve[Ind2].Rang = ListeChoixCreation[Ind].Rang) then
-          begin
-            ListeChoixCreation[Ind].CodeChoisi := Sauve[Ind2].CodeChoisi;
-            ListeChoixCreation[Ind].Jet        := Sauve[Ind2].Jet;
-            break;
-          end;
+              begin
+                ListeChoixCreation[Ind].CodeChoisi     := Sauve[Ind2].CodeChoisi;
+                ListeChoixCreation[Ind].CodeSpecialise := Sauve[Ind2].CodeSpecialise;
+                ListeChoixCreation[Ind].Jet            := Sauve[Ind2].Jet;
+                break;
+              end;
 
     // 4 - lignes filles engendrées par les choix retenus
     Ind := 0;
     while Ind <= High(ListeChoixCreation) do
       begin
         if (ListeChoixCreation[Ind].CodeChoisi <> '')
-           and CompareRechercheValeur(ListeChoixCreation[Ind].CodeChoisi, TalentGenerique) then
-          begin
+          and CompareRechercheValeur(ListeChoixCreation[Ind].CodeChoisi, TalentGenerique)
+            and (Pos(ValeurGenerique, ListeChoixCreation[Ind].CodeChoisi) = 0) then          begin
             Nouvelle.Origine    := ListeChoixCreation[Ind].Origine;
             Nouvelle.CodeSource := ListeChoixCreation[Ind].CodeChoisi;
             Nouvelle.CodeParent := ListeChoixCreation[Ind].CodeSource;
@@ -3049,12 +3106,13 @@ Procedure TWinCreations.ReconstruitChoixCreation();
               if (Sauve[Ind2].CodeSource = Nouvelle.CodeSource)
                  and (Sauve[Ind2].CodeParent = Nouvelle.CodeParent)
                    and (Sauve[Ind2].Rang = Nouvelle.Rang) then
-                begin
-                  ListeChoixCreation[High(ListeChoixCreation)].CodeChoisi := Sauve[Ind2].CodeChoisi;
-                  ListeChoixCreation[High(ListeChoixCreation)].Jet        := Sauve[Ind2].Jet;
-                  break;
-                end;
-          end;
+                     begin
+                       ListeChoixCreation[High(ListeChoixCreation)].CodeChoisi     := Sauve[Ind2].CodeChoisi;
+                       ListeChoixCreation[High(ListeChoixCreation)].CodeSpecialise := Sauve[Ind2].CodeSpecialise;
+                       ListeChoixCreation[High(ListeChoixCreation)].Jet            := Sauve[Ind2].Jet;
+                       break;
+                     end;
+            end;
         Ind := Ind + 1;
       end;
 
@@ -3101,6 +3159,20 @@ Procedure TWinCreations.AfficheChoixCreation();
                 TabCreationHasard.Cells[ColHasJet, LigHasard]    := '';
                 TabCreationHasard.Cells[ColHasLibSel, LigHasard] := GetTexteLibelle(ConstLabSelSpe);
               end;
+            // spécialisation éventuelle
+            TabCreationHasard.Cells[ColHasSpe, LigHasard] := ListeChoixCreation[Ind].CodeSpecialise;
+            if Pos(ValeurGenerique, ListeChoixCreation[Ind].CodeChoisi) > 0 then
+              begin
+                if ListeChoixCreation[Ind].CodeSpecialise = '' then
+                  TabCreationHasard.Cells[ColHasLibSpe, LigHasard] := GetTexteLibelle(ConstLabSelSpe)
+                else
+                  begin
+                    PTalent := ChercheTalent(ListeChoixCreation[Ind].CodeSpecialise);
+                    TabCreationHasard.Cells[ColHasLibSpe, LigHasard] := PTalent.Libelle;
+                  end;
+              end
+            else
+              TabCreationHasard.Cells[ColHasLibSpe, LigHasard] := '';
           end
         else
           begin
@@ -3129,11 +3201,19 @@ Function TWinCreations.ChoixCreationComplet(): Boolean;
   begin
     Result := True;
     for Ind := 0 to High(ListeChoixCreation) do
-      if ListeChoixCreation[Ind].CodeChoisi = '' then
-        begin
-          Result := False;
-          Break;
-        end;
+      begin
+        if ListeChoixCreation[Ind].CodeChoisi = '' then
+          begin
+            Result := False;
+            Break;
+          end;
+        if (Pos(ValeurGenerique, ListeChoixCreation[Ind].CodeChoisi) > 0)
+           and (ListeChoixCreation[Ind].CodeSpecialise = '') then
+          begin
+            Result := False;
+            Break;
+          end;
+      end;
   end;
 
 Function TWinCreations.LibelleChoixMultiple(Code: String): String;
@@ -3183,6 +3263,7 @@ Procedure TWinCreations.AjouteTalentsResolus();
     Ind:     Integer;
     Lig:     Integer;
     PTalent: StructureTalent;
+    CodeFinal: String;
   begin
     // se placer après la dernière ligne remplie
     Lig := 0;
@@ -3191,16 +3272,19 @@ Procedure TWinCreations.AjouteTalentsResolus();
         Lig := Ind;
 
     for Ind := 0 to High(ListeChoixCreation) do
-      if ListeChoixCreation[Ind].CodeChoisi <> '' then
-        if not CompareRechercheValeur(ListeChoixCreation[Ind].CodeChoisi, TalentGenerique) then
+      begin
+        CodeFinal := ListeChoixCreation[Ind].CodeSpecialise;
+        if CodeFinal = '' then
+          CodeFinal := ListeChoixCreation[Ind].CodeChoisi;
+        if (CodeFinal <> '') and (not CompareRechercheValeur(CodeFinal, TalentGenerique)) then
           begin
-            PTalent := ChercheTalent(ListeChoixCreation[Ind].CodeChoisi);
-            Lig     := Lig + 1;
+            PTalent := ChercheTalent(CodeFinal);            Lig     := Lig + 1;
             if Lig >= TabTalent.RowCount then
               TabTalent.RowCount := Lig + 1;
             TabTalent.Cells[1, Lig] := PTalent.CodeTalent;
             TabTalent.Cells[2, Lig] := PTalent.Libelle;
           end;
+      end;
   end;
 
 end.

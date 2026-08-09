@@ -114,14 +114,12 @@ Type
   end;
 
   StructureChoixCreation = record
-      Origine:     String;
-      CodeSource:  String;
-      CodeParent:  String;
-      Rang:        Integer;   // ← distingue deux lignes de même source
-      CodeChoisi:  String;
-      Aleatoire:   Boolean;
-      Jet:         Integer;
-    end;
+    Origine, CodeSource, CodeParent, CodeChoisi: String;
+    CodeSpecialise: String;
+    Rang: Integer;
+    Aleatoire: Boolean;
+    Jet: Integer;
+  end;
 
   // XML
   function PersonnageXmlCreation(Personnage: StructurePersonnage; Xp: Integer; XpRestante: Integer; fileName: string; PersonnageName: String): Boolean;

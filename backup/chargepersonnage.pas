@@ -114,13 +114,14 @@ Type
   end;
 
   StructureChoixCreation = record
-    Origine:     String;    // 'RACE', 'METIER1'...
-    CodeSource:  String;    // RULES-T0002/RULES-T0117
-    CodeParent:  String;    // '' si racine
-    CodeChoisi:  String;    // vide tant que non résolu
-    Aleatoire:   Boolean;
-    Jet:         Integer;
-  end;
+      Origine:     String;
+      CodeSource:  String;
+      CodeParent:  String;
+      Rang:        Integer;   // ← distingue deux lignes de même source
+      CodeChoisi:  String;
+      Aleatoire:   Boolean;
+      Jet:         Integer;
+    end;
 
   // XML
   function PersonnageXmlCreation(Personnage: StructurePersonnage; Xp: Integer; XpRestante: Integer; fileName: string; PersonnageName: String): Boolean;
