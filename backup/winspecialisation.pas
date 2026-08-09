@@ -63,12 +63,25 @@ Procedure TWinSpecialisations.ChargeSpecialisation(CodeGenerique: String);
     Res:               String;
     NbL:               Integer;
     MaxL:              Integer;
+    ListOpt:           TStringList;
   begin
     case ChoixWinTypeFichier of
       ConstXmlSousChapitreTalent:    // Talents
-        for PTalent in ListTalent do
-          if VerifieFiltre(PTalent.Livre, FiltreLivre) then
-            AjouteLigne(CodeGenerique, PTalent.CodeTalent, PTalent.Libelle, '', false);
+        if Pos(SeparateurMulti, CodeGenerique) > 0 then
+          begin
+            ListOpt := ListeTalent(CodeGenerique);
+            for NbL := 0 to ListOpt.Count - 1 do
+              begin
+                PTalent := ChercheTalent(ListOpt[NbL]);
+                if VerifieFiltre(PTalent.Livre, FiltreLivre) then
+                  AjouteLigne(CodeGenerique, ListOpt[NbL], PTalent.Libelle, '', true);
+              end;
+            ListOpt.Free;
+          end
+        else
+          for PTalent in ListTalent do
+            if VerifieFiltre(PTalent.Livre, FiltreLivre) then
+              AjouteLigne(CodeGenerique, PTalent.CodeTalent, PTalent.Libelle, '', false);
 
       ConstXmlSousChapitreCompetence:      // Compétences
         for PCompetence in ListCompetence do

@@ -19,9 +19,9 @@
         <HasResources Value="True"/>
         <ResourceBaseClass Value="Form"/>
         <UnitName Value="WarhammerSource"/>
-        <EditorIndex Value="3"/>
-        <TopLine Value="101"/>
-        <CursorPos X="14" Y="111"/>
+        <EditorIndex Value="7"/>
+        <TopLine Value="598"/>
+        <CursorPos X="36" Y="612"/>
         <UsageCount Value="200"/>
         <Loaded Value="True"/>
         <LoadedDesigner Value="True"/>
@@ -33,10 +33,12 @@
         <HasResources Value="True"/>
         <ResourceBaseClass Value="Form"/>
         <UnitName Value="WinCompetence"/>
-        <EditorIndex Value="-1"/>
-        <TopLine Value="177"/>
-        <CursorPos X="10" Y="186"/>
+        <EditorIndex Value="5"/>
+        <TopLine Value="202"/>
+        <CursorPos X="31" Y="213"/>
         <UsageCount Value="200"/>
+        <Loaded Value="True"/>
+        <LoadedDesigner Value="True"/>
       </Unit>
       <Unit>
         <Filename Value="chargecompetence.pas"/>
@@ -50,9 +52,9 @@
         <Filename Value="chargeconstantes.pas"/>
         <IsPartOfProject Value="True"/>
         <UnitName Value="ChargeConstantes"/>
-        <EditorIndex Value="2"/>
-        <TopLine Value="481"/>
-        <CursorPos X="23" Y="489"/>
+        <EditorIndex Value="6"/>
+        <TopLine Value="590"/>
+        <CursorPos Y="612"/>
         <UsageCount Value="200"/>
         <Loaded Value="True"/>
       </Unit>
@@ -133,10 +135,12 @@
         <HasResources Value="True"/>
         <ResourceBaseClass Value="Form"/>
         <UnitName Value="WinMetier"/>
-        <EditorIndex Value="-1"/>
+        <EditorIndex Value="1"/>
         <TopLine Value="652"/>
         <CursorPos X="76" Y="665"/>
         <UsageCount Value="200"/>
+        <Loaded Value="True"/>
+        <LoadedDesigner Value="True"/>
       </Unit>
       <Unit>
         <Filename Value="chargeracemetier.pas"/>
@@ -198,9 +202,11 @@
         <Filename Value="globalfonts.pas"/>
         <IsPartOfProject Value="True"/>
         <UnitName Value="GlobalFonts"/>
-        <EditorIndex Value="-1"/>
-        <CursorPos X="30" Y="24"/>
+        <EditorIndex Value="2"/>
+        <TopLine Value="11"/>
+        <CursorPos X="46" Y="24"/>
         <UsageCount Value="200"/>
+        <Loaded Value="True"/>
       </Unit>
       <Unit>
         <Filename Value="wincreation.pas"/>
@@ -210,8 +216,8 @@
         <ResourceBaseClass Value="Form"/>
         <UnitName Value="WinCreation"/>
         <IsVisibleTab Value="True"/>
-        <TopLine Value="350"/>
-        <CursorPos X="2" Y="362"/>
+        <TopLine Value="3451"/>
+        <CursorPos X="71" Y="3468"/>
         <UsageCount Value="200"/>
         <Loaded Value="True"/>
         <LoadedDesigner Value="True"/>
@@ -407,10 +413,11 @@
         <HasResources Value="True"/>
         <ResourceBaseClass Value="Form"/>
         <UnitName Value="WinSpecialisation"/>
-        <EditorIndex Value="-1"/>
-        <TopLine Value="51"/>
-        <CursorPos X="24" Y="66"/>
+        <EditorIndex Value="4"/>
+        <CursorPos X="44" Y="22"/>
         <UsageCount Value="200"/>
+        <Loaded Value="True"/>
+        <LoadedDesigner Value="True"/>
       </Unit>
       <Unit>
         <Filename Value="chargepersonnage.pas"/>
@@ -532,7 +539,7 @@
         <EditorIndex Value="-1"/>
         <TopLine Value="30"/>
         <CursorPos X="29" Y="44"/>
-        <UsageCount Value="163"/>
+        <UsageCount Value="165"/>
       </Unit>
       <Unit>
         <Filename Value="chargeracecorruptioncreation.pas"/>
@@ -541,7 +548,7 @@
         <EditorIndex Value="-1"/>
         <TopLine Value="5"/>
         <CursorPos X="34" Y="11"/>
-        <UsageCount Value="77"/>
+        <UsageCount Value="79"/>
       </Unit>
       <Unit>
         <Filename Value="chargetalentattributmodif.pas"/>
@@ -550,7 +557,7 @@
         <EditorIndex Value="-1"/>
         <TopLine Value="3"/>
         <CursorPos X="43" Y="13"/>
-        <UsageCount Value="71"/>
+        <UsageCount Value="73"/>
       </Unit>
       <Unit>
         <Filename Value="chargetalentcompetencemodif.pas"/>
@@ -558,7 +565,7 @@
         <UnitName Value="ChargeTalentCompetenceModif"/>
         <EditorIndex Value="-1"/>
         <CursorPos X="31" Y="17"/>
-        <UsageCount Value="68"/>
+        <UsageCount Value="70"/>
       </Unit>
       <Unit>
         <Filename Value="chargetalentcompetenceajoute.pas"/>
@@ -566,7 +573,7 @@
         <UnitName Value="ChargeTalentCompetenceAjoute"/>
         <EditorIndex Value="-1"/>
         <CursorPos X="43" Y="14"/>
-        <UsageCount Value="67"/>
+        <UsageCount Value="69"/>
       </Unit>
       <Unit>
         <Filename Value="winlancede.pas"/>
@@ -575,10 +582,10 @@
         <HasResources Value="True"/>
         <ResourceBaseClass Value="Form"/>
         <UnitName Value="WinLanceDe"/>
-        <EditorIndex Value="1"/>
-        <TopLine Value="60"/>
-        <CursorPos X="30" Y="66"/>
-        <UsageCount Value="25"/>
+        <EditorIndex Value="3"/>
+        <TopLine Value="35"/>
+        <CursorPos X="53" Y="47"/>
+        <UsageCount Value="27"/>
         <Loaded Value="True"/>
         <LoadedDesigner Value="True"/>
       </Unit>
@@ -1201,120 +1208,123 @@
     <JumpHistory HistoryIndex="29">
       <Position>
         <Filename Value="wincreation.pas"/>
-        <Caret Line="16" Column="30"/>
+        <Caret Line="330" Column="29" TopLine="316"/>
       </Position>
       <Position>
         <Filename Value="wincreation.pas"/>
-        <Caret Line="322" Column="51" TopLine="312"/>
+        <Caret Line="333" Column="29" TopLine="316"/>
       </Position>
       <Position>
         <Filename Value="wincreation.pas"/>
-        <Caret Line="17" Column="20"/>
+        <Caret Line="334" Column="29" TopLine="316"/>
       </Position>
       <Position>
         <Filename Value="wincreation.pas"/>
-        <Caret Line="16" Column="87" TopLine="7"/>
+        <Caret Line="335" Column="29" TopLine="316"/>
       </Position>
       <Position>
         <Filename Value="wincreation.pas"/>
-        <Caret Line="322" Column="51" TopLine="312"/>
+        <Caret Line="336" Column="29" TopLine="317"/>
       </Position>
       <Position>
         <Filename Value="wincreation.pas"/>
-        <Caret Line="17" Column="13"/>
-      </Position>
-      <Position>
-        <Filename Value="chargeconstantes.pas"/>
-        <Caret Line="587" Column="17" TopLine="572"/>
+        <Caret Line="337" Column="29" TopLine="318"/>
       </Position>
       <Position>
         <Filename Value="wincreation.pas"/>
-        <Caret Line="20" Column="40" TopLine="6"/>
+        <Caret Line="338" Column="29" TopLine="319"/>
       </Position>
       <Position>
         <Filename Value="wincreation.pas"/>
-        <Caret Line="1282" Column="60" TopLine="1273"/>
+        <Caret Line="339" Column="29" TopLine="320"/>
       </Position>
       <Position>
         <Filename Value="wincreation.pas"/>
-        <Caret Line="624" Column="36" TopLine="614"/>
+        <Caret Line="340" Column="29" TopLine="321"/>
+      </Position>
+      <Position>
+        <Filename Value="wincreation.pas"/>
+        <Caret Line="569" Column="24" TopLine="550"/>
+      </Position>
+      <Position>
+        <Filename Value="wincreation.pas"/>
+        <Caret Line="940" Column="37" TopLine="921"/>
+      </Position>
+      <Position>
+        <Filename Value="wincreation.pas"/>
+        <Caret Line="941" Column="37" TopLine="922"/>
+      </Position>
+      <Position>
+        <Filename Value="wincreation.pas"/>
+        <Caret Line="942" Column="37" TopLine="923"/>
+      </Position>
+      <Position>
+        <Filename Value="wincreation.pas"/>
+        <Caret Line="944" Column="37" TopLine="925"/>
+      </Position>
+      <Position>
+        <Filename Value="wincreation.pas"/>
+        <Caret Line="1537" Column="21" TopLine="1518"/>
+      </Position>
+      <Position>
+        <Filename Value="wincreation.pas"/>
+        <Caret Line="2571" Column="24" TopLine="2552"/>
+      </Position>
+      <Position>
+        <Filename Value="wincreation.pas"/>
+        <Caret Line="2572" Column="24" TopLine="2553"/>
+      </Position>
+      <Position>
+        <Filename Value="wincreation.pas"/>
+        <Caret Line="3227" Column="29" TopLine="3208"/>
+      </Position>
+      <Position>
+        <Filename Value="wincreation.pas"/>
+        <Caret Line="3374" Column="24" TopLine="3355"/>
+      </Position>
+      <Position>
+        <Filename Value="wincreation.pas"/>
+        <Caret Line="3375" Column="24" TopLine="3356"/>
+      </Position>
+      <Position>
+        <Filename Value="wincreation.pas"/>
+        <Caret Line="212" Column="72" TopLine="201"/>
+      </Position>
+      <Position>
+        <Filename Value="wincreation.pas"/>
+        <Caret Line="324" Column="18" TopLine="315"/>
+      </Position>
+      <Position>
+        <Filename Value="wincreation.pas"/>
+        <Caret Line="808" Column="54" TopLine="798"/>
+      </Position>
+      <Position>
+        <Filename Value="wincreation.pas"/>
+        <Caret Line="1224" Column="45" TopLine="1205"/>
       </Position>
       <Position>
         <Filename Value="winlancede.pas"/>
-        <Caret Line="42" Column="35" TopLine="31"/>
+        <Caret Line="92" Column="37" TopLine="84"/>
       </Position>
       <Position>
         <Filename Value="winlancede.pas"/>
-        <Caret Line="9" Column="60"/>
-      </Position>
-      <Position>
-        <Filename Value="winlancede.pas"/>
-        <Caret Line="40" Column="23" TopLine="21"/>
-      </Position>
-      <Position>
-        <Filename Value="winlancede.pas"/>
-        <Caret Line="56" Column="30" TopLine="37"/>
+        <Caret Line="74" Column="121" TopLine="66"/>
       </Position>
       <Position>
         <Filename Value="wincreation.pas"/>
-        <Caret Line="625" Column="37" TopLine="614"/>
+        <Caret Line="2520" Column="38" TopLine="2509"/>
       </Position>
       <Position>
         <Filename Value="wincreation.pas"/>
+        <Caret Line="796" Column="75" TopLine="785"/>
       </Position>
       <Position>
         <Filename Value="wincreation.pas"/>
-        <Caret Line="224" Column="34" TopLine="206"/>
+        <Caret Line="797" Column="75" TopLine="785"/>
       </Position>
       <Position>
         <Filename Value="wincreation.pas"/>
-        <Caret Line="620" Column="44" TopLine="602"/>
-      </Position>
-      <Position>
-        <Filename Value="wincreation.pas"/>
-        <Caret Line="1283" Column="44" TopLine="1265"/>
-      </Position>
-      <Position>
-        <Filename Value="wincreation.pas"/>
-        <Caret Line="3569" Column="73" TopLine="3560"/>
-      </Position>
-      <Position>
-        <Filename Value="wincreation.pas"/>
-        <Caret Line="221" Column="39" TopLine="212"/>
-      </Position>
-      <Position>
-        <Filename Value="wincreation.pas"/>
-      </Position>
-      <Position>
-        <Filename Value="wincreation.pas"/>
-        <Caret Line="123" Column="40" TopLine="105"/>
-      </Position>
-      <Position>
-        <Filename Value="wincreation.pas"/>
-        <Caret Line="1294" Column="35" TopLine="1284"/>
-      </Position>
-      <Position>
-        <Filename Value="wincreation.pas"/>
-        <Caret Line="620" Column="46" TopLine="609"/>
-      </Position>
-      <Position>
-        <Filename Value="wincreation.pas"/>
-        <Caret Line="1283" Column="82" TopLine="1273"/>
-      </Position>
-      <Position>
-        <Filename Value="wincreation.pas"/>
-        <Caret Line="12" Column="28"/>
-      </Position>
-      <Position>
-        <Filename Value="wincreation.pas"/>
-      </Position>
-      <Position>
-        <Filename Value="wincreation.pas"/>
-        <Caret Line="123" Column="40" TopLine="105"/>
-      </Position>
-      <Position>
-        <Filename Value="wincreation.pas"/>
-        <Caret Line="1283" Column="20" TopLine="1274"/>
+        <Caret Line="798" Column="75" TopLine="785"/>
       </Position>
     </JumpHistory>
     <RunParams>

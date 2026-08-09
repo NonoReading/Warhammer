@@ -5,23 +5,25 @@ unit WinLanceDe;
 interface
 
 uses
-  Classes, SysUtils, Forms, Controls, StdCtrls, Spin, Dialogs, GlobalFonts,
-  ChargeTalent, ChargeConstantes, ChargeTexte, ChargeTalentCreation;
+  Classes, SysUtils, Forms, Controls, StdCtrls, Spin, Dialogs, BCButton,
+  GlobalFonts, ChargeTalent, ChargeConstantes, ChargeTexte,
+  ChargeTalentCreation, Graphics;
 
 type
 
   { TWinLanceDes }
 
   TWinLanceDes = class(TForm)
+    ButtonAnnuler: TBCButton;
+    ButtonLancer: TBCButton;
+    ButtonValider: TBCButton;
     LabelInfo:     TLabel;
     SpinEditJet:   TSpinEdit;
-    ButtonLancer:  TButton;
-    ButtonValider: TButton;
-    ButtonAnnuler: TButton;
     procedure FormCreate({%H-}Sender: TObject);
     procedure ButtonLancerClick({%H-}Sender: TObject);
     procedure ButtonValiderClick({%H-}Sender: TObject);
     procedure ButtonAnnulerClick({%H-}Sender: TObject);
+    procedure FormPaint(Sender: TObject);
   private
   public
   end;
@@ -43,6 +45,7 @@ procedure TWinLanceDes.FormCreate(Sender: TObject);
     SpinEditJet.MinValue := 0;
     SpinEditJet.Value    := ChoixWinJetValeur;
     LabelInfo.Caption    := GetTexteLibelle('LAB_xxx');
+    MiseEnFormeDesChamp(self);
   end;
 
 procedure TWinLanceDes.ButtonLancerClick(Sender: TObject);
@@ -68,11 +71,6 @@ procedure TWinLanceDes.ButtonValiderClick(Sender: TObject);
         Exit;
       end;
 
-    if ChoixWinJetDeja = nil then
-          ShowMessage('Deja = nil')
-        else
-          ShowMessage('Deja contient ' + IntToStr(ChoixWinJetDeja.Count) + ' : ' + ChoixWinJetDeja.Text);
-
     if TalentDejaPossede(CodeTire, ChoixWinJetDeja) then
       begin
         PTalent := ChercheTalent(CodeTire);
@@ -80,6 +78,7 @@ procedure TWinLanceDes.ButtonValiderClick(Sender: TObject);
         ShowMessage(Format(GetTexteLibelle('MESS_xxx'), [PTalent.Libelle]));
         Exit;                                      // la fenêtre reste ouverte
       end;
+
     SelectWinJet       := SpinEditJet.Value;
     SelectWinJetTalent := CodeTire;
     Close;
@@ -91,5 +90,13 @@ procedure TWinLanceDes.ButtonAnnulerClick(Sender: TObject);
     SelectWinJetTalent := '';
     Close;
   end;
+
+procedure TWinLanceDes.FormPaint(Sender: TObject);
+begin
+  Canvas.Pen.Color   := ClWhite;
+  Canvas.Pen.Width   := 3;
+  Canvas.Brush.Style := bsClear;
+  Canvas.Rectangle(2, 2, ClientWidth - 2, ClientHeight - 2);
+end;
 
 end.

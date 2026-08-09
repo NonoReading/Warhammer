@@ -133,7 +133,6 @@ type
     Procedure RaceFenetre(CodeRace: String);
     Procedure MetierFenetre(CodeMetier: String);
     procedure ChargerLivre();
-    Procedure InitGrillesTalent();
     Procedure ReconstruitChoixCreation();
     Procedure AfficheChoixCreation();
 
@@ -199,25 +198,6 @@ type
       CodeTalentResult: TEdit; CodeTalentLib: TEdit; ComboBoxTalentSpe: TComboBox): Boolean;
     function TalentTest(Num: Integer; Code: String; Hasard: Boolean): Boolean;
     procedure TalentSpecialisation(ComboBoxTalentSpe: TComboBox; CodeTalent: String);
-    procedure RadioButtonTalentChoix11MouseUp({%H-}Sender: TObject;
-      {%H-}Button: TMouseButton; {%H-}Shift: TShiftState; {%H-}X, {%H-}Y: Integer);
-    procedure RadioButtonTalentChoix12MouseUp({%H-}Sender: TObject;
-      {%H-}Button: TMouseButton; {%H-}Shift: TShiftState; {%H-}X, {%H-}Y: Integer);
-    procedure RadioButtonTalentChoix21MouseUp({%H-}Sender: TObject;
-      {%H-}Button: TMouseButton; {%H-}Shift: TShiftState; {%H-}X, {%H-}Y: Integer);
-    procedure RadioButtonTalentChoix22MouseUp({%H-}Sender: TObject;
-      {%H-}Button: TMouseButton; {%H-}Shift: TShiftState; {%H-}X, {%H-}Y: Integer);
-    procedure RadioButtonTalentChoix31MouseUp({%H-}Sender: TObject;
-      {%H-}Button: TMouseButton; {%H-}Shift: TShiftState; {%H-}X, {%H-}Y: Integer);
-    procedure RadioButtonTalentChoix32MouseUp({%H-}Sender: TObject;
-      {%H-}Button: TMouseButton; {%H-}Shift: TShiftState; {%H-}X, {%H-}Y: Integer);
-    procedure RadioButtonTalentChoix41MouseUp({%H-}Sender: TObject;
-      {%H-}Button: TMouseButton; {%H-}Shift: TShiftState; {%H-}X, {%H-}Y: Integer);
-    procedure RadioButtonTalentChoix42MouseUp({%H-}Sender: TObject;
-      {%H-}Button: TMouseButton; {%H-}Shift: TShiftState; {%H-}X, {%H-}Y: Integer);
-    procedure CodeTalentResult1DblClick({%H-}Sender: TObject);
-    procedure CodeTalentResult2DblClick({%H-}Sender: TObject);
-    procedure CodeTalentResult3DblClick({%H-}Sender: TObject);
     Function LibelleChoixMultiple(Code: String): String;
     Function ChoixCreationComplet(): Boolean;
     Function RangSuivant(Source, ParentLigne: String): Integer;
@@ -359,7 +339,7 @@ var
   ColHasRang:      Integer = 7;   // caché
   ColHasParent:    Integer = 8;   // caché
 
-;  ChoixWinJetDeja: TStringList;
+//  ChoixWinJetDeja: TStringList;
 
   ListeChoixCreation: array of StructureChoixCreation;
 
@@ -402,10 +382,8 @@ procedure TWinCreations.FormCreate(Sender: TObject);
     if FileExists(GetCurrentDir+ConstCheminScroll) then
        begin
          Bmp := TBGRABitmap.Create(GetCurrentDir+ConstCheminScroll);
-         //Bmp.ApplyGlobalOpacity(150);
          ImageScroll.Picture.Bitmap.Assign(Bmp);
          Bmp.Free;
-         //ImageScroll.Transparent := false;
          ImageScroll.SendToBack;
        end;
 
@@ -414,10 +392,6 @@ procedure TWinCreations.FormCreate(Sender: TObject);
     LastCheckRaceResultat               := 0;
     LastCheckMetierResultat             := 0;
     LastCheckMetierSousMetierResul      := 0;
-
-    //ComboBoxTalentSpe1.Style           := csDropDownList;
-    //ComboBoxTalentSpe2.Style           := csDropDownList;
-    //ComboBoxTalentSpe3.Style           := csDropDownList;
 
     LabelRace.Caption                          := GetTexteLibelle('LAB_042');
     LabelMetier.Caption                        := GetTexteLibelle('LAB_006');
@@ -472,8 +446,6 @@ procedure TWinCreations.FormCreate(Sender: TObject);
 
     ButtonRaceCompetenceHasard.BringToFront;
     ButtonMetierCompetenceHasard.BringToFront;
-
-    InitGrillesTalent();
 
     KeyPreview := true;
 
@@ -804,7 +776,7 @@ procedure TWinCreations.ChargerImage();
     ChargeTabAttribut();
 
   // 4 - TALENTS
-     // Mise en forme du tableau de choix des Attributs
+     // Mise en forme du tableau de choix des Talents
      TabTalent.Options          := TabTalent.Options + [goAlwaysShowEditor];
      TabTalent.ColCount         := 3;
      TabTalent.RowCount         := 10;
@@ -815,6 +787,40 @@ procedure TWinCreations.ChargerImage();
      TabTalent.ColWidths[2]     := 200;
      TabTalent.Height           := TabTalent.DefaultRowHeight * TabTalent.RowCount + 5;
      TabTalent.Width            := 235;
+
+     // Talent avec choix
+    TabCreationChoix.RowCount := 1;
+    TabCreationChoix.ColCount := 8;
+    TabCreationChoix.FixedRows := 1;
+    TabCreationChoix.Options := TabCreationChoix.Options + [goRowSelect];
+    TabCreationChoix.Cells[ColChoixOrigine, 0] := GetTexteLibelle('LAB_xxx');  // Origine
+    TabCreationChoix.Cells[ColChoixLib, 0]     := GetTexteLibelle('LAB_xxx');  // Élément
+    TabCreationChoix.Cells[ColChoixLibSel, 0]  := GetTexteLibelle('LAB_xxx');  // Choix
+    TabCreationChoix.ColWidths[0]               := 0;
+    TabCreationChoix.ColWidths[ColChoixOrigine] := 0;
+    TabCreationChoix.ColWidths[ColChoixLib]     := 250;
+    TabCreationChoix.ColWidths[ColChoixLibSel]  := 250;
+    TabCreationChoix.ColWidths[ColChoixSource]  := 0;
+    TabCreationChoix.ColWidths[ColChoixSel]     := 0;
+    TabCreationChoix.ColWidths[ColChoixParent]  := 0;
+    TabCreationChoix.ColWidths[ColChoixRang]    := 0;
+    TabCreationChoix.Width:= 2000;
+
+    // --- Tableau ALÉATOIRE
+    TabCreationHasard.RowCount := 1;
+    TabCreationHasard.ColCount := 9;
+    TabCreationHasard.FixedRows := 1;
+    TabCreationHasard.Options := TabCreationChoix.Options + [goRowSelect];
+    TabCreationHasard.ColWidths[0]             := 0;
+    TabCreationHasard.ColWidths[ColHasOrigine] := 0;
+    TabCreationHasard.ColWidths[ColHasLib] := 250;
+    TabCreationHasard.ColWidths[ColHasJet] := 250;
+    TabCreationHasard.ColWidths[ColHasLibSel] := 250;
+    TabCreationHasard.ColWidths[ColHasSource] := 250;
+    TabCreationHasard.ColWidths[ColHasSel] := 250;
+    TabCreationHasard.ColWidths[ColHasRang] := 0;
+    TabCreationHasard.ColWidths[ColHasParent] := 0;
+    TabCreationHasard.Width:= 2000;
 
   // 5 - COMPETENCES DE RACES
      // Mise en forme dy tableau de choix des Compétences de race
@@ -926,50 +932,6 @@ procedure TWinCreations.LibRaceDblClick(Sender: TObject);
     RaceFenetre(RaceEnCours);
   end;
 
-procedure TWinCreations.RadioButtonTalentChoix11MouseUp(Sender: TObject;
-  Button: TMouseButton; Shift: TShiftState; X, Y: Integer);
-  begin
-    TalentFenetre(1, RadiobuttonTalentChoix11Val);
-  end;
-
-procedure TWinCreations.RadioButtonTalentChoix31MouseUp(Sender: TObject;
-  Button: TMouseButton; Shift: TShiftState; X, Y: Integer);
-  begin
-    TalentFenetre(3, RadiobuttonTalentChoix31Val);
-  end;
-
-procedure TWinCreations.RadioButtonTalentChoix32MouseUp(Sender: TObject;
-  Button: TMouseButton; Shift: TShiftState; X, Y: Integer);
-  begin
-    TalentFenetre(3, RadiobuttonTalentChoix32Val);
-  end;
-
-procedure TWinCreations.RadioButtonTalentChoix41MouseUp(Sender: TObject;
-  Button: TMouseButton; Shift: TShiftState; X, Y: Integer);
-  begin
-    TalentFenetre(4, RadiobuttonTalentChoix41Val);
-  end;
-
-procedure TWinCreations.RadioButtonTalentChoix42MouseUp(Sender: TObject;
-  Button: TMouseButton; Shift: TShiftState; X, Y: Integer);
-  begin
-    TalentFenetre(4, RadiobuttonTalentChoix42Val);
-  end;
-
-procedure TWinCreations.CodeTalentResult1DblClick(Sender: TObject);
-begin
-
-end;
-
-procedure TWinCreations.CodeTalentResult2DblClick(Sender: TObject);
-begin
-
-end;
-
-procedure TWinCreations.CodeTalentResult3DblClick(Sender: TObject);
-begin
-
-end;
 
 ////////////////////////////////////////////////////////////////////////////////
 //                               PHASES                                       //
@@ -1213,23 +1175,6 @@ Procedure TWinCreations.MetierFenetre(CodeMetier: String);
       ChoixWinMetierRace  := '';
   end;
 
-procedure TWinCreations.RadioButtonTalentChoix12MouseUp(Sender: TObject;
-  Button: TMouseButton; Shift: TShiftState; X, Y: Integer);
-  begin
-    TalentFenetre(1, RadiobuttonTalentChoix12Val);
-  end;
-
-procedure TWinCreations.RadioButtonTalentChoix21MouseUp(Sender: TObject;
-  Button: TMouseButton; Shift: TShiftState; X, Y: Integer);
-  begin
-    TalentFenetre(2, RadiobuttonTalentChoix21Val);
-  end;
-
-procedure TWinCreations.RadioButtonTalentChoix22MouseUp(Sender: TObject;
-  Button: TMouseButton; Shift: TShiftState; X, Y: Integer);
-  begin
-    TalentFenetre(2, RadiobuttonTalentChoix22Val);
-  end;
 
 procedure TWinCreations.RecapAttributSelectEditor(Sender: TObject; aCol,
   aRow: Integer; var Editor: TWinControl);
@@ -3330,45 +3275,6 @@ procedure TWinCreations.ChargerLivre();
     AdjustGridColumnsWidth(TabLivre, PageEtapes.Height, false, true);
   end;
 
-Procedure TWinCreations.InitGrillesTalent();
-  begin
-    // --- Tableau CHOIX
-    TabCreationChoix.RowCount := 1;
-    TabCreationChoix.ColCount := 8;
-    TabCreationChoix.FixedRows := 1;
-    TabCreationChoix.Options := TabCreationChoix.Options + [goRowSelect];
-    TabCreationChoix.Cells[ColChoixOrigine, 0] := GetTexteLibelle('LAB_xxx');  // Origine
-    TabCreationChoix.Cells[ColChoixLib, 0]     := GetTexteLibelle('LAB_xxx');  // Élément
-    TabCreationChoix.Cells[ColChoixLibSel, 0]  := GetTexteLibelle('LAB_xxx');  // Choix
-    TabCreationChoix.ColWidths[ColChoixOrigine] := 250;
-    TabCreationChoix.ColWidths[ColChoixLib]     := 250;
-    TabCreationChoix.ColWidths[ColChoixLibSel]  := 250;
-    TabCreationChoix.ColWidths[ColChoixSource]  := 250;
-    TabCreationChoix.ColWidths[ColChoixSel]     := 250;
-    TabCreationChoix.ColWidths[ColChoixParent]  := 250;
-    TabCreationChoix.ColWidths[ColChoixRang]    := 250;
-    TabCreationChoix.Width:= 2000;
-
-    // --- Tableau ALÉATOIRE
-    TabCreationHasard.RowCount := 1;
-    TabCreationHasard.ColCount := 9;
-    TabCreationHasard.FixedRows := 1;
-    TabCreationHasard.Options := TabCreationChoix.Options + [goRowSelect];
-    //TabCreationHasard.Cells[ColChoixOrigine, 0] := GetTexteLibelle('LAB_xxx');  // Origine
-    //TabCreationHasard.Cells[ColChoixLib, 0]     := GetTexteLibelle('LAB_xxx');  // Élément
-    //TabCreationHasard.Cells[ColChoixLibSel, 0]  := GetTexteLibelle('LAB_xxx');  // Choix
-    TabCreationHasard.ColWidths[ColHasOrigine] := 250;
-    TabCreationHasard.ColWidths[ColHasLib] := 250;
-    TabCreationHasard.ColWidths[ColHasJet] := 250;
-    TabCreationHasard.ColWidths[ColHasLibSel] := 250;
-    TabCreationHasard.ColWidths[ColHasSource] := 250;
-    TabCreationHasard.ColWidths[ColHasSel] := 250;
-    TabCreationHasard.ColWidths[ColHasRang] := 250;
-    TabCreationHasard.ColWidths[ColHasParent] := 250;
-    TabCreationHasard.Width:= 2000;
-
-  end;
-
 Procedure TWinCreations.ReconstruitChoixCreation();
   var
     Sauve:      array of StructureChoixCreation;
@@ -3523,6 +3429,8 @@ Procedure TWinCreations.AfficheChoixCreation();
               end;
           end;
       end;
+    AdjustGridColumnsWidth(TabCreationChoix,  382, False, False, True);
+    AdjustGridColumnsWidth(TabCreationHasard, 790, False, False, True);
   end;
 
 Function TWinCreations.ChoixCreationComplet(): Boolean;
@@ -3549,7 +3457,7 @@ Function TWinCreations.LibelleChoixMultiple(Code: String): String;
       begin
         PTalent := ChercheTalent(Liste[Ind]);
         if Result <> '' then
-          Result := Result + ' ' + GetTexteLibelle('LAB_xxx') + ' ';   // "ou"
+          Result := Result + ' / ';   // "ou"
         Result := Result + PTalent.Libelle;
       end;
     Liste.Free;

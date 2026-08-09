@@ -13,9 +13,12 @@ type
 
   { TWinSpecialisation }
 
+  { TWinSpecialisations }
+
   TWinSpecialisations = class(TForm)
     TabSpecialisation: TStringGrid;
     procedure FormCreate({%H-}Sender: TObject);
+    procedure FormPaint(Sender: TObject);
     procedure TabSpecialisationDblClick({%H-}Sender: TObject);
     Procedure ChargeSpecialisation(CodeGenerique: String);
     Procedure AjouteLigne(Gen: String; Code: String; Lib :string; Typ :String; SansTest :Boolean);
@@ -160,6 +163,14 @@ procedure TWinSpecialisations.FormCreate(Sender: TObject);
     end;
 
   end;
+
+procedure TWinSpecialisations.FormPaint(Sender: TObject);
+begin
+  Canvas.Pen.Color   := ClWhite;
+  Canvas.Pen.Width   := 3;
+  Canvas.Brush.Style := bsClear;
+  Canvas.Rectangle(2, 2, ClientWidth - 2, ClientHeight - 2);
+end;
 
 procedure TWinSpecialisations.TabSpecialisationDblClick(Sender: TObject);
 // renvoyer le code sélectionné et fermer la fenête

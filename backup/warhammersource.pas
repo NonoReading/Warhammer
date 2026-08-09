@@ -128,6 +128,7 @@ var
   ColLivreWor:        Integer = 6;
   ColLivreO_F:        Integer = 7;
   ColLivreAbr:        Integer = 8;
+  ColLivreChe:        Integer = 9;
   ColPersoNom:        Integer = 1;
   ColPersoWor:        Integer = 2;
   ColPersoRac:        Integer = 3;
@@ -457,7 +458,7 @@ begin
       BookName := TabLivre.Cells[ColLivreCod, TabLivre.Row];
 
       // Construire le chemin : DATABASE\BOOK RULESBOOK.Xml
-      BookPath := 'DATABASE' + PathDelim + BookName + '.Xml';
+      BookPath := 'DATABASE\' + TabLivre.Cells[ColLivreChe, TabLivre.Row];;
 
       // Créer/Ouvrir WinLivre et charger le livre
       if not Assigned(FenLivre) then
@@ -558,6 +559,7 @@ procedure TMenu.FormCreate(Sender: TObject);
        ColLivreWor := GridAjouteColonne(TabLivre, 'W', 30);
        ColLivreO_F := GridAjouteColonne(TabLivre, 'B', 30);
        ColLivreAbr := GridAjouteColonne(TabLivre, 'A', 30);
+       ColLivreChe := GridAjouteColonne(TabLivre, '');
 
        // mise en forme du tableau des personnages
        TabPersonnage.ColCount         := 1;
@@ -607,6 +609,7 @@ procedure TMenu.FormCreate(Sender: TObject);
              else
                TabLivre.Cells[ColLivreO_F, I]   := ConstLivreOfficiel;
              TabLivre.Cells[ColLivreOrd, I]     := Ordre+Nom;
+               TabLivre.Cells[ColLivreChe, I]   := searchResult.Name;
              ListBook                 += [Nom];
            end;
          until FindNext(searchResult) <> 0;

@@ -486,6 +486,7 @@ Var
   SelectWinJet:       Integer;   // 0 = annulé
   SelectWinJetTalent: String;    // code du talent obtenu, '' = annulé
   ChoixWinJetDeja:    TStringList;
+  ChoixWinJetValeur:  Integer;
 
   CouleurOk:      String = '6';
   CouleurNot:     String = '5';
