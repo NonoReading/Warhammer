@@ -270,9 +270,9 @@ object WinPersonnages: TWinPersonnages
     Height = 368
     Top = 120
     Width = 665
-    ActivePage = TabSheetTalent
+    ActivePage = TabSheetCompetence
     Anchors = [akTop, akLeft, akRight]
-    TabIndex = 2
+    TabIndex = 1
     TabOrder = 10
     OnChange = PageExperienceChange
     object TabSheetAttribut: TTabSheet

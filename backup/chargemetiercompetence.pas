@@ -41,7 +41,7 @@ Begin
     CodeComp := CodeCompetence;
 
   for PMetierCompetence in ListMetierCompetence do
-    if (PMetierCompetence.CodeMetier = CodeMetier) then
+    if CompareRechercheValeur(PMetierCompetence.CodeMetier, CodeMetier) then
       begin
         if InList(PMetierCompetence.CodeCompetence,CodeCompetence+','+CodeComp) then
           begin
@@ -77,7 +77,7 @@ Begin
     if Pos(SeparateurMulti,PMetierCompetence.CodeCompetence) > 0 then
       begin
         code := ExtractStringBefore(PMetierCompetence.CodeCompetence, SeparateurMulti);
-        if (PMetierCompetence.CodeMetier = CodeMetier) and (Code = CodeCompetence) then
+        if CompareRechercheValeur(PMetierCompetence.CodeMetier, CodeMetier) and (Code = CodeCompetence) then
           begin
             If (NiveauMetier = '') or (PMetierCompetence.NiveauMetier > StrToIntDef(NiveauMetier,0)) then
               Result := IntToStr(PMetierCompetence.NiveauMetier)
@@ -86,7 +86,7 @@ Begin
             break
           end;
         code := ExtractStringAfter(PMetierCompetence.CodeCompetence, SeparateurMulti);
-        if (PMetierCompetence.CodeMetier = CodeMetier) and (Code = CodeCompetence) then
+        if CompareRechercheValeur(PMetierCompetence.CodeMetier, CodeMetier) and (Code = CodeCompetence) then
           begin
             If (NiveauMetier = '') or (PMetierCompetence.NiveauMetier > StrToIntDef(NiveauMetier,0)) then
               Result := IntToStr(PMetierCompetence.NiveauMetier)
@@ -128,15 +128,28 @@ function ListeMetierCompetence(CodeCompetence :String): TStringList;
     Code:              String;
     PCompetence:       StructureCompetence;
     Deb:               String;
+    Branches:          TStringList;
+    SousListe:         TStringList;
+    Ind:               Integer;
   begin
     Liste := TStringList.Create;
     if Pos(SeparateurMulti,CodeCompetence) > 0 then
-      // compétence à choisir entre deux options
+      // compétence à choisir entre plusieurs options
       begin
-        code := ExtractStringBefore(CodeCompetence, SeparateurMulti);
-        Liste.Add(code);
-        code := ExtractStringAfter(CodeCompetence, SeparateurMulti);
-        Liste.Add(code);
+        Branches                 := TStringList.Create;
+        Branches.StrictDelimiter := True;
+        Branches.Delimiter       := SeparateurMulti;
+        Branches.DelimitedText   := CodeCompetence;
+        for Ind := 0 to Branches.Count - 1 do
+          if Pos(ValeurGenerique, Branches[Ind]) > 0 then
+            begin
+              SousListe := ListeMetierCompetence(Branches[Ind]);
+              Liste.AddStrings(SousListe);
+              SousListe.Free;
+            end
+          else
+            Liste.Add(Branches[Ind]);
+        Branches.Free;
       end
     else if Pos(ValeurGenerique,CodeCompetence) > 0 then
       begin

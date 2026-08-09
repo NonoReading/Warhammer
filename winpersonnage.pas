@@ -3664,7 +3664,7 @@ Procedure TWinPersonnages.ChargeAugmentation();
 
     // Compétences
     Nbc := 0;
-    ListComp := TStringList.Create;
+    ListComp := nil;
     TabAugmentationCompetence.RowCount := 1;
     For PersonnageCompetence in Personnage.MetierCompetence do
       begin
@@ -3687,6 +3687,8 @@ Procedure TWinPersonnages.ChargeAugmentation();
                     break;
                   end;
               end;
+            ListComp.Free;
+            ListComp := ListeMetierCompetence(PersonnageCompetence.CodeCompetence);
             if (ListComp.Count > 1) or (Pos(ValeurGenerique, PersonnageCompetence.CodeCompetence) > 0) then
               TabAugmentationCompetence.Cells[ColAugmCompSpe, NbC] := GetTexteLibelle(ConstLabSelSpe);
             TabAugmentationCompetence.Cells[ColAugmCompWork, NbC]  := TabCompetence.Cells[ColCompTravail, Ind];
@@ -3743,6 +3745,7 @@ Procedure TWinPersonnages.ChargeAugmentation();
     For PersonnageTalent in Personnage.MetierTalent do
       if PersonnageTalent.Valeur = StrToInt(MetierNvEnCours) then
         begin
+         ListComp.Free;
          ListComp := ListeTalent(PersonnageTalent.CodeTalent);
          NbC := NbC + 1;
          TabAugmentationTalent.rowCount      := TabAugmentationTalent.rowCount + 1;
@@ -3800,6 +3803,7 @@ Procedure TWinPersonnages.ChargeAugmentation();
     EditTotalXp.text   := IntToStr(Personnage.XpTotal);
     EditTotalXp25.text := IntToStr(Personnage.Xp25Total);
 
+    ListComp.Free;
   end;
 
 Function TWinPersonnages.VerifieLivre(ListeLivre: String; Livre: String): String;

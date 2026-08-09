@@ -7,7 +7,7 @@ interface
 uses
   Classes, SysUtils, Forms, Controls, Graphics, Dialogs, Grids, GlobalFonts,
   ChargeTalent, ChargeCompetence, UnitCalcul, ChargeConstantes, ChargeTexte,
-  ChargeArme, ChargeArmure, ChargeArmureSimplifie;
+  ChargeArme, ChargeArmure, ChargeArmureSimplifie, ChargeMetierCompetence;
 
 type
 
@@ -87,9 +87,21 @@ Procedure TWinSpecialisations.ChargeSpecialisation(CodeGenerique: String);
               AjouteLigne(CodeGenerique, PTalent.CodeTalent, PTalent.Libelle, '', false);
 
       ConstXmlSousChapitreCompetence:      // Compétences
-        for PCompetence in ListCompetence do
-          if VerifieFiltre(Pcompetence.Livre, FiltreLivre) then
-            AjouteLigne(CodeGenerique, PCompetence.CodeCompetence, PCompetence.Libelle, '', false);
+        if Pos(SeparateurMulti, CodeGenerique) > 0 then
+          begin
+            ListOpt := ListeMetierCompetence(CodeGenerique);
+            for NbL := 0 to ListOpt.Count - 1 do
+              begin
+                PCompetence := ChercheCompetence(ListOpt[NbL]);
+                if VerifieFiltre(PCompetence.Livre, FiltreLivre) then
+                  AjouteLigne(CodeGenerique, ListOpt[NbL], PCompetence.Libelle, '', true);
+              end;
+            ListOpt.Free;
+          end
+        else
+          for PCompetence in ListCompetence do
+            if VerifieFiltre(PCompetence.Livre, FiltreLivre) then
+              AjouteLigne(CodeGenerique, PCompetence.CodeCompetence, PCompetence.Libelle, '', false);
 
       ConstXmlSousChapitreArme:     // Armess
         for PArme in ListArme do

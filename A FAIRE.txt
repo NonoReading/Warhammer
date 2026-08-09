@@ -23,3 +23,7 @@ gérer des versions et attention à traduction qui a une version par langue
 faire des colonnes pour les niveaux liés aux talents, compétences, et les ajouter pour les attributs ?
 faire les lézards des LUCIA
 gérer les ABOUT pour les lires facultatifs
+
+
+
+
