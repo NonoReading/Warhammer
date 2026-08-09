@@ -1779,6 +1779,7 @@ object WinCreations: TWinCreations
         DropDownWidth = 16
         DropDownArrowSize = 8
         GlobalOpacity = 255
+        OnClick = ButtonTalentHasardClick
         ParentColor = False
         Rounding.RoundX = 12
         Rounding.RoundY = 12
@@ -1795,6 +1796,7 @@ object WinCreations: TWinCreations
         Width = 592
         TabOrder = 1
         OnDblClick = TabCreationChoixDblClick
+        OnPrepareCanvas = TabCreationChoixPrepareCanvas
       end
       object TabCreationHasard: TStringGrid
         Left = 400
@@ -1803,6 +1805,7 @@ object WinCreations: TWinCreations
         Width = 592
         TabOrder = 2
         OnDblClick = TabCreationHasardDblClick
+        OnPrepareCanvas = TabCreationHasardPrepareCanvas
       end
     end
     object TabSheetCompRace: TTabSheet

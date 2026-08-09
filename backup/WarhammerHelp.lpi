@@ -384,6 +384,14 @@
         <IsPartOfProject Value="True"/>
         <UnitName Value="ChargeTalentCompetenceAjoute"/>
       </Unit>
+      <Unit>
+        <Filename Value="winlancede.pas"/>
+        <IsPartOfProject Value="True"/>
+        <ComponentName Value="Form1"/>
+        <HasResources Value="True"/>
+        <ResourceBaseClass Value="Form"/>
+        <UnitName Value="WinLanceDe"/>
+      </Unit>
     </Units>
   </ProjectOptions>
   <CompilerOptions>

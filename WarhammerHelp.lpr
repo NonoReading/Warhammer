@@ -11,7 +11,7 @@ uses
   {$ENDIF}
   Interfaces, // this includes the LCL widgetset
   Forms, pack_powerpdf,
-  lazcontrols, WarhammerSource;
+  lazcontrols, WarhammerSource, WinLanceDe;
 
 {$R *.res}
 

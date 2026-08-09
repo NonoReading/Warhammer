@@ -356,6 +356,9 @@ Const
       ConstCompetenceInverseDe              = 'ChooseDice';
       ConstCompetenceBonus                  = 'Bonus';
 
+      ConstOrigineRace                      = 'RACE';
+      ConstOrigineMetier                    = 'METIER';
+
 Var
   NomPersonnage:       String;
   CodeLivre:           String;
@@ -478,6 +481,15 @@ Var
 
   RechercheTrouve:         Boolean = false;
   LivreComplet:            Boolean = false;
+
+  ChoixWinJetRace:    String;    // race en cours, pour TalentAleatoire
+  SelectWinJet:       Integer;   // 0 = annulé
+  SelectWinJetTalent: String;    // code du talent obtenu, '' = annulé
+  ChoixWinJetDeja:    TStringList;
+
+  CouleurOk:      String = '6';
+  CouleurNot:     String = '5';
+  CouleurKo:      String = '7';
 
 
 procedure NettoyerElementsFenetre(Fenetre: TWinControl);

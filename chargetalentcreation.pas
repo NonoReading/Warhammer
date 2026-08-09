@@ -22,6 +22,9 @@ Var
   NbTalentCreation:   Integer;
 
 Function DescriptionTalent(CodeTalent: String; CodeRace: String): String;
+Function IntervalleChance(Chance: String; out Deb, Fin: Integer): Boolean;
+Function TalentAleatoire(Jet: Integer; CodeRace: String): String;
+Function TalentDejaPossede(Code: String; Deja: TStringList): Boolean;
 
 implementation
 
@@ -58,6 +61,66 @@ Function DescriptionTalent(CodeTalent: String; CodeRace: String): String;
 
     // envoyer le résultat
     Result := Lib;
+  end;
+
+Function IntervalleChance(Chance: String; out Deb, Fin: Integer): Boolean;
+  begin
+    Chance := Trim(Chance);
+    if Pos('-', Chance) > 0 then
+      begin
+        Deb := StrToIntDef(ExtractStringBefore(Chance, '-'), 0);
+        Fin := StrToIntDef(ExtractStringAfter(Chance, '-'), 0);
+      end
+    else
+      begin
+        Deb := StrToIntDef(Chance, 0);
+        Fin := Deb;
+      end;
+    Result := (Deb > 0) and (Fin >= Deb);
+  end;
+
+
+Function TalentAleatoire(Jet: Integer; CodeRace: String): String;
+  var
+    PTalentCreation: StructureTalentCreation;
+    Deb, Fin:        Integer;
+    Trouve:          Boolean = False;
+  begin
+    Result := '';
+    // 1 - table spécifique à la race
+    For PTalentCreation in ListTalentCreation do
+      if CompareRechercheValeur(PTalentCreation.CodeRace, CodeRace) then
+        begin
+          Trouve := True;
+          if IntervalleChance(PTalentCreation.Chance, Deb, Fin) and (Jet >= Deb) and (Jet <= Fin) then
+            begin
+              Result := PTalentCreation.CodeTalent;
+              Exit;
+            end;
+        end;
+    // 2 - repli sur la table générique du RULESBOOK
+    if not Trouve then
+      For PTalentCreation in ListTalentCreation do
+        if CompareRechercheValeur(PTalentCreation.CodeRace, ConstCodeRaceCreationGenerique) then
+          if IntervalleChance(PTalentCreation.Chance, Deb, Fin) and (Jet >= Deb) and (Jet <= Fin) then
+            begin
+              Result := PTalentCreation.CodeTalent;
+              Exit;
+            end;
+  end;
+
+Function TalentDejaPossede(Code: String; Deja: TStringList): Boolean;
+  var
+    Ind: Integer;
+  begin
+    Result := False;
+    if Deja = nil then Exit;
+    for Ind := 0 to Deja.Count - 1 do
+      if CompareRechercheValeur(Code, Deja[Ind]) then
+        begin
+          Result := True;
+          Exit;
+        end;
   end;
 
 end.

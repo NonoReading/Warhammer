@@ -10,8 +10,8 @@ uses
   athreads,
   {$ENDIF}
   Interfaces, // this includes the LCL widgetset
-  Forms, pack_powerpdf,  VirtualTrees,
-  lazcontrols, WarhammerSource;
+  Forms, pack_powerpdf,
+  lazcontrols, WarhammerSource, WinLanceDe;
 
 {$R *.res}
 
@@ -20,6 +20,7 @@ begin
   Application.Scaled:=True;
   Application.Initialize;
   Application.CreateForm(TMenu, Menu);
+  Application.CreateForm(TWinLanceDes, Form1);
   Application.Run;
 end.
 

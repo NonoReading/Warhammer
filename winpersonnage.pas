@@ -388,9 +388,6 @@ var
   ListeSavComp:   String = '';
   ListeSavTal:    String = '';
 
-  CouleurOk:      String = '6';
-  CouleurNot:     String = '5';
-  CouleurKo:      String = '7';
   NvMetier:       String = '';
   NvNiveau:       String = '';
   NvMetierChoisi: String = '';
