@@ -19,7 +19,7 @@
         <HasResources Value="True"/>
         <ResourceBaseClass Value="Form"/>
         <UnitName Value="WarhammerSource"/>
-        <EditorIndex Value="9"/>
+        <EditorIndex Value="10"/>
         <TopLine Value="598"/>
         <CursorPos X="36" Y="612"/>
         <UsageCount Value="200"/>
@@ -33,7 +33,7 @@
         <HasResources Value="True"/>
         <ResourceBaseClass Value="Form"/>
         <UnitName Value="WinCompetence"/>
-        <EditorIndex Value="7"/>
+        <EditorIndex Value="8"/>
         <TopLine Value="202"/>
         <CursorPos X="31" Y="213"/>
         <UsageCount Value="200"/>
@@ -52,9 +52,9 @@
         <Filename Value="chargeconstantes.pas"/>
         <IsPartOfProject Value="True"/>
         <UnitName Value="ChargeConstantes"/>
-        <EditorIndex Value="8"/>
-        <TopLine Value="245"/>
-        <CursorPos X="7" Y="257"/>
+        <EditorIndex Value="9"/>
+        <TopLine Value="696"/>
+        <CursorPos X="41" Y="707"/>
         <UsageCount Value="200"/>
         <Loaded Value="True"/>
       </Unit>
@@ -138,8 +138,8 @@
         <UnitName Value="WinMetier"/>
         <IsVisibleTab Value="True"/>
         <EditorIndex Value="3"/>
-        <TopLine Value="913"/>
-        <CursorPos Y="928"/>
+        <TopLine Value="821"/>
+        <CursorPos X="20" Y="829"/>
         <UsageCount Value="200"/>
         <Loaded Value="True"/>
         <LoadedDesigner Value="True"/>
@@ -204,7 +204,7 @@
         <Filename Value="globalfonts.pas"/>
         <IsPartOfProject Value="True"/>
         <UnitName Value="GlobalFonts"/>
-        <EditorIndex Value="4"/>
+        <EditorIndex Value="5"/>
         <TopLine Value="11"/>
         <CursorPos X="46" Y="24"/>
         <UsageCount Value="200"/>
@@ -337,10 +337,12 @@
         <HasResources Value="True"/>
         <ResourceBaseClass Value="Form"/>
         <UnitName Value="WinArmor"/>
-        <EditorIndex Value="-1"/>
-        <TopLine Value="242"/>
-        <CursorPos X="43" Y="268"/>
+        <EditorIndex Value="4"/>
+        <TopLine Value="314"/>
+        <CursorPos X="22" Y="327"/>
         <UsageCount Value="201"/>
+        <Loaded Value="True"/>
+        <LoadedDesigner Value="True"/>
       </Unit>
       <Unit>
         <Filename Value="chargesort.pas"/>
@@ -416,7 +418,7 @@
         <HasResources Value="True"/>
         <ResourceBaseClass Value="Form"/>
         <UnitName Value="WinSpecialisation"/>
-        <EditorIndex Value="6"/>
+        <EditorIndex Value="7"/>
         <TopLine Value="94"/>
         <CursorPos X="39" Y="106"/>
         <UsageCount Value="200"/>
@@ -587,7 +589,7 @@
         <HasResources Value="True"/>
         <ResourceBaseClass Value="Form"/>
         <UnitName Value="WinLanceDe"/>
-        <EditorIndex Value="5"/>
+        <EditorIndex Value="6"/>
         <TopLine Value="35"/>
         <CursorPos X="53" Y="47"/>
         <UsageCount Value="31"/>
@@ -1210,47 +1212,7 @@
         <DefaultSyntaxHighlighter Value="LFM"/>
       </Unit>
     </Units>
-    <JumpHistory HistoryIndex="29">
-      <Position>
-        <Filename Value="wincreation.pas"/>
-        <Caret Line="3236" Column="29" TopLine="3218"/>
-      </Position>
-      <Position>
-        <Filename Value="wincreation.pas"/>
-        <Caret Line="3237" Column="29" TopLine="3219"/>
-      </Position>
-      <Position>
-        <Filename Value="wincreation.pas"/>
-        <Caret Line="769" Column="22" TopLine="758"/>
-      </Position>
-      <Position>
-        <Filename Value="wincreation.pas"/>
-        <Caret Line="771" Column="22" TopLine="758"/>
-      </Position>
-      <Position>
-        <Filename Value="wincreation.pas"/>
-        <Caret Line="984" Column="36" TopLine="966"/>
-      </Position>
-      <Position>
-        <Filename Value="wincreation.pas"/>
-        <Caret Line="1717" Column="25" TopLine="1706"/>
-      </Position>
-      <Position>
-        <Filename Value="wincreation.pas"/>
-        <Caret Line="1660" TopLine="1648"/>
-      </Position>
-      <Position>
-        <Filename Value="wincreation.pas"/>
-        <Caret Line="1666" TopLine="1684"/>
-      </Position>
-      <Position>
-        <Filename Value="wincreation.pas"/>
-        <Caret Line="1734" Column="3" TopLine="1713"/>
-      </Position>
-      <Position>
-        <Filename Value="wincreation.pas"/>
-        <Caret Line="2567" TopLine="2548"/>
-      </Position>
+    <JumpHistory HistoryIndex="28">
       <Position>
         <Filename Value="wincreation.pas"/>
         <Caret Line="1661" TopLine="1649"/>
@@ -1328,6 +1290,42 @@
       <Position>
         <Filename Value="winmetier.pas"/>
       </Position>
+      <Position>
+        <Filename Value="winmetier.pas"/>
+        <Caret Line="928" Column="69" TopLine="913"/>
+      </Position>
+      <Position>
+        <Filename Value="winmetier.pas"/>
+        <Caret Line="975" Column="69" TopLine="957"/>
+      </Position>
+      <Position>
+        <Filename Value="winmetier.pas"/>
+        <Caret Line="928" Column="69" TopLine="917"/>
+      </Position>
+      <Position>
+        <Filename Value="winmetier.pas"/>
+        <Caret Line="973" TopLine="960"/>
+      </Position>
+      <Position>
+        <Filename Value="winmetier.pas"/>
+        <Caret Line="920" Column="10" TopLine="916"/>
+      </Position>
+      <Position>
+        <Filename Value="winmetier.pas"/>
+        <Caret Line="881" Column="8" TopLine="875"/>
+      </Position>
+      <Position>
+        <Filename Value="winarmor.pas"/>
+        <Caret Line="327" Column="22" TopLine="314"/>
+      </Position>
+      <Position>
+        <Filename Value="winmetier.pas"/>
+        <Caret Line="482" Column="13" TopLine="465"/>
+      </Position>
+      <Position>
+        <Filename Value="chargeconstantes.pas"/>
+        <Caret Line="707" Column="41" TopLine="696"/>
+      </Position>
     </JumpHistory>
     <RunParams>
       <FormatVersion Value="2"/>
@@ -1349,13 +1347,6 @@
         <WatchKind Value="wpkWrite"/>
         <Source Value="chargelivre.pas"/>
         <Line Value="36"/>
-      </Item>
-      <Item>
-        <Kind Value="bpkSource"/>
-        <WatchScope Value="wpsLocal"/>
-        <WatchKind Value="wpkWrite"/>
-        <Source Value="winmetier.pas"/>
-        <Line Value="928"/>
       </Item>
     </BreakPoints>
     <Watches>
