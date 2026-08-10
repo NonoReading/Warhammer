@@ -193,7 +193,7 @@ type
     procedure TabAttributLanceDeClickCombo();
 
     // Talent
-    function TalentTest(Num: Integer; Code: String; Hasard: Boolean): Boolean;
+    //function TalentTest(Num: Integer; Code: String; Hasard: Boolean): Boolean;
     Function LibelleChoixMultiple(Code: String): String;
     Function ChoixCreationComplet(): Boolean;
     Function RangSuivant(Source, ParentLigne: String): Integer;
@@ -268,7 +268,7 @@ var
     TalentRaceChoix2:            String;
     TalentRaceChoix3:            String;
     TalentRaceChoix4:            String;
-    NbGenerique:                 Integer = 0;
+    //NbGenerique:                 Integer = 0;
 
   // Métier
   MetierEnCours:                 String;
@@ -552,6 +552,15 @@ procedure TWinCreations.ButtonTalentHasardClick(Sender: TObject);
     CodeTire: String;
     NbEssai:  Integer;
   begin
+    //// repartir de zéro pour permettre plusieurs tirages successifs
+    //for Ind := 0 to High(ListeChoixCreation) do
+    //  begin
+    //    ListeChoixCreation[Ind].CodeChoisi     := '';
+    //    ListeChoixCreation[Ind].CodeSpecialise := '';
+    //    ListeChoixCreation[Ind].Jet            := 0;
+    //  end;
+    //ReconstruitChoixCreation();
+
     repeat
       // 1 - resoudre les choix
       for Ind := 0 to High(ListeChoixCreation) do
@@ -1649,9 +1658,7 @@ Procedure TWinCreations.AfficheImageRace();
   Var
     indTabAttribut:          integer;
     Talent1:                 String;
-    Talent2:                 String;
     Multi:                   boolean;
-    NbMulti:                 Integer;
     NbTalentTab:             Integer;
     PTalent:                 StructureTalent;
     PRaceTalent:             StructureRaceTalent;
@@ -1660,9 +1667,7 @@ Procedure TWinCreations.AfficheImageRace();
     CheminImage2:            String;
 
   begin
-    NbMulti                  := 0;
     NbTalentTab              := 0;
-    NbGenerique              := 0;
     NbRaceCompetenceTab      := 0;
 
 
@@ -1713,36 +1718,28 @@ Procedure TWinCreations.AfficheImageRace();
     For PRaceTalent in ListRaceTalent do
       if CompareRechercheValeur(PRaceTalent.CodeRace, RaceEnCours) then
         Begin
-          Talent2 := '';
           Multi   := (pos(SeparateurMulti, PRaceTalent.CodeTalent) > 0);
           if Multi then
              Begin
-               NbMulti := NbMulti+1;
                Talent1 := ExtractStringBefore(PRaceTalent.CodeTalent, SeparateurMulti);
-               Talent2 := ExtractStringAfter(PRaceTalent.CodeTalent, SeparateurMulti);
              end
           else
              begin
                Talent1 := PRaceTalent.CodeTalent;
              end;
 
-          For PTalent in ListTalent do
-            if CompareRechercheValeur(PTalent.CodeTalent, Talent1) and CompareRechercheValeur(PTalent.CodeTalent, TalentGenerique) then
-               Begin
-                 NbGenerique     := NbGenerique + 1;
-               end
-            else if CompareRechercheValeur(PTalent.CodeTalent, Talent1) then
-              begin
-                  if not multi then
-                    Begin
-                      NbTalentTab                     := NbTalentTab + 1;
-                      TabTalent.Cells[1, NbTalentTab] := PTalent.CodeTalent;
-                      TabTalent.Cells[2, NbTalentTab] := PTalent.Libelle;
-                    end;
-              end;
+             For PTalent in ListTalent do
+               if CompareRechercheValeur(PTalent.CodeTalent, Talent1)
+                  and (not CompareRechercheValeur(PTalent.CodeTalent, TalentGenerique))
+                    and (not Multi) then
+                 begin
+                   NbTalentTab                     := NbTalentTab + 1;
+                   TabTalent.Cells[1, NbTalentTab] := PTalent.CodeTalent;
+                   TabTalent.Cells[2, NbTalentTab] := PTalent.Libelle;
+                 end;
         end;
     ReconstruitChoixCreation();
-    ButtonTalentHasard.visible   := (NbGenerique > 0) or (NbMulti > 0);
+    ButtonTalentHasard.visible   := (Length(ListeChoixCreation) > 0);
     ButtonTalentHasard.BringToFront;
   end;
 
@@ -2557,34 +2554,6 @@ procedure TWinCreations.TabMetierResultat(Resul: Integer);
             Break;
           end
       end;
-  end;
-
-
-Function TWinCreations.TalentTest(Num: Integer; Code: String; Hasard: Boolean): Boolean;
-  Var
-    I: Integer;
-    R: Boolean;
-  begin
-    R := true;
-    // choix entre deux
-    if Code = TalentRaceChoix1 then
-       R := false;
-    if Code = TalentRaceChoix2 then
-       R := false;
-    if Code = TalentRaceChoix3 then
-       R := false;
-    if Code = TalentRaceChoix4 then
-       R := false;
-    // talent forcé
-    for I := 0 to TabTalent.RowCount -1 do
-      begin
-        if TabTalent.cells[1, I] = Code then
-          R := false;
-      end;
-    // talents aléatoires
-    if (not Hasard) and (Not R) then
-      ShowMessage(GetTexteLibelle('MESS_021'));
-    Result := R;
   end;
 
 ////////////////////////////////////////////////////////////////////////////////
