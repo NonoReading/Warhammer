@@ -9,11 +9,11 @@ object WinMetiers: TWinMetiers
   ClientWidth = 1821
   Color = clBlack
   DesignTimePPI = 120
+  LCLVersion = '4.8.0.0'
   OnClose = FormClose
   OnCloseQuery = FormCloseQuery
   OnCreate = FormCreate
   OnKeyPress = FormKeyPress
-  LCLVersion = '3.4.0.0'
   object PanelHautGauche: TPanel
     Left = 932
     Height = 206
@@ -134,9 +134,9 @@ object WinMetiers: TWinMetiers
     Anchors = [akTop, akLeft, akBottom]
     ReadOnly = True
     TabOrder = 1
+    Options = [tvoAutoItemHeight, tvoHideSelection, tvoKeepCollapsedNodes, tvoReadOnly, tvoShowButtons, tvoShowLines, tvoShowRoot, tvoToolTips, tvoThemedDraw]
     OnAdvancedCustomDrawItem = TreeViewMetier1AdvancedCustomDrawItem
     OnChange = TreeViewMetier1Change
-    Options = [tvoAutoItemHeight, tvoHideSelection, tvoKeepCollapsedNodes, tvoReadOnly, tvoShowButtons, tvoShowLines, tvoShowRoot, tvoToolTips, tvoThemedDraw]
   end
   object Image1: TImage
     AnchorSideBottom.Side = asrBottom

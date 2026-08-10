@@ -604,12 +604,32 @@ var
     PMetierCompetence:  StructureMetierCompetence;
     NodeData:           TMyNodeData;
     LibComp:            String;
-  Begin
+    ListOpt:            TStringList;
+    IndL:               Integer;
+Begin
     NodeSBrance            := TreeViewMetier1.Items.AddChild(NodeBase, ConstArbreCompetence);
     NodeSBrance.ImageIndex := Niveau;
     For PMetierCompetence in ListMetierCompetence do
       if (PMetierCompetence.CodeMetier = MetierEnCours) and (PMetierCompetence.NiveauMetier = Niveau) then
-        Begin
+        if Pos(SeparateurMulti, PMetierCompetence.CodeCompetence) > 0 then
+          Begin
+            // choix multiple : une sous-branche, une feuille par option
+            NodeSTBranche            := TreeViewMetier1.Items.AddChild(NodeSBrance, ConstArbreAuChoix);
+            NodeSTBranche.ImageIndex := 0;
+            ListOpt                  := ListeMetierCompetence(PMetierCompetence.CodeCompetence);
+            for IndL := 0 to ListOpt.Count - 1 do
+              begin
+                NodeData                 := TMyNodeData.Create;
+                PCompetence              := ChercheCompetence(ListOpt[IndL]);
+                NodeSTFeuille            := TreeViewMetier1.Items.AddChild(NodeSTBranche, PCompetence.Libelle);
+                NodeSTFeuille.ImageIndex := 0;
+                NodeData.AdditionalData  := PCompetence.CodeCompetence;
+                NodeSTFeuille.Data       := NodeData;
+              end;
+            ListOpt.Free;
+          end
+        else
+          Begin
             NodeData                := TMyNodeData.Create;
             PCompetence             := ChercheCompetence(PMetierCompetence.CodeCompetence);
             LibComp                 := PCompetence.Libelle;
@@ -621,8 +641,7 @@ var
                PCompetence     := ChercheCompetence(Copy(PMetierCompetence.CodeCompetence, 1, Pos('_', PCompetence.CodeCompetence) - 1)+'_*');
             NodeData.AdditionalData := PCompetence.CodeCompetence;
             NodeSFeuille.Data       := NodeData;
-
-        end;
+          end;
 end;
 
 // Niveau 2 : charger les talents
@@ -899,12 +918,20 @@ Begin
                 end
             else if AffType.text = ConstArbreCompetence then
                 Begin
-                  PCompetence        := ChercheCompetence(NodeData.AdditionalData);
-                  AffCode.Text       := PCompetence.CodeCompetence;
-                  AffLib.Text        := PCompetence.Libelle;
-                  AffLivre.Text      := getTexteLibelle(PCompetence.Livre,'','',true);
-                  AffAttribut.Text   := GetTExteLibelle(PCompetence.CodeAttribut);
-                  AffDescription.Text:= PCompetence.Description;
+                  if Node.Data <> nil then
+                    begin
+                      PCompetence        := ChercheCompetence(NodeData.AdditionalData);
+                      AffCode.Text       := PCompetence.CodeCompetence;
+                      AffLib.Text        := PCompetence.Libelle;
+                      AffLivre.Text      := getTexteLibelle(PCompetence.Livre,'','',true);
+                      AffAttribut.Text   := GetTexteLibelle(PCompetence.CodeAttribut);
+                      if (PCompetence.Description = '')
+                         and (Pos(ValeurSousCompetence, PCompetence.CodeCompetence) > 0) then
+                        PCompetence      := ChercheCompetence(Copy(PCompetence.CodeCompetence, 1,
+                                            Pos(ValeurSousCompetence, PCompetence.CodeCompetence) - 1)
+                                            + ValeurGenerique);
+                      AffDescription.Text:= PCompetence.Description;
+                    end;
                 end
             else if AffType.text = ConstArbreTalent then
                 Begin
@@ -916,42 +943,47 @@ Begin
                   AffDescription.Text:= DescriptionTalent(PTalent.CodeTalent, ConstCodeRaceCreationGenerique);
                 end
             else if AffType.text = ConstArbreEquipement then
-                Begin
-                  if Node.text <> ConstArbreAuchoix then
-                  begin
-                    if Node.Data <> nil then
-                      begin
-                        if (copy(Node.text,1,Length(EquipArme)) = EquipArme) then
-                          begin
-                            PArme              := ChercheArme(NodeData.AdditionalData);
-                            AffCode.Text       := PArme.CodeArme;
-                            AffLib.Text        := PArme.Libelle;
-                            AffLivre.Text      := getTexteLibelle(PArme.Livre,'','',true);
-                            AffDescription.Text:= TexteArme(PArme);
-                          end
-                        else if (copy(Node.text,1,Length(EquipArmure)) = EquipArmure) then
-                          begin
-                            PArmure            := ChercheArmure(NodeData.AdditionalData);
-                            AffCode.Text       := PArmure.CodeArmure;
-                            AffLib.Text        := PArmure.Libelle;
-                            AffLivre.Text      := getTexteLibelle(PArmure.Livre,'','',true);
-                            AffDescription.Text:= TexteArmure(PArmure);
-                          end;
-                      end;
-                  end;
-                end
-            else if AffType.text = ConstArbreAuchoix then
-                Begin
+              Begin
+                if Node.text <> ConstArbreAuchoix then
+                begin
                   if Node.Data <> nil then
                     begin
-                      PArme              := ChercheArme(NodeData.AdditionalData);
-                      AffCode.Text       := PArme.CodeArme;
-                      AffLib.Text        := PArme.Libelle;
-                      AffLivre.Text      := getTexteLibelle(PArme.Livre,'','',true);
-                      AffDescription.Text:= TexteArme(PArme);
+                      if (copy(Node.text,1,Length(EquipArme)) = EquipArme) then
+                        begin
+                          PArme              := ChercheArme(NodeData.AdditionalData);
+                          AffCode.Text       := PArme.CodeArme;
+                          AffLib.Text        := PArme.Libelle;
+                          AffLivre.Text      := getTexteLibelle(PArme.Livre,'','',true);
+                          AffDescription.Text:= TexteArme(PArme);
+                        end
+                      else if (copy(Node.text,1,Length(EquipArmure)) = EquipArmure) then
+                        begin
+                          PArmure            := ChercheArmure(NodeData.AdditionalData);
+                          AffCode.Text       := PArmure.CodeArmure;
+                          AffLib.Text        := PArmure.Libelle;
+                          AffLivre.Text      := getTexteLibelle(PArmure.Livre,'','',true);
+                          AffDescription.Text:= TexteArmure(PArmure);
+                        end;
                     end;
                 end;
-
+              end
+            else if AffType.text = ConstArbreAuchoix then
+              Begin
+                if Node.Data <> nil then
+                  if Node.Parent.Parent.Text = ConstArbreCompetence then
+                    begin
+                      PCompetence        := ChercheCompetence(NodeData.AdditionalData);
+                      AffCode.Text       := PCompetence.CodeCompetence;
+                      AffLib.Text        := PCompetence.Libelle;
+                      AffLivre.Text      := getTexteLibelle(PCompetence.Livre,'','',true);
+                      AffAttribut.Text   := GetTexteLibelle(PCompetence.CodeAttribut);
+                      AffDescription.Text:= PCompetence.Description;
+                    end
+                  else
+                  begin
+                    PArme              := ChercheArme(NodeData.AdditionalData);
+                  end;
+              end;
           end;
        end;
         if CheminImage1 = '' then
