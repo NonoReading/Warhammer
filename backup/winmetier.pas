@@ -924,12 +924,7 @@ Begin
                       AffCode.Text       := PCompetence.CodeCompetence;
                       AffLib.Text        := PCompetence.Libelle;
                       AffLivre.Text      := getTexteLibelle(PCompetence.Livre,'','',true);
-                      AffAttribut.Text   := GetTexteLibelle(PCompetence.CodeAttribut);
-                      if (PCompetence.Description = '')
-                         and (Pos(ValeurSousCompetence, PCompetence.CodeCompetence) > 0) then
-                        PCompetence      := ChercheCompetence(Copy(PCompetence.CodeCompetence, 1,
-                                            Pos(ValeurSousCompetence, PCompetence.CodeCompetence) - 1)
-                                            + ValeurGenerique);
+                      AffAttribut.Text   := GetTExteLibelle(PCompetence.CodeAttribut);
                       AffDescription.Text:= PCompetence.Description;
                     end;
                 end
@@ -977,8 +972,12 @@ Begin
                       AffLib.Text        := PCompetence.Libelle;
                       AffLivre.Text      := getTexteLibelle(PCompetence.Livre,'','',true);
                       AffAttribut.Text   := GetTexteLibelle(PCompetence.CodeAttribut);
-                      AffDescription.Text:= PCompetence.Description;
-                    end
+                      if (PCompetence.Description = '')
+                         and (Pos(ValeurSousCompetence, PCompetence.CodeCompetence) > 0) then
+                        PCompetence      := ChercheCompetence(Copy(PCompetence.CodeCompetence, 1,
+                                            Pos(ValeurSousCompetence, PCompetence.CodeCompetence) - 1)
+                                            + ValeurGenerique);
+                      AffDescription.Text:= PCompetence.Description;                    end
                   else
                   begin
                     PArme              := ChercheArme(NodeData.AdditionalData);

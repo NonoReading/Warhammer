@@ -883,7 +883,6 @@ Var
   CheminImage3: String;
   NodeData:     TMyNodeData;
 Begin
-    NodeData := TMyNodeData.Create;
     if Assigned(Node) then
       begin
         CheminImage1         := '';
