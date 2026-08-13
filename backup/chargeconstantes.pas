@@ -225,6 +225,7 @@ Const
       ConstCheminLivre                  = '\DATABASE\';
       ConstCheminLivreExport            = '\DATABASE_EXPORT\';
       ConstFichierIni                   = '\INI.TXT';
+      ConstCheminTravail                = '\TRAVAIL\';
       ConstIniLangue                    = 'LANG=';
       ConstIniLivre                     = 'BOOK=';
       ConstAnglais                      = 'ENGLISH';
@@ -498,6 +499,7 @@ Var
 procedure NettoyerElementsFenetre(Fenetre: TWinControl);
 procedure AdjustGridColumnsWidth(Grid: TStringGrid; MaxHeight: Integer; ForceMax: Boolean; MaxWidth: boolean; AutoSizeCol: Boolean = true; AddHeight: Integer = 0; AddWidth: Integer = 0; ForceScroll: TScrollStyle = ssautoboth);
 procedure AdjustTKGridColumnsWidth(Grid: TKGrid; MaxHeight: Integer; ForceMax: Boolean; MaxWidth: boolean; AutoSizeCol: Boolean = true; AddHeight: Integer = 0; AddWidth: Integer = 0; ForceScroll: TScrollStyle = ssautoboth);
+Function GridAjouteColonne(Grid: TStringGrid; Caption: String = ''; Widths: Integer = 0; Align: TAlignment = taLeftJustify): Integer;
 procedure ClearStringGrid(Grid: TStringGrid);
 Procedure DeleteData(ATreeView: TTreeView; ANode: TTreeNode);
 Function AjouteAccolade(Filtre: String): String;
@@ -506,7 +508,6 @@ Function VerifieFiltre(Valeur: String; Liste: String): Boolean;
 Function ReplaceTilde(Ligne: String): String;
 Function LivreOrdre(Livre: String): String;
 Function CheminFichier(TypeDonnee: String; Livre: String): String;
-Function GridAjouteColonne(Grid: TStringGrid; Caption: String = ''; Widths: Integer = 0; Align: TAlignment = taLeftJustify): Integer;
 function extractnumbers(line: string): String;
 function VerifieRecherche():Boolean;
 
@@ -905,5 +906,34 @@ begin
   result := Trouve;
   end;
 
+Function LivreRepertoireTravail(CodeLivre, Langue: String): String;
+  begin
+    Result := GetCurrentDir + ConstCheminTravail + CodeLivre + '_' + Langue;
+  end;
+
+Function LivreFichierActuel(CodeLivre, Langue: String): String;
+  var
+    SearchRec:   TSearchRec;
+    PlusRecent:  String;
+    Repertoire:  String;
+  begin
+    Result     := '';
+    PlusRecent := '';
+    Repertoire := LivreRepertoireTravail(CodeLivre, Langue);
+    if not DirectoryExists(Repertoire) then Exit;
+    if FindFirst(Repertoire + PathDelim + '*.xml', faAnyFile, SearchRec) = 0 then
+      begin
+        repeat
+          if (SearchRec.Attr and faDirectory) = 0 then
+            if PlusRecent = '' then
+              PlusRecent := SearchRec.Name
+            else if CompareText(SearchRec.Name, PlusRecent) > 0 then
+              PlusRecent := SearchRec.Name;
+        until FindNext(SearchRec) <> 0;
+        FindClose(SearchRec);
+      end;
+    if PlusRecent <> '' then
+      Result := IncludeTrailingPathDelimiter(Repertoire) + PlusRecent;
+  end;
 end.
 

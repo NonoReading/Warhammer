@@ -327,6 +327,9 @@ begin
   InitTalentsUI();
 
   TreeViewLivre.ReadOnly := True;
+
+  ShowMessage('[' + LivreRepertoireTravail('RULES','ENGLISH') + ']' + SeparateurRetourLigne
+            + '[' + LivreFichierActuel('RULES','ENGLISH') + ']');
   
   // Style
   try
@@ -1491,7 +1494,7 @@ begin
 
     // ========== INFORMATIONS DU LIVRE ==========
     NodeInfos := TreeViewLivre.Items.AddChild(NodeRoot, GetTexteLibelle('LAB_128'));
-    SetNodeInfo(NodeInfos, 1, 'DATA_BOOK');
+    SetNodeInfo(NodeInfos, 37);
 
     // ========== RACES ==========
     NodeRaces := TreeViewLivre.Items.AddChild(NodeRoot, GetTexteLibelle('LAB_042'));
@@ -1844,6 +1847,11 @@ begin
          LabelFormTitle.Caption := GetTexteLibelle('LAB_042') + ' ' + GetTexteLibelle('LAB_085');
          AfficherTirageRace();
        end;
+    37: begin
+             // Informations du livre (bloc DATA_BOOK)
+             TypeNodeSelectionnee := 'LIVRE';
+             AfficherInfosLivre();
+           end;
     16, 17, 19, 21, 23, 25: begin
          // Sous-branches d'un métier : races possibles, niveaux et leur contenu.
          // Affichage seul pour l'instant, la saisie viendra plus tard.

@@ -427,7 +427,6 @@ procedure TMenu.ChargerLivre(ForceMaJ: Boolean; ForceLivre: String);
 
 procedure TMenu.TabLivreDblClick(Sender: TObject);
 var
-  BookName: String;
   BookPath: String;
 begin
   if (TabLivre.Cells[ColLivreLib, TabLivre.Row] <> '') then
@@ -454,9 +453,6 @@ begin
     // Si double-click sur une AUTRE colonne → ouvrir WinLivre avec le livre
     else
     begin
-      // Récupérer le code du livre
-      BookName := TabLivre.Cells[ColLivreCod, TabLivre.Row];
-
       // Construire le chemin : DATABASE\BOOK RULESBOOK.Xml
       BookPath := 'DATABASE\' + TabLivre.Cells[ColLivreChe, TabLivre.Row];;
 

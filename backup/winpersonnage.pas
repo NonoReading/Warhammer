@@ -3803,6 +3803,7 @@ Procedure TWinPersonnages.ChargeAugmentation();
     EditTotalXp.text   := IntToStr(Personnage.XpTotal);
     EditTotalXp25.text := IntToStr(Personnage.Xp25Total);
 
+    ListComp.Free;
   end;
 
 Function TWinPersonnages.VerifieLivre(ListeLivre: String; Livre: String): String;

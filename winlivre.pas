@@ -327,7 +327,7 @@ begin
   InitTalentsUI();
 
   TreeViewLivre.ReadOnly := True;
-  
+
   // Style
   try
     { MiseEnFormeDesChamp(Self); }  // À implémenter plus tard

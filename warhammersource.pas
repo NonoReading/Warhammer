@@ -431,6 +431,10 @@ var
 begin
   if (TabLivre.Cells[ColLivreLib, TabLivre.Row] <> '') then
   begin
+    ShowMessage('[' + LivreRepertoireTravail('RULES','ENGLISH') + ']' + SeparateurRetourLigne
+              + '[' + LivreFichierActuel('RULES','ENGLISH') + ']');
+
+
     // Si double-click sur la PREMIÈRE colonne (sélection) → toggle + charger
     if TabLivre.Col = ColLivreSel then
       begin

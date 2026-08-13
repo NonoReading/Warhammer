@@ -225,6 +225,7 @@ Const
       ConstCheminLivre                  = '\DATABASE\';
       ConstCheminLivreExport            = '\DATABASE_EXPORT\';
       ConstFichierIni                   = '\INI.TXT';
+      ConstCheminTravail                = '\TRAVAIL\';
       ConstIniLangue                    = 'LANG=';
       ConstIniLivre                     = 'BOOK=';
       ConstAnglais                      = 'ENGLISH';
@@ -509,6 +510,8 @@ Function LivreOrdre(Livre: String): String;
 Function CheminFichier(TypeDonnee: String; Livre: String): String;
 function extractnumbers(line: string): String;
 function VerifieRecherche():Boolean;
+Function LivreRepertoireTravail(CodeLivre, Langue: String): String;
+Function LivreFichierActuel(CodeLivre, Langue: String): String;
 
 implementation
 
@@ -905,5 +908,34 @@ begin
   result := Trouve;
   end;
 
+Function LivreRepertoireTravail(CodeLivre, Langue: String): String;
+  begin
+    Result := GetCurrentDir + ConstCheminTravail + CodeLivre + '_' + Langue;
+  end;
+
+Function LivreFichierActuel(CodeLivre, Langue: String): String;
+  var
+    SearchRec:   TSearchRec;
+    PlusRecent:  String;
+    Repertoire:  String;
+  begin
+    Result     := '';
+    PlusRecent := '';
+    Repertoire := LivreRepertoireTravail(CodeLivre, Langue);
+    if not DirectoryExists(Repertoire) then Exit;
+    if FindFirst(Repertoire + PathDelim + '*.xml', faAnyFile, SearchRec) = 0 then
+      begin
+        repeat
+          if (SearchRec.Attr and faDirectory) = 0 then
+            if PlusRecent = '' then
+              PlusRecent := SearchRec.Name
+            else if CompareText(SearchRec.Name, PlusRecent) > 0 then
+              PlusRecent := SearchRec.Name;
+        until FindNext(SearchRec) <> 0;
+        FindClose(SearchRec);
+      end;
+    if PlusRecent <> '' then
+      Result := IncludeTrailingPathDelimiter(Repertoire) + PlusRecent;
+  end;
 end.
 
