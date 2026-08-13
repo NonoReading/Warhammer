@@ -6,7 +6,7 @@ interface
 
 uses
   Classes, SysUtils, Forms, Controls, StdCtrls, ComCtrls, ExtCtrls, Menus,
-  Dialogs, Graphics, BCButton, ChargeConstantes, ChargeTexte, ChargeCompetence, ChargeTalent, ChargeMetier, ChargeLivre, ChargeArme, ChargeArmure, UnitCalcul, Grids,
+  Dialogs, Graphics, BCButton, ChargeConstantes, ChargeTexte, ChargeCompetence, ChargeTalent, ChargeMetier, ChargeLivre, ChargeArme, ChargeArmure, ChargeRace, UnitCalcul, Grids,
   Generics.Collections, DOM, XMLRead, XMLWrite, FGL;
 
 type
@@ -77,6 +77,14 @@ type
     LabelFormLib: TLabel;
     EditFormLib: TEdit;
     LabelFormDesc: TLabel;
+    LabelFormAttribut: TLabel;
+    EditFormAttribut: TEdit;
+    LabelFormMax: TLabel;
+    EditFormMax: TEdit;
+    LabelFormClasse: TLabel;
+    EditFormClasse: TEdit;
+    LabelFormCompPrinc: TLabel;
+    EditFormCompPrinc: TEdit;
     MemoFormDesc: TMemo;
     
     // Attribute Controls (hidden until attribute selected)
@@ -104,6 +112,15 @@ type
     LabelFormSkills: TLabel;
     StringGridSkills: TStringGrid;
     StringGridCareers: TStringGrid;
+    StringGridRaces: TStringGrid;
+    StringGridAttributs: TStringGrid;
+    StringGridCompetences: TStringGrid;
+    StringGridTalents: TStringGrid;
+    StringGridEquipement: TStringGrid;
+    StringGridDetail: TStringGrid;
+    StringGridQualites: TStringGrid;
+    MemoDetail: TMemo;
+    StringGridRandomRace: TStringGrid;
     
     // Talents (to be created in code)
     LabelTalentsRandom: TLabel;
@@ -127,6 +144,7 @@ type
     procedure FormShow(Sender: TObject);
     procedure ButtonChargerXMLClick(Sender: TObject);
     procedure TreeViewLivreChange(Sender: TObject; Node: TTreeNode);
+    procedure GridNiveauPrepareCanvas(Sender: TObject; aCol, aRow: Integer; aState: TGridDrawState);
     procedure TreeViewLivreDblClick(Sender: TObject);
     procedure TreeViewLivreContextPopup(Sender: TObject; MousePos: TPoint; var Handled: Boolean);
     procedure PopupMenuTreePopup(Sender: TObject);
@@ -136,7 +154,8 @@ type
     procedure ButtonFormValiderClick(Sender: TObject);
     procedure ButtonFormAnnulerClick(Sender: TObject);
     procedure ButtonFormSupprimerClick(Sender: TObject);
-    
+    procedure AfficherInfosLivre();
+
   private
     // Variables
     XMLDoc: TXMLDocument;
@@ -144,6 +163,7 @@ type
     AttributesDataList: TAttributDataMap;  // Attributs de la race actuelle
     AttributeValuesMap: TStringList;  // Map attribute codes to raw values
     MetierRacesMap: TStringList;  // CODE_METIER=CodeRace1|CodeRace2|...
+    NiveauCourantAffiche: Integer;  // niveau mis en évidence dans les grilles
     RaceSkillsData: TStringList;        // Compétences de la race sélectionnée
     RaceCareersData: TStringList;       // Carrières de la race sélectionnée (Code|Valeur)
     NodeSelectionnee: TTreeNode;
@@ -168,16 +188,38 @@ type
     procedure ConstruireMetierRacesMap();
     procedure LoadMetierRacesPossibles(CareerCode: String; MetierNode: TTreeNode);
     procedure LoadMetierNiveaux(CareerElement: TDOMElement; CareerCode: String; MetierNode: TTreeNode);
-    procedure LoadMetierNiveauAttributs(CareerElement: TDOMElement; Niveau: Integer; NodeBase: TTreeNode);
-    procedure LoadMetierNiveauCompetences(CareerElement: TDOMElement; Niveau: Integer; SkillPrincipal: String; NodeBase: TTreeNode);
-    procedure LoadMetierNiveauTalents(CareerElement: TDOMElement; Niveau: Integer; NodeBase: TTreeNode);
-    procedure LoadMetierNiveauEquipement(CareerElement: TDOMElement; Niveau: Integer; NodeBase: TTreeNode);
+    procedure LoadMetierNiveauAttributs(CareerElement: TDOMElement; Niveau: Integer; CodeNiveau: String; NodeBase: TTreeNode);
+    procedure LoadMetierNiveauCompetences(CareerElement: TDOMElement; Niveau: Integer; SkillPrincipal: String; CodeNiveau: String; NodeBase: TTreeNode);
+    procedure LoadMetierNiveauTalents(CareerElement: TDOMElement; Niveau: Integer; CodeNiveau: String; NodeBase: TTreeNode);
+    procedure LoadMetierNiveauEquipement(CareerElement: TDOMElement; Niveau: Integer; CodeNiveau: String; NodeBase: TTreeNode);
     procedure AjouterFeuilleEquipement(NomItem: String; NodeBase: TTreeNode);
     procedure LoadSkillsForRace(RaceElement: TDOMElement; RaceCode: String);
     procedure LoadCareersForRace(RaceElement: TDOMElement);
     procedure AfficherSkillsForRace(RaceCode: String);
     procedure AfficherTalentsForRace();
     procedure AfficherCareersForRace(RaceCode: String);
+    procedure AfficherRacesForMetier(CareerCode: String);
+    procedure AfficherDonneeMetier(CareerCode: String);
+    procedure AfficherDonneeCompetence(CodeComp, Titre: String);
+    procedure ChargerBrancheSimple(ChapitreTag, ElementTag, TitreBranche: String; TypeNoeud: Integer; NodeParent: TTreeNode; Regrouper: Boolean = False);
+    procedure AfficherDonneeTalent(CodeTalent, Titre: String);
+    procedure AfficherDonneeEquipement(Code, TagName, Titre: String);
+    procedure AfficherDonneeBonusMalus(Code, Titre: String);
+    procedure AfficherDonneeSort(Code, Titre: String);
+    procedure AfficherTirageRace();
+    procedure AjouterLignesTalentsSort(Valeur: String);
+    procedure AjouterLigneDetail(Libelle, Valeur: String; Toujours: Boolean = False);
+    procedure AjouterLignesQualite(Valeur, Prefixe: String);
+    function  PrefixeLivre(Code: String): String;
+    function  TraduireCodesMultiples(Valeur: String): String;
+    function  DecouperDegats(Degats: String; out CodeBonus, Fixe: String): Boolean;
+    function  TrouverElementParId(TagName, Id: String): TDOMElement;
+    procedure AfficherAttributsForNiveau(CodeNiveau: String);
+    procedure AfficherCompetencesForNiveau(CodeNiveau: String);
+    procedure AfficherTalentsForNiveau(CodeNiveau: String);
+    procedure AfficherEquipementForNiveau(CodeNiveau: String);
+    function  LibelleEquipement(NomItem: String; out TypeEquip: Char): String;
+    function  TrouverCareerElement(CareerCode: String): TDOMElement;
     procedure MasquerAfficherElements(ElementType: String);
     procedure SortSkillsGrid();
     procedure ShowComponentControl(Index: Integer; AttrLabel: String; Coefficient: String);
@@ -283,6 +325,8 @@ begin
   
   // Initialiser l'UI des talents
   InitTalentsUI();
+
+  TreeViewLivre.ReadOnly := True;
   
   // Style
   try
@@ -335,6 +379,11 @@ begin
   LabelFormAttrBaseValue.Caption := GetTexteLibelle('LAB_025'); // 'Value'
   LabelFormAttrFormula.Caption := GetTexteLibelle('LAB_020'); // 'Calculation'
   LabelFormSkills.Caption := GetTexteLibelle('LAB_087');  // 'Specie's Skills'
+  LabelFormCompPrinc.Caption := GetTexteLibelle('LAB_009');  // 'Compétence'
+  // Libellé emprunté aux traductions PDF, faute de LAB_ dédié à 'Classe'.
+  LabelFormClasse.Caption := GetTexteLibelle('PDF_MAIN1_CLASS');  // 'Classe'
+  LabelFormAttribut.Caption := GetTexteLibelle('LAB_008');  // 'Attribut'
+  LabelFormMax.Caption := GetTexteLibelle('LAB_044');  // 'Max'
   
   // Mettre à jour les captions pour Composants
   LabelFormComponent1.Caption := 'Component 1:';
@@ -995,7 +1044,7 @@ begin
 end;
 
 // Sous-branche "Attribut" d'un niveau de métier
-procedure TWinLivres.LoadMetierNiveauAttributs(CareerElement: TDOMElement; Niveau: Integer; NodeBase: TTreeNode);
+procedure TWinLivres.LoadMetierNiveauAttributs(CareerElement: TDOMElement; Niveau: Integer; CodeNiveau: String; NodeBase: TTreeNode);
 var
   Chapitre: TDOMNode;
   Elements: TDOMNodeList;
@@ -1007,7 +1056,7 @@ begin
   if Chapitre = nil then Exit;
   
   NodeBranche := TreeViewLivre.Items.AddChild(NodeBase, ConstArbreAttribut);
-  SetNodeInfo(NodeBranche, 18);  // 18 = branche attributs du niveau
+  SetNodeInfo(NodeBranche, 18, CodeNiveau);  // 18 = branche attributs du niveau
   
   Elements := TDOMElement(Chapitre).GetElementsByTagName('Attribut');
   
@@ -1026,7 +1075,7 @@ end;
 
 // Sous-branche "Compétence" d'un niveau de métier.
 // SkillPrincipal = le <Skill> racine du <Career>, marqué d'une étoile.
-procedure TWinLivres.LoadMetierNiveauCompetences(CareerElement: TDOMElement; Niveau: Integer; SkillPrincipal: String; NodeBase: TTreeNode);
+procedure TWinLivres.LoadMetierNiveauCompetences(CareerElement: TDOMElement; Niveau: Integer; SkillPrincipal: String; CodeNiveau: String; NodeBase: TTreeNode);
 var
   Chapitre: TDOMNode;
   Elements: TDOMNodeList;
@@ -1039,7 +1088,7 @@ begin
   if Chapitre = nil then Exit;
   
   NodeBranche := TreeViewLivre.Items.AddChild(NodeBase, ConstArbreCompetence);
-  SetNodeInfo(NodeBranche, 20);  // 20 = branche compétences du niveau
+  SetNodeInfo(NodeBranche, 20, CodeNiveau);  // 20 = branche compétences du niveau
   
   Elements := TDOMElement(Chapitre).GetElementsByTagName('Skill');
   
@@ -1066,7 +1115,7 @@ begin
 end;
 
 // Sous-branche "Talent" d'un niveau de métier
-procedure TWinLivres.LoadMetierNiveauTalents(CareerElement: TDOMElement; Niveau: Integer; NodeBase: TTreeNode);
+procedure TWinLivres.LoadMetierNiveauTalents(CareerElement: TDOMElement; Niveau: Integer; CodeNiveau: String; NodeBase: TTreeNode);
 var
   Chapitre: TDOMNode;
   Elements: TDOMNodeList;
@@ -1079,7 +1128,7 @@ begin
   if Chapitre = nil then Exit;
   
   NodeBranche := TreeViewLivre.Items.AddChild(NodeBase, ConstArbreTalent);
-  SetNodeInfo(NodeBranche, 22);  // 22 = branche talents du niveau
+  SetNodeInfo(NodeBranche, 22, CodeNiveau);  // 22 = branche talents du niveau
   
   Elements := TDOMElement(Chapitre).GetElementsByTagName('Talent');
   
@@ -1101,16 +1150,18 @@ begin
   end;
 end;
 
-// Ajoute une feuille d'équipement sous NodeBase, en résolvant le code
-// en arme ou armure selon son préfixe. Les entrées en texte libre
-// ("writing set") sont affichées telles quelles.
-procedure TWinLivres.AjouterFeuilleEquipement(NomItem: String; NodeBase: TTreeNode);
+// Résout un nom d'équipement du XML en libellé affichable.
+// TypeEquip renvoie 'W' pour une arme, 'P' pour une armure, 'D' pour du
+// texte libre ("writing set"). Partagé par l'arbre et la grille.
+function TWinLivres.LibelleEquipement(NomItem: String; out TypeEquip: Char): String;
 var
-  NodeFeuille: TTreeNode;
-  CodeItem, Qualite, Libelle: String;
+  CodeItem, Qualite: String;
   Arme: StructureArme;
   Armure: StructureArmure;
 begin
+  Result    := '';
+  TypeEquip := 'D';
+  
   CodeItem := Trim(NomItem);
   if CodeItem = '' then Exit;
   
@@ -1118,7 +1169,7 @@ begin
   if Pos(EquipementQualite, CodeItem) > 0 then
   begin
     CodeItem := Copy(CodeItem, 1, Length(CodeItem) - Length(EquipementQualite));
-    Qualite  := GetTexteLibelle('LAB_038');
+    Qualite  := GetTexteLibelle('LAB_038');  // ' de qualité'
   end
   else
     Qualite := '';
@@ -1128,39 +1179,52 @@ begin
      (Pos(EquipementMU, CodeItem) > 0) then
   begin
     // Arme (corps à corps, projectile ou munition)
+    TypeEquip := 'W';
     Arme := ChercheArme(CodeItem);
     if Arme.CodeArme <> '' then
-      Libelle := EquipArme + Arme.Libelle + Qualite
+      Result := Arme.Libelle + Qualite
     else
-      Libelle := EquipArme + CodeItem + Qualite;  // fallback
-    
-    NodeFeuille := TreeViewLivre.Items.AddChild(NodeBase, Libelle);
-    SetNodeInfo(NodeFeuille, 25, CodeItem);
+      Result := CodeItem + Qualite;  // fallback
   end
   else if Pos(EquipementAR, CodeItem) > 0 then
   begin
     // Armure
+    TypeEquip := 'P';
     Armure := ChercheArmure(CodeItem);
     if Armure.CodeArmure <> '' then
-      Libelle := EquipArmure + Armure.Libelle + Qualite
+      Result := Armure.Libelle + Qualite
     else
-      Libelle := EquipArmure + CodeItem + Qualite;  // fallback
-    
-    NodeFeuille := TreeViewLivre.Items.AddChild(NodeBase, Libelle);
-    SetNodeInfo(NodeFeuille, 25, CodeItem);
+      Result := CodeItem + Qualite;  // fallback
   end
   else
-  begin
     // Texte libre : "writing set", "impressive hat", "patron"...
-    NodeFeuille := TreeViewLivre.Items.AddChild(NodeBase, NomItem);
-    SetNodeInfo(NodeFeuille, 25, NomItem);
+    Result := NomItem;
+end;
+
+// Ajoute une feuille d'équipement sous NodeBase.
+procedure TWinLivres.AjouterFeuilleEquipement(NomItem: String; NodeBase: TTreeNode);
+var
+  NodeFeuille: TTreeNode;
+  Libelle: String;
+  TypeEquip: Char;
+begin
+  if Trim(NomItem) = '' then Exit;
+  
+  Libelle := LibelleEquipement(NomItem, TypeEquip);
+  
+  case TypeEquip of
+    'W': Libelle := EquipArme + Libelle;
+    'P': Libelle := EquipArmure + Libelle;
   end;
+  
+  NodeFeuille := TreeViewLivre.Items.AddChild(NodeBase, Libelle);
+  SetNodeInfo(NodeFeuille, 25, Trim(NomItem));
 end;
 
 // Sous-branche "Equipement" d'un niveau de métier.
 // Le XML mélange du texte libre ("writing set") et des codes
 // ("RULES-ARMO_04"), le type se déduit du préfixe du code.
-procedure TWinLivres.LoadMetierNiveauEquipement(CareerElement: TDOMElement; Niveau: Integer; NodeBase: TTreeNode);
+procedure TWinLivres.LoadMetierNiveauEquipement(CareerElement: TDOMElement; Niveau: Integer; CodeNiveau: String; NodeBase: TTreeNode);
 var
   Chapitre: TDOMNode;
   Elements: TDOMNodeList;
@@ -1173,7 +1237,7 @@ begin
   if Chapitre = nil then Exit;
   
   NodeBranche := TreeViewLivre.Items.AddChild(NodeBase, ConstArbreEquipement);
-  SetNodeInfo(NodeBranche, 24);  // 24 = branche équipement du niveau
+  SetNodeInfo(NodeBranche, 24, CodeNiveau);  // 24 = branche équipement du niveau
   
   Elements := TDOMElement(Chapitre).GetElementsByTagName('Item');
   
@@ -1188,7 +1252,7 @@ begin
     begin
       // Choix multiple : "A/B" -> sous-branche "au choix"
       NodeChoix := TreeViewLivre.Items.AddChild(NodeBranche, ConstArbreAuChoix);
-      SetNodeInfo(NodeChoix, 24);
+      SetNodeInfo(NodeChoix, 25);  // 25 : nœud passif, pas la branche Equipement
       
       Choix := TStringList.Create;
       try
@@ -1244,10 +1308,10 @@ begin
     // Code = "CODEMETIER|niveau" pour retrouver l'élément XML plus tard
     SetNodeInfo(NodeNiveau, 17, CareerCode + '|' + IntToStr(Niveau));  // 17 = niveau
     
-    LoadMetierNiveauAttributs(CareerElement, Niveau, NodeNiveau);
-    LoadMetierNiveauCompetences(CareerElement, Niveau, SkillPrincipal, NodeNiveau);
-    LoadMetierNiveauTalents(CareerElement, Niveau, NodeNiveau);
-    LoadMetierNiveauEquipement(CareerElement, Niveau, NodeNiveau);
+    LoadMetierNiveauAttributs(CareerElement, Niveau, CareerCode + '|' + IntToStr(Niveau), NodeNiveau);
+    LoadMetierNiveauCompetences(CareerElement, Niveau, SkillPrincipal, CareerCode + '|' + IntToStr(Niveau), NodeNiveau);
+    LoadMetierNiveauTalents(CareerElement, Niveau, CareerCode + '|' + IntToStr(Niveau), NodeNiveau);
+    LoadMetierNiveauEquipement(CareerElement, Niveau, CareerCode + '|' + IntToStr(Niveau), NodeNiveau);
   end;
 end;
 
@@ -1295,6 +1359,89 @@ begin
   end;
 end;
 
+// Construit une branche plate depuis un chapitre du XML.
+// Sert pour DATA_SKILL, DATA_SKILL_SPECIALIZATION, DATA_TALENT et
+// DATA_TALENT_SPECIALIZATION : même structure, seul le nombre de champs
+// par entrée diffère, ce dont s'occupe l'affichage.
+// Regrouper = True insère un niveau intermédiaire par élément mère, déduit
+// du code de la spécialisation ("RULES-COMPART_CALLI" -> "RULES-COMPART_*").
+procedure TWinLivres.ChargerBrancheSimple(ChapitreTag, ElementTag, TitreBranche: String; TypeNoeud: Integer; NodeParent: TTreeNode; Regrouper: Boolean = False);
+var
+  Chapitres, Elements: TDOMNodeList;
+  I, UnderPos, Idx: Integer;
+  XMLElement, MereElement: TDOMElement;
+  NodeBranche, NodeFeuille, NodeMere, NodeCible: TTreeNode;
+  Code, Libelle, CodeMere, LibelleMere: String;
+  Meres: TStringList;
+begin
+  if XMLDoc = nil then Exit;
+  
+  Chapitres := XMLDoc.GetElementsByTagName(ChapitreTag);
+  if Chapitres.Count = 0 then Exit;
+  
+  NodeBranche := TreeViewLivre.Items.AddChild(NodeParent, TitreBranche);
+  SetNodeInfo(NodeBranche, 0);  // 0 = chapitre
+  
+  // On reste dans le chapitre : les éléments de même nom nichés dans les
+  // SUBCHAPTER_* des races et des métiers sont ailleurs dans le document.
+  Elements := TDOMElement(Chapitres.Item[0]).GetElementsByTagName(ElementTag);
+  
+  // Table code mère -> noeud, pour ne créer chaque mère qu'une fois
+  // sans supposer que le XML soit trié.
+  Meres := TStringList.Create;
+  try
+    Meres.Sorted := True;
+    
+    for I := 0 to Elements.Count - 1 do
+    begin
+      XMLElement := TDOMElement(Elements.Item[I]);
+      
+      Code := XMLElement.GetAttribute('id');
+      if Code = '' then Continue;
+      
+      Libelle := ValeurXML(XMLElement.FindNode('Description'));
+      if Libelle = '' then
+        Libelle := Code;  // fallback
+      
+      NodeCible := NodeBranche;
+      
+      if Regrouper then
+      begin
+        UnderPos := Pos(ValeurSousCompetence, Code);
+        if UnderPos > 0 then
+        begin
+          CodeMere := Copy(Code, 1, UnderPos - 1) + ValeurSousCompetence + '*';
+          
+          Idx := Meres.IndexOf(CodeMere);
+          if Idx >= 0 then
+            NodeCible := TTreeNode(Meres.Objects[Idx])
+          else
+          begin
+            // Libellé de la mère depuis son propre chapitre
+            LibelleMere := '';
+            MereElement := TrouverElementParId(ElementTag, CodeMere);
+            if MereElement <> nil then
+              LibelleMere := ValeurXML(MereElement.FindNode('Description'));
+            if LibelleMere = '' then
+              LibelleMere := CodeMere;  // fallback
+            
+            NodeMere := TreeViewLivre.Items.AddChild(NodeBranche, LibelleMere);
+            SetNodeInfo(NodeMere, 0, CodeMere);  // 0 = regroupement passif
+            
+            Meres.AddObject(CodeMere, NodeMere);
+            NodeCible := NodeMere;
+          end;
+        end;
+      end;
+      
+      NodeFeuille := TreeViewLivre.Items.AddChild(NodeCible, Libelle);
+      SetNodeInfo(NodeFeuille, TypeNoeud, Code);
+    end;
+  finally
+    Meres.Free;
+  end;
+end;
+
 procedure TWinLivres.ChargerXMLFile(AFilePath: String);
 var
   XMLElement: TDOMElement;
@@ -1306,9 +1453,12 @@ var
   NodeRoot: TTreeNode;
   NodeRaces, NodeRace: TTreeNode;
   NodeCareers, NodeCareer: TTreeNode;
+  NodeEquip: TTreeNode;
+  NodeTirage: TTreeNode;
   DescNode: TDOMNode;
   ExplNode: TDOMNode;
   FileName: String;
+  NodeInfos: TTreeNode;
 begin
   try
     // Charger le fichier XML
@@ -1338,7 +1488,11 @@ begin
     // Afficher dans LabelFormTitle
     LabelFormTitle.Caption := GetTexteLibelle('LAB_128') + ': ' + FileName;
     SetNodeInfo(NodeRoot, 0);  // 0 = chapitre
-    
+
+    // ========== INFORMATIONS DU LIVRE ==========
+    NodeInfos := TreeViewLivre.Items.AddChild(NodeRoot, GetTexteLibelle('LAB_128'));
+    SetNodeInfo(NodeInfos, 1, 'DATA_BOOK');
+
     // ========== RACES ==========
     NodeRaces := TreeViewLivre.Items.AddChild(NodeRoot, GetTexteLibelle('LAB_042'));
     SetNodeInfo(NodeRaces, 0);
@@ -1440,6 +1594,42 @@ begin
             LoadMetierNiveaux(XMLElement, Code, NodeCareer);
           end;
       end;
+    
+    // ========== COMPÉTENCES ==========
+    // Deux chapitres distincts dans le XML : DATA_SKILL pour les compétences,
+    // DATA_SKILL_SPECIALIZATION pour les spécialisations, qui n'ont qu'un libellé.
+    ChargerBrancheSimple('DATA_SKILL', 'Skill', GetTexteLibelle('LAB_009'), 26, NodeRoot);
+    ChargerBrancheSimple('DATA_SKILL_SPECIALIZATION', 'Skill', GetTexteLibelle('LAB_146'), 27, NodeRoot, True);
+    
+    // ========== TALENTS ==========
+    ChargerBrancheSimple('DATA_TALENT', 'Talent', GetTexteLibelle('LAB_007'), 28, NodeRoot);
+    ChargerBrancheSimple('DATA_TALENT_SPECIALIZATION', 'Talent', GetTexteLibelle('LAB_147'), 29, NodeRoot, True);
+    
+    // ========== ÉQUIPEMENT ==========
+    // Une branche porteuse, puis un chapitre XML par type.
+    // Le "divers" n'a pas de chapitre : c'est du texte libre dans les métiers.
+    NodeEquip := TreeViewLivre.Items.AddChild(NodeRoot, GetTexteLibelle('LAB_013'));
+    SetNodeInfo(NodeEquip, 0);
+    
+    ChargerBrancheSimple('DATA_WEAPON', 'Weapon', GetTexteLibelle('LAB_063'), 30, NodeEquip);
+    ChargerBrancheSimple('DATA_ARMOR',  'Armor',  GetTexteLibelle('LAB_065'), 31, NodeEquip);
+    ChargerBrancheSimple('DATA_ARMOR_SIMP', 'ArmorSimp', GetTexteLibelle('LAB_149'), 33, NodeEquip);
+    ChargerBrancheSimple('DATA_WEAPON_BONUS', 'BonusMalus',
+                         GetTexteLibelle('LAB_125') + ' ' + GetTexteLibelle('LAB_063'), 32, NodeEquip);
+    ChargerBrancheSimple('DATA_ARMOR_BONUS', 'BonusMalus',
+                         GetTexteLibelle('LAB_125') + ' ' + GetTexteLibelle('LAB_065'), 34, NodeEquip);
+    
+    // ========== SORTS ==========
+    ChargerBrancheSimple('DATA_SPELL', 'Sort', GetTexteLibelle('LAB_083'), 35, NodeRoot);
+    
+    // ========== TIRAGE ALÉATOIRE DE RACE ==========
+    // Un seul noeud, sans enfant : il ouvre directement la table.
+    if XMLDoc.GetElementsByTagName('DATA_RANDOM_SPECIE').Count > 0 then
+    begin
+      NodeTirage := TreeViewLivre.Items.AddChild(NodeRoot,
+                      GetTexteLibelle('LAB_042') + ' ' + GetTexteLibelle('LAB_085'));
+      SetNodeInfo(NodeTirage, 36);
+    end;
     
     // Expand les branches principales
     NodeRoot.Expand(False);
@@ -1549,11 +1739,112 @@ begin
     14: begin
          // C'est un métier de niveau 1
          TypeNodeSelectionnee := 'METIER';
-         LabelFormTitle.Caption := GetTexteLibelle('LAB_006') + ': ' + Node.Text;
-         MasquerAfficherElements('');  // Masquer tous les grids
-         MasquerForm();
+         AfficherDonneeMetier(GetNodeCode(Node));
        end;
-    15..25: begin
+    15: begin
+         // Branche "Races possibles" d'un métier
+         TypeNodeSelectionnee := 'CHAPITRE';
+         LabelFormTitle.Caption := ConstArbreRacePossible;
+         if Node.Parent <> nil then
+           LabelFormTitle.Caption := ConstArbreRacePossible + ': ' + Node.Parent.Text;
+         
+         AfficherRacesForMetier(GetNodeCode(Node));
+       end;
+    18: begin
+         // Branche "Attribut" d'un niveau de métier
+         TypeNodeSelectionnee := 'CHAPITRE';
+         LabelFormTitle.Caption := ConstArbreAttribut;
+         if Node.Parent <> nil then
+           LabelFormTitle.Caption := ConstArbreAttribut + ': ' + Node.Parent.Text;
+         
+         AfficherAttributsForNiveau(GetNodeCode(Node));
+       end;
+    20: begin
+         // Branche "Compétence" d'un niveau de métier
+         TypeNodeSelectionnee := 'CHAPITRE';
+         LabelFormTitle.Caption := ConstArbreCompetence;
+         if Node.Parent <> nil then
+           LabelFormTitle.Caption := ConstArbreCompetence + ': ' + Node.Parent.Text;
+         
+         AfficherCompetencesForNiveau(GetNodeCode(Node));
+       end;
+    22: begin
+         // Branche "Talent" d'un niveau de métier
+         TypeNodeSelectionnee := 'CHAPITRE';
+         LabelFormTitle.Caption := ConstArbreTalent;
+         if Node.Parent <> nil then
+           LabelFormTitle.Caption := ConstArbreTalent + ': ' + Node.Parent.Text;
+         
+         AfficherTalentsForNiveau(GetNodeCode(Node));
+       end;
+    24: begin
+         // Branche "Equipement" d'un niveau de métier
+         TypeNodeSelectionnee := 'CHAPITRE';
+         LabelFormTitle.Caption := ConstArbreEquipement;
+         if Node.Parent <> nil then
+           LabelFormTitle.Caption := ConstArbreEquipement + ': ' + Node.Parent.Text;
+         
+         AfficherEquipementForNiveau(GetNodeCode(Node));
+       end;
+    26: begin
+         // Compétence de niveau 1
+         TypeNodeSelectionnee := 'COMPETENCE';
+         AfficherDonneeCompetence(GetNodeCode(Node), GetTexteLibelle('LAB_009'));
+       end;
+    27: begin
+         // Spécialisation de compétence
+         TypeNodeSelectionnee := 'COMPETENCE';
+         AfficherDonneeCompetence(GetNodeCode(Node), GetTexteLibelle('LAB_146'));
+       end;
+    28: begin
+         // Talent de niveau 1
+         TypeNodeSelectionnee := 'TALENT';
+         AfficherDonneeTalent(GetNodeCode(Node), GetTexteLibelle('LAB_007'));
+       end;
+    29: begin
+         // Spécialisation de talent
+         TypeNodeSelectionnee := 'TALENT';
+         AfficherDonneeTalent(GetNodeCode(Node), GetTexteLibelle('LAB_147'));
+       end;
+    30: begin
+         // Arme
+         TypeNodeSelectionnee := 'EQUIPEMENT';
+         AfficherDonneeEquipement(GetNodeCode(Node), 'Weapon', GetTexteLibelle('LAB_063'));
+       end;
+    31: begin
+         // Armure
+         TypeNodeSelectionnee := 'EQUIPEMENT';
+         AfficherDonneeEquipement(GetNodeCode(Node), 'Armor', GetTexteLibelle('LAB_065'));
+       end;
+    32: begin
+         // Qualité d'arme
+         TypeNodeSelectionnee := 'EQUIPEMENT';
+         AfficherDonneeBonusMalus(GetNodeCode(Node),
+                                  GetTexteLibelle('LAB_125') + ' ' + GetTexteLibelle('LAB_063'));
+       end;
+    33: begin
+         // Armure simplifiée
+         TypeNodeSelectionnee := 'EQUIPEMENT';
+         AfficherDonneeEquipement(GetNodeCode(Node), 'ArmorSimp', GetTexteLibelle('LAB_149'));
+       end;
+    34: begin
+         // Qualité d'armure
+         TypeNodeSelectionnee := 'EQUIPEMENT';
+         AfficherDonneeBonusMalus(GetNodeCode(Node),
+                                  GetTexteLibelle('LAB_125') + ' ' + GetTexteLibelle('LAB_065'));
+       end;
+    35: begin
+         // Sort
+         TypeNodeSelectionnee := 'SORT';
+         AfficherDonneeSort(GetNodeCode(Node), GetTexteLibelle('LAB_083'));
+       end;
+    36: begin
+         // Table de tirage aléatoire de race
+         TypeNodeSelectionnee := 'CHAPITRE';
+         LabelFormTitle.Caption := GetTexteLibelle('LAB_042') + ' ' + GetTexteLibelle('LAB_085');
+         AfficherTirageRace();
+       end;
+    16, 17, 19, 21, 23, 25: begin
          // Sous-branches d'un métier : races possibles, niveaux et leur contenu.
          // Affichage seul pour l'instant, la saisie viendra plus tard.
          TypeNodeSelectionnee := 'METIER';
@@ -1696,6 +1987,15 @@ begin
   LabelFormSkills.Visible := False;
   StringGridSkills.Visible := False;
   StringGridCareers.Visible := False;
+  StringGridRaces.Visible := False;
+  StringGridAttributs.Visible := False;
+  StringGridCompetences.Visible := False;
+  StringGridTalents.Visible := False;
+  StringGridEquipement.Visible := False;
+  StringGridDetail.Visible := False;
+  StringGridQualites.Visible := False;
+  MemoDetail.Visible := False;
+  StringGridRandomRace.Visible := False;
   if TreeViewTalents <> nil then
     TreeViewTalents.Visible := False;
   if LabelTalentsRandom <> nil then
@@ -1717,6 +2017,50 @@ begin
         LabelFormSkills.Visible := True;
         StringGridCareers.Visible := True;
         // Les autres grids restent masqués
+      end;
+    
+    'RACE':
+      begin
+        // Afficher les races (StringGridRaces).
+        // Pas de LabelFormSkills ici : son libellé est 'Compétence de race',
+        // hors sujet au-dessus d'une liste de races. Le titre vient de LabelFormTitle.
+        StringGridRaces.Visible := True;
+      end;
+    
+    'ATTRIBUT_METIER':
+      begin
+        // Grille des attributs d'un niveau de métier
+        StringGridAttributs.Visible := True;
+      end;
+    
+    'COMPETENCE_METIER':
+      begin
+        // Grille des compétences d'un niveau de métier
+        StringGridCompetences.Visible := True;
+      end;
+    
+    'TALENT_METIER':
+      begin
+        // Grille des talents d'un niveau de métier
+        StringGridTalents.Visible := True;
+      end;
+    
+    'EQUIPEMENT_METIER':
+      begin
+        // Grille de l'équipement d'un niveau de métier
+        StringGridEquipement.Visible := True;
+      end;
+    
+    'DETAIL':
+      begin
+        // Grille clé/valeur : détail d'une arme ou d'une armure
+        StringGridDetail.Visible := True;
+      end;
+    
+    'TIRAGE_RACE':
+      begin
+        // Table de tirage aléatoire de race propre au livre
+        StringGridRandomRace.Visible := True;
       end;
     
     'TALENT':
@@ -2001,6 +2345,516 @@ begin
   end;
 end;
 
+// ========== AFFICHER ATTRIBUTS D'UN NIVEAU DE MÉTIER ==========
+// Les attributs de Warhammer sont un ensemble FERMÉ : les dix sont toujours
+// présents dans SUBCHAPTER_ATTR, chacun portant le niveau où il est acquis
+// (0 = jamais). On affiche donc la répartition complète, pas seulement le
+// niveau courant, dont les lignes sont mises en évidence.
+// CodeNiveau a la forme "RULES-WORK01|2".
+procedure TWinLivres.AfficherAttributsForNiveau(CodeNiveau: String);
+var
+  CareerElement: TDOMElement;
+  Chapitre: TDOMNode;
+  Elements: TDOMNodeList;
+  I, RowIdx, PipePos: Integer;
+  CareerCode, CodeAttr, Valeur: String;
+begin
+  MasquerAfficherElements('ATTRIBUT_METIER');
+  
+  // Masquer les contrôles de saisie
+  LabelFormCode.Visible := False;
+  EditFormCode.Visible := False;
+  LabelFormLib.Visible := False;
+  EditFormLib.Visible := False;
+  LabelFormDesc.Visible := False;
+  MemoFormDesc.Visible := False;
+  GroupBoxForm.Visible := False;
+  
+  // Découper "CODEMETIER|niveau"
+  PipePos := Pos('|', CodeNiveau);
+  if PipePos = 0 then Exit;
+  
+  CareerCode := Copy(CodeNiveau, 1, PipePos - 1);
+  NiveauCourantAffiche := StrToIntDef(Copy(CodeNiveau, PipePos + 1, Length(CodeNiveau)), 0);
+  
+  CareerElement := TrouverCareerElement(CareerCode);
+  if CareerElement = nil then Exit;
+  
+  Chapitre := CareerElement.FindNode('SUBCHAPTER_ATTR');
+  if Chapitre = nil then Exit;
+  
+  StringGridAttributs.RowCount := 1;
+  
+  // Col 0 = vide (réservé Lazarus), 1 = Code, 2 = Attribut, 3 = Niveau
+  StringGridAttributs.Columns[0].Title.Caption := GetTexteLibelle('LAB_001');  // Code
+  StringGridAttributs.Columns[1].Title.Caption := GetTexteLibelle('LAB_008');  // Attribut
+  StringGridAttributs.Columns[2].Title.Caption := GetTexteLibelle('LAB_019');  // Niv.
+  
+  Elements := TDOMElement(Chapitre).GetElementsByTagName('Attribut');
+  
+  // Pas de tri : l'ordre du XML est l'ordre canonique de Warhammer
+  // (CC, CT, F, E, I, Ag, Dex, Int, FM, Soc), plus parlant qu'un tri alphabétique.
+  StringGridAttributs.RowCount := Elements.Count + 1;
+  RowIdx := 1;
+  
+  for I := 0 to Elements.Count - 1 do
+  begin
+    CodeAttr := TDOMElement(Elements.Item[I]).GetAttribute('name');
+    if CodeAttr = '' then Continue;
+    
+    Valeur := ValeurXML(Elements.Item[I]);
+    
+    StringGridAttributs.Cells[1, RowIdx] := CodeAttr;
+    StringGridAttributs.Cells[2, RowIdx] := GetAttributLabel(CodeAttr);
+    StringGridAttributs.Cells[3, RowIdx] := Valeur;
+    
+    Inc(RowIdx);
+  end;
+  
+  StringGridAttributs.RowCount := RowIdx;
+  
+  AdjustGridColumnsWidth(StringGridAttributs, 0, False, False, True, 10, 10, ssAutoBoth);
+end;
+
+// ========== AFFICHER COMPÉTENCES D'UN NIVEAU DE MÉTIER ==========
+// Contrairement aux attributs, les compétences forment un ensemble OUVERT :
+// une même compétence peut apparaître plusieurs fois avec des spécialisations
+// différentes (Métier (Apothicaire) et Métier (Empoisonneur)). Les lignes
+// viennent donc du XML et non de ListCompetence, sinon les doublons de
+// spécialisation seraient impossibles à représenter.
+// CodeNiveau a la forme "RULES-WORK01|2".
+procedure TWinLivres.AfficherCompetencesForNiveau(CodeNiveau: String);
+var
+  CareerElement: TDOMElement;
+  Chapitre: TDOMNode;
+  Elements: TDOMNodeList;
+  I, RowIdx, PipePos, UnderPos: Integer;
+  CareerCode, CodeComp, BaseCode, SkillPrincipal: String;
+  ColComp, ColSpec: String;
+  Competence, Generique: StructureCompetence;
+begin
+  MasquerAfficherElements('COMPETENCE_METIER');
+  
+  // Masquer les contrôles de saisie
+  LabelFormCode.Visible := False;
+  EditFormCode.Visible := False;
+  LabelFormLib.Visible := False;
+  EditFormLib.Visible := False;
+  LabelFormDesc.Visible := False;
+  MemoFormDesc.Visible := False;
+  GroupBoxForm.Visible := False;
+  
+  // Découper "CODEMETIER|niveau"
+  PipePos := Pos('|', CodeNiveau);
+  if PipePos = 0 then Exit;
+  
+  CareerCode := Copy(CodeNiveau, 1, PipePos - 1);
+  NiveauCourantAffiche := StrToIntDef(Copy(CodeNiveau, PipePos + 1, Length(CodeNiveau)), 0);
+  
+  CareerElement := TrouverCareerElement(CareerCode);
+  if CareerElement = nil then Exit;
+  
+  Chapitre := CareerElement.FindNode('SUBCHAPTER_SKILL');
+  if Chapitre = nil then Exit;
+  
+  // Compétence principale du métier, marquée d'une étoile comme dans l'arbre
+  SkillPrincipal := ValeurXML(CareerElement.FindNode('Skill'));
+  
+  StringGridCompetences.RowCount := 1;
+  
+  // Col 0 = vide (réservé Lazarus)
+  StringGridCompetences.Columns[0].Title.Caption := GetTexteLibelle('LAB_001');  // Code
+  StringGridCompetences.Columns[1].Title.Caption := GetTexteLibelle('LAB_009');  // Compétence
+  StringGridCompetences.Columns[2].Title.Caption := GetTexteLibelle('LAB_078');  // Spécialisation
+  StringGridCompetences.Columns[3].Title.Caption := GetTexteLibelle('LAB_019');  // Niv.
+  
+  Elements := TDOMElement(Chapitre).GetElementsByTagName('Skill');
+  
+  // Pas de tri : l'ordre du XML groupe déjà les compétences par niveau croissant.
+  StringGridCompetences.RowCount := Elements.Count + 1;
+  RowIdx := 1;
+  
+  for I := 0 to Elements.Count - 1 do
+  begin
+    CodeComp := TDOMElement(Elements.Item[I]).GetAttribute('name');
+    if CodeComp = '' then Continue;
+    
+    Competence := ChercheCompetence(CodeComp);
+    
+    if Competence.CodeCompetence = '' then
+    begin
+      // Compétence inconnue : on montre au moins le code
+      ColComp := CodeComp;
+      ColSpec := '';
+    end
+    else if Competence.SousCompetence then
+    begin
+      // Spécialisation : remonter à la compétence générique "XXX_*"
+      UnderPos := Pos('_', CodeComp);
+      if UnderPos > 0 then
+        BaseCode := Copy(CodeComp, 1, UnderPos - 1) + '_*'
+      else
+        BaseCode := '';
+      
+      Generique := ChercheCompetence(BaseCode);
+      if Generique.CodeCompetence <> '' then
+        ColComp := Generique.Libelle
+      else
+        ColComp := BaseCode;
+      
+      ColSpec := Competence.Libelle;
+    end
+    else
+    begin
+      // Compétence sans spécialisation
+      ColComp := Competence.Libelle;
+      ColSpec := '';
+    end;
+    
+    if CodeComp = SkillPrincipal then
+      ColComp := ColComp + ' *';
+    
+    StringGridCompetences.Cells[1, RowIdx] := CodeComp;
+    StringGridCompetences.Cells[2, RowIdx] := ColComp;
+    StringGridCompetences.Cells[3, RowIdx] := ColSpec;
+    StringGridCompetences.Cells[4, RowIdx] := ValeurXML(Elements.Item[I]);
+    
+    Inc(RowIdx);
+  end;
+  
+  StringGridCompetences.RowCount := RowIdx;
+  
+  AdjustGridColumnsWidth(StringGridCompetences, 0, False, False, True, 10, 10, ssAutoBoth);
+end;
+
+// ========== AFFICHER TALENTS D'UN NIVEAU DE MÉTIER ==========
+// Même modèle que les compétences : ensemble ouvert, spécialisations possibles
+// (RULES-T0136_* = Etiquette (au choix)), donc les lignes viennent du XML.
+// CodeNiveau a la forme "RULES-WORK01|2".
+procedure TWinLivres.AfficherTalentsForNiveau(CodeNiveau: String);
+var
+  CareerElement: TDOMElement;
+  Chapitre: TDOMNode;
+  Elements: TDOMNodeList;
+  I, RowIdx, PipePos, UnderPos: Integer;
+  CareerCode, CodeTal, BaseCode: String;
+  ColTal, ColSpec: String;
+  Talent, Generique: StructureTalent;
+begin
+  MasquerAfficherElements('TALENT_METIER');
+  
+  // Masquer les contrôles de saisie
+  LabelFormCode.Visible := False;
+  EditFormCode.Visible := False;
+  LabelFormLib.Visible := False;
+  EditFormLib.Visible := False;
+  LabelFormDesc.Visible := False;
+  MemoFormDesc.Visible := False;
+  GroupBoxForm.Visible := False;
+  
+  // Découper "CODEMETIER|niveau"
+  PipePos := Pos('|', CodeNiveau);
+  if PipePos = 0 then Exit;
+  
+  CareerCode := Copy(CodeNiveau, 1, PipePos - 1);
+  NiveauCourantAffiche := StrToIntDef(Copy(CodeNiveau, PipePos + 1, Length(CodeNiveau)), 0);
+  
+  CareerElement := TrouverCareerElement(CareerCode);
+  if CareerElement = nil then Exit;
+  
+  Chapitre := CareerElement.FindNode('SUBCHAPTER_TALENT');
+  if Chapitre = nil then Exit;
+  
+  StringGridTalents.RowCount := 1;
+  
+  // Col 0 = vide (réservé Lazarus)
+  StringGridTalents.Columns[0].Title.Caption := GetTexteLibelle('LAB_001');  // Code
+  StringGridTalents.Columns[1].Title.Caption := GetTexteLibelle('LAB_007');  // Talent
+  StringGridTalents.Columns[2].Title.Caption := GetTexteLibelle('LAB_078');  // Spécialisation
+  StringGridTalents.Columns[3].Title.Caption := GetTexteLibelle('LAB_019');  // Niv.
+  
+  Elements := TDOMElement(Chapitre).GetElementsByTagName('Talent');
+  
+  // Pas de tri : l'ordre du XML groupe déjà les talents par niveau croissant.
+  StringGridTalents.RowCount := Elements.Count + 1;
+  RowIdx := 1;
+  
+  for I := 0 to Elements.Count - 1 do
+  begin
+    CodeTal := TDOMElement(Elements.Item[I]).GetAttribute('name');
+    if CodeTal = '' then Continue;
+    
+    Talent := ChercheTalent(CodeTal);
+    
+    if Talent.CodeTalent = '' then
+    begin
+      // Talent inconnu : on montre au moins le code
+      ColTal  := CodeTal;
+      ColSpec := '';
+    end
+    else if Talent.SousTalent then
+    begin
+      // Spécialisation : remonter au talent générique "XXX_*"
+      UnderPos := Pos('_', CodeTal);
+      if UnderPos > 0 then
+        BaseCode := Copy(CodeTal, 1, UnderPos - 1) + '_*'
+      else
+        BaseCode := '';
+      
+      Generique := ChercheTalent(BaseCode);
+      if Generique.CodeTalent <> '' then
+        ColTal := Generique.Libelle
+      else
+        ColTal := BaseCode;
+      
+      ColSpec := Talent.Libelle;
+    end
+    else
+    begin
+      // Talent sans spécialisation
+      ColTal  := Talent.Libelle;
+      ColSpec := '';
+    end;
+    
+    StringGridTalents.Cells[1, RowIdx] := CodeTal;
+    StringGridTalents.Cells[2, RowIdx] := ColTal;
+    StringGridTalents.Cells[3, RowIdx] := ColSpec;
+    StringGridTalents.Cells[4, RowIdx] := ValeurXML(Elements.Item[I]);
+    
+    Inc(RowIdx);
+  end;
+  
+  StringGridTalents.RowCount := RowIdx;
+  
+  AdjustGridColumnsWidth(StringGridTalents, 0, False, False, True, 10, 10, ssAutoBoth);
+end;
+
+// ========== AFFICHER ÉQUIPEMENT D'UN NIVEAU DE MÉTIER ==========
+// Une ligne = une entrée <Item> du XML, comme pour les compétences et talents.
+// Un choix multiple ("A/B") reste donc sur UNE ligne, ses options jointes par
+// le séparateur : c'est une seule donnée à modifier plus tard, pas deux.
+// CodeNiveau a la forme "RULES-WORK01|2".
+procedure TWinLivres.AfficherEquipementForNiveau(CodeNiveau: String);
+var
+  CareerElement: TDOMElement;
+  Chapitre: TDOMNode;
+  Elements: TDOMNodeList;
+  I, J, RowIdx, PipePos: Integer;
+  CareerCode, NomItem, ColLib, ColType: String;
+  TypeEquip: Char;
+  Choix: TStringList;
+begin
+  MasquerAfficherElements('EQUIPEMENT_METIER');
+  
+  // Masquer les contrôles de saisie
+  LabelFormCode.Visible := False;
+  EditFormCode.Visible := False;
+  LabelFormLib.Visible := False;
+  EditFormLib.Visible := False;
+  LabelFormDesc.Visible := False;
+  MemoFormDesc.Visible := False;
+  GroupBoxForm.Visible := False;
+  
+  // Découper "CODEMETIER|niveau"
+  PipePos := Pos('|', CodeNiveau);
+  if PipePos = 0 then Exit;
+  
+  CareerCode := Copy(CodeNiveau, 1, PipePos - 1);
+  NiveauCourantAffiche := StrToIntDef(Copy(CodeNiveau, PipePos + 1, Length(CodeNiveau)), 0);
+  
+  CareerElement := TrouverCareerElement(CareerCode);
+  if CareerElement = nil then Exit;
+  
+  Chapitre := CareerElement.FindNode('SUBCHAPTER_ITEM');
+  if Chapitre = nil then Exit;
+  
+  StringGridEquipement.RowCount := 1;
+  
+  // Col 0 = vide (réservé Lazarus)
+  StringGridEquipement.Columns[0].Title.Caption := GetTexteLibelle('LAB_001');  // Code
+  StringGridEquipement.Columns[1].Title.Caption := GetTexteLibelle('LAB_018');  // Type
+  StringGridEquipement.Columns[2].Title.Caption := GetTexteLibelle('LAB_013');  // Equipement
+  StringGridEquipement.Columns[3].Title.Caption := GetTexteLibelle('LAB_019');  // Niv.
+  
+  Elements := TDOMElement(Chapitre).GetElementsByTagName('Item');
+  
+  StringGridEquipement.RowCount := Elements.Count + 1;
+  RowIdx := 1;
+  
+  for I := 0 to Elements.Count - 1 do
+  begin
+    NomItem := TDOMElement(Elements.Item[I]).GetAttribute('name');
+    if NomItem = '' then Continue;
+    
+    if Pos(SeparateurMulti, NomItem) > 0 then
+    begin
+      // Choix multiple : résoudre chaque option, les rejoindre sur une ligne
+      ColLib  := '';
+      ColType := ConstArbreAuChoix;
+      
+      Choix := TStringList.Create;
+      try
+        Choix.Delimiter       := SeparateurMulti;
+        Choix.StrictDelimiter := True;
+        Choix.DelimitedText   := NomItem;
+        
+        for J := 0 to Choix.Count - 1 do
+        begin
+          if ColLib <> '' then
+            ColLib := ColLib + ' ' + SeparateurMulti + ' ';
+          ColLib := ColLib + LibelleEquipement(Choix[J], TypeEquip);
+        end;
+      finally
+        Choix.Free;
+      end;
+    end
+    else
+    begin
+      ColLib := LibelleEquipement(NomItem, TypeEquip);
+      
+      case TypeEquip of
+        'W': ColType := GetTexteLibelle('LAB_063');  // Arme
+        'P': ColType := GetTexteLibelle('LAB_065');  // Armure
+      else
+        ColType := GetTexteLibelle('LAB_064');       // Divers
+      end;
+    end;
+    
+    StringGridEquipement.Cells[1, RowIdx] := NomItem;
+    StringGridEquipement.Cells[2, RowIdx] := ColType;
+    StringGridEquipement.Cells[3, RowIdx] := ColLib;
+    StringGridEquipement.Cells[4, RowIdx] := ValeurXML(Elements.Item[I]);
+    
+    Inc(RowIdx);
+  end;
+  
+  StringGridEquipement.RowCount := RowIdx;
+  
+  AdjustGridColumnsWidth(StringGridEquipement, 0, False, False, True, 10, 10, ssAutoBoth);
+end;
+
+// Met en évidence les lignes du niveau courant.
+// Partagé par toutes les grilles dont la DERNIÈRE colonne est le niveau.
+// OnPrepareCanvas plutôt que OnDrawCell : on ne change que le pinceau,
+// la grille se dessine elle-même normalement.
+procedure TWinLivres.GridNiveauPrepareCanvas(Sender: TObject; aCol, aRow: Integer; aState: TGridDrawState);
+var
+  Grille: TStringGrid;
+begin
+  if aRow < 1 then Exit;           // ligne d'en-tête
+  if NiveauCourantAffiche = 0 then Exit;
+  
+  Grille := TStringGrid(Sender);
+  if Grille.ColCount < 1 then Exit;
+  
+  if Grille.Cells[Grille.ColCount - 1, aRow] = IntToStr(NiveauCourantAffiche) then
+    Grille.Canvas.Brush.Color := $00F0E4D8;  // fond discret
+end;
+
+// ========== AFFICHER RACES FOR METIER ==========
+// Liste TOUTES les races de ListRace et coche celles qui proposent ce métier.
+// Symétrique de AfficherCareersForRace, qui liste tous les métiers pour une race.
+procedure TWinLivres.AfficherRacesForMetier(CareerCode: String);
+var
+  I, RowIdx, PipePos: Integer;
+  Race: StructureRace;
+  RacesDuMetier: TStringList;
+  TempRacesData: TStringList;
+  Ligne, Selected, Libelle, Code, LivreStr: String;
+begin
+  // Afficher le grid des races, masquer le reste
+  MasquerAfficherElements('RACE');
+  
+  // Masquer les contrôles de race et attributs
+  LabelFormCode.Visible := False;
+  EditFormCode.Visible := False;
+  LabelFormLib.Visible := False;
+  EditFormLib.Visible := False;
+  LabelFormDesc.Visible := False;
+  MemoFormDesc.Visible := False;
+  
+  if ListRace = nil then Exit;
+  
+  StringGridRaces.RowCount := 1;
+  
+  // Les colonnes sont définies dans le .lfm
+  // Col 0 = vide (réservé Lazarus), 1 = Code, 2 = Libellé, 3 = Livre, 4 = Sélectionné
+  StringGridRaces.Columns[0].Title.Caption := GetTexteLibelle('LAB_001');  // Code
+  StringGridRaces.Columns[1].Title.Caption := GetTexteLibelle('LAB_002');  // Libellé
+  StringGridRaces.Columns[2].Title.Caption := GetTexteLibelle('LAB_128');  // Livre
+  StringGridRaces.Columns[3].Title.Caption := GetTexteLibelle('LAB_004');  // Sélectionné
+  
+  // Codes des races qui proposent ce métier
+  RacesDuMetier := TStringList.Create;
+  TempRacesData := TStringList.Create;
+  try
+    if MetierRacesMap <> nil then
+    begin
+      RacesDuMetier.Delimiter       := '|';
+      RacesDuMetier.StrictDelimiter := True;
+      RacesDuMetier.DelimitedText   := MetierRacesMap.Values[CareerCode];
+    end;
+    
+    // Format de tri : "Selected|Libelle|Code|Livre"
+    // Selected = "0" si la race propose le métier (donc en premier), "1" sinon
+    for I := 0 to ListRace.Count - 1 do
+    begin
+      Race := ListRace[I];
+      if Race.CodeRace = '' then Continue;
+      
+      if RacesDuMetier.IndexOf(Race.CodeRace) >= 0 then
+        Selected := '0'
+      else
+        Selected := '1';
+      
+      TempRacesData.Add(Selected + '|' + Race.Libelle + '|' + Race.CodeRace + '|' +
+                        GetTexteLibelle(Race.Livre, '', '', True));
+    end;
+    
+    // Tri : sélectionnées d'abord ("0" < "1"), puis alphabétique par libellé
+    TempRacesData.Sort;
+    
+    StringGridRaces.RowCount := TempRacesData.Count + 1;
+    RowIdx := 1;
+    
+    for I := 0 to TempRacesData.Count - 1 do
+    begin
+      // Découpage manuel : DelimitedText se comporte mal avec le pipe
+      Ligne := TempRacesData[I];
+      
+      PipePos  := Pos('|', Ligne);
+      Selected := Copy(Ligne, 1, PipePos - 1);
+      Ligne    := Copy(Ligne, PipePos + 1, Length(Ligne));
+      
+      PipePos  := Pos('|', Ligne);
+      Libelle  := Copy(Ligne, 1, PipePos - 1);
+      Ligne    := Copy(Ligne, PipePos + 1, Length(Ligne));
+      
+      PipePos  := Pos('|', Ligne);
+      Code     := Copy(Ligne, 1, PipePos - 1);
+      LivreStr := Copy(Ligne, PipePos + 1, Length(Ligne));
+      
+      StringGridRaces.Cells[1, RowIdx] := Code;
+      StringGridRaces.Cells[2, RowIdx] := Libelle;
+      StringGridRaces.Cells[3, RowIdx] := LivreStr;
+      
+      if Selected = '0' then
+        StringGridRaces.Cells[4, RowIdx] := '✓'
+      else
+        StringGridRaces.Cells[4, RowIdx] := '';
+      
+      Inc(RowIdx);
+    end;
+  finally
+    TempRacesData.Free;
+    RacesDuMetier.Free;
+  end;
+  
+  AdjustGridColumnsWidth(StringGridRaces, 0, False, False, True, 10, 10, ssAutoBoth);
+  
+  GroupBoxForm.Visible := False;
+end;
+
 // ========== AFFICHER CAREERS FOR RACE ==========
 procedure TWinLivres.AfficherCareersForRace(RaceCode: String);
 var
@@ -2230,6 +3084,35 @@ begin
   end;
 end;
 
+procedure TWinLivres.AfficherInfosLivre();
+var
+  Racine: TDOMElement;
+
+  function LireBalise(Nom: String): String;
+  var N: TDOMNode;
+  begin
+    Result := '';
+    if Racine = nil then Exit;
+    N := Racine.FindNode(Nom);
+    if N <> nil then
+      Result := RemoveQuotes(Trim(N.TextContent));
+  end;
+
+begin
+  MasquerAfficherElements('DETAIL');
+  StringGridDetail.RowCount := 1;
+  if XMLDoc = nil then Exit;
+  Racine := XMLDoc.DocumentElement;
+  AjouterLigneDetail('CODE_BOOK', LireBalise('CODE_BOOK'), True);
+  AjouterLigneDetail('BOOK',      LireBalise('BOOK'),      True);
+  AjouterLigneDetail('LANGUAGE',  LireBalise('language'),  True);
+  AjouterLigneDetail('VERSION',   LireBalise('VERSION'),   True);
+  AjouterLigneDetail('OFFICIAL',  LireBalise('OFFICIAL'),  True);
+  AjouterLigneDetail('COMPLETE',  LireBalise('COMPLETE'),  True);
+  LabelFormTitle.Caption := GetTexteLibelle('LAB_128');
+  GroupBoxForm.Visible := True;
+end;
+
 // ✨ AFFICHAGE DYNAMIQUE
 
 procedure TWinLivres.AfficherDonneeRace(ACode: String);
@@ -2271,11 +3154,760 @@ begin
   MasquerForm();
 end;
 
+// ========== AFFICHER DONNÉE MÉTIER ==========
+// Retrouve un élément racine par son attribut id, en écartant les éléments
+// de même nom nichés dans les SUBCHAPTER_*, qui eux portent un attribut name.
+function TWinLivres.TrouverElementParId(TagName, Id: String): TDOMElement;
+var
+  Elements: TDOMNodeList;
+  I: Integer;
+  Element: TDOMElement;
+begin
+  Result := nil;
+  if (XMLDoc = nil) or (Id = '') then Exit;
+  
+  Elements := XMLDoc.GetElementsByTagName(TagName);
+  
+  for I := 0 to Elements.Count - 1 do
+  begin
+    Element := TDOMElement(Elements.Item[I]);
+    
+    if Element.GetAttribute('id') = Id then
+    begin
+      Result := Element;
+      Exit;
+    end;
+  end;
+end;
+
+function TWinLivres.TrouverCareerElement(CareerCode: String): TDOMElement;
+begin
+  Result := TrouverElementParId('Career', CareerCode);
+end;
+
+// Découpe un calcul de dégâts du type "+(BATTR_S)+5" en deux parties :
+// le code du bonus d'attribut, et la valeur fixe. Renvoie True si un bonus
+// est présent. Tolère l'absence de l'un ou l'autre.
+function TWinLivres.DecouperDegats(Degats: String; out CodeBonus, Fixe: String): Boolean;
+var
+  P1, P2: Integer;
+  Reste: String;
+begin
+  CodeBonus := '';
+  Fixe      := '';
+  Result    := False;
+  
+  Reste := Trim(Degats);
+  if (Reste = '') or (Reste = '-') then
+  begin
+    Fixe := Reste;
+    Exit;
+  end;
+  
+  // Le bonus d'attribut est entre parenthèses
+  P1 := Pos('(', Reste);
+  P2 := Pos(')', Reste);
+  if (P1 > 0) and (P2 > P1) then
+  begin
+    CodeBonus := Copy(Reste, P1 + 1, P2 - P1 - 1);
+    Delete(Reste, P1, P2 - P1 + 1);
+    Result := True;
+  end;
+  
+  // Nettoyer les '+' devenus orphelins après le retrait du groupe
+  while (Length(Reste) > 0) and (Reste[1] = '+') do
+    Delete(Reste, 1, 1);
+  
+  Fixe := Trim(Reste);
+end;
+
+// ========== AFFICHER DONNÉE ÉQUIPEMENT (arme / armure) ==========
+
+// Ajoute une ligne à la grille de détail.
+// Toujours = True force l'affichage même sans valeur, pour les champs dont
+// la seule présence est l'information (une qualité sans valeur associée).
+procedure TWinLivres.AjouterLigneDetail(Libelle, Valeur: String; Toujours: Boolean = False);
+var
+  Ligne: Integer;
+begin
+  if (Valeur = '') and (not Toujours) then Exit;
+  
+  Ligne := StringGridDetail.RowCount;
+  StringGridDetail.RowCount := Ligne + 1;
+  StringGridDetail.Cells[1, Ligne] := Libelle;
+  StringGridDetail.Cells[2, Ligne] := Valeur;
+end;
+
+// Préfixe de livre d'un code, "RULES-COMB_05" -> "RULES-".
+// Les codes référencés dans les champs sont écrits sans préfixe alors que
+// les id des éléments le portent.
+function TWinLivres.PrefixeLivre(Code: String): String;
+var
+  P: Integer;
+begin
+  P := Pos('-', Code);
+  if P > 0 then
+    Result := Copy(Code, 1, P)
+  else
+    Result := '';
+end;
+
+// Remplit la grille des qualités. Grille séparée de la grille générale
+// parce que les deux n'ont pas la même nature : la générale a une ligne fixe
+// par champ du XML, celle-ci une liste variable qu'on pourra compléter.
+// Format : "WEAPB18 2,WEAPB08,WEAPB27" — certaines portent une valeur,
+// séparée du code par une espace.
+procedure TWinLivres.AjouterLignesQualite(Valeur, Prefixe: String);
+var
+  Codes: TStringList;
+  I, EspPos, Ligne: Integer;
+  CodeQ, ValQ, LibQ: String;
+  Element: TDOMElement;
+begin
+  StringGridQualites.RowCount := 1;
+  StringGridQualites.Columns[0].Title.Caption := GetTexteLibelle('LAB_125');  // Qualité
+  StringGridQualites.Columns[1].Title.Caption := GetTexteLibelle('LAB_025');  // Valeur
+  
+  if (Valeur = '') or (Valeur = '-') then Exit;
+  
+  Codes := TStringList.Create;
+  try
+    Codes.Delimiter       := ',';
+    Codes.StrictDelimiter := True;
+    Codes.DelimitedText   := Valeur;
+    
+    for I := 0 to Codes.Count - 1 do
+    begin
+      CodeQ := Trim(Codes[I]);
+      if CodeQ = '' then Continue;
+      
+      // Valeur associée éventuelle, après une espace
+      ValQ   := '';
+      EspPos := Pos(' ', CodeQ);
+      if EspPos > 0 then
+      begin
+        ValQ  := Trim(Copy(CodeQ, EspPos + 1, Length(CodeQ)));
+        CodeQ := Copy(CodeQ, 1, EspPos - 1);
+      end;
+      
+      // Libellé depuis les <BonusMalus>, qui ne sont pas des <Text>
+      LibQ := CodeQ;
+      Element := TrouverElementParId('BonusMalus', Prefixe + CodeQ);
+      if Element <> nil then
+        LibQ := ValeurXML(Element.FindNode('Description'));
+      
+      Ligne := StringGridQualites.RowCount;
+      StringGridQualites.RowCount := Ligne + 1;
+      StringGridQualites.Cells[1, Ligne] := LibQ;
+      StringGridQualites.Cells[2, Ligne] := ValQ;
+    end;
+  finally
+    Codes.Free;
+  end;
+end;
+
+// Traduit une valeur de champ qui contient un ou plusieurs codes séparés
+// par des virgules, par exemple Quality = "ARMOB_03,ARMOB_08".
+function TWinLivres.TraduireCodesMultiples(Valeur: String): String;
+var
+  Codes: TStringList;
+  I: Integer;
+begin
+  Result := '';
+  if (Valeur = '') or (Valeur = '-') then
+  begin
+    Result := Valeur;
+    Exit;
+  end;
+  
+  Codes := TStringList.Create;
+  try
+    Codes.Delimiter       := ',';
+    Codes.StrictDelimiter := True;
+    Codes.DelimitedText   := Valeur;
+    
+    for I := 0 to Codes.Count - 1 do
+    begin
+      if Result <> '' then
+        Result := Result + ', ';
+      Result := Result + GetTexteLibelle(Trim(Codes[I]));
+    end;
+  finally
+    Codes.Free;
+  end;
+end;
+
+// Affiche une arme ou une armure dans la grille clé/valeur.
+// Les deux ont des champs différents, on n'affiche donc que ceux présents
+// dans l'élément XML plutôt qu'un formulaire figé.
+procedure TWinLivres.AfficherDonneeEquipement(Code, TagName, Titre: String);
+var
+  Element: TDOMElement;
+  Valeur, LibComp, CodeBonus, Fixe: String;
+  Competence: StructureCompetence;
+begin
+  MasquerAfficherElements('DETAIL');
+  MasquerForm();
+  
+  Element := TrouverElementParId(TagName, Code);
+  if Element = nil then Exit;
+  
+  StringGridDetail.RowCount := 1;
+  StringGridDetail.Columns[0].Title.Caption := GetTexteLibelle('LAB_002');  // Libellé
+  StringGridDetail.Columns[1].Title.Caption := GetTexteLibelle('LAB_025');  // Valeur
+  
+  LabelFormTitle.Caption := Titre + ': ' + ValeurXML(Element.FindNode('Description'));
+//  
+  AjouterLigneDetail(GetTexteLibelle('LAB_001'), Code);                                    // Code
+  AjouterLigneDetail(GetTexteLibelle('LAB_002'), ValeurXML(Element.FindNode('Description')));
+  
+  // Champs propres aux armes
+  Valeur := ValeurXML(Element.FindNode('Skill'));
+  if Valeur <> '' then
+  begin
+    Competence := ChercheCompetence(Valeur);
+    if Competence.CodeCompetence <> '' then
+      LibComp := Competence.Libelle
+    else
+      LibComp := Valeur;  // fallback, vaut souvent '-'
+    AjouterLigneDetail(GetTexteLibelle('LAB_009'), LibComp);                               // Compétence
+  end;
+  
+  // Dégâts : deux lignes, le bonus d'attribut et la valeur fixe
+  Valeur := ValeurXML(Element.FindNode('Damage'));
+  if Valeur <> '' then
+  begin
+    if DecouperDegats(Valeur, CodeBonus, Fixe) then
+      AjouterLigneDetail(GetTexteLibelle('LAB_159') + ' - ' + GetTexteLibelle(CodeBonus), '✓')
+    else
+      AjouterLigneDetail(GetTexteLibelle('LAB_159') + ' - ' + GetTexteLibelle('LAB_034'), '');
+    
+    AjouterLigneDetail(GetTexteLibelle('LAB_159') + ' - ' + GetTexteLibelle('LAB_025'), Fixe);
+  end;
+  
+  AjouterLigneDetail(GetTexteLibelle('LAB_057'),
+                     TraduireCodesMultiples(ValeurXML(Element.FindNode('Reach'))));    // Portée
+  AjouterLigneDetail(GetTexteLibelle('LAB_053'), ValeurXML(Element.FindNode('Hand')));     // Mains
+  AjouterLigneDetail(GetTexteLibelle('LAB_060'), ValeurXML(Element.FindNode('Ammunition'))); // Munitions
+  
+  // Champs propres aux armures
+  AjouterLigneDetail(GetTexteLibelle('LAB_075'),
+                     TraduireCodesMultiples(ValeurXML(Element.FindNode('Location'))));     // Emplacement
+  AjouterLigneDetail(GetTexteLibelle('LAB_076'), ValeurXML(Element.FindNode('ArmorPoint'))); // Protection
+  AjouterLigneDetail(GetTexteLibelle('LAB_074'),
+                     TraduireCodesMultiples(ValeurXML(Element.FindNode('Type'))));         // Type matériel
+  
+  // Champs communs
+  AjouterLigneDetail(GetTexteLibelle('LAB_056'),
+                     TraduireCodesMultiples(ValeurXML(Element.FindNode('Availability'))));  // Disponibilité
+  AjouterLigneDetail(GetTexteLibelle('LAB_054'), ValeurXML(Element.FindNode('Price')));     // Prix
+  AjouterLigneDetail(GetTexteLibelle('LAB_055'), ValeurXML(Element.FindNode('Encumbrance'))); // Encombrement
+  AjouterLignesQualite(ValeurXML(Element.FindNode('Quality')), PrefixeLivre(Code));         // Qualité
+  
+  CodeDonneeSelectionnee := Code;
+  
+  AdjustGridColumnsWidth(StringGridDetail, 0, False, False, True, 10, 10, ssAutoBoth);
+  
+  // La grille de détail a une hauteur variable : on place celle des qualités
+  // juste en dessous, une fois l'ajustement fait.
+  if StringGridQualites.RowCount > 1 then
+  begin
+    StringGridQualites.Top := StringGridDetail.Top + StringGridDetail.Height + 15;
+    AdjustGridColumnsWidth(StringGridQualites, 0, False, False, True, 10, 10, ssAutoBoth);
+    StringGridQualites.Visible := True;
+  end;
+end;
+
+// ========== AFFICHER TIRAGE ALÉATOIRE DE RACE ==========
+// Chaque livre définit ses propres tranches de dé pour tirer une race.
+// La grille part de ListRace pour montrer TOUTES les races connues, y compris
+// celles que ce livre ne propose pas au tirage : on voit ainsi d'un coup d'œil
+// ce qui est couvert et ce qui ne l'est pas.
+procedure TWinLivres.AfficherTirageRace();
+var
+  Chapitres, Elements: TDOMNodeList;
+  I, RowIdx, TiretPos, PipePos: Integer;
+  Race: StructureRace;
+  Tranches, Tri: TStringList;
+  Plage, Debut, Fin, Ligne, Cle, Code, Libelle, LivreStr: String;
+begin
+  MasquerAfficherElements('TIRAGE_RACE');
+  MasquerForm();
+  
+  if ListRace = nil then Exit;
+  if XMLDoc = nil then Exit;
+  
+  StringGridRandomRace.RowCount := 1;
+  StringGridRandomRace.Columns[0].Title.Caption := GetTexteLibelle('LAB_001');  // Code
+  StringGridRandomRace.Columns[1].Title.Caption := GetTexteLibelle('LAB_002');  // Libellé
+  StringGridRandomRace.Columns[2].Title.Caption := GetTexteLibelle('LAB_128');  // Livre
+  StringGridRandomRace.Columns[3].Title.Caption := GetTexteLibelle('LAB_141');  // Début
+  StringGridRandomRace.Columns[4].Title.Caption := GetTexteLibelle('LAB_142');  // Fin
+  
+  // Tranches définies par ce livre : "CODE=01-90"
+  Tranches := TStringList.Create;
+  Tri      := TStringList.Create;
+  try
+    Chapitres := XMLDoc.GetElementsByTagName('DATA_RANDOM_SPECIE');
+    if Chapitres.Count > 0 then
+    begin
+      Elements := TDOMElement(Chapitres.Item[0]).GetElementsByTagName('Specie');
+      for I := 0 to Elements.Count - 1 do
+      begin
+        Code := TDOMElement(Elements.Item[I]).GetAttribute('name');
+        if Code <> '' then
+          Tranches.Values[Code] := ValeurXML(Elements.Item[I]);
+      end;
+    end;
+    
+    // Clé de tri : les races tirables d'abord, par tranche croissante,
+    // puis les autres par libellé.
+    for I := 0 to ListRace.Count - 1 do
+    begin
+      Race := ListRace[I];
+      if Race.CodeRace = '' then Continue;
+      
+      Plage := Tranches.Values[Race.CodeRace];
+      
+      if Plage <> '' then
+      begin
+        TiretPos := Pos('-', Plage);
+        if TiretPos > 0 then
+        begin
+          Debut := Trim(Copy(Plage, 1, TiretPos - 1));
+          Fin   := Trim(Copy(Plage, TiretPos + 1, Length(Plage)));
+        end
+        else
+        begin
+          // Valeur unique : même début et même fin
+          Debut := Plage;
+          Fin   := Plage;
+        end;
+        
+        // Cadrage sur 3 chiffres pour que le tri reste numérique
+        Cle := '0' + Format('%.3d', [StrToIntDef(Debut, 0)]);
+      end
+      else
+      begin
+        Debut := '';
+        Fin   := '';
+        Cle   := '1' + Race.Libelle;
+      end;
+      
+      Tri.Add(Cle + '|' + Race.CodeRace + '|' + Race.Libelle + '|' +
+              GetTexteLibelle(Race.Livre, '', '', True) + '|' + Debut + '|' + Fin);
+    end;
+    
+    Tri.Sort;
+    
+    StringGridRandomRace.RowCount := Tri.Count + 1;
+    RowIdx := 1;
+    
+    for I := 0 to Tri.Count - 1 do
+    begin
+      Ligne := Tri[I];
+      
+      PipePos := Pos('|', Ligne);                                  // clé de tri, ignorée
+      Ligne   := Copy(Ligne, PipePos + 1, Length(Ligne));
+      
+      PipePos := Pos('|', Ligne);
+      Code    := Copy(Ligne, 1, PipePos - 1);
+      Ligne   := Copy(Ligne, PipePos + 1, Length(Ligne));
+      
+      PipePos := Pos('|', Ligne);
+      Libelle := Copy(Ligne, 1, PipePos - 1);
+      Ligne   := Copy(Ligne, PipePos + 1, Length(Ligne));
+      
+      PipePos  := Pos('|', Ligne);
+      LivreStr := Copy(Ligne, 1, PipePos - 1);
+      Ligne    := Copy(Ligne, PipePos + 1, Length(Ligne));
+      
+      PipePos := Pos('|', Ligne);
+      Debut   := Copy(Ligne, 1, PipePos - 1);
+      Fin     := Copy(Ligne, PipePos + 1, Length(Ligne));
+      
+      StringGridRandomRace.Cells[1, RowIdx] := Code;
+      StringGridRandomRace.Cells[2, RowIdx] := Libelle;
+      StringGridRandomRace.Cells[3, RowIdx] := LivreStr;
+      StringGridRandomRace.Cells[4, RowIdx] := Debut;
+      StringGridRandomRace.Cells[5, RowIdx] := Fin;
+      
+      Inc(RowIdx);
+    end;
+  finally
+    Tri.Free;
+    Tranches.Free;
+  end;
+  
+  AdjustGridColumnsWidth(StringGridRandomRace, 0, False, False, True, 10, 10, ssAutoBoth);
+end;
+
+// ========== AFFICHER DONNÉE SORT ==========
+// Remplit la grille secondaire avec les talents qui donnent accès au sort.
+// Même grille que les qualités d'équipement : un sort n'a pas de qualité et
+// une arme n'a pas de talent, les deux usages ne se croisent jamais.
+procedure TWinLivres.AjouterLignesTalentsSort(Valeur: String);
+var
+  Codes: TStringList;
+  I, Ligne: Integer;
+  CodeT, LibT: String;
+  Element: TDOMElement;
+begin
+  StringGridQualites.RowCount := 1;
+  StringGridQualites.Columns[0].Title.Caption := GetTexteLibelle('LAB_007');  // Talent
+  StringGridQualites.Columns[1].Title.Caption := GetTexteLibelle('LAB_001');  // Code
+  
+  if Valeur = '' then Exit;
+  
+  Codes := TStringList.Create;
+  try
+    Codes.Delimiter       := ',';
+    Codes.StrictDelimiter := True;
+    Codes.DelimitedText   := Valeur;
+    
+    for I := 0 to Codes.Count - 1 do
+    begin
+      CodeT := Trim(Codes[I]);
+      if CodeT = '' then Continue;
+      
+      // Les codes sont ici complets, préfixe compris
+      LibT := CodeT;
+      Element := TrouverElementParId('Talent', CodeT);
+      if Element <> nil then
+        LibT := ValeurXML(Element.FindNode('Description'));
+      
+      Ligne := StringGridQualites.RowCount;
+      StringGridQualites.RowCount := Ligne + 1;
+      StringGridQualites.Cells[1, Ligne] := LibT;
+      StringGridQualites.Cells[2, Ligne] := CodeT;
+    end;
+  finally
+    Codes.Free;
+  end;
+end;
+
+procedure TWinLivres.AfficherDonneeSort(Code, Titre: String);
+var
+  Element: TDOMElement;
+  Explication: String;
+begin
+  MasquerAfficherElements('DETAIL');
+  MasquerForm();
+  
+  Element := TrouverElementParId('Sort', Code);
+  if Element = nil then Exit;
+  
+  StringGridDetail.RowCount := 1;
+  StringGridDetail.Columns[0].Title.Caption := GetTexteLibelle('LAB_002');  // Libellé
+  StringGridDetail.Columns[1].Title.Caption := GetTexteLibelle('LAB_025');  // Valeur
+  
+  LabelFormTitle.Caption := Titre + ': ' + ValeurXML(Element.FindNode('Description'));
+  
+  AjouterLigneDetail(GetTexteLibelle('LAB_001'), Code);                                      // Code
+  AjouterLigneDetail(GetTexteLibelle('LAB_002'), ValeurXML(Element.FindNode('Description')));
+  AjouterLigneDetail(GetTexteLibelle('LAB_116'), ValeurXML(Element.FindNode('TypSpell')));    // Type de sort
+  AjouterLigneDetail(GetTexteLibelle('LAB_108'), ValeurXML(Element.FindNode('Target')));      // Cible
+  AjouterLigneDetail(GetTexteLibelle('LAB_109'), ValeurXML(Element.FindNode('Duration')));    // Durée
+  AjouterLigneDetail(GetTexteLibelle('LAB_057'), ValeurXML(Element.FindNode('Range')));       // Portée
+  AjouterLigneDetail(GetTexteLibelle('LAB_019'), ValeurXML(Element.FindNode('Level')));       // Niveau
+  
+  // Talents donnant accès au sort : liste variable, donc grille à part
+  AjouterLignesTalentsSort(ValeurXML(Element.FindNode('Talent')));
+  
+  CodeDonneeSelectionnee := Code;
+  
+  AdjustGridColumnsWidth(StringGridDetail, 0, False, False, True, 10, 10, ssAutoBoth);
+  
+  if StringGridQualites.RowCount > 1 then
+  begin
+    StringGridQualites.Top := StringGridDetail.Top + StringGridDetail.Height + 15;
+    AdjustGridColumnsWidth(StringGridQualites, 0, False, False, True, 10, 10, ssAutoBoth);
+    StringGridQualites.Visible := True;
+  end;
+  
+  // Explication sous les grilles, dont la hauteur varie
+  Explication := ValeurXML(Element.FindNode('Explanation'));
+  if Explication <> '' then
+  begin
+    MemoDetail.Text := Explication;
+    
+    if StringGridQualites.Visible then
+      MemoDetail.Top := StringGridQualites.Top + StringGridQualites.Height + 15
+    else
+      MemoDetail.Top := StringGridDetail.Top + StringGridDetail.Height + 15;
+    
+    MemoDetail.Visible := True;
+  end;
+end;
+
+// ========== AFFICHER DONNÉE QUALITÉ (BonusMalus) ==========
+// Réutilise les deux emplacements libres du formulaire en changeant leur
+// intitulé : une qualité n'a ni compétence ni maximum, mais un résumé et
+// un modificateur. Chaque procédure d'affichage pose ses propres intitulés,
+// pour qu'aucune ne dépende de l'écran précédent.
+procedure TWinLivres.AfficherDonneeBonusMalus(Code, Titre: String);
+var
+  Element: TDOMElement;
+  Valeur: String;
+begin
+  MasquerAfficherElements('');
+  NettoyerForm();
+  
+  Element := TrouverElementParId('BonusMalus', Code);
+  if Element = nil then
+  begin
+    MasquerForm();
+    Exit;
+  end;
+  
+  LabelFormTitle.Caption := Titre + ': ' + ValeurXML(Element.FindNode('Description'));
+  
+  EditFormCode.Text := Code;
+  EditFormLib.Text  := ValeurXML(Element.FindNode('Description'));
+  
+  LabelFormCode.Visible := True;
+  EditFormCode.Visible := True;
+  LabelFormLib.Visible := True;
+  EditFormLib.Visible := True;
+  
+  // Résumé
+  Valeur := ValeurXML(Element.FindNode('Short'));
+  if Valeur <> '' then
+  begin
+    LabelFormCompPrinc.Caption := GetTexteLibelle('LAB_073');  // 'Résumé'
+    EditFormCompPrinc.Text := Valeur;
+    LabelFormCompPrinc.Visible := True;
+    EditFormCompPrinc.Visible := True;
+  end;
+  
+  // Modificateur : '+' pour un bonus, '-' pour un malus
+  Valeur := ValeurXML(Element.FindNode('Modifier'));
+  if Valeur <> '' then
+  begin
+    LabelFormMax.Caption := GetTexteLibelle('LAB_034');  // 'Bonus'
+    EditFormMax.Text := Valeur;
+    LabelFormMax.Visible := True;
+    EditFormMax.Visible := True;
+  end;
+  
+  // Explication
+  Valeur := ValeurXML(Element.FindNode('Explanation'));
+  if Valeur <> '' then
+  begin
+    MemoFormDesc.Text := Valeur;
+    LabelFormDesc.Visible := True;
+    MemoFormDesc.Visible := True;
+  end;
+  
+  CodeDonneeSelectionnee := Code;
+  
+  GroupBoxForm.Visible := True;
+end;
+
+// ========== AFFICHER DONNÉE TALENT ==========
+// Sert pour DATA_TALENT et DATA_TALENT_SPECIALIZATION. Comme pour les
+// compétences, on n'affiche que les champs réellement renseignés : certains
+// talents ont un <Attribut>""</Attribut> ou un <Skill>""</Skill> vide.
+procedure TWinLivres.AfficherDonneeTalent(CodeTalent, Titre: String);
+var
+  TalentElement: TDOMElement;
+  Valeur, LibComp: String;
+  Competence: StructureCompetence;
+begin
+  MasquerAfficherElements('');  // Masquer les grids
+  NettoyerForm();
+  
+  TalentElement := TrouverElementParId('Talent', CodeTalent);
+  if TalentElement = nil then
+  begin
+    MasquerForm();
+    Exit;
+  end;
+  
+  LabelFormTitle.Caption := Titre + ': ' +
+                            ValeurXML(TalentElement.FindNode('Description'));
+  
+  EditFormCode.Text := CodeTalent;
+  EditFormLib.Text  := ValeurXML(TalentElement.FindNode('Description'));
+  
+  LabelFormCode.Visible := True;
+  EditFormCode.Visible := True;
+  LabelFormLib.Visible := True;
+  EditFormLib.Visible := True;
+  
+  // Attribut lié
+  Valeur := ValeurXML(TalentElement.FindNode('Attribut'));
+  if Valeur <> '' then
+  begin
+    EditFormAttribut.Text := GetAttributLabel(Valeur);
+    LabelFormAttribut.Visible := True;
+    EditFormAttribut.Visible := True;
+  end;
+  
+  // Compétence liée
+  LabelFormCompPrinc.Caption := GetTexteLibelle('LAB_009');  // 'Compétence'
+  Valeur := ValeurXML(TalentElement.FindNode('Skill'));
+  if Valeur <> '' then
+  begin
+    Competence := ChercheCompetence(Valeur);
+    if Competence.CodeCompetence <> '' then
+      LibComp := Competence.Libelle
+    else
+      LibComp := Valeur;  // fallback
+    
+    EditFormCompPrinc.Text := LibComp;
+    LabelFormCompPrinc.Visible := True;
+    EditFormCompPrinc.Visible := True;
+  end;
+  
+  // Maximum
+  LabelFormMax.Caption := GetTexteLibelle('LAB_044');  // 'Max'
+  Valeur := ValeurXML(TalentElement.FindNode('Max'));
+  if Valeur <> '' then
+  begin
+    EditFormMax.Text := Valeur;
+    LabelFormMax.Visible := True;
+    EditFormMax.Visible := True;
+  end;
+  
+  // Explication
+  Valeur := ValeurXML(TalentElement.FindNode('Explanation'));
+  if Valeur <> '' then
+  begin
+    MemoFormDesc.Text := Valeur;
+    LabelFormDesc.Visible := True;
+    MemoFormDesc.Visible := True;
+  end;
+  
+  CodeDonneeSelectionnee := CodeTalent;
+  
+  GroupBoxForm.Visible := True;
+end;
+
+// ========== AFFICHER DONNÉE COMPÉTENCE ==========
+// Sert pour DATA_SKILL et DATA_SKILL_SPECIALIZATION : une spécialisation
+// n'a qu'un libellé, donc on n'affiche que les champs réellement présents.
+procedure TWinLivres.AfficherDonneeCompetence(CodeComp, Titre: String);
+var
+  SkillElement: TDOMElement;
+  CodeAttr, Explication: String;
+begin
+  MasquerAfficherElements('');  // Masquer les grids
+  NettoyerForm();
+  
+  SkillElement := TrouverElementParId('Skill', CodeComp);
+  if SkillElement = nil then
+  begin
+    MasquerForm();
+    Exit;
+  end;
+  
+  LabelFormTitle.Caption := Titre + ': ' +
+                            ValeurXML(SkillElement.FindNode('Description'));
+  
+  EditFormCode.Text := CodeComp;
+  EditFormLib.Text  := ValeurXML(SkillElement.FindNode('Description'));
+  
+  LabelFormCode.Visible := True;
+  EditFormCode.Visible := True;
+  LabelFormLib.Visible := True;
+  EditFormLib.Visible := True;
+  
+  // Attribut lié : absent des spécialisations
+  CodeAttr := ValeurXML(SkillElement.FindNode('Attribut'));
+  if CodeAttr <> '' then
+  begin
+    EditFormAttribut.Text := GetAttributLabel(CodeAttr);
+    LabelFormAttribut.Visible := True;
+    EditFormAttribut.Visible := True;
+  end;
+  
+  // Explication : absente des spécialisations
+  Explication := ValeurXML(SkillElement.FindNode('Explanation'));
+  if Explication <> '' then
+  begin
+    MemoFormDesc.Text := Explication;
+    LabelFormDesc.Visible := True;
+    MemoFormDesc.Visible := True;
+  end;
+  
+  CodeDonneeSelectionnee := CodeComp;
+  
+  GroupBoxForm.Visible := True;
+end;
+
+procedure TWinLivres.AfficherDonneeMetier(CareerCode: String);
+var
+  CareerElement: TDOMElement;
+  Classe, CodeComp, LibComp: String;
+  Competence: StructureCompetence;
+begin
+  MasquerAfficherElements('');  // Masquer les grids
+  NettoyerForm();
+  
+  CareerElement := TrouverCareerElement(CareerCode);
+  if CareerElement = nil then
+  begin
+    MasquerForm();
+    Exit;
+  end;
+  
+  LabelFormTitle.Caption := GetTexteLibelle('LAB_006') + ': ' +
+                            ValeurXML(CareerElement.FindNode('Description'));
+  
+  EditFormCode.Text := CareerCode;
+  EditFormLib.Text  := ValeurXML(CareerElement.FindNode('Description'));
+  MemoFormDesc.Text := ValeurXML(CareerElement.FindNode('Explanation'));
+  
+  // Classe du métier : le XML porte un code (CLASS_BURG), traduit à l'affichage
+  Classe := ValeurXML(CareerElement.FindNode('Class'));
+  if Classe <> '' then
+    EditFormClasse.Text := GetTexteLibelle(Classe)
+  else
+    EditFormClasse.Text := '';
+  
+  // Compétence principale du métier
+  LabelFormCompPrinc.Caption := GetTexteLibelle('LAB_009');  // 'Compétence'
+  CodeComp := ValeurXML(CareerElement.FindNode('Skill'));
+  LibComp  := '';
+  if CodeComp <> '' then
+  begin
+    Competence := ChercheCompetence(CodeComp);
+    if Competence.CodeCompetence <> '' then
+      LibComp := Competence.Libelle
+    else
+      LibComp := CodeComp;  // fallback
+  end;
+  EditFormCompPrinc.Text := LibComp;
+  
+  CodeDonneeSelectionnee := CareerCode;
+  
+  // Champs communs
+  LabelFormCode.Visible := True;
+  EditFormCode.Visible := True;
+  LabelFormLib.Visible := True;
+  EditFormLib.Visible := True;
+  LabelFormDesc.Visible := True;
+  MemoFormDesc.Visible := True;
+  
+  // Champs propres au métier
+  LabelFormClasse.Visible := True;
+  EditFormClasse.Visible := True;
+  LabelFormCompPrinc.Visible := True;
+  EditFormCompPrinc.Visible := True;
+  
+  GroupBoxForm.Visible := True;
+end;
+
 procedure TWinLivres.NettoyerForm();
 begin
   EditFormCode.Clear;
   EditFormLib.Clear;
   MemoFormDesc.Clear;
+  EditFormClasse.Clear;
+  EditFormCompPrinc.Clear;
+  EditFormAttribut.Clear;
+  EditFormMax.Clear;
   EditFormAttrName.Clear;
   EditFormAttrDices.Clear;
   EditFormAttrBaseValue.Clear;
@@ -2289,6 +3921,14 @@ begin
   CodeDonneeSelectionnee := '';
   
   // Hide all controls by default
+  LabelFormClasse.Visible := False;
+  EditFormClasse.Visible := False;
+  LabelFormAttribut.Visible := False;
+  EditFormAttribut.Visible := False;
+  LabelFormMax.Visible := False;
+  EditFormMax.Visible := False;
+  LabelFormCompPrinc.Visible := False;
+  EditFormCompPrinc.Visible := False;
   LabelFormCode.Visible := False;
   EditFormCode.Visible := False;
   LabelFormLib.Visible := False;

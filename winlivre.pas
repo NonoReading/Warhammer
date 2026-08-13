@@ -154,7 +154,8 @@ type
     procedure ButtonFormValiderClick(Sender: TObject);
     procedure ButtonFormAnnulerClick(Sender: TObject);
     procedure ButtonFormSupprimerClick(Sender: TObject);
-    
+    procedure AfficherInfosLivre();
+
   private
     // Variables
     XMLDoc: TXMLDocument;
@@ -324,6 +325,8 @@ begin
   
   // Initialiser l'UI des talents
   InitTalentsUI();
+
+  TreeViewLivre.ReadOnly := True;
   
   // Style
   try
@@ -1455,6 +1458,7 @@ var
   DescNode: TDOMNode;
   ExplNode: TDOMNode;
   FileName: String;
+  NodeInfos: TTreeNode;
 begin
   try
     // Charger le fichier XML
@@ -1484,7 +1488,11 @@ begin
     // Afficher dans LabelFormTitle
     LabelFormTitle.Caption := GetTexteLibelle('LAB_128') + ': ' + FileName;
     SetNodeInfo(NodeRoot, 0);  // 0 = chapitre
-    
+
+    // ========== INFORMATIONS DU LIVRE ==========
+    NodeInfos := TreeViewLivre.Items.AddChild(NodeRoot, GetTexteLibelle('LAB_128'));
+    SetNodeInfo(NodeInfos, 37);
+
     // ========== RACES ==========
     NodeRaces := TreeViewLivre.Items.AddChild(NodeRoot, GetTexteLibelle('LAB_042'));
     SetNodeInfo(NodeRaces, 0);
@@ -1836,6 +1844,11 @@ begin
          LabelFormTitle.Caption := GetTexteLibelle('LAB_042') + ' ' + GetTexteLibelle('LAB_085');
          AfficherTirageRace();
        end;
+    37: begin
+             // Informations du livre (bloc DATA_BOOK)
+             TypeNodeSelectionnee := 'LIVRE';
+             AfficherInfosLivre();
+           end;
     16, 17, 19, 21, 23, 25: begin
          // Sous-branches d'un métier : races possibles, niveaux et leur contenu.
          // Affichage seul pour l'instant, la saisie viendra plus tard.
@@ -3076,6 +3089,35 @@ begin
   end;
 end;
 
+procedure TWinLivres.AfficherInfosLivre();
+var
+  Racine: TDOMElement;
+
+  function LireBalise(Nom: String): String;
+  var N: TDOMNode;
+  begin
+    Result := '';
+    if Racine = nil then Exit;
+    N := Racine.FindNode(Nom);
+    if N <> nil then
+      Result := RemoveQuotes(Trim(N.TextContent));
+  end;
+
+begin
+  MasquerAfficherElements('DETAIL');
+  StringGridDetail.RowCount := 1;
+  if XMLDoc = nil then Exit;
+  Racine := XMLDoc.DocumentElement;
+  AjouterLigneDetail('CODE_BOOK', LireBalise('CODE_BOOK'), True);
+  AjouterLigneDetail('BOOK',      LireBalise('BOOK'),      True);
+  AjouterLigneDetail('LANGUAGE',  LireBalise('language'),  True);
+  AjouterLigneDetail('VERSION',   LireBalise('VERSION'),   True);
+  AjouterLigneDetail('OFFICIAL',  LireBalise('OFFICIAL'),  True);
+  AjouterLigneDetail('COMPLETE',  LireBalise('COMPLETE'),  True);
+  LabelFormTitle.Caption := GetTexteLibelle('LAB_128');
+  GroupBoxForm.Visible := True;
+end;
+
 // ✨ AFFICHAGE DYNAMIQUE
 
 procedure TWinLivres.AfficherDonneeRace(ACode: String);
@@ -3320,7 +3362,7 @@ begin
   StringGridDetail.Columns[1].Title.Caption := GetTexteLibelle('LAB_025');  // Valeur
   
   LabelFormTitle.Caption := Titre + ': ' + ValeurXML(Element.FindNode('Description'));
-  
+//  
   AjouterLigneDetail(GetTexteLibelle('LAB_001'), Code);                                    // Code
   AjouterLigneDetail(GetTexteLibelle('LAB_002'), ValeurXML(Element.FindNode('Description')));
   

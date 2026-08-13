@@ -252,6 +252,94 @@ object WinLivres: TWinLivres
           ParentColor = False
           ParentFont = False
         end
+        object LabelFormClasse: TLabel
+          Left = 420
+          Height = 20
+          Top = 20
+          Width = 44
+          Caption = 'Classe:'
+          Font.Color = clBlack
+          ParentColor = False
+          ParentFont = False
+          Visible = False
+        end
+        object EditFormClasse: TEdit
+          Left = 420
+          Height = 28
+          Top = 50
+          Width = 375
+          Font.Color = clBlack
+          ParentFont = False
+          ReadOnly = True
+          TabOrder = 14
+          Visible = False
+        end
+        object LabelFormMax: TLabel
+          Left = 820
+          Height = 20
+          Top = 95
+          Width = 31
+          Caption = 'Max:'
+          Font.Color = clBlack
+          ParentColor = False
+          ParentFont = False
+          Visible = False
+        end
+        object EditFormMax: TEdit
+          Left = 820
+          Height = 28
+          Top = 125
+          Width = 230
+          Font.Color = clBlack
+          ParentFont = False
+          ReadOnly = True
+          TabOrder = 15
+          Visible = False
+        end
+        object LabelFormAttribut: TLabel
+          Left = 820
+          Height = 20
+          Top = 20
+          Width = 54
+          Caption = 'Attribut:'
+          Font.Color = clBlack
+          ParentColor = False
+          ParentFont = False
+          Visible = False
+        end
+        object EditFormAttribut: TEdit
+          Left = 820
+          Height = 28
+          Top = 50
+          Width = 230
+          Font.Color = clBlack
+          ParentFont = False
+          ReadOnly = True
+          TabOrder = 16
+          Visible = False
+        end
+        object LabelFormCompPrinc: TLabel
+          Left = 420
+          Height = 20
+          Top = 95
+          Width = 87
+          Caption = 'Compétence:'
+          Font.Color = clBlack
+          ParentColor = False
+          ParentFont = False
+          Visible = False
+        end
+        object EditFormCompPrinc: TEdit
+          Left = 420
+          Height = 28
+          Top = 125
+          Width = 375
+          Font.Color = clBlack
+          ParentFont = False
+          ReadOnly = True
+          TabOrder = 17
+          Visible = False
+        end
         object MemoFormDesc: TMemo
           Left = 20
           Height = 375
@@ -779,6 +867,7 @@ object WinLivres: TWinLivres
       Height = 500
       Top = 45
       Width = 900
+      ColCount = 6
       Columns = <      
         item
           Title.Caption = 'Code'
@@ -804,6 +893,234 @@ object WinLivres: TWinLivres
       ParentFont = False
       RowCount = 1
       TabOrder = 2
+      Visible = False
+    end
+    object StringGridRaces: TStringGrid
+      Left = 20
+      Height = 500
+      Top = 45
+      Width = 900
+      Columns = <      
+        item
+          Title.Caption = 'Code'
+          Width = 100
+        end      
+        item
+          Title.Caption = 'Libellé'
+          Width = 200
+        end      
+        item
+          Title.Caption = 'Livre'
+          Width = 200
+        end      
+        item
+          Title.Caption = 'Sélectionné'
+          Width = 80
+        end>
+      Font.Color = clBlack
+      ParentFont = False
+      RowCount = 1
+      TabOrder = 3
+      Visible = False
+    end
+    object StringGridAttributs: TStringGrid
+      Left = 20
+      Height = 500
+      Top = 45
+      Width = 900
+      ColCount = 4
+      Columns = <      
+        item
+          Title.Caption = 'Code'
+          Width = 180
+        end      
+        item
+          Title.Caption = 'Attribut'
+          Width = 220
+        end      
+        item
+          Title.Caption = 'Niveau'
+          Width = 80
+        end>
+      Font.Color = clBlack
+      ParentFont = False
+      RowCount = 1
+      TabOrder = 4
+      Visible = False
+      OnPrepareCanvas = GridNiveauPrepareCanvas
+    end
+    object StringGridCompetences: TStringGrid
+      Left = 20
+      Height = 500
+      Top = 45
+      Width = 900
+      Columns = <      
+        item
+          Title.Caption = 'Code'
+          Width = 200
+        end      
+        item
+          Title.Caption = 'Compétence'
+          Width = 220
+        end      
+        item
+          Title.Caption = 'Spécialisation'
+          Width = 220
+        end      
+        item
+          Title.Caption = 'Niveau'
+          Width = 80
+        end>
+      Font.Color = clBlack
+      ParentFont = False
+      RowCount = 1
+      TabOrder = 5
+      Visible = False
+      OnPrepareCanvas = GridNiveauPrepareCanvas
+    end
+    object StringGridTalents: TStringGrid
+      Left = 20
+      Height = 500
+      Top = 45
+      Width = 900
+      Columns = <      
+        item
+          Title.Caption = 'Code'
+          Width = 200
+        end      
+        item
+          Title.Caption = 'Talent'
+          Width = 220
+        end      
+        item
+          Title.Caption = 'Spécialisation'
+          Width = 220
+        end      
+        item
+          Title.Caption = 'Niveau'
+          Width = 80
+        end>
+      Font.Color = clBlack
+      ParentFont = False
+      RowCount = 1
+      TabOrder = 6
+      Visible = False
+      OnPrepareCanvas = GridNiveauPrepareCanvas
+    end
+    object StringGridEquipement: TStringGrid
+      Left = 20
+      Height = 500
+      Top = 45
+      Width = 900
+      Columns = <      
+        item
+          Title.Caption = 'Code'
+          Width = 200
+        end      
+        item
+          Title.Caption = 'Type'
+          Width = 100
+        end      
+        item
+          Title.Caption = 'Equipement'
+          Width = 320
+        end      
+        item
+          Title.Caption = 'Niveau'
+          Width = 80
+        end>
+      Font.Color = clBlack
+      ParentFont = False
+      RowCount = 1
+      TabOrder = 7
+      Visible = False
+      OnPrepareCanvas = GridNiveauPrepareCanvas
+    end
+    object StringGridDetail: TStringGrid
+      Left = 20
+      Height = 500
+      Top = 45
+      Width = 900
+      ColCount = 3
+      Columns = <      
+        item
+          Title.Caption = 'Libellé'
+          Width = 220
+        end      
+        item
+          Title.Caption = 'Valeur'
+          Width = 500
+        end>
+      Font.Color = clBlack
+      ParentFont = False
+      RowCount = 1
+      TabOrder = 8
+      Visible = False
+    end
+    object StringGridQualites: TStringGrid
+      Left = 20
+      Height = 200
+      Top = 560
+      Width = 900
+      ColCount = 3
+      Columns = <      
+        item
+          Title.Caption = 'Qualité'
+          Width = 320
+        end      
+        item
+          Title.Caption = 'Valeur'
+          Width = 100
+        end>
+      Font.Color = clBlack
+      ParentFont = False
+      RowCount = 1
+      TabOrder = 9
+      Visible = False
+    end
+    object MemoDetail: TMemo
+      Left = 20
+      Height = 250
+      Top = 780
+      Width = 900
+      Font.Color = clBlack
+      ParentFont = False
+      ReadOnly = True
+      ScrollBars = ssAutoVertical
+      TabOrder = 10
+      Visible = False
+    end
+    object StringGridRandomRace: TStringGrid
+      Left = 20
+      Height = 500
+      Top = 45
+      Width = 900
+      ColCount = 6
+      Columns = <      
+        item
+          Title.Caption = 'Code'
+          Width = 200
+        end      
+        item
+          Title.Caption = 'Libellé'
+          Width = 220
+        end      
+        item
+          Title.Caption = 'Livre'
+          Width = 220
+        end      
+        item
+          Title.Caption = 'Début'
+          Width = 80
+        end      
+        item
+          Title.Caption = 'Fin'
+          Width = 80
+        end>
+      Font.Color = clBlack
+      ParentFont = False
+      RowCount = 1
+      TabOrder = 11
       Visible = False
     end
   end
