@@ -55,10 +55,10 @@ Général :
   DesignTimePPI = 120 -> écart compensé à la main par AddHeight/AddWidth
 
 WinLivre :
-- Phase ÉDITION (toggle sélection, édition "Chance", boutons Valider/Annuler pour écrire/
-  rejeter dans le XML) : en discussion actuellement -> décision à prendre entre écriture XML
-  immédiate au clic sur "Valider" ou modification en mémoire + bouton séparé "Enregistrer le
-  livre" (voir CONTEXT.md §2.2)
+- Phase ÉDITION (toggle sélection, édition "Chance", boutons Valider/Annuler) : conception de
+  l'enregistrement arrêtée le 14/08/2026 (DATABASE = registre + livres complets, TRAVAIL =
+  historique horodaté des livres en cours, bouton de finalisation COMPLETE 0->1) - pas encore
+  implémentée, voir CONTEXT.md §2.1
 - aide à la saisie de formules (Dégâts/Portée/Durée)
 
 Note : "UP IN ARMS : gérer les mises à jour des compétences" et "calculer les changements

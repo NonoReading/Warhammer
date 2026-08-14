@@ -64,6 +64,52 @@ Prévu (jamais commencé) :
 - Aide à la saisie de formules (clic droit, parseur partagé Dégâts/Portée/Durée avec
   jetons `(ATTR_xx)`/`(BATTR_xx)`, sur la base de `DecouperDegats`)
 
+**Conception de l'enregistrement/versionning : arrêtée le 14/08/2026, pas encore
+implémentée.**
+
+En-tête présent dans chaque XML de livre (`<DATA_BOOK>`) :
+`CODE_BOOK` (5 caractères, préfixe unique du livre, ex. `RULES-`), `BOOK` (libellé),
+`language` (livres créés en anglais uniquement, traduction = processus séparé),
+`VERSION` (`AAAAMMJJ`, complété par `-HHMMSS` à l'enregistrement), `OFFICIAL`
+(`0` = RULESBOOK, cas obligatoire particulier ; `1` = livre officiel ; `2` = livre
+créé par un fan), `COMPLETE` (`0`/`1` — un livre `COMPLETE = 1` n'est plus modifiable).
+
+Flux retenu — trois moments d'écriture distincts, jamais d'écrasement en place :
+
+1. **Premier enregistrement** d'un nouveau livre : écrit un stub minimal (juste
+   l'en-tête `DATA_BOOK`, `COMPLETE = "0"`) dans `DATABASE\` (dossier nommé en dur,
+   à côté de l'exécutable). Un livre `COMPLETE = "0"` n'est jamais proposé/chargé
+   dans le reste du programme (sélection des livres au démarrage) — seul `WinLivre`
+   sait le rouvrir pour continuer à l'éditer.
+2. **Sauvegardes intermédiaires**, tant que `COMPLETE = "0"` : chaque enregistrement
+   crée un nouveau fichier horodaté `TRAVAIL\<CODE_BOOK>\<AAAAMMJJ-HHMMSS>.xml` —
+   jamais d'écrasement, `DATABASE` n'est pas touché. Au chargement, `WinLivre` lit
+   le stub dans `DATABASE`, voit `COMPLETE = "0"`, et va chercher dans
+   `TRAVAIL\<CODE_BOOK>\` le fichier le plus récent (tri alphabétique = tri
+   chronologique grâce au format de nom). Même principe que `SAVED_CARACTERS`
+   (un dossier par entité, un fichier horodaté par sauvegarde), déjà en place et
+   validé pour les personnages.
+3. **Finalisation** (nouveau bouton, à créer) : bascule `COMPLETE` de `"0"` à
+   `"1"` et écrit l'arborescence en cours à la place du stub dans `DATABASE`. À
+   partir de ce moment, `TRAVAIL\<CODE_BOOK>\` n'est plus jamais relu — gardé
+   uniquement comme historique, sans conséquence si vidé.
+
+Conséquence sur les boutons déjà présents dans `winlivre.pas`/`winlivre.lfm`
+(`ButtonFormValiderClick`, `ButtonFormAnnulerClick`, `ButtonFormSupprimerClick`,
+tous vides aujourd'hui) : "Valider" sur un formulaire ne doit modifier que la
+mémoire (`XMLDoc`), pas écrire sur disque. Les écritures réelles viennent de deux
+actions séparées à créer : "Enregistrer une version de travail" (écrit dans
+`TRAVAIL`) et "Marquer comme terminé" (écrit dans `DATABASE`, bascule `COMPLETE`).
+
+Point technique déjà identifié en lisant `winlivre.pas` : le chemin complet du
+fichier XML chargé n'est stocké nulle part comme champ de la classe (`ChargerXMLFile`
+ne garde que `FileCode`, pas le chemin) — il faudra ajouter un champ (ex.
+`CurrentFilePath`) avant de pouvoir implémenter l'enregistrement.
+
+Reste à préciser avant l'implémentation : que devient `TRAVAIL\<CODE_BOOK>\` une fois
+`COMPLETE = "1"` (gardé tel quel, purgé, archivé ailleurs) — pas bloquant, à trancher
+si besoin le jour où on l'implémente.
+
 ### 2.2 WinPersonnage / WinCreation — Persistance des choix & refonte de la création
 
 **✅ Terminé :**
