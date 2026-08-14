@@ -47,185 +47,195 @@ begin
   // Mise à jour des différents types de champ pour homogénéiser le tout
   // Changer la couleur de la barre de titre en noir
 
-  //for I := 0 to AContainer.ComponentCount - 1 do
-  //begin
-  //  if (AContainer.Components[I] is TTabSheet) then
-  //    begin
-  //        Shape                  := tshape.Create(AContainer);
-  //        Shape.Parent           := TTabSheet(AContainer.Components[I]);
-  //        Shape.Align            := alClient;
-  //        Shape.Font.Name        := ConstPoliceNom;
-  //        Shape.Font.Size        := ConstPoliceTaille;
-  //        Shape.Brush.Color      := CouleurDefInverse;
-  //        For J := 0 to TTabSheet(AContainer.Components[I]).ControlCount  - 1 do
-  //          begin
-  //            if TTabSheet(AContainer.Components[I]).Controls[J] is TLabel then
-  //               begin
-  //                 TLabel(TTabSheet(AContainer.Components[I]).Controls[J]).ParentColor := False;
-  //                 TLabel(TTabSheet(AContainer.Components[I]).Controls[J]).Color       := ClREd;
-  //                 TLabel(TTabSheet(AContainer.Components[I]).Controls[J]).Font.Color  := ClGray;
-  //               end;
-  //          end;
-  //    end
-  //
-  //  // Champs de saisie
-  //  else if (AContainer.Components[I] is TComboBox)
-  //     or (AContainer.Components[I] is TTreeView) then
-  //      begin
-  //        TControl(AContainer.Components[I]).Font.Name := ConstPoliceNom;
-  //        TControl(AContainer.Components[I]).Color     := CouleurDefColor;
-  //        if TControl(AContainer.Components[I]).Font.Size < ConstPoliceTaille then
-  //           TControl(AContainer.Components[I]).Font.Size := ConstPoliceTaille;
-  //      end
-  //
-  //  else if (AContainer.Components[I] is TMemo) then
-  //      begin
-  //        TMemo(AContainer.Components[I]).Font.Name := ConstPoliceNom;
-  //        if TMemo(AContainer.Components[I]).ReadOnly = true then
-  //          begin
-  //            TMemo(AContainer.Components[I]).Color     := CouleurDefColor;
-  //            TMemo(AContainer.Components[I]).Font.Color:= CouleurDefInverse;
-  //          end
-  //        else
-  //          TMemo(AContainer.Components[I]).Color     := ClWhite;
-  //        if TMemo(AContainer.Components[I]).Font.Size < ConstPoliceTaille then
-  //           TMemo(AContainer.Components[I]).Font.Size := ConstPoliceTaille;
-  //      end
-  //
-  //  // Champs de saisie
-  //  else if (AContainer.Components[I] is TEdit) then
-  //      begin
-  //        TEdit(AContainer.Components[I]).Font.Name := ConstPoliceNom;
-  //        if TEdit(AContainer.Components[I]).ReadOnly = true then
-  //          begin
-  //            TEdit(AContainer.Components[I]).Color     := CouleurDefColor;
-  //            TEdit(AContainer.Components[I]).Font.Color:= CouleurDefInverse;
-  //          end
-  //        else
-  //          TEdit(AContainer.Components[I]).Color     := CouleurDefColor;
-  //        if TEdit(AContainer.Components[I]).Font.Size < ConstPoliceTaille then
-  //           TEdit(AContainer.Components[I]).Font.Size := ConstPoliceTaille;
-  //      end
-  //
-  //  // Tableaux
-  //  else if (AContainer.Components[I] is TStringGrid) then
-  //      StylesTStringGrid(TStringGrid(AContainer.Components[I]))
-  //
-  //  // Libellés
-  //  else if (AContainer.Components[I] is TLabel) then
-  //   begin
-  //       TControl(AContainer.Components[I]).Font.Name := ConstPoliceNom;
-  //       if TControl(AContainer.Components[I]).Font.Size < ConstPoliceTaille then
-  //          TControl(AContainer.Components[I]).Font.Size := ConstPoliceTaille;
-  //       TControl(AContainer.Components[I]).Font.Bold:= True;
-  //       TControl(AContainer.Components[I]).Font.color:= clRed;
-  //   end
-  //
-  //  // Libellés
-  //  else if (AContainer.Components[I] is TBCLabel) then
-  //   begin
-  //       TBCLabel(AContainer.Components[I]).FontEx.Name         := ConstPoliceNom;
-  //       TBCLabel(AContainer.Components[I]).FontEx.Height       := 30;
-  //       TBCLabel(AContainer.Components[I]).FontEx.Style        := [fsbold];
-  //       TBCLabel(AContainer.Components[I]).FontEx.color        := ClYellow;
-  //       TBCLabel(AContainer.Components[I]).FontEx.Shadow       := True;
-  //       TBCLabel(AContainer.Components[I]).FontEx.ShadowColor  := ClRed;
-  //       TBCLabel(AContainer.Components[I]).FontEx.ShadowRadius := 5;
-  //       TBCLabel(AContainer.Components[I]).FontEx.ShadowOffsetX:= 2;
-  //       TBCLabel(AContainer.Components[I]).FontEx.ShadowOffsetY:= 2;
-  //       TBCLabel(AContainer.Components[I]).Height:= 40;
-  //   end
-  //
-  //  // Radio button
-  //  else if AContainer.Components[I] is TRadioButton then
-  //      begin
-  //        TRadioButton(AContainer.Components[I]).Font.Name := ConstPoliceNom;
-  //        TRadioButton(AContainer.Components[I]).Font.Size := ConstPoliceTaille;
-  //        TRadioButton(AContainer.Components[I]).Font.Bold := True;
-  //        TRadioButton(AContainer.Components[I]).Color     := CouleurDefColor;
-  //      end
-  //
-  //  // Boutons
-  //  else if (AContainer.Components[I] is TButton) then
-  //      begin
-  //        TButton(AContainer.Components[I]).Font.Name := ConstPoliceNom;
-  //        if TButton(AContainer.Components[I]).Font.Size < ConstPoliceBtTaille then
-  //           TButton(AContainer.Components[I]).Font.Size := ConstPoliceBtTaille;
-  //        TButton(AContainer.Components[I]).Font.Bold:= True;
-  //        TButton(AContainer.Components[I]).Color     := CouleurDefColor;
-  //      end
-  //
-  //  // Boutons
-  //  else if (AContainer.Components[I] is TBCButton) then
-  //      begin
-  //        TBCButton(AContainer.Components[I]).StateNormal.Background.Gradient1.EndColor   := CouleurButton;//ClSilver;
-  //        TBCButton(AContainer.Components[I]).StateNormal.Background.Gradient2.EndColor   := CouleurButton;//ClSilver;
-  //        TBCButton(AContainer.Components[I]).StateNormal.Background.Gradient1.StartColor := CouleurButton;//ClSilver;
-  //        TBCButton(AContainer.Components[I]).StateNormal.Background.Gradient2.StartColor := CouleurButton;//ClSilver;
-  //        TBCButton(AContainer.Components[I]).StateNormal.FontEx.ShadowColor              := ClRed;
-  //        TBCButton(AContainer.Components[I]).StateNormal.FontEx.ShadowRadius             := 5;
-  //        TBCButton(AContainer.Components[I]).StateNormal.FontEx.Color                    := ClYellow;
-  //        TBCButton(AContainer.Components[I]).StateNormal.FontEx.Height                   := ConstPoliceBtTaille;
-  //        TBCButton(AContainer.Components[I]).StateNormal.FontEx.Style                    := [fsBold];
-  //        TBCButton(AContainer.Components[I]).StateNormal.FontEx.Name                     := ConstPoliceNom;
-  //        TBCButton(AContainer.Components[I]).StateNormal.Border.Style                    := bboSolid;
-  //        TBCButton(AContainer.Components[I]).StateNormal.Border.Width                    := 2;
-  //        TBCButton(AContainer.Components[I]).StateNormal.Border.Color                    := ClRed;
-  //
-  //        TBCButton(AContainer.Components[I]).StateHover.Background.Gradient1.EndColor    := ClBlack;
-  //        TBCButton(AContainer.Components[I]).StateHover.Background.Gradient2.EndColor    := ClBlack;
-  //        TBCButton(AContainer.Components[I]).StateHover.Background.Gradient1.StartColor  := ClBlack;
-  //        TBCButton(AContainer.Components[I]).StateHover.Background.Gradient2.StartColor  := ClBlack;
-  //        TBCButton(AContainer.Components[I]).StateHover.FontEx.Color                     := ClRed;
-  //        TBCButton(AContainer.Components[I]).StateHover.FontEx.Height                    := ConstPoliceBtTaille;
-  //        TBCButton(AContainer.Components[I]).StateClicked.FontEx.Style                   := [fsbold];
-  //        TBCButton(AContainer.Components[I]).StateHover.FontEx.Name                      := ConstPoliceNom;
-  //
-  //        TBCButton(AContainer.Components[I]).StateClicked.Background.Gradient1.EndColor  := ClBlack;
-  //        TBCButton(AContainer.Components[I]).StateClicked.Background.Gradient2.EndColor  := ClBlack;
-  //        TBCButton(AContainer.Components[I]).StateClicked.Background.Gradient1.StartColor:= ClBlack;
-  //        TBCButton(AContainer.Components[I]).StateClicked.Background.Gradient2.StartColor:= ClBlack;
-  //        TBCButton(AContainer.Components[I]).StateClicked.FontEx.Color                   := CouleurButton;
-  //        TBCButton(AContainer.Components[I]).StateClicked.FontEx.Height                  := ConstPoliceBtTaille;
-  //        TBCButton(AContainer.Components[I]).StateClicked.FontEx.Style                   := [fsbold];
-  //        TBCButton(AContainer.Components[I]).StateClicked.FontEx.Name                    := ConstPoliceNom;
-  //      end
-  //  else if (AContainer.Components[I] is TBCButtonFocus) then
-  //      begin
-  //        TBCButtonFocus(AContainer.Components[I]).StateNormal.Background.Gradient1.EndColor   := ClSilver;
-  //        TBCButtonFocus(AContainer.Components[I]).StateNormal.Background.Gradient2.EndColor   := ClSilver;
-  //        TBCButtonFocus(AContainer.Components[I]).StateNormal.Background.Gradient1.StartColor := ClSilver;
-  //        TBCButtonFocus(AContainer.Components[I]).StateNormal.Background.Gradient2.StartColor := ClSilver;
-  //        TBCButtonFocus(AContainer.Components[I]).StateNormal.FontEx.ShadowColor              := ClRed;
-  //        TBCButtonFocus(AContainer.Components[I]).StateNormal.FontEx.ShadowRadius             := 5;
-  //        TBCButtonFocus(AContainer.Components[I]).StateNormal.FontEx.Color                    := ClYellow;
-  //        TBCButtonFocus(AContainer.Components[I]).StateNormal.FontEx.Height                   := ConstPoliceBtTaille;
-  //        TBCButtonFocus(AContainer.Components[I]).StateNormal.FontEx.Style                    := [fsBold];
-  //        TBCButtonFocus(AContainer.Components[I]).StateNormal.FontEx.Name                     := ConstPoliceNom;
-  //        TBCButtonFocus(AContainer.Components[I]).StateNormal.Border.Style                    := bboSolid;
-  //        TBCButtonFocus(AContainer.Components[I]).StateNormal.Border.Width                    := 2;
-  //        TBCButtonFocus(AContainer.Components[I]).StateNormal.Border.Color                    := ClRed;
-  //
-  //        TBCButtonFocus(AContainer.Components[I]).StateHover.Background.Gradient1.EndColor    := ClBlack;
-  //        TBCButtonFocus(AContainer.Components[I]).StateHover.Background.Gradient2.EndColor    := ClBlack;
-  //        TBCButtonFocus(AContainer.Components[I]).StateHover.Background.Gradient1.StartColor  := ClBlack;
-  //        TBCButtonFocus(AContainer.Components[I]).StateHover.Background.Gradient2.StartColor  := ClBlack;
-  //        TBCButtonFocus(AContainer.Components[I]).StateHover.FontEx.Color                     := ClRed;
-  //        TBCButtonFocus(AContainer.Components[I]).StateHover.FontEx.Height                    := ConstPoliceBtTaille;
-  //        TBCButtonFocus(AContainer.Components[I]).StateClicked.FontEx.Style                   := [fsbold];
-  //        TBCButtonFocus(AContainer.Components[I]).StateHover.FontEx.Name                      := ConstPoliceNom;
-  //
-  //        TBCButtonFocus(AContainer.Components[I]).StateClicked.Background.Gradient1.EndColor  := ClBlack;
-  //        TBCButtonFocus(AContainer.Components[I]).StateClicked.Background.Gradient2.EndColor  := ClBlack;
-  //        TBCButtonFocus(AContainer.Components[I]).StateClicked.Background.Gradient1.StartColor:= ClBlack;
-  //        TBCButtonFocus(AContainer.Components[I]).StateClicked.Background.Gradient2.StartColor:= ClBlack;
-  //        TBCButtonFocus(AContainer.Components[I]).StateClicked.FontEx.Color                   := CouleurDefColor;
-  //        TBCButtonFocus(AContainer.Components[I]).StateClicked.FontEx.Height                  := ConstPoliceBtTaille;
-  //        TBCButtonFocus(AContainer.Components[I]).StateClicked.FontEx.Style                   := [fsbold];
-  //        TBCButtonFocus(AContainer.Components[I]).StateClicked.FontEx.Name                    := ConstPoliceNom;
-  //
-  //      end;
-  //end;
+  for I := 0 to AContainer.ComponentCount - 1 do
+  begin
+    if (AContainer.Components[I] is TTabSheet) then
+      begin
+          Shape                  := tshape.Create(AContainer);
+          Shape.Parent           := TTabSheet(AContainer.Components[I]);
+          Shape.Align            := alClient;
+          Shape.Font.Name        := ConstPoliceNom;
+          Shape.Font.Size        := ConstPoliceTaille;
+          Shape.Brush.Color      := CouleurDefInverse;
+          For J := 0 to TTabSheet(AContainer.Components[I]).ControlCount  - 1 do
+            begin
+              if TTabSheet(AContainer.Components[I]).Controls[J] is TLabel then
+                 begin
+                   TLabel(TTabSheet(AContainer.Components[I]).Controls[J]).ParentColor := False;
+                   TLabel(TTabSheet(AContainer.Components[I]).Controls[J]).Color       := ClREd;
+                   TLabel(TTabSheet(AContainer.Components[I]).Controls[J]).Font.Color  := ClGray;
+                 end;
+            end;
+      end
+    // Panels
+    else if (AContainer.Components[I] is TPanel) then
+        begin
+          TPanel(AContainer.Components[I]).ParentBackground := False; // sinon Color est ignoré
+          TPanel(AContainer.Components[I]).ParentColor       := False; // idem, selon version VCL/LCL
+          TPanel(AContainer.Components[I]).Color             := TColor($404040); // ta couleur cible
+          TPanel(AContainer.Components[I]).Font.Name         := ConstPoliceNom;
+          TPanel(AContainer.Components[I]).Font.Color        := CouleurDefInverse;
+          if TPanel(AContainer.Components[I]).Font.Size < ConstPoliceTaille then
+             TPanel(AContainer.Components[I]).Font.Size := ConstPoliceTaille;
+        end
+    // Champs de saisie
+    else if (AContainer.Components[I] is TComboBox)
+       or (AContainer.Components[I] is TTreeView) then
+        begin
+          TControl(AContainer.Components[I]).Font.Name := ConstPoliceNom;
+          TControl(AContainer.Components[I]).Color     := CouleurDefColor;
+          if TControl(AContainer.Components[I]).Font.Size < ConstPoliceTaille then
+             TControl(AContainer.Components[I]).Font.Size := ConstPoliceTaille;
+        end
+
+    else if (AContainer.Components[I] is TMemo) then
+        begin
+          TMemo(AContainer.Components[I]).Font.Name := ConstPoliceNom;
+          if TMemo(AContainer.Components[I]).ReadOnly = true then
+            begin
+              TMemo(AContainer.Components[I]).Color     := CouleurDefColor;
+              TMemo(AContainer.Components[I]).Font.Color:= CouleurDefInverse;
+            end
+          else
+            TMemo(AContainer.Components[I]).Color     := ClWhite;
+          if TMemo(AContainer.Components[I]).Font.Size < ConstPoliceTaille then
+             TMemo(AContainer.Components[I]).Font.Size := ConstPoliceTaille;
+        end
+
+    // Champs de saisie
+    else if (AContainer.Components[I] is TEdit) then
+        begin
+          TEdit(AContainer.Components[I]).Font.Name := ConstPoliceNom;
+          if TEdit(AContainer.Components[I]).ReadOnly = true then
+            begin
+              TEdit(AContainer.Components[I]).Color     := CouleurDefColor;
+              TEdit(AContainer.Components[I]).Font.Color:= CouleurDefInverse;
+            end
+          else
+            TEdit(AContainer.Components[I]).Color     := CouleurDefColor;
+          if TEdit(AContainer.Components[I]).Font.Size < ConstPoliceTaille then
+             TEdit(AContainer.Components[I]).Font.Size := ConstPoliceTaille;
+        end
+
+    // Tableaux
+    else if (AContainer.Components[I] is TStringGrid) then
+        StylesTStringGrid(TStringGrid(AContainer.Components[I]))
+
+    // Libellés
+    else if (AContainer.Components[I] is TLabel) then
+     begin
+         TControl(AContainer.Components[I]).Font.Name := ConstPoliceNom;
+         if TControl(AContainer.Components[I]).Font.Size < ConstPoliceTaille then
+            TControl(AContainer.Components[I]).Font.Size := ConstPoliceTaille;
+         TControl(AContainer.Components[I]).Font.Bold:= True;
+         TControl(AContainer.Components[I]).Font.color:= clRed;
+     end
+
+    // Libellés
+    else if (AContainer.Components[I] is TBCLabel) then
+     begin
+         TBCLabel(AContainer.Components[I]).FontEx.Name         := ConstPoliceNom;
+         TBCLabel(AContainer.Components[I]).FontEx.Height       := 30;
+         TBCLabel(AContainer.Components[I]).FontEx.Style        := [fsbold];
+         TBCLabel(AContainer.Components[I]).FontEx.color        := ClYellow;
+         TBCLabel(AContainer.Components[I]).FontEx.Shadow       := True;
+         TBCLabel(AContainer.Components[I]).FontEx.ShadowColor  := ClRed;
+         TBCLabel(AContainer.Components[I]).FontEx.ShadowRadius := 5;
+         TBCLabel(AContainer.Components[I]).FontEx.ShadowOffsetX:= 2;
+         TBCLabel(AContainer.Components[I]).FontEx.ShadowOffsetY:= 2;
+         TBCLabel(AContainer.Components[I]).Height:= 40;
+     end
+
+    // Radio button
+    else if AContainer.Components[I] is TRadioButton then
+        begin
+          TRadioButton(AContainer.Components[I]).Font.Name := ConstPoliceNom;
+          TRadioButton(AContainer.Components[I]).Font.Size := ConstPoliceTaille;
+          TRadioButton(AContainer.Components[I]).Font.Bold := True;
+          TRadioButton(AContainer.Components[I]).Color     := CouleurDefColor;
+        end
+
+    // Boutons
+    else if (AContainer.Components[I] is TButton) then
+        begin
+          TButton(AContainer.Components[I]).Font.Name := ConstPoliceNom;
+          if TButton(AContainer.Components[I]).Font.Size < ConstPoliceBtTaille then
+             TButton(AContainer.Components[I]).Font.Size := ConstPoliceBtTaille;
+          TButton(AContainer.Components[I]).Font.Bold:= True;
+          TButton(AContainer.Components[I]).Color     := CouleurDefColor;
+        end
+
+    // Boutons
+    else if (AContainer.Components[I] is TBCButton) then
+        begin
+          TBCButton(AContainer.Components[I]).StateNormal.Background.Gradient1.EndColor   := CouleurButton;//ClSilver;
+          TBCButton(AContainer.Components[I]).StateNormal.Background.Gradient2.EndColor   := CouleurButton;//ClSilver;
+          TBCButton(AContainer.Components[I]).StateNormal.Background.Gradient1.StartColor := CouleurButton;//ClSilver;
+          TBCButton(AContainer.Components[I]).StateNormal.Background.Gradient2.StartColor := CouleurButton;//ClSilver;
+          TBCButton(AContainer.Components[I]).StateNormal.FontEx.ShadowColor              := ClRed;
+          TBCButton(AContainer.Components[I]).StateNormal.FontEx.ShadowRadius             := 5;
+          TBCButton(AContainer.Components[I]).StateNormal.FontEx.Color                    := ClYellow;
+          TBCButton(AContainer.Components[I]).StateNormal.FontEx.Height                   := ConstPoliceBtTaille;
+          TBCButton(AContainer.Components[I]).StateNormal.FontEx.Style                    := [fsBold];
+          TBCButton(AContainer.Components[I]).StateNormal.FontEx.Name                     := ConstPoliceNom;
+          TBCButton(AContainer.Components[I]).StateNormal.Border.Style                    := bboSolid;
+          TBCButton(AContainer.Components[I]).StateNormal.Border.Width                    := 2;
+          TBCButton(AContainer.Components[I]).StateNormal.Border.Color                    := ClRed;
+
+          TBCButton(AContainer.Components[I]).StateHover.Background.Gradient1.EndColor    := ClBlack;
+          TBCButton(AContainer.Components[I]).StateHover.Background.Gradient2.EndColor    := ClBlack;
+          TBCButton(AContainer.Components[I]).StateHover.Background.Gradient1.StartColor  := ClBlack;
+          TBCButton(AContainer.Components[I]).StateHover.Background.Gradient2.StartColor  := ClBlack;
+          TBCButton(AContainer.Components[I]).StateHover.FontEx.Color                     := ClRed;
+          TBCButton(AContainer.Components[I]).StateHover.FontEx.Height                    := ConstPoliceBtTaille;
+          TBCButton(AContainer.Components[I]).StateClicked.FontEx.Style                   := [fsbold];
+          TBCButton(AContainer.Components[I]).StateHover.FontEx.Name                      := ConstPoliceNom;
+
+          TBCButton(AContainer.Components[I]).StateClicked.Background.Gradient1.EndColor  := ClBlack;
+          TBCButton(AContainer.Components[I]).StateClicked.Background.Gradient2.EndColor  := ClBlack;
+          TBCButton(AContainer.Components[I]).StateClicked.Background.Gradient1.StartColor:= ClBlack;
+          TBCButton(AContainer.Components[I]).StateClicked.Background.Gradient2.StartColor:= ClBlack;
+          TBCButton(AContainer.Components[I]).StateClicked.FontEx.Color                   := CouleurButton;
+          TBCButton(AContainer.Components[I]).StateClicked.FontEx.Height                  := ConstPoliceBtTaille;
+          TBCButton(AContainer.Components[I]).StateClicked.FontEx.Style                   := [fsbold];
+          TBCButton(AContainer.Components[I]).StateClicked.FontEx.Name                    := ConstPoliceNom;
+        end
+    else if (AContainer.Components[I] is TBCButtonFocus) then
+        begin
+          TBCButtonFocus(AContainer.Components[I]).StateNormal.Background.Gradient1.EndColor   := ClSilver;
+          TBCButtonFocus(AContainer.Components[I]).StateNormal.Background.Gradient2.EndColor   := ClSilver;
+          TBCButtonFocus(AContainer.Components[I]).StateNormal.Background.Gradient1.StartColor := ClSilver;
+          TBCButtonFocus(AContainer.Components[I]).StateNormal.Background.Gradient2.StartColor := ClSilver;
+          TBCButtonFocus(AContainer.Components[I]).StateNormal.FontEx.ShadowColor              := ClRed;
+          TBCButtonFocus(AContainer.Components[I]).StateNormal.FontEx.ShadowRadius             := 5;
+          TBCButtonFocus(AContainer.Components[I]).StateNormal.FontEx.Color                    := ClYellow;
+          TBCButtonFocus(AContainer.Components[I]).StateNormal.FontEx.Height                   := ConstPoliceBtTaille;
+          TBCButtonFocus(AContainer.Components[I]).StateNormal.FontEx.Style                    := [fsBold];
+          TBCButtonFocus(AContainer.Components[I]).StateNormal.FontEx.Name                     := ConstPoliceNom;
+          TBCButtonFocus(AContainer.Components[I]).StateNormal.Border.Style                    := bboSolid;
+          TBCButtonFocus(AContainer.Components[I]).StateNormal.Border.Width                    := 2;
+          TBCButtonFocus(AContainer.Components[I]).StateNormal.Border.Color                    := ClRed;
+
+          TBCButtonFocus(AContainer.Components[I]).StateHover.Background.Gradient1.EndColor    := ClBlack;
+          TBCButtonFocus(AContainer.Components[I]).StateHover.Background.Gradient2.EndColor    := ClBlack;
+          TBCButtonFocus(AContainer.Components[I]).StateHover.Background.Gradient1.StartColor  := ClBlack;
+          TBCButtonFocus(AContainer.Components[I]).StateHover.Background.Gradient2.StartColor  := ClBlack;
+          TBCButtonFocus(AContainer.Components[I]).StateHover.FontEx.Color                     := ClRed;
+          TBCButtonFocus(AContainer.Components[I]).StateHover.FontEx.Height                    := ConstPoliceBtTaille;
+          TBCButtonFocus(AContainer.Components[I]).StateClicked.FontEx.Style                   := [fsbold];
+          TBCButtonFocus(AContainer.Components[I]).StateHover.FontEx.Name                      := ConstPoliceNom;
+
+          TBCButtonFocus(AContainer.Components[I]).StateClicked.Background.Gradient1.EndColor  := ClBlack;
+          TBCButtonFocus(AContainer.Components[I]).StateClicked.Background.Gradient2.EndColor  := ClBlack;
+          TBCButtonFocus(AContainer.Components[I]).StateClicked.Background.Gradient1.StartColor:= ClBlack;
+          TBCButtonFocus(AContainer.Components[I]).StateClicked.Background.Gradient2.StartColor:= ClBlack;
+          TBCButtonFocus(AContainer.Components[I]).StateClicked.FontEx.Color                   := CouleurDefColor;
+          TBCButtonFocus(AContainer.Components[I]).StateClicked.FontEx.Height                  := ConstPoliceBtTaille;
+          TBCButtonFocus(AContainer.Components[I]).StateClicked.FontEx.Style                   := [fsbold];
+          TBCButtonFocus(AContainer.Components[I]).StateClicked.FontEx.Name                    := ConstPoliceNom;
+
+        end;
+  end;
 end;
 
 Procedure TButton.WndPRoc(Var Msg:TLMessage);
@@ -268,8 +278,11 @@ begin
     // Parcourir tous les formulaires ou composants qui affichent du texte
     if Screen.Forms[I] is TForm then
        if Screen.Forms[I] = Win then
-          if Screen.Forms[I].Enabled then
-            MiseAJourUnContenaire(Screen.Forms[I]);
+         begin
+           Screen.Forms[I].Color := TColor($404040);
+           if Screen.Forms[I].Enabled then
+             MiseAJourUnContenaire(Screen.Forms[I]);
+         end;
   end;
 end;
 

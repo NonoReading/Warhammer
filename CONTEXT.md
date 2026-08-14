@@ -1,111 +1,203 @@
-# WinLivre v2.0.0 - Session du 02/08/2026 (FINAL + Compétences + Talents + BugFix)
+# Warhammer — Contexte projet
 
-## État actuel - ✅ PHASE 1 AFFICHAGE: 100% COMPLÈTE
+**Dernière mise à jour : 10/08/2026.** Ce fichier remplace tous les anciens
+`CONTEXT*.md` / `INDEX*.md` / `RESUME*.md` / `SESSION*.md`. Il n'y en a plus
+qu'un : celui-ci. On ne le duplique jamais, on l'édite en place.
 
-### TreeView Structure ✅
-- ✅ Races avec libellés traduits
-- ✅ Attributs avec valeurs (3 types: SIMPLE/DICES/FORMULA)
-- ✅ Compétences (génériques uniquement) + PickList spécialisations
-- ✅ Talents (hiérarchie: Choix multi + Fixe + Aléatoires)
+---
 
-### StringGrid Compétences ✅ 100% COMPLÈTE
-- ✅ Affiche TOUTES compétences génériques
-- ✅ Colonne "Libellé" avec noms corrects
-- ✅ Colonne "Spécialisation" avec PickList (générique | spécialisations)
-- ✅ Affiche générique OU spécialisée sélectionnée
-- ✅ Tri automatique: sélectionnées en premier, puis alphabétique
-- ✅ Cells[3] prêt pour enregistrement
+## 0. Comment travailler avec moi (règles validées par Nono)
 
-### TreeView Talents ✅ 100% COMPLÈTE
-- ✅ Nœud racine "Talent" (LAB_007)
-- ✅ Talents fixes: RULES-T0171 → affiche libellé direct
-- ✅ Choix multiples: RULES-T0002/T0117 → nœud "{Au choix}" (LAB_127) + enfants hiérarchiques
-- ✅ Talents aléatoires: RULES-T* → comptés et affichés dans label "Randomly: X"
-- ✅ Parse "/" avec StrictDelimiter
-- ✅ Node.Data utilisé pour identification (6=random, 7=choice, 10=talent, 11=choice parent, 12=choice item)
+- **Une seule modification à la fois.** Un fichier, un endroit précis, puis STOP :
+  je compile, je teste, je te dis, on continue.
+- **Jamais de placeholder** dans du code destiné à être collé (pas de `<clé complète>`,
+  pas de `...`). Si une valeur manque, la demander.
+- **Ne pas changer une signature** sans corriger tous les appels dans la même réponse.
+- **Ne pas enchaîner** plusieurs chantiers imbriqués sans point de compilation entre les deux.
+- Les discussions de conception restent **séparées** du code à coller.
+- Ce qui a mal marché : livrer des blocs de 300 lignes non relus, avec des colonnes
+  qui n'existaient pas encore. Ce qui marche : petites corrections validées une par une.
 
-### UI Talents (Dynamique) ✅ 100% COMPLÈTE
-- ✅ LabelTalentsRandom créé dynamiquement (Parent=Self)
-- ✅ TreeViewTalents créé dynamiquement (Parent=Self)
-- ✅ BringToFront pour éviter les overlaps
-- ✅ Masquage correct quand on bascule entre sections
+---
 
-### Internationalization (i18n) ✅ 100% COMPLÈTE
-- ✅ LAB_007 = "Talent"
-- ✅ LAB_127 = "{Au choix}"
-- ✅ LAB_085 = "Randomly"
-- ✅ LAB_042 = "Specie"
-- ✅ LAB_087 = "Specie's Skills"
-- ✅ LAB_128 = "Book"
-- ✅ LAB_004 = "Select"
-- ✅ LAB_001 = "Code", LAB_002 = "Label", LAB_003 = "Description"
-- ✅ LAB_155 = "Open book"
+## 1. Le projet
 
-### Architecture Finale
+Application personnelle de gestion de personnages **Warhammer Fantasy V4**, en Lazarus/Free Pascal.
 
-**Files:**
-- `winlivre.pas` (1530+ lignes) - Code Pascal complet
-- `winlivre.lfm` - Layout UI (StringGridSkills EN DEHORS GroupBoxForm)
+- Dépôt : `https://github.com/NonoReading/Warhammer.git`
+- Local : `C:\Users\arnau\Documents\Lazarus Project\Warhammer\`
 
-**Modules utilisés:**
-- ChargeCompetence: ChercheCompetence(), ListCompetence, StructureCompetence
-- **ChargeTalent**: ChercheTalent(), ListTalent, StructureTalent
-- ChargeTexte: GetTexteLibelle()
-- UnitCalcul: RemoveQuotes()
+| Programme | Rôle |
+|---|---|
+| **WinCreation** (`TWinCreations`, avec un `s`, erreur historique conservée) | création de personnage en 8 phases |
+| **WinPersonnage** (`TWinPersonnages`) | modification / progression du personnage |
+| **WinLivre** (`TWinLivres`) | éditeur XML des livres de règles |
 
-**Procédures clés:**
-- LoadSkillsForRaceTree(): Compétences du XML race
-- LoadTalentsForRaceTree(): Talents du XML race (Node.Data pour identification)
-- AfficherSkillsForRace(): StringGrid compétences + MASQUE talents
-- AfficherTalentsForRace(): TreeView talents + label aléatoires
-- SortSkillsGrid(): Trie compétences
-- InitTalentsUI(): Crée dynamiquement UI talents
-- MasquerForm(): Masque TOUS les contrôles correctement
+Pattern général du projet : les données (métiers, compétences, talents, livres) sont
+chargées en mémoire au démarrage (`ListMetier`, `ListCompetence`, `ListTalent`, `ListLivre`)
+et consultées via des fonctions `ChercheXxx()`. On ne relit pas le XML à la volée.
 
-### Data Structures
+Constantes clés (`chargeconstantes.pas` ~13-20) :
+`SeparateurMulti='/'`, `SeparateurLivre='-'`, `ValeurSousCompetence='_'`, `ValeurGenerique='_*'`.
 
-**StructureCompetence:**
-- CodeCompetence, Libelle, CodeAttribut, Description
-- SousTalent: boolean → Distingue générique vs spécialisé
-- Livre, Tests, CompAjoutee, ModifyCarac
+---
 
-**StructureTalent:**
-- CodeTalent, Libelle, Tests, Description, Attribut
-- SousTalent: boolean → Distingue générique vs spécialisé
-- MaxiTalent, Livre, TalentPdf, Resume, CompAjoutee, ModifyCarac
+## 2. État par chantier
 
-### Points importants pour prochaine session
+### 2.1 WinLivre — Affichage des carrières : ✅ Phase 1 terminée
 
-1. **TreeView talents fonctionne** - Hiérarchie correcte, Node.Data pour identification
-2. **Label aléatoires affiche** - Compte correct des RULES-T*
-3. **I18N 100%** - Plus de hardcoding nulle part
-4. **Parent=Self pour UI dynamique** - Important pour éviter overlaps
-5. **BringToFront utilisé** - Pour z-order correct
-6. **AfficherSkillsForRace masque talents** - Bug fixé!
+Ajout d'une branche "Career" par race dans le TreeView, affichant le libellé du métier
+et le nom du livre (ex. `Agitator (Core Rules Book)` au lieu de `RULES-WORK01`), toutes
+races et tous livres confondus (RULES, ARCH2, ARCH3, WINDS, DEATH, ENEMY...).
 
-### Phase 2 TODO - ÉDITION
+- Fichier concerné : `winlivre.pas` (1530+ lignes), `winlivre.lfm`
+- Fonction clé : `LoadCareersForRaceTree()`
+- Grille métiers : 5 colonnes (Code, Libellé, Livre, Sélectionné, Chance), tri
+  "sélectionnés d'abord puis alphabétique", en-têtes i18n (`LAB_*`), parsing manuel
+  (pas `DelimitedText`, jugé peu fiable pour ce cas)
 
-**Affichage compétences:**
-- ❌ Faire Cells[3] éditable (double-clic = ComboBox spécialisations)
-- ❌ Ajouter checkboxes vraies (Cells[4])
+**Phase 2 (édition interactive) : ⏳ non démarrée**, tous les `TEdit` encore en `ReadOnly`.
+Prévu (jamais commencé) :
+- Double-clic sur "Sélectionné" → toggle
+- Double-clic sur "Chance" → éditer
+- Boutons Valider / Annuler → écrire dans le XML
+- Aide à la saisie de formules (clic droit, parseur partagé Dégâts/Portée/Durée avec
+  jetons `(ATTR_xx)`/`(BATTR_xx)`, sur la base de `DecouperDegats`)
 
-**Affichage talents:**
-- ❌ Faire TreeViewTalents éditables
-- ❌ ComboBox pour choix multiples
+### 2.2 WinPersonnage / WinCreation — Persistance des choix & refonte de la création
 
-**Édition globale:**
-- ❌ Bouton "Valider" pour sauvegarder dans XML race
-- ❌ Mettre à jour SUBCHAPTER_SKILL et SUBCHAPTER_TALENT dans XMLDoc
+**✅ Terminé :**
 
-**Cas particuliers:**
-- ❌ Talents/Compétences avec "_*" (spécialisations) comme compétences
-- ❌ Talents aléatoires probabilistes (DATA_RANDOM_TALENT)
+- Persistance des spécialisations de **compétences** de métier : `Personnage.MetierCompetence`
+  est un instantané écrit/relu dans `CHAPTER_SKILL/SUBCHAPTER_SKILLCAREER`
+  (`chargepersonnage.pas ~97, 308-318, 774-792`), mis à jour dans
+  `TabAugmentationCompetenceDblClick` (blocs A/B/C). Piège : `TabCompetence` ne contient
+  pas les compétences non encore possédées (créées seulement par `MajTables`) ; ne jamais
+  garder le renommage sous `if Cout > 0`.
+- Même mécanisme pour les **talents** : création de `Personnage.MetierTalent` (n'existait
+  pas), chapitre autonome `CHAPTER_TALENT/SUBCHAPTER_TALENTCAREER`, blocs A/B/C dans
+  `TabAugmentationTalentDblClick`. Bug corrigé : double réglage de `ColWidths` sur la
+  mauvaise colonne (`ColAugmTalSpe` au lieu de `ColAugmTalSpeSel`).
+- Normalisation des préfixes de livre dans les XML (13 fichiers, 129 lignes) : chaque
+  branche `/` sans `SeparateurLivre` reçoit le préfixe de la première branche
+  (`<Price>`/`<Quality>` exclus). Jusqu'à 9 branches vues, préfixes autres que `RULES-`
+  (`WINDS-`, `ARCH2-`).
+- `ListeTalent` et `ListeMetierCompetence` réécrites en récursif pour aplatir les
+  génériques (`ValeurGenerique`) en spécialités, avec `StrictDelimiter := True` **avant**
+  `Delimiter`/`DelimitedText`.
+- Refonte complète de l'étape "choix" de création de personnage : remplacement de
+  l'ancien système (4 `GroupBoxTalentChoix` + radios, plafonné à 4 choix de 2 options)
+  par deux `TStringGrid` (`TabCreationChoix` / `TabCreationHasard`) pilotées par un
+  modèle mémoire `StructureChoixCreation` (clé = `CodeSource, CodeParent, Rang`),
+  reconstruit à chaque changement (`ReconstruitChoixCreation()`), avec cascade
+  bidirectionnelle Choix↔Aléatoire. Validé de bout en bout XML compris.
 
-## Commit ready - SESSION COMPLÈTE + BUG FIX ✅
+**🔧 En cours — point de reprise immédiat :**
 
-Tous les fichiers sont finalisés:
-- winlivre.pas ✅ (talents TreeView + i18n complet + UI dynamique + BUG FIX)
-- winlivre.lfm ✅
-- CONTEXT.md ✅
+`ChargeAugmentation` (`winpersonnage.pas`) : la colonne de choix n'apparaît pas pour une
+compétence à choix multiple (ex. `RULES-COMPDISC_RURAL/RULES-COMPDISC_URB`).
 
-**Prochaine session: Phase 2 ÉDITION (Checkboxes + ComboBox + Sauvegarde XML)**
+Cause identifiée : dans le bloc compétence, `ListComp` est créée mais jamais alimentée.
+**Correction attendue** : ajouter
+`ListComp := ListeMetierCompetence(PersonnageCompetence.CodeCompetence);`
+comme le fait déjà le bloc talent avec `ListeTalent`.
+
+→ Redonner `winpersonnage.pas` à jour en début de session pour la ligne exacte (les
+numéros ont bougé depuis le 09/08).
+
+→ Vérifier aussi la branche compétence de `winspecialisation.pas` : elle a probablement
+besoin du même correctif `SeparateurMulti` que la branche talent, sinon la fenêtre de
+choix s'ouvre vide.
+
+### 2.3 Versionning des éléments entre livres/suppléments — conception arrêtée le 10/08, non démarré
+
+Besoin : certains éléments du Livre de Règles ont une variante révisée dans un
+supplément (ex. `RULES-COMPATL` → `UPINA-COMPATL`). Deux objectifs :
+
+1. Corriger un bug latent : au changement de métier, une compétence possédée sous un
+   livre n'est pas reconnue comme celle demandée par le nouveau métier sous un autre
+   livre → doublon.
+2. Ajouter une fonctionnalité : bouton dans WinPersonnage "mettre à jour les éléments
+   par rapport à un livre", qui liste ce qui est remplaçable et laisse le joueur cocher.
+
+Périmètre : compétences, talents, équipements, sorts. Exclus : race et métier (trop
+structurants). À relire en entier au lancement de ce chantier — conception détaillée
+dans l'historique (voir CHANGELOG.md, entrée du 10/08).
+
+---
+
+## 3. TODO / Backlog
+
+### WinCreation
+- [ ] Nettoyer les blocs commentés (`PhaseSave`, `PageEtapesChange`, `AfficheImageRace`)
+- [ ] Supprimer du `.lfm` les anciens composants (4 GroupBox, 8 radios, 3 séries spin/Valider)
+- [ ] Améliorer l'affichage de `TWinLanceDes` (boutons qui débordent)
+
+### Général
+- [ ] Passe globale sur les libellés `LAB_xxx`/`MESS_xxx` (reportée)
+- [ ] Coquille `LAB_130` : « Spéc**u**lation choisie » → « Spécialisation choisie »
+- [ ] Appliquer `GridAjouteColonne` (déjà écrite dans `ChargeConstantes`) aux nouvelles
+      grilles pour supprimer les indices en dur (⚠️ passer les grilles en mode `Columns`,
+      tester avec `OnPrepareCanvas`)
+- [ ] `ColAugmTalLib` trop étroite pour les libellés spécialisés
+- [ ] `TabAugmentationTalentDblClick`, branche "ajouter un talent" : utilise par erreur
+      les constantes compétence (`ColCompLib`, `ColAugmCompLib`) au lieu de `ColAugmTalLib`
+- [ ] `VerifieRecherche` vit dans `ChargeConstantes` mais n'est appelée que depuis `UnitCalcul`
+- [ ] Entrées fantômes type `<Skill id="RULES-COMPCOMB_2M/COMPCOMB_FLEAU">` : construire
+      le libellé à la volée en joignant les branches par "ou" plutôt que de les supprimer
+- [ ] Le menu des livres retrouve le fichier par le libellé → renommer les fichiers XML
+      (supprimer les espaces) casserait le lien ; chantier isolé si besoin
+- [ ] `ChargeImageNiveau`/`ColorList` locales à WinPersonnage → mutualisables dans
+      `ChargeConstantes` si besoin de couleurs partagées
+- [ ] Le protocole par variables globales (`ChoixWinTalent`, `SelectWinTalent`, etc.)
+      grossit ; passer par des propriétés de fiche serait plus sûr (pas urgent)
+- [ ] `AdjustGridColumnsWidth` appelle `ScaleFormToDesign(96)` alors que les `.lfm` sont
+      en `DesignTimePPI = 120` → écart d'échelle compensé à la main par `AddHeight`/`AddWidth`
+
+### WinLivre
+- [ ] Phase ÉDITION (voir §2.1) — toggle sélection, édition chance, sauvegarde/annulation XML
+- [ ] Aide à la saisie de formules (Dégâts/Portée/Durée)
+
+### Nouveau chantier (non démarré)
+- [ ] Versionning des éléments entre livres (voir §2.3)
+
+---
+
+## 4. Pièges Lazarus / Free Pascal accumulés
+
+- Colonne 0 réservée dans un `TStringGrid` (les données commencent à `Cells[1]`)
+- `ColCount` = dernier indice + 1, sinon les écritures sont perdues sans erreur
+- `StrictDelimiter := True` **avant** `Delimiter` et `DelimitedText`, sinon les espaces séparent
+- Les gestionnaires d'événements doivent être dans la section `published`
+- Les contrôles créés dynamiquement qui recouvrent une ScrollBox doivent avoir `Parent := Self`
+- `Parent` est une propriété de `TControl` → ne jamais nommer une variable locale `Parent`
+  (erreur "Duplicate identifier")
+- `TColor` s'écrit en BGR, pas en RGB (`#FF8080` → `$8080FF`)
+- Homonymie de globales : une variable déclarée dans deux unités compile sans erreur ; la
+  dernière unité du `uses` gagne. `Ctrl+Clic` mène à la déclaration réellement utilisée.
+  Convention à tenir : les globales partagées vivent uniquement dans `ChargeConstantes`.
+- Éditer un `.lfm` à la main : fermer Lazarus d'abord, remplacer les blocs, ne pas les ajouter
+
+---
+
+## 5. Méthode de débogage qui a fait ses preuves
+
+**L'écran ment, le XML et le modèle disent la vérité.** La plupart des bugs viennent
+d'une valeur écrite ou lue dans la mauvaise colonne — rarement d'une logique fausse.
+
+Réflexe qui débloque : un `ShowMessage` qui affiche l'état réel du modèle, ex. :
+
+```pascal
+Msg := '';
+for Ind := 0 to High(ListeChoixCreation) do
+  Msg := Msg + IntToStr(Ind) + ' src=' + ListeChoixCreation[Ind].CodeSource
+             + ' rang=' + IntToStr(ListeChoixCreation[Ind].Rang)
+             + ' choisi=[' + ListeChoixCreation[Ind].CodeChoisi + ']'
+             + ' jet=' + IntToStr(ListeChoixCreation[Ind].Jet) + SeparateurRetourLigne;
+ShowMessage(Msg);
+```
+
+⚠️ Ce témoin s'affiche **avant** le rafraîchissement des grilles : un écart entre le
+message et l'écran est normal.
+⚠️ Vérifier que le témoin lit bien la bonne grille (déjà arrivé : lecture de
+`TabCreationChoix` au lieu de `TabCreationHasard`).

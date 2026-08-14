@@ -29,6 +29,7 @@ object WinLivres: TWinLivres
     BevelOuter = bvNone
     ClientHeight = 1129
     ClientWidth = 400
+    ParentBackground = False
     ParentColor = False
     TabOrder = 2
     object PanelTopButtons: TPanel
@@ -167,6 +168,8 @@ object WinLivres: TWinLivres
     BevelOuter = bvNone
     ClientHeight = 1129
     ClientWidth = 1134
+    Color = clBlack
+    ParentBackground = False
     ParentColor = False
     TabOrder = 1
     object LabelFormTitle: TLabel

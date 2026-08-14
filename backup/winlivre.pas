@@ -7,7 +7,7 @@ interface
 uses
   Classes, SysUtils, Forms, Controls, StdCtrls, ComCtrls, ExtCtrls, Menus,
   Dialogs, Graphics, BCButton, ChargeConstantes, ChargeTexte, ChargeCompetence, ChargeTalent, ChargeMetier, ChargeLivre, ChargeArme, ChargeArmure, ChargeRace, UnitCalcul, Grids,
-  Generics.Collections, DOM, XMLRead, XMLWrite, FGL;
+  Generics.Collections, DOM, XMLRead, XMLWrite, FGL, GlobalFonts;
 
 type
   // Structure pour stocker les données du XML
@@ -328,12 +328,9 @@ begin
 
   TreeViewLivre.ReadOnly := True;
 
-  ShowMessage('[' + LivreRepertoireTravail('RULES','ENGLISH') + ']' + SeparateurRetourLigne
-            + '[' + LivreFichierActuel('RULES','ENGLISH') + ']');
-  
   // Style
   try
-    { MiseEnFormeDesChamp(Self); }  // À implémenter plus tard
+    MiseEnFormeDesChamp(Self);   // À implémenter plus tard
   except
     // GlobalFonts non disponible, continuer sans
   end;

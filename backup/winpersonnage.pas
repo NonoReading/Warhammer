@@ -4,6 +4,7 @@ unit WinPersonnage;
 {$ModeSwitch ArrayOperators}
 interface
 
+
 uses
   Classes, SysUtils, Forms, Controls, Graphics, Dialogs, ExtCtrls, StdCtrls,
   Grids, ComCtrls, LCLIntf, Spin, MaskEdit, Math, BGRABitmap, BGRABitmapTypes,
@@ -19,6 +20,11 @@ uses
 type
 
   { TWinPersonnages }
+
+  TTabControlDrawer = class
+    procedure DrawTab(Control: TCustomTabControl; TabIndex: Integer;
+      const ARect: TRect; Active: Boolean);
+  end;
 
   TWinPersonnages = class(TForm)
     EditHairColors: TEdit;
@@ -419,6 +425,7 @@ var
 
   // verrue
   PremierAjustage:            integer = 3;
+
 
 implementation
 
@@ -4352,5 +4359,36 @@ Function TWinPersonnages.CalculOptionXpDiv25(Xp: Integer): Integer;
     else
       Result := Xp;
   end;
+
+var
+  GTabControlDrawer: TTabControlDrawer;
+
+procedure TTabControlDrawer.DrawTab(Control: TCustomTabControl; TabIndex: Integer;
+  const ARect: TRect; Active: Boolean);
+var
+  CellText:     string;
+  TextWidth:    Integer;
+  TextX, TextY: Integer;
+begin
+  with Control.Canvas do
+  begin
+    if Active then
+      Brush.Color := TColor($404040)
+    else
+      Brush.Color := clBlack;
+    FillRect(ARect);
+
+    Font.Color := clWhite;
+    Font.Style := [fsBold];
+    Font.Size  := ConstPoliceTaille;
+    Font.Name  := ConstPoliceNom;
+
+    CellText  := Control.Tabs[TabIndex];
+    TextWidth := TextWidth(CellText);
+    TextX     := ARect.Left + (ARect.Right - ARect.Left - TextWidth) div 2;
+    TextY     := ARect.Top  + (ARect.Bottom - ARect.Top - TextHeight(CellText)) div 2;
+    TextRect(ARect, TextX, TextY, CellText);
+  end;
+end;
 
 end.
