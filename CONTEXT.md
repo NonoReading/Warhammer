@@ -122,44 +122,17 @@ supplément (ex. `RULES-COMPATL` → `UPINA-COMPATL`). Deux objectifs :
 
 Périmètre : compétences, talents, équipements, sorts. Exclus : race et métier (trop
 structurants). À relire en entier au lancement de ce chantier — conception détaillée
-dans l'historique (voir CHANGELOG.md, entrée du 10/08).
+dans l'historique (voir `Log.txt`, entrée du 10/08/2026).
 
 ---
 
 ## 3. TODO / Backlog
 
-### WinCreation
-- [ ] Nettoyer les blocs commentés (`PhaseSave`, `PageEtapesChange`, `AfficheImageRace`)
-- [ ] Supprimer du `.lfm` les anciens composants (4 GroupBox, 8 radios, 3 séries spin/Valider)
-- [ ] Améliorer l'affichage de `TWinLanceDes` (boutons qui débordent)
-
-### Général
-- [ ] Passe globale sur les libellés `LAB_xxx`/`MESS_xxx` (reportée)
-- [ ] Coquille `LAB_130` : « Spéc**u**lation choisie » → « Spécialisation choisie »
-- [ ] Appliquer `GridAjouteColonne` (déjà écrite dans `ChargeConstantes`) aux nouvelles
-      grilles pour supprimer les indices en dur (⚠️ passer les grilles en mode `Columns`,
-      tester avec `OnPrepareCanvas`)
-- [ ] `ColAugmTalLib` trop étroite pour les libellés spécialisés
-- [ ] `TabAugmentationTalentDblClick`, branche "ajouter un talent" : utilise par erreur
-      les constantes compétence (`ColCompLib`, `ColAugmCompLib`) au lieu de `ColAugmTalLib`
-- [ ] `VerifieRecherche` vit dans `ChargeConstantes` mais n'est appelée que depuis `UnitCalcul`
-- [ ] Entrées fantômes type `<Skill id="RULES-COMPCOMB_2M/COMPCOMB_FLEAU">` : construire
-      le libellé à la volée en joignant les branches par "ou" plutôt que de les supprimer
-- [ ] Le menu des livres retrouve le fichier par le libellé → renommer les fichiers XML
-      (supprimer les espaces) casserait le lien ; chantier isolé si besoin
-- [ ] `ChargeImageNiveau`/`ColorList` locales à WinPersonnage → mutualisables dans
-      `ChargeConstantes` si besoin de couleurs partagées
-- [ ] Le protocole par variables globales (`ChoixWinTalent`, `SelectWinTalent`, etc.)
-      grossit ; passer par des propriétés de fiche serait plus sûr (pas urgent)
-- [ ] `AdjustGridColumnsWidth` appelle `ScaleFormToDesign(96)` alors que les `.lfm` sont
-      en `DesignTimePPI = 120` → écart d'échelle compensé à la main par `AddHeight`/`AddWidth`
-
-### WinLivre
-- [ ] Phase ÉDITION (voir §2.1) — toggle sélection, édition chance, sauvegarde/annulation XML
-- [ ] Aide à la saisie de formules (Dégâts/Portée/Durée)
-
-### Nouveau chantier (non démarré)
-- [ ] Versionning des éléments entre livres (voir §2.3)
+Le backlog complet (tout ce qui n'est pas encore commencé) vit dans `A FAIRE.txt`
+(fichier déjà existant dans le projet), pas ici — pour pouvoir y ajouter une ligne à
+tout moment sans toucher à l'état détaillé des chantiers ci-dessus. Dès qu'un item
+d'`A FAIRE.txt` passe en travail actif, il migre dans la section "en cours" du
+chantier concerné, avec les détails techniques.
 
 ---
 

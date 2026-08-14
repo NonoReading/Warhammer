@@ -168,3 +168,10 @@
 13/06/2025 : Livre :refonte de l'export pour que les codes soient de type <Livre>-<Code>
 13/06/2026 : données génériques (age, taille, cheveux, yeux) + ajout dans PDF
 14/06/2026 : ajout des % de corruption physique et mental par race.
+02/08/2026 : WIN LIVRE : affichage des carrières par race (grille métiers, tri intelligent, en-têtes i18n) - Phase 1 terminée
+05/08/2026 : WIN PERSONNAGE : persistance du choix de spécialisation pour les compétences génériques de métier
+06/08/2026 : WIN PERSONNAGE : même correctif pour les talents (création de Personnage.MetierTalent) ; conception de la refonte de l'étape "choix" à la création de personnage
+06-09/08/2026 : WIN CREATION : refonte des choix (2 TStringGrid + modèle StructureChoixCreation, cascade choix/aléatoire) ; normalisation des préfixes de livre dans les XML (13 fichiers, 129 lignes) ; choix multiple à N branches
+09/08/2026 : WIN PERSONNAGE : point de reprise - bug ListComp non alimentée dans ChargeAugmentation pour les compétences à choix multiple (non corrigé)
+10/08/2026 : conception (non démarrée) - versionning des éléments entre livre et suppléments
+14/08/2026 : consolidation des ~30 fichiers .md de session (créés par erreur au lieu de continuer ce log) dans CONTEXT.md ; fusion du backlog dans A FAIRE.txt ; reprise de ce Log.txt comme historique unique du projet

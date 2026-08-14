@@ -26,4 +26,42 @@ gérer les ABOUT pour les lires facultatifs
 
 
 
+-------------------------
+AJOUTS DU 14/08/2026 (repris des ~30 fichiers de session, dédupliqués)
+-------------------------
 
+WinCreation :
+- nettoyer les blocs commentés (PhaseSave, PageEtapesChange, AfficheImageRace)
+- supprimer du .lfm les anciens composants (4 GroupBox, 8 radios, 3 séries spin/Valider)
+- améliorer l'affichage de TWinLanceDes (boutons qui débordent)
+
+Général :
+- coquille LAB_130 : "Spéculation choisie" -> "Spécialisation choisie"
+- appliquer GridAjouteColonne (déjà écrite dans ChargeConstantes) aux nouvelles grilles pour
+  supprimer les indices en dur (passer les grilles en mode Columns, tester avec OnPrepareCanvas)
+- ColAugmTalLib trop étroite pour les libellés spécialisés
+- TabAugmentationTalentDblClick, branche "ajouter un talent" : utilise par erreur les
+  constantes compétence (ColCompLib, ColAugmCompLib) au lieu de ColAugmTalLib
+- VerifieRecherche vit dans ChargeConstantes mais n'est appelée que depuis UnitCalcul
+- entrées fantômes type <Skill id="RULES-COMPCOMB_2M/COMPCOMB_FLEAU"> : construire le libellé
+  à la volée en joignant les branches par "ou" plutôt que de les supprimer
+- le menu des livres retrouve le fichier par le libellé -> renommer les fichiers XML
+  (supprimer les espaces) casserait le lien ; chantier isolé si besoin
+- ChargeImageNiveau/ColorList locales à WinPersonnage -> mutualisables dans ChargeConstantes
+  si besoin de couleurs partagées
+- le protocole par variables globales (ChoixWinTalent, SelectWinTalent, etc.) grossit ;
+  passer par des propriétés de fiche serait plus sûr (pas urgent)
+- AdjustGridColumnsWidth appelle ScaleFormToDesign(96) alors que les .lfm sont en
+  DesignTimePPI = 120 -> écart compensé à la main par AddHeight/AddWidth
+
+WinLivre :
+- Phase ÉDITION (toggle sélection, édition "Chance", boutons Valider/Annuler pour écrire/
+  rejeter dans le XML) : en discussion actuellement -> décision à prendre entre écriture XML
+  immédiate au clic sur "Valider" ou modification en mémoire + bouton séparé "Enregistrer le
+  livre" (voir CONTEXT.md §2.2)
+- aide à la saisie de formules (Dégâts/Portée/Durée)
+
+Note : "UP IN ARMS : gérer les mises à jour des compétences" et "calculer les changements
+entre deux versions" plus haut correspondent au chantier détaillé dans CONTEXT.md §2.3
+(versionning des éléments entre livres/suppléments, conception arrêtée le 10/08, non
+démarré) — pas dupliqué ici, juste ce renvoi.
