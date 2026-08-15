@@ -52,10 +52,9 @@
         <Filename Value="chargeconstantes.pas"/>
         <IsPartOfProject Value="True"/>
         <UnitName Value="ChargeConstantes"/>
-        <IsVisibleTab Value="True"/>
         <EditorIndex Value="7"/>
         <TopLine Value="216"/>
-        <CursorPos X="55" Y="228"/>
+        <CursorPos X="31" Y="229"/>
         <UsageCount Value="200"/>
         <Loaded Value="True"/>
       </Unit>
@@ -493,7 +492,7 @@
         <UnitName Value="PdfPersonnage"/>
         <EditorIndex Value="-1"/>
         <TopLine Value="2242"/>
-        <CursorPos X="21" Y="2242"/>
+        <CursorPos X="36" Y="2249"/>
         <UsageCount Value="200"/>
       </Unit>
       <Unit>
@@ -541,10 +540,11 @@
         <Filename Value="chargelivre.pas"/>
         <IsPartOfProject Value="True"/>
         <UnitName Value="ChargeLivre"/>
+        <IsVisibleTab Value="True"/>
         <EditorIndex Value="9"/>
-        <TopLine Value="31"/>
-        <CursorPos X="20" Y="12"/>
-        <UsageCount Value="182"/>
+        <TopLine Value="32"/>
+        <CursorPos X="34" Y="45"/>
+        <UsageCount Value="183"/>
         <Loaded Value="True"/>
       </Unit>
       <Unit>
@@ -554,7 +554,7 @@
         <EditorIndex Value="-1"/>
         <TopLine Value="5"/>
         <CursorPos X="34" Y="11"/>
-        <UsageCount Value="96"/>
+        <UsageCount Value="97"/>
       </Unit>
       <Unit>
         <Filename Value="chargetalentattributmodif.pas"/>
@@ -563,7 +563,7 @@
         <EditorIndex Value="-1"/>
         <TopLine Value="3"/>
         <CursorPos X="43" Y="13"/>
-        <UsageCount Value="90"/>
+        <UsageCount Value="91"/>
       </Unit>
       <Unit>
         <Filename Value="chargetalentcompetencemodif.pas"/>
@@ -571,7 +571,7 @@
         <UnitName Value="ChargeTalentCompetenceModif"/>
         <EditorIndex Value="-1"/>
         <CursorPos X="31" Y="17"/>
-        <UsageCount Value="87"/>
+        <UsageCount Value="88"/>
       </Unit>
       <Unit>
         <Filename Value="chargetalentcompetenceajoute.pas"/>
@@ -579,7 +579,7 @@
         <UnitName Value="ChargeTalentCompetenceAjoute"/>
         <EditorIndex Value="-1"/>
         <CursorPos X="43" Y="14"/>
-        <UsageCount Value="86"/>
+        <UsageCount Value="87"/>
       </Unit>
       <Unit>
         <Filename Value="winlancede.pas"/>
@@ -591,7 +591,7 @@
         <EditorIndex Value="4"/>
         <TopLine Value="35"/>
         <CursorPos X="53" Y="47"/>
-        <UsageCount Value="44"/>
+        <UsageCount Value="45"/>
         <Loaded Value="True"/>
         <LoadedDesigner Value="True"/>
       </Unit>
@@ -823,7 +823,7 @@
         <WindowIndex Value="-1"/>
         <TopLine Value="-1"/>
         <CursorPos X="-1" Y="-1"/>
-        <UsageCount Value="0"/>
+        <UsageCount Value="10"/>
         <DefaultSyntaxHighlighter Value="None"/>
       </Unit>
       <Unit>
@@ -832,7 +832,7 @@
         <WindowIndex Value="-1"/>
         <TopLine Value="-1"/>
         <CursorPos X="-1" Y="-1"/>
-        <UsageCount Value="0"/>
+        <UsageCount Value="10"/>
         <DefaultSyntaxHighlighter Value="None"/>
       </Unit>
       <Unit>
@@ -841,7 +841,7 @@
         <WindowIndex Value="-1"/>
         <TopLine Value="-1"/>
         <CursorPos X="-1" Y="-1"/>
-        <UsageCount Value="0"/>
+        <UsageCount Value="10"/>
       </Unit>
       <Unit>
         <Filename Value="C:\laz_conf\onlinepackagemanager\packages\SynPDF-master\README.md"/>
@@ -849,7 +849,7 @@
         <WindowIndex Value="-1"/>
         <TopLine Value="-1"/>
         <CursorPos X="-1" Y="-1"/>
-        <UsageCount Value="0"/>
+        <UsageCount Value="10"/>
         <DefaultSyntaxHighlighter Value="None"/>
       </Unit>
       <Unit>
@@ -858,7 +858,7 @@
         <WindowIndex Value="-1"/>
         <TopLine Value="-1"/>
         <CursorPos X="-1" Y="-1"/>
-        <UsageCount Value="0"/>
+        <UsageCount Value="10"/>
         <DefaultSyntaxHighlighter Value="None"/>
       </Unit>
       <Unit>
@@ -867,7 +867,7 @@
         <WindowIndex Value="-1"/>
         <TopLine Value="-1"/>
         <CursorPos X="-1" Y="-1"/>
-        <UsageCount Value="0"/>
+        <UsageCount Value="10"/>
         <DefaultSyntaxHighlighter Value="None"/>
       </Unit>
       <Unit>
@@ -875,7 +875,7 @@
         <EditorIndex Value="-1"/>
         <TopLine Value="20544"/>
         <CursorPos X="40" Y="20562"/>
-        <UsageCount Value="0"/>
+        <UsageCount Value="10"/>
       </Unit>
       <Unit>
         <Filename Value="C:\laz_conf\onlinepackagemanager\packages\SynPDF-master\SynCrypto.pas"/>
@@ -883,7 +883,7 @@
         <WindowIndex Value="-1"/>
         <TopLine Value="-1"/>
         <CursorPos X="-1" Y="-1"/>
-        <UsageCount Value="0"/>
+        <UsageCount Value="10"/>
       </Unit>
       <Unit>
         <Filename Value="C:\laz_conf\onlinepackagemanager\packages\SynPDF-master\SynDoubleToText.inc"/>
@@ -891,7 +891,7 @@
         <WindowIndex Value="-1"/>
         <TopLine Value="-1"/>
         <CursorPos X="-1" Y="-1"/>
-        <UsageCount Value="0"/>
+        <UsageCount Value="10"/>
       </Unit>
       <Unit>
         <Filename Value="C:\laz_conf\onlinepackagemanager\packages\SynPDF-master\SynFPCTypInfo.pas"/>
@@ -899,14 +899,14 @@
         <WindowIndex Value="-1"/>
         <TopLine Value="-1"/>
         <CursorPos X="-1" Y="-1"/>
-        <UsageCount Value="0"/>
+        <UsageCount Value="10"/>
       </Unit>
       <Unit>
         <Filename Value="C:\laz_conf\onlinepackagemanager\packages\SynPDF-master\SynGdiPlus.pas"/>
         <EditorIndex Value="-1"/>
         <TopLine Value="48"/>
         <CursorPos X="31" Y="77"/>
-        <UsageCount Value="0"/>
+        <UsageCount Value="10"/>
       </Unit>
       <Unit>
         <Filename Value="C:\laz_conf\onlinepackagemanager\packages\SynPDF-master\SynLZ.pas"/>
@@ -914,7 +914,7 @@
         <WindowIndex Value="-1"/>
         <TopLine Value="-1"/>
         <CursorPos X="-1" Y="-1"/>
-        <UsageCount Value="0"/>
+        <UsageCount Value="10"/>
       </Unit>
       <Unit>
         <Filename Value="C:\laz_conf\onlinepackagemanager\packages\SynPDF-master\Synopse.inc"/>
@@ -922,7 +922,7 @@
         <WindowIndex Value="-1"/>
         <TopLine Value="-1"/>
         <CursorPos X="-1" Y="-1"/>
-        <UsageCount Value="0"/>
+        <UsageCount Value="10"/>
       </Unit>
       <Unit>
         <Filename Value="C:\laz_conf\onlinepackagemanager\packages\SynPDF-master\SynopseCommit.inc"/>
@@ -930,7 +930,7 @@
         <WindowIndex Value="-1"/>
         <TopLine Value="-1"/>
         <CursorPos X="-1" Y="-1"/>
-        <UsageCount Value="0"/>
+        <UsageCount Value="10"/>
       </Unit>
       <Unit>
         <Filename Value="C:\laz_conf\onlinepackagemanager\packages\SynPDF-master\SynPdf.pas"/>
@@ -938,7 +938,7 @@
         <WindowIndex Value="-1"/>
         <TopLine Value="-1"/>
         <CursorPos X="-1" Y="-1"/>
-        <UsageCount Value="0"/>
+        <UsageCount Value="10"/>
       </Unit>
       <Unit>
         <Filename Value="C:\laz_conf\onlinepackagemanager\packages\SynPDF-master\SynTable.pas"/>
@@ -946,7 +946,7 @@
         <WindowIndex Value="-1"/>
         <TopLine Value="-1"/>
         <CursorPos X="-1" Y="-1"/>
-        <UsageCount Value="0"/>
+        <UsageCount Value="10"/>
       </Unit>
       <Unit>
         <Filename Value="C:\laz_conf\onlinepackagemanager\packages\SynPDF-master\SynZip.pas"/>
@@ -954,7 +954,7 @@
         <WindowIndex Value="-1"/>
         <TopLine Value="-1"/>
         <CursorPos X="-1" Y="-1"/>
-        <UsageCount Value="0"/>
+        <UsageCount Value="10"/>
       </Unit>
       <Unit>
         <Filename Value="C:\laz_conf\onlinepackagemanager\packages\SynPDF-master\trees.obj"/>
@@ -962,7 +962,7 @@
         <WindowIndex Value="-1"/>
         <TopLine Value="-1"/>
         <CursorPos X="-1" Y="-1"/>
-        <UsageCount Value="0"/>
+        <UsageCount Value="10"/>
         <DefaultSyntaxHighlighter Value="None"/>
       </Unit>
       <Unit>
@@ -1035,7 +1035,7 @@
         <EditorIndex Value="-1"/>
         <TopLine Value="1060"/>
         <CursorPos Y="1082"/>
-        <UsageCount Value="0"/>
+        <UsageCount Value="10"/>
       </Unit>
       <Unit>
         <Filename Value="C:\lazarus\lcl\controls.pp"/>

@@ -1,6 +1,6 @@
 # Warhammer — Contexte projet
 
-**Dernière mise à jour : 10/08/2026.** Ce fichier remplace tous les anciens
+**Dernière mise à jour : 15/08/2026.** Ce fichier remplace tous les anciens
 `CONTEXT*.md` / `INDEX*.md` / `RESUME*.md` / `SESSION*.md`. Il n'y en a plus
 qu'un : celui-ci. On ne le duplique jamais, on l'édite en place.
 
@@ -170,82 +170,72 @@ Périmètre : compétences, talents, équipements, sorts. Exclus : race et méti
 structurants). À relire en entier au lancement de ce chantier — conception détaillée
 dans l'historique (voir `Log.txt`, entrée du 10/08/2026).
 
-### 2.4 Refonte du PDF de personnage — architecture Bloc/Tableau — ⭐ priorité pour Nono, conception arrêtée le 14/08/2026, non implémenté
+### 2.4 Refonte du PDF de personnage — architecture Bloc/Tableau — ⭐ priorité pour Nono, en cours
 
 **Problème** : `pdfpersonnage.pas` contient deux procédures géantes qui dessinent
 chacune une fiche de personnage entière, coordonnée par coordonnée, en millimètres,
 sans aucune séparation entre mise en page et données :
-- `PdfPersonnageCreation` : 1071 lignes (294-1365), ~90 variables locales.
-- `PdfPersonnageCreationFeldo2P` : ~1388 lignes (1422-2810), contient aussi des blocs
-  entiers commentés/morts (ex. bloc "Blessure" ~40 lignes, bloc "PCM" ~15 lignes) qui
-  se confondent visuellement avec le code actif.
+- `PdfPersonnageCreation` : 1071 lignes (294-1365), ~90 variables locales — pas encore
+  attaqué, viendra après `PdfPersonnageCreationFeldo2P` (priorité de Nono).
+- `PdfPersonnageCreationFeldo2P` : ~1388 lignes à l'origine, contient aussi des blocs
+  entiers commentés/morts (ex. bloc "Blessure" ~40 lignes, bloc "PCM" ~15 lignes) pas
+  encore supprimés — en cours de découpage, voir avancement ci-dessous.
 
 Douleur exprimée par Nono : impossible de retrouver facilement un bloc ("tableau
 avec titre et données") pour le modifier ou en ajouter un — tout est noyé dans une
-seule fonction. **Priorité : finir `PdfPersonnageCreationFeldo2P` en premier.**
+seule fonction.
 
-**Conception retenue** — deux briques, pas une seule (pour ne pas alourdir les blocs
-simples avec la machinerie des tableaux de données) :
+**Architecture retenue** — deux briques (types définis en tête de `pdfpersonnage.pas`,
+juste après `StructureDonnee`) :
 
-*Brique 1 — "bloc simple"* : pour les panneaux à champs fixes, sans lignes répétées
-(Résilience, Destin, Expérience, Mouvement, Corruption...). Chaque bloc devient sa
-propre procédure, signature commune :
-```pascal
-procedure PdfBlocResilience(PdfPage: TPDFPage; Personnage: StructurePersonnage; X, Y: Single);
-```
-Le bloc ne connaît que son coin de départ, jamais sa position absolue sur la page —
-ça, c'est le rôle de l'assembleur (la future version courte de
-`PdfPersonnageCreationFeldo2P`, qui ne fait plus que calculer les positions et
-enchaîner les appels aux blocs, dans l'ordre de leurs dépendances de position).
+*Brique 1 — "bloc simple"* : pour les panneaux à champs fixes, sans lignes répétées.
+Chaque bloc est sa propre procédure, qui ne connaît que son coin de départ (jamais sa
+position absolue sur la page) — ex. `PdfBlocResilience`/`PdfBlocDestin`.
 
-*Brique 2 — "tableau de données"* : pour les vraies grilles répétitives
-(Compétences, Talents, Armes, Sorts, Équipement). Types retenus :
-```pascal
-TPdfLigne     = array of String;      // une ligne = une valeur (texte déjà formaté) par colonne
-TPdfRecordSet = array of TPdfLigne;   // type "recordset" : la donnée pré-calculée, aplatie,
-                                       // indépendamment de sa source d'origine (TStringGrid,
-                                       // tableau de records StructureArme, etc.)
+*Brique 2 — "tableau de données"* : pour les grilles répétitives (Compétences, Talents,
+Armes, Sorts, Équipement, Caractéristiques). Une seule procédure générique
+`DessinerTableau(PdfPage, Tableau: TPdfTableau, Donnees: TPdfRecordSet): Single`
+(renvoie le Y du bas du tableau) dessine cadre + en-têtes + valeurs ; la seule logique
+spécifique à chaque tableau est sa fonction de préparation (ex.
+`PdfPreparerRecordSetCaracteristiques`), qui lit les structures du personnage et
+remplit un `TPdfRecordSet` sans jamais dessiner. `TPdfRecordSet` simule un
+"enregistrement SQL" : chaque valeur est retrouvée par son nom de champ
+(`TPdfColonne.Champ`), pas par position, pour que préparation et mise en page restent
+indépendantes.
 
-TPdfColonne = record
-  Libelle:   String;                  // clé i18n de l'en-tête
-  Taille:    Single;                  // largeur en mm — la position de la colonne se déduit
-                                       // en cumulant les Taille précédentes, jamais stockée en dur
-  Affichage: (pdfCentre, pdfEcritAdaptatif, pdfGauche);  // quel helper de PdfUtils.pas utiliser
-end;
+Deux orientations, selon si une "entrée" du tableau est une ligne ou une colonne :
+- `orColonne` (une entrée = une colonne, ses champs empilés en lignes) : cas des
+  Caractéristiques, où chaque caractéristique occupe une colonne.
+- `orLigne` (une entrée = une ligne, ses champs en colonnes) : cas des Compétences.
+  Gère colonnes de largeur variable, en-tête fusionné sur plusieurs colonnes, police à
+  3 états par case (valeur / en-tête / accent), cadre à capacité fixe supérieure au
+  nombre d'entrées réelles (grille surdimensionnée, comme l'ancien code).
 
-TPdfPosition = (posAbsolue, posSousTableau, posDroiteTableau, posGaucheTableau, posDessusTableau);
+Un mécanisme d'annotation générique (`TPdfValeurCase.Annotation`) couvre à la fois le
+bonus racial/talent des Caractéristiques et l'astérisque des Compétences : la
+préparation pose juste le texte, `DessinerTableau` choisit position/taille selon
+l'orientation.
 
-TPdfTableau = record
-  Position:     TPdfPosition;
-  TableauRef:   ^TPdfTableau;         // nil si posAbsolue ; le tableau dont celui-ci dépend
-  Marge:        Single;
-  X, Y:         Single;               // renseignées directement, ou calculées par PositionnerTableau
-  HauteurLigne: Single;
-  Colonnes:     array of TPdfColonne;
-  Donnees:      TPdfRecordSet;
-end;
-```
-Une seule procédure générique `DessinerTableau(PdfPage: TPDFPage; Tableau: TPdfTableau)`
-dessine l'en-tête et boucle sur `Donnees` pour toutes les grilles. La seule logique
-spécifique à chaque tableau est sa préparation de données (ex.
-`PreparerDonneesCompetences(Personnage): TPdfRecordSet`), qui reste proche de ce que
-le code fait déjà aujourd'hui, juste sans le dessin mélangé dedans.
+**Avancement (extraits de `PdfPersonnageCreationFeldo2P`, chacun validé à la
+compilation et comparé visuellement à l'original — rendu identique)** :
+- ✅ Bloc Résilience/Destin (`PdfBlocResilience`/`PdfBlocDestin`)
+- ✅ Tableau Caractéristiques (`orColonne`, `PdfPreparerRecordSetCaracteristiques`)
+- ✅ Tableau Compétences de base (`orLigne`, `PdfPreparerRecordSetCompetencesBase`)
+- ✅ Tableau Compétences groupées (`orLigne`, réutilise `DessinerTableau` tel quel,
+  `PdfPreparerRecordSetCompetencesGroupees`). A nécessité de généraliser les décalages
+  d'en-tête (`TPdfColonne.DecalageEnteteMin/DecalageEnteteMax`, jusque-là en dur dans
+  `DessinerTableau`) pour supporter les deux jeux d'offsets différents des deux tableaux
+  de compétences. A aussi corrigé un bug préexistant de l'ancien code, validé avec Nono :
+  l'astérisque de bonus utilisait une variable `Comp` restée de la boucle précédente au
+  lieu du code de la compétence courante ; corrigé en utilisant
+  `PCompetence.CodeCompetence`.
+- ⏳ Reste dans le bloc monolithique d'origine : Entête, Ambitions, Expérience,
+  Mouvement, Corruption, blocs morts (Blessure, PCM) à supprimer, Talents, Armes,
+  Armures, Sorts.
 
-`PositionnerTableau(var Tableau: TPdfTableau)` résout `X`/`Y` à partir de
-`TableauRef` (déjà résolu) + sa largeur/hauteur totale + `Marge`, selon `Position`
-(ex. `posDroiteTableau` : même `Y`, `X := TableauRef.X + LargeurTotale(TableauRef) + Marge`).
-Contrainte à respecter dans l'assembleur : positionner les tableaux dans l'ordre de
-leurs dépendances (un tableau après celui dont il dépend), pas de référence circulaire.
-
-Helpers de dessin déjà existants à réutiliser tels quels (`PdfUtils.pas`) :
-`PdfCentre`, `PdfEcrit` (texte adaptatif qui rétrécit/coupe en 2-3 lignes si trop long),
-`PdfTaillePolice`, `PdfEncadre`.
-
-**Prochaine étape (prototype)** : un bloc simple (Résilience) et un tableau minimal
-(la ligne des 9 caractéristiques, un seul tableau à une seule ligne de données) pour
-valider le principe — comparer le PDF généré à l'original, un bloc à la fois,
-compilation entre chaque (règle §0), avant d'enchaîner sur le reste de
-`PdfPersonnageCreationFeldo2P`.
+**Prochaine étape** : continuer bloc par bloc / tableau par tableau, compilation entre
+chaque (règle §0). Une fois `PdfPersonnageCreationFeldo2P` terminée, appliquer la même
+approche à `PdfPersonnageCreation`.
 
 ---
 
