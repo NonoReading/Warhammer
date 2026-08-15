@@ -65,3 +65,9 @@ Note : "UP IN ARMS : gérer les mises à jour des compétences" et "calculer les
 entre deux versions" plus haut correspondent au chantier détaillé dans CONTEXT.md §2.3
 (versionning des éléments entre livres/suppléments, conception arrêtée le 10/08, non
 démarré) — pas dupliqué ici, juste ce renvoi.
+
+PDF Personnage (PRIORITAIRE) :
+- refonte de pdfpersonnage.pas en blocs/tableaux réutilisables (architecture Bloc/Tableau,
+  positionnement relatif) - conception arrêtée le 14/08/2026, voir CONTEXT.md §2.4.
+  Commencer par PdfPersonnageCreationFeldo2P, prototype sur le bloc Résilience puis le
+  tableau des 9 caractéristiques.

@@ -201,9 +201,10 @@
         <Filename Value="globalfonts.pas"/>
         <IsPartOfProject Value="True"/>
         <UnitName Value="GlobalFonts"/>
+        <IsVisibleTab Value="True"/>
         <EditorIndex Value="3"/>
-        <TopLine Value="302"/>
-        <CursorPos X="6" Y="311"/>
+        <TopLine Value="352"/>
+        <CursorPos X="4" Y="375"/>
         <UsageCount Value="200"/>
         <Loaded Value="True"/>
       </Unit>
@@ -245,7 +246,6 @@
         <HasResources Value="True"/>
         <ResourceBaseClass Value="Form"/>
         <UnitName Value="WinPersonnage"/>
-        <IsVisibleTab Value="True"/>
         <EditorIndex Value="2"/>
         <TopLine Value="6"/>
         <CursorPos X="28" Y="13"/>
@@ -1213,22 +1213,6 @@
     </Units>
     <JumpHistory HistoryIndex="29">
       <Position>
-        <Filename Value="winlivre.pas"/>
-        <Caret Line="331" TopLine="320"/>
-      </Position>
-      <Position>
-        <Filename Value="warhammersource.pas"/>
-        <Caret Line="520" Column="57" TopLine="508"/>
-      </Position>
-      <Position>
-        <Filename Value="warhammersource.pas"/>
-        <Caret Line="437" TopLine="427"/>
-      </Position>
-      <Position>
-        <Filename Value="chargeconstantes.pas"/>
-        <Caret Line="909" Column="32" TopLine="896"/>
-      </Position>
-      <Position>
         <Filename Value="chargeconstantes.pas"/>
         <Caret Line="915" TopLine="896"/>
       </Position>
@@ -1330,6 +1314,22 @@
       <Position>
         <Filename Value="winpersonnage.pas"/>
         <Caret Line="4334" Column="32" TopLine="4322"/>
+      </Position>
+      <Position>
+        <Filename Value="globalfonts.pas"/>
+        <Caret Line="316" Column="42" TopLine="302"/>
+      </Position>
+      <Position>
+        <Filename Value="globalfonts.pas"/>
+        <Caret Line="29" Column="48" TopLine="12"/>
+      </Position>
+      <Position>
+        <Filename Value="globalfonts.pas"/>
+        <Caret Line="86" Column="37" TopLine="70"/>
+      </Position>
+      <Position>
+        <Filename Value="globalfonts.pas"/>
+        <Caret Line="375" Column="5" TopLine="352"/>
       </Position>
     </JumpHistory>
     <RunParams>

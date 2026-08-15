@@ -176,3 +176,4 @@
 10/08/2026 : conception (non démarrée) - versionning des éléments entre livre et suppléments
 14/08/2026 : consolidation des ~30 fichiers .md de session (créés par erreur au lieu de continuer ce log) dans CONTEXT.md ; fusion du backlog dans A FAIRE.txt ; reprise de ce Log.txt comme historique unique du projet
 14/08/2026 : WIN LIVRE : conception de l'enregistrement/versionning (DATABASE registre + TRAVAIL historique horodaté type SAVED_CARACTERS + finalisation COMPLETE 0->1) - non implémenté
+14/08/2026 : PDF PERSONNAGE : conception de la refonte en blocs/tableaux réutilisables (architecture Bloc/Tableau, positionnement relatif) - non implémenté, priorité pour la suite

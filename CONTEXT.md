@@ -170,6 +170,83 @@ Périmètre : compétences, talents, équipements, sorts. Exclus : race et méti
 structurants). À relire en entier au lancement de ce chantier — conception détaillée
 dans l'historique (voir `Log.txt`, entrée du 10/08/2026).
 
+### 2.4 Refonte du PDF de personnage — architecture Bloc/Tableau — ⭐ priorité pour Nono, conception arrêtée le 14/08/2026, non implémenté
+
+**Problème** : `pdfpersonnage.pas` contient deux procédures géantes qui dessinent
+chacune une fiche de personnage entière, coordonnée par coordonnée, en millimètres,
+sans aucune séparation entre mise en page et données :
+- `PdfPersonnageCreation` : 1071 lignes (294-1365), ~90 variables locales.
+- `PdfPersonnageCreationFeldo2P` : ~1388 lignes (1422-2810), contient aussi des blocs
+  entiers commentés/morts (ex. bloc "Blessure" ~40 lignes, bloc "PCM" ~15 lignes) qui
+  se confondent visuellement avec le code actif.
+
+Douleur exprimée par Nono : impossible de retrouver facilement un bloc ("tableau
+avec titre et données") pour le modifier ou en ajouter un — tout est noyé dans une
+seule fonction. **Priorité : finir `PdfPersonnageCreationFeldo2P` en premier.**
+
+**Conception retenue** — deux briques, pas une seule (pour ne pas alourdir les blocs
+simples avec la machinerie des tableaux de données) :
+
+*Brique 1 — "bloc simple"* : pour les panneaux à champs fixes, sans lignes répétées
+(Résilience, Destin, Expérience, Mouvement, Corruption...). Chaque bloc devient sa
+propre procédure, signature commune :
+```pascal
+procedure PdfBlocResilience(PdfPage: TPDFPage; Personnage: StructurePersonnage; X, Y: Single);
+```
+Le bloc ne connaît que son coin de départ, jamais sa position absolue sur la page —
+ça, c'est le rôle de l'assembleur (la future version courte de
+`PdfPersonnageCreationFeldo2P`, qui ne fait plus que calculer les positions et
+enchaîner les appels aux blocs, dans l'ordre de leurs dépendances de position).
+
+*Brique 2 — "tableau de données"* : pour les vraies grilles répétitives
+(Compétences, Talents, Armes, Sorts, Équipement). Types retenus :
+```pascal
+TPdfLigne     = array of String;      // une ligne = une valeur (texte déjà formaté) par colonne
+TPdfRecordSet = array of TPdfLigne;   // type "recordset" : la donnée pré-calculée, aplatie,
+                                       // indépendamment de sa source d'origine (TStringGrid,
+                                       // tableau de records StructureArme, etc.)
+
+TPdfColonne = record
+  Libelle:   String;                  // clé i18n de l'en-tête
+  Taille:    Single;                  // largeur en mm — la position de la colonne se déduit
+                                       // en cumulant les Taille précédentes, jamais stockée en dur
+  Affichage: (pdfCentre, pdfEcritAdaptatif, pdfGauche);  // quel helper de PdfUtils.pas utiliser
+end;
+
+TPdfPosition = (posAbsolue, posSousTableau, posDroiteTableau, posGaucheTableau, posDessusTableau);
+
+TPdfTableau = record
+  Position:     TPdfPosition;
+  TableauRef:   ^TPdfTableau;         // nil si posAbsolue ; le tableau dont celui-ci dépend
+  Marge:        Single;
+  X, Y:         Single;               // renseignées directement, ou calculées par PositionnerTableau
+  HauteurLigne: Single;
+  Colonnes:     array of TPdfColonne;
+  Donnees:      TPdfRecordSet;
+end;
+```
+Une seule procédure générique `DessinerTableau(PdfPage: TPDFPage; Tableau: TPdfTableau)`
+dessine l'en-tête et boucle sur `Donnees` pour toutes les grilles. La seule logique
+spécifique à chaque tableau est sa préparation de données (ex.
+`PreparerDonneesCompetences(Personnage): TPdfRecordSet`), qui reste proche de ce que
+le code fait déjà aujourd'hui, juste sans le dessin mélangé dedans.
+
+`PositionnerTableau(var Tableau: TPdfTableau)` résout `X`/`Y` à partir de
+`TableauRef` (déjà résolu) + sa largeur/hauteur totale + `Marge`, selon `Position`
+(ex. `posDroiteTableau` : même `Y`, `X := TableauRef.X + LargeurTotale(TableauRef) + Marge`).
+Contrainte à respecter dans l'assembleur : positionner les tableaux dans l'ordre de
+leurs dépendances (un tableau après celui dont il dépend), pas de référence circulaire.
+
+Helpers de dessin déjà existants à réutiliser tels quels (`PdfUtils.pas`) :
+`PdfCentre`, `PdfEcrit` (texte adaptatif qui rétrécit/coupe en 2-3 lignes si trop long),
+`PdfTaillePolice`, `PdfEncadre`.
+
+**Prochaine étape (prototype)** : un bloc simple (Résilience) et un tableau minimal
+(la ligne des 9 caractéristiques, un seul tableau à une seule ligne de données) pour
+valider le principe — comparer le PDF généré à l'original, un bloc à la fois,
+compilation entre chaque (règle §0), avant d'enchaîner sur le reste de
+`PdfPersonnageCreationFeldo2P`.
+
 ---
 
 ## 3. TODO / Backlog
