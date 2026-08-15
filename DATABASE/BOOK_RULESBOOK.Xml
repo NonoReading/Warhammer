@@ -15109,17 +15109,17 @@ If your opponent has a weapon with the Impaler Perk and rolls a Critical, your a
 <BonusMalus id="RULES-ARMOB_05">
 <Description language="ENGLISH">"Not discreet"</Description>
 <Explanation language="ENGLISH">"Wearing any mesh or flat gives a -10 Stealth penalty each time"</Explanation>
-<Modifier>"Stealth -10"</Modifier>
+<Modifier name="RULES-COMPDISC_*">-10</Modifier>
 </BonusMalus>
 <BonusMalus id="RULES-ARMOB_06">
 <Description language="ENGLISH">"Narrow the view"</Description>
 <Explanation language="ENGLISH">"Wearing this armor grants a -10% penalty to Perception"</Explanation>
-<Modifier>"Perception -10"</Modifier>
+<Modifier name="RULES-COMPPRECEP">-10</Modifier>
 </BonusMalus>
 <BonusMalus id="RULES-ARMOB_07">
 <Description language="ENGLISH">"Blocks the view"</Description>
 <Explanation language="ENGLISH">"Wearing this armor grants a -20% penalty to Perception"</Explanation>
-<Modifier>"Perception -20"</Modifier>
+<Modifier name="RULES-COMPPRECEP">-20</Modifier>
 </BonusMalus>
 <BonusMalus id="RULES-ARMOB_08">
 <Description language="ENGLISH">"Under armor"</Description>
@@ -15129,7 +15129,7 @@ If your opponent has a weapon with the Impaler Perk and rolls a Critical, your a
 <BonusMalus id="RULES-ARMOB_19">
 <Description language="ENGLISH">"Not Discreet at all"</Description>
 <Explanation language="ENGLISH">"Wearing that armor gives a -20 Stealth penalty each time"</Explanation>
-<Modifier>"Stealth -20"</Modifier>
+<Modifier name="RULES-COMPDISC_*">-20</Modifier>
 </BonusMalus>
 </DATA_ARMOR_BONUS>
 <DATA_SPELL>

@@ -21,7 +21,7 @@ uses
   ChargeTraduction, ChargeArmureSimplifie, ChargeLivre,
   ChargeTalentAttributModif, ChargeTalentCompetenceModif,
   ChargeTalentCompetenceAjoute, ChargeRaceCorruptionCreation,
-  ChargeRaceOpinion,
+  ChargeRaceOpinion, ChargeArmureBonusModif,
   CustomDrawn_Common, BCButton, BCLabel, fpTTF,
   PdfPersonnage, XmlExportImport, fppdf, WinLivre;
 
@@ -528,6 +528,7 @@ procedure TMenu.FormCreate(Sender: TObject);
        ListTalentCompetenceModif    := TListTalentCompetenceModif.Create;
        ListTalentCompetenceAjoute   := TListTalentCompetenceAjoute.Create;
        ListRaceOpinion              := TListRaceOpinion.Create;
+       ListArmureBonusModif         := TListArmureBonusModif.Create;
 
        // chercher les livres
        directoryPath := GetCurrentDir + ConstCheminLivre;

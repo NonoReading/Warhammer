@@ -89,6 +89,15 @@ PDF Personnage (PRIORITAIRE) :
   affecté avec le type bonus/malus) avant de toucher au code - pas la même chose que le
   mécanisme d'astérisque actuel (TPdfValeurCase.Annotation dans DessinerTableau +
   affichage en dur dans PdfBlocTalents).
+- (idée nettoyage, 15/08/2026, pas conçue) BOOK_RULESBOOK_FRANCAIS.Xml contient en fait
+  toutes les mêmes données que BOOK_RULESBOOK.Xml (pas seulement les traductions), alors
+  que seul le chargement du livre anglais (LangueDef = ConstAnglais) alimente réellement
+  les listes utilisées par le programme - le reste du fichier français n'est là que pour
+  les libellés/descriptions traduits (via AddTrad/Traduit, chargetraduction.pas). Nono
+  aimerait ne garder dans ce fichier que les données de traduction, mais craint de tout
+  casser en le faisant à la main. À concevoir séparément (identifier précisément quels
+  champs sont réellement lus pour un livre non-anglais avant de supprimer quoi que ce
+  soit) avant de toucher au fichier.
 - (idée refonte, 15/08/2026, pas conçue) revoir la gestion des sorts liés aux talents :
   aujourd'hui ButtonSortClick/SortAffiche (winpersonnage.pas) recherchent par constantes
   en dur (TalentSortDomaine/TalentSortMiracle/TalentSortMagieMineure/TalentSortBenediction,

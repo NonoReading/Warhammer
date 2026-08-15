@@ -16,6 +16,7 @@ uses
   ChargeMetierSousMetier, ChargeTraduction, ChargeArmureSimplifie, ChargeLivre,
   ChargeRaceCorruptionCreation, ChargeTalentAttributModif,
   ChargeTalentCompetenceModif, ChargeTalentCompetenceAjoute, ChargeRaceOpinion,
+  ChargeArmureBonusModif,
   XMLRead, DOM, Unitcalcul,  Dialogs, strutils;
 
 Procedure XmlExportBook(Livre: String; Langue: String);
@@ -862,6 +863,7 @@ Procedure XmlImport(FileName: String; OnlyPrimary: Boolean; OnlyCode: Boolean);
     PTalentAttributModif:     StructureTalentAttributModif;
     PTalentCompetenceModif:   StructureTalentCompetenceModif;
     PTalentCompetenceAjoute:  StructureTalentCompetenceAjoute;
+    PArmureBonusModif:        StructureArmureBonusModif;
     PLivre:                   StructureLivre;
     PRaceOpinion:             StructureRaceOpinion;  // ✨ NOUVEAU
     Langue:                   String;
@@ -1897,6 +1899,12 @@ Procedure XmlImport(FileName: String; OnlyPrimary: Boolean; OnlyCode: Boolean);
                     begin
                       PArmureBonus.Livre           := Livre;
                       PArmureBonus.CodeArmureBonus := RemoveQuotes(UTF8Encode(NodeNv2.Attributes.GetNamedItem(ConstXmlId).NodeValue));
+                      // remis à vide à chaque entrée (corrige le 15/08/2026) : PArmureBonus est
+                      // réutilisée d'un tour de boucle à l'autre, et depuis l'ajout du Modifier
+                      // structuré (name="..."), .Malus n'est plus toujours réécrit par le
+                      // <Modifier> - sans ce reset, une entrée structurée garde le Malus de
+                      // l'entrée précédente lue dans le même livre.
+                      PArmureBonus.Malus            := '';
                       PTraduction                  := InitTrad(ConstPArmureBonus, PArmureBonus.CodeArmureBonus, '', PArmureBonus.Livre);
 
                       Node := NodeNv2.FirstChild;
@@ -1916,7 +1924,25 @@ Procedure XmlImport(FileName: String; OnlyPrimary: Boolean; OnlyCode: Boolean);
                                 PTraduction.Libelle        := PArmureBonus.Libelle;
                               end;
                             ConstXmlPositifNegatif:
-                              PArmureBonus.Malus           := RemoveQuotes(UTF8Encode(Node.TextContent));
+                              begin
+                                if Assigned(Node.Attributes) and Assigned(Node.Attributes.GetNamedItem(ConstXmlData)) then
+                                  begin
+                                    // Modifier structuré, lié à une compétence : <Modifier name="CodeCompetence">Valeur</Modifier>
+                                    // (même convention que <ModifySkill name="..."> pour les talents, voir ConstXmlModifieCompetence)
+                                    PArmureBonusModif.Livre           := Livre;
+                                    PArmureBonusModif.CodeArmureBonus := PArmureBonus.CodeArmureBonus;
+                                    PArmureBonusModif.CodeCompetence  := RemoveQuotes(UTF8Encode(Node.Attributes.GetNamedItem(ConstXmlData).NodeValue));
+                                    PArmureBonusModif.Valeur          := StrToInt(RemoveQuotes(UTF8Encode(Node.TextContent)));
+                                    if LangueDef = ConstAnglais then
+                                       begin
+                                        ListArmureBonusModif.add(PArmureBonusModif);
+                                        inc(NbArmureBonusModif);
+                                       end;
+                                  end
+                                else
+                                  // Modifier texte libre, sans compétence liée (note mécanique type "combinable with Plate") : comportement inchangé
+                                  PArmureBonus.Malus := RemoveQuotes(UTF8Encode(Node.TextContent));
+                              end;
                           end;
 
                           Node := Node.NextSibling;

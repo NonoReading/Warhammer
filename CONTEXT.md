@@ -507,6 +507,101 @@ l'envie du moment :
 
 ---
 
+### 2.5 Astérisques numérotées croisées — armure → compétence — en cours (démarré le 15/08/2026)
+
+**Rappel de l'idée** (capturée dans `A FAIRE.txt`) : aujourd'hui, chaque astérisque
+(talent, compétence/caractéristique) s'affiche indépendamment, sans lien visible entre
+l'élément qui cause le bonus/malus et l'élément affecté. Nono voudrait qu'une armure
+qui inflige un malus à une compétence (typiquement Discrétion/Perception) porte une
+astérisque numérotée, et que la compétence affectée porte la même astérisque en face —
+un vrai renvoi partagé, pas juste "il y a un malus ici".
+
+**Découverte de départ** : un mécanisme équivalent existe déjà pour les talents
+(`Personnage.Asterisque` + `PersonnageTalentAsterisque` + `ListTalentAttributModif`/
+`ListTalentCompetenceModif`, `chargepersonnage.pas`), entièrement câblé jusqu'à
+l'affichage PDF (`PdfBlocTalents` + `TPdfValeurCase.Annotation` via `DessinerTableau`).
+Ce qui manque spécifiquement, c'est l'équivalent côté armure : `StructureArmureBonus.Malus`
+(`ChargeArmureBonus.pas`) n'était jusqu'ici que du texte libre anglais (ex. `"Stealth
+-10"`), sans lien structuré vers un code de compétence ni valeur numérique exploitable.
+
+**Décisions de conception validées par Nono** :
+- Affichage : la valeur de base de la compétence reste inchangée en police normale ;
+  chaque source de malus (chaque pièce d'armure portée) obtient sa propre annotation en
+  petite police avec son propre pourcentage, ex. `(5) -10% (6) -20%` — pas une seule
+  astérisque cumulée, car un personnage peut porter certaines pièces d'un ensemble sans
+  les autres (ex. la maille mais pas la coiffe).
+- Numérotation : au moment de la génération du PDF, relire le maximum déjà utilisé par
+  `Personnage.Asterisque` (posé par le système de talents au chargement du personnage)
+  et continuer à partir de là, sans jamais réécrire cette valeur dans les données du
+  personnage — évite les doublons sans avoir à synchroniser deux phases de calcul
+  distinctes (chargement vs génération PDF).
+
+**Syntaxe XML retenue pour `<Modifier>`** (mêmes conventions que le système de talents
+existant, pas une invention isolée) : le fichier réel `BOOK_RULESBOOK.Xml` utilise déjà,
+pour les talents, `<ModifySkill name="RULES-COMPXXX">"Bonus"</ModifySkill>` — un attribut
+`name` (constante `ConstXmlData = 'name'`) portant le code de compétence complet, lu et
+ajouté (pas écrasé) dans une liste (`ListTalentCompetenceModif`) à chaque balise
+rencontrée. Repris à l'identique pour l'armure, avec la valeur numérique signée en
+contenu texte (comme `<ModifyCarac name="RULES-ATTR_Fel">+5</ModifyCarac>`, pas de
+guillemets autour d'un nombre) :
+`<Modifier name="RULES-COMPDISC_*">-10</Modifier>`. Une balise sans attribut `name`
+reste une note mécanique libre (ex. `"combinable with Plate"`), comportement inchangé —
+c'est la présence de l'attribut qui distingue les deux cas au chargement.
+
+**Implémenté et confirmé (15/08/2026)** :
+- Nouvelle unit `ChargeArmureBonusModif.pas` (calquée sur `ChargeTalentCompetenceModif.pas`) :
+  `StructureArmureBonusModif` (`Livre`, `CodeArmureBonus`, `CodeCompetence`, `Valeur:
+  Integer`) + `TListArmureBonusModif` + `ListArmureBonusModif`/`NbArmureBonusModif`.
+  Instanciée dans `WarhammerSource.pas` (`TMenu.FormCreate`, à côté de
+  `ListArmureBonus := TListArmureBonus.Create;`) — fait par Nono directement (via
+  l'IDE), confirmé compilant.
+- `xmlexportimport.pas`, bloc de lecture `<DATA_ARMOR_BONUS>` (`ConstXmlPositifNegatif`,
+  `'Modifier'`) : si la balise a l'attribut `name`, ajoute une entrée à
+  `ListArmureBonusModif` (`CodeCompetence` = valeur de l'attribut, `Valeur` =
+  `StrToInt` du contenu) au lieu d'écraser `PArmureBonus.Malus` ; sinon, comportement
+  inchangé (texte libre dans `.Malus`). Corrige au passage le bug latent déjà repéré
+  (plusieurs `<Modifier>` sur une même entrée n'auraient gardé que le dernier lu) —
+  plusieurs balises structurées sur une même `<BonusMalus>` s'accumulent maintenant
+  naturellement dans la liste.
+- **Bug réel trouvé et corrigé pendant le test** : `PArmureBonus` est réutilisée d'un
+  tour de boucle à l'autre sans être réinitialisée. Avant ce chantier, `.Malus` était
+  toujours réécrit (chaque entrée avait un unique `<Modifier>` texte libre) donc ça ne
+  se voyait jamais. Depuis que certaines entrées passent par la branche structurée
+  (qui n'écrit plus `.Malus`), une entrée structurée gardait le `.Malus` de l'entrée
+  précédente lue dans le même livre (repéré par Nono dans WinArmor : "Not discreet"
+  affichait le texte de malus de "Weakpoints"). Corrigé en réinitialisant
+  `PArmureBonus.Malus := '';` au tout début de chaque `<BonusMalus>`, avant la lecture
+  du `<Modifier>`.
+- `BOOK_RULESBOOK.Xml` et `BOOK_RULESBOOK_FRANCAIS.Xml` (`DATABASE/`) : les 4 entrées
+  liées à une compétence converties au nouveau format — `ARMOB_05`/`ARMOB_19`
+  (Discrétion, `name="RULES-COMPDISC_*"`, -10/-20) et `ARMOB_06`/`ARMOB_07`
+  (Perception, `name="RULES-COMPPRECEP"`, -10/-20). Les 5 autres entrées mécaniques
+  (`ARMOB_01,02,03,04,08`) inchangées, toujours en texte libre.
+- Confirmé par Nono par test dans WinArmor : le tableau Bonus/Malus n'affiche plus de
+  texte incohérent (colonne Penalty vide pour les 4 entrées converties — attendu, rien
+  n'affiche encore la valeur structurée dans WinArmor à ce stade), l'explication en
+  dessous du tableau reste correcte.
+
+**Pas encore fait** : le calcul et l'affichage réels des astérisques (ni dans WinArmor,
+ni dans le PDF) — seule la donnée structurée existe maintenant (`ListArmureBonusModif`),
+rien ne la consomme encore. Reste à concevoir : (1) au moment de la génération du PDF
+(ou de l'affichage personnage), pour chaque pièce d'armure effectivement portée, croiser
+son `CodeArmureBonus` avec `ListArmureBonusModif` pour savoir si elle affecte une
+compétence actuellement affichée ; (2) attribuer à chaque source trouvée une astérisque
+séquentielle continuant après le max de `Personnage.Asterisque` ; (3) afficher ces
+annotations en petite police à côté de la valeur de compétence (probablement via
+`TPdfValeurCase.Annotation`, à concaténer si plusieurs sources touchent la même
+compétence) ; (4) afficher la légende correspondante (ex. "(5) pour la Coiffe"),
+probablement dans/à côté de `PdfBlocDessinExplication`. Idée non conçue en détail, à
+reprendre avec Nono avant de coder quoi que ce soit ici.
+
+**Idée liée, pas conçue, capturée dans `A FAIRE.txt`** : `BOOK_RULESBOOK_FRANCAIS.Xml`
+contient en fait toutes les données (pas seulement les traductions), alors que seul le
+chargement du livre anglais alimente réellement les listes utilisées par le programme —
+Nono aimerait nettoyer ce fichier mais craint de tout casser à la main.
+
+---
+
 ## 3. TODO / Backlog
 
 Le backlog complet (tout ce qui n'est pas encore commencé) vit dans `A FAIRE.txt`

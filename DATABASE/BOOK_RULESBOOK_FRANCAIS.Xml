@@ -14992,17 +14992,17 @@ Si votre adversaire possède une arme avec l’Atout Empaleuse et obtient un Cri
 <BonusMalus id="RULES-ARMOB_05">
 <Description language="FRANCAIS">"Peu discret"</Description>
 <Explanation language="FRANCAIS">"Porter n’importe quelle maille ou plate confère chaque fois une pénalité de -10 en Discrétion"</Explanation>
-<Modifier>"Stealth -10"</Modifier>
+<Modifier name="RULES-COMPDISC_*">-10</Modifier>
 </BonusMalus>
 <BonusMalus id="RULES-ARMOB_06">
 <Description language="FRANCAIS">"Bloque la vue"</Description>
 <Explanation language="FRANCAIS">"Porte cette armure confère une pénalité de -10% en Perception"</Explanation>
-<Modifier>"Perception -10"</Modifier>
+<Modifier name="RULES-COMPPRECEP">-10</Modifier>
 </BonusMalus>
 <BonusMalus id="RULES-ARMOB_07">
 <Description language="FRANCAIS">"Bouche la vue"</Description>
 <Explanation language="FRANCAIS">"Porte cette armure confère une pénalité de -20% en Perception"</Explanation>
-<Modifier>"Perception -20"</Modifier>
+<Modifier name="RULES-COMPPRECEP">-20</Modifier>
 </BonusMalus>
 <BonusMalus id="RULES-ARMOB_08">
 <Description language="FRANCAIS">"Sous armure"</Description>
@@ -15012,7 +15012,7 @@ Si votre adversaire possède une arme avec l’Atout Empaleuse et obtient un Cri
 <BonusMalus id="RULES-ARMOB_19">
 <Description language="FRANCAIS">"Pas discret du tout"</Description>
 <Explanation language="FRANCAIS">"Porter cette armure confère chaque fois une pénalité de -20 en Discrétion"</Explanation>
-<Modifier>"Stealth -20"</Modifier>
+<Modifier name="RULES-COMPDISC_*">-20</Modifier>
 </BonusMalus>
 </DATA_ARMOR_BONUS>
 <DATA_SPELL>

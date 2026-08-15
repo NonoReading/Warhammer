@@ -20,8 +20,8 @@
         <ResourceBaseClass Value="Form"/>
         <UnitName Value="WarhammerSource"/>
         <EditorIndex Value="12"/>
-        <TopLine Value="423"/>
-        <CursorPos X="32" Y="435"/>
+        <TopLine Value="524"/>
+        <CursorPos X="28" Y="536"/>
         <UsageCount Value="200"/>
         <Loaded Value="True"/>
         <LoadedDesigner Value="True"/>
@@ -323,10 +323,11 @@
         <Filename Value="chargearmurebonus.pas"/>
         <IsPartOfProject Value="True"/>
         <UnitName Value="ChargeArmureBonus"/>
-        <EditorIndex Value="-1"/>
-        <TopLine Value="20"/>
-        <CursorPos Y="41"/>
+        <IsVisibleTab Value="True"/>
+        <EditorIndex Value="13"/>
+        <CursorPos X="30" Y="9"/>
         <UsageCount Value="200"/>
+        <Loaded Value="True"/>
       </Unit>
       <Unit>
         <Filename Value="winarmor.pas"/>
@@ -491,9 +492,8 @@
         <Filename Value="pdfpersonnage.pas"/>
         <IsPartOfProject Value="True"/>
         <UnitName Value="PdfPersonnage"/>
-        <IsVisibleTab Value="True"/>
         <EditorIndex Value="11"/>
-        <TopLine Value="2205"/>
+        <TopLine Value="2206"/>
         <CursorPos X="47" Y="2212"/>
         <UsageCount Value="200"/>
         <Loaded Value="True"/>
@@ -520,7 +520,7 @@
         <Filename Value="chargetraduction.pas"/>
         <IsPartOfProject Value="True"/>
         <UnitName Value="ChargeTraduction"/>
-        <EditorIndex Value="13"/>
+        <EditorIndex Value="14"/>
         <TopLine Value="201"/>
         <CursorPos X="11" Y="214"/>
         <UsageCount Value="200"/>
@@ -1216,10 +1216,6 @@
     <JumpHistory HistoryIndex="29">
       <Position>
         <Filename Value="winpersonnage.pas"/>
-        <Caret Line="4372" Column="25" TopLine="4372"/>
-      </Position>
-      <Position>
-        <Filename Value="winpersonnage.pas"/>
         <Caret Line="4373" Column="16" TopLine="4361"/>
       </Position>
       <Position>
@@ -1333,6 +1329,10 @@
       <Position>
         <Filename Value="winpersonnage.pas"/>
         <Caret Line="899" TopLine="889"/>
+      </Position>
+      <Position>
+        <Filename Value="warhammersource.pas"/>
+        <Caret Line="433" Column="63" TopLine="423"/>
       </Position>
     </JumpHistory>
     <RunParams>
