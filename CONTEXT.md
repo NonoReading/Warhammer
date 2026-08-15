@@ -300,6 +300,17 @@ compilation et comparé visuellement à l'original — rendu identique)** :
   `IndDivers > DessinNbLigEqu - 1`) — volontaire, pour ne pas prendre trop de place en
   hauteur si la liste s'allonge.
 - ✅ Bloc Armes, cadre uniquement (`PdfBlocArmes`) — même principe.
+- ✅ Bloc Sorts, cadre uniquement (`PdfBlocSorts`) — même principe. Au passage,
+  correction d'une incohérence de casse sans impact fonctionnel repérée dans l'ancien
+  code (`DessinHauteursor` au lieu de `DessinHauteurSor` sur 6 lignes — Pascal étant
+  insensible à la casse, c'était déjà la même variable, juste écrite différemment ;
+  uniformisé dans la fonction extraite).
+- ✅ Bloc Encombrement, cadre uniquement (`PdfBlocEncombrement`) — dernier de la série
+  cadre+en-têtes. Contrairement aux 4 précédents (Armures/Équipement/Armes/Sorts), a
+  des libellés de largeur variable (`PdfEcrit`), donc reprend `MinPolice` en
+  paramètre. Les valeurs (totaux d'encombrement, écrites après la boucle de
+  remplissage) restent dans la procédure principale, hors de ce bloc. **Les 5 cadres
+  de la page 2 sont maintenant tous extraits.**
 - **Décisions de conception validées par Nono (15/08/2026)** pour le remplissage des 4
   tableaux (Armes/Armures/Équipement-Divers/Sorts) : (1) le découper en 4 boucles
   séparées plutôt que garder le passage unique actuel — Nono confirme que parcourir 4
@@ -312,28 +323,137 @@ compilation et comparé visuellement à l'original — rendu identique)** :
   deux fois la même info de bonus/malus si elle est présente sur plusieurs
   équipements (dédoublonnage déjà présent dans le code via `Pos(...) = 0` avant
   d'ajouter à `ArmureBonii`/`ArmeBonii` — à bien vérifier qu'il survit au découpage).
-- ⏳ Reste dans le bloc monolithique d'origine : cadres Sorts/Encombrement (page 2,
-  même schéma que Armures/Équipement/Armes ci-dessus), puis le remplissage des 4
-  tableaux en 4 boucles séparées + `out` params (voir décisions ci-dessus), puis le
-  bloc Blessure actif et le bloc Compétence de combat de la page 2 (candidats pour une
-  brique ultérieure une fois les tableaux répétitifs terminés).
+- ✅ Remplissage Sorts, première des 4 boucles séparées (`PdfBlocSortsDonnees`) —
+  filtre `Personnage.Equipement` sur `TypeEquipSp`, remplit le tableau dont le cadre
+  est `PdfBlocSorts`. `NbSort` est resté purement local à cette procédure (personne ne
+  le relit après dans `PdfPersonnageCreationFeldo2P`), contrairement aux totaux
+  d'Armes/Armures qui devront être remontés en `out`/`var` car réutilisés par
+  l'Encombrement et DessinExplication (voir ci-dessous). Nettoyage au passage :
+  `NBSort` et `PSort` retirés du bloc `var` principal (devenus inutilisés par ce
+  découpage). Retirée de la boucle partagée, c'était la dernière clause du
+  if/else-if — Divers en devient la dernière clause.
+- ✅ Remplissage Divers, deuxième des 4 boucles séparées (`PdfBlocDiversDonnees`) —
+  filtre `Personnage.Equipement` sur `TypeEquipDI`, remplit la liste Divers du cadre
+  Équipement (`PdfBlocEquipement`), avec bascule en deuxième demi-colonne au-delà de
+  `NbLignes` lignes préservée telle quelle (comportement volontaire, voir plus haut).
+  `IndDivers` purement local à cette procédure (comme `NbSort` pour Sorts) ; retiré du
+  bloc `var` principal de `PdfPersonnageCreationFeldo2P` (l'occurrence dans l'ancienne
+  `PdfPersonnageCreation`, non touchée par ce chantier, garde la sienne). C'était la
+  dernière clause du if/else-if partagé ; Armures en devient la dernière clause.
+  Poussé le 15/08/2026, pas encore testé/compilé par Nono.
+- ✅ Remplissage Armes, troisième des 4 boucles séparées (`PdfBlocArmesDonnees`) —
+  filtre `Personnage.Equipement` sur `TypeEquipWe`, remplit le tableau dont le cadre
+  est `PdfBlocArmes`. Le cas délicat annoncé : `FabricationBonii` est accumulé par
+  Armes ET Armures (les deux ajoutent au même texte d'explication affiché plus loin
+  via `FabricationDetail`), remonté en paramètre `var` plutôt que local pour que les
+  deux boucles s'y ajoutent sans s'écraser — Armures reste pour l'instant dans la
+  boucle partagée de la procédure principale (prochaine étape), donc `FabricationBonii`
+  y est encore accédé directement, en plus d'être passé en `var` à `PdfBlocArmesDonnees`.
+  `EncArme`/`ArmeBonii` remontés en `out` (réutilisés par l'Encombrement et
+  DessinExplication) ; `BF`/`TBonusCC`/`TBonusCT` passés en lecture seule (déjà
+  calculés plus haut dans la procédure principale, non modifiés entre-temps).
+  Nettoyage au passage : `NbArme`, `PArme`, `TexteRange1`/`TexteRange2`, `Portee`,
+  `PorteMoyenne`, `Deg`, `PosProtection`, `Pourcent`, `PasBonus`, `Bidon`, `ListMalii`
+  retirés du bloc `var` principal (devenus inutilisés par ce découpage, purement
+  locaux à la nouvelle procédure). `ArmureBouclier` aussi retiré — il était déjà
+  écrit sans jamais être relu dans `PdfPersonnageCreationFeldo2P` (voir la liste de
+  nettoyage pré-existante ci-dessous, dont cet item disparaît puisqu'il est
+  maintenant traité). Armes était la première clause du if/else-if partagé ; Armures
+  (seule clause restante) passe de `else if` à `if` simple. Poussé le 15/08/2026, pas
+  encore testé/compilé par Nono.
+- ✅ Remplissage Armures, dernière des 4 boucles séparées (`PdfBlocArmuresDonnees`) —
+  filtre `Personnage.Equipement` sur `TypeEquipAR`/`TypeEquipARS` selon `ArmureSet`,
+  remplit le tableau dont le cadre est `PdfBlocArmures`. **Les 4 boucles de
+  remplissage (Sorts/Divers/Armes/Armures) sont maintenant toutes extraites de
+  l'ancienne boucle unique sur `Personnage.Equipement`.** `FabricationBonii` en
+  paramètre `var` (partagé avec Armes, comme prévu) ; `EncArmure`/
+  `ArmureBras/Corps/Jambe/Tete`/`ArmureBonii` remontés en `out` ; `ArmureSet` passé en
+  lecture seule. Nettoyage au passage : `Quality`, `Enc`, `EncP`, `NbArmure`,
+  `LigneBonus`, `PArmure`, `PArmureSimplifiee`, `PersonnageEquipement` retirés du bloc
+  `var` principal (devenus inutilisés). C'était la seule clause restante de l'ancienne
+  boucle partagée ; toute la boucle (le `for PersonnageEquipement in
+  Personnage.Equipement do ... end;`) a donc disparu de
+  `PdfPersonnageCreationFeldo2P`, remplacée par les 4 appels séquentiels. La ligne
+  `PdfTaillePolice(PdfPage, PdfFontValue, ConstPoliceArial, 9);` qui précédait
+  l'ancienne boucle a aussi disparu : `PdfBlocSortsDonnees` (premier des 4 appels) fait
+  déjà ce même réglage de police en tout début de procédure, donc la police à 9 reste
+  correctement établie avant Sorts/Divers/Armes/Armures (chaîne vérifiée : aucun des 4
+  ne change la police avant sa propre première utilisation, sauf Armes et Armures qui
+  la remettent explicitement à 9 en fin de chaque itération).
+  **Découverte signalée à Nono, non corrigée** : `ArmureBras`/`ArmureCorps`/
+  `ArmureJambe`/`ArmureTete` sont calculés dans `PdfPersonnageCreationFeldo2P` mais ne
+  semblent lus nulle part ensuite dans cette procédure (contrairement à l'ancienne
+  `PdfPersonnageCreation`, qui les affiche via `WriteText` sur une silhouette de
+  protection, lignes ~1600-1613) — possible fonctionnalité manquante sur la page 2 du
+  PDF (silhouette/tableau de protection par emplacement du corps absent). Comportement
+  préservé tel quel par cette extraction (gardés en `out` params, aucune suppression) ;
+  à investiguer/concevoir séparément si Nono confirme le manque. Poussé le 15/08/2026,
+  confirmé par Nono ("cela compile et donne une résultat juste") — les 4 boucles de
+  remplissage sont validées.
+- ✅ Cadre "DessinExplication" (affichage des libellés de bonus/malus accumulés pour
+  Armures/Armes/Fabrication, dernier bloc de `PdfPersonnageCreationFeldo2P` avant la
+  sauvegarde du PDF) extrait dans `PdfBlocDessinExplication`. Contrairement aux 4
+  boucles de remplissage ci-dessus (qui remplissent un cadre déjà dessiné ailleurs),
+  ce bloc dessine lui-même son propre cadre : troisième pattern de bloc (cadre +
+  contenu combinés dans une seule procédure), en plus des blocs "cadre seul" et
+  "remplissage seul" déjà établis. `ArmureBonii`/`ArmeBonii`/`FabricationBonii` reçus
+  déjà construits et dédoublonnés (le dédoublonnage se fait en amont, rien à refaire
+  ici). `NbBonus` reste un compteur de ligne **PARTAGÉ** entre les trois sections,
+  jamais remis à zéro entre elles (comportement intentionnel préservé tel quel, à la
+  différence de `NbSort`/`IndDivers`/`NbArme`/`NbArmure` qui sont chacun réinitialisés
+  au début de leur propre boucle). Nettoyage au passage : `NbBonus`, `NbLoca`,
+  `IndLoca`, `PArmureBonus`, `PArmeBonus`, `PFabrication`, `TxtBonus` retirés du bloc
+  `var` principal (devenus inutilisés) ; `LocData` gardé (reréutilisé plus loin dans
+  une boucle Métier sans rapport) ; `DessinHauteurExl` gardé (passé en paramètre
+  `HauteurLigne` à l'appel de `PdfBlocDessinExplication`, donc toujours en usage).
+  **Incohérence pré-existante signalée à Nono, non corrigée** : l'entête de la section
+  Fabrication utilise un `X=15` en dur (`PdfPage.WriteText(15, ...)`) au lieu de
+  `XGauche + 4` comme les entêtes Armures/Armes et comme toutes les lignes de détail
+  des trois sections (y compris celles de Fabrication elle-même) — désalignement
+  visuel préservé exactement tel quel, avec un commentaire dans le code signalant le
+  problème. Poussé le 15/08/2026, pas encore testé/compilé par Nono.
 
 **Nettoyage variables inutilisées** : un passage de compilation du 15/08/2026 a
 remonté plusieurs "Note: Local variable ... not used" dans
 `PdfPersonnageCreationFeldo2P`. Quatre étaient une conséquence directe du découpage
 (`DessinNbLigCarac`, `DessinNbColCarac`, `DessinNbColComp`, `DessinNbColComg` —
 supprimées du bloc `var`). Les autres sont préexistantes, sans lien avec ce chantier
-(`PMetierAttribut`, `Comp`, `ValStat`, `ValBonus`, `ValTotal`, `ArmureBouclier`,
+(`PMetierAttribut`, `Comp`, `ValStat`, `ValBonus`, `ValTotal`,
 `PersonnageCompetence`, `NivCompMetier`, `AmePure` à la ligne 535 — pas celui du bloc
 Corruption, qui lui est utilisé) — reportées dans `A FAIRE.txt`, à traiter avec le
-nettoyage des blocs morts.
+nettoyage des blocs morts. (`ArmureBouclier` faisait partie de cette liste ; retiré du
+`var` block lors de l'extraction d'Armes, n'y figure donc plus.)
 
-**Prochaine étape** : continuer l'extraction des cadres page 2 un par un (Sorts, puis
-Encombrement — même schéma que `PdfBlocArmures`/`PdfBlocEquipement`/`PdfBlocArmes`),
-compilation entre chaque (règle §0). Une fois les 5 cadres extraits, découper le
-remplissage des tableaux en 4 boucles séparées + totaux en `out` params, selon les
-décisions de conception validées ci-dessus. Une fois `PdfPersonnageCreationFeldo2P`
-terminée, appliquer la même approche à `PdfPersonnageCreation`.
+**Confirmation de la découverte ci-dessus (15/08/2026)** : Nono confirme que le bloc
+"Armour Points" (silhouette + valeurs de protection par emplacement du corps - Tête,
+Bras, Corps, Jambes, Bouclier) existe bien dans l'autre PDF (`PdfPersonnageCreation`,
+page 1, lignes ~1594-1613) et veut qu'il soit ajouté à `PdfPersonnageCreationFeldo2P`,
+sous le bloc Encombrement de la page 2. Repéré dans le code source : le bloc n'est
+que des `PdfPage.WriteText` de valeurs numériques à des coordonnées absolues fixes
+(145/190, 145/207.5, 184.5/195.5, etc.) - la silhouette, les cases et le losange
+"Shield" eux-mêmes viennent d'une image de fond déjà présente sur le template PDF
+utilisé par `PdfPersonnageCreation`, pas dessinés par ce code Pascal. Le modèle de
+données ne distingue pas gauche/droite : `ArmureBras` sert aux deux bras (primaire ET
+secondaire), `ArmureJambe` aux deux jambes, une seule valeur écrite deux fois à des
+coordonnées différentes. `ArmureBouclier` (protection du bouclier, calculée à part
+dans les branches Armes - voir plus haut) fait aussi partie de ce bloc. À concevoir
+avant de coder : d'où vient l'image de fond de la silhouette pour du PdfPersonnageCreationFeldo2P
+(même asset que l'autre PDF ? à ajouter au template page 2 ?), et les coordonnées
+relatives (Dessin...) équivalentes pour ce nouveau bloc, positionné sous
+`DessinDebutHautEnc`/`DessinNbLigEnc`/`DessinHauteurEnc` (bas du cadre Encombrement).
+
+**Prochaine étape** : Nono confirme que l'extraction de "DessinExplication"
+(`PdfBlocDessinExplication`) est bonne et va commit avant d'attaquer la suite.
+**Avec ce point validé, toute l'extraction Bloc/Tableau du corps de
+`PdfPersonnageCreationFeldo2P` est terminée** (5 blocs cadre seul, 4 boucles de
+remplissage, 1 cadre+contenu). Reste alors, à la demande de Nono, à concevoir puis
+ajouter le bloc "Armour Points" sous l'Encombrement (voir ci-dessus - questions de
+conception à trancher avant de coder : source de l'image de fond de la silhouette pour
+`PdfPersonnageCreationFeldo2P`, et coordonnées relatives `Dessin...` du nouveau bloc).
+Puis le bloc Blessure actif et le bloc Compétence de combat de la page 2 (candidats
+pour une brique ultérieure, non demandés
+pour l'instant). Une fois `PdfPersonnageCreationFeldo2P` totalement terminée, appliquer
+la même approche à `PdfPersonnageCreation`.
 
 ---
 
@@ -361,6 +481,25 @@ chantier concerné, avec les détails techniques.
   dernière unité du `uses` gagne. `Ctrl+Clic` mène à la déclaration réellement utilisée.
   Convention à tenir : les globales partagées vivent uniquement dans `ChargeConstantes`.
 - Éditer un `.lfm` à la main : fermer Lazarus d'abord, remplacer les blocs, ne pas les ajouter
+- Ne jamais comparer un `CodeTalent`/`CodeSort`/etc. par position brute (`copy(Code,1,N)`) en
+  supposant l'absence de préfixe de livre (`LIVRE-CODE`) : ça casse dès qu'un livre est ajouté
+  et que le code se retrouve préfixé. Utiliser `DecoupeCodeValeur`/`CodeValeur` (unitcalcul.pas)
+  ou `CompareRechercheValeur`, qui gèrent déjà le découpage. Bug réel trouvé le 15/08/2026 dans
+  `TWinPersonnages.SortAffiche` (winpersonnage.pas) : `copy(Tal,1,5) = TalentSortBenediction`
+  ne matchait plus depuis l'ajout d'un livre, empêchant l'ajout automatique des sorts liés à un
+  talent de Bénédiction - corrigé en insérant `DecoupeCodeValeur(Tal)` avant la comparaison.
+- `CompareRechercheValeur` fait une comparaison EXACTE du code (après retrait du préfixe de
+  livre), pas une comparaison de préfixe : `(LivreRecherche=LivreValeur) and
+  (CodeRecherche=CodeValeur)`. Pour les catégories de talent qui existent en variantes
+  suffixées par divinité/domaine (Miracle `T0080_*`, Domaine `T0088_*` - voir
+  `BOOK_RULESBOOK.Xml`), comparer avec `CompareRechercheValeur(Code, TalentSortMiracle)` ne
+  matche donc jamais, même sans problème de préfixe de livre. Bug réel trouvé le 15/08/2026
+  dans `TWinPersonnages.ButtonSortClick` (winpersonnage.pas) : les trois vérifications
+  (Domaine/Miracle/MagieMineure) utilisaient `CompareRechercheValeur` contre les constantes
+  brutes `TalentSortDomaine`/`TalentSortMiracle`/`TalentSortMagieMineure` - corrigé en
+  `DecoupeCodeValeur(...)` puis `copy(CodeValeur,1,5) = TalentSortXXX` (comparaison de préfixe
+  sur les 5 premiers caractères, cohérente aussi pour MagieMineure/T0089 qui n'a pas de
+  variante suffixée).
 
 ---
 

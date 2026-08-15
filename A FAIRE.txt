@@ -73,10 +73,11 @@ PDF Personnage (PRIORITAIRE) :
   tableau des 9 caractéristiques.
 - nettoyer les variables locales jamais utilisées dans PdfPersonnageCreationFeldo2P
   (relevé Lazarus du 15/08/2026, pré-existantes, pas liées au découpage en cours) :
-  PMetierAttribut, Comp, ValStat, ValBonus, ValTotal, ArmureBouclier,
+  PMetierAttribut, Comp, ValStat, ValBonus, ValTotal,
   PersonnageCompetence, NivCompMetier, AmePure. Pas urgent, à faire en même temps que le
   nettoyage des blocs morts (Blessure, PCM) une fois PdfPersonnageCreationFeldo2P
-  entièrement découpée.
+  entièrement découpée. (ArmureBouclier faisait partie de cette liste ; retiré le
+  15/08/2026 lors de l'extraction du remplissage Armes en PdfBlocArmesDonnees.)
 - (idée fonctionnalité, 15/08/2026, pas conçue) astérisques numérotées croisées dans le
   PDF personnage : aujourd'hui chaque astérisque (talent, compétence/caractéristique)
   s'affiche indépendamment, sans lien entre elles. Nono voudrait qu'un talent (ou une
@@ -88,3 +89,15 @@ PDF Personnage (PRIORITAIRE) :
   affecté avec le type bonus/malus) avant de toucher au code - pas la même chose que le
   mécanisme d'astérisque actuel (TPdfValeurCase.Annotation dans DessinerTableau +
   affichage en dur dans PdfBlocTalents).
+- (idée refonte, 15/08/2026, pas conçue) revoir la gestion des sorts liés aux talents :
+  aujourd'hui ButtonSortClick/SortAffiche (winpersonnage.pas) recherchent par constantes
+  en dur (TalentSortDomaine/TalentSortMiracle/TalentSortMagieMineure/TalentSortBenediction,
+  chargeconstantes.pas) avec une comparaison de préfixe sur le CodeTalent - fragile et pas
+  extensible (un nouveau type de talent "à sorts" oblige à toucher le code). Nono propose :
+  ajouter une information sur le talent (StructureTalent, chargetalent.pas) indiquant si ses
+  sorts s'ajoutent automatiquement ou manuellement, et remplacer la recherche par constantes
+  par une recherche générique - pour les talents en mode manuel, chercher les sorts dont
+  ListeTalent (StructureSort, chargesort.pas) contient le talent, au lieu de comparer des
+  codes de catégorie. À concevoir séparément (nouveau champ + XML, impact sur SortAffiche ET
+  ButtonSortClick, migration des données existantes) avant de toucher au code - fait suite
+  aux deux bugs corrigés le 15/08/2026 sur SortAffiche et ButtonSortClick.

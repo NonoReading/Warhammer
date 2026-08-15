@@ -893,16 +893,21 @@ procedure TWinPersonnages.ButtonSortClick(Sender: TObject);
     // ajouter les domaines
     ListeTalent := '';
     For Ind := 1 to TabTalent.RowCount-1 do
-      case copy(TabTalent.Cells[ColTalCode, ind],1,5) of
-        TalentSortDomaine:      ListeTalent := ListeTalent+' '+TabTalent.Cells[ColTalCode, ind];
+      begin
+        DecoupeCodeValeur(TabTalent.Cells[ColTalCode, ind]);
+        if copy(CodeValeur, 1, 5) = TalentSortDomaine then
+          ListeTalent := ListeTalent+' '+TabTalent.Cells[ColTalCode, ind];
       end;
 
     // si aucun domainge, on peut ajouter les autres
     if ListeTalent = '' then
       For Ind := 1 to TabTalent.RowCount-1 do
-        case copy(TabTalent.Cells[ColTalCode, ind],1,5) of
-          TalentSortMiracle:      ListeTalent := ListeTalent+' '+TabTalent.Cells[ColTalCode, ind];
-          TalentSortMagieMineure: ListeTalent := ListeTalent+' '+TabTalent.Cells[ColTalCode, ind];
+        begin
+          DecoupeCodeValeur(TabTalent.Cells[ColTalCode, ind]);
+          if copy(CodeValeur, 1, 5) = TalentSortMiracle then
+            ListeTalent := ListeTalent+' '+TabTalent.Cells[ColTalCode, ind];
+          if copy(CodeValeur, 1, 5) = TalentSortMagieMineure then
+            ListeTalent := ListeTalent+' '+TabTalent.Cells[ColTalCode, ind];
         end;
 
     if ListeTalent = '' then
@@ -1024,7 +1029,8 @@ Procedure TWinPersonnages.SortAffiche();
       if StrToIntDef(TabAugmentationTalent.Cells[ColAugmTalNouveau, Ind], 0) > StrToIntDef(TabAugmentationTalent.Cells[ColAugmTalActuel, Ind], 0) then
         begin
           Tal := TabAugmentationTalent.Cells[ColAugmTalCode, Ind];
-          if copy(Tal,1,5) = TalentSortBenediction then
+          DecoupeCodeValeur(Tal);
+          if copy(CodeValeur,1,5) = TalentSortBenediction then
             begin
               For Psort in ListSort do
                 if Pos(Tal, PSort.ListeTalent) > 0 then
@@ -1035,7 +1041,7 @@ Procedure TWinPersonnages.SortAffiche();
                     TabSort.Cells[3, TabSort.RowCount-1]   := Tal;
                   end;
             end
-          else if copy(Tal,1,5) = TalentSortMiracle then
+          else if copy(CodeValeur,1,5) = TalentSortMiracle then
             begin
               TabSort.Visible                     := true;
               TabSort.RowCount                    := TabSort.RowCount + 1;

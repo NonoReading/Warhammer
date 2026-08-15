@@ -19,7 +19,7 @@
         <HasResources Value="True"/>
         <ResourceBaseClass Value="Form"/>
         <UnitName Value="WarhammerSource"/>
-        <EditorIndex Value="11"/>
+        <EditorIndex Value="12"/>
         <TopLine Value="423"/>
         <CursorPos X="32" Y="435"/>
         <UsageCount Value="200"/>
@@ -33,7 +33,7 @@
         <HasResources Value="True"/>
         <ResourceBaseClass Value="Form"/>
         <UnitName Value="WinCompetence"/>
-        <EditorIndex Value="6"/>
+        <EditorIndex Value="7"/>
         <TopLine Value="202"/>
         <CursorPos X="31" Y="213"/>
         <UsageCount Value="200"/>
@@ -52,7 +52,7 @@
         <Filename Value="chargeconstantes.pas"/>
         <IsPartOfProject Value="True"/>
         <UnitName Value="ChargeConstantes"/>
-        <EditorIndex Value="7"/>
+        <EditorIndex Value="8"/>
         <TopLine Value="216"/>
         <CursorPos X="31" Y="229"/>
         <UsageCount Value="200"/>
@@ -201,7 +201,7 @@
         <Filename Value="globalfonts.pas"/>
         <IsPartOfProject Value="True"/>
         <UnitName Value="GlobalFonts"/>
-        <EditorIndex Value="3"/>
+        <EditorIndex Value="4"/>
         <TopLine Value="291"/>
         <CursorPos X="21" Y="299"/>
         <UsageCount Value="200"/>
@@ -224,10 +224,11 @@
         <Filename Value="unitcalcul.pas"/>
         <IsPartOfProject Value="True"/>
         <UnitName Value="UnitCalcul"/>
-        <EditorIndex Value="-1"/>
-        <TopLine Value="443"/>
-        <CursorPos X="13" Y="459"/>
+        <EditorIndex Value="3"/>
+        <TopLine Value="442"/>
+        <CursorPos X="32" Y="453"/>
         <UsageCount Value="200"/>
+        <Loaded Value="True"/>
       </Unit>
       <Unit>
         <Filename Value="chargetalentcreation.pas"/>
@@ -246,8 +247,8 @@
         <ResourceBaseClass Value="Form"/>
         <UnitName Value="WinPersonnage"/>
         <EditorIndex Value="2"/>
-        <TopLine Value="6"/>
-        <CursorPos X="28" Y="13"/>
+        <TopLine Value="896"/>
+        <CursorPos X="83" Y="910"/>
         <UsageCount Value="200"/>
         <Loaded Value="True"/>
         <LoadedDesigner Value="True"/>
@@ -413,7 +414,7 @@
         <HasResources Value="True"/>
         <ResourceBaseClass Value="Form"/>
         <UnitName Value="WinSpecialisation"/>
-        <EditorIndex Value="5"/>
+        <EditorIndex Value="6"/>
         <TopLine Value="94"/>
         <CursorPos X="39" Y="106"/>
         <UsageCount Value="200"/>
@@ -491,9 +492,9 @@
         <IsPartOfProject Value="True"/>
         <UnitName Value="PdfPersonnage"/>
         <IsVisibleTab Value="True"/>
-        <EditorIndex Value="10"/>
-        <TopLine Value="2198"/>
-        <CursorPos X="27" Y="2210"/>
+        <EditorIndex Value="11"/>
+        <TopLine Value="2203"/>
+        <CursorPos X="48" Y="2211"/>
         <UsageCount Value="200"/>
         <Loaded Value="True"/>
       </Unit>
@@ -519,7 +520,7 @@
         <Filename Value="chargetraduction.pas"/>
         <IsPartOfProject Value="True"/>
         <UnitName Value="ChargeTraduction"/>
-        <EditorIndex Value="12"/>
+        <EditorIndex Value="13"/>
         <TopLine Value="201"/>
         <CursorPos X="11" Y="214"/>
         <UsageCount Value="200"/>
@@ -532,7 +533,7 @@
         <HasResources Value="True"/>
         <ResourceBaseClass Value="Form"/>
         <UnitName Value="WinLivre"/>
-        <EditorIndex Value="8"/>
+        <EditorIndex Value="9"/>
         <CursorPos X="65" Y="10"/>
         <UsageCount Value="200"/>
         <Loaded Value="True"/>
@@ -542,7 +543,7 @@
         <Filename Value="chargelivre.pas"/>
         <IsPartOfProject Value="True"/>
         <UnitName Value="ChargeLivre"/>
-        <EditorIndex Value="9"/>
+        <EditorIndex Value="10"/>
         <TopLine Value="33"/>
         <CursorPos Y="36"/>
         <UsageCount Value="185"/>
@@ -589,7 +590,7 @@
         <HasResources Value="True"/>
         <ResourceBaseClass Value="Form"/>
         <UnitName Value="WinLanceDe"/>
-        <EditorIndex Value="4"/>
+        <EditorIndex Value="5"/>
         <TopLine Value="35"/>
         <CursorPos X="53" Y="47"/>
         <UsageCount Value="47"/>
@@ -1214,49 +1215,6 @@
     </Units>
     <JumpHistory HistoryIndex="29">
       <Position>
-        <Filename Value="globalfonts.pas"/>
-        <Caret Line="75" Column="37" TopLine="68"/>
-      </Position>
-      <Position>
-        <Filename Value="globalfonts.pas"/>
-        <Caret Line="25" Column="104" TopLine="13"/>
-      </Position>
-      <Position>
-        <Filename Value="winpersonnage.pas"/>
-        <Caret Line="92" Column="19" TopLine="82"/>
-      </Position>
-      <Position>
-        <Filename Value="winpersonnage.pas"/>
-        <Caret Line="1075" Column="14" TopLine="1062"/>
-      </Position>
-      <Position>
-        <Filename Value="winpersonnage.pas"/>
-        <Caret Line="122" Column="5" TopLine="112"/>
-      </Position>
-      <Position>
-        <Filename Value="winpersonnage.pas"/>
-        <Caret Line="430" TopLine="411"/>
-      </Position>
-      <Position>
-        <Filename Value="winpersonnage.pas"/>
-        <Caret Line="419" Column="28" TopLine="415"/>
-      </Position>
-      <Position>
-        <Filename Value="winpersonnage.pas"/>
-      </Position>
-      <Position>
-        <Filename Value="winpersonnage.pas"/>
-        <Caret Line="423" TopLine="411"/>
-      </Position>
-      <Position>
-        <Filename Value="winpersonnage.pas"/>
-        <Caret Line="4393" TopLine="4371"/>
-      </Position>
-      <Position>
-        <Filename Value="winpersonnage.pas"/>
-        <Caret Line="4374" Column="24" TopLine="4361"/>
-      </Position>
-      <Position>
         <Filename Value="winpersonnage.pas"/>
         <Caret Line="4372" Column="25" TopLine="4372"/>
       </Position>
@@ -1331,6 +1289,50 @@
       <Position>
         <Filename Value="pdfpersonnage.pas"/>
         <Caret Line="2117" Column="33" TopLine="2098"/>
+      </Position>
+      <Position>
+        <Filename Value="pdfpersonnage.pas"/>
+        <Caret Line="2214" Column="16" TopLine="2201"/>
+      </Position>
+      <Position>
+        <Filename Value="winpersonnage.pas"/>
+        <Caret Line="894" TopLine="889"/>
+      </Position>
+      <Position>
+        <Filename Value="winpersonnage.pas"/>
+        <Caret Line="895" TopLine="889"/>
+      </Position>
+      <Position>
+        <Filename Value="winpersonnage.pas"/>
+        <Caret Line="896" Column="54" TopLine="889"/>
+      </Position>
+      <Position>
+        <Filename Value="unitcalcul.pas"/>
+        <Caret Line="218" Column="39" TopLine="208"/>
+      </Position>
+      <Position>
+        <Filename Value="winpersonnage.pas"/>
+        <Caret Line="893" Column="37" TopLine="878"/>
+      </Position>
+      <Position>
+        <Filename Value="winpersonnage.pas"/>
+        <Caret Line="896" Column="12" TopLine="886"/>
+      </Position>
+      <Position>
+        <Filename Value="unitcalcul.pas"/>
+        <Caret Line="453" Column="32" TopLine="442"/>
+      </Position>
+      <Position>
+        <Filename Value="winpersonnage.pas"/>
+        <Caret Line="897" TopLine="886"/>
+      </Position>
+      <Position>
+        <Filename Value="winpersonnage.pas"/>
+        <Caret Line="896" Column="90" TopLine="886"/>
+      </Position>
+      <Position>
+        <Filename Value="winpersonnage.pas"/>
+        <Caret Line="899" TopLine="889"/>
       </Position>
     </JumpHistory>
     <RunParams>
