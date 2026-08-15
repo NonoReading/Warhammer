@@ -77,3 +77,14 @@ PDF Personnage (PRIORITAIRE) :
   PersonnageCompetence, NivCompMetier, AmePure. Pas urgent, à faire en même temps que le
   nettoyage des blocs morts (Blessure, PCM) une fois PdfPersonnageCreationFeldo2P
   entièrement découpée.
+- (idée fonctionnalité, 15/08/2026, pas conçue) astérisques numérotées croisées dans le
+  PDF personnage : aujourd'hui chaque astérisque (talent, compétence/caractéristique)
+  s'affiche indépendamment, sans lien entre elles. Nono voudrait qu'un talent (ou une
+  armure, qui donne généralement des malus aux compétences type Perception/Discrétion)
+  qui affecte une caractéristique ou une compétence porte une astérisque numérotée, et
+  que l'élément affecté porte la même astérisque numérotée en face - un vrai renvoi
+  numéroté partagé entre les deux affichages, pas juste "il y a un bonus ici". À
+  concevoir séparément (numérotation par personnage, table talent/armure -> élément
+  affecté avec le type bonus/malus) avant de toucher au code - pas la même chose que le
+  mécanisme d'astérisque actuel (TPdfValeurCase.Annotation dans DessinerTableau +
+  affichage en dur dans PdfBlocTalents).

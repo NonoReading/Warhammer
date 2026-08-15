@@ -260,9 +260,63 @@ compilation et comparé visuellement à l'original — rendu identique)** :
   `TotalResitance`/`TotalCommandement`/`TotalIntuition`, sortis en paramètres `out` de
   `PdfPreparerRecordSetCompetencesBase` précisément pour cette réutilisation). C'est un
   doublon voulu, pas une redondance à supprimer.
-- ⏳ Reste dans le bloc monolithique d'origine : Talents, Armes, Armures, Sorts (page
-  1 et 2), puis le bloc Blessure actif et le bloc Compétence de combat de la page 2
-  (candidats pour une brique ultérieure une fois les tableaux répétitifs terminés).
+- ✅ Bloc Talents (`PdfBlocTalents`) — liste répétitive à deux passes (talents acquis,
+  puis talents accessibles via le métier mais pas encore pris, grisés), du même esprit
+  que Compétences groupées, mais gardée en bloc simple plutôt que réécrite avec
+  `DessinerTableau` : la colonne Description a un décalage vertical qui dépend de la
+  longueur du texte (`Length(Resume) > 20` → `+1.5` au lieu de `+1`, pour recentrer un
+  résumé probablement affiché sur 2 lignes par `PdfEcrit`), un cas que le tableau
+  générique ne modélise pas aujourd'hui — pas de généralisation forcée pour un seul
+  cas. Utilise directement les globales `ListTalent`/`ListMetierTalent`/`ChercheTalent`
+  (déjà globales dans l'ancien code). Au passage, nettoyage de 6 variables devenues
+  inutilisées par le découpage dans `PdfPersonnageCreationFeldo2P` (`PTalent`,
+  `PMetierTalent`, `TalentDonnee`, `NivTalMetier`, `ListeTalent`, `NbLigne`).
+- ✅ Bloc Armures, cadre uniquement (`PdfBlocArmures`) — page 2. Structure différente
+  des blocs précédents : dans le code d'origine, tous les cadres de la page 2
+  (Armures/Équipement/Armes/Sorts/Encombrement) sont dessinés à la suite, PUIS une
+  seule boucle plus loin (`for PersonnageEquipement in Personnage.Equipement`)
+  remplit les lignes des 4 tableaux (Armes/Armures/Équipement-Divers/Sorts) en un seul
+  passage, en accumulant des totaux partagés (`EncArme`, `EncArmure`, `ArmureBras`/
+  `Corps`/`Jambe`/`Tete`, `NbArme`/`NbArmure`/`NbSort`, `ArmureBonii`/`ArmeBonii`/
+  `FabricationBonii`) réutilisés encore plus loin par le bloc Encombrement (valeurs) et
+  par le cadre "DessinExplication" en fin de page. Extraire ce remplissage bloc par
+  bloc comme pour Talents casserait ce partage de totaux entre 4 tableaux + 2 blocs
+  aval — nécessite une vraie discussion de conception (regrouper le calcul des totaux
+  avant l'affichage ? les faire remonter en `out` comme
+  `PdfPreparerRecordSetCompetencesBase` ?) avant d'y toucher, pas juste un découpage
+  mécanique. Pour avancer sans bloquer, seuls les 5 cadres (dessin du cadre + en-têtes,
+  sans les données) sont extraits un par un pour l'instant, en gardant le remplissage
+  dans la procédure principale. `PdfBlocArmures` ne prend pas `MinPolice` (aucun
+  `PdfEcrit`, uniquement des libellés fixes via `PdfCentre`). Point d'attention
+  particulier : `DessinDebutHautArm` (Y du haut) et `DessinLargeurArm` (bord droit)
+  sont relus bien plus loin (cadre "DessinExplication", ~L.3341) — l'appelant garde
+  donc ses propres variables, le bloc ne fait que dessiner avec les valeurs qu'on lui
+  passe.
+- ✅ Bloc Équipement, cadre uniquement (`PdfBlocEquipement`) — même principe que
+  `PdfBlocArmures`. Point curieux préservé tel quel (pas un bug, confirmé par Nono) :
+  la grille de colonnes Nom/Encombrement est doublée (répétée deux fois dans
+  l'en-tête) parce que la liste "Divers" se répartit sur deux demi-colonnes quand elle
+  dépasse la hauteur du cadre (le remplissage bascule sur
+  `IndDivers > DessinNbLigEqu - 1`) — volontaire, pour ne pas prendre trop de place en
+  hauteur si la liste s'allonge.
+- ✅ Bloc Armes, cadre uniquement (`PdfBlocArmes`) — même principe.
+- **Décisions de conception validées par Nono (15/08/2026)** pour le remplissage des 4
+  tableaux (Armes/Armures/Équipement-Divers/Sorts) : (1) le découper en 4 boucles
+  séparées plutôt que garder le passage unique actuel — Nono confirme que parcourir 4
+  fois `Personnage.Equipement` n'a aucun impact perf vu la taille des données ; (2)
+  faire remonter les totaux partagés (`EncArme`, `EncArmure`, `ArmureBras/Corps/Jambe/
+  Tete`, `ArmureBonii`, `ArmeBonii`, `FabricationBonii`) en paramètres `out`, même
+  principe que `PdfPreparerRecordSetCompetencesBase` pour les compétences de combat ;
+  (3) le cadre "DessinExplication" (affichage des libellés de bonus/malus accumulés)
+  peut lui aussi devenir une boucle à part — contrainte à respecter : ne pas afficher
+  deux fois la même info de bonus/malus si elle est présente sur plusieurs
+  équipements (dédoublonnage déjà présent dans le code via `Pos(...) = 0` avant
+  d'ajouter à `ArmureBonii`/`ArmeBonii` — à bien vérifier qu'il survit au découpage).
+- ⏳ Reste dans le bloc monolithique d'origine : cadres Sorts/Encombrement (page 2,
+  même schéma que Armures/Équipement/Armes ci-dessus), puis le remplissage des 4
+  tableaux en 4 boucles séparées + `out` params (voir décisions ci-dessus), puis le
+  bloc Blessure actif et le bloc Compétence de combat de la page 2 (candidats pour une
+  brique ultérieure une fois les tableaux répétitifs terminés).
 
 **Nettoyage variables inutilisées** : un passage de compilation du 15/08/2026 a
 remonté plusieurs "Note: Local variable ... not used" dans
@@ -274,8 +328,11 @@ supprimées du bloc `var`). Les autres sont préexistantes, sans lien avec ce ch
 Corruption, qui lui est utilisé) — reportées dans `A FAIRE.txt`, à traiter avec le
 nettoyage des blocs morts.
 
-**Prochaine étape** : continuer bloc par bloc / tableau par tableau sur Talents, Armes,
-Armures, Sorts, compilation entre chaque (règle §0). Une fois `PdfPersonnageCreationFeldo2P`
+**Prochaine étape** : continuer l'extraction des cadres page 2 un par un (Sorts, puis
+Encombrement — même schéma que `PdfBlocArmures`/`PdfBlocEquipement`/`PdfBlocArmes`),
+compilation entre chaque (règle §0). Une fois les 5 cadres extraits, découper le
+remplissage des tableaux en 4 boucles séparées + totaux en `out` params, selon les
+décisions de conception validées ci-dessus. Une fois `PdfPersonnageCreationFeldo2P`
 terminée, appliquer la même approche à `PdfPersonnageCreation`.
 
 ---
