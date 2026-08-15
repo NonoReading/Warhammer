@@ -237,12 +237,13 @@ Procedure PdfBlocDiversDonnees(PdfPage: TPDFPage; Personnage: StructurePersonnag
 // s'écraser. EncArme et ArmeBonii sont remontés en `out` car réutilisés par le bloc
 // Encombrement et DessinExplication, plus loin dans la procédure principale. BF (bonus
 // Force) et TBonusCC/TBonusCT (bonus de dégât Corps-à-corps/Tir, déjà calculés plus
-// haut dans la procédure principale) sont passés en lecture seule. NbArme, Quality,
-// ArmureBouclier restent purement locaux (ArmureBouclier est déjà écrit mais jamais
-// relu dans PdfPersonnageCreationFeldo2P - pré-existant, voir A FAIRE.txt, pas touché
-// ici). Armures reste pour l'instant dans la boucle partagée de la procédure
-// principale (prochaine étape).
-Procedure PdfBlocArmesDonnees(PdfPage: TPDFPage; Personnage: StructurePersonnage; XGauche, XDroite, Y, HauteurLigne: Single; BF, TBonusCC, TBonusCT: Integer; var FabricationBonii: String; out EncArme: Integer; out ArmeBonii: String; MinPolice: Integer);
+// haut dans la procédure principale) sont passés en lecture seule. NbArme, Quality
+// restent purement locaux. ArmureBouclier (protection du bouclier, calculée ici quand
+// une arme porte le bonus "protection") est désormais remonté en `out` lui aussi
+// (15/08/2026, ajout du bloc "Armour Points") : il était déjà écrit mais jamais relu
+// avant cet ajout - voir CONTEXT.md §2.4 - il sert maintenant à afficher la valeur du
+// Bouclier dans le nouveau bloc PdfBlocArmourPoints.
+Procedure PdfBlocArmesDonnees(PdfPage: TPDFPage; Personnage: StructurePersonnage; XGauche, XDroite, Y, HauteurLigne: Single; BF, TBonusCC, TBonusCT: Integer; var FabricationBonii: String; out EncArme: Integer; out ArmeBonii: String; out ArmureBouclier: Integer; MinPolice: Integer);
 
 // Bloc Armures (page 2, remplissage des données) — dernière des 4 boucles de
 // remplissage à être séparée (CONTEXT.md §2.4). Filtre sur TypeEquipAR (armure
@@ -278,6 +279,29 @@ Procedure PdfBlocArmuresDonnees(PdfPage: TPDFPage; Personnage: StructurePersonna
 // `XGauche + 4` - l'en-tête Fabrication est donc décalé par rapport au reste du bloc.
 // Reproduit à l'identique (littéral 15 conservé).
 Procedure PdfBlocDessinExplication(PdfPage: TPDFPage; XGauche, XDroite, YHaut, YBas, HauteurLigne: Single; ArmureBonii, ArmeBonii, FabricationBonii: String);
+
+// Bloc Armour Points (page 2, cadre + contenu) — silhouette/valeurs de protection par
+// emplacement du corps (Tête/Bras/Corps/Jambes/Bouclier), demandée par Nono le
+// 15/08/2026 pour compléter Feldo2P (absente jusqu'ici, contrairement à l'ancienne
+// PdfPersonnageCreation - voir CONTEXT.md §2.4). Positionnée sous le bloc Encombrement.
+// Comme DessinExplication, ce bloc dessine son propre "cadre" (ici une image + des
+// petits encadrés vectoriels) et son contenu dans la même procédure. Contrairement aux
+// autres blocs, il combine une image de fond (SHADOW.png, silhouette du personnage,
+// chargée par l'appelant via PdfDoc.Images.AddFromFile car PdfDoc n'est pas accessible
+// depuis un bloc séparé - seul l'identifiant d'image `PdfImgShadow` est passé ici) et
+// des encadrés vectoriels dessinés par l'utilitaire déjà partagé `PdfEncadre`
+// (PdfUtils.pas) - un appel par emplacement, dont un avec `Bouclier = true` qui dessine
+// un losange au lieu d'un rectangle. (X, Y) est le coin bas-gauche de l'image (55x72mm,
+// taille identique à l'ancien PDF), exactement comme (135,190) l'était dans l'ancien
+// PdfPersonnageCreation - tous les décalages internes ci-dessous reproduisent à
+// l'identique les coordonnées absolues de l'ancien bloc, simplement traduites par
+// rapport à ce nouveau point d'ancrage (même tailles, mêmes écarts relatifs, validé
+// avec Nono). PdfFontBack/PdfFontValue sont des globales (ChargeConstantes.pas), pas
+// des paramètres - PdfEncadre écrit ses étiquettes avec la police d'en-tête
+// (PdfFontBack, Carlson Bold 10, comme dans l'ancien PDF) puis on repasse en
+// PdfFontValue/Arial 9 pour écrire les valeurs numériques, à l'identique de l'ancien
+// bloc.
+Procedure PdfBlocArmourPoints(PdfPage: TPDFPage; PdfImgShadow: Integer; X, Y: Single; ArmureTete, ArmureBras, ArmureCorps, ArmureJambe, ArmureBouclier: Integer);
 
 // Brique 2 (tableau de données, CONTEXT.md §2.4) — DessinerTableau est générique : elle
 // dessine le cadre et le contenu à partir de Tableau (mise en page) et Donnees (valeurs déjà
@@ -2207,7 +2231,7 @@ Procedure PdfBlocDiversDonnees(PdfPage: TPDFPage; Personnage: StructurePersonnag
         end;
   end;
 
-Procedure PdfBlocArmesDonnees(PdfPage: TPDFPage; Personnage: StructurePersonnage; XGauche, XDroite, Y, HauteurLigne: Single; BF, TBonusCC, TBonusCT: Integer; var FabricationBonii: String; out EncArme: Integer; out ArmeBonii: String; MinPolice: Integer);
+Procedure PdfBlocArmesDonnees(PdfPage: TPDFPage; Personnage: StructurePersonnage; XGauche, XDroite, Y, HauteurLigne: Single; BF, TBonusCC, TBonusCT: Integer; var FabricationBonii: String; out EncArme: Integer; out ArmeBonii: String; out ArmureBouclier: Integer; MinPolice: Integer);
   var
     PersonnageEquipement: StructurePersonnageEquipement;
     PArme:                StructureArme;
@@ -2226,17 +2250,17 @@ Procedure PdfBlocArmesDonnees(PdfPage: TPDFPage; Personnage: StructurePersonnage
     PorteMoyenne:          Integer;
     Deg:                   Integer;
     PosProtection:         SizeInt;
-    ArmureBouclier:        Integer;
     NbLoca:                Integer;
     IndLoca:               Integer;
     LocData:               String;
     LigneBonus:            String;
     ListMalii:             String;
   begin
-    EncArme    := 0;
-    ArmeBonii  := '';
-    NbArme     := 0;
-    Bidon      := 0;
+    EncArme        := 0;
+    ArmeBonii      := '';
+    ArmureBouclier := 0;
+    NbArme         := 0;
+    Bidon          := 0;
     for PersonnageEquipement in Personnage.Equipement do
       if PersonnageEquipement.TypeEquipement = TypeEquipWe then
         begin
@@ -2553,6 +2577,61 @@ Procedure PdfBlocDessinExplication(PdfPage: TPDFPage; XGauche, XDroite, YHaut, Y
             PdfPage.WriteText(XGauche + 4,YHaut-(NbBonus*HauteurLigne), TxtBonus);
           end;
       end;
+  end;
+
+Procedure PdfBlocArmourPoints(PdfPage: TPDFPage; PdfImgShadow: Integer; X, Y: Single; ArmureTete, ArmureBras, ArmureCorps, ArmureJambe, ArmureBouclier: Integer);
+  var
+    ImgX: Single;
+    ImgY: Single;
+  begin
+    // (X, Y) = coin HAUT-GAUCHE du cadre (corrigé le 15/08/2026 suite au retour de
+    // Nono : doit tomber exactement sous le coin bas-gauche du cadre Encombrement,
+    // comme les autres blocs de la page s'alignent entre eux). L'image (55x72mm) est
+    // décalée de 4mm par rapport au cadre à gauche/haut/droite, et 8mm en bas pour
+    // laisser la place à l'étiquette "Shield" qui déborde sous l'image (PdfEncadre,
+    // Bouclier = true, Bas = 7.5).
+    ImgX := X + 4;
+    ImgY := Y - 4 - 72;
+
+    // Cadre
+    PdfPage.DrawLine(X     , Y - 84, X     , Y     , 1);
+    PdfPage.DrawLine(X + 63, Y - 84, X + 63, Y     , 1);
+    PdfPage.DrawLine(X     , Y     , X + 63, Y     , 1);
+    PdfPage.DrawLine(X     , Y - 84, X + 63, Y - 84, 1);
+
+    // Image de fond (silhouette), taille fixe 55x72mm comme dans l'ancien
+    // PdfPersonnageCreation. (ImgX,ImgY) = coin bas-gauche de l'image, comme
+    // (135,190) dans l'ancien PDF - tous les décalages ci-dessous reproduisent à
+    // l'identique les coordonnées absolues de l'ancien bloc, juste traduites par
+    // rapport à ce nouveau point d'ancrage.
+    PdfPage.DrawImage(ImgX, ImgY, 55, 72, PdfImgShadow);
+
+    PdfTaillePolice(PdfPage, PdfFontBack, ConstPoliceCarlson+ConstPoliceGras, 10);
+    PdfEncadre(PdfPage, ImgX + 10  , ImgY + 60  , false, GetTexteLibelle('PDF_ARMOURPOINT_HEAD'), '', '01-09');
+    PdfEncadre(PdfPage, ImgX + 10  , ImgY + 39  , false, GetTexteLibelle('PDF_ARMOURPOINT_RIGHTARM1'), GetTexteLibelle('PDF_ARMOURPOINT_RIGHTARM2'), '25-44');
+    PdfEncadre(PdfPage, ImgX + 10  , ImgY + 17.5, false, GetTexteLibelle('PDF_ARMOURPOINT_RIGHTLEG'), '', '90-00');
+    PdfEncadre(PdfPage, ImgX + 10  , ImgY       , true , GetTexteLibelle('PDF_ARMOURPOINT_SHIELD'), '', '');
+    PdfEncadre(PdfPage, ImgX + 49.5, ImgY + 51  , false, GetTexteLibelle('PDF_ARMOURPOINT_LEFTARM1'), GetTexteLibelle('PDF_ARMOURPOINT_LEFTARM2'), '10-24');
+    PdfEncadre(PdfPage, ImgX + 49.5, ImgY + 29.5, false, GetTexteLibelle('PDF_ARMOURPOINT_BODY'), '', '45-79');
+    PdfEncadre(PdfPage, ImgX + 49.5, ImgY + 5.5 , false, GetTexteLibelle('PDF_ARMOURPOINT_LEFTLEG'), '', '80-89');
+
+    PdfTaillePolice(PdfPage, PdfFontValue, ConstPoliceArial, 9);
+    if ArmureBouclier > 0 then
+      PdfPage.WriteText(ImgX + 10, ImgY, IntToStr(ArmureBouclier));
+    if ArmureJambe > 0 then
+      begin
+        PdfPage.WriteText(ImgX + 10  , ImgY + 17.5, IntToStr(ArmureJambe));
+        PdfPage.WriteText(ImgX + 49.5, ImgY + 5.5 , IntToStr(ArmureJambe));
+      end;
+    if ArmureBras > 0 then
+      begin
+        PdfPage.WriteText(ImgX + 10  , ImgY + 39, IntToStr(ArmureBras));
+        PdfPage.WriteText(ImgX + 49.5, ImgY + 51, IntToStr(ArmureBras));
+      end;
+    if ArmureTete > 0 then
+      PdfPage.WriteText(ImgX + 10, ImgY + 60, IntToStr(ArmureTete));
+    if ArmureCorps > 0 then
+      PdfPage.WriteText(ImgX + 49.5, ImgY + 29.5, IntToStr(ArmureCorps));
   end;
 
 // Cherche la valeur du champ nommé Champ dans Enr. Renvoie une case vide (Valeur = '') si le
@@ -3036,6 +3115,8 @@ Procedure PdfPersonnageCreationFeldo2P(Personnage: StructurePersonnage);
     ArmureBras:      Integer;
     ArmureCorps:     Integer;
     ArmureJambe:     Integer;
+    ArmureBouclier:  Integer;
+    DessinHautArmourPoints: Single;
     LocData:         String;
     ArmeBonii:       String = '';
     ArmureBonii:     String = '';
@@ -3090,6 +3171,7 @@ Procedure PdfPersonnageCreationFeldo2P(Personnage: StructurePersonnage);
         PdfImgWarhammer: Integer;
         PdfImgFantasy:   Integer;
         PdfImgUbersreik: Integer;
+        PdfImgShadow:    Integer;
         // Entete
         DessinDebutHautEntete:Single  = 285;
         DessinHauteurEntete:  Single  = 4.5;
@@ -3499,6 +3581,10 @@ Procedure PdfPersonnageCreationFeldo2P(Personnage: StructurePersonnage);
      PdfPage.PaperType:= ptA4;
      PdfPage.UnitOfMeasure := uomMillimeters;
      PdfTaillePolice(PdfPage, PdfFontBack, ConstPoliceCarlson+ConstPoliceGras, 10);
+     // silhouette du bloc "Armour Points" (PdfBlocArmourPoints, ajouté le 15/08/2026,
+     // CONTEXT.md §2.4) - chargée ici comme les autres images (Warhammer/Fantasy/
+     // Ubersreik sur la page 1), l'identifiant est passé au bloc qui la dessine
+     PdfImgShadow := PdfDoc.Images.AddFromFile(GetCurrentDir+ConstCheminPdfShadow,false);
      // Dessin Armures (extrait dans PdfBlocArmures, CONTEXT.md §2.4 - cadre uniquement,
      // le remplissage des lignes reste plus bas, dans la boucle Equipement/Armes/Sorts)
      DessinDebutHautArm := DessinDebutHautEntete;
@@ -3521,7 +3607,7 @@ Procedure PdfPersonnageCreationFeldo2P(Personnage: StructurePersonnage);
      // Dessin Divers (extrait dans PdfBlocDiversDonnees, CONTEXT.md §2.4 - remplissage)
      PdfBlocDiversDonnees(PdfPage, Personnage, DessinDebColG, DessinDebutHautEqu, DessinHauteurEqu, DessinNbLigEqu, MinPolice);
      // Dessin Armes (extrait dans PdfBlocArmesDonnees, CONTEXT.md §2.4 - remplissage)
-     PdfBlocArmesDonnees(PdfPage, Personnage, DessinDebColG, DessinLargeurWea, DessinDebutHautWea, DessinHauteurWea, BF, TBonusCC, TBonusCT, FabricationBonii, EncArme, ArmeBonii, MinPolice);
+     PdfBlocArmesDonnees(PdfPage, Personnage, DessinDebColG, DessinLargeurWea, DessinDebutHautWea, DessinHauteurWea, BF, TBonusCC, TBonusCT, FabricationBonii, EncArme, ArmeBonii, ArmureBouclier, MinPolice);
      // Dessin Armures (extrait dans PdfBlocArmuresDonnees, CONTEXT.md §2.4 - remplissage) -
      // dernière des 4 boucles, les 4 sont maintenant toutes extraites de la boucle partagée
      PdfBlocArmuresDonnees(PdfPage, Personnage, DessinDebColG, DessinLargeurArm, DessinDebutHautArm, DessinHauteurArm, ArmureSet, FabricationBonii, EncArmure, ArmureBras, ArmureCorps, ArmureJambe, ArmureTete, ArmureBonii, MinPolice);
@@ -3534,6 +3620,20 @@ Procedure PdfPersonnageCreationFeldo2P(Personnage: StructurePersonnage);
     PdfCentre(PdfPage, DessinDebColG + 15, DessinLargeurEnc, DessinDebutHautEnc - ((DessinNbLigEnc - 2) * DessinHauteurEnc) + 0.9, IntToStr(EncArme));
     PdfCentre(PdfPage, DessinDebColG + 15, DessinLargeurEnc, DessinDebutHautEnc - ((DessinNbLigEnc - 0) * DessinHauteurEnc) + 0.9, IntToStr(Floor(BF/10) + Floor(BE/10) + BonusEncomb));
     PdfCentre(PdfPage, DessinDebColG + 15, DessinLargeurEnc, DessinDebutHautEnc - ((DessinNbLigEnc + 1) * DessinHauteurEnc) + 0.9, IntToStr(EncArmure + EncArme));
+
+    // Dessin Armour Points (nouveau bloc PdfBlocArmourPoints, CONTEXT.md §2.4 - cadre +
+    // contenu) - positionné sous l'Encombrement, demandé par Nono le 15/08/2026.
+    // Correction du 15/08/2026 (retour de Nono) : le calcul précédent oubliait le "+1"
+    // que tous les autres blocs appliquent à leur nombre de lignes pour retrouver le bas
+    // réel d'un cadre (voir PdfBlocEncombrement : bas = Y - ((NbLignes+1)*HauteurLigne))
+    // - du coup le nouveau bloc démarrait quasiment collé sous l'Encombrement au lieu de
+    // laisser un espace. Formule corrigée pour utiliser exactement le même "-3" que
+    // partout ailleurs entre deux blocs (le même écart qu'entre Sorts et Encombrement) ;
+    // (X,Y) passé au bloc est maintenant le coin HAUT-GAUCHE de son cadre, aligné sur
+    // DessinDebColG comme tous les autres blocs de la page (au lieu d'un décalage de
+    // 4mm vers la gauche par rapport au bloc Encombrement).
+    DessinHautArmourPoints := DessinDebutHautEnc - ((DessinNbLigEnc + 1) * DessinHauteurEnc) - 3;
+    PdfBlocArmourPoints(PdfPage, PdfImgShadow, DessinDebColG, DessinHautArmourPoints, ArmureTete, ArmureBras, ArmureCorps, ArmureJambe, ArmureBouclier);
 
     // Dessin Blessure
     DessinDebutHautBle   := DessinDebutHautEnc;

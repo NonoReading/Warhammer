@@ -428,32 +428,82 @@ nettoyage des blocs morts. (`ArmureBouclier` faisait partie de cette liste ; ret
 "Armour Points" (silhouette + valeurs de protection par emplacement du corps - Tête,
 Bras, Corps, Jambes, Bouclier) existe bien dans l'autre PDF (`PdfPersonnageCreation`,
 page 1, lignes ~1594-1613) et veut qu'il soit ajouté à `PdfPersonnageCreationFeldo2P`,
-sous le bloc Encombrement de la page 2. Repéré dans le code source : le bloc n'est
-que des `PdfPage.WriteText` de valeurs numériques à des coordonnées absolues fixes
-(145/190, 145/207.5, 184.5/195.5, etc.) - la silhouette, les cases et le losange
-"Shield" eux-mêmes viennent d'une image de fond déjà présente sur le template PDF
-utilisé par `PdfPersonnageCreation`, pas dessinés par ce code Pascal. Le modèle de
-données ne distingue pas gauche/droite : `ArmureBras` sert aux deux bras (primaire ET
-secondaire), `ArmureJambe` aux deux jambes, une seule valeur écrite deux fois à des
-coordonnées différentes. `ArmureBouclier` (protection du bouclier, calculée à part
-dans les branches Armes - voir plus haut) fait aussi partie de ce bloc. À concevoir
-avant de coder : d'où vient l'image de fond de la silhouette pour du PdfPersonnageCreationFeldo2P
-(même asset que l'autre PDF ? à ajouter au template page 2 ?), et les coordonnées
-relatives (Dessin...) équivalentes pour ce nouveau bloc, positionné sous
-`DessinDebutHautEnc`/`DessinNbLigEnc`/`DessinHauteurEnc` (bas du cadre Encombrement).
+sous le bloc Encombrement de la page 2. **Correction en cours de conception** (ma
+première lecture du code était incomplète) : le bloc n'est pas qu'une image de fond
+avec des `WriteText` par-dessus — les cases et le losange "Shield" sont dessinés en
+vectoriel par l'utilitaire déjà partagé `PdfEncadre` (`PdfUtils.pas`, appelé une fois
+par emplacement), et c'est seulement la silhouette du personnage en arrière-plan qui
+vient d'une image, mais un asset dédié déjà existant (`SHADOW.png`, 55x72mm,
+`ConstCheminPdfShadow`), pas `BACK.png` (qui est le fond de page complet de l'ancien
+PDF, sans rapport) - confirmé par Nono de mémoire. Le modèle de données ne distingue
+pas gauche/droite : `ArmureBras` sert aux deux bras (primaire ET secondaire),
+`ArmureJambe` aux deux jambes, une seule valeur écrite deux fois à des coordonnées
+différentes. `ArmureBouclier` (protection du bouclier, calculée à part dans les
+branches Armes - voir plus haut) fait aussi partie de ce bloc.
 
-**Prochaine étape** : Nono confirme que l'extraction de "DessinExplication"
-(`PdfBlocDessinExplication`) est bonne et va commit avant d'attaquer la suite.
-**Avec ce point validé, toute l'extraction Bloc/Tableau du corps de
-`PdfPersonnageCreationFeldo2P` est terminée** (5 blocs cadre seul, 4 boucles de
-remplissage, 1 cadre+contenu). Reste alors, à la demande de Nono, à concevoir puis
-ajouter le bloc "Armour Points" sous l'Encombrement (voir ci-dessus - questions de
-conception à trancher avant de coder : source de l'image de fond de la silhouette pour
-`PdfPersonnageCreationFeldo2P`, et coordonnées relatives `Dessin...` du nouveau bloc).
-Puis le bloc Blessure actif et le bloc Compétence de combat de la page 2 (candidats
-pour une brique ultérieure, non demandés
-pour l'instant). Une fois `PdfPersonnageCreationFeldo2P` totalement terminée, appliquer
-la même approche à `PdfPersonnageCreation`.
+- ✅ Bloc "Armour Points" implémenté (`PdfBlocArmourPoints`, cadre + contenu comme
+  `PdfBlocDessinExplication` : troisième pattern de bloc). Combine une image
+  (`PdfImgShadow`, chargée une seule fois au début de la page 2 de
+  `PdfPersonnageCreationFeldo2P` via `PdfDoc.Images.AddFromFile` — `PdfDoc` n'étant pas
+  accessible depuis un bloc séparé, seul l'identifiant Integer est passé en paramètre,
+  comme `PdfImgWarhammer`/`PdfImgFantasy`/`PdfImgUbersreik`) et 7 appels à `PdfEncadre`
+  (Tête/Bras droit/Jambe droite/Bouclier/Bras gauche/Corps/Jambe gauche). `(X, Y)` =
+  coin bas-gauche de l'image, exactement comme `(135, 190)` dans l'ancien PDF - tous
+  les décalages internes (offsets vers chaque `PdfEncadre` et chaque `WriteText` de
+  valeur) reproduisent à l'identique les coordonnées absolues de l'ancien bloc, juste
+  traduits par rapport à ce nouvel ancrage (même taille 55x72mm, mêmes écarts relatifs,
+  validé avec Nono - pas de mise à l'échelle). Positionné sous l'Encombrement, ancré à
+  `X = DessinDebColG`. `PdfFontBack`/`PdfFontValue` (globales de `ChargeConstantes.pas`,
+  pas des paramètres) : `PdfEncadre` écrit ses étiquettes en `PdfFontBack` (Carlson Bold
+  10, comme l'ancien PDF), puis on repasse en `PdfFontValue`/Arial 9 pour les valeurs
+  numériques - à l'identique de l'ancien bloc. **Changement de signature** :
+  `ArmureBouclier` était calculé dans `PdfBlocArmesDonnees` mais jamais relu (item
+  pré-existant listé dans `A FAIRE.txt`) - remonté en paramètre `out` pour alimenter ce
+  nouveau bloc ; seul appel corrigé dans le même mouvement. Poussé le 15/08/2026.
+- ✅ Retour de Nono sur le premier rendu ("presque parfait", capture d'écran à l'appui) :
+  deux ajustements demandés — un cadre autour du bloc, et un peu plus d'espace entre
+  l'Encombrement et le bloc. Ajouté dans `PdfBlocArmourPoints` : un cadre (`DrawLine`)
+  avec 4mm de marge à gauche/droite/haut autour de l'image, 8mm en bas pour laisser la
+  place à l'étiquette "Shield" qui déborde sous l'image (`PdfEncadre` avec
+  `Bouclier = true` dessine son étiquette 7.5mm sous le point d'ancrage). Poussé le
+  15/08/2026, pas encore testé/compilé par Nono à ce stade.
+- ✅ Nono renvoie une capture pleine page : le coin haut-gauche du bloc lui semble mal
+  calculé, il veut qu'il tombe exactement sous le coin bas-gauche du cadre Encombrement,
+  avec le même espace qu'entre Sorts et Encombrement. **Bug réel trouvé** : le calcul du
+  bas d'Encombrement dans le nouveau bloc oubliait le "+1" que tous les autres blocs
+  appliquent au nombre de lignes pour retrouver le vrai bas d'un cadre (voir
+  `PdfBlocEncombrement` : bas = `Y - ((NbLignes+1)*HauteurLigne)`) - le nouveau bloc
+  démarrait donc quasiment collé sous l'Encombrement (écart réel d'à peine 0.4mm) au
+  lieu de l'espace visé. `PdfBlocArmourPoints` réécrit : `(X, Y)` reçu est maintenant le
+  coin **HAUT-GAUCHE du cadre** (plus l'ancien coin bas-gauche de l'image), aligné
+  exactement sur `DessinDebColG` comme tous les autres blocs de la page (plus de
+  décalage de 4mm vers la gauche) ; l'image et les 7 `PdfEncadre` sont recalculés en
+  interne (`ImgX`/`ImgY`, décalés de 4mm par rapport au cadre) par rapport à ce nouveau
+  point d'ancrage. Appel corrigé pour utiliser exactement le même `-3` que
+  Sorts→Encombrement partout ailleurs sur la page :
+  `DessinHautArmourPoints := DessinDebutHautEnc - ((DessinNbLigEnc + 1) *
+  DessinHauteurEnc) - 3;`. Var renommée `DessinBasArmourPoints` → `DessinHautArmourPoints`
+  (reflète maintenant le haut du cadre, pas le bas de l'image comme avant). **Point
+  d'attention pour le prochain test** : la page 2 de Feldo2P est déjà chargée (5 blocs
+  empilés avant celui-ci) ; avec ce repositionnement, le bas du cadre se retrouve à
+  environ 9mm du bas de la page (calcul à la main, pas vérifié par un rendu réel) - à
+  surveiller si Nono voit quoi que ce soit de coupé ou de trop proche du bord en bas.
+  Poussé le 15/08/2026, confirmé par Nono ("c'est bon") - positionnement et cadre
+  corrects.
+
+**✅ Chantier "refonte Bloc/Tableau de `PdfPersonnageCreationFeldo2P`" terminé et
+confirmé par Nono le 15/08/2026** : 5 blocs "cadre uniquement" (Armures/Équipement/
+Armes/Sorts/Encombrement), 4 boucles de remplissage (Sorts/Divers/Armes/Armures), 2
+blocs "cadre + contenu" (DessinExplication, Armour Points). Nono s'arrête ici pour
+l'instant ("ce chantier est fini, je m'arrête un peu").
+
+**Prochaine étape (à la reprise)** : rien d'urgent en cours - au choix de Nono selon
+l'envie du moment :
+- le bloc Blessure actif et le bloc Compétence de combat de la page 2 (candidats pour
+  une brique ultérieure, non demandés pour l'instant) ;
+- appliquer la même approche Bloc/Tableau à l'ancienne `PdfPersonnageCreation` (page 1) ;
+- un des autres chantiers listés dans `A FAIRE.txt` (nettoyage des variables inutilisées
+  pré-existantes, astérisques numérotées croisées, refonte sorts liés aux talents, etc.).
 
 ---
 
