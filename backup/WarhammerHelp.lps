@@ -19,7 +19,7 @@
         <HasResources Value="True"/>
         <ResourceBaseClass Value="Form"/>
         <UnitName Value="WarhammerSource"/>
-        <EditorIndex Value="10"/>
+        <EditorIndex Value="11"/>
         <TopLine Value="423"/>
         <CursorPos X="32" Y="435"/>
         <UsageCount Value="200"/>
@@ -490,10 +490,12 @@
         <Filename Value="pdfpersonnage.pas"/>
         <IsPartOfProject Value="True"/>
         <UnitName Value="PdfPersonnage"/>
-        <EditorIndex Value="-1"/>
-        <TopLine Value="2242"/>
-        <CursorPos X="36" Y="2249"/>
+        <IsVisibleTab Value="True"/>
+        <EditorIndex Value="10"/>
+        <TopLine Value="2196"/>
+        <CursorPos X="33" Y="2245"/>
         <UsageCount Value="200"/>
+        <Loaded Value="True"/>
       </Unit>
       <Unit>
         <Filename Value="pdfrace.pas"/>
@@ -517,7 +519,7 @@
         <Filename Value="chargetraduction.pas"/>
         <IsPartOfProject Value="True"/>
         <UnitName Value="ChargeTraduction"/>
-        <EditorIndex Value="11"/>
+        <EditorIndex Value="12"/>
         <TopLine Value="201"/>
         <CursorPos X="11" Y="214"/>
         <UsageCount Value="200"/>
@@ -540,10 +542,9 @@
         <Filename Value="chargelivre.pas"/>
         <IsPartOfProject Value="True"/>
         <UnitName Value="ChargeLivre"/>
-        <IsVisibleTab Value="True"/>
         <EditorIndex Value="9"/>
-        <TopLine Value="32"/>
-        <CursorPos X="17" Y="43"/>
+        <TopLine Value="33"/>
+        <CursorPos Y="36"/>
         <UsageCount Value="183"/>
         <Loaded Value="True"/>
       </Unit>
@@ -1213,50 +1214,6 @@
     </Units>
     <JumpHistory HistoryIndex="29">
       <Position>
-        <Filename Value="chargeconstantes.pas"/>
-        <Caret Line="915" TopLine="896"/>
-      </Position>
-      <Position>
-        <Filename Value="winlivre.pas"/>
-        <Caret Line="333" Column="32" TopLine="320"/>
-      </Position>
-      <Position>
-        <Filename Value="winlivre.pas"/>
-        <Caret Line="335" Column="19" TopLine="322"/>
-      </Position>
-      <Position>
-        <Filename Value="globalfonts.pas"/>
-        <Caret Line="24" Column="30" TopLine="11"/>
-      </Position>
-      <Position>
-        <Filename Value="globalfonts.pas"/>
-        <Caret Line="265" Column="32" TopLine="251"/>
-      </Position>
-      <Position>
-        <Filename Value="globalfonts.pas"/>
-        <Caret Line="271" Column="9" TopLine="254"/>
-      </Position>
-      <Position>
-        <Filename Value="globalfonts.pas"/>
-        <Caret Line="274" Column="35" TopLine="258"/>
-      </Position>
-      <Position>
-        <Filename Value="globalfonts.pas"/>
-        <Caret Line="23" Column="32" TopLine="11"/>
-      </Position>
-      <Position>
-        <Filename Value="winpersonnage.pas"/>
-        <Caret Line="4" Column="26"/>
-      </Position>
-      <Position>
-        <Filename Value="globalfonts.pas"/>
-        <Caret Line="274" Column="35" TopLine="258"/>
-      </Position>
-      <Position>
-        <Filename Value="globalfonts.pas"/>
-        <Caret Line="23" Column="32" TopLine="11"/>
-      </Position>
-      <Position>
         <Filename Value="globalfonts.pas"/>
         <Caret Line="75" Column="37" TopLine="68"/>
       </Position>
@@ -1331,6 +1288,50 @@
         <Filename Value="globalfonts.pas"/>
         <Caret Line="299" Column="21" TopLine="291"/>
       </Position>
+      <Position>
+        <Filename Value="pdfpersonnage.pas"/>
+        <Caret Line="2260" Column="27" TopLine="2245"/>
+      </Position>
+      <Position>
+        <Filename Value="pdfpersonnage.pas"/>
+        <Caret Line="2258" Column="3" TopLine="2247"/>
+      </Position>
+      <Position>
+        <Filename Value="pdfpersonnage.pas"/>
+        <Caret Line="2017" Column="84" TopLine="2007"/>
+      </Position>
+      <Position>
+        <Filename Value="pdfpersonnage.pas"/>
+        <Caret Line="2000" Column="18" TopLine="1988"/>
+      </Position>
+      <Position>
+        <Filename Value="pdfpersonnage.pas"/>
+        <Caret Line="2017" Column="84" TopLine="1998"/>
+      </Position>
+      <Position>
+        <Filename Value="pdfpersonnage.pas"/>
+        <Caret Line="2057" Column="25" TopLine="2038"/>
+      </Position>
+      <Position>
+        <Filename Value="pdfpersonnage.pas"/>
+        <Caret Line="2059" Column="68" TopLine="2040"/>
+      </Position>
+      <Position>
+        <Filename Value="pdfpersonnage.pas"/>
+        <Caret Line="2060" Column="60" TopLine="2041"/>
+      </Position>
+      <Position>
+        <Filename Value="pdfpersonnage.pas"/>
+        <Caret Line="2078" Column="18" TopLine="2058"/>
+      </Position>
+      <Position>
+        <Filename Value="pdfpersonnage.pas"/>
+        <Caret Line="2092" Column="110" TopLine="2073"/>
+      </Position>
+      <Position>
+        <Filename Value="pdfpersonnage.pas"/>
+        <Caret Line="2117" Column="33" TopLine="2098"/>
+      </Position>
     </JumpHistory>
     <RunParams>
       <FormatVersion Value="2"/>
@@ -1345,13 +1346,6 @@
         <WatchKind Value="wpkWrite"/>
         <Source Value="pdfutils.pas"/>
         <Line Value="364"/>
-      </Item>
-      <Item>
-        <Kind Value="bpkSource"/>
-        <WatchScope Value="wpsLocal"/>
-        <WatchKind Value="wpkWrite"/>
-        <Source Value="chargelivre.pas"/>
-        <Line Value="36"/>
       </Item>
     </BreakPoints>
     <Watches>

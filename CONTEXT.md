@@ -229,13 +229,54 @@ compilation et comparé visuellement à l'original — rendu identique)** :
   l'astérisque de bonus utilisait une variable `Comp` restée de la boucle précédente au
   lieu du code de la compétence courante ; corrigé en utilisant
   `PCompetence.CodeCompetence`.
-- ⏳ Reste dans le bloc monolithique d'origine : Entête, Ambitions, Expérience,
-  Mouvement, Corruption, blocs morts (Blessure, PCM) à supprimer, Talents, Armes,
-  Armures, Sorts.
+- ✅ Bloc Entête (`PdfBlocEntete`) — cadre à colonnes irrégulières (les séparateurs
+  changent d'une ligne à l'autre), donc bloc simple et non `TPdfTableau`. Ajustement
+  suite retour Nono : la colonne "Species"/"Career Level" débordait sur son libellé en
+  anglais (libellés plus longs qu'en français) — séparateur du milieu déplacé de 5mm
+  vers la gauche (82→77) pour lui donner plus de place.
+- ✅ Bloc Ambitions (`PdfBlocAmbitions`) — panneau sans donnée calculée (titre +
+  deux lignes laissées vides pour être remplies à la main).
+- ✅ Blocs Expérience / Mouvement / Corruption (`PdfBlocExperience` /
+  `PdfBlocMouvement` / `PdfBlocCorruption`) — trois panneaux côte à côte sous
+  Résilience/Destin, même gabarit "titre + lignes libellé/valeur". Au passage,
+  suppression d'un calcul mort repéré pendant l'extraction (une première affectation de
+  `DessinDebutHautExp`, juste après Résilience/Destin, était systématiquement écrasée
+  par une deuxième avant la moindre lecture — code mort probablement laissé par
+  l'ancien bloc Blessure aujourd'hui commenté).
+- ✅ Blocs morts supprimés (page 1) : l'ancien bloc "Dessin Blessure" (commenté, ~35
+  lignes) et l'ancien bloc "Dessin PCM" (commenté, ~15 lignes, aucune variable
+  associée — code mort pur). Attention pour la suite : il existe un bloc Blessure
+  actif (non commenté, page 2, vers la zone Encombrement — réutilise les mêmes noms
+  `DessinDebutHautBle`/`DessinHauteurBle`/`DessinNbLigBle`/`DessinLargeurBle`/`Ch`
+  /`DurACuire`/`ValDurACuire` que l'ancien bloc mort de la page 1) : ce n'est pas du
+  code mort, à ne pas supprimer par erreur en confondant les deux blocs. Confirmé par
+  Nono (15/08/2026) : Blessure a été déplacée **définitivement** de la page 1 vers la
+  page 2 pour regrouper toutes les données liées au combat sur une seule page (ne pas
+  avoir à retourner la page en jeu). Pour la même raison, le bloc "Compétence de
+  combat" de la page 2 (~L.3283, `DessinDebutHautComC`, libellés
+  `RULES-PDF_SKILLS1_BASIC`/`RULES-PDF_SKILLS2_TOTAL`) réaffiche volontairement en
+  doublon Esquive/Calme/Résistance/Commandement/Intuition — déjà montrées dans le
+  tableau Compétences de base de la page 1 (`TotalEsquive`/`TotalCalme`/
+  `TotalResitance`/`TotalCommandement`/`TotalIntuition`, sortis en paramètres `out` de
+  `PdfPreparerRecordSetCompetencesBase` précisément pour cette réutilisation). C'est un
+  doublon voulu, pas une redondance à supprimer.
+- ⏳ Reste dans le bloc monolithique d'origine : Talents, Armes, Armures, Sorts (page
+  1 et 2), puis le bloc Blessure actif et le bloc Compétence de combat de la page 2
+  (candidats pour une brique ultérieure une fois les tableaux répétitifs terminés).
 
-**Prochaine étape** : continuer bloc par bloc / tableau par tableau, compilation entre
-chaque (règle §0). Une fois `PdfPersonnageCreationFeldo2P` terminée, appliquer la même
-approche à `PdfPersonnageCreation`.
+**Nettoyage variables inutilisées** : un passage de compilation du 15/08/2026 a
+remonté plusieurs "Note: Local variable ... not used" dans
+`PdfPersonnageCreationFeldo2P`. Quatre étaient une conséquence directe du découpage
+(`DessinNbLigCarac`, `DessinNbColCarac`, `DessinNbColComp`, `DessinNbColComg` —
+supprimées du bloc `var`). Les autres sont préexistantes, sans lien avec ce chantier
+(`PMetierAttribut`, `Comp`, `ValStat`, `ValBonus`, `ValTotal`, `ArmureBouclier`,
+`PersonnageCompetence`, `NivCompMetier`, `AmePure` à la ligne 535 — pas celui du bloc
+Corruption, qui lui est utilisé) — reportées dans `A FAIRE.txt`, à traiter avec le
+nettoyage des blocs morts.
+
+**Prochaine étape** : continuer bloc par bloc / tableau par tableau sur Talents, Armes,
+Armures, Sorts, compilation entre chaque (règle §0). Une fois `PdfPersonnageCreationFeldo2P`
+terminée, appliquer la même approche à `PdfPersonnageCreation`.
 
 ---
 

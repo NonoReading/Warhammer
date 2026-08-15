@@ -21,6 +21,105 @@ Type
     Total:	   Integer;
 end;
 
+  // Brique 2 (tableau de données, CONTEXT.md §2.4) — types génériques pour dessiner un
+  // tableau à partir de données déjà préparées, sans que le dessin ait à connaître le sens
+  // métier des champs.
+  //
+  // Orientation : orLigne = une entrée du tableau est une ligne, ses champs sont en colonnes
+  // (cas des tableaux de Compétences). orColonne = une entrée est une colonne, ses champs
+  // sont empilés en lignes (cas du tableau des Caractéristiques).
+  TPdfOrientationTableau = (orLigne, orColonne);
+
+  // Police utilisée pour dessiner une valeur : spValeur = police de valeur normale de la
+  // colonne (Arial, taille Tableau.Police) sauf si la colonne est EnTete (alors police
+  // d'en-tête, voir TPdfColonne) ; spEnTete force la police d'en-tête (Carlson gras 10)
+  // même sur une colonne qui ne l'est pas par défaut ; spAccent force une police "accent"
+  // (Arial gras 8), utilisée par ex. pour le nom d'une compétence liée au métier en cours.
+  TPdfStylePolice = (spValeur, spEnTete, spAccent);
+
+  // Une valeur affichée dans une case du tableau. Valeur = '' signifie "case vide, rien
+  // n'est dessiné" (ex : le niveau métier n'existe pas pour cette caractéristique).
+  // Annotation est un petit texte optionnel affiché à côté de la valeur, utilisé pour le
+  // bonus racial/talent (Caractéristiques) ou l'astérisque de compétence (Compétences) —
+  // DessinerTableau choisit automatiquement sa position et sa taille selon l'orientation du
+  // tableau, la préparation des données n'a pas à connaître ces détails de dessin.
+  TPdfValeurCase = record
+    Champ:      String;
+    Valeur:     String;
+    Grise:      Boolean;
+    Annotation: String;
+    Style:      TPdfStylePolice;
+  end;
+
+  // Une entrée du tableau (une caractéristique, une compétence...). Valeurs simule un
+  // "enregistrement SQL" : les champs sont retrouvés par leur nom (TPdfColonne.Champ), pas
+  // par position, pour que la préparation des données et la définition du tableau restent
+  // indépendantes l'une de l'autre.
+  TPdfEnregistrement = record
+    Valeurs: array of TPdfValeurCase;
+  end;
+  TPdfRecordSet = array of TPdfEnregistrement;
+
+  // Alignement du texte d'en-tête d'une colonne (orLigne uniquement) : alCentre utilise
+  // PdfCentre (texte centré, taille fixe), alGauche utilise PdfEcrit (texte cadré à gauche,
+  // rétréci jusqu'à Tableau.PoliceMin si besoin) — cas de la colonne "Nom".
+  TPdfAlignementEntete = (alCentre, alGauche);
+
+  // Définit une ligne (orColonne) ou une colonne (orLigne) du tableau.
+  //  - Libelle : texte affiché dans la bande de libellés (orColonne) ou en en-tête de
+  //    colonne (orLigne).
+  //  - Champ : nom du champ à aller chercher dans chaque TPdfEnregistrement.
+  //  - EnTete : la valeur de cette ligne/colonne est dessinée avec la police d'en-tête
+  //    (Carlson gras) plutôt que la police de valeur normale par défaut (cas de la ligne
+  //    "Code" des Caractéristiques, et des colonnes Nom/Attribut des Compétences).
+  // Les champs suivants ne concernent que l'orientation orLigne :
+  //  - Largeur : largeur propre de cette colonne (0 = largeur par défaut Tableau.LargeurEntree) ;
+  //    permet une colonne plus large que les autres (ex : le nom d'une compétence).
+  //  - FusionAvecSuivante : si vrai, le libellé de cette colonne est centré sur sa largeur ET
+  //    celle de la colonne suivante, et le séparateur entre les deux ne descend qu'à partir de
+  //    la première ligne de données (pas dans la bande d'en-tête) — cas de "Carac" qui chapeaute
+  //    les colonnes Attribut + Valeur.
+  //  - AlignementEntete : voir TPdfAlignementEntete.
+  //  - DecalageValeurMin/Max : décalages ajoutés aux bords gauche/droit de la colonne pour
+  //    positionner le texte d'une valeur (PdfEcrit) ; 0 = dessiné exactement dans les bords
+  //    de la colonne. Chaque tableau a ses propres décalages (constatés colonne par colonne
+  //    dans l'ancien code, pas de convention unique) — à renseigner à chaque définition de
+  //    tableau, jamais de valeur par défaut "raisonnable" côté DessinerTableau.
+  //  - DecalageEnteteMin/Max : même principe que DecalageValeurMin/Max, mais pour le texte
+  //    d'en-tête d'une colonne AlignementEntete = alGauche (PdfEcrit) ; sans effet en alCentre.
+  TPdfColonne = record
+    Libelle:            String;
+    Champ:              String;
+    EnTete:             Boolean;
+    Largeur:             Single;
+    FusionAvecSuivante:  Boolean;
+    AlignementEntete:    TPdfAlignementEntete;
+    DecalageValeurMin:   Single;
+    DecalageValeurMax:   Single;
+    DecalageEnteteMin:   Single;
+    DecalageEnteteMax:   Single;
+  end;
+
+  TPdfTableau = record
+    X, Y:            Single;   // coin haut-gauche du tableau, bande de libellés incluse
+    Orientation:      TPdfOrientationTableau;
+    LargeurLibelles:  Single;  // largeur de la bande de libellés (orColonne)
+    LargeurEntree:    Single;  // largeur par défaut d'une colonne "entrée" (orColonne) ou
+                                // d'une colonne de donnée (orLigne, si Champ.Largeur = 0)
+    HauteurLigne:     Single;
+    Police:           Integer; // taille de police par défaut des valeurs (hors EnTete/Accent)
+    Champs:           array of TPdfColonne;
+    // orLigne uniquement :
+    Titre:               String; // bandeau plein largeur au-dessus des en-têtes ('' = aucun)
+    TitreDecalageGauche:  Single;
+    PoliceMin:            Integer; // taille plancher pour le rétrécissement auto (PdfEcrit)
+    NbLignesMax:          Integer; // nombre de lignes du cadre dessiné, si le tableau a une
+                                    // capacité fixe supérieure au nombre d'entrées réellement
+                                    // fournies (ex : grille de compétences à 28 lignes, dont
+                                    // seules les premières sont remplies) ; 0 = cadre exactement
+                                    // à la taille de Donnees.
+  end;
+
 
 Procedure PdfPersonnageCompetenceTri(ListPage: TStringList);
 Function PdfPersonnageAttribut(Personnage: StructurePersonnage; Attribut: String; var Bonus: String): StructureDonnee;
@@ -31,6 +130,58 @@ Function PdfPersonnageTalent(Personnage: StructurePersonnage; Talent: String; Va
 Function PdfPersonnageRemplaceBonus(Personnage: StructurePersonnage; ChW: String): String;
 Function PdfPersonnageCompetenceBonus(Personnage: StructurePersonnage; CodeCompetence: String): String;
 Function PdfPersonnageTalentBonus(Personnage: StructurePersonnage; CodeTalent: String): String;
+
+// Blocs extraits de PdfPersonnageCreationFeldo2P (CONTEXT.md §2.4) — premier prototype
+// de l'architecture Bloc/Tableau. PdfBlocResilience dessine le cadre partagé
+// Résilience/Destin (les deux tableaux occupent une seule boîte dans ce gabarit) ET le
+// contenu du côté Résilience ; PdfBlocDestin dessine uniquement le contenu du côté Destin,
+// sans redessiner le cadre. Voir le commentaire sur PdfBlocResilience pour le détail.
+Procedure PdfBlocResilience(PdfPage: TPDFPage; Personnage: StructurePersonnage; X, Y: Single; NbLignes: Integer; HauteurLigne: Single; MinPolice: Integer; Determine: Integer; out NbLignesPourSuite: Integer);
+Procedure PdfBlocDestin(PdfPage: TPDFPage; Personnage: StructurePersonnage; XGauche, Y: Single; HauteurLigne: Single; MinPolice: Integer; Chance: Integer);
+
+// Bloc Entête (panneau fixe en haut de la page 1 : nom, race, classe, carrière, niveau de
+// carrière, voie, statut, âge/taille/cheveux/yeux). Grille à colonnes irrégulières selon la
+// ligne (les séparateurs verticaux internes changent d'une ligne à l'autre) : ce n'est donc
+// pas un TPdfTableau générique, juste un bloc simple comme Résilience/Destin. Renvoie le Y
+// du bas du cadre, comme DessinerTableau (sans le -3 de marge, laissé à l'appelant).
+Function PdfBlocEntete(PdfPage: TPDFPage; Personnage: StructurePersonnage; PRace: StructureRace; PMetier: StructureMetier; PMetierNiveau: StructureMetierNiveau; LocData: String; XGauche, XDroite, Y, HauteurLigne: Single; NbLignes: Integer; MinPolice: Integer): Single;
+
+// Bloc Ambitions (panneau fixe : titre + deux lignes "court terme"/"long terme" laissées
+// vides à l'impression pour être remplies à la main — aucune donnée de Personnage,
+// uniquement des libellés). Brique 1, CONTEXT.md §2.4. Renvoie le Y du bas du cadre, comme
+// PdfBlocEntete (sans le -3 de marge, laissé à l'appelant).
+Function PdfBlocAmbitions(PdfPage: TPDFPage; XGauche, XDroite, Y, HauteurLigne: Single; NbLignes: Integer; MinPolice: Integer): Single;
+
+// Brique 2 (tableau de données, CONTEXT.md §2.4) — DessinerTableau est générique : elle
+// dessine le cadre et le contenu à partir de Tableau (mise en page) et Donnees (valeurs déjà
+// préparées), sans rien connaître du sens métier des champs. Elle renvoie le Y du bas du
+// tableau, pour que l'appelant enchaîne le bloc suivant (comme DessinDebutHautComp).
+// Les deux orientations (orColonne : Caractéristiques ; orLigne : Compétences) sont
+// implémentées.
+Function DessinerTableau(PdfPage: TPDFPage; const Tableau: TPdfTableau; const Donnees: TPdfRecordSet): Single;
+
+// Prototype de préparation pour le tableau des Caractéristiques : transforme les données du
+// personnage (via PdfPersonnageAttribut et ListMetierAttribut) en TPdfRecordSet prêt à être
+// dessiné par DessinerTableau, sans aucun calcul de position/dessin.
+Function PdfPreparerRecordSetCaracteristiques(Personnage: StructurePersonnage; PMetier: StructureMetier): TPdfRecordSet;
+
+// Prépare le tableau des compétences de base (première grille de la page, celle qui liste
+// ListPage). Renvoie aussi, en paramètres out, les totaux de 5 compétences (Esquive, Calme,
+// Résistance, Commandement, Intuition) réutilisés plus loin dans PdfPersonnageCreationFeldo2P
+// pour un autre encart, et ListPris (la liste des codes de compétences déjà affichées, pour
+// que le tableau des compétences groupées ne les propose pas une deuxième fois) — c'est le
+// même calcul que faisait l'ancien code, juste extrait ici.
+Function PdfPreparerRecordSetCompetencesBase(Personnage: StructurePersonnage; PMetier: StructureMetier; ListPage: TStringList; out TotalEsquive, TotalCalme, TotalResitance, TotalCommandement, TotalIntuition: Integer; out ListPris: String): TPdfRecordSet;
+
+// Prépare le tableau des compétences groupées (deuxième grille) : d'abord les compétences de
+// ListCompetence déjà augmentées et pas déjà affichées dans le tableau de base (ListPris),
+// puis, tant qu'il reste de la place (CapaciteMax lignes au total), les compétences
+// accessibles via le métier mais pas encore augmentées, grisées. Contrairement au tableau de
+// base, ni Nom ni Attribut n'ont de police "accent" ici (toujours police de valeur normale).
+// Note : corrige un bug de l'ancien code, qui utilisait par erreur une variable non
+// réassignée (`Comp`, reliquat du tableau précédent) pour l'astérisque de bonus — remplacé
+// ici par le code de la compétence réellement affichée sur la ligne (validé avec Nono).
+Function PdfPreparerRecordSetCompetencesGroupees(Personnage: StructurePersonnage; ListPris: String; CapaciteMax: Integer): TPdfRecordSet;
 
 implementation
 
@@ -1419,6 +1570,605 @@ begin
   Result := Bonus;
 end;
 
+// Dessine le cadre partagé Résilience/Destin (4 lignes de haut, de X à X+78) et le contenu
+// du côté Résilience (colonnes X à X+40). Dans le gabarit Feldo2P, Résilience et Destin
+// occupent physiquement UNE SEULE boîte, avec des séparateurs internes de hauteurs
+// différentes (celui à X+40 ne descend pas jusqu'à la dernière ligne, celui à X+69 saute
+// la ligne de titre) — les reproduire depuis deux cadres indépendants aurait changé le
+// rendu (traits en double ou manquants). C'est pourquoi le cadre est dessiné ici en entier ;
+// PdfBlocDestin ne dessine que son texte/ses valeurs. À revoir si on veut un jour deux
+// tableaux vraiment indépendants (cf. CONTEXT.md §2.4).
+//
+// NbLignesPourSuite reproduit la valeur que la boucle "for IndC := 0 to DessinNbLigRes"
+// laissait dans IndC après son exécution (NbLignes + 1), utilisée par le bloc
+// Expérience pour calculer sa position de départ. Valeur préservée telle quelle pour ne
+// rien changer visuellement ; à vérifier si ce "+1" est voulu ou un héritage accidentel
+// avant de la retoucher plus tard.
+//
+// NbLignes/HauteurLigne remplacent les anciennes constantes locales DessinNbLigRes/
+// DessinHauteurRes de PdfPersonnageCreationFeldo2P (hors de portée dans une procédure
+// séparée) — l'appelant continue de passer ses valeurs actuelles (4 et 4.4), donc rien
+// ne change au rendu.
+Procedure PdfBlocResilience(PdfPage: TPDFPage; Personnage: StructurePersonnage; X, Y: Single; NbLignes: Integer; HauteurLigne: Single; MinPolice: Integer; Determine: Integer; out NbLignesPourSuite: Integer);
+  var
+    IndC:           Integer;
+    Bonus:          String;
+    AttributDonnee: StructureDonnee;
+  begin
+    // Dessin (cadre partagé Résilience + Destin)
+    PdfPage.DrawLine( X,      Y,                    X,      Y - (NbLignes * HauteurLigne), 1);
+    PdfPage.DrawLine( X+29.9, Y - HauteurLigne,      X+29.9, Y - (NbLignes * HauteurLigne), 1);
+    PdfPage.DrawLine( X+40,   Y,                     X+40,   Y - ((NbLignes-1) * HauteurLigne), 1);
+    PdfPage.DrawLine( X+69,   Y - HauteurLigne,      X+69,   Y - ((NbLignes-1) * HauteurLigne), 1);
+    PdfPage.DrawLine( X+78,   Y,                     X+78,   Y - (NbLignes * HauteurLigne), 1);
+    for IndC := 0 to NbLignes do
+      PdfPage.DrawLine(X, Y - (IndC * HauteurLigne), X+78, Y - (IndC * HauteurLigne), 1);
+
+    // Texte Résilience
+    PdfTaillePolice(PdfPage, PdfFontBack, ConstPoliceCarlson+ConstPoliceGras, 10);
+    PdfCentre(PdfPage, X+2, X+42, Y - (1 * HauteurLigne) + 1, GetTexteLibelle('PDF_RESIL1_RESILIENCE'));
+    PdfEcrit (PdfPage, X+2, X+42, Y - (2 * HauteurLigne) + 1, GetTexteLibelle('PDF_RESIL2A_RESILIENCE'), MinPolice);
+    PdfEcrit (PdfPage, X+2, X+42, Y - (3 * HauteurLigne) + 1, GetTexteLibelle('PDF_RESIL2B_RESOLVE'),    MinPolice);
+    PdfEcrit (PdfPage, X+2, X+49, Y - (NbLignes * HauteurLigne) + 1, GetTexteLibelle('PDF_RESIL2C_MOTIVATION'), MinPolice);
+
+    // Valeur Résilience
+    PdfTaillePolice(PdfPage, PdfFontValue, ConstPoliceArial, 9);
+    AttributDonnee := PdfPersonnageAttribut(Personnage, ConstCaracResil, Bonus);
+    PdfCentre(PdfPage, X+30, X+40, Y - (2 * HauteurLigne) + 1, IntToStr(AttributDonnee.Total));   // Résilience
+    PdfCentre(PdfPage, X+30, X+40, Y - (3 * HauteurLigne) + 1, IntToStr(Determine));              // Détermination
+
+    NbLignesPourSuite := NbLignes + 1;
+  end;
+
+// Dessine le contenu (texte + valeurs) du côté Destin de la boîte Résilience/Destin.
+// Ne dessine aucun cadre : il est entièrement à la charge de PdfBlocResilience (voir son
+// commentaire). XGauche doit correspondre au X+40 utilisé pour appeler PdfBlocResilience
+// juste avant (le bord commun entre les deux zones). HauteurLigne remplace l'ancienne
+// constante locale DessinHauteurDes (même valeur, 4.4, passée par l'appelant).
+Procedure PdfBlocDestin(PdfPage: TPDFPage; Personnage: StructurePersonnage; XGauche, Y: Single; HauteurLigne: Single; MinPolice: Integer; Chance: Integer);
+  var
+    Bonus:          String;
+    AttributDonnee: StructureDonnee;
+  begin
+    // Texte Destin
+    PdfTaillePolice(PdfPage, PdfFontBack, ConstPoliceCarlson+ConstPoliceGras, 10);
+    PdfCentre(PdfPage, XGauche+2,  XGauche+38, Y - (1 * HauteurLigne) + 1, GetTexteLibelle('PDF_FATE1_FATE'));
+    PdfEcrit (PdfPage, XGauche+2,  XGauche+29, Y - (2 * HauteurLigne) + 1, GetTexteLibelle('PDF_FATE2_FATE'),    MinPolice);
+    PdfEcrit (PdfPage, XGauche+2,  XGauche+29, Y - (3 * HauteurLigne) + 1, GetTexteLibelle('PDF_FATE3_FORTUNE'), MinPolice);
+
+    // Valeur Destin
+    PdfTaillePolice(PdfPage, PdfFontValue, ConstPoliceArial, 9);
+    AttributDonnee := PdfPersonnageAttribut(Personnage, ConstCaracDestin, Bonus);
+    PdfCentre(PdfPage, XGauche+29, XGauche+38, Y - (2 * HauteurLigne) + 1, IntToStr(AttributDonnee.Total));  // Destin
+    PdfCentre(PdfPage, XGauche+29, XGauche+38, Y - (3 * HauteurLigne) + 1, IntToStr(Chance));                // Chance
+  end;
+
+// Dessine le panneau Entête (extrait de PdfPersonnageCreationFeldo2P, CONTEXT.md §2.4).
+// Cadre à colonnes irrégulières : les séparateurs verticaux internes (52/82/114) ne sont pas
+// les mêmes d'une ligne à l'autre (voir les conditions IndC = 4 / IndC <> 3 / IndC <> 2
+// ci-dessous, reprises telles quelles de l'ancien code). XGauche/XDroite sont les bords du
+// cadre, Y son sommet, HauteurLigne la hauteur d'une ligne et NbLignes son nombre de lignes.
+Function PdfBlocEntete(PdfPage: TPDFPage; Personnage: StructurePersonnage; PRace: StructureRace; PMetier: StructureMetier; PMetierNiveau: StructureMetierNiveau; LocData: String; XGauche, XDroite, Y, HauteurLigne: Single; NbLignes: Integer; MinPolice: Integer): Single;
+  var
+    IndC: Integer;
+  begin
+    // Dessin cadre
+    PdfPage.DrawLine(XGauche, Y, XGauche, Y - (NbLignes * HauteurLigne), 1);
+    PdfPage.DrawLine(XDroite, Y, XDroite, Y - (NbLignes * HauteurLigne), 1);
+    for IndC := 0 to NbLignes do
+      begin
+        PdfPage.DrawLine(XGauche, Y - (IndC * HauteurLigne), XDroite, Y - (IndC * HauteurLigne), 1);
+        if IndC > 0 then
+          begin
+            if IndC = 4  then PdfPage.DrawLine( 52, Y - ((IndC-1) * HauteurLigne),  52, Y - (IndC * HauteurLigne), 1);
+            if IndC <> 3 then PdfPage.DrawLine( 77, Y - ((IndC-1) * HauteurLigne),  77, Y - (IndC * HauteurLigne), 1);
+            if IndC <> 2 then PdfPage.DrawLine(114, Y - ((IndC-1) * HauteurLigne), 114, Y - (IndC * HauteurLigne), 1);
+          end;
+      end;
+
+    // Texte Entête
+    PdfTaillePolice(PdfPage, PdfFontBack, ConstPoliceCarlson+ConstPoliceGras, 10);
+    PdfPage.WriteText( 21, Y - (HauteurLigne * 1) + 1, GetTexteLibelle('PDF_MAIN1_NAME'));
+    PdfPage.WriteText( 78, Y - (HauteurLigne * 1) + 1, GetTexteLibelle('PDF_MAIN1_SPECIES'));
+    PdfPage.WriteText(115, Y - (HauteurLigne * 1) + 1, GetTexteLibelle('PDF_MAIN1_CLASS'));
+    PdfPage.WriteText( 21, Y - (HauteurLigne * 2) + 1, GetTexteLibelle('PDF_MAIN2_CAREER'));
+    PdfPage.WriteText( 78, Y - (HauteurLigne * 2) + 1, GetTexteLibelle('PDF_MAIN2_CAREERLEVEL'));
+    PdfPage.WriteText( 21, Y - (HauteurLigne * 3) + 1, GetTexteLibelle('PDF_MAIN3_CAREERPATH'));
+    PdfPage.WriteText(115, Y - (HauteurLigne * 3) + 1, GetTexteLibelle('PDF_MAIN3_STATUS'));
+    PdfPage.WriteText( 21, Y - (HauteurLigne * 4) + 1, GetTexteLibelle('PDF_MAIN4_AGE'));
+    PdfPage.WriteText( 53, Y - (HauteurLigne * 4) + 1, GetTexteLibelle('PDF_MAIN4_HEIGHT'));
+    PdfPage.WriteText( 78, Y - (HauteurLigne * 4) + 1, GetTexteLibelle('PDF_MAIN4_HAIR'));
+    PdfPage.WriteText(115, Y - (HauteurLigne * 4) + 1, GetTexteLibelle('PDF_MAIN4_EYES'));
+
+    // Valeur Entête
+    PdfTaillePolice(PdfPage, PdfFontValue, ConstPoliceArial, 9);
+    PdfEcrit(PdfPage,  32,  86, Y - (HauteurLigne * 1) + 1, Personnage.NomPersonnage, MinPolice);
+    PdfEcrit(PdfPage,  89, 115, Y - (HauteurLigne * 1) + 1, PRace.Libelle, MinPolice);
+    PdfEcrit(PdfPage, 126, XDroite, Y - (HauteurLigne * 1) + 1, GetTexteLibelle(PMetier.LibelleGroupe), MinPolice);
+    PdfEcrit(PdfPage,  32,  85, Y - (HauteurLigne * 2) + 1, PMetier.Libelle, MinPolice);
+    PdfEcrit(PdfPage,  95, XDroite, Y - (HauteurLigne * 2) + 1, IntToStr(Personnage.MetierEnCours.NiveauMetier)+' - '+ PMetierNiveau.Libelle, MinPolice);
+    PdfEcrit(PdfPage,  50, XDroite, Y - (HauteurLigne * 3) + 1, LocData, MinPolice);
+    PdfEcrit(PdfPage, 125, XDroite, Y - (HauteurLigne * 3) + 1, GetTexteLibelle(PMetierNiveau.SalaireMetier, '', ' '), MinPolice);
+    PdfEcrit(PdfPage,  32,  53, Y - (HauteurLigne * 4) + 1, IntToStr(Personnage.Age), MinPolice);
+    PdfEcrit(PdfPage,  63,  78, Y - (HauteurLigne * 4) + 1, IntToStr(Personnage.Height), MinPolice);
+    PdfEcrit(PdfPage,  98, 115, Y - (HauteurLigne * 4) + 1, Personnage.HairColors, MinPolice);
+    PdfEcrit(PdfPage, 125, XDroite, Y - (HauteurLigne * 4) + 1, Personnage.EyeColors, MinPolice);
+
+    Result := Y - (NbLignes * HauteurLigne);
+  end;
+
+// Dessine le panneau Ambitions (extrait de PdfPersonnageCreationFeldo2P, CONTEXT.md §2.4).
+// XGauche+19.9 remplace l'ancienne constante absolue 39.9 (= 20 + 19.9, avec 20 = l'ancien
+// DessinDebColG) pour que le bloc ne connaisse que son coin de départ.
+Function PdfBlocAmbitions(PdfPage: TPDFPage; XGauche, XDroite, Y, HauteurLigne: Single; NbLignes: Integer; MinPolice: Integer): Single;
+  var
+    IndC: Integer;
+  begin
+    // Dessin cadre
+    PdfPage.DrawLine(XGauche,        Y,                 XGauche,        Y - (NbLignes * HauteurLigne), 1);
+    PdfPage.DrawLine(XGauche + 19.9, Y - HauteurLigne,   XGauche + 19.9, Y - (NbLignes * HauteurLigne), 1);
+    PdfPage.DrawLine(XDroite,        Y,                 XDroite,        Y - (NbLignes * HauteurLigne), 1);
+    for IndC := 0 to NbLignes do
+      PdfPage.DrawLine(XGauche, Y - (IndC * HauteurLigne), XDroite, Y - (IndC * HauteurLigne), 1);
+
+    // Texte Ambitions
+    PdfTaillePolice(PdfPage, PdfFontBack, ConstPoliceCarlson+ConstPoliceGras, 10);
+    PdfCentre(PdfPage, XGauche + 2, XDroite,        Y - (1 * HauteurLigne) + 1, GetTexteLibelle('PDF_AMBITION1_AMBITIONS'));
+    PdfEcrit (PdfPage, XGauche + 2, XGauche + 19.9, Y - (2 * HauteurLigne) + 1, GetTexteLibelle('PDF_AMBITION2A_SHORT')+GetTexteLibelle('PDF_AMBITION2B_SHORT'), MinPolice);
+    PdfEcrit (PdfPage, XGauche + 2, XGauche + 19.9, Y - (3 * HauteurLigne) + 1, GetTexteLibelle('PDF_AMBITION3A_LONG')+GetTexteLibelle('PDF_AMBITION3B_LONG'), MinPolice);
+
+    Result := Y - (NbLignes * HauteurLigne);
+  end;
+
+// Cherche la valeur du champ nommé Champ dans Enr. Renvoie une case vide (Valeur = '') si le
+// champ n'existe pas dans cet enregistrement, plutôt qu'une erreur : cela permet à une
+// préparation de ne pas renseigner un champ non pertinent pour une entrée donnée.
+Function PdfChercheValeurChamp(const Enr: TPdfEnregistrement; const Champ: String): TPdfValeurCase;
+  var
+    Ind: Integer;
+  begin
+    Result.Champ      := Champ;
+    Result.Valeur     := '';
+    Result.Grise      := False;
+    Result.Annotation := '';
+    for Ind := 0 to High(Enr.Valeurs) do
+      if Enr.Valeurs[Ind].Champ = Champ then
+        begin
+          Result := Enr.Valeurs[Ind];
+          break;
+        end;
+  end;
+
+Function DessinerTableau(PdfPage: TPDFPage; const Tableau: TPdfTableau; const Donnees: TPdfRecordSet): Single;
+  var
+    NbEntrees, NbChamps, IndE, IndC: Integer;
+    XFinTableau, XCol, YHautLigne:   Single;
+    ValeurCase:                      TPdfValeurCase;
+    // orLigne uniquement
+    XPos:           array of Single;
+    NbLignesEntete: Integer;
+    NbLignesTotal:  Integer;
+    LigneCourante:  Integer;
+    YEntete, YDonnee, XDroite: Single;
+    Fusionne:       Boolean;
+
+  // Choisit la police d'une case selon son style explicite (ValeurCase.Style) ou, à défaut,
+  // celui de sa colonne (Colonne.EnTete). Partagée par les deux orientations.
+  Procedure AppliquerStylePolice(const Colonne: TPdfColonne; const Valeur: TPdfValeurCase);
+    var
+      Style: TPdfStylePolice;
+    begin
+      Style := Valeur.Style;
+      if (Style = spValeur) and Colonne.EnTete then
+        Style := spEnTete;
+      case Style of
+        spEnTete: PdfTaillePolice(PdfPage, PdfFontBack,  ConstPoliceCarlson+ConstPoliceGras, 10);
+        spAccent: PdfTaillePolice(PdfPage, PdfFontBold,  ConstPoliceArial+ConstPoliceGras,     8);
+        else      PdfTaillePolice(PdfPage, PdfFontValue, ConstPoliceArial, Tableau.Police);
+      end;
+    end;
+
+  begin
+    NbEntrees := Length(Donnees);
+    NbChamps  := Length(Tableau.Champs);
+
+    if Tableau.Orientation = orColonne then
+      begin
+        XFinTableau := Tableau.X + Tableau.LargeurLibelles + (NbEntrees * Tableau.LargeurEntree);
+
+        // Cadre
+        PdfPage.DrawLine(Tableau.X, Tableau.Y, XFinTableau, Tableau.Y, 1);
+        PdfPage.DrawLine(Tableau.X, Tableau.Y, Tableau.X, Tableau.Y - (NbChamps * Tableau.HauteurLigne), 1);
+        for IndE := 0 to NbEntrees do
+          begin
+            XCol := Tableau.X + Tableau.LargeurLibelles + (IndE * Tableau.LargeurEntree);
+            PdfPage.DrawLine(XCol, Tableau.Y, XCol, Tableau.Y - (NbChamps * Tableau.HauteurLigne), 1);
+          end;
+        for IndC := 0 to NbChamps do
+          PdfPage.DrawLine(Tableau.X, Tableau.Y - (IndC * Tableau.HauteurLigne), XFinTableau, Tableau.Y - (IndC * Tableau.HauteurLigne), 1);
+
+        // Bande de libellés (à gauche)
+        PdfTaillePolice(PdfPage, PdfFontBack, ConstPoliceCarlson+ConstPoliceGras, 10);
+        for IndC := 0 to NbChamps - 1 do
+          PdfCentre(PdfPage, Tableau.X, Tableau.X + Tableau.LargeurLibelles, Tableau.Y - ((IndC+1) * Tableau.HauteurLigne) + 1, Tableau.Champs[IndC].Libelle);
+
+        // Valeurs (une colonne par entrée)
+        for IndE := 0 to NbEntrees - 1 do
+          for IndC := 0 to NbChamps - 1 do
+            begin
+              ValeurCase := PdfChercheValeurChamp(Donnees[IndE], Tableau.Champs[IndC].Champ);
+              if ValeurCase.Valeur = '' then
+                continue;
+
+              AppliquerStylePolice(Tableau.Champs[IndC], ValeurCase);
+
+              if ValeurCase.Grise then
+                PdfPage.SetColor(RGB(150,150,150), False);
+
+              XCol := Tableau.X + Tableau.LargeurLibelles + (IndE * Tableau.LargeurEntree);
+              PdfCentre(PdfPage, XCol, XCol + Tableau.LargeurEntree, Tableau.Y - ((IndC+1) * Tableau.HauteurLigne) + 1, ValeurCase.Valeur);
+
+              if ValeurCase.Grise then
+                PdfPage.SetColor(clBlack, False);
+
+              if ValeurCase.Annotation <> '' then
+                begin
+                  YHautLigne := Tableau.Y - (IndC * Tableau.HauteurLigne);
+                  PdfEcrit(PdfPage, XCol + (Tableau.LargeurEntree * 0.5) + 0.75, XCol + Tableau.LargeurEntree + 0.75, YHautLigne + 3, ValeurCase.Annotation, 4);
+                end;
+            end;
+
+        Result := Tableau.Y - (NbChamps * Tableau.HauteurLigne);
+      end
+    else // orLigne
+      begin
+        // Positions X cumulées : largeur propre par colonne (Champs[i].Largeur) si
+        // renseignée, sinon largeur par défaut du tableau.
+        SetLength(XPos, NbChamps + 1);
+        XPos[0] := Tableau.X;
+        for IndC := 0 to NbChamps - 1 do
+          if Tableau.Champs[IndC].Largeur > 0 then
+            XPos[IndC+1] := XPos[IndC] + Tableau.Champs[IndC].Largeur
+          else
+            XPos[IndC+1] := XPos[IndC] + Tableau.LargeurEntree;
+        XFinTableau := XPos[NbChamps];
+
+        NbLignesEntete := 1;
+        if Tableau.Titre <> '' then
+          NbLignesEntete := NbLignesEntete + 1;
+        // Le cadre peut avoir une capacité fixe supérieure au nombre d'entrées fournies
+        // (NbLignesMax) ; les lignes au-delà de NbEntrees restent alors vides (grille sans
+        // texte), seul le cadre est dessiné sur toute la capacité.
+        if Tableau.NbLignesMax > 0 then
+          NbLignesTotal := NbLignesEntete + Tableau.NbLignesMax
+        else
+          NbLignesTotal := NbLignesEntete + NbEntrees;
+
+        // Cadre horizontal (toutes les lignes, pleine largeur)
+        for IndC := 0 to NbLignesTotal do
+          PdfPage.DrawLine(Tableau.X, Tableau.Y - (IndC * Tableau.HauteurLigne), XFinTableau, Tableau.Y - (IndC * Tableau.HauteurLigne), 1);
+
+        // Cadre vertical : les bords extérieurs (0 et NbChamps) sont toujours pleine
+        // hauteur ; un séparateur intérieur dont la colonne de gauche est "fusionnée avec
+        // la suivante" ne descend qu'à partir de la première ligne de données (pour laisser
+        // le libellé fusionné chapeauter les deux colonnes sans trait au milieu).
+        for IndC := 0 to NbChamps do
+          begin
+            if (IndC = 0) or (IndC = NbChamps) then
+              YHautLigne := Tableau.Y
+            else if Tableau.Champs[IndC-1].FusionAvecSuivante then
+              YHautLigne := Tableau.Y - (NbLignesEntete * Tableau.HauteurLigne)
+            else if Tableau.Titre <> '' then
+              YHautLigne := Tableau.Y - Tableau.HauteurLigne
+            else
+              YHautLigne := Tableau.Y;
+            PdfPage.DrawLine(XPos[IndC], YHautLigne, XPos[IndC], Tableau.Y - (NbLignesTotal * Tableau.HauteurLigne), 1);
+          end;
+
+        LigneCourante := 0;
+
+        // Titre (bandeau plein largeur, optionnel)
+        if Tableau.Titre <> '' then
+          begin
+            PdfTaillePolice(PdfPage, PdfFontBack, ConstPoliceCarlson+ConstPoliceGras, 10);
+            PdfCentre(PdfPage, Tableau.X + Tableau.TitreDecalageGauche, XFinTableau, Tableau.Y - Tableau.HauteurLigne + 1, Tableau.Titre);
+            LigneCourante := 1;
+          end;
+
+        // En-têtes de colonnes : une colonne "fusionnée dans" la précédente (i.e. dont la
+        // précédente a FusionAvecSuivante) ne dessine rien elle-même, son libellé est porté
+        // par la colonne précédente et centré sur la largeur des deux réunies.
+        PdfTaillePolice(PdfPage, PdfFontBack, ConstPoliceCarlson+ConstPoliceGras, 10);
+        YEntete := Tableau.Y - ((LigneCourante+1) * Tableau.HauteurLigne) + 1;
+        IndC := 0;
+        while IndC < NbChamps do
+          begin
+            Fusionne := (IndC > 0) and Tableau.Champs[IndC-1].FusionAvecSuivante;
+            if not Fusionne then
+              begin
+                if Tableau.Champs[IndC].FusionAvecSuivante then
+                  XDroite := XPos[IndC+2]
+                else
+                  XDroite := XPos[IndC+1];
+                if Tableau.Champs[IndC].Libelle <> '' then
+                  if Tableau.Champs[IndC].AlignementEntete = alGauche then
+                    PdfEcrit(PdfPage, XPos[IndC]+Tableau.Champs[IndC].DecalageEnteteMin, XDroite+Tableau.Champs[IndC].DecalageEnteteMax, YEntete, Tableau.Champs[IndC].Libelle, Tableau.PoliceMin)
+                  else
+                    PdfCentre(PdfPage, XPos[IndC]+1, XDroite, YEntete, Tableau.Champs[IndC].Libelle);
+              end;
+            Inc(IndC);
+          end;
+
+        // Valeurs (une ligne par entrée)
+        for IndE := 0 to NbEntrees - 1 do
+          begin
+            YDonnee := Tableau.Y - ((NbLignesEntete + IndE + 1) * Tableau.HauteurLigne) + 1;
+            for IndC := 0 to NbChamps - 1 do
+              begin
+                ValeurCase := PdfChercheValeurChamp(Donnees[IndE], Tableau.Champs[IndC].Champ);
+                if ValeurCase.Valeur = '' then
+                  continue;
+
+                AppliquerStylePolice(Tableau.Champs[IndC], ValeurCase);
+
+                if ValeurCase.Grise then
+                  PdfPage.SetColor(RGB(150,150,150), False);
+
+                PdfEcrit(PdfPage, XPos[IndC] + Tableau.Champs[IndC].DecalageValeurMin, XPos[IndC+1] + Tableau.Champs[IndC].DecalageValeurMax, YDonnee, ValeurCase.Valeur, Tableau.PoliceMin);
+
+                if ValeurCase.Grise then
+                  PdfPage.SetColor(clBlack, False);
+
+                if ValeurCase.Annotation <> '' then
+                  begin
+                    PdfTaillePolice(PdfPage, PdfFontBack, ConstPoliceArial, 6);
+                    PdfEcrit(PdfPage, XPos[IndC+1] - 5, XPos[IndC+1] + 3.5, YDonnee + 1, ValeurCase.Annotation, 6);
+                  end;
+              end;
+          end;
+
+        Result := Tableau.Y - (NbLignesTotal * Tableau.HauteurLigne);
+      end;
+  end;
+
+// Prépare les données du tableau des Caractéristiques (10 entrées = les 10 caractéristiques,
+// dans l'ordre StructureAttribut.OrdreAttribut ; 6 champs par entrée : Code, Initial, Improv,
+// Advances, Current, Bonus). Aucun dessin ici, uniquement du calcul/lecture de données.
+Function PdfPreparerRecordSetCaracteristiques(Personnage: StructurePersonnage; PMetier: StructureMetier): TPdfRecordSet;
+  var
+    PAttribut:       StructureAttribut;
+    PMetierAttribut: StructureMetierAttribut;
+    AttributDonnee:  StructureDonnee;
+    Bonus:           String;
+    Ind:             Integer;
+    NiveauMetier:    Integer;
+  begin
+    SetLength(Result, 10);
+    for Ind := 1 to 10 do
+      begin
+        PAttribut      := ListeAttribut[Ind-1];
+        AttributDonnee := PdfPersonnageAttribut(Personnage, PAttribut.CodeAttribut, Bonus);
+
+        SetLength(Result[Ind-1].Valeurs, 6);
+
+        Result[Ind-1].Valeurs[0].Champ  := 'Code';
+        Result[Ind-1].Valeurs[0].Valeur := GetTexteLibelle('SHORTATTR_'+ExtractStringAfter(PAttribut.CodeAttribut,'_'));
+
+        Result[Ind-1].Valeurs[1].Champ      := 'Initial';
+        Result[Ind-1].Valeurs[1].Valeur     := IntToStr(AttributDonnee.Base);
+        Result[Ind-1].Valeurs[1].Annotation := Bonus;
+
+        NiveauMetier := 0;
+        For PMetierAttribut in ListMetierAttribut do
+          if (PMetierAttribut.CodeMetier = PMetier.CodeMetier)
+             and (PMetierAttribut.CodeAttribut = PAttribut.CodeAttribut)
+             and (PMetierAttribut.NiveauMetier > 0) then
+            begin
+              NiveauMetier := PMetierAttribut.NiveauMetier;
+              break;
+            end;
+        Result[Ind-1].Valeurs[2].Champ := 'Improv';
+        if NiveauMetier > 0 then
+          begin
+            Result[Ind-1].Valeurs[2].Valeur := IntToStr(NiveauMetier);
+            Result[Ind-1].Valeurs[2].Grise  := (NiveauMetier > Personnage.MetierEnCours.NiveauMetier);
+          end;
+
+        Result[Ind-1].Valeurs[3].Champ := 'Advances';
+        if AttributDonnee.Augmentation <> 0 then
+          Result[Ind-1].Valeurs[3].Valeur := IntToStr(AttributDonnee.Augmentation);
+
+        Result[Ind-1].Valeurs[4].Champ  := 'Current';
+        Result[Ind-1].Valeurs[4].Valeur := IntToStr(AttributDonnee.Total);
+
+        Result[Ind-1].Valeurs[5].Champ  := 'Bonus';
+        Result[Ind-1].Valeurs[5].Valeur := IntToStr(Trunc(AttributDonnee.Total/10));
+      end;
+  end;
+
+// Prépare le tableau des compétences de base : une entrée par compétence de ListPage, 6
+// champs (Nom, Attribut, Stat, Upg, Adv, Total). Nom et Attribut partagent le même style de
+// police par ligne (en-tête, ou "accent" si la compétence appartient au métier en cours) —
+// c'est le même calcul que faisait l'ancien code juste avant de dessiner.
+Function PdfPreparerRecordSetCompetencesBase(Personnage: StructurePersonnage; PMetier: StructureMetier; ListPage: TStringList; out TotalEsquive, TotalCalme, TotalResitance, TotalCommandement, TotalIntuition: Integer; out ListPris: String): TPdfRecordSet;
+  var
+    Ind:              Integer;
+    Comp:             String;
+    PCompetence:      StructureCompetence;
+    PAttribut:        StructureAttribut;
+    CompetenceDonnee: StructureDonnee;
+    NivCompMetier:    Integer;
+    ValBonus:         String;
+    Bonus:            String;
+    StyleLigne:       TPdfStylePolice;
+  begin
+    TotalEsquive      := 0;
+    TotalCalme        := 0;
+    TotalResitance    := 0;
+    TotalCommandement := 0;
+    TotalIntuition    := 0;
+    ListPris          := '';
+
+    SetLength(Result, ListPage.Count);
+    for Ind := 0 to ListPage.Count - 1 do
+      begin
+        Comp             := ListPage[Ind];
+        PCompetence      := ChercheCompetence(Comp);
+        CompetenceDonnee := PdfPersonnageCompetence(Personnage, Comp, NivCompMetier);
+        PAttribut        := ChercheAttribut(PCompetence.CodeAttribut);
+        ListPris         := ListPris + Separateurtabulation + Comp;
+
+        case Comp of
+          ConstCEsquive:      TotalEsquive      := CompetenceDonnee.Total;
+          ConstCCalme:        TotalCalme        := CompetenceDonnee.Total;
+          ConstCResitance:    TotalResitance    := CompetenceDonnee.Total;
+          ConstCCommandement: TotalCommandement := CompetenceDonnee.Total;
+          ConstCIntuition:    TotalIntuition    := CompetenceDonnee.Total;
+        end;
+
+        ValBonus := IntToStr(CompetenceDonnee.Augmentation);
+        if ValBonus = '0' then
+          ValBonus := '';
+        if (StrToIntDef(ValBonus,0) >= 0) and (StrToIntDef(ValBonus,0) < 10) then
+          ValBonus := '  ' + ValBonus;
+
+        if CompareCompetence(PCompetence.CodeCompetence, PMetier.CodeCompetence) then
+          StyleLigne := spAccent
+        else
+          StyleLigne := spValeur; // colonnes EnTete=True => police d'en-tête par défaut
+
+        Bonus := PdfPersonnageCompetenceBonus(Personnage, Comp);
+
+        SetLength(Result[Ind].Valeurs, 6);
+
+        Result[Ind].Valeurs[0].Champ      := 'Nom';
+        Result[Ind].Valeurs[0].Valeur     := PdfSupprimeGenerique(PCompetence.CodeCompetence, PCompetence.Libelle);
+        Result[Ind].Valeurs[0].Style      := StyleLigne;
+        Result[Ind].Valeurs[0].Annotation := Bonus;
+
+        Result[Ind].Valeurs[1].Champ  := 'Attribut';
+        Result[Ind].Valeurs[1].Valeur := GetTexteLibelle(PAttribut.Resume);
+        Result[Ind].Valeurs[1].Style  := StyleLigne;
+
+        Result[Ind].Valeurs[2].Champ  := 'Stat';
+        Result[Ind].Valeurs[2].Valeur := IntToStr(CompetenceDonnee.Base);
+
+        Result[Ind].Valeurs[3].Champ := 'Upg';
+        if NivCompMetier > 0 then
+          begin
+            Result[Ind].Valeurs[3].Valeur := IntToStr(NivCompMetier);
+            Result[Ind].Valeurs[3].Grise  := (NivCompMetier > Personnage.MetierEnCours.NiveauMetier);
+          end;
+
+        Result[Ind].Valeurs[4].Champ  := 'Adv';
+        Result[Ind].Valeurs[4].Valeur := ValBonus;
+
+        Result[Ind].Valeurs[5].Champ  := 'Total';
+        Result[Ind].Valeurs[5].Valeur := IntToStr(CompetenceDonnee.Total);
+      end;
+  end;
+
+Function PdfPreparerRecordSetCompetencesGroupees(Personnage: StructurePersonnage; ListPris: String; CapaciteMax: Integer): TPdfRecordSet;
+  var
+    Ind:                  Integer;
+    NbLigne:              Integer;
+    PCompetence:          StructureCompetence;
+    PAttribut:            StructureAttribut;
+    CompetenceDonnee:     StructureDonnee;
+    NivCompMetier:        Integer;
+    ValBonus:             String;
+    Bonus:                String;
+    PersonnageCompetence: StructurePersonnageCompetence;
+  begin
+    SetLength(Result, 0);
+    NbLigne := 0;
+
+    // Passe 1 : compétences groupées déjà augmentées, pas déjà affichées dans le tableau de base
+    for Ind := 0 to ListCompetence.Count - 1 do
+      begin
+        PCompetence := ListCompetence[Ind];
+        if pos(PCompetence.CodeCompetence, ListPris) = 0 then
+          begin
+            CompetenceDonnee := PdfPersonnageCompetence(Personnage, PCompetence.CodeCompetence, NivCompMetier);
+            if CompetenceDonnee.Augmentation <> 0 then
+              begin
+                PAttribut := ChercheAttribut(PCompetence.CodeAttribut);
+
+                ValBonus := IntToStr(CompetenceDonnee.Augmentation);
+                if (StrToIntDef(ValBonus,0) >= 0) and (StrToIntDef(ValBonus,0) < 10) then
+                  ValBonus := '  ' + ValBonus;
+
+                Bonus := PdfPersonnageCompetenceBonus(Personnage, PCompetence.CodeCompetence);
+
+                SetLength(Result, Length(Result)+1);
+                SetLength(Result[High(Result)].Valeurs, 6);
+
+                Result[High(Result)].Valeurs[0].Champ      := 'Nom';
+                Result[High(Result)].Valeurs[0].Valeur     := PdfSupprimeGenerique(PCompetence.CodeCompetence, PCompetence.Libelle);
+                Result[High(Result)].Valeurs[0].Annotation := Bonus;
+
+                Result[High(Result)].Valeurs[1].Champ  := 'Attribut';
+                Result[High(Result)].Valeurs[1].Valeur := GetTexteLibelle(PAttribut.Resume);
+
+                Result[High(Result)].Valeurs[2].Champ  := 'Stat';
+                Result[High(Result)].Valeurs[2].Valeur := IntToStr(CompetenceDonnee.Base);
+
+                Result[High(Result)].Valeurs[3].Champ := 'Upg';
+                if NivCompMetier > 0 then
+                  begin
+                    Result[High(Result)].Valeurs[3].Valeur := IntToStr(NivCompMetier);
+                    Result[High(Result)].Valeurs[3].Grise  := (NivCompMetier > Personnage.MetierEnCours.NiveauMetier);
+                  end;
+
+                Result[High(Result)].Valeurs[4].Champ  := 'Adv';
+                Result[High(Result)].Valeurs[4].Valeur := ValBonus;
+
+                Result[High(Result)].Valeurs[5].Champ  := 'Total';
+                Result[High(Result)].Valeurs[5].Valeur := IntToStr(CompetenceDonnee.Total);
+
+                NbLigne := NbLigne + 1;
+              end;
+          end;
+      end;
+
+    // Passe 2 : compétences accessibles via le métier mais pas augmentées ("non prises"),
+    // grisées entièrement, pour combler l'espace restant — plafonnée à CapaciteMax lignes au
+    // total, comme le faisait l'ancien code (silencieusement tronqué au-delà).
+    for PersonnageCompetence in Personnage.MetierCompetence do
+      begin
+        CompetenceDonnee := PdfPersonnageCompetence(Personnage, PersonnageCompetence.CodeCompetence, NivCompMetier);
+        if (CompetenceDonnee.Augmentation = 0) and (NivCompMetier > 0) then
+          if (pos(PersonnageCompetence.CodeCompetence, ListPris) = 0) and (NbLigne < CapaciteMax) then
+            begin
+              PCompetence := ChercheCompetence(PersonnageCompetence.CodeCompetence);
+              PAttribut   := ChercheAttribut(PCompetence.CodeAttribut);
+
+              SetLength(Result, Length(Result)+1);
+              SetLength(Result[High(Result)].Valeurs, 4);
+
+              Result[High(Result)].Valeurs[0].Champ  := 'Nom';
+              Result[High(Result)].Valeurs[0].Valeur := PdfSupprimeGenerique(PCompetence.CodeCompetence, PCompetence.Libelle);
+              Result[High(Result)].Valeurs[0].Grise  := True;
+
+              Result[High(Result)].Valeurs[1].Champ  := 'Attribut';
+              Result[High(Result)].Valeurs[1].Valeur := GetTexteLibelle(PAttribut.Resume);
+              Result[High(Result)].Valeurs[1].Grise  := True;
+
+              Result[High(Result)].Valeurs[2].Champ  := 'Stat';
+              Result[High(Result)].Valeurs[2].Valeur := IntToStr(CompetenceDonnee.Base);
+              Result[High(Result)].Valeurs[2].Grise  := True;
+
+              Result[High(Result)].Valeurs[3].Champ  := 'Upg';
+              Result[High(Result)].Valeurs[3].Valeur := IntToStr(NivCompMetier);
+              Result[High(Result)].Valeurs[3].Grise  := True;
+              // Adv/Total : jamais renseignés ici (Augmentation = 0 par construction),
+              // comme dans l'ancien code.
+
+              NbLigne := NbLigne + 1;
+            end;
+      end;
+  end;
+
 Procedure PdfPersonnageCreationFeldo2P(Personnage: StructurePersonnage);
   var
     PDFDoc:          TPDFDocument;
@@ -1503,9 +2253,9 @@ Procedure PdfPersonnageCreationFeldo2P(Personnage: StructurePersonnage);
     TalentDonnee:            StructureDonnee;
     PersonnageEquipement:    StructurePersonnageEquipement;
     PersonnageMetier:        StructurePersonnageMetier;
-    PersonnageCompetence:    StructurePersonnageCompetence;
+//    PersonnageCompetence:    StructurePersonnageCompetence;
     PArmureSimplifiee:       StructureArmureSimplifiee;
-    NivCompMetier:           Integer = 0;
+//    NivCompMetier:           Integer = 0;
     NivTalMetier:            Integer = 0;
     ListeTalent:             String='';
     bidon:                   Integer=0;
@@ -1523,6 +2273,12 @@ Procedure PdfPersonnageCreationFeldo2P(Personnage: StructurePersonnage);
     TotalCommandement:       Integer = 0;
     TotalIntuition:          Integer = 0;
     Bonus:                   String;
+    TableauCarac:            TPdfTableau;
+    DonneesCarac:            TPdfRecordSet;
+    TableauComp:             TPdfTableau;
+    DonneesComp:             TPdfRecordSet;
+    TableauCompG:            TPdfTableau;
+    DonneesCompG:            TPdfRecordSet;
 
     // Page 1
       // Entête
@@ -1543,14 +2299,11 @@ Procedure PdfPersonnageCreationFeldo2P(Personnage: StructurePersonnage);
         // Caractéristiques
         DessinDebutHautCarac: Single;
         DessinHauteurCarac:   Single  = 4.6;
-        DessinNbLigCarac:     Integer = 6;
-        DessinNbColCarac:     Integer = 10;
         DessinLargeurCarac:   Single  = 10.3;
         // Compétence
         DessinDebutHautComp:  Single;
         DessinHauteurComp:    Single  = 4.4;
         DessinNbLigComp:      Integer = 28;
-        DessinNbColComp:      Integer = 5;
         DessinLargeurComp:    Single  = 8.6;
         // Ambition
         DessinDebutHautAmb:   Single;
@@ -1591,7 +2344,6 @@ Procedure PdfPersonnageCreationFeldo2P(Personnage: StructurePersonnage);
         DessinDebutHautComg:  Single;
         DessinHauteurComg:    Single  = 4.4;
         DessinNbLigComg:      Integer = 26;
-        DessinNbColComg:      Integer = 5;
         DessinLargeurComg:    Single  = 9;
         // Talents
         DessinDebutHautTal:   Single;
@@ -1772,225 +2524,93 @@ Procedure PdfPersonnageCreationFeldo2P(Personnage: StructurePersonnage);
     ListPage       := TStringList.Create;
     PdfPersonnageCompetenceTri(ListPage);
 
-    // dessin entête
-    PdfPage.DrawLine( DessinDebColG, DessinDebutHautEntete, DessinDebColG, DessinDebutHautEntete - (DessinNbLigEntete * DessinHauteurEntete), 1);
-    PdfPage.DrawLine(DessinFinEntete, DessinDebutHautEntete,DessinFinEntete, DessinDebutHautEntete - (DessinNbLigEntete * DessinHauteurEntete), 1);
-    for IndC := 0 to DessinNbLigEntete do
-      begin
-        PdfPage.DrawLine(DessinDebColG,DessinDebutHautEntete - (indC * DessinHauteurEntete), DessinFinEntete, DessinDebutHautEntete - (indC * DessinHauteurEntete), 1);
-        if IndC > 0 then
-          begin
-            if IndC = 4 then PdfPage.DrawLine( 52, DessinDebutHautEntete - ((indC-1) * DessinHauteurEntete), 52, DessinDebutHautEntete - (indC * DessinHauteurEntete), 1);
-            if IndC <>3 then PdfPage.DrawLine( 82, DessinDebutHautEntete - ((indC-1) * DessinHauteurEntete), 82, DessinDebutHautEntete - (indC * DessinHauteurEntete), 1);
-            if IndC <>2 then PdfPage.DrawLine(114, DessinDebutHautEntete - ((indC-1) * DessinHauteurEntete),114, DessinDebutHautEntete - (indC * DessinHauteurEntete), 1);
-          end;
-      end;
-    DessinDebutHautCarac :=  DessinDebutHautEntete - (indC * DessinHauteurEntete) - 3;
-    // Texte Entête
-    PdfTaillePolice(PdfPage, PdfFontBack, ConstPoliceCarlson+ConstPoliceGras, 10);
-    PdfPage.WriteText( 21, DessinDebutHautEntete - (DessinHauteurEntete * 1) + 1, GetTexteLibelle('PDF_MAIN1_NAME'));
-    PdfPage.WriteText( 83, DessinDebutHautEntete - (DessinHauteurEntete * 1) + 1, GetTexteLibelle('PDF_MAIN1_SPECIES'));
-    PdfPage.WriteText(115, DessinDebutHautEntete - (DessinHauteurEntete * 1) + 1, GetTexteLibelle('PDF_MAIN1_CLASS'));
-    PdfPage.WriteText( 21, DessinDebutHautEntete - (DessinHauteurEntete * 2) + 1, GetTexteLibelle('PDF_MAIN2_CAREER'));
-    PdfPage.WriteText( 83, DessinDebutHautEntete - (DessinHauteurEntete * 2) + 1, GetTexteLibelle('PDF_MAIN2_CAREERLEVEL'));
-    PdfPage.WriteText( 21, DessinDebutHautEntete - (DessinHauteurEntete * 3) + 1, GetTexteLibelle('PDF_MAIN3_CAREERPATH'));
-    PdfPage.WriteText(115, DessinDebutHautEntete - (DessinHauteurEntete * 3) + 1, GetTexteLibelle('PDF_MAIN3_STATUS'));
-    PdfPage.WriteText( 21, DessinDebutHautEntete - (DessinHauteurEntete * 4) + 1, GetTexteLibelle('PDF_MAIN4_AGE'));
-    PdfPage.WriteText( 53, DessinDebutHautEntete - (DessinHauteurEntete * 4) + 1, GetTexteLibelle('PDF_MAIN4_HEIGHT'));
-    PdfPage.WriteText( 83, DessinDebutHautEntete - (DessinHauteurEntete * 4) + 1, GetTexteLibelle('PDF_MAIN4_HAIR'));
-    PdfPage.WriteText(115, DessinDebutHautEntete - (DessinHauteurEntete * 4) + 1, GetTexteLibelle('PDF_MAIN4_EYES'));
-    // Valeur Entête
-    PdfTaillePolice(PdfPage, PdfFontValue, ConstPoliceArial, 9);
-    PdfEcrit(PdfPage, 32, 86, DessinDebutHautEntete - (DessinHauteurEntete * 1) + 1, Personnage.NomPersonnage, MinPolice);
-    PdfEcrit(PdfPage, 89,115, DessinDebutHautEntete - (DessinHauteurEntete * 1) + 1, PRace.Libelle, MinPolice);
-    PdfEcrit(PdfPage,126,DessinFinEntete, DessinDebutHautEntete - (DessinHauteurEntete * 1) + 1, GetTexteLibelle(PMetier.LibelleGroupe), MinPolice);
-    PdfEcrit(PdfPage, 32, 85, DessinDebutHautEntete - (DessinHauteurEntete * 2) + 1, PMetier.Libelle, MinPolice);
-    PdfEcrit(PdfPage, 95,DessinFinEntete, DessinDebutHautEntete - (DessinHauteurEntete * 2) + 1, IntToStr(Personnage.MetierEnCours.NiveauMetier)+' - '+ PMetierNiveau.Libelle, MinPolice);
-    PdfEcrit(PdfPage, 50,DessinFinEntete, DessinDebutHautEntete - (DessinHauteurEntete * 3) + 1, LocData, MinPolice);
-    PdfEcrit(PdfPage,125,DessinFinEntete, DessinDebutHautEntete - (DessinHauteurEntete * 3) + 1, GetTexteLibelle(PMetierNiveau.SalaireMetier, '', ' '), MinPolice);
-    PdfEcrit(PdfPage, 32, 53, DessinDebutHautEntete - (DessinHauteurEntete * 4) + 1, IntToStr(Personnage.Age), MinPolice);
-    PdfEcrit(PdfPage, 63, 83, DessinDebutHautEntete - (DessinHauteurEntete * 4) + 1, IntToStr(Personnage.Height), MinPolice);
-    PdfEcrit(PdfPage, 98, 115, DessinDebutHautEntete - (DessinHauteurEntete * 4) + 1, Personnage.HairColors, MinPolice);
-    PdfEcrit(PdfPage, 125, DessinFinEntete, DessinDebutHautEntete - (DessinHauteurEntete * 4) + 1, Personnage.EyeColors, MinPolice);
+    // Bloc Entête (extrait dans PdfBlocEntete, CONTEXT.md §2.4)
+    DessinDebutHautCarac := PdfBlocEntete(PdfPage, Personnage, PRace, PMetier, PMetierNiveau, LocData,
+      DessinDebColG, DessinFinEntete, DessinDebutHautEntete, DessinHauteurEntete, DessinNbLigEntete, MinPolice) - 3;
 
-    // Dessin caractéristiques
-    PdfPage.DrawLine( DessinDebColG, DessinDebutHautCarac,DessinFinEntete, DessinDebutHautCarac, 1);
-    PdfPage.DrawLine( DessinDebColG, DessinDebutHautCarac, 20, DessinDebutHautCarac - (DessinNbLigCarac * DessinHauteurCarac), 1);
-    for IndC := 0 to DessinNbColCarac do
-      PdfPage.DrawLine( 40 + (IndC * DessinLargeurCarac), DessinDebutHautCarac, 40  + (IndC * DessinLargeurCarac), DessinDebutHautCarac - (DessinNbLigCarac * DessinHauteurCarac), 1);
-    for IndC := 0 to DessinNbLigCarac do
-      PdfPage.DrawLine(20,DessinDebutHautCarac - (indC * DessinHauteurCarac), DessinFinEntete, DessinDebutHautCarac - (indC * DessinHauteurCarac), 1);
-    DessinDebutHautComp := DessinDebutHautCarac - (DessinNbLigCarac * DessinHauteurCarac) - 3;
+    // Tableau Caractéristiques (extrait dans DessinerTableau / PdfPreparerRecordSetCaracteristiques, CONTEXT.md §2.4)
+    TableauCarac.X               := DessinDebColG;
+    TableauCarac.Y               := DessinDebutHautCarac;
+    TableauCarac.Orientation     := orColonne;
+    TableauCarac.LargeurLibelles := 40 - DessinDebColG;
+    TableauCarac.LargeurEntree   := DessinLargeurCarac;
+    TableauCarac.HauteurLigne    := DessinHauteurCarac;
+    TableauCarac.Police          := 9;
+    SetLength(TableauCarac.Champs, 6);
+    TableauCarac.Champs[0].Libelle := GetTexteLibelle('PDF_CHARAC1_CHARAC');   TableauCarac.Champs[0].Champ := 'Code';     TableauCarac.Champs[0].EnTete := True;
+    TableauCarac.Champs[1].Libelle := GetTexteLibelle('PDF_CHARAC3_INITIAL');  TableauCarac.Champs[1].Champ := 'Initial';
+    TableauCarac.Champs[2].Libelle := GetTexteLibelle('PDF_CHARAC3_IMPROV');   TableauCarac.Champs[2].Champ := 'Improv';
+    TableauCarac.Champs[3].Libelle := GetTexteLibelle('PDF_CHARAC3_ADVANCES'); TableauCarac.Champs[3].Champ := 'Advances';
+    TableauCarac.Champs[4].Libelle := GetTexteLibelle('PDF_CHARAC3_CURRENT');  TableauCarac.Champs[4].Champ := 'Current';
+    TableauCarac.Champs[5].Libelle := GetTexteLibelle('PDF_CHARAC3_BONUS');    TableauCarac.Champs[5].Champ := 'Bonus';
+
+    DonneesCarac := PdfPreparerRecordSetCaracteristiques(Personnage, PMetier);
+    DessinDebutHautComp := DessinerTableau(PdfPage, TableauCarac, DonneesCarac) - 3;
     DessinDebutHautComg := DessinDebutHautComp;
 
-    // Texte caractéristiques
-    PdfTaillePolice(PdfPage, PdfFontBack, ConstPoliceCarlson+ConstPoliceGras, 10);
-    For PAttribut in ListeAttribut do
-      if (PAttribut.OrdreAttribut <= 10) then
-        PdfCentre(PdfPage,40 + ((PAttribut.OrdreAttribut-1) * DessinLargeurCarac),40 + (PAttribut.OrdreAttribut * DessinLargeurCarac),DessinDebutHautCarac - (DessinHauteurCarac * 1 ) + 1, GetTexteLibelle('SHORTATTR_'+ExtractStringAfter(PAttribut.CodeAttribut,'_')));
-    PdfCentre(PdfPage,21, 43, DessinDebutHautCarac - (DessinHauteurCarac * 1 ) + 1, GetTexteLibelle('PDF_CHARAC1_CHARAC'));
-    PdfCentre(PdfPage,21, 43, DessinDebutHautCarac - (DessinHauteurCarac * 2 ) + 1, GetTexteLibelle('PDF_CHARAC3_INITIAL'));
-    PdfCentre(PdfPage,21, 43, DessinDebutHautCarac - (DessinHauteurCarac * 3 ) + 1, GetTexteLibelle('PDF_CHARAC3_IMPROV'));
-    PdfCentre(PdfPage,21, 43, DessinDebutHautCarac - (DessinHauteurCarac * 4 ) + 1, GetTexteLibelle('PDF_CHARAC3_ADVANCES'));
-    PdfCentre(PdfPage,21, 43, DessinDebutHautCarac - (DessinHauteurCarac * 5 ) + 1, GetTexteLibelle('PDF_CHARAC3_CURRENT'));
-    PdfCentre(PdfPage,21, 43, DessinDebutHautCarac - (DessinHauteurCarac * 6 ) + 1, GetTexteLibelle('PDF_CHARAC3_BONUS'));
-    // Valeur caractéristiques
-    PdfTaillePolice(PdfPage, PdfFontValue, ConstPoliceArial, 9);
-    for Ind := 1 to 10 do
-      begin
-        PAttribut      := ListeAttribut[Ind-1];
-        AttributDonnee := PdfPersonnageAttribut(Personnage, PAttribut.CodeAttribut, Bonus);
-        PdfCentre(PdfPage,  40 + ((Ind-1) * DessinLargeurCarac),40 + (Ind * DessinLargeurCarac),DessinDebutHautCarac - (DessinHauteurCarac * 2 ) + 1, IntToStr(AttributDonnee.Base));
-        if Bonus <> '' then
-          PdfEcrit(PdfPage,  40 + ((Ind - 0.5) * DessinLargeurCarac) + 0.75, 40 + (Ind * DessinLargeurCarac) +0.75,DessinDebutHautCarac - (DessinHauteurCarac * 1 ) + 3, Bonus, 4);
-        For PAttribut in ListeAttribut do
-          if PAttribut.OrdreAttribut = Ind then
-            break;
-        For PMetierAttribut in ListMetierAttribut do
-          if (PMetierAttribut.CodeMetier = PMetier.CodeMetier)
-             and (PMetierAttribut.CodeAttribut = PAttribut.CodeAttribut)
-             and (PMetierAttribut.NiveauMetier > 0) then
-            begin
-              if (PMetierAttribut.NiveauMetier > Personnage.MetierEnCours.NiveauMetier) then
-                PdfPage.SetColor(RGB(150,150,150), False);
-              PdfCentre(PdfPage,  40 + ((Ind-1) * DessinLargeurCarac),40 + (Ind * DessinLargeurCarac),DessinDebutHautCarac - (DessinHauteurCarac * 3 ) + 1, InttoStr(PMetierAttribut.NiveauMetier));
-              PdfPage.SetColor(clBlack, False);
-              break;
-            end;
-        if AttributDonnee.Augmentation <> 0 then
-          PdfCentre(PdfPage,40 + ((Ind-1) * DessinLargeurCarac),40 + (Ind * DessinLargeurCarac),DessinDebutHautCarac - (DessinHauteurCarac * 4 ) + 1, IntToStr(AttributDonnee.Augmentation));
-        PdfCentre(PdfPage,  40 + ((Ind-1) * DessinLargeurCarac),40 + (Ind * DessinLargeurCarac),DessinDebutHautCarac - (DessinHauteurCarac * 5 ) + 1, IntToStr(AttributDonnee.Total));
-        PdfCentre(PdfPage,  40 + ((Ind-1) * DessinLargeurCarac),40 + (Ind * DessinLargeurCarac),DessinDebutHautCarac - (DessinHauteurCarac * 6 ) + 1, IntToStr(Trunc(AttributDonnee.Total/10)));
-      end;
+    // Tableau Compétences de base (extrait dans DessinerTableau (orLigne) /
+    // PdfPreparerRecordSetCompetencesBase, CONTEXT.md §2.4)
+    TableauComp.X                := DessinDebColG;
+    TableauComp.Y                := DessinDebutHautComp;
+    TableauComp.Orientation      := orLigne;
+    TableauComp.LargeurEntree    := DessinLargeurComp;
+    TableauComp.HauteurLigne     := DessinHauteurComp;
+    TableauComp.Police           := 9;
+    TableauComp.PoliceMin        := MinPolice;
+    TableauComp.Titre            := Trim(GetTexteLibelle('PDF_SKILLS1_BASIC'));
+    TableauComp.TitreDecalageGauche := 15;
+    TableauComp.NbLignesMax       := DessinNbLigComp - 2; // 2 lignes d'en-tête (titre + libellés)
 
-    // Dessin compétence de base
-    PdfPage.DrawLine( DessinDebColG, DessinDebutHautComp, DessinFinColG, DessinDebutHautComp, 1);
-    PdfPage.DrawLine( DessinDebColG, DessinDebutHautComp, DessinDebColG, DessinDebutHautComp - (DessinNbLigComp * DessinHauteurComp), 1);
-    for IndC := 0 to DessinNbColComp do
-      if Indc = DessinNbColComp then
-        PdfPage.DrawLine( 55 + (IndC * DessinLargeurComp), DessinDebutHautComp, 55  + (IndC * DessinLargeurComp), DessinDebutHautComp - (DessinNbLigComp * DessinHauteurComp), 1)
-      else if Indc = 1 then
-        PdfPage.DrawLine( 55 + (IndC * DessinLargeurComp), DessinDebutHautComp - (DessinHauteurComp * 2), 55  + (IndC * DessinLargeurComp), DessinDebutHautComp - (DessinNbLigComp * DessinHauteurComp), 1)
-      else
-        PdfPage.DrawLine( 55 + (IndC * DessinLargeurComp), DessinDebutHautComp - DessinHauteurComp, 55  + (IndC * DessinLargeurComp), DessinDebutHautComp - (DessinNbLigComp * DessinHauteurComp), 1);
-    for IndC := 0 to DessinNbLigComp do
-      PdfPage.DrawLine(DessinDebColG,DessinDebutHautComp - (indC * DessinHauteurComp), DessinFinColG, DessinDebutHautComp - (indC * DessinHauteurComp), 1);
-    DessinDebutHautAmb := DessinDebutHautComp - (indC * DessinHauteurComp) - 3;
-    // Texte Compétence de base
-    PdfTaillePolice(PdfPage, PdfFontBack, ConstPoliceCarlson+ConstPoliceGras, 10);
-    PdfCentre(PdfPage, DessinDebColG + 15, DessinFinColG, DessinDebutHautComp - (1 * DessinHauteurComp) + 1, Trim(GetTexteLibelle('PDF_SKILLS1_BASIC')));
-    PdfEcrit(PdfPage, 22, 55, DessinDebutHautComp - (2 * DessinHauteurComp) + 1,GetTexteLibelle('PDF_SKILLS2_NAME'),MinPolice);
-    PdfCentre(PdfPage, 55 + (0 * DessinLargeurComp) + 1, 55 + (2 * DessinLargeurComp), DessinDebutHautComp - (2 * DessinHauteurComp) + 1,GetTexteLibelle('PDF_SKILLS2_CHARAC'));
-    PdfCentre(PdfPage, 55 + (2 * DessinLargeurComp) + 1, 55 + (3 * DessinLargeurComp), DessinDebutHautComp - (2 * DessinHauteurComp) + 1,GetTexteLibelle('PDF_SKILLS2_UPG'));
-    PdfCentre(PdfPage, 55 + (3 * DessinLargeurComp) + 1, 55 + (4 * DessinLargeurComp), DessinDebutHautComp - (2 * DessinHauteurComp) + 1,GetTexteLibelle('PDF_SKILLS2_ADV'));
-    PdfCentre(PdfPage, 55 + (4 * DessinLargeurComp) + 1, 55 + (5 * DessinLargeurComp), DessinDebutHautComp - (2 * DessinHauteurComp) + 1,GetTexteLibelle('PDF_SKILLS2_TOTAL'));
-    // Valeur compétence de base
-    // Compétences page 1
-    NbLigne := 0;
-    ListPris:= '';
-    for IndC := 0 to ListPage.count-1 do
-      begin
-        Comp        := ListPage[IndC];
-        PCompetence := ChercheCompetence(Comp);
-        CompetenceDonnee := PdfPersonnageCompetence(Personnage, Comp, NivCompMetier);
-        ValStat     := IntToStr(CompetenceDonnee.Base);
-        ValBonus    := IntToStr(CompetenceDonnee.Augmentation);
-        ValTotal    := IntToStr(CompetenceDonnee.Total);
-        case Comp of
-          ConstCEsquive:      TotalEsquive      := CompetenceDonnee.Total;
-          ConstCCalme:        TotalCalme        := CompetenceDonnee.Total;
-          ConstCResitance:    TotalResitance    := CompetenceDonnee.Total;
-          ConstCCommandement: TotalCommandement := CompetenceDonnee.Total;
-          ConstCIntuition:    TotalIntuition    := CompetenceDonnee.Total;
-        end;
-        ListPris    := ListPris + Separateurtabulation + Comp;
-        //Asterisc := TabCompetence.Cells[ColCompAsterisc, IndT];
+    SetLength(TableauComp.Champs, 6);
+    TableauComp.Champs[0].Libelle           := GetTexteLibelle('PDF_SKILLS2_NAME');
+    TableauComp.Champs[0].Champ             := 'Nom';
+    TableauComp.Champs[0].EnTete            := True;
+    TableauComp.Champs[0].Largeur           := 55 - DessinDebColG;
+    TableauComp.Champs[0].AlignementEntete  := alGauche;
+    TableauComp.Champs[0].DecalageEnteteMin := 2;
+    TableauComp.Champs[0].DecalageEnteteMax := 0;
+    TableauComp.Champs[0].DecalageValeurMin := 2;
+    TableauComp.Champs[0].DecalageValeurMax := 3.5;
 
-        if ValBonus = '0' then
-          ValBonus := '';
-        if (StrToIntDef(ValBonus,0) >= 0) and (StrToIntDef(ValBonus,0) < 10) then
-          ValBonus := '  ' + ValBonus;
-        if CompareCompetence(PCompetence.CodeCompetence,PMetier.CodeCompetence) then
-          PdfTaillePolice(PdfPage, PdfFontBold, ConstPoliceArial+ConstPoliceGras, 8)
-        else
-          PdfTaillePolice(PdfPage, PdfFontBack, ConstPoliceCarlson+ConstPoliceGras, 10);
+    TableauComp.Champs[1].Libelle           := GetTexteLibelle('PDF_SKILLS2_CHARAC');
+    TableauComp.Champs[1].Champ             := 'Attribut';
+    TableauComp.Champs[1].EnTete            := True;
+    TableauComp.Champs[1].FusionAvecSuivante:= True;
+    TableauComp.Champs[1].DecalageValeurMin := 3.5;
+    TableauComp.Champs[1].DecalageValeurMax := 3.5;
 
-        PdfEcrit(PdfPage, 22, 55 + (0 * DessinLargeurComp) + 3.5, DessinDebutHautComp - (DessinHauteurComp * (IndC+3)) + 1, PdfSupprimeGenerique(PCompetence.CodeCompetence, PCompetence.Libelle),MinPolice);
-        // gérer les astérisques
-        Bonus       := PdfPersonnageCompetenceBonus(Personnage, Comp);
-        if Bonus <> '' then
-          begin
-            PdfTaillePolice(PdfPage, PdfFontBack, ConstPoliceArial, 6);
-            PdfEcrit(PdfPage, 50, 55 + (0 * DessinLargeurComp) + 3.5, DessinDebutHautComp - (DessinHauteurComp * (IndC+3)) + 2, Bonus, 6);
-            if CompareCompetence(PCompetence.CodeCompetence,PMetier.CodeCompetence) then
-              PdfTaillePolice(PdfPage, PdfFontBold, ConstPoliceArial+ConstPoliceGras, 8)
-            else
-              PdfTaillePolice(PdfPage, PdfFontBack, ConstPoliceCarlson+ConstPoliceGras, 10);
-          end;
-        PAttribut                              := ChercheAttribut(PCompetence.CodeAttribut);
-        PdfEcrit(PdfPage, 55 + (0 * DessinLargeurComp) + 3.5, 55 + (1 * DessinLargeurComp) + 3.5, DessinDebutHautComp - (DessinHauteurComp * (IndC+3)) + 1, GetTexteLibelle(PAttribut.Resume),MinPolice);
-        PdfTaillePolice(PdfPage, PdfFontValue, ConstPoliceArial, 9);
-        PdfEcrit(PdfPage, 55 + (1 * DessinLargeurComp) + 3.5, 55 + (2 * DessinLargeurComp) + 3.5, DessinDebutHautComp - (DessinHauteurComp * (IndC+3)) + 1, ValStat,MinPolice);
-        if (NivCompMetier > 0) then
-          begin
-            if (NivCompMetier > Personnage.MetierEnCours.NiveauMetier) then
-              PdfPage.SetColor(RGB(150,150,150), False);
-            PdfEcrit(PdfPage, 55 + (2 * DessinLargeurComp) + 3.5, 55 + (3 * DessinLargeurComp) + 3.5, DessinDebutHautComp - (DessinHauteurComp * (IndC+3)) + 1, IntToStr(NivCompMetier),MinPolice);
-            PdfPage.SetColor(clBlack, False);
-          end;
-        PdfEcrit(PdfPage, 55 + (3 * DessinLargeurComp) + 3.5, 55 + (4 * DessinLargeurComp) + 3.5, DessinDebutHautComp - (DessinHauteurComp * (IndC+3)) + 1, ValBonus,MinPolice);
-        PdfEcrit(PdfPage, 55 + (4 * DessinLargeurComp) + 3.5, 55 + (5 * DessinLargeurComp) + 3.5, DessinDebutHautComp - (DessinHauteurComp * (IndC+3)) + 1, ValTotal,MinPolice);
+    TableauComp.Champs[2].Champ             := 'Stat';
+    TableauComp.Champs[2].DecalageValeurMin := 3.5;
+    TableauComp.Champs[2].DecalageValeurMax := 3.5;
 
-        NbLigne := NbLigne + 1;
-      end;
+    TableauComp.Champs[3].Libelle           := GetTexteLibelle('PDF_SKILLS2_UPG');
+    TableauComp.Champs[3].Champ             := 'Upg';
+    TableauComp.Champs[3].DecalageValeurMin := 3.5;
+    TableauComp.Champs[3].DecalageValeurMax := 3.5;
+
+    TableauComp.Champs[4].Libelle           := GetTexteLibelle('PDF_SKILLS2_ADV');
+    TableauComp.Champs[4].Champ             := 'Adv';
+    TableauComp.Champs[4].DecalageValeurMin := 3.5;
+    TableauComp.Champs[4].DecalageValeurMax := 3.5;
+
+    TableauComp.Champs[5].Libelle           := GetTexteLibelle('PDF_SKILLS2_TOTAL');
+    TableauComp.Champs[5].Champ             := 'Total';
+    TableauComp.Champs[5].DecalageValeurMin := 3.5;
+    TableauComp.Champs[5].DecalageValeurMax := 3.5;
+
+    DonneesComp := PdfPreparerRecordSetCompetencesBase(Personnage, PMetier, ListPage, TotalEsquive, TotalCalme, TotalResitance, TotalCommandement, TotalIntuition, ListPris);
     ListPage.Destroy;
+    DessinDebutHautAmb := DessinerTableau(PdfPage, TableauComp, DonneesComp) - 3;
 
-    // Dessin Ambitions
-    PdfPage.DrawLine( DessinDebColG, DessinDebutHautAmb, DessinDebColG, DessinDebutHautAmb - (DessinNbLigAmb * DessinHauteurAmb), 1);
-    PdfPage.DrawLine( 39.9, DessinDebutHautAmb - DessinHauteurAmb, 39.9, DessinDebutHautAmb - (DessinNbLigAmb * DessinHauteurAmb), 1);
-    PdfPage.DrawLine( DessinFinColG, DessinDebutHautAmb, DessinFinColG, DessinDebutHautAmb - (DessinNbLigAmb * DessinHauteurAmb), 1);
-    for IndC := 0 to DessinNbLigAmb do
-      PdfPage.DrawLine(20,DessinDebutHautAmb - (indC * DessinHauteurAmb), DessinFinColG, DessinDebutHautAmb - (indC * DessinHauteurAmb), 1);
-    DessinDebutHautRes := DessinDebutHautAmb - (indC * DessinHauteurAmb) - 3;
-    DessinDebutHautDes := DessinDebutHautAmb - (indC * DessinHauteurAmb) - 3;
-    // Texte Ambitions
-    PdfTaillePolice(PdfPage, PdfFontBack, ConstPoliceCarlson+ConstPoliceGras, 10);
-    PdfCentre(PdfPage, 22, DessinFinColG, DessinDebutHautAmb - (1 * DessinHauteurAmb) + 1,GetTexteLibelle('PDF_AMBITION1_AMBITIONS'));
-    PdfEcrit(PdfPage, 22, 39.9, DessinDebutHautAmb - (2 * DessinHauteurAmb) + 1, GetTexteLibelle('PDF_AMBITION2A_SHORT')+GetTexteLibelle('PDF_AMBITION2B_SHORT'),MinPolice);
-    PdfEcrit(PdfPage, 22, 39.9, DessinDebutHautAmb - (3 * DessinHauteurAmb) + 1, GetTexteLibelle('PDF_AMBITION3A_LONG')+GetTexteLibelle('PDF_AMBITION3B_LONG'),MinPolice);
+    // Bloc Ambitions (extrait dans PdfBlocAmbitions, CONTEXT.md §2.4)
+    DessinDebutHautRes := PdfBlocAmbitions(PdfPage, DessinDebColG, DessinFinColG, DessinDebutHautAmb, DessinHauteurAmb, DessinNbLigAmb, MinPolice) - 3;
+    DessinDebutHautDes := DessinDebutHautRes;
 
-    // Dessin Résilience
-    PdfPage.DrawLine( DessinDebColG, DessinDebutHautRes, DessinDebColG, DessinDebutHautRes - (DessinNbLigRes * DessinHauteurRes), 1);
-    PdfPage.DrawLine( 49.9, DessinDebutHautRes - DessinHauteurRes, 49.9, DessinDebutHautRes - (DessinNbLigRes * DessinHauteurRes), 1);
-    PdfPage.DrawLine( 60, DessinDebutHautRes, 60, DessinDebutHautRes - ((DessinNbLigRes-1) * DessinHauteurRes), 1);
-    PdfPage.DrawLine( 89, DessinDebutHautRes - DessinHauteurRes, 89, DessinDebutHautRes - ((DessinNbLigRes-1) * DessinHauteurRes), 1);
-    PdfPage.DrawLine( DessinFinColG, DessinDebutHautRes, DessinFinColG, DessinDebutHautRes - (DessinNbLigRes * DessinHauteurRes), 1);
-    for IndC := 0 to DessinNbLigRes do
-      PdfPage.DrawLine(20,DessinDebutHautRes - (indC * DessinHauteurRes), DessinFinColG, DessinDebutHautRes - (indC * DessinHauteurRes), 1);
-    // Texte Résilience
-    PdfTaillePolice(PdfPage, PdfFontBack, ConstPoliceCarlson+ConstPoliceGras, 10);
-    PdfCentre(PdfPage,22,62,DessinDebutHautRes - (1 * DessinHauteurRes) + 1, GetTexteLibelle('PDF_RESIL1_RESILIENCE'));
-    PdfEcrit(PdfPage,22,62,DessinDebutHautRes - (2 * DessinHauteurRes) + 1, GetTexteLibelle('PDF_RESIL2A_RESILIENCE'),MinPolice);
-    PdfEcrit(PdfPage,22,62,DessinDebutHautRes - (3 * DessinHauteurRes) + 1, GetTexteLibelle('PDF_RESIL2B_RESOLVE'),MinPolice);
-    PdfEcrit(PdfPage,22,69,DessinDebutHautRes - (DessinNbLigRes * DessinHauteurRes) + 1, GetTexteLibelle('PDF_RESIL2C_MOTIVATION'),MinPolice);
-    // Valeur Résilience
-    PdfTaillePolice(PdfPage, PdfFontValue, ConstPoliceArial, 9);
-    AttributDonnee := PdfPersonnageAttribut(Personnage, ConstCaracResil, Bonus);
-    PdfCentre(PdfPage,50,60, DessinDebutHautRes - (2 * DessinHauteurRes) + 1,IntToStr(AttributDonnee.Total));          // Résilience
-    PdfCentre(PdfPage,50,60, DessinDebutHautRes - (3 * DessinHauteurRes) + 1,IntToStr(Determine));                     // Détermination
+    // Bloc Résilience / Destin (extrait dans PdfBlocResilience / PdfBlocDestin, CONTEXT.md §2.4)
+    PdfBlocResilience(PdfPage, Personnage, DessinDebColG, DessinDebutHautRes, DessinNbLigRes, DessinHauteurRes, MinPolice, Determine, IndC);
+    PdfBlocDestin(PdfPage, Personnage, DessinDebColG + 40, DessinDebutHautDes, DessinHauteurDes, MinPolice, Chance);
 
-    //DessinDebutHautBle := DessinDebutHautDes - (indC * DessinHauteurDes) - 3;
     DessinDebutHautExp := DessinDebutHautDes - (indC * DessinHauteurDes) - 3;
-    // Texte Destin
-    PdfTaillePolice(PdfPage, PdfFontBack, ConstPoliceCarlson+ConstPoliceGras, 10);
-    PdfCentre(PdfPage,62,DessinFinColG,DessinDebutHautDes - (1 * DessinHauteurDes) + 1, GetTexteLibelle('PDF_FATE1_FATE'));
-    PdfEcrit(PdfPage,62,89,DessinDebutHautDes - (2 * DessinHauteurDes) + 1, GetTexteLibelle('PDF_FATE2_FATE'),MinPolice);
-    PdfEcrit(PdfPage,62,89,DessinDebutHautDes - (3 * DessinHauteurDes) + 1, GetTexteLibelle('PDF_FATE3_FORTUNE'),MinPolice);
-    // Valeur Destin
-    PdfTaillePolice(PdfPage, PdfFontValue, ConstPoliceArial, 9);
-    AttributDonnee := PdfPersonnageAttribut(Personnage, ConstCaracDestin, Bonus);
-    PdfCentre(PdfPage,89,DessinFinColG, DessinDebutHautDes - (2 * DessinHauteurDes) + 1,IntToStr(AttributDonnee.Total));          // Destin
-    PdfCentre(PdfPage,89,DessinFinColG, DessinDebutHautDes - (3 * DessinHauteurDes) + 1,IntToStr(Chance));                        // Chance
 
     //// Dessin Blessure
     //PdfPage.DrawLine( DessinDebColG , DessinDebutHautBle, DessinDebColG, DessinDebutHautBle - (DessinNbLigBle * DessinHauteurBle), 1);
@@ -2130,95 +2750,56 @@ Procedure PdfPersonnageCreationFeldo2P(Personnage: StructurePersonnage);
     //PdfPage.DrawLine( DessinDebColG + 54, DessinDebutHautPCM     , DessinDebColG + 54, DessinDebutHautPCM - 19, 1);
     //PdfPage.DrawLine( DessinDebColG + 78, DessinDebutHautPCM     , DessinDebColG + 78, DessinDebutHautPCM - 19, 1);
 
-    // Dessin compétences groupées
-    PdfPage.DrawLine( DessinDebColD, DessinDebutHautComg, DessinFinColD, DessinDebutHautComg, 1);
-    PdfPage.DrawLine( DessinDebColD, DessinDebutHautComg, DessinDebColD, DessinDebutHautComg - (DessinNbLigComg * DessinHauteurComg), 1);
-    for IndC := 0 to DessinNbColComg do
-      if Indc = DessinNbColComg then
-        PdfPage.DrawLine( 143 + (IndC * DessinLargeurComg), DessinDebutHautComg, 143  + (IndC * DessinLargeurComg), DessinDebutHautComg - (DessinNbLigComg * DessinHauteurComg), 1)
-      else if Indc = 1 then
-        PdfPage.DrawLine( 143 + (IndC * DessinLargeurComg), DessinDebutHautComg - (DessinHauteurComg * 2), 143  + (IndC * DessinLargeurComg), DessinDebutHautComg - (DessinNbLigComg * DessinHauteurComg), 1)
-      else
-        PdfPage.DrawLine( 143 + (IndC * DessinLargeurComg), DessinDebutHautComg - DessinHauteurComg, 143  + (IndC * DessinLargeurComg), DessinDebutHautComg - (DessinNbLigComg * DessinHauteurComg), 1);
-    for IndC := 0 to DessinNbLigComg do
-      PdfPage.DrawLine(DessinDebColD,DessinDebutHautComg - (indC * DessinHauteurComg), DessinFinColD, DessinDebutHautComg - (indC * DessinHauteurComg), 1);
-    DessinDebutHautTal := DessinDebutHautComg - (DessinNbLigComg * DessinHauteurComg) - 3;
-    // Texte compétences groupées
-    PdfTaillePolice(PdfPage, PdfFontBack, ConstPoliceCarlson+ConstPoliceGras, 10);
-    PdfCentre(PdfPage, DessinDebColD + 15, DessinFinColD, DessinDebutHautComg - (1 * DessinHauteurComg) + 1, Trim(GetTexteLibelle('PDF_SKILLS1_ADVANCED')));
-    PdfEcrit(PdfPage, DessinDebColD + 5, 148, DessinDebutHautComg - (2 * DessinHauteurComg) + 1,GetTexteLibelle('PDF_SKILLS2_NAME'),MinPolice);
-    PdfCentre(PdfPage, 143 + (0 * DessinLargeurComg) + 1, 143 + (2 * DessinLargeurComg), DessinDebutHautComg - (2 * DessinHauteurComg) + 1,GetTexteLibelle('PDF_SKILLS2_CHARAC'));
-    PdfCentre(PdfPage, 143 + (2 * DessinLargeurComg) + 1, 143 + (3 * DessinLargeurComg), DessinDebutHautComg - (2 * DessinHauteurComg) + 1,GetTexteLibelle('PDF_SKILLS2_UPG'));
-    PdfCentre(PdfPage, 143 + (3 * DessinLargeurComg) + 1, 143 + (4 * DessinLargeurComg), DessinDebutHautComg - (2 * DessinHauteurComg) + 1,GetTexteLibelle('PDF_SKILLS2_ADV'));
-    PdfCentre(PdfPage, 143 + (4 * DessinLargeurComg) + 1, 143 + (5 * DessinLargeurComg), DessinDebutHautComg - (2 * DessinHauteurComg) + 1,GetTexteLibelle('PDF_SKILLS2_TOTAL'));
-    // Valeur Compétences groupées
-    NbLigne := 0;
-    for IndC := 0 to ListCompetence.Count-1 do
-      begin
-        PCompetence   := ListCompetence[IndC];
-        if (pos(PCompetence.CodeCompetence, ListPris) = 0) then
-          begin
-            CompetenceDonnee := PdfPersonnageCompetence(Personnage, PCompetence.CodeCompetence, NivCompMetier);
-            if CompetenceDonnee.Augmentation <> 0 then
-              begin
-                ValStat     := IntToStr(CompetenceDonnee.Base);
-                ValBonus    := IntToStr(CompetenceDonnee.Augmentation);
-                ValTotal    := IntToStr(CompetenceDonnee.Total);
-                if (StrToIntDef(ValBonus,0) >= 0) and (StrToIntDef(ValBonus,0) < 10) then
-                  ValBonus := '  ' + ValBonus;
-                //PCompetence := ChercheCompetence(PCompetence.CodeCompetence);
-                // gérer les astérisques
-                Bonus       := PdfPersonnageCompetenceBonus(Personnage, Comp);
-                if Bonus <> '' then
-                  begin
-                    PdfTaillePolice(PdfPage, PdfFontBack, ConstPoliceArial, 6);
-                    PdfEcrit(PdfPage, 138, 143 , DessinDebutHautComp - (DessinHauteurComp * (NbLigne+3)) + 2, Bonus, 6);
-                  end;
-                PdfTaillePolice(PdfPage, PdfFontValue, ConstPoliceArial, 9);
-                PdfEcrit(PdfPage, 105 , 143, DessinDebutHautComg - (DessinHauteurComg * (NbLigne+3)) + 1, PdfSupprimeGenerique(PCompetence.CodeCompetence, PCompetence.Libelle),MinPolice);
-                PAttribut                              := ChercheAttribut(PCompetence.CodeAttribut);
-                PdfEcrit(PdfPage, 143 + (0 * DessinLargeurComg) + 2.5, 143 + (1 * DessinLargeurComg) + 2.5, DessinDebutHautComg - (DessinHauteurComg * (NbLigne+3)) + 1, GetTexteLibelle(PAttribut.Resume),MinPolice);
-                PdfTaillePolice(PdfPage, PdfFontValue, ConstPoliceArial, 9);
-                PdfEcrit(PdfPage, 143 + (1 * DessinLargeurComg) + 2.5, 143 + (2 * DessinLargeurComg) + 2.5, DessinDebutHautComg - (DessinHauteurComg * (NbLigne+3)) + 1, ValStat,MinPolice);
-                if (NivCompMetier > 0) then
-                  begin
-                    if (NivCompMetier > Personnage.MetierEnCours.NiveauMetier) then
-                      PdfPage.SetColor(RGB(150,150,150), False);
-                    PdfEcrit(PdfPage, 143 + (2 * DessinLargeurComg) + 2.5, 143 + (3 * DessinLargeurComg) + 2.5, DessinDebutHautComg - (DessinHauteurComg * (NbLigne+3)) + 1, IntToStr(NivCompMetier),MinPolice);
-                    PdfPage.SetColor(clBlack, False);
-                  end;
-                PdfEcrit(PdfPage, 143 + (3 * DessinLargeurComg) + 2.5, 143 + (4 * DessinLargeurComg) + 2.5, DessinDebutHautComg - (DessinHauteurComg * (NbLigne+3)) + 1, ValBonus,MinPolice);
-                PdfEcrit(PdfPage, 143 + (4 * DessinLargeurComg) + 2.5, 143 + (5 * DessinLargeurComg) + 2.5, DessinDebutHautComg - (DessinHauteurComg * (NbLigne+3)) + 1, ValTotal,MinPolice);
-                NbLigne := NbLigne + 1;
-              end;
-          end;
-      end;
-    // Valeur Compétences groupées non prises
-    PdfPage.SetColor(RGB(150,150,150), False);
-    for PersonnageCompetence in Personnage.MetierCompetence do
-      begin
-        CompetenceDonnee := PdfPersonnageCompetence(Personnage, PersonnageCompetence.CodeCompetence, NivCompMetier);
-        if (CompetenceDonnee.Augmentation = 0) and (NivCompMetier > 0) then
-          begin
-            if (pos(PersonnageCompetence.CodeCompetence, ListPris) = 0) and (NbLigne < (DessinNbLigComg - 2)) then
-              begin
-                ValStat     := IntToStr(CompetenceDonnee.Base);
-                ValBonus    := IntToStr(CompetenceDonnee.Augmentation);
-                ValTotal    := IntToStr(CompetenceDonnee.Total);
-                PCompetence := ChercheCompetence(PersonnageCompetence.CodeCompetence);
-                PdfTaillePolice(PdfPage, PdfFontValue, ConstPoliceArial, 9);
-                PdfEcrit(PdfPage, 105 , 143, DessinDebutHautComg - (DessinHauteurComg * (NbLigne+3)) + 1, PdfSupprimeGenerique(PCompetence.CodeCompetence, PCompetence.Libelle),MinPolice);
-                PAttribut                              := ChercheAttribut(PCompetence.CodeAttribut);
-                PdfEcrit(PdfPage, 143 + (0 * DessinLargeurComg) + 2.5, 143 + (1 * DessinLargeurComg) + 2.5, DessinDebutHautComg - (DessinHauteurComg * (NbLigne+3)) + 1, GetTexteLibelle(PAttribut.Resume),MinPolice);
-                PdfTaillePolice(PdfPage, PdfFontValue, ConstPoliceArial, 9);
-                PdfEcrit(PdfPage, 143 + (1 * DessinLargeurComg) + 2.5, 143 + (2 * DessinLargeurComg) + 2.5, DessinDebutHautComg - (DessinHauteurComg * (NbLigne+3)) + 1, ValStat,MinPolice);
-                if (NivCompMetier > 0) then
-                  PdfEcrit(PdfPage, 143 + (2 * DessinLargeurComg) + 2.5, 143 + (3 * DessinLargeurComg) + 2.5, DessinDebutHautComg - (DessinHauteurComg * (NbLigne+3)) + 1, IntToStr(NivCompMetier),MinPolice);
-                NbLigne := NbLigne + 1;
-              end;
-          end;
-        end;
-    PdfPage.SetColor(clBlack, False);
+    // Tableau Compétences groupées (extrait dans DessinerTableau (orLigne) /
+    // PdfPreparerRecordSetCompetencesGroupees, CONTEXT.md §2.4)
+    TableauCompG.X                 := DessinDebColD;
+    TableauCompG.Y                 := DessinDebutHautComg;
+    TableauCompG.Orientation       := orLigne;
+    TableauCompG.LargeurEntree     := DessinLargeurComg;
+    TableauCompG.HauteurLigne      := DessinHauteurComg;
+    TableauCompG.Police            := 9;
+    TableauCompG.PoliceMin         := MinPolice;
+    TableauCompG.Titre             := Trim(GetTexteLibelle('PDF_SKILLS1_ADVANCED'));
+    TableauCompG.TitreDecalageGauche := 15;
+    TableauCompG.NbLignesMax        := DessinNbLigComg - 2; // 2 lignes d'en-tête (titre + libellés)
+
+    SetLength(TableauCompG.Champs, 6);
+    TableauCompG.Champs[0].Libelle           := GetTexteLibelle('PDF_SKILLS2_NAME');
+    TableauCompG.Champs[0].Champ             := 'Nom';
+    TableauCompG.Champs[0].Largeur           := 143 - DessinDebColD;
+    TableauCompG.Champs[0].AlignementEntete  := alGauche;
+    TableauCompG.Champs[0].DecalageEnteteMin := 5;
+    TableauCompG.Champs[0].DecalageEnteteMax := 5;
+    TableauCompG.Champs[0].DecalageValeurMin := 3;
+    TableauCompG.Champs[0].DecalageValeurMax := 0;
+
+    TableauCompG.Champs[1].Libelle           := GetTexteLibelle('PDF_SKILLS2_CHARAC');
+    TableauCompG.Champs[1].Champ             := 'Attribut';
+    TableauCompG.Champs[1].FusionAvecSuivante:= True;
+    TableauCompG.Champs[1].DecalageValeurMin := 2.5;
+    TableauCompG.Champs[1].DecalageValeurMax := 2.5;
+
+    TableauCompG.Champs[2].Champ             := 'Stat';
+    TableauCompG.Champs[2].DecalageValeurMin := 2.5;
+    TableauCompG.Champs[2].DecalageValeurMax := 2.5;
+
+    TableauCompG.Champs[3].Libelle           := GetTexteLibelle('PDF_SKILLS2_UPG');
+    TableauCompG.Champs[3].Champ             := 'Upg';
+    TableauCompG.Champs[3].DecalageValeurMin := 2.5;
+    TableauCompG.Champs[3].DecalageValeurMax := 2.5;
+
+    TableauCompG.Champs[4].Libelle           := GetTexteLibelle('PDF_SKILLS2_ADV');
+    TableauCompG.Champs[4].Champ             := 'Adv';
+    TableauCompG.Champs[4].DecalageValeurMin := 2.5;
+    TableauCompG.Champs[4].DecalageValeurMax := 2.5;
+
+    TableauCompG.Champs[5].Libelle           := GetTexteLibelle('PDF_SKILLS2_TOTAL');
+    TableauCompG.Champs[5].Champ             := 'Total';
+    TableauCompG.Champs[5].DecalageValeurMin := 2.5;
+    TableauCompG.Champs[5].DecalageValeurMax := 2.5;
+
+    DonneesCompG := PdfPreparerRecordSetCompetencesGroupees(Personnage, ListPris, DessinNbLigComg - 2);
+    DessinDebutHautTal := DessinerTableau(PdfPage, TableauCompG, DonneesCompG) - 3;
 
     // Dessin Talents
     PdfPage.DrawLine( DessinDebColD, DessinDebutHautTal, DessinDebColD, DessinDebutHautTal - (DessinNbLigTal * DessinHauteurTal), 1);
@@ -2252,7 +2833,7 @@ Procedure PdfPersonnageCreationFeldo2P(Personnage: StructurePersonnage);
             if Bonus <> '' then
               begin
                 PdfTaillePolice(PdfPage, PdfFontValue, ConstPoliceArial, 4);
-                PdfEcrit(PdfPage, DessinDebColD + 39, DessinDebColD + 41, DessinDebutHautTal - ((NbLigne + 2) * DessinHauteurTal) + 3, Bonus, 4);
+                PdfEcrit(PdfPage, DessinDebColD + 38, DessinDebColD + 41, DessinDebutHautTal - ((NbLigne + 2) * DessinHauteurTal) + 3, Bonus, 4);
                 PdfTaillePolice(PdfPage, PdfFontValue, ConstPoliceArial, 9);
               end;
             if (NivTalMetier > 0) then

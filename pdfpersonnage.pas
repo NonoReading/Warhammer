@@ -139,6 +139,27 @@ Function PdfPersonnageTalentBonus(Personnage: StructurePersonnage; CodeTalent: S
 Procedure PdfBlocResilience(PdfPage: TPDFPage; Personnage: StructurePersonnage; X, Y: Single; NbLignes: Integer; HauteurLigne: Single; MinPolice: Integer; Determine: Integer; out NbLignesPourSuite: Integer);
 Procedure PdfBlocDestin(PdfPage: TPDFPage; Personnage: StructurePersonnage; XGauche, Y: Single; HauteurLigne: Single; MinPolice: Integer; Chance: Integer);
 
+// Bloc Entête (panneau fixe en haut de la page 1 : nom, race, classe, carrière, niveau de
+// carrière, voie, statut, âge/taille/cheveux/yeux). Grille à colonnes irrégulières selon la
+// ligne (les séparateurs verticaux internes changent d'une ligne à l'autre) : ce n'est donc
+// pas un TPdfTableau générique, juste un bloc simple comme Résilience/Destin. Renvoie le Y
+// du bas du cadre, comme DessinerTableau (sans le -3 de marge, laissé à l'appelant).
+Function PdfBlocEntete(PdfPage: TPDFPage; Personnage: StructurePersonnage; PRace: StructureRace; PMetier: StructureMetier; PMetierNiveau: StructureMetierNiveau; LocData: String; XGauche, XDroite, Y, HauteurLigne: Single; NbLignes: Integer; MinPolice: Integer): Single;
+
+// Bloc Ambitions (panneau fixe : titre + deux lignes "court terme"/"long terme" laissées
+// vides à l'impression pour être remplies à la main — aucune donnée de Personnage,
+// uniquement des libellés). Brique 1, CONTEXT.md §2.4. Renvoie le Y du bas du cadre, comme
+// PdfBlocEntete (sans le -3 de marge, laissé à l'appelant).
+Function PdfBlocAmbitions(PdfPage: TPDFPage; XGauche, XDroite, Y, HauteurLigne: Single; NbLignes: Integer; MinPolice: Integer): Single;
+
+// Blocs Expérience / Mouvement / Corruption : trois panneaux "titre + lignes libellé/valeur"
+// alignés côte à côte sur la même rangée (même Y de départ, calculé par l'appelant à partir
+// du bas du bloc Résilience/Destin). Chacun ne connaît que son propre coin (XGauche/XDroite),
+// brique 1, CONTEXT.md §2.4. Renvoient le Y du bas du cadre (sans le -3 de marge).
+Function PdfBlocExperience(PdfPage: TPDFPage; Personnage: StructurePersonnage; XGauche, XDroite, Y, HauteurLigne: Single; NbLignes: Integer; MinPolice: Integer): Single;
+Function PdfBlocMouvement(PdfPage: TPDFPage; XGauche, XDroite, Y, HauteurLigne: Single; NbLignes: Integer; MinPolice: Integer; Mouv, BonusSprint: Integer): Single;
+Function PdfBlocCorruption(PdfPage: TPDFPage; XGauche, XDroite, Y, HauteurLigne: Single; NbLignes: Integer; MinPolice: Integer; BE, BFM, AmePure: Integer): Single;
+
 // Brique 2 (tableau de données, CONTEXT.md §2.4) — DessinerTableau est générique : elle
 // dessine le cadre et le contenu à partir de Tableau (mise en page) et Donnees (valeurs déjà
 // préparées), sans rien connaître du sens métier des champs. Elle renvoie le Y du bas du
@@ -1630,6 +1651,172 @@ Procedure PdfBlocDestin(PdfPage: TPDFPage; Personnage: StructurePersonnage; XGau
     PdfCentre(PdfPage, XGauche+29, XGauche+38, Y - (3 * HauteurLigne) + 1, IntToStr(Chance));                // Chance
   end;
 
+// Dessine le panneau Entête (extrait de PdfPersonnageCreationFeldo2P, CONTEXT.md §2.4).
+// Cadre à colonnes irrégulières : les séparateurs verticaux internes (52/82/114) ne sont pas
+// les mêmes d'une ligne à l'autre (voir les conditions IndC = 4 / IndC <> 3 / IndC <> 2
+// ci-dessous, reprises telles quelles de l'ancien code). XGauche/XDroite sont les bords du
+// cadre, Y son sommet, HauteurLigne la hauteur d'une ligne et NbLignes son nombre de lignes.
+Function PdfBlocEntete(PdfPage: TPDFPage; Personnage: StructurePersonnage; PRace: StructureRace; PMetier: StructureMetier; PMetierNiveau: StructureMetierNiveau; LocData: String; XGauche, XDroite, Y, HauteurLigne: Single; NbLignes: Integer; MinPolice: Integer): Single;
+  var
+    IndC: Integer;
+  begin
+    // Dessin cadre
+    PdfPage.DrawLine(XGauche, Y, XGauche, Y - (NbLignes * HauteurLigne), 1);
+    PdfPage.DrawLine(XDroite, Y, XDroite, Y - (NbLignes * HauteurLigne), 1);
+    for IndC := 0 to NbLignes do
+      begin
+        PdfPage.DrawLine(XGauche, Y - (IndC * HauteurLigne), XDroite, Y - (IndC * HauteurLigne), 1);
+        if IndC > 0 then
+          begin
+            if IndC = 4  then PdfPage.DrawLine( 52, Y - ((IndC-1) * HauteurLigne),  52, Y - (IndC * HauteurLigne), 1);
+            if IndC <> 3 then PdfPage.DrawLine( 77, Y - ((IndC-1) * HauteurLigne),  77, Y - (IndC * HauteurLigne), 1);
+            if IndC <> 2 then PdfPage.DrawLine(114, Y - ((IndC-1) * HauteurLigne), 114, Y - (IndC * HauteurLigne), 1);
+          end;
+      end;
+
+    // Texte Entête
+    PdfTaillePolice(PdfPage, PdfFontBack, ConstPoliceCarlson+ConstPoliceGras, 10);
+    PdfPage.WriteText( 21, Y - (HauteurLigne * 1) + 1, GetTexteLibelle('PDF_MAIN1_NAME'));
+    PdfPage.WriteText( 78, Y - (HauteurLigne * 1) + 1, GetTexteLibelle('PDF_MAIN1_SPECIES'));
+    PdfPage.WriteText(115, Y - (HauteurLigne * 1) + 1, GetTexteLibelle('PDF_MAIN1_CLASS'));
+    PdfPage.WriteText( 21, Y - (HauteurLigne * 2) + 1, GetTexteLibelle('PDF_MAIN2_CAREER'));
+    PdfPage.WriteText( 78, Y - (HauteurLigne * 2) + 1, GetTexteLibelle('PDF_MAIN2_CAREERLEVEL'));
+    PdfPage.WriteText( 21, Y - (HauteurLigne * 3) + 1, GetTexteLibelle('PDF_MAIN3_CAREERPATH'));
+    PdfPage.WriteText(115, Y - (HauteurLigne * 3) + 1, GetTexteLibelle('PDF_MAIN3_STATUS'));
+    PdfPage.WriteText( 21, Y - (HauteurLigne * 4) + 1, GetTexteLibelle('PDF_MAIN4_AGE'));
+    PdfPage.WriteText( 53, Y - (HauteurLigne * 4) + 1, GetTexteLibelle('PDF_MAIN4_HEIGHT'));
+    PdfPage.WriteText( 78, Y - (HauteurLigne * 4) + 1, GetTexteLibelle('PDF_MAIN4_HAIR'));
+    PdfPage.WriteText(115, Y - (HauteurLigne * 4) + 1, GetTexteLibelle('PDF_MAIN4_EYES'));
+
+    // Valeur Entête
+    PdfTaillePolice(PdfPage, PdfFontValue, ConstPoliceArial, 9);
+    PdfEcrit(PdfPage,  32,  86, Y - (HauteurLigne * 1) + 1, Personnage.NomPersonnage, MinPolice);
+    PdfEcrit(PdfPage,  89, 115, Y - (HauteurLigne * 1) + 1, PRace.Libelle, MinPolice);
+    PdfEcrit(PdfPage, 126, XDroite, Y - (HauteurLigne * 1) + 1, GetTexteLibelle(PMetier.LibelleGroupe), MinPolice);
+    PdfEcrit(PdfPage,  32,  85, Y - (HauteurLigne * 2) + 1, PMetier.Libelle, MinPolice);
+    PdfEcrit(PdfPage,  95, XDroite, Y - (HauteurLigne * 2) + 1, IntToStr(Personnage.MetierEnCours.NiveauMetier)+' - '+ PMetierNiveau.Libelle, MinPolice);
+    PdfEcrit(PdfPage,  50, XDroite, Y - (HauteurLigne * 3) + 1, LocData, MinPolice);
+    PdfEcrit(PdfPage, 125, XDroite, Y - (HauteurLigne * 3) + 1, GetTexteLibelle(PMetierNiveau.SalaireMetier, '', ' '), MinPolice);
+    PdfEcrit(PdfPage,  32,  53, Y - (HauteurLigne * 4) + 1, IntToStr(Personnage.Age), MinPolice);
+    PdfEcrit(PdfPage,  63,  78, Y - (HauteurLigne * 4) + 1, IntToStr(Personnage.Height), MinPolice);
+    PdfEcrit(PdfPage,  98, 115, Y - (HauteurLigne * 4) + 1, Personnage.HairColors, MinPolice);
+    PdfEcrit(PdfPage, 125, XDroite, Y - (HauteurLigne * 4) + 1, Personnage.EyeColors, MinPolice);
+
+    Result := Y - (NbLignes * HauteurLigne);
+  end;
+
+// Dessine le panneau Ambitions (extrait de PdfPersonnageCreationFeldo2P, CONTEXT.md §2.4).
+// XGauche+19.9 remplace l'ancienne constante absolue 39.9 (= 20 + 19.9, avec 20 = l'ancien
+// DessinDebColG) pour que le bloc ne connaisse que son coin de départ.
+Function PdfBlocAmbitions(PdfPage: TPDFPage; XGauche, XDroite, Y, HauteurLigne: Single; NbLignes: Integer; MinPolice: Integer): Single;
+  var
+    IndC: Integer;
+  begin
+    // Dessin cadre
+    PdfPage.DrawLine(XGauche,        Y,                 XGauche,        Y - (NbLignes * HauteurLigne), 1);
+    PdfPage.DrawLine(XGauche + 19.9, Y - HauteurLigne,   XGauche + 19.9, Y - (NbLignes * HauteurLigne), 1);
+    PdfPage.DrawLine(XDroite,        Y,                 XDroite,        Y - (NbLignes * HauteurLigne), 1);
+    for IndC := 0 to NbLignes do
+      PdfPage.DrawLine(XGauche, Y - (IndC * HauteurLigne), XDroite, Y - (IndC * HauteurLigne), 1);
+
+    // Texte Ambitions
+    PdfTaillePolice(PdfPage, PdfFontBack, ConstPoliceCarlson+ConstPoliceGras, 10);
+    PdfCentre(PdfPage, XGauche + 2, XDroite,        Y - (1 * HauteurLigne) + 1, GetTexteLibelle('PDF_AMBITION1_AMBITIONS'));
+    PdfEcrit (PdfPage, XGauche + 2, XGauche + 19.9, Y - (2 * HauteurLigne) + 1, GetTexteLibelle('PDF_AMBITION2A_SHORT')+GetTexteLibelle('PDF_AMBITION2B_SHORT'), MinPolice);
+    PdfEcrit (PdfPage, XGauche + 2, XGauche + 19.9, Y - (3 * HauteurLigne) + 1, GetTexteLibelle('PDF_AMBITION3A_LONG')+GetTexteLibelle('PDF_AMBITION3B_LONG'), MinPolice);
+
+    Result := Y - (NbLignes * HauteurLigne);
+  end;
+
+// Dessine le panneau Expérience (titre + Total/Utilisé/Restant). Extrait de
+// PdfPersonnageCreationFeldo2P, CONTEXT.md §2.4.
+Function PdfBlocExperience(PdfPage: TPDFPage; Personnage: StructurePersonnage; XGauche, XDroite, Y, HauteurLigne: Single; NbLignes: Integer; MinPolice: Integer): Single;
+  var
+    IndC: Integer;
+  begin
+    // Dessin cadre
+    PdfPage.DrawLine(XGauche,      Y,                 XGauche,      Y - (NbLignes * HauteurLigne), 1);
+    PdfPage.DrawLine(XGauche + 15, Y - HauteurLigne,   XGauche + 15, Y - (NbLignes * HauteurLigne), 1);
+    PdfPage.DrawLine(XDroite,      Y,                 XDroite,      Y - (NbLignes * HauteurLigne), 1);
+    for IndC := 0 to NbLignes do
+      PdfPage.DrawLine(XGauche, Y - (IndC * HauteurLigne), XDroite, Y - (IndC * HauteurLigne), 1);
+
+    // Texte Expérience
+    PdfTaillePolice(PdfPage, PdfFontBack, ConstPoliceCarlson+ConstPoliceGras, 10);
+    PdfCentre(PdfPage, XGauche + 1, XDroite,      Y - ((NbLignes - 3) * HauteurLigne) + 0.6, GetTexteLibelle('PDF_XP1_EXPERIENCE'));
+    PdfEcrit (PdfPage, XGauche + 1, XGauche + 15, Y - ((NbLignes - 2) * HauteurLigne) + 0.6, GetTexteLibelle('PDF_XP2C_TOTAL')  , MinPolice);
+    PdfEcrit (PdfPage, XGauche + 1, XGauche + 15, Y - ((NbLignes - 1) * HauteurLigne) + 0.6, GetTexteLibelle('PDF_XP2B_SPENT') , MinPolice);
+    PdfEcrit (PdfPage, XGauche + 1, XGauche + 15, Y - ( NbLignes      * HauteurLigne) + 0.6, GetTexteLibelle('PDF_XP2A_CURRENT'), MinPolice);
+
+    // Valeur Expérience
+    PdfTaillePolice(PdfPage, PdfFontValue, ConstPoliceArial, 9);
+    PdfCentre(PdfPage, XGauche + 15, XDroite, Y - ((NbLignes - 2) * HauteurLigne) + 0.6, IntToStr(Trunc(Personnage.Xp25Total)));                       // Total Xp
+    PdfCentre(PdfPage, XGauche + 15, XDroite, Y - ((NbLignes - 1) * HauteurLigne) + 0.6, IntToStr(Trunc(Personnage.Xp25Total - Personnage.XpActuel))); // Utilisé
+    PdfCentre(PdfPage, XGauche + 15, XDroite, Y - ( NbLignes      * HauteurLigne) + 0.6, IntToStr(Trunc(Personnage.XpActuel)));                        // Restant
+
+    Result := Y - (NbLignes * HauteurLigne);
+  end;
+
+// Dessine le panneau Mouvement (titre + Mouvement/Marche/Course). Extrait de
+// PdfPersonnageCreationFeldo2P, CONTEXT.md §2.4.
+Function PdfBlocMouvement(PdfPage: TPDFPage; XGauche, XDroite, Y, HauteurLigne: Single; NbLignes: Integer; MinPolice: Integer; Mouv, BonusSprint: Integer): Single;
+  var
+    IndC: Integer;
+  begin
+    // Dessin cadre
+    PdfPage.DrawLine(XGauche,      Y,                 XGauche,      Y - (NbLignes * HauteurLigne), 1);
+    PdfPage.DrawLine(XGauche + 15, Y - HauteurLigne,   XGauche + 15, Y - (NbLignes * HauteurLigne), 1);
+    PdfPage.DrawLine(XDroite,      Y,                 XDroite,      Y - (NbLignes * HauteurLigne), 1);
+    for IndC := 0 to NbLignes do
+      PdfPage.DrawLine(XGauche, Y - (IndC * HauteurLigne), XDroite, Y - (IndC * HauteurLigne), 1);
+
+    // Texte Mouvement
+    PdfTaillePolice(PdfPage, PdfFontBack, ConstPoliceCarlson+ConstPoliceGras, 10);
+    PdfCentre(PdfPage, XGauche + 1, XDroite,      Y - ((NbLignes - 3) * HauteurLigne) + 0.6, GetTexteLibelle('PDF_MV1_MOVEMENT'));
+    PdfEcrit (PdfPage, XGauche + 1, XGauche + 15, Y - ((NbLignes - 2) * HauteurLigne) + 0.6, GetTexteLibelle('PDF_MV2A_MOVEMENT'), MinPolice);
+    PdfEcrit (PdfPage, XGauche + 1, XGauche + 15, Y - ((NbLignes - 1) * HauteurLigne) + 0.6, GetTexteLibelle('PDF_MV2B_WALK')    , MinPolice);
+    PdfEcrit (PdfPage, XGauche + 1, XGauche + 15, Y - ( NbLignes      * HauteurLigne) + 0.6, GetTexteLibelle('PDF_MV2C_RUN')     , MinPolice);
+
+    // Valeur Mouvement
+    PdfTaillePolice(PdfPage, PdfFontValue, ConstPoliceArial, 9);
+    PdfCentre(PdfPage, XGauche + 15, XDroite, Y - ((NbLignes - 2) * HauteurLigne) + 0.6, IntToStr(Mouv));
+    PdfCentre(PdfPage, XGauche + 15, XDroite, Y - ((NbLignes - 1) * HauteurLigne) + 0.6, IntToStr(Mouv * 2));
+    PdfCentre(PdfPage, XGauche + 15, XDroite, Y - ( NbLignes      * HauteurLigne) + 0.6, IntToStr((Mouv + BonusSprint) * 4));
+
+    Result := Y - (NbLignes * HauteurLigne);
+  end;
+
+// Dessine le panneau Corruption (titre + Tolérance/Volonté/Bonus/Total). Extrait de
+// PdfPersonnageCreationFeldo2P, CONTEXT.md §2.4.
+Function PdfBlocCorruption(PdfPage: TPDFPage; XGauche, XDroite, Y, HauteurLigne: Single; NbLignes: Integer; MinPolice: Integer; BE, BFM, AmePure: Integer): Single;
+  var
+    IndC: Integer;
+  begin
+    // Dessin cadre
+    PdfPage.DrawLine(XGauche,      Y,                 XGauche,      Y - (NbLignes * HauteurLigne), 1);
+    PdfPage.DrawLine(XGauche + 15, Y - HauteurLigne,   XGauche + 15, Y - (NbLignes * HauteurLigne), 1);
+    PdfPage.DrawLine(XDroite,      Y,                 XDroite,      Y - (NbLignes * HauteurLigne), 1);
+    for IndC := 0 to NbLignes do
+      PdfPage.DrawLine(XGauche, Y - (IndC * HauteurLigne), XDroite, Y - (IndC * HauteurLigne), 1);
+
+    // Texte Corruption
+    PdfTaillePolice(PdfPage, PdfFontBack, ConstPoliceCarlson+ConstPoliceGras, 10);
+    PdfCentre(PdfPage, XGauche + 1, XDroite,      Y - ((NbLignes - 4) * HauteurLigne) + 0.6, GetTexteLibelle('PDF_CORRUPTION_TITLE'));
+    PdfEcrit (PdfPage, XGauche + 1, XGauche + 15, Y - ((NbLignes - 3) * HauteurLigne) + 0.6, GetTexteLibelle('PDF_CORRUPTION_T')    , MinPolice);
+    PdfEcrit (PdfPage, XGauche + 1, XGauche + 15, Y - ((NbLignes - 2) * HauteurLigne) + 0.6, GetTexteLibelle('PDF_CORRUPTION_WP')   , MinPolice);
+    PdfEcrit (PdfPage, XGauche + 1, XGauche + 15, Y - ((NbLignes - 1) * HauteurLigne) + 0.6, GetTexteLibelle('PDF_CORRUPTION_BONUS'), MinPolice);
+    PdfEcrit (PdfPage, XGauche + 1, XGauche + 15, Y - ( NbLignes      * HauteurLigne) + 0.6, GetTexteLibelle('PDF_CORRUPTION_TOTAL'), MinPolice);
+
+    // Valeur Corruption
+    PdfTaillePolice(PdfPage, PdfFontValue, ConstPoliceArial, 9);
+    PdfCentre(PdfPage, XGauche + 15, XDroite, Y - ((NbLignes - 3) * HauteurLigne) + 0.6, IntToStr(Floor(BE/10)));
+    PdfCentre(PdfPage, XGauche + 15, XDroite, Y - ((NbLignes - 2) * HauteurLigne) + 0.6, IntToStr(Floor(BFM/10)));
+    PdfCentre(PdfPage, XGauche + 15, XDroite, Y - ((NbLignes - 1) * HauteurLigne) + 0.6, IntToStr(AmePure));
+    PdfCentre(PdfPage, XGauche + 15, XDroite, Y - ( NbLignes      * HauteurLigne) + 0.6, IntToStr(Floor(BE/10) + Floor(BFM/10) + AmePure));
+
+    Result := Y - (NbLignes * HauteurLigne);
+  end;
+
 // Cherche la valeur du champ nommé Champ dans Enr. Renvoie une case vide (Valeur = '') si le
 // champ n'existe pas dans cet enregistrement, plutôt qu'une erreur : cela permet à une
 // préparation de ne pas renseigner un champ non pertinent pour une entrée donnée.
@@ -2209,14 +2396,11 @@ Procedure PdfPersonnageCreationFeldo2P(Personnage: StructurePersonnage);
         // Caractéristiques
         DessinDebutHautCarac: Single;
         DessinHauteurCarac:   Single  = 4.6;
-        DessinNbLigCarac:     Integer = 6;
-        DessinNbColCarac:     Integer = 10;
         DessinLargeurCarac:   Single  = 10.3;
         // Compétence
         DessinDebutHautComp:  Single;
         DessinHauteurComp:    Single  = 4.4;
         DessinNbLigComp:      Integer = 28;
-        DessinNbColComp:      Integer = 5;
         DessinLargeurComp:    Single  = 8.6;
         // Ambition
         DessinDebutHautAmb:   Single;
@@ -2257,7 +2441,6 @@ Procedure PdfPersonnageCreationFeldo2P(Personnage: StructurePersonnage);
         DessinDebutHautComg:  Single;
         DessinHauteurComg:    Single  = 4.4;
         DessinNbLigComg:      Integer = 26;
-        DessinNbColComg:      Integer = 5;
         DessinLargeurComg:    Single  = 9;
         // Talents
         DessinDebutHautTal:   Single;
@@ -2438,46 +2621,9 @@ Procedure PdfPersonnageCreationFeldo2P(Personnage: StructurePersonnage);
     ListPage       := TStringList.Create;
     PdfPersonnageCompetenceTri(ListPage);
 
-    // dessin entête
-    PdfPage.DrawLine( DessinDebColG, DessinDebutHautEntete, DessinDebColG, DessinDebutHautEntete - (DessinNbLigEntete * DessinHauteurEntete), 1);
-    PdfPage.DrawLine(DessinFinEntete, DessinDebutHautEntete,DessinFinEntete, DessinDebutHautEntete - (DessinNbLigEntete * DessinHauteurEntete), 1);
-    for IndC := 0 to DessinNbLigEntete do
-      begin
-        PdfPage.DrawLine(DessinDebColG,DessinDebutHautEntete - (indC * DessinHauteurEntete), DessinFinEntete, DessinDebutHautEntete - (indC * DessinHauteurEntete), 1);
-        if IndC > 0 then
-          begin
-            if IndC = 4 then PdfPage.DrawLine( 52, DessinDebutHautEntete - ((indC-1) * DessinHauteurEntete), 52, DessinDebutHautEntete - (indC * DessinHauteurEntete), 1);
-            if IndC <>3 then PdfPage.DrawLine( 82, DessinDebutHautEntete - ((indC-1) * DessinHauteurEntete), 82, DessinDebutHautEntete - (indC * DessinHauteurEntete), 1);
-            if IndC <>2 then PdfPage.DrawLine(114, DessinDebutHautEntete - ((indC-1) * DessinHauteurEntete),114, DessinDebutHautEntete - (indC * DessinHauteurEntete), 1);
-          end;
-      end;
-    DessinDebutHautCarac :=  DessinDebutHautEntete - (indC * DessinHauteurEntete) - 3;
-    // Texte Entête
-    PdfTaillePolice(PdfPage, PdfFontBack, ConstPoliceCarlson+ConstPoliceGras, 10);
-    PdfPage.WriteText( 21, DessinDebutHautEntete - (DessinHauteurEntete * 1) + 1, GetTexteLibelle('PDF_MAIN1_NAME'));
-    PdfPage.WriteText( 83, DessinDebutHautEntete - (DessinHauteurEntete * 1) + 1, GetTexteLibelle('PDF_MAIN1_SPECIES'));
-    PdfPage.WriteText(115, DessinDebutHautEntete - (DessinHauteurEntete * 1) + 1, GetTexteLibelle('PDF_MAIN1_CLASS'));
-    PdfPage.WriteText( 21, DessinDebutHautEntete - (DessinHauteurEntete * 2) + 1, GetTexteLibelle('PDF_MAIN2_CAREER'));
-    PdfPage.WriteText( 83, DessinDebutHautEntete - (DessinHauteurEntete * 2) + 1, GetTexteLibelle('PDF_MAIN2_CAREERLEVEL'));
-    PdfPage.WriteText( 21, DessinDebutHautEntete - (DessinHauteurEntete * 3) + 1, GetTexteLibelle('PDF_MAIN3_CAREERPATH'));
-    PdfPage.WriteText(115, DessinDebutHautEntete - (DessinHauteurEntete * 3) + 1, GetTexteLibelle('PDF_MAIN3_STATUS'));
-    PdfPage.WriteText( 21, DessinDebutHautEntete - (DessinHauteurEntete * 4) + 1, GetTexteLibelle('PDF_MAIN4_AGE'));
-    PdfPage.WriteText( 53, DessinDebutHautEntete - (DessinHauteurEntete * 4) + 1, GetTexteLibelle('PDF_MAIN4_HEIGHT'));
-    PdfPage.WriteText( 83, DessinDebutHautEntete - (DessinHauteurEntete * 4) + 1, GetTexteLibelle('PDF_MAIN4_HAIR'));
-    PdfPage.WriteText(115, DessinDebutHautEntete - (DessinHauteurEntete * 4) + 1, GetTexteLibelle('PDF_MAIN4_EYES'));
-    // Valeur Entête
-    PdfTaillePolice(PdfPage, PdfFontValue, ConstPoliceArial, 9);
-    PdfEcrit(PdfPage, 32, 86, DessinDebutHautEntete - (DessinHauteurEntete * 1) + 1, Personnage.NomPersonnage, MinPolice);
-    PdfEcrit(PdfPage, 89,115, DessinDebutHautEntete - (DessinHauteurEntete * 1) + 1, PRace.Libelle, MinPolice);
-    PdfEcrit(PdfPage,126,DessinFinEntete, DessinDebutHautEntete - (DessinHauteurEntete * 1) + 1, GetTexteLibelle(PMetier.LibelleGroupe), MinPolice);
-    PdfEcrit(PdfPage, 32, 85, DessinDebutHautEntete - (DessinHauteurEntete * 2) + 1, PMetier.Libelle, MinPolice);
-    PdfEcrit(PdfPage, 95,DessinFinEntete, DessinDebutHautEntete - (DessinHauteurEntete * 2) + 1, IntToStr(Personnage.MetierEnCours.NiveauMetier)+' - '+ PMetierNiveau.Libelle, MinPolice);
-    PdfEcrit(PdfPage, 50,DessinFinEntete, DessinDebutHautEntete - (DessinHauteurEntete * 3) + 1, LocData, MinPolice);
-    PdfEcrit(PdfPage,125,DessinFinEntete, DessinDebutHautEntete - (DessinHauteurEntete * 3) + 1, GetTexteLibelle(PMetierNiveau.SalaireMetier, '', ' '), MinPolice);
-    PdfEcrit(PdfPage, 32, 53, DessinDebutHautEntete - (DessinHauteurEntete * 4) + 1, IntToStr(Personnage.Age), MinPolice);
-    PdfEcrit(PdfPage, 63, 83, DessinDebutHautEntete - (DessinHauteurEntete * 4) + 1, IntToStr(Personnage.Height), MinPolice);
-    PdfEcrit(PdfPage, 98, 115, DessinDebutHautEntete - (DessinHauteurEntete * 4) + 1, Personnage.HairColors, MinPolice);
-    PdfEcrit(PdfPage, 125, DessinFinEntete, DessinDebutHautEntete - (DessinHauteurEntete * 4) + 1, Personnage.EyeColors, MinPolice);
+    // Bloc Entête (extrait dans PdfBlocEntete, CONTEXT.md §2.4)
+    DessinDebutHautCarac := PdfBlocEntete(PdfPage, Personnage, PRace, PMetier, PMetierNiveau, LocData,
+      DessinDebColG, DessinFinEntete, DessinDebutHautEntete, DessinHauteurEntete, DessinNbLigEntete, MinPolice) - 3;
 
     // Tableau Caractéristiques (extrait dans DessinerTableau / PdfPreparerRecordSetCaracteristiques, CONTEXT.md §2.4)
     TableauCarac.X               := DessinDebColG;
@@ -2553,66 +2699,13 @@ Procedure PdfPersonnageCreationFeldo2P(Personnage: StructurePersonnage);
     ListPage.Destroy;
     DessinDebutHautAmb := DessinerTableau(PdfPage, TableauComp, DonneesComp) - 3;
 
-    // Dessin Ambitions
-    PdfPage.DrawLine( DessinDebColG, DessinDebutHautAmb, DessinDebColG, DessinDebutHautAmb - (DessinNbLigAmb * DessinHauteurAmb), 1);
-    PdfPage.DrawLine( 39.9, DessinDebutHautAmb - DessinHauteurAmb, 39.9, DessinDebutHautAmb - (DessinNbLigAmb * DessinHauteurAmb), 1);
-    PdfPage.DrawLine( DessinFinColG, DessinDebutHautAmb, DessinFinColG, DessinDebutHautAmb - (DessinNbLigAmb * DessinHauteurAmb), 1);
-    for IndC := 0 to DessinNbLigAmb do
-      PdfPage.DrawLine(20,DessinDebutHautAmb - (indC * DessinHauteurAmb), DessinFinColG, DessinDebutHautAmb - (indC * DessinHauteurAmb), 1);
-    DessinDebutHautRes := DessinDebutHautAmb - (indC * DessinHauteurAmb) - 3;
-    DessinDebutHautDes := DessinDebutHautAmb - (indC * DessinHauteurAmb) - 3;
-    // Texte Ambitions
-    PdfTaillePolice(PdfPage, PdfFontBack, ConstPoliceCarlson+ConstPoliceGras, 10);
-    PdfCentre(PdfPage, 22, DessinFinColG, DessinDebutHautAmb - (1 * DessinHauteurAmb) + 1,GetTexteLibelle('PDF_AMBITION1_AMBITIONS'));
-    PdfEcrit(PdfPage, 22, 39.9, DessinDebutHautAmb - (2 * DessinHauteurAmb) + 1, GetTexteLibelle('PDF_AMBITION2A_SHORT')+GetTexteLibelle('PDF_AMBITION2B_SHORT'),MinPolice);
-    PdfEcrit(PdfPage, 22, 39.9, DessinDebutHautAmb - (3 * DessinHauteurAmb) + 1, GetTexteLibelle('PDF_AMBITION3A_LONG')+GetTexteLibelle('PDF_AMBITION3B_LONG'),MinPolice);
+    // Bloc Ambitions (extrait dans PdfBlocAmbitions, CONTEXT.md §2.4)
+    DessinDebutHautRes := PdfBlocAmbitions(PdfPage, DessinDebColG, DessinFinColG, DessinDebutHautAmb, DessinHauteurAmb, DessinNbLigAmb, MinPolice) - 3;
+    DessinDebutHautDes := DessinDebutHautRes;
 
     // Bloc Résilience / Destin (extrait dans PdfBlocResilience / PdfBlocDestin, CONTEXT.md §2.4)
     PdfBlocResilience(PdfPage, Personnage, DessinDebColG, DessinDebutHautRes, DessinNbLigRes, DessinHauteurRes, MinPolice, Determine, IndC);
     PdfBlocDestin(PdfPage, Personnage, DessinDebColG + 40, DessinDebutHautDes, DessinHauteurDes, MinPolice, Chance);
-
-    DessinDebutHautExp := DessinDebutHautDes - (indC * DessinHauteurDes) - 3;
-
-    //// Dessin Blessure
-    //PdfPage.DrawLine( DessinDebColG , DessinDebutHautBle, DessinDebColG, DessinDebutHautBle - (DessinNbLigBle * DessinHauteurBle), 1);
-    //PdfPage.DrawLine( 47 , DessinDebutHautBle - (4 * DessinHauteurBle), 47, DessinDebutHautBle - (5 * DessinHauteurBle), 1);
-    //PdfPage.DrawLine( 66 , DessinDebutHautBle - (1 * DessinHauteurBle), 66, DessinDebutHautBle - (DessinNbLigBle * DessinHauteurBle), 1);
-    //PdfPage.DrawLine( 79 , DessinDebutHautBle - (1 * DessinHauteurBle), 79, DessinDebutHautBle - (DessinNbLigBle * DessinHauteurBle), 1);
-    //PdfPage.DrawLine( DessinFinColG, DessinDebutHautBle, DessinFinColG, DessinDebutHautBle - (DessinNbLigBle * DessinHauteurBle), 1);
-    //for IndC := 0 to DessinNbLigBle do
-    //  if (IndC < 2) or (IndC = DessinNbLigBle) then
-    //    PdfPage.DrawLine(DessinDebColG,DessinDebutHautBle - (indC * DessinHauteurBle), DessinFinColG, DessinDebutHautBle - (indC * DessinHauteurBle), 1)
-    //  else
-    //    PdfPage.DrawLine(DessinDebColG,DessinDebutHautBle - (indC * DessinHauteurBle), 79, DessinDebutHautBle - (indC * DessinHauteurBle), 1);
-    //// Texte Blessure
-    //PdfTaillePolice(PdfPage, PdfFontBack, ConstPoliceCarlson+ConstPoliceGras, 10);
-    //PdfCentre(PdfPage,22,DessinFinColG,DessinDebutHautBle - (1 * DessinHauteurBle) + 1, GetTexteLibelle('PDF_WOUNDS1_WOUNDS'));
-    //PdfEcrit(PdfPage,22,79,DessinDebutHautBle - (2 * DessinHauteurBle) + 1, GetTexteLibelle('PDF_WOUNDS7_BS'),MinPolice);
-    //PdfEcrit(PdfPage,22,79,DessinDebutHautBle - (3 * DessinHauteurBle) + 1, GetTexteLibelle('PDF_WOUNDS7_BT'),MinPolice);
-    //PdfEcrit(PdfPage,22,79,DessinDebutHautBle - (4 * DessinHauteurBle) + 1, GetTexteLibelle('PDF_WOUNDS7_BWP'),MinPolice);
-    //PdfEcrit(PdfPage,22,47,DessinDebutHautBle - (5 * DessinHauteurBle) + 1, GetTexteLibelle('PDF_WOUNDS5_HARDY'),MinPolice);
-    //PdfEcrit(PdfPage,22,79,DessinDebutHautBle - (6 * DessinHauteurBle) + 1, GetTexteLibelle('PDF_WOUNDS7_Tot'),MinPolice);
-    //// Valeur Blessure
-    //Ch := IntToStr(Floor(BF/10));
-    //if Length(Ch) = 1 then Ch := ' '+Ch;
-    //PdfCentre(PdfPage,66,79,DessinDebutHautBle - (2 * DessinHauteurBle) + 1, Ch);
-    //Ch := IntToStr(Floor(BE/10)*2);
-    //if Length(Ch) = 1 then Ch := ' '+Ch;
-    //PdfCentre(PdfPage,66,79,DessinDebutHautBle - (3 * DessinHauteurBle) + 1, Ch);
-    //Ch := IntToStr(Floor(BFM/10));
-    //if Length(Ch) = 1 then Ch := ' '+Ch;
-    //PdfCentre(PdfPage,66,79,DessinDebutHautBle - (4 * DessinHauteurBle) + 1, Ch);
-    //if DurACuire > 0 then
-    //  begin
-    //    Ch := IntToStr(DurACuire);
-    //    if Length(Ch) = 1 then Ch := ' '+Ch;
-    //    PdfCentre(PdfPage,47,66,DessinDebutHautBle - (5 * DessinHauteurBle) + 1, IntToStr(ValDurACuire));
-    //    PdfCentre(PdfPage,66,79,DessinDebutHautBle - (5 * DessinHauteurBle) + 1, Ch);
-    //  end;
-    //PRaceAttribut := ChercheRaceAttribut(Personnage.Race, ConstCaracBlessure);
-    //Ch := IntToStr(CalculBlessure(PRaceAttribut.CalculRace, BF, BE, BFM) + DurACuire);
-    //if Length(Ch) = 1 then Ch := ' '+Ch;
-    //PdfCentre(PdfPage,66,79,DessinDebutHautBle - (6 * DessinHauteurBle) + 1, Ch);
 
     // calcul expérience
     for PersonnageXpAttribut in Personnage.XpCoutAttribut do
@@ -2630,86 +2723,19 @@ Procedure PdfPersonnageCreationFeldo2P(Personnage: StructurePersonnage);
     for PersonnageXpTalent in Personnage.XpCoutTalent do
       TotalXpSoustrait := TotalXpSoustrait + PersonnageXpAttribut.CoutXp - (100 + (PersonnageXpCompetence.Fin - PersonnageXpCompetence.Debut - 1) * 100);
 
-    // Dessin Expérience
-    DessinDebutHautExp := DessinDebutHautDes - (DessinNbLigRes * DessinHauteurDes) - 3;
-    DessinDebutHautMou := DessinDebutHautDes - (DessinNbLigRes * DessinHauteurDes) - 3;
-    PdfPage.DrawLine( DessinDebColG      , DessinDebutHautExp                         , DessinDebColG      , DessinDebutHautExp - ((DessinNbLigExp + 1) * DessinHauteurExp), 1);
-    PdfPage.DrawLine( DessinDebColG +  15, DessinDebutHautExp - (1 * DessinHauteurExp), DessinDebColG +  15, DessinDebutHautExp - ((DessinNbLigExp + 1) * DessinHauteurExp), 1);
-    PdfPage.DrawLine( DessinLargeurExp   , DessinDebutHautExp                         , DessinLargeurExp   , DessinDebutHautExp - ((DessinNbLigExp + 1) * DessinHauteurExp), 1);
-    for IndC := 0 to (DessinNbLigExp + 1) do
-      PdfPage.DrawLine(DessinDebColG,DessinDebutHautExp - (indC * DessinHauteurExp), DessinLargeurExp, DessinDebutHautExp - (indC * DessinHauteurExp), 1);
-    // Expérience
-    PdfTaillePolice(PdfPage, PdfFontBack, ConstPoliceCarlson+ConstPoliceGras, 10);
-    PdfCentre(PdfPage, DessinDebColG + 1, DessinLargeurExp  , DessinDebutHautExp - ((DessinNbLigExp - 2) * DessinHauteurExp) + 0.6, GetTexteLibelle('PDF_XP1_EXPERIENCE'));
-    PdfEcrit(PdfPage,  DessinDebColG + 1, DessinDebColG + 15, DessinDebutHautExp - ((DessinNbLigExp - 1) * DessinHauteurExp) + 0.6, GetTexteLibelle('PDF_XP2C_TOTAL')      , MinPolice);
-    PdfEcrit(PdfPage,  DessinDebColG + 1, DessinDebColG + 15, DessinDebutHautExp - ((DessinNbLigExp - 0) * DessinHauteurExp) + 0.6, GetTexteLibelle('PDF_XP2B_SPENT')      , MinPolice);
-    PdfEcrit(PdfPage,  DessinDebColG + 1, DessinDebColG + 15, DessinDebutHautExp - ((DessinNbLigExp + 1) * DessinHauteurExp) + 0.6, GetTexteLibelle('PDF_XP2A_CURRENT')    , MinPolice);
-    // Valeur Expérience
-    PdfTaillePolice(PdfPage, PdfFontValue, ConstPoliceArial, 9);
-    PdfCentre(PdfPage,  DessinDebColG + 15, DessinLargeurExp, DessinDebutHautExp - ((DessinNbLigExp - 1) * DessinHauteurExp) + 0.6, IntToStr(Trunc(Personnage.Xp25Total)));                      // Total Xp
-    PdfCentre(PdfPage,  DessinDebColG + 15, DessinLargeurExp, DessinDebutHautExp - ((DessinNbLigExp - 0) * DessinHauteurExp) + 0.6, IntToStr(Trunc(Personnage.Xp25Total - personnage.XpActuel)));// Utilisé
-    PdfCentre(PdfPage,  DessinDebColG + 15, DessinLargeurExp, DessinDebutHautExp - ((DessinNbLigExp + 1) * DessinHauteurExp) + 0.6, IntToStr(Trunc(Personnage.XpActuel)));                       // Restant
-
-    // Dessin Mouvement
-    DessinDebutHautMou   := DessinDebutHautDes - (DessinNbLigRes * DessinHauteurDes) - 3;
+    // Blocs Expérience / Mouvement / Corruption (extraits dans PdfBlocExperience /
+    // PdfBlocMouvement / PdfBlocCorruption, CONTEXT.md §2.4) — trois panneaux côte à côte
+    // sur la même rangée, sous Résilience/Destin.
+    DessinDebutHautExp   := DessinDebutHautDes - (DessinNbLigRes * DessinHauteurDes) - 3;
+    DessinDebutHautMou   := DessinDebutHautExp;
+    DessinDebutHautCor   := DessinDebutHautExp;
     DessinDebutGaucheMou := DessinLargeurExp + 3;
-    PdfPage.DrawLine( DessinDebutGaucheMou      , DessinDebutHautMou                         , DessinDebutGaucheMou      , DessinDebutHautMou - ((DessinNbLigMou + 1) * DessinHauteurMou), 1);
-    PdfPage.DrawLine( DessinDebutGaucheMou +  15, DessinDebutHautMou - (1 * DessinHauteurMou), DessinDebutGaucheMou +  15, DessinDebutHautMou - ((DessinNbLigMou + 1) * DessinHauteurMou), 1);
-    PdfPage.DrawLine( DessinDebutGaucheMou + DessinLargeurMou   , DessinDebutHautMou                         , DessinDebutGaucheMou + DessinLargeurMou   , DessinDebutHautMou - ((DessinNbLigMou + 1) * DessinHauteurMou), 1);
-    for IndC := 0 to (DessinNbLigMou + 1) do
-      PdfPage.DrawLine(DessinDebutGaucheMou, DessinDebutHautMou - (indC * DessinHauteurMou), DessinDebutGaucheMou + DessinLargeurMou, DessinDebutHautMou - (indC * DessinHauteurMou), 1);
-    // Mouvement
-    PdfTaillePolice(PdfPage, PdfFontBack, ConstPoliceCarlson+ConstPoliceGras, 10);
-    PdfCentre(PdfPage, DessinDebutGaucheMou + 1, DessinDebutGaucheMou + DessinLargeurMou  , DessinDebutHautMou - ((DessinNbLigMou - 2) * DessinHauteurMou) + 0.6, GetTexteLibelle('PDF_MV1_MOVEMENT'));
-    PdfEcrit(PdfPage,  DessinDebutGaucheMou + 1, DessinDebutGaucheMou + 15, DessinDebutHautMou - ((DessinNbLigMou - 1) * DessinHauteurMou) + 0.6, GetTexteLibelle('PDF_MV2A_MOVEMENT')      , MinPolice);
-    PdfEcrit(PdfPage,  DessinDebutGaucheMou + 1, DessinDebutGaucheMou + 15, DessinDebutHautMou - ((DessinNbLigMou - 0) * DessinHauteurMou) + 0.6, GetTexteLibelle('PDF_MV2B_WALK')      , MinPolice);
-    PdfEcrit(PdfPage,  DessinDebutGaucheMou + 1, DessinDebutGaucheMou + 15, DessinDebutHautMou - ((DessinNbLigMou + 1) * DessinHauteurMou) + 0.6, GetTexteLibelle('PDF_MV2C_RUN')    , MinPolice);
-    // Valeur Mouvement
-    PdfTaillePolice(PdfPage, PdfFontValue, ConstPoliceArial, 9);
-    PdfCentre(PdfPage,  DessinDebutGaucheMou + 15, DessinDebutGaucheMou + DessinLargeurMou, DessinDebutHautMou - ((DessinNbLigMou - 1) * DessinHauteurMou) + 0.6, IntToStr(Mouv));
-    PdfCentre(PdfPage,  DessinDebutGaucheMou + 15, DessinDebutGaucheMou + DessinLargeurMou, DessinDebutHautMou - ((DessinNbLigMou - 0) * DessinHauteurMou) + 0.6, IntToStr(Mouv * 2));
-    PdfCentre(PdfPage,  DessinDebutGaucheMou + 15, DessinDebutGaucheMou + DessinLargeurMou, DessinDebutHautMou - ((DessinNbLigMou + 1) * DessinHauteurMou) + 0.6, IntToStr((Mouv + BonusSprint)*4));
-
-    // Dessin Corruption
-    DessinDebutHautCor   := DessinDebutHautDes - (DessinNbLigRes * DessinHauteurDes) - 3;
     DessinDebutGaucheCor := DessinDebutGaucheMou + DessinLargeurMou + 3;
     DessinLargeurCor     := DessinFinColG - DessinDebutGaucheCor;
-    PdfPage.DrawLine( DessinDebutGaucheCor      , DessinDebutHautCor                         , DessinDebutGaucheCor      , DessinDebutHautCor - ((DessinNbLigCor + 1) * DessinHauteurCor), 1);
-    PdfPage.DrawLine( DessinDebutGaucheCor +  15, DessinDebutHautCor - (1 * DessinHauteurCor), DessinDebutGaucheCor +  15, DessinDebutHautCor - ((DessinNbLigCor + 1) * DessinHauteurCor), 1);
-    PdfPage.DrawLine( DessinDebutGaucheCor + DessinLargeurCor   , DessinDebutHautCor                         , DessinDebutGaucheCor + DessinLargeurCor   , DessinDebutHautCor - ((DessinNbLigCor + 1) * DessinHauteurCor), 1);
-    for IndC := 0 to (DessinNbLigCor + 1) do
-      PdfPage.DrawLine(DessinDebutGaucheCor, DessinDebutHautCor - (indC * DessinHauteurCor), DessinDebutGaucheCor + DessinLargeurCor, DessinDebutHautCor - (indC * DessinHauteurCor), 1);
-    // Corruption
-    PdfTaillePolice(PdfPage, PdfFontBack, ConstPoliceCarlson+ConstPoliceGras, 10);
-    PdfCentre(PdfPage, DessinDebutGaucheCor + 1, DessinDebutGaucheCor + DessinLargeurCor  , DessinDebutHautCor - ((DessinNbLigCor - 3) * DessinHauteurCor) + 0.6, GetTexteLibelle('PDF_CORRUPTION_TITLE'));
-    PdfEcrit(PdfPage,  DessinDebutGaucheCor + 1, DessinDebutGaucheCor + 15, DessinDebutHautCor - ((DessinNbLigCor - 2) * DessinHauteurCor) + 0.6, GetTexteLibelle('PDF_CORRUPTION_T')      , MinPolice);
-    PdfEcrit(PdfPage,  DessinDebutGaucheCor + 1, DessinDebutGaucheCor + 15, DessinDebutHautCor - ((DessinNbLigCor - 1) * DessinHauteurCor) + 0.6, GetTexteLibelle('PDF_CORRUPTION_WP')      , MinPolice);
-    PdfEcrit(PdfPage,  DessinDebutGaucheCor + 1, DessinDebutGaucheCor + 15, DessinDebutHautCor - ((DessinNbLigCor - 0) * DessinHauteurCor) + 0.6, GetTexteLibelle('PDF_CORRUPTION_BONUS')      , MinPolice);
-    PdfEcrit(PdfPage,  DessinDebutGaucheCor + 1, DessinDebutGaucheCor + 15, DessinDebutHautCor - ((DessinNbLigCor + 1) * DessinHauteurCor) + 0.6, GetTexteLibelle('PDF_CORRUPTION_TOTAL')    , MinPolice);
-    // Valeur Corruption
-    PdfTaillePolice(PdfPage, PdfFontValue, ConstPoliceArial, 9);
-    PdfCentre(PdfPage,  DessinDebutGaucheCor + 15, DessinDebutGaucheCor + DessinLargeurCor, DessinDebutHautCor - ((DessinNbLigCor - 2) * DessinHauteurCor) + 0.6, IntToStr(Floor(BE/10)));
-    PdfCentre(PdfPage,  DessinDebutGaucheCor + 15, DessinDebutGaucheCor + DessinLargeurCor, DessinDebutHautCor - ((DessinNbLigCor - 1) * DessinHauteurCor) + 0.6, IntToStr(Floor(BFM/10)));
-    PdfCentre(PdfPage,  DessinDebutGaucheCor + 15, DessinDebutGaucheCor + DessinLargeurCor, DessinDebutHautCor - ((DessinNbLigCor - 0) * DessinHauteurCor) + 0.6, IntToStr(AmePure));
-    PdfCentre(PdfPage,  DessinDebutGaucheCor + 15, DessinDebutGaucheCor + DessinLargeurCor, DessinDebutHautCor - ((DessinNbLigCor + 1) * DessinHauteurCor) + 0.6, IntToStr(Floor(BE/10) + Floor(BFM/10) + AmePure));
 
-
-    //// Dessin PCM
-    //PdfPage.DrawLine( DessinDebColG     , DessinDebutHautPCM     , DessinDebColG + 28, DessinDebutHautPCM     , 1);
-    //PdfPage.DrawLine( DessinDebColG + 30, DessinDebutHautPCM     , DessinDebColG + 52, DessinDebutHautPCM     , 1);
-    //PdfPage.DrawLine( DessinDebColG + 54, DessinDebutHautPCM     , DessinDebColG + 78, DessinDebutHautPCM     , 1);
-    //PdfPage.DrawLine( DessinDebColG     , DessinDebutHautPCM -  4, DessinDebColG + 28, DessinDebutHautPCM -  4, 1);
-    //PdfPage.DrawLine( DessinDebColG + 30, DessinDebutHautPCM -  4, DessinDebColG + 52, DessinDebutHautPCM -  4, 1);
-    //PdfPage.DrawLine( DessinDebColG + 54, DessinDebutHautPCM -  4, DessinDebColG + 78, DessinDebutHautPCM -  4, 1);
-    //PdfPage.DrawLine( DessinDebColG     , DessinDebutHautPCM - 19, DessinDebColG + 28, DessinDebutHautPCM - 19, 1);
-    //PdfPage.DrawLine( DessinDebColG + 30, DessinDebutHautPCM - 19, DessinDebColG + 52, DessinDebutHautPCM - 19, 1);
-    //PdfPage.DrawLine( DessinDebColG + 54, DessinDebutHautPCM - 19, DessinDebColG + 78, DessinDebutHautPCM - 19, 1);
-    //PdfPage.DrawLine( DessinDebColG     , DessinDebutHautPCM     , DessinDebColG     , DessinDebutHautPCM - 19, 1);
-    //PdfPage.DrawLine( DessinDebColG + 28, DessinDebutHautPCM     , DessinDebColG + 28, DessinDebutHautPCM - 19, 1);
-    //PdfPage.DrawLine( DessinDebColG + 30, DessinDebutHautPCM     , DessinDebColG + 30, DessinDebutHautPCM - 19, 1);
-    //PdfPage.DrawLine( DessinDebColG + 52, DessinDebutHautPCM     , DessinDebColG + 52, DessinDebutHautPCM - 19, 1);
-    //PdfPage.DrawLine( DessinDebColG + 54, DessinDebutHautPCM     , DessinDebColG + 54, DessinDebutHautPCM - 19, 1);
-    //PdfPage.DrawLine( DessinDebColG + 78, DessinDebutHautPCM     , DessinDebColG + 78, DessinDebutHautPCM - 19, 1);
+    PdfBlocExperience(PdfPage, Personnage, DessinDebColG, DessinLargeurExp, DessinDebutHautExp, DessinHauteurExp, DessinNbLigExp + 1, MinPolice);
+    PdfBlocMouvement(PdfPage, DessinDebutGaucheMou, DessinDebutGaucheMou + DessinLargeurMou, DessinDebutHautMou, DessinHauteurMou, DessinNbLigMou + 1, MinPolice, Mouv, BonusSprint);
+    PdfBlocCorruption(PdfPage, DessinDebutGaucheCor, DessinDebutGaucheCor + DessinLargeurCor, DessinDebutHautCor, DessinHauteurCor, DessinNbLigCor + 1, MinPolice, BE, BFM, AmePure);
 
     // Tableau Compétences groupées (extrait dans DessinerTableau (orLigne) /
     // PdfPreparerRecordSetCompetencesGroupees, CONTEXT.md §2.4)

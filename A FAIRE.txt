@@ -71,3 +71,9 @@ PDF Personnage (PRIORITAIRE) :
   positionnement relatif) - conception arrêtée le 14/08/2026, voir CONTEXT.md §2.4.
   Commencer par PdfPersonnageCreationFeldo2P, prototype sur le bloc Résilience puis le
   tableau des 9 caractéristiques.
+- nettoyer les variables locales jamais utilisées dans PdfPersonnageCreationFeldo2P
+  (relevé Lazarus du 15/08/2026, pré-existantes, pas liées au découpage en cours) :
+  PMetierAttribut, Comp, ValStat, ValBonus, ValTotal, ArmureBouclier,
+  PersonnageCompetence, NivCompMetier, AmePure. Pas urgent, à faire en même temps que le
+  nettoyage des blocs morts (Blessure, PCM) une fois PdfPersonnageCreationFeldo2P
+  entièrement découpée.
