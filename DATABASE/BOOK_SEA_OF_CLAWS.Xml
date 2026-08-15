@@ -1,0 +1,1344 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<DATA_BOOK>
+<CODE_BOOK>"SEAOF"</CODE_BOOK>
+<BOOK>"BOOK SEA OF CLAWS"</BOOK>
+<language>"ENGLISH"</language>
+<VERSION>"20250623"</VERSION>
+<OFFICIAL>"1"</OFFICIAL>
+<COMPLETE>"1"</COMPLETE>
+<DATA_TALENT>
+<Talent id="SEAOF-T0182">
+<Attribut>""</Attribut>
+<Description language="ENGLISH">"Chanty"</Description>
+<Short language="ENGLISH">""</Short>
+<Explanation language="ENGLISH">"This Talent allows a Character to learn a chanty (see page 67).
+Whenever a Character buys a new level in the Talent they learn a new song.
+A Chanty affects an entire crew.
+To use the talent the Chantyman should find a location within earshot of as many of the crew as possible and pass an Entertain (Singing) Test.
+It takes 30 seconds for a Chantyman to establish the chanty, after which the effect lasts for three minutes plus a number of minutes equal to the SL on the Entertain (Singing) Test.
+The only combat action the Chantyman can make while the Chanty is being performed is a Dodge.
+Other actions can be made at the GM’s discretion, such as Perception Tests or Cool Tests.
+If the Chantyman takes damage or fails any Opposed Test their  Chanty ends.
+A Chanty may be sung at each watch.
+There’s only so much inspiration a crew can take."</Explanation>
+<Skill>""</Skill>
+<Max>"(BATTR_Int)"</Max>
+<PDF>""</PDF>
+<Test language="ENGLISH">"COMPDIVERT_CHANT"</Test>
+</Talent>
+<Talent id="SEAOF-T0184">
+<Attribut>""</Attribut>
+<Description language="ENGLISH">"Master and Commander"</Description>
+<Short language="ENGLISH">""</Short>
+<Explanation language="ENGLISH">"You are respected and trusted by your crew.
+Any appropriate Leadership Test on board your ship or involving your crew gains an SL bonus equal to your levels in Master and Commander.
+This bonus applies to Crew Tests as well as individual Leadership Tests."</Explanation>
+<Skill>""</Skill>
+<Max>"(BATTR_Fel)"</Max>
+<PDF>""</PDF>
+<Test language="ENGLISH">"COMPCOMM"</Test>
+</Talent>
+</DATA_TALENT>
+<DATA_CAREER>
+<Career id="SEAOF-WORK109">
+<Description language="ENGLISH">"Beachcomber"</Description>
+<Explanation language="ENGLISH">"You scour the local beaches for anything of value, always on the lookout for a hidden gem or lucky find. Beachcombers live by their wits upon the littoral, finding most of what they need to survive through Manann’s providence. A diverse range of flotsam and jetsam gets washed up on the beaches of the Sea of Claws, and Beachcombers take full advantage of this. Almost any item that can be traded will find itself aboard a ship on the Sea of Claws, and therefore, provided it floats for a time, could end up washed up on a beach. Such castaway cargo can often fetch good money from a local merchant or be bartered for other useful stuff."</Explanation>
+<Skill>"RULES-COMPPRECEP"</Skill>
+<Class>"CLASS_RIVE"</Class>
+<SUBCHAPTER_LEVEL>
+<Level id="1">
+<Description language="ENGLISH">"Scavenger"</Description>
+<Salary>"TIERS_BRASS 1"</Salary>
+</Level>
+<Level id="2">
+<Description language="ENGLISH">"Beachcomber"</Description>
+<Salary>"TIERS_BRASS 3"</Salary>
+</Level>
+<Level id="3">
+<Description language="ENGLISH">"Drifter"</Description>
+<Salary>"TIERS_BRASS 5"</Salary>
+</Level>
+<Level id="4">
+<Description language="ENGLISH">"Master of the Beach"</Description>
+<Salary>"TIERS_SILVER 2"</Salary>
+</Level>
+</SUBCHAPTER_LEVEL>
+<SUBCHAPTER_ATTR>
+<Attribut name="RULES-ATTR_WS">"1"</Attribut>
+<Attribut name="RULES-ATTR_BS">"0"</Attribut>
+<Attribut name="RULES-ATTR_S">"0"</Attribut>
+<Attribut name="RULES-ATTR_T">"4"</Attribut>
+<Attribut name="RULES-ATTR_I">"1"</Attribut>
+<Attribut name="RULES-ATTR_Ag">"2"</Attribut>
+<Attribut name="RULES-ATTR_Dex">"0"</Attribut>
+<Attribut name="RULES-ATTR_Int">"1"</Attribut>
+<Attribut name="RULES-ATTR_WP">"3"</Attribut>
+<Attribut name="RULES-ATTR_Fel">"0"</Attribut>
+</SUBCHAPTER_ATTR>
+<SUBCHAPTER_SKILL>
+<Skill name="RULES-COMPESCAL">"1"</Skill>
+  <!-- Climb -->
+<Skill name="RULES-COMPESQU">"1"</Skill>
+  <!-- Dodge -->
+<Skill name="RULES-COMPRAGOT">"1"</Skill>
+  <!-- Gossip -->
+<Skill name="RULES-COMPMARCH">"1"</Skill>
+  <!-- Haggle -->
+<Skill name="RULES-COMPSAVOIR_COASTTIDES">"1"</Skill>
+  <!-- Lore (Coasts and Tides) -->
+<Skill name="RULES-COMPCOMB_BASE">"1"</Skill>
+  <!-- Melee (Basic) -->
+<Skill name="RULES-COMPSURVEXT">"1"</Skill>
+  <!-- Outdoor Survival -->
+<Skill name="RULES-COMPPRECEP">"1"</Skill>
+  <!-- Perception  -->
+<Skill name="RULES-COMPRAMER">"1"</Skill>
+  <!-- Row -->
+<Skill name="RULES-COMPDISC_RURAL">"1"</Skill>
+  <!-- Stealth (Rural) -->
+<Skill name="RULES-COMPRESALC">"2"</Skill>
+  <!-- Consume Alcohol -->
+<Skill name="RULES-COMPRESIST">"2"</Skill>
+  <!-- Endurance -->
+<Skill name="RULES-COMPSAVOIR_*">"2"</Skill>
+  <!-- Lore (Anyl) -->
+<Skill name="RULES-COMPPROJ_FROND">"2"</Skill>
+  <!-- Ranged (Slingshot) -->
+<Skill name="RULES-COMPPIEG">"2"</Skill>
+  <!-- Set Trap -->
+<Skill name="RULES-COMPNATA">"2"</Skill>
+  <!-- Swim -->
+<Skill name="RULES-COMPCHARM">"3"</Skill>
+  <!-- Charm -->
+<Skill name="RULES-COMPEVAL">"3"</Skill>
+  <!-- Evaluate -->
+<Skill name="RULES-COMPPARI">"3"</Skill>
+  <!-- Gamble -->
+<Skill name="RULES-COMPVOILE">"3"</Skill>
+  <!-- Sail -->
+<Skill name="RULES-COMPCOMM">"4"</Skill>
+  <!-- Leadership -->
+<Skill name="RULES-COMPMETIER_BATEA">"4"</Skill>
+  <!-- Trade (Boat building) -->
+</SUBCHAPTER_SKILL>
+<SUBCHAPTER_TALENT>
+<Talent name="RULES-T0113">"1"</Talent>
+  <!-- Fisherman -->
+<Talent name="RULES-T0140">"1"</Talent>
+  <!-- Orientation -->
+<Talent name="RULES-T0013_COASTAL">"1"</Talent>
+  <!-- Strider (Coastal) -->
+<Talent name="RULES-T0100">"1"</Talent>
+  <!-- Strong Swimmer -->
+<Talent name="RULES-T0074">"2"</Talent>
+  <!-- Coolheaded -->
+<Talent name="RULES-T0064">"2"</Talent>
+  <!-- Flee! -->
+<Talent name="RULES-T0105">"2"</Talent>
+  <!-- Rover -->
+<Talent name="RULES-T0016">"2"</Talent>
+  <!-- Stone Soup -->
+<Talent name="RULES-T0085">"3"</Talent>
+  <!-- Old Salt -->
+<Talent name="RULES-T0134_COASTAL">"3"</Talent>
+  <!-- Savant (Coasts and Tides) -->
+<Talent name="RULES-T0119">"3"</Talent>
+  <!-- Sea Legs -->
+<Talent name="RULES-T0015">"3"</Talent>
+  <!-- Tinker -->
+<Talent name="RULES-T0102">"4"</Talent>
+  <!-- Dealmaker -->
+<Talent name="RULES-T0068">"4"</Talent>
+  <!-- River Guide -->
+<Talent name="RULES-T0168">"4"</Talent>
+  <!-- Seasoned Traveller -->
+<Talent name="RULES-T0116">"4"</Talent>
+  <!-- Tenacious -->
+</SUBCHAPTER_TALENT>
+<SUBCHAPTER_ITEM>
+<Item name="Fishing Net">"1"</Item>
+<Item name="String Bag">"1"</Item>
+<Item name="Found Boots">"2"</Item>
+<Item name="RULES-ARMO_03">"2"</Item>
+<Item name="Rain Hat">"2"</Item>
+<Item name="Boat">"3"</Item>
+<Item name="Hut">"3"</Item>
+<Item name="Storm Lantern">"3"</Item>
+<Item name="Wreck Dwelling">"4"</Item>
+</SUBCHAPTER_ITEM>
+</Career>
+<Career id="SEAOF-WORK110">
+<Description language="ENGLISH">"Chantyman"</Description>
+<Explanation language="ENGLISH">"You coordinate the actions of your ship’s crew, guide their activity, and raise their morale with rousing ditties. Any sailor worth their salt performs better to the sound  of a Chantyman. Some say they are just singers and musicians, like any others. However, it is a common belief amongst most ships crews that the best Chantymen can have an unnatural effect upon the crew."</Explanation>
+<Skill>"RULES-COMPDIVERT_CHANT"</Skill>
+<Class>"CLASS_RIVE"</Class>
+<SUBCHAPTER_LEVEL>
+<Level id="1">
+<Description language="ENGLISH">"Chanter"</Description>
+<Salary>"TIERS_SILVER 1"</Salary>
+</Level>
+<Level id="2">
+<Description language="ENGLISH">"Chantyman"</Description>
+<Salary>"TIERS_SILVER 3"</Salary>
+</Level>
+<Level id="3">
+<Description language="ENGLISH">"Chanty Captain"</Description>
+<Salary>"TIERS_SILVER 5"</Salary>
+</Level>
+<Level id="4">
+<Description language="ENGLISH">"Chanty Master"</Description>
+<Salary>"TIERS_GOLD 1"</Salary>
+</Level>
+</SUBCHAPTER_LEVEL>
+<SUBCHAPTER_ATTR>
+<Attribut name="RULES-ATTR_WS">"0"</Attribut>
+<Attribut name="RULES-ATTR_BS">"0"</Attribut>
+<Attribut name="RULES-ATTR_S">"0"</Attribut>
+<Attribut name="RULES-ATTR_T">"0"</Attribut>
+<Attribut name="RULES-ATTR_I">"4"</Attribut>
+<Attribut name="RULES-ATTR_Ag">"2"</Attribut>
+<Attribut name="RULES-ATTR_Dex">"1"</Attribut>
+<Attribut name="RULES-ATTR_Int">"1"</Attribut>
+<Attribut name="RULES-ATTR_WP">"3"</Attribut>
+<Attribut name="RULES-ATTR_Fel">"1"</Attribut>
+</SUBCHAPTER_ATTR>
+<SUBCHAPTER_SKILL>
+<Skill name="RULES-COMPCHARM">"1"</Skill>
+  <!-- Charm -->
+<Skill name="RULES-COMPRESALC">"1"</Skill>
+  <!-- Consume Alcohol -->
+<Skill name="RULES-COMPESQU">"1"</Skill>
+  <!-- Dodge -->
+<Skill name="RULES-COMPDIVERT_CHANT">"1"</Skill>
+  <!-- Entertainment (Singing) -->
+<Skill name="RULES-COMPRAGOT">"1"</Skill>
+  <!-- Gossip -->
+<Skill name="RULES-COMPCOMB_BAGARRE">"1"</Skill>
+  <!-- Melee (Brawling) -->
+<Skill name="RULES-COMPMUSIC_*">"1"</Skill>
+  <!-- Play (Any) -->
+<Skill name="RULES-COMPRAMER">"1"</Skill>
+  <!-- Row -->
+<Skill name="RULES-COMPVOILE">"1"</Skill>
+  <!-- Sail -->
+<Skill name="RULES-COMPNATA">"1"</Skill>
+  <!-- Swim -->
+<Skill name="RULES-COMPATHL">"2"</Skill>
+  <!-- Athletics -->
+<Skill name="RULES-COMPESCAL">"2"</Skill>
+  <!-- Climb -->
+<Skill name="RULES-COMPRESIST">"2"</Skill>
+  <!-- Endurance -->
+<Skill name="RULES-COMPPARI">"2"</Skill>
+  <!-- Gamble -->
+<Skill name="RULES-COMPCOMB_BASE">"2"</Skill>
+  <!-- Melee (Basic) -->
+<Skill name="RULES-COMPREPRES_*">"2"</Skill>
+  <!-- Perform (Any) -->
+<Skill name="RULES-COMPCALM">"3"</Skill>
+  <!-- Cool -->
+<Skill name="RULES-COMPLANG_*">"3"</Skill>
+  <!-- Language (Any) -->
+<Skill name="RULES-COMPCOMM">"3"</Skill>
+  <!-- Leadership -->
+<Skill name="RULES-COMPPRECEP">"3"</Skill>
+  <!-- Perception  -->
+<Skill name="RULES-COMPSAVOIR_OCEAN">"4"</Skill>
+  <!-- Lore (Oceans) -->
+<Skill name="RULES-COMPORIENT">"4"</Skill>
+  <!-- Navigation -->
+</SUBCHAPTER_SKILL>
+<SUBCHAPTER_TALENT>
+<Talent name="RULES-T0136_CREW">"1"</Talent>
+  <!-- Etiquette (Crew) -->
+<Talent name="RULES-T0110">"1"</Talent>
+  <!-- Perfect Pitch -->
+<Talent name="RULES-T0119">"1"</Talent>
+  <!-- Sea Legs -->
+<Talent name="RULES-T0013_COASTAL">"1"</Talent>
+  <!-- Strider (Coastal) -->
+<Talent name="SEAOF-T0182">"2"</Talent>
+  <!-- Chanty -->
+<Talent name="RULES-T0133">"2"</Talent>
+  <!-- Jump Up -->
+<Talent name="RULES-T0168">"2"</Talent>
+  <!-- Seasoned Traveller -->
+<Talent name="RULES-T0100">"2"</Talent>
+  <!-- Strong Swimmer -->
+<Talent name="RULES-T0104">"3"</Talent>
+  <!-- Carouser -->
+<Talent name="RULES-T0113">"3"</Talent>
+  <!-- Fisherman -->
+<Talent name="RULES-T0085">"3"</Talent>
+  <!-- Old Salt -->
+<Talent name="RULES-T0109">"3"</Talent>
+  <!-- Public Speaker -->
+<Talent name="RULES-T0116">"4"</Talent>
+  <!-- Tenacious -->
+<Talent name="RULES-T0090">"4"</Talent>
+  <!-- Magnum Opus -->
+<Talent name="RULES-T0140">"4"</Talent>
+  <!-- Orientation -->
+<Talent name="RULES-T0084">"4"</Talent>
+  <!-- Read/Write -->
+</SUBCHAPTER_TALENT>
+<SUBCHAPTER_ITEM>
+<Item name="Musical Instrument">"1"</Item>
+<Item name="Rain Hat">"1"</Item>
+<Item name="Sealskin Coat">"2"</Item>
+<Item name="Instrument (Q)">"3"</Item>
+<Item name="Hat (Q)">"4"</Item>
+</SUBCHAPTER_ITEM>
+</Career>
+<Career id="SEAOF-WORK111">
+<Description language="ENGLISH">"Huffer"</Description>
+<Explanation language="ENGLISH">"You guide ships through the most treacherous waters of the world’s several seas. Huffers are known to work on the rivers of the Empire, but pilots and navigators are obviously even more invaluable to captains of ocean-going vessels. Not only is knowledge of areas of rock, reef, or sandbank necessary, but seafarers often sail beyond sight of any landmark, so navigators at sea must display practical knowledge of how to pinpoint their location from the position of the sun and the stars."</Explanation>
+<Skill>"RULES-COMPORIENT"</Skill>
+<Class>"CLASS_RIVE"</Class>
+<SUBCHAPTER_LEVEL>
+<Level id="1">
+<Description language="ENGLISH">"Portguide"</Description>
+<Salary>"TIERS_BRASS 4"</Salary>
+</Level>
+<Level id="2">
+<Description language="ENGLISH">"Huffer"</Description>
+<Salary>"TIERS_SILVER 1"</Salary>
+</Level>
+<Level id="3">
+<Description language="ENGLISH">"Pilot"</Description>
+<Salary>"TIERS_SILVER 3"</Salary>
+</Level>
+<Level id="4">
+<Description language="ENGLISH">"Master Pilot"</Description>
+<Salary>"TIERS_SILVER 5"</Salary>
+</Level>
+</SUBCHAPTER_LEVEL>
+<SUBCHAPTER_ATTR>
+<Attribut name="RULES-ATTR_WS">"1"</Attribut>
+<Attribut name="RULES-ATTR_BS">"0"</Attribut>
+<Attribut name="RULES-ATTR_S">"0"</Attribut>
+<Attribut name="RULES-ATTR_T">"1"</Attribut>
+<Attribut name="RULES-ATTR_I">"1"</Attribut>
+<Attribut name="RULES-ATTR_Ag">"0"</Attribut>
+<Attribut name="RULES-ATTR_Dex">"0"</Attribut>
+<Attribut name="RULES-ATTR_Int">"3"</Attribut>
+<Attribut name="RULES-ATTR_WP">"2"</Attribut>
+<Attribut name="RULES-ATTR_Fel">"4"</Attribut>
+</SUBCHAPTER_ATTR>
+<SUBCHAPTER_SKILL>
+<Skill name="RULES-COMPRESALC">"1"</Skill>
+  <!-- Consume Alcohol -->
+<Skill name="RULES-COMPRAGOT">"1"</Skill>
+  <!-- Gossip -->
+<Skill name="RULES-COMPINTUI">"1"</Skill>
+  <!-- Intuition  -->
+<Skill name="RULES-COMPSAVOIR_LOCAL">"1"</Skill>
+  <!-- Lore (Loca) -->
+<Skill name="RULES-COMPSAVOIR_OCEAN">"1"</Skill>
+  <!-- Lore (Oceans) -->
+<Skill name="RULES-COMPCOMB_BASE">"1"</Skill>
+  <!-- Melee (Basic) -->
+<Skill name="RULES-COMPORIENT">"1"</Skill>
+  <!-- Navigation -->
+<Skill name="RULES-COMPPRECEP">"1"</Skill>
+  <!-- Perception  -->
+<Skill name="RULES-COMPRAMER">"1"</Skill>
+  <!-- Row -->
+<Skill name="RULES-COMPNATA">"1"</Skill>
+  <!-- Swim -->
+<Skill name="RULES-COMPATHL">"2"</Skill>
+  <!-- Athletics -->
+<Skill name="RULES-COMPCHARM">"2"</Skill>
+  <!-- Charm -->
+<Skill name="RULES-COMPESCAL">"2"</Skill>
+  <!-- Climb -->
+<Skill name="RULES-COMPCALM">"2"</Skill>
+  <!-- Cool -->
+<Skill name="RULES-COMPDIVERT_NARRA">"2"</Skill>
+  <!-- Entertainment (Storytelling) -->
+<Skill name="RULES-COMPLANG_*">"2"</Skill>
+  <!-- Language (Any) -->
+<Skill name="RULES-COMPMARCH">"3"</Skill>
+  <!-- Haggle -->
+<Skill name="RULES-COMPINTIM">"3"</Skill>
+  <!-- Intimidate -->
+<Skill name="RULES-COMPSAVOIR_LOCAL">"3"</Skill>
+  <!-- Lore (Loca) -->
+<Skill name="RULES-COMPSAVOIR_EPAVE">"3"</Skill>
+  <!-- Lore (Wrecks) -->
+<Skill name="RULES-COMPCOMM">"4"</Skill>
+  <!-- Leadership -->
+<Skill name="RULES-COMPVOILE">"4"</Skill>
+  <!-- Sail -->
+</SUBCHAPTER_SKILL>
+<SUBCHAPTER_TALENT>
+<Talent name="RULES-T0113">"1"</Talent>
+  <!-- Fisherman -->
+<Talent name="RULES-T0164">"1"</Talent>
+  <!-- Night Vision -->
+<Talent name="RULES-T0140">"1"</Talent>
+  <!-- Orientation -->
+<Talent name="RULES-T0097">"1"</Talent>
+  <!-- Waterman -->
+<Talent name="RULES-T0102">"2"</Talent>
+  <!-- Dealmaker -->
+<Talent name="RULES-T0136_GUILD">"2"</Talent>
+  <!-- Etiquette (Guild) -->
+<Talent name="RULES-T0058">"2"</Talent>
+  <!-- Nose for Trouble -->
+<Talent name="RULES-T0085">"2"</Talent>
+  <!-- Old Salt -->
+<Talent name="RULES-T0139_VUE">"3"</Talent>
+  <!-- Acute Sense (Sight) -->
+<Talent name="RULES-T0120">"3"</Talent>
+  <!-- Pilot -->
+<Talent name="RULES-T0119">"3"</Talent>
+  <!-- Sea Legs -->
+<Talent name="RULES-T0158">"3"</Talent>
+  <!-- Very Strong -->
+<Talent name="RULES-T0166">"4"</Talent>
+  <!-- Sharp -->
+<Talent name="RULES-T0141">"4"</Talent>
+  <!-- Sixth Sense -->
+<Talent name="RULES-T0100">"4"</Talent>
+  <!-- Strong Swimmer -->
+<Talent name="RULES-T0116">"4"</Talent>
+  <!-- Tenacious -->
+</SUBCHAPTER_TALENT>
+<SUBCHAPTER_ITEM>
+<Item name="UPINA-COMB_BAGAR_04">"1"</Item>
+<Item name="Storm Lantern and Oil">"1"</Item>
+<Item name="RULES-ARMO_03">"2"</Item>
+<Item name="Rope">"2"</Item>
+<Item name="Row Boat">"2"</Item>
+<Item name="Pole">"3"</Item>
+<Item name="Storm Lantern and Oil">"3"</Item>
+<Item name="Boathand">"4"</Item>
+<Item name="Small Boat">"4"</Item>
+</SUBCHAPTER_ITEM>
+</Career>
+<Career id="SEAOF-WORK112">
+<Description language="ENGLISH">"Officer"</Description>
+<Explanation language="ENGLISH">"You command a ship, and must inspire your crew to place their lives in your hands. Ship’s Officers, especially captains, are judge, jury, and executioner aboard their vessels. They have Manann-given power of life and death over the crew, but this is a double-edged sword. The Officer must also inspire the crew to trust their judgement and competence, or the hands might mutiny."</Explanation>
+<Skill>"RULES-COMPCOMM"</Skill>
+<Class>"CLASS_RIVE"</Class>
+<SUBCHAPTER_LEVEL>
+<Level id="1">
+<Description language="ENGLISH">"Midshipman"</Description>
+<Salary>"TIERS_SILVER 1"</Salary>
+</Level>
+<Level id="2">
+<Description language="ENGLISH">"Officer"</Description>
+<Salary>"TIERS_SILVER 5"</Salary>
+</Level>
+<Level id="3">
+<Description language="ENGLISH">"Captain"</Description>
+<Salary>"TIERS_GOLD 2"</Salary>
+</Level>
+<Level id="4">
+<Description language="ENGLISH">"Admiral"</Description>
+<Salary>"TIERS_GOLD 5"</Salary>
+</Level>
+</SUBCHAPTER_LEVEL>
+<SUBCHAPTER_ATTR>
+<Attribut name="RULES-ATTR_WS">"1"</Attribut>
+<Attribut name="RULES-ATTR_BS">"2"</Attribut>
+<Attribut name="RULES-ATTR_S">"0"</Attribut>
+<Attribut name="RULES-ATTR_T">"3"</Attribut>
+<Attribut name="RULES-ATTR_I">"0"</Attribut>
+<Attribut name="RULES-ATTR_Ag">"0"</Attribut>
+<Attribut name="RULES-ATTR_Dex">"0"</Attribut>
+<Attribut name="RULES-ATTR_Int">"1"</Attribut>
+<Attribut name="RULES-ATTR_WP">"4"</Attribut>
+<Attribut name="RULES-ATTR_Fel">"1"</Attribut>
+</SUBCHAPTER_ATTR>
+<SUBCHAPTER_SKILL>
+<Skill name="RULES-COMPATHL">"1"</Skill>
+  <!-- Athletics -->
+<Skill name="RULES-COMPESCAL">"1"</Skill>
+  <!-- Climb -->
+<Skill name="RULES-COMPRAGOT">"1"</Skill>
+  <!-- Gossip -->
+<Skill name="RULES-COMPCOMM">"1"</Skill>
+  <!-- Leadership -->
+<Skill name="RULES-COMPCOMB_BASE">"1"</Skill>
+  <!-- Melee (Basic) -->
+<Skill name="RULES-COMPSURVEXT">"1"</Skill>
+  <!-- Outdoor Survival -->
+<Skill name="RULES-COMPPRECEP">"1"</Skill>
+  <!-- Perception  -->
+<Skill name="RULES-COMPRAMER">"1"</Skill>
+  <!-- Row -->
+<Skill name="RULES-COMPVOILE">"1"</Skill>
+  <!-- Sail -->
+<Skill name="RULES-COMPNATA">"1"</Skill>
+  <!-- Swim -->
+<Skill name="RULES-COMPCALM">"2"</Skill>
+  <!-- Cool -->
+<Skill name="RULES-COMPRESIST">"2"</Skill>
+  <!-- Endurance -->
+<Skill name="RULES-COMPINTIM">"2"</Skill>
+  <!-- Intimidate -->
+<Skill name="RULES-COMPSAVOIR_OCEAN">"2"</Skill>
+  <!-- Lore (Oceans) -->
+<Skill name="RULES-COMPORIENT">"2"</Skill>
+  <!-- Navigation -->
+<Skill name="RULES-COMPPROJ_POUDRE">"2"</Skill>
+  <!-- Ranged (Black Powder) -->
+<Skill name="RULES-COMPART_CARTO">"3"</Skill>
+  <!-- Art (Cartography) -->
+<Skill name="RULES-COMPCHARM">"3"</Skill>
+  <!-- Charm -->
+<Skill name="RULES-COMPESQU">"3"</Skill>
+  <!-- Dodge -->
+<Skill name="RULES-COMPINTUI">"3"</Skill>
+  <!-- Intuition  -->
+<Skill name="RULES-COMPLANG_*">"4"</Skill>
+  <!-- Language (Any) -->
+<Skill name="RULES-COMPSAVOIR_*">"4"</Skill>
+  <!-- Lore (Anyl) -->
+</SUBCHAPTER_SKILL>
+<SUBCHAPTER_TALENT>
+<Talent name="RULES-T0136_CREW">"1"</Talent>
+  <!-- Etiquette (Crew) -->
+<Talent name="RULES-T0140">"1"</Talent>
+  <!-- Orientation -->
+<Talent name="RULES-T0084">"1"</Talent>
+  <!-- Read/Write -->
+<Talent name="RULES-T0119">"1"</Talent>
+  <!-- Sea Legs -->
+<Talent name="RULES-T0074">"2"</Talent>
+  <!-- Coolheaded -->
+<Talent name="RULES-T0085">"2"</Talent>
+  <!-- Old Salt -->
+<Talent name="SEAOF-T0184">"2"</Talent>
+  <!-- Master and Commander -->
+<Talent name="RULES-T0120">"2"</Talent>
+  <!-- Pilot -->
+<Talent name="RULES-T0053">"3"</Talent>
+  <!-- Inspiring -->
+<Talent name="RULES-T0168">"3"</Talent>
+  <!-- Seasoned Traveller -->
+<Talent name="RULES-T0138">"3"</Talent>
+  <!-- War Leader -->
+<Talent name="RULES-T0002">"3"</Talent>
+  <!-- Suave -->
+<Talent name="RULES-T0122">"4"</Talent>
+  <!-- Commanding Presence -->
+<Talent name="RULES-T0167">"4"</Talent>
+  <!-- Iron Will -->
+<Talent name="RULES-T0109">"4"</Talent>
+  <!-- Public Speaker -->
+<Talent name="RULES-T0025">"4"</Talent>
+  <!-- Stout-hearted -->
+</SUBCHAPTER_TALENT>
+<SUBCHAPTER_ITEM>
+<Item name="RULES-COMB_BASE_*">"1"</Item>
+<Item name="Uniform">"1"</Item>
+<Item name="Uniform (Q)">"2"</Item>
+<Item name="Ship’s Chest">"2"</Item>
+<Item name="Big Hat">"3"</Item>
+<Item name="Boat to Command">"3"</Item>
+<Item name="Captain’s Log">"3"</Item>
+<Item name="A Fleet">"4"</Item>
+</SUBCHAPTER_ITEM>
+</Career>
+<Career id="SEAOF-WORK113">
+<Description language="ENGLISH">"Sailor"</Description>
+<Explanation language="ENGLISH">"You work on board a ship, keeping the decks clean and the sails suitably trimmed. Humans of the Old World had to learn the skills of sailing for themselves, for the Dwarfs were never a great maritime civilisation, and the Elves had no desire to encourage Human exploration of the wider world. Human civilisation before the age of Sigmar rarely ventured upon the waves. Even the mighty Khemrians built few vessels capable of ocean travel."</Explanation>
+<Skill>"RULES-COMPVOILE"</Skill>
+<Class>"CLASS_RIVE"</Class>
+<SUBCHAPTER_LEVEL>
+<Level id="1">
+<Description language="ENGLISH">"Landsman"</Description>
+<Salary>"TIERS_SILVER 1"</Salary>
+</Level>
+<Level id="2">
+<Description language="ENGLISH">"Sailor"</Description>
+<Salary>"TIERS_SILVER 3"</Salary>
+</Level>
+<Level id="3">
+<Description language="ENGLISH">"Boatswain"</Description>
+<Salary>"TIERS_SILVER 5"</Salary>
+</Level>
+<Level id="4">
+<Description language="ENGLISH">"Ship’s Master"</Description>
+<Salary>"TIERS_GOLD 2"</Salary>
+</Level>
+</SUBCHAPTER_LEVEL>
+<SUBCHAPTER_ATTR>
+<Attribut name="RULES-ATTR_WS">"2"</Attribut>
+<Attribut name="RULES-ATTR_BS">"0"</Attribut>
+<Attribut name="RULES-ATTR_S">"0"</Attribut>
+<Attribut name="RULES-ATTR_T">"0"</Attribut>
+<Attribut name="RULES-ATTR_I">"3"</Attribut>
+<Attribut name="RULES-ATTR_Ag">"1"</Attribut>
+<Attribut name="RULES-ATTR_Dex">"1"</Attribut>
+<Attribut name="RULES-ATTR_Int">"4"</Attribut>
+<Attribut name="RULES-ATTR_WP">"0"</Attribut>
+<Attribut name="RULES-ATTR_Fel">"1"</Attribut>
+</SUBCHAPTER_ATTR>
+<SUBCHAPTER_SKILL>
+<Skill name="RULES-COMPESCAL">"1"</Skill>
+  <!-- Climb -->
+<Skill name="RULES-COMPRESALC">"1"</Skill>
+  <!-- Consume Alcohol -->
+<Skill name="RULES-COMPPARI">"1"</Skill>
+  <!-- Gamble -->
+<Skill name="RULES-COMPRAGOT">"1"</Skill>
+  <!-- Gossip -->
+<Skill name="RULES-COMPSAVOIR_OCEAN">"1"</Skill>
+  <!-- Lore (Oceans) -->
+<Skill name="RULES-COMPCOMB_BAGARRE">"1"</Skill>
+  <!-- Melee (Brawling) -->
+<Skill name="RULES-COMPMUSIC_PENNYW">"1"</Skill>
+  <!-- Play (Pennywhistle) -->
+<Skill name="RULES-COMPRAMER">"1"</Skill>
+  <!-- Row -->
+<Skill name="RULES-COMPVOILE">"1"</Skill>
+  <!-- Sail -->
+<Skill name="RULES-COMPNATA">"1"</Skill>
+  <!-- Swim -->
+<Skill name="RULES-COMPATHL">"2"</Skill>
+  <!-- Athletics -->
+<Skill name="RULES-COMPESQU">"2"</Skill>
+  <!-- Dodge -->
+<Skill name="RULES-COMPRESIST">"2"</Skill>
+  <!-- Endurance -->
+<Skill name="RULES-COMPDIVERT_CHANT">"2"</Skill>
+  <!-- Entertainment (Singing) -->
+<Skill name="RULES-COMPLANG_*">"2"</Skill>
+  <!-- Language (Any) -->
+<Skill name="RULES-COMPCOMB_BASE">"2"</Skill>
+  <!-- Melee (Basic) -->
+<Skill name="RULES-COMPCALM">"3"</Skill>
+  <!-- Cool -->
+<Skill name="RULES-COMPCOMM">"3"</Skill>
+  <!-- Leadership -->
+<Skill name="RULES-COMPPRECEP">"3"</Skill>
+  <!-- Perception  -->
+<Skill name="RULES-COMPMETIER_CHARP">"3"</Skill>
+  <!-- Trade (Carpenter) -->
+<Skill name="RULES-COMPCHARM">"4"</Skill>
+  <!-- Charm -->
+<Skill name="RULES-COMPORIENT">"4"</Skill>
+  <!-- Navigation -->
+</SUBCHAPTER_SKILL>
+<SUBCHAPTER_TALENT>
+<Talent name="RULES-T0113">"1"</Talent>
+  <!-- Fisherman -->
+<Talent name="RULES-T0013_COASTAL">"1"</Talent>
+  <!-- Strider (Coastal) -->
+<Talent name="RULES-T0077">"1"</Talent>
+  <!-- Strong Back -->
+<Talent name="RULES-T0100">"1"</Talent>
+  <!-- Strong Swimmer -->
+<Talent name="RULES-T0144">"2"</Talent>
+  <!-- Catfall -->
+<Talent name="RULES-T0119">"2"</Talent>
+  <!-- Sea Legs -->
+<Talent name="RULES-T0168">"2"</Talent>
+  <!-- Seasoned Traveller -->
+<Talent name="RULES-T0014">"2"</Talent>
+  <!-- Strong Legs -->
+<Talent name="RULES-T0085">"3"</Talent>
+  <!-- Old Salt -->
+<Talent name="RULES-T0037">"3"</Talent>
+  <!-- Strike Mighty Blow -->
+<Talent name="RULES-T0116">"3"</Talent>
+  <!-- Tenacious -->
+<Talent name="RULES-T0158">"3"</Talent>
+  <!-- Very Strong -->
+<Talent name="RULES-T0140">"4"</Talent>
+  <!-- Orientation -->
+<Talent name="RULES-T0120">"4"</Talent>
+  <!-- Pilot -->
+<Talent name="RULES-T0109">"4"</Talent>
+  <!-- Public Speaker -->
+<Talent name="RULES-T0117">"4"</Talent>
+  <!-- Savvy -->
+</SUBCHAPTER_TALENT>
+<SUBCHAPTER_ITEM>
+<Item name="Brush">"1"</Item>
+<Item name="Bucket">"1"</Item>
+<Item name="Mop">"1"</Item>
+<Item name="UPINA-COMB_BAGAR_04">"2"</Item>
+<Item name="RULES-ARMO_03">"2"</Item>
+<Item name="Trade Tools (Carpenter)">"3"</Item>
+<Item name="Sailing Ship and Crew">"4"</Item>
+<Item name="Sextant">"4"</Item>
+<Item name="Shipping Charts">"4"</Item>
+<Item name="Spyglass">"4"</Item>
+</SUBCHAPTER_ITEM>
+</Career>
+<Career id="SEAOF-WORK114">
+<Description language="ENGLISH">"Sailor-Priest of Manann"</Description>
+<Explanation language="ENGLISH">"You bring the will of Manann to his followers and intercede to court his favour and avoid his wrath. Priests of Manann are found working and ministering on board vessels as often as they are found in his temples and shrines. Manann is a fickle and moody deity, but he seems to respect a degree of practical ability and  experience of the seas in his priests, and most of them spend a part of their career at sea."</Explanation>
+<Skill>"RULES-COMPPRIERE"</Skill>
+<Class>"CLASS_RIVE"</Class>
+<SUBCHAPTER_LEVEL>
+<Level id="1">
+<Description language="ENGLISH">"Initiate"</Description>
+<Salary>"TIERS_BRASS 2"</Salary>
+</Level>
+<Level id="2">
+<Description language="ENGLISH">"Sailor-Priest"</Description>
+<Salary>"TIERS_SILVER 1"</Salary>
+</Level>
+<Level id="3">
+<Description language="ENGLISH">"Priest-Captain"</Description>
+<Salary>"TIERS_GOLD 1"</Salary>
+</Level>
+<Level id="4">
+<Description language="ENGLISH">"Wave Lord"</Description>
+<Salary>"TIERS_GOLD 2"</Salary>
+</Level>
+</SUBCHAPTER_LEVEL>
+<SUBCHAPTER_ATTR>
+<Attribut name="RULES-ATTR_WS">"0"</Attribut>
+<Attribut name="RULES-ATTR_BS">"0"</Attribut>
+<Attribut name="RULES-ATTR_S">"0"</Attribut>
+<Attribut name="RULES-ATTR_T">"1"</Attribut>
+<Attribut name="RULES-ATTR_I">"3"</Attribut>
+<Attribut name="RULES-ATTR_Ag">"1"</Attribut>
+<Attribut name="RULES-ATTR_Dex">"0"</Attribut>
+<Attribut name="RULES-ATTR_Int">"4"</Attribut>
+<Attribut name="RULES-ATTR_WP">"1"</Attribut>
+<Attribut name="RULES-ATTR_Fel">"2"</Attribut>
+</SUBCHAPTER_ATTR>
+<SUBCHAPTER_SKILL>
+<Skill name="RULES-COMPATHL">"1"</Skill>
+  <!-- Athletics -->
+<Skill name="RULES-COMPRESALC">"1"</Skill>
+  <!-- Consume Alcohol -->
+<Skill name="RULES-COMPCALM">"1"</Skill>
+  <!-- Cool -->
+<Skill name="RULES-COMPRESIST">"1"</Skill>
+  <!-- Endurance -->
+<Skill name="RULES-COMPLANG_CLASS">"1"</Skill>
+  <!-- Language (Classic) -->
+<Skill name="RULES-COMPSAVOIR_MANANN">"1"</Skill>
+  <!-- Lore (Manann) -->
+<Skill name="RULES-COMPPRIERE">"1"</Skill>
+  <!-- Pray -->
+<Skill name="RULES-COMPRAMER">"1"</Skill>
+  <!-- Row -->
+<Skill name="RULES-COMPVOILE">"1"</Skill>
+  <!-- Sail -->
+<Skill name="RULES-COMPNATA">"1"</Skill>
+  <!-- Swim -->
+<Skill name="RULES-COMPINTUI">"2"</Skill>
+  <!-- Intuition  -->
+<Skill name="RULES-COMPDIVERT_CHANT">"2"</Skill>
+  <!-- Entertainment (Singing) -->
+<Skill name="RULES-COMPPARI">"2"</Skill>
+  <!-- Gamble -->
+<Skill name="RULES-COMPINTIM">"2"</Skill>
+  <!-- Intimidate -->
+<Skill name="RULES-COMPCOMB_HAST">"2"</Skill>
+  <!-- Melee (Polearm) -->
+<Skill name="RULES-COMPORIENT">"2"</Skill>
+  <!-- Navigation -->
+<Skill name="RULES-COMPCHARM">"3"</Skill>
+  <!-- Charm -->
+<Skill name="RULES-COMPCOMM">"3"</Skill>
+  <!-- Leadership -->
+<Skill name="RULES-COMPSAVOIR_OCEAN">"3"</Skill>
+  <!-- Lore (Oceans) -->
+<Skill name="RULES-COMPPROJ_POUDRE">"3"</Skill>
+  <!-- Ranged (Black Powder) -->
+<Skill name="RULES-COMPLANG_*">"4"</Skill>
+  <!-- Language (Any) -->
+<Skill name="RULES-COMPSAVOIR_POLIT">"4"</Skill>
+  <!-- Lore (Politics) -->
+</SUBCHAPTER_SKILL>
+<SUBCHAPTER_TALENT>
+<Talent name="RULES-T0012_MANANN">"1"</Talent>
+  <!-- Beni of Manann (Sea) -->
+<Talent name="RULES-T0165">"1"</Talent>
+  <!-- Holy Visions -->
+<Talent name="RULES-T0119">"1"</Talent>
+  <!-- Sea Legs -->
+<Talent name="RULES-T0158">"1"</Talent>
+  <!-- Very Strong -->
+<Talent name="RULES-T0080_MANANN">"2"</Talent>
+  <!-- Invoke Manann (Sea) -->
+<Talent name="RULES-T0109">"2"</Talent>
+  <!-- Public Speaker -->
+<Talent name="RULES-T0084">"2"</Talent>
+  <!-- Read/Write -->
+<Talent name="RULES-T0077">"2"</Talent>
+  <!-- Strong Back -->
+<Talent name="RULES-T0069_STROMFELS">"3"</Talent>
+  <!-- Hatred (Followers of Stromfels) -->
+<Talent name="RULES-T0085">"3"</Talent>
+  <!-- Old Salt -->
+<Talent name="RULES-T0120">"3"</Talent>
+  <!-- Pilot -->
+<Talent name="RULES-T0100">"3"</Talent>
+  <!-- Strong Swimmer -->
+<Talent name="SEAOF-T0182">"4"</Talent>
+  <!-- Chanty -->
+<Talent name="RULES-T0053">"4"</Talent>
+  <!-- Inspiring -->
+<Talent name="RULES-T0005">"4"</Talent>
+  <!-- Pure Soul -->
+<Talent name="RULES-T0168">"4"</Talent>
+  <!-- Seasoned Traveller -->
+</SUBCHAPTER_TALENT>
+<SUBCHAPTER_ITEM>
+<Item name="Blue Robes/Green Robes/Turquoise Robes">"1"</Item>
+<Item name="RULES-COMB_BASE_10">"1"</Item>
+<Item name="Symbol of Manann">"1"</Item>
+<Item name="Holy Book of Manann">"2"</Item>
+<Item name="RULES-COMB_HAST_03">"2"</Item>
+<Item name="Ceremonial Boat">"3"</Item>
+<Item name="Subordinate Priests">"3"</Item>
+<Item name="Temple">"3"</Item>
+<Item name="Flotilla of Ships">"4"</Item>
+<Item name="Holy Relic">"4"</Item>
+<Item name="Subordinate High Priests">"4"</Item>
+</SUBCHAPTER_ITEM>
+</Career>
+<Career id="SEAOF-WORK115">
+<Description language="ENGLISH">"Ship’s Gunner"</Description>
+<Explanation language="ENGLISH">"You maintain and fire the guns aboard ship and are expert in their use. The Ship’s Gunner is part of the crew, and just like any other crew member they are expected to help with the sailing of their vessel and to put their hand to anything involved in running the ship. In addition, they are experts on blackpowder weapons and their use at sea."</Explanation>
+<Skill>"RULES-COMPPROJ_POUDRE"</Skill>
+<Class>"CLASS_RIVE"</Class>
+<SUBCHAPTER_LEVEL>
+<Level id="1">
+<Description language="ENGLISH">"Powder Monkey"</Description>
+<Salary>"TIERS_BRASS 3"</Salary>
+</Level>
+<Level id="2">
+<Description language="ENGLISH">"Ship’s Gunner"</Description>
+<Salary>"TIERS_SILVER 3"</Salary>
+</Level>
+<Level id="3">
+<Description language="ENGLISH">"Gunnery Captain"</Description>
+<Salary>"TIERS_SILVER 5"</Salary>
+</Level>
+<Level id="4">
+<Description language="ENGLISH">"Master Gunner"</Description>
+<Salary>"TIERS_GOLD 1"</Salary>
+</Level>
+</SUBCHAPTER_LEVEL>
+<SUBCHAPTER_ATTR>
+<Attribut name="RULES-ATTR_WS">"0"</Attribut>
+<Attribut name="RULES-ATTR_BS">"1"</Attribut>
+<Attribut name="RULES-ATTR_S">"0"</Attribut>
+<Attribut name="RULES-ATTR_T">"3"</Attribut>
+<Attribut name="RULES-ATTR_I">"2"</Attribut>
+<Attribut name="RULES-ATTR_Ag">"1"</Attribut>
+<Attribut name="RULES-ATTR_Dex">"0"</Attribut>
+<Attribut name="RULES-ATTR_Int">"1"</Attribut>
+<Attribut name="RULES-ATTR_WP">"4"</Attribut>
+<Attribut name="RULES-ATTR_Fel">"0"</Attribut>
+</SUBCHAPTER_ATTR>
+<SUBCHAPTER_SKILL>
+<Skill name="RULES-COMPATHL">"1"</Skill>
+  <!-- Athletics -->
+<Skill name="RULES-COMPESCAL">"1"</Skill>
+  <!-- Climb -->
+<Skill name="RULES-COMPESQU">"1"</Skill>
+  <!-- Dodge -->
+<Skill name="RULES-COMPRESIST">"1"</Skill>
+  <!-- Endurance -->
+<Skill name="RULES-COMPLANG_BATAIL">"1"</Skill>
+  <!-- Language (Battle) -->
+<Skill name="RULES-COMPCOMB_BAGARRE">"1"</Skill>
+  <!-- Melee (Brawling) -->
+<Skill name="RULES-COMPPRECEP">"1"</Skill>
+  <!-- Perception  -->
+<Skill name="RULES-COMPPROJ_POUDRE">"1"</Skill>
+  <!-- Ranged (Black Powder) -->
+<Skill name="RULES-COMPRAMER">"1"</Skill>
+  <!-- Row -->
+<Skill name="RULES-COMPNATA">"1"</Skill>
+  <!-- Swim -->
+<Skill name="RULES-COMPRESALC">"2"</Skill>
+  <!-- Consume Alcohol -->
+<Skill name="RULES-COMPCALM">"2"</Skill>
+  <!-- Cool -->
+<Skill name="RULES-COMPPARI">"2"</Skill>
+  <!-- Gamble -->
+<Skill name="RULES-COMPRAGOT">"2"</Skill>
+  <!-- Gossip -->
+<Skill name="RULES-COMPCOMB_BASE">"2"</Skill>
+  <!-- Melee (Basic) -->
+<Skill name="RULES-COMPVOILE">"2"</Skill>
+  <!-- Sail -->
+<Skill name="RULES-COMPCOMM">"3"</Skill>
+  <!-- Leadership -->
+<Skill name="RULES-COMPSAVOIR_ARTILLERY">"3"</Skill>
+  <!-- Lore (Artillery) -->
+<Skill name="RULES-COMPORIENT">"3"</Skill>
+  <!-- Navigation -->
+<Skill name="RULES-COMPMETIER_ARMU">"3"</Skill>
+  <!-- Trade (Gunsmith) -->
+<Skill name="RULES-COMPCHARM">"4"</Skill>
+  <!-- Charm -->
+<Skill name="RULES-COMPSAVOIR_OCEAN">"4"</Skill>
+  <!-- Lore (Oceans) -->
+</SUBCHAPTER_SKILL>
+<SUBCHAPTER_TALENT>
+<Talent name="RULES-T0085">"1"</Talent>
+  <!-- Old Salt -->
+<Talent name="RULES-T0125">"1"</Talent>
+  <!-- Rapid Reload -->
+<Talent name="RULES-T0119">"1"</Talent>
+  <!-- Sea Legs -->
+<Talent name="RULES-T0077">"1"</Talent>
+  <!-- Strong Back -->
+<Talent name="RULES-T0136_CREW">"2"</Talent>
+  <!-- Etiquette (Crew) -->
+<Talent name="RULES-T0006">"2"</Talent>
+  <!-- Gunner -->
+<Talent name="RULES-T0153">"2"</Talent>
+  <!-- Marksman -->
+<Talent name="RULES-T0154">"2"</Talent>
+  <!-- Sniper -->
+<Talent name="RULES-T0163">"3"</Talent>
+  <!-- Combat Aware -->
+<Talent name="UPINA-T0173">"3"</Talent>
+  <!-- Crew Commander -->
+<Talent name="RULES-T0140">"3"</Talent>
+  <!-- Orientation -->
+<Talent name="RULES-T0084">"3"</Talent>
+  <!-- Read/Write -->
+<Talent name="RULES-T0149">"4"</Talent>
+  <!-- Accurate Shot -->
+<Talent name="RULES-T0053">"4"</Talent>
+  <!-- Inspiring -->
+<Talent name="RULES-T0168">"4"</Talent>
+  <!-- Seasoned Traveller -->
+<Talent name="RULES-T0025">"4"</Talent>
+  <!-- Stout-hearted -->
+</SUBCHAPTER_TALENT>
+<SUBCHAPTER_ITEM>
+<Item name="Bucket">"1"</Item>
+<Item name="Hammock">"1"</Item>
+<Item name="Hat">"2"</Item>
+<Item name="Sea Chest">"2"</Item>
+<Item name="Tools">"2"</Item>
+<Item name="Crew">"3"</Item>
+<Item name="Telescope">"3"</Item>
+<Item name="Cabin">"4"</Item>
+<Item name="Uniform (Q)">"4"</Item>
+</SUBCHAPTER_ITEM>
+</Career>
+<Career id="SEAOF-WORK116">
+<Description language="ENGLISH">"Wrecker"</Description>
+<Explanation language="ENGLISH">"You lure vessels to a watery doom and make off with their precious cargo. Bands of wreckers work around the coasts of all the nations of the Old World. They live by salvaging cargos from stricken vessels. Although there are some wreckers who live by treacherous lengths of coastline and wait patiently for ships to run aground, they may even manage to keep on the right side of the law as they do so, informing the authorities of their actions but seeking a cut of the salvage. But such people are not archetypal wreckers. The enterprise of wrecking is usually an opportunistic and criminal one, and the name is associated with those who take an active role in ensuring a steady supply of ships to wreck and plunder."</Explanation>
+<Skill>"RULES-COMPCOMB_BASE"</Skill>
+<Class>"CLASS_RIVE"</Class>
+<SUBCHAPTER_LEVEL>
+<Level id="1">
+<Description language="ENGLISH">"Cargo Scavenger"</Description>
+<Salary>"TIERS_BRASS 2"</Salary>
+</Level>
+<Level id="2">
+<Description language="ENGLISH">"Wrecker"</Description>
+<Salary>"TIERS_BRASS 3"</Salary>
+</Level>
+<Level id="3">
+<Description language="ENGLISH">"Pirate"</Description>
+<Salary>"TIERS_BRASS 5"</Salary>
+</Level>
+<Level id="4">
+<Description language="ENGLISH">"Pirate Captain"</Description>
+<Salary>"TIERS_SILVER 2"</Salary>
+</Level>
+</SUBCHAPTER_LEVEL>
+<SUBCHAPTER_ATTR>
+<Attribut name="RULES-ATTR_WS">"1"</Attribut>
+<Attribut name="RULES-ATTR_BS">"3"</Attribut>
+<Attribut name="RULES-ATTR_S">"1"</Attribut>
+<Attribut name="RULES-ATTR_T">"0"</Attribut>
+<Attribut name="RULES-ATTR_I">"1"</Attribut>
+<Attribut name="RULES-ATTR_Ag">"0"</Attribut>
+<Attribut name="RULES-ATTR_Dex">"0"</Attribut>
+<Attribut name="RULES-ATTR_Int">"0"</Attribut>
+<Attribut name="RULES-ATTR_WP">"2"</Attribut>
+<Attribut name="RULES-ATTR_Fel">"4"</Attribut>
+</SUBCHAPTER_ATTR>
+<SUBCHAPTER_SKILL>
+<Skill name="RULES-COMPESCAL">"1"</Skill>
+  <!-- Climb -->
+<Skill name="RULES-COMPRESALC">"1"</Skill>
+  <!-- Consume Alcohol -->
+<Skill name="RULES-COMPESQU">"1"</Skill>
+  <!-- Dodge -->
+<Skill name="RULES-COMPRESIST">"1"</Skill>
+  <!-- Endurance -->
+<Skill name="RULES-COMPCOMB_BASE">"1"</Skill>
+  <!-- Melee (Basic) -->
+<Skill name="RULES-COMPSURVEXT">"1"</Skill>
+  <!-- Outdoor Survival -->
+<Skill name="RULES-COMPPROJ_FROND">"1"</Skill>
+  <!-- Ranged (Slingshot) -->
+<Skill name="RULES-COMPRAMER">"1"</Skill>
+  <!-- Row -->
+<Skill name="RULES-COMPVOILE">"1"</Skill>
+  <!-- Sail -->
+<Skill name="RULES-COMPNATA">"1"</Skill>
+  <!-- Swim -->
+<Skill name="RULES-COMPSUBOR">"2"</Skill>
+  <!-- Bribery -->
+<Skill name="RULES-COMPCALM">"2"</Skill>
+  <!-- Cool -->
+<Skill name="RULES-COMPINTUI">"2"</Skill>
+  <!-- Intuition  -->
+<Skill name="RULES-COMPORIENT">"2"</Skill>
+  <!-- Navigation -->
+<Skill name="RULES-COMPPRECEP">"2"</Skill>
+  <!-- Perception  -->
+<Skill name="RULES-COMPPIEG">"2"</Skill>
+  <!-- Set Trap -->
+<Skill name="RULES-COMPRAGOT">"3"</Skill>
+  <!-- Gossip -->
+<Skill name="RULES-COMPINTIM">"3"</Skill>
+  <!-- Intimidate -->
+<Skill name="RULES-COMPPROJ_ARB">"3"</Skill>
+  <!-- Ranged (Crossbow) -->
+<Skill name="RULES-COMPDISC_RURAL">"3"</Skill>
+  <!-- Stealth (Rural) -->
+<Skill name="RULES-COMPCOMM">"4"</Skill>
+  <!-- Leadership -->
+<Skill name="RULES-COMPSAVOIR_OCEAN">"4"</Skill>
+  <!-- Lore (Oceans) -->
+</SUBCHAPTER_SKILL>
+<SUBCHAPTER_TALENT>
+<Talent name="RULES-T0048">"1"</Talent>
+  <!-- Break and Enter -->
+<Talent name="RULES-T0038">"1"</Talent>
+  <!-- Criminal -->
+<Talent name="RULES-T0113">"1"</Talent>
+  <!-- Fisherman -->
+<Talent name="RULES-T0077">"1"</Talent>
+  <!-- Strong Back -->
+<Talent name="RULES-T0064">"2"</Talent>
+  <!-- Flee! -->
+<Talent name="RULES-T0105">"2"</Talent>
+  <!-- Rover -->
+<Talent name="RULES-T0100">"2"</Talent>
+  <!-- Strong Swimmer -->
+<Talent name="RULES-T0156">"2"</Talent>
+  <!-- Trapper -->
+<Talent name="RULES-T0026">"3"</Talent>
+  <!-- Dirty Fighting -->
+<Talent name="RULES-T0136_CRIM">"3"</Talent>
+  <!-- Etiquette (Criminals) -->
+<Talent name="RULES-T0098">"3"</Talent>
+  <!-- Menacing -->
+<Talent name="RULES-T0097">"3"</Talent>
+  <!-- Waterman -->
+<Talent name="RULES-T0008">"4"</Talent>
+  <!-- Furious Assault -->
+<Talent name="RULES-T0029">"4"</Talent>
+  <!-- In-fighter -->
+<Talent name="SEAOF-T0184">"4"</Talent>
+  <!-- Master and Commander -->
+<Talent name="RULES-T0067">"4"</Talent>
+  <!-- Warrior Born -->
+</SUBCHAPTER_TALENT>
+<SUBCHAPTER_ITEM>
+<Item name="Crowbar">"1"</Item>
+<Item name="Large Sack">"1"</Item>
+<Item name="Leather Gloves">"1"</Item>
+<Item name="UPINA-COMB_BAGAR_04">"2"</Item>
+<Item name="RULES-ARMO_03">"2"</Item>
+<Item name="Storm Lantern and Oil">"2"</Item>
+<Item name="RULES-PROJ_ARB_01">"3"</Item>
+<Item name="Grappling Hook">"3"</Item>
+<Item name="Rope">"3"</Item>
+<Item name="Riverboat">"3"</Item>
+<Item name="Fleet of Riverboats and Wrecker Crew">"4"</Item>
+<Item name="Keg of Ale">"4"</Item>
+<Item name="Manacles">"4"</Item>
+</SUBCHAPTER_ITEM>
+</Career>
+<Career id="SEAOF-WORK118">
+<Description language="ENGLISH">"Priest Of Stromfels"</Description>
+<Explanation language="ENGLISH">"You preach that the strong have the right to take advantage of the weak and call on Stromfels to aid you in your predations. Priests of Stromfels are actively involved in the business of piracy, raiding, or wrecking — to do less would be hypocrisy. You may not take the Priest of Stromfels as your first career, and it can only be undertaken after you have completed the first tier of a predatory occupation. This need not be a seafaring career; there are Outlaws, Protagonists, and Racketeers who might find much to admire in Stromfels, but most of his priests have either served as crew on a pirate vessel, or worked as Wreckers. ‘Feel that sou-wester blowing up? There’ll be gifts from Stromfels scattered on the shore tomorrow morning, and a few more souls in his jaws this night.’ — Thijs Vroom, Marienburg sailor"</Explanation>
+<Skill>"RULES-COMPCOMB_BASE"</Skill>
+<Class>"CLASS_RIVE"</Class>
+<SUBCHAPTER_LEVEL>
+<Level id="1">
+<Description language="ENGLISH">"Initiate"</Description>
+<Salary>"TIERS_SILVER 2"</Salary>
+</Level>
+<Level id="2">
+<Description language="ENGLISH">"Priest of Stromfels"</Description>
+<Salary>"TIERS_SILVER 3"</Salary>
+</Level>
+<Level id="3">
+<Description language="ENGLISH">"Pirate Priest"</Description>
+<Salary>"TIERS_SILVER 4"</Salary>
+</Level>
+<Level id="4">
+<Description language="ENGLISH">"Priest Captain"</Description>
+<Salary>"TIERS_SILVER 5"</Salary>
+</Level>
+</SUBCHAPTER_LEVEL>
+<SUBCHAPTER_ATTR>
+<Attribut name="RULES-ATTR_WS">"1"</Attribut>
+<Attribut name="RULES-ATTR_BS">"4"</Attribut>
+<Attribut name="RULES-ATTR_S">"1"</Attribut>
+<Attribut name="RULES-ATTR_T">"0"</Attribut>
+<Attribut name="RULES-ATTR_I">"1"</Attribut>
+<Attribut name="RULES-ATTR_Ag">"3"</Attribut>
+<Attribut name="RULES-ATTR_Dex">"0"</Attribut>
+<Attribut name="RULES-ATTR_Int">"0"</Attribut>
+<Attribut name="RULES-ATTR_WP">"0"</Attribut>
+<Attribut name="RULES-ATTR_Fel">"2"</Attribut>
+</SUBCHAPTER_ATTR>
+<SUBCHAPTER_SKILL>
+<Skill name="RULES-COMPESCAL">"1"</Skill>
+  <!-- Climb -->
+<Skill name="RULES-COMPRESALC">"1"</Skill>
+  <!-- Consume Alcohol -->
+<Skill name="RULES-COMPRESIST">"1"</Skill>
+  <!-- Endurance -->
+<Skill name="RULES-COMPINTIM">"1"</Skill>
+  <!-- Intimidate -->
+<Skill name="RULES-COMPINTUI">"1"</Skill>
+  <!-- Intuition  -->
+<Skill name="RULES-COMPCOMB_BASE">"1"</Skill>
+  <!-- Melee (Basic) -->
+<Skill name="RULES-COMPPRIERE">"1"</Skill>
+  <!-- Pray -->
+<Skill name="RULES-COMPRAMER">"1"</Skill>
+  <!-- Row -->
+<Skill name="RULES-COMPVOILE">"1"</Skill>
+  <!-- Sail -->
+<Skill name="RULES-COMPNATA">"1"</Skill>
+  <!-- Swim -->
+<Skill name="RULES-COMPCALM">"2"</Skill>
+  <!-- Cool -->
+<Skill name="RULES-COMPDIVERT_CHANT">"2"</Skill>
+  <!-- Entertainment (Singing) -->
+<Skill name="RULES-COMPSAVOIR_STROMFELS">"2"</Skill>
+  <!-- Lore (Stromfels) -->
+<Skill name="RULES-COMPORIENT">"2"</Skill>
+  <!-- Navigation -->
+<Skill name="RULES-COMPPRECEP">"2"</Skill>
+  <!-- Perception  -->
+<Skill name="RULES-COMPPIST">"2"</Skill>
+  <!-- Track -->
+<Skill name="RULES-COMPRAGOT">"3"</Skill>
+  <!-- Gossip -->
+<Skill name="RULES-COMPCOMM">"3"</Skill>
+  <!-- Leadership -->
+<Skill name="RULES-COMPSAVOIR_OCEAN">"3"</Skill>
+  <!-- Lore (Oceans) -->
+<Skill name="RULES-COMPPIEG">"3"</Skill>
+  <!-- Set Trap -->
+<Skill name="RULES-COMPCOMB_*">"4"</Skill>
+  <!-- Melee (Any) -->
+<Skill name="RULES-COMPPROJ_POUDRE">"4"</Skill>
+  <!-- Ranged (Black Powder) -->
+</SUBCHAPTER_SKILL>
+<SUBCHAPTER_TALENT>
+<Talent name="RULES-T0012_STROMFELS">"1"</Talent>
+  <!-- Blessed by Stromfels -->
+<Talent name="RULES-T0038">"1"</Talent>
+  <!-- Criminal -->
+<Talent name="RULES-T0165">"1"</Talent>
+  <!-- Holy Visions -->
+<Talent name="RULES-T0100">"1"</Talent>
+  <!-- Strong Swimmer -->
+<Talent name="RULES-T0132_TOUT">"2"</Talent>
+  <!-- Fearless (Any) -->
+<Talent name="RULES-T0064">"2"</Talent>
+  <!-- Flee! -->
+<Talent name="RULES-T0080_STROMFELS">"2"</Talent>
+  <!-- Invoke Stromfels (Predators) -->
+<Talent name="RULES-T0098">"2"</Talent>
+  <!-- Menacing -->
+<Talent name="RULES-T0069_MANANN/RULES-T0069_CHAOS">"3"</Talent>
+  <!-- Hatred (Manannites or Followers of Chaos) -->
+<Talent name="RULES-T0056">"3"</Talent>
+  <!-- Impassioned Zeal -->
+<Talent name="RULES-T0065">"3"</Talent>
+  <!-- Master Orator -->
+<Talent name="RULES-T0105">"3"</Talent>
+  <!-- Rover -->
+<Talent name="RULES-T0008">"4"</Talent>
+  <!-- Furious Assault -->
+<Talent name="RULES-T0029">"4"</Talent>
+  <!-- In-fighter -->
+<Talent name="RULES-T0120">"4"</Talent>
+  <!-- Pilot -->
+<Talent name="RULES-T0067">"4"</Talent>
+  <!-- Warrior Born -->
+</SUBCHAPTER_TALENT>
+<SUBCHAPTER_ITEM>
+<Item name="Crowbar">"1"</Item>
+<Item name="RULES-COMB_BASE_*">"1"</Item>
+<Item name="Large Sack">"1"</Item>
+<Item name="RULES-ARMO_03">"1"</Item>
+<Item name="Leather Gloves">"1"</Item>
+<Item name="RULES-ARMO_04">"2"</Item>
+<Item name="Storm Lantern and Oil">"2"</Item>
+<Item name="Grappling Hook and Rope">"3"</Item>
+<Item name="Religious Relic">"3"</Item>
+<Item name="Riverboat">"3"</Item>
+<Item name="Group of Cultists">"4"</Item>
+<Item name="RULES-PROJ_POUDRE_04">"4"</Item>
+</SUBCHAPTER_ITEM>
+</Career>
+</DATA_CAREER>
+<DATA_SPELL>
+<Sort id="SEAOF-MIRAC_MANAMM_07">
+<Description language="ENGLISH">"Blessed Voyage"</Description>
+<Explanation language="ENGLISH">"This Miracle may be performed whenever it is time for a ship to calculate Manann’s Mood. You perform the rites thought best to supplicate Manann. His mood improves by 2d10, –1 for each Sin Point you currently have."</Explanation>
+<Target>"1 ship"</Target>
+<Duration>"Instant"</Duration>
+<Range>"Touch"</Range>
+<Talent>"RULES-T0080_MANANN"</Talent>
+<Level>""</Level>
+<TypSpell>"Miracle"</TypSpell>
+</Sort>
+<Sort id="SEAOF-BENED_020">
+<Description language="ENGLISH">"Blessing of the Albatross"</Description>
+<Explanation language="ENGLISH">"Upon completing the invocation, an albatross descends from the clouds and follows the ship. The albatross waits up to 1 hour for the ship to sail, and after that, it stays with the ship until the duration expires. As long as the albatross is present, the ship cannot sink, no matter how much damage it takes. Should the albatross be killed, the ship suffers from –d10 Morale and –2d10 for Manann’s Mood (should you need statistics for an albatross, treat it as a pigeon from WFRP, page 316, though its Size is Small and it has 3 Wounds)."</Explanation>
+<Target>"1 ship"</Target>
+<Duration>"(BATTR_WP) days"</Duration>
+<Range>"Touch"</Range>
+<Talent>"RULES-T0012_MANANN"</Talent>
+<Level>""</Level>
+<TypSpell>"Blessing"</TypSpell>
+</Sort>
+<Sort id="SEAOF-BENED_021">
+<Description language="ENGLISH">"Blessing of the Mariner"</Description>
+<Explanation language="ENGLISH">"Your blessing grants a character an instinctive feel for the sea and sailing. Any Row, Sail, or Swim Tests they make benefit from +1 SL."</Explanation>
+<Target>"1"</Target>
+<Duration>"1 day"</Duration>
+<Range>"Touch"</Range>
+<Talent>"RULES-T0012_MANANN"</Talent>
+<Level>""</Level>
+<TypSpell>"Blessing"</TypSpell>
+</Sort>
+<Sort id="SEAOF-MIRAC_MANAMM_08">
+<Description language="ENGLISH">"Breathe Water"</Description>
+<Explanation language="ENGLISH">"Your prayers allow a character to breathe water as if it were air. When it comes to drowing in water, the character can ignore the Suffocation rules on WFRP page 181 for the duration of the Miracle. It is not possible to perform this Miracle while your own mouth is underwater."</Explanation>
+<Target>"1"</Target>
+<Duration>"(BATTR_Fel) minutes"</Duration>
+<Range>"Touch"</Range>
+<Talent>"RULES-T0080_MANANN"</Talent>
+<Level>""</Level>
+<TypSpell>"Miracle"</TypSpell>
+</Sort>
+<Sort id="SEAOF-MIRAC_MANAMM_09">
+<Description language="ENGLISH">"Quell Waters"</Description>
+<Explanation language="ENGLISH">"You can chant this prayer, quelling a strong current. The M rating of a strait or whirlpool is reduced to 0 whilst the miracle is in effect."</Explanation>
+<Target>"1 strait or whirlpool"</Target>
+<Duration>"(BATTR_Fel) Rounds"</Duration>
+<Range>"(ATTR_Fel) yards × 10"</Range>
+<Talent>"RULES-T0080_MANANN"</Talent>
+<Level>""</Level>
+<TypSpell>"Miracle"</TypSpell>
+</Sort>
+<Sort id="SEAOF-MIRAC_MANAMM_10">
+<Description language="ENGLISH">"Sea Curse"</Description>
+<Explanation language="ENGLISH">"You call doom down on the enemies of Manann. Provided the targeted ship is crewed by those who do not warrant the respect of Manann (followers of Chaos, worshippers of Stromfels, Orcs and Goblins, Skaven, crews who have a negative Manann’s Mood score), that crew suffer from a curse. Add 2 to the Damage of all hits the crew receives whilst the Miracle is in effect."</Explanation>
+<Target>"1 ship"</Target>
+<Duration>"(BATTR_Fel) Rounds"</Duration>
+<Range>"(ATTR_Fel) yards × 10"</Range>
+<Talent>"RULES-T0080_MANANN"</Talent>
+<Level>""</Level>
+<TypSpell>"Miracle"</TypSpell>
+</Sort>
+<Sort id="SEAOF-MIRAC_MANAMM_11">
+<Description language="ENGLISH">"Repel Sea Beast"</Description>
+<Explanation language="ENGLISH">"You can chant this prayer to a sea creature, causing it to forget all rage and hunger whilst the miracle is in effect. For the duration of the miracle the creature will not make any hostile actions, provided that it suffers no damage or adverse Conditions."</Explanation>
+<Target>"1 creature with the Aquatic or the Marine Trait"</Target>
+<Duration>"(BATTR_Fel) Rounds"</Duration>
+<Range>"(ATTR_Fel) yards × 10"</Range>
+<Talent>"RULES-T0080_MANANN"</Talent>
+<Level>""</Level>
+<TypSpell>"Miracle"</TypSpell>
+</Sort>
+<Sort id="SEAOF-MIRAC_MANAMM_12">
+<Description language="ENGLISH">"Rip Tides"</Description>
+<Explanation language="ENGLISH">"You can chant this prayer at a ship you can see. The ship suffers –1 M and –1 SL to Man."</Explanation>
+<Target>"1 ship"</Target>
+<Duration>"(BATTR_Fel) Rounds"</Duration>
+<Range>"(ATTR_Fel) yards × 10"</Range>
+<Talent>"RULES-T0080_MANANN"</Talent>
+<Level>""</Level>
+<TypSpell>"Miracle"</TypSpell>
+</Sort>
+<Sort id="SEAOF-MIRAC_STROMFELS_01">
+<Description language="ENGLISH">"Blood Trail"</Description>
+<Explanation language="ENGLISH">"When trying to track someone who has been injured, you smell the smallest drops of blood even if some attempt has been made to remove them. You can follow their trail over land and water by passing an Easy (+40) Track Test."</Explanation>
+<Target>"You"</Target>
+<Duration>"1 hour"</Duration>
+<Range>"You"</Range>
+<Talent>"RULES-T0080_STROMFELS"</Talent>
+<Level>""</Level>
+<TypSpell>"Miracle"</TypSpell>
+</Sort>
+<Sort id="SEAOF-MIRAC_STROMFELS_02">
+<Description language="ENGLISH">"Curse of the Harsh Mistress"</Description>
+<Explanation language="ENGLISH">"You inflict nightmares upon your target that make it impossible for them to get a good night’s sleep, resulting in lethargy and weakness. The nightmares are extremely vivid, disturbing, and connected to the ocean in some way; they commonly involve a woman draped in fronds of bloodwrack walking from the sea to torment the victim. Whilst under the influence of the Miracle the target must pass a Difficult (–10) Cool Test every time they take some rest to recover from Fatigued Conditions. If the Test is failed, the Fatigued Condition remains."</Explanation>
+<Target>"1"</Target>
+<Duration>"(BATTR_S) days"</Duration>
+<Range>"Touch"</Range>
+<Talent>"RULES-T0080_STROMFELS"</Talent>
+<Level>""</Level>
+<TypSpell>"Miracle"</TypSpell>
+</Sort>
+<Sort id="SEAOF-MIRAC_STROMFELS_03">
+<Description language="ENGLISH">"Manann’s Mood Made Meaningless"</Description>
+<Explanation language="ENGLISH">"You proclaim that Stromfels is the true lord of the sea, and that the superstitions of those who respect Manann are delusions. Once the miracle is in effect, roll on the table below and apply the result to the Manann’s Mood score for the ship you are currently aboard (see page 130). Add 1 to the roll for every Sin Point you possess. d10 Roll Result :  - 1 to 4 Stromfels Triumphant! Whilst the miracle is in effect, treat Manann’s Mood as 0.  - 5 to 8 Stromfels Ascends! Roll 5d10. The number may be added to Manann’s Mood if it is currently negative, or subtracted from it if it is positive.  - 9 No effect. Manann’s Mood is calculated as normal.  - 10 or more Manann Provoked! Roll 5d10, he number is subtracted from Manann’s Mood."</Explanation>
+<Target>"See text"</Target>
+<Duration>"(BATTR_S) days"</Duration>
+<Range>"See text"</Range>
+<Talent>"RULES-T0080_STROMFELS"</Talent>
+<Level>""</Level>
+<TypSpell>"Miracle"</TypSpell>
+</Sort>
+<Sort id="SEAOF-MIRAC_STROMFELS_04">
+<Description language="ENGLISH">"Raging Seas"</Description>
+<Explanation language="ENGLISH">"You command the sea to form a massive wave that crashes into a specific target, such as a person in the water or on the shore, a boat, or a lighthouse. The wave counts as having a CR of 15."</Explanation>
+<Target>"See text"</Target>
+<Duration>"Instant"</Duration>
+<Range>"(ATTR_S) yards × 10"</Range>
+<Talent>"RULES-T0080_STROMFELS"</Talent>
+<Level>""</Level>
+<TypSpell>"Miracle"</TypSpell>
+</Sort>
+<Sort id="SEAOF-MIRAC_STROMFELS_05">
+<Description language="ENGLISH">"Seasickness"</Description>
+<Explanation language="ENGLISH">"You curse someone, even the saltiest of seadogs, with a bout of seasickness that lasts for one hour. See page 125 for details of Seasickness."</Explanation>
+<Target>"1"</Target>
+<Duration>"Strength Bonus hours"</Duration>
+<Range>"(ATTR_S) yards × 10"</Range>
+<Talent>"RULES-T0080_STROMFELS"</Talent>
+<Level>""</Level>
+<TypSpell>"Miracle"</TypSpell>
+</Sort>
+<Sort id="SEAOF-MIRAC_STROMFELS_06">
+<Description language="ENGLISH">"Send ‘em to Stromfels"</Description>
+<Explanation language="ENGLISH">"You focus on a stricken vessel, exerting your will to ensure that none escape. Splits and tears in the target ship’s hull widen as a result of the miracle. Double the target ship’s Holed Rating (see page 117)."</Explanation>
+<Target>"1 ship with a Holed Rating"</Target>
+<Duration>"Instant"</Duration>
+<Range>"(ATTR_S) yards × 10"</Range>
+<Talent>"RULES-T0080_STROMFELS"</Talent>
+<Level>""</Level>
+<TypSpell>"Miracle"</TypSpell>
+</Sort>
+<Sort id="SEAOF-MIRAC_STROMFELS_07">
+<Description language="ENGLISH">"Storm Winds"</Description>
+<Explanation language="ENGLISH">"You call the winds to blow with greater force into the sails of 1 ship. Increase the intensity of the wind by 1 step for the duration of the miracle (see page 107). The direction of the wind is not affected."</Explanation>
+<Target>"1 ship"</Target>
+<Duration>"(ATTR_S) minutes"</Duration>
+<Range>"(ATTR_S) yards × 10"</Range>
+<Talent>"RULES-T0080_STROMFELS"</Talent>
+<Level>""</Level>
+<TypSpell>"Miracle"</TypSpell>
+</Sort>
+</DATA_SPELL>
+</DATA_BOOK>

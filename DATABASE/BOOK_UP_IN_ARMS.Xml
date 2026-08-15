@@ -1,0 +1,3258 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<DATA_BOOK>
+<CODE_BOOK>"UPINA"</CODE_BOOK>
+<BOOK>"BOOK UP IN ARMS"</BOOK>
+<language>"ENGLISH"</language>
+<VERSION>"20250623"</VERSION>
+<OFFICIAL>"1"</OFFICIAL>
+<COMPLETE>"1"</COMPLETE>
+<DATA_TALENT>
+<Talent id="UPINA-T0173">
+<Attribut>""</Attribut>
+<Description language="ENGLISH">"Crew Commander"</Description>
+<Short language="ENGLISH">""</Short>
+<Explanation language="ENGLISH">"A Character with this talent is practised at managing crews of siege weapons and artillery pieces.
+The Character may make a Challenging (+0) Leadership Test to help a crew manning a weapon with the Crewed Quality within earshot.
+Ifthe Character passes the Test, the crew members may then use the Characters Ranged Skill when shooting the weapon."</Explanation>
+<Skill>""</Skill>
+<Max>"(BATTR_I)"</Max>
+<PDF>""</PDF>
+<Test language="ENGLISH">"Ranged Skill tests when firing a weapon with the Crewed Flaw"</Test>
+</Talent>
+</DATA_TALENT>
+<DATA_SPECIE>
+<Specie id="UPINA-RACE_HTIL">
+<Description language="ENGLISH">"Humans (Tilea)"</Description>
+<Explanation language="ENGLISH">"Southwest of the Empire, over the Vaults lies Tilea, where — according to Tileans, at least — civilization first arose in the Old World. A narrow strip of fertile but rocky land runs north skirting the Appucinis from the ever-shifting frontier with the Border Princes and circles west past Miragliano along the Irrana mountains to sink into the dread Blighted Marshes, where the capital of the Skaven is said to lie. South from there the land grows so narrow as to almost vanish between the cliffs of the Abaskos and the Tilean Sea. Tileans have learned to get the most out of their land: growing olives and exporting oil; raising sheep for meat and wool; citrus fruits and wine grapes that prosper in the warm sun; and fish from the Tilean Sea, which has stocks so abundant Tileans claim it is proof of Manann’s love for Myrmidia. Though the small towns and feudal holdings of Tilea are important, when outsiders think of Tilea they think of the great city-states and their people: dour Luccini, home of Morr’s cult; Remas, Tilea’s one, true republic; Miragliano the Serene, owner of Tilea’s largest fleet and ever-vigilant over the Blighted Marshes; unconquered Tobaro, built into the cliffs of the Abaskos; and Sartosa, freewheeling and deadly home of the Pirate Captains. To the average Imperial, Tileans are shifty, dishonest, unreliable,and inclined toward criminality,but this portrait is unjust. Tileans do value cleverness and cunning, for it often saves Tilean lives. Regularly outnumbered, Tileans look to Myrmidia’s teachings to win through manoeuvre, strategy, and deception, risking a battle only when all the factors favour them. But when the fight comes, they are as fierce as griffons. They have to be, surrounded as they are by enemies, Human and otherwise. Perhaps it is the influence of the ancient Elven ruins underlying so many Tilean cities, but the people value cleverness in their daily lives, too. Quick thinking and the ability to argue well are seen as virtues that let the average Tilean rise as high as their abilities can take him, even to ships captain or merchant prince. Among urban Tileans, Ranald is a popular god, here known less as a god of thieves and more as the epitome of the dynamic individual who seizes any opportunity. But Tilea has its perils, chief among them the wild pirates of Sartosa off the south coast. Whether raiding ships of all nations, or leading them to their doom on the rocks, Sartosans see everyone else as their prey. Sometimes hired by one party to raid a rival’s commerce, they are quick to change sides if the temptation presents itself. Little wonder it is that Sartosa is rumoured to be a major centre of the cult of Stromfels, the shark-god that Tileans know as Stromfalo."</Explanation>
+<Ethnic>"SPECIE_HUMAN"</Ethnic>
+<SUBCHAPTER_ATTR>
+<Attribut name="RULES-ATTR_WS">"2d10+20"</Attribut>
+<Attribut name="RULES-ATTR_BS">"2d10+20"</Attribut>
+<Attribut name="RULES-ATTR_S">"2d10+20"</Attribut>
+<Attribut name="RULES-ATTR_T">"2d10+20"</Attribut>
+<Attribut name="RULES-ATTR_I">"2d10+20"</Attribut>
+<Attribut name="RULES-ATTR_Ag">"2d10+20"</Attribut>
+<Attribut name="RULES-ATTR_Dex">"2d10+20"</Attribut>
+<Attribut name="RULES-ATTR_Int">"2d10+20"</Attribut>
+<Attribut name="RULES-ATTR_WP">"2d10+20"</Attribut>
+<Attribut name="RULES-ATTR_Fel">"2d10+20"</Attribut>
+<Attribut name="RULES-ATTR_Fate">"2"</Attribut>
+<Attribut name="RULES-ATTR_Resil">"1"</Attribut>
+<Attribut name="RULES-ATTR_Wound">"1xBATTR_S+2xBATTR_T+1xBATTR_WP"</Attribut>
+<Attribut name="RULES-ATTR_Supp">"3"</Attribut>
+<Attribut name="RULES-ATTR_Move">"4"</Attribut>
+</SUBCHAPTER_ATTR>
+<SUBCHAPTER_SKILL>
+<Skill>"RULES-COMPCHARM"</Skill>
+  <!-- Charm -->
+<Skill>"RULES-COMPCALM"</Skill>
+  <!-- Cool -->
+<Skill>"RULES-COMPEVAL"</Skill>
+  <!-- Evaluate -->
+<Skill>"RULES-COMPRAGOT"</Skill>
+  <!-- Gossip -->
+<Skill>"RULES-COMPMARCH"</Skill>
+  <!-- Haggle -->
+<Skill>"RULES-COMPLANG_ARABY"</Skill>
+  <!-- Language (Arabyan) -->
+<Skill>"RULES-COMPLANG_REIK"</Skill>
+  <!-- Language (Reikspiel) -->
+<Skill>"RULES-COMPLANG_ESTA"</Skill>
+  <!-- Language (Estalian) -->
+<Skill>"RULES-COMPSAVOIR_TILEA"</Skill>
+  <!-- Savoir (Tilea) -->
+<Skill>"RULES-COMPLANG_TILE"</Skill>
+  <!-- Language (Tilean) -->
+<Skill>"RULES-COMPCOMB_BASE"</Skill>
+  <!-- Melee (Basic) -->
+<Skill>"RULES-COMPPROJ_ARB"</Skill>
+  <!-- Ranged (Crossbow) -->
+</SUBCHAPTER_SKILL>
+<SUBCHAPTER_TALENT>
+<Talent>"WINDS-T0051/WINDS-T0113"</Talent>
+  <!-- Argumentative/Fisherman -->
+<Talent>"WINDS-T0074/WINDS-T0002"</Talent>
+  <!-- Coolheaded/Suave -->
+<Talent>"RULES-T*"</Talent>
+  <!-- Random Talent -->
+<Talent>"RULES-T*"</Talent>
+  <!-- Random Talent -->
+<Talent>"RULES-T*"</Talent>
+  <!-- Random Talent -->
+</SUBCHAPTER_TALENT>
+<SUBCHAPTER_CAREER>
+<Career name="ARCH3-WORK99">"X"</Career>
+  <!-- Priest of Handrich -->
+<Career name="ARCH3-WORK101">"X"</Career>
+  <!-- Priest of Rhya -->
+<Career name="ARCH3-WORK100">"X"</Career>
+  <!-- Priest of Solkan -->
+<Career name="SALZE-WORK108">"X"</Career>
+  <!-- Owler -->
+<Career name="SEAOF-WORK109">"X"</Career>
+  <!-- Beachcomber -->
+<Career name="SEAOF-WORK110">"X"</Career>
+  <!-- Chantyman -->
+<Career name="SEAOF-WORK111">"X"</Career>
+  <!-- Huffer -->
+<Career name="SEAOF-WORK112">"X"</Career>
+  <!-- Officer -->
+<Career name="SEAOF-WORK118">"X"</Career>
+  <!-- Priest Of Stromfels -->
+<Career name="SEAOF-WORK113">"X"</Career>
+  <!-- Sailor -->
+<Career name="SEAOF-WORK114">"X"</Career>
+  <!-- Sailor-Priest of Manann -->
+<Career name="SEAOF-WORK115">"X"</Career>
+  <!-- Ship’s Gunner -->
+<Career name="SEAOF-WORK116">"X"</Career>
+  <!-- Wrecker -->
+<Career name="RULES-WORK02">"01"</Career>
+  <!-- Apothecary -->
+<Career name="UPINA-WORK69">"X"</Career>
+  <!-- Artillerist -->
+<Career name="UPINA-WORK71">"X"</Career>
+  <!-- Cartographer -->
+<Career name="RULES-WORK31">"02"</Career>
+  <!-- Engineer -->
+<Career name="RULES-WORK33">"03"</Career>
+  <!-- Lawyer -->
+<Career name="RULES-WORK45">"04-05"</Career>
+  <!-- Nun -->
+<Career name="RULES-WORK36">"06"</Career>
+  <!-- Physician -->
+<Career name="RULES-WORK49">"07-11"</Career>
+  <!-- Priest -->
+<Career name="RULES-WORK23">"12-13"</Career>
+  <!-- Scholar -->
+<Career name="RULES-WORK58">"14"</Career>
+  <!-- Wizard -->
+<Career name="RULES-WORK01">"15"</Career>
+  <!-- Agitator -->
+<Career name="RULES-WORK03">"16-17"</Career>
+  <!-- Artisan -->
+<Career name="RULES-WORK37">"18-19"</Career>
+  <!-- Beggar -->
+<Career name="RULES-WORK21">"20"</Career>
+  <!-- Inverstigator -->
+<Career name="RULES-WORK34">"21"</Career>
+  <!-- Merchant -->
+<Career name="RULES-WORK52">"22-23"</Career>
+  <!-- Rat Catcher -->
+<Career name="RULES-WORK07">"24-26"</Career>
+  <!-- Townsman -->
+<Career name="RULES-WORK39">"27"</Career>
+  <!-- Watchman -->
+<Career name="RULES-WORK15">"28"</Career>
+  <!-- Advisor -->
+<Career name="RULES-WORK04">"29"</Career>
+  <!-- Artist -->
+<Career name="RULES-WORK18">"30"</Career>
+  <!-- Duellist -->
+<Career name="RULES-WORK20">"31"</Career>
+  <!-- Envoy -->
+<Career name="RULES-WORK44">"32"</Career>
+  <!-- Noble -->
+<Career name="RULES-WORK56">"33-35"</Career>
+  <!-- Servant -->
+<Career name="RULES-WORK24">"36"</Career>
+  <!-- Spy -->
+<Career name="RULES-WORK32">"37"</Career>
+  <!-- Warden -->
+<Career name="RULES-WORK05">"38"</Career>
+  <!-- Bailif -->
+<Career name="RULES-WORK59">"39"</Career>
+  <!-- Hedge Witch -->
+<Career name="RULES-WORK29">"40"</Career>
+  <!-- Herbalist -->
+<Career name="RULES-WORK10">"41-42"</Career>
+  <!-- Hunter -->
+<Career name="RULES-WORK40">"43"</Career>
+  <!-- Miner -->
+<Career name="RULES-WORK41">"44"</Career>
+  <!-- Mystic -->
+<Career name="RULES-WORK19">"45"</Career>
+  <!-- Scout -->
+<Career name="RULES-WORK63">"46-50"</Career>
+  <!-- Villager -->
+<Career name="RULES-WORK11">"51"</Career>
+  <!-- Bounty Hunter -->
+<Career name="UPINA-WORK70">"X"</Career>
+  <!-- Camp Follower -->
+<Career name="RULES-WORK13">"52"</Career>
+  <!-- Coachman -->
+<Career name="RULES-WORK55">"53-54"</Career>
+  <!-- Entertainer -->
+<Career name="RULES-WORK26">"55-56"</Career>
+  <!-- Flagellant -->
+<Career name="RULES-WORK38">"57"</Career>
+  <!-- Messenger -->
+<Career name="RULES-WORK14">"58"</Career>
+  <!-- Pedlar -->
+<Career name="RULES-WORK47">"59"</Career>
+  <!-- Road Warden -->
+<Career name="RULES-WORK54">"60"</Career>
+  <!-- Witch Hunter -->
+<Career name="RULES-WORK06">"61-62"</Career>
+  <!-- Boatman -->
+<Career name="RULES-WORK43">"63"</Career>
+  <!-- Huffer -->
+<Career name="RULES-WORK46">"64-65"</Career>
+  <!-- Riverwarden -->
+<Career name="RULES-WORK25">"66-68"</Career>
+  <!-- Riverwoman -->
+<Career name="RULES-WORK35">"69-70"</Career>
+  <!-- Seaman -->
+<Career name="RULES-WORK16">"71"</Career>
+  <!-- Smuggler -->
+<Career name="RULES-WORK17">"72-73"</Career>
+  <!-- Stevedor -->
+<Career name="RULES-WORK42">"74"</Career>
+  <!-- Wrecker -->
+<Career name="RULES-WORK22">"75-76"</Career>
+  <!-- Bawl -->
+<Career name="RULES-WORK09">"77"</Career>
+  <!-- Charlatan -->
+<Career name="RULES-WORK53">"78"</Career>
+  <!-- Fence -->
+<Career name="RULES-WORK48">"79"</Career>
+  <!-- Grave Robber -->
+<Career name="RULES-WORK30">"80-83"</Career>
+  <!-- Outlaw -->
+<Career name="RULES-WORK51">"84"</Career>
+  <!-- Racketeer -->
+<Career name="RULES-WORK64">"85-87"</Career>
+  <!-- Thief -->
+<Career name="RULES-WORK60">"88"</Career>
+  <!-- Witch -->
+<Career name="UPINA-WORK65">"X"</Career>
+  <!-- Archer -->
+<Career name="RULES-WORK08">"89-90"</Career>
+  <!-- Cavalryman -->
+<Career name="UPINA-WORK72">"X"</Career>
+  <!-- Freelance -->
+<Career name="UPINA-WORK66">"X"</Career>
+  <!-- Greatsword -->
+<Career name="RULES-WORK27">"91-92"</Career>
+  <!-- Guard -->
+<Career name="UPINA-WORK67">"X"</Career>
+  <!-- Halberdier -->
+<Career name="UPINA-WORK68">"X"</Career>
+  <!-- Handgunner -->
+<Career name="UPINA-WORK73">"X"</Career>
+  <!-- Knight of the Blazing Sun -->
+<Career name="UPINA-WORK74">"X"</Career>
+  <!-- Knight of the White Wolf -->
+<Career name="UPINA-WORK75">"X"</Career>
+  <!-- Knight Panther -->
+<Career name="RULES-WORK12">"93"</Career>
+  <!-- Knight -->
+<Career name="UPINA-WORK76">"X"</Career>
+  <!-- Light Cavalry -->
+<Career name="UPINA-WORK78">"X"</Career>
+  <!-- Pikeman -->
+<Career name="RULES-WORK28">"94"</Career>
+  <!-- Pit Fighter -->
+<Career name="UPINA-WORK79">"X"</Career>
+  <!-- Priest of Myrmidia -->
+<Career name="RULES-WORK61">"95"</Career>
+  <!-- Protagonist -->
+<Career name="UPINA-WORK77">"X"</Career>
+  <!-- Siege Specialist -->
+<Career name="RULES-WORK57">"96-99"</Career>
+  <!-- Soldier -->
+<Career name="RULES-WORK50">"100"</Career>
+  <!-- Warrior Priest -->
+<Career name="WINDS-WORK85">"X"</Career>
+  <!-- Alchemist -->
+<Career name="WINDS-WORK87">"X"</Career>
+  <!-- Astromancer -->
+<Career name="WINDS-WORK86">"X"</Career>
+  <!-- Druid -->
+<Career name="WINDS-WORK84">"X"</Career>
+  <!-- Hierophant -->
+<Career name="WINDS-WORK82">"X"</Career>
+  <!-- Magister Vigilant -->
+<Career name="WINDS-WORK81">"X"</Career>
+  <!-- Mundane Alchemist -->
+<Career name="WINDS-WORK90">"X"</Career>
+  <!-- Pyromancer -->
+<Career name="WINDS-WORK88">"X"</Career>
+  <!-- Shadowmancer -->
+<Career name="WINDS-WORK91">"X"</Career>
+  <!-- Shaman -->
+<Career name="WINDS-WORK89">"X"</Career>
+  <!-- Spiriter -->
+<Career name="WINDS-WORK83">"X"</Career>
+  <!-- Scryer -->
+<Career name="WINDS-WORK80">"X"</Career>
+  <!-- Beadle -->
+</SUBCHAPTER_CAREER>
+</Specie>
+</DATA_SPECIE>
+<DATA_CAREER>
+<Career id="UPINA-WORK65">
+<Description language="ENGLISH">"Archer"</Description>
+<Explanation language="ENGLISH">"Employing strength and skill in equal measure, you bring finesse and accuracy to the battlefield. Respected for their skill and command of the battlefield or disdained for their unwillingness to get involved in the nitty gritty, archers pride themselves on being apart from (and even better than) the usual rabble that joins the army. Anyone can hold a halberd or fire a handgun, they say, but it takes years of training to be an archer."</Explanation>
+<Skill>"RULES-COMPPROJ_ARC"</Skill>
+<Class>"CLASS_WARR"</Class>
+<SUBCHAPTER_LEVEL>
+<Level id="1">
+<Description language="ENGLISH">"Bowman"</Description>
+<Salary>"TIERS_SILVER 1"</Salary>
+</Level>
+<Level id="2">
+<Description language="ENGLISH">"Archer"</Description>
+<Salary>"TIERS_SILVER 3"</Salary>
+</Level>
+<Level id="3">
+<Description language="ENGLISH">"Archer Sergeant"</Description>
+<Salary>"TIERS_SILVER 5"</Salary>
+</Level>
+<Level id="4">
+<Description language="ENGLISH">"Archer Captain"</Description>
+<Salary>"TIERS_GOLD 1"</Salary>
+</Level>
+</SUBCHAPTER_LEVEL>
+<SUBCHAPTER_ATTR>
+<Attribut name="RULES-ATTR_WS">"0"</Attribut>
+<Attribut name="RULES-ATTR_BS">"1"</Attribut>
+<Attribut name="RULES-ATTR_S">"2"</Attribut>
+<Attribut name="RULES-ATTR_T">"3"</Attribut>
+<Attribut name="RULES-ATTR_I">"1"</Attribut>
+<Attribut name="RULES-ATTR_Ag">"1"</Attribut>
+<Attribut name="RULES-ATTR_Dex">"0"</Attribut>
+<Attribut name="RULES-ATTR_Int">"4"</Attribut>
+<Attribut name="RULES-ATTR_WP">"0"</Attribut>
+<Attribut name="RULES-ATTR_Fel">"0"</Attribut>
+</SUBCHAPTER_ATTR>
+<SUBCHAPTER_SKILL>
+<Skill name="RULES-COMPATHL">"1"</Skill>
+  <!-- Athletics -->
+<Skill name="RULES-COMPESCAL">"1"</Skill>
+  <!-- Climb -->
+<Skill name="RULES-COMPRESALC">"1"</Skill>
+  <!-- Consume Alcohol -->
+<Skill name="RULES-COMPESQU">"1"</Skill>
+  <!-- Dodge -->
+<Skill name="RULES-COMPRESIST">"1"</Skill>
+  <!-- Endurance -->
+<Skill name="RULES-COMPLANG_BATAIL">"1"</Skill>
+  <!-- Language (Battle) -->
+<Skill name="RULES-COMPPRECEP">"1"</Skill>
+  <!-- Perception  -->
+<Skill name="RULES-COMPMUSIC_COR">"1"</Skill>
+  <!-- Play (Horn) -->
+<Skill name="RULES-COMPPROJ_ARC">"1"</Skill>
+  <!-- Ranged (Bow) -->
+<Skill name="RULES-COMPDISC_RURAL">"1"</Skill>
+  <!-- Stealth (Rural) -->
+<Skill name="RULES-COMPPARI">"2"</Skill>
+  <!-- Gamble -->
+<Skill name="RULES-COMPRAGOT">"2"</Skill>
+  <!-- Gossip -->
+<Skill name="RULES-COMPCOMB_BASE">"2"</Skill>
+  <!-- Melee (Basic) -->
+<Skill name="RULES-COMPSURVEXT">"2"</Skill>
+  <!-- Outdoor Survival -->
+<Skill name="RULES-COMPPIST">"2"</Skill>
+  <!-- Track -->
+<Skill name="RULES-COMPMETIER_FLECHE">"2"</Skill>
+  <!-- Trade (Fletcher) -->
+<Skill name="RULES-COMPCALM">"3"</Skill>
+  <!-- Cool -->
+<Skill name="RULES-COMPCOMM">"3"</Skill>
+  <!-- Leadership -->
+<Skill name="RULES-COMPORIENT">"3"</Skill>
+  <!-- Navigation -->
+<Skill name="RULES-COMPCHEV_CHEVAL">"3"</Skill>
+  <!-- Ride (Horse) -->
+<Skill name="RULES-COMPSAVOIR_GUERRE">"4"</Skill>
+  <!-- Lore (War) -->
+<Skill name="RULES-COMPSIGNES_ECLAI">"4"</Skill>
+  <!-- Secret Signs (Pathfinders) -->
+</SUBCHAPTER_SKILL>
+<SUBCHAPTER_TALENT>
+<Talent name="RULES-T0149">"1"</Talent>
+  <!-- Accurate Shot -->
+<Talent name="RULES-T0150">"1"</Talent>
+  <!-- Fast Shot -->
+<Talent name="RULES-T0077">"1"</Talent>
+  <!-- Strong Back -->
+<Talent name="RULES-T0067">"1"</Talent>
+  <!-- Warrior Born -->
+<Talent name="RULES-T0036">"2"</Talent>
+  <!-- Drilled -->
+<Talent name="RULES-T0136_SOLD">"2"</Talent>
+  <!-- Etiquette (Soldiers) -->
+<Talent name="RULES-T0153">"2"</Talent>
+  <!-- Marksman -->
+<Talent name="RULES-T0151">"2"</Talent>
+  <!-- Sure Shot -->
+<Talent name="RULES-T0163">"3"</Talent>
+  <!-- Combat Aware -->
+<Talent name="RULES-T0152">"3"</Talent>
+  <!-- Sharpshooter -->
+<Talent name="RULES-T0154">"3"</Talent>
+  <!-- Sniper -->
+<Talent name="RULES-T0076">"3"</Talent>
+  <!-- Unshakable -->
+<Talent name="RULES-T0053">"4"</Talent>
+  <!-- Inspiring -->
+<Talent name="RULES-T0168">"4"</Talent>
+  <!-- Seasoned Traveller -->
+<Talent name="RULES-T0025">"4"</Talent>
+  <!-- Stout-hearted -->
+<Talent name="RULES-T0138">"4"</Talent>
+  <!-- War Leader -->
+</SUBCHAPTER_TALENT>
+<SUBCHAPTER_ITEM>
+<Item name="Quiver and 10 Arrows">"1"</Item>
+<Item name="RULES-PROJ_ARC_01">"1"</Item>
+<Item name="RULES-COMB_BASE_10">"1"</Item>
+<Item name="Pack">"1"</Item>
+<Item name="Uniform">"1"</Item>
+<Item name="Headgear">"2"</Item>
+<Item name="RULES-COMB_BASE_04">"2"</Item>
+<Item name="RULES-PROJ_ARC_01">"2"</Item>
+<Item name="Symbol of Rank">"3"</Item>
+<Item name="Uniform (Q)">"3"</Item>
+<Item name="Letter of Commission">"4"</Item>
+<Item name="Light Warhorse with Saddle and Tack">"4"</Item>
+<Item name="Symbol of Rank">"4"</Item>
+</SUBCHAPTER_ITEM>
+</Career>
+<Career id="UPINA-WORK66">
+<Description language="ENGLISH">"Greatsword"</Description>
+<Explanation language="ENGLISH">"Skilfully wielding your vicious zweihänder, you are the greatest of all the Empires foot soldiers. Greatswords are the signature elite infantry of the Imperial armies, the most prestigious and feared of all the Empire’ foot soldiers. They forsake the shield to wield huge zweihänder swords, ensuring their combats are short and deadly whichever way they go. Their large, two-handed weapons are unwieldy, so Greatswords need to be swift and athletic to compensate. For this reason, they dress in a much looser formation than other foot soldiers."</Explanation>
+<Skill>"RULES-COMPCOMB_2M"</Skill>
+<Class>"CLASS_WARR"</Class>
+<SUBCHAPTER_LEVEL>
+<Level id="1">
+<Description language="ENGLISH">"Greatsword Cadet"</Description>
+<Salary>"TIERS_SILVER 1"</Salary>
+</Level>
+<Level id="2">
+<Description language="ENGLISH">"Greatsword"</Description>
+<Salary>"TIERS_SILVER 3"</Salary>
+</Level>
+<Level id="3">
+<Description language="ENGLISH">"Greatsword Sergeant"</Description>
+<Salary>"TIERS_SILVER 5"</Salary>
+</Level>
+<Level id="4">
+<Description language="ENGLISH">"Greatsword Captain"</Description>
+<Salary>"TIERS_GOLD 1"</Salary>
+</Level>
+</SUBCHAPTER_LEVEL>
+<SUBCHAPTER_ATTR>
+<Attribut name="RULES-ATTR_WS">"1"</Attribut>
+<Attribut name="RULES-ATTR_BS">"0"</Attribut>
+<Attribut name="RULES-ATTR_S">"1"</Attribut>
+<Attribut name="RULES-ATTR_T">"3"</Attribut>
+<Attribut name="RULES-ATTR_I">"2"</Attribut>
+<Attribut name="RULES-ATTR_Ag">"0"</Attribut>
+<Attribut name="RULES-ATTR_Dex">"0"</Attribut>
+<Attribut name="RULES-ATTR_Int">"4"</Attribut>
+<Attribut name="RULES-ATTR_WP">"1"</Attribut>
+<Attribut name="RULES-ATTR_Fel">"0"</Attribut>
+</SUBCHAPTER_ATTR>
+<SUBCHAPTER_SKILL>
+<Skill name="RULES-COMPATHL">"1"</Skill>
+  <!-- Athletics -->
+<Skill name="RULES-COMPRESALC">"1"</Skill>
+  <!-- Consume Alcohol -->
+<Skill name="RULES-COMPCALM">"1"</Skill>
+  <!-- Cool -->
+<Skill name="RULES-COMPESQU">"1"</Skill>
+  <!-- Dodge -->
+<Skill name="RULES-COMPRESIST">"1"</Skill>
+  <!-- Endurance -->
+<Skill name="RULES-COMPRAGOT">"1"</Skill>
+  <!-- Gossip -->
+<Skill name="RULES-COMPLANG_BATAIL">"1"</Skill>
+  <!-- Language (Battle) -->
+<Skill name="RULES-COMPCOMB_BASE">"1"</Skill>
+  <!-- Melee (Basic) -->
+<Skill name="RULES-COMPCOMB_2M">"1"</Skill>
+  <!-- Melee (Two hands) -->
+<Skill name="RULES-COMPMUSIC_TAMB">"1"</Skill>
+  <!-- Play (Drum) -->
+<Skill name="RULES-COMPPARI">"2"</Skill>
+  <!-- Gamble -->
+<Skill name="RULES-COMPINTIM">"2"</Skill>
+  <!-- Intimidate -->
+<Skill name="RULES-COMPSAVOIR_HERAL">"2"</Skill>
+  <!-- Lore (Heraldry) -->
+<Skill name="RULES-COMPCOMB_*">"2"</Skill>
+  <!-- Melee (Any) -->
+<Skill name="RULES-COMPSURVEXT">"2"</Skill>
+  <!-- Outdoor Survival -->
+<Skill name="RULES-COMPPRECEP">"2"</Skill>
+  <!-- Perception  -->
+<Skill name="RULES-COMPINTUI">"3"</Skill>
+  <!-- Intuition  -->
+<Skill name="RULES-COMPCOMM">"3"</Skill>
+  <!-- Leadership -->
+<Skill name="RULES-COMPORIENT">"3"</Skill>
+  <!-- Navigation -->
+<Skill name="RULES-COMPCHEV_CHEVAL">"3"</Skill>
+  <!-- Ride (Horse) -->
+<Skill name="RULES-COMPCHARM">"4"</Skill>
+  <!-- Charm -->
+<Skill name="RULES-COMPSAVOIR_GUERRE">"4"</Skill>
+  <!-- Lore (War) -->
+</SUBCHAPTER_SKILL>
+<SUBCHAPTER_TALENT>
+<Talent name="RULES-T0074">"1"</Talent>
+  <!-- Coolheaded -->
+<Talent name="RULES-T0036">"1"</Talent>
+  <!-- Drilled -->
+<Talent name="RULES-T0077">"1"</Talent>
+  <!-- Strong Back -->
+<Talent name="RULES-T0067">"1"</Talent>
+  <!-- Warrior Born -->
+<Talent name="RULES-T0028">"2"</Talent>
+  <!-- Combat Reflexes -->
+<Talent name="RULES-T0136_SOLD">"2"</Talent>
+  <!-- Etiquette (Soldiers) -->
+<Talent name="RULES-T0132_TOUT">"2"</Talent>
+  <!-- Fearless (Any) -->
+<Talent name="RULES-T0037">"2"</Talent>
+  <!-- Strike Mighty Blow -->
+<Talent name="RULES-T0163">"3"</Talent>
+  <!-- Combat Aware -->
+<Talent name="RULES-T0027">"3"</Talent>
+  <!-- Enclosed Fighter -->
+<Talent name="RULES-T0076">"3"</Talent>
+  <!-- Unshakable -->
+<Talent name="RULES-T0138">"3"</Talent>
+  <!-- War Leader -->
+<Talent name="RULES-T0122">"4"</Talent>
+  <!-- Commanding Presence -->
+<Talent name="RULES-T0053">"4"</Talent>
+  <!-- Inspiring -->
+<Talent name="RULES-T0109">"4"</Talent>
+  <!-- Public Speaker -->
+<Talent name="RULES-T0025">"4"</Talent>
+  <!-- Stout-hearted -->
+</SUBCHAPTER_TALENT>
+<SUBCHAPTER_ITEM>
+<Item name="RULES-COMB_BASE_10">"1"</Item>
+<Item name="RULES-ARMO_14">"1"</Item>
+<Item name="Uniform">"1"</Item>
+<Item name="RULES-COMB_2M_05">"1"</Item>
+<Item name="RULES-ARMO_10">"2"</Item>
+<Item name="RULES-ARMO_11">"2"</Item>
+<Item name="RULES-ARMO_12">"2"</Item>
+<Item name="RULES-ARMO_13">"2"</Item>
+<Item name="RULES-ARMO_14">"2"</Item>
+<Item name="Large Feathered Hat">"2"</Item>
+<Item name="Manual on the art of fighting">"3"</Item>
+<Item name="RULES-COMB_2M_05 (Q)">"3"</Item>
+<Item name="Symbol of Rank">"3"</Item>
+<Item name="Letter of Commission">"4"</Item>
+<Item name="Light Warhorse with Saddle and Tack">"4"</Item>
+<Item name="Uniform (Q)">"4"</Item>
+<Item name="Symbol of Rank">"4"</Item>
+</SUBCHAPTER_ITEM>
+</Career>
+<Career id="UPINA-WORK67">
+<Description language="ENGLISH">"Halberdier"</Description>
+<Explanation language="ENGLISH">"Famously reliable, you are a stalwart of the infantry, and not do be trifled with. The mainstay of all Imperial armies, Halberdiers are found in forces the length and breadth of the Empire, and beyond. They have a reputation for reliability and grit and make a formidable sight on the field of battle, massed closely together with their imposing weapons. ‘The Halberdier takes heart from fighting in large groups of tightly formed units, where they benefit from the reach of the halberd while not suffering too much from a lack of manoeuvrability."</Explanation>
+<Skill>"RULES-COMPCOMB_HAST"</Skill>
+<Class>"CLASS_WARR"</Class>
+<SUBCHAPTER_LEVEL>
+<Level id="1">
+<Description language="ENGLISH">"Halberdier Recruit"</Description>
+<Salary>"TIERS_SILVER 1"</Salary>
+</Level>
+<Level id="2">
+<Description language="ENGLISH">"Halberdier"</Description>
+<Salary>"TIERS_SILVER 3"</Salary>
+</Level>
+<Level id="3">
+<Description language="ENGLISH">"Halberdier Sergeant"</Description>
+<Salary>"TIERS_SILVER 5"</Salary>
+</Level>
+<Level id="4">
+<Description language="ENGLISH">"Halberdier Captain"</Description>
+<Salary>"TIERS_GOLD 1"</Salary>
+</Level>
+</SUBCHAPTER_LEVEL>
+<SUBCHAPTER_ATTR>
+<Attribut name="RULES-ATTR_WS">"1"</Attribut>
+<Attribut name="RULES-ATTR_BS">"0"</Attribut>
+<Attribut name="RULES-ATTR_S">"2"</Attribut>
+<Attribut name="RULES-ATTR_T">"1"</Attribut>
+<Attribut name="RULES-ATTR_I">"3"</Attribut>
+<Attribut name="RULES-ATTR_Ag">"1"</Attribut>
+<Attribut name="RULES-ATTR_Dex">"0"</Attribut>
+<Attribut name="RULES-ATTR_Int">"4"</Attribut>
+<Attribut name="RULES-ATTR_WP">"0"</Attribut>
+<Attribut name="RULES-ATTR_Fel">"0"</Attribut>
+</SUBCHAPTER_ATTR>
+<SUBCHAPTER_SKILL>
+<Skill name="RULES-COMPATHL">"1"</Skill>
+  <!-- Athletics -->
+<Skill name="RULES-COMPRESALC">"1"</Skill>
+  <!-- Consume Alcohol -->
+<Skill name="RULES-COMPCALM">"1"</Skill>
+  <!-- Cool -->
+<Skill name="RULES-COMPESQU">"1"</Skill>
+  <!-- Dodge -->
+<Skill name="RULES-COMPRESIST">"1"</Skill>
+  <!-- Endurance -->
+<Skill name="RULES-COMPLANG_BATAIL">"1"</Skill>
+  <!-- Language (Battle) -->
+<Skill name="RULES-COMPCOMB_BASE">"1"</Skill>
+  <!-- Melee (Basic) -->
+<Skill name="RULES-COMPCOMB_HAST">"1"</Skill>
+  <!-- Melee (Polearm) -->
+<Skill name="RULES-COMPREPRES_PARAD">"1"</Skill>
+  <!-- Perform (Parade) -->
+<Skill name="RULES-COMPMUSIC_TAMB">"1"</Skill>
+  <!-- Play (Drum) -->
+<Skill name="RULES-COMPESCAL">"2"</Skill>
+  <!-- Climb -->
+<Skill name="RULES-COMPPARI">"2"</Skill>
+  <!-- Gamble -->
+<Skill name="RULES-COMPRAGOT">"2"</Skill>
+  <!-- Gossip -->
+<Skill name="RULES-COMPINTIM">"2"</Skill>
+  <!-- Intimidate -->
+<Skill name="RULES-COMPSURVEXT">"2"</Skill>
+  <!-- Outdoor Survival -->
+<Skill name="RULES-COMPPRECEP">"2"</Skill>
+  <!-- Perception  -->
+<Skill name="RULES-COMPINTUI">"3"</Skill>
+  <!-- Intuition  -->
+<Skill name="RULES-COMPCOMM">"3"</Skill>
+  <!-- Leadership -->
+<Skill name="RULES-COMPORIENT">"3"</Skill>
+  <!-- Navigation -->
+<Skill name="RULES-COMPCHEV_CHEVAL">"3"</Skill>
+  <!-- Ride (Horse) -->
+<Skill name="RULES-COMPCHARM">"4"</Skill>
+  <!-- Charm -->
+<Skill name="RULES-COMPSAVOIR_GUERRE">"4"</Skill>
+  <!-- Lore (War) -->
+</SUBCHAPTER_SKILL>
+<SUBCHAPTER_TALENT>
+<Talent name="RULES-T0094">"1"</Talent>
+  <!-- Diceman -->
+<Talent name="RULES-T0036">"1"</Talent>
+  <!-- Drilled -->
+<Talent name="RULES-T0077">"1"</Talent>
+  <!-- Strong Back -->
+<Talent name="RULES-T0067">"1"</Talent>
+  <!-- Warrior Born -->
+<Talent name="RULES-T0027">"2"</Talent>
+  <!-- Enclosed Fighter -->
+<Talent name="RULES-T0136_SOLD">"2"</Talent>
+  <!-- Etiquette (Soldiers) -->
+<Talent name="RULES-T0132_TOUT">"2"</Talent>
+  <!-- Fearless (Any) -->
+<Talent name="RULES-T0037">"2"</Talent>
+  <!-- Strike Mighty Blow -->
+<Talent name="RULES-T0163">"3"</Talent>
+  <!-- Combat Aware -->
+<Talent name="RULES-T0076">"3"</Talent>
+  <!-- Unshakable -->
+<Talent name="RULES-T0025">"3"</Talent>
+  <!-- Stout-hearted -->
+<Talent name="RULES-T0138">"3"</Talent>
+  <!-- War Leader -->
+<Talent name="RULES-T0053">"4"</Talent>
+  <!-- Inspiring -->
+<Talent name="RULES-T0109">"4"</Talent>
+  <!-- Public Speaker -->
+<Talent name="RULES-T0168">"4"</Talent>
+  <!-- Seasoned Traveller -->
+<Talent name="RULES-T0122">"4"</Talent>
+  <!-- Commanding Presence -->
+</SUBCHAPTER_TALENT>
+<SUBCHAPTER_ITEM>
+<Item name="RULES-COMB_BASE_10">"1"</Item>
+<Item name="RULES-COMB_HAST_02">"1"</Item>
+<Item name="RULES-ARMO_05">"1"</Item>
+<Item name="Uniform">"1"</Item>
+<Item name="RULES-ARMO_14">"2"</Item>
+<Item name="RULES-ARMO_11">"2"</Item>
+<Item name="RULES-COMB_HAST_02 (Q)">"2"</Item>
+<Item name="Symbol of Rank">"3"</Item>
+<Item name="Uniform (Q)">"3"</Item>
+<Item name="Letter of Commission">"4"</Item>
+<Item name="Light Warhorse with Saddle and Tack">"4"</Item>
+<Item name="RULES-COMB_BASE_04 (Q)">"4"</Item>
+<Item name="Symbol of Rank">"4"</Item>
+</SUBCHAPTER_ITEM>
+</Career>
+<Career id="UPINA-WORK68">
+<Description language="ENGLISH">"Handgunner"</Description>
+<Explanation language="ENGLISH">"Wielding a handgun, you bring death to your enemies from  “Ihey are unreliable, noisy, full of hot air, and they leave a long range — or at least put the fear of Sigmar into them. foul smell behind them. And their guns aren’t much better” — Holger Kass, 1st Bôgenhafen Halberdiers The Handgunner is a comparative newcomer to the Imperial army. Though they have been around for hundreds of years, they are not yet entirely trusted by the rest of the military. Even so, as technology advances, they have become increasingly effective on the battlefield and are fielded in the Imperial armies in ever greater numbers."</Explanation>
+<Skill>"RULES-COMPPROJ_POUDRE"</Skill>
+<Class>"CLASS_WARR"</Class>
+<SUBCHAPTER_LEVEL>
+<Level id="1">
+<Description language="ENGLISH">"Handgunner Recruit"</Description>
+<Salary>"TIERS_SILVER 1"</Salary>
+</Level>
+<Level id="2">
+<Description language="ENGLISH">"Handgunner"</Description>
+<Salary>"TIERS_SILVER 3"</Salary>
+</Level>
+<Level id="3">
+<Description language="ENGLISH">"Handgunner Sergeant"</Description>
+<Salary>"TIERS_SILVER 5"</Salary>
+</Level>
+<Level id="4">
+<Description language="ENGLISH">"Handgunner Captain"</Description>
+<Salary>"TIERS_GOLD 1"</Salary>
+</Level>
+</SUBCHAPTER_LEVEL>
+<SUBCHAPTER_ATTR>
+<Attribut name="RULES-ATTR_WS">"0"</Attribut>
+<Attribut name="RULES-ATTR_BS">"1"</Attribut>
+<Attribut name="RULES-ATTR_S">"0"</Attribut>
+<Attribut name="RULES-ATTR_T">"0"</Attribut>
+<Attribut name="RULES-ATTR_I">"2"</Attribut>
+<Attribut name="RULES-ATTR_Ag">"1"</Attribut>
+<Attribut name="RULES-ATTR_Dex">"1"</Attribut>
+<Attribut name="RULES-ATTR_Int">"3"</Attribut>
+<Attribut name="RULES-ATTR_WP">"4"</Attribut>
+<Attribut name="RULES-ATTR_Fel">"0"</Attribut>
+</SUBCHAPTER_ATTR>
+<SUBCHAPTER_SKILL>
+<Skill name="RULES-COMPATHL">"1"</Skill>
+  <!-- Athletics -->
+<Skill name="RULES-COMPRESALC">"1"</Skill>
+  <!-- Consume Alcohol -->
+<Skill name="RULES-COMPCALM">"1"</Skill>
+  <!-- Cool -->
+<Skill name="RULES-COMPESQU">"1"</Skill>
+  <!-- Dodge -->
+<Skill name="RULES-COMPRESIST">"1"</Skill>
+  <!-- Endurance -->
+<Skill name="RULES-COMPLANG_BATAIL">"1"</Skill>
+  <!-- Language (Battle) -->
+<Skill name="RULES-COMPCOMB_BASE">"1"</Skill>
+  <!-- Melee (Basic) -->
+<Skill name="RULES-COMPPRECEP">"1"</Skill>
+  <!-- Perception  -->
+<Skill name="RULES-COMPMUSIC_FLUTE">"1"</Skill>
+  <!-- Play (Flute) -->
+<Skill name="RULES-COMPPROJ_POUDRE">"1"</Skill>
+  <!-- Ranged (Black Powder) -->
+<Skill name="RULES-COMPESCAL">"2"</Skill>
+  <!-- Climb -->
+<Skill name="RULES-COMPPARI">"2"</Skill>
+  <!-- Gamble -->
+<Skill name="RULES-COMPRAGOT">"2"</Skill>
+  <!-- Gossip -->
+<Skill name="RULES-COMPINTUI">"2"</Skill>
+  <!-- Intuition  -->
+<Skill name="RULES-COMPSURVEXT">"2"</Skill>
+  <!-- Outdoor Survival -->
+<Skill name="RULES-COMPMETIER_ARMU">"2"</Skill>
+  <!-- Trade (Gunsmith) -->
+<Skill name="RULES-COMPCOMM">"3"</Skill>
+  <!-- Leadership -->
+<Skill name="RULES-COMPORIENT">"3"</Skill>
+  <!-- Navigation -->
+<Skill name="RULES-COMPPROJ_ING">"3"</Skill>
+  <!-- Ranged (Engineering) -->
+<Skill name="RULES-COMPCHEV_CHEVAL">"3"</Skill>
+  <!-- Ride (Horse) -->
+<Skill name="RULES-COMPCHARM">"4"</Skill>
+  <!-- Charm -->
+<Skill name="RULES-COMPSAVOIR_GUERRE">"4"</Skill>
+  <!-- Lore (War) -->
+</SUBCHAPTER_SKILL>
+<SUBCHAPTER_TALENT>
+<Talent name="RULES-T0149">"1"</Talent>
+  <!-- Accurate Shot -->
+<Talent name="RULES-T0006">"1"</Talent>
+  <!-- Gunner -->
+<Talent name="RULES-T0153">"1"</Talent>
+  <!-- Marksman -->
+<Talent name="RULES-T0154">"1"</Talent>
+  <!-- Sniper -->
+<Talent name="RULES-T0036">"2"</Talent>
+  <!-- Drilled -->
+<Talent name="RULES-T0136_SOLD">"2"</Talent>
+  <!-- Etiquette (Soldiers) -->
+<Talent name="RULES-T0150">"2"</Talent>
+  <!-- Fast Shot -->
+<Talent name="RULES-T0125">"2"</Talent>
+  <!-- Rapid Reload -->
+<Talent name="RULES-T0163">"3"</Talent>
+  <!-- Combat Aware -->
+<Talent name="RULES-T0152">"3"</Talent>
+  <!-- Sharpshooter -->
+<Talent name="RULES-T0151">"3"</Talent>
+  <!-- Sure Shot -->
+<Talent name="RULES-T0076">"3"</Talent>
+  <!-- Unshakable -->
+<Talent name="RULES-T0053">"4"</Talent>
+  <!-- Inspiring -->
+<Talent name="RULES-T0168">"4"</Talent>
+  <!-- Seasoned Traveller -->
+<Talent name="RULES-T0025">"4"</Talent>
+  <!-- Stout-hearted -->
+<Talent name="RULES-T0138">"4"</Talent>
+  <!-- War Leader -->
+</SUBCHAPTER_TALENT>
+<SUBCHAPTER_ITEM>
+<Item name="RULES-COMB_BASE_10">"1"</Item>
+<Item name="RULES-PROJ_POUDRE_01">"1"</Item>
+<Item name="Uniform">"1"</Item>
+<Item name="Large Feathered Hat">"2"</Item>
+<Item name="RULES-PROJ_POUDRE_01 (Q)">"2"</Item>
+<Item name="Symbol of Rank">"3"</Item>
+<Item name="Uniform (Q)">"3"</Item>
+<Item name="Letter of Commission">"4"</Item>
+<Item name="Light Warhorse with Saddle and Tack">"4"</Item>
+<Item name="Symbol of Rank">"4"</Item>
+</SUBCHAPTER_ITEM>
+</Career>
+<Career id="UPINA-WORK69">
+<Description language="ENGLISH">"Artillerist"</Description>
+<Explanation language="ENGLISH">"You bring the big guns to the fight. You maintain and fire I baven*t noticed any smell of manure — why is it even artillery and understand the best use of blackpowder. relevant? - Ludmilla Krabbe, old artillerist on being The pride and joy of the Empire, its artillery is famed asked about the noise of battle for an awe-inspiring spectacle that strikes fear into the heart of all her enemies. However, artillery regiments do not possess the glamour of the knightly orders or the Greatswords. It is hard graft involving heavy lifting, fetching, carrying, and tedious excavation. Despite this, it is vital to the Empires war effort and artillerists see themselves as the unsung heroes of the Empire’s armies."</Explanation>
+<Skill>"RULES-COMPPROJ_ARB/RULES-COMPPROJ_ING/RULES-COMPPROJ_POUDRE/RULES-COMPPROJ_CATAPULT"</Skill>
+<Class>"CLASS_ACAD"</Class>
+<SUBCHAPTER_LEVEL>
+<Level id="1">
+<Description language="ENGLISH">"Apprentice Artillerist"</Description>
+<Salary>"TIERS_SILVER 1"</Salary>
+</Level>
+<Level id="2">
+<Description language="ENGLISH">"Artillerist"</Description>
+<Salary>"TIERS_SILVER 3"</Salary>
+</Level>
+<Level id="3">
+<Description language="ENGLISH">"Artillerist Captain"</Description>
+<Salary>"TIERS_SILVER 5"</Salary>
+</Level>
+<Level id="4">
+<Description language="ENGLISH">"Artillerist Master"</Description>
+<Salary>"TIERS_GOLD 1"</Salary>
+</Level>
+</SUBCHAPTER_LEVEL>
+<SUBCHAPTER_ATTR>
+<Attribut name="RULES-ATTR_WS">"0"</Attribut>
+<Attribut name="RULES-ATTR_BS">"1"</Attribut>
+<Attribut name="RULES-ATTR_S">"0"</Attribut>
+<Attribut name="RULES-ATTR_T">"2"</Attribut>
+<Attribut name="RULES-ATTR_I">"1"</Attribut>
+<Attribut name="RULES-ATTR_Ag">"4"</Attribut>
+<Attribut name="RULES-ATTR_Dex">"0"</Attribut>
+<Attribut name="RULES-ATTR_Int">"1"</Attribut>
+<Attribut name="RULES-ATTR_WP">"3"</Attribut>
+<Attribut name="RULES-ATTR_Fel">"0"</Attribut>
+</SUBCHAPTER_ATTR>
+<SUBCHAPTER_SKILL>
+<Skill name="RULES-COMPSOINANI">"1"</Skill>
+  <!-- Animal Care -->
+<Skill name="RULES-COMPCALM">"1"</Skill>
+  <!-- Cool -->
+<Skill name="RULES-COMPCOND">"1"</Skill>
+  <!-- Drive -->
+<Skill name="RULES-COMPRESIST">"1"</Skill>
+  <!-- Endurance -->
+<Skill name="RULES-COMPEVAL">"1"</Skill>
+  <!-- Evaluate -->
+<Skill name="RULES-COMPLANG_BATAIL">"1"</Skill>
+  <!-- Language (Battle) -->
+<Skill name="RULES-COMPCOMB_BASE">"1"</Skill>
+  <!-- Melee (Basic) -->
+<Skill name="RULES-COMPORIENT">"1"</Skill>
+  <!-- Navigation -->
+<Skill name="RULES-COMPPRECEP">"1"</Skill>
+  <!-- Perception  -->
+<Skill name="RULES-COMPPROJ_ARB/RULES-COMPPROJ_ING/RULES-COMPPROJ_POUDRE/RULES-COMPPROJ_CATAPULT">"1"</Skill>
+  <!-- Ranged (Blackpowder, Catapult, Crossbow or Engineering) -->
+<Skill name="RULES-COMPRESALC">"2"</Skill>
+  <!-- Consume Alcohol -->
+<Skill name="RULES-COMPPARI">"2"</Skill>
+  <!-- Gamble -->
+<Skill name="RULES-COMPRAGOT">"2"</Skill>
+  <!-- Gossip -->
+<Skill name="RULES-COMPSURVEXT">"2"</Skill>
+  <!-- Outdoor Survival -->
+<Skill name="RULES-COMPPROJ_ARB/RULES-COMPPROJ_ING/RULES-COMPPROJ_POUDRE/RULES-COMPPROJ_CATAPULT">"2"</Skill>
+  <!-- Ranged (Blackpowder, Catapult, Crossbow or Engineering) -->
+<Skill name="RULES-COMPMETIER_ARMU/RULES-COMPMETIER_CHARP">"2"</Skill>
+  <!-- Ranged (Blackpowder, Catapult, Crossbow or Engineering) -->
+<Skill name="RULES-COMPINTUI">"3"</Skill>
+  <!-- Intuition  -->
+<Skill name="RULES-COMPCOMM">"3"</Skill>
+  <!-- Leadership -->
+<Skill name="RULES-COMPSAVOIR_ARTILLERY">"3"</Skill>
+  <!-- Lore (Artillery) -->
+<Skill name="RULES-COMPCHEV_CHEVAL">"3"</Skill>
+  <!-- Ride (Horse) -->
+<Skill name="RULES-COMPCHARM">"4"</Skill>
+  <!-- Charm -->
+<Skill name="RULES-COMPSAVOIR_GUERRE">"4"</Skill>
+  <!-- Lore (War) -->
+</SUBCHAPTER_SKILL>
+<SUBCHAPTER_TALENT>
+<Talent name="RULES-T0153">"1"</Talent>
+  <!-- Marksman -->
+<Talent name="RULES-T0125">"1"</Talent>
+  <!-- Rapid Reload -->
+<Talent name="RULES-T0077">"1"</Talent>
+  <!-- Strong Back -->
+<Talent name="RULES-T0067">"1"</Talent>
+  <!-- Warrior Born -->
+<Talent name="UPINA-T0173">"2"</Talent>
+  <!-- Crew Commander -->
+<Talent name="RULES-T0136_SOLD">"2"</Talent>
+  <!-- Etiquette (Soldiers) -->
+<Talent name="RULES-T0140">"2"</Talent>
+  <!-- Orientation -->
+<Talent name="RULES-T0154">"2"</Talent>
+  <!-- Sniper -->
+<Talent name="RULES-T0163">"3"</Talent>
+  <!-- Combat Aware -->
+<Talent name="RULES-T0084">"3"</Talent>
+  <!-- Read/Write -->
+<Talent name="RULES-T0015">"3"</Talent>
+  <!-- Tinker -->
+<Talent name="RULES-T0076">"3"</Talent>
+  <!-- Unshakable -->
+<Talent name="RULES-T0053">"4"</Talent>
+  <!-- Inspiring -->
+<Talent name="RULES-T0109">"4"</Talent>
+  <!-- Public Speaker -->
+<Talent name="RULES-T0168">"4"</Talent>
+  <!-- Seasoned Traveller -->
+<Talent name="RULES-T0025">"4"</Talent>
+  <!-- Stout-hearted -->
+</SUBCHAPTER_TALENT>
+<SUBCHAPTER_ITEM>
+<Item name="RULES-COMB_BASE_10">"1"</Item>
+<Item name="Leather Apron">"1"</Item>
+<Item name="RULES-COMB_*">"2"</Item>
+<Item name="Telescope">"2"</Item>
+<Item name="Tools">"2"</Item>
+<Item name="Uniform">"2"</Item>
+<Item name="Symbol of Rank">"3"</Item>
+<Item name="Uniform (Q)">"3"</Item>
+<Item name="Artillery piece and Limber">"4"</Item>
+<Item name="Letter of Commission">"4"</Item>
+<Item name="Light Warhorse with Saddle and Tack">"4"</Item>
+<Item name="Map">"4"</Item>
+<Item name="Symbol of Rank">"4"</Item>
+</SUBCHAPTER_ITEM>
+</Career>
+<Career id="UPINA-WORK70">
+<Description language="ENGLISH">"Camp Follower"</Description>
+<Explanation language="ENGLISH">"You accompany armies on campaign, looking for adventure, protection, or just an an gle. The logistics of military manoeuvres can be near incomprehensible. Like mobile cities, the armies of the Old World rely on complex supply chains and strict organisation to keep them fed and supplied. Much of this is directly under the remit of the army. But private enterprise is always on the lookout for profit, so much of any army will be made up of an eclectic band of hangers on, pedlars, bawds, tradespeople, artisans, and charlatans. Many of these can be described using other careers, but those dedicated to following the troops without any specific trade or vocation come under the auspices of Camp Follower."</Explanation>
+<Skill>"RULES-COMPSURVEXT"</Skill>
+<Class>"CLASS_RANG"</Class>
+<SUBCHAPTER_LEVEL>
+<Level id="1">
+<Description language="ENGLISH">"Ribaud"</Description>
+<Salary>"TIERS_BRASS 1"</Salary>
+</Level>
+<Level id="2">
+<Description language="ENGLISH">"Camp Follower"</Description>
+<Salary>"TIERS_BRASS 4"</Salary>
+</Level>
+<Level id="3">
+<Description language="ENGLISH">"Seasoned Scavenger"</Description>
+<Salary>"TIERS_SILVER 1"</Salary>
+</Level>
+<Level id="4">
+<Description language="ENGLISH">"Camp Chief"</Description>
+<Salary>"TIERS_SILVER 4"</Salary>
+</Level>
+</SUBCHAPTER_LEVEL>
+<SUBCHAPTER_ATTR>
+<Attribut name="RULES-ATTR_WS">"1"</Attribut>
+<Attribut name="RULES-ATTR_BS">"0"</Attribut>
+<Attribut name="RULES-ATTR_S">"0"</Attribut>
+<Attribut name="RULES-ATTR_T">"4"</Attribut>
+<Attribut name="RULES-ATTR_I">"3"</Attribut>
+<Attribut name="RULES-ATTR_Ag">"1"</Attribut>
+<Attribut name="RULES-ATTR_Dex">"0"</Attribut>
+<Attribut name="RULES-ATTR_Int">"2"</Attribut>
+<Attribut name="RULES-ATTR_WP">"0"</Attribut>
+<Attribut name="RULES-ATTR_Fel">"1"</Attribut>
+</SUBCHAPTER_ATTR>
+<SUBCHAPTER_SKILL>
+<Skill name="RULES-COMPCHARM">"1"</Skill>
+  <!-- Charm -->
+<Skill name="RULES-COMPRESALC">"1"</Skill>
+  <!-- Consume Alcohol -->
+<Skill name="RULES-COMPESQU">"1"</Skill>
+  <!-- Dodge -->
+<Skill name="RULES-COMPDIVERT_*">"1"</Skill>
+  <!-- Entertainment (Any) -->
+<Skill name="RULES-COMPRAGOT">"1"</Skill>
+  <!-- Gossip -->
+<Skill name="RULES-COMPMARCH">"1"</Skill>
+  <!-- Haggle -->
+<Skill name="RULES-COMPCOMB_*">"1"</Skill>
+  <!-- Melee (Any) -->
+<Skill name="RULES-COMPSURVEXT">"1"</Skill>
+  <!-- Outdoor Survival -->
+<Skill name="RULES-COMPPRECEP">"1"</Skill>
+  <!-- Perception  -->
+<Skill name="RULES-COMPREPRES_DANS">"1"</Skill>
+  <!-- Perform (Dance) -->
+<Skill name="RULES-COMPATHL">"2"</Skill>
+  <!-- Athletics -->
+<Skill name="RULES-COMPSUBOR">"2"</Skill>
+  <!-- Bribery -->
+<Skill name="RULES-COMPRESIST">"2"</Skill>
+  <!-- Endurance -->
+<Skill name="RULES-COMPPARI">"2"</Skill>
+  <!-- Gamble -->
+<Skill name="RULES-COMPPROJ_*">"2"</Skill>
+  <!-- Ranged (Any) -->
+<Skill name="RULES-COMPDISC_RURAL">"2"</Skill>
+  <!-- Stealth (Rural) -->
+<Skill name="RULES-COMPCALM">"3"</Skill>
+  <!-- Cool -->
+<Skill name="RULES-COMPINTIM">"3"</Skill>
+  <!-- Intimidate -->
+<Skill name="RULES-COMPINTUI">"3"</Skill>
+  <!-- Intuition  -->
+<Skill name="RULES-COMPLANG_*">"3"</Skill>
+  <!-- Language (Any) -->
+<Skill name="RULES-COMPEVAL">"4"</Skill>
+  <!-- Evaluate -->
+<Skill name="RULES-COMPCOMM">"4"</Skill>
+  <!-- Leadership -->
+</SUBCHAPTER_SKILL>
+<SUBCHAPTER_TALENT>
+<Talent name="RULES-T0009">"1"</Talent>
+  <!-- Attractive -->
+<Talent name="RULES-T0078">"1"</Talent>
+  <!-- Beneath Notice -->
+<Talent name="RULES-T0010">"1"</Talent>
+  <!-- Blather -->
+<Talent name="RULES-T0026">"1"</Talent>
+  <!-- Dirty Fighting -->
+<Talent name="RULES-T0094">"2"</Talent>
+  <!-- Diceman -->
+<Talent name="RULES-T0136_SOLD">"2"</Talent>
+  <!-- Etiquette (Soldiers) -->
+<Talent name="RULES-T0105">"2"</Talent>
+  <!-- Rover -->
+<Talent name="RULES-T0016">"2"</Talent>
+  <!-- Stone Soup -->
+<Talent name="RULES-T0168">"3"</Talent>
+  <!-- Seasoned Traveller -->
+<Talent name="RULES-T0035">"3"</Talent>
+  <!-- Sturdy -->
+<Talent name="RULES-T0076">"3"</Talent>
+  <!-- Unshakable -->
+<Talent name="RULES-T0159">"3"</Talent>
+  <!-- Very Resilient -->
+<Talent name="RULES-T0053">"4"</Talent>
+  <!-- Inspiring -->
+<Talent name="RULES-T0109">"4"</Talent>
+  <!-- Public Speaker -->
+<Talent name="RULES-T0025">"4"</Talent>
+  <!-- Stout-hearted -->
+<Talent name="RULES-T0107">"4"</Talent>
+  <!-- Strong-minded -->
+</SUBCHAPTER_TALENT>
+<SUBCHAPTER_ITEM>
+<Item name="Bed Roll">"1"</Item>
+<Item name="RULES-COMB_BASE_10">"1"</Item>
+<Item name="Pack">"1"</Item>
+<Item name="Tent">"2"</Item>
+<Item name="Hat (Q)">"2"</Item>
+<Item name="Quality Clothing">"3"</Item>
+<Item name="Riding Horse with Saddle and Tack">"4"</Item>
+<Item name="Ring of camp Followers">"4"</Item>
+</SUBCHAPTER_ITEM>
+</Career>
+<Career id="UPINA-WORK71">
+<Description language="ENGLISH">"Cartographer"</Description>
+<Explanation language="ENGLISH">"You are hired to survey and map far flung locations. The more the area is in need of mapping, the more dangerous the job is likely to be. As the world gets more sophisticated there is a need to map it in increasing detail. Whether this involves exploring largely unknown lands and making sweeping maps of the general area or going into exacting detail over small tracts in petty land disputes, cartographers are increasingly in demand."</Explanation>
+<Skill>"RULES-COMPART_CARTO"</Skill>
+<Class>"CLASS_ACAD"</Class>
+<SUBCHAPTER_LEVEL>
+<Level id="1">
+<Description language="ENGLISH">"Surveyor"</Description>
+<Salary>"TIERS_SILVER 1"</Salary>
+</Level>
+<Level id="2">
+<Description language="ENGLISH">"Cartographer"</Description>
+<Salary>"TIERS_SILVER 3"</Salary>
+</Level>
+<Level id="3">
+<Description language="ENGLISH">"Chartered Cartographer"</Description>
+<Salary>"TIERS_SILVER 5"</Salary>
+</Level>
+<Level id="4">
+<Description language="ENGLISH">"Master Cartographer"</Description>
+<Salary>"TIERS_GOLD 1"</Salary>
+</Level>
+</SUBCHAPTER_LEVEL>
+<SUBCHAPTER_ATTR>
+<Attribut name="RULES-ATTR_WS">"3"</Attribut>
+<Attribut name="RULES-ATTR_BS">"0"</Attribut>
+<Attribut name="RULES-ATTR_S">"0"</Attribut>
+<Attribut name="RULES-ATTR_T">"0"</Attribut>
+<Attribut name="RULES-ATTR_I">"1"</Attribut>
+<Attribut name="RULES-ATTR_Ag">"2"</Attribut>
+<Attribut name="RULES-ATTR_Dex">"1"</Attribut>
+<Attribut name="RULES-ATTR_Int">"1"</Attribut>
+<Attribut name="RULES-ATTR_WP">"4"</Attribut>
+<Attribut name="RULES-ATTR_Fel">"0"</Attribut>
+</SUBCHAPTER_ATTR>
+<SUBCHAPTER_SKILL>
+<Skill name="RULES-COMPART_CARTO">"1"</Skill>
+  <!-- Art (Cartography) -->
+<Skill name="RULES-COMPESCAL">"1"</Skill>
+  <!-- Climb -->
+<Skill name="RULES-COMPEVAL">"1"</Skill>
+  <!-- Evaluate -->
+<Skill name="RULES-COMPSAVOIR_GEOG">"1"</Skill>
+  <!-- Lore (Geography) -->
+<Skill name="RULES-COMPCOMB_BASE">"1"</Skill>
+  <!-- Melee (Basic) -->
+<Skill name="RULES-COMPORIENT">"1"</Skill>
+  <!-- Navigation -->
+<Skill name="RULES-COMPSURVEXT">"1"</Skill>
+  <!-- Outdoor Survival -->
+<Skill name="RULES-COMPPRECEP">"1"</Skill>
+  <!-- Perception  -->
+<Skill name="RULES-COMPCHEV_CHEVAL">"1"</Skill>
+  <!-- Ride (Horse) -->
+<Skill name="RULES-COMPDISC_RURAL">"1"</Skill>
+  <!-- Stealth (Rural) -->
+<Skill name="RULES-COMPCHARM">"2"</Skill>
+  <!-- Charm -->
+<Skill name="RULES-COMPRESIST">"2"</Skill>
+  <!-- Endurance -->
+<Skill name="RULES-COMPRAGOT">"2"</Skill>
+  <!-- Gossip -->
+<Skill name="RULES-COMPMARCH">"2"</Skill>
+  <!-- Haggle -->
+<Skill name="RULES-COMPSAVOIR_HERAL">"2"</Skill>
+  <!-- Lore (Heraldry) -->
+<Skill name="RULES-COMPMETIER_CARTO">"2"</Skill>
+  <!-- Trade (Cartographer) -->
+<Skill name="RULES-COMPINTUI">"3"</Skill>
+  <!-- Intuition  -->
+<Skill name="RULES-COMPLANG_GUILD">"3"</Skill>
+  <!-- Language (Guild) -->
+<Skill name="RULES-COMPRECH">"3"</Skill>
+  <!-- Research -->
+<Skill name="RULES-COMPSIGNES_GUILD">"3"</Skill>
+  <!-- Secret Signs (Guild) -->
+<Skill name="RULES-COMPLANG_*">"4"</Skill>
+  <!-- Language (Any) -->
+<Skill name="RULES-COMPSAVOIR_*">"4"</Skill>
+  <!-- Lore (Anyl) -->
+</SUBCHAPTER_SKILL>
+<SUBCHAPTER_TALENT>
+<Talent name="RULES-T0007">"1"</Talent>
+  <!-- Artistic -->
+<Talent name="RULES-T0140">"1"</Talent>
+  <!-- Orientation -->
+<Talent name="RULES-T0084">"1"</Talent>
+  <!-- Read/Write -->
+<Talent name="RULES-T0105">"1"</Talent>
+  <!-- Rover -->
+<Talent name="RULES-T0074">"2"</Talent>
+  <!-- Coolheaded -->
+<Talent name="RULES-T0064">"2"</Talent>
+  <!-- Flee! -->
+<Talent name="RULES-T0168">"2"</Talent>
+  <!-- Seasoned Traveller -->
+<Talent name="RULES-T0013_*">"2"</Talent>
+  <!-- Strider (Any) -->
+<Talent name="RULES-T0146">"3"</Talent>
+  <!-- Bookish -->
+<Talent name="RULES-T0136_GUILD">"3"</Talent>
+  <!-- Etiquette (Guild) -->
+<Talent name="RULES-T0045">"3"</Talent>
+  <!-- Nimble Fingered -->
+<Talent name="RULES-T0076">"3"</Talent>
+  <!-- Unshakable -->
+<Talent name="RULES-T0102">"4"</Talent>
+  <!-- Dealmaker -->
+<Talent name="RULES-T0025">"4"</Talent>
+  <!-- Stout-hearted -->
+<Talent name="RULES-T0157_CARTO">"4"</Talent>
+  <!-- Master Tradesman (Cartographer) -->
+<Talent name="RULES-T0090">"4"</Talent>
+  <!-- Magnum Opus -->
+</SUBCHAPTER_TALENT>
+<SUBCHAPTER_ITEM>
+<Item name="Vellum">"1"</Item>
+<Item name="Writing Kit">"1"</Item>
+<Item name="Horse with Saddle and Tack">"2"</Item>
+<Item name="Theodolite">"2"</Item>
+<Item name="Letter of Charter">"3"</Item>
+<Item name="Travel Clothes (Q)">"3"</Item>
+</SUBCHAPTER_ITEM>
+</Career>
+<Career id="UPINA-WORK72">
+<Description language="ENGLISH">"Freelance"</Description>
+<Explanation language="ENGLISH">"You pursue the life of the knight, but without the obligations to, or the protection of; a Knightly Order. Not all knights belong to an order, there are those who are knighted independently by a noble, others declare themselves a knight, and there are some who leave (or are thrown out.) of an Order to forge their own path. These are known as ‘freelancers’, knights who fight for coin, honour, or some peculiar motive of their own. Some are hardened mercenaries or little better than bandits. Others are champions of the downtrodden or selfless unsung heroes of the people."</Explanation>
+<Skill>"RULES-COMPCOMB_CAVAL"</Skill>
+<Class>"CLASS_WARR"</Class>
+<SUBCHAPTER_LEVEL>
+<Level id="1">
+<Description language="ENGLISH">"Squire"</Description>
+<Salary>"TIERS_SILVER 1"</Salary>
+</Level>
+<Level id="2">
+<Description language="ENGLISH">"Freelance Knight"</Description>
+<Salary>"TIERS_SILVER 2"</Salary>
+</Level>
+<Level id="3">
+<Description language="ENGLISH">"Freelance Captain"</Description>
+<Salary>"TIERS_GOLD 1"</Salary>
+</Level>
+<Level id="4">
+<Description language="ENGLISH">"Knight Commander"</Description>
+<Salary>"TIERS_GOLD 3"</Salary>
+</Level>
+</SUBCHAPTER_LEVEL>
+<SUBCHAPTER_ATTR>
+<Attribut name="RULES-ATTR_WS">"2"</Attribut>
+<Attribut name="RULES-ATTR_BS">"0"</Attribut>
+<Attribut name="RULES-ATTR_S">"1"</Attribut>
+<Attribut name="RULES-ATTR_T">"0"</Attribut>
+<Attribut name="RULES-ATTR_I">"1"</Attribut>
+<Attribut name="RULES-ATTR_Ag">"1"</Attribut>
+<Attribut name="RULES-ATTR_Dex">"0"</Attribut>
+<Attribut name="RULES-ATTR_Int">"0"</Attribut>
+<Attribut name="RULES-ATTR_WP">"3"</Attribut>
+<Attribut name="RULES-ATTR_Fel">"4"</Attribut>
+</SUBCHAPTER_ATTR>
+<SUBCHAPTER_SKILL>
+<Skill name="RULES-COMPATHL">"1"</Skill>
+  <!-- Athletics -->
+<Skill name="RULES-COMPSOINANI">"1"</Skill>
+  <!-- Animal Care -->
+<Skill name="RULES-COMPANIM">"1"</Skill>
+  <!-- Charm Animal -->
+<Skill name="RULES-COMPRESALC">"1"</Skill>
+  <!-- Consume Alcohol -->
+<Skill name="RULES-COMPGUERI">"1"</Skill>
+  <!-- Heal -->
+<Skill name="RULES-COMPRAGOT">"1"</Skill>
+  <!-- Gossip -->
+<Skill name="RULES-COMPCOMB_CAVAL">"1"</Skill>
+  <!-- Melee (Cavalry) -->
+<Skill name="RULES-COMPSURVEXT">"1"</Skill>
+  <!-- Outdoor Survival -->
+<Skill name="RULES-COMPCHEV_CHEVAL">"1"</Skill>
+  <!-- Ride (Horse) -->
+<Skill name="RULES-COMPMETIER_MFERR">"1"</Skill>
+  <!-- Trade (farrier) -->
+<Skill name="RULES-COMPCHARM">"2"</Skill>
+  <!-- Charm -->
+<Skill name="RULES-COMPCALM">"2"</Skill>
+  <!-- Cool -->
+<Skill name="RULES-COMPESQU">"2"</Skill>
+  <!-- Dodge -->
+<Skill name="RULES-COMPRESIST">"2"</Skill>
+  <!-- Endurance -->
+<Skill name="RULES-COMPINTIM">"2"</Skill>
+  <!-- Intimidate -->
+<Skill name="RULES-COMPINTUI">"2"</Skill>
+  <!-- Intuition  -->
+<Skill name="RULES-COMPCOMB_*">"3"</Skill>
+  <!-- Melee (Any) -->
+<Skill name="RULES-COMPMARCH">"3"</Skill>
+  <!-- Haggle -->
+<Skill name="RULES-COMPPARI">"3"</Skill>
+  <!-- Gamble -->
+<Skill name="RULES-COMPCOMM">"3"</Skill>
+  <!-- Leadership -->
+<Skill name="RULES-COMPSAVOIR_GUERRE">"3"</Skill>
+  <!-- Lore (War) -->
+<Skill name="RULES-COMPLANG_BATAIL">"4"</Skill>
+  <!-- Language (Battle) -->
+<Skill name="RULES-COMPSAVOIR_*">"4"</Skill>
+  <!-- Lore (Anyl) -->
+</SUBCHAPTER_SKILL>
+<SUBCHAPTER_TALENT>
+<Talent name="RULES-T0019">"1"</Talent>
+  <!-- Roughrider -->
+<Talent name="RULES-T0035">"1"</Talent>
+  <!-- Sturdy -->
+<Talent name="RULES-T0067">"1"</Talent>
+  <!-- Warrior Born -->
+<Talent name="RULES-T0163">"1"</Talent>
+  <!-- Combat Aware -->
+<Talent name="RULES-T0136_*">"2"</Talent>
+  <!-- Etiquette (Any) -->
+<Talent name="RULES-T0168">"2"</Talent>
+  <!-- Seasoned Traveller -->
+<Talent name="RULES-T0037">"2"</Talent>
+  <!-- Strike Mighty Blow -->
+<Talent name="RULES-T0016">"2"</Talent>
+  <!-- Stone Soup -->
+<Talent name="RULES-T0095">"3"</Talent>
+  <!-- Combat Master -->
+<Talent name="RULES-T0025">"3"</Talent>
+  <!-- Stout-hearted -->
+<Talent name="RULES-T0076">"3"</Talent>
+  <!-- Unshakable -->
+<Talent name="RULES-T0138">"3"</Talent>
+  <!-- War Leader -->
+<Talent name="RULES-T0020">"4"</Talent>
+  <!-- Luck -->
+<Talent name="RULES-T0039">"4"</Talent>
+  <!-- Disarm -->
+<Talent name="RULES-T0167">"4"</Talent>
+  <!-- Iron Will -->
+<Talent name="RULES-T0053">"4"</Talent>
+  <!-- Inspiring -->
+</SUBCHAPTER_TALENT>
+<SUBCHAPTER_ITEM>
+<Item name="RULES-ARMO_04">"1"</Item>
+<Item name="RULES-ARMO_07">"1"</Item>
+<Item name="Riding Horse with Saddle and Tack">"1"</Item>
+<Item name="RULES-COMB_BASE_07">"1"</Item>
+<Item name="Trade Tools (Farrier)">"1"</Item>
+<Item name="Destrier with Saddle and Tack">"2"</Item>
+<Item name="RULES-COMB_*">"2"</Item>
+<Item name="RULES-ARMO_14 and Helm">"2"</Item>
+<Item name="Personal Heraldry">"2"</Item>
+<Item name="Barding">"3"</Item>
+<Item name="Small Retinue of Followers">"3"</Item>
+<Item name="Company of knights">"4"</Item>
+<Item name="Squire">"4"</Item>
+</SUBCHAPTER_ITEM>
+</Career>
+<Career id="UPINA-WORK73">
+<Description language="ENGLISH">"Knight of the Blazing Sun"</Description>
+<Explanation language="ENGLISH">"You embody the values of Myrmidia and ride at the forefront of her templar knights. The Knights of the Blazing Sun are templars of Myrmidia and the goddess’ largest Order in the Empire. They have a good reputation, but suspicion surrounds knights dedicated to a war goddess often regarded as foreign to the Empire. The Order favours nobles who are willing to declare their faith in Myrmidia and rise above petty inter-cult rivalries. À wealthy Order, a steady stream of gold flows into their vaults from Tilea and Estalia and expeditions further afield."</Explanation>
+<Skill>"RULES-COMPCOMB_CAVAL"</Skill>
+<Class>"CLASS_WARR"</Class>
+<SUBCHAPTER_LEVEL>
+<Level id="1">
+<Description language="ENGLISH">"Novice"</Description>
+<Salary>"TIERS_SILVER 3"</Salary>
+</Level>
+<Level id="2">
+<Description language="ENGLISH">"Knight"</Description>
+<Salary>"TIERS_SILVER 5"</Salary>
+</Level>
+<Level id="3">
+<Description language="ENGLISH">"Hochmeister"</Description>
+<Salary>"TIERS_GOLD 2"</Salary>
+</Level>
+<Level id="4">
+<Description language="ENGLISH">"Knight of the Inner Circle"</Description>
+<Salary>"TIERS_GOLD 4"</Salary>
+</Level>
+</SUBCHAPTER_LEVEL>
+<SUBCHAPTER_ATTR>
+<Attribut name="RULES-ATTR_WS">"1"</Attribut>
+<Attribut name="RULES-ATTR_BS">"0"</Attribut>
+<Attribut name="RULES-ATTR_S">"1"</Attribut>
+<Attribut name="RULES-ATTR_T">"0"</Attribut>
+<Attribut name="RULES-ATTR_I">"1"</Attribut>
+<Attribut name="RULES-ATTR_Ag">"3"</Attribut>
+<Attribut name="RULES-ATTR_Dex">"0"</Attribut>
+<Attribut name="RULES-ATTR_Int">"2"</Attribut>
+<Attribut name="RULES-ATTR_WP">"0"</Attribut>
+<Attribut name="RULES-ATTR_Fel">"4"</Attribut>
+</SUBCHAPTER_ATTR>
+<SUBCHAPTER_SKILL>
+<Skill name="RULES-COMPATHL">"1"</Skill>
+  <!-- Athletics -->
+<Skill name="RULES-COMPSOINANI">"1"</Skill>
+  <!-- Animal Care -->
+<Skill name="RULES-COMPANIM">"1"</Skill>
+  <!-- Charm Animal -->
+<Skill name="RULES-COMPGUERI">"1"</Skill>
+  <!-- Heal -->
+<Skill name="RULES-COMPLANG_CLASS">"1"</Skill>
+  <!-- Language (Classic) -->
+<Skill name="RULES-COMPSAVOIR_HERAL">"1"</Skill>
+  <!-- Lore (Heraldry) -->
+<Skill name="RULES-COMPSAVOIR_*">"1"</Skill>
+  <!-- Lore (Anyl) -->
+<Skill name="RULES-COMPCOMB_BASE">"1"</Skill>
+  <!-- Melee (Basic) -->
+<Skill name="RULES-COMPCOMB_CAVAL">"1"</Skill>
+  <!-- Melee (Cavalry) -->
+<Skill name="RULES-COMPCHEV_CHEVAL">"1"</Skill>
+  <!-- Ride (Horse) -->
+<Skill name="RULES-COMPCALM">"2"</Skill>
+  <!-- Cool -->
+<Skill name="RULES-COMPESQU">"2"</Skill>
+  <!-- Dodge -->
+<Skill name="RULES-COMPRESIST">"2"</Skill>
+  <!-- Endurance -->
+<Skill name="RULES-COMPINTIM">"2"</Skill>
+  <!-- Intimidate -->
+<Skill name="RULES-COMPLANG_BATAIL">"2"</Skill>
+  <!-- Language (Battle) -->
+<Skill name="RULES-COMPCOMB_*">"2"</Skill>
+  <!-- Melee (Any) -->
+<Skill name="RULES-COMPSAVOIR_GUERRE">"2"</Skill>
+  <!-- Lore (War) -->
+<Skill name="RULES-COMPCHARM">"3"</Skill>
+  <!-- Charm -->
+<Skill name="RULES-COMPPROJ_*">"3"</Skill>
+  <!-- Ranged (Any) -->
+<Skill name="RULES-COMPCOMM">"3"</Skill>
+  <!-- Leadership -->
+<Skill name="RULES-COMPRECH">"3"</Skill>
+  <!-- Research -->
+<Skill name="RULES-COMPSIGNES_BLAZING">"4"</Skill>
+  <!-- Secret Signs (Blazing Sun) -->
+<Skill name="RULES-COMPSAVOIR_*">"4"</Skill>
+  <!-- Lore (Anyl) -->
+</SUBCHAPTER_SKILL>
+<SUBCHAPTER_TALENT>
+<Talent name="RULES-T0136_*">"1"</Talent>
+  <!-- Etiquette (Any) -->
+<Talent name="RULES-T0084">"1"</Talent>
+  <!-- Read/Write -->
+<Talent name="RULES-T0019">"1"</Talent>
+  <!-- Roughrider -->
+<Talent name="RULES-T0067">"1"</Talent>
+  <!-- Warrior Born -->
+<Talent name="RULES-T0168">"2"</Talent>
+  <!-- Seasoned Traveller -->
+<Talent name="RULES-T0117">"2"</Talent>
+  <!-- Savvy -->
+<Talent name="RULES-T0121">"2"</Talent>
+  <!-- Shieldsman -->
+<Talent name="RULES-T0060">"2"</Talent>
+  <!-- Strike to Injure -->
+<Talent name="RULES-T0132_TOUT">"3"</Talent>
+  <!-- Fearless (Any) -->
+<Talent name="RULES-T0138">"3"</Talent>
+  <!-- War Leader -->
+<Talent name="RULES-T0039">"3"</Talent>
+  <!-- Disarm -->
+<Talent name="RULES-T0076">"3"</Talent>
+  <!-- Unshakable -->
+<Talent name="RULES-T0053">"4"</Talent>
+  <!-- Inspiring -->
+<Talent name="RULES-T0025">"4"</Talent>
+  <!-- Stout-hearted -->
+<Talent name="RULES-T0101">"4"</Talent>
+  <!-- Wealthy -->
+<Talent name="RULES-T0037">"4"</Talent>
+  <!-- Strike Mighty Blow -->
+</SUBCHAPTER_TALENT>
+<SUBCHAPTER_ITEM>
+<Item name="RULES-ARMO_04">"1"</Item>
+<Item name="RULES-ARMO_07">"1"</Item>
+<Item name="Riding Horse with Saddle and Tack">"1"</Item>
+<Item name="RULES-COMB_BASE_07">"1"</Item>
+<Item name="Trade Tools (Farrier)">"1"</Item>
+<Item name="Religious Symbol (Myrmidia)">"1"</Item>
+<Item name="Destrier with Saddle and Tack">"2"</Item>
+<Item name="RULES-COMB_*">"2"</Item>
+<Item name="RULES-COMB_HAST_03">"2"</Item>
+<Item name="RULES-ARMO_14 and Helm">"2"</Item>
+<Item name="Barding">"3"</Item>
+<Item name="Small Unit of Blazing Sun knights">"3"</Item>
+<Item name="Great Helm with Sun emblem">"4"</Item>
+<Item name="Squire">"4"</Item>
+<Item name="Large">"4"</Item>
+</SUBCHAPTER_ITEM>
+</Career>
+<Career id="UPINA-WORK74">
+<Description language="ENGLISH">"Knight of the White Wolf"</Description>
+<Explanation language="ENGLISH">"You embody the ferocity and strength of the god of battle, wolves and winter. There are few sights more evocative of the Ulrican faith than that of a heavily armoured and heroically hirsute knight galloping into battle swinging a cavalry hammer. The Knights of the White Wolf are the largest templar order in the Empire, charged with protecting Ulric’s holy sites wherever they are found."</Explanation>
+<Skill>"RULES-COMPCOMB_CAVAL"</Skill>
+<Class>"CLASS_WARR"</Class>
+<SUBCHAPTER_LEVEL>
+<Level id="1">
+<Description language="ENGLISH">"Novice"</Description>
+<Salary>"TIERS_SILVER 3"</Salary>
+</Level>
+<Level id="2">
+<Description language="ENGLISH">"Knight"</Description>
+<Salary>"TIERS_SILVER 5"</Salary>
+</Level>
+<Level id="3">
+<Description language="ENGLISH">"Templar Sergeant"</Description>
+<Salary>"TIERS_GOLD 2"</Salary>
+</Level>
+<Level id="4">
+<Description language="ENGLISH">"Company Commander (Inner Circle)"</Description>
+<Salary>"TIERS_GOLD 3"</Salary>
+</Level>
+</SUBCHAPTER_LEVEL>
+<SUBCHAPTER_ATTR>
+<Attribut name="RULES-ATTR_WS">"1"</Attribut>
+<Attribut name="RULES-ATTR_BS">"0"</Attribut>
+<Attribut name="RULES-ATTR_S">"1"</Attribut>
+<Attribut name="RULES-ATTR_T">"4"</Attribut>
+<Attribut name="RULES-ATTR_I">"1"</Attribut>
+<Attribut name="RULES-ATTR_Ag">"2"</Attribut>
+<Attribut name="RULES-ATTR_Dex">"0"</Attribut>
+<Attribut name="RULES-ATTR_Int">"0"</Attribut>
+<Attribut name="RULES-ATTR_WP">"3"</Attribut>
+<Attribut name="RULES-ATTR_Fel">"0"</Attribut>
+</SUBCHAPTER_ATTR>
+<SUBCHAPTER_SKILL>
+<Skill name="RULES-COMPATHL">"1"</Skill>
+  <!-- Athletics -->
+<Skill name="RULES-COMPSOINANI">"1"</Skill>
+  <!-- Animal Care -->
+<Skill name="RULES-COMPANIM">"1"</Skill>
+  <!-- Charm Animal -->
+<Skill name="RULES-COMPGUERI">"1"</Skill>
+  <!-- Heal -->
+<Skill name="RULES-COMPSAVOIR_HERAL">"1"</Skill>
+  <!-- Lore (Heraldry) -->
+<Skill name="RULES-COMPCOMB_BASE">"1"</Skill>
+  <!-- Melee (Basic) -->
+<Skill name="RULES-COMPCOMB_CAVAL">"1"</Skill>
+  <!-- Melee (Cavalry) -->
+<Skill name="RULES-COMPSURVEXT">"1"</Skill>
+  <!-- Outdoor Survival -->
+<Skill name="RULES-COMPCHEV_CHEVAL">"1"</Skill>
+  <!-- Ride (Horse) -->
+<Skill name="RULES-COMPMETIER_MFERR">"1"</Skill>
+  <!-- Trade (farrier) -->
+<Skill name="RULES-COMPCALM">"2"</Skill>
+  <!-- Cool -->
+<Skill name="RULES-COMPESQU">"2"</Skill>
+  <!-- Dodge -->
+<Skill name="RULES-COMPRESIST">"2"</Skill>
+  <!-- Endurance -->
+<Skill name="RULES-COMPINTIM">"2"</Skill>
+  <!-- Intimidate -->
+<Skill name="RULES-COMPLANG_BATAIL">"2"</Skill>
+  <!-- Language (Battle) -->
+<Skill name="RULES-COMPCOMB_*">"2"</Skill>
+  <!-- Melee (Any) -->
+<Skill name="RULES-COMPRESALC">"3"</Skill>
+  <!-- Consume Alcohol -->
+<Skill name="RULES-COMPCOMM">"3"</Skill>
+  <!-- Leadership -->
+<Skill name="RULES-COMPSAVOIR_GUERRE">"3"</Skill>
+  <!-- Lore (War) -->
+<Skill name="RULES-COMPPRECEP">"3"</Skill>
+  <!-- Perception  -->
+<Skill name="RULES-COMPSAVOIR_*">"4"</Skill>
+  <!-- Lore (Anyl) -->
+<Skill name="RULES-COMPSIGNES_ULRIC">"4"</Skill>
+  <!-- Secret Signs (Ulric) -->
+</SUBCHAPTER_SKILL>
+<SUBCHAPTER_TALENT>
+<Talent name="RULES-T0019">"1"</Talent>
+  <!-- Roughrider -->
+<Talent name="RULES-T0035">"1"</Talent>
+  <!-- Sturdy -->
+<Talent name="RULES-T0067">"1"</Talent>
+  <!-- Warrior Born -->
+<Talent name="RULES-T0047">"1"</Talent>
+  <!-- Hardy -->
+<Talent name="RULES-T0098">"2"</Talent>
+  <!-- Menacing -->
+<Talent name="RULES-T0168">"2"</Talent>
+  <!-- Seasoned Traveller -->
+<Talent name="RULES-T0037">"2"</Talent>
+  <!-- Strike Mighty Blow -->
+<Talent name="RULES-T0060">"2"</Talent>
+  <!-- Strike to Injure -->
+<Talent name="RULES-T0008">"3"</Talent>
+  <!-- Furious Assault -->
+<Talent name="RULES-T0076">"3"</Talent>
+  <!-- Unshakable -->
+<Talent name="RULES-T0132_TOUT">"3"</Talent>
+  <!-- Fearless (Any) -->
+<Talent name="RULES-T0138">"3"</Talent>
+  <!-- War Leader -->
+<Talent name="RULES-T0167">"4"</Talent>
+  <!-- Iron Will -->
+<Talent name="RULES-T0053">"4"</Talent>
+  <!-- Inspiring -->
+<Talent name="RULES-T0074">"4"</Talent>
+  <!-- Coolheaded -->
+<Talent name="RULES-T0050">"4"</Talent>
+  <!-- Implacable -->
+</SUBCHAPTER_TALENT>
+<SUBCHAPTER_ITEM>
+<Item name="RULES-ARMO_04">"1"</Item>
+<Item name="RULES-ARMO_07">"1"</Item>
+<Item name="Riding Horse with Saddle and Tack">"1"</Item>
+<Item name="UPINA-COMB_CAVAL_03">"1"</Item>
+<Item name="Trade Tools (Farrier)">"1"</Item>
+<Item name="Religious Symbol (Ulric)">"1"</Item>
+<Item name="Destrier with Saddle and Tack">"2"</Item>
+<Item name="RULES-ARMO_14">"2"</Item>
+<Item name="Wolfskin Cloak">"2"</Item>
+<Item name="Barding">"3"</Item>
+<Item name="Small Unit of White Wolf knights">"3"</Item>
+<Item name="Novice">"4"</Item>
+<Item name="Company of White Wolf knights">"4"</Item>
+</SUBCHAPTER_ITEM>
+</Career>
+<Career id="UPINA-WORK75">
+<Description language="ENGLISH">"Knight Panther"</Description>
+<Explanation language="ENGLISH">"You are dedicated to ensuring the fidelity of the Empire and defending it from Chaos. The Knights Panther are the most widespread secular order in the Empire, second only to the Reiksguard in power. They are not aligned with any province and will lend military aid to any general or leaders deserving of their support."</Explanation>
+<Skill>"RULES-COMPCOMB_CAVAL"</Skill>
+<Class>"CLASS_WARR"</Class>
+<SUBCHAPTER_LEVEL>
+<Level id="1">
+<Description language="ENGLISH">"Squire"</Description>
+<Salary>"TIERS_SILVER 3"</Salary>
+</Level>
+<Level id="2">
+<Description language="ENGLISH">"Knight"</Description>
+<Salary>"TIERS_SILVER 5"</Salary>
+</Level>
+<Level id="3">
+<Description language="ENGLISH">"First Knight"</Description>
+<Salary>"TIERS_GOLD 2"</Salary>
+</Level>
+<Level id="4">
+<Description language="ENGLISH">"Company Commander (Inner Circle)"</Description>
+<Salary>"TIERS_GOLD 4"</Salary>
+</Level>
+</SUBCHAPTER_LEVEL>
+<SUBCHAPTER_ATTR>
+<Attribut name="RULES-ATTR_WS">"1"</Attribut>
+<Attribut name="RULES-ATTR_BS">"0"</Attribut>
+<Attribut name="RULES-ATTR_S">"1"</Attribut>
+<Attribut name="RULES-ATTR_T">"0"</Attribut>
+<Attribut name="RULES-ATTR_I">"1"</Attribut>
+<Attribut name="RULES-ATTR_Ag">"2"</Attribut>
+<Attribut name="RULES-ATTR_Dex">"0"</Attribut>
+<Attribut name="RULES-ATTR_Int">"0"</Attribut>
+<Attribut name="RULES-ATTR_WP">"3"</Attribut>
+<Attribut name="RULES-ATTR_Fel">"4"</Attribut>
+</SUBCHAPTER_ATTR>
+<SUBCHAPTER_SKILL>
+<Skill name="RULES-COMPATHL">"1"</Skill>
+  <!-- Athletics -->
+<Skill name="RULES-COMPSOINANI">"1"</Skill>
+  <!-- Animal Care -->
+<Skill name="RULES-COMPANIM">"1"</Skill>
+  <!-- Charm Animal -->
+<Skill name="RULES-COMPGUERI">"1"</Skill>
+  <!-- Heal -->
+<Skill name="RULES-COMPSAVOIR_EMPIRE">"1"</Skill>
+  <!-- Lore (the Empire) -->
+<Skill name="RULES-COMPSAVOIR_HERAL">"1"</Skill>
+  <!-- Lore (Heraldry) -->
+<Skill name="RULES-COMPCOMB_BASE">"1"</Skill>
+  <!-- Melee (Basic) -->
+<Skill name="RULES-COMPCOMB_CAVAL">"1"</Skill>
+  <!-- Melee (Cavalry) -->
+<Skill name="RULES-COMPCHEV_CHEVAL">"1"</Skill>
+  <!-- Ride (Horse) -->
+<Skill name="RULES-COMPMETIER_MFERR">"1"</Skill>
+  <!-- Trade (farrier) -->
+<Skill name="RULES-COMPCALM">"2"</Skill>
+  <!-- Cool -->
+<Skill name="RULES-COMPESQU">"2"</Skill>
+  <!-- Dodge -->
+<Skill name="RULES-COMPRESIST">"2"</Skill>
+  <!-- Endurance -->
+<Skill name="RULES-COMPINTIM">"2"</Skill>
+  <!-- Intimidate -->
+<Skill name="RULES-COMPLANG_BATAIL">"2"</Skill>
+  <!-- Language (Battle) -->
+<Skill name="RULES-COMPCOMB_*">"2"</Skill>
+  <!-- Melee (Any) -->
+<Skill name="RULES-COMPCHARM">"3"</Skill>
+  <!-- Charm -->
+<Skill name="RULES-COMPLANG_*">"3"</Skill>
+  <!-- Language (Any) -->
+<Skill name="RULES-COMPCOMM">"3"</Skill>
+  <!-- Leadership -->
+<Skill name="RULES-COMPSAVOIR_GUERRE">"3"</Skill>
+  <!-- Lore (War) -->
+<Skill name="RULES-COMPSIGNES_PANTHER">"4"</Skill>
+  <!-- Secret Signs (Knights Panther) -->
+<Skill name="RULES-COMPSAVOIR_*">"4"</Skill>
+  <!-- Lore (Anyl) -->
+</SUBCHAPTER_SKILL>
+<SUBCHAPTER_TALENT>
+<Talent name="RULES-T0136_*">"1"</Talent>
+  <!-- Etiquette (Any) -->
+<Talent name="RULES-T0019">"1"</Talent>
+  <!-- Roughrider -->
+<Talent name="RULES-T0035">"1"</Talent>
+  <!-- Sturdy -->
+<Talent name="RULES-T0067">"1"</Talent>
+  <!-- Warrior Born -->
+<Talent name="RULES-T0098">"2"</Talent>
+  <!-- Menacing -->
+<Talent name="RULES-T0121">"2"</Talent>
+  <!-- Shieldsman -->
+<Talent name="RULES-T0037">"2"</Talent>
+  <!-- Strike Mighty Blow -->
+<Talent name="RULES-T0074">"2"</Talent>
+  <!-- Coolheaded -->
+<Talent name="RULES-T0132_CHAOS">"3"</Talent>
+  <!-- Fearless (Chaos) -->
+<Talent name="RULES-T0025">"3"</Talent>
+  <!-- Stout-hearted -->
+<Talent name="RULES-T0076">"3"</Talent>
+  <!-- Unshakable -->
+<Talent name="RULES-T0138">"3"</Talent>
+  <!-- War Leader -->
+<Talent name="RULES-T0039">"4"</Talent>
+  <!-- Disarm -->
+<Talent name="RULES-T0053">"4"</Talent>
+  <!-- Inspiring -->
+<Talent name="RULES-T0167">"4"</Talent>
+  <!-- Iron Will -->
+<Talent name="RULES-T0060">"4"</Talent>
+  <!-- Strike to Injure -->
+</SUBCHAPTER_TALENT>
+<SUBCHAPTER_ITEM>
+<Item name="RULES-ARMO_04">"1"</Item>
+<Item name="RULES-ARMO_07">"1"</Item>
+<Item name="Riding Horse with Saddle and Tack">"1"</Item>
+<Item name="RULES-COMB_BASE_07">"1"</Item>
+<Item name="Trade Tools (Farrier)">"1"</Item>
+<Item name="Great Cat Pelt">"2"</Item>
+<Item name="Destrier with Saddle and Tack">"2"</Item>
+<Item name="RULES-COMB_BASE_04">"2"</Item>
+<Item name="RULES-COMB_HAST_03">"2"</Item>
+<Item name="RULES-ARMO_14">"2"</Item>
+<Item name="Ring or Medallion with Panther emblem">"2"</Item>
+<Item name="Great Helm with Bestial Crest">"2"</Item>
+<Item name="Barding">"3"</Item>
+<Item name="Small Unit of Knights Panther">"3"</Item>
+<Item name="Squire">"4"</Item>
+<Item name="Large Unit of Knights Panther or Several Small Units of Knights">"4"</Item>
+</SUBCHAPTER_ITEM>
+</Career>
+<Career id="UPINA-WORK76">
+<Description language="ENGLISH">"Light Cavalry"</Description>
+<Explanation language="ENGLISH">"You rely on speed to find the enemy, screen your allies from his scouts, and strike without warning where he least expects. With fewer heavily armed and armoured knights than the Empire, Tilean mercenary armies rely on fast, lightly armed horsemen to provide mobile striking power. Rather than charge headlong into the teeth — and pikes — of the foe, Tilean light cavalrymen, called S#radioti in their language, prefer to strike from the flanks or, best of all, the rear, where the enemy’s baggage train presents a tempting target."</Explanation>
+<Skill>"RULES-COMPCHEV_CHEVAL"</Skill>
+<Class>"CLASS_WARR"</Class>
+<SUBCHAPTER_LEVEL>
+<Level id="1">
+<Description language="ENGLISH">"Reiver"</Description>
+<Salary>"TIERS_BRASS 3"</Salary>
+</Level>
+<Level id="2">
+<Description language="ENGLISH">"Light Cavalry"</Description>
+<Salary>"TIERS_SILVER 2"</Salary>
+</Level>
+<Level id="3">
+<Description language="ENGLISH">"Lance"</Description>
+<Salary>"TIERS_SILVER 5"</Salary>
+</Level>
+<Level id="4">
+<Description language="ENGLISH">"Captain"</Description>
+<Salary>"TIERS_GOLD 1"</Salary>
+</Level>
+</SUBCHAPTER_LEVEL>
+<SUBCHAPTER_ATTR>
+<Attribut name="RULES-ATTR_WS">"1"</Attribut>
+<Attribut name="RULES-ATTR_BS">"2"</Attribut>
+<Attribut name="RULES-ATTR_S">"0"</Attribut>
+<Attribut name="RULES-ATTR_T">"1"</Attribut>
+<Attribut name="RULES-ATTR_I">"0"</Attribut>
+<Attribut name="RULES-ATTR_Ag">"1"</Attribut>
+<Attribut name="RULES-ATTR_Dex">"0"</Attribut>
+<Attribut name="RULES-ATTR_Int">"4"</Attribut>
+<Attribut name="RULES-ATTR_WP">"0"</Attribut>
+<Attribut name="RULES-ATTR_Fel">"3"</Attribut>
+</SUBCHAPTER_ATTR>
+<SUBCHAPTER_SKILL>
+<Skill name="RULES-COMPSOINANI">"1"</Skill>
+  <!-- Animal Care -->
+<Skill name="RULES-COMPESQU">"1"</Skill>
+  <!-- Dodge -->
+<Skill name="RULES-COMPRESIST">"1"</Skill>
+  <!-- Endurance -->
+<Skill name="RULES-COMPMARCH">"1"</Skill>
+  <!-- Haggle -->
+<Skill name="RULES-COMPGUERI">"1"</Skill>
+  <!-- Heal -->
+<Skill name="RULES-COMPLANG_BATAIL">"1"</Skill>
+  <!-- Language (Battle) -->
+<Skill name="RULES-COMPCOMB_BASE">"1"</Skill>
+  <!-- Melee (Basic) -->
+<Skill name="RULES-COMPSURVEXT">"1"</Skill>
+  <!-- Outdoor Survival -->
+<Skill name="RULES-COMPPROJ_LANC">"1"</Skill>
+  <!-- Ranged (Throwing) -->
+<Skill name="RULES-COMPCHEV_CHEVAL">"1"</Skill>
+  <!-- Ride (Horse) -->
+<Skill name="RULES-COMPCHARM">"2"</Skill>
+  <!-- Charm -->
+<Skill name="RULES-COMPRESALC">"2"</Skill>
+  <!-- Consume Alcohol -->
+<Skill name="RULES-COMPPARI">"2"</Skill>
+  <!-- Gamble -->
+<Skill name="RULES-COMPRAGOT">"2"</Skill>
+  <!-- Gossip -->
+<Skill name="RULES-COMPCOMB_CAVAL">"2"</Skill>
+  <!-- Melee (Cavalry) -->
+<Skill name="RULES-COMPPROJ_ARC">"2"</Skill>
+  <!-- Ranged (Bow) -->
+<Skill name="RULES-COMPCOND">"3"</Skill>
+  <!-- Drive -->
+<Skill name="RULES-COMPINTUI">"3"</Skill>
+  <!-- Intuition  -->
+<Skill name="RULES-COMPCOMM">"3"</Skill>
+  <!-- Leadership -->
+<Skill name="RULES-COMPSAVOIR_GUERRE">"3"</Skill>
+  <!-- Lore (War) -->
+<Skill name="RULES-COMPSAVOIR_HERAL/RULES-COMPSAVOIR_LOI">"4"</Skill>
+  <!-- Lore (Law or Heraldry) -->
+<Skill name="RULES-COMPPROJ_POUDRE">"4"</Skill>
+  <!-- Ranged (Black Powder) -->
+</SUBCHAPTER_SKILL>
+<SUBCHAPTER_TALENT>
+<Talent name="RULES-T0136_MERC">"1"</Talent>
+  <!-- Etiquette (Mercenaries) -->
+<Talent name="RULES-T0111">"1"</Talent>
+  <!-- Field Dressing -->
+<Talent name="RULES-T0064">"1"</Talent>
+  <!-- Flee! -->
+<Talent name="RULES-T0077">"1"</Talent>
+  <!-- Strong Back -->
+<Talent name="RULES-T0163">"2"</Talent>
+  <!-- Combat Aware -->
+<Talent name="RULES-T0140">"2"</Talent>
+  <!-- Orientation -->
+<Talent name="RULES-T0105">"2"</Talent>
+  <!-- Rover -->
+<Talent name="RULES-T0019">"2"</Talent>
+  <!-- Roughrider -->
+<Talent name="RULES-T0028">"3"</Talent>
+  <!-- Combat Reflexes -->
+<Talent name="RULES-T0125">"3"</Talent>
+  <!-- Rapid Reload -->
+<Talent name="RULES-T0168">"3"</Talent>
+  <!-- Seasoned Traveller -->
+<Talent name="RULES-T0001">"3"</Talent>
+  <!-- Trick Riding -->
+<Talent name="RULES-T0122">"4"</Talent>
+  <!-- Commanding Presence -->
+<Talent name="RULES-T0102">"4"</Talent>
+  <!-- Dealmaker -->
+<Talent name="RULES-T0053">"4"</Talent>
+  <!-- Inspiring -->
+<Talent name="RULES-T0138">"4"</Talent>
+  <!-- War Leader -->
+</SUBCHAPTER_TALENT>
+<SUBCHAPTER_ITEM>
+<Item name="RULES-COMB_BASE_07/RULES-COMB_BASE_09">"1"</Item>
+<Item name="RULES-ARMO_04">"1"</Item>
+<Item name="Riding Horse with Saddle and Tack">"1"</Item>
+<Item name="RULES-PROJ_LANC_05">"1"</Item>
+<Item name="Light Warhorse">"2"</Item>
+<Item name="RULES-ARMO_09">"2"</Item>
+<Item name="Open Helm">"2"</Item>
+<Item name="RULES-COMB_HAST_03">"3"</Item>
+<Item name="RULES-ARMO_06">"3"</Item>
+<Item name="Squire">"3"</Item>
+<Item name="Page">"3"</Item>
+<Item name="UPINA-PROJ_POUDRE_08">"4"</Item>
+<Item name="Warhorse">"4"</Item>
+<Item name="Flamboyant Clothing">"4"</Item>
+<Item name="RULES-ARMO_14">"4"</Item>
+</SUBCHAPTER_ITEM>
+</Career>
+<Career id="UPINA-WORK77">
+<Description language="ENGLISH">"Siege Specialist"</Description>
+<Explanation language="ENGLISH">"Ît is your job to bring down castle walls and to kecp others from doing so. Let other poor fools storm the walls — you’Il provide cover, or a more subtle way in. Though besieging fortified places is common throughout the Old World — an art Humans learned from the Dwarfs — it has reached its highest refinement in T’ilea, whose Siege Specialists even Dwarfs will grudgingly admit are ‘passable’."</Explanation>
+<Skill>"RULES-COMPPROJ_ARB"</Skill>
+<Class>"CLASS_WARR"</Class>
+<SUBCHAPTER_LEVEL>
+<Level id="1">
+<Description language="ENGLISH">"Crossbowman"</Description>
+<Salary>"TIERS_SILVER 1"</Salary>
+</Level>
+<Level id="2">
+<Description language="ENGLISH">"Siege Specialist"</Description>
+<Salary>"TIERS_SILVER 3"</Salary>
+</Level>
+<Level id="3">
+<Description language="ENGLISH">"Sapper"</Description>
+<Salary>"TIERS_SILVER 5"</Salary>
+</Level>
+<Level id="4">
+<Description language="ENGLISH">"Siege Master"</Description>
+<Salary>"TIERS_GOLD 1"</Salary>
+</Level>
+</SUBCHAPTER_LEVEL>
+<SUBCHAPTER_ATTR>
+<Attribut name="RULES-ATTR_WS">"1"</Attribut>
+<Attribut name="RULES-ATTR_BS">"1"</Attribut>
+<Attribut name="RULES-ATTR_S">"1"</Attribut>
+<Attribut name="RULES-ATTR_T">"0"</Attribut>
+<Attribut name="RULES-ATTR_I">"0"</Attribut>
+<Attribut name="RULES-ATTR_Ag">"2"</Attribut>
+<Attribut name="RULES-ATTR_Dex">"0"</Attribut>
+<Attribut name="RULES-ATTR_Int">"3"</Attribut>
+<Attribut name="RULES-ATTR_WP">"0"</Attribut>
+<Attribut name="RULES-ATTR_Fel">"4"</Attribut>
+</SUBCHAPTER_ATTR>
+<SUBCHAPTER_SKILL>
+<Skill name="RULES-COMPATHL">"1"</Skill>
+  <!-- Athletics -->
+<Skill name="RULES-COMPESCAL">"1"</Skill>
+  <!-- Climb -->
+<Skill name="RULES-COMPRESALC">"1"</Skill>
+  <!-- Consume Alcohol -->
+<Skill name="RULES-COMPRESIST">"1"</Skill>
+  <!-- Endurance -->
+<Skill name="RULES-COMPPARI">"1"</Skill>
+  <!-- Gamble -->
+<Skill name="RULES-COMPRAGOT">"1"</Skill>
+  <!-- Gossip -->
+<Skill name="RULES-COMPLANG_BATAIL">"1"</Skill>
+  <!-- Language (Battle) -->
+<Skill name="RULES-COMPCOMB_BASE">"1"</Skill>
+  <!-- Melee (Basic) -->
+<Skill name="RULES-COMPSURVEXT">"1"</Skill>
+  <!-- Outdoor Survival -->
+<Skill name="RULES-COMPPROJ_ARB">"1"</Skill>
+  <!-- Ranged (Crossbow) -->
+<Skill name="RULES-COMPINTUI">"2"</Skill>
+  <!-- Intuition  -->
+<Skill name="RULES-COMPSAVOIR_ING">"2"</Skill>
+  <!-- Lore (Engineering) -->
+<Skill name="RULES-COMPCOMB_2M">"2"</Skill>
+  <!-- Melee (Two hands) -->
+<Skill name="RULES-COMPPRECEP">"2"</Skill>
+  <!-- Perception  -->
+<Skill name="RULES-COMPPIEG">"2"</Skill>
+  <!-- Set Trap -->
+<Skill name="RULES-COMPMETIER_MINNER">"2"</Skill>
+  <!-- Trade (Miner) -->
+<Skill name="RULES-COMPCOMM">"3"</Skill>
+  <!-- Leadership -->
+<Skill name="RULES-COMPPROJ_POUDRE/RULES-COMPPROJ_ING">"3"</Skill>
+  <!-- Ranged (black powder and engineering) -->
+<Skill name="RULES-COMPMETIER_EXPL">"3"</Skill>
+  <!-- Trade (Explosives) -->
+<Skill name="RULES-COMPMARCH">"4"</Skill>
+  <!-- Haggle -->
+<Skill name="RULES-COMPSAVOIR_LOI">"4"</Skill>
+  <!-- Lore (Law) -->
+<Skill name="RULES-COMPCHEV_CHEVAL">"4"</Skill>
+  <!-- Ride (Horse) -->
+</SUBCHAPTER_SKILL>
+<SUBCHAPTER_TALENT>
+<Talent name="RULES-T0136_MERC">"1"</Talent>
+  <!-- Etiquette (Mercenaries) -->
+<Talent name="RULES-T0153">"1"</Talent>
+  <!-- Marksman -->
+<Talent name="RULES-T0125">"1"</Talent>
+  <!-- Rapid Reload -->
+<Talent name="RULES-T0077">"1"</Talent>
+  <!-- Strong Back -->
+<Talent name="RULES-T0027">"2"</Talent>
+  <!-- Enclosed Fighter -->
+<Talent name="RULES-T0047">"2"</Talent>
+  <!-- Hardy -->
+<Talent name="RULES-T0140">"2"</Talent>
+  <!-- Orientation -->
+<Talent name="RULES-T0124">"2"</Talent>
+  <!-- Tunnel Rat -->
+<Talent name="RULES-T0149">"3"</Talent>
+  <!-- Accurate Shot -->
+<Talent name="RULES-T0092_EXPLO">"3"</Talent>
+  <!-- Craftsman (Explosives) -->
+<Talent name="RULES-T0006">"3"</Talent>
+  <!-- Gunner -->
+<Talent name="RULES-T0076">"3"</Talent>
+  <!-- Unshakable -->
+<Talent name="RULES-T0163">"4"</Talent>
+  <!-- Combat Aware -->
+<Talent name="RULES-T0157_INGE">"4"</Talent>
+  <!-- Master Tradesman (Engineering) -->
+<Talent name="RULES-T0117">"4"</Talent>
+  <!-- Savvy -->
+<Talent name="RULES-T0138">"4"</Talent>
+  <!-- War Leader -->
+</SUBCHAPTER_TALENT>
+<SUBCHAPTER_ITEM>
+<Item name="RULES-PROJ_ARB_01">"1"</Item>
+<Item name="RULES-COMB_BASE_*">"1"</Item>
+<Item name="UPINA-COMB_BASE_24">"1"</Item>
+<Item name="RULES-ARMO_04">"1"</Item>
+<Item name="Feathered Hat">"1"</Item>
+<Item name="Skullcap">"1"</Item>
+<Item name="RULES-COMB_2M_04">"2"</Item>
+<Item name="Shovel">"2"</Item>
+<Item name="Book of Ballistics Tables">"3"</Item>
+<Item name="Set of Six 60-sccond Fuses">"3"</Item>
+<Item name="RULES-ARMO_14">"3"</Item>
+<Item name="RULES-PROJ_POUDRE_04">"3"</Item>
+<Item name="Trade Tools (Engineer)">"3"</Item>
+<Item name="Quality Clothes">"4"</Item>
+<Item name="Light Warhorse">"4"</Item>
+<Item name="Pavilion">"4"</Item>
+<Item name="Tent with Body Servant">"4"</Item>
+</SUBCHAPTER_ITEM>
+</Career>
+<Career id="UPINA-WORK78">
+<Description language="ENGLISH">"Pikeman"</Description>
+<Explanation language="ENGLISH">"Discipline and drill. If you keep your wits about you and the enemy in front, no force on a battlefield, not even the heaviest Imperial Knights, can stop a phalanx of Pikemen. All towns and villages in the Old World have their militias, masses of armed residents who can be turned out on short notice to defend homes and fields or fight for a few weeks in their lord’s service. Their lack of discipline and desire to return home to families and trades, however, makes them of limited use on long campaigns or when facing heavily armed and armoured horsemen."</Explanation>
+<Skill>"RULES-COMPCOMB_HAST"</Skill>
+<Class>"CLASS_WARR"</Class>
+<SUBCHAPTER_LEVEL>
+<Level id="1">
+<Description language="ENGLISH">"Recruit"</Description>
+<Salary>"TIERS_SILVER 1"</Salary>
+</Level>
+<Level id="2">
+<Description language="ENGLISH">"Pikeman"</Description>
+<Salary>"TIERS_SILVER 3"</Salary>
+</Level>
+<Level id="3">
+<Description language="ENGLISH">"File Leader"</Description>
+<Salary>"TIERS_SILVER 5"</Salary>
+</Level>
+<Level id="4">
+<Description language="ENGLISH">"Banner Captain"</Description>
+<Salary>"TIERS_GOLD 1"</Salary>
+</Level>
+</SUBCHAPTER_LEVEL>
+<SUBCHAPTER_ATTR>
+<Attribut name="RULES-ATTR_WS">"1"</Attribut>
+<Attribut name="RULES-ATTR_BS">"0"</Attribut>
+<Attribut name="RULES-ATTR_S">"1"</Attribut>
+<Attribut name="RULES-ATTR_T">"1"</Attribut>
+<Attribut name="RULES-ATTR_I">"2"</Attribut>
+<Attribut name="RULES-ATTR_Ag">"0"</Attribut>
+<Attribut name="RULES-ATTR_Dex">"0"</Attribut>
+<Attribut name="RULES-ATTR_Int">"0"</Attribut>
+<Attribut name="RULES-ATTR_WP">"3"</Attribut>
+<Attribut name="RULES-ATTR_Fel">"4"</Attribut>
+</SUBCHAPTER_ATTR>
+<SUBCHAPTER_SKILL>
+<Skill name="RULES-COMPATHL">"1"</Skill>
+  <!-- Athletics -->
+<Skill name="RULES-COMPESCAL">"1"</Skill>
+  <!-- Climb -->
+<Skill name="RULES-COMPRESALC">"1"</Skill>
+  <!-- Consume Alcohol -->
+<Skill name="RULES-COMPESQU">"1"</Skill>
+  <!-- Dodge -->
+<Skill name="RULES-COMPRESIST">"1"</Skill>
+  <!-- Endurance -->
+<Skill name="RULES-COMPPARI">"1"</Skill>
+  <!-- Gamble -->
+<Skill name="RULES-COMPLANG_BATAIL">"1"</Skill>
+  <!-- Language (Battle) -->
+<Skill name="RULES-COMPLANG_TILE">"1"</Skill>
+  <!-- Language (Tilean) -->
+<Skill name="RULES-COMPCOMB_BASE">"1"</Skill>
+  <!-- Melee (Basic) -->
+<Skill name="RULES-COMPCOMB_HAST">"1"</Skill>
+  <!-- Melee (Polearm) -->
+<Skill name="RULES-COMPCALM">"2"</Skill>
+  <!-- Cool -->
+<Skill name="RULES-COMPRAGOT">"2"</Skill>
+  <!-- Gossip -->
+<Skill name="RULES-COMPGUERI">"2"</Skill>
+  <!-- Heal -->
+<Skill name="RULES-COMPINTIM">"2"</Skill>
+  <!-- Intimidate -->
+<Skill name="RULES-COMPSAVOIR_GUERRE">"2"</Skill>
+  <!-- Lore (War) -->
+<Skill name="RULES-COMPSURVEXT">"2"</Skill>
+  <!-- Outdoor Survival -->
+<Skill name="RULES-COMPMARCH">"3"</Skill>
+  <!-- Haggle -->
+<Skill name="RULES-COMPINTUI">"3"</Skill>
+  <!-- Intuition  -->
+<Skill name="RULES-COMPCOMM">"3"</Skill>
+  <!-- Leadership -->
+<Skill name="RULES-COMPPRECEP">"3"</Skill>
+  <!-- Perception  -->
+<Skill name="RULES-COMPSAVOIR_LOI">"4"</Skill>
+  <!-- Lore (Law) -->
+<Skill name="RULES-COMPCHEV_CHEVAL">"4"</Skill>
+  <!-- Ride (Horse) -->
+</SUBCHAPTER_SKILL>
+<SUBCHAPTER_TALENT>
+<Talent name="RULES-T0036">"1"</Talent>
+  <!-- Drilled -->
+<Talent name="RULES-T0062">"1"</Talent>
+  <!-- Reaction Strike -->
+<Talent name="RULES-T0158">"1"</Talent>
+  <!-- Very Strong -->
+<Talent name="RULES-T0067">"1"</Talent>
+  <!-- Warrior Born -->
+<Talent name="RULES-T0094">"2"</Talent>
+  <!-- Diceman -->
+<Talent name="RULES-T0027">"2"</Talent>
+  <!-- Enclosed Fighter -->
+<Talent name="RULES-T0136_MERC">"2"</Talent>
+  <!-- Etiquette (Mercenaries) -->
+<Talent name="RULES-T0132_CAVALRY">"2"</Talent>
+  <!-- Fearless (Cavalry) -->
+<Talent name="RULES-T0163">"3"</Talent>
+  <!-- Combat Aware -->
+<Talent name="RULES-T0028">"3"</Talent>
+  <!-- Combat Reflexes -->
+<Talent name="RULES-T0111">"3"</Talent>
+  <!-- Field Dressing -->
+<Talent name="RULES-T0131">"3"</Talent>
+  <!-- Robust -->
+<Talent name="RULES-T0053">"4"</Talent>
+  <!-- Inspiring -->
+<Talent name="RULES-T0076">"4"</Talent>
+  <!-- Unshakable -->
+<Talent name="RULES-T0159">"4"</Talent>
+  <!-- Very Resilient -->
+<Talent name="RULES-T0138">"4"</Talent>
+  <!-- War Leader -->
+</SUBCHAPTER_TALENT>
+<SUBCHAPTER_ITEM>
+<Item name="RULES-COMB_BASE_*">"1"</Item>
+<Item name="RULES-ARMO_05">"1"</Item>
+<Item name="Leather Skullcap">"1"</Item>
+<Item name="UPINA-COMB_HAST_12">"1"</Item>
+<Item name="Uniform in Unit Colours">"1"</Item>
+<Item name="Dice">"2"</Item>
+<Item name="RULES-ARMO_09">"2"</Item>
+<Item name="Open Helm">"2"</Item>
+<Item name="RULES-ARMO_14">"3"</Item>
+<Item name="Sash of Rank">"3"</Item>
+<Item name="Baton of Rank">"4"</Item>
+<Item name="Banner-Bearer">"4"</Item>
+<Item name="Light Warhorse">"4"</Item>
+<Item name="Uniform (Q)">"4"</Item>
+<Item name="RULES-ARMO_10">"4"</Item>
+<Item name="Phalanx of Pikemen">"4"</Item>
+<Item name="Unit Banner">"4"</Item>
+<Item name="RULES-ARMO_13">"4"</Item>
+</SUBCHAPTER_ITEM>
+</Career>
+<Career id="UPINA-WORK79">
+<Description language="ENGLISH">"Priest of Myrmidia"</Description>
+<Explanation language="ENGLISH">"You value honour, obedience and tactical martial prowess, in emulation of your patron goddess, Myrmidia. Myrmidian Priests from the Order of the Righteous Spear and Order of Fury help organise cult meetings, spread its teachings, and lead its ceremonies. They are often sought as advisors by generals and mercenary commanders, particularly in Tilea and Estalia."</Explanation>
+<Skill>"RULES-COMPSAVOIR_GUERRE"</Skill>
+<Class>"CLASS_WARR"</Class>
+<SUBCHAPTER_LEVEL>
+<Level id="1">
+<Description language="ENGLISH">"First Eagle"</Description>
+<Salary>"TIERS_SILVER 2"</Salary>
+</Level>
+<Level id="2">
+<Description language="ENGLISH">"Warrior Priest"</Description>
+<Salary>"TIERS_SILVER 3"</Salary>
+</Level>
+<Level id="3">
+<Description language="ENGLISH">"Priest Sergean"</Description>
+<Salary>"TIERS_SILVER 4"</Salary>
+</Level>
+<Level id="4">
+<Description language="ENGLISH">"Priest Captain"</Description>
+<Salary>"TIERS_SILVER 5"</Salary>
+</Level>
+</SUBCHAPTER_LEVEL>
+<SUBCHAPTER_ATTR>
+<Attribut name="RULES-ATTR_WS">"1"</Attribut>
+<Attribut name="RULES-ATTR_BS">"0"</Attribut>
+<Attribut name="RULES-ATTR_S">"4"</Attribut>
+<Attribut name="RULES-ATTR_T">"0"</Attribut>
+<Attribut name="RULES-ATTR_I">"2"</Attribut>
+<Attribut name="RULES-ATTR_Ag">"3"</Attribut>
+<Attribut name="RULES-ATTR_Dex">"0"</Attribut>
+<Attribut name="RULES-ATTR_Int">"1"</Attribut>
+<Attribut name="RULES-ATTR_WP">"0"</Attribut>
+<Attribut name="RULES-ATTR_Fel">"1"</Attribut>
+</SUBCHAPTER_ATTR>
+<SUBCHAPTER_SKILL>
+<Skill name="RULES-COMPCALM">"1"</Skill>
+  <!-- Cool -->
+<Skill name="RULES-COMPESQU">"1"</Skill>
+  <!-- Dodge -->
+<Skill name="RULES-COMPLANG_BATAIL">"1"</Skill>
+  <!-- Language (Battle) -->
+<Skill name="RULES-COMPCOMM">"1"</Skill>
+  <!-- Leadership -->
+<Skill name="RULES-COMPSAVOIR_GUERRE">"1"</Skill>
+  <!-- Lore (War) -->
+<Skill name="RULES-COMPSAVOIR_THEO">"1"</Skill>
+  <!-- Lore (Theology) -->
+<Skill name="RULES-COMPCOMB_BASE">"1"</Skill>
+  <!-- Melee (Basic) -->
+<Skill name="RULES-COMPCOMB_HAST">"1"</Skill>
+  <!-- Melee (Polearm) -->
+<Skill name="RULES-COMPPRECEP">"1"</Skill>
+  <!-- Perception  -->
+<Skill name="RULES-COMPPRIERE">"1"</Skill>
+  <!-- Pray -->
+<Skill name="RULES-COMPCHARM">"2"</Skill>
+  <!-- Charm -->
+<Skill name="RULES-COMPDIVERT_DISC">"2"</Skill>
+  <!-- Entertainment (Speech) -->
+<Skill name="RULES-COMPGUERI">"2"</Skill>
+  <!-- Heal -->
+<Skill name="RULES-COMPINTUI">"2"</Skill>
+  <!-- Intuition  -->
+<Skill name="RULES-COMPCOMB_*">"2"</Skill>
+  <!-- Melee (Any) -->
+<Skill name="RULES-COMPPROJ_*">"2"</Skill>
+  <!-- Ranged (Any) -->
+<Skill name="RULES-COMPSAVOIR_*">"3"</Skill>
+  <!-- Lore (Anyl) -->
+<Skill name="RULES-COMPCOMB_*">"3"</Skill>
+  <!-- Melee (Any) -->
+<Skill name="RULES-COMPRECH">"3"</Skill>
+  <!-- Research -->
+<Skill name="RULES-COMPMETIER_WEAPONSMITH/RULES-COMPMETIER_ARMOURER">"3"</Skill>
+  <!-- Trade (Weaponsmith or Armourer) -->
+<Skill name="RULES-COMPSOINANI">"4"</Skill>
+  <!-- Animal Care -->
+<Skill name="RULES-COMPCHEV_CHEVAL">"4"</Skill>
+  <!-- Ride (Horse) -->
+</SUBCHAPTER_SKILL>
+<SUBCHAPTER_TALENT>
+<Talent name="RULES-T0012_MYRMIDIA">"1"</Talent>
+  <!-- Blessed of Myrmidia (Strategy) -->
+<Talent name="RULES-T0163">"1"</Talent>
+  <!-- Combat Aware -->
+<Talent name="RULES-T0136_CULTIST">"1"</Talent>
+  <!-- Etiquette (Cultists) -->
+<Talent name="RULES-T0084">"1"</Talent>
+  <!-- Read/Write -->
+<Talent name="RULES-T0036">"2"</Talent>
+  <!-- Drilled -->
+<Talent name="RULES-T0053">"2"</Talent>
+  <!-- Inspiring -->
+<Talent name="RULES-T0080_MYRMIDIA">"2"</Talent>
+  <!-- Invoke Myrmidia (Strategy) -->
+<Talent name="RULES-T0121">"2"</Talent>
+  <!-- Shieldsman -->
+<Talent name="RULES-T0146">"3"</Talent>
+  <!-- Bookish -->
+<Talent name="RULES-T0165">"3"</Talent>
+  <!-- Holy Visions -->
+<Talent name="RULES-T0005">"3"</Talent>
+  <!-- Pure Soul -->
+<Talent name="RULES-T0025">"3"</Talent>
+  <!-- Stout-hearted -->
+<Talent name="RULES-T0095">"4"</Talent>
+  <!-- Combat Master -->
+<Talent name="RULES-T0028">"4"</Talent>
+  <!-- Combat Reflexes -->
+<Talent name="RULES-T0132_TOUT">"4"</Talent>
+  <!-- Fearless (Any) -->
+<Talent name="RULES-T0138">"4"</Talent>
+  <!-- War Leader -->
+</SUBCHAPTER_TALENT>
+<SUBCHAPTER_ITEM>
+<Item name="Myrmidian Holy Book">"1"</Item>
+<Item name="RULES-ARMO_14">"2"</Item>
+<Item name="RULES-ARMO_10">"3"</Item>
+<Item name="RULES-ARMO_11">"3"</Item>
+<Item name="RULES-ARMO_12">"3"</Item>
+<Item name="RULES-ARMO_13">"3"</Item>
+<Item name="RULES-ARMO_14">"3"</Item>
+<Item name="Religious Relic (Myrmidian)">"4"</Item>
+</SUBCHAPTER_ITEM>
+</Career>
+</DATA_CAREER>
+<DATA_WEAPON>
+<Weapon id="UPINA-COMB_BASE_11">
+<Description language="ENGLISH">"Axe"</Description>
+<Skill>"RULES-COMPCOMB_BASE"</Skill>
+<Damage>"+(BATTR_S)+4"</Damage>
+<Availability>"DISPO_COMMON"</Availability>
+<Reach>"WEAPR_MID"</Reach>
+<Price>"10/-"</Price>
+<Encumbrance>"1"</Encumbrance>
+<Quality>"WEAPB30,WEAPB31"</Quality>
+<Hand>"1"</Hand>
+<Ammunition>"0"</Ammunition>
+</Weapon>
+<Weapon id="UPINA-COMB_BASE_12">
+<Description language="ENGLISH">"Ballock Knife"</Description>
+<Skill>"RULES-COMPCOMB_BASE"</Skill>
+<Damage>"+(BATTR_S)+1"</Damage>
+<Availability>"DISPO_LIMITED"</Availability>
+<Reach>"WEAPR_CLOSE"</Reach>
+<Price>"16/-"</Price>
+<Encumbrance>"0"</Encumbrance>
+<Quality>"WEAPB12,WEAPB22,WEAPB16"</Quality>
+<Hand>"1"</Hand>
+<Ammunition>"0"</Ammunition>
+</Weapon>
+<Weapon id="UPINA-COMB_BASE_13">
+<Description language="ENGLISH">"Club"</Description>
+<Skill>"RULES-COMPCOMB_BASE"</Skill>
+<Damage>"+(BATTR_S)+4"</Damage>
+<Availability>"DISPO_COMMON"</Availability>
+<Reach>"WEAPR_MID"</Reach>
+<Price>"4/-"</Price>
+<Encumbrance>"0"</Encumbrance>
+<Quality>"WEAPB27,WEAPB31"</Quality>
+<Hand>"1"</Hand>
+<Ammunition>"0"</Ammunition>
+</Weapon>
+<Weapon id="UPINA-COMB_BASE_14">
+<Description language="ENGLISH">"Dagger"</Description>
+<Skill>"RULES-COMPCOMB_BASE"</Skill>
+<Damage>"+(BATTR_S)+2"</Damage>
+<Availability>"DISPO_COMMON"</Availability>
+<Reach>"WEAPR_CLOSE"</Reach>
+<Price>"16/-"</Price>
+<Encumbrance>"0"</Encumbrance>
+<Quality>"-"</Quality>
+<Hand>"1"</Hand>
+<Ammunition>"0"</Ammunition>
+</Weapon>
+<Weapon id="UPINA-COMB_BASE_15">
+<Description language="ENGLISH">"Knife"</Description>
+<Skill>"RULES-COMPCOMB_BASE"</Skill>
+<Damage>"+(BATTR_S)+1"</Damage>
+<Availability>"DISPO_COMMON"</Availability>
+<Reach>"WEAPR_CLOSE"</Reach>
+<Price>"8/-"</Price>
+<Encumbrance>"0"</Encumbrance>
+<Quality>"WEAPB27"</Quality>
+<Hand>"1"</Hand>
+<Ammunition>"0"</Ammunition>
+</Weapon>
+<Weapon id="UPINA-COMB_BASE_16">
+<Description language="ENGLISH">"Mace"</Description>
+<Skill>"RULES-COMPCOMB_BASE"</Skill>
+<Damage>"+(BATTR_S)+4"</Damage>
+<Availability>"DISPO_COMMON"</Availability>
+<Reach>"WEAPR_MID"</Reach>
+<Price>"15/-"</Price>
+<Encumbrance>"1"</Encumbrance>
+<Quality>"WEAPB04,WEAPB31"</Quality>
+<Hand>"1"</Hand>
+<Ammunition>"0"</Ammunition>
+</Weapon>
+<Weapon id="UPINA-COMB_BASE_17">
+<Description language="ENGLISH">"Military Pick"</Description>
+<Skill>"RULES-COMPCOMB_BASE"</Skill>
+<Damage>"+(BATTR_S)+4"</Damage>
+<Availability>"DISPO_LIMITED"</Availability>
+<Reach>"WEAPR_MID"</Reach>
+<Price>"15/-"</Price>
+<Encumbrance>"1"</Encumbrance>
+<Quality>"WEAPB22,WEAPB31"</Quality>
+<Hand>"1"</Hand>
+<Ammunition>"0"</Ammunition>
+</Weapon>
+<Weapon id="UPINA-COMB_BASE_18">
+<Description language="ENGLISH">"Scimitar"</Description>
+<Skill>"RULES-COMPCOMB_BASE"</Skill>
+<Damage>"+(BATTR_S)+4"</Damage>
+<Availability>"DISPO_LIMITED"</Availability>
+<Reach>"WEAPR_SHORT"</Reach>
+<Price>"1 GC"</Price>
+<Encumbrance>"1"</Encumbrance>
+<Quality>"WEAPB32 1"</Quality>
+<Hand>"1"</Hand>
+<Ammunition>"0"</Ammunition>
+</Weapon>
+<Weapon id="UPINA-COMB_BASE_19">
+<Description language="ENGLISH">"Sword"</Description>
+<Skill>"RULES-COMPCOMB_BASE"</Skill>
+<Damage>"+(BATTR_S)+4"</Damage>
+<Availability>"DISPO_COMMON"</Availability>
+<Reach>"WEAPR_MID"</Reach>
+<Price>"1 GC"</Price>
+<Encumbrance>"1"</Encumbrance>
+<Quality>"-"</Quality>
+<Hand>"1"</Hand>
+<Ammunition>"0"</Ammunition>
+</Weapon>
+<Weapon id="UPINA-COMB_BASE_20">
+<Description language="ENGLISH">"Warhammer"</Description>
+<Skill>"RULES-COMPCOMB_BASE"</Skill>
+<Damage>"+(BATTR_S)+4"</Damage>
+<Availability>"DISPO_LIMITED"</Availability>
+<Reach>"WEAPR_MID"</Reach>
+<Price>"1 GC"</Price>
+<Encumbrance>"1"</Encumbrance>
+<Quality>"WEAPB31,WEAPB04,WEAPB22"</Quality>
+<Hand>"1"</Hand>
+<Ammunition>"0"</Ammunition>
+</Weapon>
+<Weapon id="UPINA-COMB_BASE_21">
+<Description language="ENGLISH">"Shield (Buckler)"</Description>
+<Skill>"RULES-COMPCOMB_BASE"</Skill>
+<Damage>"+(BATTR_S)+1"</Damage>
+<Availability>"DISPO_COMMON"</Availability>
+<Reach>"WEAPR_PERSO"</Reach>
+<Price>"18/2"</Price>
+<Encumbrance>"0"</Encumbrance>
+<Quality>"WEAPB18 1,WEAPB08,WEAPB27"</Quality>
+<Hand>"1"</Hand>
+<Ammunition>"0"</Ammunition>
+</Weapon>
+<Weapon id="UPINA-COMB_BASE_22">
+<Description language="ENGLISH">"Shield"</Description>
+<Skill>"RULES-COMPCOMB_BASE"</Skill>
+<Damage>"+(BATTR_S)+2"</Damage>
+<Availability>"DISPO_COMMON"</Availability>
+<Reach>"WEAPR_CLOSE"</Reach>
+<Price>"2GC"</Price>
+<Encumbrance>"1"</Encumbrance>
+<Quality>"WEAPB18 2,WEAPB08,WEAPB27"</Quality>
+<Hand>"1"</Hand>
+<Ammunition>"0"</Ammunition>
+</Weapon>
+<Weapon id="UPINA-COMB_BASE_23">
+<Description language="ENGLISH">"Shield (Large)"</Description>
+<Skill>"RULES-COMPCOMB_BASE"</Skill>
+<Damage>"+(BATTR_S)+3"</Damage>
+<Availability>"DISPO_COMMON"</Availability>
+<Reach>"WEAPR_CLOSE"</Reach>
+<Price>"3GC"</Price>
+<Encumbrance>"3"</Encumbrance>
+<Quality>"WEAPB18 3,WEAPB08,WEAPB27"</Quality>
+<Hand>"1"</Hand>
+<Ammunition>"0"</Ammunition>
+</Weapon>
+<Weapon id="UPINA-COMB_BASE_24">
+<Description language="ENGLISH">"Pavise"</Description>
+<Skill>"RULES-COMPCOMB_BASE"</Skill>
+<Damage>"+(BATTR_S)+2"</Damage>
+<Availability>"DISPO_RARE"</Availability>
+<Reach>"-"</Reach>
+<Price>"3 GC 15/-"</Price>
+<Encumbrance>"4"</Encumbrance>
+<Quality>"WEAPB18 5"</Quality>
+<Hand>"1"</Hand>
+<Ammunition>"0"</Ammunition>
+</Weapon>
+<Weapon id="UPINA-COMB_CAVAL_03">
+<Description language="ENGLISH">"Cavalry Hammer"</Description>
+<Skill>"RULES-COMPCOMB_CAVAL"</Skill>
+<Damage>"+(BATTR_S)+5"</Damage>
+<Availability>"DISPO_LIMITED"</Availability>
+<Reach>"WEAPR_LONG"</Reach>
+<Price>"3GC"</Price>
+<Encumbrance>"3"</Encumbrance>
+<Quality>"WEAPB04"</Quality>
+<Hand>"2"</Hand>
+<Ammunition>"0"</Ammunition>
+</Weapon>
+<Weapon id="UPINA-COMB_CAVAL_04">
+<Description language="ENGLISH">"Demi-Lance"</Description>
+<Skill>"RULES-COMPCOMB_CAVAL"</Skill>
+<Damage>"(BATTR_S)+5*"</Damage>
+<Availability>"DISPO_LIMITED"</Availability>
+<Reach>"WEAPR_LONG"</Reach>
+<Price>"1GC"</Price>
+<Encumbrance>"2"</Encumbrance>
+<Quality>"WEAPB21,WEAPB12"</Quality>
+<Hand>"1"</Hand>
+<Ammunition>"0"</Ammunition>
+</Weapon>
+<Weapon id="UPINA-COMB_CAVAL_05">
+<Description language="ENGLISH">"Lance"</Description>
+<Skill>"RULES-COMPCOMB_CAVAL"</Skill>
+<Damage>"+(BATTR_S)+6*"</Damage>
+<Availability>"DISPO_LIMITED"</Availability>
+<Reach>"WEAPR_BIG"</Reach>
+<Price>"1GC"</Price>
+<Encumbrance>"3"</Encumbrance>
+<Quality>"WEAPB21,WEAPB12"</Quality>
+<Hand>"1"</Hand>
+<Ammunition>"0"</Ammunition>
+</Weapon>
+<Weapon id="UPINA-COMB_CAVAL_06">
+<Description language="ENGLISH">"Sabre"</Description>
+<Skill>"RULES-COMPCOMB_CAVAL"</Skill>
+<Damage>"(BATTR_S)+4"</Damage>
+<Availability>"DISPO_LIMITED"</Availability>
+<Reach>"WEAPR_MID"</Reach>
+<Price>"2GC"</Price>
+<Encumbrance>"1"</Encumbrance>
+<Quality>"WEAPB32 1"</Quality>
+<Hand>"1"</Hand>
+<Ammunition>"0"</Ammunition>
+</Weapon>
+<Weapon id="UPINA-COMB_ESCR_03">
+<Description language="ENGLISH">"Foil"</Description>
+<Skill>"RULES-COMPCOMB_ESCR"</Skill>
+<Damage>"+(BATTR_S)+3"</Damage>
+<Availability>"DISPO_LIMITED"</Availability>
+<Reach>"WEAPR_MID"</Reach>
+<Price>"5GC"</Price>
+<Encumbrance>"1"</Encumbrance>
+<Quality>"WEAPB20,WEAPB12,WEAPB16,WEAPB27"</Quality>
+<Hand>"1"</Hand>
+<Ammunition>"0"</Ammunition>
+</Weapon>
+<Weapon id="UPINA-COMB_ESCR_04">
+<Description language="ENGLISH">"Rapier"</Description>
+<Skill>"RULES-COMPCOMB_ESCR"</Skill>
+<Damage>"+(BATTR_S)+4"</Damage>
+<Availability>"DISPO_LIMITED"</Availability>
+<Reach>"WEAPR_LONG"</Reach>
+<Price>"5GC"</Price>
+<Encumbrance>"1"</Encumbrance>
+<Quality>"WEAPB20,WEAPB12"</Quality>
+<Hand>"1"</Hand>
+<Ammunition>"0"</Ammunition>
+</Weapon>
+<Weapon id="UPINA-COMB_ESCR_05">
+<Description language="ENGLISH">"Smallsword"</Description>
+<Skill>"RULES-COMPCOMB_ESCR"</Skill>
+<Damage>"+(BATTR_S)+2"</Damage>
+<Availability>"DISPO_LIMITED"</Availability>
+<Reach>"WEAPR_MID"</Reach>
+<Price>"4GC"</Price>
+<Encumbrance>"1"</Encumbrance>
+<Quality>"WEAPB20,WEAPB12,WEAPB16"</Quality>
+<Hand>"1"</Hand>
+<Ammunition>"0"</Ammunition>
+</Weapon>
+<Weapon id="UPINA-COMB_BAGAR_03">
+<Description language="ENGLISH">"Spiked Gauntlet"</Description>
+<Skill>"RULES-COMPCOMB_BAGAR"</Skill>
+<Damage>"+(BATTR_S)+3"</Damage>
+<Availability>"DISPO_LIMITED"</Availability>
+<Reach>"WEAPR_PERSO"</Reach>
+<Price>"2 GC"</Price>
+<Encumbrance>"1"</Encumbrance>
+<Quality>"WEAPB12,WEAPB31"</Quality>
+<Hand>"1"</Hand>
+<Ammunition>"0"</Ammunition>
+</Weapon>
+<Weapon id="UPINA-COMB_BAGAR_04">
+<Description language="ENGLISH">"Boat Hook"</Description>
+<Skill>"RULES-COMPCOMB_BAGAR"</Skill>
+<Damage>"+(BATTR_S)+4"</Damage>
+<Availability>"DISPO_COMMON"</Availability>
+<Reach>"WEAPR_SHORT"</Reach>
+<Price>"6/-"</Price>
+<Encumbrance>"0"</Encumbrance>
+<Quality>"WEAPB34,WEAPB27"</Quality>
+<Hand>"1"</Hand>
+<Ammunition>"0"</Ammunition>
+</Weapon>
+<Weapon id="UPINA-COMB_BAGAR_05">
+<Description language="ENGLISH">"Garrote"</Description>
+<Skill>"RULES-COMPCOMB_BAGAR"</Skill>
+<Damage>"+(BATTR_S)+2"</Damage>
+<Availability>"DISPO_RARE"</Availability>
+<Reach>"WEAPR_PERSO"</Reach>
+<Price>"1/-"</Price>
+<Encumbrance>"0"</Encumbrance>
+<Quality>"WEAPB17,WEAPB28,WEAPB31,WEAPB27"</Quality>
+<Hand>"2"</Hand>
+<Ammunition>"0"</Ammunition>
+</Weapon>
+<Weapon id="UPINA-COMB_BAGAR_06">
+<Description language="ENGLISH">"Knuckledusters"</Description>
+<Skill>"RULES-COMPCOMB_BAGAR"</Skill>
+<Damage>"+(BATTR_S)+2"</Damage>
+<Availability>"DISPO_COMMON"</Availability>
+<Reach>"WEAPR_PERSO"</Reach>
+<Price>"2/6"</Price>
+<Encumbrance>"0"</Encumbrance>
+<Quality>"-"</Quality>
+<Hand>"1"</Hand>
+<Ammunition>"0"</Ammunition>
+</Weapon>
+<Weapon id="UPINA-COMB_BAGAR_07">
+<Description language="ENGLISH">"Locked Gauntlet"</Description>
+<Skill>"RULES-COMPCOMB_BAGAR"</Skill>
+<Damage>"+(BATTR_S)+2"</Damage>
+<Availability>"DISPO_LIMITED"</Availability>
+<Reach>"WEAPR_PERSO"</Reach>
+<Price>"1 GC"</Price>
+<Encumbrance>"1"</Encumbrance>
+<Quality>"WEAPB27"</Quality>
+<Hand>"1"</Hand>
+<Ammunition>"0"</Ammunition>
+</Weapon>
+<Weapon id="UPINA-COMB_BAGAR_08">
+<Description language="ENGLISH">"Sap"</Description>
+<Skill>"RULES-COMPCOMB_BAGAR"</Skill>
+<Damage>"+(BATTR_S)+1"</Damage>
+<Availability>"DISPO_RARE"</Availability>
+<Reach>"WEAPR_PERSO"</Reach>
+<Price>"1/-"</Price>
+<Encumbrance>"0"</Encumbrance>
+<Quality>"WEAPB04,WEAPB31,WEAPB27"</Quality>
+<Hand>"1"</Hand>
+<Ammunition>"0"</Ammunition>
+</Weapon>
+<Weapon id="UPINA-COMB_FLEAU_04">
+<Description language="ENGLISH">"Grain Flail"</Description>
+<Skill>"RULES-COMPCOMB_FLEAU"</Skill>
+<Damage>"+(BATTR_S)+3"</Damage>
+<Availability>"DISPO_COMMON"</Availability>
+<Reach>"WEAPR_MID"</Reach>
+<Price>"10/-"</Price>
+<Encumbrance>"1"</Encumbrance>
+<Quality>"WEAPB09,WEAPB26,WEAPB01"</Quality>
+<Hand>"1"</Hand>
+<Ammunition>"0"</Ammunition>
+</Weapon>
+<Weapon id="UPINA-COMB_FLEAU_05">
+<Description language="ENGLISH">"Flail"</Description>
+<Skill>"RULES-COMPCOMB_FLEAU"</Skill>
+<Damage>"+(BATTR_S)+5"</Damage>
+<Availability>"DISPO_LIMITED"</Availability>
+<Reach>"WEAPR_MID"</Reach>
+<Price>"2GC"</Price>
+<Encumbrance>"1"</Encumbrance>
+<Quality>"WEAPB09,WEAPB01"</Quality>
+<Hand>"1"</Hand>
+<Ammunition>"0"</Ammunition>
+</Weapon>
+<Weapon id="UPINA-COMB_FLEAU_06">
+<Description language="ENGLISH">"Military Flail"</Description>
+<Skill>"RULES-COMPCOMB_FLEAU"</Skill>
+<Damage>"+(BATTR_S)+6"</Damage>
+<Availability>"DISPO_RARE"</Availability>
+<Reach>"WEAPR_LONG"</Reach>
+<Price>"3GC"</Price>
+<Encumbrance>"2"</Encumbrance>
+<Quality>"WEAPB09,WEAPB21,WEAPB25,WEAPB01"</Quality>
+<Hand>"2"</Hand>
+<Ammunition>"0"</Ammunition>
+</Weapon>
+<Weapon id="UPINA-COMB_PARAD_03">
+<Description language="ENGLISH">"Cloak"</Description>
+<Skill>"RULES-COMPCOMB_PARAD"</Skill>
+<Damage>"+(BATTR_S)+0"</Damage>
+<Availability>"DISPO_COMMON"</Availability>
+<Reach>"WEAPR_SHORT"</Reach>
+<Price>"10/-"</Price>
+<Encumbrance>"1"</Encumbrance>
+<Quality>"WEAPB17,WEAPB08,WEAPB27"</Quality>
+<Hand>"1"</Hand>
+<Ammunition>"0"</Ammunition>
+</Weapon>
+<Weapon id="UPINA-COMB_PARAD_04">
+<Description language="ENGLISH">"Main Gauche"</Description>
+<Skill>"RULES-COMPCOMB_PARAD"</Skill>
+<Damage>"+(BATTR_S)+2"</Damage>
+<Availability>"DISPO_RARE"</Availability>
+<Reach>"WEAPR_CLOSE"</Reach>
+<Price>"1GC"</Price>
+<Encumbrance>"0"</Encumbrance>
+<Quality>"WEAPB08"</Quality>
+<Hand>"1"</Hand>
+<Ammunition>"0"</Ammunition>
+</Weapon>
+<Weapon id="UPINA-COMB_PARAD_05">
+<Description language="ENGLISH">"Swordbreaker"</Description>
+<Skill>"RULES-COMPCOMB_PARAD"</Skill>
+<Damage>"+(BATTR_S)+1"</Damage>
+<Availability>"DISPO_LIMITED"</Availability>
+<Reach>"WEAPR_SHORT"</Reach>
+<Price>"1GC 2/6"</Price>
+<Encumbrance>"1"</Encumbrance>
+<Quality>"WEAPB08,WEAPB11"</Quality>
+<Hand>"1"</Hand>
+<Ammunition>"0"</Ammunition>
+</Weapon>
+<Weapon id="UPINA-COMB_PARAD_06">
+<Description language="ENGLISH">"Weighted Net"</Description>
+<Skill>"RULES-COMPCOMB_PARAD"</Skill>
+<Damage>"+(BATTR_S)+0"</Damage>
+<Availability>"DISPO_RARE"</Availability>
+<Reach>"WEAPR_SHORT"</Reach>
+<Price>"1GC 10/-"</Price>
+<Encumbrance>"1"</Encumbrance>
+<Quality>"WEAPB17,WEAPB08,WEAPB18 1,WEAPB28,WEAPB27,WEAPB01"</Quality>
+<Hand>"2"</Hand>
+<Ammunition>"0"</Ammunition>
+</Weapon>
+<Weapon id="UPINA-COMB_HAST_05">
+<Description language="ENGLISH">"Ahlspiess"</Description>
+<Skill>"RULES-COMPCOMB_HAST"</Skill>
+<Damage>"+(BATTR_S)+3"</Damage>
+<Availability>"DISPO_LIMITED"</Availability>
+<Reach>"WEAPR_BIG"</Reach>
+<Price>"2GC"</Price>
+<Encumbrance>"2"</Encumbrance>
+<Quality>"WEAPB12,WEAPB22"</Quality>
+<Hand>"2"</Hand>
+<Ammunition>"0"</Ammunition>
+</Weapon>
+<Weapon id="UPINA-COMB_HAST_06">
+<Description language="ENGLISH">"Bill"</Description>
+<Skill>"RULES-COMPCOMB_HAST"</Skill>
+<Damage>"+(BATTR_S)+4"</Damage>
+<Availability>"DISPO_LIMITED"</Availability>
+<Reach>"WEAPR_LONG"</Reach>
+<Price>"2GC"</Price>
+<Encumbrance>"3"</Encumbrance>
+<Quality>"WEAPB08,WEAPB30/WEAPB34"</Quality>
+<Hand>"2"</Hand>
+<Ammunition>"0"</Ammunition>
+</Weapon>
+<Weapon id="UPINA-COMB_HAST_07">
+<Description language="ENGLISH">"Halberd"</Description>
+<Skill>"RULES-COMPCOMB_HAST"</Skill>
+<Damage>"+(BATTR_S)+4"</Damage>
+<Availability>"DISPO_COMMON"</Availability>
+<Reach>"WEAPR_LONG"</Reach>
+<Price>"2GC"</Price>
+<Encumbrance>"3"</Encumbrance>
+<Quality>"WEAPB08,WEAPB30/WEAPB12"</Quality>
+<Hand>"2"</Hand>
+<Ammunition>"0"</Ammunition>
+</Weapon>
+<Weapon id="UPINA-COMB_HAST_08">
+<Description language="ENGLISH">"Mancatcher"</Description>
+<Skill>"RULES-COMPCOMB_HAST"</Skill>
+<Damage>"+(BATTR_S)+2"</Damage>
+<Availability>"DISPO_RARE"</Availability>
+<Reach>"WEAPR_LONG"</Reach>
+<Price>"2GC"</Price>
+<Encumbrance>"3"</Encumbrance>
+<Quality>"WEAPB08,WEAPB17"</Quality>
+<Hand>"2"</Hand>
+<Ammunition>"0"</Ammunition>
+</Weapon>
+<Weapon id="UPINA-COMB_HAST_09">
+<Description language="ENGLISH">"Partizan/Glaive"</Description>
+<Skill>"RULES-COMPCOMB_HAST"</Skill>
+<Damage>"+(BATTR_S)+4"</Damage>
+<Availability>"DISPO_LIMITED"</Availability>
+<Reach>"WEAPR_LONG"</Reach>
+<Price>"2GC"</Price>
+<Encumbrance>"3"</Encumbrance>
+<Quality>"WEAPB08,WEAPB12/WEAPB32 2"</Quality>
+<Hand>"2"</Hand>
+<Ammunition>"0"</Ammunition>
+</Weapon>
+<Weapon id="UPINA-COMB_HAST_10">
+<Description language="ENGLISH">"Pollaxe"</Description>
+<Skill>"RULES-COMPCOMB_HAST"</Skill>
+<Damage>"+(BATTR_S)+4"</Damage>
+<Availability>"DISPO_LIMITED"</Availability>
+<Reach>"WEAPR_LONG"</Reach>
+<Price>"2GC"</Price>
+<Encumbrance>"2"</Encumbrance>
+<Quality>"WEAPB08,WEAPB30/WEAPB12/WEAPB04"</Quality>
+<Hand>"2"</Hand>
+<Ammunition>"0"</Ammunition>
+</Weapon>
+<Weapon id="UPINA-COMB_HAST_11">
+<Description language="ENGLISH">"Spear"</Description>
+<Skill>"RULES-COMPCOMB_HAST"</Skill>
+<Damage>"+(BATTR_S)+4"</Damage>
+<Availability>"DISPO_COMMON"</Availability>
+<Reach>"WEAPR_BIG"</Reach>
+<Price>"15/-"</Price>
+<Encumbrance>"0"</Encumbrance>
+<Quality>"WEAPB12"</Quality>
+<Hand>"2"</Hand>
+<Ammunition>"0"</Ammunition>
+</Weapon>
+<Weapon id="UPINA-COMB_HAST_12">
+<Description language="ENGLISH">"Pike"</Description>
+<Skill>"RULES-COMPCOMB_HAST"</Skill>
+<Damage>"+(BATTR_S)+4"</Damage>
+<Availability>"DISPO_RARE"</Availability>
+<Reach>"WEAPR_HUGE"</Reach>
+<Price>"18/-"</Price>
+<Encumbrance>"4"</Encumbrance>
+<Quality>"WEAPB12"</Quality>
+<Hand>"2"</Hand>
+<Ammunition>"0"</Ammunition>
+</Weapon>
+<Weapon id="UPINA-COMB_HAST_13">
+<Description language="ENGLISH">"Quarterstaff"</Description>
+<Skill>"RULES-COMPCOMB_HAST"</Skill>
+<Damage>"+(BATTR_S)+4"</Damage>
+<Availability>"DISPO_COMMON"</Availability>
+<Reach>"WEAPR_LONG"</Reach>
+<Price>"3/-"</Price>
+<Encumbrance>"2"</Encumbrance>
+<Quality>"WEAPB08,WEAPB04"</Quality>
+<Hand>"2"</Hand>
+<Ammunition>"0"</Ammunition>
+</Weapon>
+<Weapon id="UPINA-COMB_2M_06">
+<Description language="ENGLISH">"Bastard Sword"</Description>
+<Skill>"RULES-COMPCOMB_2M"</Skill>
+<Damage>"+(BATTR_S)+5"</Damage>
+<Availability>"DISPO_LIMITED"</Availability>
+<Reach>"WEAPR_LONG"</Reach>
+<Price>"8GC"</Price>
+<Encumbrance>"3"</Encumbrance>
+<Quality>"WEAPB10,WEAPB08"</Quality>
+<Hand>"2"</Hand>
+<Ammunition>"0"</Ammunition>
+</Weapon>
+<Weapon id="UPINA-COMB_2M_07">
+<Description language="ENGLISH">"Great Axe"</Description>
+<Skill>"RULES-COMPCOMB_2M"</Skill>
+<Damage>"+(BATTR_S)+6"</Damage>
+<Availability>"DISPO_COMMON"</Availability>
+<Reach>"WEAPR_LONG"</Reach>
+<Price>"4GC"</Price>
+<Encumbrance>"3"</Encumbrance>
+<Quality>"WEAPB30,WEAPB21,WEAPB25"</Quality>
+<Hand>"2"</Hand>
+<Ammunition>"0"</Ammunition>
+</Weapon>
+<Weapon id="UPINA-COMB_2M_08">
+<Description language="ENGLISH">"Flamberge Zweihander"</Description>
+<Skill>"RULES-COMPCOMB_2M"</Skill>
+<Damage>"+(BATTR_S)+5"</Damage>
+<Availability>"DISPO_EXOTIC"</Availability>
+<Reach>"WEAPR_LONG"</Reach>
+<Price>"30GC"</Price>
+<Encumbrance>"3"</Encumbrance>
+<Quality>"WEAPB10,WEAPB30,WEAPB32 2"</Quality>
+<Hand>"2"</Hand>
+<Ammunition>"0"</Ammunition>
+</Weapon>
+<Weapon id="UPINA-COMB_2M_09">
+<Description language="ENGLISH">"Pick"</Description>
+<Skill>"RULES-COMPCOMB_2M"</Skill>
+<Damage>"+(BATTR_S)+5"</Damage>
+<Availability>"DISPO_COMMON"</Availability>
+<Reach>"WEAPR_MID"</Reach>
+<Price>"9/-"</Price>
+<Encumbrance>"3"</Encumbrance>
+<Quality>"WEAPB10,WEAPB12,WEAPB28"</Quality>
+<Hand>"2"</Hand>
+<Ammunition>"0"</Ammunition>
+</Weapon>
+<Weapon id="UPINA-COMB_2M_10">
+<Description language="ENGLISH">"Warhammer"</Description>
+<Skill>"RULES-COMPCOMB_2M"</Skill>
+<Damage>"+(BATTR_S)+6"</Damage>
+<Availability>"DISPO_COMMON"</Availability>
+<Reach>"WEAPR_MID"</Reach>
+<Price>"3GC"</Price>
+<Encumbrance>"3"</Encumbrance>
+<Quality>"WEAPB10,WEAPB04,WEAPB28"</Quality>
+<Hand>"2"</Hand>
+<Ammunition>"0"</Ammunition>
+</Weapon>
+<Weapon id="UPINA-COMB_2M_11">
+<Description language="ENGLISH">"Zweihander"</Description>
+<Skill>"RULES-COMPCOMB_2M"</Skill>
+<Damage>"+(BATTR_S)+5"</Damage>
+<Availability>"DISPO_LIMITED"</Availability>
+<Reach>"WEAPR_LONG"</Reach>
+<Price>"10GC"</Price>
+<Encumbrance>"3"</Encumbrance>
+<Quality>"WEAPB10,WEAPB30"</Quality>
+<Hand>"2"</Hand>
+<Ammunition>"0"</Ammunition>
+</Weapon>
+<Weapon id="UPINA-PROJ_POUDRE_05">
+<Description language="ENGLISH">"Blunderbuss"</Description>
+<Skill>"RULES-COMPPROJ_POUDRE"</Skill>
+<Damage>"+8"</Damage>
+<Availability>"DISPO_LIMITED"</Availability>
+<Reach>"20"</Reach>
+<Price>"2GC"</Price>
+<Encumbrance>"1"</Encumbrance>
+<Quality>"WEAPB24,WEAPB23 2"</Quality>
+<Hand>"2"</Hand>
+<Ammunition>"0"</Ammunition>
+</Weapon>
+<Weapon id="UPINA-PROJ_POUDRE_06">
+<Description language="ENGLISH">"Hochland Long Rifle"</Description>
+<Skill>"RULES-COMPPROJ_POUDRE"</Skill>
+<Damage>"+9"</Damage>
+<Availability>"DISPO_EXOTIC"</Availability>
+<Reach>"100"</Reach>
+<Price>"100GC"</Price>
+<Encumbrance>"3"</Encumbrance>
+<Quality>"WEAPB16,WEAPB16,WEAPB23 4"</Quality>
+<Hand>"2"</Hand>
+<Ammunition>"0"</Ammunition>
+</Weapon>
+<Weapon id="UPINA-PROJ_POUDRE_07">
+<Description language="ENGLISH">"Handgun"</Description>
+<Skill>"RULES-COMPPROJ_POUDRE"</Skill>
+<Damage>"+9"</Damage>
+<Availability>"DISPO_LIMITED"</Availability>
+<Reach>"50"</Reach>
+<Price>"4GC"</Price>
+<Encumbrance>"2"</Encumbrance>
+<Quality>"WEAPB24,WEAPB23 3"</Quality>
+<Hand>"2"</Hand>
+<Ammunition>"0"</Ammunition>
+</Weapon>
+<Weapon id="UPINA-PROJ_POUDRE_08">
+<Description language="ENGLISH">"Pistol"</Description>
+<Skill>"RULES-COMPPROJ_POUDRE"</Skill>
+<Damage>"+8"</Damage>
+<Availability>"DISPO_RARE"</Availability>
+<Reach>"20"</Reach>
+<Price>"8 GC"</Price>
+<Encumbrance>"0"</Encumbrance>
+<Quality>"WEAPB13,WEAPB23 1"</Quality>
+<Hand>"1"</Hand>
+<Ammunition>"0"</Ammunition>
+</Weapon>
+<Weapon id="UPINA-PROJ_POUDRE_09">
+<Description language="ENGLISH">"Matchlock Handgun"</Description>
+<Skill>"RULES-COMPPROJ_POUDRE"</Skill>
+<Damage>"+8"</Damage>
+<Availability>"DISPO_RARE"</Availability>
+<Reach>"50"</Reach>
+<Price>"2GC"</Price>
+<Encumbrance>"2"</Encumbrance>
+<Quality>"WEAPB24,WEAPB23 4"</Quality>
+<Hand>"1"</Hand>
+<Ammunition>"0"</Ammunition>
+</Weapon>
+<Weapon id="UPINA-PROJ_POUDRE_10">
+<Description language="ENGLISH">"Matchlock Blunderbuss"</Description>
+<Skill>"RULES-COMPPROJ_POUDRE"</Skill>
+<Damage>"+7"</Damage>
+<Availability>"DISPO_RARE"</Availability>
+<Reach>"20"</Reach>
+<Price>"1GC"</Price>
+<Encumbrance>"1"</Encumbrance>
+<Quality>"WEAPB33 3,WEAPB24,WEAPB23 3"</Quality>
+<Hand>"1"</Hand>
+<Ammunition>"0"</Ammunition>
+</Weapon>
+<Weapon id="UPINA-PROJ_POUDRE_11">
+<Description language="ENGLISH">"Arqucbus"</Description>
+<Skill>"RULES-COMPPROJ_POUDRE"</Skill>
+<Damage>"+9"</Damage>
+<Availability>"DISPO_EXOTIC"</Availability>
+<Reach>"40"</Reach>
+<Price>"5GC"</Price>
+<Encumbrance>"3"</Encumbrance>
+<Quality>"WEAPB24,WEAPB26,WEAPB23 5"</Quality>
+<Hand>"1"</Hand>
+<Ammunition>"0"</Ammunition>
+</Weapon>
+<Weapon id="UPINA-PROJ_POUDRE_12">
+<Description language="ENGLISH">"Double Barrelled Handgun"</Description>
+<Skill>"RULES-COMPPROJ_POUDRE"</Skill>
+<Damage>"+9"</Damage>
+<Availability>"DISPO_EXOTIC"</Availability>
+<Reach>"50"</Reach>
+<Price>"7 GC"</Price>
+<Encumbrance>"3"</Encumbrance>
+<Quality>"WEAPB24,WEAPB03 2,WEAPB23 4"</Quality>
+<Hand>"1"</Hand>
+<Ammunition>"0"</Ammunition>
+</Weapon>
+<Weapon id="UPINA-PROJ_POUDRE_13">
+<Description language="ENGLISH">"Griffonsfoot Pistol"</Description>
+<Skill>"RULES-COMPPROJ_POUDRE"</Skill>
+<Damage>"+7"</Damage>
+<Availability>"DISPO_EXOTIC"</Availability>
+<Reach>"10"</Reach>
+<Price>"10 GC"</Price>
+<Encumbrance>"1"</Encumbrance>
+<Quality>"WEAPB26,WEAPB33 5"</Quality>
+<Hand>"1"</Hand>
+<Ammunition>"0"</Ammunition>
+</Weapon>
+<Weapon id="UPINA-PROJ_POUDRE_14">
+<Description language="ENGLISH">"Gun Axe"</Description>
+<Skill>"RULES-COMPPROJ_POUDRE"</Skill>
+<Damage>"+9"</Damage>
+<Availability>"DISPO_EXOTIC"</Availability>
+<Reach>"30"</Reach>
+<Price>"8"</Price>
+<Encumbrance>"1"</Encumbrance>
+<Quality>"WEAPB26,WEAPB24,WEAPB23 4"</Quality>
+<Hand>"2"</Hand>
+<Ammunition>"0"</Ammunition>
+</Weapon>
+<Weapon id="UPINA-PROJ_POUDRE_15">
+<Description language="ENGLISH">"Gun Halberd"</Description>
+<Skill>"RULES-COMPPROJ_POUDRE"</Skill>
+<Damage>"+9"</Damage>
+<Availability>"DISPO_EXOTIC"</Availability>
+<Reach>"30"</Reach>
+<Price>"10"</Price>
+<Encumbrance>"3"</Encumbrance>
+<Quality>"WEAPB26,WEAPB24,WEAPB23 4"</Quality>
+<Hand>"2"</Hand>
+<Ammunition>"0"</Ammunition>
+</Weapon>
+<Weapon id="UPINA-PROJ_ING_03">
+<Description language="ENGLISH">"Repeater Handgun"</Description>
+<Skill>"RULES-COMPPROJ_ING"</Skill>
+<Damage>"+9"</Damage>
+<Availability>"DISPO_RARE"</Availability>
+<Reach>"30"</Reach>
+<Price>"10 GC"</Price>
+<Encumbrance>"3"</Encumbrance>
+<Quality>"WEAPB24,WEAPB23 5,WEAPB03 4"</Quality>
+<Hand>"1"</Hand>
+<Ammunition>"0"</Ammunition>
+</Weapon>
+<Weapon id="UPINA-PROJ_ING_04">
+<Description language="ENGLISH">"Repeater Pistol"</Description>
+<Skill>"RULES-COMPPROJ_ING"</Skill>
+<Damage>"+8"</Damage>
+<Availability>"DISPO_RARE"</Availability>
+<Reach>"10"</Reach>
+<Price>"15 GC"</Price>
+<Encumbrance>"1"</Encumbrance>
+<Quality>"WEAPB24,WEAPB13,WEAPB23 4,WEAPB03 4"</Quality>
+<Hand>"1"</Hand>
+<Ammunition>"0"</Ammunition>
+</Weapon>
+<Weapon id="UPINA-PROJ_ING_05">
+<Description language="ENGLISH">"Pepperbox"</Description>
+<Skill>"RULES-COMPPROJ_ING"</Skill>
+<Damage>"+8"</Damage>
+<Availability>"DISPO_RARE"</Availability>
+<Reach>"10"</Reach>
+<Price>"12 GC"</Price>
+<Encumbrance>"1"</Encumbrance>
+<Quality>"WEAPB24,WEAPB13,WEAPB23 4,WEAPB03 4"</Quality>
+<Hand>"1"</Hand>
+<Ammunition>"0"</Ammunition>
+</Weapon>
+<Weapon id="UPINA-PROJ_ING_06">
+<Description language="ENGLISH">"Hand Mortar"</Description>
+<Skill>"RULES-COMPPROJ_ING"</Skill>
+<Damage>"+7"</Damage>
+<Availability>"DISPO_EXOTIC"</Availability>
+<Reach>"30"</Reach>
+<Price>"50 GC"</Price>
+<Encumbrance>"3"</Encumbrance>
+<Quality>"WEAPB24,WEAPB26,WEAPB23 2"</Quality>
+<Hand>"1"</Hand>
+<Ammunition>"0"</Ammunition>
+</Weapon>
+<Weapon id="UPINA-PROJ_ING_07">
+<Description language="ENGLISH">"Cane Pistol"</Description>
+<Skill>"RULES-COMPPROJ_ING"</Skill>
+<Damage>"+8"</Damage>
+<Availability>"DISPO_EXOTIC"</Availability>
+<Reach>"10"</Reach>
+<Price>"15 GC"</Price>
+<Encumbrance>"1"</Encumbrance>
+<Quality>"WEAPB24,WEAPB26,WEAPB23 6"</Quality>
+<Hand>"1"</Hand>
+<Ammunition>"0"</Ammunition>
+</Weapon>
+</DATA_WEAPON>
+<DATA_WEAPON_BONUS>
+<BonusMalus id="UPINA-WEAPB31">
+<Description language="ENGLISH">"Unbalanced"</Description>
+<Explanation language="ENGLISH">"The weight of some weapons is concentrated at the head, making them inefficient for parrying.
+When this weapon is used to oppose an incoming attack, it suffers a —1 SL penalty to the attack."</Explanation>
+<Short language="ENGLISH">"-1DR in attack"</Short>
+<Modifier>"-"</Modifier>
+</BonusMalus>
+<BonusMalus id="UPINA-WEAPB32">
+<Description language="ENGLISH">"Slash"</Description>
+<Explanation language="ENGLISH">"Slash weapons concentrate their cutting power in such a way as to open up gaping wounds.
+If you cause Critical Damage with the weapon, the target takes a Bleeding Condition in addition to any other effects of the critical hit.
+You may spend X Advantage to have your opponent suffer 1 additional BZeeding Condition.
+"</Explanation>
+<Short language="ENGLISH">"Critical add bleed"</Short>
+<Modifier>"+"</Modifier>
+</BonusMalus>
+<BonusMalus id="UPINA-WEAPB33">
+<Description language="ENGLISH">"Spread"</Description>
+<Explanation language="ENGLISH">"Weapons with the Spread quality fire an expanding cloud of projectiles which may strike several targets.
+Depending on the range to the target, weapons with this quality behave somewhat differently.
+Point Blank : The shot targets a single individual.
+Add (Rating) to the weapon’s Damage.
+Short Range to Long Range: The shot targets a single individual, and the next (Rating) closest visible creatures.
+No two targets may be more than (Rating) yards apart.
+Extreme Range: As for Short to Long Range, but reduce the weapon’s damage by (Rating) as well.
+"</Explanation>
+<Short language="ENGLISH">"Can strike several targets"</Short>
+<Modifier>"+"</Modifier>
+</BonusMalus>
+<BonusMalus id="UPINA-WEAPB34">
+<Description language="ENGLISH">"Trip"</Description>
+<Explanation language="ENGLISH">"Trip weapons are designed to hook an opponent’s leg or otherwise drive them from their feet.
+After hitting your opponent, you may spend 2 Advantage and make an opposed Strength/Athletics Test.
+If you win, your opponent gains the Prone Condition (if they are mounted, they suffer a 2-yard fall and then gain the Prone Condition).
+If you lose, nothing happens other than standard effects for losing an Opposed Test in combat."</Explanation>
+<Short language="ENGLISH">"May stend 2 ADV to Str/Ath Test to add Prone"</Short>
+<Modifier>"+"</Modifier>
+</BonusMalus>
+</DATA_WEAPON_BONUS>
+<DATA_SPELL>
+<Sort id="UPINA-MIRAC_MYRMIDIA_07">
+<Description language="ENGLISH">"Command the region"</Description>
+<Explanation language="ENGLISH">"Myrmidia carries your orders across the battlefield. You may issue a command to any ally within line of sight. The command must be relevant to the accomplishment of an armed struggle or ongoing strategy. Any Leadership Tests you make as a result benefit from a +10 bonus."</Explanation>
+<Target>"Any ally"</Target>
+<Duration>"1 Round"</Duration>
+<Range>"Special"</Range>
+<Talent>"RULES-T0080_MYRMIDIA"</Talent>
+<Level>""</Level>
+<TypSpell>"Miracle"</TypSpell>
+</Sort>
+<Sort id="UPINA-MIRAC_MYRMIDIA_08">
+<Description language="ENGLISH">"Dismay Foe"</Description>
+<Explanation language="ENGLISH">"You embody Myrmidia in her most wrathful of aspects. Gain the Terror 1 Creature Trait."</Explanation>
+<Target>"You"</Target>
+<Duration>"1 Round"</Duration>
+<Range>"You"</Range>
+<Talent>"RULES-T0080_MYRMIDIA"</Talent>
+<Level>""</Level>
+<TypSpell>"Miracle"</TypSpell>
+</Sort>
+<Sort id="UPINA-MIRAC_MYRMIDIA_09">
+<Description language="ENGLISH">"In Good Orper"</Description>
+<Explanation language="ENGLISH">"Knowing that the situation is hopeless you pray that your forces do not suffer from a disastrous rout. While the miracle is in play any allies may break from combat without allowing the enemy to gain advantage or make free attacks (see Fleeing on WFRP page 165)."</Explanation>
+<Target>"Allies within AoE ((ATTR_WP) yards)"</Target>
+<Duration>"(BATTR_WP) Rounds"</Duration>
+<Range>"Self"</Range>
+<Talent>"RULES-T0080_MYRMIDIA"</Talent>
+<Level>""</Level>
+<TypSpell>"Miracle"</TypSpell>
+</Sort>
+<Sort id="UPINA-MIRAC_MYRMIDIA_10">
+<Description language="ENGLISH">"Know Your Enemy"</Description>
+<Explanation language="ENGLISH">"You call on Myrmidia to inform you of a nearby enemy”s strengths and weaknesses. The GM should allow you to check the profile, traits, skills and talents of the target. "</Explanation>
+<Target>"1"</Target>
+<Duration>"Instant"</Duration>
+<Range>"Willpower Yards"</Range>
+<Talent>"RULES-T0080_MYRMIDIA"</Talent>
+<Level>""</Level>
+<TypSpell>"Miracle"</TypSpell>
+</Sort>
+<Sort id="UPINA-MIRAC_MYRMIDIA_12">
+<Description language="ENGLISH">"Quick Strike"</Description>
+<Explanation language="ENGLISH">"Infused with Myrmidias power, you benefit from heightened reflexes and can anticipate your opponent’s moves. Ât the start of every round whilst the Miracle is in effect, you may attempt a Challenging (+0) Initiative Test to gain an immediate free attack outside the normal turn sequence. This attack is resolved with whatever weapon you are carrying in your primary hand."</Explanation>
+<Target>"You"</Target>
+<Duration>"3 Rounds"</Duration>
+<Range>"You"</Range>
+<Talent>"RULES-T0080_MYRMIDIA"</Talent>
+<Level>""</Level>
+<TypSpell>"Miracle"</TypSpell>
+</Sort>
+<Sort id="UPINA-MIRAC_MYRMIDIA_13">
+<Description language="ENGLISH">"Shieldmaiden’S Devoltion"</Description>
+<Explanation language="ENGLISH">"Your chanted prayers fill the hearts of the faithful with the fearlessness of her bravest Shieldmaidens. All Myrmidians within range gain the Fearless (Enemy) Talent. This enemy may either be a particular individual, or a particular species."</Explanation>
+<Target>"See text"</Target>
+<Duration>"4 Rounds"</Duration>
+<Range>"36 yds"</Range>
+<Talent>"RULES-T0080_MYRMIDIA"</Talent>
+<Level>""</Level>
+<TypSpell>"Miracle"</TypSpell>
+</Sort>
+<Sort id="UPINA-MIRAC_MYRMIDIA_14">
+<Description language="ENGLISH">"Skill of Combat"</Description>
+<Explanation language="ENGLISH">"You embody in your allies the skill of Myrmidia. Whilst this Miracle is in effect, all allies in range benefit from a +10 bonus to their WS and BS."</Explanation>
+<Target>"See text"</Target>
+<Duration>"4 Rounds"</Duration>
+<Range>"24 yds"</Range>
+<Talent>"RULES-T0080_MYRMIDIA"</Talent>
+<Level>""</Level>
+<TypSpell>"Miracle"</TypSpell>
+</Sort>
+<Sort id="UPINA-MIRAC_MYRMIDIA_15">
+<Description language="ENGLISH">"Vengeful Wrath"</Description>
+<Explanation language="ENGLISH">"You are filled with the righteous indignation of Myrmidia. Whilst this Miracle is in effect, you must charge and attack the nearest unrepentant enemy. You may reroll any Melee Skill rolls you make whilst the Miracle is in effect."</Explanation>
+<Target>"You"</Target>
+<Duration>"6 Rounds"</Duration>
+<Range>"You"</Range>
+<Talent>"RULES-T0080_MYRMIDIA"</Talent>
+<Level>""</Level>
+<TypSpell>"Miracle"</TypSpell>
+</Sort>
+</DATA_SPELL>
+<DATA_CAREER_SUBCHOICE>
+<Choice>
+<Career>"RULES-WORK31"</Career>
+<Alternative name="RULES-WORK31">"01-75"</Alternative>
+</Choice>
+<Choice>
+<Career>"RULES-WORK31"</Career>
+<Alternative name="UPINA-WORK69">"76-100"</Alternative>
+</Choice>
+<Choice>
+<Career>"RULES-WORK23"</Career>
+<Alternative name="RULES-WORK23">"01-85"</Alternative>
+</Choice>
+<Choice>
+<Career>"RULES-WORK23"</Career>
+<Alternative name="UPINA-WORK71">"86-100"</Alternative>
+</Choice>
+<Choice>
+<Career>"RULES-WORK14"</Career>
+<Alternative name="RULES-WORK14">"01-75"</Alternative>
+</Choice>
+<Choice>
+<Career>"RULES-WORK14"</Career>
+<Alternative name="UPINA-WORK70">"76-100"</Alternative>
+</Choice>
+<Choice>
+<Career>"RULES-WORK08"</Career>
+<Alternative name="RULES-WORK08">"01-75"</Alternative>
+</Choice>
+<Choice>
+<Career>"RULES-WORK08"</Career>
+<Alternative name="UPINA-WORK76">"76-100"</Alternative>
+</Choice>
+<Choice>
+<Career>"RULES-WORK12"</Career>
+<Alternative name="RULES-WORK12">"01-55"</Alternative>
+</Choice>
+<Choice>
+<Career>"RULES-WORK12"</Career>
+<Alternative name="UPINA-WORK72">"56-65"</Alternative>
+</Choice>
+<Choice>
+<Career>"RULES-WORK12"</Career>
+<Alternative name="UPINA-WORK73">"66-70"</Alternative>
+</Choice>
+<Choice>
+<Career>"RULES-WORK12"</Career>
+<Alternative name="UPINA-WORK74">"71-85"</Alternative>
+</Choice>
+<Choice>
+<Career>"RULES-WORK12"</Career>
+<Alternative name="UPINA-WORK75">"86-100"</Alternative>
+</Choice>
+<Choice>
+<Career>"RULES-WORK57"</Career>
+<Alternative name="RULES-WORK57">"01-40"</Alternative>
+</Choice>
+<Choice>
+<Career>"RULES-WORK57"</Career>
+<Alternative name="UPINA-WORK65">"41-50"</Alternative>
+</Choice>
+<Choice>
+<Career>"RULES-WORK57"</Career>
+<Alternative name="UPINA-WORK67">"51-75"</Alternative>
+</Choice>
+<Choice>
+<Career>"RULES-WORK57"</Career>
+<Alternative name="UPINA-WORK68">"71-85"</Alternative>
+</Choice>
+<Choice>
+<Career>"RULES-WORK57"</Career>
+<Alternative name="UPINA-WORK66">"86-90"</Alternative>
+</Choice>
+<Choice>
+<Career>"RULES-WORK57"</Career>
+<Alternative name="UPINA-WORK78">"91-96"</Alternative>
+</Choice>
+<Choice>
+<Career>"RULES-WORK57"</Career>
+<Alternative name="UPINA-WORK77">"97-100"</Alternative>
+</Choice>
+<Choice>
+<Career>"RULES-WORK50"</Career>
+<Alternative name="RULES-WORK50">"01-85"</Alternative>
+</Choice>
+<Choice>
+<Career>"RULES-WORK50"</Career>
+<Alternative name="UPINA-WORK79">"86-100"</Alternative>
+</Choice>
+</DATA_CAREER_SUBCHOICE>
+</DATA_BOOK>

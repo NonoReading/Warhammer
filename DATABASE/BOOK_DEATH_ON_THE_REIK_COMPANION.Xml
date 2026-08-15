@@ -1,0 +1,151 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<DATA_BOOK>
+<CODE_BOOK>"DEATH"</CODE_BOOK>
+<BOOK>"BOOK DEATH ON THE REIK COMPANION"</BOOK>
+<language>"ENGLISH"</language>
+<VERSION>"20250623"</VERSION>
+<OFFICIAL>"1"</OFFICIAL>
+<COMPLETE>"1"</COMPLETE>
+<DATA_TALENT>
+<Talent id="DEATH-T0178">
+<Attribut>""</Attribut>
+<Description language="ENGLISH">"Wilful Corruption"</Description>
+<Short language="ENGLISH">""</Short>
+<Explanation language="ENGLISH">"The favoured of Tzeentch are masters of magic, and gain a small measure of insight and control over the horrific gifts their patron bestows.
+When you gain a mutation, you roll any dice twice and pick the preferred result."</Explanation>
+<Skill>""</Skill>
+<Max>"1"</Max>
+<PDF>""</PDF>
+<Test language="ENGLISH">"Mutation"</Test>
+</Talent>
+</DATA_TALENT>
+<DATA_CAREER>
+<Career id="DEATH-WORK105">
+<Description language="ENGLISH">"Warrior of Tzeentch"</Description>
+<Explanation language="ENGLISH">"Tzeentch is the Architect of Fate, the Great Conspirator. Change itself is Tzeenth’s domain, and you have given yourself over to it body, mind, and soul. While Tzeentch delights in change brought about by secret conspirators and callous seekers of knowledge, The Great Mutator does not neglect the role of violence may play in bringing forth change. Many of his most favoured mortals are deceitful warriors or cunning generals who force violent, bloody change upon the Old World. These more militant servants weild  steel and magic in service to their blasphemous god, carving a path of smoking ruin toward their promised emphemeral future."</Explanation>
+<Skill>"RULES-COMPCOMB_BASE"</Skill>
+<Class>"CLASS_WARR"</Class>
+<SUBCHAPTER_LEVEL>
+<Level id="1">
+<Description language="ENGLISH">"Initiate of the Mysteries"</Description>
+<Salary>"TIERS_BRASS 1"</Salary>
+</Level>
+<Level id="2">
+<Description language="ENGLISH">"Favoured of Tzeentch"</Description>
+<Salary>"TIERS_BRASS 5"</Salary>
+</Level>
+<Level id="3">
+<Description language="ENGLISH">"Warrior of Tzeentch"</Description>
+<Salary>"TIERS_SILVER 2"</Salary>
+</Level>
+<Level id="4">
+<Description language="ENGLISH">"Chosen of Tzeentch"</Description>
+<Salary>"TIERS_GOLD 1"</Salary>
+</Level>
+</SUBCHAPTER_LEVEL>
+<SUBCHAPTER_ATTR>
+<Attribut name="RULES-ATTR_WS">"1"</Attribut>
+<Attribut name="RULES-ATTR_BS">"0"</Attribut>
+<Attribut name="RULES-ATTR_S">"4"</Attribut>
+<Attribut name="RULES-ATTR_T">"1"</Attribut>
+<Attribut name="RULES-ATTR_I">"0"</Attribut>
+<Attribut name="RULES-ATTR_Ag">"3"</Attribut>
+<Attribut name="RULES-ATTR_Dex">"0"</Attribut>
+<Attribut name="RULES-ATTR_Int">"1"</Attribut>
+<Attribut name="RULES-ATTR_WP">"2"</Attribut>
+<Attribut name="RULES-ATTR_Fel">"0"</Attribut>
+</SUBCHAPTER_ATTR>
+<SUBCHAPTER_SKILL>
+<Skill name="RULES-COMPATHL">"1"</Skill>
+  <!-- Athletics -->
+<Skill name="RULES-COMPCHARM">"1"</Skill>
+  <!-- Charm -->
+<Skill name="RULES-COMPRAGOT">"1"</Skill>
+  <!-- Gossip -->
+<Skill name="RULES-COMPRESALC">"1"</Skill>
+  <!-- Consume Alcohol -->
+<Skill name="RULES-COMPLANG_MAG">"1"</Skill>
+  <!-- Language (Magick) -->
+<Skill name="RULES-COMPCOMB_BASE">"1"</Skill>
+  <!-- Melee (Basic) -->
+<Skill name="RULES-COMPPRECEP">"1"</Skill>
+  <!-- Perception  -->
+<Skill name="RULES-COMPDISC_RURAL">"1"</Skill>
+  <!-- Stealth (Rural) -->
+<Skill name="RULES-COMPSUBOR">"2"</Skill>
+  <!-- Bribery -->
+<Skill name="RULES-COMPESQU">"2"</Skill>
+  <!-- Dodge -->
+<Skill name="RULES-COMPRESIST">"2"</Skill>
+  <!-- Endurance -->
+<Skill name="RULES-COMPINTIM">"2"</Skill>
+  <!-- Intimidate -->
+<Skill name="RULES-COMPINTUI">"2"</Skill>
+  <!-- Intuition  -->
+<Skill name="RULES-COMPLANG_DARKTOUNGE">"2"</Skill>
+  <!-- Language (Dark Tongue) -->
+<Skill name="RULES-COMPFOCAL_*">"3"</Skill>
+  <!-- Channelling (Any) -->
+<Skill name="RULES-COMPCOMM">"3"</Skill>
+  <!-- Leadership -->
+<Skill name="RULES-COMPCOMB_*">"3"</Skill>
+  <!-- Melee (Any) -->
+<Skill name="RULES-COMPSAVOIR_*">"3"</Skill>
+  <!-- Lore (Anyl) -->
+<Skill name="RULES-COMPCALM">"4"</Skill>
+  <!-- Cool -->
+<Skill name="RULES-COMPSAVOIR_*">"4"</Skill>
+  <!-- Lore (Anyl) -->
+</SUBCHAPTER_SKILL>
+<SUBCHAPTER_TALENT>
+<Talent name="RULES-T0096/RULES-T0121">"1"</Talent>
+  <!-- Dual Wielder or Shieldsman -->
+<Talent name="WINDS-T0176_OMBRE">"1"</Talent>
+  <!-- Suffuse With (Ulgu) -->
+<Talent name="RULES-T0136_BEASTMEN">"1"</Talent>
+  <!-- Etiquette (Beastmen) -->
+<Talent name="DEATH-T0178">"1"</Talent>
+  <!-- Wilful Corruption -->
+<Talent name="RULES-T0098">"2"</Talent>
+  <!-- Menacing -->
+<Talent name="RULES-T0089">"2"</Talent>
+  <!-- Petty Magic -->
+<Talent name="RULES-T0079">"2"</Talent>
+  <!-- Schemer -->
+<Talent name="RULES-T0128">"2"</Talent>
+  <!-- Reversal -->
+<Talent name="RULES-T0088_TZEENTCH">"3"</Talent>
+  <!-- Arcane Magic (Tzeentch) -->
+<Talent name="RULES-T0008">"3"</Talent>
+  <!-- Furious Assault -->
+<Talent name="RULES-T0060">"3"</Talent>
+  <!-- Strike to Injure -->
+<Talent name="RULES-T0087">"3"</Talent>
+  <!-- War Wizard -->
+<Talent name="RULES-T0099">"4"</Talent>
+  <!-- Cat-tongued -->
+<Talent name="RULES-T0042">"4"</Talent>
+  <!-- Instinctive Diction -->
+<Talent name="RULES-T0161">"4"</Talent>
+  <!-- Slayer -->
+<Talent name="RULES-T0138">"4"</Talent>
+  <!-- War Leader -->
+</SUBCHAPTER_TALENT>
+<SUBCHAPTER_ITEM>
+<Item name="RULES-COMB_BASE_*">"1"</Item>
+<Item name="RULES-ARMO_04">"1"</Item>
+<Item name="Religious Symbol (Talisman of Tzeentch)">"1"</Item>
+<Item name="RULES-ARMO_07">"2"</Item>
+<Item name="Tome of Forbidden Knowledge">"2"</Item>
+<Item name="Grimoire of Dark Magicks">"3"</Item>
+<Item name="RULES-ARMO_14">"3"</Item>
+<Item name="RULES-ARMO_11">"3"</Item>
+<Item name="Spell ingredients for 5 spells">"3"</Item>
+<Item name="Cohort of Chaos Warriors">"4"</Item>
+<Item name="Daemon-bound Weapon">"4"</Item>
+<Item name="Daemonic Familiar">"4"</Item>
+<Item name="Severed heads of two or more enemy commanders">"4"</Item>
+</SUBCHAPTER_ITEM>
+</Career>
+</DATA_CAREER>
+</DATA_BOOK>

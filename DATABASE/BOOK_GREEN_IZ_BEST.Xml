@@ -1,0 +1,1290 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<DATA_BOOK>
+<CODE_BOOK>"GREEN"</CODE_BOOK>
+<BOOK>"BOOK GREEN IZ BEST"</BOOK>
+<language>"ENGLISH"</language>
+<VERSION>"20250623"</VERSION>
+<OFFICIAL>"2"</OFFICIAL>
+<COMPLETE>"1"</COMPLETE>
+<DATA_RANDOM_TALENT>
+<DATA_RANDOM_TALENT id="RULES-T0139_*">
+<Specie>"GREEN-RACE_BORC"</Specie>
+<Talent name="RULES-T0139_*">"01-03"</Talent>
+  <!-- Acute Sense (Any) -->
+</DATA_RANDOM_TALENT>
+<DATA_RANDOM_TALENT id="RULES-T0004">
+<Specie>"GREEN-RACE_BORC"</Specie>
+<Talent name="RULES-T0004">"04-06"</Talent>
+  <!-- Ambidextrous -->
+</DATA_RANDOM_TALENT>
+<DATA_RANDOM_TALENT id="RULES-T0003">
+<Specie>"GREEN-RACE_BORC"</Specie>
+<Talent name="RULES-T0003">"07-09"</Talent>
+  <!-- Animal Affinity -->
+</DATA_RANDOM_TALENT>
+<DATA_RANDOM_TALENT id="RULES-T0BIG">
+<Specie>"GREEN-RACE_BORC"</Specie>
+<Talent name="RULES-T0BIG">"10-12"</Talent>
+  <!-- Big -->
+</DATA_RANDOM_TALENT>
+<DATA_RANDOM_TALENT id="RULES-T0104">
+<Specie>"GREEN-RACE_BORC"</Specie>
+<Talent name="RULES-T0104">"13-15"</Talent>
+  <!-- Carouser -->
+</DATA_RANDOM_TALENT>
+<DATA_RANDOM_TALENT id="RULES-T0074">
+<Specie>"GREEN-RACE_BORC"</Specie>
+<Talent name="RULES-T0074">"16-18"</Talent>
+  <!-- Coolheaded -->
+</DATA_RANDOM_TALENT>
+<DATA_RANDOM_TALENT id="RULES-T0092_*">
+<Specie>"GREEN-RACE_BORC"</Specie>
+<Talent name="RULES-T0092_*">"19-21"</Talent>
+  <!-- craftsman (Any) -->
+</DATA_RANDOM_TALENT>
+<DATA_RANDOM_TALENT id="RULES-T0026">
+<Specie>"GREEN-RACE_BORC"</Specie>
+<Talent name="RULES-T0026">"22-24"</Talent>
+  <!-- Dirty Fighting -->
+</DATA_RANDOM_TALENT>
+<DATA_RANDOM_TALENT id="RULES-T0091">
+<Specie>"GREEN-RACE_BORC"</Specie>
+<Talent name="RULES-T0091">"25-28"</Talent>
+  <!-- Fast Hands -->
+</DATA_RANDOM_TALENT>
+<DATA_RANDOM_TALENT id="RULES-T0064">
+<Specie>"GREEN-RACE_BORC"</Specie>
+<Talent name="RULES-T0064">"29-31"</Talent>
+  <!-- Flee! -->
+</DATA_RANDOM_TALENT>
+<DATA_RANDOM_TALENT id="RULES-T0063">
+<Specie>"GREEN-RACE_BORC"</Specie>
+<Talent name="RULES-T0063">"32-34"</Talent>
+  <!-- Frenzy -->
+</DATA_RANDOM_TALENT>
+<DATA_RANDOM_TALENT id="RULES-T0047">
+<Specie>"GREEN-RACE_BORC"</Specie>
+<Talent name="RULES-T0047">"35-38"</Talent>
+  <!-- Hardy -->
+</DATA_RANDOM_TALENT>
+<DATA_RANDOM_TALENT id="RULES-T0086">
+<Specie>"GREEN-RACE_BORC"</Specie>
+<Talent name="RULES-T0086">"39-41"</Talent>
+  <!-- Iron Jaw -->
+</DATA_RANDOM_TALENT>
+<DATA_RANDOM_TALENT id="RULES-T0127">
+<Specie>"GREEN-RACE_BORC"</Specie>
+<Talent name="RULES-T0127">"42-44"</Talent>
+  <!-- Lightning Reflexes -->
+</DATA_RANDOM_TALENT>
+<DATA_RANDOM_TALENT id="RULES-T0020">
+<Specie>"GREEN-RACE_BORC"</Specie>
+<Talent name="RULES-T0020">"45-47"</Talent>
+  <!-- Luck -->
+</DATA_RANDOM_TALENT>
+<DATA_RANDOM_TALENT id="RULES-T0153">
+<Specie>"GREEN-RACE_BORC"</Specie>
+<Talent name="RULES-T0153">"48-50"</Talent>
+  <!-- Marksman -->
+</DATA_RANDOM_TALENT>
+<DATA_RANDOM_TALENT id="RULES-T0045">
+<Specie>"GREEN-RACE_BORC"</Specie>
+<Talent name="RULES-T0045">"51-53"</Talent>
+  <!-- Nimble Fingered -->
+</DATA_RANDOM_TALENT>
+<DATA_RANDOM_TALENT id="RULES-T0058">
+<Specie>"GREEN-RACE_BORC"</Specie>
+<Talent name="RULES-T0058">"54-55"</Talent>
+  <!-- Nose for Trouble -->
+</DATA_RANDOM_TALENT>
+<DATA_RANDOM_TALENT id="RULES-T0140">
+<Specie>"GREEN-RACE_BORC"</Specie>
+<Talent name="RULES-T0140">"56-58"</Talent>
+  <!-- Orientation -->
+</DATA_RANDOM_TALENT>
+<DATA_RANDOM_TALENT id="RULES-T0PAI">
+<Specie>"GREEN-RACE_BORC"</Specie>
+<Talent name="RULES-T0PAI">"59-62"</Talent>
+  <!-- Painless -->
+</DATA_RANDOM_TALENT>
+<DATA_RANDOM_TALENT id="RULES-T0129_*">
+<Specie>"GREEN-RACE_BORC"</Specie>
+<Talent name="RULES-T0129_*">"63-65"</Talent>
+  <!-- Resistance (Any) -->
+</DATA_RANDOM_TALENT>
+<DATA_RANDOM_TALENT id="RULES-T0105">
+<Specie>"GREEN-RACE_BORC"</Specie>
+<Talent name="RULES-T0105">"66-68"</Talent>
+  <!-- Rover -->
+</DATA_RANDOM_TALENT>
+<DATA_RANDOM_TALENT id="RULES-T0117">
+<Specie>"GREEN-RACE_BORC"</Specie>
+<Talent name="RULES-T0117">"69-71"</Talent>
+  <!-- Savvy -->
+</DATA_RANDOM_TALENT>
+<DATA_RANDOM_TALENT id="RULES-T0166">
+<Specie>"GREEN-RACE_BORC"</Specie>
+<Talent name="RULES-T0166">"72-74"</Talent>
+  <!-- Sharp -->
+</DATA_RANDOM_TALENT>
+<DATA_RANDOM_TALENT id="RULES-T0141">
+<Specie>"GREEN-RACE_BORC"</Specie>
+<Talent name="RULES-T0141">"75-78"</Talent>
+  <!-- Sixth Sense -->
+</DATA_RANDOM_TALENT>
+<DATA_RANDOM_TALENT id="RULES-T0016">
+<Specie>"GREEN-RACE_BORC"</Specie>
+<Talent name="RULES-T0016">"79-81"</Talent>
+  <!-- Stone Soup -->
+</DATA_RANDOM_TALENT>
+<DATA_RANDOM_TALENT id="RULES-T0014">
+<Specie>"GREEN-RACE_BORC"</Specie>
+<Talent name="RULES-T0014">"82-84"</Talent>
+  <!-- Strong Legs -->
+</DATA_RANDOM_TALENT>
+<DATA_RANDOM_TALENT id="RULES-T0035">
+<Specie>"GREEN-RACE_BORC"</Specie>
+<Talent name="RULES-T0035">"85-87"</Talent>
+  <!-- Sturdy -->
+</DATA_RANDOM_TALENT>
+<DATA_RANDOM_TALENT id="RULES-T0116">
+<Specie>"GREEN-RACE_BORC"</Specie>
+<Talent name="RULES-T0116">"88-91"</Talent>
+  <!-- Tenacious -->
+</DATA_RANDOM_TALENT>
+<DATA_RANDOM_TALENT id="RULES-T0159">
+<Specie>"GREEN-RACE_BORC"</Specie>
+<Talent name="RULES-T0159">"92-94"</Talent>
+  <!-- Very Resilient -->
+</DATA_RANDOM_TALENT>
+<DATA_RANDOM_TALENT id="RULES-T0158">
+<Specie>"GREEN-RACE_BORC"</Specie>
+<Talent name="RULES-T0158">"95-97"</Talent>
+  <!-- Very Strong -->
+</DATA_RANDOM_TALENT>
+<DATA_RANDOM_TALENT id="RULES-T0067">
+<Specie>"GREEN-RACE_BORC"</Specie>
+<Talent name="RULES-T0067">"98-100"</Talent>
+  <!-- Warrior Born -->
+</DATA_RANDOM_TALENT>
+<DATA_RANDOM_TALENT id="RULES-T0139_*">
+<Specie>"GREEN-RACE_CGOB"</Specie>
+<Talent name="RULES-T0139_*">"01-03"</Talent>
+  <!-- Acute Sense (Any) -->
+</DATA_RANDOM_TALENT>
+<DATA_RANDOM_TALENT id="RULES-T0004">
+<Specie>"GREEN-RACE_CGOB"</Specie>
+<Talent name="RULES-T0004">"04-06"</Talent>
+  <!-- Ambidextrous -->
+</DATA_RANDOM_TALENT>
+<DATA_RANDOM_TALENT id="RULES-T0003">
+<Specie>"GREEN-RACE_CGOB"</Specie>
+<Talent name="RULES-T0003">"07-09"</Talent>
+  <!-- Animal Affinity -->
+</DATA_RANDOM_TALENT>
+<DATA_RANDOM_TALENT id="RULES-T0BIG">
+<Specie>"GREEN-RACE_CGOB"</Specie>
+<Talent name="RULES-T0BIG">"10-12"</Talent>
+  <!-- Big -->
+</DATA_RANDOM_TALENT>
+<DATA_RANDOM_TALENT id="RULES-T0104">
+<Specie>"GREEN-RACE_CGOB"</Specie>
+<Talent name="RULES-T0104">"13-15"</Talent>
+  <!-- Carouser -->
+</DATA_RANDOM_TALENT>
+<DATA_RANDOM_TALENT id="RULES-T0074">
+<Specie>"GREEN-RACE_CGOB"</Specie>
+<Talent name="RULES-T0074">"16-18"</Talent>
+  <!-- Coolheaded -->
+</DATA_RANDOM_TALENT>
+<DATA_RANDOM_TALENT id="RULES-T0092_*">
+<Specie>"GREEN-RACE_CGOB"</Specie>
+<Talent name="RULES-T0092_*">"19-21"</Talent>
+  <!-- craftsman (Any) -->
+</DATA_RANDOM_TALENT>
+<DATA_RANDOM_TALENT id="RULES-T0026">
+<Specie>"GREEN-RACE_CGOB"</Specie>
+<Talent name="RULES-T0026">"22-24"</Talent>
+  <!-- Dirty Fighting -->
+</DATA_RANDOM_TALENT>
+<DATA_RANDOM_TALENT id="RULES-T0091">
+<Specie>"GREEN-RACE_CGOB"</Specie>
+<Talent name="RULES-T0091">"25-28"</Talent>
+  <!-- Fast Hands -->
+</DATA_RANDOM_TALENT>
+<DATA_RANDOM_TALENT id="RULES-T0064">
+<Specie>"GREEN-RACE_CGOB"</Specie>
+<Talent name="RULES-T0064">"29-31"</Talent>
+  <!-- Flee! -->
+</DATA_RANDOM_TALENT>
+<DATA_RANDOM_TALENT id="RULES-T0063">
+<Specie>"GREEN-RACE_CGOB"</Specie>
+<Talent name="RULES-T0063">"32-34"</Talent>
+  <!-- Frenzy -->
+</DATA_RANDOM_TALENT>
+<DATA_RANDOM_TALENT id="RULES-T0047">
+<Specie>"GREEN-RACE_CGOB"</Specie>
+<Talent name="RULES-T0047">"35-38"</Talent>
+  <!-- Hardy -->
+</DATA_RANDOM_TALENT>
+<DATA_RANDOM_TALENT id="RULES-T0086">
+<Specie>"GREEN-RACE_CGOB"</Specie>
+<Talent name="RULES-T0086">"39-41"</Talent>
+  <!-- Iron Jaw -->
+</DATA_RANDOM_TALENT>
+<DATA_RANDOM_TALENT id="RULES-T0127">
+<Specie>"GREEN-RACE_CGOB"</Specie>
+<Talent name="RULES-T0127">"42-44"</Talent>
+  <!-- Lightning Reflexes -->
+</DATA_RANDOM_TALENT>
+<DATA_RANDOM_TALENT id="RULES-T0020">
+<Specie>"GREEN-RACE_CGOB"</Specie>
+<Talent name="RULES-T0020">"45-47"</Talent>
+  <!-- Luck -->
+</DATA_RANDOM_TALENT>
+<DATA_RANDOM_TALENT id="RULES-T0153">
+<Specie>"GREEN-RACE_CGOB"</Specie>
+<Talent name="RULES-T0153">"48-50"</Talent>
+  <!-- Marksman -->
+</DATA_RANDOM_TALENT>
+<DATA_RANDOM_TALENT id="RULES-T0045">
+<Specie>"GREEN-RACE_CGOB"</Specie>
+<Talent name="RULES-T0045">"51-53"</Talent>
+  <!-- Nimble Fingered -->
+</DATA_RANDOM_TALENT>
+<DATA_RANDOM_TALENT id="RULES-T0058">
+<Specie>"GREEN-RACE_CGOB"</Specie>
+<Talent name="RULES-T0058">"54-55"</Talent>
+  <!-- Nose for Trouble -->
+</DATA_RANDOM_TALENT>
+<DATA_RANDOM_TALENT id="RULES-T0140">
+<Specie>"GREEN-RACE_CGOB"</Specie>
+<Talent name="RULES-T0140">"56-58"</Talent>
+  <!-- Orientation -->
+</DATA_RANDOM_TALENT>
+<DATA_RANDOM_TALENT id="RULES-T0PAI">
+<Specie>"GREEN-RACE_CGOB"</Specie>
+<Talent name="RULES-T0PAI">"59-62"</Talent>
+  <!-- Painless -->
+</DATA_RANDOM_TALENT>
+<DATA_RANDOM_TALENT id="RULES-T0129_*">
+<Specie>"GREEN-RACE_CGOB"</Specie>
+<Talent name="RULES-T0129_*">"63-65"</Talent>
+  <!-- Resistance (Any) -->
+</DATA_RANDOM_TALENT>
+<DATA_RANDOM_TALENT id="RULES-T0105">
+<Specie>"GREEN-RACE_CGOB"</Specie>
+<Talent name="RULES-T0105">"66-68"</Talent>
+  <!-- Rover -->
+</DATA_RANDOM_TALENT>
+<DATA_RANDOM_TALENT id="RULES-T0117">
+<Specie>"GREEN-RACE_CGOB"</Specie>
+<Talent name="RULES-T0117">"69-71"</Talent>
+  <!-- Savvy -->
+</DATA_RANDOM_TALENT>
+<DATA_RANDOM_TALENT id="RULES-T0166">
+<Specie>"GREEN-RACE_CGOB"</Specie>
+<Talent name="RULES-T0166">"72-74"</Talent>
+  <!-- Sharp -->
+</DATA_RANDOM_TALENT>
+<DATA_RANDOM_TALENT id="RULES-T0141">
+<Specie>"GREEN-RACE_CGOB"</Specie>
+<Talent name="RULES-T0141">"75-78"</Talent>
+  <!-- Sixth Sense -->
+</DATA_RANDOM_TALENT>
+<DATA_RANDOM_TALENT id="RULES-T0016">
+<Specie>"GREEN-RACE_CGOB"</Specie>
+<Talent name="RULES-T0016">"79-81"</Talent>
+  <!-- Stone Soup -->
+</DATA_RANDOM_TALENT>
+<DATA_RANDOM_TALENT id="RULES-T0014">
+<Specie>"GREEN-RACE_CGOB"</Specie>
+<Talent name="RULES-T0014">"82-84"</Talent>
+  <!-- Strong Legs -->
+</DATA_RANDOM_TALENT>
+<DATA_RANDOM_TALENT id="RULES-T0035">
+<Specie>"GREEN-RACE_CGOB"</Specie>
+<Talent name="RULES-T0035">"85-87"</Talent>
+  <!-- Sturdy -->
+</DATA_RANDOM_TALENT>
+<DATA_RANDOM_TALENT id="RULES-T0116">
+<Specie>"GREEN-RACE_CGOB"</Specie>
+<Talent name="RULES-T0116">"88-91"</Talent>
+  <!-- Tenacious -->
+</DATA_RANDOM_TALENT>
+<DATA_RANDOM_TALENT id="RULES-T0159">
+<Specie>"GREEN-RACE_CGOB"</Specie>
+<Talent name="RULES-T0159">"92-94"</Talent>
+  <!-- Very Resilient -->
+</DATA_RANDOM_TALENT>
+<DATA_RANDOM_TALENT id="RULES-T0158">
+<Specie>"GREEN-RACE_CGOB"</Specie>
+<Talent name="RULES-T0158">"95-97"</Talent>
+  <!-- Very Strong -->
+</DATA_RANDOM_TALENT>
+<DATA_RANDOM_TALENT id="RULES-T0067">
+<Specie>"GREEN-RACE_CGOB"</Specie>
+<Talent name="RULES-T0067">"98-100"</Talent>
+  <!-- Warrior Born -->
+</DATA_RANDOM_TALENT>
+<DATA_RANDOM_TALENT id="RULES-T0139_*">
+<Specie>"GREEN-RACE_CORC"</Specie>
+<Talent name="RULES-T0139_*">"01-03"</Talent>
+  <!-- Acute Sense (Any) -->
+</DATA_RANDOM_TALENT>
+<DATA_RANDOM_TALENT id="RULES-T0004">
+<Specie>"GREEN-RACE_CORC"</Specie>
+<Talent name="RULES-T0004">"04-06"</Talent>
+  <!-- Ambidextrous -->
+</DATA_RANDOM_TALENT>
+<DATA_RANDOM_TALENT id="RULES-T0003">
+<Specie>"GREEN-RACE_CORC"</Specie>
+<Talent name="RULES-T0003">"07-09"</Talent>
+  <!-- Animal Affinity -->
+</DATA_RANDOM_TALENT>
+<DATA_RANDOM_TALENT id="RULES-T0BIG">
+<Specie>"GREEN-RACE_CORC"</Specie>
+<Talent name="RULES-T0BIG">"10-12"</Talent>
+  <!-- Big -->
+</DATA_RANDOM_TALENT>
+<DATA_RANDOM_TALENT id="RULES-T0104">
+<Specie>"GREEN-RACE_CORC"</Specie>
+<Talent name="RULES-T0104">"13-15"</Talent>
+  <!-- Carouser -->
+</DATA_RANDOM_TALENT>
+<DATA_RANDOM_TALENT id="RULES-T0074">
+<Specie>"GREEN-RACE_CORC"</Specie>
+<Talent name="RULES-T0074">"16-18"</Talent>
+  <!-- Coolheaded -->
+</DATA_RANDOM_TALENT>
+<DATA_RANDOM_TALENT id="RULES-T0092_*">
+<Specie>"GREEN-RACE_CORC"</Specie>
+<Talent name="RULES-T0092_*">"19-21"</Talent>
+  <!-- craftsman (Any) -->
+</DATA_RANDOM_TALENT>
+<DATA_RANDOM_TALENT id="RULES-T0026">
+<Specie>"GREEN-RACE_CORC"</Specie>
+<Talent name="RULES-T0026">"22-24"</Talent>
+  <!-- Dirty Fighting -->
+</DATA_RANDOM_TALENT>
+<DATA_RANDOM_TALENT id="RULES-T0091">
+<Specie>"GREEN-RACE_CORC"</Specie>
+<Talent name="RULES-T0091">"25-28"</Talent>
+  <!-- Fast Hands -->
+</DATA_RANDOM_TALENT>
+<DATA_RANDOM_TALENT id="RULES-T0064">
+<Specie>"GREEN-RACE_CORC"</Specie>
+<Talent name="RULES-T0064">"29-31"</Talent>
+  <!-- Flee! -->
+</DATA_RANDOM_TALENT>
+<DATA_RANDOM_TALENT id="RULES-T0063">
+<Specie>"GREEN-RACE_CORC"</Specie>
+<Talent name="RULES-T0063">"32-34"</Talent>
+  <!-- Frenzy -->
+</DATA_RANDOM_TALENT>
+<DATA_RANDOM_TALENT id="RULES-T0047">
+<Specie>"GREEN-RACE_CORC"</Specie>
+<Talent name="RULES-T0047">"35-38"</Talent>
+  <!-- Hardy -->
+</DATA_RANDOM_TALENT>
+<DATA_RANDOM_TALENT id="RULES-T0086">
+<Specie>"GREEN-RACE_CORC"</Specie>
+<Talent name="RULES-T0086">"39-41"</Talent>
+  <!-- Iron Jaw -->
+</DATA_RANDOM_TALENT>
+<DATA_RANDOM_TALENT id="RULES-T0127">
+<Specie>"GREEN-RACE_CORC"</Specie>
+<Talent name="RULES-T0127">"42-44"</Talent>
+  <!-- Lightning Reflexes -->
+</DATA_RANDOM_TALENT>
+<DATA_RANDOM_TALENT id="RULES-T0020">
+<Specie>"GREEN-RACE_CORC"</Specie>
+<Talent name="RULES-T0020">"45-47"</Talent>
+  <!-- Luck -->
+</DATA_RANDOM_TALENT>
+<DATA_RANDOM_TALENT id="RULES-T0153">
+<Specie>"GREEN-RACE_CORC"</Specie>
+<Talent name="RULES-T0153">"48-50"</Talent>
+  <!-- Marksman -->
+</DATA_RANDOM_TALENT>
+<DATA_RANDOM_TALENT id="RULES-T0045">
+<Specie>"GREEN-RACE_CORC"</Specie>
+<Talent name="RULES-T0045">"51-53"</Talent>
+  <!-- Nimble Fingered -->
+</DATA_RANDOM_TALENT>
+<DATA_RANDOM_TALENT id="RULES-T0058">
+<Specie>"GREEN-RACE_CORC"</Specie>
+<Talent name="RULES-T0058">"54-55"</Talent>
+  <!-- Nose for Trouble -->
+</DATA_RANDOM_TALENT>
+<DATA_RANDOM_TALENT id="RULES-T0140">
+<Specie>"GREEN-RACE_CORC"</Specie>
+<Talent name="RULES-T0140">"56-58"</Talent>
+  <!-- Orientation -->
+</DATA_RANDOM_TALENT>
+<DATA_RANDOM_TALENT id="RULES-T0PAI">
+<Specie>"GREEN-RACE_CORC"</Specie>
+<Talent name="RULES-T0PAI">"59-62"</Talent>
+  <!-- Painless -->
+</DATA_RANDOM_TALENT>
+<DATA_RANDOM_TALENT id="RULES-T0129_*">
+<Specie>"GREEN-RACE_CORC"</Specie>
+<Talent name="RULES-T0129_*">"63-65"</Talent>
+  <!-- Resistance (Any) -->
+</DATA_RANDOM_TALENT>
+<DATA_RANDOM_TALENT id="RULES-T0105">
+<Specie>"GREEN-RACE_CORC"</Specie>
+<Talent name="RULES-T0105">"66-68"</Talent>
+  <!-- Rover -->
+</DATA_RANDOM_TALENT>
+<DATA_RANDOM_TALENT id="RULES-T0117">
+<Specie>"GREEN-RACE_CORC"</Specie>
+<Talent name="RULES-T0117">"69-71"</Talent>
+  <!-- Savvy -->
+</DATA_RANDOM_TALENT>
+<DATA_RANDOM_TALENT id="RULES-T0166">
+<Specie>"GREEN-RACE_CORC"</Specie>
+<Talent name="RULES-T0166">"72-74"</Talent>
+  <!-- Sharp -->
+</DATA_RANDOM_TALENT>
+<DATA_RANDOM_TALENT id="RULES-T0141">
+<Specie>"GREEN-RACE_CORC"</Specie>
+<Talent name="RULES-T0141">"75-78"</Talent>
+  <!-- Sixth Sense -->
+</DATA_RANDOM_TALENT>
+<DATA_RANDOM_TALENT id="RULES-T0016">
+<Specie>"GREEN-RACE_CORC"</Specie>
+<Talent name="RULES-T0016">"79-81"</Talent>
+  <!-- Stone Soup -->
+</DATA_RANDOM_TALENT>
+<DATA_RANDOM_TALENT id="RULES-T0014">
+<Specie>"GREEN-RACE_CORC"</Specie>
+<Talent name="RULES-T0014">"82-84"</Talent>
+  <!-- Strong Legs -->
+</DATA_RANDOM_TALENT>
+<DATA_RANDOM_TALENT id="RULES-T0035">
+<Specie>"GREEN-RACE_CORC"</Specie>
+<Talent name="RULES-T0035">"85-87"</Talent>
+  <!-- Sturdy -->
+</DATA_RANDOM_TALENT>
+<DATA_RANDOM_TALENT id="RULES-T0116">
+<Specie>"GREEN-RACE_CORC"</Specie>
+<Talent name="RULES-T0116">"88-91"</Talent>
+  <!-- Tenacious -->
+</DATA_RANDOM_TALENT>
+<DATA_RANDOM_TALENT id="RULES-T0159">
+<Specie>"GREEN-RACE_CORC"</Specie>
+<Talent name="RULES-T0159">"92-94"</Talent>
+  <!-- Very Resilient -->
+</DATA_RANDOM_TALENT>
+<DATA_RANDOM_TALENT id="RULES-T0158">
+<Specie>"GREEN-RACE_CORC"</Specie>
+<Talent name="RULES-T0158">"95-97"</Talent>
+  <!-- Very Strong -->
+</DATA_RANDOM_TALENT>
+<DATA_RANDOM_TALENT id="RULES-T0067">
+<Specie>"GREEN-RACE_CORC"</Specie>
+<Talent name="RULES-T0067">"98-100"</Talent>
+  <!-- Warrior Born -->
+</DATA_RANDOM_TALENT>
+<DATA_RANDOM_TALENT id="RULES-T0139_*">
+<Specie>"GREEN-RACE_HGOB"</Specie>
+<Talent name="RULES-T0139_*">"01-03"</Talent>
+  <!-- Acute Sense (Any) -->
+</DATA_RANDOM_TALENT>
+<DATA_RANDOM_TALENT id="RULES-T0004">
+<Specie>"GREEN-RACE_HGOB"</Specie>
+<Talent name="RULES-T0004">"04-06"</Talent>
+  <!-- Ambidextrous -->
+</DATA_RANDOM_TALENT>
+<DATA_RANDOM_TALENT id="RULES-T0003">
+<Specie>"GREEN-RACE_HGOB"</Specie>
+<Talent name="RULES-T0003">"07-09"</Talent>
+  <!-- Animal Affinity -->
+</DATA_RANDOM_TALENT>
+<DATA_RANDOM_TALENT id="RULES-T0BIG">
+<Specie>"GREEN-RACE_HGOB"</Specie>
+<Talent name="RULES-T0BIG">"10-12"</Talent>
+  <!-- Big -->
+</DATA_RANDOM_TALENT>
+<DATA_RANDOM_TALENT id="RULES-T0104">
+<Specie>"GREEN-RACE_HGOB"</Specie>
+<Talent name="RULES-T0104">"13-15"</Talent>
+  <!-- Carouser -->
+</DATA_RANDOM_TALENT>
+<DATA_RANDOM_TALENT id="RULES-T0074">
+<Specie>"GREEN-RACE_HGOB"</Specie>
+<Talent name="RULES-T0074">"16-18"</Talent>
+  <!-- Coolheaded -->
+</DATA_RANDOM_TALENT>
+<DATA_RANDOM_TALENT id="RULES-T0092_*">
+<Specie>"GREEN-RACE_HGOB"</Specie>
+<Talent name="RULES-T0092_*">"19-21"</Talent>
+  <!-- craftsman (Any) -->
+</DATA_RANDOM_TALENT>
+<DATA_RANDOM_TALENT id="RULES-T0026">
+<Specie>"GREEN-RACE_HGOB"</Specie>
+<Talent name="RULES-T0026">"22-24"</Talent>
+  <!-- Dirty Fighting -->
+</DATA_RANDOM_TALENT>
+<DATA_RANDOM_TALENT id="RULES-T0091">
+<Specie>"GREEN-RACE_HGOB"</Specie>
+<Talent name="RULES-T0091">"25-28"</Talent>
+  <!-- Fast Hands -->
+</DATA_RANDOM_TALENT>
+<DATA_RANDOM_TALENT id="RULES-T0064">
+<Specie>"GREEN-RACE_HGOB"</Specie>
+<Talent name="RULES-T0064">"29-31"</Talent>
+  <!-- Flee! -->
+</DATA_RANDOM_TALENT>
+<DATA_RANDOM_TALENT id="RULES-T0063">
+<Specie>"GREEN-RACE_HGOB"</Specie>
+<Talent name="RULES-T0063">"32-34"</Talent>
+  <!-- Frenzy -->
+</DATA_RANDOM_TALENT>
+<DATA_RANDOM_TALENT id="RULES-T0047">
+<Specie>"GREEN-RACE_HGOB"</Specie>
+<Talent name="RULES-T0047">"35-38"</Talent>
+  <!-- Hardy -->
+</DATA_RANDOM_TALENT>
+<DATA_RANDOM_TALENT id="RULES-T0086">
+<Specie>"GREEN-RACE_HGOB"</Specie>
+<Talent name="RULES-T0086">"39-41"</Talent>
+  <!-- Iron Jaw -->
+</DATA_RANDOM_TALENT>
+<DATA_RANDOM_TALENT id="RULES-T0127">
+<Specie>"GREEN-RACE_HGOB"</Specie>
+<Talent name="RULES-T0127">"42-44"</Talent>
+  <!-- Lightning Reflexes -->
+</DATA_RANDOM_TALENT>
+<DATA_RANDOM_TALENT id="RULES-T0020">
+<Specie>"GREEN-RACE_HGOB"</Specie>
+<Talent name="RULES-T0020">"45-47"</Talent>
+  <!-- Luck -->
+</DATA_RANDOM_TALENT>
+<DATA_RANDOM_TALENT id="RULES-T0153">
+<Specie>"GREEN-RACE_HGOB"</Specie>
+<Talent name="RULES-T0153">"48-50"</Talent>
+  <!-- Marksman -->
+</DATA_RANDOM_TALENT>
+<DATA_RANDOM_TALENT id="RULES-T0045">
+<Specie>"GREEN-RACE_HGOB"</Specie>
+<Talent name="RULES-T0045">"51-53"</Talent>
+  <!-- Nimble Fingered -->
+</DATA_RANDOM_TALENT>
+<DATA_RANDOM_TALENT id="RULES-T0058">
+<Specie>"GREEN-RACE_HGOB"</Specie>
+<Talent name="RULES-T0058">"54-55"</Talent>
+  <!-- Nose for Trouble -->
+</DATA_RANDOM_TALENT>
+<DATA_RANDOM_TALENT id="RULES-T0140">
+<Specie>"GREEN-RACE_HGOB"</Specie>
+<Talent name="RULES-T0140">"56-58"</Talent>
+  <!-- Orientation -->
+</DATA_RANDOM_TALENT>
+<DATA_RANDOM_TALENT id="RULES-T0PAI">
+<Specie>"GREEN-RACE_HGOB"</Specie>
+<Talent name="RULES-T0PAI">"59-62"</Talent>
+  <!-- Painless -->
+</DATA_RANDOM_TALENT>
+<DATA_RANDOM_TALENT id="RULES-T0129_*">
+<Specie>"GREEN-RACE_HGOB"</Specie>
+<Talent name="RULES-T0129_*">"63-65"</Talent>
+  <!-- Resistance (Any) -->
+</DATA_RANDOM_TALENT>
+<DATA_RANDOM_TALENT id="RULES-T0105">
+<Specie>"GREEN-RACE_HGOB"</Specie>
+<Talent name="RULES-T0105">"66-68"</Talent>
+  <!-- Rover -->
+</DATA_RANDOM_TALENT>
+<DATA_RANDOM_TALENT id="RULES-T0117">
+<Specie>"GREEN-RACE_HGOB"</Specie>
+<Talent name="RULES-T0117">"69-71"</Talent>
+  <!-- Savvy -->
+</DATA_RANDOM_TALENT>
+<DATA_RANDOM_TALENT id="RULES-T0166">
+<Specie>"GREEN-RACE_HGOB"</Specie>
+<Talent name="RULES-T0166">"72-74"</Talent>
+  <!-- Sharp -->
+</DATA_RANDOM_TALENT>
+<DATA_RANDOM_TALENT id="RULES-T0141">
+<Specie>"GREEN-RACE_HGOB"</Specie>
+<Talent name="RULES-T0141">"75-78"</Talent>
+  <!-- Sixth Sense -->
+</DATA_RANDOM_TALENT>
+<DATA_RANDOM_TALENT id="RULES-T0016">
+<Specie>"GREEN-RACE_HGOB"</Specie>
+<Talent name="RULES-T0016">"79-81"</Talent>
+  <!-- Stone Soup -->
+</DATA_RANDOM_TALENT>
+<DATA_RANDOM_TALENT id="RULES-T0014">
+<Specie>"GREEN-RACE_HGOB"</Specie>
+<Talent name="RULES-T0014">"82-84"</Talent>
+  <!-- Strong Legs -->
+</DATA_RANDOM_TALENT>
+<DATA_RANDOM_TALENT id="RULES-T0035">
+<Specie>"GREEN-RACE_HGOB"</Specie>
+<Talent name="RULES-T0035">"85-87"</Talent>
+  <!-- Sturdy -->
+</DATA_RANDOM_TALENT>
+<DATA_RANDOM_TALENT id="RULES-T0116">
+<Specie>"GREEN-RACE_HGOB"</Specie>
+<Talent name="RULES-T0116">"88-91"</Talent>
+  <!-- Tenacious -->
+</DATA_RANDOM_TALENT>
+<DATA_RANDOM_TALENT id="RULES-T0159">
+<Specie>"GREEN-RACE_HGOB"</Specie>
+<Talent name="RULES-T0159">"92-94"</Talent>
+  <!-- Very Resilient -->
+</DATA_RANDOM_TALENT>
+<DATA_RANDOM_TALENT id="RULES-T0158">
+<Specie>"GREEN-RACE_HGOB"</Specie>
+<Talent name="RULES-T0158">"95-97"</Talent>
+  <!-- Very Strong -->
+</DATA_RANDOM_TALENT>
+<DATA_RANDOM_TALENT id="RULES-T0067">
+<Specie>"GREEN-RACE_HGOB"</Specie>
+<Talent name="RULES-T0067">"98-100"</Talent>
+  <!-- Warrior Born -->
+</DATA_RANDOM_TALENT>
+<DATA_RANDOM_TALENT id="RULES-T0139_*">
+<Specie>"GREEN-RACE_NGOB"</Specie>
+<Talent name="RULES-T0139_*">"01-03"</Talent>
+  <!-- Acute Sense (Any) -->
+</DATA_RANDOM_TALENT>
+<DATA_RANDOM_TALENT id="RULES-T0004">
+<Specie>"GREEN-RACE_NGOB"</Specie>
+<Talent name="RULES-T0004">"04-06"</Talent>
+  <!-- Ambidextrous -->
+</DATA_RANDOM_TALENT>
+<DATA_RANDOM_TALENT id="RULES-T0003">
+<Specie>"GREEN-RACE_NGOB"</Specie>
+<Talent name="RULES-T0003">"07-09"</Talent>
+  <!-- Animal Affinity -->
+</DATA_RANDOM_TALENT>
+<DATA_RANDOM_TALENT id="RULES-T0BIG">
+<Specie>"GREEN-RACE_NGOB"</Specie>
+<Talent name="RULES-T0BIG">"10-12"</Talent>
+  <!-- Big -->
+</DATA_RANDOM_TALENT>
+<DATA_RANDOM_TALENT id="RULES-T0104">
+<Specie>"GREEN-RACE_NGOB"</Specie>
+<Talent name="RULES-T0104">"13-15"</Talent>
+  <!-- Carouser -->
+</DATA_RANDOM_TALENT>
+<DATA_RANDOM_TALENT id="RULES-T0074">
+<Specie>"GREEN-RACE_NGOB"</Specie>
+<Talent name="RULES-T0074">"16-18"</Talent>
+  <!-- Coolheaded -->
+</DATA_RANDOM_TALENT>
+<DATA_RANDOM_TALENT id="RULES-T0092_*">
+<Specie>"GREEN-RACE_NGOB"</Specie>
+<Talent name="RULES-T0092_*">"19-21"</Talent>
+  <!-- craftsman (Any) -->
+</DATA_RANDOM_TALENT>
+<DATA_RANDOM_TALENT id="RULES-T0026">
+<Specie>"GREEN-RACE_NGOB"</Specie>
+<Talent name="RULES-T0026">"22-24"</Talent>
+  <!-- Dirty Fighting -->
+</DATA_RANDOM_TALENT>
+<DATA_RANDOM_TALENT id="RULES-T0091">
+<Specie>"GREEN-RACE_NGOB"</Specie>
+<Talent name="RULES-T0091">"25-28"</Talent>
+  <!-- Fast Hands -->
+</DATA_RANDOM_TALENT>
+<DATA_RANDOM_TALENT id="RULES-T0064">
+<Specie>"GREEN-RACE_NGOB"</Specie>
+<Talent name="RULES-T0064">"29-31"</Talent>
+  <!-- Flee! -->
+</DATA_RANDOM_TALENT>
+<DATA_RANDOM_TALENT id="RULES-T0063">
+<Specie>"GREEN-RACE_NGOB"</Specie>
+<Talent name="RULES-T0063">"32-34"</Talent>
+  <!-- Frenzy -->
+</DATA_RANDOM_TALENT>
+<DATA_RANDOM_TALENT id="RULES-T0047">
+<Specie>"GREEN-RACE_NGOB"</Specie>
+<Talent name="RULES-T0047">"35-38"</Talent>
+  <!-- Hardy -->
+</DATA_RANDOM_TALENT>
+<DATA_RANDOM_TALENT id="RULES-T0086">
+<Specie>"GREEN-RACE_NGOB"</Specie>
+<Talent name="RULES-T0086">"39-41"</Talent>
+  <!-- Iron Jaw -->
+</DATA_RANDOM_TALENT>
+<DATA_RANDOM_TALENT id="RULES-T0127">
+<Specie>"GREEN-RACE_NGOB"</Specie>
+<Talent name="RULES-T0127">"42-44"</Talent>
+  <!-- Lightning Reflexes -->
+</DATA_RANDOM_TALENT>
+<DATA_RANDOM_TALENT id="RULES-T0020">
+<Specie>"GREEN-RACE_NGOB"</Specie>
+<Talent name="RULES-T0020">"45-47"</Talent>
+  <!-- Luck -->
+</DATA_RANDOM_TALENT>
+<DATA_RANDOM_TALENT id="RULES-T0153">
+<Specie>"GREEN-RACE_NGOB"</Specie>
+<Talent name="RULES-T0153">"48-50"</Talent>
+  <!-- Marksman -->
+</DATA_RANDOM_TALENT>
+<DATA_RANDOM_TALENT id="RULES-T0045">
+<Specie>"GREEN-RACE_NGOB"</Specie>
+<Talent name="RULES-T0045">"51-53"</Talent>
+  <!-- Nimble Fingered -->
+</DATA_RANDOM_TALENT>
+<DATA_RANDOM_TALENT id="RULES-T0058">
+<Specie>"GREEN-RACE_NGOB"</Specie>
+<Talent name="RULES-T0058">"54-55"</Talent>
+  <!-- Nose for Trouble -->
+</DATA_RANDOM_TALENT>
+<DATA_RANDOM_TALENT id="RULES-T0140">
+<Specie>"GREEN-RACE_NGOB"</Specie>
+<Talent name="RULES-T0140">"56-58"</Talent>
+  <!-- Orientation -->
+</DATA_RANDOM_TALENT>
+<DATA_RANDOM_TALENT id="RULES-T0PAI">
+<Specie>"GREEN-RACE_NGOB"</Specie>
+<Talent name="RULES-T0PAI">"59-62"</Talent>
+  <!-- Painless -->
+</DATA_RANDOM_TALENT>
+<DATA_RANDOM_TALENT id="RULES-T0129_*">
+<Specie>"GREEN-RACE_NGOB"</Specie>
+<Talent name="RULES-T0129_*">"63-65"</Talent>
+  <!-- Resistance (Any) -->
+</DATA_RANDOM_TALENT>
+<DATA_RANDOM_TALENT id="RULES-T0105">
+<Specie>"GREEN-RACE_NGOB"</Specie>
+<Talent name="RULES-T0105">"66-68"</Talent>
+  <!-- Rover -->
+</DATA_RANDOM_TALENT>
+<DATA_RANDOM_TALENT id="RULES-T0117">
+<Specie>"GREEN-RACE_NGOB"</Specie>
+<Talent name="RULES-T0117">"69-71"</Talent>
+  <!-- Savvy -->
+</DATA_RANDOM_TALENT>
+<DATA_RANDOM_TALENT id="RULES-T0166">
+<Specie>"GREEN-RACE_NGOB"</Specie>
+<Talent name="RULES-T0166">"72-74"</Talent>
+  <!-- Sharp -->
+</DATA_RANDOM_TALENT>
+<DATA_RANDOM_TALENT id="RULES-T0141">
+<Specie>"GREEN-RACE_NGOB"</Specie>
+<Talent name="RULES-T0141">"75-78"</Talent>
+  <!-- Sixth Sense -->
+</DATA_RANDOM_TALENT>
+<DATA_RANDOM_TALENT id="RULES-T0016">
+<Specie>"GREEN-RACE_NGOB"</Specie>
+<Talent name="RULES-T0016">"79-81"</Talent>
+  <!-- Stone Soup -->
+</DATA_RANDOM_TALENT>
+<DATA_RANDOM_TALENT id="RULES-T0014">
+<Specie>"GREEN-RACE_NGOB"</Specie>
+<Talent name="RULES-T0014">"82-84"</Talent>
+  <!-- Strong Legs -->
+</DATA_RANDOM_TALENT>
+<DATA_RANDOM_TALENT id="RULES-T0035">
+<Specie>"GREEN-RACE_NGOB"</Specie>
+<Talent name="RULES-T0035">"85-87"</Talent>
+  <!-- Sturdy -->
+</DATA_RANDOM_TALENT>
+<DATA_RANDOM_TALENT id="RULES-T0116">
+<Specie>"GREEN-RACE_NGOB"</Specie>
+<Talent name="RULES-T0116">"88-91"</Talent>
+  <!-- Tenacious -->
+</DATA_RANDOM_TALENT>
+<DATA_RANDOM_TALENT id="RULES-T0159">
+<Specie>"GREEN-RACE_NGOB"</Specie>
+<Talent name="RULES-T0159">"92-94"</Talent>
+  <!-- Very Resilient -->
+</DATA_RANDOM_TALENT>
+<DATA_RANDOM_TALENT id="RULES-T0158">
+<Specie>"GREEN-RACE_NGOB"</Specie>
+<Talent name="RULES-T0158">"95-97"</Talent>
+  <!-- Very Strong -->
+</DATA_RANDOM_TALENT>
+<DATA_RANDOM_TALENT id="RULES-T0067">
+<Specie>"GREEN-RACE_NGOB"</Specie>
+<Talent name="RULES-T0067">"98-100"</Talent>
+  <!-- Warrior Born -->
+</DATA_RANDOM_TALENT>
+</DATA_RANDOM_TALENT>
+<DATA_SPECIE>
+<Specie id="GREEN-RACE_CORC">
+<Description language="ENGLISH">"Common Orcs"</Description>
+<Explanation language="ENGLISH">"Orcs are the largest as well as the toughest, meanest and by far the most dangerous of the greenskins. There are several different kinds of Orc, as we shall see, but the most numerous are just plain Orcs or Common Orcs. Even the smallest Orc packs a great deal of bone, muscle and bloody-mindedness into a body as tall as a man and substantionally broader. Orcs vary a great deal in size and appearance, with the biggest individuals in charge of the rest. The pecking order within each tribe is established by constant fighting, so only the meanest and nastiest Orcs get to the very top of the tribal ladder. What Orcs all have in undeniable abundance is brute strength, made all the more dangerous by generous lashings of ignorance."</Explanation>
+<Ethnic>"SPECIE_ORC"</Ethnic>
+<SUBCHAPTER_ATTR>
+<Attribut name="RULES-ATTR_WS">"2d10+25"</Attribut>
+<Attribut name="RULES-ATTR_BS">"2d10+20"</Attribut>
+<Attribut name="RULES-ATTR_S">"2d10+25"</Attribut>
+<Attribut name="RULES-ATTR_T">"2d10+35"</Attribut>
+<Attribut name="RULES-ATTR_I">"2d10+10"</Attribut>
+<Attribut name="RULES-ATTR_Ag">"2d10+15"</Attribut>
+<Attribut name="RULES-ATTR_Dex">"2d10+10"</Attribut>
+<Attribut name="RULES-ATTR_Int">"2d10+15"</Attribut>
+<Attribut name="RULES-ATTR_WP">"2d10+20"</Attribut>
+<Attribut name="RULES-ATTR_Fel">"2d10+10"</Attribut>
+<Attribut name="RULES-ATTR_Fate">"1"</Attribut>
+<Attribut name="RULES-ATTR_Resil">"2"</Attribut>
+<Attribut name="RULES-ATTR_Wound">"1xBATTR_S+2xBATTR_T+1xBATTR_WP"</Attribut>
+<Attribut name="RULES-ATTR_Supp">"2"</Attribut>
+<Attribut name="RULES-ATTR_Move">"4"</Attribut>
+</SUBCHAPTER_ATTR>
+<SUBCHAPTER_SKILL>
+<Skill>"RULES-COMPATHL"</Skill>
+  <!-- Athletics -->
+<Skill>"RULES-COMPRESALC"</Skill>
+  <!-- Consume Alcohol -->
+<Skill>"RULES-COMPCALM"</Skill>
+  <!-- Cool -->
+<Skill>"RULES-COMPRESIST"</Skill>
+  <!-- Endurance -->
+<Skill>"RULES-COMPPARI"</Skill>
+  <!-- Gamble -->
+<Skill>"RULES-COMPSAVOIR_GREENSKIN"</Skill>
+  <!-- Lore (Greenskins) -->
+<Skill>"RULES-COMPCOMB_BASE"</Skill>
+  <!-- Melee (Basic) -->
+<Skill>"RULES-COMPCOMB_BAGARRE"</Skill>
+  <!-- Melee (Brawling) -->
+<Skill>"RULES-COMPPROJ_ARC"</Skill>
+  <!-- Ranged (Bow) -->
+<Skill>"RULES-COMPINTIM"</Skill>
+  <!-- Intimidate -->
+<Skill>"RULES-COMPLANG_GOBLIN"</Skill>
+  <!-- Language (Goblin Tongue) -->
+<Skill>"RULES-COMPPRECEP"</Skill>
+  <!-- Perception  -->
+</SUBCHAPTER_SKILL>
+<SUBCHAPTER_TALENT>
+<Talent>"RULES-T0HAT_GREENSKIN"</Talent>
+  <!-- Animosity (Greenskins) -->
+<Talent>"RULES-T0BEL"</Talent>
+  <!-- Belligerent -->
+<Talent>"RULES-T0DIE"</Talent>
+  <!-- Die Hard -->
+<Talent>"RULES-T*"</Talent>
+  <!-- Random Talent -->
+<Talent>"RULES-T*"</Talent>
+  <!-- Random Talent -->
+</SUBCHAPTER_TALENT>
+<SUBCHAPTER_CAREER>
+<Career name="RULES-WORK10">"01-05"</Career>
+  <!-- Hunter -->
+<Career name="RULES-WORK40">"06-08"</Career>
+  <!-- Miner -->
+<Career name="RULES-WORK19">"09-10"</Career>
+  <!-- Scout -->
+<Career name="RULES-WORK42">"11-15"</Career>
+  <!-- Wrecker -->
+<Career name="RULES-WORK30">"16-20"</Career>
+  <!-- Outlaw -->
+<Career name="RULES-WORK27">"21-30"</Career>
+  <!-- Guard -->
+<Career name="RULES-WORK12">"31-40"</Career>
+  <!-- Knight -->
+<Career name="RULES-WORK28">"41-45"</Career>
+  <!-- Pit Fighter -->
+<Career name="RULES-WORK61">"46-49"</Career>
+  <!-- Protagonist -->
+<Career name="RULES-WORK57">"50-100"</Career>
+  <!-- Soldier -->
+<Career name="NAGGA-WORK120">"01-02"</Career>
+  <!-- Sorceress of Ghrond -->
+<Career name="RULES-WORK18">"03-07"</Career>
+  <!-- Duellist -->
+<Career name="RULES-WORK24">"08-11"</Career>
+  <!-- Spy -->
+<Career name="RULES-WORK10">"12-13"</Career>
+  <!-- Hunter -->
+<Career name="RULES-WORK19">"14-15"</Career>
+  <!-- Scout -->
+<Career name="NAGGA-WORK121">"16-24"</Career>
+  <!-- Beastmaster -->
+<Career name="RULES-WORK11">"25-30"</Career>
+  <!-- Bounty Hunter -->
+<Career name="NAGGA-WORK119">"31-40"</Career>
+  <!-- Black Ark Corsair -->
+<Career name="RULES-WORK35">"41-42"</Career>
+  <!-- Seaman -->
+<Career name="RULES-WORK16">"43-45"</Career>
+  <!-- Smuggler -->
+<Career name="NAGGA-WORK122">"46-50"</Career>
+  <!-- Disciple of Khaine -->
+<Career name="RULES-WORK53">"51-56"</Career>
+  <!-- Fence -->
+<Career name="RULES-WORK30">"57-62"</Career>
+  <!-- Outlaw -->
+<Career name="RULES-WORK51">"63-68"</Career>
+  <!-- Racketeer -->
+<Career name="RULES-WORK08">"69-74"</Career>
+  <!-- Cavalryman -->
+<Career name="RULES-WORK27">"75-78"</Career>
+  <!-- Guard -->
+<Career name="RULES-WORK12">"79-82"</Career>
+  <!-- Knight -->
+<Career name="RULES-WORK28">"83-86"</Career>
+  <!-- Pit Fighter -->
+<Career name="RULES-WORK61">"87-89"</Career>
+  <!-- Protagonist -->
+<Career name="RULES-WORK57">"90-100"</Career>
+  <!-- Soldier -->
+</SUBCHAPTER_CAREER>
+</Specie>
+<Specie id="GREEN-RACE_BORC">
+<Description language="ENGLISH">"Dark Orcs"</Description>
+<Explanation language="ENGLISH">"Black Orcs are the biggest, meanest and strongest of all Orcs. They get their name from their dark green or black skin, although the title is just as much derived from their dour demeanour. Black Orcs are grim and singularly focused on war – an occupation they take extremely seriously. It can truly be said that Black Orcs live to fight. In this regard all Black Orcs treat other greenskins, even the more battle-worthy types, such as Boar Boyz, as little more than frivolous amateurs. This is largely because lesser Orcs, even the hulking Big ’Uns of the Orc tribes, are likely to squabble amongst themselves instead of concentrating on the foe and fight at hand. This lack of discipline is a shortcoming that Black Orcs neither forget nor forgive"</Explanation>
+<Ethnic>"SPECIE_ORC"</Ethnic>
+<SUBCHAPTER_ATTR>
+<Attribut name="RULES-ATTR_WS">"2d10+35"</Attribut>
+<Attribut name="RULES-ATTR_BS">"2d10+15"</Attribut>
+<Attribut name="RULES-ATTR_S">"2d10+35"</Attribut>
+<Attribut name="RULES-ATTR_T">"2d10+35"</Attribut>
+<Attribut name="RULES-ATTR_I">"2d10+10"</Attribut>
+<Attribut name="RULES-ATTR_Ag">"2d10+15"</Attribut>
+<Attribut name="RULES-ATTR_Dex">"2d10+10"</Attribut>
+<Attribut name="RULES-ATTR_Int">"2d10+15"</Attribut>
+<Attribut name="RULES-ATTR_WP">"2d10+25"</Attribut>
+<Attribut name="RULES-ATTR_Fel">"2d10+10"</Attribut>
+<Attribut name="RULES-ATTR_Fate">"0"</Attribut>
+<Attribut name="RULES-ATTR_Resil">"3"</Attribut>
+<Attribut name="RULES-ATTR_Wound">"1xBATTR_S+2xBATTR_T+1xBATTR_WP"</Attribut>
+<Attribut name="RULES-ATTR_Supp">"1"</Attribut>
+<Attribut name="RULES-ATTR_Move">"4"</Attribut>
+</SUBCHAPTER_ATTR>
+<SUBCHAPTER_SKILL>
+<Skill>"RULES-COMPATHL"</Skill>
+  <!-- Athletics -->
+<Skill>"RULES-COMPRESALC"</Skill>
+  <!-- Consume Alcohol -->
+<Skill>"RULES-COMPCALM"</Skill>
+  <!-- Cool -->
+<Skill>"RULES-COMPRESIST"</Skill>
+  <!-- Endurance -->
+<Skill>"RULES-COMPCOMB_BASE"</Skill>
+  <!-- Melee (Basic) -->
+<Skill>"RULES-COMPCOMB_2M"</Skill>
+  <!-- Melee (Two hands) -->
+<Skill>"RULES-COMPINTIM"</Skill>
+  <!-- Intimidate -->
+<Skill>"RULES-COMPINTUI"</Skill>
+  <!-- Intuition  -->
+<Skill>"RULES-COMPSAVOIR_GREENSKIN"</Skill>
+  <!-- Lore (Greenskins) -->
+<Skill>"RULES-COMPCOMM"</Skill>
+  <!-- Leadership -->
+<Skill>"RULES-COMPLANG_GOBLIN"</Skill>
+  <!-- Language (Goblin Tongue) -->
+<Skill>"RULES-COMPPRECEP"</Skill>
+  <!-- Perception  -->
+</SUBCHAPTER_SKILL>
+<SUBCHAPTER_TALENT>
+<Talent>"RULES-T0BEL"</Talent>
+  <!-- Belligerent -->
+<Talent>"RULES-T0DIE"</Talent>
+  <!-- Die Hard -->
+<Talent>"RULES-T0098"</Talent>
+  <!-- Menacing -->
+<Talent>"RULES-T0164"</Talent>
+  <!-- Night Vision -->
+<Talent>"RULES-T0131/RULES-T0077"</Talent>
+  <!-- Robust/Strong Back -->
+</SUBCHAPTER_TALENT>
+<SUBCHAPTER_CAREER>
+<Career name="RULES-WORK27">"01-21"</Career>
+  <!-- Guard -->
+<Career name="RULES-WORK12">"22-35"</Career>
+  <!-- Knight -->
+<Career name="RULES-WORK28">"36-49"</Career>
+  <!-- Pit Fighter -->
+<Career name="RULES-WORK57">"50-100"</Career>
+  <!-- Soldier -->
+</SUBCHAPTER_CAREER>
+</Specie>
+<Specie id="GREEN-RACE_CGOB">
+<Description language="ENGLISH">"Common Goblins"</Description>
+<Explanation language="ENGLISH">"Goblins are small, green, vicious, mean-spirited and generally unpleasant creatues. Clues as to their character may be discerned in their tiny pointed teeth, beady glinting eyes, scrawny, grasping hands and general demeanour of a whipped dog. Goblins are however very prolific and they exist practically everywhere in the known world. No matter how many die there are still plenty left. Their preferred method of fighting is to shoot their enemy in the back from a good distance. Like all greenskins, Goblins are quarrelsome and fractious. They fight amongst themselves both on and off the battlefield. They feel little sense of loalty to their their own kin let alone anyone else, and will cheerfully maim, kill and even eat their comrades if they can get away with it. The majority of Goblins living in open areas, most notably in the Badlands and the Dark lands, are Common Goblins or just ordinary Gobbos. They are as common as muck throughout the hills, valleys and plains f the Old World and Beyond."</Explanation>
+<Ethnic>"SPECIE_GOBLIN"</Ethnic>
+<SUBCHAPTER_ATTR>
+<Attribut name="RULES-ATTR_WS">"2d10+15"</Attribut>
+<Attribut name="RULES-ATTR_BS">"2d10+25"</Attribut>
+<Attribut name="RULES-ATTR_S">"2d10+20"</Attribut>
+<Attribut name="RULES-ATTR_T">"2d10+20"</Attribut>
+<Attribut name="RULES-ATTR_I">"2d10+10"</Attribut>
+<Attribut name="RULES-ATTR_Ag">"2d10+25"</Attribut>
+<Attribut name="RULES-ATTR_Dex">"2d10+20"</Attribut>
+<Attribut name="RULES-ATTR_Int">"2d10+20"</Attribut>
+<Attribut name="RULES-ATTR_WP">"2d10+10"</Attribut>
+<Attribut name="RULES-ATTR_Fel">"2d10+10"</Attribut>
+<Attribut name="RULES-ATTR_Fate">"1"</Attribut>
+<Attribut name="RULES-ATTR_Resil">"1"</Attribut>
+<Attribut name="RULES-ATTR_Wound">"0xBATTR_Sx1xBATTR_T+1xBATTR_WP"</Attribut>
+<Attribut name="RULES-ATTR_Supp">"3"</Attribut>
+<Attribut name="RULES-ATTR_Move">"4"</Attribut>
+</SUBCHAPTER_ATTR>
+<SUBCHAPTER_SKILL>
+<Skill>"RULES-COMPATHL"</Skill>
+  <!-- Athletics -->
+<Skill>"RULES-COMPESCAL"</Skill>
+  <!-- Climb -->
+<Skill>"RULES-COMPPARI"</Skill>
+  <!-- Gamble -->
+<Skill>"RULES-COMPRAGOT"</Skill>
+  <!-- Gossip -->
+<Skill>"RULES-COMPSAVOIR_GREENSKIN"</Skill>
+  <!-- Lore (Greenskins) -->
+<Skill>"RULES-COMPCOMB_BASE"</Skill>
+  <!-- Melee (Basic) -->
+<Skill>"RULES-COMPPROJ_ARC"</Skill>
+  <!-- Ranged (Bow) -->
+<Skill>"RULES-COMPESCAM"</Skill>
+  <!-- Sleight if Hand -->
+<Skill>"RULES-COMPDISC_RURAL"</Skill>
+  <!-- Stealth (Rural) -->
+<Skill>"RULES-COMPSURVEXT"</Skill>
+  <!-- Outdoor Survival -->
+<Skill>"RULES-COMPLANG_GOBLIN"</Skill>
+  <!-- Language (Goblin Tongue) -->
+<Skill>"RULES-COMPPRECEP"</Skill>
+  <!-- Perception  -->
+</SUBCHAPTER_SKILL>
+<SUBCHAPTER_TALENT>
+<Talent>"RULES-T0HAT_GREENSKIN"</Talent>
+  <!-- Animosity (Greenskins) -->
+<Talent>"RULES-T0AFR_ELF"</Talent>
+  <!-- Afraid (Elves) -->
+<Talent>"RULES-T0164"</Talent>
+  <!-- Night Vision -->
+<Talent>"RULES-T0170"</Talent>
+  <!-- Small -->
+<Talent>"RULES-T*"</Talent>
+  <!-- Random Talent -->
+</SUBCHAPTER_TALENT>
+<SUBCHAPTER_CAREER>
+<Career name="RULES-WORK34">"01-03"</Career>
+  <!-- Merchant -->
+<Career name="RULES-WORK56">"04-10"</Career>
+  <!-- Servant -->
+<Career name="RULES-WORK29">"11-15"</Career>
+  <!-- Herbalist -->
+<Career name="RULES-WORK10">"16-20"</Career>
+  <!-- Hunter -->
+<Career name="RULES-WORK40">"21-25"</Career>
+  <!-- Miner -->
+<Career name="RULES-WORK19">"26-30"</Career>
+  <!-- Scout -->
+<Career name="RULES-WORK63">"31-38"</Career>
+  <!-- Villager -->
+<Career name="RULES-WORK55">"39-44"</Career>
+  <!-- Entertainer -->
+<Career name="RULES-WORK38">"45-50"</Career>
+  <!-- Messenger -->
+<Career name="RULES-WORK14">"51-53"</Career>
+  <!-- Pedlar -->
+<Career name="RULES-WORK42">"54-55"</Career>
+  <!-- Wrecker -->
+<Career name="RULES-WORK30">"56-59"</Career>
+  <!-- Outlaw -->
+<Career name="RULES-WORK64">"60-63"</Career>
+  <!-- Thief -->
+<Career name="RULES-WORK08">"64-69"</Career>
+  <!-- Cavalryman -->
+<Career name="RULES-WORK27">"70-71"</Career>
+  <!-- Guard -->
+<Career name="RULES-WORK12">"72-75"</Career>
+  <!-- Knight -->
+<Career name="RULES-WORK28">"76-77"</Career>
+  <!-- Pit Fighter -->
+<Career name="RULES-WORK57">"78-100"</Career>
+  <!-- Soldier -->
+</SUBCHAPTER_CAREER>
+</Specie>
+<Specie id="GREEN-RACE_NGOB">
+<Description language="ENGLISH">"Night Goblins"</Description>
+<Explanation language="ENGLISH">"Goblins are small, green, vicious, mean-spirited and generally unpleasant creatues. Clues as to their character may be discerned in their tiny pointed teeth, beady glinting eyes, scrawny, grasping hands and general demeanour of a whipped dog. Goblins are however very prolific and they exist practically everywhere in the known world. No matter how many die there are still plenty left. Their preferred method of fighting is to shoot their enemy in the back from a good distance. Like all greenskins, Goblins are quarrelsome and fractious. They fight amongst themselves both on and off the battlefield. They feel little sense of loalty to their their own kin let alone anyone else, and will cheerfully maim, kill and even eat their comrades if they can get away with it. Night Goblins are adapted to life underground where they subsist on fungi, Cave Squigs, beetles and bits of each other. They live under the mountains throughout the Old World and Southlands in tunnels that are cool and dark. Night Goblins have a strong  aversion to daylight and when forced above ground wear black or very dark enveloping robes to protect themselves from the sun’s rays. Naturally, their preferred dwelling places has also led to them being in constant conflict with Skaven and Dwarfs, the latter whom they hate with a ferocity only greenskins can muster."</Explanation>
+<Ethnic>"SPECIE_GOBLIN"</Ethnic>
+<SUBCHAPTER_ATTR>
+<Attribut name="RULES-ATTR_WS">"2d10+15"</Attribut>
+<Attribut name="RULES-ATTR_BS">"2d10+25"</Attribut>
+<Attribut name="RULES-ATTR_S">"2d10+20"</Attribut>
+<Attribut name="RULES-ATTR_T">"2d10+20"</Attribut>
+<Attribut name="RULES-ATTR_I">"2d10+10"</Attribut>
+<Attribut name="RULES-ATTR_Ag">"2d10+25"</Attribut>
+<Attribut name="RULES-ATTR_Dex">"2d10+20"</Attribut>
+<Attribut name="RULES-ATTR_Int">"2d10+20"</Attribut>
+<Attribut name="RULES-ATTR_WP">"2d10+10"</Attribut>
+<Attribut name="RULES-ATTR_Fel">"2d10+10"</Attribut>
+<Attribut name="RULES-ATTR_Fate">"1"</Attribut>
+<Attribut name="RULES-ATTR_Resil">"1"</Attribut>
+<Attribut name="RULES-ATTR_Wound">"0xBATTR_S+2xBATTR_T+1xBATTR_WP"</Attribut>
+<Attribut name="RULES-ATTR_Supp">"3"</Attribut>
+<Attribut name="RULES-ATTR_Move">"4"</Attribut>
+</SUBCHAPTER_ATTR>
+<SUBCHAPTER_SKILL>
+<Skill>"RULES-COMPATHL"</Skill>
+  <!-- Athletics -->
+<Skill>"RULES-COMPSOINANI"</Skill>
+  <!-- Animal Care -->
+<Skill>"RULES-COMPESCAL"</Skill>
+  <!-- Climb -->
+<Skill>"RULES-COMPRAGOT"</Skill>
+  <!-- Gossip -->
+<Skill>"RULES-COMPSAVOIR_GREENSKIN"</Skill>
+  <!-- Lore (Greenskins) -->
+<Skill>"RULES-COMPCOMB_BASE"</Skill>
+  <!-- Melee (Basic) -->
+<Skill>"RULES-COMPPROJ_ARC"</Skill>
+  <!-- Ranged (Bow) -->
+<Skill>"RULES-COMPESCAM"</Skill>
+  <!-- Sleight if Hand -->
+<Skill>"RULES-COMPDISC_SOUTER"</Skill>
+  <!-- Stealth (Underground) -->
+<Skill>"RULES-COMPSURVEXT"</Skill>
+  <!-- Outdoor Survival -->
+<Skill>"RULES-COMPLANG_GOBLIN"</Skill>
+  <!-- Language (Goblin Tongue) -->
+<Skill>"RULES-COMPPRECEP"</Skill>
+  <!-- Perception  -->
+</SUBCHAPTER_SKILL>
+<SUBCHAPTER_TALENT>
+<Talent>"RULES-T0HAT_GREENSKIN"</Talent>
+  <!-- Animosity (Greenskins) -->
+<Talent>"RULES-T0DVI"</Talent>
+  <!-- Dark Vision -->
+<Talent>"RULES-T0AFR_ELF"</Talent>
+  <!-- Afraid (Elves) -->
+<Talent>"RULES-T0069_DWARF"</Talent>
+  <!-- Hatred (Dwarves) -->
+<Talent>"RULES-T0170"</Talent>
+  <!-- Small -->
+</SUBCHAPTER_TALENT>
+<SUBCHAPTER_CAREER>
+<Career name="RULES-WORK34">"01-03"</Career>
+  <!-- Merchant -->
+<Career name="RULES-WORK56">"04-10"</Career>
+  <!-- Servant -->
+<Career name="RULES-WORK29">"11-15"</Career>
+  <!-- Herbalist -->
+<Career name="RULES-WORK10">"16-20"</Career>
+  <!-- Hunter -->
+<Career name="RULES-WORK40">"21-25"</Career>
+  <!-- Miner -->
+<Career name="RULES-WORK19">"26-30"</Career>
+  <!-- Scout -->
+<Career name="RULES-WORK63">"31-38"</Career>
+  <!-- Villager -->
+<Career name="RULES-WORK55">"39-44"</Career>
+  <!-- Entertainer -->
+<Career name="RULES-WORK38">"45-50"</Career>
+  <!-- Messenger -->
+<Career name="RULES-WORK14">"51-53"</Career>
+  <!-- Pedlar -->
+<Career name="RULES-WORK30">"54-55"</Career>
+  <!-- Outlaw -->
+<Career name="RULES-WORK64">"56-59"</Career>
+  <!-- Thief -->
+<Career name="RULES-WORK08">"60-65"</Career>
+  <!-- Cavalryman -->
+<Career name="RULES-WORK27">"66-70"</Career>
+  <!-- Guard -->
+<Career name="RULES-WORK28">"71-75"</Career>
+  <!-- Pit Fighter -->
+<Career name="RULES-WORK57">"76-100"</Career>
+  <!-- Soldier -->
+</SUBCHAPTER_CAREER>
+</Specie>
+<Specie id="GREEN-RACE_HGOB">
+<Description language="ENGLISH">"Hobgoblins"</Description>
+<Explanation language="ENGLISH">"Hobgoblins are one of the rarer greenskin races in the Old World. They are both stronger and taller than Common Goblins. Indeed, the largest among Hobgoblin tribes are as tall as any Orc. Their builds, though, are lean and wiry, unlike the muscled bulk of the Orcs. Hobgoblins ride snarling Great Wolves that they’ve specifically bred for speed and savagery. They are expert mounted  archers, often practising for days on end at hitting small targets while riding past going full tilt. They prefer hit and run tactics to stand up fights, though they will attack if they outnumber their opponents by more than three to one. Living on the Great Steppes to the East of the Worlds Edge Mountains, where the legendary Hobgobla Khan rules them in their great nomadic hordes as they plunder the civilized peoples of the East."</Explanation>
+<Ethnic>"SPECIE_GOBLIN"</Ethnic>
+<SUBCHAPTER_ATTR>
+<Attribut name="RULES-ATTR_WS">"2d10+20"</Attribut>
+<Attribut name="RULES-ATTR_BS">"2d10+25"</Attribut>
+<Attribut name="RULES-ATTR_S">"2d10+20"</Attribut>
+<Attribut name="RULES-ATTR_T">"2d10+25"</Attribut>
+<Attribut name="RULES-ATTR_I">"2d10+20"</Attribut>
+<Attribut name="RULES-ATTR_Ag">"2d10+15"</Attribut>
+<Attribut name="RULES-ATTR_Dex">"2d10+20"</Attribut>
+<Attribut name="RULES-ATTR_Int">"2d10+20"</Attribut>
+<Attribut name="RULES-ATTR_WP">"2d10+20"</Attribut>
+<Attribut name="RULES-ATTR_Fel">"2d10+15"</Attribut>
+<Attribut name="RULES-ATTR_Fate">"0"</Attribut>
+<Attribut name="RULES-ATTR_Resil">"1"</Attribut>
+<Attribut name="RULES-ATTR_Wound">"1xBATTR_S+2xBATTR_T+1xBATTR_WP"</Attribut>
+<Attribut name="RULES-ATTR_Supp">"2"</Attribut>
+<Attribut name="RULES-ATTR_Move">"4"</Attribut>
+</SUBCHAPTER_ATTR>
+<SUBCHAPTER_SKILL>
+<Skill>"RULES-COMPATHL"</Skill>
+  <!-- Athletics -->
+<Skill>"RULES-COMPSOINANI"</Skill>
+  <!-- Animal Care -->
+<Skill>"RULES-COMPCALM"</Skill>
+  <!-- Cool -->
+<Skill>"RULES-COMPPARI"</Skill>
+  <!-- Gamble -->
+<Skill>"RULES-COMPCOMB_BASE"</Skill>
+  <!-- Melee (Basic) -->
+<Skill>"RULES-COMPPROJ_ARC"</Skill>
+  <!-- Ranged (Bow) -->
+<Skill>"RULES-COMPCHEV_LOUP"</Skill>
+  <!-- Ride (Big Wolf) -->
+<Skill>"RULES-COMPLANG_GOBLIN"</Skill>
+  <!-- Language (Goblin Tongue) -->
+<Skill>"RULES-COMPPRECEP"</Skill>
+  <!-- Perception  -->
+</SUBCHAPTER_SKILL>
+<SUBCHAPTER_TALENT>
+<Talent>"RULES-T0HAT_GREENSKIN"</Talent>
+  <!-- Animosity (Greenskins) -->
+<Talent>"RULES-T0099"</Talent>
+  <!-- Cat-tongued -->
+<Talent>"RULES-T0164"</Talent>
+  <!-- Night Vision -->
+<Talent>"RULES-T0058"</Talent>
+  <!-- Nose for Trouble -->
+<Talent>"RULES-T*"</Talent>
+  <!-- Random Talent -->
+</SUBCHAPTER_TALENT>
+<SUBCHAPTER_CAREER>
+<Career name="RULES-WORK34">"01-03"</Career>
+  <!-- Merchant -->
+<Career name="RULES-WORK29">"04-07"</Career>
+  <!-- Herbalist -->
+<Career name="RULES-WORK10">"08-15"</Career>
+  <!-- Hunter -->
+<Career name="RULES-WORK19">"16-25"</Career>
+  <!-- Scout -->
+<Career name="RULES-WORK38">"26-30"</Career>
+  <!-- Messenger -->
+<Career name="RULES-WORK14">"31-33"</Career>
+  <!-- Pedlar -->
+<Career name="RULES-WORK42">"34-37"</Career>
+  <!-- Wrecker -->
+<Career name="RULES-WORK30">"38-45"</Career>
+  <!-- Outlaw -->
+<Career name="RULES-WORK64">"46-48"</Career>
+  <!-- Thief -->
+<Career name="RULES-WORK08">"49-70"</Career>
+  <!-- Cavalryman -->
+<Career name="RULES-WORK27">"71-74"</Career>
+  <!-- Guard -->
+<Career name="RULES-WORK12">"75-83"</Career>
+  <!-- Knight -->
+<Career name="RULES-WORK28">"84-89"</Career>
+  <!-- Pit Fighter -->
+<Career name="RULES-WORK61">"90-92"</Career>
+  <!-- Protagonist -->
+<Career name="RULES-WORK57">"93-100"</Career>
+  <!-- Soldier -->
+</SUBCHAPTER_CAREER>
+</Specie>
+</DATA_SPECIE>
+<DATA_RANDOM_SPECIE>
+<Specie name="GREEN-RACE_CORC">"01-40"</Specie>
+<Specie name="GREEN-RACE_BORC">"41-50"</Specie>
+<Specie name="GREEN-RACE_CGOB">"51-80"</Specie>
+<Specie name="GREEN-RACE_NGOB">"81-90"</Specie>
+<Specie name="GREEN-RACE_HGOB">"91-100"</Specie>
+</DATA_RANDOM_SPECIE>
+</DATA_BOOK>
