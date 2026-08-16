@@ -797,6 +797,18 @@ chantier concerné, avec les détails techniques.
   `DecoupeCodeValeur(...)` puis `copy(CodeValeur,1,5) = TalentSortXXX` (comparaison de préfixe
   sur les 5 premiers caractères, cohérente aussi pour MagieMineure/T0089 qui n'a pas de
   variante suffixée).
+- Retirer le préfixe de livre d'un seul côté d'une comparaison (`ExtractStringAfter(Code,
+  SeparateurLivre) = AutreCode`) casse tout aussi sûrement que ne pas le retirer du tout :
+  si `AutreCode` garde son préfixe, la comparaison ne matche plus jamais. Toujours traiter
+  les DEUX côtés avec la même fonction (`CompareRechercheValeur`, qui découpe les deux
+  valeurs en interne) plutôt que de découper à la main un seul argument. Bug réel trouvé le
+  16/08/2026 dans `PdfPersonnageCreationFeldo2P` (pdfpersonnage.pas) : le calcul de
+  Fortune/Resolve comparait `ExtractStringAfter(PRaceAttribut.CodeRace, SeparateurChance) =
+  Personnage.Race`, alors que `Personnage.Race` garde son préfixe livre (`RULES-RACE_HUM`) -
+  la base de race n'était donc jamais ajoutée, et Fortune/Resolve affichaient exactement la
+  moitié de Fate/Resilience (qui, eux, passent par `PdfPersonnageAttribut`, correcte).
+  Repéré par Nono en comparant un rendu PDF réel aux données du XML de sauvegarde. Corrigé
+  avec `CompareRechercheValeur(Personnage.Race, PRaceAttribut.CodeRace)`.
 - `TStringGrid.Cells[Col, Row]` (et toute propriété indexée avec getter/setter, plus
   généralement) n'est pas une vraie variable (l-value) : `+=` dessus échoue à la
   compilation avec "Variable identifier expected" (pas une erreur logique, une erreur de

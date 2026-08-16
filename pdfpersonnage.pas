@@ -3538,7 +3538,7 @@ Procedure PdfPersonnageCreationFeldo2P(Personnage: StructurePersonnage);
     Chance         := 0;
     Determine      := 0;
     For PRaceAttribut in ListRaceAttribut do
-      if ExtractStringAfter(PRaceAttribut.CodeRace, SeparateurChance) = Personnage.Race then
+      if CompareRechercheValeur(Personnage.Race, PRaceAttribut.CodeRace) then
         case ExtractStringAfter(PRaceAttribut.CodeAttribut, SeparateurLivre) of
           ConstCaracDestin: Chance    := Chance    + StrToIntDef(PRaceAttribut.CalculRace,0);
           ConstCaracResil:  Determine := Determine + StrToIntDef(PRaceAttribut.CalculRace,0);

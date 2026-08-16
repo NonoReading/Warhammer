@@ -480,8 +480,8 @@
         <IsPartOfProject Value="True"/>
         <UnitName Value="PdfPersonnage"/>
         <IsVisibleTab Value="True"/>
-        <TopLine Value="2193"/>
-        <CursorPos X="30" Y="2210"/>
+        <TopLine Value="2195"/>
+        <CursorPos X="23" Y="2202"/>
         <UsageCount Value="200"/>
         <Loaded Value="True"/>
       </Unit>
