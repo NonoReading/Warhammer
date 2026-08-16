@@ -98,7 +98,8 @@ PDF Personnage (PRIORITAIRE) :
   codes de catégorie. À concevoir séparément (nouveau champ + XML, impact sur SortAffiche ET
   ButtonSortClick, migration des données existantes) avant de toucher au code - fait suite
   aux deux bugs corrigés le 15/08/2026 sur SortAffiche et ButtonSortClick.
-- historique de corruption par personnage : en cours, voir CONTEXT.md §2.6 (couche de
-  données + persistance XML terminées le 16/08/2026, reste l'onglet WinPersonnage et le
-  réagencement/extension du PDF).
+- mutation automatique quand la corruption "Left" atteint 0 (personnage repart à 0 et
+  prend une mutation) : idée mentionnée pendant la conception de l'historique de
+  corruption (CONTEXT.md §2.6, terminé le 16/08/2026), aucune conception détaillée ni
+  code n'existe encore.
 

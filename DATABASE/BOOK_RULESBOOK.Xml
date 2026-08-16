@@ -575,6 +575,9 @@ ifically your Strength, Endurance and Mental Strength Bonuses (abbreviations BF,
 <Text name="RULES-PDF_CORRUPTION_WP">"Bonus WP"</Text>
 <Text name="RULES-PDF_CORRUPTION_BONUS">"Pure Soul"</Text>
 <Text name="RULES-PDF_CORRUPTION_TOTAL">"Total"</Text>
+<Text name="RULES-PDF_CORRUPTION_LOST">"Lost"</Text>
+<Text name="RULES-PDF_CORRUPTION_LEFT">"Left"</Text>
+<Text name="RULES-PDF_CORRUPTION_HISTORY">"CORRUPTION HISTORY"</Text>
 <Text name="CORRUPTION_PHYSICAL">"Physical Corruption"</Text>
 <Text name="CORRUPTION_MENTAL">"Mental Corruption"</Text>
 </Label>

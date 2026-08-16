@@ -479,8 +479,9 @@
         <Filename Value="pdfpersonnage.pas"/>
         <IsPartOfProject Value="True"/>
         <UnitName Value="PdfPersonnage"/>
-        <TopLine Value="2189"/>
-        <CursorPos X="42" Y="2193"/>
+        <IsVisibleTab Value="True"/>
+        <TopLine Value="2193"/>
+        <CursorPos X="30" Y="2210"/>
         <UsageCount Value="200"/>
         <Loaded Value="True"/>
       </Unit>
@@ -1195,10 +1196,8 @@
       <Unit>
         <Filename Value="..\..\..\Downloads\winpersonnage.pas"/>
         <UnitName Value="WinPersonnage"/>
-        <IsVisibleTab Value="True"/>
-        <EditorIndex Value="2"/>
+        <EditorIndex Value="-1"/>
         <UsageCount Value="10"/>
-        <Loaded Value="True"/>
       </Unit>
     </Units>
     <JumpHistory HistoryIndex="26">

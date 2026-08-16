@@ -611,6 +611,7 @@ begin
                     begin
                       PersonnageTalent.CodeTalent     := RemoveQuotes(UTF8Encode(Node.Attributes.GetNamedItem(ConstXmlData).NodeValue));
                       PersonnageTalent.Valeur         := StrToIntDef(RemoveQuotes(UTF8Encode(Node.TextContent)),0);
+                      PersonnageTalent.Asterisque     := 0;
                       Personnage.CreationTalent       += [PersonnageTalent];
                       // test compétence liées au talent
                       PTalent := ChercheTalent(PersonnageTalent.CodeTalent);
@@ -677,6 +678,7 @@ begin
                   begin
                     PersonnageTalent.CodeTalent     := RemoveQuotes(UTF8Encode(Node.Attributes.GetNamedItem(ConstXmlData).NodeValue));
                     PersonnageTalent.Valeur         := StrToIntDef(RemoveQuotes(UTF8Encode(Node.TextContent)),0);
+                    PersonnageTalent.Asterisque     := 0;
                     Personnage.AugmentationTalent   += [PersonnageTalent];
                     // test compétence liées au talent
                     PTalent := ChercheTalent(PersonnageTalent.CodeTalent);
@@ -860,6 +862,7 @@ begin
                     begin
                       PersonnageTalent.CodeTalent := RemoveQuotes(UTF8Encode(Node.Attributes.GetNamedItem(ConstXmlData).NodeValue));
                       PersonnageTalent.Valeur     := StrToIntDef(RemoveQuotes(UTF8Encode(Node.TextContent)),0);
+                      PersonnageTalent.Asterisque := 0;
                       Personnage.MetierTalent     += [PersonnageTalent];
                     end;
                   Node := Node.NextSibling;
@@ -946,7 +949,7 @@ begin
 
       // Lire Les talents ajoutés
       for IndiceTalent := 0 to high(Personnage.AugmentationTalent) Do
-        if PersonnageTalent.Asterisque = 0  then
+        if Personnage.AugmentationTalent[indiceTalent].Asterisque = 0  then
           begin
             Asterisque := PersonnageTalentAsterisque(Personnage, Personnage.AugmentationTalent[indiceTalent].CodeTalent);
             if Asterisque <> 0 then

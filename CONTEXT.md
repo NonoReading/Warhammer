@@ -658,7 +658,7 @@ Nono aimerait nettoyer ce fichier mais craint de tout casser à la main.
 
 ---
 
-### 2.6 Historique de corruption par personnage — en cours (démarré le 16/08/2026)
+### 2.6 Historique de corruption par personnage — terminé (16/08/2026)
 
 **Rappel de l'idée** (capturée dans `A FAIRE.txt` le 16/08) : garder, pour chaque
 personnage, un historique des points de corruption gagnés/perdus au fil du temps (montant
@@ -713,12 +713,43 @@ le nouvel historique doit venir consommer.
    ("Corruption") réutilisée pour le titre de l'onglet. Bug de visibilité rencontré et
    corrigé en route (`TShape` de fond qui recouvre les nouveaux contrôles, voir CONTEXT.md
    §4). Confirmé par Nono : ajout/suppression de lignes, cycle sauvegarde/rechargement.
-4. ⏳ Réagencement PDF page 1 (Résilience/Destin/Mouvement/Corruption) — pur repositionnement,
-   prochaine étape.
-5. ⏳ Extension de `PdfBlocCorruption` (lignes Lost/Left).
-6. ⏳ Nouveau tableau détaillé PDF (Montant | Libellé).
+4. ✅ Réagencement PDF page 1 : `PdfBlocResilience`/`PdfBlocDestin` resserrés de 78mm à
+   53mm (repères internes 29.9/40/69/78 → 20/27/46/53 pour Résilience, 29/38 → 17/24 pour
+   Destin, proportionnels à l'ancien) pour laisser `PdfBlocMouvement` sur la même rangée
+   (X = début colonne + 56mm) ; `PdfBlocCorruption` déplacé sous Expérience (même colonne,
+   même largeur que `PdfBlocExperience`) au lieu d'être à côté. Confirmé par Nono : bon
+   placement. En testant, bug PRÉEXISTANT découvert (sans lien avec ce chantier) et corrigé :
+   des `(-1)` parasites s'affichaient à côté de chaque talent - voir CONTEXT.md §4 (pattern
+   "variable record réutilisée jamais remise à zéro", `PersonnageTalent.Asterisque`).
+5. ✅ Extension de `PdfBlocCorruption` (lignes Lost/Left) : panneau porté de 4 à 7
+   lignes (titre + Bonus T/Bonus WP/Pure Soul/Total/**Lost**/**Left**), `NbLignes` 4 → 6,
+   tous les décalages `(NbLignes - K)` recalculés. `Lost` = somme de
+   `Personnage.Corruption[].Montant` (calculée dans `PdfPersonnageCreationFeldo2P` et
+   passée en paramètre), `Left = Total - Lost`. Nouveau paramètre `Lost: Integer` ajouté
+   à la signature de `PdfBlocCorruption` (déclaration + implémentation, un seul point
+   d'appel). Nouvelles clés `PDF_CORRUPTION_LOST`/`PDF_CORRUPTION_LEFT` ("Lost"/"Left",
+   "Perdu"/"Restant") dans les deux livres. Confirmé par Nono par test PDF réel :
+   Total 10 / Lost 2 / Left 8.
+6. ✅ Nouveau tableau détaillé PDF (Montant | Libellé) : nouveau bloc
+   `PdfBlocCorruptionDetail`, à droite d'Expérience/Corruption (X = bord droit de ce
+   panneau + 3mm, jusqu'à `DessinFinColG`), même Y de départ que `PdfBlocExperience`.
+   Une ligne par entrée de `Personnage.Corruption`, la plus récente en haut (parcours
+   `High(...) downto Low(...)`) ; au-delà de la capacité du cadre (9 lignes), les plus
+   anciennes sont silencieusement omises (même limite que `PdfBlocDiversDonnees` pour
+   Divers). Titre "CORRUPTION HISTORY"/"HISTORIQUE DE CORRUPTION" (nouvelle clé
+   `PDF_CORRUPTION_HISTORY` ; "HISTORY" seul écarté par Nono, ambiguïté avec l'onglet
+   Historique existant) ; en-têtes de colonnes Amount/Reason (réutilise `LAB_162`/`163`).
+   Bug de mise en page trouvé et corrigé en route : `PdfEcrit` répartit un libellé trop
+   long sur 2 lignes autour du Y donné (±1mm) ; avec le décalage standard +0.6 la 2e ligne
+   déborde sous la bordure du bas de la rangée. Corrigé par un décalage +2 quand le
+   libellé dépasse 18 caractères (même heuristique de longueur que `PTalent.Resume` dans
+   `PdfBlocTalents`, voir plus haut dans le fichier). Confirmé par Nono par test PDF réel.
 
-Les étapes 4-6 (PDF) s'ajustent comme d'habitude par allers-retours captures d'écran sur
+**Chantier suivant, pas encore abordé** : quand `Left` atteint 0, le personnage prend une
+mutation et repart à 0 (idée capturée dans `A FAIRE.txt`, mentionnée dans la conception
+ci-dessus mais aucune conception détaillée ni code n'existe encore).
+
+Les étapes 4-6 (PDF) se sont ajustées comme d'habitude par allers-retours captures d'écran sur
 le rendu réel, pas de spec pixel-perfect figée à l'avance.
 
 ---
@@ -787,6 +818,25 @@ chantier concerné, avec les détails techniques.
   méthode connue (et seule connue) pour avoir un fond noir homogène sur les onglets de ce
   projet, donc pas un bug à corriger à la source, juste un réflexe à avoir pour tout nouvel
   ajout.
+- **Pattern récurrent - variable record réutilisée d'un tour de boucle à l'autre pendant un
+  chargement XML, jamais remise à vide/zéro avant d'être ajoutée au tableau** : ce projet
+  charge presque tout le XML avec UNE SEULE variable record locale par type de donnée
+  (`PersonnageTalent`, `PArmureBonus`, etc.), réutilisée pour toutes les entrées d'un même
+  tableau (voire plusieurs tableaux différents dans `PersonnageXmlChargement`). Tout champ non
+  explicitement réaffecté à chaque itération garde la valeur du tour précédent (voire d'un
+  tableau totalement différent chargé plus haut dans la même fonction) - ce n'est PAS remis à
+  zéro automatiquement par le `for`/`while`. Déjà rencontré deux fois : `PArmureBonus.Malus`
+  (15/08/2026, xmlexportimport.pas, voir plus haut) et `PersonnageTalent.Asterisque`
+  (16/08/2026, chargepersonnage.pas, `PersonnageXmlChargement` - `.Asterisque` jamais
+  initialisé aux trois sites de chargement `CreationTalent`/`AugmentationTalent`/
+  `MetierTalent`, ce qui affichait des `(-1)` parasites à côté de chaque talent sur le PDF ;
+  une deuxième erreur s'y ajoutait, la boucle de calcul des astérisques pour
+  `AugmentationTalent` testait `PersonnageTalent.Asterisque` - la variable de boucle du
+  chargement XML, sans rapport - au lieu de `Personnage.AugmentationTalent[indiceTalent]
+  .Asterisque`). Réflexe à avoir : quand une variable record locale est réutilisée pour
+  peupler un tableau dans une boucle de chargement XML, vérifier que TOUS ses champs sont
+  explicitement réaffectés à chaque itération, pas seulement ceux qui viennent du XML lu à cet
+  endroit précis.
 
 ---
 

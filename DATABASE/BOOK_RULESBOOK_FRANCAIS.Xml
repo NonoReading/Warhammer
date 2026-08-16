@@ -574,6 +574,9 @@
 <Text name="RULES-PDF_CORRUPTION_WP">"Bonus FM"</Text>
 <Text name="RULES-PDF_CORRUPTION_BONUS">"Ame pure"</Text>
 <Text name="RULES-PDF_CORRUPTION_TOTAL">"Total"</Text>
+<Text name="RULES-PDF_CORRUPTION_LOST">"Perdu"</Text>
+<Text name="RULES-PDF_CORRUPTION_LEFT">"Restant"</Text>
+<Text name="RULES-PDF_CORRUPTION_HISTORY">"HISTORIQUE DE CORRUPTION"</Text>
 <Text name="CORRUPTION_PHYSICAL">"Corruption Physique"</Text>
 <Text name="CORRUPTION_MENTAL">"Corruption Mentale"</Text>
 </Label>

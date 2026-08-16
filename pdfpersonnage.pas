@@ -176,7 +176,13 @@ Function PdfBlocAmbitions(PdfPage: TPDFPage; XGauche, XDroite, Y, HauteurLigne: 
 // brique 1, CONTEXT.md §2.4. Renvoient le Y du bas du cadre (sans le -3 de marge).
 Function PdfBlocExperience(PdfPage: TPDFPage; Personnage: StructurePersonnage; XGauche, XDroite, Y, HauteurLigne: Single; NbLignes: Integer; MinPolice: Integer): Single;
 Function PdfBlocMouvement(PdfPage: TPDFPage; XGauche, XDroite, Y, HauteurLigne: Single; NbLignes: Integer; MinPolice: Integer; Mouv, BonusSprint: Integer): Single;
-Function PdfBlocCorruption(PdfPage: TPDFPage; XGauche, XDroite, Y, HauteurLigne: Single; NbLignes: Integer; MinPolice: Integer; BE, BFM, AmePure: Integer): Single;
+Function PdfBlocCorruption(PdfPage: TPDFPage; XGauche, XDroite, Y, HauteurLigne: Single; NbLignes: Integer; MinPolice: Integer; BE, BFM, AmePure, Lost: Integer): Single;
+
+// Bloc Corruption Détail : tableau Montant | Libellé, une ligne par entrée de
+// Personnage.Corruption, la plus récente en haut, CONTEXT.md §2.6. Si l'historique
+// dépasse la capacité du cadre, les entrées les plus ANCIENNES au-delà ne sont pas
+// affichées (même limite silencieuse que PdfBlocDiversDonnees pour Divers).
+Function PdfBlocCorruptionDetail(PdfPage: TPDFPage; Personnage: StructurePersonnage; XGauche, XDroite, Y, HauteurLigne: Single; NbLignes: Integer; MinPolice: Integer): Single;
 
 // Bloc Talents : liste répétitive comme les tableaux de compétences (deux passes : talents
 // acquis d'abord, puis talents accessibles via le métier mais pas encore pris, grisés, tant
@@ -1839,26 +1845,28 @@ Procedure PdfBlocResilience(PdfPage: TPDFPage; Personnage: StructurePersonnage; 
     AttributDonnee: StructureDonnee;
   begin
     // Dessin (cadre partagé Résilience + Destin)
+    // Géométrie resserrée le 16/08/2026 (78mm -> 53mm) pour laisser Mouvement sur la même
+    // rangée (CONTEXT.md §2.6) - anciens repères 29.9/40/69/78 devenus 20/27/46/53.
     PdfPage.DrawLine( X,      Y,                    X,      Y - (NbLignes * HauteurLigne), 1);
-    PdfPage.DrawLine( X+29.9, Y - HauteurLigne,      X+29.9, Y - (NbLignes * HauteurLigne), 1);
-    PdfPage.DrawLine( X+40,   Y,                     X+40,   Y - ((NbLignes-1) * HauteurLigne), 1);
-    PdfPage.DrawLine( X+69,   Y - HauteurLigne,      X+69,   Y - ((NbLignes-1) * HauteurLigne), 1);
-    PdfPage.DrawLine( X+78,   Y,                     X+78,   Y - (NbLignes * HauteurLigne), 1);
+    PdfPage.DrawLine( X+20,   Y - HauteurLigne,      X+20,   Y - (NbLignes * HauteurLigne), 1);
+    PdfPage.DrawLine( X+27,   Y,                     X+27,   Y - ((NbLignes-1) * HauteurLigne), 1);
+    PdfPage.DrawLine( X+46,   Y - HauteurLigne,      X+46,   Y - ((NbLignes-1) * HauteurLigne), 1);
+    PdfPage.DrawLine( X+53,   Y,                     X+53,   Y - (NbLignes * HauteurLigne), 1);
     for IndC := 0 to NbLignes do
-      PdfPage.DrawLine(X, Y - (IndC * HauteurLigne), X+78, Y - (IndC * HauteurLigne), 1);
+      PdfPage.DrawLine(X, Y - (IndC * HauteurLigne), X+53, Y - (IndC * HauteurLigne), 1);
 
     // Texte Résilience
     PdfTaillePolice(PdfPage, PdfFontBack, ConstPoliceCarlson+ConstPoliceGras, 10);
-    PdfCentre(PdfPage, X+2, X+42, Y - (1 * HauteurLigne) + 1, GetTexteLibelle('PDF_RESIL1_RESILIENCE'));
-    PdfEcrit (PdfPage, X+2, X+42, Y - (2 * HauteurLigne) + 1, GetTexteLibelle('PDF_RESIL2A_RESILIENCE'), MinPolice);
-    PdfEcrit (PdfPage, X+2, X+42, Y - (3 * HauteurLigne) + 1, GetTexteLibelle('PDF_RESIL2B_RESOLVE'),    MinPolice);
-    PdfEcrit (PdfPage, X+2, X+49, Y - (NbLignes * HauteurLigne) + 1, GetTexteLibelle('PDF_RESIL2C_MOTIVATION'), MinPolice);
+    PdfCentre(PdfPage, X+2, X+25, Y - (1 * HauteurLigne) + 1, GetTexteLibelle('PDF_RESIL1_RESILIENCE'));
+    PdfEcrit (PdfPage, X+2, X+18, Y - (2 * HauteurLigne) + 1, GetTexteLibelle('PDF_RESIL2A_RESILIENCE'), MinPolice);
+    PdfEcrit (PdfPage, X+2, X+18, Y - (3 * HauteurLigne) + 1, GetTexteLibelle('PDF_RESIL2B_RESOLVE'),    MinPolice);
+    PdfEcrit (PdfPage, X+2, X+50, Y - (NbLignes * HauteurLigne) + 1, GetTexteLibelle('PDF_RESIL2C_MOTIVATION'), MinPolice);
 
     // Valeur Résilience
     PdfTaillePolice(PdfPage, PdfFontValue, ConstPoliceArial, 9);
     AttributDonnee := PdfPersonnageAttribut(Personnage, ConstCaracResil, Bonus);
-    PdfCentre(PdfPage, X+30, X+40, Y - (2 * HauteurLigne) + 1, IntToStr(AttributDonnee.Total));   // Résilience
-    PdfCentre(PdfPage, X+30, X+40, Y - (3 * HauteurLigne) + 1, IntToStr(Determine));              // Détermination
+    PdfCentre(PdfPage, X+20, X+27, Y - (2 * HauteurLigne) + 1, IntToStr(AttributDonnee.Total));   // Résilience
+    PdfCentre(PdfPage, X+20, X+27, Y - (3 * HauteurLigne) + 1, IntToStr(Determine));              // Détermination
 
     NbLignesPourSuite := NbLignes + 1;
   end;
@@ -1874,16 +1882,18 @@ Procedure PdfBlocDestin(PdfPage: TPDFPage; Personnage: StructurePersonnage; XGau
     AttributDonnee: StructureDonnee;
   begin
     // Texte Destin
+    // Géométrie resserrée le 16/08/2026 (38mm -> 26mm relatifs à XGauche), même chantier que
+    // PdfBlocResilience (CONTEXT.md §2.6) - anciens repères 29/38 devenus 17/24.
     PdfTaillePolice(PdfPage, PdfFontBack, ConstPoliceCarlson+ConstPoliceGras, 10);
-    PdfCentre(PdfPage, XGauche+2,  XGauche+38, Y - (1 * HauteurLigne) + 1, GetTexteLibelle('PDF_FATE1_FATE'));
-    PdfEcrit (PdfPage, XGauche+2,  XGauche+29, Y - (2 * HauteurLigne) + 1, GetTexteLibelle('PDF_FATE2_FATE'),    MinPolice);
-    PdfEcrit (PdfPage, XGauche+2,  XGauche+29, Y - (3 * HauteurLigne) + 1, GetTexteLibelle('PDF_FATE3_FORTUNE'), MinPolice);
+    PdfCentre(PdfPage, XGauche+2,  XGauche+24, Y - (1 * HauteurLigne) + 1, GetTexteLibelle('PDF_FATE1_FATE'));
+    PdfEcrit (PdfPage, XGauche+2,  XGauche+17, Y - (2 * HauteurLigne) + 1, GetTexteLibelle('PDF_FATE2_FATE'),    MinPolice);
+    PdfEcrit (PdfPage, XGauche+2,  XGauche+17, Y - (3 * HauteurLigne) + 1, GetTexteLibelle('PDF_FATE3_FORTUNE'), MinPolice);
 
     // Valeur Destin
     PdfTaillePolice(PdfPage, PdfFontValue, ConstPoliceArial, 9);
     AttributDonnee := PdfPersonnageAttribut(Personnage, ConstCaracDestin, Bonus);
-    PdfCentre(PdfPage, XGauche+29, XGauche+38, Y - (2 * HauteurLigne) + 1, IntToStr(AttributDonnee.Total));  // Destin
-    PdfCentre(PdfPage, XGauche+29, XGauche+38, Y - (3 * HauteurLigne) + 1, IntToStr(Chance));                // Chance
+    PdfCentre(PdfPage, XGauche+17, XGauche+24, Y - (2 * HauteurLigne) + 1, IntToStr(AttributDonnee.Total));  // Destin
+    PdfCentre(PdfPage, XGauche+17, XGauche+24, Y - (3 * HauteurLigne) + 1, IntToStr(Chance));                // Chance
   end;
 
 // Dessine le panneau Entête (extrait de PdfPersonnageCreationFeldo2P, CONTEXT.md §2.4).
@@ -2023,9 +2033,10 @@ Function PdfBlocMouvement(PdfPage: TPDFPage; XGauche, XDroite, Y, HauteurLigne: 
 
 // Dessine le panneau Corruption (titre + Tolérance/Volonté/Bonus/Total). Extrait de
 // PdfPersonnageCreationFeldo2P, CONTEXT.md §2.4.
-Function PdfBlocCorruption(PdfPage: TPDFPage; XGauche, XDroite, Y, HauteurLigne: Single; NbLignes: Integer; MinPolice: Integer; BE, BFM, AmePure: Integer): Single;
+Function PdfBlocCorruption(PdfPage: TPDFPage; XGauche, XDroite, Y, HauteurLigne: Single; NbLignes: Integer; MinPolice: Integer; BE, BFM, AmePure, Lost: Integer): Single;
   var
-    IndC: Integer;
+    IndC:  Integer;
+    Total: Integer;
   begin
     // Dessin cadre
     PdfPage.DrawLine(XGauche,      Y,                 XGauche,      Y - (NbLignes * HauteurLigne), 1);
@@ -2034,20 +2045,81 @@ Function PdfBlocCorruption(PdfPage: TPDFPage; XGauche, XDroite, Y, HauteurLigne:
     for IndC := 0 to NbLignes do
       PdfPage.DrawLine(XGauche, Y - (IndC * HauteurLigne), XDroite, Y - (IndC * HauteurLigne), 1);
 
+    Total := Floor(BE/10) + Floor(BFM/10) + AmePure;
+
     // Texte Corruption
+    // Lignes Lost/Left ajoutées le 16/08/2026 (historique de corruption, CONTEXT.md §2.6) :
+    // Lost = somme des montants de Personnage.Corruption, Left = Total - Lost.
     PdfTaillePolice(PdfPage, PdfFontBack, ConstPoliceCarlson+ConstPoliceGras, 10);
-    PdfCentre(PdfPage, XGauche + 1, XDroite,      Y - ((NbLignes - 4) * HauteurLigne) + 0.6, GetTexteLibelle('PDF_CORRUPTION_TITLE'));
-    PdfEcrit (PdfPage, XGauche + 1, XGauche + 15, Y - ((NbLignes - 3) * HauteurLigne) + 0.6, GetTexteLibelle('PDF_CORRUPTION_T')    , MinPolice);
-    PdfEcrit (PdfPage, XGauche + 1, XGauche + 15, Y - ((NbLignes - 2) * HauteurLigne) + 0.6, GetTexteLibelle('PDF_CORRUPTION_WP')   , MinPolice);
-    PdfEcrit (PdfPage, XGauche + 1, XGauche + 15, Y - ((NbLignes - 1) * HauteurLigne) + 0.6, GetTexteLibelle('PDF_CORRUPTION_BONUS'), MinPolice);
-    PdfEcrit (PdfPage, XGauche + 1, XGauche + 15, Y - ( NbLignes      * HauteurLigne) + 0.6, GetTexteLibelle('PDF_CORRUPTION_TOTAL'), MinPolice);
+    PdfCentre(PdfPage, XGauche + 1, XDroite,      Y - ((NbLignes - 6) * HauteurLigne) + 0.6, GetTexteLibelle('PDF_CORRUPTION_TITLE'));
+    PdfEcrit (PdfPage, XGauche + 1, XGauche + 15, Y - ((NbLignes - 5) * HauteurLigne) + 0.6, GetTexteLibelle('PDF_CORRUPTION_T')    , MinPolice);
+    PdfEcrit (PdfPage, XGauche + 1, XGauche + 15, Y - ((NbLignes - 4) * HauteurLigne) + 0.6, GetTexteLibelle('PDF_CORRUPTION_WP')   , MinPolice);
+    PdfEcrit (PdfPage, XGauche + 1, XGauche + 15, Y - ((NbLignes - 3) * HauteurLigne) + 0.6, GetTexteLibelle('PDF_CORRUPTION_BONUS'), MinPolice);
+    PdfEcrit (PdfPage, XGauche + 1, XGauche + 15, Y - ((NbLignes - 2) * HauteurLigne) + 0.6, GetTexteLibelle('PDF_CORRUPTION_TOTAL'), MinPolice);
+    PdfEcrit (PdfPage, XGauche + 1, XGauche + 15, Y - ((NbLignes - 1) * HauteurLigne) + 0.6, GetTexteLibelle('PDF_CORRUPTION_LOST') , MinPolice);
+    PdfEcrit (PdfPage, XGauche + 1, XGauche + 15, Y - ( NbLignes      * HauteurLigne) + 0.6, GetTexteLibelle('PDF_CORRUPTION_LEFT') , MinPolice);
 
     // Valeur Corruption
     PdfTaillePolice(PdfPage, PdfFontValue, ConstPoliceArial, 9);
-    PdfCentre(PdfPage, XGauche + 15, XDroite, Y - ((NbLignes - 3) * HauteurLigne) + 0.6, IntToStr(Floor(BE/10)));
-    PdfCentre(PdfPage, XGauche + 15, XDroite, Y - ((NbLignes - 2) * HauteurLigne) + 0.6, IntToStr(Floor(BFM/10)));
-    PdfCentre(PdfPage, XGauche + 15, XDroite, Y - ((NbLignes - 1) * HauteurLigne) + 0.6, IntToStr(AmePure));
-    PdfCentre(PdfPage, XGauche + 15, XDroite, Y - ( NbLignes      * HauteurLigne) + 0.6, IntToStr(Floor(BE/10) + Floor(BFM/10) + AmePure));
+    PdfCentre(PdfPage, XGauche + 15, XDroite, Y - ((NbLignes - 5) * HauteurLigne) + 0.6, IntToStr(Floor(BE/10)));
+    PdfCentre(PdfPage, XGauche + 15, XDroite, Y - ((NbLignes - 4) * HauteurLigne) + 0.6, IntToStr(Floor(BFM/10)));
+    PdfCentre(PdfPage, XGauche + 15, XDroite, Y - ((NbLignes - 3) * HauteurLigne) + 0.6, IntToStr(AmePure));
+    PdfCentre(PdfPage, XGauche + 15, XDroite, Y - ((NbLignes - 2) * HauteurLigne) + 0.6, IntToStr(Total));
+    PdfCentre(PdfPage, XGauche + 15, XDroite, Y - ((NbLignes - 1) * HauteurLigne) + 0.6, IntToStr(Lost));
+    PdfCentre(PdfPage, XGauche + 15, XDroite, Y - ( NbLignes      * HauteurLigne) + 0.6, IntToStr(Total - Lost));
+
+    Result := Y - (NbLignes * HauteurLigne);
+  end;
+
+// Dessine le tableau détaillé de l'historique de corruption (titre + en-têtes Amount/
+// Reason + une ligne par entrée, la plus récente en haut). Extrait dans
+// PdfPersonnageCreationFeldo2P, CONTEXT.md §2.6.
+Function PdfBlocCorruptionDetail(PdfPage: TPDFPage; Personnage: StructurePersonnage; XGauche, XDroite, Y, HauteurLigne: Single; NbLignes: Integer; MinPolice: Integer): Single;
+  var
+    IndC:      Integer;
+    IndLigne:  Integer;
+    IndTab:    Integer;
+    Montant:   String;
+  begin
+    // Dessin cadre
+    PdfPage.DrawLine(XGauche,     Y,                      XGauche,     Y - (NbLignes * HauteurLigne), 1);
+    PdfPage.DrawLine(XGauche + 12, Y - (2 * HauteurLigne),  XGauche + 12, Y - (NbLignes * HauteurLigne), 1);
+    PdfPage.DrawLine(XDroite,     Y,                       XDroite,     Y - (NbLignes * HauteurLigne), 1);
+    for IndC := 0 to NbLignes do
+      PdfPage.DrawLine(XGauche, Y - (IndC * HauteurLigne), XDroite, Y - (IndC * HauteurLigne), 1);
+
+    // Titre + en-têtes de colonnes
+    PdfTaillePolice(PdfPage, PdfFontBack, ConstPoliceCarlson+ConstPoliceGras, 10);
+    PdfCentre(PdfPage, XGauche + 1, XDroite,      Y - HauteurLigne + 0.6,             GetTexteLibelle('PDF_CORRUPTION_HISTORY'));
+    PdfEcrit (PdfPage, XGauche + 1, XGauche + 12,  Y - (2 * HauteurLigne) + 0.6, GetTexteLibelle('LAB_162'), MinPolice); // Amount
+    PdfEcrit (PdfPage, XGauche + 13, XDroite,      Y - (2 * HauteurLigne) + 0.6, GetTexteLibelle('LAB_163'), MinPolice); // Reason
+
+    // Lignes de données : la plus récente (fin du tableau) en haut ; au-delà de la
+    // capacité du cadre (NbLignes - 2 lignes de données), les plus anciennes sont
+    // silencieusement omises (même limite que PdfBlocDiversDonnees pour Divers).
+    PdfTaillePolice(PdfPage, PdfFontValue, ConstPoliceArial, 9);
+    IndLigne := 0;
+    for IndTab := High(Personnage.Corruption) downto Low(Personnage.Corruption) do
+      begin
+        Inc(IndLigne);
+        if IndLigne <= (NbLignes - 2) then
+          begin
+            if Personnage.Corruption[IndTab].Montant > 0 then
+              Montant := '+' + IntToStr(Personnage.Corruption[IndTab].Montant)
+            else
+              Montant := IntToStr(Personnage.Corruption[IndTab].Montant);
+            PdfCentre(PdfPage, XGauche + 1,  XGauche + 12, Y - ((IndLigne + 2) * HauteurLigne) + 0.6, Montant);
+            // Libellé souvent trop long pour tenir sur une ligne dans cette colonne étroite :
+            // PdfEcrit le répartit alors sur 2 lignes (±1mm autour du Y donné) - avec le même
+            // décalage +0.6 que le cas court, la 2e ligne déborde sous la bordure du bas de la
+            // rangée (chevauche la ligne suivante). Remonté à +2 quand le texte est probablement
+            // sur 2 lignes (même heuristique de longueur que PdfBlocTalents pour PTalent.Resume).
+            if Length(Personnage.Corruption[IndTab].Libelle) > 18 then
+              PdfEcrit (PdfPage, XGauche + 13, XDroite, Y - ((IndLigne + 2) * HauteurLigne) + 2, Personnage.Corruption[IndTab].Libelle, MinPolice)
+            else
+              PdfEcrit (PdfPage, XGauche + 13, XDroite, Y - ((IndLigne + 2) * HauteurLigne) + 0.6, Personnage.Corruption[IndTab].Libelle, MinPolice);
+          end;
+      end;
 
     Result := Y - (NbLignes * HauteurLigne);
   end;
@@ -3266,6 +3338,8 @@ Procedure PdfPersonnageCreationFeldo2P(Personnage: StructurePersonnage);
     NivCompMetier:           Integer = 0;
     ArmureSet:               Boolean = false;
     AmePure:                 Integer=0;
+    PersonnageCorruption:    StructurePersonnageCorruption;
+    LostCorruption:          Integer = 0;
     PersonnageXpAttribut:    StructurePersonnageXpAttribut;
     PersonnageXpCompetence:  StructurePersonnageXpCompetence;
     PersonnageXpTalent:      StructurePersonnageXpTalent;
@@ -3343,8 +3417,12 @@ Procedure PdfPersonnageCreationFeldo2P(Personnage: StructurePersonnage);
         DessinDebutHautCor:   Single;
         DessinDebutGaucheCor: Single;
         DessinHauteurCor:     Single = 4.4;
-        DessinNbLigCor:       Integer = 4;
+        DessinNbLigCor:       Integer = 6;
         DessinLargeurCor:     Single;
+        // Corruption Détail (tableau Montant | Libellé, à droite d'Expérience/Corruption)
+        DessinDebutGaucheCorDet: Single;
+        DessinHauteurCorDet:     Single  = 4.4;
+        DessinNbLigCorDet:       Integer = 11;
       // Colonne droite
         // Compétence Groupée
         DessinDebutHautComg:  Single;
@@ -3620,8 +3698,12 @@ Procedure PdfPersonnageCreationFeldo2P(Personnage: StructurePersonnage);
     DessinDebutHautDes := DessinDebutHautRes;
 
     // Bloc Résilience / Destin (extrait dans PdfBlocResilience / PdfBlocDestin, CONTEXT.md §2.4)
+    // Réagencement du 16/08/2026 : Résilience/Destin raccourci (78mm -> 53mm) pour laisser
+    // la place à Mouvement sur la même rangée (voir CONTEXT.md §2.6).
     PdfBlocResilience(PdfPage, Personnage, DessinDebColG, DessinDebutHautRes, DessinNbLigRes, DessinHauteurRes, MinPolice, Determine, IndC);
-    PdfBlocDestin(PdfPage, Personnage, DessinDebColG + 40, DessinDebutHautDes, DessinHauteurDes, MinPolice, Chance);
+    PdfBlocDestin(PdfPage, Personnage, DessinDebColG + 27, DessinDebutHautDes, DessinHauteurDes, MinPolice, Chance);
+    DessinDebutGaucheMou := DessinDebColG + 56;
+    PdfBlocMouvement(PdfPage, DessinDebutGaucheMou, DessinDebutGaucheMou + DessinLargeurMou, DessinDebutHautRes, DessinHauteurMou, DessinNbLigMou + 1, MinPolice, Mouv, BonusSprint);
 
     // calcul expérience
     for PersonnageXpAttribut in Personnage.XpCoutAttribut do
@@ -3639,19 +3721,28 @@ Procedure PdfPersonnageCreationFeldo2P(Personnage: StructurePersonnage);
     for PersonnageXpTalent in Personnage.XpCoutTalent do
       TotalXpSoustrait := TotalXpSoustrait + PersonnageXpAttribut.CoutXp - (100 + (PersonnageXpCompetence.Fin - PersonnageXpCompetence.Debut - 1) * 100);
 
-    // Blocs Expérience / Mouvement / Corruption (extraits dans PdfBlocExperience /
-    // PdfBlocMouvement / PdfBlocCorruption, CONTEXT.md §2.4) — trois panneaux côte à côte
-    // sur la même rangée, sous Résilience/Destin.
+    // Bloc Expérience (extrait dans PdfBlocExperience, CONTEXT.md §2.4), sous Résilience/Destin.
     DessinDebutHautExp   := DessinDebutHautDes - (DessinNbLigRes * DessinHauteurDes) - 3;
-    DessinDebutHautMou   := DessinDebutHautExp;
-    DessinDebutHautCor   := DessinDebutHautExp;
-    DessinDebutGaucheMou := DessinLargeurExp + 3;
-    DessinDebutGaucheCor := DessinDebutGaucheMou + DessinLargeurMou + 3;
-    DessinLargeurCor     := DessinFinColG - DessinDebutGaucheCor;
-
     PdfBlocExperience(PdfPage, Personnage, DessinDebColG, DessinLargeurExp, DessinDebutHautExp, DessinHauteurExp, DessinNbLigExp + 1, MinPolice);
-    PdfBlocMouvement(PdfPage, DessinDebutGaucheMou, DessinDebutGaucheMou + DessinLargeurMou, DessinDebutHautMou, DessinHauteurMou, DessinNbLigMou + 1, MinPolice, Mouv, BonusSprint);
-    PdfBlocCorruption(PdfPage, DessinDebutGaucheCor, DessinDebutGaucheCor + DessinLargeurCor, DessinDebutHautCor, DessinHauteurCor, DessinNbLigCor + 1, MinPolice, BE, BFM, AmePure);
+
+    // Bloc Corruption (extrait dans PdfBlocCorruption, CONTEXT.md §2.4), sous Expérience
+    // (réagencement du 16/08/2026 : anciennement à côté d'Expérience/Mouvement, voir §2.6).
+    // Lost/Left (16/08/2026) : somme de l'historique Personnage.Corruption, voir §2.6.
+    LostCorruption := 0;
+    for PersonnageCorruption in Personnage.Corruption do
+      LostCorruption := LostCorruption + PersonnageCorruption.Montant;
+    DessinDebutHautCor := DessinDebutHautExp - ((DessinNbLigExp + 1) * DessinHauteurExp) - 3;
+    DessinLargeurCor   := DessinLargeurExp;
+    PdfBlocCorruption(PdfPage, DessinDebColG, DessinLargeurCor, DessinDebutHautCor, DessinHauteurCor, DessinNbLigCor + 1, MinPolice, BE, BFM, AmePure, LostCorruption);
+
+    // Bloc Corruption Détail (extrait dans PdfBlocCorruptionDetail, CONTEXT.md §2.6) :
+    // tableau Montant | Libellé, à droite d'Expérience/Corruption, dans l'espace libéré
+    // par le réagencement du 16/08/2026. DessinLargeurExp sert ici de bord droit absolu
+    // du panneau Expérience/Corruption (nom trompeur, comportement pré-existant conservé
+    // tel quel) - le nouveau tableau démarre 3mm après. Hauteur calée pour finir au même
+    // Y que le bas du panneau Corruption (NbLignes = 11, à ajuster si Bonus T/WP/etc change).
+    DessinDebutGaucheCorDet := DessinLargeurExp + 3;
+    PdfBlocCorruptionDetail(PdfPage, Personnage, DessinDebutGaucheCorDet, DessinFinColG, DessinDebutHautExp, DessinHauteurCorDet, DessinNbLigCorDet, MinPolice);
 
     // Tableau Compétences groupées (extrait dans DessinerTableau (orLigne) /
     // PdfPreparerRecordSetCompetencesGroupees, CONTEXT.md §2.4)
