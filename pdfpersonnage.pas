@@ -8,7 +8,7 @@ interface
 uses
   Classes, SysUtils, fpPDF, PdfUtils, ChargeRace, ChargeMetier, ChargeMetierNiveau,
   ChargeRaceAttribut, ChargeTalent, ChargeCompetence, ChargeArme, ChargeArmure,
-  ChargeArmeBonus, ChargeArmureBonus, ChargeSort, ChargeAttribut, ChargeFabrication,
+  ChargeArmeBonus, ChargeArmureBonus, ChargeArmureBonusModif, ChargeSort, ChargeAttribut, ChargeFabrication,
   ChargeConstantes, ChargeMetierAttribut, ChargeTexte, ChargeMetierTalent,
   ChargePersonnage, ChargeArmureSimplifie, ChargeAttributAugmentation,
   ChargeCompetenceAugmentation,
@@ -130,6 +130,24 @@ Function PdfPersonnageTalent(Personnage: StructurePersonnage; Talent: String; Va
 Function PdfPersonnageRemplaceBonus(Personnage: StructurePersonnage; ChW: String): String;
 Function PdfPersonnageCompetenceBonus(Personnage: StructurePersonnage; CodeCompetence: String): String;
 Function PdfPersonnageTalentBonus(Personnage: StructurePersonnage; CodeTalent: String): String;
+
+// Calcule les astérisques numérotées liées aux malus de compétence de l'armure
+// actuellement équipée (armures normales ET simplifiées, même résolution que
+// PdfBlocArmuresDonnees mais sans rien dessiner - peut donc être appelée avant la page 1).
+// Une astérisque par PIÈCE portée (pas par code de bonus), pour que deux pièces
+// différentes portant le même code de malus (ex. plastron + jambières "Not discreet")
+// gardent chacune leur propre numéro. Numérotation continuant après le maximum déjà
+// utilisé par le système de talents (Personnage.Asterisque), sans jamais l'écrire dedans
+// - conception validée avec Nono le 15-16/08/2026, voir CONTEXT.md §2.5. Renvoie une
+// TStringList Name=CodeCompetence / Value=texte d'annotation à concaténer à celle des
+// talents (ex. " (5) (6)", même format court que le système de talents - PdfEcrit
+// wrap sur deux lignes si le texte est trop long pour la petite colonne d'annotation,
+// donc pas de pourcentage ici). Renvoie aussi, en paramètre out, une deuxième
+// TStringList Name=CodeEquipement / Value=numéro, pour afficher le même numéro à côté
+// de la pièce d'armure elle-même (PdfBlocArmuresDonnees), comme (N) à côté d'un talent -
+// permet de retrouver quelle pièce cause quel malus. Les deux listes sont à libérer par
+// l'appelant.
+Function PdfPersonnageArmureAsterisques(Personnage: StructurePersonnage; out AsterisqueParEquipement: TStringList): TStringList;
 
 // Blocs extraits de PdfPersonnageCreationFeldo2P (CONTEXT.md §2.4) — premier prototype
 // de l'architecture Bloc/Tableau. PdfBlocResilience dessine le cadre partagé
@@ -256,7 +274,7 @@ Procedure PdfBlocArmesDonnees(PdfPage: TPDFPage; Personnage: StructurePersonnage
 // la dernière clause (devenue unique, donc simple `if`) de la boucle partagée
 // d'origine sur Personnage.Equipement - **les 4 boucles de remplissage sont
 // maintenant toutes extraites.**
-Procedure PdfBlocArmuresDonnees(PdfPage: TPDFPage; Personnage: StructurePersonnage; XGauche, XDroite, Y, HauteurLigne: Single; ArmureSet: Boolean; var FabricationBonii: String; out EncArmure, ArmureBras, ArmureCorps, ArmureJambe, ArmureTete: Integer; out ArmureBonii: String; MinPolice: Integer);
+Procedure PdfBlocArmuresDonnees(PdfPage: TPDFPage; Personnage: StructurePersonnage; XGauche, XDroite, Y, HauteurLigne: Single; ArmureSet: Boolean; var FabricationBonii: String; out EncArmure, ArmureBras, ArmureCorps, ArmureJambe, ArmureTete: Integer; out ArmureBonii: String; MinPolice: Integer; AsterisqueParEquipement: TStringList);
 
 // Bloc DessinExplication (page 2, cadre + contenu) — dernier chantier convenu avec
 // Nono (CONTEXT.md §2.4) : le cadre légendant les bonus/malus accumulés d'Armures,
@@ -322,7 +340,7 @@ Function PdfPreparerRecordSetCaracteristiques(Personnage: StructurePersonnage; P
 // pour un autre encart, et ListPris (la liste des codes de compétences déjà affichées, pour
 // que le tableau des compétences groupées ne les propose pas une deuxième fois) — c'est le
 // même calcul que faisait l'ancien code, juste extrait ici.
-Function PdfPreparerRecordSetCompetencesBase(Personnage: StructurePersonnage; PMetier: StructureMetier; ListPage: TStringList; out TotalEsquive, TotalCalme, TotalResitance, TotalCommandement, TotalIntuition: Integer; out ListPris: String): TPdfRecordSet;
+Function PdfPreparerRecordSetCompetencesBase(Personnage: StructurePersonnage; PMetier: StructureMetier; ListPage: TStringList; AnnotationArmure: TStringList; out TotalEsquive, TotalCalme, TotalResitance, TotalCommandement, TotalIntuition: Integer; out ListPris: String): TPdfRecordSet;
 
 // Prépare le tableau des compétences groupées (deuxième grille) : d'abord les compétences de
 // ListCompetence déjà augmentées et pas déjà affichées dans le tableau de base (ListPris),
@@ -332,7 +350,7 @@ Function PdfPreparerRecordSetCompetencesBase(Personnage: StructurePersonnage; PM
 // Note : corrige un bug de l'ancien code, qui utilisait par erreur une variable non
 // réassignée (`Comp`, reliquat du tableau précédent) pour l'astérisque de bonus — remplacé
 // ici par le code de la compétence réellement affichée sur la ligne (validé avec Nono).
-Function PdfPreparerRecordSetCompetencesGroupees(Personnage: StructurePersonnage; ListPris: String; CapaciteMax: Integer): TPdfRecordSet;
+Function PdfPreparerRecordSetCompetencesGroupees(Personnage: StructurePersonnage; ListPris: String; CapaciteMax: Integer; AnnotationArmure: TStringList): TPdfRecordSet;
 
 implementation
 
@@ -647,6 +665,7 @@ Procedure PdfPersonnageCreation(Personnage: StructurePersonnage; BackGround: Boo
     ArmureBonii:     String = '';
     FabricationBonii:String = '';
     PArmureBonus:    StructureArmureBonus;
+    PArmureBonusModif: StructureArmureBonusModif;
     PArmeBonus:      StructureArmeBonus;
     NbBonus:         Integer;
     TxtBonus:        String;
@@ -1599,6 +1618,18 @@ Procedure PdfPersonnageCreation(Personnage: StructurePersonnage; BackGround: Boo
             LocData      := ExtractChaine(',',ArmureBonii,IndLoca);
             PArmureBonus := ChercheArmureBonus(LocData);
             TxtBonus     := PArmureBonus.Libelle+':'+PArmureBonus.Malus;
+            if PArmureBonus.Malus = '' then
+              // Modifier structuré (attribut name="CodeCompetence", 15/08/2026) : plus de
+              // texte libre dans .Malus pour ces entrées, on reconstruit un texte lisible
+              // à partir de ListArmureBonusModif (même principe que WinArmor/Feldo2P)
+              for PArmureBonusModif in ListArmureBonusModif do
+                if CompareRechercheValeur(PArmureBonusModif.CodeArmureBonus, PArmureBonus.CodeArmureBonus) then
+                  begin
+                    if TxtBonus <> PArmureBonus.Libelle+':' then
+                      TxtBonus := TxtBonus + ', ';
+                    TxtBonus := TxtBonus + ChercheCompetence(PArmureBonusModif.CodeCompetence).Libelle
+                                          + ' ' + IntToStr(PArmureBonusModif.Valeur) + '%';
+                  end;
             PdfPage.WriteText(15,133+(NbBonus*2), TxtBonus);
           end;
         Inc(NbBonus);
@@ -1720,6 +1751,67 @@ begin
 
   Result := Bonus;
 end;
+
+Function PdfPersonnageArmureAsterisques(Personnage: StructurePersonnage; out AsterisqueParEquipement: TStringList): TStringList;
+  var
+    PersonnageEquipement: StructurePersonnageEquipement;
+    PArmure:              StructureArmure;
+    PArmureSimplifiee:    StructureArmureSimplifiee;
+    PArmureBonusModif:    StructureArmureBonusModif;
+    ListeBonus:           String;
+    NbLoca, IndLoca:       Integer;
+    LocData:               String;
+    AsterisqueCourant:      Integer;
+    AsterisquePiece:        Integer;
+  begin
+    Result                   := TStringList.Create;
+    AsterisqueParEquipement  := TStringList.Create;
+    AsterisqueCourant        := Personnage.Asterisque;
+
+    for PersonnageEquipement in Personnage.Equipement do
+      if (PersonnageEquipement.TypeEquipement = TypeEquipAR) or (PersonnageEquipement.TypeEquipement = TypeEquipARS) then
+        begin
+          if PersonnageEquipement.TypeEquipement = TypeEquipAR then
+            begin
+              PArmure    := ChercheArmure(PersonnageEquipement.CodeEquipement);
+              ListeBonus := PArmure.ListeBonus;
+            end
+          else
+            begin
+              PArmureSimplifiee := ChercheArmureSimplifiee(PersonnageEquipement.CodeEquipement);
+              ListeBonus         := PArmureSimplifiee.ListeBonus;
+            end;
+
+          if (ListeBonus <> '') and (ListeBonus <> '-') then
+            begin
+              NbLoca          := CountOccurrences(ListeBonus, ',') + 1;
+              AsterisquePiece := 0; // une seule astérisque par pièce, partagée par toutes les compétences qu'elle touche
+              for IndLoca := 1 to NbLoca do
+                begin
+                  LocData := ExtractChaine(',', ListeBonus, IndLoca);
+                  if pos(' ', LocData) <> 0 then
+                    LocData := copy(LocData, 1, Length(LocData)-2);
+                  for PArmureBonusModif in ListArmureBonusModif do
+                    if CompareRechercheValeur(PArmureBonusModif.CodeArmureBonus, LocData) then
+                      begin
+                        if AsterisquePiece = 0 then
+                          begin
+                            Inc(AsterisqueCourant);
+                            AsterisquePiece := AsterisqueCourant;
+                            // même format court que les talents ("(3)") - retour de Nono le
+                            // 16/08/2026, à côté de la pièce elle-même
+                            AsterisqueParEquipement.Values[PersonnageEquipement.CodeEquipement] := '(' + IntToStr(AsterisquePiece) + ')';
+                          end;
+                        // "(5) -10%" à côté de la compétence (idée d'origine de Nono) - la
+                        // colonne d'annotation a été élargie le 16/08/2026 (DessinerTableau,
+                        // orLigne) pour que ça tienne sur une seule ligne sans wrap PdfEcrit
+                        Result.Values[PArmureBonusModif.CodeCompetence] := Result.Values[PArmureBonusModif.CodeCompetence]
+                          + ' (' + IntToStr(AsterisquePiece) + ') ' + IntToStr(PArmureBonusModif.Valeur) + '%';
+                      end;
+                end;
+            end;
+        end;
+  end;
 
 // Dessine le cadre partagé Résilience/Destin (4 lignes de haut, de X à X+78) et le contenu
 // du côté Résilience (colonnes X à X+40). Dans le gabarit Feldo2P, Résilience et Destin
@@ -2391,7 +2483,7 @@ Procedure PdfBlocArmesDonnees(PdfPage: TPDFPage; Personnage: StructurePersonnage
         end;
   end;
 
-Procedure PdfBlocArmuresDonnees(PdfPage: TPDFPage; Personnage: StructurePersonnage; XGauche, XDroite, Y, HauteurLigne: Single; ArmureSet: Boolean; var FabricationBonii: String; out EncArmure, ArmureBras, ArmureCorps, ArmureJambe, ArmureTete: Integer; out ArmureBonii: String; MinPolice: Integer);
+Procedure PdfBlocArmuresDonnees(PdfPage: TPDFPage; Personnage: StructurePersonnage; XGauche, XDroite, Y, HauteurLigne: Single; ArmureSet: Boolean; var FabricationBonii: String; out EncArmure, ArmureBras, ArmureCorps, ArmureJambe, ArmureTete: Integer; out ArmureBonii: String; MinPolice: Integer; AsterisqueParEquipement: TStringList);
   var
     PersonnageEquipement: StructurePersonnageEquipement;
     PArmure:              StructureArmure;
@@ -2467,6 +2559,15 @@ Procedure PdfBlocArmuresDonnees(PdfPage: TPDFPage; Personnage: StructurePersonna
                 end
               else
                 PdfEcrit(PdfPage, XGauche +  1, XGauche + 34, Y - ((NbArmure + 2) * HauteurLigne) + 0.6, PArmureSimplifiee.Libelle + Quality, MinPolice);
+              // Afficher l'astérisque de la pièce (même principe que les talents,
+              // PdfPersonnageTalentBonus/PdfBlocTalents) - permet de retrouver quelle pièce
+              // cause quel malus affiché sur les Compétences (retour de Nono le 16/08/2026)
+              if AsterisqueParEquipement.Values[PersonnageEquipement.CodeEquipement] <> '' then
+                begin
+                  PdfTaillePolice(PdfPage, PdfFontValue, ConstPoliceArial, 4);
+                  PdfEcrit(PdfPage, XGauche + 31, XGauche + 34, Y - ((NbArmure + 2) * HauteurLigne) + 2.3, AsterisqueParEquipement.Values[PersonnageEquipement.CodeEquipement], 4);
+                  PdfTaillePolice(PdfPage, PdfFontValue, ConstPoliceArial, 9);
+                end;
               if Enc <> 0 then
                 if EncP <> Enc then
                   PdfCentre(PdfPage, XGauche + 53, XGauche + 62, Y - ((NbArmure + 2) * HauteurLigne) + 0.6, IntToStr(EncP)+ '('+IntToStr(Enc)+')')
@@ -2518,6 +2619,7 @@ Procedure PdfBlocDessinExplication(PdfPage: TPDFPage; XGauche, XDroite, YHaut, Y
     PArmureBonus: StructureArmureBonus;
     PArmeBonus:   StructureArmeBonus;
     PFabrication: StructureFabrication;
+    PArmureBonusModif: StructureArmureBonusModif;
     TxtBonus:     String;
   begin
     // Dessin cadre
@@ -2540,6 +2642,18 @@ Procedure PdfBlocDessinExplication(PdfPage: TPDFPage; XGauche, XDroite, YHaut, Y
             LocData      := ExtractChaine(',',ArmureBonii,IndLoca);
             PArmureBonus := ChercheArmureBonus(LocData);
             TxtBonus     := PArmureBonus.Libelle+':'+PArmureBonus.Malus;
+            if PArmureBonus.Malus = '' then
+              // Modifier structuré (attribut name="CodeCompetence", 15/08/2026) : plus de
+              // texte libre dans .Malus pour ces entrées, on reconstruit un texte lisible
+              // à partir de ListArmureBonusModif (même principe que WinArmor)
+              for PArmureBonusModif in ListArmureBonusModif do
+                if CompareRechercheValeur(PArmureBonusModif.CodeArmureBonus, PArmureBonus.CodeArmureBonus) then
+                  begin
+                    if TxtBonus <> PArmureBonus.Libelle+':' then
+                      TxtBonus := TxtBonus + ', ';
+                    TxtBonus := TxtBonus + ChercheCompetence(PArmureBonusModif.CodeCompetence).Libelle
+                                          + ' ' + IntToStr(PArmureBonusModif.Valeur) + '%';
+                  end;
             PdfPage.WriteText(XGauche + 4,YHaut-(NbBonus*HauteurLigne), TxtBonus);
           end;
       end;
@@ -2836,7 +2950,13 @@ Function DessinerTableau(PdfPage: TPDFPage; const Tableau: TPdfTableau; const Do
                 if ValeurCase.Annotation <> '' then
                   begin
                     PdfTaillePolice(PdfPage, PdfFontBack, ConstPoliceArial, 6);
-                    PdfEcrit(PdfPage, XPos[IndC+1] - 5, XPos[IndC+1] + 3.5, YDonnee + 1, ValeurCase.Annotation, 6);
+                    // Boîte élargie le 16/08/2026 (retour de Nono) : les annotations de talent
+                    // seules ("><(3)") tenaient dans 8.5mm, mais les nouvelles annotations
+                    // d'armure ("(5) -10%") sont plus longues et provoquaient un retour à la
+                    // ligne (PdfEcrit) qui désalignait le pourcentage du numéro. Champ Nom
+                    // uniquement (Valeurs[0]) sur les tableaux Compétences, ne touche pas
+                    // l'annotation des Caractéristiques (orColonne, autre PdfEcrit plus haut).
+                    PdfEcrit(PdfPage, XPos[IndC+1] - 8, XPos[IndC+1] + 5, YDonnee + 1, ValeurCase.Annotation, 6);
                   end;
               end;
           end;
@@ -2904,7 +3024,7 @@ Function PdfPreparerRecordSetCaracteristiques(Personnage: StructurePersonnage; P
 // champs (Nom, Attribut, Stat, Upg, Adv, Total). Nom et Attribut partagent le même style de
 // police par ligne (en-tête, ou "accent" si la compétence appartient au métier en cours) —
 // c'est le même calcul que faisait l'ancien code juste avant de dessiner.
-Function PdfPreparerRecordSetCompetencesBase(Personnage: StructurePersonnage; PMetier: StructureMetier; ListPage: TStringList; out TotalEsquive, TotalCalme, TotalResitance, TotalCommandement, TotalIntuition: Integer; out ListPris: String): TPdfRecordSet;
+Function PdfPreparerRecordSetCompetencesBase(Personnage: StructurePersonnage; PMetier: StructureMetier; ListPage: TStringList; AnnotationArmure: TStringList; out TotalEsquive, TotalCalme, TotalResitance, TotalCommandement, TotalIntuition: Integer; out ListPris: String): TPdfRecordSet;
   var
     Ind:              Integer;
     Comp:             String;
@@ -2952,6 +3072,8 @@ Function PdfPreparerRecordSetCompetencesBase(Personnage: StructurePersonnage; PM
           StyleLigne := spValeur; // colonnes EnTete=True => police d'en-tête par défaut
 
         Bonus := PdfPersonnageCompetenceBonus(Personnage, Comp);
+        if AnnotationArmure.Values[Comp] <> '' then
+          Bonus := Bonus + AnnotationArmure.Values[Comp];
 
         SetLength(Result[Ind].Valeurs, 6);
 
@@ -2982,7 +3104,7 @@ Function PdfPreparerRecordSetCompetencesBase(Personnage: StructurePersonnage; PM
       end;
   end;
 
-Function PdfPreparerRecordSetCompetencesGroupees(Personnage: StructurePersonnage; ListPris: String; CapaciteMax: Integer): TPdfRecordSet;
+Function PdfPreparerRecordSetCompetencesGroupees(Personnage: StructurePersonnage; ListPris: String; CapaciteMax: Integer; AnnotationArmure: TStringList): TPdfRecordSet;
   var
     Ind:                  Integer;
     NbLigne:              Integer;
@@ -3013,6 +3135,8 @@ Function PdfPreparerRecordSetCompetencesGroupees(Personnage: StructurePersonnage
                   ValBonus := '  ' + ValBonus;
 
                 Bonus := PdfPersonnageCompetenceBonus(Personnage, PCompetence.CodeCompetence);
+                if AnnotationArmure.Values[PCompetence.CodeCompetence] <> '' then
+                  Bonus := Bonus + AnnotationArmure.Values[PCompetence.CodeCompetence];
 
                 SetLength(Result, Length(Result)+1);
                 SetLength(Result[High(Result)].Valeurs, 6);
@@ -3097,6 +3221,8 @@ Procedure PdfPersonnageCreationFeldo2P(Personnage: StructurePersonnage);
     PMetierAttribut: StructureMetierAttribut;
     Mouv:            Integer = 0;
     ListPage:        TStringList;
+    ListAsterisqueArmure: TStringList;
+    AsterisqueParEquipement: TStringList;
     Comp:            String;
     PCompetence:     StructureCompetence;
     ValStat:         String;
@@ -3478,7 +3604,14 @@ Procedure PdfPersonnageCreationFeldo2P(Personnage: StructurePersonnage);
     TableauComp.Champs[5].DecalageValeurMin := 3.5;
     TableauComp.Champs[5].DecalageValeurMax := 3.5;
 
-    DonneesComp := PdfPreparerRecordSetCompetencesBase(Personnage, PMetier, ListPage, TotalEsquive, TotalCalme, TotalResitance, TotalCommandement, TotalIntuition, ListPris);
+    // Astérisques numérotées des malus d'armure sur les compétences (CONTEXT.md §2.5,
+    // conception validée avec Nono le 15-16/08/2026) - calculées ici, avant les tableaux de
+    // Compétences de la page 1, car Personnage.Equipement est disponible dès le départ (pas
+    // besoin d'attendre que la page 2 soit dessinée). Libérée après le tableau des
+    // compétences groupées, seul autre endroit où elle sert.
+    ListAsterisqueArmure := PdfPersonnageArmureAsterisques(Personnage, AsterisqueParEquipement);
+
+    DonneesComp := PdfPreparerRecordSetCompetencesBase(Personnage, PMetier, ListPage, ListAsterisqueArmure, TotalEsquive, TotalCalme, TotalResitance, TotalCommandement, TotalIntuition, ListPris);
     ListPage.Destroy;
     DessinDebutHautAmb := DessinerTableau(PdfPage, TableauComp, DonneesComp) - 3;
 
@@ -3568,7 +3701,9 @@ Procedure PdfPersonnageCreationFeldo2P(Personnage: StructurePersonnage);
     TableauCompG.Champs[5].DecalageValeurMin := 2.5;
     TableauCompG.Champs[5].DecalageValeurMax := 2.5;
 
-    DonneesCompG := PdfPreparerRecordSetCompetencesGroupees(Personnage, ListPris, DessinNbLigComg - 2);
+    DonneesCompG := PdfPreparerRecordSetCompetencesGroupees(Personnage, ListPris, DessinNbLigComg - 2, ListAsterisqueArmure);
+    // ListAsterisqueArmure et AsterisqueParEquipement libérées plus loin, après
+    // PdfBlocArmuresDonnees (page 2) qui utilise encore la seconde
     DessinDebutHautTal := DessinerTableau(PdfPage, TableauCompG, DonneesCompG) - 3;
 
     // Bloc Talents (extrait dans PdfBlocTalents, CONTEXT.md §2.4)
@@ -3610,7 +3745,9 @@ Procedure PdfPersonnageCreationFeldo2P(Personnage: StructurePersonnage);
      PdfBlocArmesDonnees(PdfPage, Personnage, DessinDebColG, DessinLargeurWea, DessinDebutHautWea, DessinHauteurWea, BF, TBonusCC, TBonusCT, FabricationBonii, EncArme, ArmeBonii, ArmureBouclier, MinPolice);
      // Dessin Armures (extrait dans PdfBlocArmuresDonnees, CONTEXT.md §2.4 - remplissage) -
      // dernière des 4 boucles, les 4 sont maintenant toutes extraites de la boucle partagée
-     PdfBlocArmuresDonnees(PdfPage, Personnage, DessinDebColG, DessinLargeurArm, DessinDebutHautArm, DessinHauteurArm, ArmureSet, FabricationBonii, EncArmure, ArmureBras, ArmureCorps, ArmureJambe, ArmureTete, ArmureBonii, MinPolice);
+     PdfBlocArmuresDonnees(PdfPage, Personnage, DessinDebColG, DessinLargeurArm, DessinDebutHautArm, DessinHauteurArm, ArmureSet, FabricationBonii, EncArmure, ArmureBras, ArmureCorps, ArmureJambe, ArmureTete, ArmureBonii, MinPolice, AsterisqueParEquipement);
+     ListAsterisqueArmure.Destroy;
+     AsterisqueParEquipement.Destroy;
 
         // Écrire du texte sur la page PDF
     PdfTaillePolice(PdfPage, PdfFontValue, ConstPoliceArial, 7);

@@ -323,9 +323,8 @@
         <Filename Value="chargearmurebonus.pas"/>
         <IsPartOfProject Value="True"/>
         <UnitName Value="ChargeArmureBonus"/>
-        <IsVisibleTab Value="True"/>
         <EditorIndex Value="13"/>
-        <CursorPos X="30" Y="9"/>
+        <CursorPos X="28" Y="12"/>
         <UsageCount Value="200"/>
         <Loaded Value="True"/>
       </Unit>
@@ -336,10 +335,12 @@
         <HasResources Value="True"/>
         <ResourceBaseClass Value="Form"/>
         <UnitName Value="WinArmor"/>
-        <EditorIndex Value="-1"/>
-        <TopLine Value="313"/>
-        <CursorPos X="22" Y="327"/>
+        <EditorIndex Value="14"/>
+        <TopLine Value="274"/>
+        <CursorPos X="40" Y="286"/>
         <UsageCount Value="201"/>
+        <Loaded Value="True"/>
+        <LoadedDesigner Value="True"/>
       </Unit>
       <Unit>
         <Filename Value="chargesort.pas"/>
@@ -492,9 +493,10 @@
         <Filename Value="pdfpersonnage.pas"/>
         <IsPartOfProject Value="True"/>
         <UnitName Value="PdfPersonnage"/>
+        <IsVisibleTab Value="True"/>
         <EditorIndex Value="11"/>
-        <TopLine Value="2206"/>
-        <CursorPos X="47" Y="2212"/>
+        <TopLine Value="2188"/>
+        <CursorPos X="42" Y="2193"/>
         <UsageCount Value="200"/>
         <Loaded Value="True"/>
       </Unit>
@@ -520,7 +522,7 @@
         <Filename Value="chargetraduction.pas"/>
         <IsPartOfProject Value="True"/>
         <UnitName Value="ChargeTraduction"/>
-        <EditorIndex Value="14"/>
+        <EditorIndex Value="15"/>
         <TopLine Value="201"/>
         <CursorPos X="11" Y="214"/>
         <UsageCount Value="200"/>
@@ -1216,10 +1218,6 @@
     <JumpHistory HistoryIndex="29">
       <Position>
         <Filename Value="winpersonnage.pas"/>
-        <Caret Line="4373" Column="16" TopLine="4361"/>
-      </Position>
-      <Position>
-        <Filename Value="winpersonnage.pas"/>
         <Caret Line="4334" Column="32" TopLine="4322"/>
       </Position>
       <Position>
@@ -1333,6 +1331,10 @@
       <Position>
         <Filename Value="warhammersource.pas"/>
         <Caret Line="433" Column="63" TopLine="423"/>
+      </Position>
+      <Position>
+        <Filename Value="chargearmurebonus.pas"/>
+        <Caret Line="12" Column="28"/>
       </Position>
     </JumpHistory>
     <RunParams>

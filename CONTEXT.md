@@ -582,18 +582,74 @@ c'est la présence de l'attribut qui distingue les deux cas au chargement.
   n'affiche encore la valeur structurée dans WinArmor à ce stade), l'explication en
   dessous du tableau reste correcte.
 
-**Pas encore fait** : le calcul et l'affichage réels des astérisques (ni dans WinArmor,
-ni dans le PDF) — seule la donnée structurée existe maintenant (`ListArmureBonusModif`),
-rien ne la consomme encore. Reste à concevoir : (1) au moment de la génération du PDF
-(ou de l'affichage personnage), pour chaque pièce d'armure effectivement portée, croiser
-son `CodeArmureBonus` avec `ListArmureBonusModif` pour savoir si elle affecte une
-compétence actuellement affichée ; (2) attribuer à chaque source trouvée une astérisque
-séquentielle continuant après le max de `Personnage.Asterisque` ; (3) afficher ces
-annotations en petite police à côté de la valeur de compétence (probablement via
-`TPdfValeurCase.Annotation`, à concaténer si plusieurs sources touchent la même
-compétence) ; (4) afficher la légende correspondante (ex. "(5) pour la Coiffe"),
-probablement dans/à côté de `PdfBlocDessinExplication`. Idée non conçue en détail, à
-reprendre avec Nono avant de coder quoi que ce soit ici.
+**✅ Colonne Penalty de WinArmor comblée (16/08/2026)** : dans
+`TWinArmors.TabArmorSelection` (`winarmor.pas`), quand `PArmureBonus.Malus` est vide
+(les 4 entrées converties), le texte de la colonne Penalty est reconstruit en
+parcourant `ListArmureBonusModif` pour ce `CodeArmureBonus` et en affichant
+`ChercheCompetence(CodeCompetence).Libelle + ' ' + Valeur + '%'` (plusieurs entrées se
+concatènent avec une virgule si une pièce affecte plusieurs compétences). Confirmé par
+Nono par test : "Stealth (Any) -10%, Perception -10%". Bug de compilation rencontré et
+corrigé au passage (`+=` sur une propriété indexée `TStringGrid.Cells` invalide en
+Pascal — voir §4).
+
+**✅ Régression PDF corrigée (16/08/2026)** : même cause que WinArmor — la légende
+bonus/malus (`PdfBlocDessinExplication` en Feldo2P, ligne ~2542, et le bloc équivalent
+non refondu de l'ancienne `PdfPersonnageCreation`, ligne ~1601, toujours utilisée en
+production - confirmé par Nono) affichait un texte vide après le `:` pour les 4
+entrées converties. Même correctif que WinArmor appliqué aux deux endroits
+(reconstruction depuis `ListArmureBonusModif` si `.Malus` est vide). Confirmé par
+Nono par test PDF réel : `Not discreet:Stealth (Any) -10%`, `Narrow the
+view:Perception -10%`.
+
+**✅ Chantier "astérisques armure → compétence" terminé et confirmé par Nono le
+16/08/2026.** Décision finale sur la légende (clarifiée par Nono en route) : pas de
+bloc légende séparé ni d'ajout dans `PdfBlocDessinExplication` — le pourcentage
+affiché directement à côté de la valeur de compétence suffit, l'objectif étant
+d'alerter vite le joueur, pas de le renvoyer sur une autre page. En revanche, le même
+numéro s'affiche aussi à côté de la pièce d'armure elle-même (tableau Armures, page
+2), pour qu'on puisse retrouver quelle pièce cause quel malus - même principe que les
+talents (`PdfPersonnageTalentBonus`/`PdfBlocTalents`, `(N)` à côté du nom).
+
+Implémentation (`pdfpersonnage.pas`) :
+- `PdfPersonnageArmureAsterisques(Personnage; out AsterisqueParEquipement): TStringList`
+  — nouvelle fonction pure (aucun dessin), même résolution armure normale/simplifiée
+  que `PdfBlocArmuresDonnees` mais sans rien dessiner, appelable avant la page 1 (les
+  données d'équipement du personnage sont connues dès le départ). Une astérisque par
+  PIÈCE portée ayant au moins un code de bonus lié à une compétence (pas par code —
+  deux pièces différentes avec le même code gardent chacune leur numéro), numérotation
+  continuant après `Personnage.Asterisque` sans jamais l'écrire. Renvoie deux
+  `TStringList` à libérer par l'appelant : le `Result` (`CodeCompetence -> " (5) -10%
+  (6) -20%"`, à concaténer à l'annotation des talents) et `AsterisqueParEquipement`
+  (`CodeEquipement -> "(5)"`, pour l'affichage côté armure).
+- `PdfPreparerRecordSetCompetencesBase`/`Groupees` : nouveau paramètre
+  `AnnotationArmure: TStringList`, concaténé à la suite du texte de
+  `PdfPersonnageCompetenceBonus` existant (même emplacement, même mécanisme
+  `TPdfValeurCase.Annotation` que les talents - pas un nouvel affichage séparé).
+- `PdfBlocArmuresDonnees` : nouveau paramètre `AsterisqueParEquipement: TStringList`,
+  affiché en police 4 juste après le libellé de la pièce (même principe visuel que
+  `PdfBlocTalents`).
+- `PdfPersonnageCreationFeldo2P` : les deux listes sont calculées une seule fois avant
+  les tableaux de Compétences de la page 1 (`ListAsterisqueArmure`/
+  `AsterisqueParEquipement`), et libérées après l'appel à `PdfBlocArmuresDonnees` sur
+  la page 2 (dernier endroit où `AsterisqueParEquipement` sert).
+- **Bug de mise en page trouvé et corrigé pendant le test** : le premier rendu
+  affichait `(5)` et `-10%` sur deux lignes non alignées. Cause : `PdfEcrit` (retour à
+  la ligne automatique si le texte dépasse la largeur disponible) — la boîte
+  d'annotation du tableau Compétences (`DessinerTableau`, orientation `orLigne`) ne
+  faisait que 8.5mm, suffisant pour les annotations de talent seules (`><(3)`, 4-5
+  caractères) mais pas pour `(5) -10%` (8+ caractères). Élargie à 13mm - ce
+  `PdfEcrit` est spécifique au champ `Nom` des tableaux Compétences (`Valeurs[0]`),
+  ne touche pas l'annotation du tableau Caractéristiques (`orColonne`, autre
+  `PdfEcrit`, table différente).
+- **Limite connue, pas un bug** : la correspondance armure→compétence est une
+  comparaison EXACTE de code (`CompareRechercheValeur`, pas de recherche floue) - un
+  code générique comme `RULES-COMPDISC_*` ("Discrétion" toutes variantes) ne matche
+  que si le personnage a littéralement cette compétence générique, pas une variante
+  spécialisée type "Discrétion (Urbain)". Même limitation préexistante que le système
+  de talents (`ListTalentCompetenceModif`), pas quelque chose d'introduit ici.
+
+Confirmé par Nono par test PDF réel, sur les deux points (alignement compétence +
+présence du numéro dans le tableau Armures) : "c'est bon".
 
 **Idée liée, pas conçue, capturée dans `A FAIRE.txt`** : `BOOK_RULESBOOK_FRANCAIS.Xml`
 contient en fait toutes les données (pas seulement les traductions), alors que seul le
@@ -645,6 +701,12 @@ chantier concerné, avec les détails techniques.
   `DecoupeCodeValeur(...)` puis `copy(CodeValeur,1,5) = TalentSortXXX` (comparaison de préfixe
   sur les 5 premiers caractères, cohérente aussi pour MagieMineure/T0089 qui n'a pas de
   variante suffixée).
+- `TStringGrid.Cells[Col, Row]` (et toute propriété indexée avec getter/setter, plus
+  généralement) n'est pas une vraie variable (l-value) : `+=` dessus échoue à la
+  compilation avec "Variable identifier expected" (pas une erreur logique, une erreur de
+  compilation). Utiliser une réaffectation complète : `Cells[C,R] := Cells[C,R] + '...';`.
+  Bug réel trouvé le 16/08/2026 dans `TWinArmors.TabArmorSelection` (winarmor.pas) en
+  construisant le texte de malus à partir de plusieurs entrées de `ListArmureBonusModif`.
 
 ---
 

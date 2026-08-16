@@ -7,7 +7,8 @@ interface
 uses
   Classes, SysUtils, Forms, Controls, Graphics, Dialogs, Grids, StdCtrls,
   ExtCtrls, BCButton, ChargeArmure, GlobalFonts, ChargeConstantes,
-  UnitCalcul, ChargeArmureBonus, ChargeTexte, WinFiltre, ChargeArmureSimplifie;
+  UnitCalcul, ChargeArmureBonus, ChargeArmureBonusModif, ChargeCompetence,
+  ChargeTexte, WinFiltre, ChargeArmureSimplifie;
 
 type
 
@@ -236,6 +237,7 @@ var
   Ind:          Integer;
   I,J:          Integer;
   PArmureBonus: StructureArmureBonus;
+  PArmureBonusModif: StructureArmureBonusModif;
   Bonus:        String;
   CheminImage1: String;
   CheminImage2: String;
@@ -269,6 +271,20 @@ begin
         TabBonus.Cells[1, Ind+1] := PArmureBonus.Libelle;
         TabBonus.Cells[2, Ind+1] := PArmureBonus.Description;
         TabBonus.Cells[3, Ind+1] := PArmureBonus.Malus;
+        if TabBonus.Cells[3, Ind+1] = '' then
+          // Modifier structuré (attribut name="CodeCompetence", 15/08/2026) : plus de texte
+          // libre dans .Malus pour ces entrées, on reconstruit un texte lisible à partir de
+          // ListArmureBonusModif (une ligne par compétence affectée, ex. plusieurs pièces
+          // touchant des compétences différentes)
+          for PArmureBonusModif in ListArmureBonusModif do
+            if CompareRechercheValeur(PArmureBonusModif.CodeArmureBonus, PArmureBonus.CodeArmureBonus) then
+              begin
+                if TabBonus.Cells[3, Ind+1] <> '' then
+                  TabBonus.Cells[3, Ind+1] := TabBonus.Cells[3, Ind+1] + ', ';
+                TabBonus.Cells[3, Ind+1] := TabBonus.Cells[3, Ind+1]
+                                             + ChercheCompetence(PArmureBonusModif.CodeCompetence).Libelle
+                                             + ' ' + IntToStr(PArmureBonusModif.Valeur) + '%';
+              end;
       end;
 
     if AffEncombrement.Text = '0' then
