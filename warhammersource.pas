@@ -21,7 +21,7 @@ uses
   ChargeTraduction, ChargeArmureSimplifie, ChargeLivre,
   ChargeTalentAttributModif, ChargeTalentCompetenceModif,
   ChargeTalentCompetenceAjoute, ChargeRaceCorruptionCreation,
-  ChargeRaceOpinion, ChargeArmureBonusModif,
+  ChargeCorruptionTable, ChargeRaceOpinion, ChargeArmureBonusModif,
   CustomDrawn_Common, BCButton, BCLabel, fpTTF,
   PdfPersonnage, XmlExportImport, fppdf, WinLivre;
 
@@ -337,6 +337,7 @@ procedure TMenu.ChargerLivre(ForceMaJ: Boolean; ForceLivre: String);
         NbArmeUnique	            := 0;
         NbTraduction                := 0;
         NbRaceCorruptionCreation    := 0;
+        nbCorruptionTable           := 0;
         NbTalentAttributModif       := 0;
         NbTalentCompetenceModif     := 0;
         NbTalentCompetenceAjoute    := 0;
@@ -367,6 +368,7 @@ procedure TMenu.ChargerLivre(ForceMaJ: Boolean; ForceLivre: String);
         ListMetierSousMetier.Clear;
         ListMetierRaceChoixMetier.Clear;
         ListRaceCorruptionCreation.Clear;
+        ListCorruptionTable.Clear;
         ListTalentAttributModif.Clear;
         ListTalentCompetenceModif.Clear;
         ListTalentCompetenceAjoute.Clear;
@@ -524,6 +526,7 @@ procedure TMenu.FormCreate(Sender: TObject);
        ListLivreTraduit             := TListLivreTraduit.Create;
        ListTexte                    := TListTexte.Create;
        ListRaceCorruptionCreation   := TListRaceCorruptionCreation.Create;
+       ListCorruptionTable          := TListCorruptionTable.Create;
        ListTalentAttributModif      := TListTalentAttributModif.Create;
        ListTalentCompetenceModif    := TListTalentCompetenceModif.Create;
        ListTalentCompetenceAjoute   := TListTalentCompetenceAjoute.Create;

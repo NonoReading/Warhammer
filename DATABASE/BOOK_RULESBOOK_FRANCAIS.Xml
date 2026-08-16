@@ -17237,4 +17237,168 @@ Si votre adversaire possède une arme avec l’Atout Empaleuse et obtient un Cri
 <Specie name="RULES-RACE_HELF">"01-100"</Specie>
 <Specie name="RULES-RACE_WELF">"01-100"</Specie>
 </DATA_CORRUPTION_MENTAL>
+<DATA_CORRUPTION_TABLE_PHYSICAL>
+<Corruption name="01-05">
+<Libelle>"Pattes d’animaux"</Libelle>
+<Effet>"+1 Mouvement"</Effet>
+</Corruption>
+<Corruption name="06-10">
+<Libelle>"Corpulent"</Libelle>
+<Effet>"-1 Mouvement, +5 Force, +5 Endurance"</Effet>
+</Corruption>
+<Corruption name="11-15">
+<Libelle>"Doigts distendus"</Libelle>
+<Effet>"+10 Dextérité"</Effet>
+</Corruption>
+<Corruption name="16-20">
+<Libelle>"Émacié"</Libelle>
+<Effet>"-10 Force, +5 Agilité"</Effet>
+</Corruption>
+<Corruption name="21-25">
+<Libelle>"Œil énorme"</Libelle>
+<Effet>"+10 aux Tests de Perception impliquant la vue"</Effet>
+</Corruption>
+<Corruption name="26-30">
+<Libelle>"Articulation supp. aux jambes"</Libelle>
+<Effet>"+5 Agilité"</Effet>
+</Corruption>
+<Corruption name="31-35">
+<Libelle>"Bouche supplémentaire"</Libelle>
+<Effet>"Effectuer un lancer sur le Tableau des Localisations afin de déterminer où cette bouche apparaît."</Effet>
+</Corruption>
+<Corruption name="36-40">
+<Libelle>"Tentacule épais"</Libelle>
+<Effet>"Vous gagnez le Trait de Créature Tentacule. Voir page 343"</Effet>
+</Corruption>
+<Corruption name="41-45">
+<Libelle>"Peau brillante"</Libelle>
+<Effet>"Produit une lumière équivalente à celle d’une bougie."</Effet>
+</Corruption>
+<Corruption name="46-50">
+<Libelle>"Beauté surnaturelle"</Libelle>
+<Effet>"+10 Sociabilité. Vous ne gardez jamais de cicatrice."</Effet>
+</Corruption>
+<Corruption name="51-55">
+<Libelle>"Visage inversé"</Libelle>
+<Effet>"-20 aux Tests de Sociabilité"</Effet>
+</Corruption>
+<Corruption name="56-60">
+<Libelle>"Peau d’acier"</Libelle>
+<Effet>"+2 PA à toutes les Localisations, -10 Agilité"</Effet>
+</Corruption>
+<Corruption name="61-65">
+<Libelle>"Langue pendante"</Libelle>
+<Effet>"-10 à tous les Tests de Langue lorsque vous parlez."</Effet>
+</Corruption>
+<Corruption name="66-70">
+<Libelle>"Plumes éparses"</Libelle>
+<Effet>"Effectuez deux lancers sur le Tableau des Localisations pour déterminer où ces plumes apparaissent."</Effet>
+</Corruption>
+<Corruption name="71-75">
+<Libelle>"Court sur pattes"</Libelle>
+<Effet>"-1 Mouvement"</Effet>
+</Corruption>
+<Corruption name="76-80">
+<Libelle>"Écailles épineuses"</Libelle>
+<Effet>"+1 PA à toutes les Localisations"</Effet>
+</Corruption>
+<Corruption name="81-85">
+<Libelle>"Cornes asymétriques"</Libelle>
+<Effet>"+1 PA à la Tête. Compte comme une Arme de Créature dont le nombre de Dégâts est égal à votre Bonus de Force (voir page 338)"</Effet>
+</Corruption>
+<Corruption name="86-90">
+<Libelle>"Suintement de pus"</Libelle>
+<Effet>"Effectuez un lancer sur le Tableau des Localisations pour déterminer l’origine du suintement"</Effet>
+</Corruption>
+<Corruption name="91-95">
+<Libelle>"Groin poilu"</Libelle>
+<Effet>"+10 Pistage"</Effet>
+</Corruption>
+<Corruption name="96-00">
+<Libelle>"Choix du MJ"</Libelle>
+<Effet>"Le MJ choisit une mutation ou un Trait de Créature. Voir page 340."</Effet>
+</Corruption>
+</DATA_CORRUPTION_TABLE_PHYSICAL>
+<DATA_CORRUPTION_TABLE_MENTAL>
+<Corruption name="01-05">
+<Libelle>"Atroces désirs"</Libelle>
+<Effet>"-5 Sociabilité, -5 Force Mentale"</Effet>
+</Corruption>
+<Corruption name="06-10">
+<Libelle>"Bête intérieure"</Libelle>
+<Effet>"+10 Force Mentale, -5 Sociabilité, -5 Intelligence"</Effet>
+</Corruption>
+<Corruption name="11-15">
+<Libelle>"Rêves chaotiques"</Libelle>
+<Effet>"Gagnez l’État Exténué pendant les deux premières heures de chaque journée."</Effet>
+</Corruption>
+<Corruption name="16-20">
+<Libelle>"Formication"</Libelle>
+<Effet>"-5 Initiative, -5 Dextérité"</Effet>
+</Corruption>
+<Corruption name="21-25">
+<Libelle>"Imprévisible fantaisiste"</Libelle>
+<Effet>"-5 Initiative, -5 Force Mentale"</Effet>
+</Corruption>
+<Corruption name="26-30">
+<Libelle>"Terrible inquiétude"</Libelle>
+<Effet>"-10 Force Mentale"</Effet>
+</Corruption>
+<Corruption name="31-35">
+<Libelle>"Pulsions de haine"</Libelle>
+<Effet>"Sujet à l’Hostilité (voir Psychologie) envers tous ceux qui ne sont pas de votre race."</Effet>
+</Corruption>
+<Corruption name="36-40">
+<Libelle>"Cœur desséché"</Libelle>
+<Effet>"+10 Force Mentale, -10 Sociabilité"</Effet>
+</Corruption>
+<Corruption name="41-45">
+<Libelle>"Pensées envieuses"</Libelle>
+<Effet>"-10 Sociabilité"</Effet>
+</Corruption>
+<Corruption name="46-50">
+<Libelle>"Esprit solitaire"</Libelle>
+<Effet>"-10 aux Tests lorsque vous êtes seul"</Effet>
+</Corruption>
+<Corruption name="51-55">
+<Libelle>"Blocage mental"</Libelle>
+<Effet>"-10 Intelligence"</Effet>
+</Corruption>
+<Corruption name="56-60">
+<Libelle>"Urgence profanatoire"</Libelle>
+<Effet>"-10 Force Mentale, +10 Agilité"</Effet>
+</Corruption>
+<Corruption name="61-65">
+<Libelle>"Morale douteuse"</Libelle>
+<Effet>"Gagnez 1 État Brisé si vous échouez à un Test dérivé de la Force Mentale."</Effet>
+</Corruption>
+<Corruption name="66-70">
+<Libelle>"Esprit suspicieux"</Libelle>
+<Effet>"-5 Initiative, -5 Intelligence"</Effet>
+</Corruption>
+<Corruption name="71-75">
+<Libelle>"Accro à l’adrénaline"</Libelle>
+<Effet>"+10 Force Mentale, -10 Initiative"</Effet>
+</Corruption>
+<Corruption name="76-80">
+<Libelle>"Visions torturées"</Libelle>
+<Effet>"-10 Initiative"</Effet>
+</Corruption>
+<Corruption name="81-85">
+<Libelle>"Totalement déséquilibré"</Libelle>
+<Effet>"-20 Sociabilité, +10 Force Mentale"</Effet>
+</Corruption>
+<Corruption name="86-90">
+<Libelle>"Infinie malveillance"</Libelle>
+<Effet>"-10 à tous les Tests qui ne sont pas destinés à blesser autrui. +10 à tous les Tests destinés à blesser autrui."</Effet>
+</Corruption>
+<Corruption name="91-95">
+<Libelle>"Colère impie"</Libelle>
+<Effet>"Sujet à Frénésie (voir Psychologie), +10 à la Capacité de Combat"</Effet>
+</Corruption>
+<Corruption name="96-00">
+<Libelle>"Affreusement nerveux"</Libelle>
+<Effet>"+5 Agilité, -5 Sociabilité"</Effet>
+</Corruption>
+</DATA_CORRUPTION_TABLE_MENTAL>
 </DATA_BOOK>

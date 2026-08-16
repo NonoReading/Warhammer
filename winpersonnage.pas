@@ -46,6 +46,7 @@ type
     EditNeedTheoXp: TSpinEdit;
     EditNeedRealXp: TSpinEdit;
     EditTotalXp: TEdit;
+    LabelCorruptionLeft: TEdit;
     EditTotalXp25: TEdit;
     ImageBackMetier: TImage;
     ImageMetier: TImage;
@@ -258,6 +259,10 @@ type
   function XpSortCout(CodeSort: String): String;
   Procedure AfficheFabrication();
   Function ChoixNonFait(): Boolean;
+
+  // Corruption
+  procedure CalculCorruptionLeft();
+  procedure StringGridCorruptionEditingDone({%H-}Sender: TObject);
 
   private
     FCurrentTabSheet: TTabSheet;
@@ -759,6 +764,7 @@ procedure TWinPersonnages.ButtonCorruptionAjouteClick(Sender: TObject);
     StringGridCorruption.Cells[1, StringGridCorruption.RowCount - 1]   := '0';
     StringGridCorruption.Row                                          := StringGridCorruption.RowCount - 1;
     StringGridCorruption.Col                                          := 1;
+    CalculCorruptionLeft();
   end;
 
 procedure TWinPersonnages.ButtonCorruptionSupprimeClick(Sender: TObject);
@@ -777,8 +783,28 @@ procedure TWinPersonnages.ButtonCorruptionSupprimeClick(Sender: TObject);
 
             // Supprime la dernière ligne, maintenant en double
             StringGridCorruption.RowCount := StringGridCorruption.RowCount - 1;
+
+            CalculCorruptionLeft();
           end;
       end;
+  end;
+
+procedure TWinPersonnages.CalculCorruptionLeft();
+  var
+    IndLig: Integer;
+    Lost:   Integer;
+  begin
+    Lost := 0;
+    for IndLig := 1 to StringGridCorruption.RowCount - 1 do
+      Lost := Lost + StrToIntDef(StringGridCorruption.Cells[1, IndLig], 0);
+
+    LabelCorruptionLeft.Text    := IntToStr(PersonnageCorruptionTotal(Personnage) - Lost);
+    LabelCorruptionLeft.Enabled := False;
+  end;
+
+procedure TWinPersonnages.StringGridCorruptionEditingDone(Sender: TObject);
+  begin
+    CalculCorruptionLeft();
   end;
 
 procedure TWinPersonnages.ButtonArmureClick(Sender: TObject);
@@ -2515,6 +2541,7 @@ begin
       StringGridCorruption.Cells[1, StringGridCorruption.RowCount - 1]    := IntToStr(PersonnageCorruption.Montant);
       StringGridCorruption.Cells[2, StringGridCorruption.RowCount - 1]    := PersonnageCorruption.Libelle;
     end;
+  CalculCorruptionLeft();
 
   // livres
   for Lig := 1 to TabLivre.RowCount - 1 do

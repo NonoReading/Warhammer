@@ -88,6 +88,10 @@ Const
       ConstXmlDataCareerSubChoice       = 'DATA_CAREER_SUBCHOICE';
       ConstXmlDataPhysicalCorruption    = 'DATA_CORRUPTION_PHYSICAL';
       ConstXmlDataMentalCorruption      = 'DATA_CORRUPTION_MENTAL';
+      ConstXmlDataCorruptionTablePhys   = 'DATA_CORRUPTION_TABLE_PHYSICAL';
+      ConstXmlDataCorruptionTableMent   = 'DATA_CORRUPTION_TABLE_MENTAL';
+      ConstXmlLibelle                   = 'Libelle';
+      ConstXmlEffet                     = 'Effet';
       ConstXmlDescription               = 'Description';
       ConstXmlExplanation               = 'Explanation';
       ConstXmlShort                     = 'Short';
@@ -348,6 +352,7 @@ Const
       ConstPArmureBonus                     = 'PArmureBonus';
       ConstPSort                            = 'PSort';
       ConstPFabrication                     = 'PFabrication';
+      ConstPCorruptionTable                 = 'PCorruptionTable';
 
       ConstCEsquive                         = 'RULES-COMPESQU';
       ConstCCalme                           = 'RULES-COMPCALM';

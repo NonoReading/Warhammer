@@ -14,7 +14,7 @@ uses
   ChargeFabrication, ChargeSort, ChargeMetierRaceChoixMetier, ChargeAttribut,
   ChargeAttributAugmentation, ChargeCompetenceAugmentation, ChargeTexte,
   ChargeMetierSousMetier, ChargeTraduction, ChargeArmureSimplifie, ChargeLivre,
-  ChargeRaceCorruptionCreation, ChargeTalentAttributModif,
+  ChargeRaceCorruptionCreation, ChargeCorruptionTable, ChargeTalentAttributModif,
   ChargeTalentCompetenceModif, ChargeTalentCompetenceAjoute, ChargeRaceOpinion,
   ChargeArmureBonusModif,
   XMLRead, DOM, Unitcalcul,  Dialogs, strutils;
@@ -860,6 +860,7 @@ Procedure XmlImport(FileName: String; OnlyPrimary: Boolean; OnlyCode: Boolean);
     PTraductionNv2:           StructureTraduction;
     PArmureSimplifiee:        StructureArmureSimplifiee;
     PRaceCorruptionCreation:  StructureRaceCorruptionCreation;
+    PCorruptionTable:         StructureCorruptionTable;
     PTalentAttributModif:     StructureTalentAttributModif;
     PTalentCompetenceModif:   StructureTalentCompetenceModif;
     PTalentCompetenceAjoute:  StructureTalentCompetenceAjoute;
@@ -2172,6 +2173,68 @@ Procedure XmlImport(FileName: String; OnlyPrimary: Boolean; OnlyCode: Boolean);
                           ListRaceCorruptionCreation.add(PRaceCorruptionCreation);
                           inc(nbRaceCorruptionCreation);
                          end;
+
+                      NodeNv2 := NodeNv2.NextSibling;
+                    end;
+                end;
+
+              // Table de mutation Physique (Physical Corruption Table, CONTEXT.md §2.6).
+              // Traduction : pas d'attribut language= sur <Libelle>/<Effet> (inutile, le
+              // <language> de tête du livre - LangueDef - suffit, même valeur que les
+              // attributs language= des autres chapitres). Clé composée pour AddTrad/Traduit
+              // (TypeCorruption + Chance) : voir le commentaire dans ChargeTraduction.Traduit.
+              NodeNv1 := BookNode.FindNode(ConstXmlDataCorruptionTablePhys);
+              if Assigned(NodeNv1) then
+                begin
+                  NodeNv2 := NodeNv1.FirstChild;
+                  While Assigned(NodeNv2) do
+                    begin
+                      PCorruptionTable.Livre          := Livre;
+                      PCorruptionTable.TypeCorruption := CorruptionPhysique;
+                      PCorruptionTable.Chance         := RemoveQuotes(UTF8Encode(NodeNv2.Attributes.GetNamedItem(ConstXmlData).NodeValue));
+                      PCorruptionTable.Libelle        := RemoveQuotes(UTF8Encode(NodeNv2.FindNode(ConstXmlLibelle).TextContent));
+                      PCorruptionTable.Effet          := RemoveQuotes(UTF8Encode(NodeNv2.FindNode(ConstXmlEffet).TextContent));
+
+                      PTraduction              := InitTrad(ConstPCorruptionTable, PCorruptionTable.TypeCorruption, PCorruptionTable.Chance, PCorruptionTable.Livre);
+                      PTraduction.Libelle      := PCorruptionTable.Libelle;
+                      PTraduction.Description  := PCorruptionTable.Effet;
+
+                       if LangueDef = ConstAnglais then
+                         begin
+                          ListCorruptionTable.add(PCorruptionTable);
+                          inc(nbCorruptionTable);
+                         end;
+
+                      AddTrad(PTraduction, LangueDef);
+
+                      NodeNv2 := NodeNv2.NextSibling;
+                    end;
+                end;
+
+              // Table de mutation Mentale (Mental Corruption Table, CONTEXT.md §2.6)
+              NodeNv1 := BookNode.FindNode(ConstXmlDataCorruptionTableMent);
+              if Assigned(NodeNv1) then
+                begin
+                  NodeNv2 := NodeNv1.FirstChild;
+                  While Assigned(NodeNv2) do
+                    begin
+                      PCorruptionTable.Livre          := Livre;
+                      PCorruptionTable.TypeCorruption := CorruptionMentale;
+                      PCorruptionTable.Chance         := RemoveQuotes(UTF8Encode(NodeNv2.Attributes.GetNamedItem(ConstXmlData).NodeValue));
+                      PCorruptionTable.Libelle        := RemoveQuotes(UTF8Encode(NodeNv2.FindNode(ConstXmlLibelle).TextContent));
+                      PCorruptionTable.Effet          := RemoveQuotes(UTF8Encode(NodeNv2.FindNode(ConstXmlEffet).TextContent));
+
+                      PTraduction              := InitTrad(ConstPCorruptionTable, PCorruptionTable.TypeCorruption, PCorruptionTable.Chance, PCorruptionTable.Livre);
+                      PTraduction.Libelle      := PCorruptionTable.Libelle;
+                      PTraduction.Description  := PCorruptionTable.Effet;
+
+                       if LangueDef = ConstAnglais then
+                         begin
+                          ListCorruptionTable.add(PCorruptionTable);
+                          inc(nbCorruptionTable);
+                         end;
+
+                      AddTrad(PTraduction, LangueDef);
 
                       NodeNv2 := NodeNv2.NextSibling;
                     end;

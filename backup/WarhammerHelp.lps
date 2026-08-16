@@ -238,9 +238,10 @@
         <HasResources Value="True"/>
         <ResourceBaseClass Value="Form"/>
         <UnitName Value="WinPersonnage"/>
+        <IsVisibleTab Value="True"/>
         <EditorIndex Value="1"/>
-        <TopLine Value="901"/>
-        <CursorPos X="35" Y="913"/>
+        <TopLine Value="903"/>
+        <CursorPos X="28" Y="913"/>
         <UsageCount Value="200"/>
         <Loaded Value="True"/>
         <LoadedDesigner Value="True"/>
@@ -479,9 +480,8 @@
         <Filename Value="pdfpersonnage.pas"/>
         <IsPartOfProject Value="True"/>
         <UnitName Value="PdfPersonnage"/>
-        <IsVisibleTab Value="True"/>
-        <TopLine Value="2195"/>
-        <CursorPos X="23" Y="2202"/>
+        <TopLine Value="2198"/>
+        <CursorPos X="55" Y="2209"/>
         <UsageCount Value="200"/>
         <Loaded Value="True"/>
       </Unit>
@@ -1200,7 +1200,7 @@
         <UsageCount Value="10"/>
       </Unit>
     </Units>
-    <JumpHistory HistoryIndex="26">
+    <JumpHistory HistoryIndex="27">
       <Position>
         <Filename Value="pdfpersonnage.pas"/>
         <Caret Line="2260" Column="27" TopLine="2245"/>
@@ -1308,6 +1308,10 @@
       <Position>
         <Filename Value="winpersonnage.pas"/>
         <Caret Line="912" Column="35" TopLine="900"/>
+      </Position>
+      <Position>
+        <Filename Value="winpersonnage.pas"/>
+        <Caret Line="913" Column="35" TopLine="901"/>
       </Position>
     </JumpHistory>
     <RunParams>

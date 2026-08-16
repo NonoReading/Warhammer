@@ -123,6 +123,11 @@ end;
 
 Procedure PdfPersonnageCompetenceTri(ListPage: TStringList);
 Function PdfPersonnageAttribut(Personnage: StructurePersonnage; Attribut: String; var Bonus: String): StructureDonnee;
+// Plafond de corruption (Bonus Endurance/10 + Bonus Force Mentale/10 + talent Âme Pure),
+// même calcul que PdfBlocCorruption mais exposé pour être réutilisé hors PDF (WinPersonnage,
+// CONTEXT.md §2.7) - PdfPersonnageCreationFeldo2P n'est PAS modifiée, nouvelle fonction
+// indépendante pour ne rien risquer sur le PDF existant.
+Function PersonnageCorruptionTotal(Personnage: StructurePersonnage): Integer;
 Procedure PdfPersonnageCreation(Personnage: StructurePersonnage; BackGround: Boolean; DessineTexteLigne: Boolean = True);
 Procedure PdfPersonnageCreationFeldo2P(Personnage: StructurePersonnage);
 Function PdfPersonnageCompetence(Personnage: StructurePersonnage; Competence: String; var NivMetier: Integer): StructureDonnee;
@@ -615,6 +620,43 @@ Function PdfPersonnageAttribut(Personnage: StructurePersonnage; Attribut: String
 
     Res.Total := Res.Base + Res.Augmentation;
     Result := res;
+  end;
+
+Function PersonnageCorruptionTotal(Personnage: StructurePersonnage): Integer;
+  var
+    Bonus:            String;
+    BE:               Integer;
+    BFM:              Integer;
+    AmePure:          Integer;
+    AttributDonnee:   StructureDonnee;
+    PersonnageTalent: StructurePersonnageTalent;
+    PAttribut:        StructureAttribut;
+  begin
+    // PdfPersonnageAttribut compare en interne le code d'attribut passé en argument à
+    // PTalent.Attribut (liste ';' de codes AVEC préfixe livre, ex. "RULES-ATTR_WP") via une
+    // simple égalité de chaîne (pas CompareRechercheValeur) - il faut donc lui donner un code
+    // complet avec préfixe, pas la constante nue ConstCaracE/ConstCaracFM ('ATTR_T'/'ATTR_WP'),
+    // sinon les bonus d'attribut donnés par certains talents sont silencieusement ignorés (bug
+    // trouvé le 16/08/2026 : WinPersonnage affichait 7 alors que le PDF, qui utilise
+    // PAttribut.CodeAttribut complet via ListeAttribut, affichait 8). ChercheAttribut fait le
+    // même travail que ChercheRaceAttribut/CompareRechercheValeur pour retrouver le code complet
+    // à partir du code nu.
+    PAttribut      := ChercheAttribut(ConstCaracE);
+    AttributDonnee := PdfPersonnageAttribut(Personnage, PAttribut.CodeAttribut, Bonus);
+    BE             := AttributDonnee.Total;
+    PAttribut      := ChercheAttribut(ConstCaracFM);
+    AttributDonnee := PdfPersonnageAttribut(Personnage, PAttribut.CodeAttribut, Bonus);
+    BFM            := AttributDonnee.Total;
+
+    AmePure := 0;
+    for PersonnageTalent in Personnage.CreationTalent do
+      if ExtractStringAfter(PersonnageTalent.CodeTalent, SeparateurLivre) = TalentAmePure then
+        AmePure := PersonnageTalent.Valeur;
+    for PersonnageTalent in Personnage.AugmentationTalent do
+      if ExtractStringAfter(PersonnageTalent.CodeTalent, SeparateurLivre) = TalentAmePure then
+        AmePure := PersonnageTalent.Valeur;
+
+    Result := Floor(BE/10) + Floor(BFM/10) + AmePure;
   end;
 
 Procedure PdfPersonnageCreation(Personnage: StructurePersonnage; BackGround: Boolean; DessineTexteLigne: Boolean = True);

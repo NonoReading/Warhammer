@@ -98,8 +98,10 @@ PDF Personnage (PRIORITAIRE) :
   codes de catégorie. À concevoir séparément (nouveau champ + XML, impact sur SortAffiche ET
   ButtonSortClick, migration des données existantes) avant de toucher au code - fait suite
   aux deux bugs corrigés le 15/08/2026 sur SortAffiche et ButtonSortClick.
-- mutation automatique quand la corruption "Left" atteint 0 (personnage repart à 0 et
-  prend une mutation) : idée mentionnée pendant la conception de l'historique de
-  corruption (CONTEXT.md §2.6, terminé le 16/08/2026), aucune conception détaillée ni
-  code n'existe encore.
+- généraliser `WinLanceDes` (winlancede.pas) : popup "lancer le dé" (SpinEdit 0-100 +
+  boutons Lancer/Valider) actuellement câblée uniquement pour le tirage aléatoire de
+  Talent (`TalentAleatoire`), avec encore des `GetTexteLibelle('LAB_xxx')`/`'MESS_xxx'`
+  non finalisés - repéré le 16/08/2026 en cherchant comment généraliser le mécanisme de
+  tirage pour le chantier mutation (CONTEXT.md §2.7), mais pas retenu pour l'instant (Nono
+  a choisi de rester sur le pattern radio-boutons de WinCreation pour la mutation).
 

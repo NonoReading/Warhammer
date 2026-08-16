@@ -8,7 +8,7 @@ uses
   Classes, SysUtils, ChargeConstantes, Generics.Collections, LazUTF8,
   ChargeAttribut, ChargeTexte, ChargeCompetence, ChargeTalent, ChargeRace,
   ChargeMetier, ChargeArme, ChargeArmeBonus, ChargeArmure, ChargeArmureBonus,
-  ChargeSort, ChargeFabrication, UnitCalcul;
+  ChargeSort, ChargeFabrication, ChargeCorruptionTable, UnitCalcul;
 
 Type
   StructureTraduction   = record
@@ -98,6 +98,7 @@ Procedure Traduit(Langue: String; Livre: String);
     PArmureBonus: StructureArmureBonus;
     PSort:        StructureSort;
     PFabrication: StructureFabrication;
+    PCorruptionTable: StructureCorruptionTable;
   begin
     if (Langue <> ConstAnglais) or (Livre <> '') then
       begin
@@ -213,6 +214,18 @@ Procedure Traduit(Langue: String; Livre: String);
                       PFabrication.Libelle     := PTraduction.Libelle;
                       PFabrication.Resume      := PTraduction.Resume;
                       ListFabrication[Ind]     := PFabrication;
+                    end;
+              ConstPCorruptionTable:
+                // Clé composée (TypeCorruption + Chance, ex. "CORRUPTION_PHYSICAL 01-05") -
+                // pas CompareRechercheValeur ici, Chance contient déjà un '-' (plage D100),
+                // ce qui casserait le découpage préfixe-livre de cette fonction.
+                for Ind :=0 to ListCorruptionTable.Count - 1 do
+                  if PTraduction.Code = (ListCorruptionTable[Ind].TypeCorruption + ' ' + ListCorruptionTable[Ind].Chance) then
+                    begin
+                      PCorruptionTable         := ListCorruptionTable[Ind];
+                      PCorruptionTable.Libelle := PTraduction.Libelle;
+                      PCorruptionTable.Effet   := PTraduction.Description;
+                      ListCorruptionTable[Ind] := PCorruptionTable;
                     end;
             end;
       end;

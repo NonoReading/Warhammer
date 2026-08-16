@@ -268,11 +268,11 @@ object WinPersonnages: TWinPersonnages
   object PageExperience: TPageControl
     Left = 1072
     Height = 368
-    Top = 120
+    Top = 128
     Width = 665
-    ActivePage = TabSheetEvolution
+    ActivePage = TabSheetCorruption
     Anchors = [akTop, akLeft, akRight]
-    TabIndex = 4
+    TabIndex = 8
     TabOrder = 10
     OnChange = PageExperienceChange
     object TabSheetAttribut: TTabSheet
@@ -994,6 +994,16 @@ object WinPersonnages: TWinPersonnages
         RoundingDropDown.RoundY = 1
         TextApplyGlobalOpacity = False
         MemoryUsage = bmuHigh
+      end
+      object LabelCorruptionLeft: TEdit
+        Left = 313
+        Height = 28
+        Top = 296
+        Width = 108
+        Enabled = False
+        TabOrder = 1
+        OnKeyPress = EditTotalXpKeyPress
+        OnKeyUp = EditTotalXpKeyUp
       end
     end
   end

@@ -745,12 +745,127 @@ le nouvel historique doit venir consommer.
    libellé dépasse 18 caractères (même heuristique de longueur que `PTalent.Resume` dans
    `PdfBlocTalents`, voir plus haut dans le fichier). Confirmé par Nono par test PDF réel.
 
-**Chantier suivant, pas encore abordé** : quand `Left` atteint 0, le personnage prend une
-mutation et repart à 0 (idée capturée dans `A FAIRE.txt`, mentionnée dans la conception
-ci-dessus mais aucune conception détaillée ni code n'existe encore).
-
 Les étapes 4-6 (PDF) se sont ajustées comme d'habitude par allers-retours captures d'écran sur
 le rendu réel, pas de spec pixel-perfect figée à l'avance.
+
+### 2.7 Mutation quand la corruption atteint son maximum — en cours (démarré le 16/08/2026)
+
+**Mécanisme** (conception validée par Nono) : quand `Left` (voir §2.6) atteint 0, le joueur
+choisit entre dépenser un point de Résilience définitivement, ou accepter une mutation.
+Dans les deux cas l'historique de corruption repart à 0. Accepter une mutation tire un D100
+en deux temps : d'abord contre `DATA_CORRUPTION_PHYSICAL`/`DATA_CORRUPTION_MENTAL` (déjà
+dans le XML, par race) pour savoir Physical ou Mental, puis un second D100 (indépendant,
+plage complète) contre la table correspondante (Physical/Mental Corruption Table, texte du
+livre donné par Nono) pour l'entrée précise. Les deux tirages offrent les trois mêmes
+options que la création de personnage (`wincreation.pas`) : Hasard (aléatoire), Résultat
+(le joueur donne son propre jet), Choix (sélection directe dans une liste - utile pour
+saisir la corruption d'un personnage déjà existant sur papier). Exception : les races sans
+choix possible pour un des deux types (ex. Elfes, "-" dans `DATA_CORRUPTION_PHYSICAL`)
+n'auront que Mental disponible.
+
+Popup `WinLanceDes` (winlancede.pas) repérée en cours de route - mécanisme générique
+"lancer le dé" déjà à moitié écrit mais câblé uniquement pour le tirage de Talent, pas
+finalisé (`GetTexteLibelle('LAB_xxx')` encore en placeholder). Non retenue pour l'instant :
+Nono reste sur le pattern radio-boutons intégrés à l'onglet (comme Race/Métier/Attribut
+dans `wincreation.pas`) plutôt que de généraliser cette popup. Idée de généralisation notée
+dans `A FAIRE.txt` pour plus tard.
+
+V1 scope : les effets de mutation ("+10 Dexterity", "Gain the Tentacles Creature Trait"...)
+sont enregistrés en texte (nom + effet) mais **pas appliqués automatiquement** au
+personnage - beaucoup d'effets ne sont pas de simples deltas de caractéristique (Traits de
+Créature, jets de Localisation, conditions de Psychologie), donc une application 100%
+automatique ne couvrirait de toute façon pas tout. L'automatisation façon
+`ListArmureBonusModif` (astérisque + application directe) est explicitement différée à une
+version ultérieure.
+
+**Étape 1 (✅ terminée)** : couche de données pour les deux tables du livre (Physical/
+Mental Corruption Table, 20 entrées chacune, D100 + Description + Effet) :
+- Nouvelle unit `ChargeCorruptionTable.pas` : `StructureCorruptionTable` (Livre,
+  TypeCorruption, Chance, Libelle, Effet) + `TListCorruptionTable`, même forme que
+  `ChargeRaceCorruptionCreation.pas`.
+- Nouveaux chapitres XML `DATA_CORRUPTION_TABLE_PHYSICAL`/`DATA_CORRUPTION_TABLE_MENTAL`
+  (`BOOK_RULESBOOK.Xml`/`BOOK_RULESBOOK_FRANCAIS.Xml`), entrées `<Corruption name="01-05">`
+  avec enfants `<Libelle>`/`<Effet>` (nouvelles constantes `ConstXmlLibelle`/`ConstXmlEffet`,
+  `chargeconstantes.pas`). Le "00" final (96-00) représente 100 en D100 (deux d10) - **pas
+  encore géré par le code de découpage de plage existant** (`TabRaceResultat` et
+  équivalents lisent `StrToInt('00') = 0`, donc un jet de 100 ne matcherait jamais la
+  dernière ligne) : à traiter au moment d'écrire le tirage.
+- Chargement dans `xmlexportimport.pas`, même emplacement que `DATA_CORRUPTION_PHYSICAL/
+  MENTAL`. Contrairement à ce couple (qui ne stocke qu'un nombre, identique dans les deux
+  langues, donc chargé une seule fois sur la passe anglaise), Libelle/Effet sont du texte
+  réellement traduit : passe par le système `InitTrad`/`AddTrad`/`Traduit` déjà utilisé pour
+  Talent/Race/Métier/etc. (`ChargeTraduction.pas`), avec une clé composée
+  (`TypeCorruption + ' ' + Chance`, via le paramètre `Code2` d'`InitTrad`) puisque le
+  Chance seul n'est pas unique entre Physical et Mental. Nouveau cas `ConstPCorruptionTable`
+  ajouté dans `Traduit()` - comparaison par égalité de chaîne stricte, PAS
+  `CompareRechercheValeur` (qui suppose un préfixe livre séparé par `-`, ce qui casserait
+  sur des plages D100 du type "01-05" qui contiennent déjà un `-`).
+- Incohérence de contenu repérée entre "Erratic Fantasist" (EN : Initiative/Willpower) et
+  "Imprévisible fantaisiste" (FR : donné initialement comme Intelligence/Force Mentale) -
+  Nono confirme que la version anglaise fait foi ; `Effet` français corrigé en
+  "-5 Initiative, -5 Force Mentale".
+- Confirmé par Nono : compile, pas de souci au changement de livre ni à l'ouverture d'un
+  personnage (donc chargement + `Traduit()` fonctionnels sur les deux tables/langues).
+
+**Étape 2 (✅ terminée)** : logique de tirage pure, sans UI, dans `ChargeCorruptionTable.pas` :
+- `CorruptionDansPlage(Plage, Jet)` : compare un jet D100 à une plage "Deb-Fin", avec le "00"
+  final traité comme 100 (contrairement à `TabRaceResultat`/équivalents dans
+  `wincreation.pas`, qui n'ont pas ce cas - pas touchés, nouvelle fonction indépendante).
+  Une plage `-` (pas de choix pour cette race/type, ex. Elfes côté Physical) ne matche jamais.
+- `CorruptionTypeResultat(CodeRace, Jet)` : Physical ou Mental pour une race/jet, via
+  `ListRaceCorruptionCreation` (`DATA_CORRUPTION_PHYSICAL`/`MENTAL`) ; `''` si rien ne matche.
+- `CorruptionTableResultat(TypeCorruption, Jet)` : entrée précise (nom + effet) de la table
+  correspondante, via `ListCorruptionTable`.
+- Confirmé par Nono : compile.
+
+**Conception validée (16/08/2026)** : l'UI vit dans l'onglet Corruption existant de
+`WinPersonnage` (pas de fenêtre séparée). Retour à 0 de l'historique : nouvelle ligne
+compensatoire négative (montant = `-Lost`, libellé auto, ex. "Résilience dépensée" ou le nom
+de la mutation) plutôt que suppression de l'historique - préserve le détail PDF (§2.6).
+Dépense de Résilience : décrémente `Personnage.CreationAttribut` (`ATTR_Resil`), peut devenir
+négatif (la base de race, elle, est intouchable), mais le TOTAL (race + CreationAttribut) ne
+peut jamais descendre sous 0 - donc l'option "dépenser un point de Résilience" doit être
+désactivée dès que la Résilience totale actuelle est à 0 (seule la mutation reste possible).
+
+**Étape 3 (✅ terminée)** : affichage "Left" en direct dans l'onglet Corruption de
+`WinPersonnage` (première brique d'UI de ce chantier) :
+- Nouvelle fonction `PersonnageCorruptionTotal(Personnage)` dans `pdfpersonnage.pas` (juste
+  après `PdfPersonnageAttribut`), qui réexpose le calcul du plafond de corruption
+  (`Floor(BE/10) + Floor(BFM/10) + AmePure`, identique à `PdfBlocCorruption`) sans toucher au
+  code PDF existant - `winpersonnage.pas` a `PdfPersonnage` dans son `uses`, aucune nouvelle
+  dépendance.
+- `LabelCorruptionLeft` : `TEdit` non modifiable (convention du projet, voir §4 - Nono ne
+  parvient pas à styliser proprement un `TLabel`), ajouté par Nono dans l'IDE sur l'onglet
+  Corruption.
+- `TWinPersonnages.CalculCorruptionLeft` (nouvelle procédure, nommée sur le modèle
+  `Calcul...` déjà utilisé dans cette classe) : `Total - somme de la colonne Montant de
+  StringGridCorruption` (pas `Personnage.Corruption` directement, pour refléter les éditions
+  non encore sauvegardées de la grille). Appelée au chargement d'un personnage, après
+  `ButtonCorruptionAjouteClick`/`ButtonCorruptionSupprimeClick`, et depuis un nouveau
+  gestionnaire `StringGridCorruptionEditingDone` (câblé manuellement par Nono dans l'Object
+  Inspector, `OnEditingDone` de `StringGridCorruption`).
+- **Bug trouvé et corrigé le 16/08/2026** : `PersonnageCorruptionTotal` affichait 7 alors que
+  le PDF (source de vérité, confirmée par Nono) affichait 8 pour le même personnage, y compris
+  juste après chargement (pas un problème de synchronisation grille/sauvegarde). Cause :
+  `PdfPersonnageAttribut` compare en interne le code d'attribut reçu aux entrées `<Attribut>`
+  d'un talent (bonus d'attribut donné par certains talents, ex. +5 Endurance) par ÉGALITÉ DE
+  CHAÎNE STRICTE (pas `CompareRechercheValeur`) contre des valeurs XML préfixées par le livre
+  (`"RULES-ATTR_WP"`). `PersonnageCorruptionTotal` appelait `PdfPersonnageAttribut` avec les
+  constantes nues `ConstCaracE`/`ConstCaracFM` (`'ATTR_T'`/`'ATTR_WP'`, sans préfixe), alors
+  que le code PDF (`PdfPersonnageCreationFeldo2P`) passe toujours `PAttribut.CodeAttribut`
+  (préfixé, via `ListeAttribut`) - la comparaison échouait donc silencieusement côté écran, et
+  tout bonus d'attribut venant d'un talent était ignoré, faisant chuter `Floor(BE/10)` ou
+  `Floor(BFM/10)` d'une unité en franchissant un palier de 10. Corrigé en passant par
+  `ChercheAttribut(ConstCaracE)`/`ChercheAttribut(ConstCaracFM)` (`chargeattribut.pas`, déjà
+  dans le `uses` de `pdfpersonnage.pas`) pour récupérer le code complet avant l'appel à
+  `PdfPersonnageAttribut` - même remède que `ChercheRaceAttribut` ailleurs dans le fichier.
+  4e occurrence du piège "un seul côté d'une comparaison stripé du préfixe livre" documenté en
+  §4. Confirmé par Nono après recompilation.
+
+**Reste à faire** : l'UI de déclenchement (bouton/popup quand `Left` atteint 0, choix
+Résilience/Mutation), le tirage à deux temps avec les trois options Hasard/Résultat/Choix
+posées sur les fonctions de l'Étape 2, et l'enregistrement de la mutation obtenue sur le
+personnage (nouvelle structure, à concevoir - pas encore discutée).
 
 ---
 
@@ -809,6 +924,19 @@ chantier concerné, avec les détails techniques.
   moitié de Fate/Resilience (qui, eux, passent par `PdfPersonnageAttribut`, correcte).
   Repéré par Nono en comparant un rendu PDF réel aux données du XML de sauvegarde. Corrigé
   avec `CompareRechercheValeur(Personnage.Race, PRaceAttribut.CodeRace)`.
+- Variante du piège ci-dessus, cette fois sans `CompareRechercheValeur` disponible :
+  `PdfPersonnageAttribut` (pdfpersonnage.pas) compare les bonus d'attribut donnés par un
+  talent (`PTalent.Attribut`, liste ';' de codes AVEC préfixe livre, ex. `"RULES-ATTR_WP"`)
+  par ÉGALITÉ DE CHAÎNE STRICTE (`Attr = Attribut`), pas via `CompareRechercheValeur`. Il faut
+  donc toujours lui passer un code d'attribut complet (préfixé), jamais une constante nue
+  comme `ConstCaracE`/`ConstCaracFM` - sinon la comparaison échoue systématiquement et
+  silencieusement, et les bonus d'attribut venant de talents sont ignorés. Bug réel trouvé le
+  16/08/2026 dans la nouvelle fonction `PersonnageCorruptionTotal` (§2.7, Étape 3) : appelait
+  `PdfPersonnageAttribut(Personnage, ConstCaracE, Bonus)` avec la constante nue, alors que
+  `PdfPersonnageCreationFeldo2P` passe toujours `PAttribut.CodeAttribut` (préfixé, via
+  `ListeAttribut`) - `WinPersonnage` affichait 7 là où le PDF affichait 8. Corrigé en
+  récupérant le code complet via `ChercheAttribut(ConstCaracE)` (chargeattribut.pas, déjà
+  prefix-safe comme `ChercheRaceAttribut`) avant l'appel.
 - `TStringGrid.Cells[Col, Row]` (et toute propriété indexée avec getter/setter, plus
   généralement) n'est pas une vraie variable (l-value) : `+=` dessus échoue à la
   compilation avec "Variable identifier expected" (pas une erreur logique, une erreur de
