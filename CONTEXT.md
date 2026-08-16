@@ -700,9 +700,21 @@ le nouvel historique doit venir consommer.
    pattern que `Equipement`/`MetierAncien` (une ligne `<Item name="Montant">"Libelle"</Item>`
    par entrée, pas de sous-chapitres). Compile, confirmé par Nono (ouverture d'un
    personnage existant sans crash).
-3. ⏳ Onglet "Corruption" dans WinPersonnage (grille + boutons Ajouter/Modifier) — pas
-   commencé, prochaine étape.
-4. ⏳ Réagencement PDF page 1 (Résilience/Destin/Mouvement/Corruption) — pur repositionnement.
+3. ✅ Onglet "Corruption" dans WinPersonnage : `TabSheetCorruption` + grille
+   `StringGridCorruption` (colonnes Amount/Reason, édition directe en place, même style que
+   `TabFabrication`/`TabAugmentationTalent` - pas de fenêtre de saisie séparée, ça n'existe
+   nulle part ailleurs dans le projet) + boutons `ButtonCorruptionAjoute`/
+   `ButtonCorruptionSupprime` (`TBCButton`, composants ajoutés par Nono directement dans
+   l'éditeur Lazarus). Chargement dans `XmlChargePersonnage` juste après l'Équipement,
+   sauvegarde par récolte de la grille dans `XmlSauvegarde()` juste avant
+   `PersonnageXmlCreation` (pas dans `CalculTableExperience`, la corruption n'a pas besoin
+   d'être recalculée en continu). Nouvelles clés de texte `LAB_162..165`/`MESS_053`
+   (anglais + français, `BOOK_RULESBOOK.Xml`/`BOOK_RULESBOOK_FRANCAIS.Xml`) ; `LAB_156`
+   ("Corruption") réutilisée pour le titre de l'onglet. Bug de visibilité rencontré et
+   corrigé en route (`TShape` de fond qui recouvre les nouveaux contrôles, voir CONTEXT.md
+   §4). Confirmé par Nono : ajout/suppression de lignes, cycle sauvegarde/rechargement.
+4. ⏳ Réagencement PDF page 1 (Résilience/Destin/Mouvement/Corruption) — pur repositionnement,
+   prochaine étape.
 5. ⏳ Extension de `PdfBlocCorruption` (lignes Lost/Left).
 6. ⏳ Nouveau tableau détaillé PDF (Montant | Libellé).
 
@@ -760,6 +772,21 @@ chantier concerné, avec les détails techniques.
   compilation). Utiliser une réaffectation complète : `Cells[C,R] := Cells[C,R] + '...';`.
   Bug réel trouvé le 16/08/2026 dans `TWinArmors.TabArmorSelection` (winarmor.pas) en
   construisant le texte de malus à partir de plusieurs entrées de `ListArmureBonusModif`.
+- **Nouveau contrôle ajouté sur un `TTabSheet` de `WinPersonnage` invisible à l'exécution
+  (mais présent dans le `.lfm`, compile sans erreur)** : `MiseEnFormeDesChamp(self)`
+  (`globalfonts.pas`, appelée dans `Initialisation()`) crée dynamiquement, pour CHAQUE
+  `TTabSheet` du formulaire, un `TShape` plein cadre (`Align := alClient`) par-dessus tout
+  le contenu de l'onglet, pour donner le fond noir/thème (`MiseAJourUnContenaire`,
+  `globalfonts.pas` ~ligne 52). Ce `TShape` passe devant les contrôles existants sauf s'ils
+  sont explicitement ramenés au premier plan - d'où le `ButtonHistorique.BringToFront;` déjà
+  présent en fin d'`AfficheImageRace()`. Tout nouveau contrôle posé sur un onglet (existant
+  ou nouveau) doit recevoir son propre `.BringToFront;` au même endroit, sinon il compile et
+  s'affiche dans l'éditeur Lazarus mais reste invisible une fois l'appli lancée. Bug réel
+  trouvé le 16/08/2026 avec `StringGridCorruption`/`ButtonCorruptionAjoute`/
+  `ButtonCorruptionSupprime` (nouvel onglet Corruption) - confirmé par Nono : c'est la
+  méthode connue (et seule connue) pour avoir un fond noir homogène sur les onglets de ce
+  projet, donc pas un bug à corriger à la source, juste un réflexe à avoir pour tout nouvel
+  ajout.
 
 ---
 

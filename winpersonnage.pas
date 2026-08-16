@@ -21,6 +21,8 @@ type
   { TWinPersonnages }
 
   TWinPersonnages = class(TForm)
+    ButtonCorruptionAjoute: TBCButton;
+    ButtonCorruptionSupprime: TBCButton;
     EditHairColors: TEdit;
     EditEyeColors: TEdit;
     EditHeight: TEdit;
@@ -85,9 +87,11 @@ type
     RadioButtonSuivant: TRadioButton;
     RadioGroupEvolution: TRadioGroup;
     StaticTextPersonnage: TStaticText;
+    StringGridCorruption: TStringGrid;
     TabAugmentationMjXp: TStringGrid;
     TabLivre: TStringGrid;
     TabMJXp: TStringGrid;
+    TabSheetCorruption: TTabSheet;
     TabSheetMjCost: TTabSheet;
     TabSheetLivre: TTabSheet;
     TabSort: TStringGrid;
@@ -119,6 +123,8 @@ type
   procedure ButtonArmeClick({%H-}Sender: TObject);
   procedure ButtonFabricationClick({%H-}Sender: TObject);
   procedure ButtonDeleteClick({%H-}Sender: TObject);
+  procedure ButtonCorruptionAjouteClick({%H-}Sender: TObject);
+  procedure ButtonCorruptionSupprimeClick({%H-}Sender: TObject);
   procedure ButtonHistoriqueClick({%H-}Sender: TObject);
   procedure ButtonQuitterClick({%H-}Sender: TObject);
   procedure ButtonRaceSelectionnerClick({%H-}Sender: TObject);
@@ -745,6 +751,34 @@ procedure TWinPersonnages.ButtonDeleteClick(Sender: TObject);
               TabEquipement.RowCount := TabEquipement.RowCount - 1;
             end
         end;
+  end;
+
+procedure TWinPersonnages.ButtonCorruptionAjouteClick(Sender: TObject);
+  begin
+    StringGridCorruption.RowCount                                     := StringGridCorruption.RowCount + 1;
+    StringGridCorruption.Cells[1, StringGridCorruption.RowCount - 1]   := '0';
+    StringGridCorruption.Row                                          := StringGridCorruption.RowCount - 1;
+    StringGridCorruption.Col                                          := 1;
+  end;
+
+procedure TWinPersonnages.ButtonCorruptionSupprimeClick(Sender: TObject);
+  var
+    Reponse:  Integer;
+    i:        Integer;
+  begin
+    if StringGridCorruption.Row > 0 then
+      begin
+        Reponse := MessageDlg(GetTexteLibelle('MESS_053'), mtConfirmation, mbYesNo, 0);
+        if Reponse = mrYes then
+          begin
+            // Décale les lignes suivantes vers le haut
+            for i := StringGridCorruption.Row to StringGridCorruption.RowCount - 2 do
+              StringGridCorruption.Rows[i].Assign(StringGridCorruption.Rows[i + 1]);
+
+            // Supprime la dernière ligne, maintenant en double
+            StringGridCorruption.RowCount := StringGridCorruption.RowCount - 1;
+          end;
+      end;
   end;
 
 procedure TWinPersonnages.ButtonArmureClick(Sender: TObject);
@@ -1407,6 +1441,16 @@ begin
   TabHistorique.Cells[3, 0]    := 'Ordre';
   TabHistorique.ColWidths[3]   := 0;
 
+  // Mise en forme de la table de l'historique de corruption
+  StringGridCorruption.Options        := StringGridCorruption.Options + [goEditing, goAlwaysShowEditor];
+  StringGridCorruption.ColCount       := 3;
+  StringGridCorruption.RowCount       := 1;
+  StringGridCorruption.ColWidths[0]   := 20;
+  StringGridCorruption.Cells[1, 0]    := GetTexteLibelle('LAB_162');
+  StringGridCorruption.ColWidths[1]   := 80;
+  StringGridCorruption.Cells[2, 0]    := GetTexteLibelle('LAB_163');
+  StringGridCorruption.ColWidths[2]   := 300;
+
   // Mise en forme de la table des Equipements
   TabEquipement.Options        := TabEquipement.Options + [goEditing, goAlwaysShowEditor];
   TabEquipement.ColCount       := 8;
@@ -1586,6 +1630,9 @@ Procedure TWinPersonnages.AfficheImageRace();
     TabSheetXP.Caption                         := GetTexteLibelle('LAB_104');
     TabSheetEvolution.Caption                  := GetTexteLibelle('LAB_105');
     TabSheetHistorique.Caption                 := GetTexteLibelle('LAB_036');
+    TabSheetCorruption.Caption                 := GetTexteLibelle('LAB_156');
+    ButtonCorruptionAjoute.Caption             := '+'+GetTexteLibelle('LAB_164');
+    ButtonCorruptionSupprime.Caption           := '-'+GetTexteLibelle('LAB_165');
     ButtonRaceSelectionner.Caption             := GetTexteLibelle('LAB_004');
     ButtonHistorique.Caption                   := GetTexteLibelle('LAB_107');
     ButtonArme.Caption                         := '+'+GetTexteLibelle('LAB_063');
@@ -1608,6 +1655,9 @@ Procedure TWinPersonnages.AfficheImageRace();
     LabEyeColors.Caption                       := GetTexteLibelle('RULES-PDF_MAIN4_EYES');
 
     ButtonHistorique.BringToFront;
+    StringGridCorruption.BringToFront;
+    ButtonCorruptionAjoute.BringToFront;
+    ButtonCorruptionSupprime.BringToFront;
 
   end;
 
@@ -2205,6 +2255,7 @@ var
   PAttribut:             StructureAttribut;
   Ind:                   Integer;
   Trouve:                Boolean;
+  PersonnageCorruption:  StructurePersonnageCorruption;
 
 begin
 
@@ -2454,6 +2505,15 @@ begin
             TabEquipement.Cells[4, NbEquipement]   := PSort.Libelle;
             TabEquipement.Cells[5, NbEquipement]   := IntToStr(CalculOptionXpDiv25(PersonnageEquipement.CoutXp));
           end;
+    end;
+
+  // historique de corruption
+  StringGridCorruption.RowCount := 1;
+  for PersonnageCorruption in Personnage.Corruption do
+    begin
+      StringGridCorruption.RowCount                                       := StringGridCorruption.RowCount + 1;
+      StringGridCorruption.Cells[1, StringGridCorruption.RowCount - 1]    := IntToStr(PersonnageCorruption.Montant);
+      StringGridCorruption.Cells[2, StringGridCorruption.RowCount - 1]    := PersonnageCorruption.Libelle;
     end;
 
   // livres
@@ -4169,11 +4229,23 @@ Procedure TWinPersonnages.MajTables();
 
 procedure TWinPersonnages.XmlSauvegarde();
   var
-    fileName:       String;
-    directoryPath:  String;
-    TotalXp:        Integer;
-    XpRestant:      Integer;
+    fileName:              String;
+    directoryPath:         String;
+    TotalXp:               Integer;
+    XpRestant:             Integer;
+    PersonnageCorruption:  StructurePersonnageCorruption;
+    Ind:                   Integer;
   begin
+
+    // Maj personnage Corruption
+    Personnage.Corruption := [];
+    for Ind := 1 to StringGridCorruption.RowCount - 1 do
+      if trim(StringGridCorruption.Cells[1, Ind]) <> '' then
+        begin
+          PersonnageCorruption.Montant := StrToIntDef(StringGridCorruption.Cells[1, Ind], 0);
+          PersonnageCorruption.Libelle := StringGridCorruption.Cells[2, Ind];
+          Personnage.Corruption        += [PersonnageCorruption];
+        end;
 
     // nouveau fichier
     directoryPath         := GetCurrentDir+ConstCheminPersonnage+NomPersonnage;

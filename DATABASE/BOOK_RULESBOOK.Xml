@@ -280,6 +280,7 @@ ifically your Strength, Endurance and Mental Strength Bonuses (abbreviations BF,
 <Text name="RULES-MESS_050">"You need to fill book name"</Text>
 <Text name="RULES-MESS_051">"This book code already exist"</Text>
 <Text name="RULES-MESS_052">"this book name already exist"</Text>
+<Text name="RULES-MESS_053">"Do you want to delete this corruption entry?"</Text>
 <Text name="RULES-LAB_001">"Code"</Text>
 <Text name="RULES-LAB_002">"Label"</Text>
 <Text name="RULES-LAB_003">"Description"</Text>
@@ -441,6 +442,10 @@ ifically your Strength, Endurance and Mental Strength Bonuses (abbreviations BF,
 <Text name="RULES-LAB_159">"Damage"</Text>
 <Text name="RULES-LAB_160">"Protection"</Text>
 <Text name="RULES-LAB_161">"Dices"</Text>
+<Text name="RULES-LAB_162">"Amount"</Text>
+<Text name="RULES-LAB_163">"Reason"</Text>
+<Text name="RULES-LAB_164">"Add"</Text>
+<Text name="RULES-LAB_165">"Remove"</Text>
 <Text name="RULES-PDF_MAIN1_NAME">"Name"</Text>
 <Text name="RULES-PDF_MAIN1_SPECIES">"Species"</Text>
 <Text name="RULES-PDF_MAIN1_CLASS">"Class"</Text>
