@@ -658,6 +658,59 @@ Nono aimerait nettoyer ce fichier mais craint de tout casser à la main.
 
 ---
 
+### 2.6 Historique de corruption par personnage — en cours (démarré le 16/08/2026)
+
+**Rappel de l'idée** (capturée dans `A FAIRE.txt` le 16/08) : garder, pour chaque
+personnage, un historique des points de corruption gagnés/perdus au fil du temps (montant
+signé + libellé expliquant la raison), consultable et modifiable dans un nouvel onglet
+"Corruption" de WinPersonnage (boutons Ajouter/Modifier), et résumé sur le PDF. Motivation
+de Nono : "cela permet aussi de calculer le nombre de points de corruption encore
+disponibles" — donc l'historique doit s'accrocher au plafond de corruption déjà calculé
+par le programme, pas réinventer un système parallèle.
+
+**Système existant retrouvé** (rien à modifier ici) : `PdfBlocCorruption` (`pdfpersonnage.pas`
+~2026) dessine déjà un panneau "Tolérance/Volonté/Bonus/Total" calculé à la volée à chaque
+génération PDF, jamais stocké : Tolérance = Bonus Endurance/10, Volonté = Bonus Force
+Mentale/10, Bonus = valeur du talent Âme Pure (0 si absent), Total = somme des trois. C'est
+exactement le plafond WFRP4e de points de corruption avant mutation — la case "Total" que
+le nouvel historique doit venir consommer.
+
+**Conception validée par Nono** :
+- Sens des montants : positif = corruption gagnée (vient réduire la marge), négatif =
+  corruption perdue/purifiée — rare, sauf au moment où le plafond est atteint (le
+  personnage repart à 0 et prend une mutation — chantier suivant, pas encore abordé).
+- PDF : le panneau `PdfBlocCorruption` existant passe de 4 à 6 lignes (Bonus T / Bonus WP /
+  Pure Soul / Total / **Lost** / **Left**), avec Lost = somme des montants de l'historique
+  et Left = Total − Lost. En plus de ça, un **nouveau tableau détaillé** (Montant | Libellé,
+  le détail gagné/perdu ligne par ligne) est ajouté sur la page 1, à droite
+  d'Expérience/Corruption, dans l'espace libéré par le réagencement ci-dessous.
+- Réagencement page 1 nécessaire (pas encore fait) : Résilience/Destin raccourcis pour
+  mettre Mouvement à côté (même ligne) ; le panneau Corruption déplacé sous Expérience
+  (au lieu d'être à côté, comme actuellement).
+- Toutes les balises XML (chapitre, nœuds, attributs) et tous les libellés PDF
+  (`GetTexteLibelle`) doivent rester en anglais, même logique que l'existant — pas de
+  français introduit dans la structure ou l'affichage PDF (seul le libellé de la raison,
+  texte libre saisi par le joueur, peut être dans sa langue).
+
+**Ordre de travail retenu, une pièce à la fois** :
+1. ✅ Couche de données : `StructurePersonnageCorruption` (Montant, Libelle) +
+   champ `Personnage.Corruption` (`chargepersonnage.pas`). Compile, confirmé par Nono.
+2. ✅ Persistance XML : nouveau chapitre `ConstXmlChapitreCorruption = 'CHAPTER_CORRUPTION'`
+   (`chargeconstantes.pas`), sauvegarde/chargement dans `chargepersonnage.pas` — même
+   pattern que `Equipement`/`MetierAncien` (une ligne `<Item name="Montant">"Libelle"</Item>`
+   par entrée, pas de sous-chapitres). Compile, confirmé par Nono (ouverture d'un
+   personnage existant sans crash).
+3. ⏳ Onglet "Corruption" dans WinPersonnage (grille + boutons Ajouter/Modifier) — pas
+   commencé, prochaine étape.
+4. ⏳ Réagencement PDF page 1 (Résilience/Destin/Mouvement/Corruption) — pur repositionnement.
+5. ⏳ Extension de `PdfBlocCorruption` (lignes Lost/Left).
+6. ⏳ Nouveau tableau détaillé PDF (Montant | Libellé).
+
+Les étapes 4-6 (PDF) s'ajustent comme d'habitude par allers-retours captures d'écran sur
+le rendu réel, pas de spec pixel-perfect figée à l'avance.
+
+---
+
 ## 3. TODO / Backlog
 
 Le backlog complet (tout ce qui n'est pas encore commencé) vit dans `A FAIRE.txt`

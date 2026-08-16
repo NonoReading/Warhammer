@@ -47,6 +47,7 @@ Const
       ConstXmlSousChapitreCompCreation  = 'SUBCHAPTER_SKILLCREATION';
       ConstXmlChapitreOldWork		= 'CHAPTER_OLDCAREER';
       ConstXmlChapitreEquipement	= 'CHAPTER_ITEM';
+      ConstXmlChapitreCorruption	= 'CHAPTER_CORRUPTION';
       ConstXmlSousChapitreArme          = 'SUBCHAPTER_WEAPON';
       ConstXmlSousChapitreArmure        = 'SUBCHAPTER_ARMOR';
       ConstXmlSousChapitreArmureSimp    = 'SUBCHAPTER_ARMOR_SET';

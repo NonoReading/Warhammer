@@ -53,8 +53,8 @@
         <IsPartOfProject Value="True"/>
         <UnitName Value="ChargeConstantes"/>
         <EditorIndex Value="8"/>
-        <TopLine Value="216"/>
-        <CursorPos X="31" Y="229"/>
+        <TopLine Value="38"/>
+        <CursorPos X="24" Y="46"/>
         <UsageCount Value="200"/>
         <Loaded Value="True"/>
       </Unit>
@@ -427,9 +427,10 @@
         <Filename Value="chargepersonnage.pas"/>
         <IsPartOfProject Value="True"/>
         <UnitName Value="ChargePersonnage"/>
+        <IsVisibleTab Value="True"/>
         <EditorIndex Value="1"/>
         <TopLine Value="103"/>
-        <CursorPos X="22" Y="111"/>
+        <CursorPos X="65" Y="116"/>
         <UsageCount Value="201"/>
         <Loaded Value="True"/>
       </Unit>
@@ -493,10 +494,9 @@
         <Filename Value="pdfpersonnage.pas"/>
         <IsPartOfProject Value="True"/>
         <UnitName Value="PdfPersonnage"/>
-        <IsVisibleTab Value="True"/>
         <EditorIndex Value="11"/>
-        <TopLine Value="2187"/>
-        <CursorPos X="26" Y="2197"/>
+        <TopLine Value="2189"/>
+        <CursorPos X="42" Y="2193"/>
         <UsageCount Value="200"/>
         <Loaded Value="True"/>
       </Unit>
@@ -548,7 +548,7 @@
         <EditorIndex Value="10"/>
         <TopLine Value="33"/>
         <CursorPos Y="36"/>
-        <UsageCount Value="185"/>
+        <UsageCount Value="186"/>
         <Loaded Value="True"/>
       </Unit>
       <Unit>
@@ -558,7 +558,7 @@
         <EditorIndex Value="-1"/>
         <TopLine Value="5"/>
         <CursorPos X="34" Y="11"/>
-        <UsageCount Value="99"/>
+        <UsageCount Value="100"/>
       </Unit>
       <Unit>
         <Filename Value="chargetalentattributmodif.pas"/>
@@ -567,7 +567,7 @@
         <EditorIndex Value="-1"/>
         <TopLine Value="3"/>
         <CursorPos X="43" Y="13"/>
-        <UsageCount Value="93"/>
+        <UsageCount Value="94"/>
       </Unit>
       <Unit>
         <Filename Value="chargetalentcompetencemodif.pas"/>
@@ -575,7 +575,7 @@
         <UnitName Value="ChargeTalentCompetenceModif"/>
         <EditorIndex Value="-1"/>
         <CursorPos X="31" Y="17"/>
-        <UsageCount Value="90"/>
+        <UsageCount Value="91"/>
       </Unit>
       <Unit>
         <Filename Value="chargetalentcompetenceajoute.pas"/>
@@ -583,7 +583,7 @@
         <UnitName Value="ChargeTalentCompetenceAjoute"/>
         <EditorIndex Value="-1"/>
         <CursorPos X="43" Y="14"/>
-        <UsageCount Value="89"/>
+        <UsageCount Value="90"/>
       </Unit>
       <Unit>
         <Filename Value="winlancede.pas"/>
@@ -595,7 +595,7 @@
         <EditorIndex Value="5"/>
         <TopLine Value="35"/>
         <CursorPos X="53" Y="47"/>
-        <UsageCount Value="47"/>
+        <UsageCount Value="48"/>
         <Loaded Value="True"/>
         <LoadedDesigner Value="True"/>
       </Unit>
@@ -1217,10 +1217,6 @@
     </Units>
     <JumpHistory HistoryIndex="29">
       <Position>
-        <Filename Value="winpersonnage.pas"/>
-        <Caret Line="4334" Column="32" TopLine="4322"/>
-      </Position>
-      <Position>
         <Filename Value="globalfonts.pas"/>
         <Caret Line="316" Column="42" TopLine="302"/>
       </Position>
@@ -1335,6 +1331,10 @@
       <Position>
         <Filename Value="chargearmurebonus.pas"/>
         <Caret Line="12" Column="28"/>
+      </Position>
+      <Position>
+        <Filename Value="chargepersonnage.pas"/>
+        <Caret Line="115" Column="19" TopLine="103"/>
       </Position>
     </JumpHistory>
     <RunParams>

@@ -43,6 +43,13 @@ Type
   end;
 
 Type
+  // historique de corruption : Montant positif = corruption gagnée, négatif = perdue/purifiée
+  StructurePersonnageCorruption  = Record
+     Montant:               Integer;
+     Libelle:               String;
+  end;
+
+Type
   StructurePersonnageMetier     = Record
      CodeMetier:            String;
      NiveauMetier:          Integer;
@@ -100,6 +107,7 @@ Type
      AugmentationCompetence:     array of StructurePersonnageCompetence;
      AugmentationTalent:         array of StructurePersonnageTalent;
      Equipement:                 array of StructurePersonnageEquipement;
+     Corruption:                 array of StructurePersonnageCorruption;
      XpCoutAttribut:             array of StructurePersonnageXpAttribut;
      XpCoutTalent:               array of StructurePersonnageXpTalent;
      XpCoutCompetence:           array of StructurePersonnageXpCompetence;
@@ -184,6 +192,7 @@ var
   PersonnageCompetence:   StructurePersonnageCompetence;
   PersonnageTalent:       StructurePersonnageTalent;
   PersonnageEquipement:   StructurePersonnageEquipement;
+  PersonnageCorruption:   StructurePersonnageCorruption;
   PersonnageMetier:       StructurePersonnageMetier;
   PersonnageXpAttribut:   StructurePersonnageXpAttribut;
   PersonnageXpCompetence: StructurePersonnageXpCompetence;
@@ -417,6 +426,12 @@ begin
 
         XMLContent.Add(XmlFin(ConstXmlChapitreEquipement));
 
+        // Historique de corruption
+        XMLContent.Add(XmlDebut(ConstXmlChapitreCorruption));
+          for PersonnageCorruption in Personnage.Corruption do
+            XMLContent.Add(XmlLigneDonnee(ConstXmlItem, IntToStr(PersonnageCorruption.Montant), PersonnageCorruption.Libelle));
+        XMLContent.Add(XmlFin(ConstXmlChapitreCorruption));
+
         // Livres
         XMLContent.Add(XmlLigne(ConstXmlLibelleLivre, ListeLivres));
         if Personnage.LivresAcceptes  = '' then
@@ -476,6 +491,7 @@ var
   PersonnageCompetence:       StructurePersonnageCompetence;
   PersonnageTalent:           StructurePersonnageTalent;
   PersonnageEquipement:       StructurePersonnageEquipement;
+  PersonnageCorruption:       StructurePersonnageCorruption;
   PersonnageXpAttribut:       StructurePersonnageXpAttribut;
   PersonnageXpCompetence:     StructurePersonnageXpCompetence;
   PersonnageXpTalent:         StructurePersonnageXpTalent;
@@ -498,6 +514,7 @@ begin
       Personnage.CreationCompetence40 := [];
       Personnage.CreationTalent       := [];
       Personnage.Equipement           := [];
+      Personnage.Corruption           := [];
       Personnage.XpCoutAttribut       := [];
       Personnage.XpCoutCompetence     := [];
       Personnage.XpCoutTalent         := [];
@@ -790,6 +807,23 @@ begin
                   end;
               end;
           end;
+        end;
+
+      // Historique de corruption
+      ChapterItemNode := PlayerNode.FindNode(ConstXmlChapitreCorruption);
+      if Assigned(ChapterItemNode) then
+        begin
+          ItemNode := ChapterItemNode.FirstChild;
+          while Assigned(ItemNode) do
+            begin
+              if (ItemNode.NodeType = ELEMENT_NODE) then
+                begin
+                  PersonnageCorruption.Montant := StrToIntDef(RemoveQuotes(UTF8Encode(ItemNode.Attributes.GetNamedItem(ConstXmlData).NodeValue)),0);
+                  PersonnageCorruption.Libelle := RemoveQuotes(UTF8Encode(ItemNode.TextContent));
+                  Personnage.Corruption        += [PersonnageCorruption];
+                end;
+              ItemNode := ItemNode.NextSibling;
+            end;
         end;
 
       ChapterRaceNode := PlayerNode.FindNode(ConstXmlChapitreCompetence);
