@@ -409,6 +409,15 @@ Var
   SelectWinE:          Integer = 0;
   SelectWinFM:         Integer = 0;
 
+  // Fenêtre WinMutation (CONTEXT.md §2.7) - même principe Select.../Choix... que les autres
+  // fenêtres modales : WinPersonnage renseigne les entrées avant ShowModal, WinMutation
+  // renseigne le résultat avant de se fermer.
+  MutationCodeRace:             String  = '';    // entrée : Personnage.Race, pour le tirage Physical/Mental
+  MutationResilienceDisponible: Boolean = false;  // entrée : Résilience totale actuelle > 0
+  MutationChoix:                String  = '';    // sortie : '' (annulé) / 'RESILIENCE' / 'MUTATION'
+  MutationLibelle:              String  = '';    // sortie : nom de la mutation tirée (si MUTATION)
+  MutationEffet:                String  = '';    // sortie : texte de l'effet de la mutation tirée
+
   // Constantes de thèmes des données des arbres d'affichages
   ConstArbreAttribut:       String;
   ConstArbreCompetence:     String;

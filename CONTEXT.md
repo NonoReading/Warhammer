@@ -862,10 +862,45 @@ désactivée dès que la Résilience totale actuelle est à 0 (seule la mutation
   4e occurrence du piège "un seul côté d'une comparaison stripé du préfixe livre" documenté en
   §4. Confirmé par Nono après recompilation.
 
-**Reste à faire** : l'UI de déclenchement (bouton/popup quand `Left` atteint 0, choix
-Résilience/Mutation), le tirage à deux temps avec les trois options Hasard/Résultat/Choix
-posées sur les fonctions de l'Étape 2, et l'enregistrement de la mutation obtenue sur le
-personnage (nouvelle structure, à concevoir - pas encore discutée).
+**Étape 4 (✅ terminée, 16/08/2026)** : UI de déclenchement + flux complet Résilience/Mutation
+(tirages Hasard uniquement pour l'instant, Résultat/Choix reportés) :
+- Nouveau bouton `ButtonCorruptionMutation` (onglet Corruption de `WinPersonnage`), actif
+  uniquement quand `Restant` (variable renommée depuis `Left` par Nono - `Left` entre en
+  conflit avec `TControl.Left`, ne compile pas dans une méthode de `TWinPersonnages`) est ≤ 0 -
+  logique dans `CalculCorruptionLeft` (§2.7 étape 3), qui appelle un nouveau
+  `CalculCorruptionLost()` (extrait de `CalculCorruptionLeft` pour être réutilisable).
+- Nouvelle fenêtre modale `WinMutation.pas`/`.lfm` (`TWinMutations`), même principe d'échange
+  que les autres fenêtres modales du projet (WinArmor etc.) : des variables `Select.../Choix...`
+  partagées via `chargeconstantes.pas` plutôt qu'un passage direct de `Personnage` (aucune
+  fenêtre modale existante n'en a besoin, `WinMutation` ne fait pas exception) - nouvelles
+  variables `MutationCodeRace`/`MutationResilienceDisponible` (entrée) et
+  `MutationChoix`/`MutationLibelle`/`MutationEffet` (sortie, `MutationChoix` = `''` / `'RESILIENCE'` /
+  `'MUTATION'`). Flux dans la fenêtre : choix initial (bouton Résilience désactivé si la
+  Résilience totale actuelle est à 0) → si Mutation, tirage D100 Physical/Mental
+  (`CorruptionTypeResultat`) puis tirage D100 de l'entrée précise (`CorruptionTableResultat`)
+  → bouton Confirmer.
+- Retour dans `WinPersonnage` (`ButtonCorruptionMutationClick`) : si Résilience, cherche
+  l'entrée `ATTR_Resil` dans `Personnage.CreationAttribut` (en ajoute une à -1 si absente,
+  jamais écrite depuis `TabAttribut` ailleurs dans ce fichier - contrairement à
+  `Personnage.Corruption`, `CreationAttribut` n'est synchronisé nulle part depuis la grille,
+  donc la mutation directe du tableau est la seule façon de la faire persister) puis ajoute une
+  ligne compensatoire (`-Lost`, libellé "Résilience dépensée") à `StringGridCorruption`. Si
+  Mutation, ajoute la même ligne compensatoire (libellé "Mutation acceptée") PLUS une ligne à
+  montant 0 dont le libellé est `MutationLibelle + ': ' + MutationEffet` - pas de nouvelle
+  structure de données, `Personnage.Corruption` sert aussi de mémoire des mutations pour cette
+  V1 (conception validée avec Nono).
+- Nouvelles clés `LAB_166` à `LAB_170` (Annuler/Dépenser un point de Résilience/Accepter une
+  mutation/Résilience dépensée/Mutation acceptée). Le type Physical/Mental est affiché via
+  `GetTexteLibelle` directement sur les constantes `CorruptionPhysique`/`CorruptionMentale`
+  (`'CORRUPTION_PHYSICAL'`/`'CORRUPTION_MENTAL'`), qui existaient déjà comme clés de texte dans
+  les deux livres ("Physical Corruption"/"Corruption Physique" etc.) - aucune nouvelle clé
+  nécessaire pour ça. Boutons Hasard/Valider réutilisent LAB_085/LAB_086 (déjà utilisées pour
+  ce rôle partout dans `wincreation.pas`).
+- Confirmé par Nono par test réel : tirage Mental obtenu, entrée "Hateful Impulses" (31-35,
+  Mental Corruption Table) affichée avec son effet, correspond exactement au livre.
+
+**Reste à faire** : les options Résultat (saisie manuelle du jet) et Choix (sélection directe)
+sur les deux tirages, actuellement Hasard uniquement.
 
 ---
 

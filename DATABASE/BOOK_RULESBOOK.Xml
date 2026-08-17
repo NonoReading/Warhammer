@@ -446,6 +446,11 @@ ifically your Strength, Endurance and Mental Strength Bonuses (abbreviations BF,
 <Text name="RULES-LAB_163">"Reason"</Text>
 <Text name="RULES-LAB_164">"Add"</Text>
 <Text name="RULES-LAB_165">"Remove"</Text>
+<Text name="RULES-LAB_166">"Cancel"</Text>
+<Text name="RULES-LAB_167">"Spend a Resilience point"</Text>
+<Text name="RULES-LAB_168">"Accept a mutation"</Text>
+<Text name="RULES-LAB_169">"Resilience spent"</Text>
+<Text name="RULES-LAB_170">"Mutation accepted"</Text>
 <Text name="RULES-PDF_MAIN1_NAME">"Name"</Text>
 <Text name="RULES-PDF_MAIN1_SPECIES">"Species"</Text>
 <Text name="RULES-PDF_MAIN1_CLASS">"Class"</Text>

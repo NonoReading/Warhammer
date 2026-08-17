@@ -15,7 +15,7 @@ uses
   WinMetier, UnitEquipement, WinWeapon, WinArmor, ChargeArmureSimplifie,
   ChargeSort, WinSpell, ChargeTexte, winFabrication, ChargeFabrication,
   WinTalent, WinCompetence, WinSpecialisation, ChargePersonnage,
-  ChargeMetierCompetence, PdfPersonnage, Types;
+  ChargeMetierCompetence, PdfPersonnage, Types, WinMutation;
 type
 
   { TWinPersonnages }
@@ -23,6 +23,7 @@ type
   TWinPersonnages = class(TForm)
     ButtonCorruptionAjoute: TBCButton;
     ButtonCorruptionSupprime: TBCButton;
+    ButtonCorruptionMutation: TBCButton;
     EditHairColors: TEdit;
     EditEyeColors: TEdit;
     EditHeight: TEdit;
@@ -119,6 +120,7 @@ type
     ToggleBoxDroite: TToggleBox;
 
   // Générales
+  procedure ButtonCorruptionMutationClick(Sender: TObject);
   procedure EditAgeKeyPress(Sender: TObject; var Key: char);
   procedure ButtonArmureClick({%H-}Sender: TObject);
   procedure ButtonArmeClick({%H-}Sender: TObject);
@@ -261,6 +263,7 @@ type
   Function ChoixNonFait(): Boolean;
 
   // Corruption
+  Function  CalculCorruptionLost(): Integer;
   procedure CalculCorruptionLeft();
   procedure StringGridCorruptionEditingDone({%H-}Sender: TObject);
 
@@ -789,7 +792,7 @@ procedure TWinPersonnages.ButtonCorruptionSupprimeClick(Sender: TObject);
       end;
   end;
 
-procedure TWinPersonnages.CalculCorruptionLeft();
+Function TWinPersonnages.CalculCorruptionLost(): Integer;
   var
     IndLig: Integer;
     Lost:   Integer;
@@ -797,9 +800,21 @@ procedure TWinPersonnages.CalculCorruptionLeft();
     Lost := 0;
     for IndLig := 1 to StringGridCorruption.RowCount - 1 do
       Lost := Lost + StrToIntDef(StringGridCorruption.Cells[1, IndLig], 0);
+    Result := Lost;
+  end;
 
-    LabelCorruptionLeft.Text    := IntToStr(PersonnageCorruptionTotal(Personnage) - Lost);
+procedure TWinPersonnages.CalculCorruptionLeft();
+  var
+    Left: Integer;
+  begin
+    Left := PersonnageCorruptionTotal(Personnage) - CalculCorruptionLost();
+
+    LabelCorruptionLeft.Text    := IntToStr(Left);
     LabelCorruptionLeft.Enabled := False;
+
+    // Déclencheur du chantier mutation (CONTEXT.md §2.7) : le bouton n'est actif que quand la
+    // capacité de corruption est épuisée.
+    ButtonCorruptionMutation.Enabled := (Left <= 0);
   end;
 
 procedure TWinPersonnages.StringGridCorruptionEditingDone(Sender: TObject);
@@ -849,6 +864,79 @@ procedure TWinPersonnages.EditAgeKeyPress(Sender: TObject; var Key: char);
 begin
   if not (Key in ['0'..'9', #8, #9]) then Key := #0;
 end;
+
+procedure TWinPersonnages.ButtonCorruptionMutationClick(Sender: TObject);
+  var
+    ResilienceTotale: Integer;
+    IndAttribut:      Integer;
+    Trouve:           Boolean;
+    Lost:             Integer;
+  begin
+    ResilienceTotale := StrToIntDef(TabAttribut.Cells[ColAttResil, LigAttTotal], 0);
+
+    MutationCodeRace             := Personnage.Race;
+    MutationResilienceDisponible := (ResilienceTotale > 0);
+
+    WinMutations           := TWinMutations.Create(Application);
+    WinMutations.Position  := poOwnerFormCenter;
+    WinMutations.ShowModal;
+
+    Lost := CalculCorruptionLost();
+
+    if MutationChoix = 'RESILIENCE' then
+      begin
+        // Décrémente Personnage.CreationAttribut (ATTR_Resil), peut devenir négatif (la base
+        // de race, elle, est intouchable) - sans risque de passer sous 0 au total puisque le
+        // bouton n'est actif que si ResilienceTotale > 0 (conception validée avec Nono le
+        // 16/08/2026, CONTEXT.md §2.7). TabAttribut n'est qu'un affichage : ce qui compte pour
+        // la sauvegarde, c'est Personnage.CreationAttribut lui-même (jamais réécrit depuis la
+        // grille ailleurs dans ce fichier, contrairement à Personnage.Corruption).
+        Trouve := False;
+        for IndAttribut := 0 to High(Personnage.CreationAttribut) do
+          if CompareRechercheValeur(Personnage.CreationAttribut[IndAttribut].CodeAttribut, ConstCaracResil) then
+            begin
+              Personnage.CreationAttribut[IndAttribut].Valeur := Personnage.CreationAttribut[IndAttribut].Valeur - 1;
+              Trouve := True;
+              break;
+            end;
+        if not Trouve then
+          begin
+            PersonnageAttribut.CodeAttribut := ConstCaracResil;
+            PersonnageAttribut.Valeur       := -1;
+            PersonnageAttribut.Bonus        := '';
+            Personnage.CreationAttribut     += [PersonnageAttribut];
+          end;
+
+        // Reflète le changement à l'écran (TabAttribut.Cells[ColAttResil, LigAttLance] est la
+        // ligne "points de création", CalculTotaux recalcule Base/Total à partir d'elle).
+        TabAttribut.Cells[ColAttResil, LigAttLance] := IntToStr(StrToIntDef(TabAttribut.Cells[ColAttResil, LigAttLance], 0) - 1);
+        CalculTotaux();
+
+        StringGridCorruption.RowCount                                   := StringGridCorruption.RowCount + 1;
+        StringGridCorruption.Cells[1, StringGridCorruption.RowCount - 1] := IntToStr(-Lost);
+        StringGridCorruption.Cells[2, StringGridCorruption.RowCount - 1] := GetTexteLibelle('LAB_169');
+      end
+    else if MutationChoix = 'MUTATION' then
+      begin
+        // Ligne compensatoire qui remet l'historique à 0, puis une ligne à montant 0 qui
+        // mémorise la mutation obtenue (nom + effet) - pas de nouvelle structure de données,
+        // Personnage.Corruption sert aussi de mémoire des mutations (conception validée avec
+        // Nono le 16/08/2026, CONTEXT.md §2.7).
+        StringGridCorruption.RowCount                                   := StringGridCorruption.RowCount + 1;
+        StringGridCorruption.Cells[1, StringGridCorruption.RowCount - 1] := IntToStr(-Lost);
+        StringGridCorruption.Cells[2, StringGridCorruption.RowCount - 1] := GetTexteLibelle('LAB_170');
+
+        StringGridCorruption.RowCount                                   := StringGridCorruption.RowCount + 1;
+        StringGridCorruption.Cells[1, StringGridCorruption.RowCount - 1] := '0';
+        StringGridCorruption.Cells[2, StringGridCorruption.RowCount - 1] := MutationLibelle + ' : ' + MutationEffet;
+      end;
+
+    CalculCorruptionLeft();
+
+    MutationChoix   := '';
+    MutationLibelle := '';
+    MutationEffet   := '';
+  end;
 
 procedure TWinPersonnages.ButtonRaceSelectionnerClick(Sender: TObject);
   Var
@@ -1684,6 +1772,7 @@ Procedure TWinPersonnages.AfficheImageRace();
     StringGridCorruption.BringToFront;
     ButtonCorruptionAjoute.BringToFront;
     ButtonCorruptionSupprime.BringToFront;
+    ButtonCorruptionMutation.BringToFront;
 
   end;
 

@@ -392,6 +392,14 @@
         <ResourceBaseClass Value="Form"/>
         <UnitName Value="WinLanceDe"/>
       </Unit>
+      <Unit>
+        <Filename Value="winmutation.pas"/>
+        <IsPartOfProject Value="True"/>
+        <ComponentName Value="WinMutations"/>
+        <HasResources Value="True"/>
+        <ResourceBaseClass Value="Form"/>
+        <UnitName Value="WinMutation"/>
+      </Unit>
     </Units>
   </ProjectOptions>
   <CompilerOptions>

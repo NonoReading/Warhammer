@@ -445,6 +445,11 @@
 <Text name="RULES-LAB_163">"Raison"</Text>
 <Text name="RULES-LAB_164">"Ajouter"</Text>
 <Text name="RULES-LAB_165">"Retirer"</Text>
+<Text name="RULES-LAB_166">"Annuler"</Text>
+<Text name="RULES-LAB_167">"Dépenser un point de Résilience"</Text>
+<Text name="RULES-LAB_168">"Accepter une mutation"</Text>
+<Text name="RULES-LAB_169">"Résilience dépensée"</Text>
+<Text name="RULES-LAB_170">"Mutation acceptée"</Text>
 <Text name="RULES-PDF_MAIN1_NAME">"Nom"</Text>
 <Text name="RULES-PDF_MAIN1_SPECIES">"Race"</Text>
 <Text name="RULES-PDF_MAIN1_CLASS">"Classe"</Text>
