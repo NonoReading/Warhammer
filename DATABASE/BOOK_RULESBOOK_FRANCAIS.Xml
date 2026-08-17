@@ -267,7 +267,7 @@
 <Text name="RULES-MESS_038">"Le PDF est déjà ouvert."</Text>
 <Text name="RULES-MESS_039">"Voulez-vous supprimer cet équipement ?"</Text>
 <Text name="RULES-MESS_040">"Veuillez entrer un chiffre entre 0 et le maximum."</Text>
-<Text name="RULES-MESS_041">"(prendra effet au prochain lancement) Changer la langue pour  : "</Text>
+<Text name="RULES-MESS_041">"Changer la langue pour  : "</Text>
 <Text name="RULES-MESS_042">"Vous devez d’abord choisir la spécialisation de cette compétence"</Text>
 <Text name="RULES-MESS_043">"Vous avez déjà atteint le niveau maximum pour cette carrière"</Text>
 <Text name="RULES-MESS_044">"Vous n’avez fait votre choix entre les deux options du troisième choix."</Text>
@@ -281,6 +281,7 @@
 <Text name="RULES-MESS_052">"Ce nom de livre existe déjà"</Text>
 <Text name="RULES-MESS_053">"Voulez-vous supprimer cette ligne de corruption ?"</Text>
 <Text name="RULES-MESS_054">"Le Meneur de Jeu doit choisir une mutation ou un Trait de Créature - sélectionnez l'entrée réelle ci-dessous."</Text>
+<Text name="RULES-MESS_055">"Merci de fermer toute fiche personnage ou fenêtre de création de personnage ouverte avant de changer la langue."</Text>
 <Text name="RULES-LAB_001">"Code"</Text>
 <Text name="RULES-LAB_002">"Libellé"</Text>
 <Text name="RULES-LAB_003">"Description"</Text>
@@ -17247,62 +17248,62 @@ Si votre adversaire possède une arme avec l’Atout Empaleuse et obtient un Cri
 </DATA_CORRUPTION_MENTAL>
 <DATA_CORRUPTION_TABLE_PHYSICAL>
 <Corruption name="RULES-CORPHY_001">
-<Libelle>"Pattes d’animaux"</Libelle>
-<Effet>"+1 Mouvement"</Effet>
+<Description language="FRANCAIS">"Pattes d’animaux"</Description>
+<Explanation language="FRANCAIS">"+1 Mouvement"</Explanation>
 <ModifyCarac name="RULES-ATTR_Move">+1</ModifyCarac>
 </Corruption>
 <Corruption name="RULES-CORPHY_002">
-<Libelle>"Corpulent"</Libelle>
-<Effet>"-1 Mouvement, +5 Force, +5 Endurance"</Effet>
+<Description language="FRANCAIS">"Corpulent"</Description>
+<Explanation language="FRANCAIS">"-1 Mouvement, +5 Force, +5 Endurance"</Explanation>
 <ModifyCarac name="RULES-ATTR_Move">-1</ModifyCarac>
 <ModifyCarac name="RULES-ATTR_S">+5</ModifyCarac>
 <ModifyCarac name="RULES-ATTR_T">+5</ModifyCarac>
 </Corruption>
 <Corruption name="RULES-CORPHY_003">
-<Libelle>"Doigts distendus"</Libelle>
-<Effet>"+10 Dextérité"</Effet>
+<Description language="FRANCAIS">"Doigts distendus"</Description>
+<Explanation language="FRANCAIS">"+10 Dextérité"</Explanation>
 <ModifyCarac name="RULES-ATTR_Dex">+10</ModifyCarac>
 </Corruption>
 <Corruption name="RULES-CORPHY_004">
-<Libelle>"Émacié"</Libelle>
-<Effet>"-10 Force, +5 Agilité"</Effet>
+<Description language="FRANCAIS">"Émacié"</Description>
+<Explanation language="FRANCAIS">"-10 Force, +5 Agilité"</Explanation>
 <ModifyCarac name="RULES-ATTR_S">-10</ModifyCarac>
 <ModifyCarac name="RULES-ATTR_Ag">+5</ModifyCarac>
 </Corruption>
 <Corruption name="RULES-CORPHY_005">
-<Libelle>"Œil énorme"</Libelle>
-<Effet>"+10 aux Tests de Perception impliquant la vue"</Effet>
+<Description language="FRANCAIS">"Œil énorme"</Description>
+<Explanation language="FRANCAIS">"+10 aux Tests de Perception impliquant la vue"</Explanation>
 </Corruption>
 <Corruption name="RULES-CORPHY_006">
-<Libelle>"Articulation supp. aux jambes"</Libelle>
-<Effet>"+5 Agilité"</Effet>
+<Description language="FRANCAIS">"Articulation supp. aux jambes"</Description>
+<Explanation language="FRANCAIS">"+5 Agilité"</Explanation>
 <ModifyCarac name="RULES-ATTR_Ag">+5</ModifyCarac>
 </Corruption>
 <Corruption name="RULES-CORPHY_007">
-<Libelle>"Bouche supplémentaire"</Libelle>
-<Effet>"Effectuer un lancer sur le Tableau des Localisations afin de déterminer où cette bouche apparaît."</Effet>
+<Description language="FRANCAIS">"Bouche supplémentaire"</Description>
+<Explanation language="FRANCAIS">"Effectuer un lancer sur le Tableau des Localisations afin de déterminer où cette bouche apparaît."</Explanation>
 </Corruption>
 <Corruption name="RULES-CORPHY_008">
-<Libelle>"Tentacule épais"</Libelle>
-<Effet>"Vous gagnez le Trait de Créature Tentacule. Voir page 343"</Effet>
+<Description language="FRANCAIS">"Tentacule épais"</Description>
+<Explanation language="FRANCAIS">"Vous gagnez le Trait de Créature Tentacule. Voir page 343"</Explanation>
 </Corruption>
 <Corruption name="RULES-CORPHY_009">
-<Libelle>"Peau brillante"</Libelle>
-<Effet>"Produit une lumière équivalente à celle d’une bougie."</Effet>
+<Description language="FRANCAIS">"Peau brillante"</Description>
+<Explanation language="FRANCAIS">"Produit une lumière équivalente à celle d’une bougie."</Explanation>
 </Corruption>
 <Corruption name="RULES-CORPHY_010">
-<Libelle>"Beauté surnaturelle"</Libelle>
-<Effet>"+10 Sociabilité. Vous ne gardez jamais de cicatrice."</Effet>
+<Description language="FRANCAIS">"Beauté surnaturelle"</Description>
+<Explanation language="FRANCAIS">"+10 Sociabilité. Vous ne gardez jamais de cicatrice."</Explanation>
 <ModifyCarac name="RULES-ATTR_Fel">+10</ModifyCarac>
 </Corruption>
 <Corruption name="RULES-CORPHY_011">
-<Libelle>"Visage inversé"</Libelle>
-<Effet>"-20 aux Tests de Sociabilité"</Effet>
+<Description language="FRANCAIS">"Visage inversé"</Description>
+<Explanation language="FRANCAIS">"-20 aux Tests de Sociabilité"</Explanation>
 <ModifySkillAttribut name="RULES-ATTR_Fel">-20</ModifySkillAttribut>
 </Corruption>
 <Corruption name="RULES-CORPHY_012">
-<Libelle>"Peau d’acier"</Libelle>
-<Effet>"+2 PA à toutes les Localisations, -10 Agilité"</Effet>
+<Description language="FRANCAIS">"Peau d’acier"</Description>
+<Explanation language="FRANCAIS">"+2 PA à toutes les Localisations, -10 Agilité"</Explanation>
 <ModifyCarac name="RULES-ATTR_Ag">-10</ModifyCarac>
 <ModifArmour name="RULES-ARMOL_HEAD">2</ModifArmour>
 <ModifArmour name="RULES-ARMOL_ARM">2</ModifArmour>
@@ -17310,150 +17311,150 @@ Si votre adversaire possède une arme avec l’Atout Empaleuse et obtient un Cri
 <ModifArmour name="RULES-ARMOL_LEG">2</ModifArmour>
 </Corruption>
 <Corruption name="RULES-CORPHY_013">
-<Libelle>"Langue pendante"</Libelle>
-<Effet>"-10 à tous les Tests de Langue lorsque vous parlez."</Effet>
+<Description language="FRANCAIS">"Langue pendante"</Description>
+<Explanation language="FRANCAIS">"-10 à tous les Tests de Langue lorsque vous parlez."</Explanation>
 <ModifySkill name="RULES-COMPLANG_*">-10</ModifySkill>
 </Corruption>
 <Corruption name="RULES-CORPHY_014">
-<Libelle>"Plumes éparses"</Libelle>
-<Effet>"Effectuez deux lancers sur le Tableau des Localisations pour déterminer où ces plumes apparaissent."</Effet>
+<Description language="FRANCAIS">"Plumes éparses"</Description>
+<Explanation language="FRANCAIS">"Effectuez deux lancers sur le Tableau des Localisations pour déterminer où ces plumes apparaissent."</Explanation>
 </Corruption>
 <Corruption name="RULES-CORPHY_015">
-<Libelle>"Court sur pattes"</Libelle>
-<Effet>"-1 Mouvement"</Effet>
+<Description language="FRANCAIS">"Court sur pattes"</Description>
+<Explanation language="FRANCAIS">"-1 Mouvement"</Explanation>
 <ModifyCarac name="RULES-ATTR_Move">-1</ModifyCarac>
 </Corruption>
 <Corruption name="RULES-CORPHY_016">
-<Libelle>"Écailles épineuses"</Libelle>
-<Effet>"+1 PA à toutes les Localisations"</Effet>
+<Description language="FRANCAIS">"Écailles épineuses"</Description>
+<Explanation language="FRANCAIS">"+1 PA à toutes les Localisations"</Explanation>
 <ModifArmour name="RULES-ARMOL_HEAD">1</ModifArmour>
 <ModifArmour name="RULES-ARMOL_ARM">1</ModifArmour>
 <ModifArmour name="RULES-ARMOL_BODY">1</ModifArmour>
 <ModifArmour name="RULES-ARMOL_LEG">1</ModifArmour>
 </Corruption>
 <Corruption name="RULES-CORPHY_017">
-<Libelle>"Cornes asymétriques"</Libelle>
-<Effet>"+1 PA à la Tête. Compte comme une Arme de Créature dont le nombre de Dégâts est égal à votre Bonus de Force (voir page 338)"</Effet>
+<Description language="FRANCAIS">"Cornes asymétriques"</Description>
+<Explanation language="FRANCAIS">"+1 PA à la Tête. Compte comme une Arme de Créature dont le nombre de Dégâts est égal à votre Bonus de Force (voir page 338)"</Explanation>
 <ModifArmour name="RULES-ARMOL_HEAD">1</ModifArmour>
 </Corruption>
 <Corruption name="RULES-CORPHY_018">
-<Libelle>"Suintement de pus"</Libelle>
-<Effet>"Effectuez un lancer sur le Tableau des Localisations pour déterminer l’origine du suintement"</Effet>
+<Description language="FRANCAIS">"Suintement de pus"</Description>
+<Explanation language="FRANCAIS">"Effectuez un lancer sur le Tableau des Localisations pour déterminer l’origine du suintement"</Explanation>
 </Corruption>
 <Corruption name="RULES-CORPHY_019">
-<Libelle>"Groin poilu"</Libelle>
-<Effet>"+10 Pistage"</Effet>
+<Description language="FRANCAIS">"Groin poilu"</Description>
+<Explanation language="FRANCAIS">"+10 Pistage"</Explanation>
 <ModifySkill name="RULES-COMPPIST">+10</ModifySkill>
 </Corruption>
 <Corruption name="RULES-CORPHY_020">
-<Libelle>"Choix du MJ"</Libelle>
-<Effet>"Le MJ choisit une mutation ou un Trait de Créature. Voir page 340."</Effet>
+<Description language="FRANCAIS">"Choix du MJ"</Description>
+<Explanation language="FRANCAIS">"Le MJ choisit une mutation ou un Trait de Créature. Voir page 340."</Explanation>
 </Corruption>
 </DATA_CORRUPTION_TABLE_PHYSICAL>
 <DATA_CORRUPTION_TABLE_MENTAL>
 <Corruption name="RULES-CORMEN_001">
-<Libelle>"Atroces désirs"</Libelle>
-<Effet>"-5 Sociabilité, -5 Force Mentale"</Effet>
+<Description language="FRANCAIS">"Atroces désirs"</Description>
+<Explanation language="FRANCAIS">"-5 Sociabilité, -5 Force Mentale"</Explanation>
 <ModifyCarac name="RULES-ATTR_Fel">-5</ModifyCarac>
 <ModifyCarac name="RULES-ATTR_WP">-5</ModifyCarac>
 </Corruption>
 <Corruption name="RULES-CORMEN_002">
-<Libelle>"Bête intérieure"</Libelle>
-<Effet>"+10 Force Mentale, -5 Sociabilité, -5 Intelligence"</Effet>
+<Description language="FRANCAIS">"Bête intérieure"</Description>
+<Explanation language="FRANCAIS">"+10 Force Mentale, -5 Sociabilité, -5 Intelligence"</Explanation>
 <ModifyCarac name="RULES-ATTR_WP">+10</ModifyCarac>
 <ModifyCarac name="RULES-ATTR_Fel">-5</ModifyCarac>
 <ModifyCarac name="RULES-ATTR_Int">-5</ModifyCarac>
 </Corruption>
 <Corruption name="RULES-CORMEN_003">
-<Libelle>"Rêves chaotiques"</Libelle>
-<Effet>"Gagnez l’État Exténué pendant les deux premières heures de chaque journée."</Effet>
+<Description language="FRANCAIS">"Rêves chaotiques"</Description>
+<Explanation language="FRANCAIS">"Gagnez l’État Exténué pendant les deux premières heures de chaque journée."</Explanation>
 </Corruption>
 <Corruption name="RULES-CORMEN_004">
-<Libelle>"Formication"</Libelle>
-<Effet>"-5 Initiative, -5 Dextérité"</Effet>
+<Description language="FRANCAIS">"Formication"</Description>
+<Explanation language="FRANCAIS">"-5 Initiative, -5 Dextérité"</Explanation>
 <ModifyCarac name="RULES-ATTR_I">-5</ModifyCarac>
 <ModifyCarac name="RULES-ATTR_Dex">-5</ModifyCarac>
 </Corruption>
 <Corruption name="RULES-CORMEN_005">
-<Libelle>"Imprévisible fantaisiste"</Libelle>
-<Effet>"-5 Initiative, -5 Force Mentale"</Effet>
+<Description language="FRANCAIS">"Imprévisible fantaisiste"</Description>
+<Explanation language="FRANCAIS">"-5 Initiative, -5 Force Mentale"</Explanation>
 <ModifyCarac name="RULES-ATTR_I">-5</ModifyCarac>
 <ModifyCarac name="RULES-ATTR_WP">-5</ModifyCarac>
 </Corruption>
 <Corruption name="RULES-CORMEN_006">
-<Libelle>"Terrible inquiétude"</Libelle>
-<Effet>"-10 Force Mentale"</Effet>
+<Description language="FRANCAIS">"Terrible inquiétude"</Description>
+<Explanation language="FRANCAIS">"-10 Force Mentale"</Explanation>
 <ModifyCarac name="RULES-ATTR_WP">-10</ModifyCarac>
 </Corruption>
 <Corruption name="RULES-CORMEN_007">
-<Libelle>"Pulsions de haine"</Libelle>
-<Effet>"Sujet à l’Hostilité (voir Psychologie) envers tous ceux qui ne sont pas de votre race."</Effet>
+<Description language="FRANCAIS">"Pulsions de haine"</Description>
+<Explanation language="FRANCAIS">"Sujet à l’Hostilité (voir Psychologie) envers tous ceux qui ne sont pas de votre race."</Explanation>
 </Corruption>
 <Corruption name="RULES-CORMEN_008">
-<Libelle>"Cœur desséché"</Libelle>
-<Effet>"+10 Force Mentale, -10 Sociabilité"</Effet>
+<Description language="FRANCAIS">"Cœur desséché"</Description>
+<Explanation language="FRANCAIS">"+10 Force Mentale, -10 Sociabilité"</Explanation>
 <ModifyCarac name="RULES-ATTR_WP">+10</ModifyCarac>
 <ModifyCarac name="RULES-ATTR_Fel">-10</ModifyCarac>
 </Corruption>
 <Corruption name="RULES-CORMEN_009">
-<Libelle>"Pensées envieuses"</Libelle>
-<Effet>"-10 Sociabilité"</Effet>
+<Description language="FRANCAIS">"Pensées envieuses"</Description>
+<Explanation language="FRANCAIS">"-10 Sociabilité"</Explanation>
 <ModifyCarac name="RULES-ATTR_Fel">-10</ModifyCarac>
 </Corruption>
 <Corruption name="RULES-CORMEN_010">
-<Libelle>"Esprit solitaire"</Libelle>
-<Effet>"-10 aux Tests lorsque vous êtes seul"</Effet>
+<Description language="FRANCAIS">"Esprit solitaire"</Description>
+<Explanation language="FRANCAIS">"-10 aux Tests lorsque vous êtes seul"</Explanation>
 </Corruption>
 <Corruption name="RULES-CORMEN_011">
-<Libelle>"Blocage mental"</Libelle>
-<Effet>"-10 Intelligence"</Effet>
+<Description language="FRANCAIS">"Blocage mental"</Description>
+<Explanation language="FRANCAIS">"-10 Intelligence"</Explanation>
 <ModifyCarac name="RULES-ATTR_Int">-10</ModifyCarac>
 </Corruption>
 <Corruption name="RULES-CORMEN_012">
-<Libelle>"Urgence profanatoire"</Libelle>
-<Effet>"-10 Force Mentale, +10 Agilité"</Effet>
+<Description language="FRANCAIS">"Urgence profanatoire"</Description>
+<Explanation language="FRANCAIS">"-10 Force Mentale, +10 Agilité"</Explanation>
 <ModifyCarac name="RULES-ATTR_WP">-10</ModifyCarac>
 <ModifyCarac name="RULES-ATTR_Ag">+10</ModifyCarac>
 </Corruption>
 <Corruption name="RULES-CORMEN_013">
-<Libelle>"Morale douteuse"</Libelle>
-<Effet>"Gagnez 1 État Brisé si vous échouez à un Test dérivé de la Force Mentale."</Effet>
+<Description language="FRANCAIS">"Morale douteuse"</Description>
+<Explanation language="FRANCAIS">"Gagnez 1 État Brisé si vous échouez à un Test dérivé de la Force Mentale."</Explanation>
 </Corruption>
 <Corruption name="RULES-CORMEN_014">
-<Libelle>"Esprit suspicieux"</Libelle>
-<Effet>"-5 Initiative, -5 Intelligence"</Effet>
+<Description language="FRANCAIS">"Esprit suspicieux"</Description>
+<Explanation language="FRANCAIS">"-5 Initiative, -5 Intelligence"</Explanation>
 <ModifyCarac name="RULES-ATTR_I">-5</ModifyCarac>
 <ModifyCarac name="RULES-ATTR_Int">-5</ModifyCarac>
 </Corruption>
 <Corruption name="RULES-CORMEN_015">
-<Libelle>"Accro à l’adrénaline"</Libelle>
-<Effet>"+10 Force Mentale, -10 Initiative"</Effet>
+<Description language="FRANCAIS">"Accro à l’adrénaline"</Description>
+<Explanation language="FRANCAIS">"+10 Force Mentale, -10 Initiative"</Explanation>
 <ModifyCarac name="RULES-ATTR_WP">+10</ModifyCarac>
 <ModifyCarac name="RULES-ATTR_I">-10</ModifyCarac>
 </Corruption>
 <Corruption name="RULES-CORMEN_016">
-<Libelle>"Visions torturées"</Libelle>
-<Effet>"-10 Initiative"</Effet>
+<Description language="FRANCAIS">"Visions torturées"</Description>
+<Explanation language="FRANCAIS">"-10 Initiative"</Explanation>
 <ModifyCarac name="RULES-ATTR_I">-10</ModifyCarac>
 </Corruption>
 <Corruption name="RULES-CORMEN_017">
-<Libelle>"Totalement déséquilibré"</Libelle>
-<Effet>"-20 Sociabilité, +10 Force Mentale"</Effet>
+<Description language="FRANCAIS">"Totalement déséquilibré"</Description>
+<Explanation language="FRANCAIS">"-20 Sociabilité, +10 Force Mentale"</Explanation>
 <ModifyCarac name="RULES-ATTR_Fel">-20</ModifyCarac>
 <ModifyCarac name="RULES-ATTR_WP">+10</ModifyCarac>
 </Corruption>
 <Corruption name="RULES-CORMEN_018">
-<Libelle>"Infinie malveillance"</Libelle>
-<Effet>"-10 à tous les Tests qui ne sont pas destinés à blesser autrui. +10 à tous les Tests destinés à blesser autrui."</Effet>
+<Description language="FRANCAIS">"Infinie malveillance"</Description>
+<Explanation language="FRANCAIS">"-10 à tous les Tests qui ne sont pas destinés à blesser autrui. +10 à tous les Tests destinés à blesser autrui."</Explanation>
 </Corruption>
 <Corruption name="RULES-CORMEN_019">
-<Libelle>"Colère impie"</Libelle>
-<Effet>"Sujet à Frénésie (voir Psychologie), +10 à la Capacité de Combat"</Effet>
+<Description language="FRANCAIS">"Colère impie"</Description>
+<Explanation language="FRANCAIS">"Sujet à Frénésie (voir Psychologie), +10 à la Capacité de Combat"</Explanation>
 <ModifyCarac name="RULES-ATTR_WS">+10</ModifyCarac>
 </Corruption>
 <Corruption name="RULES-CORMEN_020">
-<Libelle>"Affreusement nerveux"</Libelle>
-<Effet>"+5 Agilité, -5 Sociabilité"</Effet>
+<Description language="FRANCAIS">"Affreusement nerveux"</Description>
+<Explanation language="FRANCAIS">"+5 Agilité, -5 Sociabilité"</Explanation>
 <ModifyCarac name="RULES-ATTR_Ag">+5</ModifyCarac>
 <ModifyCarac name="RULES-ATTR_Fel">-5</ModifyCarac>
 </Corruption>

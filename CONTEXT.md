@@ -1174,6 +1174,97 @@ l'affichage sur `PdfBlocArmourPoints` à faire avec Nono avant de coder.
 
 ---
 
+### 2.8 Changement de langue en direct — terminé (17/08/2026)
+
+Jusqu'ici, changer de langue (`ComboBoxLangue`, menu principal) se contentait d'appeler
+`SauveIni()` puis `Application.Terminate` - il fallait relancer le programme pour voir l'effet.
+Nono a demandé si on pouvait éviter la fermeture. Conception validée après avoir vérifié le code
+existant :
+
+- **Précédent trouvé** : changer de livre actif (`TabLivreDblClick`) fait déjà un rechargement en
+  direct sans fermer le programme, via `ChargerLivre(true, '')` (vide ~30 listes globales,
+  réimporte les XML des livres sélectionnés, puis `Traduit(ValLangue, '')` réapplique les
+  traductions) - architecturalement, c'est exactement ce qu'il fallait pour la langue aussi.
+- **Fiches personnage (`TWinPersonnages`) et assistant de création (`TWinCreations`) bloquent
+  le changement de langue** s'ils sont ouverts (choix de Nono, `MESS_055`) plutôt que d'être
+  fermés/rouverts automatiquement : `Personnage` et tous les records associés
+  (`PersonnageMetier`, `PersonnageAttribut`, etc., `winpersonnage.pas`) sont des **variables
+  globales partagées par toutes les fenêtres `TWinPersonnages`**, pas des champs propres à
+  chaque fenêtre (repéré en creusant le code, voir §4) - les fermer sans sauvegarde risquerait de
+  perdre une saisie non enregistrée. Détection par balayage de `Screen.Forms` (pas des variables
+  globales `FenXxx`, qui ne reflètent que la DERNIÈRE fenêtre créée de chaque type et ne
+  permettent pas de savoir si une fenêtre plus ancienne est encore ouverte).
+- **Les autres fenêtres secondaires** (Livre/Compétence/Talent/Race/Sorts/Arme/Armure/Métier :
+  catalogues sans saisie à perdre) sont repérées via `Screen.Forms`, fermées, puis rouvertes à
+  l'identique après le rechargement - état minimal retenu ("était ouverte"), pas de position/
+  onglet/ligne sélectionnée mémorisé (choix volontairement simple).
+- **`RafraichirLibellesMenu`** (nouvelle procédure, `warhammersource.pas`) : les libellés déjà
+  posés sur le menu principal lui-même (boutons, en-têtes de colonnes des tableaux Livres/
+  Personnages, libellé de chaque livre dans `TabLivre`) ne se refont pas tout seuls - ils sont
+  fixés une seule fois dans `FormCreate`. Impossible de rappeler `FormCreate` tel quel pour les
+  rafraîchir : il fait aussi de la construction à usage unique (`GridAjouteColonne` AJOUTE une
+  colonne à chaque appel, sans vérifier si elle existe déjà - un second appel aurait dupliqué les
+  colonnes des tableaux Livres/Personnages ; une trentaine de `ListXxx.Create` auraient fui
+  l'instance précédente ; plusieurs listes/tableaux sont remplis par `+=`, donc auraient dupliqué
+  leur contenu). `RafraichirLibellesMenu` duplique DÉLIBÉRÉMENT le sous-ensemble sûr (libellés
+  simples, en-têtes de colonnes déjà créées réécrites via `.Columns[i].Title.Caption`, pas
+  `GridAjouteColonne`) plutôt que de refactoriser `FormCreate` - si un nouveau libellé
+  dépendant de la langue est ajouté à `FormCreate` plus tard, il faudra penser à l'ajouter aussi
+  ici.
+- `MESS_041` (confirmation du changement de langue) mis à jour : ne mentionne plus "prendra
+  effet au prochain lancement", devenu faux.
+- Nouveau message `MESS_055` (les deux livres) : averti l'utilisateur qu'une fiche personnage ou
+  un assistant de création doit être fermé avant de changer de langue.
+- **Bug #1 découvert au test (18/08/2026) : l'interface (boutons du menu) restait en français
+  après un changement de langue, alors que les données du jeu se rechargeaient bien.** Cause :
+  `Traduit(Langue, Livre)` (`chargetraduction.pas`) avait une garde
+  `if (Langue <> ConstAnglais) or (Livre <> '') then` qui sautait tout le corps de la fonction
+  quand on rebasculait vers l'anglais en mode "tous les livres" (`Livre=''`). Or `ListTexte` (et
+  aussi `ListeAttribut`/`ListeAttributAugmentation`/`ListeCompetenceAugmentation`, même souci
+  latent, pas encore rencontré) ne peuvent être remises à jour QUE par `Traduit` : ces listes sont
+  remplies par `XmlImport` uniquement quand `OnlyPrimary=true`, ce qui n'arrive qu'UNE fois, au
+  tout premier chargement dans `FormCreate` - `ChargerLivre` (utilisée pour le changement de livre
+  ET de langue en direct) appelle toujours `XmlImport(..., false, false)`, donc ne les retouche
+  jamais elle-même. Une première tentative de correctif (vider `ListTexte` dans `ChargerLivre`,
+  par analogie avec les ~30 autres listes qui elles SONT rechargées à chaque fois) s'est révélée
+  contre-productive : elle vidait la liste sans que rien ne puisse jamais la reremplir depuis
+  `ChargerLivre`, provoquant un bug pire (codes bruts `LAB_082` etc. affichés au lieu du texte,
+  `GetTexteLibelle` retombant sur son fallback faute de trouver quoi que ce soit) - annulée.
+  Correctif final : suppression de la garde inutile dans `Traduit` (la boucle interne filtre déjà
+  par langue/livre, elle n'avait pas besoin d'un garde-fou en plus par-dessus).
+- **Bug #2 découvert au test (18/08/2026) : la fenêtre principale (et ses tableaux Livres/
+  Personnages) grossissait un peu plus à chaque changement de langue.** Trois passes
+  successives avant résolution complète :
+  1. Cause partielle identifiée : `Grid.AutoSizeColumn` (appelée en interne par
+     `AdjustGridColumnsWidth`, `chargeconstantes.pas`) agrandit une colonne pour tenir son
+     contenu mais ne la rétrécit jamais (comportement connu de la LCL) - inoffensif tant que
+     `AdjustGridColumnsWidth` n'était appelée qu'une fois au démarrage, mais
+     `RafraichirLibellesMenu` la rappelle à chaque changement de langue. Correctif : remise des
+     colonnes auto-dimensionnées de `TabLivre`/`TabPersonnage` à leur largeur de départ (celle
+     donnée dans `FormCreate` via `GridAjouteColonne`) juste avant chaque appel à
+     `AdjustGridColumnsWidth`. Insuffisant seul - le grossissement continuait (proportionnel à
+     toute la fenêtre, pas juste aux colonnes ; les fenêtres secondaires fermées/rouvertes, elles,
+     ne grossissaient pas - indice que la fenêtre PRINCIPALE, jamais recréée, était seule en
+     cause).
+  2. Cause principale trouvée : `AdjustGridColumnsWidth` appelle aussi
+     `Grid.ScaleFormToDesign(96)`, qui remet à l'échelle DPI la fenêtre PROPRIÉTAIRE entière à
+     partir de sa taille actuelle - correct au tout premier appel (`FormCreate`), mais cumulatif
+     si rappelé sans que la fenêtre reparte d'un état neuf (exactement le cas de
+     `RafraichirLibellesMenu`, jamais recréée contrairement aux fenêtres secondaires). Un ancien
+     TODO dans `A FAIRE.txt` pointait déjà ce `ScaleFormToDesign(96)` comme suspect (écart avec le
+     `DesignTimePPI = 120` des `.lfm`). Correctif : nouveau paramètre optionnel
+     `ScaleDpi: Boolean = true` sur `AdjustGridColumnsWidth` (défaut inchangé partout ailleurs),
+     appelé avec `ScaleDpi=false` depuis `RafraichirLibellesMenu`.
+  3. Un résidu de dérive subsistait malgré les deux correctifs ci-dessus (cause exacte non
+     identifiée avec certitude). Filet de sécurité proposé par Nono, appliqué dans
+     `RafraichirLibellesMenu` : mémoriser `Self.Width`/`Height` et la taille de `TabLivre`/
+     `TabPersonnage` tout au début de la procédure, et les réimposer de force juste après les
+     deux appels à `AdjustGridColumnsWidth`, quoi qu'il se soit passé entre-temps.
+- Confirmé fonctionnel par Nono le 18/08/2026 (données, libellés d'interface, et taille de la
+  fenêtre/des tableaux stable dans la durée, testé dans les deux sens EN/FR).
+
+---
+
 ## 3. TODO / Backlog
 
 Le backlog complet (tout ce qui n'est pas encore commencé) vit dans `A FAIRE.txt`
@@ -1293,6 +1384,19 @@ chantier concerné, avec les détails techniques.
   mais pas câblé leurs événements, ce qui laissait le bouton "Randomly" (Hasard) visible même
   après avoir sélectionné un autre mode - diagnostiqué en relisant le `.lfm` (aucune ligne
   `OnClick =` sur les nouveaux contrôles).
+- **`Personnage` (et tous les records associés : `PersonnageMetier`, `PersonnageAttribut`,
+  `PersonnageCompetence`, etc., `winpersonnage.pas`) ne sont PAS des champs propres à chaque
+  fenêtre `TWinPersonnages`** : ce sont des variables globales UNIQUES au niveau de l'unité
+  (déclarées avec des initialiseurs `= false`/`= ''` typiques d'un bloc `var` d'unité, pas d'un
+  champ de classe), partagées par TOUTES les instances de fenêtre ouvertes. Repéré le
+  17/08/2026 en concevant le changement de langue en direct (§2.8) : impossible de savoir "quel
+  personnage est ouvert dans quelle fenêtre" en lisant cette donnée, puisqu'elle est écrasée par
+  la dernière fenêtre créée/chargée, quel que soit le nombre de fenêtres réellement visibles à
+  l'écran. Pas corrigé (hors scope de ce chantier, comportement pré-existant) - juste contourné
+  en identifiant les fenêtres via `Screen.Forms` + `is TWinPersonnages`/`is TWinCreations`
+  plutôt que via cette donnée interne. À garder en tête pour tout futur chantier touchant à
+  l'ouverture simultanée de plusieurs personnages : deux fenêtres ouvertes en même temps
+  partagent aujourd'hui le même `Personnage` en mémoire.
 
 ---
 

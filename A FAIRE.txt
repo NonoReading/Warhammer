@@ -127,3 +127,23 @@ PDF Personnage (PRIORITAIRE) :
   aucune capacité de dessiner une annotation, contrairement aux tableaux
   Caractéristiques/Compétences (DessinerTableau). À concevoir avec Nono (où/comment afficher le
   numéro sur les 4 cases Tête/Bras/Corps/Jambes) avant d'implémenter.
+
+- (repéré par Nono, 17/08/2026, terminé pour la partie balises) textes <Effet> des tables de
+  mutation (Physical/Mental Corruption Table) contenant un terme de jeu traductible en dur dans
+  le texte anglais, ex. "Subject to Frenzy (see Psychology), +10 Weapon Skill" ("Weapon Skill"
+  y est un nom de caractéristique). Résolu autrement que prévu initialement (pas de balise
+  imbriquée en plein milieu du texte, jugé trop complexe) : <Libelle>/<Effet> des 40 entrées
+  (20 Physical + 20 Mental, les deux livres) renommés en <Description language="X">/
+  <Explanation language="X">, même convention que les autres chapitres (Attribut/Compétence/
+  Talent/etc.) - contenu inchangé, toujours lu dans les mêmes champs Pascal .Libelle/.Effet
+  (xmlexportimport.pas). Le terme "Weapon Skill" en dur dans le texte reste tel quel pour
+  l'instant (pas de substitution dynamique via GetTexteLibelle) - seulement le NOM des balises
+  a changé, pas la structure du texte.
+
+- (idée de Nono, 17/08/2026, "c'est la théorie", pas conçue) pourquoi garder l'attribut
+  language= sur <Description>/<Explanation> même s'il n'est pas lu par le programme (voir
+  point ci-dessus) : faciliter la génération future d'un fichier XML "de traduction" à part -
+  parcourir le livre et n'en extraire que les éléments parents qui ont des enfants avec un
+  attribut language=, pour produire un fichier ne contenant que ces éléments-là. Aucun outil de
+  génération n'existe encore, juste l'intention derrière le choix de garder l'attribut. À
+  concevoir avec Nono si/quand il veut ce générateur.

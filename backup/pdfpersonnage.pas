@@ -8,10 +8,11 @@ interface
 uses
   Classes, SysUtils, fpPDF, PdfUtils, ChargeRace, ChargeMetier, ChargeMetierNiveau,
   ChargeRaceAttribut, ChargeTalent, ChargeCompetence, ChargeArme, ChargeArmure,
-  ChargeArmeBonus, ChargeArmureBonus, ChargeSort, ChargeAttribut, ChargeFabrication,
+  ChargeArmeBonus, ChargeArmureBonus, ChargeArmureBonusModif, ChargeSort, ChargeAttribut, ChargeFabrication,
   ChargeConstantes, ChargeMetierAttribut, ChargeTexte, ChargeMetierTalent,
   ChargePersonnage, ChargeArmureSimplifie, ChargeAttributAugmentation,
-  ChargeCompetenceAugmentation,
+  ChargeCompetenceAugmentation, ChargeCorruptionTable,
+  ChargeCorruptionAttributModif, ChargeCorruptionCompetenceModif,
   Dialogs, UnitCalcul, Math, LCLIntf;
 
 Type
@@ -123,6 +124,11 @@ end;
 
 Procedure PdfPersonnageCompetenceTri(ListPage: TStringList);
 Function PdfPersonnageAttribut(Personnage: StructurePersonnage; Attribut: String; var Bonus: String): StructureDonnee;
+// Plafond de corruption (Bonus Endurance/10 + Bonus Force Mentale/10 + talent Âme Pure),
+// même calcul que PdfBlocCorruption mais exposé pour être réutilisé hors PDF (WinPersonnage,
+// CONTEXT.md §2.7) - PdfPersonnageCreationFeldo2P n'est PAS modifiée, nouvelle fonction
+// indépendante pour ne rien risquer sur le PDF existant.
+Function PersonnageCorruptionTotal(Personnage: StructurePersonnage): Integer;
 Procedure PdfPersonnageCreation(Personnage: StructurePersonnage; BackGround: Boolean; DessineTexteLigne: Boolean = True);
 Procedure PdfPersonnageCreationFeldo2P(Personnage: StructurePersonnage);
 Function PdfPersonnageCompetence(Personnage: StructurePersonnage; Competence: String; var NivMetier: Integer): StructureDonnee;
@@ -130,6 +136,38 @@ Function PdfPersonnageTalent(Personnage: StructurePersonnage; Talent: String; Va
 Function PdfPersonnageRemplaceBonus(Personnage: StructurePersonnage; ChW: String): String;
 Function PdfPersonnageCompetenceBonus(Personnage: StructurePersonnage; CodeCompetence: String): String;
 Function PdfPersonnageTalentBonus(Personnage: StructurePersonnage; CodeTalent: String): String;
+
+// Calcule les astérisques numérotées liées aux malus de compétence de l'armure
+// actuellement équipée (armures normales ET simplifiées, même résolution que
+// PdfBlocArmuresDonnees mais sans rien dessiner - peut donc être appelée avant la page 1).
+// Une astérisque par PIÈCE portée (pas par code de bonus), pour que deux pièces
+// différentes portant le même code de malus (ex. plastron + jambières "Not discreet")
+// gardent chacune leur propre numéro. Numérotation continuant après le maximum déjà
+// utilisé par le système de talents (Personnage.Asterisque), sans jamais l'écrire dedans
+// - conception validée avec Nono le 15-16/08/2026, voir CONTEXT.md §2.5. Renvoie une
+// TStringList Name=CodeCompetence / Value=texte d'annotation à concaténer à celle des
+// talents (ex. " (5) (6)", même format court que le système de talents - PdfEcrit
+// wrap sur deux lignes si le texte est trop long pour la petite colonne d'annotation,
+// donc pas de pourcentage ici). Renvoie aussi, en paramètre out, une deuxième
+// TStringList Name=CodeEquipement / Value=numéro, pour afficher le même numéro à côté
+// de la pièce d'armure elle-même (PdfBlocArmuresDonnees), comme (N) à côté d'un talent -
+// permet de retrouver quelle pièce cause quel malus. Les deux listes sont à libérer par
+// l'appelant.
+// AsterisqueDepart (ajouté le 17/08/2026) : point de départ de la numérotation, pour
+// enchaîner sans collision après une autre source d'astérisques déjà numérotée dans le
+// même PDF (ex. les mutations, voir PdfPersonnageMutationAsterisques) - auparavant fixé
+// en dur à Personnage.Asterisque (le seul baseline connu, celui des talents).
+Function PdfPersonnageArmureAsterisques(Personnage: StructurePersonnage; AsterisqueDepart: Integer; out AsterisqueParEquipement: TStringList): TStringList;
+
+// Effets à delta pur des mutations obtenues, visibles sur une caractéristique ou une
+// compétence (CONTEXT.md §2.7, étape 9) - même principe que PdfPersonnageArmureAsterisques :
+// Result est une TStringList Name=CodeAttribut/CodeCompetence / Value=" (N)" (à concaténer à
+// l'annotation existante), AsterisqueParMutation est Name=CodeCorruption / Value="(N)" pour
+// l'afficher à côté du nom de la mutation elle-même (PdfBlocMutations). AsterisqueDepart
+// permet d'enchaîner après une autre source déjà numérotée ; AsterisqueFinal renvoie le
+// dernier numéro utilisé, pour qu'une source suivante (ex. les armures) puisse à son tour
+// enchaîner sans collision. Les deux TStringList sont à libérer par l'appelant.
+Function PdfPersonnageMutationAsterisques(Personnage: StructurePersonnage; AsterisqueDepart: Integer; out AsterisqueParMutation: TStringList; out AsterisqueFinal: Integer): TStringList;
 
 // Blocs extraits de PdfPersonnageCreationFeldo2P (CONTEXT.md §2.4) — premier prototype
 // de l'architecture Bloc/Tableau. PdfBlocResilience dessine le cadre partagé
@@ -152,6 +190,174 @@ Function PdfBlocEntete(PdfPage: TPDFPage; Personnage: StructurePersonnage; PRace
 // PdfBlocEntete (sans le -3 de marge, laissé à l'appelant).
 Function PdfBlocAmbitions(PdfPage: TPDFPage; XGauche, XDroite, Y, HauteurLigne: Single; NbLignes: Integer; MinPolice: Integer): Single;
 
+// Blocs Expérience / Mouvement / Corruption : trois panneaux "titre + lignes libellé/valeur"
+// alignés côte à côte sur la même rangée (même Y de départ, calculé par l'appelant à partir
+// du bas du bloc Résilience/Destin). Chacun ne connaît que son propre coin (XGauche/XDroite),
+// brique 1, CONTEXT.md §2.4. Renvoient le Y du bas du cadre (sans le -3 de marge).
+Function PdfBlocExperience(PdfPage: TPDFPage; Personnage: StructurePersonnage; XGauche, XDroite, Y, HauteurLigne: Single; NbLignes: Integer; MinPolice: Integer): Single;
+Function PdfBlocMouvement(PdfPage: TPDFPage; XGauche, XDroite, Y, HauteurLigne: Single; NbLignes: Integer; MinPolice: Integer; Mouv, BonusSprint: Integer): Single;
+Function PdfBlocCorruption(PdfPage: TPDFPage; XGauche, XDroite, Y, HauteurLigne: Single; NbLignes: Integer; MinPolice: Integer; BE, BFM, AmePure, Lost: Integer): Single;
+
+// Bloc Corruption Détail : tableau Montant | Libellé, une ligne par entrée de
+// Personnage.Corruption, la plus récente en haut, CONTEXT.md §2.6. Si l'historique
+// dépasse la capacité du cadre, les entrées les plus ANCIENNES au-delà ne sont pas
+// affichées (même limite silencieuse que PdfBlocDiversDonnees pour Divers).
+Function PdfBlocCorruptionDetail(PdfPage: TPDFPage; Personnage: StructurePersonnage; XGauche, XDroite, Y, HauteurLigne: Single; NbLignes: Integer; MinPolice: Integer): Single;
+
+// Bloc Talents : liste répétitive comme les tableaux de compétences (deux passes : talents
+// acquis d'abord, puis talents accessibles via le métier mais pas encore pris, grisés, tant
+// qu'il reste de la place), mais gardée en bloc simple plutôt que réécrite avec
+// DessinerTableau/TPdfRecordSet : la colonne Description a un décalage vertical qui dépend de
+// la longueur du texte (résumé long → probablement affiché sur 2 lignes par PdfEcrit → +1.5
+// au lieu de +1 pour recentrer), un cas que le tableau générique ne modélise pas aujourd'hui.
+// Utilise les globales ListTalent/ListMetierTalent/ChercheTalent (déjà globales dans l'ancien
+// code, pas de changement de portée). Renvoie le Y du bas du cadre, comme les autres blocs
+// (sans le -3 de marge) ; rien ne le réutilise à ce jour (la page 2 repart de
+// DessinDebutHautEntete), gardé pour la cohérence avec les autres blocs.
+Function PdfBlocTalents(PdfPage: TPDFPage; Personnage: StructurePersonnage; XGauche, XDroite, Y, HauteurLigne: Single; NbLignes: Integer; MinPolice: Integer): Single;
+
+// Bloc Armures (page 2, cadre uniquement : cadre + en-têtes de colonnes du tableau
+// Armures). Contrairement aux autres blocs, DessinDebutHautArm (Y du haut) et
+// DessinLargeurArm (X du bord droit) sont relus bien plus loin dans la procédure (cadre
+// "DessinExplication") : l'appelant garde donc ses propres variables et les passe
+// simplement en Y/XDroite, ce bloc ne fait que dessiner. Le remplissage des lignes (une
+// par armure possédée) reste dans la procédure principale, dans la même boucle que
+// Armes/Équipement/Sorts (elle calcule des totaux partagés réutilisés plus loin pour
+// l'Encombrement et le cadre d'explication) : voir CONTEXT.md §2.4 pour la discussion sur
+// pourquoi ce remplissage n'est pas encore découpé. Pas de MinPolice : ce bloc ne dessine
+// que des libellés fixes (PdfCentre), aucun texte de largeur variable (PdfEcrit). Renvoie
+// le Y du bas du cadre, comme les autres blocs (sans le -3 de marge, laissé à l'appelant).
+Function PdfBlocArmures(PdfPage: TPDFPage; XGauche, XDroite, Y, HauteurLigne: Single; NbLignes: Integer): Single;
+
+// Bloc Équipement (page 2, cadre uniquement) — même principe que PdfBlocArmures : cadre +
+// en-têtes, remplissage laissé dans la procédure principale (voir CONTEXT.md §2.4). La
+// grille de colonnes est doublée (Nom/Encombrement répété deux fois) parce que la liste
+// "Divers" se répartit sur deux demi-colonnes quand elle dépasse la hauteur du cadre
+// (voir le remplissage, `IndDivers`) — pas une erreur, préservé tel quel.
+Function PdfBlocEquipement(PdfPage: TPDFPage; XGauche, XDroite, Y, HauteurLigne: Single; NbLignes: Integer): Single;
+
+// Bloc Armes (page 2, cadre uniquement) — même principe que PdfBlocArmures/
+// PdfBlocEquipement : cadre + en-têtes, remplissage laissé dans la procédure
+// principale (voir CONTEXT.md §2.4).
+Function PdfBlocArmes(PdfPage: TPDFPage; XGauche, XDroite, Y, HauteurLigne: Single; NbLignes: Integer): Single;
+
+// Bloc Sorts (page 2, cadre uniquement) — même principe que PdfBlocArmures/
+// PdfBlocEquipement/PdfBlocArmes : cadre + en-têtes, remplissage laissé dans la
+// procédure principale (voir CONTEXT.md §2.4).
+Function PdfBlocSorts(PdfPage: TPDFPage; XGauche, XDroite, Y, HauteurLigne: Single; NbLignes: Integer): Single;
+
+// Bloc Encombrement (page 2, cadre uniquement) — dernier de la série cadre+en-têtes
+// (Armures/Équipement/Armes/Sorts/Encombrement, CONTEXT.md §2.4). Contrairement aux 4
+// précédents, ce bloc a des libellés de largeur variable (`PdfEcrit`), donc reprend
+// `MinPolice`. Les valeurs (totaux d'encombrement) sont écrites bien plus loin dans la
+// procédure, une fois la boucle de remplissage des tableaux passée — pas dans ce bloc.
+Function PdfBlocEncombrement(PdfPage: TPDFPage; XGauche, XDroite, Y, HauteurLigne: Single; NbLignes: Integer; MinPolice: Integer): Single;
+
+// Bloc Sorts (page 2, remplissage des données) — première des 4 boucles de
+// remplissage à être séparée du passage unique d'origine sur Personnage.Equipement
+// (Armes/Armures/Équipement-Divers/Sorts, CONTEXT.md §2.4 - décision du 15/08/2026 :
+// 4 boucles indépendantes plutôt qu'un seul passage). Filtre sur TypeEquipSp et
+// remplit les lignes du tableau dont le cadre est dessiné par PdfBlocSorts. Purement
+// local : NbSort ne sert qu'à positionner les lignes dans cette boucle, personne
+// d'autre ne le lit après dans la procédure principale (contrairement à EncArme/
+// EncArmure/ArmureBonii/etc., qui restent dans PdfPersonnageCreationFeldo2P car
+// réutilisés par l'Encombrement et DessinExplication).
+Procedure PdfBlocSortsDonnees(PdfPage: TPDFPage; Personnage: StructurePersonnage; XGauche, Y, HauteurLigne: Single; MinPolice: Integer);
+
+// Bloc Divers (page 2, remplissage des données) — deuxième des 4 boucles de remplissage
+// à être séparée (CONTEXT.md §2.4). Filtre sur TypeEquipDI et remplit la liste Divers du
+// cadre Équipement dessiné par PdfBlocEquipement, en basculant en deuxième demi-colonne
+// au-delà de NbLignes lignes (voir le commentaire de PdfBlocEquipement sur la grille
+// doublée — comportement préservé tel quel). Purement local : IndDivers ne sert qu'à
+// positionner les lignes dans cette boucle, personne d'autre ne le lit après.
+Procedure PdfBlocDiversDonnees(PdfPage: TPDFPage; Personnage: StructurePersonnage; XGauche, Y, HauteurLigne: Single; NbLignes: Integer; MinPolice: Integer);
+
+// Bloc Armes (page 2, remplissage des données) — troisième des 4 boucles de
+// remplissage à être séparée (CONTEXT.md §2.4). Filtre sur TypeEquipWe et remplit le
+// tableau dont le cadre est dessiné par PdfBlocArmes. Plus délicat que Sorts/Divers :
+// FabricationBonii est accumulé par Armes ET Armures (les deux ajoutent au même texte
+// d'explication affiché plus loin dans la page via FabricationDetail) - remonté en
+// paramètre `var` plutôt que local, pour que les deux boucles s'y ajoutent sans
+// s'écraser. EncArme et ArmeBonii sont remontés en `out` car réutilisés par le bloc
+// Encombrement et DessinExplication, plus loin dans la procédure principale. BF (bonus
+// Force) et TBonusCC/TBonusCT (bonus de dégât Corps-à-corps/Tir, déjà calculés plus
+// haut dans la procédure principale) sont passés en lecture seule. NbArme, Quality
+// restent purement locaux. ArmureBouclier (protection du bouclier, calculée ici quand
+// une arme porte le bonus "protection") est désormais remonté en `out` lui aussi
+// (15/08/2026, ajout du bloc "Armour Points") : il était déjà écrit mais jamais relu
+// avant cet ajout - voir CONTEXT.md §2.4 - il sert maintenant à afficher la valeur du
+// Bouclier dans le nouveau bloc PdfBlocArmourPoints.
+Procedure PdfBlocArmesDonnees(PdfPage: TPDFPage; Personnage: StructurePersonnage; XGauche, XDroite, Y, HauteurLigne: Single; BF, TBonusCC, TBonusCT: Integer; var FabricationBonii: String; out EncArme: Integer; out ArmeBonii: String; out ArmureBouclier: Integer; MinPolice: Integer);
+
+// Bloc Armures (page 2, remplissage des données) — dernière des 4 boucles de
+// remplissage à être séparée (CONTEXT.md §2.4). Filtre sur TypeEquipAR (armure
+// détaillée) ou TypeEquipARS (armure simplifiée) selon `ArmureSet`, remplit le
+// tableau dont le cadre est dessiné par PdfBlocArmures. Comme Armes, partage
+// `FabricationBonii` (paramètre `var`, les deux boucles y ajoutent sans s'écraser).
+// EncArmure, ArmureBras/Corps/Jambe/Tete et ArmureBonii sont remontés en `out` car
+// réutilisés par le bloc Encombrement et DessinExplication, plus loin dans la
+// procédure principale. NbArmure, Quality, Enc/EncP restent purement locaux. C'était
+// la dernière clause (devenue unique, donc simple `if`) de la boucle partagée
+// d'origine sur Personnage.Equipement - **les 4 boucles de remplissage sont
+// maintenant toutes extraites.**
+Procedure PdfBlocArmuresDonnees(PdfPage: TPDFPage; Personnage: StructurePersonnage; XGauche, XDroite, Y, HauteurLigne: Single; ArmureSet: Boolean; var FabricationBonii: String; out EncArmure, ArmureBras, ArmureCorps, ArmureJambe, ArmureTete: Integer; out ArmureBonii: String; MinPolice: Integer; AsterisqueParEquipement: TStringList; out AsterisqueMutationArmure: Boolean);
+
+// Bloc DessinExplication (page 2, cadre + contenu) — dernier chantier convenu avec
+// Nono (CONTEXT.md §2.4) : le cadre légendant les bonus/malus accumulés d'Armures,
+// d'Armes et de Fabrication (qualité des objets). Contrairement aux 4 boucles de
+// remplissage, ce bloc dessine SON PROPRE cadre (comme les blocs "cadre uniquement"
+// PdfBlocArmures/etc.) et remplit son contenu dans la même procédure - il n'y a rien
+// à séparer entre cadre et données ici. `ArmureBonii`/`ArmeBonii`/`FabricationBonii`
+// sont reçus déjà construits et dédoublonnés (le dédoublonnage a lieu en amont, dans
+// PdfBlocArmuresDonnees/PdfBlocArmesDonnees/FabricationDetail - rien à refaire ici,
+// ce bloc ne fait que lire et afficher). `NbBonus` est un compteur de ligne PARTAGÉ
+// entre les trois sections (Armures puis Armes puis Fabrication) : il n'est PAS
+// réinitialisé entre les sections, contrairement à `NbSort`/`IndDivers`/etc. dans les
+// autres blocs - comportement préservé tel quel. `NbLoca`/`IndLoca`/`PArmureBonus`/
+// `PArmeBonus`/`PFabrication`/`TxtBonus` deviennent purement locaux (c'était leur
+// dernier usage dans la procédure principale) ; `LocData` reste dans le bloc `var`
+// principal car réutilisé ailleurs (bloc Métiers, plus haut dans la procédure).
+// **Incohérence pré-existante repérée, signalée à Nono, pas corrigée** : l'en-tête de
+// la section Fabrication est écrit à l'abscisse fixe 15 (`PdfPage.WriteText(15, ...)`)
+// alors que les en-têtes Armures/Armes et toutes les lignes de détail utilisent
+// `XGauche + 4` - l'en-tête Fabrication est donc décalé par rapport au reste du bloc.
+// Reproduit à l'identique (littéral 15 conservé).
+Procedure PdfBlocDessinExplication(PdfPage: TPDFPage; XGauche, XDroite, YHaut, YBas, HauteurLigne: Single; ArmureBonii, ArmeBonii, FabricationBonii: String);
+
+// Bloc Armour Points (page 2, cadre + contenu) — silhouette/valeurs de protection par
+// emplacement du corps (Tête/Bras/Corps/Jambes/Bouclier), demandée par Nono le
+// 15/08/2026 pour compléter Feldo2P (absente jusqu'ici, contrairement à l'ancienne
+// PdfPersonnageCreation - voir CONTEXT.md §2.4). Positionnée sous le bloc Encombrement.
+// Comme DessinExplication, ce bloc dessine son propre "cadre" (ici une image + des
+// petits encadrés vectoriels) et son contenu dans la même procédure. Contrairement aux
+// autres blocs, il combine une image de fond (SHADOW.png, silhouette du personnage,
+// chargée par l'appelant via PdfDoc.Images.AddFromFile car PdfDoc n'est pas accessible
+// depuis un bloc séparé - seul l'identifiant d'image `PdfImgShadow` est passé ici) et
+// des encadrés vectoriels dessinés par l'utilitaire déjà partagé `PdfEncadre`
+// (PdfUtils.pas) - un appel par emplacement, dont un avec `Bouclier = true` qui dessine
+// un losange au lieu d'un rectangle. (X, Y) est le coin bas-gauche de l'image (55x72mm,
+// taille identique à l'ancien PDF), exactement comme (135,190) l'était dans l'ancien
+// PdfPersonnageCreation - tous les décalages internes ci-dessous reproduisent à
+// l'identique les coordonnées absolues de l'ancien bloc, simplement traduites par
+// rapport à ce nouveau point d'ancrage (même tailles, mêmes écarts relatifs, validé
+// avec Nono). PdfFontBack/PdfFontValue sont des globales (ChargeConstantes.pas), pas
+// des paramètres - PdfEncadre écrit ses étiquettes avec la police d'en-tête
+// (PdfFontBack, Carlson Bold 10, comme dans l'ancien PDF) puis on repasse en
+// PdfFontValue/Arial 9 pour écrire les valeurs numériques, à l'identique de l'ancien
+// bloc.
+// AsterisqueMutation (17/08/2026, CONTEXT.md §2.7 étape 9) : une seule astérisque pour
+// tout le bloc (pas de numérotation croisée avec les autres sources, choix de Nono
+// "on va pas faire compliqué") - affichée dans le coin haut-droit du cadre dès qu'au
+// moins une des 4 cases a un bonus de mutation (peu importe laquelle).
+Procedure PdfBlocArmourPoints(PdfPage: TPDFPage; PdfImgShadow: Integer; X, Y: Single; ArmureTete, ArmureBras, ArmureCorps, ArmureJambe, ArmureBouclier: Integer; AsterisqueMutation: Boolean);
+
+// Petite table des mutations obtenues (CONTEXT.md §2.7, étape 9) - à droite du bloc Armour
+// Points, capacité fixe à NbLignes (les mutations les plus anciennes sont omises au-delà).
+// AsterisqueParMutation (Name=CodeCorruption / Value="(N)", voir PdfPersonnageMutationAsterisques)
+// affiche à côté du nom le même numéro que celui renvoyé sur la caractéristique/compétence
+// affectée, même principe que Talents/Armures.
+Function PdfBlocMutations(PdfPage: TPDFPage; Personnage: StructurePersonnage; XGauche, XDroite, Y, HauteurLigne: Single; NbLignes: Integer; MinPolice: Integer; AsterisqueParMutation: TStringList): Single;
+
 // Brique 2 (tableau de données, CONTEXT.md §2.4) — DessinerTableau est générique : elle
 // dessine le cadre et le contenu à partir de Tableau (mise en page) et Donnees (valeurs déjà
 // préparées), sans rien connaître du sens métier des champs. Elle renvoie le Y du bas du
@@ -163,7 +369,11 @@ Function DessinerTableau(PdfPage: TPDFPage; const Tableau: TPdfTableau; const Do
 // Prototype de préparation pour le tableau des Caractéristiques : transforme les données du
 // personnage (via PdfPersonnageAttribut et ListMetierAttribut) en TPdfRecordSet prêt à être
 // dessiné par DessinerTableau, sans aucun calcul de position/dessin.
-Function PdfPreparerRecordSetCaracteristiques(Personnage: StructurePersonnage; PMetier: StructureMetier): TPdfRecordSet;
+// AnnotationMutation (ajouté le 17/08/2026, CONTEXT.md §2.7 étape 9) : Name=CodeAttribut /
+// Value=" (N)" à concaténer à l'annotation existante (même mécanisme que AnnotationArmure
+// pour les compétences, voir PdfPreparerRecordSetCompetencesBase) - calculée par
+// PdfPersonnageMutationAsterisques.
+Function PdfPreparerRecordSetCaracteristiques(Personnage: StructurePersonnage; PMetier: StructureMetier; AnnotationMutation: TStringList): TPdfRecordSet;
 
 // Prépare le tableau des compétences de base (première grille de la page, celle qui liste
 // ListPage). Renvoie aussi, en paramètres out, les totaux de 5 compétences (Esquive, Calme,
@@ -171,7 +381,7 @@ Function PdfPreparerRecordSetCaracteristiques(Personnage: StructurePersonnage; P
 // pour un autre encart, et ListPris (la liste des codes de compétences déjà affichées, pour
 // que le tableau des compétences groupées ne les propose pas une deuxième fois) — c'est le
 // même calcul que faisait l'ancien code, juste extrait ici.
-Function PdfPreparerRecordSetCompetencesBase(Personnage: StructurePersonnage; PMetier: StructureMetier; ListPage: TStringList; out TotalEsquive, TotalCalme, TotalResitance, TotalCommandement, TotalIntuition: Integer; out ListPris: String): TPdfRecordSet;
+Function PdfPreparerRecordSetCompetencesBase(Personnage: StructurePersonnage; PMetier: StructureMetier; ListPage: TStringList; AnnotationArmure: TStringList; out TotalEsquive, TotalCalme, TotalResitance, TotalCommandement, TotalIntuition: Integer; out ListPris: String): TPdfRecordSet;
 
 // Prépare le tableau des compétences groupées (deuxième grille) : d'abord les compétences de
 // ListCompetence déjà augmentées et pas déjà affichées dans le tableau de base (ListPris),
@@ -181,7 +391,7 @@ Function PdfPreparerRecordSetCompetencesBase(Personnage: StructurePersonnage; PM
 // Note : corrige un bug de l'ancien code, qui utilisait par erreur une variable non
 // réassignée (`Comp`, reliquat du tableau précédent) pour l'astérisque de bonus — remplacé
 // ici par le code de la compétence réellement affichée sur la ligne (validé avec Nono).
-Function PdfPreparerRecordSetCompetencesGroupees(Personnage: StructurePersonnage; ListPris: String; CapaciteMax: Integer): TPdfRecordSet;
+Function PdfPreparerRecordSetCompetencesGroupees(Personnage: StructurePersonnage; ListPris: String; CapaciteMax: Integer; AnnotationArmure: TStringList): TPdfRecordSet;
 
 implementation
 
@@ -359,7 +569,16 @@ Function PdfPersonnageCompetence(Personnage: StructurePersonnage; Competence: St
           NivMetier := PersonnageCompetence.Valeur;
           break;
         end;
+
     Res.Total := Res.Base + Res.Augmentation;
+
+    // Effets à delta pur des mutations obtenues sur une compétence (CONTEXT.md §2.7, étape 8,
+    // ex. "+10 Track") - uniquement sur le Total, jamais sur Res.Augmentation : cette valeur
+    // correspond aux avancements réellement achetés (colonne "Adv" du PDF) et sert aussi à
+    // calculer combien de compétences ont été augmentées - y mêler un effet de mutation (qui
+    // n'est pas un avancement acheté) fausserait ce calcul. Signalé par Nono le 17/08/2026.
+    Res.Total := Res.Total + PersonnageMutationCompetenceModif(Personnage, Competence);
+
     Result := res;
   end;
 
@@ -438,8 +657,49 @@ Function PdfPersonnageAttribut(Personnage: StructurePersonnage; Attribut: String
       if CompareRechercheValeur(Attribut, PersonnageAttribut.CodeAttribut) then
         Res.Augmentation := Res.Augmentation + PersonnageAttribut.Valeur;
 
+    // Effets à delta pur des mutations obtenues (CONTEXT.md §2.7, étape 8) - même bucket que les
+    // talents (Res.Base), vrai modificateur additionné au Total (pas juste une annotation).
+    Res.Base := Res.Base + PersonnageMutationAttributModif(Personnage, Attribut);
+
     Res.Total := Res.Base + Res.Augmentation;
     Result := res;
+  end;
+
+Function PersonnageCorruptionTotal(Personnage: StructurePersonnage): Integer;
+  var
+    Bonus:            String;
+    BE:               Integer;
+    BFM:              Integer;
+    AmePure:          Integer;
+    AttributDonnee:   StructureDonnee;
+    PersonnageTalent: StructurePersonnageTalent;
+    PAttribut:        StructureAttribut;
+  begin
+    // PdfPersonnageAttribut compare en interne le code d'attribut passé en argument à
+    // PTalent.Attribut (liste ';' de codes AVEC préfixe livre, ex. "RULES-ATTR_WP") via une
+    // simple égalité de chaîne (pas CompareRechercheValeur) - il faut donc lui donner un code
+    // complet avec préfixe, pas la constante nue ConstCaracE/ConstCaracFM ('ATTR_T'/'ATTR_WP'),
+    // sinon les bonus d'attribut donnés par certains talents sont silencieusement ignorés (bug
+    // trouvé le 16/08/2026 : WinPersonnage affichait 7 alors que le PDF, qui utilise
+    // PAttribut.CodeAttribut complet via ListeAttribut, affichait 8). ChercheAttribut fait le
+    // même travail que ChercheRaceAttribut/CompareRechercheValeur pour retrouver le code complet
+    // à partir du code nu.
+    PAttribut      := ChercheAttribut(ConstCaracE);
+    AttributDonnee := PdfPersonnageAttribut(Personnage, PAttribut.CodeAttribut, Bonus);
+    BE             := AttributDonnee.Total;
+    PAttribut      := ChercheAttribut(ConstCaracFM);
+    AttributDonnee := PdfPersonnageAttribut(Personnage, PAttribut.CodeAttribut, Bonus);
+    BFM            := AttributDonnee.Total;
+
+    AmePure := 0;
+    for PersonnageTalent in Personnage.CreationTalent do
+      if ExtractStringAfter(PersonnageTalent.CodeTalent, SeparateurLivre) = TalentAmePure then
+        AmePure := PersonnageTalent.Valeur;
+    for PersonnageTalent in Personnage.AugmentationTalent do
+      if ExtractStringAfter(PersonnageTalent.CodeTalent, SeparateurLivre) = TalentAmePure then
+        AmePure := PersonnageTalent.Valeur;
+
+    Result := Floor(BE/10) + Floor(BFM/10) + AmePure;
   end;
 
 Procedure PdfPersonnageCreation(Personnage: StructurePersonnage; BackGround: Boolean; DessineTexteLigne: Boolean = True);
@@ -496,6 +756,7 @@ Procedure PdfPersonnageCreation(Personnage: StructurePersonnage; BackGround: Boo
     ArmureBonii:     String = '';
     FabricationBonii:String = '';
     PArmureBonus:    StructureArmureBonus;
+    PArmureBonusModif: StructureArmureBonusModif;
     PArmeBonus:      StructureArmeBonus;
     NbBonus:         Integer;
     TxtBonus:        String;
@@ -790,6 +1051,10 @@ Procedure PdfPersonnageCreation(Personnage: StructurePersonnage; BackGround: Boo
     PMetierNiveau  := ChercheMetierNiveau(Personnage.MetierEnCours.CodeMetier, Personnage.MetierEnCours.NiveauMetier);
     PRaceAttribut  := ChercheRaceAttribut(Personnage.Race, ConstCaracMouvement);
     Mouv           := StrToInt(PRaceAttribut.CalculRace);
+    // Effets à delta pur des mutations obtenues sur le Mouvement (CONTEXT.md §2.7, étape 8)
+    // - même fonction que pour les autres attributs, ConstCaracMouvement ('ATTR_Move') utilisé
+    // comme un code d'attribut de plus.
+    Mouv           := Mouv + PersonnageMutationAttributModif(Personnage, ConstCaracMouvement);
 
     Chance         := 0;
     Determine      := 0;
@@ -1435,6 +1700,13 @@ Procedure PdfPersonnageCreation(Personnage: StructurePersonnage; BackGround: Boo
             end;
       end;
 
+    // Effets de mutation sur les Points d'Armure (CORPHY_012/016/017, CONTEXT.md §2.7,
+    // étape 8) - ajoutés après le calcul de l'équipement, ne concernent que le PDF
+    ArmureTete  := ArmureTete  + PersonnageMutationArmureModif(Personnage, BonusTete);
+    ArmureBras  := ArmureBras  + PersonnageMutationArmureModif(Personnage, BonusBras);
+    ArmureCorps := ArmureCorps + PersonnageMutationArmureModif(Personnage, BonusCorps);
+    ArmureJambe := ArmureJambe + PersonnageMutationArmureModif(Personnage, BonusJambes);
+
     // Écrire du texte sur la page PDF
     PdfTaillePolice(PdfPage, PdfFontValue, ConstPoliceArial, 6);
 
@@ -1448,6 +1720,18 @@ Procedure PdfPersonnageCreation(Personnage: StructurePersonnage; BackGround: Boo
             LocData      := ExtractChaine(',',ArmureBonii,IndLoca);
             PArmureBonus := ChercheArmureBonus(LocData);
             TxtBonus     := PArmureBonus.Libelle+':'+PArmureBonus.Malus;
+            if PArmureBonus.Malus = '' then
+              // Modifier structuré (attribut name="CodeCompetence", 15/08/2026) : plus de
+              // texte libre dans .Malus pour ces entrées, on reconstruit un texte lisible
+              // à partir de ListArmureBonusModif (même principe que WinArmor/Feldo2P)
+              for PArmureBonusModif in ListArmureBonusModif do
+                if CompareRechercheValeur(PArmureBonusModif.CodeArmureBonus, PArmureBonus.CodeArmureBonus) then
+                  begin
+                    if TxtBonus <> PArmureBonus.Libelle+':' then
+                      TxtBonus := TxtBonus + ', ';
+                    TxtBonus := TxtBonus + ChercheCompetence(PArmureBonusModif.CodeCompetence).Libelle
+                                          + ' ' + IntToStr(PArmureBonusModif.Valeur) + '%';
+                  end;
             PdfPage.WriteText(15,133+(NbBonus*2), TxtBonus);
           end;
         Inc(NbBonus);
@@ -1570,6 +1854,142 @@ begin
   Result := Bonus;
 end;
 
+Function PdfPersonnageArmureAsterisques(Personnage: StructurePersonnage; AsterisqueDepart: Integer; out AsterisqueParEquipement: TStringList): TStringList;
+  var
+    PersonnageEquipement: StructurePersonnageEquipement;
+    PArmure:              StructureArmure;
+    PArmureSimplifiee:    StructureArmureSimplifiee;
+    PArmureBonusModif:    StructureArmureBonusModif;
+    ListeBonus:           String;
+    NbLoca, IndLoca:       Integer;
+    LocData:               String;
+    AsterisqueCourant:      Integer;
+    AsterisquePiece:        Integer;
+  begin
+    Result                   := TStringList.Create;
+    AsterisqueParEquipement  := TStringList.Create;
+    AsterisqueCourant        := AsterisqueDepart;
+
+    for PersonnageEquipement in Personnage.Equipement do
+      if (PersonnageEquipement.TypeEquipement = TypeEquipAR) or (PersonnageEquipement.TypeEquipement = TypeEquipARS) then
+        begin
+          if PersonnageEquipement.TypeEquipement = TypeEquipAR then
+            begin
+              PArmure    := ChercheArmure(PersonnageEquipement.CodeEquipement);
+              ListeBonus := PArmure.ListeBonus;
+            end
+          else
+            begin
+              PArmureSimplifiee := ChercheArmureSimplifiee(PersonnageEquipement.CodeEquipement);
+              ListeBonus         := PArmureSimplifiee.ListeBonus;
+            end;
+
+          if (ListeBonus <> '') and (ListeBonus <> '-') then
+            begin
+              NbLoca          := CountOccurrences(ListeBonus, ',') + 1;
+              AsterisquePiece := 0; // une seule astérisque par pièce, partagée par toutes les compétences qu'elle touche
+              for IndLoca := 1 to NbLoca do
+                begin
+                  LocData := ExtractChaine(',', ListeBonus, IndLoca);
+                  if pos(' ', LocData) <> 0 then
+                    LocData := copy(LocData, 1, Length(LocData)-2);
+                  for PArmureBonusModif in ListArmureBonusModif do
+                    if CompareRechercheValeur(PArmureBonusModif.CodeArmureBonus, LocData) then
+                      begin
+                        if AsterisquePiece = 0 then
+                          begin
+                            Inc(AsterisqueCourant);
+                            AsterisquePiece := AsterisqueCourant;
+                            // même format court que les talents ("(3)") - retour de Nono le
+                            // 16/08/2026, à côté de la pièce elle-même
+                            AsterisqueParEquipement.Values[PersonnageEquipement.CodeEquipement] := '(' + IntToStr(AsterisquePiece) + ')';
+                          end;
+                        // "(5) -10%" à côté de la compétence (idée d'origine de Nono) - la
+                        // colonne d'annotation a été élargie le 16/08/2026 (DessinerTableau,
+                        // orLigne) pour que ça tienne sur une seule ligne sans wrap PdfEcrit
+                        Result.Values[PArmureBonusModif.CodeCompetence] := Result.Values[PArmureBonusModif.CodeCompetence]
+                          + ' (' + IntToStr(AsterisquePiece) + ') ' + IntToStr(PArmureBonusModif.Valeur) + '%';
+                      end;
+                end;
+            end;
+        end;
+  end;
+
+Function PdfPersonnageMutationAsterisques(Personnage: StructurePersonnage; AsterisqueDepart: Integer; out AsterisqueParMutation: TStringList; out AsterisqueFinal: Integer): TStringList;
+  var
+    PersonnageMutation:                 StructurePersonnageMutation;
+    PCorruptionAttributModif:           StructureCorruptionAttributModif;
+    PCorruptionCompetenceModif:         StructureCorruptionCompetenceModif;
+    PCorruptionCompetenceAttributModif: StructureCorruptionCompetenceAttributModif;
+    PCompetence:                        StructureCompetence;
+    AsterisqueCourant:                  Integer;
+    AsterisqueMutation:                 Integer;
+    IndCompetence:                      Integer;
+  begin
+    Result                 := TStringList.Create;
+    AsterisqueParMutation  := TStringList.Create;
+    AsterisqueCourant      := AsterisqueDepart;
+
+    for PersonnageMutation in Personnage.Mutations do
+      begin
+        AsterisqueMutation := 0; // une seule astérisque par mutation, partagée par tous les codes qu'elle touche
+        for PCorruptionAttributModif in ListCorruptionAttributModif do
+          if CompareRechercheValeur(PCorruptionAttributModif.CodeCorruption, PersonnageMutation.Code) then
+            begin
+              if AsterisqueMutation = 0 then
+                begin
+                  Inc(AsterisqueCourant);
+                  AsterisqueMutation := AsterisqueCourant;
+                  AsterisqueParMutation.Values[PersonnageMutation.Code] := '(' + IntToStr(AsterisqueMutation) + ')';
+                end;
+              // même format que les talents (ListTalentAttributModif) : la valeur signée
+              // suivie du numéro d'astérisque, ex. "+10 (3)".
+              if PCorruptionAttributModif.Valeur >= 0 then
+                Result.Values[PCorruptionAttributModif.CodeAttribut] := Result.Values[PCorruptionAttributModif.CodeAttribut]
+                  + ' +' + IntToStr(PCorruptionAttributModif.Valeur) + ' (' + IntToStr(AsterisqueMutation) + ')'
+              else
+                Result.Values[PCorruptionAttributModif.CodeAttribut] := Result.Values[PCorruptionAttributModif.CodeAttribut]
+                  + ' ' + IntToStr(PCorruptionAttributModif.Valeur) + ' (' + IntToStr(AsterisqueMutation) + ')';
+            end;
+        for PCorruptionCompetenceModif in ListCorruptionCompetenceModif do
+          if CompareRechercheValeur(PCorruptionCompetenceModif.CodeCorruption, PersonnageMutation.Code) then
+            begin
+              if AsterisqueMutation = 0 then
+                begin
+                  Inc(AsterisqueCourant);
+                  AsterisqueMutation := AsterisqueCourant;
+                  AsterisqueParMutation.Values[PersonnageMutation.Code] := '(' + IntToStr(AsterisqueMutation) + ')';
+                end;
+              // même format que les armures (ListArmureBonusModif) : "(N) valeur%".
+              Result.Values[PCorruptionCompetenceModif.CodeCompetence] := Result.Values[PCorruptionCompetenceModif.CodeCompetence]
+                + ' (' + IntToStr(AsterisqueMutation) + ') ' + IntToStr(PCorruptionCompetenceModif.Valeur) + '%';
+            end;
+        // Effets visant toutes les compétences d'un attribut de rattachement (ex. "-20 to all
+        // Fellowship Tests", CORPHY_011, <ModifySkillAttribut>) - pas de code de compétence
+        // unique ici, donc on parcourt le catalogue complet pour annoter chaque compétence
+        // dont l'attribut correspond (même format "(N) valeur%" que ci-dessus).
+        for PCorruptionCompetenceAttributModif in ListCorruptionCompetenceAttributModif do
+          if CompareRechercheValeur(PCorruptionCompetenceAttributModif.CodeCorruption, PersonnageMutation.Code) then
+            for IndCompetence := 0 to ListCompetence.Count - 1 do
+              begin
+                PCompetence := ListCompetence[IndCompetence];
+                if CompareRechercheValeur(PCompetence.CodeAttribut, PCorruptionCompetenceAttributModif.CodeAttribut) then
+                  begin
+                    if AsterisqueMutation = 0 then
+                      begin
+                        Inc(AsterisqueCourant);
+                        AsterisqueMutation := AsterisqueCourant;
+                        AsterisqueParMutation.Values[PersonnageMutation.Code] := '(' + IntToStr(AsterisqueMutation) + ')';
+                      end;
+                    Result.Values[PCompetence.CodeCompetence] := Result.Values[PCompetence.CodeCompetence]
+                      + ' (' + IntToStr(AsterisqueMutation) + ') ' + IntToStr(PCorruptionCompetenceAttributModif.Valeur) + '%';
+                  end;
+              end;
+      end;
+
+    AsterisqueFinal := AsterisqueCourant;
+  end;
+
 // Dessine le cadre partagé Résilience/Destin (4 lignes de haut, de X à X+78) et le contenu
 // du côté Résilience (colonnes X à X+40). Dans le gabarit Feldo2P, Résilience et Destin
 // occupent physiquement UNE SEULE boîte, avec des séparateurs internes de hauteurs
@@ -1596,26 +2016,28 @@ Procedure PdfBlocResilience(PdfPage: TPDFPage; Personnage: StructurePersonnage; 
     AttributDonnee: StructureDonnee;
   begin
     // Dessin (cadre partagé Résilience + Destin)
+    // Géométrie resserrée le 16/08/2026 (78mm -> 53mm) pour laisser Mouvement sur la même
+    // rangée (CONTEXT.md §2.6) - anciens repères 29.9/40/69/78 devenus 20/27/46/53.
     PdfPage.DrawLine( X,      Y,                    X,      Y - (NbLignes * HauteurLigne), 1);
-    PdfPage.DrawLine( X+29.9, Y - HauteurLigne,      X+29.9, Y - (NbLignes * HauteurLigne), 1);
-    PdfPage.DrawLine( X+40,   Y,                     X+40,   Y - ((NbLignes-1) * HauteurLigne), 1);
-    PdfPage.DrawLine( X+69,   Y - HauteurLigne,      X+69,   Y - ((NbLignes-1) * HauteurLigne), 1);
-    PdfPage.DrawLine( X+78,   Y,                     X+78,   Y - (NbLignes * HauteurLigne), 1);
+    PdfPage.DrawLine( X+20,   Y - HauteurLigne,      X+20,   Y - (NbLignes * HauteurLigne), 1);
+    PdfPage.DrawLine( X+27,   Y,                     X+27,   Y - ((NbLignes-1) * HauteurLigne), 1);
+    PdfPage.DrawLine( X+46,   Y - HauteurLigne,      X+46,   Y - ((NbLignes-1) * HauteurLigne), 1);
+    PdfPage.DrawLine( X+53,   Y,                     X+53,   Y - (NbLignes * HauteurLigne), 1);
     for IndC := 0 to NbLignes do
-      PdfPage.DrawLine(X, Y - (IndC * HauteurLigne), X+78, Y - (IndC * HauteurLigne), 1);
+      PdfPage.DrawLine(X, Y - (IndC * HauteurLigne), X+53, Y - (IndC * HauteurLigne), 1);
 
     // Texte Résilience
     PdfTaillePolice(PdfPage, PdfFontBack, ConstPoliceCarlson+ConstPoliceGras, 10);
-    PdfCentre(PdfPage, X+2, X+42, Y - (1 * HauteurLigne) + 1, GetTexteLibelle('PDF_RESIL1_RESILIENCE'));
-    PdfEcrit (PdfPage, X+2, X+42, Y - (2 * HauteurLigne) + 1, GetTexteLibelle('PDF_RESIL2A_RESILIENCE'), MinPolice);
-    PdfEcrit (PdfPage, X+2, X+42, Y - (3 * HauteurLigne) + 1, GetTexteLibelle('PDF_RESIL2B_RESOLVE'),    MinPolice);
-    PdfEcrit (PdfPage, X+2, X+49, Y - (NbLignes * HauteurLigne) + 1, GetTexteLibelle('PDF_RESIL2C_MOTIVATION'), MinPolice);
+    PdfCentre(PdfPage, X+2, X+25, Y - (1 * HauteurLigne) + 1, GetTexteLibelle('PDF_RESIL1_RESILIENCE'));
+    PdfEcrit (PdfPage, X+2, X+18, Y - (2 * HauteurLigne) + 1, GetTexteLibelle('PDF_RESIL2A_RESILIENCE'), MinPolice);
+    PdfEcrit (PdfPage, X+2, X+18, Y - (3 * HauteurLigne) + 1, GetTexteLibelle('PDF_RESIL2B_RESOLVE'),    MinPolice);
+    PdfEcrit (PdfPage, X+2, X+50, Y - (NbLignes * HauteurLigne) + 1, GetTexteLibelle('PDF_RESIL2C_MOTIVATION'), MinPolice);
 
     // Valeur Résilience
     PdfTaillePolice(PdfPage, PdfFontValue, ConstPoliceArial, 9);
     AttributDonnee := PdfPersonnageAttribut(Personnage, ConstCaracResil, Bonus);
-    PdfCentre(PdfPage, X+30, X+40, Y - (2 * HauteurLigne) + 1, IntToStr(AttributDonnee.Total));   // Résilience
-    PdfCentre(PdfPage, X+30, X+40, Y - (3 * HauteurLigne) + 1, IntToStr(Determine));              // Détermination
+    PdfCentre(PdfPage, X+20, X+27, Y - (2 * HauteurLigne) + 1, IntToStr(AttributDonnee.Total));   // Résilience
+    PdfCentre(PdfPage, X+20, X+27, Y - (3 * HauteurLigne) + 1, IntToStr(Determine));              // Détermination
 
     NbLignesPourSuite := NbLignes + 1;
   end;
@@ -1631,16 +2053,18 @@ Procedure PdfBlocDestin(PdfPage: TPDFPage; Personnage: StructurePersonnage; XGau
     AttributDonnee: StructureDonnee;
   begin
     // Texte Destin
+    // Géométrie resserrée le 16/08/2026 (38mm -> 26mm relatifs à XGauche), même chantier que
+    // PdfBlocResilience (CONTEXT.md §2.6) - anciens repères 29/38 devenus 17/24.
     PdfTaillePolice(PdfPage, PdfFontBack, ConstPoliceCarlson+ConstPoliceGras, 10);
-    PdfCentre(PdfPage, XGauche+2,  XGauche+38, Y - (1 * HauteurLigne) + 1, GetTexteLibelle('PDF_FATE1_FATE'));
-    PdfEcrit (PdfPage, XGauche+2,  XGauche+29, Y - (2 * HauteurLigne) + 1, GetTexteLibelle('PDF_FATE2_FATE'),    MinPolice);
-    PdfEcrit (PdfPage, XGauche+2,  XGauche+29, Y - (3 * HauteurLigne) + 1, GetTexteLibelle('PDF_FATE3_FORTUNE'), MinPolice);
+    PdfCentre(PdfPage, XGauche+2,  XGauche+24, Y - (1 * HauteurLigne) + 1, GetTexteLibelle('PDF_FATE1_FATE'));
+    PdfEcrit (PdfPage, XGauche+2,  XGauche+17, Y - (2 * HauteurLigne) + 1, GetTexteLibelle('PDF_FATE2_FATE'),    MinPolice);
+    PdfEcrit (PdfPage, XGauche+2,  XGauche+17, Y - (3 * HauteurLigne) + 1, GetTexteLibelle('PDF_FATE3_FORTUNE'), MinPolice);
 
     // Valeur Destin
     PdfTaillePolice(PdfPage, PdfFontValue, ConstPoliceArial, 9);
     AttributDonnee := PdfPersonnageAttribut(Personnage, ConstCaracDestin, Bonus);
-    PdfCentre(PdfPage, XGauche+29, XGauche+38, Y - (2 * HauteurLigne) + 1, IntToStr(AttributDonnee.Total));  // Destin
-    PdfCentre(PdfPage, XGauche+29, XGauche+38, Y - (3 * HauteurLigne) + 1, IntToStr(Chance));                // Chance
+    PdfCentre(PdfPage, XGauche+17, XGauche+24, Y - (2 * HauteurLigne) + 1, IntToStr(AttributDonnee.Total));  // Destin
+    PdfCentre(PdfPage, XGauche+17, XGauche+24, Y - (3 * HauteurLigne) + 1, IntToStr(Chance));                // Chance
   end;
 
 // Dessine le panneau Entête (extrait de PdfPersonnageCreationFeldo2P, CONTEXT.md §2.4).
@@ -1720,6 +2144,928 @@ Function PdfBlocAmbitions(PdfPage: TPDFPage; XGauche, XDroite, Y, HauteurLigne: 
     Result := Y - (NbLignes * HauteurLigne);
   end;
 
+// Dessine le panneau Expérience (titre + Total/Utilisé/Restant). Extrait de
+// PdfPersonnageCreationFeldo2P, CONTEXT.md §2.4.
+Function PdfBlocExperience(PdfPage: TPDFPage; Personnage: StructurePersonnage; XGauche, XDroite, Y, HauteurLigne: Single; NbLignes: Integer; MinPolice: Integer): Single;
+  var
+    IndC: Integer;
+  begin
+    // Dessin cadre
+    PdfPage.DrawLine(XGauche,      Y,                 XGauche,      Y - (NbLignes * HauteurLigne), 1);
+    PdfPage.DrawLine(XGauche + 15, Y - HauteurLigne,   XGauche + 15, Y - (NbLignes * HauteurLigne), 1);
+    PdfPage.DrawLine(XDroite,      Y,                 XDroite,      Y - (NbLignes * HauteurLigne), 1);
+    for IndC := 0 to NbLignes do
+      PdfPage.DrawLine(XGauche, Y - (IndC * HauteurLigne), XDroite, Y - (IndC * HauteurLigne), 1);
+
+    // Texte Expérience
+    PdfTaillePolice(PdfPage, PdfFontBack, ConstPoliceCarlson+ConstPoliceGras, 10);
+    PdfCentre(PdfPage, XGauche + 1, XDroite,      Y - ((NbLignes - 3) * HauteurLigne) + 0.6, GetTexteLibelle('PDF_XP1_EXPERIENCE'));
+    PdfEcrit (PdfPage, XGauche + 1, XGauche + 15, Y - ((NbLignes - 2) * HauteurLigne) + 0.6, GetTexteLibelle('PDF_XP2C_TOTAL')  , MinPolice);
+    PdfEcrit (PdfPage, XGauche + 1, XGauche + 15, Y - ((NbLignes - 1) * HauteurLigne) + 0.6, GetTexteLibelle('PDF_XP2B_SPENT') , MinPolice);
+    PdfEcrit (PdfPage, XGauche + 1, XGauche + 15, Y - ( NbLignes      * HauteurLigne) + 0.6, GetTexteLibelle('PDF_XP2A_CURRENT'), MinPolice);
+
+    // Valeur Expérience
+    PdfTaillePolice(PdfPage, PdfFontValue, ConstPoliceArial, 9);
+    PdfCentre(PdfPage, XGauche + 15, XDroite, Y - ((NbLignes - 2) * HauteurLigne) + 0.6, IntToStr(Trunc(Personnage.Xp25Total)));                       // Total Xp
+    PdfCentre(PdfPage, XGauche + 15, XDroite, Y - ((NbLignes - 1) * HauteurLigne) + 0.6, IntToStr(Trunc(Personnage.Xp25Total - Personnage.XpActuel))); // Utilisé
+    PdfCentre(PdfPage, XGauche + 15, XDroite, Y - ( NbLignes      * HauteurLigne) + 0.6, IntToStr(Trunc(Personnage.XpActuel)));                        // Restant
+
+    Result := Y - (NbLignes * HauteurLigne);
+  end;
+
+// Dessine le panneau Mouvement (titre + Mouvement/Marche/Course). Extrait de
+// PdfPersonnageCreationFeldo2P, CONTEXT.md §2.4.
+Function PdfBlocMouvement(PdfPage: TPDFPage; XGauche, XDroite, Y, HauteurLigne: Single; NbLignes: Integer; MinPolice: Integer; Mouv, BonusSprint: Integer): Single;
+  var
+    IndC: Integer;
+  begin
+    // Dessin cadre
+    PdfPage.DrawLine(XGauche,      Y,                 XGauche,      Y - (NbLignes * HauteurLigne), 1);
+    PdfPage.DrawLine(XGauche + 15, Y - HauteurLigne,   XGauche + 15, Y - (NbLignes * HauteurLigne), 1);
+    PdfPage.DrawLine(XDroite,      Y,                 XDroite,      Y - (NbLignes * HauteurLigne), 1);
+    for IndC := 0 to NbLignes do
+      PdfPage.DrawLine(XGauche, Y - (IndC * HauteurLigne), XDroite, Y - (IndC * HauteurLigne), 1);
+
+    // Texte Mouvement
+    PdfTaillePolice(PdfPage, PdfFontBack, ConstPoliceCarlson+ConstPoliceGras, 10);
+    PdfCentre(PdfPage, XGauche + 1, XDroite,      Y - ((NbLignes - 3) * HauteurLigne) + 0.6, GetTexteLibelle('PDF_MV1_MOVEMENT'));
+    PdfEcrit (PdfPage, XGauche + 1, XGauche + 15, Y - ((NbLignes - 2) * HauteurLigne) + 0.6, GetTexteLibelle('PDF_MV2A_MOVEMENT'), MinPolice);
+    PdfEcrit (PdfPage, XGauche + 1, XGauche + 15, Y - ((NbLignes - 1) * HauteurLigne) + 0.6, GetTexteLibelle('PDF_MV2B_WALK')    , MinPolice);
+    PdfEcrit (PdfPage, XGauche + 1, XGauche + 15, Y - ( NbLignes      * HauteurLigne) + 0.6, GetTexteLibelle('PDF_MV2C_RUN')     , MinPolice);
+
+    // Valeur Mouvement
+    PdfTaillePolice(PdfPage, PdfFontValue, ConstPoliceArial, 9);
+    PdfCentre(PdfPage, XGauche + 15, XDroite, Y - ((NbLignes - 2) * HauteurLigne) + 0.6, IntToStr(Mouv));
+    PdfCentre(PdfPage, XGauche + 15, XDroite, Y - ((NbLignes - 1) * HauteurLigne) + 0.6, IntToStr(Mouv * 2));
+    PdfCentre(PdfPage, XGauche + 15, XDroite, Y - ( NbLignes      * HauteurLigne) + 0.6, IntToStr((Mouv + BonusSprint) * 4));
+
+    Result := Y - (NbLignes * HauteurLigne);
+  end;
+
+// Dessine le panneau Corruption (titre + Tolérance/Volonté/Bonus/Total). Extrait de
+// PdfPersonnageCreationFeldo2P, CONTEXT.md §2.4.
+Function PdfBlocCorruption(PdfPage: TPDFPage; XGauche, XDroite, Y, HauteurLigne: Single; NbLignes: Integer; MinPolice: Integer; BE, BFM, AmePure, Lost: Integer): Single;
+  var
+    IndC:  Integer;
+    Total: Integer;
+  begin
+    // Dessin cadre
+    PdfPage.DrawLine(XGauche,      Y,                 XGauche,      Y - (NbLignes * HauteurLigne), 1);
+    PdfPage.DrawLine(XGauche + 15, Y - HauteurLigne,   XGauche + 15, Y - (NbLignes * HauteurLigne), 1);
+    PdfPage.DrawLine(XDroite,      Y,                 XDroite,      Y - (NbLignes * HauteurLigne), 1);
+    for IndC := 0 to NbLignes do
+      PdfPage.DrawLine(XGauche, Y - (IndC * HauteurLigne), XDroite, Y - (IndC * HauteurLigne), 1);
+
+    Total := Floor(BE/10) + Floor(BFM/10) + AmePure;
+
+    // Texte Corruption
+    // Lignes Lost/Left ajoutées le 16/08/2026 (historique de corruption, CONTEXT.md §2.6) :
+    // Lost = somme des montants de Personnage.Corruption, Left = Total - Lost.
+    PdfTaillePolice(PdfPage, PdfFontBack, ConstPoliceCarlson+ConstPoliceGras, 10);
+    PdfCentre(PdfPage, XGauche + 1, XDroite,      Y - ((NbLignes - 6) * HauteurLigne) + 0.6, GetTexteLibelle('PDF_CORRUPTION_TITLE'));
+    PdfEcrit (PdfPage, XGauche + 1, XGauche + 15, Y - ((NbLignes - 5) * HauteurLigne) + 0.6, GetTexteLibelle('PDF_CORRUPTION_T')    , MinPolice);
+    PdfEcrit (PdfPage, XGauche + 1, XGauche + 15, Y - ((NbLignes - 4) * HauteurLigne) + 0.6, GetTexteLibelle('PDF_CORRUPTION_WP')   , MinPolice);
+    PdfEcrit (PdfPage, XGauche + 1, XGauche + 15, Y - ((NbLignes - 3) * HauteurLigne) + 0.6, GetTexteLibelle('PDF_CORRUPTION_BONUS'), MinPolice);
+    PdfEcrit (PdfPage, XGauche + 1, XGauche + 15, Y - ((NbLignes - 2) * HauteurLigne) + 0.6, GetTexteLibelle('PDF_CORRUPTION_TOTAL'), MinPolice);
+    PdfEcrit (PdfPage, XGauche + 1, XGauche + 15, Y - ((NbLignes - 1) * HauteurLigne) + 0.6, GetTexteLibelle('PDF_CORRUPTION_LOST') , MinPolice);
+    PdfEcrit (PdfPage, XGauche + 1, XGauche + 15, Y - ( NbLignes      * HauteurLigne) + 0.6, GetTexteLibelle('PDF_CORRUPTION_LEFT') , MinPolice);
+
+    // Valeur Corruption
+    PdfTaillePolice(PdfPage, PdfFontValue, ConstPoliceArial, 9);
+    PdfCentre(PdfPage, XGauche + 15, XDroite, Y - ((NbLignes - 5) * HauteurLigne) + 0.6, IntToStr(Floor(BE/10)));
+    PdfCentre(PdfPage, XGauche + 15, XDroite, Y - ((NbLignes - 4) * HauteurLigne) + 0.6, IntToStr(Floor(BFM/10)));
+    PdfCentre(PdfPage, XGauche + 15, XDroite, Y - ((NbLignes - 3) * HauteurLigne) + 0.6, IntToStr(AmePure));
+    PdfCentre(PdfPage, XGauche + 15, XDroite, Y - ((NbLignes - 2) * HauteurLigne) + 0.6, IntToStr(Total));
+    PdfCentre(PdfPage, XGauche + 15, XDroite, Y - ((NbLignes - 1) * HauteurLigne) + 0.6, IntToStr(Lost));
+    PdfCentre(PdfPage, XGauche + 15, XDroite, Y - ( NbLignes      * HauteurLigne) + 0.6, IntToStr(Total - Lost));
+
+    Result := Y - (NbLignes * HauteurLigne);
+  end;
+
+// Dessine le tableau détaillé de l'historique de corruption (titre + en-têtes Amount/
+// Reason + une ligne par entrée, la plus récente en haut). Extrait dans
+// PdfPersonnageCreationFeldo2P, CONTEXT.md §2.6.
+Function PdfBlocCorruptionDetail(PdfPage: TPDFPage; Personnage: StructurePersonnage; XGauche, XDroite, Y, HauteurLigne: Single; NbLignes: Integer; MinPolice: Integer): Single;
+  var
+    IndC:      Integer;
+    IndLigne:  Integer;
+    IndTab:    Integer;
+    Montant:   String;
+  begin
+    // Dessin cadre
+    PdfPage.DrawLine(XGauche,     Y,                      XGauche,     Y - (NbLignes * HauteurLigne), 1);
+    PdfPage.DrawLine(XGauche + 12, Y - (2 * HauteurLigne),  XGauche + 12, Y - (NbLignes * HauteurLigne), 1);
+    PdfPage.DrawLine(XDroite,     Y,                       XDroite,     Y - (NbLignes * HauteurLigne), 1);
+    for IndC := 0 to NbLignes do
+      PdfPage.DrawLine(XGauche, Y - (IndC * HauteurLigne), XDroite, Y - (IndC * HauteurLigne), 1);
+
+    // Titre + en-têtes de colonnes
+    PdfTaillePolice(PdfPage, PdfFontBack, ConstPoliceCarlson+ConstPoliceGras, 10);
+    PdfCentre(PdfPage, XGauche + 1, XDroite,      Y - HauteurLigne + 0.6,             GetTexteLibelle('PDF_CORRUPTION_HISTORY'));
+    PdfEcrit (PdfPage, XGauche + 1, XGauche + 12,  Y - (2 * HauteurLigne) + 0.6, GetTexteLibelle('LAB_162'), MinPolice); // Amount
+    PdfEcrit (PdfPage, XGauche + 13, XDroite,      Y - (2 * HauteurLigne) + 0.6, GetTexteLibelle('LAB_163'), MinPolice); // Reason
+
+    // Lignes de données : la plus récente (fin du tableau) en haut ; au-delà de la
+    // capacité du cadre (NbLignes - 2 lignes de données), les plus anciennes sont
+    // silencieusement omises (même limite que PdfBlocDiversDonnees pour Divers).
+    PdfTaillePolice(PdfPage, PdfFontValue, ConstPoliceArial, 9);
+    IndLigne := 0;
+    for IndTab := High(Personnage.Corruption) downto Low(Personnage.Corruption) do
+      begin
+        Inc(IndLigne);
+        if IndLigne <= (NbLignes - 2) then
+          begin
+            if Personnage.Corruption[IndTab].Montant > 0 then
+              Montant := '+' + IntToStr(Personnage.Corruption[IndTab].Montant)
+            else
+              Montant := IntToStr(Personnage.Corruption[IndTab].Montant);
+            PdfCentre(PdfPage, XGauche + 1,  XGauche + 12, Y - ((IndLigne + 2) * HauteurLigne) + 0.6, Montant);
+            // Libellé souvent trop long pour tenir sur une ligne dans cette colonne étroite :
+            // PdfEcrit le répartit alors sur 2 lignes (±1mm autour du Y donné) - avec le même
+            // décalage +0.6 que le cas court, la 2e ligne déborde sous la bordure du bas de la
+            // rangée (chevauche la ligne suivante). Remonté à +2 quand le texte est probablement
+            // sur 2 lignes (même heuristique de longueur que PdfBlocTalents pour PTalent.Resume).
+            if Length(Personnage.Corruption[IndTab].Libelle) > 18 then
+              PdfEcrit (PdfPage, XGauche + 13, XDroite, Y - ((IndLigne + 2) * HauteurLigne) + 2, Personnage.Corruption[IndTab].Libelle, MinPolice)
+            else
+              PdfEcrit (PdfPage, XGauche + 13, XDroite, Y - ((IndLigne + 2) * HauteurLigne) + 0.6, Personnage.Corruption[IndTab].Libelle, MinPolice);
+          end;
+      end;
+
+    Result := Y - (NbLignes * HauteurLigne);
+  end;
+
+// Dessine le panneau Talents (extrait de PdfPersonnageCreationFeldo2P, CONTEXT.md §2.4).
+// Voir le commentaire de la déclaration pour pourquoi ce n'est pas passé par DessinerTableau.
+Function PdfBlocTalents(PdfPage: TPDFPage; Personnage: StructurePersonnage; XGauche, XDroite, Y, HauteurLigne: Single; NbLignes: Integer; MinPolice: Integer): Single;
+  var
+    IndC:          Integer;
+    NbLigne:       Integer;
+    PTalent:       StructureTalent;
+    NivTalMetier:  Integer;
+    TalentDonnee:  StructureDonnee;
+    Bonus:         String;
+    ListeTalent:   String;
+    PMetierTalent: StructureMetierTalent;
+  begin
+    // Dessin cadre
+    PdfPage.DrawLine( XGauche,      Y,                     XGauche,      Y - (NbLignes * HauteurLigne), 1);
+    PdfPage.DrawLine( XGauche + 41, Y - (1 * HauteurLigne), XGauche + 41, Y - (NbLignes * HauteurLigne), 1);
+    PdfPage.DrawLine( XGauche + 47, Y - (1 * HauteurLigne), XGauche + 47, Y - (NbLignes * HauteurLigne), 1);
+    PdfPage.DrawLine( XGauche + 53, Y - (1 * HauteurLigne), XGauche + 53, Y - (NbLignes * HauteurLigne), 1);
+    PdfPage.DrawLine( XDroite,      Y,                     XDroite,      Y - (NbLignes * HauteurLigne), 1);
+    for IndC := 0 to NbLignes do
+      PdfPage.DrawLine(XGauche, Y - (IndC * HauteurLigne), XDroite, Y - (IndC * HauteurLigne), 1);
+
+    // Texte Talents
+    PdfTaillePolice(PdfPage, PdfFontBack, ConstPoliceCarlson+ConstPoliceGras, 10);
+    PdfCentre(PdfPage, XGauche,      XDroite,      Y - (1 * HauteurLigne) + 1, Trim(GetTexteLibelle('PDF_TALENT1_TALENTS')));
+    PdfCentre(PdfPage, XGauche,      XGauche + 40, Y - (2 * HauteurLigne) + 1, GetTexteLibelle('PDF_TALENT2_TALENTNAME'));
+    PdfCentre(PdfPage, XGauche + 41, XGauche + 47, Y - (2 * HauteurLigne) + 1, GetTexteLibelle('PDF_TALENT2_UPG'));
+    PdfCentre(PdfPage, XGauche + 47, XGauche + 51, Y - (2 * HauteurLigne) + 1, GetTexteLibelle('PDF_TALENT2_LEVEL'));
+    PdfCentre(PdfPage, XGauche + 53, XDroite,      Y - (2 * HauteurLigne) + 1, GetTexteLibelle('PDF_TALENT2_DESC'));
+
+    // Valeur Talents
+    PdfTaillePolice(PdfPage, PdfFontValue, ConstPoliceArial, 9);
+    ListeTalent := '';
+    NbLigne := 0;
+    For IndC := 0 to ListTalent.count - 1 do
+      begin
+        PTalent := ListTalent[IndC];
+        NivTalMetier := 0;
+        TalentDonnee := PdfPersonnageTalent(Personnage, PTalent.CodeTalent, NivTalMetier);
+        if TalentDonnee.Total <> 0 then
+          begin
+            inc(NbLigne);
+            PdfEcrit(PdfPage, XGauche + 2, XGauche + 41, Y - ((NbLigne + 2) * HauteurLigne) + 1, PTalent.Libelle, MinPolice);
+            Bonus := PdfPersonnageTalentBonus(Personnage, PTalent.CodeTalent);
+            // Afficher l'astérisque pour les talents
+            if Bonus <> '' then
+              begin
+                PdfTaillePolice(PdfPage, PdfFontValue, ConstPoliceArial, 4);
+                PdfEcrit(PdfPage, XGauche + 38, XGauche + 41, Y - ((NbLigne + 2) * HauteurLigne) + 3, Bonus, 4);
+                PdfTaillePolice(PdfPage, PdfFontValue, ConstPoliceArial, 9);
+              end;
+            if (NivTalMetier > 0) then
+              begin
+                if (NivTalMetier > Personnage.MetierEnCours.NiveauMetier) then
+                  PdfPage.SetColor(RGB(150,150,150), False);
+                PdfEcrit(PdfPage, XGauche + 43, XGauche + 47, Y - ((NbLigne + 2) * HauteurLigne) + 1, IntToStr(NivTalMetier), MinPolice);
+                PdfPage.SetColor(clBlack, False);
+              end;
+            PdfCentre(PdfPage, XGauche + 47, XGauche + 53, Y - ((NbLigne + 2) * HauteurLigne) + 1, IntToStr(TalentDonnee.Total));
+            if PTalent.SousTalent then
+              PTalent := ChercheTalent(Copy(PTalent.CodeTalent, 1, Pos('_', PTalent.CodeTalent) - 1)+'_*');
+            if PTalent.Resume <> '' then
+              begin
+                if Length(PTalent.Resume) > 20 then
+                  PdfEcrit(PdfPage, XGauche + 54, XDroite, Y - ((NbLigne + 2) * HauteurLigne) + 1.5, PTalent.Resume, MinPolice)
+                else
+                  PdfEcrit(PdfPage, XGauche + 54, XDroite, Y - ((NbLigne + 2) * HauteurLigne) + 1, PTalent.Resume, MinPolice);
+                PdfTaillePolice(PdfPage, PdfFontValue, ConstPoliceArial, 9);
+              end;
+            ListeTalent += AjouteAccolade(PTalent.CodeTalent);
+          end;
+      end;
+
+    // Valeur Talents non acquis
+    PdfPage.SetColor(RGB(150,150,150), False);
+    PdfTaillePolice(PdfPage, PdfFontValue, ConstPoliceArial, 9);
+    For PMetierTalent In ListMetierTalent do
+      if (PMetierTalent.CodeMetier = Personnage.MetierEnCours.CodeMetier) then
+        if (PMetierTalent.NiveauMetier >= Personnage.MetierEnCours.NiveauMetier) then
+          if (Pos(AjouteAccolade(PMetierTalent.CodeTalent),ListeTalent) = 0) and (NbLigne < (NbLignes - 2)) then
+            begin
+              PTalent := chercheTalent(PMetierTalent.CodeTalent);
+              PdfEcrit(PdfPage, XGauche +  2, XGauche + 41, Y - ((NbLigne + 3) * HauteurLigne) + 1, PTalent.Libelle, MinPolice);
+              PdfEcrit(PdfPage, XGauche + 43, XGauche + 47, Y - ((NbLigne + 3) * HauteurLigne) + 1, InttoStr(PMetierTalent.NiveauMetier), MinPolice);
+              if PTalent.SousTalent then
+                PTalent := ChercheTalent(Copy(PTalent.CodeTalent, 1, Pos('_', PTalent.CodeTalent) - 1)+'_*');
+              if PTalent.Resume <> '' then
+                begin
+                  if Length(PTalent.Resume) > 20 then
+                    PdfEcrit(PdfPage, XGauche + 54, XDroite, Y - ((NbLigne + 3) * HauteurLigne) + 1.5, PTalent.Resume, MinPolice)
+                  else
+                    PdfEcrit(PdfPage, XGauche + 54, XDroite, Y - ((NbLigne + 3) * HauteurLigne) + 1, PTalent.Resume, MinPolice);
+                  PdfTaillePolice(PdfPage, PdfFontValue, ConstPoliceArial, 9);
+                end;
+              NbLigne := NbLigne + 1;
+            end;
+    PdfPage.SetColor(clBlack, False);
+
+    Result := Y - (NbLignes * HauteurLigne);
+  end;
+
+Function PdfBlocArmures(PdfPage: TPDFPage; XGauche, XDroite, Y, HauteurLigne: Single; NbLignes: Integer): Single;
+  var
+    IndC: Integer;
+  begin
+    // Dessin cadre
+    PdfPage.DrawLine( XGauche,      Y,                     XGauche,      Y - ((NbLignes + 1) * HauteurLigne), 1);
+    PdfPage.DrawLine( XGauche +  0, Y - (1 * HauteurLigne), XGauche +  0, Y - ((NbLignes + 1) * HauteurLigne), 1);
+    PdfPage.DrawLine( XGauche + 34, Y - (1 * HauteurLigne), XGauche + 34, Y - ((NbLignes + 1) * HauteurLigne), 1);
+    PdfPage.DrawLine( XGauche + 53, Y - (1 * HauteurLigne), XGauche + 53, Y - ((NbLignes + 1) * HauteurLigne), 1);
+    PdfPage.DrawLine( XGauche + 62, Y - (1 * HauteurLigne), XGauche + 62, Y - ((NbLignes + 1) * HauteurLigne), 1);
+    PdfPage.DrawLine( XGauche + 70, Y - (1 * HauteurLigne), XGauche + 70, Y - ((NbLignes + 1) * HauteurLigne), 1);
+    PdfPage.DrawLine( XDroite,      Y,                     XDroite,      Y - ((NbLignes + 1) * HauteurLigne), 1);
+    for IndC := 0 to (NbLignes + 1) do
+      PdfPage.DrawLine(XGauche, Y - (IndC * HauteurLigne), XDroite, Y - (IndC * HauteurLigne), 1);
+
+    // Texte Armure
+    PdfCentre(PdfPage, XGauche +  0, XDroite,      Y - (1 * HauteurLigne) + 1, GetTexteLibelle('PDF_ARMOUR1_ARMOUR'));
+    PdfCentre(PdfPage, XGauche +  0, XGauche + 34, Y - (2 * HauteurLigne) + 1, GetTexteLibelle('PDF_ARMOUR2_NAME'));
+    PdfCentre(PdfPage, XGauche + 34, XGauche + 53, Y - (2 * HauteurLigne) + 1, GetTexteLibelle('PDF_ARMOUR2_LOCATIONS'));
+    PdfCentre(PdfPage, XGauche + 53, XGauche + 62, Y - (2 * HauteurLigne) + 1, GetTexteLibelle('PDF_ARMOUR2_ENCUMBRANCE'));
+    PdfCentre(PdfPage, XGauche + 62, XGauche + 70, Y - (2 * HauteurLigne) + 1, GetTexteLibelle('PDF_ARMOUR2_ARMOURPOINT'));
+    PdfCentre(PdfPage, XGauche + 70, XDroite,      Y - (2 * HauteurLigne) + 1, GetTexteLibelle('PDF_ARMOUR2_QUALITIES'));
+
+    Result := Y - ((NbLignes + 1) * HauteurLigne);
+  end;
+
+Function PdfBlocEquipement(PdfPage: TPDFPage; XGauche, XDroite, Y, HauteurLigne: Single; NbLignes: Integer): Single;
+  var
+    IndC: Integer;
+  begin
+    // Dessin cadre
+    PdfPage.DrawLine( XGauche,       Y,                     XGauche,       Y - ((NbLignes + 1) * HauteurLigne), 1);
+    PdfPage.DrawLine( XGauche +   0, Y - (1 * HauteurLigne), XGauche +   0, Y - ((NbLignes + 1) * HauteurLigne), 1);
+    PdfPage.DrawLine( XGauche +  48, Y - (1 * HauteurLigne), XGauche +  48, Y - ((NbLignes + 1) * HauteurLigne), 1);
+    PdfPage.DrawLine( XGauche +  55, Y - (1 * HauteurLigne), XGauche +  55, Y - ((NbLignes + 1) * HauteurLigne), 1);
+    PdfPage.DrawLine( XGauche + 100, Y - (1 * HauteurLigne), XGauche + 100, Y - ((NbLignes + 1) * HauteurLigne), 1);
+    PdfPage.DrawLine( XDroite,       Y,                     XDroite,       Y - ((NbLignes + 1) * HauteurLigne), 1);
+    for IndC := 0 to (NbLignes + 1) do
+      PdfPage.DrawLine(XGauche, Y - (IndC * HauteurLigne), XDroite, Y - (IndC * HauteurLigne), 1);
+
+    // Texte Equipement
+    PdfCentre(PdfPage, XGauche +   0, XDroite,       Y - (1 * HauteurLigne) + 1, GetTexteLibelle('PDF_TRAPPING1_TRAPPINGS'));
+    PdfCentre(PdfPage, XGauche +   0, XGauche +  48, Y - (2 * HauteurLigne) + 1, GetTexteLibelle('PDF_TRAPPING2_NAME'));
+    PdfCentre(PdfPage, XGauche +  48, XGauche +  55, Y - (2 * HauteurLigne) + 1, GetTexteLibelle('PDF_TRAPPING2_ENCUMBRANCE'));
+    PdfCentre(PdfPage, XGauche +  55, XGauche + 100, Y - (2 * HauteurLigne) + 1, GetTexteLibelle('PDF_TRAPPING2_NAME'));
+    PdfCentre(PdfPage, XGauche + 100, XDroite,       Y - (2 * HauteurLigne) + 1, GetTexteLibelle('PDF_TRAPPING2_ENCUMBRANCE'));
+
+    Result := Y - ((NbLignes + 1) * HauteurLigne);
+  end;
+
+Function PdfBlocArmes(PdfPage: TPDFPage; XGauche, XDroite, Y, HauteurLigne: Single; NbLignes: Integer): Single;
+  var
+    IndC: Integer;
+  begin
+    // Dessin cadre
+    PdfPage.DrawLine( XGauche,       Y,                     XGauche,       Y - ((NbLignes + 1) * HauteurLigne), 1);
+    PdfPage.DrawLine( XGauche +   0, Y - (1 * HauteurLigne), XGauche +   0, Y - ((NbLignes + 1) * HauteurLigne), 1);
+    PdfPage.DrawLine( XGauche +  45, Y - (1 * HauteurLigne), XGauche +  45, Y - ((NbLignes + 1) * HauteurLigne), 1);
+    PdfPage.DrawLine( XGauche +  64, Y - (1 * HauteurLigne), XGauche +  64, Y - ((NbLignes + 1) * HauteurLigne), 1);
+    PdfPage.DrawLine( XGauche +  71, Y - (1 * HauteurLigne), XGauche +  71, Y - ((NbLignes + 1) * HauteurLigne), 1);
+    PdfPage.DrawLine( XGauche +  96, Y - (1 * HauteurLigne), XGauche +  96, Y - ((NbLignes + 1) * HauteurLigne), 1);
+    PdfPage.DrawLine( XGauche + 113, Y - (1 * HauteurLigne), XGauche + 113, Y - ((NbLignes + 1) * HauteurLigne), 1);
+    PdfPage.DrawLine( XDroite,       Y,                     XDroite,       Y - ((NbLignes + 1) * HauteurLigne), 1);
+    for IndC := 0 to (NbLignes + 1) do
+      PdfPage.DrawLine(XGauche, Y - (IndC * HauteurLigne), XDroite, Y - (IndC * HauteurLigne), 1);
+
+    // Texte Armes
+    PdfCentre(PdfPage, XGauche +   0, XDroite,       Y - (1 * HauteurLigne) + 1, GetTexteLibelle('PDF_WEAPONS1_WEAPONS'));
+    PdfCentre(PdfPage, XGauche +   0, XGauche +  45, Y - (2 * HauteurLigne) + 1, GetTexteLibelle('PDF_WEAPONS2_NAME'));
+    PdfCentre(PdfPage, XGauche +  45, XGauche +  64, Y - (2 * HauteurLigne) + 1, GetTexteLibelle('PDF_WEAPONS2_GROUP'));
+    PdfCentre(PdfPage, XGauche +  64, XGauche +  71, Y - (2 * HauteurLigne) + 1, GetTexteLibelle('PDF_WEAPONS2_ENCUMBRANCE'));
+    PdfCentre(PdfPage, XGauche +  71, XGauche +  96, Y - (2 * HauteurLigne) + 1, GetTexteLibelle('PDF_WEAPONS2_RANGE'));
+    PdfCentre(PdfPage, XGauche +  96, XGauche + 113, Y - (2 * HauteurLigne) + 1, GetTexteLibelle('PDF_WEAPONS2_DAMAGE'));
+    PdfCentre(PdfPage, XGauche + 113, XDroite,       Y - (2 * HauteurLigne) + 1, GetTexteLibelle('PDF_WEAPONS2_QUALITIES'));
+
+    Result := Y - ((NbLignes + 1) * HauteurLigne);
+  end;
+
+Function PdfBlocSorts(PdfPage: TPDFPage; XGauche, XDroite, Y, HauteurLigne: Single; NbLignes: Integer): Single;
+  var
+    IndC: Integer;
+  begin
+    // Dessin cadre
+    PdfPage.DrawLine( XGauche,      Y,                     XGauche,      Y - ((NbLignes + 1) * HauteurLigne), 1);
+    PdfPage.DrawLine( XGauche +  0, Y - (1 * HauteurLigne), XGauche +  0, Y - ((NbLignes + 1) * HauteurLigne), 1);
+    PdfPage.DrawLine( XGauche + 38, Y - (1 * HauteurLigne), XGauche + 38, Y - ((NbLignes + 1) * HauteurLigne), 1);
+    PdfPage.DrawLine( XGauche + 51, Y - (1 * HauteurLigne), XGauche + 51, Y - ((NbLignes + 1) * HauteurLigne), 1);
+    PdfPage.DrawLine( XGauche + 66, Y - (1 * HauteurLigne), XGauche + 66, Y - ((NbLignes + 1) * HauteurLigne), 1);
+    PdfPage.DrawLine( XGauche + 82, Y - (1 * HauteurLigne), XGauche + 82, Y - ((NbLignes + 1) * HauteurLigne), 1);
+    PdfPage.DrawLine( XGauche + 98, Y - (1 * HauteurLigne), XGauche + 98, Y - ((NbLignes + 1) * HauteurLigne), 1);
+    PdfPage.DrawLine( XDroite,      Y,                     XDroite,      Y - ((NbLignes + 1) * HauteurLigne), 1);
+    for IndC := 0 to (NbLignes + 1) do
+      PdfPage.DrawLine(XGauche, Y - (IndC * HauteurLigne), XDroite, Y - (IndC * HauteurLigne), 1);
+
+    // Texte Sorts
+    PdfCentre(PdfPage, XGauche +  0, XDroite,      Y - (1 * HauteurLigne) + 1, GetTexteLibelle('PDF_SPELL1_SPELL'));
+    PdfCentre(PdfPage, XGauche +  0, XGauche + 38, Y - (2 * HauteurLigne) + 1, GetTexteLibelle('PDF_SPELL2_NAME'));
+    PdfCentre(PdfPage, XGauche + 38, XGauche + 51, Y - (2 * HauteurLigne) + 1, GetTexteLibelle('PDF_SPELL2_CN'));
+    PdfCentre(PdfPage, XGauche + 51, XGauche + 66, Y - (2 * HauteurLigne) + 1, GetTexteLibelle('PDF_SPELL2_RANGE'));
+    PdfCentre(PdfPage, XGauche + 66, XGauche + 82, Y - (2 * HauteurLigne) + 1, GetTexteLibelle('PDF_SPELL2_TARGET'));
+    PdfCentre(PdfPage, XGauche + 82, XGauche + 98, Y - (2 * HauteurLigne) + 1, GetTexteLibelle('PDF_SPELL2_DURATION'));
+    PdfCentre(PdfPage, XGauche + 98, XDroite,      Y - (2 * HauteurLigne) + 1, GetTexteLibelle('PDF_SPELL2_EFFECT'));
+
+    Result := Y - ((NbLignes + 1) * HauteurLigne);
+  end;
+
+Function PdfBlocEncombrement(PdfPage: TPDFPage; XGauche, XDroite, Y, HauteurLigne: Single; NbLignes: Integer; MinPolice: Integer): Single;
+  var
+    IndC: Integer;
+  begin
+    // Dessin cadre
+    PdfPage.DrawLine( XGauche,      Y,                     XGauche,      Y - ((NbLignes + 1) * HauteurLigne), 1);
+    PdfPage.DrawLine( XGauche + 15, Y - (1 * HauteurLigne), XGauche + 15, Y - ((NbLignes + 1) * HauteurLigne), 1);
+    PdfPage.DrawLine( XDroite,      Y,                     XDroite,      Y - ((NbLignes + 1) * HauteurLigne), 1);
+    for IndC := 0 to (NbLignes + 1) do
+      PdfPage.DrawLine(XGauche, Y - (IndC * HauteurLigne), XDroite, Y - (IndC * HauteurLigne), 1);
+
+    // Texte Encombrement
+    PdfTaillePolice(PdfPage, PdfFontBack, ConstPoliceCarlson+ConstPoliceGras, 10);
+    PdfCentre(PdfPage, XGauche + 1, XDroite,      Y - ((NbLignes - 4) * HauteurLigne) + 0.6, GetTexteLibelle('PDF_ENCUMBRANCE1_ENCUMBRANCE'));
+    PdfEcrit(PdfPage,  XGauche + 1, XGauche + 15, Y - ((NbLignes - 3) * HauteurLigne) + 0.6, GetTexteLibelle('PDF_ENCUMBRANCE2_ARMOUR')    , MinPolice);
+    PdfEcrit(PdfPage,  XGauche + 1, XGauche + 15, Y - ((NbLignes - 2) * HauteurLigne) + 0.6, GetTexteLibelle('PDF_ENCUMBRANCE3_WEAPONS')   , MinPolice);
+    PdfEcrit(PdfPage,  XGauche + 1, XGauche + 15, Y - ((NbLignes - 1) * HauteurLigne) + 0.6, GetTexteLibelle('PDF_ENCUMBRANCE4_TRAPPINGS') , MinPolice);
+    PdfEcrit(PdfPage,  XGauche + 1, XGauche + 15, Y - ((NbLignes - 0) * HauteurLigne) + 0.6, GetTexteLibelle('PDF_ENCUMBRANCE5_MAXENC')    , MinPolice);
+    PdfEcrit(PdfPage,  XGauche + 1, XGauche + 15, Y - ((NbLignes + 1) * HauteurLigne) + 0.6, GetTexteLibelle('PDF_ENCUMBRANCE6_TOTAL')     , MinPolice);
+
+    Result := Y - ((NbLignes + 1) * HauteurLigne);
+  end;
+
+Procedure PdfBlocSortsDonnees(PdfPage: TPDFPage; Personnage: StructurePersonnage; XGauche, Y, HauteurLigne: Single; MinPolice: Integer);
+  var
+    PersonnageEquipement: StructurePersonnageEquipement;
+    PSort:                StructureSort;
+    NbSort:               Integer;
+  begin
+    PdfTaillePolice(PdfPage, PdfFontValue, ConstPoliceArial, 9);
+    NbSort := 0;
+    for PersonnageEquipement in Personnage.Equipement do
+      if PersonnageEquipement.TypeEquipement = TypeEquipSp then
+        begin
+          Inc(NbSort);
+          PSort := ChercheSort(PersonnageEquipement.CodeEquipement);
+          PdfEcrit (PdfPage, XGauche +  1, XGauche + 38, Y - ((NbSort + 2) * HauteurLigne) + 0.6, PSort.Libelle, MinPolice);
+          PdfCentre(PdfPage, XGauche + 38, XGauche + 51, Y - ((NbSort + 2) * HauteurLigne) + 0.6, PSort.Niveau);
+          PdfCentre(PdfPage, XGauche + 51, XGauche + 66, Y - ((NbSort + 2) * HauteurLigne) + 0.6, PdfPersonnageRemplaceBonus(Personnage, PSort.Portee));
+          PdfCentre(PdfPage, XGauche + 66, XGauche + 82, Y - ((NbSort + 2) * HauteurLigne) + 0.6, PdfPersonnageRemplaceBonus(Personnage, PSort.Cible));
+          PdfCentre(PdfPage, XGauche + 82, XGauche + 98, Y - ((NbSort + 2) * HauteurLigne) + 0.6, PdfPersonnageRemplaceBonus(Personnage, PSort.Duree));
+        end;
+  end;
+
+Procedure PdfBlocDiversDonnees(PdfPage: TPDFPage; Personnage: StructurePersonnage; XGauche, Y, HauteurLigne: Single; NbLignes: Integer; MinPolice: Integer);
+  var
+    PersonnageEquipement: StructurePersonnageEquipement;
+    IndDivers:            Integer;
+  begin
+    IndDivers := 0;
+    for PersonnageEquipement in Personnage.Equipement do
+      if PersonnageEquipement.TypeEquipement = TypeEquipDI then
+        begin
+          Inc(IndDivers);
+          if (IndDivers <= (NbLignes * 2)) then
+            begin
+              if IndDivers > (NbLignes - 1) then
+                PdfEcrit(PdfPage, XGauche +  56, XGauche + 100, Y - ((IndDivers - NbLignes + 3) * HauteurLigne) + 0.6, PersonnageEquipement.CodeEquipement, MinPolice)
+              else
+                PdfEcrit(PdfPage, XGauche +   1, XGauche +  48, Y - ((IndDivers + 2) * HauteurLigne) + 0.6, PersonnageEquipement.CodeEquipement, MinPolice);
+            end;
+        end;
+  end;
+
+Procedure PdfBlocArmesDonnees(PdfPage: TPDFPage; Personnage: StructurePersonnage; XGauche, XDroite, Y, HauteurLigne: Single; BF, TBonusCC, TBonusCT: Integer; var FabricationBonii: String; out EncArme: Integer; out ArmeBonii: String; out ArmureBouclier: Integer; MinPolice: Integer);
+  var
+    PersonnageEquipement: StructurePersonnageEquipement;
+    PArme:                StructureArme;
+    PArmeBonus:            StructureArmeBonus;
+    PCompetence:           StructureCompetence;
+    CompetenceDonnee:      StructureDonnee;
+    Bidon:                 Integer;
+    NbArme:                Integer;
+    Enc:                   Integer;
+    Quality:               String;
+    Pourcent:              String;
+    PasBonus:              Boolean;
+    TexteRange1:           String;
+    TexteRange2:           String;
+    Portee:                String;
+    PorteMoyenne:          Integer;
+    Deg:                   Integer;
+    PosProtection:         SizeInt;
+    NbLoca:                Integer;
+    IndLoca:               Integer;
+    LocData:               String;
+    LigneBonus:            String;
+    ListMalii:             String;
+  begin
+    EncArme        := 0;
+    ArmeBonii      := '';
+    ArmureBouclier := 0;
+    NbArme         := 0;
+    Bidon          := 0;
+    for PersonnageEquipement in Personnage.Equipement do
+      if PersonnageEquipement.TypeEquipement = TypeEquipWe then
+        begin
+          TexteRange1:= '';
+          TexteRange2:= '';
+          PArme      := ChercheArme(PersonnageEquipement.CodeEquipement);
+
+          Portee     := PArme.Portee;
+          if Pos('(B'+ConstCaracF+')',Portee) > 0 then
+            begin
+              Portee       := StringReplace(Portee, '(B'+ConstCaracF+')', IntToStr(Trunc(BF/10)), [rfReplaceAll]);;
+              PorteMoyenne := MultiChaine(Portee);
+              Portee       := IntToStr(PorteMoyenne);
+            end
+          else
+            PorteMoyenne   := StrToIntDef(Portee,0);
+
+          Enc        := PArme.Encombrement + FabricationEncombrement(PersonnageEquipement.QualiteEquipement, Quality);
+          EncArme    := EncArme + Enc;
+
+          Inc(NbArme);
+
+          Pourcent := '';
+
+          CompetenceDonnee := PdfPersonnageCompetence(Personnage, PArme.CodeCompetence, Bidon);
+
+          Pourcent := IntToStr(CompetenceDonnee.Total);
+          PasBonus := (CompetenceDonnee.Augmentation = 0);
+
+          if pos(EquipementCT, PArme.CodeArme) > 0 then
+            begin
+              TexteRange1 := '< : '+ChaineSur(3,IntToStr(Trunc(PorteMoyenne/10)))+'m '+IntToStr(StrToInt(Pourcent)+40)+'% / '+ChaineSur(3,IntToStr(Trunc(PorteMoyenne/2 )))+'m '+IntToStr(StrToInt(Pourcent)+20)+'%';
+              TexteRange2 := '> : '+ChaineSur(3,IntToStr(Trunc(PorteMoyenne*2 )))+'m '+IntToStr(StrToInt(Pourcent)-10)+'% / '+ChaineSur(3,IntToStr(Trunc(PorteMoyenne*3 )))+'m '+IntToStr(StrToInt(Pourcent)-30)+'%';
+            end;
+
+          PdfEcrit(PdfPage, XGauche +  1, XGauche + 45, Y - ((NbArme + 2) * HauteurLigne) + 0.6, PArme.Libelle + Quality, MinPolice);
+
+          LigneBonus := '';
+
+          PdfCentre(PdfPage, XGauche +  45, XGauche + 64, Y - ((NbArme + 2) * HauteurLigne) + 0.6, Pourcent + ' %');
+          if PArme.Encombrement <> 0 then
+            PdfCentre(PdfPage, XGauche +  64, XGauche + 71, Y - ((NbArme + 2) * HauteurLigne) + 0.6, IntToStr(Enc));
+          PdfCentre(PdfPage, XGauche +  71, XGauche + 96, Y - ((NbArme + 2) * HauteurLigne) + 0.6, GetAllTexteLibelle(Portee));
+
+          Deg   := CalculDegat(PArme.CalculDegat, BF);
+          if pos(EquipementCC, PArme.CodeArme) > 0 then
+            Deg := Deg + TBonusCC
+          else if pos(EquipementCT, PArme.CodeArme) > 0 then
+            Deg := Deg + TBonusCT;
+
+          if Deg = 0 then
+            PdfCentre(PdfPage, XGauche +  96, XGauche + 113, Y - ((NbArme + 2) * HauteurLigne) + 0.6, '-')
+          else
+            PdfCentre(PdfPage, XGauche +  96, XGauche + 113, Y - ((NbArme + 2) * HauteurLigne) + 0.6, 'DR + '+IntToStr(Deg));
+
+          PosProtection := pos(BonusProtection, PArme.ListeBonus);
+          if PosProtection > 0 then
+            ArmureBouclier := StrToInt(copy(PArme.ListeBonus, PosProtection + Length(BonusProtection), 1));
+          PdfTaillePolice(PdfPage, PdfFontValue, ConstPoliceArial, 6);
+
+          if TexteRange1 <> '' then
+            begin
+              PdfEcrit(PdfPage, XGauche + 113 + 40, XDroite, Y - ((NbArme + 2) * HauteurLigne) + 2.3, TexteRange1, MinPolice);
+              PdfEcrit(PdfPage, XGauche + 113 + 40, XDroite, Y - ((NbArme + 2) * HauteurLigne) + 0.3, TexteRange2, MinPolice);
+            end;
+
+          if PasBonus = false then
+            begin
+              LigneBonus := PArme.Listebonus;
+              if (PArme.ListeBonus <> '') and (PArme.ListeBonus <> '-') then
+                begin
+                  NbLoca  := CountOccurrences(PArme.ListeBonus,',') + 1;
+                  for IndLoca := 1 to NbLoca do
+                    begin
+                      LocData := ExtractChaine(',',PArme.ListeBonus,IndLoca);
+                      if pos(' ',LocData) <> 0 then
+                        LocData := copy(LocData,1,Length(LocData)-2);
+                      PArmeBonus := ChercheArmeBonus(LocData);
+                      LigneBonus := StringReplace(LigneBonus, LocData, PArmeBonus.Libelle, [rfReplaceAll]);
+                      if Pos(PArmeBonus.CodeArmeBonus, ArmeBonii) = 0 then
+                       begin
+                         if ArmeBonii <> '' then
+                          ArmeBonii := ArmeBonii + ',';
+                          ArmeBonii := ArmeBonii + PArmeBonus.CodeArmeBonus;
+                       end;
+                    end;
+                end;
+              FabricationDetail(PersonnageEquipement.QualiteEquipement, LigneBonus, FabricationBonii);
+              if (TexteRange1 = '') then
+                PdfEcrit(PdfPage, XGauche + 113 + 1, XDroite, Y - ((NbArme + 2) * HauteurLigne) + 2.3, LigneBonus, MinPolice)
+              else
+                PdfEcrit(PdfPage, XGauche + 113 + 1, XGauche + 113 + 40, Y - ((NbArme + 2) * HauteurLigne) + 2.3, LigneBonus, MinPolice);
+            end
+          else
+            begin
+              PCompetence := ChercheCompetence(PArme.CodeCompetence);
+              ListMalii := 'pas ' + PCompetence.Libelle;
+
+              if (PArme.ListeBonus <> '') and (PArme.ListeBonus <> '-') then
+                begin
+                  NbLoca  := CountOccurrences(PArme.ListeBonus,',') + 1;
+                  for IndLoca := 1 to NbLoca do
+                    begin
+                      LocData := ExtractChaine(',',PArme.ListeBonus,IndLoca);
+                      if pos(' ',LocData) <> 0 then
+                        LocData := copy(LocData,1,Length(LocData)-2);
+                      PArmeBonus := ChercheArmeBonus(LocData);
+                      if PArmeBonus.PlusMoins = '-' then
+                        begin
+                          if Pos(PArmeBonus.Libelle, ArmeBonii) = 0 then
+                            begin
+                              if ArmeBonii <> '' then ArmeBonii := ArmeBonii + ',';
+                              ArmeBonii := ArmeBonii + LocData;
+                            end;
+                          ListMalii  := ListMalii + ',' + PArmeBonus.Libelle;
+                        end;
+                    end;
+                end;
+              FabricationDetail(PersonnageEquipement.QualiteEquipement, ListMalii, FabricationBonii);
+
+              if (TexteRange1 = '') then
+                PdfEcrit(PdfPage, XGauche + 113 + 1, XDroite, Y - ((NbArme + 2) * HauteurLigne) + 2.3, ListMalii, MinPolice)
+              else
+                PdfEcrit(PdfPage, XGauche + 113 + 1, XGauche + 113 + 40, Y - ((NbArme + 2) * HauteurLigne) + 2, ListMalii, MinPolice);
+
+            end;
+          PdfTaillePolice(PdfPage, PdfFontValue, ConstPoliceArial, 9);
+        end;
+  end;
+
+Procedure PdfBlocArmuresDonnees(PdfPage: TPDFPage; Personnage: StructurePersonnage; XGauche, XDroite, Y, HauteurLigne: Single; ArmureSet: Boolean; var FabricationBonii: String; out EncArmure, ArmureBras, ArmureCorps, ArmureJambe, ArmureTete: Integer; out ArmureBonii: String; MinPolice: Integer; AsterisqueParEquipement: TStringList; out AsterisqueMutationArmure: Boolean);
+  var
+    PersonnageEquipement: StructurePersonnageEquipement;
+    PArmure:              StructureArmure;
+    PArmureSimplifiee:    StructureArmureSimplifiee;
+    PArmureBonus:         StructureArmureBonus;
+    NbArmure:             Integer;
+    Enc:                  Integer;
+    EncP:                 Integer;
+    Quality:              String;
+    NbLoca:                Integer;
+    IndLoca:               Integer;
+    LocData:               String;
+    LigneBonus:            String;
+    DeltaArmureTete:       Integer;
+    DeltaArmureBras:       Integer;
+    DeltaArmureCorps:      Integer;
+    DeltaArmureJambe:      Integer;
+  begin
+    EncArmure   := 0;
+    ArmureBras  := 0;
+    ArmureCorps := 0;
+    ArmureJambe := 0;
+    ArmureTete  := 0;
+    ArmureBonii := '';
+    NbArmure    := 0;
+    for PersonnageEquipement in Personnage.Equipement do
+      begin
+        Enc := 0;
+        EncP:= 0;
+        if ((ArmureSet = false) and (PersonnageEquipement.TypeEquipement = TypeEquipAR)) or
+           ((ArmureSet = true)  and (PersonnageEquipement.TypeEquipement = TypeEquipARS)) then
+            // gérer les armures
+            begin
+              if (PersonnageEquipement.TypeEquipement = TypeEquipAR) then
+                begin
+                  PArmure    := ChercheArmure(PersonnageEquipement.CodeEquipement);
+                  Enc        := PArmure.Encombrement + FabricationEncombrement(PersonnageEquipement.QualiteEquipement,Quality);
+                  NbLoca     := CountOccurrences(PArmure.Emplacement,',') + 1;
+                  LigneBonus := PArmure.Listebonus;
+                end
+              else
+                begin
+                  PArmureSimplifiee   := ChercheArmureSimplifiee(PersonnageEquipement.CodeEquipement);
+                  Enc                 := PArmureSimplifiee.Encombrement + FabricationEncombrement(PersonnageEquipement.QualiteEquipement,Quality);
+                  LigneBonus          := PArmureSimplifiee.Listebonus;
+                end;
+
+              EncP      := Enc;
+              if EncP > 0 then
+                EncP    := EncP - 1;
+              EncArmure := EncArmure + EncP;
+              if (PersonnageEquipement.TypeEquipement = TypeEquipAR) then
+                For IndLoca := 1 to NbLoca do
+                  begin
+                    LocData := ExtractChaine(',',PArmure.Emplacement,IndLoca);
+                    case LocData of
+                      BonusBras:   ArmureBras  := ArmureBras  + PArmure.Protection;
+                      BonusCorps:  ArmureCorps := ArmureCorps + PArmure.Protection;
+                      BonusJambes: ArmureJambe := ArmureJambe + PArmure.Protection;
+                      BonusTete:   ArmureTete  := ArmureTete  + PArmure.Protection;
+                    end;
+                  end
+              else
+                begin
+                  ArmureBras  := ArmureBras  + PArmureSimplifiee.Protection;
+                  ArmureCorps := ArmureCorps + PArmureSimplifiee.Protection;
+                  ArmureJambe := ArmureJambe + PArmureSimplifiee.Protection;
+                  ArmureTete  := ArmureTete  + PArmureSimplifiee.Protection;
+                end;
+
+              Inc(NBArmure);
+
+              if (PersonnageEquipement.TypeEquipement = TypeEquipAR) then
+                begin
+                  PdfEcrit(PdfPage, XGauche +  1, XGauche + 34, Y - ((NbArmure + 2) * HauteurLigne) + 0.6, Parmure.Libelle + Quality, MinPolice);
+                  PdfEcrit(PdfPage, XGauche + 35, XGauche + 53, Y - ((NbArmure + 2) * HauteurLigne) + 0.6, GetAllTexteLibelle(PArmure.Emplacement), MinPolice);
+                end
+              else
+                PdfEcrit(PdfPage, XGauche +  1, XGauche + 34, Y - ((NbArmure + 2) * HauteurLigne) + 0.6, PArmureSimplifiee.Libelle + Quality, MinPolice);
+              // Afficher l'astérisque de la pièce (même principe que les talents,
+              // PdfPersonnageTalentBonus/PdfBlocTalents) - permet de retrouver quelle pièce
+              // cause quel malus affiché sur les Compétences (retour de Nono le 16/08/2026)
+              if AsterisqueParEquipement.Values[PersonnageEquipement.CodeEquipement] <> '' then
+                begin
+                  PdfTaillePolice(PdfPage, PdfFontValue, ConstPoliceArial, 4);
+                  PdfEcrit(PdfPage, XGauche + 31, XGauche + 34, Y - ((NbArmure + 2) * HauteurLigne) + 2.3, AsterisqueParEquipement.Values[PersonnageEquipement.CodeEquipement], 4);
+                  PdfTaillePolice(PdfPage, PdfFontValue, ConstPoliceArial, 9);
+                end;
+              if Enc <> 0 then
+                if EncP <> Enc then
+                  PdfCentre(PdfPage, XGauche + 53, XGauche + 62, Y - ((NbArmure + 2) * HauteurLigne) + 0.6, IntToStr(EncP)+ '('+IntToStr(Enc)+')')
+                else
+                  PdfCentre(PdfPage, XGauche + 53, XGauche + 62, Y - ((NbArmure + 2) * HauteurLigne) + 0.6, IntToStr(Enc));
+              if (PersonnageEquipement.TypeEquipement = TypeEquipAR) then
+                PdfCentre(PdfPage, XGauche + 62, XGauche + 70, Y - ((NbArmure + 2) * HauteurLigne) + 0.6, IntToStr(PArmure.Protection))
+              else
+                PdfCentre(PdfPage, XGauche + 62, XGauche + 70, Y - ((NbArmure + 2) * HauteurLigne) + 0.6, IntToStr(PArmureSimplifiee.Protection));
+              if (PersonnageEquipement.TypeEquipement = TypeEquipAR) and (PArmure.ListeBonus <> '') and (PArmure.ListeBonus <> '-') or
+                 (PersonnageEquipement.TypeEquipement = TypeEquipARS) and (PArmureSimplifiee.ListeBonus <> '') and (PArmureSimplifiee.ListeBonus <> '-') then
+                begin
+                  if (PersonnageEquipement.TypeEquipement = TypeEquipAR) then
+                    NbLoca  := CountOccurrences(PArmure.ListeBonus,',') + 1
+                  else
+                    NbLoca  := CountOccurrences(PArmureSimplifiee.ListeBonus,',') + 1;
+                  for IndLoca := 1 to NbLoca do
+                    begin
+                      if (PersonnageEquipement.TypeEquipement = TypeEquipAR) then
+                        LocData := ExtractChaine(',',PArmure.ListeBonus,IndLoca)
+                      else
+                        LocData := ExtractChaine(',',PArmureSimplifiee.ListeBonus,IndLoca);
+                      if pos(' ',LocData) <> 0 then
+                        LocData := copy(LocData,1,Length(LocData)-2);
+                      PArmureBonus := ChercheArmureBonus(LocData);
+                      LigneBonus := StringReplace(LigneBonus, LocData, PArmureBonus.Libelle, [rfReplaceAll]);
+                      if pos(LocData, ArmureBonii) = 0 then
+                        begin
+                          if ArmureBonii <> '' then
+                           ArmureBonii := ArmureBonii + ',';
+                          ArmureBonii := ArmureBonii + LocData;
+                        end;
+                    end;
+                end;
+              FabricationDetail(PersonnageEquipement.QualiteEquipement, LigneBonus, FabricationBonii);
+              PdfTaillePolice(PdfPage, PdfFontValue, ConstPoliceArial, 6);
+              PdfEcrit(PdfPage, XGauche + 70 +1, XDroite, Y - ((NbArmure + 2) * HauteurLigne) + 0.6, LigneBonus, MinPolice);
+              PdfTaillePolice(PdfPage, PdfFontValue, ConstPoliceArial, 9);
+            end;
+      end;
+
+    // Effets de mutation sur les Points d'Armure (CORPHY_012/016/017, CONTEXT.md §2.7,
+    // étape 9) - ajoutés après le calcul de l'équipement, ne concernent que le PDF.
+    // AsterisqueMutationArmure : une seule astérisque pour tout le bloc (choix de Nono,
+    // pas de numérotation par case) - vraie dès qu'au moins une des 4 cases est concernée.
+    DeltaArmureTete  := PersonnageMutationArmureModif(Personnage, BonusTete);
+    DeltaArmureBras  := PersonnageMutationArmureModif(Personnage, BonusBras);
+    DeltaArmureCorps := PersonnageMutationArmureModif(Personnage, BonusCorps);
+    DeltaArmureJambe := PersonnageMutationArmureModif(Personnage, BonusJambes);
+    ArmureTete  := ArmureTete  + DeltaArmureTete;
+    ArmureBras  := ArmureBras  + DeltaArmureBras;
+    ArmureCorps := ArmureCorps + DeltaArmureCorps;
+    ArmureJambe := ArmureJambe + DeltaArmureJambe;
+    AsterisqueMutationArmure := (DeltaArmureTete <> 0) or (DeltaArmureBras <> 0)
+                                 or (DeltaArmureCorps <> 0) or (DeltaArmureJambe <> 0);
+  end;
+
+Procedure PdfBlocDessinExplication(PdfPage: TPDFPage; XGauche, XDroite, YHaut, YBas, HauteurLigne: Single; ArmureBonii, ArmeBonii, FabricationBonii: String);
+  var
+    NbBonus:      Integer;
+    NbLoca:       Integer;
+    IndLoca:      Integer;
+    LocData:      String;
+    PArmureBonus: StructureArmureBonus;
+    PArmeBonus:   StructureArmeBonus;
+    PFabrication: StructureFabrication;
+    PArmureBonusModif: StructureArmureBonusModif;
+    TxtBonus:     String;
+  begin
+    // Dessin cadre
+    PdfPage.DrawLine(XGauche + 3, YHaut,    XGauche + 3, YBas + 3, 1);
+    PdfPage.DrawLine(XDroite    , YHaut,    XDroite    , YBas + 3, 1);
+    PdfPage.DrawLine(XGauche + 3, YHaut,    XDroite    , YHaut, 1);
+    PdfPage.DrawLine(XGauche + 3, YBas + 3, XDroite    , YBas + 3, 1);
+
+    NbBonus := 0;
+    if ArmureBonii <> '' then
+      begin
+        Inc(NbBonus);
+        Inc(NbBonus);
+        PdfPage.WriteText(XGauche + 4,YHaut-(NbBonus*HauteurLigne), ' --------- ' + GetTexteLibelle('LAB_122') + ' --------- ');
+        Inc(NbBonus);
+        NbLoca := CountOccurrences(ArmureBonii,',')+1;
+        For IndLoca := 1 to NbLoca do
+          begin
+            Inc(NbBonus);
+            LocData      := ExtractChaine(',',ArmureBonii,IndLoca);
+            PArmureBonus := ChercheArmureBonus(LocData);
+            TxtBonus     := PArmureBonus.Libelle+':'+PArmureBonus.Malus;
+            if PArmureBonus.Malus = '' then
+              // Modifier structuré (attribut name="CodeCompetence", 15/08/2026) : plus de
+              // texte libre dans .Malus pour ces entrées, on reconstruit un texte lisible
+              // à partir de ListArmureBonusModif (même principe que WinArmor)
+              for PArmureBonusModif in ListArmureBonusModif do
+                if CompareRechercheValeur(PArmureBonusModif.CodeArmureBonus, PArmureBonus.CodeArmureBonus) then
+                  begin
+                    if TxtBonus <> PArmureBonus.Libelle+':' then
+                      TxtBonus := TxtBonus + ', ';
+                    TxtBonus := TxtBonus + ChercheCompetence(PArmureBonusModif.CodeCompetence).Libelle
+                                          + ' ' + IntToStr(PArmureBonusModif.Valeur) + '%';
+                  end;
+            PdfPage.WriteText(XGauche + 4,YHaut-(NbBonus*HauteurLigne), TxtBonus);
+          end;
+      end;
+
+    if ArmeBonii <> '' then
+      begin
+        Inc(NbBonus);
+        Inc(NbBonus);
+        PdfPage.WriteText(XGauche + 4,YHaut-(NbBonus*HauteurLigne), ' ---------- ' + GetTexteLibelle('LAB_123') + ' ---------- ');
+        Inc(NbBonus);
+        NbLoca := CountOccurrences(ArmeBonii,',')+1;
+        For IndLoca := 1 to NbLoca do
+          begin
+            Inc(NbBonus);
+            LocData     := ExtractChaine(',',ArmeBonii,IndLoca);
+            PArmeBonus  := ChercheArmeBonus(LocData);
+            TxtBonus    := PArmeBonus.Libelle+':'+PArmeBonus.Resume;
+            PdfPage.WriteText(XGauche + 4,YHaut-(NbBonus*HauteurLigne), TxtBonus);
+          end;
+      end;
+
+    if FabricationBonii <> '' then
+      begin
+        Inc(NbBonus);
+        Inc(NbBonus);
+        PdfPage.WriteText(15,YHaut-(NbBonus*HauteurLigne), ' ---------- ' + GetTexteLibelle('LAB_124') + ' ---------- ');
+        Inc(NbBonus);
+        NbLoca := CountOccurrences(FabricationBonii,',')+1;
+        For IndLoca := 1 to NbLoca do
+          begin
+            Inc(NbBonus);
+            LocData     := ExtractChaine(',',FabricationBonii,IndLoca);
+            PFabrication:= ChercheFabrication(LocData);
+            TxtBonus    := PFabrication.Libelle+':'+PFabrication.Resume;
+            PdfPage.WriteText(XGauche + 4,YHaut-(NbBonus*HauteurLigne), TxtBonus);
+          end;
+      end;
+  end;
+
+Procedure PdfBlocArmourPoints(PdfPage: TPDFPage; PdfImgShadow: Integer; X, Y: Single; ArmureTete, ArmureBras, ArmureCorps, ArmureJambe, ArmureBouclier: Integer; AsterisqueMutation: Boolean);
+  var
+    ImgX: Single;
+    ImgY: Single;
+  begin
+    // (X, Y) = coin HAUT-GAUCHE du cadre (corrigé le 15/08/2026 suite au retour de
+    // Nono : doit tomber exactement sous le coin bas-gauche du cadre Encombrement,
+    // comme les autres blocs de la page s'alignent entre eux). L'image (55x72mm) est
+    // décalée de 4mm par rapport au cadre à gauche/haut/droite, et 8mm en bas pour
+    // laisser la place à l'étiquette "Shield" qui déborde sous l'image (PdfEncadre,
+    // Bouclier = true, Bas = 7.5).
+    ImgX := X + 4;
+    ImgY := Y - 4 - 72;
+
+    // Cadre
+    PdfPage.DrawLine(X     , Y - 84, X     , Y     , 1);
+    PdfPage.DrawLine(X + 63, Y - 84, X + 63, Y     , 1);
+    PdfPage.DrawLine(X     , Y     , X + 63, Y     , 1);
+    PdfPage.DrawLine(X     , Y - 84, X + 63, Y - 84, 1);
+
+    // Astérisque de mutation (CONTEXT.md §2.7 étape 9) : une seule, pas de numéro, coin
+    // haut-droit du cadre, dès qu'au moins une case a un bonus de mutation.
+    if AsterisqueMutation then
+      begin
+        PdfTaillePolice(PdfPage, PdfFontValue, ConstPoliceArial, 9);
+        PdfPage.WriteText(X + 60, Y - 3, '*');
+      end;
+
+    // Image de fond (silhouette), taille fixe 55x72mm comme dans l'ancien
+    // PdfPersonnageCreation. (ImgX,ImgY) = coin bas-gauche de l'image, comme
+    // (135,190) dans l'ancien PDF - tous les décalages ci-dessous reproduisent à
+    // l'identique les coordonnées absolues de l'ancien bloc, juste traduites par
+    // rapport à ce nouveau point d'ancrage.
+    PdfPage.DrawImage(ImgX, ImgY, 55, 72, PdfImgShadow);
+
+    PdfTaillePolice(PdfPage, PdfFontBack, ConstPoliceCarlson+ConstPoliceGras, 10);
+    PdfEncadre(PdfPage, ImgX + 10  , ImgY + 60  , false, GetTexteLibelle('PDF_ARMOURPOINT_HEAD'), '', '01-09');
+    PdfEncadre(PdfPage, ImgX + 10  , ImgY + 39  , false, GetTexteLibelle('PDF_ARMOURPOINT_RIGHTARM1'), GetTexteLibelle('PDF_ARMOURPOINT_RIGHTARM2'), '25-44');
+    PdfEncadre(PdfPage, ImgX + 10  , ImgY + 17.5, false, GetTexteLibelle('PDF_ARMOURPOINT_RIGHTLEG'), '', '90-00');
+    PdfEncadre(PdfPage, ImgX + 10  , ImgY       , true , GetTexteLibelle('PDF_ARMOURPOINT_SHIELD'), '', '');
+    PdfEncadre(PdfPage, ImgX + 49.5, ImgY + 51  , false, GetTexteLibelle('PDF_ARMOURPOINT_LEFTARM1'), GetTexteLibelle('PDF_ARMOURPOINT_LEFTARM2'), '10-24');
+    PdfEncadre(PdfPage, ImgX + 49.5, ImgY + 29.5, false, GetTexteLibelle('PDF_ARMOURPOINT_BODY'), '', '45-79');
+    PdfEncadre(PdfPage, ImgX + 49.5, ImgY + 5.5 , false, GetTexteLibelle('PDF_ARMOURPOINT_LEFTLEG'), '', '80-89');
+
+    PdfTaillePolice(PdfPage, PdfFontValue, ConstPoliceArial, 9);
+    if ArmureBouclier > 0 then
+      PdfPage.WriteText(ImgX + 10, ImgY, IntToStr(ArmureBouclier));
+    if ArmureJambe > 0 then
+      begin
+        PdfPage.WriteText(ImgX + 10  , ImgY + 17.5, IntToStr(ArmureJambe));
+        PdfPage.WriteText(ImgX + 49.5, ImgY + 5.5 , IntToStr(ArmureJambe));
+      end;
+    if ArmureBras > 0 then
+      begin
+        PdfPage.WriteText(ImgX + 10  , ImgY + 39, IntToStr(ArmureBras));
+        PdfPage.WriteText(ImgX + 49.5, ImgY + 51, IntToStr(ArmureBras));
+      end;
+    if ArmureTete > 0 then
+      PdfPage.WriteText(ImgX + 10, ImgY + 60, IntToStr(ArmureTete));
+    if ArmureCorps > 0 then
+      PdfPage.WriteText(ImgX + 49.5, ImgY + 29.5, IntToStr(ArmureCorps));
+  end;
+
+// Petite table des mutations obtenues (CONTEXT.md §2.7, étape 9) - même style de cadre que
+// PdfBlocEncombrement (titre + lignes), une seule colonne. Seules les NbLignes mutations les
+// plus récentes sont affichées (Personnage.Mutations, ajoutées dans l'ordre d'obtention) - au-
+// delà, les plus anciennes sont omises plutôt que de faire déborder le cadre.
+Function PdfBlocMutations(PdfPage: TPDFPage; Personnage: StructurePersonnage; XGauche, XDroite, Y, HauteurLigne: Single; NbLignes: Integer; MinPolice: Integer; AsterisqueParMutation: TStringList): Single;
+  var
+    IndM, Debut: Integer;
+    PCorruptionTable: StructureCorruptionTable;
+    Texte: String;
+  begin
+    // Cadre (titre + NbLignes lignes)
+    PdfPage.DrawLine(XGauche, Y,                    XGauche, Y - ((NbLignes + 1) * HauteurLigne), 1);
+    PdfPage.DrawLine(XDroite, Y,                    XDroite, Y - ((NbLignes + 1) * HauteurLigne), 1);
+    PdfPage.DrawLine(XGauche, Y,                    XDroite, Y,                                   1);
+    PdfPage.DrawLine(XGauche, Y - HauteurLigne,      XDroite, Y - HauteurLigne,                    1);
+    PdfPage.DrawLine(XGauche, Y - ((NbLignes + 1) * HauteurLigne), XDroite, Y - ((NbLignes + 1) * HauteurLigne), 1);
+
+    // Titre
+    PdfTaillePolice(PdfPage, PdfFontBack, ConstPoliceCarlson+ConstPoliceGras, 10);
+    PdfCentre(PdfPage, XGauche + 1, XDroite, Y - HauteurLigne + 0.6, GetTexteLibelle('LAB_172'));
+
+    // Les NbLignes mutations les plus récentes (les plus anciennes, en tête du tableau, sont
+    // silencieusement omises au-delà - même principe que PdfBlocCorruptionDetail).
+    PdfTaillePolice(PdfPage, PdfFontValue, ConstPoliceArial, MinPolice);
+    Debut := Length(Personnage.Mutations) - NbLignes;
+    if Debut < 0 then
+      Debut := 0;
+    for IndM := Debut to High(Personnage.Mutations) do
+      begin
+        PCorruptionTable := ChercheCorruptionTable(Personnage.Mutations[IndM].Code);
+        // Numéro d'astérisque (CONTEXT.md §2.7, étape 9) si cette mutation a un effet
+        // structuré sur une caractéristique/compétence - même "(N)" que celui affiché sur
+        // la donnée affectée (PdfPersonnageMutationAsterisques).
+        Texte := PCorruptionTable.Libelle;
+        if AsterisqueParMutation.Values[Personnage.Mutations[IndM].Code] <> '' then
+          Texte := Texte + ' ' + AsterisqueParMutation.Values[Personnage.Mutations[IndM].Code];
+        // Libellé (+ astérisque) souvent trop long pour tenir sur une ligne dans cette colonne
+        // étroite : PdfEcrit le répartit alors sur 2 lignes - même heuristique de longueur que
+        // PdfBlocCorruptionDetail/PdfBlocTalents pour ne pas déborder sous la bordure.
+        if Length(Texte) > 18 then
+          PdfEcrit(PdfPage, XGauche + 1, XDroite - 1, Y - ((IndM - Debut + 2) * HauteurLigne) + 2,   Texte, MinPolice)
+        else
+          PdfEcrit(PdfPage, XGauche + 1, XDroite - 1, Y - ((IndM - Debut + 2) * HauteurLigne) + 0.6, Texte, MinPolice);
+      end;
+
+    Result := Y - ((NbLignes + 1) * HauteurLigne);
+  end;
+
 // Cherche la valeur du champ nommé Champ dans Enr. Renvoie une case vide (Valeur = '') si le
 // champ n'existe pas dans cet enregistrement, plutôt qu'une erreur : cela permet à une
 // préparation de ne pas renseigner un champ non pertinent pour une entrée donnée.
@@ -1744,6 +3090,10 @@ Function DessinerTableau(PdfPage: TPDFPage; const Tableau: TPdfTableau; const Do
     NbEntrees, NbChamps, IndE, IndC: Integer;
     XFinTableau, XCol, YHautLigne:   Single;
     ValeurCase:                      TPdfValeurCase;
+    // orColonne : découpage de l'annotation en plusieurs lignes empilées (une par source, ex.
+    // Talent '|' Mutation) - CONTEXT.md §2.7.
+    LignesAnnotation:                TStringList;
+    IndLigne:                        Integer;
     // orLigne uniquement
     XPos:           array of Single;
     NbLignesEntete: Integer;
@@ -1813,8 +3163,22 @@ Function DessinerTableau(PdfPage: TPDFPage; const Tableau: TPdfTableau; const Do
 
               if ValeurCase.Annotation <> '' then
                 begin
-                  YHautLigne := Tableau.Y - (IndC * Tableau.HauteurLigne);
-                  PdfEcrit(PdfPage, XCol + (Tableau.LargeurEntree * 0.5) + 0.75, XCol + Tableau.LargeurEntree + 0.75, YHautLigne + 3, ValeurCase.Annotation, 4);
+                  YHautLigne := Tableau.Y - ((IndC+1) * Tableau.HauteurLigne) + 1;
+                  LignesAnnotation := TStringList.Create;
+                  ExtractStrings(['|'], [], PChar(ValeurCase.Annotation), LignesAnnotation);
+                  // Empilement : une ligne par source, avec le même espacement que celui déjà
+                  // utilisé par PdfEcrit en interne pour ses propres cas à 2/3 lignes.
+                  case LignesAnnotation.Count of
+                    1: PdfEcrit(PdfPage, XCol + (Tableau.LargeurEntree * 0.5) + 0.75, XCol + Tableau.LargeurEntree + 0.75, YHautLigne + 1.5, LignesAnnotation[0], 4);
+                    2: begin
+                         PdfEcrit(PdfPage, XCol + (Tableau.LargeurEntree * 0.5) + 0.75, XCol + Tableau.LargeurEntree + 0.75, YHautLigne + 1.5 + 1,   LignesAnnotation[0], 4);
+                         PdfEcrit(PdfPage, XCol + (Tableau.LargeurEntree * 0.5) + 0.75, XCol + Tableau.LargeurEntree + 0.75, YHautLigne + 1.5 - 1,   LignesAnnotation[1], 4);
+                       end;
+                    else
+                       for IndLigne := 0 to LignesAnnotation.Count - 1 do
+                         PdfEcrit(PdfPage, XCol + (Tableau.LargeurEntree * 0.5) + 0.75, XCol + Tableau.LargeurEntree + 0.75, YHautLigne + 1.5 + 1.4 - (IndLigne * 1.4), LignesAnnotation[IndLigne], 4);
+                  end;
+                  LignesAnnotation.Free;
                 end;
             end;
 
@@ -1922,7 +3286,13 @@ Function DessinerTableau(PdfPage: TPDFPage; const Tableau: TPdfTableau; const Do
                 if ValeurCase.Annotation <> '' then
                   begin
                     PdfTaillePolice(PdfPage, PdfFontBack, ConstPoliceArial, 6);
-                    PdfEcrit(PdfPage, XPos[IndC+1] - 5, XPos[IndC+1] + 3.5, YDonnee + 1, ValeurCase.Annotation, 6);
+                    // Boîte élargie le 16/08/2026 (retour de Nono) : les annotations de talent
+                    // seules ("><(3)") tenaient dans 8.5mm, mais les nouvelles annotations
+                    // d'armure ("(5) -10%") sont plus longues et provoquaient un retour à la
+                    // ligne (PdfEcrit) qui désalignait le pourcentage du numéro. Champ Nom
+                    // uniquement (Valeurs[0]) sur les tableaux Compétences, ne touche pas
+                    // l'annotation des Caractéristiques (orColonne, autre PdfEcrit plus haut).
+                    PdfEcrit(PdfPage, XPos[IndC+1] - 8, XPos[IndC+1] + 5, YDonnee + 1, ValeurCase.Annotation, 6);
                   end;
               end;
           end;
@@ -1934,7 +3304,7 @@ Function DessinerTableau(PdfPage: TPDFPage; const Tableau: TPdfTableau; const Do
 // Prépare les données du tableau des Caractéristiques (10 entrées = les 10 caractéristiques,
 // dans l'ordre StructureAttribut.OrdreAttribut ; 6 champs par entrée : Code, Initial, Improv,
 // Advances, Current, Bonus). Aucun dessin ici, uniquement du calcul/lecture de données.
-Function PdfPreparerRecordSetCaracteristiques(Personnage: StructurePersonnage; PMetier: StructureMetier): TPdfRecordSet;
+Function PdfPreparerRecordSetCaracteristiques(Personnage: StructurePersonnage; PMetier: StructureMetier; AnnotationMutation: TStringList): TPdfRecordSet;
   var
     PAttribut:       StructureAttribut;
     PMetierAttribut: StructureMetierAttribut;
@@ -1948,6 +3318,16 @@ Function PdfPreparerRecordSetCaracteristiques(Personnage: StructurePersonnage; P
       begin
         PAttribut      := ListeAttribut[Ind-1];
         AttributDonnee := PdfPersonnageAttribut(Personnage, PAttribut.CodeAttribut, Bonus);
+        // Effets à delta pur des mutations obtenues (CONTEXT.md §2.7, étape 9) - même principe
+        // que l'annotation armure sur les compétences, concaténée à l'annotation existante.
+        // Séparateur '|' : permet à DessinerTableau d'afficher chaque source sur sa propre
+        // ligne plutôt que de laisser PdfEcrit couper le texte concaténé n'importe où.
+        if AnnotationMutation.Values[PAttribut.CodeAttribut] <> '' then
+          begin
+            if Bonus <> '' then
+              Bonus := Bonus + '|';
+            Bonus := Bonus + AnnotationMutation.Values[PAttribut.CodeAttribut];
+          end;
 
         SetLength(Result[Ind-1].Valeurs, 6);
 
@@ -1990,7 +3370,7 @@ Function PdfPreparerRecordSetCaracteristiques(Personnage: StructurePersonnage; P
 // champs (Nom, Attribut, Stat, Upg, Adv, Total). Nom et Attribut partagent le même style de
 // police par ligne (en-tête, ou "accent" si la compétence appartient au métier en cours) —
 // c'est le même calcul que faisait l'ancien code juste avant de dessiner.
-Function PdfPreparerRecordSetCompetencesBase(Personnage: StructurePersonnage; PMetier: StructureMetier; ListPage: TStringList; out TotalEsquive, TotalCalme, TotalResitance, TotalCommandement, TotalIntuition: Integer; out ListPris: String): TPdfRecordSet;
+Function PdfPreparerRecordSetCompetencesBase(Personnage: StructurePersonnage; PMetier: StructureMetier; ListPage: TStringList; AnnotationArmure: TStringList; out TotalEsquive, TotalCalme, TotalResitance, TotalCommandement, TotalIntuition: Integer; out ListPris: String): TPdfRecordSet;
   var
     Ind:              Integer;
     Comp:             String;
@@ -2038,6 +3418,8 @@ Function PdfPreparerRecordSetCompetencesBase(Personnage: StructurePersonnage; PM
           StyleLigne := spValeur; // colonnes EnTete=True => police d'en-tête par défaut
 
         Bonus := PdfPersonnageCompetenceBonus(Personnage, Comp);
+        if AnnotationArmure.Values[Comp] <> '' then
+          Bonus := Bonus + AnnotationArmure.Values[Comp];
 
         SetLength(Result[Ind].Valeurs, 6);
 
@@ -2068,7 +3450,7 @@ Function PdfPreparerRecordSetCompetencesBase(Personnage: StructurePersonnage; PM
       end;
   end;
 
-Function PdfPreparerRecordSetCompetencesGroupees(Personnage: StructurePersonnage; ListPris: String; CapaciteMax: Integer): TPdfRecordSet;
+Function PdfPreparerRecordSetCompetencesGroupees(Personnage: StructurePersonnage; ListPris: String; CapaciteMax: Integer; AnnotationArmure: TStringList): TPdfRecordSet;
   var
     Ind:                  Integer;
     NbLigne:              Integer;
@@ -2099,6 +3481,8 @@ Function PdfPreparerRecordSetCompetencesGroupees(Personnage: StructurePersonnage
                   ValBonus := '  ' + ValBonus;
 
                 Bonus := PdfPersonnageCompetenceBonus(Personnage, PCompetence.CodeCompetence);
+                if AnnotationArmure.Values[PCompetence.CodeCompetence] <> '' then
+                  Bonus := Bonus + AnnotationArmure.Values[PCompetence.CodeCompetence];
 
                 SetLength(Result, Length(Result)+1);
                 SetLength(Result[High(Result)].Valeurs, 6);
@@ -2180,17 +3564,19 @@ Procedure PdfPersonnageCreationFeldo2P(Personnage: StructurePersonnage);
     PMetier:         StructureMetier;
     PMetierNiveau:   StructureMetierNiveau;
     PRaceAttribut:   StructureRaceAttribut;
-    PTalent:         StructureTalent;
     PMetierAttribut: StructureMetierAttribut;
-    PMetierTalent:   StructureMetierTalent;
     Mouv:            Integer = 0;
     ListPage:        TStringList;
+    ListAsterisqueArmure: TStringList;
+    AsterisqueParEquipement: TStringList;
+    ListAsterisqueMutation: TStringList;
+    AsterisqueParMutation:  TStringList;
+    AsterisqueFinalMutation: Integer;
     Comp:            String;
     PCompetence:     StructureCompetence;
     ValStat:         String;
     ValBonus:        String;
     ValTotal:        String;
-    NbLigne:         Integer;
     IndC:            Integer;
     ListPris:        String;
     BF, BE, BFM:     Integer;
@@ -2198,46 +3584,21 @@ Procedure PdfPersonnageCreationFeldo2P(Personnage: StructurePersonnage);
     DurACuire:       Integer = 0;
     ValDurACuire:    Integer = 0;
     BonusEncomb:     Integer = 0;
-    Enc:             Integer;
-    EncP:            Integer;
-    PArme:           StructureArme;
-    PArmure:         StructureArmure;
-    Deg:             Integer;
-    Pourcent:        String;
     EncArme:         Integer;
     EncArmure:       Integer;
     ArmureTete:      Integer;
     ArmureBras:      Integer;
     ArmureCorps:     Integer;
     ArmureJambe:     Integer;
-    ArmureBouclier:  Integer = 0;
-    PosProtection:   SizeInt;
-    NbLoca:          Integer;
-    IndLoca:         Integer;
+    ArmureBouclier:  Integer;
+    DessinHautArmourPoints: Single;
+    AsterisqueMutationArmure: Boolean;
     LocData:         String;
-    NbArme:          Integer;
-    NbArmure:        Integer;
     ArmeBonii:       String = '';
     ArmureBonii:     String = '';
     FabricationBonii:String = '';
-    PArmureBonus:    StructureArmureBonus;
-    PArmeBonus:      StructureArmeBonus;
-    NbBonus:         Integer;
-    TxtBonus:        String;
-    IndDivers:       Integer = 0;
-    PasBonus:        Boolean;
-    ListMalii:       String;
-    NBSort:          Integer;
-    PSort:           StructureSort;
-    LigneBonus:      String;
     Ind:             Integer;
     PAttribut:       StructureAttribut;
-    PFabrication:    StructureFabrication;
-    Quality:         String;
-    Portee:          String;
-    TexteRange1:     String;
-    TexteRange2:     String;
-    PorteMoyenne:    Integer;
     Chance:          Integer;
     Determine:       Integer;
     TBonusCC:        Integer=0;
@@ -2250,17 +3611,13 @@ Procedure PdfPersonnageCreationFeldo2P(Personnage: StructurePersonnage);
     AttributDonnee:          StructureDonnee;
     CompetenceDonnee:        StructureDonnee;
     PersonnageTalent:        StructurePersonnagetalent;
-    TalentDonnee:            StructureDonnee;
-    PersonnageEquipement:    StructurePersonnageEquipement;
     PersonnageMetier:        StructurePersonnageMetier;
-//    PersonnageCompetence:    StructurePersonnageCompetence;
-    PArmureSimplifiee:       StructureArmureSimplifiee;
-//    NivCompMetier:           Integer = 0;
-    NivTalMetier:            Integer = 0;
-    ListeTalent:             String='';
-    bidon:                   Integer=0;
+    PersonnageCompetence:    StructurePersonnageCompetence;
+    NivCompMetier:           Integer = 0;
     ArmureSet:               Boolean = false;
     AmePure:                 Integer=0;
+    PersonnageCorruption:    StructurePersonnageCorruption;
+    LostCorruption:          Integer = 0;
     PersonnageXpAttribut:    StructurePersonnageXpAttribut;
     PersonnageXpCompetence:  StructurePersonnageXpCompetence;
     PersonnageXpTalent:      StructurePersonnageXpTalent;
@@ -2292,6 +3649,7 @@ Procedure PdfPersonnageCreationFeldo2P(Personnage: StructurePersonnage);
         PdfImgWarhammer: Integer;
         PdfImgFantasy:   Integer;
         PdfImgUbersreik: Integer;
+        PdfImgShadow:    Integer;
         // Entete
         DessinDebutHautEntete:Single  = 285;
         DessinHauteurEntete:  Single  = 4.5;
@@ -2337,8 +3695,12 @@ Procedure PdfPersonnageCreationFeldo2P(Personnage: StructurePersonnage);
         DessinDebutHautCor:   Single;
         DessinDebutGaucheCor: Single;
         DessinHauteurCor:     Single = 4.4;
-        DessinNbLigCor:       Integer = 4;
+        DessinNbLigCor:       Integer = 6;
         DessinLargeurCor:     Single;
+        // Corruption Détail (tableau Montant | Libellé, à droite d'Expérience/Corruption)
+        DessinDebutGaucheCorDet: Single;
+        DessinHauteurCorDet:     Single  = 4.4;
+        DessinNbLigCorDet:       Integer = 11;
       // Colonne droite
         // Compétence Groupée
         DessinDebutHautComg:  Single;
@@ -2450,11 +3812,15 @@ Procedure PdfPersonnageCreationFeldo2P(Personnage: StructurePersonnage);
     PMetierNiveau  := ChercheMetierNiveau(Personnage.MetierEnCours.CodeMetier, Personnage.MetierEnCours.NiveauMetier);
     PRaceAttribut  := ChercheRaceAttribut(Personnage.Race, ConstCaracMouvement);
     Mouv           := StrToInt(PRaceAttribut.CalculRace);
+    // Effets à delta pur des mutations obtenues sur le Mouvement (CONTEXT.md §2.7, étape 8)
+    // - même fonction que pour les autres attributs, ConstCaracMouvement ('ATTR_Move') utilisé
+    // comme un code d'attribut de plus.
+    Mouv           := Mouv + PersonnageMutationAttributModif(Personnage, ConstCaracMouvement);
 
     Chance         := 0;
     Determine      := 0;
     For PRaceAttribut in ListRaceAttribut do
-      if ExtractStringAfter(PRaceAttribut.CodeRace, SeparateurChance) = Personnage.Race then
+      if CompareRechercheValeur(Personnage.Race, PRaceAttribut.CodeRace) then
         case ExtractStringAfter(PRaceAttribut.CodeAttribut, SeparateurLivre) of
           ConstCaracDestin: Chance    := Chance    + StrToIntDef(PRaceAttribut.CalculRace,0);
           ConstCaracResil:  Determine := Determine + StrToIntDef(PRaceAttribut.CalculRace,0);
@@ -2524,6 +3890,13 @@ Procedure PdfPersonnageCreationFeldo2P(Personnage: StructurePersonnage);
     ListPage       := TStringList.Create;
     PdfPersonnageCompetenceTri(ListPage);
 
+    // Astérisques des mutations (CONTEXT.md §2.7, étape 9) - calculés tôt, avant le tableau
+    // Caractéristiques qui en a besoin (contrairement aux armures, qui ne touchent que des
+    // compétences et sont calculées plus tard, juste avant les tableaux de compétences).
+    // Départ à Personnage.Asterisque (même baseline que les talents) ; les armures enchaînent
+    // ensuite après AsterisqueFinalMutation, pour ne jamais réutiliser un numéro déjà pris.
+    ListAsterisqueMutation := PdfPersonnageMutationAsterisques(Personnage, Personnage.Asterisque, AsterisqueParMutation, AsterisqueFinalMutation);
+
     // Bloc Entête (extrait dans PdfBlocEntete, CONTEXT.md §2.4)
     DessinDebutHautCarac := PdfBlocEntete(PdfPage, Personnage, PRace, PMetier, PMetierNiveau, LocData,
       DessinDebColG, DessinFinEntete, DessinDebutHautEntete, DessinHauteurEntete, DessinNbLigEntete, MinPolice) - 3;
@@ -2544,7 +3917,7 @@ Procedure PdfPersonnageCreationFeldo2P(Personnage: StructurePersonnage);
     TableauCarac.Champs[4].Libelle := GetTexteLibelle('PDF_CHARAC3_CURRENT');  TableauCarac.Champs[4].Champ := 'Current';
     TableauCarac.Champs[5].Libelle := GetTexteLibelle('PDF_CHARAC3_BONUS');    TableauCarac.Champs[5].Champ := 'Bonus';
 
-    DonneesCarac := PdfPreparerRecordSetCaracteristiques(Personnage, PMetier);
+    DonneesCarac := PdfPreparerRecordSetCaracteristiques(Personnage, PMetier, ListAsterisqueMutation);
     DessinDebutHautComp := DessinerTableau(PdfPage, TableauCarac, DonneesCarac) - 3;
     DessinDebutHautComg := DessinDebutHautComp;
 
@@ -2598,7 +3971,25 @@ Procedure PdfPersonnageCreationFeldo2P(Personnage: StructurePersonnage);
     TableauComp.Champs[5].DecalageValeurMin := 3.5;
     TableauComp.Champs[5].DecalageValeurMax := 3.5;
 
-    DonneesComp := PdfPreparerRecordSetCompetencesBase(Personnage, PMetier, ListPage, TotalEsquive, TotalCalme, TotalResitance, TotalCommandement, TotalIntuition, ListPris);
+    // Astérisques numérotées des malus d'armure sur les compétences (CONTEXT.md §2.5,
+    // conception validée avec Nono le 15-16/08/2026) - calculées ici, avant les tableaux de
+    // Compétences de la page 1, car Personnage.Equipement est disponible dès le départ (pas
+    // besoin d'attendre que la page 2 soit dessinée). Libérée après le tableau des
+    // compétences groupées, seul autre endroit où elle sert.
+    // Enchaîne après AsterisqueFinalMutation (calculé plus haut) pour ne jamais réutiliser un
+    // numéro déjà pris par une mutation à effet sur une caractéristique.
+    ListAsterisqueArmure := PdfPersonnageArmureAsterisques(Personnage, AsterisqueFinalMutation, AsterisqueParEquipement);
+
+    // Fusionne les annotations de compétence des mutations (CONTEXT.md §2.7, étape 9) dans
+    // ListAsterisqueArmure, seule TStringList lue par PdfPreparerRecordSetCompetencesBase/
+    // Groupees (Values[Comp] concaténé à l'annotation existante) - Name=CodeAttribut restées
+    // dans ListAsterisqueMutation (utilisées plus haut pour Caractéristiques) n'y trouvent
+    // simplement jamais de correspondance côté compétence, sans effet de bord.
+    For Ind := 0 to ListAsterisqueMutation.Count - 1 do
+      ListAsterisqueArmure.Values[ListAsterisqueMutation.Names[Ind]] :=
+        ListAsterisqueArmure.Values[ListAsterisqueMutation.Names[Ind]] + ListAsterisqueMutation.ValueFromIndex[Ind];
+
+    DonneesComp := PdfPreparerRecordSetCompetencesBase(Personnage, PMetier, ListPage, ListAsterisqueArmure, TotalEsquive, TotalCalme, TotalResitance, TotalCommandement, TotalIntuition, ListPris);
     ListPage.Destroy;
     DessinDebutHautAmb := DessinerTableau(PdfPage, TableauComp, DonneesComp) - 3;
 
@@ -2607,51 +3998,12 @@ Procedure PdfPersonnageCreationFeldo2P(Personnage: StructurePersonnage);
     DessinDebutHautDes := DessinDebutHautRes;
 
     // Bloc Résilience / Destin (extrait dans PdfBlocResilience / PdfBlocDestin, CONTEXT.md §2.4)
+    // Réagencement du 16/08/2026 : Résilience/Destin raccourci (78mm -> 53mm) pour laisser
+    // la place à Mouvement sur la même rangée (voir CONTEXT.md §2.6).
     PdfBlocResilience(PdfPage, Personnage, DessinDebColG, DessinDebutHautRes, DessinNbLigRes, DessinHauteurRes, MinPolice, Determine, IndC);
-    PdfBlocDestin(PdfPage, Personnage, DessinDebColG + 40, DessinDebutHautDes, DessinHauteurDes, MinPolice, Chance);
-
-    DessinDebutHautExp := DessinDebutHautDes - (indC * DessinHauteurDes) - 3;
-
-    //// Dessin Blessure
-    //PdfPage.DrawLine( DessinDebColG , DessinDebutHautBle, DessinDebColG, DessinDebutHautBle - (DessinNbLigBle * DessinHauteurBle), 1);
-    //PdfPage.DrawLine( 47 , DessinDebutHautBle - (4 * DessinHauteurBle), 47, DessinDebutHautBle - (5 * DessinHauteurBle), 1);
-    //PdfPage.DrawLine( 66 , DessinDebutHautBle - (1 * DessinHauteurBle), 66, DessinDebutHautBle - (DessinNbLigBle * DessinHauteurBle), 1);
-    //PdfPage.DrawLine( 79 , DessinDebutHautBle - (1 * DessinHauteurBle), 79, DessinDebutHautBle - (DessinNbLigBle * DessinHauteurBle), 1);
-    //PdfPage.DrawLine( DessinFinColG, DessinDebutHautBle, DessinFinColG, DessinDebutHautBle - (DessinNbLigBle * DessinHauteurBle), 1);
-    //for IndC := 0 to DessinNbLigBle do
-    //  if (IndC < 2) or (IndC = DessinNbLigBle) then
-    //    PdfPage.DrawLine(DessinDebColG,DessinDebutHautBle - (indC * DessinHauteurBle), DessinFinColG, DessinDebutHautBle - (indC * DessinHauteurBle), 1)
-    //  else
-    //    PdfPage.DrawLine(DessinDebColG,DessinDebutHautBle - (indC * DessinHauteurBle), 79, DessinDebutHautBle - (indC * DessinHauteurBle), 1);
-    //// Texte Blessure
-    //PdfTaillePolice(PdfPage, PdfFontBack, ConstPoliceCarlson+ConstPoliceGras, 10);
-    //PdfCentre(PdfPage,22,DessinFinColG,DessinDebutHautBle - (1 * DessinHauteurBle) + 1, GetTexteLibelle('PDF_WOUNDS1_WOUNDS'));
-    //PdfEcrit(PdfPage,22,79,DessinDebutHautBle - (2 * DessinHauteurBle) + 1, GetTexteLibelle('PDF_WOUNDS7_BS'),MinPolice);
-    //PdfEcrit(PdfPage,22,79,DessinDebutHautBle - (3 * DessinHauteurBle) + 1, GetTexteLibelle('PDF_WOUNDS7_BT'),MinPolice);
-    //PdfEcrit(PdfPage,22,79,DessinDebutHautBle - (4 * DessinHauteurBle) + 1, GetTexteLibelle('PDF_WOUNDS7_BWP'),MinPolice);
-    //PdfEcrit(PdfPage,22,47,DessinDebutHautBle - (5 * DessinHauteurBle) + 1, GetTexteLibelle('PDF_WOUNDS5_HARDY'),MinPolice);
-    //PdfEcrit(PdfPage,22,79,DessinDebutHautBle - (6 * DessinHauteurBle) + 1, GetTexteLibelle('PDF_WOUNDS7_Tot'),MinPolice);
-    //// Valeur Blessure
-    //Ch := IntToStr(Floor(BF/10));
-    //if Length(Ch) = 1 then Ch := ' '+Ch;
-    //PdfCentre(PdfPage,66,79,DessinDebutHautBle - (2 * DessinHauteurBle) + 1, Ch);
-    //Ch := IntToStr(Floor(BE/10)*2);
-    //if Length(Ch) = 1 then Ch := ' '+Ch;
-    //PdfCentre(PdfPage,66,79,DessinDebutHautBle - (3 * DessinHauteurBle) + 1, Ch);
-    //Ch := IntToStr(Floor(BFM/10));
-    //if Length(Ch) = 1 then Ch := ' '+Ch;
-    //PdfCentre(PdfPage,66,79,DessinDebutHautBle - (4 * DessinHauteurBle) + 1, Ch);
-    //if DurACuire > 0 then
-    //  begin
-    //    Ch := IntToStr(DurACuire);
-    //    if Length(Ch) = 1 then Ch := ' '+Ch;
-    //    PdfCentre(PdfPage,47,66,DessinDebutHautBle - (5 * DessinHauteurBle) + 1, IntToStr(ValDurACuire));
-    //    PdfCentre(PdfPage,66,79,DessinDebutHautBle - (5 * DessinHauteurBle) + 1, Ch);
-    //  end;
-    //PRaceAttribut := ChercheRaceAttribut(Personnage.Race, ConstCaracBlessure);
-    //Ch := IntToStr(CalculBlessure(PRaceAttribut.CalculRace, BF, BE, BFM) + DurACuire);
-    //if Length(Ch) = 1 then Ch := ' '+Ch;
-    //PdfCentre(PdfPage,66,79,DessinDebutHautBle - (6 * DessinHauteurBle) + 1, Ch);
+    PdfBlocDestin(PdfPage, Personnage, DessinDebColG + 27, DessinDebutHautDes, DessinHauteurDes, MinPolice, Chance);
+    DessinDebutGaucheMou := DessinDebColG + 56;
+    PdfBlocMouvement(PdfPage, DessinDebutGaucheMou, DessinDebutGaucheMou + DessinLargeurMou, DessinDebutHautRes, DessinHauteurMou, DessinNbLigMou + 1, MinPolice, Mouv, BonusSprint);
 
     // calcul expérience
     for PersonnageXpAttribut in Personnage.XpCoutAttribut do
@@ -2669,86 +4021,28 @@ Procedure PdfPersonnageCreationFeldo2P(Personnage: StructurePersonnage);
     for PersonnageXpTalent in Personnage.XpCoutTalent do
       TotalXpSoustrait := TotalXpSoustrait + PersonnageXpAttribut.CoutXp - (100 + (PersonnageXpCompetence.Fin - PersonnageXpCompetence.Debut - 1) * 100);
 
-    // Dessin Expérience
-    DessinDebutHautExp := DessinDebutHautDes - (DessinNbLigRes * DessinHauteurDes) - 3;
-    DessinDebutHautMou := DessinDebutHautDes - (DessinNbLigRes * DessinHauteurDes) - 3;
-    PdfPage.DrawLine( DessinDebColG      , DessinDebutHautExp                         , DessinDebColG      , DessinDebutHautExp - ((DessinNbLigExp + 1) * DessinHauteurExp), 1);
-    PdfPage.DrawLine( DessinDebColG +  15, DessinDebutHautExp - (1 * DessinHauteurExp), DessinDebColG +  15, DessinDebutHautExp - ((DessinNbLigExp + 1) * DessinHauteurExp), 1);
-    PdfPage.DrawLine( DessinLargeurExp   , DessinDebutHautExp                         , DessinLargeurExp   , DessinDebutHautExp - ((DessinNbLigExp + 1) * DessinHauteurExp), 1);
-    for IndC := 0 to (DessinNbLigExp + 1) do
-      PdfPage.DrawLine(DessinDebColG,DessinDebutHautExp - (indC * DessinHauteurExp), DessinLargeurExp, DessinDebutHautExp - (indC * DessinHauteurExp), 1);
-    // Expérience
-    PdfTaillePolice(PdfPage, PdfFontBack, ConstPoliceCarlson+ConstPoliceGras, 10);
-    PdfCentre(PdfPage, DessinDebColG + 1, DessinLargeurExp  , DessinDebutHautExp - ((DessinNbLigExp - 2) * DessinHauteurExp) + 0.6, GetTexteLibelle('PDF_XP1_EXPERIENCE'));
-    PdfEcrit(PdfPage,  DessinDebColG + 1, DessinDebColG + 15, DessinDebutHautExp - ((DessinNbLigExp - 1) * DessinHauteurExp) + 0.6, GetTexteLibelle('PDF_XP2C_TOTAL')      , MinPolice);
-    PdfEcrit(PdfPage,  DessinDebColG + 1, DessinDebColG + 15, DessinDebutHautExp - ((DessinNbLigExp - 0) * DessinHauteurExp) + 0.6, GetTexteLibelle('PDF_XP2B_SPENT')      , MinPolice);
-    PdfEcrit(PdfPage,  DessinDebColG + 1, DessinDebColG + 15, DessinDebutHautExp - ((DessinNbLigExp + 1) * DessinHauteurExp) + 0.6, GetTexteLibelle('PDF_XP2A_CURRENT')    , MinPolice);
-    // Valeur Expérience
-    PdfTaillePolice(PdfPage, PdfFontValue, ConstPoliceArial, 9);
-    PdfCentre(PdfPage,  DessinDebColG + 15, DessinLargeurExp, DessinDebutHautExp - ((DessinNbLigExp - 1) * DessinHauteurExp) + 0.6, IntToStr(Trunc(Personnage.Xp25Total)));                      // Total Xp
-    PdfCentre(PdfPage,  DessinDebColG + 15, DessinLargeurExp, DessinDebutHautExp - ((DessinNbLigExp - 0) * DessinHauteurExp) + 0.6, IntToStr(Trunc(Personnage.Xp25Total - personnage.XpActuel)));// Utilisé
-    PdfCentre(PdfPage,  DessinDebColG + 15, DessinLargeurExp, DessinDebutHautExp - ((DessinNbLigExp + 1) * DessinHauteurExp) + 0.6, IntToStr(Trunc(Personnage.XpActuel)));                       // Restant
+    // Bloc Expérience (extrait dans PdfBlocExperience, CONTEXT.md §2.4), sous Résilience/Destin.
+    DessinDebutHautExp   := DessinDebutHautDes - (DessinNbLigRes * DessinHauteurDes) - 3;
+    PdfBlocExperience(PdfPage, Personnage, DessinDebColG, DessinLargeurExp, DessinDebutHautExp, DessinHauteurExp, DessinNbLigExp + 1, MinPolice);
 
-    // Dessin Mouvement
-    DessinDebutHautMou   := DessinDebutHautDes - (DessinNbLigRes * DessinHauteurDes) - 3;
-    DessinDebutGaucheMou := DessinLargeurExp + 3;
-    PdfPage.DrawLine( DessinDebutGaucheMou      , DessinDebutHautMou                         , DessinDebutGaucheMou      , DessinDebutHautMou - ((DessinNbLigMou + 1) * DessinHauteurMou), 1);
-    PdfPage.DrawLine( DessinDebutGaucheMou +  15, DessinDebutHautMou - (1 * DessinHauteurMou), DessinDebutGaucheMou +  15, DessinDebutHautMou - ((DessinNbLigMou + 1) * DessinHauteurMou), 1);
-    PdfPage.DrawLine( DessinDebutGaucheMou + DessinLargeurMou   , DessinDebutHautMou                         , DessinDebutGaucheMou + DessinLargeurMou   , DessinDebutHautMou - ((DessinNbLigMou + 1) * DessinHauteurMou), 1);
-    for IndC := 0 to (DessinNbLigMou + 1) do
-      PdfPage.DrawLine(DessinDebutGaucheMou, DessinDebutHautMou - (indC * DessinHauteurMou), DessinDebutGaucheMou + DessinLargeurMou, DessinDebutHautMou - (indC * DessinHauteurMou), 1);
-    // Mouvement
-    PdfTaillePolice(PdfPage, PdfFontBack, ConstPoliceCarlson+ConstPoliceGras, 10);
-    PdfCentre(PdfPage, DessinDebutGaucheMou + 1, DessinDebutGaucheMou + DessinLargeurMou  , DessinDebutHautMou - ((DessinNbLigMou - 2) * DessinHauteurMou) + 0.6, GetTexteLibelle('PDF_MV1_MOVEMENT'));
-    PdfEcrit(PdfPage,  DessinDebutGaucheMou + 1, DessinDebutGaucheMou + 15, DessinDebutHautMou - ((DessinNbLigMou - 1) * DessinHauteurMou) + 0.6, GetTexteLibelle('PDF_MV2A_MOVEMENT')      , MinPolice);
-    PdfEcrit(PdfPage,  DessinDebutGaucheMou + 1, DessinDebutGaucheMou + 15, DessinDebutHautMou - ((DessinNbLigMou - 0) * DessinHauteurMou) + 0.6, GetTexteLibelle('PDF_MV2B_WALK')      , MinPolice);
-    PdfEcrit(PdfPage,  DessinDebutGaucheMou + 1, DessinDebutGaucheMou + 15, DessinDebutHautMou - ((DessinNbLigMou + 1) * DessinHauteurMou) + 0.6, GetTexteLibelle('PDF_MV2C_RUN')    , MinPolice);
-    // Valeur Mouvement
-    PdfTaillePolice(PdfPage, PdfFontValue, ConstPoliceArial, 9);
-    PdfCentre(PdfPage,  DessinDebutGaucheMou + 15, DessinDebutGaucheMou + DessinLargeurMou, DessinDebutHautMou - ((DessinNbLigMou - 1) * DessinHauteurMou) + 0.6, IntToStr(Mouv));
-    PdfCentre(PdfPage,  DessinDebutGaucheMou + 15, DessinDebutGaucheMou + DessinLargeurMou, DessinDebutHautMou - ((DessinNbLigMou - 0) * DessinHauteurMou) + 0.6, IntToStr(Mouv * 2));
-    PdfCentre(PdfPage,  DessinDebutGaucheMou + 15, DessinDebutGaucheMou + DessinLargeurMou, DessinDebutHautMou - ((DessinNbLigMou + 1) * DessinHauteurMou) + 0.6, IntToStr((Mouv + BonusSprint)*4));
+    // Bloc Corruption (extrait dans PdfBlocCorruption, CONTEXT.md §2.4), sous Expérience
+    // (réagencement du 16/08/2026 : anciennement à côté d'Expérience/Mouvement, voir §2.6).
+    // Lost/Left (16/08/2026) : somme de l'historique Personnage.Corruption, voir §2.6.
+    LostCorruption := 0;
+    for PersonnageCorruption in Personnage.Corruption do
+      LostCorruption := LostCorruption + PersonnageCorruption.Montant;
+    DessinDebutHautCor := DessinDebutHautExp - ((DessinNbLigExp + 1) * DessinHauteurExp) - 3;
+    DessinLargeurCor   := DessinLargeurExp;
+    PdfBlocCorruption(PdfPage, DessinDebColG, DessinLargeurCor, DessinDebutHautCor, DessinHauteurCor, DessinNbLigCor + 1, MinPolice, BE, BFM, AmePure, LostCorruption);
 
-    // Dessin Corruption
-    DessinDebutHautCor   := DessinDebutHautDes - (DessinNbLigRes * DessinHauteurDes) - 3;
-    DessinDebutGaucheCor := DessinDebutGaucheMou + DessinLargeurMou + 3;
-    DessinLargeurCor     := DessinFinColG - DessinDebutGaucheCor;
-    PdfPage.DrawLine( DessinDebutGaucheCor      , DessinDebutHautCor                         , DessinDebutGaucheCor      , DessinDebutHautCor - ((DessinNbLigCor + 1) * DessinHauteurCor), 1);
-    PdfPage.DrawLine( DessinDebutGaucheCor +  15, DessinDebutHautCor - (1 * DessinHauteurCor), DessinDebutGaucheCor +  15, DessinDebutHautCor - ((DessinNbLigCor + 1) * DessinHauteurCor), 1);
-    PdfPage.DrawLine( DessinDebutGaucheCor + DessinLargeurCor   , DessinDebutHautCor                         , DessinDebutGaucheCor + DessinLargeurCor   , DessinDebutHautCor - ((DessinNbLigCor + 1) * DessinHauteurCor), 1);
-    for IndC := 0 to (DessinNbLigCor + 1) do
-      PdfPage.DrawLine(DessinDebutGaucheCor, DessinDebutHautCor - (indC * DessinHauteurCor), DessinDebutGaucheCor + DessinLargeurCor, DessinDebutHautCor - (indC * DessinHauteurCor), 1);
-    // Corruption
-    PdfTaillePolice(PdfPage, PdfFontBack, ConstPoliceCarlson+ConstPoliceGras, 10);
-    PdfCentre(PdfPage, DessinDebutGaucheCor + 1, DessinDebutGaucheCor + DessinLargeurCor  , DessinDebutHautCor - ((DessinNbLigCor - 3) * DessinHauteurCor) + 0.6, GetTexteLibelle('PDF_CORRUPTION_TITLE'));
-    PdfEcrit(PdfPage,  DessinDebutGaucheCor + 1, DessinDebutGaucheCor + 15, DessinDebutHautCor - ((DessinNbLigCor - 2) * DessinHauteurCor) + 0.6, GetTexteLibelle('PDF_CORRUPTION_T')      , MinPolice);
-    PdfEcrit(PdfPage,  DessinDebutGaucheCor + 1, DessinDebutGaucheCor + 15, DessinDebutHautCor - ((DessinNbLigCor - 1) * DessinHauteurCor) + 0.6, GetTexteLibelle('PDF_CORRUPTION_WP')      , MinPolice);
-    PdfEcrit(PdfPage,  DessinDebutGaucheCor + 1, DessinDebutGaucheCor + 15, DessinDebutHautCor - ((DessinNbLigCor - 0) * DessinHauteurCor) + 0.6, GetTexteLibelle('PDF_CORRUPTION_BONUS')      , MinPolice);
-    PdfEcrit(PdfPage,  DessinDebutGaucheCor + 1, DessinDebutGaucheCor + 15, DessinDebutHautCor - ((DessinNbLigCor + 1) * DessinHauteurCor) + 0.6, GetTexteLibelle('PDF_CORRUPTION_TOTAL')    , MinPolice);
-    // Valeur Corruption
-    PdfTaillePolice(PdfPage, PdfFontValue, ConstPoliceArial, 9);
-    PdfCentre(PdfPage,  DessinDebutGaucheCor + 15, DessinDebutGaucheCor + DessinLargeurCor, DessinDebutHautCor - ((DessinNbLigCor - 2) * DessinHauteurCor) + 0.6, IntToStr(Floor(BE/10)));
-    PdfCentre(PdfPage,  DessinDebutGaucheCor + 15, DessinDebutGaucheCor + DessinLargeurCor, DessinDebutHautCor - ((DessinNbLigCor - 1) * DessinHauteurCor) + 0.6, IntToStr(Floor(BFM/10)));
-    PdfCentre(PdfPage,  DessinDebutGaucheCor + 15, DessinDebutGaucheCor + DessinLargeurCor, DessinDebutHautCor - ((DessinNbLigCor - 0) * DessinHauteurCor) + 0.6, IntToStr(AmePure));
-    PdfCentre(PdfPage,  DessinDebutGaucheCor + 15, DessinDebutGaucheCor + DessinLargeurCor, DessinDebutHautCor - ((DessinNbLigCor + 1) * DessinHauteurCor) + 0.6, IntToStr(Floor(BE/10) + Floor(BFM/10) + AmePure));
-
-
-    //// Dessin PCM
-    //PdfPage.DrawLine( DessinDebColG     , DessinDebutHautPCM     , DessinDebColG + 28, DessinDebutHautPCM     , 1);
-    //PdfPage.DrawLine( DessinDebColG + 30, DessinDebutHautPCM     , DessinDebColG + 52, DessinDebutHautPCM     , 1);
-    //PdfPage.DrawLine( DessinDebColG + 54, DessinDebutHautPCM     , DessinDebColG + 78, DessinDebutHautPCM     , 1);
-    //PdfPage.DrawLine( DessinDebColG     , DessinDebutHautPCM -  4, DessinDebColG + 28, DessinDebutHautPCM -  4, 1);
-    //PdfPage.DrawLine( DessinDebColG + 30, DessinDebutHautPCM -  4, DessinDebColG + 52, DessinDebutHautPCM -  4, 1);
-    //PdfPage.DrawLine( DessinDebColG + 54, DessinDebutHautPCM -  4, DessinDebColG + 78, DessinDebutHautPCM -  4, 1);
-    //PdfPage.DrawLine( DessinDebColG     , DessinDebutHautPCM - 19, DessinDebColG + 28, DessinDebutHautPCM - 19, 1);
-    //PdfPage.DrawLine( DessinDebColG + 30, DessinDebutHautPCM - 19, DessinDebColG + 52, DessinDebutHautPCM - 19, 1);
-    //PdfPage.DrawLine( DessinDebColG + 54, DessinDebutHautPCM - 19, DessinDebColG + 78, DessinDebutHautPCM - 19, 1);
-    //PdfPage.DrawLine( DessinDebColG     , DessinDebutHautPCM     , DessinDebColG     , DessinDebutHautPCM - 19, 1);
-    //PdfPage.DrawLine( DessinDebColG + 28, DessinDebutHautPCM     , DessinDebColG + 28, DessinDebutHautPCM - 19, 1);
-    //PdfPage.DrawLine( DessinDebColG + 30, DessinDebutHautPCM     , DessinDebColG + 30, DessinDebutHautPCM - 19, 1);
-    //PdfPage.DrawLine( DessinDebColG + 52, DessinDebutHautPCM     , DessinDebColG + 52, DessinDebutHautPCM - 19, 1);
-    //PdfPage.DrawLine( DessinDebColG + 54, DessinDebutHautPCM     , DessinDebColG + 54, DessinDebutHautPCM - 19, 1);
-    //PdfPage.DrawLine( DessinDebColG + 78, DessinDebutHautPCM     , DessinDebColG + 78, DessinDebutHautPCM - 19, 1);
+    // Bloc Corruption Détail (extrait dans PdfBlocCorruptionDetail, CONTEXT.md §2.6) :
+    // tableau Montant | Libellé, à droite d'Expérience/Corruption, dans l'espace libéré
+    // par le réagencement du 16/08/2026. DessinLargeurExp sert ici de bord droit absolu
+    // du panneau Expérience/Corruption (nom trompeur, comportement pré-existant conservé
+    // tel quel) - le nouveau tableau démarre 3mm après. Hauteur calée pour finir au même
+    // Y que le bas du panneau Corruption (NbLignes = 11, à ajuster si Bonus T/WP/etc change).
+    DessinDebutGaucheCorDet := DessinLargeurExp + 3;
+    PdfBlocCorruptionDetail(PdfPage, Personnage, DessinDebutGaucheCorDet, DessinFinColG, DessinDebutHautExp, DessinHauteurCorDet, DessinNbLigCorDet, MinPolice);
 
     // Tableau Compétences groupées (extrait dans DessinerTableau (orLigne) /
     // PdfPreparerRecordSetCompetencesGroupees, CONTEXT.md §2.4)
@@ -2798,89 +4092,13 @@ Procedure PdfPersonnageCreationFeldo2P(Personnage: StructurePersonnage);
     TableauCompG.Champs[5].DecalageValeurMin := 2.5;
     TableauCompG.Champs[5].DecalageValeurMax := 2.5;
 
-    DonneesCompG := PdfPreparerRecordSetCompetencesGroupees(Personnage, ListPris, DessinNbLigComg - 2);
+    DonneesCompG := PdfPreparerRecordSetCompetencesGroupees(Personnage, ListPris, DessinNbLigComg - 2, ListAsterisqueArmure);
+    // ListAsterisqueArmure et AsterisqueParEquipement libérées plus loin, après
+    // PdfBlocArmuresDonnees (page 2) qui utilise encore la seconde
     DessinDebutHautTal := DessinerTableau(PdfPage, TableauCompG, DonneesCompG) - 3;
 
-    // Dessin Talents
-    PdfPage.DrawLine( DessinDebColD, DessinDebutHautTal, DessinDebColD, DessinDebutHautTal - (DessinNbLigTal * DessinHauteurTal), 1);
-    PdfPage.DrawLine( DessinDebColD + 41, DessinDebutHautTal - (1 * DessinHauteurTal), DessinDebColD + 41, DessinDebutHautTal - (DessinNbLigTal * DessinHauteurTal), 1);
-    PdfPage.DrawLine( DessinDebColD + 47, DessinDebutHautTal - (1 * DessinHauteurTal), DessinDebColD + 47, DessinDebutHautTal - (DessinNbLigTal * DessinHauteurTal), 1);
-    PdfPage.DrawLine( DessinDebColD + 53, DessinDebutHautTal - (1 * DessinHauteurTal), DessinDebColD + 53, DessinDebutHautTal - (DessinNbLigTal * DessinHauteurTal), 1);
-    PdfPage.DrawLine( DessinFinColD, DessinDebutHautTal, DessinFinColD, DessinDebutHautTal - (DessinNbLigTal * DessinHauteurTal), 1);
-    for IndC := 0 to DessinNbLigTal do
-      PdfPage.DrawLine(DessinDebColD,DessinDebutHautTal - (indC * DessinHauteurTal), DessinFinColD, DessinDebutHautTal - (indC * DessinHauteurTal), 1);
-    // Texte Talents
-    PdfTaillePolice(PdfPage, PdfFontBack, ConstPoliceCarlson+ConstPoliceGras, 10);
-    PdfCentre(PdfPage, DessinDebColD, DessinFinColD, DessinDebutHautTal - (1 * DessinHauteurTal) + 1, Trim(GetTexteLibelle('PDF_TALENT1_TALENTS')));
-    PdfCentre(PdfPage, DessinDebColD, DessinDebColD + 40, DessinDebutHautTal - (2 * DessinHauteurTal) + 1,GetTexteLibelle('PDF_TALENT2_TALENTNAME'));
-    PdfCentre(PdfPage, DessinDebColD + 41, DessinDebColD + 47, DessinDebutHautTal - (2 * DessinHauteurTal) + 1,GetTexteLibelle('PDF_TALENT2_UPG'));
-    PdfCentre(PdfPage, DessinDebColD + 47, DessinDebColD + 51, DessinDebutHautTal - (2 * DessinHauteurTal) + 1,GetTexteLibelle('PDF_TALENT2_LEVEL'));
-    PdfCentre(PdfPage, DessinDebColD + 53, DessinFinColD, DessinDebutHautTal - (2 * DessinHauteurTal) + 1,GetTexteLibelle('PDF_TALENT2_DESC'));
-    // Valeur Talents
-    PdfTaillePolice(PdfPage, PdfFontValue, ConstPoliceArial, 9);
-    NbLigne := 0;
-    For IndC := 0 to ListTalent.count - 1 do
-      begin
-        PTalent := ListTalent[IndC];
-        NivTalMetier := 0;
-        TalentDonnee := PdfPersonnageTalent(Personnage, PTalent.CodeTalent, NivTalMetier);
-        if TalentDonnee.Total <> 0 then
-          begin
-            inc(NbLigne);
-            PdfEcrit(PdfPage, DessinDebColD + 2, DessinDebColD + 41, DessinDebutHautTal - ((NbLigne + 2) * DessinHauteurTal) + 1, PTalent.Libelle, MinPolice);
-            Bonus := PdfPersonnageTalentBonus(Personnage, PTalent.CodeTalent);
-            // Afficher l'astérisque pour les talents
-            if Bonus <> '' then
-              begin
-                PdfTaillePolice(PdfPage, PdfFontValue, ConstPoliceArial, 4);
-                PdfEcrit(PdfPage, DessinDebColD + 38, DessinDebColD + 41, DessinDebutHautTal - ((NbLigne + 2) * DessinHauteurTal) + 3, Bonus, 4);
-                PdfTaillePolice(PdfPage, PdfFontValue, ConstPoliceArial, 9);
-              end;
-            if (NivTalMetier > 0) then
-              begin
-                if (NivTalMetier > Personnage.MetierEnCours.NiveauMetier) then
-                  PdfPage.SetColor(RGB(150,150,150), False);
-                PdfEcrit(PdfPage, DessinDebColD + 43, DessinDebColD + 47, DessinDebutHautTal - ((NbLigne + 2) * DessinHauteurTal) + 1, IntToStr(NivTalMetier),MinPolice);
-                PdfPage.SetColor(clBlack, False);
-              end;
-            PdfCentre(PdfPage, DessinDebColD + 47, DessinDebColD + 53, DessinDebutHautTal - ((NbLigne + 2) * DessinHauteurTal) + 1, IntToStr(TalentDonnee.Total));
-            if PTalent.SousTalent then
-              PTalent := ChercheTalent(Copy(PTalent.CodeTalent, 1, Pos('_', PTalent.CodeTalent) - 1)+'_*');
-            if PTalent.Resume <> '' then
-              begin
-                if Length(PTalent.Resume) > 20 then
-                  PdfEcrit(PdfPage, DessinDebColD + 54, DessinFinColD, DessinDebutHautTal - ((NbLigne + 2) * DessinHauteurTal) + 1.5, PTalent.Resume, MinPolice)
-                else
-                  PdfEcrit(PdfPage, DessinDebColD + 54, DessinFinColD, DessinDebutHautTal - ((NbLigne + 2) * DessinHauteurTal) + 1, PTalent.Resume, MinPolice);
-                PdfTaillePolice(PdfPage, PdfFontValue, ConstPoliceArial, 9);
-              end;
-            ListeTalent += AjouteAccolade(PTalent.CodeTalent);
-          end;
-      end;
-    // Valeur Talents non acquis
-    PdfPage.SetColor(RGB(150,150,150), False);
-    PdfTaillePolice(PdfPage, PdfFontValue, ConstPoliceArial, 9);
-    For PMetierTalent In ListMetierTalent do
-      if (PMetierTalent.CodeMetier = Personnage.MetierEnCours.CodeMetier) then
-        if (PMetierTalent.NiveauMetier >= Personnage.MetierEnCours.NiveauMetier) then
-          if (Pos(AjouteAccolade(PMetierTalent.CodeTalent),ListeTalent) = 0)  and (NbLigne < (DessinNbLigTal - 2)) then
-            begin
-              PTalent := chercheTalent(PMetierTalent.CodeTalent);
-              PdfEcrit(PdfPage, DessinDebColD +  2, DessinDebColD + 41, DessinDebutHautTal - ((NbLigne + 3) * DessinHauteurTal) + 1, PTalent.Libelle, MinPolice);
-              PdfEcrit(PdfPage, DessinDebColD + 43, DessinDebColD + 47, DessinDebutHautTal - ((NbLigne + 3) * DessinHauteurTal) + 1, InttoStr(PMetierTalent.NiveauMetier), MinPolice);
-              if PTalent.SousTalent then
-                PTalent := ChercheTalent(Copy(PTalent.CodeTalent, 1, Pos('_', PTalent.CodeTalent) - 1)+'_*');
-              if PTalent.Resume <> '' then
-                begin
-                  if Length(PTalent.Resume) > 20 then
-                    PdfEcrit(PdfPage, DessinDebColD + 54, DessinFinColD, DessinDebutHautTal - ((NbLigne + 3) * DessinHauteurTal) + 1.5, PTalent.Resume, MinPolice)
-                  else
-                    PdfEcrit(PdfPage, DessinDebColD + 54, DessinFinColD, DessinDebutHautTal - ((NbLigne + 3) * DessinHauteurTal) + 1, PTalent.Resume, MinPolice);
-                  PdfTaillePolice(PdfPage, PdfFontValue, ConstPoliceArial, 9);
-                end;
-              NbLigne := NbLigne + 1;
-            end;
-    PdfPage.SetColor(clBlack, False);
+    // Bloc Talents (extrait dans PdfBlocTalents, CONTEXT.md §2.4)
+    PdfBlocTalents(PdfPage, Personnage, DessinDebColD, DessinFinColD, DessinDebutHautTal, DessinHauteurTal, DessinNbLigTal, MinPolice);
 
 
    // PAGE 2
@@ -2889,357 +4107,39 @@ Procedure PdfPersonnageCreationFeldo2P(Personnage: StructurePersonnage);
      PdfPage.PaperType:= ptA4;
      PdfPage.UnitOfMeasure := uomMillimeters;
      PdfTaillePolice(PdfPage, PdfFontBack, ConstPoliceCarlson+ConstPoliceGras, 10);
-     // Dessin Armures
+     // silhouette du bloc "Armour Points" (PdfBlocArmourPoints, ajouté le 15/08/2026,
+     // CONTEXT.md §2.4) - chargée ici comme les autres images (Warhammer/Fantasy/
+     // Ubersreik sur la page 1), l'identifiant est passé au bloc qui la dessine
+     PdfImgShadow := PdfDoc.Images.AddFromFile(GetCurrentDir+ConstCheminPdfShadow,false);
+     // Dessin Armures (extrait dans PdfBlocArmures, CONTEXT.md §2.4 - cadre uniquement,
+     // le remplissage des lignes reste plus bas, dans la boucle Equipement/Armes/Sorts)
      DessinDebutHautArm := DessinDebutHautEntete;
-     PdfPage.DrawLine( DessinDebColG, DessinDebutHautArm, DessinDebColG, DessinDebutHautArm - ((DessinNbLigArm + 1) * DessinHauteurArm), 1);
-     PdfPage.DrawLine( DessinDebColG +  0, DessinDebutHautArm - (1 * DessinHauteurArm), DessinDebColG +  0, DessinDebutHautArm - ((DessinNbLigArm + 1) * DessinHauteurArm), 1);
-     PdfPage.DrawLine( DessinDebColG + 34, DessinDebutHautArm - (1 * DessinHauteurArm), DessinDebColG + 34, DessinDebutHautArm - ((DessinNbLigArm + 1) * DessinHauteurArm), 1);
-     PdfPage.DrawLine( DessinDebColG + 53, DessinDebutHautArm - (1 * DessinHauteurArm), DessinDebColG + 53, DessinDebutHautArm - ((DessinNbLigArm + 1) * DessinHauteurArm), 1);
-     PdfPage.DrawLine( DessinDebColG + 62, DessinDebutHautArm - (1 * DessinHauteurArm), DessinDebColG + 62, DessinDebutHautArm - ((DessinNbLigArm + 1) * DessinHauteurArm), 1);
-     PdfPage.DrawLine( DessinDebColG + 70, DessinDebutHautArm - (1 * DessinHauteurArm), DessinDebColG + 70, DessinDebutHautArm - ((DessinNbLigArm + 1) * DessinHauteurArm), 1);
-     PdfPage.DrawLine( DessinLargeurArm, DessinDebutHautArm, DessinLargeurArm, DessinDebutHautArm - ((DessinNbLigArm + 1) * DessinHauteurArm), 1);
-     for IndC := 0 to (DessinNbLigArm + 1) do
-       PdfPage.DrawLine(DessinDebColG,DessinDebutHautArm - (indC * DessinHauteurArm), DessinLargeurArm, DessinDebutHautArm - (indC * DessinHauteurArm), 1);
-     // Texte Armure
-     PdfCentre(PdfPage, DessinDebColG +   0, DessinLargeurArm  , DessinDebutHautArm - (1 * DessinHauteurArm) + 1, GetTexteLibelle('PDF_ARMOUR1_ARMOUR'));
-     PdfCentre(PdfPage, DessinDebColG +   0, DessinDebColG + 34, DessinDebutHautArm - (2 * DessinHauteurArm) + 1, GetTexteLibelle('PDF_ARMOUR2_NAME'));
-     PdfCentre(PdfPage, DessinDebColG +  34, DessinDebColG + 53, DessinDebutHautArm - (2 * DessinHauteurArm) + 1, GetTexteLibelle('PDF_ARMOUR2_LOCATIONS'));
-     PdfCentre(PdfPage, DessinDebColG +  53, DessinDebColG + 62, DessinDebutHautArm - (2 * DessinHauteurArm) + 1, GetTexteLibelle('PDF_ARMOUR2_ENCUMBRANCE'));
-     PdfCentre(PdfPage, DessinDebColG +  62, DessinDebColG + 70, DessinDebutHautArm - (2 * DessinHauteurArm) + 1, GetTexteLibelle('PDF_ARMOUR2_ARMOURPOINT'));
-     PdfCentre(PdfPage, DessinDebColG +  70, DessinLargeurArm  , DessinDebutHautArm - (2 * DessinHauteurArm) + 1, GetTexteLibelle('PDF_ARMOUR2_QUALITIES'));
-     // Dessin Equipement
-     DessinDebutHautEqu := DessinDebutHautArm - (indC * DessinHauteurArm) - 3;
-     PdfPage.DrawLine( DessinDebColG, DessinDebutHautEqu, DessinDebColG, DessinDebutHautEqu - ((DessinNbLigEqu + 1) * DessinHauteurEqu), 1);
-     PdfPage.DrawLine( DessinDebColG +   0, DessinDebutHautEqu - (1 * DessinHauteurEqu), DessinDebColG +   0, DessinDebutHautEqu - ((DessinNbLigEqu + 1) * DessinHauteurEqu), 1);
-     PdfPage.DrawLine( DessinDebColG +  48, DessinDebutHautEqu - (1 * DessinHauteurEqu), DessinDebColG +  48, DessinDebutHautEqu - ((DessinNbLigEqu + 1) * DessinHauteurEqu), 1);
-     PdfPage.DrawLine( DessinDebColG +  55, DessinDebutHautEqu - (1 * DessinHauteurEqu), DessinDebColG +  55, DessinDebutHautEqu - ((DessinNbLigEqu + 1) * DessinHauteurEqu), 1);
-     PdfPage.DrawLine( DessinDebColG + 100, DessinDebutHautEqu - (1 * DessinHauteurEqu), DessinDebColG + 100, DessinDebutHautEqu - ((DessinNbLigEqu + 1) * DessinHauteurEqu), 1);
-     PdfPage.DrawLine( DessinLargeurEqu, DessinDebutHautEqu, DessinLargeurEqu, DessinDebutHautEqu - ((DessinNbLigEqu + 1) * DessinHauteurEqu), 1);
-     for IndC := 0 to (DessinNbLigEqu + 1) do
-       PdfPage.DrawLine(DessinDebColG,DessinDebutHautEqu - (indC * DessinHauteurEqu), DessinLargeurEqu, DessinDebutHautEqu - (indC * DessinHauteurEqu), 1);
-     // Texte Equipement
-     PdfCentre(PdfPage, DessinDebColG +   0, DessinLargeurEqu  , DessinDebutHautEqu - (1 * DessinHauteurEqu) + 1, GetTexteLibelle('PDF_TRAPPING1_TRAPPINGS'));
-     PdfCentre(PdfPage, DessinDebColG +   0, DessinDebColG + 48, DessinDebutHautEqu - (2 * DessinHauteurEqu) + 1, GetTexteLibelle('PDF_TRAPPING2_NAME'));
-     PdfCentre(PdfPage, DessinDebColG +  48, DessinDebColG + 55, DessinDebutHautEqu - (2 * DessinHauteurEqu) + 1, GetTexteLibelle('PDF_TRAPPING2_ENCUMBRANCE'));
-     PdfCentre(PdfPage, DessinDebColG +  55, DessinDebColG +100, DessinDebutHautEqu - (2 * DessinHauteurEqu) + 1, GetTexteLibelle('PDF_TRAPPING2_NAME'));
-     PdfCentre(PdfPage, DessinDebColG + 100, DessinLargeurEqu  , DessinDebutHautEqu - (2 * DessinHauteurEqu) + 1, GetTexteLibelle('PDF_TRAPPING2_ENCUMBRANCE'));
-     // Dessin Armes
-     DessinDebutHautWea := DessinDebutHautEqu - (indC * DessinHauteurEqu) - 3;
-     PdfPage.DrawLine( DessinDebColG, DessinDebutHautWea, DessinDebColG, DessinDebutHautWea - ((DessinNbLigWea + 1) * DessinHauteurWea), 1);
-     PdfPage.DrawLine( DessinDebColG +   0, DessinDebutHautWea - (1 * DessinHauteurWea), DessinDebColG +   0, DessinDebutHautWea - ((DessinNbLigWea + 1) * DessinHauteurWea), 1);
-     PdfPage.DrawLine( DessinDebColG +  45, DessinDebutHautWea - (1 * DessinHauteurWea), DessinDebColG +  45, DessinDebutHautWea - ((DessinNbLigWea + 1) * DessinHauteurWea), 1);
-     PdfPage.DrawLine( DessinDebColG +  64, DessinDebutHautWea - (1 * DessinHauteurWea), DessinDebColG +  64, DessinDebutHautWea - ((DessinNbLigWea + 1) * DessinHauteurWea), 1);
-     PdfPage.DrawLine( DessinDebColG +  71, DessinDebutHautWea - (1 * DessinHauteurWea), DessinDebColG +  71, DessinDebutHautWea - ((DessinNbLigWea + 1) * DessinHauteurWea), 1);
-     PdfPage.DrawLine( DessinDebColG +  96, DessinDebutHautWea - (1 * DessinHauteurWea), DessinDebColG +  96, DessinDebutHautWea - ((DessinNbLigWea + 1) * DessinHauteurWea), 1);
-     PdfPage.DrawLine( DessinDebColG + 113, DessinDebutHautWea - (1 * DessinHauteurWea), DessinDebColG + 113, DessinDebutHautWea - ((DessinNbLigWea + 1) * DessinHauteurWea), 1);
-     PdfPage.DrawLine( DessinLargeurWea, DessinDebutHautWea, DessinLargeurWea, DessinDebutHautWea - ((DessinNbLigWea + 1) * DessinHauteurWea), 1);
-     for IndC := 0 to (DessinNbLigWea + 1) do
-       PdfPage.DrawLine(DessinDebColG,DessinDebutHautWea - (indC * DessinHauteurWea), DessinLargeurWea, DessinDebutHautWea - (indC * DessinHauteurWea), 1);
-     // Texte Armes
-     PdfCentre(PdfPage, DessinDebColG +   0, DessinLargeurWea  , DessinDebutHautWea - (1 * DessinHauteurWea) + 1, GetTexteLibelle('PDF_WEAPONS1_WEAPONS'));
-     PdfCentre(PdfPage, DessinDebColG +   0, DessinDebColG + 45, DessinDebutHautWea - (2 * DessinHauteurWea) + 1, GetTexteLibelle('PDF_WEAPONS2_NAME'));
-     PdfCentre(PdfPage, DessinDebColG +  45, DessinDebColG + 64, DessinDebutHautWea - (2 * DessinHauteurWea) + 1, GetTexteLibelle('PDF_WEAPONS2_GROUP'));
-     PdfCentre(PdfPage, DessinDebColG +  64, DessinDebColG + 71, DessinDebutHautWea - (2 * DessinHauteurWea) + 1, GetTexteLibelle('PDF_WEAPONS2_ENCUMBRANCE'));
-     PdfCentre(PdfPage, DessinDebColG +  71, DessinDebColG + 96, DessinDebutHautWea - (2 * DessinHauteurWea) + 1, GetTexteLibelle('PDF_WEAPONS2_RANGE'));
-     PdfCentre(PdfPage, DessinDebColG +  96, DessinDebColG +113, DessinDebutHautWea - (2 * DessinHauteurWea) + 1, GetTexteLibelle('PDF_WEAPONS2_DAMAGE'));
-     PdfCentre(PdfPage, DessinDebColG + 113, DessinLargeurWea  , DessinDebutHautWea - (2 * DessinHauteurWea) + 1, GetTexteLibelle('PDF_WEAPONS2_QUALITIES'));
-     // Dessin Sorts
-     DessinDebutHautSor := DessinDebutHautWea - (indC * DessinHauteurWea) - 3;
-     PdfPage.DrawLine( DessinDebColG, DessinDebutHautSor, DessinDebColG, DessinDebutHautSor - ((DessinNbLigSor + 1) * DessinHauteurSor), 1);
-     PdfPage.DrawLine( DessinDebColG +   0, DessinDebutHautSor - (1 * DessinHauteurSor), DessinDebColG +   0, DessinDebutHautSor - ((DessinNbLigSor + 1) * DessinHauteurSor), 1);
-     PdfPage.DrawLine( DessinDebColG +  38, DessinDebutHautSor - (1 * DessinHauteurSor), DessinDebColG +  38, DessinDebutHautSor - ((DessinNbLigSor + 1) * DessinHauteurSor), 1);
-     PdfPage.DrawLine( DessinDebColG +  51, DessinDebutHautSor - (1 * DessinHauteurSor), DessinDebColG +  51, DessinDebutHautSor - ((DessinNbLigSor + 1) * DessinHauteurSor), 1);
-     PdfPage.DrawLine( DessinDebColG +  66, DessinDebutHautSor - (1 * DessinHauteurSor), DessinDebColG +  66, DessinDebutHautSor - ((DessinNbLigSor + 1) * DessinHauteurSor), 1);
-     PdfPage.DrawLine( DessinDebColG +  82, DessinDebutHautSor - (1 * DessinHauteurSor), DessinDebColG +  82, DessinDebutHautSor - ((DessinNbLigSor + 1) * DessinHauteurSor), 1);
-     PdfPage.DrawLine( DessinDebColG +  98, DessinDebutHautSor - (1 * DessinHauteurSor), DessinDebColG +  98, DessinDebutHautSor - ((DessinNbLigSor + 1) * DessinHauteurSor), 1);
-     PdfPage.DrawLine( DessinLargeurSor, DessinDebutHautSor, DessinLargeurSor, DessinDebutHautSor - ((DessinNbLigSor + 1) * DessinHauteurSor), 1);
-     for IndC := 0 to (DessinNbLigSor + 1) do
-       PdfPage.DrawLine(DessinDebColG,DessinDebutHautSor - (indC * DessinHauteurSor), DessinLargeurSor, DessinDebutHautSor - (indC * DessinHauteurSor), 1);
-     // Texte Sorts
-     PdfCentre(PdfPage, DessinDebColG +   0, DessinLargeurSor  , DessinDebutHautSor - (1 * DessinHauteursor) + 1, GetTexteLibelle('PDF_SPELL1_SPELL'));
-     PdfCentre(PdfPage, DessinDebColG +   0, DessinDebColG + 38, DessinDebutHautSor - (2 * DessinHauteursor) + 1, GetTexteLibelle('PDF_SPELL2_NAME'));
-     PdfCentre(PdfPage, DessinDebColG +  38, DessinDebColG + 51, DessinDebutHautSor - (2 * DessinHauteursor) + 1, GetTexteLibelle('PDF_SPELL2_CN'));
-     PdfCentre(PdfPage, DessinDebColG +  51, DessinDebColG + 66, DessinDebutHautSor - (2 * DessinHauteursor) + 1, GetTexteLibelle('PDF_SPELL2_RANGE'));
-     PdfCentre(PdfPage, DessinDebColG +  66, DessinDebColG + 82, DessinDebutHautSor - (2 * DessinHauteursor) + 1, GetTexteLibelle('PDF_SPELL2_TARGET'));
-     PdfCentre(PdfPage, DessinDebColG +  82, DessinDebColG + 98, DessinDebutHautSor - (2 * DessinHauteursor) + 1, GetTexteLibelle('PDF_SPELL2_DURATION'));
-     PdfCentre(PdfPage, DessinDebColG +  98, DessinLargeurSor  , DessinDebutHautSor - (2 * DessinHauteursor) + 1, GetTexteLibelle('PDF_SPELL2_EFFECT'));
-     // Encombrement
-     DessinDebutHautEnc := DessinDebutHautSor - (indC * DessinHauteurSor) - 3;
-     PdfPage.DrawLine( DessinDebColG      , DessinDebutHautEnc                         , DessinDebColG      , DessinDebutHautEnc - ((DessinNbLigEnc + 1) * DessinHauteurEnc), 1);
-     PdfPage.DrawLine( DessinDebColG +  15, DessinDebutHautEnc - (1 * DessinHauteurEnc), DessinDebColG +  15, DessinDebutHautEnc - ((DessinNbLigEnc + 1) * DessinHauteurEnc), 1);
-     PdfPage.DrawLine( DessinLargeurEnc   , DessinDebutHautEnc                         , DessinLargeurEnc   , DessinDebutHautEnc - ((DessinNbLigEnc + 1) * DessinHauteurEnc), 1);
-     for IndC := 0 to (DessinNbLigEnc + 1) do
-       PdfPage.DrawLine(DessinDebColG,DessinDebutHautEnc - (indC * DessinHauteurEnc), DessinLargeurEnc, DessinDebutHautEnc - (indC * DessinHauteurEnc), 1);
-     // Texte Encombrement
-     PdfTaillePolice(PdfPage, PdfFontBack, ConstPoliceCarlson+ConstPoliceGras, 10);
-     PdfCentre(PdfPage, DessinDebColG + 1, DessinLargeurEnc  , DessinDebutHautEnc - ((DessinNbLigEnc - 4) * DessinHauteurEnc) + 0.6, GetTexteLibelle('PDF_ENCUMBRANCE1_ENCUMBRANCE'));
-     PdfEcrit(PdfPage,  DessinDebColG + 1, DessinDebColG + 15, DessinDebutHautEnc - ((DessinNbLigEnc - 3) * DessinHauteurEnc) + 0.6, GetTexteLibelle('PDF_ENCUMBRANCE2_ARMOUR')    , MinPolice);
-     PdfEcrit(PdfPage,  DessinDebColG + 1, DessinDebColG + 15, DessinDebutHautEnc - ((DessinNbLigEnc - 2) * DessinHauteurEnc) + 0.6, GetTexteLibelle('PDF_ENCUMBRANCE3_WEAPONS')   , MinPolice);
-     PdfEcrit(PdfPage,  DessinDebColG + 1, DessinDebColG + 15, DessinDebutHautEnc - ((DessinNbLigEnc - 1) * DessinHauteurEnc) + 0.6, GetTexteLibelle('PDF_ENCUMBRANCE4_TRAPPINGS') , MinPolice);
-     PdfEcrit(PdfPage,  DessinDebColG + 1, DessinDebColG + 15, DessinDebutHautEnc - ((DessinNbLigEnc - 0) * DessinHauteurEnc) + 0.6, GetTexteLibelle('PDF_ENCUMBRANCE5_MAXENC')    , MinPolice);
-     PdfEcrit(PdfPage,  DessinDebColG + 1, DessinDebColG + 15, DessinDebutHautEnc - ((DessinNbLigEnc + 1) * DessinHauteurEnc) + 0.6, GetTexteLibelle('PDF_ENCUMBRANCE6_TOTAL')     , MinPolice);
+     PdfBlocArmures(PdfPage, DessinDebColG, DessinLargeurArm, DessinDebutHautArm, DessinHauteurArm, DessinNbLigArm);
+     // Dessin Equipement (extrait dans PdfBlocEquipement, CONTEXT.md §2.4 - cadre uniquement)
+     DessinDebutHautEqu := DessinDebutHautArm - ((DessinNbLigArm + 1) * DessinHauteurArm) - 3;
+     PdfBlocEquipement(PdfPage, DessinDebColG, DessinLargeurEqu, DessinDebutHautEqu, DessinHauteurEqu, DessinNbLigEqu);
+     // Dessin Armes (extrait dans PdfBlocArmes, CONTEXT.md §2.4 - cadre uniquement)
+     DessinDebutHautWea := DessinDebutHautEqu - ((DessinNbLigEqu + 1) * DessinHauteurEqu) - 3;
+     PdfBlocArmes(PdfPage, DessinDebColG, DessinLargeurWea, DessinDebutHautWea, DessinHauteurWea, DessinNbLigWea);
+     // Dessin Sorts (extrait dans PdfBlocSorts, CONTEXT.md §2.4 - cadre uniquement)
+     DessinDebutHautSor := DessinDebutHautWea - ((DessinNbLigWea + 1) * DessinHauteurWea) - 3;
+     PdfBlocSorts(PdfPage, DessinDebColG, DessinLargeurSor, DessinDebutHautSor, DessinHauteurSor, DessinNbLigSor);
+     // Encombrement (extrait dans PdfBlocEncombrement, CONTEXT.md §2.4 - cadre uniquement)
+     DessinDebutHautEnc := DessinDebutHautSor - ((DessinNbLigSor + 1) * DessinHauteurSor) - 3;
+     PdfBlocEncombrement(PdfPage, DessinDebColG, DessinLargeurEnc, DessinDebutHautEnc, DessinHauteurEnc, DessinNbLigEnc, MinPolice);
 
-     // Valeurs Armures, Equipement, Armes
-     PdfTaillePolice(PdfPage, PdfFontValue, ConstPoliceArial, 9);
-     EncArme     := 0;
-     EncArmure   := 0;
-     ArmureBras  := 0;
-     ArmureCorps := 0;
-     ArmureJambe := 0;
-     ArmureTete  := 0;
-     NbArme      := 0;
-     NbArmure    := 0;
-     NbSort      := 0;
-     Quality     := '';
-     for PersonnageEquipement in Personnage.Equipement do
-       begin
-         Enc := 0;
-         EncP:= 0;
-         if PersonnageEquipement.TypeEquipement = TypeEquipWe then
-           // gérer les armes
-             begin
-               TexteRange1:= '';
-               TexteRange2:= '';
-               PArme      := ChercheArme(PersonnageEquipement.CodeEquipement);
+     // Dessin Sorts (extrait dans PdfBlocSortsDonnees, CONTEXT.md §2.4 - remplissage)
+     PdfBlocSortsDonnees(PdfPage, Personnage, DessinDebColG, DessinDebutHautSor, DessinHauteurSor, MinPolice);
+     // Dessin Divers (extrait dans PdfBlocDiversDonnees, CONTEXT.md §2.4 - remplissage)
+     PdfBlocDiversDonnees(PdfPage, Personnage, DessinDebColG, DessinDebutHautEqu, DessinHauteurEqu, DessinNbLigEqu, MinPolice);
+     // Dessin Armes (extrait dans PdfBlocArmesDonnees, CONTEXT.md §2.4 - remplissage)
+     PdfBlocArmesDonnees(PdfPage, Personnage, DessinDebColG, DessinLargeurWea, DessinDebutHautWea, DessinHauteurWea, BF, TBonusCC, TBonusCT, FabricationBonii, EncArme, ArmeBonii, ArmureBouclier, MinPolice);
+     // Dessin Armures (extrait dans PdfBlocArmuresDonnees, CONTEXT.md §2.4 - remplissage) -
+     // dernière des 4 boucles, les 4 sont maintenant toutes extraites de la boucle partagée
+     PdfBlocArmuresDonnees(PdfPage, Personnage, DessinDebColG, DessinLargeurArm, DessinDebutHautArm, DessinHauteurArm, ArmureSet, FabricationBonii, EncArmure, ArmureBras, ArmureCorps, ArmureJambe, ArmureTete, ArmureBonii, MinPolice, AsterisqueParEquipement, AsterisqueMutationArmure);
+     ListAsterisqueArmure.Destroy;
+     AsterisqueParEquipement.Destroy;
 
-               Portee     := PArme.Portee;
-               if Pos('(B'+ConstCaracF+')',Portee) > 0 then
-                 begin
-                   Portee       := StringReplace(Portee, '(B'+ConstCaracF+')', IntToStr(Trunc(BF/10)), [rfReplaceAll]);;
-                   PorteMoyenne := MultiChaine(Portee);
-                   Portee       := IntToStr(PorteMoyenne);
-                 end
-               else
-                 PorteMoyenne   := StrToIntDef(Portee,0);
-
-               Enc        := PArme.Encombrement + FabricationEncombrement(PersonnageEquipement.QualiteEquipement, Quality);
-               EncArme    := EncArme + Enc;
-
-               Inc(NbArme);
-
-               Pourcent := '';
-
-               CompetenceDonnee := PdfPersonnageCompetence(Personnage, PArme.CodeCompetence, Bidon);
-
-               Pourcent := IntToStr(CompetenceDonnee.Total);
-               PasBonus := (CompetenceDonnee.Augmentation = 0);
-
-               if pos(EquipementCT, PArme.CodeArme) > 0 then
-                 begin
-                   TexteRange1 := '< : '+ChaineSur(3,IntToStr(Trunc(PorteMoyenne/10)))+'m '+IntToStr(StrToInt(Pourcent)+40)+'% / '+ChaineSur(3,IntToStr(Trunc(PorteMoyenne/2 )))+'m '+IntToStr(StrToInt(Pourcent)+20)+'%';
-                   TexteRange2 := '> : '+ChaineSur(3,IntToStr(Trunc(PorteMoyenne*2 )))+'m '+IntToStr(StrToInt(Pourcent)-10)+'% / '+ChaineSur(3,IntToStr(Trunc(PorteMoyenne*3 )))+'m '+IntToStr(StrToInt(Pourcent)-30)+'%';
-                 end;
-
-               PdfEcrit(PdfPage, DessinDebColG +  1, DessinDebColG + 45, DessinDebutHautWea - ((NbArme + 2) * DessinHauteurWea) + 0.6, PArme.Libelle + Quality, MinPolice);
-
-               LigneBonus := '';
-
-               PdfCentre(PdfPage, DessinDebColG +  45, DessinDebColG + 64, DessinDebutHautWea - ((NbArme + 2) * DessinHauteurWea) + 0.6, Pourcent + ' %');
-               if PArme.Encombrement <> 0 then
-                 PdfCentre(PdfPage, DessinDebColG +  64, DessinDebColG + 71, DessinDebutHautWea - ((NbArme + 2) * DessinHauteurWea) + 0.6, IntToStr(Enc));
-               PdfCentre(PdfPage, DessinDebColG +  71, DessinDebColG + 96, DessinDebutHautWea - ((NbArme + 2) * DessinHauteurWea) + 0.6, GetAllTexteLibelle(Portee));
-
-               Deg   := CalculDegat(PArme.CalculDegat, BF);
-               if pos(EquipementCC, PArme.CodeArme) > 0 then
-                 Deg := Deg + TBonusCC
-               else if pos(EquipementCT, PArme.CodeArme) > 0 then
-                 Deg := Deg + TBonusCT;
-
-               if Deg = 0 then
-                 PdfCentre(PdfPage, DessinDebColG +  96, DessinDebColG + 113, DessinDebutHautWea - ((NbArme + 2) * DessinHauteurWea) + 0.6, '-')
-               else
-                 PdfCentre(PdfPage, DessinDebColG +  96, DessinDebColG + 113, DessinDebutHautWea - ((NbArme + 2) * DessinHauteurWea) + 0.6, 'DR + '+IntToStr(Deg));
-
-               PosProtection := pos(BonusProtection, PArme.ListeBonus);
-               if PosProtection > 0 then
-                 ArmureBouclier := StrToInt(copy(PArme.ListeBonus, PosProtection + Length(BonusProtection), 1));
-               PdfTaillePolice(PdfPage, PdfFontValue, ConstPoliceArial, 6);
-
-               if TexteRange1 <> '' then
-                 begin
-                   PdfEcrit(PdfPage, DessinDebColG + 113 + 40, DessinLargeurWea, DessinDebutHautWea - ((NbArme + 2) * DessinHauteurWea) + 2.3, TexteRange1, MinPolice);
-                   PdfEcrit(PdfPage, DessinDebColG + 113 + 40, DessinLargeurWea, DessinDebutHautWea - ((NbArme + 2) * DessinHauteurWea) + 0.3, TexteRange2, MinPolice);
-                 end;
-
-               if PasBonus = false then
-                 begin
-                   LigneBonus := PArme.Listebonus;
-                   if (PArme.ListeBonus <> '') and (PArme.ListeBonus <> '-') then
-                     begin
-                       NbLoca  := CountOccurrences(PArme.ListeBonus,',') + 1;
-                       for IndLoca := 1 to NbLoca do
-                         begin
-                           LocData := ExtractChaine(',',PArme.ListeBonus,IndLoca);
-                           if pos(' ',LocData) <> 0 then
-                             LocData := copy(LocData,1,Length(LocData)-2);
-                           PArmeBonus := ChercheArmeBonus(LocData);
-                           LigneBonus := StringReplace(LigneBonus, LocData, PArmeBonus.Libelle, [rfReplaceAll]);
-                           if Pos(PArmeBonus.CodeArmeBonus, ArmeBonii) = 0 then
-                            begin
-                              if ArmeBonii <> '' then
-                               ArmeBonii := ArmeBonii + ',';
-                               ArmeBonii := ArmeBonii + PArmeBonus.CodeArmeBonus;
-                            end;
-                         end;
-                     end;
-                   FabricationDetail(PersonnageEquipement.QualiteEquipement, LigneBonus, FabricationBonii);
-                   if (TexteRange1 = '') then
-                     PdfEcrit(PdfPage, DessinDebColG + 113 + 1, DessinLargeurWea, DessinDebutHautWea - ((NbArme + 2) * DessinHauteurWea) + 2.3, LigneBonus, MinPolice)
-                   else
-                     PdfEcrit(PdfPage, DessinDebColG + 113 + 1, DessinDebColG + 113 + 40, DessinDebutHautWea - ((NbArme + 2) * DessinHauteurWea) + 2.3, LigneBonus, MinPolice);
-                 end
-               else
-                 begin
-                   PCompetence := ChercheCompetence(PArme.CodeCompetence);
-                   ListMalii := 'pas ' + PCompetence.Libelle;
-
-                   if (PArme.ListeBonus <> '') and (PArme.ListeBonus <> '-') then
-                     begin
-                       NbLoca  := CountOccurrences(PArme.ListeBonus,',') + 1;
-                       for IndLoca := 1 to NbLoca do
-                         begin
-                           LocData := ExtractChaine(',',PArme.ListeBonus,IndLoca);
-                           if pos(' ',LocData) <> 0 then
-                             LocData := copy(LocData,1,Length(LocData)-2);
-                           PArmeBonus := ChercheArmeBonus(LocData);
-                           if PArmeBonus.PlusMoins = '-' then
-                             begin
-                               if Pos(PArmeBonus.Libelle, ArmeBonii) = 0 then
-                                 begin
-                                   if ArmeBonii <> '' then ArmeBonii := ArmeBonii + ',';
-                                   ArmeBonii := ArmeBonii + LocData;
-                                 end;
-                               ListMalii  := ListMalii + ',' + PArmeBonus.Libelle;
-                             end;
-                         end;
-                     end;
-                   FabricationDetail(PersonnageEquipement.QualiteEquipement, ListMalii, FabricationBonii);
-
-                   if (TexteRange1 = '') then
-                     PdfEcrit(PdfPage, DessinDebColG + 113 + 1, DessinLargeurWea, DessinDebutHautWea - ((NbArme + 2) * DessinHauteurWea) + 2.3, ListMalii, MinPolice)
-                   else
-                     PdfEcrit(PdfPage, DessinDebColG + 113 + 1, DessinDebColG + 113 + 40, DessinDebutHautWea - ((NbArme + 2) * DessinHauteurWea) + 2, ListMalii, MinPolice);
-
-                 end;
-               PdfTaillePolice(PdfPage, PdfFontValue, ConstPoliceArial, 9);
-             end
-
-         else if ((ArmureSet = false) and (PersonnageEquipement.TypeEquipement = TypeEquipAR)) or
-                 ((ArmureSet = true)  and (PersonnageEquipement.TypeEquipement = TypeEquipARS)) then
-             // gérer les armures
-             begin
-               if (PersonnageEquipement.TypeEquipement = TypeEquipAR) then
-                 begin
-                   PArmure    := ChercheArmure(PersonnageEquipement.CodeEquipement);
-                   Enc        := PArmure.Encombrement + FabricationEncombrement(PersonnageEquipement.QualiteEquipement,Quality);
-                   NbLoca     := CountOccurrences(PArmure.Emplacement,',') + 1;
-                   LigneBonus := PArmure.Listebonus;
-                 end
-               else
-                 begin
-                   PArmureSimplifiee   := ChercheArmureSimplifiee(PersonnageEquipement.CodeEquipement);
-                   Enc                 := PArmureSimplifiee.Encombrement + FabricationEncombrement(PersonnageEquipement.QualiteEquipement,Quality);
-                   LigneBonus          := PArmureSimplifiee.Listebonus;
-                 end;
-
-               EncP      := Enc;
-               if EncP > 0 then
-                 EncP    := EncP - 1;
-               EncArmure := EncArmure + EncP;
-               if (PersonnageEquipement.TypeEquipement = TypeEquipAR) then
-                 For IndLoca := 1 to NbLoca do
-                   begin
-                     LocData := ExtractChaine(',',PArmure.Emplacement,IndLoca);
-                     case LocData of
-                       BonusBras:   ArmureBras  := ArmureBras  + PArmure.Protection;
-                       BonusCorps:  ArmureCorps := ArmureCorps + PArmure.Protection;
-                       BonusJambes: ArmureJambe := ArmureJambe + PArmure.Protection;
-                       BonusTete:   ArmureTete  := ArmureTete  + PArmure.Protection;
-                     end;
-                   end
-               else
-                 begin
-                   ArmureBras  := ArmureBras  + PArmureSimplifiee.Protection;
-                   ArmureCorps := ArmureCorps + PArmureSimplifiee.Protection;
-                   ArmureJambe := ArmureJambe + PArmureSimplifiee.Protection;
-                   ArmureTete  := ArmureTete  + PArmureSimplifiee.Protection;
-                 end;
-
-               Inc(NBArmure);
-
-               if (PersonnageEquipement.TypeEquipement = TypeEquipAR) then
-                 begin
-                   PdfEcrit(PdfPage, DessinDebColG +  1, DessinDebColG + 34, DessinDebutHautArm - ((NbArmure + 2) * DessinHauteurArm) + 0.6, Parmure.Libelle + Quality, MinPolice);
-                   PdfEcrit(PdfPage, DessinDebColG + 35, DessinDebColG + 53, DessinDebutHautArm - ((NbArmure + 2) * DessinHauteurArm) + 0.6, GetAllTexteLibelle(PArmure.Emplacement), MinPolice);
-                 end
-               else
-                 PdfEcrit(PdfPage, DessinDebColG +  1, DessinDebColG + 34, DessinDebutHautArm - ((NbArmure + 2) * DessinHauteurArm) + 0.6, PArmureSimplifiee.Libelle + Quality, MinPolice);
-               if Enc <> 0 then
-                 if EncP <> Enc then
-                   PdfCentre(PdfPage, DessinDebColG + 53, DessinDebColG + 62, DessinDebutHautArm - ((NbArmure + 2) * DessinHauteurArm) + 0.6, IntToStr(EncP)+ '('+IntToStr(Enc)+')')
-                 else
-                   PdfCentre(PdfPage, DessinDebColG + 53, DessinDebColG + 62, DessinDebutHautArm - ((NbArmure + 2) * DessinHauteurArm) + 0.6, IntToStr(Enc));
-               if (PersonnageEquipement.TypeEquipement = TypeEquipAR) then
-                 PdfCentre(PdfPage, DessinDebColG + 62, DessinDebColG + 70, DessinDebutHautArm - ((NbArmure + 2) * DessinHauteurArm) + 0.6, IntToStr(PArmure.Protection))
-               else
-                 PdfCentre(PdfPage, DessinDebColG + 62, DessinDebColG + 70, DessinDebutHautArm - ((NbArmure + 2) * DessinHauteurArm) + 0.6, IntToStr(PArmureSimplifiee.Protection));
-               if (PersonnageEquipement.TypeEquipement = TypeEquipAR) and (PArmure.ListeBonus <> '') and (PArmure.ListeBonus <> '-') or
-                  (PersonnageEquipement.TypeEquipement = TypeEquipARS) and (PArmureSimplifiee.ListeBonus <> '') and (PArmureSimplifiee.ListeBonus <> '-') then
-                 begin
-                   if (PersonnageEquipement.TypeEquipement = TypeEquipAR) then
-                     NbLoca  := CountOccurrences(PArmure.ListeBonus,',') + 1
-                   else
-                     NbLoca  := CountOccurrences(PArmureSimplifiee.ListeBonus,',') + 1;
-                   for IndLoca := 1 to NbLoca do
-                     begin
-                       if (PersonnageEquipement.TypeEquipement = TypeEquipAR) then
-                         LocData := ExtractChaine(',',PArmure.ListeBonus,IndLoca)
-                       else
-                         LocData := ExtractChaine(',',PArmureSimplifiee.ListeBonus,IndLoca);
-                       if pos(' ',LocData) <> 0 then
-                         LocData := copy(LocData,1,Length(LocData)-2);
-                       PArmureBonus := ChercheArmureBonus(LocData);
-                       LigneBonus := StringReplace(LigneBonus, LocData, PArmureBonus.Libelle, [rfReplaceAll]);
-                       if pos(LocData, ArmureBonii) = 0 then
-                         begin
-                           if ArmureBonii <> '' then
-                            ArmureBonii := ArmureBonii + ',';
-                           ArmureBonii := ArmureBonii + LocData;
-                         end;
-                     end;
-                 end;
-               FabricationDetail(PersonnageEquipement.QualiteEquipement, LigneBonus, FabricationBonii);
-               PdfTaillePolice(PdfPage, PdfFontValue, ConstPoliceArial, 6);
-               PdfEcrit(PdfPage, DessinDebColG + 70 +1, DessinLargeurArm, DessinDebutHautArm - ((NbArmure + 2) * DessinHauteurArm) + 0.6, LigneBonus, MinPolice);
-               PdfTaillePolice(PdfPage, PdfFontValue, ConstPoliceArial, 9);
-             end
-
-           else if PersonnageEquipement.TypeEquipement = TypeEquipDI then
-             // gérer les divers
-             begin
-               Inc(IndDivers);
-               if (IndDivers <= (DessinNbLigEqu * 2)) then
-                  begin
-                    if IndDivers > (DessinNbLigEqu - 1) then
-                      PdfEcrit(PdfPage, DessinDebColG +  56, DessinDebColG + 100, DessinDebutHautEqu - ((IndDivers - DessinNbLigEqu + 3) * DessinHauteurEqu) + 0.6, PersonnageEquipement.CodeEquipement, MinPolice)
-                    else
-                      PdfEcrit(PdfPage, DessinDebColG +   1, DessinDebColG +  48, DessinDebutHautEqu - ((IndDivers + 2) * DessinHauteurEqu) + 0.6, PersonnageEquipement.CodeEquipement, MinPolice);
-                  end;
-             end
-
-           else if PersonnageEquipement.TypeEquipement = TypeEquipSp then
-             begin
-               // gérer les sorts
-               Inc(NbSort);
-               PSort := ChercheSort(PersonnageEquipement.CodeEquipement);
-               PdfEcrit (PdfPage, DessinDebColG +   1, DessinDebColG + 38, DessinDebutHautSor - ((NbSort + 2) * DessinHauteurSor) + 0.6, PSort.Libelle, MinPolice);
-               PdfCentre(PdfPage, DessinDebColG +  38, DessinDebColG + 51, DessinDebutHautSor - ((NbSort + 2) * DessinHauteurSor) + 0.6, PSort.Niveau);
-               PdfCentre(PdfPage, DessinDebColG +  51, DessinDebColG + 66, DessinDebutHautSor - ((NbSort + 2) * DessinHauteurSor) + 0.6, PdfPersonnageRemplaceBonus(Personnage, PSort.Portee));
-               PdfCentre(PdfPage, DessinDebColG +  66, DessinDebColG + 82, DessinDebutHautSor - ((NbSort + 2) * DessinHauteurSor) + 0.6, PdfPersonnageRemplaceBonus(Personnage, PSort.Cible));
-               PdfCentre(PdfPage, DessinDebColG +  82, DessinDebColG + 98, DessinDebutHautSor - ((NbSort + 2) * DessinHauteurSor) + 0.6, PdfPersonnageRemplaceBonus(Personnage, PSort.Duree));
-               PdfTaillePolice(PdfPage, PdfFontValue, ConstPoliceArial, 9);
-             end;
-       end;
         // Écrire du texte sur la page PDF
     PdfTaillePolice(PdfPage, PdfFontValue, ConstPoliceArial, 7);
 
@@ -3248,6 +4148,31 @@ Procedure PdfPersonnageCreationFeldo2P(Personnage: StructurePersonnage);
     PdfCentre(PdfPage, DessinDebColG + 15, DessinLargeurEnc, DessinDebutHautEnc - ((DessinNbLigEnc - 2) * DessinHauteurEnc) + 0.9, IntToStr(EncArme));
     PdfCentre(PdfPage, DessinDebColG + 15, DessinLargeurEnc, DessinDebutHautEnc - ((DessinNbLigEnc - 0) * DessinHauteurEnc) + 0.9, IntToStr(Floor(BF/10) + Floor(BE/10) + BonusEncomb));
     PdfCentre(PdfPage, DessinDebColG + 15, DessinLargeurEnc, DessinDebutHautEnc - ((DessinNbLigEnc + 1) * DessinHauteurEnc) + 0.9, IntToStr(EncArmure + EncArme));
+
+    // Dessin Armour Points (nouveau bloc PdfBlocArmourPoints, CONTEXT.md §2.4 - cadre +
+    // contenu) - positionné sous l'Encombrement, demandé par Nono le 15/08/2026.
+    // Correction du 15/08/2026 (retour de Nono) : le calcul précédent oubliait le "+1"
+    // que tous les autres blocs appliquent à leur nombre de lignes pour retrouver le bas
+    // réel d'un cadre (voir PdfBlocEncombrement : bas = Y - ((NbLignes+1)*HauteurLigne))
+    // - du coup le nouveau bloc démarrait quasiment collé sous l'Encombrement au lieu de
+    // laisser un espace. Formule corrigée pour utiliser exactement le même "-3" que
+    // partout ailleurs entre deux blocs (le même écart qu'entre Sorts et Encombrement) ;
+    // (X,Y) passé au bloc est maintenant le coin HAUT-GAUCHE de son cadre, aligné sur
+    // DessinDebColG comme tous les autres blocs de la page (au lieu d'un décalage de
+    // 4mm vers la gauche par rapport au bloc Encombrement).
+    DessinHautArmourPoints := DessinDebutHautEnc - ((DessinNbLigEnc + 1) * DessinHauteurEnc) - 3;
+    PdfBlocArmourPoints(PdfPage, PdfImgShadow, DessinDebColG, DessinHautArmourPoints, ArmureTete, ArmureBras, ArmureCorps, ArmureJambe, ArmureBouclier, AsterisqueMutationArmure);
+
+    // Table des mutations obtenues (CONTEXT.md §2.7, étape 9) - à droite d'Armour Points, même
+    // écart de 3mm que partout ailleurs entre deux blocs de la page ; XDroite réutilise
+    // DessinLargeurArm (bord droit déjà établi pour Armure/Équipement plus haut sur la page)
+    // plutôt qu'une nouvelle largeur arbitraire. Capacité fixe à 3 lignes, demandée par Nono.
+    PdfBlocMutations(PdfPage, Personnage, DessinDebColG + 63 + 3, DessinLargeurArm, DessinHautArmourPoints, DessinHauteurEnc, 3, MinPolice, AsterisqueParMutation);
+    // Dernière utilisation de ListAsterisqueMutation/AsterisqueParMutation sur cette page -
+    // libérées ici (même moment que ListAsterisqueArmure/AsterisqueParEquipement, juste avant,
+    // après leur dernier usage respectif).
+    ListAsterisqueMutation.Destroy;
+    AsterisqueParMutation.Destroy;
 
     // Dessin Blessure
     DessinDebutHautBle   := DessinDebutHautEnc;
@@ -3321,63 +4246,8 @@ Procedure PdfPersonnageCreationFeldo2P(Personnage: StructurePersonnage);
     PdfEcrit(PdfPage ,DessinDebutGaucheComC + 1,DessinLargeurComC - 10,DessinDebutHautComC - (6 * DessinHauteurComC) + 1, PCompetence.Libelle, MinPolice);
     PdfCentre(PdfPage,DessinLargeurComC - 10   ,DessinLargeurComC, DessinDebutHautComC     - (6 * DessinHauteurComC) + 1, IntToStr(TotalResitance));
 
-    // DessinExplication
-    PdfPage.DrawLine(DessinLargeurArm + 3, DessinDebutHautArm,    DessinLargeurArm + 3, DessinDebutHautWea + 3, 1);
-    PdfPage.DrawLine(DessinLargeurWea    , DessinDebutHautArm,    DessinLargeurWea    , DessinDebutHautWea + 3, 1);
-    PdfPage.DrawLine(DessinLargeurArm + 3, DessinDebutHautArm,    DessinLargeurWea    , DessinDebutHautArm, 1);
-    PdfPage.DrawLine(DessinLargeurArm + 3, DessinDebutHautWea + 3,DessinLargeurWea    , DessinDebutHautWea + 3, 1);
-
-    NbBonus := 0;
-    if ArmureBonii <> '' then
-      begin
-        Inc(NbBonus);
-        Inc(NbBonus);
-        PdfPage.WriteText(DessinLargeurArm + 4,DessinDebutHautArm-(NbBonus*DessinHauteurExl), ' --------- ' + GetTexteLibelle('LAB_122') + ' --------- ');
-        Inc(NbBonus);
-        NbLoca := CountOccurrences(ArmureBonii,',')+1;
-        For IndLoca := 1 to NbLoca do
-          begin
-            Inc(NbBonus);
-            LocData      := ExtractChaine(',',ArmureBonii,IndLoca);
-            PArmureBonus := ChercheArmureBonus(LocData);
-            TxtBonus     := PArmureBonus.Libelle+':'+PArmureBonus.Malus;
-            PdfPage.WriteText(DessinLargeurArm + 4,DessinDebutHautArm-(NbBonus*DessinHauteurExl), TxtBonus);
-          end;
-      end;
-
-    if ArmeBonii <> '' then
-      begin
-        Inc(NbBonus);
-        Inc(NbBonus);
-        PdfPage.WriteText(DessinLargeurArm + 4,DessinDebutHautArm-(NbBonus*DessinHauteurExl), ' ---------- ' + GetTexteLibelle('LAB_123') + ' ---------- ');
-        Inc(NbBonus);
-        NbLoca := CountOccurrences(ArmeBonii,',')+1;
-        For IndLoca := 1 to NbLoca do
-          begin
-            Inc(NbBonus);
-            LocData     := ExtractChaine(',',ArmeBonii,IndLoca);
-            PArmeBonus  := ChercheArmeBonus(LocData);
-            TxtBonus    := PArmeBonus.Libelle+':'+PArmeBonus.Resume;
-            PdfPage.WriteText(DessinLargeurArm + 4,DessinDebutHautArm-(NbBonus*DessinHauteurExl), TxtBonus);
-          end;
-      end;
-
-    if FabricationBonii <> '' then
-      begin
-        Inc(NbBonus);
-        Inc(NbBonus);
-        PdfPage.WriteText(15,DessinDebutHautArm-(NbBonus*DessinHauteurExl), ' ---------- ' + GetTexteLibelle('LAB_124') + ' ---------- ');
-        Inc(NbBonus);
-        NbLoca := CountOccurrences(FabricationBonii,',')+1;
-        For IndLoca := 1 to NbLoca do
-          begin
-            Inc(NbBonus);
-            LocData     := ExtractChaine(',',FabricationBonii,IndLoca);
-            PFabrication:= ChercheFabrication(LocData);
-            TxtBonus    := PFabrication.Libelle+':'+PFabrication.Resume;
-            PdfPage.WriteText(DessinLargeurArm + 4,DessinDebutHautArm-(NbBonus*DessinHauteurExl), TxtBonus);
-          end;
-      end;
+    // Dessin Explication (extrait dans PdfBlocDessinExplication, CONTEXT.md §2.4 - cadre + contenu)
+    PdfBlocDessinExplication(PdfPage, DessinLargeurArm, DessinLargeurWea, DessinDebutHautArm, DessinDebutHautWea, DessinHauteurExl, ArmureBonii, ArmeBonii, FabricationBonii);
 
 
     PDFDoc.SaveToFile(PdfChemin);

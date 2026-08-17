@@ -529,7 +529,7 @@ Var
   CouleurFondKo:  TColor = TColor($7F7F7F);   // gris (7.png)
 
 procedure NettoyerElementsFenetre(Fenetre: TWinControl);
-procedure AdjustGridColumnsWidth(Grid: TStringGrid; MaxHeight: Integer; ForceMax: Boolean; MaxWidth: boolean; AutoSizeCol: Boolean = true; AddHeight: Integer = 0; AddWidth: Integer = 0; ForceScroll: TScrollStyle = ssautoboth);
+procedure AdjustGridColumnsWidth(Grid: TStringGrid; MaxHeight: Integer; ForceMax: Boolean; MaxWidth: boolean; AutoSizeCol: Boolean = true; AddHeight: Integer = 0; AddWidth: Integer = 0; ForceScroll: TScrollStyle = ssautoboth; ScaleDpi: Boolean = true);
 procedure AdjustTKGridColumnsWidth(Grid: TKGrid; MaxHeight: Integer; ForceMax: Boolean; MaxWidth: boolean; AutoSizeCol: Boolean = true; AddHeight: Integer = 0; AddWidth: Integer = 0; ForceScroll: TScrollStyle = ssautoboth);
 Function GridAjouteColonne(Grid: TStringGrid; Caption: String = ''; Widths: Integer = 0; Align: TAlignment = taLeftJustify): Integer;
 procedure ClearStringGrid(Grid: TStringGrid);
@@ -567,7 +567,7 @@ procedure NettoyerElementsFenetre(Fenetre: TWinControl);
       end;
   end;
 
-procedure AdjustGridColumnsWidth(Grid: TStringGrid; MaxHeight: Integer; ForceMax: Boolean; MaxWidth: boolean; AutoSizeCol: Boolean = true; AddHeight: Integer = 0; AddWidth: Integer = 0; ForceScroll: TScrollStyle = ssautoboth);
+procedure AdjustGridColumnsWidth(Grid: TStringGrid; MaxHeight: Integer; ForceMax: Boolean; MaxWidth: boolean; AutoSizeCol: Boolean = true; AddHeight: Integer = 0; AddWidth: Integer = 0; ForceScroll: TScrollStyle = ssautoboth; ScaleDpi: Boolean = true);
   var
     Col:   Integer;
     Lig:   Integer;
@@ -615,7 +615,16 @@ procedure AdjustGridColumnsWidth(Grid: TStringGrid; MaxHeight: Integer; ForceMax
       Grid.Width := TotalC + 5
     else if Grid.Width > (TotalC + 5) then
       Grid.Width := TotalC + 5;
-    Grid.ScaleFormToDesign(96);
+    // ScaleFormToDesign recalcule la taille de la fenêtre PROPRIÉTAIRE (pas juste la
+    // grille) à partir de sa taille actuelle - un rappel de cette fonction sur une fenêtre
+    // déjà mise à l'échelle une première fois (au FormCreate) la remet à l'échelle une
+    // deuxième fois par-dessus, cumulant l'agrandissement (bug du 18/08/2026, découvert
+    // via RafraichirLibellesMenu qui rappelle AdjustGridColumnsWidth à chaque changement
+    // de langue en direct, CONTEXT.md §2.8) - ScaleDpi=false permet de sauter ce rappel
+    // pour un simple rafraîchissement de contenu, sans toucher les appels existants
+    // (paramètre optionnel, true par défaut = comportement inchangé partout ailleurs).
+    if ScaleDpi then
+      Grid.ScaleFormToDesign(96);
     if not MaxWidth then
       if  Asc > 0 then
         Grid.Width := Grid.Width + Asc;

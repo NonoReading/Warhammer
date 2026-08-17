@@ -2185,10 +2185,14 @@ Procedure XmlImport(FileName: String; OnlyPrimary: Boolean; OnlyCode: Boolean);
                 end;
 
               // Catalogue de mutation Physique (Physical Corruption Table, CONTEXT.md §2.7).
-              // Traduction : pas d'attribut language= sur <Libelle>/<Effet> (inutile, le
-              // <language> de tête du livre - LangueDef - suffit, même valeur que les
-              // attributs language= des autres chapitres). Code = code stable du catalogue
-              // (ex. "RULES-CORPHY_001"), décorrélé de la plage D100 - voir
+              // Balises <Description language="X">/<Explanation language="X"> (renommées le
+              // 17/08/2026 depuis <Libelle>/<Effet>, à la demande de Nono, pour la même
+              // convention que les autres chapitres - Attribut/Compétence/Talent/etc.) restent
+              // lues dans les champs Pascal .Libelle/.Effet existants (noms internes conservés,
+              // choix de Nono). L'attribut language= n'est pas lu (toujours redondant avec le
+              // <language> de tête du livre - LangueDef - même s'il est maintenant présent dans
+              // le XML pour la cohérence visuelle avec les autres chapitres). Code = code stable
+              // du catalogue (ex. "RULES-CORPHY_001"), décorrélé de la plage D100 - voir
               // DATA_CORRUPTION_PHYSICAL_CHANCE/DATA_CORRUPTION_MENTAL_CHANCE plus bas pour le
               // tirage (conception revue avec Nono le 17/08/2026).
               NodeNv1 := BookNode.FindNode(ConstXmlDataCorruptionTablePhys);
@@ -2209,9 +2213,9 @@ Procedure XmlImport(FileName: String; OnlyPrimary: Boolean; OnlyCode: Boolean);
                       while Assigned(Node) do
                         begin
                           case Node.NodeName of
-                            ConstXmlLibelle:
+                            ConstXmlDescription:
                               PCorruptionTable.Libelle := RemoveQuotes(UTF8Encode(Node.TextContent));
-                            ConstXmlEffet:
+                            ConstXmlExplanation:
                               PCorruptionTable.Effet   := RemoveQuotes(UTF8Encode(Node.TextContent));
                             ConstXmlModifieAttribut:
                               begin
@@ -2297,9 +2301,9 @@ Procedure XmlImport(FileName: String; OnlyPrimary: Boolean; OnlyCode: Boolean);
                       while Assigned(Node) do
                         begin
                           case Node.NodeName of
-                            ConstXmlLibelle:
+                            ConstXmlDescription:
                               PCorruptionTable.Libelle := RemoveQuotes(UTF8Encode(Node.TextContent));
-                            ConstXmlEffet:
+                            ConstXmlExplanation:
                               PCorruptionTable.Effet   := RemoveQuotes(UTF8Encode(Node.TextContent));
                             ConstXmlModifieAttribut:
                               begin

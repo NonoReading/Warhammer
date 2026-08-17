@@ -268,7 +268,7 @@ ifically your Strength, Endurance and Mental Strength Bonuses (abbreviations BF,
 <Text name="RULES-MESS_038">"The PDF is already open."</Text>
 <Text name="RULES-MESS_039">"Do you want to delete this equipment?"</Text>
 <Text name="RULES-MESS_040">"Please enter a number between 0 and the maximum."</Text>
-<Text name="RULES-MESS_041">"(this will take effect on the next launch) change the language to"</Text>
+<Text name="RULES-MESS_041">"Change the language to"</Text>
 <Text name="RULES-MESS_042">"You must first choose the specialization of this skill"</Text>
 <Text name="RULES-MESS_043">"you already reached the max level for that carear"</Text>
 <Text name="RULES-MESS_044">"You have not made your choice between the two options (3rd choice)."</Text>
@@ -282,6 +282,7 @@ ifically your Strength, Endurance and Mental Strength Bonuses (abbreviations BF,
 <Text name="RULES-MESS_052">"this book name already exist"</Text>
 <Text name="RULES-MESS_053">"Do you want to delete this corruption entry?"</Text>
 <Text name="RULES-MESS_054">"The GM must choose a Mutation or Creature Trait - select the actual entry below."</Text>
+<Text name="RULES-MESS_055">"Please close any open character sheet or character creation window before changing the language."</Text>
 <Text name="RULES-LAB_001">"Code"</Text>
 <Text name="RULES-LAB_002">"Label"</Text>
 <Text name="RULES-LAB_003">"Description"</Text>
@@ -17364,62 +17365,62 @@ If your opponent has a weapon with the Impaler Perk and rolls a Critical, your a
 </DATA_CORRUPTION_MENTAL>
 <DATA_CORRUPTION_TABLE_PHYSICAL>
 <Corruption name="RULES-CORPHY_001">
-<Libelle>"Animalistic Legs"</Libelle>
-<Effet>"+1 Movement"</Effet>
+<Description language="ENGLISH">"Animalistic Legs"</Description>
+<Explanation language="ENGLISH">"+1 Movement"</Explanation>
 <ModifyCarac name="RULES-ATTR_Move">+1</ModifyCarac>
 </Corruption>
 <Corruption name="RULES-CORPHY_002">
-<Libelle>"Corpulent"</Libelle>
-<Effet>"-1 Movement, +5 Strength, +5 Toughness"</Effet>
+<Description language="ENGLISH">"Corpulent"</Description>
+<Explanation language="ENGLISH">"-1 Movement, +5 Strength, +5 Toughness"</Explanation>
 <ModifyCarac name="RULES-ATTR_Move">-1</ModifyCarac>
 <ModifyCarac name="RULES-ATTR_S">+5</ModifyCarac>
 <ModifyCarac name="RULES-ATTR_T">+5</ModifyCarac>
 </Corruption>
 <Corruption name="RULES-CORPHY_003">
-<Libelle>"Distended Digits"</Libelle>
-<Effet>"+10 Dexterity"</Effet>
+<Description language="ENGLISH">"Distended Digits"</Description>
+<Explanation language="ENGLISH">"+10 Dexterity"</Explanation>
 <ModifyCarac name="RULES-ATTR_Dex">+10</ModifyCarac>
 </Corruption>
 <Corruption name="RULES-CORPHY_004">
-<Libelle>"Emaciated"</Libelle>
-<Effet>"-10 Strength, +5 Agility"</Effet>
+<Description language="ENGLISH">"Emaciated"</Description>
+<Explanation language="ENGLISH">"-10 Strength, +5 Agility"</Explanation>
 <ModifyCarac name="RULES-ATTR_S">-10</ModifyCarac>
 <ModifyCarac name="RULES-ATTR_Ag">+5</ModifyCarac>
 </Corruption>
 <Corruption name="RULES-CORPHY_005">
-<Libelle>"Enormous Eye"</Libelle>
-<Effet>"+10 on Perception Tests involving sight"</Effet>
+<Description language="ENGLISH">"Enormous Eye"</Description>
+<Explanation language="ENGLISH">"+10 on Perception Tests involving sight"</Explanation>
 </Corruption>
 <Corruption name="RULES-CORPHY_006">
-<Libelle>"Extra Leg Joints"</Libelle>
-<Effet>"+5 Agility"</Effet>
+<Description language="ENGLISH">"Extra Leg Joints"</Description>
+<Explanation language="ENGLISH">"+5 Agility"</Explanation>
 <ModifyCarac name="RULES-ATTR_Ag">+5</ModifyCarac>
 </Corruption>
 <Corruption name="RULES-CORPHY_007">
-<Libelle>"Extra Mouth"</Libelle>
-<Effet>"Roll on the Hit Location table to see where"</Effet>
+<Description language="ENGLISH">"Extra Mouth"</Description>
+<Explanation language="ENGLISH">"Roll on the Hit Location table to see where"</Explanation>
 </Corruption>
 <Corruption name="RULES-CORPHY_008">
-<Libelle>"Fleshy Tentacle"</Libelle>
-<Effet>"Gain the Tentacles Creature Trait. See page 342"</Effet>
+<Description language="ENGLISH">"Fleshy Tentacle"</Description>
+<Explanation language="ENGLISH">"Gain the Tentacles Creature Trait. See page 342"</Explanation>
 </Corruption>
 <Corruption name="RULES-CORPHY_009">
-<Libelle>"Glowing Skin"</Libelle>
-<Effet>"Effective light of a candle"</Effet>
+<Description language="ENGLISH">"Glowing Skin"</Description>
+<Explanation language="ENGLISH">"Effective light of a candle"</Explanation>
 </Corruption>
 <Corruption name="RULES-CORPHY_010">
-<Libelle>"Inhuman Beauty"</Libelle>
-<Effet>"+10 Fellowship; you do not scar"</Effet>
+<Description language="ENGLISH">"Inhuman Beauty"</Description>
+<Explanation language="ENGLISH">"+10 Fellowship; you do not scar"</Explanation>
 <ModifyCarac name="RULES-ATTR_Fel">+10</ModifyCarac>
 </Corruption>
 <Corruption name="RULES-CORPHY_011">
-<Libelle>"Inverted Face"</Libelle>
-<Effet>"-20 to all Fellowship Tests"</Effet>
+<Description language="ENGLISH">"Inverted Face"</Description>
+<Explanation language="ENGLISH">"-20 to all Fellowship Tests"</Explanation>
 <ModifySkillAttribut name="RULES-ATTR_Fel">-20</ModifySkillAttribut>
 </Corruption>
 <Corruption name="RULES-CORPHY_012">
-<Libelle>"Iron Skin"</Libelle>
-<Effet>"+2 Armour Points to all locations, -10 Agility"</Effet>
+<Description language="ENGLISH">"Iron Skin"</Description>
+<Explanation language="ENGLISH">"+2 Armour Points to all locations, -10 Agility"</Explanation>
 <ModifyCarac name="RULES-ATTR_Ag">-10</ModifyCarac>
 <ModifArmour name="RULES-ARMOL_HEAD">2</ModifArmour>
 <ModifArmour name="RULES-ARMOL_ARM">2</ModifArmour>
@@ -17427,150 +17428,150 @@ If your opponent has a weapon with the Impaler Perk and rolls a Critical, your a
 <ModifArmour name="RULES-ARMOL_LEG">2</ModifArmour>
 </Corruption>
 <Corruption name="RULES-CORPHY_013">
-<Libelle>"Lolling Tongue"</Libelle>
-<Effet>"-10 to all Language Tests when speaking"</Effet>
+<Description language="ENGLISH">"Lolling Tongue"</Description>
+<Explanation language="ENGLISH">"-10 to all Language Tests when speaking"</Explanation>
 <ModifySkill name="RULES-COMPLANG_*">-10</ModifySkill>
 </Corruption>
 <Corruption name="RULES-CORPHY_014">
-<Libelle>"Patchy Feathers"</Libelle>
-<Effet>"Roll on the Hit Location table twice to see where"</Effet>
+<Description language="ENGLISH">"Patchy Feathers"</Description>
+<Explanation language="ENGLISH">"Roll on the Hit Location table twice to see where"</Explanation>
 </Corruption>
 <Corruption name="RULES-CORPHY_015">
-<Libelle>"Short Legs"</Libelle>
-<Effet>"-1 Movement"</Effet>
+<Description language="ENGLISH">"Short Legs"</Description>
+<Explanation language="ENGLISH">"-1 Movement"</Explanation>
 <ModifyCarac name="RULES-ATTR_Move">-1</ModifyCarac>
 </Corruption>
 <Corruption name="RULES-CORPHY_016">
-<Libelle>"Thorny Scales"</Libelle>
-<Effet>"+1 Armour Points to all locations"</Effet>
+<Description language="ENGLISH">"Thorny Scales"</Description>
+<Explanation language="ENGLISH">"+1 Armour Points to all locations"</Explanation>
 <ModifArmour name="RULES-ARMOL_HEAD">1</ModifArmour>
 <ModifArmour name="RULES-ARMOL_ARM">1</ModifArmour>
 <ModifArmour name="RULES-ARMOL_BODY">1</ModifArmour>
 <ModifArmour name="RULES-ARMOL_LEG">1</ModifArmour>
 </Corruption>
 <Corruption name="RULES-CORPHY_017">
-<Libelle>"Uneven Horns"</Libelle>
-<Effet>"+1 Armour Points to the Head; counts as a Creature Weapon of Damage equal to your SB (see page 343)"</Effet>
+<Description language="ENGLISH">"Uneven Horns"</Description>
+<Explanation language="ENGLISH">"+1 Armour Points to the Head; counts as a Creature Weapon of Damage equal to your SB (see page 343)"</Explanation>
 <ModifArmour name="RULES-ARMOL_HEAD">1</ModifArmour>
 </Corruption>
 <Corruption name="RULES-CORPHY_018">
-<Libelle>"Weeping Pus"</Libelle>
-<Effet>"Roll on the Hit Location Table to see from where"</Effet>
+<Description language="ENGLISH">"Weeping Pus"</Description>
+<Explanation language="ENGLISH">"Roll on the Hit Location Table to see from where"</Explanation>
 </Corruption>
 <Corruption name="RULES-CORPHY_019">
-<Libelle>"Whiskered Snout"</Libelle>
-<Effet>"+10 Track"</Effet>
+<Description language="ENGLISH">"Whiskered Snout"</Description>
+<Explanation language="ENGLISH">"+10 Track"</Explanation>
 <ModifySkill name="RULES-COMPPIST">+10</ModifySkill>
 </Corruption>
 <Corruption name="RULES-CORPHY_020">
-<Libelle>"GM's Choice"</Libelle>
-<Effet>"The GM chooses a Mutation or Creature Trait. See page 338"</Effet>
+<Description language="ENGLISH">"GM's Choice"</Description>
+<Explanation language="ENGLISH">"The GM chooses a Mutation or Creature Trait. See page 338"</Explanation>
 </Corruption>
 </DATA_CORRUPTION_TABLE_PHYSICAL>
 <DATA_CORRUPTION_TABLE_MENTAL>
 <Corruption name="RULES-CORMEN_001">
-<Libelle>"Awful Cravings"</Libelle>
-<Effet>"-5 Fellowship, -5 Willpower"</Effet>
+<Description language="ENGLISH">"Awful Cravings"</Description>
+<Explanation language="ENGLISH">"-5 Fellowship, -5 Willpower"</Explanation>
 <ModifyCarac name="RULES-ATTR_Fel">-5</ModifyCarac>
 <ModifyCarac name="RULES-ATTR_WP">-5</ModifyCarac>
 </Corruption>
 <Corruption name="RULES-CORMEN_002">
-<Libelle>"Beast Within"</Libelle>
-<Effet>"+10 Willpower, -5 Fellowship, -5 Intelligence"</Effet>
+<Description language="ENGLISH">"Beast Within"</Description>
+<Explanation language="ENGLISH">"+10 Willpower, -5 Fellowship, -5 Intelligence"</Explanation>
 <ModifyCarac name="RULES-ATTR_WP">+10</ModifyCarac>
 <ModifyCarac name="RULES-ATTR_Fel">-5</ModifyCarac>
 <ModifyCarac name="RULES-ATTR_Int">-5</ModifyCarac>
 </Corruption>
 <Corruption name="RULES-CORMEN_003">
-<Libelle>"Chaotic Dreams"</Libelle>
-<Effet>"Gain the Fatigued Condition for the first two hours of every day"</Effet>
+<Description language="ENGLISH">"Chaotic Dreams"</Description>
+<Explanation language="ENGLISH">"Gain the Fatigued Condition for the first two hours of every day"</Explanation>
 </Corruption>
 <Corruption name="RULES-CORMEN_004">
-<Libelle>"Crawling Skin"</Libelle>
-<Effet>"-5 Initiative, -5 Dexterity"</Effet>
+<Description language="ENGLISH">"Crawling Skin"</Description>
+<Explanation language="ENGLISH">"-5 Initiative, -5 Dexterity"</Explanation>
 <ModifyCarac name="RULES-ATTR_I">-5</ModifyCarac>
 <ModifyCarac name="RULES-ATTR_Dex">-5</ModifyCarac>
 </Corruption>
 <Corruption name="RULES-CORMEN_005">
-<Libelle>"Erratic Fantasist"</Libelle>
-<Effet>"-5 Initiative, -5 Willpower"</Effet>
+<Description language="ENGLISH">"Erratic Fantasist"</Description>
+<Explanation language="ENGLISH">"-5 Initiative, -5 Willpower"</Explanation>
 <ModifyCarac name="RULES-ATTR_I">-5</ModifyCarac>
 <ModifyCarac name="RULES-ATTR_WP">-5</ModifyCarac>
 </Corruption>
 <Corruption name="RULES-CORMEN_006">
-<Libelle>"Fearful Concern"</Libelle>
-<Effet>"-10 Willpower"</Effet>
+<Description language="ENGLISH">"Fearful Concern"</Description>
+<Explanation language="ENGLISH">"-10 Willpower"</Explanation>
 <ModifyCarac name="RULES-ATTR_WP">-10</ModifyCarac>
 </Corruption>
 <Corruption name="RULES-CORMEN_007">
-<Libelle>"Hateful Impulses"</Libelle>
-<Effet>"Subject to Animosity (see Psychology) to all not of your species"</Effet>
+<Description language="ENGLISH">"Hateful Impulses"</Description>
+<Explanation language="ENGLISH">"Subject to Animosity (see Psychology) to all not of your species"</Explanation>
 </Corruption>
 <Corruption name="RULES-CORMEN_008">
-<Libelle>"Hollow Heart"</Libelle>
-<Effet>"+10 Willpower, -10 Fellowship"</Effet>
+<Description language="ENGLISH">"Hollow Heart"</Description>
+<Explanation language="ENGLISH">"+10 Willpower, -10 Fellowship"</Explanation>
 <ModifyCarac name="RULES-ATTR_WP">+10</ModifyCarac>
 <ModifyCarac name="RULES-ATTR_Fel">-10</ModifyCarac>
 </Corruption>
 <Corruption name="RULES-CORMEN_009">
-<Libelle>"Jealous Thoughts"</Libelle>
-<Effet>"-10 Fellowship"</Effet>
+<Description language="ENGLISH">"Jealous Thoughts"</Description>
+<Explanation language="ENGLISH">"-10 Fellowship"</Explanation>
 <ModifyCarac name="RULES-ATTR_Fel">-10</ModifyCarac>
 </Corruption>
 <Corruption name="RULES-CORMEN_010">
-<Libelle>"Lonely Spirit"</Libelle>
-<Effet>"-10 to any Test when alone"</Effet>
+<Description language="ENGLISH">"Lonely Spirit"</Description>
+<Explanation language="ENGLISH">"-10 to any Test when alone"</Explanation>
 </Corruption>
 <Corruption name="RULES-CORMEN_011">
-<Libelle>"Mental Blocks"</Libelle>
-<Effet>"-10 Intelligence"</Effet>
+<Description language="ENGLISH">"Mental Blocks"</Description>
+<Explanation language="ENGLISH">"-10 Intelligence"</Explanation>
 <ModifyCarac name="RULES-ATTR_Int">-10</ModifyCarac>
 </Corruption>
 <Corruption name="RULES-CORMEN_012">
-<Libelle>"Profane Urgency"</Libelle>
-<Effet>"-10 Willpower, +10 Agility"</Effet>
+<Description language="ENGLISH">"Profane Urgency"</Description>
+<Explanation language="ENGLISH">"-10 Willpower, +10 Agility"</Explanation>
 <ModifyCarac name="RULES-ATTR_WP">-10</ModifyCarac>
 <ModifyCarac name="RULES-ATTR_Ag">+10</ModifyCarac>
 </Corruption>
 <Corruption name="RULES-CORMEN_013">
-<Libelle>"Shaky Morale"</Libelle>
-<Effet>"Gain the Broken condition if you fail a Test derived from Willpower"</Effet>
+<Description language="ENGLISH">"Shaky Morale"</Description>
+<Explanation language="ENGLISH">"Gain the Broken condition if you fail a Test derived from Willpower"</Explanation>
 </Corruption>
 <Corruption name="RULES-CORMEN_014">
-<Libelle>"Suspicious Mind"</Libelle>
-<Effet>"-5 I, -5 Int"</Effet>
+<Description language="ENGLISH">"Suspicious Mind"</Description>
+<Explanation language="ENGLISH">"-5 I, -5 Int"</Explanation>
 <ModifyCarac name="RULES-ATTR_I">-5</ModifyCarac>
 <ModifyCarac name="RULES-ATTR_Int">-5</ModifyCarac>
 </Corruption>
 <Corruption name="RULES-CORMEN_015">
-<Libelle>"Thrill Hunter"</Libelle>
-<Effet>"+10 Willpower, -10 Initiative"</Effet>
+<Description language="ENGLISH">"Thrill Hunter"</Description>
+<Explanation language="ENGLISH">"+10 Willpower, -10 Initiative"</Explanation>
 <ModifyCarac name="RULES-ATTR_WP">+10</ModifyCarac>
 <ModifyCarac name="RULES-ATTR_I">-10</ModifyCarac>
 </Corruption>
 <Corruption name="RULES-CORMEN_016">
-<Libelle>"Tortured Visions"</Libelle>
-<Effet>"-10 Initiative"</Effet>
+<Description language="ENGLISH">"Tortured Visions"</Description>
+<Explanation language="ENGLISH">"-10 Initiative"</Explanation>
 <ModifyCarac name="RULES-ATTR_I">-10</ModifyCarac>
 </Corruption>
 <Corruption name="RULES-CORMEN_017">
-<Libelle>"Totally Unhinged"</Libelle>
-<Effet>"-20 Fellowship, +10 Willpower"</Effet>
+<Description language="ENGLISH">"Totally Unhinged"</Description>
+<Explanation language="ENGLISH">"-20 Fellowship, +10 Willpower"</Explanation>
 <ModifyCarac name="RULES-ATTR_Fel">-20</ModifyCarac>
 <ModifyCarac name="RULES-ATTR_WP">+10</ModifyCarac>
 </Corruption>
 <Corruption name="RULES-CORMEN_018">
-<Libelle>"Unending Malice"</Libelle>
-<Effet>"-10 to any Test not hurting another; +10 on Tests to hurt"</Effet>
+<Description language="ENGLISH">"Unending Malice"</Description>
+<Explanation language="ENGLISH">"-10 to any Test not hurting another; +10 on Tests to hurt"</Explanation>
 </Corruption>
 <Corruption name="RULES-CORMEN_019">
-<Libelle>"Unholy Rage"</Libelle>
-<Effet>"Subject to Frenzy (see Psychology), +10 Weapon Skill"</Effet>
+<Description language="ENGLISH">"Unholy Rage"</Description>
+<Explanation language="ENGLISH">"Subject to Frenzy (see Psychology), +10 Weapon Skill"</Explanation>
 <ModifyCarac name="RULES-ATTR_WS">+10</ModifyCarac>
 </Corruption>
 <Corruption name="RULES-CORMEN_020">
-<Libelle>"Worried Jitters"</Libelle>
-<Effet>"+5 Agility, -5 Fellowship"</Effet>
+<Description language="ENGLISH">"Worried Jitters"</Description>
+<Explanation language="ENGLISH">"+5 Agility, -5 Fellowship"</Explanation>
 <ModifyCarac name="RULES-ATTR_Ag">+5</ModifyCarac>
 <ModifyCarac name="RULES-ATTR_Fel">-5</ModifyCarac>
 </Corruption>

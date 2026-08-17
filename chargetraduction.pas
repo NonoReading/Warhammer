@@ -100,9 +100,15 @@ Procedure Traduit(Langue: String; Livre: String);
     PFabrication: StructureFabrication;
     PCorruptionTable: StructureCorruptionTable;
   begin
-    if (Langue <> ConstAnglais) or (Livre <> '') then
-      begin
-        For PTraduction in ListTraduction do
+    // Pas de garde sur Langue = ConstAnglais ici : ListTexte/ListeAttribut/etc. ne sont
+    // PAS rechargées avec du texte anglais frais lors d'un changement de livre/langue en
+    // direct (XmlImport y est appelé avec OnlyPrimary=false, qui saute tout le bloc Texte/
+    // Attribut/AttributAugmentation/CompetenceAugmentation - seul le premier chargement au
+    // démarrage, avec OnlyPrimary=true, les remplit). Revenir à l'anglais doit donc, comme
+    // pour toute autre langue, réappliquer explicitement les valeurs mises en cache dans
+    // ListTraduction (qui contient bien des entrées Langue=ConstAnglais, ajoutées sans
+    // condition par AddTrad dès le chargement initial). CONTEXT.md §2.8 (bug du 17/08/2026).
+    For PTraduction in ListTraduction do
           if (PTraduction.Langue = Langue) and ((Livre = '') or (PTraduction.Livre = Livre)) then
             case PTraduction.TypeDonnee of
               ConstPAttribut:
@@ -229,7 +235,6 @@ Procedure Traduit(Langue: String; Livre: String);
                       ListCorruptionTable[Ind] := PCorruptionTable;
                     end;
             end;
-      end;
 
   end;
 

@@ -105,6 +105,7 @@ type
       {%H-}aState: TGridDrawState);
     procedure TabPersonnageSelection({%H-}Sender: TObject; {%H-}aCol, {%H-}aRow: Integer);
     function XmlPersonnageFichierActuel(const Directory: string): string;
+    procedure RafraichirLibellesMenu();
   private
   public
   end;
@@ -229,19 +230,282 @@ begin
 end;
 
 procedure TMenu.ComboBoxLangueSelect(Sender: TObject);
+  // Changement de langue en direct, sans fermer le programme (CONTEXT.md §2.8,
+  // demandé par Nono le 17/08/2026). Mécanisme calqué sur celui déjà utilisé pour changer
+  // de livre actif (TabLivreDblClick -> ChargerLivre(true,'')) : vider/recharger les
+  // données, puis retraduire (Traduit(ValLangue,'')). Deux différences avec le changement
+  // de livre : (1) il faut aussi rafraîchir les libellés déjà posés sur le menu lui-même
+  // (RafraichirLibellesMenu, voir plus bas - FormCreate ne peut pas être rappelé tel quel,
+  // il ajoute des colonnes de grille à chaque appel) ; (2) certaines fenêtres doivent être
+  // fermées puis rouvertes pour afficher la nouvelle langue.
+  // Fiches personnage (TWinPersonnages) et assistant de création (TWinCreations) sont
+  // volontairement EXCLUS de la fermeture/réouverture automatique et BLOQUENT le
+  // changement de langue s'ils sont ouverts (choix de Nono) : Personnage et les records
+  // associés sont des variables globales PARTAGÉES par toutes les fenêtres WinPersonnage
+  // (pas un champ propre à chaque fenêtre, voir CONTEXT.md §4) - les fermer sans
+  // sauvegarde risquerait de perdre une saisie non enregistrée.
+  // Les autres fenêtres secondaires ouvertes (catalogues Livre/Compétence/Talent/Race/
+  // Sorts/Arme/Armure/Métier) sont fermées puis rouvertes à l'identique - état minimal
+  // (juste "était ouverte"), pas de position/onglet/ligne sélectionnée mémorisé (choix
+  // volontairement simple, comme le reste de ce chantier).
   var
-    Langue:   String;
+    Langue:            String;
+    Ind:               Integer;
+    BloqueLangue:      Boolean;
+    OuvertLivre:       Boolean;
+    OuvertCompetence:  Boolean;
+    OuvertTalent:      Boolean;
+    OuvertRace:        Boolean;
+    OuvertSort:        Boolean;
+    OuvertArme:        Boolean;
+    OuvertArmure:      Boolean;
+    OuvertMetier:      Boolean;
   begin
     if (ComboBoxLangue.Itemindex) <> -1 then
       begin
         Langue := comboboxlangue.items[ComboBoxLangue.Itemindex];
         If Langue <> ValLangue then
-          if MessageDlg(GetTexteLibelle('MESS_041')+' : '+Langue, mtConfirmation, mbYesNo, 0) = mrYes then
-            begin
-              SauveIni();
-              Application.Terminate
-            end;
+          begin
+            BloqueLangue := false;
+            for Ind := 0 to Screen.FormCount - 1 do
+              if (Screen.Forms[Ind] is TWinPersonnages) or (Screen.Forms[Ind] is TWinCreations) then
+                BloqueLangue := true;
+
+            if BloqueLangue then
+              ShowMessage(GetTexteLibelle('MESS_055'))
+            else
+              if MessageDlg(GetTexteLibelle('MESS_041')+' : '+Langue, mtConfirmation, mbYesNo, 0) = mrYes then
+                begin
+                  OuvertLivre      := false;
+                  OuvertCompetence := false;
+                  OuvertTalent     := false;
+                  OuvertRace       := false;
+                  OuvertSort       := false;
+                  OuvertArme       := false;
+                  OuvertArmure     := false;
+                  OuvertMetier     := false;
+                  for Ind := Screen.FormCount - 1 downto 0 do
+                    begin
+                      if Screen.Forms[Ind] is TWinLivres then
+                        begin
+                          OuvertLivre := true;
+                          Screen.Forms[Ind].Close;
+                        end
+                      else if Screen.Forms[Ind] is TWinCompetence then
+                        begin
+                          OuvertCompetence := true;
+                          Screen.Forms[Ind].Close;
+                        end
+                      else if Screen.Forms[Ind] is TWintTalent then
+                        begin
+                          OuvertTalent := true;
+                          Screen.Forms[Ind].Close;
+                        end
+                      else if Screen.Forms[Ind] is TWinRace then
+                        begin
+                          OuvertRace := true;
+                          Screen.Forms[Ind].Close;
+                        end
+                      else if Screen.Forms[Ind] is TWinSpells then
+                        begin
+                          OuvertSort := true;
+                          Screen.Forms[Ind].Close;
+                        end
+                      else if Screen.Forms[Ind] is TWinWeapons then
+                        begin
+                          OuvertArme := true;
+                          Screen.Forms[Ind].Close;
+                        end
+                      else if Screen.Forms[Ind] is TWinArmors then
+                        begin
+                          OuvertArmure := true;
+                          Screen.Forms[Ind].Close;
+                        end
+                      else if Screen.Forms[Ind] is TWinMetiers then
+                        begin
+                          OuvertMetier := true;
+                          Screen.Forms[Ind].Close;
+                        end;
+                    end;
+
+                  ValLangue := Langue;
+                  ChargerLivre(true, '');
+                  ChargerPersonnages();
+                  RafraichirLibellesMenu();
+                  SauveIni();
+
+                  if OuvertLivre then
+                    begin
+                      FenLivre          := TWinLivres.Create(Application);
+                      FenLivre.Position := poOwnerFormCenter;
+                      FenLivre.Show;
+                    end;
+                  if OuvertCompetence then
+                    begin
+                      FenCompetence          := TWinCompetence.Create(Application);
+                      FenCompetence.Position := poOwnerFormCenter;
+                      FenCompetence.Show;
+                    end;
+                  if OuvertTalent then
+                    begin
+                      FenTalent          := TWintTalent.Create(Application);
+                      FenTalent.Position := poOwnerFormCenter;
+                      FenTalent.Show;
+                    end;
+                  if OuvertRace then
+                    begin
+                      FenRace          := TWinRace.Create(Application);
+                      FenRace.Position := poOwnerFormCenter;
+                      FenRace.Show;
+                    end;
+                  if OuvertSort then
+                    begin
+                      FenSort          := TWinSpells.Create(Application);
+                      FenSort.Position := poOwnerFormCenter;
+                      FenSort.Show;
+                    end;
+                  if OuvertArme then
+                    begin
+                      FenArme          := TWinWeapons.Create(Application);
+                      FenArme.Position := poOwnerFormCenter;
+                      FenArme.Show;
+                    end;
+                  if OuvertArmure then
+                    begin
+                      FenArmure          := TWinArmors.Create(Application);
+                      FenArmure.Position := poOwnerFormCenter;
+                      FenArmure.Show;
+                    end;
+                  if OuvertMetier then
+                    begin
+                      FenMetier          := TWinMetiers.Create(Application);
+                      FenMetier.Position := poOwnerFormCenter;
+                      FenMetier.Show;
+                    end;
+                end;
+          end;
       end;
+  end;
+
+Procedure TMenu.RafraichirLibellesMenu();
+  // Rafraîchit les libellés déjà posés sur le menu principal après un changement de
+  // langue en direct (CONTEXT.md §2.8). Duplique DÉLIBÉRÉMENT un sous-ensemble de
+  // FormCreate plutôt que de le rappeler : FormCreate fait aussi de la construction à
+  // usage unique (GridAjouteColonne ajoute une colonne à chaque appel, les Listxxx.Create
+  // fuiraient l'instance précédente, plusieurs listes/tableaux sont remplis par += donc
+  // dupliqueraient leur contenu) - seul le sous-ensemble "libellé simple, sûr à
+  // réécrire" est repris ici. Si un nouveau libellé est ajouté à FormCreate plus tard,
+  // penser à l'ajouter aussi ici s'il doit changer avec la langue.
+  var
+    Ind:          Integer;
+    LargeurForm:  Integer;
+    HauteurForm:  Integer;
+    LargeurLivre: Integer;
+    HauteurLivre: Integer;
+    LargeurPerso: Integer;
+    HauteurPerso: Integer;
+  begin
+    // Filet de sécurité contre le grossissement cumulatif de la fenêtre à chaque
+    // changement de langue (CONTEXT.md §2.8, bug du 18/08/2026) : malgré le
+    // ScaleDpi=false plus bas, la taille continuait à dériver un peu plus à chaque appel
+    // - cause exacte non identifiée avec certitude (LCL). Solution de contournement
+    // proposée par Nono : mémoriser la taille de la fenêtre et des deux grilles avant
+    // tout rafraîchissement, et la réimposer de force juste après, quoi qu'il se soit
+    // passé entre-temps.
+    LargeurForm  := Self.Width;
+    HauteurForm  := Self.Height;
+    LargeurLivre := TabLivre.Width;
+    HauteurLivre := TabLivre.Height;
+    LargeurPerso := TabPersonnage.Width;
+    HauteurPerso := TabPersonnage.Height;
+
+    TypeEquipCC         := GetTexteLibelle('LAB_061');
+    TypeEquipCT         := GetTexteLibelle('LAB_062');
+    TypeEquipMU         := GetTexteLibelle('LAB_060');
+    TypeEquipWe         := GetTexteLibelle('LAB_063');
+    TypeEquipDI         := GetTexteLibelle('LAB_064');
+    TypeEquipAR         := GetTexteLibelle('LAB_065');
+    TypeEquipARS        := GetTexteLibelle('LAB_150');
+
+    // En-têtes de colonnes déjà créées (pas de GridAjouteColonne ici, qui ajouterait une
+    // colonne de plus à chaque changement de langue - on réécrit juste le titre de la
+    // colonne existante, retrouvée via les mêmes constantes d'indice que FormCreate).
+    TabLivre.Columns[ColLivreLib - 1].Title.Caption := GetTexteLibelle('LAB_014');
+
+    TabPersonnage.Columns[ColPersoNom - 1].Title.Caption := GetTexteLibelle('LAB_014');
+    TabPersonnage.Columns[ColPersoWor - 1].Title.Caption := GetTexteLibelle('LAB_006');
+    TabPersonnage.Columns[ColPersoRac - 1].Title.Caption := GetTexteLibelle('LAB_042');
+    TabPersonnage.Columns[ColPersoNiv - 1].Title.Caption := GetTexteLibelle('LAB_019');
+    TabPersonnage.Columns[ColPersoTXp - 1].Title.Caption := GetTexteLibelle('LAB_035');
+    TabPersonnage.Columns[ColPersoCXp - 1].Title.Caption := GetTexteLibelle('LAB_041');
+    TabPersonnage.Columns[ColPersoLOb - 1].Title.Caption := GetTexteLibelle('LAB_128');
+    TabPersonnage.Columns[ColPersoLNe - 1].Title.Caption := GetTexteLibelle('LAB_136');
+
+    // Libellés des livres eux-mêmes (une ligne par livre dans TabLivre, pas juste
+    // l'en-tête de colonne) - même appel que FormCreate (ligne ~620).
+    for Ind := 1 to TabLivre.RowCount - 1 do
+      if TabLivre.Cells[ColLivreCod, Ind] <> '' then
+        TabLivre.Cells[ColLivreLib, Ind] := GetTexteLibelle(TabLivre.Cells[ColLivreCod, Ind],'','',true);
+
+    ConstArbreAttribut          := GetTexteLibelle('LAB_008');
+    ConstArbreCompetence        := GetTexteLibelle('LAB_009');
+    ConstArbreTalent            := GetTexteLibelle('LAB_007');
+    ConstArbreAuChoix           := GetTexteLibelle('LAB_010');
+    ConstArbreMetierPossible    := GetTexteLibelle('LAB_011');
+    ConstArbreRacePossible      := GetTexteLibelle('LAB_012');
+    ConstArbreEquipement        := GetTexteLibelle('LAB_013');
+    ConstArbreCorruption        := GetTexteLibelle('LAB_156');
+
+    Label1.Caption              := GetTexteLibelle('LAB_082');
+    ButtonCompetence.Caption    := GetTexteLibelle('LAB_009');
+    ButtonTalent.Caption        := GetTexteLibelle('LAB_007');
+    ButtonMetier.Caption        := GetTexteLibelle('LAB_006');
+    ButtonRace.Caption          := GetTexteLibelle('LAB_042');
+    ButtonArme.Caption          := GetTexteLibelle('LAB_063');
+    ButtonArmure.Caption        := GetTexteLibelle('LAB_065');
+    ButtonSort.Caption          := GetTexteLibelle('LAB_083');
+
+    Label2.Caption              := GetTexteLibelle('LAB_081');
+    ButtonCreation.Caption      := GetTexteLibelle('LAB_079');
+    ButtonModification.Caption  := GetTexteLibelle('LAB_080');
+
+    Label3.Caption              := GetTexteLibelle('LAB_128');
+
+    ButtonCreationLivre.Caption := GetTexteLibelle('LAB_154');
+    ButtonOuvrirLivre.Caption   := GetTexteLibelle('LAB_155');
+
+    // Remettre les colonnes auto-dimensionnées à leur largeur de départ (celle donnée à
+    // GridAjouteColonne dans FormCreate) avant de rappeler AdjustGridColumnsWidth : sa
+    // Grid.AutoSizeColumn ne fait qu'agrandir une colonne, jamais la rétrécir - sans ce
+    // reset, les tables s'élargissaient un peu plus à chaque changement de langue en
+    // direct (CONTEXT.md §2.8, bug du 17/08/2026).
+    TabLivre.ColWidths[ColLivreSel] := 20;
+    TabLivre.ColWidths[ColLivreLib] := 230;
+    TabLivre.ColWidths[ColLivreRac] := 30;
+    TabLivre.ColWidths[ColLivreWor] := 30;
+    TabLivre.ColWidths[ColLivreO_F] := 30;
+    TabLivre.ColWidths[ColLivreAbr] := 30;
+
+    TabPersonnage.ColWidths[ColPersoNom] := 100;
+    TabPersonnage.ColWidths[ColPersoWor] := 150;
+    TabPersonnage.ColWidths[ColPersoRac] := 200;
+    TabPersonnage.ColWidths[ColPersoNiv] := 30;
+    TabPersonnage.ColWidths[ColPersoTXp] := 30;
+    TabPersonnage.ColWidths[ColPersoCXp] := 30;
+    TabPersonnage.ColWidths[ColPersoLOb] := 150;
+    TabPersonnage.ColWidths[ColPersoLNe] := 150;
+
+    AdjustGridColumnsWidth(TabLivre, Self.Height, true, true, True, 0, 10, ssAutoBoth, false);
+    AdjustGridColumnsWidth(TabPersonnage, Self.Height, true, true, True, 0, 10, ssAutoBoth, false);
+
+    // Réimposer la taille mémorisée au tout début, quoi qu'AdjustGridColumnsWidth ait pu
+    // faire dériver entre-temps.
+    Self.Width          := LargeurForm;
+    Self.Height         := HauteurForm;
+    TabLivre.Width       := LargeurLivre;
+    TabLivre.Height      := HauteurLivre;
+    TabPersonnage.Width  := LargeurPerso;
+    TabPersonnage.Height := HauteurPerso;
   end;
 
 procedure TMenu.FormActivate(Sender: TObject);

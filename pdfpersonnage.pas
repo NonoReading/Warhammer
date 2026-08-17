@@ -13,6 +13,7 @@ uses
   ChargePersonnage, ChargeArmureSimplifie, ChargeAttributAugmentation,
   ChargeCompetenceAugmentation, ChargeCorruptionTable,
   ChargeCorruptionAttributModif, ChargeCorruptionCompetenceModif,
+  ChargeCorruptionArmureModif,
   Dialogs, UnitCalcul, Math, LCLIntf;
 
 Type
@@ -167,7 +168,13 @@ Function PdfPersonnageArmureAsterisques(Personnage: StructurePersonnage; Asteris
 // permet d'enchaîner après une autre source déjà numérotée ; AsterisqueFinal renvoie le
 // dernier numéro utilisé, pour qu'une source suivante (ex. les armures) puisse à son tour
 // enchaîner sans collision. Les deux TStringList sont à libérer par l'appelant.
-Function PdfPersonnageMutationAsterisques(Personnage: StructurePersonnage; AsterisqueDepart: Integer; out AsterisqueParMutation: TStringList; out AsterisqueFinal: Integer): TStringList;
+// AsterisqueArmure (ajouté le 17/08/2026, CONTEXT.md §2.7 étape 9) : concaténation des
+// "(N)" des mutations qui affectent les Armour Points (ListCorruptionArmureModif, peu
+// importe la case Tête/Bras/Corps/Jambes touchée) - un seul marqueur pour tout le bloc
+// PdfBlocArmourPoints, pas un par case (choix de Nono, "pas mettre l'astérisque sur
+// chaque partie de l'armure"). Même numéro que celui déjà utilisé pour la mutation si
+// elle touche aussi un Attribut/une Compétence (AsterisqueMutation partagé par mutation).
+Function PdfPersonnageMutationAsterisques(Personnage: StructurePersonnage; AsterisqueDepart: Integer; out AsterisqueParMutation: TStringList; out AsterisqueArmure: String; out AsterisqueFinal: Integer): TStringList;
 
 // Blocs extraits de PdfPersonnageCreationFeldo2P (CONTEXT.md §2.4) — premier prototype
 // de l'architecture Bloc/Tableau. PdfBlocResilience dessine le cadre partagé
@@ -345,7 +352,12 @@ Procedure PdfBlocDessinExplication(PdfPage: TPDFPage; XGauche, XDroite, YHaut, Y
 // (PdfFontBack, Carlson Bold 10, comme dans l'ancien PDF) puis on repasse en
 // PdfFontValue/Arial 9 pour écrire les valeurs numériques, à l'identique de l'ancien
 // bloc.
-Procedure PdfBlocArmourPoints(PdfPage: TPDFPage; PdfImgShadow: Integer; X, Y: Single; ArmureTete, ArmureBras, ArmureCorps, ArmureJambe, ArmureBouclier: Integer);
+// AsterisqueArmure (17/08/2026, CONTEXT.md §2.7 étape 9) : un seul marqueur numéroté
+// "(N)" pour tout le bloc (pas un par case, choix de Nono "on va pas faire compliqué") -
+// affiché dans le coin haut-droit du cadre, même format/numérotation que les autres
+// sources d'astérisques du PDF (voir PdfPersonnageMutationAsterisques). Chaîne vide =
+// rien à afficher.
+Procedure PdfBlocArmourPoints(PdfPage: TPDFPage; PdfImgShadow: Integer; X, Y: Single; ArmureTete, ArmureBras, ArmureCorps, ArmureJambe, ArmureBouclier: Integer; AsterisqueArmure: String);
 
 // Petite table des mutations obtenues (CONTEXT.md §2.7, étape 9) - à droite du bloc Armour
 // Points, capacité fixe à NbLignes (les mutations les plus anciennes sont omises au-delà).
@@ -1911,12 +1923,13 @@ Function PdfPersonnageArmureAsterisques(Personnage: StructurePersonnage; Asteris
         end;
   end;
 
-Function PdfPersonnageMutationAsterisques(Personnage: StructurePersonnage; AsterisqueDepart: Integer; out AsterisqueParMutation: TStringList; out AsterisqueFinal: Integer): TStringList;
+Function PdfPersonnageMutationAsterisques(Personnage: StructurePersonnage; AsterisqueDepart: Integer; out AsterisqueParMutation: TStringList; out AsterisqueArmure: String; out AsterisqueFinal: Integer): TStringList;
   var
     PersonnageMutation:                 StructurePersonnageMutation;
     PCorruptionAttributModif:           StructureCorruptionAttributModif;
     PCorruptionCompetenceModif:         StructureCorruptionCompetenceModif;
     PCorruptionCompetenceAttributModif: StructureCorruptionCompetenceAttributModif;
+    PCorruptionArmureModif:             StructureCorruptionArmureModif;
     PCompetence:                        StructureCompetence;
     AsterisqueCourant:                  Integer;
     AsterisqueMutation:                 Integer;
@@ -1924,6 +1937,7 @@ Function PdfPersonnageMutationAsterisques(Personnage: StructurePersonnage; Aster
   begin
     Result                 := TStringList.Create;
     AsterisqueParMutation  := TStringList.Create;
+    AsterisqueArmure       := '';
     AsterisqueCourant      := AsterisqueDepart;
 
     for PersonnageMutation in Personnage.Mutations do
@@ -1981,6 +1995,23 @@ Function PdfPersonnageMutationAsterisques(Personnage: StructurePersonnage; Aster
                       + ' (' + IntToStr(AsterisqueMutation) + ') ' + IntToStr(PCorruptionCompetenceAttributModif.Valeur) + '%';
                   end;
               end;
+        // Effets sur les Armour Points (CORPHY_012/016/017, <ModifArmour>) - un seul
+        // marqueur pour tout le bloc PdfBlocArmourPoints, peu importe combien de cases
+        // sont touchées (choix de Nono, pas d'astérisque par case). Même AsterisqueMutation
+        // que ci-dessus si la mutation touche aussi un Attribut/une Compétence.
+        for PCorruptionArmureModif in ListCorruptionArmureModif do
+          if CompareRechercheValeur(PCorruptionArmureModif.CodeCorruption, PersonnageMutation.Code) then
+            begin
+              if AsterisqueMutation = 0 then
+                begin
+                  Inc(AsterisqueCourant);
+                  AsterisqueMutation := AsterisqueCourant;
+                  AsterisqueParMutation.Values[PersonnageMutation.Code] := '(' + IntToStr(AsterisqueMutation) + ')';
+                end;
+              if Pos('(' + IntToStr(AsterisqueMutation) + ')', AsterisqueArmure) = 0 then
+                AsterisqueArmure := AsterisqueArmure + '(' + IntToStr(AsterisqueMutation) + ')';
+              Break;
+            end;
       end;
 
     AsterisqueFinal := AsterisqueCourant;
@@ -2849,7 +2880,9 @@ Procedure PdfBlocArmuresDonnees(PdfPage: TPDFPage; Personnage: StructurePersonna
       end;
 
     // Effets de mutation sur les Points d'Armure (CORPHY_012/016/017, CONTEXT.md §2.7,
-    // étape 8) - ajoutés après le calcul de l'équipement, ne concernent que le PDF
+    // étape 9) - ajoutés après le calcul de l'équipement, ne concernent que le PDF.
+    // L'astérisque correspondante (un seul marqueur pour tout le bloc, pas par case) est
+    // calculée séparément par PdfPersonnageMutationAsterisques, pas ici.
     ArmureTete  := ArmureTete  + PersonnageMutationArmureModif(Personnage, BonusTete);
     ArmureBras  := ArmureBras  + PersonnageMutationArmureModif(Personnage, BonusBras);
     ArmureCorps := ArmureCorps + PersonnageMutationArmureModif(Personnage, BonusCorps);
@@ -2939,7 +2972,7 @@ Procedure PdfBlocDessinExplication(PdfPage: TPDFPage; XGauche, XDroite, YHaut, Y
       end;
   end;
 
-Procedure PdfBlocArmourPoints(PdfPage: TPDFPage; PdfImgShadow: Integer; X, Y: Single; ArmureTete, ArmureBras, ArmureCorps, ArmureJambe, ArmureBouclier: Integer);
+Procedure PdfBlocArmourPoints(PdfPage: TPDFPage; PdfImgShadow: Integer; X, Y: Single; ArmureTete, ArmureBras, ArmureCorps, ArmureJambe, ArmureBouclier: Integer; AsterisqueArmure: String);
   var
     ImgX: Single;
     ImgY: Single;
@@ -2958,6 +2991,16 @@ Procedure PdfBlocArmourPoints(PdfPage: TPDFPage; PdfImgShadow: Integer; X, Y: Si
     PdfPage.DrawLine(X + 63, Y - 84, X + 63, Y     , 1);
     PdfPage.DrawLine(X     , Y     , X + 63, Y     , 1);
     PdfPage.DrawLine(X     , Y - 84, X + 63, Y - 84, 1);
+
+    // Astérisque de mutation (CONTEXT.md §2.7 étape 9) : un seul marqueur numéroté pour
+    // tout le bloc, coin haut-droit du cadre, même format que les autres sources
+    // d'astérisques du PDF (ex. "(7)").
+    if AsterisqueArmure <> '' then
+      begin
+        PdfTaillePolice(PdfPage, PdfFontValue, ConstPoliceArial, 4);
+        PdfPage.WriteText(X + 55, Y - 3, AsterisqueArmure);
+        PdfTaillePolice(PdfPage, PdfFontValue, ConstPoliceArial, 9);
+      end;
 
     // Image de fond (silhouette), taille fixe 55x72mm comme dans l'ancien
     // PdfPersonnageCreation. (ImgX,ImgY) = coin bas-gauche de l'image, comme
@@ -3568,6 +3611,7 @@ Procedure PdfPersonnageCreationFeldo2P(Personnage: StructurePersonnage);
     ArmureJambe:     Integer;
     ArmureBouclier:  Integer;
     DessinHautArmourPoints: Single;
+    AsterisqueArmure: String;
     LocData:         String;
     ArmeBonii:       String = '';
     ArmureBonii:     String = '';
@@ -3870,7 +3914,7 @@ Procedure PdfPersonnageCreationFeldo2P(Personnage: StructurePersonnage);
     // compétences et sont calculées plus tard, juste avant les tableaux de compétences).
     // Départ à Personnage.Asterisque (même baseline que les talents) ; les armures enchaînent
     // ensuite après AsterisqueFinalMutation, pour ne jamais réutiliser un numéro déjà pris.
-    ListAsterisqueMutation := PdfPersonnageMutationAsterisques(Personnage, Personnage.Asterisque, AsterisqueParMutation, AsterisqueFinalMutation);
+    ListAsterisqueMutation := PdfPersonnageMutationAsterisques(Personnage, Personnage.Asterisque, AsterisqueParMutation, AsterisqueArmure, AsterisqueFinalMutation);
 
     // Bloc Entête (extrait dans PdfBlocEntete, CONTEXT.md §2.4)
     DessinDebutHautCarac := PdfBlocEntete(PdfPage, Personnage, PRace, PMetier, PMetierNiveau, LocData,
@@ -4136,7 +4180,7 @@ Procedure PdfPersonnageCreationFeldo2P(Personnage: StructurePersonnage);
     // DessinDebColG comme tous les autres blocs de la page (au lieu d'un décalage de
     // 4mm vers la gauche par rapport au bloc Encombrement).
     DessinHautArmourPoints := DessinDebutHautEnc - ((DessinNbLigEnc + 1) * DessinHauteurEnc) - 3;
-    PdfBlocArmourPoints(PdfPage, PdfImgShadow, DessinDebColG, DessinHautArmourPoints, ArmureTete, ArmureBras, ArmureCorps, ArmureJambe, ArmureBouclier);
+    PdfBlocArmourPoints(PdfPage, PdfImgShadow, DessinDebColG, DessinHautArmourPoints, ArmureTete, ArmureBras, ArmureCorps, ArmureJambe, ArmureBouclier, AsterisqueArmure);
 
     // Table des mutations obtenues (CONTEXT.md §2.7, étape 9) - à droite d'Armour Points, même
     // écart de 3mm que partout ailleurs entre deux blocs de la page ; XDroite réutilise
