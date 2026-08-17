@@ -966,14 +966,81 @@ chaque livre et librement extensible sans perturber les codes existants.
   Attribut/Compétence/Talent) n'avait jamais ce commentaire malgré des codes tout aussi
   résolubles - ajouté avec le même schéma (`ChercheAttribut`/`ChercheCompetence`/
   `ChercheTalent`). `SUBCHAPTER_MISC` (Divers) et `CHAPTER_CORRUPTION` restent sans commentaire
-  à raison : ils stockent déjà du texte libre, pas un code de catalogue. **Poussé, pas encore
-  recompilé/testé par Nono** (il part tester au moment de cette mise à jour).
+  à raison : ils stockent déjà du texte libre, pas un code de catalogue. Confirmé par Nono :
+  compile, commentaires corrects dans le XML de sauvegarde.
 
-**Reste à faire** : les options Résultat (saisie manuelle du jet) et Choix (sélection directe)
-sur les deux tirages, actuellement Hasard uniquement. Le mécanisme de perte de mutation
-lui-même (rare, confirmé possible par le livre) n'est ni conçu ni implémenté - c'est justement
-ce qui a motivé `Personnage.Mutations` comme liste dédiée plutôt qu'un ledger texte, mais
-aucune UI/logique de retrait n'existe encore.
+**Étape 6 (✅ terminée, 17/08/2026)** : options Résultat (saisie manuelle du jet) et Choix
+(sélection directe) sur les deux tirages de `WinMutation`, jusque-là Hasard uniquement - même
+principe que Race/Métier dans `wincreation.pas` (trio de `TRadioButton` dans un `TGroupBox`,
+comme `GroupBoxRace`, PAS un `TRadioGroup` - Nono avait posé la question, confirmé que le
+projet groupe par `Parent` commun).
+- Cas particulier trouvé par Nono en concevant : la Physical Corruption Table a une entrée
+  "GM's Choice" (96-00, code `RULES-CORPHY_020`) qui n'est pas une vraie mutation mais une
+  instruction de consulter le MJ (Mental n'a pas d'équivalent - son 96-00, "Worried Jitters",
+  est une entrée normale). Option retenue (B, choisie par Nono) : si Hasard ou Résultat tombe
+  dessus, redirection automatique vers le mode Choix avec un message (nouvelle clé
+  `MESS_054`) plutôt que de proposer de valider un résultat qui n'existe pas encore - repéré
+  via un nouveau marqueur `CorruptionChoixMJ = 'CORPHY_020'` (`chargeconstantes.pas`, comparé
+  comme les autres codes bruts du projet). Un choix VOLONTAIRE de cette entrée dans la grille
+  Choix (double-clic) n'est en revanche pas redirigé (l'utilisateur vient de la choisir en
+  connaissance de cause).
+- `WinMutation` (`winmutation.pas`) : deux trios `TRadioButton`/`TGroupBox`
+  (`GroupBoxMutationType`/`GroupBoxMutationEntree`), un `TSpinEdit` (0-100) + bouton Valider
+  par tirage pour Résultat, deux boutons directs Physical/Mental pour le Choix du Type (grisés
+  si la race n'a pas cette option - nouvelle fonction `CorruptionTypeDisponible(CodeRace,
+  TypeCorruption)` dans `ChargeCorruptionTable.pas`, nécessaire car le Choix direct contourne
+  le jet de dé qui gérait déjà ce cas via `CorruptionDansPlage('-', ...)`), et un
+  `TStringGrid` (`TabMutationChoix`) pour le Choix de l'Entrée (double-clic, colonne 0
+  réservée, Code caché en colonne 1, Libellé visible en colonne 2 - même convention que
+  `TabCreationChoix` dans `wincreation.pas`). Logique de résolution centralisée
+  (`AfficheTypeResolu`/`AfficheEntreeResolue`) partagée entre Hasard et Résultat, pour éviter
+  de dupliquer la logique de redirection "GM's Choice". Changer de mode avant résolution
+  repart de zéro (et invalide l'Entrée déjà résolue si on change le Type), même principe que
+  `RadioButtonRaceClick` dans `wincreation.pas`.
+- Piège Lazarus trouvé en cours de route (documenté aussi en §4) : les contrôles ajoutés dans
+  l'IDE (nouveaux `TRadioButton`/`TBCButton`/`TStringGrid`) n'ont PAS leurs événements
+  `OnClick`/`OnDblClick` câblés automatiquement juste en écrivant le code Pascal derrière -
+  Nono avait bien ajouté les contrôles mais oublié de les câbler dans l'Inspecteur d'objets,
+  ce qui compilait sans erreur mais laissait la fenêtre figée dans son état initial (repéré
+  via une capture d'écran de Nono montrant le bouton "Randomly" toujours visible malgré un
+  autre mode sélectionné).
+- Confirmé par Nono par test réel après câblage : Type en mode Choix → "Physical Corruption"
+  sélectionné directement ; Entrée en mode Résultat → jet 55 saisi à la main → "Inverted Face"
+  (-20 to all Fellowship Tests, plage 51-55 de la table Physical), conforme au livre.
+
+**Étape 7 (✅ terminée, 17/08/2026)** : affichage de `Personnage.Mutations` dans la fiche
+personnage. Nono a demandé cet affichage en relisant l'onglet Corruption existant ("il faudrait
+aussi l'afficher dans la fiche"), ce qui a fait remonter une question d'ergonomie séparée (trop
+d'onglets dans `WinPersonnage`) - tranchée rapidement avec Nono via deux choix indépendants :
+nouvel onglet dédié pour les Mutations (plutôt que fusionner dans l'onglet Corruption), et
+réorganisation plus large des onglets remise à plus tard (notée dans `A FAIRE.txt`).
+- Nono a ajouté les composants dans l'IDE (`TabSheetMutation`, `TabMutation` en `TStringGrid`,
+  `MemoMutationEffet` en `TMemo`), avec `TabMutation.OnClick` déjà câblé vers `TabMutationClick`
+  - Lazarus avait donc auto-généré la déclaration et un stub vide, retrouvés et remplacés par
+  l'implémentation réelle (piège § câblage IDE, voir §4, cette fois repéré avant que Nono ait à
+  déboguer).
+- `winpersonnage.pas` : nouvelle procédure `AfficheMutations()` (reconstruit `TabMutation` ligne
+  par ligne depuis `Personnage.Mutations`, résolu via `ChercheCorruptionTable(Code)` - colonne 1
+  Type (`GetTexteLibelle` sur `TypeCorruption`), colonne 2 Libellé, colonne 3 Code caché pour le
+  clic) et `TabMutationClick()` (affiche l'Effet de la ligne cliquée dans `MemoMutationEffet`,
+  garde `if TabMutation.Row < 1 then Exit;` même style que `TabCreationChoixDblClick`). Appelée
+  au chargement du personnage (`XmlChargePersonnage`, juste après `CalculCorruptionLeft();`) et
+  à l'obtention d'une nouvelle mutation (`ButtonCorruptionMutationClick`, juste après
+  `Personnage.Mutations += [PersonnageMutation];`). Grille configurée en lecture seule
+  (`Initialisation()` : `ColCount := 4`, en-têtes `LAB_171`/`LAB_002` réutilisés, colonne 3
+  cachée via `ColWidths[3] := 0`, `MemoMutationEffet.ReadOnly := True`). Piège TShape/BringToFront
+  (§4) anticipé cette fois : `TabMutation.BringToFront;`/`MemoMutationEffet.BringToFront;`
+  ajoutés dans `AfficheImageRace()` dès l'implémentation, avant tout test.
+- Nouvelles clés `LAB_171` ("Type") et `LAB_172` ("Mutations", caption de l'onglet) ajoutées aux
+  deux livres.
+- Confirmé par Nono par test réel : "cela marche".
+
+**Reste à faire** : le mécanisme de perte de mutation lui-même (rare, confirmé possible par le
+livre) n'est ni conçu ni implémenté - c'est justement ce qui a motivé `Personnage.Mutations`
+comme liste dédiée plutôt qu'un ledger texte, mais aucune UI/logique de retrait n'existe
+encore. L'application automatique des effets de mutation reste hors scope (V1, texte affiché
+seulement) - voir aussi l'idée de `<Modifier>` structurés en complément du texte, discutée
+avec Nono le 17/08/2026 et notée dans `A FAIRE.txt` (pas retenue pour l'instant).
 
 ---
 
@@ -1085,6 +1152,17 @@ chantier concerné, avec les détails techniques.
   peupler un tableau dans une boucle de chargement XML, vérifier que TOUS ses champs sont
   explicitement réaffectés à chaque itération, pas seulement ceux qui viennent du XML lu à cet
   endroit précis.
+- Ajouter un contrôle dans l'IDE (glisser-déposer un `TRadioButton`/`TBCButton`/`TStringGrid`
+  etc.) ne câble PAS son `OnClick`/`OnDblClick` tout seul, même si le gestionnaire existe déjà
+  dans le `.pas` (écrit par Claude, pas créé via double-clic dans l'IDE). Il faut explicitement
+  aller dans l'Inspecteur d'objets (onglet Events) et choisir le nom du gestionnaire dans le
+  menu déroulant pour CHAQUE contrôle. Tant que ce n'est pas fait, le code compile sans erreur
+  (les procédures existent, juste non référencées par aucun contrôle) mais la fenêtre reste
+  figée dans son état de départ - aucun retour visuel n'indique l'oubli. Repéré le 17/08/2026
+  (CONTEXT.md §2.7, étape 6) : Nono avait ajouté tous les nouveaux contrôles de `WinMutation`
+  mais pas câblé leurs événements, ce qui laissait le bouton "Randomly" (Hasard) visible même
+  après avoir sélectionné un autre mode - diagnostiqué en relisant le `.lfm` (aucune ligne
+  `OnClick =` sur les nouveaux contrôles).
 
 ---
 

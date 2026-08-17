@@ -280,6 +280,7 @@
 <Text name="RULES-MESS_051">"Ce code de livre existe déjà"</Text>
 <Text name="RULES-MESS_052">"Ce nom de livre existe déjà"</Text>
 <Text name="RULES-MESS_053">"Voulez-vous supprimer cette ligne de corruption ?"</Text>
+<Text name="RULES-MESS_054">"Le Meneur de Jeu doit choisir une mutation ou un Trait de Créature - sélectionnez l'entrée réelle ci-dessous."</Text>
 <Text name="RULES-LAB_001">"Code"</Text>
 <Text name="RULES-LAB_002">"Libellé"</Text>
 <Text name="RULES-LAB_003">"Description"</Text>
@@ -450,6 +451,8 @@
 <Text name="RULES-LAB_168">"Accepter une mutation"</Text>
 <Text name="RULES-LAB_169">"Résilience dépensée"</Text>
 <Text name="RULES-LAB_170">"Mutation acceptée"</Text>
+<Text name="RULES-LAB_171">"Type"</Text>
+<Text name="RULES-LAB_172">"Mutations"</Text>
 <Text name="RULES-PDF_MAIN1_NAME">"Nom"</Text>
 <Text name="RULES-PDF_MAIN1_SPECIES">"Race"</Text>
 <Text name="RULES-PDF_MAIN1_CLASS">"Classe"</Text>

@@ -241,8 +241,8 @@
         <UnitName Value="WinPersonnage"/>
         <IsVisibleTab Value="True"/>
         <EditorIndex Value="1"/>
-        <TopLine Value="798"/>
-        <CursorPos X="16" Y="803"/>
+        <TopLine Value="3053"/>
+        <CursorPos X="37" Y="3069"/>
         <UsageCount Value="200"/>
         <Loaded Value="True"/>
         <LoadedDesigner Value="True"/>
@@ -530,7 +530,7 @@
         <EditorIndex Value="-1"/>
         <TopLine Value="33"/>
         <CursorPos Y="36"/>
-        <UsageCount Value="187"/>
+        <UsageCount Value="189"/>
       </Unit>
       <Unit>
         <Filename Value="chargeracecorruptioncreation.pas"/>
@@ -539,7 +539,7 @@
         <EditorIndex Value="-1"/>
         <TopLine Value="5"/>
         <CursorPos X="34" Y="11"/>
-        <UsageCount Value="101"/>
+        <UsageCount Value="103"/>
       </Unit>
       <Unit>
         <Filename Value="chargetalentattributmodif.pas"/>
@@ -548,7 +548,7 @@
         <EditorIndex Value="-1"/>
         <TopLine Value="3"/>
         <CursorPos X="43" Y="13"/>
-        <UsageCount Value="95"/>
+        <UsageCount Value="97"/>
       </Unit>
       <Unit>
         <Filename Value="chargetalentcompetencemodif.pas"/>
@@ -556,7 +556,7 @@
         <UnitName Value="ChargeTalentCompetenceModif"/>
         <EditorIndex Value="-1"/>
         <CursorPos X="31" Y="17"/>
-        <UsageCount Value="92"/>
+        <UsageCount Value="94"/>
       </Unit>
       <Unit>
         <Filename Value="chargetalentcompetenceajoute.pas"/>
@@ -564,7 +564,7 @@
         <UnitName Value="ChargeTalentCompetenceAjoute"/>
         <EditorIndex Value="-1"/>
         <CursorPos X="43" Y="14"/>
-        <UsageCount Value="91"/>
+        <UsageCount Value="93"/>
       </Unit>
       <Unit>
         <Filename Value="winlancede.pas"/>
@@ -576,7 +576,7 @@
         <EditorIndex Value="-1"/>
         <TopLine Value="35"/>
         <CursorPos X="53" Y="47"/>
-        <UsageCount Value="49"/>
+        <UsageCount Value="51"/>
       </Unit>
       <Unit>
         <Filename Value="winmutation.pas"/>
@@ -586,9 +586,9 @@
         <ResourceBaseClass Value="Form"/>
         <UnitName Value="WinMutation"/>
         <EditorIndex Value="2"/>
-        <TopLine Value="9"/>
-        <CursorPos X="46" Y="21"/>
-        <UsageCount Value="21"/>
+        <TopLine Value="73"/>
+        <CursorPos X="30" Y="82"/>
+        <UsageCount Value="23"/>
         <Loaded Value="True"/>
         <LoadedDesigner Value="True"/>
       </Unit>
@@ -1216,124 +1216,124 @@
     </Units>
     <JumpHistory HistoryIndex="29">
       <Position>
-        <Filename Value="winpersonnage.pas"/>
-        <Caret Line="896" Column="90" TopLine="886"/>
-      </Position>
-      <Position>
-        <Filename Value="winpersonnage.pas"/>
-        <Caret Line="899" TopLine="889"/>
-      </Position>
-      <Position>
-        <Filename Value="winpersonnage.pas"/>
-        <Caret Line="910" Column="83" TopLine="897"/>
-      </Position>
-      <Position>
-        <Filename Value="winpersonnage.pas"/>
-        <Caret Line="911" Column="83" TopLine="898"/>
-      </Position>
-      <Position>
-        <Filename Value="winpersonnage.pas"/>
-        <Caret Line="912" Column="83" TopLine="899"/>
-      </Position>
-      <Position>
-        <Filename Value="winpersonnage.pas"/>
-        <Caret Line="913" Column="35" TopLine="901"/>
-      </Position>
-      <Position>
-        <Filename Value="winpersonnage.pas"/>
-        <Caret Line="912" Column="35" TopLine="900"/>
-      </Position>
-      <Position>
-        <Filename Value="winpersonnage.pas"/>
-        <Caret Line="913" Column="35" TopLine="901"/>
-      </Position>
-      <Position>
-        <Filename Value="winpersonnage.pas"/>
-        <Caret Line="912" Column="35" TopLine="900"/>
-      </Position>
-      <Position>
-        <Filename Value="winpersonnage.pas"/>
-        <Caret Line="913" Column="35" TopLine="901"/>
+        <Filename Value="winmutation.pas"/>
+        <Caret Line="29" Column="46" TopLine="9"/>
       </Position>
       <Position>
         <Filename Value="winmutation.pas"/>
-        <Caret Line="19" Column="29"/>
+        <Caret Line="30" Column="46" TopLine="9"/>
       </Position>
       <Position>
         <Filename Value="winmutation.pas"/>
-        <Caret Line="25" Column="4" TopLine="4"/>
+        <Caret Line="29" Column="46" TopLine="9"/>
       </Position>
       <Position>
         <Filename Value="winmutation.pas"/>
-        <Caret Column="6"/>
-      </Position>
-      <Position>
-        <Filename Value="winpersonnage.pas"/>
-        <Caret Line="911" Column="22" TopLine="905"/>
+        <Caret Line="30" Column="46" TopLine="9"/>
       </Position>
       <Position>
         <Filename Value="winmutation.pas"/>
-        <Caret Line="9" Column="51"/>
+        <Caret Line="29" Column="46" TopLine="9"/>
       </Position>
       <Position>
         <Filename Value="winmutation.pas"/>
-        <Caret Line="23" Column="30"/>
+        <Caret Line="30" Column="46" TopLine="9"/>
       </Position>
       <Position>
         <Filename Value="winmutation.pas"/>
-        <Caret Line="24" Column="30" TopLine="2"/>
+        <Caret Line="29" Column="46" TopLine="9"/>
       </Position>
       <Position>
         <Filename Value="winmutation.pas"/>
-        <Caret Line="25" Column="30" TopLine="3"/>
+        <Caret Line="30" Column="46" TopLine="9"/>
       </Position>
       <Position>
         <Filename Value="winmutation.pas"/>
-        <Caret Line="26" Column="30" TopLine="4"/>
+        <Caret Line="31" Column="46" TopLine="9"/>
       </Position>
       <Position>
         <Filename Value="winmutation.pas"/>
-        <Caret Line="27" Column="30" TopLine="5"/>
+        <Caret Line="30" Column="46" TopLine="9"/>
       </Position>
       <Position>
         <Filename Value="winmutation.pas"/>
-        <Caret Line="26" Column="30" TopLine="5"/>
+        <Caret Line="31" Column="46" TopLine="9"/>
       </Position>
       <Position>
         <Filename Value="winmutation.pas"/>
-        <Caret Line="27" Column="30" TopLine="5"/>
+        <Caret Line="32" Column="46" TopLine="10"/>
       </Position>
       <Position>
         <Filename Value="winmutation.pas"/>
-        <Caret Line="28" Column="30" TopLine="6"/>
+        <Caret Line="33" Column="46" TopLine="11"/>
       </Position>
       <Position>
         <Filename Value="winmutation.pas"/>
-        <Caret Line="29" Column="30" TopLine="7"/>
+        <Caret Line="34" Column="46" TopLine="12"/>
       </Position>
       <Position>
         <Filename Value="winmutation.pas"/>
-        <Caret Line="30" Column="30" TopLine="8"/>
+        <Caret Line="35" Column="46" TopLine="13"/>
       </Position>
       <Position>
         <Filename Value="winmutation.pas"/>
-        <Caret Line="29" Column="30" TopLine="8"/>
+        <Caret Line="24" Column="18" TopLine="14"/>
       </Position>
       <Position>
         <Filename Value="winmutation.pas"/>
-        <Caret Line="30" Column="30" TopLine="8"/>
+        <Caret Line="48" Column="43" TopLine="30"/>
+      </Position>
+      <Position>
+        <Filename Value="winmutation.pas"/>
+        <Caret Line="254" Column="53" TopLine="235"/>
+      </Position>
+      <Position>
+        <Filename Value="winmutation.pas"/>
+        <Caret Line="48" Column="43" TopLine="37"/>
       </Position>
       <Position>
         <Filename Value="winpersonnage.pas"/>
-        <Caret Line="2" Column="14"/>
+        <Caret Line="813" Column="27" TopLine="798"/>
       </Position>
       <Position>
         <Filename Value="winpersonnage.pas"/>
-        <Caret Line="869" Column="25" TopLine="855"/>
+        <Caret Line="815" Column="27" TopLine="800"/>
+      </Position>
+      <Position>
+        <Filename Value="winpersonnage.pas"/>
+        <Caret Line="3482" Column="3" TopLine="3480"/>
+      </Position>
+      <Position>
+        <Filename Value="winpersonnage.pas"/>
+        <Caret Line="3481" Column="3" TopLine="3479"/>
+      </Position>
+      <Position>
+        <Filename Value="winpersonnage.pas"/>
+        <Caret Line="3482" Column="3" TopLine="3480"/>
+      </Position>
+      <Position>
+        <Filename Value="winpersonnage.pas"/>
+        <Caret Line="3483" Column="3" TopLine="3481"/>
+      </Position>
+      <Position>
+        <Filename Value="winpersonnage.pas"/>
+        <Caret Line="3485" Column="3" TopLine="3483"/>
+      </Position>
+      <Position>
+        <Filename Value="winpersonnage.pas"/>
+        <Caret Line="3548" Column="45" TopLine="3526"/>
       </Position>
       <Position>
         <Filename Value="winmutation.pas"/>
-        <Caret Line="21" Column="46" TopLine="9"/>
+        <Caret Line="258" Column="34" TopLine="245"/>
+      </Position>
+      <Position>
+        <Filename Value="winmutation.pas"/>
+        <Caret Line="102" Column="24" TopLine="92"/>
+      </Position>
+      <Position>
+        <Filename Value="winmutation.pas"/>
+        <Caret Line="40" Column="20" TopLine="30"/>
       </Position>
     </JumpHistory>
     <RunParams>

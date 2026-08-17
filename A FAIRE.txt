@@ -104,4 +104,21 @@ PDF Personnage (PRIORITAIRE) :
   non finalisés - repéré le 16/08/2026 en cherchant comment généraliser le mécanisme de
   tirage pour le chantier mutation (CONTEXT.md §2.7), mais pas retenu pour l'instant (Nono
   a choisi de rester sur le pattern radio-boutons de WinCreation pour la mutation).
+- ajouter des `<Modifier>` structurés (deltas d'attribut purs uniquement) en complément du
+  texte `<Effet>` des tables de mutation (`DATA_CORRUPTION_TABLE_PHYSICAL`/`MENTAL`,
+  CONTEXT.md §2.7) - même convention que `ListArmureBonusModif`/`ListTalentAttributModif`
+  déjà en place. Le texte reste la source de vérité affichée (garde tout, y compris les
+  effets non réductibles à un delta : Traits de Créature, jets de Localisation, conditions
+  de Psychologie, "GM's Choice"...), le `<Modifier>` ne couvrirait que le sous-ensemble
+  d'entrées à delta pur (la majorité côté Mental, environ la moitié côté Physical d'après
+  un premier passage). Ne couvre pas encore l'application automatique elle-même (déjà
+  différée au-delà du V1, CONTEXT.md §2.7) - juste la donnée structurée en préalable.
+  Discuté et scope validé avec Nono le 17/08/2026, remis à plus tard (pas de chantier
+  ouvert pour l'instant).
 
+- (idée ergonomie, 17/08/2026, pas conçue) WinPersonnage a accumulé beaucoup d'onglets au fil
+  des chantiers (Corruption, Mutations, ...) - Nono trouve que ça devient peu lisible. Remis à
+  plus tard à sa demande (choisi "Nouvel onglet dédié" pour Mutations plutôt que d'attendre une
+  réorganisation). Piste évoquée mais pas discutée en détail : regrouper les onglets par
+  catégorie (ex. Fiche/Progression/Journal/Référence) plutôt qu'une seule rangée plate. À
+  concevoir avec Nono avant de toucher au .lfm.

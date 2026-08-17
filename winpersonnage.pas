@@ -15,7 +15,7 @@ uses
   WinMetier, UnitEquipement, WinWeapon, WinArmor, ChargeArmureSimplifie,
   ChargeSort, WinSpell, ChargeTexte, winFabrication, ChargeFabrication,
   WinTalent, WinCompetence, WinSpecialisation, ChargePersonnage,
-  ChargeMetierCompetence, PdfPersonnage, Types, WinMutation;
+  ChargeMetierCompetence, PdfPersonnage, Types, WinMutation, ChargeCorruptionTable;
 type
 
   { TWinPersonnages }
@@ -80,6 +80,7 @@ type
     LabHairColors: TBCLabel;
     LabTabNiveau: TBCLabel;
     LabTabTalent: TBCLabel;
+    MemoMutationEffet: TMemo;
     PageExperience: TPageControl;
     LibMetier: TEdit;
     LibRace: TEdit;
@@ -89,10 +90,12 @@ type
     RadioButtonSuivant: TRadioButton;
     RadioGroupEvolution: TRadioGroup;
     StaticTextPersonnage: TStaticText;
+    TabMutation: TStringGrid;
     StringGridCorruption: TStringGrid;
     TabAugmentationMjXp: TStringGrid;
     TabLivre: TStringGrid;
     TabMJXp: TStringGrid;
+    TabSheetMutation: TTabSheet;
     TabSheetCorruption: TTabSheet;
     TabSheetMjCost: TTabSheet;
     TabSheetLivre: TTabSheet;
@@ -145,10 +148,12 @@ type
   procedure FormCreate({%H-}Sender: TObject);
   procedure AjustePositionTables();
   procedure EditHeightKeyPress(Sender: TObject; var Key: char);
+  procedure Label1Click(Sender: TObject);
   procedure PageExperienceChange({%H-}Sender: TObject);
   procedure RadioButtonRASChange({%H-}Sender: TObject);
   procedure RadioButtonSuivantChange({%H-}Sender: TObject);
   procedure StaticTextPersonnageClick(Sender: TObject);
+  procedure StringGrid1Click(Sender: TObject);
   procedure TabAttributDrawCell({%H-}Sender: TObject; aCol, aRow: Integer;
     aRect: TRect; aState: TGridDrawState);
   procedure TabAttributSelectEditor({%H-}Sender: TObject; {%H-}aCol, {%H-}aRow: Integer;
@@ -197,6 +202,7 @@ type
   procedure TabMetierEquipementDblClick({%H-}Sender: TObject);
   procedure TabMetierEquipementSelectEditor({%H-}Sender: TObject; {%H-}aCol,
     {%H-}aRow: Integer; var Editor: TWinControl);
+  procedure TabMutationClick(Sender: TObject);
   procedure TabSheetMjCostContextPopup(Sender: TObject; MousePos: TPoint;
     var Handled: Boolean);
   procedure TabSortDblClick({%H-}Sender: TObject);
@@ -266,6 +272,7 @@ type
   Function  CalculCorruptionLost(): Integer;
   procedure CalculCorruptionLeft();
   procedure StringGridCorruptionEditingDone({%H-}Sender: TObject);
+  procedure AfficheMutations();
 
   private
     FCurrentTabSheet: TTabSheet;
@@ -822,6 +829,42 @@ procedure TWinPersonnages.StringGridCorruptionEditingDone(Sender: TObject);
     CalculCorruptionLeft();
   end;
 
+// Onglet Mutations (CONTEXT.md §2.7, étape 7) - liste en lecture seule des mutations
+// obtenues, résolues depuis Personnage.Mutations (juste un Code) via ChercheCorruptionTable.
+// Colonne 0 réservée/en-tête (convention du projet), 1 = Type, 2 = Libellé, 3 = Code (caché,
+// sert à retrouver l'Effet dans TabMutationClick).
+procedure TWinPersonnages.AfficheMutations();
+  var
+    PersonnageMutation: StructurePersonnageMutation;
+    PCorruptionTable:   StructureCorruptionTable;
+    IndLig:             Integer;
+  begin
+    TabMutation.RowCount := 1;
+    IndLig := 0;
+    for PersonnageMutation in Personnage.Mutations do
+      begin
+        PCorruptionTable := ChercheCorruptionTable(PersonnageMutation.Code);
+
+        IndLig := IndLig + 1;
+        TabMutation.RowCount              := IndLig + 1;
+        TabMutation.Cells[1, IndLig]      := GetTexteLibelle(PCorruptionTable.TypeCorruption);
+        TabMutation.Cells[2, IndLig]      := PCorruptionTable.Libelle;
+        TabMutation.Cells[3, IndLig]      := PersonnageMutation.Code;
+      end;
+
+    MemoMutationEffet.Text := '';
+  end;
+
+procedure TWinPersonnages.TabMutationClick(Sender: TObject);
+  var
+    PCorruptionTable: StructureCorruptionTable;
+  begin
+    if (TabMutation.Row < 1) then Exit;
+
+    PCorruptionTable       := ChercheCorruptionTable(TabMutation.Cells[3, TabMutation.Row]);
+    MemoMutationEffet.Text := PCorruptionTable.Effet;
+  end;
+
 procedure TWinPersonnages.ButtonArmureClick(Sender: TObject);
   Var
     PArmure:           StructureArmure;
@@ -931,6 +974,7 @@ procedure TWinPersonnages.ButtonCorruptionMutationClick(Sender: TObject);
 
         PersonnageMutation.Code := MutationCode;
         Personnage.Mutations    += [PersonnageMutation];
+        AfficheMutations();
       end;
 
     CalculCorruptionLeft();
@@ -1568,6 +1612,18 @@ begin
   StringGridCorruption.Cells[2, 0]    := GetTexteLibelle('LAB_163');
   StringGridCorruption.ColWidths[2]   := 300;
 
+  // Mise en forme de la table des mutations obtenues (CONTEXT.md §2.7, étape 7) - lecture
+  // seule, pas de goEditing (contrairement à StringGridCorruption). Colonne 3 = Code, cachée.
+  TabMutation.ColCount       := 4;
+  TabMutation.RowCount       := 1;
+  TabMutation.ColWidths[0]   := 20;
+  TabMutation.Cells[1, 0]    := GetTexteLibelle('LAB_171');
+  TabMutation.ColWidths[1]   := 100;
+  TabMutation.Cells[2, 0]    := GetTexteLibelle('LAB_002');
+  TabMutation.ColWidths[2]   := 300;
+  TabMutation.ColWidths[3]   := 0;
+  MemoMutationEffet.ReadOnly := True;
+
   // Mise en forme de la table des Equipements
   TabEquipement.Options        := TabEquipement.Options + [goEditing, goAlwaysShowEditor];
   TabEquipement.ColCount       := 8;
@@ -1748,6 +1804,7 @@ Procedure TWinPersonnages.AfficheImageRace();
     TabSheetEvolution.Caption                  := GetTexteLibelle('LAB_105');
     TabSheetHistorique.Caption                 := GetTexteLibelle('LAB_036');
     TabSheetCorruption.Caption                 := GetTexteLibelle('LAB_156');
+    TabSheetMutation.Caption                   := GetTexteLibelle('LAB_172');
     ButtonCorruptionAjoute.Caption             := '+'+GetTexteLibelle('LAB_164');
     ButtonCorruptionSupprime.Caption           := '-'+GetTexteLibelle('LAB_165');
     ButtonRaceSelectionner.Caption             := GetTexteLibelle('LAB_004');
@@ -1776,6 +1833,10 @@ Procedure TWinPersonnages.AfficheImageRace();
     ButtonCorruptionAjoute.BringToFront;
     ButtonCorruptionSupprime.BringToFront;
     ButtonCorruptionMutation.BringToFront;
+    // Nouvel onglet Mutations (CONTEXT.md §2.7, étape 7) - même piège TShape/BringToFront que
+    // les autres contrôles d'onglet (CONTEXT.md §4).
+    TabMutation.BringToFront;
+    MemoMutationEffet.BringToFront;
 
   end;
 
@@ -2635,6 +2696,9 @@ begin
     end;
   CalculCorruptionLeft();
 
+  // mutations obtenues (CONTEXT.md §2.7)
+  AfficheMutations();
+
   // livres
   for Lig := 1 to TabLivre.RowCount - 1 do
     begin
@@ -3475,6 +3539,11 @@ begin
   if not (Key in ['0'..'9', #8, #9]) then Key := #0;
 end;
 
+procedure TWinPersonnages.Label1Click(Sender: TObject);
+begin
+
+end;
+
 procedure TWinPersonnages.PageExperienceChange(Sender: TObject);
 var
   I: Integer;
@@ -3508,6 +3577,11 @@ begin
 end;
 
 procedure TWinPersonnages.StaticTextPersonnageClick(Sender: TObject);
+begin
+
+end;
+
+procedure TWinPersonnages.StringGrid1Click(Sender: TObject);
 begin
 
 end;

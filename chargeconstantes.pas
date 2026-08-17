@@ -311,6 +311,10 @@ Const
       RaceFamilier                      = 'SPECIE_FAMILIAR';
       CorruptionPhysique                = 'CORRUPTION_PHYSICAL';
       CorruptionMentale                 = 'CORRUPTION_MENTAL';
+      // "GM's Choice" (Physical Corruption Table, 96-00) - pas une vraie mutation, une
+      // instruction de consulter le MJ (CONTEXT.md §2.7). Seule la table Physical a ce cas ;
+      // Mental n'a pas d'entrée équivalente à 96-00 ("Worried Jitters", une entrée normale).
+      CorruptionChoixMJ                 = 'CORPHY_020';
 
       KEY_ESC                           = #27;
 
