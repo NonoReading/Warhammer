@@ -867,10 +867,11 @@ end;
 
 procedure TWinPersonnages.ButtonCorruptionMutationClick(Sender: TObject);
   var
-    ResilienceTotale: Integer;
-    IndAttribut:      Integer;
-    Trouve:           Boolean;
-    Lost:             Integer;
+    ResilienceTotale:   Integer;
+    IndAttribut:        Integer;
+    Trouve:             Boolean;
+    Lost:               Integer;
+    PersonnageMutation: StructurePersonnageMutation;
   begin
     ResilienceTotale := StrToIntDef(TabAttribut.Cells[ColAttResil, LigAttTotal], 0);
 
@@ -918,22 +919,24 @@ procedure TWinPersonnages.ButtonCorruptionMutationClick(Sender: TObject);
       end
     else if MutationChoix = 'MUTATION' then
       begin
-        // Ligne compensatoire qui remet l'historique à 0, puis une ligne à montant 0 qui
-        // mémorise la mutation obtenue (nom + effet) - pas de nouvelle structure de données,
-        // Personnage.Corruption sert aussi de mémoire des mutations (conception validée avec
-        // Nono le 16/08/2026, CONTEXT.md §2.7).
+        // Ligne compensatoire qui remet l'historique à 0. La mutation elle-même n'est PAS
+        // mémorisée ici : Personnage.Corruption garde son rôle d'origine (ledger de points), la
+        // mutation est stockée à part dans Personnage.Mutations (référence Code stable du
+        // catalogue, pas le texte résolu ni la plage de jet - conception révisée avec Nono les
+        // 16 et 17/08/2026, CONTEXT.md §2.7, pour permettre de retrouver/retirer une mutation
+        // précise plus tard et rester valide si un futur livre renumérote sa table de chance).
         StringGridCorruption.RowCount                                   := StringGridCorruption.RowCount + 1;
         StringGridCorruption.Cells[1, StringGridCorruption.RowCount - 1] := IntToStr(-Lost);
         StringGridCorruption.Cells[2, StringGridCorruption.RowCount - 1] := GetTexteLibelle('LAB_170');
 
-        StringGridCorruption.RowCount                                   := StringGridCorruption.RowCount + 1;
-        StringGridCorruption.Cells[1, StringGridCorruption.RowCount - 1] := '0';
-        StringGridCorruption.Cells[2, StringGridCorruption.RowCount - 1] := MutationLibelle + ' : ' + MutationEffet;
+        PersonnageMutation.Code := MutationCode;
+        Personnage.Mutations    += [PersonnageMutation];
       end;
 
     CalculCorruptionLeft();
 
-    MutationChoix   := '';
+    MutationChoix := '';
+    MutationCode  := '';
     MutationLibelle := '';
     MutationEffet   := '';
   end;

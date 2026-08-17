@@ -10,7 +10,7 @@ uses
   Unitcalcul, ChargeRace, ChargeMetier, ChargeAttribut, ChargeCompetence,
   ChargeTalent, ChargeArme, ChargeArmure, ChargeArmureSimplifie,
   ChargeTalentAttributModif, ChargeTalentCompetenceModif,
-  ChargeSort, XmlExportImport;
+  ChargeSort, ChargeCorruptionTable, XmlExportImport;
 
 Type
   StructurePersonnageAttribut   = Record
@@ -47,6 +47,17 @@ Type
   StructurePersonnageCorruption  = Record
      Montant:               Integer;
      Libelle:               String;
+  end;
+
+Type
+  // mutation obtenue par le personnage (CONTEXT.md §2.7) - référence (Code stable du catalogue,
+  // ex. "RULES-CORMEN_007") vers ListCorruptionTable (ChargeCorruptionTable.pas), pas le texte
+  // résolu ni la plage de jet : cohérent avec le reste du projet (codes stockés, texte retraduit
+  // à l'affichage via ChercheCorruptionTable), reste valide si un futur livre renumérote sa table
+  // de chance (DATA_CORRUPTION_..._CHANCE), et nécessaire pour retrouver/retirer une mutation
+  // précise (perte de mutation, rare mais prévue par le livre).
+  StructurePersonnageMutation    = Record
+     Code:                  String;
   end;
 
 Type
@@ -108,6 +119,7 @@ Type
      AugmentationTalent:         array of StructurePersonnageTalent;
      Equipement:                 array of StructurePersonnageEquipement;
      Corruption:                 array of StructurePersonnageCorruption;
+     Mutations:                  array of StructurePersonnageMutation;
      XpCoutAttribut:             array of StructurePersonnageXpAttribut;
      XpCoutTalent:               array of StructurePersonnageXpTalent;
      XpCoutCompetence:           array of StructurePersonnageXpCompetence;
@@ -193,6 +205,7 @@ var
   PersonnageTalent:       StructurePersonnageTalent;
   PersonnageEquipement:   StructurePersonnageEquipement;
   PersonnageCorruption:   StructurePersonnageCorruption;
+  PersonnageMutation:     StructurePersonnageMutation;
   PersonnageMetier:       StructurePersonnageMetier;
   PersonnageXpAttribut:   StructurePersonnageXpAttribut;
   PersonnageXpCompetence: StructurePersonnageXpCompetence;
@@ -206,6 +219,7 @@ var
   PArmure:                StructureArmure;
   PArmureSimplifiee:      StructureArmureSimplifiee;
   PSort:                  StructureSort;
+  PCorruptionTable:       StructureCorruptionTable;
   ListeLivres:            String = '';
 begin
   Result := False; // Initialise le résultat à False
@@ -432,6 +446,18 @@ begin
             XMLContent.Add(XmlLigneDonnee(ConstXmlItem, IntToStr(PersonnageCorruption.Montant), PersonnageCorruption.Libelle));
         XMLContent.Add(XmlFin(ConstXmlChapitreCorruption));
 
+        // Mutations obtenues (CONTEXT.md §2.7) - référence (Code stable du catalogue), pas le texte
+        XMLContent.Add(XmlDebut(ConstXmlChapitreMutation));
+          for PersonnageMutation in Personnage.Mutations do
+            begin
+              XMLContent.Add(XmlLigneDonnee(ConstXmlItem, PersonnageMutation.Code, ''));
+              PCorruptionTable.Code := '';
+              PCorruptionTable := ChercheCorruptionTable(PersonnageMutation.Code);
+              if (PCorruptionTable.Code <> '') then
+                XMLContent.Add(XmlCommentaire(PCorruptionTable.Libelle));
+            end;
+        XMLContent.Add(XmlFin(ConstXmlChapitreMutation));
+
         // Livres
         XMLContent.Add(XmlLigne(ConstXmlLibelleLivre, ListeLivres));
         if Personnage.LivresAcceptes  = '' then
@@ -444,19 +470,37 @@ begin
           // Attribut
           XMLContent.Add(XmlDebut(ConstXmlSousChapitreCarac));
           For PersonnageXpAttribut in Personnage.XpCoutAttribut do
-            XMLContent.Add(XmlLigneDonnee(ConstXmlCarac, PersonnageXpAttribut.CodeAttribut+DriveSeparator+IntToStr(PersonnageXpAttribut.Debut)+SeparateurChance+IntToStr(PersonnageXpAttribut.Fin), IntToStr(PersonnageXpAttribut.CoutXp)));
+            begin
+              XMLContent.Add(XmlLigneDonnee(ConstXmlCarac, PersonnageXpAttribut.CodeAttribut+DriveSeparator+IntToStr(PersonnageXpAttribut.Debut)+SeparateurChance+IntToStr(PersonnageXpAttribut.Fin), IntToStr(PersonnageXpAttribut.CoutXp)));
+              PAttribut.CodeAttribut := '';
+              PAttribut := ChercheAttribut(PersonnageXpAttribut.CodeAttribut);
+              if (PAttribut.CodeAttribut <> '') then
+                XMLContent.Add(XmlCommentaire(PAttribut.Libelle));
+            end;
           XMLContent.Add(XmlFin(ConstXmlSousChapitreCarac));
 
           // Compétence
           XMLContent.Add(XmlDebut(ConstXmlSousChapitreCompetence));
           For PersonnageXpCompetence in Personnage.XpCoutCompetence do
-            XMLContent.Add(XmlLigneDonnee(ConstXmlCompetence, PersonnageXpCompetence.CodeCompetence+DriveSeparator+IntToStr(PersonnageXpCompetence.Debut)+SeparateurChance+IntToStr(PersonnageXpCompetence.Fin), IntToStr(PersonnageXpCompetence.CoutXp)));
+            begin
+              XMLContent.Add(XmlLigneDonnee(ConstXmlCompetence, PersonnageXpCompetence.CodeCompetence+DriveSeparator+IntToStr(PersonnageXpCompetence.Debut)+SeparateurChance+IntToStr(PersonnageXpCompetence.Fin), IntToStr(PersonnageXpCompetence.CoutXp)));
+              PCompetence.CodeCompetence := '';
+              PCompetence := ChercheCompetence(PersonnageXpCompetence.CodeCompetence);
+              if (PCompetence.CodeCompetence <> '') then
+                XMLContent.Add(XmlCommentaire(PCompetence.Libelle));
+            end;
           XMLContent.Add(XmlFin(ConstXmlSousChapitreCompetence));
 
           // Talent
           XMLContent.Add(XmlDebut(ConstXmlSousChapitreTalent));
           For PersonnageXpTalent in Personnage.XpCoutTalent do
-            XMLContent.Add(XmlLigneDonnee(ConstXmlTalent, PersonnageXpTalent.CodeTalent+DriveSeparator+IntToStr(PersonnageXpTalent.Debut)+SeparateurChance+IntToStr(PersonnageXpTalent.Fin), IntToStr(PersonnageXpTalent.CoutXp)));
+            begin
+              XMLContent.Add(XmlLigneDonnee(ConstXmlTalent, PersonnageXpTalent.CodeTalent+DriveSeparator+IntToStr(PersonnageXpTalent.Debut)+SeparateurChance+IntToStr(PersonnageXpTalent.Fin), IntToStr(PersonnageXpTalent.CoutXp)));
+              PTalent.CodeTalent := '';
+              PTalent := ChercheTalent(PersonnageXpTalent.CodeTalent);
+              if (PTalent.CodeTalent <> '') then
+                XMLContent.Add(XmlCommentaire(PTalent.Libelle));
+            end;
           XMLContent.Add(XmlFin(ConstXmlSousChapitreTalent));
 
         XMLContent.Add(XmlFin(ConstXmlChapitreCoutXp));
@@ -492,6 +536,7 @@ var
   PersonnageTalent:           StructurePersonnageTalent;
   PersonnageEquipement:       StructurePersonnageEquipement;
   PersonnageCorruption:       StructurePersonnageCorruption;
+  PersonnageMutation:         StructurePersonnageMutation;
   PersonnageXpAttribut:       StructurePersonnageXpAttribut;
   PersonnageXpCompetence:     StructurePersonnageXpCompetence;
   PersonnageXpTalent:         StructurePersonnageXpTalent;
@@ -515,6 +560,7 @@ begin
       Personnage.CreationTalent       := [];
       Personnage.Equipement           := [];
       Personnage.Corruption           := [];
+      Personnage.Mutations            := [];
       Personnage.XpCoutAttribut       := [];
       Personnage.XpCoutCompetence     := [];
       Personnage.XpCoutTalent         := [];
@@ -823,6 +869,22 @@ begin
                   PersonnageCorruption.Montant := StrToIntDef(RemoveQuotes(UTF8Encode(ItemNode.Attributes.GetNamedItem(ConstXmlData).NodeValue)),0);
                   PersonnageCorruption.Libelle := RemoveQuotes(UTF8Encode(ItemNode.TextContent));
                   Personnage.Corruption        += [PersonnageCorruption];
+                end;
+              ItemNode := ItemNode.NextSibling;
+            end;
+        end;
+
+      // Mutations obtenues (CONTEXT.md §2.7) - référence (Code stable du catalogue), pas le texte
+      ChapterItemNode := PlayerNode.FindNode(ConstXmlChapitreMutation);
+      if Assigned(ChapterItemNode) then
+        begin
+          ItemNode := ChapterItemNode.FirstChild;
+          while Assigned(ItemNode) do
+            begin
+              if (ItemNode.NodeType = ELEMENT_NODE) then
+                begin
+                  PersonnageMutation.Code := RemoveQuotes(UTF8Encode(ItemNode.Attributes.GetNamedItem(ConstXmlData).NodeValue));
+                  Personnage.Mutations    += [PersonnageMutation];
                 end;
               ItemNode := ItemNode.NextSibling;
             end;

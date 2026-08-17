@@ -216,11 +216,12 @@ Procedure Traduit(Langue: String; Livre: String);
                       ListFabrication[Ind]     := PFabrication;
                     end;
               ConstPCorruptionTable:
-                // Clé composée (TypeCorruption + Chance, ex. "CORRUPTION_PHYSICAL 01-05") -
-                // pas CompareRechercheValeur ici, Chance contient déjà un '-' (plage D100),
-                // ce qui casserait le découpage préfixe-livre de cette fonction.
+                // Code = code stable du catalogue (ex. "RULES-CORMEN_007", book-prefixed) depuis
+                // le pivot du 17/08/2026 - CompareRechercheValeur standard, comme les autres
+                // catalogues (Talents, Races, ...). Avant ce pivot, Code était une clé composée
+                // TypeCorruption+Chance (plage D100), incompatible avec CompareRechercheValeur.
                 for Ind :=0 to ListCorruptionTable.Count - 1 do
-                  if PTraduction.Code = (ListCorruptionTable[Ind].TypeCorruption + ' ' + ListCorruptionTable[Ind].Chance) then
+                  if CompareRechercheValeur(PTraduction.Code, ListCorruptionTable[Ind].Code) then
                     begin
                       PCorruptionTable         := ListCorruptionTable[Ind];
                       PCorruptionTable.Libelle := PTraduction.Libelle;

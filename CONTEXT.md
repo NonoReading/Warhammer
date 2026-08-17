@@ -748,7 +748,7 @@ le nouvel historique doit venir consommer.
 Les étapes 4-6 (PDF) se sont ajustées comme d'habitude par allers-retours captures d'écran sur
 le rendu réel, pas de spec pixel-perfect figée à l'avance.
 
-### 2.7 Mutation quand la corruption atteint son maximum — en cours (démarré le 16/08/2026)
+### 2.7 Mutation quand la corruption atteint son maximum — en cours (démarré le 16/08/2026, dernière mise à jour le 17/08/2026)
 
 **Mécanisme** (conception validée par Nono) : quand `Left` (voir §2.6) atteint 0, le joueur
 choisit entre dépenser un point de Résilience définitivement, ou accepter une mutation.
@@ -886,9 +886,10 @@ désactivée dès que la Résilience totale actuelle est à 0 (seule la mutation
   donc la mutation directe du tableau est la seule façon de la faire persister) puis ajoute une
   ligne compensatoire (`-Lost`, libellé "Résilience dépensée") à `StringGridCorruption`. Si
   Mutation, ajoute la même ligne compensatoire (libellé "Mutation acceptée") PLUS une ligne à
-  montant 0 dont le libellé est `MutationLibelle + ': ' + MutationEffet` - pas de nouvelle
-  structure de données, `Personnage.Corruption` sert aussi de mémoire des mutations pour cette
-  V1 (conception validée avec Nono).
+  montant 0 dont le libellé est `MutationLibelle + ': ' + MutationEffet` - V1 : pas de nouvelle
+  structure de données, `Personnage.Corruption` sert aussi de mémoire des mutations. **Revu en
+  Étape 5** : Nono a repéré le lendemain que ça mélangeait ledger narratif et donnée
+  structurée, remplacé par `Personnage.Mutations`.
 - Nouvelles clés `LAB_166` à `LAB_170` (Annuler/Dépenser un point de Résilience/Accepter une
   mutation/Résilience dépensée/Mutation acceptée). Le type Physical/Mental est affiché via
   `GetTexteLibelle` directement sur les constantes `CorruptionPhysique`/`CorruptionMentale`
@@ -899,8 +900,80 @@ désactivée dès que la Résilience totale actuelle est à 0 (seule la mutation
 - Confirmé par Nono par test réel : tirage Mental obtenu, entrée "Hateful Impulses" (31-35,
   Mental Corruption Table) affichée avec son effet, correspond exactement au livre.
 
+**Étape 5 (✅ terminée, 17/08/2026)** : deux pivots de conception coup sur coup, tous deux
+initiés par Nono en relisant le XML sauvegardé d'un personnage après l'Étape 4 :
+
+*Pivot 1 - liste dédiée `Personnage.Mutations`.* Nono a remarqué que la mutation obtenue
+finissait comme simple ligne texte à montant 0 dans `Personnage.Corruption`
+(`<Item name="0">"Hateful Impulses : ..."</Item>`), mélangée à l'historique narratif de
+points. Deux problèmes : le texte résolu est figé dans la langue active au moment du tirage
+(pas retraduisible, contrairement au reste du projet qui stocke des codes) et une entrée
+texte libre est difficile à cibler pour une future application automatique d'effet ou pour
+une future perte de mutation (Nono a confirmé via le livre que perdre une mutation est
+possible, bien que très rare). Fix : nouveau type `StructurePersonnageMutation`
+(`chargepersonnage.pas`) et champ `Personnage.Mutations: array of ...`, persistés dans un
+nouveau chapitre XML `CHAPTER_MUTATION` (constante `ConstXmlChapitreMutation`,
+`chargeconstantes.pas`) via `PersonnageXmlCreation`/le chargement, suivant le même schéma que
+`Personnage.Corruption`. `Personnage.Corruption` retrouve son rôle d'origine, pur ledger de
+points (seule la ligne compensatoire `-Lost` "Mutation acceptée" y reste pour ce cas).
+
+*Pivot 2 - catalogue à code stable + table de chance séparée.* En lisant le XML de plus près
+(`<Corruption name="01-05">`), Nono a réalisé qu'une plage D100 comme identité de mutation
+est fragile : si un futur livre ajoute des entrées aux tables Physical/Mental, les plages
+peuvent être renumérotées, ce qui repointerait silencieusement les mutations déjà
+enregistrées sur des personnages existants vers une entrée différente. Fix, sur le modèle
+déjà utilisé pour Talents/Races (code stable book-prefixé, jamais la position/le tirage comme
+identité) : le catalogue (`DATA_CORRUPTION_TABLE_PHYSICAL`/`MENTAL`, dans les deux livres)
+utilise maintenant `<Corruption name="RULES-CORPHY_NNN">`/`RULES-CORMEN_NNN">` (codes stables,
+001-020, même ordre que les anciennes plages, `Libelle`/`Effet` inchangés) au lieu de la plage
+D100. Deux nouveaux chapitres `DATA_CORRUPTION_PHYSICAL_CHANCE`/`MENTAL_CHANCE` (contenu
+identique dans les deux livres, comme les autres chapitres purement mécaniques) portent
+maintenant le lien D100 → code (`<Chance name="01-05">"RULES-CORPHY_001"</Chance>`), propre à
+chaque livre et librement extensible sans perturber les codes existants.
+- `ChargeCorruptionTable.pas` : `StructureCorruptionTable.Chance` renommé `.Code` ; nouveau
+  type `StructureCorruptionChance` (Livre, TypeCorruption, Chance, Code) + `ListCorruptionChance`
+  (même schéma de reset/init que `ListCorruptionTable` dans `warhammersource.pas`).
+  `CorruptionTableResultat(TypeCorruption, Jet)` fait maintenant une recherche en deux temps :
+  `ListCorruptionChance` (jet → Code) puis `ListCorruptionTable` (Code → catalogue, via
+  `CompareRechercheValeur`, redevenu possible car `Code` est un vrai code book-prefixé - avant
+  ce pivot, `Chance` contenait un `-` qui cassait ce découpage). Nouvelle fonction
+  `ChercheCorruptionTable(Code)` (même pattern que `ChercheTalent`/`ChercheAttribut`) pour
+  retrouver une mutation déjà stockée depuis son seul code.
+- `xmlexportimport.pas` : chargement des deux nouveaux chapitres `_CHANCE` (même schéma que
+  `DATA_CORRUPTION_PHYSICAL`/`MENTAL` - pas de traduction, chargé une fois sur la passe
+  anglaise) ; `InitTrad` du catalogue simplifié pour utiliser `Code` seul (plus besoin du
+  `Code2` composé `TypeCorruption+Chance`, `Code` est maintenant unique tout seul).
+  `chargetraduction.pas` : `ConstPCorruptionTable` repassé au pattern standard
+  `CompareRechercheValeur` (plus besoin de la comparaison de chaîne composée, contournement
+  documenté comme piège potentiel maintenant obsolète pour ce cas précis).
+- `Personnage.Mutations`/`StructurePersonnageMutation` simplifiés en cohérence : un seul champ
+  `Code` (plus `TypeCorruption`+`Chance`). Variables d'échange `WinMutation` simplifiées en
+  conséquence : `MutationTypeCorruption`+`MutationChance` fusionnées en `MutationCode`.
+- Confirmé par Nono par test réel après recompilation : tirage Mental, mutation "Fearful
+  Concern" (26-30, code `RULES-CORMEN_006`), sauvegardée comme
+  `<Item name="RULES-CORMEN_006">""</Item>` dans `CHAPTER_MUTATION` - référence stable, plus
+  de plage D100 ni de texte résolu dans le XML de sauvegarde.
+- Complément demandé par Nono le même jour, en relisant ce XML : `CHAPTER_MUTATION` a reçu le
+  commentaire `<!-- Libellé -->` sous chaque `<Item name="Code">` que le reste du fichier de
+  sauvegarde personnage a déjà partout où c'est possible (Attributs, Compétences, Talents,
+  Armes, Armures, Sorts, Ancien métier...) - convention déjà en place via `XmlCommentaire` +
+  une fonction `Cherche...` de résolution Code → Libelle, `PersonnageXmlCreation`
+  (`chargepersonnage.pas`). Réutilise `ChercheCorruptionTable(Code)` (ajoutée au pivot 2
+  ci-dessus), même garde-fou `if Code <> ''` que Arme/Armure/Sort (au cas où un code de
+  mutation stocké ne matcherait plus aucun livre chargé). En vérifiant les autres chapitres à
+  la demande de Nono ("sauf oubli de ma part"), un vrai oubli préexistant (sans rapport avec
+  ce chantier) a été trouvé et corrigé au passage : `CHAPTER_XP` (coûts XP hors norme -
+  Attribut/Compétence/Talent) n'avait jamais ce commentaire malgré des codes tout aussi
+  résolubles - ajouté avec le même schéma (`ChercheAttribut`/`ChercheCompetence`/
+  `ChercheTalent`). `SUBCHAPTER_MISC` (Divers) et `CHAPTER_CORRUPTION` restent sans commentaire
+  à raison : ils stockent déjà du texte libre, pas un code de catalogue. **Poussé, pas encore
+  recompilé/testé par Nono** (il part tester au moment de cette mise à jour).
+
 **Reste à faire** : les options Résultat (saisie manuelle du jet) et Choix (sélection directe)
-sur les deux tirages, actuellement Hasard uniquement.
+sur les deux tirages, actuellement Hasard uniquement. Le mécanisme de perte de mutation
+lui-même (rare, confirmé possible par le livre) n'est ni conçu ni implémenté - c'est justement
+ce qui a motivé `Personnage.Mutations` comme liste dédiée plutôt qu'un ledger texte, mais
+aucune UI/logique de retrait n'existe encore.
 
 ---
 

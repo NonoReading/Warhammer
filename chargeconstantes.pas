@@ -48,6 +48,7 @@ Const
       ConstXmlChapitreOldWork		= 'CHAPTER_OLDCAREER';
       ConstXmlChapitreEquipement	= 'CHAPTER_ITEM';
       ConstXmlChapitreCorruption	= 'CHAPTER_CORRUPTION';
+      ConstXmlChapitreMutation	        = 'CHAPTER_MUTATION';
       ConstXmlSousChapitreArme          = 'SUBCHAPTER_WEAPON';
       ConstXmlSousChapitreArmure        = 'SUBCHAPTER_ARMOR';
       ConstXmlSousChapitreArmureSimp    = 'SUBCHAPTER_ARMOR_SET';
@@ -90,6 +91,9 @@ Const
       ConstXmlDataMentalCorruption      = 'DATA_CORRUPTION_MENTAL';
       ConstXmlDataCorruptionTablePhys   = 'DATA_CORRUPTION_TABLE_PHYSICAL';
       ConstXmlDataCorruptionTableMent   = 'DATA_CORRUPTION_TABLE_MENTAL';
+      ConstXmlDataCorruptionPhysChance  = 'DATA_CORRUPTION_PHYSICAL_CHANCE';
+      ConstXmlDataCorruptionMentChance  = 'DATA_CORRUPTION_MENTAL_CHANCE';
+      ConstXmlChance                    = 'Chance';
       ConstXmlLibelle                   = 'Libelle';
       ConstXmlEffet                     = 'Effet';
       ConstXmlDescription               = 'Description';
@@ -415,6 +419,13 @@ Var
   MutationCodeRace:             String  = '';    // entrée : Personnage.Race, pour le tirage Physical/Mental
   MutationResilienceDisponible: Boolean = false;  // entrée : Résilience totale actuelle > 0
   MutationChoix:                String  = '';    // sortie : '' (annulé) / 'RESILIENCE' / 'MUTATION'
+  // sortie (si MUTATION) : référence stockée sur le personnage (Personnage.Mutations, CONTEXT.md
+  // §2.7) - le code stable du catalogue (ex. "RULES-CORMEN_007"), pas le texte résolu ni la
+  // plage de jet, pour rester cohérent avec le reste du projet (codes stockés, texte retraduit
+  // à l'affichage) et rester valide même si un futur livre renumérote les tables de chance, et
+  // permettre de retrouver/retirer une mutation précise plus tard (mutation perdue, rare mais
+  // prévu par le livre).
+  MutationCode:                 String  = '';
   MutationLibelle:              String  = '';    // sortie : nom de la mutation tirée (si MUTATION)
   MutationEffet:                String  = '';    // sortie : texte de l'effet de la mutation tirée
 

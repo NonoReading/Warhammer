@@ -861,6 +861,7 @@ Procedure XmlImport(FileName: String; OnlyPrimary: Boolean; OnlyCode: Boolean);
     PArmureSimplifiee:        StructureArmureSimplifiee;
     PRaceCorruptionCreation:  StructureRaceCorruptionCreation;
     PCorruptionTable:         StructureCorruptionTable;
+    PCorruptionChance:        StructureCorruptionChance;
     PTalentAttributModif:     StructureTalentAttributModif;
     PTalentCompetenceModif:   StructureTalentCompetenceModif;
     PTalentCompetenceAjoute:  StructureTalentCompetenceAjoute;
@@ -2178,11 +2179,13 @@ Procedure XmlImport(FileName: String; OnlyPrimary: Boolean; OnlyCode: Boolean);
                     end;
                 end;
 
-              // Table de mutation Physique (Physical Corruption Table, CONTEXT.md §2.6).
+              // Catalogue de mutation Physique (Physical Corruption Table, CONTEXT.md §2.7).
               // Traduction : pas d'attribut language= sur <Libelle>/<Effet> (inutile, le
               // <language> de tête du livre - LangueDef - suffit, même valeur que les
-              // attributs language= des autres chapitres). Clé composée pour AddTrad/Traduit
-              // (TypeCorruption + Chance) : voir le commentaire dans ChargeTraduction.Traduit.
+              // attributs language= des autres chapitres). Code = code stable du catalogue
+              // (ex. "RULES-CORPHY_001"), décorrélé de la plage D100 - voir
+              // DATA_CORRUPTION_PHYSICAL_CHANCE/DATA_CORRUPTION_MENTAL_CHANCE plus bas pour le
+              // tirage (conception revue avec Nono le 17/08/2026).
               NodeNv1 := BookNode.FindNode(ConstXmlDataCorruptionTablePhys);
               if Assigned(NodeNv1) then
                 begin
@@ -2191,11 +2194,11 @@ Procedure XmlImport(FileName: String; OnlyPrimary: Boolean; OnlyCode: Boolean);
                     begin
                       PCorruptionTable.Livre          := Livre;
                       PCorruptionTable.TypeCorruption := CorruptionPhysique;
-                      PCorruptionTable.Chance         := RemoveQuotes(UTF8Encode(NodeNv2.Attributes.GetNamedItem(ConstXmlData).NodeValue));
+                      PCorruptionTable.Code           := RemoveQuotes(UTF8Encode(NodeNv2.Attributes.GetNamedItem(ConstXmlData).NodeValue));
                       PCorruptionTable.Libelle        := RemoveQuotes(UTF8Encode(NodeNv2.FindNode(ConstXmlLibelle).TextContent));
                       PCorruptionTable.Effet          := RemoveQuotes(UTF8Encode(NodeNv2.FindNode(ConstXmlEffet).TextContent));
 
-                      PTraduction              := InitTrad(ConstPCorruptionTable, PCorruptionTable.TypeCorruption, PCorruptionTable.Chance, PCorruptionTable.Livre);
+                      PTraduction              := InitTrad(ConstPCorruptionTable, PCorruptionTable.Code, '', PCorruptionTable.Livre);
                       PTraduction.Libelle      := PCorruptionTable.Libelle;
                       PTraduction.Description  := PCorruptionTable.Effet;
 
@@ -2211,7 +2214,7 @@ Procedure XmlImport(FileName: String; OnlyPrimary: Boolean; OnlyCode: Boolean);
                     end;
                 end;
 
-              // Table de mutation Mentale (Mental Corruption Table, CONTEXT.md §2.6)
+              // Catalogue de mutation Mentale (Mental Corruption Table, CONTEXT.md §2.7)
               NodeNv1 := BookNode.FindNode(ConstXmlDataCorruptionTableMent);
               if Assigned(NodeNv1) then
                 begin
@@ -2220,11 +2223,11 @@ Procedure XmlImport(FileName: String; OnlyPrimary: Boolean; OnlyCode: Boolean);
                     begin
                       PCorruptionTable.Livre          := Livre;
                       PCorruptionTable.TypeCorruption := CorruptionMentale;
-                      PCorruptionTable.Chance         := RemoveQuotes(UTF8Encode(NodeNv2.Attributes.GetNamedItem(ConstXmlData).NodeValue));
+                      PCorruptionTable.Code           := RemoveQuotes(UTF8Encode(NodeNv2.Attributes.GetNamedItem(ConstXmlData).NodeValue));
                       PCorruptionTable.Libelle        := RemoveQuotes(UTF8Encode(NodeNv2.FindNode(ConstXmlLibelle).TextContent));
                       PCorruptionTable.Effet          := RemoveQuotes(UTF8Encode(NodeNv2.FindNode(ConstXmlEffet).TextContent));
 
-                      PTraduction              := InitTrad(ConstPCorruptionTable, PCorruptionTable.TypeCorruption, PCorruptionTable.Chance, PCorruptionTable.Livre);
+                      PTraduction              := InitTrad(ConstPCorruptionTable, PCorruptionTable.Code, '', PCorruptionTable.Livre);
                       PTraduction.Libelle      := PCorruptionTable.Libelle;
                       PTraduction.Description  := PCorruptionTable.Effet;
 
@@ -2235,6 +2238,52 @@ Procedure XmlImport(FileName: String; OnlyPrimary: Boolean; OnlyCode: Boolean);
                          end;
 
                       AddTrad(PTraduction, LangueDef);
+
+                      NodeNv2 := NodeNv2.NextSibling;
+                    end;
+                end;
+
+              // Table de chance Physique (D100 -> Code), CONTEXT.md §2.7 - propre à ce livre,
+              // pas de traduction (juste une plage et un code), chargée une seule fois comme
+              // DATA_CORRUPTION_PHYSICAL/DATA_CORRUPTION_MENTAL plus haut.
+              NodeNv1 := BookNode.FindNode(ConstXmlDataCorruptionPhysChance);
+              if Assigned(NodeNv1) then
+                begin
+                  NodeNv2 := NodeNv1.FirstChild;
+                  While Assigned(NodeNv2) do
+                    begin
+                      PCorruptionChance.Livre          := Livre;
+                      PCorruptionChance.TypeCorruption := CorruptionPhysique;
+                      PCorruptionChance.Chance         := RemoveQuotes(UTF8Encode(NodeNv2.Attributes.GetNamedItem(ConstXmlData).NodeValue));
+                      PCorruptionChance.Code           := RemoveQuotes(UTF8Encode(NodeNv2.TextContent));
+
+                       if LangueDef = ConstAnglais then
+                         begin
+                          ListCorruptionChance.add(PCorruptionChance);
+                          inc(nbCorruptionChance);
+                         end;
+
+                      NodeNv2 := NodeNv2.NextSibling;
+                    end;
+                end;
+
+              // Table de chance Mentale (D100 -> Code), CONTEXT.md §2.7
+              NodeNv1 := BookNode.FindNode(ConstXmlDataCorruptionMentChance);
+              if Assigned(NodeNv1) then
+                begin
+                  NodeNv2 := NodeNv1.FirstChild;
+                  While Assigned(NodeNv2) do
+                    begin
+                      PCorruptionChance.Livre          := Livre;
+                      PCorruptionChance.TypeCorruption := CorruptionMentale;
+                      PCorruptionChance.Chance         := RemoveQuotes(UTF8Encode(NodeNv2.Attributes.GetNamedItem(ConstXmlData).NodeValue));
+                      PCorruptionChance.Code           := RemoveQuotes(UTF8Encode(NodeNv2.TextContent));
+
+                       if LangueDef = ConstAnglais then
+                         begin
+                          ListCorruptionChance.add(PCorruptionChance);
+                          inc(nbCorruptionChance);
+                         end;
 
                       NodeNv2 := NodeNv2.NextSibling;
                     end;

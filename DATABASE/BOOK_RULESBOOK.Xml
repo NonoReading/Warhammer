@@ -17360,167 +17360,211 @@ If your opponent has a weapon with the Impaler Perk and rolls a Critical, your a
 <Specie name="RULES-RACE_WELF">"01-100"</Specie>
 </DATA_CORRUPTION_MENTAL>
 <DATA_CORRUPTION_TABLE_PHYSICAL>
-<Corruption name="01-05">
+<Corruption name="RULES-CORPHY_001">
 <Libelle>"Animalistic Legs"</Libelle>
 <Effet>"+1 Movement"</Effet>
 </Corruption>
-<Corruption name="06-10">
+<Corruption name="RULES-CORPHY_002">
 <Libelle>"Corpulent"</Libelle>
 <Effet>"-1 Movement, +5 Strength, +5 Toughness"</Effet>
 </Corruption>
-<Corruption name="11-15">
+<Corruption name="RULES-CORPHY_003">
 <Libelle>"Distended Digits"</Libelle>
 <Effet>"+10 Dexterity"</Effet>
 </Corruption>
-<Corruption name="16-20">
+<Corruption name="RULES-CORPHY_004">
 <Libelle>"Emaciated"</Libelle>
 <Effet>"-10 Strength, +5 Agility"</Effet>
 </Corruption>
-<Corruption name="21-25">
+<Corruption name="RULES-CORPHY_005">
 <Libelle>"Enormous Eye"</Libelle>
 <Effet>"+10 on Perception Tests involving sight"</Effet>
 </Corruption>
-<Corruption name="26-30">
+<Corruption name="RULES-CORPHY_006">
 <Libelle>"Extra Leg Joints"</Libelle>
 <Effet>"+5 Agility"</Effet>
 </Corruption>
-<Corruption name="31-35">
+<Corruption name="RULES-CORPHY_007">
 <Libelle>"Extra Mouth"</Libelle>
 <Effet>"Roll on the Hit Location table to see where"</Effet>
 </Corruption>
-<Corruption name="36-40">
+<Corruption name="RULES-CORPHY_008">
 <Libelle>"Fleshy Tentacle"</Libelle>
 <Effet>"Gain the Tentacles Creature Trait. See page 342"</Effet>
 </Corruption>
-<Corruption name="41-45">
+<Corruption name="RULES-CORPHY_009">
 <Libelle>"Glowing Skin"</Libelle>
 <Effet>"Effective light of a candle"</Effet>
 </Corruption>
-<Corruption name="46-50">
+<Corruption name="RULES-CORPHY_010">
 <Libelle>"Inhuman Beauty"</Libelle>
 <Effet>"+10 Fellowship; you do not scar"</Effet>
 </Corruption>
-<Corruption name="51-55">
+<Corruption name="RULES-CORPHY_011">
 <Libelle>"Inverted Face"</Libelle>
 <Effet>"-20 to all Fellowship Tests"</Effet>
 </Corruption>
-<Corruption name="56-60">
+<Corruption name="RULES-CORPHY_012">
 <Libelle>"Iron Skin"</Libelle>
 <Effet>"+2 Armour Points to all locations, -10 Agility"</Effet>
 </Corruption>
-<Corruption name="61-65">
+<Corruption name="RULES-CORPHY_013">
 <Libelle>"Lolling Tongue"</Libelle>
 <Effet>"-10 to all Language Tests when speaking"</Effet>
 </Corruption>
-<Corruption name="66-70">
+<Corruption name="RULES-CORPHY_014">
 <Libelle>"Patchy Feathers"</Libelle>
 <Effet>"Roll on the Hit Location table twice to see where"</Effet>
 </Corruption>
-<Corruption name="71-75">
+<Corruption name="RULES-CORPHY_015">
 <Libelle>"Short Legs"</Libelle>
 <Effet>"-1 Movement"</Effet>
 </Corruption>
-<Corruption name="76-80">
+<Corruption name="RULES-CORPHY_016">
 <Libelle>"Thorny Scales"</Libelle>
 <Effet>"+1 Armour Points to all locations"</Effet>
 </Corruption>
-<Corruption name="81-85">
+<Corruption name="RULES-CORPHY_017">
 <Libelle>"Uneven Horns"</Libelle>
 <Effet>"+1 Armour Points to the Head; counts as a Creature Weapon of Damage equal to your SB (see page 343)"</Effet>
 </Corruption>
-<Corruption name="86-90">
+<Corruption name="RULES-CORPHY_018">
 <Libelle>"Weeping Pus"</Libelle>
 <Effet>"Roll on the Hit Location Table to see from where"</Effet>
 </Corruption>
-<Corruption name="91-95">
+<Corruption name="RULES-CORPHY_019">
 <Libelle>"Whiskered Snout"</Libelle>
 <Effet>"+10 Track"</Effet>
 </Corruption>
-<Corruption name="96-00">
+<Corruption name="RULES-CORPHY_020">
 <Libelle>"GM's Choice"</Libelle>
 <Effet>"The GM chooses a Mutation or Creature Trait. See page 338"</Effet>
 </Corruption>
 </DATA_CORRUPTION_TABLE_PHYSICAL>
 <DATA_CORRUPTION_TABLE_MENTAL>
-<Corruption name="01-05">
+<Corruption name="RULES-CORMEN_001">
 <Libelle>"Awful Cravings"</Libelle>
 <Effet>"-5 Fellowship, -5 Willpower"</Effet>
 </Corruption>
-<Corruption name="06-10">
+<Corruption name="RULES-CORMEN_002">
 <Libelle>"Beast Within"</Libelle>
 <Effet>"+10 Willpower, -5 Fellowship, -5 Intelligence"</Effet>
 </Corruption>
-<Corruption name="11-15">
+<Corruption name="RULES-CORMEN_003">
 <Libelle>"Chaotic Dreams"</Libelle>
 <Effet>"Gain the Fatigued Condition for the first two hours of every day"</Effet>
 </Corruption>
-<Corruption name="16-20">
+<Corruption name="RULES-CORMEN_004">
 <Libelle>"Crawling Skin"</Libelle>
 <Effet>"-5 Initiative, -5 Dexterity"</Effet>
 </Corruption>
-<Corruption name="21-25">
+<Corruption name="RULES-CORMEN_005">
 <Libelle>"Erratic Fantasist"</Libelle>
 <Effet>"-5 Initiative, -5 Willpower"</Effet>
 </Corruption>
-<Corruption name="26-30">
+<Corruption name="RULES-CORMEN_006">
 <Libelle>"Fearful Concern"</Libelle>
 <Effet>"-10 Willpower"</Effet>
 </Corruption>
-<Corruption name="31-35">
+<Corruption name="RULES-CORMEN_007">
 <Libelle>"Hateful Impulses"</Libelle>
 <Effet>"Subject to Animosity (see Psychology) to all not of your species"</Effet>
 </Corruption>
-<Corruption name="36-40">
+<Corruption name="RULES-CORMEN_008">
 <Libelle>"Hollow Heart"</Libelle>
 <Effet>"+10 Willpower, -10 Fellowship"</Effet>
 </Corruption>
-<Corruption name="41-45">
+<Corruption name="RULES-CORMEN_009">
 <Libelle>"Jealous Thoughts"</Libelle>
 <Effet>"-10 Fellowship"</Effet>
 </Corruption>
-<Corruption name="46-50">
+<Corruption name="RULES-CORMEN_010">
 <Libelle>"Lonely Spirit"</Libelle>
 <Effet>"-10 to any Test when alone"</Effet>
 </Corruption>
-<Corruption name="51-55">
+<Corruption name="RULES-CORMEN_011">
 <Libelle>"Mental Blocks"</Libelle>
 <Effet>"-10 Intelligence"</Effet>
 </Corruption>
-<Corruption name="56-60">
+<Corruption name="RULES-CORMEN_012">
 <Libelle>"Profane Urgency"</Libelle>
 <Effet>"-10 Willpower, +10 Agility"</Effet>
 </Corruption>
-<Corruption name="61-65">
+<Corruption name="RULES-CORMEN_013">
 <Libelle>"Shaky Morale"</Libelle>
 <Effet>"Gain the Broken condition if you fail a Test derived from Willpower"</Effet>
 </Corruption>
-<Corruption name="66-70">
+<Corruption name="RULES-CORMEN_014">
 <Libelle>"Suspicious Mind"</Libelle>
 <Effet>"-5 I, -5 Int"</Effet>
 </Corruption>
-<Corruption name="71-75">
+<Corruption name="RULES-CORMEN_015">
 <Libelle>"Thrill Hunter"</Libelle>
 <Effet>"+10 Willpower, -10 Initiative"</Effet>
 </Corruption>
-<Corruption name="76-80">
+<Corruption name="RULES-CORMEN_016">
 <Libelle>"Tortured Visions"</Libelle>
 <Effet>"-10 Initiative"</Effet>
 </Corruption>
-<Corruption name="81-85">
+<Corruption name="RULES-CORMEN_017">
 <Libelle>"Totally Unhinged"</Libelle>
 <Effet>"-20 Fellowship, +10 Willpower"</Effet>
 </Corruption>
-<Corruption name="86-90">
+<Corruption name="RULES-CORMEN_018">
 <Libelle>"Unending Malice"</Libelle>
 <Effet>"-10 to any Test not hurting another; +10 on Tests to hurt"</Effet>
 </Corruption>
-<Corruption name="91-95">
+<Corruption name="RULES-CORMEN_019">
 <Libelle>"Unholy Rage"</Libelle>
 <Effet>"Subject to Frenzy (see Psychology), +10 Weapon Skill"</Effet>
 </Corruption>
-<Corruption name="96-00">
+<Corruption name="RULES-CORMEN_020">
 <Libelle>"Worried Jitters"</Libelle>
 <Effet>"+5 Agility, -5 Fellowship"</Effet>
 </Corruption>
 </DATA_CORRUPTION_TABLE_MENTAL>
+<DATA_CORRUPTION_PHYSICAL_CHANCE>
+<Chance name="01-05">"RULES-CORPHY_001"</Chance>
+<Chance name="06-10">"RULES-CORPHY_002"</Chance>
+<Chance name="11-15">"RULES-CORPHY_003"</Chance>
+<Chance name="16-20">"RULES-CORPHY_004"</Chance>
+<Chance name="21-25">"RULES-CORPHY_005"</Chance>
+<Chance name="26-30">"RULES-CORPHY_006"</Chance>
+<Chance name="31-35">"RULES-CORPHY_007"</Chance>
+<Chance name="36-40">"RULES-CORPHY_008"</Chance>
+<Chance name="41-45">"RULES-CORPHY_009"</Chance>
+<Chance name="46-50">"RULES-CORPHY_010"</Chance>
+<Chance name="51-55">"RULES-CORPHY_011"</Chance>
+<Chance name="56-60">"RULES-CORPHY_012"</Chance>
+<Chance name="61-65">"RULES-CORPHY_013"</Chance>
+<Chance name="66-70">"RULES-CORPHY_014"</Chance>
+<Chance name="71-75">"RULES-CORPHY_015"</Chance>
+<Chance name="76-80">"RULES-CORPHY_016"</Chance>
+<Chance name="81-85">"RULES-CORPHY_017"</Chance>
+<Chance name="86-90">"RULES-CORPHY_018"</Chance>
+<Chance name="91-95">"RULES-CORPHY_019"</Chance>
+<Chance name="96-00">"RULES-CORPHY_020"</Chance>
+</DATA_CORRUPTION_PHYSICAL_CHANCE>
+<DATA_CORRUPTION_MENTAL_CHANCE>
+<Chance name="01-05">"RULES-CORMEN_001"</Chance>
+<Chance name="06-10">"RULES-CORMEN_002"</Chance>
+<Chance name="11-15">"RULES-CORMEN_003"</Chance>
+<Chance name="16-20">"RULES-CORMEN_004"</Chance>
+<Chance name="21-25">"RULES-CORMEN_005"</Chance>
+<Chance name="26-30">"RULES-CORMEN_006"</Chance>
+<Chance name="31-35">"RULES-CORMEN_007"</Chance>
+<Chance name="36-40">"RULES-CORMEN_008"</Chance>
+<Chance name="41-45">"RULES-CORMEN_009"</Chance>
+<Chance name="46-50">"RULES-CORMEN_010"</Chance>
+<Chance name="51-55">"RULES-CORMEN_011"</Chance>
+<Chance name="56-60">"RULES-CORMEN_012"</Chance>
+<Chance name="61-65">"RULES-CORMEN_013"</Chance>
+<Chance name="66-70">"RULES-CORMEN_014"</Chance>
+<Chance name="71-75">"RULES-CORMEN_015"</Chance>
+<Chance name="76-80">"RULES-CORMEN_016"</Chance>
+<Chance name="81-85">"RULES-CORMEN_017"</Chance>
+<Chance name="86-90">"RULES-CORMEN_018"</Chance>
+<Chance name="91-95">"RULES-CORMEN_019"</Chance>
+<Chance name="96-00">"RULES-CORMEN_020"</Chance>
+</DATA_CORRUPTION_MENTAL_CHANCE>
 </DATA_BOOK>
