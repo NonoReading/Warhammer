@@ -147,3 +147,36 @@ PDF Personnage (PRIORITAIRE) :
   attribut language=, pour produire un fichier ne contenant que ces éléments-là. Aucun outil de
   génération n'existe encore, juste l'intention derrière le choix de garder l'attribut. À
   concevoir avec Nono si/quand il veut ce générateur.
+
+- (demandé par Nono, 18/08/2026, à prévoir - pas commencé) explorer l'ancrage LCL
+  (AnchorSide/BorderSpacing) comme remplacement du positionnement manuel en pixels de
+  WinPersonnage.AjustePositionTables (winpersonnage.pas). Point de départ convenu avec Nono :
+  prototype restreint sur les 4 champs Age/Taille/Cheveux/Yeux (EditAge/EditHeight/
+  EditHairColors/EditEyeColors + leurs Lab correspondants) avant d'envisager d'étendre au
+  reste de la fonction. Nono a déjà essayé seul sans succès ("beaucoup de tâtonnage... un
+  enfer en cas de déplacement d'un élément") - piège probable évoqué : ancrages posés dans le
+  mauvais ordre de dépendance ou en boucle. Rappel du principe retenu : AnchorSide ne dispense
+  pas de recalculer la taille propre d'un TStringGrid après un changement de colonne/ligne
+  visible (Grid.Width/Height à remettre à jour explicitement à cet endroit précis), mais
+  supprime le besoin de répercuter ce changement à la main sur tous les éléments positionnés
+  en aval (ils suivent automatiquement une fois ancrés).
+
+- (repéré par Claude en revue de code, 18/08/2026, pas encore vérifié ni corrigé) deux points
+  soulevés en lisant WinPersonnage.AjustePositionTables (winpersonnage.pas) à la demande de
+  Nono, à vérifier au prochain test un peu poussé sur une fiche personnage :
+  1. Tous les appels à AdjustGridColumnsWidth dans cette fonction n'utilisent pas
+     ScaleDpi=false (nouveau paramètre ajouté le 18/08/2026, voir CONTEXT.md §2.8 bug #2) -
+     or AjustePositionTables est rappelée plusieurs fois sur la même fenêtre jamais recréée
+     (CheckBoxDestinResilience, CheckBoxXp, après chargement de données) : même schéma que le
+     grossissement cumulatif corrigé sur le menu principal. À tester en cochant/décochant les
+     deux CheckBox plusieurs fois de suite sur une même fiche.
+  2. PremierAjustage (ligne ~444) est une variable GLOBALE, pas propre à chaque fenêtre -
+     utilisée une fois avec un facteur 3 puis repasse à 1 pour le reste de la session de la
+     fenêtre, remise à 3 seulement à FormClose. Si une deuxième TWinPersonnages est ouverte
+     pendant qu'une première est déjà passée en facteur 1, la deuxième pourrait hériter du
+     mauvais facteur pour son tout premier ajustement (mauvais espacement des champs Age/
+     Taille/Cheveux/Yeux). À tester en ouvrant deux fiches personnage simultanément.
+  Anecdotique, sans impact fonctionnel : ligne ~3542-3543, ButtonSauvegarde.left est assigné
+  deux fois d'affilée à la même valeur (copier-coller resté en trop) ; AdjustGridColumnsWidth
+  est appelé deux fois pour TabCompetence dans la même fonction (ligne ~3452 et ~3569) - à
+  confirmer avec Nono si c'est volontaire (second passage nécessaire) avant d'y toucher.
