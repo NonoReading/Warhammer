@@ -11,7 +11,8 @@ uses
   ChargeArmeBonus, ChargeArmureBonus, ChargeArmureBonusModif, ChargeSort, ChargeAttribut, ChargeFabrication,
   ChargeConstantes, ChargeMetierAttribut, ChargeTexte, ChargeMetierTalent,
   ChargePersonnage, ChargeArmureSimplifie, ChargeAttributAugmentation,
-  ChargeCompetenceAugmentation,
+  ChargeCompetenceAugmentation, ChargeCorruptionTable,
+  ChargeCorruptionAttributModif, ChargeCorruptionCompetenceModif,
   Dialogs, UnitCalcul, Math, LCLIntf;
 
 Type
@@ -152,7 +153,21 @@ Function PdfPersonnageTalentBonus(Personnage: StructurePersonnage; CodeTalent: S
 // de la pièce d'armure elle-même (PdfBlocArmuresDonnees), comme (N) à côté d'un talent -
 // permet de retrouver quelle pièce cause quel malus. Les deux listes sont à libérer par
 // l'appelant.
-Function PdfPersonnageArmureAsterisques(Personnage: StructurePersonnage; out AsterisqueParEquipement: TStringList): TStringList;
+// AsterisqueDepart (ajouté le 17/08/2026) : point de départ de la numérotation, pour
+// enchaîner sans collision après une autre source d'astérisques déjà numérotée dans le
+// même PDF (ex. les mutations, voir PdfPersonnageMutationAsterisques) - auparavant fixé
+// en dur à Personnage.Asterisque (le seul baseline connu, celui des talents).
+Function PdfPersonnageArmureAsterisques(Personnage: StructurePersonnage; AsterisqueDepart: Integer; out AsterisqueParEquipement: TStringList): TStringList;
+
+// Effets à delta pur des mutations obtenues, visibles sur une caractéristique ou une
+// compétence (CONTEXT.md §2.7, étape 9) - même principe que PdfPersonnageArmureAsterisques :
+// Result est une TStringList Name=CodeAttribut/CodeCompetence / Value=" (N)" (à concaténer à
+// l'annotation existante), AsterisqueParMutation est Name=CodeCorruption / Value="(N)" pour
+// l'afficher à côté du nom de la mutation elle-même (PdfBlocMutations). AsterisqueDepart
+// permet d'enchaîner après une autre source déjà numérotée ; AsterisqueFinal renvoie le
+// dernier numéro utilisé, pour qu'une source suivante (ex. les armures) puisse à son tour
+// enchaîner sans collision. Les deux TStringList sont à libérer par l'appelant.
+Function PdfPersonnageMutationAsterisques(Personnage: StructurePersonnage; AsterisqueDepart: Integer; out AsterisqueParMutation: TStringList; out AsterisqueFinal: Integer): TStringList;
 
 // Blocs extraits de PdfPersonnageCreationFeldo2P (CONTEXT.md §2.4) — premier prototype
 // de l'architecture Bloc/Tableau. PdfBlocResilience dessine le cadre partagé
@@ -332,6 +347,13 @@ Procedure PdfBlocDessinExplication(PdfPage: TPDFPage; XGauche, XDroite, YHaut, Y
 // bloc.
 Procedure PdfBlocArmourPoints(PdfPage: TPDFPage; PdfImgShadow: Integer; X, Y: Single; ArmureTete, ArmureBras, ArmureCorps, ArmureJambe, ArmureBouclier: Integer);
 
+// Petite table des mutations obtenues (CONTEXT.md §2.7, étape 9) - à droite du bloc Armour
+// Points, capacité fixe à NbLignes (les mutations les plus anciennes sont omises au-delà).
+// AsterisqueParMutation (Name=CodeCorruption / Value="(N)", voir PdfPersonnageMutationAsterisques)
+// affiche à côté du nom le même numéro que celui renvoyé sur la caractéristique/compétence
+// affectée, même principe que Talents/Armures.
+Function PdfBlocMutations(PdfPage: TPDFPage; Personnage: StructurePersonnage; XGauche, XDroite, Y, HauteurLigne: Single; NbLignes: Integer; MinPolice: Integer; AsterisqueParMutation: TStringList): Single;
+
 // Brique 2 (tableau de données, CONTEXT.md §2.4) — DessinerTableau est générique : elle
 // dessine le cadre et le contenu à partir de Tableau (mise en page) et Donnees (valeurs déjà
 // préparées), sans rien connaître du sens métier des champs. Elle renvoie le Y du bas du
@@ -343,7 +365,11 @@ Function DessinerTableau(PdfPage: TPDFPage; const Tableau: TPdfTableau; const Do
 // Prototype de préparation pour le tableau des Caractéristiques : transforme les données du
 // personnage (via PdfPersonnageAttribut et ListMetierAttribut) en TPdfRecordSet prêt à être
 // dessiné par DessinerTableau, sans aucun calcul de position/dessin.
-Function PdfPreparerRecordSetCaracteristiques(Personnage: StructurePersonnage; PMetier: StructureMetier): TPdfRecordSet;
+// AnnotationMutation (ajouté le 17/08/2026, CONTEXT.md §2.7 étape 9) : Name=CodeAttribut /
+// Value=" (N)" à concaténer à l'annotation existante (même mécanisme que AnnotationArmure
+// pour les compétences, voir PdfPreparerRecordSetCompetencesBase) - calculée par
+// PdfPersonnageMutationAsterisques.
+Function PdfPreparerRecordSetCaracteristiques(Personnage: StructurePersonnage; PMetier: StructureMetier; AnnotationMutation: TStringList): TPdfRecordSet;
 
 // Prépare le tableau des compétences de base (première grille de la page, celle qui liste
 // ListPage). Renvoie aussi, en paramètres out, les totaux de 5 compétences (Esquive, Calme,
@@ -539,7 +565,16 @@ Function PdfPersonnageCompetence(Personnage: StructurePersonnage; Competence: St
           NivMetier := PersonnageCompetence.Valeur;
           break;
         end;
+
     Res.Total := Res.Base + Res.Augmentation;
+
+    // Effets à delta pur des mutations obtenues sur une compétence (CONTEXT.md §2.7, étape 8,
+    // ex. "+10 Track") - uniquement sur le Total, jamais sur Res.Augmentation : cette valeur
+    // correspond aux avancements réellement achetés (colonne "Adv" du PDF) et sert aussi à
+    // calculer combien de compétences ont été augmentées - y mêler un effet de mutation (qui
+    // n'est pas un avancement acheté) fausserait ce calcul. Signalé par Nono le 17/08/2026.
+    Res.Total := Res.Total + PersonnageMutationCompetenceModif(Personnage, Competence);
+
     Result := res;
   end;
 
@@ -617,6 +652,10 @@ Function PdfPersonnageAttribut(Personnage: StructurePersonnage; Attribut: String
     For PersonnageAttribut in Personnage.AugmentationAttribut do
       if CompareRechercheValeur(Attribut, PersonnageAttribut.CodeAttribut) then
         Res.Augmentation := Res.Augmentation + PersonnageAttribut.Valeur;
+
+    // Effets à delta pur des mutations obtenues (CONTEXT.md §2.7, étape 8) - même bucket que les
+    // talents (Res.Base), vrai modificateur additionné au Total (pas juste une annotation).
+    Res.Base := Res.Base + PersonnageMutationAttributModif(Personnage, Attribut);
 
     Res.Total := Res.Base + Res.Augmentation;
     Result := res;
@@ -1008,6 +1047,10 @@ Procedure PdfPersonnageCreation(Personnage: StructurePersonnage; BackGround: Boo
     PMetierNiveau  := ChercheMetierNiveau(Personnage.MetierEnCours.CodeMetier, Personnage.MetierEnCours.NiveauMetier);
     PRaceAttribut  := ChercheRaceAttribut(Personnage.Race, ConstCaracMouvement);
     Mouv           := StrToInt(PRaceAttribut.CalculRace);
+    // Effets à delta pur des mutations obtenues sur le Mouvement (CONTEXT.md §2.7, étape 8)
+    // - même fonction que pour les autres attributs, ConstCaracMouvement ('ATTR_Move') utilisé
+    // comme un code d'attribut de plus.
+    Mouv           := Mouv + PersonnageMutationAttributModif(Personnage, ConstCaracMouvement);
 
     Chance         := 0;
     Determine      := 0;
@@ -1653,6 +1696,13 @@ Procedure PdfPersonnageCreation(Personnage: StructurePersonnage; BackGround: Boo
             end;
       end;
 
+    // Effets de mutation sur les Points d'Armure (CORPHY_012/016/017, CONTEXT.md §2.7,
+    // étape 8) - ajoutés après le calcul de l'équipement, ne concernent que le PDF
+    ArmureTete  := ArmureTete  + PersonnageMutationArmureModif(Personnage, BonusTete);
+    ArmureBras  := ArmureBras  + PersonnageMutationArmureModif(Personnage, BonusBras);
+    ArmureCorps := ArmureCorps + PersonnageMutationArmureModif(Personnage, BonusCorps);
+    ArmureJambe := ArmureJambe + PersonnageMutationArmureModif(Personnage, BonusJambes);
+
     // Écrire du texte sur la page PDF
     PdfTaillePolice(PdfPage, PdfFontValue, ConstPoliceArial, 6);
 
@@ -1800,7 +1850,7 @@ begin
   Result := Bonus;
 end;
 
-Function PdfPersonnageArmureAsterisques(Personnage: StructurePersonnage; out AsterisqueParEquipement: TStringList): TStringList;
+Function PdfPersonnageArmureAsterisques(Personnage: StructurePersonnage; AsterisqueDepart: Integer; out AsterisqueParEquipement: TStringList): TStringList;
   var
     PersonnageEquipement: StructurePersonnageEquipement;
     PArmure:              StructureArmure;
@@ -1814,7 +1864,7 @@ Function PdfPersonnageArmureAsterisques(Personnage: StructurePersonnage; out Ast
   begin
     Result                   := TStringList.Create;
     AsterisqueParEquipement  := TStringList.Create;
-    AsterisqueCourant        := Personnage.Asterisque;
+    AsterisqueCourant        := AsterisqueDepart;
 
     for PersonnageEquipement in Personnage.Equipement do
       if (PersonnageEquipement.TypeEquipement = TypeEquipAR) or (PersonnageEquipement.TypeEquipement = TypeEquipARS) then
@@ -1859,6 +1909,81 @@ Function PdfPersonnageArmureAsterisques(Personnage: StructurePersonnage; out Ast
                 end;
             end;
         end;
+  end;
+
+Function PdfPersonnageMutationAsterisques(Personnage: StructurePersonnage; AsterisqueDepart: Integer; out AsterisqueParMutation: TStringList; out AsterisqueFinal: Integer): TStringList;
+  var
+    PersonnageMutation:                 StructurePersonnageMutation;
+    PCorruptionAttributModif:           StructureCorruptionAttributModif;
+    PCorruptionCompetenceModif:         StructureCorruptionCompetenceModif;
+    PCorruptionCompetenceAttributModif: StructureCorruptionCompetenceAttributModif;
+    PCompetence:                        StructureCompetence;
+    AsterisqueCourant:                  Integer;
+    AsterisqueMutation:                 Integer;
+    IndCompetence:                      Integer;
+  begin
+    Result                 := TStringList.Create;
+    AsterisqueParMutation  := TStringList.Create;
+    AsterisqueCourant      := AsterisqueDepart;
+
+    for PersonnageMutation in Personnage.Mutations do
+      begin
+        AsterisqueMutation := 0; // une seule astérisque par mutation, partagée par tous les codes qu'elle touche
+        for PCorruptionAttributModif in ListCorruptionAttributModif do
+          if CompareRechercheValeur(PCorruptionAttributModif.CodeCorruption, PersonnageMutation.Code) then
+            begin
+              if AsterisqueMutation = 0 then
+                begin
+                  Inc(AsterisqueCourant);
+                  AsterisqueMutation := AsterisqueCourant;
+                  AsterisqueParMutation.Values[PersonnageMutation.Code] := '(' + IntToStr(AsterisqueMutation) + ')';
+                end;
+              // même format que les talents (ListTalentAttributModif) : la valeur signée
+              // suivie du numéro d'astérisque, ex. "+10 (3)".
+              if PCorruptionAttributModif.Valeur >= 0 then
+                Result.Values[PCorruptionAttributModif.CodeAttribut] := Result.Values[PCorruptionAttributModif.CodeAttribut]
+                  + ' +' + IntToStr(PCorruptionAttributModif.Valeur) + ' (' + IntToStr(AsterisqueMutation) + ')'
+              else
+                Result.Values[PCorruptionAttributModif.CodeAttribut] := Result.Values[PCorruptionAttributModif.CodeAttribut]
+                  + ' ' + IntToStr(PCorruptionAttributModif.Valeur) + ' (' + IntToStr(AsterisqueMutation) + ')';
+            end;
+        for PCorruptionCompetenceModif in ListCorruptionCompetenceModif do
+          if CompareRechercheValeur(PCorruptionCompetenceModif.CodeCorruption, PersonnageMutation.Code) then
+            begin
+              if AsterisqueMutation = 0 then
+                begin
+                  Inc(AsterisqueCourant);
+                  AsterisqueMutation := AsterisqueCourant;
+                  AsterisqueParMutation.Values[PersonnageMutation.Code] := '(' + IntToStr(AsterisqueMutation) + ')';
+                end;
+              // même format que les armures (ListArmureBonusModif) : "(N) valeur%".
+              Result.Values[PCorruptionCompetenceModif.CodeCompetence] := Result.Values[PCorruptionCompetenceModif.CodeCompetence]
+                + ' (' + IntToStr(AsterisqueMutation) + ') ' + IntToStr(PCorruptionCompetenceModif.Valeur) + '%';
+            end;
+        // Effets visant toutes les compétences d'un attribut de rattachement (ex. "-20 to all
+        // Fellowship Tests", CORPHY_011, <ModifySkillAttribut>) - pas de code de compétence
+        // unique ici, donc on parcourt le catalogue complet pour annoter chaque compétence
+        // dont l'attribut correspond (même format "(N) valeur%" que ci-dessus).
+        for PCorruptionCompetenceAttributModif in ListCorruptionCompetenceAttributModif do
+          if CompareRechercheValeur(PCorruptionCompetenceAttributModif.CodeCorruption, PersonnageMutation.Code) then
+            for IndCompetence := 0 to ListCompetence.Count - 1 do
+              begin
+                PCompetence := ListCompetence[IndCompetence];
+                if CompareRechercheValeur(PCompetence.CodeAttribut, PCorruptionCompetenceAttributModif.CodeAttribut) then
+                  begin
+                    if AsterisqueMutation = 0 then
+                      begin
+                        Inc(AsterisqueCourant);
+                        AsterisqueMutation := AsterisqueCourant;
+                        AsterisqueParMutation.Values[PersonnageMutation.Code] := '(' + IntToStr(AsterisqueMutation) + ')';
+                      end;
+                    Result.Values[PCompetence.CodeCompetence] := Result.Values[PCompetence.CodeCompetence]
+                      + ' (' + IntToStr(AsterisqueMutation) + ') ' + IntToStr(PCorruptionCompetenceAttributModif.Valeur) + '%';
+                  end;
+              end;
+      end;
+
+    AsterisqueFinal := AsterisqueCourant;
   end;
 
 // Dessine le cadre partagé Résilience/Destin (4 lignes de haut, de X à X+78) et le contenu
@@ -2722,6 +2847,13 @@ Procedure PdfBlocArmuresDonnees(PdfPage: TPDFPage; Personnage: StructurePersonna
               PdfTaillePolice(PdfPage, PdfFontValue, ConstPoliceArial, 9);
             end;
       end;
+
+    // Effets de mutation sur les Points d'Armure (CORPHY_012/016/017, CONTEXT.md §2.7,
+    // étape 8) - ajoutés après le calcul de l'équipement, ne concernent que le PDF
+    ArmureTete  := ArmureTete  + PersonnageMutationArmureModif(Personnage, BonusTete);
+    ArmureBras  := ArmureBras  + PersonnageMutationArmureModif(Personnage, BonusBras);
+    ArmureCorps := ArmureCorps + PersonnageMutationArmureModif(Personnage, BonusCorps);
+    ArmureJambe := ArmureJambe + PersonnageMutationArmureModif(Personnage, BonusJambes);
   end;
 
 Procedure PdfBlocDessinExplication(PdfPage: TPDFPage; XGauche, XDroite, YHaut, YBas, HauteurLigne: Single; ArmureBonii, ArmeBonii, FabricationBonii: String);
@@ -2862,6 +2994,54 @@ Procedure PdfBlocArmourPoints(PdfPage: TPDFPage; PdfImgShadow: Integer; X, Y: Si
       PdfPage.WriteText(ImgX + 49.5, ImgY + 29.5, IntToStr(ArmureCorps));
   end;
 
+// Petite table des mutations obtenues (CONTEXT.md §2.7, étape 9) - même style de cadre que
+// PdfBlocEncombrement (titre + lignes), une seule colonne. Seules les NbLignes mutations les
+// plus récentes sont affichées (Personnage.Mutations, ajoutées dans l'ordre d'obtention) - au-
+// delà, les plus anciennes sont omises plutôt que de faire déborder le cadre.
+Function PdfBlocMutations(PdfPage: TPDFPage; Personnage: StructurePersonnage; XGauche, XDroite, Y, HauteurLigne: Single; NbLignes: Integer; MinPolice: Integer; AsterisqueParMutation: TStringList): Single;
+  var
+    IndM, Debut: Integer;
+    PCorruptionTable: StructureCorruptionTable;
+    Texte: String;
+  begin
+    // Cadre (titre + NbLignes lignes)
+    PdfPage.DrawLine(XGauche, Y,                    XGauche, Y - ((NbLignes + 1) * HauteurLigne), 1);
+    PdfPage.DrawLine(XDroite, Y,                    XDroite, Y - ((NbLignes + 1) * HauteurLigne), 1);
+    PdfPage.DrawLine(XGauche, Y,                    XDroite, Y,                                   1);
+    PdfPage.DrawLine(XGauche, Y - HauteurLigne,      XDroite, Y - HauteurLigne,                    1);
+    PdfPage.DrawLine(XGauche, Y - ((NbLignes + 1) * HauteurLigne), XDroite, Y - ((NbLignes + 1) * HauteurLigne), 1);
+
+    // Titre
+    PdfTaillePolice(PdfPage, PdfFontBack, ConstPoliceCarlson+ConstPoliceGras, 10);
+    PdfCentre(PdfPage, XGauche + 1, XDroite, Y - HauteurLigne + 0.6, GetTexteLibelle('LAB_172'));
+
+    // Les NbLignes mutations les plus récentes (les plus anciennes, en tête du tableau, sont
+    // silencieusement omises au-delà - même principe que PdfBlocCorruptionDetail).
+    PdfTaillePolice(PdfPage, PdfFontValue, ConstPoliceArial, MinPolice);
+    Debut := Length(Personnage.Mutations) - NbLignes;
+    if Debut < 0 then
+      Debut := 0;
+    for IndM := Debut to High(Personnage.Mutations) do
+      begin
+        PCorruptionTable := ChercheCorruptionTable(Personnage.Mutations[IndM].Code);
+        // Numéro d'astérisque (CONTEXT.md §2.7, étape 9) si cette mutation a un effet
+        // structuré sur une caractéristique/compétence - même "(N)" que celui affiché sur
+        // la donnée affectée (PdfPersonnageMutationAsterisques).
+        Texte := PCorruptionTable.Libelle;
+        if AsterisqueParMutation.Values[Personnage.Mutations[IndM].Code] <> '' then
+          Texte := Texte + ' ' + AsterisqueParMutation.Values[Personnage.Mutations[IndM].Code];
+        // Libellé (+ astérisque) souvent trop long pour tenir sur une ligne dans cette colonne
+        // étroite : PdfEcrit le répartit alors sur 2 lignes - même heuristique de longueur que
+        // PdfBlocCorruptionDetail/PdfBlocTalents pour ne pas déborder sous la bordure.
+        if Length(Texte) > 18 then
+          PdfEcrit(PdfPage, XGauche + 1, XDroite - 1, Y - ((IndM - Debut + 2) * HauteurLigne) + 2,   Texte, MinPolice)
+        else
+          PdfEcrit(PdfPage, XGauche + 1, XDroite - 1, Y - ((IndM - Debut + 2) * HauteurLigne) + 0.6, Texte, MinPolice);
+      end;
+
+    Result := Y - ((NbLignes + 1) * HauteurLigne);
+  end;
+
 // Cherche la valeur du champ nommé Champ dans Enr. Renvoie une case vide (Valeur = '') si le
 // champ n'existe pas dans cet enregistrement, plutôt qu'une erreur : cela permet à une
 // préparation de ne pas renseigner un champ non pertinent pour une entrée donnée.
@@ -2886,6 +3066,10 @@ Function DessinerTableau(PdfPage: TPDFPage; const Tableau: TPdfTableau; const Do
     NbEntrees, NbChamps, IndE, IndC: Integer;
     XFinTableau, XCol, YHautLigne:   Single;
     ValeurCase:                      TPdfValeurCase;
+    // orColonne : découpage de l'annotation en plusieurs lignes empilées (une par source, ex.
+    // Talent '|' Mutation) - CONTEXT.md §2.7.
+    LignesAnnotation:                TStringList;
+    IndLigne:                        Integer;
     // orLigne uniquement
     XPos:           array of Single;
     NbLignesEntete: Integer;
@@ -2955,8 +3139,22 @@ Function DessinerTableau(PdfPage: TPDFPage; const Tableau: TPdfTableau; const Do
 
               if ValeurCase.Annotation <> '' then
                 begin
-                  YHautLigne := Tableau.Y - (IndC * Tableau.HauteurLigne);
-                  PdfEcrit(PdfPage, XCol + (Tableau.LargeurEntree * 0.5) + 0.75, XCol + Tableau.LargeurEntree + 0.75, YHautLigne + 3, ValeurCase.Annotation, 4);
+                  YHautLigne := Tableau.Y - ((IndC+1) * Tableau.HauteurLigne) + 1;
+                  LignesAnnotation := TStringList.Create;
+                  ExtractStrings(['|'], [], PChar(ValeurCase.Annotation), LignesAnnotation);
+                  // Empilement : une ligne par source, avec le même espacement que celui déjà
+                  // utilisé par PdfEcrit en interne pour ses propres cas à 2/3 lignes.
+                  case LignesAnnotation.Count of
+                    1: PdfEcrit(PdfPage, XCol + (Tableau.LargeurEntree * 0.5) + 0.75, XCol + Tableau.LargeurEntree + 0.75, YHautLigne + 1.5, LignesAnnotation[0], 4);
+                    2: begin
+                         PdfEcrit(PdfPage, XCol + (Tableau.LargeurEntree * 0.5) + 0.75, XCol + Tableau.LargeurEntree + 0.75, YHautLigne + 1.5 + 1,   LignesAnnotation[0], 4);
+                         PdfEcrit(PdfPage, XCol + (Tableau.LargeurEntree * 0.5) + 0.75, XCol + Tableau.LargeurEntree + 0.75, YHautLigne + 1.5 - 1,   LignesAnnotation[1], 4);
+                       end;
+                    else
+                       for IndLigne := 0 to LignesAnnotation.Count - 1 do
+                         PdfEcrit(PdfPage, XCol + (Tableau.LargeurEntree * 0.5) + 0.75, XCol + Tableau.LargeurEntree + 0.75, YHautLigne + 1.5 + 1.4 - (IndLigne * 1.4), LignesAnnotation[IndLigne], 4);
+                  end;
+                  LignesAnnotation.Free;
                 end;
             end;
 
@@ -3082,7 +3280,7 @@ Function DessinerTableau(PdfPage: TPDFPage; const Tableau: TPdfTableau; const Do
 // Prépare les données du tableau des Caractéristiques (10 entrées = les 10 caractéristiques,
 // dans l'ordre StructureAttribut.OrdreAttribut ; 6 champs par entrée : Code, Initial, Improv,
 // Advances, Current, Bonus). Aucun dessin ici, uniquement du calcul/lecture de données.
-Function PdfPreparerRecordSetCaracteristiques(Personnage: StructurePersonnage; PMetier: StructureMetier): TPdfRecordSet;
+Function PdfPreparerRecordSetCaracteristiques(Personnage: StructurePersonnage; PMetier: StructureMetier; AnnotationMutation: TStringList): TPdfRecordSet;
   var
     PAttribut:       StructureAttribut;
     PMetierAttribut: StructureMetierAttribut;
@@ -3096,6 +3294,16 @@ Function PdfPreparerRecordSetCaracteristiques(Personnage: StructurePersonnage; P
       begin
         PAttribut      := ListeAttribut[Ind-1];
         AttributDonnee := PdfPersonnageAttribut(Personnage, PAttribut.CodeAttribut, Bonus);
+        // Effets à delta pur des mutations obtenues (CONTEXT.md §2.7, étape 9) - même principe
+        // que l'annotation armure sur les compétences, concaténée à l'annotation existante.
+        // Séparateur '|' : permet à DessinerTableau d'afficher chaque source sur sa propre
+        // ligne plutôt que de laisser PdfEcrit couper le texte concaténé n'importe où.
+        if AnnotationMutation.Values[PAttribut.CodeAttribut] <> '' then
+          begin
+            if Bonus <> '' then
+              Bonus := Bonus + '|';
+            Bonus := Bonus + AnnotationMutation.Values[PAttribut.CodeAttribut];
+          end;
 
         SetLength(Result[Ind-1].Valeurs, 6);
 
@@ -3337,6 +3545,9 @@ Procedure PdfPersonnageCreationFeldo2P(Personnage: StructurePersonnage);
     ListPage:        TStringList;
     ListAsterisqueArmure: TStringList;
     AsterisqueParEquipement: TStringList;
+    ListAsterisqueMutation: TStringList;
+    AsterisqueParMutation:  TStringList;
+    AsterisqueFinalMutation: Integer;
     Comp:            String;
     PCompetence:     StructureCompetence;
     ValStat:         String;
@@ -3576,6 +3787,10 @@ Procedure PdfPersonnageCreationFeldo2P(Personnage: StructurePersonnage);
     PMetierNiveau  := ChercheMetierNiveau(Personnage.MetierEnCours.CodeMetier, Personnage.MetierEnCours.NiveauMetier);
     PRaceAttribut  := ChercheRaceAttribut(Personnage.Race, ConstCaracMouvement);
     Mouv           := StrToInt(PRaceAttribut.CalculRace);
+    // Effets à delta pur des mutations obtenues sur le Mouvement (CONTEXT.md §2.7, étape 8)
+    // - même fonction que pour les autres attributs, ConstCaracMouvement ('ATTR_Move') utilisé
+    // comme un code d'attribut de plus.
+    Mouv           := Mouv + PersonnageMutationAttributModif(Personnage, ConstCaracMouvement);
 
     Chance         := 0;
     Determine      := 0;
@@ -3650,6 +3865,13 @@ Procedure PdfPersonnageCreationFeldo2P(Personnage: StructurePersonnage);
     ListPage       := TStringList.Create;
     PdfPersonnageCompetenceTri(ListPage);
 
+    // Astérisques des mutations (CONTEXT.md §2.7, étape 9) - calculés tôt, avant le tableau
+    // Caractéristiques qui en a besoin (contrairement aux armures, qui ne touchent que des
+    // compétences et sont calculées plus tard, juste avant les tableaux de compétences).
+    // Départ à Personnage.Asterisque (même baseline que les talents) ; les armures enchaînent
+    // ensuite après AsterisqueFinalMutation, pour ne jamais réutiliser un numéro déjà pris.
+    ListAsterisqueMutation := PdfPersonnageMutationAsterisques(Personnage, Personnage.Asterisque, AsterisqueParMutation, AsterisqueFinalMutation);
+
     // Bloc Entête (extrait dans PdfBlocEntete, CONTEXT.md §2.4)
     DessinDebutHautCarac := PdfBlocEntete(PdfPage, Personnage, PRace, PMetier, PMetierNiveau, LocData,
       DessinDebColG, DessinFinEntete, DessinDebutHautEntete, DessinHauteurEntete, DessinNbLigEntete, MinPolice) - 3;
@@ -3670,7 +3892,7 @@ Procedure PdfPersonnageCreationFeldo2P(Personnage: StructurePersonnage);
     TableauCarac.Champs[4].Libelle := GetTexteLibelle('PDF_CHARAC3_CURRENT');  TableauCarac.Champs[4].Champ := 'Current';
     TableauCarac.Champs[5].Libelle := GetTexteLibelle('PDF_CHARAC3_BONUS');    TableauCarac.Champs[5].Champ := 'Bonus';
 
-    DonneesCarac := PdfPreparerRecordSetCaracteristiques(Personnage, PMetier);
+    DonneesCarac := PdfPreparerRecordSetCaracteristiques(Personnage, PMetier, ListAsterisqueMutation);
     DessinDebutHautComp := DessinerTableau(PdfPage, TableauCarac, DonneesCarac) - 3;
     DessinDebutHautComg := DessinDebutHautComp;
 
@@ -3729,7 +3951,18 @@ Procedure PdfPersonnageCreationFeldo2P(Personnage: StructurePersonnage);
     // Compétences de la page 1, car Personnage.Equipement est disponible dès le départ (pas
     // besoin d'attendre que la page 2 soit dessinée). Libérée après le tableau des
     // compétences groupées, seul autre endroit où elle sert.
-    ListAsterisqueArmure := PdfPersonnageArmureAsterisques(Personnage, AsterisqueParEquipement);
+    // Enchaîne après AsterisqueFinalMutation (calculé plus haut) pour ne jamais réutiliser un
+    // numéro déjà pris par une mutation à effet sur une caractéristique.
+    ListAsterisqueArmure := PdfPersonnageArmureAsterisques(Personnage, AsterisqueFinalMutation, AsterisqueParEquipement);
+
+    // Fusionne les annotations de compétence des mutations (CONTEXT.md §2.7, étape 9) dans
+    // ListAsterisqueArmure, seule TStringList lue par PdfPreparerRecordSetCompetencesBase/
+    // Groupees (Values[Comp] concaténé à l'annotation existante) - Name=CodeAttribut restées
+    // dans ListAsterisqueMutation (utilisées plus haut pour Caractéristiques) n'y trouvent
+    // simplement jamais de correspondance côté compétence, sans effet de bord.
+    For Ind := 0 to ListAsterisqueMutation.Count - 1 do
+      ListAsterisqueArmure.Values[ListAsterisqueMutation.Names[Ind]] :=
+        ListAsterisqueArmure.Values[ListAsterisqueMutation.Names[Ind]] + ListAsterisqueMutation.ValueFromIndex[Ind];
 
     DonneesComp := PdfPreparerRecordSetCompetencesBase(Personnage, PMetier, ListPage, ListAsterisqueArmure, TotalEsquive, TotalCalme, TotalResitance, TotalCommandement, TotalIntuition, ListPris);
     ListPage.Destroy;
@@ -3904,6 +4137,17 @@ Procedure PdfPersonnageCreationFeldo2P(Personnage: StructurePersonnage);
     // 4mm vers la gauche par rapport au bloc Encombrement).
     DessinHautArmourPoints := DessinDebutHautEnc - ((DessinNbLigEnc + 1) * DessinHauteurEnc) - 3;
     PdfBlocArmourPoints(PdfPage, PdfImgShadow, DessinDebColG, DessinHautArmourPoints, ArmureTete, ArmureBras, ArmureCorps, ArmureJambe, ArmureBouclier);
+
+    // Table des mutations obtenues (CONTEXT.md §2.7, étape 9) - à droite d'Armour Points, même
+    // écart de 3mm que partout ailleurs entre deux blocs de la page ; XDroite réutilise
+    // DessinLargeurArm (bord droit déjà établi pour Armure/Équipement plus haut sur la page)
+    // plutôt qu'une nouvelle largeur arbitraire. Capacité fixe à 3 lignes, demandée par Nono.
+    PdfBlocMutations(PdfPage, Personnage, DessinDebColG + 63 + 3, DessinLargeurArm, DessinHautArmourPoints, DessinHauteurEnc, 3, MinPolice, AsterisqueParMutation);
+    // Dernière utilisation de ListAsterisqueMutation/AsterisqueParMutation sur cette page -
+    // libérées ici (même moment que ListAsterisqueArmure/AsterisqueParEquipement, juste avant,
+    // après leur dernier usage respectif).
+    ListAsterisqueMutation.Destroy;
+    AsterisqueParMutation.Destroy;
 
     // Dessin Blessure
     DessinDebutHautBle   := DessinDebutHautEnc;

@@ -301,14 +301,15 @@ var
   LigAttRace:     Integer = 1;
   LigAttLance:    Integer = 2;
   LigAttTalent:   Integer = 3;
-  LigAttBase:     Integer = 4;
-  LigAttImage:    Integer = 5;
-  LigAttBonus:    Integer = 6;
-  LigAttTotal:    Integer = 7;
-  LigAttXp:       Integer = 8;
-  LigAttActuel:   Integer = 9;
-  LigAttCode:     Integer =10;
-  LigAttAsterisc: Integer =11;
+  LigAttMutation: Integer = 4;
+  LigAttBase:     Integer = 5;
+  LigAttImage:    Integer = 6;
+  LigAttBonus:    Integer = 7;
+  LigAttTotal:    Integer = 8;
+  LigAttXp:       Integer = 9;
+  LigAttActuel:   Integer =10;
+  LigAttCode:     Integer =11;
+  LigAttAsterisc: Integer =12;
   ColAttLib:      Integer = 1;
   ColAttCC:       Integer = 2;
   ColAttCT:       Integer = 3;
@@ -332,14 +333,15 @@ var
   ColComp35:      Integer = 6;
   ColComp40:      Integer = 7;
   ColCompWork:    Integer = 8;
-  ColCompBonus:   Integer = 9;
-  ColCompTotal:   Integer =10;
-  ColCompStat:    Integer =11;
-  ColCompXp:      Integer =12;
-  ColCompActuel:  Integer =13;
-  ColCompTravail: Integer =14;
-  ColCompAsterisc:Integer =15;
-  ColCompTalent:  Integer =16;
+  ColCompMutation:Integer = 9;
+  ColCompBonus:   Integer =10;
+  ColCompTotal:   Integer =11;
+  ColCompStat:    Integer =12;
+  ColCompXp:      Integer =13;
+  ColCompActuel:  Integer =14;
+  ColCompTravail: Integer =15;
+  ColCompAsterisc:Integer =16;
+  ColCompTalent:  Integer =17;
   // talent
   ColTalCode:     Integer = 1;
   ColTalLib:      Integer = 3;
@@ -624,13 +626,15 @@ begin
 
   TabTalent.ColWidths[5]               := Largeur;
 
-  TabCompetence.ColWidths[ColComp35]   := Largeur;
-  TabCompetence.ColWidths[ColComp40]   := Largeur;
-  TabCompetence.ColWidths[ColCompWork] := Largeur;
+  TabCompetence.ColWidths[ColComp35]      := Largeur;
+  TabCompetence.ColWidths[ColComp40]      := Largeur;
+  TabCompetence.ColWidths[ColCompWork]    := Largeur;
+  TabCompetence.ColWidths[ColCompMutation]:= Largeur;
 
-  TabAttribut.RowHeights[LigAttRace]   := Hauteur;
-  TabAttribut.RowHeights[LigAttLance]  := Hauteur;
-  TabAttribut.RowHeights[LigAttTalent] := Hauteur;
+  TabAttribut.RowHeights[LigAttRace]     := Hauteur;
+  TabAttribut.RowHeights[LigAttLance]    := Hauteur;
+  TabAttribut.RowHeights[LigAttTalent]   := Hauteur;
+  TabAttribut.RowHeights[LigAttMutation] := Hauteur;
 
   TabAttribut.ColWidths[ColAttDestin]  := Largeur;
   TabAttribut.ColWidths[ColAttResil]   := Largeur;
@@ -665,7 +669,7 @@ procedure TWinPersonnages.FormClose(Sender: TObject;
   var CloseAction: TCloseAction);
 begin
   NettoyerElementsFenetre(self);
-  EffaceDonnee(TabAttribut, 12);
+  EffaceDonnee(TabAttribut, 13);
   EffaceDonnee(TabCompetence, 1);
   EffaceDonnee(TabTalent, 1);
   EffaceDonnee(TabCarriere, 1);
@@ -686,7 +690,7 @@ procedure TWinPersonnages.EffaceDonnee(Tableau: TStringGrid; NbLig: Integer);
 
 procedure TWinPersonnages.ButtonHistoriqueClick(Sender: TObject);
 begin
-  EffaceDonnee(TabAttribut, 12);
+  EffaceDonnee(TabAttribut, 13);
   EffaceDonnee(TabCompetence, 1);
   EffaceDonnee(TabTalent, 1);
   EffaceDonnee(TabCarriere, 1);
@@ -1335,7 +1339,7 @@ begin
   TabAttribut.Clear;
   TabAttribut.Options          := TabAttribut.Options + [goEditing, goAlwaysShowEditor];
   TabAttribut.ColCount         := 1;
-  TabAttribut.RowCount         := 12;
+  TabAttribut.RowCount         := 13;
   For I := 0 to 13 do
     begin
       if TabAttribut.Columns.Count <= I then
@@ -1358,6 +1362,7 @@ begin
   TabAttribut.Cells[ColAttLib, LigAttRace]    := GetTexteLibelle('LAB_042');
   TabAttribut.Cells[ColAttLib, LigAttLance]   := GetTexteLibelle('LAB_022');
   TabAttribut.Cells[ColAttLib, LigAttTalent]  := GetTexteLibelle('LAB_007');
+  TabAttribut.Cells[ColAttLib, LigAttMutation]:= GetTexteLibelle('LAB_172');
   TabAttribut.Cells[ColAttLib, LigAttBase]    := GetTexteLibelle('LAB_043');
   TabAttribut.Cells[ColAttLib, LigAttImage]   := GetTexteLibelle('LAB_019');
   TabAttribut.Cells[ColAttLib, LigAttBonus]   := GetTexteLibelle('LAB_040');
@@ -1368,6 +1373,7 @@ begin
   TabAttribut.RowHeights[LigAttRace]    := 1;
   TabAttribut.RowHeights[LigAttLance]   := 1;
   TabAttribut.RowHeights[LigAttTalent]  := 1;
+  TabAttribut.RowHeights[LigAttMutation]:= 1;
   TabAttribut.RowHeights[LigAttXp]      := 1;
   TabAttribut.RowHeights[LigAttImage]   := 1;
   TabAttribut.RowHeights[LigAttActuel]  := 1;
@@ -1416,7 +1422,7 @@ begin
 
   // Mise en forme du tableau des Compétences
   TabCompetence.Options                   := TabCompetence.Options + [goEditing, goAlwaysShowEditor];
-  TabCompetence.ColCount                  := 17;
+  TabCompetence.ColCount                  := 18;
   TabCompetence.RowCount                  := 1;
   TabCompetence.ColWidths[0]              := 20;
   TabCompetence.ColWidths[ColCompCode]    := 0;
@@ -1434,6 +1440,8 @@ begin
   TabCompetence.ColWidths[ColComp40]      := 0;
   TabCompetence.Cells[ColCompWork, 0]     := GetTexteLibelle('LAB_006');
   TabCompetence.ColWidths[ColCompWork]    := 0;
+  TabCompetence.Cells[ColCompMutation, 0] := GetTexteLibelle('LAB_172');
+  TabCompetence.ColWidths[ColCompMutation]:= 0;
   TabCompetence.Cells[ColCompBonus, 0]    := GetTexteLibelle('LAB_034');
   TabCompetence.ColWidths[ColCompBonus]   := 50;
   TabCompetence.Cells[ColCompTotal, 0]    := GetTexteLibelle('LAB_021');
@@ -2037,7 +2045,8 @@ procedure TWinPersonnages.CalculTotaux();
       begin
         Total  := StrToIntdef(TabAttribut.Cells[IndCol, LigAttRace],0) +
                   StrToIntdef(TabAttribut.Cells[IndCol, LigAttLance],0)+
-                  StrToIntdef(TabAttribut.Cells[IndCol, LigAttTalent],0);
+                  StrToIntdef(TabAttribut.Cells[IndCol, LigAttTalent],0)+
+                  StrToIntdef(TabAttribut.Cells[IndCol, LigAttMutation],0);
         TabAttribut.Cells[IndCol, LigAttBase] := IntToStr(Total);
         Total  := Total +
                   StrToIntdef(TabAttribut.Cells[IndCol, LigAttBonus],0);
@@ -2057,11 +2066,17 @@ procedure TWinPersonnages.CalculTotaux();
                 break
               end;
           end;
+        // ColCompMutation volontairement absent de ColCompBonus : ColCompBonus correspond aux
+        // avancements réellement achetés (utilisé ailleurs, ex. ligne ~3814, pour calculer le
+        // coût Xp / combien de compétences ont été augmentées) - un effet de mutation n'est
+        // pas un avancement acheté, il ne doit compter que dans le Total. Signalé par Nono le
+        // 17/08/2026 (même souci repéré côté PDF, corrigé en même temps dans pdfpersonnage.pas).
         TabCompetence.Cells[ColCompBonus, IndLig] := IntToStr(StrToIntDef(TabCompetence.Cells[ColComp35, IndLig],0) +
                                                               StrToIntDef(TabCompetence.Cells[ColComp40, IndLig],0) +
                                                               StrToIntDef(TabCompetence.Cells[ColCompWork, IndLig],0));
         TabCompetence.Cells[ColCompTotal, IndLig] := IntToStr(StrToIntDef(TabCompetence.Cells[ColCompBonus, IndLig],0) +
-                                                              StrToIntDef(TabCompetence.Cells[ColCompAtt, IndLig],0));
+                                                              StrToIntDef(TabCompetence.Cells[ColCompAtt, IndLig],0) +
+                                                              StrToIntDef(TabCompetence.Cells[ColCompMutation, IndLig],0));
       end;
 
   end;
@@ -2435,6 +2450,7 @@ var
   Ind:                   Integer;
   Trouve:                Boolean;
   PersonnageCorruption:  StructurePersonnageCorruption;
+  ValMutation:           Integer;
 
 begin
 
@@ -2609,6 +2625,16 @@ begin
           TalentAttribut(PTalent.Attribut);
         end;
 
+  // Mutation (CONTEXT.md §2.7) - effets à delta pur des mutations obtenues, même fonction
+  // que celle utilisée pour le PDF (PersonnageMutationAttributModif, chargepersonnage.pas)
+  // pour rester cohérent entre l'écran et le PDF.
+  for IndTab := 1 to TabAttribut.ColCount - 1 do
+    begin
+      ValMutation := PersonnageMutationAttributModif(Personnage, TabAttribut.Cells[IndTab, LigAttCode]);
+      if ValMutation <> 0 then
+        TabAttribut.Cells[IndTab, LigAttMutation] := IntToStr(ValMutation);
+    end;
+
   // Compétence métier
   for PersonnageCompetence in Personnage.MetierCompetence do
     for Ind := 1 to TabCompetence.RowCount - 1 do
@@ -2746,6 +2772,16 @@ begin
       TabAugmentationMjXp.Cells[ColAugmMjXpFin, Lig]   := IntToStr(PersonnageXpTalent.Fin);
       TabAugmentationMjXp.Cells[ColAugmMjXpCout, Lig]  := IntToStr(CalculExperience(ConstXmlTalent, PersonnageXpTalent.Debut, PersonnageXpTalent.Fin, '', ''));
       TabAugmentationMjXp.Cells[ColAugmMjXpReel, Lig]  := IntToStr(PersonnageXpTalent.CoutXp);
+    end;
+
+  // Mutation (compétences, CONTEXT.md §2.7) - même fonction que celle utilisée pour le PDF
+  // (PersonnageMutationCompetenceModif, chargepersonnage.pas) pour rester cohérent entre
+  // l'écran et le PDF.
+  for Ind := 1 to TabCompetence.RowCount - 1 do
+    begin
+      ValMutation := PersonnageMutationCompetenceModif(Personnage, TabCompetence.Cells[ColCompCode, Ind]);
+      if ValMutation <> 0 then
+        TabCompetence.Cells[ColCompMutation, Ind] := IntToStr(ValMutation);
     end;
 
   AfficheImageMetier();

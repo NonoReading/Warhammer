@@ -10,7 +10,8 @@ uses
   Unitcalcul, ChargeRace, ChargeMetier, ChargeAttribut, ChargeCompetence,
   ChargeTalent, ChargeArme, ChargeArmure, ChargeArmureSimplifie,
   ChargeTalentAttributModif, ChargeTalentCompetenceModif,
-  ChargeSort, ChargeCorruptionTable, XmlExportImport;
+  ChargeSort, ChargeCorruptionTable, ChargeCorruptionAttributModif,
+  ChargeCorruptionCompetenceModif, ChargeCorruptionArmureModif, XmlExportImport;
 
 Type
   StructurePersonnageAttribut   = Record
@@ -147,6 +148,14 @@ Type
   function PersonnageXmlFichierActuel(const Directory: string): string;
   function PersonnageLivre(ListeLivre: String; Livre: String): string;
   Function PersonnageTalentAsterisque(var Personnage:StructurePersonnage; CodeTalent: String): Integer;
+  // Effets à delta pur des mutations obtenues (CONTEXT.md §2.7, étape 8) - somme, pour un code
+  // d'attribut/compétence donné, tous les <ModifyCarac>/<ModifySkill> des mutations présentes
+  // dans Personnage.Mutations. Contrairement à ListTalentAttributModif/ListArmureBonusModif
+  // (annotation d'affichage uniquement), ce sont ici de vrais modificateurs additionnés au Total
+  // (PdfPersonnageAttribut/PdfPersonnageCompetence, pdfpersonnage.pas).
+  Function PersonnageMutationAttributModif(Personnage: StructurePersonnage; CodeAttribut: String): Integer;
+  Function PersonnageMutationCompetenceModif(Personnage: StructurePersonnage; CodeCompetence: String): Integer;
+  Function PersonnageMutationArmureModif(Personnage: StructurePersonnage; CodeLocalisation: String): Integer;
 
 implementation
 
@@ -1127,6 +1136,75 @@ begin
   Result := Asterisque;
 
 end;
+
+Function PersonnageMutationAttributModif(Personnage: StructurePersonnage; CodeAttribut: String): Integer;
+  var
+    PersonnageMutation: StructurePersonnageMutation;
+    indiceModif:        Integer;
+  begin
+    Result := 0;
+    for PersonnageMutation in Personnage.Mutations do
+      for indiceModif := 0 to (ListCorruptionAttributModif.Count - 1) do
+        if CompareRechercheValeur(ListCorruptionAttributModif[indiceModif].CodeCorruption, PersonnageMutation.Code)
+           and CompareRechercheValeur(ListCorruptionAttributModif[indiceModif].CodeAttribut, CodeAttribut) then
+          Result := Result + ListCorruptionAttributModif[indiceModif].Valeur;
+  end;
+
+Function PersonnageMutationCompetenceModif(Personnage: StructurePersonnage; CodeCompetence: String): Integer;
+  var
+    PersonnageMutation: StructurePersonnageMutation;
+    indiceModif:        Integer;
+    PCompetence:        StructureCompetence;
+    CodeGenerique:      String;
+    AttributCompetence: String;
+  begin
+    Result        := 0;
+    // Certains effets de mutation visent une FAMILLE de compétences (ex. "-10 to all Language
+    // Tests", CORPHY_013) plutôt qu'une compétence précise - même mécanisme que les sous-
+    // compétences ailleurs (ex. PdfPersonnageCompetence) : si CodeCompetence est une sous-
+    // compétence (ex. RULES-COMPLANG_BRET), on teste aussi sa forme générique (COMPLANG_*).
+    CodeGenerique := '';
+    PCompetence   := ChercheCompetence(CodeCompetence);
+    if PCompetence.SousCompetence then
+      CodeGenerique := ExtractStringBefore(PCompetence.CodeCompetence, ValeurSousCompetence) + ValeurGenerique;
+    // Une sous-compétence (ex. RULES-COMPLANG_BRET) n'a pas son propre <Attribut> dans le XML,
+    // seule l'entrée générique (RULES-COMPLANG_*) l'a - on va le chercher là si besoin.
+    AttributCompetence := PCompetence.CodeAttribut;
+    if (AttributCompetence = '') and (CodeGenerique <> '') then
+      AttributCompetence := ChercheCompetence(CodeGenerique).CodeAttribut;
+    for PersonnageMutation in Personnage.Mutations do
+      for indiceModif := 0 to (ListCorruptionCompetenceModif.Count - 1) do
+        if CompareRechercheValeur(ListCorruptionCompetenceModif[indiceModif].CodeCorruption, PersonnageMutation.Code)
+           and (CompareRechercheValeur(ListCorruptionCompetenceModif[indiceModif].CodeCompetence, CodeCompetence)
+                or ((CodeGenerique <> '') and CompareRechercheValeur(ListCorruptionCompetenceModif[indiceModif].CodeCompetence, CodeGenerique))) then
+          Result := Result + ListCorruptionCompetenceModif[indiceModif].Valeur;
+
+    // Effets visant TOUTES les compétences d'un attribut de rattachement (ex. "-20 to all
+    // Fellowship Tests", CORPHY_011) - sans toucher l'attribut lui-même (CONTEXT.md §2.7,
+    // étape 8). <ModifySkillAttribut>, liste et comparaison séparées de celles ci-dessus.
+    for PersonnageMutation in Personnage.Mutations do
+      for indiceModif := 0 to (ListCorruptionCompetenceAttributModif.Count - 1) do
+        if CompareRechercheValeur(ListCorruptionCompetenceAttributModif[indiceModif].CodeCorruption, PersonnageMutation.Code)
+           and (AttributCompetence <> '')
+           and CompareRechercheValeur(ListCorruptionCompetenceAttributModif[indiceModif].CodeAttribut, AttributCompetence) then
+          Result := Result + ListCorruptionCompetenceAttributModif[indiceModif].Valeur;
+  end;
+
+Function PersonnageMutationArmureModif(Personnage: StructurePersonnage; CodeLocalisation: String): Integer;
+  // Effets de mutation donnant des Points d'Armure (ex. "+2 Armour Points to all locations",
+  // CORPHY_012/016/017, CONTEXT.md §2.7, étape 8) - PDF uniquement, réutilise les 4
+  // emplacements de l'armure portée (BonusTete/BonusBras/BonusCorps/BonusJambes).
+  var
+    PersonnageMutation: StructurePersonnageMutation;
+    indiceModif:        Integer;
+  begin
+    Result := 0;
+    for PersonnageMutation in Personnage.Mutations do
+      for indiceModif := 0 to (ListCorruptionArmureModif.Count - 1) do
+        if CompareRechercheValeur(ListCorruptionArmureModif[indiceModif].CodeCorruption, PersonnageMutation.Code)
+           and CompareRechercheValeur(ListCorruptionArmureModif[indiceModif].CodeLocalisation, CodeLocalisation) then
+          Result := Result + ListCorruptionArmureModif[indiceModif].Valeur;
+  end;
 
 end.
 

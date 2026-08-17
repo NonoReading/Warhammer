@@ -22,6 +22,8 @@ uses
   ChargeTalentAttributModif, ChargeTalentCompetenceModif,
   ChargeTalentCompetenceAjoute, ChargeRaceCorruptionCreation,
   ChargeCorruptionTable, ChargeRaceOpinion, ChargeArmureBonusModif,
+  ChargeCorruptionAttributModif, ChargeCorruptionCompetenceModif,
+  ChargeCorruptionArmureModif,
   CustomDrawn_Common, BCButton, BCLabel, fpTTF,
   PdfPersonnage, XmlExportImport, fppdf, WinLivre;
 
@@ -375,6 +377,10 @@ procedure TMenu.ChargerLivre(ForceMaJ: Boolean; ForceLivre: String);
         ListTalentCompetenceModif.Clear;
         ListTalentCompetenceAjoute.Clear;
         ListRaceOpinion.Clear;
+        ListCorruptionAttributModif.Clear;
+        ListCorruptionCompetenceModif.Clear;
+        ListCorruptionCompetenceAttributModif.Clear;
+        ListCorruptionArmureModif.Clear;
       end;
 
     // chercher les livres
@@ -535,6 +541,10 @@ procedure TMenu.FormCreate(Sender: TObject);
        ListTalentCompetenceAjoute   := TListTalentCompetenceAjoute.Create;
        ListRaceOpinion              := TListRaceOpinion.Create;
        ListArmureBonusModif         := TListArmureBonusModif.Create;
+       ListCorruptionAttributModif  := TListCorruptionAttributModif.Create;
+       ListCorruptionCompetenceModif:= TListCorruptionCompetenceModif.Create;
+       ListCorruptionCompetenceAttributModif := TListCorruptionCompetenceAttributModif.Create;
+       ListCorruptionArmureModif    := TListCorruptionArmureModif.Create;
 
        // chercher les livres
        directoryPath := GetCurrentDir + ConstCheminLivre;

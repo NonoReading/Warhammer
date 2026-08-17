@@ -148,6 +148,8 @@ Const
       ConstXmlEyeColors                 = 'EyeColors';
       ConstXmlModifieAttribut           = 'ModifyCarac';
       ConstXmlModifieCompetence         = 'ModifySkill';
+      ConstXmlModifieCompetenceAttribut = 'ModifySkillAttribut';
+      ConstXmlModifieArmure             = 'ModifArmour';
       ConstXmlAjouteCompetence          = 'AddSkill';
       ConstXmlOpinions                  = 'OPINIONS';
       ConstXmlOpinion                   = 'Opinion';

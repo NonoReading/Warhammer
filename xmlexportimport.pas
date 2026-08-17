@@ -16,7 +16,8 @@ uses
   ChargeMetierSousMetier, ChargeTraduction, ChargeArmureSimplifie, ChargeLivre,
   ChargeRaceCorruptionCreation, ChargeCorruptionTable, ChargeTalentAttributModif,
   ChargeTalentCompetenceModif, ChargeTalentCompetenceAjoute, ChargeRaceOpinion,
-  ChargeArmureBonusModif,
+  ChargeArmureBonusModif, ChargeCorruptionAttributModif, ChargeCorruptionCompetenceModif,
+  ChargeCorruptionArmureModif,
   XMLRead, DOM, Unitcalcul,  Dialogs, strutils;
 
 Procedure XmlExportBook(Livre: String; Langue: String);
@@ -866,6 +867,10 @@ Procedure XmlImport(FileName: String; OnlyPrimary: Boolean; OnlyCode: Boolean);
     PTalentCompetenceModif:   StructureTalentCompetenceModif;
     PTalentCompetenceAjoute:  StructureTalentCompetenceAjoute;
     PArmureBonusModif:        StructureArmureBonusModif;
+    PCorruptionAttributModif:   StructureCorruptionAttributModif;
+    PCorruptionCompetenceModif: StructureCorruptionCompetenceModif;
+    PCorruptionCompetenceAttributModif: StructureCorruptionCompetenceAttributModif;
+    PCorruptionArmureModif:    StructureCorruptionArmureModif;
     PLivre:                   StructureLivre;
     PRaceOpinion:             StructureRaceOpinion;  // ✨ NOUVEAU
     Langue:                   String;
@@ -2195,8 +2200,70 @@ Procedure XmlImport(FileName: String; OnlyPrimary: Boolean; OnlyCode: Boolean);
                       PCorruptionTable.Livre          := Livre;
                       PCorruptionTable.TypeCorruption := CorruptionPhysique;
                       PCorruptionTable.Code           := RemoveQuotes(UTF8Encode(NodeNv2.Attributes.GetNamedItem(ConstXmlData).NodeValue));
-                      PCorruptionTable.Libelle        := RemoveQuotes(UTF8Encode(NodeNv2.FindNode(ConstXmlLibelle).TextContent));
-                      PCorruptionTable.Effet          := RemoveQuotes(UTF8Encode(NodeNv2.FindNode(ConstXmlEffet).TextContent));
+
+                      // Itère les enfants (au lieu de FindNode) pour pouvoir accueillir, en plus de
+                      // Libelle/Effet, zéro ou plusieurs <ModifyCarac name="...">/<ModifySkill name="...">
+                      // optionnels (effets à delta pur, CONTEXT.md §2.7 étape 8) - même mécanisme que
+                      // <Modifier name="..."> sous <BonusMalus> pour les armures.
+                      Node := NodeNv2.FirstChild;
+                      while Assigned(Node) do
+                        begin
+                          case Node.NodeName of
+                            ConstXmlLibelle:
+                              PCorruptionTable.Libelle := RemoveQuotes(UTF8Encode(Node.TextContent));
+                            ConstXmlEffet:
+                              PCorruptionTable.Effet   := RemoveQuotes(UTF8Encode(Node.TextContent));
+                            ConstXmlModifieAttribut:
+                              begin
+                                PCorruptionAttributModif.Livre          := Livre;
+                                PCorruptionAttributModif.CodeCorruption := PCorruptionTable.Code;
+                                PCorruptionAttributModif.CodeAttribut   := RemoveQuotes(UTF8Encode(Node.Attributes.GetNamedItem(ConstXmlData).NodeValue));
+                                PCorruptionAttributModif.Valeur         := StrToInt(RemoveQuotes(UTF8Encode(Node.TextContent)));
+                                if LangueDef = ConstAnglais then
+                                   begin
+                                    ListCorruptionAttributModif.add(PCorruptionAttributModif);
+                                    inc(NbCorruptionAttributModif);
+                                   end;
+                              end;
+                            ConstXmlModifieCompetence:
+                              begin
+                                PCorruptionCompetenceModif.Livre          := Livre;
+                                PCorruptionCompetenceModif.CodeCorruption := PCorruptionTable.Code;
+                                PCorruptionCompetenceModif.CodeCompetence := RemoveQuotes(UTF8Encode(Node.Attributes.GetNamedItem(ConstXmlData).NodeValue));
+                                PCorruptionCompetenceModif.Valeur         := StrToInt(RemoveQuotes(UTF8Encode(Node.TextContent)));
+                                if LangueDef = ConstAnglais then
+                                   begin
+                                    ListCorruptionCompetenceModif.add(PCorruptionCompetenceModif);
+                                    inc(NbCorruptionCompetenceModif);
+                                   end;
+                              end;
+                            ConstXmlModifieCompetenceAttribut:
+                              begin
+                                PCorruptionCompetenceAttributModif.Livre          := Livre;
+                                PCorruptionCompetenceAttributModif.CodeCorruption := PCorruptionTable.Code;
+                                PCorruptionCompetenceAttributModif.CodeAttribut   := RemoveQuotes(UTF8Encode(Node.Attributes.GetNamedItem(ConstXmlData).NodeValue));
+                                PCorruptionCompetenceAttributModif.Valeur         := StrToInt(RemoveQuotes(UTF8Encode(Node.TextContent)));
+                                if LangueDef = ConstAnglais then
+                                   begin
+                                    ListCorruptionCompetenceAttributModif.add(PCorruptionCompetenceAttributModif);
+                                    inc(NbCorruptionCompetenceAttributModif);
+                                   end;
+                              end;
+                            ConstXmlModifieArmure:
+                              begin
+                                PCorruptionArmureModif.Livre            := Livre;
+                                PCorruptionArmureModif.CodeCorruption   := PCorruptionTable.Code;
+                                PCorruptionArmureModif.CodeLocalisation := RemoveQuotes(UTF8Encode(Node.Attributes.GetNamedItem(ConstXmlData).NodeValue));
+                                PCorruptionArmureModif.Valeur           := StrToInt(RemoveQuotes(UTF8Encode(Node.TextContent)));
+                                if LangueDef = ConstAnglais then
+                                   begin
+                                    ListCorruptionArmureModif.add(PCorruptionArmureModif);
+                                    inc(NbCorruptionArmureModif);
+                                   end;
+                              end;
+                          end;
+                          Node := Node.NextSibling;
+                        end;
 
                       PTraduction              := InitTrad(ConstPCorruptionTable, PCorruptionTable.Code, '', PCorruptionTable.Livre);
                       PTraduction.Libelle      := PCorruptionTable.Libelle;
@@ -2224,8 +2291,67 @@ Procedure XmlImport(FileName: String; OnlyPrimary: Boolean; OnlyCode: Boolean);
                       PCorruptionTable.Livre          := Livre;
                       PCorruptionTable.TypeCorruption := CorruptionMentale;
                       PCorruptionTable.Code           := RemoveQuotes(UTF8Encode(NodeNv2.Attributes.GetNamedItem(ConstXmlData).NodeValue));
-                      PCorruptionTable.Libelle        := RemoveQuotes(UTF8Encode(NodeNv2.FindNode(ConstXmlLibelle).TextContent));
-                      PCorruptionTable.Effet          := RemoveQuotes(UTF8Encode(NodeNv2.FindNode(ConstXmlEffet).TextContent));
+
+                      // Même itération que la table Physique ci-dessus (ModifyCarac/ModifySkill optionnels).
+                      Node := NodeNv2.FirstChild;
+                      while Assigned(Node) do
+                        begin
+                          case Node.NodeName of
+                            ConstXmlLibelle:
+                              PCorruptionTable.Libelle := RemoveQuotes(UTF8Encode(Node.TextContent));
+                            ConstXmlEffet:
+                              PCorruptionTable.Effet   := RemoveQuotes(UTF8Encode(Node.TextContent));
+                            ConstXmlModifieAttribut:
+                              begin
+                                PCorruptionAttributModif.Livre          := Livre;
+                                PCorruptionAttributModif.CodeCorruption := PCorruptionTable.Code;
+                                PCorruptionAttributModif.CodeAttribut   := RemoveQuotes(UTF8Encode(Node.Attributes.GetNamedItem(ConstXmlData).NodeValue));
+                                PCorruptionAttributModif.Valeur         := StrToInt(RemoveQuotes(UTF8Encode(Node.TextContent)));
+                                if LangueDef = ConstAnglais then
+                                   begin
+                                    ListCorruptionAttributModif.add(PCorruptionAttributModif);
+                                    inc(NbCorruptionAttributModif);
+                                   end;
+                              end;
+                            ConstXmlModifieCompetence:
+                              begin
+                                PCorruptionCompetenceModif.Livre          := Livre;
+                                PCorruptionCompetenceModif.CodeCorruption := PCorruptionTable.Code;
+                                PCorruptionCompetenceModif.CodeCompetence := RemoveQuotes(UTF8Encode(Node.Attributes.GetNamedItem(ConstXmlData).NodeValue));
+                                PCorruptionCompetenceModif.Valeur         := StrToInt(RemoveQuotes(UTF8Encode(Node.TextContent)));
+                                if LangueDef = ConstAnglais then
+                                   begin
+                                    ListCorruptionCompetenceModif.add(PCorruptionCompetenceModif);
+                                    inc(NbCorruptionCompetenceModif);
+                                   end;
+                              end;
+                            ConstXmlModifieCompetenceAttribut:
+                              begin
+                                PCorruptionCompetenceAttributModif.Livre          := Livre;
+                                PCorruptionCompetenceAttributModif.CodeCorruption := PCorruptionTable.Code;
+                                PCorruptionCompetenceAttributModif.CodeAttribut   := RemoveQuotes(UTF8Encode(Node.Attributes.GetNamedItem(ConstXmlData).NodeValue));
+                                PCorruptionCompetenceAttributModif.Valeur         := StrToInt(RemoveQuotes(UTF8Encode(Node.TextContent)));
+                                if LangueDef = ConstAnglais then
+                                   begin
+                                    ListCorruptionCompetenceAttributModif.add(PCorruptionCompetenceAttributModif);
+                                    inc(NbCorruptionCompetenceAttributModif);
+                                   end;
+                              end;
+                            ConstXmlModifieArmure:
+                              begin
+                                PCorruptionArmureModif.Livre            := Livre;
+                                PCorruptionArmureModif.CodeCorruption   := PCorruptionTable.Code;
+                                PCorruptionArmureModif.CodeLocalisation := RemoveQuotes(UTF8Encode(Node.Attributes.GetNamedItem(ConstXmlData).NodeValue));
+                                PCorruptionArmureModif.Valeur           := StrToInt(RemoveQuotes(UTF8Encode(Node.TextContent)));
+                                if LangueDef = ConstAnglais then
+                                   begin
+                                    ListCorruptionArmureModif.add(PCorruptionArmureModif);
+                                    inc(NbCorruptionArmureModif);
+                                   end;
+                              end;
+                          end;
+                          Node := Node.NextSibling;
+                        end;
 
                       PTraduction              := InitTrad(ConstPCorruptionTable, PCorruptionTable.Code, '', PCorruptionTable.Livre);
                       PTraduction.Libelle      := PCorruptionTable.Libelle;

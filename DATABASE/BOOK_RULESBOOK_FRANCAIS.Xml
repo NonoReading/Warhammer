@@ -17249,18 +17249,25 @@ Si votre adversaire possède une arme avec l’Atout Empaleuse et obtient un Cri
 <Corruption name="RULES-CORPHY_001">
 <Libelle>"Pattes d’animaux"</Libelle>
 <Effet>"+1 Mouvement"</Effet>
+<ModifyCarac name="RULES-ATTR_Move">+1</ModifyCarac>
 </Corruption>
 <Corruption name="RULES-CORPHY_002">
 <Libelle>"Corpulent"</Libelle>
 <Effet>"-1 Mouvement, +5 Force, +5 Endurance"</Effet>
+<ModifyCarac name="RULES-ATTR_Move">-1</ModifyCarac>
+<ModifyCarac name="RULES-ATTR_S">+5</ModifyCarac>
+<ModifyCarac name="RULES-ATTR_T">+5</ModifyCarac>
 </Corruption>
 <Corruption name="RULES-CORPHY_003">
 <Libelle>"Doigts distendus"</Libelle>
 <Effet>"+10 Dextérité"</Effet>
+<ModifyCarac name="RULES-ATTR_Dex">+10</ModifyCarac>
 </Corruption>
 <Corruption name="RULES-CORPHY_004">
 <Libelle>"Émacié"</Libelle>
 <Effet>"-10 Force, +5 Agilité"</Effet>
+<ModifyCarac name="RULES-ATTR_S">-10</ModifyCarac>
+<ModifyCarac name="RULES-ATTR_Ag">+5</ModifyCarac>
 </Corruption>
 <Corruption name="RULES-CORPHY_005">
 <Libelle>"Œil énorme"</Libelle>
@@ -17269,6 +17276,7 @@ Si votre adversaire possède une arme avec l’Atout Empaleuse et obtient un Cri
 <Corruption name="RULES-CORPHY_006">
 <Libelle>"Articulation supp. aux jambes"</Libelle>
 <Effet>"+5 Agilité"</Effet>
+<ModifyCarac name="RULES-ATTR_Ag">+5</ModifyCarac>
 </Corruption>
 <Corruption name="RULES-CORPHY_007">
 <Libelle>"Bouche supplémentaire"</Libelle>
@@ -17285,18 +17293,26 @@ Si votre adversaire possède une arme avec l’Atout Empaleuse et obtient un Cri
 <Corruption name="RULES-CORPHY_010">
 <Libelle>"Beauté surnaturelle"</Libelle>
 <Effet>"+10 Sociabilité. Vous ne gardez jamais de cicatrice."</Effet>
+<ModifyCarac name="RULES-ATTR_Fel">+10</ModifyCarac>
 </Corruption>
 <Corruption name="RULES-CORPHY_011">
 <Libelle>"Visage inversé"</Libelle>
 <Effet>"-20 aux Tests de Sociabilité"</Effet>
+<ModifySkillAttribut name="RULES-ATTR_Fel">-20</ModifySkillAttribut>
 </Corruption>
 <Corruption name="RULES-CORPHY_012">
 <Libelle>"Peau d’acier"</Libelle>
 <Effet>"+2 PA à toutes les Localisations, -10 Agilité"</Effet>
+<ModifyCarac name="RULES-ATTR_Ag">-10</ModifyCarac>
+<ModifArmour name="RULES-ARMOL_HEAD">2</ModifArmour>
+<ModifArmour name="RULES-ARMOL_ARM">2</ModifArmour>
+<ModifArmour name="RULES-ARMOL_BODY">2</ModifArmour>
+<ModifArmour name="RULES-ARMOL_LEG">2</ModifArmour>
 </Corruption>
 <Corruption name="RULES-CORPHY_013">
 <Libelle>"Langue pendante"</Libelle>
 <Effet>"-10 à tous les Tests de Langue lorsque vous parlez."</Effet>
+<ModifySkill name="RULES-COMPLANG_*">-10</ModifySkill>
 </Corruption>
 <Corruption name="RULES-CORPHY_014">
 <Libelle>"Plumes éparses"</Libelle>
@@ -17305,14 +17321,20 @@ Si votre adversaire possède une arme avec l’Atout Empaleuse et obtient un Cri
 <Corruption name="RULES-CORPHY_015">
 <Libelle>"Court sur pattes"</Libelle>
 <Effet>"-1 Mouvement"</Effet>
+<ModifyCarac name="RULES-ATTR_Move">-1</ModifyCarac>
 </Corruption>
 <Corruption name="RULES-CORPHY_016">
 <Libelle>"Écailles épineuses"</Libelle>
 <Effet>"+1 PA à toutes les Localisations"</Effet>
+<ModifArmour name="RULES-ARMOL_HEAD">1</ModifArmour>
+<ModifArmour name="RULES-ARMOL_ARM">1</ModifArmour>
+<ModifArmour name="RULES-ARMOL_BODY">1</ModifArmour>
+<ModifArmour name="RULES-ARMOL_LEG">1</ModifArmour>
 </Corruption>
 <Corruption name="RULES-CORPHY_017">
 <Libelle>"Cornes asymétriques"</Libelle>
 <Effet>"+1 PA à la Tête. Compte comme une Arme de Créature dont le nombre de Dégâts est égal à votre Bonus de Force (voir page 338)"</Effet>
+<ModifArmour name="RULES-ARMOL_HEAD">1</ModifArmour>
 </Corruption>
 <Corruption name="RULES-CORPHY_018">
 <Libelle>"Suintement de pus"</Libelle>
@@ -17321,6 +17343,7 @@ Si votre adversaire possède une arme avec l’Atout Empaleuse et obtient un Cri
 <Corruption name="RULES-CORPHY_019">
 <Libelle>"Groin poilu"</Libelle>
 <Effet>"+10 Pistage"</Effet>
+<ModifySkill name="RULES-COMPPIST">+10</ModifySkill>
 </Corruption>
 <Corruption name="RULES-CORPHY_020">
 <Libelle>"Choix du MJ"</Libelle>
@@ -17331,10 +17354,15 @@ Si votre adversaire possède une arme avec l’Atout Empaleuse et obtient un Cri
 <Corruption name="RULES-CORMEN_001">
 <Libelle>"Atroces désirs"</Libelle>
 <Effet>"-5 Sociabilité, -5 Force Mentale"</Effet>
+<ModifyCarac name="RULES-ATTR_Fel">-5</ModifyCarac>
+<ModifyCarac name="RULES-ATTR_WP">-5</ModifyCarac>
 </Corruption>
 <Corruption name="RULES-CORMEN_002">
 <Libelle>"Bête intérieure"</Libelle>
 <Effet>"+10 Force Mentale, -5 Sociabilité, -5 Intelligence"</Effet>
+<ModifyCarac name="RULES-ATTR_WP">+10</ModifyCarac>
+<ModifyCarac name="RULES-ATTR_Fel">-5</ModifyCarac>
+<ModifyCarac name="RULES-ATTR_Int">-5</ModifyCarac>
 </Corruption>
 <Corruption name="RULES-CORMEN_003">
 <Libelle>"Rêves chaotiques"</Libelle>
@@ -17343,14 +17371,19 @@ Si votre adversaire possède une arme avec l’Atout Empaleuse et obtient un Cri
 <Corruption name="RULES-CORMEN_004">
 <Libelle>"Formication"</Libelle>
 <Effet>"-5 Initiative, -5 Dextérité"</Effet>
+<ModifyCarac name="RULES-ATTR_I">-5</ModifyCarac>
+<ModifyCarac name="RULES-ATTR_Dex">-5</ModifyCarac>
 </Corruption>
 <Corruption name="RULES-CORMEN_005">
 <Libelle>"Imprévisible fantaisiste"</Libelle>
 <Effet>"-5 Initiative, -5 Force Mentale"</Effet>
+<ModifyCarac name="RULES-ATTR_I">-5</ModifyCarac>
+<ModifyCarac name="RULES-ATTR_WP">-5</ModifyCarac>
 </Corruption>
 <Corruption name="RULES-CORMEN_006">
 <Libelle>"Terrible inquiétude"</Libelle>
 <Effet>"-10 Force Mentale"</Effet>
+<ModifyCarac name="RULES-ATTR_WP">-10</ModifyCarac>
 </Corruption>
 <Corruption name="RULES-CORMEN_007">
 <Libelle>"Pulsions de haine"</Libelle>
@@ -17359,10 +17392,13 @@ Si votre adversaire possède une arme avec l’Atout Empaleuse et obtient un Cri
 <Corruption name="RULES-CORMEN_008">
 <Libelle>"Cœur desséché"</Libelle>
 <Effet>"+10 Force Mentale, -10 Sociabilité"</Effet>
+<ModifyCarac name="RULES-ATTR_WP">+10</ModifyCarac>
+<ModifyCarac name="RULES-ATTR_Fel">-10</ModifyCarac>
 </Corruption>
 <Corruption name="RULES-CORMEN_009">
 <Libelle>"Pensées envieuses"</Libelle>
 <Effet>"-10 Sociabilité"</Effet>
+<ModifyCarac name="RULES-ATTR_Fel">-10</ModifyCarac>
 </Corruption>
 <Corruption name="RULES-CORMEN_010">
 <Libelle>"Esprit solitaire"</Libelle>
@@ -17371,10 +17407,13 @@ Si votre adversaire possède une arme avec l’Atout Empaleuse et obtient un Cri
 <Corruption name="RULES-CORMEN_011">
 <Libelle>"Blocage mental"</Libelle>
 <Effet>"-10 Intelligence"</Effet>
+<ModifyCarac name="RULES-ATTR_Int">-10</ModifyCarac>
 </Corruption>
 <Corruption name="RULES-CORMEN_012">
 <Libelle>"Urgence profanatoire"</Libelle>
 <Effet>"-10 Force Mentale, +10 Agilité"</Effet>
+<ModifyCarac name="RULES-ATTR_WP">-10</ModifyCarac>
+<ModifyCarac name="RULES-ATTR_Ag">+10</ModifyCarac>
 </Corruption>
 <Corruption name="RULES-CORMEN_013">
 <Libelle>"Morale douteuse"</Libelle>
@@ -17383,18 +17422,25 @@ Si votre adversaire possède une arme avec l’Atout Empaleuse et obtient un Cri
 <Corruption name="RULES-CORMEN_014">
 <Libelle>"Esprit suspicieux"</Libelle>
 <Effet>"-5 Initiative, -5 Intelligence"</Effet>
+<ModifyCarac name="RULES-ATTR_I">-5</ModifyCarac>
+<ModifyCarac name="RULES-ATTR_Int">-5</ModifyCarac>
 </Corruption>
 <Corruption name="RULES-CORMEN_015">
 <Libelle>"Accro à l’adrénaline"</Libelle>
 <Effet>"+10 Force Mentale, -10 Initiative"</Effet>
+<ModifyCarac name="RULES-ATTR_WP">+10</ModifyCarac>
+<ModifyCarac name="RULES-ATTR_I">-10</ModifyCarac>
 </Corruption>
 <Corruption name="RULES-CORMEN_016">
 <Libelle>"Visions torturées"</Libelle>
 <Effet>"-10 Initiative"</Effet>
+<ModifyCarac name="RULES-ATTR_I">-10</ModifyCarac>
 </Corruption>
 <Corruption name="RULES-CORMEN_017">
 <Libelle>"Totalement déséquilibré"</Libelle>
 <Effet>"-20 Sociabilité, +10 Force Mentale"</Effet>
+<ModifyCarac name="RULES-ATTR_Fel">-20</ModifyCarac>
+<ModifyCarac name="RULES-ATTR_WP">+10</ModifyCarac>
 </Corruption>
 <Corruption name="RULES-CORMEN_018">
 <Libelle>"Infinie malveillance"</Libelle>
@@ -17403,10 +17449,13 @@ Si votre adversaire possède une arme avec l’Atout Empaleuse et obtient un Cri
 <Corruption name="RULES-CORMEN_019">
 <Libelle>"Colère impie"</Libelle>
 <Effet>"Sujet à Frénésie (voir Psychologie), +10 à la Capacité de Combat"</Effet>
+<ModifyCarac name="RULES-ATTR_WS">+10</ModifyCarac>
 </Corruption>
 <Corruption name="RULES-CORMEN_020">
 <Libelle>"Affreusement nerveux"</Libelle>
 <Effet>"+5 Agilité, -5 Sociabilité"</Effet>
+<ModifyCarac name="RULES-ATTR_Ag">+5</ModifyCarac>
+<ModifyCarac name="RULES-ATTR_Fel">-5</ModifyCarac>
 </Corruption>
 </DATA_CORRUPTION_TABLE_MENTAL>
 <DATA_CORRUPTION_PHYSICAL_CHANCE>

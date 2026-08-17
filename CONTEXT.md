@@ -748,7 +748,7 @@ le nouvel historique doit venir consommer.
 Les étapes 4-6 (PDF) se sont ajustées comme d'habitude par allers-retours captures d'écran sur
 le rendu réel, pas de spec pixel-perfect figée à l'avance.
 
-### 2.7 Mutation quand la corruption atteint son maximum — en cours (démarré le 16/08/2026, dernière mise à jour le 17/08/2026)
+### 2.7 Mutation quand la corruption atteint son maximum — en cours (démarré le 16/08/2026, dernière mise à jour le 17/08/2026, étape 9)
 
 **Mécanisme** (conception validée par Nono) : quand `Left` (voir §2.6) atteint 0, le joueur
 choisit entre dépenser un point de Résilience définitivement, ou accepter une mutation.
@@ -1035,12 +1035,142 @@ réorganisation plus large des onglets remise à plus tard (notée dans `A FAIRE
   deux livres.
 - Confirmé par Nono par test réel : "cela marche".
 
+**Étape 8 (✅ terminée, 17/08/2026)** : contrairement à ce que le "V1 scope" ci-dessus prévoyait,
+Nono a finalement demandé l'application automatique des effets de mutation à delta pur, en vrai
+modificateur sur le personnage (pas juste une annotation texte) - d'abord sur les Attributs
+(`<ModifyCarac>`), puis sur les Compétences (`<ModifySkill>`), en PDF et dans `WinPersonnage` :
+- Nouvelle couche de données, calquée sur `StructureArmureBonusModif` : `StructureCorruptionAttributModif`/`StructureCorruptionCompetenceModif`
+  (Livre, CodeCorruption, CodeAttribut/CodeCompetence, Valeur:Integer), chacune avec son
+  `TList` (`chargecorruptionattributmodif.pas`/`chargecorruptioncompetencemodif.pas`, nouveaux
+  fichiers), initialisées/nettoyées dans `warhammersource.pas`.
+- `xmlexportimport.pas` : chargement des tables `DATA_CORRUPTION_TABLE_PHYSICAL`/`MENTAL`
+  changé de `FindNode` (un seul enfant du même nom) à une itération `FirstChild`/`NextSibling`,
+  pour supporter plusieurs `<ModifyCarac>`/`<ModifySkill>` sur une même entrée. Réutilise les
+  noms de tags `ConstXmlModifieAttribut`/`ConstXmlModifieCompetence` déjà utilisés sous
+  `<Talent>` - ambiguïté de nom signalée à Nono (sous `<Talent>`, `<ModifySkill>` porte un
+  indicateur texte "Bonus"/"ChooseDice" ; sous `<Corruption>`, un delta numérique), pas gênante
+  en pratique (parsing scopé par boucle parente), gardée telle quelle.
+- XML (les deux livres, données réelles côté anglais uniquement via `LangueDef = ConstAnglais`) :
+  22 entrées `<Corruption>` ont reçu un ou plusieurs `<ModifyCarac>` (Physical : CORPHY_002,
+  003, 004, 006, 010, 012, 019 ; Mental : CORMEN_001, 002, 004, 005, 006, 008, 009, 011, 012,
+  014, 015, 016, 017, 019, 020). Une seule entrée a un `<ModifySkill>` numérique : CORPHY_019
+  (Pistage, +10). Exclus (texte seul, décisions validées avec Nono) : effets sur Movement
+  (CORPHY_001/015, système d'application différent, reporté), effets modifiant un jet plutôt
+  qu'une valeur (CORPHY_005/011/013, CORMEN_010/018), CORPHY_020 ("GM's Choice").
+- `chargepersonnage.pas` : `PersonnageMutationAttributModif`/`PersonnageMutationCompetenceModif`
+  (Personnage, Code) → somme des modificateurs de toutes les mutations du personnage pour cet
+  attribut/cette compétence. Utilisées à la fois par le PDF et par `WinPersonnage` - un seul
+  calcul, jamais deux implémentations à maintenir en parallèle.
+- PDF : `PdfPersonnageAttribut` ajoute le delta à `Res.Base` (même case que les Talents).
+  `PdfPersonnageCompetence` ajoute le delta à `Res.Total` **après** son calcul normal
+  (`Base + Augmentation`), jamais à `Res.Augmentation` - voir bug ci-dessous.
+- Nouveau petit tableau PDF `PdfBlocMutations` (page 2, à droite de l'image SHADOW/Armour
+  Points, 3 lignes + entête, affiche les mutations les plus récentes du personnage, masque
+  silencieusement les plus anciennes si ça déborde).
+- Astérisques croisées étendues aux mutations (`PdfPersonnageMutationAsterisques`), chaînées
+  avec le compteur déjà partagé Talents/Armure (`PdfPersonnageArmureAsterisques` prend
+  maintenant `AsterisqueDepart` en paramètre au lieu de partir de `Personnage.Asterisque` en
+  dur) - jamais de collision de numéro entre les trois sources. Couvre Attributs (format
+  `"+N (n)"`, comme les Talents) et Compétences (format `"(n) N%"`, comme l'Armure).
+- Deux bugs de rendu PDF trouvés et corrigés en testant avec Nono (`DessinerTableau`,
+  orColonne, tableau Caractéristiques) : (1) l'annotation était dessinée 3mm AU-DESSUS du haut
+  de sa propre ligne (`YHautLigne + 3`), donc quasiment collée à la ligne d'en-tête juste
+  au-dessus (hauteur de ligne 4,6mm, à peine plus que l'offset) - corrigé en l'ancrant sur le
+  bas de la ligne (même ancrage que la valeur elle-même) avec un offset de +1,5. (2) quand un
+  attribut a plusieurs annotations (Talent + Mutation), elles étaient concaténées sans
+  séparateur, ce qui produisait un texte trop long coupé n'importe où par le retour à la ligne
+  automatique de `PdfEcrit` - corrigé en séparant à la concaténation avec un marqueur `'|'`, et
+  en affichant chaque source sur sa propre ligne empilée dans `DessinerTableau` (espacement
+  calqué sur celui déjà utilisé en interne par `PdfEcrit` pour ses propres cas à 2/3 lignes).
+  Limite résiduelle notée dans `A FAIRE.txt` (pas un bug) : un delta à deux chiffres (ex.
+  "+10") peut encore forcer `PdfEcrit` à passer sur 2 lignes même pour une seule source, la
+  zone d'annotation étant très étroite (~5,9mm à la police plancher).
+- `WinPersonnage`, onglet Fiche/Attributs (`TabAttribut`) : nouvelle ligne "Mutations"
+  (constante `LigAttMutation`, insérée juste après `LigAttTalent`, toutes les constantes de
+  ligne suivantes renumérotées, `RowCount` 12→13), masquée par défaut, affichée/masquée avec la
+  même case "afficher le calcul" que Race/Lance/Talent, remplie via
+  `PersonnageMutationAttributModif`, incluse dans la somme qui alimente `LigAttBase` puis
+  `LigAttTotal` (`CalculTotaux`).
+- `WinPersonnage`, onglet Compétences (`TabCompetence`) : nouvelle COLONNE "Mutations"
+  (constante `ColCompMutation`, insérée juste après `ColCompWork` et avant `ColCompBonus`,
+  toutes les constantes de colonne suivantes renumérotées, `ColCount` 17→18), même principe de
+  masquage/case à cocher que les colonnes 3p/5p, 40pts, Travail, remplie via
+  `PersonnageMutationCompetenceModif`.
+- **Bug trouvé par Nono en testant, corrigé le 17/08/2026 (PDF et WinPersonnage)** : le delta de
+  mutation sur une compétence avait d'abord été ajouté à `Res.Augmentation` (PDF) /
+  `ColCompBonus` (WinPersonnage) - la colonne "Adv" du PDF, qui correspond aux avancements
+  RÉELLEMENT PAYÉS et sert aussi ailleurs (ex. calcul du coût Xp, ~ligne 3814 de
+  `winpersonnage.pas`) à déterminer combien de compétences ont été augmentées. Un effet de
+  mutation n'est pas un avancement acheté : le mélanger à `Augmentation`/`ColCompBonus` faussait
+  ce calcul (une compétence jamais achetée semblait "augmentée"). Corrigé en ajoutant le delta
+  uniquement au Total final (`Res.Total`/`ColCompTotal`), jamais à `Res.Augmentation`/
+  `ColCompBonus`. Conséquence attendue et confirmée correcte par Nono : une compétence Avancée
+  jamais payée (donc `Augmentation = 0`) disparaît maintenant de la liste "Advanced Skills" du
+  PDF même si une mutation lui donne un bonus - cohérent avec la règle (sans avancement payé, le
+  personnage n'est pas censé savoir utiliser la compétence, donc pas non plus en bénéficier).
+- Confirmé par Nono via tests PDF + WinPersonnage réels tout au long de l'étape.
+
+**Étape 9 (✅ terminée, 17/08/2026)** : Nono a repris un par un les effets de mutation exclus à
+l'étape 8 (Movement, familles de compétences, effets "Tests de X", Armour Points), en ajoutant
+à chaque fois le mécanisme minimal nécessaire plutôt qu'un système générique unique :
+- **Movement** (CORPHY_001/002/015) : traité comme "juste un attribut de plus" - aucune nouvelle
+  structure, `PersonnageMutationAttributModif` réutilisé tel quel avec `ConstCaracMouvement`
+  (`'ATTR_Move'`). Appliqué aux deux sites de calcul du Mouvement dans `pdfpersonnage.pas`
+  (legacy page 1 et Feldo2P), juste après `Mouv := StrToInt(PRaceAttribut.CalculRace);`.
+  Explicitement SANS astérisque (choix de Nono - juste le chiffre correct). PDF uniquement,
+  pas de champ Mouvement dans `WinPersonnage`.
+- **Familles de compétences** (CORPHY_013, "-10 to all Language Tests") : `<ModifySkill
+  name="RULES-COMPLANG_*">-10</ModifySkill>` - réutilise le même tag que l'étape 8, mais
+  `PersonnageMutationCompetenceModif` étendu pour tester aussi la forme générique `_*` d'une
+  sous-compétence (`PCompetence.SousCompetence` + `ExtractStringBefore(...,
+  ValeurSousCompetence) + ValeurGenerique`, mêmes constantes que `PdfPersonnageCompetence`
+  ailleurs dans le fichier) quand le code exact ne matche pas.
+- **Effets "-N to all X Tests" par attribut de rattachement** (CORPHY_011, "-20 to all
+  Fellowship Tests") : nouveau mécanisme dédié, tag `<ModifySkillAttribut name="RULES-ATTR_Xxx">`
+  (nom de tag délibérément distinct de `ModifySkill`, choix de Nono pour ne pas répéter
+  l'ambiguïté de nom déjà notée à l'étape 8). Erreur de conception initiale corrigée en route :
+  ma première proposition réutilisait `<ModifyCarac>` directement sur l'attribut, ce que Nono a
+  refusé à raison ("la caractéristique va aussi descendre de 20 ?") - un effet "Tests de X" ne
+  doit PAS faire baisser l'attribut affiché, seulement les compétences qui s'appuient dessus.
+  Nouvelle couche `StructureCorruptionCompetenceAttributModif` (Livre, CodeCorruption,
+  CodeAttribut, Valeur), ajoutée dans le même fichier que la structure de l'étape 8
+  (`chargecorruptioncompetencemodif.pas`, deuxième bloc Type/List/Vars). `PersonnageMutation
+  CompetenceModif` résout l'attribut de rattachement de la compétence interrogée (le sien, ou
+  celui de sa forme générique si sous-compétence) et applique tous les modificateurs de cet
+  attribut, sans toucher `Res.Base`/l'attribut lui-même. Bug trouvé et corrigé pendant le test
+  Nono ("Gossip reste à 30... la colonne mutation est vide") : mauvais code attribut utilisé
+  dans le XML (`RULES-ATTR_Soc` au lieu de `RULES-ATTR_Fel`, vérifié contre `ConstCaracSoc` et
+  contre l'entrée XML réelle de la compétence Gossip) - corrigé dans les deux livres.
+  Astérisque étendue au cas par-attribut dans `PdfPersonnageMutationAsterisques` (itère tout le
+  catalogue `ListCompetence` pour trouver les compétences dont `CodeAttribut` matche, faute de
+  code de compétence unique disponible pour ce type de modificateur).
+- **Armour Points** (CORPHY_012 "+2 all locations", CORPHY_016 "+1 all locations", CORPHY_017
+  "+1 Head") : PDF uniquement (pas de panneau Armure dans `WinPersonnage`). Nono avait proposé
+  6 `<ModifArmour>` (un par emplacement Tête/Bras G/Bras D/Corps/Jambe G/Jambe D, cohérent avec
+  la table de localisation des coups du livre) ; contre-proposition retenue après vérification
+  du code existant : le système d'armure (pièces portées ET panneau PDF `PdfBlocArmourPoints`)
+  ne distingue déjà nulle part gauche/droite, seulement 4 emplacements (`BonusTete`/`BonusBras`/
+  `BonusCorps`/`BonusJambes`, `chargeconstantes.pas`) - réutilisation de ces 4 codes plutôt que
+  d'en inventer 6 nouveaux, acceptée par Nono. Nouvelle couche `chargecorruptionarmuremodif.pas`
+  (`StructureCorruptionArmureModif` : Livre, CodeCorruption, CodeLocalisation, Valeur ; nouveau
+  fichier, même forme que les autres). Nouvelle constante `ConstXmlModifieArmure = 'ModifArmour'`
+  (tag dédié, pas de réutilisation). `xmlexportimport.pas` : nouvelle branche de cas dans les
+  deux boucles de parsing `<Corruption>` (Physical et Mental, identiques). Nouvelle fonction
+  `PersonnageMutationArmureModif(Personnage, CodeLocalisation)` (`chargepersonnage.pas`, même
+  forme que `PersonnageMutationAttributModif`). Appliquée dans `pdfpersonnage.pas` aux deux
+  sites de calcul d'armure (legacy page 1 et `PdfBlocArmuresDonnees`/Feldo2P), juste après la
+  boucle de sommation de l'équipement porté, sur `ArmureTete`/`ArmureBras`/`ArmureCorps`/
+  `ArmureJambe`. Confirmé par Nono par test PDF réel (version +2 partout et version +1 Tête).
+  Astérisque PAS encore ajoutée pour ce cas (Nono la veut, mais `PdfBlocArmourPoints` n'a
+  aujourd'hui aucune capacité de dessiner une annotation - contrairement aux tableaux
+  Caractéristiques/Compétences - donc nécessite d'abord une conception de l'affichage avant
+  d'implémenter, remis à une prochaine session).
+
 **Reste à faire** : le mécanisme de perte de mutation lui-même (rare, confirmé possible par le
 livre) n'est ni conçu ni implémenté - c'est justement ce qui a motivé `Personnage.Mutations`
 comme liste dédiée plutôt qu'un ledger texte, mais aucune UI/logique de retrait n'existe
-encore. L'application automatique des effets de mutation reste hors scope (V1, texte affiché
-seulement) - voir aussi l'idée de `<Modifier>` structurés en complément du texte, discutée
-avec Nono le 17/08/2026 et notée dans `A FAIRE.txt` (pas retenue pour l'instant).
+encore. Astérisque numérotée pour les effets Armour Points (§ étape 9 ci-dessus) : conception de
+l'affichage sur `PdfBlocArmourPoints` à faire avec Nono avant de coder.
 
 ---
 

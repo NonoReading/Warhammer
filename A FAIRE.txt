@@ -104,17 +104,15 @@ PDF Personnage (PRIORITAIRE) :
   non finalisés - repéré le 16/08/2026 en cherchant comment généraliser le mécanisme de
   tirage pour le chantier mutation (CONTEXT.md §2.7), mais pas retenu pour l'instant (Nono
   a choisi de rester sur le pattern radio-boutons de WinCreation pour la mutation).
-- ajouter des `<Modifier>` structurés (deltas d'attribut purs uniquement) en complément du
-  texte `<Effet>` des tables de mutation (`DATA_CORRUPTION_TABLE_PHYSICAL`/`MENTAL`,
-  CONTEXT.md §2.7) - même convention que `ListArmureBonusModif`/`ListTalentAttributModif`
-  déjà en place. Le texte reste la source de vérité affichée (garde tout, y compris les
-  effets non réductibles à un delta : Traits de Créature, jets de Localisation, conditions
-  de Psychologie, "GM's Choice"...), le `<Modifier>` ne couvrirait que le sous-ensemble
-  d'entrées à delta pur (la majorité côté Mental, environ la moitié côté Physical d'après
-  un premier passage). Ne couvre pas encore l'application automatique elle-même (déjà
-  différée au-delà du V1, CONTEXT.md §2.7) - juste la donnée structurée en préalable.
-  Discuté et scope validé avec Nono le 17/08/2026, remis à plus tard (pas de chantier
-  ouvert pour l'instant).
+- (limite d'affichage, 17/08/2026) tableau Caractéristiques (DessinerTableau, orColonne) :
+  la zone réservée à l'annotation est très étroite (~5,9mm de large à la police plancher
+  4pt). Un delta à deux chiffres (ex. "+10 (4)", 7 caractères) fait basculer PdfEcrit en
+  2 lignes automatiquement même pour une seule source, alors qu'un delta à un chiffre
+  (ex. "+5 (4)"/"-5 (4)", 6 caractères) tient sur une seule ligne. Pas un bug - limite
+  physique de la colonne, indépendante du découpage multi-source ('|') ajouté le même jour
+  pour empiler proprement les annotations Talent+Mutation. Laissé tel quel pour l'instant
+  (Nono a choisi de ne pas complexifier davantage la colonne). Piste si besoin un jour :
+  élargir la zone d'annotation.
 
 - (idée ergonomie, 17/08/2026, pas conçue) WinPersonnage a accumulé beaucoup d'onglets au fil
   des chantiers (Corruption, Mutations, ...) - Nono trouve que ça devient peu lisible. Remis à
@@ -122,3 +120,10 @@ PDF Personnage (PRIORITAIRE) :
   réorganisation). Piste évoquée mais pas discutée en détail : regrouper les onglets par
   catégorie (ex. Fiche/Progression/Journal/Référence) plutôt qu'une seule rangée plate. À
   concevoir avec Nono avant de toucher au .lfm.
+
+- (chantier mutation, étape 9, 17/08/2026) astérisque numérotée pour les effets Armour Points
+  (CORPHY_012/016/017, CONTEXT.md §2.7) : Nono la veut ("on pourra la aussi mettre une
+  astérisque") mais PdfBlocArmourPoints (silhouette de protection, page 2) n'a aujourd'hui
+  aucune capacité de dessiner une annotation, contrairement aux tableaux
+  Caractéristiques/Compétences (DessinerTableau). À concevoir avec Nono (où/comment afficher le
+  numéro sur les 4 cases Tête/Bras/Corps/Jambes) avant d'implémenter.
