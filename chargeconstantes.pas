@@ -22,6 +22,13 @@ Const
 
       // Fichier XML de personnages
       ConstXmlRace			= 'Specie';
+      // Attention au vocabulaire : ConstXmlRace ('Specie') désigne l'ETHNIE
+      // (ex. "Humans (Reikland)"), alors que ConstXmlEspece ('Race') désigne la
+      // RACE générique qui regroupe plusieurs ethnies (ex. "Human").
+      ConstXmlEspece			= 'Race';
+      // Ne pas confondre avec ConstXmlRegle ('RULES') plus bas, qui n'est pas une règle de
+      // jeu mais la liste des livres acceptés d'un personnage (chargepersonnage.pas).
+      ConstXmlRegleJeu			= 'Rule';
       ConstXmlWork			= 'Career';
       ConstXmlCarac			= 'Attribut';
       ConstXmlTalent			= 'Talent';
@@ -85,6 +92,9 @@ Const
       ConstXmlDataRandomTalent          = 'DATA_RANDOM_TALENT';
       ConstXmlDataSpecieCreation        = 'DATA_RANDOM_SPECIE';
       ConstXmlDataCraftsmanship         = 'DATA_CRAFTMANSHIP';
+      ConstXmlDataEspece                = 'DATA_RACE';
+      ConstXmlDataRegle                 = 'DATA_RULE';
+      ConstXmlDataRegleMetier           = 'DATA_CAREER_ROLL';
       ConstXmlDataSpecieCareerChoix     = 'DATA_SPECIE_CAREER_CHOICE';
       ConstXmlDataSpecieCareerDirect    = 'DATA_SPECIE_CAREER_DIRECT';
       ConstXmlDataCareerSubChoice       = 'DATA_CAREER_SUBCHOICE';
@@ -303,16 +313,9 @@ Const
       FabricationBonus                  = 'BONUS';
       FabricationMalus                  = 'MALUS';
       SortChaos                         = 'CHAOS_';
-      RaceHumain                        = 'SPECIE_HUMAN';
-      RaceElf                           = 'SPECIE_ELF';
-      RaceNain                          = 'SPECIE_DWARF';
-      RaceOgre                          = 'SPECIE_OGRE';
-      RaceGnome                         = 'SPECIE_GNOME';
-      RaceHalfling                      = 'SPECIE_HALFLING';
-      RaceGoblin                        = 'SPECIE_GOBLIN';
-      RaceOrc                           = 'SPECIE_ORC';
-      RaceVampire                       = 'SPECIE_VAMPIRE';
-      RaceFamilier                      = 'SPECIE_FAMILIAR';
+      // Les constantes RaceHumain/RaceElf/RaceNain/... ('SPECIE_HUMAN', 'SPECIE_ELF', ...)
+      // ont été supprimées le 20/08/2026 : elles n'étaient utilisées nulle part, et la liste
+      // des RACES est désormais portée par le bloc XML DATA_RACE (voir ChargeEspece.pas).
       CorruptionPhysique                = 'CORRUPTION_PHYSICAL';
       CorruptionMentale                 = 'CORRUPTION_MENTAL';
       // "GM's Choice" (Physical Corruption Table, 96-00) - pas une vraie mutation, une
@@ -356,6 +359,8 @@ Const
       ConstPCompetence                      = 'PCompetence';
       ConstPTalent                          = 'PTalent';
       ConstPRace                            = 'PRace';
+      ConstPEspece                          = 'PEspece';
+      ConstPRegle                           = 'PRegle';
       ConstPMetier                          = 'PMetier';
       ConstPArme                            = 'PArme';
       ConstPArmeBonus                       = 'PArmeBonus';

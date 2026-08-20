@@ -10,7 +10,7 @@
 <Specie id="MIDDE-RACE_HMIDH">
 <Description language="ENGLISH">"Humans (Middenheimer)"</Description>
 <Explanation language="ENGLISH">"Citizens of Middenheim have grown up within a big cosmopolitan city, with strong links to trade, entertainment, and criminal life. Skills and Talents reflect the likelihood that such Characters have either learned how to earn a living working, or are good at networking with at least one section of the city’s complex society"</Explanation>
-<Ethnic>"SPECIE_HUMAN"</Ethnic>
+<Ethnic>"RULES-SPECIE_HUMAN"</Ethnic>
 <SUBCHAPTER_ATTR>
 <Attribut name="RULES-ATTR_WS">"2d10+20"</Attribut>
 <Attribut name="RULES-ATTR_BS">"2d10+20"</Attribut>
@@ -186,7 +186,7 @@
 <Specie id="MIDDE-RACE_HMIDL">
 <Description language="ENGLISH">"Humans (Middenlander)"</Description>
 <Explanation language="ENGLISH">"The folk of Middenland arguably have more in common with their Teutogen ancestors than Middenheimers. Many of them lead a hardscrabble existence in farming communities or villages near the edges of the Drakwald. Skills and Talents reflect a need for such Characters to have learned how to live within the wild."</Explanation>
-<Ethnic>"SPECIE_HUMAN"</Ethnic>
+<Ethnic>"RULES-SPECIE_HUMAN"</Ethnic>
 <SUBCHAPTER_ATTR>
 <Attribut name="RULES-ATTR_WS">"2d10+20"</Attribut>
 <Attribut name="RULES-ATTR_BS">"2d10+20"</Attribut>
@@ -374,7 +374,7 @@
 <Specie id="MIDDE-RACE_HNORD">
 <Description language="ENGLISH">"Humans (Nordlander)"</Description>
 <Explanation language="ENGLISH">"Most outsiders view the archetypal Nordlander as a grogsoaked sea dog, though in truth only a small minority of them live by the coast. The town of Salzenmund has the hallmarks of urban sophistication, though swathes of Nordland’s baronies are isolated backwaters. Skills and Talents reflect either a familiarity with the sea, or a need to cope with life in the country."</Explanation>
-<Ethnic>"SPECIE_HUMAN"</Ethnic>
+<Ethnic>"RULES-SPECIE_HUMAN"</Ethnic>
 <SUBCHAPTER_ATTR>
 <Attribut name="RULES-ATTR_WS">"2d10+20"</Attribut>
 <Attribut name="RULES-ATTR_BS">"2d10+20"</Attribut>

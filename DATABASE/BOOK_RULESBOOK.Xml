@@ -133,16 +133,6 @@ ifically your Strength, Endurance and Mental Strength Bonuses (abbreviations BF,
 </DATA_SKILL_COST>
 <DATA_LABEL>
 <Label language="ENGLISH">
-<Text name="RULES-SPECIE_HUMAN">"Human"</Text>
-<Text name="RULES-SPECIE_ELF">"Elf"</Text>
-<Text name="RULES-SPECIE_DWARF">"Dwarf"</Text>
-<Text name="RULES-SPECIE_OGRE">"Ogre"</Text>
-<Text name="RULES-SPECIE_GNOME">"Gnome"</Text>
-<Text name="RULES-SPECIE_HALFLING">"Halfling"</Text>
-<Text name="RULES-SPECIE_GOBLIN">"Goblin"</Text>
-<Text name="RULES-SPECIE_ORC">"Orc"</Text>
-<Text name="RULES-SPECIE_VAMPIRE">"Vampire"</Text>
-<Text name="RULES-SPECIE_FAMILIAR">"Familiar"</Text>
 <Text name="RULES-ARMOL_ARM">"Arm"</Text>
 <Text name="RULES-ARMOL_BODY">"Body"</Text>
 <Text name="RULES-ARMOL_HEAD">"Head"</Text>
@@ -4838,11 +4828,28 @@ See page 190 for Fear rules"</Explanation>
   <!-- Warrior Born -->
 </DATA_RANDOM_TALENT>
 </DATA_RANDOM_TALENT>
+<DATA_RACE>
+<Race id="RULES-SPECIE_HUMAN">
+<Description language="ENGLISH">"Human"</Description>
+</Race>
+<Race id="RULES-SPECIE_HELF">
+<Description language="ENGLISH">"High Elf"</Description>
+</Race>
+<Race id="RULES-SPECIE_WELF">
+<Description language="ENGLISH">"Wood Elf"</Description>
+</Race>
+<Race id="RULES-SPECIE_DWARF">
+<Description language="ENGLISH">"Dwarf"</Description>
+</Race>
+<Race id="RULES-SPECIE_HALFLING">
+<Description language="ENGLISH">"Halfling"</Description>
+</Race>
+</DATA_RACE>
 <DATA_SPECIE>
 <Specie id="RULES-RACE_HUM">
 <Description language="ENGLISH">"Humans (Reikland)"</Description>
 <Explanation language="ENGLISH">"Humans being the most validated civilized race in the Old World. From the plains of the Estalian Kingdoms to the frozen provinces of Kislev, humans occupy every region of the continent, and they thrive there. The largest and most powerful human kingdom is the Empire, a patchwork of mighty provinces covered in seemingly endless forests. Located in the heart of the Empire, the Reikland is the richest and most cosmopolitan region."</Explanation><OPINIONS><Opinion target="RULES-RACE_DWAR" source="Reikäger Jungling, State Soldier from Altdorf">They've been our allies since Sigmar walked this very city; fought with them meself back in '05. Sure, they're a bit stubborn, seriously vindictive and pretty blunt, but I won't hear a word said against them.</Opinion><Opinion target="RULES-RACE_HALF" source="Stefan Krause, Innkeeper from Stirgau">If I gets meself the sort wot eats and smokes all day, then I'm happy as Ranald in catnip. It's when I get them without proper manners nicking me crockery or knives and forks: that I just can't abide! They're all smiles and shrugs when the watch come to pick 'em up, like they don't understand what they done wrong.</Opinion><Opinion target="RULES-RACE_HELF" source="Dorothea Taalenstein, Merchant from Kemperbad">Yes, I do trade with them. And, no, don't be ridiculous, I've never been turned to a pillar of salt just by looking at them. Truly, I find them graceful and urbane. Proper civilised, I'd say. But, 'tween you and me, if Verena were to ask, I might also say I find them just… odd. So very intense. Like every deal we make really matters.</Opinion><Opinion target="RULES-RACE_WELF" source="Siggina Gerster, Bawd from Ubersreik">Elves of the forest you say? Ain't none of 'em around here, mate. You want to be goin' south to Bretonnia. I hear they gots loads of them, and that they're completely horrible!</Opinion></OPINIONS>
-<Ethnic>"SPECIE_HUMAN"</Ethnic>
+<Ethnic>"RULES-SPECIE_HUMAN"</Ethnic>
 <SUBCHAPTER_ATTR>
 <Attribut name="RULES-ATTR_WS">"2d10+20"</Attribut>
 <Attribut name="RULES-ATTR_BS">"2d10+20"</Attribut>
@@ -5116,7 +5123,7 @@ See page 190 for Fear rules"</Explanation>
 <Specie id="RULES-RACE_HALF">
 <Description language="ENGLISH">"Halflings"</Description>
 <Explanation language="ENGLISH">"Halflings are found all over the Reikland, working in the service of commerce in every town. An entire district of the Reikland’s capital, Altdorf, known as Haffenstadt, is even home to hundreds of extended halfling families helping out with restaurants, taverns, pipe shops, and a staggering number of traveling diners. Halflings are also very present in many villages of the Reikland, where they often work as employees of an inn or a farm. They are gregarious creatures, preferring to live in groups"</Explanation><OPINIONS><Opinion target="RULES-RACE_HUM" source="'Tubs' Samworth Rumster XVI, Pie-seller from Kalegan">Stiff-necked and pious, warlike and jealous… I could go on, but good manners halts me, and, besides, I like them, and they like me pies. As long as you keep away from their temples and the hard-liners, they're an open and pretty welcoming bunch. Good folk, and good for business.</Opinion><Opinion target="RULES-RACE_DWAR" source="'Lilly' Joseppinalina Hayfoot, Pedlar in the Reikland">My aunt Bessi was the greediest, as were six of her sons. But Bessi has nothing on them Dwarfs. Eyes grow as big as Mannslieb at even a scratch of gold. But, if you tell them that, they'll growl at you like you've taken the last honeycake, and start scribbling notes in one of their damned books about insulting their family honour or whatnot.</Opinion><Opinion target="RULES-RACE_HELF" source="'Dainty' Cordelineth Brandysnap IV, Thief from Altdorf">I've seen them on the rivers in their white ships. How do they keep them so clean? And their hair… oh, their hair… it's like sunshine, it is. Snuck on a boat once to see what they do. Same as the rest of us, it seems, just more... earnestly.</Opinion><Opinion target="RULES-RACE_WELF" source="'Jammy' Mercimaus Alderflower II, Scholar from Fielbach">Elves living in the woods? Don't be bloody ridiculous. Elves live in white towers and pretty boats over in Altdorf-town, you idiot.</Opinion></OPINIONS>
-<Ethnic>"SPECIE_HALFLING"</Ethnic>
+<Ethnic>"RULES-SPECIE_HALFLING"</Ethnic>
 <SUBCHAPTER_ATTR>
 <Attribut name="RULES-ATTR_WS">"2d10+10"</Attribut>
 <Attribut name="RULES-ATTR_BS">"2d10+30"</Attribut>
@@ -5308,7 +5315,7 @@ See page 190 for Fear rules"</Explanation>
 <Specie id="RULES-RACE_DWAR">
 <Description language="ENGLISH">"Dwarfs"</Description>
 <Explanation language="ENGLISH">"Dwarves, or Dawi as they call themselves, are legendarily gruff and stubborn. Although the majority live in vast mountainside constructions, known as “fortresses“, most of the major cities and the capital of Reikland are also home to dwarven populations. Given their clannish nature, dwarves tend to cluster together, forming enclaves or neighborhoods wherever they settle. Many of the dwarves living in Reikland are the descendants of those who were driven from fallen fortresses centuries ago, but most still consider themselves dwarves of the Gray Mountains, though some have never seen a hill, and much less a mountain."</Explanation><OPINIONS><Opinion target="RULES-RACE_HALF" source="Unknown Dwarf">They're just not my kind of folk. Always smiling. Always fidgeting. Always talking. Always moving in big groups that just won't shut up! When they come in my store, I like to shoo them off with a broom. Really, what have they got to be so happy about? I just don't trust them.</Opinion><Opinion target="RULES-RACE_HELF" source="Angry Dwarf">Don't talk to me about those bloody bastards! Alrug Skycaster, my ultimate granduncle, was bloody betrayed in the bloody War of bloody Vengeance by those… those… ARGH! It's our clan's oldest grudge! Stood for thousands of bloody years!</Opinion><Opinion target="RULES-RACE_WELF" source="Dwarf Ancestor Story">My great grandfather thought logging forests on t'other side of the Grey Mountains would be lucrative. Ignored all the warnings, he was sure he was onto a winner. What could a bunch of skinny Elves do to him and his lads, after all? A lot, as it turned out. Only my grandfather survived, left alive to spread the message: "Keep out of their forests!</Opinion></OPINIONS>
-<Ethnic>"SPECIE_DWARF"</Ethnic>
+<Ethnic>"RULES-SPECIE_DWARF"</Ethnic>
 <SUBCHAPTER_ATTR>
 <Attribut name="RULES-ATTR_WS">"2d10+30"</Attribut>
 <Attribut name="RULES-ATTR_BS">"2d10+20"</Attribut>
@@ -5498,7 +5505,7 @@ See page 190 for Fear rules"</Explanation>
 <Specie id="RULES-RACE_HELF">
 <Description language="ENGLISH">"High Elves"</Description>
 <Explanation language="ENGLISH">"Tall and slender, with dainty pointed ears, most elves are blessed with long, thin hair and melodious voices. Although they may seem fragile, their physiology is not just powerful, but also extraordinarily agile and dexterous. There is little sexual dimorphism between elves, which often causes confusion in humans who interact with them."</Explanation><OPINIONS><Opinion target="RULES-RACE_HALF" source="Hoelistor Arceye, Wizard from Saphery">I find these cheerful creatures genuinely interesting. I lived amongst an extended family group for a while, and found them so open, welcoming, and nurturing it was authentically touching. But, eventually, I had to move on, the smell was simply over-powering, and they have no understanding of personal space, which soon loses its charm.</Opinion><Opinion target="RULES-RACE_WELF" source="Anaw-Alina Darkstep, Scout from Nagarythe">If the Asrai would bother to look beyond their dirty noses, they would see what we are all up against. Isolationist idiots that deserve everything that's coming to them. I doubt the Eonir are any better.</Opinion></OPINIONS>
-<Ethnic>"SPECIE_ELF"</Ethnic>
+<Ethnic>"RULES-SPECIE_HELF"</Ethnic>
 <SUBCHAPTER_ATTR>
 <Attribut name="RULES-ATTR_WS">"2d10+30"</Attribut>
 <Attribut name="RULES-ATTR_BS">"2d10+30"</Attribut>
@@ -5654,7 +5661,7 @@ See page 190 for Fear rules"</Explanation>
 <Specie id="RULES-RACE_WELF">
 <Description language="ENGLISH">"Wood Elves"</Description>
 <Explanation language="ENGLISH">"Wood Elves are rare in Reikland, and for good reason. During the last days of the War of the Beard, many elves withdrew from the Old World. But a few remained and retreated into the depths of the magical forests, which they now call their home. Over three thousand years of isolation, hardship and war ensued, making the “wood elves“ culturally very different from their high elf cousins."</Explanation><OPINIONS><Opinion target="RULES-RACE_HUM" source="Algwyllmyr Twiceseen, Seer from Athel Loren">I see hateful creatures with darkness in their hearts and a complete disrespect for order. But they are widespread, warlike, and, most importantly, easy to manipulate. Given winter draws near, it is time to use them.</Opinion><Opinion target="RULES-RACE_DWAR" source="Wood Elf Warrior">More stubborn than the Oak of Ages, they understand one argument only: force. So, use it swiftly and decisively, and be aware they will return for petty vengeance at a later date.</Opinion><Opinion target="RULES-RACE_HALF" source="Alafael Harrowlay, Entertainer from the Laurelorn">I met one when travelling Middenland during the ninth year of Queen Marrisith. It talked a lot. And I do mean a lot. When we parted ways by a town it told me was named "Delberz", I found it had somehow managed to steal several pouches of herbs from my belt. I was impressed. So, I suggest not trusting the things, but the companionship and local lore they share may be worth the cost!</Opinion><Opinion target="RULES-RACE_HELF" source="Cynwrawn Fartrack, Hunter from the Laurelorn">Conceited beyond any sensible measure, don't approach the Asur. They are jaded, arrogant, and likely lost to Atharti. And if they try to look down on you in that superior manner they so prefer, just remind them their Queen in Avelorn lives a life no different to ours.</Opinion></OPINIONS>
-<Ethnic>"SPECIE_ELF"</Ethnic>
+<Ethnic>"RULES-SPECIE_WELF"</Ethnic>
 <SUBCHAPTER_ATTR>
 <Attribut name="RULES-ATTR_WS">"2d10+30"</Attribut>
 <Attribut name="RULES-ATTR_BS">"2d10+30"</Attribut>

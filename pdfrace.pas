@@ -6,7 +6,7 @@ interface
 
 uses
   Classes, SysUtils, fpPDF, Dialogs, PicsLib, Graphics, LCLIntf,
-  ChargeRace, ChargeConstantes, ChargeAttribut, ChargeRaceAttribut,
+  ChargeRace, ChargeEspece, ChargeConstantes, ChargeAttribut, ChargeRaceAttribut,
   ChargeRaceCompetence, ChargeCompetence, ChargeRaceTalent, ChargeTalent,
   ChargeRaceMetier, ChargeMetier, PdfPersonnage,
   ChargeTexte, PdfUtils, UnitCalcul;
@@ -134,8 +134,8 @@ begin
 
       // texte
       PdfTaillePolice(PdfPage, PdfFontBold, ConstPoliceCarlson+ConstPoliceGras, 9);
-      PdfCentre(PdfPage, 95, 115, 11, WideUpperCase(WideString(GetTExteLibelle(PRace.Espece))){%H-});
-      PdfCentre(PdfPage, 95, 115, 288, WideUpperCase(WideString(GetTExteLibelle(PRace.Espece))){%H-});
+      PdfCentre(PdfPage, 95, 115, 11, WideUpperCase(WideString(ChercheEspece(PRace.Espece).Libelle)){%H-});
+      PdfCentre(PdfPage, 95, 115, 288, WideUpperCase(WideString(ChercheEspece(PRace.Espece).Libelle)){%H-});
 
       // texte
       PdfTaillePolice(PdfPage, PdfFontBold, ConstPoliceCarlson+ConstPoliceGras, 24);

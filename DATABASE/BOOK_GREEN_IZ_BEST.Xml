@@ -808,11 +808,28 @@
   <!-- Warrior Born -->
 </DATA_RANDOM_TALENT>
 </DATA_RANDOM_TALENT>
+<DATA_RACE>
+<Race id="GREEN-SPECIE_CORC">
+<Description language="ENGLISH">"Common Orc"</Description>
+</Race>
+<Race id="GREEN-SPECIE_BORC">
+<Description language="ENGLISH">"Dark Orc"</Description>
+</Race>
+<Race id="GREEN-SPECIE_CGOB">
+<Description language="ENGLISH">"Common Goblin"</Description>
+</Race>
+<Race id="GREEN-SPECIE_NGOB">
+<Description language="ENGLISH">"Night Goblin"</Description>
+</Race>
+<Race id="GREEN-SPECIE_HGOB">
+<Description language="ENGLISH">"Hobgoblin"</Description>
+</Race>
+</DATA_RACE>
 <DATA_SPECIE>
 <Specie id="GREEN-RACE_CORC">
 <Description language="ENGLISH">"Common Orcs"</Description>
 <Explanation language="ENGLISH">"Orcs are the largest as well as the toughest, meanest and by far the most dangerous of the greenskins. There are several different kinds of Orc, as we shall see, but the most numerous are just plain Orcs or Common Orcs. Even the smallest Orc packs a great deal of bone, muscle and bloody-mindedness into a body as tall as a man and substantionally broader. Orcs vary a great deal in size and appearance, with the biggest individuals in charge of the rest. The pecking order within each tribe is established by constant fighting, so only the meanest and nastiest Orcs get to the very top of the tribal ladder. What Orcs all have in undeniable abundance is brute strength, made all the more dangerous by generous lashings of ignorance."</Explanation>
-<Ethnic>"SPECIE_ORC"</Ethnic>
+<Ethnic>"GREEN-SPECIE_CORC"</Ethnic>
 <SUBCHAPTER_ATTR>
 <Attribut name="RULES-ATTR_WS">"2d10+25"</Attribut>
 <Attribut name="RULES-ATTR_BS">"2d10+20"</Attribut>
@@ -934,7 +951,7 @@
 <Specie id="GREEN-RACE_BORC">
 <Description language="ENGLISH">"Dark Orcs"</Description>
 <Explanation language="ENGLISH">"Black Orcs are the biggest, meanest and strongest of all Orcs. They get their name from their dark green or black skin, although the title is just as much derived from their dour demeanour. Black Orcs are grim and singularly focused on war – an occupation they take extremely seriously. It can truly be said that Black Orcs live to fight. In this regard all Black Orcs treat other greenskins, even the more battle-worthy types, such as Boar Boyz, as little more than frivolous amateurs. This is largely because lesser Orcs, even the hulking Big ’Uns of the Orc tribes, are likely to squabble amongst themselves instead of concentrating on the foe and fight at hand. This lack of discipline is a shortcoming that Black Orcs neither forget nor forgive"</Explanation>
-<Ethnic>"SPECIE_ORC"</Ethnic>
+<Ethnic>"GREEN-SPECIE_BORC"</Ethnic>
 <SUBCHAPTER_ATTR>
 <Attribut name="RULES-ATTR_WS">"2d10+35"</Attribut>
 <Attribut name="RULES-ATTR_BS">"2d10+15"</Attribut>
@@ -1004,7 +1021,7 @@
 <Specie id="GREEN-RACE_CGOB">
 <Description language="ENGLISH">"Common Goblins"</Description>
 <Explanation language="ENGLISH">"Goblins are small, green, vicious, mean-spirited and generally unpleasant creatues. Clues as to their character may be discerned in their tiny pointed teeth, beady glinting eyes, scrawny, grasping hands and general demeanour of a whipped dog. Goblins are however very prolific and they exist practically everywhere in the known world. No matter how many die there are still plenty left. Their preferred method of fighting is to shoot their enemy in the back from a good distance. Like all greenskins, Goblins are quarrelsome and fractious. They fight amongst themselves both on and off the battlefield. They feel little sense of loalty to their their own kin let alone anyone else, and will cheerfully maim, kill and even eat their comrades if they can get away with it. The majority of Goblins living in open areas, most notably in the Badlands and the Dark lands, are Common Goblins or just ordinary Gobbos. They are as common as muck throughout the hills, valleys and plains f the Old World and Beyond."</Explanation>
-<Ethnic>"SPECIE_GOBLIN"</Ethnic>
+<Ethnic>"GREEN-SPECIE_CGOB"</Ethnic>
 <SUBCHAPTER_ATTR>
 <Attribut name="RULES-ATTR_WS">"2d10+15"</Attribut>
 <Attribut name="RULES-ATTR_BS">"2d10+25"</Attribut>
@@ -1102,7 +1119,7 @@
 <Specie id="GREEN-RACE_NGOB">
 <Description language="ENGLISH">"Night Goblins"</Description>
 <Explanation language="ENGLISH">"Goblins are small, green, vicious, mean-spirited and generally unpleasant creatues. Clues as to their character may be discerned in their tiny pointed teeth, beady glinting eyes, scrawny, grasping hands and general demeanour of a whipped dog. Goblins are however very prolific and they exist practically everywhere in the known world. No matter how many die there are still plenty left. Their preferred method of fighting is to shoot their enemy in the back from a good distance. Like all greenskins, Goblins are quarrelsome and fractious. They fight amongst themselves both on and off the battlefield. They feel little sense of loalty to their their own kin let alone anyone else, and will cheerfully maim, kill and even eat their comrades if they can get away with it. Night Goblins are adapted to life underground where they subsist on fungi, Cave Squigs, beetles and bits of each other. They live under the mountains throughout the Old World and Southlands in tunnels that are cool and dark. Night Goblins have a strong  aversion to daylight and when forced above ground wear black or very dark enveloping robes to protect themselves from the sun’s rays. Naturally, their preferred dwelling places has also led to them being in constant conflict with Skaven and Dwarfs, the latter whom they hate with a ferocity only greenskins can muster."</Explanation>
-<Ethnic>"SPECIE_GOBLIN"</Ethnic>
+<Ethnic>"GREEN-SPECIE_NGOB"</Ethnic>
 <SUBCHAPTER_ATTR>
 <Attribut name="RULES-ATTR_WS">"2d10+15"</Attribut>
 <Attribut name="RULES-ATTR_BS">"2d10+25"</Attribut>
@@ -1196,7 +1213,7 @@
 <Specie id="GREEN-RACE_HGOB">
 <Description language="ENGLISH">"Hobgoblins"</Description>
 <Explanation language="ENGLISH">"Hobgoblins are one of the rarer greenskin races in the Old World. They are both stronger and taller than Common Goblins. Indeed, the largest among Hobgoblin tribes are as tall as any Orc. Their builds, though, are lean and wiry, unlike the muscled bulk of the Orcs. Hobgoblins ride snarling Great Wolves that they’ve specifically bred for speed and savagery. They are expert mounted  archers, often practising for days on end at hitting small targets while riding past going full tilt. They prefer hit and run tactics to stand up fights, though they will attack if they outnumber their opponents by more than three to one. Living on the Great Steppes to the East of the Worlds Edge Mountains, where the legendary Hobgobla Khan rules them in their great nomadic hordes as they plunder the civilized peoples of the East."</Explanation>
-<Ethnic>"SPECIE_GOBLIN"</Ethnic>
+<Ethnic>"GREEN-SPECIE_HGOB"</Ethnic>
 <SUBCHAPTER_ATTR>
 <Attribut name="RULES-ATTR_WS">"2d10+20"</Attribut>
 <Attribut name="RULES-ATTR_BS">"2d10+25"</Attribut>

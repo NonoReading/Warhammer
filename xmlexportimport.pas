@@ -7,6 +7,7 @@ interface
 
 uses
   Classes, SysUtils, ChargeConstantes, ChargeCompetence, ChargeTalent, ChargeRace,
+  ChargeEspece, ChargeRegle,
   ChargeRaceAttribut, ChargeRaceCompetence, ChargeRaceTalent, ChargeRaceMetier,
   ChargeMetier, ChargeMetierAttribut, ChargeMetierCompetence, ChargeMetierTalent,
   ChargeMetierEquipement, chargeMetierNiveau, ChargeArme, ChargeArmure,
@@ -833,6 +834,9 @@ Procedure XmlImport(FileName: String; OnlyPrimary: Boolean; OnlyCode: Boolean);
     PTalent:                  StructureTalent;
     PTalentCreation:          StructureTalentCreation;
     PRace:                    StructureRace;
+    PEspece:                  StructureEspece;
+    PRegle:                   StructureRegle;
+    PRegleMetier:             StructureRegleMetier;
     PRaceAttribut:            StructureRaceAttribut;
     PRaceCompetence:          StructureRaceCompetence;
     PRaceTalent:              StructureRaceTalent;
@@ -1308,6 +1312,49 @@ Procedure XmlImport(FileName: String; OnlyPrimary: Boolean; OnlyCode: Boolean);
                           ListTalentCreation.add(PTalentCreation);
                           inc(NbTalentCreation);
                          end;
+
+                      NodeNv2 := NodeNv2.NextSibling;
+                    end;
+                end;
+
+              // Espece (RACE générique regroupant plusieurs ethnies - voir ChargeEspece.pas
+              // pour le vocabulaire : ici <Race>, alors que <Specie> plus bas = ethnie)
+              NodeNv1 := BookNode.FindNode(ConstXmlDataEspece);
+              if Assigned(NodeNv1) then
+                begin
+                  NodeNv2 := NodeNv1.FirstChild;
+                  While Assigned(NodeNv2) do
+                    begin
+                      if NodeNv2.NodeName = ConstXmlEspece then
+                       begin
+                      PEspece.Livre      := Livre;
+                      PEspece.Libelle    := '';
+                      PEspece.CodeEspece := RemoveQuotes(UTF8Encode(NodeNv2.Attributes.GetNamedItem(ConstXmlId).NodeValue));
+                      PTraduction        := InitTrad(ConstPEspece, PEspece.CodeEspece, '', PEspece.Livre);
+
+                      Node := NodeNv2.FirstChild;
+                      while Assigned(Node) do
+                        begin
+                          case Node.NodeName of
+                            ConstXmlDescription:
+                              begin
+                                PEspece.Libelle     := RemoveQuotes(UTF8Encode(Node.TextContent));
+                                Langue              := RemoveQuotes(UTF8Encode(Node.Attributes.GetNamedItem(ConstXmlLanguage).NodeValue));
+                                PTraduction.Libelle := PEspece.Libelle;
+                              end;
+                          end;
+
+                          Node := Node.NextSibling;
+                        end;
+
+                      if LangueDef = ConstAnglais then
+                        begin
+                          ListEspece.add(PEspece);
+                          inc(NbEspece);
+                        end;
+
+                      AddTrad(PTraduction, Langue);
+                       end;
 
                       NodeNv2 := NodeNv2.NextSibling;
                     end;
@@ -2122,7 +2169,12 @@ Procedure XmlImport(FileName: String; OnlyPrimary: Boolean; OnlyCode: Boolean);
                   NodeNv2 := NodeNv1.FirstChild;
                   While Assigned(NodeNv2) do
                     begin
-                      PRaceMetier.Livre := Livre;
+                      if NodeNv2.NodeName = ConstXmlEntry then
+                       begin
+                      PRaceMetier.Livre      := Livre;
+                      PRaceMetier.CodeRace   := '';
+                      PRaceMetier.CodeMetier := '';
+                      PRaceMetier.Chance     := '';
 
                       Node := NodeNv2.FirstChild;
                       while Assigned(Node) do
@@ -2143,6 +2195,97 @@ Procedure XmlImport(FileName: String; OnlyPrimary: Boolean; OnlyCode: Boolean);
                           ListRaceMetier.add(PRaceMetier);
                           inc(NbRaceMetier);
                         end;
+                       end;
+
+                      NodeNv2 := NodeNv2.NextSibling;
+                    end;
+                end;
+
+              // Regles de jeu optionnelles apportées par le livre (voir ChargeRegle.pas)
+              NodeNv1 := BookNode.FindNode(ConstXmlDataRegle);
+              if Assigned(NodeNv1) then
+                begin
+                  NodeNv2 := NodeNv1.FirstChild;
+                  While Assigned(NodeNv2) do
+                    begin
+                      if NodeNv2.NodeName = ConstXmlRegleJeu then
+                       begin
+                      PRegle.Livre     := Livre;
+                      PRegle.Libelle   := '';
+                      PRegle.CodeRegle := RemoveQuotes(UTF8Encode(NodeNv2.Attributes.GetNamedItem(ConstXmlId).NodeValue));
+                      PTraduction      := InitTrad(ConstPRegle, PRegle.CodeRegle, '', PRegle.Livre);
+
+                      Node := NodeNv2.FirstChild;
+                      while Assigned(Node) do
+                        begin
+                          case Node.NodeName of
+                            ConstXmlDescription:
+                              begin
+                                PRegle.Libelle      := RemoveQuotes(UTF8Encode(Node.TextContent));
+                                Langue              := RemoveQuotes(UTF8Encode(Node.Attributes.GetNamedItem(ConstXmlLanguage).NodeValue));
+                                PTraduction.Libelle := PRegle.Libelle;
+                              end;
+                          end;
+
+                          Node := Node.NextSibling;
+                        end;
+
+                      if LangueDef = ConstAnglais then
+                        begin
+                          ListRegle.add(PRegle);
+                          inc(NbRegle);
+                        end;
+
+                      AddTrad(PTraduction, Langue);
+                       end;
+
+                      NodeNv2 := NodeNv2.NextSibling;
+                    end;
+                end;
+
+              // Table de tirage des métiers propre à une règle. CodeRace y désigne
+              // indifféremment une ETHNIE ou une RACE (résolution à l'usage, pas au
+              // chargement : l'ordre de lecture des livres n'est pas garanti).
+              NodeNv1 := BookNode.FindNode(ConstXmlDataRegleMetier);
+              if Assigned(NodeNv1) then
+                begin
+                  NodeNv2 := NodeNv1.FirstChild;
+                  While Assigned(NodeNv2) do
+                    begin
+                      // Ne traiter que les vrais <Entry> : un commentaire ou un noeud texte
+                      // entre deux entrées est aussi un enfant, et sans cette garde il
+                      // rejouerait les valeurs de l'entrée précédente (doublon silencieux).
+                      if NodeNv2.NodeName = ConstXmlEntry then
+                       begin
+                      PRegleMetier.Livre      := Livre;
+                      PRegleMetier.CodeRegle  := '';
+                      PRegleMetier.CodeRace   := '';
+                      PRegleMetier.CodeMetier := '';
+                      PRegleMetier.Chance     := '';
+
+                      Node := NodeNv2.FirstChild;
+                      while Assigned(Node) do
+                        begin
+                          case Node.NodeName of
+                            ConstXmlRegleJeu:
+                              PRegleMetier.CodeRegle  := RemoveQuotes(UTF8Encode(Node.TextContent));
+                            ConstXmlRace:
+                              PRegleMetier.CodeRace   := RemoveQuotes(UTF8Encode(Node.TextContent));
+                            ConstXmlWork:
+                              begin
+                                PRegleMetier.CodeMetier := RemoveQuotes(UTF8Encode(Node.Attributes.GetNamedItem(ConstXmlData).NodeValue));
+                                PRegleMetier.Chance     := RemoveQuotes(UTF8Encode(Node.TextContent));
+                              end;
+                          end;
+                          Node := Node.NextSibling;
+                        end;
+
+                      if LangueDef = ConstAnglais then
+                        begin
+                          ListRegleMetier.add(PRegleMetier);
+                          inc(NbRegleMetier);
+                        end;
+                       end;
 
                       NodeNv2 := NodeNv2.NextSibling;
                     end;

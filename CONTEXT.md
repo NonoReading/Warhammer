@@ -1267,6 +1267,8 @@ existant :
 
 ### 2.9 Import Lustria (PDF → XML) & robustesse du chargement des livres — terminé (démarré le 18/08/2026, clos le 20/08/2026)
 
+<!-- Suite directe : §2.10 (races et ethnies), lancée par Nono à partir de ce que cet import a révélé. -->
+
 **Import des carrières (`DATABASE\BOOK LUSTRIA.xml`, code livre `LUSTR`, livre officiel) :**
 - ✅ Interprète (`LUSTR-WORK123`) et Oracle (`LUSTR-WORK124`) : données complètes (4 paliers,
   compétences/talents/équipement, portrait transparent composité correctement à partir du
@@ -1373,7 +1375,171 @@ de la race pour toute la session, pas juste une ligne fantôme en trop).
 **Chantier Lustria (les 4 carrières) terminé et confirmé par Nono le 20/08/2026.** Reste en
 `A FAIRE.txt` (non bloquant, pas commencé) : le pendant écriture/export de
 `DATA_SPECIE_CAREER_DIRECT`, l'éligibilité Ogre pour Survivalist/Trailblazer (encadré Archives of
-the Empire II), le nom de fichier image sans préfixe de livre, et la notion de race générique.
+the Empire II), et le nom de fichier image sans préfixe de livre. La notion de race générique,
+elle, a été traitée dans la foulée — voir §2.10.
+
+---
+
+### 2.10 Races et ethnies — terminé (20/08/2026)
+
+Chantier lancé par Nono juste après Lustria, pour régler à la racine le problème découvert
+pendant l'import : un métier déclaré sur le Reiklander était inaccessible aux autres Humains.
+
+**Vocabulaire fixé avec Nono (à respecter dans toute discussion future) :**
+
+- **ETHNIE** = ce que le joueur choisit à la création, et ce que le code appelle
+  historiquement "Race" (`StructureRace`, `chargerace.pas`, balise XML `<Specie>`,
+  codes `RULES-RACE_HUM`…). Ex. "Humans (Reikland)".
+- **RACE** = le regroupement au-dessus, commun à plusieurs ethnies. Ex. "Human".
+  Balise XML `<Race>`, bloc `DATA_RACE`, codes `RULES-SPECIE_HUMAN`…, unité `chargeespece.pas`.
+- **Les noms Pascal et XML sont croisés** (`ConstXmlRace = 'Specie'` pour l'ethnie,
+  `ConstXmlEspece = 'Race'` pour la race) — c'est volontaire, pour ne pas renommer les 17
+  fichiers de livres. Un commentaire le rappelle dans `chargeespece.pas` et `chargeconstantes.pas`.
+
+**Ampleur réelle du problème, mesurée avant de concevoir** (c'est ce chiffrage qui a orienté
+toute la solution) : le Reiklander avait 105 entrées `SUBCHAPTER_CAREER` (63 dans la table de
+jet + 42 en `X`), le Tiléen 103 (quasi-copie), mais les trois ethnies de Middenheim n'avaient
+QUE leur table de jet régionale et **zéro entrée `X`** — les 42 métiers de suppléments accumulés
+sur le Reiklander leur étaient inaccessibles.
+
+**Point de conception clé** : le champ existait déjà et était déjà rempli partout
+(`StructureRace.Espece` ← balise `<Ethnic>`), mais il ne servait QUE à l'affichage
+(`pdfrace.pas`, `winraces.pas`, `chargeracemetier.pas`/`MetierRaceCourt`). Il portait cependant
+un regroupement *biologique* (les 3 elfes partageaient `SPECIE_ELF`) incompatible avec un
+regroupement *d'éligibilité* — d'où le découpage des races ci-dessous.
+
+**Ce qui a été fait, dans l'ordre :**
+
+1. `chargeespece.pas` (nouvelle unité) : `StructureEspece`, `ListEspece`, `NbEspece`,
+   `ChercheEspece`. Constantes `ConstXmlEspece`/`ConstXmlDataEspece`/`ConstPEspece`.
+2. Plomberie de liste dans `warhammersource.pas` (Create dans `FormCreate`, Clear + RAZ dans
+   `ChargerLivre`), lecture du bloc `DATA_RACE` dans `xmlexportimport.pas` (juste avant celui de
+   `DATA_SPECIE`), et branchement traduction dans `chargetraduction.pas` (case `ConstPEspece:`).
+3. Bloc `DATA_RACE` ajouté dans 7 livres — **chaque livre déclare désormais ses propres races**,
+   au lieu du Rulebook qui déclarait `SPECIE_OGRE`/`_GNOME`/`_FAMILIAR`/… pour des races venant
+   de suppléments (et `SPECIE_VAMPIRE`, qui ne servait à rien).
+4. Bascule : les 6 appels `GetTexteLibelle(PRace.Espece)` remplacés par
+   `ChercheEspece(PRace.Espece).Libelle`, les 20 balises `<Ethnic>` réorientées vers les nouveaux
+   codes préfixés par livre.
+5. Nettoyage : suppression des 10 `<Text name="RULES-SPECIE_*">` (EN + FR) et des 10 constantes
+   `RaceHumain`/`RaceElf`/… de `chargeconstantes.pas` — **découvertes inutilisées nulle part**.
+6. `CompleteRaceMetierParEspece` (`chargeracemetier.pas`), appelée en fin de `ChargerLivre` :
+   pour chaque entrée de `ListRaceMetier`, ajoute le même métier aux autres ethnies de la même
+   race, **toujours en `'X'`**. Donc l'accessibilité se propage, jamais les fourchettes de dés :
+   les tables de jet régionales restent intactes (`ChargeTabMetier` exclut déjà les `'X'`).
+   Garde-fou anti-doublon obligatoire (`TStringList` triée + `IndexOf`), car `ChargerLivre` est
+   rappelée à chaque changement de livre actif ou de langue.
+
+**Découpage des races — seul l'Humain regroupe plusieurs ethnies.** Repéré en simulant le
+résultat AVANT de faire tester Nono : la propagation cassait les Familiers (chacun a un unique
+métier qui est lui-même — un Familier de Combat serait devenu Familier de Sort) et élargissait
+indûment les Orques Noirs (4 métiers volontairement restreints contre 30 aux Orques Communs).
+Donc `SPECIE_ELF` → `_HELF`/`_WELF`/`_DELF`, `SPECIE_FAMILIAR` → `_FAMIC`/`_FAMIS`/`_FAMIP`,
+`SPECIE_ORC` → `_CORC`/`_BORC`, `SPECIE_GOBLIN` → `_CGOB`/`_NGOB`/`_HGOB`. Résultat final :
+`RULES-SPECIE_HUMAN` est la seule race regroupante (5 ethnies), les 15 autres ont une ethnie
+unique.
+
+**Résultat confirmé par Nono le 20/08/2026** : Middenheimer 60 → 110 métiers accessibles
+(+50), Middenlander et Nordlander 66 → 110 (+44), Reiklander 109 → 110, Tiléen 106 → 110 ;
+tirages d100 inchangés, Familiers et Peaux-Vertes inchangés. Toute nouvelle ethnie Humaine
+ajoutée dans un futur livre héritera automatiquement de tous les métiers en choix libre, sans
+retoucher quoi que ce soit.
+
+---
+
+### 2.11 Règles de jeu optionnelles & table de tirage lustrienne — terminé (20/08/2026)
+
+Suite directe de §2.10, lancée par Nono en découvrant la "Lustrian Class and Career Table"
+(Lustria p.192-193) : une table de tirage des métiers **complète et alternative**, qui remplace
+celle des pages 30-31 du livre de règles pour une campagne située en Lustria.
+
+**Ce que le modèle n'avait pas** : `Chance` était une propriété du couple (ethnie, métier),
+stockée dans `SUBCHAPTER_CAREER` - il n'existait qu'UNE table implicite, et rien ne permettait de
+dire "je tire sur telle table". Or le texte précise que le MJ peut garder la table normale.
+
+**Décisions prises avec Nono (elles conditionnent tout le reste) :**
+
+1. **Portée** : la règle change le tirage, et ses métiers s'AJOUTENT au choix libre - elle ne
+   retire jamais rien. Raison : la table lustrienne ne liste que les 64 métiers de base, donc
+   une règle qui *remplacerait* l'accessibilité ferait perdre au Reiklander les 42 métiers de
+   suppléments accumulés en `X` (dont ceux de Lustria elle-même).
+2. **Ethnie non couverte** (pas de colonne Gnome, Ogre, Elfe Noir, Peau-Verte) : repli sur la
+   table par défaut, jamais de blocage.
+3. **Pas de mémorisation dans le personnage** - justification de Nono : *"la règle ne sert que
+   lors de la création ; une fois son personnage créé, la personne peut voyager et apprendre une
+   carrière non liée à sa règle de création"*. C'est ce qui a évité de toucher `chargepersonnage.pas`.
+
+**Forme retenue** : mêmes principes que §2.9/§2.10 - blocs à plat portés par le livre qui apporte
+la règle, jamais d'écriture dans les `<Specie>` des autres livres, et résolution à l'usage (pas au
+chargement) donc insensible à l'ordre de lecture des fichiers.
+
+- `DATA_RULE` / `<Rule id="...">` : déclaration des règles (`chargeregle.pas`, `ListRegle`).
+- `DATA_CAREER_ROLL` / `<Entry><Rule><Specie><Career name=...>` : les entrées de tirage
+  (`ListRegleMetier`). **`<Specie>` accepte indifféremment une ETHNIE ou une RACE** - c'est ce
+  qui permet d'écrire la colonne "Old World Human" une seule fois pour les 5 ethnies Humaines.
+
+**Réalisé, dans l'ordre :**
+
+1. `chargeregle.pas` (nouvelle unité) + constantes. **Piège rencontré** : `ConstXmlRegle` existait
+   déjà avec la valeur `'RULES'` (la liste des livres acceptés d'un personnage, `chargepersonnage.pas`)
+   - repéré par Nono à la compilation. La nouvelle s'appelle `ConstXmlRegleJeu` (valeur `'Rule'`),
+   avec un commentaire croisé entre les deux pour éviter la confusion.
+2. Plomberie de liste (`warhammersource.pas`), lecture des deux blocs (`xmlexportimport.pas`),
+   branchement traduction (`chargetraduction.pas`, case `ConstPRegle`).
+3. `RegleMetierApplicable` / `RegleCouvreRace` (`chargeregle.pas`) : la résolution règle →
+   ethnie-ou-race, et le test de repli.
+4. UI : `GroupBoxRegle` + `ComboBoxRegle` sur la page Métier de l'assistant (`wincreation.lfm`),
+   `ChargeComboRegle` / `RegleEnCours` / `ComboBoxRegleSelect`, et `ChargeTabMetier` réécrite avec
+   les deux branches. Le cadre est **masqué tant qu'aucun livre n'apporte de règle**, donc écran
+   inchangé pour qui n'en a pas. L'index du combo suit `ListRegle`, aucune liste parallèle.
+5. Données : les 223 entrées de la table (5 colonnes ; le Norse est laissé de côté, cf. plus bas).
+
+**Bug trouvé au test, instructif** : un commentaire XML placé ENTRE deux `<Entry>` créait une
+entrée fantôme dupliquant la précédente (symptôme : "Sorcier 14" affiché deux fois). La boucle de
+lecture parcourt tous les nœuds enfants, commentaires compris ; pour un commentaire `FirstChild`
+est nil, donc l'enregistrement était ajouté avec les valeurs encore en mémoire. Corrigé sur les
+4 blocs récents (`DATA_RACE`, `DATA_RULE`, `DATA_CAREER_ROLL`, `DATA_SPECIE_CAREER_DIRECT`) par
+une garde `if NodeNv2.NodeName = <balise attendue>` + remise à zéro de l'enregistrement.
+**⚠️ Le même piège reste dans les blocs plus anciens** (`DATA_SPECIE_CAREER_CHOICE`,
+`DATA_SKILL_SPECIALIZATION`, `DATA_CAREER_SUBCHOICE`...) : non corrigés, non déclenchés
+aujourd'hui faute de commentaires à ces endroits. Pire sur les blocs à `id` : `Attributes` est nil
+sur un commentaire, donc plantage et pas seulement doublon.
+
+**Trois coquilles du livre corrigées à la saisie** (choix de Nono : *"fais en sorte qu'il y ait un
+résultat et un seul"*), détail et justification dans `A FAIRE.txt`. Chaque colonne couvre
+désormais 01-100 exactement une fois, vérifié depuis le XML écrit. Aucun errata officiel Cubicle 7
+n'existe pour Lustria à ce jour.
+
+**Le cas "3f" (union côté choix libre) réglé par les données, pas par le code.** Mesuré après
+coup, l'écart entre la table lustrienne et ce qui est déjà accessible se réduisait à **un seul
+métier** : le Stevedore pour le Haut Elfe (tirable sur 80 sous la règle, mais pas choisissable).
+Le chantier §2.10 avait déjà rendu accessible tout le reste. Réglé par une entrée
+`DATA_SPECIE_CAREER_DIRECT` plutôt qu'en faisant remonter la règle jusqu'à `winmetier.pas` -
+Nono : *"je suis aussi pour l'ajouter dans les races ayant accès. On voit que les livres ont des
+ratés"*. Contrepartie assumée : l'accès est inconditionnel, pas réservé à la règle Lustria.
+
+**Piège découvert en écrivant cette entrée, puis refermé.** `DATA_SPECIE_CAREER_DIRECT`
+n'acceptait QUE des codes d'ethnie : ses entrées vont dans `ListRaceMetier`, dont tous les
+consommateurs comparent à l'ethnie du personnage. Un code de RACE y était donc chargé sans
+erreur mais ne matchait jamais - inerte et silencieux. La résolution race-ou-ethnie n'existait
+que dans `RegleMetierApplicable`, donc pour `DATA_CAREER_ROLL` uniquement.
+Corrigé en ajoutant une **phase 1** à `CompleteRaceMetierParEspece` : toute entrée ciblant une
+race est développée en une entrée par ethnie, puis l'originale supprimée. Trois précautions :
+le développement a lieu APRÈS le chargement de tous les livres (sinon les ethnies des autres
+livres manquent - le piège de §2.9), la boucle descend car elle supprime pendant le parcours,
+et les deux phases partagent le même index anti-doublon.
+Validé sur données réelles : le bloc de Lustria a été réécrit intégralement en codes de race,
+**19 entrées au lieu de 31**, qui se développent en 35 au chargement - accès identique à avant,
+confirmé par Nono.
+
+**🔧 Reste à faire (un seul point, non bloquant) :**
+
+- **Colonne Norse non saisie** : la race Norse existe dans le livre Sea of Claws mais **pas dans la
+  base** - `BOOK_SEA_OF_CLAWS.Xml` ne contient que `DATA_CAREER`/`DATA_TALENT`/`DATA_SPELL`, aucun
+  `DATA_SPECIE`. C'est aussi ce qui explique que ses 9 métiers soient raccrochés en `X` aux races
+  existantes. La saisir est un chantier à part (race complète + classe Seafarer absente,
+  `CLASS_SEAF` n'existe pas) ; le format à plat fait que la colonne s'ajoutera ensuite sans rien
+  retoucher.
 
 ---
 

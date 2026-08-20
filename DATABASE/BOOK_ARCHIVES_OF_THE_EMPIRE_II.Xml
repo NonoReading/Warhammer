@@ -45,11 +45,16 @@ Examples you could take include: Alcohol, Food, Narcotics, Pleasure."</Explanati
 <Description language="ENGLISH">"Vice (Pleasure)"</Description>
 </Talent>
 </DATA_TALENT_SPECIALIZATION>
+<DATA_RACE>
+<Race id="ARCH2-SPECIE_OGRE">
+<Description language="ENGLISH">"Ogre"</Description>
+</Race>
+</DATA_RACE>
 <DATA_SPECIE>
 <Specie id="ARCH2-RACE_OGRE">
 <Description language="ENGLISH">"Ogre"</Description>
 <Explanation language="ENGLISH">"To most folk of the Empire, Ogres are an obscure but much-discussed threat from lands far away. Ogres, when they appear in the Old World, are almost always part of mercenary companies, hired for their incredible size, strength, and ferocity. Those who have encountered them know only too well to trcat them with caution. Big, boorish, and brutal, an adult Ogre stands at approximately 9 feet tall and weighs close to a thousand pounds, Ogres are massive mountains of muscle and thick, dense bone. The most impressive aspect of the Ogre species is certainly their guts — and not just to hear them tell it. Nothing fills an Ogre with more pride than the size of their gut, which the Ogre will often pat and flex, creating a deafening gurgling and rippling noise. The appetities of Ogres is legendary, fighting and eating are their favourite activities. Ogres are loud, greedy, boastful, enthusiastic, quick to anger, and belligerent. They are also very simple, completely failing to understand even the most elementary of abstract concepts. Music, art, imagination, creativity, and a host of other enlightened subjects mean absolutely nothing to an Ogre. It is best to state things very directly to them — any subtlety or metaphor will just confuse, and in turn frustrate Ogres. However, Ogres do appreciate a good loud bellow, especially during a feast. Ogres are well known for their tendency to travel, and can be found across the four corners of the world fighting in mercenary groups of a score to a few hundred or more. Contrary to most popular opinions, Ogres generally mix well with most societies they encounter, assimilating local customs and traditions with an ease likely spawned from a lack of imagination."</Explanation>
-<Ethnic>"SPECIE_OGRE"</Ethnic>
+<Ethnic>"ARCH2-SPECIE_OGRE"</Ethnic>
 <SUBCHAPTER_ATTR>
 <Attribut name="RULES-ATTR_WS">"2d10+20"</Attribut>
 <Attribut name="RULES-ATTR_BS">"2d10+10"</Attribut>

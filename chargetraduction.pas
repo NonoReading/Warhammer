@@ -6,7 +6,7 @@ interface
 
 uses
   Classes, SysUtils, ChargeConstantes, Generics.Collections, LazUTF8,
-  ChargeAttribut, ChargeTexte, ChargeCompetence, ChargeTalent, ChargeRace,
+  ChargeAttribut, ChargeTexte, ChargeCompetence, ChargeTalent, ChargeRace, ChargeEspece, ChargeRegle,
   ChargeMetier, ChargeArme, ChargeArmeBonus, ChargeArmure, ChargeArmureBonus,
   ChargeSort, ChargeFabrication, ChargeCorruptionTable, UnitCalcul;
 
@@ -91,6 +91,8 @@ Procedure Traduit(Langue: String; Livre: String);
     PCompetence:  StructureCompetence;
     PTalent:      StructureTalent;
     PRace:        StructureRace;
+    PEspece:      StructureEspece;
+    PRegle:       StructureRegle;
     PMetier:      StructureMetier;
     PArme:        StructureArme;
     PArmeBonus:   StructureArmeBonus;
@@ -157,6 +159,22 @@ Procedure Traduit(Langue: String; Livre: String);
                       PRace.Description := PTraduction.Description;
                       PRace.Libelle     := PTraduction.Libelle;
                       ListRace[Ind]     := PRace;
+                    end;
+              ConstPEspece:
+                for Ind :=0 to ListEspece.Count - 1 do
+                  if CompareRechercheValeur(PTraduction.Code, ListEspece[Ind].CodeEspece) then
+                    begin
+                      PEspece            := ListEspece[Ind];
+                      PEspece.Libelle    := PTraduction.Libelle;
+                      ListEspece[Ind]    := PEspece;
+                    end;
+              ConstPRegle:
+                for Ind :=0 to ListRegle.Count - 1 do
+                  if CompareRechercheValeur(PTraduction.Code, ListRegle[Ind].CodeRegle) then
+                    begin
+                      PRegle             := ListRegle[Ind];
+                      PRegle.Libelle     := PTraduction.Libelle;
+                      ListRegle[Ind]     := PRegle;
                     end;
               ConstPMetier:
                 for Ind :=0 to ListMetier.Count - 1 do

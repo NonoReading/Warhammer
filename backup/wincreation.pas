@@ -7,6 +7,7 @@ interface
 uses
   Classes, SysUtils, Forms, Controls, Graphics, Dialogs, ExtCtrls, Grids,
   ComCtrls, StdCtrls, Spin, Buttons, ChargeConstantes, GlobalFonts, ChargeRace,
+  ChargeRegle,
   Types, ChargeMetier, ChargeRaceMetier, ChargeAttribut, ChargeRaceAttribut,
   ChargeMetierAttribut, UnitCalcul, ChargeRaceTalent, ChargeTalent,
   ChargeTalentCreation, ChargeRaceCompetence, ChargeCompetence, ChargeRaceCreation,
@@ -35,6 +36,7 @@ type
     ButtonRaceValider: TBCButton;
     ButtonTalentHasard: TBCButton;
     ButtonTotalMetierCompetence: TButton;
+    ComboBoxRegle: TComboBox;
     ComboRaceCreation: TComboBox;
     EditMetierResultat: TSpinEdit;
     EditMetierSousMetierResultat: TSpinEdit;
@@ -42,6 +44,7 @@ type
     EditRaceResultat: TSpinEdit;
     GroupBoxAttribut: TGroupBox;
     GroupBoxMetier: TGroupBox;
+    GroupBoxRegle: TGroupBox;
     GroupBoxRace: TGroupBox;
     ImageScroll: TImage;
     LabDestin: TEdit;
@@ -162,6 +165,9 @@ type
 
     // Métier
     procedure ChargeTabMetier();
+    procedure ChargeComboRegle();
+    procedure ComboBoxRegleSelect({%H-}Sender: TObject);
+    function  RegleEnCours(): String;
     procedure TabMetierDrawCell({%H-}Sender: TObject; aCol, aRow: Integer;
       aRect: TRect; {%H-}aState: TGridDrawState);
     procedure TabMetierPrepareCanvas({%H-}Sender: TObject; {%H-}aCol, {%H-}aRow: Integer;
@@ -351,6 +357,7 @@ procedure TWinCreations.FormCreate(Sender: TObject);
     MiseEnFormeDesChamp(self);
     ChargerImage();
     ChargerLivre();
+    ChargeComboRegle();
     ChangementPhase(ConstSuivant);
     EditRaceResultat.MinValue    := 0;
     EditRaceResultat.MaxValue    := 100;
@@ -1875,24 +1882,77 @@ procedure TWinCreations.TabMetierDrawCell(Sender: TObject; aCol, aRow: Integer;
     TabMetier.Canvas.TextOut(aRect.Left + 2, aRect.Top + 2, TabMetier.Cells[aCol, aRow]);
   end;
 
+// La liste des règles disponibles : la table de tirage par défaut (celle du livre de
+// règles) en premier, puis une ligne par règle optionnelle apportée par un livre chargé.
+// L'index dans le combo suit exactement ListRegle, donc rien à maintenir en parallèle.
+Procedure TWinCreations.ChargeComboRegle();
+  Var
+    PRegle: StructureRegle;
+  Begin
+    ComboBoxRegle.Items.Clear;
+    ComboBoxRegle.Items.Add(GetTexteLibelle(ConstRulesBook, '', '', true));
+    For PRegle in ListRegle do
+      ComboBoxRegle.Items.Add(PRegle.Libelle);
+    ComboBoxRegle.ItemIndex := 0;
+    GroupBoxRegle.Visible   := (ListRegle.Count > 0);
+  end;
+
+// '' = table de tirage par défaut (celle des SUBCHAPTER_CAREER, livre de règles).
+Function TWinCreations.RegleEnCours(): String;
+  Begin
+    if (ComboBoxRegle.ItemIndex <= 0) or (ComboBoxRegle.ItemIndex > ListRegle.Count) then
+      Result := ''
+    else
+      Result := ListRegle[ComboBoxRegle.ItemIndex - 1].CodeRegle;
+  end;
+
+Procedure TWinCreations.ComboBoxRegleSelect(Sender: TObject);
+  Begin
+    ChargeTabMetier();
+  end;
+
 Procedure TWinCreations.ChargeTabMetier();
   Var
     IndTabMetier:  Integer;
     PMetier:       StructureMetier;
     PRaceMetier:   StructureRaceMetier;
+    PRegleMetier:  StructureRegleMetier;
+    Regle:         String;
   Begin
     IndTabMetier        := 0;
     TabMetier.RowCount  := 1;
-    For PRaceMetier in ListRaceMetier do
-      if CompareRechercheValeur(PRaceMetier.CodeRace, RaceEnCours) and (PRaceMetier.Chance <> SeparateurChance) and (PRaceMetier.Chance <> 'X') then //and (PRaceMetier.Livre = ConstRulesBook) then
-        begin
-            PMetier := ChercheMetier(PRaceMetier.CodeMetier);
-            Inc(IndTabMetier);
-            TabMetier.RowCount  := TabMetier.RowCount + 1;
-            TabMetier.Cells[1, IndTabMetier] := PMetier.CodeMetier;
-            TabMetier.Cells[2, IndTabMetier] := PMetier.Libelle;
-            TabMetier.Cells[3, IndTabMetier] := PRAceMetier.Chance;
-        end;
+
+    // Une règle qui ne couvre pas cette ethnie (pas de colonne Gnome, Ogre... dans la
+    // table lustrienne) laisse la table de tirage par défaut s'appliquer.
+    Regle := RegleEnCours();
+    if not RegleCouvreRace(Regle, RaceEnCours) then
+      Regle := '';
+
+    if Regle <> '' then
+      begin
+        For PRegleMetier in ListRegleMetier do
+          if RegleMetierApplicable(PRegleMetier, Regle, RaceEnCours) and (PRegleMetier.Chance <> SeparateurChance) and (PRegleMetier.Chance <> 'X') then
+            begin
+              PMetier := ChercheMetier(PRegleMetier.CodeMetier);
+              Inc(IndTabMetier);
+              TabMetier.RowCount  := TabMetier.RowCount + 1;
+              TabMetier.Cells[1, IndTabMetier] := PMetier.CodeMetier;
+              TabMetier.Cells[2, IndTabMetier] := PMetier.Libelle;
+              TabMetier.Cells[3, IndTabMetier] := PRegleMetier.Chance;
+            end;
+      end
+    else
+      For PRaceMetier in ListRaceMetier do
+        if CompareRechercheValeur(PRaceMetier.CodeRace, RaceEnCours) and (PRaceMetier.Chance <> SeparateurChance) and (PRaceMetier.Chance <> 'X') then //and (PRaceMetier.Livre = ConstRulesBook) then
+          begin
+              PMetier := ChercheMetier(PRaceMetier.CodeMetier);
+              Inc(IndTabMetier);
+              TabMetier.RowCount  := TabMetier.RowCount + 1;
+              TabMetier.Cells[1, IndTabMetier] := PMetier.CodeMetier;
+              TabMetier.Cells[2, IndTabMetier] := PMetier.Libelle;
+              TabMetier.Cells[3, IndTabMetier] := PRAceMetier.Chance;
+          end;
+
     AdjustGridColumnsWidth(TabMetier, PageEtapes.Height, false, false);
   end;
 

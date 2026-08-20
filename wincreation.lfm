@@ -943,6 +943,32 @@ object WinCreations: TWinCreations
           OnClick = RadioButtonMetierClick
         end
       end
+      object GroupBoxRegle: TGroupBox
+        Left = 768
+        Height = 96
+        Top = 0
+        Width = 232
+        Caption = 'Règle'
+        ClientHeight = 71
+        ClientWidth = 228
+        Color = clBlack
+        DoubleBuffered = True
+        ParentBackground = False
+        ParentColor = False
+        ParentDoubleBuffered = False
+        ParentFont = False
+        TabOrder = 5
+        object ComboBoxRegle: TComboBox
+          Left = 12
+          Height = 28
+          Top = 24
+          Width = 208
+          ItemHeight = 20
+          Style = csDropDownList
+          TabOrder = 0
+          OnSelect = ComboBoxRegleSelect
+        end
+      end
       object TabMetier: TStringGrid
         Left = 0
         Height = 652

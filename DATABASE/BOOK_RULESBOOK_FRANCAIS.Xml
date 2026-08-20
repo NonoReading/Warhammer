@@ -132,16 +132,6 @@
 </DATA_SKILL_COST>
 <DATA_LABEL>
 <Label language="FRANCAIS">
-<Text name="RULES-SPECIE_HUMAN">"Humain"</Text>
-<Text name="RULES-SPECIE_ELF">"Elf"</Text>
-<Text name="RULES-SPECIE_DWARF">"Nain"</Text>
-<Text name="RULES-SPECIE_OGRE">"Ogre"</Text>
-<Text name="RULES-SPECIE_GNOME">"Gnome"</Text>
-<Text name="RULES-SPECIE_HALFLING">"Halfling"</Text>
-<Text name="RULES-SPECIE_GOBLIN">"Goblin"</Text>
-<Text name="RULES-SPECIE_ORC">"Orc"</Text>
-<Text name="RULES-SPECIE_VAMPIRE">"Vampire"</Text>
-<Text name="RULES-SPECIE_FAMILIAR">"Familier"</Text>
 <Text name="RULES-ARMOL_ARM">"Bras"</Text>
 <Text name="RULES-ARMOL_BODY">"Corps"</Text>
 <Text name="RULES-ARMOL_HEAD">"Tête"</Text>
@@ -4729,11 +4719,28 @@ See page 190 for Fear rules"</Explanation>
   <!-- Guerrier né -->
 </DATA_RANDOM_TALENT>
 </DATA_RANDOM_TALENT>
+<DATA_RACE>
+<Race id="RULES-SPECIE_HUMAN">
+<Description language="FRANCAIS">"Humain"</Description>
+</Race>
+<Race id="RULES-SPECIE_HELF">
+<Description language="FRANCAIS">"Haut Elfe"</Description>
+</Race>
+<Race id="RULES-SPECIE_WELF">
+<Description language="FRANCAIS">"Elfe Sylvain"</Description>
+</Race>
+<Race id="RULES-SPECIE_DWARF">
+<Description language="FRANCAIS">"Nain"</Description>
+</Race>
+<Race id="RULES-SPECIE_HALFLING">
+<Description language="FRANCAIS">"Halfling"</Description>
+</Race>
+</DATA_RACE>
 <DATA_SPECIE>
 <Specie id="RULES-RACE_HUM">
 <Description language="FRANCAIS">"Humains (Reikland)"</Description>
 <Explanation language="FRANCAIS">"Les humains constituent la race civilisée la plus répandue du Vieux Monde. Depuis les plaines des Royaumes estaliens aux provinces gelées de Kislev, les humains occupent chaque région du continent, et ils y prospèrent. Le plus grand et le plus puissant royaume humain est l’Empire, une mosaïque de provinces puissantes couvertes de forêts apparemment sans fin. Situé au cœur de l’Empire, le Reikland en est la région la plus riche et la plus cosmopolite."</Explanation>
-<Ethnic>"SPECIE_HUMAN"</Ethnic>
+<Ethnic>"RULES-SPECIE_HUMAN"</Ethnic>
 <SUBCHAPTER_ATTR>
 <Attribut name="RULES-ATTR_WS">"2d10+20"</Attribut>
 <Attribut name="RULES-ATTR_BS">"2d10+20"</Attribut>
@@ -5005,7 +5012,7 @@ See page 190 for Fear rules"</Explanation>
 <Specie id="RULES-RACE_HALF">
 <Description language="FRANCAIS">"Halfling"</Description>
 <Explanation language="FRANCAIS">"Les halflings se rencontrent partout à travers le Reikland, travaillant au service des commerces dans toutes les villes. Un quartier entier de la capitale du Reikland, Altdorf, connu sous le nom de Haffenstadt, regroupe même des centaines de familles élargies de halflings venant en aide aux restaurants, aux tavernes, aux échoppes de pipes et à un nombre impressionnant de gargotes ambulantes. Les halflings sont aussi très présents dans beaucoup de villages du Reikland, où ils travaillent souvent en tant qu’employés d’une auberge ou d’une ferme. Ce sont des créatures grégaires, qui préfèrent vivre en groupes"</Explanation>
-<Ethnic>"SPECIE_HALFLING"</Ethnic>
+<Ethnic>"RULES-SPECIE_HALFLING"</Ethnic>
 <SUBCHAPTER_ATTR>
 <Attribut name="RULES-ATTR_WS">"2d10+10"</Attribut>
 <Attribut name="RULES-ATTR_BS">"2d10+30"</Attribut>
@@ -5195,7 +5202,7 @@ See page 190 for Fear rules"</Explanation>
 <Specie id="RULES-RACE_DWAR">
 <Description language="FRANCAIS">"Nains"</Description>
 <Explanation language="FRANCAIS">"Les nains, ou Dawi, le nom qu’ils se donnent – sont légendairement bourrus et têtus. Bien que la majorité vive dans de vastes constructions à flanc de montagne, connues sous le nom de « forteresses », la plupart des grandes villes et la capitale du Reikland abritent également des populations naines. Compte tenu de leur nature clanique, les nains ont tendance à se regrouper, formant des enclaves ou des quartiers partout où ils s’installent. Beaucoup de nains vivant dans le Reikland sont les descendants de ceux qui ont été chassés de forteresses tombées il y a plusieurs siècles, mais la plupart se considèrent toujours comme des nains des Montagnes Grises, bien que certains n’aient jamais vu une colline, et encore moins une montagne."</Explanation>
-<Ethnic>"SPECIE_DWARF"</Ethnic>
+<Ethnic>"RULES-SPECIE_DWARF"</Ethnic>
 <SUBCHAPTER_ATTR>
 <Attribut name="RULES-ATTR_WS">"2d10+30"</Attribut>
 <Attribut name="RULES-ATTR_BS">"2d10+20"</Attribut>
@@ -5383,7 +5390,7 @@ See page 190 for Fear rules"</Explanation>
 <Specie id="RULES-RACE_HELF">
 <Description language="FRANCAIS">"Haut Elfe"</Description>
 <Explanation language="FRANCAIS">"Grands et élancés, avec de délicates oreilles pointues, la plupart des elfes sont dotés de longs cheveux fins et d’une voix mélodieuse. Bien qu’ils puissent sembler fragiles, leur physiologie n’est pas simplement puissante, mais aussi extraordinairement agile et adroite. Il y a peu de dimorphisme sexuel entre les elfes, ce qui provoque souvent de la confusion chez les humains qui interagissent avec eux."</Explanation>
-<Ethnic>"SPECIE_ELF"</Ethnic>
+<Ethnic>"RULES-SPECIE_HELF"</Ethnic>
 <SUBCHAPTER_ATTR>
 <Attribut name="RULES-ATTR_WS">"2d10+30"</Attribut>
 <Attribut name="RULES-ATTR_BS">"2d10+30"</Attribut>
@@ -5537,7 +5544,7 @@ See page 190 for Fear rules"</Explanation>
 <Specie id="RULES-RACE_WELF">
 <Description language="FRANCAIS">"Elfe Sylvain"</Description>
 <Explanation language="FRANCAIS">"Les elfes sylvains sont rares dans le Reikland, et pour une bonne raison. Pendant les derniers jours de la Guerre de la Barbe, beaucoup d’elfes se sont retirés du Vieux Monde. Mais quelques-uns sont restés et se sont retranchés dans les profondeurs des forêts magiques, qu’ils considèrent aujourd’hui comme leur foyer. Plus de trois mille ans d’isolement, de difficultés et de guerres s’ensuivirent, rendant les « elfes sylvains » culturellement très différents de leurs cousins hauts elfes."</Explanation>
-<Ethnic>"SPECIE_ELF"</Ethnic>
+<Ethnic>"RULES-SPECIE_WELF"</Ethnic>
 <SUBCHAPTER_ATTR>
 <Attribut name="RULES-ATTR_WS">"2d10+30"</Attribut>
 <Attribut name="RULES-ATTR_BS">"2d10+30"</Attribut>

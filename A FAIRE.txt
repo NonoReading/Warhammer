@@ -299,29 +299,6 @@ PDF Personnage (PRIORITAIRE) :
   construire le chemin à partir du code complet plutôt que de CodeValeur. Pas conçu, pas
   commencé.
 
-- (repéré par Nono, 19/08/2026, pas commencé, chantier de fond) tes données de race n'ont pas
-  de notion de "race générique" - chaque livre définit ses propres variantes régionales
-  d'Humain comme des races à part entière, sans lien entre elles ni avec un "Humain" générique :
-  RULES-RACE_HUM = "Humans (Reikland)" (Rulesbook), UPINA-RACE_HTIL = "Humans (Tilea)"
-  (Up in Arms), MIDDE-RACE_HMIDH/HMIDL/HNORD = "Humans (Middenheimer/Middenlander/Nordlander)"
-  (Middenheim). Repéré en préparant les races accessibles d'Interpreter (Lustria) : le PDF dit
-  juste "Human" (générique), mais comme le Rulesbook n'a que le Reiklander, une entrée
-  DATA_SPECIE_CAREER_CHOICE ciblant seulement RULES-RACE_HUM aurait laissé les Humains
-  Tiléens/Middenheimer/Middenlander/Nordlander sans accès à Interpreter, sans toucher à la base.
-  Contournement appliqué pour Lustria le 19/08/2026 (pas une vraie solution) : une entrée
-  DATA_SPECIE_CAREER_CHOICE par variante Humaine CONNUE aujourd'hui (les 5 recensées ci-dessus),
-  vérifié une par une que chacune a bien Lawyer/RULES-WORK33 dans son propre SUBCHAPTER_METIER
-  avant de l'ajouter. Ça marche pour l'état actuel des livres, mais toute nouvelle variante
-  Humaine ajoutée dans un futur livre resterait exclue tant qu'on ne revient pas ajouter une
-  ligne ici à la main - même fragilité de fond que le point ci-dessus sur les noms de fichiers
-  image (repose sur la discipline, pas sur la structure). Nono voudrait une vraie notion de race
-  générique (un Humain générique dont Reikland/Tilea/Middenheimer/etc. dépendraient), pour que ce
-  genre de règle (accès à un métier, mais potentiellement d'autres choses) puisse cibler le
-  générique une fois et s'appliquer à toutes les variantes automatiquement. Pas conçu (quel
-  champ/lien ajouter à StructureRace, comment les mécanismes existants - SUBCHAPTER_METIER,
-  DATA_SPECIE_CAREER_CHOICE, SUBCHAPTER_CARAC, etc. - devraient consulter le générique en plus
-  ou à la place du spécifique), à concevoir avec Nono séparément.
-
 - (repéré le 20/08/2026, pas commencé) Nouveau bloc XML `DATA_SPECIE_CAREER_DIRECT`
   (chargeconstantes.pas + xmlexportimport.pas, lecture uniquement) : permet d'accrocher un
   métier à une race définie dans un AUTRE livre (ou l'inverse) sans jamais créer de `<Specie>`
@@ -343,3 +320,49 @@ PDF Personnage (PRIORITAIRE) :
   SUBCHAPTER_CAREER standard par race). Pas encore regardé si ce mécanisme spécial est déjà
   représenté dans BOOK_ARCHIVES_OF_THE_EMPIRE_II.Xml ni comment y accrocher Survivalist/
   Trailblazer proprement. Volontairement mis de côté pour plus tard (Nono, 20/08/2026).
+
+- (relevé le 20/08/2026, décision prise, à resurveiller) Trois coquilles dans la "Lustrian Class
+  and Career Table" (Lustria p.192-193), corrigées volontairement à la saisie dans
+  BOOK LUSTRIA.xml plutôt que reproduites fidèlement (choix de Nono : "fait en sorte qu'il y ait
+  un résultat et un seul"). Vérifié à l'image : le livre imprime bien ce qui est relevé, ce ne
+  sont pas des erreurs de lecture. Les trois touchent les mêmes lignes voisines
+  Seaman/Smuggler/Stevedore, ce qui ressemble à un décalage de mise en page :
+    * colonne Nain      : Stevedore imprimé 75    -> saisi 76-77 (75 est déjà pris par Smuggler,
+                          et 76-77 n'étaient attribués à personne)
+    * colonne Halfling  : Stevedore imprimé 77-79 -> saisi 80-82 (même schéma, 77-79 déjà pris
+                          par Smuggler, 80-82 orphelins)
+    * colonne Haut Elfe : Smuggler  imprimé 65-79 -> saisi 70-79 (65-69 appartiennent à Seaman ;
+                          pas de trou dans cette colonne, mais un doublon qui rendait Smuggler
+                          inatteignable)
+  Chaque correction est la SEULE valeur qui fasse couvrir 01-100 exactement une fois à la
+  colonne - contrainte arithmétique, pas une interprétation. Chaque valeur modifiée porte un
+  commentaire dans le XML rappelant ce qu'imprime le livre.
+  Aucun errata publié par Cubicle 7 pour Lustria au 20/08/2026 (seul un formulaire de
+  signalement existe : cubicle7games.com/errata-submission). A revoir si un errata officiel
+  sort un jour, ou si la coquille est signalée et corrigée.
+
+- (repéré le 20/08/2026, pas commencé) Saisir la race NORSE depuis Sea of Claws.
+  BOOK_SEA_OF_CLAWS.Xml ne contient que DATA_CAREER / DATA_TALENT / DATA_SPELL : aucune race n'a
+  jamais été saisie depuis ce livre, alors que le Norse y existe. C'est ce qui explique que ses
+  9 métiers (Beachcomber, Chantyman, Huffer, Officer, Sailor, Sailor-Priest of Manann, Ship's
+  Gunner, Wrecker, Priest of Stromfels) soient raccrochés en 'X' aux races existantes plutôt qu'à
+  leur race d'origine. Bloque la colonne Norse de la table lustrienne (CONTEXT.md §2.11), qui
+  s'ajoutera sans rien retoucher une fois la race présente (bloc à plat). Chantier à part
+  entière : race complète (description, caractéristiques, compétences/talents de départ, table de
+  métiers, image) + la classe Seafarer, absente elle aussi (pas de CLASS_SEAF, les 9 métiers sont
+  rangés sous les classes standard) + les notes 3 à 6 de Lustria p.193 qui décrivent des
+  substitutions Norse (Boatman -> Beachcomber, Seaman -> Sailor, section Riverfolk remplacée par
+  la classe Seafarer).
+
+- (repéré le 20/08/2026, pas commencé) Refermer le piège des commentaires XML dans les blocs de
+  lecture plus anciens de xmlexportimport.pas. La boucle de lecture parcourt TOUS les noeuds
+  enfants, commentaires et noeuds texte compris ; sans garde sur le type de noeud, un commentaire
+  placé entre deux éléments produit soit un doublon silencieux (l'enregistrement précédent est
+  réajouté tel quel), soit un plantage sur les blocs à 'id' (Attributes est nil sur un
+  commentaire). Rencontré pour de vrai le 20/08/2026 sur DATA_CAREER_ROLL (un "Sorcier 14" affiché
+  deux fois). Les 4 blocs récents sont protégés (DATA_RACE, DATA_RULE, DATA_CAREER_ROLL,
+  DATA_SPECIE_CAREER_DIRECT) ; restent au moins DATA_SPECIE_CAREER_CHOICE,
+  DATA_SKILL_SPECIALIZATION et DATA_CAREER_SUBCHOICE, non déclenchés aujourd'hui faute de
+  commentaires à ces endroits. Correctif connu et mécanique : if NodeNv2.NodeName = <balise
+  attendue> then, plus remise à zéro de l'enregistrement avant lecture.
+

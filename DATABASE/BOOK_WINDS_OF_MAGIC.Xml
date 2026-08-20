@@ -111,11 +111,22 @@ The assistant provides a bonus of +20 to these Tests rather than the normal +10 
 <Description language="ENGLISH">"Suffuse With (Ulgu)"</Description>
 </Talent>
 </DATA_TALENT_SPECIALIZATION>
+<DATA_RACE>
+<Race id="WINDS-SPECIE_FAMIC">
+<Description language="ENGLISH">"Combat Familiar"</Description>
+</Race>
+<Race id="WINDS-SPECIE_FAMIS">
+<Description language="ENGLISH">"Spell Familiar"</Description>
+</Race>
+<Race id="WINDS-SPECIE_FAMIP">
+<Description language="ENGLISH">"Power Familiar"</Description>
+</Race>
+</DATA_RACE>
 <DATA_SPECIE>
 <Specie id="WINDS-RACE_FAMIC">
 <Description language="ENGLISH">"Combat Familiar"</Description>
 <Explanation language="ENGLISH">"Often taking the form of small, armoured warriors, Combat Familiars provide theur creatir wiard with a deadly bodyguard."</Explanation>
-<Ethnic>"SPECIE_FAMILIAR"</Ethnic>
+<Ethnic>"WINDS-SPECIE_FAMIC"</Ethnic>
 <SUBCHAPTER_ATTR>
 <Attribut name="RULES-ATTR_WS">"1d10+30"</Attribut>
 <Attribut name="RULES-ATTR_BS">"2d10+10"</Attribut>
@@ -181,7 +192,7 @@ The assistant provides a bonus of +20 to these Tests rather than the normal +10 
 <Specie id="WINDS-RACE_FAMIS">
 <Description language="ENGLISH">"Spell Familiar"</Description>
 <Explanation language="ENGLISH">"Spell Familiars are often diminutive imps, tinu golems or magillay animated puppets tah have a gift for spellcasting and magical knowledge."</Explanation>
-<Ethnic>"SPECIE_FAMILIAR"</Ethnic>
+<Ethnic>"WINDS-SPECIE_FAMIS"</Ethnic>
 <SUBCHAPTER_ATTR>
 <Attribut name="RULES-ATTR_WS">"2d10+10"</Attribut>
 <Attribut name="RULES-ATTR_BS">"2d10+10"</Attribut>
@@ -247,7 +258,7 @@ The assistant provides a bonus of +20 to these Tests rather than the normal +10 
 <Specie id="WINDS-RACE_FAMIP">
 <Description language="ENGLISH">"Power Familiar"</Description>
 <Explanation language="ENGLISH">"Power Familiars actract magic power to it’s owner."</Explanation>
-<Ethnic>"SPECIE_FAMILIAR"</Ethnic>
+<Ethnic>"WINDS-SPECIE_FAMIP"</Ethnic>
 <SUBCHAPTER_ATTR>
 <Attribut name="RULES-ATTR_WS">"2d10+20"</Attribut>
 <Attribut name="RULES-ATTR_BS">"2d10+20"</Attribut>

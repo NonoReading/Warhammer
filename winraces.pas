@@ -8,7 +8,7 @@ interface
 
 uses
   Classes, SysUtils, Forms, Controls, Graphics, Dialogs, Grids, ComCtrls,
-  StdCtrls, ExtCtrls, BCButton, ChargeRace, ChargeRaceAttribut, ChargeAttribut,
+  StdCtrls, ExtCtrls, BCButton, ChargeRace, ChargeEspece, ChargeRaceAttribut, ChargeAttribut,
   ChargeConstantes, ChargeRaceCompetence, ChargeCompetence, UnitCalcul,
   ChargeRaceTalent, ChargeTalent, ChargeMetier, ChargeRaceMetier,
   GlobalFonts, ChargeTexte, ChargeMetierSousMetier, ChargeMetierRaceChoixMetier,
@@ -180,13 +180,13 @@ begin
             Inc(IndTab);
             if TabRace.RowCount <= IndTab then
               TabRace.RowCount := TabRace.RowCount + 1;
-            TabRace.Cells[1, IndTab] := GetTExteLibelle(PRace.Espece);
+            TabRace.Cells[1, IndTab] := ChercheEspece(PRace.Espece).Libelle;
             TabRace.Cells[2, IndTab] := PRace.CodeRace;
             TabRace.Cells[3, IndTab] := PRace.Libelle;
             TabRace.Cells[4, IndTab] := PRace.Description;
             TabRace.Cells[5, IndTab] := GetTExteLibelle(PRace.Livre,'','',true);
-            TabRace.Cells[6, IndTab] := GetTExteLibelle(PRace.Espece) + PRace.Libelle;
-            TabRace.Cells[7, IndTab] := GetTExteLibelle(PRace.Espece);
+            TabRace.Cells[6, IndTab] := ChercheEspece(PRace.Espece).Libelle + PRace.Libelle;
+            TabRace.Cells[7, IndTab] := ChercheEspece(PRace.Espece).Libelle;
           end
     end;
     TabRace.SortColRow(true,6);

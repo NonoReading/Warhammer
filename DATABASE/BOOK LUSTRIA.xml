@@ -680,155 +680,1455 @@
 </Choice>
 </DATA_SPECIE_CAREER_CHOICE>
 <DATA_SPECIE_CAREER_DIRECT>
+  <!-- Cibles exprimées en RACE (RULES-SPECIE_*) et non en ethnie : une race couvre
+       toutes ses ethnies, présentes et futures. Le développement en une entrée par
+       ethnie se fait au chargement, dans CompleteRaceMetierParEspece (phase 1). -->
 <Entry>
-<Specie>"RULES-RACE_DWAR"</Specie>
+<Specie>"RULES-SPECIE_HUMAN"</Specie>
 <Career name="LUSTR-WORK123">"X"</Career>
   <!-- Interpreter -->
 </Entry>
 <Entry>
-<Specie>"RULES-RACE_HALF"</Specie>
+<Specie>"RULES-SPECIE_DWARF"</Specie>
 <Career name="LUSTR-WORK123">"X"</Career>
   <!-- Interpreter -->
 </Entry>
 <Entry>
-<Specie>"RULES-RACE_HELF"</Specie>
+<Specie>"RULES-SPECIE_HALFLING"</Specie>
 <Career name="LUSTR-WORK123">"X"</Career>
   <!-- Interpreter -->
 </Entry>
 <Entry>
-<Specie>"RULES-RACE_HELF"</Specie>
+<Specie>"RULES-SPECIE_HELF"</Specie>
+<Career name="LUSTR-WORK123">"X"</Career>
+  <!-- Interpreter -->
+</Entry>
+<Entry>
+<Specie>"RULES-SPECIE_WELF"</Specie>
+<Career name="LUSTR-WORK123">"X"</Career>
+  <!-- Interpreter -->
+</Entry>
+<Entry>
+<Specie>"RULES-SPECIE_HUMAN"</Specie>
 <Career name="LUSTR-WORK124">"X"</Career>
   <!-- Oracle -->
 </Entry>
 <Entry>
-<Specie>"RULES-RACE_HUM"</Specie>
-<Career name="LUSTR-WORK123">"X"</Career>
-  <!-- Interpreter -->
-</Entry>
-<Entry>
-<Specie>"RULES-RACE_HUM"</Specie>
+<Specie>"RULES-SPECIE_HELF"</Specie>
 <Career name="LUSTR-WORK124">"X"</Career>
   <!-- Oracle -->
 </Entry>
 <Entry>
-<Specie>"RULES-RACE_WELF"</Specie>
-<Career name="LUSTR-WORK123">"X"</Career>
-  <!-- Interpreter -->
-</Entry>
-<Entry>
-<Specie>"RULES-RACE_WELF"</Specie>
+<Specie>"RULES-SPECIE_WELF"</Specie>
 <Career name="LUSTR-WORK124">"X"</Career>
   <!-- Oracle -->
 </Entry>
 <Entry>
-<Specie>"UPINA-RACE_HTIL"</Specie>
-<Career name="LUSTR-WORK123">"X"</Career>
-  <!-- Interpreter -->
-</Entry>
-<Entry>
-<Specie>"MIDDE-RACE_HMIDH"</Specie>
-<Career name="LUSTR-WORK123">"X"</Career>
-  <!-- Interpreter -->
-</Entry>
-<Entry>
-<Specie>"MIDDE-RACE_HMIDL"</Specie>
-<Career name="LUSTR-WORK123">"X"</Career>
-  <!-- Interpreter -->
-</Entry>
-<Entry>
-<Specie>"MIDDE-RACE_HNORD"</Specie>
-<Career name="LUSTR-WORK123">"X"</Career>
-  <!-- Interpreter -->
-</Entry>
-<Entry>
-<Specie>"RULES-RACE_DWAR"</Specie>
+<Specie>"RULES-SPECIE_HUMAN"</Specie>
 <Career name="LUSTR-WORK125">"X"</Career>
   <!-- Survivalist -->
 </Entry>
 <Entry>
-<Specie>"RULES-RACE_HALF"</Specie>
+<Specie>"RULES-SPECIE_DWARF"</Specie>
 <Career name="LUSTR-WORK125">"X"</Career>
   <!-- Survivalist -->
 </Entry>
 <Entry>
-<Specie>"RULES-RACE_HELF"</Specie>
+<Specie>"RULES-SPECIE_HALFLING"</Specie>
 <Career name="LUSTR-WORK125">"X"</Career>
   <!-- Survivalist -->
 </Entry>
 <Entry>
-<Specie>"RULES-RACE_HUM"</Specie>
+<Specie>"RULES-SPECIE_HELF"</Specie>
 <Career name="LUSTR-WORK125">"X"</Career>
   <!-- Survivalist -->
 </Entry>
 <Entry>
-<Specie>"RULES-RACE_WELF"</Specie>
+<Specie>"RULES-SPECIE_WELF"</Specie>
 <Career name="LUSTR-WORK125">"X"</Career>
   <!-- Survivalist -->
 </Entry>
 <Entry>
-<Specie>"UPINA-RACE_HTIL"</Specie>
-<Career name="LUSTR-WORK125">"X"</Career>
-  <!-- Survivalist -->
-</Entry>
-<Entry>
-<Specie>"MIDDE-RACE_HMIDH"</Specie>
-<Career name="LUSTR-WORK125">"X"</Career>
-  <!-- Survivalist -->
-</Entry>
-<Entry>
-<Specie>"MIDDE-RACE_HMIDL"</Specie>
-<Career name="LUSTR-WORK125">"X"</Career>
-  <!-- Survivalist -->
-</Entry>
-<Entry>
-<Specie>"MIDDE-RACE_HNORD"</Specie>
-<Career name="LUSTR-WORK125">"X"</Career>
-  <!-- Survivalist -->
-</Entry>
-<Entry>
-<Specie>"RULES-RACE_DWAR"</Specie>
+<Specie>"RULES-SPECIE_HUMAN"</Specie>
 <Career name="LUSTR-WORK126">"X"</Career>
   <!-- Trailblazer -->
 </Entry>
 <Entry>
-<Specie>"RULES-RACE_HALF"</Specie>
+<Specie>"RULES-SPECIE_DWARF"</Specie>
 <Career name="LUSTR-WORK126">"X"</Career>
   <!-- Trailblazer -->
 </Entry>
 <Entry>
-<Specie>"RULES-RACE_HELF"</Specie>
+<Specie>"RULES-SPECIE_HALFLING"</Specie>
 <Career name="LUSTR-WORK126">"X"</Career>
   <!-- Trailblazer -->
 </Entry>
 <Entry>
-<Specie>"RULES-RACE_HUM"</Specie>
+<Specie>"RULES-SPECIE_HELF"</Specie>
 <Career name="LUSTR-WORK126">"X"</Career>
   <!-- Trailblazer -->
 </Entry>
 <Entry>
-<Specie>"RULES-RACE_WELF"</Specie>
+<Specie>"RULES-SPECIE_WELF"</Specie>
 <Career name="LUSTR-WORK126">"X"</Career>
   <!-- Trailblazer -->
 </Entry>
 <Entry>
-<Specie>"UPINA-RACE_HTIL"</Specie>
-<Career name="LUSTR-WORK126">"X"</Career>
-  <!-- Trailblazer -->
-</Entry>
-<Entry>
-<Specie>"MIDDE-RACE_HMIDH"</Specie>
-<Career name="LUSTR-WORK126">"X"</Career>
-  <!-- Trailblazer -->
-</Entry>
-<Entry>
-<Specie>"MIDDE-RACE_HMIDL"</Specie>
-<Career name="LUSTR-WORK126">"X"</Career>
-  <!-- Trailblazer -->
-</Entry>
-<Entry>
-<Specie>"MIDDE-RACE_HNORD"</Specie>
-<Career name="LUSTR-WORK126">"X"</Career>
-  <!-- Trailblazer -->
+<Specie>"RULES-SPECIE_HELF"</Specie>
+<Career name="RULES-WORK17">"X"</Career>
+  <!-- Stevedore - la table lustrienne le donne au Haut Elfe sur 80 (p.193) alors que le livre
+       de règles ne le lui ouvre pas : sans cette entrée il serait tirable mais pas
+       choisissable. Décision Nono du 20/08/2026. -->
 </Entry>
 </DATA_SPECIE_CAREER_DIRECT>
+<DATA_RULE>
+<Rule id="LUSTR-RULE_LUSTRIA">
+<Description language="ENGLISH">"Lustrian Class and Career Table"</Description>
+</Rule>
+</DATA_RULE>
+<DATA_CAREER_ROLL>
+  <!-- ===== Colonne Old World Human ===== -->
+<Entry>
+<Rule>"LUSTR-RULE_LUSTRIA"</Rule>
+<Specie>"RULES-SPECIE_HUMAN"</Specie>
+<Career name="RULES-WORK02">"01"</Career>
+  <!-- Apothecary -->
+</Entry>
+<Entry>
+<Rule>"LUSTR-RULE_LUSTRIA"</Rule>
+<Specie>"RULES-SPECIE_HUMAN"</Specie>
+<Career name="RULES-WORK31">"02"</Career>
+  <!-- Engineer -->
+</Entry>
+<Entry>
+<Rule>"LUSTR-RULE_LUSTRIA"</Rule>
+<Specie>"RULES-SPECIE_HUMAN"</Specie>
+<Career name="LUSTR-WORK123">"03-04"</Career>
+  <!-- Interpreter -->
+</Entry>
+<Entry>
+<Rule>"LUSTR-RULE_LUSTRIA"</Rule>
+<Specie>"RULES-SPECIE_HUMAN"</Specie>
+<Career name="RULES-WORK45">"05"</Career>
+  <!-- Nun -->
+</Entry>
+<Entry>
+<Rule>"LUSTR-RULE_LUSTRIA"</Rule>
+<Specie>"RULES-SPECIE_HUMAN"</Specie>
+<Career name="RULES-WORK36">"06"</Career>
+  <!-- Physician -->
+</Entry>
+<Entry>
+<Rule>"LUSTR-RULE_LUSTRIA"</Rule>
+<Specie>"RULES-SPECIE_HUMAN"</Specie>
+<Career name="RULES-WORK49">"07-11"</Career>
+  <!-- Priest -->
+</Entry>
+<Entry>
+<Rule>"LUSTR-RULE_LUSTRIA"</Rule>
+<Specie>"RULES-SPECIE_HUMAN"</Specie>
+<Career name="RULES-WORK23">"12-13"</Career>
+  <!-- Scholar -->
+</Entry>
+<Entry>
+<Rule>"LUSTR-RULE_LUSTRIA"</Rule>
+<Specie>"RULES-SPECIE_HUMAN"</Specie>
+<Career name="RULES-WORK58">"14"</Career>
+  <!-- Wizard -->
+</Entry>
+<Entry>
+<Rule>"LUSTR-RULE_LUSTRIA"</Rule>
+<Specie>"RULES-SPECIE_HUMAN"</Specie>
+<Career name="RULES-WORK01">"15"</Career>
+  <!-- Agitator -->
+</Entry>
+<Entry>
+<Rule>"LUSTR-RULE_LUSTRIA"</Rule>
+<Specie>"RULES-SPECIE_HUMAN"</Specie>
+<Career name="RULES-WORK03">"16-17"</Career>
+  <!-- Artisan -->
+</Entry>
+<Entry>
+<Rule>"LUSTR-RULE_LUSTRIA"</Rule>
+<Specie>"RULES-SPECIE_HUMAN"</Specie>
+<Career name="RULES-WORK37">"18-19"</Career>
+  <!-- Beggar -->
+</Entry>
+<Entry>
+<Rule>"LUSTR-RULE_LUSTRIA"</Rule>
+<Specie>"RULES-SPECIE_HUMAN"</Specie>
+<Career name="RULES-WORK21">"20"</Career>
+  <!-- Investigator -->
+</Entry>
+<Entry>
+<Rule>"LUSTR-RULE_LUSTRIA"</Rule>
+<Specie>"RULES-SPECIE_HUMAN"</Specie>
+<Career name="RULES-WORK34">"21-22"</Career>
+  <!-- Merchant -->
+</Entry>
+<Entry>
+<Rule>"LUSTR-RULE_LUSTRIA"</Rule>
+<Specie>"RULES-SPECIE_HUMAN"</Specie>
+<Career name="RULES-WORK52">"23-24"</Career>
+  <!-- Rat Catcher -->
+</Entry>
+<Entry>
+<Rule>"LUSTR-RULE_LUSTRIA"</Rule>
+<Specie>"RULES-SPECIE_HUMAN"</Specie>
+<Career name="RULES-WORK07">"25"</Career>
+  <!-- Townsman -->
+</Entry>
+<Entry>
+<Rule>"LUSTR-RULE_LUSTRIA"</Rule>
+<Specie>"RULES-SPECIE_HUMAN"</Specie>
+<Career name="RULES-WORK39">"26"</Career>
+  <!-- Watchman -->
+</Entry>
+<Entry>
+<Rule>"LUSTR-RULE_LUSTRIA"</Rule>
+<Specie>"RULES-SPECIE_HUMAN"</Specie>
+<Career name="RULES-WORK15">"27"</Career>
+  <!-- Advisor -->
+</Entry>
+<Entry>
+<Rule>"LUSTR-RULE_LUSTRIA"</Rule>
+<Specie>"RULES-SPECIE_HUMAN"</Specie>
+<Career name="RULES-WORK04">"28"</Career>
+  <!-- Artist -->
+</Entry>
+<Entry>
+<Rule>"LUSTR-RULE_LUSTRIA"</Rule>
+<Specie>"RULES-SPECIE_HUMAN"</Specie>
+<Career name="RULES-WORK18">"29"</Career>
+  <!-- Duellist -->
+</Entry>
+<Entry>
+<Rule>"LUSTR-RULE_LUSTRIA"</Rule>
+<Specie>"RULES-SPECIE_HUMAN"</Specie>
+<Career name="RULES-WORK20">"30"</Career>
+  <!-- Envoy -->
+</Entry>
+<Entry>
+<Rule>"LUSTR-RULE_LUSTRIA"</Rule>
+<Specie>"RULES-SPECIE_HUMAN"</Specie>
+<Career name="RULES-WORK44">"31"</Career>
+  <!-- Noble -->
+</Entry>
+<Entry>
+<Rule>"LUSTR-RULE_LUSTRIA"</Rule>
+<Specie>"RULES-SPECIE_HUMAN"</Specie>
+<Career name="RULES-WORK56">"32-34"</Career>
+  <!-- Servant -->
+</Entry>
+<Entry>
+<Rule>"LUSTR-RULE_LUSTRIA"</Rule>
+<Specie>"RULES-SPECIE_HUMAN"</Specie>
+<Career name="RULES-WORK24">"35"</Career>
+  <!-- Spy -->
+</Entry>
+<Entry>
+<Rule>"LUSTR-RULE_LUSTRIA"</Rule>
+<Specie>"RULES-SPECIE_HUMAN"</Specie>
+<Career name="RULES-WORK32">"36"</Career>
+  <!-- Warden -->
+</Entry>
+<Entry>
+<Rule>"LUSTR-RULE_LUSTRIA"</Rule>
+<Specie>"RULES-SPECIE_HUMAN"</Specie>
+<Career name="RULES-WORK05">"37"</Career>
+  <!-- Bailiff -->
+</Entry>
+<Entry>
+<Rule>"LUSTR-RULE_LUSTRIA"</Rule>
+<Specie>"RULES-SPECIE_HUMAN"</Specie>
+<Career name="RULES-WORK59">"38"</Career>
+  <!-- Hedge Witch -->
+</Entry>
+<Entry>
+<Rule>"LUSTR-RULE_LUSTRIA"</Rule>
+<Specie>"RULES-SPECIE_HUMAN"</Specie>
+<Career name="RULES-WORK29">"39"</Career>
+  <!-- Herbalist -->
+</Entry>
+<Entry>
+<Rule>"LUSTR-RULE_LUSTRIA"</Rule>
+<Specie>"RULES-SPECIE_HUMAN"</Specie>
+<Career name="RULES-WORK10">"40-41"</Career>
+  <!-- Hunter -->
+</Entry>
+<Entry>
+<Rule>"LUSTR-RULE_LUSTRIA"</Rule>
+<Specie>"RULES-SPECIE_HUMAN"</Specie>
+<Career name="RULES-WORK40">"42"</Career>
+  <!-- Miner -->
+</Entry>
+<Entry>
+<Rule>"LUSTR-RULE_LUSTRIA"</Rule>
+<Specie>"RULES-SPECIE_HUMAN"</Specie>
+<Career name="LUSTR-WORK124">"43"</Career>
+  <!-- Oracle -->
+</Entry>
+<Entry>
+<Rule>"LUSTR-RULE_LUSTRIA"</Rule>
+<Specie>"RULES-SPECIE_HUMAN"</Specie>
+<Career name="RULES-WORK19">"44"</Career>
+  <!-- Scout -->
+</Entry>
+<Entry>
+<Rule>"LUSTR-RULE_LUSTRIA"</Rule>
+<Specie>"RULES-SPECIE_HUMAN"</Specie>
+<Career name="RULES-WORK63">"45-48"</Career>
+  <!-- Villager -->
+</Entry>
+<Entry>
+<Rule>"LUSTR-RULE_LUSTRIA"</Rule>
+<Specie>"RULES-SPECIE_HUMAN"</Specie>
+<Career name="RULES-WORK11">"49"</Career>
+  <!-- Bounty Hunter -->
+</Entry>
+<Entry>
+<Rule>"LUSTR-RULE_LUSTRIA"</Rule>
+<Specie>"RULES-SPECIE_HUMAN"</Specie>
+<Career name="RULES-WORK55">"50-51"</Career>
+  <!-- Entertainer -->
+</Entry>
+<Entry>
+<Rule>"LUSTR-RULE_LUSTRIA"</Rule>
+<Specie>"RULES-SPECIE_HUMAN"</Specie>
+<Career name="RULES-WORK26">"52-53"</Career>
+  <!-- Flagellant -->
+</Entry>
+<Entry>
+<Rule>"LUSTR-RULE_LUSTRIA"</Rule>
+<Specie>"RULES-SPECIE_HUMAN"</Specie>
+<Career name="RULES-WORK38">"54"</Career>
+  <!-- Messenger -->
+</Entry>
+<Entry>
+<Rule>"LUSTR-RULE_LUSTRIA"</Rule>
+<Specie>"RULES-SPECIE_HUMAN"</Specie>
+<Career name="RULES-WORK14">"55"</Career>
+  <!-- Pedlar -->
+</Entry>
+<Entry>
+<Rule>"LUSTR-RULE_LUSTRIA"</Rule>
+<Specie>"RULES-SPECIE_HUMAN"</Specie>
+<Career name="LUSTR-WORK125">"56-57"</Career>
+  <!-- Survivalist -->
+</Entry>
+<Entry>
+<Rule>"LUSTR-RULE_LUSTRIA"</Rule>
+<Specie>"RULES-SPECIE_HUMAN"</Specie>
+<Career name="LUSTR-WORK126">"58-59"</Career>
+  <!-- Trailblazer -->
+</Entry>
+<Entry>
+<Rule>"LUSTR-RULE_LUSTRIA"</Rule>
+<Specie>"RULES-SPECIE_HUMAN"</Specie>
+<Career name="RULES-WORK54">"60"</Career>
+  <!-- Witch Hunter -->
+</Entry>
+<Entry>
+<Rule>"LUSTR-RULE_LUSTRIA"</Rule>
+<Specie>"RULES-SPECIE_HUMAN"</Specie>
+<Career name="RULES-WORK06">"61"</Career>
+  <!-- Boatman -->
+</Entry>
+<Entry>
+<Rule>"LUSTR-RULE_LUSTRIA"</Rule>
+<Specie>"RULES-SPECIE_HUMAN"</Specie>
+<Career name="RULES-WORK43">"62"</Career>
+  <!-- Huffer -->
+</Entry>
+<Entry>
+<Rule>"LUSTR-RULE_LUSTRIA"</Rule>
+<Specie>"RULES-SPECIE_HUMAN"</Specie>
+<Career name="RULES-WORK46">"63-64"</Career>
+  <!-- Riverwarden -->
+</Entry>
+<Entry>
+<Rule>"LUSTR-RULE_LUSTRIA"</Rule>
+<Specie>"RULES-SPECIE_HUMAN"</Specie>
+<Career name="RULES-WORK25">"65-66"</Career>
+  <!-- Riverwoman -->
+</Entry>
+<Entry>
+<Rule>"LUSTR-RULE_LUSTRIA"</Rule>
+<Specie>"RULES-SPECIE_HUMAN"</Specie>
+<Career name="RULES-WORK35">"67-70"</Career>
+  <!-- Seaman -->
+</Entry>
+<Entry>
+<Rule>"LUSTR-RULE_LUSTRIA"</Rule>
+<Specie>"RULES-SPECIE_HUMAN"</Specie>
+<Career name="RULES-WORK16">"71"</Career>
+  <!-- Smuggler -->
+</Entry>
+<Entry>
+<Rule>"LUSTR-RULE_LUSTRIA"</Rule>
+<Specie>"RULES-SPECIE_HUMAN"</Specie>
+<Career name="RULES-WORK17">"72-73"</Career>
+  <!-- Stevedore -->
+</Entry>
+<Entry>
+<Rule>"LUSTR-RULE_LUSTRIA"</Rule>
+<Specie>"RULES-SPECIE_HUMAN"</Specie>
+<Career name="RULES-WORK42">"74"</Career>
+  <!-- Wrecker -->
+</Entry>
+<Entry>
+<Rule>"LUSTR-RULE_LUSTRIA"</Rule>
+<Specie>"RULES-SPECIE_HUMAN"</Specie>
+<Career name="RULES-WORK22">"75-76"</Career>
+  <!-- Bawd -->
+</Entry>
+<Entry>
+<Rule>"LUSTR-RULE_LUSTRIA"</Rule>
+<Specie>"RULES-SPECIE_HUMAN"</Specie>
+<Career name="RULES-WORK09">"77"</Career>
+  <!-- Charlatan -->
+</Entry>
+<Entry>
+<Rule>"LUSTR-RULE_LUSTRIA"</Rule>
+<Specie>"RULES-SPECIE_HUMAN"</Specie>
+<Career name="RULES-WORK53">"78"</Career>
+  <!-- Fence -->
+</Entry>
+<Entry>
+<Rule>"LUSTR-RULE_LUSTRIA"</Rule>
+<Specie>"RULES-SPECIE_HUMAN"</Specie>
+<Career name="RULES-WORK48">"79-81"</Career>
+  <!-- Grave Robber -->
+</Entry>
+<Entry>
+<Rule>"LUSTR-RULE_LUSTRIA"</Rule>
+<Specie>"RULES-SPECIE_HUMAN"</Specie>
+<Career name="RULES-WORK30">"82-84"</Career>
+  <!-- Outlaw -->
+</Entry>
+<Entry>
+<Rule>"LUSTR-RULE_LUSTRIA"</Rule>
+<Specie>"RULES-SPECIE_HUMAN"</Specie>
+<Career name="RULES-WORK51">"85"</Career>
+  <!-- Racketeer -->
+</Entry>
+<Entry>
+<Rule>"LUSTR-RULE_LUSTRIA"</Rule>
+<Specie>"RULES-SPECIE_HUMAN"</Specie>
+<Career name="RULES-WORK64">"86-87"</Career>
+  <!-- Thief -->
+</Entry>
+<Entry>
+<Rule>"LUSTR-RULE_LUSTRIA"</Rule>
+<Specie>"RULES-SPECIE_HUMAN"</Specie>
+<Career name="RULES-WORK60">"88"</Career>
+  <!-- Witch -->
+</Entry>
+<Entry>
+<Rule>"LUSTR-RULE_LUSTRIA"</Rule>
+<Specie>"RULES-SPECIE_HUMAN"</Specie>
+<Career name="RULES-WORK08">"89-90"</Career>
+  <!-- Calvalryman -->
+</Entry>
+<Entry>
+<Rule>"LUSTR-RULE_LUSTRIA"</Rule>
+<Specie>"RULES-SPECIE_HUMAN"</Specie>
+<Career name="RULES-WORK27">"91"</Career>
+  <!-- Guard -->
+</Entry>
+<Entry>
+<Rule>"LUSTR-RULE_LUSTRIA"</Rule>
+<Specie>"RULES-SPECIE_HUMAN"</Specie>
+<Career name="RULES-WORK12">"92"</Career>
+  <!-- Knight -->
+</Entry>
+<Entry>
+<Rule>"LUSTR-RULE_LUSTRIA"</Rule>
+<Specie>"RULES-SPECIE_HUMAN"</Specie>
+<Career name="RULES-WORK28">"93-94"</Career>
+  <!-- Pit Fighter -->
+</Entry>
+<Entry>
+<Rule>"LUSTR-RULE_LUSTRIA"</Rule>
+<Specie>"RULES-SPECIE_HUMAN"</Specie>
+<Career name="RULES-WORK61">"95"</Career>
+  <!-- Protagonist -->
+</Entry>
+<Entry>
+<Rule>"LUSTR-RULE_LUSTRIA"</Rule>
+<Specie>"RULES-SPECIE_HUMAN"</Specie>
+<Career name="RULES-WORK57">"96-99"</Career>
+  <!-- Soldier -->
+</Entry>
+<Entry>
+<Rule>"LUSTR-RULE_LUSTRIA"</Rule>
+<Specie>"RULES-SPECIE_HUMAN"</Specie>
+<Career name="RULES-WORK50">"100"</Career>
+  <!-- Warrior Priest -->
+</Entry>
+  <!-- ===== Colonne Dwarf ===== -->
+<Entry>
+<Rule>"LUSTR-RULE_LUSTRIA"</Rule>
+<Specie>"RULES-SPECIE_DWARF"</Specie>
+<Career name="RULES-WORK02">"01"</Career>
+  <!-- Apothecary -->
+</Entry>
+<Entry>
+<Rule>"LUSTR-RULE_LUSTRIA"</Rule>
+<Specie>"RULES-SPECIE_DWARF"</Specie>
+<Career name="RULES-WORK31">"02-04"</Career>
+  <!-- Engineer -->
+</Entry>
+<Entry>
+<Rule>"LUSTR-RULE_LUSTRIA"</Rule>
+<Specie>"RULES-SPECIE_DWARF"</Specie>
+<Career name="LUSTR-WORK123">"05-06"</Career>
+  <!-- Interpreter -->
+</Entry>
+<Entry>
+<Rule>"LUSTR-RULE_LUSTRIA"</Rule>
+<Specie>"RULES-SPECIE_DWARF"</Specie>
+<Career name="RULES-WORK36">"07"</Career>
+  <!-- Physician -->
+</Entry>
+<Entry>
+<Rule>"LUSTR-RULE_LUSTRIA"</Rule>
+<Specie>"RULES-SPECIE_DWARF"</Specie>
+<Career name="RULES-WORK23">"08-09"</Career>
+  <!-- Scholar -->
+</Entry>
+<Entry>
+<Rule>"LUSTR-RULE_LUSTRIA"</Rule>
+<Specie>"RULES-SPECIE_DWARF"</Specie>
+<Career name="RULES-WORK01">"10-11"</Career>
+  <!-- Agitator -->
+</Entry>
+<Entry>
+<Rule>"LUSTR-RULE_LUSTRIA"</Rule>
+<Specie>"RULES-SPECIE_DWARF"</Specie>
+<Career name="RULES-WORK03">"12-17"</Career>
+  <!-- Artisan -->
+</Entry>
+<Entry>
+<Rule>"LUSTR-RULE_LUSTRIA"</Rule>
+<Specie>"RULES-SPECIE_DWARF"</Specie>
+<Career name="RULES-WORK37">"18"</Career>
+  <!-- Beggar -->
+</Entry>
+<Entry>
+<Rule>"LUSTR-RULE_LUSTRIA"</Rule>
+<Specie>"RULES-SPECIE_DWARF"</Specie>
+<Career name="RULES-WORK21">"19-20"</Career>
+  <!-- Investigator -->
+</Entry>
+<Entry>
+<Rule>"LUSTR-RULE_LUSTRIA"</Rule>
+<Specie>"RULES-SPECIE_DWARF"</Specie>
+<Career name="RULES-WORK34">"21-25"</Career>
+  <!-- Merchant -->
+</Entry>
+<Entry>
+<Rule>"LUSTR-RULE_LUSTRIA"</Rule>
+<Specie>"RULES-SPECIE_DWARF"</Specie>
+<Career name="RULES-WORK52">"26"</Career>
+  <!-- Rat Catcher -->
+</Entry>
+<Entry>
+<Rule>"LUSTR-RULE_LUSTRIA"</Rule>
+<Specie>"RULES-SPECIE_DWARF"</Specie>
+<Career name="RULES-WORK07">"27-28"</Career>
+  <!-- Townsman -->
+</Entry>
+<Entry>
+<Rule>"LUSTR-RULE_LUSTRIA"</Rule>
+<Specie>"RULES-SPECIE_DWARF"</Specie>
+<Career name="RULES-WORK39">"29-30"</Career>
+  <!-- Watchman -->
+</Entry>
+<Entry>
+<Rule>"LUSTR-RULE_LUSTRIA"</Rule>
+<Specie>"RULES-SPECIE_DWARF"</Specie>
+<Career name="RULES-WORK15">"31-32"</Career>
+  <!-- Advisor -->
+</Entry>
+<Entry>
+<Rule>"LUSTR-RULE_LUSTRIA"</Rule>
+<Specie>"RULES-SPECIE_DWARF"</Specie>
+<Career name="RULES-WORK04">"33"</Career>
+  <!-- Artist -->
+</Entry>
+<Entry>
+<Rule>"LUSTR-RULE_LUSTRIA"</Rule>
+<Specie>"RULES-SPECIE_DWARF"</Specie>
+<Career name="RULES-WORK18">"34"</Career>
+  <!-- Duellist -->
+</Entry>
+<Entry>
+<Rule>"LUSTR-RULE_LUSTRIA"</Rule>
+<Specie>"RULES-SPECIE_DWARF"</Specie>
+<Career name="RULES-WORK20">"35-36"</Career>
+  <!-- Envoy -->
+</Entry>
+<Entry>
+<Rule>"LUSTR-RULE_LUSTRIA"</Rule>
+<Specie>"RULES-SPECIE_DWARF"</Specie>
+<Career name="RULES-WORK44">"37"</Career>
+  <!-- Noble -->
+</Entry>
+<Entry>
+<Rule>"LUSTR-RULE_LUSTRIA"</Rule>
+<Specie>"RULES-SPECIE_DWARF"</Specie>
+<Career name="RULES-WORK56">"38"</Career>
+  <!-- Servant -->
+</Entry>
+<Entry>
+<Rule>"LUSTR-RULE_LUSTRIA"</Rule>
+<Specie>"RULES-SPECIE_DWARF"</Specie>
+<Career name="RULES-WORK24">"39"</Career>
+  <!-- Spy -->
+</Entry>
+<Entry>
+<Rule>"LUSTR-RULE_LUSTRIA"</Rule>
+<Specie>"RULES-SPECIE_DWARF"</Specie>
+<Career name="RULES-WORK32">"40"</Career>
+  <!-- Warden -->
+</Entry>
+<Entry>
+<Rule>"LUSTR-RULE_LUSTRIA"</Rule>
+<Specie>"RULES-SPECIE_DWARF"</Specie>
+<Career name="RULES-WORK05">"41"</Career>
+  <!-- Bailiff -->
+</Entry>
+<Entry>
+<Rule>"LUSTR-RULE_LUSTRIA"</Rule>
+<Specie>"RULES-SPECIE_DWARF"</Specie>
+<Career name="RULES-WORK10">"42-43"</Career>
+  <!-- Hunter -->
+</Entry>
+<Entry>
+<Rule>"LUSTR-RULE_LUSTRIA"</Rule>
+<Specie>"RULES-SPECIE_DWARF"</Specie>
+<Career name="RULES-WORK40">"44-48"</Career>
+  <!-- Miner -->
+</Entry>
+<Entry>
+<Rule>"LUSTR-RULE_LUSTRIA"</Rule>
+<Specie>"RULES-SPECIE_DWARF"</Specie>
+<Career name="RULES-WORK19">"49"</Career>
+  <!-- Scout -->
+</Entry>
+<Entry>
+<Rule>"LUSTR-RULE_LUSTRIA"</Rule>
+<Specie>"RULES-SPECIE_DWARF"</Specie>
+<Career name="RULES-WORK63">"50-53"</Career>
+  <!-- Villager -->
+</Entry>
+<Entry>
+<Rule>"LUSTR-RULE_LUSTRIA"</Rule>
+<Specie>"RULES-SPECIE_DWARF"</Specie>
+<Career name="RULES-WORK11">"54-56"</Career>
+  <!-- Bounty Hunter -->
+</Entry>
+<Entry>
+<Rule>"LUSTR-RULE_LUSTRIA"</Rule>
+<Specie>"RULES-SPECIE_DWARF"</Specie>
+<Career name="RULES-WORK55">"57-58"</Career>
+  <!-- Entertainer -->
+</Entry>
+<Entry>
+<Rule>"LUSTR-RULE_LUSTRIA"</Rule>
+<Specie>"RULES-SPECIE_DWARF"</Specie>
+<Career name="RULES-WORK38">"59-60"</Career>
+  <!-- Messenger -->
+</Entry>
+<Entry>
+<Rule>"LUSTR-RULE_LUSTRIA"</Rule>
+<Specie>"RULES-SPECIE_DWARF"</Specie>
+<Career name="RULES-WORK14">"61"</Career>
+  <!-- Pedlar -->
+</Entry>
+<Entry>
+<Rule>"LUSTR-RULE_LUSTRIA"</Rule>
+<Specie>"RULES-SPECIE_DWARF"</Specie>
+<Career name="LUSTR-WORK125">"62-65"</Career>
+  <!-- Survivalist -->
+</Entry>
+<Entry>
+<Rule>"LUSTR-RULE_LUSTRIA"</Rule>
+<Specie>"RULES-SPECIE_DWARF"</Specie>
+<Career name="LUSTR-WORK126">"66-67"</Career>
+  <!-- Trailblazer -->
+</Entry>
+<Entry>
+<Rule>"LUSTR-RULE_LUSTRIA"</Rule>
+<Specie>"RULES-SPECIE_DWARF"</Specie>
+<Career name="RULES-WORK06">"68"</Career>
+  <!-- Boatman -->
+</Entry>
+<Entry>
+<Rule>"LUSTR-RULE_LUSTRIA"</Rule>
+<Specie>"RULES-SPECIE_DWARF"</Specie>
+<Career name="RULES-WORK43">"69"</Career>
+  <!-- Huffer -->
+</Entry>
+<Entry>
+<Rule>"LUSTR-RULE_LUSTRIA"</Rule>
+<Specie>"RULES-SPECIE_DWARF"</Specie>
+<Career name="RULES-WORK25">"70-71"</Career>
+  <!-- Riverwoman -->
+</Entry>
+<Entry>
+<Rule>"LUSTR-RULE_LUSTRIA"</Rule>
+<Specie>"RULES-SPECIE_DWARF"</Specie>
+<Career name="RULES-WORK35">"72-74"</Career>
+  <!-- Seaman -->
+</Entry>
+<Entry>
+<Rule>"LUSTR-RULE_LUSTRIA"</Rule>
+<Specie>"RULES-SPECIE_DWARF"</Specie>
+<Career name="RULES-WORK16">"75"</Career>
+  <!-- Smuggler -->
+</Entry>
+<Entry>
+<Rule>"LUSTR-RULE_LUSTRIA"</Rule>
+<Specie>"RULES-SPECIE_DWARF"</Specie>
+<Career name="RULES-WORK17">"76-77"</Career>
+  <!-- Stevedore - errata : le livre imprime 75 -->
+</Entry>
+<Entry>
+<Rule>"LUSTR-RULE_LUSTRIA"</Rule>
+<Specie>"RULES-SPECIE_DWARF"</Specie>
+<Career name="RULES-WORK42">"78"</Career>
+  <!-- Wrecker -->
+</Entry>
+<Entry>
+<Rule>"LUSTR-RULE_LUSTRIA"</Rule>
+<Specie>"RULES-SPECIE_DWARF"</Specie>
+<Career name="RULES-WORK53">"79-80"</Career>
+  <!-- Fence -->
+</Entry>
+<Entry>
+<Rule>"LUSTR-RULE_LUSTRIA"</Rule>
+<Specie>"RULES-SPECIE_DWARF"</Specie>
+<Career name="RULES-WORK30">"81-82"</Career>
+  <!-- Outlaw -->
+</Entry>
+<Entry>
+<Rule>"LUSTR-RULE_LUSTRIA"</Rule>
+<Specie>"RULES-SPECIE_DWARF"</Specie>
+<Career name="RULES-WORK51">"83"</Career>
+  <!-- Racketeer -->
+</Entry>
+<Entry>
+<Rule>"LUSTR-RULE_LUSTRIA"</Rule>
+<Specie>"RULES-SPECIE_DWARF"</Specie>
+<Career name="RULES-WORK64">"84"</Career>
+  <!-- Thief -->
+</Entry>
+<Entry>
+<Rule>"LUSTR-RULE_LUSTRIA"</Rule>
+<Specie>"RULES-SPECIE_DWARF"</Specie>
+<Career name="RULES-WORK27">"85-86"</Career>
+  <!-- Guard -->
+</Entry>
+<Entry>
+<Rule>"LUSTR-RULE_LUSTRIA"</Rule>
+<Specie>"RULES-SPECIE_DWARF"</Specie>
+<Career name="RULES-WORK28">"87-89"</Career>
+  <!-- Pit Fighter -->
+</Entry>
+<Entry>
+<Rule>"LUSTR-RULE_LUSTRIA"</Rule>
+<Specie>"RULES-SPECIE_DWARF"</Specie>
+<Career name="RULES-WORK61">"90-92"</Career>
+  <!-- Protagonist -->
+</Entry>
+<Entry>
+<Rule>"LUSTR-RULE_LUSTRIA"</Rule>
+<Specie>"RULES-SPECIE_DWARF"</Specie>
+<Career name="RULES-WORK57">"93-95"</Career>
+  <!-- Soldier -->
+</Entry>
+<Entry>
+<Rule>"LUSTR-RULE_LUSTRIA"</Rule>
+<Specie>"RULES-SPECIE_DWARF"</Specie>
+<Career name="RULES-WORK62">"96-100"</Career>
+  <!-- Slayer -->
+</Entry>
+  <!-- ===== Colonne Halfling ===== -->
+<Entry>
+<Rule>"LUSTR-RULE_LUSTRIA"</Rule>
+<Specie>"RULES-SPECIE_HALFLING"</Specie>
+<Career name="RULES-WORK02">"01"</Career>
+  <!-- Apothecary -->
+</Entry>
+<Entry>
+<Rule>"LUSTR-RULE_LUSTRIA"</Rule>
+<Specie>"RULES-SPECIE_HALFLING"</Specie>
+<Career name="RULES-WORK31">"02"</Career>
+  <!-- Engineer -->
+</Entry>
+<Entry>
+<Rule>"LUSTR-RULE_LUSTRIA"</Rule>
+<Specie>"RULES-SPECIE_HALFLING"</Specie>
+<Career name="LUSTR-WORK123">"03-04"</Career>
+  <!-- Interpreter -->
+</Entry>
+<Entry>
+<Rule>"LUSTR-RULE_LUSTRIA"</Rule>
+<Specie>"RULES-SPECIE_HALFLING"</Specie>
+<Career name="RULES-WORK36">"05-06"</Career>
+  <!-- Physician -->
+</Entry>
+<Entry>
+<Rule>"LUSTR-RULE_LUSTRIA"</Rule>
+<Specie>"RULES-SPECIE_HALFLING"</Specie>
+<Career name="RULES-WORK23">"07-08"</Career>
+  <!-- Scholar -->
+</Entry>
+<Entry>
+<Rule>"LUSTR-RULE_LUSTRIA"</Rule>
+<Specie>"RULES-SPECIE_HALFLING"</Specie>
+<Career name="RULES-WORK01">"09-10"</Career>
+  <!-- Agitator -->
+</Entry>
+<Entry>
+<Rule>"LUSTR-RULE_LUSTRIA"</Rule>
+<Specie>"RULES-SPECIE_HALFLING"</Specie>
+<Career name="RULES-WORK03">"11-15"</Career>
+  <!-- Artisan -->
+</Entry>
+<Entry>
+<Rule>"LUSTR-RULE_LUSTRIA"</Rule>
+<Specie>"RULES-SPECIE_HALFLING"</Specie>
+<Career name="RULES-WORK37">"16-19"</Career>
+  <!-- Beggar -->
+</Entry>
+<Entry>
+<Rule>"LUSTR-RULE_LUSTRIA"</Rule>
+<Specie>"RULES-SPECIE_HALFLING"</Specie>
+<Career name="RULES-WORK21">"20-21"</Career>
+  <!-- Investigator -->
+</Entry>
+<Entry>
+<Rule>"LUSTR-RULE_LUSTRIA"</Rule>
+<Specie>"RULES-SPECIE_HALFLING"</Specie>
+<Career name="RULES-WORK34">"22-25"</Career>
+  <!-- Merchant -->
+</Entry>
+<Entry>
+<Rule>"LUSTR-RULE_LUSTRIA"</Rule>
+<Specie>"RULES-SPECIE_HALFLING"</Specie>
+<Career name="RULES-WORK52">"26-28"</Career>
+  <!-- Rat Catcher -->
+</Entry>
+<Entry>
+<Rule>"LUSTR-RULE_LUSTRIA"</Rule>
+<Specie>"RULES-SPECIE_HALFLING"</Specie>
+<Career name="RULES-WORK07">"29-30"</Career>
+  <!-- Townsman -->
+</Entry>
+<Entry>
+<Rule>"LUSTR-RULE_LUSTRIA"</Rule>
+<Specie>"RULES-SPECIE_HALFLING"</Specie>
+<Career name="RULES-WORK39">"31-32"</Career>
+  <!-- Watchman -->
+</Entry>
+<Entry>
+<Rule>"LUSTR-RULE_LUSTRIA"</Rule>
+<Specie>"RULES-SPECIE_HALFLING"</Specie>
+<Career name="RULES-WORK15">"33"</Career>
+  <!-- Advisor -->
+</Entry>
+<Entry>
+<Rule>"LUSTR-RULE_LUSTRIA"</Rule>
+<Specie>"RULES-SPECIE_HALFLING"</Specie>
+<Career name="RULES-WORK04">"34-35"</Career>
+  <!-- Artist -->
+</Entry>
+<Entry>
+<Rule>"LUSTR-RULE_LUSTRIA"</Rule>
+<Specie>"RULES-SPECIE_HALFLING"</Specie>
+<Career name="RULES-WORK20">"36"</Career>
+  <!-- Envoy -->
+</Entry>
+<Entry>
+<Rule>"LUSTR-RULE_LUSTRIA"</Rule>
+<Specie>"RULES-SPECIE_HALFLING"</Specie>
+<Career name="RULES-WORK56">"37-42"</Career>
+  <!-- Servant -->
+</Entry>
+<Entry>
+<Rule>"LUSTR-RULE_LUSTRIA"</Rule>
+<Specie>"RULES-SPECIE_HALFLING"</Specie>
+<Career name="RULES-WORK24">"43"</Career>
+  <!-- Spy -->
+</Entry>
+<Entry>
+<Rule>"LUSTR-RULE_LUSTRIA"</Rule>
+<Specie>"RULES-SPECIE_HALFLING"</Specie>
+<Career name="RULES-WORK32">"44"</Career>
+  <!-- Warden -->
+</Entry>
+<Entry>
+<Rule>"LUSTR-RULE_LUSTRIA"</Rule>
+<Specie>"RULES-SPECIE_HALFLING"</Specie>
+<Career name="RULES-WORK05">"45"</Career>
+  <!-- Bailiff -->
+</Entry>
+<Entry>
+<Rule>"LUSTR-RULE_LUSTRIA"</Rule>
+<Specie>"RULES-SPECIE_HALFLING"</Specie>
+<Career name="RULES-WORK29">"46-48"</Career>
+  <!-- Herbalist -->
+</Entry>
+<Entry>
+<Rule>"LUSTR-RULE_LUSTRIA"</Rule>
+<Specie>"RULES-SPECIE_HALFLING"</Specie>
+<Career name="RULES-WORK10">"49-50"</Career>
+  <!-- Hunter -->
+</Entry>
+<Entry>
+<Rule>"LUSTR-RULE_LUSTRIA"</Rule>
+<Specie>"RULES-SPECIE_HALFLING"</Specie>
+<Career name="RULES-WORK40">"51"</Career>
+  <!-- Miner -->
+</Entry>
+<Entry>
+<Rule>"LUSTR-RULE_LUSTRIA"</Rule>
+<Specie>"RULES-SPECIE_HALFLING"</Specie>
+<Career name="RULES-WORK19">"52"</Career>
+  <!-- Scout -->
+</Entry>
+<Entry>
+<Rule>"LUSTR-RULE_LUSTRIA"</Rule>
+<Specie>"RULES-SPECIE_HALFLING"</Specie>
+<Career name="RULES-WORK63">"53-56"</Career>
+  <!-- Villager -->
+</Entry>
+<Entry>
+<Rule>"LUSTR-RULE_LUSTRIA"</Rule>
+<Specie>"RULES-SPECIE_HALFLING"</Specie>
+<Career name="RULES-WORK11">"57"</Career>
+  <!-- Bounty Hunter -->
+</Entry>
+<Entry>
+<Rule>"LUSTR-RULE_LUSTRIA"</Rule>
+<Specie>"RULES-SPECIE_HALFLING"</Specie>
+<Career name="RULES-WORK55">"58-60"</Career>
+  <!-- Entertainer -->
+</Entry>
+<Entry>
+<Rule>"LUSTR-RULE_LUSTRIA"</Rule>
+<Specie>"RULES-SPECIE_HALFLING"</Specie>
+<Career name="RULES-WORK38">"61-62"</Career>
+  <!-- Messenger -->
+</Entry>
+<Entry>
+<Rule>"LUSTR-RULE_LUSTRIA"</Rule>
+<Specie>"RULES-SPECIE_HALFLING"</Specie>
+<Career name="RULES-WORK14">"63"</Career>
+  <!-- Pedlar -->
+</Entry>
+<Entry>
+<Rule>"LUSTR-RULE_LUSTRIA"</Rule>
+<Specie>"RULES-SPECIE_HALFLING"</Specie>
+<Career name="LUSTR-WORK125">"64-65"</Career>
+  <!-- Survivalist -->
+</Entry>
+<Entry>
+<Rule>"LUSTR-RULE_LUSTRIA"</Rule>
+<Specie>"RULES-SPECIE_HALFLING"</Specie>
+<Career name="LUSTR-WORK126">"66-68"</Career>
+  <!-- Trailblazer -->
+</Entry>
+<Entry>
+<Rule>"LUSTR-RULE_LUSTRIA"</Rule>
+<Specie>"RULES-SPECIE_HALFLING"</Specie>
+<Career name="RULES-WORK06">"69"</Career>
+  <!-- Boatman -->
+</Entry>
+<Entry>
+<Rule>"LUSTR-RULE_LUSTRIA"</Rule>
+<Specie>"RULES-SPECIE_HALFLING"</Specie>
+<Career name="RULES-WORK43">"70"</Career>
+  <!-- Huffer -->
+</Entry>
+<Entry>
+<Rule>"LUSTR-RULE_LUSTRIA"</Rule>
+<Specie>"RULES-SPECIE_HALFLING"</Specie>
+<Career name="RULES-WORK46">"71"</Career>
+  <!-- Riverwarden -->
+</Entry>
+<Entry>
+<Rule>"LUSTR-RULE_LUSTRIA"</Rule>
+<Specie>"RULES-SPECIE_HALFLING"</Specie>
+<Career name="RULES-WORK25">"72-73"</Career>
+  <!-- Riverwoman -->
+</Entry>
+<Entry>
+<Rule>"LUSTR-RULE_LUSTRIA"</Rule>
+<Specie>"RULES-SPECIE_HALFLING"</Specie>
+<Career name="RULES-WORK35">"74-76"</Career>
+  <!-- Seaman -->
+</Entry>
+<Entry>
+<Rule>"LUSTR-RULE_LUSTRIA"</Rule>
+<Specie>"RULES-SPECIE_HALFLING"</Specie>
+<Career name="RULES-WORK16">"77-79"</Career>
+  <!-- Smuggler -->
+</Entry>
+<Entry>
+<Rule>"LUSTR-RULE_LUSTRIA"</Rule>
+<Specie>"RULES-SPECIE_HALFLING"</Specie>
+<Career name="RULES-WORK17">"80-82"</Career>
+  <!-- Stevedore - errata : le livre imprime 77-79 -->
+</Entry>
+<Entry>
+<Rule>"LUSTR-RULE_LUSTRIA"</Rule>
+<Specie>"RULES-SPECIE_HALFLING"</Specie>
+<Career name="RULES-WORK22">"83-84"</Career>
+  <!-- Bawd -->
+</Entry>
+<Entry>
+<Rule>"LUSTR-RULE_LUSTRIA"</Rule>
+<Specie>"RULES-SPECIE_HALFLING"</Specie>
+<Career name="RULES-WORK09">"85"</Career>
+  <!-- Charlatan -->
+</Entry>
+<Entry>
+<Rule>"LUSTR-RULE_LUSTRIA"</Rule>
+<Specie>"RULES-SPECIE_HALFLING"</Specie>
+<Career name="RULES-WORK53">"86"</Career>
+  <!-- Fence -->
+</Entry>
+<Entry>
+<Rule>"LUSTR-RULE_LUSTRIA"</Rule>
+<Specie>"RULES-SPECIE_HALFLING"</Specie>
+<Career name="RULES-WORK48">"87-89"</Career>
+  <!-- Grave Robber -->
+</Entry>
+<Entry>
+<Rule>"LUSTR-RULE_LUSTRIA"</Rule>
+<Specie>"RULES-SPECIE_HALFLING"</Specie>
+<Career name="RULES-WORK30">"90"</Career>
+  <!-- Outlaw -->
+</Entry>
+<Entry>
+<Rule>"LUSTR-RULE_LUSTRIA"</Rule>
+<Specie>"RULES-SPECIE_HALFLING"</Specie>
+<Career name="RULES-WORK51">"91"</Career>
+  <!-- Racketeer -->
+</Entry>
+<Entry>
+<Rule>"LUSTR-RULE_LUSTRIA"</Rule>
+<Specie>"RULES-SPECIE_HALFLING"</Specie>
+<Career name="RULES-WORK64">"92-95"</Career>
+  <!-- Thief -->
+</Entry>
+<Entry>
+<Rule>"LUSTR-RULE_LUSTRIA"</Rule>
+<Specie>"RULES-SPECIE_HALFLING"</Specie>
+<Career name="RULES-WORK27">"96"</Career>
+  <!-- Guard -->
+</Entry>
+<Entry>
+<Rule>"LUSTR-RULE_LUSTRIA"</Rule>
+<Specie>"RULES-SPECIE_HALFLING"</Specie>
+<Career name="RULES-WORK28">"97"</Career>
+  <!-- Pit Fighter -->
+</Entry>
+<Entry>
+<Rule>"LUSTR-RULE_LUSTRIA"</Rule>
+<Specie>"RULES-SPECIE_HALFLING"</Specie>
+<Career name="RULES-WORK57">"98-100"</Career>
+  <!-- Soldier -->
+</Entry>
+  <!-- ===== Colonne High Elf ===== -->
+<Entry>
+<Rule>"LUSTR-RULE_LUSTRIA"</Rule>
+<Specie>"RULES-SPECIE_HELF"</Specie>
+<Career name="RULES-WORK02">"01-02"</Career>
+  <!-- Apothecary -->
+</Entry>
+<Entry>
+<Rule>"LUSTR-RULE_LUSTRIA"</Rule>
+<Specie>"RULES-SPECIE_HELF"</Specie>
+<Career name="LUSTR-WORK123">"03-05"</Career>
+  <!-- Interpreter -->
+</Entry>
+<Entry>
+<Rule>"LUSTR-RULE_LUSTRIA"</Rule>
+<Specie>"RULES-SPECIE_HELF"</Specie>
+<Career name="RULES-WORK36">"06-07"</Career>
+  <!-- Physician -->
+</Entry>
+<Entry>
+<Rule>"LUSTR-RULE_LUSTRIA"</Rule>
+<Specie>"RULES-SPECIE_HELF"</Specie>
+<Career name="RULES-WORK23">"08-11"</Career>
+  <!-- Scholar -->
+</Entry>
+<Entry>
+<Rule>"LUSTR-RULE_LUSTRIA"</Rule>
+<Specie>"RULES-SPECIE_HELF"</Specie>
+<Career name="RULES-WORK58">"12-15"</Career>
+  <!-- Wizard -->
+</Entry>
+<Entry>
+<Rule>"LUSTR-RULE_LUSTRIA"</Rule>
+<Specie>"RULES-SPECIE_HELF"</Specie>
+<Career name="RULES-WORK03">"16-18"</Career>
+  <!-- Artisan -->
+</Entry>
+<Entry>
+<Rule>"LUSTR-RULE_LUSTRIA"</Rule>
+<Specie>"RULES-SPECIE_HELF"</Specie>
+<Career name="RULES-WORK21">"19"</Career>
+  <!-- Investigator -->
+</Entry>
+<Entry>
+<Rule>"LUSTR-RULE_LUSTRIA"</Rule>
+<Specie>"RULES-SPECIE_HELF"</Specie>
+<Career name="RULES-WORK34">"20-24"</Career>
+  <!-- Merchant -->
+</Entry>
+<Entry>
+<Rule>"LUSTR-RULE_LUSTRIA"</Rule>
+<Specie>"RULES-SPECIE_HELF"</Specie>
+<Career name="RULES-WORK07">"25-26"</Career>
+  <!-- Townsman -->
+</Entry>
+<Entry>
+<Rule>"LUSTR-RULE_LUSTRIA"</Rule>
+<Specie>"RULES-SPECIE_HELF"</Specie>
+<Career name="RULES-WORK39">"27"</Career>
+  <!-- Watchman -->
+</Entry>
+<Entry>
+<Rule>"LUSTR-RULE_LUSTRIA"</Rule>
+<Specie>"RULES-SPECIE_HELF"</Specie>
+<Career name="RULES-WORK15">"28-29"</Career>
+  <!-- Advisor -->
+</Entry>
+<Entry>
+<Rule>"LUSTR-RULE_LUSTRIA"</Rule>
+<Specie>"RULES-SPECIE_HELF"</Specie>
+<Career name="RULES-WORK04">"30"</Career>
+  <!-- Artist -->
+</Entry>
+<Entry>
+<Rule>"LUSTR-RULE_LUSTRIA"</Rule>
+<Specie>"RULES-SPECIE_HELF"</Specie>
+<Career name="RULES-WORK18">"31"</Career>
+  <!-- Duellist -->
+</Entry>
+<Entry>
+<Rule>"LUSTR-RULE_LUSTRIA"</Rule>
+<Specie>"RULES-SPECIE_HELF"</Specie>
+<Career name="RULES-WORK20">"32-33"</Career>
+  <!-- Envoy -->
+</Entry>
+<Entry>
+<Rule>"LUSTR-RULE_LUSTRIA"</Rule>
+<Specie>"RULES-SPECIE_HELF"</Specie>
+<Career name="RULES-WORK44">"34-36"</Career>
+  <!-- Noble -->
+</Entry>
+<Entry>
+<Rule>"LUSTR-RULE_LUSTRIA"</Rule>
+<Specie>"RULES-SPECIE_HELF"</Specie>
+<Career name="RULES-WORK24">"37-38"</Career>
+  <!-- Spy -->
+</Entry>
+<Entry>
+<Rule>"LUSTR-RULE_LUSTRIA"</Rule>
+<Specie>"RULES-SPECIE_HELF"</Specie>
+<Career name="RULES-WORK32">"39"</Career>
+  <!-- Warden -->
+</Entry>
+<Entry>
+<Rule>"LUSTR-RULE_LUSTRIA"</Rule>
+<Specie>"RULES-SPECIE_HELF"</Specie>
+<Career name="RULES-WORK29">"40-41"</Career>
+  <!-- Herbalist -->
+</Entry>
+<Entry>
+<Rule>"LUSTR-RULE_LUSTRIA"</Rule>
+<Specie>"RULES-SPECIE_HELF"</Specie>
+<Career name="RULES-WORK10">"42-44"</Career>
+  <!-- Hunter -->
+</Entry>
+<Entry>
+<Rule>"LUSTR-RULE_LUSTRIA"</Rule>
+<Specie>"RULES-SPECIE_HELF"</Specie>
+<Career name="LUSTR-WORK124">"45-46"</Career>
+  <!-- Oracle -->
+</Entry>
+<Entry>
+<Rule>"LUSTR-RULE_LUSTRIA"</Rule>
+<Specie>"RULES-SPECIE_HELF"</Specie>
+<Career name="RULES-WORK19">"47-52"</Career>
+  <!-- Scout -->
+</Entry>
+<Entry>
+<Rule>"LUSTR-RULE_LUSTRIA"</Rule>
+<Specie>"RULES-SPECIE_HELF"</Specie>
+<Career name="RULES-WORK11">"53-54"</Career>
+  <!-- Bounty Hunter -->
+</Entry>
+<Entry>
+<Rule>"LUSTR-RULE_LUSTRIA"</Rule>
+<Specie>"RULES-SPECIE_HELF"</Specie>
+<Career name="RULES-WORK55">"55-57"</Career>
+  <!-- Entertainer -->
+</Entry>
+<Entry>
+<Rule>"LUSTR-RULE_LUSTRIA"</Rule>
+<Specie>"RULES-SPECIE_HELF"</Specie>
+<Career name="RULES-WORK38">"58"</Career>
+  <!-- Messenger -->
+</Entry>
+<Entry>
+<Rule>"LUSTR-RULE_LUSTRIA"</Rule>
+<Specie>"RULES-SPECIE_HELF"</Specie>
+<Career name="LUSTR-WORK125">"59-60"</Career>
+  <!-- Survivalist -->
+</Entry>
+<Entry>
+<Rule>"LUSTR-RULE_LUSTRIA"</Rule>
+<Specie>"RULES-SPECIE_HELF"</Specie>
+<Career name="LUSTR-WORK126">"61-63"</Career>
+  <!-- Trailblazer -->
+</Entry>
+<Entry>
+<Rule>"LUSTR-RULE_LUSTRIA"</Rule>
+<Specie>"RULES-SPECIE_HELF"</Specie>
+<Career name="RULES-WORK06">"64"</Career>
+  <!-- Boatman -->
+</Entry>
+<Entry>
+<Rule>"LUSTR-RULE_LUSTRIA"</Rule>
+<Specie>"RULES-SPECIE_HELF"</Specie>
+<Career name="RULES-WORK35">"65-69"</Career>
+  <!-- Seaman -->
+</Entry>
+<Entry>
+<Rule>"LUSTR-RULE_LUSTRIA"</Rule>
+<Specie>"RULES-SPECIE_HELF"</Specie>
+<Career name="RULES-WORK16">"70-79"</Career>
+  <!-- Smuggler - errata : le livre imprime 65-79 -->
+</Entry>
+<Entry>
+<Rule>"LUSTR-RULE_LUSTRIA"</Rule>
+<Specie>"RULES-SPECIE_HELF"</Specie>
+<Career name="RULES-WORK17">"80"</Career>
+  <!-- Stevedore -->
+</Entry>
+<Entry>
+<Rule>"LUSTR-RULE_LUSTRIA"</Rule>
+<Specie>"RULES-SPECIE_HELF"</Specie>
+<Career name="RULES-WORK22">"81-82"</Career>
+  <!-- Bawd -->
+</Entry>
+<Entry>
+<Rule>"LUSTR-RULE_LUSTRIA"</Rule>
+<Specie>"RULES-SPECIE_HELF"</Specie>
+<Career name="RULES-WORK09">"83-85"</Career>
+  <!-- Charlatan -->
+</Entry>
+<Entry>
+<Rule>"LUSTR-RULE_LUSTRIA"</Rule>
+<Specie>"RULES-SPECIE_HELF"</Specie>
+<Career name="RULES-WORK30">"86-88"</Career>
+  <!-- Outlaw -->
+</Entry>
+<Entry>
+<Rule>"LUSTR-RULE_LUSTRIA"</Rule>
+<Specie>"RULES-SPECIE_HELF"</Specie>
+<Career name="RULES-WORK08">"89-91"</Career>
+  <!-- Calvalryman -->
+</Entry>
+<Entry>
+<Rule>"LUSTR-RULE_LUSTRIA"</Rule>
+<Specie>"RULES-SPECIE_HELF"</Specie>
+<Career name="RULES-WORK27">"92-93"</Career>
+  <!-- Guard -->
+</Entry>
+<Entry>
+<Rule>"LUSTR-RULE_LUSTRIA"</Rule>
+<Specie>"RULES-SPECIE_HELF"</Specie>
+<Career name="RULES-WORK12">"94"</Career>
+  <!-- Knight -->
+</Entry>
+<Entry>
+<Rule>"LUSTR-RULE_LUSTRIA"</Rule>
+<Specie>"RULES-SPECIE_HELF"</Specie>
+<Career name="RULES-WORK28">"95-96"</Career>
+  <!-- Pit Fighter -->
+</Entry>
+<Entry>
+<Rule>"LUSTR-RULE_LUSTRIA"</Rule>
+<Specie>"RULES-SPECIE_HELF"</Specie>
+<Career name="RULES-WORK61">"97"</Career>
+  <!-- Protagonist -->
+</Entry>
+<Entry>
+<Rule>"LUSTR-RULE_LUSTRIA"</Rule>
+<Specie>"RULES-SPECIE_HELF"</Specie>
+<Career name="RULES-WORK57">"98-100"</Career>
+  <!-- Soldier -->
+</Entry>
+  <!-- ===== Colonne Wood Elf ===== -->
+<Entry>
+<Rule>"LUSTR-RULE_LUSTRIA"</Rule>
+<Specie>"RULES-SPECIE_WELF"</Specie>
+<Career name="LUSTR-WORK123">"01-02"</Career>
+  <!-- Interpreter -->
+</Entry>
+<Entry>
+<Rule>"LUSTR-RULE_LUSTRIA"</Rule>
+<Specie>"RULES-SPECIE_WELF"</Specie>
+<Career name="RULES-WORK23">"03"</Career>
+  <!-- Scholar -->
+</Entry>
+<Entry>
+<Rule>"LUSTR-RULE_LUSTRIA"</Rule>
+<Specie>"RULES-SPECIE_WELF"</Specie>
+<Career name="RULES-WORK58">"04-07"</Career>
+  <!-- Wizard -->
+</Entry>
+<Entry>
+<Rule>"LUSTR-RULE_LUSTRIA"</Rule>
+<Specie>"RULES-SPECIE_WELF"</Specie>
+<Career name="RULES-WORK03">"08-11"</Career>
+  <!-- Artisan -->
+</Entry>
+<Entry>
+<Rule>"LUSTR-RULE_LUSTRIA"</Rule>
+<Specie>"RULES-SPECIE_WELF"</Specie>
+<Career name="RULES-WORK15">"12-14"</Career>
+  <!-- Advisor -->
+</Entry>
+<Entry>
+<Rule>"LUSTR-RULE_LUSTRIA"</Rule>
+<Specie>"RULES-SPECIE_WELF"</Specie>
+<Career name="RULES-WORK04">"15-17"</Career>
+  <!-- Artist -->
+</Entry>
+<Entry>
+<Rule>"LUSTR-RULE_LUSTRIA"</Rule>
+<Specie>"RULES-SPECIE_WELF"</Specie>
+<Career name="RULES-WORK20">"18-23"</Career>
+  <!-- Envoy -->
+</Entry>
+<Entry>
+<Rule>"LUSTR-RULE_LUSTRIA"</Rule>
+<Specie>"RULES-SPECIE_WELF"</Specie>
+<Career name="RULES-WORK44">"24-28"</Career>
+  <!-- Noble -->
+</Entry>
+<Entry>
+<Rule>"LUSTR-RULE_LUSTRIA"</Rule>
+<Specie>"RULES-SPECIE_WELF"</Specie>
+<Career name="RULES-WORK24">"29-31"</Career>
+  <!-- Spy -->
+</Entry>
+<Entry>
+<Rule>"LUSTR-RULE_LUSTRIA"</Rule>
+<Specie>"RULES-SPECIE_WELF"</Specie>
+<Career name="RULES-WORK29">"32-37"</Career>
+  <!-- Herbalist -->
+</Entry>
+<Entry>
+<Rule>"LUSTR-RULE_LUSTRIA"</Rule>
+<Specie>"RULES-SPECIE_WELF"</Specie>
+<Career name="RULES-WORK10">"38-46"</Career>
+  <!-- Hunter -->
+</Entry>
+<Entry>
+<Rule>"LUSTR-RULE_LUSTRIA"</Rule>
+<Specie>"RULES-SPECIE_WELF"</Specie>
+<Career name="LUSTR-WORK124">"47-51"</Career>
+  <!-- Oracle -->
+</Entry>
+<Entry>
+<Rule>"LUSTR-RULE_LUSTRIA"</Rule>
+<Specie>"RULES-SPECIE_WELF"</Specie>
+<Career name="RULES-WORK19">"52-62"</Career>
+  <!-- Scout -->
+</Entry>
+<Entry>
+<Rule>"LUSTR-RULE_LUSTRIA"</Rule>
+<Specie>"RULES-SPECIE_WELF"</Specie>
+<Career name="RULES-WORK11">"63-64"</Career>
+  <!-- Bounty Hunter -->
+</Entry>
+<Entry>
+<Rule>"LUSTR-RULE_LUSTRIA"</Rule>
+<Specie>"RULES-SPECIE_WELF"</Specie>
+<Career name="RULES-WORK55">"65-68"</Career>
+  <!-- Entertainer -->
+</Entry>
+<Entry>
+<Rule>"LUSTR-RULE_LUSTRIA"</Rule>
+<Specie>"RULES-SPECIE_WELF"</Specie>
+<Career name="RULES-WORK38">"69-70"</Career>
+  <!-- Messenger -->
+</Entry>
+<Entry>
+<Rule>"LUSTR-RULE_LUSTRIA"</Rule>
+<Specie>"RULES-SPECIE_WELF"</Specie>
+<Career name="LUSTR-WORK125">"71-74"</Career>
+  <!-- Survivalist -->
+</Entry>
+<Entry>
+<Rule>"LUSTR-RULE_LUSTRIA"</Rule>
+<Specie>"RULES-SPECIE_WELF"</Specie>
+<Career name="LUSTR-WORK126">"75-78"</Career>
+  <!-- Trailblazer -->
+</Entry>
+<Entry>
+<Rule>"LUSTR-RULE_LUSTRIA"</Rule>
+<Specie>"RULES-SPECIE_WELF"</Specie>
+<Career name="RULES-WORK42">"79"</Career>
+  <!-- Wrecker -->
+</Entry>
+<Entry>
+<Rule>"LUSTR-RULE_LUSTRIA"</Rule>
+<Specie>"RULES-SPECIE_WELF"</Specie>
+<Career name="RULES-WORK30">"80-85"</Career>
+  <!-- Outlaw -->
+</Entry>
+<Entry>
+<Rule>"LUSTR-RULE_LUSTRIA"</Rule>
+<Specie>"RULES-SPECIE_WELF"</Specie>
+<Career name="RULES-WORK08">"86-89"</Career>
+  <!-- Calvalryman -->
+</Entry>
+<Entry>
+<Rule>"LUSTR-RULE_LUSTRIA"</Rule>
+<Specie>"RULES-SPECIE_WELF"</Specie>
+<Career name="RULES-WORK27">"90-91"</Career>
+  <!-- Guard -->
+</Entry>
+<Entry>
+<Rule>"LUSTR-RULE_LUSTRIA"</Rule>
+<Specie>"RULES-SPECIE_WELF"</Specie>
+<Career name="RULES-WORK12">"92-93"</Career>
+  <!-- Knight -->
+</Entry>
+<Entry>
+<Rule>"LUSTR-RULE_LUSTRIA"</Rule>
+<Specie>"RULES-SPECIE_WELF"</Specie>
+<Career name="RULES-WORK28">"94-95"</Career>
+  <!-- Pit Fighter -->
+</Entry>
+<Entry>
+<Rule>"LUSTR-RULE_LUSTRIA"</Rule>
+<Specie>"RULES-SPECIE_WELF"</Specie>
+<Career name="RULES-WORK57">"96-100"</Career>
+  <!-- Soldier -->
+</Entry>
+</DATA_CAREER_ROLL>
 </DATA_BOOK>

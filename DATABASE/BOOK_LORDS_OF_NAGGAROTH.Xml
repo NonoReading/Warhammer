@@ -21,11 +21,16 @@ At the cost of one corruption point the Sorceress may add doublle their Willpowe
 <Test language="ENGLISH">""</Test>
 </Talent>
 </DATA_TALENT>
+<DATA_RACE>
+<Race id="NAGGA-SPECIE_DELF">
+<Description language="ENGLISH">"Dark Elf"</Description>
+</Race>
+</DATA_RACE>
 <DATA_SPECIE>
 <Specie id="NAGGA-RACE_DELF">
 <Description language="ENGLISH">"Dark Elves"</Description>
 <Explanation language="ENGLISH">"The Dark Elves are a cruel and heartless race of slavers and conquerors locked in a bitter civil war with their kin on Ulthuan that has raged for thousands of years. They are a cold and warlike people, dwelling in their fortress cities in, Naggaroth, the land of chill. Their bleak realm built on the back of suffering slaves and plunder from the shores of the known world, whose wealth and peoples they see as their birthright to conquer and enslave. Few, if any, of the people native to the Old World would be able to distinguish the cruel lords of Naggaroth from the noble scions of Ulthuan at sight. It is this inability to distinguish the two kindreds, the Dark Elves, or Druchii as they call themselves, use to pass as their much despised kin to further their own ends in the Old World. While much rarer than the High Elves and without any official presence like Ulthuans merchant houses. Dark Elves do live in the Old World, as spies, criminals and mercenaries with their own secret web of influence and schemes. Dark Elves living in the Old World are likely agents of the vast fleets of the Black Arks, enchanted fortresses plying the dread seas of the world drawn by sea serpents. As these pirate fleets plunder the ships hailing from the Old World, knowledge about their shipping routes and cargo is a valuable commodity. It is also not unheard of Dark Elves selling their murderous services as mercenaries to the highest bidder for gold and glory. The Old World can also be a refuge for some Dark Elves. Naggaroth is a realm steeped in murder and betrayal and those Dark Elves who find themselves with too many enemies can be forced to flee their chill homeland. To plot their vengeance in exile in the Old World, biding their time until they can enact their revenge. Some are even gifted in the sorcerous arts of Dark magic and come to the Old World seeking magical artifacts or knowledge. As mentioned above Dark Elf player characters have three likely backgrounds in the Old World, agents of the Black Arks, Mercenaries or Exiles. These backgrounds offer plenty of opportunities and reasons for adventures, while Dark Elves may be cruel and arrogant, they need food to eat and roofs over their heads as anyone else. Dark Elf characters are thus likely to be involved in the grey areas of Old World society to earn their living, their vicious dispositions and lust for violence making them most often found in the most cut throat and bloody of the Old Worlds many occupations"</Explanation>
-<Ethnic>"SPECIE_ELF"</Ethnic>
+<Ethnic>"NAGGA-SPECIE_DELF"</Ethnic>
 <SUBCHAPTER_ATTR>
 <Attribut name="RULES-ATTR_WS">"2d10+30"</Attribut>
 <Attribut name="RULES-ATTR_BS">"2d10+30"</Attribut>

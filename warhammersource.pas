@@ -11,7 +11,7 @@ uses
   ChargeCompetence, ChargeConstantes, ChargeAttribut, ChargeTalent, WinTalent,
   ChargeMetier, ChargeMetierNiveau, ChargeMetierAttribut,
   ChargeMetierCompetence, ChargeMetierTalent, WinMetier, ChargeRaceMetier,
-  ChargeRace, WinRaces, ChargeRaceAttribut, ChargeRaceCompetence,
+  ChargeRace, ChargeEspece, ChargeRegle, WinRaces, ChargeRaceAttribut, ChargeRaceCompetence,
   ChargeRaceTalent, GlobalFonts, WinCreation, ChargeTalentCreation,
   WinPersonnage, ChargeAttributAugmentation, ChargeCompetenceAugmentation,
   ChargeArme, WinWeapon, ChargeArmeBonus, ChargeMetierEquipement, ChargeArmure,
@@ -598,6 +598,9 @@ procedure TMenu.ChargerLivre(ForceMaJ: Boolean; ForceLivre: String);
     if ForceMaj then
       begin
         NbRace	                    := 0;
+        NbEspece                    := 0;
+        NbRegle                     := 0;
+        NbRegleMetier               := 0;
         NbTalent	            := 0;
         NbCompetence	            := 0;
         NbMetierCompetence	    := 0;
@@ -634,6 +637,9 @@ procedure TMenu.ChargerLivre(ForceMaJ: Boolean; ForceLivre: String);
 
         // vider les données
         ListRace.Clear;
+        ListEspece.Clear;
+        ListRegle.Clear;
+        ListRegleMetier.Clear;
         ListTalent.Clear;
         ListCompetence.Clear;
         ListMetierCompetence.Clear;
@@ -721,6 +727,10 @@ procedure TMenu.ChargerLivre(ForceMaJ: Boolean; ForceLivre: String);
       ListeFichiersACharger.Free;
       ListeNomsACharger.Free;
     end;
+
+    // Tous les livres sont chargés : propager l'accessibilité des métiers entre ethnies
+    // d'une même race (voir ChargeRaceMetier.CompleteRaceMetierParEspece).
+    CompleteRaceMetierParEspece;
 
     // affichages des valeurs
     TotLivreRace.Text            := IntToStr(NbRace);
@@ -812,6 +822,9 @@ procedure TMenu.FormCreate(Sender: TObject);
 
        // création de la base de donnée
        ListRace                     := TListRace.Create;
+       ListEspece                   := TListEspece.Create;
+       ListRegle                    := TListRegle.Create;
+       ListRegleMetier              := TListRegleMetier.Create;
        ListTalent                   := TListTalent.Create;
        ListCompetence               := TListCompetence.Create;
        ListMetierCompetence         := TListMetierCompetence.Create;
