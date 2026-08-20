@@ -2997,7 +2997,6 @@ Procedure TWinCreations.ReconstruitChoixCreation();
     PRaceTalent:StructureRaceTalent;
     Ind, Ind2:  Integer;
     ListOpt:    TStringList;
-    Msg:        String;
   begin
     // 1 - sauver l'état courant (choix faits et jets obtenus)
     Sauve := Copy(ListeChoixCreation, 0, Length(ListeChoixCreation));

@@ -180,3 +180,166 @@ PDF Personnage (PRIORITAIRE) :
   deux fois d'affilée à la même valeur (copier-coller resté en trop) ; AdjustGridColumnsWidth
   est appelé deux fois pour TabCompetence dans la même fonction (ligne ~3452 et ~3569) - à
   confirmer avec Nono si c'est volontaire (second passage nécessaire) avant d'y toucher.
+
+- (chantier "Effets de Talent", démarré en discussion le 18/08/2026, conception pas encore
+  tranchée) remplacer la liste de constantes Talent* traitées en dur (chargeconstantes.pas,
+  ex. TalentCostaud/TalentVeloce/TalentChanceux/TalentObstine/TalentCoutPuissant/
+  TalenttirPrecis/TalentSprinteur + les répétitions du même `case` dans pdfpersonnage.pas aux
+  lignes ~1097/~3870/~3888) par un mécanisme de données, sur le modèle de
+  ListTalentAttributModif qui existe déjà (alimentée par la balise <ModifyCarac>, déjà utilisée
+  par Véloce/T0162 sur RULES-ATTR_Move). Lié au chantier dégâts d'armes de Nono (Coup Puissant/
+  T0037 = dégâts CC, Tir Précis/T0149 = dégâts CT). Dur à Cuire (T0047) et Âme Pure (T0005)
+  restent volontairement hors de ce chantier (traités directement dans le PDF, liés aux
+  Blessures). Les talents "Sort" (Bénédiction/Miracle/Magie Mineure/Domaine, T0012/T0080/T0088/
+  T0089) sont hors périmètre aussi : ce sont des familles de sous-codes par dieu/domaine
+  (T0012_SIGMAR, etc.) traitées par préfixe pour de l'éligibilité de liste de sorts
+  (winpersonnage.pas), pas un modificateur chiffré - nature différente.
+  Recherche faite le 18/08/2026 (tous les livres du dossier DATABASE de Nono passés en revue) :
+  seul Véloce a déjà une balise <ModifyCarac>/<ModifySkill>/<AddSkill> exploitable parmi les 14
+  talents visés ; aucun talent d'aucun supplément (Winds of Magic, Up in Arms, Archives of the
+  Empire, etc.) n'utilise ces balises non plus - tout reste à faire niveau XML, pas seulement
+  pour cette liste. Trouvailles au passage à garder en tête : Haine Sacrée (T0070) est déclarée
+  en constante mais n'est consommée nulle part dans le code, alors que sa règle ("+1 dégâts en
+  Miracles par niveau") est un 3e type de bonus de dégâts, à côté de CC et CT - bon candidat
+  pour le nouveau système direct. Chanceux (T0020) : le calcul actuel en dur
+  (Chance := Chance + Val) ne correspond pas au texte de la règle (Points de Chance max =
+  Points de Destin actuels + nombre de fois où on a été chanceux) - à vérifier avec Nono avant
+  de migrer ce talent tel quel. T0088_TZEENTCH est dupliqué dans le Rulesbook (à vérifier si
+  volontaire). Nono note aussi (18/08/2026) qu'il n'a pas encore fait le travail de relecture
+  des talents des autres livres pour leur ajouter ces balises - à prévoir séparément, pas
+  bloquant pour concevoir le mécanisme.
+  Vérifié le 18/08/2026 : Encombrement et Chance ne peuvent PAS passer par <ModifyCarac> tel
+  quel, faute d'exister dans DATA_ATTRIBUT (liste réelle : WS/BS/S/T/I/Ag/Dex/Int/WP/Fel/Wound/
+  Fate/Resil/Supp/Move) - seul Mouvement (ATTR_Move) y est éligible. Sprinteur, même éligible
+  côté donnée, reste conditionnel ("+1 seulement en Courant"), pas un ajout systématique comme
+  Véloce.
+  Deux options de structure de table discutées avec Nono, choix pas encore fait :
+  1. Une table dédiée par catégorie d'effet (comme ListTalentAttributModif), colle à l'existant
+     mais beaucoup de plomberie répétée à chaque nouvelle catégorie.
+  2. Une table générique Talent/TypeEffet/Valeur, un seul jeu de plomberie pour toutes les
+     catégories présentes et futures, au prix de perdre le typage fort (TypeEffet en chaîne).
+  Option hybride évoquée : une table dédiée dégâts (CodeTalent/TypeCombat CC-CT/ValeurDonnee)
+  pour couvrir Coup Puissant + Tir Précis + Haine Sacrée (Miracles) d'un coup.
+  Nono penche pour une structure extensible car il pense qu'il y aura d'autres catégories
+  d'effet à l'avenir (pas de liste fermée).
+
+- (idée de fond de Nono, 18/08/2026, "je ne sais pas si je dois en dire la complexité" - pas
+  conçue, chantier à part entière, plus gros que celui des effets de Talent ci-dessus) principe
+  général de calcul déclaratif pour toutes les données calculées du personnage (un Attribut
+  final = valeur de Race + jet de création + modifs Talent + modifs Mutation + ...), chaque
+  terme pouvant lui-même être un calcul, sur le principe des logiciels de génération de bilan
+  comptable (Nono est comptable) ou d'un tableur - un graphe de dépendances résolu dans le bon
+  ordre plutôt que des fonctions de calcul figées en Pascal comme aujourd'hui
+  (chargepersonnage.pas/pdfpersonnage.pas, dizaines de fonctions PersonnageXxxModif/
+  CalculXxx). Précision de Nono : plutôt qu'un mini-langage de formule dans des balises XML,
+  il envisage une hiérarchie de CLASSES Pascal (classe de base + sous-classes par type de
+  donnée calculable + méthodes liées), donc du polymorphisme plutôt que du parsing de chaîne -
+  même principe de fond (graphe de dépendances), portée différente.
+  Point de départ envisagé par Nono : partir de pdfpersonnage.pas, qui centralise déjà une
+  bonne partie des calculs nécessaires, pour voir ce qui peut être mutualisé, plutôt que de
+  concevoir le système dans l'abstrait.
+  Points de complexité soulevés par Claude, à garder en tête avant de se lancer :
+  - Ordre d'évaluation : si une donnée dépend d'une autre qui dépend elle-même d'une autre, il
+    faut résoudre l'ordre correctement (tri topologique) et détecter les boucles (A dépend de
+    B qui dépend de A) pour ne pas planter/boucler à l'infini.
+  - Risque de faire cohabiter DEUX moteurs de calcul (l'ancien en dur + le nouveau) si la
+    migration des fonctions existantes n'est pas menée à son terme - complexifierait plutôt
+    que ça ne simplifierait.
+  Ce chantier engloberait à terme celui des effets de Talent ci-dessus (un modificateur de
+  Talent ne serait qu'une des sources dans le calcul d'un Attribut), mais ne le bloque pas :
+  la décision sur la table des effets de Talent peut se prendre indépendamment.
+
+- (demandé par Nono, 18/08/2026, plus petit chantier - pas commencé) se passer des 4
+  constantes TalentSortBenediction ('T0012')/TalentSortMiracle ('T0080')/
+  TalentSortMagieMineure ('T0089')/TalentSortDomaine ('T0088') codées en dur dans
+  chargeconstantes.pas. Utilisées dans winpersonnage.pas (ButtonSortClick, SortAffiche) via
+  copy(CodeValeur, 1, 5) = TalentSortXxx pour reconnaître à quelle famille appartient un talent
+  magique (chaque famille a plusieurs variantes par dieu/domaine, ex. T0012_SIGMAR, T0088_FEU).
+  Nono confirme qu'il y a de vraies différences de traitement entre les 4 (Domaine prioritaire
+  sur Miracle/MagieMineure dans ButtonSortClick ; Bénédiction cherche des sorts précis dans
+  ListSort alors que Miracle ajoute juste une ligne "à choisir" dans SortAffiche) - donc pas
+  question de supprimer la distinction, juste de ne plus la deviner par un préfixe de code en
+  dur. Piste proposée par Claude, accueillie favorablement par Nono mais pas encore détaillée :
+  ajouter une nouvelle balise sur les 4 entrées concernées dans le XML (StructureTalent
+  n'a aujourd'hui aucun champ pour ça - chargetalent.pas - contrairement à Attribut/ModifyCarac
+  déjà lus depuis <Carac>/<ModifyCarac>), par exemple <TypeMagie>"DOMAINE"</TypeMagie> sur
+  T0012_*/T0080_*/T0088_*/T0089, et lire ce champ sur le talent trouvé au lieu de comparer une
+  constante Pascal. Reste à préciser : nom exact de la balise, valeurs possibles, et si ça doit
+  attendre la décision sur la table des effets de Talent ci-dessus ou peut avancer
+  indépendamment.
+
+- (remarque de Nono, 19/08/2026, pas de décision prise) les images de niveau de métier
+  (\PICTURES\NIV\1.PNG à 4.PNG, chemin fixe ConstCheminImageNiveau dans
+  chargeconstantes.pas, consommées par pdfmetier.pas/winpersonnage.pas/wincreation.pas/
+  pdfutils.pas) sont aujourd'hui un seul jeu d'images partagé par toute l'application, pas
+  par livre. Nono anticipe qu'un futur livre (exemple cité : un livre sur les Elfes) pourrait
+  vouloir un jeu d'icônes visuellement différent pour ces mêmes 4 niveaux, et ne sait pas
+  encore comment gérer ce cas (images par livre ? thème global changeable ? autre chose ?).
+  Repéré en marge du chantier d'extraction Lustria (vérification de la légende couleur de
+  l'Advance Scheme, voir CONTEXT.md) - aucun lien de dépendance avec ce chantier, juste noté
+  pour ne pas perdre l'idée. À concevoir avec Nono quand il voudra s'y pencher.
+
+- (repéré par Nono, 19/08/2026, pas commencé) les images de métier/race
+  (DATABASE\PICTURES\CLASS\WORKxxx.PNG et WORKxxx_TRANS.PNG, chargemetier.pas/chargerace.pas
+  CheminMetierImage/CheminRaceImage) sont nommées avec le "raccourci" CodeValeur (ex. "WORK123"),
+  c'est-à-dire le code SANS le préfixe livre - obtenu via CompareRechercheValeur/
+  DecoupeCodeValeur (unitcalcul.pas) qui retire tout ce qui précède SeparateurLivre ('-') pour
+  la comparaison, et ce même code tronqué est réutilisé tel quel pour construire le chemin du
+  fichier image. Contrairement aux DONNÉES (XML), qui sont bien scopées par livre partout
+  ailleurs, le NOM DE FICHIER image ne l'est pas : deux métiers de deux livres différents avec
+  le même numéro WORKxxx (ex. "AUTRE-WORK123") partageraient et écraseraient la même image sur
+  disque. Aujourd'hui ça ne pose pas de problème parce que la convention suivie jusqu'ici est de
+  toujours prendre le numéro WORK le plus haut utilisé TOUS livres confondus (vérifié le
+  19/08/2026 en préparant Lustria : dernier numéro = WORK122 dans Lords of Naggaroth, d'où
+  LUSTR-WORK123 à 126) - mais rien dans le code ne garantit ni ne vérifie cette discipline, elle
+  repose entièrement sur le fait d'y penser à chaque nouveau livre. Nono voudrait à terme des
+  noms de fichiers complets (avec le préfixe livre, ex. "LUSTR-WORK123.PNG") plutôt que le
+  raccourci, pour être protégé même en cas d'oubli - impliquerait de renommer les ~150 images
+  existantes ET d'adapter CheminMetierImage/CheminRaceImage (et l'équivalent pour les races) pour
+  construire le chemin à partir du code complet plutôt que de CodeValeur. Pas conçu, pas
+  commencé.
+
+- (repéré par Nono, 19/08/2026, pas commencé, chantier de fond) tes données de race n'ont pas
+  de notion de "race générique" - chaque livre définit ses propres variantes régionales
+  d'Humain comme des races à part entière, sans lien entre elles ni avec un "Humain" générique :
+  RULES-RACE_HUM = "Humans (Reikland)" (Rulesbook), UPINA-RACE_HTIL = "Humans (Tilea)"
+  (Up in Arms), MIDDE-RACE_HMIDH/HMIDL/HNORD = "Humans (Middenheimer/Middenlander/Nordlander)"
+  (Middenheim). Repéré en préparant les races accessibles d'Interpreter (Lustria) : le PDF dit
+  juste "Human" (générique), mais comme le Rulesbook n'a que le Reiklander, une entrée
+  DATA_SPECIE_CAREER_CHOICE ciblant seulement RULES-RACE_HUM aurait laissé les Humains
+  Tiléens/Middenheimer/Middenlander/Nordlander sans accès à Interpreter, sans toucher à la base.
+  Contournement appliqué pour Lustria le 19/08/2026 (pas une vraie solution) : une entrée
+  DATA_SPECIE_CAREER_CHOICE par variante Humaine CONNUE aujourd'hui (les 5 recensées ci-dessus),
+  vérifié une par une que chacune a bien Lawyer/RULES-WORK33 dans son propre SUBCHAPTER_METIER
+  avant de l'ajouter. Ça marche pour l'état actuel des livres, mais toute nouvelle variante
+  Humaine ajoutée dans un futur livre resterait exclue tant qu'on ne revient pas ajouter une
+  ligne ici à la main - même fragilité de fond que le point ci-dessus sur les noms de fichiers
+  image (repose sur la discipline, pas sur la structure). Nono voudrait une vraie notion de race
+  générique (un Humain générique dont Reikland/Tilea/Middenheimer/etc. dépendraient), pour que ce
+  genre de règle (accès à un métier, mais potentiellement d'autres choses) puisse cibler le
+  générique une fois et s'appliquer à toutes les variantes automatiquement. Pas conçu (quel
+  champ/lien ajouter à StructureRace, comment les mécanismes existants - SUBCHAPTER_METIER,
+  DATA_SPECIE_CAREER_CHOICE, SUBCHAPTER_CARAC, etc. - devraient consulter le générique en plus
+  ou à la place du spécifique), à concevoir avec Nono séparément.
+
+- (repéré le 20/08/2026, pas commencé) Nouveau bloc XML `DATA_SPECIE_CAREER_DIRECT`
+  (chargeconstantes.pas + xmlexportimport.pas, lecture uniquement) : permet d'accrocher un
+  métier à une race définie dans un AUTRE livre (ou l'inverse) sans jamais créer de `<Specie>`
+  ni `<Career>` stub - donc sans risque lié à l'ordre de chargement des livres (contrairement à
+  l'ancien contournement via `<Specie>` stub + SUBCHAPTER_CAREER, qui provoquait des lignes de
+  race fantômes/écrasées selon l'ordre de FindFirst/FindNext). Utilisé pour la première fois
+  dans BOOK LUSTRIA.xml (éligibilité directe d'Interpreter/Oracle sur les races qu'ils ne
+  remplacent pas). Il manque le pendant écriture/export (XmlExportBook) : `ListRaceMetier` ne
+  garde pas la trace de quel mécanisme XML a produit chaque entrée, donc un export naïf
+  dupliquerait celles qui viennent du SUBCHAPTER_CAREER classique (déjà écrites sous chaque
+  `<Specie>`). Pas bloquant tant que Lustria (et les futurs livres) sont édités à la main plutôt
+  que régénérés depuis l'interface - à concevoir si ce besoin apparaît un jour.
+
+- (repéré le 20/08/2026, pas commencé) Eligibilité Ogre pour Survivalist/Trailblazer : le PDF
+  Lustria (page 199, encadré "OGRE CHARACTERS IN LUSTRIA") indique qu'un Ogre Pedlar peut
+  choisir de devenir Survivalist, et qu'un Ogre Bounty Hunter peut choisir de devenir
+  Trailblazer - via la "Ogre Random Class and Career Table" spécifique définie dans Archives of
+  the Empire Volume II (les Ogres ont un mécanisme de génération de personnage à part, pas le
+  SUBCHAPTER_CAREER standard par race). Pas encore regardé si ce mécanisme spécial est déjà
+  représenté dans BOOK_ARCHIVES_OF_THE_EMPIRE_II.Xml ni comment y accrocher Survivalist/
+  Trailblazer proprement. Volontairement mis de côté pour plus tard (Nono, 20/08/2026).

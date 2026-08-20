@@ -1,0 +1,834 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<DATA_BOOK>
+<CODE_BOOK>"LUSTR"</CODE_BOOK>
+<BOOK>"BOOK LUSTRIA"</BOOK>
+<language>"ENGLISH"</language>
+<VERSION>"20260818"</VERSION>
+<OFFICIAL>"1"</OFFICIAL>
+<COMPLETE>"1"</COMPLETE>
+<DATA_SKILL_SPECIALIZATION>
+<Skill id="RULES-COMPSIGNES_LIZARD">
+<Description language="ENGLISH">"Secret Signs (Lizardman)"</Description>
+</Skill>
+</DATA_SKILL_SPECIALIZATION>
+<DATA_CAREER>
+<Career id="LUSTR-WORK123">
+<Description language="ENGLISH">"Interpreter"</Description>
+<Explanation language="ENGLISH">"You employ your fluency with multiple languages to bargain with native populations and decode the warnings of the ancients. Military expeditions that thoughtlessly butcher every stranger and curious native they meet are doomed to an appropriately violent demise. Communication is key to any successful enterprise, especially one undertaken on foreign soil. Intelligence from local guides can spare a company from environmental dangers, aggravated predators, and enemy manoeuvres. Unfortunately, language barriers can make attempts at dialogue extremely difficult, or even impossible. An Interpreter with the knowledge to bridge this linguistic divide can be a vital expeditionary asset. 'I think the inscription means “Abandon Hops All Ye Who Enter Here”? Let me check my notes…' - Rufius Algorini, novice Translator. 'They’re saying “The Marsh Is Death”. But there’s nuance to the meaning; their culture has many words for “Death”. I don’t think they’re referring to our inevitable demise, but to the lingering taint of Necromancy. How many wooden stakes did we bring with us?' - Geraltina Causs, experienced Polyglot. Interpreters may be residents of the Old World who embrace contact with other civilisations, or native-born peoples who emigrate to Old World colonies. Either way, their experience makes them uniquely positioned to facilitate cultural exchanges. As the world gets smaller, and demand for international trade increases, linguistics has evolved into a scholastic discipline. It is therefore possible for Interpreters to practise languages of cultures they have never met. Though learning from books provides a more limited understanding than practising with native speakers, there are some languages - such as ancient Nehekharan - which can no longer be learned from living creatures. Approaching these dialects academically may be the only way to understand the warnings these civilisations left before their demise. Culture Clash: An inexperienced Translator may believe their job is simply to explain the meanings of words and inscriptions their clients do not understand. A successful Interpreter understands this is but a fraction of their responsibilities. As the leading representative of their faction, Interpreters set the tone of their interactions with other peoples, even if they’re simply repeating the words of their commander. They practise their elocution, diction, body language, and conversational awareness to make sure they always leave the right impression. Stories of negotiations degenerating into violence because of one misguided word choice contain enough truth to keep wary Interpreters on edge. Once someone acquires the skill for picking up a second language, they usually find it easier to learn more. Polyglots fluent in many languages can command higher rates for their services, especially in cosmopolitan areas like Marienburg, the Border Princes, Albion, or the New World colonies. Because one of the best ways to understand a culture is to study its writings, experienced Interpreters are often well-read, and knowledgeable in a variety of subjects. They often surprise their companions with niche understanding of anthropological nuances, counter-intelligence codebreaking, and historical trivia. The most respected Interpreters transition into their nation’s diplomatic corps, representing their masters as Envoys (WFRP page 72). But most Interpreters associate with less rarefied company. They are stationed on the border, where cultural contact is most intense, and primed to escalate to violence. This is dangerous, frontier territory, and most Interpreters learn basic survival skills, if only in self-defence. Every culture requires Interpreters to communicate with immigrants and trading partners, but the great maritime powers need their skills the most. As self-declared lords of the ocean, the High Elves of Ulthuan boast a substantial number of Interpreters, condescending to learn the allegedly primitive tongues of other species. Interpreters in Lustria: Those born and raised in Lustria hear a great many tongues, as travellers from all over the world arrive on their shores. However unwelcome these invaders are, most natives would rather bargain than be impaled upon their blades. Learning to say ‘We mean you know harm’ in many languages is as valuable a piece of life-saving information as learning the dangers of the jungle. Explorers may hire their Interpreters from local populations, or find an appropriately learned individual in any of the Old World’s largest ports. Mercenary companies recruit from many different backgrounds, outfitting Imperials, Kislevites, Tileans, Estalians, disinherited Bretonnians, and Dwarf fortune hunters in their formations. Though fluency in a specific tongue is often a requirement for joining the corps, it never hurts to have an Interpreter on hand to communicate nuanced instructions that might be lost on non-native speakers. The holy grail of any Interpreter in Lustria is to converse with the Lizardmen. Whilst Skink translators can develop skill in the dialects of the Old World, non-Lizardmen struggle when attempting the growls, snorts, clicks, and whistles of Saurian. Written communication has been far more successful, and many Interpreters specialise in producing the glyphs and symbols that the Lizardmen use to keep records. If Interpreters can find a way to convey peaceful intentions through this medium, it may be key to establishing a concord with the Lizardmen."</Explanation>
+<Skill>"RULES-COMPLANG_*"</Skill>
+<Class>"CLASS_ACAD"</Class>
+<SUBCHAPTER_LEVEL>
+<Level id="1">
+<Description language="ENGLISH">"Translator"</Description>
+<Salary>"TIERS_BRASS 4"</Salary>
+</Level>
+<Level id="2">
+<Description language="ENGLISH">"Interpreter"</Description>
+<Salary>"TIERS_SILVER 1"</Salary>
+</Level>
+<Level id="3">
+<Description language="ENGLISH">"Polyglot"</Description>
+<Salary>"TIERS_SILVER 3"</Salary>
+</Level>
+<Level id="4">
+<Description language="ENGLISH">"Polymath"</Description>
+<Salary>"TIERS_SILVER 5"</Salary>
+</Level>
+</SUBCHAPTER_LEVEL>
+<SUBCHAPTER_ATTR>
+<Attribut name="RULES-ATTR_WS">"0"</Attribut>
+<Attribut name="RULES-ATTR_BS">"0"</Attribut>
+<Attribut name="RULES-ATTR_S">"0"</Attribut>
+<Attribut name="RULES-ATTR_T">"1"</Attribut>
+<Attribut name="RULES-ATTR_I">"3"</Attribut>
+<Attribut name="RULES-ATTR_Ag">"0"</Attribut>
+<Attribut name="RULES-ATTR_Dex">"4"</Attribut>
+<Attribut name="RULES-ATTR_Int">"1"</Attribut>
+<Attribut name="RULES-ATTR_WP">"2"</Attribut>
+<Attribut name="RULES-ATTR_Fel">"1"</Attribut>
+</SUBCHAPTER_ATTR>
+<SUBCHAPTER_SKILL>
+<Skill name="RULES-COMPSUBOR">"1"</Skill>
+  <!-- Bribery -->
+<Skill name="RULES-COMPCHARM">"1"</Skill>
+  <!-- Charm -->
+<Skill name="RULES-COMPESQU">"1"</Skill>
+  <!-- Dodge -->
+<Skill name="RULES-COMPRAGOT">"1"</Skill>
+  <!-- Gossip -->
+<Skill name="RULES-COMPMARCH">"1"</Skill>
+  <!-- Haggle -->
+<Skill name="RULES-COMPLANG_*">"1"</Skill>
+  <!-- Language (Any) -->
+<Skill name="RULES-COMPCOMB_BASE">"1"</Skill>
+  <!-- Melee (Basic) -->
+<Skill name="RULES-COMPPRECEP">"1"</Skill>
+  <!-- Perception -->
+<Skill name="RULES-COMPRECH">"1"</Skill>
+  <!-- Research -->
+<Skill name="RULES-COMPSIGNES_*">"1"</Skill>
+  <!-- Secret Signs (Any) -->
+<Skill name="RULES-COMPANIM">"2"</Skill>
+  <!-- Charm Animal -->
+<Skill name="RULES-COMPRESALC">"2"</Skill>
+  <!-- Consume Alcohol -->
+<Skill name="RULES-COMPCALM">"2"</Skill>
+  <!-- Cool -->
+<Skill name="RULES-COMPEVAL">"2"</Skill>
+  <!-- Evaluate -->
+<Skill name="RULES-COMPLANG_*">"2"</Skill>
+  <!-- Language (Any) -->
+<Skill name="RULES-COMPORIENT">"2"</Skill>
+  <!-- Navigation -->
+<Skill name="RULES-COMPART_*">"3"</Skill>
+  <!-- Art (Any) -->
+<Skill name="RULES-COMPINTIM">"3"</Skill>
+  <!-- Intimidate -->
+<Skill name="RULES-COMPLANG_*">"3"</Skill>
+  <!-- Language (Any) -->
+<Skill name="RULES-COMPSURVEXT">"3"</Skill>
+  <!-- Outdoor Survival -->
+<Skill name="RULES-COMPLANG_*">"4"</Skill>
+  <!-- Language (Any) -->
+<Skill name="RULES-COMPSAVOIR_*">"4"</Skill>
+  <!-- Lore (Any) -->
+</SUBCHAPTER_SKILL>
+<SUBCHAPTER_TALENT>
+<Talent name="RULES-T0082">"1"</Talent>
+  <!-- Linguistics -->
+<Talent name="RULES-T0083">"1"</Talent>
+  <!-- Lip Reading -->
+<Talent name="RULES-T0084">"1"</Talent>
+  <!-- Read/Write -->
+<Talent name="RULES-T0081">"1"</Talent>
+  <!-- Speedreader -->
+<Talent name="RULES-T0147">"2"</Talent>
+  <!-- Briber -->
+<Talent name="RULES-T0102">"2"</Talent>
+  <!-- Dealmaker -->
+<Talent name="RULES-T0136_*">"2"</Talent>
+  <!-- Etiquette (Any) -->
+<Talent name="RULES-T0034">"2"</Talent>
+  <!-- Supportive -->
+<Talent name="RULES-T0139_OUIE">"3"</Talent>
+  <!-- Acute Sense (Hearing) -->
+<Talent name="RULES-T0010">"3"</Talent>
+  <!-- Blather -->
+<Talent name="RULES-T0146">"3"</Talent>
+  <!-- Bookish -->
+<Talent name="RULES-T0073">"3"</Talent>
+  <!-- Mimic -->
+<Talent name="RULES-T0056">"4"</Talent>
+  <!-- Impassioned Zeal -->
+<Talent name="RULES-T0106">"4"</Talent>
+  <!-- Numismatics -->
+<Talent name="RULES-T0110">"4"</Talent>
+  <!-- Perfect Pitch -->
+<Talent name="RULES-T0155">"4"</Talent>
+  <!-- Tower of Memories -->
+</SUBCHAPTER_TALENT>
+<SUBCHAPTER_ITEM>
+<Item name="Magnifying Glass">"1"</Item>
+<Item name="Phrase Book">"1"</Item>
+<Item name="Amulet">"2"</Item>
+<Item name="Clothing (In a Local Style)">"2"</Item>
+<Item name="Deck of Cards">"2"</Item>
+<Item name="Book (Cryptography)">"3"</Item>
+<Item name="Impressive personal library">"4"</Item>
+</SUBCHAPTER_ITEM>
+</Career>
+<Career id="LUSTR-WORK124">
+<Description language="ENGLISH">"Oracle"</Description>
+<Explanation language="ENGLISH">"You receive visions from an ancient, alien power, leading you to investigate violations of the Great Plan. Before the cleaving of continents, before the coming of Chaos, there were the Old Ones. These ancient gods uplifted the genetic ancestors of Humans, Elves, and Dwarfs into their current sapient forms and set the fundamental natural laws of the world. In all places where Chaos does not hold sway, the will of the Old Ones is still extant to this day, though few have the capacity to perceive their magical influence. Outside of the Lizardmen, only a few individuals are attuned to the Old Ones' directions, and not all of them accept their calling. Those who do are known as Oracles. 'There is only one war — the war against Chaos — and it has been waged by gods and titans for innumerable aeons. You are the latest footsoldier spawned for this conflict. You are a lesser footnote in the Great Plan, and that is a more prestigious honour than you will ever comprehend.' - Chuqa-xi of Tlaxtlan, Slann Mage-Priest. 'For the glory of the twin-tailed comet!' - Battlecry of Amalda Forktongue, devotee of Sigmar. An Oracle's visions direct them to places where the Great Plan is under threat. They may be drawn to sacred places where protective magic has been disturbed, or an artefact of essential significance has been stolen. Sometimes they are simply led to sites of Chaos worship, the ultimate enemy of everything the Old Ones constructed. The guidance of the Old Ones is rarely explicit, and is prone to misinterpretation. Oracles try to compensate by searching for evidence of the Old Ones' intentions all around them. The movement of trees, the turning of weather, perhaps even the shifting Winds of Magic — all provide hints of where their destiny leads. Few Oracles understand the source of their visions in anything but the vaguest terms. Most believe they are being guided by their own culture's deities, or the faceless hand of fate. Anyone who persists in attempting to communicate with the Old Ones directly is driven insane by the experience. This may be because the alien omnipotence of their kind is fundamentally incompatible with mortal comprehension… or perhaps because the Old Ones have been so thoroughly supplanted by the Ruinous Powers that truthseekers are liable to go mad from the revelation. Eyes of the Ancients: No-one is sure how the representatives of the Old Ones are chosen, assuming it is not simply an accident of birth. It has been noted that a disproportionate number of them emerge from rural communities, where the call of the natural world is still strong and unsilenced. By adulthood, though, most Visionaries have left their homes behind, as they are drawn to places of power expressed in their lucid dreams. Here, they are 'awakened', magically imbued with a fraction of the truth regarding their purpose. If they accept this duty, they become true Oracles — and their journey is only just beginning. Most Oracles are not spellcasters themselves, merely arcane vessels through which the Old Ones exert their will. They may perceive traces of magical influence, or locate mystical artefacts using divining rods, but do not conjure power of their own. However, an Oracle who succeeds and understands their place in the universe may unlock the potential within themself, and become a powerful mage in their own right. This enlightenment may be found in the constellations above, or in the primaeval origins of the practitioner's own lizard brain. The pre-eminent non-Lizardman devotees of the Old Ones are the Truthsayers. The first of these druidic disciples were taught by the Old Ones directly, and their order has preserved this sacred knowledge through oral histories ever since. The protective aura of Albion's Ogham Stones is maintained by the Truthsayers, as are other locations key to preserving the Geomantic Web. An Oracle may learn their craft directly under a Truthsayer's tutelage, or from plaques retrieved in Lizardman temple-cities that appear incomprehensible to others. It's speculated that some Oracles may even be 'awoken' by the direct telepathic manipulation of Slann, a dire prospect that suggests an Oracle's will may not be their own. Oracles in Lustria: Most Oracles in Lustria are Skinks — specially-spawned individuals with forked tails, destined to serve as the eyes and ears of the Slann beyond the temple-cities. Yet warm-blooded Oracles feel drawn to Lustria too. Nowhere in the Old World possesses such a precious collection of artefacts, monuments, or access points to the Geomantic Web. Oracles born on distant shores commonly volunteer to join a voyage to the New World, claiming a lust for gold or glory rather than admitting the disturbing truth. Others are fugitives from the Empire's Witch Hunters, who show little tolerance for unlicensed spellcasters or servants of an alien deity. The caves of Lustria are the native habitat of the Troglodon (page 180), a hissing, spitting, pale-skinned monster commonly considered to be untameable. Yet Skink Oracles have been known to calm a Troglodon with a gesture, even taking the creatures as steeds. It is said the first Troglodons were conceived as tracking beasts for the Old Ones and will instinctively serve sentients bound to the same destiny. Of course, not all warm-blooded Oracles are in a rush to test this theory."</Explanation>
+<Skill>"RULES-COMPINTUI"</Skill>
+<Class>"CLASS_PEAS"</Class>
+<SUBCHAPTER_LEVEL>
+<Level id="1">
+<Description language="ENGLISH">"Visionary"</Description>
+<Salary>"TIERS_BRASS 2"</Salary>
+</Level>
+<Level id="2">
+<Description language="ENGLISH">"Oracle"</Description>
+<Salary>"TIERS_BRASS 5"</Salary>
+</Level>
+<Level id="3">
+<Description language="ENGLISH">"Priest of the Old Ones"</Description>
+<Salary>"TIERS_SILVER 2"</Salary>
+</Level>
+<Level id="4">
+<Description language="ENGLISH">"Polymath"</Description>
+<Salary>"TIERS_SILVER 5"</Salary>
+</Level>
+</SUBCHAPTER_LEVEL>
+<SUBCHAPTER_ATTR>
+<Attribut name="RULES-ATTR_WS">"0"</Attribut>
+<Attribut name="RULES-ATTR_BS">"0"</Attribut>
+<Attribut name="RULES-ATTR_S">"0"</Attribut>
+<Attribut name="RULES-ATTR_T">"4"</Attribut>
+<Attribut name="RULES-ATTR_I">"1"</Attribut>
+<Attribut name="RULES-ATTR_Ag">"1"</Attribut>
+<Attribut name="RULES-ATTR_Dex">"0"</Attribut>
+<Attribut name="RULES-ATTR_Int">"2"</Attribut>
+<Attribut name="RULES-ATTR_WP">"1"</Attribut>
+<Attribut name="RULES-ATTR_Fel">"3"</Attribut>
+</SUBCHAPTER_ATTR>
+<SUBCHAPTER_SKILL>
+<Skill name="RULES-COMPANIM">"1"</Skill>
+  <!-- Charm Animal -->
+<Skill name="RULES-COMPESQU">"1"</Skill>
+  <!-- Dodge -->
+<Skill name="RULES-COMPINTUI">"1"</Skill>
+  <!-- Intuition -->
+<Skill name="RULES-COMPORIENT">"1"</Skill>
+  <!-- Navigation -->
+<Skill name="RULES-COMPSURVEXT">"1"</Skill>
+  <!-- Outdoor Survival -->
+<Skill name="RULES-COMPPRECEP">"1"</Skill>
+  <!-- Perception -->
+<Skill name="RULES-COMPPROJ_LANC">"1"</Skill>
+  <!-- Ranged (Throwing) -->
+<Skill name="RULES-COMPCHEV_*">"1"</Skill>
+  <!-- Ride (Any) -->
+<Skill name="RULES-COMPSIGNES_LIZARD">"1"</Skill>
+  <!-- Secret Signs (Lizardman) -->
+<Skill name="RULES-COMPPIST">"1"</Skill>
+  <!-- Track -->
+<Skill name="RULES-COMPSOINANI">"2"</Skill>
+  <!-- Animal Care -->
+<Skill name="RULES-COMPDRESS_*">"2"</Skill>
+  <!-- Animal Training -->
+<Skill name="RULES-COMPCALM">"2"</Skill>
+  <!-- Cool -->
+<Skill name="RULES-COMPEVAL">"2"</Skill>
+  <!-- Evaluate -->
+<Skill name="RULES-COMPINTIM">"2"</Skill>
+  <!-- Intimidate -->
+<Skill name="RULES-COMPCOMB_HAST">"2"</Skill>
+  <!-- Melee (Polearm) -->
+<Skill name="RULES-COMPGUERI">"3"</Skill>
+  <!-- Heal -->
+<Skill name="RULES-COMPLANG_*">"3"</Skill>
+  <!-- Language (Magick) -->
+<Skill name="RULES-COMPCOMM">"3"</Skill>
+  <!-- Leadership -->
+<Skill name="RULES-COMPSAVOIR_*">"3"</Skill>
+  <!-- Lore (Magic) -->
+<Skill name="RULES-COMPFOCAL_*">"4"</Skill>
+  <!-- Channelling (Azyr or Ghur) -->
+<Skill name="RULES-COMPSAVOIR_*">"4"</Skill>
+  <!-- Lore (Old Ones) -->
+</SUBCHAPTER_SKILL>
+<SUBCHAPTER_TALENT>
+<Talent name="RULES-T0074">"1"</Talent>
+  <!-- Coolheaded -->
+<Talent name="RULES-T0040">"1"</Talent>
+  <!-- Detect Artefact -->
+<Talent name="RULES-T0137">"1"</Talent>
+  <!-- Second Sight -->
+<Talent name="RULES-T0141">"1"</Talent>
+  <!-- Sixth Sense -->
+<Talent name="RULES-T0115">"2"</Talent>
+  <!-- Magical Sense -->
+<Talent name="RULES-T0140">"2"</Talent>
+  <!-- Orientation -->
+<Talent name="RULES-T0019">"2"</Talent>
+  <!-- Roughrider -->
+<Talent name="RULES-T0151">"2"</Talent>
+  <!-- Sure Shot -->
+<Talent name="RULES-T0088_*">"3"</Talent>
+  <!-- Arcane Magic (Beasts or Heavens) -->
+<Talent name="RULES-T0089">"3"</Talent>
+  <!-- Petty Magic -->
+<Talent name="RULES-T0020">"3"</Talent>
+  <!-- Luck -->
+<Talent name="RULES-T0084">"3"</Talent>
+  <!-- Read/Write -->
+<Talent name="RULES-T0071">"4"</Talent>
+  <!-- Aethyric Attunement -->
+<Talent name="RULES-T0042">"4"</Talent>
+  <!-- Instinctive Diction -->
+<Talent name="RULES-T0005">"4"</Talent>
+  <!-- Pure Soul -->
+<Talent name="RULES-T0087">"4"</Talent>
+  <!-- War Wizard -->
+</SUBCHAPTER_TALENT>
+<SUBCHAPTER_ITEM>
+<Item name="RULES-COMB_HAST_01">"1"</Item>
+  <!-- Quarterstaff -->
+<Item name="Divining Rod">"2"</Item>
+<Item name="RULES-PROJ_LANC_05">"2"</Item>
+  <!-- Javelin -->
+<Item name="Mask of the Old Ones">"2"</Item>
+<Item name="Collection of Feathers and Amulets">"3"</Item>
+<Item name="Recovered Magical Item">"4"</Item>
+</SUBCHAPTER_ITEM>
+</Career>
+<Career id="LUSTR-WORK125">
+<Description language="ENGLISH">"Survivalist"</Description>
+<Explanation language="ENGLISH">"Bitter experience has taught you how to survive the worst of the natural world and its hazards. Survivalists are hardened veterans who have learned how to stay alive in the most lethal parts of the world. They cultivate an encyclopaedic knowledge of which foragables are safe to eat, the symptoms of infectious diseases, and how to avoid predator territories. Much of this life-saving knowledge is acquired through painful personal experience, requiring a Survivalist to be very lucky, supremely resilient, or both. Their discoveries are so vital they can reliably make a living selling their wisdom back to travelling companions. 'The trick with blindwyrms is rolling with the hit, and not letting them burrow inside you. Once they deposit their young under the skin, they reproduce so fast they'll be flooding your internal organs. You see that happen to a friend, make sure to keep your distance, lest they explode and shower you in — look, you asked, alright? Not my fault you'd just had your breakfast.' - Tuni the Morbid, Dwarfen Survivalist. 'The wretches of the Plague God lie that only with their repugnant patron's gifts can one survive in a place as miserable as this. But I know better. I have seen the truly divine in the spirit of the uncompromising. I have seen the miracle of Human biology.' - Flavia Zanassi, Priestess of Shallya. 'When in Lustria, do as the Lizards do.' - Orika the Grim. Survivalists are rarely sociable sorts. Crawling through dirt, bathing in bug-repellent juices, and extracting moisture from animal excrement is not a good way to make friends. But savvy expedition commanders know that the advantages of understanding the local terrain are worth the cost in coin and morale. Survivalists pair well with Trailblazers — whilst the latter provide the drive to keep pushing onwards, the former are a tempering influence, ensuring due regard is paid for what is practically achievable and relatively safe. A Traumatic Ordeal: To become intimately familiar with the perils of the natural world, most Survivalists go through an excruciating process of trial and error. As a Subsister, their goals are nothing more worthy than scavenging enough food to survive, without succumbing to infection, malnutrition, or exposure. It is a career one seldom chooses, but is commonly inflicted by unfortunate circumstances — poverty, shipwreck, exile, or unusually harsh coming-of-age rituals. Often they are the sole survivors of larger companies, haunted by terrible acts they committed to survive as their fellows perished. The few Subsisters who live cultivate a set of skills that other travellers will happily pay for. However insistently a Survivalist claims they will never return to the wild, desperation or survivor's guilt tends to change their mind. In the field, a Survivalist's sharped situational awareness helps them to pick up new skills, with nature always the best teacher. An experienced Survivalist may transition from consultation into instruction, disseminating knowledge that can save lives in their absence. Even then, they typically follow their pupils into the field, supervising their ordeals personally. Survivalists in Lustria: The death toll of foreign expeditions to Lustria is beyond horrific. Between the bugs, predators, poisonous wildlife, infectious diseases, treacherous terrain, Lizardman armies, and magical defences of the Slann, it is extraordinary any explorers survive long enough to warn their kin never to visit the continent. If anyone can help an expedition mitigate its losses, it is a Survivalist. Naturally, the most useful consultants are those with experience of jungle exploration specifically, but even rangers who learned wilderness survival in Athel Loren, the World's Edge Mountains, the Nehekharan desert, or the Chaos Wastes will find many of their skills relevant. Survival is a state of mind. Every New World colony is littered with lost souls who stumbled back to the coast after the rest of their expedition perished. It takes a shrewd eye to recognise these haunted degenerates as potential Survivalists, but an explorer who takes the time to feed and clothe them could learn plenty from the failures of their predecessors. Other Survivalists may be born and raised in the colonies, learning about the many hazards of the jungle as part of their upbringing. These lifelong residents of Lustria may possess the most comprehensive knowledge of all, and can charge commensurately higher rates for their service."</Explanation>
+<Skill>"RULES-COMPSURVEXT"</Skill>
+<Class>"CLASS_RANG"</Class>
+<SUBCHAPTER_LEVEL>
+<Level id="1">
+<Description language="ENGLISH">"Subsister"</Description>
+<Salary>"TIERS_BRASS 1"</Salary>
+</Level>
+<Level id="2">
+<Description language="ENGLISH">"Survivalist"</Description>
+<Salary>"TIERS_BRASS 4"</Salary>
+</Level>
+<Level id="3">
+<Description language="ENGLISH">"Wild Whisperer"</Description>
+<Salary>"TIERS_BRASS 5"</Salary>
+</Level>
+<Level id="4">
+<Description language="ENGLISH">"Wilderness Instructor"</Description>
+<Salary>"TIERS_SILVER 3"</Salary>
+</Level>
+</SUBCHAPTER_LEVEL>
+<SUBCHAPTER_ATTR>
+<Attribut name="RULES-ATTR_WS">"0"</Attribut>
+<Attribut name="RULES-ATTR_BS">"0"</Attribut>
+<Attribut name="RULES-ATTR_S">"3"</Attribut>
+<Attribut name="RULES-ATTR_T">"1"</Attribut>
+<Attribut name="RULES-ATTR_I">"2"</Attribut>
+<Attribut name="RULES-ATTR_Ag">"4"</Attribut>
+<Attribut name="RULES-ATTR_Dex">"0"</Attribut>
+<Attribut name="RULES-ATTR_Int">"1"</Attribut>
+<Attribut name="RULES-ATTR_WP">"1"</Attribut>
+<Attribut name="RULES-ATTR_Fel">"0"</Attribut>
+</SUBCHAPTER_ATTR>
+<SUBCHAPTER_SKILL>
+<Skill name="RULES-COMPCALM">"1"</Skill>
+  <!-- Cool -->
+<Skill name="RULES-COMPESQU">"1"</Skill>
+  <!-- Dodge -->
+<Skill name="RULES-COMPRESIST">"1"</Skill>
+  <!-- Endurance -->
+<Skill name="RULES-COMPGUERI">"1"</Skill>
+  <!-- Heal -->
+<Skill name="RULES-COMPINTUI">"1"</Skill>
+  <!-- Intuition -->
+<Skill name="RULES-COMPCOMB_BASE">"1"</Skill>
+  <!-- Melee (Basic) -->
+<Skill name="RULES-COMPSURVEXT">"1"</Skill>
+  <!-- Outdoor Survival -->
+<Skill name="RULES-COMPPRECEP">"1"</Skill>
+  <!-- Perception -->
+<Skill name="RULES-COMPDISC_RURAL">"1"</Skill>
+  <!-- Stealth (Rural) -->
+<Skill name="RULES-COMPNATA">"1"</Skill>
+  <!-- Swim -->
+<Skill name="RULES-COMPRESALC">"2"</Skill>
+  <!-- Consume Alcohol -->
+<Skill name="RULES-COMPINTIM">"2"</Skill>
+  <!-- Intimidate -->
+<Skill name="RULES-COMPSAVOIR_LOCAL">"2"</Skill>
+  <!-- Lore (Local) -->
+<Skill name="RULES-COMPORIENT">"2"</Skill>
+  <!-- Navigation -->
+<Skill name="RULES-COMPPROJ_*">"2"</Skill>
+  <!-- Ranged (Any) -->
+<Skill name="RULES-COMPPIEG">"2"</Skill>
+  <!-- Set Trap -->
+<Skill name="RULES-COMPATHL">"3"</Skill>
+  <!-- Athletics -->
+<Skill name="RULES-COMPANIM">"3"</Skill>
+  <!-- Charm Animal -->
+<Skill name="RULES-COMPSIGNES_RANGER">"3"</Skill>
+  <!-- Secret Signs (Ranger) -->
+<Skill name="RULES-COMPPIST">"3"</Skill>
+  <!-- Track -->
+<Skill name="RULES-COMPSOINANI">"4"</Skill>
+  <!-- Animal Care -->
+<Skill name="RULES-COMPCOMM">"4"</Skill>
+  <!-- Leadership -->
+</SUBCHAPTER_SKILL>
+<SUBCHAPTER_TALENT>
+<Talent name="RULES-T0047">"1"</Talent>
+  <!-- Hardy -->
+<Talent name="RULES-T0141">"1"</Talent>
+  <!-- Sixth Sense -->
+<Talent name="RULES-T0016">"1"</Talent>
+  <!-- Stone Soup -->
+<Talent name="RULES-T0116">"1"</Talent>
+  <!-- Tenacious -->
+<Talent name="RULES-T0111">"2"</Talent>
+  <!-- Field Dressing -->
+<Talent name="RULES-T0050">"2"</Talent>
+  <!-- Implacable -->
+<Talent name="RULES-T0086">"2"</Talent>
+  <!-- Iron Jaw -->
+<Talent name="RULES-T0129_*">"2"</Talent>
+  <!-- Resistance (Any) -->
+<Talent name="RULES-T0108">"3"</Talent>
+  <!-- Hunter's Eye -->
+<Talent name="RULES-T0098">"3"</Talent>
+  <!-- Menacing -->
+<Talent name="RULES-T0140">"3"</Talent>
+  <!-- Orientation -->
+<Talent name="RULES-T0156">"3"</Talent>
+  <!-- Trapper -->
+<Talent name="RULES-T0139_OUIE">"4"</Talent>
+  <!-- Acute Sense (Hearing) -->
+<Talent name="RULES-T0061">"4"</Talent>
+  <!-- Careful Strike -->
+<Talent name="RULES-T0167">"4"</Talent>
+  <!-- Iron Will -->
+<Talent name="RULES-T0123">"4"</Talent>
+  <!-- Well-prepared -->
+</SUBCHAPTER_TALENT>
+<SUBCHAPTER_ITEM>
+<Item name="RULES-COMB_BASE_*">"1"</Item>
+  <!-- Hand Weapon -->
+<Item name="Bedroll">"2"</Item>
+<Item name="Rope">"2"</Item>
+<Item name="RULES-PROJ_FROND_02">"2"</Item>
+  <!-- Sling -->
+<Item name="RULES-MUNI_05">"2"</Item>
+  <!-- Sling ammunition -->
+<Item name="Sturdy Boots">"2"</Item>
+<Item name="Waterskin">"2"</Item>
+<Item name="Animal Traps">"3"</Item>
+<Item name="Repertoire of Bird Calls">"3"</Item>
+<Item name="Antitoxin Kit">"4"</Item>
+<Item name="Bandage">"4"</Item>
+<Item name="Extra Day of Rations">"4"</Item>
+<Item name="Map">"4"</Item>
+</SUBCHAPTER_ITEM>
+</Career>
+<Career id="LUSTR-WORK126">
+<Description language="ENGLISH">"Trailblazer"</Description>
+<Explanation language="ENGLISH">"You forge a path through untamed wilds in expeditions of discovery. For as long as civilisations have been carving out safe havens for themselves, there have been those daring enough to leave shelter behind and disappear into the wilderness. Perhaps they hope to discover a better place for settlement, a vital natural resource, or simply a cure for their pathological wanderlust. Most abandon their travels when confronted by an impassable obstacle. But others are too pig-headed to give up. Determined to find a way or make one, they persist in their travails until they reach their destination or perish in the attempt. In Lustria, the latter is far more likely. 'Who needs roads when we have machetes?' - Karl Ernst Bartus, self-proclaimed adventurer. 'I already started filing the paperwork for death-in-service. Much more efficient than waiting for the inevitable.' - Pessiminus the Economical, regimental quartermaster. There are two main schools of thought as to how best to penetrate the impenetrable. One philosophy, favoured by most Elves and Halflings, is to embrace the path of least resistance. They have an eye for any trail through dense terrain, however narrow or circuitous, and hone their bodies to slip through those routes. The other approach, famously preferred by Dwarfs and Humans, is to fashion a way forward with brute force. They chop through foliage with scant regard for environmental consequences, perhaps even laying roads for others to follow them. Each method has its advantages, though the latter surely draws more attention from native predators, even if it is more direct. Call of the Unknown: Most Trailblazers start out alone or in small parties, unable to convince many to join their perilous journeys into uncharted terrain. Only when a Pioneer returns from their travels with something of value can they expect financial backing from an intrigued patron. Whilst a Scout (WFRP page 83) might prefer solitude and familiar territory, a Trailblazer's dream is to go where no-one has been before and inspire others to follow in their footsteps. Many are driven by desire for fame and fortune, glory that can only be obtained with a suitable audience. A Trailblazer who successfully demonstrates the profitability of their ventures can expect a bigger stake in future endeavours. As a Pacesetter, they are the vanguard of their expedition, leading by example in and out of deadly environments. The ultimate goal is to be granted command of a whole expedition of explorers. Expedition Leaders know that if their undertaking is successful, they can expect their name to be reproduced in history books for hundreds of years or more. Trailblazers in Lustria: The world has no shortage of murderous landscapes for impetuous Trailblazers to explore. High Elf Shadow Warriors prowl the bleak wastelands of Naggaroth. Nomads persevere through the heat of the southern deserts. Dwarf Rangers brave the freezing peaks of the World's Edge Mountains, some even pushing north to survey the desolate Chaos Wastes. Yet Lustria lures more Trailblazers to its shores than anywhere else. Between its exotic array of lethal hazards, and the promise of gold for the successful plunderer, nowhere else so thoroughly captures the imagination of an aspiring adventurer. The perils for a Lustrian Trailblazer are frighteningly varied. The jungle is enchanted to repel would-be explorers, with diseases, insects, predators, and Lizardman defenders spelling the doom of their expeditions. Whilst Trailblazers have a reputation for recklessness, few are foolhardy enough to undertake an excursion without diligent preparation. Wherever possible, they will supplement their travelling packs with maps, survival tools, and the very latest local knowledge. That said, Lustria's jungles are renowned for their shifting landscape, quickly obliterating trails and paths previously marked through the foliage. A Lustrian Trailblazer expects that when they enter the jungle, they will be forging their own path."</Explanation>
+<Skill>"RULES-COMPORIENT"</Skill>
+<Class>"CLASS_RANG"</Class>
+<SUBCHAPTER_LEVEL>
+<Level id="1">
+<Description language="ENGLISH">"Pioneer"</Description>
+<Salary>"TIERS_BRASS 3"</Salary>
+</Level>
+<Level id="2">
+<Description language="ENGLISH">"Trailblazer"</Description>
+<Salary>"TIERS_SILVER 1"</Salary>
+</Level>
+<Level id="3">
+<Description language="ENGLISH">"Pacesetter"</Description>
+<Salary>"TIERS_SILVER 2"</Salary>
+</Level>
+<Level id="4">
+<Description language="ENGLISH">"Expedition Leader"</Description>
+<Salary>"TIERS_GOLD 1"</Salary>
+</Level>
+</SUBCHAPTER_LEVEL>
+<SUBCHAPTER_ATTR>
+<Attribut name="RULES-ATTR_WS">"0"</Attribut>
+<Attribut name="RULES-ATTR_BS">"0"</Attribut>
+<Attribut name="RULES-ATTR_S">"0"</Attribut>
+<Attribut name="RULES-ATTR_T">"2"</Attribut>
+<Attribut name="RULES-ATTR_I">"1"</Attribut>
+<Attribut name="RULES-ATTR_Ag">"1"</Attribut>
+<Attribut name="RULES-ATTR_Dex">"0"</Attribut>
+<Attribut name="RULES-ATTR_Int">"1"</Attribut>
+<Attribut name="RULES-ATTR_WP">"3"</Attribut>
+<Attribut name="RULES-ATTR_Fel">"4"</Attribut>
+</SUBCHAPTER_ATTR>
+<SUBCHAPTER_SKILL>
+<Skill name="RULES-COMPESCAL">"1"</Skill>
+  <!-- Climb -->
+<Skill name="RULES-COMPCALM">"1"</Skill>
+  <!-- Cool -->
+<Skill name="RULES-COMPRESIST">"1"</Skill>
+  <!-- Endurance -->
+<Skill name="RULES-COMPCOMB_BASE">"1"</Skill>
+  <!-- Melee (Basic) -->
+<Skill name="RULES-COMPORIENT">"1"</Skill>
+  <!-- Navigation -->
+<Skill name="RULES-COMPSURVEXT">"1"</Skill>
+  <!-- Outdoor Survival -->
+<Skill name="RULES-COMPPRECEP">"1"</Skill>
+  <!-- Perception -->
+<Skill name="RULES-COMPRAMER">"1"</Skill>
+  <!-- Row -->
+<Skill name="RULES-COMPVOILE">"1"</Skill>
+  <!-- Sail (Any) -->
+<Skill name="RULES-COMPNATA">"1"</Skill>
+  <!-- Swim -->
+<Skill name="RULES-COMPATHL">"2"</Skill>
+  <!-- Athletics -->
+<Skill name="RULES-COMPRAGOT">"2"</Skill>
+  <!-- Gossip -->
+<Skill name="RULES-COMPPROJ_POUDRE">"2"</Skill>
+  <!-- Ranged (Blackpowder) -->
+<Skill name="RULES-COMPCHEV_CHEVAL">"2"</Skill>
+  <!-- Ride (Horse) -->
+<Skill name="RULES-COMPDISC_RURAL">"2"</Skill>
+  <!-- Stealth (Rural) -->
+<Skill name="RULES-COMPMETIER_CARTO">"2"</Skill>
+  <!-- Trade (Cartographer) -->
+<Skill name="RULES-COMPSUBOR">"3"</Skill>
+  <!-- Bribery -->
+<Skill name="RULES-COMPESQU">"3"</Skill>
+  <!-- Dodge -->
+<Skill name="RULES-COMPCOND">"3"</Skill>
+  <!-- Drive -->
+<Skill name="RULES-COMPRECH">"3"</Skill>
+  <!-- Research -->
+<Skill name="RULES-COMPEVAL">"4"</Skill>
+  <!-- Evaluate -->
+<Skill name="RULES-COMPCOMM">"4"</Skill>
+  <!-- Leadership -->
+</SUBCHAPTER_SKILL>
+<SUBCHAPTER_TALENT>
+<Talent name="RULES-T0162">"1"</Talent>
+  <!-- Fleet Footed -->
+<Talent name="RULES-T0140">"1"</Talent>
+  <!-- Orientation -->
+<Talent name="RULES-T0013_*">"1"</Talent>
+  <!-- Strider (Any) -->
+<Talent name="RULES-T0116">"1"</Talent>
+  <!-- Tenacious -->
+<Talent name="RULES-T0139_VUE">"2"</Talent>
+  <!-- Acute Sense (Sight) -->
+<Talent name="RULES-T0133">"2"</Talent>
+  <!-- Jump Up -->
+<Talent name="RULES-T0105">"2"</Talent>
+  <!-- Rover -->
+<Talent name="RULES-T0066">"2"</Talent>
+  <!-- Scale Sheer Surface -->
+<Talent name="RULES-T0064">"3"</Talent>
+  <!-- Flee! -->
+<Talent name="RULES-T0047">"3"</Talent>
+  <!-- Hardy -->
+<Talent name="RULES-T0168">"3"</Talent>
+  <!-- Seasoned Traveller -->
+<Talent name="RULES-T0145">"3"</Talent>
+  <!-- Sprinter -->
+<Talent name="RULES-T0102">"4"</Talent>
+  <!-- Dealmaker -->
+<Talent name="RULES-T0136_SOLD">"4"</Talent>
+  <!-- Etiquette (Soldiers) -->
+<Talent name="RULES-T0053">"4"</Talent>
+  <!-- Inspiring -->
+<Talent name="RULES-T0084">"4"</Talent>
+  <!-- Read/Write -->
+</SUBCHAPTER_TALENT>
+<SUBCHAPTER_ITEM>
+<Item name="Cooking Pot">"1"</Item>
+<Item name="RULES-COMB_BASE_04">"1"</Item>
+  <!-- Machete -->
+<Item name="Sturdy Boots">"1"</Item>
+<Item name="Walking Stick">"1"</Item>
+<Item name="Waterskin">"1"</Item>
+<Item name="Chalk">"2"</Item>
+<Item name="Map">"2"</Item>
+<Item name="RULES-PROJ_POUDRE_04">"2"</Item>
+  <!-- Pistol -->
+<Item name="RULES-MUNI_06">"2"</Item>
+  <!-- Pistol ammunition -->
+<Item name="10 Shots">"2"</Item>
+<Item name="Telescope">"2"</Item>
+<Item name="Bedroll">"3"</Item>
+<Item name="Grappling Hook">"3"</Item>
+<Item name="Trade Tools (Navigator)">"3"</Item>
+<Item name="Company of Explorers">"4"</Item>
+<Item name="Riding Horse with Saddle and Tack">"4"</Item>
+<Item name="Tent">"4"</Item>
+<Item name="Walking Cane">"4"</Item>
+</SUBCHAPTER_ITEM>
+</Career>
+</DATA_CAREER>
+<DATA_SPECIE_CAREER_CHOICE>
+<Choice>
+<Specie>"RULES-RACE_DWAR"</Specie>
+<Career>"RULES-WORK33"</Career>
+<Alternative>"LUSTR-WORK123"</Alternative>
+</Choice>
+<Choice>
+<Specie>"RULES-RACE_HALF"</Specie>
+<Career>"RULES-WORK33"</Career>
+<Alternative>"LUSTR-WORK123"</Alternative>
+</Choice>
+<Choice>
+<Specie>"RULES-RACE_HELF"</Specie>
+<Career>"RULES-WORK33"</Career>
+<Alternative>"LUSTR-WORK123"</Alternative>
+</Choice>
+<Choice>
+<Specie>"RULES-RACE_HUM"</Specie>
+<Career>"RULES-WORK33"</Career>
+<Alternative>"LUSTR-WORK123"</Alternative>
+</Choice>
+<Choice>
+<Specie>"UPINA-RACE_HTIL"</Specie>
+<Career>"RULES-WORK33"</Career>
+<Alternative>"LUSTR-WORK123"</Alternative>
+</Choice>
+<Choice>
+<Specie>"MIDDE-RACE_HMIDH"</Specie>
+<Career>"RULES-WORK33"</Career>
+<Alternative>"LUSTR-WORK123"</Alternative>
+</Choice>
+<Choice>
+<Specie>"MIDDE-RACE_HMIDL"</Specie>
+<Career>"RULES-WORK33"</Career>
+<Alternative>"LUSTR-WORK123"</Alternative>
+</Choice>
+<Choice>
+<Specie>"MIDDE-RACE_HNORD"</Specie>
+<Career>"RULES-WORK33"</Career>
+<Alternative>"LUSTR-WORK123"</Alternative>
+</Choice>
+<Choice>
+<Specie>"RULES-RACE_WELF"</Specie>
+<Career>"RULES-WORK33"</Career>
+<Alternative>"LUSTR-WORK123"</Alternative>
+</Choice>
+<Choice>
+<Specie>"RULES-RACE_HUM"</Specie>
+<Career>"RULES-WORK41"</Career>
+<Alternative>"LUSTR-WORK124"</Alternative>
+</Choice>
+<Choice>
+<Specie>"UPINA-RACE_HTIL"</Specie>
+<Career>"RULES-WORK41"</Career>
+<Alternative>"LUSTR-WORK124"</Alternative>
+</Choice>
+<Choice>
+<Specie>"MIDDE-RACE_HMIDH"</Specie>
+<Career>"RULES-WORK41"</Career>
+<Alternative>"LUSTR-WORK124"</Alternative>
+</Choice>
+<Choice>
+<Specie>"MIDDE-RACE_HMIDL"</Specie>
+<Career>"RULES-WORK41"</Career>
+<Alternative>"LUSTR-WORK124"</Alternative>
+</Choice>
+<Choice>
+<Specie>"MIDDE-RACE_HNORD"</Specie>
+<Career>"RULES-WORK41"</Career>
+<Alternative>"LUSTR-WORK124"</Alternative>
+</Choice>
+<Choice>
+<Specie>"RULES-RACE_WELF"</Specie>
+<Career>"RULES-WORK41"</Career>
+<Alternative>"LUSTR-WORK124"</Alternative>
+</Choice>
+<Choice>
+<Specie>"RULES-RACE_HALF"</Specie>
+<Career>"RULES-WORK47"</Career>
+<Alternative>"LUSTR-WORK125"</Alternative>
+</Choice>
+<Choice>
+<Specie>"RULES-RACE_HUM"</Specie>
+<Career>"RULES-WORK47"</Career>
+<Alternative>"LUSTR-WORK125"</Alternative>
+</Choice>
+<Choice>
+<Specie>"UPINA-RACE_HTIL"</Specie>
+<Career>"RULES-WORK47"</Career>
+<Alternative>"LUSTR-WORK125"</Alternative>
+</Choice>
+<Choice>
+<Specie>"MIDDE-RACE_HMIDH"</Specie>
+<Career>"RULES-WORK47"</Career>
+<Alternative>"LUSTR-WORK125"</Alternative>
+</Choice>
+<Choice>
+<Specie>"MIDDE-RACE_HMIDL"</Specie>
+<Career>"RULES-WORK47"</Career>
+<Alternative>"LUSTR-WORK125"</Alternative>
+</Choice>
+<Choice>
+<Specie>"MIDDE-RACE_HNORD"</Specie>
+<Career>"RULES-WORK47"</Career>
+<Alternative>"LUSTR-WORK125"</Alternative>
+</Choice>
+<Choice>
+<Specie>"RULES-RACE_DWAR"</Specie>
+<Career>"RULES-WORK13"</Career>
+<Alternative>"LUSTR-WORK126"</Alternative>
+</Choice>
+<Choice>
+<Specie>"RULES-RACE_HALF"</Specie>
+<Career>"RULES-WORK13"</Career>
+<Alternative>"LUSTR-WORK126"</Alternative>
+</Choice>
+<Choice>
+<Specie>"RULES-RACE_HUM"</Specie>
+<Career>"RULES-WORK13"</Career>
+<Alternative>"LUSTR-WORK126"</Alternative>
+</Choice>
+<Choice>
+<Specie>"UPINA-RACE_HTIL"</Specie>
+<Career>"RULES-WORK13"</Career>
+<Alternative>"LUSTR-WORK126"</Alternative>
+</Choice>
+<Choice>
+<Specie>"MIDDE-RACE_HMIDH"</Specie>
+<Career>"RULES-WORK13"</Career>
+<Alternative>"LUSTR-WORK126"</Alternative>
+</Choice>
+<Choice>
+<Specie>"MIDDE-RACE_HMIDL"</Specie>
+<Career>"RULES-WORK13"</Career>
+<Alternative>"LUSTR-WORK126"</Alternative>
+</Choice>
+<Choice>
+<Specie>"MIDDE-RACE_HNORD"</Specie>
+<Career>"RULES-WORK13"</Career>
+<Alternative>"LUSTR-WORK126"</Alternative>
+</Choice>
+</DATA_SPECIE_CAREER_CHOICE>
+<DATA_SPECIE_CAREER_DIRECT>
+<Entry>
+<Specie>"RULES-RACE_DWAR"</Specie>
+<Career name="LUSTR-WORK123">"X"</Career>
+  <!-- Interpreter -->
+</Entry>
+<Entry>
+<Specie>"RULES-RACE_HALF"</Specie>
+<Career name="LUSTR-WORK123">"X"</Career>
+  <!-- Interpreter -->
+</Entry>
+<Entry>
+<Specie>"RULES-RACE_HELF"</Specie>
+<Career name="LUSTR-WORK123">"X"</Career>
+  <!-- Interpreter -->
+</Entry>
+<Entry>
+<Specie>"RULES-RACE_HELF"</Specie>
+<Career name="LUSTR-WORK124">"X"</Career>
+  <!-- Oracle -->
+</Entry>
+<Entry>
+<Specie>"RULES-RACE_HUM"</Specie>
+<Career name="LUSTR-WORK123">"X"</Career>
+  <!-- Interpreter -->
+</Entry>
+<Entry>
+<Specie>"RULES-RACE_HUM"</Specie>
+<Career name="LUSTR-WORK124">"X"</Career>
+  <!-- Oracle -->
+</Entry>
+<Entry>
+<Specie>"RULES-RACE_WELF"</Specie>
+<Career name="LUSTR-WORK123">"X"</Career>
+  <!-- Interpreter -->
+</Entry>
+<Entry>
+<Specie>"RULES-RACE_WELF"</Specie>
+<Career name="LUSTR-WORK124">"X"</Career>
+  <!-- Oracle -->
+</Entry>
+<Entry>
+<Specie>"UPINA-RACE_HTIL"</Specie>
+<Career name="LUSTR-WORK123">"X"</Career>
+  <!-- Interpreter -->
+</Entry>
+<Entry>
+<Specie>"MIDDE-RACE_HMIDH"</Specie>
+<Career name="LUSTR-WORK123">"X"</Career>
+  <!-- Interpreter -->
+</Entry>
+<Entry>
+<Specie>"MIDDE-RACE_HMIDL"</Specie>
+<Career name="LUSTR-WORK123">"X"</Career>
+  <!-- Interpreter -->
+</Entry>
+<Entry>
+<Specie>"MIDDE-RACE_HNORD"</Specie>
+<Career name="LUSTR-WORK123">"X"</Career>
+  <!-- Interpreter -->
+</Entry>
+<Entry>
+<Specie>"RULES-RACE_DWAR"</Specie>
+<Career name="LUSTR-WORK125">"X"</Career>
+  <!-- Survivalist -->
+</Entry>
+<Entry>
+<Specie>"RULES-RACE_HALF"</Specie>
+<Career name="LUSTR-WORK125">"X"</Career>
+  <!-- Survivalist -->
+</Entry>
+<Entry>
+<Specie>"RULES-RACE_HELF"</Specie>
+<Career name="LUSTR-WORK125">"X"</Career>
+  <!-- Survivalist -->
+</Entry>
+<Entry>
+<Specie>"RULES-RACE_HUM"</Specie>
+<Career name="LUSTR-WORK125">"X"</Career>
+  <!-- Survivalist -->
+</Entry>
+<Entry>
+<Specie>"RULES-RACE_WELF"</Specie>
+<Career name="LUSTR-WORK125">"X"</Career>
+  <!-- Survivalist -->
+</Entry>
+<Entry>
+<Specie>"UPINA-RACE_HTIL"</Specie>
+<Career name="LUSTR-WORK125">"X"</Career>
+  <!-- Survivalist -->
+</Entry>
+<Entry>
+<Specie>"MIDDE-RACE_HMIDH"</Specie>
+<Career name="LUSTR-WORK125">"X"</Career>
+  <!-- Survivalist -->
+</Entry>
+<Entry>
+<Specie>"MIDDE-RACE_HMIDL"</Specie>
+<Career name="LUSTR-WORK125">"X"</Career>
+  <!-- Survivalist -->
+</Entry>
+<Entry>
+<Specie>"MIDDE-RACE_HNORD"</Specie>
+<Career name="LUSTR-WORK125">"X"</Career>
+  <!-- Survivalist -->
+</Entry>
+<Entry>
+<Specie>"RULES-RACE_DWAR"</Specie>
+<Career name="LUSTR-WORK126">"X"</Career>
+  <!-- Trailblazer -->
+</Entry>
+<Entry>
+<Specie>"RULES-RACE_HALF"</Specie>
+<Career name="LUSTR-WORK126">"X"</Career>
+  <!-- Trailblazer -->
+</Entry>
+<Entry>
+<Specie>"RULES-RACE_HELF"</Specie>
+<Career name="LUSTR-WORK126">"X"</Career>
+  <!-- Trailblazer -->
+</Entry>
+<Entry>
+<Specie>"RULES-RACE_HUM"</Specie>
+<Career name="LUSTR-WORK126">"X"</Career>
+  <!-- Trailblazer -->
+</Entry>
+<Entry>
+<Specie>"RULES-RACE_WELF"</Specie>
+<Career name="LUSTR-WORK126">"X"</Career>
+  <!-- Trailblazer -->
+</Entry>
+<Entry>
+<Specie>"UPINA-RACE_HTIL"</Specie>
+<Career name="LUSTR-WORK126">"X"</Career>
+  <!-- Trailblazer -->
+</Entry>
+<Entry>
+<Specie>"MIDDE-RACE_HMIDH"</Specie>
+<Career name="LUSTR-WORK126">"X"</Career>
+  <!-- Trailblazer -->
+</Entry>
+<Entry>
+<Specie>"MIDDE-RACE_HMIDL"</Specie>
+<Career name="LUSTR-WORK126">"X"</Career>
+  <!-- Trailblazer -->
+</Entry>
+<Entry>
+<Specie>"MIDDE-RACE_HNORD"</Specie>
+<Career name="LUSTR-WORK126">"X"</Career>
+  <!-- Trailblazer -->
+</Entry>
+</DATA_SPECIE_CAREER_DIRECT>
+</DATA_BOOK>

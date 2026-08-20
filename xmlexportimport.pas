@@ -1460,9 +1460,15 @@ Procedure XmlImport(FileName: String; OnlyPrimary: Boolean; OnlyCode: Boolean);
                         end;
                        if LangueDef = ConstAnglais then
                          begin
-                          ListRace.add(PRace);
-                          inc(NbRace);
-                          Inc(LivreNbrace);
+                          // Ne pas recréer une ligne de race si ce CodeRace existe déjà
+                          // (cas d'un livre qui ne fait qu'ajouter des données - ex. SUBCHAPTER_CAREER -
+                          // sur une race définie ailleurs, sans redéclarer Description/SUBCHAPTER_ATTR/etc.)
+                          if ChercheRace(PRace.CodeRace).CodeRace = '' then
+                            begin
+                             ListRace.add(PRace);
+                             inc(NbRace);
+                             Inc(LivreNbrace);
+                            end;
                          end;
 
                       AddTrad(PTraduction, Langue);
@@ -2101,6 +2107,41 @@ Procedure XmlImport(FileName: String; OnlyPrimary: Boolean; OnlyCode: Boolean);
                         begin
                           ListMetierRaceChoixMetier.add(PMetierRaceChoixMetier);
                           inc(NbMetierRaceChoixMetier);
+                        end;
+
+                      NodeNv2 := NodeNv2.NextSibling;
+                    end;
+                end;
+
+              // Metier choix race direct (ajout d'une race à un métier existant, ou
+              // inversement, sans passer par <Specie>/<Career> - indépendant de l'ordre
+              // de chargement des livres, comme Metier choix race ci-dessus)
+              NodeNv1 := BookNode.FindNode(ConstXmlDataSpecieCareerDirect);
+              if Assigned(NodeNv1) then
+                begin
+                  NodeNv2 := NodeNv1.FirstChild;
+                  While Assigned(NodeNv2) do
+                    begin
+                      PRaceMetier.Livre := Livre;
+
+                      Node := NodeNv2.FirstChild;
+                      while Assigned(Node) do
+                        begin
+                          case Node.NodeName of
+                            ConstXmlRace:
+                              PRaceMetier.CodeRace   := RemoveQuotes(UTF8Encode(Node.TextContent));
+                            ConstXmlWork:
+                              begin
+                                PRaceMetier.CodeMetier := RemoveQuotes(UTF8Encode(Node.Attributes.GetNamedItem(ConstXmlData).NodeValue));
+                                PRaceMetier.Chance     := RemoveQuotes(UTF8Encode(Node.TextContent));
+                              end;
+                          end;
+                          Node := Node.NextSibling;
+                        end;
+                      if LangueDef = ConstAnglais then
+                        begin
+                          ListRaceMetier.add(PRaceMetier);
+                          inc(NbRaceMetier);
                         end;
 
                       NodeNv2 := NodeNv2.NextSibling;

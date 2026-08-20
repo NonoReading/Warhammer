@@ -86,6 +86,7 @@ Const
       ConstXmlDataSpecieCreation        = 'DATA_RANDOM_SPECIE';
       ConstXmlDataCraftsmanship         = 'DATA_CRAFTMANSHIP';
       ConstXmlDataSpecieCareerChoix     = 'DATA_SPECIE_CAREER_CHOICE';
+      ConstXmlDataSpecieCareerDirect    = 'DATA_SPECIE_CAREER_DIRECT';
       ConstXmlDataCareerSubChoice       = 'DATA_CAREER_SUBCHOICE';
       ConstXmlDataPhysicalCorruption    = 'DATA_CORRUPTION_PHYSICAL';
       ConstXmlDataMentalCorruption      = 'DATA_CORRUPTION_MENTAL';
@@ -131,6 +132,7 @@ Const
       ConstXmlDuree                     = 'Duration';
       ConstXmlChoix                     = 'Choice';
       ConstXmlAlternative               = 'Alternative';
+      ConstXmlEntry                     = 'Entry';
       ConstXmlId                        = 'id';
       ConstXmlAttribut                  = 'Attribut';
       ConstXmlOrder                     = 'Order';

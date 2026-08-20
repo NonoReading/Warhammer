@@ -567,10 +567,32 @@ Procedure TMenu.ChargeIni();
 
 procedure TMenu.ChargerLivre(ForceMaJ: Boolean; ForceLivre: String);
   var
-    i:             Integer = 0;
-    SearchResult:  TSearchRec;
-    DirectoryPath: string;
-    Nom:           String;
+    i:                     Integer = 0;
+    SearchResult:          TSearchRec;
+    DirectoryPath:         string;
+    Nom:                   String;
+    ListeFichiersACharger: TStringList;
+    ListeNomsACharger:     TStringList;
+    Idx:                   Integer;
+    RulesBookIndex:        Integer;
+
+    procedure ImporterUnLivre(FileName, NomLivre: String);
+      var
+        J: Integer;
+      begin
+        XmlImport(FileName, false, false);
+        if (LivreNbRace > 0) or (LivreNbMetier > 0) then
+          for J := 1 to TabLivre.RowCount - 1 do
+            if TabLivre.Cells[ColLivreCod, J] = NomLivre then
+              begin
+                if LivreNbRace > 0 then
+                  TabLivre.Cells[ColLivreRac, J] := IntToStr(LivreNbRace);
+                if LivreNbMetier > 0 then
+                  TabLivre.Cells[ColLivreWor, J] := IntToStr(LivreNbMetier);
+                break;
+              end;
+      end;
+
   begin
     // Raz des variables
     if ForceMaj then
@@ -657,27 +679,47 @@ procedure TMenu.ChargerLivre(ForceMaJ: Boolean; ForceLivre: String);
       end;
 
     // mettre à jour les données
-    directoryPath := GetCurrentDir + ConstCheminLivre;
-    if FindFirst(directoryPath + '*.xml', faAnyFile, searchResult) = 0 then
-    begin
-      repeat
-        Nom := XmlLivre(ExtractStringBefore(searchResult.Name,'.'));
-        if (pos(AjouteAccolade(Nom), LivresCharges) > 0) and ((ForceLivre = '') or ((LivreComplet = false) and (ForceLivre = Nom))) then
+    // Le RULESBOOK doit être importé en premier parmi les livres à charger ici,
+    // pour la même raison que dans FormCreate (voir xmlexportimport.pas /
+    // ChercheRace) : un supplément (ex. BOOK LUSTRIA) peut ajouter un <Specie>
+    // qui référence une race déjà définie dans le RULESBOOK.
+    directoryPath          := GetCurrentDir + ConstCheminLivre;
+    ListeFichiersACharger  := TStringList.Create;
+    ListeNomsACharger      := TStringList.Create;
+    try
+      if FindFirst(directoryPath + '*.xml', faAnyFile, searchResult) = 0 then
+      begin
+        repeat
+          Nom := XmlLivre(ExtractStringBefore(searchResult.Name,'.'));
+          if (pos(AjouteAccolade(Nom), LivresCharges) > 0) and ((ForceLivre = '') or ((LivreComplet = false) and (ForceLivre = Nom))) then
+            begin
+              ListeFichiersACharger.Add(ExtractStringBefore(searchResult.Name, '.'));
+              ListeNomsACharger.Add(Nom);
+            end;
+        until FindNext(searchResult) <> 0;
+        FindClose(searchResult);
+      end;
+
+      RulesBookIndex := -1;
+      for Idx := 0 to ListeNomsACharger.Count - 1 do
+        if ListeNomsACharger[Idx] = ConstRulesBook then
           begin
-            XmlImport(ExtractStringBefore(searchResult.Name, '.'), false, false);
-            if (LivreNbRace > 0) or (LivreNbMetier > 0) then
-              for I := 1 to TabLivre.RowCount - 1 do
-                if TabLivre.Cells[ColLivreCod, I] = Nom then
-                  begin
-                    if LivreNbRace > 0 then
-                      TabLivre.Cells[ColLivreRac, I] := IntToStr(LivreNbRace);
-                    if LivreNbMetier > 0 then
-                      TabLivre.Cells[ColLivreWor, I] := IntToStr(LivreNbMetier);
-                    break;
-                  end;
+            RulesBookIndex := Idx;
+            break;
           end;
-      until FindNext(searchResult) <> 0;
-      FindClose(searchResult);
+
+      if RulesBookIndex >= 0 then
+        begin
+          ImporterUnLivre(ListeFichiersACharger[RulesBookIndex], ListeNomsACharger[RulesBookIndex]);
+          ListeFichiersACharger.Delete(RulesBookIndex);
+          ListeNomsACharger.Delete(RulesBookIndex);
+        end;
+
+      for Idx := 0 to ListeFichiersACharger.Count - 1 do
+        ImporterUnLivre(ListeFichiersACharger[Idx], ListeNomsACharger[Idx]);
+    finally
+      ListeFichiersACharger.Free;
+      ListeNomsACharger.Free;
     end;
 
     // affichages des valeurs
@@ -748,12 +790,15 @@ end;
 
 procedure TMenu.FormCreate(Sender: TObject);
   Var
-    SearchResult:  TSearchRec;
-    DirectoryPath: string;
-    I:             Integer = 0;
-    Ordre:         String;
-    Nom:           String;
-    PLivre:        StructureLivre;
+    SearchResult:        TSearchRec;
+    DirectoryPath:       string;
+    I:                   Integer = 0;
+    Ordre:               String;
+    Nom:                 String;
+    PLivre:              StructureLivre;
+    ListeFichiersLivres: TStringList;
+    Idx:                 Integer;
+    RulesBookIndex:      Integer;
   begin
        // Images du Menu
        ChargerImage();
@@ -811,12 +856,41 @@ procedure TMenu.FormCreate(Sender: TObject);
        ListCorruptionArmureModif    := TListCorruptionArmureModif.Create;
 
        // chercher les livres
-       directoryPath := GetCurrentDir + ConstCheminLivre;
-       if FindFirst(directoryPath + '*.xml', faAnyFile, searchResult) = 0 then
-       begin
-         repeat
-           XmlImport(ExtractStringBefore(searchResult.Name, '.'), true, false);
-         until FindNext(searchResult) <> 0;
+       // Le RULESBOOK doit être chargé en premier : d'autres livres (ex. BOOK
+       // LUSTRIA) peuvent ajouter des <Specie> qui référencent des races déjà
+       // définies dans le RULESBOOK (voir xmlexportimport.pas / ChercheRace) ;
+       // il faut donc que les vraies données du RULESBOOK soient en place avant
+       // qu'un éventuel stub de supplément ne soit traité, quel que soit l'ordre
+       // renvoyé par FindFirst/FindNext.
+       directoryPath        := GetCurrentDir + ConstCheminLivre;
+       ListeFichiersLivres  := TStringList.Create;
+       try
+         if FindFirst(directoryPath + '*.xml', faAnyFile, searchResult) = 0 then
+         begin
+           repeat
+             ListeFichiersLivres.Add(ExtractStringBefore(searchResult.Name, '.'));
+           until FindNext(searchResult) <> 0;
+           FindClose(searchResult);
+         end;
+
+         RulesBookIndex := -1;
+         for Idx := 0 to ListeFichiersLivres.Count - 1 do
+           if XmlLivre(ListeFichiersLivres[Idx]) = ConstRulesBook then
+             begin
+               RulesBookIndex := Idx;
+               break;
+             end;
+
+         if RulesBookIndex >= 0 then
+           begin
+             XmlImport(ListeFichiersLivres[RulesBookIndex], true, false);
+             ListeFichiersLivres.Delete(RulesBookIndex);
+           end;
+
+         for Idx := 0 to ListeFichiersLivres.Count - 1 do
+           XmlImport(ListeFichiersLivres[Idx], true, false);
+       finally
+         ListeFichiersLivres.Free;
        end;
 
        TypeEquipCC         := GetTexteLibelle('LAB_061');

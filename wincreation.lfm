@@ -481,14 +481,14 @@ object WinCreations: TWinCreations
     Height = 858
     Top = 8
     Width = 1015
-    ActivePage = TabSheetTalent
+    ActivePage = TabSheetMetier
     Anchors = [akTop, akLeft, akRight, akBottom]
     Font.CharSet = ANSI_CHARSET
     Font.Color = clWhite
     Font.Pitch = fpVariable
     Font.Quality = fqDraft
     ParentFont = False
-    TabIndex = 3
+    TabIndex = 1
     TabOrder = 5
     OnChange = PageEtapesChange
     object TabSheetRace: TTabSheet

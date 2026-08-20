@@ -1265,6 +1265,118 @@ existant :
 
 ---
 
+### 2.9 Import Lustria (PDF → XML) & robustesse du chargement des livres — terminé (démarré le 18/08/2026, clos le 20/08/2026)
+
+**Import des carrières (`DATABASE\BOOK LUSTRIA.xml`, code livre `LUSTR`, livre officiel) :**
+- ✅ Interprète (`LUSTR-WORK123`) et Oracle (`LUSTR-WORK124`) : données complètes (4 paliers,
+  compétences/talents/équipement, portrait transparent composité correctement à partir du
+  soft-mask embarqué dans le PDF), éligibilité raciale sur les deux mécanismes existants
+  (`DATA_SPECIE_CAREER_CHOICE` pour le tirage aléatoire + entrées directes
+  `SUBCHAPTER_CAREER Chance="X"` pour le choix libre), confirmés par Nono.
+- ⬜ Survivalist (page 198) et Trailblazer (page 200) : pas encore commencés. Même pipeline
+  complet à reprendre (image Advance Scheme, texte via `pdftotext` sans `-layout`, codes
+  compétences/talents, portrait composité, éligibilité raciale sur les deux mécanismes, note
+  "GENERATING A ...").
+
+**Découverte en cours de route — deux mécanismes d'éligibilité race/carrière, tous les deux
+nécessaires** (voir aussi §4 pour le détail) : `DATA_SPECIE_CAREER_CHOICE`
+(`ChargeMetierRaceChoixMetier.pas`, tirage d100 avec substitution) et entrée directe
+`SUBCHAPTER_CAREER Chance="X"` dans `<Specie>` (choix libre en création de personnage,
+`winmetier.pas`). Une carrière ajoutée sans les deux n'est pas sélectionnable dans tous les
+modes de création.
+
+**Bug découvert au test (19/08/2026) : lignes de race fantômes.** Ajouter un `<Specie>` "stub"
+dans `BOOK LUSTRIA.xml` (juste pour y accrocher un `SUBCHAPTER_CAREER Chance="X"` sur une race
+déjà définie ailleurs, ex. `RULES-RACE_HELF`) faisait créer une DEUXIÈME ligne dans `ListRace`
+pour le même `CodeRace` (visible dans WinLivre : colonne "R" de Lustria à 9 au lieu de 0).
+Cause : dans `xmlexportimport.pas`, le bloc de lecture des noeuds `<Specie>` faisait
+`ListRace.add(PRace)` sans jamais vérifier si ce `CodeRace` existait déjà.
+**Correctif (proposé par Nono) :** ajout d'une garde `if ChercheRace(PRace.CodeRace).CodeRace = '' then`
+avant le `ListRace.add` — n'ajoute une ligne que si la race n'existe pas encore.
+
+**Ce correctif a révélé un vrai problème d'ordre de chargement**, signalé par Nono
+("ma seule peur : dans quel ordre je lis les livres ?") : `FindFirst`/`FindNext` sur
+`DATABASE\*.xml` (dans `TMenu.FormCreate` ET `TMenu.ChargerLivre`, `warhammersource.pas`) ne
+trient jamais les fichiers — ordre brut du système de fichiers, non garanti. Si le stub d'un
+supplément est traité AVANT le livre qui définit vraiment la race, la garde ci-dessus fait
+l'inverse de ce qu'elle devrait : elle bloque l'ajout des VRAIES données quand elles arrivent
+ensuite, parce que le stub incomplet est déjà là. Pire que le bug d'origine (perte silencieuse
+de la race pour toute la session, pas juste une ligne fantôme en trop).
+
+- **Premier correctif appliqué (19/08/2026, `warhammersource.pas`, `TMenu.FormCreate` et
+  `TMenu.ChargerLivre`)** : les fichiers `.xml` trouvés sont d'abord collectés dans une
+  `TStringList`, puis celui dont le `BOOK` déclaré vaut `ConstRulesBook` ('BOOK RULESBOOK') est
+  importé en premier (via `XmlLivre` pour l'identifier), avant tous les autres. Compile, et
+  corrige bien le cas Rulebook-vs-supplément.
+- **⚠️ Insuffisant : régression trouvée au test par Nono.** Les races de Middenheim
+  (`MIDDE-RACE_HMIDH/HMIDL/HNORD`) disparaissent de la fenêtre Race — remplacées par des lignes
+  vides attribuées à "(F) Book Lustria". Cause probable : `BOOK LUSTRIA.xml` contient AUSSI des
+  `<Specie>` stubs pour ces races (pour leur accrocher l'éligibilité Interprète), et si
+  `BOOK LUSTRIA.xml` est énuméré avant le livre Middenheim, le même mécanisme de shadowing se
+  reproduit — mais cette fois entre deux suppléments, pas seulement Rulebook-vs-supplément
+  (mon correctif ne traite que le cas spécial du Rulebook).
+- **✅ Solution finale retenue (20/08/2026) — supprimer le besoin de stub plutôt que d'ordonner
+  le chargement.** Nono a eu une meilleure idée que le tri par dépendances façon compilateur :
+  sortir complètement la déclaration d'éligibilité de `<Specie>`/`<Career>`, pour qu'elle ne
+  dépende plus jamais de qui définit quoi ni de l'ordre de chargement.
+  - Nouveau bloc XML **`DATA_SPECIE_CAREER_DIRECT`** (constantes `ConstXmlDataSpecieCareerDirect`
+    et `ConstXmlEntry`, `chargeconstantes.pas`), une liste à plat d'`<Entry><Specie>"CODE"</Specie>
+    <Career name="CODE">"Chance"</Career></Entry>`, sur le modèle de `DATA_SPECIE_CAREER_CHOICE`
+    (déjà order-safe puisqu'il ne stocke que des codes texte, résolus à l'usage via
+    `ChercheRace`/`ChercheMetier`, sans jamais créer de noeud `<Specie>` ni `<Career>`).
+  - Lecture ajoutée dans `xmlexportimport.pas` (`XmlImport`, juste après le bloc "Metier choix
+    race" existant) : alimente `ListRaceMetier` directement — exactement la même liste que
+    `SUBCHAPTER_CAREER` sous `<Specie>` et que lit déjà `winmetier.pas` pour le choix libre.
+    Compile, confirmé par Nono.
+  - **`BOOK LUSTRIA.xml`** migré : les 9 `<Specie>` stubs de `DATA_SPECIE` (12 entrées
+    Chance="X" au total) remplacés par un bloc `DATA_SPECIE_CAREER_DIRECT` de 12 `<Entry>`, et
+    `DATA_SPECIE` supprimé du fichier (Lustria ne définit aucune race elle-même). Testé et
+    confirmé par Nono le 20/08/2026 : les races de Middenheim réapparaissent normalement,
+    Interprète/Oracle restent sélectionnables en choix libre sur toutes les races concernées.
+  - Existe aussi, découvert au passage mais non utilisé pour Lustria : `SUBCHAPTER_SPECIE`
+    (constante `ConstXmlSousChapitreRace`, string `'SUBCHAPTER_SPECIE'`) sous `<Career>` —
+    fonctionne côté lecture mais ne résout le problème que si le livre courant définit déjà
+    entièrement la carrière (sinon même risque de shadowing, côté `ListMetier`/`ChercheMetier`
+    cette fois — repéré par Nono avant qu'on choisisse `DATA_SPECIE_CAREER_DIRECT`).
+  - **Limite connue, notée dans `A FAIRE.txt`** : pas de pendant écriture/export pour
+    `DATA_SPECIE_CAREER_DIRECT` dans `XmlExportBook` — `ListRaceMetier` ne garde pas la trace du
+    mécanisme XML d'origine par entrée, donc un export naïf dupliquerait celles déjà écrites via
+    `SUBCHAPTER_CAREER`. Pas bloquant tant qu'on édite les livres à la main.
+  - Le correctif "RULESBOOK en premier" (`FormCreate`/`ChargerLivre`, 19/08/2026) reste en place
+    comme filet de sécurité, mais n'est plus nécessaire pour ce cas précis.
+- **✅ Survivalist (`LUSTR-WORK125`) et Trailblazer (`LUSTR-WORK126`) ajoutés et confirmés
+  (20/08/2026)**, même pipeline complet que Interprète/Oracle :
+  - Survivalist remplace Road Warden (`RULES-WORK47`) ; Trailblazer remplace Coachman
+    (`RULES-WORK13`). Ni l'un ni l'autre n'est disponible pour Nain/Haut Elfe/Elfe Sylvain dans
+    le Rulebook (comme Lawyer pour l'Interprète) — substitution (`DATA_SPECIE_CAREER_CHOICE`)
+    là où la carrière remplacée existe, choix libre (`DATA_SPECIE_CAREER_DIRECT`) pour toutes les
+    races listées par le PDF.
+  - Tous les codes compétence/talent trouvés dans le Rulebook, y compris des cas déjà présents
+    mais non repérés au premier essai (`Secret Signs (Ranger)` = `RULES-COMPSIGNES_RANGER`,
+    `Lore (Local)` = `RULES-COMPSAVOIR_LOCAL` malgré la coquille "Lore (Loca)" dans le Rulebook,
+    non corrigée) — aucune nouvelle spécialisation à créer cette fois.
+  - Portraits extraits et rendus transparents (même méthode masque embarqué + PIL).
+  - **Bug trouvé par Nono après coup (20/08/2026) : plusieurs équipements (`SUBCHAPTER_ITEM`)
+    étaient en texte libre alors que ce sont des armes du Rulebook**, à corriger avec le vrai
+    code (`DATA_WEAPON`) comme le fait déjà le reste de la base (ex. `RULES-ARMO_04` pour les
+    armures). Corrigé sur les 4 carrières : Oracle *Quarterstaff* → `RULES-COMB_HAST_01`,
+    *Javelin* → `RULES-PROJ_LANC_05` ; Survivalist *Hand Weapon* → `RULES-COMB_BASE_*` (arme de
+    base non précisée, même convention que le reste du Rulebook), *Sling with Ammunition* →
+    scindé en deux lignes `RULES-PROJ_FROND_02` + `RULES-MUNI_05` (même palier) - schéma
+    arme+munition déjà utilisé partout ailleurs ; Trailblazer *Machete* → `RULES-COMB_BASE_04`
+    (Sword, pas d'équivalent exact, approximation validée par Nono), *Pistol with 10 Shots* →
+    `RULES-PROJ_POUDRE_04` + `RULES-MUNI_06` + une ligne texte libre "10 Shots" pour garder la
+    quantité (pas de champ quantité sur `<Item>`, palier = niveau d'avancement uniquement).
+    **Leçon pour la suite** : toujours vérifier `DATA_WEAPON`/`DATA_ARMOR` avant de saisir un
+    équipement en texte libre lors d'un futur import PDF.
+
+**Chantier Lustria (les 4 carrières) terminé et confirmé par Nono le 20/08/2026.** Reste en
+`A FAIRE.txt` (non bloquant, pas commencé) : le pendant écriture/export de
+`DATA_SPECIE_CAREER_DIRECT`, l'éligibilité Ogre pour Survivalist/Trailblazer (encadré Archives of
+the Empire II), le nom de fichier image sans préfixe de livre, et la notion de race générique.
+
+---
+
 ## 3. TODO / Backlog
 
 Le backlog complet (tout ce qui n'est pas encore commencé) vit dans `A FAIRE.txt`
