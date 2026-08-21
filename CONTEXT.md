@@ -651,6 +651,30 @@ Implémentation (`pdfpersonnage.pas`) :
 Confirmé par Nono par test PDF réel, sur les deux points (alignement compétence +
 présence du numéro dans le tableau Armures) : "c'est bon".
 
+**⚠️ Séquelle trouvée le 21/08/2026 (corrigée) : annotation affichée deux fois.** Sur le PDF de
+Gunther Krieg, Discrétion portait `(4) -10%` **deux fois**, Perception `(5) -10%` deux fois.
+
+Le raisonnement qui a mené à la cause tient en une observation : c'était **le même numéro** sur les
+deux lignes. L'astérisque étant attribuée une fois par pièce (`AsterisquePiece`), deux pièces
+différentes auraient donné `(4)` puis `(5)` — un numéro répété veut dire que la même entrée est
+parcourue deux fois dans `ListArmureBonusModif`. L'annotation devenait `" (4) -10% (4) -10%"`,
+coupée en deux lignes par le retour à la ligne de `PdfEcrit`.
+
+Cause réelle, sans rapport avec le PDF : **`ListArmureBonusModif.Clear` manquait dans le bloc de RAZ
+de `ChargerLivre`** (`warhammersource.pas`). La liste avait été créée dans `FormCreate` pendant ce
+chantier (par Nono via l'IDE), mais le `.Clear` correspondant n'a jamais suivi. Chaque rechargement
+— changement de livre actif (`TabLivreDblClick`) ou de langue — rempilait donc les 4 entrées.
+**Au premier lancement le PDF est correct** ; il double au premier rechargement, triple au second.
+
+`ListArmureSimplifiee` était dans le même cas, trouvée en comparant les listes créées aux listes
+vidées — corrigée en même temps. Les deux compteurs (`NbArmureSimplifiee`, `NbArmureBonusModif`)
+étaient également absents de la RAZ.
+
+Les 7 autres écarts de cette comparaison sont volontaires : `ListTexte` et `ListTraduction` ne
+doivent **surtout pas** être vidées ici (contre-correctif du 18/08, §2.8), `ListLivre`,
+`ListLivreTraduit`, `ListeAttribut`, `ListeAttributAugmentation` et `ListeCompetenceAugmentation`
+sont remplies ailleurs.
+
 **Idée liée, pas conçue, capturée dans `A FAIRE.txt`** : `BOOK_RULESBOOK_FRANCAIS.Xml`
 contient en fait toutes les données (pas seulement les traductions), alors que seul le
 chargement du livre anglais alimente réellement les listes utilisées par le programme —
@@ -1907,6 +1931,15 @@ chantier concerné, avec les détails techniques.
 
 ## 4. Pièges Lazarus / Free Pascal accumulés
 
+- **Toute nouvelle liste globale `ListXxx` doit être ajoutée au bloc de RAZ de `ChargerLivre`**
+  (`warhammersource.pas`, `if ForceMaj then`), avec son compteur `NbXxx`. Créer la liste dans
+  `FormCreate` ne suffit pas : sans le `.Clear`, chaque rechargement (changement de livre actif ou
+  de langue) empile le contenu par-dessus l'ancien, et le bug ne se voit **pas** au premier
+  lancement. Symptôme typique : une donnée affichée deux fois, puis trois. Arrivé deux fois
+  (`ListArmureBonusModif`, `ListArmureSimplifiee`, §2.5). Contre-exemples à ne pas toucher :
+  `ListTexte` et `ListTraduction`, volontairement hors de la RAZ (§2.8).
+  Contrôle rapide : comparer les `ListXxx := TListXxx.Create` de `FormCreate` aux `ListXxx.Clear`
+  du bloc de RAZ.
 - **Un commentaire XML est un nœud enfant comme un autre.** Une boucle
   `Node := Parent.FirstChild; While Assigned(Node) do ... Node.Attributes.GetNamedItem(...)`
   plante sur un commentaire (`Attributes` vaut `nil` → *access violation reading from `$10`*), et sur

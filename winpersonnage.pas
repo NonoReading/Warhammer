@@ -3585,7 +3585,7 @@ var
   I: Integer;
   J: Integer;
 begin
-  for I := 0 to PageExperience.PageCount  -1 do
+  //for I := 0 to PageExperience.PageCount  -1 do
     For J := TTabSheet(PageExperience.PAge[I]).ControlCount - 1 downto 0 do
       if TTabSheet(PageExperience.Page[I]).Controls[J] is TPanel then
         TPanel(TTabSheet(PageExperience.Page[I]).Controls[J]).SendToBack;

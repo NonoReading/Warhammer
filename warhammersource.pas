@@ -615,9 +615,11 @@ procedure TMenu.ChargerLivre(ForceMaJ: Boolean; ForceLivre: String);
         NbTalentCreation	    := 0;
         NbArme	                    := 0;
         NbArmure	            := 0;
+        NbArmureSimplifiee          := 0;
         NbArmeBonus	            := 0;
         NbMetierEquipement	    := 0;
         NbArmureBonus	            := 0;
+        NbArmureBonusModif          := 0;
         NbSort	                    := 0;
         NbFabrication	            := 0;
         NbRaceCreation	            := 0;
@@ -654,9 +656,15 @@ procedure TMenu.ChargerLivre(ForceMaJ: Boolean; ForceLivre: String);
         ListTalentCreation.Clear;
         ListArme.Clear;
         ListArmure.Clear;
+        // Oubliées jusqu'au 21/08/2026 : toutes deux remplies par XmlImport comme leurs
+        // voisines, mais jamais vidées ici - chaque rechargement (changement de livre actif
+        // ou de langue) rajoutait donc leur contenu par-dessus l'ancien. Visible sur le PDF
+        // de personnage : l'annotation d'armure s'affichait deux fois, "(4) -10% (4) -10%".
+        ListArmureSimplifiee.Clear;
         ListArmeBonus.Clear;
         ListMetierEquipement.Clear;
         ListArmureBonus.Clear;
+        ListArmureBonusModif.Clear;
         ListSort.Clear;
         ListFabrication.Clear;
         ListRaceCreation.Clear;
