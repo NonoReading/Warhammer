@@ -16,6 +16,11 @@ Type
 	Attribut:	      string;
 	MaxiTalent:	      string;
 	SousTalent:	      boolean;
+        // Trait de creature (Rulebook p.338-341) : un talent qu'on ne peut pas CHOISIR.
+        // Il arrive uniquement par la race (SUBCHAPTER_TALENT), jamais par un niveau de
+        // metier. Le livre lui-meme fait ce pont : "Night Vision - The creature has the
+        // Night Vision Talent". Voir CONTEXT.md 2.15.
+        Trait:                Boolean;
         Livre:                String;
         TalentPdf:            String;
         Resume:               String;

@@ -11,9 +11,37 @@
 <Description language="ENGLISH">"Secret Signs (Lizardman)"</Description>
 </Skill>
 </DATA_SKILL_SPECIALIZATION>
-<!-- Le livre porte son propre nom d'affichage : ajouter un livre ne demande
-       plus de modifier BOOK_RULESBOOK.Xml (décision Nono du 21/08/2026). -->
+<!-- Deux traits de créature apportés par Lustria et absents du livre de règles
+     (Lustria p.151, encadré "New Traits") : Chameleon pour les Skinks Caméléons,
+     Telepathy pour les Slann. Saisis comme des talents portant <Trait>, voir
+     CONTEXT.md §2.15. -->
+<DATA_TALENT>
+<Talent id="LUSTR-T0CHA">
+<Trait>"1"</Trait>
+<Attribut>""</Attribut>
+<Description language="ENGLISH">"Chameleon"</Description>
+<Short language="ENGLISH">""</Short>
+<Explanation language="ENGLISH">"The creature can change colour to blend into its surroundings, which makes it very hard to see. Perception Tests to spot the creature suffer a -4 SL penalty, reduced to -2 if the creature is moving. Shooting at the creature suffers a -2 SL penalty to the Ranged Test."</Explanation>
+<Skill>""</Skill>
+<Max>"1"</Max>
+<PDF>""</PDF>
+<Test language="ENGLISH">""</Test>
+</Talent>
+<Talent id="LUSTR-T0TEL">
+<Trait>"1"</Trait>
+<Attribut>""</Attribut>
+<Description language="ENGLISH">"Telepathy"</Description>
+<Short language="ENGLISH">""</Short>
+<Explanation language="ENGLISH">"The creature can communicate without words, using the power of its mind to transmit and read thoughts. If the subject wants to resist their thoughts being read, they must pass an Average (+20) Cool Test."</Explanation>
+<Skill>""</Skill>
+<Max>"1"</Max>
+<PDF>""</PDF>
+<Test language="ENGLISH">""</Test>
+</Talent>
+</DATA_TALENT>
 <DATA_LABEL>
+  <!-- Le livre porte son propre nom d'affichage : ajouter un livre ne demande
+       plus de modifier BOOK_RULESBOOK.Xml (décision Nono du 21/08/2026). -->
 <Label language="ENGLISH">
 <Text name="LUSTR-BOOK LUSTRIA">"Lustria"</Text>
 </Label>

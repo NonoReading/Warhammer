@@ -1919,6 +1919,118 @@ l'étape 0, la combo sur l'étape de l'ethnie), mais la combo reste à filtrer.
 
 ---
 
+### 2.15 Lézards de Lustria — traits de créature puis race Skink — en cours (21/08/2026)
+
+Demande de Nono : « tu peux voir pour ajouter les lézards ? » (ligne « faire les lézards des LUCIA »
+qui traînait en tête d'`A FAIRE.txt`).
+
+**Ce que le livre offre** (Lustria p. 160-163, le PDF a la même numérotation que le livre) : deux
+profils jouables, **Skink** et **Skink Caméléon** — le livre exclut explicitement Saurus, Kroxigor
+et Slann. C'est le modèle du §2.10 sans rien forcer : une RACE `LIZARDMAN`, deux ETHNIES, comme les
+Norses. Attributs, formule de Blessures (`2xBATTR_T+1xBATTR_WP`, sans terme de Force), compétences,
+talents et table de tirage par ethnie s'expriment tous tels quels — et les 21 métiers de la table
+sont **tous des métiers du Rulebook**, rien à créer.
+
+Renvois utiles : p. 135 (tempéraments, blessures spécifiques aux Lézards), p. 151 (Marques des
+Anciens **et** définition des traits `Chameleon`/`Telepathy`), Rulebook p. 338-341 (les ~70 traits).
+
+#### La décision de conception : un trait EST un talent
+
+J'ai d'abord proposé un catalogue séparé `DATA_CREATURE_TRAIT`. **Nono a objecté**, et son objection
+était juste : « théoriquement, il faut un talent du niveau. Et il faudrait mélanger des talents et
+des traits ? » Le mélange vient de la séparation, pas de son absence :
+
+- le Rulebook définit lui-même **Night Vision** comme *« The creature has the Night Vision Talent »* ;
+  avec deux catalogues, un Skink porterait `TRAIT_NIGHTVISION` pendant qu'un métier lui proposerait
+  `RULES-T0164` — deux entrées pour la même chose, sans rien pour détecter le doublon ;
+- le tableau des Marques des Anciens (p. 151) distribue **traits et talents côte à côte**, dans le
+  même paquet, sans coût (Tzunki donne *Amphibious* et *Acute Sense (Sight)* ensemble).
+
+Et la progression n'est pas concernée : un trait ne s'achète jamais. Les talents proposés viennent
+toujours d'une table explicite — `ListMetierTalent`, `ListRaceTalent`, `ListTalentCreation` — donc un
+trait ne peut pas apparaître dans un choix de niveau.
+
+**Retenu : un trait est un talent qu'on ne peut pas CHOISIR**, marqué par un drapeau.
+
+**Découverte : Nono avait déjà commencé.** `DATA_TALENT` contenait déjà sept traits de créature,
+avec sa propre convention — `T0` + trois lettres (au lieu de `T0` + quatre chiffres pour les vrais
+talents), et `_*` pour les paramétrés : `T0BIG`, `T0PAI`, `T0DIE`, `T0BEL`, `T0DVI`, `T0HAT_*`
+(Animosity), `T0AFR_*` (Afraid). Convention suivie, aucune nouvelle inventée.
+
+**Deuxième usage, signalé par Nono** : ça débloque les mutations physiques du §2.7. Deux entrées
+renvoient à un trait — `CORPHY_008` *Fleshy Tentacle* (« Gain the Tentacles Creature Trait ») et
+`CORPHY_020` *GM's Choice*. La première devient un ajout de talent ordinaire, et hérite de
+l'astérisque numérotée déjà en place.
+
+#### Fait et confirmé
+
+**Modification 1 — le drapeau (code).** `ConstXmlTrait = 'Trait'` et `ConstVrai = '1'`
+(`chargeconstantes.pas`) ; champ `Trait: Boolean` sur `StructureTalent` (`chargetalent.pas`), à côté
+de `SousTalent` qui servait de précédent ; lecture + remise à zéro dans `DATA_TALENT` **et**
+`DATA_TALENT_SPECIALIZATION` (une spécialisation de trait reste un trait — sinon `Immunity (Poison)`
+de la marque de Sotek passerait à travers), écriture à l'export seulement si vrai.
+
+Le filtre ne sert qu'à **un seul endroit** : `winspecialisation.pas` ligne ~91, la branche `else` qui
+liste le catalogue complet quand il faut choisir « un talent quelconque ». C'est le seul parcours de
+`ListTalent` proposé au joueur dans tout le programme — vérifié.
+
+**Modification 2 — les 7 traits existants marqués** (données, les deux Rulebooks). Premier vrai test
+du drapeau, sur des données antérieures : ils disparaissent des choix de talent. Confirmé.
+
+#### Livré, test non confirmé
+
+**Modification 3 — les traits du Skink saisis.** Rulebook : `T0AMP` Amphibie, `T0ARB` Arboricole,
+`T0COL` Sang-froid, `T0STE` Furtif, `T0ARM` Armure (Valeur), `T0SIZ_*` Taille + les 7 degrés en
+spécialisations (`T0SIZ_TINY` à `T0SIZ_MONS`, modèle `T0AFR_ELF`). Marquées aussi `T0AFR_ELF` et
+`T0HAT_GREENSKIN`, spécialisations de traits restées choisissables. Lustria : nouveau `DATA_TALENT`
+avec `LUSTR-T0CHA` (Chameleon) et `LUSTR-T0TEL` (Telepathy), les deux traits que ce livre ajoute.
+
+⚠️ Le commentaire explicatif de Lustria est posé **avant** `<DATA_TALENT>`, jamais dedans : cette
+boucle n'a toujours pas de garde `NodeName` (§2.13), un commentaire à l'intérieur ferait planter le
+chargement.
+
+Champ `PDF` posé après accord de Nono : `T0STE` → `COMPDISC_*`, `T0AMP` → `COMPNATA`. Laissé vide
+ailleurs à raison — *Sang-froid* agit sur un attribut, *Caméléon* pénalise la Perception **des
+autres**. Le champ accepte des listes (`COMPDISC_*,COMPPRECEP,COMPINTUI` existe déjà), donc
+*Arboricole* pourrait porter `COMPESCAL,COMPDISC_*` — proposé, pas tranché.
+
+#### Point de reprise exact : que faire de `T0ARM`
+
+`T0ARM` est aujourd'hui **décoratif** : sa Valeur (1 pour le Skink, 1 point d'armure sur toutes les
+localisations) n'est calculée nulle part. Les points d'armure ne viennent que des pièces portées et,
+depuis le §2.7, de `ListCorruptionArmureModif` (`chargepersonnage.pas` ligne ~1203). Un Skink saisi
+tel quel afficherait le trait avec zéro point d'armure — c'est faux et ça se voit.
+
+Trois options soumises à Nono, sans réponse :
+
+- **(a)** laisser tel quel et le documenter ;
+- **(b)** retirer `T0ARM` et décrire la peau écailleuse dans le texte de l'ethnie ;
+- **(c)** créer `ListTalentArmureModif`, copie de `StructureCorruptionArmureModif` (4 champs) avec
+  une balise `<ModifArmour>` sur le talent et une boucle de plus au même endroit dans
+  `chargepersonnage.pas`. Sert aussi la **marque de Quetzl** (« Armour +1 »), qui donne des points
+  d'armure sans être une mutation.
+
+Recommandation : **(c)**. `T0ARM` est le seul des sept traits du Skink qui porte un chiffre.
+
+#### Ensuite
+
+1. `NbCinq`/`NbTrois` sont **écrits en dur à 3** dans `wincreation.pas` (lignes ~1512, ~1517, ~2890,
+   ~2895, ~2897). Le Skink prend **2** compétences à +5 et **2** à +3. `StructureRace` porte déjà
+   `Point3`/`Point5` mais ce sont les *valeurs*, pas les *nombres* : deux champs de plus, une balise
+   dans `<Specie>`, et 3 par défaut pour ne rien changer aux races existantes.
+2. La race `LIZARDMAN` dans `DATA_RACE` + les deux ethnies dans Lustria (attributs, compétences,
+   talents dont les traits, tables de tirage), puis les images.
+3. Étape 3, non conçue : substitutions de compétences (13 lignes p. 162), « un Skink ne change jamais
+   de métier », et les Marques des Anciens (9 marques, avec le troc des 2 points supplémentaires).
+
+**Huitième coquille de livre**, vérifiée à l'image (Lustria p. 161, colonne Skink) : Messager
+**89–92** puis Batelier **92–94**, le 92 appartient aux deux. L'arithmétique ne tranche pas seule,
+comme pour Up in Arms. Proposé : **Messager 89–91** — toute la fin de la colonne est à 3 valeurs
+(86–88, 92–94, 96–97, 98–100) et un chevauchement d'exactement 1 sur le début du suivant ressemble à
+une erreur sur la *fin* de la plage précédente. Non tranché par Nono.
+
+---
+
 ## 3. TODO / Backlog
 
 Le backlog complet (tout ce qui n'est pas encore commencé) vit dans `A FAIRE.txt`

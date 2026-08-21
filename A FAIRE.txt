@@ -341,42 +341,19 @@ PDF Personnage (PRIORITAIRE) :
   signalement existe : cubicle7games.com/errata-submission). A revoir si un errata officiel
   sort un jour, ou si la coquille est signalée et corrigée.
 
-- (repéré le 20/08/2026, pas commencé) Saisir la race NORSE depuis Sea of Claws.
-  BOOK_SEA_OF_CLAWS.Xml ne contient que DATA_CAREER / DATA_TALENT / DATA_SPELL : aucune race n'a
-  jamais été saisie depuis ce livre, alors que le Norse y existe. C'est ce qui explique que ses
-  9 métiers (Beachcomber, Chantyman, Huffer, Officer, Sailor, Sailor-Priest of Manann, Ship's
-  Gunner, Wrecker, Priest of Stromfels) soient raccrochés en 'X' aux races existantes plutôt qu'à
-  leur race d'origine. Bloque la colonne Norse de la table lustrienne (CONTEXT.md §2.11), qui
-  s'ajoutera sans rien retoucher une fois la race présente (bloc à plat). Chantier à part
-  entière : race complète (description, caractéristiques, compétences/talents de départ, table de
-  métiers, image) + la classe Seafarer, absente elle aussi (pas de CLASS_SEAF, les 9 métiers sont
-  rangés sous les classes standard) + les notes 3 à 6 de Lustria p.193 qui décrivent des
-  substitutions Norse (Boatman -> Beachcomber, Seaman -> Sailor, section Riverfolk remplacée par
-  la classe Seafarer).
-  [21/08/2026 : chantier ouvert, voir CONTEXT.md §2.12 - il s'agit en fait de TROIS ethnies
-  Norse (Bjornling, Sarl, Skaeling), et leur table de tirage n'est pas une règle optionnelle mais
-  leur table propre. La classe Seafarer et les 3 ethnies sont saisies ; restent leurs images, la
-  colonne Norse de la table lustrienne, et la table Seafarer comme règle à substitution
-  partielle.]
-  Question ouverte de Nono (20/08/2026), à vérifier au moment de s'y mettre : Middenheim est-il
-  dans le même cas, avec une table de tirage propre qui n'aurait pas été saisie ? Premier
-  élément de réponse relevé le 20/08 : les trois ethnies de Middenheim ont DÉJÀ leur propre
-  distribution de dés dans leur SUBCHAPTER_CAREER (57, 63 et 63 entrées de tirage, différentes
-  de celles du Reiklander), donc leur variation régionale est bien modélisée - mais par le
-  mécanisme historique (une table par ethnie), pas par une règle nommée. A confronter au livre
-  pour voir s'il s'agit bien de la même chose.
+- (20/08/2026, aggrave le 21/08/2026, pas commencé) Refermer le piège des commentaires XML dans
+  les blocs de lecture anciens de xmlexportimport.pas. La boucle parcourt TOUS les noeuds enfants,
+  commentaires et noeuds texte compris. Sans garde sur le nom du noeud, un commentaire placé entre
+  deux éléments produit soit un doublon silencieux (l'enregistrement précédent est réajouté tel
+  quel), soit un PLANTAGE au lancement sur les blocs à attribut (Attributes est nil sur un
+  commentaire, access violation lue à l'adresse $10). Les deux cas sont arrivés pour de vrai :
+  doublon sur DATA_CAREER_ROLL le 20/08 ("Sorcier 14" affiché deux fois), plantage sur DATA_LABEL
+  le 21/08 (14 commentaires posés dans le bloc, sortis en catastrophe au niveau DATA_BOOK).
+  Protégés : DATA_RACE, DATA_RULE, DATA_CAREER_ROLL, DATA_SPECIE_CAREER_DIRECT.
+  Restent au moins : DATA_LABEL, DATA_SPECIE_CAREER_CHOICE, DATA_SKILL_SPECIALIZATION,
+  DATA_CAREER_SUBCHOICE. Correctif connu et mécanique : if Node.NodeName = <balise attendue> then,
+  plus remise à zéro de l'enregistrement avant lecture.
 
-- (repéré le 20/08/2026, pas commencé) Refermer le piège des commentaires XML dans les blocs de
-  lecture plus anciens de xmlexportimport.pas. La boucle de lecture parcourt TOUS les noeuds
-  enfants, commentaires et noeuds texte compris ; sans garde sur le type de noeud, un commentaire
-  placé entre deux éléments produit soit un doublon silencieux (l'enregistrement précédent est
-  réajouté tel quel), soit un plantage sur les blocs à 'id' (Attributes est nil sur un
-  commentaire). Rencontré pour de vrai le 20/08/2026 sur DATA_CAREER_ROLL (un "Sorcier 14" affiché
-  deux fois). Les 4 blocs récents sont protégés (DATA_RACE, DATA_RULE, DATA_CAREER_ROLL,
-  DATA_SPECIE_CAREER_DIRECT) ; restent au moins DATA_SPECIE_CAREER_CHOICE,
-  DATA_SKILL_SPECIALIZATION et DATA_CAREER_SUBCHOICE, non déclenchés aujourd'hui faute de
-  commentaires à ces endroits. Correctif connu et mécanique : if NodeNv2.NodeName = <balise
-  attendue> then, plus remise à zéro de l'enregistrement avant lecture.
 - (proposé le 21/08/2026, pas commencé, chantier de fond) PASSE DE CONTROLE DE COHERENCE des
   livres, affichée dans WinLivre à côté des compteurs R et W. Motivation : le modèle de données
   s'est révélé souple, mais il est SILENCIEUX quand quelque chose est faux - c'est le fil commun
@@ -407,25 +384,10 @@ PDF Personnage (PRIORITAIRE) :
   modèle, la faiblesse est côté détection d'erreur.
 
 
-- Écran de choix des livres avant l'étape 1 de la création (idée de Nono du 21/08/2026, motivation
-  d'origine du chantier CONTEXT.md §2.13). Les livres actifs seraient cochés par défaut, le joueur
-  pouvant en retirer ou en ajouter pour une création donnée. Le terrain est maintenant propre :
-  depuis §2.13, « livre coché » et « données disponibles » coïncident, chaque livre portant ses
-  propres infos. Contrecoup à mesurer avant de se lancer : la création lit les listes globales
-  chargées par ChargerLivre, pas un sous-ensemble - il faudra soit filtrer à l'usage sur le livre
-  d'origine de chaque donnée (champ .Livre présent partout), soit recharger, ce qui est plus lourd.
-
 - Garde-fou sur la boucle de sauvegarde des LivresAcceptes dans winpersonnage.pas :
   `if TabLivre.Cells[3, Ind] <> ''` avant d'ajouter une ligne. Piste du « livre vide » ajouté à
   l'enregistrement dont Nono se souvient (bug situé dans WinPersonnage, pas WinCreation). Proposé le
   21/08/2026, pas encore validé.
-
-- Garde `if Node.NodeName = <balise attendue> then` manquante sur les boucles de lecture des blocs
-  anciens : DATA_LABEL, DATA_SPECIE_CAREER_CHOICE, DATA_SKILL_SPECIALIZATION, DATA_CAREER_SUBCHOICE
-  (xmlexportimport.pas). Sans elle, un commentaire XML posé dans le bloc fait PLANTER le programme au
-  lancement (access violation, Attributes = nil) - arrivé pour de vrai le 21/08/2026 sur DATA_LABEL -
-  et un noeud sans attribut rejoue silencieusement les valeurs du precedent. Les 4 blocs recents
-  (DATA_RACE, DATA_RULE, DATA_CAREER_ROLL, DATA_SPECIE_CAREER_DIRECT) l'ont deja.
 
 - ChercheLivre et ChercheLivreLibelle (chargelivre.pas) n'affectent pas leur Result quand elles ne
   trouvent rien : les champs entiers du record valent alors n'importe quoi. Les appelants doivent
@@ -445,3 +407,25 @@ PDF Personnage (PRIORITAIRE) :
   l'onglet de l'ethnie. Depuis le 21/08/2026 il est sur son propre onglet (etape 0) et la navigation
   est unidirectionnelle. A retirer, avec ComboRaceCreation.Enabled qui est sur la meme ligne et qui,
   lui, garde peut-etre un sens.
+
+- Traductions des 7 degres de Taille (RULES-T0SIZ_TINY a T0SIZ_MONS, les deux Rulebooks) : j'ai mis
+  Minuscule / Menu / Petit / Moyen / Grand / Enorme / Monstrueux pour Tiny / Little / Small /
+  Average / Large / Enormous / Monstrous. Les deux du milieu (Little et Small) sont un pari, pas une
+  certitude - a verifier dans le livre de regles francais. C'est T0SIZ_SMAL qui sert au Skink.
+  Saisi le 21/08/2026 (CONTEXT.md 2.15).
+
+- Champ PDF du trait Arboricole (RULES-T0ARB) : laisse vide. Le champ accepte des listes
+  (COMPDISC_*,COMPPRECEP,COMPINTUI existe deja), donc COMPESCAL,COMPDISC_* serait legitime puisque le
+  trait ajoute le Bonus d'Agilite aux tests d'Escalade ET de Discretion en zone boisee. Propose le
+  21/08/2026, pas tranche.
+
+- Incoherence de donnee : le talent RULES-T0139_GOUT/RULES-T0139_VUE est libelle "Acute Sense (Taste
+  or Touch)" / "Sens aiguise (Gout ou Toucher)". Le code dit Gout ou VUE, le libelle dit Gout ou
+  TOUCHER. Vu qu'il existe un T0139_TOUCH, c'est probablement le code qui devrait etre
+  RULES-T0139_GOUT/RULES-T0139_TOUCH. Signale le 21/08/2026, non corrige.
+
+- Saisir le reste des traits de creature du Rulebook (p.338-341, environ 70 au total). 15 sont
+  saisis a ce jour : les 7 d'origine de Nono plus les 8 du chantier 2.15. Le mecanisme est en place
+  (balise <Trait> sur un talent), il ne reste que de la saisie - a faire quand le Bestiaire sera
+  aborde, ou au coup par coup selon les besoins. Cas immediat : Tentacles, pour la mutation
+  CORPHY_008 (Fleshy Tentacle), qui debloquerait une des deux dernieres mutations physiques.

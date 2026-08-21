@@ -3864,6 +3864,7 @@ Dans des conditions normales, vous ne pouvez connaître qu’un seul Savoir de M
 <Test language="FRANCAIS">""</Test>
 </Talent>
 <Talent id="RULES-T0BIG">
+<Trait>"1"</Trait>
 <Attribut>"ATTR_S;ATTR_S;ATTR_T;ATTR_T;-ATTR_Ag"</Attribut>
 <Description language="FRANCAIS">"Big"</Description>
 <Short language="FRANCAIS">"F + 10, E + 10, Agi - 5"</Short>
@@ -3874,6 +3875,7 @@ Dans des conditions normales, vous ne pouvez connaître qu’un seul Savoir de M
 <Test language="FRANCAIS">""</Test>
 </Talent>
 <Talent id="RULES-T0PAI">
+<Trait>"1"</Trait>
 <Attribut>""</Attribut>
 <Description language="FRANCAIS">"Painless"</Description>
 <Short language="FRANCAIS">"pas de malus liés aux critiques (hors amputation)"</Short>
@@ -3885,6 +3887,7 @@ Toutes les pénalités sans amputations réçues d’un coup critique sont ignor
 <Test language="FRANCAIS">""</Test>
 </Talent>
 <Talent id="RULES-T0DIE">
+<Trait>"1"</Trait>
 <Attribut>""</Attribut>
 <Description language="FRANCAIS">"Die Hard"</Description>
 <Short language="FRANCAIS">"un test d’endurance pendant E round. Si 6+Dr, revenir à 1 blessure."</Short>
@@ -3899,6 +3902,7 @@ If a Test is successful, the creature chokes back to life with 1 Wound"</Explana
 <Test language="FRANCAIS">""</Test>
 </Talent>
 <Talent id="RULES-T0HAT_*">
+<Trait>"1"</Trait>
 <Attribut>""</Attribut>
 <Description language="FRANCAIS">"Animosity (any)"</Description>
 <Short language="FRANCAIS">"test de psychologie réussi limite à -20 le malus de sociabilité avec ce groupe"</Short>
@@ -3910,6 +3914,7 @@ See page 190 for Animosity rules"</Explanation>
 <Test language="FRANCAIS">""</Test>
 </Talent>
 <Talent id="RULES-T0BEL">
+<Trait>"1"</Trait>
 <Attribut>""</Attribut>
 <Description language="FRANCAIS">"Belligerent"</Description>
 <Short language="FRANCAIS">"pas de test de psychologie si plus d’avantage que l’adversaire"</Short>
@@ -3921,6 +3926,7 @@ As long as it has more Advantage than its opponent, it is Immune to Psychology"<
 <Test language="FRANCAIS">""</Test>
 </Talent>
 <Talent id="RULES-T0AFR_*">
+<Trait>"1"</Trait>
 <Attribut>""</Attribut>
 <Description language="FRANCAIS">"Afraid (Any)"</Description>
 <Short language="FRANCAIS">"-1DR pour tout test sur le sujet de la peur"</Short>
@@ -3932,10 +3938,77 @@ See page 190 for Fear rules"</Explanation>
 <Test language="FRANCAIS">""</Test>
 </Talent>
 <Talent id="RULES-T0DVI">
+<Trait>"1"</Trait>
 <Attribut>""</Attribut>
 <Description language="FRANCAIS">"Dark Vision"</Description>
 <Short language="FRANCAIS">"vision nocturne totale"</Short>
 <Explanation language="FRANCAIS">"The creature can see in the dark as daylight"</Explanation>
+<Skill>""</Skill>
+<Max>"1"</Max>
+<PDF>""</PDF>
+<Test language="FRANCAIS">""</Test>
+</Talent>
+<Talent id="RULES-T0AMP">
+<Trait>"1"</Trait>
+<Attribut>""</Attribut>
+<Description language="FRANCAIS">"Amphibie"</Description>
+<Short language="FRANCAIS">""</Short>
+<Explanation language="FRANCAIS">"La créature est à son aise dans l'eau. Elle ajoute son Bonus d'Agilité au DR de tous ses Tests de Natation et se déplace à son Mouvement complet dans l'eau."</Explanation>
+<Skill>""</Skill>
+<Max>"1"</Max>
+<PDF>"COMPNATA"</PDF>
+<Test language="FRANCAIS">""</Test>
+</Talent>
+<Talent id="RULES-T0ARB">
+<Trait>"1"</Trait>
+<Attribut>""</Attribut>
+<Description language="FRANCAIS">"Arboricole"</Description>
+<Short language="FRANCAIS">""</Short>
+<Explanation language="FRANCAIS">"La créature est à son aise dans les forêts. En zone boisée, elle ajoute son Bonus d'Agilité au DR de tous ses Tests d'Escalade et de Discrétion."</Explanation>
+<Skill>""</Skill>
+<Max>"1"</Max>
+<PDF>""</PDF>
+<Test language="FRANCAIS">""</Test>
+</Talent>
+<Talent id="RULES-T0COL">
+<Trait>"1"</Trait>
+<Attribut>""</Attribut>
+<Description language="FRANCAIS">"Sang-froid"</Description>
+<Short language="FRANCAIS">""</Short>
+<Explanation language="FRANCAIS">"La créature est à sang froid et lente à réagir. Elle peut inverser tous ses Tests de Force Mentale ratés."</Explanation>
+<Skill>""</Skill>
+<Max>"1"</Max>
+<PDF>""</PDF>
+<Test language="FRANCAIS">""</Test>
+</Talent>
+<Talent id="RULES-T0STE">
+<Trait>"1"</Trait>
+<Attribut>""</Attribut>
+<Description language="FRANCAIS">"Furtif"</Description>
+<Short language="FRANCAIS">""</Short>
+<Explanation language="FRANCAIS">"La créature est particulièrement furtive. Elle ajoute son Bonus d'Agilité au DR de tous ses Tests de Discrétion."</Explanation>
+<Skill>""</Skill>
+<Max>"1"</Max>
+<PDF>"COMPDISC_*"</PDF>
+<Test language="FRANCAIS">""</Test>
+</Talent>
+<Talent id="RULES-T0ARM">
+<Trait>"1"</Trait>
+<Attribut>""</Attribut>
+<Description language="FRANCAIS">"Armure (Valeur)"</Description>
+<Short language="FRANCAIS">""</Short>
+<Explanation language="FRANCAIS">"La créature est protégée par une armure ou un cuir épais. Elle possède un nombre de Points d'Armure égal à sa Valeur sur toutes les Localisations."</Explanation>
+<Skill>""</Skill>
+<Max>"99"</Max>
+<PDF>""</PDF>
+<Test language="FRANCAIS">""</Test>
+</Talent>
+<Talent id="RULES-T0SIZ_*">
+<Trait>"1"</Trait>
+<Attribut>""</Attribut>
+<Description language="FRANCAIS">"Taille (au choix)"</Description>
+<Short language="FRANCAIS">""</Short>
+<Explanation language="FRANCAIS">"Ce trait représente les créatures dont la taille diffère du standard du jeu (c'est-à-dire à peu près celle d'un humain). Il existe sept degrés de Taille, de Minuscule à Monstrueux."</Explanation>
 <Skill>""</Skill>
 <Max>"1"</Max>
 <PDF>""</PDF>
@@ -4532,9 +4605,11 @@ See page 190 for Fear rules"</Explanation>
 <Description language="FRANCAIS">"Magie du chaos (Tzeentch)"</Description>
 </Talent>
 <Talent id="RULES-T0AFR_ELF">
+<Trait>"1"</Trait>
 <Description language="FRANCAIS">"Afraid (Elves)"</Description>
 </Talent>
 <Talent id="RULES-T0HAT_GREENSKIN">
+<Trait>"1"</Trait>
 <Description language="FRANCAIS">"Animosity (Greenskins)"</Description>
 </Talent>
 <Talent id="RULES-T0009/RULES-T0067">
@@ -4545,6 +4620,34 @@ See page 190 for Fear rules"</Explanation>
 </Talent>
 <Talent id="RULES-T0022/RULES-T0105">
 <Description language="FRANCAIS">"Alley Cat or Rover"</Description>
+</Talent>
+<Talent id="RULES-T0SIZ_TINY">
+<Trait>"1"</Trait>
+<Description language="FRANCAIS">"Taille (Minuscule)"</Description>
+</Talent>
+<Talent id="RULES-T0SIZ_LITT">
+<Trait>"1"</Trait>
+<Description language="FRANCAIS">"Taille (Menu)"</Description>
+</Talent>
+<Talent id="RULES-T0SIZ_SMAL">
+<Trait>"1"</Trait>
+<Description language="FRANCAIS">"Taille (Petit)"</Description>
+</Talent>
+<Talent id="RULES-T0SIZ_AVER">
+<Trait>"1"</Trait>
+<Description language="FRANCAIS">"Taille (Moyen)"</Description>
+</Talent>
+<Talent id="RULES-T0SIZ_LARG">
+<Trait>"1"</Trait>
+<Description language="FRANCAIS">"Taille (Grand)"</Description>
+</Talent>
+<Talent id="RULES-T0SIZ_ENOR">
+<Trait>"1"</Trait>
+<Description language="FRANCAIS">"Taille (Énorme)"</Description>
+</Talent>
+<Talent id="RULES-T0SIZ_MONS">
+<Trait>"1"</Trait>
+<Description language="FRANCAIS">"Taille (Monstrueux)"</Description>
 </Talent>
 </DATA_TALENT_SPECIALIZATION>
 <DATA_RANDOM_TALENT>

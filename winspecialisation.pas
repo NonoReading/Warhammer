@@ -83,7 +83,12 @@ Procedure TWinSpecialisations.ChargeSpecialisation(CodeGenerique: String);
           end
         else
           for PTalent in ListTalent do
-            if VerifieFiltre(PTalent.Livre, FiltreLivre) then
+            // les traits de creature sont exclus : ils s'acquierent a la naissance par la race,
+            // jamais par un choix du joueur (CONTEXT.md 2.15). C'est le SEUL endroit du
+            // programme qui propose le catalogue complet - partout ailleurs les talents
+            // viennent d'une table explicite (ListMetierTalent, ListRaceTalent,
+            // ListTalentCreation), donc rien d'autre a filtrer.
+            if VerifieFiltre(PTalent.Livre, FiltreLivre) and (not PTalent.Trait) then
               AjouteLigne(CodeGenerique, PTalent.CodeTalent, PTalent.Libelle, '', false);
 
       ConstXmlSousChapitreCompetence:      // Compétences

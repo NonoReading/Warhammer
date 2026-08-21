@@ -342,6 +342,9 @@ Procedure XmlExportBook(Livre: String; Langue: String);
                  XmlContent.Add(XmlLigne(ConstXmlCompetence, ''));
               XmlContent.Add(XmlLigne(ConstXmlMax, PTalent.MaxiTalent));
               XmlContent.Add(XmlLigne(ConstXmlForPdf, PTalent.TalentPdf));
+              // ecrite seulement si vraie : les ~700 talents ordinaires ne portent pas la balise
+              if PTalent.Trait then
+                XmlContent.Add(XmlLigne(ConstXmlTrait, ConstVrai));
               XmlContent.Add(XmlLigneLangue(ConstXmlTest, Langue, PTalent.Tests));
 
               XmlContent.Add(XmlFinCode(ConstXmlTalent));
@@ -1147,6 +1150,7 @@ Procedure XmlImport(FileName: String; OnlyPrimary: Boolean; OnlyCode: Boolean);
                     begin
                       PTalent.Livre          := Livre;
                       PTalent.SousTalent     := false;
+                      PTalent.Trait          := false;
                       PTalent.CodeTalent     := RemoveQuotes(UTF8Encode(NodeNv2.Attributes.GetNamedItem(ConstXmlId).NodeValue));
                       PTraduction            := InitTrad(ConstPTalent, PTalent.CodeTalent, '', PTalent.Livre);
 
@@ -1180,6 +1184,8 @@ Procedure XmlImport(FileName: String; OnlyPrimary: Boolean; OnlyCode: Boolean);
                               PTalent.MaxiTalent        := RemoveQuotes(UTF8Encode(Node.TextContent));
                             ConstXmlForPdf:
                               PTalent.TalentPdf         := RemoveQuotes(UTF8Encode(Node.TextContent));
+                            ConstXmlTrait:
+                              PTalent.Trait             := (RemoveQuotes(UTF8Encode(Node.TextContent)) = ConstVrai);
                             ConstXmlTest:
                               begin
                                 PTalent.Tests           := RemoveQuotes(UTF8Encode(Node.TextContent));
@@ -1247,6 +1253,7 @@ Procedure XmlImport(FileName: String; OnlyPrimary: Boolean; OnlyCode: Boolean);
                     begin
                       PTalent.Livre             := Livre;
                       PTalent.SousTalent        := True;
+                      PTalent.Trait             := false;
                       PTalent.Description       := '';
 
                       PTalent.Attribut          := '';
@@ -1269,6 +1276,9 @@ Procedure XmlImport(FileName: String; OnlyPrimary: Boolean; OnlyCode: Boolean);
                               Langue              := RemoveQuotes(UTF8Encode(Node.Attributes.GetNamedItem(ConstXmlLanguage).NodeValue));
                               PTraduction.Libelle := PTalent.Libelle;
                               end;
+                            // une specialisation de trait reste un trait (ex. Immunity (Poison))
+                            ConstXmlTrait:
+                              PTalent.Trait       := (RemoveQuotes(UTF8Encode(Node.TextContent)) = ConstVrai);
                           end;
 
                           Node := Node.NextSibling;

@@ -242,9 +242,10 @@
         <HasResources Value="True"/>
         <ResourceBaseClass Value="Form"/>
         <UnitName Value="WinPersonnage"/>
+        <IsVisibleTab Value="True"/>
         <EditorIndex Value="5"/>
-        <TopLine Value="3436"/>
-        <CursorPos X="27" Y="3447"/>
+        <TopLine Value="3583"/>
+        <CursorPos X="24" Y="3595"/>
         <UsageCount Value="200"/>
         <Loaded Value="True"/>
         <LoadedDesigner Value="True"/>
@@ -500,7 +501,6 @@
         <Filename Value="xmlexportimport.pas"/>
         <IsPartOfProject Value="True"/>
         <UnitName Value="XmlExportImport"/>
-        <IsVisibleTab Value="True"/>
         <EditorIndex Value="4"/>
         <TopLine Value="1019"/>
         <CursorPos X="29" Y="1032"/>
@@ -1230,10 +1230,6 @@
     <JumpHistory HistoryIndex="29">
       <Position>
         <Filename Value="chargeconstantes.pas"/>
-        <Caret Line="50" Column="22" TopLine="38"/>
-      </Position>
-      <Position>
-        <Filename Value="chargeconstantes.pas"/>
         <Caret Line="175" Column="52" TopLine="155"/>
       </Position>
       <Position>
@@ -1347,6 +1343,10 @@
       <Position>
         <Filename Value="wincreation.pas"/>
         <Caret Line="3002" Column="33" TopLine="2989"/>
+      </Position>
+      <Position>
+        <Filename Value="winpersonnage.pas"/>
+        <Caret Line="3447" Column="27" TopLine="3436"/>
       </Position>
     </JumpHistory>
     <RunParams>

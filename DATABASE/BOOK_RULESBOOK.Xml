@@ -3969,6 +3969,7 @@ Under normal conditions, you can only know one Chaotic Magic Lore."</Explanation
 <Test language="ENGLISH">""</Test>
 </Talent>
 <Talent id="RULES-T0BIG">
+<Trait>"1"</Trait>
 <Attribut>"ATTR_S;ATTR_S;ATTR_T;ATTR_T;-ATTR_Ag"</Attribut>
 <ModifyCarac name="RULES-ATTR_S">+10</ModifyCarac>
 <ModifyCarac name="RULES-ATTR_T">+10</ModifyCarac>
@@ -3983,6 +3984,7 @@ It receives +10 Strength and Toughness, and –5 Agility"</Explanation>
 <Test language="ENGLISH">""</Test>
 </Talent>
 <Talent id="RULES-T0PAI">
+<Trait>"1"</Trait>
 <Attribut>""</Attribut>
 <Description language="ENGLISH">"Painless"</Description>
 <Short language="ENGLISH">""</Short>
@@ -3994,6 +3996,7 @@ All non-amputation penalties suffered from Critical Wounds are ignored, although
 <Test language="ENGLISH">""</Test>
 </Talent>
 <Talent id="RULES-T0DIE">
+<Trait>"1"</Trait>
 <Attribut>""</Attribut>
 <Description language="ENGLISH">"Die Hard"</Description>
 <Short language="ENGLISH">""</Short>
@@ -4008,6 +4011,7 @@ If a Test is successful, the creature chokes back to life with 1 Wound"</Explana
 <Test language="ENGLISH">""</Test>
 </Talent>
 <Talent id="RULES-T0HAT_*">
+<Trait>"1"</Trait>
 <Attribut>""</Attribut>
 <Description language="ENGLISH">"Animosity (any)"</Description>
 <Short language="ENGLISH">""</Short>
@@ -4019,6 +4023,7 @@ See page 190 for Animosity rules"</Explanation>
 <Test language="ENGLISH">""</Test>
 </Talent>
 <Talent id="RULES-T0BEL">
+<Trait>"1"</Trait>
 <Attribut>""</Attribut>
 <Description language="ENGLISH">"Belligerent"</Description>
 <Short language="ENGLISH">""</Short>
@@ -4030,6 +4035,7 @@ As long as it has more Advantage than its opponent, it is Immune to Psychology"<
 <Test language="ENGLISH">""</Test>
 </Talent>
 <Talent id="RULES-T0AFR_*">
+<Trait>"1"</Trait>
 <Attribut>""</Attribut>
 <Description language="ENGLISH">"Afraid (Any)"</Description>
 <Short language="ENGLISH">""</Short>
@@ -4041,10 +4047,77 @@ See page 190 for Fear rules"</Explanation>
 <Test language="ENGLISH">""</Test>
 </Talent>
 <Talent id="RULES-T0DVI">
+<Trait>"1"</Trait>
 <Attribut>""</Attribut>
 <Description language="ENGLISH">"Dark Vision"</Description>
 <Short language="ENGLISH">""</Short>
 <Explanation language="ENGLISH">"The creature can see in the dark as daylight"</Explanation>
+<Skill>""</Skill>
+<Max>"1"</Max>
+<PDF>""</PDF>
+<Test language="ENGLISH">""</Test>
+</Talent>
+<Talent id="RULES-T0AMP">
+<Trait>"1"</Trait>
+<Attribut>""</Attribut>
+<Description language="ENGLISH">"Amphibious"</Description>
+<Short language="ENGLISH">""</Short>
+<Explanation language="ENGLISH">"The creature is at home in water. It can add its Agility Bonus to the SL of all Swim Tests and move at full Movement through water."</Explanation>
+<Skill>""</Skill>
+<Max>"1"</Max>
+<PDF>"COMPNATA"</PDF>
+<Test language="ENGLISH">""</Test>
+</Talent>
+<Talent id="RULES-T0ARB">
+<Trait>"1"</Trait>
+<Attribut>""</Attribut>
+<Description language="ENGLISH">"Arboreal"</Description>
+<Short language="ENGLISH">""</Short>
+<Explanation language="ENGLISH">"The creature is at home in the forests. In the woodlands, it adds its Agility Bonus to the SL of all Climb and Stealth Tests."</Explanation>
+<Skill>""</Skill>
+<Max>"1"</Max>
+<PDF>""</PDF>
+<Test language="ENGLISH">""</Test>
+</Talent>
+<Talent id="RULES-T0COL">
+<Trait>"1"</Trait>
+<Attribut>""</Attribut>
+<Description language="ENGLISH">"Cold-blooded"</Description>
+<Short language="ENGLISH">""</Short>
+<Explanation language="ENGLISH">"The creature is cold-blooded and slow to react. It can reverse all failed Willpower Tests."</Explanation>
+<Skill>""</Skill>
+<Max>"1"</Max>
+<PDF>""</PDF>
+<Test language="ENGLISH">""</Test>
+</Talent>
+<Talent id="RULES-T0STE">
+<Trait>"1"</Trait>
+<Attribut>""</Attribut>
+<Description language="ENGLISH">"Stealthy"</Description>
+<Short language="ENGLISH">""</Short>
+<Explanation language="ENGLISH">"The creature is especially stealthy. It adds a number equal to its Agility Bonus to the SL of all Stealth Tests."</Explanation>
+<Skill>""</Skill>
+<Max>"1"</Max>
+<PDF>"COMPDISC_*"</PDF>
+<Test language="ENGLISH">""</Test>
+</Talent>
+<Talent id="RULES-T0ARM">
+<Trait>"1"</Trait>
+<Attribut>""</Attribut>
+<Description language="ENGLISH">"Armour (Rating)"</Description>
+<Short language="ENGLISH">""</Short>
+<Explanation language="ENGLISH">"The creature is protected by armour or thick hide. It has Rating Armour Points on all Hit Locations."</Explanation>
+<Skill>""</Skill>
+<Max>"99"</Max>
+<PDF>""</PDF>
+<Test language="ENGLISH">""</Test>
+</Talent>
+<Talent id="RULES-T0SIZ_*">
+<Trait>"1"</Trait>
+<Attribut>""</Attribut>
+<Description language="ENGLISH">"Size (Any)"</Description>
+<Short language="ENGLISH">""</Short>
+<Explanation language="ENGLISH">"This trait represents creatures whose size differs from the game standard (i.e. roughly human sized). There are seven steps of Size, ranging from Tiny to Monstrous."</Explanation>
 <Skill>""</Skill>
 <Max>"1"</Max>
 <PDF>""</PDF>
@@ -4641,9 +4714,11 @@ See page 190 for Fear rules"</Explanation>
 <Description language="ENGLISH">"Magie du chaos (Tzeentch)"</Description>
 </Talent>
 <Talent id="RULES-T0AFR_ELF">
+<Trait>"1"</Trait>
 <Description language="ENGLISH">"Afraid (Elves)"</Description>
 </Talent>
 <Talent id="RULES-T0HAT_GREENSKIN">
+<Trait>"1"</Trait>
 <Description language="ENGLISH">"Animosity (Greenskins)"</Description>
 </Talent>
 <Talent id="RULES-T0009/RULES-T0067">
@@ -4654,6 +4729,34 @@ See page 190 for Fear rules"</Explanation>
 </Talent>
 <Talent id="RULES-T0022/RULES-T0105">
 <Description language="ENGLISH">"Alley Cat or Rover"</Description>
+</Talent>
+<Talent id="RULES-T0SIZ_TINY">
+<Trait>"1"</Trait>
+<Description language="ENGLISH">"Size (Tiny)"</Description>
+</Talent>
+<Talent id="RULES-T0SIZ_LITT">
+<Trait>"1"</Trait>
+<Description language="ENGLISH">"Size (Little)"</Description>
+</Talent>
+<Talent id="RULES-T0SIZ_SMAL">
+<Trait>"1"</Trait>
+<Description language="ENGLISH">"Size (Small)"</Description>
+</Talent>
+<Talent id="RULES-T0SIZ_AVER">
+<Trait>"1"</Trait>
+<Description language="ENGLISH">"Size (Average)"</Description>
+</Talent>
+<Talent id="RULES-T0SIZ_LARG">
+<Trait>"1"</Trait>
+<Description language="ENGLISH">"Size (Large)"</Description>
+</Talent>
+<Talent id="RULES-T0SIZ_ENOR">
+<Trait>"1"</Trait>
+<Description language="ENGLISH">"Size (Enormous)"</Description>
+</Talent>
+<Talent id="RULES-T0SIZ_MONS">
+<Trait>"1"</Trait>
+<Description language="ENGLISH">"Size (Monstrous)"</Description>
 </Talent>
 </DATA_TALENT_SPECIALIZATION>
 <DATA_RANDOM_TALENT>

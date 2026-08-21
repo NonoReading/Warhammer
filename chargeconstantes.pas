@@ -113,6 +113,11 @@ Const
       ConstXmlMax                       = 'Max';
       ConstXmlForPdf                    = 'PDF';
       ConstXmlTest                      = 'Test';
+      // Marque un talent comme TRAIT DE CREATURE (Rulebook p.338-341) : acquis a la naissance
+      // par la race, jamais achete ni choisi. Voir CONTEXT.md 2.15.
+      ConstXmlTrait                     = 'Trait';
+      // Valeur "vrai" d'une balise XML booleenne (meme convention que <OFFICIAL>/<COMPLETE>).
+      ConstVrai                         = '1';
       ConstXmlEthnic                    = 'Ethnic';
       ConstXmlSousChapitreMetier        = 'SUBCHAPTER_CAREER';
       ConstXmlClass                     = 'Class';
