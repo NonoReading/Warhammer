@@ -25,6 +25,66 @@
 <Description language="ENGLISH">"Language (Gospodarinyi)"</Description>
 </Skill>
 </DATA_SKILL_SPECIALIZATION>
+<DATA_SPECIE_CAREER_CHOICE>
+  <!-- Substitutions Norses : chez les Norses, ces trois métiers Riverfolk sont remplacés
+       par leur équivalent Seafarer. Déclarées ICI et non dans Lustria, pour qu'elles ne
+       s'appliquent que si Sea of Claws est chargé - ce qui est exactement la condition
+       posée par les notes du livre ("in Sea of Claws"). -->
+<Choice>
+<Specie>"SEAOF-RACE_HBJOR"</Specie>
+<Career>"RULES-WORK06"</Career>
+<Alternative>"SEAOF-WORK109"</Alternative>
+  <!-- Boatman -> Beachcomber (note 4 p.193 de Lustria) -->
+</Choice>
+<Choice>
+<Specie>"SEAOF-RACE_HBJOR"</Specie>
+<Career>"RULES-WORK43"</Career>
+<Alternative>"SEAOF-WORK111"</Alternative>
+  <!-- Huffer -> Huffer (Seafarer) (note 5 p.193 de Lustria) -->
+</Choice>
+<Choice>
+<Specie>"SEAOF-RACE_HBJOR"</Specie>
+<Career>"RULES-WORK35"</Career>
+<Alternative>"SEAOF-WORK113"</Alternative>
+  <!-- Seaman -> Sailor (note 6 p.193 de Lustria) -->
+</Choice>
+<Choice>
+<Specie>"SEAOF-RACE_HSARL"</Specie>
+<Career>"RULES-WORK06"</Career>
+<Alternative>"SEAOF-WORK109"</Alternative>
+  <!-- Boatman -> Beachcomber (note 4 p.193 de Lustria) -->
+</Choice>
+<Choice>
+<Specie>"SEAOF-RACE_HSARL"</Specie>
+<Career>"RULES-WORK43"</Career>
+<Alternative>"SEAOF-WORK111"</Alternative>
+  <!-- Huffer -> Huffer (Seafarer) (note 5 p.193 de Lustria) -->
+</Choice>
+<Choice>
+<Specie>"SEAOF-RACE_HSARL"</Specie>
+<Career>"RULES-WORK35"</Career>
+<Alternative>"SEAOF-WORK113"</Alternative>
+  <!-- Seaman -> Sailor (note 6 p.193 de Lustria) -->
+</Choice>
+<Choice>
+<Specie>"SEAOF-RACE_HSKAE"</Specie>
+<Career>"RULES-WORK06"</Career>
+<Alternative>"SEAOF-WORK109"</Alternative>
+  <!-- Boatman -> Beachcomber (note 4 p.193 de Lustria) -->
+</Choice>
+<Choice>
+<Specie>"SEAOF-RACE_HSKAE"</Specie>
+<Career>"RULES-WORK43"</Career>
+<Alternative>"SEAOF-WORK111"</Alternative>
+  <!-- Huffer -> Huffer (Seafarer) (note 5 p.193 de Lustria) -->
+</Choice>
+<Choice>
+<Specie>"SEAOF-RACE_HSKAE"</Specie>
+<Career>"RULES-WORK35"</Career>
+<Alternative>"SEAOF-WORK113"</Alternative>
+  <!-- Seaman -> Sailor (note 6 p.193 de Lustria) -->
+</Choice>
+</DATA_SPECIE_CAREER_CHOICE>
 <DATA_SPECIE>
 <Specie id="SEAOF-RACE_HBJOR">
 <Description language="ENGLISH">"Humans (Bjornling Norse)"</Description>
@@ -273,7 +333,9 @@
 </SUBCHAPTER_CAREER>
 </Specie>
 <Specie id="SEAOF-RACE_HSKAE">
-<Description language="ENGLISH">"Human (Skaeling Norse)"</Description>
+<Description language="ENGLISH">"Humans (Skaeling Norse)"</Description>
+  <!-- Le livre écrit "Human" au singulier p.56, seul des trois à le faire :
+       uniformisé au pluriel comme Bjornling et Sarl (coquille de composition). -->
 <Explanation language="ENGLISH">"Skaeling Norse are the most openly devoted to the Ruinous Powers, Khorne foremost among them. A Skaeling Character who generates the Pure Soul Talent as a Random Talent may take the Mark of Khorne instead."</Explanation>
 <Ethnic>"RULES-SPECIE_HUMAN"</Ethnic>
 <SUBCHAPTER_ATTR>

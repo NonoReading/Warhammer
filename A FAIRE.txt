@@ -378,3 +378,15 @@ PDF Personnage (PRIORITAIRE) :
   commentaires à ces endroits. Correctif connu et mécanique : if NodeNv2.NodeName = <balise
   attendue> then, plus remise à zéro de l'enregistrement avant lecture.
 
+- (repéré le 21/08/2026, pas commencé) Activer `AvecSousMetier` (chargeconstantes.pas). Ce
+  drapeau global est déclaré, testé deux fois dans chargemetiersousmetier.pas, mais n'est
+  affecté NULLE PART dans le projet : il vaut donc false depuis toujours, ce qui désactive
+  silencieusement tout le mécanisme `DATA_CAREER_SUBCHOICE` - le second jet de dé qui transforme
+  par exemple un Engineer en Artillerist sur 76-100. Les données existent pourtant : 22 entrées
+  dans Up in Arms et 8 dans Winds of Magic, saisies de longue date et jamais utilisées.
+  Son jumeau `AvecRaceChoixMetier` était dans le même cas et a été activé le 21/08/2026 (voir
+  CONTEXT.md §2.12) ; celui-ci ne l'a délibérément pas été en même temps, pour ne pas changer le
+  comportement de deux livres d'un coup sans test. A activer puis vérifier sur un Engineer ou un
+  Knight de Up in Arms (branche `SousM` de TabMetierResultat, avec EditMetierSousMetierResultat
+  et le bouton Valider).
+

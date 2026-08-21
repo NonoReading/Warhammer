@@ -1918,6 +1918,7 @@ Procedure TWinCreations.ChargeTabMetier();
     PRaceMetier:   StructureRaceMetier;
     PRegleMetier:  StructureRegleMetier;
     Regle:         String;
+    EthnieSeule:   Boolean;
   Begin
     IndTabMetier        := 0;
     TabMetier.RowCount  := 1;
@@ -1930,8 +1931,10 @@ Procedure TWinCreations.ChargeTabMetier();
 
     if Regle <> '' then
       begin
+        // calculé une seule fois : l'ethnie prime sur la race (voir ChargeRegle.pas)
+        EthnieSeule := RegleCibleEthnie(Regle, RaceEnCours);
         For PRegleMetier in ListRegleMetier do
-          if RegleMetierApplicable(PRegleMetier, Regle, RaceEnCours) and (PRegleMetier.Chance <> SeparateurChance) and (PRegleMetier.Chance <> 'X') then
+          if RegleMetierApplicable(PRegleMetier, Regle, RaceEnCours, EthnieSeule) and (PRegleMetier.Chance <> SeparateurChance) and (PRegleMetier.Chance <> 'X') then
             begin
               PMetier := ChercheMetier(PRegleMetier.CodeMetier);
               Inc(IndTabMetier);
@@ -2151,6 +2154,16 @@ procedure TWinCreations.UpdateSheetMetier(Hasard: Boolean);
     // choisir votre Metier
     ButtonMetierSelectionner.visible:= RadioButtonMetierChoix.Checked;
     ButtonMetierSelectionner.BringToFront;
+
+    // Sous-métier / substitution raciale : leur visibilité est pilotée par TabMetierResultat,
+    // mais le BringToFront doit être refait ICI, car UpdateSheetMetier s'exécute APRES et
+    // remonte les autres boutons au premier plan. Sans ça ils restaient sous le TShape de
+    // fond que MiseAJourUnContenaire (globalfonts.pas) crée en alClient sur chaque onglet -
+    // les TMemo y échappent (contrôles fenêtrés), pas les TBCButton.
+    if ButtonMetierSousMetierValider.Visible then
+      ButtonMetierSousMetierValider.BringToFront;
+    if ButtonMetierSousMetierSelectionner.Visible then
+      ButtonMetierSousMetierSelectionner.BringToFront;
 
     if Hasard then
        GroupBoxMetier.Enabled   := false;

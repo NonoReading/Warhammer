@@ -2130,5 +2130,620 @@
 <Career name="RULES-WORK57">"96-100"</Career>
   <!-- Soldier -->
 </Entry>
+  <!-- ===== Colonne Norse (p.193) : ciblée sur les trois ETHNIES norses et non sur la
+       race Humaine, car "Old World Human" et "Norse" sont deux colonnes distinctes
+       d'une même race (note 1 p.193). ===== -->
+<Entry>
+<Rule>"LUSTR-RULE_LUSTRIA"</Rule>
+<Specie>"SEAOF-RACE_HBJOR"</Specie>
+<Career name="LUSTR-WORK123">"01"</Career>
+  <!-- Interpreter -->
+</Entry>
+<Entry>
+<Rule>"LUSTR-RULE_LUSTRIA"</Rule>
+<Specie>"SEAOF-RACE_HBJOR"</Specie>
+<Career name="RULES-WORK45">"02"</Career>
+  <!-- Nun -->
+</Entry>
+<Entry>
+<Rule>"LUSTR-RULE_LUSTRIA"</Rule>
+<Specie>"SEAOF-RACE_HBJOR"</Specie>
+<Career name="RULES-WORK23">"03-04"</Career>
+  <!-- Scholar -->
+</Entry>
+<Entry>
+<Rule>"LUSTR-RULE_LUSTRIA"</Rule>
+<Specie>"SEAOF-RACE_HBJOR"</Specie>
+<Career name="RULES-WORK01">"05-06"</Career>
+  <!-- Agitator -->
+</Entry>
+<Entry>
+<Rule>"LUSTR-RULE_LUSTRIA"</Rule>
+<Specie>"SEAOF-RACE_HBJOR"</Specie>
+<Career name="RULES-WORK03">"07-09"</Career>
+  <!-- Artisan -->
+</Entry>
+<Entry>
+<Rule>"LUSTR-RULE_LUSTRIA"</Rule>
+<Specie>"SEAOF-RACE_HBJOR"</Specie>
+<Career name="RULES-WORK37">"10-11"</Career>
+  <!-- Beggar -->
+</Entry>
+<Entry>
+<Rule>"LUSTR-RULE_LUSTRIA"</Rule>
+<Specie>"SEAOF-RACE_HBJOR"</Specie>
+<Career name="RULES-WORK34">"12-13"</Career>
+  <!-- Merchant -->
+</Entry>
+<Entry>
+<Rule>"LUSTR-RULE_LUSTRIA"</Rule>
+<Specie>"SEAOF-RACE_HBJOR"</Specie>
+<Career name="RULES-WORK52">"14"</Career>
+  <!-- Rat Catcher -->
+</Entry>
+<Entry>
+<Rule>"LUSTR-RULE_LUSTRIA"</Rule>
+<Specie>"SEAOF-RACE_HBJOR"</Specie>
+<Career name="RULES-WORK15">"15-16"</Career>
+  <!-- Advisor -->
+</Entry>
+<Entry>
+<Rule>"LUSTR-RULE_LUSTRIA"</Rule>
+<Specie>"SEAOF-RACE_HBJOR"</Specie>
+<Career name="RULES-WORK04">"17"</Career>
+  <!-- Artist -->
+</Entry>
+<Entry>
+<Rule>"LUSTR-RULE_LUSTRIA"</Rule>
+<Specie>"SEAOF-RACE_HBJOR"</Specie>
+<Career name="RULES-WORK44">"18"</Career>
+  <!-- Noble -->
+</Entry>
+<Entry>
+<Rule>"LUSTR-RULE_LUSTRIA"</Rule>
+<Specie>"SEAOF-RACE_HBJOR"</Specie>
+<Career name="RULES-WORK56">"19-24"</Career>
+  <!-- Servant -->
+</Entry>
+<Entry>
+<Rule>"LUSTR-RULE_LUSTRIA"</Rule>
+<Specie>"SEAOF-RACE_HBJOR"</Specie>
+<Career name="RULES-WORK29">"25-27"</Career>
+  <!-- Herbalist -->
+</Entry>
+<Entry>
+<Rule>"LUSTR-RULE_LUSTRIA"</Rule>
+<Specie>"SEAOF-RACE_HBJOR"</Specie>
+<Career name="RULES-WORK10">"28-31"</Career>
+  <!-- Hunter -->
+</Entry>
+<Entry>
+<Rule>"LUSTR-RULE_LUSTRIA"</Rule>
+<Specie>"SEAOF-RACE_HBJOR"</Specie>
+<Career name="LUSTR-WORK124">"32"</Career>
+  <!-- Oracle -->
+</Entry>
+<Entry>
+<Rule>"LUSTR-RULE_LUSTRIA"</Rule>
+<Specie>"SEAOF-RACE_HBJOR"</Specie>
+<Career name="RULES-WORK19">"33-35"</Career>
+  <!-- Scout -->
+</Entry>
+<Entry>
+<Rule>"LUSTR-RULE_LUSTRIA"</Rule>
+<Specie>"SEAOF-RACE_HBJOR"</Specie>
+<Career name="RULES-WORK63">"36-40"</Career>
+  <!-- Villager -->
+</Entry>
+<Entry>
+<Rule>"LUSTR-RULE_LUSTRIA"</Rule>
+<Specie>"SEAOF-RACE_HBJOR"</Specie>
+<Career name="RULES-WORK55">"41-42"</Career>
+  <!-- Entertainer -->
+</Entry>
+<Entry>
+<Rule>"LUSTR-RULE_LUSTRIA"</Rule>
+<Specie>"SEAOF-RACE_HBJOR"</Specie>
+<Career name="RULES-WORK38">"43"</Career>
+  <!-- Messenger -->
+</Entry>
+<Entry>
+<Rule>"LUSTR-RULE_LUSTRIA"</Rule>
+<Specie>"SEAOF-RACE_HBJOR"</Specie>
+<Career name="RULES-WORK14">"44"</Career>
+  <!-- Pedlar -->
+</Entry>
+<Entry>
+<Rule>"LUSTR-RULE_LUSTRIA"</Rule>
+<Specie>"SEAOF-RACE_HBJOR"</Specie>
+<Career name="LUSTR-WORK125">"45-47"</Career>
+  <!-- Survivalist -->
+</Entry>
+<Entry>
+<Rule>"LUSTR-RULE_LUSTRIA"</Rule>
+<Specie>"SEAOF-RACE_HBJOR"</Specie>
+<Career name="LUSTR-WORK126">"48-51"</Career>
+  <!-- Trailblazer -->
+</Entry>
+<Entry>
+<Rule>"LUSTR-RULE_LUSTRIA"</Rule>
+<Specie>"SEAOF-RACE_HBJOR"</Specie>
+<Career name="RULES-WORK06">"52-53"</Career>
+  <!-- Boatman - note 4 p.193 : remplacé par Beachcomber si Sea of Claws est utilisé -->
+</Entry>
+<Entry>
+<Rule>"LUSTR-RULE_LUSTRIA"</Rule>
+<Specie>"SEAOF-RACE_HBJOR"</Specie>
+<Career name="RULES-WORK43">"54-56"</Career>
+  <!-- Huffer - note 5 p.193 : remplacé par son équivalent Seafarer si Sea of Claws est utilisé -->
+</Entry>
+<Entry>
+<Rule>"LUSTR-RULE_LUSTRIA"</Rule>
+<Specie>"SEAOF-RACE_HBJOR"</Specie>
+<Career name="RULES-WORK35">"57-64"</Career>
+  <!-- Seaman - note 6 p.193 : remplacé par Sailor si Sea of Claws est utilisé -->
+</Entry>
+<Entry>
+<Rule>"LUSTR-RULE_LUSTRIA"</Rule>
+<Specie>"SEAOF-RACE_HBJOR"</Specie>
+<Career name="RULES-WORK42">"65-69"</Career>
+  <!-- Wrecker -->
+</Entry>
+<Entry>
+<Rule>"LUSTR-RULE_LUSTRIA"</Rule>
+<Specie>"SEAOF-RACE_HBJOR"</Specie>
+<Career name="RULES-WORK09">"70"</Career>
+  <!-- Charlatan -->
+</Entry>
+<Entry>
+<Rule>"LUSTR-RULE_LUSTRIA"</Rule>
+<Specie>"SEAOF-RACE_HBJOR"</Specie>
+<Career name="RULES-WORK30">"71-73"</Career>
+  <!-- Outlaw -->
+</Entry>
+<Entry>
+<Rule>"LUSTR-RULE_LUSTRIA"</Rule>
+<Specie>"SEAOF-RACE_HBJOR"</Specie>
+<Career name="RULES-WORK64">"74-77"</Career>
+  <!-- Thief -->
+</Entry>
+<Entry>
+<Rule>"LUSTR-RULE_LUSTRIA"</Rule>
+<Specie>"SEAOF-RACE_HBJOR"</Specie>
+<Career name="RULES-WORK60">"78-82"</Career>
+  <!-- Witch -->
+</Entry>
+<Entry>
+<Rule>"LUSTR-RULE_LUSTRIA"</Rule>
+<Specie>"SEAOF-RACE_HBJOR"</Specie>
+<Career name="RULES-WORK08">"83-85"</Career>
+  <!-- Calvalryman -->
+</Entry>
+<Entry>
+<Rule>"LUSTR-RULE_LUSTRIA"</Rule>
+<Specie>"SEAOF-RACE_HBJOR"</Specie>
+<Career name="RULES-WORK28">"86-89"</Career>
+  <!-- Pit Fighter -->
+</Entry>
+<Entry>
+<Rule>"LUSTR-RULE_LUSTRIA"</Rule>
+<Specie>"SEAOF-RACE_HBJOR"</Specie>
+<Career name="RULES-WORK61">"90-92"</Career>
+  <!-- Protagonist -->
+</Entry>
+<Entry>
+<Rule>"LUSTR-RULE_LUSTRIA"</Rule>
+<Specie>"SEAOF-RACE_HBJOR"</Specie>
+<Career name="RULES-WORK57">"93-100"</Career>
+  <!-- Soldier -->
+</Entry>
+<Entry>
+<Rule>"LUSTR-RULE_LUSTRIA"</Rule>
+<Specie>"SEAOF-RACE_HSARL"</Specie>
+<Career name="LUSTR-WORK123">"01"</Career>
+  <!-- Interpreter -->
+</Entry>
+<Entry>
+<Rule>"LUSTR-RULE_LUSTRIA"</Rule>
+<Specie>"SEAOF-RACE_HSARL"</Specie>
+<Career name="RULES-WORK45">"02"</Career>
+  <!-- Nun -->
+</Entry>
+<Entry>
+<Rule>"LUSTR-RULE_LUSTRIA"</Rule>
+<Specie>"SEAOF-RACE_HSARL"</Specie>
+<Career name="RULES-WORK23">"03-04"</Career>
+  <!-- Scholar -->
+</Entry>
+<Entry>
+<Rule>"LUSTR-RULE_LUSTRIA"</Rule>
+<Specie>"SEAOF-RACE_HSARL"</Specie>
+<Career name="RULES-WORK01">"05-06"</Career>
+  <!-- Agitator -->
+</Entry>
+<Entry>
+<Rule>"LUSTR-RULE_LUSTRIA"</Rule>
+<Specie>"SEAOF-RACE_HSARL"</Specie>
+<Career name="RULES-WORK03">"07-09"</Career>
+  <!-- Artisan -->
+</Entry>
+<Entry>
+<Rule>"LUSTR-RULE_LUSTRIA"</Rule>
+<Specie>"SEAOF-RACE_HSARL"</Specie>
+<Career name="RULES-WORK37">"10-11"</Career>
+  <!-- Beggar -->
+</Entry>
+<Entry>
+<Rule>"LUSTR-RULE_LUSTRIA"</Rule>
+<Specie>"SEAOF-RACE_HSARL"</Specie>
+<Career name="RULES-WORK34">"12-13"</Career>
+  <!-- Merchant -->
+</Entry>
+<Entry>
+<Rule>"LUSTR-RULE_LUSTRIA"</Rule>
+<Specie>"SEAOF-RACE_HSARL"</Specie>
+<Career name="RULES-WORK52">"14"</Career>
+  <!-- Rat Catcher -->
+</Entry>
+<Entry>
+<Rule>"LUSTR-RULE_LUSTRIA"</Rule>
+<Specie>"SEAOF-RACE_HSARL"</Specie>
+<Career name="RULES-WORK15">"15-16"</Career>
+  <!-- Advisor -->
+</Entry>
+<Entry>
+<Rule>"LUSTR-RULE_LUSTRIA"</Rule>
+<Specie>"SEAOF-RACE_HSARL"</Specie>
+<Career name="RULES-WORK04">"17"</Career>
+  <!-- Artist -->
+</Entry>
+<Entry>
+<Rule>"LUSTR-RULE_LUSTRIA"</Rule>
+<Specie>"SEAOF-RACE_HSARL"</Specie>
+<Career name="RULES-WORK44">"18"</Career>
+  <!-- Noble -->
+</Entry>
+<Entry>
+<Rule>"LUSTR-RULE_LUSTRIA"</Rule>
+<Specie>"SEAOF-RACE_HSARL"</Specie>
+<Career name="RULES-WORK56">"19-24"</Career>
+  <!-- Servant -->
+</Entry>
+<Entry>
+<Rule>"LUSTR-RULE_LUSTRIA"</Rule>
+<Specie>"SEAOF-RACE_HSARL"</Specie>
+<Career name="RULES-WORK29">"25-27"</Career>
+  <!-- Herbalist -->
+</Entry>
+<Entry>
+<Rule>"LUSTR-RULE_LUSTRIA"</Rule>
+<Specie>"SEAOF-RACE_HSARL"</Specie>
+<Career name="RULES-WORK10">"28-31"</Career>
+  <!-- Hunter -->
+</Entry>
+<Entry>
+<Rule>"LUSTR-RULE_LUSTRIA"</Rule>
+<Specie>"SEAOF-RACE_HSARL"</Specie>
+<Career name="LUSTR-WORK124">"32"</Career>
+  <!-- Oracle -->
+</Entry>
+<Entry>
+<Rule>"LUSTR-RULE_LUSTRIA"</Rule>
+<Specie>"SEAOF-RACE_HSARL"</Specie>
+<Career name="RULES-WORK19">"33-35"</Career>
+  <!-- Scout -->
+</Entry>
+<Entry>
+<Rule>"LUSTR-RULE_LUSTRIA"</Rule>
+<Specie>"SEAOF-RACE_HSARL"</Specie>
+<Career name="RULES-WORK63">"36-40"</Career>
+  <!-- Villager -->
+</Entry>
+<Entry>
+<Rule>"LUSTR-RULE_LUSTRIA"</Rule>
+<Specie>"SEAOF-RACE_HSARL"</Specie>
+<Career name="RULES-WORK55">"41-42"</Career>
+  <!-- Entertainer -->
+</Entry>
+<Entry>
+<Rule>"LUSTR-RULE_LUSTRIA"</Rule>
+<Specie>"SEAOF-RACE_HSARL"</Specie>
+<Career name="RULES-WORK38">"43"</Career>
+  <!-- Messenger -->
+</Entry>
+<Entry>
+<Rule>"LUSTR-RULE_LUSTRIA"</Rule>
+<Specie>"SEAOF-RACE_HSARL"</Specie>
+<Career name="RULES-WORK14">"44"</Career>
+  <!-- Pedlar -->
+</Entry>
+<Entry>
+<Rule>"LUSTR-RULE_LUSTRIA"</Rule>
+<Specie>"SEAOF-RACE_HSARL"</Specie>
+<Career name="LUSTR-WORK125">"45-47"</Career>
+  <!-- Survivalist -->
+</Entry>
+<Entry>
+<Rule>"LUSTR-RULE_LUSTRIA"</Rule>
+<Specie>"SEAOF-RACE_HSARL"</Specie>
+<Career name="LUSTR-WORK126">"48-51"</Career>
+  <!-- Trailblazer -->
+</Entry>
+<Entry>
+<Rule>"LUSTR-RULE_LUSTRIA"</Rule>
+<Specie>"SEAOF-RACE_HSARL"</Specie>
+<Career name="RULES-WORK06">"52-53"</Career>
+  <!-- Boatman - note 4 p.193 : remplacé par Beachcomber si Sea of Claws est utilisé -->
+</Entry>
+<Entry>
+<Rule>"LUSTR-RULE_LUSTRIA"</Rule>
+<Specie>"SEAOF-RACE_HSARL"</Specie>
+<Career name="RULES-WORK43">"54-56"</Career>
+  <!-- Huffer - note 5 p.193 : remplacé par son équivalent Seafarer si Sea of Claws est utilisé -->
+</Entry>
+<Entry>
+<Rule>"LUSTR-RULE_LUSTRIA"</Rule>
+<Specie>"SEAOF-RACE_HSARL"</Specie>
+<Career name="RULES-WORK35">"57-64"</Career>
+  <!-- Seaman - note 6 p.193 : remplacé par Sailor si Sea of Claws est utilisé -->
+</Entry>
+<Entry>
+<Rule>"LUSTR-RULE_LUSTRIA"</Rule>
+<Specie>"SEAOF-RACE_HSARL"</Specie>
+<Career name="RULES-WORK42">"65-69"</Career>
+  <!-- Wrecker -->
+</Entry>
+<Entry>
+<Rule>"LUSTR-RULE_LUSTRIA"</Rule>
+<Specie>"SEAOF-RACE_HSARL"</Specie>
+<Career name="RULES-WORK09">"70"</Career>
+  <!-- Charlatan -->
+</Entry>
+<Entry>
+<Rule>"LUSTR-RULE_LUSTRIA"</Rule>
+<Specie>"SEAOF-RACE_HSARL"</Specie>
+<Career name="RULES-WORK30">"71-73"</Career>
+  <!-- Outlaw -->
+</Entry>
+<Entry>
+<Rule>"LUSTR-RULE_LUSTRIA"</Rule>
+<Specie>"SEAOF-RACE_HSARL"</Specie>
+<Career name="RULES-WORK64">"74-77"</Career>
+  <!-- Thief -->
+</Entry>
+<Entry>
+<Rule>"LUSTR-RULE_LUSTRIA"</Rule>
+<Specie>"SEAOF-RACE_HSARL"</Specie>
+<Career name="RULES-WORK60">"78-82"</Career>
+  <!-- Witch -->
+</Entry>
+<Entry>
+<Rule>"LUSTR-RULE_LUSTRIA"</Rule>
+<Specie>"SEAOF-RACE_HSARL"</Specie>
+<Career name="RULES-WORK08">"83-85"</Career>
+  <!-- Calvalryman -->
+</Entry>
+<Entry>
+<Rule>"LUSTR-RULE_LUSTRIA"</Rule>
+<Specie>"SEAOF-RACE_HSARL"</Specie>
+<Career name="RULES-WORK28">"86-89"</Career>
+  <!-- Pit Fighter -->
+</Entry>
+<Entry>
+<Rule>"LUSTR-RULE_LUSTRIA"</Rule>
+<Specie>"SEAOF-RACE_HSARL"</Specie>
+<Career name="RULES-WORK61">"90-92"</Career>
+  <!-- Protagonist -->
+</Entry>
+<Entry>
+<Rule>"LUSTR-RULE_LUSTRIA"</Rule>
+<Specie>"SEAOF-RACE_HSARL"</Specie>
+<Career name="RULES-WORK57">"93-100"</Career>
+  <!-- Soldier -->
+</Entry>
+<Entry>
+<Rule>"LUSTR-RULE_LUSTRIA"</Rule>
+<Specie>"SEAOF-RACE_HSKAE"</Specie>
+<Career name="LUSTR-WORK123">"01"</Career>
+  <!-- Interpreter -->
+</Entry>
+<Entry>
+<Rule>"LUSTR-RULE_LUSTRIA"</Rule>
+<Specie>"SEAOF-RACE_HSKAE"</Specie>
+<Career name="RULES-WORK45">"02"</Career>
+  <!-- Nun -->
+</Entry>
+<Entry>
+<Rule>"LUSTR-RULE_LUSTRIA"</Rule>
+<Specie>"SEAOF-RACE_HSKAE"</Specie>
+<Career name="RULES-WORK23">"03-04"</Career>
+  <!-- Scholar -->
+</Entry>
+<Entry>
+<Rule>"LUSTR-RULE_LUSTRIA"</Rule>
+<Specie>"SEAOF-RACE_HSKAE"</Specie>
+<Career name="RULES-WORK01">"05-06"</Career>
+  <!-- Agitator -->
+</Entry>
+<Entry>
+<Rule>"LUSTR-RULE_LUSTRIA"</Rule>
+<Specie>"SEAOF-RACE_HSKAE"</Specie>
+<Career name="RULES-WORK03">"07-09"</Career>
+  <!-- Artisan -->
+</Entry>
+<Entry>
+<Rule>"LUSTR-RULE_LUSTRIA"</Rule>
+<Specie>"SEAOF-RACE_HSKAE"</Specie>
+<Career name="RULES-WORK37">"10-11"</Career>
+  <!-- Beggar -->
+</Entry>
+<Entry>
+<Rule>"LUSTR-RULE_LUSTRIA"</Rule>
+<Specie>"SEAOF-RACE_HSKAE"</Specie>
+<Career name="RULES-WORK34">"12-13"</Career>
+  <!-- Merchant -->
+</Entry>
+<Entry>
+<Rule>"LUSTR-RULE_LUSTRIA"</Rule>
+<Specie>"SEAOF-RACE_HSKAE"</Specie>
+<Career name="RULES-WORK52">"14"</Career>
+  <!-- Rat Catcher -->
+</Entry>
+<Entry>
+<Rule>"LUSTR-RULE_LUSTRIA"</Rule>
+<Specie>"SEAOF-RACE_HSKAE"</Specie>
+<Career name="RULES-WORK15">"15-16"</Career>
+  <!-- Advisor -->
+</Entry>
+<Entry>
+<Rule>"LUSTR-RULE_LUSTRIA"</Rule>
+<Specie>"SEAOF-RACE_HSKAE"</Specie>
+<Career name="RULES-WORK04">"17"</Career>
+  <!-- Artist -->
+</Entry>
+<Entry>
+<Rule>"LUSTR-RULE_LUSTRIA"</Rule>
+<Specie>"SEAOF-RACE_HSKAE"</Specie>
+<Career name="RULES-WORK44">"18"</Career>
+  <!-- Noble -->
+</Entry>
+<Entry>
+<Rule>"LUSTR-RULE_LUSTRIA"</Rule>
+<Specie>"SEAOF-RACE_HSKAE"</Specie>
+<Career name="RULES-WORK56">"19-24"</Career>
+  <!-- Servant -->
+</Entry>
+<Entry>
+<Rule>"LUSTR-RULE_LUSTRIA"</Rule>
+<Specie>"SEAOF-RACE_HSKAE"</Specie>
+<Career name="RULES-WORK29">"25-27"</Career>
+  <!-- Herbalist -->
+</Entry>
+<Entry>
+<Rule>"LUSTR-RULE_LUSTRIA"</Rule>
+<Specie>"SEAOF-RACE_HSKAE"</Specie>
+<Career name="RULES-WORK10">"28-31"</Career>
+  <!-- Hunter -->
+</Entry>
+<Entry>
+<Rule>"LUSTR-RULE_LUSTRIA"</Rule>
+<Specie>"SEAOF-RACE_HSKAE"</Specie>
+<Career name="LUSTR-WORK124">"32"</Career>
+  <!-- Oracle -->
+</Entry>
+<Entry>
+<Rule>"LUSTR-RULE_LUSTRIA"</Rule>
+<Specie>"SEAOF-RACE_HSKAE"</Specie>
+<Career name="RULES-WORK19">"33-35"</Career>
+  <!-- Scout -->
+</Entry>
+<Entry>
+<Rule>"LUSTR-RULE_LUSTRIA"</Rule>
+<Specie>"SEAOF-RACE_HSKAE"</Specie>
+<Career name="RULES-WORK63">"36-40"</Career>
+  <!-- Villager -->
+</Entry>
+<Entry>
+<Rule>"LUSTR-RULE_LUSTRIA"</Rule>
+<Specie>"SEAOF-RACE_HSKAE"</Specie>
+<Career name="RULES-WORK55">"41-42"</Career>
+  <!-- Entertainer -->
+</Entry>
+<Entry>
+<Rule>"LUSTR-RULE_LUSTRIA"</Rule>
+<Specie>"SEAOF-RACE_HSKAE"</Specie>
+<Career name="RULES-WORK38">"43"</Career>
+  <!-- Messenger -->
+</Entry>
+<Entry>
+<Rule>"LUSTR-RULE_LUSTRIA"</Rule>
+<Specie>"SEAOF-RACE_HSKAE"</Specie>
+<Career name="RULES-WORK14">"44"</Career>
+  <!-- Pedlar -->
+</Entry>
+<Entry>
+<Rule>"LUSTR-RULE_LUSTRIA"</Rule>
+<Specie>"SEAOF-RACE_HSKAE"</Specie>
+<Career name="LUSTR-WORK125">"45-47"</Career>
+  <!-- Survivalist -->
+</Entry>
+<Entry>
+<Rule>"LUSTR-RULE_LUSTRIA"</Rule>
+<Specie>"SEAOF-RACE_HSKAE"</Specie>
+<Career name="LUSTR-WORK126">"48-51"</Career>
+  <!-- Trailblazer -->
+</Entry>
+<Entry>
+<Rule>"LUSTR-RULE_LUSTRIA"</Rule>
+<Specie>"SEAOF-RACE_HSKAE"</Specie>
+<Career name="RULES-WORK06">"52-53"</Career>
+  <!-- Boatman - note 4 p.193 : remplacé par Beachcomber si Sea of Claws est utilisé -->
+</Entry>
+<Entry>
+<Rule>"LUSTR-RULE_LUSTRIA"</Rule>
+<Specie>"SEAOF-RACE_HSKAE"</Specie>
+<Career name="RULES-WORK43">"54-56"</Career>
+  <!-- Huffer - note 5 p.193 : remplacé par son équivalent Seafarer si Sea of Claws est utilisé -->
+</Entry>
+<Entry>
+<Rule>"LUSTR-RULE_LUSTRIA"</Rule>
+<Specie>"SEAOF-RACE_HSKAE"</Specie>
+<Career name="RULES-WORK35">"57-64"</Career>
+  <!-- Seaman - note 6 p.193 : remplacé par Sailor si Sea of Claws est utilisé -->
+</Entry>
+<Entry>
+<Rule>"LUSTR-RULE_LUSTRIA"</Rule>
+<Specie>"SEAOF-RACE_HSKAE"</Specie>
+<Career name="RULES-WORK42">"65-69"</Career>
+  <!-- Wrecker -->
+</Entry>
+<Entry>
+<Rule>"LUSTR-RULE_LUSTRIA"</Rule>
+<Specie>"SEAOF-RACE_HSKAE"</Specie>
+<Career name="RULES-WORK09">"70"</Career>
+  <!-- Charlatan -->
+</Entry>
+<Entry>
+<Rule>"LUSTR-RULE_LUSTRIA"</Rule>
+<Specie>"SEAOF-RACE_HSKAE"</Specie>
+<Career name="RULES-WORK30">"71-73"</Career>
+  <!-- Outlaw -->
+</Entry>
+<Entry>
+<Rule>"LUSTR-RULE_LUSTRIA"</Rule>
+<Specie>"SEAOF-RACE_HSKAE"</Specie>
+<Career name="RULES-WORK64">"74-77"</Career>
+  <!-- Thief -->
+</Entry>
+<Entry>
+<Rule>"LUSTR-RULE_LUSTRIA"</Rule>
+<Specie>"SEAOF-RACE_HSKAE"</Specie>
+<Career name="RULES-WORK60">"78-82"</Career>
+  <!-- Witch -->
+</Entry>
+<Entry>
+<Rule>"LUSTR-RULE_LUSTRIA"</Rule>
+<Specie>"SEAOF-RACE_HSKAE"</Specie>
+<Career name="RULES-WORK08">"83-85"</Career>
+  <!-- Calvalryman -->
+</Entry>
+<Entry>
+<Rule>"LUSTR-RULE_LUSTRIA"</Rule>
+<Specie>"SEAOF-RACE_HSKAE"</Specie>
+<Career name="RULES-WORK28">"86-89"</Career>
+  <!-- Pit Fighter -->
+</Entry>
+<Entry>
+<Rule>"LUSTR-RULE_LUSTRIA"</Rule>
+<Specie>"SEAOF-RACE_HSKAE"</Specie>
+<Career name="RULES-WORK61">"90-92"</Career>
+  <!-- Protagonist -->
+</Entry>
+<Entry>
+<Rule>"LUSTR-RULE_LUSTRIA"</Rule>
+<Specie>"SEAOF-RACE_HSKAE"</Specie>
+<Career name="RULES-WORK57">"93-100"</Career>
+  <!-- Soldier -->
+</Entry>
 </DATA_CAREER_ROLL>
 </DATA_BOOK>

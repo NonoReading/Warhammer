@@ -52,7 +52,8 @@ var
   NbRegleMetier:    Integer;
 
 Function ChercheRegle(CodeRegle :String): StructureRegle;
-Function RegleMetierApplicable(PRegleMetier: StructureRegleMetier; CodeRegle: String; CodeRace: String): Boolean;
+Function RegleCibleEthnie(CodeRegle: String; CodeRace: String): Boolean;
+Function RegleMetierApplicable(PRegleMetier: StructureRegleMetier; CodeRegle: String; CodeRace: String; EthnieSeule: Boolean): Boolean;
 Function RegleCouvreRace(CodeRegle: String; CodeRace: String): Boolean;
 
 implementation
@@ -78,7 +79,14 @@ end;
 // qu'elle cible soit cette ethnie précisément (RULES-RACE_HUM), soit la RACE dont elle
 // fait partie (RULES-SPECIE_HUMAN) - la colonne "Old World Human" de la table lustrienne
 // couvre les cinq ethnies Humaines d'un coup (Lustria p.193, note 1).
-Function RegleMetierApplicable(PRegleMetier: StructureRegleMetier; CodeRegle: String; CodeRace: String): Boolean;
+//
+// L'ethnie PRIME sur la race. Une même règle peut porter les deux niveaux : la table
+// lustrienne a une colonne "Old World Human" (visant la RACE Humaine) ET une colonne
+// "Norse" (visant les trois ETHNIES norses). Sans cette précédence, un Norse recevait
+// la fusion des deux colonnes - bug trouvé au test par Nono le 21/08/2026.
+// EthnieSeule vient de RegleCibleEthnie : true si la règle a au moins une entrée visant
+// précisément cette ethnie, auquel cas les entrées de niveau race sont ignorées.
+Function RegleMetierApplicable(PRegleMetier: StructureRegleMetier; CodeRegle: String; CodeRace: String; EthnieSeule: Boolean): Boolean;
 Var
   Espece: String;
   Res:    Boolean = false;
@@ -87,13 +95,30 @@ Begin
     begin
       if CompareRechercheValeur(PRegleMetier.CodeRace, CodeRace) then
         Res := true
-      else
+      else if not EthnieSeule then
         begin
           Espece := ChercheRace(CodeRace).Espece;
           if (Espece <> '') and CompareRechercheValeur(PRegleMetier.CodeRace, Espece) then
             Res := true;
         end;
     end;
+  Result := Res;
+End;
+
+// La règle a-t-elle au moins une entrée visant précisément cette ethnie ?
+Function RegleCibleEthnie(CodeRegle: String; CodeRace: String): Boolean;
+Var
+  PRegleMetier: StructureRegleMetier;
+  Res:          Boolean = false;
+Begin
+  if (CodeRegle <> '') and (CodeRace <> '') then
+    For PRegleMetier in ListRegleMetier do
+      if CompareRechercheValeur(PRegleMetier.CodeRegle, CodeRegle)
+         and CompareRechercheValeur(PRegleMetier.CodeRace, CodeRace) then
+        begin
+          Res := true;
+          break;
+        end;
   Result := Res;
 End;
 
@@ -107,7 +132,7 @@ Var
 Begin
   if (CodeRegle <> '') and (CodeRace <> '') then
     For PRegleMetier in ListRegleMetier do
-      if RegleMetierApplicable(PRegleMetier, CodeRegle, CodeRace) then
+      if RegleMetierApplicable(PRegleMetier, CodeRegle, CodeRace, false) then
         begin
           Res := true;
           break;

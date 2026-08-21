@@ -1589,18 +1589,78 @@ c'est LEUR table, au même titre que celle du Reiklander. Elle va donc dans leur
   le 07 n'était attribué à personne. Vérifié à l'image. Saisi en 07-10, la table couvre désormais
   01-100 exactement une fois.
 
+**Tests et corrections du 21/08/2026 (tout confirmé par Nono) :**
+
+- ✅ **Les 3 ethnies fonctionnent** : création possible, table norse correcte (31 métiers,
+  Beachcomber 65-66, Artisan 07-10 donc la coquille corrigée, aucun Sorcier), et en choix libre
+  l'accès à TOUT ce qui est humain - exactement ce que décrit le livre, obtenu sans une ligne de
+  code spécifique aux Norses.
+- ✅ **Colonne Norse de la table lustrienne saisie** : 102 entrées (34 métiers x 3 ethnies).
+  La table lustrienne est donc complète : **325 entrées, 8 cibles**, chacune couvrant 01-100
+  exactement une fois. Cette colonne n'a aucune coquille, mais elle était incomplète à
+  l'extraction : les lignes Boatman/Huffer/Seaman portent un appel de note en exposant qui
+  collait au chiffre - d'où les "52-64 manquants" signalés à tort la veille.
+- 🐛 **Bug de précédence trouvé au test** : un Norse recevait la FUSION des colonnes "Old World
+  Human" (qui vise la RACE) et "Norse" (qui vise l'ETHNIE), les deux matchant simultanément.
+  Corrigé par une règle explicite : **l'ethnie prime sur la race**. Nouvelle fonction
+  `RegleCibleEthnie` (`chargeregle.pas`) + paramètre `EthnieSeule` sur `RegleMetierApplicable`,
+  calculé une seule fois avant la boucle dans `ChargeTabMetier`. Ce cas ne pouvait pas se
+  produire avant : il fallait qu'une même règle porte les deux granularités.
+- ✅ **Substitutions Norses** (notes 4-5-6 p.193 de Lustria) : Boatman → Beachcomber, Huffer →
+  son équivalent Seafarer, Seaman → Sailor. 9 entrées `DATA_SPECIE_CAREER_CHOICE` déclarées
+  **dans Sea of Claws**, donc actives seulement si ce livre est chargé - ce qui est exactement la
+  condition posée par les notes ("in Sea of Claws"). Nuance assumée : les notes disent "always
+  substituted" alors que le mécanisme propose un CHOIX entre les deux, conformément à la
+  préférence exprimée par Nono pour Lustria.
+
+**🐛 Découverte majeure : deux mécanismes désactivés depuis toujours.**
+`chargeconstantes.pas` déclarait deux drapeaux globaux, testés mais **jamais affectés nulle
+part** dans le projet :
+
+- `AvecRaceChoixMetier` → gardait `DATA_SPECIE_CAREER_CHOICE`. **La substitution raciale n'avait
+  donc jamais fonctionné**, y compris pour les 16 entrées de Lustria saisies l'avant-veille - on
+  ne l'avait pas vu faute d'avoir testé ce chemin précis. Passé à `true` le 21/08/2026.
+- `AvecSousMetier` → garde `DATA_CAREER_SUBCHOICE` (second jet de dé : Engineer puis, sur 76-100,
+  Artillerist). **Toujours à `false`**, donc les 22 entrées de Up in Arms et 8 de Winds of Magic
+  n'ont jamais rien produit non plus. Volontairement pas activé en même temps, pour ne pas
+  changer le comportement de deux livres d'un coup. Noté dans `A FAIRE.txt`.
+
+**🐛 Piège d'affichage LCL, à connaître pour toute future modification de l'assistant.**
+Le bouton de substitution restait invisible bien que `Visible := true` soit exécuté. Cause :
+`MiseAJourUnContenaire` (`globalfonts.pas`) crée **à l'exécution** un `TShape` en `alClient` sur
+chaque onglet (le fond noir). Créé après les contrôles du concepteur, il se retrouve en fin de
+liste d'enfants, donc dessiné par-dessus. Les `TMemo` y échappent (contrôles fenêtrés), pas les
+`TBCButton`. C'est la raison d'être des nombreux `BringToFront` dans `UpdateSheetMetier` - mais
+celle-ci s'exécute APRES `TabMetierResultat` et ne connaissait pas les deux boutons de
+sous-métier/substitution. Correctif : leur `BringToFront` ajouté en fin d'`UpdateSheetMetier`,
+conditionné à `Visible`. **Ne pas supprimer ces lignes en les croyant redondantes.**
+Fausse piste à ne pas refaire : la superposition avec le mémo n'était PAS en cause - le bouton
+est déclaré après lui dans le `.lfm`, donc il lui passe de toute façon devant.
+
 **🔧 Reste à faire :**
 
-- **Tester les 3 ethnies** (non fait) : elles doivent apparaître dans la fenêtre Races avec R=3
-  pour Sea of Claws, et un Bjornling en tirage aléatoire doit tomber sur la table norse (31
-  métiers, Beachcomber sur 65-66, jamais de Sorcier).
-- **Images des 3 ethnies** : le livre n'offre que **deux** illustrations norses, toutes deux en
-  niveaux de gris (p.47 jarl à la hache runique, plutôt Bjornling/Sarl ; p.55 guerrier masqué très
-  Chaos, plutôt Skaeling) - et aucune n'est un portrait d'ethnie. Les `RACE_*.png` existants sont
-  en couleur, donc le mélange se verrait. Livrées sans image pour l'instant, décision reportée :
-  soit les deux du livre, soit chercher en couleur dans un autre supplément.
-  Nommage attendu : `RACE_HBJOR1.png` / `RACE_HSARL1.png` / `RACE_HSKAE1.png` (sans préfixe de
-  livre - c'est le risque de collision déjà noté dans `A FAIRE.txt`).
+- ~~Images des 3 ethnies~~ **fait (21/08/2026)**. Le livre n'a aucun portrait d'ethnie : le
+  chapitre Norse ne contient que trois illustrations exploitables, le reste étant des fonds de
+  parchemin. Attribuées ainsi, sur critère thématique validé par Nono :
+  `RACE_HBJOR1.png` = jarl à la hache runique (p.47, le plus « noble »),
+  `RACE_HSARL1.png` = guerrier masqué (p.55),
+  `RACE_HSKAE1.png` = guerrière rousse au crâne (p.57) - la seule EN COULEUR, et la plus
+  marquée par le Chaos, ce qui colle au culte de Khorne des Skaeling.
+  Position de Nono, à garder en tête pour les prochains imports : *« j'aime avoir un visuel, tant
+  pis s'il n'est pas 100% fidèle »* - donc une illustration approchante vaut mieux qu'une case
+  vide, tant que le choix est documenté.
+  Traitement appliqué : détourage du fond blanc par propagation depuis les bords (celle de la
+  p.55 avait déjà son masque), recadrage sur le contenu, hauteur ramenée à **530 px** - celle des
+  `RACE_*.png` existants, relevée sur `RACE_DELF1.png` (365x530, RGBA, fond transparent). Les
+  livrer déjà transparentes évite au programme de refaire le calcul via
+  `RemplacerPixelParTransparent`, à l'origine du « ça boucle » sur l'Interprète de Lustria.
+  Deux écarts assumés : `RACE_HSKAE1` est en couleur quand les deux autres sont en niveaux de
+  gris, et elle conserve son décor peint au lieu d'être détourée comme les autres portraits.
+  Nommage sans préfixe de livre (`RACE_HBJOR1.png`), conforme à la convention - donc exposé au
+  risque de collision entre livres déjà noté dans `A FAIRE.txt`.
+  **Piège d'extraction à retenir** : la meilleure des trois n'a **pas** de soft-mask associé,
+  contrairement aux figures détourées. Un filtre « image RGB + smask » la ratait complètement -
+  c'est Nono qui l'a repérée en feuilletant le PDF.
 - **Colonne Norse de la table lustrienne** : maintenant possible. Attention, elle devra cibler les
   **trois ethnies** et non la race - « Old World Human » et « Norse » sont deux colonnes distinctes
   d'une même race, premier cas où la granularité race est trop grossière.

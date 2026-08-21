@@ -210,10 +210,9 @@
         <HasResources Value="True"/>
         <ResourceBaseClass Value="Form"/>
         <UnitName Value="WinCreation"/>
-        <IsVisibleTab Value="True"/>
         <EditorIndex Value="3"/>
         <TopLine Value="2989"/>
-        <CursorPos X="39" Y="2998"/>
+        <CursorPos X="37" Y="3000"/>
         <UsageCount Value="200"/>
         <Loaded Value="True"/>
         <LoadedDesigner Value="True"/>
@@ -1219,9 +1218,10 @@
       <Unit>
         <Filename Value="chargeregle.pas"/>
         <UnitName Value="ChargeRegle"/>
+        <IsVisibleTab Value="True"/>
         <EditorIndex Value="2"/>
         <TopLine Value="50"/>
-        <CursorPos X="30" Y="58"/>
+        <CursorPos X="33" Y="65"/>
         <UsageCount Value="10"/>
         <Loaded Value="True"/>
       </Unit>

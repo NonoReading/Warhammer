@@ -476,8 +476,17 @@ Var
 
   ValLangue:               String = ConstAnglais;
 
+  // Deux interrupteurs jamais affectés ailleurs dans le projet : declarés, testés, mais
+  // laissés à false, ce qui désactivait silencieusement les mécanismes correspondants.
+  //  - AvecSousMetier      -> DATA_CAREER_SUBCHOICE (second jet de dé pour un sous-métier),
+  //                           chargemetiersousmetier.pas. TOUJOURS DESACTIVE, non testé.
+  //  - AvecRaceChoixMetier -> DATA_SPECIE_CAREER_CHOICE (substitution d'un métier par un
+  //                           autre selon l'ethnie), chargemetierracechoixmetier.pas.
+  //                           Activé le 21/08/2026 : les entrées existaient depuis Lustria
+  //                           mais n'avaient jamais rien produit (repéré par Nono en testant
+  //                           la substitution Boatman -> Beachcomber des Norses).
   AvecSousMetier:          Boolean = false;
-  AvecRaceChoixMetier:     Boolean = false;
+  AvecRaceChoixMetier:     Boolean = true;
 
   ConstPoliceNom:          String = 'Arial.ttf';
   ConstPoliceGras:         String = ' Bold';

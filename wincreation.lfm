@@ -481,14 +481,14 @@ object WinCreations: TWinCreations
     Height = 858
     Top = 8
     Width = 1015
-    ActivePage = TabSheetMetier
+    ActivePage = TabSheetTalent
     Anchors = [akTop, akLeft, akRight, akBottom]
     Font.CharSet = ANSI_CHARSET
     Font.Color = clWhite
     Font.Pitch = fpVariable
     Font.Quality = fqDraft
     ParentFont = False
-    TabIndex = 1
+    TabIndex = 3
     TabOrder = 5
     OnChange = PageEtapesChange
     object TabSheetRace: TTabSheet
@@ -1394,7 +1394,7 @@ object WinCreations: TWinCreations
       object ButtonMetierSousMetierSelectionner: TBCButton
         Left = 496
         Height = 45
-        Top = 520
+        Top = 240
         Width = 256
         StateClicked.Background.Gradient1.StartColor = 8404992
         StateClicked.Background.Gradient1.EndColor = 4194304
