@@ -92,6 +92,7 @@ type
     TabSheetCompMetier: TTabSheet;
     TabSheetCompRace: TTabSheet;
     TabSheetEquipement: TTabSheet;
+    TabSheetLivre: TTabSheet;
     TabSheetMetier: TTabSheet;
     TabSheetNom: TTabSheet;
     TabSheetRace: TTabSheet;
@@ -244,7 +245,11 @@ type
 
 Const
   PhaseDebut = 0;
-  PhaseMax   = 7;
+  // 9 étapes depuis le 21/08/2026 : le choix des livres est devenu l'étape 0, avant l'ethnie
+  // (idée de Nono, CONTEXT.md §2.14). Ajouter une étape demande de toucher, dans l'ordre :
+  // PhaseMax, ListPhase (ChargerImage), les deux case de PageEtapesChange et PhaseSave, et
+  // l'ordre des TTabSheet dans le .lfm - rien d'autre ne code un numéro d'étape en dur.
+  PhaseMax   = 8;
 
 var
   WinCreations:                  TWinCreations;
@@ -629,6 +634,7 @@ procedure TWinCreations.ChargerImage();
   begin
   // PHASES
     ListPhase := TStringList.Create;
+    ListPhase.Add(GetTexteLibelle('LAB_173'));   // étape 0 : choix des livres
     ListPhase.Add(GetTexteLibelle('LAB_026'));
     ListPhase.Add(GetTexteLibelle('LAB_027'));
     ListPhase.Add(GetTexteLibelle('LAB_028'));
@@ -953,8 +959,21 @@ procedure TWinCreations.PhaseSave(NouvellePhase: Integer);
     PRace:                 StructureRace;
   Begin
     // supprimer les éléments des phases suivants
+    // NouvellePhase est la phase où l'on ARRIVE : chaque branche enregistre donc le résultat de
+    // la phase précédente et efface ce qui vient après.
     case NouvellePhase of
-      1: Begin         // Race
+      1: Begin         // Livres
+           // Le choix des livres vient d'être quitté. Rien à enregistrer ici : LivresPersonnages
+           // est déjà tenu à jour par TabLivreDblClick, et il n'est recopié dans le personnage
+           // qu'à la sauvegarde finale (phase 9).
+           //
+           // Pas d'invalidation à prévoir non plus : la création n'avance que vers l'avant
+           // (ButtonPhaseSuivante -> ChangementPhase(ConstSuivant), il n'existe aucun bouton
+           // retour, et les onglets des autres phases sont TabVisible=False). Le jour où un
+           // retour arrière existera, c'est ici qu'il faudra tout remettre à zéro.
+         end;
+
+      2: Begin         // Race
            Personnage.Race                              := RaceEnCours;
            Personnage.CreationAttribut                  := [];
            Personnage.CreationCompetence35              := [];
@@ -967,7 +986,7 @@ procedure TWinCreations.PhaseSave(NouvellePhase: Integer);
            ChargeTabMetier();
          end;
 
-      2: begin         // Métier
+      3: begin         // Métier
            PersonnageMetier.CodeMetier   := MetierEnCours;
            PersonnageMetier.NiveauMetier := 1;
            PersonnageMetier.CoutXp       := 0;
@@ -975,7 +994,7 @@ procedure TWinCreations.PhaseSave(NouvellePhase: Integer);
            Personnage.MetierAncien       += [PersonnageMetier];
          end;
 
-      3: begin         // Attribut
+      4: begin         // Attribut
            For IndTab := 1 to (TabAttribut.Rowcount-1) do
              begin
                if TabAttribut.Cells[5, IndTab] <> '' then
@@ -990,7 +1009,7 @@ procedure TWinCreations.PhaseSave(NouvellePhase: Integer);
            RecapAttribut.visible := true;
          end;
 
-      4: Begin         // Talents
+      5: Begin         // Talents
             AjouteTalentsResolus();
             for IndTab := 1 to (TabTalent.RowCount-1) do
               begin
@@ -1012,7 +1031,7 @@ procedure TWinCreations.PhaseSave(NouvellePhase: Integer);
             RecapTalent.visible := true;
          end;
 
-      5: Begin         // Compétences de race
+      6: Begin         // Compétences de race
            Prace := chercheRace(RaceEnCours);
            for IndTab := 1 to TabRaceCompetence.RowCount - 1 do
              begin
@@ -1044,7 +1063,7 @@ procedure TWinCreations.PhaseSave(NouvellePhase: Integer);
            RecapComp.visible := true;
          end;
 
-      6: Begin         // Compétences des métier
+      7: Begin         // Compétences des métier
            DebMetierRec := NbRaceComp;
            for IndTab := 1 to TabMetierCompetence.RowCount - 1 do
              begin
@@ -1096,7 +1115,7 @@ procedure TWinCreations.PhaseSave(NouvellePhase: Integer);
                 end;
          end;
 
-      7: Begin
+      8: Begin         // Équipements
            for IndTab := 1 to TabMetierEquipement.RowCount - 1 do
              begin
                PersonnageEquipement.CodeEquipement          := TabMetierEquipement.Cells[1, IndTab];
@@ -1105,7 +1124,7 @@ procedure TWinCreations.PhaseSave(NouvellePhase: Integer);
              end;
          end;
 
-      8: Begin         // sauvegarde du personnage
+      9: Begin         // sauvegarde du personnage
            Xp := XmlCalculXp();
            Personnage.LivresAcceptes:=LivresPersonnages;
            directoryPath := GetCurrentDir+ConstCheminPersonnage+EditNomPersonnag.text;
@@ -1425,7 +1444,20 @@ Function TWinCreations.PageEtapesChange(): boolean;
     Ok:                 Boolean;
   begin
        case PhaseEnCours of
-        0:   // choix de la race
+        0:   // choix des livres
+         begin
+           // Au moins un livre doit rester coché : LivresPersonnages part de LivresCharges
+           // (les livres actifs du menu principal), le joueur ne fait qu'en retirer.
+           if LivresPersonnages = '' then
+              begin
+                 ShowMessage(GetTexteLibelle('MESS_056'));
+                 Result := False;
+              end
+           else
+                 Result := true;
+         end;
+
+        1:   // choix de la race
          begin
            if RaceEnCours = '' then
               begin
@@ -1436,7 +1468,7 @@ Function TWinCreations.PageEtapesChange(): boolean;
                  Result := true;
          end;
 
-         1:  // choix du métier
+         2:  // choix du métier
           begin
             if MetierEnCours = '' then
                begin
@@ -1447,7 +1479,7 @@ Function TWinCreations.PageEtapesChange(): boolean;
                   Result := true;
           end;
 
-         2:  // choix des attributs
+         3:  // choix des attributs
           Begin
             Vide  := 0;
             for IndTab := 1 to 10 do
@@ -1463,7 +1495,7 @@ Function TWinCreations.PageEtapesChange(): boolean;
                  Result := true;
           end;
 
-         3:  // choix des talents
+         4:  // choix des talents
                    begin
                      Ok := True;
                      if not ChoixCreationComplet() then
@@ -1474,7 +1506,7 @@ Function TWinCreations.PageEtapesChange(): boolean;
                      result := Ok;
                    end;
 
-         4:  // choix des compétences de race
+         5:  // choix des compétences de race
           Begin
             Ok := True;
             if (NbCinq <> 3) and (Ok) then
@@ -1490,7 +1522,7 @@ Function TWinCreations.PageEtapesChange(): boolean;
             result := Ok;
           end;
 
-         5:  // choix des compétences de métier
+         6:  // choix des compétences de métier
           begin
             Ok := True;
             if TotalMetierCompetence <> 40 then
@@ -1507,7 +1539,7 @@ Function TWinCreations.PageEtapesChange(): boolean;
             result := Ok;
           end;
 
-         6:   // Choix des équipements
+         7:   // Choix des équipements
           begin
             Ok := True;
             for IndTab := 1 to TabMetierEquipement.RowCount - 1 do
@@ -1520,7 +1552,7 @@ Function TWinCreations.PageEtapesChange(): boolean;
             result := Ok;
           end;
 
-         7:  // choix du nom de personnage
+         8:  // choix du nom de personnage
           begin
             Ok := True;
             if EditNomPersonnag.text = '' then

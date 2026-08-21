@@ -431,3 +431,17 @@ PDF Personnage (PRIORITAIRE) :
   trouvent rien : les champs entiers du record valent alors n'importe quoi. Les appelants doivent
   tester RechercheTrouve. warhammersource.pas ligne 973 lit PLivre.Officiel sans garde ; le cas est
   reel (ecran des armures, livre non charge). Signale le 21/08/2026, non corrige.
+
+- Retirer le prefixe "Phase N sur M - " du texte des libelles d'etapes de la creation
+  (LAB_173 puis LAB_026..LAB_033, dans les deux Rulebooks). Le numero est deja calcule par le code
+  (TabSheet.Caption := IntToStr(i+1)+' sur '+IntToStr(PhaseMax+1)) : le garder en dur dans le texte
+  oblige a reecrire 9 libelles x 2 livres a chaque etape ajoutee - fait le 21/08/2026 en passant de
+  8 a 9 etapes. Si on le retire, il faudra composer le libelle affiche sur ButtonLibellePhase
+  (aujourd'hui ButtonLibellePhase.Caption := ListPhase[i]) pour ne pas perdre le numero a l'ecran.
+
+- Gel de TabLivre devenu inutile : UpdateSheetRace fait encore
+  TabLivre.Enabled := (not RadioButtonRaceHasard.Checked and not RadioButtonRaceResultat.Checked
+  and not RadioButtonRaceChoix.Checked), heritage de l'epoque ou le tableau des livres vivait sur
+  l'onglet de l'ethnie. Depuis le 21/08/2026 il est sur son propre onglet (etape 0) et la navigation
+  est unidirectionnelle. A retirer, avec ComboRaceCreation.Enabled qui est sur la meme ligne et qui,
+  lui, garde peut-etre un sens.

@@ -1825,11 +1825,73 @@ n'importe quoi. D'où le passage par `RechercheTrouve` ci-dessus. Le cas est ré
 affiche le livre d'une armure même si ce livre n'est pas chargé), et `warhammersource.pas` ligne 973
 lit `PLivre.Officiel` sans garde.
 
-**Reste ouvert.** L'écran de choix des livres avant l'étape 1 n'est pas fait — c'est la motivation
-d'origine, et le terrain est maintenant propre pour l'aborder. Autre point en attente : le garde-fou
-sur la boucle de sauvegarde des `LivresAcceptes` dans `winpersonnage.pas`
-(`if TabLivre.Cells[3, Ind] <> ''`), qui expliquerait le « livre vide » ajouté à l'enregistrement
-dont Nono se souvient — proposé, pas encore validé.
+**Reste ouvert.** Le garde-fou sur la boucle de sauvegarde des `LivresAcceptes` dans
+`winpersonnage.pas` (`if TabLivre.Cells[3, Ind] <> ''`), qui expliquerait le « livre vide » ajouté à
+l'enregistrement dont Nono se souvient — proposé, pas encore validé. L'écran de choix des livres,
+motivation d'origine du chantier, a démarré sur ce terrain nettoyé : §2.14.
+
+---
+
+### 2.14 Choix des livres à la création — écran terminé (21/08/2026), filtrage à faire
+
+**Idée de Nono**, formulée pendant §2.13 : ajouter, avant l'étape 1 de la création, un choix des
+livres affichant ceux qui sont actifs par défaut — avec la crainte explicite des contrecoups.
+
+**Ce qui existait déjà** (la moitié du chantier, trouvé en creusant avant de coder) :
+
+- `TabLivre` vivait déjà **dans WinCreation**, posée sur `TabSheetRace`, avec son `TabLivreDblClick`
+  qui reconstruit `LivresPersonnages` à chaque bascule ;
+- `LivresPersonnages := LivresCharges` au démarrage (ligne 438) : les livres actifs du menu principal
+  arrivent **pré-cochés**, exactement ce que Nono décrivait, sans rien à coder ;
+- `Personnage.LivresAcceptes := LivresPersonnages` à la sauvegarde finale.
+
+**Découverte qui a simplifié le reste : la création n'avance que vers l'avant.** Il n'existe aucun
+bouton retour (`ButtonPhaseSuivante` → `ChangementPhase(ConstSuivant)` est le seul appel utilisateur)
+et les onglets des autres phases sont `TabVisible = False`. Donc **aucune invalidation à écrire** :
+on ne peut pas revenir décocher un livre après avoir choisi une ethnie.
+
+**Le contrecoût, mesuré avant de toucher quoi que ce soit.** `PhaseEnCours` n'apparaît qu'à 8
+endroits, tous dans la navigation — aucun autre bout de code ne code un numéro d'étape en dur.
+Ajouter une étape se réduit donc à 5 points, notés en commentaire au-dessus de `PhaseMax` :
+
+1. `PhaseMax` (7 → 8) ;
+2. `ListPhase` dans `ChargerImage` (un libellé de plus, en tête) ;
+3. le `case PhaseEnCours` de `PageEtapesChange()` — validation avant de quitter une étape ;
+4. le `case NouvellePhase` de `PhaseSave()` — **`NouvellePhase` est l'étape où l'on ARRIVE**, chaque
+   branche enregistre donc le résultat de la précédente et efface ce qui suit ;
+5. l'ordre des `TTabSheet` dans le `.lfm`.
+
+**Réalisé.** `TabSheetLivre` insérée en première page de `PageEtapes` avec `TabLivre` et `LabLivre`
+déplacés depuis `TabSheetRace` ; les deux `case` décalés d'un cran ; nouvelle branche `0:` dans
+`PageEtapesChange` qui refuse d'avancer si plus aucun livre n'est coché (`MESS_056`) ; nouvelle
+branche `1:` dans `PhaseSave`, vide et commentée.
+
+⚠️ **Les libellés de phase portaient leur numéro en dur** : `LAB_026` valait littéralement
+« Phase 1 sur 8 - Choix de la Race ». Les 8 ont dû être réécrits en « sur 9 », plus `LAB_173` créé
+pour la nouvelle étape. Le numéro est pourtant déjà calculé ailleurs
+(`TabSheet.Caption := IntToStr(i+1)+' sur '+IntToStr(PhaseMax+1)`) : à terme, retirer le préfixe des
+libellés éviterait de renuméroter 8 textes × 2 livres à chaque étape ajoutée (dans `A FAIRE.txt`).
+
+**Le gel de `TabLivre`** (`UpdateSheetRace`, ligne ~1858 : `TabLivre.Enabled := not
+RadioButtonRace*.Checked`) est resté en place. Il ne sert plus à rien puisque le tableau n'est plus
+sur l'onglet de l'ethnie et que la navigation est unidirectionnelle, mais le retirer aurait été une
+modification de plus.
+
+#### En cours : le filtrage
+
+C'est ici que se trouve la vraie valeur, et rien n'est fait. **`LivresPersonnages` n'est passé qu'à
+4 endroits** — `ResultMetierSousMetier`, `TexteMetierSousMetier`, `TexteMetierRaceChoixMetier`,
+`ResultMetierRaceChoixMetier`. Ni la liste des ethnies, ni celle des métiers, ni les talents,
+compétences ou équipements ne le regardent : **décocher un livre ne change presque rien à l'écran.**
+
+Le filtrage se fait à l'usage sur le champ `.Livre`, présent sur tous les records — pas de
+rechargement. À traiter liste par liste, chacune testable séparément.
+
+Point particulier repéré : `ComboRaceCreation` (ligne 1597, `ChargeTabRaces`) choisit **de quel livre
+on prend la table de tirage des ethnies**, se remplit depuis `ListRaceCreation` et ignore
+`LivresPersonnages` — on peut donc prendre la table d'un livre qu'on vient de décocher. Deux widgets
+de livres au sens différent cohabitaient sur l'étape 1 ; ils sont maintenant séparés (les cases sur
+l'étape 0, la combo sur l'étape de l'ethnie), mais la combo reste à filtrer.
 
 ---
 

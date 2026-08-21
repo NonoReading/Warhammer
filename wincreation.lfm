@@ -491,6 +491,36 @@ object WinCreations: TWinCreations
     TabIndex = 3
     TabOrder = 5
     OnChange = PageEtapesChange
+    object TabSheetLivre: TTabSheet
+      Caption = 'Livre'
+      ClientHeight = 825
+      ClientWidth = 1007
+      object TabLivre: TStringGrid
+        Left = 8
+        Height = 772
+        Top = 48
+        Width = 394
+        Anchors = [akTop, akLeft, akBottom]
+        ColCount = 1
+        Font.CharSet = ANSI_CHARSET
+        Font.Color = clBlack
+        Font.Pitch = fpVariable
+        Font.Quality = fqDraft
+        ParentFont = False
+        TabOrder = 5
+        OnDblClick = TabLivreDblClick
+      end
+      object LabLivre: TEdit
+        Left = 8
+        Height = 28
+        Top = 8
+        Width = 392
+        Alignment = taCenter
+        Enabled = False
+        TabOrder = 6
+        Text = 'Points supplémentaires'
+      end
+    end
     object TabSheetRace: TTabSheet
       Caption = 'Race'
       ClientHeight = 825
@@ -867,31 +897,6 @@ object WinCreations: TWinCreations
         Enabled = False
         TabOrder = 4
         Text = 'Regle'
-      end
-      object TabLivre: TStringGrid
-        Left = 8
-        Height = 772
-        Top = 48
-        Width = 394
-        Anchors = [akTop, akLeft, akBottom]
-        ColCount = 1
-        Font.CharSet = ANSI_CHARSET
-        Font.Color = clBlack
-        Font.Pitch = fpVariable
-        Font.Quality = fqDraft
-        ParentFont = False
-        TabOrder = 5
-        OnDblClick = TabLivreDblClick
-      end
-      object LabLivre: TEdit
-        Left = 8
-        Height = 28
-        Top = 8
-        Width = 392
-        Alignment = taCenter
-        Enabled = False
-        TabOrder = 6
-        Text = 'Points supplémentaires'
       end
     end
     object TabSheetMetier: TTabSheet

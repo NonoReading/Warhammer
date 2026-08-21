@@ -502,8 +502,8 @@
         <UnitName Value="XmlExportImport"/>
         <IsVisibleTab Value="True"/>
         <EditorIndex Value="4"/>
-        <TopLine Value="1016"/>
-        <CursorPos X="31" Y="1030"/>
+        <TopLine Value="1018"/>
+        <CursorPos X="29" Y="1032"/>
         <UsageCount Value="200"/>
         <Loaded Value="True"/>
       </Unit>
