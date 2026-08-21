@@ -976,7 +976,7 @@ object WinCreations: TWinCreations
         Width = 280
         Anchors = [akTop, akLeft, akBottom]
         ColCount = 1
-        Enabled = False
+        Enabled = True
         TabOrder = 1
         OnDrawCell = TabMetierDrawCell
         OnPrepareCanvas = TabMetierPrepareCanvas

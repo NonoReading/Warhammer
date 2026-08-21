@@ -689,8 +689,12 @@ procedure TWinCreations.ChargerImage();
 
   // 2 - METIER
     // Mise en forme du tableau de choix des Metiers
-    TabMetier.Options          := TabMetier.Options + [goEditing, goAlwaysShowEditor];
-    TabMetier.ColCount         := 5;
+    // Grille de consultation : activée pour que l'ascenseur et la molette répondent
+    // (un contrôle désactivé n'accepte aucune souris), mais SANS les options d'édition -
+    // c'est ce que le Enabled=False d'origine cherchait à empêcher. TabMetierDrawCell
+    // continue de peindre les cellules lui-même, l'aspect ne change donc pas.
+    TabMetier.Options          := TabMetier.Options - [goEditing, goAlwaysShowEditor];
+    TabMetier.ColCount         := 6;
     TabMetier.RowCount         := 1;
     TabMetier.ColWidths[0]     := 30;
     TabMetier.Cells[1, 0]      := GetTexteLibelle('LAB_006');
@@ -701,6 +705,8 @@ procedure TWinCreations.ChargerImage();
     TabMetier.ColWidths[3]     := 80;
     TabMetier.Cells[4, 0]      := 'Sel';
     TabMetier.ColWidths[4]     := 0;
+    TabMetier.Cells[5, 0]      := 'Tri';   // clé de tri sur la valeur de début, colonne masquée
+    TabMetier.ColWidths[5]     := 0;
 
   // 3 - ATTRIBUTS
     // Mise en forme du tableau de choix des Attributs
@@ -1919,9 +1925,28 @@ Procedure TWinCreations.ChargeTabMetier();
     PRegleMetier:  StructureRegleMetier;
     Regle:         String;
     EthnieSeule:   Boolean;
+    Couvert:       Array[1..100] of Boolean;
+    Deb, Fin, Ind: Integer;
+    Chevauche:     Boolean;
+
+  Procedure AjouteLigne(Code, Lib, Ch: String);
+    var
+      D, F: Integer;
+    begin
+      DebutFin(Ch, D, F);
+      Inc(IndTabMetier);
+      TabMetier.RowCount  := TabMetier.RowCount + 1;
+      TabMetier.Cells[1, IndTabMetier] := Code;
+      TabMetier.Cells[2, IndTabMetier] := Lib;
+      TabMetier.Cells[3, IndTabMetier] := Ch;
+      TabMetier.Cells[5, IndTabMetier] := Format('%.3d', [D]);
+    end;
+
   Begin
     IndTabMetier        := 0;
     TabMetier.RowCount  := 1;
+    For Ind := 1 to 100 do
+      Couvert[Ind] := false;
 
     // Une règle qui ne couvre pas cette ethnie (pas de colonne Gnome, Ogre... dans la
     // table lustrienne) laisse la table de tirage par défaut s'appliquer.
@@ -1929,6 +1954,7 @@ Procedure TWinCreations.ChargeTabMetier();
     if not RegleCouvreRace(Regle, RaceEnCours) then
       Regle := '';
 
+    // 1) les entrées de la règle, en notant les valeurs de dé qu'elles occupent
     if Regle <> '' then
       begin
         // calculé une seule fois : l'ethnie prime sur la race (voir ChargeRegle.pas)
@@ -1937,24 +1963,40 @@ Procedure TWinCreations.ChargeTabMetier();
           if RegleMetierApplicable(PRegleMetier, Regle, RaceEnCours, EthnieSeule) and (PRegleMetier.Chance <> SeparateurChance) and (PRegleMetier.Chance <> 'X') then
             begin
               PMetier := ChercheMetier(PRegleMetier.CodeMetier);
-              Inc(IndTabMetier);
-              TabMetier.RowCount  := TabMetier.RowCount + 1;
-              TabMetier.Cells[1, IndTabMetier] := PMetier.CodeMetier;
-              TabMetier.Cells[2, IndTabMetier] := PMetier.Libelle;
-              TabMetier.Cells[3, IndTabMetier] := PRegleMetier.Chance;
+              AjouteLigne(PMetier.CodeMetier, PMetier.Libelle, PRegleMetier.Chance);
+              DebutFin(PRegleMetier.Chance, Deb, Fin);
+              For Ind := Deb to Fin do
+                if (Ind >= 1) and (Ind <= 100) then
+                  Couvert[Ind] := true;
             end;
-      end
-    else
-      For PRaceMetier in ListRaceMetier do
-        if CompareRechercheValeur(PRaceMetier.CodeRace, RaceEnCours) and (PRaceMetier.Chance <> SeparateurChance) and (PRaceMetier.Chance <> 'X') then //and (PRaceMetier.Livre = ConstRulesBook) then
-          begin
+      end;
+
+    // 2) la table de base complète les valeurs de dé restées libres.
+    // C'est ce qui distingue une règle TOTALE d'une règle PARTIELLE, sans avoir à le
+    // déclarer : la table lustrienne couvre 01-100, donc rien n'est ajouté ici ; la table
+    // Seafarer (Sea of Claws p.63) ne remplace que la section Riverfolk, donc le reste de
+    // la table de base subsiste. Sans règle, Couvert est vide et tout est repris - le
+    // comportement d'origine.
+    For PRaceMetier in ListRaceMetier do
+      if CompareRechercheValeur(PRaceMetier.CodeRace, RaceEnCours) and (PRaceMetier.Chance <> SeparateurChance) and (PRaceMetier.Chance <> 'X') then
+        begin
+          DebutFin(PRaceMetier.Chance, Deb, Fin);
+          Chevauche := false;
+          For Ind := Deb to Fin do
+            if (Ind >= 1) and (Ind <= 100) and Couvert[Ind] then
+              Chevauche := true;
+          if not Chevauche then
+            begin
               PMetier := ChercheMetier(PRaceMetier.CodeMetier);
-              Inc(IndTabMetier);
-              TabMetier.RowCount  := TabMetier.RowCount + 1;
-              TabMetier.Cells[1, IndTabMetier] := PMetier.CodeMetier;
-              TabMetier.Cells[2, IndTabMetier] := PMetier.Libelle;
-              TabMetier.Cells[3, IndTabMetier] := PRAceMetier.Chance;
-          end;
+              AjouteLigne(PMetier.CodeMetier, PMetier.Libelle, PRaceMetier.Chance);
+            end;
+        end;
+
+    // remise en ordre de dé : après fusion, les entrées de la règle et celles de la table
+    // de base sont entrelacées. Tri sur la colonne masquée 5 (début zéro-comblé sur 3
+    // chiffres, pour que 100 se classe bien après 96 en comparaison texte).
+    if IndTabMetier > 1 then
+      TabMetier.SortColRow(true, 5);
 
     AdjustGridColumnsWidth(TabMetier, PageEtapes.Height, false, false);
   end;

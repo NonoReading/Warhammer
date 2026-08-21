@@ -1543,7 +1543,7 @@ confirmé par Nono.
 
 ---
 
-### 2.12 Norse & classe Seafarer (Sea of Claws) — en cours (21/08/2026)
+### 2.12 Norse & classe Seafarer (Sea of Claws) — terminé (21/08/2026)
 
 Suite de §2.11 : la colonne « Norse » de la table lustrienne ne pouvait pas être saisie faute de
 race Norse en base. En ouvrant Sea of Claws (`Sea of Claws.pdf`, à la racine du projet), le
@@ -1661,16 +1661,49 @@ est déclaré après lui dans le `.lfm`, donc il lui passe de toute façon devan
   **Piège d'extraction à retenir** : la meilleure des trois n'a **pas** de soft-mask associé,
   contrairement aux figures détourées. Un filtre « image RGB + smask » la ratait complètement -
   c'est Nono qui l'a repérée en feuilletant le PDF.
-- **Colonne Norse de la table lustrienne** : maintenant possible. Attention, elle devra cibler les
-  **trois ethnies** et non la race - « Old World Human » et « Norse » sont deux colonnes distinctes
-  d'une même race, premier cas où la granularité race est trop grossière.
-- **Table Seafarer (p.63) comme règle optionnelle** : c'est une substitution **partielle** (elle
-  ne remplace que la section Riverfolk, et le joueur choisit avant de lancer), alors que
-  `DATA_CAREER_ROLL` ne sait faire que du remplacement total. Deux pistes : soit la règle
-  redéclare la table entière (~350 entrées), soit on ajoute la notion de remplacement partiel.
-  À concevoir. Un trou repéré au passage, à vérifier à l'image : colonne Humain, le **68** n'est
-  attribué à personne (Sailor-Priest 67, puis Sailor 69-71).
 - Le PDF `Sea of Claws.pdf` est à la racine du projet, comme `Lustria.pdf`.
+
+**✅ Règles PARTIELLES & table Seafarer — fait et confirmé (21/08/2026).**
+
+Le problème : `DATA_CAREER_ROLL` ne savait faire qu'un remplacement TOTAL, alors que la table
+Seafarer (p.63) ne remplace que la **section Riverfolk** de la table de base, le joueur choisissant
+avant de lancer. Constat qui a débloqué la conception : les fourchettes Seafarer coïncident
+**exactement** avec la section Riverfolk de chaque race (Humain 61-74, Nain 68-78, Halfling 69-82,
+Haut Elfe 64-80, Elfe Sylvain 79). C'est donc un remplacement de section au dé près.
+
+**Solution : le caractère partiel n'est jamais déclaré, il se DÉDUIT de la couverture.**
+`ChargeTabMetier` a été réécrite et ses deux branches ont fusionné en un seul enchaînement :
+(1) ajouter les entrées de la règle en marquant les valeurs de dé qu'elles occupent ;
+(2) compléter avec la table de base, en écartant toute entrée qui empiète sur ces valeurs.
+Lustria couvre 01-100 → rien ne s'ajoute (comportement inchangé) ; Seafarer ne couvre que la
+section Riverfolk → le reste subsiste ; sans règle, rien n'est marqué → tout est repris. **Le
+comportement d'origine est devenu un cas particulier du nouveau, sans syntaxe supplémentaire.**
+Ajout d'une colonne masquée n°5 dans `TabMetier` (début zéro-comblé sur 3 chiffres) pour retrier
+après fusion - sinon les entrées arrivent entrelacées, et un tri texte classerait « 100 » avant
+« 96 ».
+
+**Ciblage : par ETHNIE pour la colonne Human.** La section Riverfolk n'est pas au même endroit
+selon l'ethnie humaine (Reikland et Tilée 61-74, Middenheimer 66-68, Middenlander 59-72,
+Nordlander 57-73, Norses aucune). La colonne « Human » vaut 61-74 : elle vise donc explicitement
+`RULES-RACE_HUM` et `UPINA-RACE_HTIL`, jamais la race. **Les trois ethnies de Middenheim ne sont
+pas couvertes** et gardent leur table de base - le livre ne leur fournit pas de fourchettes.
+Si le besoin apparaît, il faudra leur en calculer.
+
+Vérifié par simulation avant livraison : après fusion, chaque ethnie couverte retombe sur une
+table complète 01-100 sans trou ni doublon (63 métiers pour les Humains, 45 Nain/Halfling,
+37 Haut Elfe, 22 Elfe Sylvain).
+
+**Sixième coquille de livre** : colonne Humain, Sailor-Priest 67 puis Sailor 69-71 - le 68
+n'appartenait à personne. Saisi en 68-71.
+
+**Correctif d'ergonomie (21/08/2026)** : `TabMetier` était `Enabled = False` dans le `.lfm`, ce qui
+la rendait non modifiable... mais bloquait aussi l'ascenseur et la molette, un contrôle désactivé
+n'acceptant aucune souris. Nono ne se souvenait plus du motif ; son commentaire dans
+`TabMetierPrepareCanvas` (« Couleur de fond de l'en-tête désactivé ») l'a retrouvé : la grille
+porte `goEditing`, elle avait donc été désactivée pour empêcher la saisie, puis dotée d'un dessin
+personnalisé pour compenser le grisage. Correctif : `Enabled = True` **et** retrait de
+`[goEditing, goAlwaysShowEditor]` - l'aspect ne bouge pas puisque `TabMetierDrawCell` peint les
+cellules lui-même. **`TabRace` est dans le même cas**, non traité faute de demande.
 
 ---
 
