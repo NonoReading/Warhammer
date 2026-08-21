@@ -3232,7 +3232,11 @@ If you lose, nothing happens other than standard effects for losing an Opposed T
 </Choice>
 <Choice>
 <Career>"RULES-WORK57"</Career>
-<Alternative name="UPINA-WORK68">"71-85"</Alternative>
+<Alternative name="UPINA-WORK68">"76-85"</Alternative>
+  <!-- Handgunner - errata : le livre imprime 71-85 (Up in Arms p.9), ce qui chevauche
+       Halberdier 51-75. Corrigé en 76-85 : sur la même page, un "01-75" enchaîne toujours
+       sur "76-00" (Pedlar, Cavalryman), et l'exemple de Gerd suppose Halberdier à partir
+       de 51. Décision Nono du 21/08/2026. -->
 </Choice>
 <Choice>
 <Career>"RULES-WORK57"</Career>

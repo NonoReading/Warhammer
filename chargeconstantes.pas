@@ -479,13 +479,15 @@ Var
   // Deux interrupteurs jamais affectés ailleurs dans le projet : declarés, testés, mais
   // laissés à false, ce qui désactivait silencieusement les mécanismes correspondants.
   //  - AvecSousMetier      -> DATA_CAREER_SUBCHOICE (second jet de dé pour un sous-métier),
-  //                           chargemetiersousmetier.pas. TOUJOURS DESACTIVE, non testé.
+  //                           chargemetiersousmetier.pas. Activé le 21/08/2026 : 22 entrées
+  //                           dans Up in Arms et 8 dans Winds of Magic, saisies de longue date
+  //                           et jamais utilisées jusque-là.
   //  - AvecRaceChoixMetier -> DATA_SPECIE_CAREER_CHOICE (substitution d'un métier par un
   //                           autre selon l'ethnie), chargemetierracechoixmetier.pas.
   //                           Activé le 21/08/2026 : les entrées existaient depuis Lustria
   //                           mais n'avaient jamais rien produit (repéré par Nono en testant
   //                           la substitution Boatman -> Beachcomber des Norses).
-  AvecSousMetier:          Boolean = false;
+  AvecSousMetier:          Boolean = true;
   AvecRaceChoixMetier:     Boolean = true;
 
   ConstPoliceNom:          String = 'Arial.ttf';

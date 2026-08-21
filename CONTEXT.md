@@ -1620,10 +1620,23 @@ part** dans le projet :
 - `AvecRaceChoixMetier` → gardait `DATA_SPECIE_CAREER_CHOICE`. **La substitution raciale n'avait
   donc jamais fonctionné**, y compris pour les 16 entrées de Lustria saisies l'avant-veille - on
   ne l'avait pas vu faute d'avoir testé ce chemin précis. Passé à `true` le 21/08/2026.
-- `AvecSousMetier` → garde `DATA_CAREER_SUBCHOICE` (second jet de dé : Engineer puis, sur 76-100,
-  Artillerist). **Toujours à `false`**, donc les 22 entrées de Up in Arms et 8 de Winds of Magic
-  n'ont jamais rien produit non plus. Volontairement pas activé en même temps, pour ne pas
-  changer le comportement de deux livres d'un coup. Noté dans `A FAIRE.txt`.
+- `AvecSousMetier` → gardait `DATA_CAREER_SUBCHOICE` (second jet de dé : Engineer puis, sur
+  76-100, Artillerist). Les 22 entrées de Up in Arms et 8 de Winds of Magic n'avaient donc jamais
+  rien produit non plus. **Activé le 21/08/2026**, après vérification des données ; confirmé
+  fonctionnel par Nono sur Cavalryman → Light Cavalryman. Le bouton « Valider » de cette branche
+  bénéficie du même `BringToFront` ajouté pour la substitution raciale, donc il s'est affiché du
+  premier coup.
+  **Septième coquille de livre, trouvée en vérifiant AVANT d'activer** : la table de sous-métiers
+  du Soldat (Up in Arms p.9) donne Halberdier 51-75 puis Handgunner **71**-85, soit 71-75
+  attribués deux fois. Vérifié à l'image : la saisie de Nono était exacte, c'est bien le livre.
+  Particularité de ce cas : **l'arithmétique ne tranchait pas** - corriger l'une ou l'autre borne
+  rendait la table complète. Retenu Handgunner **76**-85, sur deux indices convergents : dans les
+  tableaux voisins de la même page, un "01-75" enchaîne toujours sur "76-00" (Pedlar,
+  Cavalryman) ; et l'exemple travaillé de la page suppose Halberdier à partir de 51.
+  À noter, cet exemple est lui-même fautif ("second roll is 57, so Gerd is an Archer", alors
+  qu'Archer est 41-50) - possible trace d'un remaniement de la table en cours de rédaction, mais
+  reconstituer la version d'origine aurait été de la spéculation : seul le chevauchement, défaut
+  certain, a été corrigé.
 
 **🐛 Piège d'affichage LCL, à connaître pour toute future modification de l'assistant.**
 Le bouton de substitution restait invisible bien que `Visible := true` soit exécuté. Cause :

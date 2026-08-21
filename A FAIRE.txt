@@ -377,16 +377,32 @@ PDF Personnage (PRIORITAIRE) :
   DATA_SKILL_SPECIALIZATION et DATA_CAREER_SUBCHOICE, non déclenchés aujourd'hui faute de
   commentaires à ces endroits. Correctif connu et mécanique : if NodeNv2.NodeName = <balise
   attendue> then, plus remise à zéro de l'enregistrement avant lecture.
-
-- (repéré le 21/08/2026, pas commencé) Activer `AvecSousMetier` (chargeconstantes.pas). Ce
-  drapeau global est déclaré, testé deux fois dans chargemetiersousmetier.pas, mais n'est
-  affecté NULLE PART dans le projet : il vaut donc false depuis toujours, ce qui désactive
-  silencieusement tout le mécanisme `DATA_CAREER_SUBCHOICE` - le second jet de dé qui transforme
-  par exemple un Engineer en Artillerist sur 76-100. Les données existent pourtant : 22 entrées
-  dans Up in Arms et 8 dans Winds of Magic, saisies de longue date et jamais utilisées.
-  Son jumeau `AvecRaceChoixMetier` était dans le même cas et a été activé le 21/08/2026 (voir
-  CONTEXT.md §2.12) ; celui-ci ne l'a délibérément pas été en même temps, pour ne pas changer le
-  comportement de deux livres d'un coup sans test. A activer puis vérifier sur un Engineer ou un
-  Knight de Up in Arms (branche `SousM` de TabMetierResultat, avec EditMetierSousMetierResultat
-  et le bouton Valider).
+- (proposé le 21/08/2026, pas commencé, chantier de fond) PASSE DE CONTROLE DE COHERENCE des
+  livres, affichée dans WinLivre à côté des compteurs R et W. Motivation : le modèle de données
+  s'est révélé souple, mais il est SILENCIEUX quand quelque chose est faux - c'est le fil commun
+  de presque tout ce qui a été trouvé les 19-21/08/2026 :
+    * un `<Ethnic>` mal orthographié se résout en chaîne vide, sans message (GetTexteLibelle et
+      ChercheEspece retombent sur leur valeur par défaut) ;
+    * une entrée DATA_SPECIE_CAREER_DIRECT ciblant une RACE restait inerte tant que la phase 1 de
+      CompleteRaceMetierParEspece n'existait pas - chargée sans erreur, mais ne matchant jamais ;
+    * un commentaire XML placé entre deux <Entry> fabriquait une entrée fantôme dupliquant la
+      précédente (corrigé sur 4 blocs récents, le piège subsiste dans les plus anciens) ;
+    * les drapeaux AvecRaceChoixMetier et AvecSousMetier désactivaient des mécanismes entiers
+      sans que rien ne le signale ;
+    * SEPT colonnes de tirage d100 incomplètes dans TROIS livres officiels (Lustria x3, Sea of
+      Claws x2, table Norse x1, Up in Arms x1), détectées uniquement parce qu'on a compté à la
+      main. Le programme les aurait acceptées, et un joueur serait tombé sur aucun métier - ou
+      sur deux, le cas de Up in Arms étant un chevauchement et non un trou.
+  Contrôles à produire (tout est déjà en mémoire après le chargement, c'est de la lecture de
+  listes - aucun mécanisme nouveau) :
+    * référence pendante : tout code cité (métier, race, ethnie, compétence, talent, classe,
+      règle) qui n'existe dans aucun livre chargé ;
+    * granularité : une entrée qui cible une RACE là où seule une ETHNIE est résolue, ou
+      l'inverse, selon le bloc ;
+    * couverture d100 : pour chaque (ethnie, règle), signaler les valeurs de 01 à 100 non
+      couvertes ou couvertes deux fois ;
+    * doublons : deux entrées identiques (même ethnie, même métier) dans un même bloc.
+  Transformerait la discipline actuelle - qui repose sur le fait d'y penser - en garde-fou
+  structurel. Idée née de la remarque de Nono sur la solidité du système : elle est réelle côté
+  modèle, la faiblesse est côté détection d'erreur.
 
