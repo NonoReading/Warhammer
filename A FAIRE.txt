@@ -353,6 +353,18 @@ PDF Personnage (PRIORITAIRE) :
   rangés sous les classes standard) + les notes 3 à 6 de Lustria p.193 qui décrivent des
   substitutions Norse (Boatman -> Beachcomber, Seaman -> Sailor, section Riverfolk remplacée par
   la classe Seafarer).
+  [21/08/2026 : chantier ouvert, voir CONTEXT.md §2.12 - il s'agit en fait de TROIS ethnies
+  Norse (Bjornling, Sarl, Skaeling), et leur table de tirage n'est pas une règle optionnelle mais
+  leur table propre. La classe Seafarer et les 3 ethnies sont saisies ; restent leurs images, la
+  colonne Norse de la table lustrienne, et la table Seafarer comme règle à substitution
+  partielle.]
+  Question ouverte de Nono (20/08/2026), à vérifier au moment de s'y mettre : Middenheim est-il
+  dans le même cas, avec une table de tirage propre qui n'aurait pas été saisie ? Premier
+  élément de réponse relevé le 20/08 : les trois ethnies de Middenheim ont DÉJÀ leur propre
+  distribution de dés dans leur SUBCHAPTER_CAREER (57, 63 et 63 entrées de tirage, différentes
+  de celles du Reiklander), donc leur variation régionale est bien modélisée - mais par le
+  mécanisme historique (une table par ethnie), pas par une règle nommée. A confronter au livre
+  pour voir s'il s'agit bien de la même chose.
 
 - (repéré le 20/08/2026, pas commencé) Refermer le piège des commentaires XML dans les blocs de
   lecture plus anciens de xmlexportimport.pas. La boucle de lecture parcourt TOUS les noeuds

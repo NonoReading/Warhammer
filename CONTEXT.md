@@ -1543,6 +1543,77 @@ confirmé par Nono.
 
 ---
 
+### 2.12 Norse & classe Seafarer (Sea of Claws) — en cours (21/08/2026)
+
+Suite de §2.11 : la colonne « Norse » de la table lustrienne ne pouvait pas être saisie faute de
+race Norse en base. En ouvrant Sea of Claws (`Sea of Claws.pdf`, à la racine du projet), le
+chantier s'est révélé plus large que prévu.
+
+**Découverte 1 — il n'y a pas une race Norse, mais TROIS ethnies** (p.56) : Bjornling, Sarl,
+Skaeling, chacune avec ses propres compétences et talents de départ. Elles se rattachent toutes
+à la race `RULES-SPECIE_HUMAN`, exactement comme Reikland/Tilée/Middenheim.
+
+**Découverte 2 — le livre valide le modèle de §2.10 mot pour mot** (p.57) : *« Whilst Norse
+careers are limited in scope, they count as Humans for the purpose of taking on new careers, so
+whilst a Norse Character may not start their career as a wizard, they do have the potential to
+become a Wizard »*. C'est littéralement table de tirage restreinte + accessibilité de la race
+entière. La propagation (phase 2) fait donc la bonne chose sans rien ajouter.
+
+**Découverte 3 — la table Norse n'est PAS une règle optionnelle.** Première lecture erronée de
+ma part, corrigée : *« Norse Characters may generate starting careers using the table below »* -
+c'est LEUR table, au même titre que celle du Reiklander. Elle va donc dans leur
+`SUBCHAPTER_CAREER` par le mécanisme historique, pas dans un `DATA_RULE`.
+
+**Fait et confirmé par Nono :**
+
+- **Classe `CLASS_SEAF`** (Seafarers). Constat rassurant : rien n'était « oublié » - les 9 métiers
+  de Sea of Claws étaient bien saisis et correctement répartis par race, mais tous en `Chance="X"`,
+  faute de pouvoir exprimer une table de substitution partielle à l'époque. Ajouter une classe ne
+  demande **aucun code** : `StructureMetier.LibelleGroupe` est une simple chaîne, sans table ni
+  validation. Il a fallu (1) un bloc `DATA_LABEL` dans Sea of Claws - **premier supplément à en
+  porter un** - avec « Seafarers » / « Marins », (2) l'icône `PICTURES\NIV\CLASS_SEAF.png`
+  extraite du PDF p.66 et détourée (51x61 RGBA, comme les 8 autres ; c'est le même crâne, teinté
+  par classe), (3) les 9 `<Class>` passés de `CLASS_RIVE` à `CLASS_SEAF`.
+  **`<Class>` reste sans préfixe de livre** alors que le libellé est `SEAOF-CLASS_SEAF` :
+  `pdfmetier.pas` construit le chemin de l'icône avec `LibelleGroupe + '.png'`, un préfixe
+  chercherait un fichier inexistant. Les 8 classes existantes suivent la même règle.
+- **Les 3 ethnies Norse** (`SEAOF-RACE_HBJOR/HSARL/HSKAE`) : caractéristiques de l'Humain (le
+  livre ne remplace que compétences et talents de la p.36 du Rulebook), 12 compétences chacune,
+  talents à choix via la syntaxe `A/B` (vérifié : 18 des 24 références à choix déjà présentes en
+  base n'ont aucune entrée combinée déclarée, donc le `/` est bien interprété à l'exécution), et
+  la table de tirage Norse complète (31 métiers). Trois spécialisations créées au passage :
+  `RULES-COMPSAVOIR_NORSCA`, `RULES-COMPSAVOIR_KHORNE`, `RULES-COMPLANG_GOSPO` (préfixe `RULES-`
+  conservé comme pour `RULES-COMPSIGNES_LIZARD`, ce sont des spécialisations de compétences du
+  Rulebook).
+- **Quatrième coquille de livre corrigée** : table Norse, Agitator 05-06 puis Artisan **08-10**,
+  le 07 n'était attribué à personne. Vérifié à l'image. Saisi en 07-10, la table couvre désormais
+  01-100 exactement une fois.
+
+**🔧 Reste à faire :**
+
+- **Tester les 3 ethnies** (non fait) : elles doivent apparaître dans la fenêtre Races avec R=3
+  pour Sea of Claws, et un Bjornling en tirage aléatoire doit tomber sur la table norse (31
+  métiers, Beachcomber sur 65-66, jamais de Sorcier).
+- **Images des 3 ethnies** : le livre n'offre que **deux** illustrations norses, toutes deux en
+  niveaux de gris (p.47 jarl à la hache runique, plutôt Bjornling/Sarl ; p.55 guerrier masqué très
+  Chaos, plutôt Skaeling) - et aucune n'est un portrait d'ethnie. Les `RACE_*.png` existants sont
+  en couleur, donc le mélange se verrait. Livrées sans image pour l'instant, décision reportée :
+  soit les deux du livre, soit chercher en couleur dans un autre supplément.
+  Nommage attendu : `RACE_HBJOR1.png` / `RACE_HSARL1.png` / `RACE_HSKAE1.png` (sans préfixe de
+  livre - c'est le risque de collision déjà noté dans `A FAIRE.txt`).
+- **Colonne Norse de la table lustrienne** : maintenant possible. Attention, elle devra cibler les
+  **trois ethnies** et non la race - « Old World Human » et « Norse » sont deux colonnes distinctes
+  d'une même race, premier cas où la granularité race est trop grossière.
+- **Table Seafarer (p.63) comme règle optionnelle** : c'est une substitution **partielle** (elle
+  ne remplace que la section Riverfolk, et le joueur choisit avant de lancer), alors que
+  `DATA_CAREER_ROLL` ne sait faire que du remplacement total. Deux pistes : soit la règle
+  redéclare la table entière (~350 entrées), soit on ajoute la notion de remplacement partiel.
+  À concevoir. Un trou repéré au passage, à vérifier à l'image : colonne Humain, le **68** n'est
+  attribué à personne (Sailor-Priest 67, puis Sailor 69-71).
+- Le PDF `Sea of Claws.pdf` est à la racine du projet, comme `Lustria.pdf`.
+
+---
+
 ## 3. TODO / Backlog
 
 Le backlog complet (tout ce qui n'est pas encore commencé) vit dans `A FAIRE.txt`
