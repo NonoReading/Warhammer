@@ -6,6 +6,16 @@
 <VERSION>"20250623"</VERSION>
 <OFFICIAL>"1"</OFFICIAL>
 <COMPLETE>"1"</COMPLETE>
+<!-- Le livre porte son propre nom d'affichage : ajouter un livre ne demande
+       plus de modifier BOOK_RULESBOOK.Xml (décision Nono du 21/08/2026). -->
+<DATA_LABEL>
+<Label language="ENGLISH">
+<Text name="UPINA-BOOK UP IN ARMS">"Up in Arms"</Text>
+</Label>
+<Label language="FRANCAIS">
+<Text name="UPINA-BOOK UP IN ARMS">"Up in Arms"</Text>
+</Label>
+</DATA_LABEL>
 <DATA_TALENT>
 <Talent id="UPINA-T0173">
 <Attribut>""</Attribut>
@@ -20,6 +30,187 @@ Ifthe Character passes the Test, the crew members may then use the Characters Ra
 <Test language="ENGLISH">"Ranged Skill tests when firing a weapon with the Crewed Flaw"</Test>
 </Talent>
 </DATA_TALENT>
+<DATA_SPECIE_CAREER_DIRECT>
+  <!-- Ces métiers étaient déclarés en 'X' dans les <Specie> de BOOK_RULESBOOK.Xml,
+       alors qu'ils appartiennent à ce livre : un joueur n'ayant pas activé Up in Arms
+       les voyait quand même. Déplacés ici le 21/08/2026 (CONTEXT.md §2.13).
+       Exprimés en RACE et non en ethnie : toutes les ethnies d'une race en héritent. -->
+<Entry>
+<Specie>"RULES-SPECIE_HUMAN"</Specie>
+<Career name="UPINA-WORK69">"X"</Career>
+  <!-- Artillerist -->
+</Entry>
+<Entry>
+<Specie>"RULES-SPECIE_HUMAN"</Specie>
+<Career name="UPINA-WORK71">"X"</Career>
+  <!-- Cartographer -->
+</Entry>
+<Entry>
+<Specie>"RULES-SPECIE_HUMAN"</Specie>
+<Career name="UPINA-WORK70">"X"</Career>
+  <!-- Camp Follower -->
+</Entry>
+<Entry>
+<Specie>"RULES-SPECIE_HUMAN"</Specie>
+<Career name="UPINA-WORK65">"X"</Career>
+  <!-- Archer -->
+</Entry>
+<Entry>
+<Specie>"RULES-SPECIE_HUMAN"</Specie>
+<Career name="UPINA-WORK72">"X"</Career>
+  <!-- Freelance -->
+</Entry>
+<Entry>
+<Specie>"RULES-SPECIE_HUMAN"</Specie>
+<Career name="UPINA-WORK66">"X"</Career>
+  <!-- Greatsword -->
+</Entry>
+<Entry>
+<Specie>"RULES-SPECIE_HUMAN"</Specie>
+<Career name="UPINA-WORK67">"X"</Career>
+  <!-- Halberdier -->
+</Entry>
+<Entry>
+<Specie>"RULES-SPECIE_HUMAN"</Specie>
+<Career name="UPINA-WORK68">"X"</Career>
+  <!-- Handgunner -->
+</Entry>
+<Entry>
+<Specie>"RULES-SPECIE_HUMAN"</Specie>
+<Career name="UPINA-WORK73">"X"</Career>
+  <!-- Knight of the Blazing Sun -->
+</Entry>
+<Entry>
+<Specie>"RULES-SPECIE_HUMAN"</Specie>
+<Career name="UPINA-WORK74">"X"</Career>
+  <!-- Knight of the White Wolf -->
+</Entry>
+<Entry>
+<Specie>"RULES-SPECIE_HUMAN"</Specie>
+<Career name="UPINA-WORK75">"X"</Career>
+  <!-- Knight Panther -->
+</Entry>
+<Entry>
+<Specie>"RULES-SPECIE_HUMAN"</Specie>
+<Career name="UPINA-WORK76">"X"</Career>
+  <!-- Light Cavalry -->
+</Entry>
+<Entry>
+<Specie>"RULES-SPECIE_HUMAN"</Specie>
+<Career name="UPINA-WORK78">"X"</Career>
+  <!-- Pikeman -->
+</Entry>
+<Entry>
+<Specie>"RULES-SPECIE_HUMAN"</Specie>
+<Career name="UPINA-WORK79">"X"</Career>
+  <!-- Priest of Myrmidia -->
+</Entry>
+<Entry>
+<Specie>"RULES-SPECIE_HUMAN"</Specie>
+<Career name="UPINA-WORK77">"X"</Career>
+  <!-- Siege Specialist -->
+</Entry>
+<Entry>
+<Specie>"RULES-SPECIE_HALFLING"</Specie>
+<Career name="UPINA-WORK69">"X"</Career>
+  <!-- Artillerist -->
+</Entry>
+<Entry>
+<Specie>"RULES-SPECIE_HALFLING"</Specie>
+<Career name="UPINA-WORK71">"X"</Career>
+  <!-- Cartographer -->
+</Entry>
+<Entry>
+<Specie>"RULES-SPECIE_HALFLING"</Specie>
+<Career name="UPINA-WORK70">"X"</Career>
+  <!-- Camp Follower -->
+</Entry>
+<Entry>
+<Specie>"RULES-SPECIE_HALFLING"</Specie>
+<Career name="UPINA-WORK65">"X"</Career>
+  <!-- Archer -->
+</Entry>
+<Entry>
+<Specie>"RULES-SPECIE_HALFLING"</Specie>
+<Career name="UPINA-WORK67">"X"</Career>
+  <!-- Halberdier -->
+</Entry>
+<Entry>
+<Specie>"RULES-SPECIE_HALFLING"</Specie>
+<Career name="UPINA-WORK68">"X"</Career>
+  <!-- Handgunner -->
+</Entry>
+<Entry>
+<Specie>"RULES-SPECIE_DWARF"</Specie>
+<Career name="UPINA-WORK69">"X"</Career>
+  <!-- Artillerist -->
+</Entry>
+<Entry>
+<Specie>"RULES-SPECIE_DWARF"</Specie>
+<Career name="UPINA-WORK71">"X"</Career>
+  <!-- Cartographer -->
+</Entry>
+<Entry>
+<Specie>"RULES-SPECIE_DWARF"</Specie>
+<Career name="UPINA-WORK70">"X"</Career>
+  <!-- Camp Follower -->
+</Entry>
+<Entry>
+<Specie>"RULES-SPECIE_DWARF"</Specie>
+<Career name="UPINA-WORK67">"X"</Career>
+  <!-- Halberdier -->
+</Entry>
+<Entry>
+<Specie>"RULES-SPECIE_DWARF"</Specie>
+<Career name="UPINA-WORK68">"X"</Career>
+  <!-- Handgunner -->
+</Entry>
+<Entry>
+<Specie>"RULES-SPECIE_DWARF"</Specie>
+<Career name="UPINA-WORK77">"X"</Career>
+  <!-- Siege Specialist -->
+</Entry>
+<Entry>
+<Specie>"RULES-SPECIE_HELF"</Specie>
+<Career name="UPINA-WORK71">"X"</Career>
+  <!-- Cartographer -->
+</Entry>
+<Entry>
+<Specie>"RULES-SPECIE_HELF"</Specie>
+<Career name="UPINA-WORK70">"X"</Career>
+  <!-- Camp Follower -->
+</Entry>
+<Entry>
+<Specie>"RULES-SPECIE_HELF"</Specie>
+<Career name="UPINA-WORK65">"X"</Career>
+  <!-- Archer -->
+</Entry>
+<Entry>
+<Specie>"RULES-SPECIE_HELF"</Specie>
+<Career name="UPINA-WORK76">"X"</Career>
+  <!-- Light Cavalry -->
+</Entry>
+<Entry>
+<Specie>"RULES-SPECIE_HELF"</Specie>
+<Career name="UPINA-WORK77">"X"</Career>
+  <!-- Siege Specialist -->
+</Entry>
+<Entry>
+<Specie>"RULES-SPECIE_WELF"</Specie>
+<Career name="UPINA-WORK71">"X"</Career>
+  <!-- Cartographer -->
+</Entry>
+<Entry>
+<Specie>"RULES-SPECIE_WELF"</Specie>
+<Career name="UPINA-WORK70">"X"</Career>
+  <!-- Camp Follower -->
+</Entry>
+<Entry>
+<Specie>"RULES-SPECIE_WELF"</Specie>
+<Career name="UPINA-WORK65">"X"</Career>
+  <!-- Archer -->
+</Entry>
+</DATA_SPECIE_CAREER_DIRECT>
 <DATA_SPECIE>
 <Specie id="UPINA-RACE_HTIL">
 <Description language="ENGLISH">"Humans (Tilea)"</Description>

@@ -6,6 +6,16 @@
 <VERSION>"20250623"</VERSION>
 <OFFICIAL>"1"</OFFICIAL>
 <COMPLETE>"1"</COMPLETE>
+<!-- Le livre porte son propre nom d'affichage : ajouter un livre ne demande
+       plus de modifier BOOK_RULESBOOK.Xml (décision Nono du 21/08/2026). -->
+<DATA_LABEL>
+<Label language="ENGLISH">
+<Text name="WINDS-BOOK WINDS OF MAGIC">"Winds of Magic"</Text>
+</Label>
+<Label language="FRANCAIS">
+<Text name="WINDS-BOOK WINDS OF MAGIC">"Winds of Magic"</Text>
+</Label>
+</DATA_LABEL>
 <DATA_SKILL>
 <Skill id="WINDS-COMPPSYCHOM">
 <Attribut>"RULES-ATTR_Int"</Attribut>
@@ -122,6 +132,92 @@ The assistant provides a bonus of +20 to these Tests rather than the normal +10 
 <Description language="ENGLISH">"Power Familiar"</Description>
 </Race>
 </DATA_RACE>
+<DATA_SPECIE_CAREER_DIRECT>
+  <!-- Ces métiers étaient déclarés en 'X' dans les <Specie> de BOOK_RULESBOOK.Xml,
+       alors qu'ils appartiennent à ce livre : un joueur ne l'ayant pas activé les voyait
+       quand même. Déplacés ici le 21/08/2026 (CONTEXT.md §2.13).
+       Exprimés en RACE et non en ethnie : toutes les ethnies d'une race en héritent. -->
+<Entry>
+<Specie>"RULES-SPECIE_HUMAN"</Specie>
+<Career name="WINDS-WORK85">"X"</Career>
+  <!-- Alchemist -->
+</Entry>
+<Entry>
+<Specie>"RULES-SPECIE_HUMAN"</Specie>
+<Career name="WINDS-WORK87">"X"</Career>
+  <!-- Astromancer -->
+</Entry>
+<Entry>
+<Specie>"RULES-SPECIE_HUMAN"</Specie>
+<Career name="WINDS-WORK86">"X"</Career>
+  <!-- Druid -->
+</Entry>
+<Entry>
+<Specie>"RULES-SPECIE_HUMAN"</Specie>
+<Career name="WINDS-WORK84">"X"</Career>
+  <!-- Hierophant -->
+</Entry>
+<Entry>
+<Specie>"RULES-SPECIE_HUMAN"</Specie>
+<Career name="WINDS-WORK82">"X"</Career>
+  <!-- Magister Vigilant -->
+</Entry>
+<Entry>
+<Specie>"RULES-SPECIE_HUMAN"</Specie>
+<Career name="WINDS-WORK81">"X"</Career>
+  <!-- Mundane Alchemist -->
+</Entry>
+<Entry>
+<Specie>"RULES-SPECIE_HUMAN"</Specie>
+<Career name="WINDS-WORK90">"X"</Career>
+  <!-- Pyromancer -->
+</Entry>
+<Entry>
+<Specie>"RULES-SPECIE_HUMAN"</Specie>
+<Career name="WINDS-WORK88">"X"</Career>
+  <!-- Shadowmancer -->
+</Entry>
+<Entry>
+<Specie>"RULES-SPECIE_HUMAN"</Specie>
+<Career name="WINDS-WORK91">"X"</Career>
+  <!-- Shaman -->
+</Entry>
+<Entry>
+<Specie>"RULES-SPECIE_HUMAN"</Specie>
+<Career name="WINDS-WORK89">"X"</Career>
+  <!-- Spiriter -->
+</Entry>
+<Entry>
+<Specie>"RULES-SPECIE_HUMAN"</Specie>
+<Career name="WINDS-WORK83">"X"</Career>
+  <!-- Scryer -->
+</Entry>
+<Entry>
+<Specie>"RULES-SPECIE_HUMAN"</Specie>
+<Career name="WINDS-WORK80">"X"</Career>
+  <!-- Beadle -->
+</Entry>
+<Entry>
+<Specie>"RULES-SPECIE_HALFLING"</Specie>
+<Career name="WINDS-WORK81">"X"</Career>
+  <!-- Mundane Alchemist -->
+</Entry>
+<Entry>
+<Specie>"RULES-SPECIE_HALFLING"</Specie>
+<Career name="WINDS-WORK80">"X"</Career>
+  <!-- Beadle -->
+</Entry>
+<Entry>
+<Specie>"RULES-SPECIE_DWARF"</Specie>
+<Career name="WINDS-WORK81">"X"</Career>
+  <!-- Mundane Alchemist -->
+</Entry>
+<Entry>
+<Specie>"RULES-SPECIE_DWARF"</Specie>
+<Career name="WINDS-WORK80">"X"</Career>
+  <!-- Beadle -->
+</Entry>
+</DATA_SPECIE_CAREER_DIRECT>
 <DATA_SPECIE>
 <Specie id="WINDS-RACE_FAMIC">
 <Description language="ENGLISH">"Combat Familiar"</Description>

@@ -825,6 +825,16 @@
 <Description language="ENGLISH">"Hobgoblin"</Description>
 </Race>
 </DATA_RACE>
+<!-- Le livre porte son propre nom d'affichage : ajouter un livre ne demande
+       plus de modifier BOOK_RULESBOOK.Xml (décision Nono du 21/08/2026). -->
+<DATA_LABEL>
+<Label language="ENGLISH">
+<Text name="GREEN-BOOK GREEN IZ BEST">"Green iz Best"</Text>
+</Label>
+<Label language="FRANCAIS">
+<Text name="GREEN-BOOK GREEN IZ BEST">"Green iz Best"</Text>
+</Label>
+</DATA_LABEL>
 <DATA_SPECIE>
 <Specie id="GREEN-RACE_CORC">
 <Description language="ENGLISH">"Common Orcs"</Description>

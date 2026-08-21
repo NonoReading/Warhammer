@@ -348,6 +348,10 @@ Const
 
       ConstLivreOfficiel                    = 'O';
       ConstLivreFacultatif                  = 'F';
+      // Valeur de la balise <OFFICIAL> d'un livre de fan (0 = livre de règles, 1 = supplément
+      // officiel, 2 = livre de fan). Sert à la fois au 'F' de la colonne O/F du tableau des
+      // livres et au préfixe "(F)" devant le nom du livre (chargetexte.pas, GetTexteLibelle).
+      ConstLivreFanOfficiel                 = 2;
 
       ConstLabSelSpe                        = 'LAB_129';
       ConstLabAdd                           = 'LAB_143';

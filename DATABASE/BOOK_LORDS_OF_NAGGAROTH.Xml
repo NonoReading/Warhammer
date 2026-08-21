@@ -6,6 +6,16 @@
 <VERSION>"20250623"</VERSION>
 <OFFICIAL>"2"</OFFICIAL>
 <COMPLETE>"1"</COMPLETE>
+<!-- Le livre porte son propre nom d'affichage : ajouter un livre ne demande
+       plus de modifier BOOK_RULESBOOK.Xml (décision Nono du 21/08/2026). -->
+<DATA_LABEL>
+<Label language="ENGLISH">
+<Text name="NAGGA-BOOK LORDS OF NAGGAROTH">"Lords of Naggaroth"</Text>
+</Label>
+<Label language="FRANCAIS">
+<Text name="NAGGA-BOOK LORDS OF NAGGAROTH">"Lords of Naggaroth"</Text>
+</Label>
+</DATA_LABEL>
 <DATA_TALENT>
 <Talent id="NAGGA-T0185">
 <Attribut>""</Attribut>

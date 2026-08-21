@@ -132,6 +132,7 @@
 </DATA_SKILL_COST>
 <DATA_LABEL>
 <Label language="FRANCAIS">
+<Text name="RULES-BOOK RULESBOOK">"Livre de Règles"</Text>
 <Text name="RULES-ARMOL_ARM">"Bras"</Text>
 <Text name="RULES-ARMOL_BODY">"Corps"</Text>
 <Text name="RULES-ARMOL_HEAD">"Tête"</Text>
@@ -204,19 +205,6 @@
 <Text name="RULES-TIERS_BRASS">"Bronze"</Text>
 <Text name="RULES-TIERS_SILVER">"Argent"</Text>
 <Text name="RULES-TIERS_GOLD">"Or"</Text>
-<Text name="RULES-BOOK RULESBOOK">"Livre de Règles"</Text>
-<Text name="RULES-BOOK UP IN ARMS">"Up in Arms"</Text>
-<Text name="RULES-BOOK WINDS OF MAGIC">"Winds of Magic"</Text>
-<Text name="RULES-BOOK ARCHIVES OF THE EMPIRE I">"Archives of the Empire I"</Text>
-<Text name="RULES-BOOK ARCHIVES OF THE EMPIRE II">"Archives of the Empire II"</Text>
-<Text name="RULES-BOOK ARCHIVES OF THE EMPIRE III">"Archives of the Empire III"</Text>
-<Text name="RULES-BOOK ROUGH NIGHTS AND HARD DAYS">"Rough Nights &amp; Hard Days"</Text>
-<Text name="RULES-BOOK DEATH ON THE REIK COMPANION">"Death on the Reik Companion"</Text>
-<Text name="RULES-BOOK ENEMY IN SHADOWS COMPANION">"Enemy In Shadows Companion"</Text>
-<Text name="RULES-BOOK MIDDENHEIM CITY OF THE WHITE WOLF">"Middenheim City Of the White Wolf"</Text>
-<Text name="RULES-BOOK SALZENMUND CITY OF SALT AND SILVER">"Salzenmund - City Of Salt &amp; Silver"</Text>
-<Text name="RULES-BOOK THE HORNED RAT COMPANION">"The Horned Rat Companion"</Text>
-<Text name="RULES-BOOK SEA OF CLAWS">"Sea of Claws"</Text>
 <Text name="RULES-MESS_001">"Impossible de créer le chemin."</Text>
 <Text name="RULES-MESS_002">"Vous n’avez pas sélectionné votre race."</Text>
 <Text name="RULES-MESS_003">"Vous n’avez pas sélectionné votre métier."</Text>
@@ -4923,90 +4911,6 @@ See page 190 for Fear rules"</Explanation>
   <!-- Soldat  -->
 <Career name="RULES-WORK50">"100"</Career>
   <!-- Prêtre guerrier  -->
-<Career name="ARCH3-WORK99">"X"</Career>
-  <!-- Priest of Handrich -->
-<Career name="ARCH3-WORK101">"X"</Career>
-  <!-- Priest of Rhya -->
-<Career name="ARCH3-WORK100">"X"</Career>
-  <!-- Priest of Solkan -->
-<Career name="DEATH-WORK105">"X"</Career>
-  <!-- Warrior of Tzeentch -->
-<Career name="ENEMY-WORK106">"X"</Career>
-  <!-- Cult Magus of Tzeentch -->
-<Career name="SALZE-WORK108">"X"</Career>
-  <!-- Owler -->
-<Career name="SEAOF-WORK109">"X"</Career>
-  <!-- Beachcomber -->
-<Career name="SEAOF-WORK110">"X"</Career>
-  <!-- Chantyman -->
-<Career name="SEAOF-WORK111">"X"</Career>
-  <!-- Huffer -->
-<Career name="SEAOF-WORK112">"X"</Career>
-  <!-- Officer -->
-<Career name="SEAOF-WORK118">"X"</Career>
-  <!-- Priest Of Stromfels -->
-<Career name="SEAOF-WORK113">"X"</Career>
-  <!-- Sailor -->
-<Career name="SEAOF-WORK114">"X"</Career>
-  <!-- Sailor-Priest of Manann -->
-<Career name="SEAOF-WORK115">"X"</Career>
-  <!-- Ship’s Gunner -->
-<Career name="SEAOF-WORK116">"X"</Career>
-  <!-- Wrecker -->
-<Career name="UPINA-WORK69">"X"</Career>
-  <!-- Artillerist -->
-<Career name="UPINA-WORK71">"X"</Career>
-  <!-- Cartographer -->
-<Career name="UPINA-WORK70">"X"</Career>
-  <!-- Camp Follower -->
-<Career name="UPINA-WORK65">"X"</Career>
-  <!-- Archer -->
-<Career name="UPINA-WORK72">"X"</Career>
-  <!-- Freelance -->
-<Career name="UPINA-WORK66">"X"</Career>
-  <!-- Greatsword -->
-<Career name="UPINA-WORK67">"X"</Career>
-  <!-- Halberdier -->
-<Career name="UPINA-WORK68">"X"</Career>
-  <!-- Handgunner -->
-<Career name="UPINA-WORK73">"X"</Career>
-  <!-- Knight of the Blazing Sun -->
-<Career name="UPINA-WORK74">"X"</Career>
-  <!-- Knight of the White Wolf -->
-<Career name="UPINA-WORK75">"X"</Career>
-  <!-- Knight Panther -->
-<Career name="UPINA-WORK76">"X"</Career>
-  <!-- Light Cavalry -->
-<Career name="UPINA-WORK78">"X"</Career>
-  <!-- Pikeman -->
-<Career name="UPINA-WORK79">"X"</Career>
-  <!-- Priest of Myrmidia -->
-<Career name="UPINA-WORK77">"X"</Career>
-  <!-- Siege Specialist -->
-<Career name="WINDS-WORK85">"X"</Career>
-  <!-- Alchemist -->
-<Career name="WINDS-WORK87">"X"</Career>
-  <!-- Astromancer -->
-<Career name="WINDS-WORK86">"X"</Career>
-  <!-- Druid -->
-<Career name="WINDS-WORK84">"X"</Career>
-  <!-- Hierophant -->
-<Career name="WINDS-WORK82">"X"</Career>
-  <!-- Magister Vigilant -->
-<Career name="WINDS-WORK81">"X"</Career>
-  <!-- Mundane Alchemist -->
-<Career name="WINDS-WORK90">"X"</Career>
-  <!-- Pyromancer -->
-<Career name="WINDS-WORK88">"X"</Career>
-  <!-- Shadowmancer -->
-<Career name="WINDS-WORK91">"X"</Career>
-  <!-- Shaman -->
-<Career name="WINDS-WORK89">"X"</Career>
-  <!-- Spiriter -->
-<Career name="WINDS-WORK83">"X"</Career>
-  <!-- Scryer -->
-<Career name="WINDS-WORK80">"X"</Career>
-  <!-- Beadle -->
 </SUBCHAPTER_CAREER>
 </Specie>
 <Specie id="RULES-RACE_HALF">
@@ -5167,36 +5071,6 @@ See page 190 for Fear rules"</Explanation>
   <!-- Gladiateur  -->
 <Career name="RULES-WORK57">"98-100"</Career>
   <!-- Soldat  -->
-<Career name="ARCH1-WORK96">"X"</Career>
-  <!-- Fieldwarden -->
-<Career name="ARCH1-WORK98">"X"</Career>
-  <!-- Badger Rider -->
-<Career name="SALZE-WORK108">"X"</Career>
-  <!-- Owler -->
-<Career name="SEAOF-WORK109">"X"</Career>
-  <!-- Beachcomber -->
-<Career name="SEAOF-WORK111">"X"</Career>
-  <!-- Huffer -->
-<Career name="SEAOF-WORK113">"X"</Career>
-  <!-- Sailor -->
-<Career name="SEAOF-WORK115">"X"</Career>
-  <!-- Ship’s Gunner -->
-<Career name="UPINA-WORK69">"X"</Career>
-  <!-- Artillerist -->
-<Career name="UPINA-WORK71">"X"</Career>
-  <!-- Cartographer -->
-<Career name="UPINA-WORK70">"X"</Career>
-  <!-- Camp Follower -->
-<Career name="UPINA-WORK65">"X"</Career>
-  <!-- Archer -->
-<Career name="UPINA-WORK67">"X"</Career>
-  <!-- Halberdier -->
-<Career name="UPINA-WORK68">"X"</Career>
-  <!-- Handgunner -->
-<Career name="WINDS-WORK81">"X"</Career>
-  <!-- Mundane Alchemist -->
-<Career name="WINDS-WORK80">"X"</Career>
-  <!-- Beadle -->
 </SUBCHAPTER_CAREER>
 </Specie>
 <Specie id="RULES-RACE_DWAR">
@@ -5353,38 +5227,6 @@ See page 190 for Fear rules"</Explanation>
   <!-- Tueur  -->
 <Career name="RULES-WORK57">"98-100"</Career>
   <!-- Soldat  -->
-<Career name="ARCH1-WORK97">"X"</Career>
-  <!-- Karak Ranger -->
-<Career name="SALZE-WORK108">"X"</Career>
-  <!-- Owler -->
-<Career name="SEAOF-WORK111">"X"</Career>
-  <!-- Huffer -->
-<Career name="SEAOF-WORK112">"X"</Career>
-  <!-- Officer -->
-<Career name="SEAOF-WORK113">"X"</Career>
-  <!-- Sailor -->
-<Career name="SEAOF-WORK115">"X"</Career>
-  <!-- Ship’s Gunner -->
-<Career name="SEAOF-WORK116">"X"</Career>
-  <!-- Wrecker -->
-<Career name="HORNE-WORK117">"X"</Career>
-  <!-- Ironbreaker -->
-<Career name="UPINA-WORK69">"X"</Career>
-  <!-- Artillerist -->
-<Career name="UPINA-WORK71">"X"</Career>
-  <!-- Cartographer -->
-<Career name="UPINA-WORK70">"X"</Career>
-  <!-- Camp Follower -->
-<Career name="UPINA-WORK67">"X"</Career>
-  <!-- Halberdier -->
-<Career name="UPINA-WORK68">"X"</Career>
-  <!-- Handgunner -->
-<Career name="UPINA-WORK77">"X"</Career>
-  <!-- Siege Specialist -->
-<Career name="WINDS-WORK81">"X"</Career>
-  <!-- Mundane Alchemist -->
-<Career name="WINDS-WORK80">"X"</Career>
-  <!-- Beadle -->
 </SUBCHAPTER_CAREER>
 </Specie>
 <Specie id="RULES-RACE_HELF">
@@ -5517,28 +5359,6 @@ See page 190 for Fear rules"</Explanation>
   <!-- Spadassin  -->
 <Career name="RULES-WORK57">"99-100"</Career>
   <!-- Soldat  -->
-<Career name="SALZE-WORK108">"X"</Career>
-  <!-- Owler -->
-<Career name="SEAOF-WORK110">"X"</Career>
-  <!-- Chantyman -->
-<Career name="SEAOF-WORK111">"X"</Career>
-  <!-- Huffer -->
-<Career name="SEAOF-WORK112">"X"</Career>
-  <!-- Officer -->
-<Career name="SEAOF-WORK113">"X"</Career>
-  <!-- Sailor -->
-<Career name="SEAOF-WORK115">"X"</Career>
-  <!-- Ship’s Gunner -->
-<Career name="UPINA-WORK71">"X"</Career>
-  <!-- Cartographer -->
-<Career name="UPINA-WORK70">"X"</Career>
-  <!-- Camp Follower -->
-<Career name="UPINA-WORK65">"X"</Career>
-  <!-- Archer -->
-<Career name="UPINA-WORK76">"X"</Career>
-  <!-- Light Cavalry -->
-<Career name="UPINA-WORK77">"X"</Career>
-  <!-- Siege Specialist -->
 </SUBCHAPTER_CAREER>
 </Specie>
 <Specie id="RULES-RACE_WELF">
@@ -5645,16 +5465,6 @@ See page 190 for Fear rules"</Explanation>
   <!-- Gladiateur  -->
 <Career name="RULES-WORK57">"97-100"</Career>
   <!-- Soldat  -->
-<Career name="ARCH1-WORK95">"X"</Career>
-  <!-- Ghost Strider -->
-<Career name="SEAOF-WORK116">"X"</Career>
-  <!-- Wrecker -->
-<Career name="UPINA-WORK71">"X"</Career>
-  <!-- Cartographer -->
-<Career name="UPINA-WORK70">"X"</Career>
-  <!-- Camp Follower -->
-<Career name="UPINA-WORK65">"X"</Career>
-  <!-- Archer -->
 </SUBCHAPTER_CAREER>
 </Specie>
 </DATA_SPECIE>

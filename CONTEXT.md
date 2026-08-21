@@ -1720,6 +1720,119 @@ cellules lui-même. **`TabRace` est dans le même cas**, non traité faute de de
 
 ---
 
+### 2.13 Chaque livre porte « ses » infos — nettoyage du périmètre des livres — terminé (21/08/2026)
+
+**Origine.** Nono envisage d'ajouter, **avant l'étape 1 de la création**, un choix des livres
+(cochés par défaut sur les livres actifs), et s'inquiète des contrecoups. En creusant, la vraie
+gêne n'est pas l'écran à ajouter : c'est que le livre de règles contient des données qui ne lui
+appartiennent pas, donc que « livre actif » et « données disponibles » ne coïncident pas
+exactement. Principe posé par Nono, qui a servi de règle de tri pour tout le chantier :
+
+> « hors je voudrais que chaque livre possède "ses" infos »
+
+Conséquence directe : **ajouter un livre ne doit plus jamais demander de modifier
+`BOOK_RULESBOOK.Xml`.** C'était le cas pour deux familles de données.
+
+**A. Éligibilité aux métiers des suppléments (89 entrées).** Les deux livres de règles portaient
+89 balises `<Career name="XXXX-...">"X"</Career>` sous leurs `<Specie>` — c'est-à-dire que le
+Rulebook déclarait l'accès à des métiers venus d'autres livres. Toutes déplacées vers le bloc
+`DATA_SPECIE_CAREER_DIRECT` du livre propriétaire (8 suppléments concernés), forme déjà retenue
+au §2.9/§2.11 précisément parce qu'elle est à plat, portée par le livre contributeur et résolue
+à l'usage. Vérification faite livre par livre : inventaire des couples (ethnie, métier) accessibles
+avant modification, puis recomparaison après — identique à chaque fois. Les deux Rulebooks ne
+contiennent désormais plus que des `<Career name="RULES-...">` (215 de chaque côté).
+
+⚠️ Une entrée déplacée n'est active **que si son livre est chargé** — c'est justement l'effet
+recherché, mais cela veut dire qu'un supplément désactivé retire maintenant ses accès, là où le
+Rulebook les accordait inconditionnellement.
+
+**B. Libellés d'affichage des livres (16 entrées).** Les deux Rulebooks portaient les
+`<Text name="RULES-BOOK ...">` de **tous** les livres — Nono s'en sert pour l'affichage du nom
+d'un livre (l'usage « livre officiel » qu'il en faisait a été repris par la balise `<OFFICIAL>`).
+Chaque livre reçoit maintenant son propre libellé dans son `<DATA_LABEL>`, sous son propre code :
+`<Text name="SEAOF-BOOK SEA OF CLAWS">"Sea of Claws"</Text>`, dans les deux blocs
+`<Label language="ENGLISH">` et `<Label language="FRANCAIS">` (le parser lit bien plusieurs
+`<Label>` par `DATA_LABEL`, vérifié dans `xmlexportimport.pas` avant de se lancer). Les deux
+Rulebooks ne gardent que le leur, chacun dans sa langue.
+
+**Trois libellés manquaient** et ont été créés au passage : `LUSTR-BOOK LUSTRIA`,
+`GREEN-BOOK GREEN IZ BEST`, `NAGGA-BOOK LORDS OF NAGGAROTH`. Lustria s'affichait donc « (F) »
+depuis son import — voir le piège ci-dessous.
+
+**Bug de mon script, trouvé à la vérification finale** : la regex de suppression a retiré des deux
+Rulebooks *leur propre* libellé, que le script venait d'ajouter. Réinséré à la main
+(`"Rules Book"` / `"Livre de Règles"`). Contrôle final : **17 fichiers, 17 libellés, tous couverts**,
+et les 17 XML se parsent.
+
+**Kaboom au lancement — access violation, corrigé.** J'avais posé dans 14 livres un commentaire XML
+expliquant le déplacement, **juste à l'intérieur** de `<DATA_LABEL>`. La boucle de lecture
+(`xmlexportimport.pas` ligne 1022-1025) parcourt tous les nœuds enfants sans garde sur le nom :
+
+```pascal
+NodeNv2 := NodeNv1.FirstChild;
+While Assigned(NodeNv2) do
+  begin
+    Langue := RemoveQuotes(UTF8Encode(NodeNv2.Attributes.GetNamedItem(ConstXmlLanguage).NodeValue));
+```
+
+Un commentaire n'a pas d'`Attributes` → `nil.GetNamedItem` → *Access violation reading from address
+`$0000000000000010`* dès le chargement. C'est exactement le piège documenté au §2.11, que j'ai
+reproduit moi-même une semaine plus tard. Correctif : les 14 commentaires remontés **avant**
+`<DATA_LABEL>`, au niveau `DATA_BOOK` — niveau atteint uniquement par `BookNode.FindNode(...)`
+(vérifié : `BookNode` n'apparaît jamais dans une boucle sur ses enfants), où d'autres commentaires
+vivent déjà. Aucune recompilation, ce sont des données.
+
+⚠️ **Leçon sur la vérification.** Mon contrôle testait que les XML *se parsent* et que les libellés
+étaient présents — un commentaire est du XML parfaitement valide, il passait. La bonne question après
+un ajout de commentaire n'est pas « est-ce du XML valide ? » mais **« la boucle qui lit ce bloc
+a-t-elle une garde sur le nom du nœud ? »**. Les blocs récents (`DATA_RACE`, `DATA_RULE`,
+`DATA_CAREER_ROLL`, `DATA_SPECIE_CAREER_DIRECT`) l'ont ; `DATA_LABEL`,
+`DATA_SPECIE_CAREER_CHOICE`, `DATA_SKILL_SPECIALIZATION` et `DATA_CAREER_SUBCHOICE` ne l'ont
+toujours pas — un simple commentaire y plante le programme au lancement (dans `A FAIRE.txt`).
+
+**Le `(F)` : source de vérité changée (21/08/2026, confirmé par Nono).** `GetTexteLibelle(...,true)`
+préfixait `(F)` quand le libellé était **introuvable** (`chargetexte.pas` ligne 99-114), en
+reconstruisant un nom présentable à partir du code. Ça ressemblait à un marqueur « livre de fan »
+tant que les seuls livres sans libellé étaient Green iz Best et Lords of Naggaroth — mais la
+coïncidence ne tenait déjà plus : Lustria, officielle, affichait « (F) Book Lustria ». En créant les
+3 libellés manquants, le `(F)` a disparu des deux livres fan, ce que Nono a vu tout de suite.
+
+Nono veut le garder (« ça permet de savoir que ce n'est pas un livre officiel directement »), donc il
+est **reconstruit délibérément depuis `<OFFICIAL>`** :
+
+- `chargeconstantes.pas` : `ConstLivreFanOfficiel = 2` (0 = livre de règles, 1 = supplément officiel,
+  2 = livre de fan) ;
+- `chargetexte.pas` : `uses` + `ChargeLivre` (pas de cycle, `ChargeLivre` ne remonte pas vers
+  `ChargeTexte`), le repli ne fait plus que remettre le code en forme, et le préfixe est ajouté après :
+
+```pascal
+    if Livre then
+      begin
+        PLivre := ChercheLivreLibelle(CodeTexte);
+        if RechercheTrouve and (PLivre.Officiel = ConstLivreFanOfficiel) then
+          Res := '(' + ConstLivreFacultatif + ') ' + Res;
+      end;
+```
+
+Le marqueur réutilise `ConstLivreFacultatif`, la lettre déjà affichée dans la colonne O/F du tableau
+des livres (`warhammersource.pas` ligne 974-978) : les deux affichages ne peuvent plus diverger.
+Les 8 appelants de `GetTexteLibelle(...,true)` en bénéficient d'un coup (liste des livres ×2,
+armures ×2, création ×2, métiers, personnage). Confirmé par Nono.
+
+⚠️ **Bug signalé, non corrigé** : `ChercheLivreLibelle` et `ChercheLivre` (`chargelivre.pas`)
+**n'affectent pas leur `Result` quand elles ne trouvent rien** — les champs entiers valent alors
+n'importe quoi. D'où le passage par `RechercheTrouve` ci-dessus. Le cas est réel (l'écran des armures
+affiche le livre d'une armure même si ce livre n'est pas chargé), et `warhammersource.pas` ligne 973
+lit `PLivre.Officiel` sans garde.
+
+**Reste ouvert.** L'écran de choix des livres avant l'étape 1 n'est pas fait — c'est la motivation
+d'origine, et le terrain est maintenant propre pour l'aborder. Autre point en attente : le garde-fou
+sur la boucle de sauvegarde des `LivresAcceptes` dans `winpersonnage.pas`
+(`if TabLivre.Cells[3, Ind] <> ''`), qui expliquerait le « livre vide » ajouté à l'enregistrement
+dont Nono se souvient — proposé, pas encore validé.
+
+---
+
 ## 3. TODO / Backlog
 
 Le backlog complet (tout ce qui n'est pas encore commencé) vit dans `A FAIRE.txt`
@@ -1732,6 +1845,17 @@ chantier concerné, avec les détails techniques.
 
 ## 4. Pièges Lazarus / Free Pascal accumulés
 
+- **Un commentaire XML est un nœud enfant comme un autre.** Une boucle
+  `Node := Parent.FirstChild; While Assigned(Node) do ... Node.Attributes.GetNamedItem(...)`
+  plante sur un commentaire (`Attributes` vaut `nil` → *access violation reading from `$10`*), et sur
+  un bloc sans attribut elle rejoue silencieusement les valeurs du nœud précédent. Toujours poser
+  `if Node.NodeName = <balise attendue> then` avant de lire. Vu deux fois : doublon silencieux
+  (§2.11), puis plantage au lancement (§2.13). Les commentaires de documentation se posent **avant**
+  la balise du bloc, pas dedans.
+- Une fonction Pascal qui renvoie un `record` **ne garantit pas** l'initialisation de son `Result` :
+  si aucune branche ne l'affecte (cas de `ChercheLivre`/`ChercheLivreLibelle` quand rien n'est
+  trouvé), les champs entiers contiennent n'importe quoi. Tester le drapeau `RechercheTrouve` plutôt
+  que le contenu du record.
 - Colonne 0 réservée dans un `TStringGrid` (les données commencent à `Cells[1]`)
 - `ColCount` = dernier indice + 1, sinon les écritures sont perdues sans erreur
 - `StrictDelimiter := True` **avant** `Delimiter` et `DelimitedText`, sinon les espaces séparent

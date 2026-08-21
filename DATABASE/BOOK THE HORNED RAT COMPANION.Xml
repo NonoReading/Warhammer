@@ -6,6 +6,16 @@
 <VERSION>"20250623"</VERSION>
 <OFFICIAL>"1"</OFFICIAL>
 <COMPLETE>"1"</COMPLETE>
+<!-- Le livre porte son propre nom d'affichage : ajouter un livre ne demande
+       plus de modifier BOOK_RULESBOOK.Xml (décision Nono du 21/08/2026). -->
+<DATA_LABEL>
+<Label language="ENGLISH">
+<Text name="HORNE-BOOK THE HORNED RAT COMPANION">"The Horned Rat Companion"</Text>
+</Label>
+<Label language="FRANCAIS">
+<Text name="HORNE-BOOK THE HORNED RAT COMPANION">"The Horned Rat Companion"</Text>
+</Label>
+</DATA_LABEL>
 <DATA_CAREER>
 <Career id="HORNE-WORK117">
 <Description language="ENGLISH">"Ironbreaker"</Description>
@@ -141,4 +151,15 @@
 </SUBCHAPTER_ITEM>
 </Career>
 </DATA_CAREER>
+<DATA_SPECIE_CAREER_DIRECT>
+  <!-- Ces métiers étaient déclarés en 'X' dans les <Specie> de BOOK_RULESBOOK.Xml,
+       alors qu'ils appartiennent à ce livre : un joueur ne l'ayant pas activé les voyait
+       quand même. Déplacés ici le 21/08/2026 (CONTEXT.md §2.13).
+       Exprimés en RACE et non en ethnie : toutes les ethnies d'une race en héritent. -->
+<Entry>
+<Specie>"RULES-SPECIE_DWARF"</Specie>
+<Career name="HORNE-WORK117">"X"</Career>
+  <!-- Ironbreaker -->
+</Entry>
+</DATA_SPECIE_CAREER_DIRECT>
 </DATA_BOOK>

@@ -560,6 +560,16 @@
 </SUBCHAPTER_CAREER>
 </Specie>
 </DATA_SPECIE>
+<!-- Le livre porte son propre nom d'affichage : ajouter un livre ne demande
+       plus de modifier BOOK_RULESBOOK.Xml (décision Nono du 21/08/2026). -->
+<DATA_LABEL>
+<Label language="ENGLISH">
+<Text name="MIDDE-BOOK MIDDENHEIM CITY OF THE WHITE WOLF">"Middenheim - City Of the White Wolf"</Text>
+</Label>
+<Label language="FRANCAIS">
+<Text name="MIDDE-BOOK MIDDENHEIM CITY OF THE WHITE WOLF">"Middenheim City Of the White Wolf"</Text>
+</Label>
+</DATA_LABEL>
 <DATA_CAREER>
 <Career id="MIDDE-WORK107">
 <Description language="ENGLISH">"Wolf Kin"</Description>

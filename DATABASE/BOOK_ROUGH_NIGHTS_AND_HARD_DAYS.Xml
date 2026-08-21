@@ -11,6 +11,16 @@
 <Description language="ENGLISH">"Gnome"</Description>
 </Race>
 </DATA_RACE>
+<!-- Le livre porte son propre nom d'affichage : ajouter un livre ne demande
+       plus de modifier BOOK_RULESBOOK.Xml (décision Nono du 21/08/2026). -->
+<DATA_LABEL>
+<Label language="ENGLISH">
+<Text name="ROUGH-BOOK ROUGH NIGHTS AND HARD DAYS">"Rough Nights &amp; Hard Days"</Text>
+</Label>
+<Label language="FRANCAIS">
+<Text name="ROUGH-BOOK ROUGH NIGHTS AND HARD DAYS">"Rough Nights &amp; Hard Days"</Text>
+</Label>
+</DATA_LABEL>
 <DATA_SPECIE>
 <Specie id="ROUGH-RACE_GNOME">
 <Description language="ENGLISH">"Gnome"</Description>

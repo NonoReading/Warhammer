@@ -406,3 +406,28 @@ PDF Personnage (PRIORITAIRE) :
   structurel. Idée née de la remarque de Nono sur la solidité du système : elle est réelle côté
   modèle, la faiblesse est côté détection d'erreur.
 
+
+- Écran de choix des livres avant l'étape 1 de la création (idée de Nono du 21/08/2026, motivation
+  d'origine du chantier CONTEXT.md §2.13). Les livres actifs seraient cochés par défaut, le joueur
+  pouvant en retirer ou en ajouter pour une création donnée. Le terrain est maintenant propre :
+  depuis §2.13, « livre coché » et « données disponibles » coïncident, chaque livre portant ses
+  propres infos. Contrecoup à mesurer avant de se lancer : la création lit les listes globales
+  chargées par ChargerLivre, pas un sous-ensemble - il faudra soit filtrer à l'usage sur le livre
+  d'origine de chaque donnée (champ .Livre présent partout), soit recharger, ce qui est plus lourd.
+
+- Garde-fou sur la boucle de sauvegarde des LivresAcceptes dans winpersonnage.pas :
+  `if TabLivre.Cells[3, Ind] <> ''` avant d'ajouter une ligne. Piste du « livre vide » ajouté à
+  l'enregistrement dont Nono se souvient (bug situé dans WinPersonnage, pas WinCreation). Proposé le
+  21/08/2026, pas encore validé.
+
+- Garde `if Node.NodeName = <balise attendue> then` manquante sur les boucles de lecture des blocs
+  anciens : DATA_LABEL, DATA_SPECIE_CAREER_CHOICE, DATA_SKILL_SPECIALIZATION, DATA_CAREER_SUBCHOICE
+  (xmlexportimport.pas). Sans elle, un commentaire XML posé dans le bloc fait PLANTER le programme au
+  lancement (access violation, Attributes = nil) - arrivé pour de vrai le 21/08/2026 sur DATA_LABEL -
+  et un noeud sans attribut rejoue silencieusement les valeurs du precedent. Les 4 blocs recents
+  (DATA_RACE, DATA_RULE, DATA_CAREER_ROLL, DATA_SPECIE_CAREER_DIRECT) l'ont deja.
+
+- ChercheLivre et ChercheLivreLibelle (chargelivre.pas) n'affectent pas leur Result quand elles ne
+  trouvent rien : les champs entiers du record valent alors n'importe quoi. Les appelants doivent
+  tester RechercheTrouve. warhammersource.pas ligne 973 lit PLivre.Officiel sans garde ; le cas est
+  reel (ecran des armures, livre non charge). Signale le 21/08/2026, non corrige.

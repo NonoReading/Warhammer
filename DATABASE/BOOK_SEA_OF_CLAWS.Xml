@@ -8,9 +8,11 @@
 <COMPLETE>"1"</COMPLETE>
 <DATA_LABEL>
 <Label language="ENGLISH">
+<Text name="SEAOF-BOOK SEA OF CLAWS">"Sea of Claws"</Text>
 <Text name="SEAOF-CLASS_SEAF">"Seafarers"</Text>
 </Label>
 <Label language="FRANCAIS">
+<Text name="SEAOF-BOOK SEA OF CLAWS">"Sea of Claws"</Text>
 <Text name="SEAOF-CLASS_SEAF">"Marins"</Text>
 </Label>
 </DATA_LABEL>
@@ -226,6 +228,132 @@
   <!-- Wrecker -->
 </Entry>
 </DATA_CAREER_ROLL>
+<DATA_SPECIE_CAREER_DIRECT>
+  <!-- Ces métiers étaient déclarés en 'X' dans les <Specie> de BOOK_RULESBOOK.Xml,
+       alors qu'ils appartiennent à ce livre : un joueur n'ayant pas activé Sea of Claws
+       les voyait quand même. Déplacés ici le 21/08/2026 (CONTEXT.md §2.13).
+       Exprimés en RACE et non en ethnie : toutes les ethnies d'une race en héritent. -->
+<Entry>
+<Specie>"RULES-SPECIE_HUMAN"</Specie>
+<Career name="SEAOF-WORK109">"X"</Career>
+  <!-- Beachcomber -->
+</Entry>
+<Entry>
+<Specie>"RULES-SPECIE_HUMAN"</Specie>
+<Career name="SEAOF-WORK110">"X"</Career>
+  <!-- Chantyman -->
+</Entry>
+<Entry>
+<Specie>"RULES-SPECIE_HUMAN"</Specie>
+<Career name="SEAOF-WORK111">"X"</Career>
+  <!-- Huffer -->
+</Entry>
+<Entry>
+<Specie>"RULES-SPECIE_HUMAN"</Specie>
+<Career name="SEAOF-WORK112">"X"</Career>
+  <!-- Officer -->
+</Entry>
+<Entry>
+<Specie>"RULES-SPECIE_HUMAN"</Specie>
+<Career name="SEAOF-WORK118">"X"</Career>
+  <!-- Priest Of Stromfels -->
+</Entry>
+<Entry>
+<Specie>"RULES-SPECIE_HUMAN"</Specie>
+<Career name="SEAOF-WORK113">"X"</Career>
+  <!-- Sailor -->
+</Entry>
+<Entry>
+<Specie>"RULES-SPECIE_HUMAN"</Specie>
+<Career name="SEAOF-WORK114">"X"</Career>
+  <!-- Sailor-Priest of Manann -->
+</Entry>
+<Entry>
+<Specie>"RULES-SPECIE_HUMAN"</Specie>
+<Career name="SEAOF-WORK115">"X"</Career>
+  <!-- Ship’s Gunner -->
+</Entry>
+<Entry>
+<Specie>"RULES-SPECIE_HUMAN"</Specie>
+<Career name="SEAOF-WORK116">"X"</Career>
+  <!-- Wrecker -->
+</Entry>
+<Entry>
+<Specie>"RULES-SPECIE_HALFLING"</Specie>
+<Career name="SEAOF-WORK109">"X"</Career>
+  <!-- Beachcomber -->
+</Entry>
+<Entry>
+<Specie>"RULES-SPECIE_HALFLING"</Specie>
+<Career name="SEAOF-WORK111">"X"</Career>
+  <!-- Huffer -->
+</Entry>
+<Entry>
+<Specie>"RULES-SPECIE_HALFLING"</Specie>
+<Career name="SEAOF-WORK113">"X"</Career>
+  <!-- Sailor -->
+</Entry>
+<Entry>
+<Specie>"RULES-SPECIE_HALFLING"</Specie>
+<Career name="SEAOF-WORK115">"X"</Career>
+  <!-- Ship’s Gunner -->
+</Entry>
+<Entry>
+<Specie>"RULES-SPECIE_DWARF"</Specie>
+<Career name="SEAOF-WORK111">"X"</Career>
+  <!-- Huffer -->
+</Entry>
+<Entry>
+<Specie>"RULES-SPECIE_DWARF"</Specie>
+<Career name="SEAOF-WORK112">"X"</Career>
+  <!-- Officer -->
+</Entry>
+<Entry>
+<Specie>"RULES-SPECIE_DWARF"</Specie>
+<Career name="SEAOF-WORK113">"X"</Career>
+  <!-- Sailor -->
+</Entry>
+<Entry>
+<Specie>"RULES-SPECIE_DWARF"</Specie>
+<Career name="SEAOF-WORK115">"X"</Career>
+  <!-- Ship’s Gunner -->
+</Entry>
+<Entry>
+<Specie>"RULES-SPECIE_DWARF"</Specie>
+<Career name="SEAOF-WORK116">"X"</Career>
+  <!-- Wrecker -->
+</Entry>
+<Entry>
+<Specie>"RULES-SPECIE_HELF"</Specie>
+<Career name="SEAOF-WORK110">"X"</Career>
+  <!-- Chantyman -->
+</Entry>
+<Entry>
+<Specie>"RULES-SPECIE_HELF"</Specie>
+<Career name="SEAOF-WORK111">"X"</Career>
+  <!-- Huffer -->
+</Entry>
+<Entry>
+<Specie>"RULES-SPECIE_HELF"</Specie>
+<Career name="SEAOF-WORK112">"X"</Career>
+  <!-- Officer -->
+</Entry>
+<Entry>
+<Specie>"RULES-SPECIE_HELF"</Specie>
+<Career name="SEAOF-WORK113">"X"</Career>
+  <!-- Sailor -->
+</Entry>
+<Entry>
+<Specie>"RULES-SPECIE_HELF"</Specie>
+<Career name="SEAOF-WORK115">"X"</Career>
+  <!-- Ship’s Gunner -->
+</Entry>
+<Entry>
+<Specie>"RULES-SPECIE_WELF"</Specie>
+<Career name="SEAOF-WORK116">"X"</Career>
+  <!-- Wrecker -->
+</Entry>
+</DATA_SPECIE_CAREER_DIRECT>
 <DATA_SPECIE_CAREER_CHOICE>
   <!-- Substitutions Norses : chez les Norses, ces trois métiers Riverfolk sont remplacés
        par leur équivalent Seafarer. Déclarées ICI et non dans Lustria, pour qu'elles ne

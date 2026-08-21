@@ -6,6 +6,16 @@
 <VERSION>"20250623"</VERSION>
 <OFFICIAL>"1"</OFFICIAL>
 <COMPLETE>"1"</COMPLETE>
+<!-- Le livre porte son propre nom d'affichage : ajouter un livre ne demande
+       plus de modifier BOOK_RULESBOOK.Xml (décision Nono du 21/08/2026). -->
+<DATA_LABEL>
+<Label language="ENGLISH">
+<Text name="ARCH2-BOOK ARCHIVES OF THE EMPIRE II">"Archives of the Empire II"</Text>
+</Label>
+<Label language="FRANCAIS">
+<Text name="ARCH2-BOOK ARCHIVES OF THE EMPIRE II">"Archives of the Empire II"</Text>
+</Label>
+</DATA_LABEL>
 <DATA_TALENT>
 <Talent id="ARCH2-T0174">
 <Attribut>""</Attribut>

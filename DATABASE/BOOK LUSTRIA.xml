@@ -11,6 +11,16 @@
 <Description language="ENGLISH">"Secret Signs (Lizardman)"</Description>
 </Skill>
 </DATA_SKILL_SPECIALIZATION>
+<!-- Le livre porte son propre nom d'affichage : ajouter un livre ne demande
+       plus de modifier BOOK_RULESBOOK.Xml (décision Nono du 21/08/2026). -->
+<DATA_LABEL>
+<Label language="ENGLISH">
+<Text name="LUSTR-BOOK LUSTRIA">"Lustria"</Text>
+</Label>
+<Label language="FRANCAIS">
+<Text name="LUSTR-BOOK LUSTRIA">"Lustria"</Text>
+</Label>
+</DATA_LABEL>
 <DATA_CAREER>
 <Career id="LUSTR-WORK123">
 <Description language="ENGLISH">"Interpreter"</Description>
