@@ -2166,6 +2166,119 @@ restent corrects — inutile de les retirer.
 
 ---
 
+### 2.18 Les sorts de bénédiction sortent du code et passent en données — en cours (22/08/2026)
+
+**Le point de départ.** En inventoriant ce que les livres pourraient encore apporter, la question
+« est-ce qu'ajouter *High Magic* demande du code ? » a montré que oui — et Nono a tranché :
+*« oui, je pense qu'il faut redéfinir les fondations (une fois de plus...) »*.
+
+**Ce qui était en dur.** `winpersonnage.pas` reconnaissait les talents magiques en testant les
+**5 premiers caractères** du code contre quatre constantes (`TalentSortXxx`), à cinq endroits
+(lignes ~1097, 1106, 1108, 1232, 1243). Autrement dit : la liste des talents qui donnent des sorts,
+et la façon dont ils les donnent, vivaient dans le programme. Ajouter un talent magique = recompiler.
+
+Nono a précisé la règle du jeu, qui est ce qui rend le modèle possible : *« les sorts de bénédiction
+sont acquis à la sélection du talent et ils dépendent du dieu. Il n'est pas possible d'en acquérir de
+nouveaux. »* Il y a donc **deux comportements**, pas un continuum : le talent donne ses sorts
+automatiquement, ou il ouvre un choix.
+
+**Le modèle retenu** — deux balises sur `<Talent>` (et sur `<Specialization>`, qui hérite du talent
+générique quand elle ne les porte pas) :
+
+| balise | valeurs | sens |
+|---|---|---|
+| `<Magic>` | entier | niveau/domaine de magie apporté |
+| `<SpellMode>` | `AUTO` / `CHOICE` / `NONE` | sorts donnés d'office, ou choisis, ou aucun |
+
+Constantes ajoutées dans `chargeconstantes.pas` : `ConstXmlMagie`, `ConstXmlModeSort`,
+`ConstModeSortAuto`, `ConstModeSortChoix`, `ConstModeSortAucun`. Champs `Magie: Integer` et
+`ModeSort: String` sur `StructureTalent`. Lecture/RAZ/export faits dans `xmlexportimport.pas`.
+Repli du générique vers la spécialisation dans `ChercheTalent` :
+
+```pascal
+if Result.Magie = 0 then
+  Result.Magie    := PTalent.Magie;
+if Result.ModeSort = '' then
+  Result.ModeSort := PTalent.ModeSort;
+```
+
+Données saisies dans les deux Rulebooks sur `T0012_*` (Bless), `T0080_*`, `T0088_*`, `T0089`.
+
+**État — étape 1 sur 3 faite.** Le modèle existe et est renseigné, mais **rien ne le lit encore**.
+
+**Point de reprise exact — étape 2** : dans `winpersonnage.pas`, remplacer les cinq tests
+`copy(CodeValeur,1,5) = TalentSortXxx` par une lecture de `PTalent.Magie` / `PTalent.ModeSort`, puis
+**supprimer les quatre constantes `TalentSortXxx`**. Le comportement doit être *strictement identique* :
+sujet de test **Rhya** (prêtresse de Rhya), qui fonctionne aujourd'hui. Ensuite seulement, **étape 3** :
+saisir *High Magic* (5 sorts jouables, le talent `High Magic`, et `Blessed by Isha` qui n'existe pas
+encore) — si le modèle est juste, cette étape ne demande **aucune ligne de Pascal**.
+
+**Correctif attrapé en chemin** (défaut réel, pas lié au modèle) : `SortAffiche` cherchait les sorts
+avec le code du talent **générique** au lieu de la spécialisation choisie — d'où « j'ai ajouté *Blessed
+by Sigmar*, mais aucun sort n'est ajouté ». Corrigé : la fonction lit
+`TabAugmentationTalent.Cells[ColAugmTalSpeSel, ...]` quand cette cellule est renseignée.
+
+**Hors périmètre, volontairement** : l'axe « restriction par espèce » (*Slann et Elfes seulement*).
+Aucun précédent dans les données, aucune demande — à ne pas inventer.
+
+---
+
+### 2.19 Nettoyage des codes sans préfixe de livre dans les fiches — en cours (22/08/2026)
+
+**La décision.** Le filtre des sorts de `winspell.pas` échouait sur les fiches anciennes (voir
+`A FAIRE.txt`). Deux issues possibles : faire accepter les deux formes au code indéfiniment, ou nettoyer
+les données. Nono a choisi la seconde — *« je pense qu'il faudrait plutôt que je nettoie les données des
+personnages qui n'ont pas de préfixe, car normalement plus aucune ne devrait avoir ce cas »*, puis
+*« oui, autant partir sur des bases saines ^^ »*.
+
+**Le principe.** Une seule fonction, au **point d'écriture unique** de `chargepersonnage.pas` :
+
+```pascal
+Function CodeNormalise(Code, Livre: String): String;
+  begin
+    if Livre <> '' then
+      Result := XmlCreeCodeLivre(Livre, Code)
+    else
+      Result := Code;
+  end;
+```
+
+Appliquée à **17 endroits**. La règle « on ne normalise **que si** `.Livre <> ''` » est ce qui protège
+l'équipement en texte libre et les codes inconnus — et elle n'est fiable que **grâce au correctif
+§2.17** : avant lui, un `Cherche*` en échec rendait le livre de l'appel précédent.
+
+Ouvrir puis enregistrer une fiche suffit donc à la migrer.
+
+**Deux vrais bugs trouvés au passage** (mauvaise variable passée) : `chercheMetier` recevait autre chose
+que `PersonnageMetier.CodeMetier`, et `PersonnageLivre` autre chose que `PArmureSimplifiee.livre` —
+c'était la cause du **livre affiché `[]`** que Nono signalait depuis un moment. Garde ajoutée en plus :
+`if Livre = '' then Result := ListeLivre; Exit;`.
+
+⚠️ **Régression que j'ai introduite, et le piège qu'elle a révélé.** Une fois la fiche écrite en
+`RULES-ATTR_WS`, les augmentations de caractéristiques ont disparu de `WinPersonnage` : la ligne de codes
+de `TabAttribut` est semée par `AttributInit` à partir des constantes `ConstCaracXxx` (`ATTR_WS`, **sans**
+préfixe), et le `=` brut ne matchait plus. Mon premier correctif — passer à `CompareRechercheValeur` — n'a
+rien changé (*« pas mieux sur Gunther et Kuno »*), pour la raison suivante, qui vaut pour tout le projet :
+
+> **`CompareRechercheValeur` n'est PAS symétrique.** `VerifieRecherche` n'accepte le cas « livre absent »
+> que sur le **second** argument (`LivreValeur = ''`). Le code **préfixé doit venir en premier**, le code
+> court en second. Inversé, la comparaison renvoie **toujours** `False`, silencieusement.
+> C'est la convention de tout le reste du programme : `ChercheTalent` fait
+> `CompareRechercheValeur(PTalent.CodeTalent, CodeTalent)`.
+
+Corrigé à `winpersonnage.pas` ligne ~2604, avec le commentaire sur place. Confirmé par Nono.
+
+🚩 **Signalé sans être corrigé** : `winpersonnage.pas` **ligne ~2857** compare contre le champ `Attribut`
+d'un talent, qui peut contenir **`-ATTR_Ag`** (un malus). Comme `SeparateurLivre = '-'`,
+`CompareRechercheValeur` y découperait livre=`''` / code=`ATTR_Ag` et **transformerait un malus en
+correspondance positive**. Cette ligne doit rester en `=` brut **tant que les données n'ont pas été
+préfixées** — ce qui est justement la tâche notée dans `A FAIRE.txt` pour la prochaine session.
+
+**Point de reprise** : migrer les 5 fiches anciennes (**Ernold, Friederich, Harald, Kuno, Markus**) en les
+ouvrant puis en les enregistrant, puis reprendre le vrai correctif de `winspell.pas`.
+
+---
+
 ## 3. TODO / Backlog
 
 Le backlog complet (tout ce qui n'est pas encore commencé) vit dans `A FAIRE.txt`

@@ -237,6 +237,12 @@ procedure TWinSpells.TabSpellSelection(Sender: TObject; aCol, aRow: Integer);
     Ind:          Integer;
     CheminImage:  String;
   begin
+      // La grille peut n'avoir que sa ligne d'en-tete (aucun sort ne correspond aux talents du
+      // personnage) : l'evenement de selection arrive quand meme et lisait alors une ligne
+      // inexistante -> EGridException "Index Out of range". Vu le 22/08/2026 sur Kuno
+      // Kreutzberg, dont les codes de talents sont enregistres SANS prefixe de livre et ne
+      // matchent donc aucun sort (cause reelle, voir CONTEXT.md 2.19).
+      if (aRow < 1) or (aRow >= TabSpell.RowCount) then Exit;
       AffCode.Text         := TabSpell.Cells[ 1,aRow];
       AffType.Text         := TabSpell.Cells[ 2,aRow];
       AffLib.Text          := TabSpell.Cells[ 3,aRow];

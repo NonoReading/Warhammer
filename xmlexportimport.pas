@@ -368,6 +368,10 @@ Procedure XmlExportBook(Livre: String; Langue: String);
               // ecrite seulement si vraie : les ~700 talents ordinaires ne portent pas la balise
               if PTalent.Trait then
                 XmlContent.Add(XmlLigne(ConstXmlTrait, ConstVrai));
+              if PTalent.Magie > 0 then
+                XmlContent.Add(XmlLigne(ConstXmlMagie, IntToStr(PTalent.Magie)));
+              if PTalent.ModeSort <> '' then
+                XmlContent.Add(XmlLigne(ConstXmlModeSort, PTalent.ModeSort));
               for PTalentArmureModifExp in ListTalentArmureModif do
                 if CompareRechercheValeur(PTalentArmureModifExp.CodeTalent, PTalent.CodeTalent) then
                   XmlContent.Add(XmlLigneDonnee(ConstXmlModifieArmure,
@@ -1186,6 +1190,8 @@ Procedure XmlImport(FileName: String; OnlyPrimary: Boolean; OnlyCode: Boolean);
                       PTalent.Livre          := Livre;
                       PTalent.SousTalent     := false;
                       PTalent.Trait          := false;
+                      PTalent.Magie          := 0;
+                      PTalent.ModeSort       := '';
                       PTalent.CodeTalent     := RemoveQuotes(UTF8Encode(NodeNv2.Attributes.GetNamedItem(ConstXmlId).NodeValue));
                       PTraduction            := InitTrad(ConstPTalent, PTalent.CodeTalent, '', PTalent.Livre);
 
@@ -1221,6 +1227,10 @@ Procedure XmlImport(FileName: String; OnlyPrimary: Boolean; OnlyCode: Boolean);
                               PTalent.TalentPdf         := RemoveQuotes(UTF8Encode(Node.TextContent));
                             ConstXmlTrait:
                               PTalent.Trait             := (RemoveQuotes(UTF8Encode(Node.TextContent)) = ConstVrai);
+                            ConstXmlMagie:
+                              PTalent.Magie             := StrToIntDef(RemoveQuotes(UTF8Encode(Node.TextContent)), 0);
+                            ConstXmlModeSort:
+                              PTalent.ModeSort          := RemoveQuotes(UTF8Encode(Node.TextContent));
                             ConstXmlTest:
                               begin
                                 PTalent.Tests           := RemoveQuotes(UTF8Encode(Node.TextContent));
@@ -1304,6 +1314,8 @@ Procedure XmlImport(FileName: String; OnlyPrimary: Boolean; OnlyCode: Boolean);
                       PTalent.Livre             := Livre;
                       PTalent.SousTalent        := True;
                       PTalent.Trait             := false;
+                      PTalent.Magie             := 0;
+                      PTalent.ModeSort          := '';
                       PTalent.Description       := '';
 
                       PTalent.Attribut          := '';

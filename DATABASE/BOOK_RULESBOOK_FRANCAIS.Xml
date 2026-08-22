@@ -2020,6 +2020,8 @@ Ce Talent est inutile si votre adversaire ne porte pas d’arme, ou est d’une 
 <Test language="FRANCAIS">"Corps à corps pour effectuer une manœuvre de Battement"</Test>
 </Talent>
 <Talent id="RULES-T0012_*">
+<Magic>"0"</Magic>
+<SpellMode>"AUTO"</SpellMode>
 <Attribut>""</Attribut>
 <Description language="FRANCAIS">"Béni (au choix)"</Description>
 <Short language="FRANCAIS">"Permet de lancer les bénédictions"</Short>
@@ -2793,6 +2795,8 @@ Une fois par session, vous pouvez poser une question au MJ concernant une situat
 <Test language="FRANCAIS">"Tests d’Intelligence pour tout ce qui concerne ce Talent"</Test>
 </Talent>
 <Talent id="RULES-T0080_*">
+<Magic>"2"</Magic>
+<SpellMode>"CHOICE"</SpellMode>
 <Attribut>""</Attribut>
 <Description language="FRANCAIS">"Invocation (au choix)"</Description>
 <Short language="FRANCAIS">"Vous pouvez lancer des miracles."</Short>
@@ -2890,6 +2894,8 @@ Cependant, si vous le faites, vous ne pouvez lancer aucun autre Sort ce Tour."</
 <Test language="FRANCAIS">""</Test>
 </Talent>
 <Talent id="RULES-T0088_*">
+<Magic>"1"</Magic>
+<SpellMode>"NONE"</SpellMode>
 <Attribut>""</Attribut>
 <Description language="FRANCAIS">"Magie des Arcanes (au choix)"</Description>
 <Short language="FRANCAIS">"Vous pouvez lancer des sorts"</Short>
@@ -2907,6 +2913,8 @@ Vous pouvez désapprendre ce Talent pour 100 PX, mais si vous le faites, vous pe
 <Test language="FRANCAIS">""</Test>
 </Talent>
 <Talent id="RULES-T0089">
+<Magic>"2"</Magic>
+<SpellMode>"NONE"</SpellMode>
 <Attribut>""</Attribut>
 <Description language="FRANCAIS">"Magie mineure"</Description>
 <Short language="FRANCAIS">"Vous pouvez lancer des sorts mineurs"</Short>

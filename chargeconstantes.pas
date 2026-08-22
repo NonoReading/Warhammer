@@ -116,6 +116,22 @@ Const
       // Marque un talent comme TRAIT DE CREATURE (Rulebook p.338-341) : acquis a la naissance
       // par la race, jamais achete ni choisi. Voir CONTEXT.md 2.15.
       ConstXmlTrait                     = 'Trait';
+      // Acces aux sorts porte par le TALENT, en donnees, a la place des quatre constantes
+      // TalentSortXxx comparees par prefixe (winpersonnage.pas). Deux axes independants :
+      //  <Magic>     priorite d'ouverture du catalogue de sorts
+      //              1 = exclusif (un Domaine ecarte tout le reste)
+      //              2 = cumulable (Miracle, Magie Mineure)
+      //              0 = n'ouvre jamais le catalogue (Benediction)
+      //  <SpellMode> comment les sorts arrivent a l'achat du talent
+      //              AUTO   = les sorts qui citent ce talent sont ajoutes (Benediction)
+      //              CHOICE = une ligne "a choisir" est ajoutee (Miracle)
+      //              NONE   = rien (Domaine, Magie Mineure)
+      // Voir CONTEXT.md 2.18.
+      ConstXmlMagie                     = 'Magic';
+      ConstXmlModeSort                  = 'SpellMode';
+      ConstModeSortAuto                 = 'AUTO';
+      ConstModeSortChoix                = 'CHOICE';
+      ConstModeSortAucun                = 'NONE';
       // Valeur "vrai" d'une balise XML booleenne (meme convention que <OFFICIAL>/<COMPLETE>).
       ConstVrai                         = '1';
       ConstXmlEthnic                    = 'Ethnic';

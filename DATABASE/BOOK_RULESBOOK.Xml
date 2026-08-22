@@ -2072,6 +2072,8 @@ This Talent is useless if your opponent does not carry a weapon, or is of a Size
 <Test language="ENGLISH">"Melee to perform a Kick maneuver"</Test>
 </Talent>
 <Talent id="RULES-T0012_*">
+<Magic>"0"</Magic>
+<SpellMode>"AUTO"</SpellMode>
 <Attribut>""</Attribut>
 <Description language="ENGLISH">"Blessed (Any)"</Description>
 <Short language="ENGLISH">""</Short>
@@ -2868,6 +2870,8 @@ Once per session, you may ask the GM a question regarding a political situation 
 <Test language="ENGLISH">"Intelligence Tests for everything related to this Talent"</Test>
 </Talent>
 <Talent id="RULES-T0080_*">
+<Magic>"2"</Magic>
+<SpellMode>"CHOICE"</SpellMode>
 <Attribut>""</Attribut>
 <Description language="ENGLISH">"Invoke (Any)"</Description>
 <Short language="ENGLISH">""</Short>
@@ -2967,6 +2971,8 @@ However, if you do, you cannot cast any other Spells this Turn."</Explanation>
 <Test language="ENGLISH">""</Test>
 </Talent>
 <Talent id="RULES-T0088_*">
+<Magic>"1"</Magic>
+<SpellMode>"NONE"</SpellMode>
 <Attribut>""</Attribut>
 <Description language="ENGLISH">"Arcane Lore (Any)"</Description>
 <Short language="ENGLISH">""</Short>
@@ -2984,6 +2990,8 @@ You can unlearn this Talent for 100 XP, but if you do, you immediately lose all 
 <Test language="ENGLISH">""</Test>
 </Talent>
 <Talent id="RULES-T0089">
+<Magic>"2"</Magic>
+<SpellMode>"NONE"</SpellMode>
 <Attribut>""</Attribut>
 <Description language="ENGLISH">"Petty Magic"</Description>
 <Short language="ENGLISH">""</Short>

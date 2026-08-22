@@ -242,6 +242,7 @@
         <HasResources Value="True"/>
         <ResourceBaseClass Value="Form"/>
         <UnitName Value="WinPersonnage"/>
+        <IsVisibleTab Value="True"/>
         <EditorIndex Value="6"/>
         <TopLine Value="3583"/>
         <CursorPos X="26" Y="3586"/>
@@ -681,10 +682,9 @@
       <Unit>
         <Filename Value="C:\lazarus\lcl\grids.pas"/>
         <UnitName Value="Grids"/>
-        <IsVisibleTab Value="True"/>
         <EditorIndex Value="5"/>
-        <TopLine Value="10337"/>
-        <CursorPos Y="10349"/>
+        <TopLine Value="10338"/>
+        <CursorPos X="20" Y="10346"/>
         <UsageCount Value="77"/>
         <Loaded Value="True"/>
       </Unit>

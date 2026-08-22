@@ -21,6 +21,11 @@ Type
         // metier. Le livre lui-meme fait ce pont : "Night Vision - The creature has the
         // Night Vision Talent". Voir CONTEXT.md 2.15.
         Trait:                Boolean;
+        // Acces aux sorts (voir ConstXmlMagie dans chargeconstantes.pas). Renseignes sur les
+        // entrees GENERIQUES (T0012_*, T0080_*, T0088_*, T0089) ; ChercheTalent les reporte
+        // sur les specialisations, comme il le fait deja pour Resume.
+        Magie:                Integer;
+        ModeSort:             String;
         Livre:                String;
         TalentPdf:            String;
         Resume:               String;
@@ -71,6 +76,13 @@ Begin
           code          := ExtractStringBefore(CodeTalent, ValeurSousCompetence) + ValeurGenerique;
           PTalent       := ChercheTalent(Code);
           Result.Resume := PTalent.Resume;
+          // L'acces aux sorts est declare sur l'entree generique (T0012_*, T0080_*, T0088_*) :
+          // une specialisation comme T0012_SIGMAR n'a qu'une Description, elle herite donc du
+          // reste. Meme principe que Resume juste au-dessus. CONTEXT.md 2.18.
+          if Result.Magie = 0 then
+            Result.Magie    := PTalent.Magie;
+          if Result.ModeSort = '' then
+            Result.ModeSort := PTalent.ModeSort;
         end;
 end;
 

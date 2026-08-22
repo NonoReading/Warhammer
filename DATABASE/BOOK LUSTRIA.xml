@@ -241,6 +241,106 @@
 </SUBCHAPTER_CAREER>
 </Specie>
 </DATA_SPECIE>
+<!-- Armes et munitions de Lustria p.163. L'obsinite est une pierre dure doublee de bronze ;
+     la sarbacane est le premier usage de la competence LUSTR-COMPPROJ_SARBAC creee pour les
+     Skinks. Codes de qualite du Rulebook : WEAPB22 Penetrante, WEAPB04 Assommante,
+     WEAPB23 Recharge. Voir CONTEXT.md 2.15. -->
+<DATA_WEAPON>
+<Weapon id="LUSTR-COMB_BASE_01">
+<Description language="ENGLISH">"Obsinite Club"</Description>
+<Skill>"RULES-COMPCOMB_BASE"</Skill>
+<Damage>"+(BATTR_S)+3"</Damage>
+<Availability>"DISPO_LIMITED"</Availability>
+<Reach>"WEAPR_SHORT"</Reach>
+<Price>"1CO"</Price>
+<Encumbrance>"1"</Encumbrance>
+<Quality>"WEAPB22"</Quality>
+<Hand>"1"</Hand>
+<Ammunition>"0"</Ammunition>
+</Weapon>
+<Weapon id="LUSTR-COMB_BASE_02">
+<Description language="ENGLISH">"Obsinite Spiked Maul"</Description>
+<Skill>"RULES-COMPCOMB_BASE"</Skill>
+<Damage>"+(BATTR_S)+4"</Damage>
+<Availability>"DISPO_LIMITED"</Availability>
+<Reach>"WEAPR_MID"</Reach>
+<Price>"2CO"</Price>
+<Encumbrance>"2"</Encumbrance>
+<Quality>"WEAPB22,WEAPB04"</Quality>
+<Hand>"1"</Hand>
+<Ammunition>"0"</Ammunition>
+</Weapon>
+<Weapon id="LUSTR-PROJ_SARBAC_01">
+<Description language="ENGLISH">"Blowpipe"</Description>
+<Skill>"LUSTR-COMPPROJ_SARBAC"</Skill>
+<Damage>"+0"</Damage>
+<Availability>"DISPO_EXOTIC"</Availability>
+<Reach>"20"</Reach>
+<Price>"3CO"</Price>
+<Encumbrance>"1"</Encumbrance>
+<Quality>"WEAPB23 1"</Quality>
+<Hand>"1"</Hand>
+<Ammunition>"0"</Ammunition>
+</Weapon>
+<Weapon id="LUSTR-MUNI_01">
+<Description language="ENGLISH">"Blowpipe Dart (12)"</Description>
+<Skill>"LUSTR-COMPPROJ_SARBAC"</Skill>
+<Damage>"+1"</Damage>
+<Availability>"DISPO_EXOTIC"</Availability>
+<Reach>"+0"</Reach>
+<Price>"10/-"</Price>
+<Encumbrance>"0"</Encumbrance>
+<Quality>"-"</Quality>
+<Hand>"0"</Hand>
+<Ammunition>"1"</Ammunition>
+</Weapon>
+</DATA_WEAPON>
+<!-- Armure lustrienne (Lustria p.163) : os, corde et plaques de cuivre battu. Meme
+     protection que le cuir, mais +1 point d'Encombrement par piece a cause des composants
+     plus lourds. Comptee comme du cuir pour les effets de sorts, et portable par-dessus les
+     ecailles d'un Lezard. Calquee sur RULES-ARMO_01 a 04. Voir CONTEXT.md 2.15. -->
+<DATA_ARMOR>
+<Armor id="LUSTR-ARMO_01">
+<Description language="ENGLISH">"Lustrian Skullcap"</Description>
+<Availability>"DISPO_LIMITED"</Availability>
+<Price>"8/-"</Price>
+<Encumbrance>"1"</Encumbrance>
+<Quality>"ARMOB_03,ARMOB_08"</Quality>
+<Location>"ARMOL_HEAD"</Location>
+<ArmorPoint>"1"</ArmorPoint>
+<Type>"ARMOT_SOFTLEATHER"</Type>
+</Armor>
+<Armor id="LUSTR-ARMO_02">
+<Description language="ENGLISH">"Lustrian Leggings"</Description>
+<Availability>"DISPO_LIMITED"</Availability>
+<Price>"14/-"</Price>
+<Encumbrance>"2"</Encumbrance>
+<Quality>"ARMOB_08"</Quality>
+<Location>"ARMOL_LEG"</Location>
+<ArmorPoint>"1"</ArmorPoint>
+<Type>"ARMOT_SOFTLEATHER"</Type>
+</Armor>
+<Armor id="LUSTR-ARMO_03">
+<Description language="ENGLISH">"Lustrian Jerkin"</Description>
+<Availability>"DISPO_LIMITED"</Availability>
+<Price>"10/-"</Price>
+<Encumbrance>"2"</Encumbrance>
+<Quality>"ARMOB_08"</Quality>
+<Location>"ARMOL_BODY"</Location>
+<ArmorPoint>"1"</ArmorPoint>
+<Type>"ARMOT_SOFTLEATHER"</Type>
+</Armor>
+<Armor id="LUSTR-ARMO_04">
+<Description language="ENGLISH">"Lustrian Jack"</Description>
+<Availability>"DISPO_LIMITED"</Availability>
+<Price>"12/-"</Price>
+<Encumbrance>"2"</Encumbrance>
+<Quality>"ARMOB_08"</Quality>
+<Location>"ARMOL_ARM,ARMOL_BODY"</Location>
+<ArmorPoint>"1"</ArmorPoint>
+<Type>"ARMOT_SOFTLEATHER"</Type>
+</Armor>
+</DATA_ARMOR>
 <DATA_CAREER>
 <Career id="LUSTR-WORK123">
 <Description language="ENGLISH">"Interpreter"</Description>

@@ -1227,7 +1227,16 @@ Procedure TWinPersonnages.SortAffiche();
     for ind := 1 to TabAugmentationTalent.RowCount - 1 do
       if StrToIntDef(TabAugmentationTalent.Cells[ColAugmTalNouveau, Ind], 0) > StrToIntDef(TabAugmentationTalent.Cells[ColAugmTalActuel, Ind], 0) then
         begin
-          Tal := TabAugmentationTalent.Cells[ColAugmTalCode, Ind];
+          // Prendre la SPECIALISATION choisie quand il y en a une, pas le code generique.
+          // Pour une Benediction, le dieu EST la specialisation : les sorts citent
+          // RULES-T0012_SIGMAR, jamais RULES-T0012_*, donc le code generique ne matchait
+          // aucun sort et aucune benediction n'etait jamais accordee. Meme lecture que
+          // MajTables ligne ~4226. Trouve par Nono le 22/08/2026 sur un pretre guerrier
+          // de Sigmar. CONTEXT.md 2.18.
+          if TabAugmentationTalent.Cells[ColAugmTalSpeSel, Ind] <> '' then
+            Tal := TabAugmentationTalent.Cells[ColAugmTalSpeSel, Ind]
+          else
+            Tal := TabAugmentationTalent.Cells[ColAugmTalCode, Ind];
           DecoupeCodeValeur(Tal);
           if copy(CodeValeur,1,5) = TalentSortBenediction then
             begin
@@ -2581,7 +2590,18 @@ begin
   // attribut
   For PersonnageAttribut in Personnage.AugmentationAttribut do
     For IndTab := 1 to TabAttribut.ColCount - 1 do
-      if TabAttribut.Cells[IndTab, LigAttCode] = PersonnageAttribut.CodeAttribut then
+      // Comparaison qui ignore le prefixe de livre : la ligne de codes de TabAttribut est semee
+      // par AttributInit a partir des constantes ConstCaracXxx ('ATTR_WS', sans prefixe), alors
+      // que la fiche contient desormais 'RULES-ATTR_WS'. Un '=' brut ne matchait plus et les
+      // augmentations de caracteristiques disparaissaient de l'ecran. CONTEXT.md 2.19.
+      //
+      // ATTENTION A L'ORDRE DES ARGUMENTS : CompareRechercheValeur n'est PAS symetrique.
+      // VerifieRecherche accepte le cas "livre absent" uniquement sur le SECOND argument
+      // (LivreValeur = ''). Le code PREFIXE doit donc venir en premier, le code court en
+      // second - c'est la convention de tout le reste du programme (ChercheTalent fait
+      // CompareRechercheValeur(PTalent.CodeTalent, CodeTalent)). Inverse, la comparaison
+      // renvoie toujours False.
+      if CompareRechercheValeur(PersonnageAttribut.CodeAttribut, TabAttribut.Cells[IndTab, LigAttCode]) then
         TabAttribut.Cells[IndTab, LigAttBonus] := IntToStr(PersonnageAttribut.Valeur);
 
   // compétence
@@ -3585,7 +3605,7 @@ var
   I: Integer;
   J: Integer;
 begin
-  //for I := 0 to PageExperience.PageCount  -1 do
+  for I := 0 to PageExperience.PageCount  -1 do
     For J := TTabSheet(PageExperience.PAge[I]).ControlCount - 1 downto 0 do
       if TTabSheet(PageExperience.Page[I]).Controls[J] is TPanel then
         TPanel(TTabSheet(PageExperience.Page[I]).Controls[J]).SendToBack;

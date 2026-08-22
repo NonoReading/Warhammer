@@ -201,11 +201,43 @@ Function PersonnageLivre(ListeLivre: String; Livre: String): String;
 Var
   AjoutLivre: String;
 Begin
+   // Un livre vide n'a rien a faire dans la liste : c'est ce qui produisait le "[]" que Nono
+   // trainait de longue date, visible en fin de fiche sous la forme "[BOOK RULESBOOK][]".
+   // Il apparait des qu'un element n'est pas retrouve dans les listes chargees - du texte
+   // libre d'equipement, un code d'un livre decoche, ou une recherche faite sur la mauvaise
+   // variable (deux cas corriges juste en dessous). CONTEXT.md 2.19.
+   if Livre = '' then
+     begin
+       Result := ListeLivre;
+       Exit;
+     end;
    AjoutLivre   := AjouteAccolade(Livre);
    if Pos(AjoutLivre, ListeLivre) = 0 then
      ListeLivre := ListeLivre + AjoutLivre;
    result       := ListeLivre;
 end;
+
+Function CodeNormalise(Code, Livre: String): String;
+  // Ajoute le prefixe de livre a un code avant ecriture, mais SEULEMENT si l'element a ete
+  // retrouve dans les listes chargees (Livre non vide).
+  //
+  // Deux raisons a cette prudence :
+  //  - l'equipement melange des codes et du TEXTE LIBRE ("Practical Tunic and Robes") ; le
+  //    texte libre n'est jamais retrouve, donc jamais prefixe ;
+  //  - un code inconnu (livre decoche, coquille) ressort intact et reste reperable, plutot
+  //    que de recevoir un prefixe invente.
+  //
+  // Le test sur Livre n'est fiable que depuis le 22/08/2026 : avant, les fonctions Cherche*
+  // renvoyaient l'enregistrement de l'appel PRECEDENT quand elles ne trouvaient rien, donc
+  // .Livre etait celui d'un autre element (CONTEXT.md 2.17).
+  //
+  // XmlCreeCodeLivre est idempotente : un code deja prefixe ressort tel quel.
+  begin
+    if Livre <> '' then
+      Result := XmlCreeCodeLivre(Livre, Code)
+    else
+      Result := Code;
+  end;
 
 function PersonnageXmlCreation(Personnage: StructurePersonnage; Xp: Integer; XpRestante: Integer; fileName: string; PersonnageName: String): Boolean;
 var
@@ -270,8 +302,16 @@ begin
           XMLContent.Add(XmlDebut(ConstXmlSousChapitreCarac));
           for PersonnageAttribut in Personnage.CreationAttribut do
             begin
-              XMLContent.Add(XmlLigneDonnee(ConstXmlCarac, PersonnageAttribut.CodeAttribut, IntToStr(PersonnageAttribut.Valeur)));
               PAttribut := ChercheAttribut(PersonnageAttribut.CodeAttribut);
+              // Le code d'attribut est normalise avec son prefixe de livre avant ecriture.
+              // Les augmentations viennent de TabAttribut (WinPersonnage), dont la ligne de
+              // codes est semee par AttributInit a partir des constantes ConstCaracXxx, qui
+              // valent 'ATTR_WS' SANS prefixe - d'ou des fiches melangeant les deux formes,
+              // et un filtre de sorts qui ne matchait plus (CONTEXT.md 2.19). XmlCreeCodeLivre
+              // est idempotente : elle ne prefixe que si le code ne l'est pas deja.
+              XMLContent.Add(XmlLigneDonnee(ConstXmlCarac,
+                XmlCreeCodeLivre(PAttribut.Livre, PersonnageAttribut.CodeAttribut),
+                IntToStr(PersonnageAttribut.Valeur)));
               XMLContent.Add(XmlCommentaire(PAttribut.Libelle));
             end;
           XMLContent.Add(XmlFin(ConstXmlSousChapitreCarac));
@@ -280,8 +320,10 @@ begin
           XMLContent.Add(XmlDebut(ConstXmlSousChapitreCompSpecie));
           for PersonnageCompetence in Personnage.CreationCompetence35 do
             Begin
-              XMLContent.Add(XmlLigneDonnee(ConstXmlCompetence, PersonnageCompetence.CodeCompetence, IntToStr(PersonnageCompetence.Valeur)));
               PCompetence := ChercheCompetence(PersonnageCompetence.CodeCompetence);
+              XMLContent.Add(XmlLigneDonnee(ConstXmlCompetence,
+                CodeNormalise(PersonnageCompetence.CodeCompetence, PCompetence.Livre),
+                IntToStr(PersonnageCompetence.Valeur)));
               ListeLivres:= PersonnageLivre(ListeLivres, PCompetence.livre);
               XMLContent.Add(XmlCommentaire(PCompetence.Libelle));
             end;
@@ -291,8 +333,10 @@ begin
           XMLContent.Add(XmlDebut(ConstXmlSousChapitreCompCreation));
           for PersonnageCompetence in Personnage.CreationCompetence40 do
             begin
-              XMLContent.Add(XmlLigneDonnee(ConstXmlCompetence, PersonnageCompetence.CodeCompetence, IntToStr(PersonnageCompetence.Valeur)));
               PCompetence := ChercheCompetence(PersonnageCompetence.CodeCompetence);
+              XMLContent.Add(XmlLigneDonnee(ConstXmlCompetence,
+                CodeNormalise(PersonnageCompetence.CodeCompetence, PCompetence.Livre),
+                IntToStr(PersonnageCompetence.Valeur)));
               ListeLivres:= PersonnageLivre(ListeLivres, PCompetence.livre);
               XMLContent.Add(XmlCommentaire(PCompetence.Libelle));
             end;
@@ -302,8 +346,10 @@ begin
           XMLContent.Add(XmlDebut(ConstXmlSousChapitreTalent));
           for Personnagetalent in Personnage.CreationTalent do
             Begin
-              XMLContent.Add(XmlLigneDonnee(ConstXmlTalent, PersonnageTalent.CodeTalent, IntToStr(PersonnageTalent.Valeur)));
               PTalent := ChercheTalent(PersonnageTalent.CodeTalent);
+              XMLContent.Add(XmlLigneDonnee(ConstXmlTalent,
+                CodeNormalise(PersonnageTalent.CodeTalent, PTalent.Livre),
+                IntToStr(PersonnageTalent.Valeur)));
               ListeLivres:= PersonnageLivre(ListeLivres, PTalent.livre);
               XMLContent.Add(XmlCommentaire(PTalent.Libelle));
             end;
@@ -316,8 +362,16 @@ begin
           XMLContent.Add(XmlDebut(ConstXmlSousChapitreCarac));
           for PersonnageAttribut in Personnage.AugmentationAttribut do
             begin
-              XMLContent.Add(XmlLigneDonnee(ConstXmlCarac, PersonnageAttribut.CodeAttribut, IntToStr(PersonnageAttribut.Valeur)));
               PAttribut := ChercheAttribut(PersonnageAttribut.CodeAttribut);
+              // Le code d'attribut est normalise avec son prefixe de livre avant ecriture.
+              // Les augmentations viennent de TabAttribut (WinPersonnage), dont la ligne de
+              // codes est semee par AttributInit a partir des constantes ConstCaracXxx, qui
+              // valent 'ATTR_WS' SANS prefixe - d'ou des fiches melangeant les deux formes,
+              // et un filtre de sorts qui ne matchait plus (CONTEXT.md 2.19). XmlCreeCodeLivre
+              // est idempotente : elle ne prefixe que si le code ne l'est pas deja.
+              XMLContent.Add(XmlLigneDonnee(ConstXmlCarac,
+                XmlCreeCodeLivre(PAttribut.Livre, PersonnageAttribut.CodeAttribut),
+                IntToStr(PersonnageAttribut.Valeur)));
               XMLContent.Add(XmlCommentaire(PAttribut.Libelle));
             end;
           XMLContent.Add(XmlFin(ConstXmlSousChapitreCarac));
@@ -326,8 +380,10 @@ begin
           XMLContent.Add(XmlDebut(ConstXmlSousChapitreCompMetier));
           for PersonnageCompetence in Personnage.AugmentationCompetence do
             begin
-              XMLContent.Add(XmlLigneDonnee(ConstXmlCompetence, PersonnageCompetence.CodeCompetence, IntToStr(PersonnageCompetence.Valeur)));
               PCompetence := ChercheCompetence(PersonnageCompetence.CodeCompetence);
+              XMLContent.Add(XmlLigneDonnee(ConstXmlCompetence,
+                CodeNormalise(PersonnageCompetence.CodeCompetence, PCompetence.Livre),
+                IntToStr(PersonnageCompetence.Valeur)));
               ListeLivres:= PersonnageLivre(ListeLivres, PCompetence.livre);
               XMLContent.Add(XmlCommentaire(PCompetence.Libelle));
             end;
@@ -337,8 +393,10 @@ begin
           XMLContent.Add(XmlDebut(ConstXmlSousChapitreTalent));
           for Personnagetalent in Personnage.AugmentationTalent do
             Begin
-              XMLContent.Add(XmlLigneDonnee(ConstXmlTalent, PersonnageTalent.CodeTalent, IntToStr(PersonnageTalent.Valeur)));
               PTalent := ChercheTalent(PersonnageTalent.CodeTalent);
+              XMLContent.Add(XmlLigneDonnee(ConstXmlTalent,
+                CodeNormalise(PersonnageTalent.CodeTalent, PTalent.Livre),
+                IntToStr(PersonnageTalent.Valeur)));
               ListeLivres:= PersonnageLivre(ListeLivres, PTalent.livre);
               XMLContent.Add(XmlCommentaire(PTalent.Libelle));
             end;
@@ -350,8 +408,10 @@ begin
           XMLContent.Add(XmlDebut(ConstXmlSousChapitreCompMetier));
           for PersonnageCompetence in Personnage.MetierCompetence do
             begin
-              XMLContent.Add(XmlLigneDonnee(ConstXmlCompetence, PersonnageCompetence.CodeCompetence, IntToStr(PersonnageCompetence.Valeur)));
               PCompetence := ChercheCompetence(PersonnageCompetence.CodeCompetence);
+              XMLContent.Add(XmlLigneDonnee(ConstXmlCompetence,
+                CodeNormalise(PersonnageCompetence.CodeCompetence, PCompetence.Livre),
+                IntToStr(PersonnageCompetence.Valeur)));
               ListeLivres:= PersonnageLivre(ListeLivres, PCompetence.livre);
               XMLContent.Add(XmlCommentaire(PCompetence.Libelle));
             end;
@@ -363,8 +423,10 @@ begin
           XMLContent.Add(XmlDebut(ConstXmlSousChapitreTalMetier));
           for PersonnageTalent in Personnage.MetierTalent do
             begin
-              XMLContent.Add(XmlLigneDonnee(ConstXmlTalent, PersonnageTalent.CodeTalent, IntToStr(PersonnageTalent.Valeur)));
               PTalent     := ChercheTalent(PersonnageTalent.CodeTalent);
+              XMLContent.Add(XmlLigneDonnee(ConstXmlTalent,
+                CodeNormalise(PersonnageTalent.CodeTalent, PTalent.Livre),
+                IntToStr(PersonnageTalent.Valeur)));
               ListeLivres := PersonnageLivre(ListeLivres, PTalent.livre);
               XMLContent.Add(XmlCommentaire(PTalent.Libelle));
             end;
@@ -375,8 +437,13 @@ begin
         XMLContent.Add(XmlDebut(ConstXmlChapitreOldWork));
           For PersonnageMetier in Personnage.MetierAncien do
             begin
-              XMLContent.Add(XmlLigneDonnee(ConstXmlWork, PersonnageMetier.CodeMetier+SeparateurMulti+IntToStr(PersonnageMetier.NiveauMetier), IntToStr(PersonnageMetier.CoutXp)));
-              PMetier := chercheMetier(Personnage.MetierEnCours.CodeMetier);
+              // chercheMetier portait sur Personnage.MetierEnCours et non sur le metier de la
+              // boucle : la liste des livres recevait le livre du metier COURANT pour chaque
+              // ancien metier. Corrige en meme temps que le prefixe. CONTEXT.md 2.19.
+              PMetier := chercheMetier(PersonnageMetier.CodeMetier);
+              XMLContent.Add(XmlLigneDonnee(ConstXmlWork,
+                CodeNormalise(PersonnageMetier.CodeMetier, PMetier.Livre)+SeparateurMulti+IntToStr(PersonnageMetier.NiveauMetier),
+                IntToStr(PersonnageMetier.CoutXp)));
               ListeLivres:= PersonnageLivre(ListeLivres, PMetier.livre);
               XMLContent.Add(XmlCommentaire(PMetier.Libelle));
             end;
@@ -390,9 +457,11 @@ begin
           for PersonnageEquipement in Personnage.Equipement do
             if TrimRight(PersonnageEquipement.TypeEquipement) = TrimRight(TypeEquipWe) then
               begin
-               XMLContent.Add(XmlLigneDonnee(ConstXmlItem, PersonnageEquipement.CodeEquipement, PersonnageEquipement.QualiteEquipement));
                PArme.CodeArme:='';
                PArme := ChercheArme(PersonnageEquipement.CodeEquipement);
+               XMLContent.Add(XmlLigneDonnee(ConstXmlItem,
+                 CodeNormalise(PersonnageEquipement.CodeEquipement, PArme.Livre),
+                 PersonnageEquipement.QualiteEquipement));
                ListeLivres:= PersonnageLivre(ListeLivres, PArme.livre);
                if (PArme.CodeArme <> '') then
                  XMLContent.Add(XmlCommentaire(PArme.Libelle));
@@ -404,9 +473,11 @@ begin
           for PersonnageEquipement in Personnage.Equipement do
             if TrimRight(PersonnageEquipement.TypeEquipement) = TrimRight(TypeEquipAr) then
               begin
-               XMLContent.Add(XmlLigneDonnee(ConstXmlItem, PersonnageEquipement.CodeEquipement, PersonnageEquipement.QualiteEquipement));
                PArmure.CodeArmure:='';
                PArmure := ChercheArmure(PersonnageEquipement.CodeEquipement);
+               XMLContent.Add(XmlLigneDonnee(ConstXmlItem,
+                 CodeNormalise(PersonnageEquipement.CodeEquipement, PArmure.Livre),
+                 PersonnageEquipement.QualiteEquipement));
                ListeLivres:= PersonnageLivre(ListeLivres, PArmure.livre);
                if (PArmure.CodeArmure<>'') then
                  XMLContent.Add(XmlCommentaire(PArmure.Libelle));
@@ -418,10 +489,13 @@ begin
           for PersonnageEquipement in Personnage.Equipement do
             if TrimRight(PersonnageEquipement.TypeEquipement) = TrimRight(TypeEquipArS) then
               begin
-                XMLContent.Add(XmlLigneDonnee(ConstXmlItem, PersonnageEquipement.CodeEquipement, PersonnageEquipement.QualiteEquipement));
                 PArmureSimplifiee.CodeArmure:='';
                 PArmureSimplifiee := ChercheArmureSimplifiee(PersonnageEquipement.CodeEquipement);
-                ListeLivres:= PersonnageLivre(ListeLivres, PArmure.livre);
+                XMLContent.Add(XmlLigneDonnee(ConstXmlItem,
+                  CodeNormalise(PersonnageEquipement.CodeEquipement, PArmureSimplifiee.Livre),
+                  PersonnageEquipement.QualiteEquipement));
+                // etait PArmure.livre : le livre de l'armure du bloc PRECEDENT. CONTEXT.md 2.19.
+                ListeLivres:= PersonnageLivre(ListeLivres, PArmureSimplifiee.livre);
                 if (PArmureSimplifiee.CodeArmure<>'') then
                   XMLContent.Add(XmlCommentaire(PArmureSimplifiee .Libelle));
               end;
@@ -439,9 +513,11 @@ begin
           for PersonnageEquipement in Personnage.Equipement do
             if TrimRight(PersonnageEquipement.TypeEquipement) = TrimRight(TypeEquipSp) then
               begin
-               XMLContent.Add(XmlLigneDonnee(ConstXmlItem, PersonnageEquipement.CodeEquipement, IntToStr(PersonnageEquipement.CoutXp)));
                PSort.CodeSort:='';
                PSort := ChercheSort(PersonnageEquipement.CodeEquipement);
+               XMLContent.Add(XmlLigneDonnee(ConstXmlItem,
+                 CodeNormalise(PersonnageEquipement.CodeEquipement, PSort.Livre),
+                 IntToStr(PersonnageEquipement.CoutXp)));
                ListeLivres:= PersonnageLivre(ListeLivres, PSort.livre);
                if (PSort.CodeSort<>'') then
                  XMLContent.Add(XmlCommentaire(PSort.Libelle));
@@ -460,9 +536,10 @@ begin
         XMLContent.Add(XmlDebut(ConstXmlChapitreMutation));
           for PersonnageMutation in Personnage.Mutations do
             begin
-              XMLContent.Add(XmlLigneDonnee(ConstXmlItem, PersonnageMutation.Code, ''));
               PCorruptionTable.Code := '';
               PCorruptionTable := ChercheCorruptionTable(PersonnageMutation.Code);
+              XMLContent.Add(XmlLigneDonnee(ConstXmlItem,
+                CodeNormalise(PersonnageMutation.Code, PCorruptionTable.Livre), ''));
               if (PCorruptionTable.Code <> '') then
                 XMLContent.Add(XmlCommentaire(PCorruptionTable.Libelle));
             end;
@@ -481,7 +558,11 @@ begin
           XMLContent.Add(XmlDebut(ConstXmlSousChapitreCarac));
           For PersonnageXpAttribut in Personnage.XpCoutAttribut do
             begin
-              XMLContent.Add(XmlLigneDonnee(ConstXmlCarac, PersonnageXpAttribut.CodeAttribut+DriveSeparator+IntToStr(PersonnageXpAttribut.Debut)+SeparateurChance+IntToStr(PersonnageXpAttribut.Fin), IntToStr(PersonnageXpAttribut.CoutXp)));
+              PAttribut := ChercheAttribut(PersonnageXpAttribut.CodeAttribut);
+              // Le code est colle a ":debut-fin" : seul le code est prefixe.
+              XMLContent.Add(XmlLigneDonnee(ConstXmlCarac,
+                CodeNormalise(PersonnageXpAttribut.CodeAttribut, PAttribut.Livre)+DriveSeparator+IntToStr(PersonnageXpAttribut.Debut)+SeparateurChance+IntToStr(PersonnageXpAttribut.Fin),
+                IntToStr(PersonnageXpAttribut.CoutXp)));
               PAttribut.CodeAttribut := '';
               PAttribut := ChercheAttribut(PersonnageXpAttribut.CodeAttribut);
               if (PAttribut.CodeAttribut <> '') then
@@ -493,7 +574,11 @@ begin
           XMLContent.Add(XmlDebut(ConstXmlSousChapitreCompetence));
           For PersonnageXpCompetence in Personnage.XpCoutCompetence do
             begin
-              XMLContent.Add(XmlLigneDonnee(ConstXmlCompetence, PersonnageXpCompetence.CodeCompetence+DriveSeparator+IntToStr(PersonnageXpCompetence.Debut)+SeparateurChance+IntToStr(PersonnageXpCompetence.Fin), IntToStr(PersonnageXpCompetence.CoutXp)));
+              PCompetence := ChercheCompetence(PersonnageXpCompetence.CodeCompetence);
+              // Le code est colle a ":debut-fin" : seul le code est prefixe.
+              XMLContent.Add(XmlLigneDonnee(ConstXmlCompetence,
+                CodeNormalise(PersonnageXpCompetence.CodeCompetence, PCompetence.Livre)+DriveSeparator+IntToStr(PersonnageXpCompetence.Debut)+SeparateurChance+IntToStr(PersonnageXpCompetence.Fin),
+                IntToStr(PersonnageXpCompetence.CoutXp)));
               PCompetence.CodeCompetence := '';
               PCompetence := ChercheCompetence(PersonnageXpCompetence.CodeCompetence);
               if (PCompetence.CodeCompetence <> '') then
@@ -505,7 +590,11 @@ begin
           XMLContent.Add(XmlDebut(ConstXmlSousChapitreTalent));
           For PersonnageXpTalent in Personnage.XpCoutTalent do
             begin
-              XMLContent.Add(XmlLigneDonnee(ConstXmlTalent, PersonnageXpTalent.CodeTalent+DriveSeparator+IntToStr(PersonnageXpTalent.Debut)+SeparateurChance+IntToStr(PersonnageXpTalent.Fin), IntToStr(PersonnageXpTalent.CoutXp)));
+              PTalent := ChercheTalent(PersonnageXpTalent.CodeTalent);
+              // Le code est colle a ":debut-fin" : seul le code est prefixe.
+              XMLContent.Add(XmlLigneDonnee(ConstXmlTalent,
+                CodeNormalise(PersonnageXpTalent.CodeTalent, PTalent.Livre)+DriveSeparator+IntToStr(PersonnageXpTalent.Debut)+SeparateurChance+IntToStr(PersonnageXpTalent.Fin),
+                IntToStr(PersonnageXpTalent.CoutXp)));
               PTalent.CodeTalent := '';
               PTalent := ChercheTalent(PersonnageXpTalent.CodeTalent);
               if (PTalent.CodeTalent <> '') then

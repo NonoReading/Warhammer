@@ -447,3 +447,35 @@ PDF Personnage (PRIORITAIRE) :
   RecapTalent et RecapComp n'etaient jamais agrandies avant ecriture (corrige le 22/08/2026). A
   verifier au prochain personnage tres charge : d'autres grilles dimensionnees une fois pour toutes
   dans ChargerImage pourraient etre dans le meme cas (chercher les ".RowCount :=" a valeur constante).
+
+- Filtre des sorts de winspell.pas (lignes 114-125) : il compare les codes de talents en CHAINES
+  BRUTES (Pos) au lieu de CompareRechercheValeur. Consequence : un personnage enregistre AVANT la
+  convention des prefixes de livre (ex. Kuno Kreutzberg, talents "T0080_SIGMAR" au lieu de
+  "RULES-T0080_SIGMAR") ne matche aucun sort, la liste reste vide. Le crash qui en decoulait est
+  corrige (garde sur aRow dans TabSpellSelection, 22/08/2026) mais la liste reste fausse.
+  Deux anomalies voisines a traiter en meme temps : le "if pos(ValeurGenerique, PSort.ListeTalent)
+  <> 0 then ValT := copy(ValT,1,5)" qui donne "RULES" sur un code prefixe, et le test ecrit DEUX
+  FOIS a l'identique lignes 121 et 124. A tester sur Kuno ET sur Rhya (qui, elle, fonctionne).
+  Question ouverte posee a Nono : migrer les anciennes fiches vers les codes prefixes, ou faire
+  accepter les deux formes au code indefiniment ?
+
+- PREFIXER LES MODIFICATEURS D'ATTRIBUT DANS LES LIVRES (demande de Nono, 22/08/2026).
+  Le champ <Attribute> des talents contient des valeurs comme "-ATTR_Ag" (malus) ou "ATTR_Ag"
+  (bonus), sans prefixe de livre. Il faut les passer sous la forme prefixee, comme le reste des
+  donnees ("RULES-ATTR_Ag").
+  ATTENTION, ce n'est PAS une simple recherche/remplacement : SeparateurLivre = '-', donc le signe
+  moins d'un malus et le separateur de livre sont le MEME caractere. "-RULES-ATTR_Ag" serait
+  ambigu pour DecoupeCodeRecherche. Il faut donc trancher AVANT de toucher aux donnees :
+    * soit changer le signe du malus (ex. balise ou champ Valeur negatif separe du code),
+    * soit changer SeparateurLivre,
+    * soit ecrire une regle de decoupe qui sait qu'un '-' en PREMIERE position est un signe.
+  Une fois les donnees prefixees et le decoupage decide, la ligne winpersonnage.pas ~2857 (laissee
+  volontairement en '=' brut le 22/08/2026, voir CONTEXT.md 2.19) pourra passer a
+  CompareRechercheValeur, avec le code prefixe en PREMIER argument.
+
+- Migrer les 5 fiches anterieures a la convention des prefixes (Ernold, Friederich, Harald, Kuno,
+  Markus) : il suffit de les ouvrir puis de les enregistrer, la normalisation se fait a l'ecriture
+  (CONTEXT.md 2.19). A faire avant de rejuger le filtre des sorts de winspell.pas.
+
+- Inventorier ce que Sea of Claws et Up in Arms pourraient encore apporter (equipements, talents,
+  competences, sorts), un livre apres l'autre, comme cela a ete fait pour Lustria.
