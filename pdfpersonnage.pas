@@ -1714,6 +1714,12 @@ Procedure PdfPersonnageCreation(Personnage: StructurePersonnage; BackGround: Boo
     ArmureBras  := ArmureBras  + PersonnageMutationArmureModif(Personnage, BonusBras);
     ArmureCorps := ArmureCorps + PersonnageMutationArmureModif(Personnage, BonusCorps);
     ArmureJambe := ArmureJambe + PersonnageMutationArmureModif(Personnage, BonusJambes);
+    // Talents donnant des Points d'Armure (trait Armour (Rating), marque de Quetzl) -
+    // meme mecanique, source differente. CONTEXT.md 2.15.
+    ArmureTete  := ArmureTete  + PersonnageTalentArmureModif(Personnage, BonusTete);
+    ArmureBras  := ArmureBras  + PersonnageTalentArmureModif(Personnage, BonusBras);
+    ArmureCorps := ArmureCorps + PersonnageTalentArmureModif(Personnage, BonusCorps);
+    ArmureJambe := ArmureJambe + PersonnageTalentArmureModif(Personnage, BonusJambes);
 
     // Écrire du texte sur la page PDF
     PdfTaillePolice(PdfPage, PdfFontValue, ConstPoliceArial, 6);
@@ -2887,6 +2893,12 @@ Procedure PdfBlocArmuresDonnees(PdfPage: TPDFPage; Personnage: StructurePersonna
     ArmureBras  := ArmureBras  + PersonnageMutationArmureModif(Personnage, BonusBras);
     ArmureCorps := ArmureCorps + PersonnageMutationArmureModif(Personnage, BonusCorps);
     ArmureJambe := ArmureJambe + PersonnageMutationArmureModif(Personnage, BonusJambes);
+    // Talents donnant des Points d'Armure (trait Armour (Rating), marque de Quetzl) -
+    // meme mecanique, source differente. CONTEXT.md 2.15.
+    ArmureTete  := ArmureTete  + PersonnageTalentArmureModif(Personnage, BonusTete);
+    ArmureBras  := ArmureBras  + PersonnageTalentArmureModif(Personnage, BonusBras);
+    ArmureCorps := ArmureCorps + PersonnageTalentArmureModif(Personnage, BonusCorps);
+    ArmureJambe := ArmureJambe + PersonnageTalentArmureModif(Personnage, BonusJambes);
   end;
 
 Procedure PdfBlocDessinExplication(PdfPage: TPDFPage; XGauche, XDroite, YHaut, YBas, HauteurLigne: Single; ArmureBonii, ArmeBonii, FabricationBonii: String);

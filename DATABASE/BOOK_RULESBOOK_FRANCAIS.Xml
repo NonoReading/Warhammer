@@ -217,8 +217,8 @@
 <Text name="RULES-MESS_010">"Vous n’avez fait sélectionné la spécialisation du premier talent aléatoire."</Text>
 <Text name="RULES-MESS_011">"Vous n’avez fait sélectionné la spécialisation du deuxième talent aléatoire."</Text>
 <Text name="RULES-MESS_012">"Vous n’avez fait sélectionné la spécialisation du troisième talent aléatoire."</Text>
-<Text name="RULES-MESS_013">"Vous devez choix trois lignes différentes dans la colonne des cinq points."</Text>
-<Text name="RULES-MESS_014">"Vous devez choix trois lignes différentes dans la colonne des trois points."</Text>
+<Text name="RULES-MESS_013">"Vous devez choisir %d lignes différentes dans la colonne des cinq points."</Text>
+<Text name="RULES-MESS_014">"Vous devez choisir %d lignes différentes dans la colonne des trois points."</Text>
 <Text name="RULES-MESS_015">"Vous devez affecter 40 points dans les compétences."</Text>
 <Text name="RULES-MESS_016">"Vous avez des choix d’équipement à faire."</Text>
 <Text name="RULES-MESS_017">"Vous devez donner un nom à votre personnage."</Text>
@@ -3995,6 +3995,10 @@ See page 190 for Fear rules"</Explanation>
 <Talent id="RULES-T0ARM">
 <Trait>"1"</Trait>
 <Attribut>""</Attribut>
+<ModifArmour name="RULES-ARMOL_HEAD">1</ModifArmour>
+<ModifArmour name="RULES-ARMOL_ARM">1</ModifArmour>
+<ModifArmour name="RULES-ARMOL_BODY">1</ModifArmour>
+<ModifArmour name="RULES-ARMOL_LEG">1</ModifArmour>
 <Description language="FRANCAIS">"Armure (Valeur)"</Description>
 <Short language="FRANCAIS">""</Short>
 <Explanation language="FRANCAIS">"La créature est protégée par une armure ou un cuir épais. Elle possède un nombre de Points d'Armure égal à sa Valeur sur toutes les Localisations."</Explanation>

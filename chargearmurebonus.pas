@@ -47,6 +47,11 @@ function ChercheArmureBonus(CodeArmureBonus :String): StructureArmureBonus;
   var
     PArmureBonus:  StructureArmureBonus;
   Begin
+    // Sans cette ligne, Result garde le contenu du PRECEDENT appel quand rien n'est trouve
+    // (une fonction Pascal renvoyant un record ne l'initialise pas). Symptomes vus le
+    // 22/08/2026 : un libelle de talent recopie d'une ligne a l'autre, une competence
+    // affichee deux fois. CONTEXT.md 2.17.
+    Result := Default(StructureArmureBonus);
     for PArmureBonus in ListArmureBonus do
       if CompareRechercheValeur(PArmureBonus.CodeArmureBonus, CodeArmureBonus) then
          Begin

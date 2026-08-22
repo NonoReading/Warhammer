@@ -1994,40 +1994,175 @@ ailleurs à raison — *Sang-froid* agit sur un attribut, *Caméléon* pénalise
 autres**. Le champ accepte des listes (`COMPDISC_*,COMPPRECEP,COMPINTUI` existe déjà), donc
 *Arboricole* pourrait porter `COMPESCAL,COMPDISC_*` — proposé, pas tranché.
 
-#### Point de reprise exact : que faire de `T0ARM`
+#### Fait et confirmé (22/08/2026) — la race est jouable
 
-`T0ARM` est aujourd'hui **décoratif** : sa Valeur (1 pour le Skink, 1 point d'armure sur toutes les
-localisations) n'est calculée nulle part. Les points d'armure ne viennent que des pièces portées et,
-depuis le §2.7, de `ListCorruptionArmureModif` (`chargepersonnage.pas` ligne ~1203). Un Skink saisi
-tel quel afficherait le trait avec zéro point d'armure — c'est faux et ça se voit.
+**Modification 4 — un talent peut donner des Points d'Armure.** Nouvelle unit
+`chargetalentarmuremodif.pas`, copie conforme de `ChargeCorruptionArmureModif` (4 champs, même
+balise `<ModifArmour name="ARMOL_XXX">`), lue dans `DATA_TALENT`, écrite à l'export, sommée par
+`PersonnageTalentArmureModif` (`chargepersonnage.pas`, à côté de la version mutation) et appelée aux
+deux endroits du PDF qui calculent la silhouette. `T0ARM` porte ses 4 `<ModifArmour>` à 1.
 
-Trois options soumises à Nono, sans réponse :
+La valeur déclarée vaut pour **un niveau** et est multipliée par le niveau possédé : c'est la lecture
+de « Armour (**Rating**) », et ça rend exprimable le profil *Armour 2* du Skink Caméléon adverse.
+Sert aussi la marque de Quetzl (« Armour +1 »), qui donne des Points d'Armure sans être une mutation.
+⚠️ `.Clear` et compteur ajoutés à la RAZ de `ChargerLivre` **dès l'écriture** — c'est exactement
+l'oubli du §2.5.
 
-- **(a)** laisser tel quel et le documenter ;
-- **(b)** retirer `T0ARM` et décrire la peau écailleuse dans le texte de l'ethnie ;
-- **(c)** créer `ListTalentArmureModif`, copie de `StructureCorruptionArmureModif` (4 champs) avec
-  une balise `<ModifArmour>` sur le talent et une boucle de plus au même endroit dans
-  `chargepersonnage.pas`. Sert aussi la **marque de Quetzl** (« Armour +1 »), qui donne des points
-  d'armure sans être une mutation.
+**Modification 5 — le nombre de compétences de race sort du code.** `StructureRace` gagne `NbPoint3`
+et `NbPoint5` (le NOMBRE, à ne pas confondre avec `Point3`/`Point5` qui sont la VALEUR de l'avance).
+Deux balises optionnelles sur `<Specie>`, `<Skill5>` et `<Skill3>`, **3 par défaut** — aucune race
+existante à modifier. Les cinq `3` en dur de `wincreation.pas` remplacés. `MESS_013`/`MESS_014`
+portaient le mot « trois » **dans le texte** : passés en `%d` + `Format` (et grammaire corrigée au
+passage, « You must choice » → « choose »). En-têtes de colonnes calculées de même
+(`Format('%dx %dpts', [NbPoint5, Point5])`) — un Skink affiche « 2x 5pts ».
 
-Recommandation : **(c)**. `T0ARM` est le seul des sept traits du Skink qui porte un chiffre.
+Découverte : `Point3`/`Point5` existaient déjà dans la structure mais étaient **écrits en dur à 3 et
+5 au chargement** (`xmlexportimport.pas`). Le terrain était préparé, jamais branché sur le XML.
 
-#### Ensuite
+**Modification 6 — la race et les deux ethnies.** `LUSTR-SPECIE_LIZARD` + `LUSTR-RACE_SKINK` et
+`LUSTR-RACE_SKICH`, complètes : 15 attributs (Blessures `2xBATTR_T+1xBATTR_WP`, sans terme de Force),
+compétences, talents au choix, traits, tables de tirage vérifiées **01-100 exactement une fois**.
+`Ranged (Blowpipe)` n'existait pas → créé (`LUSTR-COMPPROJ_SARBAC`), et l'entrée combinée déclarée
+comme le `RULES-COMPCOMB_2M/RULES-COMPCOMB_FLEAU` du Rulebook. Images : le Skink de la p.136 détouré,
+et **le même viré au vert jungle** pour le Caméléon — le livre n'offre aucune illustration de
+Chameleon Skink (page 142 entièrement en texte, vérifié au rendu). Triche assumée par Nono.
 
-1. `NbCinq`/`NbTrois` sont **écrits en dur à 3** dans `wincreation.pas` (lignes ~1512, ~1517, ~2890,
-   ~2895, ~2897). Le Skink prend **2** compétences à +5 et **2** à +3. `StructureRace` porte déjà
-   `Point3`/`Point5` mais ce sont les *valeurs*, pas les *nombres* : deux champs de plus, une balise
-   dans `<Specie>`, et 3 par défaut pour ne rien changer aux races existantes.
-2. La race `LIZARDMAN` dans `DATA_RACE` + les deux ethnies dans Lustria (attributs, compétences,
-   talents dont les traits, tables de tirage), puis les images.
-3. Étape 3, non conçue : substitutions de compétences (13 lignes p. 162), « un Skink ne change jamais
-   de métier », et les Marques des Anciens (9 marques, avec le troc des 2 points supplémentaires).
+#### Ce que les lézards ont exhumé — cinq défauts de fondation
+
+Remarque de Nono qui résume la soirée : *« le problème de l'ajout des règles, c'est que cela peut
+affecter les fondations »*. Le Skink n'a rien cassé : il a **exercé** des chemins que rien
+n'empruntait. Aucun des cinq bugs n'est dans les données des lézards.
+
+1. **Tirage des choix sans protection anti-doublon.** `ButtonTalentHasardClick` résout en 3 passes ;
+   seule la passe 2 (tirage aléatoire) testait `TalentDejaPossede`. La passe 1 (choix) tirait à
+   l'aveugle. Invisible tant qu'aucune ethnie ne proposait **deux fois la même liste** — le Skink est
+   le premier (« 2 talents parmi les 6 listés »). Corrigé, avec repli sur la liste complète si tout
+   est déjà pris.
+2. **Libellé recopié d'une ligne à l'autre** → §2.17, c'est le défaut systémique des `Cherche*`.
+3. **Le rang n'était pas écrit dans `TabCreationChoix`.** `TabCreationChoixDblClick` identifie une
+   ligne par (source, parent, **rang**), mais `AfficheChoixCreation` n'écrivait jamais `ColChoixRang`
+   — le tableau Hasard voisin écrit le sien depuis toujours. `StrToIntDef('',0)` donnait donc 0 pour
+   toutes les lignes et le choix atterrissait **toujours sur la première**. Diagnostic trouvé par
+   Nono : « je me demande si tu recherches par le libellé / code qui est identique sur les deux
+   lignes ». Une ligne de correctif.
+4. **`RecapTalent` figée à 10 lignes.** `RowCount := 10` en dur dans `ChargerImage`, écriture sans
+   contrôle dans `PhaseSave` → `EGridException: Index Out of range Cell[Col=1 Row=10]` au passage à
+   l'étape suivante. Le Skink cumule 6 traits + 2 talents choisis et franchit la barre. **`RecapComp`
+   avait le même défaut à deux endroits**, et sa `RowCount` n'est même jamais fixée dans le code —
+   elle aurait sauté une étape plus loin. Trois garde-fous posés, sur le modèle qui existait déjà
+   dans `AjouteTalentsResolus`. `RecapAttribut` est borné structurellement (10 colonnes = 10
+   attributs), pas touché.
+5. **Compétence combinée non déclarée** (`A/B/C` dans `SUBCHAPTER_SKILL`) → même racine que le n°2.
+
+#### Reste à faire
+
+- Les **substitutions de compétences** (13 lignes, p.162), l'**interdiction de changer de métier** et
+  les **Marques des Anciens** (9 marques, avec le troc des 2 points supplémentaires) restent dans le
+  texte descriptif de l'ethnie, comme convenu.
+- Le Skink n'est **pas** dans une table de tirage de race : accessible en choix libre uniquement,
+  décision de Nono (« on peut laisser le choix uniquement pour la race »).
+- Trois en-têtes de `TabCreationChoix` affichent littéralement **`LAB_xxx`** — placeholder resté dans
+  le code (`wincreation.pas` lignes 818-820, plus `winlancede.pas` ligne 47). Les commentaires disent
+  quoi mettre : Origine, Élément, Choix. Proposé, pas fait.
 
 **Huitième coquille de livre**, vérifiée à l'image (Lustria p. 161, colonne Skink) : Messager
 **89–92** puis Batelier **92–94**, le 92 appartient aux deux. L'arithmétique ne tranche pas seule,
 comme pour Up in Arms. Proposé : **Messager 89–91** — toute la fin de la colonne est à 3 valeurs
 (86–88, 92–94, 96–97, 98–100) et un chevauchement d'exactement 1 sur le début du suivant ressemble à
 une erreur sur la *fin* de la plage précédente. Non tranché par Nono.
+
+
+---
+
+### 2.16 Commentaires XML : garde posée une fois pour toutes — terminé (21/08/2026)
+
+**Déclencheur** : troisième plantage de la journée sur la même cause, et celui-là je l'avais
+fabriqué. Après avoir réparé les 14 livres le matin (§2.13), j'ai réédité `BOOK LUSTRIA.xml`
+**depuis ma copie de travail périmée** et renvoyé la version cassée par-dessus la version réparée.
+Nono s'en est sorti en ajoutant un `DATA_LABEL` en tête de fichier : `BookNode.FindNode` ne renvoie
+que le **premier** bloc, donc le bloc cassé plus bas n'était plus jamais atteint.
+
+**Audit avant de coder** — ma note dans `A FAIRE.txt` ne citait que 4 blocs, elle était fausse. Sur
+les **31 boucles de lecture** de `xmlexportimport.pas`, **27 n'avaient aucune garde** : 24
+planteraient sur un commentaire (elles lisent `Attributes`, nil sur un commentaire) et 3
+produiraient un doublon silencieux. Seules les 4 écrites cette semaine étaient protégées.
+
+**Correctif : une fonction, pas 27 gardes.** Le problème n'est pas le *nom* du nœud mais le fait
+qu'un commentaire et un nœud texte **ne sont pas des éléments** :
+
+```pascal
+Function XmlElement(Node: TDOMNode): TDOMNode;
+begin
+  While Assigned(Node) and (Node.NodeType <> ELEMENT_NODE) do
+    Node := Node.NextSibling;
+  Result := Node;
+end;
+```
+
+Puis remplacement mécanique de **136 parcours** (`X := Y.FirstChild;` → `X := XmlElement(Y.FirstChild);`
+et l'équivalent pour `NextSibling`), à tous les niveaux d'imbrication. Sur des données valides ça ne
+change rien : un élément traverse la fonction intact.
+
+⚠️ **Piège du remplacement automatique** : il a aussi frappé le corps de `XmlElement` elle-même, qui
+s'appelait donc récursivement. Attrapé à la relecture avant envoi — un remplacement mécanique se
+relit, on ne fait pas confiance au compteur.
+
+**Résultat** : commenter un fichier de données est devenu inoffensif, partout. Confirmé par Nono.
+
+**Restent ouverts, notés dans `A FAIRE.txt`** : `FindNode` ne renvoie que le premier bloc d'un nom
+donné (un second `DATA_LABEL` est silencieusement ignoré — c'est ce qui a fait marcher le dépannage),
+et il n'y a toujours pas de garde par **nom** de balise (un `<Foo>` égaré serait traité comme une
+entrée valide ; beaucoup moins probable, et les boucles internes filtrent déjà par
+`case Node.NodeName of`).
+
+**Leçon de méthode, pour moi** : après avoir envoyé un fichier chez Nono, recharger ma copie avant de
+le retoucher. Deuxième fois dans la journée qu'une copie périmée cause un dégât — la première était
+le script de vérification qui sauvait son état de référence après la modification.
+
+
+---
+
+### 2.17 Les fonctions `Cherche*` renvoyaient le résultat précédent — terminé (22/08/2026)
+
+**Le défaut.** Une fonction Pascal qui renvoie un `record` **n'initialise pas son `Result`**. Sur les
+17 fonctions `Cherche*` du projet, **13 n'affectaient `Result` que dans la branche « trouvé »** :
+quand elles ne trouvaient rien, elles rendaient le contenu de l'appel précédent.
+
+**Comment ça s'est vu.** `AfficheChoixCreation` fait, pour chaque ligne :
+
+```pascal
+PTalent := ChercheTalent(ListeChoixCreation[Ind].CodeSource);
+Lib     := PTalent.Libelle;
+if Lib = '' then
+  Lib := LibelleChoixMultiple(ListeChoixCreation[Ind].CodeSource);
+```
+
+Le code source d'une ligne de choix est `T0149/T0074/...`, pas un talent déclaré. Échec → `Result`
+inchangé. Plus bas dans la même boucle, `ChercheTalent` est rappelée avec le talent *choisi*, trouvé,
+et `PTalent` contient alors ce talent. Au tour suivant, l'échec rend **ce** contenu : `Lib` n'est pas
+vide, `LibelleChoixMultiple` n'est jamais appelé, et **la ligne suivante affiche le talent qu'on vient
+de choisir**. Même mécanisme pour le « Discrétion (Rurale) » affiché deux fois la veille.
+
+**Le correctif** — une ligne en tête de chacune des 13 :
+
+```pascal
+Result := Default(StructureTalent);
+```
+
+`ChercheArmeBonus`, `ChercheArmureBonus`, `ChercheArmureSimplifiee`, `ChercheAttribut`,
+`ChercheCompetence`, `ChercheCorruptionTable`, `ChercheFabrication`, `ChercheLivre`,
+`ChercheLivreLibelle`, `ChercheRaceAttribut`, `ChercheSort`, `ChercheTalent`, `ChercheTexte`.
+Les 4 déjà correctes (`ChercheRace`, `ChercheEspece`, `ChercheMetier`, `ChercheRegle`) — les 4
+écrites récemment — n'ont pas été touchées.
+
+⚠️ **Mon remplacement automatique a posé 4 des 13 lignes dans la mauvaise fonction**, dans une
+fonction voisine renvoyant une chaîne : ça n'aurait pas compilé. Attrapé en relisant chaque fonction
+une par une. C'est la **deuxième fois dans la même journée** (voir §2.16) qu'un remplacement mécanique
+dérape — la leçon écrite le matin n'a pas suffi, il faut relire, pas se fier au compteur.
+
+**Conséquence à garder en tête** : plusieurs endroits contournaient ce défaut, notamment le test
+`RechercheTrouve` ajouté dans `GetTexteLibelle` (§2.13). Ces contournements deviennent redondants mais
+restent corrects — inutile de les retirer.
 
 ---
 

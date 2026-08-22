@@ -19,6 +19,12 @@ Type
         Espece:         String;
         Point3:         Integer;
         Point5:         Integer;
+        // NOMBRE de competences a choisir dans chaque colonne, a ne pas confondre avec
+        // Point3/Point5 juste au-dessus qui sont la VALEUR de l'avance (3 et 5).
+        // Toutes les races du livre de regles en prennent 3 et 3 ; le Skink de Lustria
+        // (p.160) en prend 2 et 2, d'ou ces champs. Defaut 3 si la balise est absente.
+        NbPoint3:       Integer;
+        NbPoint5:       Integer;
   End;
 
   TListRace = Specialize TList<StructureRace>;

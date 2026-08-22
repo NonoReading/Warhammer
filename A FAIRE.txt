@@ -389,11 +389,6 @@ PDF Personnage (PRIORITAIRE) :
   l'enregistrement dont Nono se souvient (bug situé dans WinPersonnage, pas WinCreation). Proposé le
   21/08/2026, pas encore validé.
 
-- ChercheLivre et ChercheLivreLibelle (chargelivre.pas) n'affectent pas leur Result quand elles ne
-  trouvent rien : les champs entiers du record valent alors n'importe quoi. Les appelants doivent
-  tester RechercheTrouve. warhammersource.pas ligne 973 lit PLivre.Officiel sans garde ; le cas est
-  reel (ecran des armures, livre non charge). Signale le 21/08/2026, non corrige.
-
 - Retirer le prefixe "Phase N sur M - " du texte des libelles d'etapes de la creation
   (LAB_173 puis LAB_026..LAB_033, dans les deux Rulebooks). Le numero est deja calcule par le code
   (TabSheet.Caption := IntToStr(i+1)+' sur '+IntToStr(PhaseMax+1)) : le garder en dur dans le texte
@@ -429,3 +424,26 @@ PDF Personnage (PRIORITAIRE) :
   (balise <Trait> sur un talent), il ne reste que de la saisie - a faire quand le Bestiaire sera
   aborde, ou au coup par coup selon les besoins. Cas immediat : Tentacles, pour la mutation
   CORPHY_008 (Fleshy Tentacle), qui debloquerait une des deux dernieres mutations physiques.
+
+- BookNode.FindNode(<nom de bloc>) ne renvoie que le PREMIER bloc portant ce nom : un second
+  DATA_LABEL (ou DATA_TALENT, ou n'importe quel autre) dans un meme livre est silencieusement
+  ignore. Decouvert le 21/08/2026 parce que c'est exactement ce qui a fait marcher le depannage de
+  Nono sur Lustria. Trompeur : rien ne signale que la moitie du fichier n'est pas lue. Piste :
+  soit parcourir tous les blocs du meme nom, soit signaler un doublon dans la passe de controle de
+  coherence.
+
+- Garde par NOM de balise, toujours absente apres le chantier 2.16 : XmlElement saute les
+  commentaires et les noeuds texte, mais un element egare (<Foo> au milieu d'un DATA_TALENT) serait
+  toujours traite comme une entree valide. Beaucoup moins probable qu'un commentaire, et les boucles
+  internes filtrent deja par case Node.NodeName of - note pour memoire, pas urgent.
+
+- Placeholders LAB_xxx restes dans le code : les trois en-tetes de colonnes de TabCreationChoix
+  (wincreation.pas lignes 818-820) et le libelle de WinLanceDes (winlancede.pas ligne 47) appellent
+  GetTexteLibelle('LAB_xxx'), un code qui n'existe pas - le tableau affiche donc litteralement
+  "LAB_xxx". Les commentaires du code disent quoi mettre : Origine, Element, Choix. Il faut creer les
+  libelles dans les deux Rulebooks et remplacer les codes. Signale le 22/08/2026.
+
+- Les traits de creature du Skink (6) le font depasser 10 talents de creation, ce qui a revele que
+  RecapTalent et RecapComp n'etaient jamais agrandies avant ecriture (corrige le 22/08/2026). A
+  verifier au prochain personnage tres charge : d'autres grilles dimensionnees une fois pour toutes
+  dans ChargerImage pourraient etre dans le meme cas (chercher les ".RowCount :=" a valeur constante).

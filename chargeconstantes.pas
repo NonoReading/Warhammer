@@ -119,6 +119,10 @@ Const
       // Valeur "vrai" d'une balise XML booleenne (meme convention que <OFFICIAL>/<COMPLETE>).
       ConstVrai                         = '1';
       ConstXmlEthnic                    = 'Ethnic';
+      // Nombre de competences de race a choisir dans chaque colonne (3 et 3 partout, sauf
+      // le Skink de Lustria qui en prend 2 et 2). Absentes = 3. Voir CONTEXT.md 2.15.
+      ConstXmlNbSkill5                  = 'Skill5';
+      ConstXmlNbSkill3                  = 'Skill3';
       ConstXmlSousChapitreMetier        = 'SUBCHAPTER_CAREER';
       ConstXmlClass                     = 'Class';
       ConstXmlEquipement                = 'Item';

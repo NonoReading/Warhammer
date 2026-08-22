@@ -559,7 +559,9 @@ procedure TWinCreations.ButtonTalentHasardClick(Sender: TObject);
     Ind:      Integer;
     NbTour:   Integer = 0;
     ListOpt:  TStringList;
+    ListLibre:TStringList;
     Deja:     TStringList;
+    IndOpt:   Integer;
     Jet:      Integer;
     CodeTire: String;
     NbEssai:  Integer;
@@ -579,8 +581,24 @@ procedure TWinCreations.ButtonTalentHasardClick(Sender: TObject);
         if (ListeChoixCreation[Ind].CodeChoisi = '') and (not ListeChoixCreation[Ind].Aleatoire) then
           begin
             ListOpt := ListeTalent(ListeChoixCreation[Ind].CodeSource);
-            if ListOpt.Count > 0 then
+            // Ecarter les talents deja pris. Le tirage des CHOIX n'avait pas cette protection,
+            // contrairement au tirage aleatoire juste en dessous (TalentDejaPossede) : ca ne se
+            // voyait pas tant qu'aucune ethnie ne proposait DEUX FOIS la meme liste. Le Skink de
+            // Lustria est le premier ("2 talents parmi les 6 listes", p.160) et tombait deux fois
+            // sur le meme talent. CONTEXT.md 2.15.
+            Deja      := ListeTalentsDejaPris('');
+            ListLibre := TStringList.Create;
+            for IndOpt := 0 to ListOpt.Count - 1 do
+              if not TalentDejaPossede(ListOpt[IndOpt], Deja) then
+                ListLibre.Add(ListOpt[IndOpt]);
+            // Repli sur la liste complete si tout est deja pris : mieux vaut un doublon qu'un
+            // choix vide qui bloquerait l'etape.
+            if ListLibre.Count > 0 then
+              ListeChoixCreation[Ind].CodeChoisi := ListLibre[Random(ListLibre.Count)]
+            else if ListOpt.Count > 0 then
               ListeChoixCreation[Ind].CodeChoisi := ListOpt[Random(ListOpt.Count)];
+            ListLibre.Free;
+            Deja.Free;
             ListOpt.Free;
           end;
       ReconstruitChoixCreation();
@@ -845,6 +863,8 @@ procedure TWinCreations.ChargerImage();
      TabRaceCompetence.Columns[2].Title.Caption      := GetTexteLibelle('LAB_009');
      TabRaceCompetence.ColWidths[3]     := 265;
      TabRaceCompetence.Columns.Add;
+     // valeurs par defaut : reecrites par ethnie au remplissage du tableau (voir plus bas,
+     // "Competences de race") - toutes les races en prennent 3 et 3, le Skink 2 et 2
      TabRaceCompetence.Columns[3].Title.Caption      := '3x 5pts';
      TabRaceCompetence.ColWidths[4]     := 80;
      TabRaceCompetence.Columns.Add;
@@ -1024,6 +1044,12 @@ procedure TWinCreations.PhaseSave(NouvellePhase: Integer);
             For PersonnageTalent in Personnage.CreationTalent do
               Begin
                 PTalent                      := ChercheTalent(PersonnageTalent.CodeTalent);
+                // RecapTalent est dimensionnee une fois pour toutes a 10 lignes dans
+                // ChargerImage : au-dela, l'ecriture levait EGridException (Index Out of range).
+                // Personne n'avait plus de 10 talents de creation avant le Skink, qui en cumule
+                // 6 traits + 2 choix + les specialisations. CONTEXT.md 2.15.
+                if IndTab >= RecapTalent.RowCount then
+                  RecapTalent.RowCount := IndTab + 1;
                 RecapTalent.Cells[1, IndTab] := PTalent.Libelle;
                 RecapTalent.Cells[2, IndTab] := PTalent.CodeTalent;
                 Inc(IndTab);
@@ -1055,6 +1081,9 @@ procedure TWinCreations.PhaseSave(NouvellePhase: Integer);
            For PersonnageCompetence in Personnage.CreationCompetence35 do
               Begin
                 PCompetence := ChercheCompetence(PersonnageCompetence.CodeCompetence);
+                // meme precaution que RecapTalent : la grille n'est jamais agrandie a la saisie
+                if IndTab >= RecapComp.RowCount then
+                  RecapComp.RowCount := IndTab + 1;
                 RecapComp.Cells[1, IndTab] := PCompetence.Libelle;
                 RecapComp.Cells[2, IndTab] := IntToStr(PersonnageCompetence.Valeur);
                 RecapComp.Cells[5, IndTab] := PCompetence.CodeCompetence;
@@ -1098,6 +1127,8 @@ procedure TWinCreations.PhaseSave(NouvellePhase: Integer);
                  begin
                    Row     := DebMetierRec + NbAdd;
                    NbAdd   := NbAdd + 1;
+                   if Row >= RecapComp.RowCount then
+                     RecapComp.RowCount := Row + 1;
                    RecapComp.Cells[1, Row] := PCompetence.Libelle;
                    RecapComp.Cells[3, Row] := IntToStr(PersonnageCompetence.Valeur);
                    RecapComp.Cells[5, Row] := PCompetence.CodeCompetence;
@@ -1442,6 +1473,7 @@ Function TWinCreations.PageEtapesChange(): boolean;
     Indtab:             Integer;
     Vide:               Integer;
     Ok:                 Boolean;
+    PRaceNb:            StructureRace;
   begin
        case PhaseEnCours of
         0:   // choix des livres
@@ -1509,14 +1541,18 @@ Function TWinCreations.PageEtapesChange(): boolean;
          5:  // choix des compétences de race
           Begin
             Ok := True;
-            if (NbCinq <> 3) and (Ok) then
+            // Le nombre attendu vient de l'ethnie, il n'est plus ecrit en dur : toutes les
+            // races du livre de regles en prennent 3 et 3, le Skink de Lustria 2 et 2
+            // (CONTEXT.md 2.15). MESS_013/014 portent un %d, d'ou le Format.
+            PRaceNb := ChercheRace(RaceEnCours);
+            if (NbCinq <> PRaceNb.NbPoint5) and (Ok) then
               begin
-                ShowMessage(GetTexteLibelle('MESS_013'));
+                ShowMessage(Format(GetTexteLibelle('MESS_013'), [PRaceNb.NbPoint5]));
                 Ok := False;
               end;
-            if (NbTrois <> 3) and (Ok) then
+            if (NbTrois <> PRaceNb.NbPoint3) and (Ok) then
               begin
-                ShowMessage(GetTexteLibelle('MESS_014'));
+                ShowMessage(Format(GetTexteLibelle('MESS_014'), [PRaceNb.NbPoint3]));
                 Ok := False;
               end;
             result := Ok;
@@ -2045,6 +2081,7 @@ Procedure TWinCreations.AfficheImageMetier();
 var
   indTabAttribut:     integer;
   PCompetence:        StructureCompetence;
+  PRaceEntete:        StructureRace;
   PRaceCompetence:    StructureRaceCompetence;
   PMetierAttribut:    StructureMetierAttribut;
   PMetierCompetence:  StructureMetierCompetence;
@@ -2083,6 +2120,13 @@ begin
   if MetierEnCours <> '' then
    begin
     // Compétences de race
+    // En-tetes des deux colonnes de choix : le nombre ET la valeur viennent de l'ethnie
+    // (NbPoint5/NbPoint3 et Point5/Point3), plus rien n'est ecrit en dur - un Skink affiche
+    // "2x 5pts" et "2x 3pts". CONTEXT.md 2.15.
+    PRaceEntete := ChercheRace(RaceEnCours);
+    TabRaceCompetence.Columns[3].Title.Caption := Format('%dx %dpts', [PRaceEntete.NbPoint5, PRaceEntete.Point5]);
+    TabRaceCompetence.Columns[4].Title.Caption := Format('%dx %dpts', [PRaceEntete.NbPoint3, PRaceEntete.Point3]);
+
     NbRaceCompetenceTab          := 0;
     TabRaceCompetence.RowCount   := 1;
     NbRaceComp                   := 0;
@@ -2885,16 +2929,19 @@ procedure TWinCreations.ButtonRaceCompetenceHasardClick(Sender: TObject);
   var
     IndTab:    Integer;
     IndPass:   Integer;
+    PRaceNb:   StructureRace;
   begin
+    // le nombre a atteindre vient de l'ethnie (3 et 3 partout, 2 et 2 pour le Skink)
+    PRaceNb := ChercheRace(RaceEnCours);
     // vérifier s'il reste des Cing ou trois
-    if (NbCinq < 3) or (NbTrois < 3) then
+    if (NbCinq < PRaceNb.NbPoint5) or (NbTrois < PRaceNb.NbPoint3) then
       for IndPass := 1 to 3 do
           for IndTab := 1 to TabRaceCompetence.RowCount-1 do
               if (not CompetenceRaceStates[4, IndTab]) and (not CompetenceRaceStates[5, IndTab]) then
                 if ((IndPass in [1,2]) and (StrToIntDef(TabRaceCompetence.Cells[2, IndTab],0) > 0)) or (IndPass = 3) then
-                  if (IndPass in [1,3]) and (NbCinq < 3) then
+                  if (IndPass in [1,3]) and (NbCinq < PRaceNb.NbPoint5) then
                     ClickRaceCompetence(4, IndTab)
-                  else if (IndPass in [2,3]) and (NbTrois < 3) then
+                  else if (IndPass in [2,3]) and (NbTrois < PRaceNb.NbPoint3) then
                     ClickRaceCompetence(5, IndTab);
   end;
 
@@ -3289,6 +3336,12 @@ Procedure TWinCreations.AfficheChoixCreation();
             TabCreationChoix.Cells[ColChoixSource, LigChoix]  := ListeChoixCreation[Ind].CodeSource;
             TabCreationChoix.Cells[ColChoixSel, LigChoix]     := ListeChoixCreation[Ind].CodeChoisi;
             TabCreationChoix.Cells[ColChoixParent, LigChoix]  := ListeChoixCreation[Ind].CodeParent;
+            // Le rang n'etait PAS ecrit ici (il l'est depuis toujours dans le tableau Hasard,
+            // ColHasRang). TabCreationChoixDblClick le relit pour retrouver la bonne entree :
+            // sans lui, StrToIntDef('',0) donnait 0 pour toutes les lignes, donc le choix
+            // atterrissait toujours sur la premiere. Invisible tant qu'une ethnie n'avait pas
+            // deux lignes de meme source - le Skink de Lustria est la premiere. CONTEXT.md 2.15.
+            TabCreationChoix.Cells[ColChoixRang, LigChoix]    := IntToStr(ListeChoixCreation[Ind].Rang);
             if ListeChoixCreation[Ind].CodeChoisi = '' then
               TabCreationChoix.Cells[ColChoixLibSel, LigChoix] := GetTexteLibelle(ConstLabSelSpe)
             else

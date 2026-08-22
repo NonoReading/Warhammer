@@ -10,6 +10,12 @@
 <Skill id="RULES-COMPSIGNES_LIZARD">
 <Description language="ENGLISH">"Secret Signs (Lizardman)"</Description>
 </Skill>
+<Skill id="LUSTR-COMPPROJ_SARBAC">
+<Description language="ENGLISH">"Ranged (Blowpipe)"</Description>
+</Skill>
+<Skill id="RULES-COMPPROJ_ARC/LUSTR-COMPPROJ_SARBAC/RULES-COMPPROJ_LANC">
+<Description language="ENGLISH">"Ranged (Bow, Blowpipe, or Throwing)"</Description>
+</Skill>
 </DATA_SKILL_SPECIALIZATION>
 <!-- Deux traits de créature apportés par Lustria et absents du livre de règles
      (Lustria p.151, encadré "New Traits") : Chameleon pour les Skinks Caméléons,
@@ -39,9 +45,9 @@
 <Test language="ENGLISH">""</Test>
 </Talent>
 </DATA_TALENT>
-<DATA_LABEL>
-  <!-- Le livre porte son propre nom d'affichage : ajouter un livre ne demande
+<!-- Le livre porte son propre nom d'affichage : ajouter un livre ne demande
        plus de modifier BOOK_RULESBOOK.Xml (décision Nono du 21/08/2026). -->
+<DATA_LABEL>
 <Label language="ENGLISH">
 <Text name="LUSTR-BOOK LUSTRIA">"Lustria"</Text>
 </Label>
@@ -49,6 +55,192 @@
 <Text name="LUSTR-BOOK LUSTRIA">"Lustria"</Text>
 </Label>
 </DATA_LABEL>
+<!-- La race Homme-lezard et ses deux ethnies jouables, Skink et Skink Cameleon
+     (Lustria p.160-163). Le livre exclut explicitement Saurus, Kroxigor et Slann.
+     Voir CONTEXT.md 2.15. -->
+<DATA_RACE>
+<Race id="LUSTR-SPECIE_LIZARD">
+<Description language="ENGLISH">"Lizardman"</Description>
+</Race>
+</DATA_RACE>
+<DATA_SPECIE>
+<Specie id="LUSTR-RACE_SKINK">
+<Description language="ENGLISH">"Skink"</Description>
+<Explanation language="ENGLISH">"Skinks are the most numerous and versatile of the Lizardmen, and the only ones the rules offer as Player Characters (Lustria p.160). They possess wit, initiative and curiosity, but are spawned into a fixed role and may never change Career. They suffer Corruption and mutation as Humans do, but only catch diseases that affect cold-blooded creatures. Certain skills make little sense to them and are substituted (Lustria p.162) - Language (Classical) becomes Language (Old One), Lore (Theology) becomes Lore (Old Ones), Melee is limited to Basic and Polearm, Ranged (Crossbow) counts as Ranged (Bow), and Trade (Barber) or (Explosives) have no meaning. A Skink may add Melee (Basic) and Ranged (Blowpipe, Bow, or Throwing) to the First Tier Skill list of any Career it takes. Skinks may be marked by an Old One (Lustria p.151), giving up their two extra points to gain the mark's profile, traits and talent."</Explanation>
+<Ethnic>"LUSTR-SPECIE_LIZARD"</Ethnic>
+<Skill5>"2"</Skill5>
+<Skill3>"2"</Skill3>
+<SUBCHAPTER_ATTR>
+<Attribut name="RULES-ATTR_WS">"2d10+10"</Attribut>
+<Attribut name="RULES-ATTR_BS">"2d10+25"</Attribut>
+<Attribut name="RULES-ATTR_S">"2d10+20"</Attribut>
+<Attribut name="RULES-ATTR_T">"2d10+15"</Attribut>
+<Attribut name="RULES-ATTR_I">"2d10+30"</Attribut>
+<Attribut name="RULES-ATTR_Ag">"2d10+30"</Attribut>
+<Attribut name="RULES-ATTR_Dex">"2d10+20"</Attribut>
+<Attribut name="RULES-ATTR_Int">"2d10+20"</Attribut>
+<Attribut name="RULES-ATTR_WP">"2d10+15"</Attribut>
+<Attribut name="RULES-ATTR_Fel">"2d10+15"</Attribut>
+<Attribut name="RULES-ATTR_Fate">"1"</Attribut>
+<Attribut name="RULES-ATTR_Resil">"0"</Attribut>
+<Attribut name="RULES-ATTR_Wound">"2xBATTR_T+1xBATTR_WP"</Attribut>
+<Attribut name="RULES-ATTR_Supp">"2"</Attribut>
+<Attribut name="RULES-ATTR_Move">"6"</Attribut>
+</SUBCHAPTER_ATTR>
+<SUBCHAPTER_SKILL>
+<Skill>"RULES-COMPATHL"</Skill>
+  <!-- Athletics -->
+<Skill>"RULES-COMPESCAL"</Skill>
+  <!-- Climb -->
+<Skill>"RULES-COMPESQU"</Skill>
+  <!-- Dodge -->
+<Skill>"RULES-COMPCOMB_BASE"</Skill>
+  <!-- Melee (Basic) -->
+<Skill>"RULES-COMPSURVEXT"</Skill>
+  <!-- Outdoor Survival -->
+<Skill>"RULES-COMPPRECEP"</Skill>
+  <!-- Perception -->
+<Skill>"RULES-COMPDISC_RURAL"</Skill>
+  <!-- Stealth (Rural) -->
+<Skill>"RULES-COMPPROJ_ARC/LUSTR-COMPPROJ_SARBAC/RULES-COMPPROJ_LANC"</Skill>
+  <!-- Ranged (Bow, Blowpipe, or Throwing) -->
+</SUBCHAPTER_SKILL>
+<SUBCHAPTER_TALENT>
+<Talent>"RULES-T0149/RULES-T0074/RULES-T0127/RULES-T0045/RULES-T0117/RULES-T0067"</Talent>
+  <!-- 1er des 2 talents au choix -->
+<Talent>"RULES-T0149/RULES-T0074/RULES-T0127/RULES-T0045/RULES-T0117/RULES-T0067"</Talent>
+  <!-- 2eme des 2 talents au choix -->
+<Talent>"RULES-T0AMP"</Talent>
+  <!-- trait : Amphibious -->
+<Talent>"RULES-T0ARB"</Talent>
+  <!-- trait : Arboreal -->
+<Talent>"RULES-T0ARM"</Talent>
+  <!-- trait : Armour 1 (Scaly Skin) -->
+<Talent>"RULES-T0COL"</Talent>
+  <!-- trait : Cold-blooded -->
+<Talent>"RULES-T0164"</Talent>
+  <!-- trait : Night Vision -->
+<Talent>"RULES-T0SIZ_SMAL"</Talent>
+  <!-- trait : Size (Small) -->
+</SUBCHAPTER_TALENT>
+<SUBCHAPTER_CAREER>
+<Career name="RULES-WORK36">"01-03"</Career>
+  <!-- Physician -->
+<Career name="RULES-WORK23">"04-07"</Career>
+  <!-- Scholar -->
+<Career name="RULES-WORK58">"08"</Career>
+  <!-- Wizard -->
+<Career name="RULES-WORK03">"09-13"</Career>
+  <!-- Artisan -->
+<Career name="RULES-WORK34">"14-16"</Career>
+  <!-- Merchant -->
+<Career name="RULES-WORK07">"17-33"</Career>
+  <!-- Townsman -->
+<Career name="RULES-WORK20">"34-36"</Career>
+  <!-- Envoy -->
+<Career name="RULES-WORK44">"37"</Career>
+  <!-- Noble -->
+<Career name="RULES-WORK56">"38-50"</Career>
+  <!-- Servant -->
+<Career name="RULES-WORK29">"51-53"</Career>
+  <!-- Herbalist -->
+<Career name="RULES-WORK10">"54-60"</Career>
+  <!-- Hunter -->
+<Career name="RULES-WORK40">"61-64"</Career>
+  <!-- Miner -->
+<Career name="RULES-WORK41">"65"</Career>
+  <!-- Mystic -->
+<Career name="RULES-WORK19">"66-69"</Career>
+  <!-- Scout -->
+<Career name="RULES-WORK63">"70-85"</Career>
+  <!-- Villager -->
+<Career name="RULES-WORK55">"86-88"</Career>
+  <!-- Entertainer -->
+<Career name="RULES-WORK38">"89-91"</Career>
+  <!-- Messenger -->
+<Career name="RULES-WORK06">"92-94"</Career>
+  <!-- Boatman -->
+<Career name="RULES-WORK43">"95"</Career>
+  <!-- Huffer -->
+<Career name="RULES-WORK30">"96-97"</Career>
+  <!-- Outlaw -->
+<Career name="RULES-WORK57">"98-100"</Career>
+  <!-- Soldier -->
+</SUBCHAPTER_CAREER>
+</Specie>
+<Specie id="LUSTR-RACE_SKICH">
+<Description language="ENGLISH">"Chameleon Skink"</Description>
+<Explanation language="ENGLISH">"Chameleon Skinks are a rarer spawning, jungle hunters without equal, who dwell in the deepest and most remote parts of Lustria (Lustria p.142). They have the diminutive hunched stature of Skinks but eyes that move independently, and a skin that shifts colour to match their surroundings. Unlike other Skinks they are never marked by an Old One, and their life path leaves them but one role: Scout. The same skill substitutions and career restrictions as Skinks apply (Lustria p.162)."</Explanation>
+<Ethnic>"LUSTR-SPECIE_LIZARD"</Ethnic>
+<Skill5>"2"</Skill5>
+<Skill3>"2"</Skill3>
+<SUBCHAPTER_ATTR>
+<Attribut name="RULES-ATTR_WS">"2d10+10"</Attribut>
+<Attribut name="RULES-ATTR_BS">"2d10+35"</Attribut>
+<Attribut name="RULES-ATTR_S">"2d10+20"</Attribut>
+<Attribut name="RULES-ATTR_T">"2d10+15"</Attribut>
+<Attribut name="RULES-ATTR_I">"2d10+30"</Attribut>
+<Attribut name="RULES-ATTR_Ag">"2d10+35"</Attribut>
+<Attribut name="RULES-ATTR_Dex">"2d10+20"</Attribut>
+<Attribut name="RULES-ATTR_Int">"2d10+20"</Attribut>
+<Attribut name="RULES-ATTR_WP">"2d10+15"</Attribut>
+<Attribut name="RULES-ATTR_Fel">"2d10+10"</Attribut>
+<Attribut name="RULES-ATTR_Fate">"0"</Attribut>
+<Attribut name="RULES-ATTR_Resil">"0"</Attribut>
+<Attribut name="RULES-ATTR_Wound">"2xBATTR_T+1xBATTR_WP"</Attribut>
+<Attribut name="RULES-ATTR_Supp">"2"</Attribut>
+<Attribut name="RULES-ATTR_Move">"6"</Attribut>
+</SUBCHAPTER_ATTR>
+<SUBCHAPTER_SKILL>
+<Skill>"RULES-COMPATHL"</Skill>
+  <!-- Athletics -->
+<Skill>"RULES-COMPESCAL"</Skill>
+  <!-- Climb -->
+<Skill>"RULES-COMPESQU"</Skill>
+  <!-- Dodge -->
+<Skill>"RULES-COMPCOMB_BASE"</Skill>
+  <!-- Melee (Basic) -->
+<Skill>"RULES-COMPSURVEXT"</Skill>
+  <!-- Outdoor Survival -->
+<Skill>"RULES-COMPPRECEP"</Skill>
+  <!-- Perception -->
+<Skill>"RULES-COMPDISC_RURAL"</Skill>
+  <!-- Stealth (Rural) -->
+<Skill>"RULES-COMPPROJ_ARC/LUSTR-COMPPROJ_SARBAC/RULES-COMPPROJ_LANC"</Skill>
+  <!-- Ranged (Blowpipe, Bow, or Throwing) - meme code combine que le Skink -->
+</SUBCHAPTER_SKILL>
+<SUBCHAPTER_TALENT>
+<Talent>"RULES-T0149/RULES-T0074/RULES-T0127/RULES-T0045/RULES-T0117"</Talent>
+  <!-- 1er des 2 talents au choix -->
+<Talent>"RULES-T0149/RULES-T0074/RULES-T0127/RULES-T0045/RULES-T0117"</Talent>
+  <!-- 2eme des 2 talents au choix -->
+<Talent>"RULES-T0139_VUE"</Talent>
+  <!-- trait : Acute Sense (Sight) -->
+<Talent>"RULES-T0AMP"</Talent>
+  <!-- trait : Amphibious -->
+<Talent>"RULES-T0ARB"</Talent>
+  <!-- trait : Arboreal -->
+<Talent>"RULES-T0ARM"</Talent>
+  <!-- trait : Armour 1 (Scaly Skin) -->
+<Talent>"RULES-T0COL"</Talent>
+  <!-- trait : Cold-blooded -->
+<Talent>"RULES-T0164"</Talent>
+  <!-- trait : Night Vision -->
+<Talent>"RULES-T0SIZ_SMAL"</Talent>
+  <!-- trait : Size (Small) -->
+<Talent>"LUSTR-T0CHA"</Talent>
+  <!-- trait : Chameleon -->
+<Talent>"RULES-T0STE"</Talent>
+  <!-- trait : Stealthy -->
+</SUBCHAPTER_TALENT>
+<SUBCHAPTER_CAREER>
+<Career name="RULES-WORK44">"01"</Career>
+  <!-- Noble -->
+<Career name="RULES-WORK19">"02-100"</Career>
+  <!-- Scout -->
+</SUBCHAPTER_CAREER>
+</Specie>
+</DATA_SPECIE>
 <DATA_CAREER>
 <Career id="LUSTR-WORK123">
 <Description language="ENGLISH">"Interpreter"</Description>

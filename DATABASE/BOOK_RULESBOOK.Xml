@@ -218,8 +218,8 @@ ifically your Strength, Endurance and Mental Strength Bonuses (abbreviations BF,
 <Text name="RULES-MESS_010">"You have not selected the specialization of the first random talent."</Text>
 <Text name="RULES-MESS_011">"You did not have the specialization of the second random talent selected."</Text>
 <Text name="RULES-MESS_012">"You have not selected the specialization of the third random talent."</Text>
-<Text name="RULES-MESS_013">"You must choice three different rows in the column of five points."</Text>
-<Text name="RULES-MESS_014">"You must choice three different rows in the column of three points."</Text>
+<Text name="RULES-MESS_013">"You must choose %d different rows in the column of five points."</Text>
+<Text name="RULES-MESS_014">"You must choose %d different rows in the column of three points."</Text>
 <Text name="RULES-MESS_015">"You must assign 40 points in skills."</Text>
 <Text name="RULES-MESS_016">"You have equipment choices to make."</Text>
 <Text name="RULES-MESS_017">"You must give your character a name."</Text>
@@ -4104,6 +4104,10 @@ See page 190 for Fear rules"</Explanation>
 <Talent id="RULES-T0ARM">
 <Trait>"1"</Trait>
 <Attribut>""</Attribut>
+<ModifArmour name="RULES-ARMOL_HEAD">1</ModifArmour>
+<ModifArmour name="RULES-ARMOL_ARM">1</ModifArmour>
+<ModifArmour name="RULES-ARMOL_BODY">1</ModifArmour>
+<ModifArmour name="RULES-ARMOL_LEG">1</ModifArmour>
 <Description language="ENGLISH">"Armour (Rating)"</Description>
 <Short language="ENGLISH">""</Short>
 <Explanation language="ENGLISH">"The creature is protected by armour or thick hide. It has Rating Armour Points on all Hit Locations."</Explanation>

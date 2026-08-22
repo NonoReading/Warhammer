@@ -23,7 +23,7 @@ uses
   ChargeTalentCompetenceAjoute, ChargeRaceCorruptionCreation,
   ChargeCorruptionTable, ChargeRaceOpinion, ChargeArmureBonusModif,
   ChargeCorruptionAttributModif, ChargeCorruptionCompetenceModif,
-  ChargeCorruptionArmureModif,
+  ChargeCorruptionArmureModif, ChargeTalentArmureModif,
   CustomDrawn_Common, BCButton, BCLabel, fpTTF,
   PdfPersonnage, XmlExportImport, fppdf, WinLivre;
 
@@ -635,6 +635,7 @@ procedure TMenu.ChargerLivre(ForceMaJ: Boolean; ForceLivre: String);
         NbTalentAttributModif       := 0;
         NbTalentCompetenceModif     := 0;
         NbTalentCompetenceAjoute    := 0;
+        NbTalentArmureModif         := 0;
         NbRaceOpinion               := 0;
 
         // vider les données
@@ -681,6 +682,7 @@ procedure TMenu.ChargerLivre(ForceMaJ: Boolean; ForceLivre: String);
         ListCorruptionCompetenceModif.Clear;
         ListCorruptionCompetenceAttributModif.Clear;
         ListCorruptionArmureModif.Clear;
+        ListTalentArmureModif.Clear;
       end;
 
     // chercher les livres
@@ -875,6 +877,7 @@ procedure TMenu.FormCreate(Sender: TObject);
        ListCorruptionCompetenceModif:= TListCorruptionCompetenceModif.Create;
        ListCorruptionCompetenceAttributModif := TListCorruptionCompetenceAttributModif.Create;
        ListCorruptionArmureModif    := TListCorruptionArmureModif.Create;
+       ListTalentArmureModif        := TListTalentArmureModif.Create;
 
        // chercher les livres
        // Le RULESBOOK doit être chargé en premier : d'autres livres (ex. BOOK

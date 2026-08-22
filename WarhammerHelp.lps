@@ -8,7 +8,7 @@
       <Unit>
         <Filename Value="WarhammerHelp.lpr"/>
         <IsPartOfProject Value="True"/>
-        <EditorIndex Value="7"/>
+        <EditorIndex Value="8"/>
         <CursorPos X="36" Y="6"/>
         <UsageCount Value="200"/>
         <Loaded Value="True"/>
@@ -242,8 +242,7 @@
         <HasResources Value="True"/>
         <ResourceBaseClass Value="Form"/>
         <UnitName Value="WinPersonnage"/>
-        <IsVisibleTab Value="True"/>
-        <EditorIndex Value="5"/>
+        <EditorIndex Value="6"/>
         <TopLine Value="3583"/>
         <CursorPos X="26" Y="3586"/>
         <UsageCount Value="200"/>
@@ -502,8 +501,8 @@
         <IsPartOfProject Value="True"/>
         <UnitName Value="XmlExportImport"/>
         <EditorIndex Value="4"/>
-        <TopLine Value="1019"/>
-        <CursorPos X="29" Y="1032"/>
+        <TopLine Value="1028"/>
+        <CursorPos X="38" Y="1041"/>
         <UsageCount Value="200"/>
         <Loaded Value="True"/>
       </Unit>
@@ -589,7 +588,7 @@
         <HasResources Value="True"/>
         <ResourceBaseClass Value="Form"/>
         <UnitName Value="WinMutation"/>
-        <EditorIndex Value="6"/>
+        <EditorIndex Value="7"/>
         <TopLine Value="82"/>
         <CursorPos X="27" Y="94"/>
         <UsageCount Value="31"/>
@@ -682,10 +681,12 @@
       <Unit>
         <Filename Value="C:\lazarus\lcl\grids.pas"/>
         <UnitName Value="Grids"/>
-        <EditorIndex Value="-1"/>
-        <TopLine Value="3179"/>
-        <CursorPos X="25" Y="3197"/>
+        <IsVisibleTab Value="True"/>
+        <EditorIndex Value="5"/>
+        <TopLine Value="10337"/>
+        <CursorPos X="38" Y="10347"/>
         <UsageCount Value="77"/>
+        <Loaded Value="True"/>
       </Unit>
       <Unit>
         <Filename Value="C:\lazarus\lcl\lclmessageglue.pas"/>
@@ -1229,38 +1230,6 @@
     </Units>
     <JumpHistory HistoryIndex="29">
       <Position>
-        <Filename Value="chargeconstantes.pas"/>
-        <Caret Line="175" Column="52" TopLine="155"/>
-      </Position>
-      <Position>
-        <Filename Value="chargeconstantes.pas"/>
-        <Caret Line="171" Column="21" TopLine="165"/>
-      </Position>
-      <Position>
-        <Filename Value="pdfpersonnage.pas"/>
-        <Caret Line="2881" Column="33" TopLine="2865"/>
-      </Position>
-      <Position>
-        <Filename Value="pdfpersonnage.pas"/>
-        <Caret Line="2882" Column="45" TopLine="2866"/>
-      </Position>
-      <Position>
-        <Filename Value="pdfpersonnage.pas"/>
-        <Caret Line="2875" TopLine="2866"/>
-      </Position>
-      <Position>
-        <Filename Value="winpersonnage.pas"/>
-        <Caret Line="3064" Column="40" TopLine="3054"/>
-      </Position>
-      <Position>
-        <Filename Value="winpersonnage.pas"/>
-        <Caret Line="1903" Column="62" TopLine="1892"/>
-      </Position>
-      <Position>
-        <Filename Value="winpersonnage.pas"/>
-        <Caret Line="1919" Column="48" TopLine="1901"/>
-      </Position>
-      <Position>
         <Filename Value="winpersonnage.pas"/>
         <Caret Line="1947" Column="87" TopLine="1929"/>
       </Position>
@@ -1347,6 +1316,38 @@
       <Position>
         <Filename Value="winpersonnage.pas"/>
         <Caret Line="3447" Column="27" TopLine="3436"/>
+      </Position>
+      <Position>
+        <Filename Value="winpersonnage.pas"/>
+        <Caret Line="3586" Column="26" TopLine="3583"/>
+      </Position>
+      <Position>
+        <Filename Value="xmlexportimport.pas"/>
+        <Caret Line="1028" TopLine="1019"/>
+      </Position>
+      <Position>
+        <Filename Value="xmlexportimport.pas"/>
+        <Caret Line="1029" TopLine="1019"/>
+      </Position>
+      <Position>
+        <Filename Value="xmlexportimport.pas"/>
+        <Caret Line="904" Column="51" TopLine="889"/>
+      </Position>
+      <Position>
+        <Filename Value="xmlexportimport.pas"/>
+        <Caret Line="1028" TopLine="1017"/>
+      </Position>
+      <Position>
+        <Filename Value="xmlexportimport.pas"/>
+        <Caret Line="896" Column="46" TopLine="887"/>
+      </Position>
+      <Position>
+        <Filename Value="xmlexportimport.pas"/>
+        <Caret Line="1021" Column="115" TopLine="1017"/>
+      </Position>
+      <Position>
+        <Filename Value="xmlexportimport.pas"/>
+        <Caret Line="1041" Column="38" TopLine="1028"/>
       </Position>
     </JumpHistory>
     <RunParams>

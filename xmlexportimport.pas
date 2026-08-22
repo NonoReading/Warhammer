@@ -18,11 +18,12 @@ uses
   ChargeRaceCorruptionCreation, ChargeCorruptionTable, ChargeTalentAttributModif,
   ChargeTalentCompetenceModif, ChargeTalentCompetenceAjoute, ChargeRaceOpinion,
   ChargeArmureBonusModif, ChargeCorruptionAttributModif, ChargeCorruptionCompetenceModif,
-  ChargeCorruptionArmureModif,
+  ChargeCorruptionArmureModif, ChargeTalentArmureModif,
   XMLRead, DOM, Unitcalcul,  Dialogs, strutils;
 
 Procedure XmlExportBook(Livre: String; Langue: String);
 Procedure XmlImport(FileName: String; OnlyPrimary: Boolean; OnlyCode: Boolean);
+Function XmlElement(Node: TDOMNode): TDOMNode;
 Function XmlDebut(TypeDonnee: string): String;
 Function XmlFin(TypeDonnee: string): String;
 Function XmlLigne(TypeDonnee: string; Valeur: String): String;
@@ -39,6 +40,27 @@ Function XmlCodeLivre(Livre: String): String;
 Function XmlCreeCodeLivre(Livre: String; Code: String): String;
 
 implementation
+
+// Renvoie Node s'il est un ELEMENT XML, sinon le premier frere suivant qui en est un.
+//
+// Un commentaire XML et un noeud texte sont des enfants comme les autres : les boucles de
+// lecture ci-dessous parcourent TOUS les enfants d'un bloc, donc sans ce filtre elles les
+// traitent comme des donnees. Deux consequences, rencontrees toutes les deux pour de vrai :
+//   - la boucle lit Node.Attributes, qui vaut nil sur un commentaire -> ACCESS VIOLATION au
+//     chargement (DATA_LABEL, 21/08/2026, plantage au lancement) ;
+//   - la boucle ne lit pas d'attribut mais reutilise l'enregistrement du tour precedent, qui
+//     n'est pas remis a zero -> DOUBLON SILENCIEUX (DATA_CAREER_ROLL, 20/08/2026, un metier
+//     affiche deux fois).
+//
+// Poser la garde ici plutot que dans chacune des 31 boucles evite d'en oublier une, et rend
+// inoffensif le fait de commenter un fichier de donnees - ce qui etait devenu un piege a
+// chaque saisie. Voir CONTEXT.md 2.16.
+Function XmlElement(Node: TDOMNode): TDOMNode;
+begin
+  While Assigned(Node) and (Node.NodeType <> ELEMENT_NODE) do
+    Node := Node.NextSibling;
+  Result := Node;
+end;
 
 Function XmlReplace(Source: String): String;
 begin
@@ -143,6 +165,7 @@ Procedure XmlExportBook(Livre: String; Langue: String);
     FileName:                 String;
     PCompetence:              StructureCompetence;
     PTalent:                  StructureTalent;
+    PTalentArmureModifExp:    StructureTalentArmureModif;
     PRace:                    StructureRace;
     PRaceAttribut:            StructureRaceAttribut;
     PRaceCompetence:          StructureRaceCompetence;
@@ -345,6 +368,11 @@ Procedure XmlExportBook(Livre: String; Langue: String);
               // ecrite seulement si vraie : les ~700 talents ordinaires ne portent pas la balise
               if PTalent.Trait then
                 XmlContent.Add(XmlLigne(ConstXmlTrait, ConstVrai));
+              for PTalentArmureModifExp in ListTalentArmureModif do
+                if CompareRechercheValeur(PTalentArmureModifExp.CodeTalent, PTalent.CodeTalent) then
+                  XmlContent.Add(XmlLigneDonnee(ConstXmlModifieArmure,
+                    XmlCreeCodeLivre(ConstRulesBook, PTalentArmureModifExp.CodeLocalisation),
+                    IntToStr(PTalentArmureModifExp.Valeur)));
               XmlContent.Add(XmlLigneLangue(ConstXmlTest, Langue, PTalent.Tests));
 
               XmlContent.Add(XmlFinCode(ConstXmlTalent));
@@ -405,6 +433,12 @@ Procedure XmlExportBook(Livre: String; Langue: String);
               XmlContent.Add(XmlLigneLangue(ConstXmlDescription, Langue, PRace.Libelle));
               XmlContent.Add(XmlLigneLangue(ConstXmlExplanation, Langue, PRace.Description));
               XmlContent.Add(XmlLigne(ConstXmlEthnic, PRace.Espece));
+              // ecrites seulement si elles s'ecartent du defaut, pour ne pas alourdir les
+              // dizaines de races qui prennent 3 et 3
+              if PRace.NbPoint5 <> 3 then
+                XmlContent.Add(XmlLigne(ConstXmlNbSkill5, IntToStr(PRace.NbPoint5)));
+              if PRace.NbPoint3 <> 3 then
+                XmlContent.Add(XmlLigne(ConstXmlNbSkill3, IntToStr(PRace.NbPoint3)));
               // Attribut de race
               XmlContent.Add(XmlDebut(ConstXmlSousChapitreCarac));
               for PRaceAttribut in ListRaceAttribut do
@@ -873,6 +907,7 @@ Procedure XmlImport(FileName: String; OnlyPrimary: Boolean; OnlyCode: Boolean);
     PTalentAttributModif:     StructureTalentAttributModif;
     PTalentCompetenceModif:   StructureTalentCompetenceModif;
     PTalentCompetenceAjoute:  StructureTalentCompetenceAjoute;
+    PTalentArmureModif:       StructureTalentArmureModif;
     PArmureBonusModif:        StructureArmureBonusModif;
     PCorruptionAttributModif:   StructureCorruptionAttributModif;
     PCorruptionCompetenceModif: StructureCorruptionCompetenceModif;
@@ -929,14 +964,14 @@ Procedure XmlImport(FileName: String; OnlyPrimary: Boolean; OnlyCode: Boolean);
               NodeNv1 := BookNode.FindNode(ConstXmlDataAttribut);
               if Assigned(NodeNv1) then
                 begin
-                  NodeNv2 := NodeNv1.FirstChild;
+                  NodeNv2 := XmlElement(NodeNv1.FirstChild);
                   While Assigned(NodeNv2) do
                     begin
                       PAttribut.Livre          := Livre;
                       PAttribut.CodeAttribut   := RemoveQuotes(UTF8Encode(NodeNv2.Attributes.GetNamedItem(ConstXmlId).NodeValue));
                       PTraduction              := InitTrad(ConstPAttribut, PAttribut.CodeAttribut, '', PAttribut.Livre);
 
-                      Node := NodeNv2.FirstChild;
+                      Node := XmlElement(NodeNv2.FirstChild);
                       while Assigned(Node) do
                         begin
                           case Node.NodeName of
@@ -962,7 +997,7 @@ Procedure XmlImport(FileName: String; OnlyPrimary: Boolean; OnlyCode: Boolean);
                               PAttribut.OrdreAttribut   := StrToIntDef(RemoveQuotes(UTF8Encode(Node.TextContent)),0);
                           end;
 
-                          Node := Node.NextSibling;
+                          Node := XmlElement(Node.NextSibling);
                         end;
                         if LangueDef = ConstAnglais then
                           begin
@@ -972,7 +1007,7 @@ Procedure XmlImport(FileName: String; OnlyPrimary: Boolean; OnlyCode: Boolean);
 
                         AddTrad(PTraduction, Langue);
 
-                      NodeNv2 := NodeNv2.NextSibling;
+                      NodeNv2 := XmlElement(NodeNv2.NextSibling);
                     end;
                 end;
 
@@ -980,7 +1015,7 @@ Procedure XmlImport(FileName: String; OnlyPrimary: Boolean; OnlyCode: Boolean);
               NodeNv1 := BookNode.FindNode(ConstXmlDataAttributCost);
               if Assigned(NodeNv1) then
                 begin
-                  NodeNv2 := NodeNv1.FirstChild;
+                  NodeNv2 := XmlElement(NodeNv1.FirstChild);
                   While Assigned(NodeNv2) do
                     begin
                       PAttributAugmentation.Livre  := Livre;
@@ -993,7 +1028,7 @@ Procedure XmlImport(FileName: String; OnlyPrimary: Boolean; OnlyCode: Boolean);
                             inc(NbAttributAugmentation);
                           end;
 
-                      NodeNv2 := NodeNv2.NextSibling;
+                      NodeNv2 := XmlElement(NodeNv2.NextSibling);
                     end;
                 end;
 
@@ -1001,7 +1036,7 @@ Procedure XmlImport(FileName: String; OnlyPrimary: Boolean; OnlyCode: Boolean);
               NodeNv1 := BookNode.FindNode(ConstXmlDataSkillCost);
               if Assigned(NodeNv1) then
                 begin
-                  NodeNv2 := NodeNv1.FirstChild;
+                  NodeNv2 := XmlElement(NodeNv1.FirstChild);
                   While Assigned(NodeNv2) do
                     begin
                       PCompetenceAugmentation.Livre          := Livre;
@@ -1014,7 +1049,7 @@ Procedure XmlImport(FileName: String; OnlyPrimary: Boolean; OnlyCode: Boolean);
                             inc(NbCompetenceAugmentation);
                           end;
 
-                      NodeNv2 := NodeNv2.NextSibling;
+                      NodeNv2 := XmlElement(NodeNv2.NextSibling);
                     end;
                 end;
 
@@ -1022,11 +1057,11 @@ Procedure XmlImport(FileName: String; OnlyPrimary: Boolean; OnlyCode: Boolean);
               NodeNv1 := BookNode.FindNode(ConstXmlDataLabel);
               if Assigned(NodeNv1) then
                 begin
-                  NodeNv2 := NodeNv1.FirstChild;
+                  NodeNv2 := XmlElement(NodeNv1.FirstChild);
                   While Assigned(NodeNv2) do
                     begin
                       Langue                    := RemoveQuotes(UTF8Encode(NodeNv2.Attributes.GetNamedItem(ConstXmlLanguage).NodeValue));
-                      NodeNv3 := NodeNv2.FirstChild;
+                      NodeNv3 := XmlElement(NodeNv2.FirstChild);
                       While Assigned(NodeNv3) do
                         begin
                           PTexte.Code           := RemoveQuotes(UTF8Encode(NodeNv3.Attributes.GetNamedItem(ConstXmlData).NodeValue));
@@ -1043,10 +1078,10 @@ Procedure XmlImport(FileName: String; OnlyPrimary: Boolean; OnlyCode: Boolean);
 
                           AddTrad(PTraduction, Langue);
 
-                          NodeNv3 := NodeNv3.NextSibling;
+                          NodeNv3 := XmlElement(NodeNv3.NextSibling);
                         end;
 
-                      NodeNv2 := NodeNv2.NextSibling;
+                      NodeNv2 := XmlElement(NodeNv2.NextSibling);
                     end;
                 end;
             end;
@@ -1057,14 +1092,14 @@ Procedure XmlImport(FileName: String; OnlyPrimary: Boolean; OnlyCode: Boolean);
               NodeNv1 := BookNode.FindNode(ConstXmlDataSkill);
               if Assigned(NodeNv1) then
                 begin
-                  NodeNv2 := NodeNv1.FirstChild;
+                  NodeNv2 := XmlElement(NodeNv1.FirstChild);
                   While Assigned(NodeNv2) do
                     begin
                       PCompetence.Livre          := Livre;
                       PCompetence.SousCompetence := False;
                       PCompetence.CodeCompetence := RemoveQuotes(UTF8Encode(NodeNv2.Attributes.GetNamedItem(ConstXmlId).NodeValue));
                       PTraduction                := InitTrad(ConstPCompetence, PCompetence.CodeCompetence, '', PCompetence.Livre);
-                      Node := NodeNv2.FirstChild;
+                      Node := XmlElement(NodeNv2.FirstChild);
                       while Assigned(Node) do
                         begin
                           case Node.NodeName of
@@ -1084,7 +1119,7 @@ Procedure XmlImport(FileName: String; OnlyPrimary: Boolean; OnlyCode: Boolean);
                               end;
                           end;
 
-                          Node := Node.NextSibling;
+                          Node := XmlElement(Node.NextSibling);
                         end;
                      if LangueDef = ConstAnglais then
                        begin
@@ -1095,7 +1130,7 @@ Procedure XmlImport(FileName: String; OnlyPrimary: Boolean; OnlyCode: Boolean);
 
                       AddTrad(PTraduction, Langue);
 
-                      NodeNv2 := NodeNv2.NextSibling;
+                      NodeNv2 := XmlElement(NodeNv2.NextSibling);
                     end;
                 end;
 
@@ -1103,7 +1138,7 @@ Procedure XmlImport(FileName: String; OnlyPrimary: Boolean; OnlyCode: Boolean);
               NodeNv1 := BookNode.FindNode(ConstXmlDataSkillSpe);
               if Assigned(NodeNv1) then
                 begin
-                  NodeNv2 := NodeNv1.FirstChild;
+                  NodeNv2 := XmlElement(NodeNv1.FirstChild);
                   While Assigned(NodeNv2) do
                     begin
                       PCompetence.Livre          := Livre;
@@ -1113,7 +1148,7 @@ Procedure XmlImport(FileName: String; OnlyPrimary: Boolean; OnlyCode: Boolean);
                       PCompetence.CodeCompetence := RemoveQuotes(UTF8Encode(NodeNv2.Attributes.GetNamedItem(ConstXmlId).NodeValue));
                       PTraduction                := InitTrad(ConstPCompetence, PCompetence.CodeCompetence, '', PCompetence.Livre);
 
-                      Node := NodeNv2.FirstChild;
+                      Node := XmlElement(NodeNv2.FirstChild);
                       while Assigned(Node) do
                         begin
                           case Node.NodeName of
@@ -1125,7 +1160,7 @@ Procedure XmlImport(FileName: String; OnlyPrimary: Boolean; OnlyCode: Boolean);
                               end;
                           end;
 
-                          Node := Node.NextSibling;
+                          Node := XmlElement(Node.NextSibling);
                         end;
                       PCompetenceMere := ChercheCompetence(ExtractStringBefore(PCompetence.CodeCompetence,ValeurSousCompetence)+ValeurGenerique);
                       PCompetence.CodeAttribut := PCompetenceMere.CodeAttribut;
@@ -1137,7 +1172,7 @@ Procedure XmlImport(FileName: String; OnlyPrimary: Boolean; OnlyCode: Boolean);
 
                       AddTrad(PTraduction, Langue);
 
-                      NodeNv2 := NodeNv2.NextSibling;
+                      NodeNv2 := XmlElement(NodeNv2.NextSibling);
                     end;
                 end;
 
@@ -1145,7 +1180,7 @@ Procedure XmlImport(FileName: String; OnlyPrimary: Boolean; OnlyCode: Boolean);
               NodeNv1 := BookNode.FindNode(ConstXmlDataTalent);
               if Assigned(NodeNv1) then
                 begin
-                  NodeNv2 := NodeNv1.FirstChild;
+                  NodeNv2 := XmlElement(NodeNv1.FirstChild);
                   While Assigned(NodeNv2) do
                     begin
                       PTalent.Livre          := Livre;
@@ -1154,7 +1189,7 @@ Procedure XmlImport(FileName: String; OnlyPrimary: Boolean; OnlyCode: Boolean);
                       PTalent.CodeTalent     := RemoveQuotes(UTF8Encode(NodeNv2.Attributes.GetNamedItem(ConstXmlId).NodeValue));
                       PTraduction            := InitTrad(ConstPTalent, PTalent.CodeTalent, '', PTalent.Livre);
 
-                      Node := NodeNv2.FirstChild;
+                      Node := XmlElement(NodeNv2.FirstChild);
                       while Assigned(Node) do
                         begin
                           case Node.NodeName of
@@ -1216,6 +1251,21 @@ Procedure XmlImport(FileName: String; OnlyPrimary: Boolean; OnlyCode: Boolean);
                                     inc(NbTalentCompetenceModif);
                                    end;
                               end;
+                            ConstXmlModifieArmure:
+                              begin
+                                // Talent donnant des Points d'Armure (trait Armour (Rating),
+                                // marque de Quetzl) - meme balise et meme forme que la version
+                                // mutation, voir ChargeTalentArmureModif.
+                                PTalentArmureModif.Livre            := Livre;
+                                PTalentArmureModif.CodeTalent       := PTalent.CodeTalent;
+                                PTalentArmureModif.CodeLocalisation := RemoveQuotes(UTF8Encode(Node.Attributes.GetNamedItem(ConstXmlData).NodeValue));
+                                PTalentArmureModif.Valeur           := StrToIntDef(RemoveQuotes(UTF8Encode(Node.TextContent)), 0);
+                                if LangueDef = ConstAnglais then
+                                   begin
+                                    ListTalentArmureModif.add(PTalentArmureModif);
+                                    inc(NbTalentArmureModif);
+                                   end;
+                              end;
                             ConstXmlAjouteCompetence:
                               begin
                                 PTalentCompetenceAjoute.Livre          := Livre;
@@ -1229,7 +1279,7 @@ Procedure XmlImport(FileName: String; OnlyPrimary: Boolean; OnlyCode: Boolean);
                               end;
                           end;
 
-                          Node := Node.NextSibling;
+                          Node := XmlElement(Node.NextSibling);
                         end;
                        if LangueDef = ConstAnglais then
                          begin
@@ -1240,7 +1290,7 @@ Procedure XmlImport(FileName: String; OnlyPrimary: Boolean; OnlyCode: Boolean);
 
                       AddTrad(PTraduction, Langue);
 
-                      NodeNv2 := NodeNv2.NextSibling;
+                      NodeNv2 := XmlElement(NodeNv2.NextSibling);
                     end;
                 end;
 
@@ -1248,7 +1298,7 @@ Procedure XmlImport(FileName: String; OnlyPrimary: Boolean; OnlyCode: Boolean);
               NodeNv1 := BookNode.FindNode(ConstXmlDataTalentSpe);
               if Assigned(NodeNv1) then
                 begin
-                  NodeNv2 := NodeNv1.FirstChild;
+                  NodeNv2 := XmlElement(NodeNv1.FirstChild);
                   While Assigned(NodeNv2) do
                     begin
                       PTalent.Livre             := Livre;
@@ -1266,7 +1316,7 @@ Procedure XmlImport(FileName: String; OnlyPrimary: Boolean; OnlyCode: Boolean);
                       PTalent.CodeTalent        := RemoveQuotes(UTF8Encode(NodeNv2.Attributes.GetNamedItem(ConstXmlId).NodeValue));
                       PTraduction               := InitTrad(ConstPTalent, PTalent.CodeTalent, '', PTalent.Livre);
 
-                      Node := NodeNv2.FirstChild;
+                      Node := XmlElement(NodeNv2.FirstChild);
                       while Assigned(Node) do
                         begin
                           case Node.NodeName of
@@ -1281,7 +1331,7 @@ Procedure XmlImport(FileName: String; OnlyPrimary: Boolean; OnlyCode: Boolean);
                               PTalent.Trait       := (RemoveQuotes(UTF8Encode(Node.TextContent)) = ConstVrai);
                           end;
 
-                          Node := Node.NextSibling;
+                          Node := XmlElement(Node.NextSibling);
                         end;
                        if LangueDef = ConstAnglais then
                          begin
@@ -1291,7 +1341,7 @@ Procedure XmlImport(FileName: String; OnlyPrimary: Boolean; OnlyCode: Boolean);
 
                       AddTrad(PTraduction, Langue);
 
-                      NodeNv2 := NodeNv2.NextSibling;
+                      NodeNv2 := XmlElement(NodeNv2.NextSibling);
                     end;
                 end;
 
@@ -1299,13 +1349,13 @@ Procedure XmlImport(FileName: String; OnlyPrimary: Boolean; OnlyCode: Boolean);
               NodeNv1 := BookNode.FindNode(ConstXmlDataRandomTalent);
               if Assigned(NodeNv1) then
                 begin
-                  NodeNv2 := NodeNv1.FirstChild;
+                  NodeNv2 := XmlElement(NodeNv1.FirstChild);
                   While Assigned(NodeNv2) do
                     begin
                       PTalentCreation.Livre      := Livre;
                       PTalentCreation.CodeTalent := RemoveQuotes(UTF8Encode(NodeNv2.Attributes.GetNamedItem(ConstXmlId).NodeValue));
 
-                      Node := NodeNv2.FirstChild;
+                      Node := XmlElement(NodeNv2.FirstChild);
                       while Assigned(Node) do
                         begin
                           case Node.NodeName of
@@ -1315,7 +1365,7 @@ Procedure XmlImport(FileName: String; OnlyPrimary: Boolean; OnlyCode: Boolean);
                               PTalentCreation.Chance     := RemoveQuotes(UTF8Encode(Node.TextContent));
                           end;
 
-                          Node := Node.NextSibling;
+                          Node := XmlElement(Node.NextSibling);
                         end;
                        if LangueDef = ConstAnglais then
                          begin
@@ -1323,7 +1373,7 @@ Procedure XmlImport(FileName: String; OnlyPrimary: Boolean; OnlyCode: Boolean);
                           inc(NbTalentCreation);
                          end;
 
-                      NodeNv2 := NodeNv2.NextSibling;
+                      NodeNv2 := XmlElement(NodeNv2.NextSibling);
                     end;
                 end;
 
@@ -1332,7 +1382,7 @@ Procedure XmlImport(FileName: String; OnlyPrimary: Boolean; OnlyCode: Boolean);
               NodeNv1 := BookNode.FindNode(ConstXmlDataEspece);
               if Assigned(NodeNv1) then
                 begin
-                  NodeNv2 := NodeNv1.FirstChild;
+                  NodeNv2 := XmlElement(NodeNv1.FirstChild);
                   While Assigned(NodeNv2) do
                     begin
                       if NodeNv2.NodeName = ConstXmlEspece then
@@ -1342,7 +1392,7 @@ Procedure XmlImport(FileName: String; OnlyPrimary: Boolean; OnlyCode: Boolean);
                       PEspece.CodeEspece := RemoveQuotes(UTF8Encode(NodeNv2.Attributes.GetNamedItem(ConstXmlId).NodeValue));
                       PTraduction        := InitTrad(ConstPEspece, PEspece.CodeEspece, '', PEspece.Livre);
 
-                      Node := NodeNv2.FirstChild;
+                      Node := XmlElement(NodeNv2.FirstChild);
                       while Assigned(Node) do
                         begin
                           case Node.NodeName of
@@ -1354,7 +1404,7 @@ Procedure XmlImport(FileName: String; OnlyPrimary: Boolean; OnlyCode: Boolean);
                               end;
                           end;
 
-                          Node := Node.NextSibling;
+                          Node := XmlElement(Node.NextSibling);
                         end;
 
                       if LangueDef = ConstAnglais then
@@ -1366,7 +1416,7 @@ Procedure XmlImport(FileName: String; OnlyPrimary: Boolean; OnlyCode: Boolean);
                       AddTrad(PTraduction, Langue);
                        end;
 
-                      NodeNv2 := NodeNv2.NextSibling;
+                      NodeNv2 := XmlElement(NodeNv2.NextSibling);
                     end;
                 end;
 
@@ -1374,16 +1424,18 @@ Procedure XmlImport(FileName: String; OnlyPrimary: Boolean; OnlyCode: Boolean);
               NodeNv1 := BookNode.FindNode(ConstXmlDataSpecie);
               if Assigned(NodeNv1) then
                 begin
-                  NodeNv2 := NodeNv1.FirstChild;
+                  NodeNv2 := XmlElement(NodeNv1.FirstChild);
                   While Assigned(NodeNv2) do
                     begin
                       PRace.Livre    := Livre;
                       PRace.CodeRace := RemoveQuotes(UTF8Encode(NodeNv2.Attributes.GetNamedItem(ConstXmlId).NodeValue));
                       PRace.Point3   := 3;
                       PRace.Point5   := 5;
+                      PRace.NbPoint3 := 3;
+                      PRace.NbPoint5 := 3;
                       PTraduction    := InitTrad(ConstPRace, PRace.CodeRace, '', PRace.Livre);
 
-                      NodeNv3 := NodeNv2.FirstChild;
+                      NodeNv3 := XmlElement(NodeNv2.FirstChild);
                       while Assigned(NodeNv3) do
                         begin
                           case NodeNv3.NodeName of
@@ -1399,11 +1451,15 @@ Procedure XmlImport(FileName: String; OnlyPrimary: Boolean; OnlyCode: Boolean);
                                 Langue                  := RemoveQuotes(UTF8Encode(NodeNv3.Attributes.GetNamedItem(ConstXmlLanguage).NodeValue));
                                 PTraduction.Description := PRace.Description;
                               end;
+                            ConstXmlNbSkill5:
+                              PRace.NbPoint5 := StrToIntDef(RemoveQuotes(UTF8Encode(NodeNv3.TextContent)), 3);
+                            ConstXmlNbSkill3:
+                              PRace.NbPoint3 := StrToIntDef(RemoveQuotes(UTF8Encode(NodeNv3.TextContent)), 3);
                             ConstXmlEthnic:
                               PRace.Espece              := RemoveQuotes(UTF8Encode(NodeNv3.TextContent));
                             ConstXmlSousChapitreCarac:
                               begin
-                                Node := NodeNv3.FirstChild;
+                                Node := XmlElement(NodeNv3.FirstChild);
                                 while Assigned(Node) do
                                   begin
                                     case Node.NodeName of
@@ -1420,12 +1476,12 @@ Procedure XmlImport(FileName: String; OnlyPrimary: Boolean; OnlyCode: Boolean);
                                               end;
                                          end;
                                     end;
-                                    Node := Node.NextSibling;
+                                    Node := XmlElement(Node.NextSibling);
                                   end;
                               end;
                             ConstXmlSousChapitreCompetence:
                               begin
-                                Node := NodeNv3.FirstChild;
+                                Node := XmlElement(NodeNv3.FirstChild);
                                 while Assigned(Node) do
                                   begin
                                     case Node.NodeName of
@@ -1441,12 +1497,12 @@ Procedure XmlImport(FileName: String; OnlyPrimary: Boolean; OnlyCode: Boolean);
                                               end;
                                          end;
                                     end;
-                                    Node := Node.NextSibling;
+                                    Node := XmlElement(Node.NextSibling);
                                   end;
                               end;
                             ConstXmlSousChapitreTalent:
                               begin
-                                Node := NodeNv3.FirstChild;
+                                Node := XmlElement(NodeNv3.FirstChild);
                                 while Assigned(Node) do
                                   begin
                                     case Node.NodeName of
@@ -1462,12 +1518,12 @@ Procedure XmlImport(FileName: String; OnlyPrimary: Boolean; OnlyCode: Boolean);
                                               end;
                                          end;
                                     end;
-                                    Node := Node.NextSibling;
+                                    Node := XmlElement(Node.NextSibling);
                                   end;
                               end;
                             ConstXmlSousChapitreMetier:
                               begin
-                                Node := NodeNv3.FirstChild;
+                                Node := XmlElement(NodeNv3.FirstChild);
                                 while Assigned(Node) do
                                   begin
                                     case Node.NodeName of
@@ -1484,12 +1540,12 @@ Procedure XmlImport(FileName: String; OnlyPrimary: Boolean; OnlyCode: Boolean);
                                               end;
                                          end;
                                     end;
-                                    Node := Node.NextSibling;
+                                    Node := XmlElement(Node.NextSibling);
                                   end;
                               end;
                             ConstXmlOpinions:  // ✨ NOUVEAU - Traiter les opinions
                               begin
-                                Node := NodeNv3.FirstChild;
+                                Node := XmlElement(NodeNv3.FirstChild);
                                 while Assigned(Node) do
                                   begin
                                     case Node.NodeName of
@@ -1507,13 +1563,13 @@ Procedure XmlImport(FileName: String; OnlyPrimary: Boolean; OnlyCode: Boolean);
                                               end;
                                          end;
                                     end;
-                                    Node := Node.NextSibling;
+                                    Node := XmlElement(Node.NextSibling);
                                   end;
                               end;
 
                           end;
 
-                          NodeNv3 := NodeNv3.NextSibling;
+                          NodeNv3 := XmlElement(NodeNv3.NextSibling);
                         end;
                        if LangueDef = ConstAnglais then
                          begin
@@ -1530,7 +1586,7 @@ Procedure XmlImport(FileName: String; OnlyPrimary: Boolean; OnlyCode: Boolean);
 
                       AddTrad(PTraduction, Langue);
 
-                      NodeNv2 := NodeNv2.NextSibling;
+                      NodeNv2 := XmlElement(NodeNv2.NextSibling);
                     end;
                 end;
 
@@ -1538,7 +1594,7 @@ Procedure XmlImport(FileName: String; OnlyPrimary: Boolean; OnlyCode: Boolean);
               NodeNv1 := BookNode.FindNode(ConstXmlDataSpecieCreation);
               if Assigned(NodeNv1) then
                 begin
-                  NodeNv2 := NodeNv1.FirstChild;
+                  NodeNv2 := XmlElement(NodeNv1.FirstChild);
                   While Assigned(NodeNv2) do
                     begin
                       PRaceCreation.Livre    := Livre;
@@ -1551,7 +1607,7 @@ Procedure XmlImport(FileName: String; OnlyPrimary: Boolean; OnlyCode: Boolean);
                           inc(NbRaceCreation);
                          end;
 
-                      NodeNv2 := NodeNv2.NextSibling;
+                      NodeNv2 := XmlElement(NodeNv2.NextSibling);
                     end;
                 end;
 
@@ -1559,14 +1615,14 @@ Procedure XmlImport(FileName: String; OnlyPrimary: Boolean; OnlyCode: Boolean);
               NodeNv1 := BookNode.FindNode(ConstXmlDataCareer);
               if Assigned(NodeNv1) then
                 begin
-                  NodeNv2 := NodeNv1.FirstChild;
+                  NodeNv2 := XmlElement(NodeNv1.FirstChild);
                   While Assigned(NodeNv2) do
                     begin
                       PMetier.Livre      := Livre;
                       PMetier.CodeMetier := RemoveQuotes(UTF8Encode(NodeNv2.Attributes.GetNamedItem(ConstXmlId).NodeValue));
                       PTraduction        := InitTrad(ConstPMetier, PMetier.CodeMetier, '', PMetier.Livre);
 
-                      NodeNv3 := NodeNv2.FirstChild;
+                      NodeNv3 := XmlElement(NodeNv2.FirstChild);
                       while Assigned(NodeNv3) do
                         begin
                           case NodeNv3.NodeName of
@@ -1588,7 +1644,7 @@ Procedure XmlImport(FileName: String; OnlyPrimary: Boolean; OnlyCode: Boolean);
                               PMetier.CodeCompetence:= RemoveQuotes(UTF8Encode(NodeNv3.TextContent));
                             ConstXmlSousChapitreNiveau:
                               begin
-                                NodeNv4 := NodeNv3.FirstChild;
+                                NodeNv4 := XmlElement(NodeNv3.FirstChild);
                                 while Assigned(NodeNv4) do
                                   begin
                                     case NodeNv4.NodeName of
@@ -1598,7 +1654,7 @@ Procedure XmlImport(FileName: String; OnlyPrimary: Boolean; OnlyCode: Boolean);
                                            PMetierNiveau.Livre        := Livre;
                                            PMetierNiveau.CodeMetier   := PMetier.CodeMetier;
                                            PTraductionNv2             := InitTrad(PMetierNiveau.CodeMetier, IntToStr(PMetierNiveau.NiveauMetier), '', PMetierNiveau.Livre);
-                                           Node := NodeNv4.FirstChild;
+                                           Node := XmlElement(NodeNv4.FirstChild);
                                            while Assigned(Node) do
                                              begin
                                                case Node.NodeName of
@@ -1611,7 +1667,7 @@ Procedure XmlImport(FileName: String; OnlyPrimary: Boolean; OnlyCode: Boolean);
                                                   ConstXmlSalaire:
                                                     PMetierNiveau.SalaireMetier := RemoveQuotes(UTF8Encode(Node.TextContent));
                                                end;
-                                               Node := Node.NextSibling;
+                                               Node := XmlElement(Node.NextSibling);
                                              end;
                                             if LangueDef = ConstAnglais then
                                               begin
@@ -1622,12 +1678,12 @@ Procedure XmlImport(FileName: String; OnlyPrimary: Boolean; OnlyCode: Boolean);
                                            AddTrad(PTraductionNv2, LangueNv2);
                                          end;
                                     end;
-                                    NodeNv4 := NodeNv4.NextSibling;
+                                    NodeNv4 := XmlElement(NodeNv4.NextSibling);
                                   end;
                               end;
                             ConstXmlSousChapitreCarac:
                               begin
-                                Node := NodeNv3.FirstChild;
+                                Node := XmlElement(NodeNv3.FirstChild);
                                 while Assigned(Node) do
                                   begin
                                     case Node.NodeName of
@@ -1644,12 +1700,12 @@ Procedure XmlImport(FileName: String; OnlyPrimary: Boolean; OnlyCode: Boolean);
                                               end;
                                          end;
                                     end;
-                                    Node := Node.NextSibling;
+                                    Node := XmlElement(Node.NextSibling);
                                   end;
                               end;
                             ConstXmlSousChapitreCompetence:
                               begin
-                                Node := NodeNv3.FirstChild;
+                                Node := XmlElement(NodeNv3.FirstChild);
                                 while Assigned(Node) do
                                   begin
                                     case Node.NodeName of
@@ -1666,12 +1722,12 @@ Procedure XmlImport(FileName: String; OnlyPrimary: Boolean; OnlyCode: Boolean);
                                               end;
                                          end;
                                     end;
-                                    Node := Node.NextSibling;
+                                    Node := XmlElement(Node.NextSibling);
                                   end;
                               end;
                             ConstXmlSousChapitreTalent:
                               begin
-                                Node := NodeNv3.FirstChild;
+                                Node := XmlElement(NodeNv3.FirstChild);
                                 while Assigned(Node) do
                                   begin
                                     case Node.NodeName of
@@ -1688,12 +1744,12 @@ Procedure XmlImport(FileName: String; OnlyPrimary: Boolean; OnlyCode: Boolean);
                                               end;
                                          end;
                                     end;
-                                    Node := Node.NextSibling;
+                                    Node := XmlElement(Node.NextSibling);
                                   end;
                               end;
                             ConstXmlSousChapitreEquipement:
                               begin
-                                Node := NodeNv3.FirstChild;
+                                Node := XmlElement(NodeNv3.FirstChild);
                                 while Assigned(Node) do
                                   begin
                                     case Node.NodeName of
@@ -1712,12 +1768,12 @@ Procedure XmlImport(FileName: String; OnlyPrimary: Boolean; OnlyCode: Boolean);
                                              end;
                                          end;
                                     end;
-                                    Node := Node.NextSibling;
+                                    Node := XmlElement(Node.NextSibling);
                                   end;
                               end;
                             ConstXmlSousChapitreRace:
                               begin
-                                Node := NodeNv3.FirstChild;
+                                Node := XmlElement(NodeNv3.FirstChild);
                                 while Assigned(Node) do
                                   begin
                                     case Node.NodeName of
@@ -1735,12 +1791,12 @@ Procedure XmlImport(FileName: String; OnlyPrimary: Boolean; OnlyCode: Boolean);
                                              end;
                                          end;
                                     end;
-                                    Node := Node.NextSibling;
+                                    Node := XmlElement(Node.NextSibling);
                                   end;
                               end;
                           end;
 
-                          NodeNv3 := NodeNv3.NextSibling;
+                          NodeNv3 := XmlElement(NodeNv3.NextSibling);
                         end;
                       if LangueDef = ConstAnglais then
                         begin
@@ -1751,7 +1807,7 @@ Procedure XmlImport(FileName: String; OnlyPrimary: Boolean; OnlyCode: Boolean);
 
                       AddTrad(PTraduction, Langue);
 
-                      NodeNv2 := NodeNv2.NextSibling;
+                      NodeNv2 := XmlElement(NodeNv2.NextSibling);
                     end;
                 end;
 
@@ -1759,14 +1815,14 @@ Procedure XmlImport(FileName: String; OnlyPrimary: Boolean; OnlyCode: Boolean);
               NodeNv1 := BookNode.FindNode(ConstXmlDataWeapon);
               if Assigned(NodeNv1) then
                 begin
-                  NodeNv2 := NodeNv1.FirstChild;
+                  NodeNv2 := XmlElement(NodeNv1.FirstChild);
                   While Assigned(NodeNv2) do
                     begin
                       PArme.Livre    := Livre;
                       PArme.CodeArme := RemoveQuotes(UTF8Encode(NodeNv2.Attributes.GetNamedItem(ConstXmlId).NodeValue));
                       PTraduction    := InitTrad(ConstPArme, PArme.CodeArme, '', PArme.Livre);
 
-                      Node := NodeNv2.FirstChild;
+                      Node := XmlElement(NodeNv2.FirstChild);
                       while Assigned(Node) do
                         begin
                           case Node.NodeName of
@@ -1796,7 +1852,7 @@ Procedure XmlImport(FileName: String; OnlyPrimary: Boolean; OnlyCode: Boolean);
                               PArme.Prix            := RemoveQuotes(UTF8Encode(Node.TextContent));
                           end;
 
-                          Node := Node.NextSibling;
+                          Node := XmlElement(Node.NextSibling);
                         end;
                       if LangueDef = ConstAnglais then
                         begin
@@ -1807,7 +1863,7 @@ Procedure XmlImport(FileName: String; OnlyPrimary: Boolean; OnlyCode: Boolean);
 
                       AddTrad(PTraduction, Langue);
 
-                      NodeNv2 := NodeNv2.NextSibling;
+                      NodeNv2 := XmlElement(NodeNv2.NextSibling);
                     end;
                 end;
 
@@ -1815,14 +1871,14 @@ Procedure XmlImport(FileName: String; OnlyPrimary: Boolean; OnlyCode: Boolean);
               NodeNv1 := BookNode.FindNode(ConstXmlDataWeaponBonus);
               if Assigned(NodeNv1) then
                 begin
-                  NodeNv2 := NodeNv1.FirstChild;
+                  NodeNv2 := XmlElement(NodeNv1.FirstChild);
                   While Assigned(NodeNv2) do
                     begin
                       PArmeBonus.Livre         := Livre;
                       PArmeBonus.CodeArmeBonus := RemoveQuotes(UTF8Encode(NodeNv2.Attributes.GetNamedItem(ConstXmlId).NodeValue));
                       PTraduction              := InitTrad(ConstPArmeBonus, PArmeBonus.CodeArmeBonus, '', PArmeBonus.livre);
 
-                      Node := NodeNv2.FirstChild;
+                      Node := XmlElement(NodeNv2.FirstChild);
                       while Assigned(Node) do
                         begin
                           case Node.NodeName of
@@ -1848,7 +1904,7 @@ Procedure XmlImport(FileName: String; OnlyPrimary: Boolean; OnlyCode: Boolean);
                               end;
                           end;
 
-                          Node := Node.NextSibling;
+                          Node := XmlElement(Node.NextSibling);
                         end;
                       if LangueDef = ConstAnglais then
                         begin
@@ -1858,7 +1914,7 @@ Procedure XmlImport(FileName: String; OnlyPrimary: Boolean; OnlyCode: Boolean);
 
                       AddTrad(PTraduction, Langue);
 
-                      NodeNv2 := NodeNv2.NextSibling;
+                      NodeNv2 := XmlElement(NodeNv2.NextSibling);
                     end;
                 end;
 
@@ -1866,14 +1922,14 @@ Procedure XmlImport(FileName: String; OnlyPrimary: Boolean; OnlyCode: Boolean);
               NodeNv1 := BookNode.FindNode(ConstXmlDataArmorSimplified);
               if Assigned(NodeNv1) then
                 begin
-                  NodeNv2 := NodeNv1.FirstChild;
+                  NodeNv2 := XmlElement(NodeNv1.FirstChild);
                   While Assigned(NodeNv2) do
                     begin
                       PArmureSimplifiee.Livre      := Livre;
                       PArmureSimplifiee.CodeArmure := RemoveQuotes(UTF8Encode(NodeNv2.Attributes.GetNamedItem(ConstXmlId).NodeValue));
                       PTraduction                  := InitTrad(ConstPArmureSimplifiee, PArmureSimplifiee.CodeArmure, '', PArmureSimplifiee.Livre);
 
-                      Node := NodeNv2.FirstChild;
+                      Node := XmlElement(NodeNv2.FirstChild);
                       while Assigned(Node) do
                         begin
                           case Node.NodeName of
@@ -1895,7 +1951,7 @@ Procedure XmlImport(FileName: String; OnlyPrimary: Boolean; OnlyCode: Boolean);
                               PArmureSimplifiee.ListeBonus      := RemoveQuotes(UTF8Encode(Node.TextContent));
                           end;
 
-                          Node := Node.NextSibling;
+                          Node := XmlElement(Node.NextSibling);
                         end;
                       if LangueDef = ConstAnglais then
                         begin
@@ -1905,7 +1961,7 @@ Procedure XmlImport(FileName: String; OnlyPrimary: Boolean; OnlyCode: Boolean);
 
                       AddTrad(PTraduction, Langue);
 
-                      NodeNv2 := NodeNv2.NextSibling;
+                      NodeNv2 := XmlElement(NodeNv2.NextSibling);
                     end;
                 end;
 
@@ -1913,14 +1969,14 @@ Procedure XmlImport(FileName: String; OnlyPrimary: Boolean; OnlyCode: Boolean);
               NodeNv1 := BookNode.FindNode(ConstXmlDataArmor);
               if Assigned(NodeNv1) then
                 begin
-                  NodeNv2 := NodeNv1.FirstChild;
+                  NodeNv2 := XmlElement(NodeNv1.FirstChild);
                   While Assigned(NodeNv2) do
                     begin
                       PArmure.Livre      := Livre;
                       PArmure.CodeArmure := RemoveQuotes(UTF8Encode(NodeNv2.Attributes.GetNamedItem(ConstXmlId).NodeValue));
                       PTraduction        := InitTrad(ConstPArmure, PArmure.CodeArmure, '', PArmure.Livre);
 
-                      Node := NodeNv2.FirstChild;
+                      Node := XmlElement(NodeNv2.FirstChild);
                       while Assigned(Node) do
                         begin
                           case Node.NodeName of
@@ -1946,7 +2002,7 @@ Procedure XmlImport(FileName: String; OnlyPrimary: Boolean; OnlyCode: Boolean);
                               PArmure.ListeBonus      := RemoveQuotes(UTF8Encode(Node.TextContent));
                           end;
 
-                          Node := Node.NextSibling;
+                          Node := XmlElement(Node.NextSibling);
                         end;
                       if LangueDef = ConstAnglais then
                         begin
@@ -1956,7 +2012,7 @@ Procedure XmlImport(FileName: String; OnlyPrimary: Boolean; OnlyCode: Boolean);
 
                       AddTrad(PTraduction, Langue);
 
-                      NodeNv2 := NodeNv2.NextSibling;
+                      NodeNv2 := XmlElement(NodeNv2.NextSibling);
                     end;
                 end;
 
@@ -1964,7 +2020,7 @@ Procedure XmlImport(FileName: String; OnlyPrimary: Boolean; OnlyCode: Boolean);
               NodeNv1 := BookNode.FindNode(ConstXmlDataArmorBonus);
               if Assigned(NodeNv1) then
                 begin
-                  NodeNv2 := NodeNv1.FirstChild;
+                  NodeNv2 := XmlElement(NodeNv1.FirstChild);
                   While Assigned(NodeNv2) do
                     begin
                       PArmureBonus.Livre           := Livre;
@@ -1977,7 +2033,7 @@ Procedure XmlImport(FileName: String; OnlyPrimary: Boolean; OnlyCode: Boolean);
                       PArmureBonus.Malus            := '';
                       PTraduction                  := InitTrad(ConstPArmureBonus, PArmureBonus.CodeArmureBonus, '', PArmureBonus.Livre);
 
-                      Node := NodeNv2.FirstChild;
+                      Node := XmlElement(NodeNv2.FirstChild);
                       while Assigned(Node) do
                         begin
                           case Node.NodeName of
@@ -2015,7 +2071,7 @@ Procedure XmlImport(FileName: String; OnlyPrimary: Boolean; OnlyCode: Boolean);
                               end;
                           end;
 
-                          Node := Node.NextSibling;
+                          Node := XmlElement(Node.NextSibling);
                         end;
                       if LangueDef = ConstAnglais then
                         begin
@@ -2025,7 +2081,7 @@ Procedure XmlImport(FileName: String; OnlyPrimary: Boolean; OnlyCode: Boolean);
 
                       AddTrad(PTraduction, Langue);
 
-                      NodeNv2 := NodeNv2.NextSibling;
+                      NodeNv2 := XmlElement(NodeNv2.NextSibling);
                     end;
                 end;
 
@@ -2033,14 +2089,14 @@ Procedure XmlImport(FileName: String; OnlyPrimary: Boolean; OnlyCode: Boolean);
               NodeNv1 := BookNode.FindNode(ConstXmlDataSpell);
               if Assigned(NodeNv1) then
                 begin
-                  NodeNv2 := NodeNv1.FirstChild;
+                  NodeNv2 := XmlElement(NodeNv1.FirstChild);
                   While Assigned(NodeNv2) do
                     begin
                       PSort.Livre    := Livre;
                       PSort.CodeSort := RemoveQuotes(UTF8Encode(NodeNv2.Attributes.GetNamedItem(ConstXmlId).NodeValue));
                       PTraduction    := InitTrad(ConstPSort, PSort.CodeSort, '', PSort.Livre);
 
-                      Node := NodeNv2.FirstChild;
+                      Node := XmlElement(NodeNv2.FirstChild);
                       while Assigned(Node) do
                         begin
                           case Node.NodeName of
@@ -2070,7 +2126,7 @@ Procedure XmlImport(FileName: String; OnlyPrimary: Boolean; OnlyCode: Boolean);
                               PSort.TypeSort        := RemoveQuotes(UTF8Encode(Node.TextContent));
                           end;
 
-                          Node := Node.NextSibling;
+                          Node := XmlElement(Node.NextSibling);
                         end;
                       if LangueDef = ConstAnglais then
                         begin
@@ -2080,7 +2136,7 @@ Procedure XmlImport(FileName: String; OnlyPrimary: Boolean; OnlyCode: Boolean);
 
                       AddTrad(PTraduction, Langue);
 
-                      NodeNv2 := NodeNv2.NextSibling;
+                      NodeNv2 := XmlElement(NodeNv2.NextSibling);
                     end;
                 end;
 
@@ -2088,14 +2144,14 @@ Procedure XmlImport(FileName: String; OnlyPrimary: Boolean; OnlyCode: Boolean);
               NodeNv1 := BookNode.FindNode(ConstXmlDataCraftsmanship);
               if Assigned(NodeNv1) then
                 begin
-                  NodeNv2 := NodeNv1.FirstChild;
+                  NodeNv2 := XmlElement(NodeNv1.FirstChild);
                   While Assigned(NodeNv2) do
                     begin
                       PFabrication.Livre           := Livre;
                       PFabrication.CodeFabrication := RemoveQuotes(UTF8Encode(NodeNv2.Attributes.GetNamedItem(ConstXmlId).NodeValue));
                       PTraduction                  := InitTrad(ConstPFabrication, PFabrication.CodeFabrication, '', PFabrication.Livre);
                       PFabrication.Encombrement    := 0;
-                      Node := NodeNv2.FirstChild;
+                      Node := XmlElement(NodeNv2.FirstChild);
                       while Assigned(Node) do
                         begin
                           case Node.NodeName of
@@ -2124,7 +2180,7 @@ Procedure XmlImport(FileName: String; OnlyPrimary: Boolean; OnlyCode: Boolean);
                             ConstXmlPositifNegatif:
                               PFabrication.TypeQualite   := RemoveQuotes(UTF8Encode(Node.TextContent));
                           end;
-                          Node := Node.NextSibling;
+                          Node := XmlElement(Node.NextSibling);
                         end;
                       if LangueDef = ConstAnglais then
                         begin
@@ -2134,7 +2190,7 @@ Procedure XmlImport(FileName: String; OnlyPrimary: Boolean; OnlyCode: Boolean);
 
                       AddTrad(PTraduction, Langue);
 
-                      NodeNv2 := NodeNv2.NextSibling;
+                      NodeNv2 := XmlElement(NodeNv2.NextSibling);
                     end;
                 end;
 
@@ -2142,12 +2198,12 @@ Procedure XmlImport(FileName: String; OnlyPrimary: Boolean; OnlyCode: Boolean);
               NodeNv1 := BookNode.FindNode(ConstXmlDataSpecieCareerChoix);
               if Assigned(NodeNv1) then
                 begin
-                  NodeNv2 := NodeNv1.FirstChild;
+                  NodeNv2 := XmlElement(NodeNv1.FirstChild);
                   While Assigned(NodeNv2) do
                     begin
                       PMetierRaceChoixMetier.Livre    := Livre;
 
-                      Node := NodeNv2.FirstChild;
+                      Node := XmlElement(NodeNv2.FirstChild);
                       while Assigned(Node) do
                         begin
                           case Node.NodeName of
@@ -2158,7 +2214,7 @@ Procedure XmlImport(FileName: String; OnlyPrimary: Boolean; OnlyCode: Boolean);
                             ConstXmlAlternative:
                               PMetierRaceChoixMetier.CodeSousMetier := RemoveQuotes(UTF8Encode(Node.TextContent));
                           end;
-                          Node := Node.NextSibling;
+                          Node := XmlElement(Node.NextSibling);
                         end;
                       if LangueDef = ConstAnglais then
                         begin
@@ -2166,7 +2222,7 @@ Procedure XmlImport(FileName: String; OnlyPrimary: Boolean; OnlyCode: Boolean);
                           inc(NbMetierRaceChoixMetier);
                         end;
 
-                      NodeNv2 := NodeNv2.NextSibling;
+                      NodeNv2 := XmlElement(NodeNv2.NextSibling);
                     end;
                 end;
 
@@ -2176,7 +2232,7 @@ Procedure XmlImport(FileName: String; OnlyPrimary: Boolean; OnlyCode: Boolean);
               NodeNv1 := BookNode.FindNode(ConstXmlDataSpecieCareerDirect);
               if Assigned(NodeNv1) then
                 begin
-                  NodeNv2 := NodeNv1.FirstChild;
+                  NodeNv2 := XmlElement(NodeNv1.FirstChild);
                   While Assigned(NodeNv2) do
                     begin
                       if NodeNv2.NodeName = ConstXmlEntry then
@@ -2186,7 +2242,7 @@ Procedure XmlImport(FileName: String; OnlyPrimary: Boolean; OnlyCode: Boolean);
                       PRaceMetier.CodeMetier := '';
                       PRaceMetier.Chance     := '';
 
-                      Node := NodeNv2.FirstChild;
+                      Node := XmlElement(NodeNv2.FirstChild);
                       while Assigned(Node) do
                         begin
                           case Node.NodeName of
@@ -2198,7 +2254,7 @@ Procedure XmlImport(FileName: String; OnlyPrimary: Boolean; OnlyCode: Boolean);
                                 PRaceMetier.Chance     := RemoveQuotes(UTF8Encode(Node.TextContent));
                               end;
                           end;
-                          Node := Node.NextSibling;
+                          Node := XmlElement(Node.NextSibling);
                         end;
                       if LangueDef = ConstAnglais then
                         begin
@@ -2207,7 +2263,7 @@ Procedure XmlImport(FileName: String; OnlyPrimary: Boolean; OnlyCode: Boolean);
                         end;
                        end;
 
-                      NodeNv2 := NodeNv2.NextSibling;
+                      NodeNv2 := XmlElement(NodeNv2.NextSibling);
                     end;
                 end;
 
@@ -2215,7 +2271,7 @@ Procedure XmlImport(FileName: String; OnlyPrimary: Boolean; OnlyCode: Boolean);
               NodeNv1 := BookNode.FindNode(ConstXmlDataRegle);
               if Assigned(NodeNv1) then
                 begin
-                  NodeNv2 := NodeNv1.FirstChild;
+                  NodeNv2 := XmlElement(NodeNv1.FirstChild);
                   While Assigned(NodeNv2) do
                     begin
                       if NodeNv2.NodeName = ConstXmlRegleJeu then
@@ -2225,7 +2281,7 @@ Procedure XmlImport(FileName: String; OnlyPrimary: Boolean; OnlyCode: Boolean);
                       PRegle.CodeRegle := RemoveQuotes(UTF8Encode(NodeNv2.Attributes.GetNamedItem(ConstXmlId).NodeValue));
                       PTraduction      := InitTrad(ConstPRegle, PRegle.CodeRegle, '', PRegle.Livre);
 
-                      Node := NodeNv2.FirstChild;
+                      Node := XmlElement(NodeNv2.FirstChild);
                       while Assigned(Node) do
                         begin
                           case Node.NodeName of
@@ -2237,7 +2293,7 @@ Procedure XmlImport(FileName: String; OnlyPrimary: Boolean; OnlyCode: Boolean);
                               end;
                           end;
 
-                          Node := Node.NextSibling;
+                          Node := XmlElement(Node.NextSibling);
                         end;
 
                       if LangueDef = ConstAnglais then
@@ -2249,7 +2305,7 @@ Procedure XmlImport(FileName: String; OnlyPrimary: Boolean; OnlyCode: Boolean);
                       AddTrad(PTraduction, Langue);
                        end;
 
-                      NodeNv2 := NodeNv2.NextSibling;
+                      NodeNv2 := XmlElement(NodeNv2.NextSibling);
                     end;
                 end;
 
@@ -2259,7 +2315,7 @@ Procedure XmlImport(FileName: String; OnlyPrimary: Boolean; OnlyCode: Boolean);
               NodeNv1 := BookNode.FindNode(ConstXmlDataRegleMetier);
               if Assigned(NodeNv1) then
                 begin
-                  NodeNv2 := NodeNv1.FirstChild;
+                  NodeNv2 := XmlElement(NodeNv1.FirstChild);
                   While Assigned(NodeNv2) do
                     begin
                       // Ne traiter que les vrais <Entry> : un commentaire ou un noeud texte
@@ -2273,7 +2329,7 @@ Procedure XmlImport(FileName: String; OnlyPrimary: Boolean; OnlyCode: Boolean);
                       PRegleMetier.CodeMetier := '';
                       PRegleMetier.Chance     := '';
 
-                      Node := NodeNv2.FirstChild;
+                      Node := XmlElement(NodeNv2.FirstChild);
                       while Assigned(Node) do
                         begin
                           case Node.NodeName of
@@ -2287,7 +2343,7 @@ Procedure XmlImport(FileName: String; OnlyPrimary: Boolean; OnlyCode: Boolean);
                                 PRegleMetier.Chance     := RemoveQuotes(UTF8Encode(Node.TextContent));
                               end;
                           end;
-                          Node := Node.NextSibling;
+                          Node := XmlElement(Node.NextSibling);
                         end;
 
                       if LangueDef = ConstAnglais then
@@ -2297,7 +2353,7 @@ Procedure XmlImport(FileName: String; OnlyPrimary: Boolean; OnlyCode: Boolean);
                         end;
                        end;
 
-                      NodeNv2 := NodeNv2.NextSibling;
+                      NodeNv2 := XmlElement(NodeNv2.NextSibling);
                     end;
                 end;
 
@@ -2305,12 +2361,12 @@ Procedure XmlImport(FileName: String; OnlyPrimary: Boolean; OnlyCode: Boolean);
               NodeNv1 := BookNode.FindNode(ConstXmlDataCareerSubChoice);
               if Assigned(NodeNv1) then
                 begin
-                  NodeNv2 := NodeNv1.FirstChild;
+                  NodeNv2 := XmlElement(NodeNv1.FirstChild);
                   While Assigned(NodeNv2) do
                     begin
                       PMetierSousMetier.Livre    := Livre;
 
-                      Node := NodeNv2.FirstChild;
+                      Node := XmlElement(NodeNv2.FirstChild);
                       while Assigned(Node) do
                         begin
                           case Node.NodeName of
@@ -2322,7 +2378,7 @@ Procedure XmlImport(FileName: String; OnlyPrimary: Boolean; OnlyCode: Boolean);
                                 PMetierSousMetier.Chance         := RemoveQuotes(UTF8Encode(Node.TextContent));
                               end;
                           end;
-                          Node := Node.NextSibling;
+                          Node := XmlElement(Node.NextSibling);
                         end;
                       if LangueDef = ConstAnglais then
                         begin
@@ -2330,7 +2386,7 @@ Procedure XmlImport(FileName: String; OnlyPrimary: Boolean; OnlyCode: Boolean);
                           inc(NbMetierSousMetier);
                         end;
 
-                      NodeNv2 := NodeNv2.NextSibling;
+                      NodeNv2 := XmlElement(NodeNv2.NextSibling);
                     end;
                 end;
 
@@ -2338,7 +2394,7 @@ Procedure XmlImport(FileName: String; OnlyPrimary: Boolean; OnlyCode: Boolean);
               NodeNv1 := BookNode.FindNode(ConstXmlDataPhysicalCorruption);
               if Assigned(NodeNv1) then
                 begin
-                  NodeNv2 := NodeNv1.FirstChild;
+                  NodeNv2 := XmlElement(NodeNv1.FirstChild);
                   While Assigned(NodeNv2) do
                     begin
                       PRaceCorruptionCreation.Livre          := Livre;
@@ -2352,7 +2408,7 @@ Procedure XmlImport(FileName: String; OnlyPrimary: Boolean; OnlyCode: Boolean);
                           inc(nbRaceCorruptionCreation);
                          end;
 
-                      NodeNv2 := NodeNv2.NextSibling;
+                      NodeNv2 := XmlElement(NodeNv2.NextSibling);
                     end;
                 end;
 
@@ -2360,7 +2416,7 @@ Procedure XmlImport(FileName: String; OnlyPrimary: Boolean; OnlyCode: Boolean);
               NodeNv1 := BookNode.FindNode(ConstXmlDataMentalCorruption);
               if Assigned(NodeNv1) then
                 begin
-                  NodeNv2 := NodeNv1.FirstChild;
+                  NodeNv2 := XmlElement(NodeNv1.FirstChild);
                   While Assigned(NodeNv2) do
                     begin
                       PRaceCorruptionCreation.Livre          := Livre;
@@ -2374,7 +2430,7 @@ Procedure XmlImport(FileName: String; OnlyPrimary: Boolean; OnlyCode: Boolean);
                           inc(nbRaceCorruptionCreation);
                          end;
 
-                      NodeNv2 := NodeNv2.NextSibling;
+                      NodeNv2 := XmlElement(NodeNv2.NextSibling);
                     end;
                 end;
 
@@ -2392,7 +2448,7 @@ Procedure XmlImport(FileName: String; OnlyPrimary: Boolean; OnlyCode: Boolean);
               NodeNv1 := BookNode.FindNode(ConstXmlDataCorruptionTablePhys);
               if Assigned(NodeNv1) then
                 begin
-                  NodeNv2 := NodeNv1.FirstChild;
+                  NodeNv2 := XmlElement(NodeNv1.FirstChild);
                   While Assigned(NodeNv2) do
                     begin
                       PCorruptionTable.Livre          := Livre;
@@ -2403,7 +2459,7 @@ Procedure XmlImport(FileName: String; OnlyPrimary: Boolean; OnlyCode: Boolean);
                       // Libelle/Effet, zéro ou plusieurs <ModifyCarac name="...">/<ModifySkill name="...">
                       // optionnels (effets à delta pur, CONTEXT.md §2.7 étape 8) - même mécanisme que
                       // <Modifier name="..."> sous <BonusMalus> pour les armures.
-                      Node := NodeNv2.FirstChild;
+                      Node := XmlElement(NodeNv2.FirstChild);
                       while Assigned(Node) do
                         begin
                           case Node.NodeName of
@@ -2460,7 +2516,7 @@ Procedure XmlImport(FileName: String; OnlyPrimary: Boolean; OnlyCode: Boolean);
                                    end;
                               end;
                           end;
-                          Node := Node.NextSibling;
+                          Node := XmlElement(Node.NextSibling);
                         end;
 
                       PTraduction              := InitTrad(ConstPCorruptionTable, PCorruptionTable.Code, '', PCorruptionTable.Livre);
@@ -2475,7 +2531,7 @@ Procedure XmlImport(FileName: String; OnlyPrimary: Boolean; OnlyCode: Boolean);
 
                       AddTrad(PTraduction, LangueDef);
 
-                      NodeNv2 := NodeNv2.NextSibling;
+                      NodeNv2 := XmlElement(NodeNv2.NextSibling);
                     end;
                 end;
 
@@ -2483,7 +2539,7 @@ Procedure XmlImport(FileName: String; OnlyPrimary: Boolean; OnlyCode: Boolean);
               NodeNv1 := BookNode.FindNode(ConstXmlDataCorruptionTableMent);
               if Assigned(NodeNv1) then
                 begin
-                  NodeNv2 := NodeNv1.FirstChild;
+                  NodeNv2 := XmlElement(NodeNv1.FirstChild);
                   While Assigned(NodeNv2) do
                     begin
                       PCorruptionTable.Livre          := Livre;
@@ -2491,7 +2547,7 @@ Procedure XmlImport(FileName: String; OnlyPrimary: Boolean; OnlyCode: Boolean);
                       PCorruptionTable.Code           := RemoveQuotes(UTF8Encode(NodeNv2.Attributes.GetNamedItem(ConstXmlData).NodeValue));
 
                       // Même itération que la table Physique ci-dessus (ModifyCarac/ModifySkill optionnels).
-                      Node := NodeNv2.FirstChild;
+                      Node := XmlElement(NodeNv2.FirstChild);
                       while Assigned(Node) do
                         begin
                           case Node.NodeName of
@@ -2548,7 +2604,7 @@ Procedure XmlImport(FileName: String; OnlyPrimary: Boolean; OnlyCode: Boolean);
                                    end;
                               end;
                           end;
-                          Node := Node.NextSibling;
+                          Node := XmlElement(Node.NextSibling);
                         end;
 
                       PTraduction              := InitTrad(ConstPCorruptionTable, PCorruptionTable.Code, '', PCorruptionTable.Livre);
@@ -2563,7 +2619,7 @@ Procedure XmlImport(FileName: String; OnlyPrimary: Boolean; OnlyCode: Boolean);
 
                       AddTrad(PTraduction, LangueDef);
 
-                      NodeNv2 := NodeNv2.NextSibling;
+                      NodeNv2 := XmlElement(NodeNv2.NextSibling);
                     end;
                 end;
 
@@ -2573,7 +2629,7 @@ Procedure XmlImport(FileName: String; OnlyPrimary: Boolean; OnlyCode: Boolean);
               NodeNv1 := BookNode.FindNode(ConstXmlDataCorruptionPhysChance);
               if Assigned(NodeNv1) then
                 begin
-                  NodeNv2 := NodeNv1.FirstChild;
+                  NodeNv2 := XmlElement(NodeNv1.FirstChild);
                   While Assigned(NodeNv2) do
                     begin
                       PCorruptionChance.Livre          := Livre;
@@ -2587,7 +2643,7 @@ Procedure XmlImport(FileName: String; OnlyPrimary: Boolean; OnlyCode: Boolean);
                           inc(nbCorruptionChance);
                          end;
 
-                      NodeNv2 := NodeNv2.NextSibling;
+                      NodeNv2 := XmlElement(NodeNv2.NextSibling);
                     end;
                 end;
 
@@ -2595,7 +2651,7 @@ Procedure XmlImport(FileName: String; OnlyPrimary: Boolean; OnlyCode: Boolean);
               NodeNv1 := BookNode.FindNode(ConstXmlDataCorruptionMentChance);
               if Assigned(NodeNv1) then
                 begin
-                  NodeNv2 := NodeNv1.FirstChild;
+                  NodeNv2 := XmlElement(NodeNv1.FirstChild);
                   While Assigned(NodeNv2) do
                     begin
                       PCorruptionChance.Livre          := Livre;
@@ -2609,7 +2665,7 @@ Procedure XmlImport(FileName: String; OnlyPrimary: Boolean; OnlyCode: Boolean);
                           inc(nbCorruptionChance);
                          end;
 
-                      NodeNv2 := NodeNv2.NextSibling;
+                      NodeNv2 := XmlElement(NodeNv2.NextSibling);
                     end;
                 end;
 
