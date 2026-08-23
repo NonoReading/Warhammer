@@ -2384,8 +2384,112 @@ Nono : *« vu que les augmentations ne sont que par 5, on peut partir là-dessus
 si un livre demande un jour autre chose qu'un multiple de 5 ; la réponse serait alors de porter une
 **valeur**, pas un autre marqueur de signe.
 
-**Point de reprise** : migrer les 5 fiches anciennes (**Ernold, Friederich, Harald, Kuno, Markus**) en les
-ouvrant puis en les enregistrant, puis reprendre le vrai correctif de `winspell.pas`.
+**Point de reprise** : migrer les 4 fiches anciennes restantes (**Ernold, Friederich, Harald,
+Markus**) en les ouvrant puis en les enregistrant — Kuno l'a été le 23/08. `winspell.pas` est corrigé
+(voir §2.18).
+
+---
+
+### 2.20 Libellés anglais, intégrité des références, et revue des livres — en cours (23/08/2026)
+
+**D'où ça vient.** Nono a expliqué la cause racine, et elle explique presque tout ce chantier :
+*« j'ai commencé à faire le programme avec le livre français et, majoritairement, j'ai demandé une
+traduction (sauf pour les noms de métier que j'ai cherché manuellement dans le livre anglais) »*.
+D'où des noms de carrière justes mais des **noms de niveau en aller-retour**, et des libellés
+fantaisistes un peu partout : *tank top* pour débardeur, *Minor* pour mineur, *Foresight* pour
+voyance, *Fight* pour bagarre.
+
+**Ce qui a été mesuré plutôt que supposé.** Sur les `<Explanation>` anglaises du Rulebook, la
+quasi-totalité des descriptions sont des retraductions (19 talents verbatim sur 178, 2 compétences
+sur 45, 2 métiers sur 64, 9 sorts sur 200). **Mais** un second contrôle, comparant talent par talent
+les NOMBRES et les NOMS DE CARACTÉRISTIQUE du texte saisi à ceux du livre, ne sort que **9 écarts**,
+essentiellement des numéros de page. Conclusion retenue : **ne pas réécrire les 455 descriptions**,
+le risque d'une ré-extraction depuis un PDF en deux colonnes dépassant le bénéfice. L'effort va aux
+**libellés**, courts et visibles partout.
+
+**Méthode validée par Nono, à réutiliser pour chaque famille** : extraire du PDF la liste de
+référence, produire une table `saisi -> livre`, **la lui faire relire**, puis appliquer. Et la règle
+d'arbitrage qu'il a posée : *« il vaut mieux se baser sur le livre de règle »* — quand le Rulebook se
+contredit lui-même, c'est la ligne `Specialisations:` du chapitre des Compétences qui fait autorité,
+pas les blocs de carrière.
+
+**Fait le 23/08 :** 173 noms de niveau du Rulebook, 11 coquilles de compétence, familles
+**Secret Signs**, **Entertain** (12 libellés, 77 occurrences) et **Perform** (6 libellés).
+
+#### Le motif récurrent : le doublon d'identifiant
+
+Quatre fois dans la même journée, la même forme : la **même** spécialisation déclarée sous deux
+identifiants, l'un venant du français, l'autre du livre anglais — avec pour conséquence deux moitiés
+de contenu qui ne se voient pas.
+
+| gardé | supprimé | ce que ça cassait |
+|---|---|---|
+| `RULES-COMPCOMB_BAGAR` | `_BAGARRE` | le Wolf Kin ne voyait aucune arme de bagarre |
+| `RULES-COMPDIVERT_VOYAN` | `_FORTUNETELLING` | Mystic et Astromancer séparés |
+| `RULES-COMPDIVERT_INTERP` | `_ACTING` | Rulebook d'un côté, WoM/EiS de l'autre |
+| `RULES-COMPSAVOIR_EMPIRE`, `_NECROMANCY`, `_DARKTOUNGE` | doublons exacts | le programme n'en voyait qu'un |
+
+**Règle de fusion appliquée** : garder l'identifiant qui porte les **armes** et le gros des métiers
+(l'historique), reprendre le **libellé** de l'autre s'il est celui du livre. Et **toujours vérifier
+`SAVED_CARACTERS`** avant : aucune fiche n'utilisait les codes supprimés.
+
+#### Deux audits réutilisables, avec leur piège
+
+1. **Compétences déclarées / référencées.** 300 déclarations, plus aucune référence orpheline.
+   ⚠️ **Piège** : une compétence n'est pas référencée que par un attribut `name=`, elle l'est aussi
+   par le **texte** d'un élément — `<Skill>"RULES-COMPCOMB_ENTRA"</Skill>` dans `DATA_WEAPON`. Une
+   passe ignorant ce canal sortait 60 orphelines au lieu de 35.
+2. **Références cassées.** Quatre corrigées (`FOCAL_AZYR`→`FOCAL_CIEUX`, `FOCAL_CHAMON`→`FOCAL_METAL`,
+   `FOCAL_KHAINE`→`FOCAL_KHAINITE`, `COMPPROj_POUDRE` avec un J minuscule). Deux compétences créées
+   (`Ride (Badger)`, `Secret Signs (Amber Order)`), une redirection (`RULES-BEGGING`→`RULES-COMPCHARM`,
+   le livre écrivant *« Tests: Charm (Begging) »*). Il reste **une** référence d'équipement non
+   résolue : `RULES-PROJ_LANC` dans une carrière du Rulebook.
+
+#### Revue des livres — méthode et état
+
+Nono a demandé une revue livre par livre, *« les informations ne sont pas toujours facilement
+accessibles »*. Recherche web faite : **aucun index public fiable** de ce que chaque livre ajoute
+(les fiches des modules Foundry VTT donnent des compteurs bruts, utilisables seulement comme alarme
+de couverture). La revue se fait donc **dans les PDF**, qui sont la source d'autorité.
+
+**Outil mis au point pour ça** (à refaire à l'identique pour les autres livres) : extraction depuis
+le PDF des schémas de progression — nom de niveau, Skills, Talents, Trappings par niveau — puis diff
+automatique contre le XML avec les libellés résolus à travers tous les livres.
+
+**Up in Arms : terminé.** Les 15 carrières, les 11 tables d'armes, les 12 talents de l'appendice III,
+les 4 qualités et les 9 miracles sont complets. Seize écarts de carrière corrigés (dont trois
+**interversions de talents entre niveaux voisins**, que seul le diff automatique pouvait voir), trois
+`Spear` rendues à la `Lance`, et l'armure de plates rendue uniforme sur les quatre carrières
+concernées. Décision de Nono : **l'artillerie du chapitre XI n'est pas saisie** — un personnage ne se
+déplace pas avec une pièce de siège ; conséquence assumée, `Crewed` et `Salvo` restent non déclarées.
+
+🐛 **Bug signalé, non corrigé, à confirmer par Nono.** Le suffixe de qualité `(Q)` s'écrit de deux
+façons dans `DATABASE` : **40** items le collent au code (`RULES-ARMO_14(Q)`), **42** mettent un
+**espace** avant (`RULES-COMB_2M_05 (Q)`). Or `winlivre.pas` `LibelleEquipement` retire les 3 derniers
+caractères sans `Trim`, `pdfmetier.pas` et `xmlexportimport.pas` coupent avec `ExtractStringBefore`, et
+`CompareRechercheValeur` ne trime pas non plus. Pour les 42 items à espace, la recherche d'arme doit
+donc échouer et afficher le **code brut**. Test : ouvrir le **Greatsword Sergeant** dans WinLivre — s'il
+montre `RULES-COMB_2M_05 de qualité` au lieu de `Zweihänder de qualité`, c'est confirmé. Corrigeable
+des deux côtés (un `Trim` dans le code, ou normaliser les 42 items).
+
+**Point de reprise, par ordre de rentabilité :**
+1. faire confirmer le bug `(Q)` ci-dessus, puis choisir le côté à corriger ;
+2. familles de libellés restantes, même méthode : **Melee** (`Two hands`→`Two-Handed`, `Fight`→`Brawling`,
+   `Scourge`→`Flail`), **Ranged**, **Play**, **Lore** (`Lore (War)`→`Lore (Warfare)`, ~10 carrières),
+   **Trade** ;
+3. arbitrer `RULES-COMPCOMB_ENTRA` « Melee (Hinder) » contre `RULES-COMPPROJ_ENTRAV` : vérifié dans le
+   Rulebook, *Entangling* est une spécialisation de **Ranged**, et le Pit Fighter reçoit
+   « Ranged (Entangling) » avec « Net or Whip » — donc `COMB_ENTRA` est un doublon dans la mauvaise
+   famille, et les armes Whip/Lasso sont mal classées ;
+4. revue du livre suivant (Sea of Claws ou Archives II, les plus riches en carrières).
+
+⚠️ **Deux écarts d'Up in Arms laissés non faits, en attente d'arbitrage** : le `Strike to Injure` du
+Chevalier du Loup Blanc contre l'`Intimidate` du livre (bizarrerie du livre — *Intimidate* est une
+compétence, pas un talent), et `Master Tradesman (Cartographer)` contre `(Cartography)`, le Rulebook
+ne tranchant pas.
+
+📄 **The Horned Rat.pdf (147 Mo) ne passe pas le pont de fichiers** : le transfert expire. Si ce livre
+doit être consulté un jour, en extraire les pages utiles ou le recompresser côté machine.
 
 ---
 
@@ -2545,6 +2649,36 @@ chantier concerné, avec les détails techniques.
 ---
 
 ## 5. Méthode de débogage qui a fait ses preuves
+
+### Contrôle systématique des tables de tirage, et arbitrage des orphelins
+
+Toute table de tirage (`DATA_CAREER_ROLL`, tables de sous-métiers, tables de corruption) est
+vérifiée **avant saisie** : chaque colonne doit couvrir **01-100 exactement une fois**, sans trou
+ni chevauchement. Ce contrôle a trouvé **dix coquilles d'édition** dans les livres officiels — il
+en trouve à peu près une par table.
+
+⚠️ Une valeur orpheline est une **coquille du livre**, pas une erreur d'extraction : elle se
+vérifie **à l'image** (`pdftoppm` sur la page, puis lecture du rendu) avant toute conclusion.
+L'extraction texte d'un PDF en colonnes se trompe assez souvent pour que cette étape soit
+obligatoire.
+
+**Règle d'arbitrage, posée par Nono le 23/08/2026** — quand l'arithmétique ne tranche pas :
+
+> La valeur orpheline va au voisin qui en a le **moins**. À égalité, elle va au **premier**
+> (celui qui précède).
+
+Exemple d'application : Sea of Claws p.57, *Agitator* 05-06 puis *Artisan* 08-10, le 07 orphelin
+→ donné à *Agitator* (2 valeurs contre 3), qui devient 05-07.
+
+Cette règle remplace le raisonnement au cas par cas utilisé jusque-là (Up in Arms p.9 :
+*Handgunner* 76-85 retenu « parce que les tableaux voisins enchaînent 01-75 sur 76-00 »). Si un
+cas résiste vraiment, le signaler plutôt que de trancher seul.
+
+⚠️ **Piège d'écriture** : un commentaire XML ne peut pas contenir `--`. Un séparateur
+`<!-- ----- Nom ----- -->` rend le fichier mal formé — utiliser `<!-- === Nom === -->`.
+
+---
+
 
 **L'écran ment, le XML et le modèle disent la vérité.** La plupart des bugs viennent
 d'une valeur écrite ou lue dans la mauvaise colonne — rarement d'une logique fausse.

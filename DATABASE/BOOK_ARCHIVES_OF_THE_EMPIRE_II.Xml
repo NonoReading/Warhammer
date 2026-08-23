@@ -90,7 +90,7 @@ Examples you could take include: Alcohol, Food, Narcotics, Pleasure."</Explanati
 <Skill>"RULES-COMPRESIST"</Skill>
   <!-- Endurance -->
 <Skill>"RULES-COMPDIVERT_NARRA"</Skill>
-  <!-- Entertainment (Storytelling) -->
+  <!-- Entertain (Storytelling) -->
 <Skill>"RULES-COMPINTIM"</Skill>
   <!-- Intimidate -->
 <Skill>"RULES-COMPLANG_GRUMBARTH"</Skill>
@@ -503,7 +503,7 @@ Examples you could take include: Alcohol, Food, Narcotics, Pleasure."</Explanati
 <Skill name="RULES-COMPSIGNES_MAW">"2"</Skill>
   <!-- Secret Signs (The Great Maw) -->
 <Skill name="RULES-COMPDIVERT_DISC">"3"</Skill>
-  <!-- Entertainment (Speech) -->
+  <!-- Entertain (Speeches) -->
 <Skill name="RULES-COMPGUERI">"3"</Skill>
   <!-- Heal -->
 <Skill name="RULES-COMPINTUI">"3"</Skill>
@@ -573,7 +573,7 @@ Examples you could take include: Alcohol, Food, Narcotics, Pleasure."</Explanati
 <Ammunition>"0"</Ammunition>
 </Weapon>
 <Weapon id="ARCH2-COMB_BASE_33">
-<Description language="ENGLISH">"Tronfist"</Description>
+<Description language="ENGLISH">"Ironfist"</Description>
 <Skill>"RULES-COMPCOMB_BASE"</Skill>
 <Damage>"+(BATTR_S)+3"</Damage>
 <Availability>"DISPO_LIMITED"</Availability>

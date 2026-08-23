@@ -872,7 +872,7 @@
   <!-- Lore (Greenskins) -->
 <Skill>"RULES-COMPCOMB_BASE"</Skill>
   <!-- Melee (Basic) -->
-<Skill>"RULES-COMPCOMB_BAGARRE"</Skill>
+<Skill>"RULES-COMPCOMB_BAGAR"</Skill>
   <!-- Melee (Brawling) -->
 <Skill>"RULES-COMPPROJ_ARC"</Skill>
   <!-- Ranged (Bow) -->

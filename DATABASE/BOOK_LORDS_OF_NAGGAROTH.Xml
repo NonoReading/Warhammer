@@ -223,6 +223,7 @@ At the cost of one corruption point the Sorceress may add doublle their Willpowe
 <Item name="boarding hooks and rope">"2"</Item>
 <Item name="knucklebone dice">"2"</Item>
 <Item name="NAGGA-PROJ_ARB_05">"3"</Item>
+<Item name="RULES-MUNI_01">"3"</Item>
 <Item name="landing party of bloodthirsty Corsairs">"3"</Item>
 <Item name="Druchii corsair ship and a villainous corsair crew">"4"</Item>
 <Item name="Parrot Lizard-hawk Reaving charts">"4"</Item>
@@ -484,6 +485,7 @@ At the cost of one corruption point the Sorceress may add doublle their Willpowe
 <Item name="RULES-ARMO_03">"2"</Item>
 <Item name="Scourgerunner Chariot">"3"</Item>
 <Item name="NAGGA-PROJ_ARB_06">"3"</Item>
+<Item name="NAGGA-MUNI_09">"3"</Item>
 <Item name="Net">"3"</Item>
 <Item name="Assistant Beastmaster">"3"</Item>
 <Item name="Trained monster (typically a Manticore or War-Hydra in Naggaroth)">"4"</Item>
@@ -526,7 +528,7 @@ At the cost of one corruption point the Sorceress may add doublle their Willpowe
 <Attribut name="RULES-ATTR_Fel">"4"</Attribut>
 </SUBCHAPTER_ATTR>
 <SUBCHAPTER_SKILL>
-<Skill name="RULES-COMPFOCAL_KHAINE">"1"</Skill>
+<Skill name="RULES-COMPFOCAL_KHAINITE">"1"</Skill>
   <!-- Pray -->
 <Skill name="RULES-COMPCALM">"1"</Skill>
   <!-- Cool -->
@@ -620,7 +622,7 @@ At the cost of one corruption point the Sorceress may add doublle their Willpowe
 <DATA_WEAPON>
 <Weapon id="NAGGA-COMB_BASE_34">
 <Description language="ENGLISH">"Black Ark Sabre"</Description>
-<Skill>"NAGGA-COMPCOMB_BASE"</Skill>
+<Skill>"RULES-COMPCOMB_BASE"</Skill>
 <Damage>"+(BATTR_S)+4"</Damage>
 <Availability>"DISPO_RARE"</Availability>
 <Reach>"WEAPR_MID"</Reach>
@@ -632,7 +634,7 @@ At the cost of one corruption point the Sorceress may add doublle their Willpowe
 </Weapon>
 <Weapon id="NAGGA-COMB_BASE_35">
 <Description language="ENGLISH">"Lakelui"</Description>
-<Skill>"NAGGA-COMPCOMB_BASE"</Skill>
+<Skill>"RULES-COMPCOMB_BASE"</Skill>
 <Damage>"+(BATTR_S)+4"</Damage>
 <Availability>"DISPO_EXOTIC"</Availability>
 <Reach>"WEAPR_MID"</Reach>
@@ -644,7 +646,7 @@ At the cost of one corruption point the Sorceress may add doublle their Willpowe
 </Weapon>
 <Weapon id="NAGGA-COMB_BASE_36">
 <Description language="ENGLISH">"Ghlaith"</Description>
-<Skill>"NAGGA-COMPCOMB_BASE"</Skill>
+<Skill>"RULES-COMPCOMB_BASE"</Skill>
 <Damage>"+(BATTR_S)+4"</Damage>
 <Availability>"DISPO_EXOTIC"</Availability>
 <Reach>"WEAPR_MID"</Reach>
@@ -656,7 +658,7 @@ At the cost of one corruption point the Sorceress may add doublle their Willpowe
 </Weapon>
 <Weapon id="NAGGA-COMB_BASE_37">
 <Description language="ENGLISH">"Sea Dragon Cloak"</Description>
-<Skill>"NAGGA-COMPCOMB_BASE"</Skill>
+<Skill>"RULES-COMPCOMB_BASE"</Skill>
 <Damage>"+(BATTR_S)"</Damage>
 <Availability>"DISPO_EXOTIC"</Availability>
 <Reach>"WEAPR_CLOSE"</Reach>
@@ -668,7 +670,7 @@ At the cost of one corruption point the Sorceress may add doublle their Willpowe
 </Weapon>
 <Weapon id="NAGGA-COMB_PARAD_07">
 <Description language="ENGLISH">"Fighting Spines"</Description>
-<Skill>"NAGGA-COMPCOMB_PARAD"</Skill>
+<Skill>"RULES-COMPCOMB_PARAD"</Skill>
 <Damage>"+(BATTR_S)+2"</Damage>
 <Availability>"DISPO_EXOTIC"</Availability>
 <Reach>"WEAPR_CLOSE"</Reach>
@@ -680,7 +682,7 @@ At the cost of one corruption point the Sorceress may add doublle their Willpowe
 </Weapon>
 <Weapon id="NAGGA-COMB_2M_15">
 <Description language="ENGLISH">"Draich"</Description>
-<Skill>"NAGGA-COMPCOMB_2M"</Skill>
+<Skill>"RULES-COMPCOMB_2M"</Skill>
 <Damage>"+(BATTR_S)+5"</Damage>
 <Availability>"DISPO_EXOTIC"</Availability>
 <Reach>"WEAPR_LONG"</Reach>
@@ -692,7 +694,7 @@ At the cost of one corruption point the Sorceress may add doublle their Willpowe
 </Weapon>
 <Weapon id="NAGGA-PROJ_ARB_04">
 <Description language="ENGLISH">"Repeater Crossbow"</Description>
-<Skill>"NAGGA-COMPPROJ_ARB"</Skill>
+<Skill>"RULES-COMPPROJ_ARB"</Skill>
 <Damage>"+8"</Damage>
 <Availability>"DISPO_EXOTIC"</Availability>
 <Reach>"60"</Reach>
@@ -704,7 +706,7 @@ At the cost of one corruption point the Sorceress may add doublle their Willpowe
 </Weapon>
 <Weapon id="NAGGA-PROJ_ARB_05">
 <Description language="ENGLISH">"Repeater Handbow"</Description>
-<Skill>"NAGGA-COMPPROJ_ARB"</Skill>
+<Skill>"RULES-COMPPROJ_ARB"</Skill>
 <Damage>"+6"</Damage>
 <Availability>"DISPO_EXOTIC"</Availability>
 <Reach>"10"</Reach>
@@ -716,7 +718,7 @@ At the cost of one corruption point the Sorceress may add doublle their Willpowe
 </Weapon>
 <Weapon id="NAGGA-PROJ_ARB_06">
 <Description language="ENGLISH">"Ravager Harpoon"</Description>
-<Skill>"NAGGA-COMPPROJ_ARB"</Skill>
+<Skill>"RULES-COMPPROJ_ARB"</Skill>
 <Damage>"+11"</Damage>
 <Availability>"DISPO_EXOTIC"</Availability>
 <Reach>"100"</Reach>
@@ -728,7 +730,7 @@ At the cost of one corruption point the Sorceress may add doublle their Willpowe
 </Weapon>
 <Weapon id="NAGGA-MUNI_09">
 <Description language="ENGLISH">"Barbed Bolts"</Description>
-<Skill>"NAGGA-COMPPROJ_ARB"</Skill>
+<Skill>"RULES-COMPPROJ_ARB"</Skill>
 <Damage>"+2"</Damage>
 <Availability>"DISPO_EXOTIC"</Availability>
 <Reach>"+0"</Reach>
@@ -736,7 +738,7 @@ At the cost of one corruption point the Sorceress may add doublle their Willpowe
 <Encumbrance>"1"</Encumbrance>
 <Quality>"WEAPB12,WEAPB17,WEAPB38"</Quality>
 <Hand>"0"</Hand>
-<Ammunition>"0"</Ammunition>
+<Ammunition>"6"</Ammunition>
 </Weapon>
 </DATA_WEAPON>
 <DATA_WEAPON_BONUS>

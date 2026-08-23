@@ -92,9 +92,9 @@
 <Skill name="RULES-COMPSAVOIR_*">"3"</Skill>
   <!-- Lore (Anyl) -->
 <Skill name="RULES-COMPSIGNES_GUILD">"3"</Skill>
-  <!-- Secret Signs (Guild) -->
+  <!-- Secret Signs (Guilder) -->
 <Skill name="RULES-COMPDIVERT_DISC">"4"</Skill>
-  <!-- Entertainment (Speech) -->
+  <!-- Entertain (Speeches) -->
 <Skill name="RULES-COMPSAVOIR_*">"4"</Skill>
   <!-- Lore (Anyl) -->
 </SUBCHAPTER_SKILL>
@@ -207,7 +207,7 @@
 <Skill name="RULES-COMPRAGOT">"2"</Skill>
   <!-- Gossip -->
 <Skill name="RULES-COMPLANG_CLASS">"2"</Skill>
-  <!-- Language (Classic) -->
+  <!-- Language (Classical) -->
 <Skill name="RULES-COMPCOMM">"2"</Skill>
   <!-- Leadership -->
 <Skill name="RULES-COMPSAVOIR_POLIT">"2"</Skill>
@@ -225,7 +225,7 @@
 <Skill name="RULES-COMPCHARM">"4"</Skill>
   <!-- Charm -->
 <Skill name="RULES-COMPDIVERT_DISC">"4"</Skill>
-  <!-- Entertainment (Speech) -->
+  <!-- Entertain (Speeches) -->
 </SUBCHAPTER_SKILL>
 <SUBCHAPTER_TALENT>
 <Talent name="RULES-T0012_SOLKAN">"1"</Talent>
@@ -338,7 +338,7 @@
 <Skill name="RULES-COMPCALM">"2"</Skill>
   <!-- Cool -->
 <Skill name="RULES-COMPDIVERT_CHANT">"2"</Skill>
-  <!-- Entertainment (Singing) -->
+  <!-- Entertain (Singing) -->
 <Skill name="RULES-COMPGUERI">"2"</Skill>
   <!-- Heal -->
 <Skill name="RULES-COMPINTIM">"2"</Skill>
@@ -346,7 +346,7 @@
 <Skill name="RULES-COMPSAVOIR_HERB">"2"</Skill>
   <!-- Lore (Herbs) -->
 <Skill name="RULES-COMPDIVERT_NARRA">"3"</Skill>
-  <!-- Entertainment (Storytelling) -->
+  <!-- Entertain (Storytelling) -->
 <Skill name="RULES-COMPCOMM">"3"</Skill>
   <!-- Leadership -->
 <Skill name="RULES-COMPSAVOIR_ESPR">"3"</Skill>
@@ -690,4 +690,289 @@ It takes an Action to open or close a visor."</Explanation>
   <!-- Priest of Solkan -->
 </Entry>
 </DATA_SPECIE_CAREER_DIRECT>
+<DATA_SPELL>
+<Sort id="ARCH3-MIRAC_HANDRICH_01">
+<Description language="ENGLISH">"Supply and Demand"</Description>
+<Explanation language="ENGLISH">"Having successfully identified a place looking to sell or buy certain goods through a Difficult (-10) Gossip Test, you may invoke Handrich to make the amount available appear to increase or decrease. This does not affect any goods in your own possession. For example, a merchant looking to buy grain will suddenly find rats have got into their existing supplies, while someone selling rare linens discovers extra stock tucked away in a back room. You may change an item's Availability by one level (Common becomes Scarce, Exotic becomes Rare, etc.) to affect its Bartering Ratio, as per WFRP page 291."</Explanation>
+<Target>"One batch of trade goods in line of sight"</Target>
+<Duration>"1 hour"</Duration>
+<Range>"Fellowship yards"</Range>
+<Talent>"RULES-T0080_HANDRICH"</Talent>
+<Level>""</Level>
+<TypSpell>"Miracle"</TypSpell>
+</Sort>
+<Sort id="ARCH3-MIRAC_HANDRICH_02">
+<Description language="ENGLISH">"Trickle Down"</Description>
+<Explanation language="ENGLISH">"Through the gift of a gold coin and the promise of increased wealth to come, you introduce those you wish to befriend to Handrich's beneficence. A successful Charm Test while speaking to people of lower Status gains +1 SL for every SL of the Pray Test to invoke this Miracle."</Explanation>
+<Target>"Fellowship Bonus people"</Target>
+<Duration>"Fellowship Bonus Rounds"</Duration>
+<Range>"Fellowship yards"</Range>
+<Talent>"RULES-T0080_HANDRICH"</Talent>
+<Level>""</Level>
+<TypSpell>"Miracle"</TypSpell>
+</Sort>
+<Sort id="ARCH3-MIRAC_HANDRICH_03">
+<Description language="ENGLISH">"A Deal's a Deal"</Description>
+<Explanation language="ENGLISH">"Upon a successful Haggle Test, you may say a word of thanks to Handrich before shaking hands on the matter. This adds +2 SL to the Haggle check, which rises by 1 per +2 SL gained on the Pray Test invoking the Miracle. In addition, the person with whom you are haggling is left with a good impression of you."</Explanation>
+<Target>"You"</Target>
+<Duration>"Instant"</Duration>
+<Range>"You"</Range>
+<Talent>"RULES-T0080_HANDRICH"</Talent>
+<Level>""</Level>
+<TypSpell>"Miracle"</TypSpell>
+</Sort>
+<Sort id="ARCH3-MIRAC_HANDRICH_04">
+<Description language="ENGLISH">"Twist of Fortune"</Description>
+<Explanation language="ENGLISH">"Handrich examines the fortunes of all and suggests a deal could be reached. You may spend 1 point of the target's Fortune as though it were your own. However, they may choose to contest this by making a Challenging (+0) Fellowship Test against your SL. If they beat this, they keep their Fortune point. If they beat your SL by +4 SL, then they may choose to spend a point of your Fortune as their own.
+The lost Fortune must be spent by the end of the session in which it is lost. When the next session begins, the lost Fortune is restored to its original owner."</Explanation>
+<Target>"1"</Target>
+<Duration>"Instant"</Duration>
+<Range>"Fellowship yards"</Range>
+<Talent>"RULES-T0080_HANDRICH"</Talent>
+<Level>""</Level>
+<TypSpell>"Miracle"</TypSpell>
+</Sort>
+<Sort id="ARCH3-MIRAC_HANDRICH_05">
+<Description language="ENGLISH">"Carry My Burdens"</Description>
+<Explanation language="ENGLISH">"You have the goods and the deal is set. Now trust in Handrich to provide the means of delivery. If you succeed on an Animal Training Test, the target creature will serve as your pack animal, no matter how wild or aggressive it was. It will not attack or follow orders, save for carrying anything you wish as you travel. Upon completing the journey, the creature reverts to its previously wild state. This Miracle can only be used on one creature at a time."</Explanation>
+<Target>"One non-monstrous creature (as determined by the GM)"</Target>
+<Duration>"Until the journey's completion"</Duration>
+<Range>"1 yard"</Range>
+<Talent>"RULES-T0080_HANDRICH"</Talent>
+<Level>""</Level>
+<TypSpell>"Miracle"</TypSpell>
+</Sort>
+<Sort id="ARCH3-MIRAC_HANDRICH_06">
+<Description language="ENGLISH">"Shake On It"</Description>
+<Explanation language="ENGLISH">"You ask Handrich to witness this deal, and seal it with a handshake. The target cannot act in opposition to this deal for at least Fellowship Bonus Rounds. If they do wish to contest some part of it, they must make an Average (+20) Cool Test contesting your SL. If successful, they can refuse to take an action dictated by the deal. For every additional 2 SL they achieve, they may take one action in opposition to the deal. You will know if they break the deal. You suffer +1 Sin point if you break the terms of the deal while this Miracle is in effect."</Explanation>
+<Target>"1"</Target>
+<Duration>"Fellowship Bonus Rounds"</Duration>
+<Range>"Touch"</Range>
+<Talent>"RULES-T0080_HANDRICH"</Talent>
+<Level>""</Level>
+<TypSpell>"Miracle"</TypSpell>
+</Sort>
+<Sort id="ARCH3-MIRAC_SOLKAN_01">
+<Description language="ENGLISH">"Light of Stasis"</Description>
+<Explanation language="ENGLISH">"You utter a terse prayer to the Gods of Law requesting respite from change. The scene around you is bathed in pale light and all within is trapped in temporary stasis - frozen and unchanging for the duration of the Miracle. All targets cannot act or move in any way - anything affected by the passing of time (falling objects, missiles, injuries, Conditions, etc.) will pause until the end of the Duration."</Explanation>
+<Target>"3"</Target>
+<Duration>"Fellowship Bonus Rounds"</Duration>
+<Range>"4 yards"</Range>
+<Talent>"RULES-T0080_SOLKAN"</Talent>
+<Level>""</Level>
+<TypSpell>"Miracle"</TypSpell>
+</Sort>
+<Sort id="ARCH3-MIRAC_SOLKAN_02">
+<Description language="ENGLISH">"Still the Winds"</Description>
+<Explanation language="ENGLISH">"You beseech the Gods of Law to calm the Winds of Magic. For the duration of the spell, within Fellowship Bonus yards, all magic is dispelled, magic items temporarily lose their magical qualities, and Channelling and Casting Tests automatically fail. Second Sight reveals the Winds are inert within the area of effect."</Explanation>
+<Target>"Area of Effect (Fellowship Bonus yards)"</Target>
+<Duration>"Fellowship Bonus Rounds"</Duration>
+<Range>"Fellowship Bonus yards"</Range>
+<Talent>"RULES-T0080_SOLKAN"</Talent>
+<Level>""</Level>
+<TypSpell>"Miracle"</TypSpell>
+</Sort>
+<Sort id="ARCH3-MIRAC_SOLKAN_03">
+<Description language="ENGLISH">"Absolute Purity"</Description>
+<Explanation language="ENGLISH">"With a cry to Solkan, you inflict the Avenger's wrath on the impure. A wave of cleansing flame washes Fellowship Bonus yards from your person, inflicting agony on all that Solkan abhors. Anything in the area with Undead, Daemon, or Spellcaster Traits, any Sin or Corruption points, or any Arcane Magic, Chaos Magic, or Petty Magic Talent receives 1d10 Wounds, ignoring Toughness and APs - this includes you and any allies or bystanders."</Explanation>
+<Target>"Area of Effect (Fellowship Bonus yards)"</Target>
+<Duration>"Instant"</Duration>
+<Range>"You"</Range>
+<Talent>"RULES-T0080_SOLKAN"</Talent>
+<Level>""</Level>
+<TypSpell>"Miracle"</TypSpell>
+</Sort>
+<Sort id="ARCH3-MIRAC_SOLKAN_04">
+<Description language="ENGLISH">"Fist of Vengeance"</Description>
+<Explanation language="ENGLISH">"You call on Solkan to smite those who defy his will. An almighty concussive blast hits your target, inflicting 1d10+WP Bonus Damage, ignoring AP."</Explanation>
+<Target>"1"</Target>
+<Duration>"Instant"</Duration>
+<Range>"Fellowship Bonus yards"</Range>
+<Talent>"RULES-T0080_SOLKAN"</Talent>
+<Level>""</Level>
+<TypSpell>"Miracle"</TypSpell>
+</Sort>
+<Sort id="ARCH3-MIRAC_SOLKAN_05">
+<Description language="ENGLISH">"Flaming Blade"</Description>
+<Explanation language="ENGLISH">"Solkan grants your weapon the power of his pitiless fury. If you are wielding a sword, it is wreathed in white hot flames. It becomes a Magical weapon with +6 Damage. Anyone struck by the blade gains +1 Ablaze Condition."</Explanation>
+<Target>"You"</Target>
+<Duration>"Fellowship Bonus Rounds"</Duration>
+<Range>"You"</Range>
+<Talent>"RULES-T0080_SOLKAN"</Talent>
+<Level>""</Level>
+<TypSpell>"Miracle"</TypSpell>
+</Sort>
+<Sort id="ARCH3-MIRAC_SOLKAN_06">
+<Description language="ENGLISH">"Fury of the Righteous Sun"</Description>
+<Explanation language="ENGLISH">"You implore your god for total illumination. A blinding light pours from the sun, making it impossible to see. All within Fellowship Bonus yards receive a number of Blinded Conditions equal to your Fellowship Bonus. The searing light also acts as a magic missile with Damage of +2 on all it hits."</Explanation>
+<Target>"Area of Effect (Fellowship Bonus yards)"</Target>
+<Duration>"Instant"</Duration>
+<Range>"Fellowship Bonus yards"</Range>
+<Talent>"RULES-T0080_SOLKAN"</Talent>
+<Level>""</Level>
+<TypSpell>"Miracle"</TypSpell>
+</Sort>
+<Sort id="ARCH3-MIRAC_RHYA_07">
+<Description language="ENGLISH">"Rhya's Dominion"</Description>
+<Explanation language="ENGLISH">"You cry an invocation for Rhya to summon a nature spirit and command its obedience. You must focus on a natural feature where a spirit could reside - such as a field of crops, a pool, or a clump of brambles. If the Miracle is successful, the spirit appears and will complete one task in the name of Rhya. Spirits tend to be over-literal in how they interpret demands, and no request can break the strictures of Rhya. Tasks could include watching others on the priestess's behalf, harassing those who trespass in the spirit's domain, or finding something lost nearby."</Explanation>
+<Target>"1"</Target>
+<Duration>"Until sunrise or sunset, whichever comes sooner"</Duration>
+<Range>"4 yards"</Range>
+<Talent>"RULES-T0080_RHYA"</Talent>
+<Level>""</Level>
+<TypSpell>"Miracle"</TypSpell>
+</Sort>
+<Sort id="ARCH3-MIRAC_RHYA_08">
+<Description language="ENGLISH">"Rhya's Flock"</Description>
+<Explanation language="ENGLISH">"You whisper deep secrets from the time when Rhya walked the earth taming the wild. A flock, herd, or pack of domesticated animals submits to your will, answering ancient commands heard by their ancestors. You can sense the mood of the animals and see through their eyes. By reaching out to the beasts' minds, you can calm or agitate them. You can make them stampede, fall asleep, attack, or simply become your eyes and ears (and sense of smell, taste, and touch) - they can do anything within the creatures' natural behavioural range."</Explanation>
+<Target>"Special"</Target>
+<Duration>"Fellowship Bonus Rounds"</Duration>
+<Range>"Fellowship yards"</Range>
+<Talent>"RULES-T0080_RHYA"</Talent>
+<Level>""</Level>
+<TypSpell>"Miracle"</TypSpell>
+</Sort>
+<Sort id="ARCH3-MIRAC_RHYA_09">
+<Description language="ENGLISH">"Rhya's Abundance"</Description>
+<Explanation language="ENGLISH">"You sing of the summer and the radiance of Rhya, to bring forth a bounty and expel all foulness. Stored food and uncooked ingredients slowly swell and divide in two, doubling everything you touch. Mould, vermin, insects, and other sources of spoilage disappear and old food becomes fresh once again. You can touch one barrel, crate, or basket of food per round."</Explanation>
+<Target>"You"</Target>
+<Duration>"1 Round"</Duration>
+<Range>"Touch"</Range>
+<Talent>"RULES-T0080_RHYA"</Talent>
+<Level>""</Level>
+<TypSpell>"Miracle"</TypSpell>
+</Sort>
+<Sort id="ARCH3-MIRAC_RHYA_10">
+<Description language="ENGLISH">"Rhya's Demand"</Description>
+<Explanation language="ENGLISH">"You sing subtle harmonies, drawing together melodious strands of resentment from deep within the earth - demanding recompense from those who have not shown Rhya gratitude. All humanoid creatures within Fellowship Bonus Yards who have not made a sacrifice to Rhya (or another deity of nature or powerful nature spirit to whom the cult of Rhya are well disposed, such as Isha or Taal) since the last spring equinox lose 1 Wound (+1 for every SL) and gain a Fatigued Condition.
+If five or more individuals are so affected then the ground within Fellowship Yards becomes infertile and nothing will grow there for d10 years from now."</Explanation>
+<Target>"Area of Effect"</Target>
+<Duration>"Instant"</Duration>
+<Range>"You"</Range>
+<Talent>"RULES-T0080_RHYA"</Talent>
+<Level>""</Level>
+<TypSpell>"Miracle"</TypSpell>
+</Sort>
+<Sort id="ARCH3-MIRAC_RHYA_11">
+<Description language="ENGLISH">"Rhya's Taming"</Description>
+<Explanation language="ENGLISH">"You reach out a gentle hand to a creature of the wild and hum soothing melodies to calm and tame. Take an Average (+20) Charm Animal Test to domesticate any uncorrupted, wild animal of Large Size or smaller. If successful, it will become docile towards Humans, Elves who honour Isha, and similar allies. For every Success Level it becomes increasingly tame and pliable, although it will not willingly leave its natural territory."</Explanation>
+<Target>"1"</Target>
+<Duration>"Until the next sunset"</Duration>
+<Range>"Touch"</Range>
+<Talent>"RULES-T0080_RHYA"</Talent>
+<Level>""</Level>
+<TypSpell>"Miracle"</TypSpell>
+</Sort>
+<Sort id="ARCH3-MIRAC_RHYA_12">
+<Description language="ENGLISH">"Rhya's Rage"</Description>
+<Explanation language="ENGLISH">"As you intone a chant of quiet resolve, you feel Rhya's power surge through your being, ready to defend those who need protection. This Miracle can be cast only when you are defending children or a home or farmstead occupied by its inhabitants. You gain the Immunity to Psychology and Painless Traits, and +2 SL to Melee, Strength, and Toughness Tests."</Explanation>
+<Target>"You"</Target>
+<Duration>"Fellowship Bonus Rounds"</Duration>
+<Range>"You"</Range>
+<Talent>"RULES-T0080_RHYA"</Talent>
+<Level>""</Level>
+<TypSpell>"Miracle"</TypSpell>
+</Sort>
+  <!-- Les 9 sorts NOUVEAUX du Domaine de Hedgecraft (livre p.62-64).
+       Le livre en imprime 15, mais 6 sont une REIMPRESSION du Rulebook p.254 et sont deja
+       saisis sous RULES-T0088_MAGIE : Goodwill, Nepenthe, Nostrum, Part the Branches,
+       Mirkride et Protective Charm. Ils n'ont pas ete recopies ici.
+       Attention pour le dedoublonnage : les libelles anglais saisis dans le Rulebook sont des
+       retraductions approximatives (Good Will / Nepenthes / Paneacea / Separate branches /
+       Ride the Darkness), la comparaison se fait sur le SENS et pas sur la chaine. -->
+<Sort id="ARCH3-COLOR_290">
+<Description language="ENGLISH">"Dagger of the Art"</Description>
+<Explanation language="ENGLISH">"You grasp a stick no longer than eight inches in length and transform it into a magical weapon. This counts as a dagger that possesses the Magical Quality. The Dagger of the Art is particularly potent when wielded against enemies with the Ethereal or Corrupted Creature Traits. It inflicts Damage of SB + 8 to these foes. You can retain the Dagger of the Art after the duration ends by passing a Challenging (+0) Channelling Test each round thereafter."</Explanation>
+<Target>"You"</Target>
+<Duration>"Willpower Bonus Rounds"</Duration>
+<Range>"You"</Range>
+<Talent>"RULES-T0088_MAGIE"</Talent>
+<Level>"4"</Level>
+<TypSpell>"Domain Magic"</TypSpell>
+</Sort>
+<Sort id="ARCH3-COLOR_291">
+<Description language="ENGLISH">"Fellstave"</Description>
+<Explanation language="ENGLISH">"When you first learn the Fellstave spell, choose a target creature type from the following list: Beastmen (including Minotaurs and Centigors, but not Skaven), Daemons, Orcs and Goblins, Ogres, Fimir, Trolls, or Undead. GMs are encouraged to add other creatures to this list as they see fit. You may learn this spell multiple times for the same XP cost as any other new spell, choosing a new target creature type each time.
+In order to cast this spell you must whittle a Fellstave, a post of wood no shorter than three feet in length and four inches in diameter. Carving warding symbols into the wood and chanting ancient words of power, you demand that all foulness flee your righteous spell. The Fellstave is driven into the ground and then the spell is cast.
+If the spell succeeds, for the following month, the Fellstave acts as a ward against the chosen creature. If any creature matching your chosen type draws within 100 yards, they must make a Challenging (+0) Cool Test or receive a Broken Condition. Creatures who recover from Broken Conditions must make a Challenging (+0) Intuition Test. If they fail, they realise that the Fellstave caused them to experience a magically induced panic, which may mean they avoid it in future, or seek to have it destroyed."</Explanation>
+<Target>"See text"</Target>
+<Duration>"1 month"</Duration>
+<Range>"See text"</Range>
+<Talent>"RULES-T0088_MAGIE"</Talent>
+<Level>"9"</Level>
+<TypSpell>"Domain Magic"</TypSpell>
+</Sort>
+<Sort id="ARCH3-COLOR_292">
+<Description language="ENGLISH">"Invigorate"</Description>
+<Explanation language="ENGLISH">"Your spell invigorates your target's body. The target ignores all Fatigued Conditions for the duration."</Explanation>
+<Target>"1"</Target>
+<Duration>"Willpower Bonus Rounds"</Duration>
+<Range>"Touch"</Range>
+<Talent>"RULES-T0088_MAGIE"</Talent>
+<Level>"2"</Level>
+<TypSpell>"Domain Magic"</TypSpell>
+</Sort>
+<Sort id="ARCH3-COLOR_293">
+<Description language="ENGLISH">"Lovelock"</Description>
+<Explanation language="ENGLISH">"You must have a cup or other drinking vessel at hand to cast this spell. You utter the secret words of Hedgecraft, and as you do so, honey drips from your lips, which you catch in the cup. If someone drinks the philtre, it causes them to fall in love with the first person they would find romantically appealing, if any at all."</Explanation>
+<Target>"See text"</Target>
+<Duration>"Until midnight"</Duration>
+<Range>"Touch"</Range>
+<Talent>"RULES-T0088_MAGIE"</Talent>
+<Level>"10"</Level>
+<TypSpell>"Domain Magic"</TypSpell>
+</Sort>
+<Sort id="ARCH3-COLOR_294">
+<Description language="ENGLISH">"Protection Pouch"</Description>
+<Explanation language="ENGLISH">"In order to cast this spell you must possess a small pouch, crafted from the body of a small animal such as a bat or shrew. As you incant the words of the spell, a small crop of strange purple herbs grows at your feet. You can harvest these herbs and place them into the pouch.
+If a person wears the herb-filled pouch around their neck, they benefit from +1 SL to any Cool Tests they make to resist supernatural effects, including Fear and Terror caused by Undead creatures and Daemons. They also benefit from +1 SL to Endurance Tests made to resist contracting diseases or suffering from Poisoned Conditions."</Explanation>
+<Target>"See text"</Target>
+<Duration>"1 week + 1 week per SL"</Duration>
+<Range>"Touch"</Range>
+<Talent>"RULES-T0088_MAGIE"</Talent>
+<Level>"5"</Level>
+<TypSpell>"Domain Magic"</TypSpell>
+</Sort>
+<Sort id="ARCH3-COLOR_295">
+<Description language="ENGLISH">"Sightstep"</Description>
+<Explanation language="ENGLISH">"This useful spell has saved the lives of many hedge witches. You incant a short invocation which dampens your own magical nature, obscuring yourself from those able to sense the Winds. Those with the Magical Sight Talent notice nothing strange about you, and you gain a bonus of +2 SL to any Stealth Tests you make to hide from Daemons, spirits, and ethereal creatures. You may not cast magic yourself while the spell is in effect, and may not dispel or channel."</Explanation>
+<Target>"You"</Target>
+<Duration>"Willpower Bonus minutes"</Duration>
+<Range>"You"</Range>
+<Talent>"RULES-T0088_MAGIE"</Talent>
+<Level>"7"</Level>
+<TypSpell>"Domain Magic"</TypSpell>
+</Sort>
+<Sort id="ARCH3-COLOR_296">
+<Description language="ENGLISH">"Silvertide"</Description>
+<Explanation language="ENGLISH">"You proclaim a charm that provides you with the luck to find lost coins. Over the course of the duration, you find pennies on the ground, at the bottom of forgotten pockets and hems, behind ears, under cushions, and so on. By the time the spell is finished you will have discovered 1d10 pennies."</Explanation>
+<Target>"You"</Target>
+<Duration>"1d10 hours"</Duration>
+<Range>"You"</Range>
+<Talent>"RULES-T0088_MAGIE"</Talent>
+<Level>"4"</Level>
+<TypSpell>"Domain Magic"</TypSpell>
+</Sort>
+<Sort id="ARCH3-COLOR_297">
+<Description language="ENGLISH">"The Ousting"</Description>
+<Explanation language="ENGLISH">"You incant words of banishment, demanding that a creature from beyond the Hedge return to its place of origin. One creature with the Ethereal or Daemonic Trait within range must pass a Challenging (+0) Willpower Test or suffer a number of Wounds equal to your Willpower Bonus. If this reduces them to 0 Wounds or fewer, they are immediately banished from the physical world, unable to return for the duration."</Explanation>
+<Target>"1"</Target>
+<Duration>"1d10 years"</Duration>
+<Range>"Willpower Bonus yards"</Range>
+<Talent>"RULES-T0088_MAGIE"</Talent>
+<Level>"8"</Level>
+<TypSpell>"Domain Magic"</TypSpell>
+</Sort>
+<Sort id="ARCH3-COLOR_298">
+<Description language="ENGLISH">"Wyrd Ward"</Description>
+<Explanation language="ENGLISH">"Hedge witches are no friends of those who work with Dhar, and witches and warlocks are amongst their oldest foes. A hedge witch can grasp a witch and declare this quick curse, depriving them of their connection to corrupt magical energy.
+After casting the spell, you must succeed on an Opposed Willpower Test with the target. If you win, the target suffers -2 SL to any Language (Magick) or Channelling Tests made to cast spells from the Lores of Witchcraft, Necromancy, Daemonology, or any Chaos Lore for the duration."</Explanation>
+<Target>"1"</Target>
+<Duration>"Willpower Bonus hours"</Duration>
+<Range>"Touch"</Range>
+<Talent>"RULES-T0088_MAGIE"</Talent>
+<Level>"4"</Level>
+<TypSpell>"Domain Magic"</TypSpell>
+</Sort>
+</DATA_SPELL>
 </DATA_BOOK>

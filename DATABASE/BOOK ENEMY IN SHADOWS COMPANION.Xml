@@ -96,7 +96,7 @@ However, their differing visions of the Empire’s fate ensure that for all thei
 <SUBCHAPTER_SKILL>
 <Skill name="RULES-COMPFOCAL_NECRO">"1"</Skill>
   <!-- Channelling (Dhar) -->
-<Skill name="RULES-COMPDIVERT_ACTING">"1"</Skill>
+<Skill name="RULES-COMPDIVERT_INTERP">"1"</Skill>
   <!-- Entertain (Acting) -->
 <Skill name="RULES-COMPINTUI">"1"</Skill>
   <!-- Intuition  -->
@@ -123,7 +123,7 @@ However, their differing visions of the Empire’s fate ensure that for all thei
 <Skill name="RULES-COMPESCAM">"2"</Skill>
   <!-- Sleight if Hand -->
 <Skill name="RULES-COMPDIVERT_NARRA">"3"</Skill>
-  <!-- Entertainment (Storytelling) -->
+  <!-- Entertain (Storytelling) -->
 <Skill name="RULES-COMPINTIM">"3"</Skill>
   <!-- Intimidate -->
 <Skill name="RULES-COMPCOMM">"3"</Skill>

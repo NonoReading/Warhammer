@@ -478,9 +478,9 @@
   <!-- Nun -->
 <Career name="RULES-WORK23">"03-04"</Career>
   <!-- Scholar -->
-<Career name="RULES-WORK01">"05-06"</Career>
+<Career name="RULES-WORK01">"05-07"</Career>
   <!-- Agitator -->
-<Career name="RULES-WORK03">"07-10"</Career>
+<Career name="RULES-WORK03">"08-10"</Career>
   <!-- Artisan -->
 <Career name="RULES-WORK37">"11-12"</Career>
   <!-- Beggar -->
@@ -601,9 +601,9 @@
   <!-- Nun -->
 <Career name="RULES-WORK23">"03-04"</Career>
   <!-- Scholar -->
-<Career name="RULES-WORK01">"05-06"</Career>
+<Career name="RULES-WORK01">"05-07"</Career>
   <!-- Agitator -->
-<Career name="RULES-WORK03">"07-10"</Career>
+<Career name="RULES-WORK03">"08-10"</Career>
   <!-- Artisan -->
 <Career name="RULES-WORK37">"11-12"</Career>
   <!-- Beggar -->
@@ -726,9 +726,9 @@
   <!-- Nun -->
 <Career name="RULES-WORK23">"03-04"</Career>
   <!-- Scholar -->
-<Career name="RULES-WORK01">"05-06"</Career>
+<Career name="RULES-WORK01">"05-07"</Career>
   <!-- Agitator -->
-<Career name="RULES-WORK03">"07-10"</Career>
+<Career name="RULES-WORK03">"08-10"</Career>
   <!-- Artisan -->
 <Career name="RULES-WORK37">"11-12"</Career>
   <!-- Beggar -->
@@ -991,10 +991,10 @@ This bonus applies to Crew Tests as well as individual Leadership Tests."</Expla
 <Skill name="RULES-COMPESQU">"1"</Skill>
   <!-- Dodge -->
 <Skill name="RULES-COMPDIVERT_CHANT">"1"</Skill>
-  <!-- Entertainment (Singing) -->
+  <!-- Entertain (Singing) -->
 <Skill name="RULES-COMPRAGOT">"1"</Skill>
   <!-- Gossip -->
-<Skill name="RULES-COMPCOMB_BAGARRE">"1"</Skill>
+<Skill name="RULES-COMPCOMB_BAGAR">"1"</Skill>
   <!-- Melee (Brawling) -->
 <Skill name="RULES-COMPMUSIC_*">"1"</Skill>
   <!-- Play (Any) -->
@@ -1136,7 +1136,7 @@ This bonus applies to Crew Tests as well as individual Leadership Tests."</Expla
 <Skill name="RULES-COMPCALM">"2"</Skill>
   <!-- Cool -->
 <Skill name="RULES-COMPDIVERT_NARRA">"2"</Skill>
-  <!-- Entertainment (Storytelling) -->
+  <!-- Entertain (Storytelling) -->
 <Skill name="RULES-COMPLANG_*">"2"</Skill>
   <!-- Language (Any) -->
 <Skill name="RULES-COMPMARCH">"3"</Skill>
@@ -1164,7 +1164,7 @@ This bonus applies to Crew Tests as well as individual Leadership Tests."</Expla
 <Talent name="RULES-T0102">"2"</Talent>
   <!-- Dealmaker -->
 <Talent name="RULES-T0136_GUILD">"2"</Talent>
-  <!-- Etiquette (Guild) -->
+  <!-- Etiquette (Guilder) -->
 <Talent name="RULES-T0058">"2"</Talent>
   <!-- Nose for Trouble -->
 <Talent name="RULES-T0085">"2"</Talent>
@@ -1370,7 +1370,7 @@ This bonus applies to Crew Tests as well as individual Leadership Tests."</Expla
   <!-- Gossip -->
 <Skill name="RULES-COMPSAVOIR_OCEAN">"1"</Skill>
   <!-- Lore (Oceans) -->
-<Skill name="RULES-COMPCOMB_BAGARRE">"1"</Skill>
+<Skill name="RULES-COMPCOMB_BAGAR">"1"</Skill>
   <!-- Melee (Brawling) -->
 <Skill name="RULES-COMPMUSIC_PENNYW">"1"</Skill>
   <!-- Play (Pennywhistle) -->
@@ -1387,7 +1387,7 @@ This bonus applies to Crew Tests as well as individual Leadership Tests."</Expla
 <Skill name="RULES-COMPRESIST">"2"</Skill>
   <!-- Endurance -->
 <Skill name="RULES-COMPDIVERT_CHANT">"2"</Skill>
-  <!-- Entertainment (Singing) -->
+  <!-- Entertain (Singing) -->
 <Skill name="RULES-COMPLANG_*">"2"</Skill>
   <!-- Language (Any) -->
 <Skill name="RULES-COMPCOMB_BASE">"2"</Skill>
@@ -1497,7 +1497,7 @@ This bonus applies to Crew Tests as well as individual Leadership Tests."</Expla
 <Skill name="RULES-COMPRESIST">"1"</Skill>
   <!-- Endurance -->
 <Skill name="RULES-COMPLANG_CLASS">"1"</Skill>
-  <!-- Language (Classic) -->
+  <!-- Language (Classical) -->
 <Skill name="RULES-COMPSAVOIR_MANANN">"1"</Skill>
   <!-- Lore (Manann) -->
 <Skill name="RULES-COMPPRIERE">"1"</Skill>
@@ -1511,7 +1511,7 @@ This bonus applies to Crew Tests as well as individual Leadership Tests."</Expla
 <Skill name="RULES-COMPINTUI">"2"</Skill>
   <!-- Intuition  -->
 <Skill name="RULES-COMPDIVERT_CHANT">"2"</Skill>
-  <!-- Entertainment (Singing) -->
+  <!-- Entertain (Singing) -->
 <Skill name="RULES-COMPPARI">"2"</Skill>
   <!-- Gamble -->
 <Skill name="RULES-COMPINTIM">"2"</Skill>
@@ -1627,7 +1627,7 @@ This bonus applies to Crew Tests as well as individual Leadership Tests."</Expla
   <!-- Endurance -->
 <Skill name="RULES-COMPLANG_BATAIL">"1"</Skill>
   <!-- Language (Battle) -->
-<Skill name="RULES-COMPCOMB_BAGARRE">"1"</Skill>
+<Skill name="RULES-COMPCOMB_BAGAR">"1"</Skill>
   <!-- Melee (Brawling) -->
 <Skill name="RULES-COMPPRECEP">"1"</Skill>
   <!-- Perception  -->
@@ -1831,6 +1831,8 @@ This bonus applies to Crew Tests as well as individual Leadership Tests."</Expla
 <Item name="RULES-ARMO_03">"2"</Item>
 <Item name="Storm Lantern and Oil">"2"</Item>
 <Item name="RULES-PROJ_ARB_01">"3"</Item>
+<Item name="RULES-MUNI_01">"3"</Item>
+  <!-- Bolt : les "10 Bolts" du livre (niveau Pirate). -->
 <Item name="Grappling Hook">"3"</Item>
 <Item name="Rope">"3"</Item>
 <Item name="Riverboat">"3"</Item>
@@ -1898,7 +1900,7 @@ This bonus applies to Crew Tests as well as individual Leadership Tests."</Expla
 <Skill name="RULES-COMPCALM">"2"</Skill>
   <!-- Cool -->
 <Skill name="RULES-COMPDIVERT_CHANT">"2"</Skill>
-  <!-- Entertainment (Singing) -->
+  <!-- Entertain (Singing) -->
 <Skill name="RULES-COMPSAVOIR_STROMFELS">"2"</Skill>
   <!-- Lore (Stromfels) -->
 <Skill name="RULES-COMPORIENT">"2"</Skill>
@@ -1967,6 +1969,8 @@ This bonus applies to Crew Tests as well as individual Leadership Tests."</Expla
 <Item name="Riverboat">"3"</Item>
 <Item name="Group of Cultists">"4"</Item>
 <Item name="RULES-PROJ_POUDRE_04">"4"</Item>
+<Item name="RULES-MUNI_06">"4"</Item>
+  <!-- Bullet and Powder : les "10 Shots" du livre (niveau Priest Captain). -->
 </SUBCHAPTER_ITEM>
 </Career>
 </DATA_CAREER>

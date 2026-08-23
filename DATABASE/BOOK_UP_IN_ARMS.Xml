@@ -260,9 +260,9 @@ Ifthe Character passes the Test, the crew members may then use the Characters Ra
   <!-- Ranged (Crossbow) -->
 </SUBCHAPTER_SKILL>
 <SUBCHAPTER_TALENT>
-<Talent>"WINDS-T0051/WINDS-T0113"</Talent>
+<Talent>"RULES-T0051/RULES-T0113"</Talent>
   <!-- Argumentative/Fisherman -->
-<Talent>"WINDS-T0074/WINDS-T0002"</Talent>
+<Talent>"RULES-T0074/RULES-T0002"</Talent>
   <!-- Coolheaded/Suave -->
 <Talent>"RULES-T*"</Talent>
   <!-- Random Talent -->
@@ -560,8 +560,8 @@ Ifthe Character passes the Test, the crew members may then use the Characters Ra
   <!-- Ride (Horse) -->
 <Skill name="RULES-COMPSAVOIR_GUERRE">"4"</Skill>
   <!-- Lore (War) -->
-<Skill name="RULES-COMPSIGNES_ECLAI">"4"</Skill>
-  <!-- Secret Signs (Pathfinders) -->
+<Skill name="RULES-COMPSIGNES_SCOUT">"4"</Skill>
+  <!-- Secret Signs (Scout) -->
 </SUBCHAPTER_SKILL>
 <SUBCHAPTER_TALENT>
 <Talent name="RULES-T0149">"1"</Talent>
@@ -598,7 +598,9 @@ Ifthe Character passes the Test, the crew members may then use the Characters Ra
   <!-- War Leader -->
 </SUBCHAPTER_TALENT>
 <SUBCHAPTER_ITEM>
-<Item name="Quiver and 10 Arrows">"1"</Item>
+<Item name="RULES-MUNI_02">"1"</Item>
+  <!-- Arrow : etait en texte libre "Quiver and 10 Arrows". Le carquois lui-meme n'est pas
+       modelise, seule la munition l'est. -->
 <Item name="RULES-PROJ_ARC_01">"1"</Item>
 <Item name="RULES-COMB_BASE_10">"1"</Item>
 <Item name="Pack">"1"</Item>
@@ -739,7 +741,7 @@ Ifthe Character passes the Test, the crew members may then use the Characters Ra
 <Item name="RULES-ARMO_13">"2"</Item>
 <Item name="RULES-ARMO_14">"2"</Item>
 <Item name="Large Feathered Hat">"2"</Item>
-<Item name="Manual on the art of fighting">"3"</Item>
+<Item name="Manual on the Art of Zweihaender Fighting">"3"</Item>
 <Item name="RULES-COMB_2M_05 (Q)">"3"</Item>
 <Item name="Symbol of Rank">"3"</Item>
 <Item name="Letter of Commission">"4"</Item>
@@ -1026,7 +1028,7 @@ Ifthe Character passes the Test, the crew members may then use the Characters Ra
 <Salary>"TIERS_SILVER 5"</Salary>
 </Level>
 <Level id="4">
-<Description language="ENGLISH">"Artillerist Master"</Description>
+<Description language="ENGLISH">"Master Artillerist"</Description>
 <Salary>"TIERS_GOLD 1"</Salary>
 </Level>
 </SUBCHAPTER_LEVEL>
@@ -1181,7 +1183,7 @@ Ifthe Character passes the Test, the crew members may then use the Characters Ra
 <Skill name="RULES-COMPESQU">"1"</Skill>
   <!-- Dodge -->
 <Skill name="RULES-COMPDIVERT_*">"1"</Skill>
-  <!-- Entertainment (Any) -->
+  <!-- Entertain (Any) -->
 <Skill name="RULES-COMPRAGOT">"1"</Skill>
   <!-- Gossip -->
 <Skill name="RULES-COMPMARCH">"1"</Skill>
@@ -1193,7 +1195,7 @@ Ifthe Character passes the Test, the crew members may then use the Characters Ra
 <Skill name="RULES-COMPPRECEP">"1"</Skill>
   <!-- Perception  -->
 <Skill name="RULES-COMPREPRES_DANS">"1"</Skill>
-  <!-- Perform (Dance) -->
+  <!-- Perform (Dancing) -->
 <Skill name="RULES-COMPATHL">"2"</Skill>
   <!-- Athletics -->
 <Skill name="RULES-COMPSUBOR">"2"</Skill>
@@ -1335,11 +1337,11 @@ Ifthe Character passes the Test, the crew members may then use the Characters Ra
 <Skill name="RULES-COMPINTUI">"3"</Skill>
   <!-- Intuition  -->
 <Skill name="RULES-COMPLANG_GUILD">"3"</Skill>
-  <!-- Language (Guild) -->
+  <!-- Language (Guilder) -->
 <Skill name="RULES-COMPRECH">"3"</Skill>
   <!-- Research -->
 <Skill name="RULES-COMPSIGNES_GUILD">"3"</Skill>
-  <!-- Secret Signs (Guild) -->
+  <!-- Secret Signs (Guilder) -->
 <Skill name="RULES-COMPLANG_*">"4"</Skill>
   <!-- Language (Any) -->
 <Skill name="RULES-COMPSAVOIR_*">"4"</Skill>
@@ -1358,14 +1360,14 @@ Ifthe Character passes the Test, the crew members may then use the Characters Ra
   <!-- Coolheaded -->
 <Talent name="RULES-T0064">"2"</Talent>
   <!-- Flee! -->
-<Talent name="RULES-T0168">"2"</Talent>
-  <!-- Seasoned Traveller -->
+<Talent name="RULES-T0146">"2"</Talent>
+  <!-- Bookish -->
 <Talent name="RULES-T0013_*">"2"</Talent>
   <!-- Strider (Any) -->
-<Talent name="RULES-T0146">"3"</Talent>
-  <!-- Bookish -->
+<Talent name="RULES-T0168">"3"</Talent>
+  <!-- Seasoned Traveller -->
 <Talent name="RULES-T0136_GUILD">"3"</Talent>
-  <!-- Etiquette (Guild) -->
+  <!-- Etiquette (Guilder) -->
 <Talent name="RULES-T0045">"3"</Talent>
   <!-- Nimble Fingered -->
 <Talent name="RULES-T0076">"3"</Talent>
@@ -1386,6 +1388,8 @@ Ifthe Character passes the Test, the crew members may then use the Characters Ra
 <Item name="Theodolite">"2"</Item>
 <Item name="Letter of Charter">"3"</Item>
 <Item name="Travel Clothes (Q)">"3"</Item>
+<Item name="Study">"4"</Item>
+<Item name="Theodolite (Q)">"4"</Item>
 </SUBCHAPTER_ITEM>
 </Career>
 <Career id="UPINA-WORK72">
@@ -1456,7 +1460,7 @@ Ifthe Character passes the Test, the crew members may then use the Characters Ra
   <!-- Intimidate -->
 <Skill name="RULES-COMPINTUI">"2"</Skill>
   <!-- Intuition  -->
-<Skill name="RULES-COMPCOMB_*">"3"</Skill>
+<Skill name="RULES-COMPCOMB_*">"2"</Skill>
   <!-- Melee (Any) -->
 <Skill name="RULES-COMPMARCH">"3"</Skill>
   <!-- Haggle -->
@@ -1513,7 +1517,8 @@ Ifthe Character passes the Test, the crew members may then use the Characters Ra
 <Item name="Trade Tools (Farrier)">"1"</Item>
 <Item name="Destrier with Saddle and Tack">"2"</Item>
 <Item name="RULES-COMB_*">"2"</Item>
-<Item name="RULES-ARMO_14 and Helm">"2"</Item>
+<Item name="RULES-ARMO_14">"2"</Item>
+<Item name="RULES-ARMO_11">"2"</Item>
 <Item name="Personal Heraldry">"2"</Item>
 <Item name="Barding">"3"</Item>
 <Item name="Small Retinue of Followers">"3"</Item>
@@ -1566,7 +1571,7 @@ Ifthe Character passes the Test, the crew members may then use the Characters Ra
 <Skill name="RULES-COMPGUERI">"1"</Skill>
   <!-- Heal -->
 <Skill name="RULES-COMPLANG_CLASS">"1"</Skill>
-  <!-- Language (Classic) -->
+  <!-- Language (Classical) -->
 <Skill name="RULES-COMPSAVOIR_HERAL">"1"</Skill>
   <!-- Lore (Heraldry) -->
 <Skill name="RULES-COMPSAVOIR_*">"1"</Skill>
@@ -1647,8 +1652,9 @@ Ifthe Character passes the Test, the crew members may then use the Characters Ra
 <Item name="Religious Symbol (Myrmidia)">"1"</Item>
 <Item name="Destrier with Saddle and Tack">"2"</Item>
 <Item name="RULES-COMB_*">"2"</Item>
-<Item name="RULES-COMB_HAST_03">"2"</Item>
-<Item name="RULES-ARMO_14 and Helm">"2"</Item>
+<Item name="RULES-COMB_CAVAL_02">"2"</Item>
+<Item name="RULES-ARMO_14">"2"</Item>
+<Item name="RULES-ARMO_11">"2"</Item>
 <Item name="Barding">"3"</Item>
 <Item name="Small Unit of Blazing Sun knights">"3"</Item>
 <Item name="Great Helm with Sun emblem">"4"</Item>
@@ -1779,6 +1785,10 @@ Ifthe Character passes the Test, the crew members may then use the Characters Ra
 <Item name="Trade Tools (Farrier)">"1"</Item>
 <Item name="Religious Symbol (Ulric)">"1"</Item>
 <Item name="Destrier with Saddle and Tack">"2"</Item>
+<Item name="RULES-ARMO_10">"2"</Item>
+<Item name="RULES-ARMO_11">"2"</Item>
+<Item name="RULES-ARMO_12">"2"</Item>
+<Item name="RULES-ARMO_13">"2"</Item>
 <Item name="RULES-ARMO_14">"2"</Item>
 <Item name="Wolfskin Cloak">"2"</Item>
 <Item name="Barding">"3"</Item>
@@ -1911,7 +1921,10 @@ Ifthe Character passes the Test, the crew members may then use the Characters Ra
 <Item name="Great Cat Pelt">"2"</Item>
 <Item name="Destrier with Saddle and Tack">"2"</Item>
 <Item name="RULES-COMB_BASE_04">"2"</Item>
-<Item name="RULES-COMB_HAST_03">"2"</Item>
+<Item name="RULES-COMB_CAVAL_02">"2"</Item>
+<Item name="RULES-ARMO_10">"2"</Item>
+<Item name="RULES-ARMO_12">"2"</Item>
+<Item name="RULES-ARMO_13">"2"</Item>
 <Item name="RULES-ARMO_14">"2"</Item>
 <Item name="Ring or Medallion with Panther emblem">"2"</Item>
 <Item name="Great Helm with Bestial Crest">"2"</Item>
@@ -1977,8 +1990,6 @@ Ifthe Character passes the Test, the crew members may then use the Characters Ra
   <!-- Ranged (Throwing) -->
 <Skill name="RULES-COMPCHEV_CHEVAL">"1"</Skill>
   <!-- Ride (Horse) -->
-<Skill name="RULES-COMPCHARM">"2"</Skill>
-  <!-- Charm -->
 <Skill name="RULES-COMPRESALC">"2"</Skill>
   <!-- Consume Alcohol -->
 <Skill name="RULES-COMPPARI">"2"</Skill>
@@ -2003,14 +2014,16 @@ Ifthe Character passes the Test, the crew members may then use the Characters Ra
   <!-- Ranged (Black Powder) -->
 </SUBCHAPTER_SKILL>
 <SUBCHAPTER_TALENT>
-<Talent name="RULES-T0136_MERC">"1"</Talent>
-  <!-- Etiquette (Mercenaries) -->
+<Talent name="RULES-T0094">"1"</Talent>
+  <!-- Diceman -->
 <Talent name="RULES-T0111">"1"</Talent>
   <!-- Field Dressing -->
 <Talent name="RULES-T0064">"1"</Talent>
   <!-- Flee! -->
 <Talent name="RULES-T0077">"1"</Talent>
   <!-- Strong Back -->
+<Talent name="RULES-T0136_MERC">"2"</Talent>
+  <!-- Etiquette (Mercenaries) -->
 <Talent name="RULES-T0163">"2"</Talent>
   <!-- Combat Aware -->
 <Talent name="RULES-T0140">"2"</Talent>
@@ -2044,11 +2057,13 @@ Ifthe Character passes the Test, the crew members may then use the Characters Ra
 <Item name="Light Warhorse">"2"</Item>
 <Item name="RULES-ARMO_09">"2"</Item>
 <Item name="Open Helm">"2"</Item>
-<Item name="RULES-COMB_HAST_03">"3"</Item>
+<Item name="RULES-COMB_CAVAL_02">"3"</Item>
 <Item name="RULES-ARMO_06">"3"</Item>
 <Item name="Squire">"3"</Item>
 <Item name="Page">"3"</Item>
 <Item name="UPINA-PROJ_POUDRE_08">"4"</Item>
+<Item name="RULES-MUNI_06">"4"</Item>
+  <!-- Bullet and Powder : le "with Gunpowder and Ammunition" du livre. -->
 <Item name="Warhorse">"4"</Item>
 <Item name="Flamboyant Clothing">"4"</Item>
 <Item name="RULES-ARMO_14">"4"</Item>
@@ -2171,6 +2186,8 @@ Ifthe Character passes the Test, the crew members may then use the Characters Ra
 </SUBCHAPTER_TALENT>
 <SUBCHAPTER_ITEM>
 <Item name="RULES-PROJ_ARB_01">"1"</Item>
+<Item name="RULES-MUNI_01">"1"</Item>
+  <!-- Bolt : le "and Ammunition" du livre p.65. -->
 <Item name="RULES-COMB_BASE_*">"1"</Item>
 <Item name="UPINA-COMB_BASE_24">"1"</Item>
 <Item name="RULES-ARMO_04">"1"</Item>
@@ -2179,7 +2196,7 @@ Ifthe Character passes the Test, the crew members may then use the Characters Ra
 <Item name="RULES-COMB_2M_04">"2"</Item>
 <Item name="Shovel">"2"</Item>
 <Item name="Book of Ballistics Tables">"3"</Item>
-<Item name="Set of Six 60-sccond Fuses">"3"</Item>
+<Item name="Set of Six 60-second Fuses">"3"</Item>
 <Item name="RULES-ARMO_14">"3"</Item>
 <Item name="RULES-PROJ_POUDRE_04">"3"</Item>
 <Item name="Trade Tools (Engineer)">"3"</Item>
@@ -2340,7 +2357,7 @@ Ifthe Character passes the Test, the crew members may then use the Characters Ra
 <Salary>"TIERS_SILVER 3"</Salary>
 </Level>
 <Level id="3">
-<Description language="ENGLISH">"Priest Sergean"</Description>
+<Description language="ENGLISH">"Priest Sergeant"</Description>
 <Salary>"TIERS_SILVER 4"</Salary>
 </Level>
 <Level id="4">
@@ -2384,7 +2401,7 @@ Ifthe Character passes the Test, the crew members may then use the Characters Ra
 <Skill name="RULES-COMPCHARM">"2"</Skill>
   <!-- Charm -->
 <Skill name="RULES-COMPDIVERT_DISC">"2"</Skill>
-  <!-- Entertainment (Speech) -->
+  <!-- Entertain (Speeches) -->
 <Skill name="RULES-COMPGUERI">"2"</Skill>
   <!-- Heal -->
 <Skill name="RULES-COMPINTUI">"2"</Skill>
@@ -2393,8 +2410,8 @@ Ifthe Character passes the Test, the crew members may then use the Characters Ra
   <!-- Melee (Any) -->
 <Skill name="RULES-COMPPROJ_*">"2"</Skill>
   <!-- Ranged (Any) -->
-<Skill name="RULES-COMPSAVOIR_*">"3"</Skill>
-  <!-- Lore (Anyl) -->
+<Skill name="RULES-COMPSAVOIR_GUERRE">"3"</Skill>
+  <!-- Lore (War) -->
 <Skill name="RULES-COMPCOMB_*">"3"</Skill>
   <!-- Melee (Any) -->
 <Skill name="RULES-COMPRECH">"3"</Skill>
@@ -2409,8 +2426,8 @@ Ifthe Character passes the Test, the crew members may then use the Characters Ra
 <SUBCHAPTER_TALENT>
 <Talent name="RULES-T0012_MYRMIDIA">"1"</Talent>
   <!-- Blessed of Myrmidia (Strategy) -->
-<Talent name="RULES-T0163">"1"</Talent>
-  <!-- Combat Aware -->
+<Talent name="RULES-T0146">"1"</Talent>
+  <!-- Bookish -->
 <Talent name="RULES-T0136_CULTIST">"1"</Talent>
   <!-- Etiquette (Cultists) -->
 <Talent name="RULES-T0084">"1"</Talent>
@@ -2423,8 +2440,8 @@ Ifthe Character passes the Test, the crew members may then use the Characters Ra
   <!-- Invoke Myrmidia (Strategy) -->
 <Talent name="RULES-T0121">"2"</Talent>
   <!-- Shieldsman -->
-<Talent name="RULES-T0146">"3"</Talent>
-  <!-- Bookish -->
+<Talent name="RULES-T0163">"3"</Talent>
+  <!-- Combat Aware -->
 <Talent name="RULES-T0165">"3"</Talent>
   <!-- Holy Visions -->
 <Talent name="RULES-T0005">"3"</Talent>
@@ -2442,6 +2459,10 @@ Ifthe Character passes the Test, the crew members may then use the Characters Ra
 </SUBCHAPTER_TALENT>
 <SUBCHAPTER_ITEM>
 <Item name="Myrmidian Holy Book">"1"</Item>
+<Item name="RULES-ARMO_03">"1"</Item>
+<Item name="Myrmidian Icon">"1"</Item>
+<Item name="White Robes">"1"</Item>
+<Item name="RULES-COMB_HAST_03">"1"</Item>
 <Item name="RULES-ARMO_14">"2"</Item>
 <Item name="RULES-ARMO_10">"3"</Item>
 <Item name="RULES-ARMO_11">"3"</Item>

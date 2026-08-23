@@ -53,7 +53,7 @@
 <Skill>"RULES-COMPESQU"</Skill>
   <!-- Dodge -->
 <Skill>"RULES-COMPDIVERT_*"</Skill>
-  <!-- Entertainment (Any) -->
+  <!-- Entertain (Any) -->
 <Skill>"RULES-COMPRAGOT"</Skill>
   <!-- Gossip -->
 <Skill>"RULES-COMPMARCH"</Skill>
@@ -70,9 +70,9 @@
   <!-- Stealth (Any) -->
 </SUBCHAPTER_SKILL>
 <SUBCHAPTER_TALENT>
-<Talent>"WINDS-T0078/WINDS-T0176_OMBRE"</Talent>
+<Talent>"RULES-T0078/WINDS-T0176_OMBRE"</Talent>
   <!-- Beneath Notice/Suffuse With (Ulgu) -->
-<Talent>"WINDS-T0020/WINDS-T0073"</Talent>
+<Talent>"RULES-T0020/RULES-T0073"</Talent>
   <!-- Luck/Mimic -->
 <Talent>"RULES-T0164"</Talent>
   <!-- Night Vision -->

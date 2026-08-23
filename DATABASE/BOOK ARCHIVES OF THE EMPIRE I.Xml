@@ -699,6 +699,62 @@
 <Hand>"1"</Hand>
 <Ammunition>"0"</Ammunition>
 </Weapon>
+  <!-- Munitions du livre (p.93), tables "Dwarf Ammunition" et "Eonir Ammunition".
+       "Accurate" des tables est la qualite Precise (WEAPB16), comme pour l'Elf Arrow du Rulebook.
+       Starfire Shafts : la note de bas de tableau "on any critical hit, also inflict an Ablaze
+       condition" est exactement la qualite ARCH1-WEAPB35 (Ablaze) creee pour le Drakefire Pistol,
+       elle est donc reprise ici plutot que laissee en note.
+       Precision Shot and Powder est AUSSI imprimee dans Up in Arms p.102 (saisie en UPINA-MUNI_07)
+       et les deux livres ne donnent pas le meme prix - 3d ici, 3/- la-bas. Les deux entrees sont
+       donc conservees, comme les 29 armes deja declarees a la fois dans le Rulebook et Up in Arms. -->
+<Weapon id="ARCH1-MUNI_01">
+<Description language="ENGLISH">"Drakefire Shot"</Description>
+<Skill>"RULES-COMPPROJ_POUDRE/RULES-COMPPROJ_ING"</Skill>
+<Damage>"+2"</Damage>
+<Availability>"DISPO_RARE"</Availability>
+<Reach>"+0"</Reach>
+<Price>"4/-"</Price>
+<Encumbrance>"0"</Encumbrance>
+<Quality>"WEAPB10"</Quality>
+<Hand>"0"</Hand>
+<Ammunition>"12"</Ammunition>
+</Weapon>
+<Weapon id="ARCH1-MUNI_02">
+<Description language="ENGLISH">"Precision Shot and Powder"</Description>
+<Skill>"RULES-COMPPROJ_POUDRE/RULES-COMPPROJ_ING"</Skill>
+<Damage>"+1"</Damage>
+<Availability>"DISPO_COMMON"</Availability>
+<Reach>"+0"</Reach>
+<Price>"3SC"</Price>
+<Encumbrance>"0"</Encumbrance>
+<Quality>"WEAPB12,WEAPB22,WEAPB16"</Quality>
+<Hand>"0"</Hand>
+<Ammunition>"1"</Ammunition>
+</Weapon>
+<Weapon id="ARCH1-MUNI_03">
+<Description language="ENGLISH">"Starfire Shafts"</Description>
+<Skill>"RULES-COMPPROJ_ARC"</Skill>
+<Damage>"-"</Damage>
+<Availability>"DISPO_EXOTIC"</Availability>
+<Reach>"+50"</Reach>
+<Price>"8/-"</Price>
+<Encumbrance>"0"</Encumbrance>
+<Quality>"WEAPB16,WEAPB12,WEAPB35"</Quality>
+<Hand>"0"</Hand>
+<Ammunition>"12"</Ammunition>
+</Weapon>
+<Weapon id="ARCH1-MUNI_04">
+<Description language="ENGLISH">"Swiftshiver Shafts"</Description>
+<Skill>"RULES-COMPPROJ_ARC"</Skill>
+<Damage>"+1"</Damage>
+<Availability>"DISPO_COMMON"</Availability>
+<Reach>"+0"</Reach>
+<Price>"6/-"</Price>
+<Encumbrance>"0"</Encumbrance>
+<Quality>"WEAPB15 1,WEAPB22"</Quality>
+<Hand>"0"</Hand>
+<Ammunition>"12"</Ammunition>
+</Weapon>
 </DATA_WEAPON>
 <DATA_WEAPON_BONUS>
 <BonusMalus id="ARCH1-WEAPB35">

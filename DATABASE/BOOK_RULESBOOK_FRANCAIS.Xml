@@ -1158,6 +1158,9 @@ Comme tous les bateaux à voile sont peu ou prou identiques à diriger, posséde
 <Skill id="RULES-COMPCHEV_LOUP">
 <Description language="FRANCAIS">"Chevaucher (Grand Loup)"</Description>
 </Skill>
+<Skill id="RULES-COMPCHEV_BADGERS">
+<Description language="FRANCAIS">"Chevaucher (Blaireau)"</Description>
+</Skill>
 <Skill id="RULES-COMPCHEV_GRIFF">
 <Description language="FRANCAIS">"Chevaucher (Griffon)"</Description>
 </Skill>
@@ -1506,9 +1509,6 @@ Comme tous les bateaux à voile sont peu ou prou identiques à diriger, posséde
 <Skill id="RULES-COMPSAVOIR_EMPIRE">
 <Description language="FRANCAIS">"Savoir (l’Empire) "</Description>
 </Skill>
-<Skill id="RULES-COMPSAVOIR_EMPIRE">
-<Description language="FRANCAIS">"Savoir (l’Empire) "</Description>
-</Skill>
 <Skill id="RULES-COMPSAVOIR_EPAVE">
 <Description language="FRANCAIS">"Savoir (Épaves) "</Description>
 </Skill>
@@ -1632,6 +1632,9 @@ Comme tous les bateaux à voile sont peu ou prou identiques à diriger, posséde
 <Skill id="RULES-COMPSIGNES_VOL">
 <Description language="FRANCAIS">"Signes secrets (Voleur) "</Description>
 </Skill>
+<Skill id="RULES-COMPSIGNES_AMBER">
+<Description language="FRANCAIS">"Signes secrets (Ordre Ambre)"</Description>
+</Skill>
 <Skill id="RULES-COMPSIGNES_GRIS">
 <Description language="FRANCAIS">"Signes secrets (Ordre Gris) "</Description>
 </Skill>
@@ -1701,9 +1704,6 @@ Comme tous les bateaux à voile sont peu ou prou identiques à diriger, posséde
 <Skill id="RULES-COMPSIGNES_TZEENTCH">
 <Description language="FRANCAIS">"Lore (Tzeentch)"</Description>
 </Skill>
-<Skill id="RULES-COMPLANG_DARKTOUNGE">
-<Description language="FRANCAIS">"Language (Dark Tongue)"</Description>
-</Skill>
 <Skill id="RULES-COMPSAVOIR_GREENSKIN">
 <Description language="FRANCAIS">"Lore (Greenskins)"</Description>
 </Skill>
@@ -1730,9 +1730,6 @@ Comme tous les bateaux à voile sont peu ou prou identiques à diriger, posséde
 </Skill>
 <Skill id="RULES-COMPSAVOIR_ULRIC">
 <Description language="FRANCAIS">"Lore (Ulric)"</Description>
-</Skill>
-<Skill id="RULES-COMPCOMB_BAGARRE">
-<Description language="FRANCAIS">"Melee (Brawling)"</Description>
 </Skill>
 <Skill id="RULES-COMPSAVOIR_MIDDENHEIM">
 <Description language="FRANCAIS">"Lore (Middenheim)"</Description>
@@ -1821,9 +1818,6 @@ Comme tous les bateaux à voile sont peu ou prou identiques à diriger, posséde
 <Skill id="RULES-COMPSAVOIR_ASTRONOMY">
 <Description language="FRANCAIS">"Lore (Astronomy)"</Description>
 </Skill>
-<Skill id="RULES-COMPDIVERT_ACTING">
-<Description language="FRANCAIS">"Entertain (Acting)"</Description>
-</Skill>
 <Skill id="RULES-COMPSAVOIR_UNDEAD">
 <Description language="FRANCAIS">"Lore (Undead)"</Description>
 </Skill>
@@ -1847,9 +1841,6 @@ Comme tous les bateaux à voile sont peu ou prou identiques à diriger, posséde
 </Skill>
 <Skill id="RULES-COMPSAVOIR_VONCARSTEIN">
 <Description language="FRANCAIS">"Lore (Von Carstein)"</Description>
-</Skill>
-<Skill id="RULES-COMPSAVOIR_NECROMANCY">
-<Description language="FRANCAIS">"Lore (Necromancy)"</Description>
 </Skill>
 <Skill id="RULES-COMPSAVOIR_LAHMIAN">
 <Description language="FRANCAIS">"Lore (Lahmian Sisterhood)"</Description>
@@ -7233,7 +7224,11 @@ See page 190 for Fear rules"</Explanation>
 <Item name="coat">"1"</Item>
 <Item name="warm gloves">"1"</Item>
 <Item name="RULES-COMB_ENTRA_01">"1"</Item>
-<Item name="blunderbuss with ten ammunition">"2"</Item>
+<Item name="RULES-PROJ_POUDRE_03">"2"</Item>
+  <!-- Blunderbuss -->
+<Item name="RULES-MUNI_06">"2"</Item>
+  <!-- Bullet and Powder : les "10 Shots" du livre. La valeur d'un Item est le NIVEAU de
+       carriere, pas une quantite ; la taille du lot vient du <Ammunition> de la munition. -->
 <Item name="coachman’s horn">"2"</Item>
 <Item name="RULES-ARMO_04">"2"</Item>
 <Item name="hat">"2"</Item>
@@ -7859,7 +7854,11 @@ See page 190 for Fear rules"</Explanation>
 <Item name="RULES-COMB_BASE_*/RULES-COMB_ESCR_02">"1"</Item>
 <Item name="satchel containing clothing">"1"</Item>
 <Item name="1d10 bandages">"1"</Item>
-<Item name="RULES-COMB_PARAD_02/RULES-COMB_2M_01">"2"</Item>
+<Item name="RULES-COMB_PARAD_02/RULES-COMB_PARAD_01">"2"</Item>
+  <!-- main gauche ou Sword Breaker. Le livre ecrit "Main Gauche or Sword-breaker" ; la
+       saisie pointait sur RULES-COMB_2M_01 (Bastard Sword), une arme a deux mains, au lieu
+       de RULES-COMB_PARAD_01 (Sword Breaker), l'arme de parade attendue au niveau ou le
+       duelliste gagne Melee (Parry). Corrige le 23/08/2026. -->
 <Item name="RULES-PROJ_POUDRE_04">"2"</Item>
 <Item name="RULES-MUNI_06">"2"</Item>
 <Item name="RULES-COMB_BASE_*">"3"</Item>
@@ -9612,6 +9611,9 @@ See page 190 for Fear rules"</Explanation>
 <Item name="lamp oil">"1"</Item>
 <Item name="delivered">"1"</Item>
 <Item name="RULES-COMB_BASE_*/RULES-PROJ_ARC_01">"2"</Item>
+<Item name="RULES-MUNI_02">"2"</Item>
+  <!-- Arrow : les "10 arrows" du livre. Elles n'ont de sens que si le Bow est choisi dans
+       l'alternative ci-dessus - le modele ne sait pas conditionner un objet a un choix. -->
 <Item name="saddle horse">"2"</Item>
 <Item name="saddle">"2"</Item>
 <Item name="harness">"2"</Item>
@@ -10700,7 +10702,7 @@ See page 190 for Fear rules"</Explanation>
   <!-- Divertissement (Narration)  -->
 <Skill name="RULES-COMPLANG_*">"3"</Skill>
   <!-- Langue (au choix)  -->
-<Skill name="RULES-COMPFOCAL_AZYR">"4"</Skill>
+<Skill name="RULES-COMPFOCAL_CIEUX">"4"</Skill>
   <!-- Langue (au choix)  -->
 <Skill name="RULES-COMPSAVOIR_PROPH">"4"</Skill>
   <!-- Savoir (Prophétie)  -->

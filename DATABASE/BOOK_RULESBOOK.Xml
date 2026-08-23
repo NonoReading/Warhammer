@@ -720,10 +720,10 @@ If you fail the Perception Test, but pass the Stealth Test, you lose your target
 </Skill>
 <Skill id="RULES-COMPDIVERT_*">
 <Attribut>"RULES-ATTR_Fel"</Attribut>
-<Description language="ENGLISH">"Entertainment (Any)"</Description>
+<Description language="ENGLISH">"Entertain (Any)"</Description>
 <Explanation language="ENGLISH">"This Skill allows you to entertain crowds with words, perhaps singing, acting, or cracking a few jokes.
 A successful use of the Entertainment Skill means that you have amused the surrounding spectators enough to make them listen to you; the DR indicates how successful you have been.
-In combat, Entertainment is unlikely to be of much use, although you may find an interesting way to use Entertainment (Interpretation) to confuse or deceive your opponents."</Explanation>
+In combat, Entertainment is unlikely to be of much use, although you may find an interesting way to use Entertain (Acting) to confuse or deceive your opponents."</Explanation>
 </Skill>
 <Skill id="RULES-COMPDRESS_*">
 <Attribut>"RULES-ATTR_Int"</Attribut>
@@ -747,7 +747,7 @@ You may even find yourself climbing tall obstacles, although in this case the no
 </Skill>
 <Skill id="RULES-COMPESCAM">
 <Attribut>"RULES-ATTR_Dex"</Attribut>
-<Description language="ENGLISH">"Sleight if Hand"</Description>
+<Description language="ENGLISH">"Sleight of Hand"</Description>
 <Explanation language="ENGLISH">"This Skill lets you pick pockets, retract objects, and perform small conjuring tricks, as well as cheat at games of chance.
 This Skill is generally opposed to your target’s Perception Skill; a Success means you’ve taken the item, picked pockets, or swapped cards, while a Minimal Success may suggest that your poor moves have made your opponent wary.
 You can also use Escamotage to “help“ your Betting Skill when playing an appropriate game of chance.
@@ -824,7 +824,7 @@ Although Force is the default statistic for Bullying Tests, DOJ may find situati
 <Explanation language="ENGLISH">"Intuition Skill lets you perceive what’s around you, notice when something is wrong, and feel when people are hiding something from you.
 Successful use of Intuition Skill gives you subtle and implicit information about your environment, as determined by your DOJ.
 It can be information, such as whether someone believes what he says, the general attitude toward the local noble, or whether the helpful local people’s intentions are as pure as they seem.
-If someone actively tries to conceal their intentions, they can resist your Intuition with Calm or Entertainment (Interpretation).
+If someone actively tries to conceal their intentions, they can resist your Intuition with Calm or Entertain (Acting).
 In combat, a successful Intuition Test can be used to give you +1 Advantage as you evaluate the environment and your opponents.
 You can continue to strengthen your Advantage in subsequent rounds provided you are able to observe your targets and are not interrupted (for example, by being attacked); in this way you can gain a maximum of Advantages equal to your Intelligence Bonus."</Explanation>
 </Skill>
@@ -1063,7 +1063,7 @@ Refer to Chapter 5: Rules for more information on this."</Explanation>
 </Skill>
 <Skill id="RULES-COMPSAVOIR_*">
 <Attribut>"RULES-ATTR_Int"</Attribut>
-<Description language="ENGLISH">"Lore (Anyl)"</Description>
+<Description language="ENGLISH">"Lore (Any)"</Description>
 <Explanation language="ENGLISH">"Possing a Knowledge Skill means that you have formally studied, or learned in some way, a branch of advanced knowledge.
 You have in-depth data in a specialization and therefore do not need to take a Test for the GM to give you the useful information.
 If you are looking for specific lesser-known information, you will need to perform a Knowledge Test, modified according to the obscure nature of the information, where the DRs will indicate how many details you remember.
@@ -1203,6 +1203,9 @@ As all sailboats are pretty much the same to steer, owning one Specialization ma
 <Skill id="RULES-COMPCHEV_LOUP">
 <Description language="ENGLISH">"Ride (Big Wolf)"</Description>
 </Skill>
+<Skill id="RULES-COMPCHEV_BADGERS">
+<Description language="ENGLISH">"Ride (Badger)"</Description>
+</Skill>
 <Skill id="RULES-COMPCHEV_GRIFF">
 <Description language="ENGLISH">"Ride (Griffin)"</Description>
 </Skill>
@@ -1219,7 +1222,7 @@ As all sailboats are pretty much the same to steer, owning one Specialization ma
 <Description language="ENGLISH">"Melee (Flail or Two Handed)"</Description>
 </Skill>
 <Skill id="RULES-COMPCOMB_BAGAR">
-<Description language="ENGLISH">"Melee (Fight)"</Description>
+<Description language="ENGLISH">"Melee (Brawling)"</Description>
 </Skill>
 <Skill id="RULES-COMPCOMB_BASE">
 <Description language="ENGLISH">"Melee (Basic)"</Description>
@@ -1258,34 +1261,34 @@ As all sailboats are pretty much the same to steer, owning one Specialization ma
 <Description language="ENGLISH">"Stealth (Urban or Underground)"</Description>
 </Skill>
 <Skill id="RULES-COMPDIVERT_CHANT">
-<Description language="ENGLISH">"Entertainment (Singing)"</Description>
+<Description language="ENGLISH">"Entertain (Singing)"</Description>
 </Skill>
 <Skill id="RULES-COMPDIVERT_CONF">
-<Description language="ENGLISH">"Entertainment (Conference)"</Description>
+<Description language="ENGLISH">"Entertain (Lecture)"</Description>
 </Skill>
 <Skill id="RULES-COMPDIVERT_DISC">
-<Description language="ENGLISH">"Entertainment (Speech)"</Description>
+<Description language="ENGLISH">"Entertain (Speeches)"</Description>
 </Skill>
 <Skill id="RULES-COMPDIVERT_INTERP">
-<Description language="ENGLISH">"Entertainment (Interpretation)"</Description>
+<Description language="ENGLISH">"Entertain (Acting)"</Description>
 </Skill>
 <Skill id="RULES-COMPDIVERT_NARRA">
-<Description language="ENGLISH">"Entertainment (Storytelling)"</Description>
+<Description language="ENGLISH">"Entertain (Storytelling)"</Description>
 </Skill>
 <Skill id="RULES-COMPDIVERT_PROPH">
-<Description language="ENGLISH">"Entertainment (Prophecy)"</Description>
+<Description language="ENGLISH">"Entertain (Prophecy)"</Description>
 </Skill>
 <Skill id="RULES-COMPDIVERT_RAILL">
-<Description language="ENGLISH">"Entertainment (Taunting)"</Description>
+<Description language="ENGLISH">"Entertain (Taunt)"</Description>
 </Skill>
 <Skill id="RULES-COMPDIVERT_RHETOR">
-<Description language="ENGLISH">"Entertainment (Rhetoric)"</Description>
+<Description language="ENGLISH">"Entertain (Rhetoric)"</Description>
 </Skill>
 <Skill id="RULES-COMPDIVERT_VOYAN">
-<Description language="ENGLISH">"Entertainment (Foresight)"</Description>
+<Description language="ENGLISH">"Entertain (Fortune Telling)"</Description>
 </Skill>
 <Skill id="RULES-COMPDIVERT_COMME">
-<Description language="ENGLISH">"Entertainment (Comedy)"</Description>
+<Description language="ENGLISH">"Entertain (Comedy)"</Description>
 </Skill>
 <Skill id="RULES-COMPDRESS_CHEVAL">
 <Description language="ENGLISH">"Animal Training (Horse)"</Description>
@@ -1303,7 +1306,7 @@ As all sailboats are pretty much the same to steer, owning one Specialization ma
 <Description language="ENGLISH">"Animal Training (Pegasus)"</Description>
 </Skill>
 <Skill id="RULES-COMPDRESS_BADGERS">
-<Description language="ENGLISH">"Dressage (Badgers) "</Description>
+<Description language="ENGLISH">"Animal Training (Badgers)"</Description>
 </Skill>
 <Skill id="RULES-COMPFOCAL_FEU">
 <Description language="ENGLISH">"Channelling (Aqshy)"</Description>
@@ -1312,7 +1315,7 @@ As all sailboats are pretty much the same to steer, owning one Specialization ma
 <Description language="ENGLISH">"Channelling (Azyr)"</Description>
 </Skill>
 <Skill id="RULES-COMPFOCAL_METAL">
-<Description language="ENGLISH">"Channellingl (Chamon)"</Description>
+<Description language="ENGLISH">"Channelling (Chamon)"</Description>
 </Skill>
 <Skill id="RULES-COMPFOCAL_NECRO">
 <Description language="ENGLISH">"Channelling (Dhar)"</Description>
@@ -1339,7 +1342,7 @@ As all sailboats are pretty much the same to steer, owning one Specialization ma
 <Description language="ENGLISH">"Language (Bretonnian)"</Description>
 </Skill>
 <Skill id="RULES-COMPLANG_CLASS">
-<Description language="ENGLISH">"Language (Classic)"</Description>
+<Description language="ENGLISH">"Language (Classical)"</Description>
 </Skill>
 <Skill id="RULES-COMPLANG_ELTHA">
 <Description language="ENGLISH">"Language (eltharin)"</Description>
@@ -1351,10 +1354,10 @@ As all sailboats are pretty much the same to steer, owning one Specialization ma
 <Description language="ENGLISH">"Language (Estalian or Tilean)"</Description>
 </Skill>
 <Skill id="RULES-COMPLANG_GUILD">
-<Description language="ENGLISH">"Language (Guild)"</Description>
+<Description language="ENGLISH">"Language (Guilder)"</Description>
 </Skill>
 <Skill id="RULES-COMPLANG_HALF">
-<Description language="ENGLISH">"Language (halfling)"</Description>
+<Description language="ENGLISH">"Language (Halfling)"</Description>
 </Skill>
 <Skill id="RULES-COMPLANG_KHAZ">
 <Description language="ENGLISH">"Language (khazalid)"</Description>
@@ -1369,7 +1372,7 @@ As all sailboats are pretty much the same to steer, owning one Specialization ma
 <Description language="ENGLISH">"Language (Thief)"</Description>
 </Skill>
 <Skill id="RULES-COMPLANG_WEST">
-<Description language="ENGLISH">"Language (wastellander)"</Description>
+<Description language="ENGLISH">"Language (Wastelander)"</Description>
 </Skill>
 <Skill id="RULES-COMPMETIER_APOTH">
 <Description language="ENGLISH">"Trade (Apothecary)"</Description>
@@ -1504,25 +1507,25 @@ As all sailboats are pretty much the same to steer, owning one Specialization ma
 <Description language="ENGLISH">"Perform (Acrobatics)"</Description>
 </Skill>
 <Skill id="RULES-COMPREPRES_COMB">
-<Description language="ENGLISH">"Perform (Combat)"</Description>
+<Description language="ENGLISH">"Perform (Fight)"</Description>
 </Skill>
 <Skill id="RULES-COMPREPRES_DANS">
-<Description language="ENGLISH">"Perform (Dance)"</Description>
+<Description language="ENGLISH">"Perform (Dancing)"</Description>
 </Skill>
 <Skill id="RULES-COMPREPRES_CFEU">
-<Description language="ENGLISH">"Perform (Fire-eater)"</Description>
+<Description language="ENGLISH">"Perform (Firebreathing)"</Description>
 </Skill>
 <Skill id="RULES-COMPREPRES_FUNAN">
-<Description language="ENGLISH">"Perform (Tightrope walker)"</Description>
+<Description language="ENGLISH">"Perform (Rope Walking)"</Description>
 </Skill>
 <Skill id="RULES-COMPREPRES_JONGL">
 <Description language="ENGLISH">"Perform (Juggling)"</Description>
 </Skill>
 <Skill id="RULES-COMPREPRES_MIME">
-<Description language="ENGLISH">"Perform (Mime)"</Description>
+<Description language="ENGLISH">"Perform (Miming)"</Description>
 </Skill>
 <Skill id="RULES-COMPREPRES_PITRE">
-<Description language="ENGLISH">"Perform (Antics)"</Description>
+<Description language="ENGLISH">"Perform (Clowning)"</Description>
 </Skill>
 <Skill id="RULES-COMPSAVOIR_ANAT">
 <Description language="ENGLISH">"Lore (Anatomy)"</Description>
@@ -1550,9 +1553,6 @@ As all sailboats are pretty much the same to steer, owning one Specialization ma
 </Skill>
 <Skill id="RULES-COMPSAVOIR_EMPIRE">
 <Description language="ENGLISH">"Lore (Empire)"</Description>
-</Skill>
-<Skill id="RULES-COMPSAVOIR_EMPIRE">
-<Description language="ENGLISH">"Lore (the Empire)"</Description>
 </Skill>
 <Skill id="RULES-COMPSAVOIR_EPAVE">
 <Description language="ENGLISH">"Lore (Wrecks)"</Description>
@@ -1663,10 +1663,10 @@ As all sailboats are pretty much the same to steer, owning one Specialization ma
 <Description language="ENGLISH">"Secret Signs (Smuggler)"</Description>
 </Skill>
 <Skill id="RULES-COMPSIGNES_GUILD">
-<Description language="ENGLISH">"Secret Signs (Guild)"</Description>
+<Description language="ENGLISH">"Secret Signs (Guilder)"</Description>
 </Skill>
 <Skill id="RULES-COMPSIGNES_MINE">
-<Description language="ENGLISH">"Secret Signs (Minor)"</Description>
+<Description language="ENGLISH">"Secret Signs (Miner)"</Description>
 </Skill>
 <Skill id="RULES-COMPSIGNES_ORDCHEVAL">
 <Description language="ENGLISH">"Secret Signs (Knightly Order)"</Description>
@@ -1676,6 +1676,9 @@ As all sailboats are pretty much the same to steer, owning one Specialization ma
 </Skill>
 <Skill id="RULES-COMPSIGNES_VOL">
 <Description language="ENGLISH">"Secret Signs (Thief)"</Description>
+</Skill>
+<Skill id="RULES-COMPSIGNES_AMBER">
+<Description language="ENGLISH">"Secret Signs (Amber Order)"</Description>
 </Skill>
 <Skill id="RULES-COMPSIGNES_GRIS">
 <Description language="ENGLISH">"Secret Signs (Grey Order)"</Description>
@@ -1737,14 +1740,11 @@ As all sailboats are pretty much the same to steer, owning one Specialization ma
 <Skill id="RULES-COMPSIGNES_MAW">
 <Description language="ENGLISH">"Secret Signs (The Great Maw)"</Description>
 </Skill>
-<Skill id="RULES-COMPLANG_DARKTOUNGE">
-<Description language="ENGLISH">"Language (dark Tounge)"</Description>
-</Skill>
 <Skill id="RULES-COMPSIGNES_CULTIST">
 <Description language="ENGLISH">"Secret Signs (Cultist)"</Description>
 </Skill>
 <Skill id="RULES-COMPSIGNES_TZEENTCH">
-<Description language="ENGLISH">"Lore (Tzeentch)"</Description>
+<Description language="ENGLISH">"Secret Signs (Tzeentch)"</Description>
 </Skill>
 <Skill id="RULES-COMPLANG_DARKTOUNGE">
 <Description language="ENGLISH">"Language (Dark Tongue)"</Description>
@@ -1775,9 +1775,6 @@ As all sailboats are pretty much the same to steer, owning one Specialization ma
 </Skill>
 <Skill id="RULES-COMPSAVOIR_ULRIC">
 <Description language="ENGLISH">"Lore (Ulric)"</Description>
-</Skill>
-<Skill id="RULES-COMPCOMB_BAGARRE">
-<Description language="ENGLISH">"Melee (Brawling)"</Description>
 </Skill>
 <Skill id="RULES-COMPSAVOIR_MIDDENHEIM">
 <Description language="ENGLISH">"Lore (Middenheim)"</Description>
@@ -1819,7 +1816,7 @@ As all sailboats are pretty much the same to steer, owning one Specialization ma
 <Description language="ENGLISH">"Language (Reikspiel)"</Description>
 </Skill>
 <Skill id="RULES-COMPSAVOIR_TILEA">
-<Description language="ENGLISH">"Savoir (Tilea)"</Description>
+<Description language="ENGLISH">"Lore (Tilea)"</Description>
 </Skill>
 <Skill id="RULES-COMPMETIER_FLECHE">
 <Description language="ENGLISH">"Trade (Fletcher)"</Description>
@@ -1866,9 +1863,6 @@ As all sailboats are pretty much the same to steer, owning one Specialization ma
 <Skill id="RULES-COMPSAVOIR_ASTRONOMY">
 <Description language="ENGLISH">"Lore (Astronomy)"</Description>
 </Skill>
-<Skill id="RULES-COMPDIVERT_ACTING">
-<Description language="ENGLISH">"Entertain (Acting)"</Description>
-</Skill>
 <Skill id="RULES-COMPSAVOIR_UNDEAD">
 <Description language="ENGLISH">"Lore (Undead)"</Description>
 </Skill>
@@ -1879,7 +1873,7 @@ As all sailboats are pretty much the same to steer, owning one Specialization ma
 <Description language="ENGLISH">"Lore (Medicine)"</Description>
 </Skill>
 <Skill id="RULES-COMPSAVOIR_LOCAL">
-<Description language="ENGLISH">"Lore (Loca)"</Description>
+<Description language="ENGLISH">"Lore (Local)"</Description>
 </Skill>
 <Skill id="RULES-COMPSAVOIR_NEHEKHARA">
 <Description language="ENGLISH">"Lore (Nehekhara)"</Description>
@@ -1888,13 +1882,10 @@ As all sailboats are pretty much the same to steer, owning one Specialization ma
 <Description language="ENGLISH">"Trade (Blacksmith, Goldsmith, or Engineer)"</Description>
 </Skill>
 <Skill id="RULES-COMPMETIER_GOLDSMITH">
-<Description language="ENGLISH">"trade (Goldsmight)"</Description>
+<Description language="ENGLISH">"Trade (Goldsmith)"</Description>
 </Skill>
 <Skill id="RULES-COMPSAVOIR_VONCARSTEIN">
 <Description language="ENGLISH">"Lore (Von Carstein)"</Description>
-</Skill>
-<Skill id="RULES-COMPSAVOIR_NECROMANCY">
-<Description language="ENGLISH">"Lore (Necromancy)"</Description>
 </Skill>
 <Skill id="RULES-COMPSAVOIR_LAHMIAN">
 <Description language="ENGLISH">"Lore (Lahmian Sisterhood)"</Description>
@@ -1989,7 +1980,7 @@ You may gain an additional number of Corruption Points equal to your Pure Soul l
 </Talent>
 <Talent id="RULES-T0006">
 <Attribut>""</Attribut>
-<ModifySkill name="RULES-COMPPROj_POUDRE">"Bonus"</ModifySkill>
+<ModifySkill name="RULES-COMPPROJ_POUDRE">"Bonus"</ModifySkill>
 <Description language="ENGLISH">"Gunner"</Description>
 <Short language="ENGLISH">""</Short>
 <Explanation language="ENGLISH">"You can easily reload Black Powder weapons.
@@ -2559,7 +2550,7 @@ Number of soldiers influenced 1:Normal x 5.2:Normal x 10.3:Normal x 20.4:Normal 
 </Talent>
 <Talent id="RULES-T0054">
 <Attribut>""</Attribut>
-<ModifySkill name="RULES-BEGGING">"Bonus"</ModifySkill>
+<ModifySkill name="RULES-COMPCHARM">"Bonus"</ModifySkill>
 <Description language="ENGLISH">"Panhandle"</Description>
 <Short language="ENGLISH">""</Short>
 <Explanation language="ENGLISH">"You are an experienced beggar, capable of winning over even the most cynical individuals.
@@ -2781,7 +2772,7 @@ You do not suffer an Imperfect Casting if you roll a double on a successful Focu
 With GM approval, choose a Quarry.
 As long as you are dressed appropriately, you may use the Social Status of the borrowed Quarry chosen, rather than your own, to modify the Social Tests.
 You can even ignore the Criminal Talent.
-However, maintaining this identity will require Entertainment (Interpretation) Tests when you encounter those who might detect your trickery.
+However, maintaining this identity will require Entertain (Acting) Tests when you encounter those who might detect your trickery.
 You can create a new Secret Identity for each Level you have in this Talent."</Explanation>
 <Skill>""</Skill>
 <Max>"(BATTR_Int)"</Max>
@@ -2798,7 +2789,7 @@ Once successful, you can still imitate the accent, and the natives will believe 
 <Skill>""</Skill>
 <Max>"(BATTR_I)"</Max>
 <PDF>"COMPDIVERT_INTERP"</PDF>
-<Test language="ENGLISH">"Entertainment (Interpretation) tests where accents are important"</Test>
+<Test language="ENGLISH">"Entertain (Acting) tests where accents are important"</Test>
 </Talent>
 <Talent id="RULES-T0074">
 <Attribut>"RULES-ATTR_WP"</Attribut>
@@ -3029,7 +3020,7 @@ Additionally, attempts to use Melee (Brawl) to simply hit an opponent gain a bon
 <Skill>""</Skill>
 <Max>"(BATTR_Dex)"</Max>
 <PDF>"COMPESQU,COMPCOMB_*"</PDF>
-<Test language="ENGLISH">" Dodge, Melee (Fight) to hit an opponent"</Test>
+<Test language="ENGLISH">" Dodge, Melee (Brawling) to hit an opponent"</Test>
 </Talent>
 <Talent id="RULES-T0092_*">
 <Attribut>""</Attribut>
@@ -3052,7 +3043,7 @@ With nothing but posture changes, facial twisting, and the judicious use of appr
 <Skill>""</Skill>
 <Max>"(BATTR_Fel)"</Max>
 <PDF>"COMPDIVERT_INTERP"</PDF>
-<Test language="ENGLISH">"Entertainment (Interpretation) when you are someone else"</Test>
+<Test language="ENGLISH">"Entertain (Acting) when you are someone else"</Test>
 </Talent>
 <Talent id="RULES-T0094">
 <Attribut>""</Attribut>
@@ -3264,11 +3255,11 @@ Number of people influenced 1:Normal x 5 ,2:Normal x 10 ,3:Normal x 20 ,4:Normal
 <Description language="ENGLISH">"Perfect Pitch"</Description>
 <Short language="ENGLISH">""</Short>
 <Explanation language="ENGLISH">"You have perfect pitch, capable of perfectly reproducing notes and identifying them without ever needing to perform a Test.
-Additionally, add Entertainment (Singing) to any Career you start; if the Skill is already in your Career, you can instead buy the Skill for 5 XP less per Increase."</Explanation>
+Additionally, add Entertain (Singing) to any Career you start; if the Skill is already in your Career, you can instead buy the Skill for 5 XP less per Increase."</Explanation>
 <Skill>"RULES-COMPDIVERT_CHANT"</Skill>
 <Max>"(BATTR_I)"</Max>
 <PDF>"COMPDIVERT_CHANT,COMPLANG_*"</PDF>
-<Test language="ENGLISH">"Entertainment (Singing), Language (Tonal languages, such as Elthárin, Cathayan, Magick)"</Test>
+<Test language="ENGLISH">"Entertain (Singing), Language (Tonal languages, such as Elthárin, Cathayan, Magick)"</Test>
 </Talent>
 <Talent id="RULES-T0111">
 <Attribut>""</Attribut>
@@ -4599,7 +4590,7 @@ See page 190 for Fear rules"</Explanation>
 <Description language="ENGLISH">"Etiquette (Faithful)"</Description>
 </Talent>
 <Talent id="RULES-T0136_GUILD">
-<Description language="ENGLISH">"Etiquette (Guild)"</Description>
+<Description language="ENGLISH">"Etiquette (Guilder)"</Description>
 </Talent>
 <Talent id="RULES-T0136_MERC">
 <Description language="ENGLISH">"Etiquette (Mercenaries)"</Description>
@@ -5170,7 +5161,7 @@ See page 190 for Fear rules"</Explanation>
 <Skill>"RULES-COMPDISC_*"</Skill>
   <!-- Stealth (Any) -->
 <Skill>"RULES-COMPESCAM"</Skill>
-  <!-- Sleight if Hand -->
+  <!-- Sleight of Hand -->
 <Skill>"RULES-COMPESQU"</Skill>
   <!-- Dodge -->
 <Skill>"RULES-COMPINTUI"</Skill>
@@ -5332,7 +5323,7 @@ See page 190 for Fear rules"</Explanation>
 <Skill>"RULES-COMPCOMB_BASE"</Skill>
   <!-- Melee (Basic) -->
 <Skill>"RULES-COMPDIVERT_NARRA"</Skill>
-  <!-- Entertainment (Storytelling) -->
+  <!-- Entertain (Storytelling) -->
 <Skill>"RULES-COMPEVAL"</Skill>
   <!-- Evaluate -->
 <Skill>"RULES-COMPINTIM"</Skill>
@@ -5492,7 +5483,7 @@ See page 190 for Fear rules"</Explanation>
 <Skill>"RULES-COMPCOMB_BASE"</Skill>
   <!-- Melee (Basic) -->
 <Skill>"RULES-COMPDIVERT_CHANT"</Skill>
-  <!-- Entertainment (Singing) -->
+  <!-- Entertain (Singing) -->
 <Skill>"RULES-COMPEVAL"</Skill>
   <!-- Evaluate -->
 <Skill>"RULES-COMPMUSIC_*"</Skill>
@@ -5626,7 +5617,7 @@ See page 190 for Fear rules"</Explanation>
 <Skill>"RULES-COMPDISC_RURAL"</Skill>
   <!-- Stealth (Rural) -->
 <Skill>"RULES-COMPDIVERT_CHANT"</Skill>
-  <!-- Entertainment (Singing) -->
+  <!-- Entertain (Singing) -->
 <Skill>"RULES-COMPESCAL"</Skill>
   <!-- Climb -->
 <Skill>"RULES-COMPINTIM"</Skill>
@@ -5725,11 +5716,11 @@ See page 190 for Fear rules"</Explanation>
 <Salary>"TIERS_BRASS 1"</Salary>
 </Level>
 <Level id="2">
-<Description language="ENGLISH">"Stirrer"</Description>
+<Description language="ENGLISH">"Agitator"</Description>
 <Salary>"TIERS_BRASS 2"</Salary>
 </Level>
 <Level id="3">
-<Description language="ENGLISH">"Troublemaker"</Description>
+<Description language="ENGLISH">"Rabble Rouser"</Description>
 <Salary>"TIERS_BRASS 3"</Salary>
 </Level>
 <Level id="4">
@@ -5771,7 +5762,7 @@ See page 190 for Fear rules"</Explanation>
 <Skill name="RULES-COMPCOMM">"2"</Skill>
   <!-- Leadership -->
 <Skill name="RULES-COMPDIVERT_NARRA">"2"</Skill>
-  <!-- Entertainment (Storytelling) -->
+  <!-- Entertain (Storytelling) -->
 <Skill name="RULES-COMPESQU">"2"</Skill>
   <!-- Dodge -->
 <Skill name="RULES-COMPINTUI">"2"</Skill>
@@ -5781,7 +5772,7 @@ See page 190 for Fear rules"</Explanation>
 <Skill name="RULES-COMPATHL">"3"</Skill>
   <!-- Athletics -->
 <Skill name="RULES-COMPCOMB_BAGAR">"3"</Skill>
-  <!-- Melee (Fight) -->
+  <!-- Melee (Brawling) -->
 <Skill name="RULES-COMPINTIM">"3"</Skill>
   <!-- Intimidate -->
 <Skill name="RULES-COMPPRECEP">"3"</Skill>
@@ -5845,7 +5836,7 @@ See page 190 for Fear rules"</Explanation>
 <Class>"CLASS_ACAD"</Class>
 <SUBCHAPTER_LEVEL>
 <Level id="1">
-<Description language="ENGLISH">"Apothecary Apprentice"</Description>
+<Description language="ENGLISH">"Apothecary’s Apprentice"</Description>
 <Salary>"TIERS_BRASS 3"</Salary>
 </Level>
 <Level id="2">
@@ -5857,7 +5848,7 @@ See page 190 for Fear rules"</Explanation>
 <Salary>"TIERS_SILVER 3"</Salary>
 </Level>
 <Level id="4">
-<Description language="ENGLISH">"Renowned Apothecary"</Description>
+<Description language="ENGLISH">"Apothecary-General"</Description>
 <Salary>"TIERS_GOLD 1"</Salary>
 </Level>
 </SUBCHAPTER_LEVEL>
@@ -5877,7 +5868,7 @@ See page 190 for Fear rules"</Explanation>
 <Skill name="RULES-COMPGUERI">"1"</Skill>
   <!-- Heal -->
 <Skill name="RULES-COMPLANG_CLASS">"1"</Skill>
-  <!-- Language (Classic) -->
+  <!-- Language (Classical) -->
 <Skill name="RULES-COMPMETIER_APOTH">"1"</Skill>
   <!-- Trade (Apothecary) -->
 <Skill name="RULES-COMPMETIER_EMPOI">"1"</Skill>
@@ -5893,7 +5884,7 @@ See page 190 for Fear rules"</Explanation>
 <Skill name="RULES-COMPCHARM">"2"</Skill>
   <!-- Charm -->
 <Skill name="RULES-COMPLANG_GUILD">"2"</Skill>
-  <!-- Language (Guild) -->
+  <!-- Language (Guilder) -->
 <Skill name="RULES-COMPMARCH">"2"</Skill>
   <!-- Haggle -->
 <Skill name="RULES-COMPPRECEP">"2"</Skill>
@@ -5909,7 +5900,7 @@ See page 190 for Fear rules"</Explanation>
 <Skill name="RULES-COMPRECH">"3"</Skill>
   <!-- Research -->
 <Skill name="RULES-COMPSIGNES_GUILD">"3"</Skill>
-  <!-- Secret Signs (Guild) -->
+  <!-- Secret Signs (Guilder) -->
 <Skill name="RULES-COMPCHEV_CHEVAL">"4"</Skill>
   <!-- Ride (Horse) -->
 <Skill name="RULES-COMPINTIM">"4"</Skill>
@@ -5929,7 +5920,7 @@ See page 190 for Fear rules"</Explanation>
 <Talent name="RULES-T0102">"2"</Talent>
   <!-- Dealmaker -->
 <Talent name="RULES-T0136_GUILD">"2"</Talent>
-  <!-- Etiquette (Guild) -->
+  <!-- Etiquette (Guilder) -->
 <Talent name="RULES-T0118">"2"</Talent>
   <!-- Pharmacist -->
 <Talent name="RULES-T0117">"3"</Talent>
@@ -5970,7 +5961,7 @@ See page 190 for Fear rules"</Explanation>
 <Class>"CLASS_BURG"</Class>
 <SUBCHAPTER_LEVEL>
 <Level id="1">
-<Description language="ENGLISH">"Apprentice Craftsman"</Description>
+<Description language="ENGLISH">"Apprentice Artisan"</Description>
 <Salary>"TIERS_BRASS 2"</Salary>
 </Level>
 <Level id="2">
@@ -5978,11 +5969,11 @@ See page 190 for Fear rules"</Explanation>
 <Salary>"TIERS_SILVER 1"</Salary>
 </Level>
 <Level id="3">
-<Description language="ENGLISH">"master craftsman"</Description>
+<Description language="ENGLISH">"Master Artisan"</Description>
 <Salary>"TIERS_SILVER 3"</Salary>
 </Level>
 <Level id="4">
-<Description language="ENGLISH">"guild master"</Description>
+<Description language="ENGLISH">"Guildmaster"</Description>
 <Salary>"TIERS_GOLD 1"</Salary>
 </Level>
 </SUBCHAPTER_LEVEL>
@@ -6018,7 +6009,7 @@ See page 190 for Fear rules"</Explanation>
 <Skill name="RULES-COMPCHARM">"2"</Skill>
   <!-- Charm -->
 <Skill name="RULES-COMPLANG_GUILD">"2"</Skill>
-  <!-- Language (Guild) -->
+  <!-- Language (Guilder) -->
 <Skill name="RULES-COMPMARCH">"2"</Skill>
   <!-- Haggle -->
 <Skill name="RULES-COMPPRECEP">"2"</Skill>
@@ -6034,7 +6025,7 @@ See page 190 for Fear rules"</Explanation>
 <Skill name="RULES-COMPRECH">"3"</Skill>
   <!-- Research -->
 <Skill name="RULES-COMPSIGNES_GUILD">"3"</Skill>
-  <!-- Secret Signs (Guild) -->
+  <!-- Secret Signs (Guilder) -->
 <Skill name="RULES-COMPINTIM">"4"</Skill>
   <!-- Intimidate -->
 <Skill name="RULES-COMPSUBOR">"4"</Skill>
@@ -6056,7 +6047,7 @@ See page 190 for Fear rules"</Explanation>
 <Talent name="RULES-T0102">"2"</Talent>
   <!-- Dealmaker -->
 <Talent name="RULES-T0136_GUILD">"2"</Talent>
-  <!-- Etiquette (Guild) -->
+  <!-- Etiquette (Guilder) -->
 <Talent name="RULES-T0015">"3"</Talent>
   <!-- Tinker -->
 <Talent name="RULES-T0084">"3"</Talent>
@@ -6101,7 +6092,7 @@ See page 190 for Fear rules"</Explanation>
 <Salary>"TIERS_SILVER 3"</Salary>
 </Level>
 <Level id="3">
-<Description language="ENGLISH">"renowned artist"</Description>
+<Description language="ENGLISH">"Master Artist"</Description>
 <Salary>"TIERS_SILVER 5"</Salary>
 </Level>
 <Level id="4">
@@ -6143,7 +6134,7 @@ See page 190 for Fear rules"</Explanation>
 <Skill name="RULES-COMPINTUI">"2"</Skill>
   <!-- Intuition  -->
 <Skill name="RULES-COMPLANG_CLASS">"2"</Skill>
-  <!-- Language (Classic) -->
+  <!-- Language (Classical) -->
 <Skill name="RULES-COMPMARCH">"2"</Skill>
   <!-- Haggle -->
 <Skill name="RULES-COMPMETIER_MATART">"2"</Skill>
@@ -6209,13 +6200,13 @@ See page 190 for Fear rules"</Explanation>
 </SUBCHAPTER_ITEM>
 </Career>
 <Career id="RULES-WORK05">
-<Description language="ENGLISH">"Bailif"</Description>
+<Description language="ENGLISH">"Bailiff"</Description>
 <Explanation language="ENGLISH">"You are a local official trusted by the rulers of the region to effectively and firmly administer their lands. “I’m going to take a look myself at the pasture in question. Until I return, I want no argument between your turbulent descendants, am I clear enough, Bauer, Meier? And you’ll split the cost of repairing the inn, or you’ll have to forfeit anything you may or may not have a right to on these lands. - Lorenz Schulte, Prefect of the Elster Valley The Nobles entrust the Baillis with collecting taxes from their lands. Some Bailiffs are respected and honest, and hardly a week goes by without them visiting a Temple of Sigmar. Others are tyrants who use the power granted by their lord over their properties and possessions to make use of threats and violence when carrying out their profession. Baillis who have been in office for a long time often become loyal servants of the ruling family and have substantial benefits in kind. The Prefects benefit from a greater field of action and have greater responsibilities. They ensure the maintenance of order at the level of the borders of the territory of their lord and resolve conflicts, whether they originate from cattle stories or the limits of agricultural properties. The vast majority of Baillis have some freedom, allowing them to take the time to attend to private matters or hire others to do so on their behalf. Since there are just as many of them who have full authority over the territories they care for, they are regularly sent by their employers to solve various problems, which can lead them to the most unexpected places."</Explanation>
 <Skill>"RULES-COMPINTIM"</Skill>
 <Class>"CLASS_PEAS"</Class>
 <SUBCHAPTER_LEVEL>
 <Level id="1">
-<Description language="ENGLISH">"Collector"</Description>
+<Description language="ENGLISH">"Tax Collector"</Description>
 <Salary>"TIERS_SILVER 1"</Salary>
 </Level>
 <Level id="2">
@@ -6223,7 +6214,7 @@ See page 190 for Fear rules"</Explanation>
 <Salary>"TIERS_SILVER 5"</Salary>
 </Level>
 <Level id="3">
-<Description language="ENGLISH">"Prefect"</Description>
+<Description language="ENGLISH">"Reeve"</Description>
 <Salary>"TIERS_GOLD 1"</Salary>
 </Level>
 <Level id="4">
@@ -6281,7 +6272,7 @@ See page 190 for Fear rules"</Explanation>
 <Skill name="RULES-COMPSOINANI">"3"</Skill>
   <!-- Animal Care -->
 <Skill name="RULES-COMPLANG_CLASS">"4"</Skill>
-  <!-- Language (Classic) -->
+  <!-- Language (Classical) -->
 <Skill name="RULES-COMPSAVOIR_LOI">"4"</Skill>
   <!-- Lore (Law) -->
 </SUBCHAPTER_SKILL>
@@ -6341,19 +6332,19 @@ See page 190 for Fear rules"</Explanation>
 <Class>"CLASS_RIVE"</Class>
 <SUBCHAPTER_LEVEL>
 <Level id="1">
-<Description language="ENGLISH">"Boater"</Description>
+<Description language="ENGLISH">"Boat-hand"</Description>
 <Salary>"TIERS_SILVER 1"</Salary>
 </Level>
 <Level id="2">
-<Description language="ENGLISH">"boatman"</Description>
+<Description language="ENGLISH">"Boatman"</Description>
 <Salary>"TIERS_SILVER 2"</Salary>
 </Level>
 <Level id="3">
-<Description language="ENGLISH">"Captain"</Description>
+<Description language="ENGLISH">"Bargeswain"</Description>
 <Salary>"TIERS_SILVER 3"</Salary>
 </Level>
 <Level id="4">
-<Description language="ENGLISH">"Captain"</Description>
+<Description language="ENGLISH">"Barge Master"</Description>
 <Salary>"TIERS_SILVER 5"</Salary>
 </Level>
 </SUBCHAPTER_LEVEL>
@@ -6371,7 +6362,7 @@ See page 190 for Fear rules"</Explanation>
 </SUBCHAPTER_ATTR>
 <SUBCHAPTER_SKILL>
 <Skill name="RULES-COMPCOMB_BAGAR">"1"</Skill>
-  <!-- Melee (Fight) -->
+  <!-- Melee (Brawling) -->
 <Skill name="RULES-COMPESQU">"1"</Skill>
   <!-- Dodge -->
 <Skill name="RULES-COMPNATA">"1"</Skill>
@@ -6389,7 +6380,7 @@ See page 190 for Fear rules"</Explanation>
 <Skill name="RULES-COMPATHL">"2"</Skill>
   <!-- Athletics -->
 <Skill name="RULES-COMPDIVERT_NARRA">"2"</Skill>
-  <!-- Entertainment (Storytelling) -->
+  <!-- Entertain (Storytelling) -->
 <Skill name="RULES-COMPINTUI">"2"</Skill>
   <!-- Intuition  -->
 <Skill name="RULES-COMPMARCH">"2"</Skill>
@@ -6399,7 +6390,7 @@ See page 190 for Fear rules"</Explanation>
 <Skill name="RULES-COMPSAVOIR_VFLUV">"2"</Skill>
   <!-- Lore (Waterways) -->
 <Skill name="RULES-COMPDIVERT_CHANT">"3"</Skill>
-  <!-- Entertainment (Singing) -->
+  <!-- Entertain (Singing) -->
 <Skill name="RULES-COMPESCAL">"3"</Skill>
   <!-- Climb -->
 <Skill name="RULES-COMPGUERI">"3"</Skill>
@@ -6423,7 +6414,7 @@ See page 190 for Fear rules"</Explanation>
 <Talent name="RULES-T0097">"2"</Talent>
   <!-- Waterman -->
 <Talent name="RULES-T0136_GUILD">"2"</Talent>
-  <!-- Etiquette (Guild) -->
+  <!-- Etiquette (Guilder) -->
 <Talent name="RULES-T0158">"2"</Talent>
   <!-- Very Strong -->
 <Talent name="RULES-T0168">"2"</Talent>
@@ -6465,19 +6456,19 @@ See page 190 for Fear rules"</Explanation>
 <Class>"CLASS_BURG"</Class>
 <SUBCHAPTER_LEVEL>
 <Level id="1">
-<Description language="ENGLISH">"Employee"</Description>
+<Description language="ENGLISH">"Clerk"</Description>
 <Salary>"TIERS_SILVER 1"</Salary>
 </Level>
 <Level id="2">
-<Description language="ENGLISH">"Bourgeois"</Description>
+<Description language="ENGLISH">"Townsman"</Description>
 <Salary>"TIERS_SILVER 2"</Salary>
 </Level>
 <Level id="3">
-<Description language="ENGLISH">"City councilor"</Description>
+<Description language="ENGLISH">"Town Councillor"</Description>
 <Salary>"TIERS_SILVER 5"</Salary>
 </Level>
 <Level id="4">
-<Description language="ENGLISH">"Mayor"</Description>
+<Description language="ENGLISH">"Burgomeister"</Description>
 <Salary>"TIERS_GOLD 1"</Salary>
 </Level>
 </SUBCHAPTER_LEVEL>
@@ -6511,7 +6502,7 @@ See page 190 for Fear rules"</Explanation>
 <Skill name="RULES-COMPRESALC">"1"</Skill>
   <!-- Consume Alcohol -->
 <Skill name="RULES-COMPCOMB_BAGAR">"2"</Skill>
-  <!-- Melee (Fight) -->
+  <!-- Melee (Brawling) -->
 <Skill name="RULES-COMPEVAL">"2"</Skill>
   <!-- Evaluate -->
 <Skill name="RULES-COMPMUSIC_*">"2"</Skill>
@@ -6594,19 +6585,19 @@ See page 190 for Fear rules"</Explanation>
 <Class>"CLASS_WARR"</Class>
 <SUBCHAPTER_LEVEL>
 <Level id="1">
-<Description language="ENGLISH">"Apprentice Rider"</Description>
+<Description language="ENGLISH">"Horseman"</Description>
 <Salary>"TIERS_SILVER 2"</Salary>
 </Level>
 <Level id="2">
-<Description language="ENGLISH">"Rider"</Description>
+<Description language="ENGLISH">"Cavalryman"</Description>
 <Salary>"TIERS_SILVER 4"</Salary>
 </Level>
 <Level id="3">
-<Description language="ENGLISH">"Light Cavalry Sergeant"</Description>
+<Description language="ENGLISH">"Cavalry Sergeant"</Description>
 <Salary>"TIERS_GOLD 1"</Salary>
 </Level>
 <Level id="4">
-<Description language="ENGLISH">"Light Cavalry Officer"</Description>
+<Description language="ENGLISH">"Cavalry Officer"</Description>
 <Salary>"TIERS_GOLD 2"</Salary>
 </Level>
 </SUBCHAPTER_LEVEL>
@@ -6723,7 +6714,7 @@ See page 190 for Fear rules"</Explanation>
 <Class>"CLASS_ROGU"</Class>
 <SUBCHAPTER_LEVEL>
 <Level id="1">
-<Description language="ENGLISH">"Trickster"</Description>
+<Description language="ENGLISH">"Swindler"</Description>
 <Salary>"TIERS_BRASS 3"</Salary>
 </Level>
 <Level id="2">
@@ -6731,11 +6722,11 @@ See page 190 for Fear rules"</Explanation>
 <Salary>"TIERS_BRASS 5"</Salary>
 </Level>
 <Level id="3">
-<Description language="ENGLISH">"Scammer"</Description>
+<Description language="ENGLISH">"Con Artist"</Description>
 <Salary>"TIERS_SILVER 2"</Salary>
 </Level>
 <Level id="4">
-<Description language="ENGLISH">"Crook"</Description>
+<Description language="ENGLISH">"Scoundrel"</Description>
 <Salary>"TIERS_SILVER 4"</Salary>
 </Level>
 </SUBCHAPTER_LEVEL>
@@ -6755,9 +6746,9 @@ See page 190 for Fear rules"</Explanation>
 <Skill name="RULES-COMPCHARM">"1"</Skill>
   <!-- Charm -->
 <Skill name="RULES-COMPDIVERT_NARRA">"1"</Skill>
-  <!-- Entertainment (Storytelling) -->
+  <!-- Entertain (Storytelling) -->
 <Skill name="RULES-COMPESCAM">"1"</Skill>
-  <!-- Sleight if Hand -->
+  <!-- Sleight of Hand -->
 <Skill name="RULES-COMPMARCH">"1"</Skill>
   <!-- Haggle -->
 <Skill name="RULES-COMPPARI">"1"</Skill>
@@ -6771,7 +6762,7 @@ See page 190 for Fear rules"</Explanation>
 <Skill name="RULES-COMPCALM">"2"</Skill>
   <!-- Cool -->
 <Skill name="RULES-COMPDIVERT_INTERP">"2"</Skill>
-  <!-- Entertainment (Interpretation) -->
+  <!-- Entertain (Acting) -->
 <Skill name="RULES-COMPESQU">"2"</Skill>
   <!-- Dodge -->
 <Skill name="RULES-COMPEVAL">"2"</Skill>
@@ -6850,7 +6841,7 @@ See page 190 for Fear rules"</Explanation>
 <Class>"CLASS_PEAS"</Class>
 <SUBCHAPTER_LEVEL>
 <Level id="1">
-<Description language="ENGLISH">"Tracker"</Description>
+<Description language="ENGLISH">"Trapper"</Description>
 <Salary>"TIERS_BRASS 2"</Salary>
 </Level>
 <Level id="2">
@@ -6858,11 +6849,11 @@ See page 190 for Fear rules"</Explanation>
 <Salary>"TIERS_BRASS 4"</Salary>
 </Level>
 <Level id="3">
-<Description language="ENGLISH">"tracker"</Description>
+<Description language="ENGLISH">"Tracker"</Description>
 <Salary>"TIERS_SILVER 1"</Salary>
 </Level>
 <Level id="4">
-<Description language="ENGLISH">"Master of the Hunt"</Description>
+<Description language="ENGLISH">"Huntsmaster"</Description>
 <Salary>"TIERS_SILVER 3"</Salary>
 </Level>
 </SUBCHAPTER_LEVEL>
@@ -6979,11 +6970,11 @@ See page 190 for Fear rules"</Explanation>
 <Class>"CLASS_RANG"</Class>
 <SUBCHAPTER_LEVEL>
 <Level id="1">
-<Description language="ENGLISH">"thieves hunter"</Description>
+<Description language="ENGLISH">"Thief-taker"</Description>
 <Salary>"TIERS_SILVER 1"</Salary>
 </Level>
 <Level id="2">
-<Description language="ENGLISH">"Bounty hunter"</Description>
+<Description language="ENGLISH">"Bounty Hunter"</Description>
 <Salary>"TIERS_SILVER 3"</Salary>
 </Level>
 <Level id="3">
@@ -6991,7 +6982,7 @@ See page 190 for Fear rules"</Explanation>
 <Salary>"TIERS_SILVER 5"</Salary>
 </Level>
 <Level id="4">
-<Description language="ENGLISH">"Veteran Bounty Hunter"</Description>
+<Description language="ENGLISH">"Bounty Hunter General"</Description>
 <Salary>"TIERS_GOLD 1"</Salary>
 </Level>
 </SUBCHAPTER_LEVEL>
@@ -7117,7 +7108,7 @@ See page 190 for Fear rules"</Explanation>
 <Salary>"TIERS_SILVER 5"</Salary>
 </Level>
 <Level id="3">
-<Description language="ENGLISH">"knight commander"</Description>
+<Description language="ENGLISH">"First Knight"</Description>
 <Salary>"TIERS_GOLD 2"</Salary>
 </Level>
 <Level id="4">
@@ -7175,7 +7166,7 @@ See page 190 for Fear rules"</Explanation>
 <Skill name="RULES-COMPSAVOIR_GUERRE">"3"</Skill>
   <!-- Lore (War) -->
 <Skill name="RULES-COMPSAVOIR_*">"4"</Skill>
-  <!-- Lore (Anyl) -->
+  <!-- Lore (Any) -->
 <Skill name="RULES-COMPSIGNES_ORDCHEVAL">"4"</Skill>
   <!-- Secret Signs (Knightly Order) -->
 </SUBCHAPTER_SKILL>
@@ -7248,15 +7239,15 @@ See page 190 for Fear rules"</Explanation>
 <Salary>"TIERS_SILVER 1"</Salary>
 </Level>
 <Level id="2">
-<Description language="ENGLISH">"Tick"</Description>
+<Description language="ENGLISH">"Coachman"</Description>
 <Salary>"TIERS_SILVER 2"</Salary>
 </Level>
 <Level id="3">
-<Description language="ENGLISH">"Coachman"</Description>
+<Description language="ENGLISH">"Coach Master"</Description>
 <Salary>"TIERS_SILVER 3"</Salary>
 </Level>
 <Level id="4">
-<Description language="ENGLISH">"master of the roads"</Description>
+<Description language="ENGLISH">"Route Master"</Description>
 <Salary>"TIERS_SILVER 5"</Salary>
 </Level>
 </SUBCHAPTER_LEVEL>
@@ -7352,7 +7343,11 @@ See page 190 for Fear rules"</Explanation>
 <Item name="coat">"1"</Item>
 <Item name="warm gloves">"1"</Item>
 <Item name="RULES-COMB_ENTRA_01">"1"</Item>
-<Item name="blunderbuss with ten ammunition">"2"</Item>
+<Item name="RULES-PROJ_POUDRE_03">"2"</Item>
+  <!-- Blunderbuss -->
+<Item name="RULES-MUNI_06">"2"</Item>
+  <!-- Bullet and Powder : les "10 Shots" du livre. La valeur d'un Item est le NIVEAU de
+       carriere, pas une quantite ; la taille du lot vient du <Ammunition> de la munition. -->
 <Item name="coachman’s horn">"2"</Item>
 <Item name="RULES-ARMO_04">"2"</Item>
 <Item name="hat">"2"</Item>
@@ -7374,15 +7369,15 @@ See page 190 for Fear rules"</Explanation>
 <Salary>"TIERS_BRASS 1"</Salary>
 </Level>
 <Level id="2">
-<Description language="ENGLISH">"peddler"</Description>
+<Description language="ENGLISH">"Pedlar"</Description>
 <Salary>"TIERS_BRASS 4"</Salary>
 </Level>
 <Level id="3">
-<Description language="ENGLISH">"Peddler master"</Description>
+<Description language="ENGLISH">"Master Pedlar"</Description>
 <Salary>"TIERS_SILVER 1"</Salary>
 </Level>
 <Level id="4">
-<Description language="ENGLISH">"Itinerant trader"</Description>
+<Description language="ENGLISH">"Wandering Trader"</Description>
 <Salary>"TIERS_SILVER 3"</Salary>
 </Level>
 </SUBCHAPTER_LEVEL>
@@ -7404,7 +7399,7 @@ See page 190 for Fear rules"</Explanation>
 <Skill name="RULES-COMPDISC_RURAL/RULES-COMPDISC_URB">"1"</Skill>
   <!-- Stealth (Rural or Urban) -->
 <Skill name="RULES-COMPDIVERT_NARRA">"1"</Skill>
-  <!-- Entertainment (Storytelling) -->
+  <!-- Entertain (Storytelling) -->
 <Skill name="RULES-COMPINTUI">"1"</Skill>
   <!-- Intuition  -->
 <Skill name="RULES-COMPMARCH">"1"</Skill>
@@ -7497,15 +7492,15 @@ See page 190 for Fear rules"</Explanation>
 <Class>"CLASS_COUR"</Class>
 <SUBCHAPTER_LEVEL>
 <Level id="1">
-<Description language="ENGLISH">"Assistant"</Description>
+<Description language="ENGLISH">"Aide"</Description>
 <Salary>"TIERS_SILVER 2"</Salary>
 </Level>
 <Level id="2">
-<Description language="ENGLISH">"Advise"</Description>
+<Description language="ENGLISH">"Advisor"</Description>
 <Salary>"TIERS_SILVER 4"</Salary>
 </Level>
 <Level id="3">
-<Description language="ENGLISH">"Consultant"</Description>
+<Description language="ENGLISH">"Counsellor"</Description>
 <Salary>"TIERS_GOLD 1"</Salary>
 </Level>
 <Level id="4">
@@ -7527,7 +7522,7 @@ See page 190 for Fear rules"</Explanation>
 </SUBCHAPTER_ATTR>
 <SUBCHAPTER_SKILL>
 <Skill name="RULES-COMPLANG_CLASS">"1"</Skill>
-  <!-- Language (Classic) -->
+  <!-- Language (Classical) -->
 <Skill name="RULES-COMPMARCH">"1"</Skill>
   <!-- Haggle -->
 <Skill name="RULES-COMPPRECEP">"1"</Skill>
@@ -7557,11 +7552,11 @@ See page 190 for Fear rules"</Explanation>
 <Skill name="RULES-COMPCOMM">"3"</Skill>
   <!-- Leadership -->
 <Skill name="RULES-COMPDIVERT_NARRA">"3"</Skill>
-  <!-- Entertainment (Storytelling) -->
+  <!-- Entertain (Storytelling) -->
 <Skill name="RULES-COMPLANG_*">"3"</Skill>
   <!-- Language (Any) -->
 <Skill name="RULES-COMPSAVOIR_*">"3"</Skill>
-  <!-- Lore (Anyl) -->
+  <!-- Lore (Any) -->
 <Skill name="RULES-COMPCHEV_CHEVAL">"4"</Skill>
   <!-- Ride (Horse) -->
 <Skill name="RULES-COMPSAVOIR_HERAL">"4"</Skill>
@@ -7620,7 +7615,7 @@ See page 190 for Fear rules"</Explanation>
 <Class>"CLASS_RIVE"</Class>
 <SUBCHAPTER_LEVEL>
 <Level id="1">
-<Description language="ENGLISH">"river runner"</Description>
+<Description language="ENGLISH">"River Runner"</Description>
 <Salary>"TIERS_BRASS 2"</Salary>
 </Level>
 <Level id="2">
@@ -7740,25 +7735,25 @@ See page 190 for Fear rules"</Explanation>
 </SUBCHAPTER_ITEM>
 </Career>
 <Career id="RULES-WORK17">
-<Description language="ENGLISH">"Stevedor"</Description>
+<Description language="ENGLISH">"Stevedore"</Description>
 <Explanation language="ENGLISH">"Even if you unload goods from ships for a fee, everyone knows that it’s the Longshoremen who rule the docks. “My boy, don’t believe that longshoremen take it easy. It’s dangerous work, in confined spaces, with very heavy loads and endless stacks of boxes, and if done incorrectly, the cargo could become unbalanced and cause the boat to capsize. What I want to tell you is that you have to pay them properly. And if you want to see a sinking ship, add some coins. - Aleida Fuchs, Merchant Although their only job is to load and unload ships, Dockworker guilds have the power to slow or speed up trade. Which gives them a certain power, because a lot of docks are run by these guilds. In larger cities, there may be violent clashes between several gangs to decide which will have power. Scowling Foremen run the day-to-day business of the guild when they’re not whistling their gangs out of dockside taverns when a new ship arrives, or defending their turf. . Despite the monotony and repetition that govern life on the quays, certain opportunities for adventure are offered to a Stevedore. Some gangs literally rule the roost and won’t hesitate to fight to defend every inch of their turf. Longshoremen are interesting Characters to have on hand, as they are very resourceful and are used to dealing with the poor. A Longshoreman can work alone in a riverside village, or belong to a larger gang that works on a bustling wharf. Sometimes he can even find himself in a gang of organized criminals who will do this work as a cover. Some decide to become executors, and make sure everyone is working to their maximum."</Explanation>
 <Skill>"RULES-COMPRESIST"</Skill>
 <Class>"CLASS_RIVE"</Class>
 <SUBCHAPTER_LEVEL>
 <Level id="1">
-<Description language="ENGLISH">"Carrier"</Description>
+<Description language="ENGLISH">"Dockhand"</Description>
 <Salary>"TIERS_BRASS 3"</Salary>
 </Level>
 <Level id="2">
-<Description language="ENGLISH">"tank top"</Description>
+<Description language="ENGLISH">"Stevedore"</Description>
 <Salary>"TIERS_SILVER 1"</Salary>
 </Level>
 <Level id="3">
-<Description language="ENGLISH">"foreman"</Description>
+<Description language="ENGLISH">"Foreman"</Description>
 <Salary>"TIERS_SILVER 3"</Salary>
 </Level>
 <Level id="4">
-<Description language="ENGLISH">"Dockmaster"</Description>
+<Description language="ENGLISH">"Dock Master"</Description>
 <Salary>"TIERS_SILVER 5"</Salary>
 </Level>
 </SUBCHAPTER_LEVEL>
@@ -7794,7 +7789,7 @@ See page 190 for Fear rules"</Explanation>
 <Skill name="RULES-COMPDISC_URB">"2"</Skill>
   <!-- Stealth (Urban) -->
 <Skill name="RULES-COMPDIVERT_NARRA">"2"</Skill>
-  <!-- Entertainment (Storytelling) -->
+  <!-- Entertain (Storytelling) -->
 <Skill name="RULES-COMPINTIM">"2"</Skill>
   <!-- Intimidate -->
 <Skill name="RULES-COMPPARI">"2"</Skill>
@@ -7832,7 +7827,7 @@ See page 190 for Fear rules"</Explanation>
 <Talent name="RULES-T0116">"2"</Talent>
   <!-- Tenacious -->
 <Talent name="RULES-T0136_GUILD">"2"</Talent>
-  <!-- Etiquette (Guild) -->
+  <!-- Etiquette (Guilder) -->
 <Talent name="RULES-T0052">"3"</Talent>
   <!-- Embezzle -->
 <Talent name="RULES-T0102">"3"</Talent>
@@ -7874,15 +7869,15 @@ See page 190 for Fear rules"</Explanation>
 <Salary>"TIERS_SILVER 3"</Salary>
 </Level>
 <Level id="2">
-<Description language="ENGLISH">"Duelist"</Description>
+<Description language="ENGLISH">"Duellist"</Description>
 <Salary>"TIERS_SILVER 5"</Salary>
 </Level>
 <Level id="3">
-<Description language="ENGLISH">"Master Duelist"</Description>
+<Description language="ENGLISH">"Duelmaster"</Description>
 <Salary>"TIERS_GOLD 1"</Salary>
 </Level>
 <Level id="4">
-<Description language="ENGLISH">"champion of righteousness"</Description>
+<Description language="ENGLISH">"Judicial Champion"</Description>
 <Salary>"TIERS_GOLD 3"</Salary>
 </Level>
 </SUBCHAPTER_LEVEL>
@@ -7910,7 +7905,7 @@ See page 190 for Fear rules"</Explanation>
 <Skill name="RULES-COMPINTUI">"1"</Skill>
   <!-- Intuition  -->
 <Skill name="RULES-COMPLANG_CLASS">"1"</Skill>
-  <!-- Language (Classic) -->
+  <!-- Language (Classical) -->
 <Skill name="RULES-COMPPRECEP">"1"</Skill>
   <!-- Perception  -->
 <Skill name="RULES-COMPRESIST">"1"</Skill>
@@ -7978,7 +7973,11 @@ See page 190 for Fear rules"</Explanation>
 <Item name="RULES-COMB_BASE_*/RULES-COMB_ESCR_02">"1"</Item>
 <Item name="satchel containing clothing">"1"</Item>
 <Item name="1d10 bandages">"1"</Item>
-<Item name="RULES-COMB_PARAD_02/RULES-COMB_2M_01">"2"</Item>
+<Item name="RULES-COMB_PARAD_02/RULES-COMB_PARAD_01">"2"</Item>
+  <!-- main gauche ou Sword Breaker. Le livre ecrit "Main Gauche or Sword-breaker" ; la
+       saisie pointait sur RULES-COMB_2M_01 (Bastard Sword), une arme a deux mains, au lieu
+       de RULES-COMB_PARAD_01 (Sword Breaker), l'arme de parade attendue au niveau ou le
+       duelliste gagne Melee (Parry). Corrige le 23/08/2026. -->
 <Item name="RULES-PROJ_POUDRE_04">"2"</Item>
 <Item name="RULES-MUNI_06">"2"</Item>
 <Item name="RULES-COMB_BASE_*">"3"</Item>
@@ -7995,7 +7994,7 @@ See page 190 for Fear rules"</Explanation>
 <Class>"CLASS_PEAS"</Class>
 <SUBCHAPTER_LEVEL>
 <Level id="1">
-<Description language="ENGLISH">"Runner of the woods"</Description>
+<Description language="ENGLISH">"Guide"</Description>
 <Salary>"TIERS_BRASS 3"</Salary>
 </Level>
 <Level id="2">
@@ -8003,7 +8002,7 @@ See page 190 for Fear rules"</Explanation>
 <Salary>"TIERS_BRASS 5"</Salary>
 </Level>
 <Level id="3">
-<Description language="ENGLISH">"Guide"</Description>
+<Description language="ENGLISH">"Pathfinder"</Description>
 <Salary>"TIERS_SILVER 1"</Salary>
 </Level>
 <Level id="4">
@@ -8129,7 +8128,7 @@ See page 190 for Fear rules"</Explanation>
 <Salary>"TIERS_SILVER 2"</Salary>
 </Level>
 <Level id="2">
-<Description language="ENGLISH">"Emissary"</Description>
+<Description language="ENGLISH">"Envoy"</Description>
 <Salary>"TIERS_SILVER 4"</Salary>
 </Level>
 <Level id="3">
@@ -8193,7 +8192,7 @@ See page 190 for Fear rules"</Explanation>
 <Skill name="RULES-COMPLANG_*">"4"</Skill>
   <!-- Language (Any) -->
 <Skill name="RULES-COMPSAVOIR_*">"4"</Skill>
-  <!-- Lore (Anyl) -->
+  <!-- Lore (Any) -->
 </SUBCHAPTER_SKILL>
 <SUBCHAPTER_TALENT>
 <Talent name="RULES-T0002">"1"</Talent>
@@ -8245,13 +8244,13 @@ See page 190 for Fear rules"</Explanation>
 </SUBCHAPTER_ITEM>
 </Career>
 <Career id="RULES-WORK21">
-<Description language="ENGLISH">"Inverstigator"</Description>
+<Description language="ENGLISH">"Investigator"</Description>
 <Explanation language="ENGLISH">"Astute as well as suspicious, you investigate the heart of crimes in order to find answers. “We can deduce, from the sight of this door shattered into a thousand pieces, that the thief received help from a huge creature. But said creature could never have descended by this narrow staircase. This leaves us with only two possible conclusions. Either she materialized out of thin air, or our thief is a shapeshifter…” - Zavant Konniger, “Sage-Detective” Most Investigators deal with cases of theft of private property, missing persons, or murder , even if some investigate the headlines of the newspapers or even the cases of blackmail to get a little “bonus“. Investigative techniques include tracking footprints, cross-checks, logical deductions, and, if necessary, illegal searches. While secular Investigators act at the edge of the law for institutions like chambers of commerce, religious investigators, mostly in the service of Sigmar and Verena, follow a very strict code of ethics. “I imagine you are aware that I am the greatest detective in the world. You’ve heard of Alphonse before, right? - Alphonse Hercule de Gascoigne, tiny Breton detective Investigators are sometimes hired to solve mysteries that it would be too dangerous to try to solve alone, which can become an informal way to create a group of adventurers. Of course, the nature of these mysteries can mean that once one of them is solved, another arises. Some Investigators can therefore benefit from a stable job, provided that they are able to identify the potential clients behind each new mystery they uncover. Seasoned Investigators sometimes abuse sleeve effects to improve their credibility. Some Master Investigators present themselves as “observation specialists” and pride themselves on possessing talents that cannot be learned. It takes a healthy dose of self-promotion to rise to the rank of Detective and be offered deals across the Old World."</Explanation>
 <Skill>"RULES-COMPPRECEP"</Skill>
 <Class>"CLASS_BURG"</Class>
 <SUBCHAPTER_LEVEL>
 <Level id="1">
-<Description language="ENGLISH">"Bloodhound"</Description>
+<Description language="ENGLISH">"Sleuth"</Description>
 <Salary>"TIERS_SILVER 1"</Salary>
 </Level>
 <Level id="2">
@@ -8297,11 +8296,11 @@ See page 190 for Fear rules"</Explanation>
 <Skill name="RULES-COMPRAGOT">"1"</Skill>
   <!-- Gossip -->
 <Skill name="RULES-COMPCOMB_BAGAR">"2"</Skill>
-  <!-- Melee (Fight) -->
+  <!-- Melee (Brawling) -->
 <Skill name="RULES-COMPCROCH">"2"</Skill>
   <!-- Pick Lock -->
 <Skill name="RULES-COMPESCAM">"2"</Skill>
-  <!-- Sleight if Hand -->
+  <!-- Sleight of Hand -->
 <Skill name="RULES-COMPESQU">"2"</Skill>
   <!-- Dodge -->
 <Skill name="RULES-COMPRESALC">"2"</Skill>
@@ -8313,13 +8312,13 @@ See page 190 for Fear rules"</Explanation>
 <Skill name="RULES-COMPEVAL">"3"</Skill>
   <!-- Evaluate -->
 <Skill name="RULES-COMPSAVOIR_*">"3"</Skill>
-  <!-- Lore (Anyl) -->
+  <!-- Lore (Any) -->
 <Skill name="RULES-COMPSUBOR">"3"</Skill>
   <!-- Bribery -->
 <Skill name="RULES-COMPINTIM">"4"</Skill>
   <!-- Intimidate -->
 <Skill name="RULES-COMPSAVOIR_*">"4"</Skill>
-  <!-- Lore (Anyl) -->
+  <!-- Lore (Any) -->
 </SUBCHAPTER_SKILL>
 <SUBCHAPTER_TALENT>
 <Talent name="RULES-T0022">"1"</Talent>
@@ -8370,25 +8369,25 @@ See page 190 for Fear rules"</Explanation>
 </SUBCHAPTER_ITEM>
 </Career>
 <Career id="RULES-WORK22">
-<Description language="ENGLISH">"Bawl"</Description>
+<Description language="ENGLISH">"Bawd"</Description>
 <Explanation language="ENGLISH">"Resourceful and self-interested, you make a living selling illicit goods in the city’s slums. “Laugh all you want, but those clothes cost a fortune. For a kid born under a manure heap, he lives a life of luxury. - Hertel Netzhoch, Innkeeper Matchmakers guide people to establishments offering a variety of illegal and immoral services. Although many humans and dwarves oppose such activities, most halflings and high elves are perfectly neutral when it comes to drug dens, brothels, and other houses of vice. Matchmakers living in urban areas sometimes travel to escape pestilence and religious persecution, the latter being more common in regions dominated by the Cult of Sigmar. Others, like those who roam with acrobats, consider travel an integral part of their profession. Those who manage to convince patrons can benefit from a lot of time to devote to their own fate. Matchmakers include drug dealers, strippers, prostitutes and models. Many of the famous masterpieces of the modern era were modeled after Matchmakers snatched from the streets. The armies on the move are followed by canteens, among whom the Matchmakers seek to make money by all means. Leaders, owners of establishments where Matchmakers congregate, can find themselves at the head of important empires providing services to all kinds of rogues, from fences who need to meet discreetly wealthy clients, to providing hideouts safe for gang leaders and crime lords."</Explanation>
 <Skill>"RULES-COMPCHARM"</Skill>
 <Class>"CLASS_ROGU"</Class>
 <SUBCHAPTER_LEVEL>
 <Level id="1">
-<Description language="ENGLISH">"prostitute"</Description>
+<Description language="ENGLISH">"Hustler"</Description>
 <Salary>"TIERS_BRASS 1"</Salary>
 </Level>
 <Level id="2">
-<Description language="ENGLISH">"matchmaker"</Description>
+<Description language="ENGLISH">"Bawd"</Description>
 <Salary>"TIERS_BRASS 3"</Salary>
 </Level>
 <Level id="3">
-<Description language="ENGLISH">"Pimp"</Description>
+<Description language="ENGLISH">"Procurer"</Description>
 <Salary>"TIERS_SILVER 1"</Salary>
 </Level>
 <Level id="4">
-<Description language="ENGLISH">"Leader"</Description>
+<Description language="ENGLISH">"Ringleader"</Description>
 <Salary>"TIERS_SILVER 3"</Salary>
 </Level>
 </SUBCHAPTER_LEVEL>
@@ -8408,7 +8407,7 @@ See page 190 for Fear rules"</Explanation>
 <Skill name="RULES-COMPCHARM">"1"</Skill>
   <!-- Charm -->
 <Skill name="RULES-COMPDIVERT_*">"1"</Skill>
-  <!-- Entertainment (Any) -->
+  <!-- Entertain (Any) -->
 <Skill name="RULES-COMPINTIM">"1"</Skill>
   <!-- Intimidate -->
 <Skill name="RULES-COMPMARCH">"1"</Skill>
@@ -8504,11 +8503,11 @@ See page 190 for Fear rules"</Explanation>
 <Salary>"TIERS_SILVER 2"</Salary>
 </Level>
 <Level id="3">
-<Description language="ENGLISH">"Searcher"</Description>
+<Description language="ENGLISH">"Fellow"</Description>
 <Salary>"TIERS_SILVER 5"</Salary>
 </Level>
 <Level id="4">
-<Description language="ENGLISH">"Teacher"</Description>
+<Description language="ENGLISH">"Professor"</Description>
 <Salary>"TIERS_GOLD 1"</Salary>
 </Level>
 </SUBCHAPTER_LEVEL>
@@ -8526,9 +8525,9 @@ See page 190 for Fear rules"</Explanation>
 </SUBCHAPTER_ATTR>
 <SUBCHAPTER_SKILL>
 <Skill name="RULES-COMPDIVERT_NARRA">"1"</Skill>
-  <!-- Entertainment (Storytelling) -->
+  <!-- Entertain (Storytelling) -->
 <Skill name="RULES-COMPLANG_CLASS">"1"</Skill>
-  <!-- Language (Classic) -->
+  <!-- Language (Classical) -->
 <Skill name="RULES-COMPMARCH">"1"</Skill>
   <!-- Haggle -->
 <Skill name="RULES-COMPPARI">"1"</Skill>
@@ -8540,7 +8539,7 @@ See page 190 for Fear rules"</Explanation>
 <Skill name="RULES-COMPRECH">"1"</Skill>
   <!-- Research -->
 <Skill name="RULES-COMPSAVOIR_*">"1"</Skill>
-  <!-- Lore (Anyl) -->
+  <!-- Lore (Any) -->
 <Skill name="RULES-COMPART_ECR">"2"</Skill>
   <!-- Art (Writing) -->
 <Skill name="RULES-COMPINTUI">"2"</Skill>
@@ -8552,19 +8551,19 @@ See page 190 for Fear rules"</Explanation>
 <Skill name="RULES-COMPPRECEP">"2"</Skill>
   <!-- Perception  -->
 <Skill name="RULES-COMPSAVOIR_*">"2"</Skill>
-  <!-- Lore (Anyl) -->
+  <!-- Lore (Any) -->
 <Skill name="RULES-COMPDIVERT_CONF">"3"</Skill>
-  <!-- Entertainment (Conference) -->
+  <!-- Entertain (Lecture) -->
 <Skill name="RULES-COMPINTIM">"3"</Skill>
   <!-- Intimidate -->
 <Skill name="RULES-COMPLANG_*">"3"</Skill>
   <!-- Language (Any) -->
 <Skill name="RULES-COMPSAVOIR_*">"3"</Skill>
-  <!-- Lore (Anyl) -->
+  <!-- Lore (Any) -->
 <Skill name="RULES-COMPDIVERT_RHETOR">"4"</Skill>
-  <!-- Entertainment (Rhetoric) -->
+  <!-- Entertain (Rhetoric) -->
 <Skill name="RULES-COMPSAVOIR_*">"4"</Skill>
-  <!-- Lore (Anyl) -->
+  <!-- Lore (Any) -->
 </SUBCHAPTER_SKILL>
 <SUBCHAPTER_TALENT>
 <Talent name="RULES-T0046">"1"</Talent>
@@ -8619,7 +8618,7 @@ See page 190 for Fear rules"</Explanation>
 <Class>"CLASS_COUR"</Class>
 <SUBCHAPTER_LEVEL>
 <Level id="1">
-<Description language="ENGLISH">"Informant"</Description>
+<Description language="ENGLISH">"Informer"</Description>
 <Salary>"TIERS_BRASS 3"</Salary>
 </Level>
 <Level id="2">
@@ -8627,11 +8626,11 @@ See page 190 for Fear rules"</Explanation>
 <Salary>"TIERS_SILVER 3"</Salary>
 </Level>
 <Level id="3">
-<Description language="ENGLISH">"Secret agent"</Description>
+<Description language="ENGLISH">"Agent"</Description>
 <Salary>"TIERS_GOLD 1"</Salary>
 </Level>
 <Level id="4">
-<Description language="ENGLISH">"Master Spy"</Description>
+<Description language="ENGLISH">"Spymaster"</Description>
 <Salary>"TIERS_GOLD 4"</Salary>
 </Level>
 </SUBCHAPTER_LEVEL>
@@ -8667,11 +8666,11 @@ See page 190 for Fear rules"</Explanation>
 <Skill name="RULES-COMPCOMB_BASE">"2"</Skill>
   <!-- Melee (Basic) -->
 <Skill name="RULES-COMPDIVERT_INTERP">"2"</Skill>
-  <!-- Entertainment (Interpretation) -->
+  <!-- Entertain (Acting) -->
 <Skill name="RULES-COMPESCAL">"2"</Skill>
   <!-- Climb -->
 <Skill name="RULES-COMPESCAM">"2"</Skill>
-  <!-- Sleight if Hand -->
+  <!-- Sleight of Hand -->
 <Skill name="RULES-COMPINTUI">"2"</Skill>
   <!-- Intuition  -->
 <Skill name="RULES-COMPSIGNES_*">"2"</Skill>
@@ -8687,7 +8686,7 @@ See page 190 for Fear rules"</Explanation>
 <Skill name="RULES-COMPRECH">"4"</Skill>
   <!-- Research -->
 <Skill name="RULES-COMPSAVOIR_*">"4"</Skill>
-  <!-- Lore (Anyl) -->
+  <!-- Lore (Any) -->
 </SUBCHAPTER_SKILL>
 <SUBCHAPTER_TALENT>
 <Talent name="RULES-T0010">"1"</Talent>
@@ -8746,19 +8745,19 @@ See page 190 for Fear rules"</Explanation>
 <Class>"CLASS_RIVE"</Class>
 <SUBCHAPTER_LEVEL>
 <Level id="1">
-<Description language="ENGLISH">"alevin"</Description>
+<Description language="ENGLISH">"Greenfish"</Description>
 <Salary>"TIERS_BRASS 2"</Salary>
 </Level>
 <Level id="2">
-<Description language="ENGLISH">"river woman"</Description>
+<Description language="ENGLISH">"Riverwoman"</Description>
 <Salary>"TIERS_BRASS 3"</Salary>
 </Level>
 <Level id="3">
-<Description language="ENGLISH">"Sage of the Shores"</Description>
+<Description language="ENGLISH">"Riverwise"</Description>
 <Salary>"TIERS_BRASS 5"</Salary>
 </Level>
 <Level id="4">
-<Description language="ENGLISH">"Ancient of the river"</Description>
+<Description language="ENGLISH">"River Elder"</Description>
 <Salary>"TIERS_SILVER 2"</Salary>
 </Level>
 </SUBCHAPTER_LEVEL>
@@ -8812,7 +8811,7 @@ See page 190 for Fear rules"</Explanation>
 <Skill name="RULES-COMPPRECEP">"3"</Skill>
   <!-- Perception  -->
 <Skill name="RULES-COMPDIVERT_NARRA">"4"</Skill>
-  <!-- Entertainment (Storytelling) -->
+  <!-- Entertain (Storytelling) -->
 <Skill name="RULES-COMPSAVOIR_FOLK">"4"</Skill>
   <!-- Lore (Folklore) -->
 </SUBCHAPTER_SKILL>
@@ -8874,7 +8873,7 @@ See page 190 for Fear rules"</Explanation>
 <Salary>"TIERS_BRASS 0"</Salary>
 </Level>
 <Level id="2">
-<Description language="ENGLISH">"Lasher"</Description>
+<Description language="ENGLISH">"Flagellant"</Description>
 <Salary>"TIERS_BRASS 0"</Salary>
 </Level>
 <Level id="3">
@@ -8882,7 +8881,7 @@ See page 190 for Fear rules"</Explanation>
 <Salary>"TIERS_BRASS 0"</Salary>
 </Level>
 <Level id="4">
-<Description language="ENGLISH">"prophet of fate"</Description>
+<Description language="ENGLISH">"Prophet of Doom"</Description>
 <Salary>"TIERS_BRASS 0"</Salary>
 </Level>
 </SUBCHAPTER_LEVEL>
@@ -8922,7 +8921,7 @@ See page 190 for Fear rules"</Explanation>
 <Skill name="RULES-COMPCALM">"2"</Skill>
   <!-- Cool -->
 <Skill name="RULES-COMPLANG_CLASS">"2"</Skill>
-  <!-- Language (Classic) -->
+  <!-- Language (Classical) -->
 <Skill name="RULES-COMPPROJ_FROND">"2"</Skill>
   <!-- Ranged (Slingshot) -->
 <Skill name="RULES-COMPSAVOIR_EMPIRE">"2"</Skill>
@@ -8938,7 +8937,7 @@ See page 190 for Fear rules"</Explanation>
 <Skill name="RULES-COMPCOMM">"4"</Skill>
   <!-- Leadership -->
 <Skill name="RULES-COMPDIVERT_DISC">"4"</Skill>
-  <!-- Entertainment (Speech) -->
+  <!-- Entertain (Speeches) -->
 </SUBCHAPTER_SKILL>
 <SUBCHAPTER_TALENT>
 <Talent name="RULES-T0016">"1"</Talent>
@@ -8993,7 +8992,7 @@ See page 190 for Fear rules"</Explanation>
 <Class>"CLASS_WARR"</Class>
 <SUBCHAPTER_LEVEL>
 <Level id="1">
-<Description language="ENGLISH">"Sentinel"</Description>
+<Description language="ENGLISH">"Sentry"</Description>
 <Salary>"TIERS_SILVER 1"</Salary>
 </Level>
 <Level id="2">
@@ -9001,11 +9000,11 @@ See page 190 for Fear rules"</Explanation>
 <Salary>"TIERS_SILVER 2"</Salary>
 </Level>
 <Level id="3">
-<Description language="ENGLISH">"honor guard"</Description>
+<Description language="ENGLISH">"Honour Guard"</Description>
 <Salary>"TIERS_SILVER 3"</Salary>
 </Level>
 <Level id="4">
-<Description language="ENGLISH">"officer guard"</Description>
+<Description language="ENGLISH">"Guard Officer"</Description>
 <Salary>"TIERS_SILVER 5"</Salary>
 </Level>
 </SUBCHAPTER_LEVEL>
@@ -9025,7 +9024,7 @@ See page 190 for Fear rules"</Explanation>
 <Skill name="RULES-COMPCOMB_BASE">"1"</Skill>
   <!-- Melee (Basic) -->
 <Skill name="RULES-COMPDIVERT_NARRA">"1"</Skill>
-  <!-- Entertainment (Storytelling) -->
+  <!-- Entertain (Storytelling) -->
 <Skill name="RULES-COMPINTUI">"1"</Skill>
   <!-- Intuition  -->
 <Skill name="RULES-COMPPARI">"1"</Skill>
@@ -9123,15 +9122,15 @@ See page 190 for Fear rules"</Explanation>
 <Salary>"TIERS_BRASS 4"</Salary>
 </Level>
 <Level id="2">
-<Description language="ENGLISH">"Gladiator"</Description>
+<Description language="ENGLISH">"Pit Fighter"</Description>
 <Salary>"TIERS_SILVER 2"</Salary>
 </Level>
 <Level id="3">
-<Description language="ENGLISH">"pit champion"</Description>
+<Description language="ENGLISH">"Pit Champion"</Description>
 <Salary>"TIERS_SILVER 5"</Salary>
 </Level>
 <Level id="4">
-<Description language="ENGLISH">"legend of the pit"</Description>
+<Description language="ENGLISH">"Pit Legend"</Description>
 <Salary>"TIERS_GOLD 2"</Salary>
 </Level>
 </SUBCHAPTER_LEVEL>
@@ -9155,7 +9154,7 @@ See page 190 for Fear rules"</Explanation>
 <Skill name="RULES-COMPCOMB_*">"1"</Skill>
   <!-- Melee (Any) -->
 <Skill name="RULES-COMPCOMB_BAGAR">"1"</Skill>
-  <!-- Melee (Fight) -->
+  <!-- Melee (Brawling) -->
 <Skill name="RULES-COMPESQU">"1"</Skill>
   <!-- Dodge -->
 <Skill name="RULES-COMPINTIM">"1"</Skill>
@@ -9179,7 +9178,7 @@ See page 190 for Fear rules"</Explanation>
 <Skill name="RULES-COMPRAGOT">"3"</Skill>
   <!-- Gossip -->
 <Skill name="RULES-COMPREPRES_COMB">"3"</Skill>
-  <!-- Perform (Combat) -->
+  <!-- Perform (Fight) -->
 <Skill name="RULES-COMPRESALC">"3"</Skill>
   <!-- Consume Alcohol -->
 <Skill name="RULES-COMPSAVOIR_ANAT">"3"</Skill>
@@ -9243,7 +9242,7 @@ See page 190 for Fear rules"</Explanation>
 <Class>"CLASS_PEAS"</Class>
 <SUBCHAPTER_LEVEL>
 <Level id="1">
-<Description language="ENGLISH">"picker"</Description>
+<Description language="ENGLISH">"Herb Gatherer"</Description>
 <Salary>"TIERS_BRASS 2"</Salary>
 </Level>
 <Level id="2">
@@ -9251,11 +9250,11 @@ See page 190 for Fear rules"</Explanation>
 <Salary>"TIERS_BRASS 4"</Salary>
 </Level>
 <Level id="3">
-<Description language="ENGLISH">"Master Herbalist"</Description>
+<Description language="ENGLISH">"Herb Master"</Description>
 <Salary>"TIERS_SILVER 1"</Salary>
 </Level>
 <Level id="4">
-<Description language="ENGLISH">"renowned herbalist"</Description>
+<Description language="ENGLISH">"Herbwise"</Description>
 <Salary>"TIERS_SILVER 3"</Salary>
 </Level>
 </SUBCHAPTER_LEVEL>
@@ -9368,7 +9367,7 @@ See page 190 for Fear rules"</Explanation>
 <Class>"CLASS_ROGU"</Class>
 <SUBCHAPTER_LEVEL>
 <Level id="1">
-<Description language="ENGLISH">"Bandit"</Description>
+<Description language="ENGLISH">"Brigand"</Description>
 <Salary>"TIERS_BRASS 1"</Salary>
 </Level>
 <Level id="2">
@@ -9376,11 +9375,11 @@ See page 190 for Fear rules"</Explanation>
 <Salary>"TIERS_BRASS 2"</Salary>
 </Level>
 <Level id="3">
-<Description language="ENGLISH">"Gang leader"</Description>
+<Description language="ENGLISH">"Outlaw Chief"</Description>
 <Salary>"TIERS_BRASS 4"</Salary>
 </Level>
 <Level id="4">
-<Description language="ENGLISH">"king of bandits"</Description>
+<Description language="ENGLISH">"Bandit King"</Description>
 <Salary>"TIERS_SILVER 2"</Salary>
 </Level>
 </SUBCHAPTER_LEVEL>
@@ -9498,7 +9497,7 @@ See page 190 for Fear rules"</Explanation>
 <Class>"CLASS_ACAD"</Class>
 <SUBCHAPTER_LEVEL>
 <Level id="1">
-<Description language="ENGLISH">"Engineering student"</Description>
+<Description language="ENGLISH">"Student Engineer"</Description>
 <Salary>"TIERS_BRASS 4"</Salary>
 </Level>
 <Level id="2">
@@ -9530,7 +9529,7 @@ See page 190 for Fear rules"</Explanation>
 <Skill name="RULES-COMPCALM">"1"</Skill>
   <!-- Cool -->
 <Skill name="RULES-COMPLANG_CLASS">"1"</Skill>
-  <!-- Language (Classic) -->
+  <!-- Language (Classical) -->
 <Skill name="RULES-COMPPRECEP">"1"</Skill>
   <!-- Perception  -->
 <Skill name="RULES-COMPMETIER_ING">"1"</Skill>
@@ -9548,7 +9547,7 @@ See page 190 for Fear rules"</Explanation>
 <Skill name="RULES-COMPESQU">"2"</Skill>
   <!-- Dodge -->
 <Skill name="RULES-COMPLANG_GUILD">"2"</Skill>
-  <!-- Language (Guild) -->
+  <!-- Language (Guilder) -->
 <Skill name="RULES-COMPORIENT">"2"</Skill>
   <!-- Navigation -->
 <Skill name="RULES-COMPPROJ_ING">"2"</Skill>
@@ -9562,11 +9561,11 @@ See page 190 for Fear rules"</Explanation>
 <Skill name="RULES-COMPLANG_KHAZ">"3"</Skill>
   <!-- Language (khazalid) -->
 <Skill name="RULES-COMPSIGNES_GUILD">"3"</Skill>
-  <!-- Secret Signs (Guild) -->
+  <!-- Secret Signs (Guilder) -->
 <Skill name="RULES-COMPLANG_*">"4"</Skill>
   <!-- Language (Any) -->
 <Skill name="RULES-COMPSAVOIR_*">"4"</Skill>
-  <!-- Lore (Anyl) -->
+  <!-- Lore (Any) -->
 </SUBCHAPTER_SKILL>
 <SUBCHAPTER_TALENT>
 <Talent name="RULES-T0007">"1"</Talent>
@@ -9580,7 +9579,7 @@ See page 190 for Fear rules"</Explanation>
 <Talent name="RULES-T0092_INGE">"2"</Talent>
   <!-- Craftsman (Engineer) -->
 <Talent name="RULES-T0136_GUILD">"2"</Talent>
-  <!-- Etiquette (Guild) -->
+  <!-- Etiquette (Guilder) -->
 <Talent name="RULES-T0140">"2"</Talent>
   <!-- Orientation -->
 <Talent name="RULES-T0153">"2"</Talent>
@@ -9621,11 +9620,11 @@ See page 190 for Fear rules"</Explanation>
 <Class>"CLASS_COUR"</Class>
 <SUBCHAPTER_LEVEL>
 <Level id="1">
-<Description language="ENGLISH">"Guardian"</Description>
+<Description language="ENGLISH">"Custodian"</Description>
 <Salary>"TIERS_SILVER 1"</Salary>
 </Level>
 <Level id="2">
-<Description language="ENGLISH">"Steward"</Description>
+<Description language="ENGLISH">"Warden"</Description>
 <Salary>"TIERS_SILVER 3"</Salary>
 </Level>
 <Level id="3">
@@ -9731,6 +9730,9 @@ See page 190 for Fear rules"</Explanation>
 <Item name="lamp oil">"1"</Item>
 <Item name="delivered">"1"</Item>
 <Item name="RULES-COMB_BASE_*/RULES-PROJ_ARC_01">"2"</Item>
+<Item name="RULES-MUNI_02">"2"</Item>
+  <!-- Arrow : les "10 arrows" du livre. Elles n'ont de sens que si le Bow est choisi dans
+       l'alternative ci-dessus - le modele ne sait pas conditionner un objet a un choix. -->
 <Item name="saddle horse">"2"</Item>
 <Item name="saddle">"2"</Item>
 <Item name="harness">"2"</Item>
@@ -9750,7 +9752,7 @@ See page 190 for Fear rules"</Explanation>
 <Class>"CLASS_ACAD"</Class>
 <SUBCHAPTER_LEVEL>
 <Level id="1">
-<Description language="ENGLISH">"Law student"</Description>
+<Description language="ENGLISH">"Student Lawyer"</Description>
 <Salary>"TIERS_BRASS 4"</Salary>
 </Level>
 <Level id="2">
@@ -9758,7 +9760,7 @@ See page 190 for Fear rules"</Explanation>
 <Salary>"TIERS_SILVER 3"</Salary>
 </Level>
 <Level id="3">
-<Description language="ENGLISH">"Master of the Bar"</Description>
+<Description language="ENGLISH">"Barrister"</Description>
 <Salary>"TIERS_GOLD 1"</Salary>
 </Level>
 <Level id="4">
@@ -9780,7 +9782,7 @@ See page 190 for Fear rules"</Explanation>
 </SUBCHAPTER_ATTR>
 <SUBCHAPTER_SKILL>
 <Skill name="RULES-COMPLANG_CLASS">"1"</Skill>
-  <!-- Language (Classic) -->
+  <!-- Language (Classical) -->
 <Skill name="RULES-COMPMARCH">"1"</Skill>
   <!-- Haggle -->
 <Skill name="RULES-COMPPRECEP">"1"</Skill>
@@ -9800,25 +9802,25 @@ See page 190 for Fear rules"</Explanation>
 <Skill name="RULES-COMPINTUI">"2"</Skill>
   <!-- Intuition  -->
 <Skill name="RULES-COMPLANG_GUILD">"2"</Skill>
-  <!-- Language (Guild) -->
+  <!-- Language (Guilder) -->
 <Skill name="RULES-COMPRAGOT">"2"</Skill>
   <!-- Gossip -->
 <Skill name="RULES-COMPSIGNES_GUILD">"2"</Skill>
-  <!-- Secret Signs (Guild) -->
+  <!-- Secret Signs (Guilder) -->
 <Skill name="RULES-COMPSUBOR">"2"</Skill>
   <!-- Bribery -->
 <Skill name="RULES-COMPART_ECR">"3"</Skill>
   <!-- Art (Writing) -->
 <Skill name="RULES-COMPDIVERT_DISC">"3"</Skill>
-  <!-- Entertainment (Speech) -->
+  <!-- Entertain (Speeches) -->
 <Skill name="RULES-COMPINTIM">"3"</Skill>
   <!-- Intimidate -->
 <Skill name="RULES-COMPSAVOIR_*">"3"</Skill>
-  <!-- Lore (Anyl) -->
+  <!-- Lore (Any) -->
 <Skill name="RULES-COMPCALM">"4"</Skill>
   <!-- Cool -->
 <Skill name="RULES-COMPSAVOIR_*">"4"</Skill>
-  <!-- Lore (Anyl) -->
+  <!-- Lore (Any) -->
 </SUBCHAPTER_SKILL>
 <SUBCHAPTER_TALENT>
 <Talent name="RULES-T0010">"1"</Talent>
@@ -9836,7 +9838,7 @@ See page 190 for Fear rules"</Explanation>
 <Talent name="RULES-T0051">"2"</Talent>
   <!-- Argumentative -->
 <Talent name="RULES-T0136_GUILD">"2"</Talent>
-  <!-- Etiquette (Guild) -->
+  <!-- Etiquette (Guilder) -->
 <Talent name="RULES-T0056">"3"</Talent>
   <!-- Impassioned Zeal -->
 <Talent name="RULES-T0099">"3"</Talent>
@@ -9885,7 +9887,7 @@ See page 190 for Fear rules"</Explanation>
 <Salary>"TIERS_GOLD 1"</Salary>
 </Level>
 <Level id="4">
-<Description language="ENGLISH">"Prince Merchant"</Description>
+<Description language="ENGLISH">"Merchant Prince"</Description>
 <Salary>"TIERS_GOLD 3"</Salary>
 </Level>
 </SUBCHAPTER_LEVEL>
@@ -9925,7 +9927,7 @@ See page 190 for Fear rules"</Explanation>
 <Skill name="RULES-COMPLANG_*">"2"</Skill>
   <!-- Language (Any) -->
 <Skill name="RULES-COMPLANG_GUILD">"2"</Skill>
-  <!-- Language (Guild) -->
+  <!-- Language (Guilder) -->
 <Skill name="RULES-COMPPRECEP">"2"</Skill>
   <!-- Perception  -->
 <Skill name="RULES-COMPSAVOIR_REG">"2"</Skill>
@@ -9933,15 +9935,15 @@ See page 190 for Fear rules"</Explanation>
 <Skill name="RULES-COMPCALM">"3"</Skill>
   <!-- Cool -->
 <Skill name="RULES-COMPLANG_CLASS">"3"</Skill>
-  <!-- Language (Classic) -->
+  <!-- Language (Classical) -->
 <Skill name="RULES-COMPORIENT">"3"</Skill>
   <!-- Navigation -->
 <Skill name="RULES-COMPSIGNES_GUILD">"3"</Skill>
-  <!-- Secret Signs (Guild) -->
+  <!-- Secret Signs (Guilder) -->
 <Skill name="RULES-COMPINTIM">"4"</Skill>
   <!-- Intimidate -->
 <Skill name="RULES-COMPSAVOIR_*">"4"</Skill>
-  <!-- Lore (Anyl) -->
+  <!-- Lore (Any) -->
 </SUBCHAPTER_SKILL>
 <SUBCHAPTER_TALENT>
 <Talent name="RULES-T0002">"1"</Talent>
@@ -9957,7 +9959,7 @@ See page 190 for Fear rules"</Explanation>
 <Talent name="RULES-T0117">"2"</Talent>
   <!-- Savvy -->
 <Talent name="RULES-T0136_GUILD">"2"</Talent>
-  <!-- Etiquette (Guild) -->
+  <!-- Etiquette (Guilder) -->
 <Talent name="RULES-T0147">"2"</Talent>
   <!-- Briber -->
 <Talent name="RULES-T0099">"3"</Talent>
@@ -10002,11 +10004,11 @@ See page 190 for Fear rules"</Explanation>
 <Class>"CLASS_RIVE"</Class>
 <SUBCHAPTER_LEVEL>
 <Level id="1">
-<Description language="ENGLISH">"freshwater sailor"</Description>
+<Description language="ENGLISH">"Landsman"</Description>
 <Salary>"TIERS_SILVER 1"</Salary>
 </Level>
 <Level id="2">
-<Description language="ENGLISH">"Marine"</Description>
+<Description language="ENGLISH">"Seaman"</Description>
 <Salary>"TIERS_SILVER 3"</Salary>
 </Level>
 <Level id="3">
@@ -10014,7 +10016,7 @@ See page 190 for Fear rules"</Explanation>
 <Salary>"TIERS_SILVER 5"</Salary>
 </Level>
 <Level id="4">
-<Description language="ENGLISH">"ship’s captain"</Description>
+<Description language="ENGLISH">"Ship’s Master"</Description>
 <Salary>"TIERS_GOLD 2"</Salary>
 </Level>
 </SUBCHAPTER_LEVEL>
@@ -10032,7 +10034,7 @@ See page 190 for Fear rules"</Explanation>
 </SUBCHAPTER_ATTR>
 <SUBCHAPTER_SKILL>
 <Skill name="RULES-COMPCOMB_BAGAR">"1"</Skill>
-  <!-- Melee (Fight) -->
+  <!-- Melee (Brawling) -->
 <Skill name="RULES-COMPESCAL">"1"</Skill>
   <!-- Climb -->
 <Skill name="RULES-COMPNATA">"1"</Skill>
@@ -10052,7 +10054,7 @@ See page 190 for Fear rules"</Explanation>
 <Skill name="RULES-COMPCOMB_BASE">"2"</Skill>
   <!-- Melee (Basic) -->
 <Skill name="RULES-COMPDIVERT_CHANT">"2"</Skill>
-  <!-- Entertainment (Singing) -->
+  <!-- Entertain (Singing) -->
 <Skill name="RULES-COMPESQU">"2"</Skill>
   <!-- Dodge -->
 <Skill name="RULES-COMPLANG_*">"2"</Skill>
@@ -10126,19 +10128,19 @@ See page 190 for Fear rules"</Explanation>
 <Class>"CLASS_ACAD"</Class>
 <SUBCHAPTER_LEVEL>
 <Level id="1">
-<Description language="ENGLISH">"Medecine studient"</Description>
+<Description language="ENGLISH">"Physician’s Apprentice"</Description>
 <Salary>"TIERS_BRASS 4"</Salary>
 </Level>
 <Level id="2">
-<Description language="ENGLISH">"Doctor"</Description>
+<Description language="ENGLISH">"Physician"</Description>
 <Salary>"TIERS_SILVER 3"</Salary>
 </Level>
 <Level id="3">
-<Description language="ENGLISH">"medical doctor"</Description>
+<Description language="ENGLISH">"Doktor"</Description>
 <Salary>"TIERS_SILVER 5"</Salary>
 </Level>
 <Level id="4">
-<Description language="ENGLISH">"court physician"</Description>
+<Description language="ENGLISH">"Court Physician"</Description>
 <Salary>"TIERS_GOLD 1"</Salary>
 </Level>
 </SUBCHAPTER_LEVEL>
@@ -10160,7 +10162,7 @@ See page 190 for Fear rules"</Explanation>
 <Skill name="RULES-COMPCOND">"1"</Skill>
   <!-- Drive -->
 <Skill name="RULES-COMPESCAM">"1"</Skill>
-  <!-- Sleight if Hand -->
+  <!-- Sleight of Hand -->
 <Skill name="RULES-COMPGUERI">"1"</Skill>
   <!-- Heal -->
 <Skill name="RULES-COMPPRECEP">"1"</Skill>
@@ -10174,7 +10176,7 @@ See page 190 for Fear rules"</Explanation>
 <Skill name="RULES-COMPCHARM">"2"</Skill>
   <!-- Charm -->
 <Skill name="RULES-COMPLANG_GUILD">"2"</Skill>
-  <!-- Language (Guild) -->
+  <!-- Language (Guilder) -->
 <Skill name="RULES-COMPMARCH">"2"</Skill>
   <!-- Haggle -->
 <Skill name="RULES-COMPMETIER_BARB">"2"</Skill>
@@ -10192,7 +10194,7 @@ See page 190 for Fear rules"</Explanation>
 <Skill name="RULES-COMPRESALC">"3"</Skill>
   <!-- Consume Alcohol -->
 <Skill name="RULES-COMPREPRES_DANS">"4"</Skill>
-  <!-- Perform (Dance) -->
+  <!-- Perform (Dancing) -->
 <Skill name="RULES-COMPSAVOIR_NOBL">"4"</Skill>
   <!-- Lore (Noble) -->
 </SUBCHAPTER_SKILL>
@@ -10212,7 +10214,7 @@ See page 190 for Fear rules"</Explanation>
 <Talent name="RULES-T0074">"2"</Talent>
   <!-- Coolheaded -->
 <Talent name="RULES-T0136_GUILD">"2"</Talent>
-  <!-- Etiquette (Guild) -->
+  <!-- Etiquette (Guilder) -->
 <Talent name="RULES-T0060">"3"</Talent>
   <!-- Strike to Injure -->
 <Talent name="RULES-T0117">"3"</Talent>
@@ -10249,7 +10251,7 @@ See page 190 for Fear rules"</Explanation>
 <Class>"CLASS_BURG"</Class>
 <SUBCHAPTER_LEVEL>
 <Level id="1">
-<Description language="ENGLISH">"Indigent"</Description>
+<Description language="ENGLISH">"Pauper"</Description>
 <Salary>"TIERS_BRASS 0"</Salary>
 </Level>
 <Level id="2">
@@ -10261,7 +10263,7 @@ See page 190 for Fear rules"</Explanation>
 <Salary>"TIERS_BRASS 4"</Salary>
 </Level>
 <Level id="4">
-<Description language="ENGLISH">"King of Beggars"</Description>
+<Description language="ENGLISH">"Beggar King"</Description>
 <Salary>"TIERS_SILVER 2"</Salary>
 </Level>
 </SUBCHAPTER_LEVEL>
@@ -10295,11 +10297,11 @@ See page 190 for Fear rules"</Explanation>
 <Skill name="RULES-COMPRESALC">"1"</Skill>
   <!-- Consume Alcohol -->
 <Skill name="RULES-COMPDIVERT_INTERP">"2"</Skill>
-  <!-- Entertainment (Interpretation) -->
+  <!-- Entertain (Acting) -->
 <Skill name="RULES-COMPDIVERT_*">"2"</Skill>
-  <!-- Entertainment (Any) -->
+  <!-- Entertain (Any) -->
 <Skill name="RULES-COMPESCAM">"2"</Skill>
-  <!-- Sleight if Hand -->
+  <!-- Sleight of Hand -->
 <Skill name="RULES-COMPMARCH">"2"</Skill>
   <!-- Haggle -->
 <Skill name="RULES-COMPPRECEP">"2"</Skill>
@@ -10380,11 +10382,11 @@ See page 190 for Fear rules"</Explanation>
 <Salary>"TIERS_SILVER 1"</Salary>
 </Level>
 <Level id="3">
-<Description language="ENGLISH">"Dispatch rider"</Description>
+<Description language="ENGLISH">"Courier"</Description>
 <Salary>"TIERS_SILVER 3"</Salary>
 </Level>
 <Level id="4">
-<Description language="ENGLISH">"veteran courier"</Description>
+<Description language="ENGLISH">"Courier-Captain"</Description>
 <Salary>"TIERS_SILVER 5"</Salary>
 </Level>
 </SUBCHAPTER_LEVEL>
@@ -10404,7 +10406,7 @@ See page 190 for Fear rules"</Explanation>
 <Skill name="RULES-COMPATHL">"1"</Skill>
   <!-- Athletics -->
 <Skill name="RULES-COMPCOMB_BAGAR">"1"</Skill>
-  <!-- Melee (Fight) -->
+  <!-- Melee (Brawling) -->
 <Skill name="RULES-COMPESCAL">"1"</Skill>
   <!-- Climb -->
 <Skill name="RULES-COMPESQU">"1"</Skill>
@@ -10498,19 +10500,19 @@ See page 190 for Fear rules"</Explanation>
 <Class>"CLASS_BURG"</Class>
 <SUBCHAPTER_LEVEL>
 <Level id="1">
-<Description language="ENGLISH">"Militia Recruit"</Description>
+<Description language="ENGLISH">"Watch Recruit"</Description>
 <Salary>"TIERS_BRASS 3"</Salary>
 </Level>
 <Level id="2">
-<Description language="ENGLISH">"Militiaman"</Description>
+<Description language="ENGLISH">"Watchman"</Description>
 <Salary>"TIERS_SILVER 1"</Salary>
 </Level>
 <Level id="3">
-<Description language="ENGLISH">"Militia Sergeant"</Description>
+<Description language="ENGLISH">"Watch Sergeant"</Description>
 <Salary>"TIERS_SILVER 3"</Salary>
 </Level>
 <Level id="4">
-<Description language="ENGLISH">"Captain of the Militia"</Description>
+<Description language="ENGLISH">"Watch Captain"</Description>
 <Salary>"TIERS_GOLD 1"</Salary>
 </Level>
 </SUBCHAPTER_LEVEL>
@@ -10558,7 +10560,7 @@ See page 190 for Fear rules"</Explanation>
 <Skill name="RULES-COMPCOMM">"3"</Skill>
   <!-- Leadership -->
 <Skill name="RULES-COMPDIVERT_NARRA">"3"</Skill>
-  <!-- Entertainment (Storytelling) -->
+  <!-- Entertain (Storytelling) -->
 <Skill name="RULES-COMPMARCH">"3"</Skill>
   <!-- Haggle -->
 <Skill name="RULES-COMPSAVOIR_LOI">"3"</Skill>
@@ -10631,15 +10633,15 @@ See page 190 for Fear rules"</Explanation>
 <Salary>"TIERS_BRASS 2"</Salary>
 </Level>
 <Level id="2">
-<Description language="ENGLISH">"Minor"</Description>
+<Description language="ENGLISH">"Miner"</Description>
 <Salary>"TIERS_BRASS 4"</Salary>
 </Level>
 <Level id="3">
-<Description language="ENGLISH">"Minor Master"</Description>
+<Description language="ENGLISH">"Master Miner"</Description>
 <Salary>"TIERS_BRASS 5"</Salary>
 </Level>
 <Level id="4">
-<Description language="ENGLISH">"mine foreman"</Description>
+<Description language="ENGLISH">"Mine Foreman"</Description>
 <Salary>"TIERS_SILVER 4"</Salary>
 </Level>
 </SUBCHAPTER_LEVEL>
@@ -10683,7 +10685,7 @@ See page 190 for Fear rules"</Explanation>
 <Skill name="RULES-COMPRESALC">"2"</Skill>
   <!-- Consume Alcohol -->
 <Skill name="RULES-COMPSIGNES_MINE">"2"</Skill>
-  <!-- Secret Signs (Minor) -->
+  <!-- Secret Signs (Miner) -->
 <Skill name="RULES-COMPDISC_SOUTER">"3"</Skill>
   <!-- Stealth (Underground) -->
 <Skill name="RULES-COMPMETIER_ING">"3"</Skill>
@@ -10754,19 +10756,19 @@ See page 190 for Fear rules"</Explanation>
 <Class>"CLASS_PEAS"</Class>
 <SUBCHAPTER_LEVEL>
 <Level id="1">
-<Description language="ENGLISH">"Seeing"</Description>
+<Description language="ENGLISH">"Fortune Teller"</Description>
 <Salary>"TIERS_BRASS 1"</Salary>
 </Level>
 <Level id="2">
-<Description language="ENGLISH">"Mystical"</Description>
+<Description language="ENGLISH">"Mystic"</Description>
 <Salary>"TIERS_BRASS 2"</Salary>
 </Level>
 <Level id="3">
-<Description language="ENGLISH">"Wise"</Description>
+<Description language="ENGLISH">"Sage"</Description>
 <Salary>"TIERS_BRASS 3"</Salary>
 </Level>
 <Level id="4">
-<Description language="ENGLISH">"Prophet"</Description>
+<Description language="ENGLISH">"Seer"</Description>
 <Salary>"TIERS_BRASS 4"</Salary>
 </Level>
 </SUBCHAPTER_LEVEL>
@@ -10786,9 +10788,9 @@ See page 190 for Fear rules"</Explanation>
 <Skill name="RULES-COMPCHARM">"1"</Skill>
   <!-- Charm -->
 <Skill name="RULES-COMPDIVERT_VOYAN">"1"</Skill>
-  <!-- Entertainment (Foresight) -->
+  <!-- Entertain (Fortune Telling) -->
 <Skill name="RULES-COMPESCAM">"1"</Skill>
-  <!-- Sleight if Hand -->
+  <!-- Sleight of Hand -->
 <Skill name="RULES-COMPESQU">"1"</Skill>
   <!-- Dodge -->
 <Skill name="RULES-COMPINTUI">"1"</Skill>
@@ -10802,7 +10804,7 @@ See page 190 for Fear rules"</Explanation>
 <Skill name="RULES-COMPCALM">"2"</Skill>
   <!-- Cool -->
 <Skill name="RULES-COMPDIVERT_PROPH">"2"</Skill>
-  <!-- Entertainment (Prophecy) -->
+  <!-- Entertain (Prophecy) -->
 <Skill name="RULES-COMPEVAL">"2"</Skill>
   <!-- Evaluate -->
 <Skill name="RULES-COMPINTIM">"2"</Skill>
@@ -10816,10 +10818,10 @@ See page 190 for Fear rules"</Explanation>
 <Skill name="RULES-COMPANIM">"3"</Skill>
   <!-- Charm Animal -->
 <Skill name="RULES-COMPDIVERT_NARRA">"3"</Skill>
-  <!-- Entertainment (Storytelling) -->
+  <!-- Entertain (Storytelling) -->
 <Skill name="RULES-COMPLANG_*">"3"</Skill>
   <!-- Language (Any) -->
-<Skill name="RULES-COMPFOCAL_AZYR">"4"</Skill>
+<Skill name="RULES-COMPFOCAL_CIEUX">"4"</Skill>
   <!-- Language (Any) -->
 <Skill name="RULES-COMPSAVOIR_PROPH">"4"</Skill>
   <!-- Lore (Prophecy) -->
@@ -10873,7 +10875,7 @@ See page 190 for Fear rules"</Explanation>
 <Class>"CLASS_RIVE"</Class>
 <SUBCHAPTER_LEVEL>
 <Level id="1">
-<Description language="ENGLISH">"Wreck Raider"</Description>
+<Description language="ENGLISH">"Cargo Scavenger"</Description>
 <Salary>"TIERS_BRASS 2"</Salary>
 </Level>
 <Level id="2">
@@ -10881,11 +10883,11 @@ See page 190 for Fear rules"</Explanation>
 <Salary>"TIERS_BRASS 3"</Salary>
 </Level>
 <Level id="3">
-<Description language="ENGLISH">"river pirate"</Description>
+<Description language="ENGLISH">"River Pirate"</Description>
 <Salary>"TIERS_BRASS 5"</Salary>
 </Level>
 <Level id="4">
-<Description language="ENGLISH">"shipwreck captain"</Description>
+<Description language="ENGLISH">"Wrecker Captain"</Description>
 <Salary>"TIERS_SILVER 2"</Salary>
 </Level>
 </SUBCHAPTER_LEVEL>
@@ -11000,11 +11002,11 @@ See page 190 for Fear rules"</Explanation>
 <Class>"CLASS_RIVE"</Class>
 <SUBCHAPTER_LEVEL>
 <Level id="1">
-<Description language="ENGLISH">"river guide"</Description>
+<Description language="ENGLISH">"Riverguide"</Description>
 <Salary>"TIERS_BRASS 4"</Salary>
 </Level>
 <Level id="2">
-<Description language="ENGLISH">"Seaman"</Description>
+<Description language="ENGLISH">"Huffer"</Description>
 <Salary>"TIERS_SILVER 1"</Salary>
 </Level>
 <Level id="3">
@@ -11012,7 +11014,7 @@ See page 190 for Fear rules"</Explanation>
 <Salary>"TIERS_SILVER 3"</Salary>
 </Level>
 <Level id="4">
-<Description language="ENGLISH">"Master porter"</Description>
+<Description language="ENGLISH">"Master Pilot"</Description>
 <Salary>"TIERS_SILVER 5"</Salary>
 </Level>
 </SUBCHAPTER_LEVEL>
@@ -11052,7 +11054,7 @@ See page 190 for Fear rules"</Explanation>
 <Skill name="RULES-COMPCOMB_BASE">"2"</Skill>
   <!-- Melee (Basic) -->
 <Skill name="RULES-COMPDIVERT_NARRA">"2"</Skill>
-  <!-- Entertainment (Storytelling) -->
+  <!-- Entertain (Storytelling) -->
 <Skill name="RULES-COMPLANG_*">"2"</Skill>
   <!-- Language (Any) -->
 <Skill name="RULES-COMPORIENT">"2"</Skill>
@@ -11086,7 +11088,7 @@ See page 190 for Fear rules"</Explanation>
 <Talent name="RULES-T0102">"2"</Talent>
   <!-- Dealmaker -->
 <Talent name="RULES-T0136_GUILD">"2"</Talent>
-  <!-- Etiquette (Guild) -->
+  <!-- Etiquette (Guilder) -->
 <Talent name="RULES-T0119">"3"</Talent>
   <!-- Sea Legs -->
 <Talent name="RULES-T0120">"3"</Talent>
@@ -11123,7 +11125,7 @@ See page 190 for Fear rules"</Explanation>
 <Class>"CLASS_COUR"</Class>
 <SUBCHAPTER_LEVEL>
 <Level id="1">
-<Description language="ENGLISH">"Heir"</Description>
+<Description language="ENGLISH">"Scion"</Description>
 <Salary>"TIERS_GOLD 1"</Salary>
 </Level>
 <Level id="2">
@@ -11175,7 +11177,7 @@ See page 190 for Fear rules"</Explanation>
 <Skill name="RULES-COMPCOMB_PARAD">"2"</Skill>
   <!-- Melee (Parry) -->
 <Skill name="RULES-COMPLANG_CLASS">"2"</Skill>
-  <!-- Language (Classic) -->
+  <!-- Language (Classical) -->
 <Skill name="RULES-COMPRAGOT">"2"</Skill>
   <!-- Gossip -->
 <Skill name="RULES-COMPSAVOIR_REG">"2"</Skill>
@@ -11191,7 +11193,7 @@ See page 190 for Fear rules"</Explanation>
 <Skill name="RULES-COMPPIST">"4"</Skill>
   <!-- Track -->
 <Skill name="RULES-COMPSAVOIR_*">"4"</Skill>
-  <!-- Lore (Anyl) -->
+  <!-- Lore (Any) -->
 </SUBCHAPTER_SKILL>
 <SUBCHAPTER_TALENT>
 <Talent name="RULES-T0020">"1"</Talent>
@@ -11259,11 +11261,11 @@ See page 190 for Fear rules"</Explanation>
 <Class>"CLASS_ACAD"</Class>
 <SUBCHAPTER_LEVEL>
 <Level id="1">
-<Description language="ENGLISH">"Novice"</Description>
+<Description language="ENGLISH">"Novitiate"</Description>
 <Salary>"TIERS_BRASS 1"</Salary>
 </Level>
 <Level id="2">
-<Description language="ENGLISH">"nun"</Description>
+<Description language="ENGLISH">"Nun"</Description>
 <Salary>"TIERS_BRASS 4"</Salary>
 </Level>
 <Level id="3">
@@ -11293,7 +11295,7 @@ See page 190 for Fear rules"</Explanation>
 <Skill name="RULES-COMPCALM">"1"</Skill>
   <!-- Cool -->
 <Skill name="RULES-COMPDIVERT_NARRA">"1"</Skill>
-  <!-- Entertainment (Storytelling) -->
+  <!-- Entertain (Storytelling) -->
 <Skill name="RULES-COMPGUERI">"1"</Skill>
   <!-- Heal -->
 <Skill name="RULES-COMPPRIERE">"1"</Skill>
@@ -11327,7 +11329,7 @@ See page 190 for Fear rules"</Explanation>
 <Skill name="RULES-COMPLANG_*">"4"</Skill>
   <!-- Language (Any) -->
 <Skill name="RULES-COMPSAVOIR_*">"4"</Skill>
-  <!-- Lore (Anyl) -->
+  <!-- Lore (Any) -->
 </SUBCHAPTER_SKILL>
 <SUBCHAPTER_TALENT>
 <Talent name="RULES-T0012_*">"1"</Talent>
@@ -11381,19 +11383,19 @@ See page 190 for Fear rules"</Explanation>
 <Class>"CLASS_RIVE"</Class>
 <SUBCHAPTER_LEVEL>
 <Level id="1">
-<Description language="ENGLISH">"River recruit"</Description>
+<Description language="ENGLISH">"River Recruit"</Description>
 <Salary>"TIERS_SILVER 1"</Salary>
 </Level>
 <Level id="2">
-<Description language="ENGLISH">"river patrol boat"</Description>
+<Description language="ENGLISH">"Riverwarden"</Description>
 <Salary>"TIERS_SILVER 2"</Salary>
 </Level>
 <Level id="3">
-<Description language="ENGLISH">"Approacher"</Description>
+<Description language="ENGLISH">"Shipsword"</Description>
 <Salary>"TIERS_SILVER 4"</Salary>
 </Level>
 <Level id="4">
-<Description language="ENGLISH">"master boarder"</Description>
+<Description language="ENGLISH">"Shipsword Master"</Description>
 <Salary>"TIERS_GOLD 1"</Salary>
 </Level>
 </SUBCHAPTER_LEVEL>
@@ -11507,19 +11509,19 @@ See page 190 for Fear rules"</Explanation>
 <Class>"CLASS_RANG"</Class>
 <SUBCHAPTER_LEVEL>
 <Level id="1">
-<Description language="ENGLISH">"toll"</Description>
+<Description language="ENGLISH">"Toll Keeper"</Description>
 <Salary>"TIERS_BRASS 5"</Salary>
 </Level>
 <Level id="2">
-<Description language="ENGLISH">"highway patrol"</Description>
+<Description language="ENGLISH">"Road Warden"</Description>
 <Salary>"TIERS_SILVER 2"</Salary>
 </Level>
 <Level id="3">
-<Description language="ENGLISH">"Patrol Sergeant"</Description>
+<Description language="ENGLISH">"Road Sergeant"</Description>
 <Salary>"TIERS_SILVER 4"</Salary>
 </Level>
 <Level id="4">
-<Description language="ENGLISH">"Patrol Captain"</Description>
+<Description language="ENGLISH">"Road Captain"</Description>
 <Salary>"TIERS_GOLD 1"</Salary>
 </Level>
 </SUBCHAPTER_LEVEL>
@@ -11641,19 +11643,19 @@ See page 190 for Fear rules"</Explanation>
 <Class>"CLASS_ROGU"</Class>
 <SUBCHAPTER_LEVEL>
 <Level id="1">
-<Description language="ENGLISH">"smuggler of corpses"</Description>
+<Description language="ENGLISH">"Body Snatcher"</Description>
 <Salary>"TIERS_BRASS 2"</Salary>
 </Level>
 <Level id="2">
-<Description language="ENGLISH">"grave robber"</Description>
+<Description language="ENGLISH">"Grave Robber"</Description>
 <Salary>"TIERS_BRASS 3"</Salary>
 </Level>
 <Level id="3">
-<Description language="ENGLISH">"tomb robber"</Description>
+<Description language="ENGLISH">"Tomb Robber"</Description>
 <Salary>"TIERS_SILVER 1"</Salary>
 </Level>
 <Level id="4">
-<Description language="ENGLISH">"treasure hunter"</Description>
+<Description language="ENGLISH">"Treasure Hunter"</Description>
 <Salary>"TIERS_SILVER 5"</Salary>
 </Level>
 </SUBCHAPTER_LEVEL>
@@ -11774,7 +11776,7 @@ See page 190 for Fear rules"</Explanation>
 <Class>"CLASS_ACAD"</Class>
 <SUBCHAPTER_LEVEL>
 <Level id="1">
-<Description language="ENGLISH">"Initiated"</Description>
+<Description language="ENGLISH">"Initiate"</Description>
 <Salary>"TIERS_BRASS 2"</Salary>
 </Level>
 <Level id="2">
@@ -11782,11 +11784,11 @@ See page 190 for Fear rules"</Explanation>
 <Salary>"TIERS_SILVER 1"</Salary>
 </Level>
 <Level id="3">
-<Description language="ENGLISH">"High priest"</Description>
+<Description language="ENGLISH">"High Priest"</Description>
 <Salary>"TIERS_GOLD 1"</Salary>
 </Level>
 <Level id="4">
-<Description language="ENGLISH">"Drive"</Description>
+<Description language="ENGLISH">"Lector"</Description>
 <Salary>"TIERS_GOLD 2"</Salary>
 </Level>
 </SUBCHAPTER_LEVEL>
@@ -11824,7 +11826,7 @@ See page 190 for Fear rules"</Explanation>
 <Skill name="RULES-COMPCOMB_BASE">"2"</Skill>
   <!-- Melee (Basic) -->
 <Skill name="RULES-COMPDIVERT_NARRA">"2"</Skill>
-  <!-- Entertainment (Storytelling) -->
+  <!-- Entertain (Storytelling) -->
 <Skill name="RULES-COMPGUERI">"2"</Skill>
   <!-- Heal -->
 <Skill name="RULES-COMPINTIM">"2"</Skill>
@@ -11836,7 +11838,7 @@ See page 190 for Fear rules"</Explanation>
 <Skill name="RULES-COMPCOMM">"3"</Skill>
   <!-- Leadership -->
 <Skill name="RULES-COMPDIVERT_DISC">"3"</Skill>
-  <!-- Entertainment (Speech) -->
+  <!-- Entertain (Speeches) -->
 <Skill name="RULES-COMPSAVOIR_HERAL">"3"</Skill>
   <!-- Lore (Heraldry) -->
 <Skill name="RULES-COMPLANG_*">"4"</Skill>
@@ -11898,7 +11900,7 @@ See page 190 for Fear rules"</Explanation>
 <Class>"CLASS_WARR"</Class>
 <SUBCHAPTER_LEVEL>
 <Level id="1">
-<Description language="ENGLISH">"Novice"</Description>
+<Description language="ENGLISH">"Novitiate"</Description>
 <Salary>"TIERS_BRASS 2"</Salary>
 </Level>
 <Level id="2">
@@ -11906,11 +11908,11 @@ See page 190 for Fear rules"</Explanation>
 <Salary>"TIERS_SILVER 2"</Salary>
 </Level>
 <Level id="3">
-<Description language="ENGLISH">"Sergeant Priest"</Description>
+<Description language="ENGLISH">"Priest Sergeant"</Description>
 <Salary>"TIERS_SILVER 3"</Salary>
 </Level>
 <Level id="4">
-<Description language="ENGLISH">"captain priest"</Description>
+<Description language="ENGLISH">"Priest Captain"</Description>
 <Salary>"TIERS_SILVER 4"</Salary>
 </Level>
 </SUBCHAPTER_LEVEL>
@@ -11948,7 +11950,7 @@ See page 190 for Fear rules"</Explanation>
 <Skill name="RULES-COMPCOMB_*">"2"</Skill>
   <!-- Melee (Any) -->
 <Skill name="RULES-COMPDIVERT_DISC">"2"</Skill>
-  <!-- Entertainment (Speech) -->
+  <!-- Entertain (Speeches) -->
 <Skill name="RULES-COMPINTIM">"2"</Skill>
   <!-- Intimidate -->
 <Skill name="RULES-COMPLANG_BATAIL">"2"</Skill>
@@ -12023,19 +12025,19 @@ See page 190 for Fear rules"</Explanation>
 <Class>"CLASS_ROGU"</Class>
 <SUBCHAPTER_LEVEL>
 <Level id="1">
-<Description language="ENGLISH">"hock cutter"</Description>
+<Description language="ENGLISH">"Thug"</Description>
 <Salary>"TIERS_BRASS 3"</Salary>
 </Level>
 <Level id="2">
-<Description language="ENGLISH">"ransomer"</Description>
+<Description language="ENGLISH">"Racketeer"</Description>
 <Salary>"TIERS_BRASS 5"</Salary>
 </Level>
 <Level id="3">
-<Description language="ENGLISH">"gang leader"</Description>
+<Description language="ENGLISH">"Gang Boss"</Description>
 <Salary>"TIERS_SILVER 3"</Salary>
 </Level>
 <Level id="4">
-<Description language="ENGLISH">"crime lord"</Description>
+<Description language="ENGLISH">"Crime Lord"</Description>
 <Salary>"TIERS_SILVER 5"</Salary>
 </Level>
 </SUBCHAPTER_LEVEL>
@@ -12055,7 +12057,7 @@ See page 190 for Fear rules"</Explanation>
 <Skill name="RULES-COMPCALM">"1"</Skill>
   <!-- Cool -->
 <Skill name="RULES-COMPCOMB_BAGAR">"1"</Skill>
-  <!-- Melee (Fight) -->
+  <!-- Melee (Brawling) -->
 <Skill name="RULES-COMPDISC_URB">"1"</Skill>
   <!-- Stealth (Urban) -->
 <Skill name="RULES-COMPESQU">"1"</Skill>
@@ -12154,11 +12156,11 @@ See page 190 for Fear rules"</Explanation>
 <Salary>"TIERS_BRASS 3"</Salary>
 </Level>
 <Level id="2">
-<Description language="ENGLISH">"ratter"</Description>
+<Description language="ENGLISH">"Rat Catcher"</Description>
 <Salary>"TIERS_SILVER 1"</Salary>
 </Level>
 <Level id="3">
-<Description language="ENGLISH">"sewer"</Description>
+<Description language="ENGLISH">"Sewer Jack"</Description>
 <Salary>"TIERS_SILVER 2"</Salary>
 </Level>
 <Level id="4">
@@ -12232,7 +12234,7 @@ See page 190 for Fear rules"</Explanation>
 <Talent name="RULES-T0027">"2"</Talent>
   <!-- Enclosed Fighter -->
 <Talent name="RULES-T0136_GUILD">"2"</Talent>
-  <!-- Etiquette (Guild) -->
+  <!-- Etiquette (Guilder) -->
 <Talent name="RULES-T0132_RATS">"2"</Talent>
   <!-- Fearless (Rats) -->
 <Talent name="RULES-T0159">"2"</Talent>
@@ -12276,19 +12278,19 @@ See page 190 for Fear rules"</Explanation>
 <Class>"CLASS_ROGU"</Class>
 <SUBCHAPTER_LEVEL>
 <Level id="1">
-<Description language="ENGLISH">"Flea market"</Description>
+<Description language="ENGLISH">"Broker"</Description>
 <Salary>"TIERS_SILVER 1"</Salary>
 </Level>
 <Level id="2">
-<Description language="ENGLISH">"fence"</Description>
+<Description language="ENGLISH">"Fence"</Description>
 <Salary>"TIERS_SILVER 2"</Salary>
 </Level>
 <Level id="3">
-<Description language="ENGLISH">"master receiver"</Description>
+<Description language="ENGLISH">"Master Fence"</Description>
 <Salary>"TIERS_SILVER 3"</Salary>
 </Level>
 <Level id="4">
-<Description language="ENGLISH">"black market professional"</Description>
+<Description language="ENGLISH">"Black Marketeer"</Description>
 <Salary>"TIERS_SILVER 4"</Salary>
 </Level>
 </SUBCHAPTER_LEVEL>
@@ -12334,7 +12336,7 @@ See page 190 for Fear rules"</Explanation>
 <Skill name="RULES-COMPSIGNES_VOL">"2"</Skill>
   <!-- Secret Signs (Thief) -->
 <Skill name="RULES-COMPDIVERT_NARRA">"3"</Skill>
-  <!-- Entertainment (Storytelling) -->
+  <!-- Entertain (Storytelling) -->
 <Skill name="RULES-COMPSAVOIR_ART">"3"</Skill>
   <!-- Lore (Art) -->
 <Skill name="RULES-COMPSAVOIR_REG">"3"</Skill>
@@ -12411,7 +12413,7 @@ See page 190 for Fear rules"</Explanation>
 <Salary>"TIERS_SILVER 5"</Salary>
 </Level>
 <Level id="4">
-<Description language="ENGLISH">"Veteran Witch Hunter"</Description>
+<Description language="ENGLISH">"Witchfinder General"</Description>
 <Salary>"TIERS_GOLD 1"</Salary>
 </Level>
 </SUBCHAPTER_LEVEL>
@@ -12431,7 +12433,7 @@ See page 190 for Fear rules"</Explanation>
 <Skill name="RULES-COMPCHARM">"1"</Skill>
   <!-- Charm -->
 <Skill name="RULES-COMPCOMB_BAGAR">"1"</Skill>
-  <!-- Melee (Fight) -->
+  <!-- Melee (Brawling) -->
 <Skill name="RULES-COMPGUERI">"1"</Skill>
   <!-- Heal -->
 <Skill name="RULES-COMPINTIM">"1"</Skill>
@@ -12527,11 +12529,11 @@ See page 190 for Fear rules"</Explanation>
 <Class>"CLASS_RANG"</Class>
 <SUBCHAPTER_LEVEL>
 <Level id="1">
-<Description language="ENGLISH">"street musician"</Description>
+<Description language="ENGLISH">"Busker"</Description>
 <Salary>"TIERS_BRASS 3"</Salary>
 </Level>
 <Level id="2">
-<Description language="ENGLISH">"Acrobat"</Description>
+<Description language="ENGLISH">"Entertainer"</Description>
 <Salary>"TIERS_BRASS 5"</Salary>
 </Level>
 <Level id="3">
@@ -12539,7 +12541,7 @@ See page 190 for Fear rules"</Explanation>
 <Salary>"TIERS_SILVER 3"</Salary>
 </Level>
 <Level id="4">
-<Description language="ENGLISH">"troop leader"</Description>
+<Description language="ENGLISH">"Troupe Leader"</Description>
 <Salary>"TIERS_GOLD 1"</Salary>
 </Level>
 </SUBCHAPTER_LEVEL>
@@ -12561,9 +12563,9 @@ See page 190 for Fear rules"</Explanation>
 <Skill name="RULES-COMPCHARM">"1"</Skill>
   <!-- Charm -->
 <Skill name="RULES-COMPDIVERT_*">"1"</Skill>
-  <!-- Entertainment (Any) -->
+  <!-- Entertain (Any) -->
 <Skill name="RULES-COMPESCAM">"1"</Skill>
-  <!-- Sleight if Hand -->
+  <!-- Sleight of Hand -->
 <Skill name="RULES-COMPMARCH">"1"</Skill>
   <!-- Haggle -->
 <Skill name="RULES-COMPMUSIC_*">"1"</Skill>
@@ -12577,7 +12579,7 @@ See page 190 for Fear rules"</Explanation>
 <Skill name="RULES-COMPCOMB_BASE">"2"</Skill>
   <!-- Melee (Basic) -->
 <Skill name="RULES-COMPDIVERT_*">"2"</Skill>
-  <!-- Entertainment (Any) -->
+  <!-- Entertain (Any) -->
 <Skill name="RULES-COMPMUSIC_*">"2"</Skill>
   <!-- Play (Any) -->
 <Skill name="RULES-COMPPROJ_LANC">"2"</Skill>
@@ -12652,7 +12654,7 @@ See page 190 for Fear rules"</Explanation>
 <Class>"CLASS_COUR"</Class>
 <SUBCHAPTER_LEVEL>
 <Level id="1">
-<Description language="ENGLISH">"Domestic"</Description>
+<Description language="ENGLISH">"Menial"</Description>
 <Salary>"TIERS_SILVER 1"</Salary>
 </Level>
 <Level id="2">
@@ -12660,11 +12662,11 @@ See page 190 for Fear rules"</Explanation>
 <Salary>"TIERS_SILVER 3"</Salary>
 </Level>
 <Level id="3">
-<Description language="ENGLISH">"Valet"</Description>
+<Description language="ENGLISH">"Attendant"</Description>
 <Salary>"TIERS_SILVER 5"</Salary>
 </Level>
 <Level id="4">
-<Description language="ENGLISH">"Manager"</Description>
+<Description language="ENGLISH">"Steward"</Description>
 <Salary>"TIERS_GOLD 1"</Salary>
 </Level>
 </SUBCHAPTER_LEVEL>
@@ -12906,7 +12908,7 @@ See page 190 for Fear rules"</Explanation>
 <Class>"CLASS_ACAD"</Class>
 <SUBCHAPTER_LEVEL>
 <Level id="1">
-<Description language="ENGLISH">"novice wizard"</Description>
+<Description language="ENGLISH">"Wizard’s Apprentice"</Description>
 <Salary>"TIERS_BRASS 3"</Salary>
 </Level>
 <Level id="2">
@@ -12914,11 +12916,11 @@ See page 190 for Fear rules"</Explanation>
 <Salary>"TIERS_SILVER 3"</Salary>
 </Level>
 <Level id="3">
-<Description language="ENGLISH">"Master Sorcerer"</Description>
+<Description language="ENGLISH">"Master Wizard"</Description>
 <Salary>"TIERS_GOLD 1"</Salary>
 </Level>
 <Level id="4">
-<Description language="ENGLISH">"wizard lord"</Description>
+<Description language="ENGLISH">"Wizard Lord"</Description>
 <Salary>"TIERS_GOLD 2"</Salary>
 </Level>
 </SUBCHAPTER_LEVEL>
@@ -12974,7 +12976,7 @@ See page 190 for Fear rules"</Explanation>
 <Skill name="RULES-COMPLANG_*">"4"</Skill>
   <!-- Language (Any) -->
 <Skill name="RULES-COMPSAVOIR_*">"4"</Skill>
-  <!-- Lore (Anyl) -->
+  <!-- Lore (Any) -->
 </SUBCHAPTER_SKILL>
 <SUBCHAPTER_TALENT>
 <Talent name="RULES-T0071">"1"</Talent>
@@ -13029,19 +13031,19 @@ See page 190 for Fear rules"</Explanation>
 <Class>"CLASS_PEAS"</Class>
 <SUBCHAPTER_LEVEL>
 <Level id="1">
-<Description language="ENGLISH">"Village Sorcerer’s Apprentice"</Description>
+<Description language="ENGLISH">"Hedge Apprentice"</Description>
 <Salary>"TIERS_BRASS 1"</Salary>
 </Level>
 <Level id="2">
-<Description language="ENGLISH">"village wizard"</Description>
+<Description language="ENGLISH">"Hedge Witch"</Description>
 <Salary>"TIERS_BRASS 2"</Salary>
 </Level>
 <Level id="3">
-<Description language="ENGLISH">"Master Village Wizard"</Description>
+<Description language="ENGLISH">"Hedge Master"</Description>
 <Salary>"TIERS_BRASS 3"</Salary>
 </Level>
 <Level id="4">
-<Description language="ENGLISH">"village sage"</Description>
+<Description language="ENGLISH">"Hedgewise"</Description>
 <Salary>"TIERS_BRASS 5"</Salary>
 </Level>
 </SUBCHAPTER_LEVEL>
@@ -13153,15 +13155,15 @@ See page 190 for Fear rules"</Explanation>
 <Class>"CLASS_ROGU"</Class>
 <SUBCHAPTER_LEVEL>
 <Level id="1">
-<Description language="ENGLISH">"Sorcerer"</Description>
+<Description language="ENGLISH">"Hexer"</Description>
 <Salary>"TIERS_BRASS 1"</Salary>
 </Level>
 <Level id="2">
-<Description language="ENGLISH">"Dissenting Sorcerer"</Description>
+<Description language="ENGLISH">"Witch"</Description>
 <Salary>"TIERS_BRASS 2"</Salary>
 </Level>
 <Level id="3">
-<Description language="ENGLISH">"diviner"</Description>
+<Description language="ENGLISH">"Wyrd"</Description>
 <Salary>"TIERS_BRASS 3"</Salary>
 </Level>
 <Level id="4">
@@ -13187,7 +13189,7 @@ See page 190 for Fear rules"</Explanation>
 <Skill name="RULES-COMPDISC_RURAL">"1"</Skill>
   <!-- Stealth (Rural) -->
 <Skill name="RULES-COMPESCAM">"1"</Skill>
-  <!-- Sleight if Hand -->
+  <!-- Sleight of Hand -->
 <Skill name="RULES-COMPFOCAL_*">"1"</Skill>
   <!-- Channelling (Any) -->
 <Skill name="RULES-COMPINTIM">"1"</Skill>
@@ -13280,11 +13282,11 @@ See page 190 for Fear rules"</Explanation>
 <Class>"CLASS_WARR"</Class>
 <SUBCHAPTER_LEVEL>
 <Level id="1">
-<Description language="ENGLISH">"Bullying"</Description>
+<Description language="ENGLISH">"Braggart"</Description>
 <Salary>"TIERS_BRASS 2"</Salary>
 </Level>
 <Level id="2">
-<Description language="ENGLISH">"Swordsman"</Description>
+<Description language="ENGLISH">"Protagonist"</Description>
 <Salary>"TIERS_SILVER 1"</Salary>
 </Level>
 <Level id="3">
@@ -13314,7 +13316,7 @@ See page 190 for Fear rules"</Explanation>
 <Skill name="RULES-COMPCOMB_*">"1"</Skill>
   <!-- Melee (Any) -->
 <Skill name="RULES-COMPDIVERT_RAILL">"1"</Skill>
-  <!-- Entertainment (Taunting) -->
+  <!-- Entertain (Taunt) -->
 <Skill name="RULES-COMPESQU">"1"</Skill>
   <!-- Dodge -->
 <Skill name="RULES-COMPINTIM">"1"</Skill>
@@ -13346,7 +13348,7 @@ See page 190 for Fear rules"</Explanation>
 <Skill name="RULES-COMPPROJ_LANC">"3"</Skill>
   <!-- Ranged (Throwing) -->
 <Skill name="RULES-COMPDIVERT_INTERP">"4"</Skill>
-  <!-- Entertainment (Interpretation) -->
+  <!-- Entertain (Acting) -->
 <Skill name="RULES-COMPPROJ_ARB">"4"</Skill>
   <!-- Ranged (Crossbow) -->
 </SUBCHAPTER_SKILL>
@@ -13410,7 +13412,7 @@ See page 190 for Fear rules"</Explanation>
 <Class>"CLASS_WARR"</Class>
 <SUBCHAPTER_LEVEL>
 <Level id="1">
-<Description language="ENGLISH">"Trollslayer"</Description>
+<Description language="ENGLISH">"Troll Slayer"</Description>
 <Salary>"TIERS_BRASS 2"</Salary>
 </Level>
 <Level id="2">
@@ -13418,11 +13420,11 @@ See page 190 for Fear rules"</Explanation>
 <Salary>"TIERS_BRASS 2"</Salary>
 </Level>
 <Level id="3">
-<Description language="ENGLISH">"dragon slayer"</Description>
+<Description language="ENGLISH">"Dragon Slayer"</Description>
 <Salary>"TIERS_BRASS 2"</Salary>
 </Level>
 <Level id="4">
-<Description language="ENGLISH">"Demon Slayer"</Description>
+<Description language="ENGLISH">"Daemon Slayer"</Description>
 <Salary>"TIERS_BRASS 2"</Salary>
 </Level>
 </SUBCHAPTER_LEVEL>
@@ -13468,7 +13470,7 @@ See page 190 for Fear rules"</Explanation>
 <Skill name="RULES-COMPSURVEXT">"2"</Skill>
   <!-- Outdoor Survival -->
 <Skill name="RULES-COMPDIVERT_NARRA">"3"</Skill>
-  <!-- Entertainment (Storytelling) -->
+  <!-- Entertain (Storytelling) -->
 <Skill name="RULES-COMPPRECEP">"3"</Skill>
   <!-- Perception  -->
 <Skill name="RULES-COMPPROJ_LANC">"3"</Skill>
@@ -13538,15 +13540,15 @@ See page 190 for Fear rules"</Explanation>
 <Salary>"TIERS_BRASS 2"</Salary>
 </Level>
 <Level id="2">
-<Description language="ENGLISH">"villager"</Description>
+<Description language="ENGLISH">"Villager"</Description>
 <Salary>"TIERS_BRASS 3"</Salary>
 </Level>
 <Level id="3">
-<Description language="ENGLISH">"Alderman"</Description>
+<Description language="ENGLISH">"Councillor"</Description>
 <Salary>"TIERS_BRASS 4"</Salary>
 </Level>
 <Level id="4">
-<Description language="ENGLISH">"Dean"</Description>
+<Description language="ENGLISH">"Village Elder"</Description>
 <Salary>"TIERS_SILVER 2"</Salary>
 </Level>
 </SUBCHAPTER_LEVEL>
@@ -13566,7 +13568,7 @@ See page 190 for Fear rules"</Explanation>
 <Skill name="RULES-COMPATHL">"1"</Skill>
   <!-- Athletics -->
 <Skill name="RULES-COMPCOMB_BAGAR">"1"</Skill>
-  <!-- Melee (Fight) -->
+  <!-- Melee (Brawling) -->
 <Skill name="RULES-COMPRAGOT">"1"</Skill>
   <!-- Gossip -->
 <Skill name="RULES-COMPRESIST">"1"</Skill>
@@ -13584,7 +13586,7 @@ See page 190 for Fear rules"</Explanation>
 <Skill name="RULES-COMPCOMB_BASE">"2"</Skill>
   <!-- Melee (Basic) -->
 <Skill name="RULES-COMPDIVERT_NARRA">"2"</Skill>
-  <!-- Entertainment (Storytelling) -->
+  <!-- Entertain (Storytelling) -->
 <Skill name="RULES-COMPESQU">"2"</Skill>
   <!-- Dodge -->
 <Skill name="RULES-COMPMARCH">"2"</Skill>
@@ -13653,7 +13655,7 @@ See page 190 for Fear rules"</Explanation>
 <Class>"CLASS_ROGU"</Class>
 <SUBCHAPTER_LEVEL>
 <Level id="1">
-<Description language="ENGLISH">"ranger"</Description>
+<Description language="ENGLISH">"Prowler"</Description>
 <Salary>"TIERS_BRASS 1"</Salary>
 </Level>
 <Level id="2">
@@ -13661,11 +13663,11 @@ See page 190 for Fear rules"</Explanation>
 <Salary>"TIERS_BRASS 3"</Salary>
 </Level>
 <Level id="3">
-<Description language="ENGLISH">"master thief"</Description>
+<Description language="ENGLISH">"Master Thief"</Description>
 <Salary>"TIERS_BRASS 5"</Salary>
 </Level>
 <Level id="4">
-<Description language="ENGLISH">"Burglar"</Description>
+<Description language="ENGLISH">"Cat Burglar"</Description>
 <Salary>"TIERS_SILVER 3"</Salary>
 </Level>
 </SUBCHAPTER_LEVEL>
@@ -13701,7 +13703,7 @@ See page 190 for Fear rules"</Explanation>
 <Skill name="RULES-COMPCROCH">"2"</Skill>
   <!-- Pick Lock -->
 <Skill name="RULES-COMPESCAM">"2"</Skill>
-  <!-- Sleight if Hand -->
+  <!-- Sleight of Hand -->
 <Skill name="RULES-COMPEVAL">"2"</Skill>
   <!-- Evaluate -->
 <Skill name="RULES-COMPRAGOT">"2"</Skill>
@@ -16867,7 +16869,7 @@ If your opponent has a weapon with the Impaler Perk and rolls a Critical, your a
 <TypSpell>"Domain Magic"</TypSpell>
 </Sort>
 <Sort id="RULES-COLOR_65">
-<Description language="ENGLISH">"Good Will"</Description>
+<Description language="ENGLISH">"Goodwill"</Description>
 <Explanation language="ENGLISH">"You create an atmosphere conducive to benevolence and kindness. All Sociability Tests made in the Area of Effect have a +10 bonus, and Animosity and Hatred Psychologies have no effect."</Explanation>
 <Target>"ZdE (BATTR_Fel)m"</Target>
 <Duration>"(BATTR_WP) Rounds"</Duration>
@@ -16887,7 +16889,7 @@ If your opponent has a weapon with the Impaler Perk and rolls a Critical, your a
 <TypSpell>"Domain Magic"</TypSpell>
 </Sort>
 <Sort id="RULES-COLOR_67">
-<Description language="ENGLISH">"Ride the Darkness"</Description>
+<Description language="ENGLISH">"Mirkride"</Description>
 <Explanation language="ENGLISH">"By pronouncing words of ancient magic, your spirit leaves your body and enters the Hedge, this dark space, border between the material world and that of the spirits. For the duration of the Spell, you find yourself outside the world, an invisible witness without being able to affect it in any way whatsoever. Physical barriers are not a problem and you can pass through any non-magical obstacle if you wish. Your body remains in place, still and insensitive. At the end of the Spell, you suddenly return to your body. If the latter is killed while you Ride the Darkness, your mind will wander aimlessly for all eternity."</Explanation>
 <Target>"You"</Target>
 <Duration>"(BATTR_WP) minutes"</Duration>
@@ -16897,7 +16899,7 @@ If your opponent has a weapon with the Impaler Perk and rolls a Critical, your a
 <TypSpell>"Domain Magic"</TypSpell>
 </Sort>
 <Sort id="RULES-COLOR_68">
-<Description language="ENGLISH">"Nepenthes"</Description>
+<Description language="ENGLISH">"Nepenthe"</Description>
 <Explanation language="ENGLISH">"You mutter words of power over a specially brewed potion of grass and magically transform it into a potion of great potency. If this potion is ingested while the Spell is still active, the target can choose to forget an individual permanently."</Explanation>
 <Target>"Special"</Target>
 <Duration>"(BATTR_WP) Rounds"</Duration>
@@ -16907,7 +16909,7 @@ If your opponent has a weapon with the Impaler Perk and rolls a Critical, your a
 <TypSpell>"Domain Magic"</TypSpell>
 </Sort>
 <Sort id="RULES-COLOR_69">
-<Description language="ENGLISH">"Paneacea"</Description>
+<Description language="ENGLISH">"Nostrum"</Description>
 <Explanation language="ENGLISH">"You cast a Spell on an already prepared decoction, giving it magical properties. If the latter is drunk while the Spell is active, the target is cured of a number of Wound Points equal to your Mental Strength Bonus, as well as of an illness. For each DR+2 you roll, you can cure an additional Disease."</Explanation>
 <Target>"Special"</Target>
 <Duration>"(BATTR_WP) Rounds"</Duration>
@@ -16917,7 +16919,7 @@ If your opponent has a weapon with the Impaler Perk and rolls a Critical, your a
 <TypSpell>"Domain Magic"</TypSpell>
 </Sort>
 <Sort id="RULES-COLOR_70">
-<Description language="ENGLISH">"Separate branches"</Description>
+<Description language="ENGLISH">"Part the Branches"</Description>
 <Explanation language="ENGLISH">"Your pupils dilate when the cast is complete, allowing you to see into the Spirit World. This allows you to perceive invisible creatures, spirits, demons as well as those marked as being impossible to spot."</Explanation>
 <Target>"You"</Target>
 <Duration>"(ATTR_WP) minutes"</Duration>

@@ -600,26 +600,64 @@ RESTE A FAIRE :
    (a verifier avant : qu'aucune fiche de personnage enregistree ne porte deja la forme avec
    espace, sinon la correction casserait ces fiches).
 
-2) A TRANCHER - CREW COMMANDER, DEPENDANCE ENTRE DEUX LIVRES.
-   Sea of Claws definit TROIS nouveaux talents p.63 : Chanty, Crew Commander, Master and
-   Commander. Deux seulement sont saisis, et la numerotation montre que le trou etait prevu :
-   SEAOF-T0182 (Chanty), [T0183 ABSENT], SEAOF-T0184 (Master and Commander).
-   Aujourd'hui, le niveau 3 du Ship's Gunner (Gunnery Captain) reference UPINA-T0173, le Crew
-   Commander de Up in Arms. Consequence : un joueur qui possede Sea of Claws mais PAS Up in Arms
-   a un niveau de carriere dont le talent ne se resout pas (libelle vide depuis le correctif
-   2.17 ; avant, c'etait pire).
-   C'est contraire au principe du chantier 2.13 - chaque livre doit posseder "ses" infos - mais
-   la duplication a un cout elle aussi : recensement fait sur les 17 livres, AUCUN talent n'est
-   aujourd'hui declare dans deux livres, et si les deux livres sont charges le joueur verrait
-   Crew Commander en double dans le catalogue.
-   Trois sorties possibles :
-     (a) declarer SEAOF-T0183 = Crew Commander (texte identique, le livre le reimprime p.63) et
-         faire pointer le Gunnery Captain dessus - conforme a 2.13, mais doublon a l'affichage ;
-     (b) laisser la reference croisee et l'assumer - il faut alors le dire quelque part, parce
-         que rien dans le programme ne signale un talent introuvable ;
-     (c) prevoir un mecanisme de "meme talent declare dans plusieurs livres" (dedoublonnage a
-         l'affichage sur le libelle) - le plus propre, le plus cher.
-   Signale le 23/08/2026, NON TRANCHE.
+2) (TRANCHE le 23/08/2026 par Nono) CREW COMMANDER et les dependances entre livres. La reference
+   croisee reste : le Ship's Gunner de Sea of Claws continue de pointer sur UPINA-T0173. Nono :
+   "il peut y avoir des interdependances multiples. Crew Commander necessite d'avoir le livre
+   correspondant. C'est un choix de l'editeur et il y en aura sans doute d'autres."
+   Donc SEAOF-T0183 ne sera PAS cree, et le trou dans la numerotation est normal.
+   Consequence a garder en tete : posseder un supplement ne suffit pas toujours, et RIEN dans le
+   programme ne signale un code qui ne se resout pas (libelle vide, silencieux).
+
+2bis) CARTE DES DEPENDANCES ENTRE SUPPLEMENTS, relevee le 23/08/2026 (hors RULES, requis partout).
+   A refaire apres chaque ajout de livre - c'est le meme genre d'audit que celui des sorts
+   inaccessibles, il trouve ce qui ne provoque aucune erreur.
+     DEATH  -> WINDS : 1 (Suffuse With (Ulgu))
+     ROUGH  -> WINDS : 1 (Suffuse With (Ulgu))
+     SEAOF  -> UPINA : 1 (Crew Commander)
+     UPINA  -> ARCH3 : 3 carrieres
+     UPINA  -> SALZE : 1 carriere
+     UPINA  -> SEAOF : 9 carrieres
+     UPINA  -> WINDS : 12 carrieres
+     RULES  -> GREEN : 5 ethnies      <-- a regarder, voir plus bas
+     RULES  -> NAGGA : 4 carrieres    <-- a regarder, voir plus bas
+   Les deux dernieres lignes vont a contre-sens du chantier 2.13 : ce sont les deux Rulebooks qui
+   referencent des livres de fan. Verifie, les cibles existent bien, donc ca fonctionne ; mais le
+   principe pose etait qu'ajouter un livre ne doit jamais demander de modifier BOOK_RULESBOOK.
+   A examiner : reste-t-il des entrees a deplacer vers Green iz Best et Lords of Naggaroth ?
+
+2ter) (CORRIGE le 23/08/2026) DIX-SEPT REFERENCES AVEC UN PREFIXE DE LIVRE FAUX. Trouvees en
+   verifiant que chaque dependance entre livres pointe bien sur quelque chose d'existant. Toutes
+   avaient un equivalent unique sous RULES-, aucune n'existait sous le prefixe ecrit, et les
+   commentaires XML poses a cote confirmaient mot pour mot le talent voulu.
+     BOOK_ROUGH_NIGHTS_AND_HARD_DAYS.Xml : WINDS-T0078 (Beneath Notice), WINDS-T0020 (Luck),
+        WINDS-T0073 (Mimic)                       -- WINDS-T0176_OMBRE sur la meme ligne etait
+                                                     correct et a ete conserve
+     BOOK_UP_IN_ARMS.Xml : WINDS-T0051 (Argumentative), WINDS-T0113 (Fisherman),
+        WINDS-T0074 (Coolheaded), WINDS-T0002 (Suave)
+     BOOK_WINDS_OF_MAGIC.Xml : WINDS-T0067 (Warrior Born), WINDS-T0159 (Very Resilient),
+        WINDS-T0127 (Lightning Reflexes), WINDS-T0158 (Very Strong),
+        WINDS-T0132_LARGER / WINDS-T0132_SMALLER (Fearless)
+     BOOK_LORDS_OF_NAGGAROTH.Xml : NAGGA-COMPCOMB_BASE (x4), NAGGA-COMPPROJ_ARB (x4),
+        NAGGA-COMPCOMB_2M, NAGGA-COMPCOMB_PARAD -- competences d'armes du Rulebook portees par
+        les armes du livre, donc ces armes n'avaient AUCUNE competence associee.
+   Cause probable, visible dans deux cas sur quatre : une ligne voisine utilisait legitimement un
+   code du supplement (WINDS-T0176_OMBRE) et le prefixe a ete recopie sur toute la ligne.
+   Controle final sur les 17 livres : plus AUCUNE reference prefixee ne pointe dans le vide.
+
+2quater) L'AUDIT A GARDER. Ces defauts ne provoquent aucune erreur : le libelle reste vide, c'est
+   tout. Deux audits a relancer apres chaque ajout de livre, ils se font en quelques secondes :
+     (a) atteignabilite des sorts : croiser les <Talent> cites par les <Sort> avec les talents
+         portant <Magic>/<SpellMode> (a trouve la Magie du Chaos, CONTEXT.md 2.18) ;
+     (b) references pendantes : tout code prefixe cite dans un <Talent>/<Skill>/<Career>/<Sort>/
+         <Weapon> doit exister, en tenant compte des generiques _* et des listes separees par
+         ',' ou '/' (a trouve ces 17 references).
+   PIEGE DE COMPTAGE, signale par Nono le 23/08/2026 : ces audits parcourent les 17 FICHIERS, or
+   le Rulebook existe en DEUX fichiers (anglais et francais) qui portent les MEMES ids. Compter
+   les occurrences donne donc 683 sorts la ou le programme, qui ne charge qu'une langue, en
+   affiche 469 - et c'est 469 qui est juste (683 - les 214 sorts du Rulebook comptes deux fois).
+   Il faut compter les ids DISTINCTS, ou exclure le fichier _FRANCAIS. Le meme piege vaut pour
+   les talents, competences et carrieres. Repartition reelle des 469 sorts : Rulebook 214,
+   Winds of Magic 200, Sea of Claws 21, Archives III 18, Up in Arms 9, Archives II 7.
 
 HORS MODELE, a ne pas chercher a saisir : les quatre tables d'armes du livre sont TOUTES de
 l'artillerie (pieces d'artillerie p.100 et p.157, munitions d'artillerie p.44 et p.100) - meme
@@ -627,3 +665,715 @@ decision que pour Up in Arms, l'artillerie n'a pas sa place dans une fiche de pe
 pour les bateaux et leurs ameliorations (ch. XII), le bestiaire marin (ch. XVI), et les regles
 de MJ : navigation, meteo, collisions, tests d'equipage, moral, voyages prolonges, commerce.
 Le livre n'a AUCUNE arme ni armure personnelle.
+
+
+-------------------------
+INVENTAIRE DE ARCHIVES I / II / III ET WINDS OF MAGIC (23/08/2026)
+-------------------------
+Meme methode que pour Up in Arms et Sea of Claws.
+
+=== ARCHIVES OF THE EMPIRE I (96 pages) ===
+COMPLET : les 4 carrieres (Ghost Strider, Fieldwarden, Karak Ranger, Badger Rider), les 14 armes
+des 5 tables, les 2 qualites (Ablaze, Fertile earth).
+(FAIT le 23/08/2026) Les 4 munitions sont saisies en ARCH1-MUNI_01 a _04 :
+   Table "Dwarf Ammunition" p.93 : Drakefire Shot (12) 4/- 0 Rare, As weapon, +2, Damaging
+                                   Precision Shot and Powder 3d 0 Common, As weapon, +1,
+                                     Impale/Penetrating/Precise
+   Table "Eonir Ammunition" p.93 : Starfire Shafts (12) 8/- 0 Exotic, +50, -, Accurate/Impale*
+                                   Swiftshiver Shafts (12) 6/- 0 Common, As weapon, +1,
+                                     Blast 1**/Penetrating
+   (* Ablaze sur critique. ** consommer une fleche par cible touchee par le Blast.)
+   Le doublon "Precision Shot and Powder" (aussi imprimee dans Up in Arms p.102, saisie en
+   UPINA-MUNI_07) a ete CONSERVE, et c'est conforme a la convention deja en place : 29 armes sont
+   deja declarees a la fois dans le Rulebook et dans Up in Arms, chaque livre portant sa version.
+   Ce n'est d'ailleurs pas un doublon exact - les deux livres ne donnent pas le meme prix, 3d dans
+   Archives I et 3/- dans Up in Arms, ce qui justifie a soi seul de garder les deux.
+   Deux points d'interpretation, signales : "Accurate" des tables a ete rendu par la qualite
+   Precise (WEAPB16), comme pour l'Elf Arrow du Rulebook ; et la note de bas de tableau des
+   Starfire Shafts ("on any critical hit, also inflict an Ablaze condition") a ete rendue par
+   ARCH1-WEAPB35 (Ablaze), la qualite que Nono avait creee dans ce meme livre pour le Drakefire
+   Pistol, plutot que laissee en note libre.
+
+=== ARCHIVES OF THE EMPIRE II (95 pages) - les Ogres ===
+COMPLET : les 3 carrieres, les 6 talents (Large + Vice x5), la race et l'ethnie Ogre, les 7 sorts
+du Domaine de la Grande Gueule, les 10 armes, la seule armure du livre (Ogre Gutplate - verifie,
+la table "Ogre Armour" p.29 ne contient qu'une ligne).
+RESTE : rien de substantiel. Une COQUILLE DE SAISIE : l'arme "Tronfist" doit se lire "Ironfist"
+(confusion I/T a la lecture du PDF).
+
+=== ARCHIVES OF THE EMPIRE III (95 pages) ===
+COMPLET : les 3 carrieres de pretres (Handrich, Solkan, Rhya), les 20 armures du chapitre
+"Suits of Steel", les 4 qualites d'armure.
+RESTE - C'EST LE GROS MORCEAU : le livre n'a AUCUN bloc DATA_SPELL, alors qu'il contient environ
+32 sorts. Les trois carrieres de pretres sont donc saisies SANS LEURS PRIERES.
+   (FAIT le 23/08/2026) Les 18 miracles sont saisis, dans un bloc DATA_SPELL cree pour l'occasion
+   (le livre n'en avait aucun) : ARCH3-MIRAC_HANDRICH_01 a _06, ARCH3-MIRAC_SOLKAN_01 a _06, et
+   ARCH3-MIRAC_RHYA_07 a _12 (la numerotation Rhya reprend a 07, les 06 premiers etant dans le
+   Rulebook ; Handrich et Solkan n'en avaient AUCUN, ils repartent donc de 01).
+       Handrich p.47 : Supply and Demand, Trickle Down, A Deal's a Deal, Twist of Fortune,
+           Carry My Burdens, Shake On It
+       Solkan p.55   : Light of Stasis, Still the Winds, Absolute Purity, Fist of Vengeance,
+           Flaming Blade, Fury of the Righteous Sun
+       Rhya p.74     : Rhya's Dominion, Rhya's Flock, Rhya's Abundance, Rhya's Demand,
+           Rhya's Taming, Rhya's Rage
+   "FROZEN ASSETS" et "CARRY ON KISSING", que la premiere extraction avait pris pour des noms de
+   miracles, sont en fait des titres d'encadres d'aventure - ecartes apres relecture page par page
+   en ordre de lecture. Les listes de Benedictions des deux cultes (Charisma/Fortune/... pour
+   Handrich, Battle/Conscience/... pour Solkan) ne sont PAS de nouvelles donnees : elles designent
+   des benedictions generiques deja presentes dans le Rulebook.
+   RESTE de ce livre : les 15 sorts du Domaine de Hedgecraft (voir ci-dessous).
+   The Lore of Hedgecraft p.62+ (15 sorts avec CN) : Dagger of the Art, Fellstave, Nepenthe,
+       Invigorate, Nostrum, Lovelock, Part the Branches, Mirkride, Protection Pouch,
+       Protective Charm, Sightstep, Silvertide, The Ousting, ...
+   BONNE NOUVELLE pour les miracles : RULES-T0012_HANDRICH / _SOLKAN / _RHYA et RULES-T0080_HANDRICH
+   / _SOLKAN / _RHYA existent DEJA. Les 17 miracles se rattachent sans creer aucun talent, donc
+   sans une ligne de Pascal (meme cas que la Magie du Chaos, CONTEXT.md 2.18).
+   HEDGECRAFT - QUESTION RESOLUE le 23/08/2026, verifiee dans le Rulebook lui-meme (meilleure
+   source que le web, qui ne donnait rien d'exploitable). Nono avait raison sur le fond : c'est
+   bien un Domaine a part, PAS un Domaine des huit Colleges. Mais il EXISTE DEJA dans les donnees.
+     * Rulebook p.254 : "The Lore of Hedgecraft", une douzaine de sorts (Shadowstep, Shroud of
+       Invisibility, Goodwill, Mirkride, Nepenthe, Nostrum, Creeping Menace, Protective Charm,
+       Curse of Crippling Pain, Blight, Curse of Ill-Fortune, The Evil Eye...).
+     * Talent d'acces : "Arcane Magic (Hedgecraft)", porte par la carriere Hedge Witch (Brass 2,
+       Rulebook) - qui dans les donnees est RULES-WORK59 et possede bien RULES-T0088_MAGIE.
+     * RULES-T0088_MAGIE est donc LA Hedgecraft. Son libelle actuel, "Arcane Lore (village
+       magic)", est une approximation qui a masque la correspondance : le renommer en
+       "Arcane Lore (Hedgecraft)" eviterait de reposer la question dans six mois.
+   Donc : AUCUN talent a creer. Les 15 sorts de Archives III se rattachent a RULES-T0088_MAGIE.
+   MAIS dedoublonner avant de saisir : les 6 sorts deja presents sous ce talent dans le Rulebook
+   (Good Will, Protective Charm, Ride the Darkness, Nepenthes, Paneacea, Separate branches)
+   recouvrent en partie la liste d'Archives III (Protective Charm, Nepenthe, Part the Branches,
+   Mirkride...). Les libelles anglais saisis semblent etre des retraductions approximatives, il
+   faut comparer sur le SENS et pas sur la chaine.
+   A noter aussi : le Rulebook lui-meme n'a que 6 des ~12 sorts de Hedgecraft de la p.254.
+
+=== WINDS OF MAGIC (222 pages) ===
+COMPLET, et remarquablement : les 15 carrieres (les 8 des Colleges + Beadle, Mundane Alchemist,
+Magister Vigilant, Scryer + les 3 familiers), les 11 talents (Suffuse With x10 + Magical
+Assistant), les 3 familiers en race/ethnie, les 2 competences (Psychometry, Augury), et les
+200 sorts : 8 Domaines x 24 sorts + 8 sorts generiques. La symetrie 8x24 confirme qu'il n'en
+manque aucun.
+RESTE : environ 20 RITUELS (chapitre "Ritual Magic", p.27-33), aucun saisi. Ils ont un CN, une
+portee, une cible et une duree comme des sorts : Bind Monstrous Beast, Bind Spirit Within Power
+Stone, Carve Ogham Stone, Create Power Stone, Conjuration of the Bloody Hidesman, Conjuration of
+the Incarnate Elemental of Death, Conjuration of Jack O' Cinders, Corrupt Waystone, Create
+Construct, Create Familiar, Cursecraft, Invocate Daemon, Materialise the Living Swamp,
+Remove Curse, ...
+   A TRANCHER : un rituel n'est pas un sort ordinaire (ingredients, duree longue, competences
+   annexes). Faut-il un TypSpell "Ritual" a cote de Miracle/Blessing/Arcane/Domain/Minor/Chaos,
+   et quel talent y donne acces ? Question de conception, pas de saisie.
+HORS MODELE : le chapitre XII "Magical Artefacts" (robes de sorcier, parchemins, potions,
+grimoires) - le programme n'a pas de notion d'objet magique, seulement armes et armures. Meme
+decision que "A Soldier's Burden" de Up in Arms. Idem pour les regles de MJ : incantation revisee,
+endeavours, transformations.
+
+
+-------------------------
+BUG TROUVE LE 23/08/2026 - 24 SORTS DE WINDS OF MAGIC RATTACHES AU MAUVAIS DOMAINE
+-------------------------
+Trouve en cherchant le talent porteur de la Hedgecraft. RULES-T0088_MAGIE est utilise pour DEUX
+domaines differents selon le livre :
+  * dans BOOK_RULESBOOK : Good Will, Protective Charm, Ride the Darkness, Nepenthes, Paneacea,
+    Separate branches -> ce sont bien des sorts de HEDGECRAFT (Rulebook p.254). Correct.
+  * dans BOOK_WINDS_OF_MAGIC : 24 sorts qui sont TOUS du Domaine du Metal (Chamon) - Armour of
+    Tin, Crucible of Chamon, Curse of Rust, Enchant Weapon, Fool's Gold, Feather of Lead, Forge
+    of Chamon, Golden Touch, Transmutation of Chamon, Meteoric Ironclad... -> ils devraient
+    porter RULES-T0088_METAL.
+Preuve supplementaire : Winds of Magic couvre les 8 Colleges, et la repartition de ses 200 sorts
+donne 8 groupes de 24 - mais le groupe METAL est absent et le groupe MAGIE fait 24. Le Rulebook,
+lui, a bien 8 sorts sous RULES-T0088_METAL (Enchanted Weapon, Chamon's Crucible, Steel Scale,
+Chamon's Forge, Fool's Gold, Shifting Metal, Lead Feather, Transmute Chamon).
+CONSEQUENCE CONCRETE : une sorciere de village se voit proposer 24 sorts de Chamon, et un mage
+du Metal ne voit pas son propre domaine.
+CORRIGE le 23/08/2026 : les 24 <Talent> de BOOK_WINDS_OF_MAGIC.Xml passes a RULES-T0088_METAL,
+et eux seuls (verifie avant : les 24 occurrences etaient toutes dans une balise <Talent> de sort,
+aucune ailleurs). Apres correction, la repartition des 200 sorts de Winds of Magic est enfin
+symetrique - 8 Domaines x 24 (Bete, Cieux, Feu, Lumiere, Metal, Mort, Ombre, Vie) + 8 generiques -
+et RULES-T0088_MAGIE ne porte plus que les 6 sorts de Hedgecraft du Rulebook.
+Audit d'atteignabilite refait : 0 sort inaccessible sur 665.
+
+RESTE (petit) : renommer le libelle de RULES-T0088_MAGIE, "Arcane Lore (village magic)" ->
+"Arcane Lore (Hedgecraft)", dans les deux Rulebooks. C'est ce libelle approximatif qui avait
+masque le fait que la Hedgecraft existait deja. Non fait, pas demande.
+
+
+-------------------------
+INVENTAIRE DE MIDDENHEIM - CITY OF THE WHITE WOLF (23/08/2026)
+-------------------------
+160 pages, mais tres peu de contenu que le programme modelise : c'est un guide de ville. Tout le
+gazetteer (quartiers, PNJ, cultes noirs, Bas Rois), le bestiaire (Bloody Hidesman, Child of Ulric,
+Spectre, White Wolves), Middenball et l'appendice "evenements futurs" sont hors modele.
+
+COMPLET, verifie ligne a ligne contre le livre :
+  * les 3 ethnies (Middenheimer, Middenlander, Nordlander) - les 12 competences de chacune
+    correspondent exactement a la liste du livre p.151-153, et les talents aussi, y compris la
+    forme des choix : Middenheimer "Doomed + (Etiquette ou Strong Back) + 3 aleatoires",
+    Middenlander "(Doomed ou aleatoire) + (Menacing ou Warrior Born) + 3 aleatoires",
+    Nordlander "(Doomed ou aleatoire) + (Fisherman ou Rover) + (Stout-hearted ou Very Resilient)
+    + 2 aleatoires". Rien a corriger.
+  * la carriere Wolf Kin (MIDDE-WORK107) : les 4 niveaux (Survivor, Wolf Club, Wolf Kin,
+    Wolf Brother), les 20 competences reparties 10/5/3/2 sur les niveaux, les 16 talents
+    reparties 4/4/4/4, et l'equipement. Exact.
+
+RESTE A FAIRE - LA TABLE DE TIRAGE DES CARRIERES (p.148-149), aucun bloc DATA_CAREER_ROLL dans le
+fichier. Consequence : les trois ethnies de Middenheim utilisent aujourd'hui la table Humaine de
+base au lieu de la leur.
+  64 carrieres x 3 colonnes (Middenheimer / Middenlander / Nordlander), des Academics aux Warriors,
+  Wolf Kin inclus (66-68 / 59-60 / 57-58). Slayer est a "-" dans les trois colonnes.
+  VERIFIE AVANT SAISIE : les trois colonnes couvrent 01-100 exactement une fois, sans trou ni
+  chevauchement. Pas de coquille de livre cette fois - c'est la premiere table de tirage propre
+  depuis qu'on fait ce controle.
+  La table est COMPLETE (01-100), donc elle se branche comme celle de Lustria, en remplacement
+  total, et non comme la table partielle de Seafarer.
+
+FAUSSE ALERTE, levee par Nono le 23/08/2026 : j'avais signale la "NEW RULE: BROADER CAREERS"
+(p.149 - une carriere peut proposer PLUS DE 8 competences au premier niveau, Wolf Kin en propose
+10) comme un risque pour les fondations. Il n'y en a pas. WinCreation propose autant de
+competences que le metier en contient ; le 8 n'est pas un plafond d'affichage mais le seuil du
+test d'ELIGIBILITE AU CHANGEMENT DE NIVEAU : il faut 8 competences de metier ayant atteint
+niveau x 5 en augmentation (avec, en parallele, le test sur les attributs et celui sur les
+talents). C'est mot pour mot ce que decrit la regle du livre - elle etait deja respectee.
+
+
+-------------------------
+CONCEPTION OUVERTE (23/08/2026) - "TABLE DE BASE D'UNE ETHNIE" vs "REGLE OPTIONNELLE"
+-------------------------
+Question posee par Nono en voyant la table de Middenheim : "est-ce que chaque race / ethnie n'a
+pas une table de base ? pour les Reiklander c'est celle du RULEBOOK, mais pour les autres ethnies
+elle depend de leur livre d'origine". Verification faite dans les livres : IL A RAISON, et il
+manque DEUX tables de base, pas une.
+
+CE QUI EXISTE AUJOURD'HUI (une seule notion, "regle optionnelle choisie a la creation") :
+  * la table du Rulebook p.30-31, implicite, par RACE (Humain/Nain/Halfling/HElfe/Elfe Sylvain) -
+    c'est de fait la table des Reiklanders, et le repli de toute ethnie qui n'a pas la sienne ;
+  * LUSTR-RULE_LUSTRIA, 325 entrees, 8 cibles ;
+  * SEAOF-RULE_SEAFARER, 31 entrees, PARTIELLE.
+
+CE QUI MANQUE, verifie dans les PDF :
+  * "NORSE CLASS AND CAREER TABLE", Sea of Claws p.56 : une colonne d100 pour les trois ethnies
+    Norses. NON SAISIE - le DATA_CAREER_ROLL de Sea of Claws ne contient que le Seafarer.
+  * la table de Middenheim p.148-149 : 3 colonnes, 64 carrieres. NON SAISIE.
+
+CE QUE LA VERIFICATION MONTRE - TROIS NATURES DIFFERENTES sous un seul mecanisme :
+  1. TABLE DE BASE D'UNE ETHNIE - s'applique a cause de QUI ON EST (Norse, Middenheim, et la
+     colonne Skink de Lustria pour les lezards, dont Lustria est le livre d'origine).
+  2. REGLE DE CAMPAGNE - s'applique a cause d'OU L'ON JOUE. Lustria le dit noir sur blanc p.192 :
+     "for a game set in Lustria... GMs may rule that for campaigns that begin with Characters as
+     new or unprepared arrivals, the usual Class and Career Table is more appropriate."
+  3. VARIANTE DE CLASSE - le Seafarer, qui ne remplace qu'une section (Riverfolk) et qui est la
+     seule regle PARTIELLE.
+
+PROPOSITION DE NONO : garder un seul mecanisme, afficher toutes les regles sur la page des
+metiers, mais PRESELECTIONNER par defaut celle qui vient du livre d'origine de l'ethnie. Ca ne
+cree aucun concept nouveau, juste un defaut de selection.
+
+SOLUTION RETENUE PAR NONO : "dans les races, on ajoute la regle de base" - c'est-a-dire un champ
+sur l'ETHNIE qui nomme sa regle. Meme principe que <Magic>/<SpellMode> du chantier 2.18 : la
+propriete va sur la donnee, pas dans le code.
+
+CONTRECOUT MESURE AVANT DE CODER (23/08/2026), il est faible :
+  1. DONNEES : une balise, par exemple <CareerRule>, sur les <Specie> qui ont leur propre table -
+     les 3 de Middenheim, les 3 Norses, les 2 Skinks. Les ethnies du Rulebook n'en portent pas et
+     retombent sur la table par defaut. Meme travail que <Skill5>/<Skill3> du chantier 2.15 :
+     une constante, la lecture/RAZ/export dans xmlexportimport.pas.
+  2. STRUCTURE : un champ RegleBase: String sur StructureRace (chargerace.pas), a cote de
+     NbPoint3/NbPoint5 ajoutes la veille.
+  3. CODE : UN SEUL point d'insertion. ChargeComboRegle() (wincreation.pas ~1962) n'est appelee
+     QU'UNE FOIS, a la creation de la fiche (ligne 365), avant tout choix d'ethnie, et fait
+     ItemIndex := 0. Le bon moment est ligne ~1006, dans PhaseSave, la branche qui ENTRE dans la
+     phase des metiers : l'ethnie y est connue et ChargeTabMetier() y est deja appelee. Il suffit
+     d'y positionner ComboBoxRegle.ItemIndex sur la regle de l'ethnie si elle est presente dans
+     ListRegle, sinon 0.
+  RIEN d'autre a toucher : RegleEnCours() traduit deja index -> code, et ComboBoxRegleSelect
+  rappelle deja ChargeTabMetier - donc "toutes les regles affichees, une preselectionnee" vient
+  gratuitement, et le joueur peut toujours en choisir une autre. La navigation etant a sens
+  unique (chantier 2.14), la phase des metiers n'est entree qu'une fois : pas de question de
+  memorisation d'un changement manuel.
+  Repli naturel : si le livre de l'ethnie n'est pas charge, sa regle n'est pas dans ListRegle,
+  donc index 0, donc table par defaut.
+
+RESTE OUVERT, mais ne bloque pas : le cumul d'une regle PARTIELLE (le Seafarer est la seule) avec
+la table de base. Aujourd'hui une seule regle a la fois. Le mecanisme distingue deja partiel et
+complet, deduit de la couverture (ChargeTabMetier, 21/08), donc on pourra dire plus tard qu'une
+regle complete remplace et qu'une partielle se cumule - sans rien casser de ce qui precede.
+
+
+-------------------------
+COQUILLES DE SAISIE TROUVEES DANS BOOK_RULESBOOK (23/08/2026) - libelles anglais de carrieres
+-------------------------
+Trouvees en mappant la table de Middenheim : quatre de ses carrieres ne correspondaient a aucun
+libelle connu. Ce ne sont pas des carrieres manquantes, ce sont des fautes de frappe dans les
+libelles ANGLAIS du Rulebook. Le mapping de la table a ete fait avec les bons codes, mais les
+libelles restent a corriger :
+    RULES-WORK21  "Inverstigator"  ->  "Investigator"
+    RULES-WORK05  "Bailif"         ->  "Bailiff"
+    RULES-WORK17  "Stevedor"       ->  "Stevedore"
+    RULES-WORK22  "Bawl"           ->  "Bawd"
+A verifier avant correction : les libelles FRANCAIS correspondants dans
+BOOK_RULESBOOK_FRANCAIS.Xml, qui peuvent avoir le meme genre de faute.
+NON CORRIGE - ce sont des libelles affiches a l'ecran, pas des codes, donc aucun risque
+fonctionnel, mais "Bawl" au lieu de "Bawd" se voit dans la liste des carrieres.
+
+
+-------------------------
+CORRECTION MAJEURE DU 23/08/2026 - LA "TABLE DE BASE PAR ETHNIE" EXISTE DEJA
+-------------------------
+Nono avait raison, et plus qu'il ne le pensait : sa question "est-ce que chaque race/ethnie n'a
+pas une table de base ?" decrit le modele DEJA EN PLACE. Verifie sur les 25 ethnies.
+
+  * La table de tirage de base est portee par l'ETHNIE elle-meme, dans le SUBCHAPTER_CAREER de
+    son <Specie>. Les 25 ethnies en ont une (sauf NAGGA-RACE_DELF, 0 entree - a verifier), et
+    toutes celles controlees couvrent 01-100 exactement une fois.
+  * Un DATA_CAREER_ROLL n'est donc PAS une table de base : c'est une SURCHARGE optionnelle. Il
+    n'y en a que deux, et les deux sont bien de cette nature - la table lustrienne (regle de
+    campagne) et le Seafarer (variante de classe, partielle).
+  * Consequence : RIEN A CODER. Pas de balise <CareerRule> sur l'ethnie, pas de preselection,
+    pas de champ RegleBase. Le combo a index 0 = "table de base de l'ethnie" est deja le bon
+    comportement par defaut.
+
+MON ERREUR, annulee : j'avais conclu de l'absence de DATA_CAREER_ROLL dans Sea of Claws et
+Middenheim que leurs tables manquaient, et je les ai saisies (93 + 183 entrees). C'etaient des
+DOUBLONS des tables deja presentes dans les <Specie>. Les deux ajouts ont ete retires, les
+fichiers sont revenus a leur etat anterieur (Sea of Claws : 31 entrees de DATA_CAREER_ROLL, le
+seul Seafarer ; Middenheim : plus de bloc DATA_RULE ni DATA_CAREER_ROLL).
+LECON : avant de conclure qu'une donnee manque, chercher OU le modele la range - ici, un
+inventaire "quels blocs DATA_ le livre possede-t-il" ne suffisait pas, il fallait regarder
+dedans les <Specie>.
+
+CE QUE LA COMPARAISON A QUAND MEME TROUVE (le seul benefice de ce detour) :
+
+1) MIDDENHEIM - Wolf Kin est place a la FIN des trois colonnes au lieu de sa position imprimee.
+     saisi   : HMIDH 98-100, HMIDL 99-100, HNORD 99-100
+     livre   : HMIDH 66-68,  HMIDL 59-60,  HNORD 57-58
+   Toutes les carrieres situees apres sont decalees vers le bas pour compenser. Les LARGEURS de
+   fourchette sont conservees, donc les PROBABILITES sont identiques et le tirage reste juste :
+   c'est un ecart de fidelite a l'imprime, pas un bug fonctionnel. Un joueur qui tire 67 et
+   verifie dans son livre ne trouvera pas la meme carriere. Cause probable : Wolf Kin a ete
+   creee apres la saisie de la table et ajoutee a la fin.
+   CORRIGE : les trois blocs SUBCHAPTER_CAREER reecrits a l'identique de l'imprime, dans l'ordre
+   du livre, avec un commentaire de nom sur chaque ligne. Controle apres reecriture : les trois
+   colonnes couvrent 01-100 sans doublon, et Wolf Kin est bien a 66-68 / 59-60 / 57-58.
+   L'ensemble des carrieres est inchange (57 / 63 / 63), seules les fourchettes bougent.
+
+2) NORSE - l'orphelin du 07 (Agitator 05-06 puis Artisan 08-10, coquille du livre p.57 verifiee
+   a l'image) avait ete tranche en donnant le 07 a ARTISAN (07-10). La regle posee par Nono le
+   23/08/2026 - "on ajoute a celui qui en a le moins, a egalite au premier" - donne l'inverse :
+   Agitator (2 valeurs) plutot qu'Artisan (3), donc Agitator 05-07 et Artisan 08-10.
+   CORRIGE, Nono ayant demande de retroactiver : Agitator passe a 05-07 et Artisan a 08-10,
+   dans les trois ethnies Norses. Les trois colonnes couvrent toujours 01-100.
+
+
+-------------------------
+ARCHIVES III - HEDGECRAFT : FAIT le 23/08/2026
+-------------------------
+Les 15 sorts du Domaine de Hedgecraft du livre (p.62-64) ont ete depouilles : SIX sont une
+REIMPRESSION du Rulebook p.254 et existaient deja, NEUF sont nouveaux et ont ete saisis en
+ARCH3-COLOR_290 a _298, rattaches a RULES-T0088_MAGIE, TypSpell "Domain Magic".
+  Deja presents (non recopies) : Goodwill, Nepenthe, Nostrum, Part the Branches, Mirkride,
+     Protective Charm.
+  Ajoutes : Dagger of the Art (CN 4), Fellstave (9), Invigorate (2), Lovelock (10),
+     Protection Pouch (5), Sightstep (7), Silvertide (4), The Ousting (8), Wyrd Ward (4).
+Le Domaine compte donc 15 sorts au total, ce qui est exactement la liste du livre.
+
+Verifie au passage : le Rulebook n'etait PAS incomplet. Sa section "Witch Magic" p.254 annonce
+"two lists of six spells" - six pour Hedgecraft, six pour Witchcraft (RULES-T0088_SORCEL). Les 6
+de Nono etaient donc les 6 attendus. Ma remarque precedente sur "6 sur ~12" etait fausse, elle
+venait d'une extraction qui melangeait les deux listes.
+
+RESTE (cosmetique) : les libelles anglais des 6 du Rulebook sont des retraductions approximatives
+et ne correspondent pas aux noms imprimes, ce qui rend le domaine incoherent maintenant que les 9
+autres portent les noms exacts :
+     RULES-COLOR_65  "Good Will"          ->  "Goodwill"
+     RULES-COLOR_67  "Ride the Darkness"  ->  "Mirkride"
+     RULES-COLOR_68  "Nepenthes"          ->  "Nepenthe"
+     RULES-COLOR_69  "Paneacea"           ->  "Nostrum"
+     RULES-COLOR_70  "Separate branches"  ->  "Part the Branches"
+   (RULES-COLOR_66 "Protective Charm" est deja correct.)
+   A verifier en meme temps : les libelles FRANCAIS correspondants. NON CORRIGE.
+
+
+-------------------------
+AUDIT DEMANDE PAR NONO (23/08/2026) - MUNITIONS OUBLIEES DANS L'EQUIPEMENT DES METIERS
+-------------------------
+Question : "dans les fiches de metiers, est-ce que je n'ai pas oublie d'ajouter les munitions en
+meme temps que les armes a distance ?" Reponse : oui, HUIT cas, sur les 16 metiers qui portent une
+arme a distance sans munition. Les 8 autres sont FIDELES au livre, qui ne donne pas de munition.
+
+METHODE : croiser, pour chaque metier de chaque livre, les <Item name=...> pointant sur une arme
+PROJ_ avec ceux pointant sur une munition MUNI_, puis verifier CHAQUE cas contre le texte imprime
+des Trappings. Les armes de jet (PROJ_LANC) sont exclues, elles n'ont pas de munition.
+Un premier passage ne regardait que les CODES et ratait les equipements en TEXTE LIBRE - c'est le
+Coachman qui l'a revele. Un second passage a cherche les mots bow/crossbow/pistol/sling/arrow/
+bolt/ammunition/shot/handgun/blunderbuss/quiver/powder dans les libellés libres : 3 cas.
+
+(TOUT CORRIGE le 23/08/2026) Le livre donnait la munition, la donnee non :
+  RULES-WORK13  Coachman        niv 2  "Blunderbuss with 10 Shots"
+       CAS PARTICULIER : l'arme ELLE-MEME est en texte libre ("blunderbuss with ten ammunition"),
+       donc ni l'arme ni la munition ne sont liees. A remplacer par RULES-PROJ_POUDRE_03 (Blunderbuss)
+       + RULES-MUNI_06 (Bullet and Powder).
+  RULES-WORK32  Warden          niv 2  "Hand Weapon or Bow with 10 arrows"   -> + RULES-MUNI_02
+  UPINA-WORK65  Archer          niv 1  "Quiver and 10 Arrows, Bow"
+       la munition est presente mais en TEXTE LIBRE ("Quiver and 10 Arrows") -> a coder RULES-MUNI_02
+  UPINA-WORK76  Light Cavalry   niv 4  "Brace of Pistols with Gunpowder and Ammunition" -> + MUNI poudre
+  UPINA-WORK77  Siege Specialist niv 1 "Crossbow and Ammunition"             -> + RULES-MUNI_01
+  SEAOF-WORK116 Wrecker         niv 3  "Crossbow with 10 Bolts" (niveau Pirate) -> + RULES-MUNI_01
+  SEAOF-WORK118 Priest of Stromfels niv 4 "Pistol with 10 Shots" (niveau Priest Captain) -> + MUNI poudre
+  WINDS-WORK80  Beadle          niv 2  "Pistol or Blunderbuss with 12 shots" -> + MUNI poudre
+
+CONFORMES, ne rien changer - le livre ne donne PAS de munition a ces niveaux :
+  RULES-WORK13 Coachman niv 3 (Pistol seul), RULES-WORK26 Flagellant (Sling),
+  RULES-WORK54 Witch Hunter (Crossbow Pistol or Pistol), UPINA-WORK68 Handgunner (Handgun),
+  ARCH1-WORK98 Badger Rider (Sling), ARCH2-WORK92 Maneater (Ogre Pistol).
+
+NON VERIFIABLES faute de PDF (livres pas encore deposes) :
+  NAGGA-WORK119 Black Ark Corsair (Repeater Handbow), NAGGA-WORK121 Beastmaster (Ravager Harpoon),
+  HORNE-WORK117 Ironbreaker (Cinderblast Bomb - consommable, sans doute sans munition).
+
+A NOTER : la valeur d'un <Item name=...> est le NIVEAU de carriere, pas une quantite. On ne peut
+donc pas ecrire "10 fleches" ; on pose la munition au bon niveau, et la taille du lot vient de la
+balise <Ammunition> de la munition elle-meme.
+
+CORRECTION FAITE : les 8 metiers ont recu leur munition (MUNI_01 Bolt, MUNI_02 Arrow ou MUNI_06
+Bullet and Powder selon l'arme), chacune au niveau ou le livre la donne. Le Coachman a aussi
+recupere son arme, qui etait en texte libre dans les DEUX fichiers de langue - le francais portait
+le meme libelle anglais non traduit. Verifie par Nono dans WinMetier sur le cocher.
+Audit relance apres correction : il ne reste que les 8 metiers CONFORMES ou non verifiables.
+
+RESERVE sur RULES-WORK32 (Warden) : le livre ecrit "Hand Weapon OR Bow with 10 arrows". Les
+fleches n'ont donc de sens que si l'arc est choisi, mais le modele ne sait pas conditionner un
+objet a une branche d'alternative - le Warden qui prend l'arme de melee recevra quand meme les
+fleches. Ecart mineur et assume, signale ici pour ne pas le redecouvrir.
+
+
+-------------------------
+LE CAS "MUNITION LIEE A UNE SEULE BRANCHE D'UN CHOIX" - RECHERCHE ELARGIE (23/08/2026)
+-------------------------
+Question de Nono : est-ce que le cas du Warden se reproduit ailleurs ? Reponse : NON, c'est le
+seul metier joueur concerne.
+
+Le mecanisme de CHOIX existe et est complet : <Item name="A/B"> avec SeparateurMulti, la ligne
+s'affiche "au choix" (ConstArbreAuChoix, LAB_010), un double-clic ouvre WinSpecialisation
+(wincreation.pas 1408) et ChoixNonFait() bloque le passage a l'etape suivante tant qu'un choix
+n'est pas fait. Ce qui n'existe pas, c'est la possibilite d'ATTACHER un objet dependant a UNE
+branche : on ne peut pas ecrire "arme de melee OU (arc + fleches)".
+
+Mesure : 33 equipements a choix dans toute la base, dont 4 avec une arme a distance dans une
+branche - Warden (arme simple ou arc), Maneater (2 mains ou Ogre Pistol), Beadle (Pistol ou
+Blunderbuss), Witch Hunter (Crossbow Pistol ou Pistol). Sur ces 4, un seul pose probleme : les
+trois autres opposent deux armes a distance compatibles avec la meme munition, ou n'ont pas de
+munition dans le livre.
+
+Recherche dans les 9 PDF disponibles des Trappings combinant un "or" et une munition : 5 cas.
+Deux sont deja traites (Warden, Beadle), un est un faux positif (Duelliste : le choix porte sur
+deux armes de melee, le pistolet et sa munition sont inconditionnels), et les DEUX autres -
+"either a Halberd or a Crossbow and 10 Bolts" dans Up in Arms et Sea of Claws - sont des profils
+de PNJ (Hirelings, avec bloc de caracteristiques et Traits), donc hors modele.
+CONCLUSION : garder l'option 1 (le Warden recoit ses fleches meme s'il prend l'arme de melee).
+Ne pas construire de mecanisme pour un cas unique.
+
+TROUVE AU PASSAGE, CORRIGE le 23/08/2026 - erreur de saisie dans le Duelliste (RULES-WORK18),
+niveau 2 :
+   livre  : "Main Gauche or Sword-breaker"
+   saisi  : RULES-COMB_PARAD_02 / RULES-COMB_2M_01  =  main gauche / BASTARD SWORD
+   correct: RULES-COMB_PARAD_02 / RULES-COMB_PARAD_01  =  main gauche / SWORD BREAKER
+   Le Sword Breaker existe bien dans le Rulebook (RULES-COMB_PARAD_01), c'est la bonne arme de
+   parade ; le Bastard Sword est une arme a deux mains, qui n'a rien a faire la. Corrige dans les
+   deux fichiers de langue.
+   Ecarts mineurs du meme metier, NON traites car ce sont des approximations de modele et non des
+   erreurs : niveau 3, le livre donne "Quality Rapier, Hand Weapon, Trusty Second, 2 Wooden
+   Training Swords" la ou la donnee a arme simple + main gauche + 2 epees (pas d'objet "epee
+   d'entrainement en bois" dans la base) ; niveau 4, "2 Quality Weapons" rendu par une seule arme
+   de melee generique.
+
+
+-------------------------
+COQUILLES DE LIBELLE - FAIT le 23/08/2026, ET UNE DECOUVERTE BIEN PLUS LARGE
+-------------------------
+CORRIGE (10 libelles anglais) :
+  Domaine Hedgecraft, BOOK_RULESBOOK : Good Will -> Goodwill, Ride the Darkness -> Mirkride,
+     Nepenthes -> Nepenthe, Paneacea -> Nostrum, Separate branches -> Part the Branches.
+     Le domaine est desormais homogene avec les 9 sorts d'Archives III.
+  Noms de carriere, BOOK_RULESBOOK : Inverstigator -> Investigator, Bailif -> Bailiff,
+     Stevedor -> Stevedore, Bawl -> Bawd.
+  BOOK_ARCHIVES_OF_THE_EMPIRE_II : Tronfist -> Ironfist.
+  (Les fichiers FRANCAIS ne portent pas ces libelles anglais, sauf pour les carrieres - voir
+  ci-dessous.)
+
+DECOUVERTE A TRANCHER - LES NOMS DE NIVEAU DE CARRIERE EN ANGLAIS SONT DES RETRADUCTIONS.
+En comparant les niveaux saisis aux noms imprimes dans le Rulebook : sur 256 niveaux,
+170 NE FIGURENT PAS dans le livre. Ce ne sont pas des coquilles isolees, c'est un aller-retour
+francais -> anglais systematique. Exemples qui ne laissent aucun doute :
+     Stevedore niv 2 : "tank top"        (debardeur !)      livre : Stevedore
+     Bawd      niv 1 : "prostitute"                         livre : Hustler
+     Bawd      niv 3 : "Pimp"                               livre : Procurer
+     Miner     niv 2 : "Minor"           (mineur)           livre : Miner
+     Riverwoman niv 1: "alevin"                             livre : Grizzled Riverwoman(*)
+     Priest    niv 4 : "Drive"           (conduite ?)       livre : Lector
+     Scholar   niv 3 : "Searcher"        (chercheur)        livre : Fellow
+     Coachman  niv 2 : "Tick"                               livre : Coachman
+     Investigator niv 1 : "Bloodhound"                      livre : Sleuth
+     Bailiff   niv 1 : "Collector"                          livre : Tax Collector
+     Bailiff   niv 3 : "Prefect"                            livre : Reeve
+     Stevedore niv 1 : "Carrier"                            livre : Dockhand
+  (*) les correspondances exactes restent a etablir carriere par carriere.
+AUTRE CONSEQUENCE, vue au passage : dans BOOK_RULESBOOK_FRANCAIS, le NOM de carriere est bien
+traduit (Enqueteur, Bailli, Debardeur, Entremetteur) mais les NOMS DE NIVEAU sont restes en
+anglais - et en anglais FAUX, puisque ce sont ces memes retraductions.
+PORTEE : uniquement des libelles affiches, aucun impact fonctionnel. Mais un joueur anglophone
+voit "tank top" comme niveau de carriere.
+FAISABILITE : le livre imprime les 4 noms de niveau de chaque carriere, dans l'ordre, sous la
+forme "Nom — Brass/Silver/Gold N". Une passe scriptee peut donc reconstruire les 256 libelles
+anglais depuis le PDF. NON FAIT - a decider avec Nono, c'est une reecriture de masse.
+
+
+-------------------------
+NOMS DE NIVEAU DE CARRIERE : CORRIGES (23/08/2026), ET MESURE DU RESTE
+-------------------------
+CORRIGE : les 173 noms de niveau anglais de BOOK_RULESBOOK qui divergeaient du livre sont alignes
+sur l'imprime. 64 carrieres, 256 niveaux, zero ecart restant. Table de correspondance etablie et
+relue AVANT ecriture (methode validee par Nono), puis jetee - elle n'a pas ete deposee dans le
+projet pour ne pas creer un quatrieme fichier.
+CAUSE, expliquee par Nono : le programme a ete commence avec le livre FRANCAIS, et l'anglais a
+majoritairement ete obtenu par traduction automatique - sauf les NOMS de carriere et de
+competence, cherches a la main dans le livre anglais. D'ou des noms de carriere justes et des
+noms de NIVEAU en aller-retour ("tank top" pour debardeur, "Minor" pour mineur, "Tick" pour
+cocher...).
+
+RESTE 1 - LES LIBELLES DE COMPETENCE.
+   FAIT le 23/08/2026 - les dix coquilles franches sont corrigees dans BOOK_RULESBOOK :
+     RULES-COMPESCAM              "Sleight if Hand"         -> Sleight of Hand
+     RULES-COMPFOCAL_METAL        "Channellingl (Chamon)"   -> Channelling (Chamon)
+     RULES-COMPSAVOIR_*           "Lore (Anyl)"             -> Lore (Any)
+     RULES-COMPSAVOIR_LOCAL       "Lore (Loca)"             -> Lore (Local)
+     RULES-COMPSAVOIR_TILEA       "Savoir (Tilea)"          -> Lore (Tilea)
+     RULES-COMPDRESS_BADGERS      "Dressage (Badgers) "     -> Animal Training (Badgers)
+     RULES-COMPMETIER_GOLDSMITH   "trade (Goldsmight)"      -> Trade (Goldsmith)
+     RULES-COMPLANG_WEST          "Language (wastellander)" -> Language (Wastelander)
+     RULES-COMPLANG_HALF          "Language (halfling)"     -> Language (Halfling)
+     RULES-COMPSIGNES_TZEENTCH    "Lore (Tzeentch)"         -> Secret Signs (Tzeentch)
+     RULES-COMPSIGNES_MINE        "Secret Signs (Minor)"    -> Secret Signs (Miner)
+   RESTE A FAIRE - les FAMILLES entieres, avec la methode de table relue validee pour les
+   carrieres (extraire les lignes "Specialisations:" du chapitre des competences du Rulebook,
+   produire la table saisi -> livre, la faire relire par Nono, puis appliquer) :
+     FAIT le 23/08/2026 - famille Entertain alignee sur le Rulebook (12 libelles, 77 occurrences),
+     et RULES-COMPDIVERT_ACTING fusionne dans RULES-COMPDIVERT_INTERP.
+     FAIT le 23/08/2026 - famille Perform alignee sur le Rulebook (6 libelles, 10 occurrences).
+     Perform (Torture) verifie le 23/08/2026 dans Lords of Naggaroth (Disciple of Khaine, Tier 2) : deja bon.
+     "Melee (Two hands / Fight / Scourge / Hinder)"     contre (Two-Handed / Brawling / Flail / ...)
+     "Ranged (Slingshot / Black Powder / Hand Crossbow / Hindrances)" contre (Sling / Blackpowder / ...)
+     "Play (Violin / Bagpipes)"                         contre (Fiddle / Bagpipe)
+     "Lore (Demonology / Dwarves / Waterways / Black Magic / Know how)"
+     "Trade (Cierier / Boat building / Winegrower ...)"
+   A SIGNALER, pas encore traite : dans BOOK_RULESBOOK_FRANCAIS, plusieurs libelles FRANCAIS sont
+   restes en anglais ou fautifs - RULES-COMPSAVOIR_LOCAL "Lore (Loca)", RULES-COMPSIGNES_TZEENTCH
+   "Lore (Tzeentch)", RULES-COMPSAVOIR_NECROMANCY "Lore (Necromancy)", RULES-COMPLANG_DARKTOUNGE
+   "Language (Dark Tongue)", RULES-COMPMETIER_GOLDSMITH "trade (Goldsmight)", plus des espaces en
+   fin de libelle (Dressage (Badgers) , Langue (wastelander) , Langue (halfling) ). Ce sont des
+   traductions a decider par Nono, donc non corrigees d'office.
+
+RESTE 2 - TROIS IDENTIFIANTS DE COMPETENCE DECLARES DEUX FOIS. FAIT le 23/08/2026 : dedoublonnes
+   dans les deux fichiers Rulebook (RULES-COMPSAVOIR_EMPIRE, RULES-COMPSAVOIR_NECROMANCY,
+   RULES-COMPLANG_DARKTOUNGE). Controle relance : 292 identifiants, aucun doublon.
+
+RESTE 3 - LES DESCRIPTIONS (inquietude de Nono). MESURE FAITE plutot que supposee, sur les
+<Explanation language="ENGLISH"> de BOOK_RULESBOOK, en cherchant un fragment de chaque texte dans
+le PDF :
+     Talents      : 19 verbatim du livre / 159 reformules
+     Competences  :  2 / 43
+     Metiers      :  2 / 62
+     Sorts        :  9 / 191
+   Donc oui, la quasi-totalite des descriptions anglaises sont des retraductions, pas le texte du
+   livre. MAIS - et c'est la bonne nouvelle - un second controle montre que la traduction n'a pas
+   abime la MECANIQUE : en comparant, talent par talent, les NOMBRES et les NOMS DE
+   CARACTERISTIQUE du texte saisi a ceux du bloc correspondant du livre, seuls 9 talents
+   presentent un ecart, et la plupart sont des numeros de page ("page 342") et non des valeurs de
+   regle. Aucun "+10 devenu +20", aucune caracteristique substituee.
+   CONCLUSION PROPOSEE : ne PAS reecrire les 455 descriptions. Une prose reformulee reste lisible
+   et mecaniquement juste ; une re-extraction depuis un PDF en deux colonnes risque d'introduire
+   plus d'erreurs qu'elle n'en corrige. Ce sont les LIBELLES qui meritent le travail, parce qu'ils
+   sont courts, visibles partout dans l'interface, et qu'une erreur y saute aux yeux.
+   Le controle "nombres et caracteristiques" est en revanche a garder : il se relance vite et
+   c'est lui qui attraperait une vraie derive de sens.
+
+=== COMPETENCES : REFERENCES ET DOUBLONS (audit du 23/08/2026) ===
+
+FAIT - quatre references vers un identifiant inexistant corrigees (FOCAL_AZYR -> FOCAL_CIEUX,
+FOCAL_CHAMON -> FOCAL_METAL, FOCAL_KHAINE -> FOCAL_KHAINITE, COMPPROj_POUDRE -> COMPPROJ_POUDRE).
+
+RESTE - quatre references qui demandent une decision, la competence n'existant nulle part :
+     FAIT - RULES-COMPCHEV_BADGERS "Ride (Badger)" declaree le 23/08/2026 (le livre donne bien les
+         deux competences au Badger Rider : Animal Training (Badgers) ET Ride (Badger)).
+     FAIT - RULES-COMPSIGNES_AMBER declaree "Secret Signs (Amber Order)" (Master Shaman, WoM).
+     FAIT - RULES-BEGGING redirige vers RULES-COMPCHARM (le livre ecrit "Tests: Charm (Begging)",
+         il n'existe pas de competence Begging ; ConstCompetenceBonus ne pose qu'un asterisque,
+         donc aucun bonus indu sur Charm).
+     FAIT - RULES-COMPDIVERT_FORTUNETELLING abandonne : l'Astromancer pointe sur
+         RULES-COMPDIVERT_VOYAN, qui est le meme Entertain (Fortune Telling) et servait deja au
+         Mystic. Libelle anglais de VOYAN corrige en "Entertainment (Fortune Telling)".
+     PLUS AUCUNE reference de competence vers un identifiant inexistant (controle du 23/08/2026,
+     301 competences declarees, 16 fichiers).
+
+RESTE - deux doublons de competence reperes pendant l'audit, a arbitrer :
+     FAIT - RULES-COMPCOMB_BAGAR / RULES-COMPCOMB_BAGARRE fusionnes le 23/08/2026. Les deux
+         etaient utilises (BAGAR : 10 metiers du Rulebook, espece Ogre, les 8 armes de bagarre ;
+         BAGARRE : Wolf Kin, Chantyman, Sailor, Ship's Gunner, espece Common Orcs). BAGAR garde,
+         avec le libelle du livre "Melee (Brawling)" repris de BAGARRE. Aucun personnage sauvegarde
+         n'utilisait BAGARRE.
+     RULES-COMPCOMB_ENTRA   "Melee (Hinder)"    contre RULES-COMPPROJ_ENTRAV "Ranged (Hindrances)"
+         VERIFIE DANS LE LIVRE : Entangling est une specialisation de RANGED, pas de Melee
+         (Rulebook, "Specialisations: Blackpowder, Bow, Crossbow, Engineering, Entangling,
+         Explosives, Sling, Throwing"). Dans Up in Arms, Entangle n'est qu'une qualite d'arme.
+         RULES-COMPCOMB_ENTRA est donc un doublon dans la mauvaise famille ; les armes qui le
+         referencent sont RULES-COMB_ENTRA_01 (Whip) et RULES-COMB_ENTRA_02 (Lasso), que le livre
+         classe en Ranged (Entangling). Decision a prendre par Nono avant toute ecriture.
+     Au passage, le bon libelle anglais de RULES-COMPPROJ_ENTRAV est "Ranged (Entangling)" et non
+     "Ranged (Hindrances)" - a traiter avec la table des familles.
+
+DECIDE - les competences declarees mais referencees par aucun metier (35) sont CONSERVEES : ce
+sont des options ouvertes aux joueurs sous le generique _* (Language, Lore, Trade, Art, Play,
+Perform, Ride, Animal Training).
+
+PIEGE D'ANALYSE : une competence est referencee par un attribut name= MAIS AUSSI par le texte
+d'un element (<Skill>"RULES-COMPCOMB_ENTRA"</Skill> dans DATA_WEAPON). Toute recherche
+d'orphelins doit couvrir les deux canaux, sinon elle sur-declare (60 au lieu de 35).
+
+FAIT le 23/08/2026 - audit des munitions termine grace aux fanbooks deposes par Nono :
+     Black Ark Corsair (NAGGA-WORK119) : + RULES-MUNI_01 "Bolt"          (livre : "Repeating Handbow with 10 bolts")
+     Beastmaster       (NAGGA-WORK121) : + NAGGA-MUNI_09 "Barbed Bolts"  (livre : "Ravager Harpoon and 6 Barbed Bolts")
+     NAGGA-MUNI_09 : taille de lot 0 -> 6 (c'etait la seule munition de la base a 0).
+     Green iz Best : aucune carriere a arme a distance.
+     Ironbreaker / Cinderblast Bomb : RIEN A AJOUTER. L'objet est ARCH1-PROJ_EXPLO_03, declare
+     dans Archives of the Empire I, qui le classe sous EXPLOSIVES au prix unitaire (3 GC, Enc 0) :
+     l'objet est lui-meme le projectile. Les trois armes Ranged (Explosive) de la base portent
+     toutes <Ammunition>"0"</Ammunition>. AUDIT DES MUNITIONS TERMINE.
+     A savoir : The Horned Rat.pdf (147 Mo) ne passe pas le pont de fichiers, le transfert expire.
+     Si un jour il faut le consulter, il faudra en extraire les pages utiles cote machine.
+
+=== REVUE DU LIVRE UP IN ARMS (23/08/2026) - PREMIERE PASSE : LES CARRIERES ===
+
+Methode : extraction depuis le PDF des 15 schemas de progression (nom de niveau, Skills, Talents,
+Trappings de chaque niveau), puis comparaison automatique avec BOOK_UP_IN_ARMS.Xml, libelles
+resolus. Les 15 carrieres du livre sont bien saisies, aucune ne manque. Ci-dessous les ecarts.
+RIEN N'A ETE MODIFIE : table a relire avant ecriture, comme pour les carrieres du Rulebook.
+
+A - ECARTS FRANCS - CORRIGES LE 23/08/2026, sauf les deux lignes marquees NON FAIT
+  Archer niv.4        Secret Signs (Pathfinders)      -> Secret Signs (Scout)
+  Artillerist niv.4   "Artillerist Master"            -> "Master Artillerist"
+  Cartographer 2 / 3  Bookish et Seasoned Traveller sont INTERVERTIS entre les niveaux 2 et 3
+  Cartographer niv.3  Language (Guild) / Secret Signs (Guild) / Etiquette (Guild) : ce n'etaient
+                      pas des erreurs de la carriere mais des LIBELLES du Rulebook. Corriges a la
+                      source, le Rulebook ecrivant lui-meme Guilder (3 fois pour Secret Signs, et
+                      dans sa ligne Specialisations pour Language). Voir plus bas.
+  Cartographer niv.4  NON FAIT - Master Tradesman (Cartographer) contre (Cartography) du livre :
+                      le Rulebook ne tranche pas, il n'a que Master Tradesman (Trade), et la
+                      graphie actuelle suit le nom du metier Trade (Cartographer). A arbitrer.
+                      MANQUENT : Study, Quality Theodolite
+  Freelance           Melee (Any) est au niveau 3 ; le livre le donne au niveau 2
+  Blazing Sun niv.1   Language (Classic)              -> Language (Classical)
+  White Wolf niv.2    NON FAIT - "Strike to Injure" contre "Intimidate" du livre, voir C.2
+  Light Cavalry niv.1 Etiquette (Mercenaries)         -> Diceman
+  Light Cavalry niv.2 Charm                           -> Etiquette (Mercenaries)
+  Greatsword niv.3    "Manual on the Art of Fighting" -> "Manual on the Art of Zweihaender Fighting"
+  Siege Spec. niv.3   "set of six 60-sccond fuses"    -> "60-second"
+  Myrmidia niv.3      libelle "Priest Sergean"        -> "Priest Sergeant"
+                      Lore (Any)                      -> Lore (Warfare)
+                      Bookish et Combat Aware sont INTERVERTIS entre les niveaux 1 et 3
+  Myrmidia niv.1      MANQUENT : Leather Jerkin, Myrmidian Icon, White Robes, Spear
+
+B - LANCE CONFONDUE AVEC SPEAR, 3 carrieres. Elles recoivent RULES-COMB_HAST_03 "Spear" alors que
+  le livre ecrit Lance : Knight of the Blazing Sun niv.2, Knight Panther niv.2, Light Cavalry niv.3.
+  La Lance existe pourtant : RULES-COMB_CAVAL_02 (Rulebook) et UPINA-COMB_CAVAL_05 (Up in Arms,
+  avec aussi UPINA-COMB_CAVAL_04 Demi-Lance). Correction evidente, reste a choisir lequel des deux.
+
+C - A ARBITRER, pas des coquilles
+  1. Les ARMURES - TRAITE le 23/08/2026. Les deux "Breastplate" du Rulebook ne sont pas une
+     erreur : la page 300 emploie le meme nom pour les deux et c'est la colonne Armour Type qui
+     les separe (ARMO_05 cuir bouilli, ARMO_14 plate), distinction que la base porte deja dans
+     <Type>. L'attribution par carriere est juste. Le vrai ecart etait "Plate Armour", rendu de
+     trois facons : Loup Blanc niv.2 passe aux cinq pieces comme le Greatsword ; Soleil Flamboyant
+     niv.2 et Freelance niv.2 voient leur chaine hybride "RULES-ARMO_14 and Helm" eclatee en
+     RULES-ARMO_14 + RULES-ARMO_11.
+     Chevalier Panthere niv.2 aligne le meme jour : pieces de plates completes, le Helm standard
+     etant remplace par son "Great Helm with Bestial Crest" que le livre lui donne nommement.
+     IDEE, si l'ambiguite visuelle des deux Breastplate gene dans WinLivre : la donnee n'a pas
+     besoin de bouger, il suffirait d'afficher le <Type> quand deux armures partagent un libelle.
+  2. White Wolf niv.2 : le LIVRE liste "Intimidate" dans les Talents, alors qu'Intimidate est une
+     competence, pas un talent, dans WFRP4 - c'est une bizarrerie du livre. La saisie a mis
+     "Strike to Injure" a la place. A decider : suivre le livre ou garder la substitution.
+  3. Priest of Myrmidia : la base ecrit "Blessed of Myrmidia (Strategy)" et "Invoke Myrmidia
+     (Strategy)" la ou le livre ecrit "Bless (Myrmidia)" et "Invoke (Myrmidia)". Convention
+     volontaire de Nono, a confirmer.
+
+D - ECARTS QUI RELEVENT DES FAMILLES DE LIBELLES, deja au backlog, pas propres a Up in Arms
+  Lore (War)              -> Lore (Warfare)          (10 carrieres concernees)
+  Melee (Two hands)       -> Melee (Two-Handed)
+  Ranged (Black Powder)   -> Ranged (Blackpowder)
+  Ranged (Engineering)    -> Ranged (Engineer)
+  Talents : Unshakable/Unshakeable, War Leader/Warleader, Public Speaker/Public Speaking,
+            Roughrider/Rough Rider, Coolheaded/Cool-headed, Nimble Fingered/Nimble-fingered
+  Ces six-la sont des ecarts d'orthographe entre la saisie et le livre : a trancher en une passe
+  sur la famille des talents, pas carriere par carriere.
+
+E - BUG DE CODE DECOUVERT PENDANT LA REVUE, non corrige
+  Le suffixe de qualite "(Q)" est ecrit de deux facons dans DATABASE : 40 items collent le suffixe
+  au code ("RULES-ARMO_14(Q)") et 42 mettent un ESPACE avant ("RULES-COMB_2M_05 (Q)").
+  Or winlivre.pas LibelleEquipement enleve les 3 derniers caracteres (Copy(CodeItem, 1,
+  Length(CodeItem)-Length(EquipementQualite))) sans Trim ensuite, et pdfmetier.pas /
+  xmlexportimport.pas coupent avec ExtractStringBefore, ce qui laisse aussi l'espace.
+  Le code passe ensuite dans ChercheArme -> CompareRechercheValeur, qui compare sans Trim.
+  Consequence attendue : pour les 42 items ecrits avec un espace, le libelle n'est pas retrouve et
+  c'est le CODE BRUT qui s'affiche ("RULES-COMB_2M_05 de qualite" au lieu de "Zweihaender de
+  qualite"). A verifier par Nono dans WinLivre / WinMetier sur le Greatsword Sergeant.
+  Deux corrections possibles : un Trim dans le code, ou normaliser les 42 items du XML.
+
+=== REVUE D'UP IN ARMS - DEUXIEME PASSE : EQUIPEMENT, TALENTS, QUALITES, MIRACLES ===
+
+CE QUI EST COMPLET, verifie table par table du PDF contre les 77 armes du XML :
+  Armes personnelles : Basic (13 dont les 3 boucliers + la Pavise), Cavalry (4), Fencing (3),
+  Brawling (6), Flail (3), Parrying (4), Polearm (9), Two-Handed (6), Blackpowder (11),
+  Engineering (5), munitions (12). Rien ne manque.
+  Talents : l'appendice III "New and Updated Talents" compte 12 entrees (Beat Blade, Crew
+  Commander, Distract, Drilled, Flee!, Gunner, Rapid Reload, Relentless, Reversal, Roughrider,
+  Shieldsman, Strike to Injure). Onze sont des talents du Rulebook que le livre MET A JOUR, ils
+  existent deja ; le seul VRAIMENT nouveau, Crew Commander, est bien saisi (UPINA-T0173).
+  Qualites du chapitre VIII : Unbalanced, Slash, Spread, Trip - les 4 saisies (UPINA-WEAPB31 a 34).
+  Miracles de Myrmidia : les 9 du livre sont saisis (UPINA-MIRAC_MYRMIDIA_07 a _15).
+
+CE QUI MANQUE - LE CHAPITRE XI, ARTILLERIE ET DEGATS AUX STRUCTURES, EST ABSENT EN ENTIER
+  Aucune arme de siege n'est saisie. Le livre en donne treize :
+     BALLISTA     Ballista (petite, moyenne, grande)
+     CANNON       Cannon (small), Cannon (medium) 100 GC, Cannon (large) 250 GC
+     MORTAR       Mortar 50 GC
+     SWIVEL GUN   Swivel Gun 20 GC
+     CATAPULT     Catapult (small) 20 GC, (medium) 40 GC, (large) 60 GC
+     ENGINEERING  Volley Gun 10 GC, Helblaster Volley Gun 500 GC, Helstorm Rocket Battery 500 GC
+  Et leurs munitions, absentes elles aussi :
+     Bolt (ballista), Ball and Powder + Grapeshot and Powder (cannon), Animal Carcass +
+     Incendiary + Stone (catapult), Bomb + Incendiary (mortar), Bullets and Powder +
+     Small Shot and Powder (swivel gun), Bullet and Powder (12) (volley gun), Rocket (helstorm).
+  Et les deux nouvelles qualites/defauts que ces armes utilisent, ni l'une ni l'autre declaree
+  dans la base (verifie sur les 51 qualites existantes) :
+     Crewed  (defaut)  - l'arme demande un equipage de 2, 3 ou 4 ; c'est exactement ce que sert
+                         le talent Crew Commander deja saisi, qui est donc aujourd'hui sans objet
+     Salvo   (qualite) - rechargement par paliers des Volley Guns et du Helstorm
+  DECIDE le 23/08/2026 par Nono : ON NE SAISIT PAS L'ARTILLERIE. Un personnage ne transporte pas
+  une piece de siege, ce n'est pas de l'equipement individuel. Verification faite, le livre lui
+  donne raison : sur les 15 carrieres, une seule touche a l'artillerie, le Master Artillerist, et
+  son equipement l'ecrit en texte libre ("Artillery piece and Limber"), ce qui est deja le cas
+  dans le XML. Aucune carriere ne recoit de canon, de catapulte ni de baliste comme objet.
+  Consequence assumee : les qualites Crewed et Salvo restent non declarees, et le talent
+  Crew Commander (UPINA-T0173) reste saisi sans arme a laquelle s'appliquer - c'est normal,
+  l'artillerie est du materiel de MJ, pas de personnage. A rouvrir seulement si un jour tu veux
+  equiper des PNJ ou gerer un siege dans le programme.
+
+NON MODELISABLE EN L'ETAT, pour information
+  Le chapitre "A Soldier's Burden" (p.87) donne un tableau d'equipement courant - Theodolite,
+  Compass, Bandoleer, Bow String, Whetstone, Ostrich Feather, Sealskin, Silk Underwear,
+  Captain Braun's Multi-Stove et Insta-Boiler. La base n'a pas de catalogue d'objets : seulement
+  DATA_WEAPON, DATA_ARMOR et leurs bonus. Ces objets ne peuvent donc apparaitre que comme texte
+  libre dans l'equipement d'une carriere, ce qui est le cas aujourd'hui (Theodolite chez le
+  Cartographe). Rien a corriger, sauf si tu veux un jour un DATA_ITEM.
+
+NOUVEAU, trouve pendant l'application des corrections d'Up in Arms : une carriere du Rulebook
+reference l'objet RULES-PROJ_LANC, qui n'est declare nulle part (les armes de jet sont
+RULES-PROJ_LANC_01 et suivantes). Seule reference d'equipement non resolue de toute la base.

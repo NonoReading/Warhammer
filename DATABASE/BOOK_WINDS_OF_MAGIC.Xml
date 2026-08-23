@@ -267,9 +267,9 @@ The assistant provides a bonus of +20 to these Tests rather than the normal +10 
   <!-- Perception  -->
 </SUBCHAPTER_SKILL>
 <SUBCHAPTER_TALENT>
-<Talent>"WINDS-T0132_LARGER/WINDS-T0132_SMALLER"</Talent>
+<Talent>"RULES-T0132_LARGER/RULES-T0132_SMALLER"</Talent>
   <!-- Fearless (Larger)/Fearless (Smaller) -->
-<Talent>"WINDS-T0127/WINDS-T0158"</Talent>
+<Talent>"RULES-T0127/RULES-T0158"</Talent>
   <!-- Lightning Reflexes/Very Strong -->
 <Talent>"RULES-T0170"</Talent>
   <!-- Small -->
@@ -277,7 +277,7 @@ The assistant provides a bonus of +20 to these Tests rather than the normal +10 
   <!-- Sturdy -->
 <Talent>"WINDS-T0176_*"</Talent>
   <!-- Suffuse With (Any) -->
-<Talent>"WINDS-T0159/WINDS-T0067"</Talent>
+<Talent>"RULES-T0159/RULES-T0067"</Talent>
   <!-- Very Resilient/Warrior Born -->
 </SUBCHAPTER_TALENT>
 <SUBCHAPTER_CAREER>
@@ -322,7 +322,7 @@ The assistant provides a bonus of +20 to these Tests rather than the normal +10 
 <Skill>"RULES-COMPPRECEP"</Skill>
   <!-- Perception  -->
 <Skill>"RULES-COMPLANG_CLASS"</Skill>
-  <!-- Language (Classic) -->
+  <!-- Language (Classical) -->
 <Skill>"RULES-COMPLANG_MAG"</Skill>
   <!-- Language (Magick) -->
 <Skill>"RULES-COMPDISC_URB"</Skill>
@@ -386,7 +386,7 @@ The assistant provides a bonus of +20 to these Tests rather than the normal +10 
 <Skill>"RULES-COMPPRECEP"</Skill>
   <!-- Perception  -->
 <Skill>"RULES-COMPLANG_CLASS"</Skill>
-  <!-- Language (Classic) -->
+  <!-- Language (Classical) -->
 <Skill>"RULES-COMPDISC_URB"</Skill>
   <!-- Stealth (Urban) -->
 <Skill>"RULES-COMPDISC_RURAL"</Skill>
@@ -484,7 +484,7 @@ The assistant provides a bonus of +20 to these Tests rather than the normal +10 
 <Skill name="RULES-COMPPROJ_POUDRE">"2"</Skill>
   <!-- Ranged (Black Powder) -->
 <Skill name="RULES-COMPDIVERT_NARRA">"3"</Skill>
-  <!-- Entertainment (Storytelling) -->
+  <!-- Entertain (Storytelling) -->
 <Skill name="RULES-COMPGUERI">"3"</Skill>
   <!-- Heal -->
 <Skill name="RULES-COMPCOMB_*">"3"</Skill>
@@ -533,6 +533,8 @@ The assistant provides a bonus of +20 to these Tests rather than the normal +10 
 <SUBCHAPTER_ITEM>
 <Item name="Uniform in the Colours of the Faculty">"1"</Item>
 <Item name="RULES-PROJ_POUDRE_04/RULES-PROJ_POUDRE_03">"2"</Item>
+<Item name="RULES-MUNI_06">"2"</Item>
+  <!-- Bullet and Powder : les "12 shots" du livre. -->
 <Item name="Sleeved">"2"</Item>
 <Item name="RULES-ARMO_07">"2"</Item>
 <Item name="Helmet">"3"</Item>
@@ -586,7 +588,7 @@ The assistant provides a bonus of +20 to these Tests rather than the normal +10 
 <Skill name="RULES-COMPMARCH">"1"</Skill>
   <!-- Haggle -->
 <Skill name="RULES-COMPLANG_CLASS">"1"</Skill>
-  <!-- Language (Classic) -->
+  <!-- Language (Classical) -->
 <Skill name="RULES-COMPSAVOIR_CHIM">"1"</Skill>
   <!-- Lore (Chemistry) -->
 <Skill name="RULES-COMPSAVOIR_GEOL">"1"</Skill>
@@ -602,13 +604,13 @@ The assistant provides a bonus of +20 to these Tests rather than the normal +10 
 <Skill name="RULES-COMPSAVOIR_MEDICINE">"2"</Skill>
   <!-- Lore (Medicine) -->
 <Skill name="RULES-COMPLANG_GUILD">"2"</Skill>
-  <!-- Language (Guild) -->
+  <!-- Language (Guilder) -->
 <Skill name="RULES-COMPPRECEP">"2"</Skill>
   <!-- Perception  -->
 <Skill name="RULES-COMPRECH">"2"</Skill>
   <!-- Research -->
 <Skill name="RULES-COMPSIGNES_GUILD">"2"</Skill>
-  <!-- Secret Signs (Guild) -->
+  <!-- Secret Signs (Guilder) -->
 <Skill name="RULES-COMPCOND">"3"</Skill>
   <!-- Drive -->
 <Skill name="RULES-COMPLANG_*">"3"</Skill>
@@ -617,7 +619,7 @@ The assistant provides a bonus of +20 to these Tests rather than the normal +10 
   <!-- Leadership -->
 <Skill name="RULES-COMPSAVOIR_*">"3"</Skill>
   <!-- Lore (Anyl) -->
-<Skill name="RULES-COMPFOCAL_CHAMON">"4"</Skill>
+<Skill name="RULES-COMPFOCAL_METAL">"4"</Skill>
   <!-- Lore (Anyl) -->
 <Skill name="RULES-COMPCHEV_CHEVAL">"4"</Skill>
   <!-- Ride (Horse) -->
@@ -636,7 +638,7 @@ The assistant provides a bonus of +20 to these Tests rather than the normal +10 
 <Talent name="RULES-T0038">"2"</Talent>
   <!-- Criminal -->
 <Talent name="RULES-T0136_GUILD">"2"</Talent>
-  <!-- Etiquette (Guild) -->
+  <!-- Etiquette (Guilder) -->
 <Talent name="RULES-T0045">"2"</Talent>
   <!-- Nimble Fingered -->
 <Talent name="RULES-T0040">"3"</Talent>
@@ -872,7 +874,7 @@ The assistant provides a bonus of +20 to these Tests rather than the normal +10 
 <Skill name="RULES-COMPSAVOIR_POLIT">"3"</Skill>
   <!-- Lore (Politics) -->
 <Skill name="RULES-COMPDIVERT_NARRA">"4"</Skill>
-  <!-- Entertainment (Storytelling) -->
+  <!-- Entertain (Storytelling) -->
 <Skill name="RULES-COMPCOMM">"4"</Skill>
   <!-- Leadership -->
 </SUBCHAPTER_SKILL>
@@ -961,7 +963,7 @@ The assistant provides a bonus of +20 to these Tests rather than the normal +10 
 <Skill name="RULES-COMPESQU">"1"</Skill>
   <!-- Dodge -->
 <Skill name="RULES-COMPDIVERT_CHANT">"1"</Skill>
-  <!-- Entertainment (Singing) -->
+  <!-- Entertain (Singing) -->
 <Skill name="RULES-COMPINTUI">"1"</Skill>
   <!-- Intuition  -->
 <Skill name="RULES-COMPLANG_MAG">"1"</Skill>
@@ -1354,7 +1356,7 @@ The assistant provides a bonus of +20 to these Tests rather than the normal +10 
   <!-- Channelling (Azyr) -->
 <Skill name="RULES-COMPESQU">"1"</Skill>
   <!-- Dodge -->
-<Skill name="RULES-COMPDIVERT_FORTUNETELLING">"1"</Skill>
+<Skill name="RULES-COMPDIVERT_VOYAN">"1"</Skill>
   <!-- Dodge -->
 <Skill name="RULES-COMPINTUI">"1"</Skill>
   <!-- Intuition  -->
@@ -1505,7 +1507,7 @@ The assistant provides a bonus of +20 to these Tests rather than the normal +10 
   <!-- Charm -->
 <Skill name="RULES-COMPCALM">"2"</Skill>
   <!-- Cool -->
-<Skill name="RULES-COMPDIVERT_ACTING">"2"</Skill>
+<Skill name="RULES-COMPDIVERT_INTERP">"2"</Skill>
   <!-- Entertain (Acting) -->
 <Skill name="RULES-COMPRAGOT">"2"</Skill>
   <!-- Gossip -->
@@ -2572,7 +2574,7 @@ The assistant provides a bonus of +20 to these Tests rather than the normal +10 
 <Target>"AoE ((BATTR_WP) yards)"</Target>
 <Duration>"(BATTR_WP) rounds"</Duration>
 <Range>""</Range>
-<Talent>"RULES-T0088_MAGIE"</Talent>
+<Talent>"RULES-T0088_METAL"</Talent>
 <Level>"4"</Level>
 <TypSpell>"Domain Magic"</TypSpell>
 </Sort>
@@ -2582,7 +2584,7 @@ The assistant provides a bonus of +20 to these Tests rather than the normal +10 
 <Target>"1"</Target>
 <Duration>"Instant"</Duration>
 <Range>""</Range>
-<Talent>"RULES-T0088_MAGIE"</Talent>
+<Talent>"RULES-T0088_METAL"</Talent>
 <Level>"4"</Level>
 <TypSpell>"Domain Magic"</TypSpell>
 </Sort>
@@ -2592,7 +2594,7 @@ The assistant provides a bonus of +20 to these Tests rather than the normal +10 
 <Target>"1 object"</Target>
 <Duration>"Instant"</Duration>
 <Range>""</Range>
-<Talent>"RULES-T0088_MAGIE"</Talent>
+<Talent>"RULES-T0088_METAL"</Talent>
 <Level>"7"</Level>
 <TypSpell>"Domain Magic"</TypSpell>
 </Sort>
@@ -2602,7 +2604,7 @@ The assistant provides a bonus of +20 to these Tests rather than the normal +10 
 <Target>"1 object of 1 Encumbrance"</Target>
 <Duration>"Instant"</Duration>
 <Range>""</Range>
-<Talent>"RULES-T0088_MAGIE"</Talent>
+<Talent>"RULES-T0088_METAL"</Talent>
 <Level>"4"</Level>
 <TypSpell>"Domain Magic"</TypSpell>
 </Sort>
@@ -2612,7 +2614,7 @@ The assistant provides a bonus of +20 to these Tests rather than the normal +10 
 <Target>"special"</Target>
 <Duration>"(BATTR_WP) rounds"</Duration>
 <Range>""</Range>
-<Talent>"RULES-T0088_MAGIE"</Talent>
+<Talent>"RULES-T0088_METAL"</Talent>
 <Level>"6"</Level>
 <TypSpell>"Domain Magic"</TypSpell>
 </Sort>
@@ -2622,7 +2624,7 @@ The assistant provides a bonus of +20 to these Tests rather than the normal +10 
 <Target>"1 weapon"</Target>
 <Duration>"Initiative Bonus rounds"</Duration>
 <Range>""</Range>
-<Talent>"RULES-T0088_MAGIE"</Talent>
+<Talent>"RULES-T0088_METAL"</Talent>
 <Level>"2"</Level>
 <TypSpell>"Domain Magic"</TypSpell>
 </Sort>
@@ -2632,7 +2634,7 @@ The assistant provides a bonus of +20 to these Tests rather than the normal +10 
 <Target>"Area of Effect ((BATTR_WP) yards)"</Target>
 <Duration>"(BATTR_WP) Rounds"</Duration>
 <Range>""</Range>
-<Talent>"RULES-T0088_MAGIE"</Talent>
+<Talent>"RULES-T0088_METAL"</Talent>
 <Level>"5"</Level>
 <TypSpell>"Domain Magic"</TypSpell>
 </Sort>
@@ -2642,7 +2644,7 @@ The assistant provides a bonus of +20 to these Tests rather than the normal +10 
 <Target>"1"</Target>
 <Duration>"ATTR_WP minutes"</Duration>
 <Range>""</Range>
-<Talent>"RULES-T0088_MAGIE"</Talent>
+<Talent>"RULES-T0088_METAL"</Talent>
 <Level>"4"</Level>
 <TypSpell>"Domain Magic"</TypSpell>
 </Sort>
@@ -2652,7 +2654,7 @@ The assistant provides a bonus of +20 to these Tests rather than the normal +10 
 <Target>"Special"</Target>
 <Duration>"ATTR_WP minutes"</Duration>
 <Range>""</Range>
-<Talent>"RULES-T0088_MAGIE"</Talent>
+<Talent>"RULES-T0088_METAL"</Talent>
 <Level>"9"</Level>
 <TypSpell>"Domain Magic"</TypSpell>
 </Sort>
@@ -2662,7 +2664,7 @@ The assistant provides a bonus of +20 to these Tests rather than the normal +10 
 <Target>"AoE (2 x (BATTR_WP) yards)"</Target>
 <Duration>"(BATTR_WP) rounds"</Duration>
 <Range>""</Range>
-<Talent>"RULES-T0088_MAGIE"</Talent>
+<Talent>"RULES-T0088_METAL"</Talent>
 <Level>"13"</Level>
 <TypSpell>"Domain Magic"</TypSpell>
 </Sort>
@@ -2672,7 +2674,7 @@ The assistant provides a bonus of +20 to these Tests rather than the normal +10 
 <Target>"AoE ((BATTR_WP) yards)"</Target>
 <Duration>"(BATTR_WP) hours"</Duration>
 <Range>""</Range>
-<Talent>"RULES-T0088_MAGIE"</Talent>
+<Talent>"RULES-T0088_METAL"</Talent>
 <Level>"9"</Level>
 <TypSpell>"Domain Magic"</TypSpell>
 </Sort>
@@ -2682,7 +2684,7 @@ The assistant provides a bonus of +20 to these Tests rather than the normal +10 
 <Target>"You"</Target>
 <Duration>"Toughness Bonus Rounds"</Duration>
 <Range>""</Range>
-<Talent>"RULES-T0088_MAGIE"</Talent>
+<Talent>"RULES-T0088_METAL"</Talent>
 <Level>"5"</Level>
 <TypSpell>"Domain Magic"</TypSpell>
 </Sort>
@@ -2692,7 +2694,7 @@ The assistant provides a bonus of +20 to these Tests rather than the normal +10 
 <Target>"Special"</Target>
 <Duration>"ATTR_WP x 1d10 minutes"</Duration>
 <Range>""</Range>
-<Talent>"RULES-T0088_MAGIE"</Talent>
+<Talent>"RULES-T0088_METAL"</Talent>
 <Level>"7"</Level>
 <TypSpell>"Domain Magic"</TypSpell>
 </Sort>
@@ -2702,7 +2704,7 @@ The assistant provides a bonus of +20 to these Tests rather than the normal +10 
 <Target>"AoE ((BATTR_WP) yards)"</Target>
 <Duration>"ATTR_WP minutes"</Duration>
 <Range>""</Range>
-<Talent>"RULES-T0088_MAGIE"</Talent>
+<Talent>"RULES-T0088_METAL"</Talent>
 <Level>"10"</Level>
 <TypSpell>"Domain Magic"</TypSpell>
 </Sort>
@@ -2712,7 +2714,7 @@ The assistant provides a bonus of +20 to these Tests rather than the normal +10 
 <Target>"Special"</Target>
 <Duration>"Special"</Duration>
 <Range>""</Range>
-<Talent>"RULES-T0088_MAGIE"</Talent>
+<Talent>"RULES-T0088_METAL"</Talent>
 <Level>"2"</Level>
 <TypSpell>"Domain Magic"</TypSpell>
 </Sort>
@@ -2722,7 +2724,7 @@ The assistant provides a bonus of +20 to these Tests rather than the normal +10 
 <Target>"You"</Target>
 <Duration>"(BATTR_WP) Rounds"</Duration>
 <Range>""</Range>
-<Talent>"RULES-T0088_MAGIE"</Talent>
+<Talent>"RULES-T0088_METAL"</Talent>
 <Level>"5"</Level>
 <TypSpell>"Domain Magic"</TypSpell>
 </Sort>
@@ -2732,7 +2734,7 @@ The assistant provides a bonus of +20 to these Tests rather than the normal +10 
 <Target>"1 object"</Target>
 <Duration>"Instant"</Duration>
 <Range>""</Range>
-<Talent>"RULES-T0088_MAGIE"</Talent>
+<Talent>"RULES-T0088_METAL"</Talent>
 <Level>"4"</Level>
 <TypSpell>"Domain Magic"</TypSpell>
 </Sort>
@@ -2742,7 +2744,7 @@ The assistant provides a bonus of +20 to these Tests rather than the normal +10 
 <Target>"AoE ((BATTR_WP) yards)"</Target>
 <Duration>"1 round"</Duration>
 <Range>""</Range>
-<Talent>"RULES-T0088_MAGIE"</Talent>
+<Talent>"RULES-T0088_METAL"</Talent>
 <Level>"7"</Level>
 <TypSpell>"Domain Magic"</TypSpell>
 </Sort>
@@ -2752,7 +2754,7 @@ The assistant provides a bonus of +20 to these Tests rather than the normal +10 
 <Target>"1"</Target>
 <Duration>"(BATTR_WP) Rounds"</Duration>
 <Range>""</Range>
-<Talent>"RULES-T0088_MAGIE"</Talent>
+<Talent>"RULES-T0088_METAL"</Talent>
 <Level>"5"</Level>
 <TypSpell>"Domain Magic"</TypSpell>
 </Sort>
@@ -2762,7 +2764,7 @@ The assistant provides a bonus of +20 to these Tests rather than the normal +10 
 <Target>"You"</Target>
 <Duration>"1 round"</Duration>
 <Range>""</Range>
-<Talent>"RULES-T0088_MAGIE"</Talent>
+<Talent>"RULES-T0088_METAL"</Talent>
 <Level>"5"</Level>
 <TypSpell>"Domain Magic"</TypSpell>
 </Sort>
@@ -2772,7 +2774,7 @@ The assistant provides a bonus of +20 to these Tests rather than the normal +10 
 <Target>"1 compass"</Target>
 <Duration>"ATTR_WP minutes"</Duration>
 <Range>""</Range>
-<Talent>"RULES-T0088_MAGIE"</Talent>
+<Talent>"RULES-T0088_METAL"</Talent>
 <Level>"2"</Level>
 <TypSpell>"Domain Magic"</TypSpell>
 </Sort>
@@ -2782,7 +2784,7 @@ The assistant provides a bonus of +20 to these Tests rather than the normal +10 
 <Target>"Special"</Target>
 <Duration>"1d10 hours"</Duration>
 <Range>""</Range>
-<Talent>"RULES-T0088_MAGIE"</Talent>
+<Talent>"RULES-T0088_METAL"</Talent>
 <Level>"6"</Level>
 <TypSpell>"Domain Magic"</TypSpell>
 </Sort>
@@ -2792,7 +2794,7 @@ The assistant provides a bonus of +20 to these Tests rather than the normal +10 
 <Target>"AoE ((BATTR_WP) yards)"</Target>
 <Duration>"(BATTR_WP) Rounds"</Duration>
 <Range>""</Range>
-<Talent>"RULES-T0088_MAGIE"</Talent>
+<Talent>"RULES-T0088_METAL"</Talent>
 <Level>"12"</Level>
 <TypSpell>"Domain Magic"</TypSpell>
 </Sort>
@@ -2802,7 +2804,7 @@ The assistant provides a bonus of +20 to these Tests rather than the normal +10 
 <Target>"1"</Target>
 <Duration>"(BATTR_WP) minutes"</Duration>
 <Range>""</Range>
-<Talent>"RULES-T0088_MAGIE"</Talent>
+<Talent>"RULES-T0088_METAL"</Talent>
 <Level>"3"</Level>
 <TypSpell>"Domain Magic"</TypSpell>
 </Sort>
@@ -3328,7 +3330,7 @@ The assistant provides a bonus of +20 to these Tests rather than the normal +10 
 </Sort>
 <Sort id="WINDS-COLOR_185">
 <Description language="ENGLISH">"Dance of Despair"</Description>
-<Explanation language="ENGLISH">"You conjure a stringless fiddle that compels enemies to dance uncontrollably, losing all sense of urgency. Targets can attempt a Willpower Test to resist the dance. Affected enemies cannot move or take actions unless they first pass a Hard (-20) Athletics Test or Challenging Perform (Dance) Test. When the spell expires, affected targets receive a Farigued Condition. Friendly or neutral characters are unaffected by the spell."</Explanation>
+<Explanation language="ENGLISH">"You conjure a stringless fiddle that compels enemies to dance uncontrollably, losing all sense of urgency. Targets can attempt a Willpower Test to resist the dance. Affected enemies cannot move or take actions unless they first pass a Hard (-20) Athletics Test or Challenging Perform (Dancing) Test. When the spell expires, affected targets receive a Farigued Condition. Friendly or neutral characters are unaffected by the spell."</Explanation>
 <Target>"You"</Target>
 <Duration>"(BATTR_WP) rounds"</Duration>
 <Range>""</Range>
