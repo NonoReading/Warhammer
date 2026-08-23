@@ -448,30 +448,41 @@ PDF Personnage (PRIORITAIRE) :
   verifier au prochain personnage tres charge : d'autres grilles dimensionnees une fois pour toutes
   dans ChargerImage pourraient etre dans le meme cas (chercher les ".RowCount :=" a valeur constante).
 
-- Filtre des sorts de winspell.pas (lignes 114-125) : il compare les codes de talents en CHAINES
-  BRUTES (Pos) au lieu de CompareRechercheValeur. Consequence : un personnage enregistre AVANT la
-  convention des prefixes de livre (ex. Kuno Kreutzberg, talents "T0080_SIGMAR" au lieu de
-  "RULES-T0080_SIGMAR") ne matche aucun sort, la liste reste vide. Le crash qui en decoulait est
-  corrige (garde sur aRow dans TabSpellSelection, 22/08/2026) mais la liste reste fausse.
-  Deux anomalies voisines a traiter en meme temps : le "if pos(ValeurGenerique, PSort.ListeTalent)
-  <> 0 then ValT := copy(ValT,1,5)" qui donne "RULES" sur un code prefixe, et le test ecrit DEUX
-  FOIS a l'identique lignes 121 et 124. A tester sur Kuno ET sur Rhya (qui, elle, fonctionne).
-  Question ouverte posee a Nono : migrer les anciennes fiches vers les codes prefixes, ou faire
-  accepter les deux formes au code indefiniment ?
+- (FAIT le 23/08/2026) Filtre des sorts de winspell.pas. Les trois anomalies notees le 22/08 sont
+  traitees : le "copy(ValT,1,5)" qui donnait "RULES" sur un code prefixe, le test ecrit DEUX FOIS
+  a l'identique lignes 122 et 125, et la comparaison en chaines brutes. Remplaces par une fonction
+  SortTalentAccessible qui compare les FAMILLES de talents (voir CONTEXT.md 2.18). La question
+  ouverte "migrer les anciennes fiches ou accepter les deux formes" est tranchee depuis : migration
+  (chantier 2.19). Valide par Nono sur Kuno.
 
-- PREFIXER LES MODIFICATEURS D'ATTRIBUT DANS LES LIVRES (demande de Nono, 22/08/2026).
-  Le champ <Attribute> des talents contient des valeurs comme "-ATTR_Ag" (malus) ou "ATTR_Ag"
-  (bonus), sans prefixe de livre. Il faut les passer sous la forme prefixee, comme le reste des
-  donnees ("RULES-ATTR_Ag").
-  ATTENTION, ce n'est PAS une simple recherche/remplacement : SeparateurLivre = '-', donc le signe
-  moins d'un malus et le separateur de livre sont le MEME caractere. "-RULES-ATTR_Ag" serait
-  ambigu pour DecoupeCodeRecherche. Il faut donc trancher AVANT de toucher aux donnees :
-    * soit changer le signe du malus (ex. balise ou champ Valeur negatif separe du code),
-    * soit changer SeparateurLivre,
-    * soit ecrire une regle de decoupe qui sait qu'un '-' en PREMIERE position est un signe.
-  Une fois les donnees prefixees et le decoupage decide, la ligne winpersonnage.pas ~2857 (laissee
-  volontairement en '=' brut le 22/08/2026, voir CONTEXT.md 2.19) pourra passer a
-  CompareRechercheValeur, avec le code prefixe en PREMIER argument.
+- Les 31 sorts qui declarent <Talent>"RULES-T*"</Talent> ne sont proposes a PERSONNE : il n'y a pas
+  d'underscore dans "T*", donc ni l'ancien filtre ni le nouveau ne peuvent les faire correspondre a
+  un talent de personnage. Comportement inchange depuis toujours, signale le 23/08/2026 sans etre
+  corrige - a regarder pour savoir ce que "T*" est cense vouloir dire.
+
+- (FAIT le 23/08/2026) Prefixer les modificateurs d'attribut dans les livres. Recensement avant
+  action : les 116 balises <Attribut> renseignees etaient DEJA toutes prefixees sauf UNE, celle du
+  trait RULES-T0BIG saisi la veille. Corrigee dans les deux Rulebooks, donnees seulement.
+  La crainte notee le 22/08 (le '-' du malus et SeparateurLivre sont le meme caractere) etait
+  INFONDEE : les deux seuls lecteurs du champ (winpersonnage.pas TalentAttribut ~3446 et
+  pdfpersonnage.pas PdfPersonnageAttribut ~631) consomment le '-' en POSITION 1 avant tout
+  decoupage de livre, donc "-RULES-ATTR_Ag" se lit correctement sans changer une ligne de Pascal.
+  Option des marqueurs [P]/[M] proposee par Nono puis ecartee d'un commun accord : elle aurait
+  demande une convention, du code de decoupe et une reecriture des donnees pour eviter une
+  ambiguite qui n'existe pas, au prix de la lisibilite du XML.
+
+- La quantite d'un modificateur d'attribut de talent est ECRITE EN DUR a 5 : StrToIntDef(Neg+'5',0),
+  aux deux endroits ci-dessus. C'est pourquoi T0BIG doit repeter "RULES-ATTR_S;RULES-ATTR_S" pour
+  signifier +10. Nono, le 23/08/2026 : "vu que les augmentations ne sont que par 5, on peut partir
+  la dessus" - donc NON RETENU pour l'instant. A rouvrir seulement si un livre demande un jour un
+  modificateur qui n'est pas un multiple de 5 ; la reponse serait alors de porter une VALEUR
+  (RULES-ATTR_S=10, ou une balise separee), pas un autre marqueur de signe.
+
+- Affichage brut du champ <Attribut> quand il contient PLUSIEURS codes : winmetier.pas 936 appelle
+  GetTexteLibelle et winraces.pas 675/686 GetAllTexteLibelle, or GetAllTexteLibelle decoupe sur ','
+  alors que <Attribut> separe par ';'. Un talent a code unique s'affiche donc en clair, mais T0BIG
+  (seul cas multiple aujourd'hui) affiche sa chaine brute. Pas une regression du 23/08 : c'etait
+  deja le cas avant le prefixage. Signale, non corrige.
 
 - Migrer les 5 fiches anterieures a la convention des prefixes (Ernold, Friederich, Harald, Kuno,
   Markus) : il suffit de les ouvrir puis de les enregistrer, la normalisation se fait a l'ecriture
@@ -479,3 +490,140 @@ PDF Personnage (PRIORITAIRE) :
 
 - Inventorier ce que Sea of Claws et Up in Arms pourraient encore apporter (equipements, talents,
   competences, sorts), un livre apres l'autre, comme cela a ete fait pour Lustria.
+
+
+-------------------------
+INVENTAIRE DE UP IN ARMS (23/08/2026) - ce qui reste a ajouter
+-------------------------
+Methode : comparaison du PDF (140 pages) au contenu de BOOK_UP_IN_ARMS.Xml, categorie par
+categorie. Ce qui est DEJA COMPLET, verifie et sans rien a faire :
+  * les 15 carrieres (les 15 blocs "Career Path" du livre, y compris Siege Specialist dont le
+    premier niveau s'appelle Crossbowman, ce qui masquait la correspondance) ;
+  * les 65 armes : armes de base, boucliers, cavalerie, escrime, pugilat, fleaux, parade,
+    armes d'hast, armes a deux mains, poudre noire, ingenierie ;
+  * les 4 nouvelles qualites d'arme (Unbalanced, Slash, Spread, Trip) ;
+  * les 12 talents de l'annexe III : ce sont des talents "New AND UPDATED", et les 12 existent
+    deja (11 dans le Rulebook, Crew Commander saisi dans Up in Arms). Rien a creer.
+  * l'ethnie Tilea (UPINA-RACE_HTIL).
+Aucun bloc DATA_ARMOR n'est attendu : le livre n'a pas de chapitre d'armure, ses boucliers sont
+des armes et ils sont saisis.
+
+RESTE A FAIRE, par ordre de rapport / effort :
+
+1) MIRACLE MANQUANT - le plus rapide, une entree. Le livre en donne NEUF (p.79), le fichier en
+   contient HUIT, et la numerotation reserve deja le trou : les ids vont de MIRAC_MYRMIDIA_07 a
+   _15 en sautant _11. Le manquant est "On Deadly Ground" (Range: Self, Target: You, Duration:
+   Allies within AoE (Willpower yards) - les allies ne recoivent pas de Condition Brise).
+
+2) COQUILLES DE SAISIE a corriger dans les libelles anglais existants :
+   * "Command the region"        -> "Command the Legion"
+   * "In Good Orper"             -> "In Good Order"
+   * "Shieldmaiden'S Devoltion"  -> "Shieldmaiden's Devotion"
+   * "Arqucbus" (arme)           -> "Arquebus"
+
+3) (FAIT le 23/08/2026) MUNITIONS. Les 12 nouvelles saisies sous UPINA-MUNI_01 a _12 ; les 8
+   autres entrees des deux tables existaient deja dans le Rulebook et n'ont pas ete recopiees
+   (Arrow, Bolt, Elf Arrow, Lead Bullet, Stone Bullet, Bullet and Powder, Improvised Shot and
+   Powder, Small Shot and Powder). Conventions relevees dans les donnees existantes avant de
+   saisir : "Scarce" -> DISPO_LIMITED, "Half weapon" -> Reach "/2", prix "d" -> "SC" et
+   "GC" -> "CO", "N/A" -> "-", aucune qualite -> "-", et la note d'une qualite se met apres un
+   espace ("WEAPB23 2" = Reload 2). "Accurate" de la table est la qualite "Precise" (WEAPB16),
+   c'est deja le choix fait pour l'Elf Arrow du Rulebook.
+
+3bis) (RESOLU le 23/08/2026, par Nono) La qualite "Infected" de Scrap and Powder n'etait pas une
+   invention du livre : c'est le TRAIT DE CREATURE Infected du Rulebook p.340, dont la definition
+   dit explicitement "The creature, OR ITS WEAPON, carries a nasty infection. If it causes a living
+   opponent to lose Wounds, it must pass an Easy (+40) Endurance Test or contract a Festering Wound
+   (p.187)." Le trait prevoit donc lui-meme le cas de l'arme. Saisie en UPINA-WEAPB37 avec ce texte,
+   repris mot pour mot, et posee sur UPINA-MUNI_08. Piste trouvee par Nono.
+
+3ter) (CORRIGE le 23/08/2026) Collision de numero WEAPB31 entre deux livres. Le champ <Quality>
+   d'une arme stocke les codes SANS prefixe de livre, la numerotation WEAPB est donc un espace de
+   noms GLOBAL - et NAGGA-WEAPB31 "Barbed" (Lords of Naggaroth, 1 arme) et UPINA-WEAPB31
+   "Unbalanced" (Up in Arms, 8 armes) portaient le meme numero : les deux livres charges ensemble,
+   c'est le premier trouve dans ListArmeBonus qui gagnait, donc un des deux affichait le mauvais
+   libelle selon l'ordre de chargement.
+   Arbitrage de Nono : "Naggaroth est un livre de fan, donc c'est lui qui est le moins important".
+   NAGGA-WEAPB31 renumerote en NAGGA-WEAPB38, avec son unique utilisation (NAGGA-MUNI_09, Barbed
+   Bolts). Verification finale sur les 17 livres : 38 codes declares, AUCUNE collision entre
+   livres, aucun code utilise sans declaration.
+   A RETENIR : tant que <Quality> reste sans prefixe, tout nouveau BonusMalus doit prendre le
+   premier numero libre AU NIVEAU DE TOUS LES LIVRES, pas du livre courant. Prochain libre : 39.
+   La vraie sortie serait de prefixer les codes dans <Quality> comme partout ailleurs.
+
+4) (ECARTE le 23/08/2026, decision de Nono) ARMES DE SIEGE p.122 - les 12 pieces d'artillerie
+   (Ballista, Cannon small/medium/large, Mortar, Swivel Gun, Catapult small/medium/large, Volley
+   Gun, Helblaster Volley Gun, Helstorm Rocket Battery) et leurs 12 munitions p.123 NE SERONT PAS
+   SAISIES. Nono : "je pense que l'artillerie n'a pas de sens dans une fiche de personnage".
+   Argument technique qui va dans le meme sens : elles reposent sur la qualite "Crewed" (equipe de
+   2 a 4 servants, avec penalites si l'equipe est incomplete), que le programme ne modelise pas.
+   Ne pas rouvrir sans raison nouvelle.
+
+HORS MODELE, a ne pas chercher a saisir : "A Soldier's Burden" p.87 (equipement courant, rechauds,
+outils) - le programme n'a pas de notion d'objet ordinaire, seulement armes et armures. Idem pour
+les regles de MJ du livre : Group Advantage, Poursuites, Blessures Critiques alternatives,
+Combat Monte, Degats aux Structures.
+
+
+-------------------------
+INVENTAIRE DE SEA OF CLAWS (23/08/2026) - ce qui reste a ajouter
+-------------------------
+Meme methode que pour Up in Arms : comparaison du PDF au contenu de BOOK_SEA_OF_CLAWS.Xml,
+categorie par categorie.
+
+DEJA COMPLET, verifie :
+  * les 9 carrieres (les 8 de la classe Marin p.64-79 + Pretre de Stromfels p.90) ;
+  * les 15 sorts des deux cultes : 6 miracles de Manann + 2 benedictions (p.87-89) et les 7
+    miracles de Stromfels (p.91-93) - comptes un par un dans le PDF, aucun ne manque ;
+  * les 3 ethnies Norses, la regle SEAOF-RULE_SEAFARER et sa table de tirage ;
+  * les 3 specialisations de competence.
+  Audit de coherence : 79 references de talents et 62 de competences dans ce livre, TOUTES
+  declarees quelque part. Aucune reference pendante.
+  (Le "trou" WORK117 dans la numerotation des carrieres n'en est pas un : ce numero appartient
+  a The Horned Rat Companion. La numerotation WORK est globale, comme celle des WEAPB.)
+
+RESTE A FAIRE :
+
+1) (FAIT le 23/08/2026) Les six sorts de l'encadre "Sea Magics" p.15-16 sont saisis, en
+   SEAOF-COLOR_284 a _289, TypSpell "Domain Magic", rattaches a RULES-T0088_VIE (Living Mire,
+   Water Water Everywhere, Whirlpool) et RULES-T0088_CIEUX (Blessings of Bel Shanaar, Niezlib's
+   Optimal Firing Solution, Sea of Glass). Aucune ligne de Pascal, les deux talents porteurs
+   etaient deja declares comme familles magiques.
+   La numerotation COLOR est GLOBALE comme WORK et WEAPB : 283 numeros etaient pris, d'ou 284.
+   Audit d'atteignabilite refait : 0 sort inaccessible sur 665.
+
+1bis) COQUILLE A CORRIGER - un id de sort contient un ESPACE EN FIN : <Sort id="RULES-ARCAN_11 ">
+   dans BOOK_RULESBOOK.Xml ligne 16099 et BOOK_RULESBOOK_FRANCAIS.Xml ligne 15982. Il n'existe
+   aucun "RULES-ARCAN_11" sans espace, donc les deux fichiers sont coherents entre eux et le sort
+   s'affiche ; mais toute reference ecrite "RULES-ARCAN_11" (sans espace) ne le trouvera jamais.
+   C'est le seul id de sort de toute la base dans ce cas. Trouve le 23/08/2026, NON CORRIGE
+   (a verifier avant : qu'aucune fiche de personnage enregistree ne porte deja la forme avec
+   espace, sinon la correction casserait ces fiches).
+
+2) A TRANCHER - CREW COMMANDER, DEPENDANCE ENTRE DEUX LIVRES.
+   Sea of Claws definit TROIS nouveaux talents p.63 : Chanty, Crew Commander, Master and
+   Commander. Deux seulement sont saisis, et la numerotation montre que le trou etait prevu :
+   SEAOF-T0182 (Chanty), [T0183 ABSENT], SEAOF-T0184 (Master and Commander).
+   Aujourd'hui, le niveau 3 du Ship's Gunner (Gunnery Captain) reference UPINA-T0173, le Crew
+   Commander de Up in Arms. Consequence : un joueur qui possede Sea of Claws mais PAS Up in Arms
+   a un niveau de carriere dont le talent ne se resout pas (libelle vide depuis le correctif
+   2.17 ; avant, c'etait pire).
+   C'est contraire au principe du chantier 2.13 - chaque livre doit posseder "ses" infos - mais
+   la duplication a un cout elle aussi : recensement fait sur les 17 livres, AUCUN talent n'est
+   aujourd'hui declare dans deux livres, et si les deux livres sont charges le joueur verrait
+   Crew Commander en double dans le catalogue.
+   Trois sorties possibles :
+     (a) declarer SEAOF-T0183 = Crew Commander (texte identique, le livre le reimprime p.63) et
+         faire pointer le Gunnery Captain dessus - conforme a 2.13, mais doublon a l'affichage ;
+     (b) laisser la reference croisee et l'assumer - il faut alors le dire quelque part, parce
+         que rien dans le programme ne signale un talent introuvable ;
+     (c) prevoir un mecanisme de "meme talent declare dans plusieurs livres" (dedoublonnage a
+         l'affichage sur le libelle) - le plus propre, le plus cher.
+   Signale le 23/08/2026, NON TRANCHE.
+
+HORS MODELE, a ne pas chercher a saisir : les quatre tables d'armes du livre sont TOUTES de
+l'artillerie (pieces d'artillerie p.100 et p.157, munitions d'artillerie p.44 et p.100) - meme
+decision que pour Up in Arms, l'artillerie n'a pas sa place dans une fiche de personnage. Idem
+pour les bateaux et leurs ameliorations (ch. XII), le bestiaire marin (ch. XVI), et les regles
+de MJ : navigation, meteo, collisions, tests d'equipage, moral, voyages prolonges, commerce.
+Le livre n'a AUCUNE arme ni armure personnelle.

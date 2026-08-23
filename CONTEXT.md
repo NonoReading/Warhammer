@@ -2166,7 +2166,7 @@ restent corrects — inutile de les retirer.
 
 ---
 
-### 2.18 Les sorts de bénédiction sortent du code et passent en données — en cours (22/08/2026)
+### 2.18 L'accès aux sorts sort du code et passe en données — terminé (23/08/2026)
 
 **Le point de départ.** En inventoriant ce que les livres pourraient encore apporter, la question
 « est-ce qu'ajouter *High Magic* demande du code ? » a montré que oui — et Nono a tranché :
@@ -2204,14 +2204,99 @@ if Result.ModeSort = '' then
 
 Données saisies dans les deux Rulebooks sur `T0012_*` (Bless), `T0080_*`, `T0088_*`, `T0089`.
 
-**État — étape 1 sur 3 faite.** Le modèle existe et est renseigné, mais **rien ne le lit encore**.
+**État — étapes 1 et 2 faites (23/08/2026), validées par Nono.** Les quatre constantes
+`TalentSortXxx` **n'existent plus**. Trois constantes génériques les remplacent :
+`ConstMagieAucune = 0`, `ConstMagieExclusive = 1`, `ConstMagieCumulable = 2`.
 
-**Point de reprise exact — étape 2** : dans `winpersonnage.pas`, remplacer les cinq tests
-`copy(CodeValeur,1,5) = TalentSortXxx` par une lecture de `PTalent.Magie` / `PTalent.ModeSort`, puis
-**supprimer les quatre constantes `TalentSortXxx`**. Le comportement doit être *strictement identique* :
-sujet de test **Rhya** (prêtresse de Rhya), qui fonctionne aujourd'hui. Ensuite seulement, **étape 3** :
-saisir *High Magic* (5 sorts jouables, le talent `High Magic`, et `Blessed by Isha` qui n'existe pas
-encore) — si le modèle est juste, cette étape ne demande **aucune ligne de Pascal**.
+Correspondance des données, vérifiée avant de coder :
+
+| talent | `<Magic>` | `<SpellMode>` | ancienne constante |
+|---|---|---|---|
+| `T0012_*` Bénédiction | 0 | `AUTO` | `TalentSortBenediction` |
+| `T0080_*` Miracle | 2 | `CHOICE` | `TalentSortMiracle` |
+| `T0088_*` Domaine | 1 | `NONE` | `TalentSortDomaine` |
+| `T0089` Magie Mineure | 2 | `NONE` | `TalentSortMagieMineure` |
+
+Trois fichiers touchés, et **les deux derniers n'étaient pas prévus** :
+
+1. `winpersonnage.pas` — `ButtonSortClick` (les deux tests cumulables **fusionnent en un seul**) et
+   `SortAffiche`.
+2. `winfiltre.pas` — **site oublié à ma première recherche** (voir l'avertissement ci-dessous).
+3. `winspell.pas` — le filtre lui-même (voir plus bas).
+
+⚠️ **Ma vérification « tous les appels » était incomplète, et c'est la leçon du jour.** Mon `grep`
+portait sur les **71** `.pas` présents dans ma copie de travail, alors que `WarhammerHelp.lpi` en
+déclare **84**. `winfiltre.pas` n'y était pas. J'ai donc supprimé des constantes sans avoir tout le
+code sous les yeux. **Le bon réflexe : lister les unités du `.lpi` et comparer à ce qu'on a**, avant
+tout `grep` censé être exhaustif. Les 13 unités manquantes ont été récupérées ; le relevé refait sur
+les 84 ne laisse plus aucune référence.
+
+**Le filtre de `winfiltre.pas` était mort depuis les préfixes de livre.** Il reconnaissait les talents
+magiques par `copy(PTalent.CodeTalent,1,5)` — or les **805** `<Talent id=...>` des 17 livres sont tous
+préfixés, donc ce `copy` vaut `'RULES'`, jamais `'T0012'` : en mode « sorts seuls » la liste était
+**vide**. Reconstruit en deux temps — relever d'abord les *familles* concernées (`<Magic>`/`<SpellMode>`
+ne sont déclarés que sur l'entrée générique, alors que la liste affichée contient les spécialisations),
+puis tester l'appartenance ; passer par `ChercheTalent` ligne à ligne ferait 800 × 800 comparaisons à
+l'ouverture.
+
+🐛 **Le filtre de `winspell.pas` : Kuno se voyait offrir les sorts arcaniques.** Même famille de défaut,
+déclenchée par un autre chemin :
+
+```pascal
+if pos(ValeurGenerique, PSort.ListeTalent) <> 0 then
+  ValT := copy(ValT, 1, 5);          // 'RULES-T0088_*'  ->  'RULES'
+```
+
+`'RULES'` étant contenu dans **tous** les codes préfixés, `Pos(ValT, SelectWinSort)` réussissait
+toujours et tout sort à talent générique passait. **Ce n'est pas la suppression des constantes qui l'a
+déclenché** — `winspell.pas` ne les a jamais utilisées. Le déclencheur est la normalisation §2.19 :
+la fiche de Kuno est passée de `T0080_SIGMAR` à `RULES-T0080_SIGMAR`, et `Pos('RULES', ' T0080_SIGMAR')`
+valait 0 (rejet correct, **par chance**) là où `Pos('RULES', ' RULES-T0080_SIGMAR')` vaut 2. Diagnostic
+établi en comparant deux sauvegardes réelles de Kuno, pas de mémoire.
+
+Remplacé par `SortTalentAccessible`, qui compare vraiment les familles. **Point à retenir** :
+`CompareRechercheValeur` **ne sait pas gérer le `_*`** — `VerifieRecherche` compare les codes à
+l'identique et ne lève que le préfixe de livre ; la généricité est traitée à part, par le repli
+explicite de `ChercheTalent`. Le test dupliqué (écrit **deux fois à l'identique**) a disparu.
+
+**Étape 3 — faite et validée le 23/08/2026 : la Magie du Chaos, en données seules.**
+
+⚠️ D'abord une erreur à ne pas refaire : j'avais proposé *High Magic* comme sujet de test. **Elle
+n'existe nulle part** — ni dans les 17 XML, ni dans les quatre PDF (Rulebook, Lustria, Sea of Claws,
+Up in Arms). Je l'avais tirée de ma connaissance générale de Warhammer, pas des données de Nono.
+**Règle** : un ajout de contenu se vérifie dans les livres *avant* d'être proposé.
+
+Le bon sujet a été trouvé en retournant la question — auditer les **658 sorts** des 17 livres en
+demandant « ce sort est-il atteignable par un talent déclaré magique ? ». Six ne l'étaient pas :
+
+```
+RULES-CHAOS_01  RULES-T0172_NURGLE     Stream of Corruption
+RULES-CHAOS_02  RULES-T0172_SLAANESH   Consent
+RULES-CHAOS_03  RULES-T0172_TZEENTCH   Betrayal of Tzeentch      (× 2 langues)
+```
+
+`RULES-T0172_*` est la **Magie du Chaos**, saisie de longue date avec ses trois spécialisations et ses
+trois sorts, mais absente des quatre constantes : **ces sorts étaient inaccessibles depuis toujours**,
+sans que rien ne le signale. Tout le reste était déjà là — `TypeSortChaos = 'Chaos Magic'`, la règle
+des 100 XP dans `XpSortCout`, les gardes de suppression d'équipement. Il ne manquait que la
+déclaration :
+
+```xml
+<Talent id="RULES-T0172_*">
+<Magic>"1"</Magic>
+<SpellMode>"NONE"</SpellMode>
+```
+
+Deux balises, dans les deux Rulebooks, **zéro ligne de Pascal, pas de recompilation**. Profil du
+Domaine arcanique : exclusif (cohérent avec « vous ne pouvez connaître qu'un seul Savoir de Magie
+chaotique ») et sorts choisis au catalogue. Confirmé par Nono : *Flot de Corruption* est proposé.
+
+Nouvel audit : **0 sort inaccessible sur 658**. Familles magiques déclarées : `T0012`, `T0080`,
+`T0088`, `T0089`, `T0172`.
+
+**Cet audit est réutilisable** et vaut mieux qu'une relecture : croiser les `<Talent>` cités par les
+`<Sort>` avec les talents portant `<Magic>`/`<SpellMode>`. À relancer après chaque ajout de livre — il
+détecte le contenu saisi mais injoignable, qui ne provoque aucune erreur et ne se voit donc jamais.
 
 **Correctif attrapé en chemin** (défaut réel, pas lié au modèle) : `SortAffiche` cherchait les sorts
 avec le code du talent **générique** au lieu de la spécialisation choisie — d'où « j'ai ajouté *Blessed
@@ -2268,11 +2353,36 @@ rien changé (*« pas mieux sur Gunther et Kuno »*), pour la raison suivante, q
 
 Corrigé à `winpersonnage.pas` ligne ~2604, avec le commentaire sur place. Confirmé par Nono.
 
-🚩 **Signalé sans être corrigé** : `winpersonnage.pas` **ligne ~2857** compare contre le champ `Attribut`
-d'un talent, qui peut contenir **`-ATTR_Ag`** (un malus). Comme `SeparateurLivre = '-'`,
-`CompareRechercheValeur` y découperait livre=`''` / code=`ATTR_Ag` et **transformerait un malus en
-correspondance positive**. Cette ligne doit rester en `=` brut **tant que les données n'ont pas été
-préfixées** — ce qui est justement la tâche notée dans `A FAIRE.txt` pour la prochaine session.
+**Le signe `-` des modificateurs d'attribut — fausse alerte, tranché le 23/08/2026.** J'avais noté le
+22/08 que `-ATTR_Ag` était un danger, `SeparateurLivre` valant `'-'`. **Vérification faite dans le code :
+c'est faux.** Les deux seuls lecteurs du champ `<Attribut>` — `TalentAttribut` (`winpersonnage.pas`
+~3446) et `PdfPersonnageAttribut` (`pdfpersonnage.pas` ~631) — font tous deux :
+
+```pascal
+if leftStr(Strings[ind],1) = '-' then Neg := '-' else Neg := '';
+Attr := RightStr(Strings[ind], Length(Strings[ind]) - Length(Neg));
+```
+
+Le signe est **consommé en position 1, avant tout découpage de livre**. `-RULES-ATTR_Ag` se lit donc
+correctement **sans une ligne de Pascal**. Nono avait proposé des marqueurs `[P]`/`[M]` pour lever
+l'ambiguïté : écarté d'un commun accord, ça aurait coûté une convention, du code de découpe et une
+réécriture des données pour un problème inexistant, au prix de la lisibilité du XML.
+
+Le recensement fait à cette occasion a montré que les **116** balises `<Attribut>` renseignées étaient
+**déjà toutes préfixées sauf une** : celle de `RULES-T0BIG`, saisie la veille par moi. Corrigée en
+`RULES-ATTR_S;RULES-ATTR_S;RULES-ATTR_T;RULES-ATTR_T;-RULES-ATTR_Ag` dans les deux Rulebooks.
+
+🐛 **Ce que ce recensement a réellement trouvé** : les deux lecteurs ne comparent **pas** de la même
+façon. `winpersonnage.pas` utilise `CompareRechercheValeur` (tolérant au préfixe), `pdfpersonnage.pas`
+un `=` **strict** contre un code préfixé. Les codes nus de `T0BIG` étaient donc comptés à l'écran et
+**silencieusement ignorés dans le PDF** — le préfixage corrige les deux d'un coup, mais la divergence
+entre les deux lecteurs reste et resservira.
+
+⚠️ **La vraie limite du modèle, laissée volontairement en l'état** : la quantité est écrite **en dur**
+(`StrToIntDef(Neg+'5',0)`) — toujours ±5, d'où la répétition `RULES-ATTR_S;RULES-ATTR_S` pour +10.
+Nono : *« vu que les augmentations ne sont que par 5, on peut partir là-dessus »*. À rouvrir seulement
+si un livre demande un jour autre chose qu'un multiple de 5 ; la réponse serait alors de porter une
+**valeur**, pas un autre marqueur de signe.
 
 **Point de reprise** : migrer les 5 fiches anciennes (**Ernold, Friederich, Harald, Kuno, Markus**) en les
 ouvrant puis en les enregistrant, puis reprendre le vrai correctif de `winspell.pas`.

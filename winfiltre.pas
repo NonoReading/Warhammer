@@ -146,6 +146,7 @@ procedure TWinFiltre.ChargeTalent(SortSeul: Boolean);
   var
     IndTab:        Integer = 0;
     PTalent:       StructureTalent;
+    FamilleSort:   TStringList;
   begin
     LabelTalent.Caption         := GetTexteLibelle('LAB_007');
 
@@ -159,15 +160,29 @@ procedure TWinFiltre.ChargeTalent(SortSeul: Boolean);
     TabTalent.ColWidths[2]     := 230;
     TabTalent.ColWidths[3]     := 0;
 
+    // Quels talents concernent les sorts : lu dans les DONNEES (<Magic>/<SpellMode>), plus dans
+    // les quatre constantes TalentSortXxx supprimees le 23/08/2026. CONTEXT.md 2.18.
+    //
+    // En deux temps, parce que la liste parcourue plus bas contient les SPECIALISATIONS
+    // (RULES-T0012_HANDRICH) alors que <Magic>/<SpellMode> ne sont declares que sur l'entree
+    // GENERIQUE (RULES-T0012_*). On releve donc d'abord les FAMILLES concernees - le code prive
+    // de son "_specialisation" - puis on teste l'appartenance. Passer par ChercheTalent ligne a
+    // ligne donnerait le meme resultat mais ferait 800 x 800 comparaisons a l'ouverture.
+    //
+    // La liste n'est construite que si SortSeul : dans l'autre cas elle ne sert a rien.
+    FamilleSort := TStringList.Create;
+    if SortSeul then
+      for PTalent in ListTalent do
+        if (PTalent.Magie <> ConstMagieAucune)
+            or ((PTalent.ModeSort <> '') and (PTalent.ModeSort <> ConstModeSortAucun)) then
+          FamilleSort.Add(ExtractStringBefore(PTalent.CodeTalent, ValeurSousCompetence));
+
     for PTalent in ListTalent do
       begin
         if (pos(ValeurGenerique,PTalent.CodeTalent) = 0)
             and (pos(SeparateurMulti,PTalent.CodeTalent) = 0) then
           if (not SortSeul and (pos(ValeurSousCompetence,PTalent.CodeTalent) = 0))
-              or (SortSeul and (copy(PTalent.CodeTalent,1,5) = TalentSortBenediction))
-              or (SortSeul and (copy(PTalent.CodeTalent,1,5) = TalentSortMiracle))
-              or (SortSeul and (copy(PTalent.CodeTalent,1,5) = TalentSortMagieMineure))
-              or (SortSeul and (copy(PTalent.CodeTalent,1,5) = TalentSortDomaine)) then
+              or (SortSeul and (FamilleSort.IndexOf(ExtractStringBefore(PTalent.CodeTalent, ValeurSousCompetence)) >= 0)) then
             begin
               Inc(IndTab);
               if TabTalent.RowCount <= IndTab then
@@ -178,6 +193,7 @@ procedure TWinFiltre.ChargeTalent(SortSeul: Boolean);
               TabTalent.Cells[3, IndTab]   := PTalent.CodeTalent;
             end;
     end;
+    FamilleSort.Free;
     TabTalent.SortColRow(true,2);
 
   end;

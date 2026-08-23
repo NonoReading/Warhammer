@@ -8,7 +8,7 @@
       <Unit>
         <Filename Value="WarhammerHelp.lpr"/>
         <IsPartOfProject Value="True"/>
-        <EditorIndex Value="8"/>
+        <EditorIndex Value="9"/>
         <CursorPos X="36" Y="6"/>
         <UsageCount Value="200"/>
         <Loaded Value="True"/>
@@ -242,10 +242,9 @@
         <HasResources Value="True"/>
         <ResourceBaseClass Value="Form"/>
         <UnitName Value="WinPersonnage"/>
-        <IsVisibleTab Value="True"/>
         <EditorIndex Value="6"/>
-        <TopLine Value="3583"/>
-        <CursorPos X="30" Y="3595"/>
+        <TopLine Value="3584"/>
+        <CursorPos X="36" Y="3592"/>
         <UsageCount Value="200"/>
         <Loaded Value="True"/>
         <LoadedDesigner Value="True"/>
@@ -430,10 +429,13 @@
         <HasResources Value="True"/>
         <ResourceBaseClass Value="Form"/>
         <UnitName Value="WinFiltre"/>
-        <EditorIndex Value="-1"/>
-        <TopLine Value="153"/>
-        <CursorPos X="86" Y="169"/>
+        <IsVisibleTab Value="True"/>
+        <EditorIndex Value="7"/>
+        <TopLine Value="171"/>
+        <CursorPos X="59" Y="185"/>
         <UsageCount Value="200"/>
+        <Loaded Value="True"/>
+        <LoadedDesigner Value="True"/>
       </Unit>
       <Unit>
         <Filename Value="chargeracecreation.pas"/>
@@ -589,7 +591,7 @@
         <HasResources Value="True"/>
         <ResourceBaseClass Value="Form"/>
         <UnitName Value="WinMutation"/>
-        <EditorIndex Value="7"/>
+        <EditorIndex Value="8"/>
         <TopLine Value="82"/>
         <CursorPos X="27" Y="94"/>
         <UsageCount Value="31"/>
@@ -1231,10 +1233,6 @@
     <JumpHistory HistoryIndex="29">
       <Position>
         <Filename Value="winpersonnage.pas"/>
-        <Caret Line="1947" Column="87" TopLine="1929"/>
-      </Position>
-      <Position>
-        <Filename Value="winpersonnage.pas"/>
         <Caret Line="1959" Column="60" TopLine="1941"/>
       </Position>
       <Position>
@@ -1348,6 +1346,10 @@
       <Position>
         <Filename Value="xmlexportimport.pas"/>
         <Caret Line="1041" Column="38" TopLine="1028"/>
+      </Position>
+      <Position>
+        <Filename Value="winpersonnage.pas"/>
+        <Caret Line="3592" Column="36" TopLine="3584"/>
       </Position>
     </JumpHistory>
     <RunParams>

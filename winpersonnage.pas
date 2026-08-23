@@ -1086,15 +1086,26 @@ function TWinPersonnages.ChoixNonFait(): Boolean;
 procedure TWinPersonnages.ButtonSortClick(Sender: TObject);
   Var
     PSort:        StructureSort;
+    PTalent:      StructureTalent;
     Ind:          Integer;
     ListeTalent:  String;
   begin
-    // ajouter les domaines
+    // Quels talents ouvrent le catalogue de sorts : lu dans les DONNEES (balise <Magic>), plus
+    // en dur. Avant le 23/08/2026, les quatre talents concernes etaient nommes par les constantes
+    // TalentSortXxx et reconnus sur leurs 5 PREMIERS CARACTERES ; ajouter un talent magique
+    // demandait donc de recompiler. CONTEXT.md 2.18.
+    //
+    // Les deux passes ne sont pas symetriques et c'est voulu : ConstMagieExclusive ecarte tout le
+    // reste (avoir un Domaine arcanique interdit d'apprendre Miracles et Magie Mineure), alors que
+    // ConstMagieCumulable s'additionne. C'est exactement l'ancien comportement, ecrit en donnees.
+    //
+    // ChercheTalent reporte <Magic> de l'entree generique (T0088_*) sur la specialisation
+    // (T0088_FEU), qui ne porte qu'une Description - voir le repli dans chargetalent.pas.
     ListeTalent := '';
     For Ind := 1 to TabTalent.RowCount-1 do
       begin
-        DecoupeCodeValeur(TabTalent.Cells[ColTalCode, ind]);
-        if copy(CodeValeur, 1, 5) = TalentSortDomaine then
+        PTalent := ChercheTalent(TabTalent.Cells[ColTalCode, ind]);
+        if PTalent.Magie = ConstMagieExclusive then
           ListeTalent := ListeTalent+' '+TabTalent.Cells[ColTalCode, ind];
       end;
 
@@ -1102,10 +1113,8 @@ procedure TWinPersonnages.ButtonSortClick(Sender: TObject);
     if ListeTalent = '' then
       For Ind := 1 to TabTalent.RowCount-1 do
         begin
-          DecoupeCodeValeur(TabTalent.Cells[ColTalCode, ind]);
-          if copy(CodeValeur, 1, 5) = TalentSortMiracle then
-            ListeTalent := ListeTalent+' '+TabTalent.Cells[ColTalCode, ind];
-          if copy(CodeValeur, 1, 5) = TalentSortMagieMineure then
+          PTalent := ChercheTalent(TabTalent.Cells[ColTalCode, ind]);
+          if PTalent.Magie = ConstMagieCumulable then
             ListeTalent := ListeTalent+' '+TabTalent.Cells[ColTalCode, ind];
         end;
 
@@ -1219,9 +1228,10 @@ procedure TWinPersonnages.EditTotalXpKeyUp(Sender: TObject; var Key: Word;
 
 Procedure TWinPersonnages.SortAffiche();
   var
-    PSort:  StructureSort;
-    Tal:    String;
-    Ind:    Integer;
+    PSort:   StructureSort;
+    PTalent: StructureTalent;
+    Tal:     String;
+    Ind:     Integer;
   begin
     EffaceDonnee(TabSort,1);
     for ind := 1 to TabAugmentationTalent.RowCount - 1 do
@@ -1237,8 +1247,13 @@ Procedure TWinPersonnages.SortAffiche();
             Tal := TabAugmentationTalent.Cells[ColAugmTalSpeSel, Ind]
           else
             Tal := TabAugmentationTalent.Cells[ColAugmTalCode, Ind];
-          DecoupeCodeValeur(Tal);
-          if copy(CodeValeur,1,5) = TalentSortBenediction then
+          // Comment les sorts arrivent a l'achat du talent : lu dans les DONNEES (<SpellMode>),
+          // plus en dur. AUTO = les sorts qui citent ce talent sont accordes d'office (une
+          // Benediction depend du dieu et ne s'achete pas), CHOICE = une ligne "a choisir" est
+          // posee (un Miracle se choisit). Ancien equivalent : copy(CodeValeur,1,5) compare a
+          // TalentSortBenediction / TalentSortMiracle. CONTEXT.md 2.18.
+          PTalent := ChercheTalent(Tal);
+          if PTalent.ModeSort = ConstModeSortAuto then
             begin
               For Psort in ListSort do
                 if Pos(Tal, PSort.ListeTalent) > 0 then
@@ -1249,7 +1264,7 @@ Procedure TWinPersonnages.SortAffiche();
                     TabSort.Cells[3, TabSort.RowCount-1]   := Tal;
                   end;
             end
-          else if copy(CodeValeur,1,5) = TalentSortMiracle then
+          else if PTalent.ModeSort = ConstModeSortChoix then
             begin
               TabSort.Visible                     := true;
               TabSort.RowCount                    := TabSort.RowCount + 1;

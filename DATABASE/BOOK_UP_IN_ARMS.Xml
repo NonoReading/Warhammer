@@ -3114,7 +3114,7 @@ Ifthe Character passes the Test, the crew members may then use the Characters Ra
 <Ammunition>"0"</Ammunition>
 </Weapon>
 <Weapon id="UPINA-PROJ_POUDRE_11">
-<Description language="ENGLISH">"Arqucbus"</Description>
+<Description language="ENGLISH">"Arquebus"</Description>
 <Skill>"RULES-COMPPROJ_POUDRE"</Skill>
 <Damage>"+9"</Damage>
 <Availability>"DISPO_EXOTIC"</Availability>
@@ -3233,6 +3233,150 @@ Ifthe Character passes the Test, the crew members may then use the Characters Ra
 <Hand>"1"</Hand>
 <Ammunition>"0"</Ammunition>
 </Weapon>
+<Weapon id="UPINA-MUNI_01">
+<Description language="ENGLISH">"Barbed Arrow"</Description>
+<Skill>"RULES-COMPPROJ_ARC"</Skill>
+<Damage>"+0"</Damage>
+<Availability>"DISPO_LIMITED"</Availability>
+<Reach>"+0"</Reach>
+<Price>"8/-"</Price>
+<Encumbrance>"0"</Encumbrance>
+<Quality>"WEAPB12,WEAPB32 1"</Quality>
+<Hand>"0"</Hand>
+<Ammunition>"12"</Ammunition>
+</Weapon>
+<Weapon id="UPINA-MUNI_02">
+<Description language="ENGLISH">"Bodkin Arrow"</Description>
+<Skill>"RULES-COMPPROJ_ARC"</Skill>
+<Damage>"+0"</Damage>
+<Availability>"DISPO_LIMITED"</Availability>
+<Reach>"+0"</Reach>
+<Price>"8/-"</Price>
+<Encumbrance>"0"</Encumbrance>
+<Quality>"WEAPB12,WEAPB22"</Quality>
+<Hand>"0"</Hand>
+<Ammunition>"12"</Ammunition>
+</Weapon>
+<Weapon id="UPINA-MUNI_03">
+<Description language="ENGLISH">"Sharp Stick"</Description>
+<Skill>"RULES-COMPPROJ_ARC"</Skill>
+<Damage>"-2"</Damage>
+<Availability>"DISPO_COMMON"</Availability>
+<Reach>"/2"</Reach>
+<Price>"-"</Price>
+<Encumbrance>"0"</Encumbrance>
+<Quality>"WEAPB24,WEAPB26,WEAPB27"</Quality>
+<Hand>"0"</Hand>
+<Ammunition>"1"</Ammunition>
+</Weapon>
+<Weapon id="UPINA-MUNI_04">
+<Description language="ENGLISH">"Pebble"</Description>
+<Skill>"RULES-COMPPROJ_FROND"</Skill>
+<Damage>"-2"</Damage>
+<Availability>"DISPO_COMMON"</Availability>
+<Reach>"-10"</Reach>
+<Price>"-"</Price>
+<Encumbrance>"0"</Encumbrance>
+<Quality>"WEAPB26,WEAPB27"</Quality>
+<Hand>"0"</Hand>
+<Ammunition>"1"</Ammunition>
+</Weapon>
+<Weapon id="UPINA-MUNI_05">
+<Description language="ENGLISH">"Paper Cartridge"</Description>
+<Skill>"RULES-COMPPROJ_POUDRE/RULES-COMPPROJ_ING"</Skill>
+<Damage>"+1"</Damage>
+<Availability>"DISPO_LIMITED"</Availability>
+<Reach>"+0"</Reach>
+<Price>"5/-"</Price>
+<Encumbrance>"0"</Encumbrance>
+<Quality>"WEAPB12,WEAPB22"</Quality>
+<Hand>"0"</Hand>
+<Ammunition>"12"</Ammunition>
+</Weapon>
+<Weapon id="UPINA-MUNI_06">
+<Description language="ENGLISH">"Aqshy-Infused Powder"</Description>
+<Skill>"RULES-COMPPROJ_POUDRE/RULES-COMPPROJ_ING"</Skill>
+<Damage>"+2"</Damage>
+<Availability>"DISPO_EXOTIC"</Availability>
+<Reach>"+10"</Reach>
+<Price>"1CO"</Price>
+<Encumbrance>"0"</Encumbrance>
+<Quality>"WEAPB12,WEAPB22"</Quality>
+<Hand>"0"</Hand>
+<Ammunition>"12"</Ammunition>
+</Weapon>
+<Weapon id="UPINA-MUNI_07">
+<Description language="ENGLISH">"Precision Shot and Powder"</Description>
+<Skill>"RULES-COMPPROJ_POUDRE/RULES-COMPPROJ_ING"</Skill>
+<Damage>"+1"</Damage>
+<Availability>"DISPO_COMMON"</Availability>
+<Reach>"+0"</Reach>
+<Price>"3/-"</Price>
+<Encumbrance>"0"</Encumbrance>
+<Quality>"WEAPB12,WEAPB22,WEAPB16"</Quality>
+<Hand>"0"</Hand>
+<Ammunition>"1"</Ammunition>
+</Weapon>
+<Weapon id="UPINA-MUNI_08">
+<Description language="ENGLISH">"Scrap and Powder"</Description>
+<Skill>"RULES-COMPPROJ_POUDRE/RULES-COMPPROJ_ING"</Skill>
+<Damage>"-1"</Damage>
+<Availability>"DISPO_COMMON"</Availability>
+<Reach>"/2"</Reach>
+<Price>"2/-"</Price>
+<Encumbrance>"0"</Encumbrance>
+<Quality>"WEAPB33 3,WEAPB37"</Quality>
+<Hand>"0"</Hand>
+<Ammunition>"12"</Ammunition>
+</Weapon>
+<Weapon id="UPINA-MUNI_09">
+<Description language="ENGLISH">"Large Bullet and Powder"</Description>
+<Skill>"RULES-COMPPROJ_POUDRE/RULES-COMPPROJ_ING"</Skill>
+<Damage>"+2"</Damage>
+<Availability>"DISPO_LIMITED"</Availability>
+<Reach>"+0"</Reach>
+<Price>"1CO"</Price>
+<Encumbrance>"0"</Encumbrance>
+<Quality>"WEAPB12,WEAPB21,WEAPB22"</Quality>
+<Hand>"0"</Hand>
+<Ammunition>"12"</Ammunition>
+</Weapon>
+<Weapon id="UPINA-MUNI_10">
+<Description language="ENGLISH">"Bomb"</Description>
+<Skill>"RULES-COMPPROJ_POUDRE/RULES-COMPPROJ_ING"</Skill>
+<Damage>"+5"</Damage>
+<Availability>"DISPO_RARE"</Availability>
+<Reach>"+0"</Reach>
+<Price>"3CO"</Price>
+<Encumbrance>"0"</Encumbrance>
+<Quality>"WEAPB15 5,WEAPB24,WEAPB21"</Quality>
+<Hand>"0"</Hand>
+<Ammunition>"1"</Ammunition>
+</Weapon>
+<Weapon id="UPINA-MUNI_11">
+<Description language="ENGLISH">"Incendiary"</Description>
+<Skill>"RULES-COMPPROJ_POUDRE/RULES-COMPPROJ_ING"</Skill>
+<Damage>"-"</Damage>
+<Availability>"DISPO_LIMITED"</Availability>
+<Reach>"+0"</Reach>
+<Price>"1CO"</Price>
+<Encumbrance>"0"</Encumbrance>
+<Quality>"WEAPB15 4,WEAPB24"</Quality>
+<Hand>"0"</Hand>
+<Ammunition>"1"</Ammunition>
+</Weapon>
+<Weapon id="UPINA-MUNI_12">
+<Description language="ENGLISH">"Grapple"</Description>
+<Skill>"RULES-COMPPROJ_POUDRE/RULES-COMPPROJ_ING"</Skill>
+<Damage>"+2"</Damage>
+<Availability>"DISPO_LIMITED"</Availability>
+<Reach>"/2"</Reach>
+<Price>"2CO"</Price>
+<Encumbrance>"1"</Encumbrance>
+<Quality>"WEAPB22,WEAPB23 2"</Quality>
+<Hand>"0"</Hand>
+<Ammunition>"1"</Ammunition>
+</Weapon>
 </DATA_WEAPON>
 <DATA_WEAPON_BONUS>
 <BonusMalus id="UPINA-WEAPB31">
@@ -3273,10 +3417,18 @@ If you lose, nothing happens other than standard effects for losing an Opposed T
 <Short language="ENGLISH">"May stend 2 ADV to Str/Ath Test to add Prone"</Short>
 <Modifier>"+"</Modifier>
 </BonusMalus>
+<BonusMalus id="UPINA-WEAPB37">
+<Description language="ENGLISH">"Infected"</Description>
+<Explanation language="ENGLISH">"The creature, or its weapon, carries a nasty infection.
+If it causes a living opponent to lose Wounds, it must pass an Easy (+40) Endurance Test or contract a Festering Wound (WFRP, page 187).
+This Flaw is the Infected Creature Trait (WFRP, page 340) applied to a weapon, as the Trait itself allows."</Explanation>
+<Short language="ENGLISH">"Festering Wound on Wound loss"</Short>
+<Modifier>"-"</Modifier>
+</BonusMalus>
 </DATA_WEAPON_BONUS>
 <DATA_SPELL>
 <Sort id="UPINA-MIRAC_MYRMIDIA_07">
-<Description language="ENGLISH">"Command the region"</Description>
+<Description language="ENGLISH">"Command the Legion"</Description>
 <Explanation language="ENGLISH">"Myrmidia carries your orders across the battlefield. You may issue a command to any ally within line of sight. The command must be relevant to the accomplishment of an armed struggle or ongoing strategy. Any Leadership Tests you make as a result benefit from a +10 bonus."</Explanation>
 <Target>"Any ally"</Target>
 <Duration>"1 Round"</Duration>
@@ -3296,7 +3448,7 @@ If you lose, nothing happens other than standard effects for losing an Opposed T
 <TypSpell>"Miracle"</TypSpell>
 </Sort>
 <Sort id="UPINA-MIRAC_MYRMIDIA_09">
-<Description language="ENGLISH">"In Good Orper"</Description>
+<Description language="ENGLISH">"In Good Order"</Description>
 <Explanation language="ENGLISH">"Knowing that the situation is hopeless you pray that your forces do not suffer from a disastrous rout. While the miracle is in play any allies may break from combat without allowing the enemy to gain advantage or make free attacks (see Fleeing on WFRP page 165)."</Explanation>
 <Target>"Allies within AoE ((ATTR_WP) yards)"</Target>
 <Duration>"(BATTR_WP) Rounds"</Duration>
@@ -3315,6 +3467,16 @@ If you lose, nothing happens other than standard effects for losing an Opposed T
 <Level>""</Level>
 <TypSpell>"Miracle"</TypSpell>
 </Sort>
+<Sort id="UPINA-MIRAC_MYRMIDIA_11">
+<Description language="ENGLISH">"On Deadly Ground"</Description>
+<Explanation language="ENGLISH">"Knowing that victory cannot be secured unless your forces stand firm you call on Myrmidia to banish all thoughts of retreat from the minds of your allies. Whilst the miracle is in effect your allies do not receive Broken Conditions."</Explanation>
+<Target>"Allies within AoE (Willpower yards)"</Target>
+<Duration>"See text"</Duration>
+<Range>"Self"</Range>
+<Talent>"RULES-T0080_MYRMIDIA"</Talent>
+<Level>""</Level>
+<TypSpell>"Miracle"</TypSpell>
+</Sort>
 <Sort id="UPINA-MIRAC_MYRMIDIA_12">
 <Description language="ENGLISH">"Quick Strike"</Description>
 <Explanation language="ENGLISH">"Infused with Myrmidias power, you benefit from heightened reflexes and can anticipate your opponent’s moves. Ât the start of every round whilst the Miracle is in effect, you may attempt a Challenging (+0) Initiative Test to gain an immediate free attack outside the normal turn sequence. This attack is resolved with whatever weapon you are carrying in your primary hand."</Explanation>
@@ -3326,7 +3488,7 @@ If you lose, nothing happens other than standard effects for losing an Opposed T
 <TypSpell>"Miracle"</TypSpell>
 </Sort>
 <Sort id="UPINA-MIRAC_MYRMIDIA_13">
-<Description language="ENGLISH">"Shieldmaiden’S Devoltion"</Description>
+<Description language="ENGLISH">"Shieldmaiden’s Devotion"</Description>
 <Explanation language="ENGLISH">"Your chanted prayers fill the hearts of the faithful with the fearlessness of her bravest Shieldmaidens. All Myrmidians within range gain the Fearless (Enemy) Talent. This enemy may either be a particular individual, or a particular species."</Explanation>
 <Target>"See text"</Target>
 <Duration>"4 Rounds"</Duration>

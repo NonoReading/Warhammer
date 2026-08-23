@@ -734,13 +734,13 @@ At the cost of one corruption point the Sorceress may add doublle their Willpowe
 <Reach>"+0"</Reach>
 <Price>"8/-"</Price>
 <Encumbrance>"1"</Encumbrance>
-<Quality>"WEAPB12,WEAPB17,WEAPB31"</Quality>
+<Quality>"WEAPB12,WEAPB17,WEAPB38"</Quality>
 <Hand>"0"</Hand>
 <Ammunition>"0"</Ammunition>
 </Weapon>
 </DATA_WEAPON>
 <DATA_WEAPON_BONUS>
-<BonusMalus id="NAGGA-WEAPB31">
+<BonusMalus id="NAGGA-WEAPB38">
 <Description language="ENGLISH">"Barbed"</Description>
 <Explanation language="ENGLISH">"Inflicts +1 Bleeding condition every 2 SL’s with a successful attack."</Explanation>
 <Short language="ENGLISH">"+1 Bleed / 2SB"</Short>

@@ -3858,6 +3858,8 @@ Si votre Personnage meurt d’une façon y correspondant, votre prochain Personn
 <Test language="FRANCAIS">""</Test>
 </Talent>
 <Talent id="RULES-T0172_*">
+<Magic>"1"</Magic>
+<SpellMode>"NONE"</SpellMode>
 <Attribut>""</Attribut>
 <Description language="FRANCAIS">"Magie du Chaos (au choix)"</Description>
 <Short language="FRANCAIS">"Vous pouvez lancer des sorts du chaos"</Short>
@@ -3873,7 +3875,7 @@ Dans des conditions normales, vous ne pouvez connaître qu’un seul Savoir de M
 </Talent>
 <Talent id="RULES-T0BIG">
 <Trait>"1"</Trait>
-<Attribut>"ATTR_S;ATTR_S;ATTR_T;ATTR_T;-ATTR_Ag"</Attribut>
+<Attribut>"RULES-ATTR_S;RULES-ATTR_S;RULES-ATTR_T;RULES-ATTR_T;-RULES-ATTR_Ag"</Attribut>
 <Description language="FRANCAIS">"Big"</Description>
 <Short language="FRANCAIS">"F + 10, E + 10, Agi - 5"</Short>
 <Explanation language="FRANCAIS">"Cette créature est une large exemple de son espèce.Il reçoit +10 en force et endurence et +5 en agility."</Explanation>

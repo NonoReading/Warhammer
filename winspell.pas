@@ -7,7 +7,7 @@ interface
 uses
   Classes, SysUtils, Forms, Controls, Graphics, Dialogs, ExtCtrls, Grids,
   StdCtrls, BCButton, ChargeSort, GlobalFonts, ChargeConstantes, ChargeTalent,
-  ChargeTexte, WinFiltre;
+  ChargeTexte, WinFiltre, UnitCalcul;
 
 type
 
@@ -63,6 +63,56 @@ implementation
 
 { TWinSpells }
 
+// Un sort est proposable si l'UN des talents qu'il cite correspond a l'UN des talents que porte
+// le personnage. Le sort peut citer une FAMILLE entiere - "RULES-T0088_*" veut dire "n'importe
+// quel Domaine arcanique" - alors que le personnage porte une specialisation precise, par exemple
+// "RULES-T0088_FEU".
+//
+// Remplace, le 23/08/2026, un test qui tronquait la liste du sort a 5 caracteres des qu'elle
+// contenait "_*" (ValT := copy(ValT,1,5)). Cette troncature datait d'avant les prefixes de livre,
+// ou elle donnait bien "T0088" ; depuis, elle donne "RULES", present dans TOUS les codes - donc
+// le test "Pos(ValT, SelectWinSort)" reussissait pour n'importe quel personnage et TOUS les sorts
+// a talent generique etaient proposes a tout le monde. Symptome trouve par Nono : Kuno, pretre de
+// Sigmar, se voyait offrir les sorts arcaniques en plus de ses miracles. CONTEXT.md 2.18.
+//
+// CompareRechercheValeur ne peut pas servir ici : VerifieRecherche compare les codes a
+// l'IDENTIQUE et ne connait pas la generique "_*" (c'est ChercheTalent qui la traite a part,
+// avec son repli explicite). Elle ne sait lever que le prefixe de livre.
+//
+// Les deux listes n'ont pas le meme separateur : le sort separe ses talents par ',' (donnees),
+// ButtonSortClick construit la sienne avec des ' '. Les deux sont acceptes.
+Function SortTalentAccessible(TalentsDuSort, TalentsDuPersonnage: String): Boolean;
+  var
+    ListeSort:  TStringList;
+    ListePerso: TStringList;
+    IndS:       Integer;
+    IndP:       Integer;
+  begin
+    Result     := False;
+    ListeSort  := TStringList.Create;
+    ListePerso := TStringList.Create;
+    try
+      ExtractStrings([',', ' '], [], PChar(TalentsDuSort), ListeSort);
+      ExtractStrings([',', ' '], [], PChar(TalentsDuPersonnage), ListePerso);
+      for IndS := 0 to ListeSort.Count - 1 do
+        for IndP := 0 to ListePerso.Count - 1 do
+          begin
+            // meme talent, au prefixe de livre pres
+            if CompareRechercheValeur(ListeSort[IndS], ListePerso[IndP])
+                or CompareRechercheValeur(ListePerso[IndP], ListeSort[IndS]) then
+              Result := True
+            // le sort ouvre toute une famille : on compare les familles
+            else if Pos(ValeurGenerique, ListeSort[IndS]) > 0 then
+              if ExtractStringBefore(ListeSort[IndS], ValeurGenerique)
+                  = ExtractStringBefore(ListePerso[IndP], ValeurSousCompetence) then
+                Result := True;
+          end;
+    finally
+      ListeSort.Free;
+      ListePerso.Free;
+    end;
+  end;
+
 Function TWinSpells.SpellFiltre(PSort: StructureSort):Boolean;
 var
   ResLivre:    Boolean = True;
@@ -84,7 +134,6 @@ procedure TWinSpells.WinCharger();
     PSort:        StructureSort;
     Nb:           Integer = 0;
     Acc:          Boolean;
-    ValT:         String;
   begin
       // Appeler la procédure SetGlobalFonts au démarrage du formulaire
       MiseEnFormeDesChamp(self);
@@ -112,17 +161,13 @@ procedure TWinSpells.WinCharger();
       For PSort in ListSort do
         begin
           Acc   := true;
-          ValT  := PSort.ListeTalent;
-          if pos(ValeurGenerique,PSort.ListeTalent) <> 0 then
-            ValT := copy(ValT,1,5);
 
           if Pos(ValeurGenerique,PSort.CodeSort) <> 0 then
             Acc := False;
 
-          if (SelectWinSort <> '') and ( Pos(SelectWinSort, ValT) = 0) and ( Pos(ValT, SelectWinSort) = 0)  then
-            Acc := false;
-
-          if (SelectWinSort <> '') and ( Pos(SelectWinSort, ValT) = 0) and ( Pos(ValT, SelectWinSort) = 0)  then
+          // Le test etait ecrit DEUX FOIS a l'identique ici (lignes 122 et 125 avant le
+          // 23/08/2026) ; la seconde copie ne faisait rien de plus, elle a ete retiree.
+          if (SelectWinSort <> '') and not SortTalentAccessible(PSort.ListeTalent, SelectWinSort) then
             Acc := false;
 
           if Not SpellFiltre(PSort) then

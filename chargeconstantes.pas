@@ -132,6 +132,10 @@ Const
       ConstModeSortAuto                 = 'AUTO';
       ConstModeSortChoix                = 'CHOICE';
       ConstModeSortAucun                = 'NONE';
+      // Valeurs de <Magic>, nommees pour que le code ne compare pas des chiffres nus.
+      ConstMagieAucune                  = 0;
+      ConstMagieExclusive               = 1;
+      ConstMagieCumulable               = 2;
       // Valeur "vrai" d'une balise XML booleenne (meme convention que <OFFICIAL>/<COMPLETE>).
       ConstVrai                         = '1';
       ConstXmlEthnic                    = 'Ethnic';
@@ -314,10 +318,11 @@ Const
       TalentHaineSacree                 = 'T0070';
       TalenttirPrecis                   = 'T0149';
       TalentSprinteur                   = 'T0145';
-      TalentSortBenediction             = 'T0012';
-      TalentSortMiracle                 = 'T0080';
-      TalentSortMagieMineure            = 'T0089';
-      TalentSortDomaine                 = 'T0088';
+      // TalentSortBenediction / TalentSortMiracle / TalentSortMagieMineure / TalentSortDomaine
+      // ('T0012'/'T0080'/'T0089'/'T0088') SUPPRIMEES le 23/08/2026 : la liste des talents qui
+      // donnent acces aux sorts vit maintenant dans les donnees, balises <Magic>/<SpellMode>
+      // (voir ConstXmlMagie plus haut). Ajouter un talent magique ne demande plus de recompiler.
+      // CONTEXT.md 2.18.
 
       // Type d'équipement et de sorts
       EquipementCC                      = 'COMB_';

@@ -3963,6 +3963,8 @@ If your Character dies in a corresponding manner, your next Character will gain 
 <Test language="ENGLISH">""</Test>
 </Talent>
 <Talent id="RULES-T0172_*">
+<Magic>"1"</Magic>
+<SpellMode>"NONE"</SpellMode>
 <Attribut>""</Attribut>
 <Description language="ENGLISH">"Chaos Magic (Any)"</Description>
 <Short language="ENGLISH">""</Short>
@@ -3978,7 +3980,7 @@ Under normal conditions, you can only know one Chaotic Magic Lore."</Explanation
 </Talent>
 <Talent id="RULES-T0BIG">
 <Trait>"1"</Trait>
-<Attribut>"ATTR_S;ATTR_S;ATTR_T;ATTR_T;-ATTR_Ag"</Attribut>
+<Attribut>"RULES-ATTR_S;RULES-ATTR_S;RULES-ATTR_T;RULES-ATTR_T;-RULES-ATTR_Ag"</Attribut>
 <ModifyCarac name="RULES-ATTR_S">+10</ModifyCarac>
 <ModifyCarac name="RULES-ATTR_T">+10</ModifyCarac>
 <ModifyCarac name="RULES-ATTR_Ag">-5</ModifyCarac>

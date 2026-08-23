@@ -2121,5 +2121,66 @@ This bonus applies to Crew Tests as well as individual Leadership Tests."</Expla
 <Level>""</Level>
 <TypSpell>"Miracle"</TypSpell>
 </Sort>
+<Sort id="SEAOF-COLOR_284">
+<Description language="ENGLISH">"Living Mire"</Description>
+<Explanation language="ENGLISH">"Facing a ship at sea, you produce a stream of seaweed. The slimy algae surrounds the vessel, which becomes enmeshed. Whilst caught in the mire the vessel suffers -2 to its Movement Characteristic, and adjusts its Manoeuvre Characteristic by -3 SL. A crew can be ordered to cut the ship free with an Extended Challenging (+0) Boat Handling Test, to a target number equal to the caster's Willpower Bonus + SLs."</Explanation>
+<Target>"One ship"</Target>
+<Duration>"Willpower Bonus minutes"</Duration>
+<Range>"Willpower yards x 10"</Range>
+<Talent>"RULES-T0088_VIE"</Talent>
+<Level>"8"</Level>
+<TypSpell>"Domain Magic"</TypSpell>
+</Sort>
+<Sort id="SEAOF-COLOR_285">
+<Description language="ENGLISH">"Water Water Everywhere"</Description>
+<Explanation language="ENGLISH">"You gather Ghyran from the sea, taking small amounts of water with it. Cleansed of impurities, this water flows to the ship's stores, replenishing any empty barrels of water."</Explanation>
+<Target>"One ship"</Target>
+<Duration>"Instant"</Duration>
+<Range>"You"</Range>
+<Talent>"RULES-T0088_VIE"</Talent>
+<Level>"6"</Level>
+<TypSpell>"Domain Magic"</TypSpell>
+</Sort>
+<Sort id="SEAOF-COLOR_286">
+<Description language="ENGLISH">"Whirlpool"</Description>
+<Explanation language="ENGLISH">"You pull on the Ghyran surrounding the target area, moving it around and around. The water starts to churn, and a whirlpool forms in the target area. Whirlpools are described on page 114 of Sea of Claws.
+The spell creates an area of Gentle Rotation, but SL can be spent on making the whirlpool larger as per the Overcasting rules : 5 SL Whirlpool, 8 SL Powerful Vortex, 13 SL A Maelstrom, 21 SL or more The Maelstrom."</Explanation>
+<Target>"AoE (Willpower yards)"</Target>
+<Duration>"Willpower Bonus Rounds"</Duration>
+<Range>"Willpower yards x 10"</Range>
+<Talent>"RULES-T0088_VIE"</Talent>
+<Level>"6"</Level>
+<TypSpell>"Domain Magic"</TypSpell>
+</Sort>
+<Sort id="SEAOF-COLOR_287">
+<Description language="ENGLISH">"Blessings of Bel Shanaar"</Description>
+<Explanation language="ENGLISH">"This spell must be cast while on a journey with a set destination, the location of which is known to the caster. Closing your eyes, you focus your Second Sight on the heavens, tracing Azyr's path as it crackles across the sky, seeming to jump from star to star. For an instant a bolt of Azyr connects you to your destination, leaving a shimmering blue afterimage in your vision. For the duration of the spell, all Navigation Tests made by the wizard (or involving the wizard, in the case of Crew Tests) benefit from +2 SL."</Explanation>
+<Target>"Self"</Target>
+<Duration>"1 day"</Duration>
+<Range>"You"</Range>
+<Talent>"RULES-T0088_CIEUX"</Talent>
+<Level>"2"</Level>
+<TypSpell>"Domain Magic"</TypSpell>
+</Sort>
+<Sort id="SEAOF-COLOR_288">
+<Description language="ENGLISH">"Niezlib's Optimal Firing Solution"</Description>
+<Explanation language="ENGLISH">"This spell is a variation of one created by Lord Astromancer Wilfried-Gotthelm Niezlib, who sought to use it to prove his theories about the movement of celestial objects. He later realised it had more practical applications, and modified it to determine the exact moment a ship should fire a broadside. The caster can calculate the roll of the ship, distance to the target, weight of the cannonballs, and the power of each shot. For the duration of the spell, Tests made to fire a cannon benefit from +1 SL."</Explanation>
+<Target>"One ship"</Target>
+<Duration>"One Round"</Duration>
+<Range>"Willpower Bonus yards"</Range>
+<Talent>"RULES-T0088_CIEUX"</Talent>
+<Level>"6"</Level>
+<TypSpell>"Domain Magic"</TypSpell>
+</Sort>
+<Sort id="SEAOF-COLOR_289">
+<Description language="ENGLISH">"Sea of Glass"</Description>
+<Explanation language="ENGLISH">"You call on everyone on your vessel to be quiet, then close your eyes. An eerie silence envelops first your ship, then the surrounding sea. The sails go slack and the waves calm. The Doldrums effect from the Wind Effect Table (Sea of Claws page 107) applies for the duration of the spell."</Explanation>
+<Target>"AoE (Willpower Bonus miles)"</Target>
+<Duration>"Willpower Bonus minutes"</Duration>
+<Range>"You"</Range>
+<Talent>"RULES-T0088_CIEUX"</Talent>
+<Level>"10"</Level>
+<TypSpell>"Domain Magic"</TypSpell>
+</Sort>
 </DATA_SPELL>
 </DATA_BOOK>
