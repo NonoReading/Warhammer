@@ -1505,3 +1505,38 @@ COMPFOCAL_KHAINITE). Les 50 autres se repartissent en deux paquets :
     RULES-T0012_RHYA "Beni of Rhya" - du francais reste en anglais. Et RULES-T0012_HANDRICH
     "Bless (Handrich)" et _SOLKAN "Bless (Solkan)" n'ont pas de domaine la ou les 10 autres en ont.
   - RULES-T0088_* (3) : voir l'arbitrage ci-dessus.
+
+=== CHANTIER OUTILLE : VERIFICATION DE MASSE DES LIBELLES CONTRE LES LIVRES ===
+
+CAUSE RACINE, donnee par Nono le 23/08 : le texte des PDF etait extrait par un programme
+travaillant SUR LES IMAGES, donc de l'OCR. D'ou une famille entiere de coquilles qui n'etaient
+pas des fautes de frappe - Tronfist/Ironfist, 60-sccond, Newly Crafter, Throwing kKnife,
+Betrayal of 'Tzeentch. Deux causes se superposaient : la retraduction depuis le francais ET l'OCR.
+PDF_TEXTE contient maintenant les textes extraits par pdftotext, c'est-a-dire la couche texte du
+PDF et non une relecture d'image : la comparaison devient fiable.
+
+METHODE : normaliser apostrophes et espaces, chercher chaque libelle anglais dans le corpus des
+14 livres reunis, et sortir ce qui ne s'y trouve NULLE PART. Se relance en une commande.
+
+MESURE DU 23/08 - ce qui reste a passer en revue :
+     sorts        113 introuvables sur 478
+     talents      106 sur 382
+     competences   43 sur 271
+     armes         14 sur 183
+     armures       24 sur  41   (dont les "(A3)" et "Lustrian ...", conventions volontaires)
+     noms de niveau de carriere : 0 sur ~450 - cette partie est saine.
+
+FAUX POSITIFS CONNUS, a filtrer d'entree : le suffixe "(A3)" ajoute pour distinguer les armures
+d'Archives III, les libelles "Lustrian ...", et les generiques en "(any)".
+
+ECHANTILLON DE VRAIS ECARTS DEJA VISIBLES :
+     RULES-COMB_BASE_02   "Goof"              (gourdin ?)
+     RULES-COMB_BASE_03   "Chopped"           (hachoir ?)
+     RULES-COMB_BAGAR_02  "Unharmed"          -> Unarmed
+     RULES-PROJ_EXPLO_02  "Incendary"         -> Incendiary
+     RULES-COMB_PARAD_01  "Sword Breaker"     -> Swordbreaker
+     RULES-PROJ_LANC_02   "Throwing kKnife"   -> Throwing Knife
+     RULES-ARCAN_02       "Aethyr Armor"      -> Aethyric Armour ?
+     RULES-CHAOS_03       "Betrayal of 'Tzeentch"
+A traiter famille par famille, avec la meme methode que d'habitude : sortir la table, la faire
+relire, puis appliquer.

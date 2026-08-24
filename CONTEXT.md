@@ -2472,21 +2472,63 @@ donc échouer et afficher le **code brut**. Test : ouvrir le **Greatsword Sergea
 montre `RULES-COMB_2M_05 de qualité` au lieu de `Zweihänder de qualité`, c'est confirmé. Corrigeable
 des deux côtés (un `Trim` dans le code, ou normaliser les 42 items).
 
-**Point de reprise, par ordre de rentabilité :**
-1. faire confirmer le bug `(Q)` ci-dessus, puis choisir le côté à corriger ;
-2. familles de libellés restantes, même méthode : **Melee** (`Two hands`→`Two-Handed`, `Fight`→`Brawling`,
-   `Scourge`→`Flail`), **Ranged**, **Play**, **Lore** (`Lore (War)`→`Lore (Warfare)`, ~10 carrières),
-   **Trade** ;
-3. arbitrer `RULES-COMPCOMB_ENTRA` « Melee (Hinder) » contre `RULES-COMPPROJ_ENTRAV` : vérifié dans le
-   Rulebook, *Entangling* est une spécialisation de **Ranged**, et le Pit Fighter reçoit
-   « Ranged (Entangling) » avec « Net or Whip » — donc `COMB_ENTRA` est un doublon dans la mauvaise
-   famille, et les armes Whip/Lasso sont mal classées ;
-4. revue du livre suivant (Sea of Claws ou Archives II, les plus riches en carrières).
+#### Ce qui a été fait en fin de séance du 23/08
 
-⚠️ **Deux écarts d'Up in Arms laissés non faits, en attente d'arbitrage** : le `Strike to Injure` du
-Chevalier du Loup Blanc contre l'`Intimidate` du livre (bizarrerie du livre — *Intimidate* est une
-compétence, pas un talent), et `Master Tradesman (Cartographer)` contre `(Cartography)`, le Rulebook
-ne tranchant pas.
+Le correctif `(Q)` est **confirmé** (WinMetier affiche « (W) Zweihänder de qualité »), donc la
+compilation passe. Les familles **Entertain**, **Perform**, **Lore** et **Trade** sont alignées ;
+la **rétro-ingénierie** des libellés obscurs est appliquée (12 libellés) ; les deux carrières des
+compagnons sont corrigées ; la famille `RULES-T0088_*` est passée à **Arcane Magic**.
+
+**Sept doublons d'identifiant** ont été trouvés et fusionnés au total : `COMB_BAGAR`/`BAGARRE`,
+`DIVERT_VOYAN`/`FORTUNETELLING`, `DIVERT_INTERP`/`ACTING`, `SAVOIR_LOCAL`/`REG`,
+`SAVOIR_MEDICINE`/`REMED`, `T0088_TZEENTCH` (déclaré deux fois), plus les trois identifiants de
+compétence déclarés en double. **Règle de fusion** : garder celui qui porte le contenu, reprendre
+le libellé du livre — et **toujours lister les carrières qui utilisent le code, jamais se fier à un
+compteur** (une division par deux erronée m'a fait supprimer à tort `METIER_POIS`, rétabli depuis).
+
+**Point de reprise, par ordre de rentabilité :**
+1. les deux dernières familles : **Melee** (`Two hands`→`Two-Handed`, `Scourge`→`Flail`) et
+   **Ranged** (`Hindrances`→`Entangling`, `Slingshot`→`Sling`, `Black Powder`→`Blackpowder`) ;
+2. la convention **`Bless`/`Invoke`** — les livres écrivent `Bless (Sigmar)`, la base
+   `Blessed of Sigmar (Empire)`. Décision de Nono ; s'il garde sa version, ce sont les **génériques**
+   qu'il faut aligner, pas les 23 spécialisations. Dans tous les cas, `Beni of Manann` et
+   `Beni of Rhya` sont du français resté en anglais ;
+3. arbitrer `RULES-COMPCOMB_ENTRA` « Melee (Hinder) » contre `RULES-COMPPROJ_ENTRAV` : vérifié dans
+   le Rulebook, *Entangling* est une spécialisation de **Ranged**, et le Pit Fighter reçoit
+   « Ranged (Entangling) » avec « Net or Whip » — `COMB_ENTRA` est donc un doublon dans la mauvaise
+   famille, et les armes Whip/Lasso sont mal classées ;
+4. le **ménage d'`A FAIRE.txt`**, qui contient des lignes périmées (Archives III « sans DATA_SPELL »
+   alors que 27 sorts y ont été ajoutés, table de tirage de Middenheim déjà réécrite) ;
+5. la **revue livre par livre**, sur le modèle d'Up in Arms — seul livre revu à ce jour. Le balayage
+   de couverture désigne **Sea of Claws** (15 armes non saisies), **Archives III** (20) et
+   **Naggaroth** (sa sorcellerie) comme les plus rentables. ⚠️ Ce balayage compte des motifs de mise
+   en page, pas du sens : il dit **où regarder**, jamais « il manque ». Il m'a fait annoncer à tort
+   une carrière manquante dans Archives III — c'était le *Power Familiar*, un familier.
+
+#### Les familiers, à trancher
+
+Winds of Magic ne donne que **deux** schémas de progression : « The Combat Familiar can only follow
+the Combat Familiar Career, and the Spell Familiar can only follow the Spell Familiar career », et
+« Power Familiars use the advance scheme for Spell Familiars but cannot learn spells ». Or la base a
+un troisième métier, `WINDS-WORK104`, dont les quatre niveaux (*Newly Powered, Power Familar, Power
+Imp, Powerdling*) **n'existent dans aucun livre**. À supprimer au profit de `WINDS-WORK103`, en
+logeant les trois particularités du livre (talent *Magical Assistant* au départ, interdiction de
+`Channelling` et `Language (Magick)`, interdiction de `Petty Magic` et `Arcane Magic`).
+En revanche **Archives III apporte une vraie troisième voie**, celle du familier animal —
+*Newly Bonded → Animal Familiar → Spirit Companion → Witchling* — qui, elle, manque.
+
+#### 🔧 Vérification de masse des libellés — outillée, chantier ouvert
+
+**Cause racine révélée par Nono le 23/08** : le texte des PDF était extrait par un programme
+travaillant **sur les images**, donc de l'OCR. Deux causes se superposaient donc depuis le début —
+la retraduction depuis le français **et** l'OCR (`Tronfist`, `60-sccond`, `Newly Crafter`,
+`Throwing kKnife`, `Betrayal of 'Tzeentch`). `LIVRES/` contient désormais la vraie couche texte.
+
+**Méthode** : normaliser apostrophes et espaces, chercher chaque libellé anglais dans le corpus des
+14 livres réunis, sortir ce qui ne s'y trouve **nulle part**. Mesure du 23/08 : **0** nom de niveau
+de carrière sur ~450 (cette partie est saine), 14 armes sur 183, 43 compétences sur 271, 106 talents
+sur 382, 113 sorts sur 478, 24 armures sur 41 — ces dernières étant surtout les `(A3)` et
+`Lustrian ...`, conventions volontaires. Faux positifs à filtrer d'entrée. Détail dans `A FAIRE.txt`.
 
 📄 **Les livres vivent dans `LIVRES/`** — les PDF *et* leur extraction en texte brut
 (`pdftotext -layout`, mise en page conservée), les 16 livres de `DATABASE` plus *The Horned Rat*.

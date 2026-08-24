@@ -1979,7 +1979,7 @@ The assistant provides a bonus of +20 to these Tests rather than the normal +10 
 <Class>"CLASS_WARR"</Class>
 <SUBCHAPTER_LEVEL>
 <Level id="1">
-<Description language="ENGLISH">"Newly Crafter"</Description>
+<Description language="ENGLISH">"Newly Crafted"</Description>
 <Salary>"TIERS_BRASS 0"</Salary>
 </Level>
 <Level id="2">
@@ -2103,7 +2103,7 @@ The assistant provides a bonus of +20 to these Tests rather than the normal +10 
 <Salary>"TIERS_BRASS 0"</Salary>
 </Level>
 <Level id="2">
-<Description language="ENGLISH">"Spell Familar"</Description>
+<Description language="ENGLISH">"Spell Familiar"</Description>
 <Salary>"TIERS_BRASS 0"</Salary>
 </Level>
 <Level id="3">
