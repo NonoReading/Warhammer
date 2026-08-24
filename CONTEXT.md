@@ -2488,8 +2488,49 @@ Chevalier du Loup Blanc contre l'`Intimidate` du livre (bizarrerie du livre — 
 compétence, pas un talent), et `Master Tradesman (Cartographer)` contre `(Cartography)`, le Rulebook
 ne tranchant pas.
 
-📄 **The Horned Rat.pdf (147 Mo) ne passe pas le pont de fichiers** : le transfert expire. Si ce livre
-doit être consulté un jour, en extraire les pages utiles ou le recompresser côté machine.
+📄 **Les livres vivent dans `LIVRES/`** — les PDF *et* leur extraction en texte brut
+(`pdftotext -layout`, mise en page conservée), les 16 livres de `DATABASE` plus *The Horned Rat*.
+Le dossier s'appelait `PDF_TEXTE/` le temps d'une soirée, d'où ce nom dans les lignes du 23/08 de
+`Log.txt`. **Il est exclu de git** (`LIVRES/` dans `.gitignore`) : ce sont des livres sous droits,
+et ils n'ont jamais été commités — vérifié avec Nono, donc pas de `git rm --cached` à faire ni
+d'historique à réécrire.
+
+Le texte est la source de référence pour toute vérification : il se lit instantanément, là où un PDF
+de 100 Mo doit être retransféré, et à 147 Mo ne passe même plus. À regénérer avec
+`pdftotext -layout "LIVRES\<livre>.pdf" "LIVRES\<livre>.txt"` quand un livre est ajouté.
+Les **13** livres y sont, The Horned Rat compris : Nono l'a converti lui-même le 23/08 (874 Ko de
+texte contre 147 Mo de PDF qui ne passait pas). ⚠️ Sous **PowerShell**, une commande qui commence par
+un chemin entre guillemets a besoin de l'opérateur d'appel `&` devant, et la continuation de ligne
+est l'accent grave, pas `^`.
+
+Lecture faite : **The Horned Rat est le volume de campagne et ne contient aucune carrière jouable** —
+l'Ironbreaker vient du *Horned Rat Companion*, que Nono a déposé dans la foulée. Vérifié : la carrière
+y est **complète et juste**, niveau par niveau, et son « 3 Cinderblast Bombs » confirme que l'objet est
+son propre projectile. **L'audit des munitions n'a donc plus aucun angle mort.**
+
+🐛 **Le correctif du suffixe `(Q)` est prêt à appliquer** — validé par Nono (*« avec un trim dans le
+code, cela marche ? dans ce cas, je préfère ce choix »*). Vérifié : `ExtractStringBefore` renvoie la
+chaîne entière quand le séparateur est absent, donc un `Trim()` autour est inoffensif partout. Huit
+sites, tous le même geste, aucun changement de signature :
+
+```
+winlivre.pas               ~1171  CodeItem   := Trim(Copy(CodeItem, 1, ...));        <- commencer ici
+chargemetierequipement.pas ~57    Code       := Trim(copy(stringsI[IndL], 1, ...));
+winmetier.pas              ~701   Code       := Trim(copy(stringsI[IndL], 1, ...));
+winmetier.pas              ~739   Code       := Trim(copy(PMetierEquipement.Equipement, 1, ...));
+winmetier.pas              ~760   Code       := Trim(copy(PMetierEquipement.Equipement, 1, ...));
+pdfmetier.pas              ~410   Equipement := Trim(ExtractStringBefore(LigneEquip, EquipementQualite));
+pdfmetier.pas              ~491   Equipement := Trim(ExtractStringBefore(LigneEquip, EquipementQualite));
+xmlexportimport.pas        ~595   Equipement := Trim(ExtractStringBefore(LigneEquip, EquipementQualite));
+```
+
+**La table de rétro-ingénierie des libellés obscurs est complète et sans zone d'ombre** (voir
+`A FAIRE.txt`) : elle attend seulement une relecture de Nono avant application. Méthode à réutiliser
+telle quelle : chercher **quelles carrières** utilisent un libellé douteux, puis lire le bloc de cette
+carrière dans le texte du livre — le libellé exact s'y lit sans rien deviner. Elle a livré
+`Lore (Region)`→`Lore (Local)` (avec un **cinquième doublon d'identifiant** à la clé),
+`Lore (Waterways)`→`Riverways`, `Lore (Know how)`→`Etiquette` (l'identifiant `SAVVIV` disait déjà
+« savoir-vivre »), `Trade (trinkets)`→`Charms`, `Trade (Handyman)`→`Tinker`, et sept autres.
 
 ---
 

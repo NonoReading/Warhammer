@@ -1246,8 +1246,10 @@ FAIT le 23/08/2026 - audit des munitions termine grace aux fanbooks deposes par 
      dans Archives of the Empire I, qui le classe sous EXPLOSIVES au prix unitaire (3 GC, Enc 0) :
      l'objet est lui-meme le projectile. Les trois armes Ranged (Explosive) de la base portent
      toutes <Ammunition>"0"</Ammunition>. AUDIT DES MUNITIONS TERMINE.
-     A savoir : The Horned Rat.pdf (147 Mo) ne passe pas le pont de fichiers, le transfert expire.
-     Si un jour il faut le consulter, il faudra en extraire les pages utiles cote machine.
+     RESOLU le 23/08 : Nono a converti le livre en texte (PDF_TEXTE/The_Horned_Rat.txt). Lecture
+     faite : The Horned Rat est le VOLUME DE CAMPAGNE et ne contient aucune carriere jouable.
+     L'Ironbreaker vient de The Horned Rat COMPANION, dont le PDF n'existe pas dans le projet.
+     Il n'y a donc rien a y chercher.
 
 === REVUE DU LIVRE UP IN ARMS (23/08/2026) - PREMIERE PASSE : LES CARRIERES ===
 
@@ -1377,3 +1379,93 @@ NON MODELISABLE EN L'ETAT, pour information
 NOUVEAU, trouve pendant l'application des corrections d'Up in Arms : une carriere du Rulebook
 reference l'objet RULES-PROJ_LANC, qui n'est declare nulle part (les armes de jet sont
 RULES-PROJ_LANC_01 et suivantes). Seule reference d'equipement non resolue de toute la base.
+
+=== RETRO-INGENIERIE DES LIBELLES OBSCURS (23/08/2026) - TABLE A RELIRE ===
+
+Methode demandee par Nono : pour chaque libelle douteux, chercher QUELLES CARRIERES l'utilisent,
+puis lire le bloc correspondant dans le PDF du livre d'origine. Ca marche tres bien : le libelle du
+livre se lit directement dans la ligne Skills de la carriere, il n'y a plus rien a deviner.
+
+LORE
+  Lore (Region)      -> Lore (Local)      RULES-COMPSAVOIR_REG, 14 carrieres du Rulebook (Artisan,
+                       Bailiff, Townsman, Coachman, Advisor, Smuggler, Scout, Bawd, Riverwoman,
+                       Herbalist, Outlaw, Warden, Merchant, Beggar, Messenger, Watchman, Miner,
+                       Huffer, Noble, Nun, Racketeer, Fence, Witch Hunter, Servant, Hedge Witch,
+                       Villager, Thief). Le livre ecrit "Lore (Local)" 24 fois.
+                       !! DOUBLON : RULES-COMPSAVOIR_LOCAL "Lore (Local)" existe deja et sert
+                       3 fois. Cinquieme occurrence du motif BAGAR/BAGARRE - a fusionner.
+  Lore (Waterways)   -> Lore (Riverways)  RULES-COMPSAVOIR_VFLUV, 6 carrieres (Boatman, Smuggler,
+                       Riverwoman, Wrecker, Huffer, Riverwarden). Le livre ecrit Riverways 5 fois,
+                       sur exactement ces carrieres.
+  Lore (Know how)    -> Lore (Etiquette)  RULES-COMPSAVOIR_SAVVIV. L'identifiant dit tout : SAVVIV
+                       = savoir-vivre, retraduit en "Know how". Le livre donne "Lore (Etiquette)"
+                       au Honour Guard, niveau 3 du Guard - la carriere qui l'utilise.
+  Lore (Black Magic) -> Lore (Dark Magic) RULES-COMPSAVOIR_MAGNOIR. Le livre le donne au Wyrd,
+                       niveau 3 de la Witch - la carriere qui l'utilise.
+  Lore (Remedies)    -> Lore (Medicine) ?  RULES-COMPSAVOIR_REMED, utilise par Apothecary,
+                       Herbalist, Physician, Grave Robber. Le livre ecrit "Lore (Medicine)" 4 fois.
+                       A CONFIRMER carriere par carriere avant de fusionner.
+  Lore (Routes)      -> deja bon, le livre l'ecrit tel quel pour le Coachman.
+  Lore (Roadways)    -> DEJA BON, verifie le 23/08 : Nono a depose Salzenmund.pdf, et le Master
+                       Owler (niveau 3 de l'Owler) a bien "Lore (Law), Lore (Roadways)". Rien a
+                       changer. Au passage, le meme livre donne "Lore (Local)" a l'Owler niveau 2
+                       et le XML de Salzenmund pointe bien sur RULES-COMPSAVOIR_LOCAL - c'est le
+                       Rulebook qui utilise le doublon RULES-COMPSAVOIR_REG, ce qui confirme le
+                       sens de la fusion : garder LOCAL, faire disparaitre REG.
+
+TRADE
+  Trade (artistic material) -> Trade (Art Supplies)   RULES-COMPMETIER_MATART, Artist niv.2
+  Trade (trinkets)          -> Trade (Charms)         RULES-COMPMETIER_COLIF, Hedge Witch niv.2
+  Trade (Handyman)          -> Trade (Tinker)         RULES-COMPMETIER_BRICO, Pedlar niv.2
+  Trade (Winegrower)        -> Trade (Vintner)        RULES-COMPMETIER_VIGN, Nun niv.2
+  Trade (Boat building)     -> Trade (Boatbuilding)   RULES-COMPMETIER_BATEA, Boatman niv.3
+  Trade (farrier)           -> Trade (Farrier)        minuscule
+  Trade (Cierier)           -> Trade (Chandler)       cirier non traduit ; AUCUNE carriere ne
+                               l'utilise, donc option libre.
+  Trade (Poisons)           -> DOUBLON de Trade (Poisoner) : RULES-COMPMETIER_POIS n'est utilise
+                               par AUCUNE carriere, RULES-COMPMETIER_EMPOI l'est. Supprimer POIS.
+
+PLAY
+  Play (Bagpipes) -> Play (Bagpipe)  (singulier dans la ligne Specialisations ; aucune carriere)
+  Play (Drum) et Play (Fife) : le livre ecrit "Play (Drum or Fife)" pour le Soldier. Le decoupage
+    en deux identifiants est un choix de modele, pas une erreur - a garder.
+  Play (Violin), (Horn), (Harpsichord), (Lute) : conformes au livre.
+  Play (Flute) et (Pennywhistle) viennent d'Up in Arms et Sea of Claws, pas du Rulebook.
+
+MELEE et RANGED (deja identifies, rappel)
+  Melee (Two hands)   -> Melee (Two-Handed)
+  Melee (Scourge)     -> Melee (Flail)
+  Melee (Hinder)      -> doublon de Ranged (Entangling), voir l'arbitrage COMB_ENTRA / PROJ_ENTRAV
+  Ranged (Hindrances) -> Ranged (Entangling)
+  Ranged (Slingshot)  -> Ranged (Sling)
+  Ranged (Black Powder) -> Ranged (Blackpowder)
+
+Vu en passant dans Salzenmund : le livre ecrit "Lore (Dwarfs)" la ou la base a "Lore (Dwarves)"
+(RULES-COMPSAVOIR_NAIN). A verifier contre le Rulebook avec la famille Lore.
+
+=== LES TROIS DERNIERS COMPAGNONS, VERIFIES LE 23/08/2026 - CORRECTIONS EN ATTENTE DE GO ===
+
+Les 16 livres de DATABASE ont maintenant leur texte dans LIVRES\ (dossier renomme depuis PDF_TEXTE, exclu de git). Les trois derniers arrives
+(Enemy in Shadows Companion, Death on the Reik Companion, Rough Nights and Hard Days) ont ete
+verifies aussitot. Chacun n'apporte qu'une carriere, sauf Rough Nights qui n'en apporte aucune.
+
+ROUGH NIGHTS AND HARD DAYS : conforme. Aucune carriere dans le livre, aucune dans le XML ; ce que
+la base en tire est l'espece GNOME (ROUGH-RACE_GNOME), ce qui est bien l'apport du livre.
+
+CULT MAGUS OF TZEENTCH (ENEMY-WORK106) - quatre ecarts
+  niv.1  Secret Signs (Tzeentch)      -> le livre ecrit Lore (Tzeentch). VRAIE ERREUR : une
+         competence de Savoir saisie dans la famille Signes Secrets. RULES-COMPSAVOIR_TZEENTCH
+         n'existe pas encore, a creer ou a rattacher.
+  niv.2  Arcane Lore (Tzeentch)       -> le livre ecrit Chaos Magic (Tzeentch). Le talent existe
+         en base (RULES-T0172_*), donc a rebrancher - et c'est coherent avec le chantier 2.18.
+  niv.2  equipement "Good Quality Ritual" -> TRONQUE, le livre dit "Good Quality Ritual Vestments".
+  niv.1  talent "Tzeentch s Blessing" -> l'apostrophe a saute, "Tzeentch's Blessing".
+  (niv.2 Public Speaker / Public Speaking et niv.3 Demonology / Daemonology relevent des familles.)
+
+WARRIOR OF TZEENTCH (DEATH-WORK105) - un ecart, mais franc
+  niv.1  Suffuse With (Ulgu)          -> le livre ecrit Strike Mighty Blow. Ce n'est pas une
+         variante de libelle, c'est un TALENT DIFFERENT. A corriger.
+  niv.3  "Plate Armour and Helm" est rendu par Breastplate + Helm, comme dans Up in Arms avant
+         arbitrage - a aligner sur la meme decision (les pieces completes).
+  Le reste est conforme, y compris le fait que la base ecrive correctement "Language (Dark Tongue)"
+  la ou le livre a une coquille, "Dark Tounge".
