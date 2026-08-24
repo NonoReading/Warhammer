@@ -2508,10 +2508,10 @@ l'Ironbreaker vient du *Horned Rat Companion*, que Nono a déposé dans la foul�
 y est **complète et juste**, niveau par niveau, et son « 3 Cinderblast Bombs » confirme que l'objet est
 son propre projectile. **L'audit des munitions n'a donc plus aucun angle mort.**
 
-🐛 **Le correctif du suffixe `(Q)` est prêt à appliquer** — validé par Nono (*« avec un trim dans le
-code, cela marche ? dans ce cas, je préfère ce choix »*). Vérifié : `ExtractStringBefore` renvoie la
-chaîne entière quand le séparateur est absent, donc un `Trim()` autour est inoffensif partout. Huit
-sites, tous le même geste, aucun changement de signature :
+✅ **Le correctif du suffixe `(Q)` est APPLIQUÉ et confirmé** (23/08/2026). Nono a vérifié dans
+WinMetier : « (W) Zweihänder de qualité » au lieu du code brut. Huit sites, tous le même geste, aucun
+changement de signature — `ExtractStringBefore` renvoyant la chaîne entière quand le séparateur est
+absent, le `Trim()` est inoffensif là où il n'y a pas de `(Q)` :
 
 ```
 winlivre.pas               ~1171  CodeItem   := Trim(Copy(CodeItem, 1, ...));        <- commencer ici

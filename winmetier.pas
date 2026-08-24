@@ -698,7 +698,7 @@ Begin
                  Begin
                    if pos(EquipementQualite, StringsT[IndL]) > 0 then
                      begin
-                       Code   := copy(stringsI[IndL],1,length(stringsI[IndL]) - length(Equipementqualite));
+                       Code   := Trim(copy(stringsI[IndL],1,length(stringsI[IndL]) - length(Equipementqualite)));
                        Qualite:= GetTexteLibelle('LAB_038');
                      end
                    else
@@ -738,7 +738,7 @@ Begin
                 begin
                   if Pos(EquipementQualite, PMetierEquipement.Equipement) > 0 then
                     begin
-                      Code   := copy(PMetierEquipement.Equipement,1,length(PMetierEquipement.Equipement) - length(Equipementqualite));
+                      Code   := Trim(copy(PMetierEquipement.Equipement,1,length(PMetierEquipement.Equipement) - length(Equipementqualite)));
                       Qualite:= GetTexteLibelle('LAB_038');
                     end
                   else
@@ -757,7 +757,7 @@ Begin
                 begin
                   if Pos(EquipementQualite, PMetierEquipement.Equipement) > 0 then
                     begin
-                      Code   := copy(PMetierEquipement.Equipement,1,length(PMetierEquipement.Equipement) - length(Equipementqualite));
+                      Code   := Trim(copy(PMetierEquipement.Equipement,1,length(PMetierEquipement.Equipement) - length(Equipementqualite)));
                       Qualite:= GetTexteLibelle('LAB_038');
                     end
                   else

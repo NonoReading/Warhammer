@@ -1447,7 +1447,7 @@ Ifthe Character passes the Test, the crew members may then use the Characters Ra
 <Skill name="RULES-COMPCHEV_CHEVAL">"1"</Skill>
   <!-- Ride (Horse) -->
 <Skill name="RULES-COMPMETIER_MFERR">"1"</Skill>
-  <!-- Trade (farrier) -->
+  <!-- Trade (Farrier) -->
 <Skill name="RULES-COMPCHARM">"2"</Skill>
   <!-- Charm -->
 <Skill name="RULES-COMPCALM">"2"</Skill>
@@ -1717,7 +1717,7 @@ Ifthe Character passes the Test, the crew members may then use the Characters Ra
 <Skill name="RULES-COMPCHEV_CHEVAL">"1"</Skill>
   <!-- Ride (Horse) -->
 <Skill name="RULES-COMPMETIER_MFERR">"1"</Skill>
-  <!-- Trade (farrier) -->
+  <!-- Trade (Farrier) -->
 <Skill name="RULES-COMPCALM">"2"</Skill>
   <!-- Cool -->
 <Skill name="RULES-COMPESQU">"2"</Skill>
@@ -1852,7 +1852,7 @@ Ifthe Character passes the Test, the crew members may then use the Characters Ra
 <Skill name="RULES-COMPCHEV_CHEVAL">"1"</Skill>
   <!-- Ride (Horse) -->
 <Skill name="RULES-COMPMETIER_MFERR">"1"</Skill>
-  <!-- Trade (farrier) -->
+  <!-- Trade (Farrier) -->
 <Skill name="RULES-COMPCALM">"2"</Skill>
   <!-- Cool -->
 <Skill name="RULES-COMPESQU">"2"</Skill>

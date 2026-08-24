@@ -592,7 +592,7 @@ Procedure XmlExportBook(Livre: String; Langue: String);
                         if (Pos(EquipementQualite, Equipement) > 0) then
                           begin
                             Qualite    := EquipementQualite;
-                            Equipement := ExtractStringBefore(LigneEquip,EquipementQualite);
+                            Equipement := Trim(ExtractStringBefore(LigneEquip,EquipementQualite));
                           end;
                         LigneType := StringType[LigneIndice];
                         Inc(LigneIndice);

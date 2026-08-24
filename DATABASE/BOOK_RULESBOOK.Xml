@@ -1384,13 +1384,13 @@ As all sailboats are pretty much the same to steer, owning one Specialization ma
 <Description language="ENGLISH">"Trade (Barber)"</Description>
 </Skill>
 <Skill id="RULES-COMPMETIER_BATEA">
-<Description language="ENGLISH">"Trade (Boat building)"</Description>
+<Description language="ENGLISH">"Trade (Boatbuilding)"</Description>
 </Skill>
 <Skill id="RULES-COMPMETIER_BRAS">
 <Description language="ENGLISH">"Trade (Brewer)"</Description>
 </Skill>
 <Skill id="RULES-COMPMETIER_BRICO">
-<Description language="ENGLISH">"Trade (Handyman)"</Description>
+<Description language="ENGLISH">"Trade (Tinker)"</Description>
 </Skill>
 <Skill id="RULES-COMPMETIER_CARTO">
 <Description language="ENGLISH">"Trade (Cartographer)"</Description>
@@ -1399,13 +1399,16 @@ As all sailboats are pretty much the same to steer, owning one Specialization ma
 <Description language="ENGLISH">"Trade (Carpenter)"</Description>
 </Skill>
 <Skill id="RULES-COMPMETIER_COLIF">
-<Description language="ENGLISH">"Trade (trinkets)"</Description>
+<Description language="ENGLISH">"Trade (Charms)"</Description>
 </Skill>
 <Skill id="RULES-COMPMETIER_CUIS">
 <Description language="ENGLISH">"Trade (Cook)"</Description>
 </Skill>
 <Skill id="RULES-COMPMETIER_EMPOI">
 <Description language="ENGLISH">"Trade (Poisoner)"</Description>
+</Skill>
+<Skill id="RULES-COMPMETIER_POIS">
+<Description language="ENGLISH">"Trade (Poisons)"</Description>
 </Skill>
 <Skill id="RULES-COMPMETIER_EXPL">
 <Description language="ENGLISH">"Trade (Explosives)"</Description>
@@ -1423,22 +1426,19 @@ As all sailboats are pretty much the same to steer, owning one Specialization ma
 <Description language="ENGLISH">"Trade (Engineer)"</Description>
 </Skill>
 <Skill id="RULES-COMPMETIER_MATART">
-<Description language="ENGLISH">"Trade (artistic material)"</Description>
+<Description language="ENGLISH">"Trade (Art Supplies)"</Description>
 </Skill>
 <Skill id="RULES-COMPMETIER_MFERR">
-<Description language="ENGLISH">"Trade (farrier)"</Description>
-</Skill>
-<Skill id="RULES-COMPMETIER_POIS">
-<Description language="ENGLISH">"Trade (Poisons)"</Description>
+<Description language="ENGLISH">"Trade (Farrier)"</Description>
 </Skill>
 <Skill id="RULES-COMPMETIER_VIGN">
-<Description language="ENGLISH">"Trade (Winegrower)"</Description>
+<Description language="ENGLISH">"Trade (Vintner)"</Description>
 </Skill>
 <Skill id="RULES-COMPMETIER_CALLI">
 <Description language="ENGLISH">"Trade (Calligrapher)"</Description>
 </Skill>
 <Skill id="RULES-COMPMETIER_CIRIE">
-<Description language="ENGLISH">"Trade (Cierier)"</Description>
+<Description language="ENGLISH">"Trade (Chandler)"</Description>
 </Skill>
 <Skill id="RULES-COMPMETIER_EMBAU">
 <Description language="ENGLISH">"Trade (Embalmer)"</Description>
@@ -1465,7 +1465,7 @@ As all sailboats are pretty much the same to steer, owning one Specialization ma
 <Description language="ENGLISH">"Play (Horn)"</Description>
 </Skill>
 <Skill id="RULES-COMPMUSIC_CRNE">
-<Description language="ENGLISH">"Play (Bagpipes)"</Description>
+<Description language="ENGLISH">"Play (Bagpipe)"</Description>
 </Skill>
 <Skill id="RULES-COMPMUSIC_LUTH">
 <Description language="ENGLISH">"Play (Lute)"</Description>
@@ -1600,7 +1600,7 @@ As all sailboats are pretty much the same to steer, owning one Specialization ma
 <Description language="ENGLISH">"Lore (Magic)"</Description>
 </Skill>
 <Skill id="RULES-COMPSAVOIR_MAGNOIR">
-<Description language="ENGLISH">"Lore (Black Magic)"</Description>
+<Description language="ENGLISH">"Lore (Dark Magic)"</Description>
 </Skill>
 <Skill id="RULES-COMPSAVOIR_METAL">
 <Description language="ENGLISH">"Lore (Metallurgy)"</Description>
@@ -1623,14 +1623,8 @@ As all sailboats are pretty much the same to steer, owning one Specialization ma
 <Skill id="RULES-COMPSAVOIR_PROPH">
 <Description language="ENGLISH">"Lore (Prophecy)"</Description>
 </Skill>
-<Skill id="RULES-COMPSAVOIR_REG">
-<Description language="ENGLISH">"Lore (Region)"</Description>
-</Skill>
-<Skill id="RULES-COMPSAVOIR_REMED">
-<Description language="ENGLISH">"Lore (Remedies)"</Description>
-</Skill>
 <Skill id="RULES-COMPSAVOIR_SAVVIV">
-<Description language="ENGLISH">"Lore (Know how)"</Description>
+<Description language="ENGLISH">"Lore (Etiquette)"</Description>
 </Skill>
 <Skill id="RULES-COMPSAVOIR_SCIENC">
 <Description language="ENGLISH">"Lore (Science)"</Description>
@@ -1647,6 +1641,9 @@ As all sailboats are pretty much the same to steer, owning one Specialization ma
 <Skill id="RULES-COMPSAVOIR_THEO">
 <Description language="ENGLISH">"Lore (Theology)"</Description>
 </Skill>
+<Skill id="RULES-COMPSAVOIR_TZEENTCH">
+<Description language="ENGLISH">"Lore (Tzeentch)"</Description>
+</Skill>
 <Skill id="RULES-COMPSAVOIR_TORTU">
 <Description language="ENGLISH">"Lore (Torture)"</Description>
 </Skill>
@@ -1654,7 +1651,7 @@ As all sailboats are pretty much the same to steer, owning one Specialization ma
 <Description language="ENGLISH">"Lore (Trolls)"</Description>
 </Skill>
 <Skill id="RULES-COMPSAVOIR_VFLUV">
-<Description language="ENGLISH">"Lore (Waterways)"</Description>
+<Description language="ENGLISH">"Lore (Riverways)"</Description>
 </Skill>
 <Skill id="RULES-COMPSIGNES_CHASS">
 <Description language="ENGLISH">"Secret Signs (Hunter)"</Description>
@@ -1765,7 +1762,7 @@ As all sailboats are pretty much the same to steer, owning one Specialization ma
 <Description language="ENGLISH">"Ride (Dark Pegasus)"</Description>
 </Skill>
 <Skill id="RULES-COMPFOCAL_KHAINITE">
-<Description language="ENGLISH">"Channeling (Khainite Sorcery)"</Description>
+<Description language="ENGLISH">"Channelling (Khainite Sorcery)"</Description>
 </Skill>
 <Skill id="RULES-COMPSIGNES_KHAINE">
 <Description language="ENGLISH">"Secret Signs (Cult of Khaine)"</Description>
@@ -2965,7 +2962,7 @@ However, if you do, you cannot cast any other Spells this Turn."</Explanation>
 <Magic>"1"</Magic>
 <SpellMode>"NONE"</SpellMode>
 <Attribut>""</Attribut>
-<Description language="ENGLISH">"Arcane Lore (Any)"</Description>
+<Description language="ENGLISH">"Arcane Magic (Any)"</Description>
 <Short language="ENGLISH">""</Short>
 <Explanation language="ENGLISH">"You know one of the eight Domains of Magic – Beasts, Heavens, Death, Fire, Metal, Shadows, Light or Life –, or practice a lesser known Knowledge, such as Natural Magic or Necromancy.
 You can now memorize Spells of the chosen Domain for the following XP price.
@@ -3024,7 +3021,7 @@ Additionally, attempts to use Melee (Brawl) to simply hit an opponent gain a bon
 </Talent>
 <Talent id="RULES-T0092_*">
 <Attribut>""</Attribut>
-<Description language="ENGLISH">"craftsman (Any)"</Description>
+<Description language="ENGLISH">"Craftsman (Any)"</Description>
 <Short language="ENGLISH">""</Short>
 <Explanation language="ENGLISH">"You have real creative talent.
 Add the Trade Skill associated with any Career you start.
@@ -3910,7 +3907,7 @@ Using the Intimidate Skill does not instill Fear in you and will not prevent you
 <Description language="ENGLISH">"Seasoned Traveller"</Description>
 <Short language="ENGLISH">""</Short>
 <Explanation language="ENGLISH">"You are a curious soul who has traveled everywhere, and learned all kinds of local information.
-Add Lore (Region) to any Career you start.
+Add Lore (Local) to any Career you start.
 If it is already included in the Career, you can buy the Skill twice – with a different Specialization each time, such as Altdorf, Vorbergland or Ubersreik – for 5 XP less per Increase."</Explanation>
 <Skill>""</Skill>
 <Max>"(BATTR_Int)"</Max>
@@ -4293,52 +4290,49 @@ See page 190 for Fear rules"</Explanation>
 <Description language="ENGLISH">"Invoke Verena (Wisdom)"</Description>
 </Talent>
 <Talent id="RULES-T0088_BETE">
-<Description language="ENGLISH">"Arcane Lore (Beast)"</Description>
+<Description language="ENGLISH">"Arcane Magic (Beast)"</Description>
 </Talent>
 <Talent id="RULES-T0088_CIEUX">
-<Description language="ENGLISH">"Arcane Lore (Heavens)"</Description>
+<Description language="ENGLISH">"Arcane Magic (Heavens)"</Description>
 </Talent>
 <Talent id="RULES-T0088_DEMON">
-<Description language="ENGLISH">"Arcane Lore (Demonology)"</Description>
+<Description language="ENGLISH">"Arcane Magic (Demonology)"</Description>
 </Talent>
 <Talent id="RULES-T0088_FEU">
-<Description language="ENGLISH">"Arcane Lore (Fire)"</Description>
+<Description language="ENGLISH">"Arcane Magic (Fire)"</Description>
 </Talent>
 <Talent id="RULES-T0088_KHAINE">
 <Description language="ENGLISH">"Arcane Magic (Khainite Sorcery)"</Description>
 </Talent>
 <Talent id="RULES-T0088_LUMIERE">
-<Description language="ENGLISH">"Arcane Lore (Light)"</Description>
+<Description language="ENGLISH">"Arcane Magic (Light)"</Description>
 </Talent>
 <Talent id="RULES-T0088_MAGIE">
-<Description language="ENGLISH">"Arcane Lore (village magic)"</Description>
+<Description language="ENGLISH">"Arcane Magic (Hedgecraft)"</Description>
 </Talent>
 <Talent id="RULES-T0088_MAW">
 <Description language="ENGLISH">"Arcane Magic (Lore of the Great Maw)"</Description>
 </Talent>
 <Talent id="RULES-T0088_METAL">
-<Description language="ENGLISH">"Arcane Lore (Metal)"</Description>
+<Description language="ENGLISH">"Arcane Magic (Metal)"</Description>
 </Talent>
 <Talent id="RULES-T0088_MORT">
-<Description language="ENGLISH">"Arcane Lore (Death)"</Description>
+<Description language="ENGLISH">"Arcane Magic (Death)"</Description>
 </Talent>
 <Talent id="RULES-T0088_NECRO">
-<Description language="ENGLISH">"Arcane Lore (Necromancy)"</Description>
+<Description language="ENGLISH">"Arcane Magic (Necromancy)"</Description>
 </Talent>
 <Talent id="RULES-T0088_OMBRE">
-<Description language="ENGLISH">"Arcane Lore (Shadow)"</Description>
+<Description language="ENGLISH">"Arcane Magic (Shadow)"</Description>
 </Talent>
 <Talent id="RULES-T0088_SORCEL">
-<Description language="ENGLISH">"Arcane Lore (Witchcraft)"</Description>
-</Talent>
-<Talent id="RULES-T0088_TZEENTCH">
-<Description language="ENGLISH">"Arcane Lore (Tzeentch)"</Description>
+<Description language="ENGLISH">"Arcane Magic (Witchcraft)"</Description>
 </Talent>
 <Talent id="RULES-T0088_TZEENTCH">
 <Description language="ENGLISH">"Arcane Magic (Tzeentch)"</Description>
 </Talent>
 <Talent id="RULES-T0088_VIE">
-<Description language="ENGLISH">"Arcane Lore (Life)"</Description>
+<Description language="ENGLISH">"Arcane Magic (Life)"</Description>
 </Talent>
 <Talent id="RULES-T0092_ALCHEMIST">
 <Description language="ENGLISH">"Craftsman (Alchemist)"</Description>
@@ -4710,13 +4704,13 @@ See page 190 for Fear rules"</Explanation>
 <Description language="ENGLISH">"Doomed or Random Talent"</Description>
 </Talent>
 <Talent id="RULES-T0172_NURGLE">
-<Description language="ENGLISH">"Magie du chaos (Nurgle)"</Description>
+<Description language="ENGLISH">"Chaos Magic (Nurgle)"</Description>
 </Talent>
 <Talent id="RULES-T0172_SLAANESH">
-<Description language="ENGLISH">"Magie du chaos (Slaanesh)"</Description>
+<Description language="ENGLISH">"Chaos Magic (Slaanesh)"</Description>
 </Talent>
 <Talent id="RULES-T0172_TZEENTCH">
-<Description language="ENGLISH">"Magie du chaos (Tzeentch)"</Description>
+<Description language="ENGLISH">"Chaos Magic (Tzeentch)"</Description>
 </Talent>
 <Talent id="RULES-T0AFR_ELF">
 <Trait>"1"</Trait>
@@ -4986,8 +4980,8 @@ See page 190 for Fear rules"</Explanation>
   <!-- Ranged (Bow) -->
 <Skill>"RULES-COMPRAGOT"</Skill>
   <!-- Gossip -->
-<Skill>"RULES-COMPSAVOIR_REG"</Skill>
-  <!-- Lore (Region) -->
+<Skill>"RULES-COMPSAVOIR_LOCAL"</Skill>
+  <!-- Lore (Local) -->
 <Skill>"RULES-COMPSOINANI"</Skill>
   <!-- Animal Care -->
 </SUBCHAPTER_SKILL>
@@ -5178,8 +5172,8 @@ See page 190 for Fear rules"</Explanation>
   <!-- Perception  -->
 <Skill>"RULES-COMPRESALC"</Skill>
   <!-- Consume Alcohol -->
-<Skill>"RULES-COMPSAVOIR_REG"</Skill>
-  <!-- Lore (Region) -->
+<Skill>"RULES-COMPSAVOIR_LOCAL"</Skill>
+  <!-- Lore (Local) -->
 </SUBCHAPTER_SKILL>
 <SUBCHAPTER_TALENT>
 <Talent>"RULES-T0170"</Talent>
@@ -5877,8 +5871,8 @@ See page 190 for Fear rules"</Explanation>
   <!-- Consume Alcohol -->
 <Skill name="RULES-COMPSAVOIR_CHIM">"1"</Skill>
   <!-- Lore (Chemistry) -->
-<Skill name="RULES-COMPSAVOIR_REMED">"1"</Skill>
-  <!-- Lore (Remedies) -->
+<Skill name="RULES-COMPSAVOIR_MEDICINE">"1"</Skill>
+  <!-- Lore (Medicine) -->
 <Skill name="RULES-COMPSAVOIR_PLANT">"1"</Skill>
   <!-- Lore (Plants) -->
 <Skill name="RULES-COMPCHARM">"2"</Skill>
@@ -6014,8 +6008,8 @@ See page 190 for Fear rules"</Explanation>
   <!-- Haggle -->
 <Skill name="RULES-COMPPRECEP">"2"</Skill>
   <!-- Perception  -->
-<Skill name="RULES-COMPSAVOIR_REG">"2"</Skill>
-  <!-- Lore (Region) -->
+<Skill name="RULES-COMPSAVOIR_LOCAL">"2"</Skill>
+  <!-- Lore (Local) -->
 <Skill name="RULES-COMPRAGOT">"2"</Skill>
   <!-- Gossip -->
 <Skill name="RULES-COMPCOMM">"3"</Skill>
@@ -6138,7 +6132,7 @@ See page 190 for Fear rules"</Explanation>
 <Skill name="RULES-COMPMARCH">"2"</Skill>
   <!-- Haggle -->
 <Skill name="RULES-COMPMETIER_MATART">"2"</Skill>
-  <!-- Trade (artistic material) -->
+  <!-- Trade (Art Supplies) -->
 <Skill name="RULES-COMPPARI">"2"</Skill>
   <!-- Gamble -->
 <Skill name="RULES-COMPCHARM">"3"</Skill>
@@ -6259,8 +6253,8 @@ See page 190 for Fear rules"</Explanation>
   <!-- Intuition  -->
 <Skill name="RULES-COMPCOMM">"2"</Skill>
   <!-- Leadership -->
-<Skill name="RULES-COMPSAVOIR_REG">"2"</Skill>
-  <!-- Lore (Region) -->
+<Skill name="RULES-COMPSAVOIR_LOCAL">"2"</Skill>
+  <!-- Lore (Local) -->
 <Skill name="RULES-COMPSUBOR">"2"</Skill>
   <!-- Bribery -->
 <Skill name="RULES-COMPCHEV_CHEVAL">"3"</Skill>
@@ -6388,7 +6382,7 @@ See page 190 for Fear rules"</Explanation>
 <Skill name="RULES-COMPPRECEP">"2"</Skill>
   <!-- Perception  -->
 <Skill name="RULES-COMPSAVOIR_VFLUV">"2"</Skill>
-  <!-- Lore (Waterways) -->
+  <!-- Lore (Riverways) -->
 <Skill name="RULES-COMPDIVERT_CHANT">"3"</Skill>
   <!-- Entertain (Singing) -->
 <Skill name="RULES-COMPESCAL">"3"</Skill>
@@ -6396,7 +6390,7 @@ See page 190 for Fear rules"</Explanation>
 <Skill name="RULES-COMPGUERI">"3"</Skill>
   <!-- Heal -->
 <Skill name="RULES-COMPMETIER_BATEA">"3"</Skill>
-  <!-- Trade (Boat building) -->
+  <!-- Trade (Boatbuilding) -->
 <Skill name="RULES-COMPCOMM">"4"</Skill>
   <!-- Leadership -->
 <Skill name="RULES-COMPORIENT">"4"</Skill>
@@ -6509,8 +6503,8 @@ See page 190 for Fear rules"</Explanation>
   <!-- Play (Any) -->
 <Skill name="RULES-COMPINTUI">"2"</Skill>
   <!-- Intuition  -->
-<Skill name="RULES-COMPSAVOIR_REG">"2"</Skill>
-  <!-- Lore (Region) -->
+<Skill name="RULES-COMPSAVOIR_LOCAL">"2"</Skill>
+  <!-- Lore (Local) -->
 <Skill name="RULES-COMPSUBOR">"2"</Skill>
   <!-- Bribery -->
 <Skill name="RULES-COMPCALM">"3"</Skill>
@@ -7140,7 +7134,7 @@ See page 190 for Fear rules"</Explanation>
 <Skill name="RULES-COMPGUERI">"1"</Skill>
   <!-- Heal -->
 <Skill name="RULES-COMPMETIER_MFERR">"1"</Skill>
-  <!-- Trade (farrier) -->
+  <!-- Trade (Farrier) -->
 <Skill name="RULES-COMPSAVOIR_HERAL">"1"</Skill>
   <!-- Lore (Heraldry) -->
 <Skill name="RULES-COMPSOINANI">"1"</Skill>
@@ -7290,8 +7284,8 @@ See page 190 for Fear rules"</Explanation>
   <!-- Gossip -->
 <Skill name="RULES-COMPRESALC">"2"</Skill>
   <!-- Consume Alcohol -->
-<Skill name="RULES-COMPSAVOIR_REG">"2"</Skill>
-  <!-- Lore (Region) -->
+<Skill name="RULES-COMPSAVOIR_LOCAL">"2"</Skill>
+  <!-- Lore (Local) -->
 <Skill name="RULES-COMPDRESS_CHEVAL">"3"</Skill>
   <!-- Animal Training (Horse) -->
 <Skill name="RULES-COMPINTIM">"3"</Skill>
@@ -7417,7 +7411,7 @@ See page 190 for Fear rules"</Explanation>
 <Skill name="RULES-COMPEVAL">"2"</Skill>
   <!-- Evaluate -->
 <Skill name="RULES-COMPMETIER_BRICO">"2"</Skill>
-  <!-- Trade (Handyman) -->
+  <!-- Trade (Tinker) -->
 <Skill name="RULES-COMPRESALC">"2"</Skill>
   <!-- Consume Alcohol -->
 <Skill name="RULES-COMPSOINANI">"2"</Skill>
@@ -7432,8 +7426,8 @@ See page 190 for Fear rules"</Explanation>
   <!-- Perception  -->
 <Skill name="RULES-COMPSAVOIR_GEOG">"4"</Skill>
   <!-- Lore (Geography) -->
-<Skill name="RULES-COMPSAVOIR_REG">"4"</Skill>
-  <!-- Lore (Region) -->
+<Skill name="RULES-COMPSAVOIR_LOCAL">"4"</Skill>
+  <!-- Lore (Local) -->
 </SUBCHAPTER_SKILL>
 <SUBCHAPTER_TALENT>
 <Talent name="RULES-T0015">"1"</Talent>
@@ -7547,8 +7541,8 @@ See page 190 for Fear rules"</Explanation>
   <!-- Intuition  -->
 <Skill name="RULES-COMPPARI">"2"</Skill>
   <!-- Gamble -->
-<Skill name="RULES-COMPSAVOIR_REG">"2"</Skill>
-  <!-- Lore (Region) -->
+<Skill name="RULES-COMPSAVOIR_LOCAL">"2"</Skill>
+  <!-- Lore (Local) -->
 <Skill name="RULES-COMPCOMM">"3"</Skill>
   <!-- Leadership -->
 <Skill name="RULES-COMPDIVERT_NARRA">"3"</Skill>
@@ -7668,8 +7662,8 @@ See page 190 for Fear rules"</Explanation>
   <!-- Perception  -->
 <Skill name="RULES-COMPRAGOT">"2"</Skill>
   <!-- Gossip -->
-<Skill name="RULES-COMPSAVOIR_REG">"2"</Skill>
-  <!-- Lore (Region) -->
+<Skill name="RULES-COMPSAVOIR_LOCAL">"2"</Skill>
+  <!-- Lore (Local) -->
 <Skill name="RULES-COMPSIGNES_CONTREB">"2"</Skill>
   <!-- Secret Signs (Smuggler) -->
 <Skill name="RULES-COMPEVAL">"3"</Skill>
@@ -7679,7 +7673,7 @@ See page 190 for Fear rules"</Explanation>
 <Skill name="RULES-COMPINTUI">"3"</Skill>
   <!-- Intuition  -->
 <Skill name="RULES-COMPSAVOIR_VFLUV">"3"</Skill>
-  <!-- Lore (Waterways) -->
+  <!-- Lore (Riverways) -->
 <Skill name="RULES-COMPCOMM">"4"</Skill>
   <!-- Leadership -->
 <Skill name="RULES-COMPLANG_*">"4"</Skill>
@@ -8035,8 +8029,8 @@ See page 190 for Fear rules"</Explanation>
   <!-- Gossip -->
 <Skill name="RULES-COMPRESIST">"1"</Skill>
   <!-- Endurance -->
-<Skill name="RULES-COMPSAVOIR_REG">"1"</Skill>
-  <!-- Lore (Region) -->
+<Skill name="RULES-COMPSAVOIR_LOCAL">"1"</Skill>
+  <!-- Lore (Local) -->
 <Skill name="RULES-COMPSURVEXT">"1"</Skill>
   <!-- Outdoor Survival -->
 <Skill name="RULES-COMPATHL">"2"</Skill>
@@ -8430,8 +8424,8 @@ See page 190 for Fear rules"</Explanation>
   <!-- Perception  -->
 <Skill name="RULES-COMPRESIST">"2"</Skill>
   <!-- Endurance -->
-<Skill name="RULES-COMPSAVOIR_REG">"2"</Skill>
-  <!-- Lore (Region) -->
+<Skill name="RULES-COMPSAVOIR_LOCAL">"2"</Skill>
+  <!-- Lore (Local) -->
 <Skill name="RULES-COMPCALM">"3"</Skill>
   <!-- Cool -->
 <Skill name="RULES-COMPEVAL">"3"</Skill>
@@ -8798,10 +8792,10 @@ See page 190 for Fear rules"</Explanation>
   <!-- Ranged (Hindrances) -->
 <Skill name="RULES-COMPPROJ_LANC">"2"</Skill>
   <!-- Ranged (Throwing) -->
-<Skill name="RULES-COMPSAVOIR_REG">"2"</Skill>
-  <!-- Lore (Region) -->
+<Skill name="RULES-COMPSAVOIR_LOCAL">"2"</Skill>
+  <!-- Lore (Local) -->
 <Skill name="RULES-COMPSAVOIR_VFLUV">"2"</Skill>
-  <!-- Lore (Waterways) -->
+  <!-- Lore (Riverways) -->
 <Skill name="RULES-COMPCHARM">"3"</Skill>
   <!-- Charm -->
 <Skill name="RULES-COMPCOMB_HAST">"3"</Skill>
@@ -9056,7 +9050,7 @@ See page 190 for Fear rules"</Explanation>
 <Skill name="RULES-COMPLANG_BATAIL">"3"</Skill>
   <!-- Language (Battle) -->
 <Skill name="RULES-COMPSAVOIR_SAVVIV">"3"</Skill>
-  <!-- Lore (Know how) -->
+  <!-- Lore (Etiquette) -->
 <Skill name="RULES-COMPCOMM">"4"</Skill>
   <!-- Leadership -->
 <Skill name="RULES-COMPSAVOIR_GUERRE">"4"</Skill>
@@ -9297,16 +9291,16 @@ See page 190 for Fear rules"</Explanation>
   <!-- Consume Alcohol -->
 <Skill name="RULES-COMPRAGOT">"2"</Skill>
   <!-- Gossip -->
-<Skill name="RULES-COMPSAVOIR_REG">"2"</Skill>
-  <!-- Lore (Region) -->
+<Skill name="RULES-COMPSAVOIR_LOCAL">"2"</Skill>
+  <!-- Lore (Local) -->
 <Skill name="RULES-COMPCOMM">"3"</Skill>
   <!-- Leadership -->
 <Skill name="RULES-COMPINTUI">"3"</Skill>
   <!-- Intuition  -->
 <Skill name="RULES-COMPMETIER_POIS">"3"</Skill>
   <!-- Trade (Poisons) -->
-<Skill name="RULES-COMPSAVOIR_REMED">"3"</Skill>
-  <!-- Lore (Remedies) -->
+<Skill name="RULES-COMPSAVOIR_MEDICINE">"3"</Skill>
+  <!-- Lore (Medicine) -->
 <Skill name="RULES-COMPCOND">"4"</Skill>
   <!-- Drive -->
 <Skill name="RULES-COMPORIENT">"4"</Skill>
@@ -9422,8 +9416,8 @@ See page 190 for Fear rules"</Explanation>
   <!-- Perception  -->
 <Skill name="RULES-COMPPROJ_ARC">"2"</Skill>
   <!-- Ranged (Bow) -->
-<Skill name="RULES-COMPSAVOIR_REG">"2"</Skill>
-  <!-- Lore (Region) -->
+<Skill name="RULES-COMPSAVOIR_LOCAL">"2"</Skill>
+  <!-- Lore (Local) -->
 <Skill name="RULES-COMPCHEV_CHEVAL">"3"</Skill>
   <!-- Ride (Horse) -->
 <Skill name="RULES-COMPCOMM">"3"</Skill>
@@ -9663,8 +9657,8 @@ See page 190 for Fear rules"</Explanation>
   <!-- Endurance -->
 <Skill name="RULES-COMPRESALC">"1"</Skill>
   <!-- Consume Alcohol -->
-<Skill name="RULES-COMPSAVOIR_REG">"1"</Skill>
-  <!-- Lore (Region) -->
+<Skill name="RULES-COMPSAVOIR_LOCAL">"1"</Skill>
+  <!-- Lore (Local) -->
 <Skill name="RULES-COMPCHEV_CHEVAL">"2"</Skill>
   <!-- Ride (Horse) -->
 <Skill name="RULES-COMPCOMB_BASE">"2"</Skill>
@@ -9930,8 +9924,8 @@ See page 190 for Fear rules"</Explanation>
   <!-- Language (Guilder) -->
 <Skill name="RULES-COMPPRECEP">"2"</Skill>
   <!-- Perception  -->
-<Skill name="RULES-COMPSAVOIR_REG">"2"</Skill>
-  <!-- Lore (Region) -->
+<Skill name="RULES-COMPSAVOIR_LOCAL">"2"</Skill>
+  <!-- Lore (Local) -->
 <Skill name="RULES-COMPCALM">"3"</Skill>
   <!-- Cool -->
 <Skill name="RULES-COMPLANG_CLASS">"3"</Skill>
@@ -10183,8 +10177,8 @@ See page 190 for Fear rules"</Explanation>
   <!-- Trade (Barber) -->
 <Skill name="RULES-COMPSAVOIR_ANAT">"2"</Skill>
   <!-- Lore (Anatomy) -->
-<Skill name="RULES-COMPSAVOIR_REMED">"2"</Skill>
-  <!-- Lore (Remedies) -->
+<Skill name="RULES-COMPSAVOIR_MEDICINE">"2"</Skill>
+  <!-- Lore (Medicine) -->
 <Skill name="RULES-COMPCOMM">"3"</Skill>
   <!-- Leadership -->
 <Skill name="RULES-COMPINTIM">"3"</Skill>
@@ -10312,8 +10306,8 @@ See page 190 for Fear rules"</Explanation>
   <!-- Leadership -->
 <Skill name="RULES-COMPANIM">"3"</Skill>
   <!-- Charm Animal -->
-<Skill name="RULES-COMPSAVOIR_REG">"3"</Skill>
-  <!-- Lore (Region) -->
+<Skill name="RULES-COMPSAVOIR_LOCAL">"3"</Skill>
+  <!-- Lore (Local) -->
 <Skill name="RULES-COMPSIGNES_VAGAB">"3"</Skill>
   <!-- Secret Signs (Vagabond) -->
 <Skill name="RULES-COMPINTIM">"4"</Skill>
@@ -10427,8 +10421,8 @@ See page 190 for Fear rules"</Explanation>
   <!-- Ride (Horse) -->
 <Skill name="RULES-COMPCOMB_BASE">"2"</Skill>
   <!-- Melee (Basic) -->
-<Skill name="RULES-COMPSAVOIR_REG">"2"</Skill>
-  <!-- Lore (Region) -->
+<Skill name="RULES-COMPSAVOIR_LOCAL">"2"</Skill>
+  <!-- Lore (Local) -->
 <Skill name="RULES-COMPSOINANI">"2"</Skill>
   <!-- Animal Care -->
 <Skill name="RULES-COMPANIM">"3"</Skill>
@@ -10555,8 +10549,8 @@ See page 190 for Fear rules"</Explanation>
   <!-- Intuition  -->
 <Skill name="RULES-COMPRAGOT">"2"</Skill>
   <!-- Gossip -->
-<Skill name="RULES-COMPSAVOIR_REG">"2"</Skill>
-  <!-- Lore (Region) -->
+<Skill name="RULES-COMPSAVOIR_LOCAL">"2"</Skill>
+  <!-- Lore (Local) -->
 <Skill name="RULES-COMPCOMM">"3"</Skill>
   <!-- Leadership -->
 <Skill name="RULES-COMPDIVERT_NARRA">"3"</Skill>
@@ -10670,8 +10664,8 @@ See page 190 for Fear rules"</Explanation>
   <!-- Perception  -->
 <Skill name="RULES-COMPRESIST">"1"</Skill>
   <!-- Endurance -->
-<Skill name="RULES-COMPSAVOIR_REG">"1"</Skill>
-  <!-- Lore (Region) -->
+<Skill name="RULES-COMPSAVOIR_LOCAL">"1"</Skill>
+  <!-- Lore (Local) -->
 <Skill name="RULES-COMPSURVEXT">"1"</Skill>
   <!-- Outdoor Survival -->
 <Skill name="RULES-COMPCOMB_BASE">"2"</Skill>
@@ -10852,7 +10846,7 @@ See page 190 for Fear rules"</Explanation>
 <Talent name="RULES-T0143">"3"</Talent>
   <!-- Witch! -->
 <Talent name="RULES-T0088_CIEUX">"4"</Talent>
-  <!-- Arcane Lore (Heavens) -->
+  <!-- Arcane Magic (Heavens) -->
 <Talent name="RULES-T0098">"4"</Talent>
   <!-- Menacing -->
 <Talent name="RULES-T0107">"4"</Talent>
@@ -10943,7 +10937,7 @@ See page 190 for Fear rules"</Explanation>
 <Skill name="RULES-COMPCOMM">"4"</Skill>
   <!-- Leadership -->
 <Skill name="RULES-COMPSAVOIR_VFLUV">"4"</Skill>
-  <!-- Lore (Waterways) -->
+  <!-- Lore (Riverways) -->
 </SUBCHAPTER_SKILL>
 <SUBCHAPTER_TALENT>
 <Talent name="RULES-T0038">"1"</Talent>
@@ -11043,10 +11037,10 @@ See page 190 for Fear rules"</Explanation>
   <!-- Row -->
 <Skill name="RULES-COMPRESALC">"1"</Skill>
   <!-- Consume Alcohol -->
-<Skill name="RULES-COMPSAVOIR_REG">"1"</Skill>
-  <!-- Lore (Region) -->
+<Skill name="RULES-COMPSAVOIR_LOCAL">"1"</Skill>
+  <!-- Lore (Local) -->
 <Skill name="RULES-COMPSAVOIR_VFLUV">"1"</Skill>
-  <!-- Lore (Waterways) -->
+  <!-- Lore (Riverways) -->
 <Skill name="RULES-COMPCALM">"2"</Skill>
   <!-- Cool -->
 <Skill name="RULES-COMPCHARM">"2"</Skill>
@@ -11063,8 +11057,8 @@ See page 190 for Fear rules"</Explanation>
   <!-- Intimidate -->
 <Skill name="RULES-COMPMARCH">"3"</Skill>
   <!-- Haggle -->
-<Skill name="RULES-COMPSAVOIR_REG">"3"</Skill>
-  <!-- Lore (Region) -->
+<Skill name="RULES-COMPSAVOIR_LOCAL">"3"</Skill>
+  <!-- Lore (Local) -->
 <Skill name="RULES-COMPSAVOIR_EPAVE">"3"</Skill>
   <!-- Lore (Wrecks) -->
 <Skill name="RULES-COMPCOMM">"4"</Skill>
@@ -11180,8 +11174,8 @@ See page 190 for Fear rules"</Explanation>
   <!-- Language (Classical) -->
 <Skill name="RULES-COMPRAGOT">"2"</Skill>
   <!-- Gossip -->
-<Skill name="RULES-COMPSAVOIR_REG">"2"</Skill>
-  <!-- Lore (Region) -->
+<Skill name="RULES-COMPSAVOIR_LOCAL">"2"</Skill>
+  <!-- Lore (Local) -->
 <Skill name="RULES-COMPINTUI">"3"</Skill>
   <!-- Intuition  -->
 <Skill name="RULES-COMPLANG_*">"3"</Skill>
@@ -11315,15 +11309,15 @@ See page 190 for Fear rules"</Explanation>
 <Skill name="RULES-COMPMETIER_HERB">"2"</Skill>
   <!-- Trade (Herbalist) -->
 <Skill name="RULES-COMPMETIER_VIGN">"2"</Skill>
-  <!-- Trade (Winegrower) -->
+  <!-- Trade (Vintner) -->
 <Skill name="RULES-COMPRECH">"2"</Skill>
   <!-- Research -->
 <Skill name="RULES-COMPCOMM">"3"</Skill>
   <!-- Leadership -->
 <Skill name="RULES-COMPPRECEP">"3"</Skill>
   <!-- Perception  -->
-<Skill name="RULES-COMPSAVOIR_REG">"3"</Skill>
-  <!-- Lore (Region) -->
+<Skill name="RULES-COMPSAVOIR_LOCAL">"3"</Skill>
+  <!-- Lore (Local) -->
 <Skill name="RULES-COMPSAVOIR_POLIT">"3"</Skill>
   <!-- Lore (Politics) -->
 <Skill name="RULES-COMPLANG_*">"4"</Skill>
@@ -11437,7 +11431,7 @@ See page 190 for Fear rules"</Explanation>
 <Skill name="RULES-COMPRAGOT">"2"</Skill>
   <!-- Gossip -->
 <Skill name="RULES-COMPSAVOIR_VFLUV">"2"</Skill>
-  <!-- Lore (Waterways) -->
+  <!-- Lore (Riverways) -->
 <Skill name="RULES-COMPSUBOR">"2"</Skill>
   <!-- Bribery -->
 <Skill name="RULES-COMPCALM">"3"</Skill>
@@ -11696,8 +11690,8 @@ See page 190 for Fear rules"</Explanation>
   <!-- Evaluate -->
 <Skill name="RULES-COMPMARCH">"2"</Skill>
   <!-- Haggle -->
-<Skill name="RULES-COMPSAVOIR_REMED">"2"</Skill>
-  <!-- Lore (Remedies) -->
+<Skill name="RULES-COMPSAVOIR_MEDICINE">"2"</Skill>
+  <!-- Lore (Medicine) -->
 <Skill name="RULES-COMPSUBOR">"2"</Skill>
   <!-- Bribery -->
 <Skill name="RULES-COMPCROCH">"3"</Skill>
@@ -12068,8 +12062,8 @@ See page 190 for Fear rules"</Explanation>
   <!-- Endurance -->
 <Skill name="RULES-COMPRESALC">"1"</Skill>
   <!-- Consume Alcohol -->
-<Skill name="RULES-COMPSAVOIR_REG">"1"</Skill>
-  <!-- Lore (Region) -->
+<Skill name="RULES-COMPSAVOIR_LOCAL">"1"</Skill>
+  <!-- Lore (Local) -->
 <Skill name="RULES-COMPCHARM">"2"</Skill>
   <!-- Charm -->
 <Skill name="RULES-COMPCOMB_BASE">"2"</Skill>
@@ -12339,8 +12333,8 @@ See page 190 for Fear rules"</Explanation>
   <!-- Entertain (Storytelling) -->
 <Skill name="RULES-COMPSAVOIR_ART">"3"</Skill>
   <!-- Lore (Art) -->
-<Skill name="RULES-COMPSAVOIR_REG">"3"</Skill>
-  <!-- Lore (Region) -->
+<Skill name="RULES-COMPSAVOIR_LOCAL">"3"</Skill>
+  <!-- Lore (Local) -->
 <Skill name="RULES-COMPSUBOR">"3"</Skill>
   <!-- Bribery -->
 <Skill name="RULES-COMPRECH">"4"</Skill>
@@ -12464,8 +12458,8 @@ See page 190 for Fear rules"</Explanation>
   <!-- Endurance -->
 <Skill name="RULES-COMPSAVOIR_LOI">"3"</Skill>
   <!-- Lore (Law) -->
-<Skill name="RULES-COMPSAVOIR_REG">"3"</Skill>
-  <!-- Lore (Region) -->
+<Skill name="RULES-COMPSAVOIR_LOCAL">"3"</Skill>
+  <!-- Lore (Local) -->
 <Skill name="RULES-COMPSAVOIR_CHAOS">"4"</Skill>
   <!-- Lore (Chaos) -->
 <Skill name="RULES-COMPSAVOIR_POLIT">"4"</Skill>
@@ -12717,8 +12711,8 @@ See page 190 for Fear rules"</Explanation>
   <!-- Charm -->
 <Skill name="RULES-COMPINTIM">"3"</Skill>
   <!-- Intimidate -->
-<Skill name="RULES-COMPSAVOIR_REG">"3"</Skill>
-  <!-- Lore (Region) -->
+<Skill name="RULES-COMPSAVOIR_LOCAL">"3"</Skill>
+  <!-- Lore (Local) -->
 <Skill name="RULES-COMPCOMM">"4"</Skill>
   <!-- Leadership -->
 <Skill name="RULES-COMPCOMB_BASE">"4"</Skill>
@@ -12988,7 +12982,7 @@ See page 190 for Fear rules"</Explanation>
 <Talent name="RULES-T0137">"1"</Talent>
   <!-- Second Sight -->
 <Talent name="RULES-T0088_*">"2"</Talent>
-  <!-- Arcane Lore (Any) -->
+  <!-- Arcane Magic (Any) -->
 <Talent name="RULES-T0040">"2"</Talent>
   <!-- Detect Artefact -->
 <Talent name="RULES-T0091">"2"</Talent>
@@ -13083,11 +13077,11 @@ See page 190 for Fear rules"</Explanation>
 <Skill name="RULES-COMPRAGOT">"2"</Skill>
   <!-- Gossip -->
 <Skill name="RULES-COMPMETIER_COLIF">"2"</Skill>
-  <!-- Trade (trinkets) -->
+  <!-- Trade (Charms) -->
 <Skill name="RULES-COMPMETIER_HERB">"2"</Skill>
   <!-- Trade (Herbalist) -->
-<Skill name="RULES-COMPSAVOIR_REG">"2"</Skill>
-  <!-- Lore (Region) -->
+<Skill name="RULES-COMPSAVOIR_LOCAL">"2"</Skill>
+  <!-- Lore (Local) -->
 <Skill name="RULES-COMPMARCH">"3"</Skill>
   <!-- Haggle -->
 <Skill name="RULES-COMPSAVOIR_ESPR">"3"</Skill>
@@ -13115,7 +13109,7 @@ See page 190 for Fear rules"</Explanation>
 <Talent name="RULES-T0071">"2"</Talent>
   <!-- Aethyric Attunement -->
 <Talent name="RULES-T0088_MAGIE">"2"</Talent>
-  <!-- Arcane Lore (village magic) -->
+  <!-- Arcane Magic (Hedgecraft) -->
 <Talent name="RULES-T0141">"2"</Talent>
   <!-- Sixth Sense -->
 <Talent name="RULES-T0005">"3"</Talent>
@@ -13217,7 +13211,7 @@ See page 190 for Fear rules"</Explanation>
 <Skill name="RULES-COMPMARCH">"3"</Skill>
   <!-- Haggle -->
 <Skill name="RULES-COMPSAVOIR_MAGNOIR">"3"</Skill>
-  <!-- Lore (Black Magic) -->
+  <!-- Lore (Dark Magic) -->
 <Skill name="RULES-COMPSUBOR">"3"</Skill>
   <!-- Bribery -->
 <Skill name="RULES-COMPSAVOIR_DEMO">"4"</Skill>
@@ -13237,7 +13231,7 @@ See page 190 for Fear rules"</Explanation>
 <Talent name="RULES-T0009">"2"</Talent>
   <!-- Attractive -->
 <Talent name="RULES-T0088_SORCEL">"2"</Talent>
-  <!-- Arcane Lore (Witchcraft) -->
+  <!-- Arcane Magic (Witchcraft) -->
 <Talent name="RULES-T0137">"2"</Talent>
   <!-- Second Sight -->
 <Talent name="RULES-T0143">"2"</Talent>
@@ -13575,8 +13569,8 @@ See page 190 for Fear rules"</Explanation>
   <!-- Endurance -->
 <Skill name="RULES-COMPRESALC">"1"</Skill>
   <!-- Consume Alcohol -->
-<Skill name="RULES-COMPSAVOIR_REG">"1"</Skill>
-  <!-- Lore (Region) -->
+<Skill name="RULES-COMPSAVOIR_LOCAL">"1"</Skill>
+  <!-- Lore (Local) -->
 <Skill name="RULES-COMPSOINANI">"1"</Skill>
   <!-- Animal Care -->
 <Skill name="RULES-COMPSURVEXT">"1"</Skill>
@@ -13708,8 +13702,8 @@ See page 190 for Fear rules"</Explanation>
   <!-- Evaluate -->
 <Skill name="RULES-COMPRAGOT">"2"</Skill>
   <!-- Gossip -->
-<Skill name="RULES-COMPSAVOIR_REG">"2"</Skill>
-  <!-- Lore (Region) -->
+<Skill name="RULES-COMPSAVOIR_LOCAL">"2"</Skill>
+  <!-- Lore (Local) -->
 <Skill name="RULES-COMPSIGNES_VOL">"2"</Skill>
   <!-- Secret Signs (Thief) -->
 <Skill name="RULES-COMPINTIM">"3"</Skill>

@@ -320,7 +320,7 @@ At the cost of one corruption point the Sorceress may add doublle their Willpowe
 <Talent name="RULES-T0089">"1"</Talent>
   <!-- Petty Magic -->
 <Talent name="RULES-T0088_*">"2"</Talent>
-  <!-- Arcane Lore (Any) -->
+  <!-- Arcane Magic (Any) -->
 <Talent name="RULES-T0040">"2"</Talent>
   <!-- Detect Artefact -->
 <Talent name="RULES-T0141">"2"</Talent>

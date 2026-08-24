@@ -1362,6 +1362,9 @@ Comme tous les bateaux à voile sont peu ou prou identiques à diriger, posséde
 <Skill id="RULES-COMPMETIER_EMPOI">
 <Description language="FRANCAIS">"Métier (Empoisonneur)"</Description>
 </Skill>
+<Skill id="RULES-COMPMETIER_POIS">
+<Description language="FRANCAIS">"Métier (Poisons)"</Description>
+</Skill>
 <Skill id="RULES-COMPMETIER_EXPL">
 <Description language="FRANCAIS">"Métier (Explosifs)"</Description>
 </Skill>
@@ -1382,9 +1385,6 @@ Comme tous les bateaux à voile sont peu ou prou identiques à diriger, posséde
 </Skill>
 <Skill id="RULES-COMPMETIER_MFERR">
 <Description language="FRANCAIS">"Métier (Maréchal-ferrant)"</Description>
-</Skill>
-<Skill id="RULES-COMPMETIER_POIS">
-<Description language="FRANCAIS">"Métier (Poisons)"</Description>
 </Skill>
 <Skill id="RULES-COMPMETIER_VIGN">
 <Description language="FRANCAIS">"Métier (Vigneron)"</Description>
@@ -1578,12 +1578,6 @@ Comme tous les bateaux à voile sont peu ou prou identiques à diriger, posséde
 <Skill id="RULES-COMPSAVOIR_PROPH">
 <Description language="FRANCAIS">"Savoir (Prophétie) "</Description>
 </Skill>
-<Skill id="RULES-COMPSAVOIR_REG">
-<Description language="FRANCAIS">"Savoir (Région) "</Description>
-</Skill>
-<Skill id="RULES-COMPSAVOIR_REMED">
-<Description language="FRANCAIS">"Savoir (Remèdes) "</Description>
-</Skill>
 <Skill id="RULES-COMPSAVOIR_SAVVIV">
 <Description language="FRANCAIS">"Savoir (Savoir-vivre) "</Description>
 </Skill>
@@ -1601,6 +1595,9 @@ Comme tous les bateaux à voile sont peu ou prou identiques à diriger, posséde
 </Skill>
 <Skill id="RULES-COMPSAVOIR_THEO">
 <Description language="FRANCAIS">"Savoir (Théologie) "</Description>
+</Skill>
+<Skill id="RULES-COMPSAVOIR_TZEENTCH">
+<Description language="FRANCAIS">"Savoir (Tzeentch)"</Description>
 </Skill>
 <Skill id="RULES-COMPSAVOIR_TORTU">
 <Description language="FRANCAIS">"Savoir (Torture) "</Description>
@@ -4877,7 +4874,7 @@ See page 190 for Fear rules"</Explanation>
   <!-- Projectiles (Arc) -->
 <Skill>"RULES-COMPRAGOT"</Skill>
   <!-- Ragot  -->
-<Skill>"RULES-COMPSAVOIR_REG"</Skill>
+<Skill>"RULES-COMPSAVOIR_LOCAL"</Skill>
   <!-- Savoir (Région)  -->
 <Skill>"RULES-COMPSOINANI"</Skill>
   <!-- Soin aux animaux  -->
@@ -5067,7 +5064,7 @@ See page 190 for Fear rules"</Explanation>
   <!-- Perception  -->
 <Skill>"RULES-COMPRESALC"</Skill>
   <!-- Résistance à l’alcool  -->
-<Skill>"RULES-COMPSAVOIR_REG"</Skill>
+<Skill>"RULES-COMPSAVOIR_LOCAL"</Skill>
   <!-- Savoir (Région)  -->
 </SUBCHAPTER_SKILL>
 <SUBCHAPTER_TALENT>
@@ -5758,8 +5755,8 @@ See page 190 for Fear rules"</Explanation>
   <!-- Résistance à l’alcool  -->
 <Skill name="RULES-COMPSAVOIR_CHIM">"1"</Skill>
   <!-- Savoir (Chimie)  -->
-<Skill name="RULES-COMPSAVOIR_REMED">"1"</Skill>
-  <!-- Savoir (Remèdes)  -->
+<Skill name="RULES-COMPSAVOIR_MEDICINE">"1"</Skill>
+  <!-- Savoir (Médecine)  -->
 <Skill name="RULES-COMPSAVOIR_PLANT">"1"</Skill>
   <!-- Savoir (Plantes)  -->
 <Skill name="RULES-COMPCHARM">"2"</Skill>
@@ -5895,7 +5892,7 @@ See page 190 for Fear rules"</Explanation>
   <!-- Marchandage  -->
 <Skill name="RULES-COMPPRECEP">"2"</Skill>
   <!-- Perception  -->
-<Skill name="RULES-COMPSAVOIR_REG">"2"</Skill>
+<Skill name="RULES-COMPSAVOIR_LOCAL">"2"</Skill>
   <!-- Savoir (Région)  -->
 <Skill name="RULES-COMPRAGOT">"2"</Skill>
   <!-- Ragot  -->
@@ -6140,7 +6137,7 @@ See page 190 for Fear rules"</Explanation>
   <!-- Intuition  -->
 <Skill name="RULES-COMPCOMM">"2"</Skill>
   <!-- Commandement  -->
-<Skill name="RULES-COMPSAVOIR_REG">"2"</Skill>
+<Skill name="RULES-COMPSAVOIR_LOCAL">"2"</Skill>
   <!-- Savoir (Région)  -->
 <Skill name="RULES-COMPSUBOR">"2"</Skill>
   <!-- Subornation  -->
@@ -6390,7 +6387,7 @@ See page 190 for Fear rules"</Explanation>
   <!-- Musicien (au choix) -->
 <Skill name="RULES-COMPINTUI">"2"</Skill>
   <!-- Intuition  -->
-<Skill name="RULES-COMPSAVOIR_REG">"2"</Skill>
+<Skill name="RULES-COMPSAVOIR_LOCAL">"2"</Skill>
   <!-- Savoir (Région)  -->
 <Skill name="RULES-COMPSUBOR">"2"</Skill>
   <!-- Subornation  -->
@@ -7171,7 +7168,7 @@ See page 190 for Fear rules"</Explanation>
   <!-- Ragot  -->
 <Skill name="RULES-COMPRESALC">"2"</Skill>
   <!-- Résistance à l’alcool  -->
-<Skill name="RULES-COMPSAVOIR_REG">"2"</Skill>
+<Skill name="RULES-COMPSAVOIR_LOCAL">"2"</Skill>
   <!-- Savoir (Région)  -->
 <Skill name="RULES-COMPDRESS_CHEVAL">"3"</Skill>
   <!-- Dressage (Cheval)  -->
@@ -7313,7 +7310,7 @@ See page 190 for Fear rules"</Explanation>
   <!-- Perception  -->
 <Skill name="RULES-COMPSAVOIR_GEOG">"4"</Skill>
   <!-- Savoir (Géographie)  -->
-<Skill name="RULES-COMPSAVOIR_REG">"4"</Skill>
+<Skill name="RULES-COMPSAVOIR_LOCAL">"4"</Skill>
   <!-- Savoir (Région)  -->
 </SUBCHAPTER_SKILL>
 <SUBCHAPTER_TALENT>
@@ -7428,7 +7425,7 @@ See page 190 for Fear rules"</Explanation>
   <!-- Intuition  -->
 <Skill name="RULES-COMPPARI">"2"</Skill>
   <!-- Pari  -->
-<Skill name="RULES-COMPSAVOIR_REG">"2"</Skill>
+<Skill name="RULES-COMPSAVOIR_LOCAL">"2"</Skill>
   <!-- Savoir (Région)  -->
 <Skill name="RULES-COMPCOMM">"3"</Skill>
   <!-- Commandement  -->
@@ -7549,7 +7546,7 @@ See page 190 for Fear rules"</Explanation>
   <!-- Perception  -->
 <Skill name="RULES-COMPRAGOT">"2"</Skill>
   <!-- Ragot  -->
-<Skill name="RULES-COMPSAVOIR_REG">"2"</Skill>
+<Skill name="RULES-COMPSAVOIR_LOCAL">"2"</Skill>
   <!-- Savoir (Région)  -->
 <Skill name="RULES-COMPSIGNES_CONTREB">"2"</Skill>
   <!-- Signes secrets (Contrebandier)  -->
@@ -7916,7 +7913,7 @@ See page 190 for Fear rules"</Explanation>
   <!-- Ragot  -->
 <Skill name="RULES-COMPRESIST">"1"</Skill>
   <!-- Résistance  -->
-<Skill name="RULES-COMPSAVOIR_REG">"1"</Skill>
+<Skill name="RULES-COMPSAVOIR_LOCAL">"1"</Skill>
   <!-- Savoir (Région)  -->
 <Skill name="RULES-COMPSURVEXT">"1"</Skill>
   <!-- Survie en extérieur  -->
@@ -8311,7 +8308,7 @@ See page 190 for Fear rules"</Explanation>
   <!-- Perception  -->
 <Skill name="RULES-COMPRESIST">"2"</Skill>
   <!-- Résistance  -->
-<Skill name="RULES-COMPSAVOIR_REG">"2"</Skill>
+<Skill name="RULES-COMPSAVOIR_LOCAL">"2"</Skill>
   <!-- Savoir (Région)  -->
 <Skill name="RULES-COMPCALM">"3"</Skill>
   <!-- Calme -->
@@ -8679,7 +8676,7 @@ See page 190 for Fear rules"</Explanation>
   <!-- Projectiles (Entraves) -->
 <Skill name="RULES-COMPPROJ_LANC">"2"</Skill>
   <!-- Projectiles (Lancer) -->
-<Skill name="RULES-COMPSAVOIR_REG">"2"</Skill>
+<Skill name="RULES-COMPSAVOIR_LOCAL">"2"</Skill>
   <!-- Savoir (Région)  -->
 <Skill name="RULES-COMPSAVOIR_VFLUV">"2"</Skill>
   <!-- Savoir (Voies fluviales)  -->
@@ -9178,7 +9175,7 @@ See page 190 for Fear rules"</Explanation>
   <!-- Résistance à l’alcool  -->
 <Skill name="RULES-COMPRAGOT">"2"</Skill>
   <!-- Ragot  -->
-<Skill name="RULES-COMPSAVOIR_REG">"2"</Skill>
+<Skill name="RULES-COMPSAVOIR_LOCAL">"2"</Skill>
   <!-- Savoir (Région)  -->
 <Skill name="RULES-COMPCOMM">"3"</Skill>
   <!-- Commandement  -->
@@ -9186,8 +9183,8 @@ See page 190 for Fear rules"</Explanation>
   <!-- Intuition  -->
 <Skill name="RULES-COMPMETIER_POIS">"3"</Skill>
   <!-- Métier (Poisons) -->
-<Skill name="RULES-COMPSAVOIR_REMED">"3"</Skill>
-  <!-- Savoir (Remèdes)  -->
+<Skill name="RULES-COMPSAVOIR_MEDICINE">"3"</Skill>
+  <!-- Savoir (Médecine)  -->
 <Skill name="RULES-COMPCOND">"4"</Skill>
   <!-- Conduite d’attelage -->
 <Skill name="RULES-COMPORIENT">"4"</Skill>
@@ -9303,7 +9300,7 @@ See page 190 for Fear rules"</Explanation>
   <!-- Perception  -->
 <Skill name="RULES-COMPPROJ_ARC">"2"</Skill>
   <!-- Projectiles (Arc) -->
-<Skill name="RULES-COMPSAVOIR_REG">"2"</Skill>
+<Skill name="RULES-COMPSAVOIR_LOCAL">"2"</Skill>
   <!-- Savoir (Région)  -->
 <Skill name="RULES-COMPCHEV_CHEVAL">"3"</Skill>
   <!-- Chevaucher (Cheval) -->
@@ -9544,7 +9541,7 @@ See page 190 for Fear rules"</Explanation>
   <!-- Résistance  -->
 <Skill name="RULES-COMPRESALC">"1"</Skill>
   <!-- Résistance à l’alcool  -->
-<Skill name="RULES-COMPSAVOIR_REG">"1"</Skill>
+<Skill name="RULES-COMPSAVOIR_LOCAL">"1"</Skill>
   <!-- Savoir (Région)  -->
 <Skill name="RULES-COMPCHEV_CHEVAL">"2"</Skill>
   <!-- Chevaucher (Cheval) -->
@@ -9811,7 +9808,7 @@ See page 190 for Fear rules"</Explanation>
   <!-- Langue (Guilde)  -->
 <Skill name="RULES-COMPPRECEP">"2"</Skill>
   <!-- Perception  -->
-<Skill name="RULES-COMPSAVOIR_REG">"2"</Skill>
+<Skill name="RULES-COMPSAVOIR_LOCAL">"2"</Skill>
   <!-- Savoir (Région)  -->
 <Skill name="RULES-COMPCALM">"3"</Skill>
   <!-- Calme -->
@@ -10064,8 +10061,8 @@ See page 190 for Fear rules"</Explanation>
   <!-- Métier (Barbier) -->
 <Skill name="RULES-COMPSAVOIR_ANAT">"2"</Skill>
   <!-- Savoir (Anatomie)  -->
-<Skill name="RULES-COMPSAVOIR_REMED">"2"</Skill>
-  <!-- Savoir (Remèdes)  -->
+<Skill name="RULES-COMPSAVOIR_MEDICINE">"2"</Skill>
+  <!-- Savoir (Médecine)  -->
 <Skill name="RULES-COMPCOMM">"3"</Skill>
   <!-- Commandement  -->
 <Skill name="RULES-COMPINTIM">"3"</Skill>
@@ -10193,7 +10190,7 @@ See page 190 for Fear rules"</Explanation>
   <!-- Commandement  -->
 <Skill name="RULES-COMPANIM">"3"</Skill>
   <!-- Emprise sur les animaux -->
-<Skill name="RULES-COMPSAVOIR_REG">"3"</Skill>
+<Skill name="RULES-COMPSAVOIR_LOCAL">"3"</Skill>
   <!-- Savoir (Région)  -->
 <Skill name="RULES-COMPSIGNES_VAGAB">"3"</Skill>
   <!-- Signes secrets (Vagabond)  -->
@@ -10308,7 +10305,7 @@ See page 190 for Fear rules"</Explanation>
   <!-- Chevaucher (Cheval) -->
 <Skill name="RULES-COMPCOMB_BASE">"2"</Skill>
   <!-- Corps à corps (Base) -->
-<Skill name="RULES-COMPSAVOIR_REG">"2"</Skill>
+<Skill name="RULES-COMPSAVOIR_LOCAL">"2"</Skill>
   <!-- Savoir (Région)  -->
 <Skill name="RULES-COMPSOINANI">"2"</Skill>
   <!-- Soin aux animaux  -->
@@ -10436,7 +10433,7 @@ See page 190 for Fear rules"</Explanation>
   <!-- Intuition  -->
 <Skill name="RULES-COMPRAGOT">"2"</Skill>
   <!-- Ragot  -->
-<Skill name="RULES-COMPSAVOIR_REG">"2"</Skill>
+<Skill name="RULES-COMPSAVOIR_LOCAL">"2"</Skill>
   <!-- Savoir (Région)  -->
 <Skill name="RULES-COMPCOMM">"3"</Skill>
   <!-- Commandement  -->
@@ -10551,7 +10548,7 @@ See page 190 for Fear rules"</Explanation>
   <!-- Perception  -->
 <Skill name="RULES-COMPRESIST">"1"</Skill>
   <!-- Résistance  -->
-<Skill name="RULES-COMPSAVOIR_REG">"1"</Skill>
+<Skill name="RULES-COMPSAVOIR_LOCAL">"1"</Skill>
   <!-- Savoir (Région)  -->
 <Skill name="RULES-COMPSURVEXT">"1"</Skill>
   <!-- Survie en extérieur  -->
@@ -10924,7 +10921,7 @@ See page 190 for Fear rules"</Explanation>
   <!-- Ramer  -->
 <Skill name="RULES-COMPRESALC">"1"</Skill>
   <!-- Résistance à l’alcool  -->
-<Skill name="RULES-COMPSAVOIR_REG">"1"</Skill>
+<Skill name="RULES-COMPSAVOIR_LOCAL">"1"</Skill>
   <!-- Savoir (Région)  -->
 <Skill name="RULES-COMPSAVOIR_VFLUV">"1"</Skill>
   <!-- Savoir (Voies fluviales)  -->
@@ -10944,7 +10941,7 @@ See page 190 for Fear rules"</Explanation>
   <!-- Intimidation  -->
 <Skill name="RULES-COMPMARCH">"3"</Skill>
   <!-- Marchandage  -->
-<Skill name="RULES-COMPSAVOIR_REG">"3"</Skill>
+<Skill name="RULES-COMPSAVOIR_LOCAL">"3"</Skill>
   <!-- Savoir (Région)  -->
 <Skill name="RULES-COMPSAVOIR_EPAVE">"3"</Skill>
   <!-- Savoir (Épaves)  -->
@@ -11061,7 +11058,7 @@ See page 190 for Fear rules"</Explanation>
   <!-- Langue (Classique)  -->
 <Skill name="RULES-COMPRAGOT">"2"</Skill>
   <!-- Ragot  -->
-<Skill name="RULES-COMPSAVOIR_REG">"2"</Skill>
+<Skill name="RULES-COMPSAVOIR_LOCAL">"2"</Skill>
   <!-- Savoir (Région)  -->
 <Skill name="RULES-COMPINTUI">"3"</Skill>
   <!-- Intuition  -->
@@ -11203,7 +11200,7 @@ See page 190 for Fear rules"</Explanation>
   <!-- Commandement  -->
 <Skill name="RULES-COMPPRECEP">"3"</Skill>
   <!-- Perception  -->
-<Skill name="RULES-COMPSAVOIR_REG">"3"</Skill>
+<Skill name="RULES-COMPSAVOIR_LOCAL">"3"</Skill>
   <!-- Savoir (Région)  -->
 <Skill name="RULES-COMPSAVOIR_POLIT">"3"</Skill>
   <!-- Savoir (Politique)  -->
@@ -11577,8 +11574,8 @@ See page 190 for Fear rules"</Explanation>
   <!-- Évaluation  -->
 <Skill name="RULES-COMPMARCH">"2"</Skill>
   <!-- Marchandage  -->
-<Skill name="RULES-COMPSAVOIR_REMED">"2"</Skill>
-  <!-- Savoir (Remèdes)  -->
+<Skill name="RULES-COMPSAVOIR_MEDICINE">"2"</Skill>
+  <!-- Savoir (Médecine)  -->
 <Skill name="RULES-COMPSUBOR">"2"</Skill>
   <!-- Subornation  -->
 <Skill name="RULES-COMPCROCH">"3"</Skill>
@@ -11949,7 +11946,7 @@ See page 190 for Fear rules"</Explanation>
   <!-- Résistance  -->
 <Skill name="RULES-COMPRESALC">"1"</Skill>
   <!-- Résistance à l’alcool  -->
-<Skill name="RULES-COMPSAVOIR_REG">"1"</Skill>
+<Skill name="RULES-COMPSAVOIR_LOCAL">"1"</Skill>
   <!-- Savoir (Région)  -->
 <Skill name="RULES-COMPCHARM">"2"</Skill>
   <!-- Charme  -->
@@ -12220,7 +12217,7 @@ See page 190 for Fear rules"</Explanation>
   <!-- Divertissement (Narration)  -->
 <Skill name="RULES-COMPSAVOIR_ART">"3"</Skill>
   <!-- Savoir (Art)  -->
-<Skill name="RULES-COMPSAVOIR_REG">"3"</Skill>
+<Skill name="RULES-COMPSAVOIR_LOCAL">"3"</Skill>
   <!-- Savoir (Région)  -->
 <Skill name="RULES-COMPSUBOR">"3"</Skill>
   <!-- Subornation  -->
@@ -12345,7 +12342,7 @@ See page 190 for Fear rules"</Explanation>
   <!-- Résistance  -->
 <Skill name="RULES-COMPSAVOIR_LOI">"3"</Skill>
   <!-- Savoir (Loi)  -->
-<Skill name="RULES-COMPSAVOIR_REG">"3"</Skill>
+<Skill name="RULES-COMPSAVOIR_LOCAL">"3"</Skill>
   <!-- Savoir (Région)  -->
 <Skill name="RULES-COMPSAVOIR_CHAOS">"4"</Skill>
   <!-- Savoir (Chaos)  -->
@@ -12598,7 +12595,7 @@ See page 190 for Fear rules"</Explanation>
   <!-- Charme  -->
 <Skill name="RULES-COMPINTIM">"3"</Skill>
   <!-- Intimidation  -->
-<Skill name="RULES-COMPSAVOIR_REG">"3"</Skill>
+<Skill name="RULES-COMPSAVOIR_LOCAL">"3"</Skill>
   <!-- Savoir (Région)  -->
 <Skill name="RULES-COMPCOMM">"4"</Skill>
   <!-- Commandement  -->
@@ -12967,7 +12964,7 @@ See page 190 for Fear rules"</Explanation>
   <!-- Métier (Colifichets) -->
 <Skill name="RULES-COMPMETIER_HERB">"2"</Skill>
   <!-- Métier (Herboriste) -->
-<Skill name="RULES-COMPSAVOIR_REG">"2"</Skill>
+<Skill name="RULES-COMPSAVOIR_LOCAL">"2"</Skill>
   <!-- Savoir (Région)  -->
 <Skill name="RULES-COMPMARCH">"3"</Skill>
   <!-- Marchandage  -->
@@ -13456,7 +13453,7 @@ See page 190 for Fear rules"</Explanation>
   <!-- Résistance  -->
 <Skill name="RULES-COMPRESALC">"1"</Skill>
   <!-- Résistance à l’alcool  -->
-<Skill name="RULES-COMPSAVOIR_REG">"1"</Skill>
+<Skill name="RULES-COMPSAVOIR_LOCAL">"1"</Skill>
   <!-- Savoir (Région)  -->
 <Skill name="RULES-COMPSOINANI">"1"</Skill>
   <!-- Soin aux animaux  -->
@@ -13589,7 +13586,7 @@ See page 190 for Fear rules"</Explanation>
   <!-- Évaluation  -->
 <Skill name="RULES-COMPRAGOT">"2"</Skill>
   <!-- Ragot  -->
-<Skill name="RULES-COMPSAVOIR_REG">"2"</Skill>
+<Skill name="RULES-COMPSAVOIR_LOCAL">"2"</Skill>
   <!-- Savoir (Région)  -->
 <Skill name="RULES-COMPSIGNES_VOL">"2"</Skill>
   <!-- Signes secrets (Voleur)  -->

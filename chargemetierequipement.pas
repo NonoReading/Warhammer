@@ -55,7 +55,7 @@ function GetListeEquipement(ListeCodes: String; ListeTypes: String):String;
 
         if pos(EquipementQualite, StringsT[IndL]) > 0 then
           begin
-            Code   := copy(stringsI[IndL],1,length(stringsI[IndL]) - length(Equipementqualite));
+            Code   := Trim(copy(stringsI[IndL],1,length(stringsI[IndL]) - length(Equipementqualite)));
             Qualite:= Equipementqualite;
           end
         else

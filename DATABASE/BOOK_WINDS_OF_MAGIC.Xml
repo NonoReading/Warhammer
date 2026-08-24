@@ -650,7 +650,7 @@ The assistant provides a bonus of +20 to these Tests rather than the normal +10 
 <Talent name="RULES-T0137">"3"</Talent>
   <!-- Second Sight -->
 <Talent name="RULES-T0088_METAL">"4"</Talent>
-  <!-- Arcane Lore (Metal) -->
+  <!-- Arcane Magic (Metal) -->
 <Talent name="RULES-T0157_EMP">"4"</Talent>
   <!-- Master Tradesman (Poisoner) -->
 <Talent name="RULES-T0129_POIS">"4"</Talent>
@@ -765,7 +765,7 @@ The assistant provides a bonus of +20 to these Tests rather than the normal +10 
 <Talent name="RULES-T0137">"1"</Talent>
   <!-- Second Sight -->
 <Talent name="RULES-T0088_*">"2"</Talent>
-  <!-- Arcane Lore (Any) -->
+  <!-- Arcane Magic (Any) -->
 <Talent name="RULES-T0010">"2"</Talent>
   <!-- Blather -->
 <Talent name="RULES-T0091">"2"</Talent>
@@ -1013,7 +1013,7 @@ The assistant provides a bonus of +20 to these Tests rather than the normal +10 
 <Talent name="RULES-T0137">"1"</Talent>
   <!-- Second Sight -->
 <Talent name="RULES-T0088_LUMIERE">"2"</Talent>
-  <!-- Arcane Lore (Light) -->
+  <!-- Arcane Magic (Light) -->
 <Talent name="RULES-T0040">"2"</Talent>
   <!-- Detect Artefact -->
 <Talent name="RULES-T0117">"2"</Talent>
@@ -1142,7 +1142,7 @@ The assistant provides a bonus of +20 to these Tests rather than the normal +10 
 <Talent name="RULES-T0137">"1"</Talent>
   <!-- Second Sight -->
 <Talent name="RULES-T0088_METAL">"2"</Talent>
-  <!-- Arcane Lore (Metal) -->
+  <!-- Arcane Magic (Metal) -->
 <Talent name="RULES-T0051">"2"</Talent>
   <!-- Argumentative -->
 <Talent name="RULES-T0040">"2"</Talent>
@@ -1274,7 +1274,7 @@ The assistant provides a bonus of +20 to these Tests rather than the normal +10 
 <Talent name="RULES-T0137">"1"</Talent>
   <!-- Second Sight -->
 <Talent name="RULES-T0088_VIE">"2"</Talent>
-  <!-- Arcane Lore (Life) -->
+  <!-- Arcane Magic (Life) -->
 <Talent name="RULES-T0040">"2"</Talent>
   <!-- Detect Artefact -->
 <Talent name="RULES-T0091">"2"</Talent>
@@ -1405,7 +1405,7 @@ The assistant provides a bonus of +20 to these Tests rather than the normal +10 
 <Talent name="RULES-T0137">"1"</Talent>
   <!-- Second Sight -->
 <Talent name="RULES-T0088_CIEUX">"2"</Talent>
-  <!-- Arcane Lore (Heavens) -->
+  <!-- Arcane Magic (Heavens) -->
 <Talent name="RULES-T0040">"2"</Talent>
   <!-- Detect Artefact -->
 <Talent name="RULES-T0140">"2"</Talent>
@@ -1538,7 +1538,7 @@ The assistant provides a bonus of +20 to these Tests rather than the normal +10 
 <Talent name="RULES-T0137">"1"</Talent>
   <!-- Second Sight -->
 <Talent name="RULES-T0088_OMBRE">"2"</Talent>
-  <!-- Arcane Lore (Shadow) -->
+  <!-- Arcane Magic (Shadow) -->
 <Talent name="RULES-T0040">"2"</Talent>
   <!-- Detect Artefact -->
 <Talent name="RULES-T0091">"2"</Talent>
@@ -1670,7 +1670,7 @@ The assistant provides a bonus of +20 to these Tests rather than the normal +10 
 <Talent name="RULES-T0137">"1"</Talent>
   <!-- Second Sight -->
 <Talent name="RULES-T0088_MORT">"2"</Talent>
-  <!-- Arcane Lore (Death) -->
+  <!-- Arcane Magic (Death) -->
 <Talent name="RULES-T0040">"2"</Talent>
   <!-- Detect Artefact -->
 <Talent name="RULES-T0091">"2"</Talent>
@@ -1800,7 +1800,7 @@ The assistant provides a bonus of +20 to these Tests rather than the normal +10 
 <Talent name="RULES-T0137">"1"</Talent>
   <!-- Second Sight -->
 <Talent name="RULES-T0088_FEU">"2"</Talent>
-  <!-- Arcane Lore (Fire) -->
+  <!-- Arcane Magic (Fire) -->
 <Talent name="RULES-T0040">"2"</Talent>
   <!-- Detect Artefact -->
 <Talent name="RULES-T0091">"2"</Talent>
@@ -1935,7 +1935,7 @@ The assistant provides a bonus of +20 to these Tests rather than the normal +10 
 <Talent name="RULES-T0137">"1"</Talent>
   <!-- Second Sight -->
 <Talent name="RULES-T0088_BETE">"2"</Talent>
-  <!-- Arcane Lore (Beast) -->
+  <!-- Arcane Magic (Beast) -->
 <Talent name="RULES-T0074">"2"</Talent>
   <!-- Coolheaded -->
 <Talent name="RULES-T0091">"2"</Talent>
@@ -2183,7 +2183,7 @@ The assistant provides a bonus of +20 to these Tests rather than the normal +10 
 <Talent name="RULES-T0137">"1"</Talent>
   <!-- Second Sight -->
 <Talent name="RULES-T0088_*">"2"</Talent>
-  <!-- Arcane Lore (Any) -->
+  <!-- Arcane Magic (Any) -->
 <Talent name="RULES-T0042">"2"</Talent>
   <!-- Instinctive Diction -->
 <Talent name="RULES-T0020">"2"</Talent>
@@ -3230,7 +3230,7 @@ The assistant provides a bonus of +20 to these Tests rather than the normal +10 
 </Sort>
 <Sort id="WINDS-COLOR_175">
 <Description language="ENGLISH">"Storm of Shemtek"</Description>
-<Explanation language="ENGLISH">"Your body becomes a lightning rod of arcane power. Eldritch light pours from your eyes and mouth as your body stiffens in a cruciform pose. Lightning bolts equal to 2 x your Initiative Bonus streak from cracks in your body. Each lightning bolt is a magic missile with Damage +6 you can direct at separate targets in front of you. You immediately receive a Stunned Condition. Anyone without the Arcane Lore (Heavens) Talent who witnesses the spell must Test against a Fear (1) effect (WFRP, page 190). Storm of Shemtek does not require open sky, because it originates from the Aecthyr.A safer (but less destructive) variant of this spell calls down Initiative Bonus lightning bolts within a target area of 2 x your Willpower Bonus yards. You are not Stunned and the spell does not cause fear.  "</Explanation>
+<Explanation language="ENGLISH">"Your body becomes a lightning rod of arcane power. Eldritch light pours from your eyes and mouth as your body stiffens in a cruciform pose. Lightning bolts equal to 2 x your Initiative Bonus streak from cracks in your body. Each lightning bolt is a magic missile with Damage +6 you can direct at separate targets in front of you. You immediately receive a Stunned Condition. Anyone without the Arcane Magic (Heavens) Talent who witnesses the spell must Test against a Fear (1) effect (WFRP, page 190). Storm of Shemtek does not require open sky, because it originates from the Aecthyr.A safer (but less destructive) variant of this spell calls down Initiative Bonus lightning bolts within a target area of 2 x your Willpower Bonus yards. You are not Stunned and the spell does not cause fear.  "</Explanation>
 <Target>"2 x Initiative Bonus or Initiative Bonus"</Target>
 <Duration>"Instant"</Duration>
 <Range>""</Range>
@@ -4070,7 +4070,7 @@ The assistant provides a bonus of +20 to these Tests rather than the normal +10 
 </Sort>
 <Sort id="WINDS-COLOR_259">
 <Description language="ENGLISH">"Beast Unbroken"</Description>
-<Explanation language="ENGLISH">"You cause a domestic animal to become wild and ornery. The GM decides whether an animal flees into the wilds or turns against its former owner. The Charm Animal Skill cannot tame the target, only dissuade them from attacking. Riders must pass a Hard (-20) Ride Test to  avoid being thrown from their mount. If you roll +4 SL or more on your Casting Test, you may instead cause a Human to undergo a repugnant transformation. The target can resist with a Difficult (-10) Willpower Test. If the target fails, they sprout thick body hair and lose their capacity for speech. The target’s actions are determined by rolling 1d10 every round:  1-3 | Distracted: The target scratches its fur, defecates, or picks its nose  4-6 | Panicked: The target moves in a random direction, running into obstacles or attacking creatures in its path  7-9 | Friendly: The target laughs maniacally and crawls or dances toward the nearest character 10 | Enraged: The target releases a primal scream, causing Fear (1) in anyone without the Arcane Lore (Beasts) Talent who can hear it  For both applications of The Beast Unbroken, the target remains under the effects until the curse is dispelled."</Explanation>
+<Explanation language="ENGLISH">"You cause a domestic animal to become wild and ornery. The GM decides whether an animal flees into the wilds or turns against its former owner. The Charm Animal Skill cannot tame the target, only dissuade them from attacking. Riders must pass a Hard (-20) Ride Test to  avoid being thrown from their mount. If you roll +4 SL or more on your Casting Test, you may instead cause a Human to undergo a repugnant transformation. The target can resist with a Difficult (-10) Willpower Test. If the target fails, they sprout thick body hair and lose their capacity for speech. The target’s actions are determined by rolling 1d10 every round:  1-3 | Distracted: The target scratches its fur, defecates, or picks its nose  4-6 | Panicked: The target moves in a random direction, running into obstacles or attacking creatures in its path  7-9 | Friendly: The target laughs maniacally and crawls or dances toward the nearest character 10 | Enraged: The target releases a primal scream, causing Fear (1) in anyone without the Arcane Magic (Beasts) Talent who can hear it  For both applications of The Beast Unbroken, the target remains under the effects until the curse is dispelled."</Explanation>
 <Target>"1"</Target>
 <Duration>"Instant"</Duration>
 <Range>""</Range>

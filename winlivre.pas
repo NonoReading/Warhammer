@@ -1168,7 +1168,7 @@ begin
   // Suffixe de qualité "(Q)"
   if Pos(EquipementQualite, CodeItem) > 0 then
   begin
-    CodeItem := Copy(CodeItem, 1, Length(CodeItem) - Length(EquipementQualite));
+    CodeItem := Trim(Copy(CodeItem, 1, Length(CodeItem) - Length(EquipementQualite)));
     Qualite  := GetTexteLibelle('LAB_038');  // ' de qualité'
   end
   else

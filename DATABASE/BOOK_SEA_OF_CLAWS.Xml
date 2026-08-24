@@ -900,7 +900,7 @@ This bonus applies to Crew Tests as well as individual Leadership Tests."</Expla
 <Skill name="RULES-COMPCOMM">"4"</Skill>
   <!-- Leadership -->
 <Skill name="RULES-COMPMETIER_BATEA">"4"</Skill>
-  <!-- Trade (Boat building) -->
+  <!-- Trade (Boatbuilding) -->
 </SUBCHAPTER_SKILL>
 <SUBCHAPTER_TALENT>
 <Talent name="RULES-T0113">"1"</Talent>

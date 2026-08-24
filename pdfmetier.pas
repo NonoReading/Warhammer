@@ -407,7 +407,7 @@ begin
                       if (Pos(EquipementQualite, Equipement) > 0) then
                         begin
                           Qualite    := ' '+EquipementQualite;
-                          Equipement := ExtractStringBefore(LigneEquip,EquipementQualite);
+                          Equipement := Trim(ExtractStringBefore(LigneEquip,EquipementQualite));
                         end;
                       LigneType := StringType[LigneIndice];
                       Inc(LigneIndice);
@@ -488,7 +488,7 @@ begin
             LigneIndice := 0;
             For LigneEquip in StringEquip do
               begin
-                Equipement := ExtractStringBefore(LigneEquip,EquipementQualite);
+                Equipement := Trim(ExtractStringBefore(LigneEquip,EquipementQualite));
                 LigneType  := StringType[LigneIndice];
                 Inc(LigneIndice);
 

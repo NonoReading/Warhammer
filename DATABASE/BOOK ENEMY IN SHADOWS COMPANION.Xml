@@ -43,7 +43,7 @@ As always, any changes in Career need approval from your GM so they best fit any
 </Talent>
 <Talent id="ENEMY-T0181">
 <Attribut>""</Attribut>
-<Description language="ENGLISH">"Tzeentch s Blessing"</Description>
+<Description language="ENGLISH">"Tzeentch’s Blessing"</Description>
 <Short language="ENGLISH">""</Short>
 <Explanation language="ENGLISH">"Tzeentch, the Chaos God of Magic, has gifted you with a worming parasite within your mind.
 When you purchase this Talent, a single Spell wriggles free into your head where it takes residence, occasionally whispering to you as you sleep.
@@ -102,7 +102,7 @@ However, their differing visions of the Empire’s fate ensure that for all thei
   <!-- Intuition  -->
 <Skill name="RULES-COMPLANG_MAG">"1"</Skill>
   <!-- Language (Magick) -->
-<Skill name="RULES-COMPSIGNES_TZEENTCH">"1"</Skill>
+<Skill name="RULES-COMPSAVOIR_TZEENTCH">"1"</Skill>
   <!-- Lore (Tzeentch) -->
 <Skill name="RULES-COMPPRECEP">"1"</Skill>
   <!-- Perception  -->
@@ -141,21 +141,21 @@ However, their differing visions of the Empire’s fate ensure that for all thei
 <Talent name="RULES-T0072">"1"</Talent>
   <!-- Secret Identity -->
 <Talent name="ENEMY-T0181">"1"</Talent>
-  <!-- Tzeentch s Blessing -->
+  <!-- Tzeentch’s Blessing -->
 <Talent name="RULES-T0115">"1"</Talent>
   <!-- Magical Sense -->
 <Talent name="RULES-T0089">"1"</Talent>
   <!-- Petty Magic -->
 <Talent name="RULES-T0099">"2"</Talent>
   <!-- Cat-tongued -->
-<Talent name="RULES-T0088_TZEENTCH">"2"</Talent>
-  <!-- Arcane Magic (Tzeentch) -->
+<Talent name="RULES-T0172_TZEENTCH">"2"</Talent>
+  <!-- Chaos Magic (Tzeentch) -->
 <Talent name="ENEMY-T0180">"2"</Talent>
   <!-- Double Life -->
 <Talent name="RULES-T0109">"2"</Talent>
   <!-- Public Speaker -->
 <Talent name="RULES-T0088_DEMON">"3"</Talent>
-  <!-- Arcane Lore (Demonology) -->
+  <!-- Arcane Magic (Demonology) -->
 <Talent name="ENEMY-T0179">"3"</Talent>
   <!-- Disciple of Change -->
 <Talent name="RULES-T0093">"3"</Talent>
@@ -176,7 +176,7 @@ However, their differing visions of the Empire’s fate ensure that for all thei
 <Item name="Ritual Vestments">"1"</Item>
 <Item name="Secret Tattoo">"1"</Item>
 <Item name="Chaos Grimoire">"2"</Item>
-<Item name="Good Quality Ritual">"2"</Item>
+<Item name="Ritual Vestments (Q)">"2"</Item>
 <Item name="Cell of Cultists">"3"</Item>
 <Item name="Magic Item">"3"</Item>
 <Item name="Sacrificial Dagger">"3"</Item>
