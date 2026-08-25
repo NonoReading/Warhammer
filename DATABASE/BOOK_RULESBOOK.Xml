@@ -1216,7 +1216,7 @@ As all sailboats are pretty much the same to steer, owning one Specialization ma
 <Description language="ENGLISH">"Ride (Pegasus)"</Description>
 </Skill>
 <Skill id="RULES-COMPCOMB_2M">
-<Description language="ENGLISH">"Melee (Two hands)"</Description>
+<Description language="ENGLISH">"Melee (Two-Handed)"</Description>
 </Skill>
 <Skill id="RULES-COMPCOMB_2M/RULES-COMPCOMB_FLEAU">
 <Description language="ENGLISH">"Melee (Flail or Two Handed)"</Description>
@@ -1234,16 +1234,13 @@ As all sailboats are pretty much the same to steer, owning one Specialization ma
 <Description language="ENGLISH">"Melee (Fencing)"</Description>
 </Skill>
 <Skill id="RULES-COMPCOMB_FLEAU">
-<Description language="ENGLISH">"Melee (Scourge)"</Description>
+<Description language="ENGLISH">"Melee (Flail)"</Description>
 </Skill>
 <Skill id="RULES-COMPCOMB_HAST">
 <Description language="ENGLISH">"Melee (Polearm)"</Description>
 </Skill>
 <Skill id="RULES-COMPCOMB_PARAD">
 <Description language="ENGLISH">"Melee (Parry)"</Description>
-</Skill>
-<Skill id="RULES-COMPCOMB_ENTRA">
-<Description language="ENGLISH">"Melee (Hinder)"</Description>
 </Skill>
 <Skill id="RULES-COMPDISC_RURAL">
 <Description language="ENGLISH">"Stealth (Rural)"</Description>
@@ -1477,16 +1474,16 @@ As all sailboats are pretty much the same to steer, owning one Specialization ma
 <Description language="ENGLISH">"Ranged (Crossbow)"</Description>
 </Skill>
 <Skill id="RULES-COMPPROJ_ARBPG">
-<Description language="ENGLISH">"Ranged (Hand Crossbow)"</Description>
+<Description language="ENGLISH">"Ranged (Crossbow Pistol)"</Description>
 </Skill>
 <Skill id="RULES-COMPPROJ_ARC">
 <Description language="ENGLISH">"Ranged (Bow)"</Description>
 </Skill>
 <Skill id="RULES-COMPPROJ_ENTRAV">
-<Description language="ENGLISH">"Ranged (Hindrances)"</Description>
+<Description language="ENGLISH">"Ranged (Entangling)"</Description>
 </Skill>
 <Skill id="RULES-COMPPROJ_FROND">
-<Description language="ENGLISH">"Ranged (Slingshot)"</Description>
+<Description language="ENGLISH">"Ranged (Sling)"</Description>
 </Skill>
 <Skill id="RULES-COMPPROJ_ING">
 <Description language="ENGLISH">"Ranged (Engineering)"</Description>
@@ -1495,10 +1492,10 @@ As all sailboats are pretty much the same to steer, owning one Specialization ma
 <Description language="ENGLISH">"Ranged (Throwing)"</Description>
 </Skill>
 <Skill id="RULES-COMPPROJ_POUDRE">
-<Description language="ENGLISH">"Ranged (Black Powder)"</Description>
+<Description language="ENGLISH">"Ranged (Blackpowder)"</Description>
 </Skill>
 <Skill id="RULES-COMPPROJ_EXPLO">
-<Description language="ENGLISH">"Ranged (Explosive)"</Description>
+<Description language="ENGLISH">"Ranged (Explosives)"</Description>
 </Skill>
 <Skill id="RULES-COMPPROJ_POUDRE/RULES-COMPPROJ_ING">
 <Description language="ENGLISH">"Ranged (black powder and engineering)"</Description>
@@ -2063,7 +2060,7 @@ This Talent is useless if your opponent does not carry a weapon, or is of a Size
 <Magic>"0"</Magic>
 <SpellMode>"AUTO"</SpellMode>
 <Attribut>""</Attribut>
-<Description language="ENGLISH">"Blessed (Any)"</Description>
+<Description language="ENGLISH">"Bless (Any)"</Description>
 <Short language="ENGLISH">""</Short>
 <Explanation language="ENGLISH">"You are protected by one of the gods and you can intensify the power of simple Prayers.
 You can now use the Blessings of your deity listed in Chapter 7: Religions and Beliefs.
@@ -4131,40 +4128,40 @@ See page 190 for Fear rules"</Explanation>
 <Description language="ENGLISH">"Bless (Handrich)"</Description>
 </Talent>
 <Talent id="RULES-T0012_MANANN">
-<Description language="ENGLISH">"Beni of Manann (Sea)"</Description>
+<Description language="ENGLISH">"Bless (Manann)"</Description>
 </Talent>
 <Talent id="RULES-T0012_MORR">
-<Description language="ENGLISH">"Blessed of Morr (Death)"</Description>
+<Description language="ENGLISH">"Bless (Morr)"</Description>
 </Talent>
 <Talent id="RULES-T0012_MYRMIDIA">
-<Description language="ENGLISH">"Blessed of Myrmidia (Strategy)"</Description>
+<Description language="ENGLISH">"Bless (Myrmidia)"</Description>
 </Talent>
 <Talent id="RULES-T0012_RANALD">
-<Description language="ENGLISH">"Blessed of Ranald (Ruse)"</Description>
+<Description language="ENGLISH">"Bless (Ranald)"</Description>
 </Talent>
 <Talent id="RULES-T0012_RHYA">
-<Description language="ENGLISH">"Beni of Rhya (Fertility)"</Description>
+<Description language="ENGLISH">"Bless (Rhya)"</Description>
 </Talent>
 <Talent id="RULES-T0012_SHALLYA">
-<Description language="ENGLISH">"Blessed of Shallya (Mercy)"</Description>
+<Description language="ENGLISH">"Bless (Shallya)"</Description>
 </Talent>
 <Talent id="RULES-T0012_SIGMAR">
-<Description language="ENGLISH">"Blessed of Sigmar (Empire)"</Description>
+<Description language="ENGLISH">"Bless (Sigmar)"</Description>
 </Talent>
 <Talent id="RULES-T0012_SOLKAN">
 <Description language="ENGLISH">"Bless (Solkan)"</Description>
 </Talent>
 <Talent id="RULES-T0012_STROMFELS">
-<Description language="ENGLISH">"Blessed by Stromfels"</Description>
+<Description language="ENGLISH">"Bless (Stromfels)"</Description>
 </Talent>
 <Talent id="RULES-T0012_TAAL">
-<Description language="ENGLISH">"Blessed of Taal (Nature)"</Description>
+<Description language="ENGLISH">"Bless (Taal)"</Description>
 </Talent>
 <Talent id="RULES-T0012_ULRIC">
-<Description language="ENGLISH">"Blessed of Ulric (War)"</Description>
+<Description language="ENGLISH">"Bless (Ulric)"</Description>
 </Talent>
 <Talent id="RULES-T0012_VERENA">
-<Description language="ENGLISH">"Blessed of Verena (Wisdom)"</Description>
+<Description language="ENGLISH">"Bless (Verena)"</Description>
 </Talent>
 <Talent id="RULES-T0013_BOID">
 <Description language="ENGLISH">"Strider (Woodedlands)"</Description>
@@ -4254,40 +4251,40 @@ See page 190 for Fear rules"</Explanation>
 <Description language="ENGLISH">"Invoke (Handrich)"</Description>
 </Talent>
 <Talent id="RULES-T0080_MANANN">
-<Description language="ENGLISH">"Invoke Manann (Sea)"</Description>
+<Description language="ENGLISH">"Invoke (Manann)"</Description>
 </Talent>
 <Talent id="RULES-T0080_MORR">
-<Description language="ENGLISH">"Invoke Morr (Death)"</Description>
+<Description language="ENGLISH">"Invoke (Morr)"</Description>
 </Talent>
 <Talent id="RULES-T0080_MYRMIDIA">
-<Description language="ENGLISH">"Invoke Myrmidia (Strategy)"</Description>
+<Description language="ENGLISH">"Invoke (Myrmidia)"</Description>
 </Talent>
 <Talent id="RULES-T0080_RANALD">
-<Description language="ENGLISH">"Invoke Ranald (Trick)"</Description>
+<Description language="ENGLISH">"Invoke (Ranald)"</Description>
 </Talent>
 <Talent id="RULES-T0080_RHYA">
-<Description language="ENGLISH">"Invoke Rhya (Fertility)"</Description>
+<Description language="ENGLISH">"Invoke (Rhya)"</Description>
 </Talent>
 <Talent id="RULES-T0080_SHALLYA">
-<Description language="ENGLISH">"Invoke Shallya (Mercy)"</Description>
+<Description language="ENGLISH">"Invoke (Shallya)"</Description>
 </Talent>
 <Talent id="RULES-T0080_SIGMAR">
-<Description language="ENGLISH">"Invoke Sigmar (Empire)"</Description>
+<Description language="ENGLISH">"Invoke (Sigmar)"</Description>
 </Talent>
 <Talent id="RULES-T0080_SOLKAN">
 <Description language="ENGLISH">"Invoke (Solkan)"</Description>
 </Talent>
 <Talent id="RULES-T0080_STROMFELS">
-<Description language="ENGLISH">"Invoke Stromfels (Predators)"</Description>
+<Description language="ENGLISH">"Invoke (Stromfels)"</Description>
 </Talent>
 <Talent id="RULES-T0080_TAAL">
-<Description language="ENGLISH">"Invoke Taal (Nature)"</Description>
+<Description language="ENGLISH">"Invoke (Taal)"</Description>
 </Talent>
 <Talent id="RULES-T0080_ULRIC">
-<Description language="ENGLISH">"Invoke Ulric (War)"</Description>
+<Description language="ENGLISH">"Invoke (Ulric)"</Description>
 </Talent>
 <Talent id="RULES-T0080_VERENA">
-<Description language="ENGLISH">"Invoke Verena (Wisdom)"</Description>
+<Description language="ENGLISH">"Invoke (Verena)"</Description>
 </Talent>
 <Talent id="RULES-T0088_BETE">
 <Description language="ENGLISH">"Arcane Magic (Beast)"</Description>
@@ -4347,13 +4344,13 @@ See page 190 for Fear rules"</Explanation>
 <Description language="ENGLISH">"Craftsman (Barber)"</Description>
 </Talent>
 <Talent id="RULES-T0092_BATEA">
-<Description language="ENGLISH">"Craftsman (Boat Builder)"</Description>
+<Description language="ENGLISH">"Craftsman (Boatbuilding)"</Description>
 </Talent>
 <Talent id="RULES-T0092_BRAS">
 <Description language="ENGLISH">"Craftsman (Brewer)"</Description>
 </Talent>
 <Talent id="RULES-T0092_BRICO">
-<Description language="ENGLISH">"Craftsman (Handyman)"</Description>
+<Description language="ENGLISH">"Craftsman (Tinker)"</Description>
 </Talent>
 <Talent id="RULES-T0092_CALLI">
 <Description language="ENGLISH">"Craftsman (Calligrapher)"</Description>
@@ -4365,10 +4362,10 @@ See page 190 for Fear rules"</Explanation>
 <Description language="ENGLISH">"Craftsman (Carpenter)"</Description>
 </Talent>
 <Talent id="RULES-T0092_CIRIE">
-<Description language="ENGLISH">"craftsman (Cirier)"</Description>
+<Description language="ENGLISH">"Craftsman (Chandler)"</Description>
 </Talent>
 <Talent id="RULES-T0092_COLIF">
-<Description language="ENGLISH">"Craftsman (Trinkets)"</Description>
+<Description language="ENGLISH">"Craftsman (Charms)"</Description>
 </Talent>
 <Talent id="RULES-T0092_CUIS">
 <Description language="ENGLISH">"Craftsman (Cook)"</Description>
@@ -4404,10 +4401,10 @@ See page 190 for Fear rules"</Explanation>
 <Description language="ENGLISH">"Craftsman (Engineer)"</Description>
 </Talent>
 <Talent id="RULES-T0092_MATART">
-<Description language="ENGLISH">"Craftsman (Art Material)"</Description>
+<Description language="ENGLISH">"Craftsman (Art Supplies)"</Description>
 </Talent>
 <Talent id="RULES-T0092_MFERR">
-<Description language="ENGLISH">"craftsman (farrier)"</Description>
+<Description language="ENGLISH">"Craftsman (Farrier)"</Description>
 </Talent>
 <Talent id="RULES-T0092_POIS">
 <Description language="ENGLISH">"Craftsman (Poisons)"</Description>
@@ -4416,7 +4413,7 @@ See page 190 for Fear rules"</Explanation>
 <Description language="ENGLISH">"Craftsman (Tanner)"</Description>
 </Talent>
 <Talent id="RULES-T0092_VIGN">
-<Description language="ENGLISH">"Craftsman (Vigneron)"</Description>
+<Description language="ENGLISH">"Craftsman (Vintner)"</Description>
 </Talent>
 <Talent id="RULES-T0096/RULES-T0121">
 <Description language="ENGLISH">"Dual Wielder or Shieldsman"</Description>
@@ -4625,9 +4622,6 @@ See page 190 for Fear rules"</Explanation>
 <Talent id="RULES-T0157_APOTH">
 <Description language="ENGLISH">"Master Tradesman (Apothecary)"</Description>
 </Talent>
-<Talent id="RULES-T0157_APOTH">
-<Description language="ENGLISH">"Master Tradesman (Apothecary)"</Description>
-</Talent>
 <Talent id="RULES-T0157_ARMU">
 <Description language="ENGLISH">"Master Tradesman (Gunsmith)"</Description>
 </Talent>
@@ -4635,13 +4629,13 @@ See page 190 for Fear rules"</Explanation>
 <Description language="ENGLISH">"Master Tradesman (Barber)"</Description>
 </Talent>
 <Talent id="RULES-T0157_BATEA">
-<Description language="ENGLISH">"Master Tradesman (Boat Builder)"</Description>
+<Description language="ENGLISH">"Master Tradesman (Boatbuilding)"</Description>
 </Talent>
 <Talent id="RULES-T0157_BRAS">
 <Description language="ENGLISH">"Master Tradesman (Brewer)"</Description>
 </Talent>
 <Talent id="RULES-T0157_BRICO">
-<Description language="ENGLISH">"Master Tradesman (Handyman)"</Description>
+<Description language="ENGLISH">"Master Tradesman (Tinker)"</Description>
 </Talent>
 <Talent id="RULES-T0157_CALLI">
 <Description language="ENGLISH">"Master Tradesman (Calligrapher)"</Description>
@@ -4653,10 +4647,10 @@ See page 190 for Fear rules"</Explanation>
 <Description language="ENGLISH">"Master Tradesman (Carpenter)"</Description>
 </Talent>
 <Talent id="RULES-T0157_CIRIE">
-<Description language="ENGLISH">"Master Tradesman (Cirier)"</Description>
+<Description language="ENGLISH">"Master Tradesman (Chandler)"</Description>
 </Talent>
 <Talent id="RULES-T0157_COLIF">
-<Description language="ENGLISH">"Master Tradesman (trinkets)"</Description>
+<Description language="ENGLISH">"Master Tradesman (Charms)"</Description>
 </Talent>
 <Talent id="RULES-T0157_CUIS">
 <Description language="ENGLISH">"Master Tradesman (Cook)"</Description>
@@ -4686,10 +4680,10 @@ See page 190 for Fear rules"</Explanation>
 <Description language="ENGLISH">"Master Tradesman (Engineering)"</Description>
 </Talent>
 <Talent id="RULES-T0157_MATART">
-<Description language="ENGLISH">"Master Tradesman (Art Material)"</Description>
+<Description language="ENGLISH">"Master Tradesman (Art Supplies)"</Description>
 </Talent>
 <Talent id="RULES-T0157_MFERR">
-<Description language="ENGLISH">"Master Tradesman (farrier)"</Description>
+<Description language="ENGLISH">"Master Tradesman (Farrier)"</Description>
 </Talent>
 <Talent id="RULES-T0157_POIS">
 <Description language="ENGLISH">"Master Tradesman (Poisons)"</Description>
@@ -4698,7 +4692,7 @@ See page 190 for Fear rules"</Explanation>
 <Description language="ENGLISH">"Master Tradesman (Tanner)"</Description>
 </Talent>
 <Talent id="RULES-T0157_VIGN">
-<Description language="ENGLISH">"Master Tradesman (Winegrower)"</Description>
+<Description language="ENGLISH">"Master Tradesman (Vintner)"</Description>
 </Talent>
 <Talent id="RULES-T0171/RULES-T*">
 <Description language="ENGLISH">"Doomed or Random Talent"</Description>
@@ -4792,7 +4786,7 @@ See page 190 for Fear rules"</Explanation>
 <DATA_RANDOM_TALENT id="RULES-T0092_*">
 <Specie>"-x"</Specie>
 <Talent name="RULES-T0092_*">"19-21"</Talent>
-  <!-- craftsman (Any) -->
+  <!-- Craftsman (Any) -->
 </DATA_RANDOM_TALENT>
 <DATA_RANDOM_TALENT id="RULES-T0064">
 <Specie>"-x"</Specie>
@@ -6031,7 +6025,7 @@ See page 190 for Fear rules"</Explanation>
 <Talent name="RULES-T0077">"1"</Talent>
   <!-- Strong Back -->
 <Talent name="RULES-T0092_*">"1"</Talent>
-  <!-- craftsman (Any) -->
+  <!-- Craftsman (Any) -->
 <Talent name="RULES-T0158">"1"</Talent>
   <!-- Very Strong -->
 <Talent name="RULES-T0035">"2"</Talent>
@@ -6631,7 +6625,7 @@ See page 190 for Fear rules"</Explanation>
 <Skill name="RULES-COMPCOMB_CAVAL">"2"</Skill>
   <!-- Melee (Cavalry) -->
 <Skill name="RULES-COMPPROJ_POUDRE">"2"</Skill>
-  <!-- Ranged (Black Powder) -->
+  <!-- Ranged (Blackpowder) -->
 <Skill name="RULES-COMPRAGOT">"2"</Skill>
   <!-- Gossip -->
 <Skill name="RULES-COMPRESALC">"2"</Skill>
@@ -6873,7 +6867,7 @@ See page 190 for Fear rules"</Explanation>
 <Skill name="RULES-COMPPRECEP">"1"</Skill>
   <!-- Perception  -->
 <Skill name="RULES-COMPPROJ_FROND">"1"</Skill>
-  <!-- Ranged (Slingshot) -->
+  <!-- Ranged (Sling) -->
 <Skill name="RULES-COMPRESIST">"1"</Skill>
   <!-- Endurance -->
 <Skill name="RULES-COMPSAVOIR_BETE">"1"</Skill>
@@ -7018,7 +7012,7 @@ See page 190 for Fear rules"</Explanation>
 <Skill name="RULES-COMPPROJ_ARB">"2"</Skill>
   <!-- Ranged (Crossbow) -->
 <Skill name="RULES-COMPPROJ_ENTRAV">"2"</Skill>
-  <!-- Ranged (Hindrances) -->
+  <!-- Ranged (Entangling) -->
 <Skill name="RULES-COMPRESIST">"2"</Skill>
   <!-- Endurance -->
 <Skill name="RULES-COMPCHEV_CHEVAL">"3"</Skill>
@@ -7269,7 +7263,7 @@ See page 190 for Fear rules"</Explanation>
 <Skill name="RULES-COMPPRECEP">"1"</Skill>
   <!-- Perception  -->
 <Skill name="RULES-COMPPROJ_ENTRAV">"1"</Skill>
-  <!-- Ranged (Hindrances) -->
+  <!-- Ranged (Entangling) -->
 <Skill name="RULES-COMPRESIST">"1"</Skill>
   <!-- Endurance -->
 <Skill name="RULES-COMPSOINANI">"1"</Skill>
@@ -7279,7 +7273,7 @@ See page 190 for Fear rules"</Explanation>
 <Skill name="RULES-COMPORIENT">"2"</Skill>
   <!-- Navigation -->
 <Skill name="RULES-COMPPROJ_POUDRE">"2"</Skill>
-  <!-- Ranged (Black Powder) -->
+  <!-- Ranged (Blackpowder) -->
 <Skill name="RULES-COMPRAGOT">"2"</Skill>
   <!-- Gossip -->
 <Skill name="RULES-COMPRESALC">"2"</Skill>
@@ -7915,7 +7909,7 @@ See page 190 for Fear rules"</Explanation>
 <Skill name="RULES-COMPPARI">"2"</Skill>
   <!-- Gamble -->
 <Skill name="RULES-COMPPROJ_POUDRE">"2"</Skill>
-  <!-- Ranged (Black Powder) -->
+  <!-- Ranged (Blackpowder) -->
 <Skill name="RULES-COMPCOMM">"3"</Skill>
   <!-- Leadership -->
 <Skill name="RULES-COMPCOMB_BASE">"3"</Skill>
@@ -8789,7 +8783,7 @@ See page 190 for Fear rules"</Explanation>
 <Skill name="RULES-COMPPIEG">"2"</Skill>
   <!-- Set Trap -->
 <Skill name="RULES-COMPPROJ_ENTRAV">"2"</Skill>
-  <!-- Ranged (Hindrances) -->
+  <!-- Ranged (Entangling) -->
 <Skill name="RULES-COMPPROJ_LANC">"2"</Skill>
   <!-- Ranged (Throwing) -->
 <Skill name="RULES-COMPSAVOIR_LOCAL">"2"</Skill>
@@ -8821,7 +8815,7 @@ See page 190 for Fear rules"</Explanation>
 <Talent name="RULES-T0077">"2"</Talent>
   <!-- Strong Back -->
 <Talent name="RULES-T0092_BATEA">"2"</Talent>
-  <!-- Craftsman (Boat Builder) -->
+  <!-- Craftsman (Boatbuilding) -->
 <Talent name="RULES-T0097">"2"</Talent>
   <!-- Waterman -->
 <Talent name="RULES-T0105">"2"</Talent>
@@ -8839,7 +8833,7 @@ See page 190 for Fear rules"</Explanation>
 <Talent name="RULES-T0109">"4"</Talent>
   <!-- Public Speaker -->
 <Talent name="RULES-T0157_BATEA">"4"</Talent>
-  <!-- Master Tradesman (Boat Builder) -->
+  <!-- Master Tradesman (Boatbuilding) -->
 <Talent name="RULES-T0166">"4"</Talent>
   <!-- Sharp -->
 </SUBCHAPTER_TALENT>
@@ -8893,7 +8887,7 @@ See page 190 for Fear rules"</Explanation>
 </SUBCHAPTER_ATTR>
 <SUBCHAPTER_SKILL>
 <Skill name="RULES-COMPCOMB_FLEAU">"1"</Skill>
-  <!-- Melee (Scourge) -->
+  <!-- Melee (Flail) -->
 <Skill name="RULES-COMPESQU">"1"</Skill>
   <!-- Dodge -->
 <Skill name="RULES-COMPGUERI">"1"</Skill>
@@ -8917,7 +8911,7 @@ See page 190 for Fear rules"</Explanation>
 <Skill name="RULES-COMPLANG_CLASS">"2"</Skill>
   <!-- Language (Classical) -->
 <Skill name="RULES-COMPPROJ_FROND">"2"</Skill>
-  <!-- Ranged (Slingshot) -->
+  <!-- Ranged (Sling) -->
 <Skill name="RULES-COMPSAVOIR_EMPIRE">"2"</Skill>
   <!-- Lore (Empire) -->
 <Skill name="RULES-COMPCHARM">"3"</Skill>
@@ -9044,7 +9038,7 @@ See page 190 for Fear rules"</Explanation>
 <Skill name="RULES-COMPPROJ_ARC">"2"</Skill>
   <!-- Ranged (Bow) -->
 <Skill name="RULES-COMPCOMB_2M">"3"</Skill>
-  <!-- Melee (Two hands) -->
+  <!-- Melee (Two-Handed) -->
 <Skill name="RULES-COMPGUERI">"3"</Skill>
   <!-- Heal -->
 <Skill name="RULES-COMPLANG_BATAIL">"3"</Skill>
@@ -9168,7 +9162,7 @@ See page 190 for Fear rules"</Explanation>
 <Skill name="RULES-COMPPRECEP">"2"</Skill>
   <!-- Perception  -->
 <Skill name="RULES-COMPPROJ_ENTRAV">"2"</Skill>
-  <!-- Ranged (Hindrances) -->
+  <!-- Ranged (Entangling) -->
 <Skill name="RULES-COMPRAGOT">"3"</Skill>
   <!-- Gossip -->
 <Skill name="RULES-COMPREPRES_COMB">"3"</Skill>
@@ -9529,7 +9523,7 @@ See page 190 for Fear rules"</Explanation>
 <Skill name="RULES-COMPMETIER_ING">"1"</Skill>
   <!-- Trade (Engineer) -->
 <Skill name="RULES-COMPPROJ_POUDRE">"1"</Skill>
-  <!-- Ranged (Black Powder) -->
+  <!-- Ranged (Blackpowder) -->
 <Skill name="RULES-COMPRESIST">"1"</Skill>
   <!-- Endurance -->
 <Skill name="RULES-COMPRESALC">"1"</Skill>
@@ -10655,7 +10649,7 @@ See page 190 for Fear rules"</Explanation>
 <Skill name="RULES-COMPCALM">"1"</Skill>
   <!-- Cool -->
 <Skill name="RULES-COMPCOMB_2M">"1"</Skill>
-  <!-- Melee (Two hands) -->
+  <!-- Melee (Two-Handed) -->
 <Skill name="RULES-COMPINTUI">"1"</Skill>
   <!-- Intuition  -->
 <Skill name="RULES-COMPNATA">"1"</Skill>
@@ -11327,7 +11321,7 @@ See page 190 for Fear rules"</Explanation>
 </SUBCHAPTER_SKILL>
 <SUBCHAPTER_TALENT>
 <Talent name="RULES-T0012_*">"1"</Talent>
-  <!-- Blessed (Any) -->
+  <!-- Bless (Any) -->
 <Talent name="RULES-T0016">"1"</Talent>
   <!-- Stone Soup -->
 <Talent name="RULES-T0054">"1"</Talent>
@@ -11427,7 +11421,7 @@ See page 190 for Fear rules"</Explanation>
 <Skill name="RULES-COMPINTIM">"2"</Skill>
   <!-- Intimidate -->
 <Skill name="RULES-COMPPROJ_POUDRE">"2"</Skill>
-  <!-- Ranged (Black Powder) -->
+  <!-- Ranged (Blackpowder) -->
 <Skill name="RULES-COMPRAGOT">"2"</Skill>
   <!-- Gossip -->
 <Skill name="RULES-COMPSAVOIR_VFLUV">"2"</Skill>
@@ -11567,7 +11561,7 @@ See page 190 for Fear rules"</Explanation>
 <Skill name="RULES-COMPCOMM">"3"</Skill>
   <!-- Leadership -->
 <Skill name="RULES-COMPPROJ_POUDRE">"3"</Skill>
-  <!-- Ranged (Black Powder) -->
+  <!-- Ranged (Blackpowder) -->
 <Skill name="RULES-COMPORIENT">"4"</Skill>
   <!-- Navigation -->
 <Skill name="RULES-COMPSAVOIR_EMPIRE">"4"</Skill>
@@ -11844,7 +11838,7 @@ See page 190 for Fear rules"</Explanation>
 <Talent name="RULES-T0002">"1"</Talent>
   <!-- Suave -->
 <Talent name="RULES-T0012_*">"1"</Talent>
-  <!-- Blessed (Any) -->
+  <!-- Bless (Any) -->
 <Talent name="RULES-T0084">"1"</Talent>
   <!-- Read/Write -->
 <Talent name="RULES-T0165">"1"</Talent>
@@ -11966,7 +11960,7 @@ See page 190 for Fear rules"</Explanation>
 </SUBCHAPTER_SKILL>
 <SUBCHAPTER_TALENT>
 <Talent name="RULES-T0012_*">"1"</Talent>
-  <!-- Blessed (Any) -->
+  <!-- Bless (Any) -->
 <Talent name="RULES-T0084">"1"</Talent>
   <!-- Read/Write -->
 <Talent name="RULES-T0107">"1"</Talent>
@@ -12186,7 +12180,7 @@ See page 190 for Fear rules"</Explanation>
 <Skill name="RULES-COMPANIM">"1"</Skill>
   <!-- Charm Animal -->
 <Skill name="RULES-COMPPROJ_FROND">"1"</Skill>
-  <!-- Ranged (Slingshot) -->
+  <!-- Ranged (Sling) -->
 <Skill name="RULES-COMPRESIST">"1"</Skill>
   <!-- Endurance -->
 <Skill name="RULES-COMPRESALC">"1"</Skill>
@@ -12210,7 +12204,7 @@ See page 190 for Fear rules"</Explanation>
 <Skill name="RULES-COMPESQU">"3"</Skill>
   <!-- Dodge -->
 <Skill name="RULES-COMPPROJ_ARBPG">"3"</Skill>
-  <!-- Ranged (Hand Crossbow) -->
+  <!-- Ranged (Crossbow Pistol) -->
 <Skill name="RULES-COMPCOMM">"4"</Skill>
   <!-- Leadership -->
 <Skill name="RULES-COMPPIST">"4"</Skill>
@@ -13452,7 +13446,7 @@ See page 190 for Fear rules"</Explanation>
 <Skill name="RULES-COMPSAVOIR_TROLL">"1"</Skill>
   <!-- Lore (Trolls) -->
 <Skill name="RULES-COMPCOMB_2M">"2"</Skill>
-  <!-- Melee (Two hands) -->
+  <!-- Melee (Two-Handed) -->
 <Skill name="RULES-COMPEVAL">"2"</Skill>
   <!-- Evaluate -->
 <Skill name="RULES-COMPINTIM">"2"</Skill>
@@ -13620,7 +13614,7 @@ See page 190 for Fear rules"</Explanation>
 <Talent name="RULES-T0025">"3"</Talent>
   <!-- Stout-hearted -->
 <Talent name="RULES-T0092_*">"3"</Talent>
-  <!-- craftsman (Any) -->
+  <!-- Craftsman (Any) -->
 <Talent name="RULES-T0102">"3"</Talent>
   <!-- Dealmaker -->
 <Talent name="RULES-T0159">"3"</Talent>
@@ -14106,7 +14100,7 @@ See page 190 for Fear rules"</Explanation>
 </Weapon>
 <Weapon id="RULES-COMB_ENTRA_01">
 <Description language="ENGLISH">"Whip"</Description>
-<Skill>"RULES-COMPCOMB_ENTRA"</Skill>
+<Skill>"RULES-COMPPROJ_ENTRAV"</Skill>
 <Damage>"+(BATTR_S)+2"</Damage>
 <Availability>"DISPO_COMMON"</Availability>
 <Reach>"6"</Reach>
@@ -14118,7 +14112,7 @@ See page 190 for Fear rules"</Explanation>
 </Weapon>
 <Weapon id="RULES-COMB_ENTRA_02">
 <Description language="ENGLISH">"Lasso"</Description>
-<Skill>"RULES-COMPCOMB_ENTRA"</Skill>
+<Skill>"RULES-COMPPROJ_ENTRAV"</Skill>
 <Damage>"0"</Damage>
 <Availability>"DISPO_COMMON"</Availability>
 <Reach>"(BATTR_S)X2"</Reach>

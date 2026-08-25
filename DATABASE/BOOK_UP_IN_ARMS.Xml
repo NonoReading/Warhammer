@@ -668,7 +668,7 @@ Ifthe Character passes the Test, the crew members may then use the Characters Ra
 <Skill name="RULES-COMPCOMB_BASE">"1"</Skill>
   <!-- Melee (Basic) -->
 <Skill name="RULES-COMPCOMB_2M">"1"</Skill>
-  <!-- Melee (Two hands) -->
+  <!-- Melee (Two-Handed) -->
 <Skill name="RULES-COMPMUSIC_TAMB">"1"</Skill>
   <!-- Play (Drum) -->
 <Skill name="RULES-COMPPARI">"2"</Skill>
@@ -936,7 +936,7 @@ Ifthe Character passes the Test, the crew members may then use the Characters Ra
 <Skill name="RULES-COMPMUSIC_FLUTE">"1"</Skill>
   <!-- Play (Flute) -->
 <Skill name="RULES-COMPPROJ_POUDRE">"1"</Skill>
-  <!-- Ranged (Black Powder) -->
+  <!-- Ranged (Blackpowder) -->
 <Skill name="RULES-COMPESCAL">"2"</Skill>
   <!-- Climb -->
 <Skill name="RULES-COMPPARI">"2"</Skill>
@@ -2011,7 +2011,7 @@ Ifthe Character passes the Test, the crew members may then use the Characters Ra
 <Skill name="RULES-COMPSAVOIR_HERAL/RULES-COMPSAVOIR_LOI">"4"</Skill>
   <!-- Lore (Law or Heraldry) -->
 <Skill name="RULES-COMPPROJ_POUDRE">"4"</Skill>
-  <!-- Ranged (Black Powder) -->
+  <!-- Ranged (Blackpowder) -->
 </SUBCHAPTER_SKILL>
 <SUBCHAPTER_TALENT>
 <Talent name="RULES-T0094">"1"</Talent>
@@ -2130,7 +2130,7 @@ Ifthe Character passes the Test, the crew members may then use the Characters Ra
 <Skill name="RULES-COMPSAVOIR_ING">"2"</Skill>
   <!-- Lore (Engineering) -->
 <Skill name="RULES-COMPCOMB_2M">"2"</Skill>
-  <!-- Melee (Two hands) -->
+  <!-- Melee (Two-Handed) -->
 <Skill name="RULES-COMPPRECEP">"2"</Skill>
   <!-- Perception  -->
 <Skill name="RULES-COMPPIEG">"2"</Skill>
@@ -2425,7 +2425,7 @@ Ifthe Character passes the Test, the crew members may then use the Characters Ra
 </SUBCHAPTER_SKILL>
 <SUBCHAPTER_TALENT>
 <Talent name="RULES-T0012_MYRMIDIA">"1"</Talent>
-  <!-- Blessed of Myrmidia (Strategy) -->
+  <!-- Bless (Myrmidia) -->
 <Talent name="RULES-T0146">"1"</Talent>
   <!-- Bookish -->
 <Talent name="RULES-T0136_CULTIST">"1"</Talent>
@@ -2437,7 +2437,7 @@ Ifthe Character passes the Test, the crew members may then use the Characters Ra
 <Talent name="RULES-T0053">"2"</Talent>
   <!-- Inspiring -->
 <Talent name="RULES-T0080_MYRMIDIA">"2"</Talent>
-  <!-- Invoke Myrmidia (Strategy) -->
+  <!-- Invoke (Myrmidia) -->
 <Talent name="RULES-T0121">"2"</Talent>
   <!-- Shieldsman -->
 <Talent name="RULES-T0163">"3"</Talent>

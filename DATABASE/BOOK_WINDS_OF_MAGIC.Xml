@@ -258,11 +258,11 @@ The assistant provides a bonus of +20 to these Tests rather than the normal +10 
 <Skill>"RULES-COMPCOMB_ESCR"</Skill>
   <!-- Melee (Fencing) -->
 <Skill>"RULES-COMPCOMB_FLEAU"</Skill>
-  <!-- Melee (Scourge) -->
+  <!-- Melee (Flail) -->
 <Skill>"RULES-COMPCOMB_PARAD"</Skill>
   <!-- Melee (Parry) -->
 <Skill>"RULES-COMPCOMB_2M"</Skill>
-  <!-- Melee (Two hands) -->
+  <!-- Melee (Two-Handed) -->
 <Skill>"RULES-COMPPRECEP"</Skill>
   <!-- Perception  -->
 </SUBCHAPTER_SKILL>
@@ -482,7 +482,7 @@ The assistant provides a bonus of +20 to these Tests rather than the normal +10 
 <Skill name="RULES-COMPSAVOIR_*">"2"</Skill>
   <!-- Lore (Anyl) -->
 <Skill name="RULES-COMPPROJ_POUDRE">"2"</Skill>
-  <!-- Ranged (Black Powder) -->
+  <!-- Ranged (Blackpowder) -->
 <Skill name="RULES-COMPDIVERT_NARRA">"3"</Skill>
   <!-- Entertain (Storytelling) -->
 <Skill name="RULES-COMPGUERI">"3"</Skill>

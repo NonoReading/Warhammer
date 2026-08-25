@@ -1266,13 +1266,15 @@ A - ECARTS FRANCS - CORRIGES LE 23/08/2026, sauf les deux lignes marquees NON FA
                       pas des erreurs de la carriere mais des LIBELLES du Rulebook. Corriges a la
                       source, le Rulebook ecrivant lui-meme Guilder (3 fois pour Secret Signs, et
                       dans sa ligne Specialisations pour Language). Voir plus bas.
-  Cartographer niv.4  NON FAIT - Master Tradesman (Cartographer) contre (Cartography) du livre :
-                      le Rulebook ne tranche pas, il n'a que Master Tradesman (Trade), et la
-                      graphie actuelle suit le nom du metier Trade (Cartographer). A arbitrer.
+  Cartographer niv.4  CLOS le 24/08 - on garde Cartographer : les trois familles miroir
+                      (Trade, Craftsman, Master Tradesman) l'ecrivent ainsi, c'est Up in Arms
+                      qui ecrit Cartography une fois.
                       MANQUENT : Study, Quality Theodolite
   Freelance           Melee (Any) est au niveau 3 ; le livre le donne au niveau 2
   Blazing Sun niv.1   Language (Classic)              -> Language (Classical)
-  White Wolf niv.2    NON FAIT - "Strike to Injure" contre "Intimidate" du livre, voir C.2
+  White Wolf niv.2    CLOS le 24/08 - la base a RAISON. Source verifiee par Nono : les quatre
+                      talents sont Menacing, Seasoned Traveller, Strike Mighty Blow et Strike to
+                      Injure. L'"Intimidate" de la ligne Talents du livre est une coquille.
   Light Cavalry niv.1 Etiquette (Mercenaries)         -> Diceman
   Light Cavalry niv.2 Charm                           -> Etiquette (Mercenaries)
   Greatsword niv.3    "Manual on the Art of Fighting" -> "Manual on the Art of Zweihaender Fighting"
@@ -1540,3 +1542,39 @@ ECHANTILLON DE VRAIS ECARTS DEJA VISIBLES :
      RULES-CHAOS_03       "Betrayal of 'Tzeentch"
 A traiter famille par famille, avec la meme methode que d'habitude : sortir la table, la faire
 relire, puis appliquer.
+
+FAIT le 24/08/2026 - FAMILLES MELEE ET RANGED alignees (7 libelles), et RULES-COMPCOMB_ENTRA
+"Melee (Hinder)" supprime : doublon dans la mauvaise famille, ses 4 armes (Whip, Lasso,
+Harpoon Launcher, Chain Trap) basculees sur RULES-COMPPROJ_ENTRAV. Le chantier des familles de
+libelles est CLOS : Secret Signs, Entertain, Perform, Lore, Trade, Melee, Ranged.
+
+FAIT le 24/08/2026 - FAMILLES BLESS ET INVOKE alignees sur le livre : "Bless (Sigmar)",
+"Invoke (Sigmar)", generiques "Bless (Any)" et "Invoke (Any)". 23 libelles, 34 occurrences.
+Quatre graphies cohabitaient avant (Blessed of X (Domaine), Bless (X), Blessed by X, Beni of X).
+RESTE : les libelles FRANCAIS de ces deux familles, non touches - ils gardent "Beni de Sigmar
+(Empire)" / "Invocation de Sigmar (Empire)". Si on suit la meme logique, ils deviendraient
+"Benediction (Sigmar)" et "Invocation (Sigmar)" ; c'est une decision de traduction.
+Et six libelles du fichier FRANCAIS sont restes en anglais dans cette famille (Handrich, Solkan,
+Stromfels, pour Bless comme pour Invoke).
+
+FAIT le 24/08/2026 - LES TROIS FAMILLES MIROIR DU METIER normalisees. La competence Trade (X),
+le talent Craftsman (X) (RULES-T0092_*) et le talent Master Tradesman (X) (RULES-T0157_*) portent
+les memes suffixes d'identifiant et doivent porter les memes spécialisations. 9 divergences
+trouvees, 7 corrigees (Boat Builder -> Boatbuilding, Handyman -> Tinker, Cirier -> Chandler,
+Trinkets -> Charms, Art Material -> Art Supplies, farrier -> Farrier, Vigneron/Winegrower ->
+Vintner), plus 8 commentaires en minuscule et le doublon RULES-T0157_APOTH.
+Et l'arbitrage "Master Tradesman (Cartographer) ou (Cartography)" est clos : les trois familles
+disent Cartographer, on garde.
+RESTENT deux divergences volontaires :
+  INGE - le Rulebook ecrit lui-meme "Craftsman (Engineer)" et "Master Tradesman (Engineering)".
+  ARMU - Trade et Master Tradesman disent Gunsmith, Craftsman dit Armourer ; aucun des deux
+         talents n'est utilise, aligner supprimerait le seul "Craftsman (Armourer)".
+A RETENIR : cette regle des familles miroir vaut aussi ailleurs (Bless/Invoke portent les memes
+suffixes de dieu, Arcane Magic et Channelling les memes suffixes de vent). A verifier un jour.
+
+A DECIDER (mon erreur, 24/08) - CAVALERIE LEGERE niveau 2 : 5 competences + 5 talents, la ou
+toutes les autres carrieres sont a 6 + 4. J'ai deplace Etiquette (Mercenaries) au niveau 2 parce
+que le livre l'y met, mais le livre le met dans la ligne SKILLS alors que c'est un TALENT dans le
+modele ; j'ai retire Charm pour compenser, et Charm n'est effectivement pas dans le livre. Le
+contenu est donc plus fidele qu'avant, seule la repartition devie. Trois options : laisser ainsi,
+remettre Charm (6+5), ou rendre Etiquette au niveau 1 comme avant.

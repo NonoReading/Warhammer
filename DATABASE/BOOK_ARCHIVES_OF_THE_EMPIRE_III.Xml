@@ -360,7 +360,7 @@
 </SUBCHAPTER_SKILL>
 <SUBCHAPTER_TALENT>
 <Talent name="RULES-T0012_RHYA">"1"</Talent>
-  <!-- Beni of Rhya (Fertility) -->
+  <!-- Bless (Rhya) -->
 <Talent name="RULES-T0165">"1"</Talent>
   <!-- Holy Visions -->
 <Talent name="RULES-T0140">"1"</Talent>
@@ -372,7 +372,7 @@
 <Talent name="RULES-T0142">"2"</Talent>
   <!-- Gregarious -->
 <Talent name="RULES-T0080_RHYA">"2"</Talent>
-  <!-- Invoke Rhya (Fertility) -->
+  <!-- Invoke (Rhya) -->
 <Talent name="RULES-T0084">"2"</Talent>
   <!-- Read/Write -->
 <Talent name="RULES-T0074">"3"</Talent>

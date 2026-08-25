@@ -884,7 +884,7 @@ This bonus applies to Crew Tests as well as individual Leadership Tests."</Expla
 <Skill name="RULES-COMPSAVOIR_*">"2"</Skill>
   <!-- Lore (Anyl) -->
 <Skill name="RULES-COMPPROJ_FROND">"2"</Skill>
-  <!-- Ranged (Slingshot) -->
+  <!-- Ranged (Sling) -->
 <Skill name="RULES-COMPPIEG">"2"</Skill>
   <!-- Set Trap -->
 <Skill name="RULES-COMPNATA">"2"</Skill>
@@ -1265,7 +1265,7 @@ This bonus applies to Crew Tests as well as individual Leadership Tests."</Expla
 <Skill name="RULES-COMPORIENT">"2"</Skill>
   <!-- Navigation -->
 <Skill name="RULES-COMPPROJ_POUDRE">"2"</Skill>
-  <!-- Ranged (Black Powder) -->
+  <!-- Ranged (Blackpowder) -->
 <Skill name="RULES-COMPART_CARTO">"3"</Skill>
   <!-- Art (Cartography) -->
 <Skill name="RULES-COMPCHARM">"3"</Skill>
@@ -1527,7 +1527,7 @@ This bonus applies to Crew Tests as well as individual Leadership Tests."</Expla
 <Skill name="RULES-COMPSAVOIR_OCEAN">"3"</Skill>
   <!-- Lore (Oceans) -->
 <Skill name="RULES-COMPPROJ_POUDRE">"3"</Skill>
-  <!-- Ranged (Black Powder) -->
+  <!-- Ranged (Blackpowder) -->
 <Skill name="RULES-COMPLANG_*">"4"</Skill>
   <!-- Language (Any) -->
 <Skill name="RULES-COMPSAVOIR_POLIT">"4"</Skill>
@@ -1535,7 +1535,7 @@ This bonus applies to Crew Tests as well as individual Leadership Tests."</Expla
 </SUBCHAPTER_SKILL>
 <SUBCHAPTER_TALENT>
 <Talent name="RULES-T0012_MANANN">"1"</Talent>
-  <!-- Beni of Manann (Sea) -->
+  <!-- Bless (Manann) -->
 <Talent name="RULES-T0165">"1"</Talent>
   <!-- Holy Visions -->
 <Talent name="RULES-T0119">"1"</Talent>
@@ -1543,7 +1543,7 @@ This bonus applies to Crew Tests as well as individual Leadership Tests."</Expla
 <Talent name="RULES-T0158">"1"</Talent>
   <!-- Very Strong -->
 <Talent name="RULES-T0080_MANANN">"2"</Talent>
-  <!-- Invoke Manann (Sea) -->
+  <!-- Invoke (Manann) -->
 <Talent name="RULES-T0109">"2"</Talent>
   <!-- Public Speaker -->
 <Talent name="RULES-T0084">"2"</Talent>
@@ -1632,7 +1632,7 @@ This bonus applies to Crew Tests as well as individual Leadership Tests."</Expla
 <Skill name="RULES-COMPPRECEP">"1"</Skill>
   <!-- Perception  -->
 <Skill name="RULES-COMPPROJ_POUDRE">"1"</Skill>
-  <!-- Ranged (Black Powder) -->
+  <!-- Ranged (Blackpowder) -->
 <Skill name="RULES-COMPRAMER">"1"</Skill>
   <!-- Row -->
 <Skill name="RULES-COMPNATA">"1"</Skill>
@@ -1757,7 +1757,7 @@ This bonus applies to Crew Tests as well as individual Leadership Tests."</Expla
 <Skill name="RULES-COMPSURVEXT">"1"</Skill>
   <!-- Outdoor Survival -->
 <Skill name="RULES-COMPPROJ_FROND">"1"</Skill>
-  <!-- Ranged (Slingshot) -->
+  <!-- Ranged (Sling) -->
 <Skill name="RULES-COMPRAMER">"1"</Skill>
   <!-- Row -->
 <Skill name="RULES-COMPVOILE">"1"</Skill>
@@ -1920,11 +1920,11 @@ This bonus applies to Crew Tests as well as individual Leadership Tests."</Expla
 <Skill name="RULES-COMPCOMB_*">"4"</Skill>
   <!-- Melee (Any) -->
 <Skill name="RULES-COMPPROJ_POUDRE">"4"</Skill>
-  <!-- Ranged (Black Powder) -->
+  <!-- Ranged (Blackpowder) -->
 </SUBCHAPTER_SKILL>
 <SUBCHAPTER_TALENT>
 <Talent name="RULES-T0012_STROMFELS">"1"</Talent>
-  <!-- Blessed by Stromfels -->
+  <!-- Bless (Stromfels) -->
 <Talent name="RULES-T0038">"1"</Talent>
   <!-- Criminal -->
 <Talent name="RULES-T0165">"1"</Talent>
@@ -1936,7 +1936,7 @@ This bonus applies to Crew Tests as well as individual Leadership Tests."</Expla
 <Talent name="RULES-T0064">"2"</Talent>
   <!-- Flee! -->
 <Talent name="RULES-T0080_STROMFELS">"2"</Talent>
-  <!-- Invoke Stromfels (Predators) -->
+  <!-- Invoke (Stromfels) -->
 <Talent name="RULES-T0098">"2"</Talent>
   <!-- Menacing -->
 <Talent name="RULES-T0069_MANANN/RULES-T0069_CHAOS">"3"</Talent>

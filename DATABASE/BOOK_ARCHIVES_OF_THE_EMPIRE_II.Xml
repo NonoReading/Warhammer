@@ -244,9 +244,9 @@ Examples you could take include: Alcohol, Food, Narcotics, Pleasure."</Explanati
 <Skill name="RULES-COMPSAVOIR_LOCAL">"2"</Skill>
   <!-- Lore (Loca) -->
 <Skill name="RULES-COMPCOMB_2M">"2"</Skill>
-  <!-- Melee (Two hands) -->
+  <!-- Melee (Two-Handed) -->
 <Skill name="RULES-COMPPROJ_POUDRE">"2"</Skill>
-  <!-- Ranged (Black Powder) -->
+  <!-- Ranged (Blackpowder) -->
 <Skill name="RULES-COMPCOMB_*">"3"</Skill>
   <!-- Melee (Any) -->
 <Skill name="RULES-COMPINTUI">"3"</Skill>
@@ -356,7 +356,7 @@ Examples you could take include: Alcohol, Food, Narcotics, Pleasure."</Explanati
 <Skill name="RULES-COMPPRECEP">"1"</Skill>
   <!-- Perception  -->
 <Skill name="RULES-COMPPROJ_ENTRAV">"1"</Skill>
-  <!-- Ranged (Hindrances) -->
+  <!-- Ranged (Entangling) -->
 <Skill name="RULES-COMPPIEG">"1"</Skill>
   <!-- Set Trap -->
 <Skill name="RULES-COMPDISC_RURAL">"1"</Skill>
@@ -634,7 +634,7 @@ Examples you could take include: Alcohol, Food, Narcotics, Pleasure."</Explanati
 </Weapon>
 <Weapon id="ARCH2-COMB_ENTRA_03">
 <Description language="ENGLISH">"Harpoon Launcher"</Description>
-<Skill>"RULES-COMPCOMB_ENTRA"</Skill>
+<Skill>"RULES-COMPPROJ_ENTRAV"</Skill>
 <Damage>"+10"</Damage>
 <Availability>"DISPO_EXOTIC"</Availability>
 <Reach>"20"</Reach>
@@ -646,7 +646,7 @@ Examples you could take include: Alcohol, Food, Narcotics, Pleasure."</Explanati
 </Weapon>
 <Weapon id="ARCH2-COMB_ENTRA_04">
 <Description language="ENGLISH">"Chain Trap"</Description>
-<Skill>"RULES-COMPCOMB_ENTRA"</Skill>
+<Skill>"RULES-COMPPROJ_ENTRAV"</Skill>
 <Damage>"+7"</Damage>
 <Availability>"DISPO_LIMITED"</Availability>
 <Reach>"(BATTR_S)x2"</Reach>

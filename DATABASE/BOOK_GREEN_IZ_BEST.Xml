@@ -40,7 +40,7 @@
 <DATA_RANDOM_TALENT id="RULES-T0092_*">
 <Specie>"GREEN-RACE_BORC"</Specie>
 <Talent name="RULES-T0092_*">"19-21"</Talent>
-  <!-- craftsman (Any) -->
+  <!-- Craftsman (Any) -->
 </DATA_RANDOM_TALENT>
 <DATA_RANDOM_TALENT id="RULES-T0026">
 <Specie>"GREEN-RACE_BORC"</Specie>
@@ -200,7 +200,7 @@
 <DATA_RANDOM_TALENT id="RULES-T0092_*">
 <Specie>"GREEN-RACE_CGOB"</Specie>
 <Talent name="RULES-T0092_*">"19-21"</Talent>
-  <!-- craftsman (Any) -->
+  <!-- Craftsman (Any) -->
 </DATA_RANDOM_TALENT>
 <DATA_RANDOM_TALENT id="RULES-T0026">
 <Specie>"GREEN-RACE_CGOB"</Specie>
@@ -360,7 +360,7 @@
 <DATA_RANDOM_TALENT id="RULES-T0092_*">
 <Specie>"GREEN-RACE_CORC"</Specie>
 <Talent name="RULES-T0092_*">"19-21"</Talent>
-  <!-- craftsman (Any) -->
+  <!-- Craftsman (Any) -->
 </DATA_RANDOM_TALENT>
 <DATA_RANDOM_TALENT id="RULES-T0026">
 <Specie>"GREEN-RACE_CORC"</Specie>
@@ -520,7 +520,7 @@
 <DATA_RANDOM_TALENT id="RULES-T0092_*">
 <Specie>"GREEN-RACE_HGOB"</Specie>
 <Talent name="RULES-T0092_*">"19-21"</Talent>
-  <!-- craftsman (Any) -->
+  <!-- Craftsman (Any) -->
 </DATA_RANDOM_TALENT>
 <DATA_RANDOM_TALENT id="RULES-T0026">
 <Specie>"GREEN-RACE_HGOB"</Specie>
@@ -680,7 +680,7 @@
 <DATA_RANDOM_TALENT id="RULES-T0092_*">
 <Specie>"GREEN-RACE_NGOB"</Specie>
 <Talent name="RULES-T0092_*">"19-21"</Talent>
-  <!-- craftsman (Any) -->
+  <!-- Craftsman (Any) -->
 </DATA_RANDOM_TALENT>
 <DATA_RANDOM_TALENT id="RULES-T0026">
 <Specie>"GREEN-RACE_NGOB"</Specie>
@@ -991,7 +991,7 @@
 <Skill>"RULES-COMPCOMB_BASE"</Skill>
   <!-- Melee (Basic) -->
 <Skill>"RULES-COMPCOMB_2M"</Skill>
-  <!-- Melee (Two hands) -->
+  <!-- Melee (Two-Handed) -->
 <Skill>"RULES-COMPINTIM"</Skill>
   <!-- Intimidate -->
 <Skill>"RULES-COMPINTUI"</Skill>

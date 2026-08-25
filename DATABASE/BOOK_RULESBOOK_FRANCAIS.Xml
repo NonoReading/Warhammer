@@ -1197,9 +1197,6 @@ Comme tous les bateaux à voile sont peu ou prou identiques à diriger, posséde
 <Skill id="RULES-COMPCOMB_PARAD">
 <Description language="FRANCAIS">"Corps à corps (Parade)"</Description>
 </Skill>
-<Skill id="RULES-COMPCOMB_ENTRA">
-<Description language="FRANCAIS">"Corps à corps (Entrave)"</Description>
-</Skill>
 <Skill id="RULES-COMPDISC_RURAL">
 <Description language="FRANCAIS">"Discrétion (Rurale)"</Description>
 </Skill>
@@ -13990,7 +13987,7 @@ See page 190 for Fear rules"</Explanation>
 </Weapon>
 <Weapon id="RULES-COMB_ENTRA_01">
 <Description language="FRANCAIS">"Fouet"</Description>
-<Skill>"RULES-COMPCOMB_ENTRA"</Skill>
+<Skill>"RULES-COMPPROJ_ENTRAV"</Skill>
 <Damage>"+(BATTR_S)+2"</Damage>
 <Availability>"DISPO_COMMON"</Availability>
 <Reach>"6"</Reach>
@@ -14002,7 +13999,7 @@ See page 190 for Fear rules"</Explanation>
 </Weapon>
 <Weapon id="RULES-COMB_ENTRA_02">
 <Description language="FRANCAIS">"Lasso"</Description>
-<Skill>"RULES-COMPCOMB_ENTRA"</Skill>
+<Skill>"RULES-COMPPROJ_ENTRAV"</Skill>
 <Damage>"0"</Damage>
 <Availability>"DISPO_COMMON"</Availability>
 <Reach>"(BATTR_S)X2"</Reach>

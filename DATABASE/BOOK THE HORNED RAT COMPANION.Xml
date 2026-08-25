@@ -84,13 +84,13 @@
 <Skill name="RULES-COMPCOMB_PARAD">"2"</Skill>
   <!-- Melee (Parry) -->
 <Skill name="RULES-COMPPROJ_EXPLO">"2"</Skill>
-  <!-- Ranged (Explosive) -->
+  <!-- Ranged (Explosives) -->
 <Skill name="RULES-COMPINTUI">"3"</Skill>
   <!-- Intuition  -->
 <Skill name="RULES-COMPCOMM">"3"</Skill>
   <!-- Leadership -->
 <Skill name="RULES-COMPCOMB_2M">"3"</Skill>
-  <!-- Melee (Two hands) -->
+  <!-- Melee (Two-Handed) -->
 <Skill name="RULES-COMPPRECEP">"3"</Skill>
   <!-- Perception  -->
 <Skill name="RULES-COMPSAVOIR_GUERRE">"4"</Skill>

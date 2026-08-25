@@ -409,7 +409,7 @@ At the cost of one corruption point the Sorceress may add doublle their Willpowe
 <Skill name="RULES-COMPCOMB_BASE">"1"</Skill>
   <!-- Melee (Basic) -->
 <Skill name="RULES-COMPPROJ_ENTRAV">"1"</Skill>
-  <!-- Ranged (Hindrances) -->
+  <!-- Ranged (Entangling) -->
 <Skill name="RULES-COMPSURVEXT">"1"</Skill>
   <!-- Outdoor Survival -->
 <Skill name="RULES-COMPPRECEP">"1"</Skill>

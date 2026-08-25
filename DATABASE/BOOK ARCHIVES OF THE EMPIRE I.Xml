@@ -194,7 +194,7 @@
 <Skill name="RULES-COMPPRECEP">"1"</Skill>
   <!-- Perception  -->
 <Skill name="RULES-COMPPROJ_FROND">"1"</Skill>
-  <!-- Ranged (Slingshot) -->
+  <!-- Ranged (Sling) -->
 <Skill name="RULES-COMPMETIER_*">"1"</Skill>
   <!-- Trade (Any) -->
 <Skill name="RULES-COMPDISC_RURAL">"1"</Skill>
@@ -333,7 +333,7 @@
 <Skill name="RULES-COMPINTUI">"2"</Skill>
   <!-- Intuition  -->
 <Skill name="RULES-COMPPROJ_POUDRE">"2"</Skill>
-  <!-- Ranged (Black Powder) -->
+  <!-- Ranged (Blackpowder) -->
 <Skill name="RULES-COMPSIGNES_SCOUT">"2"</Skill>
   <!-- Secret Signs (Scout) -->
 <Skill name="RULES-COMPSIGNES_RANGER">"2"</Skill>
@@ -447,9 +447,9 @@
 <Skill name="RULES-COMPPRECEP">"1"</Skill>
   <!-- Perception  -->
 <Skill name="RULES-COMPPROJ_FROND">"1"</Skill>
-  <!-- Ranged (Slingshot) -->
+  <!-- Ranged (Sling) -->
 <Skill name="RULES-COMPCHEV_BADGERS">"1"</Skill>
-  <!-- Ranged (Slingshot) -->
+  <!-- Ranged (Sling) -->
 <Skill name="RULES-COMPMETIER_*">"1"</Skill>
   <!-- Trade (Any) -->
 <Skill name="RULES-COMPSOINANI">"2"</Skill>
@@ -465,7 +465,7 @@
 <Skill name="RULES-COMPORIENT">"2"</Skill>
   <!-- Navigation -->
 <Skill name="RULES-COMPPROJ_ENTRAV">"2"</Skill>
-  <!-- Ranged (Hindrances) -->
+  <!-- Ranged (Entangling) -->
 <Skill name="RULES-COMPINTIM">"3"</Skill>
   <!-- Intimidate -->
 <Skill name="RULES-COMPCOMB_CAVAL">"3"</Skill>
