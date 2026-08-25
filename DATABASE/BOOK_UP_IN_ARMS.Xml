@@ -1990,6 +1990,8 @@ Ifthe Character passes the Test, the crew members may then use the Characters Ra
   <!-- Ranged (Throwing) -->
 <Skill name="RULES-COMPCHEV_CHEVAL">"1"</Skill>
   <!-- Ride (Horse) -->
+<Skill name="RULES-COMPCHARM">"2"</Skill>
+  <!-- Charm -->
 <Skill name="RULES-COMPRESALC">"2"</Skill>
   <!-- Consume Alcohol -->
 <Skill name="RULES-COMPPARI">"2"</Skill>
@@ -2022,8 +2024,6 @@ Ifthe Character passes the Test, the crew members may then use the Characters Ra
   <!-- Flee! -->
 <Talent name="RULES-T0077">"1"</Talent>
   <!-- Strong Back -->
-<Talent name="RULES-T0136_MERC">"2"</Talent>
-  <!-- Etiquette (Mercenaries) -->
 <Talent name="RULES-T0163">"2"</Talent>
   <!-- Combat Aware -->
 <Talent name="RULES-T0140">"2"</Talent>

@@ -1572,9 +1572,8 @@ RESTENT deux divergences volontaires :
 A RETENIR : cette regle des familles miroir vaut aussi ailleurs (Bless/Invoke portent les memes
 suffixes de dieu, Arcane Magic et Channelling les memes suffixes de vent). A verifier un jour.
 
-A DECIDER (mon erreur, 24/08) - CAVALERIE LEGERE niveau 2 : 5 competences + 5 talents, la ou
-toutes les autres carrieres sont a 6 + 4. J'ai deplace Etiquette (Mercenaries) au niveau 2 parce
-que le livre l'y met, mais le livre le met dans la ligne SKILLS alors que c'est un TALENT dans le
-modele ; j'ai retire Charm pour compenser, et Charm n'est effectivement pas dans le livre. Le
-contenu est donc plus fidele qu'avant, seule la repartition devie. Trois options : laisser ainsi,
-remettre Charm (6+5), ou rendre Etiquette au niveau 1 comme avant.
+RESOLU (24/08) - CAVALERIE LEGERE niveau 2 : remise a 6 competences + 4 talents. Etiquette
+(Mercenaries) retire, Charm rendu aux competences, Diceman conserve au niveau 1. Source apportee
+par Nono, cohérente avec la ligne Talents du livre. Le texte anglais rangeait Etiquette - un
+TALENT - dans la ligne des competences ; c'est cette anomalie qui m'avait egare.
+
