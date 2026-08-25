@@ -805,7 +805,7 @@ There’s only so much inspiration a crew can take."</Explanation>
 <Skill>""</Skill>
 <Max>"(BATTR_Int)"</Max>
 <PDF>""</PDF>
-<Test language="ENGLISH">"COMPDIVERT_CHANT"</Test>
+<Test language="ENGLISH">"Entertain (Singing)"</Test>
 </Talent>
 <Talent id="SEAOF-T0184">
 <Attribut>""</Attribut>
@@ -817,7 +817,7 @@ This bonus applies to Crew Tests as well as individual Leadership Tests."</Expla
 <Skill>""</Skill>
 <Max>"(BATTR_Fel)"</Max>
 <PDF>""</PDF>
-<Test language="ENGLISH">"COMPCOMM"</Test>
+<Test language="ENGLISH">"Leadership"</Test>
 </Talent>
 </DATA_TALENT>
 <DATA_CAREER>

@@ -151,7 +151,7 @@ ifically your Strength, Endurance and Mental Strength Bonuses (abbreviations BF,
 <Text name="RULES-WEAPR_SHORT">"Short"</Text>
 <Text name="RULES-ARMOT_SOFTLEATHER">"Soft leather"</Text>
 <Text name="RULES-ARMOT_BOILLEDLEATHER">"Boiled leather"</Text>
-<Text name="RULES-ARMOT_MAIL">"Chainmail"</Text>
+<Text name="RULES-ARMOT_MAIL">"Mail"</Text>
 <Text name="RULES-ARMOT_PLATE">"Plate"</Text>
 <Text name="RULES-ARMOT_SOFTKITS">"Soft Kits"</Text>
 <Text name="RULES-ARMOT_BRIGANDINE">"Brigandine"</Text>
@@ -1183,13 +1183,13 @@ As all sailboats are pretty much the same to steer, owning one Specialization ma
 <Description language="ENGLISH">"Art (Engraving)"</Description>
 </Skill>
 <Skill id="RULES-COMPART_MOSAI">
-<Description language="ENGLISH">"Art (Mosaic)"</Description>
+<Description language="ENGLISH">"Art (Mosaics)"</Description>
 </Skill>
 <Skill id="RULES-COMPART_PEINT">
 <Description language="ENGLISH">"Art (Painting)"</Description>
 </Skill>
 <Skill id="RULES-COMPART_SCUL">
-<Description language="ENGLISH">"Art (Carving)"</Description>
+<Description language="ENGLISH">"Art (Sculpture)"</Description>
 </Skill>
 <Skill id="RULES-COMPART_TATOU">
 <Description language="ENGLISH">"Art (Tattoo)"</Description>
@@ -1201,16 +1201,16 @@ As all sailboats are pretty much the same to steer, owning one Specialization ma
 <Description language="ENGLISH">"Ride (Horse)"</Description>
 </Skill>
 <Skill id="RULES-COMPCHEV_LOUP">
-<Description language="ENGLISH">"Ride (Big Wolf)"</Description>
+<Description language="ENGLISH">"Ride (Great Wolf)"</Description>
 </Skill>
 <Skill id="RULES-COMPCHEV_BADGERS">
 <Description language="ENGLISH">"Ride (Badger)"</Description>
 </Skill>
 <Skill id="RULES-COMPCHEV_GRIFF">
-<Description language="ENGLISH">"Ride (Griffin)"</Description>
+<Description language="ENGLISH">"Ride (Griffon)"</Description>
 </Skill>
 <Skill id="RULES-COMPCHEV_DEMIG">
-<Description language="ENGLISH">"Ride (Demi-Griffin)"</Description>
+<Description language="ENGLISH">"Ride (Demigryph)"</Description>
 </Skill>
 <Skill id="RULES-COMPCHEV_PEGA">
 <Description language="ENGLISH">"Ride (Pegasus)"</Description>
@@ -1297,7 +1297,7 @@ As all sailboats are pretty much the same to steer, owning one Specialization ma
 <Description language="ENGLISH">"Animal Training (Pigeon)"</Description>
 </Skill>
 <Skill id="RULES-COMPDRESS_DEMIG">
-<Description language="ENGLISH">"Animal Training (Demigriffin)"</Description>
+<Description language="ENGLISH">"Animal Training (Demigryph)"</Description>
 </Skill>
 <Skill id="RULES-COMPDRESS_PEGA">
 <Description language="ENGLISH">"Animal Training (Pegasus)"</Description>
@@ -2040,7 +2040,7 @@ In general, you can only attempt to Tweak a Character once per scene, or longer 
 <Skill>""</Skill>
 <Max>"(BATTR_Fel)"</Max>
 <PDF>"COMPCHARM"</PDF>
-<Test language="ENGLISH">"Charm for Chatting"</Test>
+<Test language="ENGLISH">"Charm to Blather"</Test>
 </Talent>
 <Talent id="RULES-T0011">
 <Attribut>""</Attribut>
@@ -2054,7 +2054,7 @@ This Talent is useless if your opponent does not carry a weapon, or is of a Size
 <Skill>""</Skill>
 <Max>"(BATTR_WS)"</Max>
 <PDF>"COMPCOMB_*"</PDF>
-<Test language="ENGLISH">"Melee to perform a Kick maneuver"</Test>
+<Test language="ENGLISH">"Melee for a Beat Blade"</Test>
 </Talent>
 <Talent id="RULES-T0012_*">
 <Magic>"0"</Magic>
@@ -2104,7 +2104,7 @@ You treat all nonmagical Job Skills as Basic when repairing broken items."</Expl
 <Skill>""</Skill>
 <Max>"(BATTR_Dex)"</Max>
 <PDF>"COMPMETIER_*"</PDF>
-<Test language="ENGLISH">"Professional tests to repair broken objects"</Test>
+<Test language="ENGLISH">"Trade Tests to repair broken items"</Test>
 </Talent>
 <Talent id="RULES-T0016">
 <Attribut>""</Attribut>
@@ -2115,7 +2115,7 @@ You can subsist on half the food you need without negative penalties (preventing
 <Skill>""</Skill>
 <Max>"(BATTR_T)"</Max>
 <PDF>"COMPRESIST"</PDF>
-<Test language="ENGLISH">"Resistance Tests to Resist Hunger"</Test>
+<Test language="ENGLISH">"Endurance Tests to resist hunger"</Test>
 </Talent>
 <Talent id="RULES-T0017">
 <Attribut>""</Attribut>
@@ -2138,7 +2138,7 @@ Assuming you have the Ride Skill, you can directly command your mount to perform
 <Skill>""</Skill>
 <Max>"(BATTR_Ag)"</Max>
 <PDF>"COMPCHEV_*"</PDF>
-<Test language="ENGLISH">"Ride (Horse) during combat"</Test>
+<Test language="ENGLISH">"Ride (Horse) when in combat"</Test>
 </Talent>
 <Talent id="RULES-T0020">
 <Attribut>""</Attribut>
@@ -2160,7 +2160,7 @@ When performing a Berserk Charge, you inflict +1 point of Damage per level in th
 <Skill>""</Skill>
 <Max>"(BATTR_S)"</Max>
 <PDF>"COMPCOMB_*"</PDF>
-<Test language="ENGLISH">"Melee on a Round when performing a Berserk Charge"</Test>
+<Test language="ENGLISH">"Melee on a Round when you Charge"</Test>
 </Talent>
 <Talent id="RULES-T0022">
 <Attribut>""</Attribut>
@@ -2187,7 +2187,7 @@ After the Surgery, the patient must pass an Accessible (+20) Resistance Test or 
 <Skill>""</Skill>
 <Max>"(BATTR_Int)"</Max>
 <PDF>"COMPGUERI"</PDF>
-<Test language="ENGLISH">"Healing Tests outside of Combat Rounds; when you have time to do it right."</Test>
+<Test language="ENGLISH">"Heal Tests outside combat rounds; i.e. when you have time to do it ‘properly’"</Test>
 </Talent>
 <Talent id="RULES-T0024">
 <Attribut>""</Attribut>
@@ -2212,7 +2212,7 @@ You can attempt a Calm Test to remove a Broken State at the end of each of your 
 <Skill>""</Skill>
 <Max>"(BATTR_WP)"</Max>
 <PDF>"COMPCALM"</PDF>
-<Test language="ENGLISH">"Calm Tests to remove Broken States"</Test>
+<Test language="ENGLISH">"Cool Tests to remove Broken Conditions"</Test>
 </Talent>
 <Talent id="RULES-T0026">
 <Attribut>""</Attribut>
@@ -2282,7 +2282,7 @@ This allows you to slip into unlikely spaces and manipulate your body in incredi
 <Skill>""</Skill>
 <Max>"(BATTR_Ag)"</Max>
 <PDF>"COMPDIVERT_*"</PDF>
-<Test language="ENGLISH">"Representation and Agility when using Contortionist"</Test>
+<Test language="ENGLISH">"Perform and Agility Tests when contorting helps"</Test>
 </Talent>
 <Talent id="RULES-T0033">
 <Attribut>""</Attribut>
@@ -2293,7 +2293,7 @@ You can end it with a successful Calm Test at the end of the Round."</Explanatio
 <Skill>""</Skill>
 <Max>"(BATTR_WP)"</Max>
 <PDF>"COMPCOMB_*"</PDF>
-<Test language="ENGLISH">"Melee Tests while Frenzied"</Test>
+<Test language="ENGLISH">"Melee Tests when Frenzied"</Test>
 </Talent>
 <Talent id="RULES-T0034">
 <Attribut>""</Attribut>
@@ -2308,7 +2308,7 @@ So a hit of 46 can be used as a +6 DR."</Explanation>
 <Skill>""</Skill>
 <Max>"(BATTR_Fel)"</Max>
 <PDF>"COMPCHARM"</PDF>
-<Test language="ENGLISH">"Social tests to influence a superior"</Test>
+<Test language="ENGLISH">"Social Tests to influence a superior"</Test>
 </Talent>
 <Talent id="RULES-T0035">
 <Attribut>""</Attribut>
@@ -2330,7 +2330,7 @@ If an enemy causes you to lose Boons while standing next to an active ally with 
 <Skill>""</Skill>
 <Max>"(BATTR_WS)"</Max>
 <PDF>"COMPCOMB_*"</PDF>
-<Test language="ENGLISH">"Melee when standing next to an ally with Elbow to Elbow"</Test>
+<Test language="ENGLISH">"Melee Tests when beside an ally with Drilled"</Test>
 </Talent>
 <Talent id="RULES-T0037">
 <Attribut>""</Attribut>
@@ -2370,7 +2370,7 @@ This Talent is useless if your opponent has no weapon, or if he is of a Size gre
 <Skill>""</Skill>
 <Max>"(BATTR_I)"</Max>
 <PDF>"COMPCOMB_*"</PDF>
-<Test language="ENGLISH">"Melee Tests for this Talent"</Test>
+<Test language="ENGLISH">"Melee Tests concerning this Talent"</Test>
 </Talent>
 <Talent id="RULES-T0040">
 <Attribut>""</Attribut>
@@ -2383,7 +2383,7 @@ In principle, you can only attempt this Test once per artifact hit."</Explanatio
 <Skill>""</Skill>
 <Max>"(BATTR_I)"</Max>
 <PDF>"COMPINTUI"</PDF>
-<Test language="ENGLISH">"Intuition Tests to Detect Magical Artifacts"</Test>
+<Test language="ENGLISH">"Intuition tests to detect magical artefacts"</Test>
 </Talent>
 <Talent id="RULES-T0041">
 <Attribut>""</Attribut>
@@ -2419,7 +2419,7 @@ Instead, you simply make a Perception or Stealth Test, whichever is greater."</E
 <Skill>""</Skill>
 <Max>"(BATTR_Ag)"</Max>
 <PDF>"COMPDISC_*"</PDF>
-<Test language="ENGLISH">" any Test involving Spinning"</Test>
+<Test language="ENGLISH">"Any Test involving Shadowing"</Test>
 </Talent>
 <Talent id="RULES-T0044">
 <Attribut>""</Attribut>
@@ -2454,7 +2454,7 @@ You can use a simple calculator to simulate what your PC can mentally count."</E
 <Skill>""</Skill>
 <Max>"(BATTR_Int)"</Max>
 <PDF>"COMPPARI"</PDF>
-<Test language="ENGLISH">"Assessment, Bet"</Test>
+<Test language="ENGLISH">"Evaluate, Gamble"</Test>
 </Talent>
 <Talent id="RULES-T0047">
 <Attribut>""</Attribut>
@@ -2528,7 +2528,7 @@ Any other result means you failed to scam money."</Explanation>
 <Skill>""</Skill>
 <Max>"(BATTR_Int)"</Max>
 <PDF>"ATTR_Int"</PDF>
-<Test language="ENGLISH">"Intelligence (Scam)"</Test>
+<Test language="ENGLISH">"Intelligence (Embezzling)"</Test>
 </Talent>
 <Talent id="RULES-T0053">
 <Attribut>""</Attribut>
@@ -2615,7 +2615,7 @@ Additionally, you consider all improvised weapons to have the Knock Out perk."</
 <Skill>""</Skill>
 <Max>"(BATTR_WS)"</Max>
 <PDF>"COMPCOMB_*"</PDF>
-<Test language="ENGLISH">"Melee Tests when performing a Stunning Strike"</Test>
+<Test language="ENGLISH">"Melee Tests when Striking to Stun"</Test>
 </Talent>
 <Talent id="RULES-T0060">
 <Attribut>""</Attribut>
@@ -2651,7 +2651,7 @@ You can make as many Reactive Strikes in a Round as you have Levels in that Tale
 <Skill>""</Skill>
 <Max>"(BATTR_I)"</Max>
 <PDF>"ATTR_I"</PDF>
-<Test language="ENGLISH">"Initiative Tests for Anything Related to this Talent"</Test>
+<Test language="ENGLISH">"Initiative Tests concerning this Talent"</Test>
 </Talent>
 <Talent id="RULES-T0063">
 <Attribut>""</Attribut>
@@ -2771,7 +2771,7 @@ You can create a new Secret Identity for each Level you have in this Talent."</E
 <Skill>""</Skill>
 <Max>"(BATTR_Int)"</Max>
 <PDF>"COMPDIVERT_INTERP"</PDF>
-<Test language="ENGLISH">"Entertainment Tests (Interpretation) to support your secret identities"</Test>
+<Test language="ENGLISH">"Entertain (Acting) Tests to support your secret identities"</Test>
 </Talent>
 <Talent id="RULES-T0073">
 <Attribut>""</Attribut>
@@ -2828,7 +2828,7 @@ You may add your Indefatigable Levels to your DR in all opposed Strength Tests a
 <Skill>""</Skill>
 <Max>"(BATTR_S)"</Max>
 <PDF>"COMPNATA,COMPRAMER"</PDF>
-<Test language="ENGLISH">" Rowing and Swimming"</Test>
+<Test language="ENGLISH">"Row and Swim"</Test>
 </Talent>
 <Talent id="RULES-T0078">
 <Attribut>""</Attribut>
@@ -2841,7 +2841,7 @@ Additionally, Characters of a higher Status Tier than you do not gain Advantage 
 <Skill>""</Skill>
 <Max>"(BATTR_Fel)"</Max>
 <PDF>"COMPDISC_*"</PDF>
-<Test language="ENGLISH">" Discretion when you are in plain sight"</Test>
+<Test language="ENGLISH">"Stealth when in plain sight"</Test>
 </Talent>
 <Talent id="RULES-T0079">
 <Attribut>""</Attribut>
@@ -2883,7 +2883,7 @@ If the speed at which you read is important during a fight, a successful Languag
 <Skill>""</Skill>
 <Max>"(BATTR_Int)"</Max>
 <PDF>"COMPRECH"</PDF>
-<Test language="ENGLISH">"Search and Language if reading speed is important"</Test>
+<Test language="ENGLISH">"Research and Language Tests where speed of reading is important"</Test>
 </Talent>
 <Talent id="RULES-T0082">
 <Attribut>""</Attribut>
@@ -2930,7 +2930,7 @@ Additionally, you count as two sailors towards the minimum number of crew needed
 <Skill>""</Skill>
 <Max>"(BATTR_Ag)"</Max>
 <PDF>"COMPVOILE"</PDF>
-<Test language="ENGLISH">" Sailing (any vessel capable of sailing at sea)"</Test>
+<Test language="ENGLISH">"Sail (any Sea-worthy Vessels)"</Test>
 </Talent>
 <Talent id="RULES-T0086">
 <Attribut>""</Attribut>
@@ -2941,7 +2941,7 @@ Each time you gain one or more Stunned States, you can immediately make an Inter
 <Skill>""</Skill>
 <Max>"(BATTR_T)"</Max>
 <PDF>"COMPRESIST"</PDF>
-<Test language="ENGLISH">"Resistance Tests to resist Stunned States"</Test>
+<Test language="ENGLISH">"Endurance tests to resist Stunned"</Test>
 </Talent>
 <Talent id="RULES-T0087">
 <Attribut>""</Attribut>
@@ -3037,7 +3037,7 @@ With nothing but posture changes, facial twisting, and the judicious use of appr
 <Skill>""</Skill>
 <Max>"(BATTR_Fel)"</Max>
 <PDF>"COMPDIVERT_INTERP"</PDF>
-<Test language="ENGLISH">"Entertain (Acting) when you are someone else"</Test>
+<Test language="ENGLISH">"Entertain (Acting) when being someone else"</Test>
 </Talent>
 <Talent id="RULES-T0094">
 <Attribut>""</Attribut>
@@ -3051,7 +3051,7 @@ If you play real dice games to represent the one in play, always roll a number o
 <Skill>""</Skill>
 <Max>"(BATTR_Int)"</Max>
 <PDF>"COMPPARI,COMPESCAM"</PDF>
-<Test language="ENGLISH">"Wager and Shoplift when playing a dice game"</Test>
+<Test language="ENGLISH">"Gamble and Sleight of Hand when playing dice games"</Test>
 </Talent>
 <Talent id="RULES-T0095">
 <Attribut>""</Attribut>
@@ -3085,7 +3085,7 @@ You do not gain Advantage when you successfully hit or inflict a Wound on an opp
 <Skill>""</Skill>
 <Max>"(BATTR_Ag)"</Max>
 <PDF>"COMPCOMB_*,COMPPROJ_*"</PDF>
-<Test language="ENGLISH">"Melee or Projectiles if attacking with two weapons"</Test>
+<Test language="ENGLISH">"Melee or Ranged when attacking with two weapons"</Test>
 </Talent>
 <Talent id="RULES-T0097">
 <Attribut>""</Attribut>
@@ -3098,7 +3098,7 @@ Additionally, you count as two boatmen towards the minimum number of crew needed
 <Skill>""</Skill>
 <Max>"(BATTR_Ag)"</Max>
 <PDF>"COMPVOILE"</PDF>
-<Test language="ENGLISH">"Sail tests for river vessels."</Test>
+<Test language="ENGLISH">"Sail Tests for river-going vessels"</Test>
 </Talent>
 <Talent id="RULES-T0098">
 <Attribut>""</Attribut>
@@ -3110,7 +3110,7 @@ When you use the Intimidate Skill, gain a DR bonus equal to your Threat Levels."
 <Skill>""</Skill>
 <Max>"(BATTR_S)"</Max>
 <PDF>"COMPINTIM"</PDF>
-<Test language="ENGLISH">"Intimidation"</Test>
+<Test language="ENGLISH">"Intimidate"</Test>
 </Talent>
 <Talent id="RULES-T0099">
 <Attribut>""</Attribut>
@@ -3182,7 +3182,7 @@ You can reverse the result of any failed Alcohol Resistance Test if it results i
 <Skill>""</Skill>
 <Max>"(BATTR_T)"</Max>
 <PDF>"COMPCHARM,COMPRAGOT,COMPRESALC"</PDF>
-<Test language="ENGLISH">"Charm and Gossip at parties, Alcohol resistance"</Test>
+<Test language="ENGLISH">"Charm at Parties, Gossip at Parties, Consume Alcohol"</Test>
 </Talent>
 <Talent id="RULES-T0105">
 <Attribut>""</Attribut>
@@ -3194,7 +3194,7 @@ When you use Stealth in a rural environment, those who cross your path do not ge
 <Skill>""</Skill>
 <Max>"(BATTR_Ag)"</Max>
 <PDF>"COMPDISC_RURAL"</PDF>
-<Test language="ENGLISH">"Discretion Tests in Rural Environment"</Test>
+<Test language="ENGLISH">"Stealth Tests in a Rural environment"</Test>
 </Talent>
 <Talent id="RULES-T0106">
 <Attribut>""</Attribut>
@@ -3206,7 +3206,7 @@ Additionally, you can identify counterfeit parts with a simple Benchmark Test; h
 <Skill>""</Skill>
 <Max>"(BATTR_I)"</Max>
 <PDF>"COMPEVAL"</PDF>
-<Test language="ENGLISH">"Evaluation to establish the value of coins"</Test>
+<Test language="ENGLISH">"Evaluate to establish the worth of coins"</Test>
 </Talent>
 <Talent id="RULES-T0107">
 <Attribut>""</Attribut>
@@ -3229,7 +3229,7 @@ You can provide even more food using the normal Foraging rules (see page 131)."<
 <Skill>""</Skill>
 <Max>"(BATTR_I)"</Max>
 <PDF>"COMPDISC_*"</PDF>
-<Test language="ENGLISH">"Any Test to track or capture game"</Test>
+<Test language="ENGLISH">"Any Test to trail or capture game"</Test>
 </Talent>
 <Talent id="RULES-T0109">
 <Attribut>""</Attribut>
@@ -3277,7 +3277,7 @@ None of your opponents will gain a Free Attack when you sidestep."</Explanation>
 <Skill>""</Skill>
 <Max>"(BATTR_Ag)"</Max>
 <PDF>"COMPESQU"</PDF>
-<Test language="ENGLISH">"Dodging tests to activate this Talent"</Test>
+<Test language="ENGLISH">"Dodge Tests to activate this Talent"</Test>
 </Talent>
 <Talent id="RULES-T0113">
 <Attribut>""</Attribut>
@@ -3291,7 +3291,7 @@ You can supply more fish using the normal Foraging rules (see page 131)."</Expla
 <Skill>""</Skill>
 <Max>"(BATTR_I)"</Max>
 <PDF>"COMPSURVEXT"</PDF>
-<Test language="ENGLISH">"Any Test concerning fishing"</Test>
+<Test language="ENGLISH">"Any Test involving fishing"</Test>
 </Talent>
 <Talent id="RULES-T0115">
 <Attribut>""</Attribut>
@@ -3314,7 +3314,7 @@ This includes enduring prolonged riding, exposure, rituals, and similar issues."
 <Skill>""</Skill>
 <Max>"(BATTR_T)"</Max>
 <PDF>"COMPRESIST"</PDF>
-<Test language="ENGLISH">"Resistance Tests to withstand difficulties"</Test>
+<Test language="ENGLISH">"Endurance Tests for enduring hardships"</Test>
 </Talent>
 <Talent id="RULES-T0117">
 <Attribut>"RULES-ATTR_Int"</Attribut>
@@ -3386,7 +3386,7 @@ Of course, enemies are still no more inclined to respect or obey you, but ordina
 <Skill>""</Skill>
 <Max>"(BATTR_Fel)"</Max>
 <PDF>"COMPCOMM"</PDF>
-<Test language="ENGLISH">"Command"</Test>
+<Test language="ENGLISH">"Leadership"</Test>
 </Talent>
 <Talent id="RULES-T0123">
 <Attribut>""</Attribut>
@@ -3541,7 +3541,7 @@ You now have Second Sight (see page 233)."</Explanation>
 <Skill>""</Skill>
 <Max>"(BATTR_I)"</Max>
 <PDF>"COMPDISC_*,COMPPRECEP,COMPINTUI"</PDF>
-<Test language="ENGLISH">"any Test to detect Winds of Magic"</Test>
+<Test language="ENGLISH">"Any Test to detect the Winds of Magic"</Test>
 </Talent>
 <Talent id="RULES-T0138">
 <Attribut>""</Attribut>
@@ -3577,7 +3577,7 @@ You automatically know where north is by looking at stars, trees, or any other f
 <Skill>""</Skill>
 <Max>"(BATTR_I)"</Max>
 <PDF>"COMPPRECEP"</PDF>
-<Test language="ENGLISH">" Orientation"</Test>
+<Test language="ENGLISH">"Navigation"</Test>
 </Talent>
 <Talent id="RULES-T0141">
 <Attribut>""</Attribut>
@@ -3601,7 +3601,7 @@ You may reverse any Gossip Test if doing so allows the Test to pass."</Explanati
 <Skill>""</Skill>
 <Max>"(BATTR_Fel)"</Max>
 <PDF>"COMPRAGOT"</PDF>
-<Test language="ENGLISH">"Ragot tests with travelers"</Test>
+<Test language="ENGLISH">"Gossip Tests with travellers"</Test>
 </Talent>
 <Talent id="RULES-T0143">
 <Attribut>""</Attribut>
@@ -3627,7 +3627,7 @@ On a success, reduce the fall distance by 1 meter, +1 additional meter per +1 DR
 <Skill>""</Skill>
 <Max>"(BATTR_Ag)"</Max>
 <PDF>"COMPATHL"</PDF>
-<Test language="ENGLISH">"Athletics when you fall"</Test>
+<Test language="ENGLISH">"Athletics when falling"</Test>
 </Talent>
 <Talent id="RULES-T0145">
 <Attribut>""</Attribut>
@@ -3638,7 +3638,7 @@ Your Movement Attribute counts as 1 higher when you Run."</Explanation>
 <Skill>""</Skill>
 <Max>"(BATTR_S)"</Max>
 <PDF>"COMPATHL"</PDF>
-<Test language="ENGLISH">"Athletics Tests for Running"</Test>
+<Test language="ENGLISH">"Athletics Tests concerning Running"</Test>
 </Talent>
 <Talent id="RULES-T0146">
 <Attribut>""</Attribut>
@@ -3699,7 +3699,7 @@ In case of a tie, they fire simultaneously and should be managed at the same tim
 <Skill>""</Skill>
 <Max>"(BATTR_Ag)"</Max>
 <PDF>"COMPPROJ_*"</PDF>
-<Test language="ENGLISH">" Projectiles when performing a Rapid Fire"</Test>
+<Test language="ENGLISH">"Ranged when making a Fast Shot"</Test>
 </Talent>
 <Talent id="RULES-T0151">
 <Attribut>""</Attribut>
@@ -3743,7 +3743,7 @@ You suffer no penalties when shooting at Long Range, and half penalties at Extre
 <Skill>""</Skill>
 <Max>"4"</Max>
 <PDF>"COMPPROJ_*"</PDF>
-<Test language="ENGLISH">"Range (Long – Extreme)"</Test>
+<Test language="ENGLISH">"Ranged (Long–Extreme Range)"</Test>
 </Talent>
 <Talent id="RULES-T0155">
 <Attribut>""</Attribut>
@@ -3851,7 +3851,7 @@ You can make an Intermediate (+0) Perception Test to ignore the Surprise, modifi
 <Skill>""</Skill>
 <Max>"(BATTR_I)"</Max>
 <PDF>"COMPPRECEP"</PDF>
-<Test language="ENGLISH">"Perception during Melee combat"</Test>
+<Test language="ENGLISH">"Perception during melee"</Test>
 </Talent>
 <Talent id="RULES-T0164">
 <Attribut>""</Attribut>
@@ -3875,7 +3875,7 @@ happened here in the past."</Explanation>
 <Skill>""</Skill>
 <Max>"(BATTR_I)"</Max>
 <PDF>"COMPINTUI"</PDF>
-<Test language="ENGLISH">"Intuition test when standing on sacred ground"</Test>
+<Test language="ENGLISH">"Intuition Tests when on holy ground"</Test>
 </Talent>
 <Talent id="RULES-T0166">
 <Attribut>"RULES-ATTR_I"</Attribut>
@@ -3909,7 +3909,7 @@ If it is already included in the Career, you can buy the Skill twice – with a 
 <Skill>""</Skill>
 <Max>"(BATTR_Int)"</Max>
 <PDF>""</PDF>
-<Test language="ENGLISH">" any Test concerning local peculiarities"</Test>
+<Test language="ENGLISH">"Any Lore Test concerning local detail"</Test>
 </Talent>
 <Talent id="RULES-T0169">
 <Attribut>""</Attribut>
@@ -4164,7 +4164,7 @@ See page 190 for Fear rules"</Explanation>
 <Description language="ENGLISH">"Bless (Verena)"</Description>
 </Talent>
 <Talent id="RULES-T0013_BOID">
-<Description language="ENGLISH">"Strider (Woodedlands)"</Description>
+<Description language="ENGLISH">"Strider (Woodlands)"</Description>
 </Talent>
 <Talent id="RULES-T0013_COASTAL">
 <Description language="ENGLISH">"Strider (Coastal)"</Description>
@@ -4494,7 +4494,7 @@ See page 190 for Fear rules"</Explanation>
 <Description language="ENGLISH">"Fearless (Undead)"</Description>
 </Talent>
 <Talent id="RULES-T0132_NAUF">
-<Description language="ENGLISH">"Fearless (Shrewreckers)"</Description>
+<Description language="ENGLISH">"Fearless (Wreckers)"</Description>
 </Talent>
 <Talent id="RULES-T0132_PATFLU">
 <Description language="ENGLISH">"Fearless (River Patrollers)"</Description>
@@ -7962,9 +7962,9 @@ See page 190 for Fear rules"</Explanation>
 <Item name="satchel containing clothing">"1"</Item>
 <Item name="1d10 bandages">"1"</Item>
 <Item name="RULES-COMB_PARAD_02/RULES-COMB_PARAD_01">"2"</Item>
-  <!-- main gauche ou Sword Breaker. Le livre ecrit "Main Gauche or Sword-breaker" ; la
+  <!-- main gauche ou Swordbreaker. Le livre ecrit "Main Gauche or Sword-breaker" ; la
        saisie pointait sur RULES-COMB_2M_01 (Bastard Sword), une arme a deux mains, au lieu
-       de RULES-COMB_PARAD_01 (Sword Breaker), l'arme de parade attendue au niveau ou le
+       de RULES-COMB_PARAD_01 (Swordbreaker), l'arme de parade attendue au niveau ou le
        duelliste gagne Melee (Parry). Corrige le 23/08/2026. -->
 <Item name="RULES-PROJ_POUDRE_04">"2"</Item>
 <Item name="RULES-MUNI_06">"2"</Item>
@@ -11465,7 +11465,7 @@ See page 190 for Fear rules"</Explanation>
 <Talent name="RULES-T0120">"3"</Talent>
   <!-- Pilot -->
 <Talent name="RULES-T0132_NAUF">"3"</Talent>
-  <!-- Fearless (Shrewreckers) -->
+  <!-- Fearless (Wreckers) -->
 <Talent name="RULES-T0017">"4"</Talent>
   <!-- Kingpin -->
 <Talent name="RULES-T0098">"4"</Talent>
@@ -13091,7 +13091,7 @@ See page 190 for Fear rules"</Explanation>
 </SUBCHAPTER_SKILL>
 <SUBCHAPTER_TALENT>
 <Talent name="RULES-T0013_BOID">"1"</Talent>
-  <!-- Strider (Woodedlands) -->
+  <!-- Strider (Woodlands) -->
 <Talent name="RULES-T0089">"1"</Talent>
   <!-- Petty Magic -->
 <Talent name="RULES-T0091">"1"</Talent>
@@ -14183,7 +14183,7 @@ See page 190 for Fear rules"</Explanation>
 <Ammunition>"0"</Ammunition>
 </Weapon>
 <Weapon id="RULES-COMB_PARAD_01">
-<Description language="ENGLISH">"Sword Breaker"</Description>
+<Description language="ENGLISH">"Swordbreaker"</Description>
 <Skill>"RULES-COMPCOMB_PARAD"</Skill>
 <Damage>"+(BATTR_S)+3"</Damage>
 <Availability>"DISPO_LIMITED"</Availability>
@@ -14303,7 +14303,7 @@ See page 190 for Fear rules"</Explanation>
 <Ammunition>"0"</Ammunition>
 </Weapon>
 <Weapon id="RULES-PROJ_EXPLO_02">
-<Description language="ENGLISH">"Incendary"</Description>
+<Description language="ENGLISH">"Incendiary"</Description>
 <Skill>"RULES-COMPPROJ_EXPLO"</Skill>
 <Damage>"0"</Damage>
 <Availability>"DISPO_LIMITED"</Availability>
@@ -14387,7 +14387,7 @@ See page 190 for Fear rules"</Explanation>
 <Ammunition>"0"</Ammunition>
 </Weapon>
 <Weapon id="RULES-PROJ_LANC_02">
-<Description language="ENGLISH">"Throwing kKnife"</Description>
+<Description language="ENGLISH">"Throwing Knife"</Description>
 <Skill>"RULES-COMPPROJ_LANC"</Skill>
 <Damage>"+(BATTR_S)+2"</Damage>
 <Availability>"DISPO_COMMON"</Availability>
@@ -14888,7 +14888,7 @@ You still suffer the normal Wounds (and since your AP is now reduced by 1 Point,
 <Type>"ARMOT_BOILLEDLEATHER"</Type>
 </Armor>
 <Armor id="RULES-ARMO_06">
-<Description language="ENGLISH">"Chainmail Chausses"</Description>
+<Description language="ENGLISH">"Mail Chausses"</Description>
 <Availability>"DISPO_LIMITED"</Availability>
 <Price>"2C0"</Price>
 <Encumbrance>"3"</Encumbrance>
@@ -14898,7 +14898,7 @@ You still suffer the normal Wounds (and since your AP is now reduced by 1 Point,
 <Type>"ARMOT_MAIL"</Type>
 </Armor>
 <Armor id="RULES-ARMO_07">
-<Description language="ENGLISH">"Chainmail Shirt"</Description>
+<Description language="ENGLISH">"Mail Shirt"</Description>
 <Availability>"DISPO_LIMITED"</Availability>
 <Price>"2C0"</Price>
 <Encumbrance>"2"</Encumbrance>
@@ -14908,7 +14908,7 @@ You still suffer the normal Wounds (and since your AP is now reduced by 1 Point,
 <Type>"ARMOT_MAIL"</Type>
 </Armor>
 <Armor id="RULES-ARMO_08">
-<Description language="ENGLISH">"Chainmail Coif"</Description>
+<Description language="ENGLISH">"Mail Coif"</Description>
 <Availability>"DISPO_LIMITED"</Availability>
 <Price>"1CO"</Price>
 <Encumbrance>"2"</Encumbrance>
@@ -14918,32 +14918,12 @@ You still suffer the normal Wounds (and since your AP is now reduced by 1 Point,
 <Type>"ARMOT_MAIL"</Type>
 </Armor>
 <Armor id="RULES-ARMO_09">
-<Description language="ENGLISH">"Chainmail Coat"</Description>
+<Description language="ENGLISH">"Mail Coat"</Description>
 <Availability>"DISPO_COMMON"</Availability>
 <Price>"3CO"</Price>
 <Encumbrance>"3"</Encumbrance>
 <Quality>"ARMOB_01,ARMOB_05"</Quality>
 <Location>"ARMOL_ARM,ARMOL_BODY"</Location>
-<ArmorPoint>"2"</ArmorPoint>
-<Type>"ARMOT_MAIL"</Type>
-</Armor>
-<Armor id="RULES-ARMO_98">
-<Description language="FRANCAIS">"Coiffe de maille"</Description>
-<Availability>"DISPO_LIMITED"</Availability>
-<Price>"1CO"</Price>
-<Encumbrance>"1"</Encumbrance>
-<Quality>"ARMOB_01,ARMOB_03,ARMOB_06"</Quality>
-<Location>"ARMOL_HEAD"</Location>
-<ArmorPoint>"2"</ArmorPoint>
-<Type>"ARMOT_MAIL"</Type>
-</Armor>
-<Armor id="RULES-ARMO_99">
-<Description language="FRANCAIS">"Cotte de maille"</Description>
-<Availability>"DISPO_COMMON"</Availability>
-<Price>"3CO"</Price>
-<Encumbrance>"2"</Encumbrance>
-<Quality>"ARMOB_01,ARMOB_05"</Quality>
-<Location>"ARMOL_ARM,ARMOL_BODY,ARMOL_LEG"</Location>
 <ArmorPoint>"2"</ArmorPoint>
 <Type>"ARMOT_MAIL"</Type>
 </Armor>
@@ -16297,7 +16277,7 @@ If your opponent has a weapon with the Impaler Perk and rolls a Critical, your a
 <TypSpell>"Domain Magic"</TypSpell>
 </Sort>
 <Sort id="RULES-COLOR_09">
-<Description language="ENGLISH">"Arch of T’Essla"</Description>
+<Description language="ENGLISH">"T’Essla’s Arc"</Description>
 <Explanation language="ENGLISH">"Crackling lightning shoots from your fingertips, striking your target. This is a Magic Projectile with +10 Damage that inflicts +1 Blinded State."</Explanation>
 <Target>"1"</Target>
 <Duration>"Instant"</Duration>

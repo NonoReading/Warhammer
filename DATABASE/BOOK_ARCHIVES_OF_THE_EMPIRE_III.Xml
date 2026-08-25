@@ -504,7 +504,7 @@
 <Encumbrance>"3"</Encumbrance>
 <Quality>"ARMOB_01"</Quality>
 <Location>"ARMOL_BODY"</Location>
-<ArmorPoint>"0"</ArmorPoint>
+<ArmorPoint>"2"</ArmorPoint>
 <Type>"ARMOT_MAIL"</Type>
 </Armor>
 <Armor id="ARCH3-ARMO_26">

@@ -1577,3 +1577,417 @@ RESOLU (24/08) - CAVALERIE LEGERE niveau 2 : remise a 6 competences + 4 talents.
 par Nono, cohérente avec la ligne Talents du livre. Le texte anglais rangeait Etiquette - un
 TALENT - dans la ligne des competences ; c'est cette anomalie qui m'avait egare.
 
+
+=== DECISION DE NONO (24/08/2026) : LES LIBELLES FRANCAIS SONT GELES ===
+
+"pour le francais, c'est un sujet que tu oublies pour l'instant".
+
+On ne touche plus a BOOK_RULESBOOK_FRANCAIS ni aux <Description language="FRANCAIS"> tant que
+Nono ne rouvre pas le sujet. Les identifiants et la structure continuent bien sur d'etre corriges
+dans les deux fichiers - c'est uniquement le TEXTE francais qui est gele.
+
+Ce qui attendra donc, sans y revenir a chaque fois :
+  - les libelles francais restes en anglais (Lore (Loca), Lore (Tzeentch), Lore (Necromancy),
+    Language (Dark Tongue), trade (Goldsmight), Bless (Handrich), Bless (Solkan),
+    Blessed by Stromfels, Invoke (Handrich), Invoke (Solkan), Invoke Stromfels (Predators),
+    Ranged (Catapult), Entertain (Bellow), Entertain (Acting)...) ;
+  - les espaces en fin de libelle (Dressage (Badgers) , Langue (wastelander) , Langue (halfling) ) ;
+  - la convention francaise de Bless/Invoke, qui devrait suivre l'anglais si elle etait reprise
+    ("Benediction (Sigmar)" / "Invocation (Sigmar)" au lieu de "Beni de Sigmar (Empire)").
+
+=== VERIFICATION DE MASSE DES LIBELLES ANGLAIS (24/08/2026) - LISTE DE CANDIDATS ===
+
+Methode : chaque libelle anglais declare dans DATABASE est cherche dans le corpus des 14 livres
+reunis (7,8 Mo de texte pdftotext), apres normalisation des apostrophes, tirets et espaces, puis
+une seconde passe insensible a la casse. Ce qui ne s'y trouve nulle part est un CANDIDAT, pas une
+erreur : beaucoup de specialisations existent sans etre ecrites en toutes lettres dans un livre.
+La suggestion vient d'une comparaison approchee avec le vocabulaire du corpus.
+
+1348 libelles verifies, 245 introuvables : 99 sorts, 85 talents, 33 competences, 23 armures,
+5 armes. La mention "(famille connue, specialisation absente du corpus)" signale un libelle dont
+la FAMILLE est attestee mais pas la specialisation - le plus souvent legitime.
+
+REFERENCES DE FAMILLE RELEVEES DANS LE RULEBOOK, qui tranchent plusieurs cas :
+   Art               Cartography, Engraving, Mosaics, Painting, Sculpture, Tattoo, Weaving
+   Animal Training   Demigryph, Dog, Horse, Pegasus, Pigeon
+   Ride              Demigryph, Great Wolf, Griffon, Horse, Pegasus
+   Armures           les livres ecrivent Mail Shirt (40 fois), Mail Coat (14), Mail Chausses (3),
+                     Mail Coif (3) - jamais "Chainmail", sauf Coat 3 fois
+
+
+--- ARMES (5 candidats) ---
+   NAGGA-PROJ_ARB_04                Repeater Crossbow                      
+   RULES-COMB_BASE_02               Goof                                   God of
+   RULES-COMB_PARAD_01              Sword Breaker                          Swordbreaker | Sword-breaker
+   RULES-PROJ_EXPLO_02              Incendary                              Incendiary | An Incendiary
+   RULES-PROJ_LANC_02               Throwing kKnife                        Throwing Knife | Throwing Knives
+
+--- ARMURES (23 candidats) ---
+   ARCH3-ARMO_18                    Leather Jack (A3)                      Leather Jack
+   ARCH3-ARMO_19                    Leather Jerkin (A3)                    Leather Jerkin | Leather Jerkin Body
+   ARCH3-ARMO_20                    Leather Leggings (A3)                  Leather Leggings
+   ARCH3-ARMO_21                    Leather Skullcap (A3)                  Leather Skullcap
+   ARCH3-ARMO_22                    Chainmail Chausses (A3)                
+   ARCH3-ARMO_23                    Chainmail Coat (A3)                    Chainmail Coat
+   ARCH3-ARMO_24                    Chainmail Coif (A3)                    
+   ARCH3-ARMO_25                    Chainmail Shirt (A3)                   
+   ARCH3-ARMO_26                    Brigandine Jack                        Brigandine
+   ARCH3-ARMO_27                    Brigandine Jerkin                      
+   ARCH3-ARMO_28                    Bracers (A3)                           
+   ARCH3-ARMO_29                    Breastplate (A3)                       Breastplate | Breastplates
+   ARCH3-ARMO_30                    Open Helm (A3)                         Open Helm
+   ARCH3-ARMO_31                    Plate Leggings (A3)                    Plate Leggings
+   LUSTR-ARMO_01                    Lustrian Skullcap                      
+   LUSTR-ARMO_02                    Lustrian Leggings                      
+   LUSTR-ARMO_03                    Lustrian Jerkin                        
+   LUSTR-ARMO_04                    Lustrian Jack                          
+   RULES-ARMO_06                    Chainmail Chausses                     
+   RULES-ARMO_07                    Chainmail Shirt                        
+   RULES-ARMO_08                    Chainmail Coif                         Chainmail Coat | Chainmail
+   RULES-ARMO_98                    Coiffe de maille                       
+   RULES-ARMO_99                    Cotte de maille                        
+
+--- COMPETENCES (33 candidats) ---
+   RULES-COMPART_MOSAI              Art (Mosaic)                           (famille connue, specialisation absente du corpus)
+   RULES-COMPART_SCUL               Art (Carving)                          Art (Engraving)
+   RULES-COMPART_TATOU              Art (Tattoo)                           (famille connue, specialisation absente du corpus)
+   RULES-COMPART_TISSA              Art (Weaving)                          Art (Engraving)
+   RULES-COMPCHEV_DEMIG             Ride (Demi-Griffin)                    Ride (Griffon)
+   RULES-COMPCHEV_GRIFF             Ride (Griffin)                         Ride (Griffon)
+   RULES-COMPCHEV_LOUP              Ride (Big Wolf)                        (famille connue, specialisation absente du corpus)
+   RULES-COMPDRESS_DEMIG            Animal Training (Demigriffin)          (famille connue, specialisation absente du corpus)
+   RULES-COMPDRESS_PEGA             Animal Training (Pegasus)              (famille connue, specialisation absente du corpus)
+   RULES-COMPFOCAL_KHAINITE         Channelling (Khainite Sorcery)         (famille connue, specialisation absente du corpus)
+   RULES-COMPLANG_HALF              Language (Halfling)                    (famille connue, specialisation absente du corpus)
+   RULES-COMPLANG_NEHEKRARAN        Language (Nehekharan)                  (famille connue, specialisation absente du corpus)
+   RULES-COMPLANG_VOL               Language (Thief)                       Language (Thief )
+   RULES-COMPMETIER_ARMOURER        Trade (Armourer)                       (famille connue, specialisation absente du corpus)
+   RULES-COMPMETIER_CIRIE           Trade (Chandler)                       (famille connue, specialisation absente du corpus)
+   RULES-COMPMETIER_EMBAU           Trade (Embalmer)                       (famille connue, specialisation absente du corpus)
+   RULES-COMPMETIER_TANNE           Trade (Tanner)                         Trade (Tinker)
+   RULES-COMPMETIER_WEAPONSMITH     Trade (Weaponsmith)                    Trade (Weaponsmith or Armourer) | Trade (Gunsmith)
+   RULES-COMPREPRES_FUNAN           Perform (Rope Walking)                 (famille connue, specialisation absente du corpus)
+   RULES-COMPREPRES_JONGL           Perform (Juggling)                     Perform ( Juggling)
+   RULES-COMPSAVOIR_BLOODDRAGON     Lore (Blood Dragon)                    Lore (Dragons)
+   RULES-COMPSAVOIR_DEMO            Lore (Demonology)                      Lore (Daemonology) | Lore (Geology)
+   RULES-COMPSAVOIR_GUERRE          Lore (War)                             (famille connue, specialisation absente du corpus)
+   RULES-COMPSAVOIR_LAHMIAN         Lore (Lahmian Sisterhood)              (famille connue, specialisation absente du corpus)
+   RULES-COMPSAVOIR_NAIN            Lore (Dwarves)                         Lore (Dwarfs)
+   RULES-COMPSAVOIR_NECRARCH        Lore (Necrarch)                        Lore (Necromancy)
+   RULES-COMPSAVOIR_NORSCA          Lore (Norsca)                          (famille connue, specialisation absente du corpus)
+   RULES-COMPSAVOIR_STROIGOI        Lore (Strigoi)                         (famille connue, specialisation absente du corpus)
+   RULES-COMPSAVOIR_VONCARSTEIN     Lore (Von Carstein)                    (famille connue, specialisation absente du corpus)
+   RULES-COMPSIGNES_ECLAI           Secret Signs (Pathfinders)             (famille connue, specialisation absente du corpus)
+   RULES-COMPSIGNES_RURAUX          Secret Signs (Rural)                   (famille connue, specialisation absente du corpus)
+   RULES-COMPSIGNES_TZEENTCH        Secret Signs (Tzeentch)                (famille connue, specialisation absente du corpus)
+   RULES-COMPSIGNES_VOL             Secret Signs (Thief)                   Secret Signs (Thief ) | Secret Signs (Thieves)
+
+--- TALENTS (85 candidats) ---
+   ARCH2-T0175_ALCOHOL              Vice (Alcohol)                         (famille connue, specialisation absente du corpus)
+   ARCH2-T0175_NARCO                Vice (Narcotics)                       (famille connue, specialisation absente du corpus)
+   ARCH2-T0175_PLEASURE             Vice (Pleasure)                        (famille connue, specialisation absente du corpus)
+   RULES-T0012_TAAL                 Bless (Taal)                           (famille connue, specialisation absente du corpus)
+   RULES-T0012_VERENA               Bless (Verena)                         (famille connue, specialisation absente du corpus)
+   RULES-T0013_BOID                 Strider (Woodedlands)                  Strider (Woodlands)
+   RULES-T0013_DES                  Strider (Deserts)                      (famille connue, specialisation absente du corpus)
+   RULES-T0013_LIT                  Strider (Littoral)                     (famille connue, specialisation absente du corpus)
+   RULES-T0013_MAR                  Strider (Swamps)                       (famille connue, specialisation absente du corpus)
+   RULES-T0013_TOUN                 Strider (Tundra)                       (famille connue, specialisation absente du corpus)
+   RULES-T0069_BAND                 Hatred (Outlaw)                        Hatred (Outlaws)
+   RULES-T0069_CHAOS                Hatred (Followers of Chaos)            Hatred (Followers of Stromfels) | Hatred (Followers of Nurgle)
+   RULES-T0069_MANANN               Hatred (Manannites)                    (famille connue, specialisation absente du corpus)
+   RULES-T0069_MONSTR               Hatred (monsters)                      (famille connue, specialisation absente du corpus)
+   RULES-T0069_SDISSI               Hatred (Dissident Wizards)             (famille connue, specialisation absente du corpus)
+   RULES-T0069_SIGMAR               Hatred (sigmarites)                    (famille connue, specialisation absente du corpus)
+   RULES-T0080_TAAL                 Invoke (Taal)                          (famille connue, specialisation absente du corpus)
+   RULES-T0080_VERENA               Invoke (Verena)                        (famille connue, specialisation absente du corpus)
+   RULES-T0088_BETE                 Arcane Magic (Beast)                   Arcane Magic (Beasts)
+   RULES-T0088_DEMON                Arcane Magic (Demonology)              (famille connue, specialisation absente du corpus)
+   RULES-T0088_MAW                  Arcane Magic (Lore of the Great Maw)   Arcane Magic (Lore of Death) | Arcane Magic (Lore of Beasts)
+   RULES-T0088_NECRO                Arcane Magic (Necromancy)              (famille connue, specialisation absente du corpus)
+   RULES-T0088_TZEENTCH             Arcane Magic (Tzeentch)                (famille connue, specialisation absente du corpus)
+   RULES-T0092_ARMU                 Craftsman (Armourer)                   (famille connue, specialisation absente du corpus)
+   RULES-T0092_BARB                 Craftsman (Barber)                     Craftsman (Brewer)
+   RULES-T0092_BATEA                Craftsman (Boatbuilding)               Craftsman (Boatbuilder)
+   RULES-T0092_BRICO                Craftsman (Tinker)                     (famille connue, specialisation absente du corpus)
+   RULES-T0092_CALLI                Craftsman (Calligrapher)               (famille connue, specialisation absente du corpus)
+   RULES-T0092_CARTO                Craftsman (Cartographer)               (famille connue, specialisation absente du corpus)
+   RULES-T0092_CHARP                Craftsman (Carpenter)                  (famille connue, specialisation absente du corpus)
+   RULES-T0092_CIRIE                Craftsman (Chandler)                   (famille connue, specialisation absente du corpus)
+   RULES-T0092_COLIF                Craftsman (Charms)                     (famille connue, specialisation absente du corpus)
+   RULES-T0092_EMBAU                Craftsman (Embalmer)                   (famille connue, specialisation absente du corpus)
+   RULES-T0092_EMPOI                Craftsman (Poisoner)                   (famille connue, specialisation absente du corpus)
+   RULES-T0092_GRAV                 Craftsman (Engraver)                   Craftsman (Engineer)
+   RULES-T0092_IMPR                 Craftsman (Printing)                   Craftsman (Smithing)
+   RULES-T0092_MATART               Craftsman (Art Supplies)               (famille connue, specialisation absente du corpus)
+   RULES-T0092_MFERR                Craftsman (Farrier)                    (famille connue, specialisation absente du corpus)
+   RULES-T0092_POIS                 Craftsman (Poisons)                    (famille connue, specialisation absente du corpus)
+   RULES-T0092_TANNE                Craftsman (Tanner)                     (famille connue, specialisation absente du corpus)
+   RULES-T0092_VIGN                 Craftsman (Vintner)                    (famille connue, specialisation absente du corpus)
+   RULES-T0129_CORR                 Resistance (Corruption)                (famille connue, specialisation absente du corpus)
+   RULES-T0129_INGESTED             Resistance (Poison Ingested)           (famille connue, specialisation absente du corpus)
+   RULES-T0129_MUTA                 Resistance (Mutation)                  (famille connue, specialisation absente du corpus)
+   RULES-T0132_BAND                 Fearless (Outlaw)                      Fearless (Outlaws)
+   RULES-T0132_INTRU                Fearless (Intruder)                    Fearless (Intruders)
+   RULES-T0132_LARGER               Fearless (Larger)                      (famille connue, specialisation absente du corpus)
+   RULES-T0132_MILIC                Fearless (Militia)                     (famille connue, specialisation absente du corpus)
+   RULES-T0132_NAUF                 Fearless (Shrewreckers)                Fearless (Wreckers)
+   RULES-T0132_PATFLU               Fearless (River Patrollers)            Fearless (Riverwardens)
+   RULES-T0132_PATROU               Fearless (Road Patrols)                Fearless (Road Wardens)
+   RULES-T0132_SMALLER              Fearless (Smaller)                     (famille connue, specialisation absente du corpus)
+   RULES-T0134_FLUV                 Savant (Waterways)                     Savant (Riverways)
+   RULES-T0134_REG                  Savant (Region)                        (famille connue, specialisation absente du corpus)
+   RULES-T0136_EMP                  Etiquette (Erudite)                    (famille connue, specialisation absente du corpus)
+   RULES-T0136_FIDEL                Etiquette (Faithful)                   (famille connue, specialisation absente du corpus)
+   RULES-T0139_TOUCH                Acute Sense (Touch)                    (famille connue, specialisation absente du corpus)
+   RULES-T0157_ARMU                 Master Tradesman (Gunsmith)            (famille connue, specialisation absente du corpus)
+   RULES-T0157_BARB                 Master Tradesman (Barber)              Master Tradesman (Brewer)
+   RULES-T0157_BATEA                Master Tradesman (Boatbuilding)        (famille connue, specialisation absente du corpus)
+   RULES-T0157_BRICO                Master Tradesman (Tinker)              (famille connue, specialisation absente du corpus)
+   RULES-T0157_CALLI                Master Tradesman (Calligrapher)        (famille connue, specialisation absente du corpus)
+   RULES-T0157_CARTO                Master Tradesman (Cartographer)        Master Tradesman (Cartography)
+   RULES-T0157_CHARP                Master Tradesman (Carpenter)           (famille connue, specialisation absente du corpus)
+   RULES-T0157_CIRIE                Master Tradesman (Chandler)            (famille connue, specialisation absente du corpus)
+   RULES-T0157_COLIF                Master Tradesman (Charms)              (famille connue, specialisation absente du corpus)
+   RULES-T0157_EMBAU                Master Tradesman (Embalmer)            (famille connue, specialisation absente du corpus)
+   RULES-T0157_EXPL                 Master Tradesman (Explosives)          (famille connue, specialisation absente du corpus)
+   RULES-T0157_FORGE                Master Tradesman (Blacksmith)          (famille connue, specialisation absente du corpus)
+   RULES-T0157_GRAV                 Master Tradesman (Engraver)            (famille connue, specialisation absente du corpus)
+   RULES-T0157_IMPR                 Master Tradesman (Printing)            (famille connue, specialisation absente du corpus)
+   RULES-T0157_MATART               Master Tradesman (Art Supplies)        (famille connue, specialisation absente du corpus)
+   RULES-T0157_MFERR                Master Tradesman (Farrier)             (famille connue, specialisation absente du corpus)
+   RULES-T0157_POIS                 Master Tradesman (Poisons)             Master Tradesman (Poisoner)
+   RULES-T0157_TANNE                Master Tradesman (Tanner)              (famille connue, specialisation absente du corpus)
+   RULES-T0157_VIGN                 Master Tradesman (Vintner)             (famille connue, specialisation absente du corpus)
+   WINDS-T0176_BETE                 Suffuse With (Ghur)                    (famille connue, specialisation absente du corpus)
+   WINDS-T0176_CIEUX                Suffuse With (Azyr)                    (famille connue, specialisation absente du corpus)
+   WINDS-T0176_FEU                  Suffuse With (Aqshy)                   (famille connue, specialisation absente du corpus)
+   WINDS-T0176_LUMIERE              Suffuse With (Hysh)                    (famille connue, specialisation absente du corpus)
+   WINDS-T0176_METAL                Suffuse With (Chamon)                  (famille connue, specialisation absente du corpus)
+   WINDS-T0176_MORT                 Suffuse With (Shyish)                  (famille connue, specialisation absente du corpus)
+   WINDS-T0176_NECRO                Suffuse With (Dhar)                    (famille connue, specialisation absente du corpus)
+   WINDS-T0176_OMBRE                Suffuse With (Ulgu)                    (famille connue, specialisation absente du corpus)
+   WINDS-T0176_VIE                  Suffuse With (Ghyran)                  (famille connue, specialisation absente du corpus)
+
+--- SORTS (99 candidats) ---
+   RULES-ARCAN_01                   Aethric Weapon                         
+   RULES-ARCAN_02                   Aethyr Armor                           Aethyric Armour | Aethyric Arms
+   RULES-ARCAN_03                   Chain Attacks                          Chain Attack | If Chain Attack
+   RULES-ARCAN_04                   Ordinary Aura                          
+   RULES-ARCAN_05                   Anti-Arrow Shield                      Arrow Shield
+   RULES-ARCAN_09                   Moving Object                          Move Object
+   RULES-ARCAN_23                   Darkvision                             Dark Vision
+   RULES-CHAOS_03                   Betrayal of 'Tzeentch                  
+   RULES-COLOR_02                   Incarnation of Wyssan                  
+   RULES-COLOR_03                   The Spear of Amber                     
+   RULES-COLOR_04                   Beastly Tongue                         Beast Tongue | Battle Tongue
+   RULES-COLOR_05                   Master of the Beast                    
+   RULES-COLOR_06                   Hunter Skin                            
+   RULES-COLOR_08                   Flight of Destiny                      
+   RULES-COLOR_09                   Arch of T'Essla                        
+   RULES-COLOR_11                   Cassandora's Comet                     
+   RULES-COLOR_12                   Irony of Fate                          
+   RULES-COLOR_13                   The First Sign of Amul                 
+   RULES-COLOR_14                   The Second Sign of Amul                
+   RULES-COLOR_15                   The Third Sign of Amul                 
+   RULES-COLOR_17                   Cauterize                              Cauterise
+   RULES-COLOR_18                   Burning Hearts                         Burning Head
+   RULES-COLOR_19                   Wreath of Flames                       
+   RULES-COLOR_21                   The Aegis of Agshy                     
+   RULES-COLOR_22                   The Burning Sword of Rbuin             
+   RULES-COLOR_23                   Wall of Fire                           
+   RULES-COLOR_26                   Clarity of Mind                        Clarity of
+   RULES-COLOR_27                   Demon Reaper                           
+   RULES-COLOR_28                   Amyntok's Fillet                       
+   RULES-COLOR_32                   Protection of Pha                      Protection Pouch
+   RULES-COLOR_34                   Chamon's Crucible                      
+   RULES-COLOR_35                   Steel Scale                            
+   RULES-COLOR_36                   Chamon's Forge                         
+   RULES-COLOR_38                   Shifting Metal                         
+   RULES-COLOR_39                   Lead Feather                           
+   RULES-COLOR_40                   Transmute Chamon                       
+   RULES-COLOR_41                   Laniph's Caress                        
+   RULES-COLOR_42                   Last lyrics                            
+   RULES-COLOR_43                   The Scythe of SAyish                   
+   RULES-COLOR_44                   The Violet Veil of SAyish              
+   RULES-COLOR_47                   Lifesteal                              
+   RULES-COLOR_51                   Evil Twin                              
+   RULES-COLOR_54                   Strangling Shadows                     
+   RULES-COLOR_55                   Loss of memory                         
+   RULES-COLOR_56                   Shadow Portal                          
+   RULES-COLOR_57                   Terrain Setup                          
+   RULES-COLOR_58                   Gift of Life                           
+   RULES-COLOR_59                   Earth Water                            Earth Mother
+   RULES-COLOR_62                   Grease of the Earth                    
+   RULES-COLOR_64                   Blood of Earth                         
+   RULES-COLOR_71                   Degradation                            
+   RULES-COLOR_74                   Curse of Bad Luck                      
+   RULES-COLOR_77                   Demon Minor Destruction                
+   RULES-COLOR_78                   Demon Detection                        Enemy Detection
+   RULES-COLOR_79                   Lesser Demon Manifestation             Daemonic Manifestation
+   RULES-COLOR_80                   Octogram                               Octagram
+   RULES-COLOR_83                   Resuscitation                          Reputation
+   RULES-COLOR_84                   Raise the Dead                         Raise Dead
+   RULES-MIRAC_MANAMM_03            Walk on Water                          
+   RULES-MIRAC_MANAMM_05            Favorable Winds                        
+   RULES-MIRAC_MANAMM_06            Face of the Drowned Man                
+   RULES-MIRAC_MORR_03              Hand of Morr                           Hand Mortar
+   RULES-MIRAC_MORR_06              Gateway Threshold                      
+   RULES-MIRAC_MYRMIDIA_01          Call to Fury                           
+   RULES-MIRAC_RANALD_03            May Luck Remain                        
+   RULES-MIRAC_RANALD_04            Rich, poor, beggar, thief              
+   RULES-MIRAC_RANALD_05            You didn't see me, did you?            
+   RULES-MIRAC_RANALD_06            Cat Eyes                               Cat's Eyes
+   RULES-MIRAC_RHYA_02              Rhya's Caress                          Rhya's Harvest
+   RULES-MIRAC_RHYA_05              Rhya's Rescue                          
+   RULES-MIRAC_RHYA_06              Rhya Union                             Rhya's Union
+   RULES-MIRAC_SHALLYA_02           Balm for a Wounded Spirit              
+   RULES-MIRAC_SHALLYA_03           Stamina of the Anchorite               
+   RULES-MIRAC_SHALLYA_04           Immaculate Innocence                   
+   RULES-MIRAC_SIGMAR_01            Two-Tailed Comet                       Twin-tailed Comet | Twin Tailed Comet
+   RULES-MIRAC_SIGMAR_02            Soul Fire                              Soulfire
+   RULES-MIRAC_SIGMAR_03            Beacon of Virtue                       
+   RULES-MIRAC_SIGMAR_04            Fiery Hammer of Sigmar                 Fiery Heart Sigmar
+   RULES-MIRAC_SIGMAR_05            Don't listen to the Witch              
+   RULES-MIRAC_SIGMAR_06            Defeat the Unholy                      
+   RULES-MIRAC_TAAL_01              Leaping like a deer                    
+   RULES-MIRAC_ULRIC_01             Chill of Frost                         
+   RULES-MIRAC_ULRIC_02             ULRIC Fury                             
+   RULES-MIRAC_ULRIC_04             Snow King's Judgment                   Snow King's Judgement
+   RULES-MIRAC_ULRIC_06             Winter Wolf Hide                       Winter Wolf
+   RULES-MIRAC_VERENA_01            Hindrances of Truth                    
+   RULES-MIRAC_VERENA_04            Truth will come out                    
+   RULES-SPELL_02                   Animal Friendship                      Animal Friend
+   RULES-SPELL_05                   Conservation                           Consideration | Considerations
+   RULES-SPELL_07                   Create a small animal                  
+   RULES-SPELL_16                   Light step                             Light Test
+   RULES-SPELL_17                   Rain protection                        
+   RULES-SPELL_18                   Water purification                     
+   RULES-SPELL_25                   Listen up                              Listen
+   WINDS-COLOR_104                  Pha's Protection                       
+   WINDS-COLOR_176                  T'Essla's Axc                          T'Essla's Arc | Essla's Arc
+   WINDS-COLOR_228                  Wild Kin of Zand ox                    
+   WINDS-COLOR_242                  Great Fires of U'”Zhul                 
+   WINDS-COLOR_275                  Whrithing Worm                         Writhing Worm Range
+
+NOUVEAU (24/08/2026, complete le 25/08/2026) - DOUBLONS DE SORTS ENTRE RULEBOOK ET WINDS OF MAGIC.
+Trouve en corrigeant "T'Essla's Axc" : RULES-COLOR_09 et WINDS-COLOR_176 sont le meme sort.
+Winds of Magic reimprime les sorts des huit domaines du Rulebook et la base a saisi les deux
+versions. CONFIRME PAR NONO dans WinSort : "j'ai une ligne pour Rulebook et une ligne pour Winds
+pour Blinding Light".
+
+AMPLEUR REELLE : 64 doublons, pas 14. Les 8 domaines x 8 sorts sont tous dedoubles. Les 14
+reperes au libelle ne sont que la partie visible ; les 50 autres se cachent derriere un libelle
+divergent (le Rulebook de la base a ete saisi depuis le livre FRANCAIS, donc ses noms sont des
+retraductions : "Grease of the Earth" pour "Fat of the Land", "Quick Death" pour "Swift Passing",
+"Terrain Setup" pour "Lie of the Land"...).
+
+METHODE D'APPARIEMENT QUI MARCHE : meme TALENT (le domaine) + meme NIVEAU (le CN), puis
+similarite du texte de l'EXPLANATION pour departager quand plusieurs sorts partagent le CN.
+Le libelle ne sert a rien pour apparier - c'est justement lui qui est faux.
+Table complete des 64 paires produite le 25/08/2026 (fichier table_sorts.txt, non livre : c'est
+un document de travail, pas un quatrieme fichier de suivi).
+
+FAIT LE 25/08/2026 : l'entree RULES-COLOR_* a recu le nom imprime dans le livre et le doublon
+WINDS-COLOR_* a ete supprime. 49 libelles reecrits sur 64, 64 declarations retirees de Winds of
+Magic (192 -> 128 sorts). Les deux fichiers parsent, aucun identifiant en double, aucune reference
+orpheline, plus aucun libelle commun aux deux livres.
+PIEGE RENCONTRE, a retenir : le libelle de Winds n'etait PAS toujours le bon. WINDS-COLOR_242
+portait "Great Fires of U'”Zhul" (scorie d'OCR) et WINDS-COLOR_104 "Pha's Protection" sans
+l'accent circonflexe. L'orthographe des 64 noms a donc ete prise dans l'INDEX du Rulebook, ou
+chaque sort apparait une fois avec sa graphie propre.
+
+DIVERGENCE ENTRE LES DEUX LIVRES - ARBITREE LE 25/08/2026 : le sort Caress of Laniph
+(RULES-COLOR_41 / WINDS-COLOR_209) est imprime CN 7 dans le Rulebook (p. 246) et CN 4 dans Winds
+of Magic (p. 122). Les deux extractions ont ete verifiees sur la mise en page complete : ce n'est
+pas un artefact de conversion, les deux livres se contredisent vraiment. L'errata officiel de
+Cubicle 7 ne mentionne ni ce sort ni aucune correction de CN dans le Lore of Death, et il n'existe
+pas d'errata publie pour Winds of Magic. Winds retouche par ailleurs l'effet du sort (il ajoute
+un plafond "up to your maximum Wounds" absent du Rulebook), donc on ne peut pas conclure a une
+simple coquille.
+DECISION DE NONO : on reste sur le RULEBOOK, donc CN 7. Aucune modification a faire - la base
+porte deja cette valeur. Ligne conservee ici pour qu'une session future ne "corrige" pas
+la valeur en croyant bien faire.
+
+
+NOUVEAU (25/08/2026) - APRES LE CHANTIER DES MAILLES, trois points laisses ouverts.
+
+1. [FAIT 25/08/2026 - Nono : "on part sur Mail"] LIBELLE DU TYPE D'ARMURE RULES-ARMOT_MAIL,
+   anciennement "Chainmail". Le Rulebook intitule la
+   section de son tableau ARMOUR "MAIL", Archives of the Empire III intitule la sienne "CHAINMAIL",
+   et les deux livres partagent le meme code de type : un seul libelle doit servir aux deux.
+   A ARBITRER par Nono. Non touche. A noter que les autres libelles de type de la base melangent
+   les casses ("Soft leather", "Boiled leather", "Plate", "Soft Kits", "Brigandine"), ce qui
+   meritera peut-etre une passe de normalisation en meme temps.
+
+2. [FAIT 25/08/2026 - Nono : "oui erreur"] ARCH3-ARMO_25 "Chainmail Shirt (A3)" portait ArmorPoint 0. Le tableau d'Archives III lui donne
+   2 AP, comme ses trois voisines de la meme section, et toutes ses autres caracteristiques sont
+   conformes. Ressemble a une saisie oubliee. BUG SIGNALE, non corrige.
+
+3. [FAIT 25/08/2026 - Nono : "il ne doit y avoir que des english dans le livre anglais"]
+   RULES-ARMO_98 "Coiffe de maille" et RULES-ARMO_99 "Cotte de maille" retirees du fichier
+   ANGLAIS, ou elles etaient declarees avec une Description language="FRANCAIS" et aucune version
+   anglaise. Elles n'etaient referencees par rien et faisaient doublon avec Mail Coif et Mail Coat.
+   POINT D'ARCHITECTURE RAPPELE PAR NONO, et il a raison : quand on passe en francais, seuls les
+   LIBELLES sont repris du fichier francais, jamais les DONNEES. Le chargeur ne remplit les listes
+   de donnees que si le fichier declare <language>"ENGLISH"</language> - la garde
+   "if LangueDef = ConstAnglais" dans xmlexportimport.pas, presente 55 fois, couvre toutes les
+   listes sans exception (armures, armes, sorts, metiers, races, talents, competences...). Pour un
+   fichier francais, seul AddTrad s'execute. C'etait deja documente dans CONTEXT.md ligne 1077 ;
+   c'est moi qui ne l'ai pas applique.
+   CONSEQUENCE : les deux declarations qui subsistent dans BOOK_RULESBOOK_FRANCAIS.Xml ne sont
+   plus que des TRADUCTIONS ORPHELINES - un libelle sans armure derriere. Elles ne peuvent plus
+   apparaitre nulle part dans le programme. Les supprimer reste souhaitable par proprete, mais ce
+   n'est plus un correctif fonctionnel, juste du menage. A faire quand le francais sera degele.
+   A NOTER pour la methode : toute divergence de DONNEES entre les deux fichiers Rulebook est sans
+   effet - seuls les identifiants comptent, puisqu'ils sont la cle de jointure des traductions.
+   C'est ce qui justifie la regle "on corrige les identifiants et la structure dans les deux
+   fichiers, mais plus le texte francais".
+
+CORRECTION A LA NOTE DU 24/08 SUR LES MAILLES : elle annonçait que "toute la famille des mailles
+de la base est a renommer". C'est FAUX pour les quatre entrees (A3). Archives of the Empire III
+imprime reellement "Chainmail Chausses / Coat / Coif / Shirt" sous une section CHAINMAIL ; la base
+est fidele au livre et le suffixe (A3) existe justement parce que ce livre redonne les memes
+armures avec d'autres valeurs. Seules les quatre entrees du Rulebook etaient a corriger, ce qui
+est fait.
+
+
+NOUVEAU (25/08/2026) - LE CHAMP <Test> DES TALENTS EST MASSIVEMENT RETRADUIT.
+Trouve en corrigeant la famille Art : le talent Artistic (RULES-T0007) porte "Art (your choice)"
+la ou le Rulebook imprime "Tests: Art (Any)". Audit lance sur tous les champs <Test> de la base,
+confrontes au corpus des 14 livres : 87 segments introuvables, dont 83 pour le seul Rulebook,
+soit la quasi-totalite de ses champs Test.
+
+DEUX MOTIFS DISTINCTS, qui n'appellent pas la meme reponse.
+(a) LA PARAPHRASE. Le livre ecrit des formules courtes, la base des phrases longues :
+    "Charm test to influence those who find you attractive.",
+    "Healing Tests outside of Combat Rounds; when you have time to do it right.",
+    "Melee on a Round when performing a Berserk Charge".
+    Genant pour la fidelite, mais lisible et sans consequence fonctionnelle.
+(b) LES NOMS DE COMPETENCE RESTES EN FRANCAIS ou traduits a la main. Ceux-la ne renvoient a
+    AUCUNE competence existante de la base :
+       "Ragot tests with travelers"                    -> Gossip
+       "Representation and Agility when using Contortionist" -> Entertain
+       "Focusing (Any)"                                -> Channelling
+       "Discretion when you are in plain sight"        -> Stealth
+       "Profession (Apothecary)" / "Profession (choose one)" -> Trade
+       "Knowledge (Apothecary)" / "Knowledge (Chosen Knowledge)" -> Lore
+       "Projectiles when performing a Rapid Fire"      -> Ranged
+       "Mental Strength (Group to fight)"              -> Willpower
+       "Evaluation to establish the value of coins"    -> Evaluate
+    C'est la partie vraiment problematique : un joueur anglophone lit un nom de competence qui
+    n'existe pas dans son jeu.
+
+[TRANCHE PAR NONO LE 25/08/2026 : "on corrige" - retour aux formules exactes du livre.]
+FAIT : 53 talents du Rulebook apparies a leur ligne "Tests:" imprimee, 5 deja conformes,
+48 CORRIGES verbatim.
+RESTE : 58 champs Test du Rulebook NON APPARIES automatiquement - soit le livre ne leur donne
+pas de ligne "Tests:", soit l'extraction en deux colonnes n'a pas su les rattacher a leur talent.
+A traiter a la main, talent par talent. La liste est dans table_tests.txt (document de travail).
+
+[FAIT 25/08/2026] LES TROIS FUITES D'IDENTIFIANT sont corrigees, chacune verifiee dans son livre :
+SEAOF-T0182 (Chantyman) "COMPDIVERT_CHANT" -> "Entertain (Singing)", SEAOF-T0184 (Master and
+Commander) "COMPCOMM" -> "Leadership", ARCH2-T0175_* (Vice) "ATTR_WP (Resist Target)" ->
+"Willpower (Resist Target)".
+A NOTER, non touche : ce talent Vice s'appelle "Vice (Target)" dans Archives II et "Vice (Any)"
+dans la base, ce qui suit la convention des generiques - laisse tel quel.

@@ -38,7 +38,7 @@ Examples you could take include: Alcohol, Food, Narcotics, Pleasure."</Explanati
 <Skill>""</Skill>
 <Max>"(BATTR_WP)"</Max>
 <PDF>""</PDF>
-<Test language="ENGLISH">"ATTR_WP (Resist Target)"</Test>
+<Test language="ENGLISH">"Willpower (Resist Target)"</Test>
 </Talent>
 </DATA_TALENT>
 <DATA_TALENT_SPECIALIZATION>
