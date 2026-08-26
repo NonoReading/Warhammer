@@ -4189,6 +4189,14 @@ See page 190 for Fear rules"</Explanation>
 <Talent id="RULES-T0088_FEU">
 <Description language="FRANCAIS">"Magie des Couleurs (Feu)"</Description>
 </Talent>
+<Talent id="RULES-T0088_DARK">
+<Description language="FRANCAIS">"Arcane Magic (Dark Magic)"</Description>
+  <!-- Lords of Naggaroth, "THE LORE OF DARK MAGIC". Specialisation creee le 26/08/2026 pour
+       rattacher les sept sorts de ce domaine, qui manquaient entierement. Le libelle est laisse
+       en anglais dans le fichier francais, comme le fait deja RULES-T0088_KHAINE juste apres :
+       les libelles francais sont geles, et l'identifiant doit exister des deux cotes pour que
+       les deux fichiers Rulebook declarent le meme jeu d'identifiants. -->
+</Talent>
 <Talent id="RULES-T0088_KHAINE">
 <Description language="FRANCAIS">"Arcane Magic (Khainite Sorcery)"</Description>
 </Talent>

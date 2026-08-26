@@ -2003,32 +2003,37 @@ Fearless (Monsters), Strider (Woodlands), Hatred (Greenskins)... - ont toutes un
 alors que le livre donne une seule ligne "Tests:" valable pour toute la famille (par exemple
 "Trade (any one)" pour tous les Craftsman, "Charm and Gossip (Social Group)" pour tous les
 Etiquette).
-PRECISION IMPORTANTE (25/08/2026) : le livre ne donne pas un texte FIXE mais un texte A PARAMETRE.
-La ligne Tests: du generique contient le nom du parametre, a remplacer par la specialisation :
-   Craftsman (Trade)        -> Trade (any one)
-   Etiquette (Social Group) -> Charm and Gossip (Social Group)
-   Acute Sense (Sense)      -> Perception (Sense)
-   Savant (Lore)            -> Lore (chosen Lore)
-   Strider (Terrain)        -> Athletics Tests to traverse the Terrain
-   Hatred (Group)           -> Willpower (Resist Group)
-   Fearless (Enemy)         -> Cool to oppose your Enemy's Intimidate, Fear, and Terror
-   Resistance (Threat)      -> All those to resist the associated Threat
-   Master Tradesman (Trade) -> Any appropriate Extended Trade Tests
-   Linguistics              -> Language (All)
-DONC recopier tel quel le texte du generique serait FAUX pour la moitie des familles :
-Etiquette (Nobles) doit tester "Charm and Gossip (Nobles)", pas "(Social Group)".
+[CLOS LE 26/08/2026 SANS MODIFICATION - il n'y a rien a faire.]
+Avant d'ecrire le marqueur de substitution, verification de OU le champ Test est affiche : un seul
+endroit dans tout le projet, wintalent.pas ligne 116. Cette grille est remplie sous la condition
+"PTalent.SousTalent = false" : elle ne liste QUE les generiques. Les specialisations vivent dans
+TabSpe, qui n'a que deux colonnes, code et libelle. Le champ Test d'une specialisation n'est donc
+JAMAIS montre - ni a l'ecran, ni en PDF (pdfrace et pdfmetier ne le referencent pas).
+MIEUX : selectionner une specialisation bascule l'affichage sur son generique (wintalent.pas
+lignes 99-101, via ValeurSousCompetence et ValeurGenerique), donc le joueur lit toujours la
+formule exacte du livre. La conception d'origine etait juste.
 
-JE N'AI RIEN REMPLI : c'est une question de conception, pas une coquille. Trois options.
-  (a) Laisser vide et faire remonter le texte du generique a l'affichage, si le programme sait
-      deja le faire - c'est probablement l'intention d'origine. Mais le parametre resterait
-      affiche tel quel ("Charm and Gossip (Social Group)" pour Etiquette (Nobles)).
-  (b) Recopier le texte du generique dans chaque specialisation : redondant ET faux pour les
-      familles a parametre.
-  (c) SUBSTITUER a l'affichage : remonter le texte du generique en remplacant le parametre par
-      la specialisation. C'est la seule option fidele au livre, mais elle demande du code.
-A ARBITRER PAR NONO. Verifier d'abord ce que WinMetier affiche aujourd'hui pour, disons,
-Craftsman (Blacksmith) : si la ligne Tests y est vide, l'option (a) n'est pas implementee et la
-question devient concrete.
+CHIFFRAGE, conserve pour memoire : 143 specialisations au champ Test vide, sur dix familles.
+   a texte PARAMETRE (90) : Fearless 24, Hatred 14, Savant 13, Etiquette 13, Strider 10,
+                            Resistance 7, Acute Sense 5, Vice 4
+   a texte FIXE      (53) : Craftsman 27, Master Tradesman 26
+
+DESIGN VALIDE PAR NONO MAIS NON APPLIQUE, a garder si l'on veut un jour afficher le test par
+specialisation. Le parametre doit etre marque explicitement, car la parenthese ne suffit pas comme
+repere : quatre familles ont leur parametre en pleine phrase (Strider, Fearless, Resistance) et
+Craftsman a une parenthese qu'il ne faut PAS toucher. Marqueur retenu : '*', place n'importe ou.
+   Etiquette          Charm and Gossip (*)
+   Acute Sense        Perception (*)
+   Savant             Lore (*)
+   Hatred / Vice      Willpower (Resist *)
+   Strider            Athletics Tests to traverse the *
+   Fearless           Cool to oppose your *'s Intimidate, Fear, and Terror
+   Resistance         All those to resist the associated *
+   Craftsman          Trade (any one)          <- inchange, pas de marqueur = pas de substitution
+Le programme remplacerait '*' par la parenthese du libelle de la specialisation, et par "Any" pour
+le generique. L'absence de marqueur vaut "ne rien faire", donc Craftsman et Master Tradesman sont
+couverts sans cas particulier. Nono a ecarte l'alternative d'un attribut separe
+(<Test parametre="Social Group">), trop lourde.
 
 
 NOUVEAU (25/08/2026) - DEUX ANOMALIES DE DECLARATION DE TALENT, reperees en listant les generiques.
@@ -2164,7 +2169,134 @@ la colonne Human de la table de tirage. Detail des six points.
 "Intuition " et RULES-COMPPRECEP "Perception ". Controle final sur les seize livres : plus aucun
 libelle anglais ne porte d'espace en debut ou en fin.
 
-NOUVEAU (25/08/2026) - "Hatred (Dwarves)" (Rulebook) : forme non tranchee. Le corpus donne UNE
-occurrence de "Hatred (Dwarfs)" et UNE de "Hatred (Dwarves)", donc aucune autorite. Depuis la
-correction de Lore (Dwarfs), la base ecrit les deux formes selon la famille, ce qui est
-inconfortable mais fidele. A arbitrer si Nono veut uniformiser.
+[FAIT 26/08/2026 - Nono : "pour rester uniforme au Lore"] "Hatred (Dwarves)" -> "Hatred (Dwarfs)".
+Le corpus ne departageait pas (une occurrence de chaque), c'est la coherence interne qui a
+tranche. Commentaire XML de Green iz Best resynchronise. Les trois "Dwarves" restants sont dans
+des <Explanation>, donc de la prose, non touchee.
+
+
+[TOUS FAITS LE 26/08/2026 - Nono : "je valide tout ce que tu as trouve"]
+REVUE D'ARCHIVES OF THE EMPIRE III : SEPT POINTS, TOUS CORRIGES.
+Le reste du livre est conforme : 20 armures exactes (y compris leur type, Archives III reclassant
+les cuirs en BOILED LEATHER), 4 nouvelles qualites completes, 27 sorts et miracles exacts et
+complets (Handrich 6, Solkan 6, Rhya 6, Hedgecraft 9), 3 carrieres conformes en competences et
+talents. Les chapitres VII a IX n'apportent aucune donnee joueur.
+
+1. PRIEST OF SOLKAN, DEUX SALAIRES FAUX.
+      niveau 2 Priest      : base TIERS_SILVER 2  ->  livre "Silver 1"
+      niveau 3 Inquisitor  : base TIERS_SILVER 5  ->  livre "Silver 3"
+   La progression de la base est Brass 2 / Silver 2 / Silver 5 / Silver 5 - deux paliers identiques
+   a la suite, ce qui est en soi le signal. Celle du livre est reguliere.
+
+2. RULES-T0069_CHAOS DECLARE DEUX FOIS dans BOOK_RULESBOOK.Xml, sur deux lignes consecutives, avec
+   deux libelles differents : "Hatred (Chaos)" et "Hatred (Followers of Chaos)".
+   Le corpus tranche pour "Hatred (Chaos)" (Archives III, une occurrence) : "Followers of Chaos"
+   n'apparait jamais seul, seulement dans "Hatred (Manannites or Followers of Chaos)" de Sea of
+   Claws, qui a deja sa propre declaration combinee RULES-T0069_MANANN/RULES-T0069_CHAOS.
+   -> garder "Hatred (Chaos)", supprimer la seconde declaration.
+
+3. ARCH3-ARMO_17 s'appelle "Soft Kit", comme ARCH3-ARMO_16. Le livre l'intitule
+   "Reinforced Soft Kit" (2GC, enc 1, 1 PA, qualites Partial et Reinforced). Deux armures
+   homonymes a l'ecran.
+
+4. ESPACE PARASITE DANS UNE VALEUR, et celui-la n'est pas cosmetique :
+   ARCH3-ARMO_19 porte <Quality>"ARMOB_08 "</Quality>.
+   CompareRechercheValeur ne faisant PAS de Trim, la qualite risque de ne jamais etre resolue pour
+   cette armure. A TESTER dans WinLivre. C'est le premier espace parasite trouve dans une VALEUR -
+   l'audit du 25/08 ne portait que sur les libelles. Une passe sur les valeurs serait a faire.
+
+5. LE TALENT "Animal Assistant" MANQUE (Archives III p.81, "New Talent", Max 1).
+   Le livre precise lui-meme qu'il est distinct de son equivalent de Winds : "This Talent is
+   specifically for Power Familiar (Animal) Characters. For the Power Familiar (Homunculus)
+   version, see the Winds of Magic sourcebook, page 186." La base n'a que WINDS-T0177
+   "Magical Assistant".
+   HORS PERIMETRE en revanche, les nouveaux Creature Traits (Animal Telepathy, Messenger, Sensory
+   Sharing, Invisibility, Companion Traits) : la base ne modelise pas les traits de creature en
+   general - Bestial, Skittish, Flight, Armour, Bite sont tous absents - et les familiers y sont
+   des ethnies. Seul Animal Assistant est concerne, parce que le livre le classe comme TALENT.
+
+6. QUATRE LIBELLES Hatred EN MINUSCULES : "Hatred (monsters)", "Hatred (undead)",
+   "Hatred (greenskins)", "Hatred (sigmarites)". Les livres ecrivent Greenskins 7 fois et Undead
+   2 fois avec majuscule, jamais en minuscule. Les deux autres ne sont pas attestes, mais toute la
+   famille prend la majuscule.
+
+7. La carriere s'appelle "Priest of Rhya" dans la base, "Priestess of Rhya" dans le livre - dont
+   tous les niveaux sont au feminin (Initiate, Priestess, High Priestess, Green Watcher).
+
+[26/08/2026] Controle global apres la revue d'Archives III, sur les seize livres : aucun doublon de
+declaration de talent ou de competence dans toute la base, aucune reference orpheline.
+
+[FAIT 26/08/2026] PASSE SUR LES ESPACES PARASITES DANS LES VALEURS.
+Resultat principal, negatif et rassurant : AUCUN champ de reference n'en porte, sur les 17 fichiers
+(Quality, Type, Location, Talent, Skill, Career, Specie, Rule, Attribut, Ethnic, Class, et les
+scalaires Price, Encumbrance, ArmorPoint, Availability, Level, TypSpell, Range, Duration, Target,
+PDF). Le <Quality>"ARMOB_08 " d'Archives III etait le seul de toute la base.
+Quatre vrais defauts corriges : WINDS-COLOR_196 "Pit of Tarnus " et WINDS-COLOR_251
+"Withering Heat " (libelles de SORT - l'audit du 25/08 ne parcourait que Talent et Skill),
+RULES-T0037 <Test> " Stealth (Urban)", et WINDS-T0176_* <Max> " 1". Plus 40 espaces retires en
+tete ou en queue de prose anglaise (cosmetique).
+A NE JAMAIS "CORRIGER" : RULES-MESS_046 "Missing Books to open that character : ",
+RULES-LAB_038 " of quality" et RULES-LAB_084 "Select " sont des FRAGMENTS DE CONCATENATION, leur
+espace fait partie du texte.
+RESTE, gele avec le francais : 172 Description et 13 Test du fichier francais portent un espace en
+trop. La liste se regenere en une commande le jour ou le francais sera degele.
+Constat d'origine : L'audit du 25/08 ne couvrait que les <Description> ;
+c'est un <Quality> qui portait l'espace de trop cette fois, et comme CompareRechercheValeur ne
+fait pas de Trim, ce genre d'espace peut casser une resolution en silence. A passer sur tous les
+champs de reference (Quality, Type, Location, Talent, Skill, Career, Specie...).
+
+
+[TOUT FAIT LE 26/08/2026] REVUE DE LORDS OF NAGGAROTH : deux manques majeurs combles, six defauts
+corriges, la question tranchee (carriere de Bete hors perimetre, voir plus bas).
+Conforme par ailleurs : ethnie Dark Elves exacte, 4 carrieres conformes (hors les deux points
+ci-dessous), 10 armes aux bons noms, degats et qualites, talent Power of Darkness present.
+
+MANQUE 1 - LE CHAPITRE MAGIE ENTIER, 15 sorts et miracles, alors que les talents d'acces sont deja
+en base (Arcane Magic (Khainite Sorcery), Channelling (Khainite Sorcery)...).
+   Lore of Dark Magic (7)        : Chillwind, Doombolt, Word of Pain, Bladewind, Soul Stealer,
+                                   Black Horror, Dominion
+   Lore of Khainite Sorcery (8)  : Bloody Hand, Blessing of Murder, Hand of Khaine, Cry of War,
+                                   Sting of the Scorpion, Life in Death, Visage of the Manticore,
+                                   Maker of Widows
+   Consequence : une Sorceress of Ghrond ou un Disciple of Khaine peut prendre le talent mais n'a
+   aucun sort a lancer.
+
+MANQUE 2 - LA TABLE DE TIRAGE DES CARRIERES DARK ELF, 21 entrees. NAGGA-RACE_DELF n'a aucun
+SUBCHAPTER_CAREER, et la correction du chargeur du 25/08 NE PEUT PAS l'aider : les Dark Elves sont
+leur propre race (NAGGA-SPECIE_DELF), il n'existe aucune ethnie soeur dont heriter. Un joueur elfe
+noir n'a aujourd'hui aucun metier tirable.
+   Table du livre (avec ses deux erreurs, arbitrees selon la regle de CONTEXT.md) :
+     Sorceress of Ghrond 01-02 | Duelist 03-07 | Spy 08-11 | Hunter 12-13 | Scout 14-15
+     Beastmaster 16-24 | Bounty Hunter 25-30 | Black Ark Corsair 31-40 | Seaman 41-42
+     Smuggler 43-45 | Disciple of Khaine 46-50 | Fence 51-56 | Outlaw 57-62
+     Racketeer 63-67 (le livre ecrit 62-67, or 62 est deja a Outlaw)
+     Cavalryman 68-73 | Guard 74-78 (le livre ecrit 75-78, le 74 n'etait attribue a personne ;
+     la regle donne l'orphelin au voisin qui en a le moins, soit Guard avec quatre contre six)
+     Knight 79-82 | Pit Fighter 83-86 | Protagonist 87-89 | Soldier 90-100
+   Ainsi corrigee la table est continue de 01 a 100.
+
+DEFAUTS
+   3. Lore (Demonology) -> Lore (Daemonology). Les livres ecrivent Daemonology 40 fois,
+      Demonology jamais.
+   4. Disciple of Khaine niveau 2 : TIERS_SILVER 1 -> le livre dit "Silver 2".
+   5. Beastmaster niveau 3 : CINQ talents la ou tous les autres niveaux en ont quatre. Le livre
+      ecrit "Crack the Whip or Rover", un choix saisi comme deux talents distincts.
+      -> passer en separateur multi, RULES-T0024/RULES-T0105.
+   6. Encombrement 0 au lieu de 1 sur trois armes : Black Ark Sabre, Lakelui, Ghlaith.
+   7. Sea Dragon Cloak : allonge WEAPR_CLOSE ("Very short") -> le livre dit Average, WEAPR_MID.
+   8. Fighting Spines : allonge WEAPR_CLOSE -> le livre dit Short, WEAPR_SHORT.
+      Et prix "1CO 2/6" -> le livre dit 5gc. Le format lui-meme detonne, les autres armes du livre
+      s'ecrivent "2CO/-", "10CO", "14CO".
+
+QUESTION - LA CARRIERE DE BETE : REPONDUE LE 26/08/2026, ELLE EST HORS PERIMETRE.
+Les betes n'ont PAS de caracteristiques au sens d'une ethnie. Le livre intitule la section
+"Henchman career: Beastmaster trained" et sa ligne de caracteristiques porte "Base - Base Base
+Silver Bronze - Gold - -", des marqueurs du systeme des HENCHMEN et non un profil 2d10+X. Le texte
+precise : "a generic career using the Henchman rules intended to be applied to tamed monsters and
+beasts" - un gabarit a plaquer sur la creature apprivoisee, dont les vraies caracteristiques
+viennent du bestiaire.
+Ce n'est donc ni une ethnie (aucun profil) ni une carriere de joueur (aucun point d'avance). C'est
+une TROISIEME CATEGORIE que la base ne modelise nulle part - zero occurrence de "Henchman" sur les
+dix-sept fichiers. Les Henchmen sont definis au Rulebook p.309, chapitre Hirelings : des PNJ
+engages qui progressent sur une part de l'experience d'un joueur. La saisir demanderait
+d'introduire tout ce systeme. HORS PERIMETRE sauf decision contraire.

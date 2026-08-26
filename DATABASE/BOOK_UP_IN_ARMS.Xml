@@ -3411,8 +3411,7 @@ When this weapon is used to oppose an incoming attack, it suffers a —1 SL pena
 <Description language="ENGLISH">"Slash"</Description>
 <Explanation language="ENGLISH">"Slash weapons concentrate their cutting power in such a way as to open up gaping wounds.
 If you cause Critical Damage with the weapon, the target takes a Bleeding Condition in addition to any other effects of the critical hit.
-You may spend X Advantage to have your opponent suffer 1 additional BZeeding Condition.
-"</Explanation>
+You may spend X Advantage to have your opponent suffer 1 additional BZeeding Condition."</Explanation>
 <Short language="ENGLISH">"Critical add bleed"</Short>
 <Modifier>"+"</Modifier>
 </BonusMalus>
@@ -3424,8 +3423,7 @@ Point Blank : The shot targets a single individual.
 Add (Rating) to the weapon’s Damage.
 Short Range to Long Range: The shot targets a single individual, and the next (Rating) closest visible creatures.
 No two targets may be more than (Rating) yards apart.
-Extreme Range: As for Short to Long Range, but reduce the weapon’s damage by (Rating) as well.
-"</Explanation>
+Extreme Range: As for Short to Long Range, but reduce the weapon’s damage by (Rating) as well."</Explanation>
 <Short language="ENGLISH">"Can strike several targets"</Short>
 <Modifier>"+"</Modifier>
 </BonusMalus>
@@ -3480,7 +3478,7 @@ This Flaw is the Infected Creature Trait (WFRP, page 340) applied to a weapon, a
 </Sort>
 <Sort id="UPINA-MIRAC_MYRMIDIA_10">
 <Description language="ENGLISH">"Know Your Enemy"</Description>
-<Explanation language="ENGLISH">"You call on Myrmidia to inform you of a nearby enemy”s strengths and weaknesses. The GM should allow you to check the profile, traits, skills and talents of the target. "</Explanation>
+<Explanation language="ENGLISH">"You call on Myrmidia to inform you of a nearby enemy”s strengths and weaknesses. The GM should allow you to check the profile, traits, skills and talents of the target."</Explanation>
 <Target>"1"</Target>
 <Duration>"Instant"</Duration>
 <Range>"Willpower Yards"</Range>

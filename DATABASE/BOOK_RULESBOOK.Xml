@@ -753,8 +753,7 @@ This Skill is generally opposed to your target’s Perception Skill; a Success m
 You can also use Escamotage to “help“ your Betting Skill when playing an appropriate game of chance.
 Before each Round (or equivalent, depending on the game in question), you can attempt an Escamotage Test (which will be opposed if others are suspicious).
 On a success, you may reverse your Betting Test for the Round if it results in a success.
-Escamotage and combat rarely mix, although inventive Players may be able to create a spectacular diversion with the GM’s approval, perhaps even gaining an Advantage by making a dagger appear out of nowhere, surprising a superstitious enemy.
-"</Explanation>
+Escamotage and combat rarely mix, although inventive Players may be able to create a spectacular diversion with the GM’s approval, perhaps even gaining an Advantage by making a dagger appear out of nowhere, surprising a superstitious enemy."</Explanation>
 </Skill>
 <Skill id="RULES-COMPESQU">
 <Attribut>"RULES-ATTR_Ag"</Attribut>
@@ -1543,7 +1542,7 @@ As all sailboats are pretty much the same to steer, owning one Specialization ma
 <Description language="ENGLISH">"Lore (Chemistry)"</Description>
 </Skill>
 <Skill id="RULES-COMPSAVOIR_DEMO">
-<Description language="ENGLISH">"Lore (Demonology)"</Description>
+<Description language="ENGLISH">"Lore (Daemonology)"</Description>
 </Skill>
 <Skill id="RULES-COMPSAVOIR_DRAG">
 <Description language="ENGLISH">"Lore (Dragons)"</Description>
@@ -2172,7 +2171,7 @@ When using Stealth (Urban), you may reverse the roll of any failed Test if it re
 <Skill>""</Skill>
 <Max>"(BATTR_I)"</Max>
 <PDF>"COMPDISC_URBAN"</PDF>
-<Test language="ENGLISH">" Stealth (Urban)"</Test>
+<Test language="ENGLISH">"Stealth (Urban)"</Test>
 </Talent>
 <Talent id="RULES-T0023">
 <Attribut>""</Attribut>
@@ -4193,6 +4192,9 @@ See page 190 for Fear rules"</Explanation>
 <Talent id="RULES-T0013_TOUN">
 <Description language="ENGLISH">"Strider (Tundra)"</Description>
 </Talent>
+<Talent id="RULES-T0024/RULES-T0105">
+<Description language="ENGLISH">"Crack the Whip or Rover"</Description>
+</Talent>
 <Talent id="RULES-T0025/RULES-T0159">
 <Description language="ENGLISH">"Stout-hearted or Very Resilient"</Description>
 </Talent>
@@ -4208,11 +4210,8 @@ See page 190 for Fear rules"</Explanation>
 <Talent id="RULES-T0069_CHAOS">
 <Description language="ENGLISH">"Hatred (Chaos)"</Description>
 </Talent>
-<Talent id="RULES-T0069_CHAOS">
-<Description language="ENGLISH">"Hatred (Followers of Chaos)"</Description>
-</Talent>
 <Talent id="RULES-T0069_DWARF">
-<Description language="ENGLISH">"Hatred (Dwarves)"</Description>
+<Description language="ENGLISH">"Hatred (Dwarfs)"</Description>
 </Talent>
 <Talent id="RULES-T0069_HBETE">
 <Description language="ENGLISH">"Hatred (Beastmen)"</Description>
@@ -4230,19 +4229,19 @@ See page 190 for Fear rules"</Explanation>
 <Description language="ENGLISH">"Hatred (Manannites or Followers of Chaos)"</Description>
 </Talent>
 <Talent id="RULES-T0069_MONSTR">
-<Description language="ENGLISH">"Hatred (monsters)"</Description>
+<Description language="ENGLISH">"Hatred (Monsters)"</Description>
 </Talent>
 <Talent id="RULES-T0069_MVIVAN">
-<Description language="ENGLISH">"Hatred (undead)"</Description>
+<Description language="ENGLISH">"Hatred (Undead)"</Description>
 </Talent>
 <Talent id="RULES-T0069_PVERTE">
-<Description language="ENGLISH">"Hatred (greenskins)"</Description>
+<Description language="ENGLISH">"Hatred (Greenskins)"</Description>
 </Talent>
 <Talent id="RULES-T0069_SDISSI">
 <Description language="ENGLISH">"Hatred (Dissident Wizards)"</Description>
 </Talent>
 <Talent id="RULES-T0069_SIGMAR">
-<Description language="ENGLISH">"Hatred (sigmarites)"</Description>
+<Description language="ENGLISH">"Hatred (Sigmarites)"</Description>
 </Talent>
 <Talent id="RULES-T0069_STROMFELS">
 <Description language="ENGLISH">"Hatred (Followers of Stromfels)"</Description>
@@ -4297,6 +4296,14 @@ See page 190 for Fear rules"</Explanation>
 </Talent>
 <Talent id="RULES-T0088_FEU">
 <Description language="ENGLISH">"Arcane Magic (Fire)"</Description>
+</Talent>
+<Talent id="RULES-T0088_DARK">
+<Description language="ENGLISH">"Arcane Magic (Dark Magic)"</Description>
+  <!-- Lords of Naggaroth, "THE LORE OF DARK MAGIC". Specialisation creee le 26/08/2026 pour
+       rattacher les sept sorts de ce domaine, qui manquaient entierement. Le libelle est laisse
+       en anglais dans le fichier francais, comme le fait deja RULES-T0088_KHAINE juste apres :
+       les libelles francais sont geles, et l'identifiant doit exister des deux cotes pour que
+       les deux fichiers Rulebook declarent le meme jeu d'identifiants. -->
 </Talent>
 <Talent id="RULES-T0088_KHAINE">
 <Description language="ENGLISH">"Arcane Magic (Khainite Sorcery)"</Description>
@@ -13209,7 +13216,7 @@ See page 190 for Fear rules"</Explanation>
 <Skill name="RULES-COMPSUBOR">"3"</Skill>
   <!-- Bribery -->
 <Skill name="RULES-COMPSAVOIR_DEMO">"4"</Skill>
-  <!-- Lore (Demonology) -->
+  <!-- Lore (Daemonology) -->
 <Skill name="RULES-COMPSAVOIR_MAGIE">"4"</Skill>
   <!-- Lore (Magic) -->
 </SUBCHAPTER_SKILL>
@@ -14738,7 +14745,7 @@ You can end it whenever you want."</Explanation>
 <Description language="ENGLISH">"Shield"</Description>
 <Explanation language="ENGLISH">"If you use this weapon to oppose an attack, you are considered to have AP Rating in all parts of your body.
 If your weapon has a Protective Index of 2 or more (thus: Protective 2 or Protective 3), you can also oppose projectiles fired in your Line of Sight."</Explanation>
-<Short language="ENGLISH">"  +Protection index (if >=2 also projectile)"</Short>
+<Short language="ENGLISH">"+Protection index (if >=2 also projectile)"</Short>
 <Modifier>"+"</Modifier>
 </BonusMalus>
 <BonusMalus id="RULES-WEAPB19">
@@ -15068,7 +15075,7 @@ If your opponent has a weapon with the Impaler Perk and rolls a Critical, your a
 </Sort>
 <Sort id="RULES-BENED_007">
 <Description language="ENGLISH">"Blessing of Righteousness"</Description>
-<Explanation language="ENGLISH">" Your target’s weapon is considered Magic."</Explanation>
+<Explanation language="ENGLISH">"Your target’s weapon is considered Magic."</Explanation>
 <Target>"1"</Target>
 <Duration>"6 Rounds"</Duration>
 <Range>"6m"</Range>
@@ -15318,7 +15325,7 @@ If your opponent has a weapon with the Impaler Perk and rolls a Critical, your a
 </Sort>
 <Sort id="RULES-MIRAC_RANALD_03">
 <Description language="ENGLISH">"May Luck Remain"</Description>
-<Explanation language="ENGLISH">" Crossing your fingers, you ask Ranald’s riddle and ask what exactly is luck? Gain +1 Luck Point. For each +2 DR, you can gain an additional +1 Luck Point, which can go beyond the normal maximum. You can no longer invoke this Miracle until you have reached 0 Luck Points."</Explanation>
+<Explanation language="ENGLISH">"Crossing your fingers, you ask Ranald’s riddle and ask what exactly is luck? Gain +1 Luck Point. For each +2 DR, you can gain an additional +1 Luck Point, which can go beyond the normal maximum. You can no longer invoke this Miracle until you have reached 0 Luck Points."</Explanation>
 <Target>"You"</Target>
 <Duration>"Special"</Duration>
 <Range>"Vous"</Range>
@@ -16138,7 +16145,7 @@ If your opponent has a weapon with the Impaler Perk and rolls a Critical, your a
 </Sort>
 <Sort id="RULES-ARCAN_18">
 <Description language="ENGLISH">"Protection"</Description>
-<Explanation language="ENGLISH">" You envelop yourself in protective magic, gain the Protection (9+) creature trait (see page 341)."</Explanation>
+<Explanation language="ENGLISH">"You envelop yourself in protective magic, gain the Protection (9+) creature trait (see page 341)."</Explanation>
 <Target>"You"</Target>
 <Duration>"(BATTR_WP) Rounds"</Duration>
 <Range>"You"</Range>
@@ -16158,7 +16165,7 @@ If your opponent has a weapon with the Impaler Perk and rolls a Critical, your a
 </Sort>
 <Sort id="RULES-ARCAN_20">
 <Description language="ENGLISH">"Breath"</Description>
-<Explanation language="ENGLISH">" You immediately make a Breath attack, as if you had spent 2 Boons to activate the Breath creature trait (see page 341). Blast is a magic Projectile whose Damage is equal to your Endurance Bonus. The GM determines which type of Breath attack best matches your Arcane Magic Talent."</Explanation>
+<Explanation language="ENGLISH">"You immediately make a Breath attack, as if you had spent 2 Boons to activate the Breath creature trait (see page 341). Blast is a magic Projectile whose Damage is equal to your Endurance Bonus. The GM determines which type of Breath attack best matches your Arcane Magic Talent."</Explanation>
 <Target>"Special"</Target>
 <Duration>"Instant"</Duration>
 <Range>"1 meter"</Range>
@@ -16178,7 +16185,7 @@ If your opponent has a weapon with the Impaler Perk and rolls a Critical, your a
 </Sort>
 <Sort id="RULES-ARCAN_22">
 <Description language="ENGLISH">"Terrifying"</Description>
-<Explanation language="ENGLISH">" You gain Creature Trait Zzrreur 1 (see page 343)."</Explanation>
+<Explanation language="ENGLISH">"You gain Creature Trait Zzrreur 1 (see page 343)."</Explanation>
 <Target>"You"</Target>
 <Duration>"(BATTR_WP) Rounds"</Duration>
 <Range>"You"</Range>
@@ -16358,7 +16365,7 @@ If your opponent has a weapon with the Impaler Perk and rolls a Critical, your a
 </Sort>
 <Sort id="RULES-COLOR_17">
 <Description language="ENGLISH">"Cauterize"</Description>
-<Explanation language="ENGLISH">" Focus Agshy through your hands, laying them on an ally’s wounds. Immediately heal 1d10 Wounds and remove all Bleeding States. Additionally, Wounds will not become infected. Targets without the Arcane Magic (Fire) Talent must pass an Intermediate (+0) Calm Test or scream in pain. If it fails by -6 DR or more, the target gains the Unconscious State and is marked for life, waking up 1410 hours later."</Explanation>
+<Explanation language="ENGLISH">"Focus Agshy through your hands, laying them on an ally’s wounds. Immediately heal 1d10 Wounds and remove all Bleeding States. Additionally, Wounds will not become infected. Targets without the Arcane Magic (Fire) Talent must pass an Intermediate (+0) Calm Test or scream in pain. If it fails by -6 DR or more, the target gains the Unconscious State and is marked for life, waking up 1410 hours later."</Explanation>
 <Target>"1"</Target>
 <Duration>"Instant"</Duration>
 <Range>"Contact"</Range>
@@ -16618,7 +16625,7 @@ If your opponent has a weapon with the Impaler Perk and rolls a Critical, your a
 </Sort>
 <Sort id="RULES-COLOR_43">
 <Description language="ENGLISH">"The Scythe of SAyish"</Description>
-<Explanation language="ENGLISH">" You summon a magic scythe, which can be carried in combat, using the Melee Skill (Polearm). It acts as a mundane scythe with a Damage value equal to your Will Power Bonus +3. Enemies with the Undead Creature Trait receive no Advantage when Engaged in combat with you."</Explanation>
+<Explanation language="ENGLISH">"You summon a magic scythe, which can be carried in combat, using the Melee Skill (Polearm). It acts as a mundane scythe with a Damage value equal to your Will Power Bonus +3. Enemies with the Undead Creature Trait receive no Advantage when Engaged in combat with you."</Explanation>
 <Target>"You"</Target>
 <Duration>"(BATTR_WP) Rounds"</Duration>
 <Range>"You"</Range>
@@ -16738,7 +16745,7 @@ If your opponent has a weapon with the Impaler Perk and rolls a Critical, your a
 </Sort>
 <Sort id="RULES-COLOR_55">
 <Description language="ENGLISH">"Loss of memory"</Description>
-<Explanation language="ENGLISH">" You summon delicate strands of U/eu into your target’s mind, erasing all memories of you for the duration of the spell. Once the Spell is complete, the target must pass an Accessible (+20) Intelligence Test, or the memory loss becomes permanent until dispelled."</Explanation>
+<Explanation language="ENGLISH">"You summon delicate strands of U/eu into your target’s mind, erasing all memories of you for the duration of the spell. Once the Spell is complete, the target must pass an Accessible (+20) Intelligence Test, or the memory loss becomes permanent until dispelled."</Explanation>
 <Target>"1"</Target>
 <Duration>"(ATTR_WP) minutes"</Duration>
 <Range>"1 meter"</Range>

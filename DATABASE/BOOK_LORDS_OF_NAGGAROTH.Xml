@@ -99,6 +99,57 @@ At the cost of one corruption point the Sorceress may add doublle their Willpowe
   <!-- Read/Write -->
 </SUBCHAPTER_TALENT>
 <SUBCHAPTER_CAREER>
+  <!-- Table "Dark Elf Random Class and Career table", p.4 du livre. Saisie le 26/08/2026 :
+       elle manquait entierement, et l'ethnie n'ayant aucune soeur dans sa race (les Dark
+       Elves sont leur propre race NAGGA-SPECIE_DELF), le repli du chargeur ne pouvait pas
+       la suppleer - un joueur elfe noir n'avait aucun metier tirable.
+       DEUX ERREURS DU LIVRE ARBITREES ICI, selon la regle de CONTEXT.md.
+       Le livre ecrit Racketeer 62-67 alors que 62 est deja donne a Outlaw (57-62) : lu 63-67.
+       Le livre ecrit Guard 75-78, laissant le 74 sans attributaire entre Cavalryman 68-73 et
+       lui ; la valeur orpheline va au voisin qui en a le moins, soit Guard avec quatre contre
+       six, d'ou Guard 74-78. Ainsi corrigee la table est continue de 01 a 100.
+       Le livre ecrit "Duelist" avec un seul l ; le Rulebook declare "Duellist", 13 occurrences
+       dans les livres contre 2 - on pointe donc RULES-WORK18. -->
+<Career name="NAGGA-WORK120">"01-02"</Career>
+  <!-- Sorceress of Ghrond -->
+<Career name="RULES-WORK18">"03-07"</Career>
+  <!-- Duellist -->
+<Career name="RULES-WORK24">"08-11"</Career>
+  <!-- Spy -->
+<Career name="RULES-WORK10">"12-13"</Career>
+  <!-- Hunter -->
+<Career name="RULES-WORK19">"14-15"</Career>
+  <!-- Scout -->
+<Career name="NAGGA-WORK121">"16-24"</Career>
+  <!-- Beastmaster -->
+<Career name="RULES-WORK11">"25-30"</Career>
+  <!-- Bounty Hunter -->
+<Career name="NAGGA-WORK119">"31-40"</Career>
+  <!-- Black Ark Corsair -->
+<Career name="RULES-WORK35">"41-42"</Career>
+  <!-- Seaman -->
+<Career name="RULES-WORK16">"43-45"</Career>
+  <!-- Smuggler -->
+<Career name="NAGGA-WORK122">"46-50"</Career>
+  <!-- Disciple of Khaine -->
+<Career name="RULES-WORK53">"51-56"</Career>
+  <!-- Fence -->
+<Career name="RULES-WORK30">"57-62"</Career>
+  <!-- Outlaw -->
+<Career name="RULES-WORK51">"63-67"</Career>
+  <!-- Racketeer -->
+<Career name="RULES-WORK08">"68-73"</Career>
+  <!-- Cavalryman -->
+<Career name="RULES-WORK27">"74-78"</Career>
+  <!-- Guard -->
+<Career name="RULES-WORK12">"79-82"</Career>
+  <!-- Knight -->
+<Career name="RULES-WORK28">"83-86"</Career>
+  <!-- Pit Fighter -->
+<Career name="RULES-WORK61">"87-89"</Career>
+  <!-- Protagonist -->
+<Career name="RULES-WORK57">"90-100"</Career>
+  <!-- Soldier -->
 </SUBCHAPTER_CAREER>
 </Specie>
 </DATA_SPECIE>
@@ -292,7 +343,7 @@ At the cost of one corruption point the Sorceress may add doublle their Willpowe
 <Skill name="RULES-COMPINTIM">"2"</Skill>
   <!-- Intimidate -->
 <Skill name="RULES-COMPSAVOIR_DEMO">"2"</Skill>
-  <!-- Lore (Demonology) -->
+  <!-- Lore (Daemonology) -->
 <Skill name="RULES-COMPSIGNES_CONVENTSORC">"2"</Skill>
   <!-- Secret Signs (Convent of Sorceresses) -->
 <Skill name="RULES-COMPEVAL">"3"</Skill>
@@ -460,10 +511,10 @@ At the cost of one corruption point the Sorceress may add doublle their Willpowe
   <!-- Fearless (Monsters) -->
 <Talent name="RULES-T0131">"3"</Talent>
   <!-- Robust -->
-<Talent name="RULES-T0024">"3"</Talent>
-  <!-- Crack the Whip -->
-<Talent name="RULES-T0105">"3"</Talent>
-  <!-- Rover -->
+<Talent name="RULES-T0024/RULES-T0105">"3"</Talent>
+  <!-- Crack the Whip or Rover : le livre p.343 ecrit un CHOIX, la base l'avait saisi
+       comme deux talents distincts, d'ou cinq talents a ce niveau la ou tous les autres
+       niveaux du livre en ont quatre. Corrige le 26/08/2026. -->
 <Talent name="RULES-T0151">"3"</Talent>
   <!-- Sure Shot -->
 <Talent name="RULES-T0049">"4"</Talent>
@@ -504,7 +555,7 @@ At the cost of one corruption point the Sorceress may add doublle their Willpowe
 </Level>
 <Level id="2">
 <Description language="ENGLISH">"Disciple of Khaine"</Description>
-<Salary>"TIERS_SILVER 1"</Salary>
+<Salary>"TIERS_SILVER 2"</Salary>
 </Level>
 <Level id="3">
 <Description language="ENGLISH">"Anointed"</Description>
@@ -619,6 +670,193 @@ At the cost of one corruption point the Sorceress may add doublle their Willpowe
 </SUBCHAPTER_ITEM>
 </Career>
 </DATA_CAREER>
+<DATA_SPELL>
+  <!-- Les quinze sorts et miracles du livre, saisis le 26/08/2026 : ils manquaient
+       ENTIEREMENT alors que les talents pour y acceder etaient deja en base, si bien
+       qu'une Sorceress of Ghrond ou un Disciple of Khaine pouvait prendre le talent sans
+       avoir le moindre sort a lancer.
+       Sept relevent de THE LORE OF DARK MAGIC (RULES-T0088_DARK, specialisation creee pour
+       l'occasion) et huit de THE LORE OF KHAINITE SORCERY (RULES-T0088_KHAINE, qui existait
+       deja et que les carrieres utilisent).
+       Les deux lores sont arcaniques - les carrieres prennent Channelling et Arcane Magic,
+       pas Bless ni Invoke - d'ou TypSpell "Domain Magic" et non "Miracle", malgre le
+       vocabulaire religieux du culte de Khaine.
+       La ligne "Ingredients:" propre a chaque sort de Khaine est reportee en tete de
+       l'Explanation, le modele n'ayant pas de champ dedie. -->
+<Sort id="NAGGA-COLOR_299">
+<Description language="ENGLISH">"Chillwind"</Description>
+<Explanation language="ENGLISH">"Calling upon the coldness of Nagaelythe of the Utterdark, the Dark Elf unleashes a freezing wind against her enemies.
+Unleashing a wind of freezing cold in a cone before them, Chillwind is a magic missile causing +9 damage and hits targets as if the caster had the Breath (Cold) creature trait."</Explanation>
+<Target>"AoE (Special)"</Target>
+<Duration>"Instant"</Duration>
+<Range>"Half Willpower Yards"</Range>
+<Talent>"RULES-T0088_DARK"</Talent>
+<Level>"6"</Level>
+<TypSpell>"Domain Magic"</TypSpell>
+</Sort>
+<Sort id="NAGGA-COLOR_300">
+<Description language="ENGLISH">"Doombolt"</Description>
+<Explanation language="ENGLISH">"As the invocation is spoken, the other-worldly beast known as Kharatidon unleashes a bolt of pure darkness upon the Dark Elves adversaries.
+Doombolt is a magic missile with +10 damage that targets everyone in the area of effect."</Explanation>
+<Target>"AoE (Willpower Bonus yards)"</Target>
+<Duration>"Instant"</Duration>
+<Range>"Willpower yards"</Range>
+<Talent>"RULES-T0088_DARK"</Talent>
+<Level>"8"</Level>
+<TypSpell>"Domain Magic"</TypSpell>
+</Sort>
+<Sort id="NAGGA-COLOR_301">
+<Description language="ENGLISH">"Word of Pain"</Description>
+<Explanation language="ENGLISH">"Upon uttering the true name of the Serpent Lord, an unnatural and unbearable agony suffuses the body of the casters hated foes.
+Upon uttering the incantation you inflict a number of Stunned conditions equal to your Willpower Bonus on your target and everyone within Willpower Bonus yards of your initial target."</Explanation>
+<Target>"AoE (Willpower Bonus yards)"</Target>
+<Duration>"Willpower Bonus Rounds"</Duration>
+<Range>"Willpower Yards"</Range>
+<Talent>"RULES-T0088_DARK"</Talent>
+<Level>"7"</Level>
+<TypSpell>"Domain Magic"</TypSpell>
+</Sort>
+<Sort id="NAGGA-COLOR_302">
+<Description language="ENGLISH">"Bladewind"</Description>
+<Explanation language="ENGLISH">"With a plea to the Mistress of a Thousand Cuts, the Dark Elf sorceress conjures up a storm of magical swords with which to assail the enemy.
+Bladewind is a magical missile that targets everyone in the area of effect. Causing Willpower Bonus close combat attacks with +12 damage and inflicting +1 Bleeding condition for every 2 wounds suffered. These attacks can be defended against with an Opposed Melee/Language (Magick) test."</Explanation>
+<Target>"AoE (Willpower Bonus yards)"</Target>
+<Duration>"Willpower Bonus Rounds"</Duration>
+<Range>"Willpower Yards"</Range>
+<Talent>"RULES-T0088_DARK"</Talent>
+<Level>"10"</Level>
+<TypSpell>"Domain Magic"</TypSpell>
+</Sort>
+<Sort id="NAGGA-COLOR_303">
+<Description language="ENGLISH">"Soul Stealer"</Description>
+<Explanation language="ENGLISH">"The Daemon-crawler Anchan-Rogar reaches out from his domain and plucks the souls from the enemy.
+Soul Stealer is a magical missile targeting everyone in the area of effect. It causes +10 damage, ignoring Armour Points, and +1 Fatigued condition for every 2 wounds suffered and for every wound inflicted the caster gains up to Willpower Bonus additional wounds. These additional wounds may not exceed the casters starting wounds + Toughness bonus and any wounds gained beyond this are lost."</Explanation>
+<Target>"AoE (Willpower Bonus yards)"</Target>
+<Duration>"Instant"</Duration>
+<Range>"Willpower Bonus yards"</Range>
+<Talent>"RULES-T0088_DARK"</Talent>
+<Level>"12"</Level>
+<TypSpell>"Domain Magic"</TypSpell>
+</Sort>
+<Sort id="NAGGA-COLOR_304">
+<Description language="ENGLISH">"Black Horror"</Description>
+<Explanation language="ENGLISH">"The sorceress conjures a whirling vortex of devastating magical energy that drags her victims into other infernal regions.
+Black Horror is a magical missile targeting everyone in the area of effect. Targets within the area of effect must succeed in an Opposed Athletics/Language (Magick) test or suffer +15 damage, ignoring Armour Points and Toughness Bonus. Targets within the area of effect must make an immediate Cool test against Terror (Willpower Bonus rating)."</Explanation>
+<Target>"AoE (Willpower Bonus x2 yards)"</Target>
+<Duration>"Instant"</Duration>
+<Range>"Willpower Yards"</Range>
+<Talent>"RULES-T0088_DARK"</Talent>
+<Level>"17"</Level>
+<TypSpell>"Domain Magic"</TypSpell>
+</Sort>
+<Sort id="NAGGA-COLOR_305">
+<Description language="ENGLISH">"Dominion"</Description>
+<Explanation language="ENGLISH">"Calling upon Lamehk the Slavemaster of the Third Hell, the sorceress takes control of the foe's thoughts.
+Dominion targets everyone within a chosen area of effect, centered on an initial target (State Trooper, Goblin, Zombie, Wolf, etc). Targets within the area of effect must succeed on an immediate Opposed Cool/Language (Magick) test or fall under the casters control. Controlled targets will perform any orders given by the caster for the duration of the spell."</Explanation>
+<Target>"AoE (Willpower bonus yards)"</Target>
+<Duration>"Willpower Bonus Minutes"</Duration>
+<Range>"Willpower Bonus x2 yards"</Range>
+<Talent>"RULES-T0088_DARK"</Talent>
+<Level>"15"</Level>
+<TypSpell>"Domain Magic"</TypSpell>
+</Sort>
+<Sort id="NAGGA-COLOR_306">
+<Description language="ENGLISH">"Bloody Hand"</Description>
+<Explanation language="ENGLISH">"Ingredients: A murdered man's blood.
+You chant your dark dedications to the Lord of Murder and your hands begin to drip blood, marking you as Khaine's chosen.
+Your hands drip with the blood of the murdered, splashing on your foes in combat. Any that wish to charge you must first succeed on a Cool test or suffer a Broken condition as they stare at the blood in horror. Furthermore, those in combat with you suffer a -10 penalty to Weapon skill and Agility tests as they instinctually try to avoid the terrible ichor."</Explanation>
+<Target>"You"</Target>
+<Duration>"Willpower Bonus Rounds"</Duration>
+<Range>"You"</Range>
+<Talent>"RULES-T0088_KHAINE"</Talent>
+<Level>"2"</Level>
+<TypSpell>"Domain Magic"</TypSpell>
+</Sort>
+<Sort id="NAGGA-COLOR_307">
+<Description language="ENGLISH">"Blessing of Murder"</Description>
+<Explanation language="ENGLISH">"Ingredients: Dagger that has been used to murder.
+The ninety-nine sacred killing strikes are secret ways of killing jealously guarded by Khaines devoted, and with dark dedications chanted to the Lord of Murder this holy knowledge can be passed to those carrying His blessing.
+Invoking the Lord of Murder to bless His agent with one of the ninety-nine sacred killing strikes, you touch the edge of a dagger used in murder to the bare skin of your target, granting them Khaines blessing. For the duration of the spell, the target will gain an additional Resilience point to use only for I Will Not Fail! in tests made to Attack a target. If it is not used within the duration of the spell, the Resilience point is lost."</Explanation>
+<Target>"1"</Target>
+<Duration>"Willpower Bonus hours"</Duration>
+<Range>"Touch"</Range>
+<Talent>"RULES-T0088_KHAINE"</Talent>
+<Level>"3"</Level>
+<TypSpell>"Domain Magic"</TypSpell>
+</Sort>
+<Sort id="NAGGA-COLOR_308">
+<Description language="ENGLISH">"Hand of Khaine"</Description>
+<Explanation language="ENGLISH">"Ingredients: Blood spilled in battle.
+Tracing a complex pattern in the air, Khaines devoted entrances his victim, leaving him vulnerable and open to attack.
+With blood spilled in battle on their fingers, the sorcerer draws a runic pattern in the air sacred to the Bloody Handed God and places the target in a terror induced trance. When successfully cast, the target must succeed on a Difficult Cool (-10) test or suffer an amount of Stunned conditions equal to the SL the target failed with."</Explanation>
+<Target>"1"</Target>
+<Duration>"SL rounds"</Duration>
+<Range>"Willpower Bonus Yards"</Range>
+<Talent>"RULES-T0088_KHAINE"</Talent>
+<Level>"3"</Level>
+<TypSpell>"Domain Magic"</TypSpell>
+</Sort>
+<Sort id="NAGGA-COLOR_309">
+<Description language="ENGLISH">"Cry of War"</Description>
+<Explanation language="ENGLISH">"Ingredients: Edged weapon wielded in anger (is not consumed when casting the spell).
+By screeching one of the seventeen secret names of Khaine, the warrior freezes enemies with horror.
+Screeching one of the seventeen secret names of Khaine as a warcry, you freeze an amount of targets equal to your Willpower Bonus within range of the spell. The targets must succeed on a Hard Cool (-20) test or suffer an amount of Stunned conditions equal to your Willpower Bonus. Targets that succeed on the Cool test suffer 1 Broken condition."</Explanation>
+<Target>"AoE (Special)"</Target>
+<Duration>"Willpower Bonus Rounds"</Duration>
+<Range>"Willpower Bonus yards"</Range>
+<Talent>"RULES-T0088_KHAINE"</Talent>
+<Level>"5"</Level>
+<TypSpell>"Domain Magic"</TypSpell>
+</Sort>
+<Sort id="NAGGA-COLOR_310">
+<Description language="ENGLISH">"Sting of the Scorpion"</Description>
+<Explanation language="ENGLISH">"Ingredients: Distilled Scorpion venom.
+Scorpions are sacred animals to Khaine in His aspect as the Scorpion Prince, invoking His name and imbibing the venom of His children grants His faithful their blessed sting.
+By drinking the venom of a sacred scorpion and praising the name of the Scorpion Prince you invoke the killing power of the scorpion to the blades of Khaines faithful. Your melee weapons, which must be edged (swords, axes, daggers etc), gain the Impale, Damaging and Fast qualities for the duration of the spell. If they already possess one of these qualities they gain the Venom trait in replacement for the duplicate quality."</Explanation>
+<Target>"Willpower Bonus targets"</Target>
+<Duration>"Willpower Bonus x2 Minutes"</Duration>
+<Range>"Touch"</Range>
+<Talent>"RULES-T0088_KHAINE"</Talent>
+<Level>"6"</Level>
+<TypSpell>"Domain Magic"</TypSpell>
+</Sort>
+<Sort id="NAGGA-COLOR_311">
+<Description language="ENGLISH">"Life in Death"</Description>
+<Explanation language="ENGLISH">"Ingredients: Blood of a sacrificial victim to Khaine.
+Not all death is sacred to Khaine, by taking the lifeblood of His sacrifices the God of War can restore His mortal warriors to health, so that they may bring Him more blood and souls to feast upon.
+You bathe the target with the blood of a sacrificial victim to Khaine and beseech his aspect as Ennialos, the God of War to grant life anew to his mortal warriors. The spell restores an amount of wounds equal to the Willpower Bonus of the caster and heals an amount of Critical Wounds equal to half the SL of the Language (Magick) test used to cast the spell."</Explanation>
+<Target>"1"</Target>
+<Duration>"Instant"</Duration>
+<Range>"Touch"</Range>
+<Talent>"RULES-T0088_KHAINE"</Talent>
+<Level>"7"</Level>
+<TypSpell>"Domain Magic"</TypSpell>
+</Sort>
+<Sort id="NAGGA-COLOR_312">
+<Description language="ENGLISH">"Visage of the Manticore"</Description>
+<Explanation language="ENGLISH">"Ingredients: Five strands of Manticore fur.
+Chanting the dread praises of the Lord of Murder, you are filled with the spirit of His favoured child and your foes look upon one of the many faces of death.
+Praising the name of the Lord of Murder He grants you his blessing by infusing you with the vicious and bloodthirsty spirit of the Manticore. You gain the Terror (Willpower Bonus) creature trait from your monstrous visage and the manifest blessing of the Lord of Murder grants your allies Fearless (All) talent within Willpower Bonus yards of you."</Explanation>
+<Target>"AoE (Special)"</Target>
+<Duration>"Willpower Bonus Rounds"</Duration>
+<Range>"Willpower Bonus Yards"</Range>
+<Talent>"RULES-T0088_KHAINE"</Talent>
+<Level>"8"</Level>
+<TypSpell>"Domain Magic"</TypSpell>
+</Sort>
+<Sort id="NAGGA-COLOR_313">
+<Description language="ENGLISH">"Maker of Widows"</Description>
+<Explanation language="ENGLISH">"Ingredients: Sacrificial victim(s).
+The cursed Widowmaker taints the souls of the Druchii and with enough blood and souls sacrificed to Kaela Mensha Khaine, the Bloody Handed God, He can grant a portion of its cursed power upon His worshippers.
+In a great and (un)holy ritual of blood and death you cut out the hearts of sacrificial victims and offer their souls to Kaela Mensha Khaine to grant you and the assembled worshippers a portion of the murderous frenzy bound in the Widowmaker. For each victim used as sacrifice the caster gains a +10 bonus to their Channeling (Khainite Sorcery) test. The first victim sacrificed grants a number of targets equal to your Willpower Bonus x2 Frenzy and Fear (1) for the duration of the spell. For each additional victim sacrificed as part of the casting of the spell, increase the multiplier for the number of affected targets by 1 and the rating of the Fear trait by 1. You can only sacrifice up to your Willpower Bonus in victims to increase the Channeling (Khainite Sorcery) test bonus, number of affected targets, Fear rating and duration, any further sacrifices will give no mechanical advantage but will be pleasing to Khaine."</Explanation>
+<Target>"Special"</Target>
+<Duration>"10 minutes per sacrificed victim"</Duration>
+<Range>"Special"</Range>
+<Talent>"RULES-T0088_KHAINE"</Talent>
+<Level>"10"</Level>
+<TypSpell>"Domain Magic"</TypSpell>
+</Sort>
+</DATA_SPELL>
 <DATA_WEAPON>
 <Weapon id="NAGGA-COMB_BASE_34">
 <Description language="ENGLISH">"Black Ark Sabre"</Description>
@@ -627,7 +865,7 @@ At the cost of one corruption point the Sorceress may add doublle their Willpowe
 <Availability>"DISPO_RARE"</Availability>
 <Reach>"WEAPR_MID"</Reach>
 <Price>"2CO/-"</Price>
-<Encumbrance>"0"</Encumbrance>
+<Encumbrance>"1"</Encumbrance>
 <Quality>"WEAPB10"</Quality>
 <Hand>"1"</Hand>
 <Ammunition>"0"</Ammunition>
@@ -639,7 +877,7 @@ At the cost of one corruption point the Sorceress may add doublle their Willpowe
 <Availability>"DISPO_EXOTIC"</Availability>
 <Reach>"WEAPR_MID"</Reach>
 <Price>"7CO/-"</Price>
-<Encumbrance>"0"</Encumbrance>
+<Encumbrance>"1"</Encumbrance>
 <Quality>"WEAPB21,WEAPB12"</Quality>
 <Hand>"1"</Hand>
 <Ammunition>"0"</Ammunition>
@@ -651,7 +889,7 @@ At the cost of one corruption point the Sorceress may add doublle their Willpowe
 <Availability>"DISPO_EXOTIC"</Availability>
 <Reach>"WEAPR_MID"</Reach>
 <Price>"5CO/-"</Price>
-<Encumbrance>"0"</Encumbrance>
+<Encumbrance>"1"</Encumbrance>
 <Quality>"WEAPB10,WEAPB16"</Quality>
 <Hand>"1"</Hand>
 <Ammunition>"0"</Ammunition>
@@ -661,7 +899,7 @@ At the cost of one corruption point the Sorceress may add doublle their Willpowe
 <Skill>"RULES-COMPCOMB_BASE"</Skill>
 <Damage>"+(BATTR_S)"</Damage>
 <Availability>"DISPO_EXOTIC"</Availability>
-<Reach>"WEAPR_CLOSE"</Reach>
+<Reach>"WEAPR_MID"</Reach>
 <Price>"10CO"</Price>
 <Encumbrance>"2"</Encumbrance>
 <Quality>"WEAPB18 2,WEAPB08,WEAPB09"</Quality>
@@ -673,8 +911,8 @@ At the cost of one corruption point the Sorceress may add doublle their Willpowe
 <Skill>"RULES-COMPCOMB_PARAD"</Skill>
 <Damage>"+(BATTR_S)+2"</Damage>
 <Availability>"DISPO_EXOTIC"</Availability>
-<Reach>"WEAPR_CLOSE"</Reach>
-<Price>"1CO 2/6"</Price>
+<Reach>"WEAPR_SHORT"</Reach>
+<Price>"5CO"</Price>
 <Encumbrance>"3"</Encumbrance>
 <Quality>"WEAPB08,WEAPB11,WEAPB27"</Quality>
 <Hand>"1"</Hand>

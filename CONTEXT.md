@@ -2641,9 +2641,21 @@ Naggaroth** — les deux plus rentables d'après le balayage de couverture. La m
 inventaire du fichier, puis confrontation section par section au TXT du livre, en comparant les
 carrières automatiquement niveau par niveau après résolution des identifiants en libellés.
 
-Les arbitrages laissés ouverts sont dans `A FAIRE.txt` : les champs `<Test>` des 141 spécialisations
-(le livre donne un texte **à paramètre**, donc recopier le générique serait faux — il faut
-substituer), `Hatred (Dwarves)` vs `Dwarfs`, et `Tin Whistle` / `Pennywhistle`.
+**Arbitrages depuis clos (26/08).** `Hatred (Dwarves)` → `Hatred (Dwarfs)`, pour rester uniforme
+avec `Lore (Dwarfs)` — le corpus ne départageait pas, c'est la cohérence interne qui a tranché.
+
+Et surtout : **les champs `<Test>` des 143 spécialisations n'ont finalement rien demandé.**
+Avant d'écrire le mécanisme de substitution, vérification de *où* ce champ est affiché — un seul
+endroit, `wintalent.pas` ligne 116, et cette grille est remplie sous `PTalent.SousTalent = false`,
+donc elle ne liste que les génériques. Les spécialisations vivent dans `TabSpe`, qui n'a que le
+code et le libellé. Mieux : sélectionner une spécialisation bascule l'affichage sur son générique
+(lignes 99-101, via `ValeurSousCompetence`/`ValeurGenerique`), si bien que le joueur lit toujours
+la formule exacte du livre. **La conception d'origine était juste, le point est clos sans une seule
+modification.** Le design du marqueur `*`, validé par Nono, reste consigné dans `A FAIRE.txt` au cas
+où l'on voudrait un jour afficher le test par spécialisation.
+
+Seul arbitrage encore ouvert : `Tin Whistle` / `Pennywhistle` — faut-il deux spécialisations
+distinctes, ou la seule `RULES-COMPMUSIC_PENNYW` comme aujourd'hui ?
 
 ---
 

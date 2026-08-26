@@ -16,6 +16,29 @@
 <Text name="ARCH3-BOOK ARCHIVES OF THE EMPIRE III">"Archives of the Empire III"</Text>
 </Label>
 </DATA_LABEL>
+<DATA_TALENT>
+<Talent id="ARCH3-T0186">
+<Attribut>""</Attribut>
+<Description language="ENGLISH">"Animal Assistant"</Description>
+<Short language="ENGLISH">""</Short>
+<Explanation language="ENGLISH">"This Talent is specifically for Power Familiar (Animal) Characters. For the Power Familiar (Homunculus) version, see the Winds of Magic sourcebook, page 186.
+The Animal Familiar may assist a soul-bonded spellcaster with any Channelling or Language (Magick) Tests they make. The familiar can also assist Outdoor Survival Tests, and Perception Tests that are magical in nature.
+Each assistant provides the normal +10 bonus (WFRP page 155) whether it knows the Skill or not."</Explanation>
+<Skill>""</Skill>
+<Max>"1"</Max>
+<PDF>""</PDF>
+<Test language="ENGLISH">""</Test>
+  <!-- Archives of the Empire III p.81, sous le titre "New Talent". Le livre le distingue
+       lui-meme de WINDS-T0177 "Magical Assistant", qui est la version Homunculus : ce sont
+       deux talents differents pour deux types de familiers, pas un doublon.
+       Numero T0186 pris apres le maximum utilise (NAGGA-T0185) ; T0183 restait libre mais
+       isole, on ne l'a pas comble faute de savoir s'il etait reserve.
+       Les nouveaux Creature Traits du meme chapitre (Animal Telepathy, Messenger, Sensory
+       Sharing, Invisibility, Companion Traits) ne sont PAS saisis : la base ne modelise pas
+       les traits de creature (Bestial, Skittish, Flight, Bite sont tous absents) et les
+       familiers y sont des ethnies. Seul celui-ci est un TALENT selon le livre. -->
+</Talent>
+</DATA_TALENT>
 <DATA_CAREER>
 <Career id="ARCH3-WORK99">
 <Description language="ENGLISH">"Priest of Handrich"</Description>
@@ -158,11 +181,11 @@
 </Level>
 <Level id="2">
 <Description language="ENGLISH">"Priest"</Description>
-<Salary>"TIERS_SILVER 2"</Salary>
+<Salary>"TIERS_SILVER 1"</Salary>
 </Level>
 <Level id="3">
 <Description language="ENGLISH">"Inquisitor"</Description>
-<Salary>"TIERS_SILVER 5"</Salary>
+<Salary>"TIERS_SILVER 3"</Salary>
 </Level>
 <Level id="4">
 <Description language="ENGLISH">"Grand Inquisitor"</Description>
@@ -278,7 +301,7 @@
 </SUBCHAPTER_ITEM>
 </Career>
 <Career id="ARCH3-WORK101">
-<Description language="ENGLISH">"Priest of Rhya"</Description>
+<Description language="ENGLISH">"Priestess of Rhya"</Description>
 <Explanation language="ENGLISH">"You are a vessel for the Earth Mother’s wishes and blessings amongst the mortals who depend on her benefucence for comfort and survival. Priestesses of Rhya live amongst the common folk. They wander  between farms, villages, and sacred sites, talking with people, offering blessings, and keeping a close eye on the land and the pastoral care of their flock. People depend on them to stave off famine, bring new life into the world, and give practical advice on love and matters of the family."</Explanation>
 <Skill>"RULES-COMPPRIERE"</Skill>
 <Class>"CLASS_ACAD"</Class>
@@ -418,7 +441,7 @@
 <Type>"ARMOT_SOFTKITS"</Type>
 </Armor>
 <Armor id="ARCH3-ARMO_17">
-<Description language="ENGLISH">"Soft Kit"</Description>
+<Description language="ENGLISH">"Reinforced Soft Kit"</Description>
 <Availability>"DISPO_LIMITED"</Availability>
 <Price>"2GC"</Price>
 <Encumbrance>"1"</Encumbrance>
@@ -426,6 +449,8 @@
 <Location>"ARMOL_ARM,ARMOL_BODY,ARMOL_LEG"</Location>
 <ArmorPoint>"1"</ArmorPoint>
 <Type>"ARMOT_SOFTKITS"</Type>
+  <!-- Renomme le 26/08/2026 : le livre p.37 intitule cette ligne "Reinforced Soft Kit",
+       la base disait "Soft Kit" comme ARCH3-ARMO_16, ce qui donnait deux armures homonymes. -->
 </Armor>
 <Armor id="ARCH3-ARMO_18">
 <Description language="ENGLISH">"Leather Jack (A3)"</Description>
@@ -442,7 +467,7 @@
 <Availability>"DISPO_COMMON"</Availability>
 <Price>"10/-"</Price>
 <Encumbrance>"1"</Encumbrance>
-<Quality>"ARMOB_08 "</Quality>
+<Quality>"ARMOB_08"</Quality>
 <Location>"ARMOL_BODY"</Location>
 <ArmorPoint>"1"</ArmorPoint>
 <Type>"ARMOT_BOILLEDLEATHER"</Type>
@@ -682,7 +707,7 @@ It takes an Action to open or close a visor."</Explanation>
 <Entry>
 <Specie>"RULES-SPECIE_HUMAN"</Specie>
 <Career name="ARCH3-WORK101">"X"</Career>
-  <!-- Priest of Rhya -->
+  <!-- Priestess of Rhya -->
 </Entry>
 <Entry>
 <Specie>"RULES-SPECIE_HUMAN"</Specie>

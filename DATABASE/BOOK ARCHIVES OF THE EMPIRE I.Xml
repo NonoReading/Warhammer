@@ -767,8 +767,7 @@ The condition is normally only applied if target is flammable but this weapon ca
 <BonusMalus id="ARCH1-WEAPB36">
 <Description language="ENGLISH">"Fertile earth"</Description>
 <Explanation language="ENGLISH">"So long as it is allowed to rest in fertile earth each night, a Blackbriar Javelin inflicts 1 Poisoned condition on any target which looses at least 1 Wound from the attack.
-This may be resisted with a Challenging (+0) Endurance Test.
-"</Explanation>
+This may be resisted with a Challenging (+0) Endurance Test."</Explanation>
 <Short language="ENGLISH">"add Poisoned condition"</Short>
 <Modifier>"+"</Modifier>
 </BonusMalus>
