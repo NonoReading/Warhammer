@@ -27,7 +27,7 @@ Ifthe Character passes the Test, the crew members may then use the Characters Ra
 <Skill>""</Skill>
 <Max>"(BATTR_I)"</Max>
 <PDF>""</PDF>
-<Test language="ENGLISH">"Ranged Skill tests when firing a weapon with the Crewed Flaw"</Test>
+<Test language="ENGLISH">"Ranged Skill Tests when firing a weapon with the Crewed Flaw"</Test>
 </Talent>
 </DATA_TALENT>
 <DATA_SPECIE_CAREER_DIRECT>
@@ -709,7 +709,7 @@ Ifthe Character passes the Test, the crew members may then use the Characters Ra
   <!-- Combat Reflexes -->
 <Talent name="RULES-T0136_SOLD">"2"</Talent>
   <!-- Etiquette (Soldiers) -->
-<Talent name="RULES-T0132_TOUT">"2"</Talent>
+<Talent name="RULES-T0132_*">"2"</Talent>
   <!-- Fearless (Any) -->
 <Talent name="RULES-T0037">"2"</Talent>
   <!-- Strike Mighty Blow -->
@@ -844,7 +844,7 @@ Ifthe Character passes the Test, the crew members may then use the Characters Ra
   <!-- Enclosed Fighter -->
 <Talent name="RULES-T0136_SOLD">"2"</Talent>
   <!-- Etiquette (Soldiers) -->
-<Talent name="RULES-T0132_TOUT">"2"</Talent>
+<Talent name="RULES-T0132_*">"2"</Talent>
   <!-- Fearless (Any) -->
 <Talent name="RULES-T0037">"2"</Talent>
   <!-- Strike Mighty Blow -->
@@ -1626,7 +1626,7 @@ Ifthe Character passes the Test, the crew members may then use the Characters Ra
   <!-- Shieldsman -->
 <Talent name="RULES-T0060">"2"</Talent>
   <!-- Strike to Injure -->
-<Talent name="RULES-T0132_TOUT">"3"</Talent>
+<Talent name="RULES-T0132_*">"3"</Talent>
   <!-- Fearless (Any) -->
 <Talent name="RULES-T0138">"3"</Talent>
   <!-- War Leader -->
@@ -1764,7 +1764,7 @@ Ifthe Character passes the Test, the crew members may then use the Characters Ra
   <!-- Furious Assault -->
 <Talent name="RULES-T0076">"3"</Talent>
   <!-- Unshakable -->
-<Talent name="RULES-T0132_TOUT">"3"</Talent>
+<Talent name="RULES-T0132_*">"3"</Talent>
   <!-- Fearless (Any) -->
 <Talent name="RULES-T0138">"3"</Talent>
   <!-- War Leader -->
@@ -2452,7 +2452,7 @@ Ifthe Character passes the Test, the crew members may then use the Characters Ra
   <!-- Combat Master -->
 <Talent name="RULES-T0028">"4"</Talent>
   <!-- Combat Reflexes -->
-<Talent name="RULES-T0132_TOUT">"4"</Talent>
+<Talent name="RULES-T0132_*">"4"</Talent>
   <!-- Fearless (Any) -->
 <Talent name="RULES-T0138">"4"</Talent>
   <!-- War Leader -->

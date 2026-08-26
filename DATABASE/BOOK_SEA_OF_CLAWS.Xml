@@ -26,6 +26,27 @@
 <Skill id="RULES-COMPLANG_GOSPO">
 <Description language="ENGLISH">"Language (Gospodarinyi)"</Description>
 </Skill>
+<Skill id="RULES-COMPMUSIC_FIDDLE">
+<Description language="ENGLISH">"Play (Fiddle)"</Description>
+</Skill>
+<Skill id="RULES-COMPMUSIC_SQUEEZE">
+<Description language="ENGLISH">"Play (Squeezebox)"</Description>
+</Skill>
+<Skill id="RULES-COMPMUSIC_FIDDLE/RULES-COMPMUSIC_SQUEEZE/RULES-COMPMUSIC_PENNYW">
+<Description language="ENGLISH">"Play (Fiddle, Squeezebox or Tin Whistle)"</Description>
+  <!-- Choix ferme du Chantyman niveau 1, p.66 : le livre ecrit
+       "Play (Fiddle, Squeezebox or Tin Whistle)". La base disait "Play (Any)", ce qui
+       ouvrait tous les instruments. Remplace par un identifiant a separateur multi
+       le 25/08/2026.
+       Fiddle et Squeezebox sont creees ici : elles n'existaient nulle part et ne sont
+       citees que par cette ligne dans les quatorze livres.
+       Le troisieme morceau pointe sur RULES-COMPMUSIC_PENNYW "Play (Pennywhistle)"
+       PLUTOT que de creer une specialisation "Tin Whistle" : c'est le meme instrument
+       sous deux noms, et Sea of Claws lui-meme emploie les deux - "Pennywhistle" pour
+       le Sailor niveau 1 p.72, "Tin Whistle" ici. Creer les deux aurait refait un
+       doublon d'identifiant du type de ceux nettoyes ce mois-ci. A ARBITRER si Nono
+       prefere deux specialisations distinctes. -->
+</Skill>
 </DATA_SKILL_SPECIALIZATION>
 <DATA_RULE>
 <Rule id="SEAOF-RULE_SEAFARER">
@@ -786,6 +807,80 @@
   <!-- Soldier -->
 </SUBCHAPTER_CAREER>
 </Specie>
+<Specie id="SEAOF-RACE_DNORSE">
+<Description language="ENGLISH">"Dwarfs (Norse)"</Description>
+  <!-- Encadre NORSE DWARF CHARACTERS, p.41, chapitre VI Kraka Ravnsvake - et non
+       dans la section Norse Characters du chapitre VII, ce qui explique qu'il ait
+       ete manque lors de la premiere saisie du livre. -->
+<Explanation language="ENGLISH">"A player may like to create a Norse Dwarf Character from one of the Krakas. If so, these rules can be used rather than the rules for Dwarfs on page 36 of the WFRP Core Rulebook. Norse Dwarfs are generally thought easygoing by Dwarf standards, but they still record their grievances and seek recompense for them."</Explanation>
+<Ethnic>"RULES-SPECIE_DWARF"</Ethnic>
+<SUBCHAPTER_ATTR>
+<Attribut name="RULES-ATTR_WS">"2d10+30"</Attribut>
+<Attribut name="RULES-ATTR_BS">"2d10+20"</Attribut>
+<Attribut name="RULES-ATTR_S">"2d10+20"</Attribut>
+<Attribut name="RULES-ATTR_T">"2d10+30"</Attribut>
+<Attribut name="RULES-ATTR_I">"2d10+20"</Attribut>
+<Attribut name="RULES-ATTR_Ag">"2d10+10"</Attribut>
+<Attribut name="RULES-ATTR_Dex">"2d10+30"</Attribut>
+<Attribut name="RULES-ATTR_Int">"2d10+20"</Attribut>
+<Attribut name="RULES-ATTR_WP">"2d10+40"</Attribut>
+<Attribut name="RULES-ATTR_Fel">"2d10+10"</Attribut>
+<Attribut name="RULES-ATTR_Fate">"0"</Attribut>
+<Attribut name="RULES-ATTR_Resil">"2"</Attribut>
+<Attribut name="RULES-ATTR_Wound">"1xBATTR_S+2xBATTR_T+1xBATTR_WP"</Attribut>
+<Attribut name="RULES-ATTR_Supp">"2"</Attribut>
+<Attribut name="RULES-ATTR_Move">"3"</Attribut>
+  <!-- Profil repris a l'identique du nain du Rulebook : l'encadre ne remplace que
+       les competences et les talents, il ne redonne aucune caracteristique. -->
+</SUBCHAPTER_ATTR>
+<SUBCHAPTER_SKILL>
+<Skill>"RULES-COMPESCAL"</Skill>
+  <!-- Climb -->
+<Skill>"RULES-COMPRESALC"</Skill>
+  <!-- Consume Alcohol -->
+<Skill>"RULES-COMPCALM"</Skill>
+  <!-- Cool -->
+<Skill>"RULES-COMPRESIST"</Skill>
+  <!-- Endurance -->
+<Skill>"RULES-COMPDIVERT_NARRA"</Skill>
+  <!-- Entertain (Storytelling) -->
+<Skill>"RULES-COMPEVAL"</Skill>
+  <!-- Evaluate -->
+<Skill>"RULES-COMPLANG_KHAZ"</Skill>
+  <!-- Language (Khazalid) -->
+<Skill>"RULES-COMPLANG_NORSE"</Skill>
+  <!-- Language (Norse) -->
+<Skill>"RULES-COMPSAVOIR_NAIN"</Skill>
+  <!-- Lore (Dwarfs) -->
+<Skill>"RULES-COMPCOMB_BASE"</Skill>
+  <!-- Melee (Basic) -->
+<Skill>"RULES-COMPVOILE"</Skill>
+  <!-- Sail -->
+<Skill>"RULES-COMPMETIER_*"</Skill>
+  <!-- Trade (Any) -->
+</SUBCHAPTER_SKILL>
+<SUBCHAPTER_TALENT>
+<Talent>"RULES-T0104/RULES-T0107"</Talent>
+  <!-- Carouser or Strong-minded : le livre ecrit "Strong Minded", forme minoritaire
+       du corpus (7 occurrences contre 34 pour Strong-minded, dont 17 au Rulebook). -->
+<Talent>"RULES-T0169"</Talent>
+  <!-- Magic Resistance -->
+<Talent>"RULES-T0164"</Talent>
+  <!-- Night Vision -->
+<Talent>"RULES-T0084/RULES-T0075"</Talent>
+  <!-- Read/Write or Relentless -->
+<Talent>"RULES-T0035"</Talent>
+  <!-- Sturdy -->
+</SUBCHAPTER_TALENT>
+  <!-- Pas de SUBCHAPTER_CAREER, et c'est VOLONTAIRE ET VERIFIE. L'encadre du livre ne
+       donne aucune table de carrieres aux nains norses, contrairement aux trois ethnies
+       norses humaines qui ont la leur page 57. Nono a controle le comportement du
+       programme le 25/08/2026 : en l'absence de table, la creation de personnage retombe
+       sur celle du nain standard via le lien Ethnic RULES-SPECIE_DWARF. C'est exactement
+       le resultat voulu. Ne pas recopier les 47 entrees du nain : ce serait redondant et
+       il faudrait les maintenir en double.
+       Meme motif dans la base : NAGGA-RACE_DELF (Dark Elves) n'a pas de table non plus. -->
+</Specie>
 </DATA_SPECIE>
 <DATA_TALENT>
 <Talent id="SEAOF-T0182">
@@ -996,7 +1091,7 @@ This bonus applies to Crew Tests as well as individual Leadership Tests."</Expla
   <!-- Gossip -->
 <Skill name="RULES-COMPCOMB_BAGAR">"1"</Skill>
   <!-- Melee (Brawling) -->
-<Skill name="RULES-COMPMUSIC_*">"1"</Skill>
+<Skill name="RULES-COMPMUSIC_FIDDLE/RULES-COMPMUSIC_SQUEEZE/RULES-COMPMUSIC_PENNYW">"1"</Skill>
   <!-- Play (Any) -->
 <Skill name="RULES-COMPRAMER">"1"</Skill>
   <!-- Row -->
@@ -1931,7 +2026,7 @@ This bonus applies to Crew Tests as well as individual Leadership Tests."</Expla
   <!-- Holy Visions -->
 <Talent name="RULES-T0100">"1"</Talent>
   <!-- Strong Swimmer -->
-<Talent name="RULES-T0132_TOUT">"2"</Talent>
+<Talent name="RULES-T0132_*">"2"</Talent>
   <!-- Fearless (Any) -->
 <Talent name="RULES-T0064">"2"</Talent>
   <!-- Flee! -->
@@ -1985,25 +2080,35 @@ This bonus applies to Crew Tests as well as individual Leadership Tests."</Expla
 <Level>""</Level>
 <TypSpell>"Miracle"</TypSpell>
 </Sort>
-<Sort id="SEAOF-BENED_020">
+<Sort id="SEAOF-MIRAC_MANAMM_13">
 <Description language="ENGLISH">"Blessing of the Albatross"</Description>
 <Explanation language="ENGLISH">"Upon completing the invocation, an albatross descends from the clouds and follows the ship. The albatross waits up to 1 hour for the ship to sail, and after that, it stays with the ship until the duration expires. As long as the albatross is present, the ship cannot sink, no matter how much damage it takes. Should the albatross be killed, the ship suffers from –d10 Morale and –2d10 for Manann’s Mood (should you need statistics for an albatross, treat it as a pigeon from WFRP, page 316, though its Size is Small and it has 3 Wounds)."</Explanation>
 <Target>"1 ship"</Target>
 <Duration>"(BATTR_WP) days"</Duration>
 <Range>"Touch"</Range>
-<Talent>"RULES-T0012_MANANN"</Talent>
+<Talent>"RULES-T0080_MANANN"</Talent>
 <Level>""</Level>
-<TypSpell>"Blessing"</TypSpell>
+<TypSpell>"Miracle"</TypSpell>
+  <!-- Reclasse le 25/08/2026 : le livre imprime ce texte dans la section MIRACLES OF
+       MANANN, entre Blessed Voyage et Breathe Water, et la section Stromfels precise que
+       les Blessings des deux cultes sont les six generiques (Battle, Breath, Courage,
+       Hardiness, Savagery, Tenacity). Le nom trompe : c'est un miracle, pas une
+       benediction. Etait SEAOF-BENED_020 avec le talent Bless.-->
 </Sort>
-<Sort id="SEAOF-BENED_021">
+<Sort id="SEAOF-MIRAC_MANAMM_14">
 <Description language="ENGLISH">"Blessing of the Mariner"</Description>
 <Explanation language="ENGLISH">"Your blessing grants a character an instinctive feel for the sea and sailing. Any Row, Sail, or Swim Tests they make benefit from +1 SL."</Explanation>
 <Target>"1"</Target>
 <Duration>"1 day"</Duration>
 <Range>"Touch"</Range>
-<Talent>"RULES-T0012_MANANN"</Talent>
+<Talent>"RULES-T0080_MANANN"</Talent>
 <Level>""</Level>
-<TypSpell>"Blessing"</TypSpell>
+<TypSpell>"Miracle"</TypSpell>
+  <!-- Reclasse le 25/08/2026 : le livre imprime ce texte dans la section MIRACLES OF
+       MANANN, entre Blessed Voyage et Breathe Water, et la section Stromfels precise que
+       les Blessings des deux cultes sont les six generiques (Battle, Breath, Courage,
+       Hardiness, Savagery, Tenacity). Le nom trompe : c'est un miracle, pas une
+       benediction. Etait SEAOF-BENED_021 avec le talent Bless.-->
 </Sort>
 <Sort id="SEAOF-MIRAC_MANAMM_08">
 <Description language="ENGLISH">"Breathe Water"</Description>

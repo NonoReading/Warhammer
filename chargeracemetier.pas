@@ -43,6 +43,8 @@ implementation
 Procedure CompleteRaceMetierParEspece;
   var
     Existant:     TStringList;
+    AvecTirage:   TStringList;
+    Donneur:      TStringList;
     NbInitial:    Integer;
     Ind:          Integer;
     PSource:      StructureRaceMetier;
@@ -51,6 +53,7 @@ Procedure CompleteRaceMetierParEspece;
     PRaceCible:   StructureRace;
     EspeceSource: String;
     Cle:          String;
+    CleEspece:    String;
 
   // Normalisation identique à DecoupeCodeValeur (UnitCalcul), mais en local : passer par
   // CompareRechercheValeur écraserait les variables globales CodeValeur/CodeRecherche,
@@ -64,7 +67,9 @@ Procedure CompleteRaceMetierParEspece;
     end;
 
   begin
-    Existant := TStringList.Create;
+    Existant   := TStringList.Create;
+    AvecTirage := TStringList.Create;
+    Donneur    := TStringList.Create;
     try
       Existant.Sorted     := True;
       Existant.Duplicates := dupIgnore;
@@ -102,6 +107,44 @@ Procedure CompleteRaceMetierParEspece;
           dec(NbRaceMetier);
         end;
 
+      // ---- Pré-calcul pour la phase 2 : qui a déjà une table de tirage, et qui la donne ----
+      // Une ethnie qui n'a AUCUNE fourchette de dés à elle (cas du nain norse de Sea of
+      // Claws, dont l'encadré p.41 ne donne que des compétences et des talents) doit
+      // hériter de la table de sa RACE, et pas seulement de l'accessibilité en 'X' :
+      // sans cela sa table de tirage est vide et le joueur n'a aucun métier à tirer
+      // (bug trouvé au test par Nono le 25/08/2026). C'est le même principe que celui
+      // déjà posé pour les règles dans ChargeRegle - "une ethnie non couverte par la
+      // règle retombe sur la table par défaut" - appliqué cette fois aux ethnies.
+      //
+      // AvecTirage : les ethnies qui possèdent au moins une fourchette propre. Calculé
+      // AVANT la phase 2, sinon la première fourchette héritée ferait basculer l'ethnie
+      // dans cette liste et les suivantes repasseraient en 'X'.
+      AvecTirage.Sorted     := True;
+      AvecTirage.Duplicates := dupIgnore;
+      For PSource in ListRaceMetier do
+        if (PSource.Chance <> 'X') and (PSource.Chance <> SeparateurChance) then
+          AvecTirage.Add(CodeSansLivre(PSource.CodeRace));
+
+      // Donneur : pour chaque RACE, l'UNE de ses ethnies dont la table sera recopiée.
+      // Il en faut une seule, sinon une ethnie sans table hériterait des fourchettes de
+      // toutes ses soeurs à la fois et les plages se chevaucheraient (cas des Humains,
+      // qui ont cinq ethnies avec chacune sa table). En cas de plusieurs candidates, on
+      // retient celle qui vient du même livre que la RACE elle-même, c'est-à-dire
+      // l'ethnie de référence - RULES-RACE_HUM pour les Humains, RULES-RACE_DWAR pour
+      // les Nains. Choix déterministe, qui ne dépend donc pas de l'ordre de chargement
+      // des livres (lequel n'est pas garanti, voir CONTEXT.md §2.9).
+      For PRaceCible in ListRace do
+        begin
+          if AvecTirage.IndexOf(CodeSansLivre(PRaceCible.CodeRace)) < 0 then
+            continue;
+          CleEspece := CodeSansLivre(PRaceCible.Espece);
+          if CleEspece = '' then
+            continue;
+          if (Donneur.Values[CleEspece] = '')
+             or (PRaceCible.Livre = ChercheEspece(PRaceCible.Espece).Livre) then
+            Donneur.Values[CleEspece] := CodeSansLivre(PRaceCible.CodeRace);
+        end;
+
       // ---- Phase 2 : propager l'accessibilité entre ethnies d'une même race ----
       // borne figée avant la boucle : on ajoute dans la liste qu'on parcourt
       NbInitial := ListRaceMetier.Count;
@@ -131,7 +174,15 @@ Procedure CompleteRaceMetierParEspece;
 
               PNouveau          := PSource;
               PNouveau.CodeRace := PRaceCible.CodeRace;
-              PNouveau.Chance   := 'X';
+              // L'ethnie cible n'a pas de table à elle ET la source est l'ethnie de
+              // référence de la race : on lui transmet la fourchette telle quelle, donc
+              // sa vraie table de tirage. Dans tous les autres cas on garde le
+              // comportement d'origine, 'X' = éligible hors tirage.
+              if (AvecTirage.IndexOf(CodeSansLivre(PRaceCible.CodeRace)) < 0)
+                 and (Donneur.Values[CodeSansLivre(PRaceCible.Espece)] = CodeSansLivre(PSource.CodeRace)) then
+                PNouveau.Chance := PSource.Chance
+              else
+                PNouveau.Chance := 'X';
               ListRaceMetier.Add(PNouveau);
               inc(NbRaceMetier);
               Existant.Add(Cle);
@@ -139,6 +190,8 @@ Procedure CompleteRaceMetierParEspece;
         end;
     finally
       Existant.Free;
+      AvecTirage.Free;
+      Donneur.Free;
     end;
   end;
 

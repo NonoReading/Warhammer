@@ -2390,7 +2390,7 @@ Markus**) en les ouvrant puis en les enregistrant — Kuno l'a été le 23/08. `
 
 ---
 
-### 2.20 Libellés anglais, intégrité des références, et revue des livres — en cours (23/08/2026)
+### 2.20 Libellés anglais, intégrité des références, et revue des livres — en cours (25/08/2026)
 
 **D'où ça vient.** Nono a expliqué la cause racine, et elle explique presque tout ce chantier :
 *« j'ai commencé à faire le programme avec le livre français et, majoritairement, j'ai demandé une
@@ -2574,7 +2574,79 @@ carrière dans le texte du livre — le libellé exact s'y lit sans rien deviner
 `Lore (Waterways)`→`Riverways`, `Lore (Know how)`→`Etiquette` (l'identifiant `SAVVIV` disait déjà
 « savoir-vivre »), `Trade (trinkets)`→`Charms`, `Trade (Handyman)`→`Tinker`, et sept autres.
 
+
+#### Point d'étape du 25/08/2026 — ce qui est clos, et où reprendre
+
+**Clos ce jour.**
+
+- **Doublons de sorts Rulebook / Winds of Magic.** Les 64 sorts des huit domaines colorés étaient
+  saisis deux fois. L'entrée `RULES-COLOR_*` a reçu le nom imprimé, le doublon `WINDS-COLOR_*` a été
+  supprimé — Winds passe de 192 à 128 sorts. 49 libellés réécrits sur 64. Plus aucun libellé commun
+  aux deux livres.
+- **Famille des mailles.** Les quatre armures du Rulebook renommées `Mail X`, le type
+  `RULES-ARMOT_MAIL` passé de « Chainmail » à « Mail ». **Les quatre entrées `(A3)` ne sont PAS
+  concernées** : Archives III imprime réellement une section CHAINMAIL, la base y est fidèle, et
+  c'est la raison d'être du suffixe.
+- **Champs `<Test>` des talents : 92 corrigés.** L'audit passe de 87 valeurs introuvables dans le
+  corpus à 4, et ces 4 sont correctes (texte coupé sur deux lignes dans l'extraction PDF). C'est la
+  moisson la plus parlante du chantier : les champs Test contenaient des noms de compétence
+  français traduits mot à mot, qui ne renvoyaient à **aucune** compétence du jeu anglais —
+  `Orientation`→Navigation, `Resistance Tests`→Endurance, `Discretion`→Stealth,
+  `Representation`→Perform, `Ragot`→Gossip, `Knowledge`→Lore, `Command`→Leadership,
+  `Projectiles`→Ranged, `Assessment, Bet`→Evaluate, Gamble.
+- **Trois familles de spécialisations** alignées sur les lignes de référence : Art (Mosaics,
+  Sculpture), Ride (Demigryph, Great Wolf, Griffon), Animal Training (Demigryph).
+- **Déclarations combinées** (identifiant contenant le `SeparateurMulti`) : audit des 27, convention
+  de libellé rétablie partout (`X or Y`, ou `Famille (A or B)`).
+- **Revue complète de Sea of Claws** (voir plus bas).
+
+**Trois pièges de méthode appris ce jour, à ne pas refaire.**
+
+1. **Extraction trop large = problème inventé.** Deux fausses alertes dans la même journée. La prose
+   d'Up in Arms recollée au champ Test de *Flee!*, et surtout la table de tirage Seafarer déclarée
+   « incomplète » alors qu'elle est parfaite : `DATA_CAREER_ROLL` et `DATA_SPECIE_CAREER_DIRECT`
+   emploient les **mêmes noms de balises** (`<Entry>`, `<Specie>`, `<Career>`), donc lire les
+   `<Entry>` du fichier entier mélange les fourchettes de dés et les drapeaux `X`.
+   → **Toujours ancrer l'extraction sur le bloc parent, jamais sur le nom de balise seul.**
+2. **La passe insensible à la casse masque les fautes de casse.** La vérification de masse du 24/08
+   validait `Language (khazalid)` parce que `Language (Khazalid)` existe dans le corpus. Trois
+   libellés fautifs ont survécu ainsi (Khazalid, Eltharin, `Lore (Dwarves)`→`Dwarfs`).
+   → Une passe dédiée, **sensible à la casse**, reste à faire sur les libellés validés uniquement
+   par la seconde passe.
+3. **Le comportement réel se vérifie à l'écran, pas dans le XML.** Trois questions tranchées ce jour
+   par un test de Nono et non par le raisonnement : le doublon `Fearless` (les Slayers), le choix
+   Etiquette de Middenheim (capture d'écran), la table de métiers du nain norse.
+
+**Revue de Sea of Claws — terminée.** Le livre était déjà très bien saisi : trois ethnies norses
+conformes au mot près, neuf carrières sur 36 niveaux avec seulement six écarts dont quatre où la
+base a raison de suivre le Rulebook (`Warleader`, `Public Speaking`, `In-Fighter` sont les graphies
+de Sea of Claws), 21 sorts et miracles complets et exacts. Deux vrais défauts corrigés :
+
+- **l'ethnie `Dwarfs (Norse)` manquait** (encadré p.41, chapitre VI, noyé dans la prose de Kraka
+  Ravnsvake — d'où l'oubli) ; saisie sous `SEAOF-RACE_DNORSE`, profil repris du nain du Rulebook ;
+- **deux miracles classés comme bénédictions** : `Blessing of the Albatross` et `of the Mariner`
+  sont devenus `SEAOF-MIRAC_MANAMM_13`/`_14`, talent `Invoke` au lieu de `Bless`.
+
+**Correction de chargeur qui en découle (validée au test).** `chargeracemetier.pas`,
+`CompleteRaceMetierParEspece` : une ethnie qui ne possède **aucune** fourchette de dés à elle hérite
+désormais de la table de tirage de sa race, au lieu de ne recevoir que l'accessibilité en `X` — sans
+quoi sa table de tirage est vide et le joueur n'a aucun métier à tirer. Deux garde-fous : `AvecTirage`
+est calculé **avant** la phase 2 (sinon la première fourchette héritée ferait repasser toutes les
+suivantes en `X`), et `Donneur` ne retient **qu'une** ethnie par race — celle du même livre que la
+race — sinon les plages de plusieurs sœurs se chevaucheraient. Profite aussi à `NAGGA-RACE_DELF`,
+qui était dans le même cas.
+
+**Où reprendre.** La revue livre par livre continue : **Archives of the Empire III**, puis **Lords of
+Naggaroth** — les deux plus rentables d'après le balayage de couverture. La méthode est rodée :
+inventaire du fichier, puis confrontation section par section au TXT du livre, en comparant les
+carrières automatiquement niveau par niveau après résolution des identifiants en libellés.
+
+Les arbitrages laissés ouverts sont dans `A FAIRE.txt` : les champs `<Test>` des 141 spécialisations
+(le livre donne un texte **à paramètre**, donc recopier le générique serait faux — il faut
+substituer), `Hatred (Dwarves)` vs `Dwarfs`, et `Tin Whistle` / `Pennywhistle`.
+
 ---
+
 
 ## 3. TODO / Backlog
 

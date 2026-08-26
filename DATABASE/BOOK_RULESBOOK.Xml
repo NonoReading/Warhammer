@@ -820,7 +820,7 @@ Although Force is the default statistic for Bullying Tests, DOJ may find situati
 </Skill>
 <Skill id="RULES-COMPINTUI">
 <Attribut>"RULES-ATTR_I"</Attribut>
-<Description language="ENGLISH">"Intuition "</Description>
+<Description language="ENGLISH">"Intuition"</Description>
 <Explanation language="ENGLISH">"Intuition Skill lets you perceive what’s around you, notice when something is wrong, and feel when people are hiding something from you.
 Successful use of Intuition Skill gives you subtle and implicit information about your environment, as determined by your DOJ.
 It can be information, such as whether someone believes what he says, the general attitude toward the local noble, or whether the helpful local people’s intentions are as pure as they seem.
@@ -969,7 +969,7 @@ The GM can also use the Pursuit rules to determine if you are successful in trac
 </Skill>
 <Skill id="RULES-COMPPRECEP">
 <Attribut>"RULES-ATTR_I"</Attribut>
-<Description language="ENGLISH">"Perception "</Description>
+<Description language="ENGLISH">"Perception"</Description>
 <Explanation language="ENGLISH">"This is your ability to perceive things with your senses – sight, smell, hearing, touch and taste, and any other senses such as magical or non-human senses.
 Your GM may ask you to make a Perception Test to detect something, such as movement behind the tree line, the presence of a trap, or someone following you, modified by the ease of noticing it.
 Perception is also used to resist attempts to conceal things through Skills such as Concealment or Stealth.
@@ -1342,7 +1342,7 @@ As all sailboats are pretty much the same to steer, owning one Specialization ma
 <Description language="ENGLISH">"Language (Classical)"</Description>
 </Skill>
 <Skill id="RULES-COMPLANG_ELTHA">
-<Description language="ENGLISH">"Language (eltharin)"</Description>
+<Description language="ENGLISH">"Language (Eltharin)"</Description>
 </Skill>
 <Skill id="RULES-COMPLANG_ESTA">
 <Description language="ENGLISH">"Language (Estalian)"</Description>
@@ -1357,7 +1357,7 @@ As all sailboats are pretty much the same to steer, owning one Specialization ma
 <Description language="ENGLISH">"Language (Halfling)"</Description>
 </Skill>
 <Skill id="RULES-COMPLANG_KHAZ">
-<Description language="ENGLISH">"Language (khazalid)"</Description>
+<Description language="ENGLISH">"Language (Khazalid)"</Description>
 </Skill>
 <Skill id="RULES-COMPLANG_MAG">
 <Description language="ENGLISH">"Language (Magick)"</Description>
@@ -1498,7 +1498,7 @@ As all sailboats are pretty much the same to steer, owning one Specialization ma
 <Description language="ENGLISH">"Ranged (Explosives)"</Description>
 </Skill>
 <Skill id="RULES-COMPPROJ_POUDRE/RULES-COMPPROJ_ING">
-<Description language="ENGLISH">"Ranged (black powder and engineering)"</Description>
+<Description language="ENGLISH">"Ranged (Blackpowder or Engineering)"</Description>
 </Skill>
 <Skill id="RULES-COMPREPRES_ACROB">
 <Description language="ENGLISH">"Perform (Acrobatics)"</Description>
@@ -1603,7 +1603,7 @@ As all sailboats are pretty much the same to steer, owning one Specialization ma
 <Description language="ENGLISH">"Lore (Metallurgy)"</Description>
 </Skill>
 <Skill id="RULES-COMPSAVOIR_NAIN">
-<Description language="ENGLISH">"Lore (Dwarves)"</Description>
+<Description language="ENGLISH">"Lore (Dwarfs)"</Description>
 </Skill>
 <Skill id="RULES-COMPSAVOIR_NOBL">
 <Description language="ENGLISH">"Lore (Noble)"</Description>
@@ -1947,7 +1947,7 @@ near."</Explanation>
 <Skill>""</Skill>
 <Max>"(BATTR_WP)"</Max>
 <PDF>""</PDF>
-<Test language="ENGLISH">"Control over animals"</Test>
+<Test language="ENGLISH">"Charm Animal"</Test>
 </Talent>
 <Talent id="RULES-T0004">
 <Attribut>""</Attribut>
@@ -1995,7 +1995,7 @@ Also add Art (Any) to any Career you start; if it is already included in the Car
 <Skill>""</Skill>
 <Max>"(BATTR_Dex)"</Max>
 <PDF>"COMPART_*"</PDF>
-<Test language="ENGLISH">"Art (your choice)"</Test>
+<Test language="ENGLISH">"Art (Any)"</Test>
 </Talent>
 <Talent id="RULES-T0008">
 <Attribut>""</Attribut>
@@ -2006,7 +2006,7 @@ Once per Round, if you hit an opponent in close combat, you can immediately expe
 <Skill>""</Skill>
 <Max>"(BATTR_Ag)"</Max>
 <PDF>"COMPCOMB_*"</PDF>
-<Test language="ENGLISH">"Melee while performing extra attacks"</Test>
+<Test language="ENGLISH">"Melee when making extra attacks"</Test>
 </Talent>
 <Talent id="RULES-T0009">
 <Attribut>""</Attribut>
@@ -2019,7 +2019,7 @@ Therefore, a hit of 63 can be used as a +3 DR."</Explanation>
 <Skill>""</Skill>
 <Max>"(BATTR_Fel)"</Max>
 <PDF>"COMPCHARM"</PDF>
-<Test language="ENGLISH">"Charm test to influence those who find you attractive."</Test>
+<Test language="ENGLISH">"Charm Tests to influence those attracted to you"</Test>
 </Talent>
 <Talent id="RULES-T0010">
 <Attribut>""</Attribut>
@@ -2081,7 +2081,7 @@ Common specializations include: Coastline, Deserts, Swamps, Rocky, Tundra, Woodl
 <Skill>""</Skill>
 <Max>"(BATTR_Ag)"</Max>
 <PDF>"COMPATHL"</PDF>
-<Test language="ENGLISH">"Athletics tests to cross the Terrain"</Test>
+<Test language="ENGLISH">"Athletics Tests to traverse the Terrain"</Test>
 </Talent>
 <Talent id="RULES-T0014">
 <Attribut>""</Attribut>
@@ -2200,7 +2200,7 @@ When an animal you control Flees or Runs, it gains +1 Movement if you use a whip
 <Skill>""</Skill>
 <Max>"(BATTR_Dex)"</Max>
 <PDF>"COMPDRESS_*"</PDF>
-<Test language="ENGLISH">"Hitch or Ride Tests while Fleeing or Running."</Test>
+<Test language="ENGLISH">"Drive or Ride Tests when Fleeing or Running"</Test>
 </Talent>
 <Talent id="RULES-T0025">
 <Attribut>""</Attribut>
@@ -2235,7 +2235,7 @@ You ignore Close Combat penalties caused by confined spaces, such as tunnels, fr
 <Skill>""</Skill>
 <Max>"(BATTR_Ag)"</Max>
 <PDF>"COMPESQU"</PDF>
-<Test language="ENGLISH">"Dodging in closed environments"</Test>
+<Test language="ENGLISH">"Dodge in enclosed environments"</Test>
 </Talent>
 <Talent id="RULES-T0028">
 <Attribut>""</Attribut>
@@ -2258,7 +2258,7 @@ Additionally, if you use the Melee Combat optional rules (see page 297), gain a 
 <Skill>""</Skill>
 <Max>"(BATTR_Dex)"</Max>
 <PDF>"COMPCOMB_*"</PDF>
-<Test language="ENGLISH">"Melee when fighting in close contact or going into close contact"</Test>
+<Test language="ENGLISH">"Melee when in-fighting, or to enter in-fighting"</Test>
 </Talent>
 <Talent id="RULES-T0031">
 <Attribut>""</Attribut>
@@ -2271,7 +2271,7 @@ Other Craft Activities follow the normal rules."</Explanation>
 <Skill>""</Skill>
 <Max>"(BATTR_Int)"</Max>
 <PDF>"COMPMETIER_APOTH"</PDF>
-<Test language="ENGLISH">" Knowledge (Apothecary)"</Test>
+<Test language="ENGLISH">"Lore (Apothecary)"</Test>
 </Talent>
 <Talent id="RULES-T0032">
 <Attribut>""</Attribut>
@@ -2406,7 +2406,7 @@ You do not suffer an Imperfect Casting if you roll a double on a successful Lang
 <Skill>""</Skill>
 <Max>"(BATTR_I)"</Max>
 <PDF>"COMPLANG_MAG"</PDF>
-<Test language="ENGLISH">" Tongue (Magick) when Casting"</Test>
+<Test language="ENGLISH">"Language (Magick) when casting"</Test>
 </Talent>
 <Talent id="RULES-T0043">
 <Attribut>""</Attribut>
@@ -2513,7 +2513,7 @@ So a successful roll of 24 can be used as a +4 DR."</Explanation>
 <Skill>""</Skill>
 <Max>"(BATTR_Fel)"</Max>
 <PDF>"COMPCHARM"</PDF>
-<Test language="ENGLISH">"Charm Tests when Arguing or Debating"</Test>
+<Test language="ENGLISH">"Charm Tests when arguing and debating"</Test>
 </Talent>
 <Talent id="RULES-T0052">
 <Attribut>""</Attribut>
@@ -2540,7 +2540,7 @@ Number of soldiers influenced 1:Normal x 5.2:Normal x 10.3:Normal x 20.4:Normal 
 <Skill>""</Skill>
 <Max>"(BATTR_Fel)"</Max>
 <PDF>"COMPCOMM"</PDF>
-<Test language="ENGLISH">"Command during the war"</Test>
+<Test language="ENGLISH">"Leadership during war"</Test>
 </Talent>
 <Talent id="RULES-T0054">
 <Attribut>""</Attribut>
@@ -2576,7 +2576,7 @@ You can double your Fellowship to calculate the number of people you influence w
 <Skill>""</Skill>
 <Max>"(BATTR_Fel)"</Max>
 <PDF>"COMPCHARM"</PDF>
-<Test language="ENGLISH">"Charm when speaking up for your cause"</Test>
+<Test language="ENGLISH">"Charm when speaking about your cause"</Test>
 </Talent>
 <Talent id="RULES-T0057">
 <Attribut>""</Attribut>
@@ -2590,7 +2590,7 @@ If you fail to flog yourself on a given day, or if you allow your bruised flesh 
 <Skill>""</Skill>
 <Max>"(BATTR_T)"</Max>
 <PDF>"COMPRESIST"</PDF>
-<Test language="ENGLISH">"Any Test to resist the Powers of Ruin"</Test>
+<Test language="ENGLISH">"Any for resisting the Ruinous Powers"</Test>
 </Talent>
 <Talent id="RULES-T0058">
 <Attribut>""</Attribut>
@@ -2603,7 +2603,7 @@ If spotted disruptors engage in combat, you can ignore any Surprised States they
 <Skill>""</Skill>
 <Max>"(BATTR_I)"</Max>
 <PDF>"COMPPRECEP"</PDF>
-<Test language="ENGLISH">"Any test to identify disruptors"</Test>
+<Test language="ENGLISH">"Any Test to spot Troublemakers"</Test>
 </Talent>
 <Talent id="RULES-T0059">
 <Attribut>""</Attribut>
@@ -2672,7 +2672,7 @@ Your Movement Attribute counts as if it were increased by 1 when fleeing (see pa
 <Skill>""</Skill>
 <Max>"(BATTR_Ag)"</Max>
 <PDF>"COMPATHL"</PDF>
-<Test language="ENGLISH">"Athletics when you Flee"</Test>
+<Test language="ENGLISH">"Athletics when Fleeing"</Test>
 </Talent>
 <Talent id="RULES-T0065">
 <Attribut>""</Attribut>
@@ -2721,7 +2721,7 @@ Additionally, if you have the appropriate Knowledge (Region) Skill, you never ne
 <Skill>""</Skill>
 <Max>"(BATTR_I)"</Max>
 <PDF>"COMPSAVOIR_VFLUV"</PDF>
-<Test language="ENGLISH">"Any Knowledge Test concerning river matters"</Test>
+<Test language="ENGLISH">"Any Lore Test concerning river matters"</Test>
 </Talent>
 <Talent id="RULES-T0069_*">
 <Attribut>""</Attribut>
@@ -2733,7 +2733,7 @@ Here are some examples of groups you can hate: Beastmen, Greenskins, Monsters, O
 <Skill>""</Skill>
 <Max>"(BATTR_WP)"</Max>
 <PDF>"ATTR_WP"</PDF>
-<Test language="ENGLISH">"Mental Strength (Group to fight)"</Test>
+<Test language="ENGLISH">"Willpower (Resist Group)"</Test>
 </Talent>
 <Talent id="RULES-T0070">
 <Attribut>""</Attribut>
@@ -2756,7 +2756,7 @@ You do not suffer an Imperfect Casting if you roll a double on a successful Focu
 <Skill>""</Skill>
 <Max>"(BATTR_I)"</Max>
 <PDF>"COMPFOCAL_*"</PDF>
-<Test language="ENGLISH">"Focusing (Any)"</Test>
+<Test language="ENGLISH">"Channelling (Any)"</Test>
 </Talent>
 <Talent id="RULES-T0072">
 <Attribut>""</Attribut>
@@ -2783,7 +2783,7 @@ Once successful, you can still imitate the accent, and the natives will believe 
 <Skill>""</Skill>
 <Max>"(BATTR_I)"</Max>
 <PDF>"COMPDIVERT_INTERP"</PDF>
-<Test language="ENGLISH">"Entertain (Acting) tests where accents are important"</Test>
+<Test language="ENGLISH">"Entertain (Acting) Tests where accents are important"</Test>
 </Talent>
 <Talent id="RULES-T0074">
 <Attribut>"RULES-ATTR_WP"</Attribut>
@@ -2817,7 +2817,7 @@ You need to make a Calm Test to resist a Broken State only if you are successful
 <Skill>""</Skill>
 <Max>"(BATTR_WP)"</Max>
 <PDF>"COMPCALM"</PDF>
-<Test language="ENGLISH">"Calm Tests to Resist Black Powder Panic"</Test>
+<Test language="ENGLISH">"Cool Tests to resist Blackpowder panic"</Test>
 </Talent>
 <Talent id="RULES-T0077">
 <Attribut>""</Attribut>
@@ -2852,7 +2852,7 @@ Once per session, you may ask the GM a question regarding a political situation 
 <Skill>""</Skill>
 <Max>"(BATTR_Int)"</Max>
 <PDF>"ATTR_Int"</PDF>
-<Test language="ENGLISH">"Intelligence Tests for everything related to this Talent"</Test>
+<Test language="ENGLISH">"Intelligence Tests concerning this Talent"</Test>
 </Talent>
 <Talent id="RULES-T0080_*">
 <Magic>"2"</Magic>
@@ -2895,7 +2895,7 @@ Note: Linguistic Talent only works for languages used to communicate with others
 <Skill>""</Skill>
 <Max>"(BATTR_Int)"</Max>
 <PDF>"COMPLANG_*"</PDF>
-<Test language="ENGLISH">"Language (all)"</Test>
+<Test language="ENGLISH">"Language (All)"</Test>
 </Talent>
 <Talent id="RULES-T0083">
 <Attribut>""</Attribut>
@@ -2906,7 +2906,7 @@ If you have a clear view of the speaker’s lower face, you can attempt a Percep
 <Skill>""</Skill>
 <Max>"(BATTR_I)"</Max>
 <PDF>"COMPPRECEP"</PDF>
-<Test language="ENGLISH">"Perception Tests for anything related to this Talent"</Test>
+<Test language="ENGLISH">"Perception Tests concerning this Talent"</Test>
 </Talent>
 <Talent id="RULES-T0084">
 <Attribut>""</Attribut>
@@ -3014,7 +3014,7 @@ Additionally, attempts to use Melee (Brawl) to simply hit an opponent gain a bon
 <Skill>""</Skill>
 <Max>"(BATTR_Dex)"</Max>
 <PDF>"COMPESQU,COMPCOMB_*"</PDF>
-<Test language="ENGLISH">" Dodge, Melee (Brawling) to hit an opponent"</Test>
+<Test language="ENGLISH">"Sleight of Hand, Melee (Brawling) to touch an opponent"</Test>
 </Talent>
 <Talent id="RULES-T0092_*">
 <Attribut>""</Attribut>
@@ -3026,7 +3026,7 @@ If the Profession Skill is already included in your Career, you can instead buy 
 <Skill>""</Skill>
 <Max>"(BATTR_Dex)"</Max>
 <PDF>"COMPMETIER_*"</PDF>
-<Test language="ENGLISH">"Profession (choose one)"</Test>
+<Test language="ENGLISH">"Trade (any one)"</Test>
 </Talent>
 <Talent id="RULES-T0093">
 <Attribut>""</Attribut>
@@ -3253,7 +3253,7 @@ Additionally, add Entertain (Singing) to any Career you start; if the Skill is a
 <Skill>"RULES-COMPDIVERT_CHANT"</Skill>
 <Max>"(BATTR_I)"</Max>
 <PDF>"COMPDIVERT_CHANT,COMPLANG_*"</PDF>
-<Test language="ENGLISH">"Entertain (Singing), Language (Tonal languages, such as Elthárin, Cathayan, Magick)"</Test>
+<Test language="ENGLISH">"Entertain (Singing), Language (Tonal Languages, such as Elthárin, Cathayan, and Magick)"</Test>
 </Talent>
 <Talent id="RULES-T0111">
 <Attribut>""</Attribut>
@@ -3265,7 +3265,7 @@ If you fail a Heal Test while using Bandages, you can reverse the result if it r
 <Skill>""</Skill>
 <Max>"(BATTR_Int)"</Max>
 <PDF>"COMPGUERI"</PDF>
-<Test language="ENGLISH">"Healing during Combat Rounds"</Test>
+<Test language="ENGLISH">"Heal during combat Rounds"</Test>
 </Talent>
 <Talent id="RULES-T0112">
 <Attribut>""</Attribut>
@@ -3301,7 +3301,7 @@ You can supply more fish using the normal Foraging rules (see page 131)."</Expla
 <Skill>""</Skill>
 <Max>"(BATTR_I)"</Max>
 <PDF>"COMPINTUI"</PDF>
-<Test language="ENGLISH">"Intuition tests to detect Sorcerers"</Test>
+<Test language="ENGLISH">"Intuition Tests to detect Wizards"</Test>
 </Talent>
 <Talent id="RULES-T0116">
 <Attribut>""</Attribut>
@@ -3337,7 +3337,7 @@ You may reverse any failed Trade (Apothecary) Test if it results in a success."<
 <Skill>""</Skill>
 <Max>"(BATTR_Int)"</Max>
 <PDF>"COMPMETIER_APOTH"</PDF>
-<Test language="ENGLISH">"Profession (Apothecary)"</Test>
+<Test language="ENGLISH">"Trade (Apothecary)"</Test>
 </Talent>
 <Talent id="RULES-T0119">
 <Attribut>""</Attribut>
@@ -3349,7 +3349,7 @@ In other cases (such as a storm or seasickness caused by magic), you can ignore 
 <Skill>""</Skill>
 <Max>"(BATTR_T)"</Max>
 <PDF>"COMPRESIST"</PDF>
-<Test language="ENGLISH">"All Tests to resist seasickness"</Test>
+<Test language="ENGLISH">"All those taken to resist Sea Sickness"</Test>
 </Talent>
 <Talent id="RULES-T0120">
 <Attribut>""</Attribut>
@@ -3362,7 +3362,7 @@ If you fail a Test to cross them, you can reverse the result if it results in a 
 <Skill>""</Skill>
 <Max>"(BATTR_I)"</Max>
 <PDF>"COMPVOILE,COMPRAMER"</PDF>
-<Test language="ENGLISH">" Rowing or Sailing tests as you navigate unsafe waters"</Test>
+<Test language="ENGLISH">"Row or Sail Tests while navigating unsure waters"</Test>
 </Talent>
 <Talent id="RULES-T0121">
 <Attribut>""</Attribut>
@@ -3373,7 +3373,7 @@ When you use a Shield to defend yourself, you gain a number of Advantages equal 
 <Skill>""</Skill>
 <Max>"(BATTR_S)"</Max>
 <PDF>"COMPCOMB_*"</PDF>
-<Test language="ENGLISH">"any Test to defend yourself with a shield"</Test>
+<Test language="ENGLISH">"Any Test to defend with a shield"</Test>
 </Talent>
 <Talent id="RULES-T0122">
 <Attribut>""</Attribut>
@@ -3411,7 +3411,7 @@ When you use Stealth there, those who cross your path do not get passive Percept
 <Skill>""</Skill>
 <Max>"(BATTR_Ag)"</Max>
 <PDF>"COMPDISC_SOUTER"</PDF>
-<Test language="ENGLISH">"Stealth Tests in the Underground"</Test>
+<Test language="ENGLISH">"Stealth Tests when underground"</Test>
 </Talent>
 <Talent id="RULES-T0125">
 <Attribut>""</Attribut>
@@ -3493,7 +3493,7 @@ Common enemies include Beastmen, Greenskins, Outlaws, Vampires, Wardens, and Dis
 <Skill>""</Skill>
 <Max>"(BATTR_WP)"</Max>
 <PDF>"COMPCALM"</PDF>
-<Test language="ENGLISH">"Calm to oppose Intimidation, Fear and Terror of your Enemy"</Test>
+<Test language="ENGLISH">"Cool to oppose your Enemy’s Intimidate, Fear, and Terror"</Test>
 </Talent>
 <Talent id="RULES-T0133">
 <Attribut>""</Attribut>
@@ -3517,7 +3517,7 @@ Tests, as always, will give you more information, determined by the GM."</Explan
 <Skill>""</Skill>
 <Max>"(BATTR_Int)"</Max>
 <PDF>"COMPSAVOIR_*"</PDF>
-<Test language="ENGLISH">" Knowledge (Chosen Knowledge)"</Test>
+<Test language="ENGLISH">"Lore (chosen Lore)"</Test>
 </Talent>
 <Talent id="RULES-T0136_*">
 <Attribut>""</Attribut>
@@ -3553,7 +3553,7 @@ This bonus is not cumulative."</Explanation>
 <Skill>""</Skill>
 <Max>"(BATTR_Fel)"</Max>
 <PDF>"COMMAND"</PDF>
-<Test language="ENGLISH">"Command Tests During War"</Test>
+<Test language="ENGLISH">"Leadership Tests during War"</Test>
 </Talent>
 <Talent id="RULES-T0139_*">
 <Attribut>""</Attribut>
@@ -3589,7 +3589,7 @@ Additionally, you can ignore the Surprise if you pass an Intuition Test."</Expla
 <Skill>""</Skill>
 <Max>"(BATTR_I)"</Max>
 <PDF>"COMPINTUI"</PDF>
-<Test language="ENGLISH">"Intuition test involving your Sixth Sense"</Test>
+<Test language="ENGLISH">"Intuition Tests involving your Sixth Sense"</Test>
 </Talent>
 <Talent id="RULES-T0142">
 <Attribut>""</Attribut>
@@ -3768,7 +3768,7 @@ You can perform a Perception Test to spot them automatically, without having to 
 <Skill>""</Skill>
 <Max>"(BATTR_I)"</Max>
 <PDF>"COMPPRECEP"</PDF>
-<Test language="ENGLISH">"Perception Tests to Spot Traps, Trapping"</Test>
+<Test language="ENGLISH">"Perception Tests to spot traps, Set Trap"</Test>
 </Talent>
 <Talent id="RULES-T0157_*">
 <Attribut>""</Attribut>
@@ -3780,7 +3780,7 @@ You remove the level of your Skilled Worker Talent from the DR required for any 
 <Skill>""</Skill>
 <Max>"(BATTR_Dex)"</Max>
 <PDF>"COMPMETIER_*"</PDF>
-<Test language="ENGLISH">"all appropriate Extended Business Tests."</Test>
+<Test language="ENGLISH">"Any appropriate Extended Trade Tests"</Test>
 </Talent>
 <Talent id="RULES-T0158">
 <Attribut>"RULES-ATTR_S"</Attribut>
@@ -3816,7 +3816,7 @@ If you are playing with an actual deck of cards to represent what is happening i
 <Skill>""</Skill>
 <Max>"(BATTR_Int)"</Max>
 <PDF>"COMPPARI"</PDF>
-<Test language="ENGLISH">"Wager and Shoplift when playing a card game"</Test>
+<Test language="ENGLISH">"Gamble and Sleight of Hand when playing card games"</Test>
 </Talent>
 <Talent id="RULES-T0161">
 <Attribut>""</Attribut>
@@ -3863,7 +3863,7 @@ Additionally, you can extend the effective illumination distance of all light so
 <Skill>""</Skill>
 <Max>"(BATTR_I)"</Max>
 <PDF>"COMPPRECEP"</PDF>
-<Test language="ENGLISH">"Perception tests in low light conditions"</Test>
+<Test language="ENGLISH">"Perception tests in low-light conditions"</Test>
 </Talent>
 <Talent id="RULES-T0165">
 <Attribut>""</Attribut>
@@ -3897,7 +3897,7 @@ Using the Intimidate Skill does not instill Fear in you and will not prevent you
 <Skill>""</Skill>
 <Max>"(BATTR_WP)"</Max>
 <PDF>"COMPCALM"</PDF>
-<Test language="ENGLISH">"Calm Tests to oppose Intimidate"</Test>
+<Test language="ENGLISH">"Cool Tests to oppose Intimidate"</Test>
 </Talent>
 <Talent id="RULES-T0168">
 <Attribut>""</Attribut>
@@ -4449,7 +4449,7 @@ See page 190 for Fear rules"</Explanation>
 <Description language="ENGLISH">"Resistance (Poison)"</Description>
 </Talent>
 <Talent id="RULES-T0131/RULES-T0077">
-<Description language="ENGLISH">"Robust/Strong Back"</Description>
+<Description language="ENGLISH">"Robust or Strong Back"</Description>
 </Talent>
 <Talent id="RULES-T0132_ANIM">
 <Description language="ENGLISH">"Fearless (Animals)"</Description>
@@ -4521,7 +4521,7 @@ See page 190 for Fear rules"</Explanation>
 <Description language="ENGLISH">"Fearless (Witches)"</Description>
 </Talent>
 <Talent id="RULES-T0132_TOUT">
-<Description language="ENGLISH">"Fearless (Any)"</Description>
+<Description language="ENGLISH">"Fearless (Everything)"</Description>
 </Talent>
 <Talent id="RULES-T0134_ALCHEMIST">
 <Description language="ENGLISH">"Savant (Alchemy)"</Description>
@@ -4557,7 +4557,7 @@ See page 190 for Fear rules"</Explanation>
 <Description language="ENGLISH">"Savant (Tzeentch)"</Description>
 </Talent>
 <Talent id="RULES-T0136_*/RULES-T0077">
-<Description language="ENGLISH">"Etiquette (Any)"</Description>
+<Description language="ENGLISH">"Etiquette (Any) or Strong Back"</Description>
 </Talent>
 <Talent id="RULES-T0136_BEASTMEN">
 <Description language="ENGLISH">"Etiquette (Beastmen)"</Description>
@@ -5317,7 +5317,7 @@ See page 190 for Fear rules"</Explanation>
 <Skill>"RULES-COMPINTIM"</Skill>
   <!-- Intimidate -->
 <Skill>"RULES-COMPLANG_KHAZ"</Skill>
-  <!-- Language (khazalid) -->
+  <!-- Language (Khazalid) -->
 <Skill>"RULES-COMPMETIER_*"</Skill>
   <!-- Trade (Any) -->
 <Skill>"RULES-COMPRESIST"</Skill>
@@ -5329,7 +5329,7 @@ See page 190 for Fear rules"</Explanation>
 <Skill>"RULES-COMPSAVOIR_METAL"</Skill>
   <!-- Lore (Metallurgy) -->
 <Skill>"RULES-COMPSAVOIR_NAIN"</Skill>
-  <!-- Lore (Dwarves) -->
+  <!-- Lore (Dwarfs) -->
 </SUBCHAPTER_SKILL>
 <SUBCHAPTER_TALENT>
 <Talent>"RULES-T0035"</Talent>
@@ -5477,7 +5477,7 @@ See page 190 for Fear rules"</Explanation>
 <Skill>"RULES-COMPMUSIC_*"</Skill>
   <!-- Play (Any) -->
 <Skill>"RULES-COMPLANG_ELTHA"</Skill>
-  <!-- Language (eltharin) -->
+  <!-- Language (Eltharin) -->
 <Skill>"RULES-COMPNATA"</Skill>
   <!-- Swim -->
 <Skill>"RULES-COMPORIENT"</Skill>
@@ -5611,7 +5611,7 @@ See page 190 for Fear rules"</Explanation>
 <Skill>"RULES-COMPINTIM"</Skill>
   <!-- Intimidate -->
 <Skill>"RULES-COMPLANG_ELTHA"</Skill>
-  <!-- Language (eltharin) -->
+  <!-- Language (Eltharin) -->
 <Skill>"RULES-COMPPRECEP"</Skill>
   <!-- Perception  -->
 <Skill>"RULES-COMPPIST"</Skill>
@@ -9547,7 +9547,7 @@ See page 190 for Fear rules"</Explanation>
 <Skill name="RULES-COMPCOMM">"3"</Skill>
   <!-- Leadership -->
 <Skill name="RULES-COMPLANG_KHAZ">"3"</Skill>
-  <!-- Language (khazalid) -->
+  <!-- Language (Khazalid) -->
 <Skill name="RULES-COMPSIGNES_GUILD">"3"</Skill>
   <!-- Secret Signs (Guilder) -->
 <Skill name="RULES-COMPLANG_*">"4"</Skill>

@@ -249,7 +249,7 @@
   <!-- Night Vision -->
 <Talent name="RULES-T0105">"3"</Talent>
   <!-- Rover -->
-<Talent name="RULES-T0132_TOUT">"4"</Talent>
+<Talent name="RULES-T0132_*">"4"</Talent>
   <!-- Fearless (Any) -->
 <Talent name="RULES-T0069_MVIVAN">"4"</Talent>
   <!-- Hatred (undead) -->

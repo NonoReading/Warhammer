@@ -1981,9 +1981,12 @@ DEUX MOTIFS DISTINCTS, qui n'appellent pas la meme reponse.
 [TRANCHE PAR NONO LE 25/08/2026 : "on corrige" - retour aux formules exactes du livre.]
 FAIT : 53 talents du Rulebook apparies a leur ligne "Tests:" imprimee, 5 deja conformes,
 48 CORRIGES verbatim.
-RESTE : 58 champs Test du Rulebook NON APPARIES automatiquement - soit le livre ne leur donne
-pas de ligne "Tests:", soit l'extraction en deux colonnes n'a pas su les rattacher a leur talent.
-A traiter a la main, talent par talent. La liste est dans table_tests.txt (document de travail).
+FAIT AUSSI : les 58 non apparies de la premiere passe ont ete repris et traites (appariement sur
+le radical pour les generiques, puis recherche ciblee nom + "Tests:" dans la meme colonne).
+92 champs Test corriges au total. L'audit passe de 87 champs introuvables dans le corpus a 4, et
+ces 4 sont corrects - leur texte est coupe sur deux lignes dans l'extraction PDF, donc la
+recherche de chaine contigue echoue (Surgery, Speedreader, Perfect Pitch, Crew Commander).
+CHANTIER CLOS.
 
 [FAIT 25/08/2026] LES TROIS FUITES D'IDENTIFIANT sont corrigees, chacune verifiee dans son livre :
 SEAOF-T0182 (Chantyman) "COMPDIVERT_CHANT" -> "Entertain (Singing)", SEAOF-T0184 (Master and
@@ -1991,3 +1994,177 @@ Commander) "COMPCOMM" -> "Leadership", ARCH2-T0175_* (Vice) "ATTR_WP (Resist Tar
 "Willpower (Resist Target)".
 A NOTER, non touche : ce talent Vice s'appelle "Vice (Target)" dans Archives II et "Vice (Any)"
 dans la base, ce qui suit la convention des generiques - laisse tel quel.
+
+
+NOUVEAU (25/08/2026) - QUESTION DE CONCEPTION SUR LES CHAMPS <Test> DES SPECIALISATIONS.
+Constate en terminant le chantier : le champ Test n'est renseigne que sur le talent GENERIQUE.
+Les 141 specialisations declarees individuellement - Craftsman (Blacksmith), Etiquette (Nobles),
+Fearless (Monsters), Strider (Woodlands), Hatred (Greenskins)... - ont toutes un champ Test VIDE,
+alors que le livre donne une seule ligne "Tests:" valable pour toute la famille (par exemple
+"Trade (any one)" pour tous les Craftsman, "Charm and Gossip (Social Group)" pour tous les
+Etiquette).
+PRECISION IMPORTANTE (25/08/2026) : le livre ne donne pas un texte FIXE mais un texte A PARAMETRE.
+La ligne Tests: du generique contient le nom du parametre, a remplacer par la specialisation :
+   Craftsman (Trade)        -> Trade (any one)
+   Etiquette (Social Group) -> Charm and Gossip (Social Group)
+   Acute Sense (Sense)      -> Perception (Sense)
+   Savant (Lore)            -> Lore (chosen Lore)
+   Strider (Terrain)        -> Athletics Tests to traverse the Terrain
+   Hatred (Group)           -> Willpower (Resist Group)
+   Fearless (Enemy)         -> Cool to oppose your Enemy's Intimidate, Fear, and Terror
+   Resistance (Threat)      -> All those to resist the associated Threat
+   Master Tradesman (Trade) -> Any appropriate Extended Trade Tests
+   Linguistics              -> Language (All)
+DONC recopier tel quel le texte du generique serait FAUX pour la moitie des familles :
+Etiquette (Nobles) doit tester "Charm and Gossip (Nobles)", pas "(Social Group)".
+
+JE N'AI RIEN REMPLI : c'est une question de conception, pas une coquille. Trois options.
+  (a) Laisser vide et faire remonter le texte du generique a l'affichage, si le programme sait
+      deja le faire - c'est probablement l'intention d'origine. Mais le parametre resterait
+      affiche tel quel ("Charm and Gossip (Social Group)" pour Etiquette (Nobles)).
+  (b) Recopier le texte du generique dans chaque specialisation : redondant ET faux pour les
+      familles a parametre.
+  (c) SUBSTITUER a l'affichage : remonter le texte du generique en remplacant le parametre par
+      la specialisation. C'est la seule option fidele au livre, mais elle demande du code.
+A ARBITRER PAR NONO. Verifier d'abord ce que WinMetier affiche aujourd'hui pour, disons,
+Craftsman (Blacksmith) : si la ligne Tests y est vide, l'option (a) n'est pas implementee et la
+question devient concrete.
+
+
+NOUVEAU (25/08/2026) - DEUX ANOMALIES DE DECLARATION DE TALENT, reperees en listant les generiques.
+
+1. [ELUCIDE LE 25/08/2026 PAR NONO - "regarde les Slayers"] RULES-T0132_TOUT N'EST PAS UN DOUBLON.
+   Le Rulebook donne au Slayer "Talents: Dual Wielder, Fearless (Everything), Frenzy, Slayer" :
+   c'est une valeur de jeu distincte - sans peur de TOUT, sans specialisation a choisir - et le
+   suffixe francais _TOUT la nomme exactement. Les livres l'ecrivent de trois facons :
+   "Fearless (Everything)" (Rulebook Slayer, Sea of Claws x2), "Fearless (All)" (Naggaroth),
+   "Fearless (Any)" ailleurs.
+   IL RESTE UN VRAI DEFAUT : le libelle anglais de _TOUT est "Fearless (Any)", identique a celui
+   du generique _*, donc les deux sont indistinguables a l'ecran.
+   [FAIT 25/08/2026 - Nono : "je plussoie"] _TOUT renomme "Fearless (Everything)".
+   A verifier avant d'ecrire : sur les neuf carrieres qui l'utilisent (Slayer, Fieldwarden,
+   Disciple of Khaine, Priest of Stromfels, Greatsword, Halberdier, Knight of the Blazing Sun,
+   Knight of the White Wolf, Priest of Myrmidia), plusieurs sont imprimees "(Any)" dans leur
+   livre. Si le libelle devient "Everything", verifier que l'affectation reste juste pour elles.
+
+2. [FAIT 25/08/2026] RULES-T0136_*/RULES-T0077. Le livre l'ecrit ainsi - Middenheim, ethnie Humans
+   (Middenheimer) : "Talents: Doomed, Etiquette (choose group) or Strong Back, ...". Le slash
+   encode fidelement le OU du livre avec le SeparateurMulti.
+   MON HYPOTHESE DE "POIDS MORT" ETAIT FAUSSE, capture d'ecran de Nono a l'appui : en creation de
+   personnage le choix fonctionne, la fenetre Specialisation liste bien les treize Etiquette ET
+   Strong Back. La declaration combinee fournit le LIBELLE du tableau recapitulatif, qui ne
+   montrait que "Etiquette (Any)". CORRIGE en "Etiquette (Any) or Strong Back".
+   AUDIT AU PASSAGE : 27 declarations combinees dans la base, convention de libelle stable
+   ("X or Y", ou "Famille (A or B)"), et UNE SEULE avait un libelle incomplet - celle-ci.
+   Oubli isole, pas defaut de conception.
+
+
+[FAIT 25/08/2026] DEUX ECARTS DE CONVENTION SUR LES LIBELLES COMBINES, corriges.
+Sur les 27 declarations dont l'identifiant contient le SeparateurMulti, la convention est
+"X or Y" pour deux talents differents et "Famille (A or B)" pour la meme famille. Deux s'en ecartent.
+   RULES-T0131/RULES-T0077                  "Robust/Strong Back" -> "Robust or Strong Back"
+   RULES-COMPPROJ_POUDRE/RULES-COMPPROJ_ING "Ranged (black powder and engineering)"
+                                            -> "Ranged (Blackpowder or Engineering)"
+CONTROLE FINAL : les 27 declarations combinees respectent maintenant toutes la convention.
+Ce second cas cumule trois ecarts : minuscules, "and" au lieu de "or", et "black powder" en deux
+mots alors que la famille a ete normalisee sur "Blackpowder" le 24/08. Les libelles unitaires de
+la base sont bien "Ranged (Blackpowder)" et "Ranged (Engineering)".
+
+
+NOUVEAU (25/08/2026) - REVUE DE SEA OF CLAWS : SIX POINTS OUVERTS.
+Le reste du livre est conforme : les trois ethnies norses au mot pres, les neuf carrieres sur
+36 niveaux, les 21 sorts et miracles (8 Manann, 7 Stromfels, 6 sorts marins), les trois talents,
+la colonne Human de la table de tirage. Detail des six points.
+
+1. [FAIT 25/08/2026] ETHNIE "Dwarfs (Norse)" SAISIE, identifiant SEAOF-RACE_DNORSE, page 41 du livre.
+   Skills: Climb, Consume Alcohol, Cool, Endurance, Entertain (Storytelling), Evaluate,
+           Language (Khazalid), Language (Norse), Lore (Dwarfs), Melee (Basic), Sail, Trade (Any)
+   Talents: Carouser or Strong Minded, Magic Resistance, Night Vision, Read/Write or Relentless,
+            Sturdy
+   Quatrieme ethnie jouable du livre, au meme titre que les trois norses humaines deja saisies.
+   PREREQUIS VERIFIES LE 25/08/2026 : les 19 competences et talents de l'encadre existent tous en
+   base. Trois portaient un libelle fautif, corriges dans la foulee - Language (Khazalid),
+   Language (Eltharin), Lore (Dwarfs). Le talent "Strong Minded" du livre correspond au
+   "Strong-minded" de la base, qui est la forme majoritaire des livres : pas de correction.
+   Rien ne bloquait donc la saisie, faite le 25/08/2026.
+   PAS DE TABLE DE CARRIERES, et c'est verifie : Nono a teste la creation de personnage le
+   25/08/2026, "il repart sur le nain standard pour la table des metiers". L'absence de
+   SUBCHAPTER_CAREER fait retomber la creation sur la table du nain standard via le lien Ethnic
+   RULES-SPECIE_DWARF, ce qui est le comportement voulu. Ne pas recopier les 47 entrees du nain.
+   POINT CLOS.
+
+2. [FAIT 25/08/2026] DEUX MIRACLES CLASSES COMME BENEDICTIONS. Reclasses en SEAOF-MIRAC_MANAMM_13
+   et _14, talent RULES-T0080_MANANN, TypSpell "Miracle". Aucun autre element ne les referencait.
+   Constat initial : SEAOF-BENED_020 "Blessing of the Albatross" et
+   SEAOF-BENED_021 "Blessing of the Mariner" sont rattaches a RULES-T0012_MANANN (Bless) avec
+   TypSpell "Blessing". Le livre les imprime dans la section MIRACLES OF MANANN, entre Blessed
+   Voyage et Breathe Water, et la section Stromfels precise que les Blessings des deux cultes
+   sont les six generiques (Battle, Breath, Courage, Hardiness, Savagery, Tenacity).
+   CONSEQUENCE DE JEU : un pretre de Manann les obtient avec Bless au lieu d'Invoke.
+   Correction attendue : identifiants MIRAC, talent RULES-T0080_MANANN, TypSpell "Miracle".
+
+3. [DIAGNOSTIQUE LE 25/08/2026, SOLUTION A CHOISIR] LE NAIN NORSE N'A AUCUNE CARRIERE TIRABLE.
+   Test de Nono : "il n'a aucune carriere possible en RULEBOOK et juste les carrieres marines avec
+   the Seafarer Class". CAUSE, trouvee dans chargeracemetier.pas : la phase 2 de
+   CompleteRaceMetierParEspece propage l'eligibilite entre ethnies d'une meme race mais force
+   Chance a 'X' - son propre commentaire le dit, "Seule l'ACCESSIBILITE se propage, jamais la
+   table de jet d100" - et ChargeTabMetier exclut les 'X' du tirage. Une ethnie sans
+   SUBCHAPTER_CAREER a donc une table de tirage VIDE. Les carrieres marines apparaissent par un
+   autre chemin, DATA_SPECIE_CAREER_DIRECT en 'X' sur la race naine (phase 1).
+   [SOLUTION (b) RETENUE ET ECRITE LE 25/08/2026 - chargeracemetier.pas. A COMPILER ET TESTER.]
+   DEUX SOLUTIONS, TRANCHEES PAR NONO :
+     (a) DONNEES - donner a SEAOF-RACE_DNORSE son propre SUBCHAPTER_CAREER en recopiant les 47
+         entrees du nain standard. C'est ce que fait deja toute ethnie jouable ayant une table.
+         Simple et sans risque, mais 47 lignes dupliquees a maintenir.
+     (b) CODE - faire que la phase 2 propage aussi les fourchettes quand l'ethnie cible n'a
+         AUCUNE entree de tirage propre. Plus elegant, vrai pour toute ethnie future dans ce cas,
+         mais c'est une modification du chargeur. A noter : chargeregle.pas pose deja ce principe
+         pour les REGLES ("une ethnie non couverte par la regle retombe sur la table par defaut") ;
+         il manque au niveau des ETHNIES.
+   [RESOLU ET VALIDE AU TEST LE 25/08/2026] Nono : "j'ai les choix de rules book et ceux de
+   seafarer remplace la partie sailor si je la selectionne". Le nain norse herite de la table du
+   nain standard et la surcharge Seafarer se substitue correctement.
+
+   FAUSSE ALERTE A ANNULER : j'avais annonce que la table de tirage Seafarer ne couvrait que la
+   colonne Human. C'EST FAUX, les CINQ colonnes sont presentes et exactes (Dwarf, Halfling,
+   High Elf, Wood Elf, Human, plus Tilea), zero ecart avec le livre hormis l'errata du 68 deja
+   documente. Mon extracteur ramassait tous les <Entry> du fichier alors que DATA_CAREER_ROLL et
+   DATA_SPECIE_CAREER_DIRECT emploient les MEMES noms de balises : je melangeais les fourchettes
+   de des avec les drapeaux d'eligibilite 'X'. RIEN A FAIRE ICI.
+
+4. [CLOS 25/08/2026 - Nono : "on utilise Boatbuilding partout"] RIEN A CORRIGER : les trois
+   familles miroir portaient deja "Boatbuilding" (RULES-COMPMETIER_BATEA, RULES-T0092_BATEA,
+   RULES-T0157_BATEA). C'est le livre qui fait exception. Constat initial :
+   Les deux familles miroir se contredisent dans le corpus - Trade (Boatbuilding) 7 occurrences
+   contre 1, mais Craftsman (Boatbuilder) 2 contre 0 - et la ligne de reference Trade du Rulebook
+   ne cite ni l'un ni l'autre. Aucune autorite pour trancher : decision de Nono.
+
+5. [FAIT 25/08/2026] Chantyman niveau 1 : "Play (Any)" remplace par
+   RULES-COMPMUSIC_FIDDLE/RULES-COMPMUSIC_SQUEEZE/RULES-COMPMUSIC_PENNYW, affiche
+   "Play (Fiddle, Squeezebox or Tin Whistle)". Deux specialisations creees dans le bloc
+   DATA_SKILL_SPECIALIZATION de Sea of Claws : Play (Fiddle) et Play (Squeezebox).
+   RESTE UNE PETITE QUESTION : le troisieme morceau pointe sur RULES-COMPMUSIC_PENNYW
+   "Play (Pennywhistle)" plutot que de creer une specialisation "Tin Whistle" - c'est le meme
+   instrument sous deux noms, et Sea of Claws emploie les deux (Pennywhistle au Sailor p.72,
+   Tin Whistle au Chantyman p.66 ; Archives III ecrit aussi "Play (Tin Whistle)"). Creer les deux
+   aurait refait un doublon d'identifiant. A ARBITRER si Nono prefere deux specialisations.
+
+6. REGRESSION DU 25/08 A ARBITRER - suite du renommage Fearless. Verification carriere par
+   carriere : le SLAYER est le seul dont le livre ecrit "Fearless (Everything)". Les huit autres
+   utilisatrices de _TOUT sont imprimees "Fearless (Any)" : Priest of Stromfels, Disciple of
+   Khaine, Greatsword, Halberdier, Knight of the Blazing Sun, Knight of the White Wolf, Priest de
+   Myrmidia, Fieldwarden. Et RULES-T0132_* est employe par deux carrieres dont le livre dit aussi
+   "(Any)" (Knight et Warrior Priest du Rulebook). Les deux identifiants sont donc utilises
+   INDIFFEREMMENT sur 10 usages sur 11.
+   [FAIT 25/08/2026] Les huit carrieres non-Slayer sont basculees sur RULES-T0132_*, 8 references
+   dans 4 fichiers. Etat final : _* "Fearless (Any)" pour dix carrieres, _TOUT "Fearless
+   (Everything)" pour le seul Slayer. Regression refermee et doublon resolu.
+
+[FAIT 25/08/2026] DEUX ESPACES PARASITES EN FIN DE LIBELLE ANGLAIS corriges : RULES-COMPINTUI
+"Intuition " et RULES-COMPPRECEP "Perception ". Controle final sur les seize livres : plus aucun
+libelle anglais ne porte d'espace en debut ou en fin.
+
+NOUVEAU (25/08/2026) - "Hatred (Dwarves)" (Rulebook) : forme non tranchee. Le corpus donne UNE
+occurrence de "Hatred (Dwarfs)" et UNE de "Hatred (Dwarves)", donc aucune autorite. Depuis la
+correction de Lore (Dwarfs), la base ecrit les deux formes selon la famille, ce qui est
+inconfortable mais fidele. A arbitrer si Nono veut uniformiser.
