@@ -24,7 +24,6 @@ faire les lézards des LUCIA
 gérer les ABOUT pour les lires facultatifs
 
 
-
 -------------------------
 AJOUTS DU 14/08/2026 (repris des ~30 fichiers de session, dédupliqués)
 -------------------------
@@ -448,29 +447,6 @@ PDF Personnage (PRIORITAIRE) :
   verifier au prochain personnage tres charge : d'autres grilles dimensionnees une fois pour toutes
   dans ChargerImage pourraient etre dans le meme cas (chercher les ".RowCount :=" a valeur constante).
 
-- (FAIT le 23/08/2026) Filtre des sorts de winspell.pas. Les trois anomalies notees le 22/08 sont
-  traitees : le "copy(ValT,1,5)" qui donnait "RULES" sur un code prefixe, le test ecrit DEUX FOIS
-  a l'identique lignes 122 et 125, et la comparaison en chaines brutes. Remplaces par une fonction
-  SortTalentAccessible qui compare les FAMILLES de talents (voir CONTEXT.md 2.18). La question
-  ouverte "migrer les anciennes fiches ou accepter les deux formes" est tranchee depuis : migration
-  (chantier 2.19). Valide par Nono sur Kuno.
-
-- Les 31 sorts qui declarent <Talent>"RULES-T*"</Talent> ne sont proposes a PERSONNE : il n'y a pas
-  d'underscore dans "T*", donc ni l'ancien filtre ni le nouveau ne peuvent les faire correspondre a
-  un talent de personnage. Comportement inchange depuis toujours, signale le 23/08/2026 sans etre
-  corrige - a regarder pour savoir ce que "T*" est cense vouloir dire.
-
-- (FAIT le 23/08/2026) Prefixer les modificateurs d'attribut dans les livres. Recensement avant
-  action : les 116 balises <Attribut> renseignees etaient DEJA toutes prefixees sauf UNE, celle du
-  trait RULES-T0BIG saisi la veille. Corrigee dans les deux Rulebooks, donnees seulement.
-  La crainte notee le 22/08 (le '-' du malus et SeparateurLivre sont le meme caractere) etait
-  INFONDEE : les deux seuls lecteurs du champ (winpersonnage.pas TalentAttribut ~3446 et
-  pdfpersonnage.pas PdfPersonnageAttribut ~631) consomment le '-' en POSITION 1 avant tout
-  decoupage de livre, donc "-RULES-ATTR_Ag" se lit correctement sans changer une ligne de Pascal.
-  Option des marqueurs [P]/[M] proposee par Nono puis ecartee d'un commun accord : elle aurait
-  demande une convention, du code de decoupe et une reecriture des donnees pour eviter une
-  ambiguite qui n'existe pas, au prix de la lisibilite du XML.
-
 - La quantite d'un modificateur d'attribut de talent est ECRITE EN DUR a 5 : StrToIntDef(Neg+'5',0),
   aux deux endroits ci-dessus. C'est pourquoi T0BIG doit repeter "RULES-ATTR_S;RULES-ATTR_S" pour
   signifier +10. Nono, le 23/08/2026 : "vu que les augmentations ne sont que par 5, on peut partir
@@ -488,1539 +464,130 @@ PDF Personnage (PRIORITAIRE) :
   Markus) : il suffit de les ouvrir puis de les enregistrer, la normalisation se fait a l'ecriture
   (CONTEXT.md 2.19). A faire avant de rejuger le filtre des sorts de winspell.pas.
 
-- Inventorier ce que Sea of Claws et Up in Arms pourraient encore apporter (equipements, talents,
-  competences, sorts), un livre apres l'autre, comme cela a ete fait pour Lustria.
 
-
--------------------------
-INVENTAIRE DE UP IN ARMS (23/08/2026) - ce qui reste a ajouter
--------------------------
-Methode : comparaison du PDF (140 pages) au contenu de BOOK_UP_IN_ARMS.Xml, categorie par
-categorie. Ce qui est DEJA COMPLET, verifie et sans rien a faire :
-  * les 15 carrieres (les 15 blocs "Career Path" du livre, y compris Siege Specialist dont le
-    premier niveau s'appelle Crossbowman, ce qui masquait la correspondance) ;
-  * les 65 armes : armes de base, boucliers, cavalerie, escrime, pugilat, fleaux, parade,
-    armes d'hast, armes a deux mains, poudre noire, ingenierie ;
-  * les 4 nouvelles qualites d'arme (Unbalanced, Slash, Spread, Trip) ;
-  * les 12 talents de l'annexe III : ce sont des talents "New AND UPDATED", et les 12 existent
-    deja (11 dans le Rulebook, Crew Commander saisi dans Up in Arms). Rien a creer.
-  * l'ethnie Tilea (UPINA-RACE_HTIL).
-Aucun bloc DATA_ARMOR n'est attendu : le livre n'a pas de chapitre d'armure, ses boucliers sont
-des armes et ils sont saisis.
-
-RESTE A FAIRE, par ordre de rapport / effort :
-
-1) MIRACLE MANQUANT - le plus rapide, une entree. Le livre en donne NEUF (p.79), le fichier en
-   contient HUIT, et la numerotation reserve deja le trou : les ids vont de MIRAC_MYRMIDIA_07 a
-   _15 en sautant _11. Le manquant est "On Deadly Ground" (Range: Self, Target: You, Duration:
-   Allies within AoE (Willpower yards) - les allies ne recoivent pas de Condition Brise).
-
-2) COQUILLES DE SAISIE a corriger dans les libelles anglais existants :
-   * "Command the region"        -> "Command the Legion"
-   * "In Good Orper"             -> "In Good Order"
-   * "Shieldmaiden'S Devoltion"  -> "Shieldmaiden's Devotion"
-   * "Arqucbus" (arme)           -> "Arquebus"
-
-3) (FAIT le 23/08/2026) MUNITIONS. Les 12 nouvelles saisies sous UPINA-MUNI_01 a _12 ; les 8
-   autres entrees des deux tables existaient deja dans le Rulebook et n'ont pas ete recopiees
-   (Arrow, Bolt, Elf Arrow, Lead Bullet, Stone Bullet, Bullet and Powder, Improvised Shot and
-   Powder, Small Shot and Powder). Conventions relevees dans les donnees existantes avant de
-   saisir : "Scarce" -> DISPO_LIMITED, "Half weapon" -> Reach "/2", prix "d" -> "SC" et
-   "GC" -> "CO", "N/A" -> "-", aucune qualite -> "-", et la note d'une qualite se met apres un
-   espace ("WEAPB23 2" = Reload 2). "Accurate" de la table est la qualite "Precise" (WEAPB16),
-   c'est deja le choix fait pour l'Elf Arrow du Rulebook.
-
-3bis) (RESOLU le 23/08/2026, par Nono) La qualite "Infected" de Scrap and Powder n'etait pas une
-   invention du livre : c'est le TRAIT DE CREATURE Infected du Rulebook p.340, dont la definition
-   dit explicitement "The creature, OR ITS WEAPON, carries a nasty infection. If it causes a living
-   opponent to lose Wounds, it must pass an Easy (+40) Endurance Test or contract a Festering Wound
-   (p.187)." Le trait prevoit donc lui-meme le cas de l'arme. Saisie en UPINA-WEAPB37 avec ce texte,
-   repris mot pour mot, et posee sur UPINA-MUNI_08. Piste trouvee par Nono.
-
-3ter) (CORRIGE le 23/08/2026) Collision de numero WEAPB31 entre deux livres. Le champ <Quality>
-   d'une arme stocke les codes SANS prefixe de livre, la numerotation WEAPB est donc un espace de
-   noms GLOBAL - et NAGGA-WEAPB31 "Barbed" (Lords of Naggaroth, 1 arme) et UPINA-WEAPB31
-   "Unbalanced" (Up in Arms, 8 armes) portaient le meme numero : les deux livres charges ensemble,
-   c'est le premier trouve dans ListArmeBonus qui gagnait, donc un des deux affichait le mauvais
-   libelle selon l'ordre de chargement.
-   Arbitrage de Nono : "Naggaroth est un livre de fan, donc c'est lui qui est le moins important".
-   NAGGA-WEAPB31 renumerote en NAGGA-WEAPB38, avec son unique utilisation (NAGGA-MUNI_09, Barbed
-   Bolts). Verification finale sur les 17 livres : 38 codes declares, AUCUNE collision entre
-   livres, aucun code utilise sans declaration.
-   A RETENIR : tant que <Quality> reste sans prefixe, tout nouveau BonusMalus doit prendre le
-   premier numero libre AU NIVEAU DE TOUS LES LIVRES, pas du livre courant. Prochain libre : 39.
-   La vraie sortie serait de prefixer les codes dans <Quality> comme partout ailleurs.
-
-4) (ECARTE le 23/08/2026, decision de Nono) ARMES DE SIEGE p.122 - les 12 pieces d'artillerie
-   (Ballista, Cannon small/medium/large, Mortar, Swivel Gun, Catapult small/medium/large, Volley
-   Gun, Helblaster Volley Gun, Helstorm Rocket Battery) et leurs 12 munitions p.123 NE SERONT PAS
-   SAISIES. Nono : "je pense que l'artillerie n'a pas de sens dans une fiche de personnage".
-   Argument technique qui va dans le meme sens : elles reposent sur la qualite "Crewed" (equipe de
-   2 a 4 servants, avec penalites si l'equipe est incomplete), que le programme ne modelise pas.
-   Ne pas rouvrir sans raison nouvelle.
-
-HORS MODELE, a ne pas chercher a saisir : "A Soldier's Burden" p.87 (equipement courant, rechauds,
-outils) - le programme n'a pas de notion d'objet ordinaire, seulement armes et armures. Idem pour
-les regles de MJ du livre : Group Advantage, Poursuites, Blessures Critiques alternatives,
-Combat Monte, Degats aux Structures.
-
-
--------------------------
-INVENTAIRE DE SEA OF CLAWS (23/08/2026) - ce qui reste a ajouter
--------------------------
-Meme methode que pour Up in Arms : comparaison du PDF au contenu de BOOK_SEA_OF_CLAWS.Xml,
-categorie par categorie.
-
-DEJA COMPLET, verifie :
-  * les 9 carrieres (les 8 de la classe Marin p.64-79 + Pretre de Stromfels p.90) ;
-  * les 15 sorts des deux cultes : 6 miracles de Manann + 2 benedictions (p.87-89) et les 7
-    miracles de Stromfels (p.91-93) - comptes un par un dans le PDF, aucun ne manque ;
-  * les 3 ethnies Norses, la regle SEAOF-RULE_SEAFARER et sa table de tirage ;
-  * les 3 specialisations de competence.
-  Audit de coherence : 79 references de talents et 62 de competences dans ce livre, TOUTES
-  declarees quelque part. Aucune reference pendante.
-  (Le "trou" WORK117 dans la numerotation des carrieres n'en est pas un : ce numero appartient
-  a The Horned Rat Companion. La numerotation WORK est globale, comme celle des WEAPB.)
-
-RESTE A FAIRE :
-
-1) (FAIT le 23/08/2026) Les six sorts de l'encadre "Sea Magics" p.15-16 sont saisis, en
-   SEAOF-COLOR_284 a _289, TypSpell "Domain Magic", rattaches a RULES-T0088_VIE (Living Mire,
-   Water Water Everywhere, Whirlpool) et RULES-T0088_CIEUX (Blessings of Bel Shanaar, Niezlib's
-   Optimal Firing Solution, Sea of Glass). Aucune ligne de Pascal, les deux talents porteurs
-   etaient deja declares comme familles magiques.
-   La numerotation COLOR est GLOBALE comme WORK et WEAPB : 283 numeros etaient pris, d'ou 284.
-   Audit d'atteignabilite refait : 0 sort inaccessible sur 665.
-
-1bis) COQUILLE A CORRIGER - un id de sort contient un ESPACE EN FIN : <Sort id="RULES-ARCAN_11 ">
-   dans BOOK_RULESBOOK.Xml ligne 16099 et BOOK_RULESBOOK_FRANCAIS.Xml ligne 15982. Il n'existe
-   aucun "RULES-ARCAN_11" sans espace, donc les deux fichiers sont coherents entre eux et le sort
-   s'affiche ; mais toute reference ecrite "RULES-ARCAN_11" (sans espace) ne le trouvera jamais.
-   C'est le seul id de sort de toute la base dans ce cas. Trouve le 23/08/2026, NON CORRIGE
-   (a verifier avant : qu'aucune fiche de personnage enregistree ne porte deja la forme avec
-   espace, sinon la correction casserait ces fiches).
-
-2) (TRANCHE le 23/08/2026 par Nono) CREW COMMANDER et les dependances entre livres. La reference
-   croisee reste : le Ship's Gunner de Sea of Claws continue de pointer sur UPINA-T0173. Nono :
-   "il peut y avoir des interdependances multiples. Crew Commander necessite d'avoir le livre
-   correspondant. C'est un choix de l'editeur et il y en aura sans doute d'autres."
-   Donc SEAOF-T0183 ne sera PAS cree, et le trou dans la numerotation est normal.
-   Consequence a garder en tete : posseder un supplement ne suffit pas toujours, et RIEN dans le
-   programme ne signale un code qui ne se resout pas (libelle vide, silencieux).
-
-2bis) CARTE DES DEPENDANCES ENTRE SUPPLEMENTS, relevee le 23/08/2026 (hors RULES, requis partout).
-   A refaire apres chaque ajout de livre - c'est le meme genre d'audit que celui des sorts
-   inaccessibles, il trouve ce qui ne provoque aucune erreur.
-     DEATH  -> WINDS : 1 (Suffuse With (Ulgu))
-     ROUGH  -> WINDS : 1 (Suffuse With (Ulgu))
-     SEAOF  -> UPINA : 1 (Crew Commander)
-     UPINA  -> ARCH3 : 3 carrieres
-     UPINA  -> SALZE : 1 carriere
-     UPINA  -> SEAOF : 9 carrieres
-     UPINA  -> WINDS : 12 carrieres
-     RULES  -> GREEN : 5 ethnies      <-- a regarder, voir plus bas
-     RULES  -> NAGGA : 4 carrieres    <-- a regarder, voir plus bas
-   Les deux dernieres lignes vont a contre-sens du chantier 2.13 : ce sont les deux Rulebooks qui
-   referencent des livres de fan. Verifie, les cibles existent bien, donc ca fonctionne ; mais le
-   principe pose etait qu'ajouter un livre ne doit jamais demander de modifier BOOK_RULESBOOK.
-   A examiner : reste-t-il des entrees a deplacer vers Green iz Best et Lords of Naggaroth ?
-
-2ter) (CORRIGE le 23/08/2026) DIX-SEPT REFERENCES AVEC UN PREFIXE DE LIVRE FAUX. Trouvees en
-   verifiant que chaque dependance entre livres pointe bien sur quelque chose d'existant. Toutes
-   avaient un equivalent unique sous RULES-, aucune n'existait sous le prefixe ecrit, et les
-   commentaires XML poses a cote confirmaient mot pour mot le talent voulu.
-     BOOK_ROUGH_NIGHTS_AND_HARD_DAYS.Xml : WINDS-T0078 (Beneath Notice), WINDS-T0020 (Luck),
-        WINDS-T0073 (Mimic)                       -- WINDS-T0176_OMBRE sur la meme ligne etait
-                                                     correct et a ete conserve
-     BOOK_UP_IN_ARMS.Xml : WINDS-T0051 (Argumentative), WINDS-T0113 (Fisherman),
-        WINDS-T0074 (Coolheaded), WINDS-T0002 (Suave)
-     BOOK_WINDS_OF_MAGIC.Xml : WINDS-T0067 (Warrior Born), WINDS-T0159 (Very Resilient),
-        WINDS-T0127 (Lightning Reflexes), WINDS-T0158 (Very Strong),
-        WINDS-T0132_LARGER / WINDS-T0132_SMALLER (Fearless)
-     BOOK_LORDS_OF_NAGGAROTH.Xml : NAGGA-COMPCOMB_BASE (x4), NAGGA-COMPPROJ_ARB (x4),
-        NAGGA-COMPCOMB_2M, NAGGA-COMPCOMB_PARAD -- competences d'armes du Rulebook portees par
-        les armes du livre, donc ces armes n'avaient AUCUNE competence associee.
-   Cause probable, visible dans deux cas sur quatre : une ligne voisine utilisait legitimement un
-   code du supplement (WINDS-T0176_OMBRE) et le prefixe a ete recopie sur toute la ligne.
-   Controle final sur les 17 livres : plus AUCUNE reference prefixee ne pointe dans le vide.
-
-2quater) L'AUDIT A GARDER. Ces defauts ne provoquent aucune erreur : le libelle reste vide, c'est
-   tout. Deux audits a relancer apres chaque ajout de livre, ils se font en quelques secondes :
-     (a) atteignabilite des sorts : croiser les <Talent> cites par les <Sort> avec les talents
-         portant <Magic>/<SpellMode> (a trouve la Magie du Chaos, CONTEXT.md 2.18) ;
-     (b) references pendantes : tout code prefixe cite dans un <Talent>/<Skill>/<Career>/<Sort>/
-         <Weapon> doit exister, en tenant compte des generiques _* et des listes separees par
-         ',' ou '/' (a trouve ces 17 references).
-   PIEGE DE COMPTAGE, signale par Nono le 23/08/2026 : ces audits parcourent les 17 FICHIERS, or
-   le Rulebook existe en DEUX fichiers (anglais et francais) qui portent les MEMES ids. Compter
-   les occurrences donne donc 683 sorts la ou le programme, qui ne charge qu'une langue, en
-   affiche 469 - et c'est 469 qui est juste (683 - les 214 sorts du Rulebook comptes deux fois).
-   Il faut compter les ids DISTINCTS, ou exclure le fichier _FRANCAIS. Le meme piege vaut pour
-   les talents, competences et carrieres. Repartition reelle des 469 sorts : Rulebook 214,
-   Winds of Magic 200, Sea of Claws 21, Archives III 18, Up in Arms 9, Archives II 7.
-
-HORS MODELE, a ne pas chercher a saisir : les quatre tables d'armes du livre sont TOUTES de
-l'artillerie (pieces d'artillerie p.100 et p.157, munitions d'artillerie p.44 et p.100) - meme
-decision que pour Up in Arms, l'artillerie n'a pas sa place dans une fiche de personnage. Idem
-pour les bateaux et leurs ameliorations (ch. XII), le bestiaire marin (ch. XVI), et les regles
-de MJ : navigation, meteo, collisions, tests d'equipage, moral, voyages prolonges, commerce.
-Le livre n'a AUCUNE arme ni armure personnelle.
-
-
--------------------------
-INVENTAIRE DE ARCHIVES I / II / III ET WINDS OF MAGIC (23/08/2026)
--------------------------
-Meme methode que pour Up in Arms et Sea of Claws.
-
-=== ARCHIVES OF THE EMPIRE I (96 pages) ===
-COMPLET : les 4 carrieres (Ghost Strider, Fieldwarden, Karak Ranger, Badger Rider), les 14 armes
-des 5 tables, les 2 qualites (Ablaze, Fertile earth).
-(FAIT le 23/08/2026) Les 4 munitions sont saisies en ARCH1-MUNI_01 a _04 :
-   Table "Dwarf Ammunition" p.93 : Drakefire Shot (12) 4/- 0 Rare, As weapon, +2, Damaging
-                                   Precision Shot and Powder 3d 0 Common, As weapon, +1,
-                                     Impale/Penetrating/Precise
-   Table "Eonir Ammunition" p.93 : Starfire Shafts (12) 8/- 0 Exotic, +50, -, Accurate/Impale*
-                                   Swiftshiver Shafts (12) 6/- 0 Common, As weapon, +1,
-                                     Blast 1**/Penetrating
-   (* Ablaze sur critique. ** consommer une fleche par cible touchee par le Blast.)
-   Le doublon "Precision Shot and Powder" (aussi imprimee dans Up in Arms p.102, saisie en
-   UPINA-MUNI_07) a ete CONSERVE, et c'est conforme a la convention deja en place : 29 armes sont
-   deja declarees a la fois dans le Rulebook et dans Up in Arms, chaque livre portant sa version.
-   Ce n'est d'ailleurs pas un doublon exact - les deux livres ne donnent pas le meme prix, 3d dans
-   Archives I et 3/- dans Up in Arms, ce qui justifie a soi seul de garder les deux.
-   Deux points d'interpretation, signales : "Accurate" des tables a ete rendu par la qualite
-   Precise (WEAPB16), comme pour l'Elf Arrow du Rulebook ; et la note de bas de tableau des
-   Starfire Shafts ("on any critical hit, also inflict an Ablaze condition") a ete rendue par
-   ARCH1-WEAPB35 (Ablaze), la qualite que Nono avait creee dans ce meme livre pour le Drakefire
-   Pistol, plutot que laissee en note libre.
-
-=== ARCHIVES OF THE EMPIRE II (95 pages) - les Ogres ===
-COMPLET : les 3 carrieres, les 6 talents (Large + Vice x5), la race et l'ethnie Ogre, les 7 sorts
-du Domaine de la Grande Gueule, les 10 armes, la seule armure du livre (Ogre Gutplate - verifie,
-la table "Ogre Armour" p.29 ne contient qu'une ligne).
-RESTE : rien de substantiel. Une COQUILLE DE SAISIE : l'arme "Tronfist" doit se lire "Ironfist"
-(confusion I/T a la lecture du PDF).
-
-=== ARCHIVES OF THE EMPIRE III (95 pages) ===
-COMPLET : les 3 carrieres de pretres (Handrich, Solkan, Rhya), les 20 armures du chapitre
-"Suits of Steel", les 4 qualites d'armure.
-RESTE - C'EST LE GROS MORCEAU : le livre n'a AUCUN bloc DATA_SPELL, alors qu'il contient environ
-32 sorts. Les trois carrieres de pretres sont donc saisies SANS LEURS PRIERES.
-   (FAIT le 23/08/2026) Les 18 miracles sont saisis, dans un bloc DATA_SPELL cree pour l'occasion
-   (le livre n'en avait aucun) : ARCH3-MIRAC_HANDRICH_01 a _06, ARCH3-MIRAC_SOLKAN_01 a _06, et
-   ARCH3-MIRAC_RHYA_07 a _12 (la numerotation Rhya reprend a 07, les 06 premiers etant dans le
-   Rulebook ; Handrich et Solkan n'en avaient AUCUN, ils repartent donc de 01).
-       Handrich p.47 : Supply and Demand, Trickle Down, A Deal's a Deal, Twist of Fortune,
-           Carry My Burdens, Shake On It
-       Solkan p.55   : Light of Stasis, Still the Winds, Absolute Purity, Fist of Vengeance,
-           Flaming Blade, Fury of the Righteous Sun
-       Rhya p.74     : Rhya's Dominion, Rhya's Flock, Rhya's Abundance, Rhya's Demand,
-           Rhya's Taming, Rhya's Rage
-   "FROZEN ASSETS" et "CARRY ON KISSING", que la premiere extraction avait pris pour des noms de
-   miracles, sont en fait des titres d'encadres d'aventure - ecartes apres relecture page par page
-   en ordre de lecture. Les listes de Benedictions des deux cultes (Charisma/Fortune/... pour
-   Handrich, Battle/Conscience/... pour Solkan) ne sont PAS de nouvelles donnees : elles designent
-   des benedictions generiques deja presentes dans le Rulebook.
-   RESTE de ce livre : les 15 sorts du Domaine de Hedgecraft (voir ci-dessous).
-   The Lore of Hedgecraft p.62+ (15 sorts avec CN) : Dagger of the Art, Fellstave, Nepenthe,
-       Invigorate, Nostrum, Lovelock, Part the Branches, Mirkride, Protection Pouch,
-       Protective Charm, Sightstep, Silvertide, The Ousting, ...
-   BONNE NOUVELLE pour les miracles : RULES-T0012_HANDRICH / _SOLKAN / _RHYA et RULES-T0080_HANDRICH
-   / _SOLKAN / _RHYA existent DEJA. Les 17 miracles se rattachent sans creer aucun talent, donc
-   sans une ligne de Pascal (meme cas que la Magie du Chaos, CONTEXT.md 2.18).
-   HEDGECRAFT - QUESTION RESOLUE le 23/08/2026, verifiee dans le Rulebook lui-meme (meilleure
-   source que le web, qui ne donnait rien d'exploitable). Nono avait raison sur le fond : c'est
-   bien un Domaine a part, PAS un Domaine des huit Colleges. Mais il EXISTE DEJA dans les donnees.
-     * Rulebook p.254 : "The Lore of Hedgecraft", une douzaine de sorts (Shadowstep, Shroud of
-       Invisibility, Goodwill, Mirkride, Nepenthe, Nostrum, Creeping Menace, Protective Charm,
-       Curse of Crippling Pain, Blight, Curse of Ill-Fortune, The Evil Eye...).
-     * Talent d'acces : "Arcane Magic (Hedgecraft)", porte par la carriere Hedge Witch (Brass 2,
-       Rulebook) - qui dans les donnees est RULES-WORK59 et possede bien RULES-T0088_MAGIE.
-     * RULES-T0088_MAGIE est donc LA Hedgecraft. Son libelle actuel, "Arcane Lore (village
-       magic)", est une approximation qui a masque la correspondance : le renommer en
-       "Arcane Lore (Hedgecraft)" eviterait de reposer la question dans six mois.
-   Donc : AUCUN talent a creer. Les 15 sorts de Archives III se rattachent a RULES-T0088_MAGIE.
-   MAIS dedoublonner avant de saisir : les 6 sorts deja presents sous ce talent dans le Rulebook
-   (Good Will, Protective Charm, Ride the Darkness, Nepenthes, Paneacea, Separate branches)
-   recouvrent en partie la liste d'Archives III (Protective Charm, Nepenthe, Part the Branches,
-   Mirkride...). Les libelles anglais saisis semblent etre des retraductions approximatives, il
-   faut comparer sur le SENS et pas sur la chaine.
-   A noter aussi : le Rulebook lui-meme n'a que 6 des ~12 sorts de Hedgecraft de la p.254.
-
-=== WINDS OF MAGIC (222 pages) ===
-COMPLET, et remarquablement : les 15 carrieres (les 8 des Colleges + Beadle, Mundane Alchemist,
-Magister Vigilant, Scryer + les 3 familiers), les 11 talents (Suffuse With x10 + Magical
-Assistant), les 3 familiers en race/ethnie, les 2 competences (Psychometry, Augury), et les
-200 sorts : 8 Domaines x 24 sorts + 8 sorts generiques. La symetrie 8x24 confirme qu'il n'en
-manque aucun.
-RESTE : environ 20 RITUELS (chapitre "Ritual Magic", p.27-33), aucun saisi. Ils ont un CN, une
-portee, une cible et une duree comme des sorts : Bind Monstrous Beast, Bind Spirit Within Power
-Stone, Carve Ogham Stone, Create Power Stone, Conjuration of the Bloody Hidesman, Conjuration of
-the Incarnate Elemental of Death, Conjuration of Jack O' Cinders, Corrupt Waystone, Create
-Construct, Create Familiar, Cursecraft, Invocate Daemon, Materialise the Living Swamp,
-Remove Curse, ...
-   A TRANCHER : un rituel n'est pas un sort ordinaire (ingredients, duree longue, competences
-   annexes). Faut-il un TypSpell "Ritual" a cote de Miracle/Blessing/Arcane/Domain/Minor/Chaos,
-   et quel talent y donne acces ? Question de conception, pas de saisie.
-HORS MODELE : le chapitre XII "Magical Artefacts" (robes de sorcier, parchemins, potions,
-grimoires) - le programme n'a pas de notion d'objet magique, seulement armes et armures. Meme
-decision que "A Soldier's Burden" de Up in Arms. Idem pour les regles de MJ : incantation revisee,
-endeavours, transformations.
-
-
--------------------------
-BUG TROUVE LE 23/08/2026 - 24 SORTS DE WINDS OF MAGIC RATTACHES AU MAUVAIS DOMAINE
--------------------------
-Trouve en cherchant le talent porteur de la Hedgecraft. RULES-T0088_MAGIE est utilise pour DEUX
-domaines differents selon le livre :
-  * dans BOOK_RULESBOOK : Good Will, Protective Charm, Ride the Darkness, Nepenthes, Paneacea,
-    Separate branches -> ce sont bien des sorts de HEDGECRAFT (Rulebook p.254). Correct.
-  * dans BOOK_WINDS_OF_MAGIC : 24 sorts qui sont TOUS du Domaine du Metal (Chamon) - Armour of
-    Tin, Crucible of Chamon, Curse of Rust, Enchant Weapon, Fool's Gold, Feather of Lead, Forge
-    of Chamon, Golden Touch, Transmutation of Chamon, Meteoric Ironclad... -> ils devraient
-    porter RULES-T0088_METAL.
-Preuve supplementaire : Winds of Magic couvre les 8 Colleges, et la repartition de ses 200 sorts
-donne 8 groupes de 24 - mais le groupe METAL est absent et le groupe MAGIE fait 24. Le Rulebook,
-lui, a bien 8 sorts sous RULES-T0088_METAL (Enchanted Weapon, Chamon's Crucible, Steel Scale,
-Chamon's Forge, Fool's Gold, Shifting Metal, Lead Feather, Transmute Chamon).
-CONSEQUENCE CONCRETE : une sorciere de village se voit proposer 24 sorts de Chamon, et un mage
-du Metal ne voit pas son propre domaine.
-CORRIGE le 23/08/2026 : les 24 <Talent> de BOOK_WINDS_OF_MAGIC.Xml passes a RULES-T0088_METAL,
-et eux seuls (verifie avant : les 24 occurrences etaient toutes dans une balise <Talent> de sort,
-aucune ailleurs). Apres correction, la repartition des 200 sorts de Winds of Magic est enfin
-symetrique - 8 Domaines x 24 (Bete, Cieux, Feu, Lumiere, Metal, Mort, Ombre, Vie) + 8 generiques -
-et RULES-T0088_MAGIE ne porte plus que les 6 sorts de Hedgecraft du Rulebook.
-Audit d'atteignabilite refait : 0 sort inaccessible sur 665.
-
-RESTE (petit) : renommer le libelle de RULES-T0088_MAGIE, "Arcane Lore (village magic)" ->
-"Arcane Lore (Hedgecraft)", dans les deux Rulebooks. C'est ce libelle approximatif qui avait
-masque le fait que la Hedgecraft existait deja. Non fait, pas demande.
-
-
--------------------------
-INVENTAIRE DE MIDDENHEIM - CITY OF THE WHITE WOLF (23/08/2026)
--------------------------
-160 pages, mais tres peu de contenu que le programme modelise : c'est un guide de ville. Tout le
-gazetteer (quartiers, PNJ, cultes noirs, Bas Rois), le bestiaire (Bloody Hidesman, Child of Ulric,
-Spectre, White Wolves), Middenball et l'appendice "evenements futurs" sont hors modele.
-
-COMPLET, verifie ligne a ligne contre le livre :
-  * les 3 ethnies (Middenheimer, Middenlander, Nordlander) - les 12 competences de chacune
-    correspondent exactement a la liste du livre p.151-153, et les talents aussi, y compris la
-    forme des choix : Middenheimer "Doomed + (Etiquette ou Strong Back) + 3 aleatoires",
-    Middenlander "(Doomed ou aleatoire) + (Menacing ou Warrior Born) + 3 aleatoires",
-    Nordlander "(Doomed ou aleatoire) + (Fisherman ou Rover) + (Stout-hearted ou Very Resilient)
-    + 2 aleatoires". Rien a corriger.
-  * la carriere Wolf Kin (MIDDE-WORK107) : les 4 niveaux (Survivor, Wolf Club, Wolf Kin,
-    Wolf Brother), les 20 competences reparties 10/5/3/2 sur les niveaux, les 16 talents
-    reparties 4/4/4/4, et l'equipement. Exact.
-
-RESTE A FAIRE - LA TABLE DE TIRAGE DES CARRIERES (p.148-149), aucun bloc DATA_CAREER_ROLL dans le
-fichier. Consequence : les trois ethnies de Middenheim utilisent aujourd'hui la table Humaine de
-base au lieu de la leur.
-  64 carrieres x 3 colonnes (Middenheimer / Middenlander / Nordlander), des Academics aux Warriors,
-  Wolf Kin inclus (66-68 / 59-60 / 57-58). Slayer est a "-" dans les trois colonnes.
-  VERIFIE AVANT SAISIE : les trois colonnes couvrent 01-100 exactement une fois, sans trou ni
-  chevauchement. Pas de coquille de livre cette fois - c'est la premiere table de tirage propre
-  depuis qu'on fait ce controle.
-  La table est COMPLETE (01-100), donc elle se branche comme celle de Lustria, en remplacement
-  total, et non comme la table partielle de Seafarer.
-
-FAUSSE ALERTE, levee par Nono le 23/08/2026 : j'avais signale la "NEW RULE: BROADER CAREERS"
-(p.149 - une carriere peut proposer PLUS DE 8 competences au premier niveau, Wolf Kin en propose
-10) comme un risque pour les fondations. Il n'y en a pas. WinCreation propose autant de
-competences que le metier en contient ; le 8 n'est pas un plafond d'affichage mais le seuil du
-test d'ELIGIBILITE AU CHANGEMENT DE NIVEAU : il faut 8 competences de metier ayant atteint
-niveau x 5 en augmentation (avec, en parallele, le test sur les attributs et celui sur les
-talents). C'est mot pour mot ce que decrit la regle du livre - elle etait deja respectee.
-
-
--------------------------
-CONCEPTION OUVERTE (23/08/2026) - "TABLE DE BASE D'UNE ETHNIE" vs "REGLE OPTIONNELLE"
--------------------------
-Question posee par Nono en voyant la table de Middenheim : "est-ce que chaque race / ethnie n'a
-pas une table de base ? pour les Reiklander c'est celle du RULEBOOK, mais pour les autres ethnies
-elle depend de leur livre d'origine". Verification faite dans les livres : IL A RAISON, et il
-manque DEUX tables de base, pas une.
-
-CE QUI EXISTE AUJOURD'HUI (une seule notion, "regle optionnelle choisie a la creation") :
-  * la table du Rulebook p.30-31, implicite, par RACE (Humain/Nain/Halfling/HElfe/Elfe Sylvain) -
-    c'est de fait la table des Reiklanders, et le repli de toute ethnie qui n'a pas la sienne ;
-  * LUSTR-RULE_LUSTRIA, 325 entrees, 8 cibles ;
-  * SEAOF-RULE_SEAFARER, 31 entrees, PARTIELLE.
-
-CE QUI MANQUE, verifie dans les PDF :
-  * "NORSE CLASS AND CAREER TABLE", Sea of Claws p.56 : une colonne d100 pour les trois ethnies
-    Norses. NON SAISIE - le DATA_CAREER_ROLL de Sea of Claws ne contient que le Seafarer.
-  * la table de Middenheim p.148-149 : 3 colonnes, 64 carrieres. NON SAISIE.
-
-CE QUE LA VERIFICATION MONTRE - TROIS NATURES DIFFERENTES sous un seul mecanisme :
-  1. TABLE DE BASE D'UNE ETHNIE - s'applique a cause de QUI ON EST (Norse, Middenheim, et la
-     colonne Skink de Lustria pour les lezards, dont Lustria est le livre d'origine).
-  2. REGLE DE CAMPAGNE - s'applique a cause d'OU L'ON JOUE. Lustria le dit noir sur blanc p.192 :
-     "for a game set in Lustria... GMs may rule that for campaigns that begin with Characters as
-     new or unprepared arrivals, the usual Class and Career Table is more appropriate."
-  3. VARIANTE DE CLASSE - le Seafarer, qui ne remplace qu'une section (Riverfolk) et qui est la
-     seule regle PARTIELLE.
-
-PROPOSITION DE NONO : garder un seul mecanisme, afficher toutes les regles sur la page des
-metiers, mais PRESELECTIONNER par defaut celle qui vient du livre d'origine de l'ethnie. Ca ne
-cree aucun concept nouveau, juste un defaut de selection.
-
-SOLUTION RETENUE PAR NONO : "dans les races, on ajoute la regle de base" - c'est-a-dire un champ
-sur l'ETHNIE qui nomme sa regle. Meme principe que <Magic>/<SpellMode> du chantier 2.18 : la
-propriete va sur la donnee, pas dans le code.
-
-CONTRECOUT MESURE AVANT DE CODER (23/08/2026), il est faible :
-  1. DONNEES : une balise, par exemple <CareerRule>, sur les <Specie> qui ont leur propre table -
-     les 3 de Middenheim, les 3 Norses, les 2 Skinks. Les ethnies du Rulebook n'en portent pas et
-     retombent sur la table par defaut. Meme travail que <Skill5>/<Skill3> du chantier 2.15 :
-     une constante, la lecture/RAZ/export dans xmlexportimport.pas.
-  2. STRUCTURE : un champ RegleBase: String sur StructureRace (chargerace.pas), a cote de
-     NbPoint3/NbPoint5 ajoutes la veille.
-  3. CODE : UN SEUL point d'insertion. ChargeComboRegle() (wincreation.pas ~1962) n'est appelee
-     QU'UNE FOIS, a la creation de la fiche (ligne 365), avant tout choix d'ethnie, et fait
-     ItemIndex := 0. Le bon moment est ligne ~1006, dans PhaseSave, la branche qui ENTRE dans la
-     phase des metiers : l'ethnie y est connue et ChargeTabMetier() y est deja appelee. Il suffit
-     d'y positionner ComboBoxRegle.ItemIndex sur la regle de l'ethnie si elle est presente dans
-     ListRegle, sinon 0.
-  RIEN d'autre a toucher : RegleEnCours() traduit deja index -> code, et ComboBoxRegleSelect
-  rappelle deja ChargeTabMetier - donc "toutes les regles affichees, une preselectionnee" vient
-  gratuitement, et le joueur peut toujours en choisir une autre. La navigation etant a sens
-  unique (chantier 2.14), la phase des metiers n'est entree qu'une fois : pas de question de
-  memorisation d'un changement manuel.
-  Repli naturel : si le livre de l'ethnie n'est pas charge, sa regle n'est pas dans ListRegle,
-  donc index 0, donc table par defaut.
-
-RESTE OUVERT, mais ne bloque pas : le cumul d'une regle PARTIELLE (le Seafarer est la seule) avec
-la table de base. Aujourd'hui une seule regle a la fois. Le mecanisme distingue deja partiel et
-complet, deduit de la couverture (ChargeTabMetier, 21/08), donc on pourra dire plus tard qu'une
-regle complete remplace et qu'une partielle se cumule - sans rien casser de ce qui precede.
-
-
--------------------------
-COQUILLES DE SAISIE TROUVEES DANS BOOK_RULESBOOK (23/08/2026) - libelles anglais de carrieres
--------------------------
-Trouvees en mappant la table de Middenheim : quatre de ses carrieres ne correspondaient a aucun
-libelle connu. Ce ne sont pas des carrieres manquantes, ce sont des fautes de frappe dans les
-libelles ANGLAIS du Rulebook. Le mapping de la table a ete fait avec les bons codes, mais les
-libelles restent a corriger :
-    RULES-WORK21  "Inverstigator"  ->  "Investigator"
-    RULES-WORK05  "Bailif"         ->  "Bailiff"
-    RULES-WORK17  "Stevedor"       ->  "Stevedore"
-    RULES-WORK22  "Bawl"           ->  "Bawd"
-A verifier avant correction : les libelles FRANCAIS correspondants dans
-BOOK_RULESBOOK_FRANCAIS.Xml, qui peuvent avoir le meme genre de faute.
-NON CORRIGE - ce sont des libelles affiches a l'ecran, pas des codes, donc aucun risque
-fonctionnel, mais "Bawl" au lieu de "Bawd" se voit dans la liste des carrieres.
-
-
--------------------------
-CORRECTION MAJEURE DU 23/08/2026 - LA "TABLE DE BASE PAR ETHNIE" EXISTE DEJA
--------------------------
-Nono avait raison, et plus qu'il ne le pensait : sa question "est-ce que chaque race/ethnie n'a
-pas une table de base ?" decrit le modele DEJA EN PLACE. Verifie sur les 25 ethnies.
-
-  * La table de tirage de base est portee par l'ETHNIE elle-meme, dans le SUBCHAPTER_CAREER de
-    son <Specie>. Les 25 ethnies en ont une (sauf NAGGA-RACE_DELF, 0 entree - a verifier), et
-    toutes celles controlees couvrent 01-100 exactement une fois.
-  * Un DATA_CAREER_ROLL n'est donc PAS une table de base : c'est une SURCHARGE optionnelle. Il
-    n'y en a que deux, et les deux sont bien de cette nature - la table lustrienne (regle de
-    campagne) et le Seafarer (variante de classe, partielle).
-  * Consequence : RIEN A CODER. Pas de balise <CareerRule> sur l'ethnie, pas de preselection,
-    pas de champ RegleBase. Le combo a index 0 = "table de base de l'ethnie" est deja le bon
-    comportement par defaut.
-
-MON ERREUR, annulee : j'avais conclu de l'absence de DATA_CAREER_ROLL dans Sea of Claws et
-Middenheim que leurs tables manquaient, et je les ai saisies (93 + 183 entrees). C'etaient des
-DOUBLONS des tables deja presentes dans les <Specie>. Les deux ajouts ont ete retires, les
-fichiers sont revenus a leur etat anterieur (Sea of Claws : 31 entrees de DATA_CAREER_ROLL, le
-seul Seafarer ; Middenheim : plus de bloc DATA_RULE ni DATA_CAREER_ROLL).
-LECON : avant de conclure qu'une donnee manque, chercher OU le modele la range - ici, un
-inventaire "quels blocs DATA_ le livre possede-t-il" ne suffisait pas, il fallait regarder
-dedans les <Specie>.
-
-CE QUE LA COMPARAISON A QUAND MEME TROUVE (le seul benefice de ce detour) :
-
-1) MIDDENHEIM - Wolf Kin est place a la FIN des trois colonnes au lieu de sa position imprimee.
-     saisi   : HMIDH 98-100, HMIDL 99-100, HNORD 99-100
-     livre   : HMIDH 66-68,  HMIDL 59-60,  HNORD 57-58
-   Toutes les carrieres situees apres sont decalees vers le bas pour compenser. Les LARGEURS de
-   fourchette sont conservees, donc les PROBABILITES sont identiques et le tirage reste juste :
-   c'est un ecart de fidelite a l'imprime, pas un bug fonctionnel. Un joueur qui tire 67 et
-   verifie dans son livre ne trouvera pas la meme carriere. Cause probable : Wolf Kin a ete
-   creee apres la saisie de la table et ajoutee a la fin.
-   CORRIGE : les trois blocs SUBCHAPTER_CAREER reecrits a l'identique de l'imprime, dans l'ordre
-   du livre, avec un commentaire de nom sur chaque ligne. Controle apres reecriture : les trois
-   colonnes couvrent 01-100 sans doublon, et Wolf Kin est bien a 66-68 / 59-60 / 57-58.
-   L'ensemble des carrieres est inchange (57 / 63 / 63), seules les fourchettes bougent.
-
-2) NORSE - l'orphelin du 07 (Agitator 05-06 puis Artisan 08-10, coquille du livre p.57 verifiee
-   a l'image) avait ete tranche en donnant le 07 a ARTISAN (07-10). La regle posee par Nono le
-   23/08/2026 - "on ajoute a celui qui en a le moins, a egalite au premier" - donne l'inverse :
-   Agitator (2 valeurs) plutot qu'Artisan (3), donc Agitator 05-07 et Artisan 08-10.
-   CORRIGE, Nono ayant demande de retroactiver : Agitator passe a 05-07 et Artisan a 08-10,
-   dans les trois ethnies Norses. Les trois colonnes couvrent toujours 01-100.
-
-
--------------------------
-ARCHIVES III - HEDGECRAFT : FAIT le 23/08/2026
--------------------------
-Les 15 sorts du Domaine de Hedgecraft du livre (p.62-64) ont ete depouilles : SIX sont une
-REIMPRESSION du Rulebook p.254 et existaient deja, NEUF sont nouveaux et ont ete saisis en
-ARCH3-COLOR_290 a _298, rattaches a RULES-T0088_MAGIE, TypSpell "Domain Magic".
-  Deja presents (non recopies) : Goodwill, Nepenthe, Nostrum, Part the Branches, Mirkride,
-     Protective Charm.
-  Ajoutes : Dagger of the Art (CN 4), Fellstave (9), Invigorate (2), Lovelock (10),
-     Protection Pouch (5), Sightstep (7), Silvertide (4), The Ousting (8), Wyrd Ward (4).
-Le Domaine compte donc 15 sorts au total, ce qui est exactement la liste du livre.
-
-Verifie au passage : le Rulebook n'etait PAS incomplet. Sa section "Witch Magic" p.254 annonce
-"two lists of six spells" - six pour Hedgecraft, six pour Witchcraft (RULES-T0088_SORCEL). Les 6
-de Nono etaient donc les 6 attendus. Ma remarque precedente sur "6 sur ~12" etait fausse, elle
-venait d'une extraction qui melangeait les deux listes.
-
-RESTE (cosmetique) : les libelles anglais des 6 du Rulebook sont des retraductions approximatives
-et ne correspondent pas aux noms imprimes, ce qui rend le domaine incoherent maintenant que les 9
-autres portent les noms exacts :
-     RULES-COLOR_65  "Good Will"          ->  "Goodwill"
-     RULES-COLOR_67  "Ride the Darkness"  ->  "Mirkride"
-     RULES-COLOR_68  "Nepenthes"          ->  "Nepenthe"
-     RULES-COLOR_69  "Paneacea"           ->  "Nostrum"
-     RULES-COLOR_70  "Separate branches"  ->  "Part the Branches"
-   (RULES-COLOR_66 "Protective Charm" est deja correct.)
-   A verifier en meme temps : les libelles FRANCAIS correspondants. NON CORRIGE.
-
-
--------------------------
-AUDIT DEMANDE PAR NONO (23/08/2026) - MUNITIONS OUBLIEES DANS L'EQUIPEMENT DES METIERS
--------------------------
-Question : "dans les fiches de metiers, est-ce que je n'ai pas oublie d'ajouter les munitions en
-meme temps que les armes a distance ?" Reponse : oui, HUIT cas, sur les 16 metiers qui portent une
-arme a distance sans munition. Les 8 autres sont FIDELES au livre, qui ne donne pas de munition.
-
-METHODE : croiser, pour chaque metier de chaque livre, les <Item name=...> pointant sur une arme
-PROJ_ avec ceux pointant sur une munition MUNI_, puis verifier CHAQUE cas contre le texte imprime
-des Trappings. Les armes de jet (PROJ_LANC) sont exclues, elles n'ont pas de munition.
-Un premier passage ne regardait que les CODES et ratait les equipements en TEXTE LIBRE - c'est le
-Coachman qui l'a revele. Un second passage a cherche les mots bow/crossbow/pistol/sling/arrow/
-bolt/ammunition/shot/handgun/blunderbuss/quiver/powder dans les libellés libres : 3 cas.
-
-(TOUT CORRIGE le 23/08/2026) Le livre donnait la munition, la donnee non :
-  RULES-WORK13  Coachman        niv 2  "Blunderbuss with 10 Shots"
-       CAS PARTICULIER : l'arme ELLE-MEME est en texte libre ("blunderbuss with ten ammunition"),
-       donc ni l'arme ni la munition ne sont liees. A remplacer par RULES-PROJ_POUDRE_03 (Blunderbuss)
-       + RULES-MUNI_06 (Bullet and Powder).
-  RULES-WORK32  Warden          niv 2  "Hand Weapon or Bow with 10 arrows"   -> + RULES-MUNI_02
-  UPINA-WORK65  Archer          niv 1  "Quiver and 10 Arrows, Bow"
-       la munition est presente mais en TEXTE LIBRE ("Quiver and 10 Arrows") -> a coder RULES-MUNI_02
-  UPINA-WORK76  Light Cavalry   niv 4  "Brace of Pistols with Gunpowder and Ammunition" -> + MUNI poudre
-  UPINA-WORK77  Siege Specialist niv 1 "Crossbow and Ammunition"             -> + RULES-MUNI_01
-  SEAOF-WORK116 Wrecker         niv 3  "Crossbow with 10 Bolts" (niveau Pirate) -> + RULES-MUNI_01
-  SEAOF-WORK118 Priest of Stromfels niv 4 "Pistol with 10 Shots" (niveau Priest Captain) -> + MUNI poudre
-  WINDS-WORK80  Beadle          niv 2  "Pistol or Blunderbuss with 12 shots" -> + MUNI poudre
-
-CONFORMES, ne rien changer - le livre ne donne PAS de munition a ces niveaux :
-  RULES-WORK13 Coachman niv 3 (Pistol seul), RULES-WORK26 Flagellant (Sling),
-  RULES-WORK54 Witch Hunter (Crossbow Pistol or Pistol), UPINA-WORK68 Handgunner (Handgun),
-  ARCH1-WORK98 Badger Rider (Sling), ARCH2-WORK92 Maneater (Ogre Pistol).
-
-NON VERIFIABLES faute de PDF (livres pas encore deposes) :
-  NAGGA-WORK119 Black Ark Corsair (Repeater Handbow), NAGGA-WORK121 Beastmaster (Ravager Harpoon),
-  HORNE-WORK117 Ironbreaker (Cinderblast Bomb - consommable, sans doute sans munition).
-
-A NOTER : la valeur d'un <Item name=...> est le NIVEAU de carriere, pas une quantite. On ne peut
-donc pas ecrire "10 fleches" ; on pose la munition au bon niveau, et la taille du lot vient de la
-balise <Ammunition> de la munition elle-meme.
-
-CORRECTION FAITE : les 8 metiers ont recu leur munition (MUNI_01 Bolt, MUNI_02 Arrow ou MUNI_06
-Bullet and Powder selon l'arme), chacune au niveau ou le livre la donne. Le Coachman a aussi
-recupere son arme, qui etait en texte libre dans les DEUX fichiers de langue - le francais portait
-le meme libelle anglais non traduit. Verifie par Nono dans WinMetier sur le cocher.
-Audit relance apres correction : il ne reste que les 8 metiers CONFORMES ou non verifiables.
-
-RESERVE sur RULES-WORK32 (Warden) : le livre ecrit "Hand Weapon OR Bow with 10 arrows". Les
-fleches n'ont donc de sens que si l'arc est choisi, mais le modele ne sait pas conditionner un
-objet a une branche d'alternative - le Warden qui prend l'arme de melee recevra quand meme les
-fleches. Ecart mineur et assume, signale ici pour ne pas le redecouvrir.
-
-
--------------------------
-LE CAS "MUNITION LIEE A UNE SEULE BRANCHE D'UN CHOIX" - RECHERCHE ELARGIE (23/08/2026)
--------------------------
-Question de Nono : est-ce que le cas du Warden se reproduit ailleurs ? Reponse : NON, c'est le
-seul metier joueur concerne.
-
-Le mecanisme de CHOIX existe et est complet : <Item name="A/B"> avec SeparateurMulti, la ligne
-s'affiche "au choix" (ConstArbreAuChoix, LAB_010), un double-clic ouvre WinSpecialisation
-(wincreation.pas 1408) et ChoixNonFait() bloque le passage a l'etape suivante tant qu'un choix
-n'est pas fait. Ce qui n'existe pas, c'est la possibilite d'ATTACHER un objet dependant a UNE
-branche : on ne peut pas ecrire "arme de melee OU (arc + fleches)".
-
-Mesure : 33 equipements a choix dans toute la base, dont 4 avec une arme a distance dans une
-branche - Warden (arme simple ou arc), Maneater (2 mains ou Ogre Pistol), Beadle (Pistol ou
-Blunderbuss), Witch Hunter (Crossbow Pistol ou Pistol). Sur ces 4, un seul pose probleme : les
-trois autres opposent deux armes a distance compatibles avec la meme munition, ou n'ont pas de
-munition dans le livre.
-
-Recherche dans les 9 PDF disponibles des Trappings combinant un "or" et une munition : 5 cas.
-Deux sont deja traites (Warden, Beadle), un est un faux positif (Duelliste : le choix porte sur
-deux armes de melee, le pistolet et sa munition sont inconditionnels), et les DEUX autres -
-"either a Halberd or a Crossbow and 10 Bolts" dans Up in Arms et Sea of Claws - sont des profils
-de PNJ (Hirelings, avec bloc de caracteristiques et Traits), donc hors modele.
-CONCLUSION : garder l'option 1 (le Warden recoit ses fleches meme s'il prend l'arme de melee).
-Ne pas construire de mecanisme pour un cas unique.
-
-TROUVE AU PASSAGE, CORRIGE le 23/08/2026 - erreur de saisie dans le Duelliste (RULES-WORK18),
-niveau 2 :
-   livre  : "Main Gauche or Sword-breaker"
-   saisi  : RULES-COMB_PARAD_02 / RULES-COMB_2M_01  =  main gauche / BASTARD SWORD
-   correct: RULES-COMB_PARAD_02 / RULES-COMB_PARAD_01  =  main gauche / SWORD BREAKER
-   Le Sword Breaker existe bien dans le Rulebook (RULES-COMB_PARAD_01), c'est la bonne arme de
-   parade ; le Bastard Sword est une arme a deux mains, qui n'a rien a faire la. Corrige dans les
-   deux fichiers de langue.
-   Ecarts mineurs du meme metier, NON traites car ce sont des approximations de modele et non des
-   erreurs : niveau 3, le livre donne "Quality Rapier, Hand Weapon, Trusty Second, 2 Wooden
-   Training Swords" la ou la donnee a arme simple + main gauche + 2 epees (pas d'objet "epee
-   d'entrainement en bois" dans la base) ; niveau 4, "2 Quality Weapons" rendu par une seule arme
-   de melee generique.
-
-
--------------------------
-COQUILLES DE LIBELLE - FAIT le 23/08/2026, ET UNE DECOUVERTE BIEN PLUS LARGE
--------------------------
-CORRIGE (10 libelles anglais) :
-  Domaine Hedgecraft, BOOK_RULESBOOK : Good Will -> Goodwill, Ride the Darkness -> Mirkride,
-     Nepenthes -> Nepenthe, Paneacea -> Nostrum, Separate branches -> Part the Branches.
-     Le domaine est desormais homogene avec les 9 sorts d'Archives III.
-  Noms de carriere, BOOK_RULESBOOK : Inverstigator -> Investigator, Bailif -> Bailiff,
-     Stevedor -> Stevedore, Bawl -> Bawd.
-  BOOK_ARCHIVES_OF_THE_EMPIRE_II : Tronfist -> Ironfist.
-  (Les fichiers FRANCAIS ne portent pas ces libelles anglais, sauf pour les carrieres - voir
-  ci-dessous.)
-
-DECOUVERTE A TRANCHER - LES NOMS DE NIVEAU DE CARRIERE EN ANGLAIS SONT DES RETRADUCTIONS.
-En comparant les niveaux saisis aux noms imprimes dans le Rulebook : sur 256 niveaux,
-170 NE FIGURENT PAS dans le livre. Ce ne sont pas des coquilles isolees, c'est un aller-retour
-francais -> anglais systematique. Exemples qui ne laissent aucun doute :
-     Stevedore niv 2 : "tank top"        (debardeur !)      livre : Stevedore
-     Bawd      niv 1 : "prostitute"                         livre : Hustler
-     Bawd      niv 3 : "Pimp"                               livre : Procurer
-     Miner     niv 2 : "Minor"           (mineur)           livre : Miner
-     Riverwoman niv 1: "alevin"                             livre : Grizzled Riverwoman(*)
-     Priest    niv 4 : "Drive"           (conduite ?)       livre : Lector
-     Scholar   niv 3 : "Searcher"        (chercheur)        livre : Fellow
-     Coachman  niv 2 : "Tick"                               livre : Coachman
-     Investigator niv 1 : "Bloodhound"                      livre : Sleuth
-     Bailiff   niv 1 : "Collector"                          livre : Tax Collector
-     Bailiff   niv 3 : "Prefect"                            livre : Reeve
-     Stevedore niv 1 : "Carrier"                            livre : Dockhand
-  (*) les correspondances exactes restent a etablir carriere par carriere.
-AUTRE CONSEQUENCE, vue au passage : dans BOOK_RULESBOOK_FRANCAIS, le NOM de carriere est bien
-traduit (Enqueteur, Bailli, Debardeur, Entremetteur) mais les NOMS DE NIVEAU sont restes en
-anglais - et en anglais FAUX, puisque ce sont ces memes retraductions.
-PORTEE : uniquement des libelles affiches, aucun impact fonctionnel. Mais un joueur anglophone
-voit "tank top" comme niveau de carriere.
-FAISABILITE : le livre imprime les 4 noms de niveau de chaque carriere, dans l'ordre, sous la
-forme "Nom — Brass/Silver/Gold N". Une passe scriptee peut donc reconstruire les 256 libelles
-anglais depuis le PDF. NON FAIT - a decider avec Nono, c'est une reecriture de masse.
-
-
--------------------------
-NOMS DE NIVEAU DE CARRIERE : CORRIGES (23/08/2026), ET MESURE DU RESTE
--------------------------
-CORRIGE : les 173 noms de niveau anglais de BOOK_RULESBOOK qui divergeaient du livre sont alignes
-sur l'imprime. 64 carrieres, 256 niveaux, zero ecart restant. Table de correspondance etablie et
-relue AVANT ecriture (methode validee par Nono), puis jetee - elle n'a pas ete deposee dans le
-projet pour ne pas creer un quatrieme fichier.
-CAUSE, expliquee par Nono : le programme a ete commence avec le livre FRANCAIS, et l'anglais a
-majoritairement ete obtenu par traduction automatique - sauf les NOMS de carriere et de
-competence, cherches a la main dans le livre anglais. D'ou des noms de carriere justes et des
-noms de NIVEAU en aller-retour ("tank top" pour debardeur, "Minor" pour mineur, "Tick" pour
-cocher...).
-
-RESTE 1 - LES LIBELLES DE COMPETENCE.
-   FAIT le 23/08/2026 - les dix coquilles franches sont corrigees dans BOOK_RULESBOOK :
-     RULES-COMPESCAM              "Sleight if Hand"         -> Sleight of Hand
-     RULES-COMPFOCAL_METAL        "Channellingl (Chamon)"   -> Channelling (Chamon)
-     RULES-COMPSAVOIR_*           "Lore (Anyl)"             -> Lore (Any)
-     RULES-COMPSAVOIR_LOCAL       "Lore (Loca)"             -> Lore (Local)
-     RULES-COMPSAVOIR_TILEA       "Savoir (Tilea)"          -> Lore (Tilea)
-     RULES-COMPDRESS_BADGERS      "Dressage (Badgers) "     -> Animal Training (Badgers)
-     RULES-COMPMETIER_GOLDSMITH   "trade (Goldsmight)"      -> Trade (Goldsmith)
-     RULES-COMPLANG_WEST          "Language (wastellander)" -> Language (Wastelander)
-     RULES-COMPLANG_HALF          "Language (halfling)"     -> Language (Halfling)
-     RULES-COMPSIGNES_TZEENTCH    "Lore (Tzeentch)"         -> Secret Signs (Tzeentch)
-     RULES-COMPSIGNES_MINE        "Secret Signs (Minor)"    -> Secret Signs (Miner)
-   RESTE A FAIRE - les FAMILLES entieres, avec la methode de table relue validee pour les
-   carrieres (extraire les lignes "Specialisations:" du chapitre des competences du Rulebook,
-   produire la table saisi -> livre, la faire relire par Nono, puis appliquer) :
-     FAIT le 23/08/2026 - famille Entertain alignee sur le Rulebook (12 libelles, 77 occurrences),
-     et RULES-COMPDIVERT_ACTING fusionne dans RULES-COMPDIVERT_INTERP.
-     FAIT le 23/08/2026 - famille Perform alignee sur le Rulebook (6 libelles, 10 occurrences).
-     Perform (Torture) verifie le 23/08/2026 dans Lords of Naggaroth (Disciple of Khaine, Tier 2) : deja bon.
-     "Melee (Two hands / Fight / Scourge / Hinder)"     contre (Two-Handed / Brawling / Flail / ...)
-     "Ranged (Slingshot / Black Powder / Hand Crossbow / Hindrances)" contre (Sling / Blackpowder / ...)
-     "Play (Violin / Bagpipes)"                         contre (Fiddle / Bagpipe)
-     "Lore (Demonology / Dwarves / Waterways / Black Magic / Know how)"
-     "Trade (Cierier / Boat building / Winegrower ...)"
-   A SIGNALER, pas encore traite : dans BOOK_RULESBOOK_FRANCAIS, plusieurs libelles FRANCAIS sont
-   restes en anglais ou fautifs - RULES-COMPSAVOIR_LOCAL "Lore (Loca)", RULES-COMPSIGNES_TZEENTCH
-   "Lore (Tzeentch)", RULES-COMPSAVOIR_NECROMANCY "Lore (Necromancy)", RULES-COMPLANG_DARKTOUNGE
-   "Language (Dark Tongue)", RULES-COMPMETIER_GOLDSMITH "trade (Goldsmight)", plus des espaces en
-   fin de libelle (Dressage (Badgers) , Langue (wastelander) , Langue (halfling) ). Ce sont des
-   traductions a decider par Nono, donc non corrigees d'office.
-
-RESTE 2 - TROIS IDENTIFIANTS DE COMPETENCE DECLARES DEUX FOIS. FAIT le 23/08/2026 : dedoublonnes
-   dans les deux fichiers Rulebook (RULES-COMPSAVOIR_EMPIRE, RULES-COMPSAVOIR_NECROMANCY,
-   RULES-COMPLANG_DARKTOUNGE). Controle relance : 292 identifiants, aucun doublon.
-
-RESTE 3 - LES DESCRIPTIONS (inquietude de Nono). MESURE FAITE plutot que supposee, sur les
-<Explanation language="ENGLISH"> de BOOK_RULESBOOK, en cherchant un fragment de chaque texte dans
-le PDF :
-     Talents      : 19 verbatim du livre / 159 reformules
-     Competences  :  2 / 43
-     Metiers      :  2 / 62
-     Sorts        :  9 / 191
-   Donc oui, la quasi-totalite des descriptions anglaises sont des retraductions, pas le texte du
-   livre. MAIS - et c'est la bonne nouvelle - un second controle montre que la traduction n'a pas
-   abime la MECANIQUE : en comparant, talent par talent, les NOMBRES et les NOMS DE
-   CARACTERISTIQUE du texte saisi a ceux du bloc correspondant du livre, seuls 9 talents
-   presentent un ecart, et la plupart sont des numeros de page ("page 342") et non des valeurs de
-   regle. Aucun "+10 devenu +20", aucune caracteristique substituee.
-   CONCLUSION PROPOSEE : ne PAS reecrire les 455 descriptions. Une prose reformulee reste lisible
-   et mecaniquement juste ; une re-extraction depuis un PDF en deux colonnes risque d'introduire
-   plus d'erreurs qu'elle n'en corrige. Ce sont les LIBELLES qui meritent le travail, parce qu'ils
-   sont courts, visibles partout dans l'interface, et qu'une erreur y saute aux yeux.
-   Le controle "nombres et caracteristiques" est en revanche a garder : il se relance vite et
-   c'est lui qui attraperait une vraie derive de sens.
-
-=== COMPETENCES : REFERENCES ET DOUBLONS (audit du 23/08/2026) ===
-
-FAIT - quatre references vers un identifiant inexistant corrigees (FOCAL_AZYR -> FOCAL_CIEUX,
-FOCAL_CHAMON -> FOCAL_METAL, FOCAL_KHAINE -> FOCAL_KHAINITE, COMPPROj_POUDRE -> COMPPROJ_POUDRE).
-
-RESTE - quatre references qui demandent une decision, la competence n'existant nulle part :
-     FAIT - RULES-COMPCHEV_BADGERS "Ride (Badger)" declaree le 23/08/2026 (le livre donne bien les
-         deux competences au Badger Rider : Animal Training (Badgers) ET Ride (Badger)).
-     FAIT - RULES-COMPSIGNES_AMBER declaree "Secret Signs (Amber Order)" (Master Shaman, WoM).
-     FAIT - RULES-BEGGING redirige vers RULES-COMPCHARM (le livre ecrit "Tests: Charm (Begging)",
-         il n'existe pas de competence Begging ; ConstCompetenceBonus ne pose qu'un asterisque,
-         donc aucun bonus indu sur Charm).
-     FAIT - RULES-COMPDIVERT_FORTUNETELLING abandonne : l'Astromancer pointe sur
-         RULES-COMPDIVERT_VOYAN, qui est le meme Entertain (Fortune Telling) et servait deja au
-         Mystic. Libelle anglais de VOYAN corrige en "Entertainment (Fortune Telling)".
-     PLUS AUCUNE reference de competence vers un identifiant inexistant (controle du 23/08/2026,
-     301 competences declarees, 16 fichiers).
-
-RESTE - deux doublons de competence reperes pendant l'audit, a arbitrer :
-     FAIT - RULES-COMPCOMB_BAGAR / RULES-COMPCOMB_BAGARRE fusionnes le 23/08/2026. Les deux
-         etaient utilises (BAGAR : 10 metiers du Rulebook, espece Ogre, les 8 armes de bagarre ;
-         BAGARRE : Wolf Kin, Chantyman, Sailor, Ship's Gunner, espece Common Orcs). BAGAR garde,
-         avec le libelle du livre "Melee (Brawling)" repris de BAGARRE. Aucun personnage sauvegarde
-         n'utilisait BAGARRE.
-     RULES-COMPCOMB_ENTRA   "Melee (Hinder)"    contre RULES-COMPPROJ_ENTRAV "Ranged (Hindrances)"
-         VERIFIE DANS LE LIVRE : Entangling est une specialisation de RANGED, pas de Melee
-         (Rulebook, "Specialisations: Blackpowder, Bow, Crossbow, Engineering, Entangling,
-         Explosives, Sling, Throwing"). Dans Up in Arms, Entangle n'est qu'une qualite d'arme.
-         RULES-COMPCOMB_ENTRA est donc un doublon dans la mauvaise famille ; les armes qui le
-         referencent sont RULES-COMB_ENTRA_01 (Whip) et RULES-COMB_ENTRA_02 (Lasso), que le livre
-         classe en Ranged (Entangling). Decision a prendre par Nono avant toute ecriture.
-     Au passage, le bon libelle anglais de RULES-COMPPROJ_ENTRAV est "Ranged (Entangling)" et non
-     "Ranged (Hindrances)" - a traiter avec la table des familles.
-
-DECIDE - les competences declarees mais referencees par aucun metier (35) sont CONSERVEES : ce
-sont des options ouvertes aux joueurs sous le generique _* (Language, Lore, Trade, Art, Play,
-Perform, Ride, Animal Training).
-
-PIEGE D'ANALYSE : une competence est referencee par un attribut name= MAIS AUSSI par le texte
-d'un element (<Skill>"RULES-COMPCOMB_ENTRA"</Skill> dans DATA_WEAPON). Toute recherche
-d'orphelins doit couvrir les deux canaux, sinon elle sur-declare (60 au lieu de 35).
-
-FAIT le 23/08/2026 - audit des munitions termine grace aux fanbooks deposes par Nono :
-     Black Ark Corsair (NAGGA-WORK119) : + RULES-MUNI_01 "Bolt"          (livre : "Repeating Handbow with 10 bolts")
-     Beastmaster       (NAGGA-WORK121) : + NAGGA-MUNI_09 "Barbed Bolts"  (livre : "Ravager Harpoon and 6 Barbed Bolts")
-     NAGGA-MUNI_09 : taille de lot 0 -> 6 (c'etait la seule munition de la base a 0).
-     Green iz Best : aucune carriere a arme a distance.
-     Ironbreaker / Cinderblast Bomb : RIEN A AJOUTER. L'objet est ARCH1-PROJ_EXPLO_03, declare
-     dans Archives of the Empire I, qui le classe sous EXPLOSIVES au prix unitaire (3 GC, Enc 0) :
-     l'objet est lui-meme le projectile. Les trois armes Ranged (Explosive) de la base portent
-     toutes <Ammunition>"0"</Ammunition>. AUDIT DES MUNITIONS TERMINE.
-     RESOLU le 23/08 : Nono a converti le livre en texte (PDF_TEXTE/The_Horned_Rat.txt). Lecture
-     faite : The Horned Rat est le VOLUME DE CAMPAGNE et ne contient aucune carriere jouable.
-     L'Ironbreaker vient de The Horned Rat COMPANION, dont le PDF n'existe pas dans le projet.
-     Il n'y a donc rien a y chercher.
-
-=== REVUE DU LIVRE UP IN ARMS (23/08/2026) - PREMIERE PASSE : LES CARRIERES ===
-
-Methode : extraction depuis le PDF des 15 schemas de progression (nom de niveau, Skills, Talents,
-Trappings de chaque niveau), puis comparaison automatique avec BOOK_UP_IN_ARMS.Xml, libelles
-resolus. Les 15 carrieres du livre sont bien saisies, aucune ne manque. Ci-dessous les ecarts.
-RIEN N'A ETE MODIFIE : table a relire avant ecriture, comme pour les carrieres du Rulebook.
-
-A - ECARTS FRANCS - CORRIGES LE 23/08/2026, sauf les deux lignes marquees NON FAIT
-  Archer niv.4        Secret Signs (Pathfinders)      -> Secret Signs (Scout)
-  Artillerist niv.4   "Artillerist Master"            -> "Master Artillerist"
-  Cartographer 2 / 3  Bookish et Seasoned Traveller sont INTERVERTIS entre les niveaux 2 et 3
-  Cartographer niv.3  Language (Guild) / Secret Signs (Guild) / Etiquette (Guild) : ce n'etaient
-                      pas des erreurs de la carriere mais des LIBELLES du Rulebook. Corriges a la
-                      source, le Rulebook ecrivant lui-meme Guilder (3 fois pour Secret Signs, et
-                      dans sa ligne Specialisations pour Language). Voir plus bas.
-  Cartographer niv.4  CLOS le 24/08 - on garde Cartographer : les trois familles miroir
-                      (Trade, Craftsman, Master Tradesman) l'ecrivent ainsi, c'est Up in Arms
-                      qui ecrit Cartography une fois.
-                      MANQUENT : Study, Quality Theodolite
-  Freelance           Melee (Any) est au niveau 3 ; le livre le donne au niveau 2
-  Blazing Sun niv.1   Language (Classic)              -> Language (Classical)
-  White Wolf niv.2    CLOS le 24/08 - la base a RAISON. Source verifiee par Nono : les quatre
-                      talents sont Menacing, Seasoned Traveller, Strike Mighty Blow et Strike to
-                      Injure. L'"Intimidate" de la ligne Talents du livre est une coquille.
-  Light Cavalry niv.1 Etiquette (Mercenaries)         -> Diceman
-  Light Cavalry niv.2 Charm                           -> Etiquette (Mercenaries)
-  Greatsword niv.3    "Manual on the Art of Fighting" -> "Manual on the Art of Zweihaender Fighting"
-  Siege Spec. niv.3   "set of six 60-sccond fuses"    -> "60-second"
-  Myrmidia niv.3      libelle "Priest Sergean"        -> "Priest Sergeant"
-                      Lore (Any)                      -> Lore (Warfare)
-                      Bookish et Combat Aware sont INTERVERTIS entre les niveaux 1 et 3
-  Myrmidia niv.1      MANQUENT : Leather Jerkin, Myrmidian Icon, White Robes, Spear
-
-B - LANCE CONFONDUE AVEC SPEAR, 3 carrieres. Elles recoivent RULES-COMB_HAST_03 "Spear" alors que
-  le livre ecrit Lance : Knight of the Blazing Sun niv.2, Knight Panther niv.2, Light Cavalry niv.3.
-  La Lance existe pourtant : RULES-COMB_CAVAL_02 (Rulebook) et UPINA-COMB_CAVAL_05 (Up in Arms,
-  avec aussi UPINA-COMB_CAVAL_04 Demi-Lance). Correction evidente, reste a choisir lequel des deux.
-
-C - A ARBITRER, pas des coquilles
-  1. Les ARMURES - TRAITE le 23/08/2026. Les deux "Breastplate" du Rulebook ne sont pas une
-     erreur : la page 300 emploie le meme nom pour les deux et c'est la colonne Armour Type qui
-     les separe (ARMO_05 cuir bouilli, ARMO_14 plate), distinction que la base porte deja dans
-     <Type>. L'attribution par carriere est juste. Le vrai ecart etait "Plate Armour", rendu de
-     trois facons : Loup Blanc niv.2 passe aux cinq pieces comme le Greatsword ; Soleil Flamboyant
-     niv.2 et Freelance niv.2 voient leur chaine hybride "RULES-ARMO_14 and Helm" eclatee en
-     RULES-ARMO_14 + RULES-ARMO_11.
-     Chevalier Panthere niv.2 aligne le meme jour : pieces de plates completes, le Helm standard
-     etant remplace par son "Great Helm with Bestial Crest" que le livre lui donne nommement.
-     IDEE, si l'ambiguite visuelle des deux Breastplate gene dans WinLivre : la donnee n'a pas
-     besoin de bouger, il suffirait d'afficher le <Type> quand deux armures partagent un libelle.
-  2. White Wolf niv.2 : le LIVRE liste "Intimidate" dans les Talents, alors qu'Intimidate est une
-     competence, pas un talent, dans WFRP4 - c'est une bizarrerie du livre. La saisie a mis
-     "Strike to Injure" a la place. A decider : suivre le livre ou garder la substitution.
-  3. Priest of Myrmidia : la base ecrit "Blessed of Myrmidia (Strategy)" et "Invoke Myrmidia
-     (Strategy)" la ou le livre ecrit "Bless (Myrmidia)" et "Invoke (Myrmidia)". Convention
-     volontaire de Nono, a confirmer.
-
-D - ECARTS QUI RELEVENT DES FAMILLES DE LIBELLES, deja au backlog, pas propres a Up in Arms
-  Lore (War)              -> Lore (Warfare)          (10 carrieres concernees)
-  Melee (Two hands)       -> Melee (Two-Handed)
-  Ranged (Black Powder)   -> Ranged (Blackpowder)
-  Ranged (Engineering)    -> Ranged (Engineer)
-  Talents : Unshakable/Unshakeable, War Leader/Warleader, Public Speaker/Public Speaking,
-            Roughrider/Rough Rider, Coolheaded/Cool-headed, Nimble Fingered/Nimble-fingered
-  Ces six-la sont des ecarts d'orthographe entre la saisie et le livre : a trancher en une passe
-  sur la famille des talents, pas carriere par carriere.
-
-E - BUG DE CODE DECOUVERT PENDANT LA REVUE, non corrige
-  Le suffixe de qualite "(Q)" est ecrit de deux facons dans DATABASE : 40 items collent le suffixe
-  au code ("RULES-ARMO_14(Q)") et 42 mettent un ESPACE avant ("RULES-COMB_2M_05 (Q)").
-  Or winlivre.pas LibelleEquipement enleve les 3 derniers caracteres (Copy(CodeItem, 1,
-  Length(CodeItem)-Length(EquipementQualite))) sans Trim ensuite, et pdfmetier.pas /
-  xmlexportimport.pas coupent avec ExtractStringBefore, ce qui laisse aussi l'espace.
-  Le code passe ensuite dans ChercheArme -> CompareRechercheValeur, qui compare sans Trim.
-  Consequence attendue : pour les 42 items ecrits avec un espace, le libelle n'est pas retrouve et
-  c'est le CODE BRUT qui s'affiche ("RULES-COMB_2M_05 de qualite" au lieu de "Zweihaender de
-  qualite"). A verifier par Nono dans WinLivre / WinMetier sur le Greatsword Sergeant.
-  Deux corrections possibles : un Trim dans le code, ou normaliser les 42 items du XML.
-
-=== REVUE D'UP IN ARMS - DEUXIEME PASSE : EQUIPEMENT, TALENTS, QUALITES, MIRACLES ===
-
-CE QUI EST COMPLET, verifie table par table du PDF contre les 77 armes du XML :
-  Armes personnelles : Basic (13 dont les 3 boucliers + la Pavise), Cavalry (4), Fencing (3),
-  Brawling (6), Flail (3), Parrying (4), Polearm (9), Two-Handed (6), Blackpowder (11),
-  Engineering (5), munitions (12). Rien ne manque.
-  Talents : l'appendice III "New and Updated Talents" compte 12 entrees (Beat Blade, Crew
-  Commander, Distract, Drilled, Flee!, Gunner, Rapid Reload, Relentless, Reversal, Roughrider,
-  Shieldsman, Strike to Injure). Onze sont des talents du Rulebook que le livre MET A JOUR, ils
-  existent deja ; le seul VRAIMENT nouveau, Crew Commander, est bien saisi (UPINA-T0173).
-  Qualites du chapitre VIII : Unbalanced, Slash, Spread, Trip - les 4 saisies (UPINA-WEAPB31 a 34).
-  Miracles de Myrmidia : les 9 du livre sont saisis (UPINA-MIRAC_MYRMIDIA_07 a _15).
-
-CE QUI MANQUE - LE CHAPITRE XI, ARTILLERIE ET DEGATS AUX STRUCTURES, EST ABSENT EN ENTIER
-  Aucune arme de siege n'est saisie. Le livre en donne treize :
-     BALLISTA     Ballista (petite, moyenne, grande)
-     CANNON       Cannon (small), Cannon (medium) 100 GC, Cannon (large) 250 GC
-     MORTAR       Mortar 50 GC
-     SWIVEL GUN   Swivel Gun 20 GC
-     CATAPULT     Catapult (small) 20 GC, (medium) 40 GC, (large) 60 GC
-     ENGINEERING  Volley Gun 10 GC, Helblaster Volley Gun 500 GC, Helstorm Rocket Battery 500 GC
-  Et leurs munitions, absentes elles aussi :
-     Bolt (ballista), Ball and Powder + Grapeshot and Powder (cannon), Animal Carcass +
-     Incendiary + Stone (catapult), Bomb + Incendiary (mortar), Bullets and Powder +
-     Small Shot and Powder (swivel gun), Bullet and Powder (12) (volley gun), Rocket (helstorm).
-  Et les deux nouvelles qualites/defauts que ces armes utilisent, ni l'une ni l'autre declaree
-  dans la base (verifie sur les 51 qualites existantes) :
-     Crewed  (defaut)  - l'arme demande un equipage de 2, 3 ou 4 ; c'est exactement ce que sert
-                         le talent Crew Commander deja saisi, qui est donc aujourd'hui sans objet
-     Salvo   (qualite) - rechargement par paliers des Volley Guns et du Helstorm
-  DECIDE le 23/08/2026 par Nono : ON NE SAISIT PAS L'ARTILLERIE. Un personnage ne transporte pas
-  une piece de siege, ce n'est pas de l'equipement individuel. Verification faite, le livre lui
-  donne raison : sur les 15 carrieres, une seule touche a l'artillerie, le Master Artillerist, et
-  son equipement l'ecrit en texte libre ("Artillery piece and Limber"), ce qui est deja le cas
-  dans le XML. Aucune carriere ne recoit de canon, de catapulte ni de baliste comme objet.
-  Consequence assumee : les qualites Crewed et Salvo restent non declarees, et le talent
-  Crew Commander (UPINA-T0173) reste saisi sans arme a laquelle s'appliquer - c'est normal,
-  l'artillerie est du materiel de MJ, pas de personnage. A rouvrir seulement si un jour tu veux
-  equiper des PNJ ou gerer un siege dans le programme.
-
-NON MODELISABLE EN L'ETAT, pour information
-  Le chapitre "A Soldier's Burden" (p.87) donne un tableau d'equipement courant - Theodolite,
-  Compass, Bandoleer, Bow String, Whetstone, Ostrich Feather, Sealskin, Silk Underwear,
-  Captain Braun's Multi-Stove et Insta-Boiler. La base n'a pas de catalogue d'objets : seulement
-  DATA_WEAPON, DATA_ARMOR et leurs bonus. Ces objets ne peuvent donc apparaitre que comme texte
-  libre dans l'equipement d'une carriere, ce qui est le cas aujourd'hui (Theodolite chez le
-  Cartographe). Rien a corriger, sauf si tu veux un jour un DATA_ITEM.
-
-NOUVEAU, trouve pendant l'application des corrections d'Up in Arms : une carriere du Rulebook
-reference l'objet RULES-PROJ_LANC, qui n'est declare nulle part (les armes de jet sont
-RULES-PROJ_LANC_01 et suivantes). Seule reference d'equipement non resolue de toute la base.
-
-=== RETRO-INGENIERIE DES LIBELLES OBSCURS (23/08/2026) - APPLIQUEE, sauf mentions ci-dessous ===
-
-APPLIQUE le 23/08 : les 12 libelles ci-dessous et la fusion Lore (Region) -> Lore (Local).
-NON APPLIQUE, et pour cause : "Trade (Poisons)" n'est PAS un doublon mort - le livre le donne a
-l'Herb Master, niveau 3 de l'Herbalist. Ma conclusion venait d'un bug de comptage, la declaration
-a ete retablie. Lore (Remedies) -> Lore (Medicine) : fait le meme jour, voir plus bas.
-
-Methode demandee par Nono : pour chaque libelle douteux, chercher QUELLES CARRIERES l'utilisent,
-puis lire le bloc correspondant dans le PDF du livre d'origine. Ca marche tres bien : le libelle du
-livre se lit directement dans la ligne Skills de la carriere, il n'y a plus rien a deviner.
-
-LORE
-  Lore (Region)      -> Lore (Local)      RULES-COMPSAVOIR_REG, 14 carrieres du Rulebook (Artisan,
-                       Bailiff, Townsman, Coachman, Advisor, Smuggler, Scout, Bawd, Riverwoman,
-                       Herbalist, Outlaw, Warden, Merchant, Beggar, Messenger, Watchman, Miner,
-                       Huffer, Noble, Nun, Racketeer, Fence, Witch Hunter, Servant, Hedge Witch,
-                       Villager, Thief). Le livre ecrit "Lore (Local)" 24 fois.
-                       !! DOUBLON : RULES-COMPSAVOIR_LOCAL "Lore (Local)" existe deja et sert
-                       3 fois. Cinquieme occurrence du motif BAGAR/BAGARRE - a fusionner.
-  Lore (Waterways)   -> Lore (Riverways)  RULES-COMPSAVOIR_VFLUV, 6 carrieres (Boatman, Smuggler,
-                       Riverwoman, Wrecker, Huffer, Riverwarden). Le livre ecrit Riverways 5 fois,
-                       sur exactement ces carrieres.
-  Lore (Know how)    -> Lore (Etiquette)  RULES-COMPSAVOIR_SAVVIV. L'identifiant dit tout : SAVVIV
-                       = savoir-vivre, retraduit en "Know how". Le livre donne "Lore (Etiquette)"
-                       au Honour Guard, niveau 3 du Guard - la carriere qui l'utilise.
-  Lore (Black Magic) -> Lore (Dark Magic) RULES-COMPSAVOIR_MAGNOIR. Le livre le donne au Wyrd,
-                       niveau 3 de la Witch - la carriere qui l'utilise.
-  Lore (Remedies)    -> Lore (Medicine) ?  RULES-COMPSAVOIR_REMED, utilise par Apothecary,
-                       Herbalist, Physician, Grave Robber. Le livre ecrit "Lore (Medicine)" 4 fois.
-                       FAIT le 23/08 : confirme carriere par carriere ET sur les 14 livres.
-                       "Lore (Remedies)" n'existe dans aucun livre, "Lore (Medicine)" apparait
-                       12 fois dans 8 livres. Sixieme doublon : REMED portait les 4 carrieres du
-                       Rulebook, MEDICINE en portait 2 (Green Watcher d'Archives III, Alchemist
-                       de Winds of Magic). MEDICINE garde, REMED supprime.
-  Lore (Routes)      -> deja bon, le livre l'ecrit tel quel pour le Coachman.
-  Lore (Roadways)    -> DEJA BON, verifie le 23/08 : Nono a depose Salzenmund.pdf, et le Master
-                       Owler (niveau 3 de l'Owler) a bien "Lore (Law), Lore (Roadways)". Rien a
-                       changer. Au passage, le meme livre donne "Lore (Local)" a l'Owler niveau 2
-                       et le XML de Salzenmund pointe bien sur RULES-COMPSAVOIR_LOCAL - c'est le
-                       Rulebook qui utilise le doublon RULES-COMPSAVOIR_REG, ce qui confirme le
-                       sens de la fusion : garder LOCAL, faire disparaitre REG.
-
-TRADE
-  Trade (artistic material) -> Trade (Art Supplies)   RULES-COMPMETIER_MATART, Artist niv.2
-  Trade (trinkets)          -> Trade (Charms)         RULES-COMPMETIER_COLIF, Hedge Witch niv.2
-  Trade (Handyman)          -> Trade (Tinker)         RULES-COMPMETIER_BRICO, Pedlar niv.2
-  Trade (Winegrower)        -> Trade (Vintner)        RULES-COMPMETIER_VIGN, Nun niv.2
-  Trade (Boat building)     -> Trade (Boatbuilding)   RULES-COMPMETIER_BATEA, Boatman niv.3
-  Trade (farrier)           -> Trade (Farrier)        minuscule
-  Trade (Cierier)           -> Trade (Chandler)       cirier non traduit ; AUCUNE carriere ne
-                               l'utilise, donc option libre.
-  Trade (Poisons)           -> A GARDER. Le livre l'ecrit pour l'Herb Master (Herbalist niv.3).
-                               Ma conclusion "doublon mort" etait fausse, bug de comptage.
-
-PLAY
-  Play (Bagpipes) -> Play (Bagpipe)  (singulier dans la ligne Specialisations ; aucune carriere)
-  Play (Drum) et Play (Fife) : le livre ecrit "Play (Drum or Fife)" pour le Soldier. Le decoupage
-    en deux identifiants est un choix de modele, pas une erreur - a garder.
-  Play (Violin), (Horn), (Harpsichord), (Lute) : conformes au livre.
-  Play (Flute) et (Pennywhistle) viennent d'Up in Arms et Sea of Claws, pas du Rulebook.
-
-MELEE et RANGED (deja identifies, rappel)
-  Melee (Two hands)   -> Melee (Two-Handed)
-  Melee (Scourge)     -> Melee (Flail)
-  Melee (Hinder)      -> doublon de Ranged (Entangling), voir l'arbitrage COMB_ENTRA / PROJ_ENTRAV
-  Ranged (Hindrances) -> Ranged (Entangling)
-  Ranged (Slingshot)  -> Ranged (Sling)
-  Ranged (Black Powder) -> Ranged (Blackpowder)
-
-Vu en passant dans Salzenmund : le livre ecrit "Lore (Dwarfs)" la ou la base a "Lore (Dwarves)"
-(RULES-COMPSAVOIR_NAIN). A verifier contre le Rulebook avec la famille Lore.
-
-=== LES TROIS DERNIERS COMPAGNONS, VERIFIES LE 23/08/2026 - CORRECTIONS EN ATTENTE DE GO ===
-
-Les 16 livres de DATABASE ont maintenant leur texte dans LIVRES\ (dossier renomme depuis PDF_TEXTE, exclu de git). Les trois derniers arrives
-(Enemy in Shadows Companion, Death on the Reik Companion, Rough Nights and Hard Days) ont ete
-verifies aussitot. Chacun n'apporte qu'une carriere, sauf Rough Nights qui n'en apporte aucune.
-
-ROUGH NIGHTS AND HARD DAYS : conforme. Aucune carriere dans le livre, aucune dans le XML ; ce que
-la base en tire est l'espece GNOME (ROUGH-RACE_GNOME), ce qui est bien l'apport du livre.
-
-CULT MAGUS OF TZEENTCH (ENEMY-WORK106) - quatre ecarts
-  niv.1  Secret Signs (Tzeentch)      -> le livre ecrit Lore (Tzeentch). VRAIE ERREUR : une
-         competence de Savoir saisie dans la famille Signes Secrets. RULES-COMPSAVOIR_TZEENTCH
-         n'existe pas encore, a creer ou a rattacher.
-  niv.2  Arcane Lore (Tzeentch)       -> le livre ecrit Chaos Magic (Tzeentch). Le talent existe
-         en base (RULES-T0172_*), donc a rebrancher - et c'est coherent avec le chantier 2.18.
-  niv.2  equipement "Good Quality Ritual" -> TRONQUE, le livre dit "Good Quality Ritual Vestments".
-  niv.1  talent "Tzeentch s Blessing" -> l'apostrophe a saute, "Tzeentch's Blessing".
-  (niv.2 Public Speaker / Public Speaking et niv.3 Demonology / Daemonology relevent des familles.)
-
-WARRIOR OF TZEENTCH (DEATH-WORK105) - un ecart, mais franc
-  niv.1  Suffuse With (Ulgu)          -> le livre ecrit Strike Mighty Blow. Ce n'est pas une
-         variante de libelle, c'est un TALENT DIFFERENT. A corriger.
-  niv.3  "Plate Armour and Helm" est rendu par Breastplate + Helm, comme dans Up in Arms avant
-         arbitrage - a aligner sur la meme decision (les pieces completes).
-  Le reste est conforme, y compris le fait que la base ecrive correctement "Language (Dark Tongue)"
-  la ou le livre a une coquille, "Dark Tounge".
-
-FAIT (23/08/2026) - LA FAMILLE RULES-T0088_* EST PASSEE A "ARCANE MAGIC (X)".
-Tranche par la lecture du chapitre des talents : les livres declarent "Arcane Magic (Lore)", et le
-texte de l'entree dit "one of the 8 Arcane LORES of Magic" - Lore est ce qu'on apprend, Arcane
-Magic est le talent. C'etait donc le generique de la base qui etait faux. 32 occurrences dans
-4 livres, doublon RULES-T0088_TZEENTCH resolu, et RULES-T0088_MAGIE "village magic" identifie par
-ses sorts (Mirkride, Nepenthe, Nostrum, Part the Branches...) comme le Lore of Hedgecraft :
-renomme "Arcane Magic (Hedgecraft)".
-RESTE dans cette famille, sans source claire : les livres hesitent entre Beasts/Beast,
-Shadows/Shadow, Witchery/Witchcraft ; et _DEMON ecrit "Demonology" contre "Daemonology" ailleurs.
-livres, "Arcane Magic (X)" est le nom du Rulebook et "Arcane Lore (X)" celui de Winds of Magic pour
-le MEME talent. C'est donc une convention a choisir pour toute la famille RULES-T0088_*, et il faut
-d'abord regarder combien de specialisations portent chaque forme.
-
-AUDIT "SPECIALISATION CONTRE GENERIQUE" (23/08/2026) - a relancer apres chaque ajout de livre.
-Principe donne par Nono : le libelle du generique X_* dit la convention de toute la famille.
-54 ecarts trouves, dont 4 corriges le jour meme (T0092 generique, T0172_NURGLE et _SLAANESH,
-COMPFOCAL_KHAINITE). Les 50 autres se repartissent en deux paquets :
-  - RULES-T0012_* (12) et RULES-T0080_* (11) : les generiques sont "Blessed (Any)" et
-    "Invoke (Any)" mais les specialisations ecrivent "Blessed of Sigmar (Empire)" et
-    "Invoke Sigmar (Empire)". C'est la CONVENTION DELIBEREE de Nono, qui ajoute le domaine.
-    Les livres, eux, ecrivent "Bless (Sigmar)" et "Invoke (Sigmar)", sans domaine. A arbitrer -
-    et si la convention est gardee, ce sont les GENERIQUES qu'il faut aligner, pas l'inverse.
-    Deux cas sont fautifs quelle que soit la decision : RULES-T0012_MANANN "Beni of Manann" et
-    RULES-T0012_RHYA "Beni of Rhya" - du francais reste en anglais. Et RULES-T0012_HANDRICH
-    "Bless (Handrich)" et _SOLKAN "Bless (Solkan)" n'ont pas de domaine la ou les 10 autres en ont.
-  - RULES-T0088_* (3) : voir l'arbitrage ci-dessus.
-
-=== CHANTIER OUTILLE : VERIFICATION DE MASSE DES LIBELLES CONTRE LES LIVRES ===
-
-CAUSE RACINE, donnee par Nono le 23/08 : le texte des PDF etait extrait par un programme
-travaillant SUR LES IMAGES, donc de l'OCR. D'ou une famille entiere de coquilles qui n'etaient
-pas des fautes de frappe - Tronfist/Ironfist, 60-sccond, Newly Crafter, Throwing kKnife,
-Betrayal of 'Tzeentch. Deux causes se superposaient : la retraduction depuis le francais ET l'OCR.
-PDF_TEXTE contient maintenant les textes extraits par pdftotext, c'est-a-dire la couche texte du
-PDF et non une relecture d'image : la comparaison devient fiable.
-
-METHODE : normaliser apostrophes et espaces, chercher chaque libelle anglais dans le corpus des
-14 livres reunis, et sortir ce qui ne s'y trouve NULLE PART. Se relance en une commande.
-
-MESURE DU 23/08 - ce qui reste a passer en revue :
-     sorts        113 introuvables sur 478
-     talents      106 sur 382
-     competences   43 sur 271
-     armes         14 sur 183
-     armures       24 sur  41   (dont les "(A3)" et "Lustrian ...", conventions volontaires)
-     noms de niveau de carriere : 0 sur ~450 - cette partie est saine.
-
-FAUX POSITIFS CONNUS, a filtrer d'entree : le suffixe "(A3)" ajoute pour distinguer les armures
-d'Archives III, les libelles "Lustrian ...", et les generiques en "(any)".
-
-ECHANTILLON DE VRAIS ECARTS DEJA VISIBLES :
-     RULES-COMB_BASE_02   "Goof"              (gourdin ?)
-     RULES-COMB_BASE_03   "Chopped"           (hachoir ?)
-     RULES-COMB_BAGAR_02  "Unharmed"          -> Unarmed
-     RULES-PROJ_EXPLO_02  "Incendary"         -> Incendiary
-     RULES-COMB_PARAD_01  "Sword Breaker"     -> Swordbreaker
-     RULES-PROJ_LANC_02   "Throwing kKnife"   -> Throwing Knife
-     RULES-ARCAN_02       "Aethyr Armor"      -> Aethyric Armour ?
-     RULES-CHAOS_03       "Betrayal of 'Tzeentch"
-A traiter famille par famille, avec la meme methode que d'habitude : sortir la table, la faire
-relire, puis appliquer.
-
-FAIT le 24/08/2026 - FAMILLES MELEE ET RANGED alignees (7 libelles), et RULES-COMPCOMB_ENTRA
-"Melee (Hinder)" supprime : doublon dans la mauvaise famille, ses 4 armes (Whip, Lasso,
-Harpoon Launcher, Chain Trap) basculees sur RULES-COMPPROJ_ENTRAV. Le chantier des familles de
-libelles est CLOS : Secret Signs, Entertain, Perform, Lore, Trade, Melee, Ranged.
-
-FAIT le 24/08/2026 - FAMILLES BLESS ET INVOKE alignees sur le livre : "Bless (Sigmar)",
-"Invoke (Sigmar)", generiques "Bless (Any)" et "Invoke (Any)". 23 libelles, 34 occurrences.
-Quatre graphies cohabitaient avant (Blessed of X (Domaine), Bless (X), Blessed by X, Beni of X).
-RESTE : les libelles FRANCAIS de ces deux familles, non touches - ils gardent "Beni de Sigmar
-(Empire)" / "Invocation de Sigmar (Empire)". Si on suit la meme logique, ils deviendraient
-"Benediction (Sigmar)" et "Invocation (Sigmar)" ; c'est une decision de traduction.
-Et six libelles du fichier FRANCAIS sont restes en anglais dans cette famille (Handrich, Solkan,
-Stromfels, pour Bless comme pour Invoke).
-
-FAIT le 24/08/2026 - LES TROIS FAMILLES MIROIR DU METIER normalisees. La competence Trade (X),
-le talent Craftsman (X) (RULES-T0092_*) et le talent Master Tradesman (X) (RULES-T0157_*) portent
-les memes suffixes d'identifiant et doivent porter les memes spécialisations. 9 divergences
-trouvees, 7 corrigees (Boat Builder -> Boatbuilding, Handyman -> Tinker, Cirier -> Chandler,
-Trinkets -> Charms, Art Material -> Art Supplies, farrier -> Farrier, Vigneron/Winegrower ->
-Vintner), plus 8 commentaires en minuscule et le doublon RULES-T0157_APOTH.
-Et l'arbitrage "Master Tradesman (Cartographer) ou (Cartography)" est clos : les trois familles
-disent Cartographer, on garde.
-RESTENT deux divergences volontaires :
-  INGE - le Rulebook ecrit lui-meme "Craftsman (Engineer)" et "Master Tradesman (Engineering)".
-  ARMU - Trade et Master Tradesman disent Gunsmith, Craftsman dit Armourer ; aucun des deux
-         talents n'est utilise, aligner supprimerait le seul "Craftsman (Armourer)".
-A RETENIR : cette regle des familles miroir vaut aussi ailleurs (Bless/Invoke portent les memes
-suffixes de dieu, Arcane Magic et Channelling les memes suffixes de vent). A verifier un jour.
-
-RESOLU (24/08) - CAVALERIE LEGERE niveau 2 : remise a 6 competences + 4 talents. Etiquette
-(Mercenaries) retire, Charm rendu aux competences, Diceman conserve au niveau 1. Source apportee
-par Nono, cohérente avec la ligne Talents du livre. Le texte anglais rangeait Etiquette - un
-TALENT - dans la ligne des competences ; c'est cette anomalie qui m'avait egare.
-
-
-=== DECISION DE NONO (24/08/2026) : LES LIBELLES FRANCAIS SONT GELES ===
-
-"pour le francais, c'est un sujet que tu oublies pour l'instant".
-
-On ne touche plus a BOOK_RULESBOOK_FRANCAIS ni aux <Description language="FRANCAIS"> tant que
-Nono ne rouvre pas le sujet. Les identifiants et la structure continuent bien sur d'etre corriges
-dans les deux fichiers - c'est uniquement le TEXTE francais qui est gele.
-
-Ce qui attendra donc, sans y revenir a chaque fois :
-  - les libelles francais restes en anglais (Lore (Loca), Lore (Tzeentch), Lore (Necromancy),
-    Language (Dark Tongue), trade (Goldsmight), Bless (Handrich), Bless (Solkan),
-    Blessed by Stromfels, Invoke (Handrich), Invoke (Solkan), Invoke Stromfels (Predators),
-    Ranged (Catapult), Entertain (Bellow), Entertain (Acting)...) ;
-  - les espaces en fin de libelle (Dressage (Badgers) , Langue (wastelander) , Langue (halfling) ) ;
-  - la convention francaise de Bless/Invoke, qui devrait suivre l'anglais si elle etait reprise
-    ("Benediction (Sigmar)" / "Invocation (Sigmar)" au lieu de "Beni de Sigmar (Empire)").
-
-=== VERIFICATION DE MASSE DES LIBELLES ANGLAIS (24/08/2026) - LISTE DE CANDIDATS ===
-
-Methode : chaque libelle anglais declare dans DATABASE est cherche dans le corpus des 14 livres
-reunis (7,8 Mo de texte pdftotext), apres normalisation des apostrophes, tirets et espaces, puis
-une seconde passe insensible a la casse. Ce qui ne s'y trouve nulle part est un CANDIDAT, pas une
-erreur : beaucoup de specialisations existent sans etre ecrites en toutes lettres dans un livre.
-La suggestion vient d'une comparaison approchee avec le vocabulaire du corpus.
-
-1348 libelles verifies, 245 introuvables : 99 sorts, 85 talents, 33 competences, 23 armures,
-5 armes. La mention "(famille connue, specialisation absente du corpus)" signale un libelle dont
-la FAMILLE est attestee mais pas la specialisation - le plus souvent legitime.
-
-REFERENCES DE FAMILLE RELEVEES DANS LE RULEBOOK, qui tranchent plusieurs cas :
-   Art               Cartography, Engraving, Mosaics, Painting, Sculpture, Tattoo, Weaving
-   Animal Training   Demigryph, Dog, Horse, Pegasus, Pigeon
-   Ride              Demigryph, Great Wolf, Griffon, Horse, Pegasus
-   Armures           les livres ecrivent Mail Shirt (40 fois), Mail Coat (14), Mail Chausses (3),
-                     Mail Coif (3) - jamais "Chainmail", sauf Coat 3 fois
-
-
---- ARMES (5 candidats) ---
-   NAGGA-PROJ_ARB_04                Repeater Crossbow                      
-   RULES-COMB_BASE_02               Goof                                   God of
-   RULES-COMB_PARAD_01              Sword Breaker                          Swordbreaker | Sword-breaker
-   RULES-PROJ_EXPLO_02              Incendary                              Incendiary | An Incendiary
-   RULES-PROJ_LANC_02               Throwing kKnife                        Throwing Knife | Throwing Knives
-
---- ARMURES (23 candidats) ---
-   ARCH3-ARMO_18                    Leather Jack (A3)                      Leather Jack
-   ARCH3-ARMO_19                    Leather Jerkin (A3)                    Leather Jerkin | Leather Jerkin Body
-   ARCH3-ARMO_20                    Leather Leggings (A3)                  Leather Leggings
-   ARCH3-ARMO_21                    Leather Skullcap (A3)                  Leather Skullcap
-   ARCH3-ARMO_22                    Chainmail Chausses (A3)                
-   ARCH3-ARMO_23                    Chainmail Coat (A3)                    Chainmail Coat
-   ARCH3-ARMO_24                    Chainmail Coif (A3)                    
-   ARCH3-ARMO_25                    Chainmail Shirt (A3)                   
-   ARCH3-ARMO_26                    Brigandine Jack                        Brigandine
-   ARCH3-ARMO_27                    Brigandine Jerkin                      
-   ARCH3-ARMO_28                    Bracers (A3)                           
-   ARCH3-ARMO_29                    Breastplate (A3)                       Breastplate | Breastplates
-   ARCH3-ARMO_30                    Open Helm (A3)                         Open Helm
-   ARCH3-ARMO_31                    Plate Leggings (A3)                    Plate Leggings
-   LUSTR-ARMO_01                    Lustrian Skullcap                      
-   LUSTR-ARMO_02                    Lustrian Leggings                      
-   LUSTR-ARMO_03                    Lustrian Jerkin                        
-   LUSTR-ARMO_04                    Lustrian Jack                          
-   RULES-ARMO_06                    Chainmail Chausses                     
-   RULES-ARMO_07                    Chainmail Shirt                        
-   RULES-ARMO_08                    Chainmail Coif                         Chainmail Coat | Chainmail
-   RULES-ARMO_98                    Coiffe de maille                       
-   RULES-ARMO_99                    Cotte de maille                        
-
---- COMPETENCES (33 candidats) ---
-   RULES-COMPART_MOSAI              Art (Mosaic)                           (famille connue, specialisation absente du corpus)
-   RULES-COMPART_SCUL               Art (Carving)                          Art (Engraving)
-   RULES-COMPART_TATOU              Art (Tattoo)                           (famille connue, specialisation absente du corpus)
-   RULES-COMPART_TISSA              Art (Weaving)                          Art (Engraving)
-   RULES-COMPCHEV_DEMIG             Ride (Demi-Griffin)                    Ride (Griffon)
-   RULES-COMPCHEV_GRIFF             Ride (Griffin)                         Ride (Griffon)
-   RULES-COMPCHEV_LOUP              Ride (Big Wolf)                        (famille connue, specialisation absente du corpus)
-   RULES-COMPDRESS_DEMIG            Animal Training (Demigriffin)          (famille connue, specialisation absente du corpus)
-   RULES-COMPDRESS_PEGA             Animal Training (Pegasus)              (famille connue, specialisation absente du corpus)
-   RULES-COMPFOCAL_KHAINITE         Channelling (Khainite Sorcery)         (famille connue, specialisation absente du corpus)
-   RULES-COMPLANG_HALF              Language (Halfling)                    (famille connue, specialisation absente du corpus)
-   RULES-COMPLANG_NEHEKRARAN        Language (Nehekharan)                  (famille connue, specialisation absente du corpus)
-   RULES-COMPLANG_VOL               Language (Thief)                       Language (Thief )
-   RULES-COMPMETIER_ARMOURER        Trade (Armourer)                       (famille connue, specialisation absente du corpus)
-   RULES-COMPMETIER_CIRIE           Trade (Chandler)                       (famille connue, specialisation absente du corpus)
-   RULES-COMPMETIER_EMBAU           Trade (Embalmer)                       (famille connue, specialisation absente du corpus)
-   RULES-COMPMETIER_TANNE           Trade (Tanner)                         Trade (Tinker)
-   RULES-COMPMETIER_WEAPONSMITH     Trade (Weaponsmith)                    Trade (Weaponsmith or Armourer) | Trade (Gunsmith)
-   RULES-COMPREPRES_FUNAN           Perform (Rope Walking)                 (famille connue, specialisation absente du corpus)
-   RULES-COMPREPRES_JONGL           Perform (Juggling)                     Perform ( Juggling)
-   RULES-COMPSAVOIR_BLOODDRAGON     Lore (Blood Dragon)                    Lore (Dragons)
-   RULES-COMPSAVOIR_DEMO            Lore (Demonology)                      Lore (Daemonology) | Lore (Geology)
-   RULES-COMPSAVOIR_GUERRE          Lore (War)                             (famille connue, specialisation absente du corpus)
-   RULES-COMPSAVOIR_LAHMIAN         Lore (Lahmian Sisterhood)              (famille connue, specialisation absente du corpus)
-   RULES-COMPSAVOIR_NAIN            Lore (Dwarves)                         Lore (Dwarfs)
-   RULES-COMPSAVOIR_NECRARCH        Lore (Necrarch)                        Lore (Necromancy)
-   RULES-COMPSAVOIR_NORSCA          Lore (Norsca)                          (famille connue, specialisation absente du corpus)
-   RULES-COMPSAVOIR_STROIGOI        Lore (Strigoi)                         (famille connue, specialisation absente du corpus)
-   RULES-COMPSAVOIR_VONCARSTEIN     Lore (Von Carstein)                    (famille connue, specialisation absente du corpus)
-   RULES-COMPSIGNES_ECLAI           Secret Signs (Pathfinders)             (famille connue, specialisation absente du corpus)
-   RULES-COMPSIGNES_RURAUX          Secret Signs (Rural)                   (famille connue, specialisation absente du corpus)
-   RULES-COMPSIGNES_TZEENTCH        Secret Signs (Tzeentch)                (famille connue, specialisation absente du corpus)
-   RULES-COMPSIGNES_VOL             Secret Signs (Thief)                   Secret Signs (Thief ) | Secret Signs (Thieves)
-
---- TALENTS (85 candidats) ---
-   ARCH2-T0175_ALCOHOL              Vice (Alcohol)                         (famille connue, specialisation absente du corpus)
-   ARCH2-T0175_NARCO                Vice (Narcotics)                       (famille connue, specialisation absente du corpus)
-   ARCH2-T0175_PLEASURE             Vice (Pleasure)                        (famille connue, specialisation absente du corpus)
-   RULES-T0012_TAAL                 Bless (Taal)                           (famille connue, specialisation absente du corpus)
-   RULES-T0012_VERENA               Bless (Verena)                         (famille connue, specialisation absente du corpus)
-   RULES-T0013_BOID                 Strider (Woodedlands)                  Strider (Woodlands)
-   RULES-T0013_DES                  Strider (Deserts)                      (famille connue, specialisation absente du corpus)
-   RULES-T0013_LIT                  Strider (Littoral)                     (famille connue, specialisation absente du corpus)
-   RULES-T0013_MAR                  Strider (Swamps)                       (famille connue, specialisation absente du corpus)
-   RULES-T0013_TOUN                 Strider (Tundra)                       (famille connue, specialisation absente du corpus)
-   RULES-T0069_BAND                 Hatred (Outlaw)                        Hatred (Outlaws)
-   RULES-T0069_CHAOS                Hatred (Followers of Chaos)            Hatred (Followers of Stromfels) | Hatred (Followers of Nurgle)
-   RULES-T0069_MANANN               Hatred (Manannites)                    (famille connue, specialisation absente du corpus)
-   RULES-T0069_MONSTR               Hatred (monsters)                      (famille connue, specialisation absente du corpus)
-   RULES-T0069_SDISSI               Hatred (Dissident Wizards)             (famille connue, specialisation absente du corpus)
-   RULES-T0069_SIGMAR               Hatred (sigmarites)                    (famille connue, specialisation absente du corpus)
-   RULES-T0080_TAAL                 Invoke (Taal)                          (famille connue, specialisation absente du corpus)
-   RULES-T0080_VERENA               Invoke (Verena)                        (famille connue, specialisation absente du corpus)
-   RULES-T0088_BETE                 Arcane Magic (Beast)                   Arcane Magic (Beasts)
-   RULES-T0088_DEMON                Arcane Magic (Demonology)              (famille connue, specialisation absente du corpus)
-   RULES-T0088_MAW                  Arcane Magic (Lore of the Great Maw)   Arcane Magic (Lore of Death) | Arcane Magic (Lore of Beasts)
-   RULES-T0088_NECRO                Arcane Magic (Necromancy)              (famille connue, specialisation absente du corpus)
-   RULES-T0088_TZEENTCH             Arcane Magic (Tzeentch)                (famille connue, specialisation absente du corpus)
-   RULES-T0092_ARMU                 Craftsman (Armourer)                   (famille connue, specialisation absente du corpus)
-   RULES-T0092_BARB                 Craftsman (Barber)                     Craftsman (Brewer)
-   RULES-T0092_BATEA                Craftsman (Boatbuilding)               Craftsman (Boatbuilder)
-   RULES-T0092_BRICO                Craftsman (Tinker)                     (famille connue, specialisation absente du corpus)
-   RULES-T0092_CALLI                Craftsman (Calligrapher)               (famille connue, specialisation absente du corpus)
-   RULES-T0092_CARTO                Craftsman (Cartographer)               (famille connue, specialisation absente du corpus)
-   RULES-T0092_CHARP                Craftsman (Carpenter)                  (famille connue, specialisation absente du corpus)
-   RULES-T0092_CIRIE                Craftsman (Chandler)                   (famille connue, specialisation absente du corpus)
-   RULES-T0092_COLIF                Craftsman (Charms)                     (famille connue, specialisation absente du corpus)
-   RULES-T0092_EMBAU                Craftsman (Embalmer)                   (famille connue, specialisation absente du corpus)
-   RULES-T0092_EMPOI                Craftsman (Poisoner)                   (famille connue, specialisation absente du corpus)
-   RULES-T0092_GRAV                 Craftsman (Engraver)                   Craftsman (Engineer)
-   RULES-T0092_IMPR                 Craftsman (Printing)                   Craftsman (Smithing)
-   RULES-T0092_MATART               Craftsman (Art Supplies)               (famille connue, specialisation absente du corpus)
-   RULES-T0092_MFERR                Craftsman (Farrier)                    (famille connue, specialisation absente du corpus)
-   RULES-T0092_POIS                 Craftsman (Poisons)                    (famille connue, specialisation absente du corpus)
-   RULES-T0092_TANNE                Craftsman (Tanner)                     (famille connue, specialisation absente du corpus)
-   RULES-T0092_VIGN                 Craftsman (Vintner)                    (famille connue, specialisation absente du corpus)
-   RULES-T0129_CORR                 Resistance (Corruption)                (famille connue, specialisation absente du corpus)
-   RULES-T0129_INGESTED             Resistance (Poison Ingested)           (famille connue, specialisation absente du corpus)
-   RULES-T0129_MUTA                 Resistance (Mutation)                  (famille connue, specialisation absente du corpus)
-   RULES-T0132_BAND                 Fearless (Outlaw)                      Fearless (Outlaws)
-   RULES-T0132_INTRU                Fearless (Intruder)                    Fearless (Intruders)
-   RULES-T0132_LARGER               Fearless (Larger)                      (famille connue, specialisation absente du corpus)
-   RULES-T0132_MILIC                Fearless (Militia)                     (famille connue, specialisation absente du corpus)
-   RULES-T0132_NAUF                 Fearless (Shrewreckers)                Fearless (Wreckers)
-   RULES-T0132_PATFLU               Fearless (River Patrollers)            Fearless (Riverwardens)
-   RULES-T0132_PATROU               Fearless (Road Patrols)                Fearless (Road Wardens)
-   RULES-T0132_SMALLER              Fearless (Smaller)                     (famille connue, specialisation absente du corpus)
-   RULES-T0134_FLUV                 Savant (Waterways)                     Savant (Riverways)
-   RULES-T0134_REG                  Savant (Region)                        (famille connue, specialisation absente du corpus)
-   RULES-T0136_EMP                  Etiquette (Erudite)                    (famille connue, specialisation absente du corpus)
-   RULES-T0136_FIDEL                Etiquette (Faithful)                   (famille connue, specialisation absente du corpus)
-   RULES-T0139_TOUCH                Acute Sense (Touch)                    (famille connue, specialisation absente du corpus)
-   RULES-T0157_ARMU                 Master Tradesman (Gunsmith)            (famille connue, specialisation absente du corpus)
-   RULES-T0157_BARB                 Master Tradesman (Barber)              Master Tradesman (Brewer)
-   RULES-T0157_BATEA                Master Tradesman (Boatbuilding)        (famille connue, specialisation absente du corpus)
-   RULES-T0157_BRICO                Master Tradesman (Tinker)              (famille connue, specialisation absente du corpus)
-   RULES-T0157_CALLI                Master Tradesman (Calligrapher)        (famille connue, specialisation absente du corpus)
-   RULES-T0157_CARTO                Master Tradesman (Cartographer)        Master Tradesman (Cartography)
-   RULES-T0157_CHARP                Master Tradesman (Carpenter)           (famille connue, specialisation absente du corpus)
-   RULES-T0157_CIRIE                Master Tradesman (Chandler)            (famille connue, specialisation absente du corpus)
-   RULES-T0157_COLIF                Master Tradesman (Charms)              (famille connue, specialisation absente du corpus)
-   RULES-T0157_EMBAU                Master Tradesman (Embalmer)            (famille connue, specialisation absente du corpus)
-   RULES-T0157_EXPL                 Master Tradesman (Explosives)          (famille connue, specialisation absente du corpus)
-   RULES-T0157_FORGE                Master Tradesman (Blacksmith)          (famille connue, specialisation absente du corpus)
-   RULES-T0157_GRAV                 Master Tradesman (Engraver)            (famille connue, specialisation absente du corpus)
-   RULES-T0157_IMPR                 Master Tradesman (Printing)            (famille connue, specialisation absente du corpus)
-   RULES-T0157_MATART               Master Tradesman (Art Supplies)        (famille connue, specialisation absente du corpus)
-   RULES-T0157_MFERR                Master Tradesman (Farrier)             (famille connue, specialisation absente du corpus)
-   RULES-T0157_POIS                 Master Tradesman (Poisons)             Master Tradesman (Poisoner)
-   RULES-T0157_TANNE                Master Tradesman (Tanner)              (famille connue, specialisation absente du corpus)
-   RULES-T0157_VIGN                 Master Tradesman (Vintner)             (famille connue, specialisation absente du corpus)
-   WINDS-T0176_BETE                 Suffuse With (Ghur)                    (famille connue, specialisation absente du corpus)
-   WINDS-T0176_CIEUX                Suffuse With (Azyr)                    (famille connue, specialisation absente du corpus)
-   WINDS-T0176_FEU                  Suffuse With (Aqshy)                   (famille connue, specialisation absente du corpus)
-   WINDS-T0176_LUMIERE              Suffuse With (Hysh)                    (famille connue, specialisation absente du corpus)
-   WINDS-T0176_METAL                Suffuse With (Chamon)                  (famille connue, specialisation absente du corpus)
-   WINDS-T0176_MORT                 Suffuse With (Shyish)                  (famille connue, specialisation absente du corpus)
-   WINDS-T0176_NECRO                Suffuse With (Dhar)                    (famille connue, specialisation absente du corpus)
-   WINDS-T0176_OMBRE                Suffuse With (Ulgu)                    (famille connue, specialisation absente du corpus)
-   WINDS-T0176_VIE                  Suffuse With (Ghyran)                  (famille connue, specialisation absente du corpus)
-
---- SORTS (99 candidats) ---
-   RULES-ARCAN_01                   Aethric Weapon                         
-   RULES-ARCAN_02                   Aethyr Armor                           Aethyric Armour | Aethyric Arms
-   RULES-ARCAN_03                   Chain Attacks                          Chain Attack | If Chain Attack
-   RULES-ARCAN_04                   Ordinary Aura                          
-   RULES-ARCAN_05                   Anti-Arrow Shield                      Arrow Shield
-   RULES-ARCAN_09                   Moving Object                          Move Object
-   RULES-ARCAN_23                   Darkvision                             Dark Vision
-   RULES-CHAOS_03                   Betrayal of 'Tzeentch                  
-   RULES-COLOR_02                   Incarnation of Wyssan                  
-   RULES-COLOR_03                   The Spear of Amber                     
-   RULES-COLOR_04                   Beastly Tongue                         Beast Tongue | Battle Tongue
-   RULES-COLOR_05                   Master of the Beast                    
-   RULES-COLOR_06                   Hunter Skin                            
-   RULES-COLOR_08                   Flight of Destiny                      
-   RULES-COLOR_09                   Arch of T'Essla                        
-   RULES-COLOR_11                   Cassandora's Comet                     
-   RULES-COLOR_12                   Irony of Fate                          
-   RULES-COLOR_13                   The First Sign of Amul                 
-   RULES-COLOR_14                   The Second Sign of Amul                
-   RULES-COLOR_15                   The Third Sign of Amul                 
-   RULES-COLOR_17                   Cauterize                              Cauterise
-   RULES-COLOR_18                   Burning Hearts                         Burning Head
-   RULES-COLOR_19                   Wreath of Flames                       
-   RULES-COLOR_21                   The Aegis of Agshy                     
-   RULES-COLOR_22                   The Burning Sword of Rbuin             
-   RULES-COLOR_23                   Wall of Fire                           
-   RULES-COLOR_26                   Clarity of Mind                        Clarity of
-   RULES-COLOR_27                   Demon Reaper                           
-   RULES-COLOR_28                   Amyntok's Fillet                       
-   RULES-COLOR_32                   Protection of Pha                      Protection Pouch
-   RULES-COLOR_34                   Chamon's Crucible                      
-   RULES-COLOR_35                   Steel Scale                            
-   RULES-COLOR_36                   Chamon's Forge                         
-   RULES-COLOR_38                   Shifting Metal                         
-   RULES-COLOR_39                   Lead Feather                           
-   RULES-COLOR_40                   Transmute Chamon                       
-   RULES-COLOR_41                   Laniph's Caress                        
-   RULES-COLOR_42                   Last lyrics                            
-   RULES-COLOR_43                   The Scythe of SAyish                   
-   RULES-COLOR_44                   The Violet Veil of SAyish              
-   RULES-COLOR_47                   Lifesteal                              
-   RULES-COLOR_51                   Evil Twin                              
-   RULES-COLOR_54                   Strangling Shadows                     
-   RULES-COLOR_55                   Loss of memory                         
-   RULES-COLOR_56                   Shadow Portal                          
-   RULES-COLOR_57                   Terrain Setup                          
-   RULES-COLOR_58                   Gift of Life                           
-   RULES-COLOR_59                   Earth Water                            Earth Mother
-   RULES-COLOR_62                   Grease of the Earth                    
-   RULES-COLOR_64                   Blood of Earth                         
-   RULES-COLOR_71                   Degradation                            
-   RULES-COLOR_74                   Curse of Bad Luck                      
-   RULES-COLOR_77                   Demon Minor Destruction                
-   RULES-COLOR_78                   Demon Detection                        Enemy Detection
-   RULES-COLOR_79                   Lesser Demon Manifestation             Daemonic Manifestation
-   RULES-COLOR_80                   Octogram                               Octagram
-   RULES-COLOR_83                   Resuscitation                          Reputation
-   RULES-COLOR_84                   Raise the Dead                         Raise Dead
-   RULES-MIRAC_MANAMM_03            Walk on Water                          
-   RULES-MIRAC_MANAMM_05            Favorable Winds                        
-   RULES-MIRAC_MANAMM_06            Face of the Drowned Man                
-   RULES-MIRAC_MORR_03              Hand of Morr                           Hand Mortar
-   RULES-MIRAC_MORR_06              Gateway Threshold                      
-   RULES-MIRAC_MYRMIDIA_01          Call to Fury                           
-   RULES-MIRAC_RANALD_03            May Luck Remain                        
-   RULES-MIRAC_RANALD_04            Rich, poor, beggar, thief              
-   RULES-MIRAC_RANALD_05            You didn't see me, did you?            
-   RULES-MIRAC_RANALD_06            Cat Eyes                               Cat's Eyes
-   RULES-MIRAC_RHYA_02              Rhya's Caress                          Rhya's Harvest
-   RULES-MIRAC_RHYA_05              Rhya's Rescue                          
-   RULES-MIRAC_RHYA_06              Rhya Union                             Rhya's Union
-   RULES-MIRAC_SHALLYA_02           Balm for a Wounded Spirit              
-   RULES-MIRAC_SHALLYA_03           Stamina of the Anchorite               
-   RULES-MIRAC_SHALLYA_04           Immaculate Innocence                   
-   RULES-MIRAC_SIGMAR_01            Two-Tailed Comet                       Twin-tailed Comet | Twin Tailed Comet
-   RULES-MIRAC_SIGMAR_02            Soul Fire                              Soulfire
-   RULES-MIRAC_SIGMAR_03            Beacon of Virtue                       
-   RULES-MIRAC_SIGMAR_04            Fiery Hammer of Sigmar                 Fiery Heart Sigmar
-   RULES-MIRAC_SIGMAR_05            Don't listen to the Witch              
-   RULES-MIRAC_SIGMAR_06            Defeat the Unholy                      
-   RULES-MIRAC_TAAL_01              Leaping like a deer                    
-   RULES-MIRAC_ULRIC_01             Chill of Frost                         
-   RULES-MIRAC_ULRIC_02             ULRIC Fury                             
-   RULES-MIRAC_ULRIC_04             Snow King's Judgment                   Snow King's Judgement
-   RULES-MIRAC_ULRIC_06             Winter Wolf Hide                       Winter Wolf
-   RULES-MIRAC_VERENA_01            Hindrances of Truth                    
-   RULES-MIRAC_VERENA_04            Truth will come out                    
-   RULES-SPELL_02                   Animal Friendship                      Animal Friend
-   RULES-SPELL_05                   Conservation                           Consideration | Considerations
-   RULES-SPELL_07                   Create a small animal                  
-   RULES-SPELL_16                   Light step                             Light Test
-   RULES-SPELL_17                   Rain protection                        
-   RULES-SPELL_18                   Water purification                     
-   RULES-SPELL_25                   Listen up                              Listen
-   WINDS-COLOR_104                  Pha's Protection                       
-   WINDS-COLOR_176                  T'Essla's Axc                          T'Essla's Arc | Essla's Arc
-   WINDS-COLOR_228                  Wild Kin of Zand ox                    
-   WINDS-COLOR_242                  Great Fires of U'”Zhul                 
-   WINDS-COLOR_275                  Whrithing Worm                         Writhing Worm Range
-
-NOUVEAU (24/08/2026, complete le 25/08/2026) - DOUBLONS DE SORTS ENTRE RULEBOOK ET WINDS OF MAGIC.
-Trouve en corrigeant "T'Essla's Axc" : RULES-COLOR_09 et WINDS-COLOR_176 sont le meme sort.
-Winds of Magic reimprime les sorts des huit domaines du Rulebook et la base a saisi les deux
-versions. CONFIRME PAR NONO dans WinSort : "j'ai une ligne pour Rulebook et une ligne pour Winds
-pour Blinding Light".
-
-AMPLEUR REELLE : 64 doublons, pas 14. Les 8 domaines x 8 sorts sont tous dedoubles. Les 14
-reperes au libelle ne sont que la partie visible ; les 50 autres se cachent derriere un libelle
-divergent (le Rulebook de la base a ete saisi depuis le livre FRANCAIS, donc ses noms sont des
-retraductions : "Grease of the Earth" pour "Fat of the Land", "Quick Death" pour "Swift Passing",
-"Terrain Setup" pour "Lie of the Land"...).
-
-METHODE D'APPARIEMENT QUI MARCHE : meme TALENT (le domaine) + meme NIVEAU (le CN), puis
-similarite du texte de l'EXPLANATION pour departager quand plusieurs sorts partagent le CN.
-Le libelle ne sert a rien pour apparier - c'est justement lui qui est faux.
-Table complete des 64 paires produite le 25/08/2026 (fichier table_sorts.txt, non livre : c'est
-un document de travail, pas un quatrieme fichier de suivi).
-
-FAIT LE 25/08/2026 : l'entree RULES-COLOR_* a recu le nom imprime dans le livre et le doublon
-WINDS-COLOR_* a ete supprime. 49 libelles reecrits sur 64, 64 declarations retirees de Winds of
-Magic (192 -> 128 sorts). Les deux fichiers parsent, aucun identifiant en double, aucune reference
-orpheline, plus aucun libelle commun aux deux livres.
-PIEGE RENCONTRE, a retenir : le libelle de Winds n'etait PAS toujours le bon. WINDS-COLOR_242
-portait "Great Fires of U'”Zhul" (scorie d'OCR) et WINDS-COLOR_104 "Pha's Protection" sans
-l'accent circonflexe. L'orthographe des 64 noms a donc ete prise dans l'INDEX du Rulebook, ou
-chaque sort apparait une fois avec sa graphie propre.
-
-DIVERGENCE ENTRE LES DEUX LIVRES - ARBITREE LE 25/08/2026 : le sort Caress of Laniph
-(RULES-COLOR_41 / WINDS-COLOR_209) est imprime CN 7 dans le Rulebook (p. 246) et CN 4 dans Winds
-of Magic (p. 122). Les deux extractions ont ete verifiees sur la mise en page complete : ce n'est
-pas un artefact de conversion, les deux livres se contredisent vraiment. L'errata officiel de
-Cubicle 7 ne mentionne ni ce sort ni aucune correction de CN dans le Lore of Death, et il n'existe
-pas d'errata publie pour Winds of Magic. Winds retouche par ailleurs l'effet du sort (il ajoute
-un plafond "up to your maximum Wounds" absent du Rulebook), donc on ne peut pas conclure a une
-simple coquille.
-DECISION DE NONO : on reste sur le RULEBOOK, donc CN 7. Aucune modification a faire - la base
-porte deja cette valeur. Ligne conservee ici pour qu'une session future ne "corrige" pas
-la valeur en croyant bien faire.
-
-
-NOUVEAU (25/08/2026) - APRES LE CHANTIER DES MAILLES, trois points laisses ouverts.
-
-1. [FAIT 25/08/2026 - Nono : "on part sur Mail"] LIBELLE DU TYPE D'ARMURE RULES-ARMOT_MAIL,
-   anciennement "Chainmail". Le Rulebook intitule la
-   section de son tableau ARMOUR "MAIL", Archives of the Empire III intitule la sienne "CHAINMAIL",
-   et les deux livres partagent le meme code de type : un seul libelle doit servir aux deux.
-   A ARBITRER par Nono. Non touche. A noter que les autres libelles de type de la base melangent
-   les casses ("Soft leather", "Boiled leather", "Plate", "Soft Kits", "Brigandine"), ce qui
-   meritera peut-etre une passe de normalisation en meme temps.
-
-2. [FAIT 25/08/2026 - Nono : "oui erreur"] ARCH3-ARMO_25 "Chainmail Shirt (A3)" portait ArmorPoint 0. Le tableau d'Archives III lui donne
-   2 AP, comme ses trois voisines de la meme section, et toutes ses autres caracteristiques sont
-   conformes. Ressemble a une saisie oubliee. BUG SIGNALE, non corrige.
-
-3. [FAIT 25/08/2026 - Nono : "il ne doit y avoir que des english dans le livre anglais"]
-   RULES-ARMO_98 "Coiffe de maille" et RULES-ARMO_99 "Cotte de maille" retirees du fichier
-   ANGLAIS, ou elles etaient declarees avec une Description language="FRANCAIS" et aucune version
-   anglaise. Elles n'etaient referencees par rien et faisaient doublon avec Mail Coif et Mail Coat.
-   POINT D'ARCHITECTURE RAPPELE PAR NONO, et il a raison : quand on passe en francais, seuls les
-   LIBELLES sont repris du fichier francais, jamais les DONNEES. Le chargeur ne remplit les listes
-   de donnees que si le fichier declare <language>"ENGLISH"</language> - la garde
-   "if LangueDef = ConstAnglais" dans xmlexportimport.pas, presente 55 fois, couvre toutes les
-   listes sans exception (armures, armes, sorts, metiers, races, talents, competences...). Pour un
-   fichier francais, seul AddTrad s'execute. C'etait deja documente dans CONTEXT.md ligne 1077 ;
-   c'est moi qui ne l'ai pas applique.
-   CONSEQUENCE : les deux declarations qui subsistent dans BOOK_RULESBOOK_FRANCAIS.Xml ne sont
-   plus que des TRADUCTIONS ORPHELINES - un libelle sans armure derriere. Elles ne peuvent plus
-   apparaitre nulle part dans le programme. Les supprimer reste souhaitable par proprete, mais ce
-   n'est plus un correctif fonctionnel, juste du menage. A faire quand le francais sera degele.
-   A NOTER pour la methode : toute divergence de DONNEES entre les deux fichiers Rulebook est sans
-   effet - seuls les identifiants comptent, puisqu'ils sont la cle de jointure des traductions.
-   C'est ce qui justifie la regle "on corrige les identifiants et la structure dans les deux
-   fichiers, mais plus le texte francais".
-
-CORRECTION A LA NOTE DU 24/08 SUR LES MAILLES : elle annonçait que "toute la famille des mailles
-de la base est a renommer". C'est FAUX pour les quatre entrees (A3). Archives of the Empire III
-imprime reellement "Chainmail Chausses / Coat / Coif / Shirt" sous une section CHAINMAIL ; la base
-est fidele au livre et le suffixe (A3) existe justement parce que ce livre redonne les memes
-armures avec d'autres valeurs. Seules les quatre entrees du Rulebook etaient a corriger, ce qui
-est fait.
-
-
-NOUVEAU (25/08/2026) - LE CHAMP <Test> DES TALENTS EST MASSIVEMENT RETRADUIT.
-Trouve en corrigeant la famille Art : le talent Artistic (RULES-T0007) porte "Art (your choice)"
-la ou le Rulebook imprime "Tests: Art (Any)". Audit lance sur tous les champs <Test> de la base,
-confrontes au corpus des 14 livres : 87 segments introuvables, dont 83 pour le seul Rulebook,
-soit la quasi-totalite de ses champs Test.
-
-DEUX MOTIFS DISTINCTS, qui n'appellent pas la meme reponse.
-(a) LA PARAPHRASE. Le livre ecrit des formules courtes, la base des phrases longues :
-    "Charm test to influence those who find you attractive.",
-    "Healing Tests outside of Combat Rounds; when you have time to do it right.",
-    "Melee on a Round when performing a Berserk Charge".
-    Genant pour la fidelite, mais lisible et sans consequence fonctionnelle.
-(b) LES NOMS DE COMPETENCE RESTES EN FRANCAIS ou traduits a la main. Ceux-la ne renvoient a
-    AUCUNE competence existante de la base :
-       "Ragot tests with travelers"                    -> Gossip
-       "Representation and Agility when using Contortionist" -> Entertain
-       "Focusing (Any)"                                -> Channelling
-       "Discretion when you are in plain sight"        -> Stealth
-       "Profession (Apothecary)" / "Profession (choose one)" -> Trade
-       "Knowledge (Apothecary)" / "Knowledge (Chosen Knowledge)" -> Lore
-       "Projectiles when performing a Rapid Fire"      -> Ranged
-       "Mental Strength (Group to fight)"              -> Willpower
-       "Evaluation to establish the value of coins"    -> Evaluate
-    C'est la partie vraiment problematique : un joueur anglophone lit un nom de competence qui
-    n'existe pas dans son jeu.
-
-[TRANCHE PAR NONO LE 25/08/2026 : "on corrige" - retour aux formules exactes du livre.]
-FAIT : 53 talents du Rulebook apparies a leur ligne "Tests:" imprimee, 5 deja conformes,
-48 CORRIGES verbatim.
-FAIT AUSSI : les 58 non apparies de la premiere passe ont ete repris et traites (appariement sur
-le radical pour les generiques, puis recherche ciblee nom + "Tests:" dans la meme colonne).
-92 champs Test corriges au total. L'audit passe de 87 champs introuvables dans le corpus a 4, et
-ces 4 sont corrects - leur texte est coupe sur deux lignes dans l'extraction PDF, donc la
-recherche de chaine contigue echoue (Surgery, Speedreader, Perfect Pitch, Crew Commander).
-CHANTIER CLOS.
-
-[FAIT 25/08/2026] LES TROIS FUITES D'IDENTIFIANT sont corrigees, chacune verifiee dans son livre :
-SEAOF-T0182 (Chantyman) "COMPDIVERT_CHANT" -> "Entertain (Singing)", SEAOF-T0184 (Master and
-Commander) "COMPCOMM" -> "Leadership", ARCH2-T0175_* (Vice) "ATTR_WP (Resist Target)" ->
-"Willpower (Resist Target)".
-A NOTER, non touche : ce talent Vice s'appelle "Vice (Target)" dans Archives II et "Vice (Any)"
-dans la base, ce qui suit la convention des generiques - laisse tel quel.
-
-
-NOUVEAU (25/08/2026) - QUESTION DE CONCEPTION SUR LES CHAMPS <Test> DES SPECIALISATIONS.
-Constate en terminant le chantier : le champ Test n'est renseigne que sur le talent GENERIQUE.
-Les 141 specialisations declarees individuellement - Craftsman (Blacksmith), Etiquette (Nobles),
-Fearless (Monsters), Strider (Woodlands), Hatred (Greenskins)... - ont toutes un champ Test VIDE,
-alors que le livre donne une seule ligne "Tests:" valable pour toute la famille (par exemple
-"Trade (any one)" pour tous les Craftsman, "Charm and Gossip (Social Group)" pour tous les
-Etiquette).
-[CLOS LE 26/08/2026 SANS MODIFICATION - il n'y a rien a faire.]
-Avant d'ecrire le marqueur de substitution, verification de OU le champ Test est affiche : un seul
-endroit dans tout le projet, wintalent.pas ligne 116. Cette grille est remplie sous la condition
-"PTalent.SousTalent = false" : elle ne liste QUE les generiques. Les specialisations vivent dans
-TabSpe, qui n'a que deux colonnes, code et libelle. Le champ Test d'une specialisation n'est donc
-JAMAIS montre - ni a l'ecran, ni en PDF (pdfrace et pdfmetier ne le referencent pas).
-MIEUX : selectionner une specialisation bascule l'affichage sur son generique (wintalent.pas
-lignes 99-101, via ValeurSousCompetence et ValeurGenerique), donc le joueur lit toujours la
-formule exacte du livre. La conception d'origine etait juste.
-
-CHIFFRAGE, conserve pour memoire : 143 specialisations au champ Test vide, sur dix familles.
-   a texte PARAMETRE (90) : Fearless 24, Hatred 14, Savant 13, Etiquette 13, Strider 10,
-                            Resistance 7, Acute Sense 5, Vice 4
-   a texte FIXE      (53) : Craftsman 27, Master Tradesman 26
-
-DESIGN VALIDE PAR NONO MAIS NON APPLIQUE, a garder si l'on veut un jour afficher le test par
-specialisation. Le parametre doit etre marque explicitement, car la parenthese ne suffit pas comme
-repere : quatre familles ont leur parametre en pleine phrase (Strider, Fearless, Resistance) et
+=========================================================================
+MENAGE DU 26/08/2026 - COMMENT CE FICHIER SE TIENT
+=========================================================================
+Ce fichier ne contient QUE ce qui reste a faire. Des qu'un point est termine il en SORT ; son
+histoire, elle, reste dans Log.txt, date et detaille. Avant ce menage il avait derive : 2302
+lignes dont 23 blocs deja termines, et des entetes devenus FAUX - "Archives III n'a AUCUN bloc
+DATA_SPELL" alors que le livre en a 27 depuis le 23/08. Une session qui parcourt les titres
+repartait sur de fausses pistes. Tout ce qui a ete retire ci-dessous a son equivalent dans Log.txt.
+
+
+=========================================================================
+REVUES DE LIVRE - CE QUI RESTE
+=========================================================================
+FAITES : Up in Arms, Sea of Claws, Archives of the Empire I, II et III, Winds of Magic,
+Lords of Naggaroth, Middenheim (partiellement, voir ci-dessous).
+Methode rodee : inventaire du fichier XML, puis confrontation section par section au TXT du
+livre, les carrieres comparees automatiquement niveau par niveau apres resolution des
+identifiants en libelles. Piege a ne pas refaire : ancrer l'extraction sur le bloc parent
+attendu, jamais sur le nom de balise seul - DATA_CAREER_ROLL et DATA_SPECIE_CAREER_DIRECT
+emploient les MEMES noms de balises.
+
+1. MIDDENHEIM - LA TABLE DE TIRAGE DES CARRIERES (p.148-149). Aucun bloc DATA_CAREER_ROLL dans
+   le fichier, donc les trois ethnies de Middenheim utilisent aujourd'hui la table Humaine de
+   base au lieu de la leur. 64 carrieres x 3 colonnes (Middenheimer / Middenlander / Nordlander),
+   des Academics aux Warriors, Wolf Kin inclus (66-68 / 59-60 / 57-58) ; Slayer est a "-" dans
+   les trois colonnes. VERIFIE AVANT SAISIE : les trois colonnes couvrent 01-100 exactement une
+   fois, sans trou ni chevauchement - pas de coquille de livre cette fois.
+   C'est le plus gros morceau restant.
+
+2. WINDS OF MAGIC - LES ~20 RITUELS (chapitre "Ritual Magic", p.27-33), aucun saisi. Ils ont un
+   CN, une portee, une cible et une duree comme des sorts : Bind Monstrous Beast, Bind Spirit
+   Within Power Stone, Carve Ogham Stone, Create Power Stone, Conjuration of the Bloody Hidesman,
+   Conjuration of the Incarnate Elemental of Death, Conjuration of Jack O' Cinders, Corrupt
+   Waystone, Create Construct, Create Familiar, Cursecraft, Invocate Daemon, Materialise the
+   Living Swamp, et la suite.
+   DECISION DE CONCEPTION D'ABORD : un rituel n'est pas un sort ordinaire (temps de lancement en
+   heures, ingredients obligatoires, participants). A trancher avec Nono avant toute saisie.
+
+3. LIVRES NON ENCORE REVUS : Lustria, Green iz Best, Rough Nights and Hard Days, Salzenmund,
+   The Horned Rat Companion, Enemy in Shadows Companion, Death on the Reik Companion,
+   Middenheim (le reste). Le balayage de couverture les donnait nettement plus propres que les
+   trois premiers.
+
+
+=========================================================================
+ARBITRAGES OUVERTS
+=========================================================================
+1. FAMILLE RULES-T0088_* : les livres hesitent entre Beasts/Beast, Shadows/Shadow,
+   Witchery/Witchcraft. A trancher pour toute la famille. (Demonology -> Daemonology, lui, est
+   fait le 26/08.)
+
+2. "Arcane Magic (X)" contre "Arcane Lore (X)" : c'est le MEME talent, nomme differemment par le
+   Rulebook et par Winds of Magic. Convention a choisir pour toute la famille.
+
+3. TIN WHISTLE / PENNYWHISTLE (Sea of Claws). Le choix du Chantyman pointe aujourd'hui sur
+   RULES-COMPMUSIC_PENNYW pour son troisieme instrument, plutot que de creer une specialisation
+   "Tin Whistle" : c'est le meme instrument sous deux noms, et Sea of Claws emploie les deux
+   (Pennywhistle au Sailor p.72, Tin Whistle au Chantyman p.66 ; Archives III ecrit aussi
+   "Play (Tin Whistle)"). Creer les deux referait un doublon d'identifiant. A confirmer ou a
+   changer - c'est une ligne.
+
+4. NAGGAROTH - LA CARRIERE DE BETE, classee HORS PERIMETRE le 26/08 mais reouvrable : le livre
+   donne quatre niveaux (Trainee, Beast, Trained Beast, Veteran Beast) sous le titre "Henchman
+   career". Ce n'est ni une ethnie (aucun profil 2d10+X) ni une carriere de joueur (aucun point
+   d'avance) : c'est le systeme des HENCHMEN du Rulebook p.309, que la base ne modelise nulle
+   part - zero occurrence sur les dix-sept fichiers. La saisir demanderait d'introduire tout ce
+   systeme.
+
+5. CUMUL D'UNE REGLE PARTIELLE AVEC LA TABLE DE BASE. Le Seafarer est la seule regle partielle
+   aujourd'hui, et une seule regle s'applique a la fois, donc rien ne bloque. Le mecanisme
+   distingue deja partiel et complet, deduit de la couverture (ChargeTabMetier) : on pourra dire
+   plus tard qu'une regle complete remplace et qu'une partielle se cumule, sans rien casser.
+
+
+=========================================================================
+CHANTIERS DE FOND, PAS ENCORE OUVERTS
+=========================================================================
+1. PREFIXER LES CODES <Quality> PAR LEUR LIVRE. Le champ stocke les codes SANS prefixe, donc la
+   numerotation WEAPB est un espace de noms GLOBAL : deux livres peuvent se marcher dessus, ce
+   qui est deja arrive (NAGGA-WEAPB31 contre UPINA-WEAPB31, renumerote le 23/08). Tant que ce
+   n'est pas fait, TOUT nouveau BonusMalus doit prendre le premier numero libre AU NIVEAU DE TOUS
+   LES LIVRES. Prochain libre : 39.
+
+2. MIGRER LES QUATRE PERSONNAGES HERITES (Ernold, Friederich, Harald, Markus).
+
+3. LES PLACEHOLDERS LAB_xxx, visibles a l'ecran (en-tetes de colonnes de la fenetre
+   Specialisation, par exemple).
+
+4. LA REFERENCE PENDANTE RULES-PROJ_LANC.
+
+
+=========================================================================
+GELE - LES LIBELLES FRANCAIS
+=========================================================================
+Decision de Nono du 24/08/2026 : "pour le francais, c'est un sujet que tu oublies pour l'instant".
+On continue a corriger les identifiants et la structure dans les deux fichiers Rulebook, mais
+plus le texte francais. Ce qui attend le degel, regroupe ici pour ne pas ressortir a chaque
+chantier :
+  * 172 <Description> et 13 <Test> du fichier francais portent un espace parasite en tete ou en
+    queue. La liste se regenere en une commande.
+  * des libelles francais restes EN ANGLAIS, notamment dans la famille Bless/Invoke :
+    Bless (Handrich), Bless (Solkan), Invoke (Handrich), Invoke (Solkan), Blessed by Stromfels,
+    Invoke Stromfels (Predators) - et RULES-T0088_KHAINE et _DARK, laisses volontairement en
+    anglais des deux cotes.
+  * la convention francaise de Bless/Invoke : les libelles gardent "Beni de Sigmar (Empire)" /
+    "Invocation de Sigmar (Empire)" alors que l'anglais est passe a "Bless (Sigmar)" /
+    "Invoke (Sigmar)". Si la convention anglaise fait foi, la francaise devrait suivre -
+    "Benediction (Sigmar)" et "Invocation (Sigmar)" - mais c'est une decision de traduction.
+  * RULES-ARMO_98 "Coiffe de maille" et RULES-ARMO_99 "Cotte de maille" subsistent dans
+    BOOK_RULESBOOK_FRANCAIS.Xml apres leur retrait du fichier anglais. Elles n'y sont
+    referencees par rien : ce sont des TRADUCTIONS ORPHELINES, invisibles dans le programme.
+    Les supprimer est du menage, pas un correctif.
+
+
+=========================================================================
+CONSERVE POUR REFERENCE - LE MARQUEUR DE SUBSTITUTION DES CHAMPS <Test>
+=========================================================================
+Le chantier a ete CLOS le 26/08 sans modification : le champ <Test> d'une specialisation n'est
+JAMAIS affiche (wintalent.pas ne remplit sa grille que pour PTalent.SousTalent = false, et
+selectionner une specialisation bascule l'affichage sur son generique). Le design ci-dessous est
+garde au cas ou l'on voudrait un jour afficher le test par specialisation ; il est valide par
+Nono mais non applique.
+La parenthese ne suffit pas comme repere - quatre familles ont leur parametre en pleine phrase et
 Craftsman a une parenthese qu'il ne faut PAS toucher. Marqueur retenu : '*', place n'importe ou.
    Etiquette          Charm and Gossip (*)
    Acute Sense        Perception (*)
@@ -2030,273 +597,324 @@ Craftsman a une parenthese qu'il ne faut PAS toucher. Marqueur retenu : '*', pla
    Fearless           Cool to oppose your *'s Intimidate, Fear, and Terror
    Resistance         All those to resist the associated *
    Craftsman          Trade (any one)          <- inchange, pas de marqueur = pas de substitution
-Le programme remplacerait '*' par la parenthese du libelle de la specialisation, et par "Any" pour
-le generique. L'absence de marqueur vaut "ne rien faire", donc Craftsman et Master Tradesman sont
-couverts sans cas particulier. Nono a ecarte l'alternative d'un attribut separe
-(<Test parametre="Social Group">), trop lourde.
+Le programme remplacerait '*' par la parenthese du libelle de la specialisation, et par "Any"
+pour le generique. L'absence de marqueur vaut "ne rien faire". Nono a ecarte l'alternative d'un
+attribut separe (<Test parametre="Social Group">), trop lourde.
 
 
-NOUVEAU (25/08/2026) - DEUX ANOMALIES DE DECLARATION DE TALENT, reperees en listant les generiques.
+=========================================================================
+VERIFICATION DE MASSE DES LIBELLES ANGLAIS - LISTE REGENEREE LE 26/08/2026
+=========================================================================
+202 libelles anglais sur 1438 (217 le 26/08, 15 traites le 28/08) ne se trouvent nulle part dans le corpus des 14 livres. La liste
+qui suit a ete REGENEREE ce jour : celle du 24/08 comptait 245 candidats et une bonne partie a
+ete traitee depuis, elle n'etait plus fiable.
 
-1. [ELUCIDE LE 25/08/2026 PAR NONO - "regarde les Slayers"] RULES-T0132_TOUT N'EST PAS UN DOUBLON.
-   Le Rulebook donne au Slayer "Talents: Dual Wielder, Fearless (Everything), Frenzy, Slayer" :
-   c'est une valeur de jeu distincte - sans peur de TOUT, sans specialisation a choisir - et le
-   suffixe francais _TOUT la nomme exactement. Les livres l'ecrivent de trois facons :
-   "Fearless (Everything)" (Rulebook Slayer, Sea of Claws x2), "Fearless (All)" (Naggaroth),
-   "Fearless (Any)" ailleurs.
-   IL RESTE UN VRAI DEFAUT : le libelle anglais de _TOUT est "Fearless (Any)", identique a celui
-   du generique _*, donc les deux sont indistinguables a l'ecran.
-   [FAIT 25/08/2026 - Nono : "je plussoie"] _TOUT renomme "Fearless (Everything)".
-   A verifier avant d'ecrire : sur les neuf carrieres qui l'utilisent (Slayer, Fieldwarden,
-   Disciple of Khaine, Priest of Stromfels, Greatsword, Halberdier, Knight of the Blazing Sun,
-   Knight of the White Wolf, Priest of Myrmidia), plusieurs sont imprimees "(Any)" dans leur
-   livre. Si le libelle devient "Everything", verifier que l'affectation reste juste pour elles.
+NOTE DU 28/08 : Nono avait deja corrige a la main les libelles des TALENTS, des
+COMPETENCES, des RACES et des METIERS - mais pas les autres. C est pourquoi les sorts,
+miracles et benedictions sortaient encore massivement en anomalie. Les familles non
+revues restent : corruptions, bonus/malus, equipements, qualites, et le reste.
 
-2. [FAIT 25/08/2026] RULES-T0136_*/RULES-T0077. Le livre l'ecrit ainsi - Middenheim, ethnie Humans
-   (Middenheimer) : "Talents: Doomed, Etiquette (choose group) or Strong Back, ...". Le slash
-   encode fidelement le OU du livre avec le SeparateurMulti.
-   MON HYPOTHESE DE "POIDS MORT" ETAIT FAUSSE, capture d'ecran de Nono a l'appui : en creation de
-   personnage le choix fonctionne, la fenetre Specialisation liste bien les treize Etiquette ET
-   Strong Back. La declaration combinee fournit le LIBELLE du tableau recapitulatif, qui ne
-   montrait que "Etiquette (Any)". CORRIGE en "Etiquette (Any) or Strong Back".
-   AUDIT AU PASSAGE : 27 declarations combinees dans la base, convention de libelle stable
-   ("X or Y", ou "Famille (A or B)"), et UNE SEULE avait un libelle incomplet - celle-ci.
-   Oubli isole, pas defaut de conception.
+LIRE CETTE LISTE AVEC LA MEME PRUDENCE QU'AU PREMIER JOUR : un libelle introuvable n'est PAS une
+erreur. Beaucoup de specialisations existent legitimement sans etre ecrites en toutes lettres
+dans un livre - "Art (Mosaics)" n'apparait pas tel quel, mais "Mosaics" figure bien dans la ligne
+Specialisations du Rulebook. Chaque candidat demande d'aller voir le livre.
 
+DEUX ANGLES MORTS DE LA METHODE, decouverts a l'usage :
+  * la passe insensible a la casse MASQUE les fautes de casse. C'est ainsi que
+    "Language (khazalid)", "Language (eltharin)" et "Lore (Dwarves)" ont survecu jusqu'au 26/08.
+    Une passe dediee, SENSIBLE A LA CASSE, reste a faire sur les libelles valides uniquement par
+    la seconde passe.
+  * une extraction trop large fabrique de faux problemes. Deux fausses alertes en une journee,
+    dont une table de tirage declaree incomplete alors qu'elle etait parfaite.
 
-[FAIT 25/08/2026] DEUX ECARTS DE CONVENTION SUR LES LIBELLES COMBINES, corriges.
-Sur les 27 declarations dont l'identifiant contient le SeparateurMulti, la convention est
-"X or Y" pour deux talents differents et "Famille (A or B)" pour la meme famille. Deux s'en ecartent.
-   RULES-T0131/RULES-T0077                  "Robust/Strong Back" -> "Robust or Strong Back"
-   RULES-COMPPROJ_POUDRE/RULES-COMPPROJ_ING "Ranged (black powder and engineering)"
-                                            -> "Ranged (Blackpowder or Engineering)"
-CONTROLE FINAL : les 27 declarations combinees respectent maintenant toutes la convention.
-Ce second cas cumule trois ecarts : minuscules, "and" au lieu de "or", et "black powder" en deux
-mots alors que la famille a ete normalisee sur "Blackpowder" le 24/08. Les libelles unitaires de
-la base sont bien "Ranged (Blackpowder)" et "Ranged (Engineering)".
+--- COMPETENCES (28) ---
+   RULES-COMPDRESS_DEMIG              Animal Training (Demigryph)
+   RULES-COMPDRESS_PEGA               Animal Training (Pegasus)
+   RULES-COMPART_MOSAI                Art (Mosaics)
+   RULES-COMPART_SCUL                 Art (Sculpture)
+   RULES-COMPART_TATOU                Art (Tattoo)
+   RULES-COMPART_TISSA                Art (Weaving)
+   RULES-COMPFOCAL_KHAINITE           Channelling (Khainite Sorcery)
+   RULES-COMPLANG_HALF                Language (Halfling)
+   RULES-COMPLANG_NEHEKRARAN          Language (Nehekharan)
+   RULES-COMPSAVOIR_BLOODDRAGON       Lore (Blood Dragon)
+   RULES-COMPSAVOIR_LAHMIAN           Lore (Lahmian Sisterhood)
+   RULES-COMPSAVOIR_NECRARCH          Lore (Necrarch)
+   RULES-COMPSAVOIR_NORSCA            Lore (Norsca)
+   RULES-COMPSAVOIR_STROIGOI          Lore (Strigoi)
+   RULES-COMPSAVOIR_VONCARSTEIN       Lore (Von Carstein)
+   RULES-COMPREPRES_FUNAN             Perform (Rope Walking)
+   RULES-COMPMUSIC_FIDDLE/RULES-COMPMUSIC_SQUEEZE/RULES-COMPMUSIC_PENNYW Play (Fiddle, Squeezebox or Tin Whistle)
+   RULES-COMPMUSIC_SQUEEZE            Play (Squeezebox)
+   RULES-COMPPROJ_ARC/LUSTR-COMPPROJ_SARBAC/RULES-COMPPROJ_LANC Ranged (Bow, Blowpipe, or Throwing)
+   RULES-COMPSIGNES_ECLAI             Secret Signs (Pathfinders)
+   RULES-COMPSIGNES_RURAUX            Secret Signs (Rural)
+   RULES-COMPSIGNES_RANGER/RULES-COMPSIGNES_SCOUT Secret Signs (Scout or Ranger)
+   RULES-COMPSIGNES_TZEENTCH          Secret Signs (Tzeentch)
+   RULES-COMPDISC_URB/RULES-COMPDISC_SOUTER Stealth (Urban or Underground)
+   RULES-COMPMETIER_EMBAU/RULES-COMPMETIER_APOTH Trade (Apothecary or Embalmer)
+   RULES-COMPMETIER_ARMOURER          Trade (Armourer)
+   RULES-COMPMETIER_EMBAU             Trade (Embalmer)
+   RULES-COMPMETIER_TANNE             Trade (Tanner)
+--- TALENTS (73) ---
+   RULES-T0139_TOUCH                  Acute Sense (Touch)
+   RULES-T0022/RULES-T0105            Alley Cat or Rover
+   RULES-T0HAT_*                      Animosity (any)
+   RULES-T0088_DARK                   Arcane Magic (Dark Magic)
+   RULES-T0088_DEMON                  Arcane Magic (Demonology)
+   RULES-T0088_MAW                    Arcane Magic (Lore of the Great Maw)
+   RULES-T0009/RULES-T0067            Attractive or Warrior Born
+   RULES-T0012_TAAL                   Bless (Taal)
+   RULES-T0012_VERENA                 Bless (Verena)
+   RULES-T0099/RULES-T0142            Cat-tongued or Gregarious
+   RULES-T0092_ARMU                   Craftsman (Armourer)
+   RULES-T0092_MATART                 Craftsman (Art Supplies)
+   RULES-T0092_BARB                   Craftsman (Barber)
+   RULES-T0092_BATEA                  Craftsman (Boatbuilding)
+   RULES-T0092_CALLI                  Craftsman (Calligrapher)
+   RULES-T0092_CHARP                  Craftsman (Carpenter)
+   RULES-T0092_CARTO                  Craftsman (Cartographer)
+   RULES-T0092_CIRIE                  Craftsman (Chandler)
+   RULES-T0092_COLIF                  Craftsman (Charms)
+   RULES-T0092_EMBAU                  Craftsman (Embalmer)
+   RULES-T0092_GRAV                   Craftsman (Engraver)
+   RULES-T0092_MFERR                  Craftsman (Farrier)
+   RULES-T0092_EMPOI                  Craftsman (Poisoner)
+   RULES-T0092_POIS                   Craftsman (Poisons)
+   RULES-T0092_IMPR                   Craftsman (Printing)
+   RULES-T0092_TANNE                  Craftsman (Tanner)
+   RULES-T0092_BRICO                  Craftsman (Tinker)
+   RULES-T0092_VIGN                   Craftsman (Vintner)
+   RULES-T0171/RULES-T*               Doomed or Random Talent
+   RULES-T0136_*/RULES-T0077          Etiquette (Any) or Strong Back
+   RULES-T0136_EMP                    Etiquette (Erudite)
+   RULES-T0136_FIDEL                  Etiquette (Faithful)
+   RULES-T0132_LARGER                 Fearless (Larger)
+   RULES-T0132_MILIC                  Fearless (Militia)
+   RULES-T0132_PATFLU                 Fearless (River Patrollers)
+   RULES-T0132_PATROU                 Fearless (Road Patrols)
+   RULES-T0132_SMALLER                Fearless (Smaller)
+   RULES-T0069_SDISSI                 Hatred (Dissident Wizards)
+   RULES-T0069_MONSTR                 Hatred (Monsters)
+   RULES-T0069_SIGMAR                 Hatred (Sigmarites)
+   RULES-T0080_TAAL                   Invoke (Taal)
+   RULES-T0080_VERENA                 Invoke (Verena)
+   RULES-T0157_MATART                 Master Tradesman (Art Supplies)
+   RULES-T0157_BARB                   Master Tradesman (Barber)
+   RULES-T0157_FORGE                  Master Tradesman (Blacksmith)
+   RULES-T0157_BATEA                  Master Tradesman (Boatbuilding)
+   RULES-T0157_CALLI                  Master Tradesman (Calligrapher)
+   RULES-T0157_CHARP                  Master Tradesman (Carpenter)
+   RULES-T0157_CARTO                  Master Tradesman (Cartographer)
+   RULES-T0157_CIRIE                  Master Tradesman (Chandler)
+   RULES-T0157_COLIF                  Master Tradesman (Charms)
+   RULES-T0157_EMBAU                  Master Tradesman (Embalmer)
+   RULES-T0157_GRAV                   Master Tradesman (Engraver)
+   RULES-T0157_EXPL                   Master Tradesman (Explosives)
+   RULES-T0157_MFERR                  Master Tradesman (Farrier)
+   RULES-T0157_ARMU                   Master Tradesman (Gunsmith)
+   RULES-T0157_POIS                   Master Tradesman (Poisons)
+   RULES-T0157_IMPR                   Master Tradesman (Printing)
+   RULES-T0157_TANNE                  Master Tradesman (Tanner)
+   RULES-T0157_BRICO                  Master Tradesman (Tinker)
+   RULES-T0157_VIGN                   Master Tradesman (Vintner)
+   RULES-T0129_CORR                   Resistance (Corruption)
+   RULES-T0134_REG                    Savant (Region)
+   RULES-T0134_FLUV                   Savant (Waterways)
+   RULES-T0013_DES                    Strider (Deserts)
+   RULES-T0013_LIT                    Strider (Littoral)
+   RULES-T0013_MAR                    Strider (Swamps)
+   RULES-T0013_TOUN                   Strider (Tundra)
+   WINDS-T0176_*                      Suffuse With (Any)
+   WINDS-T0176_NECRO                  Suffuse With (Dhar)
+   ARCH2-T0175_ALCOHOL                Vice (Alcohol)
+   ARCH2-T0175_NARCO                  Vice (Narcotics)
+   ARCH2-T0175_PLEASURE               Vice (Pleasure)
+--- SORTS (91) ---
+   RULES-ARCAN_01                     Aethric Weapon
+   RULES-COLOR_28                     Amyntok’s Fillet
+   RULES-ARCAN_05                     Anti-Arrow Shield
+   RULES-MIRAC_SHALLYA_02             Balm for a Wounded Spirit
+   RULES-MIRAC_SIGMAR_03              Beacon of Virtue
+   RULES-COLOR_04                     Beastly Tongue
+   RULES-CHAOS_03                     Betrayal of ’Tzeentch
+   RULES-COLOR_64                     Blood of Earth
+   RULES-COLOR_18                     Burning Hearts
+   RULES-MIRAC_MYRMIDIA_01            Call to Fury
+   RULES-COLOR_11                     Cassandora’s Comet
+   RULES-COLOR_17                     Cauterize
+   RULES-COLOR_34                     Chamon’s Crucible
+   RULES-COLOR_36                     Chamon’s Forge
+   RULES-MIRAC_ULRIC_01               Chill of Frost
+   RULES-COLOR_26                     Clarity of Mind
+   RULES-COLOR_74                     Curse of Bad Luck
+   RULES-MIRAC_SIGMAR_06              Defeat the Unholy
+   RULES-COLOR_71                     Degradation
+   RULES-COLOR_78                     Demon Detection
+   RULES-COLOR_77                     Demon Minor Destruction
+   RULES-COLOR_27                     Demon Reaper
+   RULES-MIRAC_SIGMAR_05              Don’t listen to the Witch
+   RULES-COLOR_59                     Earth Water
+   RULES-COLOR_51                     Evil Twin
+   RULES-MIRAC_MANAMM_06              Face of the Drowned Man
+   RULES-MIRAC_MANAMM_05              Favorable Winds
+   RULES-MIRAC_SIGMAR_04              Fiery Hammer of Sigmar
+   RULES-COLOR_08                     Flight of Destiny
+   RULES-MIRAC_MORR_06                Gateway Threshold
+   RULES-COLOR_58                     Gift of Life
+   RULES-COLOR_62                     Grease of the Earth
+   RULES-MIRAC_MORR_03                Hand of Morr
+   RULES-MIRAC_VERENA_01              Hindrances of Truth
+   RULES-COLOR_06                     Hunter Skin
+   RULES-MIRAC_SHALLYA_04             Immaculate Innocence
+   RULES-COLOR_02                     Incarnation of Wyssan
+   RULES-COLOR_12                     Irony of Fate
+   RULES-COLOR_41                     Laniph’s Caress
+   RULES-COLOR_42                     Last lyrics
+   RULES-COLOR_39                     Lead Feather
+   RULES-MIRAC_TAAL_01                Leaping like a deer
+   RULES-COLOR_79                     Lesser Demon Manifestation
+   RULES-COLOR_47                     Lifesteal
+   RULES-COLOR_55                     Loss of memory
+   RULES-COLOR_05                     Master of the Beast
+   RULES-MIRAC_RANALD_03              May Luck Remain
+   RULES-ARCAN_09                     Moving Object
+   RULES-ARCAN_04                     Ordinary Aura
+   RULES-COLOR_32                     Protection of Pha
+   RULES-COLOR_84                     Raise the Dead
+   RULES-COLOR_83                     Resuscitation
+   RULES-MIRAC_RHYA_02                Rhya’s Caress
+   RULES-MIRAC_RHYA_05                Rhya’s Rescue
+   RULES-MIRAC_RANALD_04              Rich, poor, beggar, thief
+   RULES-COLOR_56                     Shadow Portal
+   RULES-COLOR_38                     Shifting Metal
+   RULES-MIRAC_SHALLYA_03             Stamina of the Anchorite
+   RULES-COLOR_35                     Steel Scale
+   RULES-COLOR_54                     Strangling Shadows
+   RULES-COLOR_57                     Terrain Setup
+   RULES-COLOR_21                     The Aegis of Agshy
+   RULES-COLOR_22                     The Burning Sword of Rbuin
+   RULES-COLOR_13                     The First Sign of Amul
+   RULES-COLOR_43                     The Scythe of SAyish
+   RULES-COLOR_14                     The Second Sign of Amul
+   RULES-COLOR_03                     The Spear of Amber
+   RULES-COLOR_15                     The Third Sign of Amul
+   RULES-COLOR_44                     The Violet Veil of SAyish
+   RULES-COLOR_40                     Transmute Chamon
+   RULES-MIRAC_VERENA_04              Truth will come out
+   RULES-MIRAC_MANAMM_03              Walk on Water
+   RULES-COLOR_23                     Wall of Fire
+   RULES-MIRAC_ULRIC_06               Winter Wolf Hide
+   RULES-COLOR_19                     Wreath of Flames
+   RULES-MIRAC_RANALD_05              You didn’t see me, did you?
+--- ARMES (7) ---
+   RULES-COMB_CAVAL_*                 Cavalry (any)
+   RULES-COMB_ENTRA_*                 Entangling weapon (any)
+   NAGGA-PROJ_ARB_04                  Repeater Crossbow
+   RULES-COMB_BASE_*                  Simple weapon (Any)
+   RULES-PROJ_LANC_*                  Throwing (any)
+   RULES-COMB_2M_*                    Two-handed weapons (Any)
+   RULES-PROJ_POUDRE_*                blackpowder weapon (any)
+--- ARMURES (18) ---
+   ARCH3-ARMO_28                      Bracers (A3)
+   ARCH3-ARMO_29                      Breastplate (A3)
+   ARCH3-ARMO_26                      Brigandine Jack
+   ARCH3-ARMO_27                      Brigandine Jerkin
+   ARCH3-ARMO_22                      Chainmail Chausses (A3)
+   ARCH3-ARMO_23                      Chainmail Coat (A3)
+   ARCH3-ARMO_24                      Chainmail Coif (A3)
+   ARCH3-ARMO_25                      Chainmail Shirt (A3)
+   ARCH3-ARMO_18                      Leather Jack (A3)
+   ARCH3-ARMO_19                      Leather Jerkin (A3)
+   ARCH3-ARMO_20                      Leather Leggings (A3)
+   ARCH3-ARMO_21                      Leather Skullcap (A3)
+   LUSTR-ARMO_04                      Lustrian Jack
+   LUSTR-ARMO_03                      Lustrian Jerkin
+   LUSTR-ARMO_02                      Lustrian Leggings
+   LUSTR-ARMO_01                      Lustrian Skullcap
+   ARCH3-ARMO_30                      Open Helm (A3)
+   ARCH3-ARMO_31                      Plate Leggings (A3)
 
+=========================================================================
+CHANTIER : EXPLICATIONS ANGLAISES RETRADUITES - TERMINE LE 28/08/2026
+=========================================================================
+LES 611 EXPLICATIONS DU RULEBOOK VIENNENT MAINTENANT DU LIVRE. Cette section est
+conservee pour la methode et les outils, qui resserviront si le probleme reapparait.
 
-NOUVEAU (25/08/2026) - REVUE DE SEA OF CLAWS : SIX POINTS OUVERTS.
-Le reste du livre est conforme : les trois ethnies norses au mot pres, les neuf carrieres sur
-36 niveaux, les 21 sorts et miracles (8 Manann, 7 Stromfels, 6 sorts marins), les trois talents,
-la colonne Human de la table de tirage. Detail des six points.
+CONSTAT ETABLI LE 28/08/2026. Les <Explanation> anglaises du Rulebook ne sont pas
+le texte du livre : c est une retraduction depuis le francais. Preuve : sur les 611
+explications, zero "magic missile", zero "Channelling Test", zero "Average (+20)",
+1 seul "yards" - alors que les variantes retraduites (Magic Projectile, Focus Test,
+Accessible (+20), ... State, meter, Wound Point, Mental Strength) sont partout. Les
+explications parlent meme des noms francais traduits : "The Calm Skill" pour Cool,
+"The Resistance Skill" pour Endurance.
 
-1. [FAIT 25/08/2026] ETHNIE "Dwarfs (Norse)" SAISIE, identifiant SEAOF-RACE_DNORSE, page 41 du livre.
-   Skills: Climb, Consume Alcohol, Cool, Endurance, Entertain (Storytelling), Evaluate,
-           Language (Khazalid), Language (Norse), Lore (Dwarfs), Melee (Basic), Sail, Trade (Any)
-   Talents: Carouser or Strong Minded, Magic Resistance, Night Vision, Read/Write or Relentless,
-            Sturdy
-   Quatrieme ethnie jouable du livre, au meme titre que les trois norses humaines deja saisies.
-   PREREQUIS VERIFIES LE 25/08/2026 : les 19 competences et talents de l'encadre existent tous en
-   base. Trois portaient un libelle fautif, corriges dans la foulee - Language (Khazalid),
-   Language (Eltharin), Lore (Dwarfs). Le talent "Strong Minded" du livre correspond au
-   "Strong-minded" de la base, qui est la forme majoritaire des livres : pas de correction.
-   Rien ne bloquait donc la saisie, faite le 25/08/2026.
-   PAS DE TABLE DE CARRIERES, et c'est verifie : Nono a teste la creation de personnage le
-   25/08/2026, "il repart sur le nain standard pour la table des metiers". L'absence de
-   SUBCHAPTER_CAREER fait retomber la creation sur la table du nain standard via le lien Ethnic
-   RULES-SPECIE_DWARF, ce qui est le comportement voulu. Ne pas recopier les 47 entrees du nain.
-   POINT CLOS.
+DECISIONS PRISES : reprise mot pour mot du texte du livre ; description seule (pas
+les blocs "Example:", pas les lignes "Specialisations:") ; le fichier francais n est
+pas touche (gel du francais toujours en vigueur).
 
-2. [FAIT 25/08/2026] DEUX MIRACLES CLASSES COMME BENEDICTIONS. Reclasses en SEAOF-MIRAC_MANAMM_13
-   et _14, talent RULES-T0080_MANANN, TypSpell "Miracle". Aucun autre element ne les referencait.
-   Constat initial : SEAOF-BENED_020 "Blessing of the Albatross" et
-   SEAOF-BENED_021 "Blessing of the Mariner" sont rattaches a RULES-T0012_MANANN (Bless) avec
-   TypSpell "Blessing". Le livre les imprime dans la section MIRACLES OF MANANN, entre Blessed
-   Voyage et Breathe Water, et la section Stromfels precise que les Blessings des deux cultes
-   sont les six generiques (Battle, Breath, Courage, Hardiness, Savagery, Tenacity).
-   CONSEQUENCE DE JEU : un pretre de Manann les obtient avec Bless au lieu d'Invoke.
-   Correction attendue : identifiants MIRAC, talent RULES-T0080_MANANN, TypSpell "Miracle".
+OUTILLAGE PRET, A REUTILISER : colextract.py extrait le PDF en respectant les deux
+colonnes (gouttiere detectee page par page), filtre les encadres par leur police
+(CaslonAntique) et restitue les paragraphes. build_skills.py decoupe la section et
+nettoie. Comptez une passe de mise au point par lot : les pieges rencontres sont les
+titres courants, les puces coupees en fin de colonne, et les tableaux.
 
-3. [DIAGNOSTIQUE LE 25/08/2026, SOLUTION A CHOISIR] LE NAIN NORSE N'A AUCUNE CARRIERE TIRABLE.
-   Test de Nono : "il n'a aucune carriere possible en RULEBOOK et juste les carrieres marines avec
-   the Seafarer Class". CAUSE, trouvee dans chargeracemetier.pas : la phase 2 de
-   CompleteRaceMetierParEspece propage l'eligibilite entre ethnies d'une meme race mais force
-   Chance a 'X' - son propre commentaire le dit, "Seule l'ACCESSIBILITE se propage, jamais la
-   table de jet d100" - et ChargeTabMetier exclut les 'X' du tirage. Une ethnie sans
-   SUBCHAPTER_CAREER a donc une table de tirage VIDE. Les carrieres marines apparaissent par un
-   autre chemin, DATA_SPECIE_CAREER_DIRECT en 'X' sur la race naine (phase 1).
-   [SOLUTION (b) RETENUE ET ECRITE LE 25/08/2026 - chargeracemetier.pas. A COMPILER ET TESTER.]
-   DEUX SOLUTIONS, TRANCHEES PAR NONO :
-     (a) DONNEES - donner a SEAOF-RACE_DNORSE son propre SUBCHAPTER_CAREER en recopiant les 47
-         entrees du nain standard. C'est ce que fait deja toute ethnie jouable ayant une table.
-         Simple et sans risque, mais 47 lignes dupliquees a maintenir.
-     (b) CODE - faire que la phase 2 propage aussi les fourchettes quand l'ethnie cible n'a
-         AUCUNE entree de tirage propre. Plus elegant, vrai pour toute ethnie future dans ce cas,
-         mais c'est une modification du chargeur. A noter : chargeregle.pas pose deja ce principe
-         pour les REGLES ("une ethnie non couverte par la regle retombe sur la table par defaut") ;
-         il manque au niveau des ETHNIES.
-   [RESOLU ET VALIDE AU TEST LE 25/08/2026] Nono : "j'ai les choix de rules book et ceux de
-   seafarer remplace la partie sailor si je la selectionne". Le nain norse herite de la table du
-   nain standard et la surcharge Seafarer se substitue correctement.
+LOTS, par bloc parent :
+  [FAIT 28/08] Skill ......... 45   pilote, chapitre IV p.117-140
+  [FAIT 28/08] Talent ........ 167  chapitre IV p.131-147
+  Creature Traits ............ 13   modelises comme Talent mais decrits dans le
+                                    bestiaire : Big, Painless, Die Hard, Animosity,
+                                    Belligerent, Afraid, Dark Vision, Amphibious,
+                                    Arboreal, Cold-blooded, Stealthy, Armour, Size.
+                                    A rapprocher de la note existante sur les Creature
+                                    Traits partiellement modelises.
+  [FAIT 28/08] Sort .......... 214  chapitre VII p.216-228 + chapitre VIII p.240-257
+                                    58 libellés retraduits renommes aussi (valide).
+  [FAIT 28/08] Career ........ 64   p.53-116, une carriere par page
+  [FAIT 28/08] Corruption .... 40   tables p.184-185
+  [FAIT 28/08] BonusMalus .... 37   armes p.297-299, armures p.300
+                                    reste 2 arbitrages, voir ci-dessous
+  [FAIT 28/08] Attribut ...... 15   p.34-35
+  [FAIT 28/08] Craftsmanship . 8    p.292-293, libelles compris
+  [FAIT 28/08] Specie ........ 5    p.25-29, premier paragraphe
 
-   FAUSSE ALERTE A ANNULER : j'avais annonce que la table de tirage Seafarer ne couvrait que la
-   colonne Human. C'EST FAUX, les CINQ colonnes sont presentes et exactes (Dwarf, Halfling,
-   High Elf, Wood Elf, Human, plus Tilea), zero ecart avec le livre hormis l'errata du 68 deja
-   documente. Mon extracteur ramassait tous les <Entry> du fichier alors que DATA_CAREER_ROLL et
-   DATA_SPECIE_CAREER_DIRECT emploient les MEMES noms de balises : je melangeais les fourchettes
-   de des avec les drapeaux d'eligibilite 'X'. RIEN A FAIRE ICI.
+ARBITRAGES OUVERTS SORTIS DE CE CHANTIER :
+  * [TRANCHE 28/08] RULES-WEAPB29 devient "Ablaze" : c etait la note de bas de tableau
+    de l arme Incendiary, seule a la porter.
+  * [TRANCHE 28/08] les 5 ARMOB sans equivalent sont une SIMPLIFICATION VOLONTAIRE du
+    maitre du jeu de Nono. On les garde, ce ne sont pas des erreurs. Ne plus les
+    ressortir en anomalie.
+  * [FAIT 28/08] les 30 <Short> des BonusMalus d armes remis dans le vocabulaire du
+    livre, style telegraphique conserve. Ces champs alimentent les PDF.
+  * A FAIRE QUAND LE FRANCAIS SERA DEGELE : les <Short> de RULES-WEAPB06 et _07 sont
+    inverses dans le fichier francais (06 Arbaletes dit "(lancer)", 07 Lancer dit
+    "(arbalete)"). Corrige cote anglais le 28/08, pas cote francais.
+  * la qualite d armure "Critical Deflection" du livre n existe pas dans la base.
 
-4. [CLOS 25/08/2026 - Nono : "on utilise Boatbuilding partout"] RIEN A CORRIGER : les trois
-   familles miroir portaient deja "Boatbuilding" (RULES-COMPMETIER_BATEA, RULES-T0092_BATEA,
-   RULES-T0157_BATEA). C'est le livre qui fait exception. Constat initial :
-   Les deux familles miroir se contredisent dans le corpus - Trade (Boatbuilding) 7 occurrences
-   contre 1, mais Craftsman (Boatbuilder) 2 contre 0 - et la ligne de reference Trade du Rulebook
-   ne cite ni l'un ni l'autre. Aucune autorite pour trancher : decision de Nono.
+PERIMETRE CONFIRME PAR NONO le 28/08 : le probleme est limite au RULEBOOK, seul livre
+sur lequel il a travaille avec la version francaise. Les autres livres ne sont pas
+concernes - ne pas relancer le chantier dessus.
 
-5. [FAIT 25/08/2026] Chantyman niveau 1 : "Play (Any)" remplace par
-   RULES-COMPMUSIC_FIDDLE/RULES-COMPMUSIC_SQUEEZE/RULES-COMPMUSIC_PENNYW, affiche
-   "Play (Fiddle, Squeezebox or Tin Whistle)". Deux specialisations creees dans le bloc
-   DATA_SKILL_SPECIALIZATION de Sea of Claws : Play (Fiddle) et Play (Squeezebox).
-   RESTE UNE PETITE QUESTION : le troisieme morceau pointe sur RULES-COMPMUSIC_PENNYW
-   "Play (Pennywhistle)" plutot que de creer une specialisation "Tin Whistle" - c'est le meme
-   instrument sous deux noms, et Sea of Claws emploie les deux (Pennywhistle au Sailor p.72,
-   Tin Whistle au Chantyman p.66 ; Archives III ecrit aussi "Play (Tin Whistle)"). Creer les deux
-   aurait refait un doublon d'identifiant. A ARBITRER si Nono prefere deux specialisations.
+=========================================================================
+FAMILLE PETTY MAGIC (RULES-SPELL_01..25) - SIGNALEMENTS, NON CORRIGES
+=========================================================================
+Les libelles ont ete realignes sur le Rulebook p.240-242 le 28/08/2026. Deux
+anomalies subsistent dans ces memes blocs, volontairement laissees en l'etat :
 
-6. REGRESSION DU 25/08 A ARBITRER - suite du renommage Fearless. Verification carriere par
-   carriere : le SLAYER est le seul dont le livre ecrit "Fearless (Everything)". Les huit autres
-   utilisatrices de _TOUT sont imprimees "Fearless (Any)" : Priest of Stromfels, Disciple of
-   Khaine, Greatsword, Halberdier, Knight of the Blazing Sun, Knight of the White Wolf, Priest de
-   Myrmidia, Fieldwarden. Et RULES-T0132_* est employe par deux carrieres dont le livre dit aussi
-   "(Any)" (Knight et Warrior Priest du Rulebook). Les deux identifiants sont donc utilises
-   INDIFFEREMMENT sur 10 usages sur 11.
-   [FAIT 25/08/2026] Les huit carrieres non-Slayer sont basculees sur RULES-T0132_*, 8 references
-   dans 4 fichiers. Etat final : _* "Fearless (Any)" pour dix carrieres, _TOUT "Fearless
-   (Everything)" pour le seul Slayer. Regression refermee et doublon resolu.
+  * <TypSpell> vaut "Minor Magic" pour les 25. Les autres familles portent le nom
+    du livre ; ici ce serait "Petty Magic". A trancher avant de toucher, parce que
+    la valeur peut etre lue ailleurs dans le code.
 
-[FAIT 25/08/2026] DEUX ESPACES PARASITES EN FIN DE LIBELLE ANGLAIS corriges : RULES-COMPINTUI
-"Intuition " et RULES-COMPPRECEP "Perception ". Controle final sur les seize livres : plus aucun
-libelle anglais ne porte d'espace en debut ou en fin.
+  * (le point vocabulaire ci-dessous est desormais couvert par le chantier general
+    des explications retraduites, voir la section precedente)
+  * les <Range> sont en metres ("1 meter", "(ATTR_WP)m") alors que le livre est en
+    yards, et les <Explanation> gardent le vocabulaire retraduit du francais :
+    "Magic Projectile" (livre : magic missile), "Downed State" (Prone Condition),
+    "Blinded State" (Blinded Condition), "Focus Test" (Channelling Test),
+    "Accessible (+20)" (Average (+20)), "Wound Point" (Wound).
+    Ce n'est pas propre a Petty Magic : c'est un chantier de vocabulaire qui touche
+    probablement toutes les explications du livre anglais. A dimensionner avant de
+    s'y mettre.
 
-[FAIT 26/08/2026 - Nono : "pour rester uniforme au Lore"] "Hatred (Dwarves)" -> "Hatred (Dwarfs)".
-Le corpus ne departageait pas (une occurrence de chaque), c'est la coherence interne qui a
-tranche. Commentaire XML de Green iz Best resynchronise. Les trois "Dwarves" restants sont dans
-des <Explanation>, donc de la prose, non touchee.
-
-
-[TOUS FAITS LE 26/08/2026 - Nono : "je valide tout ce que tu as trouve"]
-REVUE D'ARCHIVES OF THE EMPIRE III : SEPT POINTS, TOUS CORRIGES.
-Le reste du livre est conforme : 20 armures exactes (y compris leur type, Archives III reclassant
-les cuirs en BOILED LEATHER), 4 nouvelles qualites completes, 27 sorts et miracles exacts et
-complets (Handrich 6, Solkan 6, Rhya 6, Hedgecraft 9), 3 carrieres conformes en competences et
-talents. Les chapitres VII a IX n'apportent aucune donnee joueur.
-
-1. PRIEST OF SOLKAN, DEUX SALAIRES FAUX.
-      niveau 2 Priest      : base TIERS_SILVER 2  ->  livre "Silver 1"
-      niveau 3 Inquisitor  : base TIERS_SILVER 5  ->  livre "Silver 3"
-   La progression de la base est Brass 2 / Silver 2 / Silver 5 / Silver 5 - deux paliers identiques
-   a la suite, ce qui est en soi le signal. Celle du livre est reguliere.
-
-2. RULES-T0069_CHAOS DECLARE DEUX FOIS dans BOOK_RULESBOOK.Xml, sur deux lignes consecutives, avec
-   deux libelles differents : "Hatred (Chaos)" et "Hatred (Followers of Chaos)".
-   Le corpus tranche pour "Hatred (Chaos)" (Archives III, une occurrence) : "Followers of Chaos"
-   n'apparait jamais seul, seulement dans "Hatred (Manannites or Followers of Chaos)" de Sea of
-   Claws, qui a deja sa propre declaration combinee RULES-T0069_MANANN/RULES-T0069_CHAOS.
-   -> garder "Hatred (Chaos)", supprimer la seconde declaration.
-
-3. ARCH3-ARMO_17 s'appelle "Soft Kit", comme ARCH3-ARMO_16. Le livre l'intitule
-   "Reinforced Soft Kit" (2GC, enc 1, 1 PA, qualites Partial et Reinforced). Deux armures
-   homonymes a l'ecran.
-
-4. ESPACE PARASITE DANS UNE VALEUR, et celui-la n'est pas cosmetique :
-   ARCH3-ARMO_19 porte <Quality>"ARMOB_08 "</Quality>.
-   CompareRechercheValeur ne faisant PAS de Trim, la qualite risque de ne jamais etre resolue pour
-   cette armure. A TESTER dans WinLivre. C'est le premier espace parasite trouve dans une VALEUR -
-   l'audit du 25/08 ne portait que sur les libelles. Une passe sur les valeurs serait a faire.
-
-5. LE TALENT "Animal Assistant" MANQUE (Archives III p.81, "New Talent", Max 1).
-   Le livre precise lui-meme qu'il est distinct de son equivalent de Winds : "This Talent is
-   specifically for Power Familiar (Animal) Characters. For the Power Familiar (Homunculus)
-   version, see the Winds of Magic sourcebook, page 186." La base n'a que WINDS-T0177
-   "Magical Assistant".
-   HORS PERIMETRE en revanche, les nouveaux Creature Traits (Animal Telepathy, Messenger, Sensory
-   Sharing, Invisibility, Companion Traits) : la base ne modelise pas les traits de creature en
-   general - Bestial, Skittish, Flight, Armour, Bite sont tous absents - et les familiers y sont
-   des ethnies. Seul Animal Assistant est concerne, parce que le livre le classe comme TALENT.
-
-6. QUATRE LIBELLES Hatred EN MINUSCULES : "Hatred (monsters)", "Hatred (undead)",
-   "Hatred (greenskins)", "Hatred (sigmarites)". Les livres ecrivent Greenskins 7 fois et Undead
-   2 fois avec majuscule, jamais en minuscule. Les deux autres ne sont pas attestes, mais toute la
-   famille prend la majuscule.
-
-7. La carriere s'appelle "Priest of Rhya" dans la base, "Priestess of Rhya" dans le livre - dont
-   tous les niveaux sont au feminin (Initiate, Priestess, High Priestess, Green Watcher).
-
-[26/08/2026] Controle global apres la revue d'Archives III, sur les seize livres : aucun doublon de
-declaration de talent ou de competence dans toute la base, aucune reference orpheline.
-
-[FAIT 26/08/2026] PASSE SUR LES ESPACES PARASITES DANS LES VALEURS.
-Resultat principal, negatif et rassurant : AUCUN champ de reference n'en porte, sur les 17 fichiers
-(Quality, Type, Location, Talent, Skill, Career, Specie, Rule, Attribut, Ethnic, Class, et les
-scalaires Price, Encumbrance, ArmorPoint, Availability, Level, TypSpell, Range, Duration, Target,
-PDF). Le <Quality>"ARMOB_08 " d'Archives III etait le seul de toute la base.
-Quatre vrais defauts corriges : WINDS-COLOR_196 "Pit of Tarnus " et WINDS-COLOR_251
-"Withering Heat " (libelles de SORT - l'audit du 25/08 ne parcourait que Talent et Skill),
-RULES-T0037 <Test> " Stealth (Urban)", et WINDS-T0176_* <Max> " 1". Plus 40 espaces retires en
-tete ou en queue de prose anglaise (cosmetique).
-A NE JAMAIS "CORRIGER" : RULES-MESS_046 "Missing Books to open that character : ",
-RULES-LAB_038 " of quality" et RULES-LAB_084 "Select " sont des FRAGMENTS DE CONCATENATION, leur
-espace fait partie du texte.
-RESTE, gele avec le francais : 172 Description et 13 Test du fichier francais portent un espace en
-trop. La liste se regenere en une commande le jour ou le francais sera degele.
-Constat d'origine : L'audit du 25/08 ne couvrait que les <Description> ;
-c'est un <Quality> qui portait l'espace de trop cette fois, et comme CompareRechercheValeur ne
-fait pas de Trim, ce genre d'espace peut casser une resolution en silence. A passer sur tous les
-champs de reference (Quality, Type, Location, Talent, Skill, Career, Specie...).
-
-
-[TOUT FAIT LE 26/08/2026] REVUE DE LORDS OF NAGGAROTH : deux manques majeurs combles, six defauts
-corriges, la question tranchee (carriere de Bete hors perimetre, voir plus bas).
-Conforme par ailleurs : ethnie Dark Elves exacte, 4 carrieres conformes (hors les deux points
-ci-dessous), 10 armes aux bons noms, degats et qualites, talent Power of Darkness present.
-
-MANQUE 1 - LE CHAPITRE MAGIE ENTIER, 15 sorts et miracles, alors que les talents d'acces sont deja
-en base (Arcane Magic (Khainite Sorcery), Channelling (Khainite Sorcery)...).
-   Lore of Dark Magic (7)        : Chillwind, Doombolt, Word of Pain, Bladewind, Soul Stealer,
-                                   Black Horror, Dominion
-   Lore of Khainite Sorcery (8)  : Bloody Hand, Blessing of Murder, Hand of Khaine, Cry of War,
-                                   Sting of the Scorpion, Life in Death, Visage of the Manticore,
-                                   Maker of Widows
-   Consequence : une Sorceress of Ghrond ou un Disciple of Khaine peut prendre le talent mais n'a
-   aucun sort a lancer.
-
-MANQUE 2 - LA TABLE DE TIRAGE DES CARRIERES DARK ELF, 21 entrees. NAGGA-RACE_DELF n'a aucun
-SUBCHAPTER_CAREER, et la correction du chargeur du 25/08 NE PEUT PAS l'aider : les Dark Elves sont
-leur propre race (NAGGA-SPECIE_DELF), il n'existe aucune ethnie soeur dont heriter. Un joueur elfe
-noir n'a aujourd'hui aucun metier tirable.
-   Table du livre (avec ses deux erreurs, arbitrees selon la regle de CONTEXT.md) :
-     Sorceress of Ghrond 01-02 | Duelist 03-07 | Spy 08-11 | Hunter 12-13 | Scout 14-15
-     Beastmaster 16-24 | Bounty Hunter 25-30 | Black Ark Corsair 31-40 | Seaman 41-42
-     Smuggler 43-45 | Disciple of Khaine 46-50 | Fence 51-56 | Outlaw 57-62
-     Racketeer 63-67 (le livre ecrit 62-67, or 62 est deja a Outlaw)
-     Cavalryman 68-73 | Guard 74-78 (le livre ecrit 75-78, le 74 n'etait attribue a personne ;
-     la regle donne l'orphelin au voisin qui en a le moins, soit Guard avec quatre contre six)
-     Knight 79-82 | Pit Fighter 83-86 | Protagonist 87-89 | Soldier 90-100
-   Ainsi corrigee la table est continue de 01 a 100.
-
-DEFAUTS
-   3. Lore (Demonology) -> Lore (Daemonology). Les livres ecrivent Daemonology 40 fois,
-      Demonology jamais.
-   4. Disciple of Khaine niveau 2 : TIERS_SILVER 1 -> le livre dit "Silver 2".
-   5. Beastmaster niveau 3 : CINQ talents la ou tous les autres niveaux en ont quatre. Le livre
-      ecrit "Crack the Whip or Rover", un choix saisi comme deux talents distincts.
-      -> passer en separateur multi, RULES-T0024/RULES-T0105.
-   6. Encombrement 0 au lieu de 1 sur trois armes : Black Ark Sabre, Lakelui, Ghlaith.
-   7. Sea Dragon Cloak : allonge WEAPR_CLOSE ("Very short") -> le livre dit Average, WEAPR_MID.
-   8. Fighting Spines : allonge WEAPR_CLOSE -> le livre dit Short, WEAPR_SHORT.
-      Et prix "1CO 2/6" -> le livre dit 5gc. Le format lui-meme detonne, les autres armes du livre
-      s'ecrivent "2CO/-", "10CO", "14CO".
-
-QUESTION - LA CARRIERE DE BETE : REPONDUE LE 26/08/2026, ELLE EST HORS PERIMETRE.
-Les betes n'ont PAS de caracteristiques au sens d'une ethnie. Le livre intitule la section
-"Henchman career: Beastmaster trained" et sa ligne de caracteristiques porte "Base - Base Base
-Silver Bronze - Gold - -", des marqueurs du systeme des HENCHMEN et non un profil 2d10+X. Le texte
-precise : "a generic career using the Henchman rules intended to be applied to tamed monsters and
-beasts" - un gabarit a plaquer sur la creature apprivoisee, dont les vraies caracteristiques
-viennent du bestiaire.
-Ce n'est donc ni une ethnie (aucun profil) ni une carriere de joueur (aucun point d'avance). C'est
-une TROISIEME CATEGORIE que la base ne modelise nulle part - zero occurrence de "Henchman" sur les
-dix-sept fichiers. Les Henchmen sont definis au Rulebook p.309, chapitre Hirelings : des PNJ
-engages qui progressent sur une part de l'experience d'un joueur. La saisir demanderait
-d'introduire tout ce systeme. HORS PERIMETRE sauf decision contraire.
+  * "GM's Choice" utilise l'apostrophe droite alors que le fichier en compte 27 en
+    typographique. Isole, non corrige.

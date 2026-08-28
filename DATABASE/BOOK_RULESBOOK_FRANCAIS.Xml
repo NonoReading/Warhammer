@@ -15983,7 +15983,7 @@ Si votre adversaire possède une arme avec l’Atout Empaleuse et obtient un Cri
 <Level>"7"</Level>
 <TypSpell>"Arcane Magic"</TypSpell>
 </Sort>
-<Sort id="RULES-ARCAN_11 ">
+<Sort id="RULES-ARCAN_11">
 <Description language="FRANCAIS">"Effrayant"</Description>
 <Explanation language="FRANCAIS">"En vous recouvrant de magie, vous devenez effrayant et intimidant. Gagnez Peur 1. Pour chaque +3 DR, vous pouvez augmenter votre valeur de Peur de 1."</Explanation>
 <Target>"You"</Target>

@@ -18,6 +18,32 @@ qu'un : celui-ci. On ne le duplique jamais, on l'édite en place.
 - Ce qui a mal marché : livrer des blocs de 300 lignes non relus, avec des colonnes
   qui n'existaient pas encore. Ce qui marche : petites corrections validées une par une.
 
+### Économie de recherche (règles ajoutées le 28/08, après une semaine trop coûteuse)
+
+Chacune vient d'une erreur réelle, pas d'une préférence de style.
+
+- **Corpus local avant le web.** Les TXT de `PDF_TEXTE/` contiennent les livres. Un
+  `grep` ciblé répond presque toujours. Le web ne sert que si le corpus a répondu
+  « absent » de façon vérifiée. *(Deux sorts Petty cherchés en ligne alors qu'ils
+  étaient ligne 13627 de `RULEBOOK.txt`.)*
+- **Lire le code avant de raisonner sur les données.** Une question du type « ce champ
+  est-il cohérent ? » se tranche en lisant qui l'affiche. *(Le chantier des `<Test>`
+  sur spécialisations a été clos par une lecture de `wintalent.pas`, après une longue
+  exploration inutile des données.)*
+- **Ancrer toute extraction sur le bloc parent attendu**, jamais sur le nom de balise
+  seul. *(`<Entry>` existe dans `DATA_CAREER_ROLL` et `DATA_SPECIE_CAREER_DIRECT` ;
+  `RULES-T*` dans `<Specie>` n'est pas une déclaration de sort. Deux fausses alertes.)*
+- **Jamais de copie en masse depuis le staging** (`cp *.Xml`). Copier uniquement les
+  fichiers qui viennent d'être stagés, nommément. *(A écrasé silencieusement la fusion
+  des 64 sorts, déjà livrée et committée.)*
+- **Réutiliser les fichiers de travail déjà produits** (`table_sorts.txt`,
+  `table_tests.txt`, extractions précédentes) plutôt que les régénérer.
+- **Proportionner l'outil à la question.** Pas de script Python là où un `grep` suffit,
+  pas de tableau de synthèse là où une phrase suffit. Le lourd est réservé aux
+  chantiers de masse.
+- **Tenir `A FAIRE.txt` court** : il est relu à chaque session, il ne contient que ce
+  qui reste. L'historique va dans `Log.txt`.
+
 ---
 
 ## 1. Le projet
@@ -43,6 +69,50 @@ Constantes clés (`chargeconstantes.pas` ~13-20) :
 ---
 
 ## 2. État par chantier
+
+### 2.0 Explications anglaises retraduites : ✅ TERMINÉ le 28/08/2026
+
+**Le constat.** Les `<Explanation>` anglaises de `BOOK_RULESBOOK.Xml` n'étaient pas le
+texte du livre : c'était une retraduction depuis le français. Preuve chiffrée avant
+correction, sur 611 explications : zéro `magic missile`, zéro `Channelling Test`, zéro
+`Average (+20)`, un seul `yards` — alors que les variantes retraduites (`Magic
+Projectile`, `Focus Test`, `Accessible (+20)`, `... State`, `meter`, `Wound Point`,
+`Mental Strength`, `CO` pour les couronnes d'or) étaient partout. Deux compétences
+parlaient même encore du nom français : *« The Calm Skill »* pour Cool, *« The
+Resistance Skill »* pour Endurance.
+
+**Le périmètre.** Limité au Rulebook — c'est le seul livre sur lequel Nono a travaillé
+avec la version française. Les autres livres ne sont pas concernés, ne pas relancer le
+chantier dessus. Le fichier français n'a pas été touché (gel du français).
+
+**Fait.** Les 611 explications viennent maintenant du livre, mot pour mot : Skill 45,
+Talent 167, Sort 214, Career 64, Corruption 40, BonusMalus 37, Attribut 15,
+Craftsmanship 8, Specie 5. Plus les 29 `<Short>` des qualités d'armes, remis dans le
+vocabulaire du livre en gardant le style télégraphique (ces champs alimentent les PDF).
+Tous les marqueurs sont à zéro.
+
+**Libellés.** Nono avait déjà corrigé à la main ceux des talents, compétences, races et
+métiers — pas les autres. D'où 58 libellés de sorts renommés ce jour, plus les 8
+qualités d'objet et 4 qualités d'armes. Restent non revus : équipements et le reste.
+
+**Outillage, à réutiliser.** `colextract.py` extrait le PDF en respectant les colonnes
+(nombre détecté par page, 2 ou 3), écarte les encadrés par leur police `CaslonAntique`
+et restitue les paragraphes. Les `build_*.py` découpent chaque section. Compter une
+passe de mise au point par lot : les pièges rencontrés sont les titres courants, les
+puces coupées en fin de colonne, les tableaux, et — sur les pages de carrières — le
+tableau de caractéristiques qui crée de faux débuts de colonne et coupait les phrases.
+
+**Erreurs de données trouvées en chemin**, toutes corrigées côté anglais :
+`RULES-WEAPB14` « Pointed » portait le texte de **Precise** et `RULES-WEAPB16`
+« Precise » celui d'**Accurate** ; les `<Short>` de `RULES-WEAPB06`/`_07`
+(Crossbow/Throwing) sont **inversés** — corrigé en anglais, **le fichier français porte
+la même inversion**, à reprendre au dégel ; `RULES-WEAPB29` « Inflamed » était en fait
+la note de bas de tableau de l'arme Incendiary, devenue **Ablaze**.
+
+**Tranché par Nono.** Les 5 `RULES-ARMOB_*` sans équivalent (Not discreet, Not Discreet
+at all, Narrow the view, Blocks the view, Under armor) sont une simplification
+volontaire de son maître du jeu. On les garde, ce ne sont pas des erreurs — ne plus les
+ressortir en anomalie.
 
 ### 2.1 WinLivre — Affichage des carrières : ✅ Phase 1 terminée
 
