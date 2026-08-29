@@ -132,12 +132,12 @@
   <!-- Herbalist -->
 <Career name="RULES-WORK10">"45-46"</Career>
   <!-- Hunter -->
-<Career name="RULES-WORK40">"47-50"</Career>
+<Career name="RULES-WORK40">"47-54"</Career>
   <!-- Miner -->
-<Career name="RULES-WORK40">"51-58"</Career>
-  <!-- Miner -->
-<Career name="RULES-WORK19">"59-62"</Career>
+<Career name="RULES-WORK19">"55-58"</Career>
   <!-- Scout -->
+<Career name="RULES-WORK63">"59-62"</Career>
+  <!-- Villager -->
 <Career name="RULES-WORK11">"63"</Career>
   <!-- Bounty Hunter -->
 <Career name="RULES-WORK55">"64-68"</Career>

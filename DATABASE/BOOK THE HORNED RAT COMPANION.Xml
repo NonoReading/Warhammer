@@ -94,7 +94,7 @@
 <Skill name="RULES-COMPPRECEP">"3"</Skill>
   <!-- Perception  -->
 <Skill name="RULES-COMPSAVOIR_GUERRE">"4"</Skill>
-  <!-- Lore (War) -->
+  <!-- Lore (Warfare) -->
 <Skill name="RULES-COMPORIENT">"4"</Skill>
   <!-- Navigation -->
 </SUBCHAPTER_SKILL>
@@ -140,7 +140,7 @@
 <Item name="RULES-COMB_BASE_08">"1"</Item>
 <Item name="UPINA-COMB_BASE_11">"1"</Item>
 <Item name="ARCH1-PROJ_EXPLO_03">"2"</Item>
-<Item name="ARCH1-COMB_BASE_* (Q)">"2"</Item>
+<Item name="RULES-COMB_BASE_* (Q)">"2"</Item>
 <Item name="RULES-COMB_2M_02">"3"</Item>
 <Item name="RULES-ARMO_14(Q)">"3"</Item>
 <Item name="RULES-ARMO_12(Q)">"3"</Item>

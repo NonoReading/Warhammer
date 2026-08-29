@@ -16,6 +16,12 @@
 <Skill id="RULES-COMPPROJ_ARC/LUSTR-COMPPROJ_SARBAC/RULES-COMPPROJ_LANC">
 <Description language="ENGLISH">"Ranged (Bow, Blowpipe, or Throwing)"</Description>
 </Skill>
+<Skill id="RULES-COMPSAVOIR_OLDONES">
+<Description language="ENGLISH">"Lore (Old Ones)"</Description>
+</Skill>
+<Skill id="RULES-COMPFOCAL_CIEUX/RULES-COMPFOCAL_BETE">
+<Description language="ENGLISH">"Channelling (Azyr or Ghur)"</Description>
+</Skill>
 </DATA_SKILL_SPECIALIZATION>
 <!-- Deux traits de créature apportés par Lustria et absents du livre de règles
      (Lustria p.151, encadré "New Traits") : Chameleon pour les Skinks Caméléons,
@@ -43,6 +49,9 @@
 <Max>"1"</Max>
 <PDF>""</PDF>
 <Test language="ENGLISH">""</Test>
+</Talent>
+<Talent id="RULES-T0088_BETE/RULES-T0088_CIEUX">
+<Description language="ENGLISH">"Arcane Magic (Beasts or Heavens)"</Description>
 </Talent>
 </DATA_TALENT>
 <!-- Le livre porte son propre nom d'affichage : ajouter un livre ne demande
@@ -294,6 +303,18 @@
 <Hand>"0"</Hand>
 <Ammunition>"1"</Ammunition>
 </Weapon>
+<Weapon id="LUSTR-COMB_BASE_03">
+<Description language="ENGLISH">"Machete"</Description>
+<Skill>"RULES-COMPCOMB_BASE"</Skill>
+<Damage>"+(BATTR_S)+4"</Damage>
+<Availability>"DISPO_COMMON"</Availability>
+<Reach>"WEAPR_MID"</Reach>
+<Price>"1CO"</Price>
+<Encumbrance>"1"</Encumbrance>
+<Quality>"-"</Quality>
+<Hand>"1"</Hand>
+<Ammunition>"0"</Ammunition>
+</Weapon>
 </DATA_WEAPON>
 <!-- Armure lustrienne (Lustria p.163) : os, corde et plaques de cuivre battu. Meme
      protection que le cuir, mais +1 point d'Encombrement par piece a cause des composants
@@ -537,15 +558,15 @@
   <!-- Melee (Polearm) -->
 <Skill name="RULES-COMPGUERI">"3"</Skill>
   <!-- Heal -->
-<Skill name="RULES-COMPLANG_*">"3"</Skill>
+<Skill name="RULES-COMPLANG_MAG">"3"</Skill>
   <!-- Language (Magick) -->
 <Skill name="RULES-COMPCOMM">"3"</Skill>
   <!-- Leadership -->
-<Skill name="RULES-COMPSAVOIR_*">"3"</Skill>
+<Skill name="RULES-COMPSAVOIR_MAGIE">"3"</Skill>
   <!-- Lore (Magic) -->
-<Skill name="RULES-COMPFOCAL_*">"4"</Skill>
+<Skill name="RULES-COMPFOCAL_CIEUX/RULES-COMPFOCAL_BETE">"4"</Skill>
   <!-- Channelling (Azyr or Ghur) -->
-<Skill name="RULES-COMPSAVOIR_*">"4"</Skill>
+<Skill name="RULES-COMPSAVOIR_OLDONES">"4"</Skill>
   <!-- Lore (Old Ones) -->
 </SUBCHAPTER_SKILL>
 <SUBCHAPTER_TALENT>
@@ -565,7 +586,7 @@
   <!-- Roughrider -->
 <Talent name="RULES-T0151">"2"</Talent>
   <!-- Sure Shot -->
-<Talent name="RULES-T0088_*">"3"</Talent>
+<Talent name="RULES-T0088_BETE/RULES-T0088_CIEUX">"3"</Talent>
   <!-- Arcane Magic (Beasts or Heavens) -->
 <Talent name="RULES-T0089">"3"</Talent>
   <!-- Petty Magic -->
@@ -844,7 +865,7 @@
 </SUBCHAPTER_TALENT>
 <SUBCHAPTER_ITEM>
 <Item name="Cooking Pot">"1"</Item>
-<Item name="RULES-COMB_BASE_04">"1"</Item>
+<Item name="LUSTR-COMB_BASE_03">"1"</Item>
   <!-- Machete -->
 <Item name="Sturdy Boots">"1"</Item>
 <Item name="Walking Stick">"1"</Item>

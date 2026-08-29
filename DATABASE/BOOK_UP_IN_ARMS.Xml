@@ -559,7 +559,7 @@ Ifthe Character passes the Test, the crew members may then use the Characters Ra
 <Skill name="RULES-COMPCHEV_CHEVAL">"3"</Skill>
   <!-- Ride (Horse) -->
 <Skill name="RULES-COMPSAVOIR_GUERRE">"4"</Skill>
-  <!-- Lore (War) -->
+  <!-- Lore (Warfare) -->
 <Skill name="RULES-COMPSIGNES_SCOUT">"4"</Skill>
   <!-- Secret Signs (Scout) -->
 </SUBCHAPTER_SKILL>
@@ -694,7 +694,7 @@ Ifthe Character passes the Test, the crew members may then use the Characters Ra
 <Skill name="RULES-COMPCHARM">"4"</Skill>
   <!-- Charm -->
 <Skill name="RULES-COMPSAVOIR_GUERRE">"4"</Skill>
-  <!-- Lore (War) -->
+  <!-- Lore (Warfare) -->
 </SUBCHAPTER_SKILL>
 <SUBCHAPTER_TALENT>
 <Talent name="RULES-T0074">"1"</Talent>
@@ -829,7 +829,7 @@ Ifthe Character passes the Test, the crew members may then use the Characters Ra
 <Skill name="RULES-COMPCHARM">"4"</Skill>
   <!-- Charm -->
 <Skill name="RULES-COMPSAVOIR_GUERRE">"4"</Skill>
-  <!-- Lore (War) -->
+  <!-- Lore (Warfare) -->
 </SUBCHAPTER_SKILL>
 <SUBCHAPTER_TALENT>
 <Talent name="RULES-T0094">"1"</Talent>
@@ -960,7 +960,7 @@ Ifthe Character passes the Test, the crew members may then use the Characters Ra
 <Skill name="RULES-COMPCHARM">"4"</Skill>
   <!-- Charm -->
 <Skill name="RULES-COMPSAVOIR_GUERRE">"4"</Skill>
-  <!-- Lore (War) -->
+  <!-- Lore (Warfare) -->
 </SUBCHAPTER_SKILL>
 <SUBCHAPTER_TALENT>
 <Talent name="RULES-T0149">"1"</Talent>
@@ -1088,7 +1088,7 @@ Ifthe Character passes the Test, the crew members may then use the Characters Ra
 <Skill name="RULES-COMPCHARM">"4"</Skill>
   <!-- Charm -->
 <Skill name="RULES-COMPSAVOIR_GUERRE">"4"</Skill>
-  <!-- Lore (War) -->
+  <!-- Lore (Warfare) -->
 </SUBCHAPTER_SKILL>
 <SUBCHAPTER_TALENT>
 <Talent name="RULES-T0153">"1"</Talent>
@@ -1469,7 +1469,7 @@ Ifthe Character passes the Test, the crew members may then use the Characters Ra
 <Skill name="RULES-COMPCOMM">"3"</Skill>
   <!-- Leadership -->
 <Skill name="RULES-COMPSAVOIR_GUERRE">"3"</Skill>
-  <!-- Lore (War) -->
+  <!-- Lore (Warfare) -->
 <Skill name="RULES-COMPLANG_BATAIL">"4"</Skill>
   <!-- Language (Battle) -->
 <Skill name="RULES-COMPSAVOIR_*">"4"</Skill>
@@ -1595,7 +1595,7 @@ Ifthe Character passes the Test, the crew members may then use the Characters Ra
 <Skill name="RULES-COMPCOMB_*">"2"</Skill>
   <!-- Melee (Any) -->
 <Skill name="RULES-COMPSAVOIR_GUERRE">"2"</Skill>
-  <!-- Lore (War) -->
+  <!-- Lore (Warfare) -->
 <Skill name="RULES-COMPCHARM">"3"</Skill>
   <!-- Charm -->
 <Skill name="RULES-COMPPROJ_*">"3"</Skill>
@@ -1735,7 +1735,7 @@ Ifthe Character passes the Test, the crew members may then use the Characters Ra
 <Skill name="RULES-COMPCOMM">"3"</Skill>
   <!-- Leadership -->
 <Skill name="RULES-COMPSAVOIR_GUERRE">"3"</Skill>
-  <!-- Lore (War) -->
+  <!-- Lore (Warfare) -->
 <Skill name="RULES-COMPPRECEP">"3"</Skill>
   <!-- Perception  -->
 <Skill name="RULES-COMPSAVOIR_*">"4"</Skill>
@@ -1872,7 +1872,7 @@ Ifthe Character passes the Test, the crew members may then use the Characters Ra
 <Skill name="RULES-COMPCOMM">"3"</Skill>
   <!-- Leadership -->
 <Skill name="RULES-COMPSAVOIR_GUERRE">"3"</Skill>
-  <!-- Lore (War) -->
+  <!-- Lore (Warfare) -->
 <Skill name="RULES-COMPSIGNES_PANTHER">"4"</Skill>
   <!-- Secret Signs (Knights Panther) -->
 <Skill name="RULES-COMPSAVOIR_*">"4"</Skill>
@@ -2009,7 +2009,7 @@ Ifthe Character passes the Test, the crew members may then use the Characters Ra
 <Skill name="RULES-COMPCOMM">"3"</Skill>
   <!-- Leadership -->
 <Skill name="RULES-COMPSAVOIR_GUERRE">"3"</Skill>
-  <!-- Lore (War) -->
+  <!-- Lore (Warfare) -->
 <Skill name="RULES-COMPSAVOIR_HERAL/RULES-COMPSAVOIR_LOI">"4"</Skill>
   <!-- Lore (Law or Heraldry) -->
 <Skill name="RULES-COMPPROJ_POUDRE">"4"</Skill>
@@ -2271,7 +2271,7 @@ Ifthe Character passes the Test, the crew members may then use the Characters Ra
 <Skill name="RULES-COMPINTIM">"2"</Skill>
   <!-- Intimidate -->
 <Skill name="RULES-COMPSAVOIR_GUERRE">"2"</Skill>
-  <!-- Lore (War) -->
+  <!-- Lore (Warfare) -->
 <Skill name="RULES-COMPSURVEXT">"2"</Skill>
   <!-- Outdoor Survival -->
 <Skill name="RULES-COMPMARCH">"3"</Skill>
@@ -2387,7 +2387,7 @@ Ifthe Character passes the Test, the crew members may then use the Characters Ra
 <Skill name="RULES-COMPCOMM">"1"</Skill>
   <!-- Leadership -->
 <Skill name="RULES-COMPSAVOIR_GUERRE">"1"</Skill>
-  <!-- Lore (War) -->
+  <!-- Lore (Warfare) -->
 <Skill name="RULES-COMPSAVOIR_THEO">"1"</Skill>
   <!-- Lore (Theology) -->
 <Skill name="RULES-COMPCOMB_BASE">"1"</Skill>
@@ -2411,7 +2411,7 @@ Ifthe Character passes the Test, the crew members may then use the Characters Ra
 <Skill name="RULES-COMPPROJ_*">"2"</Skill>
   <!-- Ranged (Any) -->
 <Skill name="RULES-COMPSAVOIR_GUERRE">"3"</Skill>
-  <!-- Lore (War) -->
+  <!-- Lore (Warfare) -->
 <Skill name="RULES-COMPCOMB_*">"3"</Skill>
   <!-- Melee (Any) -->
 <Skill name="RULES-COMPRECH">"3"</Skill>

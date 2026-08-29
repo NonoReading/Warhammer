@@ -989,7 +989,7 @@ The assistant provides a bonus of +20 to these Tests rather than the normal +10 
 <Skill name="RULES-COMPCOMM">"2"</Skill>
   <!-- Leadership -->
 <Skill name="RULES-COMPSAVOIR_GUERRE">"2"</Skill>
-  <!-- Lore (War) -->
+  <!-- Lore (Warfare) -->
 <Skill name="RULES-COMPEVAL">"3"</Skill>
   <!-- Evaluate -->
 <Skill name="RULES-COMPSAVOIR_DEMO">"3"</Skill>
@@ -1652,7 +1652,7 @@ The assistant provides a bonus of +20 to these Tests rather than the normal +10 
 <Skill name="RULES-COMPCOMM">"3"</Skill>
   <!-- Leadership -->
 <Skill name="RULES-COMPSAVOIR_GUERRE">"3"</Skill>
-  <!-- Lore (War) -->
+  <!-- Lore (Warfare) -->
 <Skill name="RULES-COMPCHEV_CHEVAL">"3"</Skill>
   <!-- Ride (Horse) -->
 <Skill name="RULES-COMPLANG_*">"4"</Skill>
@@ -1772,7 +1772,7 @@ The assistant provides a bonus of +20 to these Tests rather than the normal +10 
 <Skill name="RULES-COMPCOMM">"2"</Skill>
   <!-- Leadership -->
 <Skill name="RULES-COMPSAVOIR_GUERRE">"2"</Skill>
-  <!-- Lore (War) -->
+  <!-- Lore (Warfare) -->
 <Skill name="RULES-COMPRAGOT">"2"</Skill>
   <!-- Gossip -->
 <Skill name="RULES-COMPLANG_*">"2"</Skill>
@@ -2029,7 +2029,7 @@ The assistant provides a bonus of +20 to these Tests rather than the normal +10 
 <Skill name="RULES-COMPINTIM">"2"</Skill>
   <!-- Intimidate -->
 <Skill name="RULES-COMPSAVOIR_GUERRE">"2"</Skill>
-  <!-- Lore (War) -->
+  <!-- Lore (Warfare) -->
 <Skill name="RULES-COMPCOMB_*">"2"</Skill>
   <!-- Melee (Any) -->
 <Skill name="RULES-COMPCHEV_CHEVAL">"2"</Skill>

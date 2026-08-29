@@ -50,6 +50,12 @@ un :
 suivant : sa borne de fin vaut « fin du fichier » et il aspire tout ce qui suit. Vérifier la
 longueur du **dernier** élément de chaque lot, systématiquement.
 
+**Table de tirage (d100).** Deux contrôles, pas un : la couverture 01-100 sans trou ni
+chevauchement, **et** l'absence de carrière déclarée deux fois dans la même table. Le
+premier seul ne suffit pas — sur le Gnome de Rough Nights, un décalage d'un cran avec
+`Miner` dupliqué et `Villager` oublié passait la couverture sans broncher, parce qu'un
+décalage compensé se referme sur lui-même.
+
 **Appariement de deux listes.** Apparier par le **contenu**, jamais par la position, l'ordre
 supposé ou l'ordre alphabétique — l'ordre de lecture des colonnes d'un PDF n'est pas celui du
 livre, trois rituels sur dix-sept auraient été faux. Contrôler par **bijection** : autant
@@ -57,6 +63,13 @@ d'éléments d'un côté que de l'autre, chacun consommé une fois exactement.
 
 **Affirmation d'absence.** Interdit de conclure « ce livre n'a pas X » sans avoir d'abord
 listé les balises réellement présentes dans **ce** fichier, puis cherché par le contenu.
+**Et il faut RELIRE cet inventaire au moment d'écrire l'absence** : sur Lustria j'avais
+l'inventaire sous les yeux, `SUBCHAPTER_CAREER` y figurait avec 2 occurrences, et j'ai
+quand même annoncé que les Skinks n'avaient aucune carrière — parce que j'avais cherché
+dans les deux blocs employés par le Rulebook et que je m'étais arrêté là. Quand une
+donnée n'est pas où on la cherche, l'hypothèse par défaut est **« elle est ailleurs »**,
+pas « elle manque » : Middenheim et Lustria rangent tous deux leurs tables de tirage dans
+le `SUBCHAPTER_CAREER` de chaque espèce.
 Voir la règle détaillée plus haut — trois occurrences, dont une qui a mis au backlog pendant
 des jours un chantier de 183 lignes déjà faites.
 
@@ -179,6 +192,30 @@ la note de bas de tableau de l'arme Incendiary, devenue **Ablaze**.
 at all, Narrow the view, Blocks the view, Under armor) sont une simplification
 volontaire de son maître du jeu. On les garde, ce ne sont pas des erreurs — ne plus les
 ressortir en anomalie.
+
+### 2.0ter Revues de livre : ✅ TERMINÉES le 29/08/2026
+
+Les dix-sept fichiers de `DATABASE/` ont été confrontés à leur livre. Ce qui a été trouvé,
+par ordre de gravité : une table de tirage d'Elfes Noirs **copiée chez les Orcs Communs**
+de Green iz Best, où chaque valeur renvoyait deux carrières ; un `Villager` oublié dans la
+table du Gnome de Rough Nights, avec `Miner` dupliqué et tout décalé d'un cran ; un talent
+entièrement faux au Warrior of Tzeentch (`Suffuse With (Ulgu)` au lieu de `Strike Mighty
+Blow`) ; trois ethnies de Salzenmund absentes, ajoutées ; et le libellé `Lore (War)`,
+retraduit, corrigé en `Lore (Warfare)` dans cinq fichiers.
+
+**Deux contrôles ont fait tout le travail**, et ils sont bon marché :
+
+- *Couverture d'une table de tirage* — 01-100 sans trou ni chevauchement, **plus** aucune
+  carrière déclarée deux fois. Le premier seul ne suffit pas : un décalage compensé se
+  referme sur lui-même et passe sans broncher.
+- *Références mortes* — confronter tous les identifiants cités d'un fichier aux
+  identifiants déclarés dans les dix-sept.
+
+**Et un piège récurrent, à connaître** : trois suppléments d'affilée (Horned Rat, Enemy in
+Shadows, Death on the Reik) orthographient mal un talent du Rulebook — `Unshakeable`,
+`Public Speaking`, `Warleader`. À chaque fois la base avait raison. Devant un écart de
+libellé, lire la **déclaration** du talent dans le Rulebook ; ne jamais compter les
+occurrences dans le corpus, elles font pencher du mauvais côté.
 
 ### 2.0bis Références mortes dans les personnages sauvegardés : ⏳ à trancher
 

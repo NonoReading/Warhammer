@@ -174,4 +174,197 @@
   <!-- Owler -->
 </Entry>
 </DATA_SPECIE_CAREER_DIRECT>
+<DATA_SKILL_SPECIALIZATION>
+<Skill id="RULES-COMPMETIER_SILVERSMITH">
+<Description language="ENGLISH">"Trade (Silversmith)"</Description>
+</Skill>
+</DATA_SKILL_SPECIALIZATION>
+<DATA_SPECIE>
+<Specie id="SALZE-RACE_HSALZ">
+<Description language="ENGLISH">"Humans (Salzenmunder)"</Description>
+<Explanation language="ENGLISH">"Salzenmund, whilst it is not a major city, has the hallmarks of urban sophistication, and Characters from Salzenmund have much in common with those from more civilised parts of the Empire."</Explanation>
+<Ethnic>"RULES-SPECIE_HUMAN"</Ethnic>
+<SUBCHAPTER_ATTR>
+<Attribut name="RULES-ATTR_WS">"2d10+20"</Attribut>
+<Attribut name="RULES-ATTR_BS">"2d10+20"</Attribut>
+<Attribut name="RULES-ATTR_S">"2d10+20"</Attribut>
+<Attribut name="RULES-ATTR_T">"2d10+20"</Attribut>
+<Attribut name="RULES-ATTR_I">"2d10+20"</Attribut>
+<Attribut name="RULES-ATTR_Ag">"2d10+20"</Attribut>
+<Attribut name="RULES-ATTR_Dex">"2d10+20"</Attribut>
+<Attribut name="RULES-ATTR_Int">"2d10+20"</Attribut>
+<Attribut name="RULES-ATTR_WP">"2d10+20"</Attribut>
+<Attribut name="RULES-ATTR_Fel">"2d10+20"</Attribut>
+<Attribut name="RULES-ATTR_Fate">"2"</Attribut>
+<Attribut name="RULES-ATTR_Resil">"1"</Attribut>
+<Attribut name="RULES-ATTR_Wound">"1xBATTR_S+2xBATTR_T+1xBATTR_WP"</Attribut>
+<Attribut name="RULES-ATTR_Supp">"3"</Attribut>
+<Attribut name="RULES-ATTR_Move">"4"</Attribut>
+  <!-- Profil repris a l'identique du Rulebook : le chapitre Nordlander Characters
+       (p.142) ne remplace que les competences et les talents. -->
+</SUBCHAPTER_ATTR>
+<SUBCHAPTER_SKILL>
+<Skill>"RULES-COMPCHARM"</Skill>
+  <!-- Charm -->
+<Skill>"RULES-COMPCALM"</Skill>
+  <!-- Cool -->
+<Skill>"RULES-COMPDIVERT_NARRA"</Skill>
+  <!-- Entertain (Storytelling) -->
+<Skill>"RULES-COMPEVAL"</Skill>
+  <!-- Evaluate -->
+<Skill>"RULES-COMPRAGOT"</Skill>
+  <!-- Gossip -->
+<Skill>"RULES-COMPMARCH"</Skill>
+  <!-- Haggle -->
+<Skill>"RULES-COMPLANG_NORSE"</Skill>
+  <!-- Language (Norse) -->
+<Skill>"RULES-COMPCOMM"</Skill>
+  <!-- Leadership -->
+<Skill>"RULES-COMPSAVOIR_NORDLAND"</Skill>
+  <!-- Lore (Nordland) -->
+<Skill>"RULES-COMPCOMB_BASE"</Skill>
+  <!-- Melee (Basic) -->
+<Skill>"RULES-COMPPROJ_ARC"</Skill>
+  <!-- Ranged (Bow) -->
+<Skill>"RULES-COMPMETIER_*"</Skill>
+  <!-- Trade (Any) -->
+</SUBCHAPTER_SKILL>
+<SUBCHAPTER_TALENT>
+<Talent>"RULES-T0171"</Talent>
+  <!-- Doomed -->
+<Talent>"RULES-T0002/RULES-T0117"</Talent>
+  <!-- Savvy or Suave -->
+<Talent>"RULES-T*"</Talent>
+  <!-- Random Talent -->
+<Talent>"RULES-T*"</Talent>
+  <!-- Random Talent -->
+<Talent>"RULES-T*"</Talent>
+  <!-- Random Talent -->
+</SUBCHAPTER_TALENT>
+</Specie>
+<Specie id="SALZE-RACE_DCRAG">
+<Description language="ENGLISH">"Dwarfs (Cragforge Clan)"</Description>
+<Explanation language="ENGLISH">"There are few Dwarfs resident in Nordland, though in Salzenmund members of the Cragforge and Grumsson Clans may be encountered. The Cragforge Clan are heavily involved in the production of silver."</Explanation>
+<Ethnic>"RULES-SPECIE_DWARF"</Ethnic>
+<SUBCHAPTER_ATTR>
+<Attribut name="RULES-ATTR_WS">"2d10+30"</Attribut>
+<Attribut name="RULES-ATTR_BS">"2d10+20"</Attribut>
+<Attribut name="RULES-ATTR_S">"2d10+20"</Attribut>
+<Attribut name="RULES-ATTR_T">"2d10+30"</Attribut>
+<Attribut name="RULES-ATTR_I">"2d10+20"</Attribut>
+<Attribut name="RULES-ATTR_Ag">"2d10+10"</Attribut>
+<Attribut name="RULES-ATTR_Dex">"2d10+30"</Attribut>
+<Attribut name="RULES-ATTR_Int">"2d10+20"</Attribut>
+<Attribut name="RULES-ATTR_WP">"2d10+40"</Attribut>
+<Attribut name="RULES-ATTR_Fel">"2d10+10"</Attribut>
+<Attribut name="RULES-ATTR_Fate">"0"</Attribut>
+<Attribut name="RULES-ATTR_Resil">"2"</Attribut>
+<Attribut name="RULES-ATTR_Wound">"1xBATTR_S+2xBATTR_T+1xBATTR_WP"</Attribut>
+<Attribut name="RULES-ATTR_Supp">"2"</Attribut>
+<Attribut name="RULES-ATTR_Move">"3"</Attribut>
+  <!-- Profil repris a l'identique du Rulebook : le chapitre Nordlander Characters
+       (p.142) ne remplace que les competences et les talents. -->
+</SUBCHAPTER_ATTR>
+<SUBCHAPTER_SKILL>
+<Skill>"RULES-COMPRESALC"</Skill>
+  <!-- Consume Alcohol -->
+<Skill>"RULES-COMPCALM"</Skill>
+  <!-- Cool -->
+<Skill>"RULES-COMPRESIST"</Skill>
+  <!-- Endurance -->
+<Skill>"RULES-COMPDIVERT_NARRA"</Skill>
+  <!-- Entertain (Storytelling) -->
+<Skill>"RULES-COMPEVAL"</Skill>
+  <!-- Evaluate -->
+<Skill>"RULES-COMPINTIM"</Skill>
+  <!-- Intimidate -->
+<Skill>"RULES-COMPLANG_KHAZ"</Skill>
+  <!-- Language (Khazalid) -->
+<Skill>"RULES-COMPSAVOIR_NAIN"</Skill>
+  <!-- Lore (Dwarfs) -->
+<Skill>"RULES-COMPSAVOIR_GEOL"</Skill>
+  <!-- Lore (Geology) -->
+<Skill>"RULES-COMPSAVOIR_METAL"</Skill>
+  <!-- Lore (Metallurgy) -->
+<Skill>"RULES-COMPCOMB_BASE"</Skill>
+  <!-- Melee (Basic) -->
+<Skill>"RULES-COMPMETIER_SILVERSMITH"</Skill>
+  <!-- Trade (Silversmith) -->
+</SUBCHAPTER_SKILL>
+<SUBCHAPTER_TALENT>
+<Talent>"RULES-T0169"</Talent>
+  <!-- Magic Resistance -->
+<Talent>"RULES-T0164"</Talent>
+  <!-- Night Vision -->
+<Talent>"RULES-T0084/RULES-T0075"</Talent>
+  <!-- Read/Write or Relentless -->
+<Talent>"RULES-T0041/RULES-T0107"</Talent>
+  <!-- Resolute or Strong-minded -->
+<Talent>"RULES-T0035"</Talent>
+  <!-- Sturdy -->
+</SUBCHAPTER_TALENT>
+</Specie>
+<Specie id="SALZE-RACE_DGRUM">
+<Description language="ENGLISH">"Dwarfs (Grumsson Clan)"</Description>
+<Explanation language="ENGLISH">"There are few Dwarfs resident in Nordland, though in Salzenmund members of the Cragforge and Grumsson Clans may be encountered. The Grumsson Clan are versatile, with apparent Norse Dwarf roots."</Explanation>
+<Ethnic>"RULES-SPECIE_DWARF"</Ethnic>
+<SUBCHAPTER_ATTR>
+<Attribut name="RULES-ATTR_WS">"2d10+30"</Attribut>
+<Attribut name="RULES-ATTR_BS">"2d10+20"</Attribut>
+<Attribut name="RULES-ATTR_S">"2d10+20"</Attribut>
+<Attribut name="RULES-ATTR_T">"2d10+30"</Attribut>
+<Attribut name="RULES-ATTR_I">"2d10+20"</Attribut>
+<Attribut name="RULES-ATTR_Ag">"2d10+10"</Attribut>
+<Attribut name="RULES-ATTR_Dex">"2d10+30"</Attribut>
+<Attribut name="RULES-ATTR_Int">"2d10+20"</Attribut>
+<Attribut name="RULES-ATTR_WP">"2d10+40"</Attribut>
+<Attribut name="RULES-ATTR_Fel">"2d10+10"</Attribut>
+<Attribut name="RULES-ATTR_Fate">"0"</Attribut>
+<Attribut name="RULES-ATTR_Resil">"2"</Attribut>
+<Attribut name="RULES-ATTR_Wound">"1xBATTR_S+2xBATTR_T+1xBATTR_WP"</Attribut>
+<Attribut name="RULES-ATTR_Supp">"2"</Attribut>
+<Attribut name="RULES-ATTR_Move">"3"</Attribut>
+  <!-- Profil repris a l'identique du Rulebook : le chapitre Nordlander Characters
+       (p.142) ne remplace que les competences et les talents. -->
+</SUBCHAPTER_ATTR>
+<SUBCHAPTER_SKILL>
+<Skill>"RULES-COMPRESALC"</Skill>
+  <!-- Consume Alcohol -->
+<Skill>"RULES-COMPCALM"</Skill>
+  <!-- Cool -->
+<Skill>"RULES-COMPRESIST"</Skill>
+  <!-- Endurance -->
+<Skill>"RULES-COMPDIVERT_NARRA"</Skill>
+  <!-- Entertain (Storytelling) -->
+<Skill>"RULES-COMPEVAL"</Skill>
+  <!-- Evaluate -->
+<Skill>"RULES-COMPINTIM"</Skill>
+  <!-- Intimidate -->
+<Skill>"RULES-COMPLANG_NORSE"</Skill>
+  <!-- Language (Norse) -->
+<Skill>"RULES-COMPLANG_KHAZ"</Skill>
+  <!-- Language (Khazalid) -->
+<Skill>"RULES-COMPSAVOIR_NAIN"</Skill>
+  <!-- Lore (Dwarfs) -->
+<Skill>"RULES-COMPCOMB_BASE"</Skill>
+  <!-- Melee (Basic) -->
+<Skill>"RULES-COMPVOILE"</Skill>
+  <!-- Sail -->
+<Skill>"RULES-COMPMETIER_*"</Skill>
+  <!-- Trade (Any) -->
+</SUBCHAPTER_SKILL>
+<SUBCHAPTER_TALENT>
+<Talent>"RULES-T0169"</Talent>
+  <!-- Magic Resistance -->
+<Talent>"RULES-T0164"</Talent>
+  <!-- Night Vision -->
+<Talent>"RULES-T0075/RULES-T0107"</Talent>
+  <!-- Relentless or Strong-minded -->
+<Talent>"RULES-T0035"</Talent>
+  <!-- Sturdy -->
+<Talent>"RULES-T*"</Talent>
+  <!-- Random Talent -->
+</SUBCHAPTER_TALENT>
+</Specie>
+</DATA_SPECIE>
 </DATA_BOOK>

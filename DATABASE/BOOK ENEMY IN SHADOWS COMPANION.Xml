@@ -31,7 +31,7 @@
 <Attribut>""</Attribut>
 <Description language="ENGLISH">"Double Life"</Description>
 <Short language="ENGLISH">""</Short>
-<Explanation language="ENGLISH">"So adept are yoy at maintaining your Secret Identity, that you are able to live two completely separate lives.
+<Explanation language="ENGLISH">"So adept are you at maintaining your Secret Identity, that you are able to live two completely separate lives.
 When you purchase this Talent, you may enter into a second Career alongside your Chaos Career.
 You now count as belonging to both Careers, and may purchase Advances and Talents in either one, as well as enter and leave new Careers from either.
 As always, any changes in Career need approval from your GM so they best fit any campaign plans and properly reflect your double life."</Explanation>
@@ -176,6 +176,7 @@ However, their differing visions of the Empire’s fate ensure that for all thei
 <Item name="Secret Tattoo">"1"</Item>
 <Item name="Chaos Grimoire">"2"</Item>
 <Item name="Ritual Vestments (Q)">"2"</Item>
+<Item name="Schemes">"2"</Item>
 <Item name="Cell of Cultists">"3"</Item>
 <Item name="Magic Item">"3"</Item>
 <Item name="Sacrificial Dagger">"3"</Item>

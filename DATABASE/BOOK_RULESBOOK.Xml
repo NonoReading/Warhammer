@@ -1280,7 +1280,7 @@ As sailing one ship is not so different to sailing another, having any Sail Spec
 <Description language="ENGLISH">"Lore (Geology)"</Description>
 </Skill>
 <Skill id="RULES-COMPSAVOIR_GUERRE">
-<Description language="ENGLISH">"Lore (War)"</Description>
+<Description language="ENGLISH">"Lore (Warfare)"</Description>
 </Skill>
 <Skill id="RULES-COMPSAVOIR_HERAL">
 <Description language="ENGLISH">"Lore (Heraldry)"</Description>
@@ -6069,7 +6069,7 @@ Whether it’s units of Pistoliers, Outriders, Demilancers, Horse Archers, or si
 <Skill name="RULES-COMPINTUI">"3"</Skill>
   <!-- Intuition  -->
 <Skill name="RULES-COMPSAVOIR_GUERRE">"3"</Skill>
-  <!-- Lore (War) -->
+  <!-- Lore (Warfare) -->
 <Skill name="RULES-COMPPARI">"4"</Skill>
   <!-- Gamble -->
 <Skill name="RULES-COMPSAVOIR_HERAL">"4"</Skill>
@@ -6590,7 +6590,7 @@ Many believe heavy cavalry are the pre-eminent warriors of the Old World. A mass
 <Skill name="RULES-COMPRESALC">"3"</Skill>
   <!-- Consume Alcohol -->
 <Skill name="RULES-COMPSAVOIR_GUERRE">"3"</Skill>
-  <!-- Lore (War) -->
+  <!-- Lore (Warfare) -->
 <Skill name="RULES-COMPSAVOIR_*">"4"</Skill>
   <!-- Lore (Any) -->
 <Skill name="RULES-COMPSIGNES_ORDCHEVAL">"4"</Skill>
@@ -8510,7 +8510,7 @@ The best way to keep something safe is to post a guard. Guarding looks easy enou
 <Skill name="RULES-COMPCOMM">"4"</Skill>
   <!-- Leadership -->
 <Skill name="RULES-COMPSAVOIR_GUERRE">"4"</Skill>
-  <!-- Lore (War) -->
+  <!-- Lore (Warfare) -->
 </SUBCHAPTER_SKILL>
 <SUBCHAPTER_TALENT>
 <Talent name="RULES-T0059">"1"</Talent>
@@ -11450,7 +11450,7 @@ Some cults of the Empire have clerics trained for war. In the Reikland, the Warr
 <Skill name="RULES-COMPRESALC">"4"</Skill>
   <!-- Consume Alcohol -->
 <Skill name="RULES-COMPSAVOIR_GUERRE">"4"</Skill>
-  <!-- Lore (War) -->
+  <!-- Lore (Warfare) -->
 </SUBCHAPTER_SKILL>
 <SUBCHAPTER_TALENT>
 <Talent name="RULES-T0012_*">"1"</Talent>
@@ -12336,7 +12336,7 @@ By the command of Emperor Magnus the Pious after the Great War Against Chaos, al
 <Skill name="RULES-COMPORIENT">"4"</Skill>
   <!-- Navigation -->
 <Skill name="RULES-COMPSAVOIR_GUERRE">"4"</Skill>
-  <!-- Lore (War) -->
+  <!-- Lore (Warfare) -->
 </SUBCHAPTER_SKILL>
 <SUBCHAPTER_TALENT>
 <Talent name="RULES-T0067">"1"</Talent>
@@ -12462,7 +12462,7 @@ Wizards channel one of the eight ‘Winds of Magic’ only spellcasters perceive
 <Skill name="RULES-COMPEVAL">"3"</Skill>
   <!-- Evaluate -->
 <Skill name="RULES-COMPSAVOIR_GUERRE">"3"</Skill>
-  <!-- Lore (War) -->
+  <!-- Lore (Warfare) -->
 <Skill name="RULES-COMPSOINANI">"3"</Skill>
   <!-- Animal Care -->
 <Skill name="RULES-COMPLANG_*">"4"</Skill>
@@ -13286,7 +13286,7 @@ Thieves steal all manner of wealth and goods from their fellow man. From the low
 <Ammunition>"0"</Ammunition>
 </Weapon>
 <Weapon id="RULES-COMB_HAST_01">
-<Description language="ENGLISH">"Quarter Staff"</Description>
+<Description language="ENGLISH">"Quarterstaff"</Description>
 <Skill>"RULES-COMPCOMB_HAST"</Skill>
 <Damage>"+(BATTR_S)+4"</Damage>
 <Availability>"DISPO_COMMON"</Availability>
@@ -13382,7 +13382,7 @@ Thieves steal all manner of wealth and goods from their fellow man. From the low
 <Ammunition>"0"</Ammunition>
 </Weapon>
 <Weapon id="RULES-COMB_BASE_02">
-<Description language="ENGLISH">"Goof"</Description>
+<Description language="ENGLISH">"Boat Hook"</Description>
 <Skill>"RULES-COMPCOMB_BASE"</Skill>
 <Damage>"+(BATTR_S)+4"</Damage>
 <Availability>"DISPO_COMMON"</Availability>
@@ -13394,7 +13394,7 @@ Thieves steal all manner of wealth and goods from their fellow man. From the low
 <Ammunition>"0"</Ammunition>
 </Weapon>
 <Weapon id="RULES-COMB_BASE_03">
-<Description language="ENGLISH">"Chopped"</Description>
+<Description language="ENGLISH">"Axe"</Description>
 <Skill>"RULES-COMPCOMB_BASE"</Skill>
 <Damage>"+(BATTR_S)+4"</Damage>
 <Availability>"DISPO_COMMON"</Availability>

@@ -517,10 +517,62 @@ trois tiennent, les occurrences trouvees etaient de la prose et non des declarat
    <Talent> = enumeration des Lores, blocs Ingredients / Conditions / Sacrifices /
    Consequences / Learning XP replies dans <Explanation>. Aucun champ nouveau.
 
-3. LIVRES NON ENCORE REVUS : Lustria, Green iz Best, Rough Nights and Hard Days, Salzenmund,
-   The Horned Rat Companion, Enemy in Shadows Companion, Death on the Reik Companion,
-   Middenheim (le reste). Le balayage de couverture les donnait nettement plus propres que les
-   trois premiers.
+2octies. DEATH ON THE REIK COMPANION : revue faite le 29/08. Carriere Warrior of Tzeentch
+   conforme apres deux corrections (talent Suffuse With (Ulgu) remplace par Strike Mighty
+   Blow au niveau 1, salaire du niveau 3 porte a Silver 4).
+   [FAIT 29/08] Armure du niveau 3 completee en quatre pieces sur le modele de
+   l Ironbreaker (Breastplate, Helm, Bracers, Plate Leggings).
+   Signale sans equivalent possible : le "Crude Hand Weapon" du niveau 1, rendu par le
+   generique RULES-COMB_BASE_* - la nuance "crude" n existe pas dans la base.
+
+2septies. ENEMY IN SHADOWS COMPANION : revue faite le 29/08. Carriere Cult Magus of
+   Tzeentch et ses trois talents conformes. Deux corrections mineures (coquille "yoy",
+   trapping "Schemes" oublie au niveau 2). Le "Arcane Lore (Daemonology)" du livre contre
+   "Arcane Magic (Daemonology)" de la base releve de l arbitrage ouvert n.2.
+
+2sexies. THE HORNED RAT COMPANION : revue faite le 29/08. La carriere Ironbreaker est
+   conforme. Une reference morte corrigee (ARCH1-COMB_BASE_* -> RULES-COMB_BASE_*) et le
+   libelle transverse "Lore (War)" -> "Lore (Warfare)" applique aux 5 fichiers concernes.
+   Signale sans suite : le livre donne "3 Cinderblast Bombs" mais SUBCHAPTER_ITEM utilise
+   sa valeur pour le NIVEAU - aucune carriere de la base ne peut exprimer une quantite.
+
+2quinquies. SALZENMUND : revue faite le 29/08. La carriere Owler est entierement conforme.
+   [FAIT 29/08] Les trois ethnies manquantes du chapitre "Nordlander Characters" (p.142)
+   ont ete ajoutees : SALZE-RACE_HSALZ, SALZE-RACE_DCRAG, SALZE-RACE_DGRUM, sur le modele
+   du Nain Norse. La quatrieme, Humans (Nordlander), existait deja sous MIDDE-RACE_HNORD
+   et correspondait exactement - non dupliquee.
+   [TRANCHE 29/08 : on laisse] "Language (Norse)" en base contre "Language (Norscan)"
+   dans le livre. Corpus a egalite, 4 occurrences de chaque. Ne plus ressortir.
+
+2quater. ROUGH NIGHTS AND HARD DAYS : revue faite le 29/08. Espece Gnome conforme, un
+   decalage corrige dans la table de tirage (Miner en double, Villager absent).
+   [TRANCHE 29/08 par Nono : on laisse en l etat] Deux points constates, volontairement
+   non corriges - ne plus les ressortir en anomalie :
+     * "Suffuse With (Ulgu)", presente comme nouveau talent par ce livre, est declare
+       dans Winds of Magic (WINDS-T0176_OMBRE). Dependance inter-livres assumee.
+     * DATA_CORRUPTION_MENTAL et DATA_CORRUPTION_PHYSICAL sont vides dans ce fichier,
+       le livre renvoyant a la table du Rulebook. Blocs vides conserves.
+
+2ter. GREEN IZ BEST : revue allegee faite le 29/08 (livre de fan). Une table de tirage
+   parasite supprimee chez les Common Orcs, le reste est sain. Non fait, si besoin un
+   jour : la confrontation detaillee des 5 ethnies au PDF (caracteristiques, competences,
+   talents).
+
+2bis. LUSTRIA : revue faite le 29/08. Carrieres (4, 16 niveaux, 6 corrections), especes,
+   talents, armes, armures et TABLES DE TIRAGE : tout est conforme au livre. Livre clos.
+   Les tables Skink et Chameleon Skink sont dans le SUBCHAPTER_CAREER de chaque <Specie>,
+   comme Middenheim - 21 et 2 entrees, couvrant 01-100 sans trou.
+   Seul point signale, non corrige : le trait Armour de la base est le generique
+   "Armour (Rating)" la ou le livre ecrit "Armour 1 (Scaly Skin)".
+   A prevoir un jour, non modelise : le livre p.162 donne des SUBSTITUTIONS de competences
+   pour les Skinks (Language (Classical) -> Language (Old One), Lore (Theology) ->
+   Lore (Old Ones), Melee limite a Basic et Polearm, Ranged (Crossbow) compte comme
+   Ranged (Bow), Trade (Barber) et (Explosives) sans objet). Elles sont documentees dans
+   l Explanation de LUSTR-RACE_SKINK.
+
+3. [TERMINE 29/08] LES REVUES DE LIVRE SONT TOUTES FAITES. Les dix-sept fichiers ont ete
+   confrontes a leur livre. Middenheim, le dernier, n a demande aucune correction : ses
+   3 ethnies, ses 3 tables de tirage et la carriere Wolf Kin sont conformes.
 
 
 =========================================================================
@@ -530,8 +582,14 @@ ARBITRAGES OUVERTS
    Witchery/Witchcraft. A trancher pour toute la famille. (Demonology -> Daemonology, lui, est
    fait le 26/08.)
 
-2. "Arcane Magic (X)" contre "Arcane Lore (X)" : c'est le MEME talent, nomme differemment par le
-   Rulebook et par Winds of Magic. Convention a choisir pour toute la famille.
+2. [TRANCHE 29/08 - RIEN A FAIRE] "Arcane Magic (X)" contre "Arcane Lore (X)". La note etait
+   mal posee : ce ne sont pas deux noms du meme talent. Le Rulebook emploie les deux termes
+   pour des choses DIFFERENTES - "Arcane Magic (X)" est le nom du TALENT, "Arcane Lore" designe
+   le DOMAINE de magie, et il ecrit meme "Arcane Magic (Any Arcane Lore)" a la carriere Wizard.
+   Les 17 libelles RULES-T0088_* de la base disent deja tous "Arcane Magic (X)" : conforme.
+   Winds of Magic et Enemy in Shadows sont les divergents, pas la base.
+   Reste au degel du francais : RULES-T0088_TZEENTCH est libelle "Arcane Lore (Tzeentch)" dans
+   BOOK_RULESBOOK_FRANCAIS.Xml, libelle anglais reste en francais avec la mauvaise convention.
 
 3. TIN WHISTLE / PENNYWHISTLE (Sea of Claws). Le choix du Chantyman pointe aujourd'hui sur
    RULES-COMPMUSIC_PENNYW pour son troisieme instrument, plutot que de creer une specialisation
@@ -933,6 +991,11 @@ ARBITRAGES OUVERTS SORTIS DE CE CHANTIER :
     inverses dans le fichier francais (06 Arbaletes dit "(lancer)", 07 Lancer dit
     "(arbalete)"). Corrige cote anglais le 28/08, pas cote francais.
   * la qualite d armure "Critical Deflection" du livre n existe pas dans la base.
+  * [CLOS 29/08] "Hand Weapon" : rien a corriger. Le livre ecrit "Hand Weapon (Boat Hook)",
+    "(Axe)", "(Sickle)", "(Pick)", "(Sword)" - c est une arme qu on tient EN MAIN, par
+    opposition aux armes a distance, la parenthese precisant la forme. La base nomme
+    directement ce que le livre met entre parentheses, ce qui est equivalent et plus lisible.
+    Seuls deux libelles etaient fautifs, corriges : Goof -> Boat Hook, Chopped -> Axe.
   * [FAIT 29/08] RULES-T0088_DEMON renomme "Arcane Magic (Daemonology)".
   * les 3 <ArmorSimp> (Light / Medium / Heavy Armour) sont un ajout ASSUME de Nono,
     reprenant l option "Quick Armour" du livre p.301. Ne pas les ressortir en anomalie.

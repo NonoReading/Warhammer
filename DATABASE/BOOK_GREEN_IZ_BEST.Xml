@@ -916,46 +916,6 @@
   <!-- Protagonist -->
 <Career name="RULES-WORK57">"50-100"</Career>
   <!-- Soldier -->
-<Career name="NAGGA-WORK120">"01-02"</Career>
-  <!-- Sorceress of Ghrond -->
-<Career name="RULES-WORK18">"03-07"</Career>
-  <!-- Duellist -->
-<Career name="RULES-WORK24">"08-11"</Career>
-  <!-- Spy -->
-<Career name="RULES-WORK10">"12-13"</Career>
-  <!-- Hunter -->
-<Career name="RULES-WORK19">"14-15"</Career>
-  <!-- Scout -->
-<Career name="NAGGA-WORK121">"16-24"</Career>
-  <!-- Beastmaster -->
-<Career name="RULES-WORK11">"25-30"</Career>
-  <!-- Bounty Hunter -->
-<Career name="NAGGA-WORK119">"31-40"</Career>
-  <!-- Black Ark Corsair -->
-<Career name="RULES-WORK35">"41-42"</Career>
-  <!-- Seaman -->
-<Career name="RULES-WORK16">"43-45"</Career>
-  <!-- Smuggler -->
-<Career name="NAGGA-WORK122">"46-50"</Career>
-  <!-- Disciple of Khaine -->
-<Career name="RULES-WORK53">"51-56"</Career>
-  <!-- Fence -->
-<Career name="RULES-WORK30">"57-62"</Career>
-  <!-- Outlaw -->
-<Career name="RULES-WORK51">"63-68"</Career>
-  <!-- Racketeer -->
-<Career name="RULES-WORK08">"69-74"</Career>
-  <!-- Cavalryman -->
-<Career name="RULES-WORK27">"75-78"</Career>
-  <!-- Guard -->
-<Career name="RULES-WORK12">"79-82"</Career>
-  <!-- Knight -->
-<Career name="RULES-WORK28">"83-86"</Career>
-  <!-- Pit Fighter -->
-<Career name="RULES-WORK61">"87-89"</Career>
-  <!-- Protagonist -->
-<Career name="RULES-WORK57">"90-100"</Career>
-  <!-- Soldier -->
 </SUBCHAPTER_CAREER>
 </Specie>
 <Specie id="GREEN-RACE_BORC">
