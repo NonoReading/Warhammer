@@ -482,26 +482,40 @@ FAITES : Up in Arms, Sea of Claws, Archives of the Empire I, II et III, Winds of
 Lords of Naggaroth, Middenheim (partiellement, voir ci-dessous).
 Methode rodee : inventaire du fichier XML, puis confrontation section par section au TXT du
 livre, les carrieres comparees automatiquement niveau par niveau apres resolution des
-identifiants en libelles. Piege a ne pas refaire : ancrer l'extraction sur le bloc parent
-attendu, jamais sur le nom de balise seul - DATA_CAREER_ROLL et DATA_SPECIE_CAREER_DIRECT
-emploient les MEMES noms de balises.
+identifiants en libelles.
 
-1. MIDDENHEIM - LA TABLE DE TIRAGE DES CARRIERES (p.148-149). Aucun bloc DATA_CAREER_ROLL dans
-   le fichier, donc les trois ethnies de Middenheim utilisent aujourd'hui la table Humaine de
-   base au lieu de la leur. 64 carrieres x 3 colonnes (Middenheimer / Middenlander / Nordlander),
-   des Academics aux Warriors, Wolf Kin inclus (66-68 / 59-60 / 57-58) ; Slayer est a "-" dans
-   les trois colonnes. VERIFIE AVANT SAISIE : les trois colonnes couvrent 01-100 exactement une
-   fois, sans trou ni chevauchement - pas de coquille de livre cette fois.
-   C'est le plus gros morceau restant.
+REGLE DE METHODE, REECRITE LE 29/08 APRES UNE TROISIEME OCCURRENCE DU MEME PIEGE
+--------------------------------------------------------------------------------
+NE JAMAIS CONCLURE A UNE ABSENCE DEPUIS UN SEUL NOM DE BALISE. Deux fautes distinctes,
+qui se sont produites l une et l autre :
+  (a) chercher un nom de balise et le trouver ailleurs qu on croit. DATA_CAREER_ROLL et
+      DATA_SPECIE_CAREER_DIRECT emploient les MEMES noms d enfants (<Entry>, <Specie>,
+      <Career>) : compter les <Entry> melange des plages de des et des indicateurs d
+      eligibilite. Toujours ancrer sur le bloc parent attendu.
+  (b) chercher un nom de balise, ne pas le trouver, et en deduire que la DONNEE est
+      absente. Les livres n emploient PAS tous la meme structure : le Rulebook range ses
+      tables de tirage dans DATA_CAREER_ROLL, Middenheim les range sous SUBCHAPTER_CAREER
+      a l interieur de chaque <Specie>. J ai declare la table absente pendant des jours.
 
-2. WINDS OF MAGIC - LES ~20 RITUELS (chapitre "Ritual Magic", p.27-33), aucun saisi. Ils ont un
-   CN, une portee, une cible et une duree comme des sorts : Bind Monstrous Beast, Bind Spirit
-   Within Power Stone, Carve Ogham Stone, Create Power Stone, Conjuration of the Bloody Hidesman,
-   Conjuration of the Incarnate Elemental of Death, Conjuration of Jack O' Cinders, Corrupt
-   Waystone, Create Construct, Create Familiar, Cursecraft, Invocate Daemon, Materialise the
-   Living Swamp, et la suite.
-   DECISION DE CONCEPTION D'ABORD : un rituel n'est pas un sort ordinaire (temps de lancement en
-   heures, ingredients obligatoires, participants). A trancher avec Nono avant toute saisie.
+AVANT DE DIRE "ce livre n a pas X" : lister les balises reellement presentes dans CE
+fichier, puis chercher par le CONTENU (un identifiant, un libelle attendu), jamais par le
+seul nom de balise du fichier voisin. Trois notes de ce fichier ont ete reverifiees ainsi
+le 29/08 - rituels de Winds of Magic, systeme des henchmen, Critical Deflection : les
+trois tiennent, les occurrences trouvees etaient de la prose et non des declarations.
+
+1. [RETIRE LE 29/08 - LA NOTE ETAIT FAUSSE] "Middenheim n a pas de table de tirage des
+   carrieres". FAUX. Les trois tables existent, une par ethnie, sous SUBCHAPTER_CAREER :
+   Middenheimer 57 entrees, Middenlander 63, Nordlander 63. Verifiees le 29/08 en
+   deroulant les plages : les trois couvrent 01-100 exactement une fois, sans trou ni
+   chevauchement. Et elles sont bien lues au chargement - xmlexportimport.pas les traite
+   sous ConstXmlSousChapitreMetier et reporte la valeur dans PRaceMetier.Chance.
+   POURQUOI L ERREUR : j avais cherche DATA_CAREER_ROLL, le nom employe par le Rulebook,
+   au lieu de regarder comment CE livre est structure. Voir la regle de methode ci-dessous.
+
+2. [FAIT LE 29/08] WINDS OF MAGIC - LES RITUELS. 17 saisis (p.27-33), ids
+   WINDS-RITUAL_01 a _17. Loges dans <Sort>, TypSpell "Ritual", <Level> = CN,
+   <Talent> = enumeration des Lores, blocs Ingredients / Conditions / Sacrifices /
+   Consequences / Learning XP replies dans <Explanation>. Aucun champ nouveau.
 
 3. LIVRES NON ENCORE REVUS : Lustria, Green iz Best, Rough Nights and Hard Days, Salzenmund,
    The Horned Rat Companion, Enemy in Shadows Companion, Death on the Reik Companion,
@@ -836,6 +850,35 @@ DEUX ANGLES MORTS DE LA METHODE, decouverts a l'usage :
    ARCH3-ARMO_31                      Plate Leggings (A3)
 
 =========================================================================
+REFERENCES MORTES DANS LES PERSONNAGES SAUVEGARDES - A TRANCHER
+=========================================================================
+Constate le 29/08 apres un signalement de Nono (savoir de region non reconnu sur
+Gunther Krieg). Audit complet des 21 personnages de SAVED_CARACTERS contre les 2153
+identifiants declares dans les 17 livres.
+
+UNE SEULE reference morte : RULES-COMPSAVOIR_REG, supprime le 23/08 par la fusion
+Lore (Region) -> Lore (Local). Elle touche 9 personnages : Gunther Krieg, Kuno
+Kreutzberg, Skaeling Norse, Skink, skink 2, Vol Heure, mage, artisan test multi choix
+talent, test 2. Les 12 autres sont sains.
+
+DEUX FACONS DE CORRIGER, a trancher avant d ecrire :
+  (a) une passe de migration sur les fichiers de SAVED_CARACTERS. Simple, mais ne
+      protege que les fichiers presents sur le disque au moment ou on la lance.
+  (b) une table de correspondance ancien -> nouveau dans le chargeur de personnage,
+      pour que les identifiants retires continuent d etre resolus. Protege aussi les
+      sauvegardes absentes et les futures fusions, mais touche au code.
+
+REGLE A RETENIR POUR TOUTE FUTURE FUSION D IDENTIFIANT : les livres ne sont pas seuls
+a porter des references. Les personnages sauvegardes en portent aussi, et rien ne les
+met a jour.
+
+PIEGE DE L AUDIT, a ne pas refaire : les references de personnage sont COMPOSEES.
+"RULES-WORK28/1" est une carriere suivie d un NUMERO DE NIVEAU, "RULES-T0172_NURGLE:0-1"
+porte un suffixe, et "RULES-COMPCOMB_2M/COMPCOMB_FLEAU" est une declaration combinee
+dont le second membre est ecrit SANS son prefixe. Un comptage brut sort 21 faux
+positifs. Decomposer avant de conclure.
+
+=========================================================================
 CHANTIER : EXPLICATIONS ANGLAISES RETRADUITES - TERMINE LE 28/08/2026
 =========================================================================
 LES 611 EXPLICATIONS DU RULEBOOK VIENNENT MAINTENANT DU LIVRE. Cette section est
@@ -890,6 +933,10 @@ ARBITRAGES OUVERTS SORTIS DE CE CHANTIER :
     inverses dans le fichier francais (06 Arbaletes dit "(lancer)", 07 Lancer dit
     "(arbalete)"). Corrige cote anglais le 28/08, pas cote francais.
   * la qualite d armure "Critical Deflection" du livre n existe pas dans la base.
+  * [FAIT 29/08] RULES-T0088_DEMON renomme "Arcane Magic (Daemonology)".
+  * les 3 <ArmorSimp> (Light / Medium / Heavy Armour) sont un ajout ASSUME de Nono,
+    reprenant l option "Quick Armour" du livre p.301. Ne pas les ressortir en anomalie.
+    [FAIT 29/08] Heavy Armour corrige de 10CO a 30CO, valeur du livre.
 
 PERIMETRE CONFIRME PAR NONO le 28/08 : le probleme est limite au RULEBOOK, seul livre
 sur lequel il a travaille avec la version francaise. Les autres livres ne sont pas

@@ -3688,6 +3688,261 @@ The assistant provides a bonus of +20 to these Tests rather than the normal +10 
 <Level>"2"</Level>
 <TypSpell>"Arcane Magic"</TypSpell>
 </Sort>
+<Sort id="WINDS-RITUAL_01">
+<Description language="ENGLISH">"Bind Monstrous Beast"</Description>
+<Explanation language="ENGLISH">"You project your will onto that of the target beast. You must win an Opposed Willpower Test against the creature to control it. Failure almost always results in the creature attacking the wizard who failed to bind it. If the creature is successfully bound, it serves you for Willpower Bonus days. During this time, it will follow clear orders you give it. At the end of this time, the beast’s own will reasserts itself. How resentful it feels about the escapade depends on what use it was put to during its period of servitude, but it is unlikely to regard you with fondness.
+Ingredients: The skull or hide from the same species as the beast being bound.
+Conditions: The inhabited lair of a suitable beast must be within Willpower yards of the caster.
+Sacrifices: Each Round of Channelling the spellcaster must make an Average (+20) Endurance Test or gain a Fatigued Condition.
+Consequences: The beast becomes immediately aware that someone has tried to enslave it to their will and regards this as a serious threat.
+Learning XP: 400"</Explanation>
+<Target>""</Target>
+<Duration>""</Duration>
+<Range>""</Range>
+<Talent>"RULES-T0088_BETE"</Talent>
+<Level>"Equal to the Beast’s Wounds"</Level>
+<TypSpell>"Ritual"</TypSpell>
+</Sort>
+<Sort id="WINDS-RITUAL_02">
+<Description language="ENGLISH">"Bind Spirit Within Power Stone"</Description>
+<Explanation language="ENGLISH">"You bind a minor spirit within a Power Stone. Wizards often summon Minor Elementals for this task. The benefits of possessing a Power Stone inhabited by a Minor Elemental are explained on page 167. Versions of this ritual are said to exist for other sorts of spirit — Forest Spites, Ghosts and Spectres, Daemons, Incarnate Elementals, and so on. The details of such rituals are left up to the GM, but bear in mind that these creatures tend to be more wilful than Minor Elementals, and resentful of those who seek to control them without carefully justified warrant.
+Ingredients: A Power Stone and a Minor Elemental (or similar spirit)
+Conditions: If the ritual takes place at a Leyline Junction (page 197) or Arcane Fulcrum (page 198), the CN is halved.
+Sacrifices: No sacrifice required.
+Consequences: None.
+Learning XP: 600"</Explanation>
+<Target>""</Target>
+<Duration>""</Duration>
+<Range>""</Range>
+<Talent>"RULES-T0088_BETE,RULES-T0088_MORT,RULES-T0088_FEU,RULES-T0088_CIEUX,RULES-T0088_METAL,RULES-T0088_VIE,RULES-T0088_LUMIERE,RULES-T0088_OMBRE"</Talent>
+<Level>"32"</Level>
+<TypSpell>"Ritual"</TypSpell>
+</Sort>
+<Sort id="WINDS-RITUAL_03">
+<Description language="ENGLISH">"Carve Ogham Stone"</Description>
+<Explanation language="ENGLISH">"You create an Ogham stone. Whilst it is not a true substitute for the waystones created by Elves or Dwarfs, it can have one of the following waystone properties: Attraction, Containment, or Dampening. Ogham stones can also be constructed into a druidic circle. See page 195 for details.
+Ingredients: A large piece of granite shot through with veins of quartz. The stone should be around six feet in height and a foot in breadth, or larger.
+Conditions: Before the ritual begins you must inscribe the stone with suitable magical symbols, warding off magical energies or attracting them depending on what purpose the stone will serve. You must have the Read/Write Talent and make a Difficult (-10) Language Magick Test followed by an Average (+20) Art (Engraving) Test. If you succeed on both Tests, the ritual may begin.
+Sacrifices: Each Round of Channelling the spellcaster must make an Average (+20) Endurance Test or gain a Fatigued Condition.
+Consequences: The ritual fails.
+Learning XP: 450"</Explanation>
+<Target>""</Target>
+<Duration>""</Duration>
+<Range>""</Range>
+<Talent>"RULES-T0088_*"</Talent>
+<Level>"50"</Level>
+<TypSpell>"Ritual"</TypSpell>
+</Sort>
+<Sort id="WINDS-RITUAL_04">
+<Description language="ENGLISH">"Create Power Stone"</Description>
+<Explanation language="ENGLISH">"The ritual for producing Power Stones is taught only to a select few master wizards and wizard lords in each College of Magic. Power Stones are very difficult and time consuming to produce. After performing this ritual, you create one Power Stone of a type corresponding to the Lore of Magic you work with.
+Ingredients: None
+Conditions: At least two apprentices must assist with triangulating the desired Wind of Magic for aethyric deposition. If the ritual takes place at a Leyline Junction (page 197) or Arcane Fulcrum (page 198), the CN is halved.
+Sacrifices: The spellcaster and their apprentices must spend d10 hours in preparation before beginning this ritual.
+Consequences: None.
+Learning XP: 400"</Explanation>
+<Target>""</Target>
+<Duration>""</Duration>
+<Range>""</Range>
+<Talent>"RULES-T0088_BETE,RULES-T0088_MORT,RULES-T0088_FEU,RULES-T0088_CIEUX,RULES-T0088_METAL,RULES-T0088_VIE,RULES-T0088_LUMIERE,RULES-T0088_OMBRE"</Talent>
+<Level>"64"</Level>
+<TypSpell>"Ritual"</TypSpell>
+</Sort>
+<Sort id="WINDS-RITUAL_05">
+<Description language="ENGLISH">"Conjuration of the Bloody Hidesman"</Description>
+<Explanation language="ENGLISH">"The bloody totem takes on the form of an Incarnate Elemental of Beasts (page 176).
+Ingredients: A constructed totem comprised of the bones and freshly flensed pelts from eight or more large animals.
+Conditions: Extreme Saturation , an Arcane Fulcrum, or a Storm of Magic (see Chapter 14 ).
+Sacrifices: Each Round of Channelling the spellcaster must make an Average (+20) Endurance Test or gain a Fatigued Condition.
+Consequences: Individuals within Willpower Bonus yards of the spellcaster, including the caster, suffer a freezing blast of pure Ghur . This is an attack with a Damage of +12 that ignores armour made from leather or furs.
+Learning XP: 500"</Explanation>
+<Target>""</Target>
+<Duration>""</Duration>
+<Range>""</Range>
+<Talent>"RULES-T0088_BETE"</Talent>
+<Level>"85"</Level>
+<TypSpell>"Ritual"</TypSpell>
+</Sort>
+<Sort id="WINDS-RITUAL_06">
+<Description language="ENGLISH">"Conjuration of the Incarnate Elemental of Death"</Description>
+<Explanation language="ENGLISH">"The twin-headed serpentine form of an Incarnate Elemental of Death (page 175) hatches from the hourglass.
+Ingredients: An hourglass filled with sand made from the powdered bones of a monarch.
+Conditions: Extreme Saturation , an Arcane Fulcrum, or a Storm of Magic (see Chapter 14 ).
+Sacrifices: Each Round of Channelling the spellcaster must make a Challenging (+0) Endurance Test or gain a Fatigued Condition.
+Consequences: Individuals within Willpower Bonus yards of the spellcaster, including the caster, suffer Damage equal to the caster’s Willpower Bonus and suffer the Prone Condition. This is a magical attack that is not reduced by Toughness Bonus or Armour Points.
+Learning XP: 500"</Explanation>
+<Target>""</Target>
+<Duration>""</Duration>
+<Range>""</Range>
+<Talent>"RULES-T0088_MORT"</Talent>
+<Level>"90"</Level>
+<TypSpell>"Ritual"</TypSpell>
+</Sort>
+<Sort id="WINDS-RITUAL_07">
+<Description language="ENGLISH">"Conjuration of Jack O’ Cinders"</Description>
+<Explanation language="ENGLISH">"From the inferno you summon forth an Incarnate Elemental of Fire (page 174).
+Ingredients: A colossal pyre must be constructed and kept ablaze whilst the ritual is in progress.
+Conditions: Extreme Saturation, an Arcane Fulcrum, or a Storm of Magic (see Chapter 14 ).
+Sacrifices: Each Round of Channelling the spellcaster must make an Average (+20) Endurance Test or gain a Fatigued Condition.
+Consequences: Individuals within Willpower Bonus yards of the spellcaster, including the caster, suffer 4 Ablaze Conditions.
+Learning XP: 500"</Explanation>
+<Target>""</Target>
+<Duration>""</Duration>
+<Range>""</Range>
+<Talent>"RULES-T0088_FEU"</Talent>
+<Level>"85"</Level>
+<TypSpell>"Ritual"</TypSpell>
+</Sort>
+<Sort id="WINDS-RITUAL_08">
+<Description language="ENGLISH">"Corrupt Waystone"</Description>
+<Explanation language="ENGLISH">"You alter the properties of a waystone, corrupting it to produce the effects described on page 194. If the waystone is part of a planned leyline, not only does this affect the stone in question, but magic stops flowing through the leyline. Magic coalesces and stagnates around the closest ‘upstream’ waystone that isn’t also corrupted. The next stone in line becomes a new gathering stone, and then magic is passed on from this point. This is quickly noticed by the High Elf Mages of Saphery, who will make it a priority to locate the source of the disruption and hunt down those responsible.
+Ingredients: An unbroken waystone.
+Conditions: No conditions necessary.
+Sacrifices: Each Round of Channelling the spellcaster must make an Average (+20) Endurance Test or gain a Fatigued Condition.
+Consequences: The ritual fails.
+Learning XP: 450"</Explanation>
+<Target>""</Target>
+<Duration>""</Duration>
+<Range>""</Range>
+<Talent>"RULES-T0088_MAGIE,RULES-T0088_SORCEL,RULES-T0088_DEMON,RULES-T0088_NECRO"</Talent>
+<Level>"60"</Level>
+<TypSpell>"Ritual"</TypSpell>
+</Sort>
+<Sort id="WINDS-RITUAL_09">
+<Description language="ENGLISH">"Create Construct"</Description>
+<Explanation language="ENGLISH">"Given the vast differences between various constructs it is impossible to catalogue them all or detail the methods of their creation beyond some general principles. A wizard wishing to create a construct must have raw materials to form the construct’s body. Suitable materials include a metal automaton, a puppet, a pile of organic matter, or an empty suit of armour. Detailed ideas for forms of construct are given on page 177. A construct has the following profile by default. 4 25 – 45 45 10 20 10 – – 32 Traits: Construct, Painless, Size (Large), Stupid, Unstable, Weapon +8 Wizards may provide their construct with additional Creature Traits, but doing so increases the CN of the ritual. Constructs tend to be lumpen and massive, so Traits that boost their strength and resilience are relatively easy to imbue, whilst Traits that improve their manoeuvrability can be challenging. See WFRP pages 338–343 for more on Creature Traits. Trait / CN : Big +10 ; Brute +5 ; Champion +10 ; Die Hard +10 ; Fast +20 ; Flight (20) +30 ; Hardy +5 ; Horns (SB+3) +5 ; Rear +5 ; Size (Tiny) –20 ; Size (Little) –15 ; Size (Small) –10 ; Size (Average) –5 ; Size (Enormous) +60 ; Size (Monstrous) +120 ; Stride +20 ; Tough +10 ; Wallcrawler +20.
+Ingredients: A suitable form for the construct to inhabit.
+Conditions: No conditions necessary.
+Sacrifices: Each Round of Channelling the spellcaster must make an Average (+20) Endurance Test or permanently lose a point of either Strength or Toughness.
+Consequences: The ritual fails.
+Learning XP: 400"</Explanation>
+<Target>""</Target>
+<Duration>""</Duration>
+<Range>""</Range>
+<Talent>"RULES-T0088_*"</Talent>
+<Level>"60"</Level>
+<TypSpell>"Ritual"</TypSpell>
+</Sort>
+<Sort id="WINDS-RITUAL_10">
+<Description language="ENGLISH">"Create Familiar"</Description>
+<Explanation language="ENGLISH">"You imbue the vessel with a portion of your own essence, as well as a degree of magical power. You now possess a familiar, which can be one of three types: a Power Familiar (which can help with spellcasting), a Spell Familiar (a wizard in its own right), or a Combat Familiar (a magical bodyguard devoted to your safety). Familiars are Characters of their own; they do not necessarily like their creators, but they are bound to protect and obey them. Familiars may even improve over time and even be played by other Players. See page 184 for more information. Most wizards make do with a single familiar, but some create a second. It is a trickier process, as personal essence is used up at a greater rate to imbue an additional familiar with the required potency. The sacrifice is increased to two Wounds, Fate Points, or Resilience Points, and the CN is increased to 80. By default, familiars are assumed to be humanoid in appearance. If a wizard wishes to construct one that deviates from a humanoid appearance, the GM should consider what sort of abilities or deficits result from its new shape. If a wizard seeks to create a more useful servant through altering its form they can do so, though this will make the process of creating the familiar more difficult. The table below indicates how the CN should be altered to account for familiars of greater or lesser complexity. This is not necessarily an exhaustive list but gives GMs some ideas on how creating a familiar may be easier or more complex. Trait / CN : Size (Tiny) –10 ; Size (Little) –5 ; No Arms –10 ; May not talk –10 ; May not smell –5 ; Amphibious +20 ; Dark Vision +5 ; Flight (20) +20 ; Stride +10 ; Ward (10) +30.
+Ingredients: You must prepare a suitable vessel for the familiar. This could be almost anything from a marionette to a pet cat, a small skeleton, or a grimoire. More information on vessels is found on page 180. An idea or concept may serve as a vessel, but double the CN if so.
+Conditions: No conditions necessary.
+Sacrifices: Familiars are a serious investment. The spellcaster must permanently surrender either a Wound, a Fate point, or a Resilience point during the ritual.
+Consequences: The ritual fails and the vessel is destroyed.
+Learning XP: 250"</Explanation>
+<Target>""</Target>
+<Duration>""</Duration>
+<Range>""</Range>
+<Talent>"RULES-T0088_*"</Talent>
+<Level>"45"</Level>
+<TypSpell>"Ritual"</TypSpell>
+</Sort>
+<Sort id="WINDS-RITUAL_11">
+<Description language="ENGLISH">"Create Waystone Property"</Description>
+<Explanation language="ENGLISH">"You alter the properties of a functioning waystone to create an Amplification, Containment, Dampening, or Refraction effect. These properties are described beginning on page 194. If the creating the new property disrupts the flow of magic towards the Great Vortex, High Elf Mages from Saphery may, in time, investigate the cause of the magical disruption and mete out harsh consequences to those who caused the interference.
+Ingredients: An unbroken waystone.
+Conditions: The waystone must be an active part of a planned leyline (see page 193).
+Sacrifices: Each Round of Channelling the spellcaster must make an Average (+20) Endurance Test or gain a Fatigued Condition.
+Consequences: The ritual fails.
+Learning XP: 300"</Explanation>
+<Target>""</Target>
+<Duration>""</Duration>
+<Range>""</Range>
+<Talent>"RULES-T0088_*"</Talent>
+<Level>"40"</Level>
+<TypSpell>"Ritual"</TypSpell>
+</Sort>
+<Sort id="WINDS-RITUAL_12">
+<Description language="ENGLISH">"Cursecraft"</Description>
+<Explanation language="ENGLISH">"associated with witches. Numbers in brackets represent a reduced difficulty for spellcasters who practise one of the following Lores: Witchcraft, Daemonology, Necromancy, or any Chaos Lore. You imbue the item with a magical ability (a boon), that also comes with the deliberate cost of an ironic or dangerous side-effect (a bane). It is up to the player and GM to decide on the nature of the benefit and the curse, but several examples of cursed items are provided on page 170.
+Ingredients: The item to be cursed.
+Conditions: No conditions necessary.
+Sacrifices: Curses are powered by the lifeblood of the practitioner who creates them. The creator of a curse must sacrifice a single Wound, which will never heal. Additionally, the process is equivalent to Moderate Exposure to Corruption ( WFRP , page 182).
+Consequences: The ritual fails and the ingredients are destroyed.
+Learning XP: 200 (100)"</Explanation>
+<Target>""</Target>
+<Duration>""</Duration>
+<Range>""</Range>
+<Talent>"RULES-T0088_*"</Talent>
+<Level>"50 (25)"</Level>
+<TypSpell>"Ritual"</TypSpell>
+</Sort>
+<Sort id="WINDS-RITUAL_13">
+<Description language="ENGLISH">"Imbue Staff"</Description>
+<Explanation language="ENGLISH">"You imbue the staff with magical symbology and power. It is now an Enchanted Staff (see page 152).
+Ingredients: A quarterstaff or metal rod of similar length. Paraphernalia and decorations relating to the caster’s Lore of Magic.
+Conditions: No conditions necessary.
+Sacrifices: A Fortune or Resolve point (these may be regained in due course as usual).
+Consequences: The ritual fails and the ingredients are destroyed.
+Learning XP: 100"</Explanation>
+<Target>""</Target>
+<Duration>""</Duration>
+<Range>""</Range>
+<Talent>"RULES-T0088_BETE,RULES-T0088_MORT,RULES-T0088_FEU,RULES-T0088_CIEUX,RULES-T0088_METAL,RULES-T0088_VIE,RULES-T0088_LUMIERE,RULES-T0088_OMBRE"</Talent>
+<Level>"35"</Level>
+<TypSpell>"Ritual"</TypSpell>
+</Sort>
+<Sort id="WINDS-RITUAL_14">
+<Description language="ENGLISH">"Invocate Daemon"</Description>
+<Explanation language="ENGLISH">"You invocate the Daemon, which manifests inside the Octagram you prepared earlier. It remains there for a number of days equal to the caster’s Intelligence Bonus, after which it returns to the Realms of Chaos. You can communicate with the Daemon during this time, but it is not required to answer you or obey you in any way. Daemonologists must be prepared to make additional sacrifices and bargains once they have invoked a Daemon, but what exactly these bargains are, and what the Daemon is willing to offer in return, is left up to the Player and GM to decide. Daemons have multifaceted identities, involving a nigh- unpronounceable true name, assorted common names, euphemistic epithets, and grandiloquent titles. Generally, the more you know the more you can bargain with, but there is a matter of etiquette. Knowledge of their true name can give power over a Daemon, but they invariably seek to destroy those who possess it. The best strategy is to use a Daemon’s common name whilst insinuating that you know their true name but also reassuring them that you will guard it respectfully. The GM may award up to +3 SL to Tests made to complete this ritual based on how much research the Daemonologist has undertaken into learning the identity of the Daemon they are invoking.
+Ingredients: Bounds of good taste inhibit a discussion of ingredients, but Daemons typically pay no heed to mortals unless they know at least one of the names the Daemon uses. The invoker must also cause significant mayhem, suffering, or death during the ritual.
+Conditions: The invoker must cast Octagram ( WFRP , page 256) before beginning the ritual.
+Sacrifices: Each Round of Channelling the spellcaster must make an Average (+20) Endurance Test or permanently lose a point of Strength or Toughness (randomly determined).
+Consequences: The Daemon becomes aware that a mortal has tried to invoke it. Their reaction depends on the Daemon in question, though most find such invasions of their privacy a serious affront.
+Learning XP: 400"</Explanation>
+<Target>""</Target>
+<Duration>""</Duration>
+<Range>""</Range>
+<Talent>"RULES-T0088_DEMON"</Talent>
+<Level>"The Daemon’s Willpower"</Level>
+<TypSpell>"Ritual"</TypSpell>
+</Sort>
+<Sort id="WINDS-RITUAL_15">
+<Description language="ENGLISH">"Materialise the Living Swamp"</Description>
+<Explanation language="ENGLISH">"Shadows, Lore of Hedgecraft, Lore of Witchcraft Marsh matter and vegetation coalesce into the form of a Fenbeast (see page 179). The creature lives for a number of days equal to your Willpower Bonus. If the Fenbeast enters an area of Extreme Saturation its lifespan is extended whilst it remains there. The creature follows your orders. You can dismiss the Fenbeast at any time, whereupon it collapses into a pile of rotting sludge.
+Ingredients: A heartstone (see page 179) and access to a suitable quantity of organic matter.
+Conditions: Heavy, Extreme, or Corrupted Saturation , an Arcane Fulcrum, or a Storm of Magic.
+Sacrifices: Each Round of Channelling the spellcaster must make an Average (+20) Endurance Test or permanently lose a point of Strength or Toughness (randomly determined).
+Consequences: The ritual fails.
+Learning XP: 400"</Explanation>
+<Target>""</Target>
+<Duration>""</Duration>
+<Range>""</Range>
+<Talent>"RULES-T0088_MORT,RULES-T0088_VIE,RULES-T0088_OMBRE,RULES-T0088_MAGIE,RULES-T0088_SORCEL"</Talent>
+<Level>"40"</Level>
+<TypSpell>"Ritual"</TypSpell>
+</Sort>
+<Sort id="WINDS-RITUAL_16">
+<Description language="ENGLISH">"Remove Curse"</Description>
+<Explanation language="ENGLISH">"You may opt to lift the curse, removing all boons and banes from the item. A weapon whose curse has been lifted retains its Magical Quality.
+Ingredients: The cursed Item.
+Conditions: The item must be confirmed as a cursed item through a successful Decipher Curse spell (see page 26).
+Sacrifices: Each Round of Channelling the spellcaster must make an Average (+20) Cool Test or suffer Moderate Exposure to Corruption ( WFRP , page 182).
+Consequences: The ritual fails.
+Learning XP: 200"</Explanation>
+<Target>""</Target>
+<Duration>""</Duration>
+<Range>""</Range>
+<Talent>"RULES-T0088_*"</Talent>
+<Level>"40"</Level>
+<TypSpell>"Ritual"</TypSpell>
+</Sort>
+<Sort id="WINDS-RITUAL_17">
+<Description language="ENGLISH">"The Crossed Scythes"</Description>
+<Explanation language="ENGLISH">"Occasionally, an Amethyst Wizard will mark a tomb with a pair of overlaid and reversed Shyish runes. Only a fool would enter such a place, for this symbol warns of great evil slumbering within and acts as a ward against its escape. If an Amethyst Wizard seeks to create such a carving, they must be gifted at channelling Shyish and also deft with a hammer and chisel. Once the symbol is carved and the ritual complete, any Undead creature without the Construct Trait that tries to cross the threshold must make a Very Difficult (–30) Cool Test to do so. If the creature fails the Test, they cannot pass the engraving and must take a Fatigued Condition for every –SL. They must do this even if they would not normally suffer Fatigued Conditions. The creature could try to cross the threshold again the following turn, but would continue to accrue Fatigued Conditions until they pass the Cool Test. The creature can only recover from these Fatigued Conditions after a full night’s rest. Undead creatures with the Construct Trait must make a Very Difficult (-30) Endurance Test. If the creature fails the Test, they cannot pass the engraving and suffer 1 Wound for every –SL. The following Endeavours are available to spellcasting characters in between adventures. Note that Endeavours for crafting magical items are described in Archives of the Empire vol II . Brew Potion Creating potions can be a laborious process, and many Characters might like to reserve brewing potions to between adventures. A Character may attempt to brew a single batch of a particular potion as an Endeavour following the process described on page 160. This assumes they have all the ingredients to hand or manage to find them by taking the Commission or Gather Ingredients Endeavours. The Character must also have access to a laboratory unless they have the Concoct Talent ( WFRP , page 135). Gather Ingredients Gathering ingredients for potions normally requires a Character to spend a week in an appropriate locale as explained on page 155. If the GM thinks such a locale is close enough, a Character can spend an Endeavour gathering ingredients. If they fail on the first attempt, they can try again as a second Endeavour. Improve Familiar Familiars are rather limited in their abilities to improve themselves, being driven in part by the will of their creator wizard. Familiars cannot use the Endeavours rules themselves, unless their creator spends time nurturing them. To improve their familiar, the wizard that created them must take this endeavour and make a Hard (–20) Research Test. The Familiar may assist. If the wizard passes this Test, they succeed in imbuing their familiar with enough drive to undertake an Endeavour of their own. However, whilst the wizard has managed to provide an opportunity to their familiar, the familiar must still perform the Endeavour to benefit from it. Each time their creator completes an Improve Familiar endeavour, a Familiar can immediately undertake one of the following Endeavours: Training ( WFRP , page 199) Unusual Learning ( WFRP , page 199; a familiar may not learn the Bless , Invoke , or Pure Soul Talents) Train with Unusual Weapon ( Altdorf , page 219; Combat Familiars only) Test Magic Item ( Altdorf , page 219; Spell Familiars only) Perform Ritual Rituals can be performed between adventures as an Endeavour. It is prudent to spend as much time preparing for a ritual as possible, and to proceed with the rite without undue haste — there are advantages to undertaking rituals as endeavours rather than performing them during normal game time. The disadvantage of performing rituals as Endeavours is that the effects of the ritual may have worn off by the time the adventure recommences, or the spellcaster’s enemies may get word of the magical workings they have undertaken and adopt countermeasures. A ritual performed as an Endeavour can take place in an environment conducive to magical activity. There are magical sites all over the known world, so if the GM and Player agree it should be easy enough for the spellcaster to find a site of Heavy or Extreme magical Saturation. The second benefit is that because the spellcaster can approach the ritual at a steady pace they are more likely to complete the ritual without mishap. To represent this, the ritual’s CN is halved (rounding up). This does not mean less magical energy has to be channelled but does reflect the benefits of taking lengthy periods of time to properly prepare the rite and undergo the process slowly and carefully.
+Ingredients: No ingredients, though the caster requires the tools with which to create the carving.
+Conditions: Before commencing the ritual, the wizard must engrave a symbol of crossed downward-pointing scythes over the entrance to a tomb, cave entrance, gatehouse, or other portal. This requires an Extended Challenging (+0) Art (Engraving) Test to a total of 20 SL. Beyond this portal there must be an Undead creature the Wizard seeks to suppress.
+Sacrifices: Each Round of Channelling the spellcaster must make an Average (+20) Cool Test or suffer 1 Damage which cannot be reduced by Toughness Bonus or Armour Points.
+Consequences: The ritual fails; the entity becomes aware of the effort to contain it.
+Learning XP: 400"</Explanation>
+<Target>""</Target>
+<Duration>""</Duration>
+<Range>""</Range>
+<Talent>"RULES-T0088_MORT"</Talent>
+<Level>"Willpower of the entity"</Level>
+<TypSpell>"Ritual"</TypSpell>
+</Sort>
 </DATA_SPELL>
 <DATA_CAREER_SUBCHOICE>
 <Choice>

@@ -18,6 +18,63 @@ qu'un : celui-ci. On ne le duplique jamais, on l'édite en place.
 - Ce qui a mal marché : livrer des blocs de 300 lignes non relus, avec des colonnes
   qui n'existaient pas encore. Ce qui marche : petites corrections validées une par une.
 
+- **Annoncer le coût avant un gros chantier.** Nono travaille sur un budget de jetons
+  limité, pour un projet perso non lucratif. Avant tout chantier qui dépasse quelques
+  manipulations, lui donner en une ligne ce que ça demande, pourquoi, et ce que ça
+  rapporte — pour qu'il tranche avant, pas après. Ordre de grandeur observé : une
+  correction ciblée ou un lot de 5 à 15 blocs sur une section bien rangée coûte peu ;
+  40 à 70 blocs avec appariement par nom, modérément ; un lot demandant un
+  **appariement non évident** coûte plusieurs fois plus (les 214 sorts contre les 64
+  carrières). Et le vrai gouffre n'est pas la taille, ce sont les erreurs et le
+  retravail qu'elles entraînent.
+
+### Contrôles obligatoires selon la forme de la tâche (ajouté le 29/08)
+
+Ces règles se déclenchent sur **la forme de ce qui est demandé**, pas sur mon jugement du
+moment. Elles existent parce que le vrai coût de ce projet n'est pas la réflexion, c'est le
+retravail : un lot livré faux se repaie au décuple. Et parce qu'un script qui affiche
+« 15 traités » sur un fichier qui parse est un **signal de succès trompeur** — c'est très
+exactement l'état dans lequel `RULES-ATTR_Fel` a été livré avec 8000 caractères de trop.
+
+**Lot de plus de 10 blocs écrits en une passe.** Avant toute livraison, deux contrôles, pas
+un :
+1. *Ponctuation finale* — tout texte repris d'un livre doit se terminer par une ponctuation.
+   Coût : trois lignes. C'est ce test qui a trouvé la troncature des Halflings et celle des
+   rituels. Les faux positifs connus sont les notations mécaniques (Corruption : « +1
+   Movement ») et les tableaux aplatis : les lire, ne pas les ignorer d'office.
+2. *Ré-extraction contre base* — relancer l'extraction et comparer bloc à bloc avec ce qui
+   est écrit. Une minute pour certifier des centaines de blocs. Zéro écart attendu.
+   Un écart non expliqué interdit la livraison.
+
+**Bornes d'un découpage par liste de noms.** Le dernier élément d'une liste n'a pas de
+suivant : sa borne de fin vaut « fin du fichier » et il aspire tout ce qui suit. Vérifier la
+longueur du **dernier** élément de chaque lot, systématiquement.
+
+**Appariement de deux listes.** Apparier par le **contenu**, jamais par la position, l'ordre
+supposé ou l'ordre alphabétique — l'ordre de lecture des colonnes d'un PDF n'est pas celui du
+livre, trois rituels sur dix-sept auraient été faux. Contrôler par **bijection** : autant
+d'éléments d'un côté que de l'autre, chacun consommé une fois exactement.
+
+**Affirmation d'absence.** Interdit de conclure « ce livre n'a pas X » sans avoir d'abord
+listé les balises réellement présentes dans **ce** fichier, puis cherché par le contenu.
+Voir la règle détaillée plus haut — trois occurrences, dont une qui a mis au backlog pendant
+des jours un chantier de 183 lignes déjà faites.
+
+**Avant de corriger une erreur que je crois avoir commise**, vérifier qu'elle existe. J'ai
+« réparé » le script des sorts sur un soupçon : le code était juste, et ma correction
+ajoutait le nom du sort suivant à la fin de 214 explications.
+
+**Pondérer par l'enjeu.** Ce qui est affiché partout dans l'application mérite plus de
+contrôle qu'une donnée portée par un seul objet. Ne pas dépenser autant à élucider une
+qualité d'arme unique qu'à valider 611 explications.
+
+**Se rendre contredisable.** Les économies les plus fortes de ces deux jours viennent de
+Nono, pas de moi : « ce n'est pas une torche », « qu'est-ce que tu racontes sur Middenheim »,
+« j'avais déjà corrigé les talents ». Donc : annoncer ce que je crois **avant** d'agir,
+montrer une table **avant** d'écrire, et dire d'où vient une conclusion. Le contredire tôt
+coûte une phrase, le corriger tard coûte une journée.
+
+
 ### Économie de recherche (règles ajoutées le 28/08, après une semaine trop coûteuse)
 
 Chacune vient d'une erreur réelle, pas d'une préférence de style.
@@ -30,9 +87,18 @@ Chacune vient d'une erreur réelle, pas d'une préférence de style.
   est-il cohérent ? » se tranche en lisant qui l'affiche. *(Le chantier des `<Test>`
   sur spécialisations a été clos par une lecture de `wintalent.pas`, après une longue
   exploration inutile des données.)*
-- **Ancrer toute extraction sur le bloc parent attendu**, jamais sur le nom de balise
-  seul. *(`<Entry>` existe dans `DATA_CAREER_ROLL` et `DATA_SPECIE_CAREER_DIRECT` ;
-  `RULES-T*` dans `<Specie>` n'est pas une déclaration de sort. Deux fausses alertes.)*
+- **Ne jamais conclure à une absence depuis un seul nom de balise.** Deux fautes
+  distinctes, commises l'une et l'autre. D'abord, chercher un nom de balise et le
+  trouver là où on ne croit pas : `<Entry>` existe dans `DATA_CAREER_ROLL` **et** dans
+  `DATA_SPECIE_CAREER_DIRECT`, `RULES-T*` sous `<Specie>` n'est pas une déclaration de
+  sort — d'où l'obligation d'ancrer toute extraction sur le bloc parent attendu.
+  Ensuite, et c'est la plus coûteuse : ne pas trouver un nom de balise et en déduire
+  que la **donnée** est absente. Les livres n'ont pas tous la même structure — le
+  Rulebook range ses tables de tirage dans `DATA_CAREER_ROLL`, Middenheim les range
+  sous `SUBCHAPTER_CAREER` dans chaque `<Specie>`. J'ai déclaré cette table manquante
+  pendant des jours, et elle figurait au backlog comme « le plus gros morceau
+  restant ». Avant d'écrire « ce livre n'a pas X » : lister les balises réellement
+  présentes dans **ce** fichier, puis chercher par le **contenu**.
 - **Jamais de copie en masse depuis le staging** (`cp *.Xml`). Copier uniquement les
   fichiers qui viennent d'être stagés, nommément. *(A écrasé silencieusement la fusion
   des 64 sorts, déjà livrée et committée.)*
@@ -113,6 +179,17 @@ la note de bas de tableau de l'arme Incendiary, devenue **Ablaze**.
 at all, Narrow the view, Blocks the view, Under armor) sont une simplification
 volontaire de son maître du jeu. On les garde, ce ne sont pas des erreurs — ne plus les
 ressortir en anomalie.
+
+### 2.0bis Références mortes dans les personnages sauvegardés : ⏳ à trancher
+
+La fusion `RULES-COMPSAVOIR_REG` → `_LOCAL` du 23/08 n'a porté que sur les livres. Les
+9 personnages qui référençaient l'ancien identifiant ont perdu la compétence. Audit
+complet fait le 29/08 : c'est la **seule** référence morte sur les 21 personnages.
+Choix à faire entre migrer les fichiers sauvegardés et ajouter une table de
+correspondance dans le chargeur — détail dans `A FAIRE.txt`.
+
+**Règle qui en découle** : toute fusion d'identifiant doit se demander qui d'autre le
+référence. Les personnages sauvegardés en portent, et rien ne les met à jour.
 
 ### 2.1 WinLivre — Affichage des carrières : ✅ Phase 1 terminée
 
