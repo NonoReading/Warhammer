@@ -143,6 +143,9 @@ Const
       // le Skink de Lustria qui en prend 2 et 2). Absentes = 3. Voir CONTEXT.md 2.15.
       ConstXmlNbSkill5                  = 'Skill5';
       ConstXmlNbSkill3                  = 'Skill3';
+      // Dossier d'icones de niveau propre a l'ethnie, sous \PICTURES\. Balise absente ou
+      // vide = dossier NIV generique. Voir CheminNiveauImage dans ChargeRace.
+      ConstXmlPictureLevel              = 'PictureLevel';
       ConstXmlSousChapitreMetier        = 'SUBCHAPTER_CAREER';
       ConstXmlClass                     = 'Class';
       ConstXmlEquipement                = 'Item';
@@ -252,6 +255,11 @@ Const
       ConstCheminImageArme              = '\PICTURES\WEAPON\';
       ConstCheminImageArmure            = '\PICTURES\ARMOR\';
       ConstCheminImageNiveau            = '\PICTURES\NIV\';
+      // Racine des dossiers d'icones de niveau. ConstCheminImageNiveau juste au-dessus
+      // reste le dossier PAR DEFAUT ; une ethnie peut en designer un autre sous cette
+      // racine via la balise <PictureLevel> (ex : NIV_HELF pour les Hauts Elfes, dont le
+      // livre utilise des glyphes et des couleurs qui lui sont propres).
+      ConstCheminImageNiveauRacine      = '\PICTURES\';
       ConstCheminImagePolice            = '\FONT\';
 
       // pdf du personnage

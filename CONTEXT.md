@@ -18,110 +18,43 @@ qu'un : celui-ci. On ne le duplique jamais, on l'édite en place.
 - Ce qui a mal marché : livrer des blocs de 300 lignes non relus, avec des colonnes
   qui n'existaient pas encore. Ce qui marche : petites corrections validées une par une.
 
-- **Annoncer le coût avant un gros chantier.** Nono travaille sur un budget de jetons
-  limité, pour un projet perso non lucratif. Avant tout chantier qui dépasse quelques
-  manipulations, lui donner en une ligne ce que ça demande, pourquoi, et ce que ça
-  rapporte — pour qu'il tranche avant, pas après. Ordre de grandeur observé : une
-  correction ciblée ou un lot de 5 à 15 blocs sur une section bien rangée coûte peu ;
-  40 à 70 blocs avec appariement par nom, modérément ; un lot demandant un
-  **appariement non évident** coûte plusieurs fois plus (les 214 sorts contre les 64
-  carrières). Et le vrai gouffre n'est pas la taille, ce sont les erreurs et le
-  retravail qu'elles entraînent.
+**Règles de lecture des sources, ajoutées le 30/08/2026 après quatre erreurs de la même
+famille dans la même journée** — toutes venaient de conclure trop vite depuis un outil de
+lecture, jamais depuis la source elle-même :
 
-### Contrôles obligatoires selon la forme de la tâche (ajouté le 29/08)
+- **Recharger avant d'indexer.** Avant de construire un index du corpus (résolution de
+  libellés en identifiants, recherche de doublons, vérification de références), restager
+  les fichiers depuis le poste. Une copie vieille de quelques heures a suffi à me faire
+  signaler un bug qui n'existait pas — et aurait tout aussi bien pu m'en faire rater un.
+- **Un marqueur compté n'est pas un marqueur lu.** Avant de conclure depuis un `grep -c`,
+  sortir le contexte autour des occurrences. Trois livres ont été mal classés parce que
+  leurs « Career Path » étaient des fiches de PNJ et de la prose.
+- **Un grep aplatit la mise en page.** J'ai déclaré les sorts d'un livre inexploitables
+  parce que deux colonnes se mélangeaient dans un résultat de grep ; `pdftotext -layout`
+  préservait les positions, il suffisait de découper la gouttière. Un défaut de mon outil
+  de lecture n'est pas un défaut de la source.
+- **Quand une donnée n'est pas là où je regarde, elle est ailleurs.** L'hypothèse par
+  défaut n'est jamais « elle manque ». Pour un talent ou une compétence, le premier
+  « ailleurs » à essayer est **la base**, pas une autre page du livre.
+- **Avant d'introduire une valeur nouvelle dans un champ existant**, vérifier si le champ
+  est un libellé libre ou une **énumération portée par le code**. `TypSpell` en est une :
+  y avoir ajouté « Ritual » sans le vérifier a laissé deux bugs derrière moi.
 
-Ces règles se déclenchent sur **la forme de ce qui est demandé**, pas sur mon jugement du
-moment. Elles existent parce que le vrai coût de ce projet n'est pas la réflexion, c'est le
-retravail : un lot livré faux se repaie au décuple. Et parce qu'un script qui affiche
-« 15 traités » sur un fichier qui parse est un **signal de succès trompeur** — c'est très
-exactement l'état dans lequel `RULES-ATTR_Fel` a été livré avec 8000 caractères de trop.
+**Quand Nono dit qu'il va committer (règle du 30/08/2026)** — lui proposer **le récapitulatif
+de ce qui part dans ce commit**, sans qu'il ait à le demander : la liste des fichiers modifiés
+**depuis son dernier commit**, groupés par nature (données / code / fichiers de suivi), avec
+une phrase par groupe sur ce qui a changé, et une proposition de message de commit. Cela
+suppose de tenir le compte, au fil de la session, de ce qui a été livré depuis le dernier
+« j'ai commit » — c'est à moi de le suivre, pas à lui de s'en souvenir.
 
-**Lot de plus de 10 blocs écrits en une passe.** Avant toute livraison, deux contrôles, pas
-un :
-1. *Ponctuation finale* — tout texte repris d'un livre doit se terminer par une ponctuation.
-   Coût : trois lignes. C'est ce test qui a trouvé la troncature des Halflings et celle des
-   rituels. Les faux positifs connus sont les notations mécaniques (Corruption : « +1
-   Movement ») et les tableaux aplatis : les lire, ne pas les ignorer d'office.
-2. *Ré-extraction contre base* — relancer l'extraction et comparer bloc à bloc avec ce qui
-   est écrit. Une minute pour certifier des centaines de blocs. Zéro écart attendu.
-   Un écart non expliqué interdit la livraison.
-
-**Bornes d'un découpage par liste de noms.** Le dernier élément d'une liste n'a pas de
-suivant : sa borne de fin vaut « fin du fichier » et il aspire tout ce qui suit. Vérifier la
-longueur du **dernier** élément de chaque lot, systématiquement.
-
-**Table de tirage (d100).** Deux contrôles, pas un : la couverture 01-100 sans trou ni
-chevauchement, **et** l'absence de carrière déclarée deux fois dans la même table. Le
-premier seul ne suffit pas — sur le Gnome de Rough Nights, un décalage d'un cran avec
-`Miner` dupliqué et `Villager` oublié passait la couverture sans broncher, parce qu'un
-décalage compensé se referme sur lui-même.
-
-**Appariement de deux listes.** Apparier par le **contenu**, jamais par la position, l'ordre
-supposé ou l'ordre alphabétique — l'ordre de lecture des colonnes d'un PDF n'est pas celui du
-livre, trois rituels sur dix-sept auraient été faux. Contrôler par **bijection** : autant
-d'éléments d'un côté que de l'autre, chacun consommé une fois exactement.
-
-**Affirmation d'absence.** Interdit de conclure « ce livre n'a pas X » sans avoir d'abord
-listé les balises réellement présentes dans **ce** fichier, puis cherché par le contenu.
-**Et il faut RELIRE cet inventaire au moment d'écrire l'absence** : sur Lustria j'avais
-l'inventaire sous les yeux, `SUBCHAPTER_CAREER` y figurait avec 2 occurrences, et j'ai
-quand même annoncé que les Skinks n'avaient aucune carrière — parce que j'avais cherché
-dans les deux blocs employés par le Rulebook et que je m'étais arrêté là. Quand une
-donnée n'est pas où on la cherche, l'hypothèse par défaut est **« elle est ailleurs »**,
-pas « elle manque » : Middenheim et Lustria rangent tous deux leurs tables de tirage dans
-le `SUBCHAPTER_CAREER` de chaque espèce.
-Voir la règle détaillée plus haut — trois occurrences, dont une qui a mis au backlog pendant
-des jours un chantier de 183 lignes déjà faites.
-
-**Avant de corriger une erreur que je crois avoir commise**, vérifier qu'elle existe. J'ai
-« réparé » le script des sorts sur un soupçon : le code était juste, et ma correction
-ajoutait le nom du sort suivant à la fin de 214 explications.
-
-**Pondérer par l'enjeu.** Ce qui est affiché partout dans l'application mérite plus de
-contrôle qu'une donnée portée par un seul objet. Ne pas dépenser autant à élucider une
-qualité d'arme unique qu'à valider 611 explications.
-
-**Se rendre contredisable.** Les économies les plus fortes de ces deux jours viennent de
-Nono, pas de moi : « ce n'est pas une torche », « qu'est-ce que tu racontes sur Middenheim »,
-« j'avais déjà corrigé les talents ». Donc : annoncer ce que je crois **avant** d'agir,
-montrer une table **avant** d'écrire, et dire d'où vient une conclusion. Le contredire tôt
-coûte une phrase, le corriger tard coûte une journée.
-
-
-### Économie de recherche (règles ajoutées le 28/08, après une semaine trop coûteuse)
-
-Chacune vient d'une erreur réelle, pas d'une préférence de style.
-
-- **Corpus local avant le web.** Les TXT de `PDF_TEXTE/` contiennent les livres. Un
-  `grep` ciblé répond presque toujours. Le web ne sert que si le corpus a répondu
-  « absent » de façon vérifiée. *(Deux sorts Petty cherchés en ligne alors qu'ils
-  étaient ligne 13627 de `RULEBOOK.txt`.)*
-- **Lire le code avant de raisonner sur les données.** Une question du type « ce champ
-  est-il cohérent ? » se tranche en lisant qui l'affiche. *(Le chantier des `<Test>`
-  sur spécialisations a été clos par une lecture de `wintalent.pas`, après une longue
-  exploration inutile des données.)*
-- **Ne jamais conclure à une absence depuis un seul nom de balise.** Deux fautes
-  distinctes, commises l'une et l'autre. D'abord, chercher un nom de balise et le
-  trouver là où on ne croit pas : `<Entry>` existe dans `DATA_CAREER_ROLL` **et** dans
-  `DATA_SPECIE_CAREER_DIRECT`, `RULES-T*` sous `<Specie>` n'est pas une déclaration de
-  sort — d'où l'obligation d'ancrer toute extraction sur le bloc parent attendu.
-  Ensuite, et c'est la plus coûteuse : ne pas trouver un nom de balise et en déduire
-  que la **donnée** est absente. Les livres n'ont pas tous la même structure — le
-  Rulebook range ses tables de tirage dans `DATA_CAREER_ROLL`, Middenheim les range
-  sous `SUBCHAPTER_CAREER` dans chaque `<Specie>`. J'ai déclaré cette table manquante
-  pendant des jours, et elle figurait au backlog comme « le plus gros morceau
-  restant ». Avant d'écrire « ce livre n'a pas X » : lister les balises réellement
-  présentes dans **ce** fichier, puis chercher par le **contenu**.
-- **Jamais de copie en masse depuis le staging** (`cp *.Xml`). Copier uniquement les
-  fichiers qui viennent d'être stagés, nommément. *(A écrasé silencieusement la fusion
-  des 64 sorts, déjà livrée et committée.)*
-- **Réutiliser les fichiers de travail déjà produits** (`table_sorts.txt`,
-  `table_tests.txt`, extractions précédentes) plutôt que les régénérer.
-- **Proportionner l'outil à la question.** Pas de script Python là où un `grep` suffit,
-  pas de tableau de synthèse là où une phrase suffit. Le lourd est réservé aux
-  chantiers de masse.
-- **Tenir `A FAIRE.txt` court** : il est relu à chaque session, il ne contient que ce
-  qui reste. L'historique va dans `Log.txt`.
+**Règle de scission des ethnies (Nono, 30/08/2026)** — « ce qu'il faut éviter, c'est le
+bête doublon dont juste le nom de l'ethnie change ; si au moins une donnée de création
+change, alors on double ». Le critère est donc factuel et se vérifie avant de trancher :
+comparer les compétences, les talents, les caractéristiques et la table de carrière. Si
+tout est identique, une seule ethnie. Si **une seule** de ces données diffère, on scinde,
+même si ça fait beaucoup d'ethnies — les onze sous-types de Haut Elfe de *High Elf
+Player's Guide* ont été tranchés ainsi. Conséquence assumée : la table de tirage porte
+autant de lignes que d'ethnies.
 
 ---
 
@@ -148,85 +81,6 @@ Constantes clés (`chargeconstantes.pas` ~13-20) :
 ---
 
 ## 2. État par chantier
-
-### 2.0 Explications anglaises retraduites : ✅ TERMINÉ le 28/08/2026
-
-**Le constat.** Les `<Explanation>` anglaises de `BOOK_RULESBOOK.Xml` n'étaient pas le
-texte du livre : c'était une retraduction depuis le français. Preuve chiffrée avant
-correction, sur 611 explications : zéro `magic missile`, zéro `Channelling Test`, zéro
-`Average (+20)`, un seul `yards` — alors que les variantes retraduites (`Magic
-Projectile`, `Focus Test`, `Accessible (+20)`, `... State`, `meter`, `Wound Point`,
-`Mental Strength`, `CO` pour les couronnes d'or) étaient partout. Deux compétences
-parlaient même encore du nom français : *« The Calm Skill »* pour Cool, *« The
-Resistance Skill »* pour Endurance.
-
-**Le périmètre.** Limité au Rulebook — c'est le seul livre sur lequel Nono a travaillé
-avec la version française. Les autres livres ne sont pas concernés, ne pas relancer le
-chantier dessus. Le fichier français n'a pas été touché (gel du français).
-
-**Fait.** Les 611 explications viennent maintenant du livre, mot pour mot : Skill 45,
-Talent 167, Sort 214, Career 64, Corruption 40, BonusMalus 37, Attribut 15,
-Craftsmanship 8, Specie 5. Plus les 29 `<Short>` des qualités d'armes, remis dans le
-vocabulaire du livre en gardant le style télégraphique (ces champs alimentent les PDF).
-Tous les marqueurs sont à zéro.
-
-**Libellés.** Nono avait déjà corrigé à la main ceux des talents, compétences, races et
-métiers — pas les autres. D'où 58 libellés de sorts renommés ce jour, plus les 8
-qualités d'objet et 4 qualités d'armes. Restent non revus : équipements et le reste.
-
-**Outillage, à réutiliser.** `colextract.py` extrait le PDF en respectant les colonnes
-(nombre détecté par page, 2 ou 3), écarte les encadrés par leur police `CaslonAntique`
-et restitue les paragraphes. Les `build_*.py` découpent chaque section. Compter une
-passe de mise au point par lot : les pièges rencontrés sont les titres courants, les
-puces coupées en fin de colonne, les tableaux, et — sur les pages de carrières — le
-tableau de caractéristiques qui crée de faux débuts de colonne et coupait les phrases.
-
-**Erreurs de données trouvées en chemin**, toutes corrigées côté anglais :
-`RULES-WEAPB14` « Pointed » portait le texte de **Precise** et `RULES-WEAPB16`
-« Precise » celui d'**Accurate** ; les `<Short>` de `RULES-WEAPB06`/`_07`
-(Crossbow/Throwing) sont **inversés** — corrigé en anglais, **le fichier français porte
-la même inversion**, à reprendre au dégel ; `RULES-WEAPB29` « Inflamed » était en fait
-la note de bas de tableau de l'arme Incendiary, devenue **Ablaze**.
-
-**Tranché par Nono.** Les 5 `RULES-ARMOB_*` sans équivalent (Not discreet, Not Discreet
-at all, Narrow the view, Blocks the view, Under armor) sont une simplification
-volontaire de son maître du jeu. On les garde, ce ne sont pas des erreurs — ne plus les
-ressortir en anomalie.
-
-### 2.0ter Revues de livre : ✅ TERMINÉES le 29/08/2026
-
-Les dix-sept fichiers de `DATABASE/` ont été confrontés à leur livre. Ce qui a été trouvé,
-par ordre de gravité : une table de tirage d'Elfes Noirs **copiée chez les Orcs Communs**
-de Green iz Best, où chaque valeur renvoyait deux carrières ; un `Villager` oublié dans la
-table du Gnome de Rough Nights, avec `Miner` dupliqué et tout décalé d'un cran ; un talent
-entièrement faux au Warrior of Tzeentch (`Suffuse With (Ulgu)` au lieu de `Strike Mighty
-Blow`) ; trois ethnies de Salzenmund absentes, ajoutées ; et le libellé `Lore (War)`,
-retraduit, corrigé en `Lore (Warfare)` dans cinq fichiers.
-
-**Deux contrôles ont fait tout le travail**, et ils sont bon marché :
-
-- *Couverture d'une table de tirage* — 01-100 sans trou ni chevauchement, **plus** aucune
-  carrière déclarée deux fois. Le premier seul ne suffit pas : un décalage compensé se
-  referme sur lui-même et passe sans broncher.
-- *Références mortes* — confronter tous les identifiants cités d'un fichier aux
-  identifiants déclarés dans les dix-sept.
-
-**Et un piège récurrent, à connaître** : trois suppléments d'affilée (Horned Rat, Enemy in
-Shadows, Death on the Reik) orthographient mal un talent du Rulebook — `Unshakeable`,
-`Public Speaking`, `Warleader`. À chaque fois la base avait raison. Devant un écart de
-libellé, lire la **déclaration** du talent dans le Rulebook ; ne jamais compter les
-occurrences dans le corpus, elles font pencher du mauvais côté.
-
-### 2.0bis Références mortes dans les personnages sauvegardés : ⏳ à trancher
-
-La fusion `RULES-COMPSAVOIR_REG` → `_LOCAL` du 23/08 n'a porté que sur les livres. Les
-9 personnages qui référençaient l'ancien identifiant ont perdu la compétence. Audit
-complet fait le 29/08 : c'est la **seule** référence morte sur les 21 personnages.
-Choix à faire entre migrer les fichiers sauvegardés et ajouter une table de
-correspondance dans le chargeur — détail dans `A FAIRE.txt`.
-
-**Règle qui en découle** : toute fusion d'identifiant doit se demander qui d'autre le
-référence. Les personnages sauvegardés en portent, et rien ne les met à jour.
 
 ### 2.1 WinLivre — Affichage des carrières : ✅ Phase 1 terminée
 
@@ -2574,7 +2428,7 @@ Markus**) en les ouvrant puis en les enregistrant — Kuno l'a été le 23/08. `
 
 ---
 
-### 2.20 Libellés anglais, intégrité des références, et revue des livres — en cours (25/08/2026)
+### 2.20 Libellés anglais, intégrité des références, et revue des livres — en cours (23/08/2026)
 
 **D'où ça vient.** Nono a expliqué la cause racine, et elle explique presque tout ce chantier :
 *« j'ai commencé à faire le programme avec le livre français et, majoritairement, j'ai demandé une
@@ -2758,91 +2612,49 @@ carrière dans le texte du livre — le libellé exact s'y lit sans rien deviner
 `Lore (Waterways)`→`Riverways`, `Lore (Know how)`→`Etiquette` (l'identifiant `SAVVIV` disait déjà
 « savoir-vivre »), `Trade (trinkets)`→`Charms`, `Trade (Handyman)`→`Tinker`, et sept autres.
 
-
-#### Point d'étape du 25/08/2026 — ce qui est clos, et où reprendre
-
-**Clos ce jour.**
-
-- **Doublons de sorts Rulebook / Winds of Magic.** Les 64 sorts des huit domaines colorés étaient
-  saisis deux fois. L'entrée `RULES-COLOR_*` a reçu le nom imprimé, le doublon `WINDS-COLOR_*` a été
-  supprimé — Winds passe de 192 à 128 sorts. 49 libellés réécrits sur 64. Plus aucun libellé commun
-  aux deux livres.
-- **Famille des mailles.** Les quatre armures du Rulebook renommées `Mail X`, le type
-  `RULES-ARMOT_MAIL` passé de « Chainmail » à « Mail ». **Les quatre entrées `(A3)` ne sont PAS
-  concernées** : Archives III imprime réellement une section CHAINMAIL, la base y est fidèle, et
-  c'est la raison d'être du suffixe.
-- **Champs `<Test>` des talents : 92 corrigés.** L'audit passe de 87 valeurs introuvables dans le
-  corpus à 4, et ces 4 sont correctes (texte coupé sur deux lignes dans l'extraction PDF). C'est la
-  moisson la plus parlante du chantier : les champs Test contenaient des noms de compétence
-  français traduits mot à mot, qui ne renvoyaient à **aucune** compétence du jeu anglais —
-  `Orientation`→Navigation, `Resistance Tests`→Endurance, `Discretion`→Stealth,
-  `Representation`→Perform, `Ragot`→Gossip, `Knowledge`→Lore, `Command`→Leadership,
-  `Projectiles`→Ranged, `Assessment, Bet`→Evaluate, Gamble.
-- **Trois familles de spécialisations** alignées sur les lignes de référence : Art (Mosaics,
-  Sculpture), Ride (Demigryph, Great Wolf, Griffon), Animal Training (Demigryph).
-- **Déclarations combinées** (identifiant contenant le `SeparateurMulti`) : audit des 27, convention
-  de libellé rétablie partout (`X or Y`, ou `Famille (A or B)`).
-- **Revue complète de Sea of Claws** (voir plus bas).
-
-**Trois pièges de méthode appris ce jour, à ne pas refaire.**
-
-1. **Extraction trop large = problème inventé.** Deux fausses alertes dans la même journée. La prose
-   d'Up in Arms recollée au champ Test de *Flee!*, et surtout la table de tirage Seafarer déclarée
-   « incomplète » alors qu'elle est parfaite : `DATA_CAREER_ROLL` et `DATA_SPECIE_CAREER_DIRECT`
-   emploient les **mêmes noms de balises** (`<Entry>`, `<Specie>`, `<Career>`), donc lire les
-   `<Entry>` du fichier entier mélange les fourchettes de dés et les drapeaux `X`.
-   → **Toujours ancrer l'extraction sur le bloc parent, jamais sur le nom de balise seul.**
-2. **La passe insensible à la casse masque les fautes de casse.** La vérification de masse du 24/08
-   validait `Language (khazalid)` parce que `Language (Khazalid)` existe dans le corpus. Trois
-   libellés fautifs ont survécu ainsi (Khazalid, Eltharin, `Lore (Dwarves)`→`Dwarfs`).
-   → Une passe dédiée, **sensible à la casse**, reste à faire sur les libellés validés uniquement
-   par la seconde passe.
-3. **Le comportement réel se vérifie à l'écran, pas dans le XML.** Trois questions tranchées ce jour
-   par un test de Nono et non par le raisonnement : le doublon `Fearless` (les Slayers), le choix
-   Etiquette de Middenheim (capture d'écran), la table de métiers du nain norse.
-
-**Revue de Sea of Claws — terminée.** Le livre était déjà très bien saisi : trois ethnies norses
-conformes au mot près, neuf carrières sur 36 niveaux avec seulement six écarts dont quatre où la
-base a raison de suivre le Rulebook (`Warleader`, `Public Speaking`, `In-Fighter` sont les graphies
-de Sea of Claws), 21 sorts et miracles complets et exacts. Deux vrais défauts corrigés :
-
-- **l'ethnie `Dwarfs (Norse)` manquait** (encadré p.41, chapitre VI, noyé dans la prose de Kraka
-  Ravnsvake — d'où l'oubli) ; saisie sous `SEAOF-RACE_DNORSE`, profil repris du nain du Rulebook ;
-- **deux miracles classés comme bénédictions** : `Blessing of the Albatross` et `of the Mariner`
-  sont devenus `SEAOF-MIRAC_MANAMM_13`/`_14`, talent `Invoke` au lieu de `Bless`.
-
-**Correction de chargeur qui en découle (validée au test).** `chargeracemetier.pas`,
-`CompleteRaceMetierParEspece` : une ethnie qui ne possède **aucune** fourchette de dés à elle hérite
-désormais de la table de tirage de sa race, au lieu de ne recevoir que l'accessibilité en `X` — sans
-quoi sa table de tirage est vide et le joueur n'a aucun métier à tirer. Deux garde-fous : `AvecTirage`
-est calculé **avant** la phase 2 (sinon la première fourchette héritée ferait repasser toutes les
-suivantes en `X`), et `Donneur` ne retient **qu'une** ethnie par race — celle du même livre que la
-race — sinon les plages de plusieurs sœurs se chevaucheraient. Profite aussi à `NAGGA-RACE_DELF`,
-qui était dans le même cas.
-
-**Où reprendre.** La revue livre par livre continue : **Archives of the Empire III**, puis **Lords of
-Naggaroth** — les deux plus rentables d'après le balayage de couverture. La méthode est rodée :
-inventaire du fichier, puis confrontation section par section au TXT du livre, en comparant les
-carrières automatiquement niveau par niveau après résolution des identifiants en libellés.
-
-**Arbitrages depuis clos (26/08).** `Hatred (Dwarves)` → `Hatred (Dwarfs)`, pour rester uniforme
-avec `Lore (Dwarfs)` — le corpus ne départageait pas, c'est la cohérence interne qui a tranché.
-
-Et surtout : **les champs `<Test>` des 143 spécialisations n'ont finalement rien demandé.**
-Avant d'écrire le mécanisme de substitution, vérification de *où* ce champ est affiché — un seul
-endroit, `wintalent.pas` ligne 116, et cette grille est remplie sous `PTalent.SousTalent = false`,
-donc elle ne liste que les génériques. Les spécialisations vivent dans `TabSpe`, qui n'a que le
-code et le libellé. Mieux : sélectionner une spécialisation bascule l'affichage sur son générique
-(lignes 99-101, via `ValeurSousCompetence`/`ValeurGenerique`), si bien que le joueur lit toujours
-la formule exacte du livre. **La conception d'origine était juste, le point est clos sans une seule
-modification.** Le design du marqueur `*`, validé par Nono, reste consigné dans `A FAIRE.txt` au cas
-où l'on voudrait un jour afficher le test par spécialisation.
-
-Seul arbitrage encore ouvert : `Tin Whistle` / `Pennywhistle` — faut-il deux spécialisations
-distinctes, ou la seule `RULES-COMPMUSIC_PENNYW` comme aujourd'hui ?
-
 ---
 
+### 2.21 Icônes de niveau propres à un livre — terminé (30/08/2026)
+
+*High Elf Player's Guide* n'utilise pas les icônes de niveau du livre de base : son schéma
+d'avance emploie des glyphes elfiques colorés, un par niveau. D'où un mécanisme général —
+n'importe quel livre peut désormais fournir son propre jeu d'icônes.
+
+**Données.** Une balise optionnelle `<PictureLevel>` portant un **nom de dossier** sous
+`\PICTURES\` (jamais un chemin), déclarable à trois endroits : sur le **métier**
+(`<Career>`), sur l'**ethnie** (`<Specie>`) et sur la **race** (`<Race>`). Écrite à l'export
+seulement si elle s'écarte du défaut, comme `Skill3`/`Skill5`. Absente = dossier `NIV`.
+
+**Ordre de résolution : métier → ethnie → race → générique.** La raison du premier rang du
+métier est de Nono et vaut d'être retenue : *un métier ne déclare un dossier que s'il vient
+d'un livre, et il n'existe que si ce livre est chargé — sa déclaration prouve donc que le
+supplément est actif*, ce que l'ethnie seule ne dit pas.
+
+**Code.** `CheminNiveauDossier(Dossier, Niveau)` dans `ChargeRace` fabrique le chemin et
+porte les deux replis (dossier vide, fichier absent). Au-dessus :
+`CheminNiveauImage(CodeRace, Niveau)` (ethnie→race), `CheminNiveauImageMetier` et
+`CheminNiveauImageMetierRace` dans `ChargeMetier`. Chaque fenêtre a une
+`ChargeImagesNiveau()` qui vide et recharge sa `TImageList`, appelée dès que le métier ou
+l'ethnie est connu — **et jamais avant**, l'ordre des affectations comptant.
+
+**Trois pièges rencontrés, tous du même genre : plusieurs chemins de dessin en parallèle.**
+1. `WinRaces` charge une `ColorList` qui ne sert à rien : son test `Node.Text[1] in
+   ['1'..'4']` est toujours faux, aucun texte de nœud n'y commence par un chiffre.
+2. Dans `WinMetier`, l'arbre passe par `ListImage` mais la **bande de caractéristiques**
+   rechargeait le fichier en dur à chaque dessin (l.430) — d'où des glyphes d'un côté et
+   des icônes génériques de l'autre. Trouvé par Nono à l'écran.
+3. `WinCreation` ne déclarait **ni `ListImage` ni `Path`** : non déclarés, ils se
+   résolvaient sur les globales de `WinRaces` (dernière unité de sa clause `uses` à les
+   déclarer), si bien qu'elle remplissait la liste d'images d'une autre fenêtre. Sans
+   conséquence tant que tout le monde chargeait les mêmes icônes ; faux dès que les icônes
+   dépendent du livre. Corrigé par deux déclarations.
+
+**Validé par Nono le 30/08** sur les trois cas qui couvrent la matrice :
+ethnie du livre → icônes du livre ; Haut Elfe de base + métier du livre → icônes du livre ;
+Haut Elfe de base + métier de base → icônes d'origine.
+
+**Reste hors périmètre** : `pdfmetier.pas` (l.92, 250, 285) charge encore en dur. Les icônes
+de **classe** (`winmetier` l.835, `pdfmetier` l.179) ne sont pas concernées.
 
 ## 3. TODO / Backlog
 

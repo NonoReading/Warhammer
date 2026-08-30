@@ -29,19 +29,68 @@ function GetAllArmeBonusLibelle(CodeArmeBonus :String): String;
 implementation
 
 function GetAllArmeBonusLibelle(CodeArmeBonus :String): String;
+// Remplace chaque code de qualite par son libelle, dans une liste separee par des virgules.
+//
+// L'ancienne version faisait un StringReplace de SOUS-CHAINE sur la liste entiere, apres
+// avoir retire le prefixe de livre du code declare. Deux consequences :
+//   - un code qui est le prefixe d'un autre (WEAPB4 dans WEAPB40) aurait corrompu
+//     l'affichage en silence. Aucun cas aujourd'hui, les codes faisant tous deux
+//     chiffres, mais l'equilibre ne tient qu'a cela.
+//   - la comparaison ignorait le livre, alors que ChercheArmeBonus sait le gerer.
+// Cette version decoupe la liste et resout chaque code entier via ChercheArmeBonus, qui
+// passe par CompareRechercheValeur et accepte donc le code prefixe comme non prefixe.
+//
+// Deux formes particulieres sont conservees telles quelles :
+//   "WEAPB18 2"        un indice numerique suit le code, separe par un espace
+//   "WEAPB30/WEAPB12"  qualites alternatives, separees par SeparateurMulti
 var
-  PArmeBonus:        StructureArmeBonus;
-  Res:               String;
-  Code:              String;
+  Liste:        TStringList;
+  Alternatives: TStringList;
+  Element:      String;
+  Suffixe:      String;
+  Morceau:      String;
+  Code:         String;
+  PArmeBonus:   StructureArmeBonus;
+  Ind:          Integer;
+  IndAlt:       Integer;
 Begin
-  Res := CodeArmeBonus;
-  for PArmeBonus in ListArmeBonus do
-    begin
-      Code := ExtractStringAfter(PArmeBonus.CodeArmeBonus, SeparateurLivre);
-      if Pos(Code, Res) > 0 then
-        Res := StringReplace(Res, Code, PArmeBonus.Libelle, [rfReplaceAll]);
-    end;
-  Result := Res;
+  Result       := '';
+  Liste        := TStringList.Create;
+  Alternatives := TStringList.Create;
+  try
+    ExtractStrings([','], [], PChar(CodeArmeBonus), Liste);
+    for Ind := 0 to Liste.Count - 1 do
+      begin
+        Element := Trim(Liste[Ind]);
+        Suffixe := '';
+        if Pos(' ', Element) > 0 then
+          begin
+            Suffixe := ' ' + Trim(ExtractStringAfter(Element, ' '));
+            Element := Trim(ExtractStringBefore(Element, ' '));
+          end;
+
+        Alternatives.Clear;
+        ExtractStrings([SeparateurMulti], [], PChar(Element), Alternatives);
+        Morceau := '';
+        for IndAlt := 0 to Alternatives.Count - 1 do
+          begin
+            Code       := Trim(Alternatives[IndAlt]);
+            PArmeBonus := ChercheArmeBonus(Code);
+            if PArmeBonus.Libelle <> '' then
+              Code := PArmeBonus.Libelle;
+            if Morceau <> '' then
+              Morceau := Morceau + SeparateurMulti;
+            Morceau := Morceau + Code;
+          end;
+
+        if Result <> '' then
+          Result := Result + ',';
+        Result := Result + Morceau + Suffixe;
+      end;
+  finally
+    Alternatives.Free;
+    Liste.Free;
+  end;
 end;
 
 function ChercheArmeBonus(CodeArmeBonus :String): StructureArmeBonus;

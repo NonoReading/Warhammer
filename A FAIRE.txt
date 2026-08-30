@@ -476,6 +476,612 @@ repartait sur de fausses pistes. Tout ce qui a ete retire ci-dessous a son equiv
 
 
 =========================================================================
+CHANTIER OUVERT LE 30/08/2026 - INTEGRATION DE HIGH ELF PLAYER S GUIDE
+=========================================================================
+Livre officiel Cubicle 7, 2025, 128 pages. Choisi pour caler la methode d INTEGRATION
+(creer un fichier de livre depuis zero, par opposition a la revue d un livre existant).
+TXT disponible dans PDF_TEXTE, PDF NON disponible.
+
+CE QUE LE LIVRE CONTIENT, releve au sommaire - l inventaire du 29/08 ne voyait que les
+carrieres :
+  9 carrieres, table d armes (8 lignes), table d armures Ithilmar et Dragon (~12 pieces),
+  4 tables d objets et d herbes, ~54 sorts (Petty Magic, Elven Arcane, Lore of High Magic,
+  magie de Vaul, Sea Magic, magie de Hoeth), talents de Haute Magie, Runes du Cadai,
+  et une section "Sea Elf Characters" avec competences et talents d espece.
+
+CE QUI S EXTRAIT DU TXT, ET CE QUI NE S EXTRAIT PAS
+  OK  : les 9 blocs de carriere sortent complets (competences, talents, equipement,
+        niveaux, salaires), et les tables d armes et d armures aussi.
+  NON : les COCHES DU SCHEMA D AVANCE sont absentes du TXT - ce sont des glyphes
+        vectoriels, pas du texte. Sous chaque ligne "WS BS S T I Ag Dex Int WP Fel" il n y
+        a que des lignes vides. SUBCHAPTER_ATTR ne peut donc etre rempli pour AUCUNE des
+        9 carrieres depuis le TXT.
+        CONTOURNEMENT RETENU LE 30/08 : Nono envoie une capture de la bande du schema
+        d avance, carriere par carriere ; elle se lit directement en SUBCHAPTER_ATTR.
+
+CORRESPONDANCE GLYPHE -> NIVEAU DU LIVRE HIGH ELF, etablie le 30/08 sur la bande du Mage
+que Nono a fournie avec sa lecture (3 0 0 0 5 4 2 1 1 1). Les Elfes n utilisent PAS les
+icones generiques, et les couleurs ne suivent pas non plus l ordre des niveaux :
+     fond PALE,  glyphe en C majuscule gras ......... niveau 1
+     fond BLEU,  glyphe en forme de P a boucle ...... niveau 2
+     fond GRIS fonce, glyphe en forme de h boucle ... niveau 3
+     fond JAUNE, glyphe en forme de U ouvert ........ niveau 4
+     fond VERT,  glyphe en forme de croix a boucles . niveau 5
+     fond PALE, case vide ........................... 0, aucune augmentation possible
+La couleur et le glyphe sont deux indices REDONDANTS : ils disent la meme chose, ce qui
+permet de relire une bande meme si la capture rend mal les glyphes.
+C est precisement cet ecart qui motive le chantier NIV_HELF decrit plus bas.
+
+DONNEES ACQUISES - SCHEMAS D AVANCE RELEVES SUR LES CAPTURES DE NONO (30/08) :
+                            WS  BS   S   T   I  Ag Dex Int  WP Fel
+  Sea Guard            p.64  1   1   3   0   2   1   0   0   4   0
+  Swordmaster          p.66  1   0   1   0   1   4   0   3   2   0
+  Shadow Warrior       p.70  1   1   2   0   0   1   0   3   4   0
+  Merchant Adventurer  p.72  1   0   4   0   1   2   0   3   0   1
+  Aestheticist         p.74  0   0   0   0   2   1   3   1   4   1
+  Mage (lot 2)         p.90  3   0   0   0   5   4   2   1   1   1
+  Smith-priest (lot 2) p.100 3   0   4   0   5   0   3   3   3   3
+CONTROLE DE COHERENCE PASSE PAR LES CINQ CARRIERES A 4 NIVEAUX : chacune marque TROIS
+caracteristiques au niveau 1, puis UNE par niveau - six marquees, quatre a zero. C est
+exactement la forme des carrieres deja en base (Beachcomber de Sea of Claws : WS/I/Int au
+niveau 1, puis Ag au 2, WP au 3, T au 4). Le livre High Elf change les symboles, pas la
+regle. Toute bande future qui sortirait de ce moule doit etre signalee, pas saisie.
+RESTE A OBTENIR pour le lot 2 : Smith-priest p.100, Storm Weaver p.104, Loremaster p.108.
+
+RATTACHEMENT : RULES-RACE_HELF (High Elf) existe deja dans BOOK_RULESBOOK.Xml, ainsi que
+RULES-RACE_WELF (Wood Elf, utile pour le Smith-priest of Vaul du lot 2). Aucune ethnie a
+creer pour le lot 1.
+  OK  : LES SORTS AUSSI - correction du 30/08, ma premiere conclusion etait fausse.
+        J avais ecrit que les pages de sorts etaient "non exploitables" parce que des
+        "CN:" des deux colonnes tombaient sur la meme ligne dans un resultat de grep. Mais
+        pdftotext -layout PRESERVE les positions horizontales : les deux colonnes sont
+        cote a cote, separees par une gouttiere de blancs, et il suffit de la trouver pour
+        les redecouper. Ecrit et teste : script split2col, detection de la gouttiere par
+        page (la plus large plage de colonnes blanches sur les lignes de plus de 40
+        caracteres ; ici elle ne fait que 3 caracteres de large, d ou un premier echec avec
+        un seuil trop exigeant). Les 58 sorts ressortent alors parfaitement, avec leur CN,
+        Range, Target, Duration, Winds et texte complet.
+        LECON, la meme que celle du tri des livres : ne pas conclure a l inexploitabilite
+        d une source depuis un resultat de grep. Un grep aplatit la mise en page ; c est un
+        defaut de MON outil de lecture, pas de la source.
+
+LES NIVEAUX - LE LIVRE SORT DU MOULE DES 4 NIVEAUX
+Les 190 carrieres de la base ont toutes exactement 4 niveaux. Pas celles-ci :
+  Sea Guard, Swordmaster, Shadow Warrior, Merchant Adventurer, Aestheticist ... 4 niveaux
+  Mage ....................................................................... 5 niveaux
+  Smith-priest of Vaul, Storm Weaver, Loremaster of Hoeth .................... NIVEAUX 3 A 5
+Le livre le dit explicitement p.99 : "Elven Priest Careers cover levels 3-5. Players
+wishing to enter a Priest Career must complete Mage level 2 (Student Mage) before taking
+up the mantle of Priest." Ces trois carrieres n ont donc PAS de niveaux 1 et 2 : on y entre
+depuis le Mage. Les salaires le confirmaient deja (Gold 2 / 4 ou 5 / 7, jamais de Brass).
+=> les quatre carrieres de lanceurs de sorts exigent le niveau 5, et trois d entre elles
+   exigent en plus de demarrer au niveau 3.
+
+DECOUPAGE RETENU : DEUX LOTS
+  LOT 1 - LIVRE LE 30/08 : BOOK_HIGH_ELF_PLAYERS_GUIDE.Xml, code livre HELFG, 787 lignes.
+          5 carrieres (HELFG-WORK127 a WORK131), 5 declarations de competence, 3 de talent,
+          2 talents entiers, rattachement a RULES-SPECIE_HELF. AUCUNE modification de code.
+          TESTE ET VALIDE LE 30/08 : Nono a charge le livre et cree un Haut Elfe
+          Estheticien. Les trois arbitrages sont clos, detail dans Log.txt.
+  LOT 2 - Mage, Smith-priest, Storm Weaver, Loremaster, une fois reglee la question du
+          niveau 5 et des carrieres demarrant au niveau 3.
+          COMMENT LES QUATRE S ARTICULENT, precise le 30/08 sur la p.99 : le Mage couvre
+          les niveaux 1 a 5 ; les trois carrieres de pretre couvrent les niveaux 3 a 5 et
+          on y entre APRES AVOIR TERMINE LE NIVEAU 2 DU MAGE (Student Mage). Le livre
+          ajoute deux precisions : les avances de caracteristique et de talent du niveau 3
+          de pretre doivent etre terminees avant de passer au niveau 4 "comme si c etaient
+          des prerequis de niveau 1", et les competences des niveaux 1 et 2 du Mage
+          comptent pour l avancement.
+          CE QUE LA BASE NE SAIT PAS FAIRE, verifie le 30/08 :
+            - DATA_CAREER_SUBCHOICE existe mais ne fait PAS cela : c est un SECOND JET DE
+              DE A LA CREATION (on tire Wizard, puis un d100 dit si on prend une variante
+              de Winds of Magic). Rien a voir avec un embranchement en cours de carriere.
+            - StructureMetier (chargemetier.pas) ne porte aucun prerequis : CodeMetier,
+              Libelle, LibelleGroupe, Description, Livre, CodeCompetence, et c est tout.
+            - un changement de carriere entre TOUJOURS au niveau 1 :
+              ChargerMetierEquipement(NvMetierChoisi, 1) dans winpersonnage.pas.
+          Il faudrait donc, pour etre fidele : des carrieres dont le premier niveau est 3,
+          et un champ de prerequis (carriere + niveau) que rien ne porte aujourd hui.
+          IDEE DE NONO DU 30/08 : "tricher" en mettant les donnees du Mage 1 et 2 dans les
+          carrieres de pretre. Etudiee, voici ce qu elle donne :
+            VARIANTE A, telle que proposee - Mage 1 + Mage 2 + les trois niveaux de pretre
+              = CINQ niveaux. Elle rend le prerequis reel (on ne peut pas atteindre le
+              Smith-priest sans passer par Novitiate et Student Mage) mais elle NE FAIT PAS
+              L ECONOMIE DU NIVEAU 5 : c est exactement le probleme qu on cherchait a
+              contourner.
+            VARIANTE B - ne reprendre que STUDENT MAGE comme niveau 1, puis les trois
+              niveaux de pretre en 2, 3 et 4. QUATRE niveaux : ca passe avec le code
+              d aujourd hui, sans une ligne a modifier. Le prerequis reste exprime, puisque
+              la carriere commence par Student Mage. Prix a payer : les numeros de niveau
+              divergent du livre (le livre dit 3-4-5, la fiche dirait 1-2-3-4), le Novitiate
+              devient implicite, et Student Mage est recopie dans trois carrieres - donc
+              trois endroits a corriger le jour ou on le corrige.
+            VARIANTE C - garder la numerotation du livre (niveaux 3 a 5) et mettre le
+              prerequis en commentaire. Ne demande rien non plus cote structure, MAIS le
+              niveau 5 reste, donc TabNiveau plante quand meme.
+          OBJECTION DE NONO, ET ELLE PORTE : le paragraphe "Fifth Level Careers" p.83 dit
+          que LES QUATRE carrieres peuvent entrer dans un cinquieme niveau - le Mage, le
+          Smith-priest, le Storm Weaver et le Loremaster. Le cinquieme niveau d une carriere
+          de pretre est donc son dernier niveau imprime (Arch Forge-priest, Caller of the
+          Maelstrom, High Loremaster). Et ce n est pas un simple numero : c est un niveau
+          QUI PORTE UNE REGLE - "25 Advances in all your Career level s seven
+          Characteristics and in eight of its available Skills", plus au moins un talent du
+          niveau en cours. Renumeroter ce niveau en 4 (variante B) masque donc une regle,
+          ce n est pas qu un decalage cosmetique. La variante B coute plus cher que je ne
+          l avais dit.
+          INDICE FORT QUE LA VARIANTE A EST EN FAIT LA LECTURE FIDELE : la regle parle de
+          "seven Characteristics". Or une carriere a 4 niveaux en marque SIX (3 au niveau 1
+          puis une par niveau) et une carriere a 5 niveaux en marque SEPT. Le schema
+          d avance du Mage releve le 30/08 en marque exactement sept (WS 3, I 5, Ag 4,
+          Dex 2, Int 1, WP 1, Fel 1 - seuls BS, S et T sont vides). Si les schemas des trois
+          pretres marquent eux aussi sept caracteristiques, alors le livre considere que la
+          carriere de pretre INCLUT les niveaux 1 et 2 du Mage, et la variante A n est plus
+          une triche mais le modele fidele.
+          TEST FAIT LE 30/08, ET IL TRANCHE CONTRE LA VARIANTE A. Bande du Smith-priest :
+             WS 3 | BS 0 | S 4 | T 0 | I 5 | Ag 0 | Dex 3 | Int 3 | WP 3 | Fel 3
+          Sept caracteristiques marquees, comme prevu - mais AUCUN 1 NI AUCUN 2. Le livre
+          n inclut donc pas les niveaux du Mage dans le schema du pretre. La carriere de
+          pretre est bien une carriere de TROIS niveaux occupant les rangs 3, 4 et 5, et
+          elle atteint les sept caracteristiques autrement : CINQ au niveau 3, puis une au
+          4 et une au 5.
+          CONSEQUENCE SUR LE CONTROLE DE COHERENCE : ma regle "trois caracteristiques au
+          niveau 1 puis une par niveau" ne vaut que pour les carrieres a quatre niveaux.
+          La regle generale du livre est : SEPT caracteristiques marquees en tout pour ces
+          carrieres de lanceurs, le premier niveau de la carriere en portant autant qu il
+          faut (3 pour le Mage qui a cinq niveaux, 5 pour un pretre qui en a trois).
+          CONCLUSION DEFINITIVE : il n y a pas de triche possible. Les pretres sont des
+          carrieres de niveaux 3 a 5, le Mage une carriere de niveaux 1 a 5, et les deux
+          formes exigent que le niveau 5 existe. LE CORRECTIF DU NIVEAU 5 EST UN PREALABLE
+          AU LOT 2, il ne peut pas etre contourne par la donnee.
+          LES 58 SORTS DU LIVRE APPARTIENNENT A CE LOT, decision du 30/08 : ils dependent
+          exactement des memes talents que ces quatre carrieres (High Magic, Blessed by
+          Isha, Cadai Meditation), qui n existent pas encore en base. Les saisir avant les
+          carrieres reviendrait a declarer des sorts pointant sur des talents absents.
+          REPARTITION DES 58 SORTS :
+             Petty Magic Spells .................... p.80      6   TypSpell "Minor Magic"
+             Elven Arcane Spells ................... p.81-82   8   voir question 2 ci-dessous
+             Lore of High Magic .................... p.86-89  15
+             Magic of Vaul ......................... p.102-103  9
+             High Elf Sea Magic (Mathlann) ......... p.106-107 10
+             Magic of Hoeth ........................ p.110-111 10
+          QUESTIONS DE MODELISATION A TRANCHER AVANT LA SAISIE :
+           1. Quel TypSpell pour la Haute Magie ? LA QUESTION N EST PAS UNE QUESTION DE
+              DONNEE MAIS DE CODE - voir le bloc "TypSpell est une enumeration fermee"
+              ci-dessous. Creer la valeur "High Magic" demande de toucher au code ; s en
+              tenir a "Domain Magic" ne demande rien, et le livre le justifie a moitie
+              ("High Magic spells are cast using the same rules as Colour Lores", p.84).
+              La Haute Magie reste toutefois une categorie a part dans le livre, qui lui
+              consacre son propre talent, sa propre competence de Focalisation et sa propre
+              grille de cout en XP.
+           2. Les Elven Arcane Spells n ont pas de domaine fixe : ils portent une ligne
+              "Winds:" citant deux vents, et le lanceur CHOISIT lequel il utilise. Le
+              modele a un seul <Talent> par sort. Declaration combinee avec
+              SeparateurMulti, comme "Channelling (Azyr or Ghur)" deja fait ?
+           3. 69 mentions d Overcasting, 13 de "Sacrifice:" et 16 de "Yenlui State must be"
+              n ont pas de champ dedie. Meme traitement que les 17 rituels de Winds of
+              Magic, c est-a-dire replies dans <Explanation> ? C est ce qui avait ete
+              retenu le 29/08 et ca a marche.
+           4. L etat YENLUI (p.46) est une mecanique propre aux Elfes, avec trois valeurs
+              (Balanced, Light, Dark), qui conditionne des difficultes de Test et des
+              options d Overcasting. Rien en base ne le porte. A afficher seulement, comme
+              le CN des rituels, ou a ignorer pour l instant ?
+Reste a creer pour le lot 1 et 2 reunis, mesure : ~19 specialisations de competence
+absentes (Channelling (Qhaysh), Sail (Bloodhawk / Falconship / Hawkship / Dragonship),
+Secret Signs (Shadow Warriors), Drive (Skycutter), Animal Care (Swiftfeather Roc),
+Trade (Jeweller), Art (Poetry)...) et ~20 talents (Sword-dancing, High Magic, Cadai
+Meditation, Eye of the Storm, Sanctuary of the Mind, Tower of Memories, Blessed by Isha,
+Lileath s Blessing, Savant (Oceans), Fearless (Dark Elves), Fearless (Sea Monsters),
+Martial Arts, Mind over Body, War Wizard...). Attention, certains ne sont que des variantes
+d orthographe d un talent existant : Detect Artifact/Artefact, Cat Fall/Catfall,
+Strongminded/Strong-minded - a verifier avant creation.
+L equipement n est PAS un souci : le modele accepte du texte libre dans <Item name="...">.
+
+=========================================================================
+HIGH ELF PLAYER S GUIDE - CE QUI RESTE APRES LE LOT 1
+=========================================================================
+LOT 1 VALIDE LE 30/08 : Nono a charge le livre et cree un Haut Elfe Estheticien. La
+methode d integration d un livre absent est donc eprouvee de bout en bout - lecture du
+TXT, releve des schemas d avance sur capture, resolution des libelles en identifiants,
+generation du fichier, verification automatique, chargement dans le programme.
+Les trois arbitrages du lot 1 sont clos ; leur detail est dans Log.txt au 30/08.
+
+CE QUE LE LOT 1 NE FAIT PAS, ET QUI RESTE OUVERT
+  - la TABLE DE TIRAGE ALEATOIRE DE CLASSE ET CARRIERE p.59, decouverte pendant le
+    chantier : 5 colonnes (Outer Kingdoms, Nagarythe, Inner Kingdoms, Avelorn, Sea Elf)
+    sur une quarantaine de carrieres, dont la plupart sont des carrieres du Rulebook.
+    FAISABLE SANS AUCUNE MODIFICATION DE CODE - verifie le 30/08 dans ChargeRegle.pas et
+    dans ChargeTabMetier (wincreation.pas l.1988). Le mecanisme de REGLE fait exactement
+    ce qu il faut : une REGLE est une variante optionnelle apportee par un livre, que le
+    joueur choisit a la creation, et RegleEnCours() n en retient qu une a la fois - ce qui
+    correspond precisement a "je joue un Elfe des Royaumes Exterieurs". Chaque colonne
+    devient donc une regle : 5 <Rule> dans DATA_RULE, et un DATA_CAREER_ROLL portant les
+    ~200 entrees, toutes sur RULES-RACE_HELF.
+    Un point de mecanique a connaitre : ChargeTabMetier marque les valeurs de de couvertes
+    par la regle, puis complete avec la table de base pour les valeurs restees libres. Une
+    regle qui couvre 01-100 remplace donc TOTALEMENT la table de base, sans avoir a le
+    declarer - c est ce qui distingue la table lustrienne (totale) de la table Seafarer de
+    Sea of Claws (partielle). Les colonnes High Elf couvrent 01-100 : elles seront totales.
+    CORRECTION DU 30/08, APRES LECTURE DES PAGES 54 A 57 : ma recommandation des cinq
+    regles etait prematuree, je n avais lu que la table p.59. Le livre ne propose pas cinq
+    variantes de tirage sur une seule ethnie : il declare ONZE SOUS-TYPES DE HAUT ELFE,
+    chacun avec SES PROPRES COMPETENCES ET TALENTS D ESPECE, ce qu une regle ne sait pas
+    porter et ce qu une ethnie porte deja.
+      Royaumes interieurs p.54 ... Caledor, Ellyrion, Avelorn, Saphery, Eataine
+      Royaumes exterieurs p.55 ... Tiranoc, Nagarythe (les Shadowlands), Chrace, Cothique,
+                                  Yvresse
+      Sea Elf p.56-57 ........... "a cultural sub-type of High Elves", dit le livre, avec
+                                  ses 12 competences, ses 6 talents et un talent nouveau,
+                                  Uncouth Uranai (-1 de Standing face aux Elfes de Caledor,
+                                  Ellyrion, Avelorn et Saphery)
+    Les caracteristiques ne changent pas : "Roll Attributes as any Elf". Ces onze
+    sous-types ne different QUE par leurs competences, leurs talents et leur table de
+    carriere - exactement le perimetre d une ethnie chez nous, et exactement ce que sont
+    deja les cinq ethnies humaines du Rulebook.
+    LES 5 COLONNES DE LA TABLE p.59 NE SONT DONC PAS 5 VARIANTES MAIS 5 REGROUPEMENTS :
+      Inner Kingdoms . Caledor, Ellyrion, Saphery, Eataine     Avelorn . Avelorn seul
+      Outer Kingdoms . Tiranoc, Chrace, Cothique, Yvresse      Nagarythe . Nagarythe seul
+      Sea Elf ........ Sea Elf seul
+    CONSEQUENCE : AUCUNE REGLE N EST NECESSAIRE. La table de tirage se met dans le
+    SUBCHAPTER_CAREER de chaque ethnie, comme Middenheim le fait pour ses trois ethnies -
+    le joueur choisit son ethnie, pas une option de creation. Une regle servirait a offrir
+    un CHOIX au joueur ; ici il n y a pas de choix, il y a onze ethnies.
+    MESURE DU 30/08 - LES DONNEES DIFFERENT VRAIMENT, on ne peut donc pas se contenter des
+    cinq colonnes sans perdre de l information. Socle commun aux onze : 4 competences
+    seulement (Cool, Entertain (Singing), Language (Elthárin), Melee (Basic)) et 2 talents
+    (Night Vision, Read/Write). Tout le reste varie. Et surtout, A L INTERIEUR d une meme
+    colonne les listes divergent :
+       colonne Inner Kingdoms  Caledor, Ellyrion, Saphery, Eataine
+                               6 competences communes sur 22 citees
+       colonne Outer Kingdoms  Tiranoc, Chrace, Cothique, Yvresse
+                               7 competences communes sur 20 citees
+    Ramener a cinq ethnies reviendrait donc a choisir une liste par groupe et a jeter les
+    six autres. Ce qui distingue chaque royaume est justement ce qui fait son interet :
+    Ellyrion a Ride (Horse) et Animal Affinity, Saphery a Lore (Any), Research et Bookish,
+    Chrace a Set Trap et Strider (Woodlands), Nagarythe a Stealth (Rural) et Hatred (Dark
+    Elves), Cothique a Sail et Sea Legs.
+    DECISION DE NONO, 30/08 : ON FAIT LES ONZE. Regle generale qu il en tire, remontee
+    dans CONTEXT.md paragraphe 0 : ce qu il faut eviter est le bete doublon dont seul le
+    nom de l ethnie change ; si au moins une donnee de creation change, on scinde. La
+    consequence - autant de lignes que d ethnies dans la table de tirage - est acceptee.
+
+    LOT 3 LIVRE LE 30/08 - le fichier passe de 785 a 2432 lignes. Produit :
+      - les 11 <Specie> HELFG-RACE_CALED, _ELLYR, _AVELO, _SAPHE, _EATAI, _TIRAN, _NAGAR,
+        _CHRAC, _COTHI, _YVRES, _SEAEL. Ethnic = RULES-SPECIE_HELF, les 15 caracteristiques
+        recopiees de RULES-RACE_HELF, competences et talents propres, et la table de
+        carriere portee par chaque ethnie.
+      - RULES-T0069_DELF "Hatred (Dark Elves)" et HELFG-T0188 "Uncouth Uranai".
+      - AUCUNE declaration combinee creee : les choix "X or Y" des talents d espece sont
+        ecrits en ligne (RULES-T0074/RULES-T0116), ce qui est la convention du corpus -
+        28 des 35 combinaisons deja presentes dans les <Specie> ne sont pas declarees.
+      - Les deux errata appliques, marques en commentaire a cote de la valeur imprimee.
+    IL RESTE UN TROU CONNU DANS LES ONZE TABLES : la ligne Mage. C est le Mage du livre
+    (p.90), carriere a CINQ niveaux du lot 2, et non le Wizard du Rulebook - le livre
+    distingue explicitement les deux p.60. La fourchette est laissee en commentaire dans
+    chaque ethnie, a rebrancher en meme temps que la carriere.
+    A NOTER, non fait volontairement : DATA_RANDOM_SPECIE n a pas ete touche. Ces onze
+    ethnies s obtiennent par choix, pas par tirage d espece.
+
+    CE QUI ETAIT PREVU POUR CE LOT :
+      - 11 blocs <Specie> HELFG-RACE_* : Caledor, Ellyrion, Avelorn, Saphery, Eataine,
+        Tiranoc, Nagarythe, Chrace, Cothique, Yvresse, Sea Elf. Ethnic = RULES-SPECIE_HELF,
+        SUBCHAPTER_ATTR recopie de RULES-RACE_HELF (le livre dit "Roll Attributes as any
+        Elf"), competences et talents propres a chacun, et SUBCHAPTER_CAREER porte par
+        chaque ethnie - pas de <Rule>, pas de DATA_CAREER_ROLL.
+      - 1 talent nouveau : Uncouth Uranai (Sea Elf).
+      - une quinzaine de declarations combinees pour les choix "X or Y" des talents
+        d espece (Commanding Presence or Resolute, Animal Affinity or Orientation,
+        Attractive or Artistic, Coolheaded or Savvy, Dealmaker or Savvy, Schemer or Sixth
+        Sense, Coolheaded or Hatred (Dark Elves), Tenacious or Sixth Sense, Coolheaded or
+        Tenacious, Rover or Sixth Sense, Hardy or Hunter s Eye, Sea Legs or Hardy,
+        Orientation or Sixth Sense, Coolheaded or Stout-hearted, Resolute or Implacable,
+        Second Sight or Strong-minded, Second Sight or Sixth Sense, Acute Sense (Sight) or
+        Bookish, Old Salt or Sea Legs) - a dedoublonner, plusieurs reviennent.
+      - la table p.59 : 44 carrieres x 11 ethnies, une fois les colonnes eclatees.
+
+    DEUX ERRATA DU LIVRE TROUVES EN CONTROLANT LA TABLE p.59 (methode du paragraphe 5 de
+    CONTEXT.md : couverture 01-100 et absence de chevauchement, colonne par colonne).
+    Les cinq colonnes couvrent bien 01-100 sans trou, mais deux chevauchements :
+      colonne Outer Kingdoms : Guard "89-91" et Knight "91-92" se disputent le 91.
+        Dans les quatre autres colonnes, Guard et Knight prennent deux valeurs chacun et
+        Cavalryman s arrete a 88 ; la lecture la plus probable est donc GUARD 89-90.
+      colonne Avelorn : Scholar "13-19" et Artisan "18-21" se disputent le 18 et le 19.
+        Scholar prend 2 a 4 valeurs dans les autres colonnes, jamais 7, et Physician
+        s arrete a 12 ; la lecture la plus probable est donc SCHOLAR 13-17.
+    A ARBITRER PAR NONO avant la saisie - ce sont des hypotheses de lecture, pas des
+    certitudes.
+  - les carrieres marquees d une * dans cette table (Servant, Villager, Huffer, Stevedore)
+    ne sont pas normalement accessibles aux Hauts Elfes : une nuance a porter quelque part.
+  - "ADAPTING CAREERS" p.60-62 : le livre donne des substitutions sur les carrieres du
+    Rulebook jouees par des Hauts Elfes (exemple releve : le Pit Fighter elfe remplace
+    Dirty Fighting par Feint au niveau 1). C est le meme mecanisme que
+    DATA_SPECIE_CAREER_CHOICE / DATA_CAREER_SUBCHOICE, a inventorier.
+
+=========================================================================
+BUG TROUVE LE 30/08 : TypSpell EST UNE ENUMERATION FERMEE, ET "Ritual" N Y EST PAS
+=========================================================================
+NON CORRIGE. Trouve en cherchant quel TypSpell donner aux sorts de Haute Magie.
+
+Le champ TypSpell n est PAS un libelle libre. chargeconstantes.pas l.498-503 declare six
+valeurs et six seulement :
+     TypeSortBenediction = 'Blessing'      TypeSortArcane  = 'Arcane Magic'
+     TypeSortMiracle     = 'Miracle'       TypeSortCouleur = 'Domain Magic'
+     TypeSortMineur      = 'Minor Magic'   TypeSortChaos   = 'Chaos Magic'
+Or la base contient 17 sorts en TypSpell "Ritual" - les rituels de Winds of Magic saisis le
+29/08. "Ritual" n apparait NULLE PART dans le code Pascal. Deux consequences concretes :
+
+ 1. XpSortCout (winpersonnage.pas l.1024) calcule le cout en XP par une cascade de tests
+    sur les six valeurs. Un "Ritual" n en satisfait aucune, donc AUCUNE BRANCHE N AFFECTE
+    CoutXp - et CoutXp est declaree "CoutXp: Integer;" SANS INITIALISEUR, contrairement aux
+    cinq autres locales de la fonction qui portent toutes "= 0". La valeur retournee est
+    donc indeterminee, pas nulle.
+ 2. ButtonFabricationClick (winpersonnage.pas l.732) ouvre la fenetre de FABRICATION quand
+    la ligne selectionnee n est PAS un sort, le test etant "not InList(cellule, les six
+    valeurs)". Une ligne de rituel passe ce test : le programme la prend pour un objet et
+    propose de la fabriquer.
+
+A VERIFIER PAR NONO sur un personnage portant un rituel, puis a arbitrer : soit "Ritual"
+et "High Magic" rejoignent l enumeration et les cascades (code), soit les rituels
+retombent sur une valeur existante (donnee). Les deux endroits ci-dessus ne sont peut-etre
+pas les seuls : chercher toutes les occurrences de TypeSort dans winpersonnage.pas.
+
+=========================================================================
+LES TALENTS ET LA COMPETENCE NOUVEAUX DE HIGH ELF PLAYER S GUIDE (p.83 et suivantes)
+=========================================================================
+Releve complet, pour le lot 2. Aucun n existe en base.
+  Skill  Channelling (Qhaysh) .... p.83  (WP) advanced, unique. Requise pour High Magic.
+                                        Contrainte propre : on ne peut jamais avoir plus
+                                        d avances en Qhaysh que dans chacun des huit vents.
+  Talent Blessed by Isha .......... p.83  Max 1. Reserve aux Elfes. Ouvre High Magic.
+  Talent High Magic ............... p.83  PAS DE LIGNE "Max:" IMPRIMEE - a verifier sur le
+                                        PDF. Exige Channelling (Qhaysh) + Blessed by Isha.
+                                        Porte sa propre grille de cout en XP.
+  Talent Lileath s Blessing ....... p.83  Max Bonus d Initiative. Tests: Channelling (Qhaysh)
+  Talent Cadai Meditation ......... p.101
+  Talent Mind over Body ........... p.101 Max 3
+  Talent Eye of the Storm ......... p.105 Max 3
+  Talent Sanctuary of the Mind .... p.111 Max 3
+  Talent Blood of Aenarion ........ p.51  Talent d origine, pas de carriere - hors lot 2.
+  Talent Martial Arts / Sword-dancing ... p.68, DEJA FAITS dans le lot 1.
+
+"Tower of Memories" : RESOLU par Nono, c est RULES-T0155, deja en base. Je l avais cherche
+dans les blocs "New Talent" DU LIVRE alors que c est un talent DU RULEBOOK que le livre se
+contente d appeler. Meme famille d erreur que les tables de carriere de Middenheim et de
+Lustria : quand une donnee n est pas la ou je regarde, l hypothese par defaut est "elle est
+ailleurs", et le premier "ailleurs" a essayer est la BASE, pas une autre page du livre.
+
+INVENTAIRE COMPLET DU LOT 2, mesure le 30/08 sur les 43 talents cites par les 4 carrieres :
+  A CREER - 7 talents definis par le livre :
+     Blessed by Isha, High Magic, Lileath s Blessing, Cadai Meditation, Mind over Body,
+     Eye of the Storm, Sanctuary of the Mind
+  FAIT le 30/08 - 1 competence : Channelling (Qhaysh) = RULES-COMPFOCAL_QHAYSH, deja
+     declaree dans BOOK_HIGH_ELF_PLAYERS_GUIDE.Xml bien qu aucune carriere du lot 1 ne
+     l appelle, parce que le talent High Magic en depend.
+  A CREER - 1 specialisation de talent : Savant (Magic) -> RULES-T0134_MAGIE
+  RABATTEMENTS SUR L EXISTANT - VALIDES PAR NONO LE 30/08, a appliquer tels quels :
+     "Arcane Magic (Any Arcane Lore)" -> RULES-T0088_* "Arcane Magic (Any)". Simple
+        variante de formulation du livre.
+     "Trade (Smith)" ............ -> RULES-COMPMETIER_FORGE  Trade (Blacksmith)
+     "Craftsman (Smith)" ........ -> RULES-T0092_FORGE        Craftsman (Blacksmith)
+     "Master Tradesman (Smith)" . -> RULES-T0157_FORGE        Master Tradesman (Blacksmith)
+        La base dit BLACKSMITH et les trois membres de la famille miroir existent deja.
+        WFRP n a pas de specialisation "Smith" distincte ; le livre abrege, sans doute par
+        echo au titre Smith-priest. Creer un quatrieme jeu ferait un doublon de plus dans
+        une famille qu on venait justement de normaliser le 24/08.
+  Les 33 autres talents cites existent deja et se resolvent sans ambiguite.
+
+=========================================================================
+BUG LATENT ET LIMITE STRUCTURELLE : LES CARRIERES A PLUS DE 4 NIVEAUX
+=========================================================================
+Constate le 30/08 en preparant l integration de High Elf Player s Guide. NON CORRIGE.
+La couche donnee est deja generique : ChercheMaxMetierNiveau() existe et
+ChercheMetierNiveau(Code, Niveau) cherche par numero de niveau explicite. Ce sont les
+COUCHES D AFFICHAGE qui sont calibrees pour 4.
+
+  winpersonnage.pas .... CORRECTION DU 30/08 : j avais ecrit "rien a faire", c est FAUX.
+                         Sa liste d IMAGES est bien prete (SetLength(ColorList, 8), boucle
+                         0 to 7, chaque acces garde par "ImageIndex < ListImage.Count"),
+                         mais l.1435 pose "TabNiveau.RowCount := 5" - ligne 0 d entete plus
+                         quatre niveaux - et l.2989 ecrit
+                         "TabNiveau.Cells[2, PMetierNiveau.NiveauMetier]", c est-a-dire que
+                         LE NUMERO DE NIVEAU SERT D INDICE DE LIGNE. Un niveau 5 ecrit donc
+                         en ligne 5 d une grille qui n en a que 5 (0 a 4) : hors bornes.
+                         C est le cinquieme site du niveau 5, et le plus direct.
+                         A noter au passage, consequence utile : une carriere qui commence
+                         au niveau 3 ne plante pas, elle laisse simplement les lignes 1 et 2
+                         vides.
+  pdfmetier.pas    l.89  SetLength(ColorList, 5) alors que la boucle juste dessous va
+                         "1 to ChercheMaxMetierNiveau" -> ECRITURE HORS BORNES des le
+                         premier metier a 5 niveaux. C est le plus dangereux des quatre.
+  winmetier.pas    l.852 "if NvS in ['1','2','3','4']" -> le niveau 5 tombe dans le else
+                         et s affiche en gris.
+  winraces.pas     l.587 idem.
+  wincreation.pas  l.373 SetLength(ColorList, 5) + boucle "0 to 4".
+
+ET UN CINQUIEME POINT, QUI N EST PAS UNE CONSTANTE A CHANGER : pdfmetier.pas dessine la
+grille du schema d avance avec une GEOMETRIE CALIBREE POUR 4 LIGNES - "For Ind := 0 to 5 do
+DrawLine", positions en "(Nv-1)*4.7", et "FinAttribut := 261.15-HautAttribut - ((3)*4.7)".
+Une cinquieme ligne deborderait du cadre. C est de la mise en page a refaire.
+
+IMAGES : PICTURES\NIV\5.png, 6.png et 7.png EXISTENT mais font 164 octets - ce sont des
+placeholders, pas de vraies icones de niveau.
+
+=========================================================================
+CONCEPTION PROPOSEE PAR NONO LE 30/08 : ICONES DE NIVEAU PAR ETHNIE
+=========================================================================
+Constat de depart : les icones de niveau du livre High Elf ne sont pas celles des autres
+livres. Le schema d avance des Elfes utilise des glyphes propres (symboles planetaires
+colores), pas les icones generiques.
+
+PROPOSITION : un repertoire generique (NIV) et la possibilite, pour l ethnie, de designer
+un repertoire particulier (NIV_HELF par exemple) via une option dans la declaration de
+l ethnie. Option absente = on cherche dans NIV.
+
+CE QUI PLAIDE POUR : LE CODE A DEJA CE PATRON. CheminRaceImage() dans chargerace.pas
+resout les images d ethnie via ConstCheminImageRace = '\DATABASE\BOOKS\%BOOK%\PICTURE\
+SPECIE\', ou %BOOK% (ConstLivre) est substitue par le livre de l ethnie. Les icones de
+niveau sont les DERNIERES images encore figees sur un repertoire unique
+(ConstCheminImageNiveau = '\PICTURES\NIV\').
+
+TROIS POINTS A TRANCHER AVANT DE CODER :
+
+1. ETHNIE OU LIVRE ? Les icones de niveau sont dessinees PAR CARRIERE, et une carriere
+   n est pas liee a une seule ethnie. Dans WinMetier l arbre est carriere -> niveaux, sans
+   aucun contexte d ethnie ; pdfmetier genere une fiche de carriere, sans ethnie non plus.
+   Et le Smith-priest of Vaul est declare pour DEUX ethnies ("High Elf, Wood Elf").
+   Trois options :
+     (a) option sur l ethnie comme propose, et repli pur et simple sur NIV partout ou
+         l ethnie n est pas connue (WinMetier et la fiche PDF de carriere gardent donc les
+         icones generiques). Simple, jamais ambigu.  <- la plus sure
+     (b) option sur l ethnie, et dans WinMetier on la resout via les ethnies qui donnent
+         acces a la carriere : marche quand elles sont d accord, ambigu sinon.
+     (c) option sur le LIVRE, comme les images d ethnie le sont deja : jamais ambigu, mais
+         faux pour un livre melant carrieres elfiques et humaines. High Elf Player s Guide
+         est entierement elfique, donc ca marcherait ici et pas forcement ailleurs.
+
+2. LA TImageList EST CHARGEE UNE SEULE FOIS, a l ouverture de la fenetre, et les grilles et
+   l arbre stockent LE NUMERO DE NIVEAU comme index dans cette liste
+   (ImageIndex := StrToIntDef(Grid.Cells[...], -1)). On ne peut donc pas se contenter de
+   changer un chemin : il faut soit recharger la liste a chaque changement d ethnie, soit
+   charger LES DEUX jeux dans la meme liste et decaler l index (0-7 generique, 8-15
+   elfique). La seconde solution est plus stable mais impose que la cellule porte l index
+   decale, plus le numero de niveau brut.
+
+3. CONVENTION DU PIXEL [1,1] A RESPECTER. ChargeImageArrayColor() prend la couleur du cadre
+   dans le pixel en haut a gauche de l icone. Toute image deposee dans NIV_HELF doit suivre
+   cette convention, sinon les cadres de l arbre seront faux.
+
+CE CHANTIER NE BLOQUE PAS L INTEGRATION DU LIVRE : le lot 1 peut se faire avec les icones
+generiques, comme tous les autres livres aujourd hui.
+
+CHANTIER TERMINE LE 30/08/2026 ET VALIDE PAR NONO. Le detail complet - conception, ordre de
+resolution, les trois pieges de chemins de dessin paralleles, et les trois tests de
+validation - est passe dans CONTEXT.md section 2.21, ou est sa place durable.
+
+CE QUI RESTE, ET QUI N EST PAS BLOQUANT :
+  pdfmetier.pas l.92, 250, 285 : trois chargements d icone de niveau encore en dur. Le PDF
+  de metier connait le metier, donc CheminNiveauImageMetier s applique directement. Les
+  icones de CLASSE (winmetier l.835, pdfmetier l.179) ne sont PAS concernees.
+
+A NOTER POUR PLUS TARD, decouvert en cours de route et non traite : ce projet a beaucoup de
+VARIABLES GLOBALES D UNITE portant le meme nom d une fenetre a l autre - Node, Bitmap,
+Path, ListImage, TextWidth, FrameRect, ColorLoc... Tant que toutes les fenetres s en
+servent pour la meme chose au meme moment, ca tient ; des qu une donnee devient
+contextuelle, ca casse - c est exactement ce qui est arrive a WinCreation. Un inventaire de
+ces globales partagees vaudrait la peine, un jour, AU CALME et sans rien corriger dans la
+foulee.
+
+=========================================================================
+DEUX POINTS TRANCHES PAR LE PDF LE 30/08
+=========================================================================
+1. LE TALENT High Magic N A PAS DE LIGNE "Max:" - ce n est pas un defaut d extraction, le
+   livre ne l imprime pas. Et le bloc commence par une phrase amputee : "Channelling
+   (Qhaysh) Skill and Blessed by Isha Talent can take this Talent", ou il manque
+   visiblement "Only characters with the". C est une coquille d edition. Le talent est
+   manifestement a niveaux ("your level in High Magic is added to the Overcasting SL"),
+   mais le livre ne dit pas jusqu ou. A ARBITRER au lot 2.
+2. LES DEUX ERRATA DE LA TABLE p.59 SONT CONFIRMES sur le PDF, qui imprime bien
+   Guard "89-91" et Knight "91-92" en colonne Outer Kingdoms (le 91 attribue deux fois),
+   et Scholar "13-19" et Artisan "18-21" en colonne Avelorn (18 et 19 deux fois).
+   L extraction TXT etait fidele : ce sont de vraies erreurs du livre. Les corrections
+   appliquees dans le XML (Guard 89-90, Scholar 13-17) restent les lectures les plus
+   probables, pas des certitudes.
+
+=========================================================================
+INVENTAIRE DU REPERTOIRE PDF_TEXTE - fait le 29/08/2026
+=========================================================================
+Nono a depose l export TXT de tous ses PDF V4 : plus de 200 fichiers, 40 Mo.
+LIRE CE CORPUS EN ENTIER EST HORS DE PORTEE (de l ordre de dix millions de jetons).
+Ce n est pas necessaire : toutes les revues du 29/08 se sont faites par recherche ciblee,
+sans jamais ouvrir un livre en entier. La taille d un fichier ne coute rien tant qu on ne
+le lit pas.
+
+CROISEMENT AVEC LA BASE : 10 des livres presents sont deja modelises, 57 ne le sont pas.
+
+TRI PAR CONTENU, obtenu en comptant les marqueurs de regles (Career Path, Advance Scheme,
+profils 2d10+, Trappings) sans lire les fichiers. Les livres qui apportent des DONNEES
+JOUABLES, par ordre de richesse :
+
+  Nations of Mankind ............ 30 schemas d avance, 127 trappings - le plus gros
+                                  gisement de carrieres du lot, et de loin
+  Dwarf Player s Guide .......... 10 carrieres completes
+  Deft Steps Light Fingers ...... 9 carrieres + 5 profils d espece
+  High Elf Player s Guide ....... 9 carrieres
+  Unofficial Grimoire 1.2 ....... 5 carrieres, probablement des sorts en nombre
+  Princes of Ulthuan 1.2 ........ 4 carrieres
+  Aristocracy of the Night ...... 60 profils 2d10+ (especes vampiriques), 0 carriere
+  Kings of the Dead 1.1 ......... 2 carrieres + 10 profils
+  A Guide to Cannons ............ 1 carriere (Gunner Advance Scheme, verifiee)
+  Initiations and Cult Skills ... 1 carriere (Anchorite Advance Scheme, verifiee)
+  Parravonese, Strigany, and Signaller Career . 1 carriere (8 Ko, tres petit, verifiee)
+  Wood Elf Wardancer Career ..... 1 carriere (4 Ko, tres petit)
+
+CORRECTION DU 30/08/2026 - TROIS ERREURS DANS CE TRI, TROUVEES EN VOULANT L UTILISER
+------------------------------------------------------------------------------------
+Le tri ci-dessus a ete fait en COMPTANT le marqueur "Career Path", sans regarder ce qu il y
+avait autour. Trois livres etaient donc mal classes ; ils n apportent AUCUNE carriere :
+  Power Behind the Throne Companion - ses 2 "Career Path" sont dans des FICHES DE
+        PERSONNAGE PRE-TIREES (ligne "Career: Wizard   Player:   Career Path: Wizard").
+  The Imperial Zoo - ses 6 occurrences sont du meme type (fiches de PNJ).
+  Lords of Stone and Steel - son unique occurrence est dans de la prose
+        ("using the normal Career Path").
+LECON, a ajouter aux regles de methode : un marqueur COMPTE n est pas un marqueur LU. Pour
+une decision d integration, sortir toujours les 10 lignes de contexte autour des marqueurs
+avant de conclure - ca ne coute presque rien et ca evite de lancer un chantier sur du vide.
+Les comptes des fanbooks ci-dessus n ont PAS ete reverifies de cette facon ; seuls les
+livres officiels et les tres petits l ont ete.
+
+  SANS AUCUNE CARRIERE ni espece : Ubersreik Adventures 1/2/3, A Guide to Ubersreik,
+  Altdorf - Crown of the Empire, Empire In Ruins Companion, Temple of Spite, Reikland
+  Miscellanea, Tribes and Tribulations, Sea Wardens of Cothique, Taverns of the Old World,
+  Hirelings of the Old World, Patrons of the Old World I et II, Shrines of Sigmar,
+  Sullasara s Spells, Conversion Tables, Unofficial Bestiary, Unofficial Character Pack,
+  et les aventures. Leurs "Trappings" sont des profils de PNJ, pas des carrieres jouables.
+
+STATUT OFFICIEL OU FAN, determine par la mention legale (les fanbooks V4 passent par le
+programme Community Content, qui impose une mention ; les livres Cubicle 7 portent leur
+copyright complet). Utile car la base a deja un champ <OFFICIAL> - 1 officiel, 2 fan.
+
+  OFFICIELS parmi les gisements, apres la correction du 30/08 : il n en reste que TROIS -
+  Dwarf Player s Guide (10 carrieres), High Elf Player s Guide (9), Deft Steps Light
+  Fingers (9). The Imperial Zoo, Power Behind the Throne Companion et Lords of Stone and
+  Steel sont officiels mais n apportent pas de carriere.
+  Detail utile pour l integration : Dwarf Player s Guide et High Elf Player s Guide ne
+  contiennent AUCUN profil "2d10+", donc aucune nouvelle espece - leurs carrieres se
+  rattachent a des ethnies deja en base (Nain, Haut Elfe). Deft Steps Light Fingers, lui,
+  a 5 profils 2d10+ : il ajoute des especes, et est donc le plus lourd des trois.
+
+  FANBOOKS averes, mention Community Content trouvee : Aristocracy of the Night,
+  Kings of the Dead, Wood Elf Wardancer Career, Princes of Ulthuan, Unofficial Bestiary,
+  Unofficial Grimoire, Unofficial Character Pack. Ils rejoignent Green iz Best et Lords of
+  Naggaroth, deja marques OFFICIAL=2.
+
+  SANS AUCUNE MENTION, statut PROBABLE mais NON PROUVE - l absence peut aussi venir de
+  l export TXT si la page de copyright etait une image :
+    Nations of Mankind ...... ouvre sur une citation encyclopedique, sans page de titre ni
+                              copyright. Ressemble a une compilation personnelle.
+                              IMPORTANT : c est le plus gros gisement du lot (30 carrieres)
+                              et il est vraisemblablement NON OFFICIEL.
+    Parravonese, Strigany, and Signaller Career ... s annonce "Variant Humans for WFRP 4e",
+                              document d une page fait par un joueur.
+    A Guide to Cannons ...... mise en page soignee, aucune mention d editeur.
+    Initiations and Cult Skills, Revised Critical System (beta) ... idem.
+
+CE QUE CA COUTE, par activite :
+  * inventaire, recherche ciblee, tri par marqueurs : negligeable, meme sur 40 Mo
+  * revue d un livre deja modelise : un lot moyen (voir les huit revues du 29/08)
+  * INTEGRATION d un livre absent : bien plus lourd qu une revue - il faut creer le
+    fichier XML, les carrieres, les especes, les tables. A ne lancer qu un par un.
+
+SUGGESTION D ORDRE, REVUE LE 30/08 : les deux tres petits d abord (Wood Elf Wardancer,
+Parravonese/Strigany/Signaller) pour caler la methode a moindre frais - mais ce sont des
+fanbooks. Si on veut du strictement officiel, commencer par HIGH ELF PLAYER S GUIDE
+(9 carrieres, aucune espece a creer, 600 Ko) : c est le plus simple des trois officiels,
+la structure "Advance Scheme + Career Path" y est reguliere, et il se raccroche a une
+ethnie deja en base. Dwarf Player s Guide ensuite (meme forme, 10 carrieres), Deft Steps
+Light Fingers en dernier des trois (il ajoute 5 especes). Nations of Mankind reste le plus
+riche mais aussi le plus lourd, et il est vraisemblablement non officiel.
+
+=========================================================================
 REVUES DE LIVRE - CE QUI RESTE
 =========================================================================
 FAITES : Up in Arms, Sea of Claws, Archives of the Empire I, II et III, Winds of Magic,
@@ -614,7 +1220,15 @@ ARBITRAGES OUVERTS
 =========================================================================
 CHANTIERS DE FOND, PAS ENCORE OUVERTS
 =========================================================================
-1. PREFIXER LES CODES <Quality> PAR LEUR LIVRE. Le champ stocke les codes SANS prefixe, donc la
+1. PREFIXER LES CODES <Quality> PAR LEUR LIVRE. [MESURE LE 29/08 - risque theorique]
+   Aucune collision aujourd hui : les 55 codes sont declares chacun par un seul livre.
+   Le chantier reste possible mais n est plus urgent. Cout mesure : deux fonctions a
+   adapter (GetAllArmeBonusLibelle, deja reecrite, et son jumeau armure), plus une passe
+   sur les donnees. ChercheArmeBonus / ChercheArmureBonus acceptent DEJA le code prefixe,
+   elles passent par CompareRechercheValeur. Alternative bon marche : un controle
+   d unicite globale a chaque ajout, qui supprime le risque sans rien changer.
+
+   ANCIEN LIBELLE : Le champ stocke les codes SANS prefixe, donc la
    numerotation WEAPB est un espace de noms GLOBAL : deux livres peuvent se marcher dessus, ce
    qui est deja arrive (NAGGA-WEAPB31 contre UPINA-WEAPB31, renumerote le 23/08). Tant que ce
    n'est pas fait, TOUT nouveau BonusMalus doit prendre le premier numero libre AU NIVEAU DE TOUS
@@ -978,6 +1592,12 @@ LOTS, par bloc parent :
   [FAIT 28/08] Attribut ...... 15   p.34-35
   [FAIT 28/08] Craftsmanship . 8    p.292-293, libelles compris
   [FAIT 28/08] Specie ........ 5    p.25-29, premier paragraphe
+
+A ARBITRER, SORTI DU CHANTIER DES QUALITES :
+  * LES SUPPLEMENTS NE SONT PAS TRADUITS. BOOK_RULESBOOK_FRANCAIS.Xml ne contient aucun
+    identifiant UPINA-, SEAOF-, ARCH3-... Seul le Rulebook a une version francaise, donc
+    un joueur en francais voit les huit supplements en anglais. Constate le 29/08 en
+    cherchant a traduire quatre qualites d armes. Chantier entier, lie au gel du francais.
 
 ARBITRAGES OUVERTS SORTIS DE CE CHANTIER :
   * [TRANCHE 28/08] RULES-WEAPB29 devient "Ablaze" : c etait la note de bas de tableau

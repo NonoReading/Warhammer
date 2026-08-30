@@ -111,6 +111,7 @@ type
     procedure FormCreate({%H-}Sender: TObject);
     procedure ChargerImage();
     Procedure ChargeImageNiveau(Niveau: Integer);
+    Procedure ChargeImagesNiveau();
     procedure LibMetierDblClick({%H-}Sender: TObject);
     procedure LibRaceDblClick({%H-}Sender: TObject);
     procedure RecapAttributSelectEditor({%H-}Sender: TObject; {%H-}aCol, {%H-}aRow: Integer;
@@ -261,6 +262,13 @@ var
   // Pour les images
   ColorLoc:                      TColor;
   ColorList:                     array of TColor;
+  // ListImage et Path etaient absents d'ici : non declares, ils se resolvaient sur les
+  // globales de WinRaces (derniere unite de la clause uses a les declarer), si bien que
+  // cette fenetre remplissait la liste d'images d'une AUTRE fenetre. Sans consequence tant
+  // que tout le monde chargeait les memes icones generiques ; devenu faux le jour ou les
+  // icones dependent du livre. Declares ici le 30/08/2026.
+  ListImage:                     TImageList;
+  Path:                          String;
 
   // Race
   RaceEnCours:                   String;
@@ -370,10 +378,7 @@ procedure TWinCreations.FormCreate(Sender: TObject);
     EditMetierResultat.MaxValue  := 100;
 
     // charges les images des niveaux
-    SetLength(ColorList, 5);
-    ListImage := TImageList.Create(nil);
-    For IndTab := 0 to 4 Do
-      ChargeImageNiveau(IndTab);
+    ChargeImagesNiveau();
 
     if FileExists(GetCurrentDir+ConstCheminScroll) then
        begin
@@ -472,6 +477,8 @@ procedure TWinCreations.ButtonMetierSelectionnerClick(Sender: TObject);
         PMetier          := chercheMetier(ChoixWinMetierRace);
         MetierEnCours    := PMetier.CodeMetier;
         MetierLibEnCours := PMetier.Libelle;
+        // Le metier vient de changer : les icones de niveau peuvent en dependre.
+        ChargeImagesNiveau();
         AfficheImageMetier();
         UpdateSheetMetier(true);
       end;
@@ -497,6 +504,8 @@ procedure TWinCreations.ButtonMetierSousMetierSelectionnerClick(Sender: TObject)
         PMetier          := chercheMetier(ChoixWinMetierRace);
         MetierEnCours    := PMetier.CodeMetier;
         MetierLibEnCours := PMetier.Libelle;
+        // Le metier vient de changer : les icones de niveau peuvent en dependre.
+        ChargeImagesNiveau();
         AfficheImageMetier();
         UpdateSheetMetier(true);
       end;
@@ -517,6 +526,9 @@ procedure TWinCreations.ButtonMetierSousMetierValiderClick(Sender: TObject);
     begin
       LastCheckMetierSousMetierResul := EditMetierSousMetierResultat.Value;
       MetierEnCours := ResultMetierSousMetier(MetierEnCoursPrincipal, LastCheckMetierSousMetierResul, LivresPersonnages);
+      // Idem. Si MetierEnCours porte encore un choix multiple, la resolution ne trouvera
+      // pas de metier et retombera sur l'ethnie : sans effet, pas d'erreur.
+      ChargeImagesNiveau();
       if pos(SeparateurMulti,MetierEnCours) = 0 then
         begin
           PMetier          := chercheMetier(MetierEnCours);
@@ -930,13 +942,32 @@ procedure TWinCreations.TabSelectEditor(Sender: TObject; aCol,
     Editor := nil;
   end;
 
+// Recharge icones et couleurs de niveau pour le couple metier/ethnie du moment. Les deux
+// changent en cours de creation, dans les deux sens : cette procedure est donc appelee a
+// chaque fois que l'un des deux est fixe.
+procedure TWinCreations.ChargeImagesNiveau();
+  var
+    IndNiv: Integer;
+  begin
+    if not Assigned(ListImage) then
+      ListImage := TImageList.Create(nil);
+    ListImage.Clear;
+    SetLength(ColorList, 0);
+    SetLength(ColorList, 5);
+    For IndNiv := 0 to 4 Do
+      ChargeImageNiveau(IndNiv);
+  end;
+
 procedure TWinCreations.ChargeImageNiveau(Niveau: Integer);
   // pour afficher les images des niveaux
   begin
       Picture  := TPicture.Create;
       Bitmap   := TBitmap.Create;
       try
-        Path   :=GetCurrentDir+ConstCheminImageNiveau+InttoStr(Niveau)+'.PNG';
+        // Meme resolution que la fiche de personnage : le metier d'abord - sa
+        // declaration prouve que son livre est charge - puis l'ethnie, puis sa race,
+        // puis \PICTURES\NIV\. Voir CheminNiveauImageMetierRace dans ChargeMetier.
+        Path   := CheminNiveauImageMetierRace(MetierEnCours, RaceEnCours, Niveau);
         Picture.LoadFromFile(Path);
         Bitmap.Assign(Picture.graphic);
         ListImage.Add(Bitmap, nil); // Ajout de l'image au TImageList
@@ -1867,6 +1898,8 @@ procedure TWinCreations.TabRaceResultat(Resul: Integer);
           begin
             RaceEnCours              := TabRace.Cells[1, indTab];
             RaceLibEnCours           := TabRace.Cells[2, indTab];
+            // L'ethnie vient de changer : elle intervient dans la resolution des icones.
+            ChargeImagesNiveau();
             TabRace.Cells[4, IndTab] := '1';
             TabRace.Invalidate;
             Break;
@@ -1878,6 +1911,8 @@ procedure TWinCreations.TabRaceResultat(Resul: Integer);
         PRace          := chercheRace(ChoixWinRace);
         RaceEnCours    := Prace.CodeRace;
         RaceLibEnCours := PRace.Libelle;
+        // Idem.
+        ChargeImagesNiveau();
       end;
   end;
 

@@ -3444,6 +3444,30 @@ This Flaw is the Infected Creature Trait (WFRP, page 340) applied to a weapon, a
 <Short language="ENGLISH">"Festering Wound on Wound loss"</Short>
 <Modifier>"-"</Modifier>
 </BonusMalus>
+<BonusMalus id="WEAPB30/WEAPB34">
+<Description language="ENGLISH">"Hack or Trip"</Description>
+<Explanation language="ENGLISH">"Qualites alternatives : le porteur choisit laquelle s applique. Le livre ecrit ce choix en toutes lettres pour cette arme. Voir chaque qualite pour son effet."</Explanation>
+<Short language="ENGLISH">"Hack or Trip"</Short>
+<Modifier>"+"</Modifier>
+</BonusMalus>
+<BonusMalus id="WEAPB30/WEAPB12">
+<Description language="ENGLISH">"Hack or Impale"</Description>
+<Explanation language="ENGLISH">"Qualites alternatives : le porteur choisit laquelle s applique. Le livre ecrit ce choix en toutes lettres pour cette arme. Voir chaque qualite pour son effet."</Explanation>
+<Short language="ENGLISH">"Hack or Impale"</Short>
+<Modifier>"+"</Modifier>
+</BonusMalus>
+<BonusMalus id="WEAPB12/WEAPB32">
+<Description language="ENGLISH">"Impale or Slash"</Description>
+<Explanation language="ENGLISH">"Qualites alternatives : le porteur choisit laquelle s applique. Le livre ecrit ce choix en toutes lettres pour cette arme. Voir chaque qualite pour son effet."</Explanation>
+<Short language="ENGLISH">"Impale or Slash"</Short>
+<Modifier>"+"</Modifier>
+</BonusMalus>
+<BonusMalus id="WEAPB30/WEAPB12/WEAPB04">
+<Description language="ENGLISH">"Hack or Impale or Pummel"</Description>
+<Explanation language="ENGLISH">"Qualites alternatives : le porteur choisit laquelle s applique. Le livre ecrit ce choix en toutes lettres pour cette arme. Voir chaque qualite pour son effet."</Explanation>
+<Short language="ENGLISH">"Hack or Impale or Pummel"</Short>
+<Modifier>"+"</Modifier>
+</BonusMalus>
 </DATA_WEAPON_BONUS>
 <DATA_SPELL>
 <Sort id="UPINA-MIRAC_MYRMIDIA_07">

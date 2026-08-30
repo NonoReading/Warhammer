@@ -5,7 +5,8 @@ unit ChargeMetier;
 interface
 
 uses
-  Classes, SysUtils, ChargeConstantes, Generics.Collections, ChargeTexte, PdfUtils, FileUtil, Unitcalcul;
+  Classes, SysUtils, ChargeConstantes, Generics.Collections, ChargeTexte, PdfUtils, FileUtil, Unitcalcul,
+  ChargeRace;
 
 Type
   StructureMetier	= Record
@@ -15,6 +16,10 @@ Type
         Description:	String;
         Livre:          String;
         CodeCompetence: String;
+        // Dossier d'icones de niveau propre a ce metier, sous \PICTURES\. C'est le seul
+        // recours dans WinMetier, qui affiche un metier sans savoir quelle ethnie le joue.
+        // Vide = dossier generique NIV.
+        DossierNiveau:  String;
   End;
 
   TListMetier = specialize TList<StructureMetier>;
@@ -25,6 +30,9 @@ var
 
 function chercheMetier(CodeMetier :String): StructureMetier;
 Function CheminMetierImage(CodeMetier: String): String;
+Function DossierNiveauMetier(CodeMetier: String): String;
+Function CheminNiveauImageMetier(CodeMetier: String; Niveau: Integer): String;
+Function CheminNiveauImageMetierRace(CodeMetier: String; CodeRace: String; Niveau: Integer): String;
 
 implementation
 
@@ -76,6 +84,43 @@ Function CheminMetierImage(CodeMetier: String): String;
     Result := Res;
   end;
 
+// Dossier declare par un METIER, chaine vide s'il n'en declare pas.
+Function DossierNiveauMetier(CodeMetier: String): String;
+  var
+    PMetier:  StructureMetier;
+  begin
+    Result := '';
+    for PMetier in ListMetier do
+      if CompareRechercheValeur(PMetier.CodeMetier, CodeMetier) then
+        begin
+          Result := Trim(PMetier.DossierNiveau);
+          break;
+        end;
+  end;
+
+// Icone de niveau vue depuis un METIER SEUL. C'est le cas de WinMetier, qui affiche un
+// metier sans savoir quelle ethnie le joue - la branche "Possible species" en liste
+// souvent plusieurs.
+Function CheminNiveauImageMetier(CodeMetier: String; Niveau: Integer): String;
+  begin
+    Result := CheminNiveauDossier(DossierNiveauMetier(CodeMetier), Niveau);
+  end;
+
+// Resolution complete pour une vue qui connait A LA FOIS le metier et l'ethnie, comme la
+// fiche de personnage. LE METIER L'EMPORTE, et la raison n'est pas esthetique : un metier
+// ne declare un dossier que s'il vient d'un livre, et il n'existe que si ce livre est
+// charge. Sa declaration prouve donc que le supplement est actif, ce que l'ethnie seule ne
+// dit pas. Si le metier ne declare rien, on retombe sur l'ethnie, puis sa race, puis le
+// dossier generique.
+Function CheminNiveauImageMetierRace(CodeMetier: String; CodeRace: String; Niveau: Integer): String;
+  var
+    Dossier: String;
+  begin
+    Dossier := DossierNiveauMetier(CodeMetier);
+    if Dossier <> '' then
+      Result := CheminNiveauDossier(Dossier, Niveau)
+    else
+      Result := CheminNiveauImage(CodeRace, Niveau);
+  end;
 
 end.
-

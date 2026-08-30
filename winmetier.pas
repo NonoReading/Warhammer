@@ -128,12 +128,15 @@ implementation
 { TWinMetiers }
 
 // Images
-procedure ChargeImage(Niveau: Integer);
+procedure ChargeImage(Niveau: Integer; CodeMetier: String);
 begin
     Picture  := TPicture.Create;
     Bitmap   := TBitmap.Create;
     try
-      Path   :=GetCurrentDir+ConstCheminImageNiveau+InttoStr(Niveau)+'.PNG';
+      // Le dossier d'icones vient du METIER lui-meme : cette fenetre affiche un metier
+      // sans savoir quelle ethnie le joue. CheminNiveauImageMetier retombe seule sur
+      // \PICTURES\NIV\ si le metier n'a pas de dossier propre.
+      Path   := CheminNiveauImageMetier(CodeMetier, Niveau);
       Picture.LoadFromFile(Path);
       Bitmap.Assign(Picture.graphic);
       ListImage.Add(Bitmap, nil);
@@ -144,6 +147,21 @@ begin
       Bitmap.Free;
     end;
 end;
+
+// Recharge icones et couleurs de niveau pour le metier couramment selectionne. Appelee a
+// l'ouverture (CodeMetier vide -> dossier generique) puis a chaque changement de metier.
+procedure ChargeImagesNiveau(CodeMetier: String);
+  var
+    IndNiv:   Integer;
+  begin
+    if not Assigned(ListImage) then
+      ListImage := TImageList.Create(nil);
+    ListImage.Clear;
+    SetLength(ColorList, 0);
+    SetLength(ColorList, 5);
+    For IndNiv := 0 to 4 Do
+      ChargeImage(IndNiv, CodeMetier);
+  end;
 
 Function TWinMetiers.MetierFiltre(PMetier: StructureMetier):Boolean;
 var
@@ -339,12 +357,7 @@ begin
         TabAttribut.RowHeights[2]    := 1;
 
         // charges les images des niveaux pour l'arbre
-        SetLength(ColorList, 5);
-        ListImage := TImageList.Create(nil);
-        For IndTab := 0 to 4 Do
-          Begin
-            ChargeImage(IndTab);
-          End;
+        ChargeImagesNiveau('');
         TreeViewMetier1.Images := ListImage;
         if FileExists(GetCurrentDir+ConstCheminLogo1) then
          ImageWar.Picture.LoadFromFile(GetCurrentDir+ConstCheminLogo1);
@@ -414,7 +427,10 @@ begin
       // Charger l'image depuis le fichier
       Img := TBGRABitmap.Create;
       try
-        Img.LoadFromFile(GetCurrentDir + ConstCheminImageNiveau + IntToStr(ImageIndex) + '.png');
+        // La bande de caracteristiques ne passe PAS par ListImage : elle recharge le
+        // fichier a chaque dessin. Elle doit donc resoudre le dossier elle-meme, sinon
+        // l'arbre afficherait les glyphes du livre et la bande ceux du dossier generique.
+        Img.LoadFromFile(CheminNiveauImageMetier(MetierEnCours, ImageIndex));
 
         // Récupérer les dimensions de l'image originale
         ImageWidth := Img.Width;
@@ -810,6 +826,11 @@ procedure TWinMetiers.TabMetierSelection(Sender: TObject; aCol, aRow: Integer);
 
       // ajouter la racine
       MetierEnCours   := TabMetier.Cells[1,aRow];
+
+      // Les icones de niveau peuvent etre propres a l'ethnie : on les recharge AVANT de
+      // construire l'arbre et la bande d'attributs.
+      ChargeImagesNiveau(MetierEnCours);
+
       Node            := TreeViewMetier1.Items.Add(nil, TabMetier.Cells[2,aRow]);
       Node.ImageIndex := 0;
       AffMetier.Text  := TabMetier.Cells[2,aRow];

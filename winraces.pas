@@ -120,7 +120,10 @@ begin
     Picture  := TPicture.Create;
     Bitmap   := TBitmap.Create;
     try
-      Path   :=GetCurrentDir+ConstCheminImageNiveau+InttoStr(Niveau)+'.PNG';
+      // Le chemin depend desormais de l'ethnie affichee : une ethnie peut designer son
+      // propre dossier d'icones via <PictureLevel>. CheminNiveauImage retombe toute seule
+      // sur \PICTURES\NIV\ si l'ethnie n'en a pas, ou si l'icone y manque.
+      Path   := CheminNiveauImage(RaceEnCours, Niveau);
       Picture.LoadFromFile(Path);
       Bitmap.Assign(Picture.graphic);
       ListImage.Add(Bitmap, nil); // Ajout de l'image au TImageList
@@ -131,6 +134,22 @@ begin
       Bitmap.Free;
     end;
 end;
+
+// Recharge les icones et les couleurs de niveau pour l'ethnie couramment selectionnee.
+// Appelee a l'ouverture de la fenetre, RaceEnCours etant alors vide - donc dossier
+// generique - puis a chaque changement d'ethnie dans la liste.
+procedure ChargeImagesNiveau();
+  var
+    IndNiv: Integer;
+  begin
+    if not Assigned(ListImage) then
+      ListImage := TImageList.Create(nil);
+    ListImage.Clear;
+    SetLength(ColorList, 0);
+    SetLength(ColorList, 5);
+    For IndNiv := 0 to 4 Do
+      ChargeImage(IndNiv);
+  end;
 
 procedure TWinRace.FormCreate(Sender: TObject);
   begin
@@ -223,10 +242,7 @@ begin
       end;
 
     // charges les images des niveaux pour l'arbre
-    SetLength(ColorList, 5);
-    ListImage := TImageList.Create(nil);
-    For IndTab := 0 to 4 Do
-      ChargeImage(IndTab);
+    ChargeImagesNiveau();
     TreeViewRace.Images := ListImage;
     if FileExists(GetCurrentDir+ConstCheminLogo1) then
      ImageWar.Picture.LoadFromFile(GetCurrentDir+ConstCheminLogo1);
@@ -547,6 +563,11 @@ begin
 
   // ajouter la racine
   RaceEnCours     := TabRace.Cells[2,aRow];
+
+  // Les icones de niveau peuvent etre propres a l'ethnie : on les recharge AVANT de
+  // construire l'arbre, pour que les couleurs de cadre soient celles de cette ethnie.
+  ChargeImagesNiveau();
+
   Node            := TreeViewRace.Items.Add(nil, TabRace.Cells[3,aRow]);
   Node.ImageIndex := 0;
   AffRace.Text    := TabRace.Cells[3,aRow];

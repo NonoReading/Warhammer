@@ -176,6 +176,7 @@ type
   procedure TabDrawCell(Sender: TObject; aCol, aRow: Integer;
     aRect: TRect; aState: TGridDrawState);
   Procedure ChargeImageNiveau(Niveau: Integer);
+  Procedure ChargeImagesNiveau();
   function ChercherValeurParCode(const Chaine: string; const CodeRecherche: string): string;
   Procedure Initialisation();
   Procedure AugmentationAjouteXpMj(TypeDonnee: String);
@@ -1310,12 +1311,7 @@ begin
   MiseEnFormeDesChamp(self);
 
   // charges les images des niveaux
-  SetLength(ColorList, 8);
-  ListImage := TImageList.Create(nil);
-  For I := 0 to 7 Do
-  Begin
-      ChargeImageNiveau(I);
-  End;
+  ChargeImagesNiveau();
 
   // Logo
   if FileExists(GetCurrentDir+ConstCheminLogo1) then
@@ -1878,7 +1874,11 @@ procedure TWinPersonnages.ChargeImageNiveau(Niveau: Integer);
       Picture  := TPicture.Create;
       Bitmap   := TBitmap.Create;
       try
-        Path   :=GetCurrentDir+ConstCheminImageNiveau+InttoStr(Niveau)+'.PNG';
+        // Le metier l'emporte sur l'ethnie : voir CheminNiveauImageMetierRace dans
+        // ChargeMetier. Un metier ne declare un dossier que s'il vient d'un livre, et il
+        // n'existe que si ce livre est charge - sa declaration prouve donc que le
+        // supplement est actif. A defaut : ethnie, puis race, puis \PICTURES\NIV\.
+        Path   := CheminNiveauImageMetierRace(MetierEnCours, RaceEnCours, Niveau);
         Picture.LoadFromFile(Path);
         Bitmap.Assign(Picture.graphic);
         ListImage.Add(Bitmap, nil); // Ajout de l'image au TImageList
@@ -1888,6 +1888,22 @@ procedure TWinPersonnages.ChargeImageNiveau(Niveau: Integer);
         Picture.Free;
         Bitmap.Free;
       end;
+  end;
+
+// Recharge les icones et les couleurs de niveau pour l'ethnie du personnage affiche.
+// Appelee a l'ouverture, RaceEnCours etant alors vide - donc dossier generique - puis a
+// chaque affichage d'un personnage, son ethnie pouvant designer son propre dossier.
+procedure TWinPersonnages.ChargeImagesNiveau();
+  var
+    IndNiv: Integer;
+  begin
+    if not Assigned(ListImage) then
+      ListImage := TImageList.Create(nil);
+    ListImage.Clear;
+    SetLength(ColorList, 0);
+    SetLength(ColorList, 8);
+    For IndNiv := 0 to 7 Do
+      ChargeImageNiveau(IndNiv);
   end;
 
 procedure TWinPersonnages.TabAttributDrawCell(Sender: TObject; aCol,
@@ -2518,6 +2534,11 @@ begin
   MetierNvEnCours  := IntToStr(PersonnageMetier.NiveauMetier);
   PMetier          := ChercheMetier(MetierEnCours);
   LibMetier.Caption:= PMetier.Libelle;
+
+  // Les icones de niveau sont rechargees ICI et pas plus haut : la resolution a besoin du
+  // METIER autant que de l'ethnie, et MetierEnCours n'est connu qu'a partir de cette
+  // ligne. Toujours AVANT que les grilles ne soient remplies et redessinees.
+  ChargeImagesNiveau();
 
   AfficheImageMetier();
 

@@ -443,6 +443,10 @@ Procedure XmlExportBook(Livre: String; Langue: String);
                 XmlContent.Add(XmlLigne(ConstXmlNbSkill5, IntToStr(PRace.NbPoint5)));
               if PRace.NbPoint3 <> 3 then
                 XmlContent.Add(XmlLigne(ConstXmlNbSkill3, IntToStr(PRace.NbPoint3)));
+              // Idem : ecrit seulement si l'ethnie designe son propre dossier d'icones
+              // de niveau, pour ne pas alourdir les dizaines d'ethnies qui prennent NIV.
+              if PRace.DossierNiveau <> '' then
+                XmlContent.Add(XmlLigne(ConstXmlPictureLevel, PRace.DossierNiveau));
               // Attribut de race
               XmlContent.Add(XmlDebut(ConstXmlSousChapitreCarac));
               for PRaceAttribut in ListRaceAttribut do
@@ -521,6 +525,9 @@ Procedure XmlExportBook(Livre: String; Langue: String);
               PCompetence := ChercheCompetence(PMetier.CodeCompetence);
               XmlContent.Add(XmlLigne(ConstXmlCompetence, XmlCreeCodeLivre(PCompetence.Livre, PMetier.CodeCompetence)));
               XmlContent.Add(XmlLigne(ConstXmlClass, PMetier.LibelleGroupe));
+              // Ecrit seulement si le metier designe son propre dossier d'icones de niveau.
+              if PMetier.DossierNiveau <> '' then
+                XmlContent.Add(XmlLigne(ConstXmlPictureLevel, PMetier.DossierNiveau));
 
               // Niveau
               XmlContent.Add(XmlDebut(ConstXmlSousChapitreNiveau));
@@ -1401,6 +1408,9 @@ Procedure XmlImport(FileName: String; OnlyPrimary: Boolean; OnlyCode: Boolean);
                        begin
                       PEspece.Livre      := Livre;
                       PEspece.Libelle    := '';
+                      // Record local reutilise d'une race a l'autre : sans remise a zero,
+                      // une race sans balise heriterait du dossier de la precedente.
+                      PEspece.DossierNiveau := '';
                       PEspece.CodeEspece := RemoveQuotes(UTF8Encode(NodeNv2.Attributes.GetNamedItem(ConstXmlId).NodeValue));
                       PTraduction        := InitTrad(ConstPEspece, PEspece.CodeEspece, '', PEspece.Livre);
 
@@ -1414,6 +1424,8 @@ Procedure XmlImport(FileName: String; OnlyPrimary: Boolean; OnlyCode: Boolean);
                                 Langue              := RemoveQuotes(UTF8Encode(Node.Attributes.GetNamedItem(ConstXmlLanguage).NodeValue));
                                 PTraduction.Libelle := PEspece.Libelle;
                               end;
+                            ConstXmlPictureLevel:
+                              PEspece.DossierNiveau := RemoveQuotes(UTF8Encode(Node.TextContent));
                           end;
 
                           Node := XmlElement(Node.NextSibling);
@@ -1445,6 +1457,10 @@ Procedure XmlImport(FileName: String; OnlyPrimary: Boolean; OnlyCode: Boolean);
                       PRace.Point5   := 5;
                       PRace.NbPoint3 := 3;
                       PRace.NbPoint5 := 3;
+                      // Record local reutilise d'une ethnie a l'autre : sans cette remise
+                      // a zero, une ethnie sans balise <PictureLevel> heriterait du dossier
+                      // de la precedente (meme piege que les fonctions Cherche*, cf 2.17).
+                      PRace.DossierNiveau := '';
                       PTraduction    := InitTrad(ConstPRace, PRace.CodeRace, '', PRace.Livre);
 
                       NodeNv3 := XmlElement(NodeNv2.FirstChild);
@@ -1467,6 +1483,8 @@ Procedure XmlImport(FileName: String; OnlyPrimary: Boolean; OnlyCode: Boolean);
                               PRace.NbPoint5 := StrToIntDef(RemoveQuotes(UTF8Encode(NodeNv3.TextContent)), 3);
                             ConstXmlNbSkill3:
                               PRace.NbPoint3 := StrToIntDef(RemoveQuotes(UTF8Encode(NodeNv3.TextContent)), 3);
+                            ConstXmlPictureLevel:
+                              PRace.DossierNiveau       := RemoveQuotes(UTF8Encode(NodeNv3.TextContent));
                             ConstXmlEthnic:
                               PRace.Espece              := RemoveQuotes(UTF8Encode(NodeNv3.TextContent));
                             ConstXmlSousChapitreCarac:
@@ -1631,6 +1649,8 @@ Procedure XmlImport(FileName: String; OnlyPrimary: Boolean; OnlyCode: Boolean);
                   While Assigned(NodeNv2) do
                     begin
                       PMetier.Livre      := Livre;
+                      // Meme precaution que pour les ethnies et les races.
+                      PMetier.DossierNiveau := '';
                       PMetier.CodeMetier := RemoveQuotes(UTF8Encode(NodeNv2.Attributes.GetNamedItem(ConstXmlId).NodeValue));
                       PTraduction        := InitTrad(ConstPMetier, PMetier.CodeMetier, '', PMetier.Livre);
 
@@ -1654,6 +1674,8 @@ Procedure XmlImport(FileName: String; OnlyPrimary: Boolean; OnlyCode: Boolean);
                               PMetier.LibelleGroupe := RemoveQuotes(UTF8Encode(NodeNv3.TextContent));
                             ConstXmlCompetence:
                               PMetier.CodeCompetence:= RemoveQuotes(UTF8Encode(NodeNv3.TextContent));
+                            ConstXmlPictureLevel:
+                              PMetier.DossierNiveau := RemoveQuotes(UTF8Encode(NodeNv3.TextContent));
                             ConstXmlSousChapitreNiveau:
                               begin
                                 NodeNv4 := XmlElement(NodeNv3.FirstChild);

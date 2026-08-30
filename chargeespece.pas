@@ -23,6 +23,9 @@ Type
 	CodeEspece:	String;
 	Libelle:	String;
 	Livre:		String;
+        // Dossier d'icones de niveau commun a toutes les ethnies de cette race, sous
+        // \PICTURES\. Une ethnie peut le surcharger ; vide = dossier generique NIV.
+        DossierNiveau:	String;
   End;
 
   TListEspece = Specialize TList<StructureEspece>;
