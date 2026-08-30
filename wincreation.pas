@@ -8,7 +8,7 @@ uses
   Classes, SysUtils, Forms, Controls, Graphics, Dialogs, ExtCtrls, Grids,
   ComCtrls, StdCtrls, Spin, Buttons, ChargeConstantes, GlobalFonts, ChargeRace,
   ChargeRegle,
-  Types, ChargeMetier, ChargeRaceMetier, ChargeAttribut, ChargeRaceAttribut,
+  Types, ChargeMetier, ChargeRaceMetier, ChargeAttribut, ChargeRaceAttribut, ChargeMetierNiveau,
   ChargeMetierAttribut, UnitCalcul, ChargeRaceTalent, ChargeTalent,
   ChargeTalentCreation, ChargeRaceCompetence, ChargeCompetence, ChargeRaceCreation,
   ChargeMetierCompetence, ChargeArme, ChargeArmure, ChargeMetierEquipement,
@@ -948,13 +948,18 @@ procedure TWinCreations.TabSelectEditor(Sender: TObject; aCol,
 procedure TWinCreations.ChargeImagesNiveau();
   var
     IndNiv: Integer;
+    MaxNiv: Integer;
   begin
     if not Assigned(ListImage) then
       ListImage := TImageList.Create(nil);
     ListImage.Clear;
     SetLength(ColorList, 0);
-    SetLength(ColorList, 5);
-    For IndNiv := 0 to 4 Do
+    // Dimensionne sur la donnee et non sur une constante : voir MaxNiveauMetier.
+    // Pas MaxNiveauMetier : le dossier NIV contient aussi des pastilles de couleur
+    // rangees apres le dernier niveau. Voir MaxIndiceIconeNiveau.
+    MaxNiv := MaxIndiceIconeNiveau();
+    SetLength(ColorList, MaxNiv + 1);
+    For IndNiv := 0 to MaxNiv Do
       ChargeImageNiveau(IndNiv);
   end;
 
@@ -968,10 +973,24 @@ procedure TWinCreations.ChargeImageNiveau(Niveau: Integer);
         // declaration prouve que son livre est charge - puis l'ethnie, puis sa race,
         // puis \PICTURES\NIV\. Voir CheminNiveauImageMetierRace dans ChargeMetier.
         Path   := CheminNiveauImageMetierRace(MetierEnCours, RaceEnCours, Niveau);
-        Picture.LoadFromFile(Path);
-        Bitmap.Assign(Picture.graphic);
+        // Icone absente pour ce niveau : on ajoute QUAND MEME une image, neutre, sinon
+        // les index de ListImage se decalent d'un cran et chaque niveau afficherait
+        // l'icone du suivant. Le cas se produit des qu'un livre amene un niveau plus haut
+        // que ce que PICTURES\NIV\ contient.
+        if FileExists(Path) then
+          begin
+            Picture.LoadFromFile(Path);
+            Bitmap.Assign(Picture.graphic);
+            ColorLoc := Bitmap.Canvas.Pixels[1, 1];
+          end
+        else
+          begin
+            Bitmap.SetSize(8, 8);
+            Bitmap.Canvas.Brush.Color := CouleurGrisFonce;
+            Bitmap.Canvas.FillRect(0, 0, 8, 8);
+            ColorLoc := CouleurGrisFonce;
+          end;
         ListImage.Add(Bitmap, nil); // Ajout de l'image au TImageList
-        ColorLoc := Bitmap.Canvas.Pixels[1, 1];
         ColorList[Niveau] := ColorLoc;
       finally
         Picture.Free;

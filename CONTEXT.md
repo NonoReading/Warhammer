@@ -35,10 +35,32 @@ lecture, jamais depuis la source elle-même :
   de lecture n'est pas un défaut de la source.
 - **Quand une donnée n'est pas là où je regarde, elle est ailleurs.** L'hypothèse par
   défaut n'est jamais « elle manque ». Pour un talent ou une compétence, le premier
-  « ailleurs » à essayer est **la base**, pas une autre page du livre.
+  « ailleurs » à essayer est **la base**, pas une autre page du livre. Deux modes d'échec
+  distincts, rencontrés l'un et l'autre : *(a)* chercher un nom de balise et le trouver
+  ailleurs qu'on croit — `DATA_CAREER_ROLL` et `DATA_SPECIE_CAREER_DIRECT` emploient les
+  mêmes noms d'enfants, donc compter les `<Entry>` mélange des plages de dés et des
+  indicateurs d'éligibilité ; toujours ancrer sur le bloc parent attendu. *(b)* ne pas
+  trouver un nom de balise et en déduire que la **donnée** est absente — les livres
+  n'emploient pas tous la même structure : le Rulebook range ses tables de tirage dans
+  `DATA_CAREER_ROLL`, Middenheim les range sous `SUBCHAPTER_CAREER` dans chaque `<Specie>`.
+  Avant de dire « ce livre n'a pas X », lister les balises **réellement présentes dans ce
+  fichier**, puis chercher par le **contenu**.
 - **Avant d'introduire une valeur nouvelle dans un champ existant**, vérifier si le champ
   est un libellé libre ou une **énumération portée par le code**. `TypSpell` en est une :
   y avoir ajouté « Ritual » sans le vérifier a laissé deux bugs derrière moi.
+
+**Tenue de `A FAIRE.txt` (Nono, 30/08/2026)** — deux règles, parce que ce fichier a déjà
+dérivé une fois jusqu'à 2302 lignes :
+- **Des items courts plutôt que de gros blocs.** Un sujet qui se décompose en plusieurs
+  étapes se scinde en autant d'entrées ; on n'écrit pas un pavé qui mêle le raisonnement,
+  la décision et ce qui reste. Ce qui reste à faire doit se lire, pas se déterrer.
+- **Une passe de nettoyage à chaque fin de session**, sur tout le fichier et pas seulement
+  sur ce qu'on vient de toucher. Le piège vérifié le 30/08 : les blocs marqués « terminé »
+  contiennent souvent des points encore ouverts, enfouis au milieu. On **distille** donc
+  chaque bloc clos — garder les points vivants, les règles du type « ne plus ressortir en
+  anomalie » et les méthodes réutilisables — après avoir vérifié que le reste a bien son
+  équivalent daté dans `Log.txt`. Une conception arrêtée mais non appliquée n'a pas sa
+  place ici non plus : elle va dans `CONTEXT.md`.
 
 **Quand Nono dit qu'il va committer (règle du 30/08/2026)** — lui proposer **le récapitulatif
 de ce qui part dans ce commit**, sans qu'il ait à le demander : la liste des fichiers modifiés
@@ -2655,6 +2677,75 @@ Haut Elfe de base + métier de base → icônes d'origine.
 
 **Reste hors périmètre** : `pdfmetier.pas` (l.92, 250, 285) charge encore en dur. Les icônes
 de **classe** (`winmetier` l.835, `pdfmetier` l.179) ne sont pas concernées.
+
+### 2.22 Substitution du paramètre dans les champs `<Test>` — conception arrêtée, non appliquée (26/08/2026)
+
+Gardée ici et non dans `A FAIRE.txt` : le chantier a été **clos sans modification**, le champ
+`<Test>` d'une spécialisation n'étant jamais affiché (`wintalent.pas` ne remplit sa grille que
+pour `PTalent.SousTalent = false`, et sélectionner une spécialisation bascule l'affichage sur
+son générique). Le design est validé par Nono et attend le jour où l'on voudrait afficher le
+test par spécialisation.
+
+La parenthèse ne suffit pas comme repère — quatre familles ont leur paramètre en pleine phrase,
+et `Craftsman` a une parenthèse qu'il ne faut **pas** toucher. Marqueur retenu : `*`, placé
+n'importe où dans le texte du test.
+
+```
+Etiquette     Charm and Gossip (*)
+Acute Sense   Perception (*)
+Savant        Lore (*)
+Hatred/Vice   Willpower (Resist *)
+Strider       Athletics Tests to traverse the *
+Fearless      Cool to oppose your *'s Intimidate, Fear, and Terror
+Resistance    All those to resist the associated *
+Craftsman     Trade (any one)   <- inchangé, pas de marqueur = pas de substitution
+```
+
+Le programme remplacerait `*` par la parenthèse du libellé de la spécialisation, et par « Any »
+pour le générique ; l'absence de marqueur vaut « ne rien faire ». Nono a écarté l'alternative
+d'un attribut séparé (`<Test parametre="Social Group">`), trop lourde.
+
+### 2.23 Le nombre de niveaux se calcule depuis la donnée — en cours (30/08/2026)
+
+Les carrières du livre de base ont toutes 4 niveaux, et ce 4 était écrit en dur à six
+endroits. *High Elf Player's Guide* apporte un Mage à 5 niveaux. Plutôt que d'élargir à 6 —
+ce qu'il aurait fallu refaire au premier livre à 6 niveaux — **le maximum se calcule
+maintenant depuis la donnée** (proposition de Nono).
+
+**Deux fonctions dans `chargemetierniveau.pas`** :
+- `MaxNiveauMetier()` — le niveau le plus haut de `ListMetierNiveau`, **plancher à 4**
+  (valeur historique du livre de base : un chargement partiel ne doit pas rétrécir
+  l'affichage sous ce qui a toujours existé).
+- `MaxIndiceIconeNiveau()` — le plus grand entre le précédent et **le plus haut fichier
+  `N.PNG` présent dans `PICTURES\NIV\`**. Cette seconde borne existe parce que ce dossier
+  ne contient pas que des niveaux (voir plus bas). La boucle ne s'arrête pas au premier
+  trou.
+
+**Fait et compilé** : les quatre fenêtres (`winraces`, `winmetier`, `winpersonnage`,
+`wincreation`) dimensionnent listes d'images et `ColorList` sur `MaxIndiceIconeNiveau()`,
+`TabNiveau.RowCount` sur `MaxNiveauMetier() + 1`, et leur chargeur d'icônes **tolère un
+fichier absent** — il ajoute alors une image neutre de 8×8 plutôt que de sauter l'entrée,
+sans quoi les index de `ListImage` se décaleraient d'un cran. La lecture du numéro de niveau
+ne prend plus le premier caractère du texte du nœud (`"10.Archmage"` commence par `'1'`)
+mais ce qui précède le point, avec les bornes tirées de `High(ColorList)`.
+
+**Piège découvert en chemin, et corrigé** : `PICTURES\NIV\` sert à deux choses. Les
+fichiers 5, 6 et 7 y sont des **pastilles de couleur** — rouge, vert, gris — utilisées comme
+indices d'image par les tableaux des onglets Attribut, Talent, Compétence et Avancement de
+`WinPersonnage`, et nommées dans `chargeconstantes.pas` (`CouleurNot`, `CouleurOk`,
+`CouleurKo`, avec les `CouleurFond*` en regard). Couper le chargement au dernier niveau les
+faisait disparaître.
+
+**Point de reprise — ce qui reste, dans l'ordre :**
+1. **Renuméroter les pastilles à 20, 21 et 22** (renommer trois PNG, changer trois lignes de
+   `chargeconstantes.pas`, porter la borne de `MaxIndiceIconeNiveau` de 20 à 30).
+   *Préalable strict au lot 2* : sinon le niveau 5 du Mage et `CouleurNot` se disputeront
+   l'indice 5.
+2. **`pdfmetier.pas`** — les trois chargements en dur (l.92, 250, 285), puis la géométrie de
+   la grille du schéma d'avance, calibrée pour quatre lignes (`For Ind := 0 to 5 do
+   DrawLine`, positions en `(Nv-1)*4.7`, `FinAttribut := ... - ((3)*4.7)`). Le seul vrai
+   morceau de travail restant.
+3. Une vraie icône pour le niveau 5 : `PICTURES\NIV\5.png` fait 164 octets.
 
 ## 3. TODO / Backlog
 

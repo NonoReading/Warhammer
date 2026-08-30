@@ -1428,7 +1428,10 @@ begin
   // Mise en forme du tableau des Niveaux
   TabNiveau.Options          := TabNiveau.Options + [goEditing, goAlwaysShowEditor];
   TabNiveau.ColCount         := 1;
-  TabNiveau.RowCount         := 5;
+  // Une ligne d'entete plus un niveau par rang existant. C'etait fige a 5, ce qui faisait
+  // ecrire hors bornes des le premier metier a cinq niveaux : l.2989 se sert du NUMERO DE
+  // NIVEAU comme indice de ligne.
+  TabNiveau.RowCount         := MaxNiveauMetier() + 1;
   TabNiveau.ColWidths[0]     := 20;
   TabNiveau.Columns.Add;
   TabNiveau.ColWidths[1]     := 0;
@@ -1879,10 +1882,24 @@ procedure TWinPersonnages.ChargeImageNiveau(Niveau: Integer);
         // n'existe que si ce livre est charge - sa declaration prouve donc que le
         // supplement est actif. A defaut : ethnie, puis race, puis \PICTURES\NIV\.
         Path   := CheminNiveauImageMetierRace(MetierEnCours, RaceEnCours, Niveau);
-        Picture.LoadFromFile(Path);
-        Bitmap.Assign(Picture.graphic);
+        // Icone absente pour ce niveau : on ajoute QUAND MEME une image, neutre, sinon
+        // les index de ListImage se decalent d'un cran et chaque niveau afficherait
+        // l'icone du suivant. Le cas se produit des qu'un livre amene un niveau plus haut
+        // que ce que PICTURES\NIV\ contient.
+        if FileExists(Path) then
+          begin
+            Picture.LoadFromFile(Path);
+            Bitmap.Assign(Picture.graphic);
+            ColorLoc := Bitmap.Canvas.Pixels[1, 1];
+          end
+        else
+          begin
+            Bitmap.SetSize(8, 8);
+            Bitmap.Canvas.Brush.Color := CouleurGrisFonce;
+            Bitmap.Canvas.FillRect(0, 0, 8, 8);
+            ColorLoc := CouleurGrisFonce;
+          end;
         ListImage.Add(Bitmap, nil); // Ajout de l'image au TImageList
-        ColorLoc := Bitmap.Canvas.Pixels[1, 1];
         ColorList[Niveau] := ColorLoc;
       finally
         Picture.Free;
@@ -1896,13 +1913,19 @@ procedure TWinPersonnages.ChargeImageNiveau(Niveau: Integer);
 procedure TWinPersonnages.ChargeImagesNiveau();
   var
     IndNiv: Integer;
+    MaxNiv: Integer;
   begin
     if not Assigned(ListImage) then
       ListImage := TImageList.Create(nil);
     ListImage.Clear;
     SetLength(ColorList, 0);
-    SetLength(ColorList, 8);
-    For IndNiv := 0 to 7 Do
+    // Dimensionne sur la donnee et non sur une constante. Cette fenetre montait deja a 7
+    // "au cas ou" ; le maximum reel remplace cette marge arbitraire.
+    // Pas MaxNiveauMetier : le dossier NIV contient aussi des pastilles de couleur
+    // rangees apres le dernier niveau. Voir MaxIndiceIconeNiveau.
+    MaxNiv := MaxIndiceIconeNiveau();
+    SetLength(ColorList, MaxNiv + 1);
+    For IndNiv := 0 to MaxNiv Do
       ChargeImageNiveau(IndNiv);
   end;
 

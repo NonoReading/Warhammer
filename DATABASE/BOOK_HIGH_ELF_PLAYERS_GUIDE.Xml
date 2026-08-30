@@ -1,0 +1,2448 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<DATA_BOOK>
+<CODE_BOOK>"HELFG"</CODE_BOOK>
+<BOOK>"BOOK HIGH ELF PLAYERS GUIDE"</BOOK>
+<language>"ENGLISH"</language>
+<VERSION>"20260830"</VERSION>
+<OFFICIAL>"1"</OFFICIAL>
+<COMPLETE>"0"</COMPLETE>
+  <!-- COMPLETE=0 : ce fichier ne couvre que le LOT 1, les 5 carrieres a 4 niveaux.
+       Restent hors perimetre, volontairement : le Mage (5 niveaux) et les trois
+       carrieres de pretre (niveaux 3 a 5), l armurerie elfique, les ~54 sorts, les
+       tables d objets et d herbes, la section Sea Elf et la table de tirage aleatoire
+       de classe et carriere p.59. Voir A FAIRE.txt. -->
+<DATA_LABEL>
+<Label language="ENGLISH">
+<Text name="HELFG-BOOK HIGH ELF PLAYERS GUIDE">"High Elf Player&apos;s Guide"</Text>
+</Label>
+<Label language="FRANCAIS">
+<Text name="HELFG-BOOK HIGH ELF PLAYERS GUIDE">"High Elf Player&apos;s Guide"</Text>
+</Label>
+</DATA_LABEL>
+<DATA_SKILL_SPECIALIZATION>
+<Skill id="RULES-COMPART_POETRY">
+<Description language="ENGLISH">"Art (Poetry)"</Description>
+</Skill>
+  <!-- specialisation nouvelle - Swordmaster niveau 2 -->
+<Skill id="RULES-COMPART_PEINT/RULES-COMPART_SCUL">
+<Description language="ENGLISH">"Art (Painting or Sculpture)"</Description>
+</Skill>
+  <!-- declaration combinee - Swordmaster niveaux 1 et 3 -->
+<Skill id="RULES-COMPMARCH/RULES-COMPPARI">
+<Description language="ENGLISH">"Haggle or Gamble"</Description>
+</Skill>
+  <!-- declaration combinee - Merchant Adventurer niveau 2 -->
+<Skill id="RULES-COMPSIGNES_SHADOWWAR">
+<Description language="ENGLISH">"Secret Signs (Shadow Warriors)"</Description>
+</Skill>
+  <!-- specialisation nouvelle - Shadow Warrior niveau 2 -->
+<Skill id="RULES-COMPMETIER_JEWELLER">
+<Description language="ENGLISH">"Trade (Jeweller)"</Description>
+</Skill>
+  <!-- specialisation nouvelle - Aestheticist niveau 1 -->
+<Skill id="RULES-COMPFOCAL_QHAYSH">
+<Description language="ENGLISH">"Channelling (Qhaysh)"</Description>
+</Skill>
+  <!-- specialisation nouvelle - p.83, (WP) advanced, unique.
+       Requise pour le talent High Magic. Aucune carriere du LOT 1 ne l appelle : elle est
+       posee d avance pour le lot 2, ou les quatre carrieres de lanceurs la demandent.
+       Contrainte propre au livre, que le modele ne porte pas : on ne peut jamais avoir plus
+       d avances en Qhaysh que dans chacun des huit vents de couleur -->
+</DATA_SKILL_SPECIALIZATION>
+<DATA_TALENT_SPECIALIZATION>
+<Talent id="RULES-T0132_DELF">
+<Description language="ENGLISH">"Fearless (Dark Elves)"</Description>
+</Talent>
+  <!-- Shadow Warrior niveau 2 -->
+<Talent id="RULES-T0132_SEAMONSTR">
+<Description language="ENGLISH">"Fearless (Sea Monsters)"</Description>
+</Talent>
+  <!-- Merchant Adventurer niveau 4 -->
+<Talent id="RULES-T0134_OCEAN">
+<Description language="ENGLISH">"Savant (Oceans)"</Description>
+</Talent>
+  <!-- Sea Guard niveau 3 -->
+<Talent id="RULES-T0069_DELF">
+<Description language="ENGLISH">"Hatred (Dark Elves)"</Description>
+</Talent>
+  <!-- talent d espece de Nagarythe. La base avait deja Hatred (High Elves) -->
+</DATA_TALENT_SPECIALIZATION>
+<DATA_TALENT>
+<Talent id="HELFG-T0186">
+<Attribut>""</Attribut>
+<Description language="ENGLISH">"Martial Arts"</Description>
+<Short language="ENGLISH">""</Short>
+<Explanation language="ENGLISH">"Your unarmed attacks lose Undamaging.
+Each subsequent level, you can use one of the following Qualities unarmed: Damaging, Defensive, Distract, Fast, Penetrating, Precise, Pummel.
+When combat begins or one of your Turns starts, choose one Quality to use until your next Turn."</Explanation>
+<Skill>""</Skill>
+<Max>"(BATTR_WS)"</Max>
+<PDF>""</PDF>
+<Test language="ENGLISH">""</Test>
+</Talent>
+<Talent id="HELFG-T0187">
+<Attribut>""</Attribut>
+<Description language="ENGLISH">"Sword-dancing"</Description>
+<Short language="ENGLISH">""</Short>
+<Explanation language="ENGLISH">"You have studied the ancient tradition of Sword-dancing and can now memorise its mystical techniques.
+You learn the Ritual of Cleansing technique.
+You can learn additional techniques for 100 XP per technique you currently know. So, if you already know 3 techniques, your next technique costs 300 XP to purchase.
+To perform a technique, make a Melee (Two-handed) Test; if your SL reaches the target number listed in the technique, you succeed. If you fail, you lose all Advantage. On an Astounding Failure, you must also roll on the Oops! Table.
+The Difficulty of the Test varies with your Yenlui State: Challenging (+0) when Balanced or Light, Very Hard (-30) when Dark."</Explanation>
+<Skill>"RULES-COMPCOMB_2M"</Skill>
+<Max>"1"</Max>
+<PDF>""</PDF>
+<Test language="ENGLISH">"COMPCOMB_2M"</Test>
+</Talent>
+<Talent id="HELFG-T0188">
+<Attribut>""</Attribut>
+<Description language="ENGLISH">"Uncouth Uranai"</Description>
+<Short language="ENGLISH">""</Short>
+<Explanation language="ENGLISH">"High Elves from the Inner Kingdoms view Sea Elves with faint disapproval.
+When interacting with High Elves from Caledor, Ellyrion, Avelorn, or Saphery, reduce Standing by 1.
+Asur from the Outer Kingdoms and Eataine do not harbour such prejudice."</Explanation>
+<Skill>""</Skill>
+<Max>"1"</Max>
+<PDF>""</PDF>
+<Test language="ENGLISH">""</Test>
+</Talent>
+</DATA_TALENT>
+<DATA_SPECIE_CAREER_DIRECT>
+  <!-- Exprime en RACE (RULES-SPECIE_HELF) et non en ethnie, comme Sea of Claws :
+       toutes les ethnies de la race en heritent. Le livre marque les 5 carrieres
+       "High Elf" sous leur titre. -->
+<Entry>
+<Specie>"RULES-SPECIE_HELF"</Specie>
+<Career name="HELFG-WORK127">"X"</Career>
+  <!-- Sea Guard -->
+</Entry>
+<Entry>
+<Specie>"RULES-SPECIE_HELF"</Specie>
+<Career name="HELFG-WORK128">"X"</Career>
+  <!-- Swordmaster -->
+</Entry>
+<Entry>
+<Specie>"RULES-SPECIE_HELF"</Specie>
+<Career name="HELFG-WORK129">"X"</Career>
+  <!-- Shadow Warrior -->
+</Entry>
+<Entry>
+<Specie>"RULES-SPECIE_HELF"</Specie>
+<Career name="HELFG-WORK130">"X"</Career>
+  <!-- Merchant Adventurer -->
+</Entry>
+<Entry>
+<Specie>"RULES-SPECIE_HELF"</Specie>
+<Career name="HELFG-WORK131">"X"</Career>
+  <!-- Aestheticist -->
+</Entry>
+</DATA_SPECIE_CAREER_DIRECT>
+<DATA_SPECIE>
+  <!-- Les onze sous-types de Haut Elfe du livre (p.54-57). Ils partagent les
+       caracteristiques de RULES-RACE_HELF - le livre dit "Roll Attributes as any Elf" -
+       et ne different que par leurs competences, leurs talents et leur table de carriere.
+       Chacun porte SA table de tirage : les cinq colonnes de la page 59 ne sont pas cinq
+       variantes mais cinq regroupements de ces onze ethnies, donc aucune <Rule> ici. -->
+<Specie id="HELFG-RACE_CALED">
+<Description language="ENGLISH">"High Elves (Caledor)"</Description>
+<Explanation language="ENGLISH">"Caledorians are stoic, disciplined people, hardened by life in their sparsely populated, rugged land. They are notoriously arrogant. Even Caledorians from mundane positions believe their land produces more exalted folk than other Elven kingdoms — was it not Caledor Dragontamer who saved the world? A Character from Caledor may seek to restore their kingdom to glory, search for wisdom to help rouse the Dragons, or explore the political or military situation beyond Caledor. Others may feel stifled by the strictly ordered Caledorian society and look elsewhere for a new role in life."</Explanation>
+<Ethnic>"RULES-SPECIE_HELF"</Ethnic>
+<PictureLevel>"NIV_HELF"</PictureLevel>
+<SUBCHAPTER_ATTR>
+<Attribut name="RULES-ATTR_WS">"2d10+30"</Attribut>
+<Attribut name="RULES-ATTR_BS">"2d10+30"</Attribut>
+<Attribut name="RULES-ATTR_S">"2d10+20"</Attribut>
+<Attribut name="RULES-ATTR_T">"2d10+20"</Attribut>
+<Attribut name="RULES-ATTR_I">"2d10+40"</Attribut>
+<Attribut name="RULES-ATTR_Ag">"2d10+30"</Attribut>
+<Attribut name="RULES-ATTR_Dex">"2d10+30"</Attribut>
+<Attribut name="RULES-ATTR_Int">"2d10+30"</Attribut>
+<Attribut name="RULES-ATTR_WP">"2d10+30"</Attribut>
+<Attribut name="RULES-ATTR_Fel">"2d10+20"</Attribut>
+<Attribut name="RULES-ATTR_Fate">"0"</Attribut>
+<Attribut name="RULES-ATTR_Resil">"0"</Attribut>
+<Attribut name="RULES-ATTR_Wound">"1xBATTR_S+2xBATTR_T+1xBATTR_WP"</Attribut>
+<Attribut name="RULES-ATTR_Supp">"2"</Attribut>
+<Attribut name="RULES-ATTR_Move">"5"</Attribut>
+</SUBCHAPTER_ATTR>
+<SUBCHAPTER_SKILL>
+<Skill>"RULES-COMPESCAL"</Skill>
+  <!-- Climb -->
+<Skill>"RULES-COMPCALM"</Skill>
+  <!-- Cool -->
+<Skill>"RULES-COMPDIVERT_CHANT"</Skill>
+  <!-- Entertain (Singing) -->
+<Skill>"RULES-COMPEVAL"</Skill>
+  <!-- Evaluate -->
+<Skill>"RULES-COMPINTIM"</Skill>
+  <!-- Intimidate -->
+<Skill>"RULES-COMPLANG_ELTHA"</Skill>
+  <!-- Language (Elthárin) -->
+<Skill>"RULES-COMPCOMM"</Skill>
+  <!-- Leadership -->
+<Skill>"RULES-COMPCOMB_BASE"</Skill>
+  <!-- Melee (Basic) -->
+<Skill>"RULES-COMPORIENT"</Skill>
+  <!-- Navigation -->
+<Skill>"RULES-COMPPRECEP"</Skill>
+  <!-- Perception -->
+<Skill>"RULES-COMPPROJ_ARC"</Skill>
+  <!-- Ranged (Bow) -->
+<Skill>"RULES-COMPNATA"</Skill>
+  <!-- Swim -->
+</SUBCHAPTER_SKILL>
+<SUBCHAPTER_TALENT>
+<Talent>"RULES-T0139_VUE"</Talent>
+  <!-- Acute Sense (Sight) -->
+<Talent>"RULES-T0122/RULES-T0041"</Talent>
+  <!-- Commanding Presence or Resolute -->
+<Talent>"RULES-T0164"</Talent>
+  <!-- Night Vision -->
+<Talent>"RULES-T0084"</Talent>
+  <!-- Read/Write -->
+<Talent>"RULES-T0137/RULES-T0107"</Talent>
+  <!-- Second Sight or Strong-minded -->
+</SUBCHAPTER_TALENT>
+<SUBCHAPTER_CAREER>
+  <!-- colonne "Inner Kingdoms" de la table p.59 -->
+<Career name="RULES-WORK02">"01-03"</Career>
+  <!-- Apothecary -->
+<Career name="RULES-WORK33">"04-06"</Career>
+  <!-- Lawyer -->
+  <!-- TROU ASSUME : Mage 07-09. C est le Mage du livre (p.90), carriere a CINQ
+       niveaux qui appartient au lot 2 et n existe pas encore. Ce n est PAS le
+       Wizard du Rulebook : le livre distingue explicitement les deux (p.60).
+       A rajouter ici en meme temps que la carriere. -->
+<Career name="RULES-WORK36">"10-11"</Career>
+  <!-- Physician -->
+<Career name="RULES-WORK23">"12-14"</Career>
+  <!-- Scholar -->
+<Career name="RULES-WORK03">"15-17"</Career>
+  <!-- Artisan -->
+<Career name="RULES-WORK21">"18-19"</Career>
+  <!-- Investigator -->
+<Career name="RULES-WORK34">"20-25"</Career>
+  <!-- Merchant -->
+<Career name="HELFG-WORK130">"26-27"</Career>
+  <!-- Merchant Adventurer -->
+<Career name="RULES-WORK07">"28-29"</Career>
+  <!-- Townsman -->
+<Career name="RULES-WORK39">"30-31"</Career>
+  <!-- Watchman -->
+<Career name="RULES-WORK15">"32-33"</Career>
+  <!-- Advisor -->
+<Career name="HELFG-WORK131">"34-36"</Career>
+  <!-- Aestheticist -->
+<Career name="RULES-WORK04">"37-38"</Career>
+  <!-- Artist -->
+<Career name="RULES-WORK18">"39-41"</Career>
+  <!-- Duellist -->
+<Career name="RULES-WORK20">"42-45"</Career>
+  <!-- Envoy -->
+<Career name="RULES-WORK44">"46-47"</Career>
+  <!-- Noble -->
+<Career name="RULES-WORK56">"48-50"</Career>
+  <!-- Servant* -->
+<Career name="RULES-WORK24">"51-53"</Career>
+  <!-- Spy -->
+<Career name="RULES-WORK32">"54-55"</Career>
+  <!-- Warden -->
+<Career name="RULES-WORK29">"56"</Career>
+  <!-- Herbalist -->
+<Career name="RULES-WORK10">"57"</Career>
+  <!-- Hunter -->
+<Career name="RULES-WORK19">"58-59"</Career>
+  <!-- Scout -->
+<Career name="RULES-WORK63">"60"</Career>
+  <!-- Villager* -->
+<Career name="RULES-WORK11">"61"</Career>
+  <!-- Bounty Hunter -->
+<Career name="RULES-WORK55">"62-64"</Career>
+  <!-- Entertainer -->
+<Career name="RULES-WORK38">"65-66"</Career>
+  <!-- Messenger -->
+<Career name="RULES-WORK06">"67-69"</Career>
+  <!-- Boatman -->
+<Career name="RULES-WORK43">"70-72"</Career>
+  <!-- Huffer* -->
+<Career name="RULES-WORK35">"73-77"</Career>
+  <!-- Seaman -->
+<Career name="RULES-WORK16">"78-80"</Career>
+  <!-- Smuggler -->
+<Career name="RULES-WORK22">"81-83"</Career>
+  <!-- Bawd -->
+<Career name="RULES-WORK09">"84-85"</Career>
+  <!-- Charlatan -->
+<Career name="RULES-WORK08">"86-87"</Career>
+  <!-- Cavalryman -->
+<Career name="RULES-WORK27">"88-89"</Career>
+  <!-- Guard -->
+<Career name="RULES-WORK12">"90-91"</Career>
+  <!-- Knight -->
+<Career name="HELFG-WORK127">"92-95"</Career>
+  <!-- Sea Guard -->
+<Career name="RULES-WORK28">"96"</Career>
+  <!-- Pit Fighter -->
+<Career name="RULES-WORK61">"97"</Career>
+  <!-- Protagonist -->
+<Career name="RULES-WORK57">"98-99"</Career>
+  <!-- Soldier -->
+<Career name="HELFG-WORK128">"100"</Career>
+  <!-- Swordmaster -->
+</SUBCHAPTER_CAREER>
+</Specie>
+<Specie id="HELFG-RACE_ELLYR">
+<Description language="ENGLISH">"High Elves (Ellyrion)"</Description>
+<Explanation language="ENGLISH">"Ellyrians are practically raised in the saddle, riding the endless summery plains almost before they can walk. They are quick to anger but equally quick to forgive. It is an important rite of passage for Ellyrians to travel beyond the kingdom to see the wider world — if only to better appreciate the open plains of home."</Explanation>
+<Ethnic>"RULES-SPECIE_HELF"</Ethnic>
+<PictureLevel>"NIV_HELF"</PictureLevel>
+<SUBCHAPTER_ATTR>
+<Attribut name="RULES-ATTR_WS">"2d10+30"</Attribut>
+<Attribut name="RULES-ATTR_BS">"2d10+30"</Attribut>
+<Attribut name="RULES-ATTR_S">"2d10+20"</Attribut>
+<Attribut name="RULES-ATTR_T">"2d10+20"</Attribut>
+<Attribut name="RULES-ATTR_I">"2d10+40"</Attribut>
+<Attribut name="RULES-ATTR_Ag">"2d10+30"</Attribut>
+<Attribut name="RULES-ATTR_Dex">"2d10+30"</Attribut>
+<Attribut name="RULES-ATTR_Int">"2d10+30"</Attribut>
+<Attribut name="RULES-ATTR_WP">"2d10+30"</Attribut>
+<Attribut name="RULES-ATTR_Fel">"2d10+20"</Attribut>
+<Attribut name="RULES-ATTR_Fate">"0"</Attribut>
+<Attribut name="RULES-ATTR_Resil">"0"</Attribut>
+<Attribut name="RULES-ATTR_Wound">"1xBATTR_S+2xBATTR_T+1xBATTR_WP"</Attribut>
+<Attribut name="RULES-ATTR_Supp">"2"</Attribut>
+<Attribut name="RULES-ATTR_Move">"5"</Attribut>
+</SUBCHAPTER_ATTR>
+<SUBCHAPTER_SKILL>
+<Skill>"RULES-COMPSOINANI"</Skill>
+  <!-- Animal Care -->
+<Skill>"RULES-COMPANIM"</Skill>
+  <!-- Charm Animal -->
+<Skill>"RULES-COMPCALM"</Skill>
+  <!-- Cool -->
+<Skill>"RULES-COMPDIVERT_CHANT"</Skill>
+  <!-- Entertain (Singing) -->
+<Skill>"RULES-COMPEVAL"</Skill>
+  <!-- Evaluate -->
+<Skill>"RULES-COMPLANG_ELTHA"</Skill>
+  <!-- Language (Elthárin) -->
+<Skill>"RULES-COMPCOMM"</Skill>
+  <!-- Leadership -->
+<Skill>"RULES-COMPCOMB_BASE"</Skill>
+  <!-- Melee (Basic) -->
+<Skill>"RULES-COMPORIENT"</Skill>
+  <!-- Navigation -->
+<Skill>"RULES-COMPPRECEP"</Skill>
+  <!-- Perception -->
+<Skill>"RULES-COMPMUSIC_*"</Skill>
+  <!-- Play (Any) -->
+<Skill>"RULES-COMPPROJ_ARC"</Skill>
+  <!-- Ranged (Bow) -->
+<Skill>"RULES-COMPCHEV_CHEVAL"</Skill>
+  <!-- Ride (Horse) -->
+</SUBCHAPTER_SKILL>
+<SUBCHAPTER_TALENT>
+<Talent>"RULES-T0139_VUE"</Talent>
+  <!-- Acute Sense (Sight) -->
+<Talent>"RULES-T0003/RULES-T0140"</Talent>
+  <!-- Animal Affinity or Orientation -->
+<Talent>"RULES-T0164"</Talent>
+  <!-- Night Vision -->
+<Talent>"RULES-T0084"</Talent>
+  <!-- Read/Write -->
+<Talent>"RULES-T0137/RULES-T0141"</Talent>
+  <!-- Second Sight or Sixth Sense -->
+</SUBCHAPTER_TALENT>
+<SUBCHAPTER_CAREER>
+  <!-- colonne "Inner Kingdoms" de la table p.59 -->
+<Career name="RULES-WORK02">"01-03"</Career>
+  <!-- Apothecary -->
+<Career name="RULES-WORK33">"04-06"</Career>
+  <!-- Lawyer -->
+  <!-- TROU ASSUME : Mage 07-09. C est le Mage du livre (p.90), carriere a CINQ
+       niveaux qui appartient au lot 2 et n existe pas encore. Ce n est PAS le
+       Wizard du Rulebook : le livre distingue explicitement les deux (p.60).
+       A rajouter ici en meme temps que la carriere. -->
+<Career name="RULES-WORK36">"10-11"</Career>
+  <!-- Physician -->
+<Career name="RULES-WORK23">"12-14"</Career>
+  <!-- Scholar -->
+<Career name="RULES-WORK03">"15-17"</Career>
+  <!-- Artisan -->
+<Career name="RULES-WORK21">"18-19"</Career>
+  <!-- Investigator -->
+<Career name="RULES-WORK34">"20-25"</Career>
+  <!-- Merchant -->
+<Career name="HELFG-WORK130">"26-27"</Career>
+  <!-- Merchant Adventurer -->
+<Career name="RULES-WORK07">"28-29"</Career>
+  <!-- Townsman -->
+<Career name="RULES-WORK39">"30-31"</Career>
+  <!-- Watchman -->
+<Career name="RULES-WORK15">"32-33"</Career>
+  <!-- Advisor -->
+<Career name="HELFG-WORK131">"34-36"</Career>
+  <!-- Aestheticist -->
+<Career name="RULES-WORK04">"37-38"</Career>
+  <!-- Artist -->
+<Career name="RULES-WORK18">"39-41"</Career>
+  <!-- Duellist -->
+<Career name="RULES-WORK20">"42-45"</Career>
+  <!-- Envoy -->
+<Career name="RULES-WORK44">"46-47"</Career>
+  <!-- Noble -->
+<Career name="RULES-WORK56">"48-50"</Career>
+  <!-- Servant* -->
+<Career name="RULES-WORK24">"51-53"</Career>
+  <!-- Spy -->
+<Career name="RULES-WORK32">"54-55"</Career>
+  <!-- Warden -->
+<Career name="RULES-WORK29">"56"</Career>
+  <!-- Herbalist -->
+<Career name="RULES-WORK10">"57"</Career>
+  <!-- Hunter -->
+<Career name="RULES-WORK19">"58-59"</Career>
+  <!-- Scout -->
+<Career name="RULES-WORK63">"60"</Career>
+  <!-- Villager* -->
+<Career name="RULES-WORK11">"61"</Career>
+  <!-- Bounty Hunter -->
+<Career name="RULES-WORK55">"62-64"</Career>
+  <!-- Entertainer -->
+<Career name="RULES-WORK38">"65-66"</Career>
+  <!-- Messenger -->
+<Career name="RULES-WORK06">"67-69"</Career>
+  <!-- Boatman -->
+<Career name="RULES-WORK43">"70-72"</Career>
+  <!-- Huffer* -->
+<Career name="RULES-WORK35">"73-77"</Career>
+  <!-- Seaman -->
+<Career name="RULES-WORK16">"78-80"</Career>
+  <!-- Smuggler -->
+<Career name="RULES-WORK22">"81-83"</Career>
+  <!-- Bawd -->
+<Career name="RULES-WORK09">"84-85"</Career>
+  <!-- Charlatan -->
+<Career name="RULES-WORK08">"86-87"</Career>
+  <!-- Cavalryman -->
+<Career name="RULES-WORK27">"88-89"</Career>
+  <!-- Guard -->
+<Career name="RULES-WORK12">"90-91"</Career>
+  <!-- Knight -->
+<Career name="HELFG-WORK127">"92-95"</Career>
+  <!-- Sea Guard -->
+<Career name="RULES-WORK28">"96"</Career>
+  <!-- Pit Fighter -->
+<Career name="RULES-WORK61">"97"</Career>
+  <!-- Protagonist -->
+<Career name="RULES-WORK57">"98-99"</Career>
+  <!-- Soldier -->
+<Career name="HELFG-WORK128">"100"</Career>
+  <!-- Swordmaster -->
+</SUBCHAPTER_CAREER>
+</Specie>
+<Specie id="HELFG-RACE_AVELO">
+<Description language="ENGLISH">"High Elves (Avelorn)"</Description>
+<Explanation language="ENGLISH">"Natives of Avelorn live a nomadic, pastoral existence, with a less restrictive culture than the rest of Asur society. They prize artistry and the spirit of festival which suffuses life in the everqueen’s realm. Avelorn’s whimsical folk are eager for new experiences and stories to bring back to their homeland. They may seek out potential threats to Avelorn or voyage afar to spread the everqueen’s beneficence. Life in a pastoral idyll is not always peaceful. Nobles of Avelorn vie for the everqueen’s attention, and they may choose adventure over a fall from favour."</Explanation>
+<Ethnic>"RULES-SPECIE_HELF"</Ethnic>
+<PictureLevel>"NIV_HELF"</PictureLevel>
+<SUBCHAPTER_ATTR>
+<Attribut name="RULES-ATTR_WS">"2d10+30"</Attribut>
+<Attribut name="RULES-ATTR_BS">"2d10+30"</Attribut>
+<Attribut name="RULES-ATTR_S">"2d10+20"</Attribut>
+<Attribut name="RULES-ATTR_T">"2d10+20"</Attribut>
+<Attribut name="RULES-ATTR_I">"2d10+40"</Attribut>
+<Attribut name="RULES-ATTR_Ag">"2d10+30"</Attribut>
+<Attribut name="RULES-ATTR_Dex">"2d10+30"</Attribut>
+<Attribut name="RULES-ATTR_Int">"2d10+30"</Attribut>
+<Attribut name="RULES-ATTR_WP">"2d10+30"</Attribut>
+<Attribut name="RULES-ATTR_Fel">"2d10+20"</Attribut>
+<Attribut name="RULES-ATTR_Fate">"0"</Attribut>
+<Attribut name="RULES-ATTR_Resil">"0"</Attribut>
+<Attribut name="RULES-ATTR_Wound">"1xBATTR_S+2xBATTR_T+1xBATTR_WP"</Attribut>
+<Attribut name="RULES-ATTR_Supp">"2"</Attribut>
+<Attribut name="RULES-ATTR_Move">"5"</Attribut>
+</SUBCHAPTER_ATTR>
+<SUBCHAPTER_SKILL>
+<Skill>"RULES-COMPATHL"</Skill>
+  <!-- Athletics -->
+<Skill>"RULES-COMPCALM"</Skill>
+  <!-- Cool -->
+<Skill>"RULES-COMPDIVERT_CHANT"</Skill>
+  <!-- Entertain (Singing) -->
+<Skill>"RULES-COMPRAGOT"</Skill>
+  <!-- Gossip -->
+<Skill>"RULES-COMPINTUI"</Skill>
+  <!-- Intuition -->
+<Skill>"RULES-COMPLANG_ELTHA"</Skill>
+  <!-- Language (Elthárin) -->
+<Skill>"RULES-COMPCOMM"</Skill>
+  <!-- Leadership -->
+<Skill>"RULES-COMPCOMB_BASE"</Skill>
+  <!-- Melee (Basic) -->
+<Skill>"RULES-COMPORIENT"</Skill>
+  <!-- Navigation -->
+<Skill>"RULES-COMPPRECEP"</Skill>
+  <!-- Perception -->
+<Skill>"RULES-COMPMUSIC_*"</Skill>
+  <!-- Play (Any) -->
+<Skill>"RULES-COMPPROJ_ARC"</Skill>
+  <!-- Ranged (Bow) -->
+</SUBCHAPTER_SKILL>
+<SUBCHAPTER_TALENT>
+<Talent>"RULES-T0139_VUE"</Talent>
+  <!-- Acute Sense (Sight) -->
+<Talent>"RULES-T0009/RULES-T0007"</Talent>
+  <!-- Attractive or Artistic -->
+<Talent>"RULES-T0164"</Talent>
+  <!-- Night Vision -->
+<Talent>"RULES-T0084"</Talent>
+  <!-- Read/Write -->
+<Talent>"RULES-T0137/RULES-T0141"</Talent>
+  <!-- Second Sight or Sixth Sense -->
+</SUBCHAPTER_TALENT>
+<SUBCHAPTER_CAREER>
+  <!-- colonne "Avelorn" de la table p.59 -->
+<Career name="RULES-WORK02">"01-04"</Career>
+  <!-- Apothecary -->
+  <!-- TROU ASSUME : Mage 05-09. C est le Mage du livre (p.90), carriere a CINQ
+       niveaux qui appartient au lot 2 et n existe pas encore. Ce n est PAS le
+       Wizard du Rulebook : le livre distingue explicitement les deux (p.60).
+       A rajouter ici en meme temps que la carriere. -->
+<Career name="RULES-WORK36">"10-12"</Career>
+  <!-- Physician -->
+<Career name="RULES-WORK23">"13-17"</Career>
+  <!-- Scholar - errata, le livre imprime "13-19" -->
+<Career name="RULES-WORK03">"18-21"</Career>
+  <!-- Artisan -->
+<Career name="RULES-WORK34">"22"</Career>
+  <!-- Merchant -->
+<Career name="HELFG-WORK130">"23"</Career>
+  <!-- Merchant Adventurer -->
+<Career name="RULES-WORK15">"24-25"</Career>
+  <!-- Advisor -->
+<Career name="HELFG-WORK131">"26-28"</Career>
+  <!-- Aestheticist -->
+<Career name="RULES-WORK04">"29-33"</Career>
+  <!-- Artist -->
+<Career name="RULES-WORK18">"34-35"</Career>
+  <!-- Duellist -->
+<Career name="RULES-WORK20">"36-38"</Career>
+  <!-- Envoy -->
+<Career name="RULES-WORK44">"39-41"</Career>
+  <!-- Noble -->
+<Career name="RULES-WORK56">"42-43"</Career>
+  <!-- Servant* -->
+<Career name="RULES-WORK24">"44-45"</Career>
+  <!-- Spy -->
+<Career name="RULES-WORK32">"46-47"</Career>
+  <!-- Warden -->
+<Career name="RULES-WORK29">"48-51"</Career>
+  <!-- Herbalist -->
+<Career name="RULES-WORK10">"52-55"</Career>
+  <!-- Hunter -->
+<Career name="RULES-WORK19">"56-59"</Career>
+  <!-- Scout -->
+<Career name="RULES-WORK63">"60-62"</Career>
+  <!-- Villager* -->
+<Career name="RULES-WORK11">"63"</Career>
+  <!-- Bounty Hunter -->
+<Career name="RULES-WORK55">"64-69"</Career>
+  <!-- Entertainer -->
+<Career name="RULES-WORK38">"70-73"</Career>
+  <!-- Messenger -->
+<Career name="RULES-WORK06">"74"</Career>
+  <!-- Boatman -->
+<Career name="RULES-WORK35">"75-77"</Career>
+  <!-- Seaman -->
+<Career name="RULES-WORK16">"78-79"</Career>
+  <!-- Smuggler -->
+<Career name="RULES-WORK22">"80-83"</Career>
+  <!-- Bawd -->
+<Career name="RULES-WORK09">"84-86"</Career>
+  <!-- Charlatan -->
+<Career name="RULES-WORK30">"87"</Career>
+  <!-- Outlaw -->
+<Career name="RULES-WORK08">"88-91"</Career>
+  <!-- Cavalryman -->
+<Career name="RULES-WORK27">"92-93"</Career>
+  <!-- Guard -->
+<Career name="RULES-WORK12">"94-95"</Career>
+  <!-- Knight -->
+<Career name="RULES-WORK61">"96"</Career>
+  <!-- Protagonist -->
+<Career name="RULES-WORK57">"97-99"</Career>
+  <!-- Soldier -->
+<Career name="HELFG-WORK128">"100"</Career>
+  <!-- Swordmaster -->
+</SUBCHAPTER_CAREER>
+</Specie>
+<Specie id="HELFG-RACE_SAPHE">
+<Description language="ENGLISH">"High Elves (Saphery)"</Description>
+<Explanation language="ENGLISH">"The eccentric rule of their magic-wielding princes influences life for Sapherians. Even the humblest menial learns about the workings of the world, and every life is suffused with the influence of magic. From the highest to the lowest, Sapherians value the acquisition of knowledge, wherever it is found. Their loremasters employ vassals to seek esoteric learning, interesting people, and strange objects."</Explanation>
+<Ethnic>"RULES-SPECIE_HELF"</Ethnic>
+<PictureLevel>"NIV_HELF"</PictureLevel>
+<SUBCHAPTER_ATTR>
+<Attribut name="RULES-ATTR_WS">"2d10+30"</Attribut>
+<Attribut name="RULES-ATTR_BS">"2d10+30"</Attribut>
+<Attribut name="RULES-ATTR_S">"2d10+20"</Attribut>
+<Attribut name="RULES-ATTR_T">"2d10+20"</Attribut>
+<Attribut name="RULES-ATTR_I">"2d10+40"</Attribut>
+<Attribut name="RULES-ATTR_Ag">"2d10+30"</Attribut>
+<Attribut name="RULES-ATTR_Dex">"2d10+30"</Attribut>
+<Attribut name="RULES-ATTR_Int">"2d10+30"</Attribut>
+<Attribut name="RULES-ATTR_WP">"2d10+30"</Attribut>
+<Attribut name="RULES-ATTR_Fel">"2d10+20"</Attribut>
+<Attribut name="RULES-ATTR_Fate">"0"</Attribut>
+<Attribut name="RULES-ATTR_Resil">"0"</Attribut>
+<Attribut name="RULES-ATTR_Wound">"1xBATTR_S+2xBATTR_T+1xBATTR_WP"</Attribut>
+<Attribut name="RULES-ATTR_Supp">"2"</Attribut>
+<Attribut name="RULES-ATTR_Move">"5"</Attribut>
+</SUBCHAPTER_ATTR>
+<SUBCHAPTER_SKILL>
+<Skill>"RULES-COMPCALM"</Skill>
+  <!-- Cool -->
+<Skill>"RULES-COMPDIVERT_CHANT"</Skill>
+  <!-- Entertain (Singing) -->
+<Skill>"RULES-COMPEVAL"</Skill>
+  <!-- Evaluate -->
+<Skill>"RULES-COMPLANG_ELTHA"</Skill>
+  <!-- Language (Elthárin) -->
+<Skill>"RULES-COMPSAVOIR_*"</Skill>
+  <!-- Lore (Any) -->
+<Skill>"RULES-COMPCOMB_BASE"</Skill>
+  <!-- Melee (Basic) -->
+<Skill>"RULES-COMPORIENT"</Skill>
+  <!-- Navigation -->
+<Skill>"RULES-COMPPRECEP"</Skill>
+  <!-- Perception -->
+<Skill>"RULES-COMPMUSIC_*"</Skill>
+  <!-- Play (Any) -->
+<Skill>"RULES-COMPPROJ_ARC"</Skill>
+  <!-- Ranged (Bow) -->
+<Skill>"RULES-COMPRECH"</Skill>
+  <!-- Research -->
+</SUBCHAPTER_SKILL>
+<SUBCHAPTER_TALENT>
+<Talent>"RULES-T0139_VUE/RULES-T0146"</Talent>
+  <!-- Acute Sense (Sight) or Bookish -->
+<Talent>"RULES-T0074/RULES-T0117"</Talent>
+  <!-- Coolheaded or Savvy -->
+<Talent>"RULES-T0164"</Talent>
+  <!-- Night Vision -->
+<Talent>"RULES-T0084"</Talent>
+  <!-- Read/Write -->
+<Talent>"RULES-T0137"</Talent>
+  <!-- Second Sight -->
+</SUBCHAPTER_TALENT>
+<SUBCHAPTER_CAREER>
+  <!-- colonne "Inner Kingdoms" de la table p.59 -->
+<Career name="RULES-WORK02">"01-03"</Career>
+  <!-- Apothecary -->
+<Career name="RULES-WORK33">"04-06"</Career>
+  <!-- Lawyer -->
+  <!-- TROU ASSUME : Mage 07-09. C est le Mage du livre (p.90), carriere a CINQ
+       niveaux qui appartient au lot 2 et n existe pas encore. Ce n est PAS le
+       Wizard du Rulebook : le livre distingue explicitement les deux (p.60).
+       A rajouter ici en meme temps que la carriere. -->
+<Career name="RULES-WORK36">"10-11"</Career>
+  <!-- Physician -->
+<Career name="RULES-WORK23">"12-14"</Career>
+  <!-- Scholar -->
+<Career name="RULES-WORK03">"15-17"</Career>
+  <!-- Artisan -->
+<Career name="RULES-WORK21">"18-19"</Career>
+  <!-- Investigator -->
+<Career name="RULES-WORK34">"20-25"</Career>
+  <!-- Merchant -->
+<Career name="HELFG-WORK130">"26-27"</Career>
+  <!-- Merchant Adventurer -->
+<Career name="RULES-WORK07">"28-29"</Career>
+  <!-- Townsman -->
+<Career name="RULES-WORK39">"30-31"</Career>
+  <!-- Watchman -->
+<Career name="RULES-WORK15">"32-33"</Career>
+  <!-- Advisor -->
+<Career name="HELFG-WORK131">"34-36"</Career>
+  <!-- Aestheticist -->
+<Career name="RULES-WORK04">"37-38"</Career>
+  <!-- Artist -->
+<Career name="RULES-WORK18">"39-41"</Career>
+  <!-- Duellist -->
+<Career name="RULES-WORK20">"42-45"</Career>
+  <!-- Envoy -->
+<Career name="RULES-WORK44">"46-47"</Career>
+  <!-- Noble -->
+<Career name="RULES-WORK56">"48-50"</Career>
+  <!-- Servant* -->
+<Career name="RULES-WORK24">"51-53"</Career>
+  <!-- Spy -->
+<Career name="RULES-WORK32">"54-55"</Career>
+  <!-- Warden -->
+<Career name="RULES-WORK29">"56"</Career>
+  <!-- Herbalist -->
+<Career name="RULES-WORK10">"57"</Career>
+  <!-- Hunter -->
+<Career name="RULES-WORK19">"58-59"</Career>
+  <!-- Scout -->
+<Career name="RULES-WORK63">"60"</Career>
+  <!-- Villager* -->
+<Career name="RULES-WORK11">"61"</Career>
+  <!-- Bounty Hunter -->
+<Career name="RULES-WORK55">"62-64"</Career>
+  <!-- Entertainer -->
+<Career name="RULES-WORK38">"65-66"</Career>
+  <!-- Messenger -->
+<Career name="RULES-WORK06">"67-69"</Career>
+  <!-- Boatman -->
+<Career name="RULES-WORK43">"70-72"</Career>
+  <!-- Huffer* -->
+<Career name="RULES-WORK35">"73-77"</Career>
+  <!-- Seaman -->
+<Career name="RULES-WORK16">"78-80"</Career>
+  <!-- Smuggler -->
+<Career name="RULES-WORK22">"81-83"</Career>
+  <!-- Bawd -->
+<Career name="RULES-WORK09">"84-85"</Career>
+  <!-- Charlatan -->
+<Career name="RULES-WORK08">"86-87"</Career>
+  <!-- Cavalryman -->
+<Career name="RULES-WORK27">"88-89"</Career>
+  <!-- Guard -->
+<Career name="RULES-WORK12">"90-91"</Career>
+  <!-- Knight -->
+<Career name="HELFG-WORK127">"92-95"</Career>
+  <!-- Sea Guard -->
+<Career name="RULES-WORK28">"96"</Career>
+  <!-- Pit Fighter -->
+<Career name="RULES-WORK61">"97"</Career>
+  <!-- Protagonist -->
+<Career name="RULES-WORK57">"98-99"</Career>
+  <!-- Soldier -->
+<Career name="HELFG-WORK128">"100"</Career>
+  <!-- Swordmaster -->
+</SUBCHAPTER_CAREER>
+</Specie>
+<Specie id="HELFG-RACE_EATAI">
+<Description language="ENGLISH">"High Elves (Eataine)"</Description>
+<Explanation language="ENGLISH">"Eataine is a rich, cosmopolitan community populated by quick-witted, open-minded Elves. They are prone to intrigue, pride, and arrogance, believing Asuryan chose their kingdom over more parochial lands. Trade, exploration, and diplomacy inspire Eataine’s Elves. Many admire the phoenix king’s history and are eager to follow in his footsteps to make their fortune beyond the Emerald Gates."</Explanation>
+<Ethnic>"RULES-SPECIE_HELF"</Ethnic>
+<PictureLevel>"NIV_HELF"</PictureLevel>
+<SUBCHAPTER_ATTR>
+<Attribut name="RULES-ATTR_WS">"2d10+30"</Attribut>
+<Attribut name="RULES-ATTR_BS">"2d10+30"</Attribut>
+<Attribut name="RULES-ATTR_S">"2d10+20"</Attribut>
+<Attribut name="RULES-ATTR_T">"2d10+20"</Attribut>
+<Attribut name="RULES-ATTR_I">"2d10+40"</Attribut>
+<Attribut name="RULES-ATTR_Ag">"2d10+30"</Attribut>
+<Attribut name="RULES-ATTR_Dex">"2d10+30"</Attribut>
+<Attribut name="RULES-ATTR_Int">"2d10+30"</Attribut>
+<Attribut name="RULES-ATTR_WP">"2d10+30"</Attribut>
+<Attribut name="RULES-ATTR_Fel">"2d10+20"</Attribut>
+<Attribut name="RULES-ATTR_Fate">"0"</Attribut>
+<Attribut name="RULES-ATTR_Resil">"0"</Attribut>
+<Attribut name="RULES-ATTR_Wound">"1xBATTR_S+2xBATTR_T+1xBATTR_WP"</Attribut>
+<Attribut name="RULES-ATTR_Supp">"2"</Attribut>
+<Attribut name="RULES-ATTR_Move">"5"</Attribut>
+</SUBCHAPTER_ATTR>
+<SUBCHAPTER_SKILL>
+<Skill>"RULES-COMPCHARM"</Skill>
+  <!-- Charm -->
+<Skill>"RULES-COMPCALM"</Skill>
+  <!-- Cool -->
+<Skill>"RULES-COMPDIVERT_CHANT"</Skill>
+  <!-- Entertain (Singing) -->
+<Skill>"RULES-COMPEVAL"</Skill>
+  <!-- Evaluate -->
+<Skill>"RULES-COMPRAGOT"</Skill>
+  <!-- Gossip -->
+<Skill>"RULES-COMPLANG_*"</Skill>
+  <!-- Language (Any) -->
+<Skill>"RULES-COMPLANG_ELTHA"</Skill>
+  <!-- Language (Elthárin) -->
+<Skill>"RULES-COMPCOMM"</Skill>
+  <!-- Leadership -->
+<Skill>"RULES-COMPCOMB_BASE"</Skill>
+  <!-- Melee (Basic) -->
+<Skill>"RULES-COMPPRECEP"</Skill>
+  <!-- Perception -->
+<Skill>"RULES-COMPVOILE"</Skill>
+  <!-- Sail -->
+<Skill>"RULES-COMPNATA"</Skill>
+  <!-- Swim -->
+</SUBCHAPTER_SKILL>
+<SUBCHAPTER_TALENT>
+<Talent>"RULES-T0139_VUE"</Talent>
+  <!-- Acute Sense (Sight) -->
+<Talent>"RULES-T0102/RULES-T0117"</Talent>
+  <!-- Dealmaker or Savvy -->
+<Talent>"RULES-T0164"</Talent>
+  <!-- Night Vision -->
+<Talent>"RULES-T0084"</Talent>
+  <!-- Read/Write -->
+<Talent>"RULES-T0079/RULES-T0141"</Talent>
+  <!-- Schemer or Sixth Sense -->
+</SUBCHAPTER_TALENT>
+<SUBCHAPTER_CAREER>
+  <!-- colonne "Inner Kingdoms" de la table p.59 -->
+<Career name="RULES-WORK02">"01-03"</Career>
+  <!-- Apothecary -->
+<Career name="RULES-WORK33">"04-06"</Career>
+  <!-- Lawyer -->
+  <!-- TROU ASSUME : Mage 07-09. C est le Mage du livre (p.90), carriere a CINQ
+       niveaux qui appartient au lot 2 et n existe pas encore. Ce n est PAS le
+       Wizard du Rulebook : le livre distingue explicitement les deux (p.60).
+       A rajouter ici en meme temps que la carriere. -->
+<Career name="RULES-WORK36">"10-11"</Career>
+  <!-- Physician -->
+<Career name="RULES-WORK23">"12-14"</Career>
+  <!-- Scholar -->
+<Career name="RULES-WORK03">"15-17"</Career>
+  <!-- Artisan -->
+<Career name="RULES-WORK21">"18-19"</Career>
+  <!-- Investigator -->
+<Career name="RULES-WORK34">"20-25"</Career>
+  <!-- Merchant -->
+<Career name="HELFG-WORK130">"26-27"</Career>
+  <!-- Merchant Adventurer -->
+<Career name="RULES-WORK07">"28-29"</Career>
+  <!-- Townsman -->
+<Career name="RULES-WORK39">"30-31"</Career>
+  <!-- Watchman -->
+<Career name="RULES-WORK15">"32-33"</Career>
+  <!-- Advisor -->
+<Career name="HELFG-WORK131">"34-36"</Career>
+  <!-- Aestheticist -->
+<Career name="RULES-WORK04">"37-38"</Career>
+  <!-- Artist -->
+<Career name="RULES-WORK18">"39-41"</Career>
+  <!-- Duellist -->
+<Career name="RULES-WORK20">"42-45"</Career>
+  <!-- Envoy -->
+<Career name="RULES-WORK44">"46-47"</Career>
+  <!-- Noble -->
+<Career name="RULES-WORK56">"48-50"</Career>
+  <!-- Servant* -->
+<Career name="RULES-WORK24">"51-53"</Career>
+  <!-- Spy -->
+<Career name="RULES-WORK32">"54-55"</Career>
+  <!-- Warden -->
+<Career name="RULES-WORK29">"56"</Career>
+  <!-- Herbalist -->
+<Career name="RULES-WORK10">"57"</Career>
+  <!-- Hunter -->
+<Career name="RULES-WORK19">"58-59"</Career>
+  <!-- Scout -->
+<Career name="RULES-WORK63">"60"</Career>
+  <!-- Villager* -->
+<Career name="RULES-WORK11">"61"</Career>
+  <!-- Bounty Hunter -->
+<Career name="RULES-WORK55">"62-64"</Career>
+  <!-- Entertainer -->
+<Career name="RULES-WORK38">"65-66"</Career>
+  <!-- Messenger -->
+<Career name="RULES-WORK06">"67-69"</Career>
+  <!-- Boatman -->
+<Career name="RULES-WORK43">"70-72"</Career>
+  <!-- Huffer* -->
+<Career name="RULES-WORK35">"73-77"</Career>
+  <!-- Seaman -->
+<Career name="RULES-WORK16">"78-80"</Career>
+  <!-- Smuggler -->
+<Career name="RULES-WORK22">"81-83"</Career>
+  <!-- Bawd -->
+<Career name="RULES-WORK09">"84-85"</Career>
+  <!-- Charlatan -->
+<Career name="RULES-WORK08">"86-87"</Career>
+  <!-- Cavalryman -->
+<Career name="RULES-WORK27">"88-89"</Career>
+  <!-- Guard -->
+<Career name="RULES-WORK12">"90-91"</Career>
+  <!-- Knight -->
+<Career name="HELFG-WORK127">"92-95"</Career>
+  <!-- Sea Guard -->
+<Career name="RULES-WORK28">"96"</Career>
+  <!-- Pit Fighter -->
+<Career name="RULES-WORK61">"97"</Career>
+  <!-- Protagonist -->
+<Career name="RULES-WORK57">"98-99"</Career>
+  <!-- Soldier -->
+<Career name="HELFG-WORK128">"100"</Career>
+  <!-- Swordmaster -->
+</SUBCHAPTER_CAREER>
+</Specie>
+<Specie id="HELFG-RACE_TIRAN">
+<Description language="ENGLISH">"High Elves (Tiranoc)"</Description>
+<Explanation language="ENGLISH">"The Elves of Tiranoc are a determined people, hardened by frequent Druchii raids on their coastal settlements. They are nostalgic for their kingdom’s golden age, but they are hopeful — how else could they have rebuilt after the devastation of the Sundering? Some Elves of Tiranoc venture forth to recover relics and memories of the kingdom’s lost glory. Others seek revenge against the Druchii whose rebellion brought ruin to Tiranoc."</Explanation>
+<Ethnic>"RULES-SPECIE_HELF"</Ethnic>
+<PictureLevel>"NIV_HELF"</PictureLevel>
+<SUBCHAPTER_ATTR>
+<Attribut name="RULES-ATTR_WS">"2d10+30"</Attribut>
+<Attribut name="RULES-ATTR_BS">"2d10+30"</Attribut>
+<Attribut name="RULES-ATTR_S">"2d10+20"</Attribut>
+<Attribut name="RULES-ATTR_T">"2d10+20"</Attribut>
+<Attribut name="RULES-ATTR_I">"2d10+40"</Attribut>
+<Attribut name="RULES-ATTR_Ag">"2d10+30"</Attribut>
+<Attribut name="RULES-ATTR_Dex">"2d10+30"</Attribut>
+<Attribut name="RULES-ATTR_Int">"2d10+30"</Attribut>
+<Attribut name="RULES-ATTR_WP">"2d10+30"</Attribut>
+<Attribut name="RULES-ATTR_Fel">"2d10+20"</Attribut>
+<Attribut name="RULES-ATTR_Fate">"0"</Attribut>
+<Attribut name="RULES-ATTR_Resil">"0"</Attribut>
+<Attribut name="RULES-ATTR_Wound">"1xBATTR_S+2xBATTR_T+1xBATTR_WP"</Attribut>
+<Attribut name="RULES-ATTR_Supp">"2"</Attribut>
+<Attribut name="RULES-ATTR_Move">"5"</Attribut>
+</SUBCHAPTER_ATTR>
+<SUBCHAPTER_SKILL>
+<Skill>"RULES-COMPSOINANI"</Skill>
+  <!-- Animal Care -->
+<Skill>"RULES-COMPCALM"</Skill>
+  <!-- Cool -->
+<Skill>"RULES-COMPRESIST"</Skill>
+  <!-- Endurance -->
+<Skill>"RULES-COMPDIVERT_CHANT"</Skill>
+  <!-- Entertain (Singing) -->
+<Skill>"RULES-COMPLANG_ELTHA"</Skill>
+  <!-- Language (Elthárin) -->
+<Skill>"RULES-COMPCOMM"</Skill>
+  <!-- Leadership -->
+<Skill>"RULES-COMPCOMB_BASE"</Skill>
+  <!-- Melee (Basic) -->
+<Skill>"RULES-COMPORIENT"</Skill>
+  <!-- Navigation -->
+<Skill>"RULES-COMPPRECEP"</Skill>
+  <!-- Perception -->
+<Skill>"RULES-COMPMUSIC_*"</Skill>
+  <!-- Play (Any) -->
+<Skill>"RULES-COMPPROJ_ARC"</Skill>
+  <!-- Ranged (Bow) -->
+<Skill>"RULES-COMPNATA"</Skill>
+  <!-- Swim -->
+</SUBCHAPTER_SKILL>
+<SUBCHAPTER_TALENT>
+<Talent>"RULES-T0139_VUE"</Talent>
+  <!-- Acute Sense (Sight) -->
+<Talent>"RULES-T0074/RULES-T0069_DELF"</Talent>
+  <!-- Coolheaded or Hatred (Dark Elves) -->
+<Talent>"RULES-T0164"</Talent>
+  <!-- Night Vision -->
+<Talent>"RULES-T0084"</Talent>
+  <!-- Read/Write -->
+<Talent>"RULES-T0116/RULES-T0141"</Talent>
+  <!-- Tenacious or Sixth Sense -->
+</SUBCHAPTER_TALENT>
+<SUBCHAPTER_CAREER>
+  <!-- colonne "Outer Kingdoms" de la table p.59 -->
+<Career name="RULES-WORK02">"01-03"</Career>
+  <!-- Apothecary -->
+<Career name="RULES-WORK33">"04-05"</Career>
+  <!-- Lawyer -->
+  <!-- TROU ASSUME : Mage 06-08. C est le Mage du livre (p.90), carriere a CINQ
+       niveaux qui appartient au lot 2 et n existe pas encore. Ce n est PAS le
+       Wizard du Rulebook : le livre distingue explicitement les deux (p.60).
+       A rajouter ici en meme temps que la carriere. -->
+<Career name="RULES-WORK36">"09-12"</Career>
+  <!-- Physician -->
+<Career name="RULES-WORK23">"13-16"</Career>
+  <!-- Scholar -->
+<Career name="RULES-WORK03">"17-19"</Career>
+  <!-- Artisan -->
+<Career name="RULES-WORK21">"20-21"</Career>
+  <!-- Investigator -->
+<Career name="RULES-WORK34">"22-24"</Career>
+  <!-- Merchant -->
+<Career name="HELFG-WORK130">"25-26"</Career>
+  <!-- Merchant Adventurer -->
+<Career name="RULES-WORK07">"27-29"</Career>
+  <!-- Townsman -->
+<Career name="RULES-WORK39">"30"</Career>
+  <!-- Watchman -->
+<Career name="RULES-WORK15">"31-32"</Career>
+  <!-- Advisor -->
+<Career name="HELFG-WORK131">"33-34"</Career>
+  <!-- Aestheticist -->
+<Career name="RULES-WORK04">"35"</Career>
+  <!-- Artist -->
+<Career name="RULES-WORK18">"36"</Career>
+  <!-- Duellist -->
+<Career name="RULES-WORK20">"37-39"</Career>
+  <!-- Envoy -->
+<Career name="RULES-WORK44">"40-42"</Career>
+  <!-- Noble -->
+<Career name="RULES-WORK56">"43-44"</Career>
+  <!-- Servant* -->
+<Career name="RULES-WORK24">"45-46"</Career>
+  <!-- Spy -->
+<Career name="RULES-WORK32">"47-51"</Career>
+  <!-- Warden -->
+<Career name="RULES-WORK29">"52"</Career>
+  <!-- Herbalist -->
+<Career name="RULES-WORK10">"53-55"</Career>
+  <!-- Hunter -->
+<Career name="RULES-WORK19">"56-60"</Career>
+  <!-- Scout -->
+<Career name="RULES-WORK63">"61-63"</Career>
+  <!-- Villager* -->
+<Career name="RULES-WORK11">"64-66"</Career>
+  <!-- Bounty Hunter -->
+<Career name="RULES-WORK55">"67"</Career>
+  <!-- Entertainer -->
+<Career name="RULES-WORK38">"68-69"</Career>
+  <!-- Messenger -->
+<Career name="RULES-WORK06">"70-71"</Career>
+  <!-- Boatman -->
+<Career name="RULES-WORK43">"72-73"</Career>
+  <!-- Huffer* -->
+<Career name="RULES-WORK35">"74-77"</Career>
+  <!-- Seaman -->
+<Career name="RULES-WORK16">"78"</Career>
+  <!-- Smuggler -->
+<Career name="RULES-WORK22">"79"</Career>
+  <!-- Bawd -->
+<Career name="RULES-WORK09">"80-81"</Career>
+  <!-- Charlatan -->
+<Career name="RULES-WORK30">"82-84"</Career>
+  <!-- Outlaw -->
+<Career name="RULES-WORK08">"85-88"</Career>
+  <!-- Cavalryman -->
+<Career name="RULES-WORK27">"89-90"</Career>
+  <!-- Guard - errata, le livre imprime "89-91" -->
+<Career name="RULES-WORK12">"91-92"</Career>
+  <!-- Knight -->
+<Career name="HELFG-WORK127">"93"</Career>
+  <!-- Sea Guard -->
+<Career name="RULES-WORK28">"94-95"</Career>
+  <!-- Pit Fighter -->
+<Career name="RULES-WORK61">"96"</Career>
+  <!-- Protagonist -->
+<Career name="RULES-WORK57">"97-99"</Career>
+  <!-- Soldier -->
+<Career name="HELFG-WORK128">"100"</Career>
+  <!-- Swordmaster -->
+</SUBCHAPTER_CAREER>
+</Specie>
+<Specie id="HELFG-RACE_NAGAR">
+<Description language="ENGLISH">"High Elves (Nagarythe)"</Description>
+<Explanation language="ENGLISH">"The taciturn wanderers of Nagarythe burn with hatred for the treacherous Druchii. They are secretive, even with one another, and prone to unsettling ruthlessness. Those from Nagarythe are restless and rarely welcomed elsewhere in Ulthuan. The need to thwart the Druchii consumes them — they may travel far to enact revenge. High Elves employ Elves from Nagarythe to seek intelligence and work as stealthy scouts."</Explanation>
+<Ethnic>"RULES-SPECIE_HELF"</Ethnic>
+<PictureLevel>"NIV_HELF"</PictureLevel>
+<SUBCHAPTER_ATTR>
+<Attribut name="RULES-ATTR_WS">"2d10+30"</Attribut>
+<Attribut name="RULES-ATTR_BS">"2d10+30"</Attribut>
+<Attribut name="RULES-ATTR_S">"2d10+20"</Attribut>
+<Attribut name="RULES-ATTR_T">"2d10+20"</Attribut>
+<Attribut name="RULES-ATTR_I">"2d10+40"</Attribut>
+<Attribut name="RULES-ATTR_Ag">"2d10+30"</Attribut>
+<Attribut name="RULES-ATTR_Dex">"2d10+30"</Attribut>
+<Attribut name="RULES-ATTR_Int">"2d10+30"</Attribut>
+<Attribut name="RULES-ATTR_WP">"2d10+30"</Attribut>
+<Attribut name="RULES-ATTR_Fel">"2d10+20"</Attribut>
+<Attribut name="RULES-ATTR_Fate">"0"</Attribut>
+<Attribut name="RULES-ATTR_Resil">"0"</Attribut>
+<Attribut name="RULES-ATTR_Wound">"1xBATTR_S+2xBATTR_T+1xBATTR_WP"</Attribut>
+<Attribut name="RULES-ATTR_Supp">"2"</Attribut>
+<Attribut name="RULES-ATTR_Move">"5"</Attribut>
+</SUBCHAPTER_ATTR>
+<SUBCHAPTER_SKILL>
+<Skill>"RULES-COMPATHL"</Skill>
+  <!-- Athletics -->
+<Skill>"RULES-COMPCALM"</Skill>
+  <!-- Cool -->
+<Skill>"RULES-COMPRESIST"</Skill>
+  <!-- Endurance -->
+<Skill>"RULES-COMPDIVERT_CHANT"</Skill>
+  <!-- Entertain (Singing) -->
+<Skill>"RULES-COMPLANG_ELTHA"</Skill>
+  <!-- Language (Elthárin) -->
+<Skill>"RULES-COMPCOMB_BASE"</Skill>
+  <!-- Melee (Basic) -->
+<Skill>"RULES-COMPORIENT"</Skill>
+  <!-- Navigation -->
+<Skill>"RULES-COMPSURVEXT"</Skill>
+  <!-- Outdoor Survival -->
+<Skill>"RULES-COMPPRECEP"</Skill>
+  <!-- Perception -->
+<Skill>"RULES-COMPPROJ_ARC"</Skill>
+  <!-- Ranged (Bow) -->
+<Skill>"RULES-COMPDISC_RURAL"</Skill>
+  <!-- Stealth (Rural) -->
+<Skill>"RULES-COMPNATA"</Skill>
+  <!-- Swim -->
+</SUBCHAPTER_SKILL>
+<SUBCHAPTER_TALENT>
+<Talent>"RULES-T0139_VUE"</Talent>
+  <!-- Acute Sense (Sight) -->
+<Talent>"RULES-T0074/RULES-T0116"</Talent>
+  <!-- Coolheaded or Tenacious -->
+<Talent>"RULES-T0069_DELF"</Talent>
+  <!-- Hatred (Dark Elves) -->
+<Talent>"RULES-T0164"</Talent>
+  <!-- Night Vision -->
+<Talent>"RULES-T0084"</Talent>
+  <!-- Read/Write -->
+<Talent>"RULES-T0105/RULES-T0141"</Talent>
+  <!-- Rover or Sixth Sense -->
+</SUBCHAPTER_TALENT>
+<SUBCHAPTER_CAREER>
+  <!-- colonne "Nagarythe" de la table p.59 -->
+<Career name="RULES-WORK02">"01-03"</Career>
+  <!-- Apothecary -->
+  <!-- TROU ASSUME : Mage 04-05. C est le Mage du livre (p.90), carriere a CINQ
+       niveaux qui appartient au lot 2 et n existe pas encore. Ce n est PAS le
+       Wizard du Rulebook : le livre distingue explicitement les deux (p.60).
+       A rajouter ici en meme temps que la carriere. -->
+<Career name="RULES-WORK36">"06-07"</Career>
+  <!-- Physician -->
+<Career name="RULES-WORK23">"08-09"</Career>
+  <!-- Scholar -->
+<Career name="RULES-WORK03">"10-12"</Career>
+  <!-- Artisan -->
+<Career name="RULES-WORK21">"13-15"</Career>
+  <!-- Investigator -->
+<Career name="RULES-WORK34">"16"</Career>
+  <!-- Merchant -->
+<Career name="HELFG-WORK130">"17-18"</Career>
+  <!-- Merchant Adventurer -->
+<Career name="RULES-WORK15">"19"</Career>
+  <!-- Advisor -->
+<Career name="HELFG-WORK131">"20"</Career>
+  <!-- Aestheticist -->
+<Career name="RULES-WORK04">"21"</Career>
+  <!-- Artist -->
+<Career name="RULES-WORK18">"22-24"</Career>
+  <!-- Duellist -->
+<Career name="RULES-WORK20">"25-27"</Career>
+  <!-- Envoy -->
+<Career name="RULES-WORK44">"28-29"</Career>
+  <!-- Noble -->
+<Career name="RULES-WORK56">"30-32"</Career>
+  <!-- Servant* -->
+<Career name="RULES-WORK24">"33-37"</Career>
+  <!-- Spy -->
+<Career name="RULES-WORK32">"38-39"</Career>
+  <!-- Warden -->
+<Career name="RULES-WORK29">"40-43"</Career>
+  <!-- Herbalist -->
+<Career name="RULES-WORK10">"44-48"</Career>
+  <!-- Hunter -->
+<Career name="RULES-WORK19">"49-56"</Career>
+  <!-- Scout -->
+<Career name="RULES-WORK63">"57-59"</Career>
+  <!-- Villager* -->
+<Career name="RULES-WORK11">"60-64"</Career>
+  <!-- Bounty Hunter -->
+<Career name="RULES-WORK55">"65-67"</Career>
+  <!-- Entertainer -->
+<Career name="RULES-WORK38">"68-70"</Career>
+  <!-- Messenger -->
+<Career name="HELFG-WORK129">"71-74"</Career>
+  <!-- Shadow Warrior -->
+<Career name="RULES-WORK06">"75"</Career>
+  <!-- Boatman -->
+<Career name="RULES-WORK16">"76"</Career>
+  <!-- Smuggler -->
+<Career name="RULES-WORK22">"77-78"</Career>
+  <!-- Bawd -->
+<Career name="RULES-WORK09">"79-82"</Career>
+  <!-- Charlatan -->
+<Career name="RULES-WORK30">"83-86"</Career>
+  <!-- Outlaw -->
+<Career name="RULES-WORK08">"87-90"</Career>
+  <!-- Cavalryman -->
+<Career name="RULES-WORK27">"91"</Career>
+  <!-- Guard -->
+<Career name="RULES-WORK12">"92-93"</Career>
+  <!-- Knight -->
+<Career name="RULES-WORK28">"94-95"</Career>
+  <!-- Pit Fighter -->
+<Career name="RULES-WORK61">"96-97"</Career>
+  <!-- Protagonist -->
+<Career name="RULES-WORK57">"98-99"</Career>
+  <!-- Soldier -->
+<Career name="HELFG-WORK128">"100"</Career>
+  <!-- Swordmaster -->
+</SUBCHAPTER_CAREER>
+</Specie>
+<Specie id="HELFG-RACE_CHRAC">
+<Description language="ENGLISH">"High Elves (Chrace)"</Description>
+<Explanation language="ENGLISH">"Chracians are ever-alert for threats from sea raiders and the monstrous beats found in the wilds of their kingdom. They have a strong warrior culture and venerate hunting as a noble pursuit essential for survival. Life in Chrace presents limited opportunities for those with ambition. They venture elsewhere to learn new trades, find riches, or broaden their minds. Others take the fight to the enemy, travelling abroad to combat the Druchii or servants of Chaos."</Explanation>
+<Ethnic>"RULES-SPECIE_HELF"</Ethnic>
+<PictureLevel>"NIV_HELF"</PictureLevel>
+<SUBCHAPTER_ATTR>
+<Attribut name="RULES-ATTR_WS">"2d10+30"</Attribut>
+<Attribut name="RULES-ATTR_BS">"2d10+30"</Attribut>
+<Attribut name="RULES-ATTR_S">"2d10+20"</Attribut>
+<Attribut name="RULES-ATTR_T">"2d10+20"</Attribut>
+<Attribut name="RULES-ATTR_I">"2d10+40"</Attribut>
+<Attribut name="RULES-ATTR_Ag">"2d10+30"</Attribut>
+<Attribut name="RULES-ATTR_Dex">"2d10+30"</Attribut>
+<Attribut name="RULES-ATTR_Int">"2d10+30"</Attribut>
+<Attribut name="RULES-ATTR_WP">"2d10+30"</Attribut>
+<Attribut name="RULES-ATTR_Fel">"2d10+20"</Attribut>
+<Attribut name="RULES-ATTR_Fate">"0"</Attribut>
+<Attribut name="RULES-ATTR_Resil">"0"</Attribut>
+<Attribut name="RULES-ATTR_Wound">"1xBATTR_S+2xBATTR_T+1xBATTR_WP"</Attribut>
+<Attribut name="RULES-ATTR_Supp">"2"</Attribut>
+<Attribut name="RULES-ATTR_Move">"5"</Attribut>
+</SUBCHAPTER_ATTR>
+<SUBCHAPTER_SKILL>
+<Skill>"RULES-COMPCALM"</Skill>
+  <!-- Cool -->
+<Skill>"RULES-COMPRESIST"</Skill>
+  <!-- Endurance -->
+<Skill>"RULES-COMPDIVERT_CHANT"</Skill>
+  <!-- Entertain (Singing) -->
+<Skill>"RULES-COMPEVAL"</Skill>
+  <!-- Evaluate -->
+<Skill>"RULES-COMPGUERI"</Skill>
+  <!-- Heal -->
+<Skill>"RULES-COMPLANG_ELTHA"</Skill>
+  <!-- Language (Elthárin) -->
+<Skill>"RULES-COMPCOMM"</Skill>
+  <!-- Leadership -->
+<Skill>"RULES-COMPCOMB_BASE"</Skill>
+  <!-- Melee (Basic) -->
+<Skill>"RULES-COMPORIENT"</Skill>
+  <!-- Navigation -->
+<Skill>"RULES-COMPSURVEXT"</Skill>
+  <!-- Outdoor Survival -->
+<Skill>"RULES-COMPPRECEP"</Skill>
+  <!-- Perception -->
+<Skill>"RULES-COMPPROJ_ARC"</Skill>
+  <!-- Ranged (Bow) -->
+<Skill>"RULES-COMPPIEG"</Skill>
+  <!-- Set Trap -->
+</SUBCHAPTER_SKILL>
+<SUBCHAPTER_TALENT>
+<Talent>"RULES-T0139_VUE"</Talent>
+  <!-- Acute Sense (Sight) -->
+<Talent>"RULES-T0047/RULES-T0108"</Talent>
+  <!-- Hardy or Hunter’s Eye -->
+<Talent>"RULES-T0164"</Talent>
+  <!-- Night Vision -->
+<Talent>"RULES-T0084"</Talent>
+  <!-- Read/Write -->
+<Talent>"RULES-T0141"</Talent>
+  <!-- Sixth Sense -->
+<Talent>"RULES-T0013_BOID"</Talent>
+  <!-- Strider (Woodlands) -->
+</SUBCHAPTER_TALENT>
+<SUBCHAPTER_CAREER>
+  <!-- colonne "Outer Kingdoms" de la table p.59 -->
+<Career name="RULES-WORK02">"01-03"</Career>
+  <!-- Apothecary -->
+<Career name="RULES-WORK33">"04-05"</Career>
+  <!-- Lawyer -->
+  <!-- TROU ASSUME : Mage 06-08. C est le Mage du livre (p.90), carriere a CINQ
+       niveaux qui appartient au lot 2 et n existe pas encore. Ce n est PAS le
+       Wizard du Rulebook : le livre distingue explicitement les deux (p.60).
+       A rajouter ici en meme temps que la carriere. -->
+<Career name="RULES-WORK36">"09-12"</Career>
+  <!-- Physician -->
+<Career name="RULES-WORK23">"13-16"</Career>
+  <!-- Scholar -->
+<Career name="RULES-WORK03">"17-19"</Career>
+  <!-- Artisan -->
+<Career name="RULES-WORK21">"20-21"</Career>
+  <!-- Investigator -->
+<Career name="RULES-WORK34">"22-24"</Career>
+  <!-- Merchant -->
+<Career name="HELFG-WORK130">"25-26"</Career>
+  <!-- Merchant Adventurer -->
+<Career name="RULES-WORK07">"27-29"</Career>
+  <!-- Townsman -->
+<Career name="RULES-WORK39">"30"</Career>
+  <!-- Watchman -->
+<Career name="RULES-WORK15">"31-32"</Career>
+  <!-- Advisor -->
+<Career name="HELFG-WORK131">"33-34"</Career>
+  <!-- Aestheticist -->
+<Career name="RULES-WORK04">"35"</Career>
+  <!-- Artist -->
+<Career name="RULES-WORK18">"36"</Career>
+  <!-- Duellist -->
+<Career name="RULES-WORK20">"37-39"</Career>
+  <!-- Envoy -->
+<Career name="RULES-WORK44">"40-42"</Career>
+  <!-- Noble -->
+<Career name="RULES-WORK56">"43-44"</Career>
+  <!-- Servant* -->
+<Career name="RULES-WORK24">"45-46"</Career>
+  <!-- Spy -->
+<Career name="RULES-WORK32">"47-51"</Career>
+  <!-- Warden -->
+<Career name="RULES-WORK29">"52"</Career>
+  <!-- Herbalist -->
+<Career name="RULES-WORK10">"53-55"</Career>
+  <!-- Hunter -->
+<Career name="RULES-WORK19">"56-60"</Career>
+  <!-- Scout -->
+<Career name="RULES-WORK63">"61-63"</Career>
+  <!-- Villager* -->
+<Career name="RULES-WORK11">"64-66"</Career>
+  <!-- Bounty Hunter -->
+<Career name="RULES-WORK55">"67"</Career>
+  <!-- Entertainer -->
+<Career name="RULES-WORK38">"68-69"</Career>
+  <!-- Messenger -->
+<Career name="RULES-WORK06">"70-71"</Career>
+  <!-- Boatman -->
+<Career name="RULES-WORK43">"72-73"</Career>
+  <!-- Huffer* -->
+<Career name="RULES-WORK35">"74-77"</Career>
+  <!-- Seaman -->
+<Career name="RULES-WORK16">"78"</Career>
+  <!-- Smuggler -->
+<Career name="RULES-WORK22">"79"</Career>
+  <!-- Bawd -->
+<Career name="RULES-WORK09">"80-81"</Career>
+  <!-- Charlatan -->
+<Career name="RULES-WORK30">"82-84"</Career>
+  <!-- Outlaw -->
+<Career name="RULES-WORK08">"85-88"</Career>
+  <!-- Cavalryman -->
+<Career name="RULES-WORK27">"89-90"</Career>
+  <!-- Guard - errata, le livre imprime "89-91" -->
+<Career name="RULES-WORK12">"91-92"</Career>
+  <!-- Knight -->
+<Career name="HELFG-WORK127">"93"</Career>
+  <!-- Sea Guard -->
+<Career name="RULES-WORK28">"94-95"</Career>
+  <!-- Pit Fighter -->
+<Career name="RULES-WORK61">"96"</Career>
+  <!-- Protagonist -->
+<Career name="RULES-WORK57">"97-99"</Career>
+  <!-- Soldier -->
+<Career name="HELFG-WORK128">"100"</Career>
+  <!-- Swordmaster -->
+</SUBCHAPTER_CAREER>
+</Specie>
+<Specie id="HELFG-RACE_COTHI">
+<Description language="ENGLISH">"High Elves (Cothique)"</Description>
+<Explanation language="ENGLISH">"Cothiquians are famous for wanderlust, a thirst for adventure, and irreverence for convention. They are shrewd and superstitious, in awe of the possibilities which lie beyond the Shifting Isles. It is the nature of the Cothiqui to seek fresh horizons and explore the world — for the joy of discovery, the possibility of trade, plunder, and sheer exhilaration."</Explanation>
+<Ethnic>"RULES-SPECIE_HELF"</Ethnic>
+<PictureLevel>"NIV_HELF"</PictureLevel>
+<SUBCHAPTER_ATTR>
+<Attribut name="RULES-ATTR_WS">"2d10+30"</Attribut>
+<Attribut name="RULES-ATTR_BS">"2d10+30"</Attribut>
+<Attribut name="RULES-ATTR_S">"2d10+20"</Attribut>
+<Attribut name="RULES-ATTR_T">"2d10+20"</Attribut>
+<Attribut name="RULES-ATTR_I">"2d10+40"</Attribut>
+<Attribut name="RULES-ATTR_Ag">"2d10+30"</Attribut>
+<Attribut name="RULES-ATTR_Dex">"2d10+30"</Attribut>
+<Attribut name="RULES-ATTR_Int">"2d10+30"</Attribut>
+<Attribut name="RULES-ATTR_WP">"2d10+30"</Attribut>
+<Attribut name="RULES-ATTR_Fel">"2d10+20"</Attribut>
+<Attribut name="RULES-ATTR_Fate">"0"</Attribut>
+<Attribut name="RULES-ATTR_Resil">"0"</Attribut>
+<Attribut name="RULES-ATTR_Wound">"1xBATTR_S+2xBATTR_T+1xBATTR_WP"</Attribut>
+<Attribut name="RULES-ATTR_Supp">"2"</Attribut>
+<Attribut name="RULES-ATTR_Move">"5"</Attribut>
+</SUBCHAPTER_ATTR>
+<SUBCHAPTER_SKILL>
+<Skill>"RULES-COMPATHL"</Skill>
+  <!-- Athletics -->
+<Skill>"RULES-COMPCALM"</Skill>
+  <!-- Cool -->
+<Skill>"RULES-COMPDIVERT_CHANT"</Skill>
+  <!-- Entertain (Singing) -->
+<Skill>"RULES-COMPEVAL"</Skill>
+  <!-- Evaluate -->
+<Skill>"RULES-COMPMARCH"</Skill>
+  <!-- Haggle -->
+<Skill>"RULES-COMPLANG_ELTHA"</Skill>
+  <!-- Language (Elthárin) -->
+<Skill>"RULES-COMPCOMB_BASE"</Skill>
+  <!-- Melee (Basic) -->
+<Skill>"RULES-COMPORIENT"</Skill>
+  <!-- Navigation -->
+<Skill>"RULES-COMPPRECEP"</Skill>
+  <!-- Perception -->
+<Skill>"RULES-COMPPROJ_ARC"</Skill>
+  <!-- Ranged (Bow) -->
+<Skill>"RULES-COMPVOILE"</Skill>
+  <!-- Sail -->
+<Skill>"RULES-COMPNATA"</Skill>
+  <!-- Swim -->
+</SUBCHAPTER_SKILL>
+<SUBCHAPTER_TALENT>
+<Talent>"RULES-T0139_VUE"</Talent>
+  <!-- Acute Sense (Sight) -->
+<Talent>"RULES-T0119/RULES-T0047"</Talent>
+  <!-- Sea Legs or Hardy -->
+<Talent>"RULES-T0164"</Talent>
+  <!-- Night Vision -->
+<Talent>"RULES-T0084"</Talent>
+  <!-- Read/Write -->
+<Talent>"RULES-T0140/RULES-T0141"</Talent>
+  <!-- Orientation or Sixth Sense -->
+</SUBCHAPTER_TALENT>
+<SUBCHAPTER_CAREER>
+  <!-- colonne "Outer Kingdoms" de la table p.59 -->
+<Career name="RULES-WORK02">"01-03"</Career>
+  <!-- Apothecary -->
+<Career name="RULES-WORK33">"04-05"</Career>
+  <!-- Lawyer -->
+  <!-- TROU ASSUME : Mage 06-08. C est le Mage du livre (p.90), carriere a CINQ
+       niveaux qui appartient au lot 2 et n existe pas encore. Ce n est PAS le
+       Wizard du Rulebook : le livre distingue explicitement les deux (p.60).
+       A rajouter ici en meme temps que la carriere. -->
+<Career name="RULES-WORK36">"09-12"</Career>
+  <!-- Physician -->
+<Career name="RULES-WORK23">"13-16"</Career>
+  <!-- Scholar -->
+<Career name="RULES-WORK03">"17-19"</Career>
+  <!-- Artisan -->
+<Career name="RULES-WORK21">"20-21"</Career>
+  <!-- Investigator -->
+<Career name="RULES-WORK34">"22-24"</Career>
+  <!-- Merchant -->
+<Career name="HELFG-WORK130">"25-26"</Career>
+  <!-- Merchant Adventurer -->
+<Career name="RULES-WORK07">"27-29"</Career>
+  <!-- Townsman -->
+<Career name="RULES-WORK39">"30"</Career>
+  <!-- Watchman -->
+<Career name="RULES-WORK15">"31-32"</Career>
+  <!-- Advisor -->
+<Career name="HELFG-WORK131">"33-34"</Career>
+  <!-- Aestheticist -->
+<Career name="RULES-WORK04">"35"</Career>
+  <!-- Artist -->
+<Career name="RULES-WORK18">"36"</Career>
+  <!-- Duellist -->
+<Career name="RULES-WORK20">"37-39"</Career>
+  <!-- Envoy -->
+<Career name="RULES-WORK44">"40-42"</Career>
+  <!-- Noble -->
+<Career name="RULES-WORK56">"43-44"</Career>
+  <!-- Servant* -->
+<Career name="RULES-WORK24">"45-46"</Career>
+  <!-- Spy -->
+<Career name="RULES-WORK32">"47-51"</Career>
+  <!-- Warden -->
+<Career name="RULES-WORK29">"52"</Career>
+  <!-- Herbalist -->
+<Career name="RULES-WORK10">"53-55"</Career>
+  <!-- Hunter -->
+<Career name="RULES-WORK19">"56-60"</Career>
+  <!-- Scout -->
+<Career name="RULES-WORK63">"61-63"</Career>
+  <!-- Villager* -->
+<Career name="RULES-WORK11">"64-66"</Career>
+  <!-- Bounty Hunter -->
+<Career name="RULES-WORK55">"67"</Career>
+  <!-- Entertainer -->
+<Career name="RULES-WORK38">"68-69"</Career>
+  <!-- Messenger -->
+<Career name="RULES-WORK06">"70-71"</Career>
+  <!-- Boatman -->
+<Career name="RULES-WORK43">"72-73"</Career>
+  <!-- Huffer* -->
+<Career name="RULES-WORK35">"74-77"</Career>
+  <!-- Seaman -->
+<Career name="RULES-WORK16">"78"</Career>
+  <!-- Smuggler -->
+<Career name="RULES-WORK22">"79"</Career>
+  <!-- Bawd -->
+<Career name="RULES-WORK09">"80-81"</Career>
+  <!-- Charlatan -->
+<Career name="RULES-WORK30">"82-84"</Career>
+  <!-- Outlaw -->
+<Career name="RULES-WORK08">"85-88"</Career>
+  <!-- Cavalryman -->
+<Career name="RULES-WORK27">"89-90"</Career>
+  <!-- Guard - errata, le livre imprime "89-91" -->
+<Career name="RULES-WORK12">"91-92"</Career>
+  <!-- Knight -->
+<Career name="HELFG-WORK127">"93"</Career>
+  <!-- Sea Guard -->
+<Career name="RULES-WORK28">"94-95"</Career>
+  <!-- Pit Fighter -->
+<Career name="RULES-WORK61">"96"</Career>
+  <!-- Protagonist -->
+<Career name="RULES-WORK57">"97-99"</Career>
+  <!-- Soldier -->
+<Career name="HELFG-WORK128">"100"</Career>
+  <!-- Swordmaster -->
+</SUBCHAPTER_CAREER>
+</Specie>
+<Specie id="HELFG-RACE_YVRES">
+<Description language="ENGLISH">"High Elves (Yvresse)"</Description>
+<Explanation language="ENGLISH">"Since Grom’s invasion, Yvresse’s subjects are resolute and dour, with a disarming tendency to blunt manners. They always fight to hold the line, but their skills at diplomacy can leave a lot to be desired. Yvresse under Eltharion the Grim can be forbidding — any High Elf seeking joy in life may choose travel. The Mistwalkers sometimes venture outside Yvresse to provide expertise to others in Daemon-hunting."</Explanation>
+<Ethnic>"RULES-SPECIE_HELF"</Ethnic>
+<PictureLevel>"NIV_HELF"</PictureLevel>
+<SUBCHAPTER_ATTR>
+<Attribut name="RULES-ATTR_WS">"2d10+30"</Attribut>
+<Attribut name="RULES-ATTR_BS">"2d10+30"</Attribut>
+<Attribut name="RULES-ATTR_S">"2d10+20"</Attribut>
+<Attribut name="RULES-ATTR_T">"2d10+20"</Attribut>
+<Attribut name="RULES-ATTR_I">"2d10+40"</Attribut>
+<Attribut name="RULES-ATTR_Ag">"2d10+30"</Attribut>
+<Attribut name="RULES-ATTR_Dex">"2d10+30"</Attribut>
+<Attribut name="RULES-ATTR_Int">"2d10+30"</Attribut>
+<Attribut name="RULES-ATTR_WP">"2d10+30"</Attribut>
+<Attribut name="RULES-ATTR_Fel">"2d10+20"</Attribut>
+<Attribut name="RULES-ATTR_Fate">"0"</Attribut>
+<Attribut name="RULES-ATTR_Resil">"0"</Attribut>
+<Attribut name="RULES-ATTR_Wound">"1xBATTR_S+2xBATTR_T+1xBATTR_WP"</Attribut>
+<Attribut name="RULES-ATTR_Supp">"2"</Attribut>
+<Attribut name="RULES-ATTR_Move">"5"</Attribut>
+</SUBCHAPTER_ATTR>
+<SUBCHAPTER_SKILL>
+<Skill>"RULES-COMPCALM"</Skill>
+  <!-- Cool -->
+<Skill>"RULES-COMPRESIST"</Skill>
+  <!-- Endurance -->
+<Skill>"RULES-COMPDIVERT_CHANT"</Skill>
+  <!-- Entertain (Singing) -->
+<Skill>"RULES-COMPEVAL"</Skill>
+  <!-- Evaluate -->
+<Skill>"RULES-COMPINTUI"</Skill>
+  <!-- Intuition -->
+<Skill>"RULES-COMPLANG_ELTHA"</Skill>
+  <!-- Language (Elthárin) -->
+<Skill>"RULES-COMPCOMM"</Skill>
+  <!-- Leadership -->
+<Skill>"RULES-COMPCOMB_BASE"</Skill>
+  <!-- Melee (Basic) -->
+<Skill>"RULES-COMPORIENT"</Skill>
+  <!-- Navigation -->
+<Skill>"RULES-COMPPRECEP"</Skill>
+  <!-- Perception -->
+<Skill>"RULES-COMPPROJ_ARC"</Skill>
+  <!-- Ranged (Bow) -->
+<Skill>"RULES-COMPNATA"</Skill>
+  <!-- Swim -->
+</SUBCHAPTER_SKILL>
+<SUBCHAPTER_TALENT>
+<Talent>"RULES-T0139_VUE"</Talent>
+  <!-- Acute Sense (Sight) -->
+<Talent>"RULES-T0074/RULES-T0025"</Talent>
+  <!-- Coolheaded or Stout-hearted -->
+<Talent>"RULES-T0164"</Talent>
+  <!-- Night Vision -->
+<Talent>"RULES-T0084"</Talent>
+  <!-- Read/Write -->
+<Talent>"RULES-T0041/RULES-T0050"</Talent>
+  <!-- Resolute or Implacable -->
+<Talent>"RULES-T0137/RULES-T0141"</Talent>
+  <!-- Second Sight or Sixth Sense -->
+</SUBCHAPTER_TALENT>
+<SUBCHAPTER_CAREER>
+  <!-- colonne "Outer Kingdoms" de la table p.59 -->
+<Career name="RULES-WORK02">"01-03"</Career>
+  <!-- Apothecary -->
+<Career name="RULES-WORK33">"04-05"</Career>
+  <!-- Lawyer -->
+  <!-- TROU ASSUME : Mage 06-08. C est le Mage du livre (p.90), carriere a CINQ
+       niveaux qui appartient au lot 2 et n existe pas encore. Ce n est PAS le
+       Wizard du Rulebook : le livre distingue explicitement les deux (p.60).
+       A rajouter ici en meme temps que la carriere. -->
+<Career name="RULES-WORK36">"09-12"</Career>
+  <!-- Physician -->
+<Career name="RULES-WORK23">"13-16"</Career>
+  <!-- Scholar -->
+<Career name="RULES-WORK03">"17-19"</Career>
+  <!-- Artisan -->
+<Career name="RULES-WORK21">"20-21"</Career>
+  <!-- Investigator -->
+<Career name="RULES-WORK34">"22-24"</Career>
+  <!-- Merchant -->
+<Career name="HELFG-WORK130">"25-26"</Career>
+  <!-- Merchant Adventurer -->
+<Career name="RULES-WORK07">"27-29"</Career>
+  <!-- Townsman -->
+<Career name="RULES-WORK39">"30"</Career>
+  <!-- Watchman -->
+<Career name="RULES-WORK15">"31-32"</Career>
+  <!-- Advisor -->
+<Career name="HELFG-WORK131">"33-34"</Career>
+  <!-- Aestheticist -->
+<Career name="RULES-WORK04">"35"</Career>
+  <!-- Artist -->
+<Career name="RULES-WORK18">"36"</Career>
+  <!-- Duellist -->
+<Career name="RULES-WORK20">"37-39"</Career>
+  <!-- Envoy -->
+<Career name="RULES-WORK44">"40-42"</Career>
+  <!-- Noble -->
+<Career name="RULES-WORK56">"43-44"</Career>
+  <!-- Servant* -->
+<Career name="RULES-WORK24">"45-46"</Career>
+  <!-- Spy -->
+<Career name="RULES-WORK32">"47-51"</Career>
+  <!-- Warden -->
+<Career name="RULES-WORK29">"52"</Career>
+  <!-- Herbalist -->
+<Career name="RULES-WORK10">"53-55"</Career>
+  <!-- Hunter -->
+<Career name="RULES-WORK19">"56-60"</Career>
+  <!-- Scout -->
+<Career name="RULES-WORK63">"61-63"</Career>
+  <!-- Villager* -->
+<Career name="RULES-WORK11">"64-66"</Career>
+  <!-- Bounty Hunter -->
+<Career name="RULES-WORK55">"67"</Career>
+  <!-- Entertainer -->
+<Career name="RULES-WORK38">"68-69"</Career>
+  <!-- Messenger -->
+<Career name="RULES-WORK06">"70-71"</Career>
+  <!-- Boatman -->
+<Career name="RULES-WORK43">"72-73"</Career>
+  <!-- Huffer* -->
+<Career name="RULES-WORK35">"74-77"</Career>
+  <!-- Seaman -->
+<Career name="RULES-WORK16">"78"</Career>
+  <!-- Smuggler -->
+<Career name="RULES-WORK22">"79"</Career>
+  <!-- Bawd -->
+<Career name="RULES-WORK09">"80-81"</Career>
+  <!-- Charlatan -->
+<Career name="RULES-WORK30">"82-84"</Career>
+  <!-- Outlaw -->
+<Career name="RULES-WORK08">"85-88"</Career>
+  <!-- Cavalryman -->
+<Career name="RULES-WORK27">"89-90"</Career>
+  <!-- Guard - errata, le livre imprime "89-91" -->
+<Career name="RULES-WORK12">"91-92"</Career>
+  <!-- Knight -->
+<Career name="HELFG-WORK127">"93"</Career>
+  <!-- Sea Guard -->
+<Career name="RULES-WORK28">"94-95"</Career>
+  <!-- Pit Fighter -->
+<Career name="RULES-WORK61">"96"</Career>
+  <!-- Protagonist -->
+<Career name="RULES-WORK57">"97-99"</Career>
+  <!-- Soldier -->
+<Career name="HELFG-WORK128">"100"</Career>
+  <!-- Swordmaster -->
+</SUBCHAPTER_CAREER>
+</Specie>
+<Specie id="HELFG-RACE_SEAEL">
+<Description language="ENGLISH">"High Elves (Sea Elves)"</Description>
+<Explanation language="ENGLISH">"You are a Sea Elf, a cultural sub-type of High Elves. The Uranai lust for exploration and the sights of distant shores. They are dauntless and garrulous. Playing a Sea Elf Character is an opportunity to escape the disciplined, stratified culture of Ulthuan to enjoy the free life of travel and trade across the Known World. Most Sea Elves engage in trade, usually as members of expatriate clans. Sea Elf enclaves can be found in non-Elven ports around the Known World."</Explanation>
+<Ethnic>"RULES-SPECIE_HELF"</Ethnic>
+<PictureLevel>"NIV_HELF"</PictureLevel>
+<SUBCHAPTER_ATTR>
+<Attribut name="RULES-ATTR_WS">"2d10+30"</Attribut>
+<Attribut name="RULES-ATTR_BS">"2d10+30"</Attribut>
+<Attribut name="RULES-ATTR_S">"2d10+20"</Attribut>
+<Attribut name="RULES-ATTR_T">"2d10+20"</Attribut>
+<Attribut name="RULES-ATTR_I">"2d10+40"</Attribut>
+<Attribut name="RULES-ATTR_Ag">"2d10+30"</Attribut>
+<Attribut name="RULES-ATTR_Dex">"2d10+30"</Attribut>
+<Attribut name="RULES-ATTR_Int">"2d10+30"</Attribut>
+<Attribut name="RULES-ATTR_WP">"2d10+30"</Attribut>
+<Attribut name="RULES-ATTR_Fel">"2d10+20"</Attribut>
+<Attribut name="RULES-ATTR_Fate">"0"</Attribut>
+<Attribut name="RULES-ATTR_Resil">"0"</Attribut>
+<Attribut name="RULES-ATTR_Wound">"1xBATTR_S+2xBATTR_T+1xBATTR_WP"</Attribut>
+<Attribut name="RULES-ATTR_Supp">"2"</Attribut>
+<Attribut name="RULES-ATTR_Move">"5"</Attribut>
+</SUBCHAPTER_ATTR>
+<SUBCHAPTER_SKILL>
+<Skill>"RULES-COMPCALM"</Skill>
+  <!-- Cool -->
+<Skill>"RULES-COMPRESIST"</Skill>
+  <!-- Endurance -->
+<Skill>"RULES-COMPDIVERT_CHANT"</Skill>
+  <!-- Entertain (Singing) -->
+<Skill>"RULES-COMPEVAL"</Skill>
+  <!-- Evaluate -->
+<Skill>"RULES-COMPRAGOT"</Skill>
+  <!-- Gossip -->
+<Skill>"RULES-COMPMARCH"</Skill>
+  <!-- Haggle -->
+<Skill>"RULES-COMPLANG_ELTHA"</Skill>
+  <!-- Language (Elthárin) -->
+<Skill>"RULES-COMPLANG_*"</Skill>
+  <!-- Language (Any) -->
+<Skill>"RULES-COMPCOMB_BASE"</Skill>
+  <!-- Melee (Basic) -->
+<Skill>"RULES-COMPORIENT"</Skill>
+  <!-- Navigation -->
+<Skill>"RULES-COMPVOILE"</Skill>
+  <!-- Sail -->
+<Skill>"RULES-COMPNATA"</Skill>
+  <!-- Swim -->
+</SUBCHAPTER_SKILL>
+<SUBCHAPTER_TALENT>
+<Talent>"RULES-T0139_VUE"</Talent>
+  <!-- Acute Sense (Sight) -->
+<Talent>"RULES-T0164"</Talent>
+  <!-- Night Vision -->
+<Talent>"RULES-T0085/RULES-T0119"</Talent>
+  <!-- Old Salt or Sea Legs -->
+<Talent>"RULES-T0140/RULES-T0141"</Talent>
+  <!-- Orientation or Sixth Sense -->
+<Talent>"RULES-T0084"</Talent>
+  <!-- Read/Write -->
+<Talent>"HELFG-T0188"</Talent>
+  <!-- Uncouth Uranai -->
+</SUBCHAPTER_TALENT>
+<SUBCHAPTER_CAREER>
+  <!-- colonne "Sea Elf" de la table p.59 -->
+<Career name="RULES-WORK02">"01-02"</Career>
+  <!-- Apothecary -->
+<Career name="RULES-WORK33">"03-04"</Career>
+  <!-- Lawyer -->
+  <!-- TROU ASSUME : Mage 05-07. C est le Mage du livre (p.90), carriere a CINQ
+       niveaux qui appartient au lot 2 et n existe pas encore. Ce n est PAS le
+       Wizard du Rulebook : le livre distingue explicitement les deux (p.60).
+       A rajouter ici en meme temps que la carriere. -->
+<Career name="RULES-WORK36">"08-11"</Career>
+  <!-- Physician -->
+<Career name="RULES-WORK23">"12-14"</Career>
+  <!-- Scholar -->
+<Career name="RULES-WORK03">"15-17"</Career>
+  <!-- Artisan -->
+<Career name="RULES-WORK21">"18-20"</Career>
+  <!-- Investigator -->
+<Career name="RULES-WORK34">"21-25"</Career>
+  <!-- Merchant -->
+<Career name="HELFG-WORK130">"26-27"</Career>
+  <!-- Merchant Adventurer -->
+<Career name="RULES-WORK07">"28"</Career>
+  <!-- Townsman -->
+<Career name="RULES-WORK39">"29"</Career>
+  <!-- Watchman -->
+<Career name="RULES-WORK15">"30-32"</Career>
+  <!-- Advisor -->
+<Career name="HELFG-WORK131">"33"</Career>
+  <!-- Aestheticist -->
+<Career name="RULES-WORK04">"34"</Career>
+  <!-- Artist -->
+<Career name="RULES-WORK18">"35"</Career>
+  <!-- Duellist -->
+<Career name="RULES-WORK20">"36-39"</Career>
+  <!-- Envoy -->
+<Career name="RULES-WORK44">"40-42"</Career>
+  <!-- Noble -->
+<Career name="RULES-WORK56">"43-44"</Career>
+  <!-- Servant* -->
+<Career name="RULES-WORK24">"45-48"</Career>
+  <!-- Spy -->
+<Career name="RULES-WORK19">"49-51"</Career>
+  <!-- Scout -->
+<Career name="RULES-WORK11">"52-55"</Career>
+  <!-- Bounty Hunter -->
+<Career name="RULES-WORK55">"56-58"</Career>
+  <!-- Entertainer -->
+<Career name="RULES-WORK38">"59-61"</Career>
+  <!-- Messenger -->
+<Career name="RULES-WORK06">"62-65"</Career>
+  <!-- Boatman -->
+<Career name="RULES-WORK43">"66-69"</Career>
+  <!-- Huffer* -->
+<Career name="RULES-WORK35">"70-74"</Career>
+  <!-- Seaman -->
+<Career name="RULES-WORK16">"75-77"</Career>
+  <!-- Smuggler -->
+<Career name="RULES-WORK17">"78-79"</Career>
+  <!-- Stevedore* -->
+<Career name="RULES-WORK22">"80-82"</Career>
+  <!-- Bawd -->
+<Career name="RULES-WORK09">"83-86"</Career>
+  <!-- Charlatan -->
+<Career name="RULES-WORK30">"87"</Career>
+  <!-- Outlaw -->
+<Career name="RULES-WORK08">"88"</Career>
+  <!-- Cavalryman -->
+<Career name="RULES-WORK27">"89-90"</Career>
+  <!-- Guard -->
+<Career name="RULES-WORK12">"91"</Career>
+  <!-- Knight -->
+<Career name="HELFG-WORK127">"92-94"</Career>
+  <!-- Sea Guard -->
+<Career name="RULES-WORK28">"95"</Career>
+  <!-- Pit Fighter -->
+<Career name="RULES-WORK61">"96"</Career>
+  <!-- Protagonist -->
+<Career name="RULES-WORK57">"97-100"</Career>
+  <!-- Soldier -->
+</SUBCHAPTER_CAREER>
+</Specie>
+</DATA_SPECIE>
+<DATA_CAREER>
+<Career id="HELFG-WORK127">
+<Description language="ENGLISH">"Sea Guard"</Description>
+<Explanation language="ENGLISH">"You are a highly trained naval warrior, capable of fighting at range and at close quarters.
+The Sea Guard are among the oldest military traditions, formed when the Elves first explored the world. They are a formidable force, embodying the union of martial prowess and mastery over the seas."</Explanation>
+<Skill>"RULES-COMPCOMB_HAST"</Skill>
+  <!-- competence de revenu : relevee par Nono sur le PDF le 30/08. Le livre la met
+       en ITALIQUE dans la ligne Skills du niveau 1, et l italique ne survit pas a
+       pdftotext - elle ne pouvait donc pas etre deduite du TXT. -->
+<Class>"CLASS_WARR"</Class>
+<PictureLevel>"NIV_HELF"</PictureLevel>
+<SUBCHAPTER_LEVEL>
+<Level id="1">
+<Description language="ENGLISH">"Sea Warden"</Description>
+<Salary>"TIERS_SILVER 1"</Salary>
+</Level>
+<Level id="2">
+<Description language="ENGLISH">"Sea Guard"</Description>
+<Salary>"TIERS_SILVER 3"</Salary>
+</Level>
+<Level id="3">
+<Description language="ENGLISH">"Sea Master"</Description>
+<Salary>"TIERS_SILVER 5"</Salary>
+</Level>
+<Level id="4">
+<Description language="ENGLISH">"Sea Helm"</Description>
+<Salary>"TIERS_GOLD 1"</Salary>
+</Level>
+</SUBCHAPTER_LEVEL>
+<SUBCHAPTER_ATTR>
+<Attribut name="RULES-ATTR_WS">"1"</Attribut>
+<Attribut name="RULES-ATTR_BS">"1"</Attribut>
+<Attribut name="RULES-ATTR_S">"3"</Attribut>
+<Attribut name="RULES-ATTR_T">"0"</Attribut>
+<Attribut name="RULES-ATTR_I">"2"</Attribut>
+<Attribut name="RULES-ATTR_Ag">"1"</Attribut>
+<Attribut name="RULES-ATTR_Dex">"0"</Attribut>
+<Attribut name="RULES-ATTR_Int">"0"</Attribut>
+<Attribut name="RULES-ATTR_WP">"4"</Attribut>
+<Attribut name="RULES-ATTR_Fel">"0"</Attribut>
+</SUBCHAPTER_ATTR>
+<SUBCHAPTER_SKILL>
+<Skill name="RULES-COMPSOINANI">"1"</Skill>
+  <!-- Animal Care (Swiftfeather Roc) -->
+<Skill name="RULES-COMPRESALC">"1"</Skill>
+  <!-- Consume Alcohol -->
+<Skill name="RULES-COMPESQU">"1"</Skill>
+  <!-- Dodge -->
+<Skill name="RULES-COMPRAGOT">"1"</Skill>
+  <!-- Gossip -->
+<Skill name="RULES-COMPCOMB_BASE">"1"</Skill>
+  <!-- Melee (Basic) -->
+<Skill name="RULES-COMPCOMB_HAST">"1"</Skill>
+  <!-- Melee (Polearm) -->
+<Skill name="RULES-COMPPROJ_ARC">"1"</Skill>
+  <!-- Ranged (Bow) -->
+<Skill name="RULES-COMPPROJ_ARB">"1"</Skill>
+  <!-- Ranged (Crossbow) -->
+<Skill name="RULES-COMPVOILE">"1"</Skill>
+  <!-- Sail (Bloodhawk, Falconship, Hawkship, or Dragonship) -->
+<Skill name="RULES-COMPNATA">"1"</Skill>
+  <!-- Swim -->
+<Skill name="RULES-COMPATHL">"2"</Skill>
+  <!-- Athletics -->
+<Skill name="RULES-COMPESCAL">"2"</Skill>
+  <!-- Climb -->
+<Skill name="RULES-COMPRESIST">"2"</Skill>
+  <!-- Endurance -->
+<Skill name="RULES-COMPPARI">"2"</Skill>
+  <!-- Gamble -->
+<Skill name="RULES-COMPSURVEXT">"2"</Skill>
+  <!-- Outdoor Survival -->
+<Skill name="RULES-COMPVOILE">"2"</Skill>
+  <!-- Sail (Bloodhawk, Falconship, Hawkship, or Dragonship) -->
+<Skill name="RULES-COMPCOMM">"3"</Skill>
+  <!-- Leadership -->
+<Skill name="RULES-COMPORIENT">"3"</Skill>
+  <!-- Navigation -->
+<Skill name="RULES-COMPPRECEP">"3"</Skill>
+  <!-- Perception -->
+<Skill name="RULES-COMPVOILE">"3"</Skill>
+  <!-- Sail (Bloodhawk, Falconship, Hawkship, or Dragonship) -->
+<Skill name="RULES-COMPCOND">"4"</Skill>
+  <!-- Drive (Skycutter) -->
+<Skill name="RULES-COMPINTIM">"4"</Skill>
+  <!-- Intimidate -->
+</SUBCHAPTER_SKILL>
+<SUBCHAPTER_TALENT>
+<Talent name="RULES-T0036">"1"</Talent>
+  <!-- Drilled -->
+<Talent name="RULES-T0113">"1"</Talent>
+  <!-- Fisherman -->
+<Talent name="RULES-T0047">"1"</Talent>
+  <!-- Hardy -->
+<Talent name="RULES-T0067">"1"</Talent>
+  <!-- Warrior Born -->
+<Talent name="RULES-T0027">"2"</Talent>
+  <!-- Enclosed Fighter -->
+<Talent name="RULES-T0127">"2"</Talent>
+  <!-- Lightning Reflexes -->
+<Talent name="RULES-T0119">"2"</Talent>
+  <!-- Sea Legs -->
+<Talent name="RULES-T0121">"2"</Talent>
+  <!-- Shieldsman -->
+<Talent name="RULES-T0053">"3"</Talent>
+  <!-- Inspiring -->
+<Talent name="RULES-T0085">"3"</Talent>
+  <!-- Old Salt -->
+<Talent name="RULES-T0134_OCEAN">"3"</Talent>
+  <!-- Savant (Oceans) -->
+<Talent name="RULES-T0060">"3"</Talent>
+  <!-- Strike to Injure -->
+<Talent name="RULES-T0163">"4"</Talent>
+  <!-- Combat Aware -->
+<Talent name="RULES-T0025">"4"</Talent>
+  <!-- Stout-hearted -->
+<Talent name="RULES-T0013_COASTAL">"4"</Talent>
+  <!-- Strider (Coastal) -->
+<Talent name="RULES-T0100">"4"</Talent>
+  <!-- Strong Swimmer -->
+</SUBCHAPTER_TALENT>
+<SUBCHAPTER_ITEM>
+<Item name="Elf Bow and 10 Arrows">"1"</Item>
+<Item name="Spear">"1"</Item>
+<Item name="Uniform">"1"</Item>
+<Item name="Breastplate">"2"</Item>
+<Item name="Helmet">"2"</Item>
+<Item name="Mail Shirt">"2"</Item>
+<Item name="Shield">"2"</Item>
+<Item name="Symbol of Rank">"3"</Item>
+<Item name="Quality Uniform">"3"</Item>
+<Item name="Quality Uniform">"4"</Item>
+<Item name="Skycutter Chariot and Swiftfeather Roc">"4"</Item>
+<Item name="Tall Sea Helm">"4"</Item>
+</SUBCHAPTER_ITEM>
+</Career>
+<Career id="HELFG-WORK128">
+<Description language="ENGLISH">"Swordmaster"</Description>
+<Explanation language="ENGLISH">"Vowed to seek knowledge, you travel the world in search of enlightenment as an adept of the Order of Swordmasters.
+Swordmasters are warrior-scholars studied in the art of war, training countless hours in the pursuit of perfection. They are unmistakable when travelling in Ulthuan, even without armour, for they carry magical greatswords upon their backs, forged in the Tower of Hoeth."</Explanation>
+<Skill>"RULES-COMPCOMB_2M"</Skill>
+  <!-- competence de revenu : relevee par Nono sur le PDF le 30/08. Le livre la met
+       en ITALIQUE dans la ligne Skills du niveau 1, et l italique ne survit pas a
+       pdftotext - elle ne pouvait donc pas etre deduite du TXT. -->
+<Class>"CLASS_WARR"</Class>
+<PictureLevel>"NIV_HELF"</PictureLevel>
+<SUBCHAPTER_LEVEL>
+<Level id="1">
+<Description language="ENGLISH">"Swordwarden"</Description>
+<Salary>"TIERS_SILVER 2"</Salary>
+</Level>
+<Level id="2">
+<Description language="ENGLISH">"Swordmaster"</Description>
+<Salary>"TIERS_SILVER 5"</Salary>
+</Level>
+<Level id="3">
+<Description language="ENGLISH">"Blademaster"</Description>
+<Salary>"TIERS_GOLD 1"</Salary>
+</Level>
+<Level id="4">
+<Description language="ENGLISH">"Bladelord"</Description>
+<Salary>"TIERS_GOLD 2"</Salary>
+</Level>
+</SUBCHAPTER_LEVEL>
+<SUBCHAPTER_ATTR>
+<Attribut name="RULES-ATTR_WS">"1"</Attribut>
+<Attribut name="RULES-ATTR_BS">"0"</Attribut>
+<Attribut name="RULES-ATTR_S">"1"</Attribut>
+<Attribut name="RULES-ATTR_T">"0"</Attribut>
+<Attribut name="RULES-ATTR_I">"1"</Attribut>
+<Attribut name="RULES-ATTR_Ag">"4"</Attribut>
+<Attribut name="RULES-ATTR_Dex">"0"</Attribut>
+<Attribut name="RULES-ATTR_Int">"3"</Attribut>
+<Attribut name="RULES-ATTR_WP">"2"</Attribut>
+<Attribut name="RULES-ATTR_Fel">"0"</Attribut>
+</SUBCHAPTER_ATTR>
+<SUBCHAPTER_SKILL>
+<Skill name="RULES-COMPART_PEINT/RULES-COMPART_SCUL">"1"</Skill>
+  <!-- Art (Painting or Sculpture) -->
+<Skill name="RULES-COMPATHL">"1"</Skill>
+  <!-- Athletics -->
+<Skill name="RULES-COMPESQU">"1"</Skill>
+  <!-- Dodge -->
+<Skill name="RULES-COMPSAVOIR_*">"1"</Skill>
+  <!-- Lore (Any) -->
+<Skill name="RULES-COMPCOMB_BASE">"1"</Skill>
+  <!-- Melee (Basic) -->
+<Skill name="RULES-COMPCOMB_BAGAR">"1"</Skill>
+  <!-- Melee (Brawling) -->
+<Skill name="RULES-COMPCOMB_2M">"1"</Skill>
+  <!-- Melee (Two-handed) -->
+<Skill name="RULES-COMPPRECEP">"1"</Skill>
+  <!-- Perception -->
+<Skill name="RULES-COMPREPRES_ACROB">"1"</Skill>
+  <!-- Perform (Acrobatics) -->
+<Skill name="RULES-COMPMUSIC_*">"1"</Skill>
+  <!-- Play (Any) -->
+<Skill name="RULES-COMPART_POETRY">"2"</Skill>
+  <!-- Art (Poetry) -->
+<Skill name="RULES-COMPCALM">"2"</Skill>
+  <!-- Cool -->
+<Skill name="RULES-COMPRESIST">"2"</Skill>
+  <!-- Endurance -->
+<Skill name="RULES-COMPRAGOT">"2"</Skill>
+  <!-- Gossip -->
+<Skill name="RULES-COMPINTUI">"2"</Skill>
+  <!-- Intuition -->
+<Skill name="RULES-COMPSAVOIR_*">"2"</Skill>
+  <!-- Lore (Any) -->
+<Skill name="RULES-COMPART_PEINT/RULES-COMPART_SCUL">"3"</Skill>
+  <!-- Art (Painting or Sculpture) -->
+<Skill name="RULES-COMPGUERI">"3"</Skill>
+  <!-- Heal -->
+<Skill name="RULES-COMPCOMM">"3"</Skill>
+  <!-- Leadership -->
+<Skill name="RULES-COMPPROJ_ARC">"3"</Skill>
+  <!-- Ranged (Bow) -->
+<Skill name="RULES-COMPINTIM">"4"</Skill>
+  <!-- Intimidate -->
+<Skill name="RULES-COMPSAVOIR_*">"4"</Skill>
+  <!-- Lore (Any) -->
+</SUBCHAPTER_SKILL>
+<SUBCHAPTER_TALENT>
+<Talent name="RULES-T0139_*">"1"</Talent>
+  <!-- Acute Sense (Any) -->
+<Talent name="RULES-T0061">"1"</Talent>
+  <!-- Careful Strike -->
+<Talent name="RULES-T0039">"1"</Talent>
+  <!-- Disarm -->
+<Talent name="HELFG-T0186">"1"</Talent>
+  <!-- Martial Arts -->
+<Talent name="RULES-T0011">"2"</Talent>
+  <!-- Beat Blade -->
+<Talent name="RULES-T0130">"2"</Talent>
+  <!-- Riposte -->
+<Talent name="RULES-T0060">"2"</Talent>
+  <!-- Strike to Injure -->
+<Talent name="HELFG-T0187">"2"</Talent>
+  <!-- Sword-dancing -->
+<Talent name="RULES-T0095">"3"</Talent>
+  <!-- Combat Master -->
+<Talent name="RULES-T0062">"3"</Talent>
+  <!-- Reaction Strike -->
+<Talent name="RULES-T0137">"3"</Talent>
+  <!-- Second Sight -->
+<Talent name="RULES-T0037">"3"</Talent>
+  <!-- Strike Mighty Blow -->
+<Talent name="RULES-T0122">"4"</Talent>
+  <!-- Commanding Presence -->
+<Talent name="RULES-T0005">"4"</Talent>
+  <!-- Pure Soul -->
+<Talent name="RULES-T0168">"4"</Talent>
+  <!-- Seasoned Traveller -->
+<Talent name="RULES-T0138">"4"</Talent>
+  <!-- War Leader -->
+</SUBCHAPTER_TALENT>
+<SUBCHAPTER_ITEM>
+<Item name="Clay Set or Painting Set">"1"</Item>
+<Item name="Loose Robes">"1"</Item>
+<Item name="Book on Philosophy">"2"</Item>
+<Item name="Greatsword of Hoeth">"2"</Item>
+<Item name="Mail Shirt">"2"</Item>
+<Item name="Tall Helmet">"2"</Item>
+<Item name="Travelling Clothes">"2"</Item>
+<Item name="Book on the Art of War">"3"</Item>
+<Item name="Combs in Hair">"3"</Item>
+<Item name="Symbol of Rank">"3"</Item>
+<Item name="Book of Poetry">"4"</Item>
+<Item name="Fine Robes">"4"</Item>
+<Item name="Ornate Armour">"4"</Item>
+</SUBCHAPTER_ITEM>
+</Career>
+<Career id="HELFG-WORK129">
+<Description language="ENGLISH">"Shadow Warrior"</Description>
+<Explanation language="ENGLISH">"You are an avenging shadow who goes to great lengths to root out the foul plots of the Druchii.
+Shadow Warriors are trained in the art of subterfuge and guerilla warfare, making them skilled scouts who often assist the armies of the phoenix king. Dressed in blue, black, or shades of grey to blend into the shadows, red is occasionally used in heraldry to symbolise the spilt blood of their kin."</Explanation>
+<Skill>"RULES-COMPDISC_RURAL"</Skill>
+  <!-- competence de revenu : relevee par Nono sur le PDF le 30/08. Le livre la met
+       en ITALIQUE dans la ligne Skills du niveau 1, et l italique ne survit pas a
+       pdftotext - elle ne pouvait donc pas etre deduite du TXT. -->
+<Class>"CLASS_RANG"</Class>
+<PictureLevel>"NIV_HELF"</PictureLevel>
+<SUBCHAPTER_LEVEL>
+<Level id="1">
+<Description language="ENGLISH">"Shadow Novice"</Description>
+<Salary>"TIERS_BRASS 2"</Salary>
+</Level>
+<Level id="2">
+<Description language="ENGLISH">"Shadow Warrior"</Description>
+<Salary>"TIERS_BRASS 4"</Salary>
+</Level>
+<Level id="3">
+<Description language="ENGLISH">"Shadow Master"</Description>
+<Salary>"TIERS_SILVER 1"</Salary>
+</Level>
+<Level id="4">
+<Description language="ENGLISH">"Shadow-walker"</Description>
+<Salary>"TIERS_SILVER 3"</Salary>
+</Level>
+</SUBCHAPTER_LEVEL>
+<SUBCHAPTER_ATTR>
+<Attribut name="RULES-ATTR_WS">"1"</Attribut>
+<Attribut name="RULES-ATTR_BS">"1"</Attribut>
+<Attribut name="RULES-ATTR_S">"2"</Attribut>
+<Attribut name="RULES-ATTR_T">"0"</Attribut>
+<Attribut name="RULES-ATTR_I">"0"</Attribut>
+<Attribut name="RULES-ATTR_Ag">"1"</Attribut>
+<Attribut name="RULES-ATTR_Dex">"0"</Attribut>
+<Attribut name="RULES-ATTR_Int">"3"</Attribut>
+<Attribut name="RULES-ATTR_WP">"4"</Attribut>
+<Attribut name="RULES-ATTR_Fel">"0"</Attribut>
+</SUBCHAPTER_ATTR>
+<SUBCHAPTER_SKILL>
+<Skill name="RULES-COMPATHL">"1"</Skill>
+  <!-- Athletics -->
+<Skill name="RULES-COMPESCAL">"1"</Skill>
+  <!-- Climb -->
+<Skill name="RULES-COMPRESIST">"1"</Skill>
+  <!-- Endurance -->
+<Skill name="RULES-COMPCOMB_BASE">"1"</Skill>
+  <!-- Melee (Basic) -->
+<Skill name="RULES-COMPORIENT">"1"</Skill>
+  <!-- Navigation -->
+<Skill name="RULES-COMPSURVEXT">"1"</Skill>
+  <!-- Outdoor Survival -->
+<Skill name="RULES-COMPPROJ_ARC">"1"</Skill>
+  <!-- Ranged (Bow) -->
+<Skill name="RULES-COMPPIEG">"1"</Skill>
+  <!-- Set Trap -->
+<Skill name="RULES-COMPDISC_RURAL">"1"</Skill>
+  <!-- Stealth (Rural) -->
+<Skill name="RULES-COMPNATA">"1"</Skill>
+  <!-- Swim -->
+<Skill name="RULES-COMPCALM">"2"</Skill>
+  <!-- Cool -->
+<Skill name="RULES-COMPESQU">"2"</Skill>
+  <!-- Dodge -->
+<Skill name="RULES-COMPINTIM">"2"</Skill>
+  <!-- Intimidate -->
+<Skill name="RULES-COMPCOMB_BAGAR">"2"</Skill>
+  <!-- Melee (Brawling) -->
+<Skill name="RULES-COMPSIGNES_SHADOWWAR">"2"</Skill>
+  <!-- Secret Signs (Shadow Warriors) -->
+<Skill name="RULES-COMPPIST">"2"</Skill>
+  <!-- Track -->
+<Skill name="RULES-COMPCHARM">"3"</Skill>
+  <!-- Charm -->
+<Skill name="RULES-COMPRAGOT">"3"</Skill>
+  <!-- Gossip -->
+<Skill name="RULES-COMPGUERI">"3"</Skill>
+  <!-- Heal -->
+<Skill name="RULES-COMPCOMM">"3"</Skill>
+  <!-- Leadership -->
+<Skill name="RULES-COMPCROCH">"4"</Skill>
+  <!-- Pick Lock -->
+<Skill name="RULES-COMPDISC_URB">"4"</Skill>
+  <!-- Stealth (Urban) -->
+</SUBCHAPTER_SKILL>
+<SUBCHAPTER_TALENT>
+<Talent name="RULES-T0148">"1"</Talent>
+  <!-- Deadeye Shot -->
+<Talent name="RULES-T0105">"1"</Talent>
+  <!-- Rover -->
+<Talent name="RULES-T0066">"1"</Talent>
+  <!-- Scale Sheer Surface -->
+<Talent name="RULES-T0013_BOID">"1"</Talent>
+  <!-- Strider (Woodlands) -->
+<Talent name="RULES-T0074">"2"</Talent>
+  <!-- Coolheaded -->
+<Talent name="RULES-T0132_DELF">"2"</Talent>
+  <!-- Fearless (Dark Elves) -->
+<Talent name="RULES-T0098">"2"</Talent>
+  <!-- Menacing -->
+<Talent name="RULES-T0043">"2"</Talent>
+  <!-- Shadow -->
+<Talent name="RULES-T0149">"3"</Talent>
+  <!-- Accurate Shot -->
+<Talent name="RULES-T0096">"3"</Talent>
+  <!-- Dual Wielder -->
+<Talent name="RULES-T0072">"3"</Talent>
+  <!-- Secret Identity -->
+<Talent name="RULES-T0060">"3"</Talent>
+  <!-- Strike to Injure -->
+<Talent name="RULES-T0144">"4"</Talent>
+  <!-- Cat Fall -->
+<Talent name="RULES-T0168">"4"</Talent>
+  <!-- Seasoned Traveller -->
+<Talent name="RULES-T0152">"4"</Talent>
+  <!-- Sharpshooter -->
+<Talent name="RULES-T0123">"4"</Talent>
+  <!-- Well-prepared -->
+</SUBCHAPTER_TALENT>
+<SUBCHAPTER_ITEM>
+<Item name="Bedroll">"1"</Item>
+<Item name="Elf Bow and 10 Barbed Arrows">"1"</Item>
+<Item name="Rope and Grappling Hook">"1"</Item>
+<Item name="Crescent Pendant of Lileath">"2"</Item>
+<Item name="Face Wrap">"2"</Item>
+<Item name="Helm">"2"</Item>
+<Item name="Mail Shirt">"2"</Item>
+<Item name="Cadre of Shadow Warriors">"3"</Item>
+<Item name="Caltrops">"3"</Item>
+<Item name="Disguise Kit">"3"</Item>
+<Item name="Lockpick">"4"</Item>
+<Item name="Ring of Contacts">"4"</Item>
+</SUBCHAPTER_ITEM>
+</Career>
+<Career id="HELFG-WORK130">
+<Description language="ENGLISH">"Merchant Adventurer"</Description>
+<Explanation language="ENGLISH">"You are filled with a desire to travel the world, seeking fortune and glory, plundering the seas, and trading its goods.
+The role of Merchant Adventurer goes back thousands of years to when Elves first explored the world. They are restless souls, filled with a desire to live on the seas, funding their explorations by taking what they can to sell at ports."</Explanation>
+<Skill>"RULES-COMPVOILE"</Skill>
+  <!-- competence de revenu : relevee par Nono sur le PDF le 30/08. Le livre la met
+       en ITALIQUE dans la ligne Skills du niveau 1, et l italique ne survit pas a
+       pdftotext - elle ne pouvait donc pas etre deduite du TXT. -->
+<Class>"CLASS_BURG"</Class>
+<PictureLevel>"NIV_HELF"</PictureLevel>
+<SUBCHAPTER_LEVEL>
+<Level id="1">
+<Description language="ENGLISH">"Sea Messenger"</Description>
+<Salary>"TIERS_BRASS 4"</Salary>
+</Level>
+<Level id="2">
+<Description language="ENGLISH">"Merchant Adventurer"</Description>
+<Salary>"TIERS_SILVER 3"</Salary>
+</Level>
+<Level id="3">
+<Description language="ENGLISH">"Sea Explorer"</Description>
+<Salary>"TIERS_GOLD 1"</Salary>
+</Level>
+<Level id="4">
+<Description language="ENGLISH">"Sea Monster Hunter"</Description>
+<Salary>"TIERS_GOLD 3"</Salary>
+</Level>
+</SUBCHAPTER_LEVEL>
+<SUBCHAPTER_ATTR>
+<Attribut name="RULES-ATTR_WS">"1"</Attribut>
+<Attribut name="RULES-ATTR_BS">"0"</Attribut>
+<Attribut name="RULES-ATTR_S">"4"</Attribut>
+<Attribut name="RULES-ATTR_T">"0"</Attribut>
+<Attribut name="RULES-ATTR_I">"1"</Attribut>
+<Attribut name="RULES-ATTR_Ag">"2"</Attribut>
+<Attribut name="RULES-ATTR_Dex">"0"</Attribut>
+<Attribut name="RULES-ATTR_Int">"3"</Attribut>
+<Attribut name="RULES-ATTR_WP">"0"</Attribut>
+<Attribut name="RULES-ATTR_Fel">"1"</Attribut>
+</SUBCHAPTER_ATTR>
+<SUBCHAPTER_SKILL>
+<Skill name="RULES-COMPATHL">"1"</Skill>
+  <!-- Athletics -->
+<Skill name="RULES-COMPANIM">"1"</Skill>
+  <!-- Charm Animal -->
+<Skill name="RULES-COMPESCAL">"1"</Skill>
+  <!-- Climb -->
+<Skill name="RULES-COMPESQU">"1"</Skill>
+  <!-- Dodge -->
+<Skill name="RULES-COMPRAGOT">"1"</Skill>
+  <!-- Gossip -->
+<Skill name="RULES-COMPCOMB_BASE">"1"</Skill>
+  <!-- Melee (Basic) -->
+<Skill name="RULES-COMPORIENT">"1"</Skill>
+  <!-- Navigation -->
+<Skill name="RULES-COMPPROJ_ARC">"1"</Skill>
+  <!-- Ranged (Bow) -->
+<Skill name="RULES-COMPVOILE">"1"</Skill>
+  <!-- Sail (Any) -->
+<Skill name="RULES-COMPNATA">"1"</Skill>
+  <!-- Swim -->
+<Skill name="RULES-COMPCHARM">"2"</Skill>
+  <!-- Charm -->
+<Skill name="RULES-COMPRESALC">"2"</Skill>
+  <!-- Consume Alcohol -->
+<Skill name="RULES-COMPEVAL">"2"</Skill>
+  <!-- Evaluate -->
+<Skill name="RULES-COMPMARCH/RULES-COMPPARI">"2"</Skill>
+  <!-- Haggle or Gamble -->
+<Skill name="RULES-COMPLANG_*">"2"</Skill>
+  <!-- Language (Any) -->
+<Skill name="RULES-COMPCOMB_BAGAR">"2"</Skill>
+  <!-- Melee (Brawling) -->
+<Skill name="RULES-COMPSUBOR">"3"</Skill>
+  <!-- Bribery -->
+<Skill name="RULES-COMPCALM">"3"</Skill>
+  <!-- Cool -->
+<Skill name="RULES-COMPRESIST">"3"</Skill>
+  <!-- Endurance -->
+<Skill name="RULES-COMPLANG_*">"3"</Skill>
+  <!-- Language (Any) -->
+<Skill name="RULES-COMPINTIM">"4"</Skill>
+  <!-- Intimidate -->
+<Skill name="RULES-COMPCOMM">"4"</Skill>
+  <!-- Leadership -->
+</SUBCHAPTER_SKILL>
+<SUBCHAPTER_TALENT>
+<Talent name="RULES-T0113">"1"</Talent>
+  <!-- Fisherman -->
+<Talent name="RULES-T0020">"1"</Talent>
+  <!-- Luck -->
+<Talent name="RULES-T0140">"1"</Talent>
+  <!-- Orientation -->
+<Talent name="RULES-T0100">"1"</Talent>
+  <!-- Strong Swimmer -->
+<Talent name="RULES-T0026">"2"</Talent>
+  <!-- Dirty Fighting -->
+<Talent name="RULES-T0085">"2"</Talent>
+  <!-- Old Salt -->
+<Talent name="RULES-T0120">"2"</Talent>
+  <!-- Pilot -->
+<Talent name="RULES-T0168">"2"</Talent>
+  <!-- Seasoned Traveller -->
+<Talent name="RULES-T0040">"3"</Talent>
+  <!-- Detect Artifact -->
+<Talent name="RULES-T0086">"3"</Talent>
+  <!-- Iron Jaw -->
+<Talent name="RULES-T0119">"3"</Talent>
+  <!-- Sea legs -->
+<Talent name="RULES-T0035">"3"</Talent>
+  <!-- Sturdy -->
+<Talent name="RULES-T0122">"4"</Talent>
+  <!-- Commanding Presence -->
+<Talent name="RULES-T0132_SEAMONSTR">"4"</Talent>
+  <!-- Fearless (Sea Monsters) -->
+<Talent name="RULES-T0151">"4"</Talent>
+  <!-- Sure Shot -->
+<Talent name="RULES-T0159">"4"</Talent>
+  <!-- Very Resilient -->
+</SUBCHAPTER_TALENT>
+<SUBCHAPTER_ITEM>
+<Item name="Abacus">"1"</Item>
+<Item name="Elf Bow and 10 Arrows">"1"</Item>
+<Item name="Hand Weapon (Sword)">"1"</Item>
+<Item name="Tidecutter and Giant Flying Fish">"1"</Item>
+<Item name="Bloodhawk or Razorbill and Crew">"2"</Item>
+<Item name="Hand Weapon (Sword)">"2"</Item>
+<Item name="Leather Jack">"2"</Item>
+<Item name="Shipping Charts and Sextant">"2"</Item>
+<Item name="Three Barrels of Goods">"2"</Item>
+<Item name="Fleet of Two Tidecutters">"3"</Item>
+<Item name="Golden Eagle and Crew">"3"</Item>
+<Item name="Warehouse">"3"</Item>
+<Item name="Albatross and Crew">"4"</Item>
+<Item name="Flotilla of Ships">"4"</Item>
+<Item name="Warehouses in Two Ports">"4"</Item>
+</SUBCHAPTER_ITEM>
+</Career>
+<Career id="HELFG-WORK131">
+<Description language="ENGLISH">"Aestheticist"</Description>
+<Explanation language="ENGLISH">"You move throughout society, advising Elves on aesthetic choices that encourage healthy spiritual harmony.
+The role of an Aestheticist is to help other Elves attain and maintain spiritual harmony through the appreciation of art and moderate excitement of the senses."</Explanation>
+<Skill>"RULES-COMPINTUI"</Skill>
+  <!-- competence de revenu : relevee par Nono sur le PDF le 30/08. Le livre la met
+       en ITALIQUE dans la ligne Skills du niveau 1, et l italique ne survit pas a
+       pdftotext - elle ne pouvait donc pas etre deduite du TXT. -->
+<Class>"CLASS_COUR"</Class>
+<PictureLevel>"NIV_HELF"</PictureLevel>
+<SUBCHAPTER_LEVEL>
+<Level id="1">
+<Description language="ENGLISH">"Outfitter"</Description>
+<Salary>"TIERS_BRASS 3"</Salary>
+</Level>
+<Level id="2">
+<Description language="ENGLISH">"Aestheticist"</Description>
+<Salary>"TIERS_SILVER 1"</Salary>
+</Level>
+<Level id="3">
+<Description language="ENGLISH">"Taste Maker"</Description>
+<Salary>"TIERS_SILVER 4"</Salary>
+</Level>
+<Level id="4">
+<Description language="ENGLISH">"Harmony Master"</Description>
+<Salary>"TIERS_GOLD 2"</Salary>
+</Level>
+</SUBCHAPTER_LEVEL>
+<SUBCHAPTER_ATTR>
+<Attribut name="RULES-ATTR_WS">"0"</Attribut>
+<Attribut name="RULES-ATTR_BS">"0"</Attribut>
+<Attribut name="RULES-ATTR_S">"0"</Attribut>
+<Attribut name="RULES-ATTR_T">"0"</Attribut>
+<Attribut name="RULES-ATTR_I">"2"</Attribut>
+<Attribut name="RULES-ATTR_Ag">"1"</Attribut>
+<Attribut name="RULES-ATTR_Dex">"3"</Attribut>
+<Attribut name="RULES-ATTR_Int">"1"</Attribut>
+<Attribut name="RULES-ATTR_WP">"4"</Attribut>
+<Attribut name="RULES-ATTR_Fel">"1"</Attribut>
+</SUBCHAPTER_ATTR>
+<SUBCHAPTER_SKILL>
+<Skill name="RULES-COMPART_*">"1"</Skill>
+  <!-- Art (Any) -->
+<Skill name="RULES-COMPCHARM">"1"</Skill>
+  <!-- Charm -->
+<Skill name="RULES-COMPCALM">"1"</Skill>
+  <!-- Cool -->
+<Skill name="RULES-COMPDIVERT_*">"1"</Skill>
+  <!-- Entertain (Any) -->
+<Skill name="RULES-COMPEVAL">"1"</Skill>
+  <!-- Evaluate -->
+<Skill name="RULES-COMPINTUI">"1"</Skill>
+  <!-- Intuition -->
+<Skill name="RULES-COMPRAGOT">"1"</Skill>
+  <!-- Gossip -->
+<Skill name="RULES-COMPMARCH">"1"</Skill>
+  <!-- Haggle -->
+<Skill name="RULES-COMPPRECEP">"1"</Skill>
+  <!-- Perception -->
+<Skill name="RULES-COMPMETIER_JEWELLER">"1"</Skill>
+  <!-- Trade (Jeweller) -->
+<Skill name="RULES-COMPART_*">"2"</Skill>
+  <!-- Art (Any) -->
+<Skill name="RULES-COMPRESALC">"2"</Skill>
+  <!-- Consume Alcohol -->
+<Skill name="RULES-COMPSAVOIR_LOCAL">"2"</Skill>
+  <!-- Lore (Local) -->
+<Skill name="RULES-COMPSAVOIR_MAGIE">"2"</Skill>
+  <!-- Lore (Magic) -->
+<Skill name="RULES-COMPDISC_URB">"2"</Skill>
+  <!-- Stealth (Urban) -->
+<Skill name="RULES-COMPMETIER_*">"2"</Skill>
+  <!-- Trade (Any) -->
+<Skill name="RULES-COMPSUBOR">"3"</Skill>
+  <!-- Bribery -->
+<Skill name="RULES-COMPLANG_*">"3"</Skill>
+  <!-- Language (Any) -->
+<Skill name="RULES-COMPSAVOIR_HERAL">"3"</Skill>
+  <!-- Lore (Heraldry) -->
+<Skill name="RULES-COMPREPRES_*">"3"</Skill>
+  <!-- Perform (Any) -->
+<Skill name="RULES-COMPGUERI">"4"</Skill>
+  <!-- Heal -->
+<Skill name="RULES-COMPCOMM">"4"</Skill>
+  <!-- Leadership -->
+</SUBCHAPTER_SKILL>
+<SUBCHAPTER_TALENT>
+<Talent name="RULES-T0139_*">"1"</Talent>
+  <!-- Acute Sense (Any) -->
+<Talent name="RULES-T0007">"1"</Talent>
+  <!-- Artistic (Any) -->
+<Talent name="RULES-T0137">"1"</Talent>
+  <!-- Second Sight -->
+<Talent name="RULES-T0002">"1"</Talent>
+  <!-- Suave -->
+<Talent name="RULES-T0074">"2"</Talent>
+  <!-- Coolheaded -->
+<Talent name="RULES-T0092_*">"2"</Talent>
+  <!-- Craftsman (Any) -->
+<Talent name="RULES-T0136_NOBLE">"2"</Talent>
+  <!-- Etiquette (Nobles) -->
+<Talent name="RULES-T0045">"2"</Talent>
+  <!-- Nimble Fingered -->
+<Talent name="RULES-T0104">"3"</Talent>
+  <!-- Carouser -->
+<Talent name="RULES-T0040">"3"</Talent>
+  <!-- Detect Artefact -->
+<Talent name="RULES-T0142">"3"</Talent>
+  <!-- Gregarious -->
+<Talent name="RULES-T0157_*">"3"</Talent>
+  <!-- Master Tradesman (Any) -->
+<Talent name="RULES-T0051">"4"</Talent>
+  <!-- Argumentative -->
+<Talent name="RULES-T0165">"4"</Talent>
+  <!-- Holy Visions -->
+<Talent name="RULES-T0090">"4"</Talent>
+  <!-- Magnum Opus -->
+<Talent name="RULES-T0005">"4"</Talent>
+  <!-- Pure Soul -->
+</SUBCHAPTER_TALENT>
+<SUBCHAPTER_ITEM>
+<Item name="Bottle of Perfume">"1"</Item>
+<Item name="Charms">"1"</Item>
+<Item name="Colourful Scarves">"1"</Item>
+<Item name="Comb">"1"</Item>
+<Item name="Crystal Pendulum">"2"</Item>
+<Item name="Flamboyant Clothing">"2"</Item>
+<Item name="Selection of Amulets">"2"</Item>
+<Item name="Essential Oils">"3"</Item>
+<Item name="Incense Sticks">"3"</Item>
+<Item name="Tuning fork">"3"</Item>
+<Item name="Aethyrolabe">"4"</Item>
+<Item name="Plain High-Quality Robes">"4"</Item>
+</SUBCHAPTER_ITEM>
+</Career>
+</DATA_CAREER>
+</DATA_BOOK>

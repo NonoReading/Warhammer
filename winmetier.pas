@@ -107,7 +107,6 @@ var
   ColorLoc:         TColor;
   ColorList:        array of TColor;
   Nv:               Integer;
-  NvS:              Char;
   TypeArme:         Integer = 1;
   TypeArmure:       Integer = 2;
   EquipArme:        String = '(W) ';
@@ -137,10 +136,24 @@ begin
       // sans savoir quelle ethnie le joue. CheminNiveauImageMetier retombe seule sur
       // \PICTURES\NIV\ si le metier n'a pas de dossier propre.
       Path   := CheminNiveauImageMetier(CodeMetier, Niveau);
-      Picture.LoadFromFile(Path);
-      Bitmap.Assign(Picture.graphic);
+      // Icone absente pour ce niveau : on ajoute QUAND MEME une image, neutre, sinon les
+      // index de ListImage se decalent d'un cran et chaque niveau afficherait l'icone du
+      // suivant. Le cas se produit des qu'un livre amene un niveau plus haut que ce que
+      // PICTURES\NIV\ contient.
+      if FileExists(Path) then
+        begin
+          Picture.LoadFromFile(Path);
+          Bitmap.Assign(Picture.graphic);
+          ColorLoc := Bitmap.Canvas.Pixels[1, 1];
+        end
+      else
+        begin
+          Bitmap.SetSize(8, 8);
+          Bitmap.Canvas.Brush.Color := CouleurGrisFonce;
+          Bitmap.Canvas.FillRect(0, 0, 8, 8);
+          ColorLoc := CouleurGrisFonce;
+        end;
       ListImage.Add(Bitmap, nil);
-      ColorLoc := Bitmap.Canvas.Pixels[1, 1];
       ColorList[Niveau] := ColorLoc;
     finally
       Picture.Free;
@@ -153,13 +166,19 @@ end;
 procedure ChargeImagesNiveau(CodeMetier: String);
   var
     IndNiv:   Integer;
+    MaxNiv:   Integer;
   begin
     if not Assigned(ListImage) then
       ListImage := TImageList.Create(nil);
     ListImage.Clear;
     SetLength(ColorList, 0);
-    SetLength(ColorList, 5);
-    For IndNiv := 0 to 4 Do
+    // Dimensionne sur la donnee et non sur une constante : un livre qui apporte une
+    // carriere a cinq niveaux fait grandir la liste tout seul. Voir MaxNiveauMetier.
+    // Pas MaxNiveauMetier : le dossier NIV contient aussi des pastilles de couleur
+    // rangees apres le dernier niveau. Voir MaxIndiceIconeNiveau.
+    MaxNiv := MaxIndiceIconeNiveau();
+    SetLength(ColorList, MaxNiv + 1);
+    For IndNiv := 0 to MaxNiv Do
       ChargeImage(IndNiv, CodeMetier);
   end;
 
@@ -869,16 +888,14 @@ begin
               TextWidth      := Sender.Canvas.TextWidth(Node.Text);  // Largeur du texte de la feuille
               FrameRect      := NodeRect;
               FrameRect.Left := FrameRect.Left + TextWidth + ((Node.Level + 1) * 29) + 5;  // Ajuster la position du cadre ici
-              NvS := Node.Text[1];
-              if NvS in ['1','2','3','4'] then
-                begin
-                  Nv := StrToInt(NvS);
-                  ColorLoc := ColorList[Nv];
-                end
+              // Le numero de niveau se lit AVANT le point, et non sur le premier
+              // caractere : "10.Archmage" commence par '1'. Les bornes viennent du
+              // tableau lui-meme, donc elles suivent MaxNiveauMetier sans le rappeler.
+              Nv := StrToIntDef(ExtractStringBefore(Node.Text, '.'), 0);
+              if (Nv >= 1) and (Nv <= High(ColorList)) then
+                ColorLoc := ColorList[Nv]
               else
-                begin
-                  ColorLoc := CouleurGrisFonce;  // Couleur du cadre
-                end;
+                ColorLoc := CouleurGrisFonce;  // Couleur du cadre
               Sender.Canvas.brush.Color := colorloc;  // Couleur du cadre
               Sender.Canvas.Pen.Width   := 1;  // Épaisseur du cadre
               Sender.Canvas.Rectangle(FrameRect);
