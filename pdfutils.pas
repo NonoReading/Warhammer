@@ -15,6 +15,7 @@ Procedure PdfTaillePolice(PdfPage: TPDFPage; IdPolice:Integer; NomPolice: String
 Function PdfSupprimeGenerique(Code: String; Chaine: String): String;
 procedure RedimensionneImage(inWidth: dWord; inHeigth: dWord; maxWidth: dWord; maxHeigth: dWord; out resWidth: dWord; out resHeigth: dWord);
 function ColorToARGB(AColor: TColor; Transparent: Integer): TARGBColor;
+Function ChargeImageArrayColorFichier(Chemin: String): TColor;
 Function ChargeImageArrayColor(Niveau: Integer): TColor;
 procedure ChargeImageTImageList(Niveau: Integer; ListImage: TImageList);
 procedure RemplacerPixelParTransparent(const FileOrig: string; Const FileDest: String);
@@ -236,25 +237,33 @@ begin
   end;
 end;
 
-Function ChargeImageArrayColor(Niveau: Integer): TColor;
+// Couleur d'encadrement tiree du pixel [1,1] d'une image DESIGNEE PAR SON CHEMIN. Le
+// chemin peut venir du dossier d'un livre : c'est l'appelant qui l'a resolu.
+// Fichier absent = gris fonce, jamais d'exception - un niveau peut ne pas avoir d'icone.
+Function ChargeImageArrayColorFichier(Chemin: String): TColor;
   var
     picture:          TPicture;
     Bitmap:           TBitmap;
-    Path:             String;
-    ColorLoc:         TColor;
   begin
+    Result := CouleurGrisFonce;
+    if not FileExists(Chemin) then
+      Exit;
     Picture  := TPicture.Create;
     Bitmap   := TBitmap.Create;
     try
-      Path   :=GetCurrentDir+ConstCheminImageNiveau+InttoStr(Niveau)+'.PNG';
-      Picture.LoadFromFile(Path);
+      Picture.LoadFromFile(Chemin);
       Bitmap.Assign(Picture.graphic);
-      ColorLoc := Bitmap.Canvas.Pixels[1, 1];
+      Result := Bitmap.Canvas.Pixels[1, 1];
     finally
       Picture.Free;
       Bitmap.Free;
     end;
-    Result := ColorLoc;
+  end;
+
+// Variante historique, sur le dossier generique.
+Function ChargeImageArrayColor(Niveau: Integer): TColor;
+  begin
+    Result := ChargeImageArrayColorFichier(GetCurrentDir+ConstCheminImageNiveau+InttoStr(Niveau)+'.PNG');
   end;
 
 procedure ChargeImageTImageList(Niveau: Integer; ListImage: TImageList);

@@ -15,7 +15,8 @@ uses
   WinMetier, UnitEquipement, WinWeapon, WinArmor, ChargeArmureSimplifie,
   ChargeSort, WinSpell, ChargeTexte, winFabrication, ChargeFabrication,
   WinTalent, WinCompetence, WinSpecialisation, ChargePersonnage,
-  ChargeMetierCompetence, PdfPersonnage, Types, WinMutation, ChargeCorruptionTable;
+  ChargeMetierCompetence, PdfPersonnage, Types, WinMutation, ChargeCorruptionTable,
+  ChargeRaceMetier;
 type
 
   { TWinPersonnages }
@@ -24,6 +25,7 @@ type
     ButtonCorruptionAjoute: TBCButton;
     ButtonCorruptionSupprime: TBCButton;
     ButtonCorruptionMutation: TBCButton;
+    ComboBoxNvMetier: TComboBox;
     EditHairColors: TEdit;
     EditEyeColors: TEdit;
     EditHeight: TEdit;
@@ -255,6 +257,8 @@ type
   Procedure XmlSauvegarde();
   procedure ButtonAugmentationClick({%H-}Sender: TObject);
   procedure RadioButtonChangerChange({%H-}Sender: TObject);
+  Procedure ListeNvMetier(Codes: TStringList);
+  Procedure ChargeComboNvMetier();
   procedure CheckBoxCalculChange({%H-}Sender: TObject);
   procedure CheckBoxXpChange({%H-}Sender: TObject);
   Function VerifieLivre(ListeLivre: String; Livre: String): String;
@@ -515,6 +519,7 @@ procedure TWinPersonnages.ButtonAugmentationClick(Sender: TObject);
 Var
   XpDispo:          Integer;
   CarriereComplete: Boolean;
+  MaxNiveau:        Integer;
 begin
   // calculs XP disponible et état carrière
   XpDispo          := (StrToIntDef(extractnumbers(tabExperience.Cells[ColXpDonnee,LigXpRestant]),0) - StrToIntDef(extractnumbers(tabExperience.Cells[ColXpDonnee,LigXpCout]),0));
@@ -522,7 +527,13 @@ begin
   // calcul Xp, Métier, Nv en changement de carrière
   if radiobuttonsuivant.Checked and CarriereComplete then
     begin
-      NvMetier := MetierEnCours;
+      // Combo visible = ce niveau ouvre sur plusieurs carrieres, c'est elle qui designe
+      // laquelle. Combo cachee = aucune bifurcation, on continue dans la carriere en cours,
+      // exactement comme avant.
+      if ComboBoxNvMetier.Visible and (NvMetierChoisi <> '') then
+        NvMetier := NvMetierChoisi
+      else
+        NvMetier := MetierEnCours;
       NvNiveau := IntToStr(StrToInt(MetierNvEnCours)+1);
     end
   else if radiobuttonChanger.Checked and CarriereComplete then
@@ -541,9 +552,20 @@ begin
       NvNiveau := '';
     end;
 
+  // Dernier niveau de la carriere EN COURS. Etait ecrit '4' en dur, ce qui refusait le
+  // passage au niveau 5 des carrieres qui en ont cinq (le Mage de High Elf Player's Guide).
+  // MaxNiveau = 0 signifie carriere inconnue de ListMetierNiveau : on ne bloque pas, le
+  // reste de la chaine de controles ci-dessous s'applique quand meme.
+  MaxNiveau        := ChercheMaxMetierNiveau(MetierEnCours);
+
   // tests
-  if radiobuttonsuivant.Checked and (MetierNvEnCours = '4') then
+  if radiobuttonsuivant.Checked and (MaxNiveau > 0) and (StrToIntDef(MetierNvEnCours, 0) >= MaxNiveau) then
     ShowMEssage(GetTexteLibelle('MESS_043'))
+  // Combo visible et rien de selectionne : le joueur n'a pas dit vers quelle carriere il
+  // monte. On ne choisit pas a sa place - continuer dans la carriere en cours est une
+  // decision, pas un defaut.
+  else if radiobuttonsuivant.Checked and ComboBoxNvMetier.Visible and (ComboBoxNvMetier.ItemIndex < 0) then
+    ShowMEssage(GetTexteLibelle('MESS_058'))
   else if (StrToIntDef(tabExperience.Cells[ColXpDonnee,LigXpCout],0) = 0) and (tabExperience.Cells[ColXpDonnee,LigXpTotal] = EditTotalXp.Text) and not radiobuttonsuivant.Checked and not radiobuttonChanger.Checked and (NbEquipement = TabEquipement.RowCount-1) and (not FabAjoute) then
     ShowMEssage(GetTexteLibelle('MESS_024'))
   else if (XpDispo < 0) then
@@ -1006,6 +1028,22 @@ procedure TWinPersonnages.ButtonRaceSelectionnerClick(Sender: TObject);
     FenMetier.Position  := poOwnerFormCenter;
     FenMetier.ShowModal;
 
+    // CARRIERE AVANCEE : un metier dont le premier <Level> declare est superieur a 1 ne
+    // s'entame pas. On y arrive en montant de niveau depuis sa carriere parente, jamais par
+    // un changement de carriere - c'est le cas du Storm Weaver, du Loremaster of Hoeth et du
+    // Smith-priest of Vaul, qui n'existent qu'a partir du niveau 3.
+    //
+    // Le refus laisse NvMetierChoisi vide et le libelle du bouton inchange : on retombe donc
+    // exactement dans l'etat "l'utilisateur a annule", qui est deja gere plus bas.
+    //
+    // Le test est ici et pas dans WinMetier, qui est aussi la fenetre de consultation : ces
+    // carrieres doivent rester VISIBLES et consultables, seule leur selection est refusee.
+    if (ChoixWinMetierRace <> '') and (ChercheMinMetierNiveau(ChoixWinMetierRace) > 1) then
+      begin
+        ShowMessage(GetTexteLibelle('MESS_057') + IntToStr(ChercheMinMetierNiveau(ChoixWinMetierRace)));
+        ChoixWinMetierRace := '';
+      end;
+
     if ChoixWinMetierRace <> '' then
       begin
         NvMetierChoisi := ChoixWinMetierRAce;
@@ -1193,10 +1231,110 @@ procedure TWinPersonnages.CalculXpNecessaire(ChangementClasse: Boolean);
     LabelNeedRealXp.Visible  := (XpNeed<>0);
   end;
 
-procedure TWinPersonnages.ComboBoxNvMetierChange(Sender: TObject);
+// Codes des carrieres accessibles en montant D'UN niveau depuis la carriere en cours.
+//   - entree 0 : TOUJOURS la carriere actuelle. Bifurquer reste un choix, pas une
+//     obligation : un Mage qui monte doit pouvoir rester Mage.
+//   - suivantes : les carrieres avancees qui declarent la carriere en cours comme parente
+//     ET qui commencent exactement au niveau vise, ET que l'ethnie du personnage peut
+//     prendre. Le filtre par ethnie regle tout seul le cas du Smith-priest of Vaul, que le
+//     livre ouvre aussi aux Elfes Sylvains.
+//
+// Une seule entree = pas de bifurcation. La combo reste alors cachee et le comportement
+// d'origine s'applique mot pour mot.
+//
+// APPELEE A DEUX ENDROITS - remplissage de la combo et validation - et c'est volontaire :
+// l'ordre etant deterministe, l'indice choisi par l'utilisateur designe le meme metier aux
+// deux appels. Aucun etat a conserver entre les deux, donc aucun risque de desynchronisation
+// si la liste des livres change entre-temps.
+Procedure TWinPersonnages.ListeNvMetier(Codes: TStringList);
+  var
+    PMetier:    StructureMetier;
+    NiveauVise: Integer;
+
+  // Le metier est-il ouvert a l'ethnie du personnage ? Un 'X' compte : il veut dire
+  // "eligible hors tirage", ce qui est exactement le cas d'une carriere avancee. Seul
+  // SeparateurChance ('-'), qui signifie explicitement indisponible, exclut.
+  Function EthnieAutorise(CodeMetier: String): Boolean;
+    var
+      PRaceMetier: StructureRaceMetier;
+    begin
+      Result := false;
+      for PRaceMetier in ListRaceMetier do
+        if CompareRechercheValeur(PRaceMetier.CodeRace, RaceEnCours) and
+           CompareRechercheValeur(PRaceMetier.CodeMetier, CodeMetier) and
+           (PRaceMetier.Chance <> SeparateurChance) then
+          begin
+            Result := true;
+            break;
+          end;
+    end;
+
   begin
-    ChargerMetierEquipement(NvMetierChoisi, 1);
-    TabEquipementAffiche();
+    Codes.Clear;
+    if Trim(MetierEnCours) = '' then
+      Exit;
+    NiveauVise := StrToIntDef(MetierNvEnCours, 0) + 1;
+    if NiveauVise < 2 then
+      Exit;
+    Codes.Add(MetierEnCours);
+    for PMetier in ListMetier do
+      if EstMetierEnfantDe(PMetier.CodeMetier, MetierEnCours) and
+         (ChercheMinMetierNiveau(PMetier.CodeMetier) = NiveauVise) and
+         EthnieAutorise(PMetier.CodeMetier) then
+        Codes.Add(PMetier.CodeMetier);
+  end;
+
+// Remplit la combo, ou la laisse cachee s'il n'y a rien a demander.
+// Elle sort d'ici TOUJOURS sur ItemIndex = -1 : celui qui la voit apparaitre doit poser un
+// choix explicite, la validation le lui refusera sinon (MESS_058).
+Procedure TWinPersonnages.ChargeComboNvMetier();
+  var
+    Codes: TStringList;
+    Ind:   Integer;
+  begin
+    ComboBoxNvMetier.Items.Clear;
+    ComboBoxNvMetier.ItemIndex := -1;
+    ComboBoxNvMetier.Visible   := false;
+    if not RadioButtonSuivant.Checked then
+      Exit;
+    Codes := TStringList.Create;
+    try
+      ListeNvMetier(Codes);
+      if Codes.Count < 2 then
+        Exit;
+      for Ind := 0 to Codes.Count - 1 do
+        ComboBoxNvMetier.Items.Add(ChercheMetier(Codes[Ind]).Libelle);
+      // Repose apres le remplissage : ajouter des items peut repositionner l'index.
+      ComboBoxNvMetier.ItemIndex := -1;
+      ComboBoxNvMetier.Visible   := true;
+      ComboBoxNvMetier.BringToFront;
+    finally
+      Codes.Free;
+    end;
+  end;
+
+// Le corps d'origine chargeait l'equipement de NvMetierChoisi AU NIVEAU 1 : il avait ete
+// ecrit pour le changement de carriere. Ici on monte d'un niveau dans une carriere qui
+// commence justement plus haut - c'est le niveau VISE qu'il faut charger, pas le 1.
+procedure TWinPersonnages.ComboBoxNvMetierChange(Sender: TObject);
+  var
+    Codes: TStringList;
+  begin
+    NvMetierChoisi := '';
+    if ComboBoxNvMetier.ItemIndex < 0 then
+      Exit;
+    Codes := TStringList.Create;
+    try
+      ListeNvMetier(Codes);
+      if ComboBoxNvMetier.ItemIndex < Codes.Count then
+        begin
+          NvMetierChoisi := Codes[ComboBoxNvMetier.ItemIndex];
+          ChargerMetierEquipement(NvMetierChoisi, StrToIntDef(MetierNvEnCours, 0) + 1);
+          TabEquipementAffiche();
+        end;
+    finally
+      Codes.Free;
+    end;
   end;
 
 procedure TWinPersonnages.EditTotalXp25KeyPress(Sender: TObject; var Key: char);
@@ -2963,6 +3101,8 @@ begin
   NvMetierChoisi := '';
   ButtonRaceSelectionner.visible := RadioButtonChanger.checked;
   ButtonRaceSelectionner.BringToFront;
+  // La combo occupe le meme emplacement que le bouton : elle doit disparaitre ici.
+  ChargeComboNvMetier();
   CalculXpNecessaire(false);
 end;
 
@@ -3674,6 +3814,7 @@ procedure TWinPersonnages.RadioButtonRASChange(Sender: TObject);
 begin
   ChargerMetierEquipement('',0);
   NvMetierChoisi := '';
+  ChargeComboNvMetier();
   TabEquipementAffiche();
   CalculXpNecessaire(false);
 end;
@@ -3687,6 +3828,7 @@ procedure TWinPersonnages.RadioButtonSuivantChange(Sender: TObject);
 begin
   ChargerMetierEquipement(MetierEnCours, StrToInt(MetierNvEnCours) + 1);
   NvMetierChoisi := '';
+  ChargeComboNvMetier();
   TabEquipementAffiche();
   CalculXpNecessaire(false);
 end;

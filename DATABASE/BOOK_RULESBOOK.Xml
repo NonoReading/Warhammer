@@ -261,6 +261,8 @@
 <Text name="RULES-MESS_054">"The GM must choose a Mutation or Creature Trait - select the actual entry below."</Text>
 <Text name="RULES-MESS_055">"Please close any open character sheet or character creation window before changing the language."</Text>
 <Text name="RULES-MESS_056">"At least one book must remain selected."</Text>
+<Text name="RULES-MESS_057">"This career cannot be started. It is only reached by advancing from another career, at level "</Text>
+<Text name="RULES-MESS_058">"This level opens onto several careers. Please choose the one you are advancing into."</Text>
 <Text name="RULES-LAB_001">"Code"</Text>
 <Text name="RULES-LAB_002">"Label"</Text>
 <Text name="RULES-LAB_003">"Description"</Text>

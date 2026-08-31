@@ -261,6 +261,8 @@
 <Text name="RULES-MESS_054">"Le Meneur de Jeu doit choisir une mutation ou un Trait de Créature - sélectionnez l'entrée réelle ci-dessous."</Text>
 <Text name="RULES-MESS_055">"Merci de fermer toute fiche personnage ou fenêtre de création de personnage ouverte avant de changer la langue."</Text>
 <Text name="RULES-MESS_056">"Au moins un livre doit rester sélectionné."</Text>
+<Text name="RULES-MESS_057">"This career cannot be started. It is only reached by advancing from another career, at level "</Text>
+<Text name="RULES-MESS_058">"This level opens onto several careers. Please choose the one you are advancing into."</Text>
 <Text name="RULES-LAB_001">"Code"</Text>
 <Text name="RULES-LAB_002">"Libellé"</Text>
 <Text name="RULES-LAB_003">"Description"</Text>
@@ -4188,14 +4190,6 @@ See page 190 for Fear rules"</Explanation>
 </Talent>
 <Talent id="RULES-T0088_FEU">
 <Description language="FRANCAIS">"Magie des Couleurs (Feu)"</Description>
-</Talent>
-<Talent id="RULES-T0088_DARK">
-<Description language="FRANCAIS">"Arcane Magic (Dark Magic)"</Description>
-  <!-- Lords of Naggaroth, "THE LORE OF DARK MAGIC". Specialisation creee le 26/08/2026 pour
-       rattacher les sept sorts de ce domaine, qui manquaient entierement. Le libelle est laisse
-       en anglais dans le fichier francais, comme le fait deja RULES-T0088_KHAINE juste apres :
-       les libelles francais sont geles, et l'identifiant doit exister des deux cotes pour que
-       les deux fichiers Rulebook declarent le meme jeu d'identifiants. -->
 </Talent>
 <Talent id="RULES-T0088_KHAINE">
 <Description language="FRANCAIS">"Arcane Magic (Khainite Sorcery)"</Description>
@@ -15983,7 +15977,7 @@ Si votre adversaire possède une arme avec l’Atout Empaleuse et obtient un Cri
 <Level>"7"</Level>
 <TypSpell>"Arcane Magic"</TypSpell>
 </Sort>
-<Sort id="RULES-ARCAN_11">
+<Sort id="RULES-ARCAN_11 ">
 <Description language="FRANCAIS">"Effrayant"</Description>
 <Explanation language="FRANCAIS">"En vous recouvrant de magie, vous devenez effrayant et intimidant. Gagnez Peur 1. Pour chaque +3 DR, vous pouvez augmenter votre valeur de Peur de 1."</Explanation>
 <Target>"You"</Target>

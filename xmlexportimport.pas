@@ -528,6 +528,13 @@ Procedure XmlExportBook(Livre: String; Langue: String);
               // Ecrit seulement si le metier designe son propre dossier d'icones de niveau.
               if PMetier.DossierNiveau <> '' then
                 XmlContent.Add(XmlLigne(ConstXmlPictureLevel, PMetier.DossierNiveau));
+              // Idem pour la carriere parente. Reecrit TEL QUEL, sans passer par
+              // XmlCreeCodeLivre : ce champ peut contenir plusieurs codes separes par
+              // SeparateurMulti, et XmlCreeCodeLivre prefixerait la chaine entiere comme un
+              // code unique. Les codes parents sont de toute facon toujours declares
+              // complets, donc XmlCreeCodeLivre les laisserait intacts.
+              if PMetier.MetierParent <> '' then
+                XmlContent.Add(XmlLigne(ConstXmlMetierParent, PMetier.MetierParent));
 
               // Niveau
               XmlContent.Add(XmlDebut(ConstXmlSousChapitreNiveau));
@@ -1651,6 +1658,7 @@ Procedure XmlImport(FileName: String; OnlyPrimary: Boolean; OnlyCode: Boolean);
                       PMetier.Livre      := Livre;
                       // Meme precaution que pour les ethnies et les races.
                       PMetier.DossierNiveau := '';
+                      PMetier.MetierParent  := '';
                       PMetier.CodeMetier := RemoveQuotes(UTF8Encode(NodeNv2.Attributes.GetNamedItem(ConstXmlId).NodeValue));
                       PTraduction        := InitTrad(ConstPMetier, PMetier.CodeMetier, '', PMetier.Livre);
 
@@ -1676,6 +1684,8 @@ Procedure XmlImport(FileName: String; OnlyPrimary: Boolean; OnlyCode: Boolean);
                               PMetier.CodeCompetence:= RemoveQuotes(UTF8Encode(NodeNv3.TextContent));
                             ConstXmlPictureLevel:
                               PMetier.DossierNiveau := RemoveQuotes(UTF8Encode(NodeNv3.TextContent));
+                            ConstXmlMetierParent:
+                              PMetier.MetierParent  := RemoveQuotes(UTF8Encode(NodeNv3.TextContent));
                             ConstXmlSousChapitreNiveau:
                               begin
                                 NodeNv4 := XmlElement(NodeNv3.FirstChild);

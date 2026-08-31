@@ -2705,7 +2705,7 @@ Le programme remplacerait `*` par la parenthèse du libellé de la spécialisati
 pour le générique ; l'absence de marqueur vaut « ne rien faire ». Nono a écarté l'alternative
 d'un attribut séparé (`<Test parametre="Social Group">`), trop lourde.
 
-### 2.23 Le nombre de niveaux se calcule depuis la donnée — en cours (30/08/2026)
+### 2.23 Le nombre de niveaux se calcule depuis la donnée — terminé (31/08/2026)
 
 Les carrières du livre de base ont toutes 4 niveaux, et ce 4 était écrit en dur à six
 endroits. *High Elf Player's Guide* apporte un Mage à 5 niveaux. Plutôt que d'élargir à 6 —
@@ -2736,16 +2736,125 @@ indices d'image par les tableaux des onglets Attribut, Talent, Compétence et Av
 `CouleurKo`, avec les `CouleurFond*` en regard). Couper le chargement au dernier niveau les
 faisait disparaître.
 
-**Point de reprise — ce qui reste, dans l'ordre :**
-1. **Renuméroter les pastilles à 20, 21 et 22** (renommer trois PNG, changer trois lignes de
-   `chargeconstantes.pas`, porter la borne de `MaxIndiceIconeNiveau` de 20 à 30).
-   *Préalable strict au lot 2* : sinon le niveau 5 du Mage et `CouleurNot` se disputeront
-   l'indice 5.
-2. **`pdfmetier.pas`** — les trois chargements en dur (l.92, 250, 285), puis la géométrie de
-   la grille du schéma d'avance, calibrée pour quatre lignes (`For Ind := 0 to 5 do
-   DrawLine`, positions en `(Nv-1)*4.7`, `FinAttribut := ... - ((3)*4.7)`). Le seul vrai
-   morceau de travail restant.
-3. Une vraie icône pour le niveau 5 : `PICTURES\NIV\5.png` fait 164 octets.
+**Pastilles déplacées à 20, 21 et 22 le 31/08/2026**, testé par Nono : la collision avec le
+niveau 5 du Mage est levée. `5.png`, `6.png` et `7.png` restent physiquement dans le dossier
+et ne servent plus — Nono doit les supprimer, ou remplacer `5.png` par une vraie icône de
+niveau 5.
+
+**`pdfmetier.pas` fait le 31/08**, validé par Nono (PDF généré pour une carrière du livre de
+base et une carrière elfique) : bornes dimensionnées sur le métier, chemins passant par
+`CheminNiveauImageMetier`, tolérance au fichier absent (`PdfImgNv` garde la place avec `-1`,
+le rectangle coloré reste tracé), et **géométrie du schéma d'avance rendue variable** —
+`For Ind := 0 to NbNiveauMetier + 1`, bas des verticaux à
+`270.7 - HautAttribut - ((NbNiveauMetier + 1) * 4.75)`, et
+`FinAttribut := 261.15 - HautAttribut - ((NbNiveauMetier - 1) * 4.7)`. Les trois formules
+redonnent exactement les valeurs d'origine à 4 niveaux (vérifié numériquement avant
+écriture). Le tableau grandit vers le bas et pousse l'image qui le suit, `FinAttribut`
+servant déjà d'ancrage.
+
+**La limite des quatre niveaux n'existe plus.** Il ne reste que deux points de confort :
+- supprimer `PICTURES\NIV\5.png`, `6.png` et `7.png`, devenus inutiles — **à la main de
+  Nono**, la passerelle ne sait pas supprimer ;
+- leur remplacer `5.png` par une vraie icône de niveau 5, sans quoi ce niveau s'affichera
+  en gris uni via le repli du chargeur tolérant.
+
+**À surveiller à la première carrière à 5 niveaux** : que l'image placée sous le schéma
+d'avance ne descende pas trop bas dans la page. Si ça devient serré, l'autre approche est de
+garder la hauteur totale constante et de réduire le pas de 4,75.
+
+### 2.24 Carrières avancées : niveau minimum et carrière parente — mécanique terminée, données à venir (31/08/2026)
+
+*High Elf Player's Guide* apporte trois carrières — Smith-priest of Vaul, Storm Weaver,
+Loremaster of Hoeth — **qui n'existent qu'à partir du niveau 3**. On ne les commence pas :
+on y arrive en montant de niveau depuis le Mage. Conception arrêtée avec Nono le 31/08.
+
+**Une seule donnée nouvelle**, `<Parent>` sur `<Career>` (`ConstXmlMetierParent`, champ
+`MetierParent` de `StructureMetier`). Elle contient un code de métier, ou plusieurs séparés
+par `SeparateurMulti` — la notation multiple est acceptée dès maintenant même si le livre
+n'en a pas besoin, pour ne pas avoir à y revenir.
+
+**Le niveau minimum ne se déclare pas, il se lit.** `ChercheMinMetierNiveau()` dans
+`chargemetierniveau.pas`, symétrique de `ChercheMaxMetierNiveau()` : le plus petit
+`<Level>` déclaré. Une balise `<MinLevel>` aurait fait doublon, avec le risque classique de
+diverger des niveaux réellement présents. Un résultat `> 1` **est** la définition d'une
+carrière avancée.
+
+**Les deux vont ensemble** : un parent sans niveau minimum n'aurait aucun effet, un niveau
+minimum sans parent rendrait la carrière définitivement inatteignable.
+
+#### Ce qui existait déjà et n'a rien coûté
+
+Le `'X'` de `StructureRaceMetier.Chance` — *« éligible hors tirage »* — fait déjà exactement
+ce qu'il fallait : `ChargeTabMetier` l'exclut de la table de d100 de WinCreation, `WinRaces`
+l'affiche quand même dans son arbre, `MetierRaceNbSuivant` ne le compte pas. **Aucun blocage
+à écrire côté création.**
+
+Mieux : `DATA_SPECIE_CAREER_DIRECT` s'exprime en RACE, et `CompleteRaceMetierParEspece` la
+développe en une entrée par ethnie, toujours en `'X'`, **en recopiant le champ `Livre`**
+(`PNouveau := PSource`). Une seule entrée `RULES-SPECIE_HELF` par carrière suffit donc pour
+les onze ethnies du livre *et* le Haut Elfe du Rulebook — et comme les entrées portent
+`HELFG`, `VerifieFiltre` les masque à qui ne charge pas le livre. **Rien ne change pour un
+joueur Rulebook seul.**
+
+#### Le blocage manquait ailleurs que prévu
+
+Pas à la création (le `'X'` s'en charge) mais dans **WinPersonnage, sur « Changer de
+carrière »** : `ButtonRaceSelectionnerClick` ouvre WinMetier, qui laisse choisir n'importe
+quel métier. Le refus y est posé, vide `ChoixWinMetierRace` et retombe ainsi dans l'état
+« l'utilisateur a annulé », déjà géré. Message `MESS_057`.
+
+Le test est côté WinPersonnage et **pas** dans WinMetier, qui sert aussi de fenêtre de
+consultation : ces carrières doivent rester visibles, seule leur *sélection* est refusée.
+
+#### La bifurcation au passage de niveau
+
+`ComboBoxNvMetier`, posée par Nono sur `TabSheetEvolution` à l'emplacement exact de
+`ButtonRaceSelectionner` (Left 8, Top 104, Width 256) — les deux ne servent jamais en même
+temps. **Son gestionnaire `ComboBoxNvMetierChange` existait déjà dans le `.pas`, orphelin :
+déclaré, implémenté, référencé par aucun contrôle.** Nono avait commencé cette idée à un
+moment. Son corps chargeait l'équipement au niveau 1 (il avait été écrit pour le changement
+de carrière) ; il charge maintenant le niveau visé.
+
+- `ListeNvMetier(Codes)` construit la liste : **entrée 0 toujours la carrière actuelle**
+  (bifurquer reste un choix), puis les enfants dont le niveau minimum vaut exactement le
+  niveau visé et que l'ethnie autorise.
+- `ChargeComboNvMetier()` remplit, ou laisse caché si moins de deux entrées. Appelée depuis
+  les **trois** `RadioButton*Change`.
+- Sort toujours sur `ItemIndex = -1` : **aucun choix par défaut** (décision de Nono). La
+  validation refuse avec `MESS_058` tant que rien n'est sélectionné.
+
+**Aucun état conservé entre le remplissage et la validation** : `ListeNvMetier` est appelée
+deux fois plutôt que de stocker les codes dans un champ du formulaire. L'ordre est
+déterministe, donc l'indice désigne le même métier aux deux appels — et rien ne peut se
+désynchroniser. Ça évite une variable partagée de plus (voir §4, l'inventaire des globales).
+
+**Le filtre par ethnie est une fonction imbriquée `EthnieAutorise`, pas `VerifieRaceMetier`.**
+⚠️ `VerifieRaceMetier(RaceChoisie, MetierActuel, MetierAVerifier)` renvoie **toujours faux**
+si `MetierActuel` est vide — sa condition est `(MetierActuel <> '') and (MetierActuel <> ...)`.
+Elle répond en fait à « ce métier est-il différent de celui-là ? », pas à « cette ethnie
+peut-elle le prendre ? ». Ne pas s'y fier sans la relire.
+
+#### Règles retenues
+
+- **Coût XP** : tarif de continuation, sans surcharge de changement de classe. C'est la même
+  carrière qui bifurque.
+- **Données** : le personnage bascule entièrement sur la nouvelle carrière, les niveaux 1-2
+  du Mage ne comptent plus. Nono : *« je stocke les données du métier en cours, donc c'est ce
+  qui va être utilisé »*. Si la règle s'avère fausse un jour, c'est la mise à jour du XML de
+  personnage qu'il faudra changer, pas cette mécanique.
+
+#### Erratum du livre, conservé tel quel
+
+Le Smith-priest of Vaul est déclaré pour les Hauts Elfes **et les Elfes Sylvains**, alors que
+le Mage n'est proposé qu'aux Hauts Elfes. Le Sylvain ne pourra donc jamais l'atteindre.
+Décision de Nono : traduire fidèlement ce que le livre écrit. Le filtre par ethnie règle le
+cas tout seul, sans exception dans le code.
+
+#### Reste à faire
+
+**Rien n'est testable en vrai tant qu'aucune carrière ne déclare de `<Parent>`** — les cinq
+étapes compilent et ne changent rien à l'écran. La mécanique s'éprouvera avec les trois
+carrières du lot 2.
 
 ## 3. TODO / Backlog
 

@@ -51,6 +51,7 @@ var
   Strings:            TStringList;
   PMetier:            StructureMetier;
   IndL:               Integer;
+  CheminIcone:        String;
 begin
   strings          := TStringList.Create;
   ExtractStrings([SeparateurMulti], [], PChar(ListeMetier), strings);
@@ -86,11 +87,21 @@ begin
   // couleur et image
   ColorList        := [];
   PdfImgNv         := [];
-  SetLength(ColorList, 5);
+  // Dimensionne sur le nombre de niveaux DE CE METIER, et non sur un 5 fige : la boucle
+  // juste dessous allait deja jusqu'a ChercheMaxMetierNiveau, donc elle ecrivait hors
+  // bornes des le premier metier a cinq niveaux.
+  SetLength(ColorList, ChercheMaxMetierNiveau(PMetier.CodeMetier) + 1);
   For IndL := 1 to ChercheMaxMetierNiveau(PMetier.CodeMetier) do
     begin
-      PdfImgNv += [PdfDoc.Images.AddFromFile(GetCurrentDir+ConstCheminImageNiveau+IntToStr(IndL)+'.PNG',false)];
-      ColorList[IndL] := ChargeImageArrayColor(IndL);
+      // Le dossier d'icones peut etre propre au livre du metier, comme dans WinMetier.
+      CheminIcone := CheminNiveauImageMetier(PMetier.CodeMetier, IndL);
+      // Icone absente : on garde la place avec -1 plutot que d'echouer, et les dessins
+      // testent ce -1. Un niveau peut ne pas avoir d'image.
+      if FileExists(CheminIcone) then
+        PdfImgNv += [PdfDoc.Images.AddFromFile(CheminIcone,false)]
+      else
+        PdfImgNv += [-1];
+      ColorList[IndL] := ChargeImageArrayColorFichier(CheminIcone);
     end;
 
   For IndL := 0 to strings.count-1 do
@@ -149,6 +160,7 @@ var
   MargeDroite:        Integer = 5;
   DebutTalent:        Integer = 45;
   FinAttribut:        Double = 0;
+  NbNiveauMetier:     Integer = 0;
   DernierTalent:      Integer = 0;
   TotalEquip:         Integer = 0;
   TotalTalent:        Integer = 0;
@@ -171,6 +183,8 @@ var
   Equipement:         String;
 begin
   PMetier := chercheMetier(MetierEnCours);
+  // Nombre de niveaux de CE metier : toute la geometrie du schema d'avance en depend.
+  NbNiveauMetier := ChercheMaxMetierNiveau(MetierEnCours);
 
   ListPage       := TStringList.Create;
 
@@ -247,29 +261,42 @@ begin
               end;
           if Nv > 0 then
             begin
-              Path := GetCurrentDir+ConstCheminImageNiveau+IntToStr(Nv)+'.PNG';
-              GetImageSize(Path, IWidth, IHeight);
-              RedimensionneImage(IWidth, IHeight, TailleCellule, 4, CWidth, cHeight);
+              Path := CheminNiveauImageMetier(MetierEnCours, Nv);
               PdfPage.SetColor(ColorToARGB(ColorList[Nv],0),false);
               Coord.X := DebutImgMetier + ((Ind - 1.0) * TailleCellule);
               Coord.Y := 261.15 - HautAttribut - ((Nv-1)*4.7);
               PdfPage.DrawRect(Coord,TailleCellule,4.7,0,true,false,0);
-              PdfPage.DrawImage(DebutImgMetier + ((Ind-0.75)*TailleCellule),Coord.Y, CWidth, cHeight, PdfImgNv[NV-1]);
+              // Le rectangle colore est toujours dessine ; l'icone seulement si elle existe.
+              if PdfImgNv[NV-1] >= 0 then
+                begin
+                  GetImageSize(Path, IWidth, IHeight);
+                  RedimensionneImage(IWidth, IHeight, TailleCellule, 4, CWidth, cHeight);
+                  PdfPage.DrawImage(DebutImgMetier + ((Ind-0.75)*TailleCellule),Coord.Y, CWidth, cHeight, PdfImgNv[NV-1]);
+                end;
               Coord.Y := 261.15 - HautAttribut + 4.7;
               PdfPage.DrawRect(Coord,TailleCellule,4.7,0,true,false,0);
               PdfPage.SetColor(clblack,false);
             end;
           PdfCentre(PdfPage,DebutImgMetier + ((Ind-1)*TailleCellule),DebutImgMetier + (ind*TailleCellule),267-HautAttribut,PAttribut.Resume);
         end;
-        FinAttribut := 261.15-HautAttribut  - ((3)*4.7);
+        // Bas du tableau du schema d'avance : une ligne par niveau, la derniere etant
+        // celle du niveau le plus haut de CE metier. C'est aussi le point d'ancrage de
+        // l'image placee dessous (voir l'appel a DrawImage plus bas), donc le tableau
+        // pousse la suite vers le bas quand il grandit.
+        FinAttribut := 261.15 - HautAttribut - ((NbNiveauMetier - 1) * 4.7);
     end;
 
-  For Ind := 0 to 5 do
+  // Traits horizontaux : une ligne d'entete plus un niveau, d'ou le +1. C'etait ecrit
+  // "0 to 5", ce qui valait exactement 0 to 4+1 tant que toutes les carrieres avaient
+  // quatre niveaux.
+  For Ind := 0 to NbNiveauMetier + 1 do
     PdfPage.DrawLine(DebutImgMetier,270.7 - HautAttribut - (Ind * 4.75),DebutImgMetier + (TailleCellule*10),270.7 - HautAttribut - (Ind * 4.75),1);
 
   PdfTaillePolice(PdfPage, PdfFontBold, ConstPoliceCarlson+ConstPoliceGras, 9);
+  // Traits verticaux : ils descendent jusqu'au dernier trait horizontal. Le 246.95 d'avant
+  // etait 270.7 moins les cinq bandes de 4.75 d'une carriere a quatre niveaux.
   for Ind := 1 to 9 do
-    PdfPage.DrawLine(DebutImgMetier + (Ind*Taillecellule),246.95-HautAttribut,DebutImgMetier + (Ind*TailleCellule),270.7-HautAttribut,1);
+    PdfPage.DrawLine(DebutImgMetier + (Ind*Taillecellule),270.7 - HautAttribut - ((NbNiveauMetier + 1) * 4.75),DebutImgMetier + (Ind*TailleCellule),270.7-HautAttribut,1);
 
   // image Feuille
   Path              := GetCurrentDir+ConstCheminPdfMetierAdvance;
@@ -282,10 +309,13 @@ begin
   for Nv := 1 to ChercheMaxMetierNiveau(PMetier.CodeMetier) do
     begin
       Inc(NBDetail);
-      Path := GetCurrentDir+ConstCheminImageNiveau+IntToStr(Nv)+'.PNG';
-      GetImageSize(Path, IWidth, IHeight);
-      RedimensionneImage(IWidth, IHeight, 5, 5, CWidth, cHeight);
-      PdfPage.DrawImage(DebutFeuille + 5 ,PdfPositionFeuille(DebutTexte,NbLigne,NbDetail) - 1, CWidth, cHeight, PdfImgNv[Nv-1]);
+      Path := CheminNiveauImageMetier(MetierEnCours, Nv);
+      if PdfImgNv[Nv-1] >= 0 then
+        begin
+          GetImageSize(Path, IWidth, IHeight);
+          RedimensionneImage(IWidth, IHeight, 5, 5, CWidth, cHeight);
+          PdfPage.DrawImage(DebutFeuille + 5 ,PdfPositionFeuille(DebutTexte,NbLigne,NbDetail) - 1, CWidth, cHeight, PdfImgNv[Nv-1]);
+        end;
       for PMetierNiveau in ListMetierNiveau do
         if (PMetierNiveau.CodeMetier = Metierencours) and (PMetierNiveau.NiveauMetier = Nv) then
           begin

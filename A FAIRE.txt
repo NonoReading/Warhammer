@@ -2,6 +2,22 @@
        WARHAMMER
 -------------------------
 
+CARRIERES AVANCEES (mecanique faite le 31/08/2026, il manque les donnees)
+ - declarer <Parent>"HELFG-WORK132" sur Smith-priest, Storm Weaver et Loremaster
+ - declarer leurs <Level> 3, 4 et 5 seulement (c'est ce qui les rend inaccessibles)
+ - une entree DATA_SPECIE_CAREER_DIRECT en "X" sur RULES-SPECIE_HELF pour les trois
+ - une entree de plus en "X" sur RULES-SPECIE_WELF pour le seul Smith-priest
+ - une fois les donnees en place : tester la combo sur un Mage haut-elfe de niveau 2
+ - tester aussi qu'un Rulebook seul ne voit RIEN changer dans l'onglet Evolution
+
+BUG SIGNALE NON CORRIGE : ChercheMaxMetierNiveau compare les codes avec = strict alors que
+sa voisine ChercheMetierNiveau utilise CompareRechercheValeur. ChercheMinMetierNiveau a ete
+alignee sur la premiere pour que les deux bornes se calculent pareil. A traiter sur les
+TROIS en meme temps, jamais sur une seule.
+
+BUG SIGNALE NON CORRIGE : VerifieRaceMetier renvoie toujours faux si MetierActuel est vide.
+Elle ne repond pas a la question que son nom suggere. Soit la renommer, soit la corriger.
+
 le 100 points de la création des attributs
  - T0070 : haine sacrée : miracle + 1 dégât
  - voyageur aguerri : savoir région (une fois par talent)
@@ -576,30 +592,31 @@ retombent sur une valeur existante (donnee). Les deux endroits ci-dessus ne sont
 pas les seuls : chercher toutes les occurrences de TypeSort dans winpersonnage.pas.
 
 =========================================================================
-COLLISION A VENIR : LES PASTILLES DE COULEUR OCCUPENT LES INDICES 5, 6 ET 7
+BUG A SIGNALER : LE PDF DE PLUSIEURS METIERS PREND LES ICONES DU PREMIER
 =========================================================================
-PICTURES\NIV\ ne contient pas que des icones de niveau. Les fichiers 5, 6 et 7 sont des
-pastilles de couleur - rouge, vert, gris - utilisees comme indices d image par les tableaux
-des onglets Attribut, Talent, Competence et Avancement de WinPersonnage. Elles sont
-proprement nommees dans chargeconstantes.pas l.584-589 :
-     CouleurNot = '5'   rouge saumon, action requise   (CouleurFondNot $8487F0)
-     CouleurOk  = '6'   vert                            (CouleurFondOk  $57ED71)
-     CouleurKo  = '7'   gris                            (CouleurFondKo  $7F7F7F)
-Le fond d une ligne est peint avec le pixel de l image d indice porte par Cells[2, ligne].
+pdfmetier.pas, PdfMetierDoc : la procedure recoit une LISTE de metiers, mais elle ne
+construit PdfImgNv et ColorList qu une fois, pour Strings[0] - le premier de la liste -
+avant d appeler PdfMetierPage pour chacun. Les metiers suivants dessinent donc avec les
+images et les couleurs du premier.
+Sans consequence tant que tous les metiers partageaient les memes icones generiques. Le
+devient depuis que le dossier d icones depend du livre : un PDF melant une carriere elfique
+et une carriere du Rulebook donnerait les glyphes elfiques aux deux, et le nombre de
+niveaux du premier metier borne aussi ColorList pour les suivants.
+NON CORRIGE - repere le 31/08 en cablant les icones par livre dans le PDF. La correction
+demande de deplacer la construction des images dans PdfMetierPage, ou de la refaire a
+chaque metier.
 
-LE PROBLEME : cet espace d indices est PARTAGE avec les niveaux de carriere. Des que le
-Mage de High Elf Player s Guide entrera en base, le niveau 5 et CouleurNot se disputeront
-l indice 5, et les lignes "action requise" afficheront l icone du niveau 5.
-A REGLER AVANT LE LOT 2.
-
-SOLUTION PROPOSEE, petite : deplacer les pastilles hors de portee, a 20, 21 et 22.
-  renommer 5.png -> 20.png, 6.png -> 21.png, 7.png -> 22.png
-  trois lignes dans chargeconstantes.pas
-  etendre de 20 a 30 la borne de la boucle de MaxIndiceIconeNiveau
-Les indices 5 a 19 seraient combles par des images neutres de 8x8, sans cout.
-ALTERNATIVE PLUS PROPRE MAIS PLUS LOURDE : peindre directement avec CouleurFondNot/Ok/Ko,
-qui existent deja, sans passer par la liste d images - mais cela touche le code de dessin
-de quatre grilles.
+=========================================================================
+TROIS FICHIERS A SUPPRIMER DANS PICTURES\NIV\
+=========================================================================
+5.png, 6.png et 7.png ne servent plus a rien : les pastilles d etat ont ete deplacees a
+20, 21 et 22 le 31/08. Plus rien ne les reference.
+Ils deviendront NUISIBLES des le lot 2 : le niveau 5 du Mage irait chercher 5.png et
+afficherait la pastille rouge. Deux facons de fermer le point :
+  - les supprimer, et le niveau 5 tombera sur l image neutre grise du chargeur tolerant ;
+  - ou remplacer 5.png par une VRAIE icone de niveau 5, ce qui reglera du meme coup le
+    point de l icone manquante.
+A LA MAIN DE NONO : la passerelle ne permet pas de supprimer un fichier sur son poste.
 
 =========================================================================
 BUG A SIGNALER : ChercheMetierNiveau NE REMET PAS Result A ZERO
@@ -610,40 +627,6 @@ Result - en pratique souvent le resultat de l appel precedent. C est exactement 
 de bug du chantier 2.17, ou les autres fonctions Cherche* ont ete corrigees ; celle-ci a
 ete oubliee. Sa voisine ChercheMaxMetierNiveau, elle, est saine.
 NON CORRIGE - repere le 30/08 en ajoutant MaxNiveauMetier dans la meme unite.
-
-=========================================================================
-BUG LATENT ET LIMITE STRUCTURELLE : LES CARRIERES A PLUS DE 4 NIVEAUX
-=========================================================================
-Constate le 30/08 en preparant l integration de High Elf Player s Guide. NON CORRIGE.
-La couche donnee est deja generique : ChercheMaxMetierNiveau() existe et
-ChercheMetierNiveau(Code, Niveau) cherche par numero de niveau explicite. Ce sont les
-COUCHES D AFFICHAGE qui sont calibrees pour 4.
-
-  winpersonnage.pas .... l.1435 pose "TabNiveau.RowCount := 5" - une ligne d entete plus
-                         quatre niveaux - et l.2989 ecrit
-                         "TabNiveau.Cells[2, PMetierNiveau.NiveauMetier]" : LE NUMERO DE
-                         NIVEAU SERT D INDICE DE LIGNE. Un niveau 5 ecrit donc en ligne 5
-                         d une grille qui n en a que 5 (0 a 4) : hors bornes. Le site le
-                         plus direct des six. Sa liste d IMAGES, elle, est deja prete
-                         (dimensionnee a 8, acces gardes).
-                         A noter au passage, consequence utile : une carriere qui commence
-                         au niveau 3 ne plante pas, elle laisse simplement les lignes 1 et 2
-                         vides.
-  pdfmetier.pas    l.89  SetLength(ColorList, 5) alors que la boucle juste dessous va
-                         "1 to ChercheMaxMetierNiveau" -> ECRITURE HORS BORNES des le
-                         premier metier a 5 niveaux. C est le plus dangereux des quatre.
-  winmetier.pas    l.852 "if NvS in ['1','2','3','4']" -> le niveau 5 tombe dans le else
-                         et s affiche en gris.
-  winraces.pas     l.587 idem.
-  wincreation.pas  l.373 SetLength(ColorList, 5) + boucle "0 to 4".
-
-ET UN CINQUIEME POINT, QUI N EST PAS UNE CONSTANTE A CHANGER : pdfmetier.pas dessine la
-grille du schema d avance avec une GEOMETRIE CALIBREE POUR 4 LIGNES - "For Ind := 0 to 5 do
-DrawLine", positions en "(Nv-1)*4.7", et "FinAttribut := 261.15-HautAttribut - ((3)*4.7)".
-Une cinquieme ligne deborderait du cadre. C est de la mise en page a refaire.
-
-IMAGES : PICTURES\NIV\5.png, 6.png et 7.png EXISTENT mais font 164 octets - ce sont des
-placeholders, pas de vraies icones de niveau.
 
 =========================================================================
 ICONES DE NIVEAU PAR LIVRE - CE QUI RESTE

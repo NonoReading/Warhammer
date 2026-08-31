@@ -238,10 +238,13 @@
         <HasResources Value="True"/>
         <ResourceBaseClass Value="Form"/>
         <UnitName Value="WinPersonnage"/>
-        <EditorIndex Value="-1"/>
-        <TopLine Value="2035"/>
-        <CursorPos X="20" Y="2045"/>
+        <IsVisibleTab Value="True"/>
+        <EditorIndex Value="2"/>
+        <TopLine Value="1220"/>
+        <CursorPos X="103" Y="1228"/>
         <UsageCount Value="200"/>
+        <Loaded Value="True"/>
+        <LoadedDesigner Value="True"/>
       </Unit>
       <Unit>
         <Filename Value="chargeattributaugmentation.pas"/>
@@ -458,10 +461,11 @@
         <Filename Value="pdfutils.pas"/>
         <IsPartOfProject Value="True"/>
         <UnitName Value="PdfUtils"/>
-        <EditorIndex Value="-1"/>
-        <TopLine Value="119"/>
-        <CursorPos X="56" Y="128"/>
+        <EditorIndex Value="1"/>
+        <TopLine Value="346"/>
+        <CursorPos X="72" Y="359"/>
         <UsageCount Value="200"/>
+        <Loaded Value="True"/>
       </Unit>
       <Unit>
         <Filename Value="pdfmetier.pas"/>
@@ -476,9 +480,8 @@
         <Filename Value="pdfpersonnage.pas"/>
         <IsPartOfProject Value="True"/>
         <UnitName Value="PdfPersonnage"/>
-        <IsVisibleTab Value="True"/>
-        <TopLine Value="2750"/>
-        <CursorPos X="53" Y="2763"/>
+        <TopLine Value="2751"/>
+        <CursorPos X="32" Y="2765"/>
         <UsageCount Value="200"/>
         <Loaded Value="True"/>
       </Unit>
@@ -1217,7 +1220,20 @@
         <UsageCount Value="11"/>
       </Unit>
     </Units>
-    <JumpHistory HistoryIndex="-1"/>
+    <JumpHistory HistoryIndex="2">
+      <Position>
+        <Filename Value="pdfpersonnage.pas"/>
+        <Caret Line="2765" Column="32" TopLine="2751"/>
+      </Position>
+      <Position>
+        <Filename Value="winpersonnage.pas"/>
+        <Caret Line="2045" Column="20" TopLine="2036"/>
+      </Position>
+      <Position>
+        <Filename Value="winpersonnage.pas"/>
+        <Caret Line="2046" Column="20" TopLine="2037"/>
+      </Position>
+    </JumpHistory>
     <RunParams>
       <FormatVersion Value="2"/>
       <Modes ActiveMode=""/>
@@ -1229,15 +1245,8 @@
         <Kind Value="bpkSource"/>
         <WatchScope Value="wpsLocal"/>
         <WatchKind Value="wpkWrite"/>
-        <Source Value="pdfutils.pas"/>
-        <Line Value="364"/>
-      </Item>
-      <Item>
-        <Kind Value="bpkSource"/>
-        <WatchScope Value="wpsLocal"/>
-        <WatchKind Value="wpkWrite"/>
         <Source Value="winpersonnage.pas"/>
-        <Line Value="4438"/>
+        <Line Value="4439"/>
       </Item>
     </BreakPoints>
     <Watches>

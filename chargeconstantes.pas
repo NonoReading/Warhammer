@@ -146,6 +146,12 @@ Const
       // Dossier d'icones de niveau propre a l'ethnie, sous \PICTURES\. Balise absente ou
       // vide = dossier NIV generique. Voir CheminNiveauImage dans ChargeRace.
       ConstXmlPictureLevel              = 'PictureLevel';
+      // Carriere DONT CELLE-CI EST LA SUITE. Balise facultative de <Career>, absente pour
+      // l'immense majorite des metiers. Contient un code de metier, ou plusieurs separes
+      // par SeparateurMulti. Sa presence, combinee a un premier <Level> superieur a 1, dit
+      // qu'on n'entre pas dans ce metier : on y arrive en montant de niveau depuis le
+      // parent. Voir CONTEXT.md, chantier des carrieres avancees.
+      ConstXmlMetierParent              = 'Parent';
       ConstXmlSousChapitreMetier        = 'SUBCHAPTER_CAREER';
       ConstXmlClass                     = 'Class';
       ConstXmlEquipement                = 'Item';
@@ -581,12 +587,18 @@ Var
   ChoixWinJetDeja:    TStringList;
   ChoixWinJetValeur:  Integer;
 
-  CouleurOk:      String = '6';
-  CouleurNot:     String = '5';
-  CouleurKo:      String = '7';
-  CouleurFondNot: TColor = TColor($8487F0);   // rouge saumon (5.png) - action requise
-  CouleurFondOk:  TColor = TColor($57ED71);   // vert (6.png)
-  CouleurFondKo:  TColor = TColor($7F7F7F);   // gris (7.png)
+  // Indices d'image des pastilles d'etat des tableaux d'avancement. Elles vivent dans le
+  // MEME dossier et la MEME liste d'images que les icones de niveau de carriere, et elles
+  // occupaient 5, 6 et 7 - c'est-a-dire juste au-dessus des quatre niveaux de l'epoque.
+  // Deplacees a 20-22 le 31/08/2026 : High Elf Player's Guide apporte une carriere a CINQ
+  // niveaux, et le niveau 5 serait venu reclamer l'indice de CouleurNot. Vingt niveaux de
+  // carriere mettraient des annees a arriver, s'ils arrivent.
+  CouleurNot:     String = '20';
+  CouleurOk:      String = '21';
+  CouleurKo:      String = '22';
+  CouleurFondNot: TColor = TColor($8487F0);   // rouge saumon (20.png) - action requise
+  CouleurFondOk:  TColor = TColor($57ED71);   // vert (21.png)
+  CouleurFondKo:  TColor = TColor($7F7F7F);   // gris (22.png)
 
 procedure NettoyerElementsFenetre(Fenetre: TWinControl);
 procedure AdjustGridColumnsWidth(Grid: TStringGrid; MaxHeight: Integer; ForceMax: Boolean; MaxWidth: boolean; AutoSizeCol: Boolean = true; AddHeight: Integer = 0; AddWidth: Integer = 0; ForceScroll: TScrollStyle = ssautoboth; ScaleDpi: Boolean = true);

@@ -20,6 +20,12 @@ Type
         // recours dans WinMetier, qui affiche un metier sans savoir quelle ethnie le joue.
         // Vide = dossier generique NIV.
         DossierNiveau:  String;
+        // Carriere dont celle-ci est la SUITE, vide dans la quasi-totalite des cas. Un ou
+        // plusieurs codes de metier separes par SeparateurMulti. Ce champ ne dit PAS a lui
+        // seul que le metier est inaccessible : c'est ChercheMinMetierNiveau > 1 qui le
+        // dit. Les deux vont ensemble - un parent sans niveau minimum n'aurait aucun effet,
+        // un niveau minimum sans parent rendrait le metier definitivement inatteignable.
+        MetierParent:   String;
   End;
 
   TListMetier = specialize TList<StructureMetier>;
@@ -33,6 +39,7 @@ Function CheminMetierImage(CodeMetier: String): String;
 Function DossierNiveauMetier(CodeMetier: String): String;
 Function CheminNiveauImageMetier(CodeMetier: String; Niveau: Integer): String;
 Function CheminNiveauImageMetierRace(CodeMetier: String; CodeRace: String; Niveau: Integer): String;
+Function EstMetierEnfantDe(CodeMetier: String; CodeParent: String): Boolean;
 
 implementation
 
@@ -121,6 +128,39 @@ Function CheminNiveauImageMetierRace(CodeMetier: String; CodeRace: String; Nivea
       Result := CheminNiveauDossier(Dossier, Niveau)
     else
       Result := CheminNiveauImage(CodeRace, Niveau);
+  end;
+
+// Vrai si CodeMetier declare CodeParent parmi ses carrieres parentes. Le champ MetierParent
+// peut en contenir plusieurs, separees par SeparateurMulti - d'ou le decoupage plutot qu'une
+// simple egalite, qui ferait repondre "non" a un metier dont le parent cherche n'est pas le
+// premier de la liste.
+//
+// Un metier sans parent - l'immense majorite - sort immediatement : cette fonction est
+// appelee sur TOUS les metiers charges a chaque ouverture de la combo.
+Function EstMetierEnfantDe(CodeMetier: String; CodeParent: String): Boolean;
+  var
+    PMetier: StructureMetier;
+    Liste:   TStringList;
+    Ind:     Integer;
+  begin
+    Result  := false;
+    if (Trim(CodeMetier) = '') or (Trim(CodeParent) = '') then
+      Exit;
+    PMetier := ChercheMetier(CodeMetier);
+    if Trim(PMetier.MetierParent) = '' then
+      Exit;
+    Liste := TStringList.Create;
+    try
+      ExtractStrings([SeparateurMulti], [], PChar(PMetier.MetierParent), Liste);
+      for Ind := 0 to Liste.Count - 1 do
+        if CompareRechercheValeur(Trim(Liste[Ind]), CodeParent) then
+          begin
+            Result := true;
+            break;
+          end;
+    finally
+      Liste.Free;
+    end;
   end;
 
 end.

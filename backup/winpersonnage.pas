@@ -176,6 +176,7 @@ type
   procedure TabDrawCell(Sender: TObject; aCol, aRow: Integer;
     aRect: TRect; aState: TGridDrawState);
   Procedure ChargeImageNiveau(Niveau: Integer);
+  Procedure ChargeImagesNiveau();
   function ChercherValeurParCode(const Chaine: string; const CodeRecherche: string): string;
   Procedure Initialisation();
   Procedure AugmentationAjouteXpMj(TypeDonnee: String);
@@ -514,6 +515,7 @@ procedure TWinPersonnages.ButtonAugmentationClick(Sender: TObject);
 Var
   XpDispo:          Integer;
   CarriereComplete: Boolean;
+  MaxNiveau:        Integer;
 begin
   // calculs XP disponible et état carrière
   XpDispo          := (StrToIntDef(extractnumbers(tabExperience.Cells[ColXpDonnee,LigXpRestant]),0) - StrToIntDef(extractnumbers(tabExperience.Cells[ColXpDonnee,LigXpCout]),0));
@@ -540,8 +542,14 @@ begin
       NvNiveau := '';
     end;
 
+  // Dernier niveau de la carriere EN COURS. Etait ecrit '4' en dur, ce qui refusait le
+  // passage au niveau 5 des carrieres qui en ont cinq (le Mage de High Elf Player's Guide).
+  // MaxNiveau = 0 signifie carriere inconnue de ListMetierNiveau : on ne bloque pas, le
+  // reste de la chaine de controles ci-dessous s'applique quand meme.
+  MaxNiveau        := ChercheMaxMetierNiveau(MetierEnCours);
+
   // tests
-  if radiobuttonsuivant.Checked and (MetierNvEnCours = '4') then
+  if radiobuttonsuivant.Checked and (MaxNiveau > 0) and (StrToIntDef(MetierNvEnCours, 0) >= MaxNiveau) then
     ShowMEssage(GetTexteLibelle('MESS_043'))
   else if (StrToIntDef(tabExperience.Cells[ColXpDonnee,LigXpCout],0) = 0) and (tabExperience.Cells[ColXpDonnee,LigXpTotal] = EditTotalXp.Text) and not radiobuttonsuivant.Checked and not radiobuttonChanger.Checked and (NbEquipement = TabEquipement.RowCount-1) and (not FabAjoute) then
     ShowMEssage(GetTexteLibelle('MESS_024'))
@@ -1005,6 +1013,22 @@ procedure TWinPersonnages.ButtonRaceSelectionnerClick(Sender: TObject);
     FenMetier.Position  := poOwnerFormCenter;
     FenMetier.ShowModal;
 
+    // CARRIERE AVANCEE : un metier dont le premier <Level> declare est superieur a 1 ne
+    // s'entame pas. On y arrive en montant de niveau depuis sa carriere parente, jamais par
+    // un changement de carriere - c'est le cas du Storm Weaver, du Loremaster of Hoeth et du
+    // Smith-priest of Vaul, qui n'existent qu'a partir du niveau 3.
+    //
+    // Le refus laisse NvMetierChoisi vide et le libelle du bouton inchange : on retombe donc
+    // exactement dans l'etat "l'utilisateur a annule", qui est deja gere plus bas.
+    //
+    // Le test est ici et pas dans WinMetier, qui est aussi la fenetre de consultation : ces
+    // carrieres doivent rester VISIBLES et consultables, seule leur selection est refusee.
+    if (ChoixWinMetierRace <> '') and (ChercheMinMetierNiveau(ChoixWinMetierRace) > 1) then
+      begin
+        ShowMessage(GetTexteLibelle('MESS_057') + IntToStr(ChercheMinMetierNiveau(ChoixWinMetierRace)));
+        ChoixWinMetierRace := '';
+      end;
+
     if ChoixWinMetierRace <> '' then
       begin
         NvMetierChoisi := ChoixWinMetierRAce;
@@ -1086,15 +1110,26 @@ function TWinPersonnages.ChoixNonFait(): Boolean;
 procedure TWinPersonnages.ButtonSortClick(Sender: TObject);
   Var
     PSort:        StructureSort;
+    PTalent:      StructureTalent;
     Ind:          Integer;
     ListeTalent:  String;
   begin
-    // ajouter les domaines
+    // Quels talents ouvrent le catalogue de sorts : lu dans les DONNEES (balise <Magic>), plus
+    // en dur. Avant le 23/08/2026, les quatre talents concernes etaient nommes par les constantes
+    // TalentSortXxx et reconnus sur leurs 5 PREMIERS CARACTERES ; ajouter un talent magique
+    // demandait donc de recompiler. CONTEXT.md 2.18.
+    //
+    // Les deux passes ne sont pas symetriques et c'est voulu : ConstMagieExclusive ecarte tout le
+    // reste (avoir un Domaine arcanique interdit d'apprendre Miracles et Magie Mineure), alors que
+    // ConstMagieCumulable s'additionne. C'est exactement l'ancien comportement, ecrit en donnees.
+    //
+    // ChercheTalent reporte <Magic> de l'entree generique (T0088_*) sur la specialisation
+    // (T0088_FEU), qui ne porte qu'une Description - voir le repli dans chargetalent.pas.
     ListeTalent := '';
     For Ind := 1 to TabTalent.RowCount-1 do
       begin
-        DecoupeCodeValeur(TabTalent.Cells[ColTalCode, ind]);
-        if copy(CodeValeur, 1, 5) = TalentSortDomaine then
+        PTalent := ChercheTalent(TabTalent.Cells[ColTalCode, ind]);
+        if PTalent.Magie = ConstMagieExclusive then
           ListeTalent := ListeTalent+' '+TabTalent.Cells[ColTalCode, ind];
       end;
 
@@ -1102,10 +1137,8 @@ procedure TWinPersonnages.ButtonSortClick(Sender: TObject);
     if ListeTalent = '' then
       For Ind := 1 to TabTalent.RowCount-1 do
         begin
-          DecoupeCodeValeur(TabTalent.Cells[ColTalCode, ind]);
-          if copy(CodeValeur, 1, 5) = TalentSortMiracle then
-            ListeTalent := ListeTalent+' '+TabTalent.Cells[ColTalCode, ind];
-          if copy(CodeValeur, 1, 5) = TalentSortMagieMineure then
+          PTalent := ChercheTalent(TabTalent.Cells[ColTalCode, ind]);
+          if PTalent.Magie = ConstMagieCumulable then
             ListeTalent := ListeTalent+' '+TabTalent.Cells[ColTalCode, ind];
         end;
 
@@ -1219,17 +1252,32 @@ procedure TWinPersonnages.EditTotalXpKeyUp(Sender: TObject; var Key: Word;
 
 Procedure TWinPersonnages.SortAffiche();
   var
-    PSort:  StructureSort;
-    Tal:    String;
-    Ind:    Integer;
+    PSort:   StructureSort;
+    PTalent: StructureTalent;
+    Tal:     String;
+    Ind:     Integer;
   begin
     EffaceDonnee(TabSort,1);
     for ind := 1 to TabAugmentationTalent.RowCount - 1 do
       if StrToIntDef(TabAugmentationTalent.Cells[ColAugmTalNouveau, Ind], 0) > StrToIntDef(TabAugmentationTalent.Cells[ColAugmTalActuel, Ind], 0) then
         begin
-          Tal := TabAugmentationTalent.Cells[ColAugmTalCode, Ind];
-          DecoupeCodeValeur(Tal);
-          if copy(CodeValeur,1,5) = TalentSortBenediction then
+          // Prendre la SPECIALISATION choisie quand il y en a une, pas le code generique.
+          // Pour une Benediction, le dieu EST la specialisation : les sorts citent
+          // RULES-T0012_SIGMAR, jamais RULES-T0012_*, donc le code generique ne matchait
+          // aucun sort et aucune benediction n'etait jamais accordee. Meme lecture que
+          // MajTables ligne ~4226. Trouve par Nono le 22/08/2026 sur un pretre guerrier
+          // de Sigmar. CONTEXT.md 2.18.
+          if TabAugmentationTalent.Cells[ColAugmTalSpeSel, Ind] <> '' then
+            Tal := TabAugmentationTalent.Cells[ColAugmTalSpeSel, Ind]
+          else
+            Tal := TabAugmentationTalent.Cells[ColAugmTalCode, Ind];
+          // Comment les sorts arrivent a l'achat du talent : lu dans les DONNEES (<SpellMode>),
+          // plus en dur. AUTO = les sorts qui citent ce talent sont accordes d'office (une
+          // Benediction depend du dieu et ne s'achete pas), CHOICE = une ligne "a choisir" est
+          // posee (un Miracle se choisit). Ancien equivalent : copy(CodeValeur,1,5) compare a
+          // TalentSortBenediction / TalentSortMiracle. CONTEXT.md 2.18.
+          PTalent := ChercheTalent(Tal);
+          if PTalent.ModeSort = ConstModeSortAuto then
             begin
               For Psort in ListSort do
                 if Pos(Tal, PSort.ListeTalent) > 0 then
@@ -1240,7 +1288,7 @@ Procedure TWinPersonnages.SortAffiche();
                     TabSort.Cells[3, TabSort.RowCount-1]   := Tal;
                   end;
             end
-          else if copy(CodeValeur,1,5) = TalentSortMiracle then
+          else if PTalent.ModeSort = ConstModeSortChoix then
             begin
               TabSort.Visible                     := true;
               TabSort.RowCount                    := TabSort.RowCount + 1;
@@ -1286,12 +1334,7 @@ begin
   MiseEnFormeDesChamp(self);
 
   // charges les images des niveaux
-  SetLength(ColorList, 8);
-  ListImage := TImageList.Create(nil);
-  For I := 0 to 7 Do
-  Begin
-      ChargeImageNiveau(I);
-  End;
+  ChargeImagesNiveau();
 
   // Logo
   if FileExists(GetCurrentDir+ConstCheminLogo1) then
@@ -1408,7 +1451,10 @@ begin
   // Mise en forme du tableau des Niveaux
   TabNiveau.Options          := TabNiveau.Options + [goEditing, goAlwaysShowEditor];
   TabNiveau.ColCount         := 1;
-  TabNiveau.RowCount         := 5;
+  // Une ligne d'entete plus un niveau par rang existant. C'etait fige a 5, ce qui faisait
+  // ecrire hors bornes des le premier metier a cinq niveaux : l.2989 se sert du NUMERO DE
+  // NIVEAU comme indice de ligne.
+  TabNiveau.RowCount         := MaxNiveauMetier() + 1;
   TabNiveau.ColWidths[0]     := 20;
   TabNiveau.Columns.Add;
   TabNiveau.ColWidths[1]     := 0;
@@ -1854,16 +1900,56 @@ procedure TWinPersonnages.ChargeImageNiveau(Niveau: Integer);
       Picture  := TPicture.Create;
       Bitmap   := TBitmap.Create;
       try
-        Path   :=GetCurrentDir+ConstCheminImageNiveau+InttoStr(Niveau)+'.PNG';
-        Picture.LoadFromFile(Path);
-        Bitmap.Assign(Picture.graphic);
+        // Le metier l'emporte sur l'ethnie : voir CheminNiveauImageMetierRace dans
+        // ChargeMetier. Un metier ne declare un dossier que s'il vient d'un livre, et il
+        // n'existe que si ce livre est charge - sa declaration prouve donc que le
+        // supplement est actif. A defaut : ethnie, puis race, puis \PICTURES\NIV\.
+        Path   := CheminNiveauImageMetierRace(MetierEnCours, RaceEnCours, Niveau);
+        // Icone absente pour ce niveau : on ajoute QUAND MEME une image, neutre, sinon
+        // les index de ListImage se decalent d'un cran et chaque niveau afficherait
+        // l'icone du suivant. Le cas se produit des qu'un livre amene un niveau plus haut
+        // que ce que PICTURES\NIV\ contient.
+        if FileExists(Path) then
+          begin
+            Picture.LoadFromFile(Path);
+            Bitmap.Assign(Picture.graphic);
+            ColorLoc := Bitmap.Canvas.Pixels[1, 1];
+          end
+        else
+          begin
+            Bitmap.SetSize(8, 8);
+            Bitmap.Canvas.Brush.Color := CouleurGrisFonce;
+            Bitmap.Canvas.FillRect(0, 0, 8, 8);
+            ColorLoc := CouleurGrisFonce;
+          end;
         ListImage.Add(Bitmap, nil); // Ajout de l'image au TImageList
-        ColorLoc := Bitmap.Canvas.Pixels[1, 1];
         ColorList[Niveau] := ColorLoc;
       finally
         Picture.Free;
         Bitmap.Free;
       end;
+  end;
+
+// Recharge les icones et les couleurs de niveau pour l'ethnie du personnage affiche.
+// Appelee a l'ouverture, RaceEnCours etant alors vide - donc dossier generique - puis a
+// chaque affichage d'un personnage, son ethnie pouvant designer son propre dossier.
+procedure TWinPersonnages.ChargeImagesNiveau();
+  var
+    IndNiv: Integer;
+    MaxNiv: Integer;
+  begin
+    if not Assigned(ListImage) then
+      ListImage := TImageList.Create(nil);
+    ListImage.Clear;
+    SetLength(ColorList, 0);
+    // Dimensionne sur la donnee et non sur une constante. Cette fenetre montait deja a 7
+    // "au cas ou" ; le maximum reel remplace cette marge arbitraire.
+    // Pas MaxNiveauMetier : le dossier NIV contient aussi des pastilles de couleur
+    // rangees apres le dernier niveau. Voir MaxIndiceIconeNiveau.
+    MaxNiv := MaxIndiceIconeNiveau();
+    SetLength(ColorList, MaxNiv + 1);
+    For IndNiv := 0 to MaxNiv Do
+      ChargeImageNiveau(IndNiv);
   end;
 
 procedure TWinPersonnages.TabAttributDrawCell(Sender: TObject; aCol,
@@ -2495,6 +2581,11 @@ begin
   PMetier          := ChercheMetier(MetierEnCours);
   LibMetier.Caption:= PMetier.Libelle;
 
+  // Les icones de niveau sont rechargees ICI et pas plus haut : la resolution a besoin du
+  // METIER autant que de l'ethnie, et MetierEnCours n'est connu qu'a partir de cette
+  // ligne. Toujours AVANT que les grilles ne soient remplies et redessinees.
+  ChargeImagesNiveau();
+
   AfficheImageMetier();
 
   // Attributs
@@ -2581,7 +2672,18 @@ begin
   // attribut
   For PersonnageAttribut in Personnage.AugmentationAttribut do
     For IndTab := 1 to TabAttribut.ColCount - 1 do
-      if TabAttribut.Cells[IndTab, LigAttCode] = PersonnageAttribut.CodeAttribut then
+      // Comparaison qui ignore le prefixe de livre : la ligne de codes de TabAttribut est semee
+      // par AttributInit a partir des constantes ConstCaracXxx ('ATTR_WS', sans prefixe), alors
+      // que la fiche contient desormais 'RULES-ATTR_WS'. Un '=' brut ne matchait plus et les
+      // augmentations de caracteristiques disparaissaient de l'ecran. CONTEXT.md 2.19.
+      //
+      // ATTENTION A L'ORDRE DES ARGUMENTS : CompareRechercheValeur n'est PAS symetrique.
+      // VerifieRecherche accepte le cas "livre absent" uniquement sur le SECOND argument
+      // (LivreValeur = ''). Le code PREFIXE doit donc venir en premier, le code court en
+      // second - c'est la convention de tout le reste du programme (ChercheTalent fait
+      // CompareRechercheValeur(PTalent.CodeTalent, CodeTalent)). Inverse, la comparaison
+      // renvoie toujours False.
+      if CompareRechercheValeur(PersonnageAttribut.CodeAttribut, TabAttribut.Cells[IndTab, LigAttCode]) then
         TabAttribut.Cells[IndTab, LigAttBonus] := IntToStr(PersonnageAttribut.Valeur);
 
   // compétence
