@@ -285,6 +285,18 @@ procedure ChargeImageTImageList(Niveau: Integer; ListImage: TImageList);
     end;
   end;
 
+// ATTENTION - CETTE FONCTION N'EST PLUS APPELEE PAR PERSONNE depuis la reecriture de
+// RemplacerPixelParTransparent le 31/08/2026, qui etait son unique utilisatrice. Elle est
+// conservee telle quelle en attendant que Nono decide de la supprimer, avec les trois
+// variables d'unite ZeroRed / ZeroGreen / ZeroBlue plus haut.
+//
+// NE PAS LA REUTILISER EN L'ETAT, elle porte deux defauts signales et non corriges :
+//   - avec VerifTrans = True elle ne teste PAS la transparence. Elle compare R, G et B a
+//     ceux de BGRAPixelTransparent, c'est-a-dire a (0,0,0), et IGNORE l'alpha : un pixel
+//     NOIR OPAQUE y repond donc "oui, je suis transparent". Sur une icone a contour noir,
+//     toute propagation basee dessus fuirait par le trait ;
+//   - ZeroRed / ZeroGreen / ZeroBlue ne sont plus alimentees par personne et valent donc 0.
+//     Avec VerifTrans = False, cette fonction compare aujourd'hui au noir, pas au fond.
 function TestCouleur(img: TBGRABitmap; x: integer;y: integer; VerifTrans: Boolean):boolean;
 var
   TestRed:   Integer;
@@ -333,38 +345,73 @@ Function TestPixelZeroZero(Const Filename: String): Boolean;
 end;
 
 
+// Rend transparent tout pixel proche de la couleur du coin (0,0).
+//
+// REECRITE LE 31/08/2026 POUR LA VITESSE. L'ancienne version appelait Img.ReplaceColor A
+// L'INTERIEUR de la double boucle. ReplaceColor reparcourt l'image ENTIERE a chaque appel ;
+// et comme le test de couleur avait une TOLERANCE alors que ReplaceColor exige la couleur
+// EXACTE, chaque pixel d'anti-aliasing du bord survivait au remplacement, matchait quand
+// meme au test suivant, et declenchait un nouveau balayage complet. Des centaines de
+// balayages de l'image entiere pour une seule icone.
+//
+// Second cout, plus discret : img.Colors[x,y] est l'accesseur TFPColor de FPImage, qui
+// convertit le pixel BGRA en quatre canaux 16 bits A CHAQUE LECTURE - et l'ancien
+// TestCouleur le relisait une fois par canal, appele jusqu'a trois fois par pixel. Une
+// vingtaine de conversions par pixel la ou une seule lecture suffit.
+//
+// Ici : un seul passage, ligne par ligne. ScanLine[y] donne un pointeur direct sur les
+// pixels de la ligne, qu'on avance par Inc(p) - donc un parcours qui suit l'ordre de la
+// memoire, alors que l'ancienne boucle allait en colonnes (x externe) sur des donnees
+// rangees en lignes.
+//
+// TOLERANCE IDENTIQUE, PAS APPROCHEE : l'ancien MaxDiff valait 2000 sur l'echelle 16 bits
+// de TFPColor. Un ecart de N sur 8 bits vaut exactement N*257 sur 16 bits, donc
+// "diff16 < 2000" equivaut a "diff8 <= 7", c'est-a-dire au "< 8" ci-dessous.
+//
+// SEMANTIQUE RETENUE (choix de Nono, 31/08/2026) : tout pixel proche du fond devient
+// transparent, OU QU'IL SOIT dans l'image. C'est deja ce que faisait l'ancienne version en
+// pratique : ReplaceColor etant globale, elle court-circuitait la logique de propagation
+// depuis les bords ecrite juste au-dessus d'elle, qui ne servait donc a rien. Les icones du
+// projet sont sur fond uni. Si l'une d'elles avait un jour du fond EMPRISONNE a l'interieur
+// du dessin et devant rester opaque, il faudrait un vrai remplissage par diffusion depuis
+// les bords - et il faudrait alors d'abord corriger TestCouleur (voir son commentaire).
 procedure RemplacerPixelParTransparent(const FileOrig: string; Const FileDest: String);
+const
+  Tolerance = 8;
 var
-  Img:   TBGRABitmap;
-  x,y:   Integer;
-  Modif: boolean;
+  Img:  TBGRABitmap;
+  Fond: TBGRAPixel;
+  p:    PBGRAPixel;
+  x, y: Integer;
 begin
   Img := TBGRABitmap.Create(FileOrig);
   try
-    ZeroRed    := img.Colors[0, 0].Red;
-    ZeroGreen  := img.Colors[0, 0].Green;
-    ZeroBlue   := img.Colors[0, 0].Blue;
+    if (Img.Width = 0) or (Img.Height = 0) then
+      begin
+        Img.SaveToFile(FileDest);
+        Exit;
+      end;
 
-    For x :=0 to img.Width - 1 do
-      for y := 0 to img.Height - 1 do
-        begin
-          Modif := true;
-          if not TestCouleur(Img, x, y, false) then
-            Modif := false
-            // test pixel itself
-          else if ((x = 0) or (Y = 0)) then
-            // no other test for 1st line and column
-          else if TestCouleur(Img, x-1, y, true) then
-            // previous x is transparent
-          else if TestCouleur(Img, x, y-1, true) then
-            // previous y is transparent
-          else
-            Modif := false;
-            // the pixel isn't close to a transparent
+    Fond := Img.GetPixel(0, 0);
 
-          if Modif then
-            Img.ReplaceColor(Img.GetPixel(x, y), BGRAPixelTransparent);
-        end;
+    for y := 0 to Img.Height - 1 do
+      begin
+        p := Img.ScanLine[y];
+        for x := 0 to Img.Width - 1 do
+          begin
+            if (Abs(Integer(p^.red)   - Integer(Fond.red))   < Tolerance) and
+               (Abs(Integer(p^.green) - Integer(Fond.green)) < Tolerance) and
+               (Abs(Integer(p^.blue)  - Integer(Fond.blue))  < Tolerance) then
+              p^ := BGRAPixelTransparent;
+            Inc(p);
+          end;
+      end;
+
+    // OBLIGATOIRE apres une ecriture directe via ScanLine : BGRABitmap garde une copie
+    // LCL du bitmap, qu'il faut invalider pour qu'elle soit reconstruite depuis les
+    // donnees qu'on vient de modifier.
+    Img.InvalidateBitmap;
+
     Img.SaveToFile(FileDest);
   finally
     Img.Free;

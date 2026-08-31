@@ -2,6 +2,27 @@
        WARHAMMER
 -------------------------
 
+NOMMER LES PNG AVEC LE CODE COMPLET DU METIER (avec le prefixe de livre)
+ Aujourd'hui les images s'appellent WORK127.PNG : le code SANS son prefixe de livre. Tous
+ les livres partagent un seul dossier DATABASE\PICTURES\CLASS, d'ou la numerotation continue
+ entre livres - HELFG reprend a 127 non par choix mais parce que le nommage l'impose. Deux
+ livres ne peuvent pas avoir chacun leur WORK001.
+ - CheminMetierImage (chargemetier.pas l.76-77) construit le nom avec CodeValeur, qui est
+   justement le code AMPUTE de son prefixe : c'est la seule ligne a changer pour CLASS
+ - meme chose pour CheminRaceImage (chargerace.pas l.77-78, dossier SPECIE, avec en plus un
+   suffixe Indice) et pour chargesort.pas l.66 (dossier SPELL)
+ - renommer les fichiers existants : RULES-WORKnn pour le livre de base, et le code du livre
+   pour les autres. Penser aux variantes _TRANS deja generees (WORK27_TRANS.PNG)
+ - ne pas oublier de renumeroter les carrieres des supplements une fois la contrainte levee
+   (HELFG-WORK127 a 131 pourraient devenir HELFG-WORK001 a 005)
+ A SAVOIR AVANT DE COMMENCER : les trois constantes de chemin valent au depart
+ '\DATABASE\BOOKS\%BOOK%\PICTURE\CLASS\' etc., mais warhammersource.pas l.829-831 les
+ ECRASE au demarrage par des chemins plats sans %BOOK%. Le StringReplace de ConstLivre dans
+ les trois fonctions ci-dessus ne remplace donc plus rien - c'est du code mort. L'autre
+ solution au meme probleme serait donc de retirer cet ecrasement et de revenir a un dossier
+ par livre, ce que le code sait deja faire ; les fichiers garderaient alors leur nom court.
+ Trancher entre les deux avant de renommer quoi que ce soit.
+
 CARRIERES AVANCEES (mecanique faite le 31/08/2026, il manque les donnees)
  - declarer <Parent>"HELFG-WORK132" sur Smith-priest, Storm Weaver et Loremaster
  - declarer leurs <Level> 3, 4 et 5 seulement (c'est ce qui les rend inaccessibles)
@@ -9,6 +30,12 @@ CARRIERES AVANCEES (mecanique faite le 31/08/2026, il manque les donnees)
  - une entree de plus en "X" sur RULES-SPECIE_WELF pour le seul Smith-priest
  - une fois les donnees en place : tester la combo sur un Mage haut-elfe de niveau 2
  - tester aussi qu'un Rulebook seul ne voit RIEN changer dans l'onglet Evolution
+
+CODE MORT SIGNALE NON SUPPRIME : depuis la reecriture de RemplacerPixelParTransparent le
+31/08/2026, la fonction TestCouleur et les variables d'unite ZeroRed / ZeroGreen / ZeroBlue
+de pdfutils.pas n'ont plus aucun appelant. Elles sont devenues un piege : les trois globales
+n'etant plus alimentees valent 0, donc TestCouleur compare au NOIR et non au fond. Un
+avertissement est pose au-dessus. A supprimer franchement, rien ne les reference.
 
 BUG SIGNALE NON CORRIGE : ChercheMaxMetierNiveau compare les codes avec = strict alors que
 sa voisine ChercheMetierNiveau utilise CompareRechercheValeur. ChercheMinMetierNiveau a ete

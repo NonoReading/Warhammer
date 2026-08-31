@@ -2868,6 +2868,28 @@ chantier concerné, avec les détails techniques.
 
 ## 4. Pièges Lazarus / Free Pascal accumulés
 
+- **Ne jamais appeler une primitive « sur toute l'image » à l'intérieur d'une boucle qui
+  parcourt déjà toute l'image.** `RemplacerPixelParTransparent` (`pdfutils.pas`) appelait
+  `Img.ReplaceColor` pour chaque pixel de fond rencontré, et `ReplaceColor` reparcourt le
+  bitmap entier. Le piège était doublé par une asymétrie : le test de couleur avait une
+  **tolérance** alors que `ReplaceColor` exige la couleur **exacte**, donc chaque pixel
+  d'anti-aliasing survivait au remplacement, re-matchait, et déclenchait un balayage
+  complet de plus. Des centaines de balayages pour une icône. Réécrit le 31/08/2026 en un
+  seul passage : quelques millisecondes.
+- **`img.Colors[x, y]` est un accesseur coûteux**, pas un accès mémoire. C'est l'interface
+  `TFPColor` de FPImage : chaque lecture convertit le pixel BGRA en quatre canaux 16 bits.
+  Le lire une fois par canal dans une comparaison le fait donc payer quatre fois. Pour
+  parcourir une image, passer par `ScanLine[y]`, qui rend un `PBGRAPixel` sur la ligne —
+  et parcourir en **lignes**, pas en colonnes : les données sont rangées en lignes.
+- **Après une écriture directe via `ScanLine`, `Img.InvalidateBitmap` est obligatoire.**
+  BGRABitmap garde une copie LCL du bitmap ; sans invalidation elle n'est pas reconstruite
+  et `SaveToFile` peut écrire l'image d'AVANT les modifications. Panne silencieuse : aucune
+  erreur, juste un fichier inchangé.
+- **Attention aux échelles de couleur qui se mélangent.** `TFPColor` va de 0 à 65535,
+  `TBGRAPixel` de 0 à 255, et la conversion est un facteur **257** (pas 256). Un seuil de
+  tolérance écrit en pensant au 0-255 mais appliqué à du 16 bits est 257 fois trop serré —
+  c'était le cas du `MaxDiff = 2000` de l'ancien `TestCouleur`, soit 3 % et non 2000.
+
 - **Toute nouvelle liste globale `ListXxx` doit être ajoutée au bloc de RAZ de `ChargerLivre`**
   (`warhammersource.pas`, `if ForceMaj then`), avec son compteur `NbXxx`. Créer la liste dans
   `FormCreate` ne suffit pas : sans le `.Clear`, chaque rechargement (changement de livre actif ou

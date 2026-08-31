@@ -238,9 +238,8 @@
         <HasResources Value="True"/>
         <ResourceBaseClass Value="Form"/>
         <UnitName Value="WinPersonnage"/>
-        <IsVisibleTab Value="True"/>
         <EditorIndex Value="2"/>
-        <TopLine Value="1220"/>
+        <TopLine Value="1350"/>
         <CursorPos X="103" Y="1228"/>
         <UsageCount Value="200"/>
         <Loaded Value="True"/>
@@ -461,9 +460,10 @@
         <Filename Value="pdfutils.pas"/>
         <IsPartOfProject Value="True"/>
         <UnitName Value="PdfUtils"/>
+        <IsVisibleTab Value="True"/>
         <EditorIndex Value="1"/>
-        <TopLine Value="346"/>
-        <CursorPos X="72" Y="359"/>
+        <TopLine Value="325"/>
+        <CursorPos X="34" Y="332"/>
         <UsageCount Value="200"/>
         <Loaded Value="True"/>
       </Unit>
