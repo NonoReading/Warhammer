@@ -1063,7 +1063,17 @@ procedure TWinPersonnages.ButtonRaceSelectionnerClick(Sender: TObject);
 function TWinPersonnages.XpSortCout(CodeSort: String): String;
   Var
     PSort:  StructureSort;
-    CoutXp: Integer;
+    // INITIALISATION INDISPENSABLE, et c'etait la seule variable de la fonction a en etre
+    // privee. La cascade de tests plus bas n'affecte CoutXp que pour les cinq types de sort
+    // qu'elle connait ; un type INCONNU ne passe dans aucune branche et la fonction
+    // renvoyait alors ce qui trainait sur la pile - un cout indetermine, pouvant changer
+    // d'un appel a l'autre pour le meme sort.
+    //
+    // Ce n'est pas theorique : le corpus contient 17 sorts en TypSpell "Ritual", valeur
+    // introduite le 29/08/2026 sans verifier que le champ etait une ENUMERATION FERMEE
+    // cote code. Le 0 rend leur cout previsible ; il ne dit pas ce que ce cout DEVRAIT
+    // etre - cette question-la reste ouverte.
+    CoutXp: Integer = 0;
     NB:     Integer = 0;
     BI:     Integer = 0;
     BFM:    Integer = 0;

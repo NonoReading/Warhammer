@@ -240,7 +240,7 @@
         <UnitName Value="WinPersonnage"/>
         <EditorIndex Value="2"/>
         <TopLine Value="1350"/>
-        <CursorPos X="103" Y="1228"/>
+        <CursorPos X="48" Y="1362"/>
         <UsageCount Value="200"/>
         <Loaded Value="True"/>
         <LoadedDesigner Value="True"/>
@@ -462,8 +462,8 @@
         <UnitName Value="PdfUtils"/>
         <IsVisibleTab Value="True"/>
         <EditorIndex Value="1"/>
-        <TopLine Value="325"/>
-        <CursorPos X="17" Y="343"/>
+        <TopLine Value="324"/>
+        <CursorPos X="22" Y="335"/>
         <UsageCount Value="200"/>
         <Loaded Value="True"/>
       </Unit>
@@ -539,7 +539,7 @@
         <EditorIndex Value="-1"/>
         <TopLine Value="5"/>
         <CursorPos X="34" Y="11"/>
-        <UsageCount Value="114"/>
+        <UsageCount Value="117"/>
       </Unit>
       <Unit>
         <Filename Value="chargetalentattributmodif.pas"/>
@@ -548,7 +548,7 @@
         <EditorIndex Value="-1"/>
         <TopLine Value="3"/>
         <CursorPos X="43" Y="13"/>
-        <UsageCount Value="108"/>
+        <UsageCount Value="111"/>
       </Unit>
       <Unit>
         <Filename Value="chargetalentcompetencemodif.pas"/>
@@ -556,7 +556,7 @@
         <UnitName Value="ChargeTalentCompetenceModif"/>
         <EditorIndex Value="-1"/>
         <CursorPos X="31" Y="17"/>
-        <UsageCount Value="105"/>
+        <UsageCount Value="108"/>
       </Unit>
       <Unit>
         <Filename Value="chargetalentcompetenceajoute.pas"/>
@@ -564,7 +564,7 @@
         <UnitName Value="ChargeTalentCompetenceAjoute"/>
         <EditorIndex Value="-1"/>
         <CursorPos X="43" Y="14"/>
-        <UsageCount Value="104"/>
+        <UsageCount Value="107"/>
       </Unit>
       <Unit>
         <Filename Value="winlancede.pas"/>
@@ -576,7 +576,7 @@
         <EditorIndex Value="-1"/>
         <TopLine Value="35"/>
         <CursorPos X="53" Y="47"/>
-        <UsageCount Value="62"/>
+        <UsageCount Value="65"/>
       </Unit>
       <Unit>
         <Filename Value="winmutation.pas"/>
@@ -588,7 +588,7 @@
         <EditorIndex Value="-1"/>
         <TopLine Value="82"/>
         <CursorPos X="27" Y="94"/>
-        <UsageCount Value="34"/>
+        <UsageCount Value="37"/>
       </Unit>
       <Unit>
         <Filename Value="unitcreationrace.pas"/>

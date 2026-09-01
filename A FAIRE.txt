@@ -2,36 +2,45 @@
        WARHAMMER
 -------------------------
 
-NOMMER LES PNG AVEC LE CODE COMPLET DU METIER (avec le prefixe de livre)
- Aujourd'hui les images s'appellent WORK127.PNG : le code SANS son prefixe de livre. Tous
- les livres partagent un seul dossier DATABASE\PICTURES\CLASS, d'ou la numerotation continue
- entre livres - HELFG reprend a 127 non par choix mais parce que le nommage l'impose. Deux
- livres ne peuvent pas avoir chacun leur WORK001.
- - CheminMetierImage (chargemetier.pas l.76-77) construit le nom avec CodeValeur, qui est
-   justement le code AMPUTE de son prefixe : c'est la seule ligne a changer pour CLASS
- - meme chose pour CheminRaceImage (chargerace.pas l.77-78, dossier SPECIE, avec en plus un
-   suffixe Indice) et pour chargesort.pas l.66 (dossier SPELL)
- - renommer les fichiers existants : RULES-WORKnn pour le livre de base, et le code du livre
-   pour les autres. Penser aux variantes _TRANS deja generees (WORK27_TRANS.PNG)
- - ne pas oublier de renumeroter les carrieres des supplements une fois la contrainte levee
-   (HELFG-WORK127 a 131 pourraient devenir HELFG-WORK001 a 005)
- A SAVOIR AVANT DE COMMENCER : les trois constantes de chemin valent au depart
- '\DATABASE\BOOKS\%BOOK%\PICTURE\CLASS\' etc., mais warhammersource.pas l.829-831 les
- ECRASE au demarrage par des chemins plats sans %BOOK%. Le StringReplace de ConstLivre dans
- les trois fonctions ci-dessus ne remplace donc plus rien - c'est du code mort. L'autre
- solution au meme probleme serait donc de retirer cet ecrasement et de revenir a un dossier
- par livre, ce que le code sait deja faire ; les fichiers garderaient alors leur nom court.
- Trancher entre les deux avant de renommer quoi que ce soit.
+RETIRER LE REPLI SUR L'ANCIEN NOM D'IMAGE (chargemetier, chargerace, chargesort). Les trois
+fonctions essaient le code complet puis retombent sur le nom court. Ce repli a servi a
+decoupler le renommage des fichiers de la modification du code ; maintenant que les 200
+fichiers sont renommes, il ne protege plus rien et masquerait un oubli de renommage futur.
 
-LOT 2 DE HIGH ELF LIVRE ET TESTE LE 31/08/2026. Reste du livre :
- - les 58 sorts de Haute Magie (chantier a part, plus lourd que tout le lot 2)
-   . trancher le TypSpell de la Haute Magie - ATTENTION, enumeration FERMEE cote code
-   . le choix des deux vents de l'Elven Arcane
-   . ou loger les conditions d'Overcasting, de Sacrifices et de Yenlui
-   . l'etat Yenlui lui-meme
+DECIDER DU SORT DE DATABASE\PICTURES\SPELL\T0080_MAW.png : aucun talent ne lui correspond,
+celui de la Grande Gueule etant RULES-T0088_MAW dont l'image existe deja. Supprimer ou
+renommer - Nono seul peut supprimer.
+
+HIGH ELF PLAYER'S GUIDE : TERMINE LE 31/08/2026, les trois lots. Reste du livre, hors magie :
  - inventaire de "Adapting Careers" p.60-62
  - l'armurerie et les objets elfiques
  - le detail de la section Sea Elf
+
+LE MODE DE CALCUL DU COUT XP D'UN SORT DEVRAIT ETRE UNE DONNEE DU TALENT (idee de Nono,
+31/08/2026). Conception a part entiere, NE PAS la melanger a la saisie des sorts.
+ Aujourd'hui tout est en dur dans XpSortCout (winpersonnage.pas, l.1063) : six branches sur
+ TypSpell, avec les 100 et les 50 en litteral. Rien dans le XML ne porte de cout, le seul
+ levier cote donnees est le TypSpell.
+ POURQUOI L'IDEE EST BONNE : le TypSpell est deja entierement DEDUCTIBLE du <Talent> du sort
+ - Minor Magic va toujours avec RULES-T0089, Domain Magic avec un RULES-T0088_<lore>,
+ Miracle avec RULES-T0080_<dieu>, Blessing avec RULES-T0012_<dieu>. C'est une donnee
+ redondante, et c'est precisement cette redondance qui a permis au "Ritual" du 29/08
+ d'exister sans qu'aucun talent ne change.
+ - preferer un MODE NOMME plus un multiplicateur (MODE_LORE + 100, MODE_MIRACLE + 100,
+   MODE_GRATUIT) plutot qu'une formule a interpreter : suffisant pour les six cas existants
+ - NE PAS OUBLIER LE REGROUPEMENT, c'est la partie subtile : Arcane Magic et Domain Magic
+   PARTAGENT leur compteur de sorts connus. Ce pool est ecrit en dur dans le InList() de la
+   condition ; il doit devenir une donnee lui aussi, sinon la migration perd du prix en
+   silence et personne ne le voit
+ - benefice attendu : un livre pourra apporter un nouveau mode de tarification sans toucher
+   au code, et le cas "type inconnu" disparait - un sort sans talent connu n'est pas
+   achetable, ce qui est un refus franc au lieu d'un cout faux
+
+QUE FAIRE DES 17 SORTS EN TypSpell "Ritual" de Winds of Magic ? Valeur que j'ai introduite le
+29/08/2026 sans verifier que le champ etait une enumeration fermee cote code. Depuis le
+31/08 leur cout vaut 0 de facon PREVISIBLE (CoutXp initialisee), mais ce 0 n'est pas une
+decision - c'est un repli. Soit les rebasculer sur un type existant, soit ajouter la branche
+manquante dans XpSortCout, soit attendre le chantier ci-dessus qui rend la question caduque.
 
 BUG QUE J'AI INTRODUIT AU LOT 1, SIGNALE NON CORRIGE : HELFG-T0187 (Sword-dancing) a
 <Test>"COMPCOMB_2M"</Test>. Or PTalent.Tests n'est pas un code : wintalent.pas l'affiche tel

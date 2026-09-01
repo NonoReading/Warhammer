@@ -1,0 +1,65 @@
+SelectWinSort=[ HELFG-T0190]
+FiltreLivre=[]
+FiltreTalent=[]
+lignes affichees=45
+
+code;libelle;type;talent;generique;talentAccessible;filtreLivre;filtreTalent
+HELFG-PETTY_01;Bless Arrow;Minor Magic;RULES-T0089;-;NON;oui;oui
+HELFG-PETTY_02;Calm;Minor Magic;RULES-T0089;-;NON;oui;oui
+HELFG-PETTY_03;Greenfinger;Minor Magic;RULES-T0089;-;NON;oui;oui
+HELFG-PETTY_04;Identify Disease;Minor Magic;RULES-T0089;-;NON;oui;oui
+HELFG-PETTY_05;Remove Dirt;Minor Magic;RULES-T0089;-;NON;oui;oui
+HELFG-PETTY_06;Reveal Magic;Minor Magic;RULES-T0089;-;NON;oui;oui
+HELFG-ARCANE_01;Enchant Plant;Domain Magic;RULES-T0088_VIE,RULES-T0088_METAL;-;NON;oui;oui
+HELFG-ARCANE_02;Lesser Banishment;Domain Magic;RULES-T0088_LUMIERE,RULES-T0088_MORT;-;NON;oui;oui
+HELFG-ARCANE_03;Magic Alarm;Domain Magic;RULES-T0088_CIEUX,RULES-T0088_OMBRE;-;NON;oui;oui
+HELFG-ARCANE_04;Masking the Mind;Domain Magic;RULES-T0088_MORT,RULES-T0088_OMBRE;-;NON;oui;oui
+HELFG-ARCANE_05;Purify Body;Domain Magic;RULES-T0088_VIE,RULES-T0088_LUMIERE;-;NON;oui;oui
+HELFG-ARCANE_06;Speak with Animal;Domain Magic;RULES-T0088_CIEUX,RULES-T0088_BETE;-;NON;oui;oui
+HELFG-ARCANE_07;Voice of Iron;Domain Magic;RULES-T0088_FEU,RULES-T0088_METAL;-;NON;oui;oui
+HELFG-ARCANE_08;Zone of Comfort;Domain Magic;RULES-T0088_FEU,RULES-T0088_BETE;-;NON;oui;oui
+HELFG-HIGH_01;Apotheosis;Domain Magic;HELFG-T0190;-;oui;oui;oui
+HELFG-HIGH_02;Arcane Unforging;Domain Magic;HELFG-T0190;-;oui;oui;oui
+HELFG-HIGH_03;Coruscation of Finreir;Domain Magic;HELFG-T0190;-;oui;oui;oui
+HELFG-HIGH_04;Curse of Arrow Attraction;Domain Magic;HELFG-T0190;-;oui;oui;oui
+HELFG-HIGH_05;Deadlock;Domain Magic;HELFG-T0190;-;oui;oui;oui
+HELFG-HIGH_06;Drain Magic;Domain Magic;HELFG-T0190;-;oui;oui;oui
+HELFG-HIGH_07;Fiery Convocation;Domain Magic;HELFG-T0190;-;oui;oui;oui
+HELFG-HIGH_08;Fortune is Fickle;Domain Magic;HELFG-T0190;-;oui;oui;oui
+HELFG-HIGH_09;Glamour of Teclis;Domain Magic;HELFG-T0190;-;oui;oui;oui
+HELFG-HIGH_10;Greater Banishment;Domain Magic;HELFG-T0190;-;oui;oui;oui
+HELFG-HIGH_11;Hand of Glory;Domain Magic;HELFG-T0190;-;oui;oui;oui
+HELFG-HIGH_12;Invisible Eye;Domain Magic;HELFG-T0190;-;oui;oui;oui
+HELFG-HIGH_13;Shield of Saphery;Domain Magic;HELFG-T0190;-;oui;oui;oui
+HELFG-HIGH_14;Soul Quench;Domain Magic;HELFG-T0190;-;oui;oui;oui
+HELFG-HIGH_15;Tempest;Domain Magic;HELFG-T0190;-;oui;oui;oui
+HELFG-HIGH_16;Walk between Worlds;Domain Magic;HELFG-T0190;-;oui;oui;oui
+HELFG-VAUL_01;Artist's Touch;Blessing;HELFG-T0190;-;oui;oui;oui
+HELFG-VAUL_02;Patience of Vaul;Blessing;HELFG-T0190;-;oui;oui;oui
+HELFG-VAUL_03;Vaul's Grace;Miracle;HELFG-T0190;-;oui;oui;oui
+HELFG-VAUL_04;Vaul's Rage;Miracle;HELFG-T0190;-;oui;oui;oui
+HELFG-VAUL_05;Divination of Flames;Miracle;HELFG-T0190;-;oui;oui;oui
+HELFG-VAUL_06;Divination of Stones;Miracle;HELFG-T0190;-;oui;oui;oui
+HELFG-VAUL_07;Fires of Perfection;Miracle;HELFG-T0190;-;oui;oui;oui
+HELFG-VAUL_08;Wisdom of the Skysteel;Miracle;HELFG-T0190;-;oui;oui;oui
+HELFG-VAUL_09;Fortress of Hotek;Miracle;HELFG-T0190;-;oui;oui;oui
+HELFG-MATH_01;Fishbonding;Blessing;HELFG-T0190;-;oui;oui;oui
+HELFG-MATH_02;Stormsense;Blessing;HELFG-T0190;-;oui;oui;oui
+HELFG-MATH_03;Ocean's Fury;Miracle;HELFG-T0190;-;oui;oui;oui
+HELFG-MATH_04;Spirits of the Waves;Miracle;HELFG-T0190;-;oui;oui;oui
+HELFG-MATH_05;Armour of Mathlann;Miracle;HELFG-T0190;-;oui;oui;oui
+HELFG-MATH_06;Call of the Seas;Miracle;HELFG-T0190;-;oui;oui;oui
+HELFG-MATH_07;Cloak of Mathlann;Miracle;HELFG-T0190;-;oui;oui;oui
+HELFG-MATH_08;Mistress of the Deep;Miracle;HELFG-T0190;-;oui;oui;oui
+HELFG-MATH_09;Waterlungs;Miracle;HELFG-T0190;-;oui;oui;oui
+HELFG-MATH_10;Writhing Mists;Miracle;HELFG-T0190;-;oui;oui;oui
+HELFG-HOETH_01;Divine Stylus;Blessing;HELFG-T0190;-;oui;oui;oui
+HELFG-HOETH_02;Enlightenment;Blessing;HELFG-T0190;-;oui;oui;oui
+HELFG-HOETH_03;Arcane Insight;Miracle;HELFG-T0190;-;oui;oui;oui
+HELFG-HOETH_04;Greater Spirit Bond;Miracle;HELFG-T0190;-;oui;oui;oui
+HELFG-HOETH_05;Crucible of Light;Miracle;HELFG-T0190;-;oui;oui;oui
+HELFG-HOETH_06;Mnemonic Control;Miracle;HELFG-T0190;-;oui;oui;oui
+HELFG-HOETH_07;Psychic Sending;Miracle;HELFG-T0190;-;oui;oui;oui
+HELFG-HOETH_08;Sacred Wards;Miracle;HELFG-T0190;-;oui;oui;oui
+HELFG-HOETH_09;Soulcraft;Miracle;HELFG-T0190;-;oui;oui;oui
+HELFG-HOETH_10;The Primary Words;Miracle;HELFG-T0190;-;oui;oui;oui

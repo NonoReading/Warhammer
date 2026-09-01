@@ -64,31 +64,111 @@ Begin
     end;
 end;
 
+// Chemin de l'illustration d'UNE ethnie precise, SANS aucun repli sur une autre.
+// Renvoie une chaine VIDE si l'image n'existe pas - c'est ce qui permet a la fonction
+// publique ci-dessous de decider s'il faut aller en chercher une ailleurs.
+Function CheminRaceImageSeule(PRace: StructureRace; Indice: String): String;
+  var
+    Dossier:   String;
+    ResTrans:  String;
+    ResNormal: String;
+  begin
+    Result   := '';
+    // Code COMPLET, avec repli sur l'ancien nom court : voir CheminMetierImage dans
+    // ChargeMetier pour le raisonnement. Ici le nom porte en plus l'INDICE de
+    // l'illustration - RULES-RACE_HELF1, RULES-RACE_HELF2 - qui reste a la fin.
+    Dossier  := GetCurrentDir+StringReplace(ConstCheminImageRace, ConstLivre, PRace.Livre, [rfReplaceAll]);
+    ResTrans := Dossier+PRace.CodeRace+Indice+ConstTransparent+'.PNG';
+    ResNormal:= Dossier+PRace.CodeRace+Indice+'.PNG';
+    if (not FileExists(ResTrans)) and (not FileExists(ResNormal)) then
+      begin
+        // DecoupeCodeValeur est appelee ICI et relue tout de suite : CodeValeur est une
+        // globale, s'y fier apres un autre appel donnerait le code d'une autre entite.
+        DecoupeCodeValeur(PRace.CodeRace);
+        ResTrans := Dossier+CodeValeur+Indice+ConstTransparent+'.PNG';
+        ResNormal:= Dossier+CodeValeur+Indice+'.PNG';
+      end;
+
+    if not FileExists(ResTrans) then
+      if FileExists(ResNormal) then
+        if Not TestPixelZeroZero(ResNormal) then
+          RemplacerPixelParTransparent(ResNormal,ResTrans);
+
+    if FileExists(ResTrans) then
+      Result := ResTrans
+    else if FileExists(ResNormal) then
+      Result := ResNormal;
+  end;
+
+// Illustration d'une ethnie, avec REPLI SUR L'ETHNIE DE REFERENCE DE SA RACE.
+//
+// Quinze ethnies n'ont pas d'illustration propre - les onze haut-elfes de High Elf Player's
+// Guide, trois naines et une humaine (releve du 31/08/2026). Plutot que de laisser un vide,
+// on emprunte l'image d'une autre ethnie de la MEME RACE : un Haut Elfe de Caledor montre
+// l'illustration generique des Hauts Elfes.
+//
+// Quelle ethnie prete son image ? Celle dont le code porte le MEME PREFIXE DE LIVRE que la
+// race elle-meme. La race etant declaree par le livre de base, cela designe naturellement
+// l'ethnie du Rulebook, sans avoir a ecrire "RULES" en dur - et cela continuerait de
+// fonctionner si un supplement definissait un jour sa propre race. A defaut, la premiere
+// ethnie de la race qui possede une image.
+//
+// L'INDICE EST CONSERVE : une ethnie sans image demandant l'illustration 2 recevra la 2 de
+// sa reference, pas la 1. Si la reference n'a pas cet indice-la non plus, on renvoie vide,
+// et l'appelant - qui teste toujours FileExists - n'affiche simplement rien.
+//
+// Ce repli ne peut PAS changer l'affichage d'une ethnie du livre de base : il ne se
+// declenche que lorsque l'ethnie demandee n'a aucune image, ce qui n'est le cas d'aucune
+// ethnie du Rulebook.
 Function CheminRaceImage(CodeRace: String; Indice: String): String;
   var
-    PRace:        StructureRace;
-    ResTrans:     String;
-    ResNormal:    String;
-    Res:          String;
+    PRace:      StructureRace;
+    PCandidat:  StructureRace;
+    Trouve:     Boolean = false;
+    Espece:     String;
+    PrefixRace: String;
+    Secours:    String = '';
+    Chemin:     String;
   begin
+    Result := '';
     for PRace in ListRace do
       if CompareRechercheValeur(PRace.CodeRace, CodeRace) then
-        Begin
-          ResTrans := GetCurrentDir+StringReplace(ConstCheminImageRace, ConstLivre, PRace.Livre, [rfReplaceAll])+CodeValeur+Indice+ConstTransparent+'.PNG';
-          ResNormal:= GetCurrentDir+StringReplace(ConstCheminImageRace, ConstLivre, PRace.Livre, [rfReplaceAll])+CodeValeur+Indice+'.PNG';
-
-          if not FileExists(ResTrans) then
-            if FileExists(ResNormal) then
-              if Not TestPixelZeroZero(ResNormal) then
-                RemplacerPixelParTransparent(ResNormal,ResTrans);
-
-          if FileExists(ResTrans) then
-            Res    := ResTrans
-          else
-            Res    := ResNormal;
+        begin
+          Trouve := true;
           break;
         end;
-    Result := Res;
+    if not Trouve then
+      Exit;
+
+    Result := CheminRaceImageSeule(PRace, Indice);
+    if Result <> '' then
+      Exit;
+
+    Espece := Trim(PRace.Espece);
+    if Espece = '' then
+      Exit;
+    PrefixRace := ExtractStringBefore(Espece, SeparateurLivre);
+
+    for PCandidat in ListRace do
+      begin
+        if CompareRechercheValeur(PCandidat.CodeRace, PRace.CodeRace) then
+          continue;
+        if not CompareRechercheValeur(PCandidat.Espece, Espece) then
+          continue;
+        Chemin := CheminRaceImageSeule(PCandidat, Indice);
+        if Chemin = '' then
+          continue;
+        // l'ethnie du meme livre que la race est LA reference : on s'arrete la
+        if ExtractStringBefore(PCandidat.CodeRace, SeparateurLivre) = PrefixRace then
+          begin
+            Result := Chemin;
+            Exit;
+          end;
+        if Secours = '' then
+          Secours := Chemin;
+      end;
+
+    Result := Secours;
   end;
 
 // Construit le chemin d'une icone de niveau a partir d'un NOM DE DOSSIER. Deux replis

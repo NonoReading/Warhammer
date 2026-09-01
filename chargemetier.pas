@@ -70,12 +70,28 @@ Function CheminMetierImage(CodeMetier: String): String;
     ResTrans:     String;
     ResNormal:    String;
     Res:          String;
+    Dossier:      String;
   begin
     for PMetier in ListMetier do
       if CompareRechercheValeur(PMetier.CodeMetier, CodeMetier) then
         Begin
-          ResTrans  := GetCurrentDir+StringReplace(ConstCheminImageMetier, ConstLivre, PMetier.Livre, [rfReplaceAll])+CodeValeur+ConstTransparent+'.PNG';
-          ResNormal := GetCurrentDir+StringReplace(ConstCheminImageMetier, ConstLivre, PMetier.Livre, [rfReplaceAll])+CodeValeur+'.PNG';
+          // NOM DE FICHIER = CODE COMPLET, prefixe de livre inclus. Tous les livres
+          // partagent un seul dossier ; nommer les images sur le code AMPUTE (CodeValeur)
+          // interdisait a deux livres d'avoir chacun leur WORK001 et forcait la numerotation
+          // continue entre supplements.
+          //
+          // REPLI SUR L'ANCIEN NOM tant qu'une image n'a pas ete renommee : cela rend le
+          // renommage (TRAVAIL\renomme_pictures.ps1) et cette modification INDEPENDANTS
+          // l'un de l'autre, et une migration partielle reste jouable. A retirer le jour ou
+          // plus aucune image ne porte de nom court.
+          Dossier   := GetCurrentDir+StringReplace(ConstCheminImageMetier, ConstLivre, PMetier.Livre, [rfReplaceAll]);
+          ResTrans  := Dossier+PMetier.CodeMetier+ConstTransparent+'.PNG';
+          ResNormal := Dossier+PMetier.CodeMetier+'.PNG';
+          if (not FileExists(ResTrans)) and (not FileExists(ResNormal)) then
+            begin
+              ResTrans  := Dossier+CodeValeur+ConstTransparent+'.PNG';
+              ResNormal := Dossier+CodeValeur+'.PNG';
+            end;
           if not FileExists(ResTrans) then
             if FileExists(ResNormal) then
               if (Not TestPixelZeroZero(ResNormal)) then

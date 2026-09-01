@@ -2939,12 +2939,147 @@ pastilles. À revérifier avant toute autre réorganisation de lignes dans ces g
 Cette correction rattrape aussi une **régression du §2.23** : depuis que le maximum global était
 passé à 5, une carrière du livre de base à quatre niveaux affichait une ligne 5 vide.
 
+### 2.26 High Elf Player's Guide, lot 3 : les 59 sorts — terminé (31/08/2026)
+
+**Le livre est complet.** Six listes : Petty (6), Elven Arcane (8), Lore of High Magic (16),
+Vaul (9), Mathlann (10), Hoeth (10).
+
+#### Le `TypSpell` n'est pas un classement, c'est un prix
+
+`XpSortCout` (`winpersonnage.pas`) branche **en dur** sur les six valeurs de l'énumération :
+`Blessing` gratuit, `Miracle` 100 × (N−1), `Arcane`/`Domain` 100 × (1 + ⌊(N−1)/BI⌋) **avec
+compteur commun**, `Chaos` 100, `Minor` 50 × ⌊(N−1)/BFM⌋. Choisir le type, c'est choisir la
+formule — il n'existe aucun autre levier côté données. Arbitrage de Nono : Petty → `Minor
+Magic` ; Elven Arcane et High Magic → `Domain Magic` ; sorts à CN 0 des listes de prêtres →
+`Blessing` ; les autres → `Miracle`.
+
+#### Les deux balises qui ouvrent le catalogue
+
+⚠️ **Oubliées à la première écriture**, d'où un « You have no spell talent » sur un
+Smith-priest ayant pourtant appris High Magic. `HELFG-T0190` porte maintenant :
+
+- `<Magic>"1"` — **exclusif**, comme `Arcane Magic (Any)`. Surtout pas `2` : un cumulable
+  n'est regardé que si le personnage n'a **aucun** talent exclusif, donc un Mage — qui porte
+  déjà un `Arcane Magic` — n'aurait jamais vu ses sorts de Haute Magie. Le `2` aurait
+  fonctionné sur le prêtre et échoué sur le mage, c'est-à-dire à moitié.
+- `<SpellMode>"NONE"` — les sorts s'achètent. `AUTO` en aurait accordé **45 d'un coup**.
+
+Vérifié en instrumentant `WinSpell` : 45 lignes proposées à un Smith-priest, filtres vides,
+libellés chargés. Les 6 Petty et 8 Elven Arcane sont écartés à juste titre — il n'a ni
+`Petty Magic` ni `Arcane Magic`.
+
+#### Ce que le modèle ne peut pas porter, et où c'est allé
+
+Aucun champ n'existe pour les **vents** d'un Elven Arcane, la ligne **Sacrifice** (13 sorts),
+les blocs **Overcasting** ni l'état **Yenlui**. Tout cela reste dans l'`<Explanation>`, les
+deux premiers **en tête** du texte là où le livre les imprime.
+
+⚠️ **Les Elven Arcane sont un compromis assumé** : le livre exige **les deux** vents,
+`SortTalentAccessible` découpe le champ sur la virgule et accepte dès qu'**un** talent
+correspond. Il n'y a pas de ET dans le modèle. Les deux vents sont donc nommés dans le texte
+pour donner au joueur l'information que la donnée ne peut pas contraindre.
+
+#### Trois pièges de l'extraction, à réutiliser
+
+- **Un titre peut disparaître** : entre *Arcane Unforging* et *Curse of Arrow Attraction*, le
+  numéro de page s'était substitué au nom. Le vrai est *Coruscation of Finreir*, retrouvé sur
+  l'image de la page.
+- **Le pied de page ne peut pas servir de borne** de fin de bloc : il tombe aussi *au milieu*
+  d'un sort qui enjambe deux pages. La borne est le titre de section en capitales.
+- …avec un cas particulier : la fusion des deux colonnes colle parfois la citation de
+  l'encadré voisin **derrière le titre**, sur la même ligne (`LOREMASTER OF HOETH 'There are
+  good reasons…'`). Il faut alors ne regarder que la tête de la ligne.
+
 #### Reste du livre
 
-Les **58 sorts** de High Magic, seul morceau non traité. Quatre décisions de modélisation
-restent ouvertes : le `TypSpell` de la Haute Magie (⚠️ champ à énumération fermée, voir le
-piège de `"Ritual"` du 29/08), le choix des deux vents de l'Elven Arcane, où loger les
-conditions d'Overcasting / Sacrifices / Yenlui, et l'état Yenlui lui-même.
+Rien. Les chantiers ouverts qui le touchent encore sont dans `A FAIRE.txt` : le mode de calcul
+du coût en donnée du talent, et le sort des 17 `"Ritual"`.
+
+### 2.27 Les images se nomment par le code complet — terminé (31/08/2026)
+
+Les images vivaient dans trois dossiers plats partagés par tous les livres, nommées sur le
+code **amputé de son préfixe** (`WORK127.PNG`). Deux livres ne pouvaient donc pas avoir
+chacun leur `WORK001`, et **la numérotation continue entre suppléments n'était pas un choix
+mais une contrainte imposée par ce nommage** — `HELFG` reprenait à 127 pour cette seule
+raison.
+
+**200 fichiers renommés** par `TRAVAIL\renomme_pictures.ps1`, plus trois sites de code qui
+construisent désormais le nom sur le code complet : `CheminMetierImage` (`chargemetier`),
+`CheminRaceImage` (`chargerace`), `CheminSortImage` (`chargesort`).
+
+#### Le repli qui découple les deux moitiés
+
+Chaque site essaie le code complet, **puis retombe sur l'ancien nom court**. Ce n'est pas de
+la prudence gratuite : sans lui, le renommage des fichiers et la modification du code
+auraient dû basculer exactement en même temps. Avec lui, on peut compiler avant de renommer,
+renommer un dossier sur trois, ou s'arrêter au milieu. ⚠️ **À retirer** le jour où plus
+aucune image ne porte de nom court — sinon un oubli de renommage passe inaperçu pour
+toujours.
+
+#### Le dossier `SPELL` ne contient pas des sorts
+
+⚠️ Malgré son nom, il porte des images de **TALENTS** — `T0089`, `T0088_FEU`,
+`T0080_SIGMAR` — ce qui est cohérent avec `CheminSortImage`, dont le paramètre s'appelle
+`CodeTalent`. Première version du script écrite sur les 506 codes de sorts : elle ne
+renommait rien, et c'est le décompte de la simulation (174 au lieu de 200) qui l'a révélé.
+Les familles génériques `T0088_*` cherchent leur image sous le seul **tronc** `T0088`, que
+`CheminSortImage` obtient en coupant au `_`.
+
+#### Deux orphelins trouvés en vérifiant la couverture
+
+- **`T0080_SOLAN.png`** : il manque un **K**, le talent étant `RULES-T0080_SOLKAN`. *Invoke
+  (Solkan)* n'avait donc **jamais** affiché son image — pas d'erreur, juste une absence.
+  Réparé par le renommage.
+- **`T0080_MAW.png`** : aucun talent correspondant, celui de la Grande Gueule étant
+  `RULES-T0088_MAW`, dont l'image existe déjà. Laissé en place, à l'appréciation de Nono.
+
+#### Renumérotation : décidée contre
+
+Renuméroter les carrières des suppléments (`HELFG-WORK127` → `HELFG-WORK001`) n'apporte rien
+de fonctionnel et **toucherait des identifiants stockés dans les fichiers de personnage**.
+Vérifié sur *Gunther Krieg*, le personnage joué : 53 codes, tous `RULES`, donc il n'aurait
+rien à subir — mais le bénéfice du chantier est déjà entièrement dans le renommage. Reporté
+sine die.
+
+#### Code mort supprimé au passage
+
+La boucle `for Book In ListBook` de `CheminSortImage` : écrite pour un chemin par livre, elle
+était devenue inopérante depuis que `warhammersource` l.829-831 écrase les constantes par des
+chemins **plats sans `%BOOK%`**. Elle refaisait *N* fois le même test.
+
+### 2.28 Une ethnie sans illustration emprunte celle de sa race — terminé (31/08/2026)
+
+**Quinze ethnies n'ont aucune illustration** (relevé du 31/08) : les onze haut-elfes de *High
+Elf Player's Guide*, trois naines (Salzenmund ×2, Sea of Claws) et une humaine (Salzenmunder).
+Les trois races concernées ont toutes leur ethnie de référence au Rulebook, donc le repli les
+couvre entièrement.
+
+`CheminRaceImage` (`chargerace.pas`) est coupée en deux :
+
+- **`CheminRaceImageSeule(PRace, Indice)`** — le chemin d'**une** ethnie, sans repli, qui
+  renvoie **une chaîne vide** si l'image n'existe pas. C'est ce vide qui permet de décider
+  s'il faut chercher ailleurs. ⚠️ Changement de contrat : l'ancienne version renvoyait le
+  chemin du fichier *normal* même absent. Vérifié avant d'écrire que **les cinq appelants
+  testent `FileExists`** — `winraces`, `wincreation`, `winpersonnage`, `winmetier`, `pdfrace`.
+- **`CheminRaceImage`** — essaie l'ethnie, puis l'ethnie de référence de sa race.
+
+**Quelle ethnie prête son image** : celle dont le code porte le **même préfixe de livre que la
+race**. La race étant déclarée par le livre de base, cela désigne l'ethnie du Rulebook **sans
+écrire `"RULES"` en dur**, et continuerait de fonctionner si un supplément définissait sa
+propre race. À défaut, la première ethnie de la race qui possède une image.
+
+**L'indice est conservé** : une ethnie qui demande l'illustration 2 reçoit la 2 de sa
+référence, pas la 1.
+
+**La règle du livre de base tient** : le repli ne se déclenche que pour une ethnie sans
+*aucune* image, ce qui n'est le cas d'aucune ethnie du Rulebook.
+
+Hygiène au passage : le `DecoupeCodeValeur` du repli sur l'ancien nom court est désormais
+appelé **juste avant** d'être relu. `CodeValeur` est une globale, et l'ancienne version
+s'appuyait sur celle laissée par le `CompareRechercheValeur` de la boucle — ce qui n'aurait
+plus tenu dès qu'on traverse deux ethnies.
+
+**Testé par Nono le 31/08/2026**, dans la foulée de l'écriture.
 
 ## 3. TODO / Backlog
 
