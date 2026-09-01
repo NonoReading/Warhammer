@@ -48,6 +48,20 @@
        posee d avance pour le lot 2, ou les quatre carrieres de lanceurs la demandent.
        Contrainte propre au livre, que le modele ne porte pas : on ne peut jamais avoir plus
        d avances en Qhaysh que dans chacun des huit vents de couleur -->
+<Skill id="RULES-COMPART_CALLI/RULES-COMPART_GRAV">
+<Description language="ENGLISH">"Art (Calligraphy or Engraving)"</Description>
+</Skill>
+  <!-- declaration combinee - Mage niveau 1 -->
+<Skill id="RULES-COMPFOCAL_BETE/RULES-COMPFOCAL_MORT/RULES-COMPFOCAL_FEU/RULES-COMPFOCAL_CIEUX/RULES-COMPFOCAL_VIE/RULES-COMPFOCAL_LUMIERE/RULES-COMPFOCAL_METAL/RULES-COMPFOCAL_OMBRE">
+<Description language="ENGLISH">"Channelling (Any Colour)"</Description>
+</Skill>
+  <!-- declaration combinee - Mage niveaux 1 et 2. HUIT membres, un par vent de COULEUR,
+       dans l ordre ou le livre les enumere (p.83). Le generique RULES-COMPFOCAL_* aurait
+       ete plus court mais FAUX : il proposerait aussi Qhaysh, Dhar, la sorcellerie
+       khainite et la Grande Gueule, qui ne sont pas des vents de couleur.
+       Verifie avant d ecrire que WinSpecialisation itere sur TOUS les membres d un
+       combine - rien ne le limite a deux, contrairement a ce que suggerent les
+       declarations existantes du corpus, qui n en ont jamais plus de trois. -->
 </DATA_SKILL_SPECIALIZATION>
 <DATA_TALENT_SPECIALIZATION>
 <Talent id="RULES-T0132_DELF">
@@ -66,6 +80,10 @@
 <Description language="ENGLISH">"Hatred (Dark Elves)"</Description>
 </Talent>
   <!-- talent d espece de Nagarythe. La base avait deja Hatred (High Elves) -->
+<Talent id="RULES-T0134_MAGIE">
+<Description language="ENGLISH">"Savant (Magic)"</Description>
+</Talent>
+  <!-- Mage niveau 5. Code arbitre par Nono. -->
 </DATA_TALENT_SPECIALIZATION>
 <DATA_TALENT>
 <Talent id="HELFG-T0186">
@@ -106,6 +124,85 @@ Asur from the Outer Kingdoms and Eataine do not harbour such prejudice."</Explan
 <PDF>""</PDF>
 <Test language="ENGLISH">""</Test>
 </Talent>
+<Talent id="HELFG-T0189">
+<Attribut>""</Attribut>
+<Description language="ENGLISH">"Blessed by Isha"</Description>
+<Short language="ENGLISH">""</Short>
+<Explanation language="ENGLISH">"Only Elves can take this Talent. You served as a novitiate of Isha and received the everqueen's blessing in Ulthuan (if you are of the Asur), or Ariel's blessing in Athel Loren (if you are of the Asrai). You may now learn the High Magic Talent."</Explanation>
+<Skill>""</Skill>
+<Max>"1"</Max>
+<PDF>""</PDF>
+<Test language="ENGLISH">""</Test>
+</Talent>
+<Talent id="HELFG-T0190">
+<Attribut>""</Attribut>
+<Description language="ENGLISH">"High Magic"</Description>
+<Short language="ENGLISH">""</Short>
+<Explanation language="ENGLISH">"Only those with the Channelling (Qhaysh) Skill and the Blessed by Isha Talent can take this Talent. When you first take this Talent, you benefit from the ability to draw upon Winds of Magic that would otherwise be inaccessible. When casting a spell from the Lores of Beasts, Death, Fire, Heavens, Life, Light, Metal, or Shadows, lack of access to a particular Wind does not impact spellcasting. If you successfully cast a spell, your level in High Magic is added to the Overcasting SL you can spend on Overcasting High Magic spells."</Explanation>
+<Skill>"RULES-COMPFOCAL_QHAYSH"</Skill>
+<Max>"1"</Max>
+<PDF>""</PDF>
+<Test language="ENGLISH">""</Test>
+</Talent>
+<Talent id="HELFG-T0191">
+<Attribut>""</Attribut>
+<Description language="ENGLISH">"Lileath's Blessing"</Description>
+<Short language="ENGLISH">""</Short>
+<Explanation language="ENGLISH">"You have mastered the advanced art of using celestial movements, dreams, and divination to augment the magic of Qhaysh. For each level in Lileath's Blessing, add +1 SL to Channelling (Qhaysh) Tests. Additionally, each level in Lileath's Blessing lets you cast an additional aura spell even when you already have another Ward-granting spell in play. This multicasting benefit applies to High Magic spells as well as Colour spells."</Explanation>
+<Skill>"RULES-COMPFOCAL_QHAYSH"</Skill>
+<Max>"(BATTR_I)"</Max>
+<PDF>""</PDF>
+<Test language="ENGLISH">"Channelling (Qhaysh)"</Test>
+</Talent>
+<Talent id="HELFG-T0192">
+<Attribut>""</Attribut>
+<Description language="ENGLISH">"Mind over Body"</Description>
+<Short language="ENGLISH">""</Short>
+<Explanation language="ENGLISH">"This meditative technique enables an Elf spellcaster to endure physical suffering and even allows them to see after they have been permanently blinded. To make use of this Talent, you must spend no less than twenty minutes in quiet contemplation before making a Challenging (+0) Pray Test. If you pass, you gain the following benefits for 1d10 + SLd10 hours.
+1 level: You gain the Painless Creature Trait and do not receive Conditions caused by pain.
+2 levels: You gain divine sight. You can see the shapes of objects or creatures in your mind's eye, but not colours, facial expressions, or fine details, save in crafted objects. You make Trade (Smith) Tests without penalty for blindness, and you are immune to the Blinded Condition, even from magical or divine sources.
+3 levels: You can use Resolve to ignore Critical Wound penalties on Extended Tests (such as Crafting Endeavours)."</Explanation>
+<Skill>"RULES-COMPPRIERE"</Skill>
+<Max>"3"</Max>
+<PDF>""</PDF>
+<Test language="ENGLISH">"Pray"</Test>
+</Talent>
+<Talent id="HELFG-T0193">
+<Attribut>""</Attribut>
+<Description language="ENGLISH">"Cadai Meditation"</Description>
+<Short language="ENGLISH">""</Short>
+<Explanation language="ENGLISH">"You have learned the basic divine meditation techniques for better achieving a State of Yenlui (Light). Each day during which you meditate for at least an hour and then make an Average (+20) Pray Test. If the Test is successful you can adjust your Yenlui State to Yenlui (Light)."</Explanation>
+<Skill>"RULES-COMPPRIERE"</Skill>
+<Max>"1"</Max>
+<PDF>""</PDF>
+<Test language="ENGLISH">"Pray"</Test>
+</Talent>
+<Talent id="HELFG-T0194">
+<Attribut>""</Attribut>
+<Description language="ENGLISH">"Eye of the Storm"</Description>
+<Short language="ENGLISH">""</Short>
+<Explanation language="ENGLISH">"This meditative technique improves the focus and resilience of an Elf spellcaster, and those who fully master it can influence the weather. To make use of this Talent, you must spend no less than twenty minutes in quiet contemplation before making a Challenging (+0) Pray Test. If you pass, you gain the following benefits for 1d10 + SLd10 hours.
+1 level: You are immune to any distractions that would normally interrupt Channelling.
+2 levels: You recover Fatigued Conditions in half the normal time that has been decided by the GM. In addition, you can ignore penalties to Channelling and Casting Tests from Fatigued Conditions.
+3 levels: When rolling on a Weather table, you may adjust the result."</Explanation>
+<Skill>"RULES-COMPPRIERE"</Skill>
+<Max>"3"</Max>
+<PDF>""</PDF>
+<Test language="ENGLISH">"Pray"</Test>
+</Talent>
+<Talent id="HELFG-T0195">
+<Attribut>""</Attribut>
+<Description language="ENGLISH">"Sanctuary of the Mind"</Description>
+<Short language="ENGLISH">""</Short>
+<Explanation language="ENGLISH">"Hoeth's meditative techniques are used by Elf spellcasters to shield their minds from corruption and insanity. To make use of this Talent, you must spend no less than twenty minutes in quiet contemplation before making a Challenging (+0) Pray Test. If you pass, you gain the following benefits for 1d10 + SLd10 hours.
+1 level: You are immune to any Corruption points that result from spellcasting.
+2 levels: You can add +1 SL to any Research Tests you make.
+3 levels: You are exempt from the negative modifiers that result from Yenlui States."</Explanation>
+<Skill>"RULES-COMPPRIERE"</Skill>
+<Max>"3"</Max>
+<PDF>""</PDF>
+<Test language="ENGLISH">"Pray"</Test>
+</Talent>
 </DATA_TALENT>
 <DATA_SPECIE_CAREER_DIRECT>
   <!-- Exprime en RACE (RULES-SPECIE_HELF) et non en ethnie, comme Sea of Claws :
@@ -135,6 +232,31 @@ Asur from the Outer Kingdoms and Eataine do not harbour such prejudice."</Explan
 <Specie>"RULES-SPECIE_HELF"</Specie>
 <Career name="HELFG-WORK131">"X"</Career>
   <!-- Aestheticist -->
+</Entry>
+<Entry>
+<Specie>"RULES-SPECIE_HELF"</Specie>
+<Career name="HELFG-WORK133">"X"</Career>
+  <!-- Smith-priest of Vaul -->
+</Entry>
+<Entry>
+<Specie>"RULES-SPECIE_HELF"</Specie>
+<Career name="HELFG-WORK134">"X"</Career>
+  <!-- Storm Weaver -->
+</Entry>
+<Entry>
+<Specie>"RULES-SPECIE_HELF"</Specie>
+<Career name="HELFG-WORK135">"X"</Career>
+  <!-- Loremaster of Hoeth -->
+</Entry>
+<Entry>
+<Specie>"RULES-SPECIE_WELF"</Specie>
+<Career name="HELFG-WORK133">"X"</Career>
+  <!-- Smith-priest of Vaul. ERRATUM DU LIVRE CONSERVE TEL QUEL : la carriere est
+       annoncee "High Elf, Wood Elf" (p.100) alors que le Mage, son unique parent,
+       n est ouvert qu aux Hauts Elfes. Un Sylvain la verra donc dans WinRaces, marquee
+       X, sans pouvoir jamais l atteindre. Decision de Nono le 31/08/2026 : traduire
+       fidelement ce que le livre ecrit plutot que de choisir a sa place lequel des deux
+       cotes de sa contradiction est le bon. -->
 </Entry>
 </DATA_SPECIE_CAREER_DIRECT>
 <DATA_SPECIE>
@@ -209,10 +331,8 @@ Asur from the Outer Kingdoms and Eataine do not harbour such prejudice."</Explan
   <!-- Apothecary -->
 <Career name="RULES-WORK33">"04-06"</Career>
   <!-- Lawyer -->
-  <!-- TROU ASSUME : Mage 07-09. C est le Mage du livre (p.90), carriere a CINQ
-       niveaux qui appartient au lot 2 et n existe pas encore. Ce n est PAS le
-       Wizard du Rulebook : le livre distingue explicitement les deux (p.60).
-       A rajouter ici en meme temps que la carriere. -->
+<Career name="HELFG-WORK132">"07-09"</Career>
+  <!-- Mage -->
 <Career name="RULES-WORK36">"10-11"</Career>
   <!-- Physician -->
 <Career name="RULES-WORK23">"12-14"</Career>
@@ -359,10 +479,8 @@ Asur from the Outer Kingdoms and Eataine do not harbour such prejudice."</Explan
   <!-- Apothecary -->
 <Career name="RULES-WORK33">"04-06"</Career>
   <!-- Lawyer -->
-  <!-- TROU ASSUME : Mage 07-09. C est le Mage du livre (p.90), carriere a CINQ
-       niveaux qui appartient au lot 2 et n existe pas encore. Ce n est PAS le
-       Wizard du Rulebook : le livre distingue explicitement les deux (p.60).
-       A rajouter ici en meme temps que la carriere. -->
+<Career name="HELFG-WORK132">"07-09"</Career>
+  <!-- Mage -->
 <Career name="RULES-WORK36">"10-11"</Career>
   <!-- Physician -->
 <Career name="RULES-WORK23">"12-14"</Career>
@@ -505,10 +623,8 @@ Asur from the Outer Kingdoms and Eataine do not harbour such prejudice."</Explan
   <!-- colonne "Avelorn" de la table p.59 -->
 <Career name="RULES-WORK02">"01-04"</Career>
   <!-- Apothecary -->
-  <!-- TROU ASSUME : Mage 05-09. C est le Mage du livre (p.90), carriere a CINQ
-       niveaux qui appartient au lot 2 et n existe pas encore. Ce n est PAS le
-       Wizard du Rulebook : le livre distingue explicitement les deux (p.60).
-       A rajouter ici en meme temps que la carriere. -->
+<Career name="HELFG-WORK132">"05-09"</Career>
+  <!-- Mage -->
 <Career name="RULES-WORK36">"10-12"</Career>
   <!-- Physician -->
 <Career name="RULES-WORK23">"13-17"</Career>
@@ -641,10 +757,8 @@ Asur from the Outer Kingdoms and Eataine do not harbour such prejudice."</Explan
   <!-- Apothecary -->
 <Career name="RULES-WORK33">"04-06"</Career>
   <!-- Lawyer -->
-  <!-- TROU ASSUME : Mage 07-09. C est le Mage du livre (p.90), carriere a CINQ
-       niveaux qui appartient au lot 2 et n existe pas encore. Ce n est PAS le
-       Wizard du Rulebook : le livre distingue explicitement les deux (p.60).
-       A rajouter ici en meme temps que la carriere. -->
+<Career name="HELFG-WORK132">"07-09"</Career>
+  <!-- Mage -->
 <Career name="RULES-WORK36">"10-11"</Career>
   <!-- Physician -->
 <Career name="RULES-WORK23">"12-14"</Career>
@@ -789,10 +903,8 @@ Asur from the Outer Kingdoms and Eataine do not harbour such prejudice."</Explan
   <!-- Apothecary -->
 <Career name="RULES-WORK33">"04-06"</Career>
   <!-- Lawyer -->
-  <!-- TROU ASSUME : Mage 07-09. C est le Mage du livre (p.90), carriere a CINQ
-       niveaux qui appartient au lot 2 et n existe pas encore. Ce n est PAS le
-       Wizard du Rulebook : le livre distingue explicitement les deux (p.60).
-       A rajouter ici en meme temps que la carriere. -->
+<Career name="HELFG-WORK132">"07-09"</Career>
+  <!-- Mage -->
 <Career name="RULES-WORK36">"10-11"</Career>
   <!-- Physician -->
 <Career name="RULES-WORK23">"12-14"</Career>
@@ -937,10 +1049,8 @@ Asur from the Outer Kingdoms and Eataine do not harbour such prejudice."</Explan
   <!-- Apothecary -->
 <Career name="RULES-WORK33">"04-05"</Career>
   <!-- Lawyer -->
-  <!-- TROU ASSUME : Mage 06-08. C est le Mage du livre (p.90), carriere a CINQ
-       niveaux qui appartient au lot 2 et n existe pas encore. Ce n est PAS le
-       Wizard du Rulebook : le livre distingue explicitement les deux (p.60).
-       A rajouter ici en meme temps que la carriere. -->
+<Career name="HELFG-WORK132">"06-08"</Career>
+  <!-- Mage -->
 <Career name="RULES-WORK36">"09-12"</Career>
   <!-- Physician -->
 <Career name="RULES-WORK23">"13-16"</Career>
@@ -1087,10 +1197,8 @@ Asur from the Outer Kingdoms and Eataine do not harbour such prejudice."</Explan
   <!-- colonne "Nagarythe" de la table p.59 -->
 <Career name="RULES-WORK02">"01-03"</Career>
   <!-- Apothecary -->
-  <!-- TROU ASSUME : Mage 04-05. C est le Mage du livre (p.90), carriere a CINQ
-       niveaux qui appartient au lot 2 et n existe pas encore. Ce n est PAS le
-       Wizard du Rulebook : le livre distingue explicitement les deux (p.60).
-       A rajouter ici en meme temps que la carriere. -->
+<Career name="HELFG-WORK132">"04-05"</Career>
+  <!-- Mage -->
 <Career name="RULES-WORK36">"06-07"</Career>
   <!-- Physician -->
 <Career name="RULES-WORK23">"08-09"</Career>
@@ -1233,10 +1341,8 @@ Asur from the Outer Kingdoms and Eataine do not harbour such prejudice."</Explan
   <!-- Apothecary -->
 <Career name="RULES-WORK33">"04-05"</Career>
   <!-- Lawyer -->
-  <!-- TROU ASSUME : Mage 06-08. C est le Mage du livre (p.90), carriere a CINQ
-       niveaux qui appartient au lot 2 et n existe pas encore. Ce n est PAS le
-       Wizard du Rulebook : le livre distingue explicitement les deux (p.60).
-       A rajouter ici en meme temps que la carriere. -->
+<Career name="HELFG-WORK132">"06-08"</Career>
+  <!-- Mage -->
 <Career name="RULES-WORK36">"09-12"</Career>
   <!-- Physician -->
 <Career name="RULES-WORK23">"13-16"</Career>
@@ -1383,10 +1489,8 @@ Asur from the Outer Kingdoms and Eataine do not harbour such prejudice."</Explan
   <!-- Apothecary -->
 <Career name="RULES-WORK33">"04-05"</Career>
   <!-- Lawyer -->
-  <!-- TROU ASSUME : Mage 06-08. C est le Mage du livre (p.90), carriere a CINQ
-       niveaux qui appartient au lot 2 et n existe pas encore. Ce n est PAS le
-       Wizard du Rulebook : le livre distingue explicitement les deux (p.60).
-       A rajouter ici en meme temps que la carriere. -->
+<Career name="HELFG-WORK132">"06-08"</Career>
+  <!-- Mage -->
 <Career name="RULES-WORK36">"09-12"</Career>
   <!-- Physician -->
 <Career name="RULES-WORK23">"13-16"</Career>
@@ -1535,10 +1639,8 @@ Asur from the Outer Kingdoms and Eataine do not harbour such prejudice."</Explan
   <!-- Apothecary -->
 <Career name="RULES-WORK33">"04-05"</Career>
   <!-- Lawyer -->
-  <!-- TROU ASSUME : Mage 06-08. C est le Mage du livre (p.90), carriere a CINQ
-       niveaux qui appartient au lot 2 et n existe pas encore. Ce n est PAS le
-       Wizard du Rulebook : le livre distingue explicitement les deux (p.60).
-       A rajouter ici en meme temps que la carriere. -->
+<Career name="HELFG-WORK132">"06-08"</Career>
+  <!-- Mage -->
 <Career name="RULES-WORK36">"09-12"</Career>
   <!-- Physician -->
 <Career name="RULES-WORK23">"13-16"</Career>
@@ -1687,10 +1789,8 @@ Asur from the Outer Kingdoms and Eataine do not harbour such prejudice."</Explan
   <!-- Apothecary -->
 <Career name="RULES-WORK33">"03-04"</Career>
   <!-- Lawyer -->
-  <!-- TROU ASSUME : Mage 05-07. C est le Mage du livre (p.90), carriere a CINQ
-       niveaux qui appartient au lot 2 et n existe pas encore. Ce n est PAS le
-       Wizard du Rulebook : le livre distingue explicitement les deux (p.60).
-       A rajouter ici en meme temps que la carriere. -->
+<Career name="HELFG-WORK132">"05-07"</Career>
+  <!-- Mage -->
 <Career name="RULES-WORK36">"08-11"</Career>
   <!-- Physician -->
 <Career name="RULES-WORK23">"12-14"</Career>
@@ -2442,6 +2542,428 @@ The role of an Aestheticist is to help other Elves attain and maintain spiritual
 <Item name="Tuning fork">"3"</Item>
 <Item name="Aethyrolabe">"4"</Item>
 <Item name="Plain High-Quality Robes">"4"</Item>
+</SUBCHAPTER_ITEM>
+</Career>
+<Career id="HELFG-WORK132">
+<Description language="ENGLISH">"Mage"</Description>
+<Explanation language="ENGLISH">"You are a student of the loremasters of the White Tower of Hoeth, practising the esoteric arts of Elven magic.
+High Elf Mages devote themselves to the Winds of Magic, whether as individual Winds or combined into the pure magic of Qhaysh. Mages are highly respected for their arcane expertise and earn further esteem for their keen level of insight in other fields, particularly in matters of divinity. Mages draw from the divine as well as the arcane for their spellcasting, enabling many to eventually become priests."</Explanation>
+<Skill>"RULES-COMPLANG_MAG"</Skill>
+<Class>"CLASS_ACAD"</Class>
+<PictureLevel>"NIV_HELF"</PictureLevel>
+<SUBCHAPTER_LEVEL>
+<Level id="1">
+<Description language="ENGLISH">"Novitiate"</Description>
+<Salary>"TIERS_SILVER 1"</Salary>
+</Level>
+<Level id="2">
+<Description language="ENGLISH">"Student Mage"</Description>
+<Salary>"TIERS_SILVER 2"</Salary>
+</Level>
+<Level id="3">
+<Description language="ENGLISH">"Mage"</Description>
+<Salary>"TIERS_GOLD 1"</Salary>
+</Level>
+<Level id="4">
+<Description language="ENGLISH">"High Mage"</Description>
+<Salary>"TIERS_GOLD 3"</Salary>
+</Level>
+<Level id="5">
+<Description language="ENGLISH">"Archmage"</Description>
+<Salary>"TIERS_GOLD 6"</Salary>
+</Level>
+</SUBCHAPTER_LEVEL>
+<SUBCHAPTER_ATTR>
+<Attribut name="RULES-ATTR_WS">"3"</Attribut>
+<Attribut name="RULES-ATTR_BS">"0"</Attribut>
+<Attribut name="RULES-ATTR_S">"0"</Attribut>
+<Attribut name="RULES-ATTR_T">"0"</Attribut>
+<Attribut name="RULES-ATTR_I">"5"</Attribut>
+<Attribut name="RULES-ATTR_Ag">"4"</Attribut>
+<Attribut name="RULES-ATTR_Dex">"2"</Attribut>
+<Attribut name="RULES-ATTR_Int">"1"</Attribut>
+<Attribut name="RULES-ATTR_WP">"1"</Attribut>
+<Attribut name="RULES-ATTR_Fel">"1"</Attribut>
+</SUBCHAPTER_ATTR>
+<SUBCHAPTER_SKILL>
+<Skill name="RULES-COMPART_CALLI/RULES-COMPART_GRAV">"1"</Skill>
+  <!-- Art (Calligraphy or Engraving) -->
+<Skill name="RULES-COMPFOCAL_BETE/RULES-COMPFOCAL_MORT/RULES-COMPFOCAL_FEU/RULES-COMPFOCAL_CIEUX/RULES-COMPFOCAL_VIE/RULES-COMPFOCAL_LUMIERE/RULES-COMPFOCAL_METAL/RULES-COMPFOCAL_OMBRE">"1"</Skill>
+  <!-- Channelling (Any Colour) -->
+<Skill name="RULES-COMPCHARM">"1"</Skill>
+  <!-- Charm -->
+<Skill name="RULES-COMPRAGOT">"1"</Skill>
+  <!-- Gossip -->
+<Skill name="RULES-COMPGUERI">"1"</Skill>
+  <!-- Heal -->
+<Skill name="RULES-COMPLANG_MAG">"1"</Skill>
+  <!-- Language (Magick) -->
+<Skill name="RULES-COMPSAVOIR_MAGIE">"1"</Skill>
+  <!-- Lore (Magic) -->
+<Skill name="RULES-COMPSAVOIR_THEO">"1"</Skill>
+  <!-- Lore (Theology) -->
+<Skill name="RULES-COMPPRECEP">"1"</Skill>
+  <!-- Perception -->
+<Skill name="RULES-COMPPRIERE">"1"</Skill>
+  <!-- Pray -->
+<Skill name="RULES-COMPFOCAL_BETE/RULES-COMPFOCAL_MORT/RULES-COMPFOCAL_FEU/RULES-COMPFOCAL_CIEUX/RULES-COMPFOCAL_VIE/RULES-COMPFOCAL_LUMIERE/RULES-COMPFOCAL_METAL/RULES-COMPFOCAL_OMBRE">"2"</Skill>
+  <!-- Channelling (Any Colour) -->
+<Skill name="RULES-COMPCALM">"2"</Skill>
+  <!-- Cool -->
+<Skill name="RULES-COMPINTIM">"2"</Skill>
+  <!-- Intimidate -->
+<Skill name="RULES-COMPLANG_*">"2"</Skill>
+  <!-- Language (Any One) -->
+<Skill name="RULES-COMPSAVOIR_*">"2"</Skill>
+  <!-- Lore (Any One) -->
+<Skill name="RULES-COMPRECH">"2"</Skill>
+  <!-- Research -->
+<Skill name="RULES-COMPFOCAL_QHAYSH">"3"</Skill>
+  <!-- Channelling (Qhaysh) -->
+<Skill name="RULES-COMPEVAL">"3"</Skill>
+  <!-- Evaluate -->
+<Skill name="RULES-COMPCOMB_HAST">"3"</Skill>
+  <!-- Melee (Polearm) -->
+<Skill name="RULES-COMPCHEV_CHEVAL">"3"</Skill>
+  <!-- Ride (Horse) -->
+<Skill name="RULES-COMPSAVOIR_*">"4"</Skill>
+  <!-- Lore (Any) -->
+<Skill name="RULES-COMPESQU">"4"</Skill>
+  <!-- Dodge -->
+<Skill name="RULES-COMPLANG_*">"5"</Skill>
+  <!-- Language (Any) -->
+</SUBCHAPTER_SKILL>
+<SUBCHAPTER_TALENT>
+<Talent name="RULES-T0071">"1"</Talent>
+  <!-- Aethyric Attunement -->
+<Talent name="RULES-T0040">"1"</Talent>
+  <!-- Detect Artefact -->
+<Talent name="RULES-T0089">"1"</Talent>
+  <!-- Petty Magic -->
+<Talent name="RULES-T0137">"1"</Talent>
+  <!-- Second Sight -->
+<Talent name="RULES-T0088_*">"2"</Talent>
+  <!-- Arcane Magic (Any Arcane Lore) -->
+<Talent name="RULES-T0074">"2"</Talent>
+  <!-- Coolheaded -->
+<Talent name="RULES-T0042">"2"</Talent>
+  <!-- Instinctive Diction -->
+<Talent name="RULES-T0117">"2"</Talent>
+  <!-- Savvy -->
+<Talent name="HELFG-T0189">"3"</Talent>
+  <!-- Blessed by Isha -->
+<Talent name="RULES-T0096">"3"</Talent>
+  <!-- Dual Wielder -->
+<Talent name="HELFG-T0190">"3"</Talent>
+  <!-- High Magic -->
+<Talent name="HELFG-T0191">"3"</Talent>
+  <!-- Lileath's Blessing -->
+<Talent name="RULES-T0091">"4"</Talent>
+  <!-- Fast Hands -->
+<Talent name="RULES-T0167">"4"</Talent>
+  <!-- Iron Will -->
+<Talent name="RULES-T0115">"4"</Talent>
+  <!-- Magical Sense -->
+<Talent name="RULES-T0098">"4"</Talent>
+  <!-- Menacing -->
+<Talent name="RULES-T0163">"5"</Talent>
+  <!-- Combat Aware -->
+<Talent name="RULES-T0134_MAGIE">"5"</Talent>
+  <!-- Savant (Magic) -->
+<Talent name="RULES-T0141">"5"</Talent>
+  <!-- Sixth Sense -->
+<Talent name="RULES-T0087">"5"</Talent>
+  <!-- War Wizard -->
+</SUBCHAPTER_TALENT>
+<SUBCHAPTER_ITEM>
+<Item name="Chalk or Chisel">"1"</Item>
+<Item name="Religious Symbol (Isha)">"1"</Item>
+<Item name="Robes">"1"</Item>
+<Item name="Grimoire">"2"</Item>
+<Item name="Religious Symbol (Hoeth)">"2"</Item>
+<Item name="Hand Weapon (Sword)">"3"</Item>
+<Item name="Light Warhorse">"3"</Item>
+<Item name="Religious Symbol (Lileath)">"3"</Item>
+<Item name="Staff">"3"</Item>
+<Item name="Wayshard">"3"</Item>
+<Item name="Magical Item">"4"</Item>
+<Item name="Library (Magic)">"5"</Item>
+<Item name="Workshop (Magic)">"5"</Item>
+</SUBCHAPTER_ITEM>
+</Career>
+<Career id="HELFG-WORK133">
+<Description language="ENGLISH">"Smith-priest of Vaul"</Description>
+<Explanation language="ENGLISH">"You seek to combine the power of High Magic, the talents of the smith, and inspiration from the divine example of Vaul to become a peerless crafter of artefacts magical and mundane.
+Smith-priests of Vaul forge powerful magical weapons and armour for the Elves. Their skill is rivalled only by Dwarf runesmiths, some of whom may even pay them grudging respect. To emulate their crippled patron god, Smith-priests may blind themselves, and they obtain divine power from this sacrifice."</Explanation>
+<Skill>"RULES-COMPMETIER_FORGE"</Skill>
+<Class>"CLASS_ACAD"</Class>
+<Parent>"HELFG-WORK132"</Parent>
+  <!-- CARRIERE AVANCEE : on n y entre pas, on y arrive en montant de niveau
+       depuis le Mage. Le premier <Level> declare est le 3, et c est CE 3 qui
+       rend la carriere inaccessible a la creation - la balise ci-dessus dit
+       seulement par ou l on y arrive. Voir CONTEXT.md 2.24. -->
+<PictureLevel>"NIV_HELF"</PictureLevel>
+<SUBCHAPTER_LEVEL>
+<Level id="3">
+<Description language="ENGLISH">"Smith-priest"</Description>
+<Salary>"TIERS_GOLD 2"</Salary>
+</Level>
+<Level id="4">
+<Description language="ENGLISH">"Master Smith-priest"</Description>
+<Salary>"TIERS_GOLD 4"</Salary>
+</Level>
+<Level id="5">
+<Description language="ENGLISH">"Arch Forge-priest"</Description>
+<Salary>"TIERS_GOLD 7"</Salary>
+</Level>
+</SUBCHAPTER_LEVEL>
+<SUBCHAPTER_ATTR>
+<Attribut name="RULES-ATTR_WS">"3"</Attribut>
+<Attribut name="RULES-ATTR_BS">"0"</Attribut>
+<Attribut name="RULES-ATTR_S">"4"</Attribut>
+<Attribut name="RULES-ATTR_T">"0"</Attribut>
+<Attribut name="RULES-ATTR_I">"5"</Attribut>
+<Attribut name="RULES-ATTR_Ag">"0"</Attribut>
+<Attribut name="RULES-ATTR_Dex">"3"</Attribut>
+<Attribut name="RULES-ATTR_Int">"3"</Attribut>
+<Attribut name="RULES-ATTR_WP">"3"</Attribut>
+<Attribut name="RULES-ATTR_Fel">"3"</Attribut>
+</SUBCHAPTER_ATTR>
+<SUBCHAPTER_SKILL>
+<Skill name="RULES-COMPART_GRAV">"3"</Skill>
+  <!-- Art (Engraving) -->
+<Skill name="RULES-COMPFOCAL_QHAYSH">"3"</Skill>
+  <!-- Channelling (Qhaysh) -->
+<Skill name="RULES-COMPEVAL">"3"</Skill>
+  <!-- Evaluate -->
+<Skill name="RULES-COMPMETIER_FORGE">"3"</Skill>
+  <!-- Trade (Smith) -->
+<Skill name="RULES-COMPMARCH">"4"</Skill>
+  <!-- Haggle -->
+<Skill name="RULES-COMPINTUI">"4"</Skill>
+  <!-- Intuition -->
+<Skill name="RULES-COMPCOMM">"5"</Skill>
+  <!-- Leadership -->
+</SUBCHAPTER_SKILL>
+<SUBCHAPTER_TALENT>
+<Talent name="RULES-T0007">"3"</Talent>
+  <!-- Artistic -->
+<Talent name="HELFG-T0193">"3"</Talent>
+  <!-- Cadai Meditation -->
+<Talent name="RULES-T0092_FORGE">"3"</Talent>
+  <!-- Craftsman (Smith) -->
+<Talent name="HELFG-T0190">"3"</Talent>
+  <!-- High Magic -->
+<Talent name="RULES-T0157_FORGE">"4"</Talent>
+  <!-- Master Tradesman (Smith) -->
+<Talent name="HELFG-T0192">"4"</Talent>
+  <!-- Mind over Body -->
+<Talent name="RULES-T0077">"4"</Talent>
+  <!-- Strong Back -->
+<Talent name="RULES-T0116">"4"</Talent>
+  <!-- Tenacious -->
+<Talent name="RULES-T0165">"5"</Talent>
+  <!-- Holy Visions -->
+<Talent name="RULES-T0090">"5"</Talent>
+  <!-- Magnum Opus -->
+<Talent name="RULES-T0141">"5"</Talent>
+  <!-- Sixth Sense -->
+<Talent name="RULES-T0107">"5"</Talent>
+  <!-- Strong-minded -->
+</SUBCHAPTER_TALENT>
+<SUBCHAPTER_ITEM>
+<Item name="Prayer Book">"3"</Item>
+<Item name="Religious Symbol (Vaul)">"3"</Item>
+<Item name="Trade Tools (Smith)">"3"</Item>
+<Item name="Blindness">"4"</Item>
+<Item name="Forge">"4"</Item>
+<Item name="Ithilmar Ore">"5"</Item>
+<Item name="Magical Item">"5"</Item>
+<Item name="Smith-priest Apprentice">"5"</Item>
+</SUBCHAPTER_ITEM>
+</Career>
+<Career id="HELFG-WORK134">
+<Description language="ENGLISH">"Storm Weaver"</Description>
+<Explanation language="ENGLISH">"You command Mathlann's realm, assisting ships and sailors through your mastery of Elven sea magics.
+Storm Weavers often serve as senior chaplains for Ulthuan's navies, most often aboard ships from Lothern and Cothique. Elves from the other kingdoms pay tribute to Mathlann, but they tend to fear the mercurial Storm Weavers for their ability to summon his wrath at their whim. Though Mathlann is considered a Cadai god, He is also a child of Ellinill, the Lord of Destruction, and his dark moods and oft-callous nature reflect that ancestry."</Explanation>
+<Skill>"RULES-COMPVOILE"</Skill>
+<Class>"CLASS_ACAD"</Class>
+<Parent>"HELFG-WORK132"</Parent>
+  <!-- CARRIERE AVANCEE : on n y entre pas, on y arrive en montant de niveau
+       depuis le Mage. Le premier <Level> declare est le 3, et c est CE 3 qui
+       rend la carriere inaccessible a la creation - la balise ci-dessus dit
+       seulement par ou l on y arrive. Voir CONTEXT.md 2.24. -->
+<PictureLevel>"NIV_HELF"</PictureLevel>
+<SUBCHAPTER_LEVEL>
+<Level id="3">
+<Description language="ENGLISH">"Mist Mage"</Description>
+<Salary>"TIERS_GOLD 2"</Salary>
+</Level>
+<Level id="4">
+<Description language="ENGLISH">"Storm Weaver"</Description>
+<Salary>"TIERS_GOLD 5"</Salary>
+</Level>
+<Level id="5">
+<Description language="ENGLISH">"Caller of the Maelstrom"</Description>
+<Salary>"TIERS_GOLD 7"</Salary>
+</Level>
+</SUBCHAPTER_LEVEL>
+<SUBCHAPTER_ATTR>
+<Attribut name="RULES-ATTR_WS">"3"</Attribut>
+<Attribut name="RULES-ATTR_BS">"0"</Attribut>
+<Attribut name="RULES-ATTR_S">"0"</Attribut>
+<Attribut name="RULES-ATTR_T">"0"</Attribut>
+<Attribut name="RULES-ATTR_I">"4"</Attribut>
+<Attribut name="RULES-ATTR_Ag">"5"</Attribut>
+<Attribut name="RULES-ATTR_Dex">"3"</Attribut>
+<Attribut name="RULES-ATTR_Int">"3"</Attribut>
+<Attribut name="RULES-ATTR_WP">"3"</Attribut>
+<Attribut name="RULES-ATTR_Fel">"3"</Attribut>
+</SUBCHAPTER_ATTR>
+<SUBCHAPTER_SKILL>
+<Skill name="RULES-COMPFOCAL_QHAYSH">"3"</Skill>
+  <!-- Channelling (Qhaysh) -->
+<Skill name="RULES-COMPRAMER">"3"</Skill>
+  <!-- Row -->
+<Skill name="RULES-COMPVOILE">"3"</Skill>
+  <!-- Sail (Any) -->
+<Skill name="RULES-COMPNATA">"3"</Skill>
+  <!-- Swim -->
+<Skill name="RULES-COMPCOMB_BASE">"4"</Skill>
+  <!-- Melee (Basic) -->
+<Skill name="RULES-COMPORIENT">"4"</Skill>
+  <!-- Navigation -->
+<Skill name="RULES-COMPCOMM">"5"</Skill>
+  <!-- Leadership -->
+</SUBCHAPTER_SKILL>
+<SUBCHAPTER_TALENT>
+<Talent name="RULES-T0071">"3"</Talent>
+  <!-- Aethyric Attunement -->
+<Talent name="HELFG-T0193">"3"</Talent>
+  <!-- Cadai Meditation -->
+<Talent name="HELFG-T0190">"3"</Talent>
+  <!-- High Magic -->
+<Talent name="HELFG-T0194">"3"</Talent>
+  <!-- Eye of the Storm -->
+<Talent name="RULES-T0132_SEAMONSTR">"4"</Talent>
+  <!-- Fearless (Sea Monsters) -->
+<Talent name="RULES-T0140">"4"</Talent>
+  <!-- Orientation -->
+<Talent name="RULES-T0119">"4"</Talent>
+  <!-- Sea Legs -->
+<Talent name="RULES-T0100">"4"</Talent>
+  <!-- Strong Swimmer -->
+<Talent name="RULES-T0165">"5"</Talent>
+  <!-- Holy Visions -->
+<Talent name="RULES-T0085">"5"</Talent>
+  <!-- Old Salt -->
+<Talent name="RULES-T0168">"5"</Talent>
+  <!-- Seasoned Traveller -->
+<Talent name="RULES-T0087">"5"</Talent>
+  <!-- War Wizard -->
+</SUBCHAPTER_TALENT>
+<SUBCHAPTER_ITEM>
+<Item name="Prayer Book">"3"</Item>
+<Item name="Religious Symbol (Mathlann)">"3"</Item>
+<Item name="Rowboat">"3"</Item>
+<Item name="Sea Charts">"4"</Item>
+<Item name="Sextant">"4"</Item>
+<Item name="Sailing Ship and Crew">"5"</Item>
+<Item name="Spyglass">"5"</Item>
+</SUBCHAPTER_ITEM>
+</Career>
+<Career id="HELFG-WORK135">
+<Description language="ENGLISH">"Loremaster of Hoeth"</Description>
+<Explanation language="ENGLISH">"You are a mage, warrior, and scholar, seeking to expand the library at the White Tower and vanquish the forbidden cults plaguing Ulthuan.
+Many of Saphery's Loremasters began their training as swordmasters of Hoeth, in pursuit of martial expertise. There are also Loremasters who first walked the path of the mage, and whose advanced research instead focuses on the academic understanding of strategy, tactics, and war magic. However, the spells and rites used by Loremasters are not intended for battlefields."</Explanation>
+<Skill>"RULES-COMPRECH"</Skill>
+<Class>"CLASS_ACAD"</Class>
+<Parent>"HELFG-WORK132"</Parent>
+  <!-- CARRIERE AVANCEE : on n y entre pas, on y arrive en montant de niveau
+       depuis le Mage. Le premier <Level> declare est le 3, et c est CE 3 qui
+       rend la carriere inaccessible a la creation - la balise ci-dessus dit
+       seulement par ou l on y arrive. Voir CONTEXT.md 2.24. -->
+<PictureLevel>"NIV_HELF"</PictureLevel>
+<SUBCHAPTER_LEVEL>
+<Level id="3">
+<Description language="ENGLISH">"Loremaster"</Description>
+<Salary>"TIERS_GOLD 2"</Salary>
+</Level>
+<Level id="4">
+<Description language="ENGLISH">"Grand Loremaster"</Description>
+<Salary>"TIERS_GOLD 5"</Salary>
+</Level>
+<Level id="5">
+<Description language="ENGLISH">"High Loremaster"</Description>
+<Salary>"TIERS_GOLD 7"</Salary>
+</Level>
+</SUBCHAPTER_LEVEL>
+<SUBCHAPTER_ATTR>
+<Attribut name="RULES-ATTR_WS">"3"</Attribut>
+<Attribut name="RULES-ATTR_BS">"0"</Attribut>
+<Attribut name="RULES-ATTR_S">"0"</Attribut>
+<Attribut name="RULES-ATTR_T">"0"</Attribut>
+<Attribut name="RULES-ATTR_I">"5"</Attribut>
+<Attribut name="RULES-ATTR_Ag">"4"</Attribut>
+<Attribut name="RULES-ATTR_Dex">"3"</Attribut>
+<Attribut name="RULES-ATTR_Int">"3"</Attribut>
+<Attribut name="RULES-ATTR_WP">"3"</Attribut>
+<Attribut name="RULES-ATTR_Fel">"3"</Attribut>
+</SUBCHAPTER_ATTR>
+<SUBCHAPTER_SKILL>
+<Skill name="RULES-COMPFOCAL_QHAYSH">"3"</Skill>
+  <!-- Channelling (Qhaysh) -->
+<Skill name="RULES-COMPLANG_*">"3"</Skill>
+  <!-- Language (Any) -->
+<Skill name="RULES-COMPSAVOIR_*">"3"</Skill>
+  <!-- Lore (Any) -->
+<Skill name="RULES-COMPCOMB_BASE">"3"</Skill>
+  <!-- Melee (Basic) -->
+<Skill name="RULES-COMPPRIERE">"3"</Skill>
+  <!-- Pray -->
+<Skill name="RULES-COMPRECH">"3"</Skill>
+  <!-- Research -->
+<Skill name="RULES-COMPLANG_*">"4"</Skill>
+  <!-- Language (Any) -->
+<Skill name="RULES-COMPSAVOIR_*">"4"</Skill>
+  <!-- Lore (Any) -->
+<Skill name="RULES-COMPSAVOIR_*">"5"</Skill>
+  <!-- Lore (Any) -->
+</SUBCHAPTER_SKILL>
+<SUBCHAPTER_TALENT>
+<Talent name="RULES-T0146">"3"</Talent>
+  <!-- Bookish -->
+<Talent name="HELFG-T0193">"3"</Talent>
+  <!-- Cadai Meditation -->
+<Talent name="HELFG-T0190">"3"</Talent>
+  <!-- High Magic -->
+<Talent name="HELFG-T0195">"3"</Talent>
+  <!-- Sanctuary of the Mind -->
+<Talent name="RULES-T0042">"4"</Talent>
+  <!-- Instinctive Diction -->
+<Talent name="RULES-T0082">"4"</Talent>
+  <!-- Linguistics -->
+<Talent name="RULES-T0081">"4"</Talent>
+  <!-- Speedreader -->
+<Talent name="RULES-T0155">"4"</Talent>
+  <!-- Tower of Memories -->
+<Talent name="RULES-T0163">"5"</Talent>
+  <!-- Combat Aware -->
+<Talent name="RULES-T0115">"5"</Talent>
+  <!-- Magical Sense -->
+<Talent name="RULES-T0165">"5"</Talent>
+  <!-- Holy Visions -->
+<Talent name="RULES-T0005">"5"</Talent>
+  <!-- Pure Soul -->
+</SUBCHAPTER_TALENT>
+<SUBCHAPTER_ITEM>
+<Item name="Prayer Book">"3"</Item>
+<Item name="Religious Symbol (Hoeth)">"3"</Item>
+<Item name="Writing Kit">"3"</Item>
+<Item name="Fine Quality Robes">"4"</Item>
+<Item name="Rare Books">"4"</Item>
+<Item name="Library">"5"</Item>
+<Item name="Office">"5"</Item>
 </SUBCHAPTER_ITEM>
 </Career>
 </DATA_CAREER>

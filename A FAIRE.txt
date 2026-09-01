@@ -23,19 +23,22 @@ NOMMER LES PNG AVEC LE CODE COMPLET DU METIER (avec le prefixe de livre)
  par livre, ce que le code sait deja faire ; les fichiers garderaient alors leur nom court.
  Trancher entre les deux avant de renommer quoi que ce soit.
 
-CARRIERES AVANCEES (mecanique faite le 31/08/2026, il manque les donnees)
- - declarer <Parent>"HELFG-WORK132" sur Smith-priest, Storm Weaver et Loremaster
- - declarer leurs <Level> 3, 4 et 5 seulement (c'est ce qui les rend inaccessibles)
- - une entree DATA_SPECIE_CAREER_DIRECT en "X" sur RULES-SPECIE_HELF pour les trois
- - une entree de plus en "X" sur RULES-SPECIE_WELF pour le seul Smith-priest
- - une fois les donnees en place : tester la combo sur un Mage haut-elfe de niveau 2
- - tester aussi qu'un Rulebook seul ne voit RIEN changer dans l'onglet Evolution
+LOT 2 DE HIGH ELF LIVRE ET TESTE LE 31/08/2026. Reste du livre :
+ - les 58 sorts de Haute Magie (chantier a part, plus lourd que tout le lot 2)
+   . trancher le TypSpell de la Haute Magie - ATTENTION, enumeration FERMEE cote code
+   . le choix des deux vents de l'Elven Arcane
+   . ou loger les conditions d'Overcasting, de Sacrifices et de Yenlui
+   . l'etat Yenlui lui-meme
+ - inventaire de "Adapting Careers" p.60-62
+ - l'armurerie et les objets elfiques
+ - le detail de la section Sea Elf
 
-CODE MORT SIGNALE NON SUPPRIME : depuis la reecriture de RemplacerPixelParTransparent le
-31/08/2026, la fonction TestCouleur et les variables d'unite ZeroRed / ZeroGreen / ZeroBlue
-de pdfutils.pas n'ont plus aucun appelant. Elles sont devenues un piege : les trois globales
-n'etant plus alimentees valent 0, donc TestCouleur compare au NOIR et non au fond. Un
-avertissement est pose au-dessus. A supprimer franchement, rien ne les reference.
+BUG QUE J'AI INTRODUIT AU LOT 1, SIGNALE NON CORRIGE : HELFG-T0187 (Sword-dancing) a
+<Test>"COMPCOMB_2M"</Test>. Or PTalent.Tests n'est pas un code : wintalent.pas l'affiche tel
+quel dans une cellule, et xmlexportimport le traite comme un libelle traduisible. Partout
+ailleurs le corpus y met de la prose. Cette entree affiche donc un code brut a l'utilisateur.
+Correction d'une ligne, en attente de l'accord de Nono.
+
 
 BUG SIGNALE NON CORRIGE : ChercheMaxMetierNiveau compare les codes avec = strict alors que
 sa voisine ChercheMetierNiveau utilise CompareRechercheValeur. ChercheMinMetierNiveau a ete

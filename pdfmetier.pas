@@ -160,7 +160,10 @@ var
   MargeDroite:        Integer = 5;
   DebutTalent:        Integer = 45;
   FinAttribut:        Double = 0;
+  // ATTENTION : NbNiveauMetier est un NOMBRE DE LIGNES, pas un numero de niveau. Les deux
+  // se confondaient tant que toute carriere commencait au niveau 1 ; ce n'est plus vrai.
   NbNiveauMetier:     Integer = 0;
+  NvMinMetier:        Integer = 1;
   DernierTalent:      Integer = 0;
   TotalEquip:         Integer = 0;
   TotalTalent:        Integer = 0;
@@ -183,8 +186,20 @@ var
   Equipement:         String;
 begin
   PMetier := chercheMetier(MetierEnCours);
-  // Nombre de niveaux de CE metier : toute la geometrie du schema d'avance en depend.
-  NbNiveauMetier := ChercheMaxMetierNiveau(MetierEnCours);
+  // Premier et dernier niveau de CE metier. Une carriere avancee - Smith-priest of Vaul,
+  // Storm Weaver, Loremaster of Hoeth - ne declare que les niveaux 3 a 5 : partir de 1
+  // dessinait deux lignes vides en haut du schema d'avance et deux icones orphelines au
+  // debut de la colonne de droite (signale par Nono le 31/08/2026, capture a l'appui).
+  //
+  // NbNiveauMetier devient donc un NOMBRE DE LIGNES et non le numero du dernier niveau.
+  // Les deux valaient la meme chose tant que tout commencait a 1, et toute la geometrie
+  // ci-dessous s'en servait deja comme d'un compte - elle n'a donc pas a changer.
+  NvMinMetier    := ChercheMinMetierNiveau(MetierEnCours);
+  if NvMinMetier < 1 then
+    NvMinMetier  := 1;
+  NbNiveauMetier := ChercheMaxMetierNiveau(MetierEnCours) - NvMinMetier + 1;
+  if NbNiveauMetier < 1 then
+    NbNiveauMetier := 1;
 
   ListPage       := TStringList.Create;
 
@@ -264,7 +279,8 @@ begin
               Path := CheminNiveauImageMetier(MetierEnCours, Nv);
               PdfPage.SetColor(ColorToARGB(ColorList[Nv],0),false);
               Coord.X := DebutImgMetier + ((Ind - 1.0) * TailleCellule);
-              Coord.Y := 261.15 - HautAttribut - ((Nv-1)*4.7);
+              // La ligne est comptee depuis le PREMIER niveau du metier, pas depuis 1.
+              Coord.Y := 261.15 - HautAttribut - ((Nv - NvMinMetier)*4.7);
               PdfPage.DrawRect(Coord,TailleCellule,4.7,0,true,false,0);
               // Le rectangle colore est toujours dessine ; l'icone seulement si elle existe.
               if PdfImgNv[NV-1] >= 0 then
@@ -306,7 +322,9 @@ begin
   NbLigne := 0;
   NbDetail:= 0;
   DebutTexte := 265;
-  for Nv := 1 to ChercheMaxMetierNiveau(PMetier.CodeMetier) do
+  // Depuis le premier niveau du metier : une carriere qui commence au 3 ne doit pas
+  // afficher les icones des niveaux 1 et 2, qu'aucune bande ne suit.
+  for Nv := NvMinMetier to ChercheMaxMetierNiveau(MetierEnCours) do
     begin
       Inc(NBDetail);
       Path := CheminNiveauImageMetier(MetierEnCours, Nv);

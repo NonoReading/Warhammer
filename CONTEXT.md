@@ -2762,7 +2762,7 @@ servant déjà d'ancrage.
 d'avance ne descende pas trop bas dans la page. Si ça devient serré, l'autre approche est de
 garder la hauteur totale constante et de réduire le pas de 4,75.
 
-### 2.24 Carrières avancées : niveau minimum et carrière parente — mécanique terminée, données à venir (31/08/2026)
+### 2.24 Carrières avancées : niveau minimum et carrière parente — terminé (31/08/2026)
 
 *High Elf Player's Guide* apporte trois carrières — Smith-priest of Vaul, Storm Weaver,
 Loremaster of Hoeth — **qui n'existent qu'à partir du niveau 3**. On ne les commence pas :
@@ -2850,11 +2850,101 @@ le Mage n'est proposé qu'aux Hauts Elfes. Le Sylvain ne pourra donc jamais l'at
 Décision de Nono : traduire fidèlement ce que le livre écrit. Le filtre par ethnie règle le
 cas tout seul, sans exception dans le code.
 
-#### Reste à faire
+#### Éprouvé de bout en bout
 
-**Rien n'est testable en vrai tant qu'aucune carrière ne déclare de `<Parent>`** — les cinq
-étapes compilent et ne changent rien à l'écran. La mécanique s'éprouvera avec les trois
-carrières du lot 2.
+Testé par Nono le 31/08/2026 avec les données du lot 2 (§2.25) : un Mage haut-elfe arrivé au
+passage de niveau voit bien **les quatre options**, et le choix du Smith-priest of Vaul
+aboutit. La mécanique est donc validée sur son seul cas d'usage réel.
+
+### 2.25 High Elf Player's Guide, lot 2 : les quatre lanceurs de sorts — terminé (31/08/2026)
+
+Le Mage (`HELFG-WORK132`, cinq niveaux) et les trois carrières avancées qui en dérivent :
+`133` Smith-priest of Vaul, `134` Storm Weaver, `135` Loremaster of Hoeth, niveaux 3 à 5.
+Le livre a un encadré « Fifth Level Careers » qui nomme exactement ces quatre-là.
+
+**Sept talents créés**, `HELFG-T0189` à `T0195` : Blessed by Isha, High Magic, Lileath's
+Blessing, Mind over Body, Cadai Meditation, Eye of the Storm, Sanctuary of the Mind. Plus la
+spécialisation `RULES-T0134_MAGIE` (Savant (Magic)) et deux déclarations combinées. Tout le
+reste — 36 compétences, 36 talents — s'est résolu sur la base existante.
+
+#### Comment les bandes d'avance se lisent
+
+Le schéma d'avance est une bande de dix cases, une par attribut, et le contenu de chaque case
+est **le numéro du niveau auquel cet attribut devient avançable**, écrit en chiffre elfique.
+La couleur double le chiffre et lève toute ambiguïté : **blanc 1, bleu 2, gris 3, jaune 4,
+vert 5**. Case vide = jamais. C'est directement la valeur de `<Attribut>` dans
+`SUBCHAPTER_ATTR`, où `0` veut dire « jamais ».
+
+Le glyphe qui précède chaque entrée de la *Career Path* donne le niveau de cette entrée : les
+trois carrières avancées commencent toutes par le glyphe **gris**, ce qui **prouve** qu'elles
+démarrent au niveau 3 — ce n'était pas une déduction.
+
+#### Les compétences de gain se lisent à la police, pas à l'œil
+
+Le livre met la compétence de revenu en *italique* dans la ligne Skills du premier niveau.
+`pdfplumber` donne le `fontname` de chaque mot : c'est comme ça qu'elles ont été relevées,
+et non en regardant une image. Mage → `Language (Magick)`, Smith-priest → `Trade (Smith)`,
+Storm Weaver → `Sail (Any)`, Loremaster → `Research`. Le `(Qhaysh)` des quatre carrières est
+aussi en italique, mais c'est le style des spécialisations — présent partout, donc non
+discriminant. Méthode à réutiliser pour tout livre à venir.
+
+#### Arbitrages de Nono
+
+- **`Channelling (Any Colour)`** → combiné des **huit** vents de couleur, déclaré avec ce
+  libellé. Le générique `RULES-COMPFOCAL_*` aurait été plus court mais faux : il proposerait
+  aussi Qhaysh, Dhar, la sorcellerie khainite et la Grande Gueule. ⚠️ **Premier combiné à
+  plus de trois membres du corpus.** Vérifié avant écriture que `WinSpecialisation` itère sur
+  la liste entière ; c'est le premier endroit à regarder si l'écran de spécialisation se
+  comporte mal.
+- **Le « Smith »** → `_FORGE` (Blacksmith) pour les trois occurrences : `Trade (Smith)`,
+  `Craftsman (Smith)`, `Master Tradesman (Smith)`. Aucun « Trade (Smith) » n'existe dans la
+  base.
+- **`High Magic` et `Cadai Meditation` n'ont pas de `Max:`** dans le livre — vérifié sur
+  l'image des pages 83 et 101, pas seulement sur le texte extrait. Fixé à **1**.
+- **`Arcane Magic (Any Arcane Lore)`** → le générique `RULES-T0088_*`.
+
+#### Deux errata du livre, conservés tels quels
+
+- L'entrée `Talent: High Magic` (p.83) commence par une phrase **amputée de son sujet** :
+  « *Channelling* (Qhaysh) Skill and *Blessed by Isha* Talent can take this Talent. » Rendu
+  de la page à l'appui, ce n'est pas l'extraction. Le sujet manquant a été rétabli dans
+  l'`<Explanation>` (« Only those with the… ») parce que la phrase était incompréhensible en
+  l'état ; c'est le seul endroit du lot où le texte du livre a été complété.
+- Le **Smith-priest of Vaul est annoncé « High Elf, Wood Elf »** (p.100) alors que le Mage,
+  son unique parent, n'est ouvert qu'aux Hauts Elfes. Un Sylvain le verra dans WinRaces,
+  marqué `X`, sans jamais pouvoir l'atteindre. Décision de Nono : traduire fidèlement la
+  contradiction plutôt que de choisir lequel de ses deux côtés est le bon.
+
+#### Corrigé dans la foulée : n'afficher que les niveaux que le métier possède
+
+Les carrières à niveaux 3-5 ont fait sortir un défaut que rien n'avait pu montrer avant, parce
+qu'il fallait une carrière ne commençant pas au niveau 1. **Deux endroits parcouraient les
+niveaux depuis 1**, et un troisième depuis le maximum *global* :
+
+- `pdfmetier.pas` — le schéma d'avance dessinait deux lignes vides en tête et la colonne de
+  droite deux icônes orphelines. `NvMinMetier` introduit ; **`NbNiveauMetier` change de sens**
+  et devient un *nombre de lignes* au lieu du numéro du dernier niveau. Les deux se
+  confondaient tant que tout commençait à 1, et les trois formules de géométrie du §2.23 s'en
+  servaient déjà comme d'un compte — elles n'ont donc pas eu à changer.
+- `winpersonnage.pas`, `AfficheImageMetier` — `TabNiveau` était dimensionné **une fois à la
+  création de la fenêtre** sur `MaxNiveauMetier()`, le maximum global, et rempli en indexant
+  par le numéro de niveau. Lignes désormais **séquentielles**, grille dimensionnée sur le
+  métier, et **vidage explicite** qui n'existait nulle part.
+
+⚠️ **Sans risque pour les icônes, et ce n'était pas évident** : `TabDrawCell` lit l'indice
+d'image dans le *contenu* de la cellule (colonne 2, le numéro de niveau), pas dans le numéro de
+ligne. Si l'indice avait été la ligne, rendre les lignes séquentielles aurait cassé toutes les
+pastilles. À revérifier avant toute autre réorganisation de lignes dans ces grilles.
+
+Cette correction rattrape aussi une **régression du §2.23** : depuis que le maximum global était
+passé à 5, une carrière du livre de base à quatre niveaux affichait une ligne 5 vide.
+
+#### Reste du livre
+
+Les **58 sorts** de High Magic, seul morceau non traité. Quatre décisions de modélisation
+restent ouvertes : le `TypSpell` de la Haute Magie (⚠️ champ à énumération fermée, voir le
+piège de `"Ritual"` du 29/08), le choix des deux vents de l'Elven Arcane, où loger les
+conditions d'Overcasting / Sacrifices / Yenlui, et l'état Yenlui lui-même.
 
 ## 3. TODO / Backlog
 

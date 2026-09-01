@@ -394,12 +394,33 @@ begin
 
     Fond := Img.GetPixel(0, 0);
 
+    // COIN DEJA TRANSPARENT : l'image arrive avec son fond detoure, il n'y a rien a enlever.
+    //
+    // Sortir ici n'est pas une economie, c'est une PROTECTION. Le RVB d'un pixel transparent
+    // vaut (0,0,0) : sans ce test, la comparaison ci-dessous prendrait le NOIR pour la
+    // couleur de fond et effacerait tous les pixels noirs de l'image, contours du dessin
+    // compris. Mesure faite le 31/08/2026 sur WORK132 a WORK135, les images des carrieres du
+    // lot 2 de High Elf, qui arrivent toutes avec un fond deja transparent : environ 50 % de
+    // leurs pixels y passaient.
+    //
+    // Le garde existait deja, mais chez les APPELANTS - le "if (Not TestPixelZeroZero(...))"
+    // de CheminMetierImage et de CheminRaceImage. Il est desormais AUSSI dans la routine,
+    // pour qu'un troisieme appelant ecrit plus tard ne puisse pas passer a cote.
+    if Fond.alpha = 0 then
+      begin
+        Img.SaveToFile(FileDest);
+        Exit;
+      end;
+
     for y := 0 to Img.Height - 1 do
       begin
         p := Img.ScanLine[y];
         for x := 0 to Img.Width - 1 do
           begin
-            if (Abs(Integer(p^.red)   - Integer(Fond.red))   < Tolerance) and
+            // Un pixel deja transparent n'a pas a etre re-teste : son RVB ne veut plus rien
+            // dire, et le rendre transparent une seconde fois ne changerait rien.
+            if (p^.alpha > 0) and
+               (Abs(Integer(p^.red)   - Integer(Fond.red))   < Tolerance) and
                (Abs(Integer(p^.green) - Integer(Fond.green)) < Tolerance) and
                (Abs(Integer(p^.blue)  - Integer(Fond.blue))  < Tolerance) then
               p^ := BGRAPixelTransparent;

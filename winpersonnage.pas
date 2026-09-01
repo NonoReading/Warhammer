@@ -3148,6 +3148,9 @@ var
   PMetierAttribut:    StructureMetierAttribut;
   PMetierNiveau:      StructureMetierNiveau;
   CheminImage1:       String;
+  NvMin:              Integer;
+  NvMax:              Integer;
+  IndNv:              Integer;
 begin
   if MetierEnCours <> '' then
      CheminImage1     := CheminMetierImage(MetierEnCours)
@@ -3167,12 +3170,45 @@ begin
           TabAttribut.Cells[IndTabAttribut,LigAttImage] := IntToStr(PMetierAttribut.NiveauMetier);
 
   // Liste des Niveaux
-  For PMetierNiveau in ListMetierNiveau do
-    if CompareRechercheValeur(PMetierNiveau.CodeMetier, MetierEnCours) then
-     begin
-        TabNiveau.Cells[2,PMetierNiveau.NiveauMetier] := IntToStr(PMetierNiveau.NiveauMetier);
-        TabNiveau.Cells[3,PMetierNiveau.NiveauMetier] := PMetierNiveau.Libelle;
-     end;
+  // Le tableau ne montre QUE les niveaux que CE metier possede. Les lignes etaient
+  // auparavant indexees par le NUMERO de niveau, dans une grille dimensionnee une fois pour
+  // toutes a la creation de la fenetre sur le maximum GLOBAL. Deux consequences, les deux
+  // vues par Nono le 31/08/2026 :
+  //   - une carriere avancee, qui commence au niveau 3, laissait deux lignes vides en tete ;
+  //   - une carriere a quatre niveaux laissait une ligne vide en queue depuis que le lot 2
+  //     a porte ce maximum global a 5 - regression du chantier de la veille.
+  //
+  // Les lignes sont desormais SEQUENTIELLES, et c'est sans danger pour les icones : TabDrawCell
+  // lit l'indice d'image dans le CONTENU de la cellule - la colonne 2, qui porte le numero de
+  // niveau - et non dans le numero de ligne.
+  NvMin := ChercheMinMetierNiveau(MetierEnCours);
+  NvMax := ChercheMaxMetierNiveau(MetierEnCours);
+  // Metier inconnu ou incoherent : on retombe sur l'affichage historique plutot que de
+  // presenter une grille vide.
+  if (NvMin < 1) or (NvMax < NvMin) then
+    begin
+      NvMin := 1;
+      NvMax := MaxNiveauMetier();
+    end;
+  TabNiveau.RowCount := NvMax - NvMin + 2;
+
+  // Vidage explicite, qui n'existait nulle part : sans lui, passer d'un metier a cinq
+  // niveaux a un metier a trois laissait les lignes de l'ancien a l'ecran.
+  for IndNv := 1 to TabNiveau.RowCount - 1 do
+    begin
+      TabNiveau.Cells[2, IndNv] := '';
+      TabNiveau.Cells[3, IndNv] := '';
+    end;
+
+  for IndNv := NvMin to NvMax do
+    For PMetierNiveau in ListMetierNiveau do
+      if CompareRechercheValeur(PMetierNiveau.CodeMetier, MetierEnCours)
+         and (PMetierNiveau.NiveauMetier = IndNv) then
+        begin
+          TabNiveau.Cells[2, IndNv - NvMin + 1] := IntToStr(PMetierNiveau.NiveauMetier);
+          TabNiveau.Cells[3, IndNv - NvMin + 1] := PMetierNiveau.Libelle;
+          break;
+        end;
 end;
 
 Procedure TwinPersonnages.TabAugmentationAttributCalcul(ARow: Integer; var Value: string);
