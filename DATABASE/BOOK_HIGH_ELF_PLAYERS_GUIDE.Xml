@@ -150,6 +150,21 @@ Asur from the Outer Kingdoms and Eataine do not harbour such prejudice."</Explan
        donnerait les 45 sorts citant ce talent d un coup. -->
 <Magic>"1"</Magic>
 <SpellMode>"NONE"</SpellMode>
+  <!-- TARIF DES SORTS ouverts par ce talent, ajoute le 02/09/2026 (CONTEXT.md 2.31).
+       Jusque-la le cout etait ECRIT EN DUR dans XpSortCout, avec une cascade de tests sur
+       TypSpell - une enumeration fermee cote code : un livre apportant une valeur inconnue
+       (les 17 rituels de Winds of Magic) donnait un cout de 0 sans que rien ne le signale.
+       Le tarif appartient au TALENT qui ouvre le catalogue, pas a l'etiquette du sort.
+          cout = XpMultiplier x max( XpFloor , ceil( n / XpDivisor ) )
+       n = nombre de sorts DEJA connus dans le meme pool ; le pool est, par defaut, ce
+       talent generique lui-meme - c'est ce qui fait que Arcane et Domaine comptent
+       ensemble sans avoir a le declarer, puisqu'ils citent le meme talent.
+       XpDivisor absent = pas de progression, donc forfait. Balises absentes = gratuit. -->
+  <!-- High Magic, table p.83 du High Elf Player's Guide : "Up to Intelligence Bonus x 1 ->
+       200 XP, x 2 -> 400 XP...". Meme forme que l'arcanique, au double du tarif. -->
+<XpMultiplier>"200"</XpMultiplier>
+<XpFloor>"1"</XpFloor>
+<XpDivisor>"(BATTR_Int)"</XpDivisor>
 <Attribut>""</Attribut>
 <Description language="ENGLISH">"High Magic"</Description>
 <Short language="ENGLISH">""</Short>

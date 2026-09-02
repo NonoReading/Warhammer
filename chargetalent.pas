@@ -26,6 +26,14 @@ Type
         // sur les specialisations, comme il le fait deja pour Resume.
         Magie:                Integer;
         ModeSort:             String;
+        // Tarif des sorts ouverts par ce talent - voir ConstXmlXpMultiplicateur dans
+        // chargeconstantes.pas pour la formule et le sens de chaque champ. Herites de
+        // l'entree generique par ChercheTalent, comme Magie et ModeSort juste au-dessus.
+        XpMultiplicateur:     Integer;
+        XpPlancher:           Integer;
+        XpDiviseur:           String;
+        XpOfferts:            String;
+        XpGroupe:             String;
         Livre:                String;
         TalentPdf:            String;
         Resume:               String;
@@ -50,6 +58,7 @@ Var
 function ChercheTalent(CodeTalent :String): StructureTalent;
 function ListeTalent(CodeTalent :String): TStringList;
 function LibelleTalent(CodeTalent :String): String;
+function CodeTalentGenerique(CodeTalent :String): String;
 
 implementation
 
@@ -83,6 +92,19 @@ Begin
             Result.Magie    := PTalent.Magie;
           if Result.ModeSort = '' then
             Result.ModeSort := PTalent.ModeSort;
+          // Le tarif suit le meme chemin : il est declare une fois sur la generique, et
+          // toutes ses specialisations en heritent. Le multiplicateur sert de temoin -
+          // une specialisation ne le renseigne jamais, donc 0 veut dire "pas declare ici"
+          // et non "gratuit". Les cinq champs se reprennent ENSEMBLE : les melanger entre
+          // deux entrees donnerait un tarif qui n'existe nulle part.
+          if Result.XpMultiplicateur = 0 then
+            begin
+              Result.XpMultiplicateur := PTalent.XpMultiplicateur;
+              Result.XpPlancher       := PTalent.XpPlancher;
+              Result.XpDiviseur       := PTalent.XpDiviseur;
+              Result.XpOfferts        := PTalent.XpOfferts;
+              Result.XpGroupe         := PTalent.XpGroupe;
+            end;
         end;
 end;
 
@@ -145,6 +167,25 @@ function LibelleTalent(CodeTalent :String): String;
 
     Result := Libelles;
   end;
+
+// Entree GENERIQUE dont ce talent depend : RULES-T0012_SIGMAR -> RULES-T0012_*. Un code qui
+// n'est pas une specialisation se renvoie lui-meme (RULES-T0089, HELFG-T0190).
+//
+// La decoupe est ECRITE EXACTEMENT COMME DANS ChercheTalent ci-dessus, et ce n'est pas un
+// hasard : les deux doivent designer la meme entree, sinon un talent heriterait d'un tarif
+// et serait compte dans un autre groupe.
+//
+// Sert a identifier le GROUPE DE COMPTAGE des sorts : deux sorts dont les talents remontent
+// a la meme generique se comptent ensemble. C'est ce qui fait que l'arcanique et le domaine
+// partagent leur compteur sans qu'aucune donnee ne le declare - ils citent le meme talent.
+function CodeTalentGenerique(CodeTalent :String): String;
+Begin
+  Result := CodeTalent;
+  if Pos(ValeurGenerique, CodeTalent) > 0 then
+    Exit;
+  if Pos(ValeurSousCompetence, CodeTalent) > 0 then
+    Result := ExtractStringBefore(CodeTalent, ValeurSousCompetence) + ValeurGenerique;
+end;
 
 end.
 

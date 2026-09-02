@@ -372,6 +372,25 @@ Procedure XmlExportBook(Livre: String; Langue: String);
                 XmlContent.Add(XmlLigne(ConstXmlMagie, IntToStr(PTalent.Magie)));
               if PTalent.ModeSort <> '' then
                 XmlContent.Add(XmlLigne(ConstXmlModeSort, PTalent.ModeSort));
+              // Tarif des sorts. Le bloc n'est ecrit QUE si au moins un des cinq champs a ete
+              // renseigne : un talent magique sans tarification n'en gagne donc pas a l'export.
+              // C'est voulu - l'absence de tarif EST le tarif des Blessings (multiplicateur 0,
+              // donc sorts gratuits), et ecrire un <XpMultiplier>0</XpMultiplier> partout
+              // reviendrait a declarer gratuits tous les talents qu'on n'a pas encore traites.
+              // A l'interieur du bloc, les deux entiers sont ecrits meme a 0 : 0 y est une
+              // valeur (plancher nul), pas une absence.
+              if (PTalent.XpMultiplicateur <> 0) or (PTalent.XpPlancher <> 0) or
+                 (PTalent.XpDiviseur <> '') or (PTalent.XpOfferts <> '') or (PTalent.XpGroupe <> '') then
+                begin
+                  XmlContent.Add(XmlLigne(ConstXmlXpMultiplicateur, IntToStr(PTalent.XpMultiplicateur)));
+                  XmlContent.Add(XmlLigne(ConstXmlXpPlancher, IntToStr(PTalent.XpPlancher)));
+                  if PTalent.XpDiviseur <> '' then
+                    XmlContent.Add(XmlLigne(ConstXmlXpDiviseur, PTalent.XpDiviseur));
+                  if PTalent.XpOfferts <> '' then
+                    XmlContent.Add(XmlLigne(ConstXmlXpOfferts, PTalent.XpOfferts));
+                  if PTalent.XpGroupe <> '' then
+                    XmlContent.Add(XmlLigne(ConstXmlXpGroupe, PTalent.XpGroupe));
+                end;
               for PTalentArmureModifExp in ListTalentArmureModif do
                 if CompareRechercheValeur(PTalentArmureModifExp.CodeTalent, PTalent.CodeTalent) then
                   XmlContent.Add(XmlLigneDonnee(ConstXmlModifieArmure,
@@ -1206,6 +1225,14 @@ Procedure XmlImport(FileName: String; OnlyPrimary: Boolean; OnlyCode: Boolean);
                       PTalent.Trait          := false;
                       PTalent.Magie          := 0;
                       PTalent.ModeSort       := '';
+                      // Tarif des sorts : remis a zero comme tout le reste de la structure, qui est
+                      // REUTILISEE d'un talent au suivant. Sans cela un talent de magie transmettrait
+                      // sa tarification a tous les talents ordinaires declares apres lui.
+                      PTalent.XpMultiplicateur := 0;
+                      PTalent.XpPlancher       := 0;
+                      PTalent.XpDiviseur       := '';
+                      PTalent.XpOfferts        := '';
+                      PTalent.XpGroupe         := '';
                       PTalent.CodeTalent     := RemoveQuotes(UTF8Encode(NodeNv2.Attributes.GetNamedItem(ConstXmlId).NodeValue));
                       PTraduction            := InitTrad(ConstPTalent, PTalent.CodeTalent, '', PTalent.Livre);
 
@@ -1245,6 +1272,19 @@ Procedure XmlImport(FileName: String; OnlyPrimary: Boolean; OnlyCode: Boolean);
                               PTalent.Magie             := StrToIntDef(RemoveQuotes(UTF8Encode(Node.TextContent)), 0);
                             ConstXmlModeSort:
                               PTalent.ModeSort          := RemoveQuotes(UTF8Encode(Node.TextContent));
+                            // Tarif des sorts ouverts par ce talent. Lu seulement sur les talents
+                            // GENERIQUES : les specialisations n'en portent pas et le recuperent par
+                            // l'heritage de ChercheTalent, exactement comme Magie et ModeSort.
+                            ConstXmlXpMultiplicateur:
+                              PTalent.XpMultiplicateur  := StrToIntDef(RemoveQuotes(UTF8Encode(Node.TextContent)), 0);
+                            ConstXmlXpPlancher:
+                              PTalent.XpPlancher        := StrToIntDef(RemoveQuotes(UTF8Encode(Node.TextContent)), 0);
+                            ConstXmlXpDiviseur:
+                              PTalent.XpDiviseur        := RemoveQuotes(UTF8Encode(Node.TextContent));
+                            ConstXmlXpOfferts:
+                              PTalent.XpOfferts         := RemoveQuotes(UTF8Encode(Node.TextContent));
+                            ConstXmlXpGroupe:
+                              PTalent.XpGroupe          := RemoveQuotes(UTF8Encode(Node.TextContent));
                             ConstXmlTest:
                               begin
                                 PTalent.Tests           := RemoveQuotes(UTF8Encode(Node.TextContent));
@@ -1330,6 +1370,14 @@ Procedure XmlImport(FileName: String; OnlyPrimary: Boolean; OnlyCode: Boolean);
                       PTalent.Trait             := false;
                       PTalent.Magie             := 0;
                       PTalent.ModeSort          := '';
+                      // Une specialisation ne porte jamais de tarif : elle le recupere de sa
+                      // famille generique via ChercheTalent. Remise a zero pour la meme raison
+                      // que Magie et ModeSort juste au-dessus - la structure est reutilisee.
+                      PTalent.XpMultiplicateur  := 0;
+                      PTalent.XpPlancher        := 0;
+                      PTalent.XpDiviseur        := '';
+                      PTalent.XpOfferts         := '';
+                      PTalent.XpGroupe          := '';
                       PTalent.Description       := '';
 
                       PTalent.Attribut          := '';

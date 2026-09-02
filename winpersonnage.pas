@@ -270,6 +270,9 @@ type
   Procedure ChargerMetierEquipement(CodeMetier: String; NiveauMetier: Integer);
   Procedure TabEquipementAffiche();
   function XpSortCout(CodeSort: String): String;
+  function ValeurTarifSort(Expression: String; Defaut: Integer): Integer;
+  function TalentSort(CodeSort: String): StructureTalent;
+  function PoolTalent(PTalent: StructureTalent): String;
   Procedure AfficheFabrication();
   Function ChoixNonFait(): Boolean;
 
@@ -1060,60 +1063,155 @@ procedure TWinPersonnages.ButtonRaceSelectionnerClick(Sender: TObject);
     TabEquipementAffiche();
   end;
 
+// Valeur d'un champ de tarification : soit un nombre ecrit tel quel, soit un bonus
+// d'attribut note (BATTR_x) - la MEME notation que <Max> des talents, et la decoupe est
+// recopiee de TabAugmentationTalentSetEditText ligne ~3480 pour qu'elles ne divergent pas.
+// Le 'B' est mange par le delimiteur '(B', ce qui laisse 'ATTR_Int', qui est exactement ce
+// que la ligne de codes de TabAttribut contient.
+//
+// Defaut est rendu quand l'expression est vide OU quand l'attribut cite n'existe pas : un
+// libelle mal orthographie dans les donnees ne doit pas faire planter une fiche.
+function TWinPersonnages.ValeurTarifSort(Expression: String; Defaut: Integer): Integer;
+  var
+    Carac: String;
+    Ind:   Integer;
+  begin
+    Result := Defaut;
+    if Expression = '' then
+      Exit;
+    if TryStrToInt(Expression, Result) then
+      Exit;
+    Carac  := StringReplace(ExtractStringAfter(Expression, '(B'), ')', '', [rfReplaceAll]);
+    Result := Defaut;
+    For Ind := 1 to TabAttribut.ColCount - 1 do
+      if TabAttribut.Cells[Ind, LigAttCode] = Carac then
+        begin
+          Result := Trunc(StrToIntDef(TabAttribut.Cells[Ind, LigAttTotal], 0) / 10);
+          Exit;
+        end;
+  end;
+
+// Talent porteur du tarif d'un sort : le PREMIER de ceux que le sort cite. Prendre le
+// premier suffit parce qu'un sort ne cite jamais que des specialisations d'UNE seule
+// famille - verifie sur les 719 sorts des seize livres charges le 02/09/2026 - et que
+// toutes les specialisations d'une famille heritent du meme tarif.
+//
+// Une structure vide (CodeTalent = '') est la reponse normale pour une ligne de
+// TabEquipement qui n'est pas un sort : une arme, une armure. C'est ainsi qu'elles sont
+// ecartees du comptage, sans avoir a les reconnaitre.
+function TWinPersonnages.TalentSort(CodeSort: String): StructureTalent;
+  var
+    PSort:      StructureSort;
+    Liste:      TStringList;
+    Ind:        Integer;
+  begin
+    Result := Default(StructureTalent);
+    if CodeSort = '' then
+      Exit;
+    PSort := ChercheSort(CodeSort);
+    if (PSort.CodeSort = '') or (PSort.ListeTalent = '') then
+      Exit;
+
+    Liste := TStringList.Create;
+    try
+      // meme decoupe que SortTalentAccessible : un sort peut citer plusieurs talents, et le
+      // OU entre eux est la seule relation que le modele connaisse.
+      ExtractStrings([',', ' '], [], PChar(PSort.ListeTalent), Liste);
+      For Ind := 0 to Liste.Count - 1 do
+        begin
+          Result := ChercheTalent(Liste[Ind]);
+          if Result.CodeTalent <> '' then
+            Exit;
+        end;
+      Result := Default(StructureTalent);
+    finally
+      Liste.Free;
+    end;
+  end;
+
+// Groupe de comptage d'un talent. C'est ce qui remplace l'ancien test sur TypSpell : deux
+// sorts sont dans le meme groupe quand leurs talents remontent a la meme entree generique,
+// ce qui fait que l'arcanique et le domaine comptent ensemble sans qu'aucune donnee ne le
+// declare - ils citent le meme talent. XpGroupe ne sert qu'a forcer un partage entre deux
+// familles distinctes, cas qu'aucun livre ne presente aujourd'hui.
+//
+// Le groupe est bati sur le code du talent TROUVE, pas sur la chaine ecrite dans le sort :
+// les deux peuvent differer du prefixe de livre, et deux ecritures du meme talent auraient
+// alors fabrique deux groupes distincts - donc des sorts moins chers, en silence.
+function TWinPersonnages.PoolTalent(PTalent: StructureTalent): String;
+  begin
+    if PTalent.CodeTalent = '' then
+      Result := ''
+    else if PTalent.XpGroupe <> '' then
+      Result := PTalent.XpGroupe
+    else
+      Result := CodeTalentGenerique(PTalent.CodeTalent);
+  end;
+
+// COUT D'UN SORT, LU DANS LE TALENT QUI L'OUVRE (chantier du 02/09/2026, CONTEXT.md 2.31).
+//
+//    cout = XpMultiplier x max( XpFloor , ceil( n / XpDivisor ) )
+//
+// n = sorts DEJA connus dans le meme groupe. C'est l'entree des tables du livre ("No. of
+// Spells Currently Known") ; le sort en cours est deja dans la grille quand on arrive ici,
+// il est donc exclu du comptage par son code.
+//
+// CE QUI DISPARAIT : la cascade de tests sur TypSpell. Elle traitait comme une enumeration
+// fermee un champ que les supplements remplissent librement - les 17 rituels de Winds of
+// Magic, arrives avec une valeur inconnue, tombaient a cout nul sans que rien ne le dise.
+// Un talent sans tarification declaree coute maintenant 0 parce que c'est ECRIT dans les
+// donnees (les benedictions), pas parce que le code ne sait pas quoi en faire.
 function TWinPersonnages.XpSortCout(CodeSort: String): String;
   Var
-    PSort:  StructureSort;
-    // INITIALISATION INDISPENSABLE, et c'etait la seule variable de la fonction a en etre
-    // privee. La cascade de tests plus bas n'affecte CoutXp que pour les cinq types de sort
-    // qu'elle connait ; un type INCONNU ne passe dans aucune branche et la fonction
-    // renvoyait alors ce qui trainait sur la pile - un cout indetermine, pouvant changer
-    // d'un appel a l'autre pour le meme sort.
-    //
-    // Ce n'est pas theorique : le corpus contient 17 sorts en TypSpell "Ritual", valeur
-    // introduite le 29/08/2026 sans verifier que le champ etait une ENUMERATION FERMEE
-    // cote code. Le 0 rend leur cout previsible ; il ne dit pas ce que ce cout DEVRAIT
-    // etre - cette question-la reste ouverte.
-    CoutXp: Integer = 0;
-    NB:     Integer = 0;
-    BI:     Integer = 0;
-    BFM:    Integer = 0;
-    Ind:    Integer = 0;
-    MaxMin: Integer = 0;
+    PTalent:  StructureTalent;
+    Pool:     String;
+    CoutXp:   Integer = 0;
+    NbConnus: Integer = 0;
+    Offerts:  Integer = 0;
+    Diviseur: Integer = 0;
+    Palier:   Integer = 0;
+    Ind:      Integer = 0;
   begin
-    PSort := ChercheSort(CodeSort);
-
-    If PSort.TypeSort = TypeSortBenediction then
-      // les bénédictions sont gratuites (on ne devrait jamais arriver ici, mais au cas où...)
-      CoutXp := 0
-    else
+    PTalent := TalentSort(CodeSort);
+    Pool    := PoolTalent(PTalent);
+    if Pool <> '' then
       begin
-        // calcul des bonus pour certains calculs
-        BI := Floor(StrToInt(TabAttribut.Cells[ColAttI, LigAttTotal]) / 10);
-        BFM:= Floor(StrToInt(TabAttribut.Cells[ColAttFM,LigAttTotal]) / 10);
+        For Ind := 1 to TabEquipement.RowCount - 1 do
+          if (TabEquipement.Cells[2, Ind] <> CodeSort) and
+             (PoolTalent(TalentSort(TabEquipement.Cells[2, Ind])) = Pool) then
+            Inc(NbConnus);
 
-        // nombre de fois que le talent exixte
-        For Ind := 1 to TabEquipement.RowCount-1 do
-          If (TabEquipement.Cells[3, Ind] = PSort.TypeSort)
-            or ((InList(PSort.TypeSort,TypeSortArcane+','+TypeSortCouleur))
-              and (InList(TabEquipement.Cells[3, Ind],TypeSortArcane+','+TypeSortCouleur))) then
-               begin
-                Inc(Nb);
-                if (Psort.TypeSort = TypeSortMineur) and (StrToIntDef(TabEquipement.Cells[5,ind],0) > MaxMin) then
-                  MaxMin := StrToInt(TabEquipement.Cells[5,ind]);
-               end;
-
-        // selon le type de sort
-        if (Psort.TypeSort = TypeSortMiracle) then
-          CoutXp := 100 * (NB-1)
-        else if InList(Psort.TypeSort,TypeSortArcane+','+TypeSortCouleur) then
-          CoutXp := 100 * (1 + floor((NB-1) / BI))
-        else if (Psort.TypeSort = TypeSortChaos) then
-          CoutXp := 100
-        else if (Psort.TypeSort = TypeSortMineur) then
+        // PLANCHER A 1 SUR LES BONUS D'ATTRIBUT : un personnage dont l'attribut est
+        // inferieur a 10 a un bonus de ZERO. L'ancien code le forcait deja a 1, sans quoi
+        // la division levait une exception ; ce plancher accordait au passage un sort
+        // offert au lieu d'aucun en Magie Mineure. Les deux effets sont conserves.
+        if PTalent.XpOfferts <> '' then
           begin
-            CoutXp := 50 * floor((NB-1) / BFM);
-            if CoutXp = MaxMin then
-              CoutXp := 0;
+            Offerts := ValeurTarifSort(PTalent.XpOfferts, 0);
+            if Offerts < 1 then
+              Offerts := 1;
+          end;
+
+        if NbConnus < Offerts then
+          // sorts accordes par le talent lui-meme : "you manifest, and permanently
+          // memorise, a number of spells equal to your Willpower Bonus"
+          CoutXp := 0
+        else
+          begin
+            // DIVISEUR ABSENT ET DIVISEUR NUL NE SONT PAS LA MEME CHOSE. Absent = le tarif
+            // ne progresse pas, c'est un forfait (Magie du Chaos, 100 XP a chaque fois).
+            // Nul = un bonus d'attribut qui vaut zero, et la c'est le plancher a 1 qui
+            // s'applique, comme avant.
+            if PTalent.XpDiviseur = '' then
+              Palier := 1
+            else
+              begin
+                Diviseur := ValeurTarifSort(PTalent.XpDiviseur, 1);
+                if Diviseur < 1 then
+                  Diviseur := 1;
+                Palier := Ceil(NbConnus / Diviseur);
+              end;
+            CoutXp := PTalent.XpMultiplicateur * Max(PTalent.XpPlancher, Palier);
           end;
       end;
 

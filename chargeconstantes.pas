@@ -129,6 +129,30 @@ Const
       // Voir CONTEXT.md 2.18.
       ConstXmlMagie                     = 'Magic';
       ConstXmlModeSort                  = 'SpellMode';
+      //  TARIF DES SORTS OUVERTS PAR CE TALENT. Cinq champs, tous portes par les entrees
+      //  GENERIQUES (T0012_*, T0080_*, T0088_*, T0089, T0172_*) et reportes sur les
+      //  specialisations par ChercheTalent, comme Magic et SpellMode.
+      //
+      //     cout = XpMultiplier x max( XpFloor , ceil( n / XpDivisor ) )
+      //
+      //  ou n est le nombre de sorts DEJA connus dans le meme XpPool.
+      //     XpMultiplier  0 = gratuit (Benediction), sinon 50 ou 100
+      //     XpFloor       plancher : 1 = le premier sort est deja payant (Domaine, Chaos)
+      //                              0 = le premier est gratuit (Miracle)
+      //     XpDivisor     largeur d'un palier. Vide = aucune progression, donc forfait.
+      //                   Accepte un nombre ou un bonus d'attribut note (BATTR_x).
+      //     XpFree        sorts offerts a l'achat du talent, donc gratuits. Accepte la
+      //                   meme notation. C'est la regle "you memorise a number of spells
+      //                   equal to your Willpower Bonus" de Petty Magic.
+      //     XpPool        compteur partage. Deux talents portant le meme pool comptent
+      //                   leurs sorts ENSEMBLE - c'est le cas d'Arcane et de Domain.
+      //                   Vide = le talent compte seul.
+      //  Voir CONTEXT.md 2.31 pour les tables du Rulebook dont ces valeurs sortent.
+      ConstXmlXpMultiplicateur          = 'XpMultiplier';
+      ConstXmlXpPlancher                = 'XpFloor';
+      ConstXmlXpDiviseur                = 'XpDivisor';
+      ConstXmlXpOfferts                 = 'XpFree';
+      ConstXmlXpGroupe                  = 'XpPool';
       ConstModeSortAuto                 = 'AUTO';
       ConstModeSortChoix                = 'CHOICE';
       ConstModeSortAucun                = 'NONE';

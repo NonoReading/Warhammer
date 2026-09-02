@@ -2785,6 +2785,21 @@ Une fois par session, vous pouvez poser une question au MJ concernant une situat
 <Talent id="RULES-T0080_*">
 <Magic>"2"</Magic>
 <SpellMode>"CHOICE"</SpellMode>
+  <!-- TARIF DES SORTS ouverts par ce talent, ajoute le 02/09/2026 (CONTEXT.md 2.31).
+       Jusque-la le cout etait ECRIT EN DUR dans XpSortCout, avec une cascade de tests sur
+       TypSpell - une enumeration fermee cote code : un livre apportant une valeur inconnue
+       (les 17 rituels de Winds of Magic) donnait un cout de 0 sans que rien ne le signale.
+       Le tarif appartient au TALENT qui ouvre le catalogue, pas a l'etiquette du sort.
+          cout = XpMultiplier x max( XpFloor , ceil( n / XpDivisor ) )
+       n = nombre de sorts DEJA connus dans le meme pool ; le pool est, par defaut, ce
+       talent generique lui-meme - c'est ce qui fait que Arcane et Domaine comptent
+       ensemble sans avoir a le declarer, puisqu'ils citent le meme talent.
+       XpDivisor absent = pas de progression, donc forfait. Balises absentes = gratuit. -->
+  <!-- Invoke : "100 XP per miracle you currently know". Plancher 0 : le miracle accorde
+       par le talent est donc gratuit, et chaque miracle connu ajoute un palier. -->
+<XpMultiplier>"100"</XpMultiplier>
+<XpFloor>"0"</XpFloor>
+<XpDivisor>"1"</XpDivisor>
 <Attribut>""</Attribut>
 <Description language="FRANCAIS">"Invocation (au choix)"</Description>
 <Short language="FRANCAIS">"Vous pouvez lancer des miracles."</Short>
@@ -2884,6 +2899,13 @@ Cependant, si vous le faites, vous ne pouvez lancer aucun autre Sort ce Tour."</
 <Talent id="RULES-T0088_*">
 <Magic>"1"</Magic>
 <SpellMode>"NONE"</SpellMode>
+  <!-- Arcane Magic : "Up to Intelligence Bonus x 1 -> 100 XP, x 2 -> 200 XP...". Plancher 1 :
+       le tout premier sort coute deja 100. Un palier par tranche de Bonus d'Intelligence.
+       ATTENTION : le code lisait jusqu'ici la colonne INITIATIVE (ColAttI) et non
+       INTELLIGENCE (ColAttInt) - voir A FAIRE.txt. -->
+<XpMultiplier>"100"</XpMultiplier>
+<XpFloor>"1"</XpFloor>
+<XpDivisor>"(BATTR_Int)"</XpDivisor>
 <Attribut>""</Attribut>
 <Description language="FRANCAIS">"Magie des Arcanes (au choix)"</Description>
 <Short language="FRANCAIS">"Vous pouvez lancer des sorts"</Short>
@@ -2903,6 +2925,13 @@ Vous pouvez désapprendre ce Talent pour 100 PX, mais si vous le faites, vous pe
 <Talent id="RULES-T0089">
 <Magic>"2"</Magic>
 <SpellMode>"NONE"</SpellMode>
+  <!-- Petty Magic : "you manifest, and permanently memorise, a number of spells equal to
+       your Willpower Bonus" - c'est XpFree, teste AVANT la formule. Ensuite "Up to
+       Willpower Bonus x 1 -> 50 XP, x 2 -> 100 XP...". -->
+<XpMultiplier>"50"</XpMultiplier>
+<XpFloor>"0"</XpFloor>
+<XpDivisor>"(BATTR_WP)"</XpDivisor>
+<XpFree>"(BATTR_WP)"</XpFree>
 <Attribut>""</Attribut>
 <Description language="FRANCAIS">"Magie mineure"</Description>
 <Short language="FRANCAIS">"Vous pouvez lancer des sorts mineurs"</Short>
@@ -3848,6 +3877,10 @@ Si votre Personnage meurt d’une façon y correspondant, votre prochain Personn
 <Talent id="RULES-T0172_*">
 <Magic>"1"</Magic>
 <SpellMode>"NONE"</SpellMode>
+  <!-- Chaos Magic : "always costs 100 XP per time instead of the normal cost". Forfait,
+       donc AUCUN diviseur : le nombre de sorts deja connus n'entre pas dans le calcul. -->
+<XpMultiplier>"100"</XpMultiplier>
+<XpFloor>"1"</XpFloor>
 <Attribut>""</Attribut>
 <Description language="FRANCAIS">"Magie du Chaos (au choix)"</Description>
 <Short language="FRANCAIS">"Vous pouvez lancer des sorts du chaos"</Short>

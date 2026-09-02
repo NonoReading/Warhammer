@@ -3169,6 +3169,132 @@ d'avant les chantiers de la semaine, le cinquième était mon erreur du lot 1.
 5. **`ChercheMetierNiveau`** ne remettait pas `Result` à zéro et renvoyait le résultat de
    l'appel précédent. Dernière `Cherche*` oubliée par le chantier §2.17.
 
+### 2.31 Le coût XP des sorts, aligné sur le Rulebook — terminé (01/09/2026)
+
+Parti d'une question de Nono sur la **mise en donnée** de la tarification, ce chantier a
+d'abord révélé que **deux des quatre formules ne suivaient pas le livre**. Corrigées en dur
+avant toute réflexion sur le modèle : le défaut existait indépendamment.
+
+#### Ce que dit le Rulebook, table en main
+
+- **Arcane Magic** : *« Up to Intelligence Bonus × 1 → 100 XP, × 2 → 200 XP… »*
+- **Petty Magic** : le talent fait mémoriser *« a number of spells equal to your Willpower
+  Bonus »* — gratuits — puis *« Up to Willpower Bonus × 1 → 50 XP, × 2 → 100 XP… »*
+- **Invoke** : *« 100 XP per miracle you currently know »*
+
+#### Les deux écarts
+
+`n` = sorts **déjà** connus (le sort tarifé est déjà dans la grille, d'où le `Nb-1`).
+
+**Arcane / Domain** — `100 × (1 + ⌊n/BI⌋)` changeait de palier **un sort trop tôt**. Avec
+BI = 4, le cinquième sort était facturé 200 là où le livre dit encore 100. Devient
+`100 × max(1, ⌈n/BI⌉)`.
+
+**Minor Magic** — `50 × ⌊n/BFM⌋` donnait des paliers **deux fois trop larges**, suivi d'un
+correctif (`if CoutXp = MaxMin then CoutXp := 0`) qui annulait le coût de **tous les sorts
+d'un palier sauf le premier** : le personnage payait 50, puis rien, puis 100, puis rien.
+⚠️ Ce correctif ne figure nulle part dans le livre, et comparait de surcroît un coût **brut**
+à une valeur de grille **déjà passée par la division par 25**. Supprimé. Devient : gratuit
+tant que `n < BFM`, puis `50 × ⌈n/BFM⌉`.
+
+`Miracle` et `Chaos` étaient justes et sont inchangés.
+
+**Vérifié par simulation avant livraison**, les deux séries reproduisant les tables du livre
+case par case, puis validé par Nono sur ses personnages.
+
+#### Deux durcissements au passage
+
+- **Plancher à 1 sur `BI` et `BFM`.** Ils servent de **diviseur** : un personnage dont
+  l'Intelligence ou la Force Mentale est inférieure à 10 a un bonus de 0, et la division
+  levait une exception. Le défaut préexistait.
+- **`NbConnus` est nommé.** Le `Nb-1` traînait dans trois formules sans que rien n'explique
+  qu'il désigne l'entrée des tables du livre.
+
+#### Ce que ça change pour le chantier de mise en donnée
+
+Il reste souhaitable mais **pour une autre raison que le nombre de modes** : la formule est
+unique, ce sont ses paramètres qui changent. Réalisé le 02/09 — voir 2.32.
+
+### 2.32 La tarification des sorts est une donnée du talent — terminé (02/09/2026)
+
+Idée de Nono du 31/08. Le coût d'un sort ne se déduit plus de son `TypSpell` mais se **lit
+dans le talent qui ouvre le catalogue**.
+
+```
+cout = XpMultiplier × max( XpFloor , ⌈ n / XpDivisor ⌉ )
+```
+
+`n` = sorts **déjà connus dans le même groupe**. Cinq balises, portées par les entrées
+génériques uniquement, héritées par les spécialisations via `ChercheTalent` — c'est ce point
+vérifié en premier qui a ramené le chantier de ~100 déclarations à **cinq**.
+
+| Talent | Multiplier | Floor | Divisor | Free |
+|---|---|---|---|---|
+| `RULES-T0012_*` Bless | *rien de déclaré* | | | |
+| `RULES-T0080_*` Invoke | 100 | 0 | `1` | – |
+| `RULES-T0088_*` Arcane | 100 | 1 | `(BATTR_Int)` | – |
+| `RULES-T0089` Petty | 50 | 0 | `(BATTR_WP)` | `(BATTR_WP)` |
+| `RULES-T0172_*` Chaos | 100 | 1 | *absent* | – |
+| `HELFG-T0190` High Magic | 200 | 1 | `(BATTR_Int)` | – |
+
+**L'absence de déclaration est le tarif des bénédictions** (multiplicateur 0 = gratuit). Les
+Blessings ne déclarent donc rien, et l'export n'écrit le bloc que si au moins un champ est
+renseigné — sinon un `<XpMultiplier>0</XpMultiplier>` posé partout déclarerait gratuits tous
+les talents non encore traités.
+
+#### Le groupe de comptage remplace le `InList()` en dur
+
+`Arcane` et `Domain` partageaient leur compteur via un `InList()` écrit dans le code. Ils le
+partagent maintenant **sans qu'aucune donnée ne le déclare** : le groupe d'un sort est
+l'entrée générique de son talent (`CodeTalentGenerique`), et les deux citent `RULES-T0088_*`.
+Vérifié sur les **719 sorts des seize livres** : la correspondance `TypSpell` → famille de
+talent est bijective, aucune exception. `XpPool` ne sert donc qu'à forcer un partage entre
+deux familles distinctes — cas qu'aucun livre ne présente aujourd'hui.
+
+#### Trois écarts assumés, tous des corrections
+
+L'objectif était « coûts rigoureusement identiques ». Il l'est pour le Rulebook et tous les
+livres de l'Empire. Trois exceptions, toutes découvertes *pendant* le chantier :
+
+1. **Le tarif arcanique se calculait sur l'Initiative.** `XpSortCout` lisait `ColAttI`
+   (colonne 6, `ATTR_I`) là où le livre dit *« Up to Intelligence Bonus »* (`ColAttInt`,
+   colonne 9, `ATTR_Int`). La variable s'appelait `BI`, qui se lit « Bonus Intelligence ».
+   ⚠️ **Piège de nommage franco-anglais** : une variable nommée d'après le français lisant
+   une colonne nommée d'après l'anglais. À chercher ailleurs.
+2. **High Magic était tarifé par l'étiquette que j'avais posée à l'import** (CN 0 → Blessing,
+   sinon Miracle) : 6 gratuits, 16 au tarif arcanique, 23 au tarif miracle — ces 23 polluant
+   en plus le compteur d'un prêtre ayant aussi Invoke. Le livre donne sa propre table p.83 :
+   200 XP par palier de Bonus d'Intelligence.
+3. **Les 17 rituels de Winds of Magic** citent `RULES-T0088_*` : ils sont désormais tarifés
+   comme de l'arcanique et comptés dans ce groupe. Referme la question ouverte du 29/08.
+
+#### Deux pièges traités explicitement dans le code
+
+- **Diviseur absent ≠ diviseur nul.** Absent = pas de progression, donc forfait (le Chaos).
+  Nul = un bonus d'attribut à zéro, et là c'est le plancher à 1 hérité de l'ancien code.
+  Les confondre transformait l'arcanique d'un personnage à Intelligence < 10 en forfait 100.
+- Ce même plancher à 1 accordait, en Magie Mineure, **un sort offert au lieu de zéro**.
+  Conservé : sans lui un personnage à FM < 10 payait son premier sort.
+
+#### Bug découvert et NON corrigé — il touche la sauvegarde
+
+La liste fermée des six `TypSpell` sert encore à trois endroits de `winpersonnage` :
+`4744` (**enregistrement du personnage**), `761` et `786` (bouton Fabrication). En 4744, une
+ligne dont le type n'est pas dans la liste — les 17 rituels — n'est pas marquée `TypeEquipSp`
+mais **enregistrée comme un équipement ordinaire**, colonne 7 recopiée en qualité et coût XP
+forcé à zéro. Laissé au `A FAIRE` : c'est le chemin de sauvegarde, et une modification à la
+fois. `TalentSort(code).CodeTalent <> ''` donne la réponse propre.
+
+#### Points de reprise
+
+- `chargetalent.pas` : `CodeTalentGenerique`, et l'héritage des cinq champs dans
+  `ChercheTalent` — **découpe recopiée à l'identique**, les deux doivent désigner la même
+  entrée sinon un talent hérite d'un tarif et compte dans un autre groupe.
+- `winpersonnage.pas` : `ValeurTarifSort`, `TalentSort`, `PoolTalent`, `XpSortCout`.
+- `ValeurTarifSort` duplique la découpe `(BATTR_x)` de `TabAugmentationTalentSetEditText`
+  (~l.3480). Candidat à une factorisation, non faite pour ne pas toucher à du code hors
+  chantier.
+
 ## 3. TODO / Backlog
 
 Le backlog complet (tout ce qui n'est pas encore commencé) vit dans `A FAIRE.txt`

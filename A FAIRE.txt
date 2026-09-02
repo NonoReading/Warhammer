@@ -11,35 +11,30 @@ fonctions essaient le code complet puis retombent sur le nom court. Ce repli a s
 decoupler le renommage des fichiers de la modification du code ; maintenant que les 200
 fichiers sont renommes, il ne protege plus rien et masquerait un oubli de renommage futur.
 
+BUG - LE TARIF ARCANIQUE SE CALCULE SUR L'INITIATIVE AU LIEU DE L'INTELLIGENCE. Trouve le
+02/09/2026 en cherchant la bonne notation (BATTR_x) pour la mettre en donnee. XpSortCout lit
+TabAttribut.Cells[ColAttI] - colonne 6, ATTR_I, l'Initiative - alors que le livre dit
+"Up to Intelligence Bonus", soit ColAttInt, colonne 9, ATTR_Int. La variable s'appelle BI, ce
+qui se lit "Bonus Intelligence" et a sans doute masque l'erreur. Meme piege possible ailleurs
+si un calcul nomme une variable d'apres le francais et lit une colonne nommee d'apres
+l'anglais. La donnee posee le 02/09 declare deja (BATTR_Int), donc l'etape 3 du chantier de
+tarification corrige ce bug au passage - le cout arcanique CHANGERA pour tout personnage dont
+l'Initiative differe de l'Intelligence.
+
+BUG - UN SORT DE TYPE INCONNU EST ENREGISTRE COMME UN OBJET. Trouve le 02/09/2026 en
+retirant la cascade sur TypSpell de XpSortCout : la MEME liste fermee de six types sert
+encore a trois autres endroits de winpersonnage.
+ - l.4744, sauvegarde du personnage : une ligne dont le TypSpell n'est pas dans la liste
+   n'est pas marquee TypeEquipSp mais enregistree comme un EQUIPEMENT ordinaire - avec la
+   colonne 7 recopiee en qualite et un cout XP force a zero. Ce sont les 17 rituels de Winds of Magic. C'est le plus grave des
+   trois, il touche le fichier de personnage.
+ - l.761 et l.786 : le bouton Fabrication s'ouvre sur ces lignes, comme sur un objet.
+Depuis le 02/09 il existe de quoi trancher proprement : TalentSort(code).CodeTalent <> ''
+dit si une ligne est un sort, en interrogeant les donnees au lieu d'une liste ecrite en dur.
+
 =========================================================================
 CONCEPTIONS A MENER  (chantiers a part entiere, ne pas les melanger)
 =========================================================================
-
-LE MODE DE CALCUL DU COUT XP D'UN SORT DEVRAIT ETRE UNE DONNEE DU TALENT (idee de Nono,
-31/08/2026). Conception a part entiere, NE PAS la melanger a la saisie des sorts.
- Aujourd'hui tout est en dur dans XpSortCout (winpersonnage.pas, l.1063) : six branches sur
- TypSpell, avec les 100 et les 50 en litteral. Rien dans le XML ne porte de cout, le seul
- levier cote donnees est le TypSpell.
- POURQUOI L'IDEE EST BONNE : le TypSpell est deja entierement DEDUCTIBLE du <Talent> du sort
- - Minor Magic va toujours avec RULES-T0089, Domain Magic avec un RULES-T0088_<lore>,
- Miracle avec RULES-T0080_<dieu>, Blessing avec RULES-T0012_<dieu>. C'est une donnee
- redondante, et c'est precisement cette redondance qui a permis au "Ritual" du 29/08
- d'exister sans qu'aucun talent ne change.
- - preferer un MODE NOMME plus un multiplicateur (MODE_LORE + 100, MODE_MIRACLE + 100,
-   MODE_GRATUIT) plutot qu'une formule a interpreter : suffisant pour les six cas existants
- - NE PAS OUBLIER LE REGROUPEMENT, c'est la partie subtile : Arcane Magic et Domain Magic
-   PARTAGENT leur compteur de sorts connus. Ce pool est ecrit en dur dans le InList() de la
-   condition ; il doit devenir une donnee lui aussi, sinon la migration perd du prix en
-   silence et personne ne le voit
- - benefice attendu : un livre pourra apporter un nouveau mode de tarification sans toucher
-   au code, et le cas "type inconnu" disparait - un sort sans talent connu n'est pas
-   achetable, ce qui est un refus franc au lieu d'un cout faux
-
-QUE FAIRE DES 17 SORTS EN TypSpell "Ritual" de Winds of Magic ? Valeur que j'ai introduite le
-29/08/2026 sans verifier que le champ etait une enumeration fermee cote code. Depuis le
-31/08 leur cout vaut 0 de facon PREVISIBLE (CoutXp initialisee), mais ce 0 n'est pas une
-decision - c'est un repli. Soit les rebasculer sur un type existant, soit ajouter la branche
-manquante dans XpSortCout, soit attendre le chantier ci-dessus qui rend la question caduque.
 
 =========================================================================
 EN VRAC  (ancien, non trie)
