@@ -110,7 +110,12 @@ The Difficulty of the Test varies with your Yenlui State: Challenging (+0) when 
 <Skill>"RULES-COMPCOMB_2M"</Skill>
 <Max>"1"</Max>
 <PDF>""</PDF>
-<Test language="ENGLISH">"COMPCOMB_2M"</Test>
+  <!-- Vide, et c'est voulu : le livre ne donne AUCUNE ligne "Tests:" a Sword-dancing
+       (p.68, il n'a qu'un "Max: 1"). Ce champ portait "COMPCOMB_2M" depuis le lot 1, ce
+       qui etait une erreur de ma part : PTalent.Tests n'est pas un code mais de la PROSE,
+       affichee telle quelle par wintalent.pas et traduite comme un libelle. L'utilisateur
+       voyait donc un code brut. -->
+<Test language="ENGLISH">""</Test>
 </Talent>
 <Talent id="HELFG-T0188">
 <Attribut>""</Attribut>
@@ -3684,4 +3689,170 @@ You invoke a mystical prime language that existed before the arrival of the Old 
 <TypSpell>"Miracle"</TypSpell>
 </Sort>
 </DATA_SPELL>
+<DATA_ARMOR>
+  <!-- Les douze armures de l'Armoury of the High Elves (p.34). Ce sont de VRAIES
+       nouveautes : rien d'equivalent n'existe dans le corpus.
+       NOMS PREFIXES - "Ithilmar Breastplate" et non "Breastplate" - parce que le Rulebook a
+       deja une Breastplate, un Helm et des Plate Leggings : sans cela WinArmor afficherait
+       plusieurs lignes de meme nom sans moyen de les distinguer.
+       LES PENALITES SONT DES QUALITES, pas un champ : c'est ainsi que le Rulebook lui-meme
+       les porte. Son Helm est ARMOB_02,ARMOB_04,ARMOB_05,ARMOB_07 et son Open Helm
+       ARMOB_03,ARMOB_05,ARMOB_06 - les memes combinaisons sont reprises ici a l'identique.
+       Le -10 Furtivite de la note de bas de table (toutes les pieces d'Ithilmar et de Dragon)
+       est porte par ARMOB_05, "Not discreet".
+       DURABLE ET FINE NE SONT PAS ICI, et ce n'est pas un oubli : ce sont des qualites de
+       FABRICATION (DATA_CRAFTMANSHIP), posees par la fenetre Fabrication sur l'objet que
+       possede un personnage, jamais sur une entree de catalogue. Aucun <Quality> du corpus
+       ne contient de code QUALITY_. -->
+<Armor id="HELFG-ARMO_01">
+<Description language="ENGLISH">"Ithilmar Breastplate"</Description>
+<Availability>"DISPO_UNIQUE"</Availability>
+<Price>"1280 GC"</Price>
+<Encumbrance>"1"</Encumbrance>
+<Quality>"ARMOB_02,ARMOB_04,ARMOB_05"</Quality>
+<Location>"ARMOL_BODY"</Location>
+<ArmorPoint>"2"</ArmorPoint>
+<Type>"ARMOT_PLATE"</Type>
+</Armor>
+<Armor id="HELFG-ARMO_02">
+<Description language="ENGLISH">"Ithilmar Open Helm"</Description>
+<Availability>"DISPO_UNIQUE"</Availability>
+<Price>"256 GC"</Price>
+<Encumbrance>"0"</Encumbrance>
+<Quality>"ARMOB_03,ARMOB_05,ARMOB_06"</Quality>
+<Location>"ARMOL_HEAD"</Location>
+<ArmorPoint>"2"</ArmorPoint>
+<Type>"ARMOT_PLATE"</Type>
+</Armor>
+<Armor id="HELFG-ARMO_03">
+<Description language="ENGLISH">"Ithilmar Bracers"</Description>
+<Availability>"DISPO_UNIQUE"</Availability>
+<Price>"1024 GC"</Price>
+<Encumbrance>"1"</Encumbrance>
+<Quality>"ARMOB_02,ARMOB_04,ARMOB_05"</Quality>
+<Location>"ARMOL_ARM"</Location>
+<ArmorPoint>"2"</ArmorPoint>
+<Type>"ARMOT_PLATE"</Type>
+</Armor>
+<Armor id="HELFG-ARMO_04">
+<Description language="ENGLISH">"Ithilmar Plate Leggings"</Description>
+<Availability>"DISPO_UNIQUE"</Availability>
+<Price>"1280 GC"</Price>
+<Encumbrance>"1"</Encumbrance>
+<Quality>"ARMOB_02,ARMOB_04,ARMOB_05"</Quality>
+<Location>"ARMOL_LEG"</Location>
+<ArmorPoint>"2"</ArmorPoint>
+<Type>"ARMOT_PLATE"</Type>
+</Armor>
+<Armor id="HELFG-ARMO_05">
+<Description language="ENGLISH">"Ithilmar Helm"</Description>
+<Availability>"DISPO_UNIQUE"</Availability>
+<Price>"384 GC"</Price>
+<Encumbrance>"0"</Encumbrance>
+<Quality>"ARMOB_02,ARMOB_04,ARMOB_05,ARMOB_07"</Quality>
+<Location>"ARMOL_HEAD"</Location>
+<ArmorPoint>"2"</ArmorPoint>
+<Type>"ARMOT_PLATE"</Type>
+</Armor>
+  <!-- ERRATUM DU LIVRE : la case AP de cette ligne est VIDE p.34 - verifie sur l image de la
+       page, ce n est pas un defaut d extraction. Toutes les autres pieces valent 2, et le
+       Ithiltaen est le casque d argent des chevaliers Silver Helms, donc 2 est retenu.
+       C EST UNE DEDUCTION, pas une lecture : la remettre a 0 si Nono prefere la fidelite. -->
+<Armor id="HELFG-ARMO_06">
+<Description language="ENGLISH">"Ithiltaen Helm"</Description>
+<Availability>"DISPO_UNIQUE"</Availability>
+<Price>"1536 GC"</Price>
+<Encumbrance>"0"</Encumbrance>
+<Quality>"ARMOB_02,ARMOB_04,ARMOB_05,ARMOB_07"</Quality>
+<Location>"ARMOL_HEAD"</Location>
+<ArmorPoint>"2"</ArmorPoint>
+<Type>"ARMOT_PLATE"</Type>
+</Armor>
+<Armor id="HELFG-ARMO_07">
+<Description language="ENGLISH">"Dragon Armour Breastplate"</Description>
+<Availability>"DISPO_UNIQUE"</Availability>
+<Price>"10240 GC"</Price>
+<Encumbrance>"3"</Encumbrance>
+<Quality>"ARMOB_02,ARMOB_04,ARMOB_05"</Quality>
+<Location>"ARMOL_BODY"</Location>
+<ArmorPoint>"2"</ArmorPoint>
+<Type>"ARMOT_PLATE"</Type>
+</Armor>
+<Armor id="HELFG-ARMO_08">
+<Description language="ENGLISH">"Dragon Armour Open Helm"</Description>
+<Availability>"DISPO_UNIQUE"</Availability>
+<Price>"2048 GC"</Price>
+<Encumbrance>"1"</Encumbrance>
+<Quality>"ARMOB_03,ARMOB_05,ARMOB_06"</Quality>
+<Location>"ARMOL_HEAD"</Location>
+<ArmorPoint>"2"</ArmorPoint>
+<Type>"ARMOT_PLATE"</Type>
+</Armor>
+<Armor id="HELFG-ARMO_09">
+<Description language="ENGLISH">"Dragon Armour Bracers"</Description>
+<Availability>"DISPO_UNIQUE"</Availability>
+<Price>"8192 GC"</Price>
+<Encumbrance>"3"</Encumbrance>
+<Quality>"ARMOB_02,ARMOB_04,ARMOB_05"</Quality>
+<Location>"ARMOL_ARM"</Location>
+<ArmorPoint>"2"</ArmorPoint>
+<Type>"ARMOT_PLATE"</Type>
+</Armor>
+<Armor id="HELFG-ARMO_10">
+<Description language="ENGLISH">"Dragon Armour Plate Leggings"</Description>
+<Availability>"DISPO_UNIQUE"</Availability>
+<Price>"10240 GC"</Price>
+<Encumbrance>"3"</Encumbrance>
+<Quality>"ARMOB_02,ARMOB_04,ARMOB_05"</Quality>
+<Location>"ARMOL_LEG"</Location>
+<ArmorPoint>"2"</ArmorPoint>
+<Type>"ARMOT_PLATE"</Type>
+</Armor>
+<Armor id="HELFG-ARMO_11">
+<Description language="ENGLISH">"Dragon Armour Helm"</Description>
+<Availability>"DISPO_UNIQUE"</Availability>
+<Price>"3072 GC"</Price>
+<Encumbrance>"2"</Encumbrance>
+<Quality>"ARMOB_02,ARMOB_04,ARMOB_05,ARMOB_07"</Quality>
+<Location>"ARMOL_HEAD"</Location>
+<ArmorPoint>"2"</ArmorPoint>
+<Type>"ARMOT_PLATE"</Type>
+</Armor>
+  <!-- Le livre ne lui donne aucune penalite de Furtivite : pas de ARMOB_05, contrairement aux
+       pieces d Ithilmar et de Dragon. Type cuir souple, faute de categorie 'peau'. -->
+<Armor id="HELFG-ARMO_12">
+<Description language="ENGLISH">"White Lion Hide Cloak"</Description>
+<Availability>"DISPO_EXOTIC"</Availability>
+<Price>"20 GC"</Price>
+<Encumbrance>"2"</Encumbrance>
+<Quality>"ARMOB_03"</Quality>
+<Location>"ARMOL_BODY"</Location>
+<ArmorPoint>"2"</ArmorPoint>
+<Type>"ARMOT_SOFTLEATHER"</Type>
+</Armor>
+</DATA_ARMOR>
+<DATA_WEAPON>
+  <!-- Le Greatsword of Hoeth (p.33). Seule arme du chapitre qui soit une nouveaute : les
+       sept autres sont les armes courantes du Rulebook vendues au marche elfique, et ce que
+       le marche leur ajoute - "at least one level each of the Durable and Fine Qualities",
+       p.32 - est une regle de marche que la fenetre Fabrication porte deja. Les modeliser
+       aurait cree des doublons ne differant que par leur prix.
+       Portee Long = WEAPR_LONG, comme la Grande Hache et l'Epee Batarde du Rulebook, qui ont
+       la meme portee et les memes degats. -->
+<Weapon id="HELFG-COMB_2M_01">
+<Description language="ENGLISH">"Greatsword of Hoeth"</Description>
+<Skill>"RULES-COMPCOMB_2M"</Skill>
+<Damage>"+(BATTR_S)+6"</Damage>
+<Availability>"DISPO_UNIQUE"</Availability>
+<Reach>"WEAPR_LONG"</Reach>
+<Price>"2000 GC"</Price>
+<Encumbrance>"2"</Encumbrance>
+<Quality>"WEAPB10,WEAPB30"</Quality>
+<Hand>"2"</Hand>
+<Ammunition>"0"</Ammunition>
+</Weapon>
+  <!-- Requise par le sword-dancing : le talent HELFG-T0187, ecrit au lot 1, exige cette
+       arme, qui n'existait pas jusqu'ici. Le livre le dit p.33 : "they are, however,
+       required in order to use sword-dancing techniques". -->
+</DATA_WEAPON>
 </DATA_BOOK>

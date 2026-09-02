@@ -2,19 +2,18 @@
        WARHAMMER
 -------------------------
 
+=========================================================================
+CORRECTIONS COURTES  (une ligne ou deux chacune)
+=========================================================================
+
 RETIRER LE REPLI SUR L'ANCIEN NOM D'IMAGE (chargemetier, chargerace, chargesort). Les trois
 fonctions essaient le code complet puis retombent sur le nom court. Ce repli a servi a
 decoupler le renommage des fichiers de la modification du code ; maintenant que les 200
 fichiers sont renommes, il ne protege plus rien et masquerait un oubli de renommage futur.
 
-DECIDER DU SORT DE DATABASE\PICTURES\SPELL\T0080_MAW.png : aucun talent ne lui correspond,
-celui de la Grande Gueule etant RULES-T0088_MAW dont l'image existe deja. Supprimer ou
-renommer - Nono seul peut supprimer.
-
-HIGH ELF PLAYER'S GUIDE : TERMINE LE 31/08/2026, les trois lots. Reste du livre, hors magie :
- - inventaire de "Adapting Careers" p.60-62
- - l'armurerie et les objets elfiques
- - le detail de la section Sea Elf
+=========================================================================
+CONCEPTIONS A MENER  (chantiers a part entiere, ne pas les melanger)
+=========================================================================
 
 LE MODE DE CALCUL DU COUT XP D'UN SORT DEVRAIT ETRE UNE DONNEE DU TALENT (idee de Nono,
 31/08/2026). Conception a part entiere, NE PAS la melanger a la saisie des sorts.
@@ -42,20 +41,9 @@ QUE FAIRE DES 17 SORTS EN TypSpell "Ritual" de Winds of Magic ? Valeur que j'ai 
 decision - c'est un repli. Soit les rebasculer sur un type existant, soit ajouter la branche
 manquante dans XpSortCout, soit attendre le chantier ci-dessus qui rend la question caduque.
 
-BUG QUE J'AI INTRODUIT AU LOT 1, SIGNALE NON CORRIGE : HELFG-T0187 (Sword-dancing) a
-<Test>"COMPCOMB_2M"</Test>. Or PTalent.Tests n'est pas un code : wintalent.pas l'affiche tel
-quel dans une cellule, et xmlexportimport le traite comme un libelle traduisible. Partout
-ailleurs le corpus y met de la prose. Cette entree affiche donc un code brut a l'utilisateur.
-Correction d'une ligne, en attente de l'accord de Nono.
-
-
-BUG SIGNALE NON CORRIGE : ChercheMaxMetierNiveau compare les codes avec = strict alors que
-sa voisine ChercheMetierNiveau utilise CompareRechercheValeur. ChercheMinMetierNiveau a ete
-alignee sur la premiere pour que les deux bornes se calculent pareil. A traiter sur les
-TROIS en meme temps, jamais sur une seule.
-
-BUG SIGNALE NON CORRIGE : VerifieRaceMetier renvoie toujours faux si MetierActuel est vide.
-Elle ne repond pas a la question que son nom suggere. Soit la renommer, soit la corriger.
+=========================================================================
+EN VRAC  (ancien, non trie)
+=========================================================================
 
 le 100 points de la création des attributs
  - T0070 : haine sacrée : miracle + 1 dégât
@@ -601,87 +589,6 @@ Ils dependent des memes talents que les quatre carrieres, donc ils viennent apre
     p.56-57 ne sont pas saisies.
   * DATA_RANDOM_SPECIE n a pas ete touche : les onze ethnies s obtiennent par choix, pas
     par tirage d espece. A revoir si Nono veut le contraire.
-
-=========================================================================
-BUG TROUVE LE 30/08 : TypSpell EST UNE ENUMERATION FERMEE, ET "Ritual" N Y EST PAS
-=========================================================================
-NON CORRIGE. Trouve en cherchant quel TypSpell donner aux sorts de Haute Magie.
-
-Le champ TypSpell n est PAS un libelle libre. chargeconstantes.pas l.498-503 declare six
-valeurs et six seulement :
-     TypeSortBenediction = 'Blessing'      TypeSortArcane  = 'Arcane Magic'
-     TypeSortMiracle     = 'Miracle'       TypeSortCouleur = 'Domain Magic'
-     TypeSortMineur      = 'Minor Magic'   TypeSortChaos   = 'Chaos Magic'
-Or la base contient 17 sorts en TypSpell "Ritual" - les rituels de Winds of Magic saisis le
-29/08. "Ritual" n apparait NULLE PART dans le code Pascal. Deux consequences concretes :
-
- 1. XpSortCout (winpersonnage.pas l.1024) calcule le cout en XP par une cascade de tests
-    sur les six valeurs. Un "Ritual" n en satisfait aucune, donc AUCUNE BRANCHE N AFFECTE
-    CoutXp - et CoutXp est declaree "CoutXp: Integer;" SANS INITIALISEUR, contrairement aux
-    cinq autres locales de la fonction qui portent toutes "= 0". La valeur retournee est
-    donc indeterminee, pas nulle.
- 2. ButtonFabricationClick (winpersonnage.pas l.732) ouvre la fenetre de FABRICATION quand
-    la ligne selectionnee n est PAS un sort, le test etant "not InList(cellule, les six
-    valeurs)". Une ligne de rituel passe ce test : le programme la prend pour un objet et
-    propose de la fabriquer.
-
-A VERIFIER PAR NONO sur un personnage portant un rituel, puis a arbitrer : soit "Ritual"
-et "High Magic" rejoignent l enumeration et les cascades (code), soit les rituels
-retombent sur une valeur existante (donnee). Les deux endroits ci-dessus ne sont peut-etre
-pas les seuls : chercher toutes les occurrences de TypeSort dans winpersonnage.pas.
-
-=========================================================================
-BUG A SIGNALER : LE PDF DE PLUSIEURS METIERS PREND LES ICONES DU PREMIER
-=========================================================================
-pdfmetier.pas, PdfMetierDoc : la procedure recoit une LISTE de metiers, mais elle ne
-construit PdfImgNv et ColorList qu une fois, pour Strings[0] - le premier de la liste -
-avant d appeler PdfMetierPage pour chacun. Les metiers suivants dessinent donc avec les
-images et les couleurs du premier.
-Sans consequence tant que tous les metiers partageaient les memes icones generiques. Le
-devient depuis que le dossier d icones depend du livre : un PDF melant une carriere elfique
-et une carriere du Rulebook donnerait les glyphes elfiques aux deux, et le nombre de
-niveaux du premier metier borne aussi ColorList pour les suivants.
-NON CORRIGE - repere le 31/08 en cablant les icones par livre dans le PDF. La correction
-demande de deplacer la construction des images dans PdfMetierPage, ou de la refaire a
-chaque metier.
-
-=========================================================================
-TROIS FICHIERS A SUPPRIMER DANS PICTURES\NIV\
-=========================================================================
-5.png, 6.png et 7.png ne servent plus a rien : les pastilles d etat ont ete deplacees a
-20, 21 et 22 le 31/08. Plus rien ne les reference.
-Ils deviendront NUISIBLES des le lot 2 : le niveau 5 du Mage irait chercher 5.png et
-afficherait la pastille rouge. Deux facons de fermer le point :
-  - les supprimer, et le niveau 5 tombera sur l image neutre grise du chargeur tolerant ;
-  - ou remplacer 5.png par une VRAIE icone de niveau 5, ce qui reglera du meme coup le
-    point de l icone manquante.
-A LA MAIN DE NONO : la passerelle ne permet pas de supprimer un fichier sur son poste.
-
-=========================================================================
-BUG A SIGNALER : ChercheMetierNiveau NE REMET PAS Result A ZERO
-=========================================================================
-chargemetierniveau.pas, fonction ChercheMetierNiveau : si le couple metier/niveau demande
-n existe pas, aucune affectation n a lieu et la fonction renvoie le contenu indetermine de
-Result - en pratique souvent le resultat de l appel precedent. C est exactement la famille
-de bug du chantier 2.17, ou les autres fonctions Cherche* ont ete corrigees ; celle-ci a
-ete oubliee. Sa voisine ChercheMaxMetierNiveau, elle, est saine.
-NON CORRIGE - repere le 30/08 en ajoutant MaxNiveauMetier dans la meme unite.
-
-=========================================================================
-ICONES DE NIVEAU PAR LIVRE - CE QUI RESTE
-=========================================================================
-Chantier clos et valide par Nono. Conception, ordre de resolution, pieges rencontres et
-tests de validation sont dans CONTEXT.md section 2.21.
-
-  * RESTE, NON BLOQUANT : pdfmetier.pas l.92, 250 et 285 chargent encore l icone de niveau
-    en dur. Le PDF de metier connait le metier, donc CheminNiveauImageMetier s applique
-    directement. Les icones de CLASSE (winmetier l.835, pdfmetier l.179) ne sont PAS
-    concernees.
-  * A INVENTORIER UN JOUR, AU CALME : les VARIABLES GLOBALES D UNITE portant le meme nom
-    d une fenetre a l autre - Node, Bitmap, Path, ListImage, TextWidth, FrameRect,
-    ColorLoc... Tant que toutes les fenetres s en servent pour la meme chose au meme
-    moment ca tient ; des qu une donnee devient contextuelle ca casse, c est exactement ce
-    qui est arrive a WinCreation le 30/08.
 
 =========================================================================
 LIVRES NON ENCORE INTEGRES - INVENTAIRE DU 29/08

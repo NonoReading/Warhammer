@@ -21,7 +21,7 @@ Var
   ListRaceMetier:   TListRaceMetier;
   NbRaceMetier:     Integer;
 
-Function VerifieRaceMetier(RaceChoisie: String; MetierActuel: String; MetierAVerifier:String):Boolean;
+Function VerifieRaceMetier(RaceChoisie: String; MetierAVerifier: String):Boolean;
 Function MetierRaceCourt(MetierActuel: String):String;
 Function MetierRaceNbSuivant(RaceEnCours:String; MetierEnCours: String):Integer;
 Procedure CompleteRaceMetierParEspece;
@@ -195,7 +195,19 @@ Procedure CompleteRaceMetierParEspece;
     end;
   end;
 
-Function VerifieRaceMetier(RaceChoisie: String; MetierActuel: String; MetierAVerifier:String):Boolean;
+// Cette ethnie peut-elle prendre ce metier ? C'est ce que le nom promet, et c'est desormais
+// ce que la fonction fait.
+//
+// AVANT LE 01/09/2026 elle prenait un troisieme parametre, MetierActuel, et sa condition
+// etait "(MetierActuel <> '') and (MetierActuel <> PRaceMetier.CodeMetier)" : elle renvoyait
+// donc TOUJOURS FAUX si on lui passait une chaine vide. Son unique appelant lui passait '.',
+// une valeur bidon choisie pour n'etre egale a aucun code - le contrat etait deja contourne
+// au point d'appel. Le parametre a ete supprime et l'appelant nettoye.
+//
+// Piege bien reel : en ecrivant la liste de bifurcation des carrieres avancees
+// (CONTEXT.md 2.24) j'allais m'en servir pour filtrer par ethnie ; elle aurait repondu faux
+// partout, et le filtre n'aurait rien laisse passer.
+Function VerifieRaceMetier(RaceChoisie: String; MetierAVerifier: String):Boolean;
   var
     PRaceMetier: StructureRaceMEtier;
     Trouve:      Boolean = false;
@@ -203,8 +215,9 @@ Function VerifieRaceMetier(RaceChoisie: String; MetierActuel: String; MetierAVer
     For PRaceMetier in ListRaceMetier do
       if CompareRechercheValeur(PRaceMetier.CodeRace, RaceChoisie) and CompareRechercheValeur(PRaceMetier.CodeMetier, MetierAVerifier) then
         begin
-          if (MEtierActuel <> '') and (MetierActuel <> PRaceMetier.CodeMetier) then
-            Trouve := True;
+          // Un 'X' compte : il veut dire "eligible hors tirage". Seul SeparateurChance,
+          // qui signifie explicitement indisponible, exclut.
+          Trouve := (PRaceMetier.Chance <> SeparateurChance);
           break;
         end;
     Result := Trouve;

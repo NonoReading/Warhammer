@@ -34,6 +34,10 @@ function ChercheMetierNiveau(CodeMetier :String; NiveauMetier: Integer): Structu
 var
   PMetierNiveau:        StructureMetierNiveau;
 Begin
+  // Sans cette ligne, un couple metier/niveau introuvable renvoyait le contenu INDETERMINE
+  // de Result - en pratique le resultat de l'appel precedent. C'est la famille de bug du
+  // chantier 2.17, ou les autres Cherche* ont ete corrigees ; celle-ci avait ete oubliee.
+  Result := Default(StructureMetierNiveau);
   For PMetierNiveau in ListMetierNiveau do
     if (CompareRechercheValeur(PMetierNiveau.CodeMetier, CodeMetier) = True) and (PMetierNiveau.NiveauMetier = NiveauMetier) then
       begin
@@ -47,8 +51,12 @@ var
   PMetierNiveau:        StructureMetierNiveau;
   MaxNiveau:            Integer = 0;
 Begin
+  // CompareRechercheValeur et non '=' : le '=' strict ignorait le prefixe de livre, alors
+  // que TOUTES les autres lectures d'un code metier dans le programme sont tolerantes.
+  // Aligne le 01/09/2026 sur les trois fonctions de l'unite EN MEME TEMPS - les traiter
+  // separement aurait fait diverger les deux bornes d'une meme carriere.
   For PMetierNiveau in ListMetierNiveau do
-    if (PMetierNiveau.CodeMetier = CodeMetier) and (PMetierNiveau.NiveauMetier > MaxNiveau) then
+    if CompareRechercheValeur(PMetierNiveau.CodeMetier, CodeMetier) and (PMetierNiveau.NiveauMetier > MaxNiveau) then
       MaxNiveau := PMetierNiveau.NiveauMetier;
   Result := MaxNiveau;
 end;
@@ -66,17 +74,15 @@ end;
 // 0 = carriere absente de la liste. Les appelants doivent traiter ce cas AVANT de comparer,
 // sinon un metier inconnu passerait pour accessible au niveau 0.
 //
-// La comparaison est le '=' strict de ChercheMaxMetierNiveau ci-dessus, volontairement :
-// les deux bornes d'une meme carriere doivent se calculer de la meme facon. Le fait que ce
-// '=' soit plus strict que le CompareRechercheValeur de ChercheMetierNiveau est un ecart
-// signale, a traiter sur les DEUX fonctions en meme temps le jour ou on s'en occupe.
+// Comme sa jumelle ChercheMaxMetierNiveau, elle compare avec CompareRechercheValeur : les
+// deux bornes d'une meme carriere doivent se calculer de la meme facon.
 function ChercheMinMetierNiveau(CodeMetier :String): Integer;
 var
   PMetierNiveau:        StructureMetierNiveau;
   MinNiveau:            Integer = 0;
 Begin
   For PMetierNiveau in ListMetierNiveau do
-    if (PMetierNiveau.CodeMetier = CodeMetier) and
+    if CompareRechercheValeur(PMetierNiveau.CodeMetier, CodeMetier) and
        ((MinNiveau = 0) or (PMetierNiveau.NiveauMetier < MinNiveau)) then
       MinNiveau := PMetierNiveau.NiveauMetier;
   Result := MinNiveau;

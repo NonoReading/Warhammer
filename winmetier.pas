@@ -309,7 +309,7 @@ begin
     for PMEtier in ListMetier do
       begin
         Accord := true;
-        if (SelectWinMetierRace <> '') and not VerifieRaceMetier(SelectWinMetierRace, '.', PMetier.CodeMetier) then
+        if (SelectWinMetierRace <> '') and not VerifieRaceMetier(SelectWinMetierRace, PMetier.CodeMetier) then
           Accord := false;
         if (SelectWinMetier <> '') and (pos(SeparateurMulti + PMetier.CodeMetier + SeparateurMulti, LocSel) = 0) then
           Accord := false;

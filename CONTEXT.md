@@ -3081,6 +3081,94 @@ plus tenu dès qu'on traverse deux ethnies.
 
 **Testé par Nono le 31/08/2026**, dans la foulée de l'écriture.
 
+### 2.29 L'armurerie elfique — terminé (01/09/2026). Le livre est intégralement traité.
+
+**13 objets** : les 12 armures de la page 34 (Ithilmar ×6, Dragon ×5, White Lion Hide Cloak)
+et le **Greatsword of Hoeth**, qui ferme le trou du sword-dancing — `HELFG-T0187` exigeait
+depuis le lot 1 une arme qui n'existait nulle part.
+
+#### Ce que le chapitre contenait, et ce qui a été écarté
+
+Sur la trentaine d'objets du chapitre, seuls 13 étaient modélisables, et c'est le **modèle**
+qui a tranché, pas une préférence :
+
+- **Les 7 armes elfiques courantes n'ont pas été écrites.** Ce ne sont pas de nouvelles armes :
+  le livre pose une **règle de marché** (p.32) — *« items purchased from Elven markets will
+  always have at least one level each of the Durable and Fine Qualities »*. Or `Durable` et
+  `Fine` sont des qualités de **fabrication** (`DATA_CRAFTMANSHIP`), que la fenêtre Fabrication
+  pose déjà sur l'objet d'un personnage. ⚠️ **Aucun `<Quality>` du corpus ne contient jamais un
+  code `QUALITY_`** — vérifié sur tous les fichiers. Les modéliser aurait créé sept doublons ne
+  différant que par leur prix.
+- **Les 4 herbes, les 6 objets enchantés et les 10 révisions de prix n'ont nulle part où
+  aller** : ⚠️ **il n'existe aucun catalogue d'objets**. Ni Lantern, ni Rope, ni Backpack, ni
+  Healing Draught dans le Rulebook — seules les armes et les armures ont une table.
+
+#### Les pénalités sont des qualités, pas un champ
+
+`DATA_ARMOR` n'a pas de champ de pénalité : `-10 Perception` est `ARMOB_06` (*Narrow the view*),
+`-20 Perception` est `ARMOB_07` (*Blocks the view*), `-10 Stealth` est `ARMOB_05` (*Not
+discreet*). Les combinaisons reprises ici sont **exactement celles du Rulebook** — son Helm est
+`ARMOB_02,ARMOB_04,ARMOB_05,ARMOB_07`, son Open Helm `ARMOB_03,ARMOB_05,ARMOB_06`.
+
+Les **niveaux** s'écrivent dans le même champ, séparés par une espace : le bouclier du livre de
+base porte `WEAPB18 2`.
+
+#### `DISPO_UNIQUE`, un ajout de vocabulaire vérifié avant d'être fait
+
+Le livre marque les 13 objets en *Unique*, disponibilité qui n'existait pas. Contrôlé que
+`Disponibilite` ne passe **que** par `GetAllTexteLibelle` et ne fait l'objet d'**aucun
+branchement dans le code** — c'est un vocabulaire **ouvert**, contrairement au `TypSpell`.
+Le libellé est déclaré dans les deux Rulebook.
+
+#### Noms préfixés
+
+« Ithilmar Breastplate », pas « Breastplate » : le Rulebook a déjà une Breastplate, un Helm et
+des Plate Leggings, et WinArmor afficherait sinon plusieurs lignes de même nom. Le contrôle
+vérifie qu'aucun libellé ne collisionne avec ceux du livre de base.
+
+#### Erratum du livre
+
+⚠️ **La case AP de l'Ithiltaen Helm est vide** page 34 — vérifié sur l'image, ce n'est pas
+l'extraction. Mis à **2**, comme toutes les autres pièces et comme le Helm dont il dérive.
+**C'est une déduction, pas une lecture**, signalée en commentaire dans le fichier.
+
+#### Section Sea Elf : déjà faite
+
+L'item du `A FAIRE` était périmé. `HELFG-RACE_SEAEL`, écrit au lot 3, correspond exactement à
+la page 57 — les douze compétences, les six talents dont les deux choix combinés et
+`HELFG-T0188`. Le reste de la section est du contexte et deux choix laissés au joueur.
+
+### 2.30 Les cinq bugs signalés — corrigés (01/09/2026)
+
+Cinq défauts accumulés et volontairement laissés en l'état à mesure qu'ils étaient trouvés,
+traités d'un coup sur décision de Nono. **Aucun n'était une régression** : quatre dataient
+d'avant les chantiers de la semaine, le cinquième était mon erreur du lot 1.
+
+1. **`HELFG-T0187`, données.** Le champ `<Test>` portait `"COMPCOMB_2M"`, un code, alors que
+   `PTalent.Tests` est de la **prose** affichée telle quelle par `wintalent.pas`. Vérification
+   faite en corrigeant : le livre ne donne **aucune** ligne `Tests:` à Sword-dancing (p.68,
+   il n'a qu'un `Max: 1`). La valeur était donc fausse deux fois — comme code *et* comme
+   contenu. Champ remis à vide.
+2. **`chargemetierniveau.pas`** — `ChercheMaxMetierNiveau` comparait les codes avec `=`
+   strict. Les **trois** fonctions de l'unité passent à `CompareRechercheValeur` ensemble ;
+   les traiter séparément aurait fait diverger les deux bornes d'une même carrière.
+3. **`VerifieRaceMetier` répond enfin à la question que son nom pose.** ⚠️ Son paramètre
+   `MetierActuel` la faisait renvoyer **toujours faux** sur une chaîne vide, et son unique
+   appelant lui passait `'.'` — une valeur bidon choisie pour n'être égale à aucun code. Le
+   contrat était donc déjà contourné au point d'appel. Paramètre **supprimé**, appelant
+   nettoyé. Ce piège avait été évité de justesse en écrivant la liste de bifurcation (§2.24).
+4. **`PdfMetierDoc` ne construisait les icônes qu'une fois**, pour le premier métier de la
+   liste : les suivants dessinaient avec ses images, ses couleurs **et son nombre de
+   niveaux**. Sans conséquence tant que tout le monde partageait les icônes génériques, réel
+   depuis §2.21. La construction est passée dans `PdfMetierPage`, donc refaite par page.
+   ⚠️ Les indices restent comptés depuis 1 (`PdfImgNv[Nv-1]`) même pour un métier commençant
+   au niveau 3 ; seules les boucles de **dessin** partent de `NvMinMetier`. Une même icône
+   sur deux pages est stockée deux fois par `PdfDoc.Images` — le prix d'une image juste.
+   **Validé par Nono** en imprimant les académiciens hauts elfes : deux styles d'icônes sur
+   la même impression.
+5. **`ChercheMetierNiveau`** ne remettait pas `Result` à zéro et renvoyait le résultat de
+   l'appel précédent. Dernière `Cherche*` oubliée par le chantier §2.17.
+
 ## 3. TODO / Backlog
 
 Le backlog complet (tout ce qui n'est pas encore commencé) vit dans `A FAIRE.txt`

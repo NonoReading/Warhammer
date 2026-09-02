@@ -141,6 +141,7 @@
 <Text name="RULES-DISPO_EXOTIC">"Exotic"</Text>
 <Text name="RULES-DISPO_LIMITED">"Limit"</Text>
 <Text name="RULES-DISPO_RARE">"Rare"</Text>
+<Text name="RULES-DISPO_UNIQUE">"Unique"</Text>
 <Text name="RULES-WEAPR_BIG">"Very long"</Text>
 <Text name="RULES-WEAPR_CLOSE">"Very short"</Text>
 <Text name="RULES-WEAPR_HUGE">"Considerable"</Text>

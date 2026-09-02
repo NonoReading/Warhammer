@@ -51,7 +51,6 @@ var
   Strings:            TStringList;
   PMetier:            StructureMetier;
   IndL:               Integer;
-  CheminIcone:        String;
 begin
   strings          := TStringList.Create;
   ExtractStrings([SeparateurMulti], [], PChar(ListeMetier), strings);
@@ -83,26 +82,6 @@ begin
   PdfFontBold      := PdfDoc.AddFont(GetCurrentDir+ConstCheminImagePolice+'CaslonAntique-Bold.ttf', ConstPoliceCarlson+ConstPoliceGras);
   PdfFontValue     := PdfDoc.AddFont(GetCurrentDir+ConstCheminImagePolice+'CaslonAntique.ttf', ConstPoliceCarlson);
   PdfFontItalique  := PdfDoc.AddFont(GetCurrentDir+ConstCheminImagePolice+'CaslonAntique-Italic.ttf', ConstPoliceCarlson+ConstPoliceItalique);
-
-  // couleur et image
-  ColorList        := [];
-  PdfImgNv         := [];
-  // Dimensionne sur le nombre de niveaux DE CE METIER, et non sur un 5 fige : la boucle
-  // juste dessous allait deja jusqu'a ChercheMaxMetierNiveau, donc elle ecrivait hors
-  // bornes des le premier metier a cinq niveaux.
-  SetLength(ColorList, ChercheMaxMetierNiveau(PMetier.CodeMetier) + 1);
-  For IndL := 1 to ChercheMaxMetierNiveau(PMetier.CodeMetier) do
-    begin
-      // Le dossier d'icones peut etre propre au livre du metier, comme dans WinMetier.
-      CheminIcone := CheminNiveauImageMetier(PMetier.CodeMetier, IndL);
-      // Icone absente : on garde la place avec -1 plutot que d'echouer, et les dessins
-      // testent ce -1. Un niveau peut ne pas avoir d'image.
-      if FileExists(CheminIcone) then
-        PdfImgNv += [PdfDoc.Images.AddFromFile(CheminIcone,false)]
-      else
-        PdfImgNv += [-1];
-      ColorList[IndL] := ChargeImageArrayColorFichier(CheminIcone);
-    end;
 
   For IndL := 0 to strings.count-1 do
     begin
@@ -164,6 +143,8 @@ var
   // se confondaient tant que toute carriere commencait au niveau 1 ; ce n'est plus vrai.
   NbNiveauMetier:     Integer = 0;
   NvMinMetier:        Integer = 1;
+  IndL:               Integer;
+  CheminIcone:        String;
   DernierTalent:      Integer = 0;
   TotalEquip:         Integer = 0;
   TotalTalent:        Integer = 0;
@@ -200,6 +181,36 @@ begin
   NbNiveauMetier := ChercheMaxMetierNiveau(MetierEnCours) - NvMinMetier + 1;
   if NbNiveauMetier < 1 then
     NbNiveauMetier := 1;
+
+  // ICONES ET COULEURS DE CE METIER, reconstruites A CHAQUE PAGE.
+  //
+  // Elles etaient construites UNE SEULE FOIS dans PdfMetierDoc, pour le PREMIER metier de la
+  // liste : tous les suivants dessinaient donc avec ses images, ses couleurs et son nombre de
+  // niveaux. Sans consequence tant que tout le monde partageait les icones generiques ; le
+  // devenu depuis que le dossier depend du livre - un PDF melant une carriere elfique et une
+  // du Rulebook donnait les glyphes elfiques aux deux. Signale le 31/08/2026, corrige le
+  // 01/09 sur demande de Nono, qui note qu'on ne le voit qu'en lancant plusieurs metiers.
+  //
+  // Les indices restent comptes depuis 1 - PdfImgNv[Nv-1] - meme quand le metier commence
+  // au niveau 3 : seules les boucles de DESSIN partent de NvMinMetier.
+  //
+  // Cote taille du fichier : une meme icone ajoutee a deux pages est stockee deux fois par
+  // PdfDoc.Images. C'est le prix d'une image juste, et il ne se paie que sur un PDF
+  // multi-metiers.
+  ColorList := [];
+  PdfImgNv  := [];
+  SetLength(ColorList, ChercheMaxMetierNiveau(MetierEnCours) + 1);
+  For IndL := 1 to ChercheMaxMetierNiveau(MetierEnCours) do
+    begin
+      CheminIcone := CheminNiveauImageMetier(MetierEnCours, IndL);
+      // Icone absente : on garde la place avec -1 plutot que d'echouer, et les dessins
+      // testent ce -1. Un niveau peut ne pas avoir d'image.
+      if FileExists(CheminIcone) then
+        PdfImgNv += [PdfDoc.Images.AddFromFile(CheminIcone,false)]
+      else
+        PdfImgNv += [-1];
+      ColorList[IndL] := ChargeImageArrayColorFichier(CheminIcone);
+    end;
 
   ListPage       := TStringList.Create;
 
