@@ -758,7 +758,9 @@ end;
 procedure TWinPersonnages.ButtonFabricationClick(Sender: TObject);
   begin
     if (TabEquipement.Row > 0)
-      and not InList(TabEquipement.Cells[3, TabEquipement.Row],TypeSortBenediction+','+TypeSortMiracle+','+TypeSortMineur+','+TypeSortCouleur+','+TypeSortArcane+','+TypeSortChaos) then
+            // Une ligne qui cite un talent est un sort : pas de fabrication dessus.
+      // Remplace la liste fermee des six TypSpell, qui laissait passer les rituels.
+      and (TalentSort(TabEquipement.Cells[2, TabEquipement.Row]).CodeTalent = '') then
         begin
           SelectWinFabrication     := TabEquipement.Cells[7,TabEquipement.row];
           FenFabrication           := TWinFabrications.Create(Application);
@@ -783,7 +785,9 @@ procedure TWinPersonnages.ButtonDeleteClick(Sender: TObject);
     i:        Integer;
   begin
     if (TabEquipement.Row > 0)
-      and not InList(TabEquipement.Cells[3, TabEquipement.Row],TypeSortBenediction+','+TypeSortMiracle+','+TypeSortMineur+','+TypeSortCouleur+','+TypeSortArcane+','+TypeSortChaos) then
+      // Une ligne qui cite un talent est un sort : il se retire par son ecran, pas ici.
+      // Remplace la liste fermee des six TypSpell, qui laissait passer les rituels.
+      and (TalentSort(TabEquipement.Cells[2, TabEquipement.Row]).CodeTalent = '') then
         begin
           Reponse := MessageDlg(GetTexteLibelle('MESS_039'), mtConfirmation, mbYesNo, 0);
           if Reponse = mrYes then
@@ -4741,12 +4745,7 @@ Procedure TWinPersonnages.MajTables();
     for Ind := 1 to TabEquipement.RowCount - 1 do
       begin
         PersonnageEquipement.CodeEquipement := TabEquipement.Cells[2, Ind];
-        If (TabEquipement.Cells[3, Ind] = TypeSortArcane)
-             or (TabEquipement.Cells[3, Ind] = TypeSortBenediction)
-             or (TabEquipement.Cells[3, Ind] = TypeSortChaos)
-             or (TabEquipement.Cells[3, Ind] = TypeSortCouleur)
-             or (TabEquipement.Cells[3, Ind] = TypeSortMineur)
-             or (TabEquipement.Cells[3, Ind] = TypeSortMiracle)
+        If TalentSort(TabEquipement.Cells[2, Ind]).CodeTalent <> ''
            then
           begin
             PersonnageEquipement.TypeEquipement    := TypeEquipSp;

@@ -270,9 +270,9 @@ object WinPersonnages: TWinPersonnages
     Height = 368
     Top = 128
     Width = 665
-    ActivePage = TabSheetAttribut
+    ActivePage = TabSheetEvolution
     Anchors = [akTop, akLeft, akRight]
-    TabIndex = 0
+    TabIndex = 4
     TabOrder = 10
     OnChange = PageExperienceChange
     object TabSheetAttribut: TTabSheet
@@ -653,6 +653,17 @@ object WinPersonnages: TWinPersonnages
         TabOrder = 6
         OnDrawCell = TabDrawCell
         OnSelectEditor = TabAttributSelectEditor
+      end
+      object ComboBoxNvMetier: TComboBox
+        Left = 8
+        Height = 28
+        Top = 104
+        Width = 256
+        ItemHeight = 20
+        Style = csDropDownList
+        TabOrder = 7
+        Visible = False
+        OnChange = ComboBoxNvMetierChange
       end
     end
     object TabSheetHistorique: TTabSheet

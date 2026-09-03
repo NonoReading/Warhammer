@@ -15,7 +15,8 @@ uses
   WinMetier, UnitEquipement, WinWeapon, WinArmor, ChargeArmureSimplifie,
   ChargeSort, WinSpell, ChargeTexte, winFabrication, ChargeFabrication,
   WinTalent, WinCompetence, WinSpecialisation, ChargePersonnage,
-  ChargeMetierCompetence, PdfPersonnage, Types, WinMutation, ChargeCorruptionTable;
+  ChargeMetierCompetence, PdfPersonnage, Types, WinMutation, ChargeCorruptionTable,
+  ChargeRaceMetier;
 type
 
   { TWinPersonnages }
@@ -24,6 +25,7 @@ type
     ButtonCorruptionAjoute: TBCButton;
     ButtonCorruptionSupprime: TBCButton;
     ButtonCorruptionMutation: TBCButton;
+    ComboBoxNvMetier: TComboBox;
     EditHairColors: TEdit;
     EditEyeColors: TEdit;
     EditHeight: TEdit;
@@ -255,6 +257,8 @@ type
   Procedure XmlSauvegarde();
   procedure ButtonAugmentationClick({%H-}Sender: TObject);
   procedure RadioButtonChangerChange({%H-}Sender: TObject);
+  Procedure ListeNvMetier(Codes: TStringList);
+  Procedure ChargeComboNvMetier();
   procedure CheckBoxCalculChange({%H-}Sender: TObject);
   procedure CheckBoxXpChange({%H-}Sender: TObject);
   Function VerifieLivre(ListeLivre: String; Livre: String): String;
@@ -266,6 +270,9 @@ type
   Procedure ChargerMetierEquipement(CodeMetier: String; NiveauMetier: Integer);
   Procedure TabEquipementAffiche();
   function XpSortCout(CodeSort: String): String;
+  function ValeurTarifSort(Expression: String; Defaut: Integer): Integer;
+  function TalentSort(CodeSort: String): StructureTalent;
+  function PoolTalent(PTalent: StructureTalent): String;
   Procedure AfficheFabrication();
   Function ChoixNonFait(): Boolean;
 
@@ -523,7 +530,13 @@ begin
   // calcul Xp, Métier, Nv en changement de carrière
   if radiobuttonsuivant.Checked and CarriereComplete then
     begin
-      NvMetier := MetierEnCours;
+      // Combo visible = ce niveau ouvre sur plusieurs carrieres, c'est elle qui designe
+      // laquelle. Combo cachee = aucune bifurcation, on continue dans la carriere en cours,
+      // exactement comme avant.
+      if ComboBoxNvMetier.Visible and (NvMetierChoisi <> '') then
+        NvMetier := NvMetierChoisi
+      else
+        NvMetier := MetierEnCours;
       NvNiveau := IntToStr(StrToInt(MetierNvEnCours)+1);
     end
   else if radiobuttonChanger.Checked and CarriereComplete then
@@ -551,6 +564,11 @@ begin
   // tests
   if radiobuttonsuivant.Checked and (MaxNiveau > 0) and (StrToIntDef(MetierNvEnCours, 0) >= MaxNiveau) then
     ShowMEssage(GetTexteLibelle('MESS_043'))
+  // Combo visible et rien de selectionne : le joueur n'a pas dit vers quelle carriere il
+  // monte. On ne choisit pas a sa place - continuer dans la carriere en cours est une
+  // decision, pas un defaut.
+  else if radiobuttonsuivant.Checked and ComboBoxNvMetier.Visible and (ComboBoxNvMetier.ItemIndex < 0) then
+    ShowMEssage(GetTexteLibelle('MESS_058'))
   else if (StrToIntDef(tabExperience.Cells[ColXpDonnee,LigXpCout],0) = 0) and (tabExperience.Cells[ColXpDonnee,LigXpTotal] = EditTotalXp.Text) and not radiobuttonsuivant.Checked and not radiobuttonChanger.Checked and (NbEquipement = TabEquipement.RowCount-1) and (not FabAjoute) then
     ShowMEssage(GetTexteLibelle('MESS_024'))
   else if (XpDispo < 0) then
@@ -740,7 +758,9 @@ end;
 procedure TWinPersonnages.ButtonFabricationClick(Sender: TObject);
   begin
     if (TabEquipement.Row > 0)
-      and not InList(TabEquipement.Cells[3, TabEquipement.Row],TypeSortBenediction+','+TypeSortMiracle+','+TypeSortMineur+','+TypeSortCouleur+','+TypeSortArcane+','+TypeSortChaos) then
+            // Une ligne qui cite un talent est un sort : pas de fabrication dessus.
+      // Remplace la liste fermee des six TypSpell, qui laissait passer les rituels.
+      and (TalentSort(TabEquipement.Cells[2, TabEquipement.Row]).CodeTalent = '') then
         begin
           SelectWinFabrication     := TabEquipement.Cells[7,TabEquipement.row];
           FenFabrication           := TWinFabrications.Create(Application);
@@ -1045,50 +1065,155 @@ procedure TWinPersonnages.ButtonRaceSelectionnerClick(Sender: TObject);
     TabEquipementAffiche();
   end;
 
+// Valeur d'un champ de tarification : soit un nombre ecrit tel quel, soit un bonus
+// d'attribut note (BATTR_x) - la MEME notation que <Max> des talents, et la decoupe est
+// recopiee de TabAugmentationTalentSetEditText ligne ~3480 pour qu'elles ne divergent pas.
+// Le 'B' est mange par le delimiteur '(B', ce qui laisse 'ATTR_Int', qui est exactement ce
+// que la ligne de codes de TabAttribut contient.
+//
+// Defaut est rendu quand l'expression est vide OU quand l'attribut cite n'existe pas : un
+// libelle mal orthographie dans les donnees ne doit pas faire planter une fiche.
+function TWinPersonnages.ValeurTarifSort(Expression: String; Defaut: Integer): Integer;
+  var
+    Carac: String;
+    Ind:   Integer;
+  begin
+    Result := Defaut;
+    if Expression = '' then
+      Exit;
+    if TryStrToInt(Expression, Result) then
+      Exit;
+    Carac  := StringReplace(ExtractStringAfter(Expression, '(B'), ')', '', [rfReplaceAll]);
+    Result := Defaut;
+    For Ind := 1 to TabAttribut.ColCount - 1 do
+      if TabAttribut.Cells[Ind, LigAttCode] = Carac then
+        begin
+          Result := Trunc(StrToIntDef(TabAttribut.Cells[Ind, LigAttTotal], 0) / 10);
+          Exit;
+        end;
+  end;
+
+// Talent porteur du tarif d'un sort : le PREMIER de ceux que le sort cite. Prendre le
+// premier suffit parce qu'un sort ne cite jamais que des specialisations d'UNE seule
+// famille - verifie sur les 719 sorts des seize livres charges le 02/09/2026 - et que
+// toutes les specialisations d'une famille heritent du meme tarif.
+//
+// Une structure vide (CodeTalent = '') est la reponse normale pour une ligne de
+// TabEquipement qui n'est pas un sort : une arme, une armure. C'est ainsi qu'elles sont
+// ecartees du comptage, sans avoir a les reconnaitre.
+function TWinPersonnages.TalentSort(CodeSort: String): StructureTalent;
+  var
+    PSort:      StructureSort;
+    Liste:      TStringList;
+    Ind:        Integer;
+  begin
+    Result := Default(StructureTalent);
+    if CodeSort = '' then
+      Exit;
+    PSort := ChercheSort(CodeSort);
+    if (PSort.CodeSort = '') or (PSort.ListeTalent = '') then
+      Exit;
+
+    Liste := TStringList.Create;
+    try
+      // meme decoupe que SortTalentAccessible : un sort peut citer plusieurs talents, et le
+      // OU entre eux est la seule relation que le modele connaisse.
+      ExtractStrings([',', ' '], [], PChar(PSort.ListeTalent), Liste);
+      For Ind := 0 to Liste.Count - 1 do
+        begin
+          Result := ChercheTalent(Liste[Ind]);
+          if Result.CodeTalent <> '' then
+            Exit;
+        end;
+      Result := Default(StructureTalent);
+    finally
+      Liste.Free;
+    end;
+  end;
+
+// Groupe de comptage d'un talent. C'est ce qui remplace l'ancien test sur TypSpell : deux
+// sorts sont dans le meme groupe quand leurs talents remontent a la meme entree generique,
+// ce qui fait que l'arcanique et le domaine comptent ensemble sans qu'aucune donnee ne le
+// declare - ils citent le meme talent. XpGroupe ne sert qu'a forcer un partage entre deux
+// familles distinctes, cas qu'aucun livre ne presente aujourd'hui.
+//
+// Le groupe est bati sur le code du talent TROUVE, pas sur la chaine ecrite dans le sort :
+// les deux peuvent differer du prefixe de livre, et deux ecritures du meme talent auraient
+// alors fabrique deux groupes distincts - donc des sorts moins chers, en silence.
+function TWinPersonnages.PoolTalent(PTalent: StructureTalent): String;
+  begin
+    if PTalent.CodeTalent = '' then
+      Result := ''
+    else if PTalent.XpGroupe <> '' then
+      Result := PTalent.XpGroupe
+    else
+      Result := CodeTalentGenerique(PTalent.CodeTalent);
+  end;
+
+// COUT D'UN SORT, LU DANS LE TALENT QUI L'OUVRE (chantier du 02/09/2026, CONTEXT.md 2.31).
+//
+//    cout = XpMultiplier x max( XpFloor , ceil( n / XpDivisor ) )
+//
+// n = sorts DEJA connus dans le meme groupe. C'est l'entree des tables du livre ("No. of
+// Spells Currently Known") ; le sort en cours est deja dans la grille quand on arrive ici,
+// il est donc exclu du comptage par son code.
+//
+// CE QUI DISPARAIT : la cascade de tests sur TypSpell. Elle traitait comme une enumeration
+// fermee un champ que les supplements remplissent librement - les 17 rituels de Winds of
+// Magic, arrives avec une valeur inconnue, tombaient a cout nul sans que rien ne le dise.
+// Un talent sans tarification declaree coute maintenant 0 parce que c'est ECRIT dans les
+// donnees (les benedictions), pas parce que le code ne sait pas quoi en faire.
 function TWinPersonnages.XpSortCout(CodeSort: String): String;
   Var
-    PSort:  StructureSort;
-    CoutXp: Integer;
-    NB:     Integer = 0;
-    BI:     Integer = 0;
-    BFM:    Integer = 0;
-    Ind:    Integer = 0;
-    MaxMin: Integer = 0;
+    PTalent:  StructureTalent;
+    Pool:     String;
+    CoutXp:   Integer = 0;
+    NbConnus: Integer = 0;
+    Offerts:  Integer = 0;
+    Diviseur: Integer = 0;
+    Palier:   Integer = 0;
+    Ind:      Integer = 0;
   begin
-    PSort := ChercheSort(CodeSort);
-
-    If PSort.TypeSort = TypeSortBenediction then
-      // les bénédictions sont gratuites (on ne devrait jamais arriver ici, mais au cas où...)
-      CoutXp := 0
-    else
+    PTalent := TalentSort(CodeSort);
+    Pool    := PoolTalent(PTalent);
+    if Pool <> '' then
       begin
-        // calcul des bonus pour certains calculs
-        BI := Floor(StrToInt(TabAttribut.Cells[ColAttI, LigAttTotal]) / 10);
-        BFM:= Floor(StrToInt(TabAttribut.Cells[ColAttFM,LigAttTotal]) / 10);
+        For Ind := 1 to TabEquipement.RowCount - 1 do
+          if (TabEquipement.Cells[2, Ind] <> CodeSort) and
+             (PoolTalent(TalentSort(TabEquipement.Cells[2, Ind])) = Pool) then
+            Inc(NbConnus);
 
-        // nombre de fois que le talent exixte
-        For Ind := 1 to TabEquipement.RowCount-1 do
-          If (TabEquipement.Cells[3, Ind] = PSort.TypeSort)
-            or ((InList(PSort.TypeSort,TypeSortArcane+','+TypeSortCouleur))
-              and (InList(TabEquipement.Cells[3, Ind],TypeSortArcane+','+TypeSortCouleur))) then
-               begin
-                Inc(Nb);
-                if (Psort.TypeSort = TypeSortMineur) and (StrToIntDef(TabEquipement.Cells[5,ind],0) > MaxMin) then
-                  MaxMin := StrToInt(TabEquipement.Cells[5,ind]);
-               end;
-
-        // selon le type de sort
-        if (Psort.TypeSort = TypeSortMiracle) then
-          CoutXp := 100 * (NB-1)
-        else if InList(Psort.TypeSort,TypeSortArcane+','+TypeSortCouleur) then
-          CoutXp := 100 * (1 + floor((NB-1) / BI))
-        else if (Psort.TypeSort = TypeSortChaos) then
-          CoutXp := 100
-        else if (Psort.TypeSort = TypeSortMineur) then
+        // PLANCHER A 1 SUR LES BONUS D'ATTRIBUT : un personnage dont l'attribut est
+        // inferieur a 10 a un bonus de ZERO. L'ancien code le forcait deja a 1, sans quoi
+        // la division levait une exception ; ce plancher accordait au passage un sort
+        // offert au lieu d'aucun en Magie Mineure. Les deux effets sont conserves.
+        if PTalent.XpOfferts <> '' then
           begin
-            CoutXp := 50 * floor((NB-1) / BFM);
-            if CoutXp = MaxMin then
-              CoutXp := 0;
+            Offerts := ValeurTarifSort(PTalent.XpOfferts, 0);
+            if Offerts < 1 then
+              Offerts := 1;
+          end;
+
+        if NbConnus < Offerts then
+          // sorts accordes par le talent lui-meme : "you manifest, and permanently
+          // memorise, a number of spells equal to your Willpower Bonus"
+          CoutXp := 0
+        else
+          begin
+            // DIVISEUR ABSENT ET DIVISEUR NUL NE SONT PAS LA MEME CHOSE. Absent = le tarif
+            // ne progresse pas, c'est un forfait (Magie du Chaos, 100 XP a chaque fois).
+            // Nul = un bonus d'attribut qui vaut zero, et la c'est le plancher a 1 qui
+            // s'applique, comme avant.
+            if PTalent.XpDiviseur = '' then
+              Palier := 1
+            else
+              begin
+                Diviseur := ValeurTarifSort(PTalent.XpDiviseur, 1);
+                if Diviseur < 1 then
+                  Diviseur := 1;
+                Palier := Ceil(NbConnus / Diviseur);
+              end;
+            CoutXp := PTalent.XpMultiplicateur * Max(PTalent.XpPlancher, Palier);
           end;
       end;
 
@@ -1216,10 +1341,110 @@ procedure TWinPersonnages.CalculXpNecessaire(ChangementClasse: Boolean);
     LabelNeedRealXp.Visible  := (XpNeed<>0);
   end;
 
-procedure TWinPersonnages.ComboBoxNvMetierChange(Sender: TObject);
+// Codes des carrieres accessibles en montant D'UN niveau depuis la carriere en cours.
+//   - entree 0 : TOUJOURS la carriere actuelle. Bifurquer reste un choix, pas une
+//     obligation : un Mage qui monte doit pouvoir rester Mage.
+//   - suivantes : les carrieres avancees qui declarent la carriere en cours comme parente
+//     ET qui commencent exactement au niveau vise, ET que l'ethnie du personnage peut
+//     prendre. Le filtre par ethnie regle tout seul le cas du Smith-priest of Vaul, que le
+//     livre ouvre aussi aux Elfes Sylvains.
+//
+// Une seule entree = pas de bifurcation. La combo reste alors cachee et le comportement
+// d'origine s'applique mot pour mot.
+//
+// APPELEE A DEUX ENDROITS - remplissage de la combo et validation - et c'est volontaire :
+// l'ordre etant deterministe, l'indice choisi par l'utilisateur designe le meme metier aux
+// deux appels. Aucun etat a conserver entre les deux, donc aucun risque de desynchronisation
+// si la liste des livres change entre-temps.
+Procedure TWinPersonnages.ListeNvMetier(Codes: TStringList);
+  var
+    PMetier:    StructureMetier;
+    NiveauVise: Integer;
+
+  // Le metier est-il ouvert a l'ethnie du personnage ? Un 'X' compte : il veut dire
+  // "eligible hors tirage", ce qui est exactement le cas d'une carriere avancee. Seul
+  // SeparateurChance ('-'), qui signifie explicitement indisponible, exclut.
+  Function EthnieAutorise(CodeMetier: String): Boolean;
+    var
+      PRaceMetier: StructureRaceMetier;
+    begin
+      Result := false;
+      for PRaceMetier in ListRaceMetier do
+        if CompareRechercheValeur(PRaceMetier.CodeRace, RaceEnCours) and
+           CompareRechercheValeur(PRaceMetier.CodeMetier, CodeMetier) and
+           (PRaceMetier.Chance <> SeparateurChance) then
+          begin
+            Result := true;
+            break;
+          end;
+    end;
+
   begin
-    ChargerMetierEquipement(NvMetierChoisi, 1);
-    TabEquipementAffiche();
+    Codes.Clear;
+    if Trim(MetierEnCours) = '' then
+      Exit;
+    NiveauVise := StrToIntDef(MetierNvEnCours, 0) + 1;
+    if NiveauVise < 2 then
+      Exit;
+    Codes.Add(MetierEnCours);
+    for PMetier in ListMetier do
+      if EstMetierEnfantDe(PMetier.CodeMetier, MetierEnCours) and
+         (ChercheMinMetierNiveau(PMetier.CodeMetier) = NiveauVise) and
+         EthnieAutorise(PMetier.CodeMetier) then
+        Codes.Add(PMetier.CodeMetier);
+  end;
+
+// Remplit la combo, ou la laisse cachee s'il n'y a rien a demander.
+// Elle sort d'ici TOUJOURS sur ItemIndex = -1 : celui qui la voit apparaitre doit poser un
+// choix explicite, la validation le lui refusera sinon (MESS_058).
+Procedure TWinPersonnages.ChargeComboNvMetier();
+  var
+    Codes: TStringList;
+    Ind:   Integer;
+  begin
+    ComboBoxNvMetier.Items.Clear;
+    ComboBoxNvMetier.ItemIndex := -1;
+    ComboBoxNvMetier.Visible   := false;
+    if not RadioButtonSuivant.Checked then
+      Exit;
+    Codes := TStringList.Create;
+    try
+      ListeNvMetier(Codes);
+      if Codes.Count < 2 then
+        Exit;
+      for Ind := 0 to Codes.Count - 1 do
+        ComboBoxNvMetier.Items.Add(ChercheMetier(Codes[Ind]).Libelle);
+      // Repose apres le remplissage : ajouter des items peut repositionner l'index.
+      ComboBoxNvMetier.ItemIndex := -1;
+      ComboBoxNvMetier.Visible   := true;
+      ComboBoxNvMetier.BringToFront;
+    finally
+      Codes.Free;
+    end;
+  end;
+
+// Le corps d'origine chargeait l'equipement de NvMetierChoisi AU NIVEAU 1 : il avait ete
+// ecrit pour le changement de carriere. Ici on monte d'un niveau dans une carriere qui
+// commence justement plus haut - c'est le niveau VISE qu'il faut charger, pas le 1.
+procedure TWinPersonnages.ComboBoxNvMetierChange(Sender: TObject);
+  var
+    Codes: TStringList;
+  begin
+    NvMetierChoisi := '';
+    if ComboBoxNvMetier.ItemIndex < 0 then
+      Exit;
+    Codes := TStringList.Create;
+    try
+      ListeNvMetier(Codes);
+      if ComboBoxNvMetier.ItemIndex < Codes.Count then
+        begin
+          NvMetierChoisi := Codes[ComboBoxNvMetier.ItemIndex];
+          ChargerMetierEquipement(NvMetierChoisi, StrToIntDef(MetierNvEnCours, 0) + 1);
+          TabEquipementAffiche();
+        end;
+    finally
+      Codes.Free;
+    end;
   end;
 
 procedure TWinPersonnages.EditTotalXp25KeyPress(Sender: TObject; var Key: char);
@@ -2986,6 +3211,8 @@ begin
   NvMetierChoisi := '';
   ButtonRaceSelectionner.visible := RadioButtonChanger.checked;
   ButtonRaceSelectionner.BringToFront;
+  // La combo occupe le meme emplacement que le bouton : elle doit disparaitre ici.
+  ChargeComboNvMetier();
   CalculXpNecessaire(false);
 end;
 
@@ -3031,6 +3258,9 @@ var
   PMetierAttribut:    StructureMetierAttribut;
   PMetierNiveau:      StructureMetierNiveau;
   CheminImage1:       String;
+  NvMin:              Integer;
+  NvMax:              Integer;
+  IndNv:              Integer;
 begin
   if MetierEnCours <> '' then
      CheminImage1     := CheminMetierImage(MetierEnCours)
@@ -3050,12 +3280,45 @@ begin
           TabAttribut.Cells[IndTabAttribut,LigAttImage] := IntToStr(PMetierAttribut.NiveauMetier);
 
   // Liste des Niveaux
-  For PMetierNiveau in ListMetierNiveau do
-    if CompareRechercheValeur(PMetierNiveau.CodeMetier, MetierEnCours) then
-     begin
-        TabNiveau.Cells[2,PMetierNiveau.NiveauMetier] := IntToStr(PMetierNiveau.NiveauMetier);
-        TabNiveau.Cells[3,PMetierNiveau.NiveauMetier] := PMetierNiveau.Libelle;
-     end;
+  // Le tableau ne montre QUE les niveaux que CE metier possede. Les lignes etaient
+  // auparavant indexees par le NUMERO de niveau, dans une grille dimensionnee une fois pour
+  // toutes a la creation de la fenetre sur le maximum GLOBAL. Deux consequences, les deux
+  // vues par Nono le 31/08/2026 :
+  //   - une carriere avancee, qui commence au niveau 3, laissait deux lignes vides en tete ;
+  //   - une carriere a quatre niveaux laissait une ligne vide en queue depuis que le lot 2
+  //     a porte ce maximum global a 5 - regression du chantier de la veille.
+  //
+  // Les lignes sont desormais SEQUENTIELLES, et c'est sans danger pour les icones : TabDrawCell
+  // lit l'indice d'image dans le CONTENU de la cellule - la colonne 2, qui porte le numero de
+  // niveau - et non dans le numero de ligne.
+  NvMin := ChercheMinMetierNiveau(MetierEnCours);
+  NvMax := ChercheMaxMetierNiveau(MetierEnCours);
+  // Metier inconnu ou incoherent : on retombe sur l'affichage historique plutot que de
+  // presenter une grille vide.
+  if (NvMin < 1) or (NvMax < NvMin) then
+    begin
+      NvMin := 1;
+      NvMax := MaxNiveauMetier();
+    end;
+  TabNiveau.RowCount := NvMax - NvMin + 2;
+
+  // Vidage explicite, qui n'existait nulle part : sans lui, passer d'un metier a cinq
+  // niveaux a un metier a trois laissait les lignes de l'ancien a l'ecran.
+  for IndNv := 1 to TabNiveau.RowCount - 1 do
+    begin
+      TabNiveau.Cells[2, IndNv] := '';
+      TabNiveau.Cells[3, IndNv] := '';
+    end;
+
+  for IndNv := NvMin to NvMax do
+    For PMetierNiveau in ListMetierNiveau do
+      if CompareRechercheValeur(PMetierNiveau.CodeMetier, MetierEnCours)
+         and (PMetierNiveau.NiveauMetier = IndNv) then
+        begin
+          TabNiveau.Cells[2, IndNv - NvMin + 1] := IntToStr(PMetierNiveau.NiveauMetier);
+          TabNiveau.Cells[3, IndNv - NvMin + 1] := PMetierNiveau.Libelle;
+          break;
+        end;
 end;
 
 Procedure TwinPersonnages.TabAugmentationAttributCalcul(ARow: Integer; var Value: string);
@@ -3697,6 +3960,7 @@ procedure TWinPersonnages.RadioButtonRASChange(Sender: TObject);
 begin
   ChargerMetierEquipement('',0);
   NvMetierChoisi := '';
+  ChargeComboNvMetier();
   TabEquipementAffiche();
   CalculXpNecessaire(false);
 end;
@@ -3710,6 +3974,7 @@ procedure TWinPersonnages.RadioButtonSuivantChange(Sender: TObject);
 begin
   ChargerMetierEquipement(MetierEnCours, StrToInt(MetierNvEnCours) + 1);
   NvMetierChoisi := '';
+  ChargeComboNvMetier();
   TabEquipementAffiche();
   CalculXpNecessaire(false);
 end;
@@ -4478,12 +4743,7 @@ Procedure TWinPersonnages.MajTables();
     for Ind := 1 to TabEquipement.RowCount - 1 do
       begin
         PersonnageEquipement.CodeEquipement := TabEquipement.Cells[2, Ind];
-        If (TabEquipement.Cells[3, Ind] = TypeSortArcane)
-             or (TabEquipement.Cells[3, Ind] = TypeSortBenediction)
-             or (TabEquipement.Cells[3, Ind] = TypeSortChaos)
-             or (TabEquipement.Cells[3, Ind] = TypeSortCouleur)
-             or (TabEquipement.Cells[3, Ind] = TypeSortMineur)
-             or (TabEquipement.Cells[3, Ind] = TypeSortMiracle)
+        If TalentSort(TabEquipement.Cells[2, Ind]).CodeTalent <> ''
            then
           begin
             PersonnageEquipement.TypeEquipement    := TypeEquipSp;

@@ -1,6 +1,6 @@
 # Warhammer — Contexte projet
 
-**Dernière mise à jour : 02/09/2026.** Ce fichier remplace tous les anciens
+**Dernière mise à jour : 03/09/2026.** Ce fichier remplace tous les anciens
 `CONTEXT*.md` / `INDEX*.md` / `RESUME*.md` / `SESSION*.md`. Il n'y en a plus
 qu'un : celui-ci. On ne le duplique jamais, on l'édite en place.
 
@@ -3288,14 +3288,11 @@ livres de l'Empire. Trois exceptions, toutes découvertes *pendant* le chantier 
 - Ce même plancher à 1 accordait, en Magie Mineure, **un sort offert au lieu de zéro**.
   Conservé : sans lui un personnage à FM < 10 payait son premier sort.
 
-#### Bug découvert et NON corrigé — il touche la sauvegarde
+#### Bug découvert et non corrigé ce jour-là — traité depuis
 
-La liste fermée des six `TypSpell` sert encore à trois endroits de `winpersonnage` :
-`4744` (**enregistrement du personnage**), `761` et `786` (bouton Fabrication). En 4744, une
-ligne dont le type n'est pas dans la liste — les 17 rituels — n'est pas marquée `TypeEquipSp`
-mais **enregistrée comme un équipement ordinaire**, colonne 7 recopiée en qualité et coût XP
-forcé à zéro. Laissé au `A FAIRE` : c'est le chemin de sauvegarde, et une modification à la
-fois. `TalentSort(code).CodeTalent <> ''` donne la réponse propre.
+La liste fermée des six `TypSpell` servait encore à trois endroits de `winpersonnage`.
+Laissé au `A FAIRE` le 02/09 (c'est le chemin de sauvegarde, et une modification à la
+fois), corrigé le 03/09 — voir **§2.33**.
 
 #### Points de reprise
 
@@ -3306,6 +3303,40 @@ fois. `TalentSort(code).CodeTalent <> ''` donne la réponse propre.
 - `ValeurTarifSort` duplique la découpe `(BATTR_x)` de `TabAugmentationTalentSetEditText`
   (~l.3480). Candidat à une factorisation, non faite pour ne pas toucher à du code hors
   chantier.
+
+### 2.33 La liste fermée des six `TypSpell` disparaît de `winpersonnage` — terminé (03/09/2026)
+
+Suite directe de §2.32, qui avait laissé le bug ouvert parce qu'il touchait la sauvegarde.
+Trois sites, corrigés **un par un**, avec compilation et test entre chaque :
+
+| Site | Ce qui était cassé |
+|---|---|
+| `l.4744`, enregistrement du personnage | Un rituel partait dans le fichier comme **équipement ordinaire** : colonne 7 recopiée en qualité, coût XP forcé à zéro |
+| `ButtonFabricationClick` | La fenêtre Fabrication s'ouvrait sur un sort — un « Bulky » a effectivement pu être posé sur un Cursecraft |
+| `ButtonDeleteClick` | Le bouton Supprimer s'ouvrait sur un sort (noté « Fabrication » par erreur dans `A FAIRE.txt`) |
+
+Le test est partout le même :
+
+```pascal
+TalentSort(TabEquipement.Cells[2, <ligne>]).CodeTalent = ''   // = ce n'est pas un sort
+```
+
+Il interroge **les données** au lieu d'une énumération écrite dans le code : une arme ou une
+armure n'a pas de `ListeTalent`, donc `TalentSort` renvoie une structure vide. Un `grep` sur
+les six constantes `TypeSort*` ne renvoie plus rien dans `winpersonnage.pas`.
+
+**Réserve connue, non régressive :** si le livre d'un sort n'est pas chargé, `ChercheSort`
+renvoie vide et la ligne repasse pour un équipement. C'était déjà le cas avant.
+
+#### Ce que la session a appris sur la méthode
+
+- **Restager avant de conclure, pas seulement avant d'éditer.** Trois fois dans la même
+  session un test a été rapporté comme concluant alors que le patch n'était pas dans le
+  fichier. La date et la taille du fichier sur le poste l'ont dit à chaque fois. La règle
+  du 31/08 s'étend donc à l'**interprétation d'un résultat de test**.
+- **Un symptôme attendu n'est pas une anomalie.** « Je peux mettre de la fabrication
+  partout » décrivait exactement le comportement du code non corrigé ; le dire évite de
+  partir chercher une cause ailleurs.
 
 ## 3. TODO / Backlog
 

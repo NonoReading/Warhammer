@@ -21,16 +21,16 @@ l'anglais. La donnee posee le 02/09 declare deja (BATTR_Int), donc l'etape 3 du 
 tarification corrige ce bug au passage - le cout arcanique CHANGERA pour tout personnage dont
 l'Initiative differe de l'Intelligence.
 
-BUG - UN SORT DE TYPE INCONNU EST ENREGISTRE COMME UN OBJET. Trouve le 02/09/2026 en
-retirant la cascade sur TypSpell de XpSortCout : la MEME liste fermee de six types sert
-encore a trois autres endroits de winpersonnage.
- - l.4744, sauvegarde du personnage : une ligne dont le TypSpell n'est pas dans la liste
-   n'est pas marquee TypeEquipSp mais enregistree comme un EQUIPEMENT ordinaire - avec la
-   colonne 7 recopiee en qualite et un cout XP force a zero. Ce sont les 17 rituels de Winds of Magic. C'est le plus grave des
-   trois, il touche le fichier de personnage.
- - l.761 et l.786 : le bouton Fabrication s'ouvre sur ces lignes, comme sur un objet.
-Depuis le 02/09 il existe de quoi trancher proprement : TalentSort(code).CodeTalent <> ''
-dit si une ligne est un sort, en interrogeant les donnees au lieu d'une liste ecrite en dur.
+FABRICATION ET SUPPRIMER RESTENT CLIQUABLES SUR UN SORT, SANS RIEN FAIRE. Depuis le
+03/09/2026 les deux boutons sont correctement inhibes sur les lignes de sort, mais en
+silence : rien ne signale a l'utilisateur pourquoi le clic n'a pas d'effet. Les griser
+quand la ligne selectionnee est un sort (TabEquipementSelection) serait plus honnete.
+Ergonomie uniquement, aucun bug derriere.
+
+VERIFIER LES AUTRES LISTES FERMEES DE TYPES ECRITES EN DUR. Celle des six TypSpell a
+produit trois bugs a trois endroits differents ; la meme forme - une enumeration recopiee
+dans le code au lieu d'etre demandee aux donnees - existe probablement ailleurs. Chercher
+les InList() portant sur des constantes de type.
 
 =========================================================================
 CONCEPTIONS A MENER  (chantiers a part entiere, ne pas les melanger)
