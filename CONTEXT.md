@@ -1,8 +1,8 @@
 # Warhammer — Contexte projet
 
-**Dernière mise à jour : 03/09/2026 (nuit — la relation sort/talent est devenue extensible,
-§2.39 TERMINÉ et appliqué ; bug de l'attribution des bénédictions corrigé §2.40 ; règle
-TXT-avant-PDF au §0).** Ce fichier remplace tous les anciens
+**Dernière mise à jour : 03/09/2026 (session de conception — lot 3 de *Nations of Mankind*
+découpé en 3a/3b/3c/3d au §2.37, conception de 3a arrêtée, aucun code ni aucune donnée
+écrits ; piège RACE/ETHNIE relevé au §0).** Ce fichier remplace tous les anciens
 `CONTEXT*.md` / `INDEX*.md` / `RESUME*.md` / `SESSION*.md`. Il n'y en a plus
 qu'un : celui-ci. On ne le duplique jamais, on l'édite en place.
 
@@ -74,6 +74,21 @@ lecture, jamais depuis la source elle-même :
 - **Avant d'introduire une valeur nouvelle dans un champ existant**, vérifier si le champ
   est un libellé libre ou une **énumération portée par le code**. `TypSpell` en est une :
   y avoir ajouté « Ritual » sans le vérifier a laissé deux bugs derrière moi.
+- **RACE et ETHNIE : les balises disent l'inverse de leurs identifiants (relevé le
+  03/09/2026).** `DATA_RACE` porte les **races** (`RULES-SPECIE_HUMAN`, `RULES-SPECIE_HELF`…)
+  et `DATA_SPECIE` porte les **ethnies** (`RULES-RACE_HUM` « Humans (Reikland) »,
+  `MIDDE-RACE_HMIDL`…). Dans chaque `<Specie>`, le champ qui remonte à la race s'appelle
+  `<Ethnic>`. Donc, des deux côtés, le nom de balise et le préfixe d'identifiant se
+  contredisent :
+  ```xml
+  <Specie id="RULES-RACE_HUM">              <!-- balise Specie, id RACE_  : une ETHNIE -->
+    <Ethnic>"RULES-SPECIE_HUMAN"</Ethnic>   <!-- balise Ethnic, id SPECIE_ : la RACE   -->
+  ```
+  C'est cohérent dans toute la base, ce n'est donc pas un bug — mais c'est ce qui fait lire
+  un fichier de travers. Le modèle, lui, est simple : **une race, N ethnies**. Les neuf
+  ethnies humaines (Reikland, Middenheimer, Middenlander, Nordlander, Salzenmunder, les
+  trois Norses, Tilea) pointent toutes sur `RULES-SPECIE_HUMAN` ; les onze Hauts Elfes de
+  HEPG plus celui du Rulebook pointent tous sur `RULES-SPECIE_HELF`.
 
 **Édition directe des fichiers sur le poste de Nono — deux règles, après trois occurrences
 du même incident (31/08, 01/09, 02/09/2026) :**
@@ -3548,12 +3563,83 @@ Artist, 5 Marques des dieux, plus Fearless/Hatred/Bless/Invoke/Savant).
 **Fait — lot 2, les carrières** : les 30, avec leurs 120 niveaux, tableaux d'avance,
 compétences, talents et équipements. **1077 références résolues sur 1077.**
 
-**Reste — lot 3** : les 7 domaines de magie (Divine Lore of Kislev / Araby / Ind / Nippon,
-Lore of Ice, Lore of the Desert), l'éligibilité par espèce, les créatures (taureaux de
-guerre estaliens), et les sections Provinces / Regiments / Knightly Orders. Point de
-reprise : le PDF est dans `LIVRES\Nations of Mankind.pdf`, les domaines de magie commencent
-page 48 ; réextraire avec `pdftotext -layout -x 306 -W 306` (colonne de droite) comme pour
-les carrières.
+**Reste — lot 3**, découpé le 03/09/2026 :
+
+- **3a — l'éligibilité par espèce.** Les espèces des 30 carrières sont aujourd'hui en
+  commentaire (`<!-- espece : ... -->`) dans le fichier. Voir plus bas « le blocage de 3a » :
+  ce n'est pas un simple rattachement, neuf des ethnies citées n'existent pas en base.
+- **3b — les 7 domaines de magie** (Divine Lore of Kislev / Araby / Ind / Nippon, Lore of
+  Ice, Lore of the Desert), p.48-57. Le gros morceau.
+- **3c — armes, armures et qualités** (p.58-61, ajouté au périmètre le 03/09/2026 : la
+  section manquait à cette liste). Une trentaine d'armes — Katana, Dao, Scimitar, Urumi,
+  Poleaxe, Becs de Corbin, Katar, Pata… — et **au moins une qualité nouvelle, `Hooked`**.
+  Une qualité nouvelle est la forme de piège du §0 : vérifier où la liste est portée
+  (donnée ou code) avant d'en créer une. **Les montures sont hors périmètre** (décision
+  Nono, 03/09/2026) : la section « New Mounts » et l'Estalian War Bull attendent.
+- **3d — Provinces / Regiments / Knightly Orders** (p.5-9). Ce ne sont pas des carrières
+  mais des bonus conditionnels (« Recruit: you gain Lore (Reikland) ») ; rien dans le modèle
+  ne porte ça aujourd'hui. Conception à mener avant toute saisie.
+
+Point de reprise : le PDF est dans `LIVRES\Nations of Mankind.pdf`, les domaines de magie
+commencent page 48 ; réextraire avec `pdftotext -layout -x 306 -W 306` (colonne de droite)
+comme pour les carrières. Vérifié le 03/09/2026 : l'export de `PDF_TEXTE` **n'est pas
+exploitable pour la section magie** — les deux colonnes s'entremêlent en milieu de ligne
+(`Range: Fellowship Bonus Yards    Lore of Ice`), et un comptage des sorts y donne
+n'importe quoi.
+
+**Le blocage de 3a, constaté le 03/09/2026.** L'index des ethnies de la base a été
+reconstruit : sur les onze groupes cités par les commentaires d'espèce, **deux seulement
+existent** — Norscan (`SEAOF-RACE_HBJOR` / `HSARL` / `HSKAE`) et Tilean (`UPINA-RACE_HTIL`).
+Manquent Bretonnien (noble et paysan), Ungol, Gospodar, Arabe, Indan, Cathayan, Nipponais,
+Estalien et Albion. Or le livre porte précisément de quoi les créer : ses pages 3-4 donnent
+pour chacune des 13 nations une liste de compétences et de talents — c'est-à-dire des
+données de création au sens de la règle de scission du §0 — et la page 5 fait de même pour
+dix provinces de l'Empire. **Direction retenue (Nono, 03/09/2026) : créer les ethnies**,
+sur le modèle exact de *High Elf Player's Guide* — onze ethnies posées sur une race
+existante. Ce n'est donc pas « créer des races », c'est faire pour les humains ce que HEPG
+a fait pour les Hauts Elfes. La partie « Provinces » de 3d est avalée au passage.
+
+#### 3a — état de la conception au 03/09/2026, point de reprise
+
+**Dix ethnies à créer**, toutes rattachées à `RULES-SPECIE_HUMAN` par leur champ
+`<Ethnic>` : Albion, Araby, Bretonnia (Peasantry), Bretonnia (Nobility), Cathay, Estalia,
+Ind, Kislev (Gospodar), Kislev (Ungol), Nippon. Source : pages 3-4 du livre, une liste de
+compétences et une de talents par nation.
+
+**Les caractéristiques sont recopiées du Reiklander (décision Nono, 03/09/2026).** Tous les
+humains ont les mêmes caractéristiques de base ; le `SUBCHAPTER_ATTR` de `RULES-RACE_HUM`
+est repris tel quel sur les dix — `2d10+20` sur les dix caractéristiques, Fate 2, Resil 1,
+Wound `1xBATTR_S+2xBATTR_T+1xBATTR_WP`, Supp 3, Move 4 — avec un commentaire disant d'où il
+vient. Le livre ne donne ni caractéristiques ni table de carrière par nation.
+
+**Norsca et Tilea ne sont PAS créées.** Le livre les redécrit, mais la base les porte déjà,
+et les listes diffèrent franchement : *Sea of Claws* a **trois** ethnies norses (Bjornling,
+Sarl, Skaeling) là où Nations n'en donne qu'une avec cinq *Tribe Traits* (dont
+Baersonslingers et Skeggi, qui n'existent nulle part) ; et `UPINA-RACE_HTIL` porte Cool,
+Évaluate, Haggle, Ranged (Crossbow) quand Nations donne Art, Bribery, Consume Alcohol,
+Perform, Sleight of Hand. **Règle posée à cette occasion : quand un livre de fan redécrit
+une ethnie qu'un livre officiel porte déjà, l'officiel gagne.** La règle de scission du §0
+départage des ethnies d'un *même* livre ; elle ne s'applique pas à deux descriptions
+concurrentes du même peuple. Les carrières « Human Norscan » se rattachent donc aux trois
+norses de *Sea of Claws*, « Human Tilean » à `UPINA-RACE_HTIL`.
+
+**Résolution des libellés déjà faite** contre l'index des 18 fichiers : l'essentiel se
+résout, et il reste une quinzaine de spécialisations à créer — compétences `Lore (Albion)`,
+`Lore (Dukedom)`, `Lore (Agriculture)`, `Lore (City State)`, `Lore (Province)`,
+`Lore (Region)`, `Lore (Kingdom)`, `Lore (Nippon)`, `Language (Indan)`,
+`Language (Nipponese)`, `Language (Cathayan)`, `Language (Ungol)` ; talents
+`Resistance (Heat)` et `Resistance (Cold)`. À refaire depuis des fichiers restagés le jour
+où on écrit, la liste ci-dessus n'étant qu'un ordre de grandeur.
+
+**Ce qui ne se modélise pas, et reste en suspens** : `Provincial Trait (Any)`,
+`Dukedom Trait (Any)`, `City State Trait (Any)`, `Clan Trait (Any)`, `Region Trait (Any)`,
+`Kingdom Trait (Any)`. Chacun renvoie à une sous-liste de la page (« •Aquitaine :
+Coolheaded, One Random Talent ») — un second niveau de choix que rien ne porte
+aujourd'hui. Proposition faite à Nono, **non validée** : les laisser en commentaire dans le
+fichier et ouvrir un item dans `A FAIRE.txt`. À trancher avant d'écrire.
+
+**Point de reprise exact** : écrire **une seule ethnie d'abord, Kislev (Ungol)** — elle n'a
+presque rien à créer — pour faire valider la forme XML par Nono avant les neuf autres.
 
 **Ce que ce livre a appris, et qui resservira sur les gros livres :**
 

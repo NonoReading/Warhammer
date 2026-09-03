@@ -94,17 +94,44 @@ A reprendre avec le morceau "creatures" du lot 3 si on veut de vraies creatures.
 CONCEPTIONS A MENER  (chantiers a part entiere, ne pas les melanger)
 =========================================================================
 
-NATIONS OF MANKIND, LOT 3. Les lots 1 (talents et specialisations) et 2 (30 carrieres) sont
-faits, voir CONTEXT.md 2.37. Restent, dans le meme fichier :
-  - les 7 domaines de magie (Divine Lore of Kislev / Araby / Ind / Nippon, Lore of Ice,
-    Lore of the Desert), a partir de la page 48 du PDF
-  - l eligibilite par espece : les 30 carrieres portent leur espece EN COMMENTAIRE faute de
-    bloc d eligibilite ("Human Ungol or Gospodar", "Dwarf, Gnome, Halfling, High Elf,
-    Human"...). Il faut les rattacher aux races existantes.
-  - les creatures (taureaux de guerre estaliens, monture du Toreador)
-  - les sections Provinces of the Empire, Regiments of the Empire, Knightly Orders Expansion
-  Methode : pdftotext -layout -x 306 -W 306 pour isoler la colonne de droite, et
-  pdftohtml -xml des qu une donnee peut etre portee par l italique.
+NATIONS OF MANKIND, LOT 3A : CREER LES DIX ETHNIES HUMAINES DU LIVRE. Albion, Araby,
+Bretonnia (Peasantry), Bretonnia (Nobility), Cathay, Estalia, Ind, Kislev (Gospodar),
+Kislev (Ungol), Nippon - toutes sur RULES-SPECIE_HUMAN, source pages 3-4. Conception
+arretee le 03/09/2026, voir CONTEXT.md 2.37. COMMENCER PAR KISLEV (UNGOL) SEULE, pour faire
+valider la forme XML. Norsca et Tilea ne sont PAS creees, la base les porte deja.
+
+NATIONS OF MANKIND, LOT 3A : LES "TRAIT (ANY)" NE SE MODELISENT PAS. Provincial, Dukedom,
+City State, Clan, Region et Kingdom Trait renvoient chacun a une sous-liste de la page
+("Aquitaine : Coolheaded, One Random Talent") - un second niveau de choix que rien ne porte.
+A TRANCHER AVANT D ECRIRE LES ETHNIES : les laisser en commentaire, ou concevoir la forme.
+
+NATIONS OF MANKIND, LOT 3A : LA QUINZAINE DE SPECIALISATIONS A CREER. Competences Lore
+(Albion), (Dukedom), (Agriculture), (City State), (Province), (Region), (Kingdom),
+(Nippon) ; Language (Indan), (Nipponese), (Cathayan), (Ungol) ; talents Resistance (Heat)
+et (Cold). Liste etablie le 03/09 contre l index, A REFAIRE depuis des fichiers restages le
+jour ou on ecrit - ce n est qu un ordre de grandeur.
+
+NATIONS OF MANKIND, LOT 3B : LES 7 DOMAINES DE MAGIE. Divine Lore of Kislev / Araby / Ind /
+Nippon, Lore of Ice, Lore of the Desert, pages 48-57. L export TXT du corpus est
+INEXPLOITABLE ici, les deux colonnes s entremelent en milieu de ligne ; reextraire au
+pdftotext -layout -x 306 -W 306. DATA_SPELL_TALENT permet de brancher les benedictions des
+nouveaux dieux sans toucher au RULEBOOK, comme les 7 dieux du lot 1.
+
+NATIONS OF MANKIND, LOT 3C : ARMES, ARMURES ET QUALITES. Pages 58-61, une trentaine d armes
+(Katana, Dao, Scimitar, Urumi, Poleaxe, Becs de Corbin, Katar, Pata). Section ajoutee au
+perimetre le 03/09/2026, elle y manquait. LES MONTURES SONT HORS PERIMETRE (decision Nono).
+
+NATIONS OF MANKIND, LOT 3C : LA QUALITE "HOOKED" EST NOUVELLE. Verifier ou la liste des
+qualites d arme est portee - donnee ou enumeration ecrite dans le code - AVANT d en creer
+une. Meme forme de piege que les six TypSpell.
+
+NATIONS OF MANKIND, LOT 3D : PROVINCES, REGIMENTS, KNIGHTLY ORDERS. Pages 5-9. Ce ne sont
+pas des carrieres mais des bonus conditionnels ("Recruit: you gain Lore (Reikland)") ; rien
+dans le modele ne porte ca. CONCEPTION A MENER AVANT TOUTE SAISIE. Les dix provinces de la
+page 5 sont des ethnies et seront avalees par 3a.
+
+NATIONS OF MANKIND, HORS LOT : LES CREATURES. Taureaux de guerre estaliens, monture du
+Toreador. Reporte avec les montures.
 
 NOMS DE NIVEAU DE CARRIERE AU MASCULIN ET AU FEMININ. Conception arretee le 03/09, NON
 APPLIQUEE : voir CONTEXT.md 2.38. A mener AVEC le chantier de traduction francaise, pas
