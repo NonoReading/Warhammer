@@ -74,21 +74,11 @@ Function CheminRaceImageSeule(PRace: StructureRace; Indice: String): String;
     ResNormal: String;
   begin
     Result   := '';
-    // Code COMPLET, avec repli sur l'ancien nom court : voir CheminMetierImage dans
-    // ChargeMetier pour le raisonnement. Ici le nom porte en plus l'INDICE de
-    // l'illustration - RULES-RACE_HELF1, RULES-RACE_HELF2 - qui reste a la fin.
+    // Code COMPLET. Le nom porte en plus l'INDICE de l'illustration -
+    // RULES-RACE_HELF1, RULES-RACE_HELF2 - qui reste a la fin.
     Dossier  := GetCurrentDir+StringReplace(ConstCheminImageRace, ConstLivre, PRace.Livre, [rfReplaceAll]);
     ResTrans := Dossier+PRace.CodeRace+Indice+ConstTransparent+'.PNG';
     ResNormal:= Dossier+PRace.CodeRace+Indice+'.PNG';
-    if (not FileExists(ResTrans)) and (not FileExists(ResNormal)) then
-      begin
-        // DecoupeCodeValeur est appelee ICI et relue tout de suite : CodeValeur est une
-        // globale, s'y fier apres un autre appel donnerait le code d'une autre entite.
-        DecoupeCodeValeur(PRace.CodeRace);
-        ResTrans := Dossier+CodeValeur+Indice+ConstTransparent+'.PNG';
-        ResNormal:= Dossier+CodeValeur+Indice+'.PNG';
-      end;
-
     if not FileExists(ResTrans) then
       if FileExists(ResNormal) then
         if Not TestPixelZeroZero(ResNormal) then
@@ -98,6 +88,42 @@ Function CheminRaceImageSeule(PRace: StructureRace; Indice: String): String;
       Result := ResTrans
     else if FileExists(ResNormal) then
       Result := ResNormal;
+  end;
+
+// Cette ethnie possede-t-elle AU MOINS UNE illustration, quel que soit son indice ?
+//
+// On interroge le DOSSIER plutot que d'ecrire en dur la liste des indices possibles
+// ('1' et '2' aujourd'hui) : le jour ou une race en aura trois, rien a changer ici.
+// Le masque CodeRace* attraperait une ethnie dont le code commence par le meme texte,
+// donc ce qui suit le code doit etre vide ou UNIQUEMENT des chiffres, apres avoir
+// retire le suffixe de transparence.
+Function RacePossedeUneImage(PRace: StructureRace): Boolean;
+  var
+    Dossier: String;
+    Reste:   String;
+    Info:    TSearchRec;
+    Ind:     Integer;
+    Chiffre: Boolean;
+  begin
+    Result  := false;
+    Dossier := GetCurrentDir+StringReplace(ConstCheminImageRace, ConstLivre, PRace.Livre, [rfReplaceAll]);
+    if FindFirst(Dossier+PRace.CodeRace+'*.PNG', faAnyFile, Info) = 0 then
+      begin
+        repeat
+          Reste := ChangeFileExt(Info.Name, '');
+          Delete(Reste, 1, Length(PRace.CodeRace));
+          if (Length(Reste) >= Length(ConstTransparent)) and
+             (UpperCase(Copy(Reste, Length(Reste)-Length(ConstTransparent)+1, Length(ConstTransparent))) = ConstTransparent) then
+            Delete(Reste, Length(Reste)-Length(ConstTransparent)+1, Length(ConstTransparent));
+          Chiffre := true;
+          for Ind := 1 to Length(Reste) do
+            if not (Reste[Ind] in ['0'..'9']) then
+              Chiffre := false;
+          if Chiffre then
+            Result := true;
+        until (Result) or (FindNext(Info) <> 0);
+        FindClose(Info);
+      end;
   end;
 
 // Illustration d'une ethnie, avec REPLI SUR L'ETHNIE DE REFERENCE DE SA RACE.
@@ -113,9 +139,16 @@ Function CheminRaceImageSeule(PRace: StructureRace; Indice: String): String;
 // fonctionner si un supplement definissait un jour sa propre race. A defaut, la premiere
 // ethnie de la race qui possede une image.
 //
-// L'INDICE EST CONSERVE : une ethnie sans image demandant l'illustration 2 recevra la 2 de
-// sa reference, pas la 1. Si la reference n'a pas cet indice-la non plus, on renvoie vide,
-// et l'appelant - qui teste toujours FileExists - n'affiche simplement rien.
+// LE REPLI EST TOUT OU RIEN, corrige le 03/09/2026. Il ne se declenche que si l'ethnie
+// n'a AUCUNE illustration - c'est ce que ce commentaire annoncait depuis le 31/08 sans
+// que le code le fasse : le test etait mene indice par indice, si bien qu'une ethnie de
+// Middenheim n'ayant que son image 1 recevait l'image 2 du Rulebook. On voyait alors
+// une illustration propre et une generique cote a cote.
+//
+// L'INDICE EST CONSERVE quand le repli a lieu : une ethnie sans aucune image demandant
+// l'illustration 2 recevra la 2 de sa reference, pas la 1. Si la reference n'a pas cet
+// indice-la non plus, on renvoie vide, et l'appelant - qui teste toujours FileExists -
+// n'affiche simplement rien.
 //
 // Ce repli ne peut PAS changer l'affichage d'une ethnie du livre de base : il ne se
 // declenche que lorsque l'ethnie demandee n'a aucune image, ce qui n'est le cas d'aucune
@@ -142,6 +175,11 @@ Function CheminRaceImage(CodeRace: String; Indice: String): String;
 
     Result := CheminRaceImageSeule(PRace, Indice);
     if Result <> '' then
+      Exit;
+
+    // L'ethnie a bien des images, mais pas celle qu'on demande : on n'emprunte PAS, sans
+    // quoi on melangerait ses illustrations avec celles d'une autre ethnie.
+    if RacePossedeUneImage(PRace) then
       Exit;
 
     Espece := Trim(PRace.Espece);

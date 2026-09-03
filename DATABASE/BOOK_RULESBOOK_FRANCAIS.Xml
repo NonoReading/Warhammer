@@ -226,7 +226,7 @@
 <Text name="RULES-MESS_018">"Ce nom de personnage existe déjà."</Text>
 <Text name="RULES-MESS_019">"Veuillez renseigner votre résultat de jet de dé."</Text>
 <Text name="RULES-MESS_020">"La valeur doit être comprise entre 2 et 20."</Text>
-<Text name="RULES-MESS_021">"Ce résultat de dé correspond à un talent déjà pris."</Text>
+<Text name="RULES-MESS_021">"Vous possédez déjà %s, relancez le dé."</Text>
 <Text name="RULES-MESS_022">"Veuillez entrer un chiffre entre 0 et 10."</Text>
 <Text name="RULES-MESS_023">"Veuillez entrer un chiffre valide entre 0 et 10."</Text>
 <Text name="RULES-MESS_024">"Aucune modification apportée."</Text>
@@ -264,6 +264,7 @@
 <Text name="RULES-MESS_056">"Au moins un livre doit rester sélectionné."</Text>
 <Text name="RULES-MESS_057">"This career cannot be started. It is only reached by advancing from another career, at level "</Text>
 <Text name="RULES-MESS_058">"This level opens onto several careers. Please choose the one you are advancing into."</Text>
+<Text name="RULES-MESS_059">"Aucun talent ne correspond à ce résultat de dé."</Text>
 <Text name="RULES-LAB_001">"Code"</Text>
 <Text name="RULES-LAB_002">"Libellé"</Text>
 <Text name="RULES-LAB_003">"Description"</Text>
@@ -437,6 +438,10 @@
 <Text name="RULES-LAB_171">"Type"</Text>
 <Text name="RULES-LAB_172">"Mutations"</Text>
 <Text name="RULES-LAB_173">"Phase 1 sur 9 - Choix des Livres"</Text>
+<Text name="RULES-LAB_174">"Origine"</Text>
+<Text name="RULES-LAB_175">"Élément"</Text>
+<Text name="RULES-LAB_176">"Choix"</Text>
+<Text name="RULES-LAB_177">"Entrez le résultat de votre D100"</Text>
 <Text name="RULES-PDF_MAIN1_NAME">"Nom"</Text>
 <Text name="RULES-PDF_MAIN1_SPECIES">"Race"</Text>
 <Text name="RULES-PDF_MAIN1_CLASS">"Classe"</Text>

@@ -44,7 +44,7 @@ procedure TWinLanceDes.FormCreate(Sender: TObject);
     SpinEditJet.MaxValue := 100;
     SpinEditJet.MinValue := 0;
     SpinEditJet.Value    := ChoixWinJetValeur;
-    LabelInfo.Caption    := GetTexteLibelle('LAB_xxx');
+    LabelInfo.Caption    := GetTexteLibelle('LAB_177');
     MiseEnFormeDesChamp(self);
   end;
 
@@ -60,22 +60,21 @@ procedure TWinLanceDes.ButtonValiderClick(Sender: TObject);
   begin
     if SpinEditJet.Value = 0 then
       begin
-        ShowMessage(GetTexteLibelle('MESS_xxx'));   // saisissez un résultat
+        ShowMessage(GetTexteLibelle('MESS_019'));
         Exit;
       end;
 
     CodeTire := TalentAleatoire(SpinEditJet.Value, ChoixWinJetRace);
     if CodeTire = '' then
       begin
-        ShowMessage(GetTexteLibelle('MESS_xxx'));   // aucun talent pour ce jet
+        ShowMessage(GetTexteLibelle('MESS_059'));
         Exit;
       end;
 
     if TalentDejaPossede(CodeTire, ChoixWinJetDeja) then
       begin
         PTalent := ChercheTalent(CodeTire);
-        // "Vous possédez déjà <talent>, relancez"
-        ShowMessage(Format(GetTexteLibelle('MESS_xxx'), [PTalent.Libelle]));
+        ShowMessage(Format(GetTexteLibelle('MESS_021'), [PTalent.Libelle]));
         Exit;                                      // la fenêtre reste ouverte
       end;
 

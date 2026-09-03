@@ -6,20 +6,11 @@
 CORRECTIONS COURTES  (une ligne ou deux chacune)
 =========================================================================
 
-RETIRER LE REPLI SUR L'ANCIEN NOM D'IMAGE (chargemetier, chargerace, chargesort). Les trois
-fonctions essaient le code complet puis retombent sur le nom court. Ce repli a servi a
-decoupler le renommage des fichiers de la modification du code ; maintenant que les 200
-fichiers sont renommes, il ne protege plus rien et masquerait un oubli de renommage futur.
-
-BUG - LE TARIF ARCANIQUE SE CALCULE SUR L'INITIATIVE AU LIEU DE L'INTELLIGENCE. Trouve le
-02/09/2026 en cherchant la bonne notation (BATTR_x) pour la mettre en donnee. XpSortCout lit
-TabAttribut.Cells[ColAttI] - colonne 6, ATTR_I, l'Initiative - alors que le livre dit
-"Up to Intelligence Bonus", soit ColAttInt, colonne 9, ATTR_Int. La variable s'appelle BI, ce
-qui se lit "Bonus Intelligence" et a sans doute masque l'erreur. Meme piege possible ailleurs
-si un calcul nomme une variable d'apres le francais et lit une colonne nommee d'apres
-l'anglais. La donnee posee le 02/09 declare deja (BATTR_Int), donc l'etape 3 du chantier de
-tarification corrige ce bug au passage - le cout arcanique CHANGERA pour tout personnage dont
-l'Initiative differe de l'Intelligence.
+PIEGE DE NOMMAGE FRANCO-ANGLAIS - A CHERCHER AILLEURS. Le tarif arcanique lisait ColAttI
+(Initiative) au lieu de ColAttInt (Intelligence) parce que la variable s'appelait BI, qui
+se lit "Bonus Intelligence". Corrige le 02/09 par le passage en donnee. La FORME du piege
+reste : un calcul qui nomme sa variable d'apres le francais et lit une colonne nommee
+d'apres l'anglais.
 
 FABRICATION ET SUPPRIMER RESTENT CLIQUABLES SUR UN SORT, SANS RIEN FAIRE. Depuis le
 03/09/2026 les deux boutons sont correctement inhibes sur les lignes de sort, mais en
@@ -755,8 +746,11 @@ CHANTIERS DE FOND, PAS ENCORE OUVERTS
 
 2. MIGRER LES QUATRE PERSONNAGES HERITES (Ernold, Friederich, Harald, Markus).
 
-3. LES PLACEHOLDERS LAB_xxx, visibles a l'ecran (en-tetes de colonnes de la fenetre
-   Specialisation, par exemple).
+3. LES TROIS PLACEHOLDERS MESS_xxx DE winlancede.pas (lignes 63, 70 et 78) : les messages
+   de la fenetre de jet - resultat vide, aucun talent pour ce jet, talent deja possede.
+   Trouves le 03/09 en corrigeant les LAB_xxx du meme fichier ; ils ne s'affichent que
+   dans des cas d'erreur, ce qui explique qu'ils soient passes sous le radar. Relever le
+   dernier MESS_ defini dans les deux Rulebooks avant d'en numeroter trois nouveaux.
 
 4. LA REFERENCE PENDANTE RULES-PROJ_LANC.
 

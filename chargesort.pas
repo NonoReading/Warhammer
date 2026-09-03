@@ -60,8 +60,7 @@ Function CheminSortImage(CodeTalent: String): String;
       Cod := CodeTalent
     else
       Cod := ExtractStringBefore(CodeTalent,'_');
-    // Code COMPLET, avec repli sur l'ancien nom court : voir CheminMetierImage dans
-    // ChargeMetier pour le raisonnement.
+    // Code COMPLET, prefixe de livre inclus : voir CheminMetierImage dans ChargeMetier.
     //
     // LA BOUCLE SUR ListBook A DISPARU, et elle ne servait deja plus a rien : elle etait
     // ecrite pour un chemin par livre, '\DATABASE\BOOKS\%BOOK%\PICTURE\SPELL\', mais
@@ -69,10 +68,7 @@ Function CheminSortImage(CodeTalent: String): String;
     // sans %BOOK%. Le StringReplace ne remplacait donc rien et la boucle refaisait N fois
     // exactement le meme test, N etant le nombre de livres charges.
     Dossier := GetCurrentDir+ConstCheminImageSort;
-    DecoupeCodeValeur(Cod);
     Res     := Dossier+Cod+'.PNG';
-    if not FileExists(Res) then
-      Res   := Dossier+CodeValeur+'.PNG';
     Result := res;
   end;
 

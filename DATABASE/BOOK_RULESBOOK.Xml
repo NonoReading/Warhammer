@@ -226,7 +226,7 @@
 <Text name="RULES-MESS_018">"This character name already exists."</Text>
 <Text name="RULES-MESS_019">"Please fill in your dice roll result."</Text>
 <Text name="RULES-MESS_020">"The value must be between 2 and 20."</Text>
-<Text name="RULES-MESS_021">"This die result corresponds to a talent already taken."</Text>
+<Text name="RULES-MESS_021">"You already have %s, roll again."</Text>
 <Text name="RULES-MESS_022">"Please enter a number between 0 and 10."</Text>
 <Text name="RULES-MESS_023">"Please enter a valid number between 0 and 10."</Text>
 <Text name="RULES-MESS_024">"No changes made."</Text>
@@ -264,6 +264,7 @@
 <Text name="RULES-MESS_056">"At least one book must remain selected."</Text>
 <Text name="RULES-MESS_057">"This career cannot be started. It is only reached by advancing from another career, at level "</Text>
 <Text name="RULES-MESS_058">"This level opens onto several careers. Please choose the one you are advancing into."</Text>
+<Text name="RULES-MESS_059">"No talent matches this die roll."</Text>
 <Text name="RULES-LAB_001">"Code"</Text>
 <Text name="RULES-LAB_002">"Label"</Text>
 <Text name="RULES-LAB_003">"Description"</Text>
@@ -437,6 +438,10 @@
 <Text name="RULES-LAB_171">"Type"</Text>
 <Text name="RULES-LAB_172">"Mutations"</Text>
 <Text name="RULES-LAB_173">"Phase 1 of 9 - Choice of books"</Text>
+<Text name="RULES-LAB_174">"Source"</Text>
+<Text name="RULES-LAB_175">"Element"</Text>
+<Text name="RULES-LAB_176">"Choice"</Text>
+<Text name="RULES-LAB_177">"Enter the result of your D100"</Text>
 <Text name="RULES-PDF_MAIN1_NAME">"Name"</Text>
 <Text name="RULES-PDF_MAIN1_SPECIES">"Species"</Text>
 <Text name="RULES-PDF_MAIN1_CLASS">"Class"</Text>

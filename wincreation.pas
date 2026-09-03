@@ -827,9 +827,9 @@ procedure TWinCreations.ChargerImage();
     TabCreationChoix.ColCount := 8;
     TabCreationChoix.FixedRows := 1;
     TabCreationChoix.Options := TabCreationChoix.Options + [goRowSelect];
-    TabCreationChoix.Cells[ColChoixOrigine, 0] := GetTexteLibelle('LAB_xxx');  // Origine
-    TabCreationChoix.Cells[ColChoixLib, 0]     := GetTexteLibelle('LAB_xxx');  // Élément
-    TabCreationChoix.Cells[ColChoixLibSel, 0]  := GetTexteLibelle('LAB_xxx');  // Choix
+    TabCreationChoix.Cells[ColChoixOrigine, 0] := GetTexteLibelle('LAB_174');
+    TabCreationChoix.Cells[ColChoixLib, 0]     := GetTexteLibelle('LAB_175');
+    TabCreationChoix.Cells[ColChoixLibSel, 0]  := GetTexteLibelle('LAB_176');
     TabCreationChoix.ColWidths[0]               := 0;
     TabCreationChoix.ColWidths[ColChoixOrigine] := 0;
     TabCreationChoix.ColWidths[ColChoixLib]     := 250;
