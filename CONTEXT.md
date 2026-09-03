@@ -1,6 +1,6 @@
 # Warhammer — Contexte projet
 
-**Dernière mise à jour : 15/08/2026.** Ce fichier remplace tous les anciens
+**Dernière mise à jour : 02/09/2026.** Ce fichier remplace tous les anciens
 `CONTEXT*.md` / `INDEX*.md` / `RESUME*.md` / `SESSION*.md`. Il n'y en a plus
 qu'un : celui-ci. On ne le duplique jamais, on l'édite en place.
 
@@ -48,6 +48,18 @@ lecture, jamais depuis la source elle-même :
 - **Avant d'introduire une valeur nouvelle dans un champ existant**, vérifier si le champ
   est un libellé libre ou une **énumération portée par le code**. `TypSpell` en est une :
   y avoir ajouté « Ritual » sans le vérifier a laissé deux bugs derrière moi.
+
+**Édition directe des fichiers sur le poste de Nono — deux règles, après trois occurrences
+du même incident (31/08, 01/09, 02/09/2026) :**
+
+- **Restager avant CHAQUE édition, pas seulement en début de session.** La copie que j'ai
+  sous la main vieillit dès que Nono touche à un fichier, ou dès que je committe moi-même.
+  Les trois fois, la copie de base précédait un ajout fait quelques heures plus tôt.
+- **Lire les RETRAITS du diff, pas seulement les ajouts.** C'est le seul contrôle qui
+  attrape le cas : une insertion de dix lignes qui fait disparaître une ligne existante se
+  voit à `diff | grep '^<'`, et à rien d'autre. Un diff dont les retraits ne sont pas
+  exactement ceux que j'ai voulus ne part pas ; je refais l'édition depuis la version
+  fraîche.
 
 **Tenue de `A FAIRE.txt` (Nono, 30/08/2026)** — deux règles, parce que ce fichier a déjà
 dérivé une fois jusqu'à 2302 lignes :
@@ -3473,6 +3485,19 @@ chantier concerné, avec les détails techniques.
 ---
 
 ## 5. Méthode de débogage qui a fait ses preuves
+
+### Un nom de variable n'est pas une preuve de ce qu'elle lit
+
+Trouvé le 02/09/2026. `XpSortCout` calculait le tarif arcanique à partir de `BI`, qu'on lit
+naturellement « Bonus Intelligence ». `BI` lisait `TabAttribut.Cells[ColAttI]` — colonne 6,
+`ATTR_I`, l'**Initiative**. L'Intelligence est `ColAttInt`, colonne 9, `ATTR_Int`. Le bug a
+survécu des années à des relectures du code parce que la ligne *se lit juste*.
+
+Le projet est structurellement exposé : **les identifiants sont en anglais, les variables en
+français**, et plusieurs paires ne se distinguent que par trois lettres — `ATTR_I` /
+`ATTR_Int`, `ATTR_S` / `ATTR_Supp`, `ATTR_T` / `ATTR_Fate`. Quand une valeur numérique sort
+d'une grille ou d'un dictionnaire, **remonter jusqu'au code de la colonne** avant de croire
+le nom de la variable qui la reçoit. Ce contrôle ne coûte qu'un `grep` sur la déclaration.
 
 ### Contrôle systématique des tables de tirage, et arbitrage des orphelins
 
