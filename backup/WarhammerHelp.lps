@@ -238,12 +238,10 @@
         <HasResources Value="True"/>
         <ResourceBaseClass Value="Form"/>
         <UnitName Value="WinPersonnage"/>
-        <EditorIndex Value="2"/>
+        <EditorIndex Value="-1"/>
         <TopLine Value="769"/>
         <CursorPos Y="788"/>
         <UsageCount Value="200"/>
-        <Loaded Value="True"/>
-        <LoadedDesigner Value="True"/>
       </Unit>
       <Unit>
         <Filename Value="chargeattributaugmentation.pas"/>
@@ -460,11 +458,10 @@
         <Filename Value="pdfutils.pas"/>
         <IsPartOfProject Value="True"/>
         <UnitName Value="PdfUtils"/>
-        <EditorIndex Value="1"/>
+        <EditorIndex Value="-1"/>
         <TopLine Value="325"/>
         <CursorPos X="27" Y="338"/>
         <UsageCount Value="200"/>
-        <Loaded Value="True"/>
       </Unit>
       <Unit>
         <Filename Value="pdfmetier.pas"/>
@@ -479,10 +476,11 @@
         <Filename Value="pdfpersonnage.pas"/>
         <IsPartOfProject Value="True"/>
         <UnitName Value="PdfPersonnage"/>
+        <IsVisibleTab Value="True"/>
+        <EditorIndex Value="-1"/>
         <TopLine Value="2751"/>
         <CursorPos X="32" Y="2765"/>
         <UsageCount Value="200"/>
-        <Loaded Value="True"/>
       </Unit>
       <Unit>
         <Filename Value="pdfrace.pas"/>
@@ -572,13 +570,10 @@
         <HasResources Value="True"/>
         <ResourceBaseClass Value="Form"/>
         <UnitName Value="WinLanceDe"/>
-        <IsVisibleTab Value="True"/>
-        <EditorIndex Value="3"/>
+        <EditorIndex Value="-1"/>
         <TopLine Value="35"/>
-        <CursorPos X="53" Y="47"/>
+        <CursorPos X="16" Y="47"/>
         <UsageCount Value="66"/>
-        <Loaded Value="True"/>
-        <LoadedDesigner Value="True"/>
       </Unit>
       <Unit>
         <Filename Value="winmutation.pas"/>
@@ -1222,36 +1217,7 @@
         <UsageCount Value="11"/>
       </Unit>
     </Units>
-    <JumpHistory HistoryIndex="6">
-      <Position>
-        <Filename Value="pdfpersonnage.pas"/>
-        <Caret Line="2765" Column="32" TopLine="2751"/>
-      </Position>
-      <Position>
-        <Filename Value="winpersonnage.pas"/>
-        <Caret Line="2045" Column="20" TopLine="2036"/>
-      </Position>
-      <Position>
-        <Filename Value="winpersonnage.pas"/>
-        <Caret Line="2046" Column="20" TopLine="2037"/>
-      </Position>
-      <Position>
-        <Filename Value="pdfutils.pas"/>
-        <Caret Line="338" Column="27" TopLine="325"/>
-      </Position>
-      <Position>
-        <Filename Value="winpersonnage.pas"/>
-        <Caret Line="4436" Column="26" TopLine="4430"/>
-      </Position>
-      <Position>
-        <Filename Value="winpersonnage.pas"/>
-        <Caret Line="4740" Column="42" TopLine="4733"/>
-      </Position>
-      <Position>
-        <Filename Value="winpersonnage.pas"/>
-        <Caret Line="758" Column="73" TopLine="750"/>
-      </Position>
-    </JumpHistory>
+    <JumpHistory HistoryIndex="-1"/>
     <RunParams>
       <FormatVersion Value="2"/>
       <Modes ActiveMode=""/>

@@ -18,6 +18,22 @@ silence : rien ne signale a l'utilisateur pourquoi le clic n'a pas d'effet. Les 
 quand la ligne selectionnee est un sort (TabEquipementSelection) serait plus honnete.
 Ergonomie uniquement, aucun bug derriere.
 
+QUATRE QUALITES D ARME FAUSSES DANS BOOK ARCHIVES OF THE EMPIRE I. Trouvees le 03/09/2026
+en cherchant le code de Precise pour l Asrai War Blade. WEAPB14 est Precise, WEAPB16 est
+Accurate ; trois armes que le livre dit Precise portent WEAPB16 : Eonir War Blade
+(ARCH1-COMB_BASE_25), Dwarf Crossbow (ARCH1-PROJ_ARB_03) et Precision Shot and Powder
+(ARCH1-MUNI_02). La quatrieme est le Bearded Axe (ARCH1-COMB_BASE_26), a qui le livre donne
+Trap Blade (WEAPB11) et qui porte WEAPB04, Pummel - la qualite de la ligne d en dessous, le
+Dwarf Hammer. PREUVE QUE C EST BIEN UNE ERREUR DE SAISIE ET PAS UNE CONVENTION : dans le
+meme fichier les Starfire Shafts, que le livre dit vraiment Accurate, portent WEAPB16
+correctement. Le reste de la table du livre (p.92-94) a ete compare ligne a ligne : juste.
+
+GRAIN FLAIL DU RULEBOOK : WEAPB16 SUSPECT. RULES-COMB_FLEAU_03 porte Distract, Accurate,
+Wrap. Accurate sur un fleau de paysan n a pas de sens ; la regle donne Imprecise (WEAPB26).
+A verifier sur le livre avant de corriger - c est le seul cas hors Archives I.
+
+COQUILLE DE LIBELLE : RULES-DISPO_COMMON s affiche "Commmon", avec trois m.
+
 VERIFIER LES AUTRES LISTES FERMEES DE TYPES ECRITES EN DUR. Celle des six TypSpell a
 produit trois bugs a trois endroits differents ; la meme forme - une enumeration recopiee
 dans le code au lieu d'etre demandee aux donnees - existe probablement ailleurs. Chercher
@@ -603,7 +619,6 @@ JOUABLES, par ordre de richesse :
   A Guide to Cannons ............ 1 carriere (Gunner Advance Scheme, verifiee)
   Initiations and Cult Skills ... 1 carriere (Anchorite Advance Scheme, verifiee)
   Parravonese, Strigany, and Signaller Career . 1 carriere (8 Ko, tres petit, verifiee)
-  Wood Elf Wardancer Career ..... 1 carriere (4 Ko, tres petit)
 
 FIABILITE DE CE TRI : les comptes des livres OFFICIELS et des tres petits ont ete verifies
 en lisant le contexte des marqueurs. CEUX DES FANBOOKS NE L ONT PAS ETE - ils sortent d un
@@ -634,9 +649,9 @@ copyright complet). Utile car la base a deja un champ <OFFICIAL> - 1 officiel, 2
   a 5 profils 2d10+ : il ajoute des especes, et est donc le plus lourd des trois.
 
   FANBOOKS averes, mention Community Content trouvee : Aristocracy of the Night,
-  Kings of the Dead, Wood Elf Wardancer Career, Princes of Ulthuan, Unofficial Bestiary,
-  Unofficial Grimoire, Unofficial Character Pack. Ils rejoignent Green iz Best et Lords of
-  Naggaroth, deja marques OFFICIAL=2.
+  Kings of the Dead, Princes of Ulthuan, Unofficial Bestiary, Unofficial Grimoire,
+  Unofficial Character Pack. Ils rejoignent Green iz Best, Lords of Naggaroth et
+  Wood Elf Wardancer Career, deja marques OFFICIAL=2.
 
   SANS AUCUNE MENTION, statut PROBABLE mais NON PROUVE - l absence peut aussi venir de
   l export TXT si la page de copyright etait une image :
@@ -655,14 +670,15 @@ CE QUE CA COUTE, par activite :
   * INTEGRATION d un livre absent : bien plus lourd qu une revue - il faut creer le
     fichier XML, les carrieres, les especes, les tables. A ne lancer qu un par un.
 
-SUGGESTION D ORDRE, REVUE LE 30/08 : les deux tres petits d abord (Wood Elf Wardancer,
-Parravonese/Strigany/Signaller) pour caler la methode a moindre frais - mais ce sont des
-fanbooks. Si on veut du strictement officiel, commencer par HIGH ELF PLAYER S GUIDE
-(9 carrieres, aucune espece a creer, 600 Ko) : c est le plus simple des trois officiels,
-la structure "Advance Scheme + Career Path" y est reguliere, et il se raccroche a une
-ethnie deja en base. Dwarf Player s Guide ensuite (meme forme, 10 carrieres), Deft Steps
-Light Fingers en dernier des trois (il ajoute 5 especes). Nations of Mankind reste le plus
-riche mais aussi le plus lourd, et il est vraisemblablement non officiel.
+SUGGESTION D ORDRE, REVUE LE 03/09 : les deux premiers de la liste du 30/08 sont faits -
+High Elf Player s Guide (chantiers 2.25 a 2.29) et Wood Elf Wardancer, ce dernier ayant
+servi a caler la methode d integration, ecrite dans CONTEXT.md 2.35.
+Reste, dans l ordre : Parravonese/Strigany/Signaller (8 Ko, 1 carriere + 2 ethnies + 2
+tables de tirage de 100 lignes - le premier a apporter des ETHNIES, donc la deuxieme
+marche de la methode), puis Dwarf Player s Guide (officiel, 10 carrieres, aucune espece a
+creer), puis Deft Steps Light Fingers (officiel, 9 carrieres et 5 especes). Nations of
+Mankind reste le plus riche - 30 schemas annonces - mais ses comptes n ont jamais ete
+verifies en contexte et il est vraisemblablement non officiel.
 
 =========================================================================
 SIGNALEMENTS OUVERTS ISSUS DES REVUES DE LIVRE
@@ -672,8 +688,13 @@ que les points qui n ont pas ete corriges et qui attendent une decision.
 
   * "Crude Hand Weapon" (Death on the Reik Companion, niveau 1 du Warrior of Tzeentch) est
     rendu par le generique RULES-COMB_BASE_* : la nuance "crude" n existe pas dans la base.
-  * AUCUNE CARRIERE NE PEUT EXPRIMER UNE QUANTITE D EQUIPEMENT. The Horned Rat Companion
-    donne "3 Cinderblast Bombs", mais SUBCHAPTER_ITEM utilise sa valeur pour le NIVEAU.
+  * QUANTITE D EQUIPEMENT : LA LIMITE EST MOINS FORTE QU ECRIT ICI (corrige le 03/09/2026).
+    La valeur de SUBCHAPTER_ITEM porte bien le NIVEAU et pas la quantite, mais REPETER LA
+    LIGNE exprime la quantite : le Rulebook lui-meme pose deux fois RULES-COMB_BASE_04 au
+    niveau 3 du RULES-WORK18, et Winds of Magic fait pareil sur WINDS-WORK102. Employe le
+    03/09 pour les "Two hand weapons" du Wardancer. Ce qui reste vrai : au-dela de deux ou
+    trois, tripler la ligne ("3 Cinderblast Bombs", The Horned Rat Companion) devient
+    illisible - une vraie colonne de quantite reste souhaitable.
   * Le trait Armour de la base est le generique "Armour (Rating)" la ou Lustria ecrit
     "Armour 1 (Scaly Skin)" : ni la valeur ni la saveur ne sont portees.
   * NON MODELISE : Lustria p.162 donne des SUBSTITUTIONS de competences pour les Skinks

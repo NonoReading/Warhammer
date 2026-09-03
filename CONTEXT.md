@@ -2611,8 +2611,16 @@ sur 382, 113 sorts sur 478, 24 armures sur 41 — ces dernières étant surtout 
 
 📄 **Les livres vivent dans `LIVRES/`** — les PDF *et* leur extraction en texte brut
 (`pdftotext -layout`, mise en page conservée), les 16 livres de `DATABASE` plus *The Horned Rat*.
-Le dossier s'appelait `PDF_TEXTE/` le temps d'une soirée, d'où ce nom dans les lignes du 23/08 de
-`Log.txt`. **Il est exclu de git** (`LIVRES/` dans `.gitignore`) : ce sont des livres sous droits,
+⚠️ **`PDF_TEXTE/` n'est pas l'ancien nom de `LIVRES/`** — corrigé le 03/09/2026, la phrase
+d'origine le laissait croire. Les deux dossiers coexistent avec des rôles différents :
+`LIVRES/` = les 17 livres **modélisés**, PDF *et* texte ; `PDF_TEXTE/` = l'export texte de
+**tout** le corpus déposé le 29/08, ~200 fichiers et 40 Mo, sous-dossiers compris (Aventures,
+Enemy Within and Companions, Fan, Fan Made, LIVRS PDF, Other help, Ubersreik) — texte seul, pas
+de PDF. C'est `PDF_TEXTE/` qu'on interroge pour savoir si une donnée existe quelque part.
+Les PDF d'origine, eux, vivent hors du dépôt, sous
+`C:\Users\arnau\Documents\Famille\Nono\JDR\Warhammer 4\Livres\4th Edition\` (chemin lu dans
+`PDF_TEXTE\conversion.log`) et ce dossier **n'est pas partagé avec la session** : tout se fait
+sur les TXT, et quand l'extraction est ambiguë on le dit au lieu de trancher seul. **Il est exclu de git** (`LIVRES/` dans `.gitignore`) : ce sont des livres sous droits,
 et ils n'ont jamais été commités — vérifié avec Nono, donc pas de `git rm --cached` à faire ni
 d'historique à réécrire.
 
@@ -3391,6 +3399,77 @@ fins de ligne et le diff a viré au rouge sur les 102 lignes du fichier. Refaite
 elle ne portait plus que sur la ligne voulue. Un tel « changement » passerait inaperçu au
 commit et polluerait tout l'historique du fichier : **éditer en préservant les octets, et
 lire le diff avant d'envoyer.**
+
+---
+
+### 2.35 Intégration d'un livre du corpus — méthode calée sur Wood Elf Wardancer — terminé (03/09/2026)
+
+**Pourquoi ce livre.** `A FAIRE.txt` recommandait depuis le 30/08 de commencer par un très
+petit livre « pour caler la méthode à moindres frais ». *Wood Elf Wardancer Career* fait 4 Ko :
+une carrière, deux talents, rien d'autre. Il a servi de banc d'essai à la procédure ci-dessous,
+qui vaut pour tous les livres restants — c'est **elle** le livrable, le fichier n'en est que la
+démonstration.
+
+**Résultat.** `DATABASE\BOOK_WOOD_ELF_WARDANCER.Xml`, seul fichier créé, aucun fichier existant
+modifié, donc aucune compilation. Contenu : `WARDA-WORK001` (Wood Elf Wardancer, 4 niveaux),
+`WARDA-T0001` (Talismanic Tattoos), `WARDA-T0002` (Shadow Dances of Loec),
+`WARDA-COMB_BASE_001` (Asrai War Blade) et `RULES-COMPSIGNES_WOODELF` (Secret Signs (Wood Elves)).
+
+#### La procédure, dans l'ordre
+
+1. **Restager les fichiers de `DATABASE`, puis construire l'index** id → libellé anglais des
+   compétences, talents, armes, armures, carrières, races et ethnies. Sans index à jour, on
+   « crée » un identifiant qui existe déjà.
+2. **Résoudre chaque libellé du livre contre cet index avant d'écrire une ligne.** Sur ce
+   livre : 20 compétences et 14 talents résolus, une seule création nécessaire. Ce qui ne se
+   résout pas n'est *pas* forcément absent — le premier « ailleurs » à essayer est un autre
+   livre de la base (l'Eonir War Blade venait d'`ARCH1`, pas du Rulebook).
+3. **Contrôler la forme avant de valider la lecture.** Une carrière WFRP4 a
+   **8/6/4/2 compétences et 4/4/4/4 talents**, et un tableau d'avance à **3/1/1/1**. Retomber
+   dessus prouve que l'extraction TXT n'a rien perdu ; ne pas y retomber est le signal qu'il
+   manque quelque chose.
+4. **Rattacher la carrière par `DATA_SPECIE_CAREER_DIRECT`, au niveau RACE**, quand le livre ne
+   donne pas de plage de dés — la table de tirage du Rulebook n'est alors pas retaillée et la
+   carrière s'obtient par choix. Précédents : High Elf Player's Guide et Sea of Claws.
+5. **Valider avant d'envoyer** : le XML parse, chaque référence à code se résout (index + ce que
+   le fichier déclare lui-même), aucun identifiant créé n'entre en collision. Les trois contrôles
+   sont scriptables et ont tourné à chaque version.
+6. **Commenter dans le fichier tout ce qui n'est pas une donnée du livre** — choix de saisie,
+   lecture d'une mise en page aplatie, donnée venue d'ailleurs. C'est ce qui permet à la
+   prochaine revue de distinguer une erreur d'un arbitrage.
+
+#### Décisions de portée générale prises à cette occasion
+
+- **La numérotation repart à 001 dans chaque nouveau livre** (Nono, 03/09/2026). Le préfixe de
+  livre étant désormais porté partout, la clé est unique sans série globale. Le code ne dépend
+  pas de la largeur : `RULES-WORK01` et `HELFG-WORK135` coexistent déjà. Les talents restent sur
+  4 chiffres (`WARDA-T0001`), les carrières sur 3 (`WARDA-WORK001`).
+- **Une spécialisation nouvelle d'une compétence du Rulebook garde le préfixe `RULES`** et se
+  déclare dans le fichier du livre qui l'introduit. Conventions de nommage : anglais, comme
+  `RULES-COMPSIGNES_SHADOWWAR` (HEPG) et `RULES-COMPSAVOIR_OLDONES` (Lustria).
+- **Répéter une ligne de `SUBCHAPTER_ITEM` exprime la quantité.** Le Rulebook pose deux fois
+  `RULES-COMB_BASE_04` au niveau 3 de `RULES-WORK18`. La limite notée dans `A FAIRE.txt` était
+  donc trop absolue ; elle y est corrigée.
+- **Une donnée de fan peut entrer dans un livre de fan, à condition de le dire.** L'Asrai War
+  Blade n'existe dans aucun livre officiel — vérifié dans Archives of the Empire I (qui ne donne
+  que l'Eonir, p.94) et sur douze livres de `PDF_TEXTE/` : zéro occurrence. Son profil vient d'un
+  wiki de campagne, il ne diffère de l'Eonir que par Enc 1 et Rare, et le commentaire du fichier
+  dit tout cela. Le livre entier étant `OFFICIAL="2"` — la carrière elle-même n'existe dans aucun
+  livre officiel — l'ensemble reste cohérent.
+
+#### Ce qui reste à surveiller sur ce livre
+
+Les deux talents sont **purement descriptifs** : Ward, Magic Resistance, attaque gratuite,
+qualité Impale et trait Distracting ne sont calculés nulle part. Même parti que `NAGGA-T0185`.
+Le niveau 4 est en **Silver 5 et non en Gold** : c'est bien ce qu'écrit le livre. Les
+« Asrai/Eonir War Blades » du niveau 2 sont posées en **une seule ligne** — le livre n'y exprime
+pas de quantité, contrairement au niveau 1.
+
+**Prochain livre, et prochaine marche de la méthode** : *Parravonese, Strigany, and Signaller
+Career* (8 Ko). Il apporte une carrière **et deux ethnies avec leurs tables de tirage de 100
+lignes** — donc le premier à exercer `DATA_SPECIE` et `DATA_CAREER_ROLL`, que le Wardancer n'a
+pas touchés. Attention : son tableau d'avance est **vide dans l'export TXT**, il faudra le lire
+sur le PDF. Ordre complet dans `A FAIRE.txt`.
 
 ---
 

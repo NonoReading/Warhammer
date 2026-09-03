@@ -1,0 +1,244 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<DATA_BOOK>
+<CODE_BOOK>"WARDA"</CODE_BOOK>
+<BOOK>"BOOK WOOD ELF WARDANCER"</BOOK>
+<language>"ENGLISH"</language>
+<VERSION>"20260903"</VERSION>
+<OFFICIAL>"2"</OFFICIAL>
+<COMPLETE>"1"</COMPLETE>
+  <!-- Livre de fan ("This is a fan made career and in no way endorsed by Games Workshop
+       or Cubicle 7"), d ou OFFICIAL=2. COMPLETE=1 : le document ne contient rien d autre
+       que la carriere et ses deux talents, tout y est.
+       PREMIER LIVRE NUMEROTE A PARTIR DE 001 (decision Nono du 03/09/2026) : le prefixe
+       de livre etant desormais porte partout, la numerotation redemarre a 1 dans chaque
+       nouveau fichier au lieu de continuer la serie globale. -->
+<DATA_LABEL>
+<Label language="ENGLISH">
+<Text name="WARDA-BOOK WOOD ELF WARDANCER">"Wood Elf Wardancer Career"</Text>
+</Label>
+<Label language="FRANCAIS">
+<Text name="WARDA-BOOK WOOD ELF WARDANCER">"Wood Elf Wardancer Career"</Text>
+</Label>
+</DATA_LABEL>
+<DATA_SKILL_SPECIALIZATION>
+<Skill id="RULES-COMPSIGNES_WOODELF">
+<Description language="ENGLISH">"Secret Signs (Wood Elves)"</Description>
+</Skill>
+  <!-- specialisation nouvelle - Wardancer niveau 2. Prefixe RULES car c est une
+       specialisation d une competence du Rulebook, declaree dans le fichier du livre qui
+       l introduit (principe du 21/08/2026). Meme forme que RULES-COMPSIGNES_SHADOWWAR,
+       creee dans High Elf Player s Guide. -->
+</DATA_SKILL_SPECIALIZATION>
+<DATA_TALENT>
+<Talent id="WARDA-T0001">
+<Attribut>""</Attribut>
+<Description language="ENGLISH">"Talismanic Tattoos"</Description>
+<Short language="ENGLISH">""</Short>
+<Explanation language="ENGLISH">"Some wood elf warriors are adorned with all manner of tattoo&apos;s and warpaint that grant them the blessing of their gods.
+A character with the Talismanic tattoos talent gains a Ward (9+) and Magic Resistance (1) if they do not wear armour."</Explanation>
+<Skill>""</Skill>
+<Max>"1"</Max>
+<PDF>""</PDF>
+<Test language="ENGLISH">""</Test>
+</Talent>
+<Talent id="WARDA-T0002">
+<Attribut>""</Attribut>
+<Description language="ENGLISH">"Shadow Dances of Loec"</Description>
+<Short language="ENGLISH">""</Short>
+<Explanation language="ENGLISH">"In each round of combat that they fight, a Wardancer must choose a Shadow Dance to perform. They cannot choose the same dance in two consecutive rounds of the same combat encounter.
+Whirling Death - Each strike of a Wardancer&apos;s blade is made with uncanny precision, capable of severing a head or piercing a heart with one deceptively elegant stroke. While performing this dance, the Wardancers melee attacks all gain the Impale weapon quality.
+Storm of Blades - The Wardancers rain blow after blow upon their opponent, moving with such speed that the eye cannot follow each distinct cut and thrust. While performing this dance, the Wardancer gains a Free Attack.
+The Shadows Coil - With agile grace the Wardancers evade the clumsy attacks of their enemies, becoming almost impossible to strike. While performing this dance, the Wardancer gains a Ward (5+). It replaces the Talismanic Tattoos Ward (9+) for the duration of the dance.
+Woven Mist - The sinuous movements of this dance distract and confuse the enemy, allowing the Wardancers to strike before their foe can react. When performing this dance, the Wardancer gains the Distracting creature trait."</Explanation>
+<Skill>""</Skill>
+<Max>"1"</Max>
+<PDF>""</PDF>
+<Test language="ENGLISH">""</Test>
+</Talent>
+  <!-- Les deux talents sont purement descriptifs : Ward, Magic Resistance, attaque
+       gratuite, qualite Impale et trait Distracting ne sont pas calcules par le
+       programme. Meme parti que NAGGA-T0185 (Power of Darkness), dont le cout en
+       blessures n est pas applique non plus. -->
+</DATA_TALENT>
+<DATA_CAREER>
+<Career id="WARDA-WORK001">
+<Description language="ENGLISH">"Wood Elf Wardancer"</Description>
+<Explanation language="ENGLISH">"Wardancers rove across the length and breadth of the Wood Elf realms in tightly knit troupes, treading paths and secret ways few others know of or dare use. They are welcomed to Elven halls and treated with the utmost respect, yet also with more than a little fear and wariness. Other Wood Elves regard the Wardancers as wild and unpredictable, and not without cause, for they are the servants and worshippers of the Elven trickster god, Loec, a deity whose conventions are a mystery to those not already committed to his path.
+As wanderers and followers of Loec, individual Wardancers can often find themselves traveling through the greater Old World. Pursuing agendas that are often mysteries to other Wood Elves."</Explanation>
+<Skill>"RULES-COMPCOMB_*"</Skill>
+  <!-- Competence de tete de carriere : Melee (Any), releve sur le PDF par Nono le
+       03/09/2026. L export TXT ne la portait pas. -->
+<Class>"CLASS_RANG"</Class>
+  <!-- Classe non donnee par le livre. Rangers, tranche par Nono le 03/09/2026 : le texte
+       les decrit comme des errants, et le niveau 1 porte Outdoor Survival, Track et
+       Stealth (Rural). -->
+<SUBCHAPTER_LEVEL>
+<Level id="1">
+<Description language="ENGLISH">"Trickster"</Description>
+<Salary>"TIERS_BRASS 4"</Salary>
+</Level>
+<Level id="2">
+<Description language="ENGLISH">"Wardancer"</Description>
+<Salary>"TIERS_SILVER 1"</Salary>
+</Level>
+<Level id="3">
+<Description language="ENGLISH">"Feastmaster"</Description>
+<Salary>"TIERS_SILVER 3"</Salary>
+</Level>
+<Level id="4">
+<Description language="ENGLISH">"Bladesinger"</Description>
+<Salary>"TIERS_SILVER 5"</Salary>
+</Level>
+  <!-- Le niveau 4 est en Silver 5 et non en Gold : c est bien ce qu ecrit le livre. -->
+</SUBCHAPTER_LEVEL>
+<SUBCHAPTER_ATTR>
+<Attribut name="RULES-ATTR_WS">"1"</Attribut>
+<Attribut name="RULES-ATTR_BS">"0"</Attribut>
+<Attribut name="RULES-ATTR_S">"2"</Attribut>
+<Attribut name="RULES-ATTR_T">"0"</Attribut>
+<Attribut name="RULES-ATTR_I">"1"</Attribut>
+<Attribut name="RULES-ATTR_Ag">"1"</Attribut>
+<Attribut name="RULES-ATTR_Dex">"0"</Attribut>
+<Attribut name="RULES-ATTR_Int">"0"</Attribut>
+<Attribut name="RULES-ATTR_WP">"3"</Attribut>
+<Attribut name="RULES-ATTR_Fel">"4"</Attribut>
+</SUBCHAPTER_ATTR>
+  <!-- Tableau d avance : l export TXT l a aplati en une ligne
+       "Base - Bronze - Base Base - - Silver Gold", lue comme Base=niveau 1,
+       Bronze=2, Silver=3, Gold=4. Repartition 3/1/1/1, celle de toutes les carrieres
+       de la base. Lecture confirmee par Nono le 03/09/2026. -->
+<SUBCHAPTER_SKILL>
+<Skill name="RULES-COMPATHL">"1"</Skill>
+  <!-- Athletics -->
+<Skill name="RULES-COMPESQU">"1"</Skill>
+  <!-- Dodge -->
+<Skill name="RULES-COMPRESIST">"1"</Skill>
+  <!-- Endurance -->
+<Skill name="RULES-COMPINTUI">"1"</Skill>
+  <!-- Intuition -->
+<Skill name="RULES-COMPCOMB_*">"1"</Skill>
+  <!-- Melee (Any) -->
+<Skill name="RULES-COMPREPRES_DANS">"1"</Skill>
+  <!-- Perform (Dancing) -->
+<Skill name="RULES-COMPDISC_RURAL">"1"</Skill>
+  <!-- Stealth (Rural) -->
+<Skill name="RULES-COMPSURVEXT">"1"</Skill>
+  <!-- Outdoor Survival -->
+<Skill name="RULES-COMPCALM">"2"</Skill>
+  <!-- Cool -->
+<Skill name="RULES-COMPCOMB_PARAD">"2"</Skill>
+  <!-- Melee (Parry) -->
+<Skill name="RULES-COMPSIGNES_WOODELF">"2"</Skill>
+  <!-- Secret Signs (Wood Elves) -->
+<Skill name="RULES-COMPESCAM">"2"</Skill>
+  <!-- Sleight of Hand -->
+<Skill name="RULES-COMPPIST">"2"</Skill>
+  <!-- Track -->
+<Skill name="RULES-COMPPRECEP">"2"</Skill>
+  <!-- Perception -->
+<Skill name="RULES-COMPCHARM">"3"</Skill>
+  <!-- Charm -->
+<Skill name="RULES-COMPDIVERT_NARRA">"3"</Skill>
+  <!-- Entertain (Storytelling) -->
+<Skill name="RULES-COMPSAVOIR_HIST">"3"</Skill>
+  <!-- Lore (History) -->
+<Skill name="RULES-COMPMUSIC_*">"3"</Skill>
+  <!-- Play (Any) -->
+<Skill name="RULES-COMPCOMM">"4"</Skill>
+  <!-- Leadership -->
+<Skill name="RULES-COMPSAVOIR_*">"4"</Skill>
+  <!-- Lore (Any) -->
+</SUBCHAPTER_SKILL>
+<SUBCHAPTER_TALENT>
+<Talent name="RULES-T0004">"1"</Talent>
+  <!-- Ambidextrous -->
+<Talent name="RULES-T0096">"1"</Talent>
+  <!-- Dual Wielder -->
+<Talent name="RULES-T0112">"1"</Talent>
+  <!-- Step Aside -->
+<Talent name="WARDA-T0001">"1"</Talent>
+  <!-- Talismanic Tattoos -->
+<Talent name="RULES-T0028">"2"</Talent>
+  <!-- Combat Reflexes -->
+<Talent name="RULES-T0162">"2"</Talent>
+  <!-- Fleet Footed -->
+<Talent name="RULES-T0025">"2"</Talent>
+  <!-- Stout-hearted (le livre ecrit "Stouthearted") -->
+<Talent name="WARDA-T0002">"2"</Talent>
+  <!-- Shadow Dances of Loec -->
+<Talent name="RULES-T0095">"3"</Talent>
+  <!-- Combat Master -->
+<Talent name="RULES-T0168">"3"</Talent>
+  <!-- Seasoned Traveller -->
+<Talent name="RULES-T0037">"3"</Talent>
+  <!-- Strike Mighty Blow -->
+<Talent name="RULES-T0130">"3"</Talent>
+  <!-- Riposte -->
+<Talent name="RULES-T0061">"4"</Talent>
+  <!-- Careful Strike -->
+<Talent name="RULES-T0132_*">"4"</Talent>
+  <!-- Fearless (Any) - le livre ecrit "Fearless (All)" -->
+<Talent name="RULES-T0008">"4"</Talent>
+  <!-- Furious Assault -->
+<Talent name="RULES-T0062">"4"</Talent>
+  <!-- Reaction Strike -->
+</SUBCHAPTER_TALENT>
+<SUBCHAPTER_ITEM>
+<Item name="RULES-COMB_BASE_*">"1"</Item>
+<Item name="RULES-COMB_BASE_*">"1"</Item>
+  <!-- "Two hand weapons" : deux lignes identiques, comme le Rulebook exprime les deux
+       epees du niveau 3 de RULES-WORK18. C est la seule facon de dire une quantite. -->
+<Item name="buckskins">"1"</Item>
+<Item name="war paint">"1"</Item>
+<Item name="WARDA-COMB_BASE_001/ARCH1-COMB_BASE_25">"2"</Item>
+  <!-- "Asrai/Eonir War Blades" : declaration combinee, forme deja employee par la base
+       (ex. RULES-COMB_BASE_*/RULES-COMB_ESCR_02 dans le Rulebook). L Eonir vient
+       d Archives of the Empire I p.94, l Asrai est creee plus bas dans ce fichier.
+       Une seule ligne : contrairement au niveau 1 ("Two hand weapons"), le livre
+       n exprime aucune quantite ici. -->
+<Item name="elven girdle">"2"</Item>
+<Item name="buckskins">"2"</Item>
+<Item name="tall tales and a storytellers finesse">"3"</Item>
+<Item name="a troupe of Wardancers">"4"</Item>
+</SUBCHAPTER_ITEM>
+</Career>
+</DATA_CAREER>
+<DATA_SPECIE_CAREER_DIRECT>
+  <!-- Exprime en RACE (RULES-SPECIE_WELF) et non en ethnie, comme High Elf Player s
+       Guide et Sea of Claws : toutes les ethnies Elfe Sylvain en heritent.
+       Le livre ne donne aucune plage de des, la table de tirage du Rulebook n est donc
+       pas retaillee : la carriere s obtient par choix. -->
+<Entry>
+<Specie>"RULES-SPECIE_WELF"</Specie>
+<Career name="WARDA-WORK001">"X"</Career>
+  <!-- Wood Elf Wardancer -->
+</Entry>
+</DATA_SPECIE_CAREER_DIRECT>
+<DATA_WEAPON>
+<Weapon id="WARDA-COMB_BASE_001">
+<Description language="ENGLISH">"Asrai War Blade"</Description>
+<Skill>"RULES-COMPCOMB_BASE"</Skill>
+<Damage>"+(BATTR_S)+3"</Damage>
+<Availability>"DISPO_RARE"</Availability>
+<Reach>"WEAPR_MID"</Reach>
+<Price>"3co"</Price>
+<Encumbrance>"1"</Encumbrance>
+<Quality>"WEAPB14"</Quality>
+<Hand>"1"</Hand>
+<Ammunition>"0"</Ammunition>
+</Weapon>
+  <!-- DONNEE NON OFFICIELLE, ET ASSUMEE COMME TELLE. Aucun livre officiel ne porte
+       l Asrai War Blade : Archives of the Empire I, seul livre a decrire cette famille
+       d armes, ne donne que l Eonir (p.94, table "EONIR MELEE WEAPONS"), et une
+       recherche sur douze livres du corpus PDF_TEXTE ne renvoie aucune occurrence
+       d "Asrai War". Le profil vient d un wiki de campagne (worldanvil,
+       warhammer-fantacy-cooledcross), verifie et accepte par Nono le 03/09/2026 comme
+       donnee de fan - ce que ce fichier est deja tout entier, la carriere elle-meme
+       n existant dans aucun livre officiel.
+       Il ne differe de l Eonir que sur deux points : Enc 1 au lieu de 0, et Rare au
+       lieu de Scarce. Tout le reste est identique.
+       ATTENTION AU CODE DE QUALITE : Precise est WEAPB14. WEAPB16 est Accurate. La
+       fiche de l Eonir dans BOOK ARCHIVES OF THE EMPIRE I porte WEAPB16 alors que le
+       livre ecrit Precise - bug reel, signale dans A FAIRE.txt, pas corrige ici. -->
+</DATA_WEAPON>
+</DATA_BOOK>
