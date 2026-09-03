@@ -1,7 +1,8 @@
 # Warhammer — Contexte projet
 
 **Dernière mise à jour : 03/09/2026 (soir — inventaire du corpus §2.36, Nations of
-Mankind lots 1 et 2 §2.37, conception des noms genrés §2.38).** Ce fichier remplace tous les anciens
+Mankind lots 1 et 2 §2.37, conception des noms genrés §2.38, relation sort/talent à rendre
+extensible §2.39 — chantier prioritaire).** Ce fichier remplace tous les anciens
 `CONTEXT*.md` / `INDEX*.md` / `RESUME*.md` / `SESSION*.md`. Il n'y en a plus
 qu'un : celui-ci. On ne le duplique jamais, on l'édite en place.
 
@@ -3608,6 +3609,62 @@ quelle dans le `<Description>` actuel — `"Recortador/Recortadora"`, `"Mercenar
 `"Jarl/Chaos Warlord"`, `"Coin King/Queen"`. C'est fidèle et **récupérable sans perte** : le
 jour où les deux champs existent, un script découpe sur le `/` et les remplit, sur Nations
 comme sur le reste. Rien n'est à ressaisir.
+
+---
+
+### 2.39 La relation sort <-> talent doit devenir extensible — CHANTIER PRIORITAIRE, conception arrêtée (03/09/2026)
+
+**C'est le chantier à mener en premier après la saisie de Nations lot 3.** Décision de Nono :
+« je voudrais évolutif, et ce livre prouve que ce ne l'est pas ».
+
+**Le problème, mis au jour par les six dieux de Nations.** La relation « ce talent donne
+accès à ce sort » est stockée **du côté du sort**, dans son champ `<Talent>`. Tant qu'un
+livre apporte ses sorts *et* ses talents ensemble, ça ne se voit pas — c'était le cas des
+Elven Arcane du High Elf. Nations casse ça : ses six dieux (Dazh, Tor, Ursun, Ormazd, les
+Devas, Orange Simca) accordent des bénédictions qui sont des `<Sort>` **du Rulebook**. La
+donnée est à cheval sur deux livres, et le modèle oblige à l'écrire dans celui des deux qui
+ne l'introduit pas.
+
+**Pourquoi on ne peut pas compléter depuis Nations** (vérifié dans `chargesort.pas`) :
+`ChercheSort` prend le **premier** enregistrement dont le code correspond et sort de la
+boucle. Aucune fusion. Une deuxième entrée portant `RULES-BENED_001` serait ignorée ou
+masquerait l'autre selon l'ordre de chargement. Les deux seules sorties sans code étaient
+donc : compléter le `<Talent>` côté Rulebook (six lignes, mais un livre écrit dans le
+fichier d'un autre), ou recopier dans Nations **16 des 18 bénédictions** — l'union des
+bénédictions des six dieux. Les deux ont été écartées au profit de la correction de fond.
+
+**La conception retenue : un bloc `DATA_SPELL_TALENT`, purement ADDITIF**, que n'importe
+quel livre peut porter.
+
+```xml
+<DATA_SPELL_TALENT>
+<Access sort="RULES-BENED_007" talent="RULES-T0012_URSUN"/>
+<Access sort="RULES-BENED_001" talent="RULES-T0012_DAZH,RULES-T0012_TOR"/>
+</DATA_SPELL_TALENT>
+```
+
+Le champ `<Talent>` du sort **ne bouge pas** : la table ne fait qu'ajouter des talents à ceux
+qu'il cite déjà. Rien à migrer, aucun livre existant à retoucher, et un livre non chargé
+retire ses lignes de lui-même — donc pas de référence pendante à signaler au contrôle
+d'intégrité du §2.20.
+
+**Ce que ça touche côté code — plus petit qu'il n'y paraît.** `PSort.ListeTalent` est le seul
+point de lecture de la relation, et deux fonctions le découpent, toutes deux avec le
+commentaire « même découpe » : `TalentSort` (`winpersonnage.pas`) et `SortTalentAccessible`
+(côté `winspell`). Donc :
+
+1. un chargeur pour le nouveau bloc, sur le modèle des autres `DATA_*` ;
+2. **une seule fonction** `TalentsDuSort(CodeSort)` qui renvoie la concaténation du champ
+   `<Talent>` et des lignes de la table ;
+3. les deux appelants passent par elle au lieu de lire `PSort.ListeTalent` directement.
+
+**Piège à vérifier au test** : `PoolTalent` bâtit le groupe de comptage XP sur le talent
+**trouvé**, pas sur la chaîne écrite dans le sort. Tant que la table renvoie des codes de
+talents réels, les coûts ne bougent pas — à confirmer avec un personnage portant deux dieux,
+car c'est exactement le cas que le modèle actuel ne rencontrait jamais.
+
+**Premier client** : les bénédictions des six dieux de Nations, laissées en attente à la fin
+du lot 3 (voir §2.37). Elles ne seront branchées que par ce chantier.
 
 ---
 

@@ -54,6 +54,22 @@ produit trois bugs a trois endroits differents ; la meme forme - une enumeration
 dans le code au lieu d'etre demandee aux donnees - existe probablement ailleurs. Chercher
 les InList() portant sur des constantes de type.
 
+NATIONS OF MANKIND : LES TABLES NEW WEAPONS / NEW ARMOR NE SONT PAS SAISIES. Vues le
+03/09/2026 page 58 du PDF en saisissant les sorts ; l inventaire du lot 3 (CONTEXT 2.37) ne
+les mentionnait pas. Une trentaine d armes (Katana, Dao, Scimitar, Katar, Urumi, Poleaxe...)
+plus les armures. A ajouter au perimetre restant du livre.
+
+NATIONS OF MANKIND : LORE ATTRIBUTE ET INGREDIENTS DES DEUX VENTS, SANS ENDROIT OU ALLER.
+Le Lore of Ice et le Lore of the Desert impriment chacun un Lore Attribute (regle de jeu, pas
+de la prose) et une liste d Ingredients. Ce sont des proprietes du DOMAINE, or le modele n a
+pas d entite domaine - seulement le talent d acces. Les recopier dans les 27 sorts n a pas de
+sens. Meme famille de manque que CONTEXT 2.39 ; a trancher avec lui.
+
+NATIONS OF MANKIND : FROSTFIEND ET DJINN SONT DANS LE TEXTE, PAS EN CREATURES. Les deux
+profils complets (caracteristiques, Traits, Optional) et la table d10 des elements du Djinn
+sont en fin d Explanation des sorts Form of the Frostfiend et Summon Djinn, faute de champ.
+A reprendre avec le morceau "creatures" du lot 3 si on veut de vraies creatures.
+
 =========================================================================
 CONCEPTIONS A MENER  (chantiers a part entiere, ne pas les melanger)
 =========================================================================

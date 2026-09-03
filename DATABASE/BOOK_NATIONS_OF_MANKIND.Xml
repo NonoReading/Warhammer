@@ -901,6 +901,53 @@ Description: You ask Dazh to illuminate the night, and he
 <Talent id="NATIO-T0015_UNDIVIDED">
 <Description language="ENGLISH">"Mark Undivided"</Description>
 </Talent>
+  <!-- LOT 3 : les talents d acces aux domaines de magie du livre. Le prefixe reste RULES
+       et non NATIO : la generique d une specialisation est deduite par DECOUPE DU TEXTE du
+       code (CodeTalentGenerique dans chargetalent.pas), donc NATIO-T0012_DAZH remonterait a
+       NATIO-T0012_*, qui n existe pas - le talent n heriterait ni de Magie, ni de ModeSort,
+       ni des cinq champs de tarif, et formerait un groupe de comptage XP a lui seul. Le
+       prefixe suit le talent d origine, pas le fichier qui l heberge (meme principe que les
+       specialisations de competence RULES-COMPSAVOIR_* en tete de ce fichier).
+       Les BENEDICTIONS de ces six dieux ne sont PAS branchees : elles sont portees par les
+       Sort RULES-BENED_* du Rulebook, dont le champ Talent enumere les dieux, et
+       ChercheSort ne fusionne pas deux entrees de meme code. Voir CONTEXT.md 2.39 :
+       chantier DATA_SPELL_TALENT, prioritaire, qui les branchera. -->
+<Talent id="RULES-T0012_DAZH">
+<Description language="ENGLISH">"Bless (Dazh)"</Description>
+</Talent>
+<Talent id="RULES-T0080_DAZH">
+<Description language="ENGLISH">"Invoke (Dazh)"</Description>
+</Talent>
+<Talent id="RULES-T0012_TOR">
+<Description language="ENGLISH">"Bless (Tor)"</Description>
+</Talent>
+<Talent id="RULES-T0080_TOR">
+<Description language="ENGLISH">"Invoke (Tor)"</Description>
+</Talent>
+<Talent id="RULES-T0012_URSUN">
+<Description language="ENGLISH">"Bless (Ursun)"</Description>
+</Talent>
+<Talent id="RULES-T0080_URSUN">
+<Description language="ENGLISH">"Invoke (Ursun)"</Description>
+</Talent>
+<Talent id="RULES-T0012_ORMAZD">
+<Description language="ENGLISH">"Bless (Ormazd)"</Description>
+</Talent>
+<Talent id="RULES-T0080_ORMAZD">
+<Description language="ENGLISH">"Invoke (Ormazd)"</Description>
+</Talent>
+<Talent id="RULES-T0012_DEVAS">
+<Description language="ENGLISH">"Bless (the Devas)"</Description>
+</Talent>
+<Talent id="RULES-T0080_DEVAS">
+<Description language="ENGLISH">"Invoke (the Devas)"</Description>
+</Talent>
+<Talent id="RULES-T0088_ICE">
+<Description language="ENGLISH">"Arcane Magic (Ice)"</Description>
+</Talent>
+<Talent id="RULES-T0088_DESERT">
+<Description language="ENGLISH">"Arcane Magic (Lore of the Desert)"</Description>
+</Talent>
 </DATA_TALENT_SPECIALIZATION>
 <DATA_CAREER>
   <!-- LOT 2 : les 30 carrieres. Statuts : le livre ecrit "Copper 3/5" pour les deux
@@ -5352,4 +5399,730 @@ These warriors are amongst the bravest of their kind, as they charge into battle
 </SUBCHAPTER_ITEM>
 </Career>
 </DATA_CAREER>
+<DATA_SPELL>
+  <!-- LOT 3 : les domaines de magie du livre. Le TypSpell choisit la formule de cout XP
+       (XpSortCout, winpersonnage.pas) : les miracles des quatre dieux sont des "Miracle",
+       les deux vents (Ice, Desert) des "Arcane Magic". Aucun miracle du livre ne porte de
+       CN, d ou un Level vide ; les sorts de vent portent le leur. -->
+<Sort id="NATIO-DAZH_01">
+<Description language="ENGLISH">"Blessing of Dazh"</Description>
+<Explanation language="ENGLISH">"The target you touch becomes blessed with Dazh's favor. For the duration of the spell, the target has all Ablaze conditions removed and cannot gain any more and is immune to fire damage from any non-magical source of fire, including Breathe Attacks."</Explanation>
+<Target>"1"</Target>
+<Duration>"Fellowship Bonus Rounds"</Duration>
+<Range>"Touch"</Range>
+<Talent>"RULES-T0080_DAZH"</Talent>
+<Level>""</Level>
+<TypSpell>"Miracle"</TypSpell>
+</Sort>
+<Sort id="NATIO-DAZH_02">
+<Description language="ENGLISH">"Brilliance"</Description>
+<Explanation language="ENGLISH">"Your prayers summon a blinding wave of holy fire. All creatures within range must pass an Agility Test or be dazzled by the fire. Affected creatures take a -20 penalty on Weapon Skill, Ballistic Skill, Agility, and Perception Tests. Targets without eyes, or who have shielded their eyes, are immune to brilliance."</Explanation>
+<Target>"You"</Target>
+<Duration>"Willpower Bonus Rounds"</Duration>
+<Range>"AoE Fellowship Yards"</Range>
+<Talent>"RULES-T0080_DAZH"</Talent>
+<Level>""</Level>
+<TypSpell>"Miracle"</TypSpell>
+</Sort>
+<Sort id="NATIO-DAZH_03">
+<Description language="ENGLISH">"Dazh Szheg!"</Description>
+<Explanation language="ENGLISH">"You call upon Dazh to burn his enemies, and a beam of holy light engulfs your opponents. All creatures in the area must succeed on a Difficult (-10) Agility Test or take +4 damage that ignores armor. A target that loses 1 or more Wounds also catches your Fellowship Bonus in Ablaze conditions."</Explanation>
+<Target>"AoE"</Target>
+<Duration>"Instant"</Duration>
+<Range>"Fellowship Bonus Yards"</Range>
+<Talent>"RULES-T0080_DAZH"</Talent>
+<Level>""</Level>
+<TypSpell>"Miracle"</TypSpell>
+</Sort>
+<Sort id="NATIO-DAZH_04">
+<Description language="ENGLISH">"Dance of the Alari"</Description>
+<Explanation language="ENGLISH">"You ask Dazh to illuminate the night, and he answers with his warrior-consorts - the Alari. The northern sky lights up with eerie fires as the Alari dance. This illumination is enough light to see by."</Explanation>
+<Target>"Special"</Target>
+<Duration>"1 hour"</Duration>
+<Range>"Fellowship Bonus Miles"</Range>
+<Talent>"RULES-T0080_DAZH"</Talent>
+<Level>""</Level>
+<TypSpell>"Miracle"</TypSpell>
+</Sort>
+<Sort id="NATIO-DAZH_05">
+<Description language="ENGLISH">"Gift of Fire"</Description>
+<Explanation language="ENGLISH">"Your prayers summon a welcoming campfire that appears anywhere within range. It does not consume any fuel, does not ignite flammable material, but does emit heat that warms living flesh (and living flesh only), can be used to cook food and negate the effects of cold weather."</Explanation>
+<Target>"Special"</Target>
+<Duration>"Fellowship Bonus Hours"</Duration>
+<Range>"Special"</Range>
+<Talent>"RULES-T0080_DAZH"</Talent>
+<Level>""</Level>
+<TypSpell>"Miracle"</TypSpell>
+</Sort>
+<Sort id="NATIO-DAZH_06">
+<Description language="ENGLISH">"Rouse the Coals"</Description>
+<Explanation language="ENGLISH">"You utter a prayer celebrating Dazh awakening from his bed of coals in the east. Your target, if flammable (as determined by the GM), immediately bursts into flames taking 1d10+WPB Ablaze Conditions."</Explanation>
+<Target>"1"</Target>
+<Duration>"Instant"</Duration>
+<Range>"Willpower Bonus Yards"</Range>
+<Talent>"RULES-T0080_DAZH"</Talent>
+<Level>""</Level>
+<TypSpell>"Miracle"</TypSpell>
+</Sort>
+<Sort id="NATIO-DAZH_07">
+<Description language="ENGLISH">"Sacred Guest"</Description>
+<Explanation language="ENGLISH">"You invoke Dazh to bless your time as a guest in another's home. If your host abuses his position or is a poor host, Dazh curses him. The curse, which is decided by the GM, could include: fires failing to light, fires giving no heat, or fuel burning at quadruple rate. The curse lasts until the host apologizes to you or prays for forgiveness at a Temple of Dazh."</Explanation>
+<Target>"1"</Target>
+<Duration>"Special"</Duration>
+<Range>"Touch"</Range>
+<Talent>"RULES-T0080_DAZH"</Talent>
+<Level>""</Level>
+<TypSpell>"Miracle"</TypSpell>
+</Sort>
+<Sort id="NATIO-DAZH_08">
+<Description language="ENGLISH">"Wreath of Flame"</Description>
+<Explanation language="ENGLISH">"Your chants wreath your body in holy flame. Anyone attempting to strike you with a handheld weapon must succeed on a Challenging (+0) Will Power Test or take a -30 penalty to their WS or BS Skill Test as the heat drives them back from the attack. Even a successful test imposes a -10 penalty. Whilst wreath of flame is in effect, you are immune to all damage from fire-based attacks."</Explanation>
+<Target>"You"</Target>
+<Duration>"Fellowship Bonus Rounds"</Duration>
+<Range>"You"</Range>
+<Talent>"RULES-T0080_DAZH"</Talent>
+<Level>""</Level>
+<TypSpell>"Miracle"</TypSpell>
+</Sort>
+<Sort id="NATIO-TOR_01">
+<Description language="ENGLISH">"Call of Tor"</Description>
+<Explanation language="ENGLISH">"You bellow prayers skywards, and Tor responds with a great deal of thunder. All Kislevites and allies in range may attack twice on a single charge attack action."</Explanation>
+<Target>"Fellowship Bonus Allies"</Target>
+<Duration>"Willpower Bonus Rounds"</Duration>
+<Range>"AoE Willpower Bonus Miles"</Range>
+<Talent>"RULES-T0080_TOR"</Talent>
+<Level>""</Level>
+<TypSpell>"Miracle"</TypSpell>
+</Sort>
+<Sort id="NATIO-TOR_02">
+<Description language="ENGLISH">"Cleave the Sky"</Description>
+<Explanation language="ENGLISH">"You invoke Tor to cleave the sky with his mighty war axe. Clouds roil high above, and after 1d10 rounds, a heavy downpour of rain, sleet, snow, or hail (as appropriate) begins. Each round, all affected targets must pass a Challenging (+0) Agility Test, or their movement is halved. Cleave the sky may only be attempted if the sky is already overcast."</Explanation>
+<Target>"Special"</Target>
+<Duration>"Willpower Bonus Days"</Duration>
+<Range>"Willpower Bonus Miles"</Range>
+<Talent>"RULES-T0080_TOR"</Talent>
+<Level>""</Level>
+<TypSpell>"Miracle"</TypSpell>
+</Sort>
+<Sort id="NATIO-TOR_03">
+<Description language="ENGLISH">"Do Tor!"</Description>
+<Explanation language="ENGLISH">"You entreat Tor to unleash his fury, and a bolt of lightning streaks towards your target. Do Tor! is a magic missile that deals +6 damage that ignores armor. If a target is killed, the lightning arcs to another enemy (if any remain) within 4 yards of the target and continues to do so until a target survives. With a +6 SL or higher or on a Critical Success your missile inflicts a Stun Condition on the target, then your targets must attempt a Hard (-20) Endurance Test. If a Failure is scored, also inflict a Prone Condition."</Explanation>
+<Target>"1"</Target>
+<Duration>"Instant"</Duration>
+<Range>"Willpower Yards"</Range>
+<Talent>"RULES-T0080_TOR"</Talent>
+<Level>""</Level>
+<TypSpell>"Miracle"</TypSpell>
+</Sort>
+<Sort id="NATIO-TOR_04">
+<Description language="ENGLISH">"Incoming Storm"</Description>
+<Explanation language="ENGLISH">"Your prayers increase the tension in the air, preparing those around you for an incoming conflict. Whenever any character within range of the spell when it was cast is Surprised, they may immediately attempt an Average (+20) Will Power Test to overcome surprise and act normally."</Explanation>
+<Target>"Fellowship Bonus Allies"</Target>
+<Duration>"Willpower Minutes"</Duration>
+<Range>"Fellowship Yards"</Range>
+<Talent>"RULES-T0080_TOR"</Talent>
+<Level>""</Level>
+<TypSpell>"Miracle"</TypSpell>
+</Sort>
+<Sort id="NATIO-TOR_05">
+<Description language="ENGLISH">"Thunder of War"</Description>
+<Explanation language="ENGLISH">"Your prayers amplify the sounds of all nearby Conflicts, as the sound of thunder blasts around you, piercing the eardrums of all nearby enemies. All enemies within range must succeed on a Hard (-20) Fear Test. If they fail with a -SL of 6 or more, they gain a number of Broken Conditions equal to your Fellowship Bonus."</Explanation>
+<Target>"You"</Target>
+<Duration>"Instant"</Duration>
+<Range>"AoE Fellowship Yards"</Range>
+<Talent>"RULES-T0080_TOR"</Talent>
+<Level>""</Level>
+<TypSpell>"Miracle"</TypSpell>
+</Sort>
+<Sort id="NATIO-TOR_06">
+<Description language="ENGLISH">"Tor's Fury"</Description>
+<Explanation language="ENGLISH">"You entreat Tor to bless your axe with his divine might. When using an axe, every time you succeed in attacking an enemy with your melee weapon you automatically inflict one Critical Wound. If you roll a Critical Hit with this effect active, you double the result on the Critical Wounds Table with any result on a 50+ being an automatic 100 regardless of the target's Wounds."</Explanation>
+<Target>"You"</Target>
+<Duration>"Fellowship Bonus Rounds"</Duration>
+<Range>"You"</Range>
+<Talent>"RULES-T0080_TOR"</Talent>
+<Level>""</Level>
+<TypSpell>"Miracle"</TypSpell>
+</Sort>
+<Sort id="NATIO-TOR_07">
+<Description language="ENGLISH">"Wrath of Tor"</Description>
+<Explanation language="ENGLISH">"Energy crackles over the weapon, imbuing it with the favor of Tor. The weapon adds +Fellowship Bonus Damage, counts as magical and gains Lightning damage: Any Wounds caused ignore armor and the target must roll a Challenging (+0) Endurance test or gain a Stunned Condition. In addition, your prayers change the quality of the air, fooling sensitive animals into believing a storm is coming. Small creatures and herd beasts automatically flee from the priest. Other animals, or those controlled by another, must pass an Average (+20) Will Power Test or flee."</Explanation>
+<Target>"You"</Target>
+<Duration>"Fellowship Bonus Rounds"</Duration>
+<Range>"You"</Range>
+<Talent>"RULES-T0080_TOR"</Talent>
+<Level>""</Level>
+<TypSpell>"Miracle"</TypSpell>
+</Sort>
+<Sort id="NATIO-URSUN_01">
+<Description language="ENGLISH">"Blessing of the Licked Paw"</Description>
+<Explanation language="ENGLISH">"You growl a plea to Ursun to lessen a wound's pain. The priest counts as if medical attention has been received. Cure yourself of one Injury (broken bone or torn muscle) that has occurred within the past hour; moreover, each additional +SL cures 1 Bleed Condition and heals your Wounds by 1."</Explanation>
+<Target>"You"</Target>
+<Duration>"Instant"</Duration>
+<Range>"You"</Range>
+<Talent>"RULES-T0080_URSUN"</Talent>
+<Level>""</Level>
+<TypSpell>"Miracle"</TypSpell>
+</Sort>
+<Sort id="NATIO-URSUN_02">
+<Description language="ENGLISH">"Blessing of Ursun"</Description>
+<Explanation language="ENGLISH">"Your prayers grant the target a +20 bonus to all Navigation and Outdoor Survival Tests taken in forests, mountains, plains or caves."</Explanation>
+<Target>"1"</Target>
+<Duration>"Willpower Bonus Hours"</Duration>
+<Range>"Fellowship Bonus Yards"</Range>
+<Talent>"RULES-T0080_URSUN"</Talent>
+<Level>""</Level>
+<TypSpell>"Miracle"</TypSpell>
+</Sort>
+<Sort id="NATIO-URSUN_03">
+<Description language="ENGLISH">"Father Bear"</Description>
+<Explanation language="ENGLISH">"Your prayer stirs one of Ursun's servants. One bear within range will not attack unless attacked and will answer any questions you pose it, drawing from its own knowledge (not Ursun's). Its voice is sonorous and noble, and it speaks in the mother tongue of the priest. The priest may roll an Average (+20) Fellowship Test to recruit the bear into your party temporarily until it wishes to go home (GM's discretion)."</Explanation>
+<Target>"AoE"</Target>
+<Duration>"Special"</Duration>
+<Range>"You"</Range>
+<Talent>"RULES-T0080_URSUN"</Talent>
+<Level>""</Level>
+<TypSpell>"Miracle"</TypSpell>
+</Sort>
+<Sort id="NATIO-URSUN_04">
+<Description language="ENGLISH">"Growling Fury"</Description>
+<Explanation language="ENGLISH">"Your chants fill you with implacable, ferocious rage. You gain the +1 Battle Rage and Frenzy Talents, a +10 bonus to Weapon Skill Tests and the Fast Trait."</Explanation>
+<Target>"You"</Target>
+<Duration>"Willpower Bonus Rounds"</Duration>
+<Range>"You"</Range>
+<Talent>"RULES-T0080_URSUN"</Talent>
+<Level>""</Level>
+<TypSpell>"Miracle"</TypSpell>
+</Sort>
+<Sort id="NATIO-URSUN_05">
+<Description language="ENGLISH">"Skin of the Ice Bear"</Description>
+<Explanation language="ENGLISH">"Your prayers draw an Ice Bear's spirit within you. For the duration, all of your attacks deal +1 Damage, you gain +2 AP on all body parts, and you gain the Acute Senses (All) and the +1 Fearless (Everything) Talents."</Explanation>
+<Target>"You"</Target>
+<Duration>"Fellowship Bonus Rounds"</Duration>
+<Range>"You"</Range>
+<Talent>"RULES-T0080_URSUN"</Talent>
+<Level>""</Level>
+<TypSpell>"Miracle"</TypSpell>
+</Sort>
+<Sort id="NATIO-URSUN_06">
+<Description language="ENGLISH">"Ursine Strength"</Description>
+<Explanation language="ENGLISH">"Your chant grants you some of Ursun's strength. You gain a +20 bonus on all Strength and Brawling Tests, another +10 towards Strength when grappling Size (Medium) or smaller creatures (for a total of +30), and all your Melee Attacks deal +1 Damage. So great is your strength that grappling tests with Size (Large) creatures no longer require a Critical Success for Opposing Strength Tests."</Explanation>
+<Target>"You"</Target>
+<Duration>"Strength Bonus Rounds"</Duration>
+<Range>"You"</Range>
+<Talent>"RULES-T0080_URSUN"</Talent>
+<Level>""</Level>
+<TypSpell>"Miracle"</TypSpell>
+</Sort>
+<Sort id="NATIO-URSUN_07">
+<Description language="ENGLISH">"Unyielding Ursun"</Description>
+<Explanation language="ENGLISH">"Your rousing prayers tap deep into Kislevite national pride. All Kislevites and party members within range may gain the +1 Fearless (Everything) and +1 Unshakeable Talents."</Explanation>
+<Target>"Fellowship Bonus Allies"</Target>
+<Duration>"Willpower Bonus Rounds"</Duration>
+<Range>"AoE Fellowship Yards"</Range>
+<Talent>"RULES-T0080_URSUN"</Talent>
+<Level>""</Level>
+<TypSpell>"Miracle"</TypSpell>
+</Sort>
+<Sort id="NATIO-URSUN_08">
+<Description language="ENGLISH">"Winter's Sleep"</Description>
+<Explanation language="ENGLISH">"Your prayers bring the deep sleep of winter upon your enemies. All living creatures (including allies), aside from the caster, in the area must succeed on an Average (+20) Will Power Test or fall into a deep sleep. Sleeping characters are helpless."</Explanation>
+<Target>"You"</Target>
+<Duration>"Willpower Bonus Rounds"</Duration>
+<Range>"AoE Fellowship Yards"</Range>
+<Talent>"RULES-T0080_URSUN"</Talent>
+<Level>""</Level>
+<TypSpell>"Miracle"</TypSpell>
+</Sort>
+<Sort id="NATIO-ORMAZD_01">
+<Description language="ENGLISH">"Burning Sands"</Description>
+<Explanation language="ENGLISH">"You call on Ormazd to scour the battlefield of heretics, and a rapidly swirling wind of flaming sand bursts forth around you. Every non-believer of Ormazd within your radius receives 1 Ablaze and Blinded Condition and takes 1 Damage at the end of each turn so long as they remain in the sand swarm. For every +2 SL, they receive +1 additional Damage at the end of each turn."</Explanation>
+<Target>"AoE Fellowship Bonus Yards"</Target>
+<Duration>"Fellowship Bonus Rounds"</Duration>
+<Range>"You"</Range>
+<Talent>"RULES-T0080_ORMAZD"</Talent>
+<Level>""</Level>
+<TypSpell>"Miracle"</TypSpell>
+</Sort>
+<Sort id="NATIO-ORMAZD_02">
+<Description language="ENGLISH">"Bury the Soul"</Description>
+<Explanation language="ENGLISH">"You implore Ormazd to bury your foes. Your targets' lungs continuously fill with sand while the Miracle is active, pouring out of their mouth, nose and ears. Your target is Deafened and cannot speak; moreover, the target gains a Fatigued Condition and is subject to the rules for Suffocation (page 181) while the Miracle is in effect."</Explanation>
+<Target>"1"</Target>
+<Duration>"Willpower Bonus Rounds"</Duration>
+<Range>"Fellowship yards"</Range>
+<Talent>"RULES-T0080_ORMAZD"</Talent>
+<Level>""</Level>
+<TypSpell>"Miracle"</TypSpell>
+</Sort>
+<Sort id="NATIO-ORMAZD_03">
+<Description language="ENGLISH">"Forgiveness of Al-Alnon"</Description>
+<Explanation language="ENGLISH">"Prostrating on the ground, you chant one of the Great Prophet's prayers to Ormazd and beg him to forgive your sins and purge you of chaotic influence. Lose 1 Corruption point and 1 Sin point you have received within Fellowship minutes. For every +2 SL you may remove an extra 1 Corruption or Sin point gained. You may not invoke this Miracle if you have committed acts deserving of condemnation from your deity (GM's discretion) outside of miscasts or corrupting influences."</Explanation>
+<Target>"You"</Target>
+<Duration>"Instant"</Duration>
+<Range>"You"</Range>
+<Talent>"RULES-T0080_ORMAZD"</Talent>
+<Level>""</Level>
+<TypSpell>"Miracle"</TypSpell>
+</Sort>
+<Sort id="NATIO-ORMAZD_04">
+<Description language="ENGLISH">"Healing Sands"</Description>
+<Explanation language="ENGLISH">"You appeal to Ormazd to grant the target the strength to endure as warm sands surround their cuts and bruises, slowly healing their ravaged flesh. The target removes any Bleeding Conditions and regenerates their Willpower Bonus in Wounds at the end of each round while this Miracle is in effect. This effect lasts until they've recovered all of their Wounds."</Explanation>
+<Target>"1"</Target>
+<Duration>"Fellowship Bonus Rounds"</Duration>
+<Range>"Fellowship Yards"</Range>
+<Talent>"RULES-T0080_ORMAZD"</Talent>
+<Level>""</Level>
+<TypSpell>"Miracle"</TypSpell>
+</Sort>
+<Sort id="NATIO-ORMAZD_05">
+<Description language="ENGLISH">"Sword of Ormazd"</Description>
+<Explanation language="ENGLISH">"You chant a prayer of the Ormazd's might as your blade shimmers and golden flakes of glowing light float around it. If wielding a sword, it counts as Magical, deals +Fellowship Bonus Damage, and any target struck receive the Ablaze and Blind Conditions. Any Undead struck while this Miracle is in effect take additional +Willpower Bonus Damage."</Explanation>
+<Target>"You"</Target>
+<Duration>"Fellowship Bonus Rounds"</Duration>
+<Range>"You"</Range>
+<Talent>"RULES-T0080_ORMAZD"</Talent>
+<Level>""</Level>
+<TypSpell>"Miracle"</TypSpell>
+</Sort>
+<Sort id="NATIO-ORMAZD_06">
+<Description language="ENGLISH">"Waters of Life"</Description>
+<Explanation language="ENGLISH">"You chant the Great Prophet's prayers, and water springs forth forming a glowing pool at the point where you touch. For each round in which the Miracle is in effect, you cause enough water to quench 1 person. Whomever drinks from the pool recovers Wounds equal to your Fellowship Bonus and recovers from any negative effects caused by thirst. This Miracle requires a suitable geographical location for the water to form in, such as a hole in sand or soil, or a circular rock formation in the mountains. The water must be consumed within a short amount of time after its formation or else it dissipates, even if contained in bottles or waterskins."</Explanation>
+<Target>"You"</Target>
+<Duration>"1 Round"</Duration>
+<Range>"Touch"</Range>
+<Talent>"RULES-T0080_ORMAZD"</Talent>
+<Level>""</Level>
+<TypSpell>"Miracle"</TypSpell>
+</Sort>
+<Sort id="NATIO-DEVAS_01">
+<Description language="ENGLISH">"Avatar of Vaishna"</Description>
+<Explanation language="ENGLISH">"You channel the heavenly wrath of Vaishna into your very soul and become the embodiment of The Preserver itself. Your eyes glow and your skin changes blue. You gain the Elite Trait and you're Immune to Psychology so long as you're protecting something of great importance. When the Miracle's duration end you return to normal and are unconscious until next sunrise, as the strain of wielding such godly power is great."</Explanation>
+<Target>"You"</Target>
+<Duration>"Fellowship Bonus Rounds"</Duration>
+<Range>"You"</Range>
+<Talent>"RULES-T0080_DEVAS"</Talent>
+<Level>""</Level>
+<TypSpell>"Miracle"</TypSpell>
+</Sort>
+<Sort id="NATIO-DEVAS_02">
+<Description language="ENGLISH">"Banish the Wicked"</Description>
+<Explanation language="ENGLISH">"You chant a prayer to Shaivi and strike your foe with your palm punishing them for their wicked deeds with the energy of the Deva of Destruction itself. You deal 1d10+SL Damage ignoring Toughness Bonus and Armor Points. If the target has the Corruption Trait, it takes an additional 1d10 Damage per the strength of the Corruption."</Explanation>
+<Target>"1"</Target>
+<Duration>"Instant"</Duration>
+<Range>"Touch"</Range>
+<Talent>"RULES-T0080_DEVAS"</Talent>
+<Level>""</Level>
+<TypSpell>"Miracle"</TypSpell>
+</Sort>
+<Sort id="NATIO-DEVAS_03">
+<Description language="ENGLISH">"Brahmir's Gift"</Description>
+<Explanation language="ENGLISH">"You call for the Creation Deva to heal the land and allow life to flow. For the duration of the Miracle, any allies in direct contact with the earth within range heal Wounds equal to your Willpower Bonus at the start of every Round. However, this act of altruism comes at a cost. For each round this Miracle is in effect you lose 1 Wound."</Explanation>
+<Target>"Fellowship Bonus Allies"</Target>
+<Duration>"Willpower Bonus Rounds"</Duration>
+<Range>"Willpower Yards"</Range>
+<Talent>"RULES-T0080_DEVAS"</Talent>
+<Level>""</Level>
+<TypSpell>"Miracle"</TypSpell>
+</Sort>
+<Sort id="NATIO-DEVAS_04">
+<Description language="ENGLISH">"Dance of Flame"</Description>
+<Explanation language="ENGLISH">"You dance in the name of the Deva of Fire, Agni, as flames circle around you and your companions, inspiring your allies and heating their blood in the process. You and your allies gain the Corrosive Blood Trait. You and your allies are immune to each other's Corrosive Blood Damage."</Explanation>
+<Target>"Willpower Bonus Allies"</Target>
+<Duration>"Fellowship Bonus Rounds"</Duration>
+<Range>"Willpower Yards"</Range>
+<Talent>"RULES-T0080_DEVAS"</Talent>
+<Level>""</Level>
+<TypSpell>"Miracle"</TypSpell>
+</Sort>
+<Sort id="NATIO-DEVAS_05">
+<Description language="ENGLISH">"Gilgadresh's Fortune"</Description>
+<Explanation language="ENGLISH">"You bow your head and pray to the elephant-headed Deva, Gilgadresh, for good fortune and new beginnings. Gain +1 Fortune point. For every +2 SL you may gain an extra +1 Fortune point, which may take you beyond your normal maximum. You may not invoke this Miracle again until you reach 0 Fortune points."</Explanation>
+<Target>"You"</Target>
+<Duration>"Special"</Duration>
+<Range>"You"</Range>
+<Talent>"RULES-T0080_DEVAS"</Talent>
+<Level>""</Level>
+<TypSpell>"Miracle"</TypSpell>
+</Sort>
+<Sort id="NATIO-DEVAS_06">
+<Description language="ENGLISH">"Idran's Will"</Description>
+<Explanation language="ENGLISH">"You invoke Idran, King of Heaven, rain and lightning to shower the land in his name. Roiling clouds are summoned high above, and after 10-Fellowship Bonus rounds, a heavy downpour of rain begins. During the downpour, you may roll additional Pray Tests to summon a bolt of lightning down on one foe dealing 1d10+Fellowship Bonus Damage ignoring armor."</Explanation>
+<Target>"Special"</Target>
+<Duration>"Willpower Bonus Minutes"</Duration>
+<Range>"Willpower Bonus Miles"</Range>
+<Talent>"RULES-T0080_DEVAS"</Talent>
+<Level>""</Level>
+<TypSpell>"Miracle"</TypSpell>
+</Sort>
+<Sort id="NATIO-DEVAS_07">
+<Description language="ENGLISH">"Sweat of Creation"</Description>
+<Explanation language="ENGLISH">"You reach out to Brahmir praying for the Deva's protection. In return your body begins to sweat profusely, closing your wounds and invigorating you. You gain the Regenerate Creature Trait. When the Miracle ends, gain 1 Fatigue."</Explanation>
+<Target>"You"</Target>
+<Duration>"Willpower Bonus Rounds"</Duration>
+<Range>"You"</Range>
+<Talent>"RULES-T0080_DEVAS"</Talent>
+<Level>""</Level>
+<TypSpell>"Miracle"</TypSpell>
+</Sort>
+<Sort id="NATIO-DEVAS_08">
+<Description language="ENGLISH">"Trident of Shaivi"</Description>
+<Explanation language="ENGLISH">"You call out to the Deva of Destruction conjuring their trident made of pure light, which can be wielded in combat, using the Melee (Polearm) Skill. It acts like a normal polearm with a very long range, Damage equal to your Willpower Bonus and counts as magical. For every +2 SL you may add an additional +1 to the Damage or a Weapon Quality to the trident."</Explanation>
+<Target>"You"</Target>
+<Duration>"Fellowship Bonus Rounds"</Duration>
+<Range>"You"</Range>
+<Talent>"RULES-T0080_DEVAS"</Talent>
+<Level>""</Level>
+<TypSpell>"Miracle"</TypSpell>
+</Sort>
+<Sort id="NATIO-SIMCA_01">
+<Description language="ENGLISH">"Gift of the Rising Sun"</Description>
+<Explanation language="ENGLISH">"You call on the Orange Simca to scour the battlefield of dishonorable foes, and a blinding flash of golden light bursts forth. All non-Simcans looking in your direction receive 1 Blinded Condition. For every +2 SL, they receive +1 Blinded Conditions."</Explanation>
+<Target>"Area of Effect"</Target>
+<Duration>"Instant"</Duration>
+<Range>"You"</Range>
+<Talent>"RULES-T0080_SIMCA"</Talent>
+<Level>""</Level>
+<TypSpell>"Miracle"</TypSpell>
+</Sort>
+<Sort id="NATIO-SIMCA_02">
+<Description language="ENGLISH">"Serpent's Eye"</Description>
+<Explanation language="ENGLISH">"You call on Simca to send a Divine Servant to grant you knowledge of your enemies. A spectral serpent manifests, slithering across the ground. The serpent looks like and has the capabilities of a normal snake, but cannot physically affect the world, or be harmed in any way. While the Miracle is in effect, you can see through the serpent's eyes and control its movement, surveying the battlefield and spying upon your enemies. Your Vision is acute, but you do not have access to any of your own sense-enhancing Talents such as Night Vision. While looking through the serpent's eyes, you cannot see through your own eyes, leaving you potentially vulnerable."</Explanation>
+<Target>"You"</Target>
+<Duration>"Fellowship Bonus Rounds"</Duration>
+<Range>"Fellowship yards"</Range>
+<Talent>"RULES-T0080_SIMCA"</Talent>
+<Level>""</Level>
+<TypSpell>"Miracle"</TypSpell>
+</Sort>
+<Sort id="NATIO-SIMCA_03">
+<Description language="ENGLISH">"Bushido's Call"</Description>
+<Explanation language="ENGLISH">"Your prayers of honor instill your allies with an unbreakable courage against their foes. All allies affected receive the +1 Drilled and Fearless Talents towards any enemies engaging them in combat."</Explanation>
+<Target>"Strength Bonus allies"</Target>
+<Duration>"Fellowship Bonus Rounds"</Duration>
+<Range>"Fellowship yards"</Range>
+<Talent>"RULES-T0080_SIMCA"</Talent>
+<Level>""</Level>
+<TypSpell>"Miracle"</TypSpell>
+</Sort>
+<Sort id="NATIO-SIMCA_04">
+<Description language="ENGLISH">"Banzai Charge"</Description>
+<Explanation language="ENGLISH">"Your prayer ignites the fires of war within your comrades. Affected targets gain the +1 Berserk Charge Talent. For Every +2 SL, you may increase Berserk Charge by an additional +1."</Explanation>
+<Target>"Strength Bonus allies"</Target>
+<Duration>"Fellowship Bonus Rounds"</Duration>
+<Range>"Fellowship yards"</Range>
+<Talent>"RULES-T0080_SIMCA"</Talent>
+<Level>""</Level>
+<TypSpell>"Miracle"</TypSpell>
+</Sort>
+<Sort id="NATIO-SIMCA_05">
+<Description language="ENGLISH">"Shield of the Sun"</Description>
+<Explanation language="ENGLISH">"Your stalwart prayers channel the glow of the Orange Simca to shield your allies in glittering, gossamer strands of light, warding enemy blows. All those affected gain +1 AP on all locations."</Explanation>
+<Target>"Strength Bonus allies"</Target>
+<Duration>"Fellowship Bonus Rounds"</Duration>
+<Range>"Fellowship yards"</Range>
+<Talent>"RULES-T0080_SIMCA"</Talent>
+<Level>""</Level>
+<TypSpell>"Miracle"</TypSpell>
+</Sort>
+<Sort id="NATIO-SIMCA_06">
+<Description language="ENGLISH">"Red Sun's Smite"</Description>
+<Explanation language="ENGLISH">"If wielding a Naginata, it gains the Impact Quality, and counts as Magical."</Explanation>
+<Target>"You"</Target>
+<Duration>"Fellowship Bonus Rounds"</Duration>
+<Range>"You"</Range>
+<Talent>"RULES-T0080_SIMCA"</Talent>
+<Level>""</Level>
+<TypSpell>"Miracle"</TypSpell>
+</Sort>
+<Sort id="NATIO-SIMCA_07">
+<Description language="ENGLISH">"Beacon of Sacred Might"</Description>
+<Explanation language="ENGLISH">"As you bellow prayers in Simca's name, you become infused with the holy fires of the Rising Sun. All allies with Line of Sight to you instantaneously remove all Broken Conditions, and gain the Fearless Talent while the Miracle is in effect and they remain in your Line of Sight. Any servants of Chaos or Skaven within Line of Sight to you are subject to Fear 1."</Explanation>
+<Target>"Area of Effect"</Target>
+<Duration>"Fellowship Bonus Rounds"</Duration>
+<Range>"You"</Range>
+<Talent>"RULES-T0080_SIMCA"</Talent>
+<Level>""</Level>
+<TypSpell>"Miracle"</TypSpell>
+</Sort>
+<Sort id="NATIO-SIMCA_08">
+<Description language="ENGLISH">"Sunfire"</Description>
+<Explanation language="ENGLISH">"You call the power of the Orange Simca to smite servants of the dark gods, children of the Horned One and those tempted by black magics. The holy fire of the Rising Sun explodes from your body blasting outwards for Fellowship Bonus yards. All targets within range take 1d10 Wounds ignoring Toughness Bonus and APs. Targets with the Skaven, Undead and Daemon Creature Traits also gain the Ablaze Condition. For every +2 SL, you may increase the area of effect by +Fellowship Bonus yards, or cause an extra +2 Damage to any Skaven, Undead, or servants of the Ruinous Powers affected."</Explanation>
+<Target>"Area of Effect"</Target>
+<Duration>"Instant"</Duration>
+<Range>"You"</Range>
+<Talent>"RULES-T0080_SIMCA"</Talent>
+<Level>""</Level>
+<TypSpell>"Miracle"</TypSpell>
+</Sort>
+<Sort id="NATIO-ICE_01">
+<Description language="ENGLISH">"Biting Wind"</Description>
+<Explanation language="ENGLISH">"You channel mighty flows of magic into a howling gale of cold. This is a magic missile. Anyone between you and your target within 2 yards of the missile is slashed by wind-whipped ice shards dealing +6 damage. In addition, creatures that lost 5 Wounds or more from this spell gain a Stun Condition and must pass a Challenging (+0) Endurance Test or be forced prone from the harsh winds and shards of ice blasting against them."</Explanation>
+<Target>"1"</Target>
+<Duration>"Instant"</Duration>
+<Range>"Willpower Yards"</Range>
+<Talent>"RULES-T0088_ICE"</Talent>
+<Level>"10"</Level>
+<TypSpell>"Arcane Magic"</TypSpell>
+</Sort>
+<Sort id="NATIO-ICE_02">
+<Description language="ENGLISH">"Blizzard"</Description>
+<Explanation language="ENGLISH">"A swirling flurry of snow and ice rises from the land, freezing and blinding all in its path. Distant targets may require a Perception Test to see clearly, as dictated by the GM. Those within the radius of the spell (including allies) take Willpower Bonus + Toughness Bonus Damage every round, ignoring armor, and reduce their line of sight to only 6 yards. Targets also take a -20 penalty to their Ballistic Skill and Agility Tests and have their Movement reduced by half."</Explanation>
+<Target>"AoE Willpower Yards"</Target>
+<Duration>"Toughness Bonus Rounds"</Duration>
+<Range>"Willpower Yards"</Range>
+<Talent>"RULES-T0088_ICE"</Talent>
+<Level>"12"</Level>
+<TypSpell>"Arcane Magic"</TypSpell>
+</Sort>
+<Sort id="NATIO-ICE_03">
+<Description language="ENGLISH">"Chill"</Description>
+<Explanation language="ENGLISH">"Your touch leaves a gleaming frost behind. The air in the area drops to freezing temperatures for the duration, such as making breathe visible and turning water to ice instantly."</Explanation>
+<Target>"AoE Willpower Bonus Yards"</Target>
+<Duration>"1 Day"</Duration>
+<Range>"Touch"</Range>
+<Talent>"RULES-T0088_ICE"</Talent>
+<Level>"4"</Level>
+<TypSpell>"Arcane Magic"</TypSpell>
+</Sort>
+<Sort id="NATIO-ICE_04">
+<Description language="ENGLISH">"Chill Voice"</Description>
+<Explanation language="ENGLISH">"You speak with the pitiless chill of the Khan-Queens of old. Gain a +20 bonus on all Haggle, Intimidate, and Leadership Tests, but take a -20 penalty to all Charm, Entertain and Gossip Tests."</Explanation>
+<Target>"You"</Target>
+<Duration>"Fellowship Minutes"</Duration>
+<Range>"You"</Range>
+<Talent>"RULES-T0088_ICE"</Talent>
+<Level>"4"</Level>
+<TypSpell>"Arcane Magic"</TypSpell>
+</Sort>
+<Sort id="NATIO-ICE_05">
+<Description language="ENGLISH">"Crystal Cloak"</Description>
+<Explanation language="ENGLISH">"You call forth a swirling, shimmering, ice-laden mist and wrap it around you. Anyone within Toughness Bonus yards of you takes a -10 penalty to all Weapon Skill, Ballistic Skill and Agility Tests as the cloak's cold seeps into them. Further, anything living trying to attack you in melee combat must pass an Average (+20) Endurance Test or lose their action for next round due to the cloaks intense cold chilling them to the bone. This Test does not apply to creatures with the Undead or Daemonic Traits. For each +2 SL, you may increase the difficulty of the Endurance Test by an additional -10 up to a maximum penalty of -50."</Explanation>
+<Target>"You"</Target>
+<Duration>"Willpower Bonus Rounds"</Duration>
+<Range>"You"</Range>
+<Talent>"RULES-T0088_ICE"</Talent>
+<Level>"7"</Level>
+<TypSpell>"Arcane Magic"</TypSpell>
+</Sort>
+<Sort id="NATIO-ICE_06">
+<Description language="ENGLISH">"Death Frost"</Description>
+<Explanation language="ENGLISH">"You call up lethal cold from the land. A target that you touch must succeed a Hard (-20) Endurance Test or take 1d10 + Willpower Bonus Damage an amount of times per your Toughness Bonus, ignoring armor. On a successful test, the target only takes half damage instead. If the target's Wounds are reduced to 0 its body freezes and turns into a solid statue made of ice, a grizzly representation of its former self."</Explanation>
+<Target>"1"</Target>
+<Duration>"Instant"</Duration>
+<Range>"Touch"</Range>
+<Talent>"RULES-T0088_ICE"</Talent>
+<Level>"13"</Level>
+<TypSpell>"Arcane Magic"</TypSpell>
+</Sort>
+<Sort id="NATIO-ICE_07">
+<Description language="ENGLISH">"Frost Blade"</Description>
+<Explanation language="ENGLISH">"A sparkling blade of ice forms in your hand, taking any shape you wish. It counts as a magic weapon that deals SB + WPB Damage and stuns targets that lose 5 Wounds or more from each strike. It immediately melts away if you let go of it. For every +3 SL you may also add 1 Quality to the Frost Blade while the spell is in effect."</Explanation>
+<Target>"You"</Target>
+<Duration>"Willpower Bonus Rounds"</Duration>
+<Range>"You"</Range>
+<Talent>"RULES-T0088_ICE"</Talent>
+<Level>"5"</Level>
+<TypSpell>"Arcane Magic"</TypSpell>
+</Sort>
+<Sort id="NATIO-ICE_08">
+<Description language="ENGLISH">"Form of the Frostfiend"</Description>
+<Explanation language="ENGLISH">"You invite the cold spirits of old within you to transform yourself, along with your trappings, into a shrieking, taloned Frostfiend. You retain your Intelligence and Willpower, but your other Characteristics and Traits are that of a Frostfiend - a large bat-winged creature with white fur native to Kislev. Your melee claw attacks count as having the Hack and Impact Qualities. However, you may not communicate in anything other than howls, cannot cast spells, and cannot wield weapons. Form of the Frostfiend ends when you take a Critical Wound, go to sleep, or when you end the spell voluntarily. For every +3 SL you may add an additional creature Trait to your Frostfiend form. FROSTFIEND - M 6, WS 60, BS 0, S 55, T 45, I 30, Ag 65, Dex 35, Int 30, WP 85, Fel 15, W 42. Traits: Armor 3, Bite +8, Dark Vision, Fear 2, Immunity (Cold), Size (Large), Flight 60, Strider (Snow), Weapon +9. Optional: Big, Distracting, Elite, Frenzy, Fury, Hardy, Tough."</Explanation>
+<Target>"You"</Target>
+<Duration>"Special"</Duration>
+<Range>"You"</Range>
+<Talent>"RULES-T0088_ICE"</Talent>
+<Level>"16"</Level>
+<TypSpell>"Arcane Magic"</TypSpell>
+</Sort>
+<Sort id="NATIO-ICE_09">
+<Description language="ENGLISH">"Hailstorm"</Description>
+<Explanation language="ENGLISH">"You channel Ice Magic upwards, forming large chunks of ice that fall to the ground with horrifying speed. All creatures within its radius take Willpower Bonus + Toughness Bonus Damage each round they remain in the area. Also, they take a -20 penalty to all Ballistic Skill and Agility Tests and halve their movement. While the spell is in effect, the ice witch may roll a Language (Magick) Test and if successful can move the Hailstorm 2 yards per +1 SL."</Explanation>
+<Target>"AoE Willpower Bonus"</Target>
+<Duration>"Toughness Bonus Rounds"</Duration>
+<Range>"Toughness Yards"</Range>
+<Talent>"RULES-T0088_ICE"</Talent>
+<Level>"7"</Level>
+<TypSpell>"Arcane Magic"</TypSpell>
+</Sort>
+<Sort id="NATIO-ICE_10">
+<Description language="ENGLISH">"Hawks of Miska"</Description>
+<Explanation language="ENGLISH">"By calling upon pacts sealed by the first Khan-Queens, you summon the Hawks of Miska, frozen spirits of fear, hatred, and dread. The icy birds crystallize from the air and swoop around the target, loosing fearful cries. All creatures in the area must pass a Fear 1 Tests every round the spell is active or until they fail. If the creature Fumbles it receives an amount of Broken Conditions equal to its -SL. For every +3 SL, the Hawks of Miska may gain +1 to Fear."</Explanation>
+<Target>"Willpower Bonus Yards"</Target>
+<Duration>"Willpower Bonus Rounds"</Duration>
+<Range>"Willpower Yards"</Range>
+<Talent>"RULES-T0088_ICE"</Talent>
+<Level>"9"</Level>
+<TypSpell>"Arcane Magic"</TypSpell>
+</Sort>
+<Sort id="NATIO-ICE_11">
+<Description language="ENGLISH">"Ice Maiden's Kiss"</Description>
+<Explanation language="ENGLISH">"You breathe forth purest cold, freezing foes into glittering statues of ice. You immediately make a Cold Breath attack, as if you had spent 2 Advantage to activate the Breath Creature Trait (see page 338). Ice Maiden's Kiss is a magic missile with a Damage equal to your Toughness Bonus, ignoring armor. If the target's Wounds are reduced to 0 its body freezes and turns into a solid statue made of ice, a grizzly representation of its former self."</Explanation>
+<Target>"Special"</Target>
+<Duration>"Instant"</Duration>
+<Range>"Toughness Bonus Yards"</Range>
+<Talent>"RULES-T0088_ICE"</Talent>
+<Level>"6"</Level>
+<TypSpell>"Arcane Magic"</TypSpell>
+</Sort>
+<Sort id="NATIO-ICE_12">
+<Description language="ENGLISH">"Ice Sheet"</Description>
+<Explanation language="ENGLISH">"You glaze an area of the ground in front of you with a thin layer of slippery ice. Those in the area must succeed on a Difficult (-10) Agility Test every time they attempt a Movement Action, or they slip and fall, going prone, and lose the rest of their turn. A success means the character can act normally but at half Movement."</Explanation>
+<Target>"AoE Willpower Bonus Yards"</Target>
+<Duration>"Special"</Duration>
+<Range>"Willpower Yards"</Range>
+<Talent>"RULES-T0088_ICE"</Talent>
+<Level>"6"</Level>
+<TypSpell>"Arcane Magic"</TypSpell>
+</Sort>
+<Sort id="NATIO-ICE_13">
+<Description language="ENGLISH">"Permafrost"</Description>
+<Explanation language="ENGLISH">"You channel mighty flows of cold into the land. A heavy frost immediately crusts over every affected surface turning it into snowy terrain and making movement past Walking speed impossible. After casting, on this round only, anyone affected (including allies) also takes 1d10 + Willpower Bonus Damage that ignores armor and must succeed on a Challenging (+0) Endurance Test or lose their next Action. After one minute, all water in the area freezes."</Explanation>
+<Target>"AoE Toughness Yards"</Target>
+<Duration>"Toughness Bonus Days"</Duration>
+<Range>"You"</Range>
+<Talent>"RULES-T0088_ICE"</Talent>
+<Level>"10"</Level>
+<TypSpell>"Arcane Magic"</TypSpell>
+</Sort>
+<Sort id="NATIO-ICE_14">
+<Description language="ENGLISH">"Shardstorm"</Description>
+<Explanation language="ENGLISH">"You unleash diamond-hard shards of ice at a target, in an amount equal to your Willpower Bonus. Each shard is a magic missile dealing +2 Damage. For every +2 SL you may fire an additional magic missile at the target."</Explanation>
+<Target>"1"</Target>
+<Duration>"Instant"</Duration>
+<Range>"Willpower Yards"</Range>
+<Talent>"RULES-T0088_ICE"</Talent>
+<Level>"8"</Level>
+<TypSpell>"Arcane Magic"</TypSpell>
+</Sort>
+<Sort id="NATIO-ICE_15">
+<Description language="ENGLISH">"Shoika's Call"</Description>
+<Explanation language="ENGLISH">"You call out to the Ancient Widow, reminding her of her promises to Khan-Queen Shoika, first Tzarina of Kislev, and cause 20-foot tendrils of ice to erupt from the ground. Any Size (Large) or smaller creature in the area has their Movement halved and must succeed a Challenging (+0) Agility Test each round or the tendrils wrap around it and deal SB+4 Damage that ignores armor. Any creature that is larger is merely attacked by the tendrils. In addition, the character is considered entangled - to break free, they must win an opposed Strength Test. The tendril counts as having a Weapon Skill equal to your Willpower Characteristic and Strength equal to your Intelligence Characteristic."</Explanation>
+<Target>"AoE Toughness Yards"</Target>
+<Duration>"Intelligence Bonus Rounds"</Duration>
+<Range>"Toughness Yards"</Range>
+<Talent>"RULES-T0088_ICE"</Talent>
+<Level>"16"</Level>
+<TypSpell>"Arcane Magic"</TypSpell>
+</Sort>
+<Sort id="NATIO-ICE_16">
+<Description language="ENGLISH">"Walk the Endless Steppe"</Description>
+<Explanation language="ENGLISH">"You lower the temperature of your body. You are completely immune to exposure caused by freezing conditions and are immune to damage from cold-based attacks."</Explanation>
+<Target>"You"</Target>
+<Duration>"Toughness Bonus Hours"</Duration>
+<Range>"You"</Range>
+<Talent>"RULES-T0088_ICE"</Talent>
+<Level>"7"</Level>
+<TypSpell>"Arcane Magic"</TypSpell>
+</Sort>
+<Sort id="NATIO-ICE_17">
+<Description language="ENGLISH">"Wall of Ice"</Description>
+<Explanation language="ENGLISH">"You form a wall of snowy ice from the ground. The ice wall is Willpower Bonus yards wide, Intelligence Bonus yards tall and 2 yards deep. For every +2 SL you may extend the length of the ice wall by +Willpower Bonus yards. You may not pass through an area emanating any warmth (living bodies, fire, and similar, as dictated by the GM). The wall blocks line of sight and has TB 5, and 10 Wounds times your Toughness Bonus. Fire deals double damage to the ice wall."</Explanation>
+<Target>"AoE (Special)"</Target>
+<Duration>"Willpower Bonus Rounds"</Duration>
+<Range>"Willpower Yards"</Range>
+<Talent>"RULES-T0088_ICE"</Talent>
+<Level>"6"</Level>
+<TypSpell>"Arcane Magic"</TypSpell>
+</Sort>
+<Sort id="NATIO-ICE_18">
+<Description language="ENGLISH">"Winter Walk"</Description>
+<Explanation language="ENGLISH">"You demand the winter spirits grant you passage. You take no Movement penalty in the snow or on ice and are immune to the negative effects and penalties from cold weather including blizzards during travel."</Explanation>
+<Target>"You"</Target>
+<Duration>"1 Day"</Duration>
+<Range>"You"</Range>
+<Talent>"RULES-T0088_ICE"</Talent>
+<Level>"3"</Level>
+<TypSpell>"Arcane Magic"</TypSpell>
+</Sort>
+<Sort id="NATIO-DESERT_01">
+<Description language="ENGLISH">"Curse of the Djinn"</Description>
+<Explanation language="ENGLISH">"The magician channels the immense power of the Djinn through their own body and lays a terrible curse upon their foe as their energy is sapped and their armor fails to protect them. The target suffers a penalty of -10 to all Tests, in addition to any other modifiers, and may not spend Fortune points. The target's armor and weapons also fail them as they break and turn to dust on impact from the next time they're struck, assuming they aren't magical."</Explanation>
+<Target>"1"</Target>
+<Duration>"Intelligence Bonus Days"</Duration>
+<Range>"Willpower Yards"</Range>
+<Talent>"RULES-T0088_DESERT"</Talent>
+<Level>"8"</Level>
+<TypSpell>"Arcane Magic"</TypSpell>
+</Sort>
+<Sort id="NATIO-DESERT_02">
+<Description language="ENGLISH">"Dancing Scimitar"</Description>
+<Explanation language="ENGLISH">"The magician summons a swirling, flaming scimitar that attacks their enemies. This spell is a magic missile that deals +8 Damage. Any enemy struck gains +1 Ablaze Condition and any Undead struck take additional +Intelligence Bonus Damage and are knocked prone. For each +2 SL, the missile may inflict an additional +1 Ablaze Condition on the target."</Explanation>
+<Target>"1"</Target>
+<Duration>"Willpower Bonus Rounds"</Duration>
+<Range>"Willpower Yards"</Range>
+<Talent>"RULES-T0088_DESERT"</Talent>
+<Level>"6"</Level>
+<TypSpell>"Arcane Magic"</TypSpell>
+</Sort>
+<Sort id="NATIO-DESERT_03">
+<Description language="ENGLISH">"Flying Servant"</Description>
+<Explanation language="ENGLISH">"With a rug, rope, broom or carpet, you animate an object capable of taking you to great heights. For the duration of the spell, you gain the Flight 60 Creature Trait as you ride across the skies on your newly animated servant. The animated object has Wounds and Encumbrance equal to your Willpower + Intelligence Bonus. Once the object's Wounds reach 0, it becomes inanimate again. For each +2 SL you may increase the Wounds and Encumbrance of the animated object by +1."</Explanation>
+<Target>"1"</Target>
+<Duration>"Fellowship Bonus Hours"</Duration>
+<Range>"Willpower Bonus Yards"</Range>
+<Talent>"RULES-T0088_DESERT"</Talent>
+<Level>"6"</Level>
+<TypSpell>"Arcane Magic"</TypSpell>
+</Sort>
+<Sort id="NATIO-DESERT_04">
+<Description language="ENGLISH">"Mirage"</Description>
+<Explanation language="ENGLISH">"You summon an illusory image of your choosing to fool your enemies, using their deepest desires and luring them into a trap with false riches of gold or confusing them with illusory clones of you or your allies. You will automatically fool anyone without the Second Sight Talent. Those with that Talent must pass a Difficult (-10) Perception Test to notice the illusion. This does not let them see through the spell. They must dispel it to do so. During combat, illusory clones may attack or defend as if they are real but cannot deal or receive Damage; however, they can help grant an outnumbering bonus against their enemies. Those engaged with the illusion must attempt a Hard (-20) Willpower test to resist its effects or else treat it as if it is real and act accordingly."</Explanation>
+<Target>"Special"</Target>
+<Duration>"Intelligence Bonus Rounds"</Duration>
+<Range>"Willpower Yards"</Range>
+<Talent>"RULES-T0088_DESERT"</Talent>
+<Level>"5"</Level>
+<TypSpell>"Arcane Magic"</TypSpell>
+</Sort>
+<Sort id="NATIO-DESERT_05">
+<Description language="ENGLISH">"Sand Blast"</Description>
+<Explanation language="ENGLISH">"A blasting sandstorm erupts from the magician's mouth, throwing those who stand before them onto the ground and covering them in sand. This spell is a magic missile that deals +6 Damage ignoring armor. Any target struck gains a Blind Condition and must attempt a Challenging (+0) Endurance Test or be knocked prone."</Explanation>
+<Target>"AoE Willpower Bonus Yards"</Target>
+<Duration>"Instant"</Duration>
+<Range>"Willpower Yards"</Range>
+<Talent>"RULES-T0088_DESERT"</Talent>
+<Level>"9"</Level>
+<TypSpell>"Arcane Magic"</TypSpell>
+</Sort>
+<Sort id="NATIO-DESERT_06">
+<Description language="ENGLISH">"Sandstorm"</Description>
+<Explanation language="ENGLISH">"You command the desert spirits to engulf your enemies in a swirling cloud of choking sand and dust. Anyone trapped within Sandstorm's radius, besides the caster, receives a -30 penalty to all Perception Tests, cannot see past 4 yards in front of them and cannot use missile weapons as the whirling sands make it impossible to aim and fire properly. For each +2 SL, the caster may make one ally immune to the effects of Sandstorm for the duration the spell is active."</Explanation>
+<Target>"AoE Willpower Yards"</Target>
+<Duration>"Intelligence Bonus Rounds"</Duration>
+<Range>"Willpower Yards"</Range>
+<Talent>"RULES-T0088_DESERT"</Talent>
+<Level>"8"</Level>
+<TypSpell>"Arcane Magic"</TypSpell>
+</Sort>
+<Sort id="NATIO-DESERT_07">
+<Description language="ENGLISH">"Summon Djinn"</Description>
+<Explanation language="ENGLISH">"You channel through the winds briefly forcing into your service a mighty ally. A Djinn immediately manifests. Perform an Opposed Channel/Willpower Test with the Djinn. If successful, the Djinn will respond to any commands issued by the caster, then vanish once the duration ends. If failed, the Djinn immediately turns on its master and must be destroyed. For every +2 SL you may add an additional Optional Trait for the Djinn; however, the Djinn will maintain these Traits even if it turns against you. The element the Djinn is manifested from is determined randomly - roll a d10: 1 Light (Damaging and Impact Quality for all physical attacks against Daemons), 2 Metal (+5 Armor Points), 3 Life (Regenerate Trait), 4 Heavens (Breath +5 Lightning Trait), 5 Shadow (Breath +5 Smoke Trait), 6 Death (Damaging and Impact Quality for all physical attacks against Undead), 7 Fire (Breath +5 Fire Trait), 8 Beast (Frenzy Trait), 9 Ice (Breath +5 Frost Trait), 10 Dhar (Terror (3) Trait). DJINN - M 6, WS 60, BS 30, S 40, T 55, I 60, Ag 40, Dex 30, Int 65, WP 70, Fel 30, W 25. Traits: Breathe (Element), Clever, Cunning, Dark Vision, Flight (60), Magical, Painless, Spellcaster (Element), Weapon +8. Optional: Big, Champion, Elite, Ethereal, Fast, Fury, Hardy, Ranged +8 (150), Size (Large)."</Explanation>
+<Target>"Special"</Target>
+<Duration>"Willpower Bonus Minutes"</Duration>
+<Range>"Willpower Bonus Yards"</Range>
+<Talent>"RULES-T0088_DESERT"</Talent>
+<Level>"12"</Level>
+<TypSpell>"Arcane Magic"</TypSpell>
+</Sort>
+<Sort id="NATIO-DESERT_08">
+<Description language="ENGLISH">"Sun Spear"</Description>
+<Explanation language="ENGLISH">"Bright beams of burning energy leap from the magician's eyes and scythe through all before them. This is a magic missile with a Damage of +12. It strikes the first creature in its path. If the target suffers any Wounds, also inflict +1 Ablaze Condition, after which the spear continues its path, striking each target in the same manner, but at -1 Damage each time. If the spear fails to inflict any Wounds, its progress is stopped, and the spell comes to an end. The Sun Spear only inflicts the minimum 1 Wound (see page 236) on the first target it strikes."</Explanation>
+<Target>"Special"</Target>
+<Duration>"Instant"</Duration>
+<Range>"Willpower Yards"</Range>
+<Talent>"RULES-T0088_DESERT"</Talent>
+<Level>"8"</Level>
+<TypSpell>"Arcane Magic"</TypSpell>
+</Sort>
+<Sort id="NATIO-DESERT_09">
+<Description language="ENGLISH">"Quicksand"</Description>
+<Explanation language="ENGLISH">"The magician causes the ground to sink beneath the targets as a pit of quicksand appears, slowly bringing them to their doom. Anyone hit by Quicksand must roll a -30 Agility Test or be knocked prone so long as they remain within its radius. Those affected may retake the test at the end of each subsequent Round. After the duration ends, the targets must then roll an additional -20 Agility Test or be sucked in by the quicksand to their deaths. For every +2 SL, the caster may reduce the duration of the spell by -1 Round. The target must be a Size (Large) creature or smaller. This spell requires sufficient terrain in order to function, such as sand or soil."</Explanation>
+<Target>"AoE Willpower Bonus Yards"</Target>
+<Duration>"Willpower Bonus Rounds"</Duration>
+<Range>"Willpower Yards"</Range>
+<Talent>"RULES-T0088_DESERT"</Talent>
+<Level>"10"</Level>
+<TypSpell>"Arcane Magic"</TypSpell>
+</Sort>
+</DATA_SPELL>
 </DATA_BOOK>
