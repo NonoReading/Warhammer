@@ -6,6 +6,27 @@
 CORRECTIONS COURTES  (une ligne ou deux chacune)
 =========================================================================
 
+ECRIRE LES NEUF ETHNIES RESTANTES DU LOT 3a DE NATIONS OF MANKIND. Albion, Araby, Bretonnia
+(Peasantry), Bretonnia (Nobility), Cathay, Estalia, Ind, Kislev (Gospodar), Nippon. Pages 3-4
+du livre. Kislev (Ungol) est ecrite et validee, et sert de modele ; les Trait (Any) sont
+modelises et fonctionnels depuis le 03/09/2026 (CONTEXT.md 2.41), il n y a donc plus
+d obstacle de modele - c est de la saisie. Deux rappels : refaire la resolution des libelles
+depuis des fichiers RESTAGES le jour ou on ecrit, et Kislev (Gospodar) REUTILISE
+NATIO-TRAIT_KISLEV au lieu de le redeclarer.
+
+DATA_RACE EST LU MAIS JAMAIS EXPORTE. Trouve le 03/09/2026 en ecrivant l export du bloc
+DATA_SPECIE_TRAIT. ListEspece n apparait nulle part dans l ecriture de xmlexportimport.pas :
+exporter le Rulebook depuis WinLivre lui ferait perdre son bloc de races. Meme piege que
+DATA_SPELL_TALENT (CONTEXT.md 2.39), mais anterieur a ce chantier. Verifier au passage s il
+y a d autres blocs dans ce cas - la methode est de croiser la liste des ConstXmlData* avec
+celles qui apparaissent dans la procedure d export.
+
+VERIFIER LES AUTRES CHEMINS D AFFICHAGE QUAND ON AJOUTE UNE NATURE DE DONNEE. Le trait
+d ethnie a demande une correction dans TROIS endroits qui aiguillent sur la FORME du code
+et non sur sa nature : la branche "choix unique" de l arbre de WinRaces, le basculement de
+ChargeSpecialisation vers le catalogue complet, et le routage par Node.Parent.Text du clic
+de WinRaces. Aucun n avait ete anticipe. A relire avant le prochain ajout du meme genre.
+
 UN TALENT DE BENEDICTION POSE A LA CREATION N ACCORDE AUCUN SORT. Trouve le 03/09/2026 en
 corrigeant CONTEXT 2.40. SortAffiche ne regarde que les lignes ou Nouveau > Actuel, or
 MajTables (winpersonnage.pas l.~4434-4467) ecrit Nouveau := Actuel pour tout talent deja

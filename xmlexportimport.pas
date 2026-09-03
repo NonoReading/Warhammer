@@ -187,6 +187,8 @@ Procedure XmlExportBook(Livre: String; Langue: String);
     PMetierRaceChoixMetier:   StructureMetierRaceChoixMetier;
     PSort:                    StructureSort;
     PSortTalent:              StructureSortTalent;
+    PTrait:                   StructureTrait;
+    PTraitOption:             StructureTraitOption;
     PMetierSousMetier:        StructureMetierSousMetier;
     PAttribut:                StructureAttribut;
     PAttributAugmentation:    StructureAttributAugmentation;
@@ -835,6 +837,34 @@ Procedure XmlExportBook(Livre: String; Langue: String);
         if Fist = false then
            XmlContent.Add(XmlFin(ConstXmlDataSpellTalent));
 
+        // Traits d'ethnie - voir CONTEXT.md 2.41. Bloc ECRIT des maintenant, meme si
+        // aucun ecran ne le saisit : l'export reconstruit le fichier depuis les listes
+        // en memoire, donc un bloc lu mais non ecrit disparait a la premiere sauvegarde
+        // depuis WinLivre (lecon du 03/09/2026, CONTEXT.md 2.39).
+        Fist := true;
+        for PTrait in ListTrait do
+          if (PTrait.Livre = Livre) then
+            begin
+              if Fist = true then
+                begin
+                  XmlContent.Add(XmlDebut(ConstXmlDataSpecieTrait));
+                  Fist := false;
+                end;
+              XmlContent.Add(XmlDebutCode(ConstXmlSpecieTrait, PTrait.CodeTrait));
+              XmlContent.Add(XmlLigneLangue(ConstXmlDescription, Langue, PTrait.Libelle));
+              for PTraitOption in ListTraitOption do
+                if CompareRechercheValeur(PTraitOption.CodeTrait, PTrait.CodeTrait) then
+                  begin
+                    XmlContent.Add(XmlDebutCode(ConstXmlTraitOption, PTraitOption.CodeOption));
+                    XmlContent.Add(XmlLigneLangue(ConstXmlDescription, Langue, PTraitOption.Libelle));
+                    XmlContent.Add(XmlLigne(ConstXmlTalent, PTraitOption.ListeTalent));
+                    XmlContent.Add(XmlFinCode(ConstXmlTraitOption));
+                  end;
+              XmlContent.Add(XmlFinCode(ConstXmlSpecieTrait));
+            end;
+        if Fist = false then
+           XmlContent.Add(XmlFin(ConstXmlDataSpecieTrait));
+
         // Fabrication
         Fist := true;
         for PFabrication in ListFabrication do
@@ -950,6 +980,8 @@ Procedure XmlImport(FileName: String; OnlyPrimary: Boolean; OnlyCode: Boolean);
     PArmureBonus:             StructureArmureBonus;
     PSort:                    StructureSort;
     PSortTalent:              StructureSortTalent;
+    PTrait:                   StructureTrait;
+    PTraitOption:             StructureTraitOption;
     PFabrication:             StructureFabrication;
     PMetierRaceChoixMetier:   StructureMetierRaceChoixMetier;
     PMetierSousMetier:        StructureMetierSousMetier;
@@ -959,6 +991,7 @@ Procedure XmlImport(FileName: String; OnlyPrimary: Boolean; OnlyCode: Boolean);
     PTexte:                   StructureTexte;
     PCompetenceMere:          StructureCompetence;
     PTraduction:              StructureTraduction;
+    PTraductionOption:        StructureTraduction;
     PTraductionNv2:           StructureTraduction;
     PArmureSimplifiee:        StructureArmureSimplifiee;
     PRaceCorruptionCreation:  StructureRaceCorruptionCreation;
@@ -2283,6 +2316,87 @@ Procedure XmlImport(FileName: String; OnlyPrimary: Boolean; OnlyCode: Boolean);
                         begin
                           ListSortTalent.add(PSortTalent);
                           inc(NbSortTalent);
+                        end;
+
+                      NodeNv2 := XmlElement(NodeNv2.NextSibling);
+                    end;
+                end;
+
+              // Traits d'ethnie - bloc de LIVRE, voir CONTEXT.md 2.41. Un Trait porte
+              // N Options, chaque Option porte une liste de talents separee par des
+              // virgules ou les formes A/B et RULES-T* restent valables.
+              NodeNv1 := BookNode.FindNode(ConstXmlDataSpecieTrait);
+              if Assigned(NodeNv1) then
+                begin
+                  NodeNv2 := XmlElement(NodeNv1.FirstChild);
+                  While Assigned(NodeNv2) do
+                    begin
+                      if NodeNv2.NodeName = ConstXmlSpecieTrait then
+                        begin
+                          PTrait.Livre     := Livre;
+                          PTrait.Libelle   := '';
+                          PTrait.CodeTrait := RemoveQuotes(UTF8Encode(NodeNv2.Attributes.GetNamedItem(ConstXmlId).NodeValue));
+                          PTraduction      := InitTrad(ConstPTrait, PTrait.CodeTrait, '', PTrait.Livre);
+
+                          NodeNv3 := XmlElement(NodeNv2.FirstChild);
+                          while Assigned(NodeNv3) do
+                            begin
+                              case NodeNv3.NodeName of
+                                ConstXmlDescription:
+                                  begin
+                                    PTrait.Libelle      := RemoveQuotes(UTF8Encode(NodeNv3.TextContent));
+                                    Langue              := RemoveQuotes(UTF8Encode(NodeNv3.Attributes.GetNamedItem(ConstXmlLanguage).NodeValue));
+                                    PTraduction.Libelle := PTrait.Libelle;
+                                  end;
+                                ConstXmlTraitOption:
+                                  begin
+                                    // Record local reutilise d'une option a l'autre : sans
+                                    // remise a zero, une option sans balise heriterait de
+                                    // la precedente (meme piege que les fonctions Cherche*).
+                                    PTraitOption.Livre       := Livre;
+                                    PTraitOption.CodeTrait   := PTrait.CodeTrait;
+                                    PTraitOption.Libelle     := '';
+                                    PTraitOption.ListeTalent := '';
+                                    PTraitOption.CodeOption  := RemoveQuotes(UTF8Encode(NodeNv3.Attributes.GetNamedItem(ConstXmlId).NodeValue));
+                                    PTraductionOption        := InitTrad(ConstPTraitOption, PTraitOption.CodeOption, '', PTraitOption.Livre);
+
+                                    Node := XmlElement(NodeNv3.FirstChild);
+                                    while Assigned(Node) do
+                                      begin
+                                        case Node.NodeName of
+                                          ConstXmlDescription:
+                                            begin
+                                              PTraitOption.Libelle      := RemoveQuotes(UTF8Encode(Node.TextContent));
+                                              Langue                    := RemoveQuotes(UTF8Encode(Node.Attributes.GetNamedItem(ConstXmlLanguage).NodeValue));
+                                              PTraductionOption.Libelle := PTraitOption.Libelle;
+                                            end;
+                                          ConstXmlTalent:
+                                            PTraitOption.ListeTalent := RemoveQuotes(UTF8Encode(Node.TextContent));
+                                        end;
+
+                                        Node := XmlElement(Node.NextSibling);
+                                      end;
+
+                                    if LangueDef = ConstAnglais then
+                                      begin
+                                        ListTraitOption.add(PTraitOption);
+                                        inc(NbTraitOption);
+                                      end;
+
+                                    AddTrad(PTraductionOption, Langue);
+                                  end;
+                              end;
+
+                              NodeNv3 := XmlElement(NodeNv3.NextSibling);
+                            end;
+
+                          if LangueDef = ConstAnglais then
+                            begin
+                              ListTrait.add(PTrait);
+                              inc(NbTrait);
+                            end;
+
+                          AddTrad(PTraduction, Langue);
                         end;
 
                       NodeNv2 := XmlElement(NodeNv2.NextSibling);

@@ -948,7 +948,251 @@ Description: You ask Dazh to illuminate the night, and he
 <Talent id="RULES-T0088_DESERT">
 <Description language="ENGLISH">"Arcane Magic (Lore of the Desert)"</Description>
 </Talent>
+<Talent id="RULES-T0129_FROID">
+<Description language="ENGLISH">"Resistance (Cold)"</Description>
+</Talent>
 </DATA_TALENT_SPECIALIZATION>
+<DATA_SPECIE_TRAIT>
+  <!-- LOT 3a : les "Trait (Any)" des ethnies. Le livre donne comme dernier talent une
+       ligne qui n en est pas un - "Provincial Trait (Any)" - et renvoie a une sous-liste
+       de la meme page : un choix parmi N GROUPES de talents. Bloc de LIVRE, cite depuis
+       le SUBCHAPTER_TALENT d une ethnie, parce qu une meme liste sert plusieurs ethnies :
+       celle-ci est citee par Kislev (Gospodar) ET par Kislev (Ungol). CONTEXT.md 2.41.
+       Chaque option porte UNE balise Talent, liste separee par des virgules, ou les formes
+       habituelles restent valables : A/B pour un choix, RULES-T* pour un talent aleatoire.
+       Le livre ecrit tantot "One Random Talent", tantot "One Random Roll" : meme chose,
+       decision Nono du 03/09/2026. -->
+<SpecieTrait id="NATIO-TRAIT_KISLEV">
+<Description language="ENGLISH">"Provincial Trait"</Description>
+  <!-- Libelle fidele au livre, decision Nono du 03/09/2026. -->
+  <Option id="NATIO-TRAIT_KISLEV_NORD">
+  <Description language="ENGLISH">"Northern Kislev"</Description>
+  <Talent>"RULES-T0164,RULES-T*"</Talent>
+    <!-- Night Vision, One Random Talent -->
+  </Option>
+  <Option id="NATIO-TRAIT_KISLEV_PRAAG">
+  <Description language="ENGLISH">"Eastern Kislev (Praag)"</Description>
+  <Talent>"RULES-T0107,RULES-T*"</Talent>
+    <!-- Strong-minded, One Random Talent -->
+  </Option>
+  <Option id="NATIO-TRAIT_KISLEV_ERENGRAD">
+  <Description language="ENGLISH">"Western Kislev (Erengrad)"</Description>
+  <Talent>"RULES-T0085/RULES-T0119,RULES-T*"</Talent>
+    <!-- Old Salt or Sea Legs, One Random Talent -->
+  </Option>
+  <Option id="NATIO-TRAIT_KISLEV_VILLE">
+  <Description language="ENGLISH">"Southern Kislev (City of Kislev)"</Description>
+  <Talent>"RULES-T*,RULES-T*"</Talent>
+    <!-- Two Random Talents -->
+  </Option>
+</SpecieTrait>
+</DATA_SPECIE_TRAIT>
+<DATA_SPECIE>
+  <!-- LOT 3a : les ethnies humaines des pages 3-4. Une race, N ethnies : toutes
+       rattachees a RULES-SPECIE_HUMAN par leur champ Ethnic, sur le modele de
+       Sea of Claws et de High Elf Player s Guide.
+       Norsca et Tilea ne sont PAS reprises ici : la base les porte deja par des
+       livres officiels (SEAOF-RACE_HBJOR / HSARL / HSKAE, UPINA-RACE_HTIL) et
+       l officiel gagne sur le livre de fan (regle du 03/09/2026).
+       Premiere ethnie ecrite seule pour faire valider la forme. -->
+<Specie id="NATIO-RACE_HUNG">
+<Description language="ENGLISH">"Humans (Kislev, Ungol)"</Description>
+<Explanation language="ENGLISH">"The Ungols were the tribes of the northern oblast before the Gospodars came from the east, subjugated them and founded Kislev. They remain the people of the north and of the horse: light riders, bowmen and herders, hardened by a cold that kills the unprepared. Ungol characters are found wherever Kislev needs eyes on its frontier, and many drift south into the Empire when the wars at home give them nothing left to defend."</Explanation>
+  <!-- CHOIX DE SAISIE : le livre ne donne aucun texte de presentation par nation,
+       ses pages 3-4 ne portent que les listes de competences et de talents. Cette
+       explication est redigee a partir du corps du livre (histoire des Kossars,
+       p.36) - a valider par Nono. -->
+<Ethnic>"RULES-SPECIE_HUMAN"</Ethnic>
+<SUBCHAPTER_ATTR>
+  <!-- Recopiees telles quelles de RULES-RACE_HUM (Humans (Reikland)) : le livre ne
+       donne pas de caracteristiques par nation, et tous les humains partagent les
+       memes. Decision Nono du 03/09/2026. -->
+<Attribut name="RULES-ATTR_WS">"2d10+20"</Attribut>
+<Attribut name="RULES-ATTR_BS">"2d10+20"</Attribut>
+<Attribut name="RULES-ATTR_S">"2d10+20"</Attribut>
+<Attribut name="RULES-ATTR_T">"2d10+20"</Attribut>
+<Attribut name="RULES-ATTR_I">"2d10+20"</Attribut>
+<Attribut name="RULES-ATTR_Ag">"2d10+20"</Attribut>
+<Attribut name="RULES-ATTR_Dex">"2d10+20"</Attribut>
+<Attribut name="RULES-ATTR_Int">"2d10+20"</Attribut>
+<Attribut name="RULES-ATTR_WP">"2d10+20"</Attribut>
+<Attribut name="RULES-ATTR_Fel">"2d10+20"</Attribut>
+<Attribut name="RULES-ATTR_Fate">"2"</Attribut>
+<Attribut name="RULES-ATTR_Resil">"1"</Attribut>
+<Attribut name="RULES-ATTR_Wound">"1xBATTR_S+2xBATTR_T+1xBATTR_WP"</Attribut>
+<Attribut name="RULES-ATTR_Supp">"3"</Attribut>
+<Attribut name="RULES-ATTR_Move">"4"</Attribut>
+</SUBCHAPTER_ATTR>
+<SUBCHAPTER_SKILL>
+  <!-- Livre p.3, "Kislev (Ungol)", les 12 competences dans l ordre du livre. -->
+<Skill>"RULES-COMPSOINANI"</Skill>
+  <!-- Animal Care -->
+<Skill>"RULES-COMPANIM"</Skill>
+  <!-- Charm Animal -->
+<Skill>"RULES-COMPCALM"</Skill>
+  <!-- Cool -->
+<Skill>"RULES-COMPCOND"</Skill>
+  <!-- Drive -->
+<Skill>"RULES-COMPRAGOT"</Skill>
+  <!-- Gossip -->
+<Skill>"RULES-COMPINTIM"</Skill>
+  <!-- Intimidate -->
+<Skill>"RULES-COMPLANG_GOSPO"</Skill>
+  <!-- Language (Gospodarinyi) -->
+<Skill>"RULES-COMPSAVOIR_KISLEV"</Skill>
+  <!-- Lore (Kislev) -->
+<Skill>"RULES-COMPCOMB_BASE"</Skill>
+  <!-- Melee (Basic) -->
+<Skill>"RULES-COMPCOMB_BAGAR"</Skill>
+  <!-- Melee (Brawling) -->
+<Skill>"RULES-COMPSURVEXT"</Skill>
+  <!-- Outdoor Survival -->
+<Skill>"RULES-COMPPROJ_ARC"</Skill>
+  <!-- Ranged (Bow) -->
+</SUBCHAPTER_SKILL>
+<SUBCHAPTER_TALENT>
+<Talent>"RULES-T0047"</Talent>
+  <!-- Hardy -->
+<Talent>"RULES-T0129_FROID"</Talent>
+  <!-- Resistance (Cold) - specialisation creee par ce livre -->
+<Talent>"RULES-T0153/RULES-T0067"</Talent>
+  <!-- Marksman or Warrior Born -->
+<Talent>"NATIO-TRAIT_KISLEV"</Talent>
+  <!-- Provincial Trait (Any) - ce n est pas un talent mais un TRAIT D ETHNIE, declare
+       dans le bloc DATA_SPECIE_TRAIT en tete de ce fichier. CONTEXT.md 2.41. -->
+</SUBCHAPTER_TALENT>
+  <!-- Table de tirage recopiee de RULES-RACE_HUM (Humans (Reikland)) : le livre
+       ne donne aucune table de carriere par nation. Decision Nono du 03/09/2026. -->
+<SUBCHAPTER_CAREER>
+<Career name="RULES-WORK02">"01"</Career>
+  <!-- Apothecary -->
+<Career name="RULES-WORK31">"02"</Career>
+  <!-- Engineer -->
+<Career name="RULES-WORK33">"03"</Career>
+  <!-- Lawyer -->
+<Career name="RULES-WORK45">"04-05"</Career>
+  <!-- Nun -->
+<Career name="RULES-WORK36">"06"</Career>
+  <!-- Physician -->
+<Career name="RULES-WORK49">"07-11"</Career>
+  <!-- Priest -->
+<Career name="RULES-WORK23">"12-13"</Career>
+  <!-- Scholar -->
+<Career name="RULES-WORK58">"14"</Career>
+  <!-- Wizard -->
+<Career name="RULES-WORK01">"15"</Career>
+  <!-- Agitator -->
+<Career name="RULES-WORK03">"16-17"</Career>
+  <!-- Artisan -->
+<Career name="RULES-WORK37">"18-19"</Career>
+  <!-- Beggar -->
+<Career name="RULES-WORK21">"20"</Career>
+  <!-- Inverstigator -->
+<Career name="RULES-WORK34">"21"</Career>
+  <!-- Merchant -->
+<Career name="RULES-WORK52">"22-23"</Career>
+  <!-- Rat Catcher -->
+<Career name="RULES-WORK07">"24-26"</Career>
+  <!-- Townsman -->
+<Career name="RULES-WORK39">"27"</Career>
+  <!-- Watchman -->
+<Career name="RULES-WORK15">"28"</Career>
+  <!-- Advisor -->
+<Career name="RULES-WORK04">"29"</Career>
+  <!-- Artist -->
+<Career name="RULES-WORK18">"30"</Career>
+  <!-- Duellist -->
+<Career name="RULES-WORK20">"31"</Career>
+  <!-- Envoy -->
+<Career name="RULES-WORK44">"32"</Career>
+  <!-- Noble -->
+<Career name="RULES-WORK56">"33-35"</Career>
+  <!-- Servant -->
+<Career name="RULES-WORK24">"36"</Career>
+  <!-- Spy -->
+<Career name="RULES-WORK32">"37"</Career>
+  <!-- Warden -->
+<Career name="RULES-WORK05">"38"</Career>
+  <!-- Bailif -->
+<Career name="RULES-WORK59">"39"</Career>
+  <!-- Hedge Witch -->
+<Career name="RULES-WORK29">"40"</Career>
+  <!-- Herbalist -->
+<Career name="RULES-WORK10">"41-42"</Career>
+  <!-- Hunter -->
+<Career name="RULES-WORK40">"43"</Career>
+  <!-- Miner -->
+<Career name="RULES-WORK41">"44"</Career>
+  <!-- Mystic -->
+<Career name="RULES-WORK19">"45"</Career>
+  <!-- Scout -->
+<Career name="RULES-WORK63">"46-50"</Career>
+  <!-- Villager -->
+<Career name="RULES-WORK11">"51"</Career>
+  <!-- Bounty Hunter -->
+<Career name="RULES-WORK13">"52"</Career>
+  <!-- Coachman -->
+<Career name="RULES-WORK55">"53-54"</Career>
+  <!-- Entertainer -->
+<Career name="RULES-WORK26">"55-56"</Career>
+  <!-- Flagellant -->
+<Career name="RULES-WORK38">"57"</Career>
+  <!-- Messenger -->
+<Career name="RULES-WORK14">"58"</Career>
+  <!-- Pedlar -->
+<Career name="RULES-WORK47">"59"</Career>
+  <!-- Road Warden -->
+<Career name="RULES-WORK54">"60"</Career>
+  <!-- Witch Hunter -->
+<Career name="RULES-WORK06">"61-62"</Career>
+  <!-- Boatman -->
+<Career name="RULES-WORK43">"63"</Career>
+  <!-- Huffer -->
+<Career name="RULES-WORK46">"64-65"</Career>
+  <!-- Riverwarden -->
+<Career name="RULES-WORK25">"66-68"</Career>
+  <!-- Riverwoman -->
+<Career name="RULES-WORK35">"69-70"</Career>
+  <!-- Seaman -->
+<Career name="RULES-WORK16">"71"</Career>
+  <!-- Smuggler -->
+<Career name="RULES-WORK17">"72-73"</Career>
+  <!-- Stevedor -->
+<Career name="RULES-WORK42">"74"</Career>
+  <!-- Wrecker -->
+<Career name="RULES-WORK22">"75-76"</Career>
+  <!-- Bawl -->
+<Career name="RULES-WORK09">"77"</Career>
+  <!-- Charlatan -->
+<Career name="RULES-WORK53">"78"</Career>
+  <!-- Fence -->
+<Career name="RULES-WORK48">"79"</Career>
+  <!-- Grave Robber -->
+<Career name="RULES-WORK30">"80-83"</Career>
+  <!-- Outlaw -->
+<Career name="RULES-WORK51">"84"</Career>
+  <!-- Racketeer -->
+<Career name="RULES-WORK64">"85-87"</Career>
+  <!-- Thief -->
+<Career name="RULES-WORK60">"88"</Career>
+  <!-- Witch -->
+<Career name="RULES-WORK08">"89-90"</Career>
+  <!-- Cavalryman -->
+<Career name="RULES-WORK27">"91-92"</Career>
+  <!-- Guard -->
+<Career name="RULES-WORK12">"93"</Career>
+  <!-- Knight -->
+<Career name="RULES-WORK28">"94"</Career>
+  <!-- Pit Fighter -->
+<Career name="RULES-WORK61">"95"</Career>
+  <!-- Protagonist -->
+<Career name="RULES-WORK57">"96-99"</Career>
+  <!-- Soldier -->
+<Career name="RULES-WORK50">"100"</Career>
+  <!-- Warrior Priest -->
+</SUBCHAPTER_CAREER>
+</Specie>
+</DATA_SPECIE>
 <DATA_CAREER>
   <!-- LOT 2 : les 30 carrieres. Statuts : le livre ecrit "Copper 3/5" pour les deux
        premiers niveaux de l Almogavar ; lu comme Brass, decision Nono du 03/09/2026 -

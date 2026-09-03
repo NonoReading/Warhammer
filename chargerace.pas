@@ -33,11 +33,46 @@ Type
 
   TListRace = Specialize TList<StructureRace>;
 
+  // Bloc DATA_SPECIE_TRAIT, ajoute le 03/09/2026. Le "Trait (Any)" des ethnies de
+  // Nations of Mankind : un choix parmi N GROUPES de talents (une province, un duche,
+  // une cite-etat...). Ce n'est pas un talent - une option en accorde deux ou trois -
+  // et ce n'est pas un champ de l'ethnie : une meme liste sert plusieurs ethnies
+  // (Kislev Gospodar et Kislev Ungol partagent leurs Provincial Traits, Sartosa
+  // apparait chez Araby et chez Estalia). D'ou un objet de LIVRE, de premier rang
+  // comme un talent, que l'ethnie CITE dans son SUBCHAPTER_TALENT. CONTEXT.md 2.41.
+  StructureTrait = Record
+        CodeTrait:      String;
+        Libelle:        String;
+        Livre:          String;
+  End;
+
+  // Une option = une ligne de la sous-liste du livre ("Northern Kislev : Night Vision,
+  // One Random Talent"). ListeTalent est une liste separee par des virgules dont chaque
+  // element garde les formes deja connues : A/B pour un choix entre deux talents,
+  // RULES-T* pour un talent aleatoire. Rien de nouveau sous le niveau de l'option.
+  StructureTraitOption = Record
+        CodeTrait:      String;
+        CodeOption:     String;
+        Libelle:        String;
+        ListeTalent:    String;
+        Livre:          String;
+  End;
+
+  TListTrait       = Specialize TList<StructureTrait>;
+  TListTraitOption = Specialize TList<StructureTraitOption>;
+
 var
   ListRace:     TListRace;
   NbRace:       Integer;
+  ListTrait:        TListTrait;
+  NbTrait:          Integer;
+  ListTraitOption:  TListTraitOption;
+  NbTraitOption:    Integer;
 
 function chercheRace(CodeRace :String): StructureRace;
+function ChercheTrait(CodeTrait :String): StructureTrait;
+function ChercheTraitOption(CodeOption :String): StructureTraitOption;
+function OptionsDuTrait(CodeTrait :String): TStringList;
 Function CheminRaceImage(CodeRace: String; Indice: String): String;
 Function CheminNiveauDossier(Dossier: String; Niveau: Integer): String;
 Function CheminNiveauImage(CodeRace: String; Niveau: Integer): String;
@@ -62,6 +97,49 @@ Begin
       PVide.Libelle := GetTexteLibelle('LAB_138');
       result:= PVide;
     end;
+end;
+
+function ChercheTrait(CodeTrait :String): StructureTrait;
+Var
+  PTrait:  StructureTrait;
+Begin
+  // Meme garde que ChercheSort : un record renvoye par une fonction Pascal n'est pas
+  // initialise, il garderait le contenu du PRECEDENT appel quand rien n'est trouve.
+  // CONTEXT.md 2.17.
+  Result := Default(StructureTrait);
+  for PTrait in ListTrait do
+    if CompareRechercheValeur(PTrait.CodeTrait, CodeTrait) then
+      begin
+        Result := PTrait;
+        break;
+      end;
+end;
+
+function ChercheTraitOption(CodeOption :String): StructureTraitOption;
+Var
+  POption:  StructureTraitOption;
+Begin
+  Result := Default(StructureTraitOption);
+  for POption in ListTraitOption do
+    if CompareRechercheValeur(POption.CodeOption, CodeOption) then
+      begin
+        Result := POption;
+        break;
+      end;
+end;
+
+// Les options d'un trait, dans l'ordre du livre. MEME CONTRAT que ListeTalent
+// (ChargeTalent) : la liste est TOUJOURS creee, c'est a l'appelant de la liberer.
+// C'est ce qui permet a un appelant d'ecrire indifferemment l'une ou l'autre.
+function OptionsDuTrait(CodeTrait :String): TStringList;
+Var
+  POption:  StructureTraitOption;
+Begin
+  Result := TStringList.Create;
+  Result.StrictDelimiter := true;
+  for POption in ListTraitOption do
+    if CompareRechercheValeur(POption.CodeTrait, CodeTrait) then
+      Result.Add(POption.CodeOption);
 end;
 
 // Chemin de l'illustration d'UNE ethnie precise, SANS aucun repli sur une autre.

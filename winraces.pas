@@ -416,6 +416,49 @@ var
         end;
 end;
 
+// Texte affiche a droite pour UNE option de trait ("Northern Kislev") : la liste des
+// talents qu'elle accorde, un par ligne. Un talent aleatoire y deroule sa table de D100,
+// exactement comme le fait DescriptionTalent sur une ligne RULES-T* - demande de Nono du
+// 03/09/2026. CONTEXT.md 2.41.
+Function TexteOptionTrait(CodeOption: String): String;
+  var
+    ListTal: TStringList;
+    IndTal:  Integer;
+  begin
+    Result  := '';
+    ListTal := TStringList.Create;
+    try
+      ExtractStrings([','], [' '], PChar(ChercheTraitOption(CodeOption).ListeTalent), ListTal);
+      for IndTal := 0 to ListTal.Count - 1 do
+        begin
+          Result := Result + SeparateurRetourLigne + ' - ' + LibelleTalent(ListTal[IndTal]);
+          // Le talent aleatoire apporte sa propre table, comme ailleurs dans cette fenetre.
+          if CompareRechercheValeur(ListTal[IndTal], TalentGenerique) then
+            Result := Result + SeparateurRetourLigne + DescriptionTalent(ListTal[IndTal], RaceEnCours);
+        end;
+    finally
+      ListTal.Free;
+    end;
+  end;
+
+// Texte affiche a droite pour la branche du trait elle-meme : ses options, chacune suivie
+// des talents qu'elle accorde.
+Function TexteTrait(CodeTrait: String): String;
+  var
+    ListOpt: TStringList;
+    IndOpt:  Integer;
+  begin
+    Result  := '';
+    ListOpt := OptionsDuTrait(CodeTrait);
+    try
+      for IndOpt := 0 to ListOpt.Count - 1 do
+        Result := Result + SeparateurRetourLigne + ChercheTraitOption(ListOpt[IndOpt]).Libelle
+                         + TexteOptionTrait(ListOpt[IndOpt]);
+    finally
+      ListOpt.Free;
+    end;
+  end;
+
 // Niveau 1 : charger les Talents
 procedure ChargeRaceTalent(TreeViewRace: TTreeView);
 Var
@@ -430,7 +473,35 @@ Begin
     For PRaceTalent in ListRaceTalent do
       if PRaceTalent.CodeRace = RaceEnCours then
         Begin
-            if pos(SeparateurMulti, PRaceTalent.CodeTalent) > 0 then
+            // TRAIT D'ETHNIE (bloc DATA_SPECIE_TRAIT, CONTEXT.md 2.41). Teste EN PREMIER :
+            // un code de trait ne contient pas de '/', il tombait donc dans le "choix
+            // unique" ci-dessous, ou ChercheTalent ne rend rien - d'ou une puce VIDE dans
+            // l'arbre, signalee par Nono le 03/09/2026. Le trait devient une sous-branche
+            // portant son libelle, avec une feuille par option.
+            if ChercheTrait(PRaceTalent.CodeTalent).CodeTrait <> '' then
+            begin
+               strings                 := OptionsDuTrait(PRaceTalent.CodeTalent);
+               NodeSBranche            := TreeViewRace.Items.AddChild(NodeBranche,
+                                            ChercheTrait(PRaceTalent.CodeTalent).Libelle);
+               NodeSBranche.ImageIndex := 0;
+               // La branche porte le code du TRAIT : le clic est intercepte avant le
+               // traitement par Node.Parent.Text (voir TreeViewRaceClick), et affiche
+               // les options du trait avec leurs talents.
+               NodeData                := TMyNodeData.Create;
+               NodeData.AdditionalData := PRaceTalent.CodeTalent;
+               NodeSBranche.Data       := NodeData;
+               For IndTab := 0 to strings.Count-1 do
+               Begin
+                 NodeSFeuille             := TreeViewRace.Items.AddChild(NodeSBranche,
+                                               ChercheTraitOption(strings[IndTab]).Libelle);
+                 NodeSFeuille.ImageIndex  := 0;
+                 NodeData                 := TMyNodeData.Create;
+                 NodeData.AdditionalData  := strings[IndTab];
+                 NodeSFeuille.Data        := NodeData;
+               end;
+               strings.Free;
+            end
+            else if pos(SeparateurMulti, PRaceTalent.CodeTalent) > 0 then
             begin
               // choix mutiple
                strings                 := TStringList.Create;
@@ -671,8 +742,32 @@ Begin
         begin
             CheminImage2   := '';
             AffType.text   := Node.Parent.Text;
+            // TRAIT D'ETHNIE : intercepte AVANT le routage par Node.Parent.Text, parce que
+            // ni la branche du trait ni ses options ne sont des talents - le parent d'une
+            // option est le libelle du trait, qui n'est aucune des branches connues, et la
+            // branche du trait serait traitee comme un talent introuvable. On se repere
+            // donc sur la DONNEE du noeud et non sur le texte de son parent.
+            // CONTEXT.md 2.41.
+            if (Node.Data <> nil)
+               and (ChercheTrait(TMyNodeData(Node.Data).AdditionalData).CodeTrait <> '') then
+              begin
+                NodeData           := TMyNodeData(Node.Data);
+                AffCode.Text       := ChercheTrait(NodeData.AdditionalData).CodeTrait;
+                AffLibelle.Text    := ChercheTrait(NodeData.AdditionalData).Libelle;
+                AffLivre.Text      := getTexteLibelle(ChercheTrait(NodeData.AdditionalData).Livre,'','',true);
+                AffDescription.Text:= TexteTrait(NodeData.AdditionalData);
+              end
+            else if (Node.Data <> nil)
+               and (ChercheTraitOption(TMyNodeData(Node.Data).AdditionalData).CodeOption <> '') then
+              begin
+                NodeData           := TMyNodeData(Node.Data);
+                AffCode.Text       := ChercheTraitOption(NodeData.AdditionalData).CodeOption;
+                AffLibelle.Text    := ChercheTraitOption(NodeData.AdditionalData).Libelle;
+                AffLivre.Text      := getTexteLibelle(ChercheTraitOption(NodeData.AdditionalData).Livre,'','',true);
+                AffDescription.Text:= TexteOptionTrait(NodeData.AdditionalData);
+              end
             // récupération du pointeur sur la donnée suivant le type du parent
-            if Node.Parent.Text = ConstArbreMetierPossible then
+            else if Node.Parent.Text = ConstArbreMetierPossible then
               begin
                 NodeData           := TMyNodeData(Node.Data);
                 PMetier            := ChercheMetier(NodeData.AdditionalData);

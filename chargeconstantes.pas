@@ -90,6 +90,10 @@ Const
       ConstXmlDataArmorBonus            = 'DATA_ARMOR_BONUS';
       ConstXmlDataSpell                 = 'DATA_SPELL';
       ConstXmlDataSpellTalent           = 'DATA_SPELL_TALENT';
+      // Les "Trait (Any)" des ethnies (Provincial / Dukedom / City State / Clan /
+      // Region / Kingdom Trait). Bloc de LIVRE, cite depuis SUBCHAPTER_TALENT d'une
+      // ethnie : une meme liste sert plusieurs ethnies. CONTEXT.md 2.41.
+      ConstXmlDataSpecieTrait           = 'DATA_SPECIE_TRAIT';
       ConstXmlDataRandomTalent          = 'DATA_RANDOM_TALENT';
       ConstXmlDataSpecieCreation        = 'DATA_RANDOM_SPECIE';
       ConstXmlDataCraftsmanship         = 'DATA_CRAFTMANSHIP';
@@ -206,6 +210,11 @@ Const
       ConstXmlChoix                     = 'Choice';
       ConstXmlAlternative               = 'Alternative';
       ConstXmlEntry                     = 'Entry';
+      // Trait d'ETHNIE (bloc DATA_SPECIE_TRAIT, CONTEXT.md 2.41). La balise ne s'appelle
+      // PAS 'Trait' : ce nom est deja pris plus haut par ConstXmlTrait, le drapeau
+      // "trait de creature" d'un talent (2.15). Deux notions differentes, deux balises.
+      ConstXmlSpecieTrait               = 'SpecieTrait';
+      ConstXmlTraitOption               = 'Option';
       ConstXmlId                        = 'id';
       ConstXmlAttribut                  = 'Attribut';
       ConstXmlOrder                     = 'Order';
@@ -433,6 +442,8 @@ Const
       ConstPTalent                          = 'PTalent';
       ConstPRace                            = 'PRace';
       ConstPEspece                          = 'PEspece';
+      ConstPTrait                           = 'PTrait';
+      ConstPTraitOption                     = 'PTraitOption';
       ConstPRegle                           = 'PRegle';
       ConstPMetier                          = 'PMetier';
       ConstPArme                            = 'PArme';

@@ -1383,10 +1383,26 @@ procedure TWinCreations.TabCreationChoixDblClick(Sender: TObject);
     Ind:    Integer;
     Source: String;
     CodeParentLigne: String;
+    ListOptLigne: TStringList;
+    RienAChoisir: Boolean;
   begin
     if TabCreationChoix.Row < 1 then Exit;
     Source := TabCreationChoix.Cells[ColChoixSource, TabCreationChoix.Row];
     CodeParentLigne := TabCreationChoix.Cells[ColChoixParent, TabCreationChoix.Row];
+
+    // Une ligne dont la source est un talent CONCRET n'a rien a choisir : c'est un talent
+    // accorde sec par une option de trait (CONTEXT.md 2.41). Sans cette garde, le double
+    // clic ouvrirait le catalogue COMPLET des talents - ChargeSpecialisation bascule sur
+    // le catalogue des qu'un code n'a ni '/' ni '_*' - et laisserait le joueur remplacer
+    // un talent que le livre lui impose.
+    if ChercheTrait(Source).CodeTrait = '' then
+      begin
+        ListOptLigne := ListeTalent(Source);
+        RienAChoisir := (ListOptLigne.Count = 0);
+        ListOptLigne.Free;
+        if RienAChoisir then
+          Exit;
+      end;
 
     ChoixWinTypeFichier        := ConstXmlSousChapitreTalent;
     ChoixWinTalent             := Source;
@@ -3244,7 +3260,9 @@ Procedure TWinCreations.ReconstruitChoixCreation();
     Nouvelle:   StructureChoixCreation;
     PRaceTalent:StructureRaceTalent;
     Ind, Ind2:  Integer;
+    Ind3:       Integer;
     ListOpt:    TStringList;
+    ListTal:    TStringList;
   begin
     // 1 - sauver l'état courant (choix faits et jets obtenus)
     Sauve := Copy(ListeChoixCreation, 0, Length(ListeChoixCreation));
@@ -3254,7 +3272,13 @@ Procedure TWinCreations.ReconstruitChoixCreation();
     For PRaceTalent in ListRaceTalent do
       if CompareRechercheValeur(PRaceTalent.CodeRace, RaceEnCours) then
         begin
-          ListOpt := ListeTalent(PRaceTalent.CodeTalent);
+          // Un TRAIT D'ETHNIE se comporte ici comme un choix entre talents : ses
+          // options remplacent la liste des talents. Voir CONTEXT.md 2.41. Les deux
+          // fonctions ont le meme contrat - liste toujours creee, a liberer par nous.
+          if ChercheTrait(PRaceTalent.CodeTalent).CodeTrait <> '' then
+            ListOpt := OptionsDuTrait(PRaceTalent.CodeTalent)
+          else
+            ListOpt := ListeTalent(PRaceTalent.CodeTalent);
           if ListOpt.Count > 1 then
             begin
               Nouvelle.Origine    := ConstOrigineRace;
@@ -3297,7 +3321,48 @@ Procedure TWinCreations.ReconstruitChoixCreation();
     Ind := 0;
     while Ind <= High(ListeChoixCreation) do
       begin
+        // UNE OPTION DE TRAIT ENGENDRE PLUSIEURS LIGNES FILLES, une par talent accordé
+        // par la province choisie ("Northern Kislev : Night Vision, One Random Talent").
+        // C'est le seul endroit du moteur où une ligne en engendre plus d'une ; le Rang,
+        // posé en 2.15 pour le Skink, suffit à les distinguer. CONTEXT.md 2.41.
+        // Chaque élément garde les formes connues et se route tout seul : un code concret
+        // arrive déjà résolu, un A/B attend un choix, un RULES-T* part au tableau Hasard.
         if (ListeChoixCreation[Ind].CodeChoisi <> '')
+          and (ChercheTraitOption(ListeChoixCreation[Ind].CodeChoisi).CodeOption <> '') then
+          begin
+            ListTal := TStringList.Create;
+            ExtractStrings([','], [' '], PChar(ChercheTraitOption(ListeChoixCreation[Ind].CodeChoisi).ListeTalent), ListTal);
+            for Ind3 := 0 to ListTal.Count - 1 do
+              begin
+                Nouvelle.Origine    := ListeChoixCreation[Ind].Origine;
+                Nouvelle.CodeSource := ListTal[Ind3];
+                Nouvelle.CodeParent := ListeChoixCreation[Ind].CodeSource;
+                Nouvelle.Aleatoire  := CompareRechercheValeur(ListTal[Ind3], TalentGenerique);
+                // Un talent accordé sec n'est pas un choix : il arrive résolu. Le
+                // double-clic est neutralisé pour ces lignes (voir TabCreationChoixDblClick).
+                if Nouvelle.Aleatoire or (Pos(SeparateurMulti, ListTal[Ind3]) > 0)
+                   or (Pos(ValeurGenerique, ListTal[Ind3]) > 0) then
+                  Nouvelle.CodeChoisi := ''
+                else
+                  Nouvelle.CodeChoisi := ListTal[Ind3];
+                Nouvelle.CodeSpecialise := '';
+                Nouvelle.Jet        := 0;
+                Nouvelle.Rang := RangSuivant(Nouvelle.CodeSource, Nouvelle.CodeParent);
+                ListeChoixCreation  += [Nouvelle];
+                for Ind2 := 0 to High(Sauve) do
+                  if (Sauve[Ind2].CodeSource = Nouvelle.CodeSource)
+                     and (Sauve[Ind2].CodeParent = Nouvelle.CodeParent)
+                       and (Sauve[Ind2].Rang = Nouvelle.Rang) then
+                         begin
+                           ListeChoixCreation[High(ListeChoixCreation)].CodeChoisi     := Sauve[Ind2].CodeChoisi;
+                           ListeChoixCreation[High(ListeChoixCreation)].CodeSpecialise := Sauve[Ind2].CodeSpecialise;
+                           ListeChoixCreation[High(ListeChoixCreation)].Jet            := Sauve[Ind2].Jet;
+                           break;
+                         end;
+              end;
+            ListTal.Free;
+          end
+        else if (ListeChoixCreation[Ind].CodeChoisi <> '')
           and CompareRechercheValeur(ListeChoixCreation[Ind].CodeChoisi, TalentGenerique)
             and (Pos(ValeurGenerique, ListeChoixCreation[Ind].CodeChoisi) = 0) then          begin
             Nouvelle.Origine    := ListeChoixCreation[Ind].Origine;
@@ -3342,6 +3407,10 @@ Procedure TWinCreations.AfficheChoixCreation();
         // libellé du code source
         PTalent := ChercheTalent(ListeChoixCreation[Ind].CodeSource);
         Lib     := PTalent.Libelle;
+        // Un trait d'ethnie n'est ni un talent ni un choix A/B : les deux appels
+        // ci-dessus rendent une chaine vide, son libelle est dans sa propre table.
+        if Lib = '' then
+          Lib := ChercheTrait(ListeChoixCreation[Ind].CodeSource).Libelle;
         if Lib = '' then
           Lib := LibelleChoixMultiple(ListeChoixCreation[Ind].CodeSource);
 
@@ -3489,7 +3558,11 @@ Procedure TWinCreations.AjouteTalentsResolus();
         CodeFinal := ListeChoixCreation[Ind].CodeSpecialise;
         if CodeFinal = '' then
           CodeFinal := ListeChoixCreation[Ind].CodeChoisi;
-        if (CodeFinal <> '') and (not CompareRechercheValeur(CodeFinal, TalentGenerique)) then
+        // Une option de trait n'est PAS un talent : elle a engendré ses lignes filles,
+        // ce sont elles qui produisent les talents. Sans ce test, la province choisie
+        // partait dans la fiche comme un talent au libellé vide. CONTEXT.md 2.41.
+        if (CodeFinal <> '') and (not CompareRechercheValeur(CodeFinal, TalentGenerique))
+           and (ChercheTraitOption(CodeFinal).CodeOption = '') then
           begin
             PTalent := ChercheTalent(CodeFinal);            Lig     := Lig + 1;
             if Lig >= TabTalent.RowCount then

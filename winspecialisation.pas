@@ -7,7 +7,7 @@ interface
 uses
   Classes, SysUtils, Forms, Controls, Graphics, Dialogs, Grids, GlobalFonts,
   ChargeTalent, ChargeCompetence, UnitCalcul, ChargeConstantes, ChargeTexte,
-  ChargeArme, ChargeArmure, ChargeArmureSimplifie, ChargeMetierCompetence;
+  ChargeArme, ChargeArmure, ChargeArmureSimplifie, ChargeMetierCompetence, ChargeRace;
 
 type
 
@@ -70,7 +70,19 @@ Procedure TWinSpecialisations.ChargeSpecialisation(CodeGenerique: String);
   begin
     case ChoixWinTypeFichier of
       ConstXmlSousChapitreTalent:    // Talents
-        if Pos(SeparateurMulti, CodeGenerique) > 0 then
+        // Trait d'ethnie : ses options sont proposees comme le seraient les branches
+        // d'un choix A/B. Teste AVANT le Pos(SeparateurMulti), parce qu'un code de trait
+        // ne contient pas de '/' et tomberait sinon dans le catalogue complet des
+        // talents. Le libelle vient de la table des options. CONTEXT.md 2.41.
+        if ChercheTrait(CodeGenerique).CodeTrait <> '' then
+          begin
+            ListOpt := OptionsDuTrait(CodeGenerique);
+            for NbL := 0 to ListOpt.Count - 1 do
+              AjouteLigne(CodeGenerique, ListOpt[NbL],
+                          ChercheTraitOption(ListOpt[NbL]).Libelle, '', true);
+            ListOpt.Free;
+          end
+        else if Pos(SeparateurMulti, CodeGenerique) > 0 then
           begin
             ListOpt := ListeTalent(CodeGenerique);
             for NbL := 0 to ListOpt.Count - 1 do

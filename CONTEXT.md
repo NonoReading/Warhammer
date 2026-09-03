@@ -1,6 +1,8 @@
 # Warhammer — Contexte projet
 
-**Dernière mise à jour : 03/09/2026 (session de conception — lot 3 de *Nations of Mankind*
+**Dernière mise à jour : 03/09/2026 (Kislev (Ungol) écrite et validée au §2.37 ; les
+« Trait (Any) » modélisés et fonctionnels au §2.41, de la donnée jusqu'à WinRaces ; lot 3 de
+*Nations of Mankind*
 découpé en 3a/3b/3c/3d au §2.37, conception de 3a arrêtée, aucun code ni aucune donnée
 écrits ; piège RACE/ETHNIE relevé au §0).** Ce fichier remplace tous les anciens
 `CONTEXT*.md` / `INDEX*.md` / `RESUME*.md` / `SESSION*.md`. Il n'y en a plus
@@ -3635,11 +3637,18 @@ où on écrit, la liste ci-dessus n'étant qu'un ordre de grandeur.
 `Dukedom Trait (Any)`, `City State Trait (Any)`, `Clan Trait (Any)`, `Region Trait (Any)`,
 `Kingdom Trait (Any)`. Chacun renvoie à une sous-liste de la page (« •Aquitaine :
 Coolheaded, One Random Talent ») — un second niveau de choix que rien ne porte
-aujourd'hui. Proposition faite à Nono, **non validée** : les laisser en commentaire dans le
-fichier et ouvrir un item dans `A FAIRE.txt`. À trancher avant d'écrire.
+aujourd'hui. Tranché le 03/09/2026 : laissés en commentaire dans le
+fichier pour Kislev (Ungol), et une table `DATA_SPECIE_TRAIT` est conçue pour les porter —
+voir §2.41, qui est à appliquer avant d'écrire les neuf autres ethnies.
 
-**Point de reprise exact** : écrire **une seule ethnie d'abord, Kislev (Ungol)** — elle n'a
-presque rien à créer — pour faire valider la forme XML par Nono avant les neuf autres.
+**Point de reprise exact, au 03/09/2026 au soir** : Kislev (Ungol) est **écrite et validée**
+(`NATIO-RACE_HUNG`, une seule spécialisation créée, `RULES-T0129_FROID` = *Resistance (Cold)*),
+et son `Provincial Trait` est **modélisé et fonctionnel** (§2.41). Restent les **neuf autres
+ethnies** : Albion, Araby, Bretonnia (Peasantry), Bretonnia (Nobility), Cathay, Estalia, Ind,
+Kislev (Gospodar), Nippon. C'est de la saisie pure — plus aucun obstacle de modèle.
+Deux points de méthode pour cette saisie : refaire la résolution des libellés depuis des
+fichiers **restagés** le jour où on écrit, et se rappeler que Kislev (Gospodar) **réutilise**
+`NATIO-TRAIT_KISLEV` au lieu de le redéclarer — c'est la raison d'être de la table à part.
 
 **Ce que ce livre a appris, et qui resservira sur les gros livres :**
 
@@ -3872,6 +3881,131 @@ création** n'accorde toujours rien. `SortAffiche` ne regarde que les lignes où
 `Nouveau > Actuel`, or `MajTables` (l.~4434-4467) écrit `Nouveau := Actuel` pour tout
 talent déjà possédé. Les bénédictions devraient découler du talent **possédé**, pas du
 talent acheté ce tour-ci. Noté dans `A FAIRE.txt`.
+
+---
+
+### 2.41 Les « Trait (Any) » des ethnies — terminé (03/09/2026)
+
+**Le besoin.** Les pages 3-4 de *Nations of Mankind* donnent à chaque nation un dernier talent
+qui n'en est pas un : `Provincial Trait (Any)`, `Dukedom Trait (Any)`, `City State Trait (Any)`,
+`Clan Trait (Any)`, `Region Trait (Any)`, `Kingdom Trait (Any)`. Chacun renvoie à une sous-liste
+de la même page — « •Northern Kislev : Night Vision, One Random Talent » — soit **un choix parmi
+N groupes de talents**, une soixantaine de sous-entrées sur les dix ethnies du lot 3a. Le modèle
+sait écrire un choix entre deux talents (`A/B`) et un talent aléatoire (`RULES-T*`), pas ça.
+
+**Pourquoi une table à part, et pas un champ de l'ethnie** (idée de Nono, 03/09/2026) — deux
+raisons données par le livre lui-même :
+- **une même liste sert plusieurs ethnies** : les *Provincial Traits* de Kislev sont cités par
+  Gospodar et par Ungol ; Sartosa apparaît dans les *City State Traits* d'Araby et dans les
+  *Region Traits* d'Estalia. Dans le bloc de l'ethnie, on recopie ; dans une table, on cite ;
+- **un trait n'est pas un talent** : une option en accorde deux ou trois (« Nan-Gau :
+  Craftsman (Engineering) ou Warrior Born, **plus** deux talents au hasard »). Aucun `<Talent>`
+  ne sait faire ça.
+
+**La forme retenue.** Un bloc `DATA_SPECIE_TRAIT` que n'importe quel livre peut porter, cité
+depuis `SUBCHAPTER_TALENT` exactement là où un talent l'est aujourd'hui :
+
+```xml
+<DATA_SPECIE_TRAIT>
+<SpecieTrait id="NATIO-TRAIT_KISLEV">
+<Description language="ENGLISH">"Provincial Trait"</Description>
+  <Option id="NATIO-TRAIT_KISLEV_NORD">
+  <Description language="ENGLISH">"Northern Kislev"</Description>
+  <Talent>"RULES-T0164"</Talent>               <!-- Night Vision -->
+  <Talent>"RULES-T*"</Talent>                  <!-- One Random Talent -->
+  </Option>
+  <Option id="NATIO-TRAIT_KISLEV_ERENGRAD">
+  <Description language="ENGLISH">"Western Kislev (Erengrad)"</Description>
+  <Talent>"RULES-T0085/RULES-T0119"</Talent>   <!-- Old Salt or Sea Legs -->
+  <Talent>"RULES-T*"</Talent>
+  </Option>
+</SpecieTrait>
+</DATA_SPECIE_TRAIT>
+```
+
+**La balise s'appelle `SpecieTrait`, pas `Trait`** — relevé par Nono le 03/09/2026 à la
+compilation : `ConstXmlTrait` = `'Trait'` existe depuis le §2.15, c'est le drapeau
+« trait de créature » d'un talent. Deux notions sans rapport ; garder le même nom aurait
+donné une déclaration en double, et surtout une balise dont le sens dépend du parent —
+la forme même du piège du §0 (« chercher un nom de balise et le trouver ailleurs qu'on
+croit »). Les constantes sont `ConstXmlSpecieTrait` et `ConstXmlTraitOption`.
+
+**Une option porte UNE balise `<Talent>`, liste séparée par des virgules** — et non une
+balise par talent comme le disait la première rédaction de cette section. Même forme que
+`DATA_SPELL_TALENT`, ce qui rend l'aller-retour import/export exact sans code de fusion ;
+on y perd le commentaire par talent.
+
+Les formes existantes se réemploient **telles quelles** à l'intérieur d'une option : `A/B` pour un
+choix, `RULES-T*` pour un aléatoire. Rien de nouveau sous le niveau de l'option.
+
+**Ce que le code demande — moins qu'attendu, parce que le moteur est déjà hiérarchique.**
+Vérifié dans `ReconstruitChoixCreation` (`wincreation.pas` l.3241) avant de proposer quoi que ce
+soit : `StructureChoixCreation` porte déjà `CodeParent` et `Rang`, l'étape 4 engendre déjà des
+lignes filles à partir d'un choix fait, et le routage Choix / Aléatoire se fait déjà sur la nature
+du code obtenu. Ce n'est donc pas une refonte mais une extension en trois points :
+
+1. **Lecture** : bloc `DATA_SPECIE_TRAIT`, structure mémoire, `ChercheTrait` — même patron que
+   `DATA_SPELL_TALENT` du 03/09 (§2.39), y compris le piège de l'export : sans structure mémoire
+   ni bloc d'export dédiés, la première sauvegarde depuis WinLivre effacerait le bloc.
+2. **Racine** : à l'étape 2, un code de trait cité dans `SUBCHAPTER_TALENT` devient une ligne du
+   tableau Choix dont les options sont les provinces.
+3. **Le seul vrai changement** : l'étape 4 engendre aujourd'hui **une** ligne fille au plus ; une
+   option de trait en engendre **deux ou trois**. `Rang` existe déjà pour distinguer deux lignes
+   filles de même source (bug du Skink, §2.15), donc le terrain est préparé.
+
+La conception du 06/08 (`CONCEPTION_creation_choix_talents.md`) prévoyait qu'il ne resterait qu'un
+cas de cascade, `RULES-T*` en option d'un choix. Le trait en ajoute un second, du même genre.
+
+**Tranché par Nono le 03/09/2026 :**
+- **libellé fidèle au livre** — la ligne s'affiche « Provincial Trait », pas « Province d'origine » ;
+- **le trait est un objet de livre, pas d'ethnie** : `NATIO-TRAIT_KISLEV` est un identifiant de
+  premier rang, comme un talent, et plusieurs ethnies le citent ;
+- **« One Random Roll » et « One Random Talent » sont la même chose** — le livre écrit les deux
+  (Ind, Tilea) ; saisir un `RULES-T*` dans les deux cas.
+
+**Appliqué le 03/09/2026, en quatre points de compilation**, dans l'ordre qui avait marché le
+02/09 : les structures et la lecture XML d'abord (compile, ne change rien), les données
+ensuite (inertes), puis le branchement.
+
+1. **Structures et XML** — `chargeconstantes.pas` (`ConstXmlDataSpecieTrait`,
+   `ConstXmlSpecieTrait`, `ConstXmlTraitOption`), `chargerace.pas` (`StructureTrait`,
+   `StructureTraitOption`, `ChercheTrait`), `warhammersource.pas` (création/vidage des deux
+   listes), `xmlexportimport.pas` (lecture **et écriture**).
+2. **Données** — `BOOK_NATIONS_OF_MANKIND.Xml` : `NATIO-TRAIT_KISLEV` et ses quatre options,
+   cité par Kislev (Ungol) dans son `SUBCHAPTER_TALENT`.
+3. **Affichage et choix** — `ChercheTraitOption` et `OptionsDuTrait` (`chargerace.pas`, même
+   contrat que `ListeTalent` : liste toujours créée, à libérer par l'appelant, ce qui permet
+   aux appelants d'écrire l'une ou l'autre) ; la racine et le libellé dans `wincreation.pas` ;
+   les options proposées dans `winspecialisation.pas`.
+4. **Cascade et consommation** — `wincreation.pas` : une option engendre N lignes filles,
+   l'option elle-même n'est pas consommée comme un talent, et le double-clic est neutralisé
+   sur une ligne dont la source est un talent concret.
+
+**Trois pièges rencontrés, tous de la même famille : un troisième chemin qu'on n'avait pas
+regardé.**
+
+- **`ConstXmlTrait` existait déjà** (§2.15, le drapeau « trait de créature » d'un talent).
+  Relevé par Nono à la compilation. La balise du trait d'ethnie s'appelle donc `SpecieTrait` :
+  renommer la seule constante aurait laissé une balise dont le sens dépend du parent.
+- **WinRaces a son propre arbre** (`ChargeRaceTalent`, `winraces.pas` l.419), qui n'a rien à
+  voir avec les tableaux de WinCreation. Un code de trait n'ayant pas de `/`, il tombait dans
+  la branche « choix unique » et affichait **une puce vide**. Signalé par Nono, capture à
+  l'appui. Le trait y est maintenant une sous-branche, sur le modèle de la branche « au choix ».
+- **`ChargeSpecialisation` bascule sur le catalogue COMPLET des talents** dès qu'un code n'a ni
+  `/` ni `_*`. Sans garde, le double-clic sur un talent accordé sec par une province aurait
+  laissé le joueur le remplacer.
+
+**Demande de Nono, faite dans la foulée** : cliquer un trait ou une province dans WinRaces
+affiche à droite les talents correspondants, et un talent aléatoire y déroule sa table de D100
+via `DescriptionTalent` — la même fonction que partout ailleurs dans cette fenêtre. Le repérage
+s'y fait sur la **donnée du nœud** et non sur `Node.Parent.Text`, dont le routage ne pouvait pas
+marcher pour une option (son parent est le libellé du trait).
+
+Au passage : `RULES-T*` **a** un libellé, « Random Talent », défini dans le Rulebook. Le
+`LAB_xxx` un moment envisagé pour lui n'a pas lieu d'être.
+
+**Ce qui reste** : les neuf autres ethnies du lot 3a (§2.37), qui sont de la saisie pure —
+le modèle sait désormais tout porter.
 
 ---
 
