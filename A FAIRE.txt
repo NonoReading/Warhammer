@@ -746,13 +746,7 @@ CHANTIERS DE FOND, PAS ENCORE OUVERTS
 
 2. MIGRER LES QUATRE PERSONNAGES HERITES (Ernold, Friederich, Harald, Markus).
 
-3. LES TROIS PLACEHOLDERS MESS_xxx DE winlancede.pas (lignes 63, 70 et 78) : les messages
-   de la fenetre de jet - resultat vide, aucun talent pour ce jet, talent deja possede.
-   Trouves le 03/09 en corrigeant les LAB_xxx du meme fichier ; ils ne s'affichent que
-   dans des cas d'erreur, ce qui explique qu'ils soient passes sous le radar. Relever le
-   dernier MESS_ defini dans les deux Rulebooks avant d'en numeroter trois nouveaux.
-
-4. LA REFERENCE PENDANTE RULES-PROJ_LANC.
+3. LA REFERENCE PENDANTE RULES-PROJ_LANC.
 
 
 =========================================================================

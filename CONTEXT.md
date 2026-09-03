@@ -1991,7 +1991,7 @@ l'étape 0, la combo sur l'étape de l'ethnie), mais la combo reste à filtrer.
 
 ---
 
-### 2.15 Lézards de Lustria — traits de créature puis race Skink — en cours (21/08/2026)
+### 2.15 Lézards de Lustria — traits de créature puis race Skink — terminé (03/09/2026)
 
 Demande de Nono : « tu peux voir pour ajouter les lézards ? » (ligne « faire les lézards des LUCIA »
 qui traînait en tête d'`A FAIRE.txt`).
@@ -2133,15 +2133,22 @@ n'empruntait. Aucun des cinq bugs n'est dans les données des lézards.
   texte descriptif de l'ethnie, comme convenu.
 - Le Skink n'est **pas** dans une table de tirage de race : accessible en choix libre uniquement,
   décision de Nono (« on peut laisser le choix uniquement pour la race »).
-- Trois en-têtes de `TabCreationChoix` affichent littéralement **`LAB_xxx`** — placeholder resté dans
-  le code (`wincreation.pas` lignes 818-820, plus `winlancede.pas` ligne 47). Les commentaires disent
-  quoi mettre : Origine, Élément, Choix. Proposé, pas fait.
+**Huitième coquille de livre** — **tranchée et appliquée** (constaté le 03/09/2026 dans
+`BOOK LUSTRIA.xml` : Messenger `89-91`, Boatman `92-94`). Lustria p. 161, colonne Skink,
+imprimait Messager **89–92** puis Batelier **92–94**, le 92 appartenant aux deux.
+L'arithmétique ne tranchait pas seule : toute la fin de la colonne est à 3 valeurs
+(86–88, 92–94, 96–97, 98–100), donc l'erreur était sur la *fin* de la plage précédente.
 
-**Huitième coquille de livre**, vérifiée à l'image (Lustria p. 161, colonne Skink) : Messager
-**89–92** puis Batelier **92–94**, le 92 appartient aux deux. L'arithmétique ne tranche pas seule,
-comme pour Up in Arms. Proposé : **Messager 89–91** — toute la fin de la colonne est à 3 valeurs
-(86–88, 92–94, 96–97, 98–100) et un chevauchement d'exactement 1 sur le début du suivant ressemble à
-une erreur sur la *fin* de la plage précédente. Non tranché par Nono.
+**Les placeholders `LAB_xxx` sont branchés** (03/09/2026) — voir §2.34, qui a traité d'un
+coup les quatre de `TabCreationChoix` et de `WinLanceDe`. Ils n'avaient rien de spécifique
+aux lézards : ils sont simplement apparus pendant ce chantier.
+
+**Ce que ce chantier a appris sur la tenue des fichiers.** Il est resté marqué « en cours »
+jusqu'au 03/09 alors que ses deux derniers points étaient réglés depuis le 27/08 — c'est
+Nono qui l'a signalé (« 2.15 n'est pas déjà fait ? »). Le travail avait été fait, jamais
+*rayé*. Symétriquement, `A FAIRE.txt` gardait des items que le code avait rattrapés. Vérifier
+un item contre la source avant de le réciter coûte quelques secondes ; le laisser traîner
+coûte une relance de chantier.
 
 
 ---
@@ -3337,6 +3344,55 @@ renvoie vide et la ligne repasse pour un équipement. C'était déjà le cas ava
 - **Un symptôme attendu n'est pas une anomalie.** « Je peux mettre de la fabrication
   partout » décrivait exactement le comportement du code non corrigé ; le dire évite de
   partir chercher une cause ailleurs.
+
+### 2.34 Les placeholders de libellés, et les deux replis d'image — terminé (03/09/2026)
+
+Petit lot de finitions, chaque modification compilée et testée séparément.
+
+**Les sept placeholders de libellés.** `wincreation.pas` portait trois `LAB_xxx` en en-têtes
+de `TabCreationChoix` ; `winlancede.pas` en portait un (`LabelInfo`) **et trois `MESS_xxx`**
+découverts au passage — ces derniers ne s'affichent que dans des cas d'erreur, ce qui
+explique qu'ils aient survécu si longtemps. Créés dans les deux Rulebooks : `LAB_174`
+Origine / `LAB_175` Élément / `LAB_176` Choix / `LAB_177` « Entrez le résultat de votre
+D100 », et `MESS_059` « Aucun talent ne correspond à ce résultat de dé ».
+
+Deux libellés existants ont suffi pour le reste, **parce qu'ils ont été cherchés avant
+d'être créés** : `MESS_019` (« Veuillez renseigner votre résultat de jet de dé »), déjà
+utilisé pour ce sens exact dans `wincreation`, et `MESS_021` (« Ce résultat de dé
+correspond à un talent déjà pris »), **défini mais orphelin** — écrit pour cette fenêtre,
+jamais branché. `MESS_021` a été réécrit avec un `%s` : le code faisait déjà
+`Format(..., [PTalent.Libelle])` et le nom du talent était silencieusement ignoré.
+
+**Le repli sur l'ancien nom d'image, retiré** (`chargemetier`, `chargerace`, `chargesort`).
+Il servait à découpler le renommage des 200 fichiers de la modification du code ; les deux
+étant faits, il ne protégeait plus rien et aurait masqué un oubli de renommage futur. Les
+appels `DecoupeCodeValeur` qui n'existaient que pour lui sont partis avec.
+
+**Le repli sur l'ethnie de référence devient TOUT OU RIEN.** Bug signalé par Nono : une
+ethnie de Middenheim n'ayant qu'une seule illustration affichait la sienne **et** la
+seconde du Rulebook, côte à côte. La cause : `CheminRaceImage` décidait du repli
+**indice par indice**. Le commentaire posé le 31/08 annonçait pourtant déjà le bon
+comportement — « il ne se déclenche que lorsque l'ethnie demandée n'a aucune image » —
+l'intention était écrite, jamais implémentée. *Un commentaire n'est pas une preuve du
+comportement du code.*
+
+La correction ajoute `RacePossedeUneImage(PRace)` : un `FindFirst` sur
+`<code de l'ethnie>*.PNG`, en vérifiant que ce qui suit le code n'est **que** des chiffres
+une fois le suffixe `_TRANS` retiré — sans quoi `MIDD-RACE_X` serait satisfait par une
+image de `MIDD-RACE_XY`. **Interroger le dossier plutôt que d'écrire « 1 et 2 » en dur** :
+les seuls appelants ne demandent que ces deux indices aujourd'hui, mais une liste fermée
+recopiée dans le code est exactement la forme qui a produit les trois bugs du §2.33.
+Validé par Nono sur les deux chemins : Middenheim garde son image sans emprunter,
+Salzenmünder qui n'en a aucune récupère bien les deux du livre de base.
+
+**Piège d'outillage rencontré, à ne pas réapprendre.** `winlancede.pas` est en **CRLF**
+alors que `wincreation.pas` est en **LF**. Une première passe d'édition a normalisé les
+fins de ligne et le diff a viré au rouge sur les 102 lignes du fichier. Refaite en binaire,
+elle ne portait plus que sur la ligne voulue. Un tel « changement » passerait inaperçu au
+commit et polluerait tout l'historique du fichier : **éditer en préservant les octets, et
+lire le diff avant d'envoyer.**
+
+---
 
 ## 3. TODO / Backlog
 
