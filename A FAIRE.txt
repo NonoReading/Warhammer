@@ -6,6 +6,24 @@
 CORRECTIONS COURTES  (une ligne ou deux chacune)
 =========================================================================
 
+UN TALENT DE BENEDICTION POSE A LA CREATION N ACCORDE AUCUN SORT. Trouve le 03/09/2026 en
+corrigeant CONTEXT 2.40. SortAffiche ne regarde que les lignes ou Nouveau > Actuel, or
+MajTables (winpersonnage.pas l.~4434-4467) ecrit Nouveau := Actuel pour tout talent deja
+possede. Un Bless (Sigmar) present des la creation ne declenche donc rien, alors qu un
+Bless achete en progression fonctionne. Les benedictions devraient decouler du talent
+POSSEDE, pas du talent achete ce tour-ci. Conception a mener : ce n est pas une inversion
+de test, il faut decider ce qui se passe quand la fiche porte deja les sorts.
+
+VERIFIER PoolTalent SUR UN PERSONNAGE PORTANT DEUX DIEUX. Signale par la conception de
+CONTEXT 2.39 et toujours pas eprouve : PoolTalent batit le groupe de comptage XP sur le
+talent TROUVE, pas sur la chaine ecrite dans le sort. Tant que la table renvoie des codes
+de talents reels les couts ne bougent pas, mais c est exactement le cas que le modele ne
+rencontrait jamais avant DATA_SPELL_TALENT. A tester le jour ou un tel personnage existe.
+
+WINLIVRE NE SAIT PAS EDITER DATA_SPELL_TALENT. Choix assume du 03/09/2026 : la table se
+saisit en XML a la main. Le jour ou un livre en portera beaucoup de lignes, un ecran
+deviendra utile - grille sort / liste de talents, sur le modele des autres blocs.
+
 PIEGE DE NOMMAGE FRANCO-ANGLAIS - A CHERCHER AILLEURS. Le tarif arcanique lisait ColAttI
 (Initiative) au lieu de ColAttInt (Intelligence) parce que la variable s'appelait BI, qui
 se lit "Bonus Intelligence". Corrige le 02/09 par le passage en donnee. La FORME du piege
@@ -63,7 +81,9 @@ NATIONS OF MANKIND : LORE ATTRIBUTE ET INGREDIENTS DES DEUX VENTS, SANS ENDROIT 
 Le Lore of Ice et le Lore of the Desert impriment chacun un Lore Attribute (regle de jeu, pas
 de la prose) et une liste d Ingredients. Ce sont des proprietes du DOMAINE, or le modele n a
 pas d entite domaine - seulement le talent d acces. Les recopier dans les 27 sorts n a pas de
-sens. Meme famille de manque que CONTEXT 2.39 ; a trancher avec lui.
+sens. Meme famille de manque que CONTEXT 2.39 - mais 2.39 est FAIT depuis le 03/09 et n a
+PAS traite ce point : il a rendu extensible la relation sort/talent, pas cree d entite
+domaine. Le manque reste entier, et c est desormais un sujet a lui seul.
 
 NATIONS OF MANKIND : FROSTFIEND ET DJINN SONT DANS LE TEXTE, PAS EN CREATURES. Les deux
 profils complets (caracteristiques, Traits, Optional) et la table d10 des elements du Djinn
@@ -179,18 +199,14 @@ PDF Personnage (PRIORITAIRE) :
   casser en le faisant à la main. À concevoir séparément (identifier précisément quels
   champs sont réellement lus pour un livre non-anglais avant de supprimer quoi que ce
   soit) avant de toucher au fichier.
-- (idée refonte, 15/08/2026, pas conçue) revoir la gestion des sorts liés aux talents :
-  aujourd'hui ButtonSortClick/SortAffiche (winpersonnage.pas) recherchent par constantes
-  en dur (TalentSortDomaine/TalentSortMiracle/TalentSortMagieMineure/TalentSortBenediction,
-  chargeconstantes.pas) avec une comparaison de préfixe sur le CodeTalent - fragile et pas
-  extensible (un nouveau type de talent "à sorts" oblige à toucher le code). Nono propose :
-  ajouter une information sur le talent (StructureTalent, chargetalent.pas) indiquant si ses
-  sorts s'ajoutent automatiquement ou manuellement, et remplacer la recherche par constantes
-  par une recherche générique - pour les talents en mode manuel, chercher les sorts dont
-  ListeTalent (StructureSort, chargesort.pas) contient le talent, au lieu de comparer des
-  codes de catégorie. À concevoir séparément (nouveau champ + XML, impact sur SortAffiche ET
-  ButtonSortClick, migration des données existantes) avant de toucher au code - fait suite
-  aux deux bugs corrigés le 15/08/2026 sur SortAffiche et ButtonSortClick.
+- (idée du 15/08/2026 - FAITE en deux temps, gardée ici pour la trace de ce qui reste)
+  la gestion des sorts liés aux talents ne passe plus par les constantes en dur
+  TalentSortDomaine/Miracle/MagieMineure/Benediction : le mode d'ajout est une donnée du
+  talent (<SpellMode>, CONTEXT 2.18, 23/08) et la recherche des sorts d'un talent est
+  générique (TalentsDuSort, CONTEXT 2.39, 03/09). Les constantes ne subsistent plus qu'en
+  commentaire (chargeconstantes.pas l.~359, winpersonnage.pas l.~1511). RESTE : vérifier
+  que ButtonSortClick (winpersonnage.pas l.1243) a bien suivi les deux chantiers - il n'a
+  été relu ni le 23/08 ni le 03/09.
 - généraliser `WinLanceDes` (winlancede.pas) : popup "lancer le dé" (SpinEdit 0-100 +
   boutons Lancer/Valider) actuellement câblée uniquement pour le tirage aléatoire de
   Talent (`TalentAleatoire`), avec encore des `GetTexteLibelle('LAB_xxx')`/`'MESS_xxx'`

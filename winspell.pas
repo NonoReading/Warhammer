@@ -123,7 +123,8 @@ begin
       ResLivre := false;
 
   if filtreTalent <> '' then
-    if not VerifieFiltre(PSort.ListeTalent, filtreTalent) then
+    // TalentsDuSort et non PSort.ListeTalent : voir CONTEXT.md 2.39.
+    if not VerifieFiltre(TalentsDuSort(PSort), filtreTalent) then
       ResTalent:= false;
 
   Result := (ResLivre and ResTalent);
@@ -167,7 +168,7 @@ procedure TWinSpells.WinCharger();
 
           // Le test etait ecrit DEUX FOIS a l'identique ici (lignes 122 et 125 avant le
           // 23/08/2026) ; la seconde copie ne faisait rien de plus, elle a ete retiree.
-          if (SelectWinSort <> '') and not SortTalentAccessible(PSort.ListeTalent, SelectWinSort) then
+          if (SelectWinSort <> '') and not SortTalentAccessible(TalentsDuSort(PSort), SelectWinSort) then
             Acc := false;
 
           if Not SpellFiltre(PSort) then
@@ -185,7 +186,11 @@ procedure TWinSpells.WinCharger();
               TabSpell.Cells[ 6,Nb]   := ReplaceTexteLibelle(PSort.Duree);
               TabSpell.Cells[ 7,Nb]   := PSort.Description;
               TabSpell.Cells[ 8,Nb]   := PSort.Niveau;
-              TabSpell.Cells[ 9,Nb]   := PSort.ListeTalent;
+              // Colonne 9 = la liste COMPLETE des talents (champ du sort + DATA_SPELL_TALENT).
+              // C'est elle que relit TabSpellSelection pour remplir TabTalent : en la
+              // remplissant ici avec TalentsDuSort, l'affichage du detail suit sans autre
+              // modification. CONTEXT.md 2.39.
+              TabSpell.Cells[ 9,Nb]   := TalentsDuSort(PSort);
               TabSpell.Cells[10,Nb]   := GetTexteLibelle(PSort.Livre,'','',true);
               TabSpell.Cells[11,Nb]   := PSort.CodeSort;
            end

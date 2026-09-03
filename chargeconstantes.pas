@@ -89,6 +89,7 @@ Const
       ConstXmlDataArmorSimplified       = 'DATA_ARMOR_SIMP';
       ConstXmlDataArmorBonus            = 'DATA_ARMOR_BONUS';
       ConstXmlDataSpell                 = 'DATA_SPELL';
+      ConstXmlDataSpellTalent           = 'DATA_SPELL_TALENT';
       ConstXmlDataRandomTalent          = 'DATA_RANDOM_TALENT';
       ConstXmlDataSpecieCreation        = 'DATA_RANDOM_SPECIE';
       ConstXmlDataCraftsmanship         = 'DATA_CRAFTMANSHIP';

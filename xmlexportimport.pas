@@ -186,6 +186,7 @@ Procedure XmlExportBook(Livre: String; Langue: String);
     PFabrication:             StructureFabrication;
     PMetierRaceChoixMetier:   StructureMetierRaceChoixMetier;
     PSort:                    StructureSort;
+    PSortTalent:              StructureSortTalent;
     PMetierSousMetier:        StructureMetierSousMetier;
     PAttribut:                StructureAttribut;
     PAttributAugmentation:    StructureAttributAugmentation;
@@ -813,6 +814,27 @@ Procedure XmlExportBook(Livre: String; Langue: String);
         if Fist = false then
            XmlContent.Add(XmlFin(ConstXmlDataSpell));
 
+        // Acces aux sorts par talent - voir CONTEXT.md 2.39.
+        // Le sort cite ici peut appartenir a un AUTRE livre que celui qu'on exporte :
+        // c'est PSortTalent.Livre, et non le livre du sort, qui decide ou la ligne part.
+        // On n'appelle donc PAS ChercheSort pour reconstruire son prefixe - le code est
+        // deja complet, tel qu'il a ete lu.
+        Fist := true;
+        for PSortTalent in ListSortTalent do
+          if (PSortTalent.Livre = Livre) then
+            begin
+              if Fist = true then
+                begin
+                  XmlContent.Add(XmlDebut(ConstXmlDataSpellTalent));
+                  Fist := false;
+                end;
+              XmlContent.Add(XmlDebutCode(ConstXmlSort, PSortTalent.CodeSort));
+              XmlContent.Add(XmlLigne(ConstXmlTalent, PSortTalent.ListeTalent));
+              XmlContent.Add(XmlFinCode(ConstXmlSort));
+            end;
+        if Fist = false then
+           XmlContent.Add(XmlFin(ConstXmlDataSpellTalent));
+
         // Fabrication
         Fist := true;
         for PFabrication in ListFabrication do
@@ -927,6 +949,7 @@ Procedure XmlImport(FileName: String; OnlyPrimary: Boolean; OnlyCode: Boolean);
     PArmure:                  StructureArmure;
     PArmureBonus:             StructureArmureBonus;
     PSort:                    StructureSort;
+    PSortTalent:              StructureSortTalent;
     PFabrication:             StructureFabrication;
     PMetierRaceChoixMetier:   StructureMetierRaceChoixMetier;
     PMetierSousMetier:        StructureMetierSousMetier;
@@ -2227,6 +2250,40 @@ Procedure XmlImport(FileName: String; OnlyPrimary: Boolean; OnlyCode: Boolean);
                         end;
 
                       AddTrad(PTraduction, Langue);
+
+                      NodeNv2 := XmlElement(NodeNv2.NextSibling);
+                    end;
+                end;
+
+              // Acces aux sorts par talent - bloc ADDITIF, voir CONTEXT.md 2.39.
+              // N'importe quel livre peut porter des lignes pour des sorts d'un AUTRE
+              // livre : c'est tout l'objet du bloc. Rien n'est ecrase, TalentsDuSort
+              // (ChargeSort) concatene ces lignes au champ <Talent> du sort lui-meme.
+              NodeNv1 := BookNode.FindNode(ConstXmlDataSpellTalent);
+              if Assigned(NodeNv1) then
+                begin
+                  NodeNv2 := XmlElement(NodeNv1.FirstChild);
+                  While Assigned(NodeNv2) do
+                    begin
+                      PSortTalent.Livre       := Livre;
+                      PSortTalent.CodeSort    := RemoveQuotes(UTF8Encode(NodeNv2.Attributes.GetNamedItem(ConstXmlId).NodeValue));
+                      PSortTalent.ListeTalent := '';
+
+                      Node := XmlElement(NodeNv2.FirstChild);
+                      while Assigned(Node) do
+                        begin
+                          case Node.NodeName of
+                            ConstXmlTalent:
+                              PSortTalent.ListeTalent := RemoveQuotes(UTF8Encode(Node.TextContent));
+                          end;
+
+                          Node := XmlElement(Node.NextSibling);
+                        end;
+                      if LangueDef = ConstAnglais then
+                        begin
+                          ListSortTalent.add(PSortTalent);
+                          inc(NbSortTalent);
+                        end;
 
                       NodeNv2 := XmlElement(NodeNv2.NextSibling);
                     end;

@@ -1,8 +1,8 @@
 # Warhammer — Contexte projet
 
-**Dernière mise à jour : 03/09/2026 (soir — inventaire du corpus §2.36, Nations of
-Mankind lots 1 et 2 §2.37, conception des noms genrés §2.38, relation sort/talent à rendre
-extensible §2.39 — chantier prioritaire).** Ce fichier remplace tous les anciens
+**Dernière mise à jour : 03/09/2026 (nuit — la relation sort/talent est devenue extensible,
+§2.39 TERMINÉ et appliqué ; bug de l'attribution des bénédictions corrigé §2.40 ; règle
+TXT-avant-PDF au §0).** Ce fichier remplace tous les anciens
 `CONTEXT*.md` / `INDEX*.md` / `RESUME*.md` / `SESSION*.md`. Il n'y en a plus
 qu'un : celui-ci. On ne le duplique jamais, on l'édite en place.
 
@@ -24,6 +24,19 @@ qu'un : celui-ci. On ne le duplique jamais, on l'édite en place.
 famille dans la même journée** — toutes venaient de conclure trop vite depuis un outil de
 lecture, jamais depuis la source elle-même :
 
+- **Chercher dans les TXT AVANT d'ouvrir un PDF (règle de Nono, 03/09/2026).** Traiter un
+  PDF coûte cher : il faut le rapatrier entier sur ma machine puis le convertir, quand une
+  recherche dans un TXT déjà présent répond en une seconde. Donc, toujours dans cet ordre :
+  chercher d'abord dans les TXT, et dans **les deux répertoires**, car ils n'ont pas le même
+  contenu — `LIVRES\` (TXT à côté des PDF, tous les livres n'en ont pas) et `PDF_TEXTE\`
+  (l'export du corpus, qui couvre des livres absents du premier). N'ouvrir le PDF que si
+  aucun des deux ne porte l'information cherchée, ou si l'extraction est visiblement
+  fautive.
+  Vérifié le 03/09/2026 : les listes « Blessings and Strictures » de *Nations of Mankind*
+  ont été extraites du PDF alors que `PDF_TEXTE\Nations of Mankind.txt` les portait
+  **à l'identique, aux mêmes numéros de ligne**. Attention donc à ne pas généraliser la
+  remarque du §2.37 (« le TXT du corpus ne suffit pas ») : elle vaut pour les **tableaux de
+  carrière**, où la mise en page est perdue, et non pour le texte courant.
 - **Recharger avant d'indexer.** Avant de construire un index du corpus (résolution de
   libellés en identifiants, recherche de doublons, vérification de références), restager
   les fichiers depuis le poste. Une copie vieille de quelques heures a suffi à me faire
@@ -3544,9 +3557,13 @@ les carrières.
 
 **Ce que ce livre a appris, et qui resservira sur les gros livres :**
 
-- **Le TXT du corpus ne suffit pas au-delà d'une petite carrière.** L'export de `PDF_TEXTE`
-  a été fait sans `-layout` : les noms de niveaux y sont tronqués et les colonnes mêlées.
-  Refaire l'export soi-même depuis le PDF est la première étape, pas un recours.
+- **Le TXT du corpus ne suffit pas au-delà d'une petite carrière — mais seulement pour les
+  TABLEAUX.** L'export de `PDF_TEXTE` a été fait sans `-layout` : dans les tableaux
+  d'avance, les noms de niveaux sont tronqués et les colonnes mêlées, et là il faut refaire
+  l'export soi-même depuis le PDF. **Le texte courant, lui, y est intact** : les listes de
+  bénédictions « Blessings and Strictures » s'y lisent aussi bien que dans le PDF
+  (vérifié le 03/09/2026). Ne pas transformer cette remarque en « ouvrir le PDF d'abord » :
+  voir la règle TXT-avant-PDF du §0.
 - **Découper le PDF en colonnes vaut mieux que chercher une gouttière.** Aucune colonne de
   blancs n'existait (les titres traversent la page) ; `pdftotext -layout -x 306 -W 306` sur
   une page Letter isole la colonne de droite, où tiennent les 30 tableaux de carrière.
@@ -3612,10 +3629,12 @@ comme sur le reste. Rien n'est à ressaisir.
 
 ---
 
-### 2.39 La relation sort <-> talent doit devenir extensible — CHANTIER PRIORITAIRE, conception arrêtée (03/09/2026)
+### 2.39 La relation sort <-> talent est devenue extensible — terminé (03/09/2026)
 
-**C'est le chantier à mener en premier après la saisie de Nations lot 3.** Décision de Nono :
-« je voudrais évolutif, et ce livre prouve que ce ne l'est pas ».
+**Fait, testé, en service.** Décision de Nono : « je voudrais évolutif, et ce livre prouve
+que ce ne l'est pas », puis « avoir une table à part pour les bénédictions et ne plus les
+renseigner dans le talent, pour ne pas avoir à modifier RULEBOOK si un nouvel élément est
+ajouté ». C'est ce qui a été livré, en cinq points de compilation.
 
 **Le problème, mis au jour par les six dieux de Nations.** La relation « ce talent donne
 accès à ce sort » est stockée **du côté du sort**, dans son champ `<Talent>`. Tant qu'un
@@ -3665,6 +3684,108 @@ car c'est exactement le cas que le modèle actuel ne rencontrait jamais.
 
 **Premier client** : les bénédictions des six dieux de Nations, laissées en attente à la fin
 du lot 3 (voir §2.37). Elles ne seront branchées que par ce chantier.
+
+---
+
+**CE QUI A ÉTÉ FAIT — écart assumé par rapport à la conception ci-dessus sur deux points.**
+
+*Point 1, le format XML.* Pas `<Access sort=… talent=…/>` mais la forme de tout le reste du
+projet, qui réutilise `XmlDebutCode` / `XmlLigne` / `XmlFinCode` sans écrire de helper
+multi-attributs :
+
+```xml
+<DATA_SPELL_TALENT>
+<Sort id="RULES-BENED_001">
+<Talent>"RULES-T0012_DAZH,RULES-T0012_TOR"</Talent>
+</Sort>
+</DATA_SPELL_TALENT>
+```
+
+*Point 2, la table n'est plus seulement additive pour les bénédictions.* La conception disait
+« le champ `<Talent>` du sort ne bouge pas ». Nono a tranché autrement : pour les
+bénédictions, la relation **sort du sort** et vit uniquement dans la table. Les 19
+`RULES-BENED_*` du Rulebook ont donc leur `<Talent>` vidé, et leurs dieux sont dans un bloc
+`DATA_SPELL_TALENT` porté par le Rulebook lui-même. Le mécanisme reste additif pour tous les
+autres sorts, qui gardent leur `<Talent>` — un domaine de magie dont le livre apporte sorts
+et talents ensemble n'a aucune raison de passer par la table.
+
+**Périmètre décidé avec Nono** : migration des bénédictions seules (pas des ~1000 autres
+relations), et saisie du bloc en XML à la main — aucun écran d'édition dans WinLivre pour
+l'instant.
+
+**Ce qui a été écrit, dans l'ordre des points de compilation :**
+
+1. `chargesort.pas` — `StructureSortTalent` (CodeSort / ListeTalent / Livre), `TListSortTalent`,
+   `ListSortTalent`, `NbSortTalent`, et **`TalentsDuSort(const PSort: StructureSort): String`**,
+   qui concatène le champ `<Talent>` et les lignes de la table sans doublon. Signature par
+   record et non par code : cinq des six appelants ont déjà leur `PSort`, ce qui évite une
+   recherche dans la boucle de `SortAffiche`.
+2. `warhammersource.pas` — `TListSortTalent.Create` et, surtout, `ListSortTalent.Clear` au
+   même endroit que celui qui avait été oublié pour `ListSort` jusqu'au 21/08.
+3. `chargeconstantes.pas` (`ConstXmlDataSpellTalent`) et `xmlexportimport.pas` — chargement
+   après le bloc Sorts, export après le bloc Sort. **Piège traité à l'export** : le sort cité
+   peut appartenir à un autre livre, donc c'est `PSortTalent.Livre` qui décide où la ligne
+   part, et le code n'est **pas** repassé par `ChercheSort` / `XmlCreeCodeLivre` — il est déjà
+   complet. Sans ça, l'export aurait réattribué les lignes au livre du sort.
+4. Les **six** points de lecture — et non deux comme l'annonçait la conception : `TalentSort`
+   et la boucle `ModeSort = AUTO` (`winpersonnage.pas`), le filtre par talent, le test
+   d'accessibilité et la colonne 9 (`winspell.pas`). Le sixième, `TabSpellSelection`, se règle
+   tout seul : il relit la colonne 9, qui contient désormais la liste complète.
+   Dans `TalentSort`, le garde `PSort.ListeTalent = ''` devenait faux — un sort sans `<Talent>`
+   mais servi par la table sortait trop tôt ; il porte maintenant sur le résultat de
+   `TalentsDuSort`.
+5. Les données : les 19 bénédictions migrées dans `BOOK_RULESBOOK.Xml` **et** dans
+   `BOOK_RULESBOOK_FRANCAIS.Xml` (ce dernier n'est pas chargé dans `ListSort`, le garde
+   `LangueDef = ConstAnglais` s'en charge, mais y laisser l'ancienne forme aurait fait croire
+   qu'elle fait foi), puis le bloc de Nations.
+
+**Résultat côté Nations** : 16 bénédictions concernées, **7** dieux, 42 couples, et **zéro
+ligne ajoutée au Rulebook** — ce qui était tout l'objet du chantier. Sept et non six : la
+**Dame de Bretonnie** (`RULES-T0012_LADY`) était déclarée depuis le lot 1 mais n'accordait
+aucune bénédiction ; le livre les liste p.9 sous « Blessings of the Lady ». Trou du lot 1,
+refermé ici. Testé par Nono sur un personnage de la Dame : les six bénédictions arrivent.
+
+**Reste ouvert** : `PoolTalent` sur un personnage portant **deux** dieux — le cas que le
+modèle ne rencontrait jamais avant, donc jamais éprouvé. À vérifier le jour où un tel
+personnage existe.
+
+---
+
+### 2.40 Les bénédictions n'arrivaient jamais quand on choisissait le dieu après coup — corrigé (03/09/2026)
+
+**Bug antérieur au §2.39, révélé par lui.** Nono crée un prêtre, prend `Bless`, choisit
+Sigmar : aucune bénédiction. `SUBCHAPTER_SPELL` vide dans le fichier sauvegardé.
+
+**La chaîne réelle**, qu'il faut avoir en tête avant de chercher :
+
+`SortAffiche` remplit `TabSort` → `MajTables` (l.~4628) recopie `TabSort` dans
+`TabEquipement`, la fiche.
+
+C'est le souvenir de Nono — « les bénédictions ne sont pas ajoutées lors de l'update
+sheet ? » — qui a fermé le diagnostic : `MajTables` **n'ajoute rien**, il ne fait que
+reporter. Un `TabSort` vide au moment de la validation donne une fiche vide, et le défaut
+ne pouvait donc être qu'au remplissage.
+
+**La cause.** `SortAffiche` n'était appelée qu'à l'édition d'une cellule de la table
+d'augmentation (l.~2722 et l.~3593). L'ordre naturel des gestes est : saisir le `1` dans
+la colonne « Nouveau », **puis** double-cliquer pour choisir le dieu. Au seul appel,
+`ColAugmTalSpeSel` était donc encore vide et `Tal` valait le code générique
+`RULES-T0012_*`, qui ne correspond à aucune bénédiction — elles citent le dieu. Rien ne
+rappelait `SortAffiche` après le choix.
+
+**La correction** : un appel à `SortAffiche()` en fin du bloc de choix de spécialisation
+de `TabAugmentationTalentDblClick` (bloc « D », après le C qui propage au tableau métier).
+
+**Même famille que le §2.18**, mais sur l'autre axe : là il s'agissait de *lire* le bon
+code, ici de le lire *au bon moment*. Le correctif vaut pour tous les talents à
+spécialisation portant un `SpellMode` — `Invoke (…)` et `Arcane Magic (…)` étaient dans le
+même cas, en mode CHOICE.
+
+**Reste ouvert, et c'est un autre chantier** : un talent de bénédiction posé **à la
+création** n'accorde toujours rien. `SortAffiche` ne regarde que les lignes où
+`Nouveau > Actuel`, or `MajTables` (l.~4434-4467) écrit `Nouveau := Actuel` pour tout
+talent déjà possédé. Les bénédictions devraient découler du talent **possédé**, pas du
+talent acheté ce tour-ci. Noté dans `A FAIRE.txt`.
 
 ---
 

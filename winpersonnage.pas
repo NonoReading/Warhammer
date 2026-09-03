@@ -1106,6 +1106,7 @@ function TWinPersonnages.ValeurTarifSort(Expression: String; Defaut: Integer): I
 function TWinPersonnages.TalentSort(CodeSort: String): StructureTalent;
   var
     PSort:      StructureSort;
+    Talents:    String;
     Liste:      TStringList;
     Ind:        Integer;
   begin
@@ -1113,14 +1114,19 @@ function TWinPersonnages.TalentSort(CodeSort: String): StructureTalent;
     if CodeSort = '' then
       Exit;
     PSort := ChercheSort(CodeSort);
-    if (PSort.CodeSort = '') or (PSort.ListeTalent = '') then
+    if PSort.CodeSort = '' then
+      Exit;
+    // TalentsDuSort et non PSort.ListeTalent : la relation talent/sort a une seconde
+    // source depuis le 03/09/2026, le bloc DATA_SPELL_TALENT. CONTEXT.md 2.39.
+    Talents := TalentsDuSort(PSort);
+    if Talents = '' then
       Exit;
 
     Liste := TStringList.Create;
     try
       // meme decoupe que SortTalentAccessible : un sort peut citer plusieurs talents, et le
       // OU entre eux est la seule relation que le modele connaisse.
-      ExtractStrings([',', ' '], [], PChar(PSort.ListeTalent), Liste);
+      ExtractStrings([',', ' '], [], PChar(Talents), Liste);
       For Ind := 0 to Liste.Count - 1 do
         begin
           Result := ChercheTalent(Liste[Ind]);
@@ -1507,7 +1513,8 @@ Procedure TWinPersonnages.SortAffiche();
           if PTalent.ModeSort = ConstModeSortAuto then
             begin
               For Psort in ListSort do
-                if Pos(Tal, PSort.ListeTalent) > 0 then
+                // TalentsDuSort : voir CONTEXT.md 2.39, la relation a une seconde source.
+                if Pos(Tal, TalentsDuSort(PSort)) > 0 then
                   Begin
                     TabSort.RowCount                       := TabSort.RowCount + 1;
                     TabSort.Cells[1, TabSort.RowCount-1]   := PSort.CodeSort;
@@ -2647,6 +2654,15 @@ procedure TWinPersonnages.TabAugmentationTalentDblClick(Sender: TObject);
                   Personnage.MetierTalent[Ind2].CodeTalent := SelectWinTalent;
                   break;
                 end;
+
+            // D - recalculer les sorts accordes par ce talent, AVEC la specialisation.
+            // Sans cet appel, SortAffiche n'avait tourne qu'a la saisie de la colonne
+            // "Nouveau", donc AVANT ce choix : la ligne portait encore le code generique
+            // RULES-T0012_*, qui ne correspond a aucune benediction (elles citent le dieu,
+            // RULES-T0012_SIGMAR). TabSort restait vide, et MajTables ne fait que recopier
+            // TabSort dans la fiche - d'ou un pretre sans aucune benediction. Trouve par
+            // Nono le 03/09/2026 sur "pretre 2". Meme famille que CONTEXT.md 2.18.
+            SortAffiche();
           end;
       end
     else if (TabAugmentationTalent.Col = ColCompLib) and (TabAugmentationTalent.Cells[ColAugmCompLib, TabAugmentationTalent.Row] = GetTexteLibelle(ConstLabAdd))  then

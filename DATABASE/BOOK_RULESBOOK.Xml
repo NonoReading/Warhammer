@@ -14582,7 +14582,7 @@ Armour is generally damaged in one of two ways:
 <Target>"1"</Target>
 <Duration>"Instant"</Duration>
 <Range>"Contact"</Range>
-<Talent>"RULES-T0012_RHYA,RULES-T0012_SHALLYA"</Talent>
+<Talent>""</Talent>
 <Level>""</Level>
 <TypSpell>"Blessing"</TypSpell>
 </Sort>
@@ -14592,7 +14592,7 @@ Armour is generally damaged in one of two ways:
 <Target>"1"</Target>
 <Duration>"6 Rounds"</Duration>
 <Range>"6m"</Range>
-<Talent>"RULES-T0012_MORR,RULES-T0012_MYRMIDIA,RULES-T0012_SIGMAR,RULES-T0012_VERENA"</Talent>
+<Talent>""</Talent>
 <Level>""</Level>
 <TypSpell>"Blessing"</TypSpell>
 </Sort>
@@ -14602,7 +14602,7 @@ Armour is generally damaged in one of two ways:
 <Target>"1"</Target>
 <Duration>"6 Rounds"</Duration>
 <Range>"6m"</Range>
-<Talent>"RULES-T0012_RANALD"</Talent>
+<Talent>""</Talent>
 <Level>""</Level>
 <TypSpell>"Blessing"</TypSpell>
 </Sort>
@@ -14612,7 +14612,7 @@ Armour is generally damaged in one of two ways:
 <Target>"1"</Target>
 <Duration>"Instant"</Duration>
 <Range>"Contact"</Range>
-<Talent>"RULES-T0012_RHYA,RULES-T0012_SHALLYA"</Talent>
+<Talent>""</Talent>
 <Level>""</Level>
 <TypSpell>"Blessing"</TypSpell>
 </Sort>
@@ -14622,7 +14622,7 @@ Armour is generally damaged in one of two ways:
 <Target>"1"</Target>
 <Duration>"6 Rounds"</Duration>
 <Range>"6m"</Range>
-<Talent>"RULES-T0012_RHYA"</Talent>
+<Talent>""</Talent>
 <Level>""</Level>
 <TypSpell>"Blessing"</TypSpell>
 </Sort>
@@ -14632,7 +14632,7 @@ Armour is generally damaged in one of two ways:
 <Target>"1"</Target>
 <Duration>"6 Rounds"</Duration>
 <Range>"6m"</Range>
-<Talent>"RULES-T0012_TAAL"</Talent>
+<Talent>""</Talent>
 <Level>""</Level>
 <TypSpell>"Blessing"</TypSpell>
 </Sort>
@@ -16665,7 +16665,7 @@ Tzeentch is the Master of Magic, Treachery, and Lies. The Lore of Tzeentch epito
 <Target>"1"</Target>
 <Duration>"6 Rounds"</Duration>
 <Range>"6m"</Range>
-<Talent>"RULES-T0012_MORR,RULES-T0012_MYRMIDIA,RULES-T0012_RANALD,RULES-T0012_VERENA,RULES-T0012_HANDRICH"</Talent>
+<Talent>""</Talent>
 <Level>""</Level>
 <TypSpell>"Blessing"</TypSpell>
 </Sort>
@@ -16675,7 +16675,7 @@ Tzeentch is the Master of Magic, Treachery, and Lies. The Lore of Tzeentch epito
 <Target>"1"</Target>
 <Duration>"6 Rounds"</Duration>
 <Range>"6m"</Range>
-<Talent>"RULES-T0012_RANALD,RULES-T0012_HANDRICH"</Talent>
+<Talent>""</Talent>
 <Level>""</Level>
 <TypSpell>"Blessing"</TypSpell>
 </Sort>
@@ -16685,7 +16685,7 @@ Tzeentch is the Master of Magic, Treachery, and Lies. The Lore of Tzeentch epito
 <Target>"1"</Target>
 <Duration>"6 Rounds"</Duration>
 <Range>"6m"</Range>
-<Talent>"RULES-T0012_MYRMIDIA,RULES-T0012_RANALD,RULES-T0012_RHYA,RULES-T0012_SHALLYA,RULES-T0012_TAAL,RULES-T0012_VERENA,RULES-T0012_SOLKAN"</Talent>
+<Talent>""</Talent>
 <Level>""</Level>
 <TypSpell>"Blessing"</TypSpell>
 </Sort>
@@ -16695,7 +16695,7 @@ Tzeentch is the Master of Magic, Treachery, and Lies. The Lore of Tzeentch epito
 <Target>"1"</Target>
 <Duration>"6 Rounds"</Duration>
 <Range>"6m"</Range>
-<Talent>"RULES-T0012_MYRMIDIA,RULES-T0012_RANALD,RULES-T0012_RHYA,RULES-T0012_SHALLYA,RULES-T0012_SIGMAR,RULES-T0012_HANDRICH"</Talent>
+<Talent>""</Talent>
 <Level>""</Level>
 <TypSpell>"Blessing"</TypSpell>
 </Sort>
@@ -16705,7 +16705,7 @@ Tzeentch is the Master of Magic, Treachery, and Lies. The Lore of Tzeentch epito
 <Target>"1"</Target>
 <Duration>"6 Rounds"</Duration>
 <Range>"6m"</Range>
-<Talent>"RULES-T0012_SIGMAR,RULES-T0012_ULRIC,RULES-T0012_SOLKAN"</Talent>
+<Talent>""</Talent>
 <Level>""</Level>
 <TypSpell>"Blessing"</TypSpell>
 </Sort>
@@ -16715,7 +16715,7 @@ Tzeentch is the Master of Magic, Treachery, and Lies. The Lore of Tzeentch epito
 <Target>"1"</Target>
 <Duration>"6 Rounds"</Duration>
 <Range>"6m JF."</Range>
-<Talent>"RULES-T0012_MORR,RULES-T0012_VERENA,RULES-T0012_HANDRICH"</Talent>
+<Talent>""</Talent>
 <Level>""</Level>
 <TypSpell>"Blessing"</TypSpell>
 </Sort>
@@ -16729,7 +16729,7 @@ Certain Miracles may have additional, optional, benefits for additional SL writt
 <Target>"1"</Target>
 <Duration>"6 Rounds"</Duration>
 <Range>"6m"</Range>
-<Talent>"RULES-T0012_RANALD,RULES-T0012_VERENA,RULES-T0012_HANDRICH"</Talent>
+<Talent>""</Talent>
 <Level>""</Level>
 <TypSpell>"Blessing"</TypSpell>
 </Sort>
@@ -16739,7 +16739,7 @@ Certain Miracles may have additional, optional, benefits for additional SL writt
 <Target>"1"</Target>
 <Duration>"6 Rounds"</Duration>
 <Range>"6m"</Range>
-<Talent>"RULES-T0012_MANANN,RULES-T0012_MYRMIDIA,RULES-T0012_SIGMAR,RULES-T0012_TAAL,RULES-T0012_ULRIC,RULES-T0012_SOLKAN,RULES-T0012_STROMFELS"</Talent>
+<Talent>""</Talent>
 <Level>""</Level>
 <TypSpell>"Blessing"</TypSpell>
 </Sort>
@@ -16749,7 +16749,7 @@ Certain Miracles may have additional, optional, benefits for additional SL writt
 <Target>"1"</Target>
 <Duration>"6 Rounds"</Duration>
 <Range>"6m"</Range>
-<Talent>"RULES-T0012_MANANN,RULES-T0012_MORR,RULES-T0012_MYRMIDIA,RULES-T0012_SIGMAR,RULES-T0012_ULRIC,RULES-T0012_VERENA,RULES-T0012_SOLKAN,RULES-T0012_STROMFELS"</Talent>
+<Talent>""</Talent>
 <Level>""</Level>
 <TypSpell>"Blessing"</TypSpell>
 </Sort>
@@ -16759,7 +16759,7 @@ Certain Miracles may have additional, optional, benefits for additional SL writt
 <Target>"1"</Target>
 <Duration>"6 Rounds"</Duration>
 <Range>"6m"</Range>
-<Talent>"RULES-T0012_MANANN,RULES-T0012_TAAL,RULES-T0012_ULRIC,RULES-T0012_STROMFELS"</Talent>
+<Talent>""</Talent>
 <Level>""</Level>
 <TypSpell>"Blessing"</TypSpell>
 </Sort>
@@ -16769,7 +16769,7 @@ Certain Miracles may have additional, optional, benefits for additional SL writt
 <Target>"1"</Target>
 <Duration>"6 Rounds"</Duration>
 <Range>"6m"</Range>
-<Talent>"RULES-T0012_MANANN,RULES-T0012_MORR,RULES-T0012_RHYA,RULES-T0012_SHALLYA,RULES-T0012_TAAL,RULES-T0012_STROMFELS"</Talent>
+<Talent>""</Talent>
 <Level>""</Level>
 <TypSpell>"Blessing"</TypSpell>
 </Sort>
@@ -16779,7 +16779,7 @@ Certain Miracles may have additional, optional, benefits for additional SL writt
 <Target>"1"</Target>
 <Duration>"Instant"</Duration>
 <Range>"6m"</Range>
-<Talent>"RULES-T0012_MANANN,RULES-T0012_MORR,RULES-T0012_SHALLYA,RULES-T0012_ULRIC,RULES-T0012_SOLKAN,RULES-T0012_STROMFELS"</Talent>
+<Talent>""</Talent>
 <Level>""</Level>
 <TypSpell>"Blessing"</TypSpell>
 </Sort>
@@ -16789,11 +16789,76 @@ Certain Miracles may have additional, optional, benefits for additional SL writt
 <Target>"1"</Target>
 <Duration>"6 Rounds"</Duration>
 <Range>"6m"</Range>
-<Talent>"RULES-T0012_MANANN,RULES-T0012_SIGMAR,RULES-T0012_TAAL,RULES-T0012_ULRIC,RULES-T0012_HANDRICH,RULES-T0012_SOLKAN,RULES-T0012_STROMFELS"</Talent>
+<Talent>""</Talent>
 <Level>""</Level>
 <TypSpell>"Blessing"</TypSpell>
 </Sort>
 </DATA_SPELL>
+<DATA_SPELL_TALENT>
+  <!-- Les dieux qui accordent chaque benediction, sortis du champ <Talent> du sort
+       le 03/09/2026. Motif : des livres AUTRES que le Rulebook introduisent des dieux
+       (les six de Nations of Mankind) qui accordent ces memes benedictions ; tant que
+       la relation vivait dans le sort, ces livres devaient modifier CE fichier.
+       Chaque livre porte desormais son propre bloc DATA_SPELL_TALENT, purement
+       additif. NE PLUS renseigner <Talent> sur un RULES-BENED_*. CONTEXT.md 2.39. -->
+<Sort id="RULES-BENED_001">
+<Talent>"RULES-T0012_MANANN,RULES-T0012_MYRMIDIA,RULES-T0012_SIGMAR,RULES-T0012_TAAL,RULES-T0012_ULRIC,RULES-T0012_SOLKAN,RULES-T0012_STROMFELS"</Talent>
+</Sort>
+<Sort id="RULES-BENED_002">
+<Talent>"RULES-T0012_MORR,RULES-T0012_MYRMIDIA,RULES-T0012_RANALD,RULES-T0012_VERENA,RULES-T0012_HANDRICH"</Talent>
+</Sort>
+<Sort id="RULES-BENED_003">
+<Talent>"RULES-T0012_RANALD,RULES-T0012_HANDRICH"</Talent>
+</Sort>
+<Sort id="RULES-BENED_004">
+<Talent>"RULES-T0012_MYRMIDIA,RULES-T0012_RANALD,RULES-T0012_RHYA,RULES-T0012_SHALLYA,RULES-T0012_TAAL,RULES-T0012_VERENA,RULES-T0012_SOLKAN"</Talent>
+</Sort>
+<Sort id="RULES-BENED_005">
+<Talent>"RULES-T0012_RHYA,RULES-T0012_SHALLYA"</Talent>
+</Sort>
+<Sort id="RULES-BENED_006">
+<Talent>"RULES-T0012_MANANN,RULES-T0012_MORR,RULES-T0012_MYRMIDIA,RULES-T0012_SIGMAR,RULES-T0012_ULRIC,RULES-T0012_VERENA,RULES-T0012_SOLKAN,RULES-T0012_STROMFELS"</Talent>
+</Sort>
+<Sort id="RULES-BENED_007">
+<Talent>"RULES-T0012_MORR,RULES-T0012_MYRMIDIA,RULES-T0012_SIGMAR,RULES-T0012_VERENA"</Talent>
+</Sort>
+<Sort id="RULES-BENED_008">
+<Talent>"RULES-T0012_RANALD"</Talent>
+</Sort>
+<Sort id="RULES-BENED_009">
+<Talent>"RULES-T0012_RHYA,RULES-T0012_SHALLYA"</Talent>
+</Sort>
+<Sort id="RULES-BENED_010">
+<Talent>"RULES-T0012_RHYA"</Talent>
+</Sort>
+<Sort id="RULES-BENED_011">
+<Talent>"RULES-T0012_TAAL"</Talent>
+</Sort>
+<Sort id="RULES-BENED_012">
+<Talent>"RULES-T0012_MYRMIDIA,RULES-T0012_RANALD,RULES-T0012_RHYA,RULES-T0012_SHALLYA,RULES-T0012_SIGMAR,RULES-T0012_HANDRICH"</Talent>
+</Sort>
+<Sort id="RULES-BENED_013">
+<Talent>"RULES-T0012_SIGMAR,RULES-T0012_ULRIC,RULES-T0012_SOLKAN"</Talent>
+</Sort>
+<Sort id="RULES-BENED_014">
+<Talent>"RULES-T0012_MORR,RULES-T0012_VERENA,RULES-T0012_HANDRICH"</Talent>
+</Sort>
+<Sort id="RULES-BENED_015">
+<Talent>"RULES-T0012_MANANN,RULES-T0012_TAAL,RULES-T0012_ULRIC,RULES-T0012_STROMFELS"</Talent>
+</Sort>
+<Sort id="RULES-BENED_016">
+<Talent>"RULES-T0012_MANANN,RULES-T0012_MORR,RULES-T0012_RHYA,RULES-T0012_SHALLYA,RULES-T0012_TAAL,RULES-T0012_STROMFELS"</Talent>
+</Sort>
+<Sort id="RULES-BENED_017">
+<Talent>"RULES-T0012_MANANN,RULES-T0012_MORR,RULES-T0012_SHALLYA,RULES-T0012_ULRIC,RULES-T0012_SOLKAN,RULES-T0012_STROMFELS"</Talent>
+</Sort>
+<Sort id="RULES-BENED_018">
+<Talent>"RULES-T0012_MANANN,RULES-T0012_SIGMAR,RULES-T0012_TAAL,RULES-T0012_ULRIC,RULES-T0012_HANDRICH,RULES-T0012_SOLKAN,RULES-T0012_STROMFELS"</Talent>
+</Sort>
+<Sort id="RULES-BENED_019">
+<Talent>"RULES-T0012_RANALD,RULES-T0012_VERENA,RULES-T0012_HANDRICH"</Talent>
+</Sort>
+</DATA_SPELL_TALENT>
 <DATA_CRAFTMANSHIP>
 <Craftsmanship id="RULES-QUALITY_01">
 <Description language="ENGLISH">"Lightweight"</Description>

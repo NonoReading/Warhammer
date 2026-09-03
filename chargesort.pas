@@ -21,13 +21,25 @@ Type
         Livre:            String;
 end;
 
+  // Bloc DATA_SPELL_TALENT, ajoute le 03/09/2026 : une ligne = "ce talent donne acces a
+  // ce sort", portee par n'importe quel livre. Voir TalentsDuSort et CONTEXT.md 2.39.
+  StructureSortTalent = Record
+        CodeSort:         string;
+        ListeTalent:      string;
+        Livre:            String;
+end;
+
   TListSort = specialize TList<StructureSort>;
+  TListSortTalent = specialize TList<StructureSortTalent>;
 
 Var
-  ListSort:     TListSort;
-  NbSort:       Integer;
+  ListSort:        TListSort;
+  NbSort:          Integer;
+  ListSortTalent:  TListSortTalent;
+  NbSortTalent:    Integer;
 
 function ChercheSort(CodeSort :String): StructureSort;
+function TalentsDuSort(const PSort: StructureSort): String;
 Function CheminSortImage(CodeTalent: String): String;
 
 implementation
@@ -48,6 +60,48 @@ function ChercheSort(CodeSort :String): StructureSort;
            Result := PSort;
            break;
          end;
+  end;
+
+function TalentsDuSort(const PSort: StructureSort): String;
+  // SEUL point de lecture de la relation "ce talent donne acces a ce sort". Elle a deux
+  // sources depuis le 03/09/2026 : le champ <Talent> du sort, et le bloc DATA_SPELL_TALENT
+  // qu'un livre quelconque peut porter. Le second est purement ADDITIF, il n'efface jamais
+  // le premier.
+  // Motif : les benedictions RULES-BENED_* du Rulebook sont accordees par des dieux
+  // introduits par d'AUTRES livres (les six dieux de Nations of Mankind). Ecrire la
+  // relation dans le sort obligeait un livre a modifier le fichier d'un autre, et
+  // ChercheSort ne fusionne pas deux entrees de meme code : il prend la premiere et sort.
+  // CONTEXT.md 2.39.
+  var
+    PSortTalent:  StructureSortTalent;
+    Liste:        TStringList;
+    Ligne:        TStringList;
+    Code:         String;
+  Begin
+    Liste := TStringList.Create;
+    Ligne := TStringList.Create;
+    try
+      ExtractStrings([',', ' '], [], PChar(PSort.ListeTalent), Liste);
+      For PSortTalent in ListSortTalent do
+        if CompareRechercheValeur(PSortTalent.CodeSort, PSort.CodeSort) then
+          Begin
+            Ligne.Clear;
+            ExtractStrings([',', ' '], [], PChar(PSortTalent.ListeTalent), Ligne);
+            For Code in Ligne do
+              if Liste.IndexOf(Code) < 0 then
+                Liste.Add(Code);
+          end;
+      Result := '';
+      For Code in Liste do
+        Begin
+          if Result <> '' then
+            Result := Result + ',';
+          Result := Result + Code;
+        end;
+    finally
+      Ligne.Free;
+      Liste.Free;
+    end;
   end;
 
 Function CheminSortImage(CodeTalent: String): String;

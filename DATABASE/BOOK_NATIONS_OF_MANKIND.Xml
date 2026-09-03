@@ -6125,4 +6125,60 @@ These warriors are amongst the bravest of their kind, as they charge into battle
 <TypSpell>"Arcane Magic"</TypSpell>
 </Sort>
 </DATA_SPELL>
+<DATA_SPELL_TALENT>
+  <!-- LOT 3 : les benedictions accordees par les dieux de ce livre. Les <Sort> cites sont
+       les RULES-BENED_* du RULEBOOK : ce bloc est ADDITIF et n oblige pas a modifier le
+       fichier du Rulebook, qui porte ses propres dieux dans son propre bloc. Source : les
+       lignes "Blessings and Strictures" du livre (Dazh p.48, Tor et Ursun p.49-50,
+       Ormazd p.53, les Devas p.56, l Orange Simca p.57) et "Blessings of the Lady" p.9.
+       CONTEXT.md 2.39. -->
+<Sort id="RULES-BENED_001">
+<Talent>"RULES-T0012_DAZH,RULES-T0012_DEVAS,RULES-T0012_LADY,RULES-T0012_ORMAZD,RULES-T0012_SIMCA,RULES-T0012_TOR,RULES-T0012_URSUN"</Talent>
+</Sort>
+<Sort id="RULES-BENED_002">
+<Talent>"RULES-T0012_DAZH,RULES-T0012_DEVAS,RULES-T0012_LADY,RULES-T0012_SIMCA"</Talent>
+</Sort>
+<Sort id="RULES-BENED_004">
+<Talent>"RULES-T0012_DAZH"</Talent>
+</Sort>
+<Sort id="RULES-BENED_005">
+<Talent>"RULES-T0012_DEVAS"</Talent>
+</Sort>
+<Sort id="RULES-BENED_006">
+<Talent>"RULES-T0012_DAZH,RULES-T0012_LADY,RULES-T0012_ORMAZD,RULES-T0012_SIMCA,RULES-T0012_TOR,RULES-T0012_URSUN"</Talent>
+</Sort>
+<Sort id="RULES-BENED_007">
+<Talent>"RULES-T0012_LADY,RULES-T0012_SIMCA,RULES-T0012_URSUN"</Talent>
+</Sort>
+<Sort id="RULES-BENED_009">
+<Talent>"RULES-T0012_DEVAS"</Talent>
+</Sort>
+<Sort id="RULES-BENED_010">
+<Talent>"RULES-T0012_ORMAZD"</Talent>
+</Sort>
+<Sort id="RULES-BENED_011">
+<Talent>"RULES-T0012_URSUN"</Talent>
+</Sort>
+<Sort id="RULES-BENED_012">
+<Talent>"RULES-T0012_DAZH,RULES-T0012_DEVAS,RULES-T0012_LADY,RULES-T0012_ORMAZD"</Talent>
+</Sort>
+<Sort id="RULES-BENED_013">
+<Talent>"RULES-T0012_LADY,RULES-T0012_SIMCA,RULES-T0012_TOR,RULES-T0012_URSUN"</Talent>
+</Sort>
+<Sort id="RULES-BENED_014">
+<Talent>"RULES-T0012_ORMAZD"</Talent>
+</Sort>
+<Sort id="RULES-BENED_015">
+<Talent>"RULES-T0012_TOR"</Talent>
+</Sort>
+<Sort id="RULES-BENED_017">
+<Talent>"RULES-T0012_ORMAZD,RULES-T0012_TOR"</Talent>
+</Sort>
+<Sort id="RULES-BENED_018">
+<Talent>"RULES-T0012_SIMCA,RULES-T0012_TOR,RULES-T0012_URSUN"</Talent>
+</Sort>
+<Sort id="RULES-BENED_019">
+<Talent>"RULES-T0012_DAZH,RULES-T0012_DEVAS"</Talent>
+</Sort>
+</DATA_SPELL_TALENT>
 </DATA_BOOK>
