@@ -1,6 +1,7 @@
 # Warhammer — Contexte projet
 
-**Dernière mise à jour : 03/09/2026.** Ce fichier remplace tous les anciens
+**Dernière mise à jour : 03/09/2026 (soir — inventaire du corpus §2.36, Nations of
+Mankind lots 1 et 2 §2.37, conception des noms genrés §2.38).** Ce fichier remplace tous les anciens
 `CONTEXT*.md` / `INDEX*.md` / `RESUME*.md` / `SESSION*.md`. Il n'y en a plus
 qu'un : celui-ci. On ne le duplique jamais, on l'édite en place.
 
@@ -33,6 +34,17 @@ lecture, jamais depuis la source elle-même :
   parce que deux colonnes se mélangeaient dans un résultat de grep ; `pdftotext -layout`
   préservait les positions, il suffisait de découper la gouttière. Un défaut de mon outil
   de lecture n'est pas un défaut de la source.
+- **L'outil de lecture perd aussi les attributs de caractère, pas seulement la mise en
+  page (03/09/2026).** Sur *Nations of Mankind* j'allais écrire que la compétence de tête
+  des 30 carrières « n'existe nulle part dans le PDF », parce que ce livre n'a pas de table
+  d'index des carrières. Nono : « c'est la ligne en italique ». Le livre porte bien la
+  donnée, en italique dans la liste de compétences du niveau 1 — et `pdftotext` ne
+  transporte pas l'italique, quelle que soit l'option. `pdftohtml -xml` conserve les
+  balises `<i>` ; les 30 ont été retrouvées en une passe. La règle : **avant de déclarer
+  une donnée absente d'un PDF, vérifier qu'elle ne tient pas dans ce que mon extraction
+  jette** — italique, gras, couleur, encadré, position. En pratique : `pdftotext -layout`
+  pour le texte et les colonnes, `pdftohtml -xml` dès qu'une information peut être portée
+  par la typographie.
 - **Quand une donnée n'est pas là où je regarde, elle est ailleurs.** L'hypothèse par
   défaut n'est jamais « elle manque ». Pour un talent ou une compétence, le premier
   « ailleurs » à essayer est **la base**, pas une autre page du livre. Deux modes d'échec
@@ -3465,11 +3477,137 @@ Le niveau 4 est en **Silver 5 et non en Gold** : c'est bien ce qu'écrit le livr
 « Asrai/Eonir War Blades » du niveau 2 sont posées en **une seule ligne** — le livre n'y exprime
 pas de quantité, contrairement au niveau 1.
 
-**Prochain livre, et prochaine marche de la méthode** : *Parravonese, Strigany, and Signaller
-Career* (8 Ko). Il apporte une carrière **et deux ethnies avec leurs tables de tirage de 100
-lignes** — donc le premier à exercer `DATA_SPECIE` et `DATA_CAREER_ROLL`, que le Wardancer n'a
-pas touchés. Attention : son tableau d'avance est **vide dans l'export TXT**, il faudra le lire
-sur le PDF. Ordre complet dans `A FAIRE.txt`.
+**Suite** : la méthode a été passée à l'échelle sur *Nations of Mankind*, voir §2.37.
+*Parravonese, Strigany, and Signaller Career* (8 Ko) reste le prochain livre à exercer
+`DATA_SPECIE` et `DATA_CAREER_ROLL`, que ni le Wardancer ni Nations n'ont touchés : il
+apporte une carrière **et deux ethnies avec leurs tables de tirage de 100 lignes**.
+Attention, son tableau d'avance est **vide dans l'export TXT** ; le lire sur le PDF.
+Ordre complet dans `A FAIRE.txt`.
+
+---
+
+### 2.36 Inventaire du corpus PDF_TEXTE — ce qui reste à modéliser (03/09/2026)
+
+Balayage de ~150 fichiers du corpus, en écartant les 19 livres déjà présents dans
+`DATABASE`. **`PDF_TEXTE` n'est pas l'ancien nom de `LIVRES`** : `LIVRES` = les livres
+modélisés avec leurs PDF, `PDF_TEXTE` = l'export texte de tout le corpus.
+
+Ce qui a de la matière, par ordre de rendement :
+
+| Livre | Contenu repéré |
+|---|---|
+| **Nations of Mankind** | 30 carrières, 16 talents, 7 domaines de magie — **lots 1 et 2 faits, voir §2.37** |
+| **Unofficial Grimoire 1.2** | ~215 sorts sur 16 domaines (Élémentalisme, Nécromancie, Nurgle/Slaanesh/Tzeentch, Warp) + 3 carrières de lanceur |
+| **Dwarf Player's Guide** | 9 carrières nommées + ~23 autres blocs à extraire, 9 blocs d'armure, ethnies naines |
+| **Deft Steps, Light Fingers** | 9 carrières (prêtres de Ranald et Taal, Forger, Poacher, Gamekeeper) |
+| **Princes of Ulthuan** | 4 carrières hauts elfes (White Lion, Swordmaster, Shadow Warrior, Seaguard) |
+| Lots de sorts purs | Reikland Miscellanea (50, dont Hedgecraft/Witchcraft), Sullasara's (50), Blood and Bramble (48), Tribes and Tribulations (30), Temple of Spite (26, elfes noirs) |
+| Ethnies | Temple of Spite (elfes noirs), Lords of Stone and Steel (Karak Azgaraz), Kings of the Dead (fan, Khemri) |
+
+**Les quatre Companions de l'Enemy Within sont déclarés mais quasi vides** : leur XML fait
+6 à 8 Ko alors que les textes portent **108 sorts** (Horned Rat 38, Enemy in Shadows 25,
+Power Behind the Throne 33, Death on the Reik 12) et quatre carrières (Ironbreaker,
+Cultist, Warrior of Tzeentch). C'est le meilleur rapport travail/résultat du corpus, parce
+que les livres existent déjà dans la base.
+
+**Zéro rendement, vérifié** : toutes les aventures (Ubersreik 1/2/3, les cinq volumes de
+l'Enemy Within, les one-shots, Fan Made, Other help hors Grimoire) — fiches de PNJ et aides
+de jeu, rien de modélisable. Ne pas y revenir.
+
+**Piège confirmé au passage** : les 15 occurrences de « Species » de *The Imperial Zoo*
+sont des fiches de PNJ, pas des ethnies — même famille que les « Career Path » mal comptés
+le 30/08. Un marqueur compté n'est toujours pas un marqueur lu.
+
+---
+
+### 2.37 Nations of Mankind — lots 1 et 2 terminés (03/09/2026), lot 3 à faire
+
+Fichier unique `DATABASE\BOOK_NATIONS_OF_MANKIND.Xml`, 277 Ko, `CODE_BOOK` = `NATIO`,
+`OFFICIAL=2`, `COMPLETE=0`. Aucun fichier existant modifié, donc aucune compilation.
+Chargé et vérifié par Nono : les 30 métiers s'affichent proprement.
+
+**Fait — lot 1, les briques** : 35 spécialisations de compétence (13 `Lore`, 5 `Ride`,
+4 `Perform`, 4 `Play`, 2 `Art`, 3 `Secret Signs`, plus Language/Entertain/Trade), 16 talents
+propres au livre, 29 spécialisations de talent (8 styles de Kenjutsu, 8 voies de Martial
+Artist, 5 Marques des dieux, plus Fearless/Hatred/Bless/Invoke/Savant).
+
+**Fait — lot 2, les carrières** : les 30, avec leurs 120 niveaux, tableaux d'avance,
+compétences, talents et équipements. **1077 références résolues sur 1077.**
+
+**Reste — lot 3** : les 7 domaines de magie (Divine Lore of Kislev / Araby / Ind / Nippon,
+Lore of Ice, Lore of the Desert), l'éligibilité par espèce, les créatures (taureaux de
+guerre estaliens), et les sections Provinces / Regiments / Knightly Orders. Point de
+reprise : le PDF est dans `LIVRES\Nations of Mankind.pdf`, les domaines de magie commencent
+page 48 ; réextraire avec `pdftotext -layout -x 306 -W 306` (colonne de droite) comme pour
+les carrières.
+
+**Ce que ce livre a appris, et qui resservira sur les gros livres :**
+
+- **Le TXT du corpus ne suffit pas au-delà d'une petite carrière.** L'export de `PDF_TEXTE`
+  a été fait sans `-layout` : les noms de niveaux y sont tronqués et les colonnes mêlées.
+  Refaire l'export soi-même depuis le PDF est la première étape, pas un recours.
+- **Découper le PDF en colonnes vaut mieux que chercher une gouttière.** Aucune colonne de
+  blancs n'existait (les titres traversent la page) ; `pdftotext -layout -x 306 -W 306` sur
+  une page Letter isole la colonne de droite, où tiennent les 30 tableaux de carrière.
+- **La compétence de tête est en italique** — voir §0, c'est la leçon principale de la
+  session.
+- **Le contrôle de collision d'identifiants sert à trouver des doublons, pas seulement à
+  les éviter.** Il a arrêté la création d'`Arcane Magic (Celestial)` en montrant que
+  `RULES-T0088_CIEUX` existait déjà sous *Arcane Magic (Heavens)* : deux noms du même
+  domaine. Sans ce contrôle, le doublon partait.
+- **Un talent peut échapper au filtre par son premier caractère.** `¡¡Despierta, Fierro!!`
+  a été manqué au lot 1 parce que le motif de titre exigeait une majuscule ASCII. Trouvé
+  seulement parce qu'une carrière le référençait et que la résolution a échoué — c'est la
+  résolution exhaustive qui rattrape les trous de l'extraction, pas l'inverse.
+
+**Choix de saisie signalés dans le fichier, à confirmer par Nono :**
+
+- `OFFICIAL=2` : aucune mention d'éditeur sur le PDF, contenu non officiel (Vimto Monks,
+  Champion of the Orange Simca).
+- **Almogavar en « Copper 3/5 »** : lu comme `TIERS_BRASS`, décision Nono — la base ne
+  connaît que Brass, Silver et Gold. Ne pas créer `TIERS_COPPER` sans avoir cherché où la
+  liste des paliers est écrite en dur dans le code (même forme que les six `TypSpell`).
+- **Highlander en Brass 0 sur ses quatre niveaux** : vérifié sur le PDF page 42, c'est bien
+  ce qu'imprime le livre.
+- **Bretonnian Knight a 4 caractéristiques de départ** (WS, Force, Agilité, Intelligence)
+  là où toutes les autres en ont 3. Saisi tel quel.
+- **Cinq carrières portent deux noms** — le titre de page et l'en-tête du tableau d'avance
+  diffèrent (Janissary / Arabyan Janissary, Samurai / Nippon Samurai, Inquisidor / Estalian
+  Inquisidor, Celestial Dragon Monk / Cathayan Dragon Monk, Cathayan Jinyiwei / Jinyiwei).
+  Le titre de page fait foi, la variante est en commentaire.
+- `Animal Training` et `Stealth (Everything)` lus comme les formes `(Any)` existantes ;
+  `Trade (Bladesmith)` créé tel quel plutôt que corrigé en Blacksmith (carrière nipponne).
+- Deux phrases du livre ne sont pas des compétences et ne sont pas saisies : « Starting
+  Skills / Talents based on Inquisitor School » (Estalian Inquisidor niveau 1).
+
+**Les espèces sont en commentaire, pas en donnée** : « Human Ungol or Gospodar », « Dwarf,
+Gnome, Halfling, High Elf, Human »… demandent un rattachement aux races existantes et un
+bloc d'éligibilité. C'est le premier morceau du lot 3.
+
+---
+
+### 2.38 Nom de niveau de carrière au masculin et au féminin — conception, non appliquée (03/09/2026)
+
+**Idée de Nono** : ajouter deux champs optionnels à `<Level>`, un nom masculin et un nom
+féminin, à côté du `<Description>` actuel.
+
+**Le besoin ne vient pas de Nations mais de la traduction.** Vérifié le 03/09 :
+`BOOK_RULESBOOK_FRANCAIS.Xml` porte ses **256 noms de niveaux encore en anglais** — la
+traduction française des carrières n'est pas faite. C'est là que le genre est massif
+(Apprenti/Apprentie, Artisan/Artisane sur 256 niveaux), pas dans les 12 niveaux
+hispanisants de Nations. Ce chantier est donc à mener **avec** celui de la traduction, pas
+pour un livre.
+
+**Ce que ça touche** : le chargeur, l'affichage dans WinPersonnage et WinLivre, le PDF de
+personnage, et une règle de repli quand les deux champs sont absents — ce qui est le cas de
+la quasi-totalité des niveaux existants. Ce n'est pas une ligne de XML.
+
+**Décision du 03/09, validée par Nono** : Nations est saisi avec la forme du livre telle
+quelle dans le `<Description>` actuel — `"Recortador/Recortadora"`, `"Mercenario/Mercenaria"`,
+`"Diestro/Diestra"`, `"Torero/Torera"`, `"Banderizo/Banderiza"`, `"Bravucón/Bravucona"`,
+`"Jarl/Chaos Warlord"`, `"Coin King/Queen"`. C'est fidèle et **récupérable sans perte** : le
+jour où les deux champs existent, un script découpe sur le `/` et les remplit, sur Nations
+comme sur le reste. Rien n'est à ressaisir.
 
 ---
 

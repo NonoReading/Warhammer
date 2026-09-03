@@ -34,6 +34,21 @@ A verifier sur le livre avant de corriger - c est le seul cas hors Archives I.
 
 COQUILLE DE LIBELLE : RULES-DISPO_COMMON s affiche "Commmon", avec trois m.
 
+NATIONS OF MANKIND : CONFIRMER OFFICIAL=2. Saisi le 03/09 sur faisceau d indices (aucune
+mention d editeur, contenu non officiel type Vimto Monks), pas sur une preuve. Le PDF est
+dans LIVRES. Une ligne a changer dans BOOK_NATIONS_OF_MANKIND.Xml si c est faux.
+
+NATIONS OF MANKIND : TROIS LIBELLES A ARBITRER, tous en commentaire dans le XML.
+Trade (Bladesmith) cree tel quel plutot que corrige en Blacksmith - carriere nipponne, le
+forgeron de lames a du sens. Fearless (Beasts) cree a cote de Fearless (Beastmen) parce que
+c est le Toreador, qui affronte des taureaux. Stealth (Everything) du Ninja lu comme
+Stealth (Any).
+
+OU EST ECRITE LA LISTE DES PALIERS DE SALAIRE ? Nations ecrit "Copper 3" pour l Almogavar
+alors que la base ne connait que Brass/Silver/Gold ; lu comme Brass le 03/09. Avant
+d envisager un TIERS_COPPER, chercher ou l enumeration est recopiee dans le code - meme
+forme que les six TypSpell, qui avaient produit trois bugs a trois endroits.
+
 VERIFIER LES AUTRES LISTES FERMEES DE TYPES ECRITES EN DUR. Celle des six TypSpell a
 produit trois bugs a trois endroits differents ; la meme forme - une enumeration recopiee
 dans le code au lieu d'etre demandee aux donnees - existe probablement ailleurs. Chercher
@@ -42,6 +57,24 @@ les InList() portant sur des constantes de type.
 =========================================================================
 CONCEPTIONS A MENER  (chantiers a part entiere, ne pas les melanger)
 =========================================================================
+
+NATIONS OF MANKIND, LOT 3. Les lots 1 (talents et specialisations) et 2 (30 carrieres) sont
+faits, voir CONTEXT.md 2.37. Restent, dans le meme fichier :
+  - les 7 domaines de magie (Divine Lore of Kislev / Araby / Ind / Nippon, Lore of Ice,
+    Lore of the Desert), a partir de la page 48 du PDF
+  - l eligibilite par espece : les 30 carrieres portent leur espece EN COMMENTAIRE faute de
+    bloc d eligibilite ("Human Ungol or Gospodar", "Dwarf, Gnome, Halfling, High Elf,
+    Human"...). Il faut les rattacher aux races existantes.
+  - les creatures (taureaux de guerre estaliens, monture du Toreador)
+  - les sections Provinces of the Empire, Regiments of the Empire, Knightly Orders Expansion
+  Methode : pdftotext -layout -x 306 -W 306 pour isoler la colonne de droite, et
+  pdftohtml -xml des qu une donnee peut etre portee par l italique.
+
+NOMS DE NIVEAU DE CARRIERE AU MASCULIN ET AU FEMININ. Conception arretee le 03/09, NON
+APPLIQUEE : voir CONTEXT.md 2.38. A mener AVEC le chantier de traduction francaise, pas
+pour un livre - BOOK_RULESBOOK_FRANCAIS.Xml porte ses 256 noms de niveaux encore en anglais.
+Touche le chargeur, WinPersonnage, WinLivre et le PDF de personnage.
+
 
 =========================================================================
 EN VRAC  (ancien, non trie)
@@ -593,93 +626,45 @@ Ils dependent des memes talents que les quatre carrieres, donc ils viennent apre
     par tirage d espece. A revoir si Nono veut le contraire.
 
 =========================================================================
-LIVRES NON ENCORE INTEGRES - INVENTAIRE DU 29/08
+LIVRES NON ENCORE INTEGRES
 =========================================================================
-Nono a depose l export TXT de tous ses PDF V4 : plus de 200 fichiers, 40 Mo.
-LIRE CE CORPUS EN ENTIER EST HORS DE PORTEE (de l ordre de dix millions de jetons).
-Ce n est pas necessaire : toutes les revues du 29/08 se sont faites par recherche ciblee,
-sans jamais ouvrir un livre en entier. La taille d un fichier ne coute rien tant qu on ne
-le lit pas.
+INVENTAIRE A JOUR : CONTEXT.md 2.36 (03/09/2026). Il remplace le tri du 29/08, qui
+comptait des marqueurs sans lire leur contexte et se trompait sur plusieurs livres.
+Ne rien relancer ici sans l avoir lu.
 
-CROISEMENT AVEC LA BASE : 10 des livres presents sont deja modelises, 57 ne le sont pas.
+FAITS : High Elf Player s Guide (CONTEXT.md 2.25 a 2.29), Wood Elf Wardancer (2.35, qui a
+servi a caler la methode), Nations of Mankind lots 1 et 2 (2.37).
 
-TRI PAR CONTENU, obtenu en comptant les marqueurs de regles (Career Path, Advance Scheme,
-profils 2d10+, Trappings) sans lire les fichiers. Les livres qui apportent des DONNEES
-JOUABLES, par ordre de richesse :
+ORDRE PROPOSE POUR LA SUITE :
+  1. Nations of Mankind, LOT 3 - domaines de magie, eligibilite par espece, creatures,
+     Provinces/Regiments/Knightly Orders. Le livre est deja ouvert, c est le moins cher.
+  2. Les quatre Companions de l Enemy Within - 108 sorts et 4 carrieres qui manquent a des
+     livres DEJA declares en base (XML de 6 a 8 Ko). Meilleur rapport travail/resultat.
+  3. Parravonese/Strigany/Signaller (8 Ko) - 1 carriere + 2 ethnies + 2 tables de tirage de
+     100 lignes. Le premier a exercer DATA_SPECIE et DATA_CAREER_ROLL. Son tableau d avance
+     est VIDE dans l export TXT, le lire sur le PDF.
+  4. Dwarf Player s Guide (officiel, aucune espece a creer), puis Deft Steps Light Fingers
+     (officiel, 9 carrieres et 5 especes), puis Unofficial Grimoire (~215 sorts).
 
-  Nations of Mankind ............ 30 schemas d avance, 127 trappings - le plus gros
-                                  gisement de carrieres du lot, et de loin
-  Dwarf Player s Guide .......... 10 carrieres completes
-  Deft Steps Light Fingers ...... 9 carrieres + 5 profils d espece
-  High Elf Player s Guide ....... 9 carrieres
-  Unofficial Grimoire 1.2 ....... 5 carrieres, probablement des sorts en nombre
-  Princes of Ulthuan 1.2 ........ 4 carrieres
-  Aristocracy of the Night ...... 60 profils 2d10+ (especes vampiriques), 0 carriere
-  Kings of the Dead 1.1 ......... 2 carrieres + 10 profils
-  A Guide to Cannons ............ 1 carriere (Gunner Advance Scheme, verifiee)
-  Initiations and Cult Skills ... 1 carriere (Anchorite Advance Scheme, verifiee)
-  Parravonese, Strigany, and Signaller Career . 1 carriere (8 Ko, tres petit, verifiee)
-
-FIABILITE DE CE TRI : les comptes des livres OFFICIELS et des tres petits ont ete verifies
-en lisant le contexte des marqueurs. CEUX DES FANBOOKS NE L ONT PAS ETE - ils sortent d un
-simple comptage de "Career Path", qui compte aussi les fiches de PNJ et la prose. Trois
-livres avaient d ailleurs ete mal classes ainsi (Power Behind the Throne Companion, The
-Imperial Zoo, Lords of Stone and Steel) : ils n apportent AUCUNE carriere et sont deja
-retires de la liste ci-dessus. Verifier le contexte avant d ouvrir un chantier sur un
-fanbook.
-
-  SANS AUCUNE CARRIERE ni espece : Ubersreik Adventures 1/2/3, A Guide to Ubersreik,
-  Altdorf - Crown of the Empire, Empire In Ruins Companion, Temple of Spite, Reikland
-  Miscellanea, Tribes and Tribulations, Sea Wardens of Cothique, Taverns of the Old World,
-  Hirelings of the Old World, Patrons of the Old World I et II, Shrines of Sigmar,
-  Sullasara s Spells, Conversion Tables, Unofficial Bestiary, Unofficial Character Pack,
-  et les aventures. Leurs "Trappings" sont des profils de PNJ, pas des carrieres jouables.
-
-STATUT OFFICIEL OU FAN, determine par la mention legale (les fanbooks V4 passent par le
-programme Community Content, qui impose une mention ; les livres Cubicle 7 portent leur
-copyright complet). Utile car la base a deja un champ <OFFICIAL> - 1 officiel, 2 fan.
-
-  OFFICIELS parmi les gisements, apres la correction du 30/08 : il n en reste que TROIS -
-  Dwarf Player s Guide (10 carrieres), High Elf Player s Guide (9), Deft Steps Light
-  Fingers (9). The Imperial Zoo, Power Behind the Throne Companion et Lords of Stone and
-  Steel sont officiels mais n apportent pas de carriere.
-  Detail utile pour l integration : Dwarf Player s Guide et High Elf Player s Guide ne
-  contiennent AUCUN profil "2d10+", donc aucune nouvelle espece - leurs carrieres se
-  rattachent a des ethnies deja en base (Nain, Haut Elfe). Deft Steps Light Fingers, lui,
-  a 5 profils 2d10+ : il ajoute des especes, et est donc le plus lourd des trois.
-
-  FANBOOKS averes, mention Community Content trouvee : Aristocracy of the Night,
-  Kings of the Dead, Princes of Ulthuan, Unofficial Bestiary, Unofficial Grimoire,
-  Unofficial Character Pack. Ils rejoignent Green iz Best, Lords of Naggaroth et
-  Wood Elf Wardancer Career, deja marques OFFICIAL=2.
-
-  SANS AUCUNE MENTION, statut PROBABLE mais NON PROUVE - l absence peut aussi venir de
-  l export TXT si la page de copyright etait une image :
-    Nations of Mankind ...... ouvre sur une citation encyclopedique, sans page de titre ni
-                              copyright. Ressemble a une compilation personnelle.
-                              IMPORTANT : c est le plus gros gisement du lot (30 carrieres)
-                              et il est vraisemblablement NON OFFICIEL.
-    Parravonese, Strigany, and Signaller Career ... s annonce "Variant Humans for WFRP 4e",
-                              document d une page fait par un joueur.
-    A Guide to Cannons ...... mise en page soignee, aucune mention d editeur.
-    Initiations and Cult Skills, Revised Critical System (beta) ... idem.
-
-CE QUE CA COUTE, par activite :
-  * inventaire, recherche ciblee, tri par marqueurs : negligeable, meme sur 40 Mo
-  * revue d un livre deja modelise : un lot moyen (voir les huit revues du 29/08)
-  * INTEGRATION d un livre absent : bien plus lourd qu une revue - il faut creer le
-    fichier XML, les carrieres, les especes, les tables. A ne lancer qu un par un.
-
-SUGGESTION D ORDRE, REVUE LE 03/09 : les deux premiers de la liste du 30/08 sont faits -
-High Elf Player s Guide (chantiers 2.25 a 2.29) et Wood Elf Wardancer, ce dernier ayant
-servi a caler la methode d integration, ecrite dans CONTEXT.md 2.35.
-Reste, dans l ordre : Parravonese/Strigany/Signaller (8 Ko, 1 carriere + 2 ethnies + 2
-tables de tirage de 100 lignes - le premier a apporter des ETHNIES, donc la deuxieme
-marche de la methode), puis Dwarf Player s Guide (officiel, 10 carrieres, aucune espece a
-creer), puis Deft Steps Light Fingers (officiel, 9 carrieres et 5 especes). Nations of
-Mankind reste le plus riche - 30 schemas annonces - mais ses comptes n ont jamais ete
-verifies en contexte et il est vraisemblablement non officiel.
-
+REGLES DE METHODE QUI RESTENT VRAIES, tirees de l inventaire du 29/08 et de sa correction :
+  * La taille d un fichier ne coute rien tant qu on ne le lit pas. Inventaire, recherche
+    ciblee et tri par marqueurs sont negligeables meme sur 40 Mo ; c est l INTEGRATION qui
+    est lourde. A ne lancer qu un livre a la fois.
+  * Un comptage de "Career Path" compte aussi les fiches de PNJ et la prose. Trois livres
+    avaient ete mal classes ainsi le 29/08 (Power Behind the Throne Companion, The Imperial
+    Zoo, Lords of Stone and Steel) ; le 03/09, The Imperial Zoo a repique au meme piege avec
+    ses 15 "Species", qui sont des PNJ. Toujours sortir le contexte avant de conclure.
+  * Un livre sans carriere n est pas un livre sans donnees : le tri du 29/08 ecartait
+    Temple of Spite, Reikland Miscellanea, Sullasara s Spells et Tribes and Tribulations
+    comme vides, alors qu ils portent entre 26 et 50 SORTS chacun.
+  * Statut officiel ou fan : les fanbooks V4 passent par le programme Community Content,
+    qui impose une mention ; les livres Cubicle 7 portent leur copyright complet. L absence
+    de mention ne prouve rien - la page de copyright peut etre une image que l export TXT
+    a perdue. Nations of Mankind est dans ce cas : saisi OFFICIAL=2 sur faisceau d indices,
+    A CONFIRMER PAR NONO.
+  * VRAIMENT ZERO RENDEMENT, verifie le 03/09 : toutes les aventures (Ubersreik 1/2/3,
+    A Guide to Ubersreik, les cinq volumes de l Enemy Within, les one-shots), Fan Made, et
+    Other help hors Unofficial Grimoire. Ne pas y revenir.
 =========================================================================
 SIGNALEMENTS OUVERTS ISSUS DES REVUES DE LIVRE
 =========================================================================
