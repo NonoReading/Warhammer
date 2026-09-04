@@ -445,6 +445,10 @@ Const
 
       ConstLabSelSpe                        = 'LAB_129';
       ConstLabAdd                           = 'LAB_143';
+      // Ligne "aucune" en tete de la liste des appartenances proposees. Elle est
+      // toujours presente : le programme ne sait pas deviner qu'un soldat est un
+      // mercenaire sans regiment. CONTEXT.md 2.44.
+      ConstLabSansAppartenance              = 'LAB_178';
 
       ConstTransparent                      = '_TRANS';
 
@@ -512,6 +516,13 @@ Var
   SelWinLibelle:       String = '';
   SelWinType:          String = '';
   ChoixWinEquipement:  String = '';
+  // Choix d'une APPARTENANCE (regiment, ordre, culte) dans WinSpecialisation. Choix... =
+  // la liste des codes candidats, separes par des virgules, calculee par
+  // AppartenancesCandidates ; Select... = le code retenu, VIDE si le joueur a repondu
+  // "aucune" ou ferme la fenetre. ChoixWinTypeFichier vaut alors ConstXmlDataCareerBonus,
+  // aucune constante de type n'a eu a etre creee. CONTEXT.md 2.44.
+  SelectWinCareerBonus:String = '';
+  ChoixWinCareerBonus: String = '';
   SelectWinLivre:      String = '';
   ChoixWinLivre:       String = '';
   ListeLivre:          String = '';

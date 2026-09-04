@@ -21,17 +21,18 @@ GreffesDesAppartenances a ete pose dans WinPersonnage.XmlChargePersonnage unique
 WinCreation batit ses propres listes de competences et de talents : un personnage cree avec
 une appartenance n en verra rien tant qu il n est pas recharge. Voir CONTEXT.md 2.44.
 
-L ECRAN DE CHOIX DE L APPARTENANCE A SA PLACE DANS WINCREATION AUTANT QUE DANS WINPERSONNAGE.
-C est a la creation que l ethnie et le metier sont choisis, or ce sont les deux conditions de
-DATA_CAREER_BONUS. A concevoir avec l ecran de saisie, pas apres.
+L ECRAN DE CHOIX DE L APPARTENANCE EXISTE DANS WINPERSONNAGE MAIS PAS DANS WINCREATION.
+Fait le 04/09/2026 cote WinPersonnage (CONTEXT.md 2.44). A la CREATION, rien n est propose et
+MEMBERSHIP reste vide : un soldat Averland cree de zero sort sans appartenance, et le seul
+contournement est de lui faire changer de carriere ensuite, ce qui n a aucun sens pour un
+soldat de depart. C est pourtant a la creation que l ethnie et le metier sont choisis, donc
+les deux conditions de DATA_CAREER_BONUS y sont reunies. Point de reprise 1 du chantier.
 
-LES ELEMENTS A CHOIX A/B DES APPARTENANCES SONT ENCORE IGNORES, ALORS QUE RIEN NE L IMPOSE.
-PersonnageAppliqueGreffes (chargepersonnage.pas) saute les codes portant SeparateurMulti par
-prudence. Or Nono a verifie le 04/09/2026 que le tableau des competences sait deja resoudre
-un choix - Play (Drum or Fife) se choisit dans la grille et le niveau suit. Il suffit donc de
-retirer les deux tests "if Pos(SeparateurMulti, Code) > 0 then continue;" pour que le palier 3
-d Averland apparaisse. A VERIFIER AVANT : le tableau des TALENTS sait-il faire la meme chose ?
-Le palier 3 d Averland est une competence, mais d autres regiments auront des talents a choix.
+RIEN NE PERMET DE VOIR NI DE CORRIGER L APPARTENANCE D UN PERSONNAGE DEJA CREE. Releve le
+04/09/2026 en testant l ecran de choix. MEMBERSHIP ne s affiche ni sur la fiche a l ecran ni
+dans le PDF, et le choix n est propose qu au moment d entrer dans une carriere : cliquer a
+cote oblige a rouvrir la carriere ou a editer le XML a la main. A concevoir - affichage en
+lecture au minimum, correction a trancher.
 
 TABCOMPETENCE.CELLS[COLCOMPCARAC, LIG] AU LIEU DE IND DANS WINPERSONNAGE. Bloc "competence
 liee a un talent" de XmlChargePersonnage : toutes les autres colonnes de la ligne creee

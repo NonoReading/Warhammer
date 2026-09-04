@@ -4554,6 +4554,7 @@ Procedure TWinPersonnages.MajTables();
     CodEquip:          String;
     TypEquip:          String;
     Ind:               Integer;
+    CandidatsAppart:   String;
   begin
     // raz table augmentation spéciales
     For IndAugm := TabAugmentationMjXp.RowCount - 1 downto 1 do
@@ -4749,6 +4750,32 @@ Procedure TWinPersonnages.MajTables();
                     PersonnageTalent.Valeur     := PMetierTalent.NiveauMetier;
                     Personnage.MetierTalent     += [PersonnageTalent];
                   end;
+
+              // Entrer dans une carriere ouvre le droit a une APPARTENANCE (regiment,
+              // ordre de chevalerie, culte). Le choix est REDEMANDE a chaque entree en
+              // carriere et il est CUMULATIF : on n'en retire jamais une, parce que le
+              // livre dit qu'on garde ce qu'elle a donne meme apres l'avoir quittee. Un
+              // personnage qui refuse repond "aucune", et rien n'est propose s'il ne
+              // reste aucun candidat. CONTEXT.md 2.44.
+              CandidatsAppart := AppartenancesCandidates(NvMetier, Personnage.Race,
+                                                         Personnage.Appartenance);
+              if CandidatsAppart <> '' then
+                begin
+                  ChoixWinTypeFichier         := ConstXmlDataCareerBonus;
+                  ChoixWinCareerBonus         := CandidatsAppart;
+                  // Remise a vide OBLIGATOIRE : fermer la fenetre sans double-cliquer ne
+                  // touche pas a SelectWin..., qui garderait sinon la reponse du choix
+                  // precedent.
+                  SelectWinCareerBonus        := '';
+                  FenSpecialisation           := TWinSpecialisations.Create(Application);
+                  FenSpecialisation.Position  := poOwnerFormCenter;
+                  FenSpecialisation.ShowModal;
+                  if SelectWinCareerBonus <> '' then
+                    if Trim(Personnage.Appartenance) = '' then
+                      Personnage.Appartenance := SelectWinCareerBonus
+                    else
+                      Personnage.Appartenance := Personnage.Appartenance + ',' + SelectWinCareerBonus;
+                end;
 
               // Les APPARTENANCES (regiment, ordre, culte) greffent leurs competences et
               // talents sur la carriere, "as if added to their Career". L'appel vient

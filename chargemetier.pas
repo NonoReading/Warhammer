@@ -86,6 +86,8 @@ function ChercheCareerBonus(CodeBonus :String): StructureCareerBonus;
 function NiveauxDuCareerBonus(CodeBonus :String): TListCareerBonusNiveau;
 Procedure GreffesDesAppartenances(ListeAppartenance: String; Niveau: Integer;
                                   out ListeCompetence: String; out ListeTalent: String);
+Function AppartenancesCandidates(CodeMetier: String; CodeRace: String;
+                                 DejaAcquises: String): String;
 
 implementation
 
@@ -201,6 +203,67 @@ Begin
       end;
   finally
     Appartenances.Free;
+  end;
+End;
+
+// Appartenances qu'on peut PROPOSER a un personnage qui entre dans une carriere.
+// C'est le pendant de GreffesDesAppartenances : les deux conditions du livre ne servent
+// qu'ICI, a la saisie, jamais a la relecture d'une fiche (on garde ce qu'un regiment a
+// donne meme apres l'avoir quitte). CONTEXT.md 2.44.
+//
+// CodeMetier   = la carriere dans laquelle on entre.
+// CodeRace     = l'ETHNIE du personnage (Personnage.Race).
+// DejaAcquises = le champ Appartenance de la fiche, pour ne pas reproposer un regiment
+//                dont il est deja membre - le choix est cumulatif, jamais exclusif.
+//
+// Le resultat sort dans la forme attendue par WinSpecialisation : des codes separes par
+// des virgules, comme la liste d'equipement. Chaine vide = aucun candidat, l'appelant
+// n'ouvre alors aucune fenetre.
+//
+// Une entree dont le CodeRace est VIDE est ouverte a tous : c'est Marienburg, que le
+// livre dispense de la condition d'origine ("who hires anyone").
+Function AppartenancesCandidates(CodeMetier: String; CodeRace: String;
+                                 DejaAcquises: String): String;
+Var
+  PBonus:  StructureCareerBonus;
+  Acquis:  TStringList;
+  Ind:     Integer;
+  Trouve:  Boolean;
+Begin
+  Result := '';
+  if Trim(CodeMetier) = '' then
+    Exit;
+
+  Acquis := TStringList.Create;
+  try
+    if Trim(DejaAcquises) <> '' then
+      ExtractStrings([','], [], PChar(DejaAcquises), Acquis);
+
+    for PBonus in ListCareerBonus do
+      begin
+        if not CompareRechercheValeur(PBonus.CodeMetier, CodeMetier) then
+          continue;
+        if (Trim(PBonus.CodeRace) <> '') and
+           (not CompareRechercheValeur(PBonus.CodeRace, CodeRace)) then
+          continue;
+
+        Trouve := false;
+        for Ind := 0 to Acquis.Count - 1 do
+          if CompareRechercheValeur(Trim(Acquis[Ind]), PBonus.CodeBonus) then
+            begin
+              Trouve := true;
+              break;
+            end;
+        if Trouve then
+          continue;
+
+        if Result = '' then
+          Result := PBonus.CodeBonus
+        else
+          Result := Result + ',' + PBonus.CodeBonus;
+      end;
+  finally
+    Acquis.Free;
   end;
 End;
 

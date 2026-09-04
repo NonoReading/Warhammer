@@ -1,8 +1,12 @@
 # Warhammer — Contexte projet
 
-**Dernière mise à jour : 04/09/2026 — fin d'après-midi : les appartenances sont branchées de
-bout en bout, CHOIX « A OU B » COMPRIS (§2.44), et la conception de l'écran de choix de
-l'appartenance est arrêtée (redemandé à chaque entrée en carrière, cumulatif).
+**Dernière mise à jour : 04/09/2026 — soir : L'ÉCRAN DE CHOIX DE L'APPARTENANCE EST EN PLACE
+DANS WINPERSONNAGE (§2.44), et le chantier est éprouvé de bout en bout — un Averlandais qui
+devient Soldier se voit proposer son régiment au clic sur « Update Sheet », et la fiche
+sauvegardée porte son `MEMBERSHIP`. **Les points de reprise sont maintenant : brancher
+WINCREATION (qui ne propose rien et laisse `MEMBERSHIP` vide — le trou le plus visible), puis
+la saisie des treize régiments restants, puis rendre l'appartenance visible sur la fiche.**
+Plus tôt : les appartenances branchées de bout en bout, CHOIX « A OU B » COMPRIS.
 (Plus tôt dans la journée : lots 3a, 3b, 3c ET 3d-1 de *Nations of Mankind* TERMINÉS
 au §2.37 : les onze ethnies humaines, les 72 sorts des six domaines de magie, l'armurerie —
 44 armes de mêlée, 17 à distance, 6 munitions, 28 armures, 3 accessoires — et les sept
@@ -4265,7 +4269,7 @@ talent. Troisième occurrence du même piège en deux jours : **un aiguillage su
 
 ---
 
-### 2.44 `DATA_CAREER_BONUS` — l'appartenance greffe des données sur une carrière — table, fiche et lecture EN PLACE ; reste l'écran de choix (04/09/2026)
+### 2.44 `DATA_CAREER_BONUS` — l'appartenance greffe des données sur une carrière — table, fiche, lecture ET écran de choix EN PLACE dans WinPersonnage ; restent WinCreation et la saisie (04/09/2026)
 
 C'est la réponse à la question laissée ouverte au 3d-2 du §2.37 (« carrière dérivée ou
 greffon ? »). **Greffon**, et le livre le dit lui-même p.6 : « All Lore Skills and Talents
@@ -4487,19 +4491,70 @@ une carrière au niveau 1, donc on repassera toujours par le palier 1 du nouveau
 seul cas contraire est le forçage manuel de niveau à coût 0, que le logiciel permet et qui est
 assumé.
 
+---
+
+**L'ÉCRAN DE CHOIX EST EN PLACE DANS WINPERSONNAGE — TERMINÉ (04/09/2026, soir).**
+
+La conception ci-dessus est appliquée telle quelle. Quatre modifications, compilées une par une.
+
+*Aucune fenêtre nouvelle n'a été créée*, et c'est le point à retenir : `WinSpecialisations` est
+la fenêtre de choix générique du projet, et son cas `ConstXmlChapitreEquipement` recevait déjà
+**une liste de codes séparés par des virgules** qu'il se contente d'afficher. Le moule servait
+tel quel — il a suffi d'un `case` de plus.
+
+1. **`chargemetier.pas`** — `AppartenancesCandidates(CodeMetier, CodeRace, DejaAcquises): String`.
+   Filtre `ListCareerBonus` sur le métier, sur l'ethnie (`CodeRace` **de l'entrée** vide = ouvert
+   à tous, cas de Marienburg), et retire les appartenances déjà acquises. Rend les codes séparés
+   par des virgules, **chaîne vide = aucun candidat**, et c'est ce qui fait que l'écran ne
+   s'ouvre pas du tout pour un Nain qui devient Fermier.
+2. **`chargeconstantes.pas`** — `SelectWinCareerBonus` / `ChoixWinCareerBonus`, et
+   `ConstLabSansAppartenance = 'LAB_178'` (« No membership » / « Aucune appartenance », ajouté
+   aux deux Rulebooks : aucun libellé « aucun » n'existait dans les 177 `LAB_` du corpus).
+   **Aucune constante de type fichier n'a été créée** : `ChoixWinTypeFichier` prend
+   `ConstXmlDataCareerBonus`, qui existait déjà et est unique — inutile d'inventer un
+   `SUBCHAPTER_*` pour un bloc qui n'est pas un chapitre de livre.
+3. **`winspecialisation.pas`** — le `case` `ConstXmlDataCareerBonus` (plus `ChargeMetier` dans
+   les `uses`), qui pose d'abord la ligne « aucune » de **code vide**, puis une ligne par
+   candidat via `ChercheCareerBonus(Res).Libelle`. Rien n'y est re-filtré, pas même sur le
+   livre : une appartenance n'existe que si son livre est chargé.
+4. **`winpersonnage.pas`** — dans `MajTables`, bloc `if StrToInt(NvNiveau) = 1`, **juste avant**
+   `PersonnageAppliqueGreffes`. `SelectWinCareerBonus` est remis à vide avant le `ShowModal` :
+   sans ça, fermer la fenêtre sans double-cliquer garderait la réponse du choix précédent, et
+   « aucune » deviendrait impossible à exprimer.
+
+*Où le joueur voit la fenêtre, et ça n'allait pas de soi.* Elle ne s'ouvre **pas** en
+sélectionnant la carrière dans la combo, mais au clic sur **« Update Sheet »**, qui déclenche
+`MajTables` une fois tous les contrôles passés. À dire avant de faire tester : Nono a cru à une
+panne en regardant l'écran d'avant.
+
+*Éprouvé* : personnage « Aver », Humans (Averland), Prêtre passant Soldier. La fenêtre propose
+les deux lignes attendues et le XML sauvegardé porte
+`<MEMBERSHIP>"NATIO-REGIM_AVER"</MEMBERSHIP>`.
+
+*Méthode confirmée* : pour un « je ne vois rien », la date du `.o` de l'unité dans
+`lib\x86_64-win64` tranche plus vite que celle de l'EXE, et sépare le « pas compilé » du
+« pas appelé ».
+
+*Reste ouvert dans le code* : `GreffesDesAppartenances` n'a toujours aucun appelant et n'a
+**pas** été supprimée, faute d'avoir pu vérifier `wincreation.pas` sans le charger entièrement.
+
+---
+
 **POINTS DE REPRISE, dans l'ordre :**
 
-1. **L'écran de choix de l'appartenance**, selon la conception ci-dessus. Point d'accroche
-   naturel : le bloc `if StrToInt(NvNiveau) = 1` de `winpersonnage.pas` (vers l. 4705), là où
-   `PersonnageAppliqueGreffes` est déjà appelée — proposer AVANT de l'appeler. Il faut une
-   fonction « appartenances candidates pour (ethnie, carrière) moins celles acquises », côté
-   `chargemetier.pas` ; `GreffesDesAppartenances`, qui n'a plus d'appelant, peut lui servir de
-   point de départ ou disparaître.
-2. **Brancher WinCreation**, qui bâtit ses propres listes, n'appelle pas la procédure et laisse
-   `MEMBERSHIP` vide. L'écran y a sa place autant que dans WinPersonnage, puisque c'est à la
-   création que l'ethnie et le métier sont choisis.
-3. **La saisie mécanique des treize régiments restants** — avec, pour chacun, la déclaration
+1. **Brancher WinCreation**, qui bâtit ses propres listes, n'appelle pas
+   `PersonnageAppliqueGreffes` et laisse `MEMBERSHIP` vide. **C'est le trou le plus visible du
+   chantier** : un soldat Averland créé de zéro sort sans appartenance et sans qu'on lui ait
+   rien demandé, le seul contournement étant de lui faire changer de carrière ensuite — ce qui
+   n'a aucun sens pour un soldat de départ. L'écran y a sa place autant que dans WinPersonnage,
+   puisque c'est à la création que l'ethnie et le métier sont choisis. Chercher l'équivalent du
+   bloc « entrée en carrière niveau 1 » dans `wincreation.pas` (144 Ko — travail de sous-agent).
+2. **La saisie mécanique des treize régiments restants** — avec, pour chacun, la déclaration
    des codes composés `A/B` dans `DATA_SKILL_SPECIALIZATION` du livre — puis le 3d-3.
+3. **Rendre l'appartenance visible.** Rien ne l'affiche aujourd'hui, ni sur la fiche à l'écran
+   ni dans le PDF, et le choix n'est proposé qu'à l'entrée en carrière : cliquer à côté oblige
+   à rouvrir la carrière ou à éditer le XML à la main. Affichage en lecture au minimum ;
+   correction à trancher. Noté aussi dans `A FAIRE.txt`.
 
 **Bug voisin découvert au passage, antérieur au chantier et noté dans `A FAIRE.txt`** :
 revenir dans une carrière déjà exercée redonne l'équipement de départ en double, et sans

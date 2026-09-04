@@ -7,7 +7,8 @@ interface
 uses
   Classes, SysUtils, Forms, Controls, Graphics, Dialogs, Grids, GlobalFonts,
   ChargeTalent, ChargeCompetence, UnitCalcul, ChargeConstantes, ChargeTexte,
-  ChargeArme, ChargeArmure, ChargeArmureSimplifie, ChargeMetierCompetence, ChargeRace;
+  ChargeArme, ChargeArmure, ChargeArmureSimplifie, ChargeMetierCompetence, ChargeRace,
+  ChargeMetier;
 
 type
 
@@ -161,6 +162,25 @@ Procedure TWinSpecialisations.ChargeSpecialisation(CodeGenerique: String);
               end;
             end;
         end;
+
+      ConstXmlDataCareerBonus:      // Appartenances (regiment, ordre de chevalerie, culte)
+        // CodeGenerique est ICI une liste de codes deja filtree par
+        // AppartenancesCandidates (metier + ethnie + non deja acquises) - meme forme que
+        // la liste d'equipement juste au-dessus. Rien n'est donc filtre a nouveau, et pas
+        // davantage sur le livre : une appartenance n'existe que si son livre est charge.
+        // La premiere ligne, de code VIDE, est le "aucune" : le programme ne peut pas
+        // deviner qu'un soldat est un mercenaire sans regiment, il faut pouvoir le dire.
+        // CONTEXT.md 2.44.
+        begin
+          AjouteLigne(CodeGenerique, '', GetTexteLibelle(ConstLabSansAppartenance), '', true);
+          MaxL := CountOccurrences(CodeGenerique, ',') + 1;
+          For NbL := 1 to MaxL do
+            begin
+              Res := Trim(ExtractChaine(',', CodeGenerique, NbL));
+              if Res <> '' then
+                AjouteLigne(CodeGenerique, Res, ChercheCareerBonus(Res).Libelle, '', true);
+            end;
+        end;
     end;
     AdjustGridColumnsWidth(TabSpecialisation,self.Height, true, true);
   end;
@@ -189,6 +209,7 @@ procedure TWinSpecialisations.FormCreate(Sender: TObject);
       ConstXmlSousChapitreArmure:       ChargeSpecialisation(ChoixWinArmure);
       ConstXmlSousChapitreArmureSimp:   ChargeSpecialisation(ChoixWinArmureSimp);
       ConstXmlChapitreEquipement:       ChargeSpecialisation(ChoixWinEquipement);
+      ConstXmlDataCareerBonus:          ChargeSpecialisation(ChoixWinCareerBonus);
     end;
 
   end;
@@ -220,6 +241,9 @@ procedure TWinSpecialisations.TabSpecialisationDblClick(Sender: TObject);
           ConstXmlSousChapitreArmure:     SelectWinArmure     := Val;
           ConstXmlSousChapitreArmureSimp: SelectWinArmureSimp := Val;
           ConstXmlChapitreEquipement:     SelectWinEquipement := Val;
+          // Val vide = la ligne "aucune appartenance", et c'est une reponse valable :
+          // l'appelant ne greffe rien. CONTEXT.md 2.44.
+          ConstXmlDataCareerBonus:        SelectWinCareerBonus := Val;
         end;
         SelWinLibelle  := Lib;
         SelWinType     := Typ;

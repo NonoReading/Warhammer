@@ -1038,3 +1038,37 @@ donc on repasse toujours par le palier 1 du nouveau regiment. Seul le forcage ma
 cout 0 y echappe, et il est assume.
 LE PIEGE D ECRITURE S EST ENCORE PRODUIT DEUX FOIS, sur winpersonnage.pas et sur CONTEXT.md.
 Meme signature : reponse "ecrit", taille inchangee sur le poste, meme envoi reemis, atterri.
+
+04/09/2026 - L ECRAN DE CHOIX DE L APPARTENANCE EST EN PLACE DANS WINPERSONNAGE
+Le point de reprise 1 du chantier DATA_CAREER_BONUS (CONTEXT.md 2.44) est termine. Quatre
+modifications, compilees une par une, chacune verifiee par la TAILLE du fichier sur le poste
+et par un diff dont les retraits ont ete lus.
+1. chargemetier.pas - AppartenancesCandidates(CodeMetier, CodeRace, DejaAcquises): String.
+   Rend les codes candidats separes par des virgules, chaine vide si aucun. Filtre sur le
+   metier, sur l ethnie (CodeRace vide de l entree = ouvert a tous, cas de Marienburg) et
+   retire ce qui est deja acquis. 12134 > 14418 octets.
+2. chargeconstantes.pas - SelectWinCareerBonus / ChoixWinCareerBonus, et
+   ConstLabSansAppartenance = LAB_178. AUCUNE constante de type fichier n a ete creee :
+   ChoixWinTypeFichier prend ConstXmlDataCareerBonus, qui existait deja et est unique.
+   48395 > 49150 octets. LAB_178 ajoute aux deux Rulebooks (No membership / Aucune
+   appartenance) : aucun libelle "aucun" n existait dans les 177 LAB_ du corpus.
+3. winspecialisation.pas - un case de plus, ConstXmlDataCareerBonus, plus ChargeMetier dans
+   les uses. PAS DE NOUVELLE FENETRE : WinSpecialisation est la fenetre de choix generique du
+   projet, et son cas Equipement recevait deja une liste de codes separes par des virgules -
+   le meme moule servait tel quel. Premiere ligne de code VIDE = "aucune appartenance".
+   9144 > 10539 octets.
+4. winpersonnage.pas - le choix s ouvre dans MajTables, bloc if StrToInt(NvNiveau) = 1, JUSTE
+   AVANT PersonnageAppliqueGreffes. SelectWinCareerBonus est remis a vide avant le ShowModal,
+   sans quoi fermer la fenetre sans double-cliquer garderait la reponse du choix precedent.
+   La reponse s ajoute a Personnage.Appartenance. 226214 > 227916 octets.
+EPROUVE : personnage Aver, Humans (Averland), Pretre passant Soldier ; la fenetre propose
+"Aucune appartenance" et "Averland State Army", et le XML sauvegarde porte
+<MEMBERSHIP>"NATIO-REGIM_AVER"</MEMBERSHIP>.
+CE QUE LA SESSION A APPRIS. (1) Le point d ouverture n etait pas evident pour Nono : la
+fenetre ne s ouvre pas en choisissant la carriere dans la combo mais au clic sur UPDATE SHEET,
+qui declenche MajTables une fois tous les controles passes. A dire avant de faire tester.
+(2) Avant de chercher une cause a un "je ne vois rien", la date du .o de l unite dans
+lib\x86_64-win64 tranche plus vite que celle de l EXE, et separe le "pas compile" du "pas
+appele". (3) GreffesDesAppartenances n a toujours aucun appelant ; elle n a PAS ete supprimee,
+faute d avoir pu verifier wincreation.pas sans le charger entierement - une modification a la
+fois.
