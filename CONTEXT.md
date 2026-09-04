@@ -1,9 +1,10 @@
 # Warhammer — Contexte projet
 
-**Dernière mise à jour : 04/09/2026 (lots 3a, 3b ET 3c de *Nations of Mankind* TERMINÉS au
-§2.37 : les onze ethnies humaines, les 72 sorts des six domaines de magie, et l'armurerie —
-44 armes de mêlée, 17 à distance, 6 munitions, 28 armures, 3 accessoires. **Il ne reste que
-3d**, qui demande une conception. Les deux bugs laissés ouverts le 03/09 sont corrigés —
+**Dernière mise à jour : 04/09/2026 (lots 3a, 3b, 3c ET 3d-1 de *Nations of Mankind* TERMINÉS
+au §2.37 : les onze ethnies humaines, les 72 sorts des six domaines de magie, l'armurerie —
+44 armes de mêlée, 17 à distance, 6 munitions, 28 armures, 3 accessoires — et les sept
+provinces de l'Empire. **Il ne reste que 3d-2 (régiments) et 3d-3 (ordres de chevalerie)**,
+qui demandent tous deux une conception. Les deux bugs laissés ouverts le 03/09 sont corrigés —
 qualités d'armes d'Archives I, et export du bloc `DATA_RACE` au §2.42 ; les compétences
 « A ou B » n'apparaissaient pas dans WinRaces, corrigé au §2.43. ⚠️ Lire le §0 sur
 **l'écriture qui répond « écrit » sans écrire**, découverte le 04/09.)** Ce fichier remplace tous les anciens
@@ -55,6 +56,17 @@ lecture, jamais depuis la source elle-même :
   revérifier. Ne jamais annoncer une livraison sur la seule réponse de l'outil. C'est le
   pendant, côté écriture, de la règle « restager avant d'interpréter un test » : la première
   fois, ce sont 23 armes qui n'étaient pas sur le disque alors que je les avais annoncées.
+- **Le contrôle de collision doit porter sur la nature de donnée qu'on AJOUTE, pas
+  seulement sur celles qu'on référence (04/09/2026).** En écrivant les provinces de
+  l'Empire, la résolution des libellés a bien vérifié les 1 044 compétences et talents
+  cités — et pas une seule fois les *ethnies* elles-mêmes, qui étaient pourtant l'objet
+  du lot. Trois doublons sont partis sur le poste : `Humans (Reikland)` était déjà
+  `RULES-RACE_HUM` du Rulebook, Middenland et Nordland étaient déjà dans Middenheim sous
+  leurs gentilés. Le nom du Rulebook était même écrit dans un commentaire du fichier, lu
+  quelques minutes plus tôt. C'est Nono qui les a vus dans la liste de WinRaces. La règle :
+  avant d'écrire N objets d'une nature donnée, indexer les libellés **de cette nature**
+  dans tout `DATABASE\`, pas seulement ceux des objets qu'ils citent.
+
 - **Un marqueur compté n'est pas un marqueur lu.** Avant de conclure depuis un `grep -c`,
   sortir le contexte autour des occurrences. Trois livres ont été mal classés parce que
   leurs « Career Path » étaient des fiches de PNJ et de la prose.
@@ -3563,7 +3575,7 @@ le 30/08. Un marqueur compté n'est toujours pas un marqueur lu.
 
 ---
 
-### 2.37 Nations of Mankind — lots 1, 2, 3a, 3b et 3c terminés (04/09/2026) ; reste 3d
+### 2.37 Nations of Mankind — lots 1, 2, 3a, 3b, 3c et 3d-1 terminés (04/09/2026) ; restent 3d-2 et 3d-3
 
 Fichier unique `DATABASE\BOOK_NATIONS_OF_MANKIND.Xml`, 277 Ko, `CODE_BOOK` = `NATIO`,
 `OFFICIAL=2`, `COMPLETE=0`. Aucun fichier existant modifié, donc aucune compilation.
@@ -3615,16 +3627,60 @@ les 17 valeurs sont relevées.
 - **3c — armes, armures et qualités** (p.58-61). **✅ TERMINÉ le 04/09/2026**, voir plus bas.
   **Les montures restent hors périmètre** (décision Nono, 03/09/2026) : la section « New
   Mounts » et l'Estalian War Bull attendent.
-- **3d — Provinces / Regiments / Knightly Orders** (p.5-9). Ce ne sont pas des carrières
-  mais des bonus conditionnels (« Recruit: you gain Lore (Reikland) ») ; rien dans le modèle
-  ne porte ça aujourd'hui. Conception à mener avant toute saisie.
+- **3d — Provinces / Regiments / Knightly Orders** (p.5-9). Lecture du 04/09/2026 : ce ne
+  sont pas trois fois la même chose, et le lot s'est scindé en trois.
+  - **3d-1 — les provinces de l'Empire (p.5). ✅ TERMINÉ le 04/09/2026.** Ce ne sont PAS des
+    bonus conditionnels : le livre leur donne la forme exacte d'une ethnie (liste de
+    compétences, liste de talents finissant par N Random Talents) et les appelle lui-même
+    « Empire Province **Racial** Skills » (p.8, Grand Order of the Reiksguard). Saisies dans
+    le moule du lot 3a. Voir plus bas « les trois provinces écartées ».
+  - **3d-2 — les régiments (p.6-7).** 14 régiments provinciaux + 11 « Regiments of Renown ».
+    Quatre paliers (Recruit / Soldier / Sergeant / Officer) qui greffent une compétence ou un
+    talent sur **la carrière Soldier du Rulebook**. **Conception à mener, une seule question :
+    un régiment est-il une CARRIÈRE dérivée (« Soldier (Averland) », 14 carrières, saisie
+    mécanique dans un modèle qui existe déjà) ou un GREFFON (une donnée nouvelle qui ajoute
+    des compétences et des talents au niveau N d'une carrière déjà chargée) ?** La première
+    marche demain, la seconde est plus juste et resservira. Les huit `Lore (…)` de province
+    créées au 3d-1 sont déjà en place : chaque régiment donne le `Lore` de sa province.
+  - **3d-3 — les ordres de chevalerie (p.8-9).** Même architecture, sur la carrière Knight
+    (Squire / Knight / First Knight / Knight of the Inner Circle), mais **le palier Squire est
+    le seul saisissable** : les trois autres sont des règles rédigées (« +10 à tes tests de CC
+    avec les lances », « tes haches gagnent le miracle Winter's Bite en début de rencontre »,
+    « tu gagnes le trait Champion contre tes ennemis haïs », « +10 Fel et +10 WP permanents »).
+    Même famille de problème que les psychologies et que la pénalité de Dextérité des
+    Stechzeug Bracers, toutes deux dans `A FAIRE.txt` : le modèle porte une compétence ou un
+    talent, pas un effet de règle. **Ne pas commencer avant d'avoir tranché ça.**
 
-**Point de reprise : 3d, et lui seul.** Rien à saisir tant que la conception n'est pas faite :
-un « Recruit: you gain Lore (Reikland) » est un bonus **conditionnel à l'appartenance**, et
-aucune table ne porte ça. Le plus proche parent est `DATA_SPECIE_TRAIT` (§2.41), écrit pour
-les traits d'ethnie à sous-liste — commencer par regarder si une province se modélise comme
-une ethnie, ou s'il faut une notion nouvelle. La partie « Provinces » a déjà été **avalée par
-3a** pour ce qui est des dix provinces de l'Empire de la page 5.
+**Le 3d-1 en détail, et les trois provinces écartées (04/09/2026).** Sept provinces saisies —
+Averland, Hochland, Ostermark, Ostland, Stirland, Talabecland, Wissenland — soit 84 compétences
+et 35 talents, plus **huit spécialisations `Lore (…)` créées** (`RULES-COMPSAVOIR_AVERLAND`,
+`_HOCHLAND`, `_OSTERMARK`, `_OSTLAND`, `_REIKLAND`, `_STIRLAND`, `_TALABECLAND`,
+`_WISSENLAND` ; Middenland et Nordland existaient déjà au Rulebook). Aucun fichier de code
+touché, donc aucune compilation.
+
+**Trois provinces sur dix n'ont PAS été saisies**, par la règle du 03/09 « l'officiel gagne
+sur le fan pour une IDENTITÉ, une ethnie étant unique » :
+- **Reikland** *est* `RULES-RACE_HUM` du Rulebook, dont le libellé est littéralement
+  « Humans (Reikland) » — contenu identique à une compétence près (le Rulebook y écrit
+  `Lore (Local)`).
+- **Middenland** et **Nordland** sont déjà dans *Middenheim* (officiel) sous leurs gentilés,
+  `MIDDE-RACE_HMIDL` « Humans (Middenlander) » et `MIDDE-RACE_HNORD` « Humans (Nordlander) ».
+  L'écart de contenu entre les deux versions est relevé dans `A FAIRE.txt`.
+
+⚠️ **Ces trois doublons sont partis sur le poste avant d'être vus** — c'est Nono qui les a
+repérés dans la liste de WinRaces. Voir la règle ajoutée au §0 : le contrôle de collision doit
+porter sur la nature de donnée qu'on **ajoute**, pas seulement sur celles qu'on référence.
+
+**Résolution des libellés du 3d-1**, trois lectures à connaître : `Language (Mootish)` lu comme
+`Language (Halfling)` (le Moot est le pays halfling, aucun « Mootish » dans le corpus),
+`Secret Signs (Hunters)` comme `Secret Signs (Hunter)`, `Trade (Farmer)` comme
+`Trade (Farming)`. Décisions Nono du 04/09/2026.
+
+**Point de reprise : 3d-2** — voir la puce 3d-2 plus haut et le point de reprise en fin de
+section. Ce paragraphe portait au 03/09 l'hypothèse « une province est peut-être une ethnie » :
+**elle s'est vérifiée le 04/09**, et le 3d-1 est fait. Ce qui reste — régiments et ordres — est
+bien, lui, du bonus **conditionnel à l'appartenance**, et aucune table ne porte ça ; le plus
+proche parent reste `DATA_SPECIE_TRAIT` (§2.41), écrit pour les traits d'ethnie à sous-liste.
 
 #### 3c — ce qui est écrit, et les cinq leçons (04/09/2026)
 
@@ -3777,10 +3833,12 @@ psychologies — item ouvert dans `A FAIRE.txt`, et il y en aura d'autres que Pr
 saisie dans chaque bloc : les pages 3-4 ne portent que des listes de compétences et de talents.
 À relire par Nono.
 
-**Point de reprise : 3b, les 7 domaines de magie** (p.48-57). Deux points de méthode qui valent
-pour toute la suite : refaire la résolution des libellés depuis des fichiers **restagés** le
-jour où on écrit, et réextraire la section magie au `pdftotext -layout -x 306 -W 306`, l'export
-de `PDF_TEXTE` y étant inexploitable.
+**Point de reprise : 3d-2, et c'est une conception, pas une saisie.** La question à trancher
+est écrite plus haut dans la puce 3d-2 : carrière dérivée ou greffon. Rien à écrire dans le XML
+tant qu'elle ne l'est pas. Deux points de méthode qui valent pour toute la suite : refaire la
+résolution des libellés depuis des fichiers **restagés** le jour où on écrit, et réextraire une
+section à deux colonnes au `pdftotext -layout -x 306 -W 306`, l'export de `PDF_TEXTE` y étant
+inexploitable — sauf pour le texte courant, qui a suffi aux pages 5-9.
 
 **Ce que ce livre a appris, et qui resservira sur les gros livres :**
 

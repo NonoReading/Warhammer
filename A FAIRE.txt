@@ -6,6 +6,15 @@
 CORRECTIONS COURTES  (une ligne ou deux chacune)
 =========================================================================
 
+L ECART MIDDENHEIM / NATIONS SUR MIDDENLAND ET NORDLAND N EST PAS ARBITRE. Les deux
+provinces existent en officiel sous leurs gentilés - MIDDE-RACE_HMIDL "Humans
+(Middenlander)" et MIDDE-RACE_HNORD "Humans (Nordlander)" - et Nations of Mankind en donne
+une version differente, non saisie le 04/09/2026 par la regle "l officiel gagne". Ecart
+releve : Middenheim donne a Middenland Gossip, Haggle, Outdoor Survival, Ranged (Bow) la ou
+Nations donne Athletics, Endurance, Melee (Two-Handed), Language (Bretonnian) ; pour Nordland
+Middenheim donne Evaluate, Ranged (Bow), Trade (Any), Fisherman/Rover la ou Nations donne
+Cool, Ranged (Throwing), Row, Hardy. A rouvrir seulement si l ecart gene en jeu.
+
 LA PENALITE DE DEXTERITE DES STECHZEUG BRACERS N EST PAS CALCULEE. NATIO-ARMOB_14, ecrite
 le 04/09/2026 : le champ Modifier name d une qualite d armure est resolu par ChercheCompetence
 (pdfpersonnage.pas l.1746) et n accepte QUE des codes de competence, jamais un attribut. La

@@ -888,3 +888,42 @@ RAPPEL DE LA REGLE DES LIVRES PAR NONO : CHAQUE LIVRE REPART A 1 DANS SA NUMEROT
 UNE PENALITE D ARMURE NE PEUT PORTER QUE SUR UNE COMPETENCE, JAMAIS SUR UN ATTRIBUT. Le Modifier name d une qualite d armure est resolu par ChercheCompetence (pdfpersonnage.pas l.1746). La penalite de -10 Dexterite des Stechzeug Bracers reste donc DESCRIPTIVE : NATIO-ARMOB_14 le dit dans son explication. Dans A FAIRE.
 INCENDIARY EXISTAIT DEJA, SOUS UN AUTRE NOM. RULES-WEAPB29 a pour libelle "Ablaze" mais son explication EST mot pour mot la regle d Incendiary. Une qualite de moins a creer, et un piege pour la prochaine session, qui ne la retrouvera pas en cherchant "Incendiary" : commente sur la Cinderbomb.
 AUTRES CHOIX DE SAISIE, tous commentes dans le fichier : les quatre armes a poudre recoivent Blackpowder et Damaging que le tableau n imprime pas, parce que le texte de Suppressed les suppose ("it loses the Blackpowder and Damaging Qualities") et que le Rulebook fait pareil - DEDUCTION, et rien d ajoute aux armes d Engineering, le fusil a air comprime n etant pas une arme a poudre. Deux homonymes INTERNES au livre renommes Morningstar (Two-Handed) et Flanged Mace (Two-Handed). Cases vides saisies +0 ou -. Quantite 12 des fleches reprise du Rulebook, DEDUCTION. Coquilles corrigees : Very Lorng, "designed will small hooks", Missile Resistance.
+
+04/09/2026 - NATIONS OF MANKIND, LOT 3d-1 : LES PROVINCES DE L EMPIRE
+LE LOT 3d N ETAIT PAS UN SEUL CHANTIER MAIS TROIS. La lecture des pages 5-9 le 04/09 a montre
+que "Provinces / Regiments / Knightly Orders" recouvre trois natures differentes. Les PROVINCES
+(p.5) ne sont pas des bonus conditionnels comme on l avait ecrit le 03/09 : elles ont la forme
+exacte d une ethnie - une liste de competences, une liste de talents finissant par N Random
+Talents - et le livre les appelle lui-meme "Empire Province RACIAL Skills" en page 8. Elles se
+saisissent donc dans le moule du lot 3a, sans conception et sans code. Les REGIMENTS (p.6-7) et
+les ORDRES DE CHEVALERIE (p.8-9) restent a concevoir, et pas pour la meme raison : les regiments
+greffent une competence ou un talent par palier sur une carriere existante, les ordres portent
+en plus des regles redigees (+10 CC avec telle famille d armes, un miracle automatique, un trait,
++10 a une caracteristique) que le modele ne sait pas representer du tout.
+FAIT : sept provinces saisies - Averland, Hochland, Ostermark, Ostland, Stirland, Talabecland,
+Wissenland - soit 84 competences et 35 talents, et HUIT specialisations Lore de province creees
+(RULES-COMPSAVOIR_AVERLAND, _HOCHLAND, _OSTERMARK, _OSTLAND, _REIKLAND, _STIRLAND, _TALABECLAND,
+_WISSENLAND). Lore (Middenland) et Lore (Nordland) existaient deja au Rulebook. Aucun fichier de
+code touche, aucune compilation.
+TROIS PROVINCES SUR DIX ONT ETE ECRITES PUIS RETIREES : C ETAIENT DES DOUBLONS. Reikland EST
+RULES-RACE_HUM du Rulebook, dont le libelle est litteralement "Humans (Reikland)" - meme contenu
+a une competence pres, le Rulebook y ecrivant Lore (Local). Middenland et Nordland sont deja dans
+Middenheim, livre officiel, sous leurs gentiles MIDDE-RACE_HMIDL "Humans (Middenlander)" et
+MIDDE-RACE_HNORD "Humans (Nordlander)". Regle du 03/09 appliquee : l officiel gagne sur le fan
+pour une IDENTITE. L ecart de contenu entre les deux versions de Middenland et de Nordland est
+releve dans A FAIRE.txt.
+LA LECON, ET ELLE A COUTE UN ALLER-RETOUR : LE CONTROLE DE COLLISION AVAIT PORTE SUR LES
+COMPETENCES ET LES TALENTS, PAS SUR LES ETHNIES. Les 1044 libelles cites par les provinces ont
+tous ete verifies contre les 21 fichiers de DATABASE ; les provinces elles-memes, jamais. Le nom
+"Humans (Reikland)" de RULES-RACE_HUM etait pourtant ecrit dans un commentaire du fichier, lu
+quelques minutes plus tot. C est Nono qui a vu les doublons dans la liste de WinRaces. Regle
+ajoutee au CONTEXT.md 0 : avant d ecrire N objets d une nature donnee, indexer les libelles DE
+CETTE NATURE dans tout DATABASE, pas seulement ceux des objets qu ils citent.
+LE PIEGE D ECRITURE DU 04/09 S EST REPRODUIT, ET LA PARADE MARCHE. L envoi du fichier apres
+retrait des trois doublons a repondu "ecrit" en avancant la date, avec la TAILLE INCHANGEE
+(566845 au lieu de 547081). Reemission du meme envoi : atterri. Verifier la taille apres chaque
+ecriture reste obligatoire.
+LANGUAGE (MOOTISH) N EXISTE PAS EN BASE, C EST LANGUAGE (HALFLING). Le Moot est le pays halfling ;
+le livre nomme la langue par le territoire, la base par le peuple, et aucun "Mootish" n existe
+dans le corpus. Meme famille : Secret Signs (Hunters) lu comme Secret Signs (Hunter), et
+Trade (Farmer) comme Trade (Farming). Decisions Nono du 04/09/2026.
