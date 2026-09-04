@@ -1,10 +1,12 @@
 # Warhammer — Contexte projet
 
-**Dernière mise à jour : 04/09/2026 (lots 3a ET 3b de *Nations of Mankind* TERMINÉS au §2.37 :
-les onze ethnies humaines sont écrites, Westerland comprise, et les 72 sorts des six domaines
-de magie sont saisis et testés ; il ne reste que 3c et 3d. Les deux bugs laissés ouverts le
-03/09 sont corrigés — qualités d'armes d'Archives I, et export du bloc `DATA_RACE` au §2.42 ;
-les compétences « A ou B » n'apparaissaient pas dans WinRaces, corrigé au §2.43).** Ce fichier remplace tous les anciens
+**Dernière mise à jour : 04/09/2026 (lots 3a, 3b ET 3c de *Nations of Mankind* TERMINÉS au
+§2.37 : les onze ethnies humaines, les 72 sorts des six domaines de magie, et l'armurerie —
+44 armes de mêlée, 17 à distance, 6 munitions, 28 armures, 3 accessoires. **Il ne reste que
+3d**, qui demande une conception. Les deux bugs laissés ouverts le 03/09 sont corrigés —
+qualités d'armes d'Archives I, et export du bloc `DATA_RACE` au §2.42 ; les compétences
+« A ou B » n'apparaissaient pas dans WinRaces, corrigé au §2.43. ⚠️ Lire le §0 sur
+**l'écriture qui répond « écrit » sans écrire**, découverte le 04/09.)** Ce fichier remplace tous les anciens
 `CONTEXT*.md` / `INDEX*.md` / `RESUME*.md` / `SESSION*.md`. Il n'y en a plus
 qu'un : celui-ci. On ne le duplique jamais, on l'édite en place.
 
@@ -43,6 +45,16 @@ lecture, jamais depuis la source elle-même :
   libellés en identifiants, recherche de doublons, vérification de références), restager
   les fichiers depuis le poste. Une copie vieille de quelques heures a suffi à me faire
   signaler un bug qui n'existait pas — et aurait tout aussi bien pu m'en faire rater un.
+- ⚠️ **L'écriture vers le poste répond « écrit » sans avoir écrit (04/09/2026).** Trois fois
+  dans la même session, l'outil qui repose un fichier sur le poste a renvoyé un succès alors
+  que le contenu n'avait pas changé — la **date du fichier avançait pourtant**, ce qui rend le
+  piège invisible si on ne regarde que l'horodatage. À chaque fois, refaire **exactement le
+  même envoi** l'a fait atterrir : c'est le premier envoi après un restage qui se perd.
+  Donc : **après chaque écriture, vérifier la TAILLE du fichier sur le poste** (le listing du
+  répertoire la donne) et la comparer à celle envoyée ; si elle diffère, réémettre et
+  revérifier. Ne jamais annoncer une livraison sur la seule réponse de l'outil. C'est le
+  pendant, côté écriture, de la règle « restager avant d'interpréter un test » : la première
+  fois, ce sont 23 armes qui n'étaient pas sur le disque alors que je les avais annoncées.
 - **Un marqueur compté n'est pas un marqueur lu.** Avant de conclure depuis un `grep -c`,
   sortir le contexte autour des occurrences. Trois livres ont été mal classés parce que
   leurs « Career Path » étaient des fiches de PNJ et de la prose.
@@ -3551,7 +3563,7 @@ le 30/08. Un marqueur compté n'est toujours pas un marqueur lu.
 
 ---
 
-### 2.37 Nations of Mankind — lots 1, 2, 3a et 3b terminés (04/09/2026) ; restent 3c et 3d
+### 2.37 Nations of Mankind — lots 1, 2, 3a, 3b et 3c terminés (04/09/2026) ; reste 3d
 
 Fichier unique `DATABASE\BOOK_NATIONS_OF_MANKIND.Xml`, 277 Ko, `CODE_BOOK` = `NATIO`,
 `OFFICIAL=2`, `COMPLETE=0`. Aucun fichier existant modifié, donc aucune compilation.
@@ -3600,24 +3612,75 @@ les 17 valeurs sont relevées.
 - **3b — les domaines de magie** (Divine Lore of Kislev / Araby / Ind / Nippon, Lore of Ice,
   Lore of the Desert), p.48-57. **✅ TERMINÉ le 04/09/2026**, voir ci-dessus. Six domaines et
   non sept : le compte de sept venait de compter Kislev deux fois.
-- **3c — armes, armures et qualités** (p.58-61, ajouté au périmètre le 03/09/2026 : la
-  section manquait à cette liste). Une trentaine d'armes — Katana, Dao, Scimitar, Urumi,
-  Poleaxe, Becs de Corbin, Katar, Pata… — et **au moins une qualité nouvelle, `Hooked`**.
-  Une qualité nouvelle est la forme de piège du §0 : vérifier où la liste est portée
-  (donnée ou code) avant d'en créer une. **Les montures sont hors périmètre** (décision
-  Nono, 03/09/2026) : la section « New Mounts » et l'Estalian War Bull attendent.
+- **3c — armes, armures et qualités** (p.58-61). **✅ TERMINÉ le 04/09/2026**, voir plus bas.
+  **Les montures restent hors périmètre** (décision Nono, 03/09/2026) : la section « New
+  Mounts » et l'Estalian War Bull attendent.
 - **3d — Provinces / Regiments / Knightly Orders** (p.5-9). Ce ne sont pas des carrières
   mais des bonus conditionnels (« Recruit: you gain Lore (Reikland) ») ; rien dans le modèle
   ne porte ça aujourd'hui. Conception à mener avant toute saisie.
 
-Point de reprise pour **3c**, la section suivante : le PDF est dans
-`LIVRES\Nations of Mankind.pdf`, les armes commencent page 58. La découpe en colonnes qui a
-servi à 3b : `pdftotext -layout -f <p> -l <p> -x 0 -y 0 -W 306 -H 792` pour la colonne de
-gauche et `-x 306 -y 0 -W 306 -H 792` pour celle de droite — **les quatre bornes sont
-nécessaires**, `-x`/`-W` seuls sortent un fichier vide sur ce PDF. Vérifié le 03/09/2026 : l'export de `PDF_TEXTE` **n'est pas
-exploitable pour la section magie** — les deux colonnes s'entremêlent en milieu de ligne
-(`Range: Fellowship Bonus Yards    Lore of Ice`), et un comptage des sorts y donne
-n'importe quoi.
+**Point de reprise : 3d, et lui seul.** Rien à saisir tant que la conception n'est pas faite :
+un « Recruit: you gain Lore (Reikland) » est un bonus **conditionnel à l'appartenance**, et
+aucune table ne porte ça. Le plus proche parent est `DATA_SPECIE_TRAIT` (§2.41), écrit pour
+les traits d'ethnie à sous-liste — commencer par regarder si une province se modélise comme
+une ethnie, ou s'il faut une notion nouvelle. La partie « Provinces » a déjà été **avalée par
+3a** pour ce qui est des dix provinces de l'Empire de la page 5.
+
+#### 3c — ce qui est écrit, et les cinq leçons (04/09/2026)
+
+**98 entrées, aucune compilation.** 44 armes de mêlée (`NATIO-COMB_<CAT>_NN`, sept catégories),
+17 armes à distance et 6 munitions (`NATIO-PROJ_*`, `NATIO-MUNI_*`), 28 armures
+(`NATIO-ARMO_NN`), 3 accessoires (`NATIO-QUALITY_01..03`), 6 qualités d'arme
+(`NATIO-WEAPB38..43`), 6 qualités d'armure (`NATIO-ARMOB_09..14`), 1 type d'armure
+(`NATIO-ARMOT_LAMELLAR`). Contrôles : XML bien formé, diff sans retrait à chaque passe,
+identifiants uniques, libellés sans collision, toutes les qualités et compétences résolues.
+**Nations est le premier livre autre que le Rulebook à déclarer des armures.**
+
+- **Le TXT du corpus a suffi pour toute la section.** Contrairement à 3b, `PDF_TEXTE\Nations
+  of Mankind.txt` rend les tableaux d'armes et d'armures lisibles tels quels. La règle
+  TXT-avant-PDF du §0 a payé : aucun PDF ouvert de la journée. Ne pas généraliser « les
+  tableaux sont inexploitables » — c'était vrai des tableaux de carrière et de la magie.
+- **Un vocabulaire n'est pas ouvert parce qu'un autre l'est.** Contrôle fait champ par champ,
+  méthode du `DISPO_UNIQUE` de 2.29 : le **type** d'armure est OUVERT (il ne passe que par
+  `GetAllTexteLibelle`, winarmor.pas l.132, et `ReplaceTexteLibelle`, chargearmure.pas l.59),
+  d'où `NATIO-ARMOT_LAMELLAR` ; la **localisation** est FERMÉE (`pdfpersonnage.pas`
+  l.1626-1629 fait un `case` sur `BonusTete/BonusBras/BonusCorps/BonusJambes`), ce qui
+  condamne les Skull Trophies, dont l'emplacement est « Any ». Deux champs voisins du même
+  bloc, deux réponses opposées.
+- **Une qualité de fabrication n'est pas une qualité d'objet.** Le livre imprime Bulky,
+  Durable, Fine, Practical et Ugly dans la même colonne que les vraies qualités d'armure. Ce
+  sont des `RULES-QUALITY_*` / `RULES-DEFECT_*` (`DATA_CRAFTMANSHIP`), que le bouton
+  `+Qualité` de WinPersonnage pose sur l'objet **que possède un personnage**
+  (`winpersonnage.pas` l.758 → colonne 7 → `QualiteEquipement`, sauvegardé dans la fiche).
+  Non saisies, signalées à leur place — même règle qu'au `DATA_ARMOR` de HEPG.
+  ⚠️ **Ne pas conclure de là que la table dort** : c'est ce que j'ai affirmé à tort en
+  cherchant « aucun appelant » sur six fichiers `.pas` rapatriés au lieu de tous. Rapatrier
+  avant de conclure, ou ne pas conclure.
+- **Un accessoire est une fabrication.** Barrel Extension, Bayonet et Telescopic Sight sont
+  entrés en `DATA_CRAFTMANSHIP` plutôt qu'en table nouvelle : un accessoire se monte sur
+  l'arme d'un personnage. Ils sont **descriptifs** — le `Modifier` d'une fabrication n'est
+  branché sur aucun calcul (aucun code `QUALITY_` référencé dans le corpus, `FabricationDetail`
+  sans appelant). Item ouvert dans `A FAIRE.txt`.
+- **La règle « l'officiel gagne » ne s'applique PAS aux objets.** Quatre armes portent le nom
+  d'une arme qu'*Up in Arms* décrit déjà autrement (Warhammer, Scimitar, Saber/Sabre, Bill).
+  Décision Nono, 04/09 : **les deux coexistent**, sous des noms distincts (règle de nommage
+  2.29) — Warhammer (Nations of Mankind), Arabyan Scimitar, Fencing Saber, Hooked Bill. La
+  règle de 2.37 sur Norsca et Tilea vaut pour une **identité** (une ethnie est unique), pas
+  pour un catalogue où deux cimeterres différents peuvent exister.
+
+**Autres choix de saisie, tous commentés dans le fichier :** les quatre armes à poudre
+reçoivent `Blackpowder` et `Damaging` que le tableau n'imprime pas, parce que le texte de
+`Suppressed` les suppose (déduction) ; `Incendiary` est résolu en `RULES-WEAPB29`, dont
+l'explication EST celle d'Incendiary bien que son libellé soit « Ablaze » (aucune qualité
+créée pour rien) ; deux homonymes internes au livre renommés `Morningstar (Two-Handed)` et
+`Flanged Mace (Two-Handed)` ; cases vides saisies `+0` ou `-` ; quantité 12 des flèches
+reprise du Rulebook (déduction) ; coquilles corrigées (*Very Lorng*, *designed will*,
+*Missile Resistance*).
+
+⚠️ **La pénalité de Dextérité des Stechzeug Bracers n'est pas calculée** : le `Modifier name`
+d'une qualité d'armure est résolu par `ChercheCompetence` (`pdfpersonnage.pas` l.1746) et
+n'accepte donc **que des compétences, jamais un attribut**. `NATIO-ARMOB_14` est descriptive,
+et le dit dans son explication.
 
 **Le blocage de 3a, constaté le 03/09/2026.** L'index des ethnies de la base a été
 reconstruit : sur les onze groupes cités par les commentaires d'espèce, **deux seulement

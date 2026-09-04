@@ -6,6 +6,23 @@
 CORRECTIONS COURTES  (une ligne ou deux chacune)
 =========================================================================
 
+LA PENALITE DE DEXTERITE DES STECHZEUG BRACERS N EST PAS CALCULEE. NATIO-ARMOB_14, ecrite
+le 04/09/2026 : le champ Modifier name d une qualite d armure est resolu par ChercheCompetence
+(pdfpersonnage.pas l.1746) et n accepte QUE des codes de competence, jamais un attribut. La
+penalite reste descriptive, dans l explication. Premier cas du corpus ; il y en aura d autres
+si un livre impose une penalite d attribut.
+
+LES SKULL TROPHIES DE NATIONS OF MANKIND NE SONT PAS SAISIS. Page 61. Leur emplacement est
+"Any" et leur PA vide, or la LOCALISATION est un vocabulaire FERME - pdfpersonnage.pas
+l.1626-1629 fait un case sur les quatre constantes BonusTete/BonusBras/BonusCorps/BonusJambes,
+un cinquieme emplacement ne serait pas compte. Leurs qualites Fear 1 et Ugly n ont pas
+davantage de place, Fear etant un trait de creature. Seule ligne du tableau non saisie.
+
+LA QUANTITE DES MUNITIONS DE NATIONS OF MANKIND EST UNE DEDUCTION. Les trois Arrow (Armor
+Piercing / Incendiary / Screamer) portent Ammunition 12, repris du Rulebook : le livre ne dit
+pas par combien elles se vendent. Pellets (12) et Revolver Shot (6) portent la leur dans leur
+nom. A confirmer si le livre le precise ailleurs.
+
 LE MODELE NE PORTE PAS LES PSYCHOLOGIES. Constate le 04/09/2026 sur Prejudice (Bretonnians)
 et Prejudice (Tileans) de Nations of Mankind : le livre les nomme des Psychologies, distinctes
 de Hatred, et rien en base ne sait les representer. Non saisis, decision Nono : prejuge
@@ -100,11 +117,6 @@ produit trois bugs a trois endroits differents ; la meme forme - une enumeration
 dans le code au lieu d'etre demandee aux donnees - existe probablement ailleurs. Chercher
 les InList() portant sur des constantes de type.
 
-NATIONS OF MANKIND : LES TABLES NEW WEAPONS / NEW ARMOR NE SONT PAS SAISIES. Vues le
-03/09/2026 page 58 du PDF en saisissant les sorts ; l inventaire du lot 3 (CONTEXT 2.37) ne
-les mentionnait pas. Une trentaine d armes (Katana, Dao, Scimitar, Katar, Urumi, Poleaxe...)
-plus les armures. A ajouter au perimetre restant du livre.
-
 NATIONS OF MANKIND : LORE ATTRIBUTE ET INGREDIENTS DES DEUX VENTS, SANS ENDROIT OU ALLER.
 Le Lore of Ice et le Lore of the Desert impriment chacun un Lore Attribute (regle de jeu, pas
 de la prose) et une liste d Ingredients. Ce sont des proprietes du DOMAINE, or le modele n a
@@ -122,41 +134,62 @@ A reprendre avec le morceau "creatures" du lot 3 si on veut de vraies creatures.
 CONCEPTIONS A MENER  (chantiers a part entiere, ne pas les melanger)
 =========================================================================
 
-NATIONS OF MANKIND, LOT 3A : CREER LES DIX ETHNIES HUMAINES DU LIVRE. Albion, Araby,
-Bretonnia (Peasantry), Bretonnia (Nobility), Cathay, Estalia, Ind, Kislev (Gospodar),
-Kislev (Ungol), Nippon - toutes sur RULES-SPECIE_HUMAN, source pages 3-4. Conception
-arretee le 03/09/2026, voir CONTEXT.md 2.37. COMMENCER PAR KISLEV (UNGOL) SEULE, pour faire
-valider la forme XML. Norsca et Tilea ne sont PAS creees, la base les porte deja.
+BRANCHER LE CALCUL DES QUALITES DE FABRICATION. Constate le 04/09/2026 en saisissant les
+accessoires d arme de Nations of Mankind. La table DATA_CRAFTMANSHIP est chargee, la fenetre
+WinFabrication l affiche, le bouton +Qualite de WinPersonnage pose les codes sur une ligne
+d equipement et chargepersonnage.pas les sauvegarde dans la fiche. Mais le champ Modifier
+n est branche sur AUCUN calcul : FabricationDetail et FabricationEncombrement n ont pas
+d appelant, et aucun code QUALITY_ n est reference dans les fichiers de livre. Les qualites
+sont donc purement DESCRIPTIVES.
+Ce qui en depend aujourd hui : Lightweight (Enc -1), Practical (penalite d armure reduite
+d un cran), Durable et Fine, les defauts Shoddy / Ugly / Unreliable / Bulky, et les trois
+accessoires NATIO-QUALITY_01 a 03 (Barrel Extension +20 de portee, Bayonet, Telescopic Sight
+qui ajoute Accurate et Precise).
+A concevoir : ou le calcul s applique (fiche PDF, WinPersonnage, les deux), et comment une
+qualite prise plusieurs fois se cumule - Fine et Durable ont Max 99.
+Point d entree : FabricationDetail et FabricationEncombrement existent deja et sont ecrites ;
+c est leur point d appel qui manque, pas leur corps.
 
-NATIONS OF MANKIND, LOT 3A : LES "TRAIT (ANY)" NE SE MODELISENT PAS. Provincial, Dukedom,
-City State, Clan, Region et Kingdom Trait renvoient chacun a une sous-liste de la page
-("Aquitaine : Coolheaded, One Random Talent") - un second niveau de choix que rien ne porte.
-A TRANCHER AVANT D ECRIRE LES ETHNIES : les laisser en commentaire, ou concevoir la forme.
+WINFABRICATION NE FILTRE PAS PAR NATURE D OBJET. Rien n empeche de monter une baionnette sur
+une hache ni de poser Durable sur une fleche : la fenetre affiche toute la liste sur n importe
+quelle ligne d equipement. Vrai depuis toujours pour les qualites du Rulebook, mais plus
+visible depuis que des accessoires y sont entres (04/09/2026). A traiter avec le branchement
+du calcul ci-dessus, pas avant.
 
-NATIONS OF MANKIND, LOT 3A : LA QUINZAINE DE SPECIALISATIONS A CREER. Competences Lore
-(Albion), (Dukedom), (Agriculture), (City State), (Province), (Region), (Kingdom),
-(Nippon) ; Language (Indan), (Nipponese), (Cathayan), (Ungol) ; talents Resistance (Heat)
-et (Cold). Liste etablie le 03/09 contre l index, A REFAIRE depuis des fichiers restages le
-jour ou on ecrit - ce n est qu un ordre de grandeur.
-
-NATIONS OF MANKIND, LOT 3B : LES 7 DOMAINES DE MAGIE. Divine Lore of Kislev / Araby / Ind /
-Nippon, Lore of Ice, Lore of the Desert, pages 48-57. L export TXT du corpus est
-INEXPLOITABLE ici, les deux colonnes s entremelent en milieu de ligne ; reextraire au
-pdftotext -layout -x 306 -W 306. DATA_SPELL_TALENT permet de brancher les benedictions des
-nouveaux dieux sans toucher au RULEBOOK, comme les 7 dieux du lot 1.
-
-NATIONS OF MANKIND, LOT 3C : ARMES, ARMURES ET QUALITES. Pages 58-61, une trentaine d armes
-(Katana, Dao, Scimitar, Urumi, Poleaxe, Becs de Corbin, Katar, Pata). Section ajoutee au
-perimetre le 03/09/2026, elle y manquait. LES MONTURES SONT HORS PERIMETRE (decision Nono).
-
-NATIONS OF MANKIND, LOT 3C : LA QUALITE "HOOKED" EST NOUVELLE. Verifier ou la liste des
-qualites d arme est portee - donnee ou enumeration ecrite dans le code - AVANT d en creer
-une. Meme forme de piege que les six TypSpell.
+CORRIGER LES PREFIXES DE LIVRE DANS LES REFERENCES, PARTOUT ET PAS SEULEMENT DANS LES
+QUALITES. Regle du projet (rappelee par Nono le 04/09/2026) : chaque livre repart a 1 dans
+sa numerotation, justement pour ne pas avoir a connaitre le dernier numero pris ailleurs.
+Cela n est vrai que si les REFERENCES portent le prefixe du livre. Or elles ne le portent
+pas toujours. Constate sur les qualites d arme : Archives I ecrit <Quality>"WEAPB35"</Quality>
+pour designer sa propre ARCH1-WEAPB35, et Up in Arms <Quality>"WEAPB31"</Quality> pour
+UPINA-WEAPB31 ; ca ne marche que parce que ces deux livres ont numerote A LA SUITE du
+Rulebook (31 a 37 ne sont pris qu une fois dans toute la base) au lieu de repartir a 1. Si un
+livre repart a WEAPB01, la reference nue "WEAPB01" sera resolue en RULES-WEAPB01 (Wrap) - une
+resolution fausse, et SILENCIEUSE. A l inverse <Talent name="NATIO-T0001"> est ecrit prefixe
+et se comporte bien.
+A FAIRE, dans cet ordre :
+ - recenser TOUTES les familles de codes et, pour chacune, si les references sont prefixees
+   ou nues (qualites d arme WEAPB, qualites d armure ARMOB, armes, armures, types ARMOT,
+   emplacements ARMOL, disponibilites DISPO, competences, talents, carrieres, sorts...) ;
+ - lire CompareRechercheValeur pour etablir ce qu elle accepte exactement - c est elle qui
+   decide si un code prefixe et un code nu se resolvent pareil. Non lue a ce jour, le
+   commentaire de ChargeArmeBonus dit qu elle "accepte le code prefixe comme non prefixe" ;
+ - decider la regle unique : reference toujours prefixee, et corriger les livres existants ;
+ - attention au piege deja documente dans chargearmebonus.pas : un code prefixe d un autre
+   (WEAPB4 dans WEAPB40) ; l equilibre actuel ne tient qu au fait que les codes font deux
+   chiffres. GetAllArmureBonusLibelle, lui, fait ENCORE un StringReplace de sous-chaine.
+EN ATTENDANT, les nouveaux livres continuent de numeroter A LA SUITE pour les qualites
+d arme ET d armure. Fait le 04/09/2026 : Nations of Mankind est parti de WEAPB38 et de
+ARMOB_09. La table DATA_CRAFTMANSHIP, elle, repart bien a 01 sans risque - CodeFabrication
+porte l identifiant complet avec son prefixe (xmlexportimport.pas l.2436).
 
 NATIONS OF MANKIND, LOT 3D : PROVINCES, REGIMENTS, KNIGHTLY ORDERS. Pages 5-9. Ce ne sont
 pas des carrieres mais des bonus conditionnels ("Recruit: you gain Lore (Reikland)") ; rien
 dans le modele ne porte ca. CONCEPTION A MENER AVANT TOUTE SAISIE. Les dix provinces de la
-page 5 sont des ethnies et seront avalees par 3a.
+page 5 ONT ETE avalees par 3a (fait le 04/09/2026). SEUL LOT ENCORE OUVERT DU LIVRE : 3a, 3b
+et 3c sont termines. Le plus proche parent a regarder d abord est DATA_SPECIE_TRAIT
+(CONTEXT.md 2.41) : voir si une province se modelise comme une ethnie, ou s il faut une
+notion nouvelle pour un bonus conditionnel a l appartenance.
 
 NATIONS OF MANKIND, HORS LOT : LES CREATURES. Taureaux de guerre estaliens, monture du
 Toreador. Reporte avec les montures.

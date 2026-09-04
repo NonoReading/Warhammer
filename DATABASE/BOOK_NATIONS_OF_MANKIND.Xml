@@ -16,9 +16,11 @@
 <DATA_LABEL>
 <Label language="ENGLISH">
 <Text name="NATIO-BOOK NATIONS OF MANKIND">"Nations of Mankind"</Text>
+<Text name="NATIO-ARMOT_LAMELLAR">"Lamellar"</Text>
 </Label>
 <Label language="FRANCAIS">
 <Text name="NATIO-BOOK NATIONS OF MANKIND">"Nations of Mankind"</Text>
+<Text name="NATIO-ARMOT_LAMELLAR">"Lamellaire"</Text>
 </Label>
 </DATA_LABEL>
 <DATA_SKILL_SPECIALIZATION>
@@ -8745,4 +8747,1326 @@ These warriors are amongst the bravest of their kind, as they charge into battle
 <Talent>"RULES-T0012_DAZH,RULES-T0012_DEVAS"</Talent>
 </Sort>
 </DATA_SPELL_TALENT>
+<DATA_ARMOR>
+  <!-- Armures, pages 60-61. 28 pieces en sept ensembles. Premier livre autre que le
+       Rulebook a declarer des armures et des qualites d armure. -->
+  <!-- Les 28 pieces de la page 60 portent des qualites de FABRICATION que le tableau imprime
+       dans la meme colonne que les qualites d armure : Bulky, Durable, Fine, Practical, Ugly.
+       Elles ne sont pas saisies ici - elles se posent sur l objet que possede un personnage,
+       via la fenetre Fabrication (RULES-QUALITY_* et RULES-DEFECT_*), jamais sur une entree de
+       catalogue. Meme regle qu au DATA_ARMOR du High Elf Player s Guide, CONTEXT.md 2.29.
+       Pour memoire, cette piece est Bulky et Durable en plus d Impenetrable. -->
+<Armor id="NATIO-ARMO_01">
+<Description language="ENGLISH">"Stechzeug Breastplate"</Description>
+<Availability>"DISPO_RARE"</Availability>
+<Price>"20 GC"</Price>
+<Encumbrance>"3"</Encumbrance>
+<Quality>"ARMOB_02"</Quality>
+<Location>"ARMOL_BODY"</Location>
+<ArmorPoint>"4"</ArmorPoint>
+<Type>"ARMOT_PLATE"</Type>
+</Armor>
+<Armor id="NATIO-ARMO_02">
+<Description language="ENGLISH">"Stechzeug Helm"</Description>
+<Availability>"DISPO_RARE"</Availability>
+<Price>"4 GC"</Price>
+<Encumbrance>"2"</Encumbrance>
+<Quality>"ARMOB_02,ARMOB_12"</Quality>
+<Location>"ARMOL_HEAD"</Location>
+<ArmorPoint>"4"</ArmorPoint>
+<Type>"ARMOT_PLATE"</Type>
+</Armor>
+<Armor id="NATIO-ARMO_03">
+<Description language="ENGLISH">"Stechzeug Bracers"</Description>
+<Availability>"DISPO_RARE"</Availability>
+<Price>"16 GC"</Price>
+<Encumbrance>"3"</Encumbrance>
+<Quality>"ARMOB_02,ARMOB_14"</Quality>
+<Location>"ARMOL_ARM"</Location>
+<ArmorPoint>"4"</ArmorPoint>
+<Type>"ARMOT_PLATE"</Type>
+</Armor>
+<Armor id="NATIO-ARMO_04">
+<Description language="ENGLISH">"Norse Breastplate"</Description>
+<Availability>"DISPO_EXOTIC"</Availability>
+<Price>"5 GC"</Price>
+<Encumbrance>"3"</Encumbrance>
+<Quality>"ARMOB_02,ARMOB_09,ARMOB_04"</Quality>
+<Location>"ARMOL_BODY"</Location>
+<ArmorPoint>"3"</ArmorPoint>
+<Type>"ARMOT_PLATE"</Type>
+</Armor>
+<Armor id="NATIO-ARMO_05">
+<Description language="ENGLISH">"Horned Helm"</Description>
+<Availability>"DISPO_EXOTIC"</Availability>
+<Price>"1 GC"</Price>
+<Encumbrance>"2"</Encumbrance>
+<Quality>"ARMOB_03,ARMOB_06"</Quality>
+<Location>"ARMOL_HEAD"</Location>
+<ArmorPoint>"2"</ArmorPoint>
+<Type>"ARMOT_PLATE"</Type>
+</Armor>
+<Armor id="NATIO-ARMO_06">
+<Description language="ENGLISH">"Norse Bracers"</Description>
+<Availability>"DISPO_EXOTIC"</Availability>
+<Price>"4 GC"</Price>
+<Encumbrance>"3"</Encumbrance>
+<Quality>"ARMOB_02,ARMOB_04"</Quality>
+<Location>"ARMOL_ARM"</Location>
+<ArmorPoint>"3"</ArmorPoint>
+<Type>"ARMOT_PLATE"</Type>
+</Armor>
+<Armor id="NATIO-ARMO_07">
+<Description language="ENGLISH">"Norse Leggings"</Description>
+<Availability>"DISPO_EXOTIC"</Availability>
+<Price>"5 GC"</Price>
+<Encumbrance>"3"</Encumbrance>
+<Quality>"ARMOB_02,ARMOB_04,ARMOB_19"</Quality>
+<Location>"ARMOL_LEG"</Location>
+<ArmorPoint>"3"</ArmorPoint>
+<Type>"ARMOT_PLATE"</Type>
+</Armor>
+<Armor id="NATIO-ARMO_08">
+<Description language="ENGLISH">"Horned Great Helm"</Description>
+<Availability>"DISPO_EXOTIC"</Availability>
+<Price>"2 GC"</Price>
+<Encumbrance>"2"</Encumbrance>
+<Quality>"ARMOB_02,ARMOB_04,ARMOB_07"</Quality>
+<Location>"ARMOL_HEAD"</Location>
+<ArmorPoint>"3"</ArmorPoint>
+<Type>"ARMOT_PLATE"</Type>
+</Armor>
+  <!-- Les quatre pieces de Chaos Plate n ont pas de prix dans le livre (case laissee vide) : elles ne
+       s achetent pas. Champ Price a "-", comme les armes sans prix du Rulebook. -->
+<Armor id="NATIO-ARMO_09">
+<Description language="ENGLISH">"Chaos Breastplate"</Description>
+<Availability>"DISPO_EXOTIC"</Availability>
+<Price>"-"</Price>
+<Encumbrance>"3"</Encumbrance>
+<Quality>"ARMOB_10,ARMOB_02,ARMOB_09"</Quality>
+<Location>"ARMOL_BODY"</Location>
+<ArmorPoint>"3"</ArmorPoint>
+<Type>"ARMOT_PLATE"</Type>
+</Armor>
+<Armor id="NATIO-ARMO_10">
+<Description language="ENGLISH">"Chaos Horned Helm"</Description>
+<Availability>"DISPO_EXOTIC"</Availability>
+<Price>"-"</Price>
+<Encumbrance>"2"</Encumbrance>
+<Quality>"ARMOB_10,ARMOB_02,ARMOB_07"</Quality>
+<Location>"ARMOL_HEAD"</Location>
+<ArmorPoint>"3"</ArmorPoint>
+<Type>"ARMOT_PLATE"</Type>
+</Armor>
+<Armor id="NATIO-ARMO_11">
+<Description language="ENGLISH">"Chaos Bracers"</Description>
+<Availability>"DISPO_EXOTIC"</Availability>
+<Price>"-"</Price>
+<Encumbrance>"3"</Encumbrance>
+<Quality>"ARMOB_10,ARMOB_02,ARMOB_09"</Quality>
+<Location>"ARMOL_ARM"</Location>
+<ArmorPoint>"3"</ArmorPoint>
+<Type>"ARMOT_PLATE"</Type>
+</Armor>
+<Armor id="NATIO-ARMO_12">
+<Description language="ENGLISH">"Chaos Leggings"</Description>
+<Availability>"DISPO_EXOTIC"</Availability>
+<Price>"-"</Price>
+<Encumbrance>"3"</Encumbrance>
+<Quality>"ARMOB_10,ARMOB_02,ARMOB_09,ARMOB_13"</Quality>
+<Location>"ARMOL_LEG"</Location>
+<ArmorPoint>"3"</ArmorPoint>
+<Type>"ARMOT_PLATE"</Type>
+</Armor>
+<Armor id="NATIO-ARMO_13">
+<Description language="ENGLISH">"Reiksplate Cuirass"</Description>
+<Availability>"DISPO_EXOTIC"</Availability>
+<Price>"80 GC"</Price>
+<Encumbrance>"3"</Encumbrance>
+<Quality>"ARMOB_02"</Quality>
+<Location>"ARMOL_BODY"</Location>
+<ArmorPoint>"3"</ArmorPoint>
+<Type>"ARMOT_PLATE"</Type>
+</Armor>
+<Armor id="NATIO-ARMO_14">
+<Description language="ENGLISH">"Reiksplate Armet"</Description>
+<Availability>"DISPO_EXOTIC"</Availability>
+<Price>"10 GC"</Price>
+<Encumbrance>"2"</Encumbrance>
+<Quality>"ARMOB_02,ARMOB_06"</Quality>
+<Location>"ARMOL_HEAD"</Location>
+<ArmorPoint>"3"</ArmorPoint>
+<Type>"ARMOT_PLATE"</Type>
+</Armor>
+<Armor id="NATIO-ARMO_15">
+<Description language="ENGLISH">"Reiksplate Bracers"</Description>
+<Availability>"DISPO_EXOTIC"</Availability>
+<Price>"60 GC"</Price>
+<Encumbrance>"3"</Encumbrance>
+<Quality>"ARMOB_02"</Quality>
+<Location>"ARMOL_ARM"</Location>
+<ArmorPoint>"3"</ArmorPoint>
+<Type>"ARMOT_PLATE"</Type>
+</Armor>
+<Armor id="NATIO-ARMO_16">
+<Description language="ENGLISH">"Reiksplate Leggings"</Description>
+<Availability>"DISPO_EXOTIC"</Availability>
+<Price>"80 GC"</Price>
+<Encumbrance>"3"</Encumbrance>
+<Quality>"ARMOB_02,ARMOB_05"</Quality>
+<Location>"ARMOL_LEG"</Location>
+<ArmorPoint>"3"</ArmorPoint>
+<Type>"ARMOT_PLATE"</Type>
+</Armor>
+  <!-- Les cinq pieces d armure de samourai sont de type NATIO-ARMOT_LAMELLAR, cree par ce livre :
+       la construction lamellaire n existait pas dans les six types du Rulebook. Controle avant
+       creation (methode du DISPO_UNIQUE de CONTEXT.md 2.29) : le champ Type ne passe que par
+       GetAllTexteLibelle (winarmor.pas l.132) et ReplaceTexteLibelle (chargearmure.pas l.59),
+       et ne fait l objet d AUCUN branchement dans le code. Vocabulaire ouvert. -->
+<Armor id="NATIO-ARMO_17">
+<Description language="ENGLISH">"Dou"</Description>
+<Availability>"DISPO_EXOTIC"</Availability>
+<Price>"10 GC"</Price>
+<Encumbrance>"3"</Encumbrance>
+<Quality>"ARMOB_04"</Quality>
+<Location>"ARMOL_BODY"</Location>
+<ArmorPoint>"2"</ArmorPoint>
+<Type>"NATIO-ARMOT_LAMELLAR"</Type>
+</Armor>
+<Armor id="NATIO-ARMO_18">
+<Description language="ENGLISH">"Kabuto"</Description>
+<Availability>"DISPO_EXOTIC"</Availability>
+<Price>"2 GC"</Price>
+<Encumbrance>"1"</Encumbrance>
+<Quality>"ARMOB_03"</Quality>
+<Location>"ARMOL_HEAD"</Location>
+<ArmorPoint>"2"</ArmorPoint>
+<Type>"NATIO-ARMOT_LAMELLAR"</Type>
+</Armor>
+<Armor id="NATIO-ARMO_19">
+<Description language="ENGLISH">"Kote"</Description>
+<Availability>"DISPO_EXOTIC"</Availability>
+<Price>"8 GC"</Price>
+<Encumbrance>"3"</Encumbrance>
+<Quality>"ARMOB_04"</Quality>
+<Location>"ARMOL_ARM"</Location>
+<ArmorPoint>"2"</ArmorPoint>
+<Type>"NATIO-ARMOT_LAMELLAR"</Type>
+</Armor>
+<Armor id="NATIO-ARMO_20">
+<Description language="ENGLISH">"Haidate"</Description>
+<Availability>"DISPO_EXOTIC"</Availability>
+<Price>"10 GC"</Price>
+<Encumbrance>"3"</Encumbrance>
+<Quality>"ARMOB_04"</Quality>
+<Location>"ARMOL_LEG"</Location>
+<ArmorPoint>"2"</ArmorPoint>
+<Type>"NATIO-ARMOT_LAMELLAR"</Type>
+</Armor>
+<Armor id="NATIO-ARMO_21">
+<Description language="ENGLISH">"Kabuto with Mengu"</Description>
+<Availability>"DISPO_EXOTIC"</Availability>
+<Price>"3 GC"</Price>
+<Encumbrance>"2"</Encumbrance>
+<Quality>"ARMOB_04,ARMOB_06"</Quality>
+<Location>"ARMOL_HEAD"</Location>
+<ArmorPoint>"2"</ArmorPoint>
+<Type>"NATIO-ARMOT_LAMELLAR"</Type>
+</Armor>
+<Armor id="NATIO-ARMO_22">
+<Description language="ENGLISH">"Lamellar Chausses"</Description>
+<Availability>"DISPO_EXOTIC"</Availability>
+<Price>"8 GC"</Price>
+<Encumbrance>"2"</Encumbrance>
+<Quality>"ARMOB_11,ARMOB_05"</Quality>
+<Location>"ARMOL_LEG"</Location>
+<ArmorPoint>"2"</ArmorPoint>
+<Type>"NATIO-ARMOT_LAMELLAR"</Type>
+</Armor>
+<Armor id="NATIO-ARMO_23">
+<Description language="ENGLISH">"Lamellar Coat"</Description>
+<Availability>"DISPO_EXOTIC"</Availability>
+<Price>"10 GC"</Price>
+<Encumbrance>"3"</Encumbrance>
+<Quality>"ARMOB_11"</Quality>
+<Location>"ARMOL_ARM,ARMOL_BODY"</Location>
+<ArmorPoint>"2"</ArmorPoint>
+<Type>"NATIO-ARMOT_LAMELLAR"</Type>
+</Armor>
+<Armor id="NATIO-ARMO_24">
+<Description language="ENGLISH">"Lamellar Helm"</Description>
+<Availability>"DISPO_EXOTIC"</Availability>
+<Price>"3 GC"</Price>
+<Encumbrance>"2"</Encumbrance>
+<Quality>"ARMOB_11,ARMOB_03,ARMOB_06"</Quality>
+<Location>"ARMOL_HEAD"</Location>
+<ArmorPoint>"2"</ArmorPoint>
+<Type>"NATIO-ARMOT_LAMELLAR"</Type>
+</Armor>
+<Armor id="NATIO-ARMO_25">
+<Description language="ENGLISH">"Gambeson (Wool Coat)"</Description>
+<Availability>"DISPO_COMMON"</Availability>
+<Price>"1 GC"</Price>
+<Encumbrance>"1"</Encumbrance>
+<Quality>"ARMOB_01"</Quality>
+<Location>"ARMOL_ARM,ARMOL_BODY"</Location>
+<ArmorPoint>"1"</ArmorPoint>
+<Type>"ARMOT_SOFTKITS"</Type>
+</Armor>
+<Armor id="NATIO-ARMO_26">
+<Description language="ENGLISH">"Jack of Plate"</Description>
+<Availability>"DISPO_RARE"</Availability>
+<Price>"8 GC"</Price>
+<Encumbrance>"3"</Encumbrance>
+<Quality>"ARMOB_01,ARMOB_02"</Quality>
+<Location>"ARMOL_BODY"</Location>
+<ArmorPoint>"2"</ArmorPoint>
+<Type>"ARMOT_BRIGANDINE"</Type>
+</Armor>
+  <!-- Le livre ecrit "Missile Resistance" ici et "Missile Resistant" partout ailleurs : meme
+       qualite, lue sous sa forme majoritaire. -->
+<Armor id="NATIO-ARMO_27">
+<Description language="ENGLISH">"Horo Cloak"</Description>
+<Availability>"DISPO_EXOTIC"</Availability>
+<Price>"15 GC"</Price>
+<Encumbrance>"0"</Encumbrance>
+<Quality>"ARMOB_11"</Quality>
+<Location>"ARMOL_ARM,ARMOL_BODY"</Location>
+<ArmorPoint>"0"</ArmorPoint>
+<Type>"ARMOT_SOFTKITS"</Type>
+</Armor>
+  <!-- Derniere piece saisie. Les SKULL TROPHIES de la meme section ne le sont PAS : leur
+       emplacement est "Any" et leur PA vide. Contrairement au type d armure, la LOCALISATION
+       est un vocabulaire FERME - pdfpersonnage.pas l.1626-1629 fait un case sur les quatre
+       constantes BonusTete/BonusBras/BonusCorps/BonusJambes. Un cinquieme emplacement ne
+       serait pas compte. Leurs qualites Fear 1 et Ugly n ont pas davantage de place : Fear est
+       un trait de creature. Note dans A FAIRE.txt. -->
+<Armor id="NATIO-ARMO_28">
+<Description language="ENGLISH">"Mirror Armor"</Description>
+<Availability>"DISPO_EXOTIC"</Availability>
+<Price>"10 GC"</Price>
+<Encumbrance>"3"</Encumbrance>
+<Quality>"ARMOB_03"</Quality>
+<Location>"ARMOL_BODY"</Location>
+<ArmorPoint>"3"</ArmorPoint>
+<Type>"ARMOT_PLATE"</Type>
+</Armor>
+</DATA_ARMOR>
+<DATA_ARMOR_BONUS>
+  <!-- Six qualites d armure nouvelles, pages 60-61. Comme pour les qualites d arme, la
+       numerotation CONTINUE celle du Rulebook (qui va de ARMOB_01 a _08, plus _19) au lieu de
+       repartir a 1 : les references de qualite d armure sont ecrites SANS prefixe partout, et
+       GetAllArmureBonusLibelle fait meme encore un StringReplace de SOUS-CHAINE. Un ARMOB_01
+       de ce livre serait resolu en RULES-ARMOB_01 (Flexible). Anomalie notee dans A FAIRE.txt,
+       section CONCEPTIONS A MENER, le 04/09/2026. Aucun livre autre que le Rulebook n avait
+       jamais declare de qualite d armure : celles-ci sont les premieres. -->
+<BonusMalus id="NATIO-ARMOB_09">
+<Description language="ENGLISH">"Spiked"</Description>
+<Explanation language="ENGLISH">"Armor grafted with Spikes grant the wearer an extra layer of dangerous protection.
+When Spiked armor is struck in melee with a weapon of Short length or less, the opponent takes 1D10 Wounds minus their TB.
+This effect is rendered unusable if the armor is Damaged by 1 AP or more as the Spikes are destroyed.
+This effect also works for melee attacks if Spikes are attached to gauntleted fists, or if the wearer succeeds against an opponent in a grapple test."</Explanation>
+<Modifier>"struck in melee at Short reach or less : 1D10 - TB to the attacker"</Modifier>
+</BonusMalus>
+<BonusMalus id="NATIO-ARMOB_10">
+<Description language="ENGLISH">"Corrupted"</Description>
+<Explanation language="ENGLISH">"Armor that has been forged and corrupted to this magnitude can only have been forged by the vile smiths of the Chaos Dwarfs in Zharr-Naggrund, far off in the Dark Lands.
+If worn, the corrupted armor slowly twists the wearer, fusing to their skin and being impossible to remove and dealing 1d10+8 Corruption Points per piece equipped.
+The pain of such a process is unimaginable; however, it comes with its benefits. Those who defy the Dark God's will take a Wound for each Corruption Point received and die instantly at 0 Wounds.
+Those who embrace the will of the gods and equip a full set may never need to eat, sleep or drink to survive and are immune to the Fatigue Condition; moreover, their armor repairs itself overtime if damaged, slowly regenerating itself with unholy speed, up to +1 AP per day up to its original value."</Explanation>
+<Modifier>"1d10+8 Corruption Points per piece worn; cannot be removed"</Modifier>
+</BonusMalus>
+<BonusMalus id="NATIO-ARMOB_11">
+<Description language="ENGLISH">"Missile Resistant"</Description>
+<Explanation language="ENGLISH">"This armor is designed in such a way to protect the wearer from ranged attacks.
+While wearing a piece of armor with this quality, all ranged weapon missile attacks have their Damage reduced by 2.
+Furthermore, all ranged weapons lose their Damaging Quality when striking this armor with missile attacks, including blackpowder and engineering."</Explanation>
+<Modifier>"ranged Damage -2; ranged weapons lose Damaging"</Modifier>
+</BonusMalus>
+  <!-- Les trois suivantes sont des penalites, sur le modele des ARMOB_05 a _07 et _19 du
+       Rulebook : la table DATA_ARMOR n a pas de champ de penalite, une penalite EST une
+       qualite (CONTEXT.md 2.29). -->
+<BonusMalus id="NATIO-ARMOB_12">
+<Description language="ENGLISH">"Blinds the view"</Description>
+<Explanation language="ENGLISH">"Wearing this armour gives a -30 penalty to Perception"</Explanation>
+<Modifier name="RULES-COMPPRECEP">-30</Modifier>
+</BonusMalus>
+<BonusMalus id="NATIO-ARMOB_13">
+<Description language="ENGLISH">"Not Discreet whatsoever"</Description>
+<Explanation language="ENGLISH">"Wearing this armour gives a -30 Stealth penalty each time"</Explanation>
+<Modifier name="RULES-COMPDISC_*">-30</Modifier>
+</BonusMalus>
+  <!-- ATTENTION, celle-ci n est PAS calculee. Le champ Modifier name d une qualite d armure
+       est resolu par ChercheCompetence (pdfpersonnage.pas l.1746) : il n accepte QUE des codes
+       de competence. La penalite de Dexterite des Stechzeug Bracers porte donc sur un ATTRIBUT,
+       ce que le modele ne sait pas exprimer ici. Elle reste descriptive, dans l explication.
+       Item ouvert dans A FAIRE.txt. -->
+<BonusMalus id="NATIO-ARMOB_14">
+<Description language="ENGLISH">"Stiffens the arms"</Description>
+<Explanation language="ENGLISH">"Wearing this armour gives a -10 penalty to the Dexterity characteristic. Not computed : an armour quality modifier can only target a Skill, never a Characteristic."</Explanation>
+<Modifier>"Dexterity -10, descriptive only"</Modifier>
+</BonusMalus>
+</DATA_ARMOR_BONUS>
+<DATA_WEAPON>
+  <!-- Armes de melee, pages 58-59. 44 armes en sept categories. Les qualites de
+       FABRICATION que le livre imprime dans certaines lignes (Fine sur la Jade Longsword)
+       ne sont pas saisies : elles se posent sur l objet que possede un personnage via la
+       fenetre Fabrication, jamais sur une entree de catalogue - meme regle qu au DATA_ARMOR
+       du High Elf Player s Guide, CONTEXT.md 2.29.
+       Quatre armes portent le nom d une arme qu Up in Arms decrit deja avec d autres
+       caracteristiques : les deux coexistent sous des noms distincts (decision Nono,
+       04/09/2026), chacune commentee a sa place. -->
+<Weapon id="NATIO-COMB_BASE_01">
+<Description language="ENGLISH">"Battle Axe"</Description>
+<Skill>"RULES-COMPCOMB_BASE"</Skill>
+<Damage>"+(BATTR_S)+4"</Damage>
+<Availability>"DISPO_COMMON"</Availability>
+<Reach>"WEAPR_MID"</Reach>
+<Price>"2 GC"</Price>
+<Encumbrance>"1"</Encumbrance>
+<Quality>"WEAPB30"</Quality>
+<Hand>"1"</Hand>
+<Ammunition>"0"</Ammunition>
+</Weapon>
+<Weapon id="NATIO-COMB_BASE_02">
+<Description language="ENGLISH">"Baton"</Description>
+<Skill>"RULES-COMPCOMB_BASE"</Skill>
+<Damage>"+(BATTR_S)+2"</Damage>
+<Availability>"DISPO_COMMON"</Availability>
+<Reach>"WEAPR_SHORT"</Reach>
+<Price>"4/-"</Price>
+<Encumbrance>"1"</Encumbrance>
+<Quality>"WEAPB04,WEAPB27"</Quality>
+<Hand>"1"</Hand>
+<Ammunition>"0"</Ammunition>
+</Weapon>
+<Weapon id="NATIO-COMB_BASE_03">
+<Description language="ENGLISH">"Morningstar"</Description>
+<Skill>"RULES-COMPCOMB_BASE"</Skill>
+<Damage>"+(BATTR_S)+4"</Damage>
+<Availability>"DISPO_LIMITED"</Availability>
+<Reach>"WEAPR_MID"</Reach>
+<Price>"1 GC"</Price>
+<Encumbrance>"1"</Encumbrance>
+<Quality>"WEAPB39"</Quality>
+<Hand>"1"</Hand>
+<Ammunition>"0"</Ammunition>
+</Weapon>
+<Weapon id="NATIO-COMB_BASE_04">
+<Description language="ENGLISH">"Flanged Mace"</Description>
+<Skill>"RULES-COMPCOMB_BASE"</Skill>
+<Damage>"+(BATTR_S)+4"</Damage>
+<Availability>"DISPO_LIMITED"</Availability>
+<Reach>"WEAPR_MID"</Reach>
+<Price>"3 GC 12/-"</Price>
+<Encumbrance>"1"</Encumbrance>
+<Quality>"WEAPB21,WEAPB25"</Quality>
+<Hand>"1"</Hand>
+<Ammunition>"0"</Ammunition>
+</Weapon>
+<Weapon id="NATIO-COMB_BASE_05">
+<Description language="ENGLISH">"Short Spear"</Description>
+<Skill>"RULES-COMPCOMB_BASE"</Skill>
+<Damage>"+(BATTR_S)+3"</Damage>
+<Availability>"DISPO_COMMON"</Availability>
+<Reach>"WEAPR_LONG"</Reach>
+<Price>"10/-"</Price>
+<Encumbrance>"1"</Encumbrance>
+<Quality>"WEAPB12"</Quality>
+<Hand>"1"</Hand>
+<Ammunition>"0"</Ammunition>
+</Weapon>
+  <!-- Le livre imprime "Warhammer". Up in Arms porte deja un Warhammer a une main de meme
+       competence, portee et degats, mais Limite et Unbalanced/Pummel/Penetrating. Les deux
+       coexistent avec un nom distinct (decision Nono, 04/09/2026, regle de nommage 2.29).
+       Aucun element du livre ne donne de qualificatif culturel a cette arme, d'ou le suffixe
+       par le nom du livre : CHOIX DE SAISIE, a confirmer. -->
+<Weapon id="NATIO-COMB_BASE_06">
+<Description language="ENGLISH">"Warhammer (Nations of Mankind)"</Description>
+<Skill>"RULES-COMPCOMB_BASE"</Skill>
+<Damage>"+(BATTR_S)+4"</Damage>
+<Availability>"DISPO_COMMON"</Availability>
+<Reach>"WEAPR_MID"</Reach>
+<Price>"1 GC 10/-"</Price>
+<Encumbrance>"1"</Encumbrance>
+<Quality>"WEAPB04"</Quality>
+<Hand>"1"</Hand>
+<Ammunition>"0"</Ammunition>
+</Weapon>
+<Weapon id="NATIO-COMB_BASE_07">
+<Description language="ENGLISH">"Katana"</Description>
+<Skill>"RULES-COMPCOMB_BASE"</Skill>
+<Damage>"+(BATTR_S)+4"</Damage>
+<Availability>"DISPO_EXOTIC"</Availability>
+<Reach>"WEAPR_MID"</Reach>
+<Price>"3 GC"</Price>
+<Encumbrance>"1"</Encumbrance>
+<Quality>"WEAPB20"</Quality>
+<Hand>"1"</Hand>
+<Ammunition>"0"</Ammunition>
+</Weapon>
+<Weapon id="NATIO-COMB_BASE_08">
+<Description language="ENGLISH">"Dao"</Description>
+<Skill>"RULES-COMPCOMB_BASE"</Skill>
+<Damage>"+(BATTR_S)+4"</Damage>
+<Availability>"DISPO_EXOTIC"</Availability>
+<Reach>"WEAPR_MID"</Reach>
+<Price>"2 GC"</Price>
+<Encumbrance>"1"</Encumbrance>
+<Quality>"WEAPB14"</Quality>
+<Hand>"1"</Hand>
+<Ammunition>"0"</Ammunition>
+</Weapon>
+  <!-- Le livre imprime "Scimitar". Up in Arms en porte un autre (Limite, portee Courte,
+       Slash 1, 1 GC). Prefixe arabyen : le livre l'attribue au Dervish et au Black Scimitar
+       Guard d'Araby. CHOIX DE SAISIE. -->
+<Weapon id="NATIO-COMB_BASE_09">
+<Description language="ENGLISH">"Arabyan Scimitar"</Description>
+<Skill>"RULES-COMPCOMB_BASE"</Skill>
+<Damage>"+(BATTR_S)+4"</Damage>
+<Availability>"DISPO_EXOTIC"</Availability>
+<Reach>"WEAPR_MID"</Reach>
+<Price>"2 GC"</Price>
+<Encumbrance>"1"</Encumbrance>
+<Quality>"WEAPB08"</Quality>
+<Hand>"1"</Hand>
+<Ammunition>"0"</Ammunition>
+</Weapon>
+<Weapon id="NATIO-COMB_CAVAL_01">
+<Description language="ENGLISH">"Cavalry Sabre"</Description>
+<Skill>"RULES-COMPCOMB_CAVAL"</Skill>
+<Damage>"+(BATTR_S)+5"</Damage>
+<Availability>"DISPO_LIMITED"</Availability>
+<Reach>"WEAPR_MID"</Reach>
+<Price>"2 GC"</Price>
+<Encumbrance>"1"</Encumbrance>
+<Quality>"WEAPB10"</Quality>
+<Hand>"1"</Hand>
+<Ammunition>"0"</Ammunition>
+</Weapon>
+<Weapon id="NATIO-COMB_CAVAL_02">
+<Description language="ENGLISH">"Horseman's Pick"</Description>
+<Skill>"RULES-COMPCOMB_CAVAL"</Skill>
+<Damage>"+(BATTR_S)+5"</Damage>
+<Availability>"DISPO_RARE"</Availability>
+<Reach>"WEAPR_LONG"</Reach>
+<Price>"3 GC"</Price>
+<Encumbrance>"3"</Encumbrance>
+<Quality>"WEAPB12,WEAPB22"</Quality>
+<Hand>"2"</Hand>
+<Ammunition>"0"</Ammunition>
+</Weapon>
+  <!-- Le livre imprime "Saber". Up in Arms porte un "Sabre" de CAVALERIE (portee Moyenne,
+       Slash 1) : ce sont deux armes reellement distinctes, celle-ci est une arme d'escrime.
+       Prefixe tire de sa categorie. CHOIX DE SAISIE. -->
+<Weapon id="NATIO-COMB_ESCR_01">
+<Description language="ENGLISH">"Fencing Saber"</Description>
+<Skill>"RULES-COMPCOMB_ESCR"</Skill>
+<Damage>"+(BATTR_S)+4"</Damage>
+<Availability>"DISPO_LIMITED"</Availability>
+<Reach>"WEAPR_LONG"</Reach>
+<Price>"5 GC"</Price>
+<Encumbrance>"1"</Encumbrance>
+<Quality>"WEAPB08,WEAPB20"</Quality>
+<Hand>"1"</Hand>
+<Ammunition>"0"</Ammunition>
+</Weapon>
+<Weapon id="NATIO-COMB_ESCR_02">
+<Description language="ENGLISH">"Epee"</Description>
+<Skill>"RULES-COMPCOMB_ESCR"</Skill>
+<Damage>"+(BATTR_S)+3"</Damage>
+<Availability>"DISPO_LIMITED"</Availability>
+<Reach>"WEAPR_LONG"</Reach>
+<Price>"5 GC"</Price>
+<Encumbrance>"1"</Encumbrance>
+<Quality>"WEAPB08,WEAPB20,WEAPB12,WEAPB27"</Quality>
+<Hand>"1"</Hand>
+<Ammunition>"0"</Ammunition>
+</Weapon>
+<Weapon id="NATIO-COMB_BAGAR_01">
+<Description language="ENGLISH">"Tiger Claws"</Description>
+<Skill>"RULES-COMPCOMB_BAGAR"</Skill>
+<Damage>"+(BATTR_S)+2"</Damage>
+<Availability>"DISPO_EXOTIC"</Availability>
+<Reach>"WEAPR_CLOSE"</Reach>
+<Price>"3 GC 8/-"</Price>
+<Encumbrance>"0"</Encumbrance>
+<Quality>"WEAPB20"</Quality>
+<Hand>"1"</Hand>
+<Ammunition>"0"</Ammunition>
+</Weapon>
+<Weapon id="NATIO-COMB_BAGAR_02">
+<Description language="ENGLISH">"Hidden Wrist Blade"</Description>
+<Skill>"RULES-COMPCOMB_BAGAR"</Skill>
+<Damage>"+(BATTR_S)+2"</Damage>
+<Availability>"DISPO_EXOTIC"</Availability>
+<Reach>"WEAPR_PERSO"</Reach>
+<Price>"10 GC"</Price>
+<Encumbrance>"0"</Encumbrance>
+<Quality>"WEAPB38,WEAPB12"</Quality>
+<Hand>"1"</Hand>
+<Ammunition>"0"</Ammunition>
+</Weapon>
+<Weapon id="NATIO-COMB_BAGAR_03">
+<Description language="ENGLISH">"Katar"</Description>
+<Skill>"RULES-COMPCOMB_BAGAR"</Skill>
+<Damage>"+(BATTR_S)+3"</Damage>
+<Availability>"DISPO_EXOTIC"</Availability>
+<Reach>"WEAPR_SHORT"</Reach>
+<Price>"2 GC"</Price>
+<Encumbrance>"1"</Encumbrance>
+<Quality>"WEAPB12"</Quality>
+<Hand>"1"</Hand>
+<Ammunition>"0"</Ammunition>
+</Weapon>
+<Weapon id="NATIO-COMB_BAGAR_04">
+<Description language="ENGLISH">"Gauntlets"</Description>
+<Skill>"RULES-COMPCOMB_BAGAR"</Skill>
+<Damage>"+(BATTR_S)+3"</Damage>
+<Availability>"DISPO_RARE"</Availability>
+<Reach>"WEAPR_PERSO"</Reach>
+<Price>"4 GC"</Price>
+<Encumbrance>"1"</Encumbrance>
+<Quality>"WEAPB04"</Quality>
+<Hand>"1"</Hand>
+<Ammunition>"0"</Ammunition>
+</Weapon>
+<Weapon id="NATIO-COMB_BAGAR_05">
+<Description language="ENGLISH">"Pata"</Description>
+<Skill>"RULES-COMPCOMB_BAGAR"</Skill>
+<Damage>"+(BATTR_S)+4"</Damage>
+<Availability>"DISPO_EXOTIC"</Availability>
+<Reach>"WEAPR_MID"</Reach>
+<Price>"3 GC"</Price>
+<Encumbrance>"1"</Encumbrance>
+<Quality>"WEAPB08"</Quality>
+<Hand>"1"</Hand>
+<Ammunition>"0"</Ammunition>
+</Weapon>
+<Weapon id="NATIO-COMB_BAGAR_06">
+<Description language="ENGLISH">"Cestus"</Description>
+<Skill>"RULES-COMPCOMB_BAGAR"</Skill>
+<Damage>"+(BATTR_S)+2"</Damage>
+<Availability>"DISPO_COMMON"</Availability>
+<Reach>"WEAPR_PERSO"</Reach>
+<Price>"8/10"</Price>
+<Encumbrance>"0"</Encumbrance>
+<Quality>"WEAPB04"</Quality>
+<Hand>"1"</Hand>
+<Ammunition>"0"</Ammunition>
+</Weapon>
+<Weapon id="NATIO-COMB_BAGAR_07">
+<Description language="ENGLISH">"Push Dagger"</Description>
+<Skill>"RULES-COMPCOMB_BAGAR"</Skill>
+<Damage>"+(BATTR_S)+1"</Damage>
+<Availability>"DISPO_COMMON"</Availability>
+<Reach>"WEAPR_PERSO"</Reach>
+<Price>"12/-"</Price>
+<Encumbrance>"0"</Encumbrance>
+<Quality>"WEAPB38"</Quality>
+<Hand>"1"</Hand>
+<Ammunition>"0"</Ammunition>
+</Weapon>
+<Weapon id="NATIO-COMB_FLEAU_01">
+<Description language="ENGLISH">"Morningstar Flail"</Description>
+<Skill>"RULES-COMPCOMB_FLEAU"</Skill>
+<Damage>"+(BATTR_S)+5"</Damage>
+<Availability>"DISPO_RARE"</Availability>
+<Reach>"WEAPR_MID"</Reach>
+<Price>"3 GC"</Price>
+<Encumbrance>"2"</Encumbrance>
+<Quality>"WEAPB39,WEAPB09,WEAPB01"</Quality>
+<Hand>"1"</Hand>
+<Ammunition>"0"</Ammunition>
+</Weapon>
+  <!-- Le livre imprime "Very Lorng" p.58 : coquille evidente, lue Very Long. -->
+<Weapon id="NATIO-COMB_FLEAU_02">
+<Description language="ENGLISH">"Chain and Sickle"</Description>
+<Skill>"RULES-COMPCOMB_FLEAU"</Skill>
+<Damage>"+(BATTR_S)+4"</Damage>
+<Availability>"DISPO_EXOTIC"</Availability>
+<Reach>"WEAPR_BIG"</Reach>
+<Price>"2 GC 10/-"</Price>
+<Encumbrance>"1"</Encumbrance>
+<Quality>"WEAPB09,WEAPB17,WEAPB01"</Quality>
+<Hand>"1"</Hand>
+<Ammunition>"0"</Ammunition>
+</Weapon>
+<Weapon id="NATIO-COMB_FLEAU_03">
+<Description language="ENGLISH">"Urumi Sword Whip"</Description>
+<Skill>"RULES-COMPCOMB_FLEAU"</Skill>
+<Damage>"+(BATTR_S)+5"</Damage>
+<Availability>"DISPO_EXOTIC"</Availability>
+<Reach>"WEAPR_LONG"</Reach>
+<Price>"3 GC"</Price>
+<Encumbrance>"2"</Encumbrance>
+<Quality>"WEAPB20,WEAPB09,WEAPB01"</Quality>
+<Hand>"1"</Hand>
+<Ammunition>"0"</Ammunition>
+</Weapon>
+<Weapon id="NATIO-COMB_FLEAU_04">
+<Description language="ENGLISH">"Hydra Flail"</Description>
+<Skill>"RULES-COMPCOMB_FLEAU"</Skill>
+<Damage>"+(BATTR_S)+6"</Damage>
+<Availability>"DISPO_RARE"</Availability>
+<Reach>"WEAPR_LONG"</Reach>
+<Price>"4 GC"</Price>
+<Encumbrance>"3"</Encumbrance>
+<Quality>"WEAPB10,WEAPB09,WEAPB04,WEAPB28,WEAPB01"</Quality>
+<Hand>"2"</Hand>
+<Ammunition>"0"</Ammunition>
+</Weapon>
+<Weapon id="NATIO-COMB_HAST_01">
+<Description language="ENGLISH">"Poleaxe"</Description>
+<Skill>"RULES-COMPCOMB_HAST"</Skill>
+<Damage>"+(BATTR_S)+5"</Damage>
+<Availability>"DISPO_LIMITED"</Availability>
+<Reach>"WEAPR_LONG"</Reach>
+<Price>"4 GC"</Price>
+<Encumbrance>"3"</Encumbrance>
+<Quality>"WEAPB08,WEAPB30,WEAPB21,WEAPB25"</Quality>
+<Hand>"2"</Hand>
+<Ammunition>"0"</Ammunition>
+</Weapon>
+<Weapon id="NATIO-COMB_HAST_02">
+<Description language="ENGLISH">"War Scythe"</Description>
+<Skill>"RULES-COMPCOMB_HAST"</Skill>
+<Damage>"+(BATTR_S)+5"</Damage>
+<Availability>"DISPO_RARE"</Availability>
+<Reach>"WEAPR_BIG"</Reach>
+<Price>"2 GC"</Price>
+<Encumbrance>"2"</Encumbrance>
+<Quality>"WEAPB10"</Quality>
+<Hand>"2"</Hand>
+<Ammunition>"0"</Ammunition>
+</Weapon>
+<Weapon id="NATIO-COMB_HAST_03">
+<Description language="ENGLISH">"Lucerne"</Description>
+<Skill>"RULES-COMPCOMB_HAST"</Skill>
+<Damage>"+(BATTR_S)+4"</Damage>
+<Availability>"DISPO_RARE"</Availability>
+<Reach>"WEAPR_BIG"</Reach>
+<Price>"6 GC"</Price>
+<Encumbrance>"3"</Encumbrance>
+<Quality>"WEAPB39,WEAPB12,WEAPB04"</Quality>
+<Hand>"2"</Hand>
+<Ammunition>"0"</Ammunition>
+</Weapon>
+<Weapon id="NATIO-COMB_HAST_04">
+<Description language="ENGLISH">"Becs de Corbin"</Description>
+<Skill>"RULES-COMPCOMB_HAST"</Skill>
+<Damage>"+(BATTR_S)+4"</Damage>
+<Availability>"DISPO_RARE"</Availability>
+<Reach>"WEAPR_BIG"</Reach>
+<Price>"6 GC"</Price>
+<Encumbrance>"3"</Encumbrance>
+<Quality>"WEAPB12,WEAPB22"</Quality>
+<Hand>"2"</Hand>
+<Ammunition>"0"</Ammunition>
+</Weapon>
+<Weapon id="NATIO-COMB_HAST_05">
+<Description language="ENGLISH">"Maul"</Description>
+<Skill>"RULES-COMPCOMB_HAST"</Skill>
+<Damage>"+(BATTR_S)+4"</Damage>
+<Availability>"DISPO_COMMON"</Availability>
+<Reach>"WEAPR_LONG"</Reach>
+<Price>"12/-"</Price>
+<Encumbrance>"2"</Encumbrance>
+<Quality>"WEAPB04"</Quality>
+<Hand>"2"</Hand>
+<Ammunition>"0"</Ammunition>
+</Weapon>
+  <!-- Le livre imprime "Bill". Up in Arms en porte un autre (portee Longue, Defensive et
+       Hack/Trip, Limite). Prefixe tire de la qualite qui les separe. CHOIX DE SAISIE. -->
+<Weapon id="NATIO-COMB_HAST_06">
+<Description language="ENGLISH">"Hooked Bill"</Description>
+<Skill>"RULES-COMPCOMB_HAST"</Skill>
+<Damage>"+(BATTR_S)+4"</Damage>
+<Availability>"DISPO_COMMON"</Availability>
+<Reach>"WEAPR_BIG"</Reach>
+<Price>"1 GC 8/-"</Price>
+<Encumbrance>"3"</Encumbrance>
+<Quality>"WEAPB40"</Quality>
+<Hand>"2"</Hand>
+<Ammunition>"0"</Ammunition>
+</Weapon>
+<Weapon id="NATIO-COMB_HAST_07">
+<Description language="ENGLISH">"Glaive"</Description>
+<Skill>"RULES-COMPCOMB_HAST"</Skill>
+<Damage>"+(BATTR_S)+5"</Damage>
+<Availability>"DISPO_LIMITED"</Availability>
+<Reach>"WEAPR_BIG"</Reach>
+<Price>"4 GC"</Price>
+<Encumbrance>"3"</Encumbrance>
+<Quality>"WEAPB30,WEAPB40"</Quality>
+<Hand>"2"</Hand>
+<Ammunition>"0"</Ammunition>
+</Weapon>
+<Weapon id="NATIO-COMB_HAST_08">
+<Description language="ENGLISH">"Corseque"</Description>
+<Skill>"RULES-COMPCOMB_HAST"</Skill>
+<Damage>"+(BATTR_S)+4"</Damage>
+<Availability>"DISPO_RARE"</Availability>
+<Reach>"WEAPR_BIG"</Reach>
+<Price>"3 GC"</Price>
+<Encumbrance>"2"</Encumbrance>
+<Quality>"WEAPB08,WEAPB12,WEAPB11"</Quality>
+<Hand>"2"</Hand>
+<Ammunition>"0"</Ammunition>
+</Weapon>
+<Weapon id="NATIO-COMB_HAST_09">
+<Description language="ENGLISH">"Naginata"</Description>
+<Skill>"RULES-COMPCOMB_HAST"</Skill>
+<Damage>"+(BATTR_S)+5"</Damage>
+<Availability>"DISPO_EXOTIC"</Availability>
+<Reach>"WEAPR_LONG"</Reach>
+<Price>"4 GC"</Price>
+<Encumbrance>"3"</Encumbrance>
+<Quality>"WEAPB10,WEAPB08"</Quality>
+<Hand>"2"</Hand>
+<Ammunition>"0"</Ammunition>
+</Weapon>
+<Weapon id="NATIO-COMB_HAST_10">
+<Description language="ENGLISH">"Dragon Staff"</Description>
+<Skill>"RULES-COMPCOMB_HAST"</Skill>
+<Damage>"+(BATTR_S)+4"</Damage>
+<Availability>"DISPO_EXOTIC"</Availability>
+<Reach>"WEAPR_LONG"</Reach>
+<Price>"100 GC"</Price>
+<Encumbrance>"2"</Encumbrance>
+<Quality>"WEAPB08,WEAPB21,WEAPB04"</Quality>
+<Hand>"2"</Hand>
+<Ammunition>"0"</Ammunition>
+</Weapon>
+<Weapon id="NATIO-COMB_2M_01">
+<Description language="ENGLISH">"Estoc"</Description>
+<Skill>"RULES-COMPCOMB_2M"</Skill>
+<Damage>"+(BATTR_S)+5"</Damage>
+<Availability>"DISPO_LIMITED"</Availability>
+<Reach>"WEAPR_LONG"</Reach>
+<Price>"8 GC"</Price>
+<Encumbrance>"3"</Encumbrance>
+<Quality>"WEAPB10,WEAPB12"</Quality>
+<Hand>"2"</Hand>
+<Ammunition>"0"</Ammunition>
+</Weapon>
+<Weapon id="NATIO-COMB_2M_02">
+<Description language="ENGLISH">"Maximilian"</Description>
+<Skill>"RULES-COMPCOMB_2M"</Skill>
+<Damage>"+(BATTR_S)+5"</Damage>
+<Availability>"DISPO_RARE"</Availability>
+<Reach>"WEAPR_LONG"</Reach>
+<Price>"15 GC"</Price>
+<Encumbrance>"3"</Encumbrance>
+<Quality>"WEAPB08,WEAPB30,WEAPB22"</Quality>
+<Hand>"2"</Hand>
+<Ammunition>"0"</Ammunition>
+</Weapon>
+<Weapon id="NATIO-COMB_2M_03">
+<Description language="ENGLISH">"Carroburg Greatsword"</Description>
+<Skill>"RULES-COMPCOMB_2M"</Skill>
+<Damage>"+(BATTR_S)+6"</Damage>
+<Availability>"DISPO_EXOTIC"</Availability>
+<Reach>"WEAPR_LONG"</Reach>
+<Price>"20 GC"</Price>
+<Encumbrance>"3"</Encumbrance>
+<Quality>"WEAPB10,WEAPB08,WEAPB30"</Quality>
+<Hand>"2"</Hand>
+<Ammunition>"0"</Ammunition>
+</Weapon>
+<Weapon id="NATIO-COMB_2M_04">
+<Description language="ENGLISH">"Boarding Axe"</Description>
+<Skill>"RULES-COMPCOMB_2M"</Skill>
+<Damage>"+(BATTR_S)+5"</Damage>
+<Availability>"DISPO_COMMON"</Availability>
+<Reach>"WEAPR_LONG"</Reach>
+<Price>"2 GC"</Price>
+<Encumbrance>"2"</Encumbrance>
+<Quality>"WEAPB30,WEAPB14"</Quality>
+<Hand>"2"</Hand>
+<Ammunition>"0"</Ammunition>
+</Weapon>
+<Weapon id="NATIO-COMB_2M_05">
+<Description language="ENGLISH">"Norseman's Axe"</Description>
+<Skill>"RULES-COMPCOMB_2M"</Skill>
+<Damage>"+(BATTR_S)+6"</Damage>
+<Availability>"DISPO_RARE"</Availability>
+<Reach>"WEAPR_LONG"</Reach>
+<Price>"4 GC"</Price>
+<Encumbrance>"3"</Encumbrance>
+<Quality>"WEAPB30,WEAPB21,WEAPB28"</Quality>
+<Hand>"2"</Hand>
+<Ammunition>"0"</Ammunition>
+</Weapon>
+  <!-- Le livre imprime "(2H) Morningstar", homonyme de son propre Morningstar a une main
+       (categorie Basic). Suffixe ajoute pour que WinWeapon n'affiche pas deux lignes de meme
+       nom - regle de nommage 2.29. -->
+<Weapon id="NATIO-COMB_2M_06">
+<Description language="ENGLISH">"Morningstar (Two-Handed)"</Description>
+<Skill>"RULES-COMPCOMB_2M"</Skill>
+<Damage>"+(BATTR_S)+6"</Damage>
+<Availability>"DISPO_LIMITED"</Availability>
+<Reach>"WEAPR_MID"</Reach>
+<Price>"4 GC"</Price>
+<Encumbrance>"3"</Encumbrance>
+<Quality>"WEAPB39,WEAPB04,WEAPB28"</Quality>
+<Hand>"2"</Hand>
+<Ammunition>"0"</Ammunition>
+</Weapon>
+  <!-- Meme cas que le Morningstar ci-dessus : homonyme du Flanged Mace a une main du livre. -->
+<Weapon id="NATIO-COMB_2M_07">
+<Description language="ENGLISH">"Flanged Mace (Two-Handed)"</Description>
+<Skill>"RULES-COMPCOMB_2M"</Skill>
+<Damage>"+(BATTR_S)+6"</Damage>
+<Availability>"DISPO_LIMITED"</Availability>
+<Reach>"WEAPR_MID"</Reach>
+<Price>"7 GC"</Price>
+<Encumbrance>"3"</Encumbrance>
+<Quality>"WEAPB21,WEAPB04,WEAPB25"</Quality>
+<Hand>"2"</Hand>
+<Ammunition>"0"</Ammunition>
+</Weapon>
+  <!-- Le livre lui donne aussi la qualite Fine. Fine est une qualite de FABRICATION
+       (RULES-QUALITY_03), que la fenetre Fabrication pose sur l'objet que possede un
+       personnage, jamais sur une entree de catalogue - meme regle qu'au DATA_ARMOR du
+       High Elf Player's Guide (CONTEXT.md 2.29). Non saisie ici, a ajouter par le joueur. -->
+<Weapon id="NATIO-COMB_2M_08">
+<Description language="ENGLISH">"Jade Longsword"</Description>
+<Skill>"RULES-COMPCOMB_2M"</Skill>
+<Damage>"+(BATTR_S)+6"</Damage>
+<Availability>"DISPO_EXOTIC"</Availability>
+<Reach>"WEAPR_LONG"</Reach>
+<Price>"300 GC"</Price>
+<Encumbrance>"2"</Encumbrance>
+<Quality>"WEAPB10,WEAPB20,WEAPB22,WEAPB19"</Quality>
+<Hand>"2"</Hand>
+<Ammunition>"0"</Ammunition>
+</Weapon>
+<Weapon id="NATIO-COMB_2M_09">
+<Description language="ENGLISH">"Nodachi"</Description>
+<Skill>"RULES-COMPCOMB_2M"</Skill>
+<Damage>"+(BATTR_S)+5"</Damage>
+<Availability>"DISPO_EXOTIC"</Availability>
+<Reach>"WEAPR_LONG"</Reach>
+<Price>"15 GC"</Price>
+<Encumbrance>"3"</Encumbrance>
+<Quality>"WEAPB10,WEAPB20,WEAPB14"</Quality>
+<Hand>"2"</Hand>
+<Ammunition>"0"</Ammunition>
+</Weapon>
+<Weapon id="NATIO-COMB_2M_10">
+<Description language="ENGLISH">"Nagamaki"</Description>
+<Skill>"RULES-COMPCOMB_2M"</Skill>
+<Damage>"+(BATTR_S)+5"</Damage>
+<Availability>"DISPO_EXOTIC"</Availability>
+<Reach>"WEAPR_LONG"</Reach>
+<Price>"15 GC"</Price>
+<Encumbrance>"3"</Encumbrance>
+<Quality>"WEAPB20,WEAPB30,WEAPB14"</Quality>
+<Hand>"2"</Hand>
+<Ammunition>"0"</Ammunition>
+</Weapon>
+  <!-- Armes a distance et munitions, page 59. 17 armes en six categories et 6 munitions.
+       Les accessoires d arme de la page 60 (Barrel Extension, Bayonet, Telescopic Sight) ne
+       sont PAS saisis : il n existe aucune table d accessoires dans le modele, comme il n en
+       existe pas pour les herbes et les objets enchantes du High Elf Player s Guide
+       (CONTEXT.md 2.29). Note dans A FAIRE.txt. -->
+  <!-- Les quatre armes de la section Blackpowder recoivent Blackpowder et Damaging, que le
+       livre n'imprime pas dans le tableau mais que la qualite Suppressed suppose
+       explicitement ("it loses the Blackpowder and Damaging Qualities", p.59). C'est aussi
+       ce que fait le Rulebook pour son Pistolet et sa Hochland Long Rifle. DEDUCTION. -->
+<Weapon id="NATIO-PROJ_POUDRE_01">
+<Description language="ENGLISH">"Duck Foot"</Description>
+<Skill>"RULES-COMPPROJ_POUDRE"</Skill>
+<Damage>"+8"</Damage>
+<Availability>"DISPO_RARE"</Availability>
+<Reach>"10"</Reach>
+<Price>"14 GC"</Price>
+<Encumbrance>"1"</Encumbrance>
+<Quality>"WEAPB15 3,WEAPB13,WEAPB23 3,WEAPB02,WEAPB10"</Quality>
+<Hand>"1"</Hand>
+<Ammunition>"0"</Ammunition>
+</Weapon>
+<Weapon id="NATIO-PROJ_POUDRE_02">
+<Description language="ENGLISH">"Dueling Pistol"</Description>
+<Skill>"RULES-COMPPROJ_POUDRE"</Skill>
+<Damage>"+8"</Damage>
+<Availability>"DISPO_RARE"</Availability>
+<Reach>"30"</Reach>
+<Price>"20 GC"</Price>
+<Encumbrance>"0"</Encumbrance>
+<Quality>"WEAPB16,WEAPB13,WEAPB23 1,WEAPB02,WEAPB10"</Quality>
+<Hand>"1"</Hand>
+<Ammunition>"0"</Ammunition>
+</Weapon>
+<Weapon id="NATIO-PROJ_POUDRE_03">
+<Description language="ENGLISH">"Double-Barrel Pistol"</Description>
+<Skill>"RULES-COMPPROJ_POUDRE"</Skill>
+<Damage>"+8"</Damage>
+<Availability>"DISPO_RARE"</Availability>
+<Reach>"20"</Reach>
+<Price>"12 GC"</Price>
+<Encumbrance>"1"</Encumbrance>
+<Quality>"WEAPB24,WEAPB41,WEAPB13,WEAPB23 2,WEAPB03 2,WEAPB02,WEAPB10"</Quality>
+<Hand>"1"</Hand>
+<Ammunition>"0"</Ammunition>
+</Weapon>
+<Weapon id="NATIO-PROJ_POUDRE_04">
+<Description language="ENGLISH">"Hand Cannon"</Description>
+<Skill>"RULES-COMPPROJ_POUDRE"</Skill>
+<Damage>"+9"</Damage>
+<Availability>"DISPO_RARE"</Availability>
+<Reach>"10"</Reach>
+<Price>"20 GC"</Price>
+<Encumbrance>"1"</Encumbrance>
+<Quality>"WEAPB24,WEAPB21,WEAPB13,WEAPB23 3,WEAPB02,WEAPB10"</Quality>
+<Hand>"1"</Hand>
+<Ammunition>"0"</Ammunition>
+</Weapon>
+<Weapon id="NATIO-PROJ_ARC_01">
+<Description language="ENGLISH">"Recurve Bow"</Description>
+<Skill>"RULES-COMPPROJ_ARC"</Skill>
+<Damage>"+(BATTR_S)+3"</Damage>
+<Availability>"DISPO_LIMITED"</Availability>
+<Reach>"40"</Reach>
+<Price>"4 GC"</Price>
+<Encumbrance>"2"</Encumbrance>
+<Quality>"WEAPB14"</Quality>
+<Hand>"2"</Hand>
+<Ammunition>"0"</Ammunition>
+</Weapon>
+<Weapon id="NATIO-PROJ_ARC_02">
+<Description language="ENGLISH">"Death Jack Bow"</Description>
+<Skill>"RULES-COMPPROJ_ARC"</Skill>
+<Damage>"+(BATTR_S)+4"</Damage>
+<Availability>"DISPO_EXOTIC"</Availability>
+<Reach>"100"</Reach>
+<Price>"15 GC"</Price>
+<Encumbrance>"2"</Encumbrance>
+<Quality>"WEAPB16,WEAPB10,WEAPB14"</Quality>
+<Hand>"2"</Hand>
+<Ammunition>"0"</Ammunition>
+</Weapon>
+<Weapon id="NATIO-PROJ_ARB_01">
+<Description language="ENGLISH">"Repeater Crossbow"</Description>
+<Skill>"RULES-COMPPROJ_ARB"</Skill>
+<Damage>"+9"</Damage>
+<Availability>"DISPO_RARE"</Availability>
+<Reach>"50"</Reach>
+<Price>"10 GC"</Price>
+<Encumbrance>"3"</Encumbrance>
+<Quality>"WEAPB23 3,WEAPB03 3"</Quality>
+<Hand>"2"</Hand>
+<Ammunition>"0"</Ammunition>
+</Weapon>
+  <!-- Les armes de la section Engineering sont saisies TELLES QUE LE LIVRE LES IMPRIME, sans
+       ajout de Blackpowder ni Damaging : le fusil a air comprime n'est pas une arme a poudre,
+       et c'est justement ce que Suppressed retire. -->
+<Weapon id="NATIO-PROJ_ING_01">
+<Description language="ENGLISH">"Air Rifle"</Description>
+<Skill>"RULES-COMPPROJ_ING"</Skill>
+<Damage>"+8"</Damage>
+<Availability>"DISPO_EXOTIC"</Availability>
+<Reach>"50"</Reach>
+<Price>"100 GC"</Price>
+<Encumbrance>"3"</Encumbrance>
+<Quality>"WEAPB23 3,WEAPB42"</Quality>
+<Hand>"2"</Hand>
+<Ammunition>"0"</Ammunition>
+</Weapon>
+  <!-- Le livre laisse la case degats vide (deux tirets) : l'arme ne blesse pas, c'est la munition qui le fait
+       (Grenade Round, +10). Saisi "+0", comme les munitions sans degat propre du Rulebook. -->
+<Weapon id="NATIO-PROJ_ING_02">
+<Description language="ENGLISH">"Grenade Launcher"</Description>
+<Skill>"RULES-COMPPROJ_ING"</Skill>
+<Damage>"+0"</Damage>
+<Availability>"DISPO_EXOTIC"</Availability>
+<Reach>"30"</Reach>
+<Price>"100 GC"</Price>
+<Encumbrance>"3"</Encumbrance>
+<Quality>"WEAPB24,WEAPB23 3"</Quality>
+<Hand>"2"</Hand>
+<Ammunition>"0"</Ammunition>
+</Weapon>
+<Weapon id="NATIO-PROJ_ING_03">
+<Description language="ENGLISH">"Revolver"</Description>
+<Skill>"RULES-COMPPROJ_ING"</Skill>
+<Damage>"+8"</Damage>
+<Availability>"DISPO_EXOTIC"</Availability>
+<Reach>"20"</Reach>
+<Price>"25 GC"</Price>
+<Encumbrance>"1"</Encumbrance>
+<Quality>"WEAPB24,WEAPB13,WEAPB23 6,WEAPB03 6"</Quality>
+<Hand>"1"</Hand>
+<Ammunition>"0"</Ammunition>
+</Weapon>
+<Weapon id="NATIO-PROJ_ING_04">
+<Description language="ENGLISH">"Triple-Barrel Repeater Pistol"</Description>
+<Skill>"RULES-COMPPROJ_ING"</Skill>
+<Damage>"+7"</Damage>
+<Availability>"DISPO_EXOTIC"</Availability>
+<Reach>"10"</Reach>
+<Price>"20 GC"</Price>
+<Encumbrance>"1"</Encumbrance>
+<Quality>"WEAPB24,WEAPB41,WEAPB13,WEAPB23 3,WEAPB03 3"</Quality>
+<Hand>"1"</Hand>
+<Ammunition>"0"</Ammunition>
+</Weapon>
+  <!-- Incendiary est resolu en WEAPB29, dont l'explication du Rulebook EST celle de la qualite
+       Incendiary ("An Incendiary gives every affected target 1+SL Ablaze Conditions") bien que
+       son libelle soit Ablaze. Aucune qualite nouvelle n'a donc ete creee pour elle. -->
+<Weapon id="NATIO-PROJ_EXPLO_01">
+<Description language="ENGLISH">"Cinderbomb"</Description>
+<Skill>"RULES-COMPPROJ_EXPLO"</Skill>
+<Damage>"+15"</Damage>
+<Availability>"DISPO_EXOTIC"</Availability>
+<Reach>"(BATTR_S)"</Reach>
+<Price>"6 GC"</Price>
+<Encumbrance>"0"</Encumbrance>
+<Quality>"WEAPB15 5,WEAPB24,WEAPB21,WEAPB29"</Quality>
+<Hand>"1"</Hand>
+<Ammunition>"0"</Ammunition>
+</Weapon>
+  <!-- Degats "Special" dans le livre : chacun des quatre effets de Ninjutsu remplace le degat.
+       Saisi "+0", le detail est dans l'explication de la qualite. -->
+<Weapon id="NATIO-PROJ_EXPLO_02">
+<Description language="ENGLISH">"Torinoko Grenades"</Description>
+<Skill>"RULES-COMPPROJ_EXPLO"</Skill>
+<Damage>"+0"</Damage>
+<Availability>"DISPO_EXOTIC"</Availability>
+<Reach>"(BATTR_S)X2"</Reach>
+<Price>"4 GC"</Price>
+<Encumbrance>"0"</Encumbrance>
+<Quality>"WEAPB15 5,WEAPB24,WEAPB43"</Quality>
+<Hand>"1"</Hand>
+<Ammunition>"0"</Ammunition>
+</Weapon>
+<Weapon id="NATIO-PROJ_LANC_01">
+<Description language="ENGLISH">"Chakram"</Description>
+<Skill>"RULES-COMPPROJ_LANC"</Skill>
+<Damage>"+(BATTR_S)+3"</Damage>
+<Availability>"DISPO_EXOTIC"</Availability>
+<Reach>"(BATTR_S)X3"</Reach>
+<Price>"2 GC"</Price>
+<Encumbrance>"1"</Encumbrance>
+<Quality>"WEAPB30"</Quality>
+<Hand>"1"</Hand>
+<Ammunition>"0"</Ammunition>
+</Weapon>
+<Weapon id="NATIO-PROJ_LANC_02">
+<Description language="ENGLISH">"Throwing Hammer"</Description>
+<Skill>"RULES-COMPPROJ_LANC"</Skill>
+<Damage>"+(BATTR_S)+3"</Damage>
+<Availability>"DISPO_COMMON"</Availability>
+<Reach>"(BATTR_S)X2"</Reach>
+<Price>"1 GC"</Price>
+<Encumbrance>"1"</Encumbrance>
+<Quality>"WEAPB04"</Quality>
+<Hand>"1"</Hand>
+<Ammunition>"0"</Ammunition>
+</Weapon>
+<Weapon id="NATIO-PROJ_LANC_03">
+<Description language="ENGLISH">"Shuriken"</Description>
+<Skill>"RULES-COMPPROJ_LANC"</Skill>
+<Damage>"+(BATTR_S)+1"</Damage>
+<Availability>"DISPO_EXOTIC"</Availability>
+<Reach>"(BATTR_S)X4"</Reach>
+<Price>"5/-"</Price>
+<Encumbrance>"0"</Encumbrance>
+<Quality>"WEAPB27"</Quality>
+<Hand>"1"</Hand>
+<Ammunition>"0"</Ammunition>
+</Weapon>
+<Weapon id="NATIO-PROJ_LANC_04">
+<Description language="ENGLISH">"Kunai"</Description>
+<Skill>"RULES-COMPPROJ_LANC"</Skill>
+<Damage>"+(BATTR_S)+2"</Damage>
+<Availability>"DISPO_EXOTIC"</Availability>
+<Reach>"(BATTR_S)X3"</Reach>
+<Price>"1 GC"</Price>
+<Encumbrance>"0"</Encumbrance>
+<Quality>"WEAPB12"</Quality>
+<Hand>"1"</Hand>
+<Ammunition>"0"</Ammunition>
+</Weapon>
+  <!-- Munitions, page 59. Portee "As Weapon" = "+0", comme la Fleche du Rulebook. Le livre ne
+       dit pas par combien elles se vendent : quantite 12 reprise du Rulebook pour les fleches.
+       DEDUCTION. Pellets et Revolver Shot, eux, portent leur quantite dans leur nom. -->
+<Weapon id="NATIO-MUNI_01">
+<Description language="ENGLISH">"Arrow (Armor Piercing)"</Description>
+<Skill>"RULES-COMPPROJ_ARC"</Skill>
+<Damage>"+0"</Damage>
+<Availability>"DISPO_LIMITED"</Availability>
+<Reach>"+0"</Reach>
+<Price>"2/-"</Price>
+<Encumbrance>"0"</Encumbrance>
+<Quality>"WEAPB12,WEAPB22"</Quality>
+<Hand>"0"</Hand>
+<Ammunition>"12"</Ammunition>
+</Weapon>
+<Weapon id="NATIO-MUNI_02">
+<Description language="ENGLISH">"Arrow (Incendiary)"</Description>
+<Skill>"RULES-COMPPROJ_ARC"</Skill>
+<Damage>"+0"</Damage>
+<Availability>"DISPO_LIMITED"</Availability>
+<Reach>"+0"</Reach>
+<Price>"2/-"</Price>
+<Encumbrance>"0"</Encumbrance>
+<Quality>"WEAPB29"</Quality>
+<Hand>"0"</Hand>
+<Ammunition>"12"</Ammunition>
+</Weapon>
+  <!-- Sans qualite : "When fired, air passes through the head, creating a screeching noise that
+       can be used to signal allies or distract enemies or game" - un effet de fiction, sans
+       regle chiffree. Champ Quality a "-", comme l'Arc du Rulebook. -->
+<Weapon id="NATIO-MUNI_03">
+<Description language="ENGLISH">"Arrow (Screamer)"</Description>
+<Skill>"RULES-COMPPROJ_ARC"</Skill>
+<Damage>"+0"</Damage>
+<Availability>"DISPO_LIMITED"</Availability>
+<Reach>"+0"</Reach>
+<Price>"2/-"</Price>
+<Encumbrance>"0"</Encumbrance>
+<Quality>"-"</Quality>
+<Hand>"0"</Hand>
+<Ammunition>"12"</Ammunition>
+</Weapon>
+<Weapon id="NATIO-MUNI_04">
+<Description language="ENGLISH">"Grenade Round"</Description>
+<Skill>"RULES-COMPPROJ_ING"</Skill>
+<Damage>"+10"</Damage>
+<Availability>"DISPO_EXOTIC"</Availability>
+<Reach>"+0"</Reach>
+<Price>"3 GC"</Price>
+<Encumbrance>"0"</Encumbrance>
+<Quality>"WEAPB15 3,WEAPB21"</Quality>
+<Hand>"0"</Hand>
+<Ammunition>"1"</Ammunition>
+</Weapon>
+<Weapon id="NATIO-MUNI_05">
+<Description language="ENGLISH">"Pellets (12)"</Description>
+<Skill>"RULES-COMPPROJ_POUDRE"</Skill>
+<Damage>"+0"</Damage>
+<Availability>"DISPO_COMMON"</Availability>
+<Reach>"+0"</Reach>
+<Price>"1/-"</Price>
+<Encumbrance>"0"</Encumbrance>
+<Quality>"WEAPB12"</Quality>
+<Hand>"0"</Hand>
+<Ammunition>"12"</Ammunition>
+</Weapon>
+<Weapon id="NATIO-MUNI_06">
+<Description language="ENGLISH">"Revolver Shot (6)"</Description>
+<Skill>"RULES-COMPPROJ_ING"</Skill>
+<Damage>"+2"</Damage>
+<Availability>"DISPO_EXOTIC"</Availability>
+<Reach>"+0"</Reach>
+<Price>"10/-"</Price>
+<Encumbrance>"0"</Encumbrance>
+<Quality>"WEAPB12,WEAPB22"</Quality>
+<Hand>"0"</Hand>
+<Ammunition>"6"</Ammunition>
+</Weapon>
+</DATA_WEAPON>
+<DATA_WEAPON_BONUS>
+  <!-- Trois qualites nouvelles, page 58-59. La numerotation CONTINUE celle de la base
+       (dernier pris : UPINA-WEAPB37) au lieu de repartir a 1 comme le veut la regle des
+       livres, parce que les references de qualite d'arme sont ecrites SANS prefixe partout
+       dans le corpus : un "WEAPB01" nu serait resolu en RULES-WEAPB01 (Wrap). Anomalie
+       connue et notee dans A FAIRE.txt, section CONCEPTIONS A MENER, le 04/09/2026. -->
+<BonusMalus id="NATIO-WEAPB38">
+<Description language="ENGLISH">"Concealed"</Description>
+<Explanation language="ENGLISH">"Concealed weapons are designed not to be seen, often strapped around various areas of the wielder's body under their clothing to avoid detection.
+If you are wielding such a weapon, no one can easily detect it on your person with their passive perception and would have to conduct a thorough investigation in order to discover it.
+If used on a surprised target, the weapon temporarily gains the Damaging and Impact Qualities."</Explanation>
+<Short language="ENGLISH">"undetectable; vs surprised target adds Damaging and Impact"</Short>
+<Modifier>"+"</Modifier>
+</BonusMalus>
+<BonusMalus id="NATIO-WEAPB39">
+<Description language="ENGLISH">"Crushing"</Description>
+<Explanation language="ENGLISH">"Crushing weapons are designed with spikes or patterns to smash up, crush and tear into the armor of the wielder's enemies.
+If you successfully attack and deal a Critical Hit on an opponent, you Damage a struck piece of armor or shield by 2 points as well as wounding the target.
+Furthermore, you ignore the Impenetrable Armor Quality for all Critical Hits."</Explanation>
+<Short language="ENGLISH">"Critical damages armour by 2 and ignores Impenetrable"</Short>
+<Modifier>"+"</Modifier>
+</BonusMalus>
+<BonusMalus id="NATIO-WEAPB40">
+<Description language="ENGLISH">"Hooked"</Description>
+<Explanation language="ENGLISH">"Hooked weapons are strategically designed with small hooks on their ends to pull down infantry or rip cavalry off their mounts.
+If you are wielding such a weapon, after a successful Melee Attack, instead of dealing Damage, you may attempt to pull down your enemy.
+If you choose to do this, enact an Opposed Strength Test. If you succeed, you force the opponent to go prone.
+If the opponent is mounted, they are forced off their mount but aren't prone."</Explanation>
+<Short language="ENGLISH">"instead of Damage, Opposed Strength Test to knock prone or unmount"</Short>
+<Modifier>"+"</Modifier>
+</BonusMalus>
+<BonusMalus id="NATIO-WEAPB41">
+<Description language="ENGLISH">"Multi-shot"</Description>
+<Explanation language="ENGLISH">"This weapon is designed to fire multiple missiles at once in a single action, assuming the weapon is fully loaded and capable of holding more than one missile at a time based on the Repeater Quality's value.
+If firing multiple projectiles, all missiles fired share the same BS Test result with the Damage increased per additional missile; however, if scoring a Critical Hit you only deal one Critical Wound.
+If you Fumble, you must roll for two results on the Fumble Table and pick the higher result."</Explanation>
+<Short language="ENGLISH">"fires all loaded missiles at once, one BS Test, damage per missile"</Short>
+<Modifier>"+"</Modifier>
+</BonusMalus>
+<BonusMalus id="NATIO-WEAPB42">
+<Description language="ENGLISH">"Suppressed"</Description>
+<Explanation language="ENGLISH">"This weapon is designed to drastically reduce the noise made from firing it.
+This weapon can be fired without immediately alerting enemies; however, it loses the Blackpowder and Damaging Qualities."</Explanation>
+<Short language="ENGLISH">"silent; loses Blackpowder and Damaging"</Short>
+<Modifier>"+"</Modifier>
+</BonusMalus>
+<BonusMalus id="NATIO-WEAPB43">
+<Description language="ENGLISH">"Ninjutsu"</Description>
+<Explanation language="ENGLISH">"This bomb is a product created from years of martial arts mastery and experimentation.
+A bomb with this Quality may have one of the effects selected below. Whichever effect is selected replaces the Ninjutsu Quality for the number of bombs crafted or purchased and cannot be replaced:
+Distraction: Made up of firecrackers and noise makers, these grenades are used to lure and distract enemies. Any targets within 50 yards of this bomb are immediately alerted to its presence and will investigate.
+Smoke: Used to blind and surprise unaware foes, anyone caught in the radius of this grenade is Surprised and gains 1+SL Blind Conditions.
+Stun: Used to incapacitate foes, anyone caught in the radius of this grenade must roll a Challenging (+0) Endurance Test or gain 1+SL Stun conditions.
+Poison: Used to weaken and kill targets, anyone caught in the radius of this grenade must roll a Challenging (+0) Endurance Test or gain 1+SL Poison conditions."</Explanation>
+<Short language="ENGLISH">"choose one effect at purchase : Distraction, Smoke, Stun or Poison"</Short>
+<Modifier>"+"</Modifier>
+</BonusMalus>
+</DATA_WEAPON_BONUS>
+<DATA_CRAFTMANSHIP>
+  <!-- Les trois accessoires d arme de la page 60, poses ici et non dans DATA_WEAPON : un
+       accessoire se monte sur l ARME D UN PERSONNAGE, pas sur une entree de catalogue - on
+       achete une baionnette et on la fixe sur son mousquet. C est exactement ce que porte
+       QualiteEquipement, que le bouton +Qualite de WinPersonnage remplit (winpersonnage.pas
+       l.758 et l.4774). Decision Nono, 04/09/2026 ; evite une quatrieme table.
+       Ici la numerotation REPART a 01 comme le veut la regle des livres, et c est sans risque :
+       CodeFabrication porte l identifiant COMPLET avec son prefixe (xmlexportimport.pas l.2436),
+       contrairement aux qualites d arme et d armure, dont les references sont nues.
+       ATTENTION : le champ Modifier d une fabrication n est branche sur AUCUN calcul - aucun
+       code QUALITY_ n est reference dans le corpus et FabricationDetail n a pas d appelant. Ces
+       trois accessoires sont donc DESCRIPTIFS : ils s affichent sur la fiche, ils ne modifient
+       ni la portee ni les qualites de l arme. Item ouvert dans A FAIRE.txt.
+       Le livre leur donne un prix (3 GC, 12/-, 7 GC) que la table ne sait pas porter : il est
+       recopie dans l explication. -->
+<Craftsmanship id="NATIO-QUALITY_01">
+<Description language="ENGLISH">"Barrel Extension"</Description>
+<Explanation language="ENGLISH">"A weapon attachment, fitted to any gun. Adds +20 to the weapon's Range.
+Price 3 GC, Encumbrance 0, Availability Rare."</Explanation>
+<Short language="ENGLISH">"any gun : +20 Range"</Short>
+<Encumbrance>"0"</Encumbrance>
+<Max>"1"</Max>
+<Modifier>""</Modifier>
+</Craftsmanship>
+<Craftsmanship id="NATIO-QUALITY_02">
+<Description language="ENGLISH">"Bayonet"</Description>
+<Explanation language="ENGLISH">"A weapon attachment, fitted to rifles. May function the same as a Spear with a Long Reach and the Impale Quality, requiring the Melee (Polearm) Skill.
+Price 12/-, Encumbrance 0, Availability Common."</Explanation>
+<Short language="ENGLISH">"rifles : also a Spear, Long reach, Impale, Melee (Polearm)"</Short>
+<Encumbrance>"0"</Encumbrance>
+<Max>"1"</Max>
+<Modifier>""</Modifier>
+</Craftsmanship>
+<Craftsmanship id="NATIO-QUALITY_03">
+<Description language="ENGLISH">"Telescopic Sight"</Description>
+<Explanation language="ENGLISH">"A weapon attachment, fitted to guns and crossbows. The weapon gains the Accurate and Precise Qualities.
+Price 7 GC, Encumbrance 0, Availability Rare."</Explanation>
+<Short language="ENGLISH">"guns and crossbows : adds Accurate and Precise"</Short>
+<Encumbrance>"0"</Encumbrance>
+<Max>"1"</Max>
+<Modifier>""</Modifier>
+</Craftsmanship>
+</DATA_CRAFTMANSHIP>
 </DATA_BOOK>
