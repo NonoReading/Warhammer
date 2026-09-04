@@ -14,6 +14,21 @@ d obstacle de modele - c est de la saisie. Deux rappels : refaire la resolution 
 depuis des fichiers RESTAGES le jour ou on ecrit, et Kislev (Gospodar) REUTILISE
 NATIO-TRAIT_KISLEV au lieu de le redeclarer.
 
+LE MODELE NE PORTE PAS LES PSYCHOLOGIES. Constate le 04/09/2026 sur Prejudice (Bretonnians)
+et Prejudice (Tileans) de Nations of Mankind : le livre les nomme des Psychologies, distinctes
+de Hatred, et rien en base ne sait les representer. Non saisis, decision Nono : prejuge
+culturel, informatif, sans effet de fiche. A rouvrir le jour ou d autres psychologies
+arriveront - il y en aura.
+
+DOUBLON DANS LE RULEBOOK : STRIDER (MOUNTAINS) EST DECLARE DEUX FOIS. RULES-T0013_MOUNTAIN,
+utilise par Archives of the Empire II, et RULES-T0013_MOUNTAINS, utilise par Salzenmund. Trouve
+le 04/09/2026 par le controle de collision. Meme famille que le doublon Arcane Magic
+(Celestial)/(Heavens) du 03/09. Choisir lequel survit et corriger les deux appelants.
+
+RELIRE LES ONZE EXPLANATION DES ETHNIES DE NATIONS OF MANKIND. Elles sont REDIGEES et non
+tirees du livre, dont les pages 3-4 ne portent que des listes de competences et de talents.
+Signalees comme choix de saisie dans chaque bloc.
+
 BRANCHER L EXPORT D UN LIVRE DEPUIS WINLIVRE. XmlExportBook existe, est complete, et n est
 APPELEE NULLE PART - constate le 04/09/2026. Il lui manque un point d appel (bouton, choix
 du livre et de la langue). Bloque pour l instant : WinLivre n affiche pas encore toutes les

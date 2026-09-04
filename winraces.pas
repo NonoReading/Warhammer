@@ -396,6 +396,7 @@ var
     PCompetence:        StructureCompetence;
     PRaceCompetence:    StructureRaceCompetence;
     NodeData:           TMyNodeData;
+    IndTab:             Integer;
   Begin
     NodeBranche            := TreeViewRace.Items.AddChild(Node, ConstArbreCompetence);
     NodeBranche.ImageIndex := 0;
@@ -405,14 +406,43 @@ var
     for PRaceCompetence in ListRaceCompetence do
       if PRaceCompetence.CodeRace = RaceEnCours then
         Begin
-          PCompetence             := ChercheCompetence(PRaceCompetence.CodeCompetence);
-          NodeSFeuille := TreeViewRace.Items.AddChild(NodeBranche, PCompetence.Libelle);
-          NodeSFeuille.ImageIndex := 0;
-          if Pos('_', PCompetence.CodeCompetence) > 0 then
-             PCompetence          := ChercheCompetence(Copy(PRaceCompetence.CodeCompetence, 1, Pos('_', PCompetence.CodeCompetence) - 1)+'_*');
-          NodeData                := TMyNodeData.Create;
-          NodeData.AdditionalData := PCompetence.CodeCompetence;
-          NodeSFeuille.Data       := NodeData;
+          // CHOIX MULTIPLE "A ou B" (Ride (Camel or Horse), Language (Norse or
+          // Wastelander)...). Sans ce cas, ChercheCompetence ne rend rien sur un code
+          // porteur d'un '/' et l'arbre affichait une PUCE VIDE - signale par Nono le
+          // 04/09/2026 sur les ethnies de Nations of Mankind. Le defaut est ANTERIEUR :
+          // le Skink de Lustria porte deja un tel code. On reprend ici la forme deja
+          // employee par les talents (ChargeRaceTalent) : une sous-branche "Au choix"
+          // avec une feuille par competence.
+          if pos(SeparateurMulti, PRaceCompetence.CodeCompetence) > 0 then
+            begin
+              strings                 := TStringList.Create;
+              NodeSBranche            := TreeViewRace.Items.AddChild(NodeBranche, ConstArbreAuChoix);
+              NodeSBranche.ImageIndex := 0;
+              ExtractStrings([SeparateurMulti], [], PChar(PRaceCompetence.CodeCompetence), strings);
+              For IndTab := 0 to strings.Count-1 do
+                Begin
+                  PCompetence              := ChercheCompetence(strings[IndTab]);
+                  NodeSFeuille             := TreeViewRace.Items.AddChild(NodeSBranche, PCompetence.Libelle);
+                  NodeSFeuille.ImageIndex  := 0;
+                  if Pos('_', PCompetence.CodeCompetence) > 0 then
+                     PCompetence           := ChercheCompetence(Copy(strings[IndTab], 1, Pos('_', PCompetence.CodeCompetence) - 1)+'_*');
+                  NodeData                 := TMyNodeData.Create;
+                  NodeData.AdditionalData  := PCompetence.CodeCompetence;
+                  NodeSFeuille.Data        := NodeData;
+                end;
+              strings.Free;
+            end
+          else
+            begin
+              PCompetence             := ChercheCompetence(PRaceCompetence.CodeCompetence);
+              NodeSFeuille := TreeViewRace.Items.AddChild(NodeBranche, PCompetence.Libelle);
+              NodeSFeuille.ImageIndex := 0;
+              if Pos('_', PCompetence.CodeCompetence) > 0 then
+                 PCompetence          := ChercheCompetence(Copy(PRaceCompetence.CodeCompetence, 1, Pos('_', PCompetence.CodeCompetence) - 1)+'_*');
+              NodeData                := TMyNodeData.Create;
+              NodeData.AdditionalData := PCompetence.CodeCompetence;
+              NodeSFeuille.Data       := NodeData;
+            end;
         end;
 end;
 
@@ -787,15 +817,30 @@ Begin
                 AffLivre.Text      := getTexteLibelle(PAttribut.Livre,'','',true);
                 AffDescription.Text:= PAttribut.Description;
               end
-            else if Node.Parent.Text = ConstArbreCompetence then
+            // Une competence "A ou B" vit sous une sous-branche "Au choix" : son parent
+            // n'est plus ConstArbreCompetence mais ConstArbreAuChoix, qui route vers les
+            // TALENTS plus bas. On teste donc aussi le grand-parent, et AVANT le cas
+            // talent. Meme piege que le 03/09/2026 : un aiguillage sur Node.Parent.Text
+            // ne survit pas a l'ajout d'un niveau dans l'arbre.
+            else if (Node.Parent.Text = ConstArbreCompetence)
+                 or ((Node.Parent.Text = ConstArbreAuChoix)
+                 and (Node.Parent.Parent <> nil)
+                 and (Node.Parent.Parent.Text = ConstArbreCompetence)) then
               Begin
-                NodeData           := TMyNodeData(Node.Data);
-                PCompetence        := ChercheCompetence(NodeData.AdditionalData);
-                AffCode.Text       := PCompetence.CodeCompetence;
-                AffLibelle.Text    := PCompetence.Libelle;
-                AffLivre.Text      := getTexteLibelle(PCompetence.Livre,'','',true);
-                AffAttribut.Text   := GetAllTexteLibelle(PCompetence.CodeAttribut);
-                AffDescription.Text:= PCompetence.Description;
+                // La sous-branche "Au choix" est elle-meme un noeud, SANS Data, et son
+                // parent est bien ConstArbreCompetence : sans ce garde, cliquer la
+                // pastille de choix dereférence nil. Meme garde que la branche talent
+                // ci-dessous. Signale par Nono le 04/09/2026 (access violation l.831).
+                if Node.Text <> ConstArbreAuChoix then
+                begin
+                  NodeData           := TMyNodeData(Node.Data);
+                  PCompetence        := ChercheCompetence(NodeData.AdditionalData);
+                  AffCode.Text       := PCompetence.CodeCompetence;
+                  AffLibelle.Text    := PCompetence.Libelle;
+                  AffLivre.Text      := getTexteLibelle(PCompetence.Livre,'','',true);
+                  AffAttribut.Text   := GetAllTexteLibelle(PCompetence.CodeAttribut);
+                  AffDescription.Text:= PCompetence.Description;
+                end
               end
             else if Node.Parent.Text = ConstArbreTalent then
               Begin

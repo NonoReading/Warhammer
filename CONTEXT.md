@@ -1,10 +1,9 @@
 # Warhammer — Contexte projet
 
-**Dernière mise à jour : 03/09/2026 (Kislev (Ungol) écrite et validée au §2.37 ; les
-« Trait (Any) » modélisés et fonctionnels au §2.41, de la donnée jusqu'à WinRaces ; lot 3 de
-*Nations of Mankind*
-découpé en 3a/3b/3c/3d au §2.37, conception de 3a arrêtée, aucun code ni aucune donnée
-écrits ; piège RACE/ETHNIE relevé au §0).** Ce fichier remplace tous les anciens
+**Dernière mise à jour : 04/09/2026 (lot 3a de *Nations of Mankind* TERMINÉ au §2.37 : les
+onze ethnies humaines sont écrites, Westerland comprise ; les deux bugs laissés ouverts le
+03/09 sont corrigés — qualités d'armes d'Archives I, et export du bloc `DATA_RACE` au §2.42 ;
+les compétences « A ou B » n'apparaissaient pas dans WinRaces, corrigé au §2.43).** Ce fichier remplace tous les anciens
 `CONTEXT*.md` / `INDEX*.md` / `RESUME*.md` / `SESSION*.md`. Il n'y en a plus
 qu'un : celui-ci. On ne le duplique jamais, on l'édite en place.
 
@@ -3641,14 +3640,53 @@ aujourd'hui. Tranché le 03/09/2026 : laissés en commentaire dans le
 fichier pour Kislev (Ungol), et une table `DATA_SPECIE_TRAIT` est conçue pour les porter —
 voir §2.41, qui est à appliquer avant d'écrire les neuf autres ethnies.
 
-**Point de reprise exact, au 03/09/2026 au soir** : Kislev (Ungol) est **écrite et validée**
-(`NATIO-RACE_HUNG`, une seule spécialisation créée, `RULES-T0129_FROID` = *Resistance (Cold)*),
-et son `Provincial Trait` est **modélisé et fonctionnel** (§2.41). Restent les **neuf autres
-ethnies** : Albion, Araby, Bretonnia (Peasantry), Bretonnia (Nobility), Cathay, Estalia, Ind,
-Kislev (Gospodar), Nippon. C'est de la saisie pure — plus aucun obstacle de modèle.
-Deux points de méthode pour cette saisie : refaire la résolution des libellés depuis des
-fichiers **restagés** le jour où on écrit, et se rappeler que Kislev (Gospodar) **réutilise**
-`NATIO-TRAIT_KISLEV` au lieu de le redéclarer — c'est la raison d'être de la table à part.
+**3a est TERMINÉ (04/09/2026).** Les **onze** ethnies humaines sont écrites et chargées :
+Kislev (Ungol) `NATIO-RACE_HUNG`, plus Albion `HALBI`, Araby `HARAB`, Bretonnia (Peasantry)
+`HBRPA`, Bretonnia (Nobility) `HBRNO`, Cathay `HCATH`, Estalia `HESTA`, Ind `HIND`,
+Kislev (Gospodar) `HGOSP`, Nippon `HNIPP`, Westerland (Marienburg) `HWEST`. Toutes sur
+`RULES-SPECIE_HUMAN`, caractéristiques et table de tirage recopiées du Reiklander. Contrôles :
+199 références résolues sur 199, aucune collision d'identifiant, diff sans aucun retrait.
+
+**Westerland était une omission de périmètre, pas un oubli du livre.** La conception du 03/09
+listait dix ethnies en partant des commentaires d'espèce des 30 carrières ; les pages 3-4 en
+décrivent **treize** — les dix, plus Norsca et Tilea (écartées à raison), plus Westerland
+(Marienburg), qui n'avait été ni créée ni écartée. Ajoutée le 04/09 sur décision de Nono. La
+leçon : le périmètre tiré des **références** d'un livre n'est pas celui de ses **pages**.
+Si un livre officiel donne un jour l'ethnie de Marienburg, la règle « l'officiel gagne »
+s'appliquera comme pour Norsca et Tilea.
+
+**Six tables `SpecieTrait` de plus** : `NATIO-TRAIT_ARABY` (City State, 9 options),
+`_DUCHE` (Dukedom, 14 — citée par les DEUX Bretonnia), `_CATHAY` (Provincial, 7),
+`_ESTALIA` (Region, 12), `_IND` (Kingdom, 7), `_NIPPON` (Clan, 4). Attention : `_CATHAY` et
+`_KISLEV` portent le **même libellé** « Provincial Trait » et sont deux listes différentes.
+
+**Dix-sept créations**, aucune collision : `Lore (Agriculture / Albion / City State / Dukedom /
+Kingdom / Nippon / Province / Region / Westerland)`, `Language (Cathayan / Indan / Nipponese /
+Ungol)`, `Trade (Farming)`, `Resistance (Heat)` = `RULES-T0129_CHALEUR`,
+`Craftsman (Miner)` = `RULES-T0092_MINNER` (la famille `Craftsman` n'avait pas de Miner alors
+que `Trade (Miner)` existait — créée pour aligner les deux familles),
+`Hatred (Daemons)` = `RULES-T0069_DEMON`.
+
+**Coquilles du livre tranchées le 04/09**, chacune commentée à l'endroit où elle est faite :
+Language (Arabic)→(Arabyan), Trade (Mining)→Trade (Miner), Strider (Marshes)→(Swamps),
+Craftsman (Ferrier)→(Farrier), Craftsman (Engineering)→(Engineer), Craftsman (Trade)→(Any),
+Seasoned Traveler→Traveller, Field-Dressing→Field Dressing, Deal Maker→Dealmaker.
+
+**`Prejudice (Bretonnians)` n'est PAS saisi (décision Nono, 04/09/2026).** Le livre le nomme
+lui-même une **Psychologie** (p.4, Almogavar : « the Prejudice (Tileans) Psychology ») et cite
+ailleurs « Prejudice **or** Hatred » : ce sont deux choses distinctes, et le rabattre sur
+`Hatred` durcirait la règle. C'est un préjugé culturel, informatif, sans effet sur la fiche.
+L'option Antoch se réduit donc à *Marksman or Warrior Born*. Le modèle ne porte pas les
+psychologies — item ouvert dans `A FAIRE.txt`, et il y en aura d'autres que Prejudice.
+
+**Les onze `Explanation` sont rédigées, pas tirées du livre**, et signalées comme choix de
+saisie dans chaque bloc : les pages 3-4 ne portent que des listes de compétences et de talents.
+À relire par Nono.
+
+**Point de reprise : 3b, les 7 domaines de magie** (p.48-57). Deux points de méthode qui valent
+pour toute la suite : refaire la résolution des libellés depuis des fichiers **restagés** le
+jour où on écrit, et réextraire la section magie au `pdftotext -layout -x 306 -W 306`, l'export
+de `PDF_TEXTE` y étant inexploitable.
 
 **Ce que ce livre a appris, et qui resservira sur les gros livres :**
 
@@ -4004,8 +4042,61 @@ marcher pour une option (son parent est le libellé du trait).
 Au passage : `RULES-T*` **a** un libellé, « Random Talent », défini dans le Rulebook. Le
 `LAB_xxx` un moment envisagé pour lui n'a pas lieu d'être.
 
-**Ce qui reste** : les neuf autres ethnies du lot 3a (§2.37), qui sont de la saisie pure —
-le modèle sait désormais tout porter.
+**Suite donnée le 04/09/2026** : les dix ethnies restantes ont été écrites (§2.37), et six
+tables `SpecieTrait` de plus sont venues s'ajouter à `NATIO-TRAIT_KISLEV`. La table à part a
+tenu ses deux promesses : Gospodar **cite** la table de Kislev sans la redéclarer, et les deux
+Bretonnia partagent celle des duchés.
+
+---
+
+### 2.42 `DATA_RACE` était lu et jamais exporté — corrigé (04/09/2026)
+
+Bug relevé le 03/09 en écrivant l'export de `DATA_SPECIE_TRAIT`, corrigé le 04/09.
+`ListEspece` n'apparaissait nulle part dans l'écriture de `xmlexportimport.pas` : exporter un
+livre lui aurait fait perdre son bloc de races. Même piège que le §2.39, mais antérieur à ce
+chantier-là. Corrigé par une déclaration `PEspece: StructureEspece;` dans `XmlExportBook` et un
+bloc d'export inséré **avant** `DATA_SPECIE`, dans le même ordre qu'à la lecture ; il écrit
+`<Race id>` avec `Description` et, seulement s'il est renseigné, `PictureLevel`.
+
+**Ce que la correction a mis au jour, et qui compte plus que le bug** : `XmlExportBook`
+**n'est appelée nulle part**. Tout le chemin d'export est du code mort aujourd'hui, ce qui
+explique qu'un bloc manquant ait pu passer inaperçu si longtemps. La correction est donc en
+place et **non testable** : le seul contrôle possible est la compilation.
+
+**Pourquoi l'export n'est pas branché tout de suite (décision Nono, 04/09/2026)** : WinLivre
+n'affiche pas encore toutes les données d'un livre, et un export écraserait ce que l'écran ne
+sait pas montrer. Le préalable est donc de compléter l'affichage/édition de WinLivre — pas
+d'ajouter un bouton. Et **avant** de brancher l'export : croiser la liste des `ConstXmlData*`
+lus avec ceux écrits, pour attraper d'un coup tous les blocs dans le cas de `DATA_RACE`
+(item dans `A FAIRE.txt`).
+
+---
+
+### 2.43 Les compétences « A ou B » n'apparaissaient pas dans WinRaces — corrigé (04/09/2026)
+
+Signalé par Nono, capture à l'appui, en vérifiant les nouvelles ethnies : Araby affichait
+**deux puces vides** dans sa liste de compétences, aux places exactes de
+`Language (Indan or Wastelander)` et `Ride (Camel or Horse)`.
+
+**Ce n'était pas la donnée.** `ChargeRaceCompetence` (`winraces.pas`) appelait
+`ChercheCompetence` sur le code entier `A/B`, qui ne résout rien, d'où un libellé vide. Le côté
+**talents** gérait ce cas depuis longtemps — sous-branche « Au choix », une feuille par
+talent — mais le côté **compétences** ne l'avait jamais fait. Le défaut est **antérieur** aux
+ethnies : le Skink de Lustria porte déjà un code de ce genre, et devait afficher la même puce
+vide sans que personne ne le remarque. Corrigé en reprenant telle quelle la forme des talents.
+
+**Puis un access violation, en cliquant la pastille « Au choix » elle-même.** La sous-branche
+est un nœud **sans `Data`**, et son parent est bien `ConstArbreCompetence` : elle entrait donc
+dans le nouveau bloc et déréférençait `nil`. La branche talent avait déjà son garde
+`if Node.Text <> ConstArbreAuChoix` ; il n'avait pas été repris. **La leçon : quand on recopie
+une forme qui marche, recopier aussi ses gardes** — c'est le garde, pas la forme, qui porte le
+cas limite déjà rencontré.
+
+**Et le routage du clic.** La feuille se retrouvant sous « Au choix », son parent n'est plus
+`ConstArbreCompetence` et elle serait tombée dans la branche **talents** (`ChercheTalent` sur
+un code de compétence). Le test regarde donc aussi le grand-parent, et passe avant le cas
+talent. Troisième occurrence du même piège en deux jours : **un aiguillage sur
+`Node.Parent.Text` ne survit pas à l'ajout d'un niveau dans l'arbre** (§2.41).
 
 ---
 
