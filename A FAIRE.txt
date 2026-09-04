@@ -6,19 +6,17 @@
 CORRECTIONS COURTES  (une ligne ou deux chacune)
 =========================================================================
 
-ECRIRE LES NEUF ETHNIES RESTANTES DU LOT 3a DE NATIONS OF MANKIND. Albion, Araby, Bretonnia
-(Peasantry), Bretonnia (Nobility), Cathay, Estalia, Ind, Kislev (Gospodar), Nippon. Pages 3-4
-du livre. Kislev (Ungol) est ecrite et validee, et sert de modele ; les Trait (Any) sont
-modelises et fonctionnels depuis le 03/09/2026 (CONTEXT.md 2.41), il n y a donc plus
-d obstacle de modele - c est de la saisie. Deux rappels : refaire la resolution des libelles
-depuis des fichiers RESTAGES le jour ou on ecrit, et Kislev (Gospodar) REUTILISE
-NATIO-TRAIT_KISLEV au lieu de le redeclarer.
-
 LE MODELE NE PORTE PAS LES PSYCHOLOGIES. Constate le 04/09/2026 sur Prejudice (Bretonnians)
 et Prejudice (Tileans) de Nations of Mankind : le livre les nomme des Psychologies, distinctes
 de Hatred, et rien en base ne sait les representer. Non saisis, decision Nono : prejuge
 culturel, informatif, sans effet de fiche. A rouvrir le jour ou d autres psychologies
 arriveront - il y en aura.
+
+TROIS SORTS DE WINDS OF MAGIC SONT PEUT-ETRE MAL CLASSES EN GENERIQUES. Fly-Infested Rotweed,
+Lifebloom Silt et Belligerence of the Bloodmarsh portent <Talent>"RULES-T0088_*" et
+apparaissent donc chez n importe quel lanceur - vu le 04/09/2026 sur une Ice Witch de Nations
+of Mankind. Leurs noms evoquent le Bloodmarsh, qui est un domaine et pas du generique.
+Verifier la ligne "Type:" de ces trois sorts dans le livre.
 
 DOUBLON DANS LE RULEBOOK : STRIDER (MOUNTAINS) EST DECLARE DEUX FOIS. RULES-T0013_MOUNTAIN,
 utilise par Archives of the Empire II, et RULES-T0013_MOUNTAINS, utilise par Salzenmund. Trouve
@@ -815,6 +813,21 @@ ARBITRAGES OUVERTS
    d'avance) : c'est le systeme des HENCHMEN du Rulebook p.309, que la base ne modelise nulle
    part - zero occurrence sur les dix-sept fichiers. La saisir demanderait d'introduire tout ce
    systeme.
+
+6. LE COUT D APPRENTISSAGE DES 17 RITUELS EST UNE DONNEE DU LIVRE, PAS UNE FORMULE.
+   Constate le 04/09/2026 avec Nono. Winds of Magic imprime "Learning XP:" en tete de chaque
+   rituel, et les valeurs sont toutes differentes : Imbue Staff 100, Remove Curse 200,
+   Cursecraft 200 (100 pour Witchcraft/Daemonology/Necromancy/Chaos), Create Familiar 250,
+   Create Waystone Property 300, Bind Monstrous Beast 400, Create Power Stone 400,
+   Create Construct 400, Invocate Daemon 400, Materialise the Living Swamp 400,
+   The Crossed Scythes 400, Carve Ogham Stone 450, Corrupt Waystone 450, les trois
+   Conjuration 500 chacune, Bind Spirit Within Power Stone 600.
+   Or CONTEXT.md 2.32 point 3 les tarife aujourd hui AU TARIF ARCANIQUE, parce qu ils citent
+   RULES-T0088_* : le prix est faux, et en plus ils POLLUENT le compteur du groupe arcanique,
+   donc ils rencherissent les vrais sorts du personnage. Le modele ne porte pas de cout fixe
+   par sort - le tarif est porte par le TALENT depuis le 02/09. Conception a mener avant toute
+   saisie ; deux points a trancher : ou vit la valeur, et comment le sort sort du comptage.
+   Le tarif reduit conditionnel de Cursecraft n est pas modelisable en l etat.
 
 5. CUMUL D'UNE REGLE PARTIELLE AVEC LA TABLE DE BASE. Le Seafarer est la seule regle partielle
    aujourd'hui, et une seule regle s'applique a la fois, donc rien ne bloque. Le mecanisme

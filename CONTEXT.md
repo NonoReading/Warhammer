@@ -1,7 +1,8 @@
 # Warhammer — Contexte projet
 
-**Dernière mise à jour : 04/09/2026 (lot 3a de *Nations of Mankind* TERMINÉ au §2.37 : les
-onze ethnies humaines sont écrites, Westerland comprise ; les deux bugs laissés ouverts le
+**Dernière mise à jour : 04/09/2026 (lots 3a ET 3b de *Nations of Mankind* TERMINÉS au §2.37 :
+les onze ethnies humaines sont écrites, Westerland comprise, et les 72 sorts des six domaines
+de magie sont saisis et testés ; il ne reste que 3c et 3d. Les deux bugs laissés ouverts le
 03/09 sont corrigés — qualités d'armes d'Archives I, et export du bloc `DATA_RACE` au §2.42 ;
 les compétences « A ou B » n'apparaissaient pas dans WinRaces, corrigé au §2.43).** Ce fichier remplace tous les anciens
 `CONTEXT*.md` / `INDEX*.md` / `RESUME*.md` / `SESSION*.md`. Il n'y en a plus
@@ -3550,7 +3551,7 @@ le 30/08. Un marqueur compté n'est toujours pas un marqueur lu.
 
 ---
 
-### 2.37 Nations of Mankind — lots 1 et 2 terminés (03/09/2026), lot 3 à faire
+### 2.37 Nations of Mankind — lots 1, 2, 3a et 3b terminés (04/09/2026) ; restent 3c et 3d
 
 Fichier unique `DATABASE\BOOK_NATIONS_OF_MANKIND.Xml`, 277 Ko, `CODE_BOOK` = `NATIO`,
 `OFFICIAL=2`, `COMPLETE=0`. Aucun fichier existant modifié, donc aucune compilation.
@@ -3564,13 +3565,41 @@ Artist, 5 Marques des dieux, plus Fearless/Hatred/Bless/Invoke/Savant).
 **Fait — lot 2, les carrières** : les 30, avec leurs 120 niveaux, tableaux d'avance,
 compétences, talents et équipements. **1077 références résolues sur 1077.**
 
+**Fait — lot 3b, les domaines de magie (04/09/2026).** Les **72 sorts** des pages 48-57, saisie
+pure, aucun fichier de code touché : Dazh 8, Tor 7, Ursun 8, Ormazd 6, les Devas 8, l'Orange
+Simca 8, **Lore of Ice 18**, **Lore of the Desert 9**. Le compte du XML correspond domaine par
+domaine à celui du PDF. Les huit talents cités par les sorts (`RULES-T0080_*` pour les six
+dieux, `RULES-T0088_ICE` et `_DESERT`) sont **tous déclarés dans le fichier** en
+spécialisations — aucune référence pendante. `TypSpell` : `Miracle` pour les quatre divine
+lores (aucun miracle du livre ne porte de CN, d'où un `Level` vide), `Arcane Magic` pour Ice
+et Desert, qui portent le leur.
+
+Et le bloc `DATA_SPELL_TALENT` du §2.39 **a trouvé son premier client** : 16 bénédictions
+`RULES-BENED_*` du Rulebook rattachées aux sept talents `Bless (…)`, sans toucher au fichier
+du Rulebook. **Testé par Nono le 04/09** : le prêtre de Dazh reçoit ses bénédictions, et
+`Invoke (Dazh)` lui ouvre ses miracles. Le chantier du 03/09 est donc validé sur un livre
+*autre* que celui qui déclare les sorts — ce pour quoi il avait été fait.
+
+⚠️ **Deux constats de ce test, qui ne concernent pas ce livre.** *(a)* Les `Ritual` qui
+apparaissent dans la liste d'un lanceur de Nations sont **normaux** : ce sont les six rituels
+de *Winds of Magic* marqués `RULES-T0088_*`, le joker « n'importe quel domaine arcane » ; les
+onze rituels à domaine précis sont bien filtrés. Même mécanisme pour les sorts arcanes communs
+du Rulebook. **Vérifier le champ `<Talent>` avant de conclure à un débordement de filtre.**
+*(b)* En revanche leur **coût est faux** : le livre imprime un `Learning XP:` propre à chaque
+rituel (100 à 600), là où le §2.32 point 3 les tarife au tarif arcanique — et surtout les fait
+**compter dans le groupe arcanique**, donc renchérir les vrais sorts du personnage. Le modèle
+ne porte pas de coût fixe par sort. Conception à mener : **arbitrage 6 d'`A FAIRE.txt`**, où
+les 17 valeurs sont relevées.
+
 **Reste — lot 3**, découpé le 03/09/2026 :
 
-- **3a — l'éligibilité par espèce.** Les espèces des 30 carrières sont aujourd'hui en
+- **3a — l'éligibilité par espèce. ✅ TERMINÉ le 04/09/2026.** Conception d'origine, conservée
+  parce qu'elle explique le blocage qu'il a fallu lever : les espèces des 30 carrières étaient en
   commentaire (`<!-- espece : ... -->`) dans le fichier. Voir plus bas « le blocage de 3a » :
   ce n'est pas un simple rattachement, neuf des ethnies citées n'existent pas en base.
-- **3b — les 7 domaines de magie** (Divine Lore of Kislev / Araby / Ind / Nippon, Lore of
-  Ice, Lore of the Desert), p.48-57. Le gros morceau.
+- **3b — les domaines de magie** (Divine Lore of Kislev / Araby / Ind / Nippon, Lore of Ice,
+  Lore of the Desert), p.48-57. **✅ TERMINÉ le 04/09/2026**, voir ci-dessus. Six domaines et
+  non sept : le compte de sept venait de compter Kislev deux fois.
 - **3c — armes, armures et qualités** (p.58-61, ajouté au périmètre le 03/09/2026 : la
   section manquait à cette liste). Une trentaine d'armes — Katana, Dao, Scimitar, Urumi,
   Poleaxe, Becs de Corbin, Katar, Pata… — et **au moins une qualité nouvelle, `Hooked`**.
@@ -3581,9 +3610,11 @@ compétences, talents et équipements. **1077 références résolues sur 1077.**
   mais des bonus conditionnels (« Recruit: you gain Lore (Reikland) ») ; rien dans le modèle
   ne porte ça aujourd'hui. Conception à mener avant toute saisie.
 
-Point de reprise : le PDF est dans `LIVRES\Nations of Mankind.pdf`, les domaines de magie
-commencent page 48 ; réextraire avec `pdftotext -layout -x 306 -W 306` (colonne de droite)
-comme pour les carrières. Vérifié le 03/09/2026 : l'export de `PDF_TEXTE` **n'est pas
+Point de reprise pour **3c**, la section suivante : le PDF est dans
+`LIVRES\Nations of Mankind.pdf`, les armes commencent page 58. La découpe en colonnes qui a
+servi à 3b : `pdftotext -layout -f <p> -l <p> -x 0 -y 0 -W 306 -H 792` pour la colonne de
+gauche et `-x 306 -y 0 -W 306 -H 792` pour celle de droite — **les quatre bornes sont
+nécessaires**, `-x`/`-W` seuls sortent un fichier vide sur ce PDF. Vérifié le 03/09/2026 : l'export de `PDF_TEXTE` **n'est pas
 exploitable pour la section magie** — les deux colonnes s'entremêlent en milieu de ligne
 (`Range: Fellowship Bonus Yards    Lore of Ice`), et un comptage des sorts y donne
 n'importe quoi.
