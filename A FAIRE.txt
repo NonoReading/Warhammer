@@ -6,6 +6,38 @@
 CORRECTIONS COURTES  (une ligne ou deux chacune)
 =========================================================================
 
+L EQUIPEMENT DE CARRIERE EST REDONNE EN DOUBLE ET SANS LIBELLE QUAND ON REVIENT DANS UNE
+CARRIERE DEJA EXERCEE. Constate le 04/09/2026 sur un Soldier passe Advisor puis revenu
+Soldier : la dague, la cuirasse et l uniforme apparaissent une seconde fois, et les deux
+premiers s affichent avec leur CODE brut (RULES-COMB_BASE_10, RULES-ARMO_05) en Description
+et "Various" en Kind. Une seule cause, la boucle "Equipement" du changement de carriere,
+winpersonnage.pas vers l.4675 : elle n ecrit que Cells[2] (le code) et Cells[3] (le type),
+jamais la colonne du LIBELLE. ARBITRE PAR NONO LE 04/09/2026 : revenir dans une carriere DOIT
+pouvoir redonner l equipement de depart - le doublon n est donc pas a interdire, c est
+l affichage sans libelle qui est le bug. Anterieur au chantier des appartenances.
+
+LES GREFFES D APPARTENANCE NE SONT PAS BRANCHEES DANS WINCREATION. Le 04/09/2026, l appel a
+GreffesDesAppartenances a ete pose dans WinPersonnage.XmlChargePersonnage uniquement.
+WinCreation batit ses propres listes de competences et de talents : un personnage cree avec
+une appartenance n en verra rien tant qu il n est pas recharge. Voir CONTEXT.md 2.44.
+
+L ECRAN DE CHOIX DE L APPARTENANCE A SA PLACE DANS WINCREATION AUTANT QUE DANS WINPERSONNAGE.
+C est a la creation que l ethnie et le metier sont choisis, or ce sont les deux conditions de
+DATA_CAREER_BONUS. A concevoir avec l ecran de saisie, pas apres.
+
+LES ELEMENTS A CHOIX A/B DES APPARTENANCES SONT ENCORE IGNORES, ALORS QUE RIEN NE L IMPOSE.
+PersonnageAppliqueGreffes (chargepersonnage.pas) saute les codes portant SeparateurMulti par
+prudence. Or Nono a verifie le 04/09/2026 que le tableau des competences sait deja resoudre
+un choix - Play (Drum or Fife) se choisit dans la grille et le niveau suit. Il suffit donc de
+retirer les deux tests "if Pos(SeparateurMulti, Code) > 0 then continue;" pour que le palier 3
+d Averland apparaisse. A VERIFIER AVANT : le tableau des TALENTS sait-il faire la meme chose ?
+Le palier 3 d Averland est une competence, mais d autres regiments auront des talents a choix.
+
+TABCOMPETENCE.CELLS[COLCOMPCARAC, LIG] AU LIEU DE IND DANS WINPERSONNAGE. Bloc "competence
+liee a un talent" de XmlChargePersonnage : toutes les autres colonnes de la ligne creee
+utilisent Ind, celle-ci utilise Lig - la caracteristique est ecrite sur une autre ligne.
+Repere le 04/09/2026, non corrige, a confirmer comme coquille avant de toucher.
+
 L ECART MIDDENHEIM / NATIONS SUR MIDDENLAND ET NORDLAND N EST PAS ARBITRE. Les deux
 provinces existent en officiel sous leurs gentilés - MIDDE-RACE_HMIDL "Humans
 (Middenlander)" et MIDDE-RACE_HNORD "Humans (Nordlander)" - et Nations of Mankind en donne

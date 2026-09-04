@@ -1,6 +1,7 @@
 # Warhammer — Contexte projet
 
-**Dernière mise à jour : 04/09/2026 (lots 3a, 3b, 3c ET 3d-1 de *Nations of Mankind* TERMINÉS
+**Dernière mise à jour : 04/09/2026 — après-midi : la LECTURE des appartenances est branchée
+et éprouvée de bout en bout (§2.44), les greffes atterrissent dans la fiche. (Matin : lots 3a, 3b, 3c ET 3d-1 de *Nations of Mankind* TERMINÉS
 au §2.37 : les onze ethnies humaines, les 72 sorts des six domaines de magie, l'armurerie —
 44 armes de mêlée, 17 à distance, 6 munitions, 28 armures, 3 accessoires — et les sept
 provinces de l'Empire. **Il ne reste que 3d-2 (régiments) et 3d-3 (ordres de chevalerie)**,
@@ -4370,13 +4371,77 @@ dans `BOOK_NATIONS_OF_MANKIND.Xml`, `Career` = `RULES-WORK57` (Soldier du Rulebo
 `RULES-T0136_DWARFS` « Etiquette (Dwarfs) », absente de tout `DATABASE\` (collision
 vérifiée avant écriture). **Le livre charge sans erreur.**
 
-**Point de reprise : brancher la LECTURE, et rien n'est encore écrit de ce côté.** Il manque
-une fonction qui, pour un personnage donné, rend les compétences et talents greffés par ses
-appartenances jusqu'au niveau atteint, et son branchement là où WinPersonnage bâtit ses
-listes de compétences et de talents. C'est le premier point du chantier qui touche à
-l'affichage. Tant qu'il n'est pas fait, le greffon est chargé mais invisible — ce qui est le
-comportement attendu, pas une anomalie. Ensuite seulement, la saisie mécanique des treize
-régiments restants.
+---
+
+**LA LECTURE EST BRANCHÉE ET ÉPROUVÉE (04/09/2026, après-midi).**
+
+*La bifurcation de conception, et c'est Nono qui l'a vue.* La première tentative calculait les
+greffes **à l'affichage**, dans `XmlChargePersonnage`. Elle a été écrite, compilée, puis
+**retirée** : question de Nono, « on a les talents dans le XML, pourquoi ne pas simplement les
+y ajouter au choix de la carrière ? ». L'argument décisif est que dans ce projet, « être une
+compétence de carrière » ne se joue pas dans la grille mais dans `Personnage.MetierCompetence`,
+qui alimente `CalculTableExperience` — donc les tables d'avance, le coût XP et le PDF. Une
+greffe posée seulement dans `TabCompetence` s'affiche mais n'est pas achetable au tarif de
+carrière : elle ne serait pas « as if added to their Career ». En l'écrivant dans la fiche,
+tout le reste marche sans qu'aucun écran n'ait à connaître les appartenances.
+
+Deux conséquences de cette bascule, à ne pas reperdre :
+- la règle de persistance du livre (« si tu quittes ton régiment, tu gardes tout ») devient
+  l'état naturel de la donnée au lieu d'une exception à coder ;
+- **rien ne marque qu'une ligne vient d'un régiment, et c'est assumé** (décision Nono) :
+  retirer une appartenance ne se fait pas, et de toute façon une compétence où de l'XP a été
+  dépensé reste sur le personnage, en « hors carrière ».
+
+*Ce qui a été écrit.* `PersonnageAppliqueGreffes(var Personnage: StructurePersonnage)` dans
+`chargepersonnage.pas`, juste avant `PersonnageTalentAsterisque` — cette unité possède
+`StructurePersonnage` et utilise déjà `ChargeMetier`, donc aucun `uses` à toucher. Elle ajoute
+dans `MetierCompetence` et `MetierTalent` les éléments de chaque palier, **avec `Valeur` = le
+numéro du palier**. `GreffesDesAppartenances` reste dans `chargemetier.pas` mais n'est plus
+appelée par personne : à supprimer ou à garder pour un usage en lecture seule, non tranché.
+
+*Le point d'accroche, et pourquoi il n'y en a qu'un.* `winpersonnage.pas`, dans le bloc
+`if StrToInt(NvNiveau) = 1` du changement de carrière (vers l. 4705), **après** les deux
+boucles qui reconstruisent `MetierCompetence` et `MetierTalent` — placé avant, il serait
+effacé par leur `:= []`. Découverte qui a simplifié tout le chantier : ces deux listes ne sont
+reconstruites **qu'à l'entrée dans une carrière**, et remplies d'un coup pour les quatre
+niveaux, chaque entrée portant son niveau en `Valeur` ; c'est `CalculTableExperience` qui
+filtre ensuite sur `Valeur <= niveau courant`. Donc **aucun crochet à chaque passage de
+niveau** n'est nécessaire.
+
+*Éprouvé.* Personnage « solder Aver 2 », Humans (Averland), `MEMBERSHIP` = `NATIO-REGIM_AVER`,
+Soldier → Advisor → Soldier. Le XML sauvegardé porte exactement les trois lignes attendues :
+`RULES-COMPSAVOIR_AVERLAND` en valeur 1, `RULES-T0136_DWARFS` en valeur 2, `RULES-T0028` en
+valeur 4. Le palier 3 est absent — voir juste en dessous.
+
+*Deux faux bugs rencontrés pendant le test, tous deux des symptômes attendus.* (1) Une fiche
+créée par WinCreation a `MEMBERSHIP` vide : WinCreation ne remplit pas le champ et n'appelle
+pas la procédure. (2) Une valeur saisie à la main dans le XML a disparu : la fiche était déjà
+chargée en mémoire quand le fichier a été édité, et la sauvegarde a réécrit le champ vide.
+**Corollaire de méthode** : avant de diagnostiquer, vérifier la date de l'EXE. Ce jour-là,
+`WarhammerHelp.exe` datait de 11:42 et les deux unités modifiées de 13:08 et 13:13 — le
+programme testé ne contenait pas le code discuté.
+
+**POINTS DE REPRISE, dans l'ordre :**
+
+1. **Retirer les deux tests `if Pos(SeparateurMulti, Code) > 0 then continue;`** de
+   `PersonnageAppliqueGreffes`. Ils sautent les éléments à choix `A/B` par prudence, or Nono a
+   vérifié ce jour que **le tableau des compétences sait déjà résoudre un choix** : Play (Drum
+   or Fife) se choisit dans la grille et le niveau suit. Le palier 3 d'Averland apparaîtra
+   alors normalement, sans écran ni champ supplémentaire. **À vérifier avant** : le tableau des
+   TALENTS sait-il faire la même chose ? Le palier 3 est une compétence, mais d'autres
+   régiments auront des talents à choix.
+2. **L'écran de choix de l'appartenance.** Rien ne remplit `Personnage.Appartenance` : il faut
+   le saisir à la main dans le XML. L'écran a sa place dans WinCreation autant que dans
+   WinPersonnage, puisque c'est à la création que l'ethnie et le métier — les deux conditions
+   de la table — sont choisis.
+3. **Brancher WinCreation**, qui bâtit ses propres listes et n'appelle pas la procédure.
+4. **La saisie mécanique des treize régiments restants**, puis le 3d-3.
+
+**Bug voisin découvert au passage, antérieur au chantier et noté dans `A FAIRE.txt`** :
+revenir dans une carrière déjà exercée redonne l'équipement de départ en double, et sans
+libellé (le code brut s'affiche en Description, « Various » en Kind). Boucle « Équipement » du
+changement de carrière, `winpersonnage.pas` vers l. 4675 : elle n'écrit ni la colonne du
+libellé, ni ne teste le doublon.
 
 ---
 

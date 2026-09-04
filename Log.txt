@@ -962,3 +962,39 @@ reste malgre tout un bug, il se verifie en RELISANT le code d export.
 LE PIEGE D ECRITURE S EST ENCORE PRODUIT, ET LA PARADE MARCHE TOUJOURS. Un envoi de
 CONTEXT.md a repondu "ecrit" en avancant la date, taille inchangee a 323432 au lieu de
 324144. Meme envoi reemis : atterri.
+
+04/09/2026 - APPARTENANCES : LA LECTURE EST BRANCHEE, ET ELLE A CHANGE DE FORME EN COURS DE ROUTE
+LE PREMIER BRANCHEMENT A ETE ECRIT, COMPILE, PUIS RETIRE. Il calculait les greffes A
+L AFFICHAGE, dans XmlChargePersonnage (GreffesDesAppartenances, chargemetier.pas). Question de
+Nono : "on a les talents dans le XML, pourquoi ne pas simplement les y ajouter au choix de la
+carriere ?". Il avait raison, et l argument est structurel : dans ce projet, etre une
+competence DE CARRIERE ne se joue pas dans la grille mais dans Personnage.MetierCompetence, qui
+alimente CalculTableExperience - donc les tables d avance, le cout XP et le PDF. Une greffe
+posee seulement dans TabCompetence s affiche mais n est pas achetable au tarif de carriere.
+CE QUI A ETE ECRIT A LA PLACE : PersonnageAppliqueGreffes dans chargepersonnage.pas, qui ajoute
+les elements de chaque palier dans MetierCompetence et MetierTalent avec Valeur = le numero du
+palier. Appelee dans winpersonnage.pas, bloc "if NvNiveau = 1" du changement de carriere, APRES
+les deux boucles qui reconstruisent ces listes - placee avant, elle serait effacee par leur := [].
+LA DECOUVERTE QUI A SIMPLIFIE LE CHANTIER : MetierCompetence et MetierTalent ne sont reconstruits
+QU A L ENTREE DANS UNE CARRIERE, et remplis d un coup pour les quatre niveaux, chaque entree
+portant son niveau en Valeur. C est CalculTableExperience qui filtre sur Valeur <= niveau courant.
+Donc AUCUN crochet a chaque passage de niveau n est necessaire, contrairement a ce qui etait prevu.
+DECISION : rien ne marque qu une ligne vient d un regiment, et c est assume. Nono : de toute
+facon une competence ou de l XP a ete depense reste sur le personnage, en hors carriere.
+EPROUVE : "solder Aver 2", MEMBERSHIP = NATIO-REGIM_AVER, Soldier > Advisor > Soldier. Le XML
+porte RULES-COMPSAVOIR_AVERLAND en 1, RULES-T0136_DWARFS en 2, RULES-T0028 en 4.
+LE CHOIX A/B N A PAS BESOIN D ETRE ENREGISTRE - verifie par Nono ce jour. Le tableau des
+competences sait deja resoudre un choix : Play (Drum or Fife) se choisit dans la grille et le
+niveau suit. Les deux tests qui sautent SeparateurMulti dans PersonnageAppliqueGreffes sont donc
+une prudence inutile, a retirer apres avoir verifie que le tableau des TALENTS sait faire pareil.
+DEUX FAUX BUGS PENDANT LE TEST, TOUS DEUX DES SYMPTOMES ATTENDUS. Une fiche creee par WinCreation
+a MEMBERSHIP vide (WinCreation n est pas branche). Une valeur saisie a la main a disparu : la
+fiche etait deja chargee en memoire quand le fichier a ete edite. REGLE AJOUTEE : avant de
+diagnostiquer, VERIFIER LA DATE DE L EXE - il datait de 11:42, les unites modifiees de 13:08 et
+13:13, le programme teste ne contenait pas le code discute.
+LE PIEGE D ECRITURE S EST PRODUIT TROIS FOIS DE PLUS DANS LA SESSION, sur winpersonnage.pas et
+sur A FAIRE.txt. Meme signature, meme parade : taille inchangee, date avancee, meme envoi reemis.
+La verification par la TAILLE apres chaque ecriture n est pas negociable.
+BUG VOISIN DECOUVERT ET NON CORRIGE (dans A FAIRE.txt) : revenir dans une carriere deja exercee
+redonne l equipement de depart en double et sans libelle. Boucle "Equipement" du changement de
+carriere, winpersonnage.pas vers l.4675.

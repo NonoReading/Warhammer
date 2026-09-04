@@ -163,6 +163,8 @@ Type
   Function PersonnageMutationCompetenceModif(Personnage: StructurePersonnage; CodeCompetence: String): Integer;
   Function PersonnageMutationArmureModif(Personnage: StructurePersonnage; CodeLocalisation: String): Integer;
   Function PersonnageTalentArmureModif(Personnage: StructurePersonnage; CodeLocalisation: String): Integer;
+  // Greffes des appartenances (regiments, ordres, cultes) - CONTEXT.md 2.44
+  Procedure PersonnageAppliqueGreffes(var Personnage: StructurePersonnage);
 
 implementation
 
@@ -1144,6 +1146,134 @@ begin
   end;
 
   result := Personnage;
+end;
+
+// Ecrit dans la fiche les competences et talents greffes par les APPARTENANCES du
+// personnage (regiments de l'Empire, ordres de chevalerie, cultes). CONTEXT.md 2.44.
+//
+// POURQUOI ON ECRIT AU LIEU DE CALCULER A L'AFFICHAGE (decision Nono, 04/09/2026) :
+// le livre traite ces elements "as if added to their Career". Or dans le projet, etre
+// une competence de carriere ne se joue pas dans la grille mais dans
+// Personnage.MetierCompetence, qui alimente CalculTableExperience - donc les tables
+// d'avance, le cout XP et le PDF. En les ecrivant ici, tout le reste marche sans qu'aucun
+// ecran n'ait a connaitre les appartenances. C'est aussi ce qui satisfait naturellement la
+// regle de persistance du livre : "If you leave your Regiment ... you maintain all
+// additional Skills and Talents."
+//
+// La Valeur portee est le NUMERO DU PALIER, exactement comme les competences de metier
+// ecrites en une fois pour les quatre niveaux a l'entree dans une carriere : c'est
+// CalculTableExperience qui filtre ensuite sur Valeur <= niveau courant.
+//
+// ETAPE 1 : un element portant SeparateurMulti ('A/B') est un choix du joueur ; il est
+// ignore tant que l'ecran de saisie de l'appartenance n'existe pas pour le lui demander.
+// C'est a cet ecran de resoudre le choix AVANT d'appeler cette procedure, pas a elle de
+// le deviner.
+Procedure PersonnageAppliqueGreffes(var Personnage: StructurePersonnage);
+var
+  GreffeCompetence:     String;
+  GreffeTalent:         String;
+  Liste:                TStringList;
+  Ind:                  Integer;
+  Code:                 String;
+  Trouve:               Boolean;
+  PNiveau:              Integer;
+  PersonnageCompetence: StructurePersonnageCompetence;
+  PersonnageTalent:     StructurePersonnageTalent;
+  Appartenances:        TStringList;
+  IndApp:               Integer;
+  Paliers:              TListCareerBonusNiveau;
+  Palier:               StructureCareerBonusNiveau;
+begin
+  if Trim(Personnage.Appartenance) = '' then
+    Exit;
+
+  Appartenances := TStringList.Create;
+  try
+    ExtractStrings([','], [], PChar(Personnage.Appartenance), Appartenances);
+    for IndApp := 0 to Appartenances.Count - 1 do
+      begin
+        if Trim(Appartenances[IndApp]) = '' then
+          continue;
+        // NiveauxDuCareerBonus rend une liste dont l'APPELANT est proprietaire.
+        Paliers := NiveauxDuCareerBonus(Trim(Appartenances[IndApp]));
+        try
+          for Palier in Paliers do
+            begin
+              if Palier.Niveau <= 0 then
+                continue;
+              PNiveau          := Palier.Niveau;
+              GreffeCompetence := Palier.ListeCompetence;
+              GreffeTalent     := Palier.ListeTalent;
+
+              // Competences du palier
+              if Trim(GreffeCompetence) <> '' then
+                begin
+                  Liste := TStringList.Create;
+                  try
+                    ExtractStrings([','], [], PChar(GreffeCompetence), Liste);
+                    for Ind := 0 to Liste.Count - 1 do
+                      begin
+                        Code := Trim(Liste[Ind]);
+                        if (Code = '') or (Pos(SeparateurMulti, Code) > 0) then
+                          continue;
+                        Trouve := false;
+                        for PersonnageCompetence in Personnage.MetierCompetence do
+                          if CompareRechercheValeur(PersonnageCompetence.CodeCompetence, Code) then
+                            begin
+                              Trouve := true;
+                              break;
+                            end;
+                        if not Trouve then
+                          begin
+                            PersonnageCompetence                := Default(StructurePersonnageCompetence);
+                            PersonnageCompetence.CodeCompetence := Code;
+                            PersonnageCompetence.Valeur         := PNiveau;
+                            Personnage.MetierCompetence         += [PersonnageCompetence];
+                          end;
+                      end;
+                  finally
+                    Liste.Free;
+                  end;
+                end;
+
+              // Talents du palier
+              if Trim(GreffeTalent) <> '' then
+                begin
+                  Liste := TStringList.Create;
+                  try
+                    ExtractStrings([','], [], PChar(GreffeTalent), Liste);
+                    for Ind := 0 to Liste.Count - 1 do
+                      begin
+                        Code := Trim(Liste[Ind]);
+                        if (Code = '') or (Pos(SeparateurMulti, Code) > 0) then
+                          continue;
+                        Trouve := false;
+                        for PersonnageTalent in Personnage.MetierTalent do
+                          if CompareRechercheValeur(PersonnageTalent.CodeTalent, Code) then
+                            begin
+                              Trouve := true;
+                              break;
+                            end;
+                        if not Trouve then
+                          begin
+                            PersonnageTalent            := Default(StructurePersonnageTalent);
+                            PersonnageTalent.CodeTalent := Code;
+                            PersonnageTalent.Valeur     := PNiveau;
+                            Personnage.MetierTalent     += [PersonnageTalent];
+                          end;
+                      end;
+                  finally
+                    Liste.Free;
+                  end;
+                end;
+            end;
+        finally
+          Paliers.Free;
+        end;
+      end;
+  finally
+    Appartenances.Free;
+  end;
 end;
 
 Function PersonnageTalentAsterisque(var Personnage:StructurePersonnage; CodeTalent: String): Integer;

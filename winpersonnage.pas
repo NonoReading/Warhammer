@@ -4703,6 +4703,12 @@ Procedure TWinPersonnages.MajTables();
                     PersonnageTalent.Valeur     := PMetierTalent.NiveauMetier;
                     Personnage.MetierTalent     += [PersonnageTalent];
                   end;
+
+              // Les APPARTENANCES (regiment, ordre, culte) greffent leurs competences et
+              // talents sur la carriere, "as if added to their Career". L'appel vient
+              // APRES les deux boucles ci-dessus, qui repartent d'une liste vide : place
+              // avant, il serait efface. CONTEXT.md 2.44.
+              PersonnageAppliqueGreffes(Personnage);
             end;
         end;
 
