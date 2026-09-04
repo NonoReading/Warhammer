@@ -213,6 +213,76 @@
 <Skill id="RULES-COMPSAVOIR_NAIN/RULES-COMPSAVOIR_GREENSKIN">
 <Description language="ENGLISH">"Lore (Dwarfs or Greenskins)"</Description>
 </Skill>
+  <!-- Les dix autres choix 'A/B' cites par les ethnies et les carrieres de ce livre, non
+       declares au lot 3a : sans leur entree, la grille de creation affichait une LIGNE
+       VIDE a leur place (vu sur Humans (Averland), 12 competences, la 12e sans libelle).
+       Libelles repris tels quels des commentaires poses a la saisie. Toutes les branches
+       existent deja dans la base, verifie le 04/09/2026. -->
+<Skill id="RULES-COMPCHEV_CHAMEAU/RULES-COMPCHEV_CHEVAL">
+<Description language="ENGLISH">"Ride (Camel or Horse)"</Description>
+</Skill>
+<Skill id="RULES-COMPCOMB_BASE/RULES-COMPCOMB_2M">
+<Description language="ENGLISH">"Melee (Basic or Two-handed)"</Description>
+</Skill>
+<Skill id="RULES-COMPCOMB_BASE/RULES-COMPCOMB_HAST">
+<Description language="ENGLISH">"Melee (Basic or Polearm)"</Description>
+</Skill>
+<Skill id="RULES-COMPLANG_ARABY/RULES-COMPLANG_BRET">
+<Description language="ENGLISH">"Language (Arabyan or Bretonnian)"</Description>
+</Skill>
+<Skill id="RULES-COMPLANG_CATHAY/RULES-COMPLANG_NIPPON">
+<Description language="ENGLISH">"Language (Cathayan or Nipponese)"</Description>
+</Skill>
+<Skill id="RULES-COMPLANG_INDAN/RULES-COMPLANG_WEST">
+<Description language="ENGLISH">"Language (Indan or Wastelander)"</Description>
+</Skill>
+<Skill id="RULES-COMPLANG_NORSE/RULES-COMPLANG_WEST">
+<Description language="ENGLISH">"Language (Norse or Wastelander)"</Description>
+</Skill>
+<Skill id="RULES-COMPMETIER_FARMING/RULES-COMPMETIER_MINNER">
+<Description language="ENGLISH">"Trade (Farming or Mining)"</Description>
+</Skill>
+<Skill id="RULES-COMPPROJ_POUDRE/RULES-COMPPROJ_ARC">
+<Description language="ENGLISH">"Ranged (Blackpowder or Bow)"</Description>
+</Skill>
+<Skill id="RULES-COMPSAVOIR_BETE/RULES-COMPSAVOIR_MONSTRE">
+<Description language="ENGLISH">"Lore (Beasts or Monsters)"</Description>
+</Skill>
+  <!-- LOT 3d-2 : les six Lore et les quatre choix 'A ou B' cites par les regiments
+       (p.6-7) et absents de tout DATABASE au 04/09/2026. Lore (Beastmen) et
+       Lore (Norscans) sont CREES et non ramenes a Lore (Beasts) / Lore (Norsca) :
+       decision Nono du 04/09 - l homme-bete n est pas une bete, le Norscan est un
+       peuple et Norsca une region. -->
+<Skill id="RULES-COMPSAVOIR_POUDRE">
+<Description language="ENGLISH">"Lore (Blackpowder)"</Description>
+</Skill>
+<Skill id="RULES-COMPSAVOIR_ARMORY">
+<Description language="ENGLISH">"Lore (Armory)"</Description>
+</Skill>
+<Skill id="RULES-COMPSAVOIR_MORR">
+<Description language="ENGLISH">"Lore (Morr)"</Description>
+</Skill>
+<Skill id="RULES-COMPSAVOIR_TAAL">
+<Description language="ENGLISH">"Lore (Taal)"</Description>
+</Skill>
+<Skill id="RULES-COMPSAVOIR_BEASTMEN">
+<Description language="ENGLISH">"Lore (Beastmen)"</Description>
+</Skill>
+<Skill id="RULES-COMPSAVOIR_NORSCANS">
+<Description language="ENGLISH">"Lore (Norscans)"</Description>
+</Skill>
+<Skill id="RULES-COMPSAVOIR_BEASTMEN/RULES-COMPSAVOIR_ULRIC">
+<Description language="ENGLISH">"Lore (Beastmen or Ulric)"</Description>
+</Skill>
+<Skill id="RULES-COMPSAVOIR_MANANN/RULES-COMPSAVOIR_NORSCANS">
+<Description language="ENGLISH">"Lore (Manann or Norscans)"</Description>
+</Skill>
+<Skill id="RULES-COMPSAVOIR_MORR/RULES-COMPSAVOIR_UNDEAD">
+<Description language="ENGLISH">"Lore (Morr or Undead)"</Description>
+</Skill>
+<Skill id="RULES-COMPSAVOIR_BEASTMEN/RULES-COMPSAVOIR_NORSCANS">
+<Description language="ENGLISH">"Lore (Beastmen or Norscans)"</Description>
+</Skill>
 </DATA_SKILL_SPECIALIZATION>
 <DATA_TALENT>
 <Talent id="NATIO-T0001">
@@ -1044,6 +1114,23 @@ Description: You ask Dazh to illuminate the night, and he
        absent de tout DATABASE\ avant creation. -->
 <Talent id="RULES-T0136_DWARFS">
 <Description language="ENGLISH">"Etiquette (Dwarfs)"</Description>
+</Talent>
+  <!-- LOT 3d-2 : Nuln donne Craftsman / Master Tradesman (Bladesmith or Gunsmith), p.6.
+       GUNSMITH n est PAS cree : decision Nono du 04/09, on pointe sur RULES-T0092_ARMU et
+       RULES-T0157_ARMU, dont le second porte deja le libelle "Master Tradesman (Gunsmith)".
+       BLADESMITH manque des deux cotes et suit le suffixe _LAMIER deja pose sur
+       RULES-COMPMETIER_LAMIER "Trade (Bladesmith)". -->
+<Talent id="RULES-T0092_LAMIER">
+<Description language="ENGLISH">"Craftsman (Bladesmith)"</Description>
+</Talent>
+<Talent id="RULES-T0157_LAMIER">
+<Description language="ENGLISH">"Master Tradesman (Bladesmith)"</Description>
+</Talent>
+<Talent id="RULES-T0092_LAMIER/RULES-T0092_ARMU">
+<Description language="ENGLISH">"Craftsman (Bladesmith or Gunsmith)"</Description>
+</Talent>
+<Talent id="RULES-T0157_LAMIER/RULES-T0157_ARMU">
+<Description language="ENGLISH">"Master Tradesman (Bladesmith or Gunsmith)"</Description>
 </Talent>
 </DATA_TALENT_SPECIALIZATION>
 <DATA_SPECIE_TRAIT>
@@ -11449,7 +11536,9 @@ Poison: Used to weaken and kill targets, anyone caught in the radius of this gre
        their Regiment are treated AS IF ADDED TO THEIR CAREER". Conditions posees par le
        livre : etre de la province (Specie) ET avoir pris la carriere Soldier du Rulebook
        (Career). Voir CONTEXT.md 2.44.
-       PREMIER REGIMENT SAISI, les treize autres suivent une fois l aller-retour valide. -->
+       LES QUATORZE REGIMENTS PROVINCIAUX SONT SAISIS (04/09/2026). Restent les onze
+       Regiments of Renown p.7, qui ne rentrent pas dans ce moule - condition de niveau 3,
+       trappings, et rang ramene a Soldier : voir CONTEXT.md 2.44. -->
 <CareerBonus id="NATIO-REGIM_AVER">
 <Description language="ENGLISH">"Averland State Army"</Description>
 <Career>"RULES-WORK57"</Career>
@@ -11474,6 +11563,339 @@ Poison: Used to weaken and kill targets, anyone caught in the radius of this gre
 <Order>"4"</Order>
 <Skill>""</Skill>
 <Talent>"RULES-T0028"</Talent>
+</Level>
+</CareerBonus>
+  <!-- Regiment de ville : le livre ne lui donne pas d ethnie, on prend celle de sa province mere, que le livre designe lui-meme par le Lore accorde au palier 1 (Reikland). CONTEXT.md 2.44. -->
+<CareerBonus id="NATIO-REGIM_ALTD">
+<Description language="ENGLISH">"Altdorf State Army"</Description>
+<Career>"RULES-WORK57"</Career>
+<Specie>"RULES-RACE_HUM"</Specie>
+<Level id="NATIO-REGIM_ALTD_1">
+<Order>"1"</Order>
+<Skill>"RULES-COMPSAVOIR_REIKLAND"</Skill>
+<Talent>""</Talent>
+</Level>
+<Level id="NATIO-REGIM_ALTD_2">
+<Order>"2"</Order>
+<Skill>""</Skill>
+<Talent>"RULES-T0058"</Talent>
+</Level>
+<Level id="NATIO-REGIM_ALTD_3">
+<Order>"3"</Order>
+<Skill>"RULES-COMPSAVOIR_SIGMAR"</Skill>
+<Talent>""</Talent>
+</Level>
+<Level id="NATIO-REGIM_ALTD_4">
+<Order>"4"</Order>
+<Skill>""</Skill>
+<Talent>"RULES-T0079"</Talent>
+</Level>
+</CareerBonus>
+<CareerBonus id="NATIO-REGIM_HOCH">
+<Description language="ENGLISH">"Hochland State Army"</Description>
+<Career>"RULES-WORK57"</Career>
+<Specie>"NATIO-RACE_HHOCH"</Specie>
+<Level id="NATIO-REGIM_HOCH_1">
+<Order>"1"</Order>
+<Skill>"RULES-COMPSAVOIR_HOCHLAND"</Skill>
+<Talent>""</Talent>
+</Level>
+<Level id="NATIO-REGIM_HOCH_2">
+<Order>"2"</Order>
+<Skill>""</Skill>
+<Talent>"RULES-T0152"</Talent>
+</Level>
+<Level id="NATIO-REGIM_HOCH_3">
+<Order>"3"</Order>
+<Skill>"RULES-COMPSAVOIR_POUDRE"</Skill>
+<Talent>""</Talent>
+</Level>
+<Level id="NATIO-REGIM_HOCH_4">
+<Order>"4"</Order>
+<Skill>""</Skill>
+<Talent>"RULES-T0154"</Talent>
+</Level>
+</CareerBonus>
+  <!-- Specie VIDE, seul cas du lot : le livre dispense explicitement Marienburg de la condition d origine, "with the exception of Marienburg who hires anyone" (p.6). -->
+<CareerBonus id="NATIO-REGIM_MARI">
+<Description language="ENGLISH">"Marienburg City Watch"</Description>
+<Career>"RULES-WORK57"</Career>
+<Specie>""</Specie>
+<Level id="NATIO-REGIM_MARI_1">
+<Order>"1"</Order>
+<Skill>"RULES-COMPSAVOIR_WESTERLAND"</Skill>
+<Talent>""</Talent>
+</Level>
+<Level id="NATIO-REGIM_MARI_2">
+<Order>"2"</Order>
+<Skill>""</Skill>
+<Talent>"NATIO-T0008"</Talent>
+</Level>
+<Level id="NATIO-REGIM_MARI_3">
+<Order>"3"</Order>
+<Skill>"RULES-COMPSAVOIR_TAXE"</Skill>
+<Talent>""</Talent>
+</Level>
+<Level id="NATIO-REGIM_MARI_4">
+<Order>"4"</Order>
+<Skill>""</Skill>
+<Talent>"RULES-T0101"</Talent>
+</Level>
+</CareerBonus>
+  <!-- Ethnie prise chez Middenheim (MIDDE-RACE_HMIDL), l officiel primant sur la version de ce livre - voir l ecart releve dans A FAIRE.txt. -->
+<CareerBonus id="NATIO-REGIM_MIDL">
+<Description language="ENGLISH">"Middenland State Army"</Description>
+<Career>"RULES-WORK57"</Career>
+<Specie>"MIDDE-RACE_HMIDL"</Specie>
+<Level id="NATIO-REGIM_MIDL_1">
+<Order>"1"</Order>
+<Skill>"RULES-COMPSAVOIR_MIDDENLAND"</Skill>
+<Talent>""</Talent>
+</Level>
+<Level id="NATIO-REGIM_MIDL_2">
+<Order>"2"</Order>
+<Skill>""</Skill>
+<Talent>"RULES-T0037"</Talent>
+</Level>
+<Level id="NATIO-REGIM_MIDL_3">
+<Order>"3"</Order>
+<Skill>"RULES-COMPSAVOIR_BEASTMEN/RULES-COMPSAVOIR_ULRIC"</Skill>
+<Talent>""</Talent>
+</Level>
+<Level id="NATIO-REGIM_MIDL_4">
+<Order>"4"</Order>
+<Skill>""</Skill>
+<Talent>"RULES-T0041"</Talent>
+</Level>
+</CareerBonus>
+  <!-- Ethnie prise chez Middenheim (MIDDE-RACE_HNORD), meme raison que Middenland. -->
+<CareerBonus id="NATIO-REGIM_NORD">
+<Description language="ENGLISH">"Nordland State Army"</Description>
+<Career>"RULES-WORK57"</Career>
+<Specie>"MIDDE-RACE_HNORD"</Specie>
+<Level id="NATIO-REGIM_NORD_1">
+<Order>"1"</Order>
+<Skill>"RULES-COMPSAVOIR_NORDLAND"</Skill>
+<Talent>""</Talent>
+</Level>
+<Level id="NATIO-REGIM_NORD_2">
+<Order>"2"</Order>
+<Skill>""</Skill>
+<Talent>"RULES-T0119"</Talent>
+</Level>
+<Level id="NATIO-REGIM_NORD_3">
+<Order>"3"</Order>
+<Skill>"RULES-COMPSAVOIR_MANANN/RULES-COMPSAVOIR_NORSCANS"</Skill>
+<Talent>""</Talent>
+</Level>
+<Level id="NATIO-REGIM_NORD_4">
+<Order>"4"</Order>
+<Skill>""</Skill>
+<Talent>"RULES-T0085"</Talent>
+</Level>
+</CareerBonus>
+  <!-- Regiment de ville : ethnie de la province mere (Wissenland), designee par le Lore du palier 1. Seul regiment dont DEUX paliers portent un choix, et les deux sur des TALENTS. -->
+<CareerBonus id="NATIO-REGIM_NULN">
+<Description language="ENGLISH">"Nuln State Army"</Description>
+<Career>"RULES-WORK57"</Career>
+<Specie>"NATIO-RACE_HWISS"</Specie>
+<Level id="NATIO-REGIM_NULN_1">
+<Order>"1"</Order>
+<Skill>"RULES-COMPSAVOIR_WISSENLAND"</Skill>
+<Talent>""</Talent>
+</Level>
+<Level id="NATIO-REGIM_NULN_2">
+<Order>"2"</Order>
+<Skill>""</Skill>
+<Talent>"RULES-T0092_LAMIER/RULES-T0092_ARMU"</Talent>
+</Level>
+<Level id="NATIO-REGIM_NULN_3">
+<Order>"3"</Order>
+<Skill>"RULES-COMPSAVOIR_ARMORY"</Skill>
+<Talent>""</Talent>
+</Level>
+<Level id="NATIO-REGIM_NULN_4">
+<Order>"4"</Order>
+<Skill>""</Skill>
+<Talent>"RULES-T0157_LAMIER/RULES-T0157_ARMU"</Talent>
+</Level>
+</CareerBonus>
+<CareerBonus id="NATIO-REGIM_OSTM">
+<Description language="ENGLISH">"Ostermark State Army"</Description>
+<Career>"RULES-WORK57"</Career>
+<Specie>"NATIO-RACE_HOSTM"</Specie>
+<Level id="NATIO-REGIM_OSTM_1">
+<Order>"1"</Order>
+<Skill>"RULES-COMPSAVOIR_OSTERMARK"</Skill>
+<Talent>""</Talent>
+</Level>
+<Level id="NATIO-REGIM_OSTM_2">
+<Order>"2"</Order>
+<Skill>""</Skill>
+<Talent>"RULES-T0098"</Talent>
+</Level>
+<Level id="NATIO-REGIM_OSTM_3">
+<Order>"3"</Order>
+<Skill>"RULES-COMPSAVOIR_MORR/RULES-COMPSAVOIR_UNDEAD"</Skill>
+<Talent>""</Talent>
+</Level>
+<Level id="NATIO-REGIM_OSTM_4">
+<Order>"4"</Order>
+<Skill>""</Skill>
+<Talent>"RULES-T0075"</Talent>
+</Level>
+</CareerBonus>
+<CareerBonus id="NATIO-REGIM_OSTL">
+<Description language="ENGLISH">"Ostland State Army"</Description>
+<Career>"RULES-WORK57"</Career>
+<Specie>"NATIO-RACE_HOSTL"</Specie>
+<Level id="NATIO-REGIM_OSTL_1">
+<Order>"1"</Order>
+<Skill>"RULES-COMPSAVOIR_OSTLAND"</Skill>
+<Talent>""</Talent>
+</Level>
+<Level id="NATIO-REGIM_OSTL_2">
+<Order>"2"</Order>
+<Skill>""</Skill>
+<Talent>"RULES-T0047"</Talent>
+</Level>
+<Level id="NATIO-REGIM_OSTL_3">
+<Order>"3"</Order>
+<Skill>"RULES-COMPSAVOIR_BEASTMEN/RULES-COMPSAVOIR_NORSCANS"</Skill>
+<Talent>""</Talent>
+</Level>
+<Level id="NATIO-REGIM_OSTL_4">
+<Order>"4"</Order>
+<Skill>""</Skill>
+<Talent>"RULES-T0131"</Talent>
+</Level>
+</CareerBonus>
+  <!-- L ethnie Reiklander est celle du Rulebook, RULES-RACE_HUM "Humans (Reikland)" - ce livre n en cree pas une seconde. -->
+<CareerBonus id="NATIO-REGIM_REIK">
+<Description language="ENGLISH">"Reikland State Army"</Description>
+<Career>"RULES-WORK57"</Career>
+<Specie>"RULES-RACE_HUM"</Specie>
+<Level id="NATIO-REGIM_REIK_1">
+<Order>"1"</Order>
+<Skill>"RULES-COMPSAVOIR_REIKLAND"</Skill>
+<Talent>""</Talent>
+</Level>
+<Level id="NATIO-REGIM_REIK_2">
+<Order>"2"</Order>
+<Skill>""</Skill>
+<Talent>"RULES-T0010"</Talent>
+</Level>
+<Level id="NATIO-REGIM_REIK_3">
+<Order>"3"</Order>
+<Skill>"RULES-COMPSAVOIR_EMPIRE"</Skill>
+<Talent>""</Talent>
+</Level>
+<Level id="NATIO-REGIM_REIK_4">
+<Order>"4"</Order>
+<Skill>""</Skill>
+<Talent>"RULES-T0065"</Talent>
+</Level>
+</CareerBonus>
+  <!-- COQUILLE DU LIVRE : le palier 3 est imprime "Death Jacks:" au lieu de "Sergeant:" (p.6). Death Jacks est un Regiment of Renown de Stirland, decrit p.7 ; le palier reste un palier 3 ordinaire. -->
+<CareerBonus id="NATIO-REGIM_STIR">
+<Description language="ENGLISH">"Stirland State Army"</Description>
+<Career>"RULES-WORK57"</Career>
+<Specie>"NATIO-RACE_HSTIR"</Specie>
+<Level id="NATIO-REGIM_STIR_1">
+<Order>"1"</Order>
+<Skill>"RULES-COMPSAVOIR_STIRLAND"</Skill>
+<Talent>""</Talent>
+</Level>
+<Level id="NATIO-REGIM_STIR_2">
+<Order>"2"</Order>
+<Skill>""</Skill>
+<Talent>"RULES-T0105"</Talent>
+</Level>
+<Level id="NATIO-REGIM_STIR_3">
+<Order>"3"</Order>
+<Skill>"RULES-COMPSAVOIR_UNDEAD"</Skill>
+<Talent>""</Talent>
+</Level>
+<Level id="NATIO-REGIM_STIR_4">
+<Order>"4"</Order>
+<Skill>""</Skill>
+<Talent>"RULES-T0129_MALA"</Talent>
+</Level>
+</CareerBonus>
+<CareerBonus id="NATIO-REGIM_TALB">
+<Description language="ENGLISH">"Talabecland State Army"</Description>
+<Career>"RULES-WORK57"</Career>
+<Specie>"NATIO-RACE_HTALA"</Specie>
+<Level id="NATIO-REGIM_TALB_1">
+<Order>"1"</Order>
+<Skill>"RULES-COMPSAVOIR_TALABECLAND"</Skill>
+<Talent>""</Talent>
+</Level>
+<Level id="NATIO-REGIM_TALB_2">
+<Order>"2"</Order>
+<Skill>""</Skill>
+<Talent>"RULES-T0140"</Talent>
+</Level>
+<Level id="NATIO-REGIM_TALB_3">
+<Order>"3"</Order>
+<Skill>"RULES-COMPSAVOIR_VFLUV"</Skill>
+<Talent>""</Talent>
+</Level>
+<Level id="NATIO-REGIM_TALB_4">
+<Order>"4"</Order>
+<Skill>""</Skill>
+<Talent>"RULES-T0068"</Talent>
+</Level>
+</CareerBonus>
+  <!-- Regiment de ville : ethnie de la province mere (Talabecland), designee par le Lore du palier 1 - le livre donne bien Lore (Talabecland) et non Lore (Talabheim). -->
+<CareerBonus id="NATIO-REGIM_TALH">
+<Description language="ENGLISH">"Talabheim State Army"</Description>
+<Career>"RULES-WORK57"</Career>
+<Specie>"NATIO-RACE_HTALA"</Specie>
+<Level id="NATIO-REGIM_TALH_1">
+<Order>"1"</Order>
+<Skill>"RULES-COMPSAVOIR_TALABECLAND"</Skill>
+<Talent>""</Talent>
+</Level>
+<Level id="NATIO-REGIM_TALH_2">
+<Order>"2"</Order>
+<Skill>""</Skill>
+<Talent>"RULES-T0013_BOID"</Talent>
+</Level>
+<Level id="NATIO-REGIM_TALH_3">
+<Order>"3"</Order>
+<Skill>"RULES-COMPSAVOIR_TAAL"</Skill>
+<Talent>""</Talent>
+</Level>
+<Level id="NATIO-REGIM_TALH_4">
+<Order>"4"</Order>
+<Skill>""</Skill>
+<Talent>"RULES-T0162"</Talent>
+</Level>
+</CareerBonus>
+<CareerBonus id="NATIO-REGIM_WISS">
+<Description language="ENGLISH">"Wissenland State Army"</Description>
+<Career>"RULES-WORK57"</Career>
+<Specie>"NATIO-RACE_HWISS"</Specie>
+<Level id="NATIO-REGIM_WISS_1">
+<Order>"1"</Order>
+<Skill>"RULES-COMPSAVOIR_WISSENLAND"</Skill>
+<Talent>""</Talent>
+</Level>
+<Level id="NATIO-REGIM_WISS_2">
+<Order>"2"</Order>
+<Skill>""</Skill>
+<Talent>"RULES-T0107"</Talent>
+</Level>
+<Level id="NATIO-REGIM_WISS_3">
+<Order>"3"</Order>
+<Skill>"RULES-COMPSAVOIR_NAIN"</Skill>
+<Talent>""</Talent>
+</Level>
+<Level id="NATIO-REGIM_WISS_4">
+<Order>"4"</Order>
+<Skill>""</Skill>
+<Talent>"RULES-T0005"</Talent>
 </Level>
 </CareerBonus>
 </DATA_CAREER_BONUS>

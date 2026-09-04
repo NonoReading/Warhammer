@@ -1,21 +1,23 @@
 # Warhammer — Contexte projet
 
-**Dernière mise à jour : 04/09/2026 — soir : L'ÉCRAN DE CHOIX DE L'APPARTENANCE EST EN PLACE
-DANS WINPERSONNAGE (§2.44), et le chantier est éprouvé de bout en bout — un Averlandais qui
-devient Soldier se voit proposer son régiment au clic sur « Update Sheet », et la fiche
-sauvegardée porte son `MEMBERSHIP`. **Les points de reprise sont maintenant : brancher
-WINCREATION (qui ne propose rien et laisse `MEMBERSHIP` vide — le trou le plus visible), puis
-la saisie des treize régiments restants, puis rendre l'appartenance visible sur la fiche.**
-Plus tôt : les appartenances branchées de bout en bout, CHOIX « A OU B » COMPRIS.
-(Plus tôt dans la journée : lots 3a, 3b, 3c ET 3d-1 de *Nations of Mankind* TERMINÉS
+**Dernière mise à jour : 04/09/2026 — fin de journée : LE CHANTIER DES APPARTENANCES EST
+COMPLET DES DEUX CÔTÉS (§2.44). WinCreation propose désormais le régiment lui aussi, et les
+QUATORZE régiments provinciaux sont saisis — un Wissenlandais Soldier se voit proposer
+Wissenland, Nuln et Marienburg, et Nuln, dont deux paliers portent un choix « A ou B » sur des
+TALENTS, passe. **Les points de reprise sont maintenant : rendre l'appartenance visible sur la
+fiche et dans le PDF, le 3d-3 (ordres de chevalerie, même table, conception à faire), les onze
+Regiments of Renown qui ne rentrent pas dans le moule, et la suppression de
+`GreffesDesAppartenances` devenue morte.** Un bug voisin est apparu et n'est PAS corrigé : une
+compétence d'ethnie « A ou B » ou « (Any) » peut recevoir ses points de création sans qu'on ait
+choisi la branche — conception au §2.45, item dans `A FAIRE.txt`.
+(Plus tôt dans la journée : lots 3a, 3b, 3c, 3d-1 ET 3d-2 de *Nations of Mankind* TERMINÉS
 au §2.37 : les onze ethnies humaines, les 72 sorts des six domaines de magie, l'armurerie —
-44 armes de mêlée, 17 à distance, 6 munitions, 28 armures, 3 accessoires — et les sept
-provinces de l'Empire. **Il ne reste que 3d-2 (régiments) et 3d-3 (ordres de chevalerie)**,
-qui demandent tous deux une conception ; celle du 3d-2 est arretee au §2.44
-(table `DATA_CAREER_BONUS`), non appliquee. Les deux bugs laissés ouverts le 03/09 sont corrigés —
+44 armes de mêlée, 17 à distance, 6 munitions, 28 armures, 3 accessoires — les sept
+provinces de l'Empire et les quatorze régiments. **Il ne reste que le 3d-3**, qui demande une
+conception. Les deux bugs laissés ouverts le 03/09 sont corrigés —
 qualités d'armes d'Archives I, et export du bloc `DATA_RACE` au §2.42 ; les compétences
 « A ou B » n'apparaissaient pas dans WinRaces, corrigé au §2.43. ⚠️ Lire le §0 sur
-**l'écriture qui répond « écrit » sans écrire**, découverte le 04/09.)** Ce fichier remplace tous les anciens
+**l'écriture qui répond « écrit » sans écrire**, qui s'est reproduite le 04/09 au soir.)** Ce fichier remplace tous les anciens
 `CONTEXT*.md` / `INDEX*.md` / `RESUME*.md` / `SESSION*.md`. Il n'y en a plus
 qu'un : celui-ci. On ne le duplique jamais, on l'édite en place.
 
@@ -3592,7 +3594,7 @@ le 30/08. Un marqueur compté n'est toujours pas un marqueur lu.
 
 ---
 
-### 2.37 Nations of Mankind — lots 1, 2, 3a, 3b, 3c et 3d-1 terminés (04/09/2026) ; restent 3d-2 et 3d-3
+### 2.37 Nations of Mankind — lots 1, 2, 3a, 3b, 3c, 3d-1 et 3d-2 terminés (04/09/2026) ; reste le 3d-3
 
 Fichier unique `DATABASE\BOOK_NATIONS_OF_MANKIND.Xml`, 277 Ko, `CODE_BOOK` = `NATIO`,
 `OFFICIAL=2`, `COMPLETE=0`. Aucun fichier existant modifié, donc aucune compilation.
@@ -4540,21 +4542,139 @@ les deux lignes attendues et le XML sauvegardé porte
 
 ---
 
+**WINCREATION EST BRANCHÉ — TERMINÉ (04/09/2026, fin de journée).**
+
+Trois insertions dans `wincreation.pas`, un seul point de compilation (144 582 → 146 592
+octets) :
+
+1. `PhaseSave`, déclarations — la variable locale `CandidatsAppart: String`.
+2. Branche `2:` (Race) — `Personnage.Appartenance := '';` avec les autres remises à vide.
+   L'ethnie conditionne l'appartenance, donc en changer doit l'invalider ; le champ n'était
+   **jamais** touché par WinCreation, il partait vide dans `PersonnageXmlCreation`.
+3. Branche `7:` (Compétences de métier), **après la boucle des talents** (l. 1196) — le bloc
+   `AppartenancesCandidates(MetierEnCours, Personnage.Race, Personnage.Appartenance)`,
+   `ShowModal` de `WinSpecialisations` si la liste n'est pas vide, cumul dans
+   `Personnage.Appartenance`, puis `PersonnageAppliqueGreffes(Personnage)`. Copié tel quel sur
+   `winpersonnage.pas`.
+
+Rien à ajouter au `uses` : `ChargeMetier`, `ChargePersonnage`, `ChargeConstantes` et
+`WinSpecialisation` y étaient déjà, et `FenSpecialisation` est déclarée l. 310. **Pas de garde
+de niveau** ici, contrairement à WinPersonnage : la création est par définition au niveau 1.
+
+*Où la fenêtre s'ouvre, et ça n'allait pas de soi non plus.* Pas au choix du métier, mais en
+**quittant** la phase « compétences de métier ». `PhaseSave(NouvellePhase)` enregistre la phase
+**précédente** : la branche 7 s'exécute en arrivant à la phase 8 (Équipements).
+
+*Piège hérité, à connaître.* Le personnage est assemblé **incrémentalement** par `PhaseSave`,
+et les remises à `[]` sont toutes en branche 2. La création n'ayant aucun retour arrière
+(commentaires l. 1036-1043), c'est sans conséquence aujourd'hui ; le jour où un retour arrière
+existera, `MetierCompetence` **et** `Appartenance` se cumuleraient en double.
+
+*Éprouvé* : un Wissenlandais Soldier se voit proposer les trois candidats attendus — Wissenland
+State Army, Nuln (régiment de ville portant l'ethnie de sa province mère) et Marienburg (sans
+condition d'origine) — plus « aucune ». Testé sur **Nuln**, le cas le plus dur du lot, seul
+régiment dont deux paliers portent un choix et les deux sur des **talents** : le XML porte
+`RULES-T0092_LAMIER/RULES-T0092_ARMU` en valeur 2 et
+`RULES-T0157_LAMIER/RULES-T0157_ARMU` en valeur 4, chacun **avec son libellé en commentaire**.
+
+`GreffesDesAppartenances` est maintenant vérifiée sans appelant y compris dans
+`wincreation.pas` (aucune occurrence dans ses 3 576 lignes) : **elle peut être supprimée.**
+
+---
+
+**LES QUATORZE RÉGIMENTS SONT SAISIS — LOT 3d-2 TERMINÉ (04/09/2026, fin de journée).**
+
+`BOOK_NATIONS_OF_MANKIND.Xml` 549 133 → 563 530 octets. Treize `CareerBonus` ajoutés à
+Averland, tous sur `RULES-WORK57` (Soldier), quatre paliers chacun ; plus **10 compétences** et
+**4 talents** créés pour eux. XML revalidé, **zéro référence pendante** sur les 56 codes cités
+par le bloc, zéro branche absente sur les six codes composés.
+
+*Décisions de saisie, toutes commentées dans le fichier.* Les régiments de ville prennent
+l'ethnie de leur province mère (Altdorf → Reikland, Nuln → Wissenland, Talabheim →
+Talabecland), Marienburg garde `<Specie>` **vide**, Middenland et Nordland pointent sur les
+ethnies de **Middenheim** (`MIDDE-RACE_HMIDL` / `HNORD`, l'officiel prime — voir l'écart relevé
+dans `A FAIRE.txt`), Reikland pointe sur `RULES-RACE_HUM` du Rulebook sans en créer une
+seconde. La coquille « Death Jacks: » de Stirland (p.6) est traitée comme un palier 3
+ordinaire, avec renvoi vers le Regiment of Renown du même nom.
+
+*Trois arbitrages de Nono sur les libellés.* **Lore (Beastmen)** et **Lore (Norscans)** sont
+**créés** et non ramenés à `Lore (Beasts)` / `Lore (Norsca)` : l'homme-bête n'est pas une bête,
+le Norscan est un peuple et Norsca une région. **Craftsman / Master Tradesman (Gunsmith)** ne
+sont **pas** créés — on pointe sur `RULES-T0092_ARMU` et `RULES-T0157_ARMU`, dont le second
+porte déjà le libellé « Master Tradesman (Gunsmith) » ; seul **Bladesmith** manquait des deux
+côtés, créé sous le suffixe `_LAMIER` déjà posé sur `RULES-COMPMETIER_LAMIER`. Reste une
+incohérence de libellé à noter : `T0092_ARMU` s'appelle « Craftsman (Armourer) » quand son
+pendant `T0157_ARMU` s'appelle « Master Tradesman (Gunsmith) ».
+
+---
+
 **POINTS DE REPRISE, dans l'ordre :**
 
-1. **Brancher WinCreation**, qui bâtit ses propres listes, n'appelle pas
-   `PersonnageAppliqueGreffes` et laisse `MEMBERSHIP` vide. **C'est le trou le plus visible du
-   chantier** : un soldat Averland créé de zéro sort sans appartenance et sans qu'on lui ait
-   rien demandé, le seul contournement étant de lui faire changer de carrière ensuite — ce qui
-   n'a aucun sens pour un soldat de départ. L'écran y a sa place autant que dans WinPersonnage,
-   puisque c'est à la création que l'ethnie et le métier sont choisis. Chercher l'équivalent du
-   bloc « entrée en carrière niveau 1 » dans `wincreation.pas` (144 Ko — travail de sous-agent).
-2. **La saisie mécanique des treize régiments restants** — avec, pour chacun, la déclaration
-   des codes composés `A/B` dans `DATA_SKILL_SPECIALIZATION` du livre — puis le 3d-3.
-3. **Rendre l'appartenance visible.** Rien ne l'affiche aujourd'hui, ni sur la fiche à l'écran
+1. **Rendre l'appartenance visible.** Rien ne l'affiche aujourd'hui, ni sur la fiche à l'écran
    ni dans le PDF, et le choix n'est proposé qu'à l'entrée en carrière : cliquer à côté oblige
    à rouvrir la carrière ou à éditer le XML à la main. Affichage en lecture au minimum ;
    correction à trancher. Noté aussi dans `A FAIRE.txt`.
+2. **Supprimer `GreffesDesAppartenances`** dans `chargemetier.pas` — sans appelant, vérifié
+   partout. Une ligne, à faire seule.
+3. **Le 3d-3, les ordres de chevalerie.** Même table `DATA_CAREER_BONUS`, sur la carrière
+   Knight au lieu de Soldier ; conception à mener avant saisie.
+4. **Les onze Regiments of Renown**, qui ne rentrent pas dans le moule — condition de niveau 3
+   atteint et non d'ethnie, *trappings* que le greffon compétence/talent ne porte pas, et rang
+   ramené à Soldier avec conservation du statut social. Même famille que les psychologies.
+
+**Bug voisin découvert au passage, antérieur au chantier et noté dans `A FAIRE.txt`** :
+revenir dans une carrière déjà exercée redonne l'équipement de départ en double, et sans
+libellé (le code brut s'affiche en Description, « Various » en Kind). Boucle « Équipement » du
+changement de carrière, `winpersonnage.pas` vers l. 4675 : elle n'écrit ni la colonne du
+libellé, ni ne teste le doublon.
+
+---
+
+### 2.45 Une compétence d'ethnie « A ou B » ou « (Any) » reçoit ses points sans choix — conception, non appliquée (04/09/2026)
+
+*Comment c'est sorti.* La grille des compétences de race de WinCreation affichait une **ligne
+vide** sur Humans (Averland) : douze compétences dans le livre, la douzième sans libellé. Ce
+n'était pas un bug d'affichage mais une **donnée manquante** — `Trade (Farming or Mining)`,
+code composé `RULES-COMPMETIER_FARMING/RULES-COMPMETIER_MINNER` cité mais jamais déclaré dans
+`DATA_SKILL_SPECIALIZATION`, donc `ChercheCompetence` ne trouvait rien. **Dix cas identiques**
+trouvés d'un coup par un contrôle sur tout `DATABASE\`, tous dans *Nations of Mankind*, tous
+corrigés le 04/09 (leurs branches existaient déjà, et les libellés étaient dans les
+commentaires de saisie).
+
+*Le vrai bug, relevé par Nono.* Une fois le libellé affiché, **cocher 3 ou 5 points sur cette
+ligne enregistre la valeur sur le code composé**, sans jamais demander laquelle des deux
+branches. Et ce n'est pas propre à ce livre : les codes **génériques** `RULES-COMPMETIER_*`,
+`RULES-COMPDISC_*`, `RULES-COMPMUSIC_*` (« Trade (Any) », « Play (Any) ») sont dans des
+compétences d'ethnie du **Rulebook lui-même**, de Middenheim, Sea of Claws, Salzenmund et High
+Elf. Seule la forme `A/B` est nouvelle — et c'est elle qui a rendu le défaut visible, parce
+qu'elle laissait une ligne vide là où `(Any)` s'affiche normalement.
+
+*Le moule de correction existe déjà, quinze lignes plus bas dans le même fichier*, sur la
+grille des compétences de **métier** : marquage `ConstArbreAuChoix` à la construction
+(`wincreation.pas` l. 2267), `TabMetierCompetenceDblClick` qui ouvre `WinSpecialisations` en
+`ConstXmlSousChapitreCompetence` et réécrit code et libellé (l. 1487), et refus de changer de
+phase tant qu'une ligne **avec des points** porte encore le marqueur (`MESS_042`, l. 1668).
+
+*Ce qu'il faut en changer pour `TabRaceCompetence`.* **(1)** Elle n'a pas de colonne technique
+libre (0 = icône, 1 = code caché, 2 = niveau métier, 3 = libellé, 4 et 5 = les deux cases) —
+mais **aucune colonne n'est à ajouter** : le code composé se reconnaît seul,
+`Pos(SeparateurMulti, Cells[1]) > 0` ou `Pos(ValeurGenerique, Cells[1]) > 0`, et une fois
+résolu il ne contient plus ni `/` ni `*`, donc la condition s'éteint d'elle-même. **(2)**
+`TabRaceCompetenceDblClick` n'appelle aujourd'hui que `CompetenceFenetre` : y mettre le `if`
+devant, en gardant `CompetenceFenetre` en `else`. **(3)** Le contrôle de phase à écrire est le
+pendant de celui de la branche 6, portant sur les cases cochées `CompetenceRaceStates[4]` /
+`[5]` au lieu d'une quantité saisie.
+
+`WinSpecialisations` n'est **pas** à toucher : sa branche `ConstXmlSousChapitreCompetence`
+teste déjà `SeparateurMulti` et passe par `ListeMetierCompetence`, sinon liste tout — elle gère
+donc les deux formes, et même le triple choix de Lustria
+(`RULES-COMPPROJ_ARC/LUSTR-COMPPROJ_SARBAC/RULES-COMPPROJ_LANC`).
+
+*Règle de méthode née de là, à relancer après chaque lot de saisie* : indexer tous les
+`id="..."` de `DATABASE\`, extraire toutes les citations contenant un `/`, faire la différence.
+Dix lignes de script, et ça attrape aussi les branches absentes. **Ne pas généraliser aux
+talents** : les talents composés (`RULES-T0117/RULES-T0002`…) ne sont déclarés dans aucun
+livre, c'est la convention en place et le filet de `ChargeAugmentation` les affiche.
 
 **Bug voisin découvert au passage, antérieur au chantier et noté dans `A FAIRE.txt`** :
 revenir dans une carrière déjà exercée redonne l'équipement de départ en double, et sans

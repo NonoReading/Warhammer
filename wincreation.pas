@@ -1027,6 +1027,7 @@ procedure TWinCreations.PhaseSave(NouvellePhase: Integer);
     PMetierTalent:         StructureMetierTalent;
     Xp:                    Integer;
     PRace:                 StructureRace;
+    CandidatsAppart:       String;
   Begin
     // supprimer les éléments des phases suivants
     // NouvellePhase est la phase où l'on ARRIVE : chaque branche enregistre donc le résultat de
@@ -1053,6 +1054,9 @@ procedure TWinCreations.PhaseSave(NouvellePhase: Integer);
            Personnage.MetierAncien                      := [];
            Personnage.MetierCompetence                  := [];
            Personnage.MetierTalent                      := [];
+           // L'APPARTENANCE (regiment, ordre, culte) est conditionnee par l'ethnie : changer
+           // d'ethnie invalide ce qui a pu etre choisi. CONTEXT.md 2.44.
+           Personnage.Appartenance                      := '';
            ChargeTabMetier();
          end;
 
@@ -1194,6 +1198,35 @@ procedure TWinCreations.PhaseSave(NouvellePhase: Integer);
                   PersonnageTalent.Valeur     := PMetierTalent.NiveauMetier;
                   Personnage.MetierTalent     += [PersonnageTalent];
                 end;
+
+           // Entrer dans une carriere ouvre le droit a une APPARTENANCE (regiment, ordre
+           // de chevalerie, culte). A la creation il n'y a pas de garde de niveau : on est
+           // par definition au niveau 1. Rien n'est propose s'il ne reste aucun candidat.
+           // CONTEXT.md 2.44.
+           CandidatsAppart := AppartenancesCandidates(MetierEnCours, Personnage.Race,
+                                                      Personnage.Appartenance);
+           if CandidatsAppart <> '' then
+             begin
+               ChoixWinTypeFichier         := ConstXmlDataCareerBonus;
+               ChoixWinCareerBonus         := CandidatsAppart;
+               // Remise a vide OBLIGATOIRE : fermer la fenetre sans double-cliquer ne
+               // touche pas a SelectWin..., qui garderait sinon une reponse precedente.
+               SelectWinCareerBonus        := '';
+               FenSpecialisation           := TWinSpecialisations.Create(Application);
+               FenSpecialisation.Position  := poOwnerFormCenter;
+               FenSpecialisation.ShowModal;
+               if SelectWinCareerBonus <> '' then
+                 if Trim(Personnage.Appartenance) = '' then
+                   Personnage.Appartenance := SelectWinCareerBonus
+                 else
+                   Personnage.Appartenance := Personnage.Appartenance + ',' + SelectWinCareerBonus;
+             end;
+
+           // Les APPARTENANCES greffent leurs competences et talents sur la carriere,
+           // "as if added to their Career". L'appel vient APRES les deux boucles
+           // ci-dessus, qui repartent d'une liste vide : place avant, il serait efface.
+           // CONTEXT.md 2.44.
+           PersonnageAppliqueGreffes(Personnage);
          end;
 
       8: Begin         // Équipements

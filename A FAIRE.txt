@@ -16,17 +16,23 @@ jamais la colonne du LIBELLE. ARBITRE PAR NONO LE 04/09/2026 : revenir dans une 
 pouvoir redonner l equipement de depart - le doublon n est donc pas a interdire, c est
 l affichage sans libelle qui est le bug. Anterieur au chantier des appartenances.
 
-LES GREFFES D APPARTENANCE NE SONT PAS BRANCHEES DANS WINCREATION. Le 04/09/2026, l appel a
-GreffesDesAppartenances a ete pose dans WinPersonnage.XmlChargePersonnage uniquement.
-WinCreation batit ses propres listes de competences et de talents : un personnage cree avec
-une appartenance n en verra rien tant qu il n est pas recharge. Voir CONTEXT.md 2.44.
+UNE COMPETENCE D ETHNIE "A OU B" OU "(ANY)" PEUT RECEVOIR SES POINTS SANS QU ON AIT CHOISI LA
+BRANCHE. Releve par Nono le 04/09/2026 sur la grille des competences de RACE de WinCreation :
+cocher 3 ou 5 points sur Trade (Farming or Mining) ou sur Trade (Any) enregistre la valeur sur
+le CODE COMPOSE, sans jamais demander laquelle. Anterieur a Nations of Mankind - les codes
+generiques sont dans des competences d ethnie du RULEBOOK lui-meme. CONCEPTION FAITE ET
+ARRETEE : CONTEXT.md 2.45, trois modifications dans wincreation.pas, rien a toucher dans
+WinSpecialisations. Reste a appliquer.
 
-L ECRAN DE CHOIX DE L APPARTENANCE EXISTE DANS WINPERSONNAGE MAIS PAS DANS WINCREATION.
-Fait le 04/09/2026 cote WinPersonnage (CONTEXT.md 2.44). A la CREATION, rien n est propose et
-MEMBERSHIP reste vide : un soldat Averland cree de zero sort sans appartenance, et le seul
-contournement est de lui faire changer de carriere ensuite, ce qui n a aucun sens pour un
-soldat de depart. C est pourtant a la creation que l ethnie et le metier sont choisis, donc
-les deux conditions de DATA_CAREER_BONUS y sont reunies. Point de reprise 1 du chantier.
+SUPPRIMER GreffesDesAppartenances DANS chargemetier.pas. Sans appelant depuis la bascule de
+conception du 04/09/2026, et c est desormais verifie sur wincreation.pas aussi. Une ligne, a
+faire seule. CONTEXT.md 2.44.
+
+CRAFTSMAN (ARMOURER) ET MASTER TRADESMAN (GUNSMITH) SONT LE MEME METIER SOUS DEUX LIBELLES.
+RULES-T0092_ARMU est libelle "Craftsman (Armourer)" et son pendant RULES-T0157_ARMU "Master
+Tradesman (Gunsmith)". Releve le 04/09/2026 en saisissant Nuln, qui donne les deux ; on a
+pointe dessus sans rien renommer (decision Nono). Renommer T0092_ARMU en "Craftsman
+(Gunsmith)" toucherait le RULEBOOK, d ou l attente d un arbitrage.
 
 RIEN NE PERMET DE VOIR NI DE CORRIGER L APPARTENANCE D UN PERSONNAGE DEJA CREE. Releve le
 04/09/2026 en testant l ecran de choix. MEMBERSHIP ne s affiche ni sur la fiche a l ecran ni
@@ -224,23 +230,6 @@ EN ATTENDANT, les nouveaux livres continuent de numeroter A LA SUITE pour les qu
 d arme ET d armure. Fait le 04/09/2026 : Nations of Mankind est parti de WEAPB38 et de
 ARMOB_09. La table DATA_CRAFTMANSHIP, elle, repart bien a 01 sans risque - CodeFabrication
 porte l identifiant complet avec son prefixe (xmlexportimport.pas l.2436).
-
-NATIONS OF MANKIND 3D-2, LES REGIMENTS : BRANCHER LA LECTURE. La table DATA_CAREER_BONUS
-existe et se charge (CONTEXT.md 2.44), le champ Appartenance existe sur la fiche, mais rien
-ne lit encore le greffon. A faire : une fonction qui, pour un personnage, rend les
-competences et talents greffes par ses appartenances au niveau atteint, appelee la ou
-WinPersonnage batit ses listes. C EST LE POINT DE REPRISE DU CHANTIER.
-
-NATIONS OF MANKIND 3D-2 : SAISIR LES TREIZE REGIMENTS RESTANTS. Averland est saisi comme
-premier cas (NATIO-REGIM_AVER). Restent Altdorf, Hochland, Marienburg, Middenland, Nordland,
-Nuln, Ostermark, Ostland, Reikland, Stirland, Talabecland, Talabheim, Wissenland. Saisie
-mecanique une fois la lecture branchee. Coquille du livre : le palier Sergeant de Stirland
-est imprime "Death Jacks:".
-
-NATIONS OF MANKIND 3D-2 : OU RATTACHER LES QUATRE REGIMENTS DE VILLES. Altdorf, Nuln et
-Talabheim ne sont pas des provinces et n ont pas d ethnie ; le livre les rattache lui-meme
-par le Lore qu il accorde (Reikland, Wissenland, Talabecland). Marienburg reste sans
-condition d origine, Specie vide. Decide, reste a ecrire.
 
 NATIONS OF MANKIND 3D-2 : LES ONZE REGIMENTS OF RENOWN NE RENTRENT PAS DANS LA TABLE.
 Condition = niveau 3 atteint et non l ethnie seule ; l effet comprend des TRAPPINGS

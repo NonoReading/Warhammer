@@ -1072,3 +1072,52 @@ lib\x86_64-win64 tranche plus vite que celle de l EXE, et separe le "pas compile
 appele". (3) GreffesDesAppartenances n a toujours aucun appelant ; elle n a PAS ete supprimee,
 faute d avoir pu verifier wincreation.pas sans le charger entierement - une modification a la
 fois.
+
+04/09/2026 - WINCREATION BRANCHE SUR LES APPARTENANCES, ET LES QUATORZE REGIMENTS SAISIS
+wincreation.pas - le choix d appartenance et les greffes sont poses dans PhaseSave, branche 7
+   (Competences de metier), APRES la boucle des talents. Trois insertions, un seul point de
+   compilation : la variable locale CandidatsAppart ; Personnage.Appartenance := '' ajoute aux
+   remises a vide de la branche 2 (Race), parce que l ethnie conditionne l appartenance et que
+   le champ n etait jamais touche par WinCreation ; puis le bloc AppartenancesCandidates +
+   ShowModal + PersonnageAppliqueGreffes, copie sur celui de winpersonnage.pas. Rien a ajouter
+   au uses : ChargeMetier, ChargePersonnage, ChargeConstantes et WinSpecialisation y etaient
+   deja, et FenSpecialisation est declaree l.310. PAS de garde de niveau ici - la creation est
+   par definition au niveau 1. 144582 > 146592 octets.
+   OU LA FENETRE S OUVRE : en QUITTANT la phase "competences de metier", pas au choix du
+   metier. PhaseSave enregistre la phase precedente ; la branche 7 s execute en arrivant a la
+   phase 8 (Equipements).
+   GreffesDesAppartenances n a toujours aucun appelant, et c est maintenant VERIFIE sur
+   wincreation.pas (aucune occurrence dans les 3576 lignes) : elle peut etre supprimee.
+BOOK_NATIONS_OF_MANKIND.Xml - LOT 3d-2 TERMINE. Les treize regiments restants (Altdorf,
+   Hochland, Marienburg, Middenland, Nordland, Nuln, Ostermark, Ostland, Reikland, Stirland,
+   Talabecland, Talabheim, Wissenland), plus 10 competences et 4 talents crees pour eux.
+   549133 > 563530 octets. Decisions de saisie, toutes commentees dans le fichier : les
+   regiments de ville prennent l ethnie de leur province mere (Altdorf > Reikland, Nuln >
+   Wissenland, Talabheim > Talabecland), Marienburg garde Specie VIDE, Middenland et Nordland
+   pointent sur les ethnies de MIDDENHEIM (l officiel prime), Reikland pointe sur
+   RULES-RACE_HUM du Rulebook. Lore (Beastmen) et Lore (Norscans) CREES et non ramenes a Lore
+   (Beasts) / Lore (Norsca) - decision Nono : l homme-bete n est pas une bete, le Norscan est
+   un peuple et Norsca une region. Craftsman/Master Tradesman (Gunsmith) NON crees, on pointe
+   sur RULES-T0092_ARMU et RULES-T0157_ARMU - decision Nono ; seul Bladesmith manquait, cree
+   sous le suffixe _LAMIER deja pose sur RULES-COMPMETIER_LAMIER.
+   EPROUVE : un Wissenlandais Soldier se voit proposer Wissenland, Nuln et Marienburg - les
+   trois candidats attendus. Nuln teste le cas le plus dur, DEUX paliers a choix et les deux
+   sur des TALENTS : le XML porte les deux codes composes avec leur libelle en commentaire.
+CE QUE LA SESSION A APPRIS.
+(1) UNE LIGNE VIDE DANS UNE GRILLE = UN CODE COMPOSE NON DECLARE. Vu sur la grille des
+    competences de race de WinCreation : Humans (Averland) a 12 competences et la 12e
+    s affichait sans libelle. C etait Trade (Farming or Mining), code A/B cite mais jamais
+    declare dans DATA_SKILL_SPECIALIZATION. Dix cas identiques trouves d un coup, tous dans
+    Nations of Mankind. Le controle est scriptable en dix lignes - indexer tous les id="..."
+    du repertoire, extraire toutes les citations contenant un "/", faire la difference - et il
+    doit etre relance apres CHAQUE lot de saisie. Il attrape aussi les branches absentes.
+(2) NE PAS CONFONDRE LES DEUX FORMES DE CODE NON RESOLU. Le "A/B" (SeparateurMulti) est
+    nouveau et vient de ce livre ; le generique "_*" (ValeurGenerique) est dans des
+    competences d ethnie du RULEBOOK lui-meme, de Middenheim, Sea of Claws, Salzenmund et High
+    Elf. Le premier laissait une ligne vide, donc se voyait ; le second s affiche avec son
+    libelle "(Any)" et passait inapercu - mais tous deux peuvent recevoir des points sans
+    qu on ait choisi la branche. Voir A FAIRE.txt.
+(3) L ECRITURE QUI REPOND "ECRIT" SANS ECRIRE S EST ENCORE PRODUITE, sur le premier envoi du
+    livre : taille inchangee sur le poste, date avancee quand meme. Le meme envoi refait a
+    l identique est passe. La verification de la TAILLE apres chaque ecriture reste
+    obligatoire - c est elle, et elle seule, qui a vu le coup.
