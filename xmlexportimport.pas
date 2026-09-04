@@ -190,6 +190,8 @@ Procedure XmlExportBook(Livre: String; Langue: String);
     PSortTalent:              StructureSortTalent;
     PTrait:                   StructureTrait;
     PTraitOption:             StructureTraitOption;
+    PCareerBonus:             StructureCareerBonus;
+    PCareerBonusNiveau:       StructureCareerBonusNiveau;
     PMetierSousMetier:        StructureMetierSousMetier;
     PAttribut:                StructureAttribut;
     PAttributAugmentation:    StructureAttributAugmentation;
@@ -887,6 +889,43 @@ Procedure XmlExportBook(Livre: String; Langue: String);
         if Fist = false then
            XmlContent.Add(XmlFin(ConstXmlDataSpecieTrait));
 
+        // Appartenances greffees sur une carriere - voir CONTEXT.md 2.44. Bloc ECRIT
+        // des maintenant, meme si aucun ecran ne le saisit : l'export reconstruit le
+        // fichier depuis les listes en memoire, donc un bloc lu mais non ecrit
+        // disparait a la premiere sauvegarde depuis WinLivre (lecon du 03/09/2026,
+        // CONTEXT.md 2.39), et un bloc lu mais jamais exporte est exactement le bug
+        // DATA_RACE du 04/09 (CONTEXT.md 2.42).
+        // Le metier et l'ethnie cites appartiennent le plus souvent a un AUTRE livre
+        // (Soldier et les Reiklander viennent du Rulebook) : c'est PCareerBonus.Livre,
+        // et non le livre du metier, qui decide ou la ligne part. Les codes sont deja
+        // complets, on ne reconstruit donc aucun prefixe.
+        Fist := true;
+        for PCareerBonus in ListCareerBonus do
+          if (PCareerBonus.Livre = Livre) then
+            begin
+              if Fist = true then
+                begin
+                  XmlContent.Add(XmlDebut(ConstXmlDataCareerBonus));
+                  Fist := false;
+                end;
+              XmlContent.Add(XmlDebutCode(ConstXmlCareerBonus, PCareerBonus.CodeBonus));
+              XmlContent.Add(XmlLigneLangue(ConstXmlDescription, Langue, PCareerBonus.Libelle));
+              XmlContent.Add(XmlLigne(ConstXmlWork, PCareerBonus.CodeMetier));
+              XmlContent.Add(XmlLigne(ConstXmlRace, PCareerBonus.CodeRace));
+              for PCareerBonusNiveau in ListCareerBonusNiveau do
+                if CompareRechercheValeur(PCareerBonusNiveau.CodeBonus, PCareerBonus.CodeBonus) then
+                  begin
+                    XmlContent.Add(XmlDebutCode(ConstXmlNiveau, PCareerBonusNiveau.CodeNiveau));
+                    XmlContent.Add(XmlLigne(ConstXmlOrder, IntToStr(PCareerBonusNiveau.Niveau)));
+                    XmlContent.Add(XmlLigne(ConstXmlCompetence, PCareerBonusNiveau.ListeCompetence));
+                    XmlContent.Add(XmlLigne(ConstXmlTalent, PCareerBonusNiveau.ListeTalent));
+                    XmlContent.Add(XmlFinCode(ConstXmlNiveau));
+                  end;
+              XmlContent.Add(XmlFinCode(ConstXmlCareerBonus));
+            end;
+        if Fist = false then
+           XmlContent.Add(XmlFin(ConstXmlDataCareerBonus));
+
         // Fabrication
         Fist := true;
         for PFabrication in ListFabrication do
@@ -1004,6 +1043,8 @@ Procedure XmlImport(FileName: String; OnlyPrimary: Boolean; OnlyCode: Boolean);
     PSortTalent:              StructureSortTalent;
     PTrait:                   StructureTrait;
     PTraitOption:             StructureTraitOption;
+    PCareerBonus:             StructureCareerBonus;
+    PCareerBonusNiveau:       StructureCareerBonusNiveau;
     PFabrication:             StructureFabrication;
     PMetierRaceChoixMetier:   StructureMetierRaceChoixMetier;
     PMetierSousMetier:        StructureMetierSousMetier;
@@ -2416,6 +2457,90 @@ Procedure XmlImport(FileName: String; OnlyPrimary: Boolean; OnlyCode: Boolean);
                             begin
                               ListTrait.add(PTrait);
                               inc(NbTrait);
+                            end;
+
+                          AddTrad(PTraduction, Langue);
+                        end;
+
+                      NodeNv2 := XmlElement(NodeNv2.NextSibling);
+                    end;
+                end;
+
+              // Appartenances greffees sur une carriere - bloc de LIVRE, purement
+              // ADDITIF, voir CONTEXT.md 2.44. Un CareerBonus porte N paliers ; chaque
+              // palier porte son numero de niveau et deux listes separees par des
+              // virgules ou la forme A/B reste valable.
+              NodeNv1 := BookNode.FindNode(ConstXmlDataCareerBonus);
+              if Assigned(NodeNv1) then
+                begin
+                  NodeNv2 := XmlElement(NodeNv1.FirstChild);
+                  While Assigned(NodeNv2) do
+                    begin
+                      if NodeNv2.NodeName = ConstXmlCareerBonus then
+                        begin
+                          PCareerBonus.Livre      := Livre;
+                          PCareerBonus.Libelle    := '';
+                          PCareerBonus.CodeMetier := '';
+                          PCareerBonus.CodeRace   := '';
+                          PCareerBonus.CodeBonus  := RemoveQuotes(UTF8Encode(NodeNv2.Attributes.GetNamedItem(ConstXmlId).NodeValue));
+                          PTraduction             := InitTrad(ConstPCareerBonus, PCareerBonus.CodeBonus, '', PCareerBonus.Livre);
+
+                          NodeNv3 := XmlElement(NodeNv2.FirstChild);
+                          while Assigned(NodeNv3) do
+                            begin
+                              case NodeNv3.NodeName of
+                                ConstXmlDescription:
+                                  begin
+                                    PCareerBonus.Libelle := RemoveQuotes(UTF8Encode(NodeNv3.TextContent));
+                                    Langue               := RemoveQuotes(UTF8Encode(NodeNv3.Attributes.GetNamedItem(ConstXmlLanguage).NodeValue));
+                                    PTraduction.Libelle  := PCareerBonus.Libelle;
+                                  end;
+                                ConstXmlWork:
+                                  PCareerBonus.CodeMetier := RemoveQuotes(UTF8Encode(NodeNv3.TextContent));
+                                ConstXmlRace:
+                                  PCareerBonus.CodeRace   := RemoveQuotes(UTF8Encode(NodeNv3.TextContent));
+                                ConstXmlNiveau:
+                                  begin
+                                    // Record local reutilise d'un palier a l'autre : sans
+                                    // remise a zero, un palier sans balise heriterait du
+                                    // precedent (meme piege que les fonctions Cherche*).
+                                    PCareerBonusNiveau.Livre           := Livre;
+                                    PCareerBonusNiveau.CodeBonus       := PCareerBonus.CodeBonus;
+                                    PCareerBonusNiveau.Niveau          := 0;
+                                    PCareerBonusNiveau.ListeCompetence := '';
+                                    PCareerBonusNiveau.ListeTalent     := '';
+                                    PCareerBonusNiveau.CodeNiveau      := RemoveQuotes(UTF8Encode(NodeNv3.Attributes.GetNamedItem(ConstXmlId).NodeValue));
+
+                                    Node := XmlElement(NodeNv3.FirstChild);
+                                    while Assigned(Node) do
+                                      begin
+                                        case Node.NodeName of
+                                          ConstXmlOrder:
+                                            PCareerBonusNiveau.Niveau          := StrToIntDef(RemoveQuotes(UTF8Encode(Node.TextContent)),0);
+                                          ConstXmlCompetence:
+                                            PCareerBonusNiveau.ListeCompetence := RemoveQuotes(UTF8Encode(Node.TextContent));
+                                          ConstXmlTalent:
+                                            PCareerBonusNiveau.ListeTalent     := RemoveQuotes(UTF8Encode(Node.TextContent));
+                                        end;
+
+                                        Node := XmlElement(Node.NextSibling);
+                                      end;
+
+                                    if LangueDef = ConstAnglais then
+                                      begin
+                                        ListCareerBonusNiveau.add(PCareerBonusNiveau);
+                                        inc(NbCareerBonusNiveau);
+                                      end;
+                                  end;
+                              end;
+
+                              NodeNv3 := XmlElement(NodeNv3.NextSibling);
+                            end;
+
+                          if LangueDef = ConstAnglais then
+                            begin
+                              ListCareerBonus.add(PCareerBonus);
+                              inc(NbCareerBonus);
                             end;
 
                           AddTrad(PTraduction, Langue);

@@ -1033,6 +1033,11 @@ Description: You ask Dazh to illuminate the night, and he
 <Talent id="RULES-T0129_FROID">
 <Description language="ENGLISH">"Resistance (Cold)"</Description>
 </Talent>
+  <!-- LOT 3d-2 : Etiquette (Dwarfs), accorde par le regiment d Averland (p.6). Verifie
+       absent de tout DATABASE\ avant creation. -->
+<Talent id="RULES-T0136_DWARFS">
+<Description language="ENGLISH">"Etiquette (Dwarfs)"</Description>
+</Talent>
 </DATA_TALENT_SPECIALIZATION>
 <DATA_SPECIE_TRAIT>
   <!-- LOT 3a : les "Trait (Any)" des ethnies. Le livre donne comme dernier talent une
@@ -11431,6 +11436,40 @@ Poison: Used to weaken and kill targets, anyone caught in the radius of this gre
 <Modifier>"+"</Modifier>
 </BonusMalus>
 </DATA_WEAPON_BONUS>
+<DATA_CAREER_BONUS>
+  <!-- LOT 3d-2 : les regiments de l Empire (p.6-7). Le livre les decrit comme un greffon
+       et non comme une carriere : "All Lore Skills and Talents granted to the soldier by
+       their Regiment are treated AS IF ADDED TO THEIR CAREER". Conditions posees par le
+       livre : etre de la province (Specie) ET avoir pris la carriere Soldier du Rulebook
+       (Career). Voir CONTEXT.md 2.44.
+       PREMIER REGIMENT SAISI, les treize autres suivent une fois l aller-retour valide. -->
+<CareerBonus id="NATIO-REGIM_AVER">
+<Description language="ENGLISH">"Averland State Army"</Description>
+<Career>"RULES-WORK57"</Career>
+<Specie>"NATIO-RACE_HAVER"</Specie>
+<Level id="NATIO-REGIM_AVER_1">
+<Order>"1"</Order>
+<Skill>"RULES-COMPSAVOIR_AVERLAND"</Skill>
+<Talent>""</Talent>
+</Level>
+<Level id="NATIO-REGIM_AVER_2">
+<Order>"2"</Order>
+<Skill>""</Skill>
+<Talent>"RULES-T0136_DWARFS"</Talent>
+</Level>
+<Level id="NATIO-REGIM_AVER_3">
+<Order>"3"</Order>
+  <!-- "Lore (Dwarfs or Greenskins)" : le choix entre deux passe par SeparateurMulti. -->
+<Skill>"RULES-COMPSAVOIR_NAIN/RULES-COMPSAVOIR_GREENSKIN"</Skill>
+<Talent>""</Talent>
+</Level>
+<Level id="NATIO-REGIM_AVER_4">
+<Order>"4"</Order>
+<Skill>""</Skill>
+<Talent>"RULES-T0028"</Talent>
+</Level>
+</CareerBonus>
+</DATA_CAREER_BONUS>
 <DATA_CRAFTMANSHIP>
   <!-- Les trois accessoires d arme de la page 60, poses ici et non dans DATA_WEAPON : un
        accessoire se monte sur l ARME D UN PERSONNAGE, pas sur une entree de catalogue - on

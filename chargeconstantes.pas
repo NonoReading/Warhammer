@@ -72,6 +72,9 @@ Const
       ConstXmlCompletLivre              = 'COMPLETE';
       ConstXmlRegle                     = 'RULES';
       ConstXmlOptions                   = 'OPTIONS';
+      // Appartenances du personnage (regiment, ordre de chevalerie, culte) : les codes
+      // des CareerBonus auxquels il adhere. Voir CONTEXT.md 2.44.
+      ConstXmlAppartenance              = 'MEMBERSHIP';
       ConstXmlDataBook                  = 'DATA_BOOK';
       ConstXmlDataAttributCost          = 'DATA_ATTRIBUT_COST';
       ConstXmlDataSkillCost             = 'DATA_SKILL_COST';
@@ -94,6 +97,11 @@ Const
       // Region / Kingdom Trait). Bloc de LIVRE, cite depuis SUBCHAPTER_TALENT d'une
       // ethnie : une meme liste sert plusieurs ethnies. CONTEXT.md 2.41.
       ConstXmlDataSpecieTrait           = 'DATA_SPECIE_TRAIT';
+      // Appartenance qui greffe des donnees sur une carriere (regiment, ordre de
+      // chevalerie, culte). Bloc de LIVRE, purement ADDITIF : le livre qui l'apporte
+      // n'a pas a modifier le fichier du livre qui declare la carriere ou l'ethnie.
+      // CONTEXT.md 2.44.
+      ConstXmlDataCareerBonus           = 'DATA_CAREER_BONUS';
       ConstXmlDataRandomTalent          = 'DATA_RANDOM_TALENT';
       ConstXmlDataSpecieCreation        = 'DATA_RANDOM_SPECIE';
       ConstXmlDataCraftsmanship         = 'DATA_CRAFTMANSHIP';
@@ -215,6 +223,10 @@ Const
       // "trait de creature" d'un talent (2.15). Deux notions differentes, deux balises.
       ConstXmlSpecieTrait               = 'SpecieTrait';
       ConstXmlTraitOption               = 'Option';
+      // Un CareerBonus (bloc DATA_CAREER_BONUS, CONTEXT.md 2.44) porte N paliers. Le
+      // palier reutilise ConstXmlNiveau ('Level') comme balise, et ConstXmlOrder pour
+      // SON numero - 'Level' ne peut pas servir aux deux.
+      ConstXmlCareerBonus               = 'CareerBonus';
       ConstXmlId                        = 'id';
       ConstXmlAttribut                  = 'Attribut';
       ConstXmlOrder                     = 'Order';
@@ -444,6 +456,7 @@ Const
       ConstPEspece                          = 'PEspece';
       ConstPTrait                           = 'PTrait';
       ConstPTraitOption                     = 'PTraitOption';
+      ConstPCareerBonus                     = 'PCareerBonus';
       ConstPRegle                           = 'PRegle';
       ConstPMetier                          = 'PMetier';
       ConstPArme                            = 'PArme';

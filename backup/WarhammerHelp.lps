@@ -48,9 +48,10 @@
         <Filename Value="chargeconstantes.pas"/>
         <IsPartOfProject Value="True"/>
         <UnitName Value="ChargeConstantes"/>
+        <IsVisibleTab Value="True"/>
         <EditorIndex Value="1"/>
         <TopLine Value="201"/>
-        <CursorPos X="35" Y="219"/>
+        <CursorPos X="37" Y="213"/>
         <UsageCount Value="200"/>
         <Loaded Value="True"/>
       </Unit>
@@ -162,10 +163,9 @@
         <HasResources Value="True"/>
         <ResourceBaseClass Value="Form"/>
         <UnitName Value="WinRaces"/>
-        <IsVisibleTab Value="True"/>
         <EditorIndex Value="2"/>
-        <TopLine Value="824"/>
-        <CursorPos X="39" Y="832"/>
+        <TopLine Value="825"/>
+        <CursorPos X="28" Y="841"/>
         <UsageCount Value="200"/>
         <Loaded Value="True"/>
         <LoadedDesigner Value="True"/>

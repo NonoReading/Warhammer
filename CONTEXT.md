@@ -4,7 +4,8 @@
 au §2.37 : les onze ethnies humaines, les 72 sorts des six domaines de magie, l'armurerie —
 44 armes de mêlée, 17 à distance, 6 munitions, 28 armures, 3 accessoires — et les sept
 provinces de l'Empire. **Il ne reste que 3d-2 (régiments) et 3d-3 (ordres de chevalerie)**,
-qui demandent tous deux une conception. Les deux bugs laissés ouverts le 03/09 sont corrigés —
+qui demandent tous deux une conception ; celle du 3d-2 est arretee au §2.44
+(table `DATA_CAREER_BONUS`), non appliquee. Les deux bugs laissés ouverts le 03/09 sont corrigés —
 qualités d'armes d'Archives I, et export du bloc `DATA_RACE` au §2.42 ; les compétences
 « A ou B » n'apparaissaient pas dans WinRaces, corrigé au §2.43. ⚠️ Lire le §0 sur
 **l'écriture qui répond « écrit » sans écrire**, découverte le 04/09.)** Ce fichier remplace tous les anciens
@@ -127,6 +128,15 @@ du même incident (31/08, 01/09, 02/09/2026) :**
   voit à `diff | grep '^<'`, et à rien d'autre. Un diff dont les retraits ne sont pas
   exactement ceux que j'ai voulus ne part pas ; je refais l'édition depuis la version
   fraîche.
+
+⚠️ **L'ENREGISTREMENT DEPUIS WINLIVRE N'EST PAS ACTIVE (Nono, 04/09/2026).** Ne plus
+proposer « sauvegarde le livre depuis WinLivre et on regarde si le bloc ressort » comme
+test : l'ecriture n'existe pas encore cote interface (§2.1, phase 2 jamais demarree, tous
+les `TEdit` en `ReadOnly`). Ce qui se teste aujourd'hui sur un bloc XML nouveau, c'est le
+CHARGEMENT et l'affichage, rien d'autre. La consequence pour la conception ne change pas :
+un bloc lu mais non exporte reste un bug a corriger au moment ou on l'ecrit (§2.42), parce
+que le jour ou l'enregistrement sera active il effacerait le bloc — mais ce risque ne se
+verifie pas par un aller-retour, il se verifie en RELISANT le code d'export.
 
 **Tenue de `A FAIRE.txt` (Nono, 30/08/2026)** — deux règles, parce que ce fichier a déjà
 dérivé une fois jusqu'à 2302 lignes :
@@ -4249,6 +4259,124 @@ cas limite déjà rencontré.
 un code de compétence). Le test regarde donc aussi le grand-parent, et passe avant le cas
 talent. Troisième occurrence du même piège en deux jours : **un aiguillage sur
 `Node.Parent.Text` ne survit pas à l'ajout d'un niveau dans l'arbre** (§2.41).
+
+---
+
+### 2.44 `DATA_CAREER_BONUS` — l'appartenance greffe des données sur une carrière — table et fiche EN PLACE, lecture à brancher (04/09/2026)
+
+C'est la réponse à la question laissée ouverte au 3d-2 du §2.37 (« carrière dérivée ou
+greffon ? »). **Greffon**, et le livre le dit lui-même p.6 : « All Lore Skills and Talents
+granted to the soldier by their Regiment are treated **as if added to their Career** and may
+be purchased and advanced as normal ». Une carrière dérivée aurait dupliqué quatorze fois
+les quatre tableaux d'avance du Soldier pour changer une ligne.
+
+**Le modèle, formulé par Nono le 04/09** : un élément complémentaire qui **nécessite une
+ethnie et un métier**, et qui, **suivant le niveau**, donne accès à une donnée supplémentaire
+en plus des compétences et talents normaux. Le livre pose exactement ces deux conditions
+p.6 : « granted to those who select the **Soldier Career** » et « your character must
+originate from the Empire and their **respective Province** ».
+
+**Pourquoi une table nouvelle et pas `DATA_SPECIE_TRAIT` (§2.41) — décision Nono.** « Les
+Reiklander existent depuis le RULEBOOK et je ne voudrais pas avoir à modifier cette table
+pour une option de fanbook. » C'est le raisonnement qui avait déjà produit
+`DATA_SPELL_TALENT` au §2.39 : un bloc **additif**, porté par le livre qui l'apporte, qu'un
+autre livre n'a jamais à retoucher, et qui se retire de lui-même si son livre n'est pas
+chargé — donc aucune référence pendante pour le contrôle d'intégrité du §2.20.
+`DATA_SPECIE_TRAIT` ne connaît d'ailleurs ni le métier ni le niveau.
+
+**La table ne doit pas s'appeler « régiment ».** La même structure porte les ordres de
+chevalerie du 3d-3 (sur la carrière Knight) et vraisemblablement les cultes
+d'*Initiations and Cult Skills*. D'où un nom générique, `DATA_CAREER_BONUS`.
+
+Forme retenue, dans le style du projet (`XmlDebutCode` / `XmlLigne` / `XmlFinCode`, pas
+d'attributs multiples — voir l'écart du §2.39 point 1) :
+
+```xml
+<DATA_CAREER_BONUS>
+<Bonus id="NATIO-REGIM_AVER">
+<Name>"Averland State Army"</Name>
+<Career>"RULES-WORK41"</Career>          <!-- Soldier, code a confirmer -->
+<Specie>"NATIO-RACE_AVERLAND"</Specie>   <!-- vide = aucune condition d'origine -->
+<Level1><Competence>"..._AVERLAND"</Competence></Level1>
+<Level2><Talent>"..."</Talent></Level2>
+<Level3><Competence>"..._DWARFS/..._GREENSKINS"</Competence></Level3>
+<Level4><Talent>"..."</Talent></Level4>
+</Bonus>
+</DATA_CAREER_BONUS>
+```
+
+Le « A ou B » du palier Sergeant passe par le séparateur multi `/`, que le §2.43 vient de
+faire fonctionner dans WinRaces. `<Specie>` vide vaut « ouvert à tous » : **validé par Nono
+le 04/09**, c'est le cas de Marienburg, que le livre dispense explicitement de la condition
+d'origine (« with the exception of Marienburg who hires anyone »).
+
+**Les quatre régiments de villes** (Altdorf, Nuln, Talabheim, Marienburg) n'ont pas d'ethnie
+au 3d-1, qui n'a saisi que des provinces. Décision : on met l'ethnie de la province mère,
+que le livre désigne lui-même par le `Lore` qu'il accorde — Altdorf → Reikland, Nuln →
+Wissenland, Talabheim → Talabecland ; Marienburg reste sans condition.
+
+**Ce que la table ne porte pas, et qui est le vrai coût du chantier.** Contrairement à
+`DATA_SPELL_TALENT`, qui était en lecture seule, « ce personnage appartient au régiment
+d'Averland » est une **donnée de la fiche** : champ nouveau dans `chargepersonnage.pas` et
+`xmlexportimport.pas`, plus un endroit pour le choisir dans WinPersonnage. Le livre ajoute
+une règle de persistance qui interdit de déduire l'appartenance de la carrière courante :
+« If you leave your Regiment under any conditions, such as being discharged or changing
+Careers, you maintain all additional Skills and Talents. »
+
+**Les Regiments of Renown (11) ne rentrent PAS dans ce moule tel quel** et sont à traiter
+après les quatorze provinciaux. Trois écarts : la condition est le **niveau 3 atteint** et
+non l'ethnie seule ; l'effet comprend des **trappings** (de l'équipement, que le greffon
+compétence/talent ne porte pas) ; et le livre y ajoute un effet de règle que le modèle ne
+sait pas dire (« votre rang 3 est ramené à Soldier mais votre statut social reste celui du
+3 »). Même famille que les psychologies et le 3d-3.
+
+**Avant la saisie** : passer au contrôle de collision les `Lore (…)` cités par les
+régiments — Blackpowder, Taxes, Armory, Westerland, Riverways, Empire, Morr, Undead,
+Manann, Sigmar, Ulric, Taal, Beastmen, Norscans, Greenskins, Dwarfs — **sur la nature
+ajoutée** (spécialisations de compétence), et pas seulement sur les objets qu'ils citent :
+c'est la règle du §0 née des trois doublons d'ethnies du 04/09.
+
+**Coquille du livre relevée** : le palier Sergeant de Stirland est imprimé « Death Jacks: »
+au lieu de « Sergeant: » (p.6).
+
+---
+
+**CE QUI A ÉTÉ FAIT LE 04/09/2026 — trois points de compilation, tous verts.**
+
+*Point 1, les structures.* `chargeconstantes.pas` : `ConstXmlDataCareerBonus`
+(`'DATA_CAREER_BONUS'`) et `ConstXmlCareerBonus` (`'CareerBonus'`) — toutes les autres
+balises existaient déjà (`Description`, `Career`, `Specie`, `Level`, `Skill`, `Talent`,
+`id`), et le **numéro** du palier réutilise `ConstXmlOrder`, `'Level'` servant déjà de nom à
+la balise du palier. `chargemetier.pas` : `StructureCareerBonus` et
+`StructureCareerBonusNiveau`, leurs deux `TList`, `ChercheCareerBonus` (avec le `Default()`
+du §2.17) et `NiveauxDuCareerBonus`, dont **l'appelant est propriétaire de la liste rendue**,
+même contrat que `OptionsDuTrait`. `warhammersource.pas` : les deux `Create` et les deux
+`Clear`, pas de `Free` (aucune liste du projet n'en a).
+
+*Point 2, l'aller-retour XML.* Import **et** export dans la même passe de
+`xmlexportimport.pas`, juste après `DATA_SPECIE_TRAIT`, plus les deux variables locales dans
+les `var` des deux procédures. Le libellé passe par `XmlLigneLangue(ConstXmlDescription, …)`
+comme tout libellé traduisible du projet, d'où `ConstPCareerBonus` pour `InitTrad`.
+
+*Point 3, la fiche.* `chargepersonnage.pas` : le champ `Appartenance: String` dans
+`StructurePersonnage` (codes de `CareerBonus` séparés par des virgules), écrit après
+`OPTIONS` et relu sous `ConstXmlAppartenance` (`'MEMBERSHIP'`), **remis à vide avant le test
+`Assigned`** pour que les fiches enregistrées avant ce jour se rechargent sans erreur.
+
+*Premier régiment saisi*, comme cas d'essai : `NATIO-REGIM_AVER` « Averland State Army »
+dans `BOOK_NATIONS_OF_MANKIND.Xml`, `Career` = `RULES-WORK57` (Soldier du Rulebook),
+`Specie` = `NATIO-RACE_HAVER`, quatre paliers, le palier 3 portant le choix
+`RULES-COMPSAVOIR_NAIN/RULES-COMPSAVOIR_GREENSKIN`. A demandé une spécialisation nouvelle,
+`RULES-T0136_DWARFS` « Etiquette (Dwarfs) », absente de tout `DATABASE\` (collision
+vérifiée avant écriture). **Le livre charge sans erreur.**
+
+**Point de reprise : brancher la LECTURE, et rien n'est encore écrit de ce côté.** Il manque
+une fonction qui, pour un personnage donné, rend les compétences et talents greffés par ses
+appartenances jusqu'au niveau atteint, et son branchement là où WinPersonnage bâtit ses
+listes de compétences et de talents. C'est le premier point du chantier qui touche à
+l'affichage. Tant qu'il n'est pas fait, le greffon est chargé mais invisible — ce qui est le
+comportement attendu, pas une anomalie. Ensuite seulement, la saisie mécanique des treize
+régiments restants.
 
 ---
 

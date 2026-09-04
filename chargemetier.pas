@@ -30,9 +30,51 @@ Type
 
   TListMetier = specialize TList<StructureMetier>;
 
+  // Bloc DATA_CAREER_BONUS, ajoute le 04/09/2026. Une APPARTENANCE (regiment de
+  // l'Empire, ordre de chevalerie, culte) qui, sous condition d'une ethnie ET d'un
+  // metier, greffe des competences et des talents supplementaires palier par palier.
+  // Nations of Mankind p.6 : "All Lore Skills and Talents granted to the soldier by
+  // their Regiment are treated AS IF ADDED TO THEIR CAREER".
+  // Pourquoi un objet de LIVRE et pas un champ de l'ethnie ou du metier : les
+  // Reiklander viennent du Rulebook, et un fanbook ne doit pas avoir a reecrire le
+  // fichier du Rulebook pour leur ajouter une option. Meme raisonnement que
+  // DATA_SPELL_TALENT (2.39). CONTEXT.md 2.44.
+  StructureCareerBonus = Record
+        CodeBonus:      String;
+        Libelle:        String;
+        // Metier sur lequel l'appartenance se greffe (ex. Soldier du Rulebook).
+        CodeMetier:     String;
+        // ETHNIE requise pour y avoir droit - ConstXmlRace ('Specie'), donc bien
+        // l'ethnie et non la race. VIDE = aucune condition d'origine : c'est le cas de
+        // Marienburg, que le livre dispense explicitement ("who hires anyone").
+        CodeRace:       String;
+        Livre:          String;
+  End;
+
+  // Un palier = "au niveau N, tu gagnes ceci". ListeCompetence et ListeTalent sont des
+  // listes separees par des virgules dont chaque element garde les formes deja connues,
+  // notamment A/B pour un choix entre deux (Lore (Morr or Undead)) - meme convention que
+  // StructureTraitOption.ListeTalent (2.41). Un palier qui n'accorde qu'un talent laisse
+  // ListeCompetence vide.
+  StructureCareerBonusNiveau = Record
+        CodeBonus:        String;
+        CodeNiveau:       String;
+        Niveau:           Integer;
+        ListeCompetence:  String;
+        ListeTalent:      String;
+        Livre:            String;
+  End;
+
+  TListCareerBonus       = specialize TList<StructureCareerBonus>;
+  TListCareerBonusNiveau = specialize TList<StructureCareerBonusNiveau>;
+
 var
   ListMetier:     TListMetier;
   NbMetier:       Integer;
+  ListCareerBonus:        TListCareerBonus;
+  NbCareerBonus:          Integer;
+  ListCareerBonusNiveau:  TListCareerBonusNiveau;
+  NbCareerBonusNiveau:    Integer;
 
 function chercheMetier(CodeMetier :String): StructureMetier;
 Function CheminMetierImage(CodeMetier: String): String;
@@ -40,6 +82,8 @@ Function DossierNiveauMetier(CodeMetier: String): String;
 Function CheminNiveauImageMetier(CodeMetier: String; Niveau: Integer): String;
 Function CheminNiveauImageMetierRace(CodeMetier: String; CodeRace: String; Niveau: Integer): String;
 Function EstMetierEnfantDe(CodeMetier: String; CodeParent: String): Boolean;
+function ChercheCareerBonus(CodeBonus :String): StructureCareerBonus;
+function NiveauxDuCareerBonus(CodeBonus :String): TListCareerBonusNiveau;
 
 implementation
 
@@ -62,6 +106,34 @@ Begin
       PVide.Libelle := GetTexteLibelle('LAB_138');
       result:= PVide;
     end;
+end;
+
+function ChercheCareerBonus(CodeBonus :String): StructureCareerBonus;
+Var
+  PBonus:  StructureCareerBonus;
+Begin
+  // Default() obligatoire : sans lui le record garde le contenu du PRECEDENT appel
+  // quand rien n'est trouve. Voir CONTEXT.md 2.17.
+  Result := Default(StructureCareerBonus);
+  for PBonus in ListCareerBonus do
+    if CompareRechercheValeur(PBonus.CodeBonus, CodeBonus) then
+      begin
+        Result := PBonus;
+        break;
+      end;
+end;
+
+function NiveauxDuCareerBonus(CodeBonus :String): TListCareerBonusNiveau;
+// Renvoie les paliers d'une appartenance, dans l'ordre du fichier. L'APPELANT est
+// proprietaire de la liste rendue et doit la liberer - meme contrat que OptionsDuTrait
+// (ChargeRace, 2.41).
+Var
+  PNiveau:  StructureCareerBonusNiveau;
+Begin
+  Result := TListCareerBonusNiveau.Create;
+  for PNiveau in ListCareerBonusNiveau do
+    if CompareRechercheValeur(PNiveau.CodeBonus, CodeBonus) then
+      Result.Add(PNiveau);
 end;
 
 Function CheminMetierImage(CodeMetier: String): String;

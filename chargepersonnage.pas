@@ -132,6 +132,12 @@ Type
      HairColors:                 String;
      EyeColors:                  String;
      Asterisque:                 Integer;
+     // Appartenances : les codes des CareerBonus (regiment, ordre de chevalerie, culte)
+     // dont ce personnage est membre, separes par des virgules, vide si aucune.
+     // C'est une donnee de la FICHE et non une deduction de la carriere en cours : le
+     // livre precise qu'on garde les competences et talents acquis meme apres avoir
+     // quitte le regiment ou change de carriere. CONTEXT.md 2.44.
+     Appartenance:               String;
   end;
 
   StructureChoixCreation = record
@@ -607,6 +613,9 @@ begin
         // Options
         XMLContent.Add(XmlLigne(ConstXmlOptions, Personnage.Options));
 
+        // Appartenances - voir CONTEXT.md 2.44.
+        XMLContent.Add(XmlLigne(ConstXmlAppartenance, Personnage.Appartenance));
+
       XMLContent.Add(XmlFin(ConstXmlPersonnage));
 
       // Enregistrer le contenu XML dans un fichier
@@ -681,6 +690,11 @@ begin
         Personnage.LivresAcceptes     := RemoveQuotes(UTF8Encode(PlayerNode.FindNode(ConstXmlRegle).TextContent));
       if Assigned(PlayerNode.FindNode(ConstXmlOptions)) then
         Personnage.Options            := RemoveQuotes(UTF8Encode(PlayerNode.FindNode(ConstXmlOptions).TextContent));
+      // Balise absente des fiches enregistrees avant le 04/09/2026 : le test Assigned
+      // suffit a les charger sans erreur, Appartenance reste vide. CONTEXT.md 2.44.
+      Personnage.Appartenance         := '';
+      if Assigned(PlayerNode.FindNode(ConstXmlAppartenance)) then
+        Personnage.Appartenance       := RemoveQuotes(UTF8Encode(PlayerNode.FindNode(ConstXmlAppartenance).TextContent));
       if Assigned(PlayerNode.FindNode(ConstXmlAge)) then
         Personnage.Age                := StrToInt(RemoveQuotes(UTF8Encode(PlayerNode.FindNode(ConstXmlAge).TextContent)));
       if Assigned(PlayerNode.FindNode(ConstXmlHeight)) then

@@ -927,3 +927,38 @@ LANGUAGE (MOOTISH) N EXISTE PAS EN BASE, C EST LANGUAGE (HALFLING). Le Moot est 
 le livre nomme la langue par le territoire, la base par le peuple, et aucun "Mootish" n existe
 dans le corpus. Meme famille : Secret Signs (Hunters) lu comme Secret Signs (Hunter), et
 Trade (Farmer) comme Trade (Farming). Decisions Nono du 04/09/2026.
+04/09/2026 - DATA_CAREER_BONUS : L APPARTENANCE GREFFE DES DONNEES SUR UNE CARRIERE
+QUESTION TRANCHEE, C EST UN GREFFON ET PAS UNE CARRIERE DERIVEE. Le lot 3d-2 de Nations of
+Mankind (les regiments de l Empire) attendait cette conception depuis le 03/09. Le livre la
+donne lui-meme p.6 : "All Lore Skills and Talents granted to the soldier by their Regiment
+are treated AS IF ADDED TO THEIR CAREER". Quatorze carrieres "Soldier (Averland)" auraient
+duplique quatorze fois les quatre tableaux d avance du Soldier pour changer une ligne.
+LE MODELE, FORMULE PAR NONO : un element complementaire qui necessite une ETHNIE et un
+METIER, et qui suivant le NIVEAU donne une donnee supplementaire. Le livre pose exactement
+ces deux conditions.
+POURQUOI UNE TABLE NOUVELLE ET PAS DATA_SPECIE_TRAIT - decision Nono : "les Reiklander
+existent depuis le RULEBOOK et je ne voudrais pas avoir a modifier cette table pour une
+option de fanbook". Meme raisonnement que DATA_SPELL_TALENT le 03/09 : un bloc ADDITIF,
+porte par le livre qui l apporte, qu aucun autre livre n a a retoucher, et qui se retire de
+lui-meme si son livre n est pas charge. La table n est pas nommee "regiment" : la meme
+structure portera les ordres de chevalerie et vraisemblablement les cultes.
+ECRIT ET COMPILE, EN TROIS POINTS. (1) chargeconstantes : ConstXmlDataCareerBonus,
+ConstXmlCareerBonus, ConstPCareerBonus, ConstXmlAppartenance ; chargemetier :
+StructureCareerBonus et StructureCareerBonusNiveau, leurs listes, ChercheCareerBonus et
+NiveauxDuCareerBonus ; warhammersource : les Create et les Clear. (2) xmlexportimport :
+import ET export dans la meme passe, pour ne pas refaire le DATA_RACE lu et jamais exporte
+du 04/09. (3) chargepersonnage : le champ Appartenance sur la fiche, ecrit et relu, avec
+remise a vide et test Assigned pour que les fiches anterieures se rechargent.
+POURQUOI LE CHAMP EST SUR LA FICHE ET PAS DEDUIT DE LA CARRIERE : le livre precise qu on
+garde les competences et talents du regiment meme apres l avoir quitte ou change de
+carriere. C est le vrai cout du chantier, la table seule ne suffisait pas.
+PREMIER REGIMENT SAISI : NATIO-REGIM_AVER, Averland State Army, ses quatre paliers, plus la
+specialisation RULES-T0136_DWARFS "Etiquette (Dwarfs)" qui n existait nulle part en base.
+Le livre charge sans erreur. Rien ne s affiche encore : la lecture n est pas branchee.
+L ENREGISTREMENT DEPUIS WINLIVRE N EST PAS ACTIVE - dit par Nono ce jour, et note au
+CONTEXT.md 0. Ne plus proposer l aller-retour "sauvegarde et regarde si le bloc ressort"
+comme test d un nouveau bloc XML : seul le chargement se teste. Un bloc lu mais non exporte
+reste malgre tout un bug, il se verifie en RELISANT le code d export.
+LE PIEGE D ECRITURE S EST ENCORE PRODUIT, ET LA PARADE MARCHE TOUJOURS. Un envoi de
+CONTEXT.md a repondu "ecrit" en avancant la date, taille inchangee a 323432 au lieu de
+324144. Meme envoi reemis : atterri.
