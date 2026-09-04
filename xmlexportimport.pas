@@ -166,6 +166,7 @@ Procedure XmlExportBook(Livre: String; Langue: String);
     PCompetence:              StructureCompetence;
     PTalent:                  StructureTalent;
     PTalentArmureModifExp:    StructureTalentArmureModif;
+    PEspece:                  StructureEspece;
     PRace:                    StructureRace;
     PRaceAttribut:            StructureRaceAttribut;
     PRaceCompetence:          StructureRaceCompetence;
@@ -443,6 +444,27 @@ Procedure XmlExportBook(Livre: String; Langue: String);
             end;
         if Fist = false then
            XmlContent.Add(XmlFin(ConstXmlDataRandomTalent));
+
+        // Espece (bloc DATA_RACE : la RACE generique qui regroupe les ethnies -
+        // voir ChargeEspece.pas pour le vocabulaire. Etait lue et jamais ecrite.)
+        Fist := true;
+        for PEspece in ListEspece do
+          if PEspece.Livre = Livre then
+            begin
+              if Fist = true then
+                begin
+                  XmlContent.Add(XmlDebut(ConstXmlDataEspece));
+                  Fist := false;
+                end;
+              XmlContent.Add(XmlDebutCode(ConstXmlEspece, XmlCreeCodeLivre(PEspece.Livre, PEspece.CodeEspece)));
+              XmlContent.Add(XmlLigneLangue(ConstXmlDescription, Langue, PEspece.Libelle));
+              // ecrit seulement si la race designe son propre dossier d'icones de niveau
+              if PEspece.DossierNiveau <> '' then
+                XmlContent.Add(XmlLigne(ConstXmlPictureLevel, PEspece.DossierNiveau));
+              XmlContent.Add(XmlFinCode(ConstXmlEspece));
+            end;
+        if Fist = false then
+           XmlContent.Add(XmlFin(ConstXmlDataEspece));
 
         // race
         Fist := true;

@@ -14,12 +14,16 @@ d obstacle de modele - c est de la saisie. Deux rappels : refaire la resolution 
 depuis des fichiers RESTAGES le jour ou on ecrit, et Kislev (Gospodar) REUTILISE
 NATIO-TRAIT_KISLEV au lieu de le redeclarer.
 
-DATA_RACE EST LU MAIS JAMAIS EXPORTE. Trouve le 03/09/2026 en ecrivant l export du bloc
-DATA_SPECIE_TRAIT. ListEspece n apparait nulle part dans l ecriture de xmlexportimport.pas :
-exporter le Rulebook depuis WinLivre lui ferait perdre son bloc de races. Meme piege que
-DATA_SPELL_TALENT (CONTEXT.md 2.39), mais anterieur a ce chantier. Verifier au passage s il
-y a d autres blocs dans ce cas - la methode est de croiser la liste des ConstXmlData* avec
-celles qui apparaissent dans la procedure d export.
+BRANCHER L EXPORT D UN LIVRE DEPUIS WINLIVRE. XmlExportBook existe, est complete, et n est
+APPELEE NULLE PART - constate le 04/09/2026. Il lui manque un point d appel (bouton, choix
+du livre et de la langue). Bloque pour l instant : WinLivre n affiche pas encore toutes les
+donnees d un livre, un export ecraserait ce que l ecran ne sait pas montrer. Prealable donc :
+completer l affichage/edition de WinLivre.
+
+CROISER LES ConstXmlData* LUS ET ECRITS DANS xmlexportimport.pas. Tant que l export n est pas
+branche, un bloc peut manquer a l ecriture sans que rien ne le signale - c est exactement
+comme ca que DATA_RACE (corrige le 04/09/2026) et DATA_SPELL_TALENT (CONTEXT.md 2.39) sont
+passes. Un grep suffit ; a faire avant de brancher l export, pas apres.
 
 VERIFIER LES AUTRES CHEMINS D AFFICHAGE QUAND ON AJOUTE UNE NATURE DE DONNEE. Le trait
 d ethnie a demande une correction dans TROIS endroits qui aiguillent sur la FORME du code
@@ -56,16 +60,6 @@ FABRICATION ET SUPPRIMER RESTENT CLIQUABLES SUR UN SORT, SANS RIEN FAIRE. Depuis
 silence : rien ne signale a l'utilisateur pourquoi le clic n'a pas d'effet. Les griser
 quand la ligne selectionnee est un sort (TabEquipementSelection) serait plus honnete.
 Ergonomie uniquement, aucun bug derriere.
-
-QUATRE QUALITES D ARME FAUSSES DANS BOOK ARCHIVES OF THE EMPIRE I. Trouvees le 03/09/2026
-en cherchant le code de Precise pour l Asrai War Blade. WEAPB14 est Precise, WEAPB16 est
-Accurate ; trois armes que le livre dit Precise portent WEAPB16 : Eonir War Blade
-(ARCH1-COMB_BASE_25), Dwarf Crossbow (ARCH1-PROJ_ARB_03) et Precision Shot and Powder
-(ARCH1-MUNI_02). La quatrieme est le Bearded Axe (ARCH1-COMB_BASE_26), a qui le livre donne
-Trap Blade (WEAPB11) et qui porte WEAPB04, Pummel - la qualite de la ligne d en dessous, le
-Dwarf Hammer. PREUVE QUE C EST BIEN UNE ERREUR DE SAISIE ET PAS UNE CONVENTION : dans le
-meme fichier les Starfire Shafts, que le livre dit vraiment Accurate, portent WEAPB16
-correctement. Le reste de la table du livre (p.92-94) a ete compare ligne a ligne : juste.
 
 GRAIN FLAIL DU RULEBOOK : WEAPB16 SUSPECT. RULES-COMB_FLEAU_03 porte Distract, Accurate,
 Wrap. Accurate sur un fleau de paysan n a pas de sens ; la regle donne Imprecise (WEAPB26).

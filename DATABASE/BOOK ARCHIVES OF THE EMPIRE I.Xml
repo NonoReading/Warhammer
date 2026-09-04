@@ -539,7 +539,7 @@
 <Reach>"WEAPR_MID"</Reach>
 <Price>"3co"</Price>
 <Encumbrance>"0"</Encumbrance>
-<Quality>"WEAPB16"</Quality>
+<Quality>"WEAPB14"</Quality>
 <Hand>"1"</Hand>
 <Ammunition>"0"</Ammunition>
 </Weapon>
@@ -575,7 +575,7 @@
 <Reach>"WEAPR_MID"</Reach>
 <Price>"1GC"</Price>
 <Encumbrance>"2"</Encumbrance>
-<Quality>"WEAPB04"</Quality>
+<Quality>"WEAPB11"</Quality>
 <Hand>"1"</Hand>
 <Ammunition>"0"</Ammunition>
 </Weapon>
@@ -659,7 +659,7 @@
 <Reach>"80"</Reach>
 <Price>"9GC"</Price>
 <Encumbrance>"3"</Encumbrance>
-<Quality>"WEAPB16,WEAPB10,WEAPB23 2"</Quality>
+<Quality>"WEAPB14,WEAPB10,WEAPB23 2"</Quality>
 <Hand>"2"</Hand>
 <Ammunition>"0"</Ammunition>
 </Weapon>
@@ -727,7 +727,7 @@
 <Reach>"+0"</Reach>
 <Price>"3SC"</Price>
 <Encumbrance>"0"</Encumbrance>
-<Quality>"WEAPB12,WEAPB22,WEAPB16"</Quality>
+<Quality>"WEAPB12,WEAPB22,WEAPB14"</Quality>
 <Hand>"0"</Hand>
 <Ammunition>"1"</Ammunition>
 </Weapon>
