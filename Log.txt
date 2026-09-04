@@ -998,3 +998,43 @@ La verification par la TAILLE apres chaque ecriture n est pas negociable.
 BUG VOISIN DECOUVERT ET NON CORRIGE (dans A FAIRE.txt) : revenir dans une carriere deja exercee
 redonne l equipement de depart en double et sans libelle. Boucle "Equipement" du changement de
 carriere, winpersonnage.pas vers l.4675.
+
+04/09/2026 - LES CHOIX "A OU B" DES PALIERS DE REGIMENT PASSENT, ET LA CONCEPTION DE L ECRAN
+D APPARTENANCE EST ARRETEE
+Les deux tests qui sautaient SeparateurMulti dans PersonnageAppliqueGreffes sont retires : le
+code de choix est greffe TEL QUEL dans la fiche. Verifie dans le XML de "solder Aver 2" :
+<Skill name="RULES-COMPSAVOIR_NAIN/RULES-COMPSAVOIR_GREENSKIN">"3"</Skill>.
+L HYPOTHESE DE DEPART ETAIT FAUSSE, ET C EST LA LECON DU JOUR. On croyait que le tableau
+d augmentation savait resoudre un choix tout seul. En realite ChercheCompetence et ChercheTalent
+comparent les codes A L IDENTIQUE (VerifieRecherche, chargeconstantes.pas l.1060) : un code A/B
+n est trouve que s il est DECLARE dans la base. Et c est bien la convention du projet - le
+Rulebook declare douze competences et un talent composes, avec leur libelle du jeu :
+Play (Drum or Fife), Acute Sense (Taste or Touch). Play marchait donc parce qu il est declare,
+pas parce que le programme sait deviner. Ce n etait pas une faille du code mais un OUBLI DE
+SAISIE : l entree composee manquait dans BOOK_NATIONS_OF_MANKIND.Xml.
+DEUX CORRECTIONS, decidees ensemble par Nono. (1) DONNEES : ajout en fin de
+DATA_SKILL_SPECIALIZATION du livre de RULES-COMPSAVOIR_NAIN/RULES-COMPSAVOIR_GREENSKIN =
+"Lore (Dwarfs or Greenskins)". A REFAIRE POUR CHAQUE CHOIX DES TREIZE REGIMENTS RESTANTS.
+(2) CODE, EN FILET : dans ChargeAugmentation (winpersonnage.pas), si la recherche rend un
+enregistrement vide ET que le code porte un /, la ligne reprend le code brut et compose son
+libelle branche par branche. Cote competence la CELLULE CODE etait vide elle aussi, d ou une
+fenetre de specialisation vide puisqu elle recoit justement cette cellule ; cote talent la
+cellule portait deja le code brut, seul le libelle manquait.
+DETECTEUR D OUBLI TROUVE PAR NONO : l export de la fiche personnage ecrit le libelle en
+commentaire a cote de chaque ligne. Un commentaire VIDE a cote d un code A/B signale une entree
+composee non declaree. Un coup d oeil au XML apres un test suffit.
+CONCEPTION DE L ECRAN D APPARTENANCE. L ethnie est une CONDITION D ACCES, pas le porteur : la
+donnee vit sur le personnage. Ce n est PAS automatique mais un CHOIX, parce qu il y a toujours
+plusieurs candidats - Marienburg est sans condition d origine donc candidat pour tout Soldier,
+les quatre regiments de villes portent l ethnie de leur province mere, et l automatique ne sait
+pas dire "aucun regiment" (mercenaire, garde privee).
+DECISION NONO : le choix est REDEMANDE a chaque entree dans une carriere eligible, liste filtree
+sur ethnie + carriere moins les appartenances deja acquises, plus "aucune" ; la reponse S AJOUTE,
+on ne retire jamais. Cela couvre mercenaire > regiment d Averland > fermier > regiment de
+Stirland, qui finit avec les deux. Appartenance etant deja une liste separee par des virgules,
+le cumul ne demande AUCUN changement de structure.
+LE DECALAGE DE PALIERS N EST PAS UN SUJET : en Warhammer on recommence une carriere au niveau 1,
+donc on repasse toujours par le palier 1 du nouveau regiment. Seul le forcage manuel de niveau a
+cout 0 y echappe, et il est assume.
+LE PIEGE D ECRITURE S EST ENCORE PRODUIT DEUX FOIS, sur winpersonnage.pas et sur CONTEXT.md.
+Meme signature : reponse "ecrit", taille inchangee sur le poste, meme envoi reemis, atterri.

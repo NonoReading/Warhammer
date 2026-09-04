@@ -4307,6 +4307,9 @@ Procedure TWinPersonnages.ChargeAugmentation();
     PAttribut:         StructureAttribut;
     Trouve:            Boolean;
     Ind2:              Integer;
+    ListBranche:       TStringList;
+    IndBranche:        Integer;
+    LibBranche:        String;
   Begin
     // Attributs
     Nbc := 0;
@@ -4355,8 +4358,33 @@ Procedure TWinPersonnages.ChargeAugmentation();
             if TabAugmentationCompetence.RowCount <= NbC then
               TabAugmentationCompetence.RowCount     := TabAugmentationCompetence.RowCount + 1;
 
-            TabAugmentationCompetence.Cells[ColAugmCompCode, NbC]  := PCompetence.CodeCompetence;
-            TabAugmentationCompetence.Cells[ColAugmCompLib, NbC]  := PCompetence.Libelle;
+            // Un code de CHOIX 'A/B' n'existe dans aucune table : ChercheCompetence compare
+            // les codes a l'identique (VerifieRecherche) et rend l'enregistrement vide. La
+            // ligne s'affichait donc sans libelle ET sans code, et comme la fenetre de
+            // specialisation recoit justement cette cellule Code, elle s'ouvrait vide. On
+            // reprend alors le code BRUT, et on compose le libelle avec celui de chaque
+            // branche. WinSpecialisation sait deja eclater le '/', et le bloc "propager au
+            // tableau metier" du double-clic retrouve la ligne par ce meme code brut.
+            // Vaut pour tout choix A/B, y compris ceux du Rulebook (Play (Drum or Fife)).
+            if (PCompetence.CodeCompetence = '') and (Pos(SeparateurMulti, PersonnageCompetence.CodeCompetence) > 0) then
+              begin
+                LibBranche  := '';
+                ListBranche := ListeMetierCompetence(PersonnageCompetence.CodeCompetence);
+                for IndBranche := 0 to ListBranche.Count - 1 do
+                  begin
+                    if LibBranche <> '' then
+                      LibBranche := LibBranche + ' ' + SeparateurMulti + ' ';
+                    LibBranche := LibBranche + ChercheCompetence(ListBranche[IndBranche]).Libelle;
+                  end;
+                ListBranche.Free;
+                TabAugmentationCompetence.Cells[ColAugmCompCode, NbC] := PersonnageCompetence.CodeCompetence;
+                TabAugmentationCompetence.Cells[ColAugmCompLib, NbC]  := LibBranche;
+              end
+            else
+              begin
+                TabAugmentationCompetence.Cells[ColAugmCompCode, NbC]  := PCompetence.CodeCompetence;
+                TabAugmentationCompetence.Cells[ColAugmCompLib, NbC]  := PCompetence.Libelle;
+              end;
             For Ind := 1 to TabCompetence.rowCount -1 do
               begin
                 if CompareRechercheValeur(PCompetence.CodeCompetence, TabCompetence.Cells[ColCompCode, Ind]) then
@@ -4431,7 +4459,25 @@ Procedure TWinPersonnages.ChargeAugmentation();
          TabAugmentationTalent.rowCount      := TabAugmentationTalent.rowCount + 1;
          TabAugmentationTalent.Cells[ColAugmTalCode, NbC] := PersonnageTalent.CodeTalent;
          PTalent                             := ChercheTalent(PersonnageTalent.CodeTalent);
-         TabAugmentationTalent.Cells[ColAugmTalLib, NbC] := PTalent.Libelle;
+         // Meme repli que pour les competences : un code de CHOIX 'A/B' n'existe dans
+         // aucune table, ChercheTalent rend l'enregistrement vide et la ligne s'affichait
+         // sans libelle. Ici la cellule Code porte deja le code BRUT (ligne au-dessus),
+         // donc seul le libelle est a composer, branche par branche.
+         if (PTalent.CodeTalent = '') and (Pos(SeparateurMulti, PersonnageTalent.CodeTalent) > 0) then
+           begin
+             LibBranche  := '';
+             ListBranche := ListeTalent(PersonnageTalent.CodeTalent);
+             for IndBranche := 0 to ListBranche.Count - 1 do
+               begin
+                 if LibBranche <> '' then
+                   LibBranche := LibBranche + ' ' + SeparateurMulti + ' ';
+                 LibBranche := LibBranche + ChercheTalent(ListBranche[IndBranche]).Libelle;
+               end;
+             ListBranche.Free;
+             TabAugmentationTalent.Cells[ColAugmTalLib, NbC] := LibBranche;
+           end
+         else
+           TabAugmentationTalent.Cells[ColAugmTalLib, NbC] := PTalent.Libelle;
          if (ListComp.Count > 1) or (Pos(ValeurGenerique, PersonnageTalent.CodeTalent) > 0) then
            TabAugmentationTalent.Cells[ColAugmTalSpe, NbC]:= GetTexteLibelle(ConstLabSelSpe);
          TabAugmentationTalent.Cells[ColAugmTalWork, NbC]  := PersonnageTalent.CodeTalent;

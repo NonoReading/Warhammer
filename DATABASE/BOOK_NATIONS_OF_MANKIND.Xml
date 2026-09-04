@@ -206,6 +206,13 @@
 <Skill id="RULES-COMPSAVOIR_WISSENLAND">
 <Description language="ENGLISH">"Lore (Wissenland)"</Description>
 </Skill>
+  <!-- Code de CHOIX 'A/B' : convention du Rulebook, qui declare chaque choix comme une
+       entree a part entiere avec son libelle (Play (Drum or Fife), Acute Sense (Taste or
+       Touch)). Sans cette declaration, ChercheCompetence ne trouve rien et la ligne
+       s'affiche sans libelle. Utilise par le palier 3 du regiment NATIO-REGIM_AVER. -->
+<Skill id="RULES-COMPSAVOIR_NAIN/RULES-COMPSAVOIR_GREENSKIN">
+<Description language="ENGLISH">"Lore (Dwarfs or Greenskins)"</Description>
+</Skill>
 </DATA_SKILL_SPECIALIZATION>
 <DATA_TALENT>
 <Talent id="NATIO-T0001">

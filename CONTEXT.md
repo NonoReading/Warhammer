@@ -1,7 +1,9 @@
 # Warhammer — Contexte projet
 
-**Dernière mise à jour : 04/09/2026 — après-midi : la LECTURE des appartenances est branchée
-et éprouvée de bout en bout (§2.44), les greffes atterrissent dans la fiche. (Matin : lots 3a, 3b, 3c ET 3d-1 de *Nations of Mankind* TERMINÉS
+**Dernière mise à jour : 04/09/2026 — fin d'après-midi : les appartenances sont branchées de
+bout en bout, CHOIX « A OU B » COMPRIS (§2.44), et la conception de l'écran de choix de
+l'appartenance est arrêtée (redemandé à chaque entrée en carrière, cumulatif).
+(Plus tôt dans la journée : lots 3a, 3b, 3c ET 3d-1 de *Nations of Mankind* TERMINÉS
 au §2.37 : les onze ethnies humaines, les 72 sorts des six domaines de magie, l'armurerie —
 44 armes de mêlée, 17 à distance, 6 munitions, 28 armures, 3 accessoires — et les sept
 provinces de l'Empire. **Il ne reste que 3d-2 (régiments) et 3d-3 (ordres de chevalerie)**,
@@ -4263,7 +4265,7 @@ talent. Troisième occurrence du même piège en deux jours : **un aiguillage su
 
 ---
 
-### 2.44 `DATA_CAREER_BONUS` — l'appartenance greffe des données sur une carrière — table et fiche EN PLACE, lecture à brancher (04/09/2026)
+### 2.44 `DATA_CAREER_BONUS` — l'appartenance greffe des données sur une carrière — table, fiche et lecture EN PLACE ; reste l'écran de choix (04/09/2026)
 
 C'est la réponse à la question laissée ouverte au 3d-2 du §2.37 (« carrière dérivée ou
 greffon ? »). **Greffon**, et le livre le dit lui-même p.6 : « All Lore Skills and Talents
@@ -4421,21 +4423,83 @@ chargée en mémoire quand le fichier a été édité, et la sauvegarde a rééc
 `WarhammerHelp.exe` datait de 11:42 et les deux unités modifiées de 13:08 et 13:13 — le
 programme testé ne contenait pas le code discuté.
 
+---
+
+**LES CHOIX « A OU B » DES PALIERS PASSENT — TERMINÉ (04/09/2026, fin d'après-midi).**
+
+Les deux tests `if Pos(SeparateurMulti, Code) > 0 then continue;` sont retirés de
+`PersonnageAppliqueGreffes` : le code de choix est greffé **tel quel** dans la fiche, et c'est
+l'écran d'augmentation qui le résout. Vérifié dans le XML de « solder Aver 2 » :
+`<Skill name="RULES-COMPSAVOIR_NAIN/RULES-COMPSAVOIR_GREENSKIN">"3"</Skill>`.
+
+*Deux corrections ont été nécessaires en aval, et l'hypothèse de départ était fausse.*
+`ChercheCompetence` / `ChercheTalent` comparent les codes **à l'identique**
+(`VerifieRecherche`, `chargeconstantes.pas` l.1060) : un code `A/B` n'est trouvé que s'il est
+**déclaré dans la base**. Or c'est bien la convention du projet — le Rulebook déclare douze
+compétences et un talent composés, avec leur libellé du jeu (`Play (Drum or Fife)`,
+`Acute Sense (Taste or Touch)`). Ce n'était donc pas une faille du programme mais un **oubli
+de saisie** : l'entrée composée manquait dans `BOOK_NATIONS_OF_MANKIND.Xml`.
+
+1. **Données** — ajout en fin de `DATA_SKILL_SPECIALIZATION` du livre :
+   `RULES-COMPSAVOIR_NAIN/RULES-COMPSAVOIR_GREENSKIN` = « Lore (Dwarfs or Greenskins) ».
+   **À refaire pour chaque choix des treize régiments restants.**
+2. **Code, en filet** — `ChargeAugmentation` (`winpersonnage.pas`) : si la recherche rend un
+   enregistrement vide **et** que le code porte un `/`, la ligne reprend le code brut et
+   compose son libellé branche par branche (`ListeMetierCompetence` / `ListeTalent`). Côté
+   compétence la **cellule Code** était vide elle aussi — d'où une fenêtre de spécialisation
+   vide, puisqu'elle reçoit justement cette cellule ; côté talent la cellule portait déjà le
+   code brut, seul le libellé manquait. Trois variables locales ajoutées : `ListBranche`,
+   `IndBranche`, `LibBranche`.
+
+*Détecteur d'oubli, trouvé par Nono :* l'export de la fiche personnage écrit le libellé en
+commentaire à côté de chaque ligne. **Un commentaire vide à côté d'un code `A/B` signale une
+entrée composée non déclarée** — un coup d'œil au XML après un test suffit à le voir.
+
+*Le piège du §0 s'est reproduit ce jour* : le premier envoi de `winpersonnage.pas` a répondu
+« écrit » sans écrire (taille inchangée sur le poste), le second a atterri. La vérification de
+la TAILLE après chaque écriture reste obligatoire.
+
+---
+
+**CONCEPTION ARRÊTÉE LE 04/09/2026 — COMMENT SE CHOISIT L'APPARTENANCE (point de reprise 2).**
+
+L'ethnie est une **condition d'accès**, pas le porteur : la donnée vit sur le personnage
+(`MEMBERSHIP`), les deux filtres d'une entrée `CareerBonus` étant `<Career>` (obligatoire) et
+`<Specie>` (facultatif, vide = ouvert à tous).
+
+**Ce n'est pas automatique, c'est un choix**, parce qu'un même personnage a toujours plusieurs
+candidats : Marienburg est sans condition d'origine donc candidat pour tout Soldier ; les
+quatre régiments de villes portent l'ethnie de leur province mère, donc un Reiklander Soldier
+peut être de la Reikland State Army *ou* du régiment d'Altdorf ; et les Regiments of Renown se
+superposeront par-dessus. Surtout, l'automatique ne sait pas dire « ce soldat n'appartient à
+aucun régiment » — mercenaire, garde privée.
+
+**Le choix est REDEMANDÉ à chaque entrée dans une carrière éligible** (décision Nono) : la
+liste proposée est filtrée sur ethnie + carrière, **moins les appartenances déjà acquises**,
+plus « aucune » ; la réponse **s'ajoute** à la liste, on ne retire jamais. C'est la règle du
+livre, et ça couvre le parcours mercenaire → régiment d'Averland → fermier → régiment de
+Stirland, qui finit avec les deux. `Appartenance` étant déjà une liste de codes séparés par
+des virgules, le cumul ne demande **aucun changement de structure**. Rien n'est proposé s'il
+ne reste aucun candidat.
+
+**Le décalage de paliers n'est pas un sujet** (tranché par Nono) : en Warhammer on recommence
+une carrière au niveau 1, donc on repassera toujours par le palier 1 du nouveau régiment. Le
+seul cas contraire est le forçage manuel de niveau à coût 0, que le logiciel permet et qui est
+assumé.
+
 **POINTS DE REPRISE, dans l'ordre :**
 
-1. **Retirer les deux tests `if Pos(SeparateurMulti, Code) > 0 then continue;`** de
-   `PersonnageAppliqueGreffes`. Ils sautent les éléments à choix `A/B` par prudence, or Nono a
-   vérifié ce jour que **le tableau des compétences sait déjà résoudre un choix** : Play (Drum
-   or Fife) se choisit dans la grille et le niveau suit. Le palier 3 d'Averland apparaîtra
-   alors normalement, sans écran ni champ supplémentaire. **À vérifier avant** : le tableau des
-   TALENTS sait-il faire la même chose ? Le palier 3 est une compétence, mais d'autres
-   régiments auront des talents à choix.
-2. **L'écran de choix de l'appartenance.** Rien ne remplit `Personnage.Appartenance` : il faut
-   le saisir à la main dans le XML. L'écran a sa place dans WinCreation autant que dans
-   WinPersonnage, puisque c'est à la création que l'ethnie et le métier — les deux conditions
-   de la table — sont choisis.
-3. **Brancher WinCreation**, qui bâtit ses propres listes et n'appelle pas la procédure.
-4. **La saisie mécanique des treize régiments restants**, puis le 3d-3.
+1. **L'écran de choix de l'appartenance**, selon la conception ci-dessus. Point d'accroche
+   naturel : le bloc `if StrToInt(NvNiveau) = 1` de `winpersonnage.pas` (vers l. 4705), là où
+   `PersonnageAppliqueGreffes` est déjà appelée — proposer AVANT de l'appeler. Il faut une
+   fonction « appartenances candidates pour (ethnie, carrière) moins celles acquises », côté
+   `chargemetier.pas` ; `GreffesDesAppartenances`, qui n'a plus d'appelant, peut lui servir de
+   point de départ ou disparaître.
+2. **Brancher WinCreation**, qui bâtit ses propres listes, n'appelle pas la procédure et laisse
+   `MEMBERSHIP` vide. L'écran y a sa place autant que dans WinPersonnage, puisque c'est à la
+   création que l'ethnie et le métier sont choisis.
+3. **La saisie mécanique des treize régiments restants** — avec, pour chacun, la déclaration
+   des codes composés `A/B` dans `DATA_SKILL_SPECIALIZATION` du livre — puis le 3d-3.
 
 **Bug voisin découvert au passage, antérieur au chantier et noté dans `A FAIRE.txt`** :
 revenir dans une carrière déjà exercée redonne l'équipement de départ en double, et sans

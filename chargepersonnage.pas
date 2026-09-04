@@ -1164,10 +1164,12 @@ end;
 // ecrites en une fois pour les quatre niveaux a l'entree dans une carriere : c'est
 // CalculTableExperience qui filtre ensuite sur Valeur <= niveau courant.
 //
-// ETAPE 1 : un element portant SeparateurMulti ('A/B') est un choix du joueur ; il est
-// ignore tant que l'ecran de saisie de l'appartenance n'existe pas pour le lui demander.
-// C'est a cet ecran de resoudre le choix AVANT d'appeler cette procedure, pas a elle de
-// le deviner.
+// Un element portant SeparateurMulti ('A/B') est greffe TEL QUEL, code de choix compris :
+// les deux tableaux d'augmentation savent le resoudre. ListeMetierCompetence et
+// ListeTalent aplatissent les branches du '/', la colonne "Spe" s'affiche des que la liste
+// rendue compte plus d'une entree, WinSpecialisation propose les branches, et le
+// double-clic reecrit le code retenu dans MetierCompetence / MetierTalent. Verifie le
+// 04/09/2026 des deux cotes. Ce n'est donc pas a cette procedure de trancher le choix.
 Procedure PersonnageAppliqueGreffes(var Personnage: StructurePersonnage);
 var
   GreffeCompetence:     String;
@@ -1214,7 +1216,7 @@ begin
                     for Ind := 0 to Liste.Count - 1 do
                       begin
                         Code := Trim(Liste[Ind]);
-                        if (Code = '') or (Pos(SeparateurMulti, Code) > 0) then
+                        if Code = '' then
                           continue;
                         Trouve := false;
                         for PersonnageCompetence in Personnage.MetierCompetence do
@@ -1245,7 +1247,7 @@ begin
                     for Ind := 0 to Liste.Count - 1 do
                       begin
                         Code := Trim(Liste[Ind]);
-                        if (Code = '') or (Pos(SeparateurMulti, Code) > 0) then
+                        if Code = '' then
                           continue;
                         Trouve := false;
                         for PersonnageTalent in Personnage.MetierTalent do
