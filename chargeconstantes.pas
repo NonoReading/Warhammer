@@ -391,10 +391,10 @@ Const
       EquipementAR                      = 'ARMO_';
       EquipementQualite                 = '(Q)';
       BonusProtection                   = 'WEAPB18 ';
-      BonusBras                         = 'ARMOL_ARM';
-      BonusCorps                        = 'ARMOL_BODY';
-      BonusJambes                       = 'ARMOL_LEG';
-      BonusTete                         = 'ARMOL_HEAD';
+      BonusBras                         = 'RULES-ARMOL_ARM';
+      BonusCorps                        = 'RULES-ARMOL_BODY';
+      BonusJambes                       = 'RULES-ARMOL_LEG';
+      BonusTete                         = 'RULES-ARMOL_HEAD';
       SortBenediction                   = 'BENED_';
       SortMiracle                       = 'MIRAC_';
       SortMineur                        = 'SPELL_';
@@ -443,12 +443,12 @@ Const
       // livres et au préfixe "(F)" devant le nom du livre (chargetexte.pas, GetTexteLibelle).
       ConstLivreFanOfficiel                 = 2;
 
-      ConstLabSelSpe                        = 'LAB_129';
-      ConstLabAdd                           = 'LAB_143';
+      ConstLabSelSpe                        = 'RULES-LAB_129';
+      ConstLabAdd                           = 'RULES-LAB_143';
       // Ligne "aucune" en tete de la liste des appartenances proposees. Elle est
       // toujours presente : le programme ne sait pas deviner qu'un soldat est un
       // mercenaire sans regiment. CONTEXT.md 2.44.
-      ConstLabSansAppartenance              = 'LAB_178';
+      ConstLabSansAppartenance              = 'RULES-LAB_178';
 
       ConstTransparent                      = '_TRANS';
 
@@ -487,6 +487,10 @@ Const
 Var
   NomPersonnage:       String;
   CodeLivre:           String;
+  // Mouchard des references nues (2.49 etape 4). TraceNuNb compte TOUS les passages par la
+  // tolerance, TraceNuListe ne garde que les couples distincts pour que le rapport reste lisible.
+  TraceNuNb:           Integer = 0;
+  TraceNuListe:        TStringList = nil;
   NomLivre:            String;
   NeedUpdate:          Boolean = false;
   SelectWinMetierRace: String = '';
@@ -674,6 +678,12 @@ Function LivreOrdre(Livre: String): String;
 Function CheminFichier(TypeDonnee: String; Livre: String): String;
 function extractnumbers(line: string): String;
 function VerifieRecherche():Boolean;
+// Mouchard de l'etape 4 du 2.49 : recense les fois ou VerifieRecherche a du TOLERER une
+// reference nue (code sans prefixe de livre) au lieu de l'apparier franchement. Ne change
+// aucun resultat : on observe d'abord, on durcit ensuite, une fois qu'on sait ce qui tombe.
+Procedure TraceNuRaz();
+Function TraceNuRapport(): String;
+Procedure TraceNuEcritFichier(Chemin: String);
 Function LivreRepertoireTravail(CodeLivre, Langue: String): String;
 Function LivreFichierActuel(CodeLivre, Langue: String): String;
 
@@ -1068,6 +1078,41 @@ function extractnumbers(line: string): String;
     end;
   end;
 
+Procedure TraceNuRaz();
+  begin
+    TraceNuNb := 0;
+    if TraceNuListe <> nil then TraceNuListe.Clear;
+  end;
+
+Function TraceNuRapport(): String;
+  var
+    Ind: Integer;
+  begin
+    Result := 'References nues tolerees : ' + IntToStr(TraceNuNb) + ' appel(s)';
+    if (TraceNuListe = nil) or (TraceNuListe.Count = 0) then
+      begin
+        Result := Result + SeparateurRetourLigne + '(aucune)';
+        Exit;
+      end;
+    Result := Result + ', ' + IntToStr(TraceNuListe.Count) + ' couple(s) distinct(s) :'
+              + SeparateurRetourLigne;
+    for Ind := 0 to TraceNuListe.Count - 1 do
+      Result := Result + TraceNuListe[Ind] + SeparateurRetourLigne;
+  end;
+
+Procedure TraceNuEcritFichier(Chemin: String);
+  var
+    Fichier: TStringList;
+  begin
+    Fichier := TStringList.Create;
+    try
+      Fichier.Text := TraceNuRapport();
+      Fichier.SaveToFile(Chemin);
+    finally
+      Fichier.Free;
+    end;
+  end;
+
 Function VerifieRecherche():Boolean;
 var
   Trouve: Boolean;
@@ -1075,7 +1120,19 @@ begin
   if (LivreRecherche = LivreValeur) and (CodeRecherche = CodeValeur) then
     Trouve := True
   else if (LivreValeur = '') and (CodeRecherche = CodeValeur) then
-    Trouve := True
+    begin
+      // La tolerance a servi : le code cherche porte un livre, la valeur trouvee n'en a pas.
+      // On enregistre, on ne refuse pas. C'est le releve qui dira ce que couterait le refus.
+      Trouve := True;
+      TraceNuNb := TraceNuNb + 1;
+      if TraceNuListe = nil then
+        begin
+          TraceNuListe            := TStringList.Create;
+          TraceNuListe.Sorted     := True;
+          TraceNuListe.Duplicates := dupIgnore;
+        end;
+      TraceNuListe.Add(LivreRecherche + SeparateurLivre + CodeRecherche + ' <- ' + CodeValeur);
+    end
   else
     Trouve := False;
   result := Trouve;

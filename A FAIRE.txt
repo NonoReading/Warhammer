@@ -6,6 +6,33 @@
 CORRECTIONS COURTES  (une ligne ou deux chacune)
 =========================================================================
 
+RETIRER LE MOUCHARD DES REFERENCES NUES QUAND L ETAPE 4 DU 2.49 SERA CLOSE. Pose le
+05/09/2026 : TraceNuNb / TraceNuListe / TraceNuRaz / TraceNuRapport / TraceNuEcritFichier dans
+chargeconstantes.pas, la branche tolerante de VerifieRecherche qui les alimente, et l appel en
+fin de FormCreate de warhammersource.pas. Le fichier TRACE_references_nues.txt est jetable,
+ce n est pas un quatrieme fichier de suivi du projet.
+
+SUPPRIMER LES ANCIENS PERSONNAGES DE CURRENT. Decide par Nono le 05/09/2026. Leurs codes sont
+nus (fiches d avant le prefixage) et representent 44 des 95 couples du releve de references
+nues. Tant qu ils sont la, le durcissement de VerifieRecherche les casse ; une fois partis, la
+question disparait. C est cette decision qui rend inutile le script de migration des fiches.
+
+TRANCHER LE CAS DES CINQ ConstCaracXxx AVANT LE DURCISSEMENT (2.49 etape 4). Elles servent
+DEUX usages incompatibles : identifiant a resoudre, et fragment de texte cherche dans les
+donnees. Les prefixer casserait (a) StringReplace de '('+ConstCaracCC+')' contre le texte des
+livres ou le code est ecrit NU, pdfpersonnage.pas l.470-498, et (b) les trois case l.1078,
+1083 et 1094 qui retirent DEJA le prefixe de la donnee avant de comparer - BE, BF et BFM
+tomberaient a zero. Trois pistes : deux series de constantes (sur, mais doublonne quinze
+constantes) ; prefixer aux cinq points d appel seulement (le moins invasif, ma preference) ;
+ou tolerer explicitement ces cinq appels au durcissement.
+
+LE TEST DE RADICAL DE TALENT SUPPOSE UN CODE DE 5 CARACTERES. winpersonnage.pas l.3245,
+copy(CodeSansLivre(...),1,5) : vrai pour les 868 codes en T+4 chiffres, faux pour les ids
+"A ou B" comme T0009/RULES-T0067 (seul le premier est compare) et pour le generique T*. Ce
+test ignore aussi le livre, alors que le CompareRechercheValeur juste a cote le respecte : un
+NATIO-T0012_X matcherait un RULES-T0012_Y. Sans effet connu aujourd hui, releve le 05/09/2026
+en supprimant la dependance aux variables globales.
+
 RULES-ARMO_98 ET RULES-ARMO_99 SONT DES SETS D ARMURE, REGLE DU MJ, A MODELISER. Coiffe de
 maille et Cotte de maille, ajoutes le 05/09/2026 dans les deux Rulebooks pour equiper Gunther.
 Ce ne sont ni les pieces de la p.299 (Mail Coif = ARMO_08, Mail Coat = ARMO_09, encombrements
@@ -214,6 +241,44 @@ A reprendre avec le morceau "creatures" du lot 3 si on veut de vraies creatures.
 =========================================================================
 CONCEPTIONS A MENER  (chantiers a part entiere, ne pas les melanger)
 =========================================================================
+
+UNE LIGNE D EQUIPEMENT DOIT DIRE SI ELLE EST EQUIPEE OU NON. Constate le 05/09/2026 : deux
+casques poses dans l equipement CUMULENT leurs Points d Armure sur la tete, alors qu on n en
+porte qu un. Aujourd hui toute ligne d equipement compte dans tous les calculs, il n existe
+aucune notion de "porte" ou "dans le sac". Ajouter une colonne booleenne dans TabEquipement,
+sauvegardee dans la fiche.
+
+Le drapeau sert a DEUX calculs, pas un seul, et c est ce qui le rend utile aux armes autant
+qu aux armures :
+ - PROTECTION (armures) : n additionner les Points d Armure que des lignes equipees. C est le
+   cumul des deux casques. Cote arme, meme logique pour le bonus de protection WEAPB18 d un
+   bouclier range.
+ - ENCOMBREMENT (armes ET armures) : une piece portee encombre MOINS qu une piece transportee.
+   La regle chiffree est a relire dans le Rulebook avant de coder, ne pas la deviner ; c est
+   la raison pour laquelle une arme aussi a besoin du drapeau, meme si elle ne protege pas.
+
+TRANCHE par Nono le 05/09/2026 : les anciennes fiches, qui n ont pas le champ, sont lues comme
+RIEN D EQUIPE. Consequence assumee, a ne pas prendre pour un bug quand on ouvrira un ancien
+dossier : plus aucun Point d Armure et un encombrement plus eleve, jusqu a ce qu on recoche les
+pieces portees a la main. Le lot de personnages existants est petit.
+
+TRANCHE aussi le 05/09/2026 : tout achat arrive NON EQUIPE. Une ligne ajoutee par +Weapon,
++Armor ou +Quick Armour est decochee, on l equipe ensuite explicitement. Meme regle que la
+reprise des anciennes fiches ci-dessus, donc un seul comportement a expliquer : rien n est
+porte tant qu on ne l a pas dit.
+
+TRANCHE aussi le 05/09/2026 : deux pieces sur la meme localisation ne sont PAS interdites, la
+superposition existe et Nono l a deja materialisee en donnee par la qualite d armure
+RULES-ARMOB_08 "Under armor" (Rulebook, DATA_ARMOR_BONUS l.14588, "This armour can be worn
+under another"). Le calcul de protection doit donc autoriser le cumul quand la piece du dessous
+porte ARMOB_08, et le refuser sinon - c est la regle qui remplace l interdiction pure.
+
+Obstacle a lever d abord : ARMOB_08 porte son <Modifier> en TEXTE LIBRE, "combinable with
+Leather", sans attribut name=, alors que les autres ARMOB portent un name= exploitable
+(RULES-COMPPRECEP...). Le code sait donc qu une piece est portable dessous, mais pas AVEC QUOI.
+A modeliser avant d ecrire le calcul : soit un name= pointant le type d armure compatible
+(ARMOT), soit une regle "ARMOB_08 se combine avec n importe quoi" si la restriction au cuir
+n est pas voulue. A verifier dans le Rulebook.
 
 BRANCHER LE CALCUL DES QUALITES DE FABRICATION. Constate le 04/09/2026 en saisissant les
 accessoires d arme de Nations of Mankind. La table DATA_CRAFTMANSHIP est chargee, la fenetre

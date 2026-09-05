@@ -83,26 +83,26 @@ procedure TWinMutations.FormCreate(Sender: TObject);
   begin
     MiseEnFormeDesChamp(self);
 
-    Self.Caption                     := GetTexteLibelle('LAB_156');
-    ButtonMutationResilience.Caption := GetTexteLibelle('LAB_167');
-    ButtonMutationAccepter.Caption   := GetTexteLibelle('LAB_168');
-    ButtonMutationAnnuler.Caption    := GetTexteLibelle('LAB_166');
-    ButtonTypeHasard.Caption         := GetTexteLibelle('LAB_085');
-    ButtonEntreeHasard.Caption       := GetTexteLibelle('LAB_085');
-    Valider.Caption                  := GetTexteLibelle('LAB_086');
+    Self.Caption                     := GetTexteLibelle('RULES-LAB_156');
+    ButtonMutationResilience.Caption := GetTexteLibelle('RULES-LAB_167');
+    ButtonMutationAccepter.Caption   := GetTexteLibelle('RULES-LAB_168');
+    ButtonMutationAnnuler.Caption    := GetTexteLibelle('RULES-LAB_166');
+    ButtonTypeHasard.Caption         := GetTexteLibelle('RULES-LAB_085');
+    ButtonEntreeHasard.Caption       := GetTexteLibelle('RULES-LAB_085');
+    Valider.Caption                  := GetTexteLibelle('RULES-LAB_086');
 
     // Résultat/Choix (CONTEXT.md §2.7) - mêmes clés déjà utilisées pour ce rôle dans
     // wincreation.pas (Race/Métier).
-    RadioButtonMutationTypeHasard.Caption   := GetTexteLibelle('LAB_085');
-    RadioButtonMutationTypeResultat.Caption := GetTexteLibelle('LAB_089');
-    RadioButtonMutationTypeChoix.Caption    := GetTexteLibelle('LAB_084');
-    ButtonMutationTypeValider.Caption       := GetTexteLibelle('LAB_086');
+    RadioButtonMutationTypeHasard.Caption   := GetTexteLibelle('RULES-LAB_085');
+    RadioButtonMutationTypeResultat.Caption := GetTexteLibelle('RULES-LAB_089');
+    RadioButtonMutationTypeChoix.Caption    := GetTexteLibelle('RULES-LAB_084');
+    ButtonMutationTypeValider.Caption       := GetTexteLibelle('RULES-LAB_086');
     ButtonMutationTypePhysical.Caption      := GetTexteLibelle(CorruptionPhysique);
     ButtonMutationTypeMental.Caption        := GetTexteLibelle(CorruptionMentale);
-    RadioButtonMutationEntreeHasard.Caption   := GetTexteLibelle('LAB_085');
-    RadioButtonMutationEntreeResultat.Caption := GetTexteLibelle('LAB_089');
-    RadioButtonMutationEntreeChoix.Caption    := GetTexteLibelle('LAB_084');
-    ButtonMutationEntreeValider.Caption       := GetTexteLibelle('LAB_086');
+    RadioButtonMutationEntreeHasard.Caption   := GetTexteLibelle('RULES-LAB_085');
+    RadioButtonMutationEntreeResultat.Caption := GetTexteLibelle('RULES-LAB_089');
+    RadioButtonMutationEntreeChoix.Caption    := GetTexteLibelle('RULES-LAB_084');
+    ButtonMutationEntreeValider.Caption       := GetTexteLibelle('RULES-LAB_086');
 
     // sortie remise à vide à chaque ouverture - ButtonMutationAnnulerClick ne fait rien
     // d'autre que Close, donc MutationChoix doit déjà être '' pour que "fermer sans choisir"

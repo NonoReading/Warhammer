@@ -199,7 +199,7 @@ procedure TWinSpecialisations.FormCreate(Sender: TObject);
     TabSpecialisation.RowCount      := 1;
     TabSpecialisation.ColCount      := 4;
     TabSpecialisation.ColWidths[0]  := 20;
-    TabSpecialisation.Cells[1,0]    := GetTexteLibelle('LAB_002');
+    TabSpecialisation.Cells[1,0]    := GetTexteLibelle('RULES-LAB_002');
     TabSpecialisation.ColWidths[1]  := 200;
     TabSpecialisation.Cells[2,0]    := GetTexteLibelle(ConstLabSelSpe);
     TabSpecialisation.ColWidths[2]  := 250;

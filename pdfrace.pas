@@ -141,7 +141,7 @@ begin
       PdfTaillePolice(PdfPage, PdfFontBold, ConstPoliceCarlson+ConstPoliceGras, 24);
       PdfEcrit(PdfPage, 17, 999, 278, WideUpperCase(WideString(PRace.Libelle)){%H-},MinPolice);
       PdfTaillePolice(PdfPage, PdfFontBold, ConstPoliceCarlson+ConstPoliceGras, 9);
-      PdfEcrit(PdfPage, DebutImgMetier, 999, 268, GetTexteLibelle('LAB_128') {%H-}+ ' : ' + WideUpperCase(WideString(GetTexteLibelle(PRace.Livre))){%H-}, MinPolice);
+      PdfEcrit(PdfPage, DebutImgMetier, 999, 268, GetTexteLibelle('RULES-LAB_128') {%H-}+ ' : ' + WideUpperCase(WideString(GetTexteLibelle(PRace.Livre))){%H-}, MinPolice);
 
 
       // image Feuille
@@ -159,7 +159,7 @@ begin
       PdfPage.DrawRect(Coord,LargeurFeuille - DebutSous - MargeDroite,4,0,true,false,0);
       PdfPage.SetColor(ClBlack,false);
       PdfTaillePolice(PdfPage, PdfFontBold, ConstPoliceCarlson+ConstPoliceGras, 10);
-      PdfEcrit(PdfPage,DebutFeuille + DebutSous - 5, 999, PdfPositionFeuille(DebutTexte,NbLigne) + 0.5, GetTexteLibelle('LAB_008')+' : ',MinPolice);
+      PdfEcrit(PdfPage,DebutFeuille + DebutSous - 5, 999, PdfPositionFeuille(DebutTexte,NbLigne) + 0.5, GetTexteLibelle('RULES-LAB_008')+' : ',MinPolice);
 
       Ind := 0;
       For PAttribut in ListeAttribut do
@@ -212,7 +212,7 @@ begin
       PdfPage.DrawRect(Coord,LargeurFeuille - DebutSous - MargeDroite,4,0,true,false,0);
       PdfPage.SetColor(ClBlack,false);
       PdfTaillePolice(PdfPage, PdfFontBold, ConstPoliceCarlson+ConstPoliceGras, 10);
-      PdfEcrit(PdfPage,DebutFeuille + DebutSous - 5, 999, PdfPositionFeuille(DebutTexte,NbLigne) + 0.5, GetTexteLibelle('LAB_009')+' : ',MinPolice);
+      PdfEcrit(PdfPage,DebutFeuille + DebutSous - 5, 999, PdfPositionFeuille(DebutTexte,NbLigne) + 0.5, GetTexteLibelle('RULES-LAB_009')+' : ',MinPolice);
 
       For PRaceCompetence in ListRaceCompetence do
         if (PRaceCompetence.CodeRace = RaceEnCours) then
@@ -244,7 +244,7 @@ begin
       PdfPage.DrawRect(Coord,LargeurFeuille - DebutTalent - MargeDroite,4,0,true,false,0);
       PdfPage.SetColor(ClBlack,false);
       PdfTaillePolice(PdfPage, PdfFontBold, ConstPoliceCarlson+ConstPoliceGras, 10);
-      PdfEcrit(PdfPage,DebutFeuille + DebutTalent - 5, 999, PdfPositionFeuille(DebutTexte,NbTalent) + 0.5, GetTexteLibelle('LAB_007')+' : ',MinPolice);
+      PdfEcrit(PdfPage,DebutFeuille + DebutTalent - 5, 999, PdfPositionFeuille(DebutTexte,NbTalent) + 0.5, GetTexteLibelle('RULES-LAB_007')+' : ',MinPolice);
 
       For PRaceTalent in ListRaceTalent do
         if (PRaceTalent.CodeRace = RaceEnCours) then
@@ -281,7 +281,7 @@ begin
       PdfPage.DrawRect(Coord,LargeurFeuille - DebutSous - MargeDroite,4,0,true,false,0);
       PdfPage.SetColor(ClBlack,false);
       PdfTaillePolice(PdfPage, PdfFontBold, ConstPoliceCarlson+ConstPoliceGras, 10);
-      PdfEcrit(PdfPage,DebutFeuille + DebutSous - 5, 999, PdfPositionFeuille(DebutTexte,NbLigne) + 0.5, GetTexteLibelle('LAB_006')+' : ',MinPolice);
+      PdfEcrit(PdfPage,DebutFeuille + DebutSous - 5, 999, PdfPositionFeuille(DebutTexte,NbLigne) + 0.5, GetTexteLibelle('RULES-LAB_006')+' : ',MinPolice);
 
       DerniereClasse  := '';
       DebutCompetence := NbLigne;
@@ -351,7 +351,7 @@ begin
         Coord.Y := 19+(NbLigne-1)*4;
         PdfPage.DrawRect(Coord, MaxTailleDetail - DebutImgMetier - 15,4,0,true,false,0);
         PdfPage.SetColor(clBlack,false);
-        PdfEcrit(PdfPage,DebutImgMetier+2, MaxTailleDetail - DebutImgMetier - 2 , 20+(NbLigne-1)*4, GetTexteLibelle('LAB_007'),MinPolice);
+        PdfEcrit(PdfPage,DebutImgMetier+2, MaxTailleDetail - DebutImgMetier - 2 , 20+(NbLigne-1)*4, GetTexteLibelle('RULES-LAB_007'),MinPolice);
 
         PdfPage.SetColor(clBlack,false);
 

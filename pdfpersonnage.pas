@@ -1763,7 +1763,7 @@ Procedure PdfPersonnageCreation(Personnage: StructurePersonnage; BackGround: Boo
             PdfPage.WriteText(15,133+(NbBonus*2), TxtBonus);
           end;
         Inc(NbBonus);
-        PdfPage.WriteText(15,133+(NbBonus*2), ' --------- ' + GetTexteLibelle('LAB_122') + ' --------- ');
+        PdfPage.WriteText(15,133+(NbBonus*2), ' --------- ' + GetTexteLibelle('RULES-LAB_122') + ' --------- ');
       end;
 
     if ArmeBonii <> '' then
@@ -1778,7 +1778,7 @@ Procedure PdfPersonnageCreation(Personnage: StructurePersonnage; BackGround: Boo
             PdfPage.WriteText(15,133+(NbBonus*2), TxtBonus);
           end;
         Inc(NbBonus);
-        PdfPage.WriteText(15,133+(NbBonus*2), ' ---------- ' + GetTexteLibelle('LAB_123') + ' ---------- ');
+        PdfPage.WriteText(15,133+(NbBonus*2), ' ---------- ' + GetTexteLibelle('RULES-LAB_123') + ' ---------- ');
       end;
 
     if FabricationBonii <> '' then
@@ -1793,7 +1793,7 @@ Procedure PdfPersonnageCreation(Personnage: StructurePersonnage; BackGround: Boo
             PdfPage.WriteText(15,133+(NbBonus*2), TxtBonus);
           end;
         Inc(NbBonus);
-        PdfPage.WriteText(15,133+(NbBonus*2), ' ---------- ' + GetTexteLibelle('LAB_124') + ' ---------- ');
+        PdfPage.WriteText(15,133+(NbBonus*2), ' ---------- ' + GetTexteLibelle('RULES-LAB_124') + ' ---------- ');
       end;
 
     PdfTaillePolice(PdfPage, PdfFontValue, ConstPoliceArial, 9);
@@ -2309,8 +2309,8 @@ Function PdfBlocCorruptionDetail(PdfPage: TPDFPage; Personnage: StructurePersonn
     // Titre + en-têtes de colonnes
     PdfTaillePolice(PdfPage, PdfFontBack, ConstPoliceCarlson+ConstPoliceGras, 10);
     PdfCentre(PdfPage, XGauche + 1, XDroite,      Y - HauteurLigne + 0.6,             GetTexteLibelle('PDF_CORRUPTION_HISTORY'));
-    PdfEcrit (PdfPage, XGauche + 1, XGauche + 12,  Y - (2 * HauteurLigne) + 0.6, GetTexteLibelle('LAB_162'), MinPolice); // Amount
-    PdfEcrit (PdfPage, XGauche + 13, XDroite,      Y - (2 * HauteurLigne) + 0.6, GetTexteLibelle('LAB_163'), MinPolice); // Reason
+    PdfEcrit (PdfPage, XGauche + 1, XGauche + 12,  Y - (2 * HauteurLigne) + 0.6, GetTexteLibelle('RULES-LAB_162'), MinPolice); // Amount
+    PdfEcrit (PdfPage, XGauche + 13, XDroite,      Y - (2 * HauteurLigne) + 0.6, GetTexteLibelle('RULES-LAB_163'), MinPolice); // Reason
 
     // Lignes de données : la plus récente (fin du tableau) en haut ; au-delà de la
     // capacité du cadre (NbLignes - 2 lignes de données), les plus anciennes sont
@@ -2944,7 +2944,7 @@ Procedure PdfBlocDessinExplication(PdfPage: TPDFPage; XGauche, XDroite, YHaut, Y
       begin
         Inc(NbBonus);
         Inc(NbBonus);
-        PdfPage.WriteText(XGauche + 4,YHaut-(NbBonus*HauteurLigne), ' --------- ' + GetTexteLibelle('LAB_122') + ' --------- ');
+        PdfPage.WriteText(XGauche + 4,YHaut-(NbBonus*HauteurLigne), ' --------- ' + GetTexteLibelle('RULES-LAB_122') + ' --------- ');
         Inc(NbBonus);
         NbLoca := CountOccurrences(ArmureBonii,',')+1;
         For IndLoca := 1 to NbLoca do
@@ -2973,7 +2973,7 @@ Procedure PdfBlocDessinExplication(PdfPage: TPDFPage; XGauche, XDroite, YHaut, Y
       begin
         Inc(NbBonus);
         Inc(NbBonus);
-        PdfPage.WriteText(XGauche + 4,YHaut-(NbBonus*HauteurLigne), ' ---------- ' + GetTexteLibelle('LAB_123') + ' ---------- ');
+        PdfPage.WriteText(XGauche + 4,YHaut-(NbBonus*HauteurLigne), ' ---------- ' + GetTexteLibelle('RULES-LAB_123') + ' ---------- ');
         Inc(NbBonus);
         NbLoca := CountOccurrences(ArmeBonii,',')+1;
         For IndLoca := 1 to NbLoca do
@@ -2990,7 +2990,7 @@ Procedure PdfBlocDessinExplication(PdfPage: TPDFPage; XGauche, XDroite, YHaut, Y
       begin
         Inc(NbBonus);
         Inc(NbBonus);
-        PdfPage.WriteText(15,YHaut-(NbBonus*HauteurLigne), ' ---------- ' + GetTexteLibelle('LAB_124') + ' ---------- ');
+        PdfPage.WriteText(15,YHaut-(NbBonus*HauteurLigne), ' ---------- ' + GetTexteLibelle('RULES-LAB_124') + ' ---------- ');
         Inc(NbBonus);
         NbLoca := CountOccurrences(FabricationBonii,',')+1;
         For IndLoca := 1 to NbLoca do
@@ -3088,7 +3088,7 @@ Function PdfBlocMutations(PdfPage: TPDFPage; Personnage: StructurePersonnage; XG
 
     // Titre
     PdfTaillePolice(PdfPage, PdfFontBack, ConstPoliceCarlson+ConstPoliceGras, 10);
-    PdfCentre(PdfPage, XGauche + 1, XDroite, Y - HauteurLigne + 0.6, GetTexteLibelle('LAB_172'));
+    PdfCentre(PdfPage, XGauche + 1, XDroite, Y - HauteurLigne + 0.6, GetTexteLibelle('RULES-LAB_172'));
 
     // Les NbLignes mutations les plus récentes (les plus anciennes, en tête du tableau, sont
     // silencieusement omises au-delà - même principe que PdfBlocCorruptionDetail).

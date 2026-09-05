@@ -44,7 +44,7 @@ procedure TWinLanceDes.FormCreate(Sender: TObject);
     SpinEditJet.MaxValue := 100;
     SpinEditJet.MinValue := 0;
     SpinEditJet.Value    := ChoixWinJetValeur;
-    LabelInfo.Caption    := GetTexteLibelle('LAB_177');
+    LabelInfo.Caption    := GetTexteLibelle('RULES-LAB_177');
     MiseEnFormeDesChamp(self);
   end;
 

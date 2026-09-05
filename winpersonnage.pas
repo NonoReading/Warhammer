@@ -927,7 +927,6 @@ procedure TWinPersonnages.ButtonArmureClick(Sender: TObject);
         else
           begin
             pArmure           := ChercheArmure(ChoixWinArmure);
-            TabEquipement.RowCount                          := TabEquipement.RowCount + 1;
             TabEquipement.Cells[2, TabEquipement.RowCount-1]:= PArmure.CodeArmure;
             TabEquipement.Cells[3, TabEquipement.RowCount-1]:= TypeEquipAr;
             TabEquipement.Cells[4, TabEquipement.RowCount-1]:= PArmure.Libelle;
@@ -993,7 +992,7 @@ procedure TWinPersonnages.ButtonCorruptionMutationClick(Sender: TObject);
 
         StringGridCorruption.RowCount                                   := StringGridCorruption.RowCount + 1;
         StringGridCorruption.Cells[1, StringGridCorruption.RowCount - 1] := IntToStr(-Lost);
-        StringGridCorruption.Cells[2, StringGridCorruption.RowCount - 1] := GetTexteLibelle('LAB_169');
+        StringGridCorruption.Cells[2, StringGridCorruption.RowCount - 1] := GetTexteLibelle('RULES-LAB_169');
       end
     else if MutationChoix = 'MUTATION' then
       begin
@@ -1005,7 +1004,7 @@ procedure TWinPersonnages.ButtonCorruptionMutationClick(Sender: TObject);
         // précise plus tard et rester valide si un futur livre renumérote sa table de chance).
         StringGridCorruption.RowCount                                   := StringGridCorruption.RowCount + 1;
         StringGridCorruption.Cells[1, StringGridCorruption.RowCount - 1] := IntToStr(-Lost);
-        StringGridCorruption.Cells[2, StringGridCorruption.RowCount - 1] := GetTexteLibelle('LAB_170');
+        StringGridCorruption.Cells[2, StringGridCorruption.RowCount - 1] := GetTexteLibelle('RULES-LAB_170');
 
         PersonnageMutation.Code := MutationCode;
         Personnage.Mutations    += [PersonnageMutation];
@@ -1028,7 +1027,7 @@ procedure TWinPersonnages.ButtonRaceSelectionnerClick(Sender: TObject);
   begin
     pMetierActuel       := ChercheMetier(MetierEnCours);
     // ouvrir les métiers
-    ButtonRaceSelectionner.Caption := GetTexteLibelle('LAB_004');
+    ButtonRaceSelectionner.Caption := GetTexteLibelle('RULES-LAB_004');
     NvMetierChoisi      := '';
     SelectWinMetierRace := RaceEnCours;
     SelectWinLivre      := Personnage.LivresAcceptes;
@@ -1637,15 +1636,15 @@ begin
   TabAttribut.ColWidths[ColAttResil]   := 0;
   TabAttribut.ColWidths[ColAttBlessure]:= 0;
 
-  TabAttribut.Cells[ColAttLib, LigAttRace]    := GetTexteLibelle('LAB_042');
-  TabAttribut.Cells[ColAttLib, LigAttLance]   := GetTexteLibelle('LAB_022');
-  TabAttribut.Cells[ColAttLib, LigAttTalent]  := GetTexteLibelle('LAB_007');
-  TabAttribut.Cells[ColAttLib, LigAttMutation]:= GetTexteLibelle('LAB_172');
-  TabAttribut.Cells[ColAttLib, LigAttBase]    := GetTexteLibelle('LAB_043');
-  TabAttribut.Cells[ColAttLib, LigAttImage]   := GetTexteLibelle('LAB_019');
-  TabAttribut.Cells[ColAttLib, LigAttBonus]   := GetTexteLibelle('LAB_040');
-  TabAttribut.Cells[ColAttLib, LigAttTotal]   := GetTexteLibelle('LAB_041');
-  TabAttribut.Cells[ColAttLib, LigAttXp]      := GetTexteLibelle('LAB_035');
+  TabAttribut.Cells[ColAttLib, LigAttRace]    := GetTexteLibelle('RULES-LAB_042');
+  TabAttribut.Cells[ColAttLib, LigAttLance]   := GetTexteLibelle('RULES-LAB_022');
+  TabAttribut.Cells[ColAttLib, LigAttTalent]  := GetTexteLibelle('RULES-LAB_007');
+  TabAttribut.Cells[ColAttLib, LigAttMutation]:= GetTexteLibelle('RULES-LAB_172');
+  TabAttribut.Cells[ColAttLib, LigAttBase]    := GetTexteLibelle('RULES-LAB_043');
+  TabAttribut.Cells[ColAttLib, LigAttImage]   := GetTexteLibelle('RULES-LAB_019');
+  TabAttribut.Cells[ColAttLib, LigAttBonus]   := GetTexteLibelle('RULES-LAB_040');
+  TabAttribut.Cells[ColAttLib, LigAttTotal]   := GetTexteLibelle('RULES-LAB_041');
+  TabAttribut.Cells[ColAttLib, LigAttXp]      := GetTexteLibelle('RULES-LAB_035');
   TabAttribut.Cells[ColAttLib, LigAttAsterisc]:= '*';
 
   TabAttribut.RowHeights[LigAttRace]    := 1;
@@ -1666,21 +1665,21 @@ begin
   TabTalent.ColWidths[0]             := 20;
   TabTalent.ColWidths[ColTalCode]    := 0;                           // code talent
   TabTalent.ColWidths[2]             := 0;                           // image
-  TabTalent.Cells[ColTalLib, 0]      := GetTexteLibelle('LAB_007');  // libellé talent
+  TabTalent.Cells[ColTalLib, 0]      := GetTexteLibelle('RULES-LAB_007');  // libellé talent
   TabTalent.ColWidths[ColTalLib]     := 200;
-  TabTalent.Cells[ColTalNb, 0]       := GetTexteLibelle('LAB_045');  // nb talent
+  TabTalent.Cells[ColTalNb, 0]       := GetTexteLibelle('RULES-LAB_045');  // nb talent
   TabTalent.ColWidths[ColTalNb]      := 53;
-  TabTalent.Cells[ColTalMax, 0]      := GetTexteLibelle('LAB_044');  // Max Talent
+  TabTalent.Cells[ColTalMax, 0]      := GetTexteLibelle('RULES-LAB_044');  // Max Talent
   TabTalent.ColWidths[ColTalMax]     := 0;
-  TabTalent.Cells[ColTalXp, 0]       := GetTexteLibelle('LAB_035');  // XP
+  TabTalent.Cells[ColTalXp, 0]       := GetTexteLibelle('RULES-LAB_035');  // XP
   TabTalent.ColWidths[ColTalXp]      := 0;
-  TabTalent.Cells[7, 0]              := GetTexteLibelle('LAB_016');  //
+  TabTalent.Cells[7, 0]              := GetTexteLibelle('RULES-LAB_016');  //
   TabTalent.ColWidths[7]             := 0;
   TabTalent.Cells[ColTalAsterisk, 0] := '*';                         // astérisque pour PDF
   TabTalent.ColWidths[ColTalAsterisk]:= 0;
-  TabTalent.Cells[ColTalNbCrea, 0]   := GetTexteLibelle('LAB_079');  // nb création
+  TabTalent.Cells[ColTalNbCrea, 0]   := GetTexteLibelle('RULES-LAB_079');  // nb création
   TabTalent.ColWidths[ColTalNbCrea]  := 0;
-  TabTalent.Cells[ColTalNbAugm,0]    := GetTexteLibelle('LAB_103');  // nb augmentation
+  TabTalent.Cells[ColTalNbAugm,0]    := GetTexteLibelle('RULES-LAB_103');  // nb augmentation
   TabTalent.ColWidths[ColTalNbAugm]  := 0;
 
   // Mise en forme du tableau des Niveaux
@@ -1695,10 +1694,10 @@ begin
   TabNiveau.ColWidths[1]     := 0;
   TabNiveau.Columns.Add;
   TabNiveau.Columns[1].Alignment := taCenter;
-  TabNiveau.Cells[2, 0]      := GetTexteLibelle('LAB_019');
+  TabNiveau.Cells[2, 0]      := GetTexteLibelle('RULES-LAB_019');
   TabNiveau.ColWidths[2]     := 40;
   TabNiveau.Columns.Add;
-  TabNiveau.Cells[3, 0]      := GetTexteLibelle('LAB_046');
+  TabNiveau.Cells[3, 0]      := GetTexteLibelle('RULES-LAB_046');
   TabNiveau.ColWidths[3]     := 140;
 
   // Mise en forme du tableau des Compétences
@@ -1707,31 +1706,31 @@ begin
   TabCompetence.RowCount                  := 1;
   TabCompetence.ColWidths[0]              := 20;
   TabCompetence.ColWidths[ColCompCode]    := 0;
-  TabCompetence.Cells[ColCompImage, 0]    := GetTexteLibelle('LAB_019');
+  TabCompetence.Cells[ColCompImage, 0]    := GetTexteLibelle('RULES-LAB_019');
   TabCompetence.ColWidths[ColCompImage]   := 0;
-  TabCompetence.Cells[ColCompLib, 0]      := GetTexteLibelle('LAB_003');
+  TabCompetence.Cells[ColCompLib, 0]      := GetTexteLibelle('RULES-LAB_003');
   TabCompetence.ColWidths[ColCompLib]     := 180;
-  TabCompetence.Cells[ColCompCarac, 0]    := GetTexteLibelle('LAB_008');
+  TabCompetence.Cells[ColCompCarac, 0]    := GetTexteLibelle('RULES-LAB_008');
   TabCompetence.ColWidths[ColCompCarac]   := 50;
-  TabCompetence.Cells[ColCompAtt, 0]      := GetTexteLibelle('LAB_025');
+  TabCompetence.Cells[ColCompAtt, 0]      := GetTexteLibelle('RULES-LAB_025');
   TabCompetence.ColWidths[ColCompAtt]     := 50;
   TabCompetence.Cells[ColComp35, 0]       := '3p/5p';
   TabCompetence.ColWidths[ColComp35]      := 0;
   TabCompetence.Cells[ColComp40, 0]       := '40pts';
   TabCompetence.ColWidths[ColComp40]      := 0;
-  TabCompetence.Cells[ColCompWork, 0]     := GetTexteLibelle('LAB_006');
+  TabCompetence.Cells[ColCompWork, 0]     := GetTexteLibelle('RULES-LAB_006');
   TabCompetence.ColWidths[ColCompWork]    := 0;
-  TabCompetence.Cells[ColCompMutation, 0] := GetTexteLibelle('LAB_172');
+  TabCompetence.Cells[ColCompMutation, 0] := GetTexteLibelle('RULES-LAB_172');
   TabCompetence.ColWidths[ColCompMutation]:= 0;
-  TabCompetence.Cells[ColCompBonus, 0]    := GetTexteLibelle('LAB_034');
+  TabCompetence.Cells[ColCompBonus, 0]    := GetTexteLibelle('RULES-LAB_034');
   TabCompetence.ColWidths[ColCompBonus]   := 50;
-  TabCompetence.Cells[ColCompTotal, 0]    := GetTexteLibelle('LAB_021');
+  TabCompetence.Cells[ColCompTotal, 0]    := GetTexteLibelle('RULES-LAB_021');
   TabCompetence.ColWidths[ColCompTotal]   := 50;
   TabCompetence.Cells[ColCompStat, 0]     := 'Stat';
   TabCompetence.ColWidths[ColCompStat]    := 0;
-  TabCompetence.Cells[ColCompXp, 0]       := GetTexteLibelle('LAB_035');
+  TabCompetence.Cells[ColCompXp, 0]       := GetTexteLibelle('RULES-LAB_035');
   TabCompetence.ColWidths[ColCompXp]      := 0;
-  TabCompetence.Cells[ColCompActuel, 0]   := GetTexteLibelle('LAB_016');
+  TabCompetence.Cells[ColCompActuel, 0]   := GetTexteLibelle('RULES-LAB_016');
   TabCompetence.ColWidths[ColCompActuel]  := 0;
   TabCompetence.Cells[ColCompTravail, 0]  := 'W';
   TabCompetence.ColWidths[ColCompTravail] := 0;
@@ -1748,14 +1747,14 @@ begin
   TabCarriere.Columns.Add;
   TabCarriere.ColWidths[1]             := 0;
   TabCarriere.Columns.Add;
-  TabCarriere.Cells[2, 0]              := GetTexteLibelle('LAB_019');
+  TabCarriere.Cells[2, 0]              := GetTexteLibelle('RULES-LAB_019');
   TabCarriere.Columns[1].Alignment     := taCenter;
   TabCarriere.ColWidths[2]             := 40;
   TabCarriere.Columns.Add;
-  TabCarriere.Cells[3, 0]              := GetTexteLibelle('LAB_003');
+  TabCarriere.Cells[3, 0]              := GetTexteLibelle('RULES-LAB_003');
   TabCarriere.ColWidths[3]             := 120;
   TabCarriere.Columns.Add;
-  TabCarriere.Cells[4, 0]              := GetTexteLibelle('LAB_035');
+  TabCarriere.Cells[4, 0]              := GetTexteLibelle('RULES-LAB_035');
   TabCarriere.ColWidths[4]             := 0;
 
   // Mise en forme du tableau d'état d'avancement
@@ -1765,15 +1764,15 @@ begin
   TabAvancement.ColWidths[0]             := 20;
   TabAvancement.ColWidths[1]             := 0;
   TabAvancement.ColWidths[2]             := 0;
-  TabAvancement.Cells[3, 0]              := GetTexteLibelle('LAB_047');
+  TabAvancement.Cells[3, 0]              := GetTexteLibelle('RULES-LAB_047');
   TabAvancement.ColWidths[3]             := 100;
-  TabAvancement.Cells[4, 0]              := GetTexteLibelle('LAB_048');
+  TabAvancement.Cells[4, 0]              := GetTexteLibelle('RULES-LAB_048');
   TabAvancement.ColWidths[4]             := 40;
-  TabAvancement.Cells[5, 0]              := GetTexteLibelle('LAB_049');
+  TabAvancement.Cells[5, 0]              := GetTexteLibelle('RULES-LAB_049');
   TabAvancement.ColWidths[5]             := 40;
-  TabAvancement.Cells[3, 1]              := GetTexteLibelle('LAB_008');
-  TabAvancement.Cells[3, 2]              := GetTexteLibelle('LAB_009');
-  TabAvancement.Cells[3, 3]              := GetTexteLibelle('LAB_007');
+  TabAvancement.Cells[3, 1]              := GetTexteLibelle('RULES-LAB_008');
+  TabAvancement.Cells[3, 2]              := GetTexteLibelle('RULES-LAB_009');
+  TabAvancement.Cells[3, 3]              := GetTexteLibelle('RULES-LAB_007');
   TabAvancement.cells[4, 2]              := '8';        // 8 compétences
   TabAvancement.cells[4, 3]              := '1';        // 1 Talent
 
@@ -1789,12 +1788,12 @@ begin
   TabExperience.Columns.add;
   TabExperience.ColWidths[3]                    := 50;
   TabExperience.Columns[2].Alignment            := taRightJustify;
-  tabExperience.Cells[ColXpLib, 0]              := GetTexteLibelle('LAB_047');
-  tabExperience.Cells[ColXpLib, LigXpTotal]     := GetTexteLibelle('LAB_021');
-  tabExperience.Cells[ColXpLib, LigXpDepense]   := GetTexteLibelle('LAB_050');
-  tabExperience.Cells[ColXpLib, LigXpRestant]   := GetTexteLibelle('LAB_051');
-  tabExperience.Cells[ColXpLib, LigXpCout]      := GetTexteLibelle('LAB_015');
-  tabExperience.Cells[ColXpDonnee, 0]           := GetTexteLibelle('LAB_025');
+  tabExperience.Cells[ColXpLib, 0]              := GetTexteLibelle('RULES-LAB_047');
+  tabExperience.Cells[ColXpLib, LigXpTotal]     := GetTexteLibelle('RULES-LAB_021');
+  tabExperience.Cells[ColXpLib, LigXpDepense]   := GetTexteLibelle('RULES-LAB_050');
+  tabExperience.Cells[ColXpLib, LigXpRestant]   := GetTexteLibelle('RULES-LAB_051');
+  tabExperience.Cells[ColXpLib, LigXpCout]      := GetTexteLibelle('RULES-LAB_015');
+  tabExperience.Cells[ColXpDonnee, 0]           := GetTexteLibelle('RULES-LAB_025');
 
   // Mise en forme du tableau des augmentation d'attribut
   TabAugmentationAttribut.Options                     := TabAugmentationAttribut.Options + [goEditing, goAlwaysShowEditor];
@@ -1802,23 +1801,23 @@ begin
   TabAugmentationAttribut.RowCount                    := 11;
   TabAugmentationAttribut.ColWidths[0]                := 20;
   TabAugmentationAttribut.ColWidths[1]                := 0;
-  TabAugmentationAttribut.Cells[1, 0]                 := GetTexteLibelle('LAB_008');
+  TabAugmentationAttribut.Cells[1, 0]                 := GetTexteLibelle('RULES-LAB_008');
   TabAugmentationAttribut.ColWidths[2]                := 0;
-  TabAugmentationAttribut.Cells[ColAugmAttCode, 0]    := GetTexteLibelle('LAB_001');
+  TabAugmentationAttribut.Cells[ColAugmAttCode, 0]    := GetTexteLibelle('RULES-LAB_001');
   TabAugmentationAttribut.ColWidths[ColAugmAttCode]   := 80;
-  TabAugmentationAttribut.Cells[ColAugmAttActuel, 0]  := GetTexteLibelle('LAB_016');
+  TabAugmentationAttribut.Cells[ColAugmAttActuel, 0]  := GetTexteLibelle('RULES-LAB_016');
   TabAugmentationAttribut.ColWidths[ColAugmAttActuel] := 80;
-  TabAugmentationAttribut.Cells[ColAugmAttNouveau, 0] := GetTexteLibelle('LAB_017');
+  TabAugmentationAttribut.Cells[ColAugmAttNouveau, 0] := GetTexteLibelle('RULES-LAB_017');
   TabAugmentationAttribut.ColWidths[ColAugmAttNouveau]:= 80;
   TabAugmentationAttribut.Cells[ColAugmAttMoins5, 0]  := '-5';
   TabAugmentationAttribut.ColWidths[ColAugmAttMoins5] := 50;
   TabAugmentationAttribut.Cells[ColAugmAttPlus5, 0]   := '+5';
   TabAugmentationAttribut.ColWidths[ColAugmAttPlus5]  := 50;
-  TabAugmentationAttribut.Cells[ColAugmAttNouveau, 0] := GetTexteLibelle('LAB_017');
+  TabAugmentationAttribut.Cells[ColAugmAttNouveau, 0] := GetTexteLibelle('RULES-LAB_017');
   TabAugmentationAttribut.ColWidths[ColAugmAttNouveau]:= 80;
-  TabAugmentationAttribut.Cells[ColAugmAttCout, 0]    := GetTexteLibelle('LAB_015');
+  TabAugmentationAttribut.Cells[ColAugmAttCout, 0]    := GetTexteLibelle('RULES-LAB_015');
   TabAugmentationAttribut.ColWidths[ColAugmAttCout]   := 80;
-  TabAugmentationAttribut.Cells[ColAugmAttReel, 0]    := GetTexteLibelle('LAB_139');
+  TabAugmentationAttribut.Cells[ColAugmAttReel, 0]    := GetTexteLibelle('RULES-LAB_139');
   TabAugmentationAttribut.ColWidths[ColAugmAttReel]   := 80;
 
   // Mise en forme du tableau des augmentation de Compétences
@@ -1828,25 +1827,25 @@ begin
   TabAugmentationCompetence.ColWidths[0]                 := 20;
   TabAugmentationCompetence.ColWidths[ColAugmCompCode]   := 0;
   TabAugmentationCompetence.ColWidths[2]                 := 0;
-  TabAugmentationCompetence.Cells[ColAugmCompLib, 0]     := GetTexteLibelle('LAB_009');
+  TabAugmentationCompetence.Cells[ColAugmCompLib, 0]     := GetTexteLibelle('RULES-LAB_009');
   TabAugmentationCompetence.ColWidths[ColAugmCompLib]    := 200;
-  TabAugmentationCompetence.Cells[ColAugmCompActuel, 0]  := GetTexteLibelle('LAB_016');
+  TabAugmentationCompetence.Cells[ColAugmCompActuel, 0]  := GetTexteLibelle('RULES-LAB_016');
   TabAugmentationCompetence.ColWidths[ColAugmCompActuel] := 70;
-  TabAugmentationCompetence.Cells[ColAugmCompNouveau, 0] := GetTexteLibelle('LAB_019');
+  TabAugmentationCompetence.Cells[ColAugmCompNouveau, 0] := GetTexteLibelle('RULES-LAB_019');
   TabAugmentationCompetence.ColWidths[ColAugmCompNouveau]:= 70;
   TabAugmentationCompetence.Cells[ColAugmCompMoins5, 0]  := '-5';
   TabAugmentationCompetence.ColWidths[ColAugmCompMoins5] := 50;
   TabAugmentationCompetence.Cells[ColAugmCompPlus5, 0]   := '+5';
   TabAugmentationCompetence.ColWidths[ColAugmCompPlus5]  := 50;
-  TabAugmentationCompetence.Cells[ColAugmCompCout, 0]    := GetTexteLibelle('LAB_015');
+  TabAugmentationCompetence.Cells[ColAugmCompCout, 0]    := GetTexteLibelle('RULES-LAB_015');
   TabAugmentationCompetence.ColWidths[ColAugmCompCout]   := 70;
-  TabAugmentationCompetence.Cells[ColAugmCompSpe, 0]     := GetTexteLibelle('LAB_078');
+  TabAugmentationCompetence.Cells[ColAugmCompSpe, 0]     := GetTexteLibelle('RULES-LAB_078');
   TabAugmentationCompetence.ColWidths[ColAugmCompSpe]    := 200;
   TabAugmentationCompetence.Cells[ColAugmCompSpeSel, 0]  := 'Spé Choisie';
   TabAugmentationCompetence.ColWidths[ColAugmCompSpeSel] := 0;
   TabAugmentationCompetence.Cells[ColAugmCompWork, 0]    := 'Work';
   TabAugmentationCompetence.ColWidths[ColAugmCompWork]   := 0;
-  TabAugmentationCompetence.Cells[ColAugmCompReel, 0]    := GetTexteLibelle('LAB_139');
+  TabAugmentationCompetence.Cells[ColAugmCompReel, 0]    := GetTexteLibelle('RULES-LAB_139');
   TabAugmentationCompetence.ColWidths[ColAugmCompReel]   := 50;
   TabAugmentationCompetence.Cells[ColAugmCompTal, 0]     := 'Talent';
   TabAugmentationCompetence.ColWidths[ColAugmCompTal]    := 0;
@@ -1860,15 +1859,15 @@ begin
   TabAugmentationTalent.ColWidths[0]                := 20;
   TabAugmentationTalent.ColWidths[ColAugmTalCode]   := 0;
   TabAugmentationTalent.ColWidths[2]                := 0;
-  TabAugmentationTalent.Cells[ColAugmTalLib, 0]     := GetTexteLibelle('LAB_007');
+  TabAugmentationTalent.Cells[ColAugmTalLib, 0]     := GetTexteLibelle('RULES-LAB_007');
   TabAugmentationTalent.ColWidths[ColAugmTalLib]    := 200;
-  TabAugmentationTalent.Cells[ColAugmTalActuel, 0]  := GetTexteLibelle('LAB_016');
+  TabAugmentationTalent.Cells[ColAugmTalActuel, 0]  := GetTexteLibelle('RULES-LAB_016');
   TabAugmentationTalent.ColWidths[ColAugmTalActuel] := 80;
-  TabAugmentationTalent.Cells[ColAugmTalNouveau, 0] := GetTexteLibelle('LAB_019');
+  TabAugmentationTalent.Cells[ColAugmTalNouveau, 0] := GetTexteLibelle('RULES-LAB_019');
   TabAugmentationTalent.ColWidths[ColAugmTalNouveau]:= 80;
-  TabAugmentationTalent.Cells[ColAugmTalCout, 0]    := GetTexteLibelle('LAB_015');
+  TabAugmentationTalent.Cells[ColAugmTalCout, 0]    := GetTexteLibelle('RULES-LAB_015');
   TabAugmentationTalent.ColWidths[ColAugmTalCout]   := 80;
-  TabAugmentationTalent.Cells[ColAugmTalSpe, 0]     := GetTexteLibelle('LAB_078');
+  TabAugmentationTalent.Cells[ColAugmTalSpe, 0]     := GetTexteLibelle('RULES-LAB_078');
   TabAugmentationTalent.ColWidths[ColAugmTalSpe]    := 200;
   TabAugmentationTalent.Cells[ColAugmTalSpeSel, 0]  := 'Spé Choisie';
   TabAugmentationTalent.ColWidths[ColAugmTalSpeSel] := 0;
@@ -1876,7 +1875,7 @@ begin
   TabAugmentationTalent.ColWidths[ColAugmTalWork]   := 0;
   TabAugmentationTalent.Cells[ColAugmTalSort, 0]    := 'Sort';
   TabAugmentationTalent.ColWidths[ColAugmTalSort]   := 0;
-  TabAugmentationTalent.Cells[ColAugmTalReel, 0]    := GetTexteLibelle('LAB_139');
+  TabAugmentationTalent.Cells[ColAugmTalReel, 0]    := GetTexteLibelle('RULES-LAB_139');
   TabAugmentationTalent.ColWidths[ColAugmTalReel]   := 50;
 
   // Mise en forme de la table des historiques
@@ -1884,9 +1883,9 @@ begin
   TabHistorique.ColCount       := 4;
   TabHistorique.RowCount       := 2;
   TabHistorique.ColWidths[0]   := 20;
-  TabHistorique.Cells[1, 0]    := GetTexteLibelle('LAB_036');
+  TabHistorique.Cells[1, 0]    := GetTexteLibelle('RULES-LAB_036');
   TabHistorique.ColWidths[1]   := 200;
-  TabHistorique.Cells[2, 0]    := GetTexteLibelle('LAB_037');
+  TabHistorique.Cells[2, 0]    := GetTexteLibelle('RULES-LAB_037');
   TabHistorique.ColWidths[2]   := 0;
   TabHistorique.Cells[3, 0]    := 'Ordre';
   TabHistorique.ColWidths[3]   := 0;
@@ -1896,9 +1895,9 @@ begin
   StringGridCorruption.ColCount       := 3;
   StringGridCorruption.RowCount       := 1;
   StringGridCorruption.ColWidths[0]   := 20;
-  StringGridCorruption.Cells[1, 0]    := GetTexteLibelle('LAB_162');
+  StringGridCorruption.Cells[1, 0]    := GetTexteLibelle('RULES-LAB_162');
   StringGridCorruption.ColWidths[1]   := 80;
-  StringGridCorruption.Cells[2, 0]    := GetTexteLibelle('LAB_163');
+  StringGridCorruption.Cells[2, 0]    := GetTexteLibelle('RULES-LAB_163');
   StringGridCorruption.ColWidths[2]   := 300;
 
   // Mise en forme de la table des mutations obtenues (CONTEXT.md §2.7, étape 7) - lecture
@@ -1906,9 +1905,9 @@ begin
   TabMutation.ColCount       := 4;
   TabMutation.RowCount       := 1;
   TabMutation.ColWidths[0]   := 20;
-  TabMutation.Cells[1, 0]    := GetTexteLibelle('LAB_171');
+  TabMutation.Cells[1, 0]    := GetTexteLibelle('RULES-LAB_171');
   TabMutation.ColWidths[1]   := 100;
-  TabMutation.Cells[2, 0]    := GetTexteLibelle('LAB_002');
+  TabMutation.Cells[2, 0]    := GetTexteLibelle('RULES-LAB_002');
   TabMutation.ColWidths[2]   := 300;
   TabMutation.ColWidths[3]   := 0;
   MemoMutationEffet.ReadOnly := True;
@@ -1918,17 +1917,17 @@ begin
   TabEquipement.ColCount       := 8;
   TabEquipement.RowCount       := 2;
   TabEquipement.ColWidths[0]   := 20;
-  TabEquipement.Cells[1, 0]    := GetTexteLibelle('LAB_052');
+  TabEquipement.Cells[1, 0]    := GetTexteLibelle('RULES-LAB_052');
   TabEquipement.ColWidths[1]   := 0;
-  TabEquipement.Cells[2, 0]    := GetTexteLibelle('LAB_001');
+  TabEquipement.Cells[2, 0]    := GetTexteLibelle('RULES-LAB_001');
   TabEquipement.ColWidths[2]   := 0;
-  TabEquipement.Cells[3, 0]    := GetTexteLibelle('LAB_018');
+  TabEquipement.Cells[3, 0]    := GetTexteLibelle('RULES-LAB_018');
   TabEquipement.ColWidths[3]   := 200;
-  TabEquipement.Cells[4, 0]    := GetTexteLibelle('LAB_003');
+  TabEquipement.Cells[4, 0]    := GetTexteLibelle('RULES-LAB_003');
   TabEquipement.ColWidths[4]   := 300;
-  TabEquipement.Cells[5, 0]    := GetTexteLibelle('LAB_035');
+  TabEquipement.Cells[5, 0]    := GetTexteLibelle('RULES-LAB_035');
   TabEquipement.ColWidths[5]   := 0;
-  TabEquipement.Cells[6, 0]    := GetTexteLibelle('LAB_120');
+  TabEquipement.Cells[6, 0]    := GetTexteLibelle('RULES-LAB_120');
   TabEquipement.ColWidths[6]   := 100;
   TabEquipement.Cells[7, 0]    := '';
   TabEquipement.ColWidths[7]   := 0;
@@ -1938,15 +1937,15 @@ begin
   TabMetierEquipement.ColCount         := 6;
   TabMetierEquipement.RowCount         := 1;
   TabMetierEquipement.ColWidths[0]     := 30;
-  TabMetierEquipement.Cells[1, 0]      := GetTexteLibelle('LAB_001');
+  TabMetierEquipement.Cells[1, 0]      := GetTexteLibelle('RULES-LAB_001');
   TabMetierEquipement.ColWidths[1]     := 0;
-  TabMetierEquipement.Cells[2, 0]      := GetTexteLibelle('LAB_013');
+  TabMetierEquipement.Cells[2, 0]      := GetTexteLibelle('RULES-LAB_013');
   TabMetierEquipement.ColWidths[2]     := 200;
-  TabMetierEquipement.Cells[3, 0]      := GetTexteLibelle('LAB_010');
+  TabMetierEquipement.Cells[3, 0]      := GetTexteLibelle('RULES-LAB_010');
   TabMetierEquipement.ColWidths[3]     := 0;
-  TabMetierEquipement.Cells[4, 0]      := GetTexteLibelle('LAB_018');
+  TabMetierEquipement.Cells[4, 0]      := GetTexteLibelle('RULES-LAB_018');
   TabMetierEquipement.ColWidths[4]     := 0;
-  TabMetierEquipement.Cells[5, 0]      := GetTexteLibelle('LAB_120');
+  TabMetierEquipement.Cells[5, 0]      := GetTexteLibelle('RULES-LAB_120');
   TabMetierEquipement.ColWidths[5]     := 100;
 
   // mise en forme du tableau des choix des sorts
@@ -1954,11 +1953,11 @@ begin
   TabSort.ColCount         := 4;
   TabSort.RowCount         := 1;
   TabSort.ColWidths[0]     := 30;
-  TabSort.Cells[1, 0]      := GetTexteLibelle('LAB_001');
+  TabSort.Cells[1, 0]      := GetTexteLibelle('RULES-LAB_001');
   TabSort.ColWidths[1]     := 0;
-  TabSort.Cells[2, 0]      := GetTexteLibelle('LAB_002');
+  TabSort.Cells[2, 0]      := GetTexteLibelle('RULES-LAB_002');
   TabSort.ColWidths[2]     := 400;
-  TabSort.Cells[3, 0]      := GetTexteLibelle('LAB_007');
+  TabSort.Cells[3, 0]      := GetTexteLibelle('RULES-LAB_007');
   TabSort.ColWidths[3]     := 0;
 
   // mise en forme du tableau de création du Livre
@@ -1967,7 +1966,7 @@ begin
   TabLivre.ColWidths[0]     := 20;
   TabLivre.Cells[1, 0]      := ConstSelectionne;
   TabLivre.ColWidths[1]     := 20;
-  TabLivre.Cells[2, 0]      := GetTexteLibelle('LAB_014');
+  TabLivre.Cells[2, 0]      := GetTexteLibelle('RULES-LAB_014');
   TabLivre.ColWidths[2]     := 230;
   TabLivre.ColWidths[3]     := 0;
   TabLivre.ColWidths[4]     := 0;
@@ -1976,17 +1975,17 @@ begin
   TabAugmentationMjXp.ColCount                   := 8;
   TabAugmentationMjXp.RowCount                   := 1;
   TabAugmentationMjXp.ColWidths[0]               := 20;
-  TabAugmentationMjXp.Cells[ColAugmMjXpType, 0]  := GetTexteLibelle('LAB_018');  // Type
+  TabAugmentationMjXp.Cells[ColAugmMjXpType, 0]  := GetTexteLibelle('RULES-LAB_018');  // Type
   TabAugmentationMjXp.ColWidths[ColAugmMjXpType] := 100;
-  TabAugmentationMjXp.Cells[ColAugmMjXpCode, 0]  := GetTexteLibelle('LAB_001');  // Code
+  TabAugmentationMjXp.Cells[ColAugmMjXpCode, 0]  := GetTexteLibelle('RULES-LAB_001');  // Code
   TabAugmentationMjXp.ColWidths[ColAugmMjXpCode] := 100;
-  TabAugmentationMjXp.Cells[ColAugmMjXpDebut, 0] := GetTexteLibelle('LAB_141');  // Début
+  TabAugmentationMjXp.Cells[ColAugmMjXpDebut, 0] := GetTexteLibelle('RULES-LAB_141');  // Début
   TabAugmentationMjXp.ColWidths[ColAugmMjXpDebut]:= 100;
-  TabAugmentationMjXp.Cells[ColAugmMjXpFin, 0]   := GetTexteLibelle('LAB_142');  // Fin
+  TabAugmentationMjXp.Cells[ColAugmMjXpFin, 0]   := GetTexteLibelle('RULES-LAB_142');  // Fin
   TabAugmentationMjXp.ColWidths[ColAugmMjXpFin]  := 100;
-  TabAugmentationMjXp.Cells[ColAugmMjXpCout, 0]  := GetTexteLibelle('LAB_015');  // Coût
+  TabAugmentationMjXp.Cells[ColAugmMjXpCout, 0]  := GetTexteLibelle('RULES-LAB_015');  // Coût
   TabAugmentationMjXp.ColWidths[ColAugmMjXpCout] := 100;
-  TabAugmentationMjXp.Cells[ColAugmMjXpReel, 0]  := GetTexteLibelle('LAB_139');  // Coût réel
+  TabAugmentationMjXp.Cells[ColAugmMjXpReel, 0]  := GetTexteLibelle('RULES-LAB_139');  // Coût réel
   TabAugmentationMjXp.ColWidths[ColAugmMjXpReel] := 100;
   TabAugmentationMjXp.Cells[ColAugmMjXpNew, 0]   := 'N';                         // nouvelle ligne
   TabAugmentationMjXp.ColWidths[ColAugmMjXpNew]  := 0;
@@ -2070,48 +2069,48 @@ Procedure TWinPersonnages.AfficheImageRace();
               TabAttribut.Cells[IndTabAttribut, LigAttRace] := PRaceAttribut.CalculRace;
             end;
 
-    Self.Caption                               := GetTexteLibelle('LAB_081');
-    LabelRace.Caption                          := GetTexteLibelle('LAB_042');
-    LabelMetier.Caption                        := GetTexteLibelle('LAB_006');
-    LabTabAttribut.Caption                     := GetTexteLibelle('LAB_008');
-    LabTabTalent.Caption                       := GetTexteLibelle('LAB_007');
-    LabTabCompetence.Caption                   := GetTexteLibelle('LAB_009');
-    LabTabCarriere.Caption                     := GetTexteLibelle('LAB_096');
-    LabTabExperience.Caption                   := GetTexteLibelle('LAB_097');
-    LabTabAvancement.Caption                   := GetTexteLibelle('LAB_098');
-    LabelCalcul.Caption                        := GetTexteLibelle('LAB_020');
-    LabelXp.Caption                            := GetTexteLibelle('LAB_035');
-    StaticTextPersonnage.Caption               := GetTexteLibelle('LAB_081');
-    LabEquipement.Caption                      := GetTexteLibelle('LAB_100');
-    ButtonAugmentation.Caption                 := GetTexteLibelle('LAB_101');
-    ButtonSauvegarde.Caption                   := GetTexteLibelle('LAB_102');
-    LabAugmentation.Caption                    := GetTexteLibelle('LAB_103');
-    TabSheetAttribut.Caption                   := GetTexteLibelle('LAB_008');
-    TabSheetTalent.Caption                     := GetTexteLibelle('LAB_007');
-    TabSheetCompetence.Caption                 := GetTexteLibelle('LAB_009');
-    TabSheetXP.Caption                         := GetTexteLibelle('LAB_104');
-    TabSheetEvolution.Caption                  := GetTexteLibelle('LAB_105');
-    TabSheetHistorique.Caption                 := GetTexteLibelle('LAB_036');
-    TabSheetCorruption.Caption                 := GetTexteLibelle('LAB_156');
-    TabSheetMutation.Caption                   := GetTexteLibelle('LAB_172');
-    ButtonCorruptionAjoute.Caption             := '+'+GetTexteLibelle('LAB_164');
-    ButtonCorruptionSupprime.Caption           := '-'+GetTexteLibelle('LAB_165');
-    ButtonRaceSelectionner.Caption             := GetTexteLibelle('LAB_004');
-    ButtonHistorique.Caption                   := GetTexteLibelle('LAB_107');
-    ButtonArme.Caption                         := '+'+GetTexteLibelle('LAB_063');
-    ButtonArmure.Caption                       := '+'+GetTexteLibelle('LAB_065');
-    ButtonSort.Caption                         := '+'+GetTexteLibelle('LAB_083');
-    LabTabNiveau.Caption                       := GetTexteLibelle('LAB_019');
-    RadioButtonRAS.Caption                     := GetTexteLibelle('LAB_113');
-    RadioButtonSuivant.Caption                 := GetTexteLibelle('LAB_114');
-    RadioButtonChanger.Caption                 := GetTexteLibelle('LAB_115');
-    ButtonFabrication.Caption                  := '+'+GetTexteLibelle('LAB_125');
-    ButtonDelete.Caption                       := '-'+GetTexteLibelle('LAB_126');
-    LabelNeedTheoXp.caption                    := GetTexteLibelle('LAB_131');
-    LabelNeedRealXp.Caption                    := GetTexteLibelle('LAB_132');
-    TabSheetLivre.Caption                      := GetTexteLibelle('LAB_128');
-    TabSheetMjCost.Caption                     := GetTexteLibelle('LAB_140');
-    LabQuickArmor.Caption                      := GetTexteLibelle('LAB_149');
+    Self.Caption                               := GetTexteLibelle('RULES-LAB_081');
+    LabelRace.Caption                          := GetTexteLibelle('RULES-LAB_042');
+    LabelMetier.Caption                        := GetTexteLibelle('RULES-LAB_006');
+    LabTabAttribut.Caption                     := GetTexteLibelle('RULES-LAB_008');
+    LabTabTalent.Caption                       := GetTexteLibelle('RULES-LAB_007');
+    LabTabCompetence.Caption                   := GetTexteLibelle('RULES-LAB_009');
+    LabTabCarriere.Caption                     := GetTexteLibelle('RULES-LAB_096');
+    LabTabExperience.Caption                   := GetTexteLibelle('RULES-LAB_097');
+    LabTabAvancement.Caption                   := GetTexteLibelle('RULES-LAB_098');
+    LabelCalcul.Caption                        := GetTexteLibelle('RULES-LAB_020');
+    LabelXp.Caption                            := GetTexteLibelle('RULES-LAB_035');
+    StaticTextPersonnage.Caption               := GetTexteLibelle('RULES-LAB_081');
+    LabEquipement.Caption                      := GetTexteLibelle('RULES-LAB_100');
+    ButtonAugmentation.Caption                 := GetTexteLibelle('RULES-LAB_101');
+    ButtonSauvegarde.Caption                   := GetTexteLibelle('RULES-LAB_102');
+    LabAugmentation.Caption                    := GetTexteLibelle('RULES-LAB_103');
+    TabSheetAttribut.Caption                   := GetTexteLibelle('RULES-LAB_008');
+    TabSheetTalent.Caption                     := GetTexteLibelle('RULES-LAB_007');
+    TabSheetCompetence.Caption                 := GetTexteLibelle('RULES-LAB_009');
+    TabSheetXP.Caption                         := GetTexteLibelle('RULES-LAB_104');
+    TabSheetEvolution.Caption                  := GetTexteLibelle('RULES-LAB_105');
+    TabSheetHistorique.Caption                 := GetTexteLibelle('RULES-LAB_036');
+    TabSheetCorruption.Caption                 := GetTexteLibelle('RULES-LAB_156');
+    TabSheetMutation.Caption                   := GetTexteLibelle('RULES-LAB_172');
+    ButtonCorruptionAjoute.Caption             := '+'+GetTexteLibelle('RULES-LAB_164');
+    ButtonCorruptionSupprime.Caption           := '-'+GetTexteLibelle('RULES-LAB_165');
+    ButtonRaceSelectionner.Caption             := GetTexteLibelle('RULES-LAB_004');
+    ButtonHistorique.Caption                   := GetTexteLibelle('RULES-LAB_107');
+    ButtonArme.Caption                         := '+'+GetTexteLibelle('RULES-LAB_063');
+    ButtonArmure.Caption                       := '+'+GetTexteLibelle('RULES-LAB_065');
+    ButtonSort.Caption                         := '+'+GetTexteLibelle('RULES-LAB_083');
+    LabTabNiveau.Caption                       := GetTexteLibelle('RULES-LAB_019');
+    RadioButtonRAS.Caption                     := GetTexteLibelle('RULES-LAB_113');
+    RadioButtonSuivant.Caption                 := GetTexteLibelle('RULES-LAB_114');
+    RadioButtonChanger.Caption                 := GetTexteLibelle('RULES-LAB_115');
+    ButtonFabrication.Caption                  := '+'+GetTexteLibelle('RULES-LAB_125');
+    ButtonDelete.Caption                       := '-'+GetTexteLibelle('RULES-LAB_126');
+    LabelNeedTheoXp.caption                    := GetTexteLibelle('RULES-LAB_131');
+    LabelNeedRealXp.Caption                    := GetTexteLibelle('RULES-LAB_132');
+    TabSheetLivre.Caption                      := GetTexteLibelle('RULES-LAB_128');
+    TabSheetMjCost.Caption                     := GetTexteLibelle('RULES-LAB_140');
+    LabQuickArmor.Caption                      := GetTexteLibelle('RULES-LAB_149');
     LabAge.Caption                             := GetTexteLibelle('RULES-PDF_MAIN4_AGE');
     LabHeight.Caption                          := GetTexteLibelle('RULES-PDF_MAIN4_HEIGHT');
     LabHairColors.Caption                      := GetTexteLibelle('RULES-PDF_MAIN4_HAIR');
@@ -2539,7 +2538,7 @@ procedure TWinPersonnages.TabAugmentationCompetenceDblClick(Sender: TObject);
         FenSpecialisation.ShowModal;
         if SelectWinCompetence <> '' then
           begin
-            TabAugmentationCompetence.Cells[ColAugmCompSpe, TabAugmentationCompetence.Row]    := GetTexteLibelle('LAB_130');
+            TabAugmentationCompetence.Cells[ColAugmCompSpe, TabAugmentationCompetence.Row]    := GetTexteLibelle('RULES-LAB_130');
             TabAugmentationCompetence.Cells[ColAugmCompSpeSel, TabAugmentationCompetence.Row] := SelectWinCompetence;
             PCompetence                                                                       := ChercheCompetence(SelectWinCompetence);
 
@@ -2627,7 +2626,7 @@ procedure TWinPersonnages.TabAugmentationTalentDblClick(Sender: TObject);
         FenSpecialisation.ShowModal;
         if SelectWinTalent <> '' then
           begin
-            TabAugmentationTalent.Cells[ColAugmTalSpe, TabAugmentationTalent.Row] := GetTexteLibelle('LAB_130');
+            TabAugmentationTalent.Cells[ColAugmTalSpe, TabAugmentationTalent.Row] := GetTexteLibelle('RULES-LAB_130');
             TabAugmentationTalent.Cells[ColAugmTalSpeSel, TabAugmentationTalent.Row] := SelectWinTalent;
             PTalent := ChercheTalent(SelectWinTalent);
             TabAugmentationTalent.Cells[ColAugmTalLib, TabAugmentationTalent.Row] := PTalent.Libelle;
@@ -3245,7 +3244,12 @@ procedure TWinPersonnages.NiveauMetierTalentMax();
       For PMetierTalent in ListMetierTalent do
         if CompareRechercheValeur(PMetierTalent.CodeMetier, MetierEnCours) then
           begin
-            if CompareRechercheValeur(PMetierTalent.CodeTalent, TabTalent.Cells[ColTalCode, ARow]) or (copy(CodeValeur,1,5) = copy(CodeRecherche,1,5)) then
+            // Second test : meme talent a la specialisation pres (T0012_* contre T0012_ANIMAL).
+            // Les cinq premiers caracteres sont le radical. On redecoupe les deux codes ici au
+            // lieu de relire CodeValeur / CodeRecherche, les globales laissees par l'appel de
+            // gauche : meme resultat, mais sans dependre de cet etat partage. CONTEXT.md 2.49.
+            if CompareRechercheValeur(PMetierTalent.CodeTalent, TabTalent.Cells[ColTalCode, ARow])
+               or (copy(CodeSansLivre(PMetierTalent.CodeTalent), 1, 5) = copy(CodeSansLivre(TabTalent.Cells[ColTalCode, ARow]), 1, 5)) then
               begin
                 TabTalent.Cells[2, Arow] := IntToStr(PMetierTalent.NiveauMetier);
                 Break;

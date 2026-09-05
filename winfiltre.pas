@@ -69,7 +69,7 @@ procedure TWinFiltre.ChargeLivre();
     ListeLocale:   String = '';
     PLivre:        StructureLivre;
   begin
-    LabelLivre.Caption         := GetTexteLibelle('LAB_128');
+    LabelLivre.Caption         := GetTexteLibelle('RULES-LAB_128');
 
     TabLivre.Clear;
     // mise en forme du tableau de création du Livre
@@ -77,7 +77,7 @@ procedure TWinFiltre.ChargeLivre();
     TabLivre.RowCount         := 10;
     TabLivre.ColWidths[0]     := 0;
     TabLivre.ColWidths[1]     := 20;
-    TabLivre.Cells[2, 0]      := GetTexteLibelle('LAB_014');
+    TabLivre.Cells[2, 0]      := GetTexteLibelle('RULES-LAB_014');
     TabLivre.ColWidths[2]     := 230;
     TabLivre.ColWidths[3]     := 0;
     TabLivre.ColWidths[4]     := 0;
@@ -117,7 +117,7 @@ procedure TWinFiltre.ChargeRace();
     IndTab:        Integer = 0;
     PRace:         StructureRace;
   begin
-    LabelRace.Caption         := GetTexteLibelle('LAB_042');
+    LabelRace.Caption         := GetTexteLibelle('RULES-LAB_042');
 
     TabRace.Clear;
     // mise en forme du tableau de création du Race
@@ -125,7 +125,7 @@ procedure TWinFiltre.ChargeRace();
     TabRace.RowCount         := 10;
     TabRace.ColWidths[0]     := 0;
     TabRace.ColWidths[1]     := 20;
-    TabRace.Cells[2, 0]      := GetTexteLibelle('LAB_014');
+    TabRace.Cells[2, 0]      := GetTexteLibelle('RULES-LAB_014');
     TabRace.ColWidths[2]     := 230;
     TabRace.ColWidths[3]     := 0;
 
@@ -148,7 +148,7 @@ procedure TWinFiltre.ChargeTalent(SortSeul: Boolean);
     PTalent:       StructureTalent;
     FamilleSort:   TStringList;
   begin
-    LabelTalent.Caption         := GetTexteLibelle('LAB_007');
+    LabelTalent.Caption         := GetTexteLibelle('RULES-LAB_007');
 
     TabTalent.Clear;
     // mise en forme du tableau de création du Talent
@@ -156,7 +156,7 @@ procedure TWinFiltre.ChargeTalent(SortSeul: Boolean);
     TabTalent.RowCount         := 10;
     TabTalent.ColWidths[0]     := 0;
     TabTalent.ColWidths[1]     := 20;
-    TabTalent.Cells[2, 0]      := GetTexteLibelle('LAB_014');
+    TabTalent.Cells[2, 0]      := GetTexteLibelle('RULES-LAB_014');
     TabTalent.ColWidths[2]     := 230;
     TabTalent.ColWidths[3]     := 0;
 
@@ -203,7 +203,7 @@ procedure TWinFiltre.ChargeGroupe();
     IndTab:        Integer = 0;
     PGroupe:       String;
   begin
-    LabelGroupe.Caption         := GetTexteLibelle('LAB_039');
+    LabelGroupe.Caption         := GetTexteLibelle('RULES-LAB_039');
 
     TabGroupe.Clear;
     // mise en forme du tableau de création du Groupe
@@ -211,7 +211,7 @@ procedure TWinFiltre.ChargeGroupe();
     TabGroupe.RowCount         := 1;
     TabGroupe.ColWidths[0]     := 0;
     TabGroupe.ColWidths[1]     := 20;
-    TabGroupe.Cells[2, 0]      := GetTexteLibelle('LAB_014');
+    TabGroupe.Cells[2, 0]      := GetTexteLibelle('RULES-LAB_014');
     TabGroupe.ColWidths[2]     := 230;
     TabGroupe.ColWidths[3]     := 0;
 
@@ -233,7 +233,7 @@ procedure TWinFiltre.ChargeAttribut();
     IndTab:        Integer = 0;
     PAttribut:     StructureAttribut;
   begin
-    LabelAttribut.Caption         := GetTexteLibelle('LAB_008');
+    LabelAttribut.Caption         := GetTexteLibelle('RULES-LAB_008');
 
     TabAttribut.Clear;
     // mise en forme du tableau de création du Attribut
@@ -241,11 +241,11 @@ procedure TWinFiltre.ChargeAttribut();
     TabAttribut.RowCount         := 1;
     TabAttribut.ColWidths[0]     := 0;
     TabAttribut.ColWidths[1]     := 20;
-    TabAttribut.Cells[2, 0]      := GetTexteLibelle('LAB_014');
+    TabAttribut.Cells[2, 0]      := GetTexteLibelle('RULES-LAB_014');
     TabAttribut.ColWidths[2]     := 230;
     TabAttribut.ColWidths[3]     := 0;
     TabAttribut.ColWidths[4]     := 30;
-    TabAttribut.Cells[4, 0]      := GetTexteLibelle('LAB_019');
+    TabAttribut.Cells[4, 0]      := GetTexteLibelle('RULES-LAB_019');
 
     for PAttribut in ListeAttribut do
       begin
@@ -353,7 +353,7 @@ Var
 begin
   MiseEnFormeDesChamp(self);
 
-  ButtonValider.Caption  := GetTexteLibelle('LAB_086');
+  ButtonValider.Caption  := GetTexteLibelle('RULES-LAB_086');
 
   AffLivre := True;
   if WinFiltreAppelant = ConstXmlWork then

@@ -419,27 +419,27 @@ Procedure TMenu.RafraichirLibellesMenu();
     LargeurPerso := TabPersonnage.Width;
     HauteurPerso := TabPersonnage.Height;
 
-    TypeEquipCC         := GetTexteLibelle('LAB_061');
-    TypeEquipCT         := GetTexteLibelle('LAB_062');
-    TypeEquipMU         := GetTexteLibelle('LAB_060');
-    TypeEquipWe         := GetTexteLibelle('LAB_063');
-    TypeEquipDI         := GetTexteLibelle('LAB_064');
-    TypeEquipAR         := GetTexteLibelle('LAB_065');
-    TypeEquipARS        := GetTexteLibelle('LAB_150');
+    TypeEquipCC         := GetTexteLibelle('RULES-LAB_061');
+    TypeEquipCT         := GetTexteLibelle('RULES-LAB_062');
+    TypeEquipMU         := GetTexteLibelle('RULES-LAB_060');
+    TypeEquipWe         := GetTexteLibelle('RULES-LAB_063');
+    TypeEquipDI         := GetTexteLibelle('RULES-LAB_064');
+    TypeEquipAR         := GetTexteLibelle('RULES-LAB_065');
+    TypeEquipARS        := GetTexteLibelle('RULES-LAB_150');
 
     // En-têtes de colonnes déjà créées (pas de GridAjouteColonne ici, qui ajouterait une
     // colonne de plus à chaque changement de langue - on réécrit juste le titre de la
     // colonne existante, retrouvée via les mêmes constantes d'indice que FormCreate).
-    TabLivre.Columns[ColLivreLib - 1].Title.Caption := GetTexteLibelle('LAB_014');
+    TabLivre.Columns[ColLivreLib - 1].Title.Caption := GetTexteLibelle('RULES-LAB_014');
 
-    TabPersonnage.Columns[ColPersoNom - 1].Title.Caption := GetTexteLibelle('LAB_014');
-    TabPersonnage.Columns[ColPersoWor - 1].Title.Caption := GetTexteLibelle('LAB_006');
-    TabPersonnage.Columns[ColPersoRac - 1].Title.Caption := GetTexteLibelle('LAB_042');
-    TabPersonnage.Columns[ColPersoNiv - 1].Title.Caption := GetTexteLibelle('LAB_019');
-    TabPersonnage.Columns[ColPersoTXp - 1].Title.Caption := GetTexteLibelle('LAB_035');
-    TabPersonnage.Columns[ColPersoCXp - 1].Title.Caption := GetTexteLibelle('LAB_041');
-    TabPersonnage.Columns[ColPersoLOb - 1].Title.Caption := GetTexteLibelle('LAB_128');
-    TabPersonnage.Columns[ColPersoLNe - 1].Title.Caption := GetTexteLibelle('LAB_136');
+    TabPersonnage.Columns[ColPersoNom - 1].Title.Caption := GetTexteLibelle('RULES-LAB_014');
+    TabPersonnage.Columns[ColPersoWor - 1].Title.Caption := GetTexteLibelle('RULES-LAB_006');
+    TabPersonnage.Columns[ColPersoRac - 1].Title.Caption := GetTexteLibelle('RULES-LAB_042');
+    TabPersonnage.Columns[ColPersoNiv - 1].Title.Caption := GetTexteLibelle('RULES-LAB_019');
+    TabPersonnage.Columns[ColPersoTXp - 1].Title.Caption := GetTexteLibelle('RULES-LAB_035');
+    TabPersonnage.Columns[ColPersoCXp - 1].Title.Caption := GetTexteLibelle('RULES-LAB_041');
+    TabPersonnage.Columns[ColPersoLOb - 1].Title.Caption := GetTexteLibelle('RULES-LAB_128');
+    TabPersonnage.Columns[ColPersoLNe - 1].Title.Caption := GetTexteLibelle('RULES-LAB_136');
 
     // Libellés des livres eux-mêmes (une ligne par livre dans TabLivre, pas juste
     // l'en-tête de colonne) - même appel que FormCreate (ligne ~620).
@@ -447,32 +447,32 @@ Procedure TMenu.RafraichirLibellesMenu();
       if TabLivre.Cells[ColLivreCod, Ind] <> '' then
         TabLivre.Cells[ColLivreLib, Ind] := GetTexteLibelle(TabLivre.Cells[ColLivreCod, Ind],'','',true);
 
-    ConstArbreAttribut          := GetTexteLibelle('LAB_008');
-    ConstArbreCompetence        := GetTexteLibelle('LAB_009');
-    ConstArbreTalent            := GetTexteLibelle('LAB_007');
-    ConstArbreAuChoix           := GetTexteLibelle('LAB_010');
-    ConstArbreMetierPossible    := GetTexteLibelle('LAB_011');
-    ConstArbreRacePossible      := GetTexteLibelle('LAB_012');
-    ConstArbreEquipement        := GetTexteLibelle('LAB_013');
-    ConstArbreCorruption        := GetTexteLibelle('LAB_156');
+    ConstArbreAttribut          := GetTexteLibelle('RULES-LAB_008');
+    ConstArbreCompetence        := GetTexteLibelle('RULES-LAB_009');
+    ConstArbreTalent            := GetTexteLibelle('RULES-LAB_007');
+    ConstArbreAuChoix           := GetTexteLibelle('RULES-LAB_010');
+    ConstArbreMetierPossible    := GetTexteLibelle('RULES-LAB_011');
+    ConstArbreRacePossible      := GetTexteLibelle('RULES-LAB_012');
+    ConstArbreEquipement        := GetTexteLibelle('RULES-LAB_013');
+    ConstArbreCorruption        := GetTexteLibelle('RULES-LAB_156');
 
-    Label1.Caption              := GetTexteLibelle('LAB_082');
-    ButtonCompetence.Caption    := GetTexteLibelle('LAB_009');
-    ButtonTalent.Caption        := GetTexteLibelle('LAB_007');
-    ButtonMetier.Caption        := GetTexteLibelle('LAB_006');
-    ButtonRace.Caption          := GetTexteLibelle('LAB_042');
-    ButtonArme.Caption          := GetTexteLibelle('LAB_063');
-    ButtonArmure.Caption        := GetTexteLibelle('LAB_065');
-    ButtonSort.Caption          := GetTexteLibelle('LAB_083');
+    Label1.Caption              := GetTexteLibelle('RULES-LAB_082');
+    ButtonCompetence.Caption    := GetTexteLibelle('RULES-LAB_009');
+    ButtonTalent.Caption        := GetTexteLibelle('RULES-LAB_007');
+    ButtonMetier.Caption        := GetTexteLibelle('RULES-LAB_006');
+    ButtonRace.Caption          := GetTexteLibelle('RULES-LAB_042');
+    ButtonArme.Caption          := GetTexteLibelle('RULES-LAB_063');
+    ButtonArmure.Caption        := GetTexteLibelle('RULES-LAB_065');
+    ButtonSort.Caption          := GetTexteLibelle('RULES-LAB_083');
 
-    Label2.Caption              := GetTexteLibelle('LAB_081');
-    ButtonCreation.Caption      := GetTexteLibelle('LAB_079');
-    ButtonModification.Caption  := GetTexteLibelle('LAB_080');
+    Label2.Caption              := GetTexteLibelle('RULES-LAB_081');
+    ButtonCreation.Caption      := GetTexteLibelle('RULES-LAB_079');
+    ButtonModification.Caption  := GetTexteLibelle('RULES-LAB_080');
 
-    Label3.Caption              := GetTexteLibelle('LAB_128');
+    Label3.Caption              := GetTexteLibelle('RULES-LAB_128');
 
-    ButtonCreationLivre.Caption := GetTexteLibelle('LAB_154');
-    ButtonOuvrirLivre.Caption   := GetTexteLibelle('LAB_155');
+    ButtonCreationLivre.Caption := GetTexteLibelle('RULES-LAB_154');
+    ButtonOuvrirLivre.Caption   := GetTexteLibelle('RULES-LAB_155');
 
     // Remettre les colonnes auto-dimensionnées à leur largeur de départ (celle donnée à
     // GridAjouteColonne dans FormCreate) avant de rappeler AdjustGridColumnsWidth : sa
@@ -927,13 +927,13 @@ procedure TMenu.FormCreate(Sender: TObject);
          ListeFichiersLivres.Free;
        end;
 
-       TypeEquipCC         := GetTexteLibelle('LAB_061');
-       TypeEquipCT         := GetTexteLibelle('LAB_062');
-       TypeEquipMU         := GetTexteLibelle('LAB_060');
-       TypeEquipWe         := GetTexteLibelle('LAB_063');
-       TypeEquipDI         := GetTexteLibelle('LAB_064');
-       TypeEquipAR         := GetTexteLibelle('LAB_065');
-       TypeEquipARS        := GetTexteLibelle('LAB_150');
+       TypeEquipCC         := GetTexteLibelle('RULES-LAB_061');
+       TypeEquipCT         := GetTexteLibelle('RULES-LAB_062');
+       TypeEquipMU         := GetTexteLibelle('RULES-LAB_060');
+       TypeEquipWe         := GetTexteLibelle('RULES-LAB_063');
+       TypeEquipDI         := GetTexteLibelle('RULES-LAB_064');
+       TypeEquipAR         := GetTexteLibelle('RULES-LAB_065');
+       TypeEquipARS        := GetTexteLibelle('RULES-LAB_150');
 
        TabLivre.Clear;
        // mise en forme du tableau de création du Livre
@@ -941,7 +941,7 @@ procedure TMenu.FormCreate(Sender: TObject);
        TabLivre.RowCount         := 1;
        TabLivre.ColWidths[0]     := 20;
        ColLivreSel := GridAjouteColonne(TabLivre, 'S', 20, taCenter);
-       ColLivreLib := GridAjouteColonne(TabLivre, GetTexteLibelle('LAB_014'), 230);
+       ColLivreLib := GridAjouteColonne(TabLivre, GetTexteLibelle('RULES-LAB_014'), 230);
        ColLivreCod := GridAjouteColonne(TabLivre, '');
        ColLivreOrd := GridAjouteColonne(TabLivre, '');
        ColLivreRac := GridAjouteColonne(TabLivre, 'R', 30);
@@ -954,14 +954,14 @@ procedure TMenu.FormCreate(Sender: TObject);
        TabPersonnage.ColCount         := 1;
        TabPersonnage.RowCount         := 1;
        TabPersonnage.ColWidths[0]     := 20;
-       ColPersoNom  := GridAjouteColonne(TabPersonnage, GetTexteLibelle('LAB_014'), 100);
-       ColPersoWor  := GridAjouteColonne(TabPersonnage, GetTexteLibelle('LAB_006'), 150);
-       ColPersoRac  := GridAjouteColonne(TabPersonnage, GetTexteLibelle('LAB_042'), 200);
-       ColPersoNiv  := GridAjouteColonne(TabPersonnage, GetTexteLibelle('LAB_019'), 30, Tacenter);
-       ColPersoTXp  := GridAjouteColonne(TabPersonnage, GetTexteLibelle('LAB_035'), 30, taRightJustify);
-       ColPersoCXp  := GridAjouteColonne(TabPersonnage, GetTexteLibelle('LAB_041'), 30, taRightJustify);
-       ColPersoLOb  := GridAjouteColonne(TabPersonnage, GetTexteLibelle('LAB_128'), 150);
-       ColPersoLNe  := GridAjouteColonne(TabPersonnage, GetTexteLibelle('LAB_136'), 150);
+       ColPersoNom  := GridAjouteColonne(TabPersonnage, GetTexteLibelle('RULES-LAB_014'), 100);
+       ColPersoWor  := GridAjouteColonne(TabPersonnage, GetTexteLibelle('RULES-LAB_006'), 150);
+       ColPersoRac  := GridAjouteColonne(TabPersonnage, GetTexteLibelle('RULES-LAB_042'), 200);
+       ColPersoNiv  := GridAjouteColonne(TabPersonnage, GetTexteLibelle('RULES-LAB_019'), 30, Tacenter);
+       ColPersoTXp  := GridAjouteColonne(TabPersonnage, GetTexteLibelle('RULES-LAB_035'), 30, taRightJustify);
+       ColPersoCXp  := GridAjouteColonne(TabPersonnage, GetTexteLibelle('RULES-LAB_041'), 30, taRightJustify);
+       ColPersoLOb  := GridAjouteColonne(TabPersonnage, GetTexteLibelle('RULES-LAB_128'), 150);
+       ColPersoLNe  := GridAjouteColonne(TabPersonnage, GetTexteLibelle('RULES-LAB_136'), 150);
 
        ComboBoxLangue.Style    := csDropDownList;
        // chercher les livres
@@ -1025,32 +1025,32 @@ procedure TMenu.FormCreate(Sender: TObject);
        // Appeler la procédure SetGlobalFonts au démarrage du formulaire
        MiseEnFormeDesChamp(self);
 
-       ConstArbreAttribut          := GetTexteLibelle('LAB_008');
-       ConstArbreCompetence        := GetTexteLibelle('LAB_009');
-       ConstArbreTalent            := GetTexteLibelle('LAB_007');
-       ConstArbreAuChoix           := GetTexteLibelle('LAB_010');
-       ConstArbreMetierPossible    := GetTexteLibelle('LAB_011');
-       ConstArbreRacePossible      := GetTexteLibelle('LAB_012');
-       ConstArbreEquipement        := GetTexteLibelle('LAB_013');
-       ConstArbreCorruption        := GetTexteLibelle('LAB_156');
+       ConstArbreAttribut          := GetTexteLibelle('RULES-LAB_008');
+       ConstArbreCompetence        := GetTexteLibelle('RULES-LAB_009');
+       ConstArbreTalent            := GetTexteLibelle('RULES-LAB_007');
+       ConstArbreAuChoix           := GetTexteLibelle('RULES-LAB_010');
+       ConstArbreMetierPossible    := GetTexteLibelle('RULES-LAB_011');
+       ConstArbreRacePossible      := GetTexteLibelle('RULES-LAB_012');
+       ConstArbreEquipement        := GetTexteLibelle('RULES-LAB_013');
+       ConstArbreCorruption        := GetTexteLibelle('RULES-LAB_156');
 
-       Label1.Caption              := GetTexteLibelle('LAB_082');
-       ButtonCompetence.Caption    := GetTexteLibelle('LAB_009');
-       ButtonTalent.Caption        := GetTexteLibelle('LAB_007');
-       ButtonMetier.Caption        := GetTexteLibelle('LAB_006');
-       ButtonRace.Caption          := GetTexteLibelle('LAB_042');
-       ButtonArme.Caption          := GetTexteLibelle('LAB_063');
-       ButtonArmure.Caption        := GetTexteLibelle('LAB_065');
-       ButtonSort.Caption          := GetTexteLibelle('LAB_083');
+       Label1.Caption              := GetTexteLibelle('RULES-LAB_082');
+       ButtonCompetence.Caption    := GetTexteLibelle('RULES-LAB_009');
+       ButtonTalent.Caption        := GetTexteLibelle('RULES-LAB_007');
+       ButtonMetier.Caption        := GetTexteLibelle('RULES-LAB_006');
+       ButtonRace.Caption          := GetTexteLibelle('RULES-LAB_042');
+       ButtonArme.Caption          := GetTexteLibelle('RULES-LAB_063');
+       ButtonArmure.Caption        := GetTexteLibelle('RULES-LAB_065');
+       ButtonSort.Caption          := GetTexteLibelle('RULES-LAB_083');
 
-       Label2.Caption              := GetTexteLibelle('LAB_081');
-       ButtonCreation.Caption      := GetTexteLibelle('LAB_079');
-       ButtonModification.Caption  := GetTexteLibelle('LAB_080');
+       Label2.Caption              := GetTexteLibelle('RULES-LAB_081');
+       ButtonCreation.Caption      := GetTexteLibelle('RULES-LAB_079');
+       ButtonModification.Caption  := GetTexteLibelle('RULES-LAB_080');
 
-       Label3.Caption              := GetTexteLibelle('LAB_128');
+       Label3.Caption              := GetTexteLibelle('RULES-LAB_128');
 
-       ButtonCreationLivre.Caption := GetTexteLibelle('LAB_154');
-       ButtonOuvrirLivre.Caption   := GetTexteLibelle('LAB_155');
+       ButtonCreationLivre.Caption := GetTexteLibelle('RULES-LAB_154');
+       ButtonOuvrirLivre.Caption   := GetTexteLibelle('RULES-LAB_155');
 
        AdjustGridColumnsWidth(TabLivre, Self.Height, true, true, True, 0, 10);
        AdjustGridColumnsWidth(TabPersonnage, Self.Height, true, true, True, 0, 10);
@@ -1061,6 +1061,12 @@ procedure TMenu.FormCreate(Sender: TObject);
       gTTFontCache.BuildFontCache;
 
       ImageTmp := GetCurrentDir+'TMP.PNG';
+
+      // Mouchard des references nues (CONTEXT.md 2.49 etape 4). Tous les livres sont charges
+      // ici : on depose le releve a la racine, sans fenetre ni clic. A RETIRER une fois le
+      // durcissement de VerifieRecherche decide - ce n'est pas un fichier de suivi du projet,
+      // c'est une trace technique jetable.
+      TraceNuEcritFichier(GetCurrentDir + PathDelim + 'TRACE_references_nues.txt');
   end;
 
 procedure TMenu.ButtonCompetenceClick(Sender: TObject);

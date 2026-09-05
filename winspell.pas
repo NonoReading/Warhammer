@@ -144,17 +144,17 @@ procedure TWinSpells.WinCharger();
       if TabSpell.ColCount < 2 then
         begin
           TabSpell.ColCount      := 1;
-          GridAjouteColonne(TabSpell, GetTexteLibelle('LAB_001'));
-          GridAjouteColonne(TabSpell, GetTexteLibelle('LAB_116'),20);
-          GridAjouteColonne(TabSpell, GetTexteLibelle('LAB_002'),250);
-          GridAjouteColonne(TabSpell, GetTexteLibelle('LAB_057'));
-          GridAjouteColonne(TabSpell, GetTexteLibelle('LAB_108'));
-          GridAjouteColonne(TabSpell, GetTexteLibelle('LAB_109'));
-          GridAjouteColonne(TabSpell, GetTexteLibelle('LAB_117'));
-          GridAjouteColonne(TabSpell, GetTexteLibelle('LAB_019'));
-          GridAjouteColonne(TabSpell, GetTexteLibelle('LAB_007'));
-          GridAjouteColonne(TabSpell, GetTexteLibelle('LAB_128'),100);
-          GridAjouteColonne(TabSpell, GetTexteLibelle('LAB_001'),100);
+          GridAjouteColonne(TabSpell, GetTexteLibelle('RULES-LAB_001'));
+          GridAjouteColonne(TabSpell, GetTexteLibelle('RULES-LAB_116'),20);
+          GridAjouteColonne(TabSpell, GetTexteLibelle('RULES-LAB_002'),250);
+          GridAjouteColonne(TabSpell, GetTexteLibelle('RULES-LAB_057'));
+          GridAjouteColonne(TabSpell, GetTexteLibelle('RULES-LAB_108'));
+          GridAjouteColonne(TabSpell, GetTexteLibelle('RULES-LAB_109'));
+          GridAjouteColonne(TabSpell, GetTexteLibelle('RULES-LAB_117'));
+          GridAjouteColonne(TabSpell, GetTexteLibelle('RULES-LAB_019'));
+          GridAjouteColonne(TabSpell, GetTexteLibelle('RULES-LAB_007'));
+          GridAjouteColonne(TabSpell, GetTexteLibelle('RULES-LAB_128'),100);
+          GridAjouteColonne(TabSpell, GetTexteLibelle('RULES-LAB_001'),100);
         end;
       TabSpell.ColWidths[0]  := 20;
 
@@ -201,8 +201,8 @@ procedure TWinSpells.WinCharger();
         begin
           TabTalent.ColCount      := 1;
           TabTalent.ColWidths[0]  := 20;
-          GridAjouteColonne(TabTalent, GetTexteLibelle('LAB_007'),100);
-          GridAjouteColonne(TabTalent, GetTexteLibelle('LAB_001'));
+          GridAjouteColonne(TabTalent, GetTexteLibelle('RULES-LAB_007'),100);
+          GridAjouteColonne(TabTalent, GetTexteLibelle('RULES-LAB_001'));
         end;
 
       //Sort
@@ -213,16 +213,16 @@ procedure TWinSpells.WinCharger();
       if FileExists(GetCurrentDir+ConstCheminLogo1) then
         ImageWar.Picture.LoadFromFile(GetCurrentDir+ConstCheminLogo1);
 
-      Self.Caption              := GetTexteLibelle('LAB_083');
-      Labcode.Caption           := GetTexteLibelle('LAB_001');
-      LabLib.Caption            := GetTexteLibelle('LAB_002');
-      LabType.Caption           := GetTexteLibelle('LAB_018');
-      LabPortee.Caption         := GetTexteLibelle('LAB_057');
-      LabCible.Caption          := GetTexteLibelle('LAB_108');
-      LabDuree.Caption          := GetTexteLibelle('LAB_109');
-      LabNiveau.Caption         := GetTexteLibelle('LAB_019');
-      AffLivre.Caption          := GetTexteLibelle('LAB_128');
-      ButtonFiltre.Caption      := GetTexteLibelle('LAB_133');
+      Self.Caption              := GetTexteLibelle('RULES-LAB_083');
+      Labcode.Caption           := GetTexteLibelle('RULES-LAB_001');
+      LabLib.Caption            := GetTexteLibelle('RULES-LAB_002');
+      LabType.Caption           := GetTexteLibelle('RULES-LAB_018');
+      LabPortee.Caption         := GetTexteLibelle('RULES-LAB_057');
+      LabCible.Caption          := GetTexteLibelle('RULES-LAB_108');
+      LabDuree.Caption          := GetTexteLibelle('RULES-LAB_109');
+      LabNiveau.Caption         := GetTexteLibelle('RULES-LAB_019');
+      AffLivre.Caption          := GetTexteLibelle('RULES-LAB_128');
+      ButtonFiltre.Caption      := GetTexteLibelle('RULES-LAB_133');
 
       TabSpell.Row := 1;
       TabSpellSelection(TabSpell, 1, 1);

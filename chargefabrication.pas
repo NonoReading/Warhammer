@@ -54,15 +54,15 @@ function TexteFabrication(PFabrication: StructureFabrication):String;
     Texte:         String;
   begin
     Texte           := '';
-    Texte := GetTexteLibelle('LAB_118') + ' : ';
+    Texte := GetTexteLibelle('RULES-LAB_118') + ' : ';
     if PFabrication.TypeQualite <> '' then
-      Texte  := Texte + SeparateurRetourLigne + SeparateurRetourLigne + GetTexteLibelle('LAB_018') + ' : ' + PFabrication.TypeQualite;
+      Texte  := Texte + SeparateurRetourLigne + SeparateurRetourLigne + GetTexteLibelle('RULES-LAB_018') + ' : ' + PFabrication.TypeQualite;
     if PFabrication.Description <> '' then
-      Texte  := Texte + SeparateurRetourLigne + SeparateurRetourLigne + GetTexteLibelle('LAB_003') + ' : ' + PFabrication.Description;
+      Texte  := Texte + SeparateurRetourLigne + SeparateurRetourLigne + GetTexteLibelle('RULES-LAB_003') + ' : ' + PFabrication.Description;
     if PFabrication.Encombrement <> 0 then
-      Texte  := Texte + SeparateurRetourLigne + SeparateurRetourLigne + GetTexteLibelle('LAB_055') + ' : ' + IntToStr(PFabrication.Encombrement);
+      Texte  := Texte + SeparateurRetourLigne + SeparateurRetourLigne + GetTexteLibelle('RULES-LAB_055') + ' : ' + IntToStr(PFabrication.Encombrement);
     if PFabrication.Maximum <> '' then
-      Texte  := Texte + SeparateurRetourLigne + SeparateurRetourLigne + GetTexteLibelle('LAB_111') + ' : ' + PFabrication.Maximum;
+      Texte  := Texte + SeparateurRetourLigne + SeparateurRetourLigne + GetTexteLibelle('RULES-LAB_111') + ' : ' + PFabrication.Maximum;
     Result   := Texte;
   end;
 

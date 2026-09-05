@@ -368,22 +368,22 @@ end;
 procedure TWinLivres.InitialiserControles();
 begin
   // Mettre à jour les captions pour Races
-  LabelLivre.Caption := GetTexteLibelle('LAB_155');        // 'Open book'
-  LabelFormCode.Caption := GetTexteLibelle('LAB_001');      // 'Code'
-  LabelFormLib.Caption := GetTexteLibelle('LAB_002');       // 'Label'
-  LabelFormDesc.Caption := GetTexteLibelle('LAB_003');      // 'Description'
+  LabelLivre.Caption := GetTexteLibelle('RULES-LAB_155');        // 'Open book'
+  LabelFormCode.Caption := GetTexteLibelle('RULES-LAB_001');      // 'Code'
+  LabelFormLib.Caption := GetTexteLibelle('RULES-LAB_002');       // 'Label'
+  LabelFormDesc.Caption := GetTexteLibelle('RULES-LAB_003');      // 'Description'
   
   // Mettre à jour les captions pour Attributs
-  LabelFormAttrName.Caption := GetTexteLibelle('LAB_008');  // 'Attribute'
-  LabelFormAttrDices.Caption := GetTexteLibelle('LAB_161'); // 'Dices'
-  LabelFormAttrBaseValue.Caption := GetTexteLibelle('LAB_025'); // 'Value'
-  LabelFormAttrFormula.Caption := GetTexteLibelle('LAB_020'); // 'Calculation'
-  LabelFormSkills.Caption := GetTexteLibelle('LAB_087');  // 'Specie's Skills'
-  LabelFormCompPrinc.Caption := GetTexteLibelle('LAB_009');  // 'Compétence'
+  LabelFormAttrName.Caption := GetTexteLibelle('RULES-LAB_008');  // 'Attribute'
+  LabelFormAttrDices.Caption := GetTexteLibelle('RULES-LAB_161'); // 'Dices'
+  LabelFormAttrBaseValue.Caption := GetTexteLibelle('RULES-LAB_025'); // 'Value'
+  LabelFormAttrFormula.Caption := GetTexteLibelle('RULES-LAB_020'); // 'Calculation'
+  LabelFormSkills.Caption := GetTexteLibelle('RULES-LAB_087');  // 'Specie's Skills'
+  LabelFormCompPrinc.Caption := GetTexteLibelle('RULES-LAB_009');  // 'Compétence'
   // Libellé emprunté aux traductions PDF, faute de LAB_ dédié à 'Classe'.
   LabelFormClasse.Caption := GetTexteLibelle('PDF_MAIN1_CLASS');  // 'Classe'
-  LabelFormAttribut.Caption := GetTexteLibelle('LAB_008');  // 'Attribut'
-  LabelFormMax.Caption := GetTexteLibelle('LAB_044');  // 'Max'
+  LabelFormAttribut.Caption := GetTexteLibelle('RULES-LAB_008');  // 'Attribut'
+  LabelFormMax.Caption := GetTexteLibelle('RULES-LAB_044');  // 'Max'
   
   // Mettre à jour les captions pour Composants
   LabelFormComponent1.Caption := 'Component 1:';
@@ -653,7 +653,7 @@ begin
   if SkillChapter = nil then Exit;
   
   // Créer la branche "Compétences" (traduite)
-  NodeSkills := TreeViewLivre.Items.AddChild(RaceNode, GetTexteLibelle('LAB_087'));
+  NodeSkills := TreeViewLivre.Items.AddChild(RaceNode, GetTexteLibelle('RULES-LAB_087'));
   SetNodeInfo(NodeSkills, 3, RaceCode);  // 3 = skills chapter
   
   // Récupérer les enfants directs de SUBCHAPTER_SKILL (pas récursif!)
@@ -710,7 +710,7 @@ begin
   if TalentChapter = nil then Exit;
   
   // Créer la branche "Talents" (traduite)
-  NodeTalents := TreeViewLivre.Items.AddChild(RaceNode, GetTexteLibelle('LAB_007'));
+  NodeTalents := TreeViewLivre.Items.AddChild(RaceNode, GetTexteLibelle('RULES-LAB_007'));
   SetNodeInfo(NodeTalents, 5, RaceCode);  // 5 = talents chapter
   
   // Récupérer les enfants directs de SUBCHAPTER_TALENT
@@ -738,7 +738,7 @@ begin
           // CASE 1: Talent aléatoire (RULES-T*)
           if TalentCode = 'RULES-T*' then
           begin
-            NodeTalent := TreeViewLivre.Items.AddChild(NodeTalents, GetTexteLibelle('LAB_085'));  // "Randomly"
+            NodeTalent := TreeViewLivre.Items.AddChild(NodeTalents, GetTexteLibelle('RULES-LAB_085'));  // "Randomly"
             SetNodeInfo(NodeTalent, 6);  // 6 = random talent
           end
           
@@ -746,7 +746,7 @@ begin
           else if Pos('/', TalentCode) > 0 then
           begin
             // Créer nœud "{Au choix}"
-            NodeChoice := TreeViewLivre.Items.AddChild(NodeTalents, GetTexteLibelle('LAB_127'));
+            NodeChoice := TreeViewLivre.Items.AddChild(NodeTalents, GetTexteLibelle('RULES-LAB_127'));
             SetNodeInfo(NodeChoice, 7);  // 7 = choice node
             
             // Scinder par "/" et ajouter chaque talent
@@ -801,7 +801,7 @@ begin
   if CareerChapter = nil then Exit;
   
   // Créer la branche "Career" (traduite)
-  NodeCareers := TreeViewLivre.Items.AddChild(RaceNode, GetTexteLibelle('LAB_006'));
+  NodeCareers := TreeViewLivre.Items.AddChild(RaceNode, GetTexteLibelle('RULES-LAB_006'));
   SetNodeInfo(NodeCareers, 9, RaceCode);  // 9 = careers chapter
   
   // Récupérer les enfants directs de SUBCHAPTER_CAREER
@@ -881,7 +881,7 @@ begin
       LabelFormAttrBaseValue.Visible := True;
       EditFormAttrBaseValue.Visible := True;
       EditFormAttrBaseValue.Text := SimpleValue;
-      LabelFormAttrBaseValue.Caption := GetTexteLibelle('LAB_025'); // 'Value'
+      LabelFormAttrBaseValue.Caption := GetTexteLibelle('RULES-LAB_025'); // 'Value'
       LabelFormAttrFormula.Visible := False;
       EditFormAttrFormula.Visible := False;
       
@@ -897,12 +897,12 @@ begin
       LabelFormAttrDices.Visible := True;
       EditFormAttrDices.Visible := True;
       EditFormAttrDices.Text := Dices;
-      LabelFormAttrDices.Caption := GetTexteLibelle('LAB_161'); // 'Dices'
+      LabelFormAttrDices.Caption := GetTexteLibelle('RULES-LAB_161'); // 'Dices'
       
       LabelFormAttrBaseValue.Visible := True;
       EditFormAttrBaseValue.Visible := True;
       EditFormAttrBaseValue.Text := BaseValue;
-      LabelFormAttrBaseValue.Caption := GetTexteLibelle('LAB_025'); // 'Value'
+      LabelFormAttrBaseValue.Caption := GetTexteLibelle('RULES-LAB_025'); // 'Value'
       
       LabelFormAttrFormula.Visible := False;
       EditFormAttrFormula.Visible := False;
@@ -1169,7 +1169,7 @@ begin
   if Pos(EquipementQualite, CodeItem) > 0 then
   begin
     CodeItem := Trim(Copy(CodeItem, 1, Length(CodeItem) - Length(EquipementQualite)));
-    Qualite  := GetTexteLibelle('LAB_038');  // ' de qualité'
+    Qualite  := GetTexteLibelle('RULES-LAB_038');  // ' de qualité'
   end
   else
     Qualite := '';
@@ -1483,18 +1483,18 @@ begin
     NodeRoot := TreeViewLivre.Items.Add(nil, GetBookLabel(FileCode));
 
     // Afficher le nom complet dans LabelLivre
-    LabelLivre.Caption := GetTexteLibelle('LAB_128') + ': ' + FileName;
+    LabelLivre.Caption := GetTexteLibelle('RULES-LAB_128') + ': ' + FileName;
 
     // Afficher dans LabelFormTitle
-    LabelFormTitle.Caption := GetTexteLibelle('LAB_128') + ': ' + FileName;
+    LabelFormTitle.Caption := GetTexteLibelle('RULES-LAB_128') + ': ' + FileName;
     SetNodeInfo(NodeRoot, 0);  // 0 = chapitre
 
     // ========== INFORMATIONS DU LIVRE ==========
-    NodeInfos := TreeViewLivre.Items.AddChild(NodeRoot, GetTexteLibelle('LAB_128'));
+    NodeInfos := TreeViewLivre.Items.AddChild(NodeRoot, GetTexteLibelle('RULES-LAB_128'));
     SetNodeInfo(NodeInfos, 37);
 
     // ========== RACES ==========
-    NodeRaces := TreeViewLivre.Items.AddChild(NodeRoot, GetTexteLibelle('LAB_042'));
+    NodeRaces := TreeViewLivre.Items.AddChild(NodeRoot, GetTexteLibelle('RULES-LAB_042'));
     SetNodeInfo(NodeRaces, 0);
     
     SpecieElements := XMLDoc.GetElementsByTagName('Specie');
@@ -1557,7 +1557,7 @@ begin
     // Table métier -> races possibles, construite avant la boucle
     ConstruireMetierRacesMap();
     
-    NodeCareers := TreeViewLivre.Items.AddChild(NodeRoot, GetTexteLibelle('LAB_006'));
+    NodeCareers := TreeViewLivre.Items.AddChild(NodeRoot, GetTexteLibelle('RULES-LAB_006'));
     SetNodeInfo(NodeCareers, 0);
     
     CareerElements := XMLDoc.GetElementsByTagName('Career');
@@ -1598,43 +1598,43 @@ begin
     // ========== COMPÉTENCES ==========
     // Deux chapitres distincts dans le XML : DATA_SKILL pour les compétences,
     // DATA_SKILL_SPECIALIZATION pour les spécialisations, qui n'ont qu'un libellé.
-    ChargerBrancheSimple('DATA_SKILL', 'Skill', GetTexteLibelle('LAB_009'), 26, NodeRoot);
-    ChargerBrancheSimple('DATA_SKILL_SPECIALIZATION', 'Skill', GetTexteLibelle('LAB_146'), 27, NodeRoot, True);
+    ChargerBrancheSimple('DATA_SKILL', 'Skill', GetTexteLibelle('RULES-LAB_009'), 26, NodeRoot);
+    ChargerBrancheSimple('DATA_SKILL_SPECIALIZATION', 'Skill', GetTexteLibelle('RULES-LAB_146'), 27, NodeRoot, True);
     
     // ========== TALENTS ==========
-    ChargerBrancheSimple('DATA_TALENT', 'Talent', GetTexteLibelle('LAB_007'), 28, NodeRoot);
-    ChargerBrancheSimple('DATA_TALENT_SPECIALIZATION', 'Talent', GetTexteLibelle('LAB_147'), 29, NodeRoot, True);
+    ChargerBrancheSimple('DATA_TALENT', 'Talent', GetTexteLibelle('RULES-LAB_007'), 28, NodeRoot);
+    ChargerBrancheSimple('DATA_TALENT_SPECIALIZATION', 'Talent', GetTexteLibelle('RULES-LAB_147'), 29, NodeRoot, True);
     
     // ========== ÉQUIPEMENT ==========
     // Une branche porteuse, puis un chapitre XML par type.
     // Le "divers" n'a pas de chapitre : c'est du texte libre dans les métiers.
-    NodeEquip := TreeViewLivre.Items.AddChild(NodeRoot, GetTexteLibelle('LAB_013'));
+    NodeEquip := TreeViewLivre.Items.AddChild(NodeRoot, GetTexteLibelle('RULES-LAB_013'));
     SetNodeInfo(NodeEquip, 0);
     
-    ChargerBrancheSimple('DATA_WEAPON', 'Weapon', GetTexteLibelle('LAB_063'), 30, NodeEquip);
-    ChargerBrancheSimple('DATA_ARMOR',  'Armor',  GetTexteLibelle('LAB_065'), 31, NodeEquip);
-    ChargerBrancheSimple('DATA_ARMOR_SIMP', 'ArmorSimp', GetTexteLibelle('LAB_149'), 33, NodeEquip);
+    ChargerBrancheSimple('DATA_WEAPON', 'Weapon', GetTexteLibelle('RULES-LAB_063'), 30, NodeEquip);
+    ChargerBrancheSimple('DATA_ARMOR',  'Armor',  GetTexteLibelle('RULES-LAB_065'), 31, NodeEquip);
+    ChargerBrancheSimple('DATA_ARMOR_SIMP', 'ArmorSimp', GetTexteLibelle('RULES-LAB_149'), 33, NodeEquip);
     ChargerBrancheSimple('DATA_WEAPON_BONUS', 'BonusMalus',
-                         GetTexteLibelle('LAB_125') + ' ' + GetTexteLibelle('LAB_063'), 32, NodeEquip);
+                         GetTexteLibelle('RULES-LAB_125') + ' ' + GetTexteLibelle('RULES-LAB_063'), 32, NodeEquip);
     ChargerBrancheSimple('DATA_ARMOR_BONUS', 'BonusMalus',
-                         GetTexteLibelle('LAB_125') + ' ' + GetTexteLibelle('LAB_065'), 34, NodeEquip);
+                         GetTexteLibelle('RULES-LAB_125') + ' ' + GetTexteLibelle('RULES-LAB_065'), 34, NodeEquip);
     
     // ========== SORTS ==========
-    ChargerBrancheSimple('DATA_SPELL', 'Sort', GetTexteLibelle('LAB_083'), 35, NodeRoot);
+    ChargerBrancheSimple('DATA_SPELL', 'Sort', GetTexteLibelle('RULES-LAB_083'), 35, NodeRoot);
     
     // ========== TIRAGE ALÉATOIRE DE RACE ==========
     // Un seul noeud, sans enfant : il ouvre directement la table.
     if XMLDoc.GetElementsByTagName('DATA_RANDOM_SPECIE').Count > 0 then
     begin
       NodeTirage := TreeViewLivre.Items.AddChild(NodeRoot,
-                      GetTexteLibelle('LAB_042') + ' ' + GetTexteLibelle('LAB_085'));
+                      GetTexteLibelle('RULES-LAB_042') + ' ' + GetTexteLibelle('RULES-LAB_085'));
       SetNodeInfo(NodeTirage, 36);
     end;
     
     // Expand les branches principales
     NodeRoot.Expand(False);
     
-    LabelFormTitle.Caption := GetTexteLibelle('LAB_128') + ': ' + FileName;
+    LabelFormTitle.Caption := GetTexteLibelle('RULES-LAB_128') + ': ' + FileName;
     // Message de succès supprimé pour l'instant
     // ShowMessage('✅ ' + IntToStr(SpecieElements.Count) + ' races + ' + IntToStr(CareerElements.Count) + ' carrières chargées!');
     
@@ -1666,7 +1666,7 @@ begin
          // C'est une race
          TypeNodeSelectionnee := 'DONNEE';
          CurrentRaceCode := GetNodeCode(Node);
-         LabelFormTitle.Caption := GetTexteLibelle('LAB_042') + ': ' + Node.Text;
+         LabelFormTitle.Caption := GetTexteLibelle('RULES-LAB_042') + ': ' + Node.Text;
          MasquerAfficherElements('');  // Masquer tous les grids
          AfficherDonneeRace(CurrentRaceCode);
        end;
@@ -1689,7 +1689,7 @@ begin
          if RaceCodeFound <> '' then
          begin
            if Node.Parent <> nil then
-             LabelFormTitle.Caption := GetTexteLibelle('LAB_087') + ': ' + Node.Parent.Text;
+             LabelFormTitle.Caption := GetTexteLibelle('RULES-LAB_087') + ': ' + Node.Parent.Text;
            
            AfficherSkillsForRace(RaceCodeFound);  // Appelle MasquerAfficherElements('COMPETENCE')
          end
@@ -1710,13 +1710,13 @@ begin
     5: begin
          // C'est la branche "Talents"
          TypeNodeSelectionnee := 'CHAPITRE';
-         LabelFormTitle.Caption := GetTexteLibelle('LAB_007');
+         LabelFormTitle.Caption := GetTexteLibelle('RULES-LAB_007');
          AfficherTalentsForRace();  // Appelle MasquerAfficherElements('TALENT')
        end;
     9: begin
          // C'est la branche "Carrières de race"
          TypeNodeSelectionnee := 'CHAPITRE';
-         LabelFormTitle.Caption := GetTexteLibelle('LAB_006');
+         LabelFormTitle.Caption := GetTexteLibelle('RULES-LAB_006');
          
          RaceCodeFound := GetNodeCode(Node);
          
@@ -1789,59 +1789,59 @@ begin
     26: begin
          // Compétence de niveau 1
          TypeNodeSelectionnee := 'COMPETENCE';
-         AfficherDonneeCompetence(GetNodeCode(Node), GetTexteLibelle('LAB_009'));
+         AfficherDonneeCompetence(GetNodeCode(Node), GetTexteLibelle('RULES-LAB_009'));
        end;
     27: begin
          // Spécialisation de compétence
          TypeNodeSelectionnee := 'COMPETENCE';
-         AfficherDonneeCompetence(GetNodeCode(Node), GetTexteLibelle('LAB_146'));
+         AfficherDonneeCompetence(GetNodeCode(Node), GetTexteLibelle('RULES-LAB_146'));
        end;
     28: begin
          // Talent de niveau 1
          TypeNodeSelectionnee := 'TALENT';
-         AfficherDonneeTalent(GetNodeCode(Node), GetTexteLibelle('LAB_007'));
+         AfficherDonneeTalent(GetNodeCode(Node), GetTexteLibelle('RULES-LAB_007'));
        end;
     29: begin
          // Spécialisation de talent
          TypeNodeSelectionnee := 'TALENT';
-         AfficherDonneeTalent(GetNodeCode(Node), GetTexteLibelle('LAB_147'));
+         AfficherDonneeTalent(GetNodeCode(Node), GetTexteLibelle('RULES-LAB_147'));
        end;
     30: begin
          // Arme
          TypeNodeSelectionnee := 'EQUIPEMENT';
-         AfficherDonneeEquipement(GetNodeCode(Node), 'Weapon', GetTexteLibelle('LAB_063'));
+         AfficherDonneeEquipement(GetNodeCode(Node), 'Weapon', GetTexteLibelle('RULES-LAB_063'));
        end;
     31: begin
          // Armure
          TypeNodeSelectionnee := 'EQUIPEMENT';
-         AfficherDonneeEquipement(GetNodeCode(Node), 'Armor', GetTexteLibelle('LAB_065'));
+         AfficherDonneeEquipement(GetNodeCode(Node), 'Armor', GetTexteLibelle('RULES-LAB_065'));
        end;
     32: begin
          // Qualité d'arme
          TypeNodeSelectionnee := 'EQUIPEMENT';
          AfficherDonneeBonusMalus(GetNodeCode(Node),
-                                  GetTexteLibelle('LAB_125') + ' ' + GetTexteLibelle('LAB_063'));
+                                  GetTexteLibelle('RULES-LAB_125') + ' ' + GetTexteLibelle('RULES-LAB_063'));
        end;
     33: begin
          // Armure simplifiée
          TypeNodeSelectionnee := 'EQUIPEMENT';
-         AfficherDonneeEquipement(GetNodeCode(Node), 'ArmorSimp', GetTexteLibelle('LAB_149'));
+         AfficherDonneeEquipement(GetNodeCode(Node), 'ArmorSimp', GetTexteLibelle('RULES-LAB_149'));
        end;
     34: begin
          // Qualité d'armure
          TypeNodeSelectionnee := 'EQUIPEMENT';
          AfficherDonneeBonusMalus(GetNodeCode(Node),
-                                  GetTexteLibelle('LAB_125') + ' ' + GetTexteLibelle('LAB_065'));
+                                  GetTexteLibelle('RULES-LAB_125') + ' ' + GetTexteLibelle('RULES-LAB_065'));
        end;
     35: begin
          // Sort
          TypeNodeSelectionnee := 'SORT';
-         AfficherDonneeSort(GetNodeCode(Node), GetTexteLibelle('LAB_083'));
+         AfficherDonneeSort(GetNodeCode(Node), GetTexteLibelle('RULES-LAB_083'));
        end;
     36: begin
          // Table de tirage aléatoire de race
          TypeNodeSelectionnee := 'CHAPITRE';
-         LabelFormTitle.Caption := GetTexteLibelle('LAB_042') + ' ' + GetTexteLibelle('LAB_085');
+         LabelFormTitle.Caption := GetTexteLibelle('RULES-LAB_042') + ' ' + GetTexteLibelle('RULES-LAB_085');
          AfficherTirageRace();
        end;
     37: begin
@@ -2297,7 +2297,7 @@ begin
         if ChildNode <> nil then
         begin
           // CASE 1: Nœud "Choix" - afficher avec enfants
-          if Pos(GetTexteLibelle('LAB_127'), ChildNode.Text) > 0 then
+          if Pos(GetTexteLibelle('RULES-LAB_127'), ChildNode.Text) > 0 then
           begin
             NodeTalent := TreeViewTalents.Items.Add(nil, ChildNode.Text);
             SetNodeInfo(NodeTalent, 11);  // 11 = choice node
@@ -2334,7 +2334,7 @@ begin
   begin
     if RandomCount > 0 then
     begin
-      LabelTalentsRandom.Caption := GetTexteLibelle('LAB_085') + ': ' + IntToStr(RandomCount);
+      LabelTalentsRandom.Caption := GetTexteLibelle('RULES-LAB_085') + ': ' + IntToStr(RandomCount);
       LabelTalentsRandom.BringToFront;
       LabelTalentsRandom.Visible := True;
     end
@@ -2391,9 +2391,9 @@ begin
   StringGridAttributs.RowCount := 1;
   
   // Col 0 = vide (réservé Lazarus), 1 = Code, 2 = Attribut, 3 = Niveau
-  StringGridAttributs.Columns[0].Title.Caption := GetTexteLibelle('LAB_001');  // Code
-  StringGridAttributs.Columns[1].Title.Caption := GetTexteLibelle('LAB_008');  // Attribut
-  StringGridAttributs.Columns[2].Title.Caption := GetTexteLibelle('LAB_019');  // Niv.
+  StringGridAttributs.Columns[0].Title.Caption := GetTexteLibelle('RULES-LAB_001');  // Code
+  StringGridAttributs.Columns[1].Title.Caption := GetTexteLibelle('RULES-LAB_008');  // Attribut
+  StringGridAttributs.Columns[2].Title.Caption := GetTexteLibelle('RULES-LAB_019');  // Niv.
   
   Elements := TDOMElement(Chapitre).GetElementsByTagName('Attribut');
   
@@ -2468,10 +2468,10 @@ begin
   StringGridCompetences.RowCount := 1;
   
   // Col 0 = vide (réservé Lazarus)
-  StringGridCompetences.Columns[0].Title.Caption := GetTexteLibelle('LAB_001');  // Code
-  StringGridCompetences.Columns[1].Title.Caption := GetTexteLibelle('LAB_009');  // Compétence
-  StringGridCompetences.Columns[2].Title.Caption := GetTexteLibelle('LAB_078');  // Spécialisation
-  StringGridCompetences.Columns[3].Title.Caption := GetTexteLibelle('LAB_019');  // Niv.
+  StringGridCompetences.Columns[0].Title.Caption := GetTexteLibelle('RULES-LAB_001');  // Code
+  StringGridCompetences.Columns[1].Title.Caption := GetTexteLibelle('RULES-LAB_009');  // Compétence
+  StringGridCompetences.Columns[2].Title.Caption := GetTexteLibelle('RULES-LAB_078');  // Spécialisation
+  StringGridCompetences.Columns[3].Title.Caption := GetTexteLibelle('RULES-LAB_019');  // Niv.
   
   Elements := TDOMElement(Chapitre).GetElementsByTagName('Skill');
   
@@ -2573,10 +2573,10 @@ begin
   StringGridTalents.RowCount := 1;
   
   // Col 0 = vide (réservé Lazarus)
-  StringGridTalents.Columns[0].Title.Caption := GetTexteLibelle('LAB_001');  // Code
-  StringGridTalents.Columns[1].Title.Caption := GetTexteLibelle('LAB_007');  // Talent
-  StringGridTalents.Columns[2].Title.Caption := GetTexteLibelle('LAB_078');  // Spécialisation
-  StringGridTalents.Columns[3].Title.Caption := GetTexteLibelle('LAB_019');  // Niv.
+  StringGridTalents.Columns[0].Title.Caption := GetTexteLibelle('RULES-LAB_001');  // Code
+  StringGridTalents.Columns[1].Title.Caption := GetTexteLibelle('RULES-LAB_007');  // Talent
+  StringGridTalents.Columns[2].Title.Caption := GetTexteLibelle('RULES-LAB_078');  // Spécialisation
+  StringGridTalents.Columns[3].Title.Caption := GetTexteLibelle('RULES-LAB_019');  // Niv.
   
   Elements := TDOMElement(Chapitre).GetElementsByTagName('Talent');
   
@@ -2676,10 +2676,10 @@ begin
   StringGridEquipement.RowCount := 1;
   
   // Col 0 = vide (réservé Lazarus)
-  StringGridEquipement.Columns[0].Title.Caption := GetTexteLibelle('LAB_001');  // Code
-  StringGridEquipement.Columns[1].Title.Caption := GetTexteLibelle('LAB_018');  // Type
-  StringGridEquipement.Columns[2].Title.Caption := GetTexteLibelle('LAB_013');  // Equipement
-  StringGridEquipement.Columns[3].Title.Caption := GetTexteLibelle('LAB_019');  // Niv.
+  StringGridEquipement.Columns[0].Title.Caption := GetTexteLibelle('RULES-LAB_001');  // Code
+  StringGridEquipement.Columns[1].Title.Caption := GetTexteLibelle('RULES-LAB_018');  // Type
+  StringGridEquipement.Columns[2].Title.Caption := GetTexteLibelle('RULES-LAB_013');  // Equipement
+  StringGridEquipement.Columns[3].Title.Caption := GetTexteLibelle('RULES-LAB_019');  // Niv.
   
   Elements := TDOMElement(Chapitre).GetElementsByTagName('Item');
   
@@ -2718,10 +2718,10 @@ begin
       ColLib := LibelleEquipement(NomItem, TypeEquip);
       
       case TypeEquip of
-        'W': ColType := GetTexteLibelle('LAB_063');  // Arme
-        'P': ColType := GetTexteLibelle('LAB_065');  // Armure
+        'W': ColType := GetTexteLibelle('RULES-LAB_063');  // Arme
+        'P': ColType := GetTexteLibelle('RULES-LAB_065');  // Armure
       else
-        ColType := GetTexteLibelle('LAB_064');       // Divers
+        ColType := GetTexteLibelle('RULES-LAB_064');       // Divers
       end;
     end;
     
@@ -2784,10 +2784,10 @@ begin
   
   // Les colonnes sont définies dans le .lfm
   // Col 0 = vide (réservé Lazarus), 1 = Code, 2 = Libellé, 3 = Livre, 4 = Sélectionné
-  StringGridRaces.Columns[0].Title.Caption := GetTexteLibelle('LAB_001');  // Code
-  StringGridRaces.Columns[1].Title.Caption := GetTexteLibelle('LAB_002');  // Libellé
-  StringGridRaces.Columns[2].Title.Caption := GetTexteLibelle('LAB_128');  // Livre
-  StringGridRaces.Columns[3].Title.Caption := GetTexteLibelle('LAB_004');  // Sélectionné
+  StringGridRaces.Columns[0].Title.Caption := GetTexteLibelle('RULES-LAB_001');  // Code
+  StringGridRaces.Columns[1].Title.Caption := GetTexteLibelle('RULES-LAB_002');  // Libellé
+  StringGridRaces.Columns[2].Title.Caption := GetTexteLibelle('RULES-LAB_128');  // Livre
+  StringGridRaces.Columns[3].Title.Caption := GetTexteLibelle('RULES-LAB_004');  // Sélectionné
   
   // Codes des races qui proposent ce métier
   RacesDuMetier := TStringList.Create;
@@ -3114,7 +3114,7 @@ begin
   AjouterLigneDetail('VERSION',   LireBalise('VERSION'),   True);
   AjouterLigneDetail('OFFICIAL',  LireBalise('OFFICIAL'),  True);
   AjouterLigneDetail('COMPLETE',  LireBalise('COMPLETE'),  True);
-  LabelFormTitle.Caption := GetTexteLibelle('LAB_128');
+  LabelFormTitle.Caption := GetTexteLibelle('RULES-LAB_128');
   GroupBoxForm.Visible := True;
 end;
 
@@ -3136,7 +3136,7 @@ begin
           RaceData := RacesDataList.Data[I];
           if RaceData <> nil then
             begin
-              LabelFormTitle.Caption := GetTexteLibelle('LAB_042') + ': ' + RaceData^.Code;
+              LabelFormTitle.Caption := GetTexteLibelle('RULES-LAB_042') + ': ' + RaceData^.Code;
               EditFormCode.Text := RaceData^.Code;
               EditFormLib.Text := RaceData^.Libelle;
               MemoFormDesc.Text := RaceData^.Description;
@@ -3270,8 +3270,8 @@ var
   Element: TDOMElement;
 begin
   StringGridQualites.RowCount := 1;
-  StringGridQualites.Columns[0].Title.Caption := GetTexteLibelle('LAB_125');  // Qualité
-  StringGridQualites.Columns[1].Title.Caption := GetTexteLibelle('LAB_025');  // Valeur
+  StringGridQualites.Columns[0].Title.Caption := GetTexteLibelle('RULES-LAB_125');  // Qualité
+  StringGridQualites.Columns[1].Title.Caption := GetTexteLibelle('RULES-LAB_025');  // Valeur
   
   if (Valeur = '') or (Valeur = '-') then Exit;
   
@@ -3358,13 +3358,13 @@ begin
   if Element = nil then Exit;
   
   StringGridDetail.RowCount := 1;
-  StringGridDetail.Columns[0].Title.Caption := GetTexteLibelle('LAB_002');  // Libellé
-  StringGridDetail.Columns[1].Title.Caption := GetTexteLibelle('LAB_025');  // Valeur
+  StringGridDetail.Columns[0].Title.Caption := GetTexteLibelle('RULES-LAB_002');  // Libellé
+  StringGridDetail.Columns[1].Title.Caption := GetTexteLibelle('RULES-LAB_025');  // Valeur
   
   LabelFormTitle.Caption := Titre + ': ' + ValeurXML(Element.FindNode('Description'));
 //  
-  AjouterLigneDetail(GetTexteLibelle('LAB_001'), Code);                                    // Code
-  AjouterLigneDetail(GetTexteLibelle('LAB_002'), ValeurXML(Element.FindNode('Description')));
+  AjouterLigneDetail(GetTexteLibelle('RULES-LAB_001'), Code);                                    // Code
+  AjouterLigneDetail(GetTexteLibelle('RULES-LAB_002'), ValeurXML(Element.FindNode('Description')));
   
   // Champs propres aux armes
   Valeur := ValeurXML(Element.FindNode('Skill'));
@@ -3375,7 +3375,7 @@ begin
       LibComp := Competence.Libelle
     else
       LibComp := Valeur;  // fallback, vaut souvent '-'
-    AjouterLigneDetail(GetTexteLibelle('LAB_009'), LibComp);                               // Compétence
+    AjouterLigneDetail(GetTexteLibelle('RULES-LAB_009'), LibComp);                               // Compétence
   end;
   
   // Dégâts : deux lignes, le bonus d'attribut et la valeur fixe
@@ -3383,30 +3383,30 @@ begin
   if Valeur <> '' then
   begin
     if DecouperDegats(Valeur, CodeBonus, Fixe) then
-      AjouterLigneDetail(GetTexteLibelle('LAB_159') + ' - ' + GetTexteLibelle(CodeBonus), '✓')
+      AjouterLigneDetail(GetTexteLibelle('RULES-LAB_159') + ' - ' + GetTexteLibelle(CodeBonus), '✓')
     else
-      AjouterLigneDetail(GetTexteLibelle('LAB_159') + ' - ' + GetTexteLibelle('LAB_034'), '');
+      AjouterLigneDetail(GetTexteLibelle('RULES-LAB_159') + ' - ' + GetTexteLibelle('RULES-LAB_034'), '');
     
-    AjouterLigneDetail(GetTexteLibelle('LAB_159') + ' - ' + GetTexteLibelle('LAB_025'), Fixe);
+    AjouterLigneDetail(GetTexteLibelle('RULES-LAB_159') + ' - ' + GetTexteLibelle('RULES-LAB_025'), Fixe);
   end;
   
-  AjouterLigneDetail(GetTexteLibelle('LAB_057'),
+  AjouterLigneDetail(GetTexteLibelle('RULES-LAB_057'),
                      TraduireCodesMultiples(ValeurXML(Element.FindNode('Reach'))));    // Portée
-  AjouterLigneDetail(GetTexteLibelle('LAB_053'), ValeurXML(Element.FindNode('Hand')));     // Mains
-  AjouterLigneDetail(GetTexteLibelle('LAB_060'), ValeurXML(Element.FindNode('Ammunition'))); // Munitions
+  AjouterLigneDetail(GetTexteLibelle('RULES-LAB_053'), ValeurXML(Element.FindNode('Hand')));     // Mains
+  AjouterLigneDetail(GetTexteLibelle('RULES-LAB_060'), ValeurXML(Element.FindNode('Ammunition'))); // Munitions
   
   // Champs propres aux armures
-  AjouterLigneDetail(GetTexteLibelle('LAB_075'),
+  AjouterLigneDetail(GetTexteLibelle('RULES-LAB_075'),
                      TraduireCodesMultiples(ValeurXML(Element.FindNode('Location'))));     // Emplacement
-  AjouterLigneDetail(GetTexteLibelle('LAB_076'), ValeurXML(Element.FindNode('ArmorPoint'))); // Protection
-  AjouterLigneDetail(GetTexteLibelle('LAB_074'),
+  AjouterLigneDetail(GetTexteLibelle('RULES-LAB_076'), ValeurXML(Element.FindNode('ArmorPoint'))); // Protection
+  AjouterLigneDetail(GetTexteLibelle('RULES-LAB_074'),
                      TraduireCodesMultiples(ValeurXML(Element.FindNode('Type'))));         // Type matériel
   
   // Champs communs
-  AjouterLigneDetail(GetTexteLibelle('LAB_056'),
+  AjouterLigneDetail(GetTexteLibelle('RULES-LAB_056'),
                      TraduireCodesMultiples(ValeurXML(Element.FindNode('Availability'))));  // Disponibilité
-  AjouterLigneDetail(GetTexteLibelle('LAB_054'), ValeurXML(Element.FindNode('Price')));     // Prix
-  AjouterLigneDetail(GetTexteLibelle('LAB_055'), ValeurXML(Element.FindNode('Encumbrance'))); // Encombrement
+  AjouterLigneDetail(GetTexteLibelle('RULES-LAB_054'), ValeurXML(Element.FindNode('Price')));     // Prix
+  AjouterLigneDetail(GetTexteLibelle('RULES-LAB_055'), ValeurXML(Element.FindNode('Encumbrance'))); // Encombrement
   AjouterLignesQualite(ValeurXML(Element.FindNode('Quality')), PrefixeLivre(Code));         // Qualité
   
   CodeDonneeSelectionnee := Code;
@@ -3443,11 +3443,11 @@ begin
   if XMLDoc = nil then Exit;
   
   StringGridRandomRace.RowCount := 1;
-  StringGridRandomRace.Columns[0].Title.Caption := GetTexteLibelle('LAB_001');  // Code
-  StringGridRandomRace.Columns[1].Title.Caption := GetTexteLibelle('LAB_002');  // Libellé
-  StringGridRandomRace.Columns[2].Title.Caption := GetTexteLibelle('LAB_128');  // Livre
-  StringGridRandomRace.Columns[3].Title.Caption := GetTexteLibelle('LAB_141');  // Début
-  StringGridRandomRace.Columns[4].Title.Caption := GetTexteLibelle('LAB_142');  // Fin
+  StringGridRandomRace.Columns[0].Title.Caption := GetTexteLibelle('RULES-LAB_001');  // Code
+  StringGridRandomRace.Columns[1].Title.Caption := GetTexteLibelle('RULES-LAB_002');  // Libellé
+  StringGridRandomRace.Columns[2].Title.Caption := GetTexteLibelle('RULES-LAB_128');  // Livre
+  StringGridRandomRace.Columns[3].Title.Caption := GetTexteLibelle('RULES-LAB_141');  // Début
+  StringGridRandomRace.Columns[4].Title.Caption := GetTexteLibelle('RULES-LAB_142');  // Fin
   
   // Tranches définies par ce livre : "CODE=01-90"
   Tranches := TStringList.Create;
@@ -3559,8 +3559,8 @@ var
   Element: TDOMElement;
 begin
   StringGridQualites.RowCount := 1;
-  StringGridQualites.Columns[0].Title.Caption := GetTexteLibelle('LAB_007');  // Talent
-  StringGridQualites.Columns[1].Title.Caption := GetTexteLibelle('LAB_001');  // Code
+  StringGridQualites.Columns[0].Title.Caption := GetTexteLibelle('RULES-LAB_007');  // Talent
+  StringGridQualites.Columns[1].Title.Caption := GetTexteLibelle('RULES-LAB_001');  // Code
   
   if Valeur = '' then Exit;
   
@@ -3603,18 +3603,18 @@ begin
   if Element = nil then Exit;
   
   StringGridDetail.RowCount := 1;
-  StringGridDetail.Columns[0].Title.Caption := GetTexteLibelle('LAB_002');  // Libellé
-  StringGridDetail.Columns[1].Title.Caption := GetTexteLibelle('LAB_025');  // Valeur
+  StringGridDetail.Columns[0].Title.Caption := GetTexteLibelle('RULES-LAB_002');  // Libellé
+  StringGridDetail.Columns[1].Title.Caption := GetTexteLibelle('RULES-LAB_025');  // Valeur
   
   LabelFormTitle.Caption := Titre + ': ' + ValeurXML(Element.FindNode('Description'));
   
-  AjouterLigneDetail(GetTexteLibelle('LAB_001'), Code);                                      // Code
-  AjouterLigneDetail(GetTexteLibelle('LAB_002'), ValeurXML(Element.FindNode('Description')));
-  AjouterLigneDetail(GetTexteLibelle('LAB_116'), ValeurXML(Element.FindNode('TypSpell')));    // Type de sort
-  AjouterLigneDetail(GetTexteLibelle('LAB_108'), ValeurXML(Element.FindNode('Target')));      // Cible
-  AjouterLigneDetail(GetTexteLibelle('LAB_109'), ValeurXML(Element.FindNode('Duration')));    // Durée
-  AjouterLigneDetail(GetTexteLibelle('LAB_057'), ValeurXML(Element.FindNode('Range')));       // Portée
-  AjouterLigneDetail(GetTexteLibelle('LAB_019'), ValeurXML(Element.FindNode('Level')));       // Niveau
+  AjouterLigneDetail(GetTexteLibelle('RULES-LAB_001'), Code);                                      // Code
+  AjouterLigneDetail(GetTexteLibelle('RULES-LAB_002'), ValeurXML(Element.FindNode('Description')));
+  AjouterLigneDetail(GetTexteLibelle('RULES-LAB_116'), ValeurXML(Element.FindNode('TypSpell')));    // Type de sort
+  AjouterLigneDetail(GetTexteLibelle('RULES-LAB_108'), ValeurXML(Element.FindNode('Target')));      // Cible
+  AjouterLigneDetail(GetTexteLibelle('RULES-LAB_109'), ValeurXML(Element.FindNode('Duration')));    // Durée
+  AjouterLigneDetail(GetTexteLibelle('RULES-LAB_057'), ValeurXML(Element.FindNode('Range')));       // Portée
+  AjouterLigneDetail(GetTexteLibelle('RULES-LAB_019'), ValeurXML(Element.FindNode('Level')));       // Niveau
   
   // Talents donnant accès au sort : liste variable, donc grille à part
   AjouterLignesTalentsSort(ValeurXML(Element.FindNode('Talent')));
@@ -3679,7 +3679,7 @@ begin
   Valeur := ValeurXML(Element.FindNode('Short'));
   if Valeur <> '' then
   begin
-    LabelFormCompPrinc.Caption := GetTexteLibelle('LAB_073');  // 'Résumé'
+    LabelFormCompPrinc.Caption := GetTexteLibelle('RULES-LAB_073');  // 'Résumé'
     EditFormCompPrinc.Text := Valeur;
     LabelFormCompPrinc.Visible := True;
     EditFormCompPrinc.Visible := True;
@@ -3689,7 +3689,7 @@ begin
   Valeur := ValeurXML(Element.FindNode('Modifier'));
   if Valeur <> '' then
   begin
-    LabelFormMax.Caption := GetTexteLibelle('LAB_034');  // 'Bonus'
+    LabelFormMax.Caption := GetTexteLibelle('RULES-LAB_034');  // 'Bonus'
     EditFormMax.Text := Valeur;
     LabelFormMax.Visible := True;
     EditFormMax.Visible := True;
@@ -3750,7 +3750,7 @@ begin
   end;
   
   // Compétence liée
-  LabelFormCompPrinc.Caption := GetTexteLibelle('LAB_009');  // 'Compétence'
+  LabelFormCompPrinc.Caption := GetTexteLibelle('RULES-LAB_009');  // 'Compétence'
   Valeur := ValeurXML(TalentElement.FindNode('Skill'));
   if Valeur <> '' then
   begin
@@ -3766,7 +3766,7 @@ begin
   end;
   
   // Maximum
-  LabelFormMax.Caption := GetTexteLibelle('LAB_044');  // 'Max'
+  LabelFormMax.Caption := GetTexteLibelle('RULES-LAB_044');  // 'Max'
   Valeur := ValeurXML(TalentElement.FindNode('Max'));
   if Valeur <> '' then
   begin
@@ -3857,7 +3857,7 @@ begin
     Exit;
   end;
   
-  LabelFormTitle.Caption := GetTexteLibelle('LAB_006') + ': ' +
+  LabelFormTitle.Caption := GetTexteLibelle('RULES-LAB_006') + ': ' +
                             ValeurXML(CareerElement.FindNode('Description'));
   
   EditFormCode.Text := CareerCode;
@@ -3872,7 +3872,7 @@ begin
     EditFormClasse.Text := '';
   
   // Compétence principale du métier
-  LabelFormCompPrinc.Caption := GetTexteLibelle('LAB_009');  // 'Compétence'
+  LabelFormCompPrinc.Caption := GetTexteLibelle('RULES-LAB_009');  // 'Compétence'
   CodeComp := ValeurXML(CareerElement.FindNode('Skill'));
   LibComp  := '';
   if CodeComp <> '' then
@@ -3977,7 +3977,7 @@ begin
   if TreeViewTalents <> nil then
     TreeViewTalents.Visible := False;
     
-  LabelFormTitle.Caption := GetTexteLibelle('LAB_004');
+  LabelFormTitle.Caption := GetTexteLibelle('RULES-LAB_004');
   NettoyerForm();
 end;
 

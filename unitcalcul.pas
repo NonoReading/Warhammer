@@ -30,6 +30,7 @@ Procedure DecodeBlessure(Calcul: String);
 Procedure DecoupeCodeValeur(Code: String);
 Procedure DecoupeCodeRecherche(Code: String);
 Function CompareRechercheValeur(ValRecherche:String; ValTrouve:String):boolean;
+Function CodeSansLivre(Code: String): String;
 
 implementation
 
@@ -449,6 +450,19 @@ Procedure DecoupeCodeRecherche(Code: String);
          end;
   end;
 
+
+// Renvoie le code prive de son prefixe de livre, SANS toucher aux variables globales
+// LivreValeur / CodeValeur / LivreRecherche / CodeRecherche que posent les DecoupeCode*.
+// Sert aux comparaisons partielles (radical d'un talent a specialisation, par exemple),
+// qui lisaient jusqu'ici l'etat laisse par le dernier appel a CompareRechercheValeur :
+// un etat partage qui ne survit pas au durcissement de VerifieRecherche. CONTEXT.md 2.49.
+Function CodeSansLivre(Code: String): String;
+  begin
+    if pos(SeparateurLivre, Code) > 0 then
+      Result := ExtractStringAfter(Code, SeparateurLivre)
+    else
+      Result := Code;
+  end;
 
 Function CompareRechercheValeur(ValRecherche:String; ValTrouve:String):boolean;
 var

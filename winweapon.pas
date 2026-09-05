@@ -86,21 +86,21 @@ begin
     if TabWeapon.ColCount < 2 then
       begin
         TabWeapon.ColCount      := 1;
-        GridAjouteColonne(TabWeapon,GetTexteLibelle('LAB_001'));
-        GridAjouteColonne(TabWeapon,GetTexteLibelle('LAB_018'),120);
-        GridAjouteColonne(TabWeapon,GetTexteLibelle('LAB_009'));
-        GridAjouteColonne(TabWeapon,GetTexteLibelle('LAB_002'),200);
-        GridAjouteColonne(TabWeapon,GetTexteLibelle('LAB_053'),100);
-        GridAjouteColonne(TabWeapon,GetTexteLibelle('LAB_054'));
-        GridAjouteColonne(TabWeapon,GetTexteLibelle('LAB_055'));
-        GridAjouteColonne(TabWeapon,GetTexteLibelle('LAB_056'));
-        GridAjouteColonne(TabWeapon,GetTexteLibelle('LAB_057'));
-        GridAjouteColonne(TabWeapon,GetTexteLibelle('LAB_058'),100);
-        GridAjouteColonne(TabWeapon,GetTexteLibelle('LAB_059'));
-        GridAjouteColonne(TabWeapon,GetTexteLibelle('LAB_060'));
-        GridAjouteColonne(TabWeapon,GetTexteLibelle('LAB_128'),100);
-        GridAjouteColonne(TabWeapon,GetTexteLibelle('LAB_001'),180);
-        GridAjouteColonne(TabWeapon,GetTexteLibelle('LAB_009'),100);
+        GridAjouteColonne(TabWeapon,GetTexteLibelle('RULES-LAB_001'));
+        GridAjouteColonne(TabWeapon,GetTexteLibelle('RULES-LAB_018'),120);
+        GridAjouteColonne(TabWeapon,GetTexteLibelle('RULES-LAB_009'));
+        GridAjouteColonne(TabWeapon,GetTexteLibelle('RULES-LAB_002'),200);
+        GridAjouteColonne(TabWeapon,GetTexteLibelle('RULES-LAB_053'),100);
+        GridAjouteColonne(TabWeapon,GetTexteLibelle('RULES-LAB_054'));
+        GridAjouteColonne(TabWeapon,GetTexteLibelle('RULES-LAB_055'));
+        GridAjouteColonne(TabWeapon,GetTexteLibelle('RULES-LAB_056'));
+        GridAjouteColonne(TabWeapon,GetTexteLibelle('RULES-LAB_057'));
+        GridAjouteColonne(TabWeapon,GetTexteLibelle('RULES-LAB_058'),100);
+        GridAjouteColonne(TabWeapon,GetTexteLibelle('RULES-LAB_059'));
+        GridAjouteColonne(TabWeapon,GetTexteLibelle('RULES-LAB_060'));
+        GridAjouteColonne(TabWeapon,GetTexteLibelle('RULES-LAB_128'),100);
+        GridAjouteColonne(TabWeapon,GetTexteLibelle('RULES-LAB_001'),180);
+        GridAjouteColonne(TabWeapon,GetTexteLibelle('RULES-LAB_009'),100);
       end;
     TabWeapon.ColWidths[0]  := 20;
 
@@ -110,9 +110,9 @@ begin
       begin
         TabBonus.ColCount      := 1;
         TabBonus.ColWidths[0]  := 20;
-        GridAjouteColonne(TabBonus,GetTexteLibelle('LAB_002'),100);
-        GridAjouteColonne(TabBonus,GetTexteLibelle('LAB_072'));
-        GridAjouteColonne(TabBonus,GetTexteLibelle('LAB_073'),380);
+        GridAjouteColonne(TabBonus,GetTexteLibelle('RULES-LAB_002'),100);
+        GridAjouteColonne(TabBonus,GetTexteLibelle('RULES-LAB_072'));
+        GridAjouteColonne(TabBonus,GetTexteLibelle('RULES-LAB_073'),380);
       end;
 
     IndTab := 0;
@@ -131,11 +131,11 @@ begin
             // GetTypeMetierEquipement (unitcalcul.pas l.218) : decouper d'abord.
             DecoupeCodeValeur(PArme.CodeArme);
             if copy(CodeValeur,1,5) = EquipementMU then
-              TabWeapon.Cells[2, IndTab] := GetTexteLibelle('LAB_060')
+              TabWeapon.Cells[2, IndTab] := GetTexteLibelle('RULES-LAB_060')
             else if copy(CodeValeur,1,5) = EquipementCC then
-              TabWeapon.Cells[2, IndTab] := GetTexteLibelle('LAB_061')
+              TabWeapon.Cells[2, IndTab] := GetTexteLibelle('RULES-LAB_061')
             else
-              TabWeapon.Cells[2, IndTab] := GetTexteLibelle('LAB_062');
+              TabWeapon.Cells[2, IndTab] := GetTexteLibelle('RULES-LAB_062');
             TabWeapon.Cells[3, IndTab]   := PArme.CodeCompetence;
             TabWeapon.Cells[4, IndTab]   := PArme.Libelle;
             TabWeapon.Cells[5, IndTab]   := IntToStr(PArme.Mains);
@@ -173,20 +173,20 @@ begin
     if FileExists(GetCurrentDir+ConstCheminLogo1) then
       ImageWar.Picture.LoadFromFile(GetCurrentDir+ConstCheminLogo1);
 
-    Self.Caption              := GetTexteLibelle('LAB_063');
-    Labcode.Caption           := GetTexteLibelle('LAB_001');
-    LabMain.Caption           := GetTexteLibelle('LAB_053');
-    LabPrix.Caption           := GetTexteLibelle('LAB_054');
-    LabEncombrement.Caption   := GetTexteLibelle('LAB_055');
-    LabMunition.Caption       := GetTexteLibelle('LAB_112');
-    LabLib.Caption            := GetTexteLibelle('LAB_002');
-    LabCompetence.Caption     := GetTexteLibelle('LAB_009');
-    LabPortee.Caption         := GetTexteLibelle('LAB_057');
-    LabDisponibilite.Caption  := GetTexteLibelle('LAB_056');
-    LabDegat.Caption          := GetTexteLibelle('LAB_058');
-    LabBonus.Caption          := GetTexteLibelle('LAB_034');
-    LabLivre.Caption          := GetTexteLibelle('LAB_128');
-    ButtonFiltre.Caption      := GetTexteLibelle('LAB_133');
+    Self.Caption              := GetTexteLibelle('RULES-LAB_063');
+    Labcode.Caption           := GetTexteLibelle('RULES-LAB_001');
+    LabMain.Caption           := GetTexteLibelle('RULES-LAB_053');
+    LabPrix.Caption           := GetTexteLibelle('RULES-LAB_054');
+    LabEncombrement.Caption   := GetTexteLibelle('RULES-LAB_055');
+    LabMunition.Caption       := GetTexteLibelle('RULES-LAB_112');
+    LabLib.Caption            := GetTexteLibelle('RULES-LAB_002');
+    LabCompetence.Caption     := GetTexteLibelle('RULES-LAB_009');
+    LabPortee.Caption         := GetTexteLibelle('RULES-LAB_057');
+    LabDisponibilite.Caption  := GetTexteLibelle('RULES-LAB_056');
+    LabDegat.Caption          := GetTexteLibelle('RULES-LAB_058');
+    LabBonus.Caption          := GetTexteLibelle('RULES-LAB_034');
+    LabLivre.Caption          := GetTexteLibelle('RULES-LAB_128');
+    ButtonFiltre.Caption      := GetTexteLibelle('RULES-LAB_133');
     TabWeapon.Row := 1;
     TabWeaponAfterSelection(TabWeapon, 1, 1);
 

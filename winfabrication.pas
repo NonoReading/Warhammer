@@ -53,17 +53,17 @@ procedure TWinFabrications.FormCreate(Sender: TObject);
      TabFabrication.ColCount         := 7;
      TabFabrication.RowCount         := NbFabrication + 1;
      TabFabrication.ColWidths[0]     := 30;
-     TabFabrication.Cells[1, 0]      := GetTexteLibelle('LAB_001');
+     TabFabrication.Cells[1, 0]      := GetTexteLibelle('RULES-LAB_001');
      TabFabrication.ColWidths[1]     := 0;
-     TabFabrication.Cells[2, 0]      := GetTexteLibelle('LAB_019');
+     TabFabrication.Cells[2, 0]      := GetTexteLibelle('RULES-LAB_019');
      TabFabrication.ColWidths[2]     := 125;
-     TabFabrication.Cells[3, 0]      := GetTexteLibelle('LAB_045');
+     TabFabrication.Cells[3, 0]      := GetTexteLibelle('RULES-LAB_045');
      TabFabrication.ColWidths[3]     := 50;
-     TabFabrication.Cells[4, 0]      := GetTexteLibelle('LAB_111');
+     TabFabrication.Cells[4, 0]      := GetTexteLibelle('RULES-LAB_111');
      TabFabrication.ColWidths[4]     := 50;
-     TabFabrication.Cells[5, 0]      := GetTexteLibelle('LAB_018');
+     TabFabrication.Cells[5, 0]      := GetTexteLibelle('RULES-LAB_018');
      TabFabrication.ColWidths[5]     := 70;
-     TabFabrication.Cells[6, 0]      := GetTexteLibelle('LAB_073');
+     TabFabrication.Cells[6, 0]      := GetTexteLibelle('RULES-LAB_073');
      TabFabrication.ColWidths[6]     := 500;
 
      For PFabrication in ListFabrication do
@@ -76,7 +76,7 @@ procedure TWinFabrications.FormCreate(Sender: TObject);
          TabFabrication.Cells[6, IndTab] := PFabrication.Resume;
        end;
 
-     ButtonOk.Caption := getTexteLibelle('LAB_106');
+     ButtonOk.Caption := getTexteLibelle('RULES-LAB_106');
 
      if SelectWinFabrication <> '' then
        begin

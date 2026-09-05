@@ -197,13 +197,13 @@ begin
     if TabRace.ColCount < 2 then
       begin
         TabRace.ColCount     := 1;
-        GridAjouteColonne(TabRace, GetTexteLibelle('LAB_001'),40);
-        GridAjouteColonne(TabRace, GetTexteLibelle('LAB_001'));
-        GridAjouteColonne(TabRace, GetTexteLibelle('LAB_002'),155);
-        GridAjouteColonne(TabRace, GetTexteLibelle('LAB_001'));
-        GridAjouteColonne(TabRace, GetTexteLibelle('LAB_128'),110);
-        GridAjouteColonne(TabRace, GetTexteLibelle('LAB_001'));
-        GridAjouteColonne(TabRace, GetTexteLibelle('LAB_001'));
+        GridAjouteColonne(TabRace, GetTexteLibelle('RULES-LAB_001'),40);
+        GridAjouteColonne(TabRace, GetTexteLibelle('RULES-LAB_001'));
+        GridAjouteColonne(TabRace, GetTexteLibelle('RULES-LAB_002'),155);
+        GridAjouteColonne(TabRace, GetTexteLibelle('RULES-LAB_001'));
+        GridAjouteColonne(TabRace, GetTexteLibelle('RULES-LAB_128'),110);
+        GridAjouteColonne(TabRace, GetTexteLibelle('RULES-LAB_001'));
+        GridAjouteColonne(TabRace, GetTexteLibelle('RULES-LAB_001'));
       end;
     TabRace.ColWidths[0] := 20;
 
@@ -266,12 +266,12 @@ begin
     if FileExists(GetCurrentDir+ConstCheminLogo1) then
      ImageWar.Picture.LoadFromFile(GetCurrentDir+ConstCheminLogo1);
 
-    Self.Caption              := GetTexteLibelle('LAB_042');
-    Labcode.Caption           := GetTexteLibelle('LAB_001');
-    LabLib.Caption            := GetTexteLibelle('LAB_002');
-    LabAttribut.Caption       := GetTexteLibelle('LAB_008');
-    LabLivre.Caption          := GetTexteLibelle('LAB_128');
-    ButtonFiltre.Caption      := GetTexteLibelle('LAB_133');
+    Self.Caption              := GetTexteLibelle('RULES-LAB_042');
+    Labcode.Caption           := GetTexteLibelle('RULES-LAB_001');
+    LabLib.Caption            := GetTexteLibelle('RULES-LAB_002');
+    LabAttribut.Caption       := GetTexteLibelle('RULES-LAB_008');
+    LabLivre.Caption          := GetTexteLibelle('RULES-LAB_128');
+    ButtonFiltre.Caption      := GetTexteLibelle('RULES-LAB_133');
 
     AdjustGridColumnsWidth(TabRace, self.Height, true, true);
 

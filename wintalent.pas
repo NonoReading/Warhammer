@@ -72,29 +72,29 @@ begin
     TabTalent.RowCount     := 1;
     TabTalent.ColCount     := 1;
     TabTalent.ColWidths[0] := 20;
-    GridAjouteColonne(TabTalent, GetTexteLibelle('LAB_001'));
-    GridAjouteColonne(TabTalent, GetTexteLibelle('LAB_002'), 265);
-    GridAjouteColonne(TabTalent, GetTexteLibelle('LAB_008'));
-    GridAjouteColonne(TabTalent, GetTexteLibelle('LAB_003'));
-    GridAjouteColonne(TabTalent, GetTexteLibelle('LAB_110'));
-    GridAjouteColonne(TabTalent, GetTexteLibelle('LAB_111'));
-    GridAjouteColonne(TabTalent, GetTexteLibelle('LAB_128'), 100);
-    GridAjouteColonne(TabTalent, GetTexteLibelle('LAB_001'), 100);
-    GridAjouteColonne(TabTalent, GetTexteLibelle('LAB_002'), 100);
-    GridAjouteColonne(TabTalent, GetTexteLibelle('LAB_001'), 0);
+    GridAjouteColonne(TabTalent, GetTexteLibelle('RULES-LAB_001'));
+    GridAjouteColonne(TabTalent, GetTexteLibelle('RULES-LAB_002'), 265);
+    GridAjouteColonne(TabTalent, GetTexteLibelle('RULES-LAB_008'));
+    GridAjouteColonne(TabTalent, GetTexteLibelle('RULES-LAB_003'));
+    GridAjouteColonne(TabTalent, GetTexteLibelle('RULES-LAB_110'));
+    GridAjouteColonne(TabTalent, GetTexteLibelle('RULES-LAB_111'));
+    GridAjouteColonne(TabTalent, GetTexteLibelle('RULES-LAB_128'), 100);
+    GridAjouteColonne(TabTalent, GetTexteLibelle('RULES-LAB_001'), 100);
+    GridAjouteColonne(TabTalent, GetTexteLibelle('RULES-LAB_002'), 100);
+    GridAjouteColonne(TabTalent, GetTexteLibelle('RULES-LAB_001'), 0);
 
     TabMetierTalent.RowCount        := 2;
     TabMetierTalent.ColCount        := 1;
     TabMetierTalent.ColWidths[0]    := 20;
-    GridAjouteColonne(TabMetierTalent, GetTexteLibelle('LAB_001'), 0);
-    GridAjouteColonne(TabMetierTalent, GetTexteLibelle('LAB_006'), 250);
-    GridAjouteColonne(TabMetierTalent, GetTexteLibelle('LAB_019'), 70);
+    GridAjouteColonne(TabMetierTalent, GetTexteLibelle('RULES-LAB_001'), 0);
+    GridAjouteColonne(TabMetierTalent, GetTexteLibelle('RULES-LAB_006'), 250);
+    GridAjouteColonne(TabMetierTalent, GetTexteLibelle('RULES-LAB_019'), 70);
 
     TabSpe.RowCount        := 2;
     TabSpe.ColCount        := 1;
     TabSpe.ColWidths[0]    := 20;
-    GridAjouteColonne(TabSpe, GetTexteLibelle('LAB_001'), 20);
-    GridAjouteColonne(TabSpe, GetTexteLibelle('LAB_006'), 250);
+    GridAjouteColonne(TabSpe, GetTexteLibelle('RULES-LAB_001'), 20);
+    GridAjouteColonne(TabSpe, GetTexteLibelle('RULES-LAB_006'), 250);
 
     if Pos(ValeurSousCompetence, SelectWinTalent) > 0 then
       SelectWinTalent := ExtractStringBefore(SelectWinTalent, ValeurSousCompetence) + ValeurGenerique;
@@ -125,16 +125,16 @@ begin
     if FileExists(GetCurrentDir+ConstCheminLogo1) then
      ImageWar.Picture.LoadFromFile(GetCurrentDir+ConstCheminLogo1);
 
-    Self.Caption              := GetTexteLibelle('LAB_007');
-    Labcode.Caption           := GetTexteLibelle('LAB_001');
-    LabLib.Caption            := GetTexteLibelle('LAB_002');
-    LabAttribut.Caption       := GetTexteLibelle('LAB_008');
-    LabTest.caption           := GetTexteLibelle('LAB_110');
-    LabDescription.caption    := GetTexteLibelle('LAB_003');
-    LabMaxi.caption           := GetTexteLibelle('LAB_111');
-    LabMetierTalent.caption   := GetTexteLibelle('LAB_006');
-    LabLivre.caption          := GetTexteLibelle('LAB_128');
-    LabSpe.caption            := GetTexteLibelle('LAB_078');
+    Self.Caption              := GetTexteLibelle('RULES-LAB_007');
+    Labcode.Caption           := GetTexteLibelle('RULES-LAB_001');
+    LabLib.Caption            := GetTexteLibelle('RULES-LAB_002');
+    LabAttribut.Caption       := GetTexteLibelle('RULES-LAB_008');
+    LabTest.caption           := GetTexteLibelle('RULES-LAB_110');
+    LabDescription.caption    := GetTexteLibelle('RULES-LAB_003');
+    LabMaxi.caption           := GetTexteLibelle('RULES-LAB_111');
+    LabMetierTalent.caption   := GetTexteLibelle('RULES-LAB_006');
+    LabLivre.caption          := GetTexteLibelle('RULES-LAB_128');
+    LabSpe.caption            := GetTexteLibelle('RULES-LAB_078');
 
     if SelectWinTalent <> '' then
      begin

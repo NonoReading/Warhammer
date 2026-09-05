@@ -59,7 +59,7 @@ begin
   if strings.Count = 1 then
     PdfChemin    := GetCurrentDir+ConstCheminPersonnage+'\'+TrimRight(PMetier.Libelle)+'.PDF'
   else
-    PdfChemin    := GetCurrentDir+ConstCheminPersonnage+'\'+TrimRight(GetTexteLibelle('LAB_006'))+'.PDF';
+    PdfChemin    := GetCurrentDir+ConstCheminPersonnage+'\'+TrimRight(GetTexteLibelle('RULES-LAB_006'))+'.PDF';
 
   if FileExists(PdfChemin) then
     if not DeleteFile(PdfChemin) then
@@ -269,7 +269,7 @@ begin
   PdfTaillePolice(PdfPage, PdfFontBold, ConstPoliceCarlson+ConstPoliceGras, 9);
   ListEspece := MetierRaceCourt(MetierEnCours);
   PdfEcrit(PdfPage, 17 + CWidth, 999, 275, ListEspece,MinPolice);
-  PdfEcrit(PdfPage, DebutImgMetier, 999, 268, GetTexteLibelle('LAB_128') {%H-}+ ' : ' + WideUpperCase(WideString(GetTexteLibelle(PMetier.Livre))){%H-}, MinPolice);
+  PdfEcrit(PdfPage, DebutImgMetier, 999, 268, GetTexteLibelle('RULES-LAB_128') {%H-}+ ' : ' + WideUpperCase(WideString(GetTexteLibelle(PMetier.Livre))){%H-}, MinPolice);
 
 
   Ind := 0;
@@ -370,7 +370,7 @@ begin
             PdfPage.DrawRect(Coord,LargeurFeuille - DebutSous - MargeDroite,4,0,true,false,0);
             PdfPage.SetColor(ClBlack,false);
             PdfTaillePolice(PdfPage, PdfFontBold, ConstPoliceCarlson+ConstPoliceGras, 10);
-            PdfEcrit(PdfPage,DebutFeuille + DebutSous, 999, PdfPositionFeuille(DebutTexte,NbLigne,NbDetail) + 0.5, GetTexteLibelle('LAB_009')+' : ',MinPolice);
+            PdfEcrit(PdfPage,DebutFeuille + DebutSous, 999, PdfPositionFeuille(DebutTexte,NbLigne,NbDetail) + 0.5, GetTexteLibelle('RULES-LAB_009')+' : ',MinPolice);
 
             // détail compétences
             IndDetail := 0;
@@ -405,7 +405,7 @@ begin
 
             // TALENT
             PdfTaillePolice(PdfPage, PdfFontBold, ConstPoliceCarlson+ConstPoliceGras, 10);
-            PdfEcrit(PdfPage,DebutFeuille + DebutSous + DebutTalent, 999, PdfPositionFeuille(DebutTexte,NbLigne,NbDetail) + 0.5, GetTexteLibelle('LAB_007')+' : ',MinPolice);
+            PdfEcrit(PdfPage,DebutFeuille + DebutSous + DebutTalent, 999, PdfPositionFeuille(DebutTexte,NbLigne,NbDetail) + 0.5, GetTexteLibelle('RULES-LAB_007')+' : ',MinPolice);
 
             // détail talents
             IndDetail := 0;
@@ -433,7 +433,7 @@ begin
             PdfPage.DrawRect(Coord,LargeurFeuille - DebutSous - MargeDroite,4,0,true,false,0);
             PdfPage.SetColor(ClBlack,false);
             PdfTaillePolice(PdfPage, PdfFontBold, ConstPoliceCarlson+ConstPoliceGras, 10);
-            PdfEcrit(PdfPage,DebutFeuille + DebutSous, 999, PdfPositionFeuille(DebutTexte,NbLigne,NbDetail) + 0.5, GetTexteLibelle('LAB_013')+' : ',MinPolice);
+            PdfEcrit(PdfPage,DebutFeuille + DebutSous, 999, PdfPositionFeuille(DebutTexte,NbLigne,NbDetail) + 0.5, GetTexteLibelle('RULES-LAB_013')+' : ',MinPolice);
 
             // détail Equipements
             IndDetail   := 0;
@@ -530,7 +530,7 @@ begin
     PdfPage.DrawRect(Coord, MaxTailleDetail - DebutImgMetier - 15,4,0,true,false,0);
 
     PdfPage.SetColor(clBlack,false);
-    PdfEcrit(PdfPage,DebutImgMetier+2, MaxTailleDetail, 20+(NbDetail-1)*4, GetTexteLibelle('LAB_007'),MinPolice);
+    PdfEcrit(PdfPage,DebutImgMetier+2, MaxTailleDetail, 20+(NbDetail-1)*4, GetTexteLibelle('RULES-LAB_007'),MinPolice);
     inc(NbDetail);
     DernierTalent := NbDetail;
     For Ind := ListMetierEquipement.count -1 downto 0 do
@@ -578,7 +578,7 @@ begin
       PdfPage.DrawRect(Coord, MaxTailleDetail - DebutImgMetier - 15,4,0,true,false,0);
 
       PdfPage.SetColor(clBlack,false);
-      PdfEcrit(PdfPage,DebutImgMetier+2, MaxTailleDetail - DebutImgMetier - 2 , 20+(NbDetail-1)*4, GetTexteLibelle('LAB_013'),MinPolice);
+      PdfEcrit(PdfPage,DebutImgMetier+2, MaxTailleDetail - DebutImgMetier - 2 , 20+(NbDetail-1)*4, GetTexteLibelle('RULES-LAB_013'),MinPolice);
     end;
 
   // image métier

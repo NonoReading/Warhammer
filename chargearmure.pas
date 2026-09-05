@@ -54,25 +54,25 @@ function TexteArmure(PArmure: StructureArmure):String;
   begin
     if Pos(ValeurGenerique,PArmure.CodeArmure) = 0 then
       begin
-        Texte := GetTexteLibelle('LAB_118') + ' : ';
+        Texte := GetTexteLibelle('RULES-LAB_118') + ' : ';
         if PArmure.TypeMateriel <> '' then
-          Texte  := Texte + SeparateurRetourLigne + SeparateurRetourLigne + GetTexteLibelle('LAB_074') + ' : ' + ReplaceTexteLibelle(PArmure.TypeMateriel);
+          Texte  := Texte + SeparateurRetourLigne + SeparateurRetourLigne + GetTexteLibelle('RULES-LAB_074') + ' : ' + ReplaceTexteLibelle(PArmure.TypeMateriel);
         if PArmure.Prix <> '' then
-          Texte  := Texte + SeparateurRetourLigne + SeparateurRetourLigne + GetTexteLibelle('LAB_054') + ' : ' + PArmure.Prix;
+          Texte  := Texte + SeparateurRetourLigne + SeparateurRetourLigne + GetTexteLibelle('RULES-LAB_054') + ' : ' + PArmure.Prix;
         if PArmure.Encombrement <> 0 then
-          Texte  := Texte + SeparateurRetourLigne + SeparateurRetourLigne + GetTexteLibelle('LAB_055') + ' : ' + IntToStr(PArmure.Encombrement);
+          Texte  := Texte + SeparateurRetourLigne + SeparateurRetourLigne + GetTexteLibelle('RULES-LAB_055') + ' : ' + IntToStr(PArmure.Encombrement);
         if PArmure.Disponibilite <> '' then
-          Texte  := Texte + SeparateurRetourLigne + SeparateurRetourLigne + GetTexteLibelle('LAB_056') + ' : ' + ReplaceTexteLibelle(PArmure.Disponibilite);
+          Texte  := Texte + SeparateurRetourLigne + SeparateurRetourLigne + GetTexteLibelle('RULES-LAB_056') + ' : ' + ReplaceTexteLibelle(PArmure.Disponibilite);
         if PArmure.Emplacement <> '' then
-          Texte  := Texte + SeparateurRetourLigne + SeparateurRetourLigne + GetTexteLibelle('LAB_075') + ' : ' + ReplaceTexteLibelle(PArmure.Emplacement);
+          Texte  := Texte + SeparateurRetourLigne + SeparateurRetourLigne + GetTexteLibelle('RULES-LAB_075') + ' : ' + ReplaceTexteLibelle(PArmure.Emplacement);
         if PArmure.Protection <> 0 then
-          Texte  := Texte + SeparateurRetourLigne + SeparateurRetourLigne + GetTexteLibelle('LAB_076') + ' : ' + IntToStr(PArmure.Protection);
+          Texte  := Texte + SeparateurRetourLigne + SeparateurRetourLigne + GetTexteLibelle('RULES-LAB_076') + ' : ' + IntToStr(PArmure.Protection);
         if PArmure.ListeBonus <> '' then
-          Texte  := Texte + SeparateurRetourLigne + SeparateurRetourLigne + GetTexteLibelle('LAB_034') + ' : ' + GetAllArmureBonusLibelle(PArmure.ListeBonus);
+          Texte  := Texte + SeparateurRetourLigne + SeparateurRetourLigne + GetTexteLibelle('RULES-LAB_034') + ' : ' + GetAllArmureBonusLibelle(PArmure.ListeBonus);
       end
     else
       begin
-        Texte := GetTexteLibelle('LAB_010') + ' : ';
+        Texte := GetTexteLibelle('RULES-LAB_010') + ' : ';
         Debut := copy(PArmure.CodeArmure,1,Length(PArmure.CodeArmure) - Length(ValeurGenerique) + 1);
           for PArmure in ListArmure do
             if (copy(PArmure.CodeArmure,1,Length(Debut)) = Debut) and (Pos(ValeurGenerique,PArmure.CodeArmure) = 0) then
@@ -89,13 +89,13 @@ function TexteLigneArmure(PArmure: StructureArmure):String;
       begin
         Texte := PArmure.Libelle;
         if PArmure.Protection <> 0 then
-          Texte  := Texte + '|' + GetTexteLibelle('LAB_076') + ' : ' + IntToStr(PArmure.Protection);
+          Texte  := Texte + '|' + GetTexteLibelle('RULES-LAB_076') + ' : ' + IntToStr(PArmure.Protection);
         if PArmure.Encombrement <> 0 then
-          Texte  := Texte + '|' + GetTexteLibelle('LAB_055') + ' : ' + IntToStr(PArmure.Encombrement);
+          Texte  := Texte + '|' + GetTexteLibelle('RULES-LAB_055') + ' : ' + IntToStr(PArmure.Encombrement);
         if PArmure.Emplacement <> '' then
-          Texte  := Texte + '|' + GetTexteLibelle('LAB_075') + ' : ' + ReplaceTexteLibelle(PArmure.Emplacement);
+          Texte  := Texte + '|' + GetTexteLibelle('RULES-LAB_075') + ' : ' + ReplaceTexteLibelle(PArmure.Emplacement);
         if PArmure.ListeBonus <> '' then
-          Texte  := Texte + '|' + GetTexteLibelle('LAB_034') + ' : ' + GetAllArmureBonusLibelle(PArmure.ListeBonus);
+          Texte  := Texte + '|' + GetTexteLibelle('RULES-LAB_034') + ' : ' + GetAllArmureBonusLibelle(PArmure.ListeBonus);
       end;
     Result   := Texte;
   end;

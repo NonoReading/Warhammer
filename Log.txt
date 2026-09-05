@@ -1416,3 +1416,59 @@ CE QUE LA SESSION A APPRIS.
     une famille plutot que d en prefixer la moitie.
 (5) L ECRITURE VERS LE POSTE A PRIS DU PREMIER COUP LES SIX FOIS. Verifie a chaque envoi par
     la TAILLE du fichier dans le listing, jamais par la seule reponse de l outil.
+
+05/09/2026 - 2.49 ETAPE 4 PREPAREE : LES DEUX PREALABLES LEVES, MOUCHARD POSE, 677 LAB_ PREFIXES
+LES QUATRE CONSTANTES D EMPLACEMENT D ARMURE PREFIXEES. chargeconstantes.pas l.394-397 :
+BonusBras / BonusCorps / BonusJambes / BonusTete passent a 'RULES-ARMOL_ARM'... Le CONTEXT
+annoncait "sans risque" sur la seule base des appels de CompareRechercheValeur ; la
+verification a porte sur la balise <ModifArmour name=>, que l etape 2 bis n avait PAS traitee
+et dont depend l armure des mutations et des traits (peau ecailleuse du Skink, marque de
+Quetzl). Elle etait deja prefixee : 63 occurrences, aucune ARMOL_ nue dans tout DATABASE.
+C est ce controle, et non l annonce du CONTEXT, qui autorisait la modification.
+WINPERSONNAGE L.3245 NE LIT PLUS LES GLOBALES DU DERNIER DECOUPE. Nouvelle fonction PURE
+CodeSansLivre (unitcalcul.pas), et le test de radical de talent (T0012_* contre T0012_ANIMAL)
+redecoupe ses deux codes au lieu de relire CodeValeur / CodeRecherche. Semantique inchangee :
+meme longueur 5, meme absence de controle du livre. Second prealable de l etape 4 leve.
+MOUCHARD DES REFERENCES NUES. VerifieRecherche compte et memorise chaque passage par la
+branche tolerante (TraceNuNb, TraceNuListe, TraceNuRapport, TraceNuEcritFichier), sans changer
+aucun resultat ; warhammersource.pas depose le releve en fin de FormCreate dans
+TRACE_references_nues.txt. Choix assume : observer avant de durcir.
+CE QUE LE RELEVE A DONNE : 195 appels toleres, 95 couples distincts, en quatre familles.
+(1) ~20 codes de livre compares a leur propre nom de fichier - structurel, hors sujet.
+(2) 31 libelles LAB_ ecrits en dur dans le code Pascal - corriges, voir plus bas.
+(3) 5 constantes ConstCaracXxx nues - NON corrigees, voir le piege ci-dessous.
+(4) ~44 codes venant des anciennes fiches de CURRENT\ - Nono compte supprimer ces
+    personnages : ni migration ni tolerance a prevoir.
+LE RELEVE A RENDU CONCRET LE RISQUE DECRIT EN TETE DU 2.49 : "UPINA-WORK71 <- WORK71" et
+"WINDS-WORK85 <- WORK85". Deux carrieres nues d une vieille fiche se resolvent vers Up in Arms
+et Winds of Magic, pas vers le Rulebook. Ce n est plus une hypothese.
+677 REFERENCES LAB_ PREFIXEES DANS 23 UNITES (warhammersource 76, winpersonnage 136, winlivre
+130, wincreation 84...). Verifie avant : les 178 libelles sont definis dans les deux Rulebooks
+et nulle part ailleurs, aucun code cite est introuvable, et AUCUNE forme construite
+dynamiquement ('LAB_'+IntToStr) - que des litteraux, donc remplacement mecanique sur.
+warhammersource.pas fait seul en premier et teste a l ecran avant les 22 autres.
+LES ConstCaracXxx NE SONT PAS LE CAS DES ARMOL_ - PIEGE EVITE DE JUSTESSE. Les prefixer
+casserait DEUX choses : (a) pdfpersonnage.pas l.470-498 fait StringReplace du motif
+'('+ConstCaracCC+')' contre le texte des livres, ou le code est ecrit NU - plus aucune valeur
+ne serait substituee dans les textes du PDF ; (b) les trois case l.1078, 1083 et 1094 retirent
+DEJA le prefixe de la donnee (ExtractStringAfter) avant de comparer a la constante, donc BE,
+BF et BFM tomberaient a zero. Ces constantes servent deux usages incompatibles : identifiant a
+resoudre, et fragment de texte a chercher. Arbitrage a rendre, trois pistes dans A FAIRE.
+BUG CORRIGE AU PASSAGE : UNE LIGNE VIDE PAR ARMURE AJOUTEE. winpersonnage.pas
+ButtonArmureClick creait la ligne DEUX fois dans la branche armure complete (pas en Quick
+Armor) : la premiere restait vide, la seconde portait l armure sans son '+' ni son numero. Les
+armes n avaient pas le defaut, leur bouton ne cree la ligne qu une fois.
+CE QUE LA SESSION A APPRIS.
+(1) UNE ANNONCE DU CONTEXT N EST PAS UNE VERIFICATION. "C est desormais sans risque" etait
+    ecrit noir sur blanc pour les quatre constantes ARMOL_ ; le controle qui le prouvait
+    (les <ModifArmour>) n avait pas ete fait et n etait pas mentionne. Refaire le controle.
+(2) DEUX USAGES DANS UNE MEME CONSTANTE = PIEGE DE PREFIXAGE. Chercher, avant de prefixer une
+    constante, si sa valeur sert aussi de MOTIF TEXTE (StringReplace, Pos) et pas seulement
+    d identifiant. C est ce qui separe les ARMOL_ (un seul usage) des ATTR_ (deux).
+(3) L ECRITURE VERS LE POSTE S EST PERDUE QUATRE FOIS SUR LA JOURNEE, TOUJOURS AU PREMIER
+    ENVOI APRES UN RESTAGE, et toujours rattrapee en reemettant le meme envoi. Le controle par
+    la TAILLE reste le seul moyen de le voir. Attention : le restage qui sert au controle
+    ECRASE la copie locale, donc garder la version envoyee ailleurs pour pouvoir reemettre.
+(4) OBSERVER AVANT DE DURCIR PAYE. Le mouchard a coute une trentaine de lignes et a evite
+    d ecrire un script de migration des anciennes fiches, devenu inutile des que Nono a dit
+    qu il les supprimait.

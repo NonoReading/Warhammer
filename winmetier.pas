@@ -293,14 +293,14 @@ begin
     if TabMetier.ColCount < 2 then
       begin
         TabMetier.ColCount     := 1;
-        GridAjouteColonne(TabMetier, GetTexteLibelle('LAB_001'));
-        GridAjouteColonne(TabMetier, GetTexteLibelle('LAB_002'),150);
-        GridAjouteColonne(TabMetier, GetTexteLibelle('LAB_039'),120);
-        GridAjouteColonne(TabMetier, GetTexteLibelle('LAB_001'));
-        GridAjouteColonne(TabMetier, GetTexteLibelle('LAB_128'),140);
-        GridAjouteColonne(TabMetier, GetTexteLibelle('LAB_001'),100);
-        GridAjouteColonne(TabMetier, GetTexteLibelle('LAB_001'));
-        GridAjouteColonne(TabMetier, GetTexteLibelle('LAB_001'));
+        GridAjouteColonne(TabMetier, GetTexteLibelle('RULES-LAB_001'));
+        GridAjouteColonne(TabMetier, GetTexteLibelle('RULES-LAB_002'),150);
+        GridAjouteColonne(TabMetier, GetTexteLibelle('RULES-LAB_039'),120);
+        GridAjouteColonne(TabMetier, GetTexteLibelle('RULES-LAB_001'));
+        GridAjouteColonne(TabMetier, GetTexteLibelle('RULES-LAB_128'),140);
+        GridAjouteColonne(TabMetier, GetTexteLibelle('RULES-LAB_001'),100);
+        GridAjouteColonne(TabMetier, GetTexteLibelle('RULES-LAB_001'));
+        GridAjouteColonne(TabMetier, GetTexteLibelle('RULES-LAB_001'));
       end;
     TabMetier.ColWidths[0] := 20;
 
@@ -381,13 +381,13 @@ begin
         if FileExists(GetCurrentDir+ConstCheminLogo1) then
          ImageWar.Picture.LoadFromFile(GetCurrentDir+ConstCheminLogo1);
 
-        Self.Caption              := GetTexteLibelle('LAB_006');
-        Labcode.Caption           := GetTexteLibelle('LAB_001');
-        LabLib.Caption            := GetTexteLibelle('LAB_002');
-        LabAttribut.Caption       := GetTexteLibelle('LAB_008');
-        LabDescription.Caption    := GetTexteLibelle('LAB_003');
-        LabLivre.Caption          := GetTexteLibelle('LAB_128');
-        ButtonFiltre.Caption      := GetTexteLibelle('LAB_133');
+        Self.Caption              := GetTexteLibelle('RULES-LAB_006');
+        Labcode.Caption           := GetTexteLibelle('RULES-LAB_001');
+        LabLib.Caption            := GetTexteLibelle('RULES-LAB_002');
+        LabAttribut.Caption       := GetTexteLibelle('RULES-LAB_008');
+        LabDescription.Caption    := GetTexteLibelle('RULES-LAB_003');
+        LabLivre.Caption          := GetTexteLibelle('RULES-LAB_128');
+        ButtonFiltre.Caption      := GetTexteLibelle('RULES-LAB_133');
         AdjustGridColumnsWidth(TabMetier, self.Height, false, true);
 
         TabMetier.Row := 1;
@@ -734,7 +734,7 @@ Begin
                    if pos(EquipementQualite, StringsT[IndL]) > 0 then
                      begin
                        Code   := Trim(copy(stringsI[IndL],1,length(stringsI[IndL]) - length(Equipementqualite)));
-                       Qualite:= GetTexteLibelle('LAB_038');
+                       Qualite:= GetTexteLibelle('RULES-LAB_038');
                      end
                    else
                      begin
@@ -774,7 +774,7 @@ Begin
                   if Pos(EquipementQualite, PMetierEquipement.Equipement) > 0 then
                     begin
                       Code   := Trim(copy(PMetierEquipement.Equipement,1,length(PMetierEquipement.Equipement) - length(Equipementqualite)));
-                      Qualite:= GetTexteLibelle('LAB_038');
+                      Qualite:= GetTexteLibelle('RULES-LAB_038');
                     end
                   else
                     begin
@@ -793,7 +793,7 @@ Begin
                   if Pos(EquipementQualite, PMetierEquipement.Equipement) > 0 then
                     begin
                       Code   := Trim(copy(PMetierEquipement.Equipement,1,length(PMetierEquipement.Equipement) - length(Equipementqualite)));
-                      Qualite:= GetTexteLibelle('LAB_038');
+                      Qualite:= GetTexteLibelle('RULES-LAB_038');
                     end
                   else
                     begin

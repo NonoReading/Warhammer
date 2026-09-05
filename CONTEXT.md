@@ -1,24 +1,30 @@
 # Warhammer — Contexte projet
 
-**Dernière mise à jour : 05/09/2026 (nuit) — le §2.49 est CLOS côté données : les cinq
-familles que l'étape 2 avait écartées comme « vocabulaires fermés » n'en étaient pas, et
-leurs 1 010 références sont préfixées sur 18 livres. Seule l'étape 4 reste.**
+**Dernière mise à jour : 05/09/2026 (soir) — les deux préalables de l'étape 4 du §2.49 sont
+levés, un mouchard mesure ce que coûterait le durcissement, et les 677 références `LAB_` du
+code Pascal sont préfixées.**
 
-PROCHAINE ÉTAPE : §2.49 étape 4 — durcir `VerifieRecherche`. **Le blocage de conception est
-levé** : `DISPO`, `CLASS`, `WEAPR`, `ARMOT` et `ARMOL` ont tous une définition `<Text name=>`
-préfixée, et toutes leurs références le sont désormais aussi. Il ne reste qu'un point avant le
-durcissement : préfixer les quatre constantes `BonusTete` / `BonusBras` / `BonusCorps` /
-`BonusJambes` (`chargeconstantes.pas` l.394-397, encore `'ARMOL_HEAD'`… nues), ce qui est
-maintenant sans risque puisque `pdfpersonnage.pas` les compare par `CompareRechercheValeur` et
-non plus par un `case`. Traiter en même temps le point annexe `winpersonnage.pas` l.3248
-(variables globales du dernier `Decoupe…`).
+PROCHAINE ÉTAPE : §2.49 étape 4, mais **deux arbitrages avant d'écrire une ligne** :
+1. **Les cinq `ConstCaracXxx`** (`chargeconstantes.pas` l.259-273) ne se préfixent PAS comme les
+   `ARMOL_` : leur valeur sert aussi de **motif texte** (`StringReplace` de `'('+ConstCaracCC+')'`,
+   `pdfpersonnage.pas` l.470-498) et trois `case` (l.1078, 1083, 1094) retirent déjà le préfixe de
+   la donnée avant de comparer. Les préfixer viderait les substitutions du PDF et mettrait `BE`,
+   `BF`, `BFM` à zéro. Trois pistes dans `A FAIRE.txt` ; ma préférence va au préfixage **aux cinq
+   points d'appel** plutôt qu'à la constante.
+2. **La suppression des anciens personnages de `CURRENT\`**, décidée par Nono le 05/09 : tant
+   qu'ils sont là, le durcissement les casse ; une fois partis, la famille disparaît. Ni
+   migration ni tolérance à écrire — c'est la décision qui a rendu inutile le script de
+   migration qu'on s'apprêtait à faire.
+Le mouchard (`TRACE_references_nues.txt`) est **à retirer** une fois l'étape 4 close : il est
+jetable, ce n'est pas un fichier de suivi du projet.
 Les points de reprise du chantier des appartenances (§2.44) sont INCHANGÉS : rendre
 l'appartenance visible sur la fiche et dans le PDF, le 3d-3 (ordres de chevalerie, bloqué par
 « le modèle ne porte pas d'effet de règle »), et les onze Regiments of Renown.
 
-⚠️ Lire le §0 sur **l'écriture qui répond « écrit » sans écrire** : aucune occurrence lors des
-sept envois de la session du soir, tous passés du premier coup — mais la vérification par la
-TAILLE du fichier a été faite à chaque fois, et c'est elle qui autorise à le dire.
+⚠️ Lire le §0 sur **l'écriture qui répond « écrit » sans écrire** : quatre occurrences le
+05/09 au soir, toujours au **premier envoi suivant un restage**, toujours réparées en
+réémettant le même envoi. Corollaire découvert ce jour-là : le restage qui sert au contrôle
+**écrase la copie locale**, donc garder la version envoyée ailleurs pour pouvoir la réémettre.
 Ce fichier remplace tous les anciens
 `CONTEXT*.md` / `INDEX*.md` / `RESUME*.md` / `SESSION*.md`. Il n'y en a plus
 qu'un : celui-ci. On ne le duplique jamais, on l'édite en place.
@@ -4870,7 +4876,7 @@ observable, `StrToIntDef` rendant 0 et le test exigeant `>= 1`. Corrigée en `2`
 lignes de commentaire pour que la borne 11 ne soit pas re-signalée comme un bug. 230 613
 octets.
 
-### 2.49 Les préfixes de livre dans les références — étapes 1, 2, 3, 5 et le préfixage des cinq familles TERMINÉS (05/09/2026) ; reste 4
+### 2.49 Les préfixes de livre dans les références — étapes 1, 2, 3, 5, le préfixage des cinq familles et les deux préalables de l'étape 4 TERMINÉS (05/09/2026) ; reste 4
 
 **La règle du projet.** Chaque livre repart à 1 dans sa numérotation, précisément pour ne
 pas avoir à connaître le dernier numéro pris ailleurs. Cela n'est vrai que si les
@@ -5046,17 +5052,43 @@ c'est un préfixage partiel qui l'aurait cassée.
 
 #### Ce qui reste
 
-4. **Durcir `VerifieRecherche`** : une référence nue devient une erreur visible au lieu d'une
-   résolution au hasard. **Le blocage est levé** — les cinq familles ne sont plus un obstacle,
-   puisque définitions et références sont préfixées des deux côtés.
-   Avant d'écrire le durcissement, deux préalables :
-   - préfixer `BonusTete` / `BonusBras` / `BonusCorps` / `BonusJambes` (`chargeconstantes.pas`
-     l.394-397) en `'RULES-ARMOL_HEAD'`… — ce sont les dernières valeurs nues du lot, et c'est
-     désormais sans risque : les deux endroits qui les comparent (`chargepersonnage.pas` l.1441
-     et 1467, plus la cascade de `pdfpersonnage.pas`) passent par `CompareRechercheValeur` ;
-   - réécrire `winpersonnage.pas` l.3248, qui s'appuie sur les **variables globales laissées par
-     le dernier `Decoupe…`** (`copy(CodeValeur,1,5) = copy(CodeRecherche,1,5)`) — un état partagé
-     qui ne survivra pas au durcissement.
+**Les deux préalables sont FAITS (05/09/2026, soir).**
+
+- Les quatre constantes d'emplacement sont préfixées (`chargeconstantes.pas` l.394-397,
+  `'RULES-ARMOL_ARM'`…). ⚠️ Le CONTEXT annonçait « sans risque » ; le contrôle qui le prouvait
+  n'avait **pas** été fait. Il portait sur la balise `<ModifArmour name=>`, que l'étape 2 bis
+  n'avait pas traitée et dont dépend l'armure des mutations et des traits (peau écailleuse du
+  Skink, marque de Quetzl). Elle était déjà préfixée — 63 occurrences, aucun `ARMOL_` nu dans
+  tout `DATABASE\` — d'où le feu vert. **Refaire ce contrôle, ne pas croire l'annonce.**
+- `winpersonnage.pas` l.3245 ne lit plus les globales : nouvelle fonction **pure**
+  `CodeSansLivre` (`unitcalcul.pas`), et le test de radical redécoupe ses deux codes.
+  Sémantique inchangée (longueur 5, pas de contrôle du livre). Deux fragilités notées sans
+  être corrigées : la longueur 5 ne vaut pas pour les ids « A ou B » (`T0009/RULES-T0067`) ni
+  pour `T*`, et ce test ignore le livre alors que celui de gauche le respecte.
+
+**Ce que le mouchard a mesuré** (`VerifieRecherche` compte les passages par la branche
+tolérante ; relevé écrit en fin de `FormCreate` dans `TRACE_references_nues.txt`) :
+**195 appels, 95 couples distincts**, en quatre familles.
+
+| Famille | Nb | Décision |
+|---|---|---|
+| Codes de livre comparés à leur nom de fichier | ~20 | Structurel, hors sujet |
+| Libellés `LAB_` en dur dans le Pascal | 31 | **Corrigé** : 677 occurrences préfixées, 23 unités |
+| Constantes `ConstCaracXxx` nues | 5 | **Bloqué**, voir le piège en tête de fichier |
+| Codes des anciennes fiches `CURRENT\` | ~44 | Fiches vouées à la suppression : rien à faire |
+
+Le relevé a rendu **concret** le risque décrit en tête du §2.49 : `UPINA-WORK71 <- WORK71` et
+`WINDS-WORK85 <- WORK85` — deux carrières nues d'une vieille fiche se résolvent vers Up in Arms
+et Winds of Magic, pas vers le Rulebook.
+
+**Le préfixage des `LAB_`**, méthode réutilisable : vérifier d'abord que les 178 libellés sont
+définis dans les deux Rulebooks et **nulle part ailleurs**, qu'aucun code cité n'est
+introuvable, et surtout qu'**aucune forme n'est construite dynamiquement** (`'LAB_'+IntToStr`) —
+c'est ce dernier point qui autorise un remplacement mécanique. Un fichier traité et testé à
+l'écran (`warhammersource.pas`, 76) avant les 22 autres (601).
+
+4. **Durcir `VerifieRecherche`** : il ne reste que ça, une fois les deux arbitrages rendus.
+   Retirer le mouchard à cette occasion.
 
 Deux fragilités relevées dans le code au passage, sans effet aujourd'hui, notées pour mémoire :
 `pdfpersonnage.pas` retire le paramètre d'une qualité par `copy(LocData,1,Length(LocData)-2)`,

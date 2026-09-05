@@ -72,27 +72,27 @@ begin
     // on met toutes les données dans la table pour les afficher directement dans les champs
     TabCompetence.ColCount     := 1;
     TabCompetence.ColWidths[0] := 20;
-    GridAjouteColonne(TabCompetence, GetTexteLibelle('LAB_001'));
-    GridAjouteColonne(TabCompetence, GetTexteLibelle('LAB_002'), 265);
-    GridAjouteColonne(TabCompetence, GetTexteLibelle('LAB_002'));
-    GridAjouteColonne(TabCompetence, GetTexteLibelle('LAB_003'));
-    GridAjouteColonne(TabCompetence, GetTexteLibelle('LAB_078'));
-    GridAjouteColonne(TabCompetence, GetTexteLibelle('LAB_128'), 130);
-    GridAjouteColonne(TabCompetence, GetTexteLibelle('LAB_001'), 130);
-    GridAjouteColonne(TabCompetence, GetTexteLibelle('LAB_001'));
+    GridAjouteColonne(TabCompetence, GetTexteLibelle('RULES-LAB_001'));
+    GridAjouteColonne(TabCompetence, GetTexteLibelle('RULES-LAB_002'), 265);
+    GridAjouteColonne(TabCompetence, GetTexteLibelle('RULES-LAB_002'));
+    GridAjouteColonne(TabCompetence, GetTexteLibelle('RULES-LAB_003'));
+    GridAjouteColonne(TabCompetence, GetTexteLibelle('RULES-LAB_078'));
+    GridAjouteColonne(TabCompetence, GetTexteLibelle('RULES-LAB_128'), 130);
+    GridAjouteColonne(TabCompetence, GetTexteLibelle('RULES-LAB_001'), 130);
+    GridAjouteColonne(TabCompetence, GetTexteLibelle('RULES-LAB_001'));
 
     TabMetierCompetence.RowCount        := 2;
     TabMetierCompetence.ColCount        := 1;
     TabMetierCompetence.ColWidths[0]    := 20;
-    GridAjouteColonne(TabMetierCompetence, GetTexteLibelle('LAB_001'), 0);
-    GridAjouteColonne(TabMetierCompetence, GetTexteLibelle('LAB_006'), 250);
-    GridAjouteColonne(TabMetierCompetence, GetTexteLibelle('LAB_019'), 70);
+    GridAjouteColonne(TabMetierCompetence, GetTexteLibelle('RULES-LAB_001'), 0);
+    GridAjouteColonne(TabMetierCompetence, GetTexteLibelle('RULES-LAB_006'), 250);
+    GridAjouteColonne(TabMetierCompetence, GetTexteLibelle('RULES-LAB_019'), 70);
 
     TabSpe.RowCount        := 2;
     TabSpe.ColCount        := 1;
     TabSpe.ColWidths[0]    := 20;
-    GridAjouteColonne(TabSpe, GetTexteLibelle('LAB_001'), 0);
-    GridAjouteColonne(TabSpe, GetTexteLibelle('LAB_006'), 70);
+    GridAjouteColonne(TabSpe, GetTexteLibelle('RULES-LAB_001'), 0);
+    GridAjouteColonne(TabSpe, GetTexteLibelle('RULES-LAB_006'), 70);
 
     if Pos(ValeurSousCompetence, SelectWinCompetence) > 0 then
       SelectWinCompetence := ExtractStringBefore(SelectWinCompetence, ValeurSousCompetence) + ValeurGenerique;
@@ -121,15 +121,15 @@ begin
     if FileExists(GetCurrentDir+ConstCheminLogo1) then
       ImageWar.Picture.LoadFromFile(GetCurrentDir+ConstCheminLogo1);
 
-    Self.Caption                := GetTexteLibelle('LAB_009');
-    Labcode.Caption             := GetTexteLibelle('LAB_001');
-    LabLib.Caption              := GetTexteLibelle('LAB_002');
-    LabAttribut.Caption         := GetTexteLibelle('LAB_008');
-    LabSpecialisation.caption   := GetTexteLibelle('LAB_078');
-    LabDescription.caption      := GetTexteLibelle('LAB_003');
-    LabMetierCompetence.caption := GetTexteLibelle('LAB_006');
-    LabLivre.caption            := GetTexteLibelle('LAB_128');
-    LabSpe.caption              := GetTexteLibelle('LAB_078');
+    Self.Caption                := GetTexteLibelle('RULES-LAB_009');
+    Labcode.Caption             := GetTexteLibelle('RULES-LAB_001');
+    LabLib.Caption              := GetTexteLibelle('RULES-LAB_002');
+    LabAttribut.Caption         := GetTexteLibelle('RULES-LAB_008');
+    LabSpecialisation.caption   := GetTexteLibelle('RULES-LAB_078');
+    LabDescription.caption      := GetTexteLibelle('RULES-LAB_003');
+    LabMetierCompetence.caption := GetTexteLibelle('RULES-LAB_006');
+    LabLivre.caption            := GetTexteLibelle('RULES-LAB_128');
+    LabSpe.caption              := GetTexteLibelle('RULES-LAB_078');
 
     if SelectWinCompetence <> '' then
       begin

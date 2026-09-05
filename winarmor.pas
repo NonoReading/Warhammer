@@ -92,17 +92,17 @@ var
     if TabArmor.ColCount < 2 then
       begin
         TabArmor.ColCount      := 1;
-        GridAjouteColonne(TabArmor,GetTexteLibelle('LAB_001'));
-        GridAjouteColonne(TabArmor,GetTexteLibelle('LAB_074'),120);
-        GridAjouteColonne(TabArmor,GetTexteLibelle('LAB_002'),220);
-        GridAjouteColonne(TabArmor,GetTexteLibelle('LAB_075'));
-        GridAjouteColonne(TabArmor,GetTexteLibelle('LAB_054'));
-        GridAjouteColonne(TabArmor,GetTexteLibelle('LAB_055'));
-        GridAjouteColonne(TabArmor,GetTexteLibelle('LAB_056'));
-        GridAjouteColonne(TabArmor,GetTexteLibelle('LAB_076'));
-        GridAjouteColonne(TabArmor,GetTexteLibelle('LAB_059'));
-        GridAjouteColonne(TabArmor,GetTexteLibelle('LAB_128'),100);
-        GridAjouteColonne(TabArmor,GetTexteLibelle('LAB_001'),100);
+        GridAjouteColonne(TabArmor,GetTexteLibelle('RULES-LAB_001'));
+        GridAjouteColonne(TabArmor,GetTexteLibelle('RULES-LAB_074'),120);
+        GridAjouteColonne(TabArmor,GetTexteLibelle('RULES-LAB_002'),220);
+        GridAjouteColonne(TabArmor,GetTexteLibelle('RULES-LAB_075'));
+        GridAjouteColonne(TabArmor,GetTexteLibelle('RULES-LAB_054'));
+        GridAjouteColonne(TabArmor,GetTexteLibelle('RULES-LAB_055'));
+        GridAjouteColonne(TabArmor,GetTexteLibelle('RULES-LAB_056'));
+        GridAjouteColonne(TabArmor,GetTexteLibelle('RULES-LAB_076'));
+        GridAjouteColonne(TabArmor,GetTexteLibelle('RULES-LAB_059'));
+        GridAjouteColonne(TabArmor,GetTexteLibelle('RULES-LAB_128'),100);
+        GridAjouteColonne(TabArmor,GetTexteLibelle('RULES-LAB_001'),100);
       end;
     TabArmor.ColWidths[0]  := 20;
 
@@ -112,9 +112,9 @@ var
       begin
         TabBonus.ColCount      := 1;
         TabBonus.ColWidths[0]  := 20;
-        GridAjouteColonne(TabBonus,GetTexteLibelle('LAB_002'),120);
-        GridAjouteColonne(TabBonus,GetTexteLibelle('LAB_072'));
-        GridAjouteColonne(TabBonus,GetTexteLibelle('LAB_077'),300);
+        GridAjouteColonne(TabBonus,GetTexteLibelle('RULES-LAB_002'),120);
+        GridAjouteColonne(TabBonus,GetTexteLibelle('RULES-LAB_072'));
+        GridAjouteColonne(TabBonus,GetTexteLibelle('RULES-LAB_077'),300);
       end;
 
     IndTab := 0;
@@ -176,18 +176,18 @@ var
     if FileExists(GetCurrentDir+ConstCheminLogo1) then
       ImageWar.Picture.LoadFromFile(GetCurrentDir+ConstCheminLogo1);
 
-    Self.Caption              := GetTexteLibelle('LAB_065');
-    Labcode.Caption           := GetTexteLibelle('LAB_001');
-    LabLib.Caption            := GetTexteLibelle('LAB_002');
-    LabPrix.Caption           := GetTexteLibelle('LAB_054');
-    LabDisponibilite.Caption  := GetTexteLibelle('LAB_056');
-    LabEncombrement.Caption   := GetTexteLibelle('LAB_055');
-    LabType.Caption           := GetTexteLibelle('LAB_018');
-    LabEmplacement.Caption    := GetTexteLibelle('LAB_075');
-    LabProtection.Caption     := GetTexteLibelle('LAB_076');
-    LabBonus.Caption          := GetTexteLibelle('LAB_034');
-    LabLivre.Caption          := GetTexteLibelle('LAB_128');
-    LabQuickArmor.Caption     := GetTexteLibelle('LAB_149');
+    Self.Caption              := GetTexteLibelle('RULES-LAB_065');
+    Labcode.Caption           := GetTexteLibelle('RULES-LAB_001');
+    LabLib.Caption            := GetTexteLibelle('RULES-LAB_002');
+    LabPrix.Caption           := GetTexteLibelle('RULES-LAB_054');
+    LabDisponibilite.Caption  := GetTexteLibelle('RULES-LAB_056');
+    LabEncombrement.Caption   := GetTexteLibelle('RULES-LAB_055');
+    LabType.Caption           := GetTexteLibelle('RULES-LAB_018');
+    LabEmplacement.Caption    := GetTexteLibelle('RULES-LAB_075');
+    LabProtection.Caption     := GetTexteLibelle('RULES-LAB_076');
+    LabBonus.Caption          := GetTexteLibelle('RULES-LAB_034');
+    LabLivre.Caption          := GetTexteLibelle('RULES-LAB_128');
+    LabQuickArmor.Caption     := GetTexteLibelle('RULES-LAB_149');
 
     TabArmor.Row := 1;
     TabArmorSelection(TabArmor, 1, 1);
