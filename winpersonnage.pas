@@ -2325,7 +2325,6 @@ Function TWinPersonnages.CalculXpMj(TypeDonnee: String; CodeDonnee:String): Inte
   var
     IndLig:    Integer;
     Total:     Integer;
-    PAttribut: StructureAttribut;
     Ajoute:    Boolean;
   begin
     Total := 0;
@@ -2333,14 +2332,12 @@ Function TWinPersonnages.CalculXpMj(TypeDonnee: String; CodeDonnee:String): Inte
       begin
         if (TabAugmentationMjXp.Cells[ColAugmMjXpType, IndLig] = TypeDonnee) then
           begin
+            // Code prefixe EN PREMIER : CompareRechercheValeur n'est pas symetrique, elle
+            // n'accepte le livre absent que sur le second argument.
             if TypeDonnee = ConstXmlCarac then
-              begin
-                PAttribut  := ChercheAttribut(codeDonnee);
-                Ajoute := (TabAugmentationMjXp.Cells[ColAugmMjXpCode, IndLig] = PAttribut.Resume);
-              end
+              Ajoute := CompareRechercheValeur(TabAugmentationMjXp.Cells[ColAugmMjXpCode, IndLig], CodeDonnee)
             else
               Ajoute := (TabAugmentationMjXp.Cells[ColAugmMjXpCode, IndLig] = CodeDonnee);
-
             if Ajoute then
               Total := Total
                        - StrToIntDef(TabAugmentationMjXp.Cells[ColAugmMjXpCout, IndLig],0)
@@ -4587,7 +4584,11 @@ Procedure TWinPersonnages.MajTables();
                 begin
                   TabAugmentationMjXp.RowCount  := TabAugmentationMjXp.RowCount + 1;
                   TabAugmentationMjXp.Cells[ColAugmMjXpType, TabAugmentationMjXp.RowCount-1]  := ConstXmlCarac;
-                  TabAugmentationMjXp.Cells[ColAugmMjXpCode, TabAugmentationMjXp.RowCount-1]  := TabAugmentationAttribut.Cells[ColAugmAttCode, indAugm];
+                  // Le code complet (RULES-ATTR_WS) et non le resume traduit : la colonne 3
+                  // de TabAugmentationAttribut porte PAttribut.Resume, qui change avec la
+                  // langue et faisait perdre silencieusement la reduction. La colonne 1 porte
+                  // le code court (ATTR_WS), que ChercheAttribut complete avec son prefixe.
+                  TabAugmentationMjXp.Cells[ColAugmMjXpCode, TabAugmentationMjXp.RowCount-1]  := ChercheAttribut(TabAugmentationAttribut.Cells[1, indAugm]).CodeAttribut;
                   TabAugmentationMjXp.Cells[ColAugmMjXpDebut, TabAugmentationMjXp.RowCount-1] := TabAugmentationAttribut.Cells[ColAugmAttActuel, indAugm];
                   TabAugmentationMjXp.Cells[ColAugmMjXpFin, TabAugmentationMjXp.RowCount-1]   := TabAugmentationAttribut.Cells[ColAugmAttNouveau, indAugm];
                   TabAugmentationMjXp.Cells[ColAugmMjXpCout, TabAugmentationMjXp.RowCount-1]  := TabAugmentationAttribut.Cells[ColAugmAttCout, indAugm];

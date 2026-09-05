@@ -1,12 +1,16 @@
 # Warhammer — Contexte projet
 
-**Dernière mise à jour : 05/09/2026 — LE §2.45 EST APPLIQUÉ (une compétence d'ethnie « A ou B »
-ou « (Any) » ne peut plus recevoir de points sans qu'on ait choisi la branche), ET UNE FAMILLE
-ENTIÈRE DE BUGS A ÉTÉ RATISSÉE : §2.46, les tests de préfixe qui ignoraient le préfixe de
-livre. Quatre endroits corrigés, deux arbitrages posés.** Les points de reprise du chantier des
-appartenances (§2.44) sont INCHANGÉS et restent les prochains : rendre l'appartenance visible
-sur la fiche et dans le PDF, le 3d-3 (ordres de chevalerie, conception à faire), et les onze
-Regiments of Renown. `GreffesDesAppartenances` est supprimée, cet item-là est clos.
+**Dernière mise à jour : 05/09/2026 — le §2.47 clôt la fiche XP : la réduction d'XP du MJ
+était appariée sur le RÉSUMÉ TRADUIT de l'attribut (`E` en français, `T` en anglais) et
+disparaissait silencieusement dès que la langue changeait. Elle porte désormais le code
+complet préfixé. Même famille que le §2.46 : un test qui compare autre chose que
+l'identifiant.** Deux défauts trouvés en chemin et NON corrigés sont dans `A FAIRE.txt`,
+dont un prioritaire : **en mode XpDiv25, le coût XP des carrières et de l'équipement est
+divisé par 25 à chaque sauvegarde** — perte de donnée silencieuse, voir §2.47.
+Les points de reprise du chantier des appartenances (§2.44) sont INCHANGÉS et restent les
+prochains : rendre l'appartenance visible sur la fiche et dans le PDF, le 3d-3 (ordres de
+chevalerie, conception à faire), et les onze Regiments of Renown. `GreffesDesAppartenances`
+est supprimée, cet item-là est clos.
 ⚠️ Lire le §0 sur **l'écriture qui répond « écrit » sans écrire** : elle s'est reproduite DEUX
 fois le 05/09, et les deux fois c'est la TAILLE du fichier, jamais la date, qui l'a vue.
 Ce fichier remplace tous les anciens
@@ -4739,6 +4743,79 @@ retour à zéro que la constante n'avait pas.**
   préfixe inclus : c'est **voulu**, et c'est désormais écrit en commentaire dans les deux
   fichiers pour qu'un futur passage ne le prenne pas pour un bug. Conséquence assumée : un livre
   ne peut pas ajouter de branche à un talent générique d'un autre livre.
+
+---
+
+### 2.47 La réduction d'XP du MJ était appariée sur un libellé traduit — corrigé (05/09/2026)
+
+*Comment c'est sorti.* Question de Nono sur le dossier Gunther Krieg, qui porte
+`<Attribut name="E:0-5">"0"</Attribut>` dans `CHAPTER_XP` : la réduction est-elle encore
+fonctionnelle ? La réponse est venue du **chiffre, pas de la lecture du code**. Le total refait
+à la main depuis le XML donne 96 unités dépensées et 2 restantes ; le fichier porte
+`CurrentXp = 2`. Avec la réduction on attendait 91 et 7. L'écart de 5 unités est exactement la
+tranche 0-5 de l'attribut : la réduction n'entrait pas dans le total. Trois pistes plausibles
+avaient été éliminées avant, en lisant les sources, sans rien trouver.
+
+*La cause.* `winpersonnage.pas` l. 2339, `CalculXpMj` comparait la cellule Code de la grille MJ
+à `PAttribut.Resume`, le **résumé traduit** de l'attribut. La ligne avait été saisie quand
+`ListeAttribut` portait les résumés français (`E` pour Endurance) et était relue avec les
+anglais (`T` pour Toughness). `'E' = 'T'` est faux, et la réduction disparaissait **sans le
+moindre message**. Les attributs étaient les seuls appariés sur un libellé ; les compétences et
+les talents portaient déjà leur code.
+
+*Ce qui a tranché.* Un `ShowMessage` temporaire dans `CalculXpMj`, affichant **entre crochets**
+la cellule, le code cherché et le résumé trouvé. Sortie : `cellule=[E] codeDonnee=[ATTR_WS]
+resume=[WS]`. Une ligne de trace a coûté moins cher que la quatrième relecture des sources.
+
+*Les deux corrections — indissociables, un seul point de compilation.*
+- `winpersonnage.pas` l. 4590, `MajTables` : la grille MJ reçoit
+  `ChercheAttribut(TabAugmentationAttribut.Cells[1, indAugm]).CodeAttribut`, soit le code
+  **complet préfixé** (`RULES-ATTR_WS`), et non plus la colonne 3 qui porte le résumé. La
+  colonne 1 de `TabAugmentationAttribut` portait déjà le code court, il ne manquait que le
+  préfixe.
+- `winpersonnage.pas`, `CalculXpMj` : comparaison par `CompareRechercheValeur`, **code préfixé
+  en premier** (la fonction n'est pas symétrique — voir le commentaire l. 2920-2928), ce qui
+  tolère au passage une ancienne ligne enregistrée sans préfixe. `PAttribut` devient inutile
+  dans la fonction et sa déclaration est retirée.
+
+229 500 → 229 929 octets. *Éprouvé* sur Gunther Krieg, la ligne du XML repassée à
+`RULES-ATTR_T:0-5` : colonne E de la ligne Xp 19 → 14, Restant 2 → 7.
+
+*Effet de bord bienvenu.* `CodeNormalise` (`chargepersonnage.pas` l. 571) retrouve maintenant
+l'attribut, donc `Livre` n'est plus vide et la ligne sort préfixée dans le XML : elle redevient
+contrôlable par le test d'intégrité du §2.20, dont elle était sortie précisément parce qu'un
+résumé n'est pas un code.
+
+*Pas de migration automatique possible.* La valeur `E` est une abréviation traduite dont on ne
+connaît plus la langue d'origine. Les lignes déjà enregistrées se corrigent à la main dans le
+XML du personnage.
+
+**⚠️ DEUX DÉFAUTS TROUVÉS EN CHEMIN, NON CORRIGÉS — détaillés dans `A FAIRE.txt`.**
+
+1. **En mode XpDiv25, le coût XP des carrières et de l'équipement est divisé par 25 à chaque
+   sauvegarde.** L'affichage divise (l. 2910 pour les carrières, l. 3056 pour l'équipement et
+   les sorts) et la sauvegarde relit la cellule **déjà divisée** (l. 4728 et l. 4867) : 100
+   devient 4, puis 0 au chargement suivant. C'est ce qui explique les trois lignes
+   `CHAPTER_OLDCAREER` de Gunther toutes à `"0"`. **Perte de donnée silencieuse, à traiter en
+   priorité** — c'est le prochain chantier proposé.
+2. Deux boucles sur `TabAttribut` bornées à la colonne 11 (l. 4021 en partant de 1, l. 4317 et
+   l. 4331 en partant de 2) alors que `ColAttLib = 1` et que les attributs vont de 2 à 14. À
+   vérifier avant de toucher : la borne est peut-être voulue pour exclure Destin et Résilience
+   du contrôle d'avancement.
+
+*Règles de méthode nées de là.*
+- **Apparier sur un libellé, c'est apparier sur la langue.** Un résumé, un libellé, un nom
+  affiché changent avec la traduction ; seul le code est stable. Même règle que le §2.46 sur
+  les préfixes : un test porte sur l'identifiant, jamais sur ce qu'on en montre.
+- **Un circuit complet qui marche n'est pas une fonction qui marche.** Écriture, relecture,
+  remplissage de grille et calcul du coût étaient tous corrects ; seule la comparaison finale
+  échouait. Vérifier chaque maillon a coûté quatre allers-retours.
+- **Refaire le total à la main est un outil de diagnostic.** Les tarifs sont dans
+  `DATA_ATTRIBUT_COST` et `DATA_SKILL_COST` du Rulebook, **par point** et non par tranche de 5 ;
+  l'écart entre le total théorique et le `CurrentXp` du fichier désigne le terme fautif. C'est
+  ce qui a aussi fait sortir le défaut n°1 ci-dessus.
+- **Une trace temporaire avec des crochets.** Encadrer les valeurs affichées rend visibles le
+  vide et l'espace parasite, les deux cas qu'une lecture du code ne peut pas exclure.
 
 ---
 

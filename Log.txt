@@ -1171,3 +1171,58 @@ CE QUE LA SESSION A APPRIS.
 (5) UN SOUS-AGENT POUR RATISSER. La recherche du motif dans tous les .pas de la racine a ete
     confiee a un sous-agent : il a rendu 3 vrais bugs, 2 cas douteux et 13 faux positifs
     ecartes, sans charger la conversation principale des fichiers lus.
+05/09/2026 - LA REDUCTION D XP DU MJ ETAIT APPARIEE SUR UN LIBELLE TRADUIT
+CONSTAT DE DEPART. Question de Nono sur le dossier Gunther Krieg, qui porte
+   <Attribut name="E:0-5">"0"</Attribut> dans CHAPTER_XP : la reduction est-elle encore
+   fonctionnelle ? Reponse : NON, et rien ne le disait. Le circuit ecriture / lecture /
+   affichage marchait de bout en bout, seule la PRISE EN COMPTE echouait.
+COMMENT C EST SORTI. Le calcul refait a la main depuis le XML donne 96 unites depensees et
+   2 restantes ; le fichier porte CurrentXp = 2. Or avec la reduction on attendait 91 et 7.
+   L ecart de 5 unites est exactement la tranche 0-5 de l attribut, donc la reduction
+   n entrait pas dans le total. C est le CHIFFRE qui a tranche, pas la lecture du code -
+   trois pistes plausibles avaient ete eliminees avant en lisant les sources.
+LA CAUSE. winpersonnage.pas l.2339, CalculXpMj comparait la cellule Code de la grille MJ a
+   PAttribut.Resume, le RESUME TRADUIT de l attribut. La ligne avait ete saisie quand
+   ListeAttribut portait les resumes francais (E pour Endurance) et etait relue avec les
+   resumes anglais (T pour Toughness) : 'E' = 'T' est faux, et la reduction disparaissait
+   sans le moindre message. Les attributs etaient les SEULS apparies sur un libelle ; les
+   competences et les talents portaient deja leur code.
+CE QUI A TRANCHE. Un ShowMessage temporaire dans CalculXpMj affichant, entre crochets, la
+   cellule, le code cherche et le resume trouve. Sortie : cellule=[E] codeDonnee=[ATTR_WS]
+   resume=[WS]. Une ligne de trace a coute moins cher que la quatrieme relecture des sources.
+CORRECTIONS (2 endroits, un seul point de compilation - les deux moities d un meme contrat).
+   winpersonnage.pas l.4590, MajTables : la grille MJ recoit desormais
+   ChercheAttribut(TabAugmentationAttribut.Cells[1, indAugm]).CodeAttribut, soit le code
+   COMPLET prefixe (RULES-ATTR_WS), et non plus la colonne 3 qui porte le resume.
+   winpersonnage.pas CalculXpMj : comparaison par CompareRechercheValeur, code prefixe en
+   PREMIER (la fonction n est pas symetrique), ce qui tolere au passage une ancienne ligne
+   enregistree sans prefixe. PAttribut devient inutile dans la fonction.
+   229500 > 229929 octets. EPROUVE sur Gunther Krieg, ligne du XML repassee a
+   RULES-ATTR_T:0-5 : colonne E de la ligne Xp 19 > 14, Restant 2 > 7.
+EFFET DE BORD BIENVENU. CodeNormalise (chargepersonnage.pas l.571) retrouve maintenant
+   l attribut, donc Livre n est plus vide et la ligne sort prefixee dans le XML : elle
+   redevient controlable par le test d integrite du 2.20, dont elle etait sortie
+   precisement parce qu un resume n est pas un code.
+DEUX DEFAUTS TROUVES EN CHEMIN, NON CORRIGES, ECRITS DANS A FAIRE.TXT.
+   (a) EN MODE XPDIV25, LE COUT DES CARRIERES ET DE L EQUIPEMENT EST DIVISE PAR 25 A CHAQUE
+   SAUVEGARDE. L affichage divise (l.2910 et l.3056) et la sauvegarde relit la cellule DEJA
+   divisee (l.4728 et l.4867) : 100 devient 4, puis 0 au chargement suivant. C est ce qui
+   explique les trois lignes CHAPTER_OLDCAREER de Gunther a "0". Perte de donnee silencieuse,
+   a traiter en priorite.
+   (b) Deux boucles sur TabAttribut bornees a la colonne 11 (l.4021 en partant de 1, l.4317
+   et l.4331 en partant de 2) alors que ColAttLib = 1 et que les attributs vont de 2 a 14.
+CE QUE LA SESSION A APPRIS.
+(1) APPARIER SUR UN LIBELLE, C EST APPARIER SUR LA LANGUE. Un resume, un libelle, un nom
+    affiche changent avec la traduction ; seul le code est stable. La regle est la meme que
+    celle du 2.46 sur les prefixes : un test doit porter sur l identifiant, jamais sur ce
+    qu on en montre. A verifier ailleurs - c etait le seul cas connu, ce n est pas une preuve.
+(2) UN CIRCUIT COMPLET QUI MARCHE N EST PAS UNE FONCTION QUI MARCHE. Ecriture, relecture,
+    remplissage de grille et calcul du cout etaient tous corrects ; seule la comparaison
+    finale echouait. Verifier chaque maillon separement a coute quatre allers-retours ;
+    refaire le calcul a la main depuis la donnee sauvegardee l aurait donne d emblee.
+(3) REFAIRE LE TOTAL A LA MAIN EST UN OUTIL DE DIAGNOSTIC. Les tarifs sont dans
+    DATA_ATTRIBUT_COST et DATA_SKILL_COST du Rulebook, PAR POINT et non par tranche de 5 ;
+    avec ca, l ecart entre le calcul theorique et le CurrentXp du fichier designe le terme
+    fautif. C est ce qui a aussi fait sortir le bug (a).
+(4) UNE TRACE TEMPORAIRE AVEC DES CROCHETS. Encadrer les valeurs affichees rend visibles le
+    vide et l espace parasite, les deux cas qu une lecture du code ne peut pas exclure.

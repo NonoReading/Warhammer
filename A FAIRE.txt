@@ -6,6 +6,24 @@
 CORRECTIONS COURTES  (une ligne ou deux chacune)
 =========================================================================
 
+LE COUT XP DES CARRIERES ET DE L EQUIPEMENT EST DIVISE PAR 25 A CHAQUE SAUVEGARDE EN MODE
+XPDIV25. Trouve le 05/09/2026 sur Gunther Krieg, dont les trois lignes CHAPTER_OLDCAREER
+portent toutes "0" alors qu un changement de niveau coute 100. L affichage divise
+(winpersonnage.pas l.2910 pour les carrieres, l.3056 pour l equipement et les sorts :
+CalculOptionXpDiv25(CoutXp)) et la sauvegarde relit la cellule DEJA divisee (l.4728 et
+l.4867) : 100 devient 4, puis 0 au chargement suivant. Deux allers-retours et le cout est
+perdu. Non corrige. C est une PERTE DE DONNEE silencieuse, plus grave que le bug de la
+reduction MJ corrige le meme jour - a traiter en priorite.
+
+DEUX BOUCLES SUR TABATTRIBUT S ARRETENT A LA COLONNE 11 ET COMMENCENT AU MAUVAIS ENDROIT.
+winpersonnage.pas l.4021 (For Ind := 1 to 11, controle d avancement) et l.4317 / l.4331
+(For Ind := 2 to 11, remplissage de TabAugmentationAttribut). Or ColAttLib = 1 est la colonne
+des libelles, les attributs vont de 2 a 14 : la premiere lit une colonne de texte, et les
+deux manquent Destin (12), Resilience (13) et Blessure (14). CalculTableExperience, elle,
+boucle correctement de 2 a ColCount-1. Repere le 05/09/2026, non corrige, a verifier avant
+de toucher : la borne 11 est peut-etre voulue pour exclure Destin et Resilience du controle
+d avancement de carriere.
+
 CRAFTSMAN (ARMOURER) ET MASTER TRADESMAN (GUNSMITH) SONT LE MEME METIER SOUS DEUX LIBELLES.
 RULES-T0092_ARMU est libelle "Craftsman (Armourer)" et son pendant RULES-T0157_ARMU "Master
 Tradesman (Gunsmith)". Releve le 04/09/2026 en saisissant Nuln, qui donne les deux ; on a

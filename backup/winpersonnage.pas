@@ -785,7 +785,9 @@ procedure TWinPersonnages.ButtonDeleteClick(Sender: TObject);
     i:        Integer;
   begin
     if (TabEquipement.Row > 0)
-      and not InList(TabEquipement.Cells[3, TabEquipement.Row],TypeSortBenediction+','+TypeSortMiracle+','+TypeSortMineur+','+TypeSortCouleur+','+TypeSortArcane+','+TypeSortChaos) then
+      // Une ligne qui cite un talent est un sort : il se retire par son ecran, pas ici.
+      // Remplace la liste fermee des six TypSpell, qui laissait passer les rituels.
+      and (TalentSort(TabEquipement.Cells[2, TabEquipement.Row]).CodeTalent = '') then
         begin
           Reponse := MessageDlg(GetTexteLibelle('MESS_039'), mtConfirmation, mbYesNo, 0);
           if Reponse = mrYes then
@@ -1104,6 +1106,7 @@ function TWinPersonnages.ValeurTarifSort(Expression: String; Defaut: Integer): I
 function TWinPersonnages.TalentSort(CodeSort: String): StructureTalent;
   var
     PSort:      StructureSort;
+    Talents:    String;
     Liste:      TStringList;
     Ind:        Integer;
   begin
@@ -1111,14 +1114,19 @@ function TWinPersonnages.TalentSort(CodeSort: String): StructureTalent;
     if CodeSort = '' then
       Exit;
     PSort := ChercheSort(CodeSort);
-    if (PSort.CodeSort = '') or (PSort.ListeTalent = '') then
+    if PSort.CodeSort = '' then
+      Exit;
+    // TalentsDuSort et non PSort.ListeTalent : la relation talent/sort a une seconde
+    // source depuis le 03/09/2026, le bloc DATA_SPELL_TALENT. CONTEXT.md 2.39.
+    Talents := TalentsDuSort(PSort);
+    if Talents = '' then
       Exit;
 
     Liste := TStringList.Create;
     try
       // meme decoupe que SortTalentAccessible : un sort peut citer plusieurs talents, et le
       // OU entre eux est la seule relation que le modele connaisse.
-      ExtractStrings([',', ' '], [], PChar(PSort.ListeTalent), Liste);
+      ExtractStrings([',', ' '], [], PChar(Talents), Liste);
       For Ind := 0 to Liste.Count - 1 do
         begin
           Result := ChercheTalent(Liste[Ind]);
@@ -1505,7 +1513,8 @@ Procedure TWinPersonnages.SortAffiche();
           if PTalent.ModeSort = ConstModeSortAuto then
             begin
               For Psort in ListSort do
-                if Pos(Tal, PSort.ListeTalent) > 0 then
+                // TalentsDuSort : voir CONTEXT.md 2.39, la relation a une seconde source.
+                if Pos(Tal, TalentsDuSort(PSort)) > 0 then
                   Begin
                     TabSort.RowCount                       := TabSort.RowCount + 1;
                     TabSort.Cells[1, TabSort.RowCount-1]   := PSort.CodeSort;
@@ -2324,11 +2333,10 @@ Function TWinPersonnages.CalculXpMj(TypeDonnee: String; CodeDonnee:String): Inte
       begin
         if (TabAugmentationMjXp.Cells[ColAugmMjXpType, IndLig] = TypeDonnee) then
           begin
+            // Code prefixe EN PREMIER : CompareRechercheValeur n'est pas symetrique, elle
+            // n'accepte le livre absent que sur le second argument.
             if TypeDonnee = ConstXmlCarac then
-              begin
-                PAttribut  := ChercheAttribut(codeDonnee);
-                Ajoute := (TabAugmentationMjXp.Cells[ColAugmMjXpCode, IndLig] = PAttribut.Resume);
-              end
+              Ajoute := CompareRechercheValeur(TabAugmentationMjXp.Cells[ColAugmMjXpCode, IndLig], CodeDonnee)
             else
               Ajoute := (TabAugmentationMjXp.Cells[ColAugmMjXpCode, IndLig] = CodeDonnee);
 
@@ -2645,6 +2653,15 @@ procedure TWinPersonnages.TabAugmentationTalentDblClick(Sender: TObject);
                   Personnage.MetierTalent[Ind2].CodeTalent := SelectWinTalent;
                   break;
                 end;
+
+            // D - recalculer les sorts accordes par ce talent, AVEC la specialisation.
+            // Sans cet appel, SortAffiche n'avait tourne qu'a la saisie de la colonne
+            // "Nouveau", donc AVANT ce choix : la ligne portait encore le code generique
+            // RULES-T0012_*, qui ne correspond a aucune benediction (elles citent le dieu,
+            // RULES-T0012_SIGMAR). TabSort restait vide, et MajTables ne fait que recopier
+            // TabSort dans la fiche - d'ou un pretre sans aucune benediction. Trouve par
+            // Nono le 03/09/2026 sur "pretre 2". Meme famille que CONTEXT.md 2.18.
+            SortAffiche();
           end;
       end
     else if (TabAugmentationTalent.Col = ColCompLib) and (TabAugmentationTalent.Cells[ColAugmCompLib, TabAugmentationTalent.Row] = GetTexteLibelle(ConstLabAdd))  then
@@ -2875,7 +2892,7 @@ begin
       PTalent                         := ChercheTalent(TabTalent.Cells[ColTalCode, NbTalent]);
       TabTalent.Cells[ColTalLib, NbTalent]    := PTalent.Libelle;
       if PTalent.SousTalent then
-        PTalent                       := ChercheTalent(copy(PTalent.CodeTalent,1,5)+'_*');
+        PTalent                       := ChercheTalent(Copy(PTalent.CodeTalent, 1, Pos('_', PTalent.CodeTalent) - 1)+'_*');
       TabTalent.Cells[ColTalMax, NbTalent]    := Ptalent.MaxiTalent;
       TalentAttribut(PTalent.Attribut);
       end;
@@ -2946,7 +2963,7 @@ begin
           PTalent                    := ChercheTalent(TabTalent.Cells[ColTalCode, Lig]);
           TabTalent.Cells[ColTalLib, Lig]    := PTalent.Libelle;
           if PTalent.SousTalent then
-            PTalent                  := ChercheTalent(copy(PTalent.CodeTalent,1,5)+'_*');
+            PTalent                  := ChercheTalent(Copy(PTalent.CodeTalent, 1, Pos('_', PTalent.CodeTalent) - 1)+'_*');
           TabTalent.Cells[ColTalMax, Lig]    := Ptalent.MaxiTalent;
           TabTalent.Cells[ColTalXp, Lig]    := IntToStr(CalculExperience(ConstXmlTalent, 0, StrToIntDef(TabTalent.Cells[ColTalNbAugm, Lig],0), PersonnageTalent.CodeTalent, ''));
           TalentAttribut(PTalent.Attribut);
@@ -4289,6 +4306,9 @@ Procedure TWinPersonnages.ChargeAugmentation();
     PAttribut:         StructureAttribut;
     Trouve:            Boolean;
     Ind2:              Integer;
+    ListBranche:       TStringList;
+    IndBranche:        Integer;
+    LibBranche:        String;
   Begin
     // Attributs
     Nbc := 0;
@@ -4337,8 +4357,33 @@ Procedure TWinPersonnages.ChargeAugmentation();
             if TabAugmentationCompetence.RowCount <= NbC then
               TabAugmentationCompetence.RowCount     := TabAugmentationCompetence.RowCount + 1;
 
-            TabAugmentationCompetence.Cells[ColAugmCompCode, NbC]  := PCompetence.CodeCompetence;
-            TabAugmentationCompetence.Cells[ColAugmCompLib, NbC]  := PCompetence.Libelle;
+            // Un code de CHOIX 'A/B' n'existe dans aucune table : ChercheCompetence compare
+            // les codes a l'identique (VerifieRecherche) et rend l'enregistrement vide. La
+            // ligne s'affichait donc sans libelle ET sans code, et comme la fenetre de
+            // specialisation recoit justement cette cellule Code, elle s'ouvrait vide. On
+            // reprend alors le code BRUT, et on compose le libelle avec celui de chaque
+            // branche. WinSpecialisation sait deja eclater le '/', et le bloc "propager au
+            // tableau metier" du double-clic retrouve la ligne par ce meme code brut.
+            // Vaut pour tout choix A/B, y compris ceux du Rulebook (Play (Drum or Fife)).
+            if (PCompetence.CodeCompetence = '') and (Pos(SeparateurMulti, PersonnageCompetence.CodeCompetence) > 0) then
+              begin
+                LibBranche  := '';
+                ListBranche := ListeMetierCompetence(PersonnageCompetence.CodeCompetence);
+                for IndBranche := 0 to ListBranche.Count - 1 do
+                  begin
+                    if LibBranche <> '' then
+                      LibBranche := LibBranche + ' ' + SeparateurMulti + ' ';
+                    LibBranche := LibBranche + ChercheCompetence(ListBranche[IndBranche]).Libelle;
+                  end;
+                ListBranche.Free;
+                TabAugmentationCompetence.Cells[ColAugmCompCode, NbC] := PersonnageCompetence.CodeCompetence;
+                TabAugmentationCompetence.Cells[ColAugmCompLib, NbC]  := LibBranche;
+              end
+            else
+              begin
+                TabAugmentationCompetence.Cells[ColAugmCompCode, NbC]  := PCompetence.CodeCompetence;
+                TabAugmentationCompetence.Cells[ColAugmCompLib, NbC]  := PCompetence.Libelle;
+              end;
             For Ind := 1 to TabCompetence.rowCount -1 do
               begin
                 if CompareRechercheValeur(PCompetence.CodeCompetence, TabCompetence.Cells[ColCompCode, Ind]) then
@@ -4413,7 +4458,25 @@ Procedure TWinPersonnages.ChargeAugmentation();
          TabAugmentationTalent.rowCount      := TabAugmentationTalent.rowCount + 1;
          TabAugmentationTalent.Cells[ColAugmTalCode, NbC] := PersonnageTalent.CodeTalent;
          PTalent                             := ChercheTalent(PersonnageTalent.CodeTalent);
-         TabAugmentationTalent.Cells[ColAugmTalLib, NbC] := PTalent.Libelle;
+         // Meme repli que pour les competences : un code de CHOIX 'A/B' n'existe dans
+         // aucune table, ChercheTalent rend l'enregistrement vide et la ligne s'affichait
+         // sans libelle. Ici la cellule Code porte deja le code BRUT (ligne au-dessus),
+         // donc seul le libelle est a composer, branche par branche.
+         if (PTalent.CodeTalent = '') and (Pos(SeparateurMulti, PersonnageTalent.CodeTalent) > 0) then
+           begin
+             LibBranche  := '';
+             ListBranche := ListeTalent(PersonnageTalent.CodeTalent);
+             for IndBranche := 0 to ListBranche.Count - 1 do
+               begin
+                 if LibBranche <> '' then
+                   LibBranche := LibBranche + ' ' + SeparateurMulti + ' ';
+                 LibBranche := LibBranche + ChercheTalent(ListBranche[IndBranche]).Libelle;
+               end;
+             ListBranche.Free;
+             TabAugmentationTalent.Cells[ColAugmTalLib, NbC] := LibBranche;
+           end
+         else
+           TabAugmentationTalent.Cells[ColAugmTalLib, NbC] := PTalent.Libelle;
          if (ListComp.Count > 1) or (Pos(ValeurGenerique, PersonnageTalent.CodeTalent) > 0) then
            TabAugmentationTalent.Cells[ColAugmTalSpe, NbC]:= GetTexteLibelle(ConstLabSelSpe);
          TabAugmentationTalent.Cells[ColAugmTalWork, NbC]  := PersonnageTalent.CodeTalent;
@@ -4426,7 +4489,17 @@ Procedure TWinPersonnages.ChargeAugmentation();
                  TabAugmentationTalent.Cells[ColAugmTalNouveau, NbC] := TabTalent.Cells[ColTalNb, IndT];
                  break;
                end
-             else if (copy(TabTalent.Cells[ColTalCode, IndT],1,12) = copy(PersonnageTalent.CodeTalent,1,12)) then
+             // "Meme talent parent" : on compare les codes jusqu'au '_' inclus. C'etait
+             // ecrit en 12 caracteres FIXES, ce qui donnait "RULES-T0088_" par coincidence
+             // de longueurs et cassait des qu'un prefixe de livre ou un code n'avait pas la
+             // taille attendue.
+             // Le '_' ajoute dans le Pos n'est PAS decoratif : un talent SANS specialite n'a
+             // pas de '_', Pos rendrait 0, Copy(...,1,0) rendrait une chaine VIDE des deux
+             // cotes et TOUS les talents se seraient equivalus (constate le 05/09/2026 : la
+             // grille d'augmentation affichait quatre fois le meme talent). Avec le '_'
+             // ajoute, un code sans specialite se compare en entier.
+             else if (Copy(TabTalent.Cells[ColTalCode, IndT], 1, Pos('_', TabTalent.Cells[ColTalCode, IndT] + '_')) =
+                      Copy(PersonnageTalent.CodeTalent, 1, Pos('_', PersonnageTalent.CodeTalent + '_'))) then
                begin
                  TabAugmentationTalent.Cells[ColAugmTalCode, NbC]   := TabTalent.Cells[ColTalCode, IndT];
                  TabAugmentationTalent.Cells[ColAugmTalLib, NbC]    := TabTalent.Cells[ColTalLib, IndT];
@@ -4490,6 +4563,7 @@ Procedure TWinPersonnages.MajTables();
     CodEquip:          String;
     TypEquip:          String;
     Ind:               Integer;
+    CandidatsAppart:   String;
   begin
     // raz table augmentation spéciales
     For IndAugm := TabAugmentationMjXp.RowCount - 1 downto 1 do
@@ -4512,7 +4586,11 @@ Procedure TWinPersonnages.MajTables();
                 begin
                   TabAugmentationMjXp.RowCount  := TabAugmentationMjXp.RowCount + 1;
                   TabAugmentationMjXp.Cells[ColAugmMjXpType, TabAugmentationMjXp.RowCount-1]  := ConstXmlCarac;
-                  TabAugmentationMjXp.Cells[ColAugmMjXpCode, TabAugmentationMjXp.RowCount-1]  := TabAugmentationAttribut.Cells[ColAugmAttCode, indAugm];
+                  // Le code complet (RULES-ATTR_WS) et non le resume traduit : la colonne 3
+                  // de TabAugmentationAttribut porte PAttribut.Resume, qui change avec la
+                  // langue et faisait perdre silencieusement la reduction. La colonne 1 porte
+                  // le code court (ATTR_WS), que ChercheAttribut complete avec son prefixe.
+                  TabAugmentationMjXp.Cells[ColAugmMjXpCode, TabAugmentationMjXp.RowCount-1]  := ChercheAttribut(TabAugmentationAttribut.Cells[1, indAugm]).CodeAttribut;
                   TabAugmentationMjXp.Cells[ColAugmMjXpDebut, TabAugmentationMjXp.RowCount-1] := TabAugmentationAttribut.Cells[ColAugmAttActuel, indAugm];
                   TabAugmentationMjXp.Cells[ColAugmMjXpFin, TabAugmentationMjXp.RowCount-1]   := TabAugmentationAttribut.Cells[ColAugmAttNouveau, indAugm];
                   TabAugmentationMjXp.Cells[ColAugmMjXpCout, TabAugmentationMjXp.RowCount-1]  := TabAugmentationAttribut.Cells[ColAugmAttCout, indAugm];
@@ -4663,6 +4741,15 @@ Procedure TWinPersonnages.MajTables();
 
               TabEquipement.Cells[2, TabEquipement.RowCount-1] := CodEquip;
               TabEquipement.Cells[3, TabEquipement.RowCount-1] := TypEquip;
+              // La colonne du LIBELLE n'etait pas ecrite : la ligne restait vide jusqu'au
+              // rechargement du XML, qui y remettait le code brut. Un equipement divers n'a
+              // pas d'autre libelle que son propre texte ("uniform"), d'ou le else.
+              if TypEquip = TypeEquipWe then
+                TabEquipement.Cells[4, TabEquipement.RowCount-1] := ChercheArme(CodEquip).Libelle
+              else if TypEquip = TypeEquipAr then
+                TabEquipement.Cells[4, TabEquipement.RowCount-1] := ChercheArmure(CodEquip).Libelle
+              else
+                TabEquipement.Cells[4, TabEquipement.RowCount-1] := CodEquip;
             end;
 
           // Competence
@@ -4685,6 +4772,38 @@ Procedure TWinPersonnages.MajTables();
                     PersonnageTalent.Valeur     := PMetierTalent.NiveauMetier;
                     Personnage.MetierTalent     += [PersonnageTalent];
                   end;
+
+              // Entrer dans une carriere ouvre le droit a une APPARTENANCE (regiment,
+              // ordre de chevalerie, culte). Le choix est REDEMANDE a chaque entree en
+              // carriere et il est CUMULATIF : on n'en retire jamais une, parce que le
+              // livre dit qu'on garde ce qu'elle a donne meme apres l'avoir quittee. Un
+              // personnage qui refuse repond "aucune", et rien n'est propose s'il ne
+              // reste aucun candidat. CONTEXT.md 2.44.
+              CandidatsAppart := AppartenancesCandidates(NvMetier, Personnage.Race,
+                                                         Personnage.Appartenance);
+              if CandidatsAppart <> '' then
+                begin
+                  ChoixWinTypeFichier         := ConstXmlDataCareerBonus;
+                  ChoixWinCareerBonus         := CandidatsAppart;
+                  // Remise a vide OBLIGATOIRE : fermer la fenetre sans double-cliquer ne
+                  // touche pas a SelectWin..., qui garderait sinon la reponse du choix
+                  // precedent.
+                  SelectWinCareerBonus        := '';
+                  FenSpecialisation           := TWinSpecialisations.Create(Application);
+                  FenSpecialisation.Position  := poOwnerFormCenter;
+                  FenSpecialisation.ShowModal;
+                  if SelectWinCareerBonus <> '' then
+                    if Trim(Personnage.Appartenance) = '' then
+                      Personnage.Appartenance := SelectWinCareerBonus
+                    else
+                      Personnage.Appartenance := Personnage.Appartenance + ',' + SelectWinCareerBonus;
+                end;
+
+              // Les APPARTENANCES (regiment, ordre, culte) greffent leurs competences et
+              // talents sur la carriere, "as if added to their Career". L'appel vient
+              // APRES les deux boucles ci-dessus, qui repartent d'une liste vide : place
+              // avant, il serait efface. CONTEXT.md 2.44.
+              PersonnageAppliqueGreffes(Personnage);
             end;
         end;
 
