@@ -6,6 +6,24 @@
 CORRECTIONS COURTES  (une ligne ou deux chacune)
 =========================================================================
 
+VERIFIER SI DISPO, CLASS, WEAPR ET ARMOT PASSENT PAR VERIFIERECHERCHE. Complement de
+l etape 3 du 2.49 (05/09/2026) : ARMOL y passe, c est etabli et documente. Les quatre autres
+vocabulaires fermes n ont pas ete verifies de la meme facon. A faire AVANT de trancher la
+conception de l etape 4, sinon on tranche sur un inventaire incomplet - c est exactement
+l erreur du recensement de la veille.
+
+WINPERSONNAGE L.3248 S APPUIE SUR LES VARIABLES GLOBALES DU DERNIER DECOUPE. Le test
+copy(CodeValeur,1,5) = copy(CodeRecherche,1,5) lit l etat laisse par l appel precedent a
+CompareRechercheValeur au lieu de comparer ses propres chaines. Sans effet aujourd hui, mais
+cet etat partage ne survivra pas au durcissement de VerifieRecherche. Repere le 05/09/2026
+(2.49 etape 3), a reecrire en meme temps que l etape 4.
+
+LES EXPORTS DE TABLES FILLES PEUVENT PERDRE DES LIGNES EN SILENCE. xmlexportimport.pas l.401,
+880 et 916 comparent la cle etrangere de la table fille (argument 1) a l id= du parent
+(argument 2) : si une table fille portait un code nu, aucune ligne fille ne serait exportee,
+sans message. Sain avec les donnees actuelles, verifie le 05/09/2026. A recontroler apres
+tout nouvel import de livre.
+
 LE SOFT KIT SIMPLE PORTE LA QUALITE "REINFORCED", COMME LE REINFORCED SOFT KIT. Archives III,
 ARCH3-ARMO_xx lignes 438 et 448 du XML : "Soft Kit" a ARMOB_08,ARCH3-ARMOB_09 et "Reinforced
 Soft Kit" a ARMOB_03,ARCH3-ARMOB_09,ARMOB_08 - la seule difference est Partial. Si ARMOB_09 est

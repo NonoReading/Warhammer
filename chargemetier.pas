@@ -180,8 +180,14 @@ Begin
           continue;
 
         Trouve := false;
+        // ORDRE DES ARGUMENTS : CompareRechercheValeur n'est PAS symetrique, sa
+        // tolerance au code nu ne porte que sur le SECOND argument. Le code dont
+        // on est sur (l'id= charge, donc prefixe) va en PREMIER, la reference a
+        // resoudre (ici un element de DejaAcquises, qui peut etre nu) en SECOND.
+        // Inverse, un acquis nu ne matchait aucun bonus prefixe et le bonus etait
+        // repropose alors qu'il etait deja pris, en silence. CONTEXT.md 2.49.
         for Ind := 0 to Acquis.Count - 1 do
-          if CompareRechercheValeur(Trim(Acquis[Ind]), PBonus.CodeBonus) then
+          if CompareRechercheValeur(PBonus.CodeBonus, Trim(Acquis[Ind])) then
             begin
               Trouve := true;
               break;

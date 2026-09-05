@@ -661,8 +661,16 @@ Function PdfPersonnageAttribut(Personnage: StructurePersonnage; Attribut: String
           end;
       end;
 
+    // ORDRE DES ARGUMENTS : meme sens que la boucle sur CreationAttribut plus haut.
+    // CompareRechercheValeur n'est pas symetrique, sa tolerance au code nu ne porte que
+    // sur le SECOND argument : le code stocke (prefixe a l'ecriture, chargepersonnage.pas)
+    // va en PREMIER, le parametre Attribut en SECOND. Il arrive nu depuis
+    // PdfPersonnageRemplaceBonus, qui passe les constantes ConstCaracXxx ('ATTR_WS'...) :
+    // en sens inverse aucune ligne ne matchait, Res.Augmentation restait a 0, et la valeur
+    // substituee dans les TEXTES du PDF etait amputee des augmentations achetees a l'XP
+    // (les tableaux, eux, passent un code prefixe et etaient justes). CONTEXT.md 2.49.
     For PersonnageAttribut in Personnage.AugmentationAttribut do
-      if CompareRechercheValeur(Attribut, PersonnageAttribut.CodeAttribut) then
+      if CompareRechercheValeur(PersonnageAttribut.CodeAttribut, Attribut) then
         Res.Augmentation := Res.Augmentation + PersonnageAttribut.Valeur;
 
     // Effets à delta pur des mutations obtenues (CONTEXT.md §2.7, étape 8) - même bucket que les

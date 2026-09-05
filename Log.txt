@@ -1330,3 +1330,46 @@ CE QUE LA SESSION A APPRIS.
 (4) L ECRITURE VERS LE POSTE S EST PERDUE UNE QUATRIEME FOIS, au deuxieme envoi de la journee,
     exactement comme decrit : succes annonce, date avancee, taille inchangee. Reemettre le meme
     envoi a suffi. Six autres envois dans la meme session sont passes du premier coup.
+
+05/09/2026 (SOIR) - ETAPE 3 DU 2.49 : LES 111 APPELS DE COMPARERECHERCHEVALEUR RECENSES,
+                    DEUX INVERSIONS CORRIGEES, ET L ETAPE 4 CHANGE DE NATURE
+   RECENSEMENT. 111 appels sur 16 unites (pdfpersonnage 26, winpersonnage 21,
+   chargepersonnage 19, wincreation 15, chargemetier 9, chargerace 8, le reste disperse).
+   Le critere de tri n est pas un "ordre canonique" mais la PROVENANCE de chaque argument :
+   la tolerance ne portant que sur le second, un appel est sain si l argument 1 est celui dont
+   on est sur qu il est prefixe (un id= charge), douteux si l argument 1 peut etre une
+   reference nue.
+   DEUX INVERSIONS REELLES, corrigees et testees sans regression.
+   - chargemetier.pas l.190, AppartenancesCandidates : le test "appartenance deja acquise ?"
+     comparait un element de DejaAcquises contre PBonus.CodeBonus prefixe. Correction de
+     ROBUSTESSE seulement : dans le flux normal, Personnage.Appartenance (balise MEMBERSHIP de
+     la fiche) est rempli depuis cette meme liste, donc deja prefixe.
+   - pdfpersonnage.pas l.673, PdfPersonnageAttribut : la boucle sur AugmentationAttribut
+     comparait dans le sens INVERSE de la boucle sur CreationAttribut cinquante lignes plus
+     haut - deux sens opposes sur le meme couple, dans la meme fonction. Les tableaux du PDF
+     passent un code prefixe et etaient justes ; PdfPersonnageRemplaceBonus passe les dix
+     constantes NUES ConstCaracXxx, donc Res.Augmentation restait a 0 et, comme
+     Res.Total = Res.Base + Res.Augmentation, la valeur substituee dans les TEXTES du PDF
+     etait amputee des augmentations achetees a l XP. Le PDF se contredisait lui-meme,
+     tableau contre texte.
+CE QUE LA SESSION A APPRIS.
+(1) UNE INCOHERENCE INTERNE VAUT MIEUX QU UNE REGLE SUPPOSEE. Les deux boucles opposees de
+    PdfPersonnageAttribut ont ete trouvees en comparant la fonction A ELLE-MEME, pas en
+    appliquant une convention : quand le meme couple est compare dans les deux sens a
+    cinquante lignes d ecart, l une des deux est fausse, sans rien savoir des donnees.
+(2) UNE HYPOTHESE DE BUG SE TESTE AVANT D ETRE ANNONCEE, ET SA PORTEE AUSSI. J ai d abord
+    annonce que les tableaux d augmentation du PDF seraient a zero ; Nono a repondu qu ils
+    s affichaient. C etait vrai : les tableaux passent un code prefixe. Le bug existait, mais
+    sur un AUTRE chemin d appel. Remonter les appelants AVANT de decrire un symptome, sinon
+    on fait tester le mauvais ecran.
+(3) UNE CORRECTION DE ROBUSTESSE DOIT ETRE ANNONCEE COMME TELLE. Pour chargemetier.pas j ai
+    demande un test que l ancien code passait aussi. Quand la chaine complete montre que les
+    deux cotes sont prefixes dans le flux normal, le dire : le test devient "pas de
+    regression", plus "regarde si le bug a disparu".
+(4) LE PREREQUIS DE L ETAPE 4 EST TOMBE DU MAUVAIS COTE. ARMOL PASSE bien par
+    VerifieRecherche : BonusTete/BonusBras/BonusCorps/BonusJambes (chargeconstantes.pas
+    l.394-397, valeurs 'ARMOL_HEAD'... NUES) arrivent en second argument depuis
+    chargepersonnage.pas l.1441 et 1467, appeles par pdfpersonnage.pas l.1721-1730 et
+    2900-2903. Un durcissement sec ferait disparaitre les points de protection d armure
+    donnes par les mutations et les talents. L etape 4 n est donc plus une correction mais une
+    decision de conception.

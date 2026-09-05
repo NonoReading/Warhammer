@@ -1,14 +1,17 @@
 # Warhammer — Contexte projet
 
-**Dernière mise à jour : 05/09/2026 (nuit) — le §2.49 est en grande partie CLOS : les cinq
-collisions de préfixe sont corrigées (23 références, pas six), `GetAllArmureBonusLibelle` est
-réécrite, et les références nues `ARMOB` / `WEAPB` sont toutes préfixées (374 lignes, 11 livres).
-Testé par Nono : qualités d'armures et d'armes correctes à l'écran et au PDF.**
+**Dernière mise à jour : 05/09/2026 (soir) — le §2.49 a maintenant ses étapes 1, 2, 3 et 5
+CLOSES. L'étape 3 a recensé les 111 appels de `CompareRechercheValeur` : deux inversions
+réelles, corrigées et testées sans régression (`chargemetier.pas` l.190,
+`pdfpersonnage.pas` l.673). Seule l'étape 4 reste.**
 
-PROCHAINE ÉTAPE : §2.49 étape 3 — recenser les points d'appel de `CompareRechercheValeur` et
-repérer ceux qui inversent leurs arguments — puis l'étape 4, durcir `VerifieRecherche`.
-⚠️ Avant de durcir : vérifier que les cinq vocabulaires fermés (`DISPO`, `CLASS`, `WEAPR`,
-`ARMOT`, `ARMOL`) ne passent pas par `VerifieRecherche`, sinon le durcissement les casse.
+PROCHAINE ÉTAPE : §2.49 étape 4 — durcir `VerifieRecherche`. ⚠️ MAIS le prérequis est
+tombé du mauvais côté : **`ARMOL` passe bien par `VerifieRecherche`** (constantes nues
+`BonusTete`/`BonusBras`/`BonusCorps`/`BonusJambes` de `chargeconstantes.pas` l.394-397,
+passées en second argument depuis `chargepersonnage.pas` l.1441 et 1467). Un durcissement
+sec casserait donc la protection d'armure donnée par les mutations et les talents. L'étape 4
+n'est plus une correction mais une **décision de conception** : exempter les vocabulaires
+fermés, ou préfixer ces quatre constantes et leurs données. À trancher avant d'écrire du code.
 Les points de reprise du chantier des appartenances (§2.44) sont INCHANGÉS : rendre
 l'appartenance visible sur la fiche et dans le PDF, le 3d-3 (ordres de chevalerie, bloqué par
 « le modèle ne porte pas d'effet de règle »), et les onze Regiments of Renown.
@@ -4868,7 +4871,7 @@ observable, `StrToIntDef` rendant 0 et le test exigeant `>= 1`. Corrigée en `2`
 lignes de commentaire pour que la borne 11 ne soit pas re-signalée comme un bug. 230 613
 octets.
 
-### 2.49 Les préfixes de livre dans les références — étapes 1, 2 et 5 TERMINÉES (05/09/2026) ; restent 3 et 4
+### 2.49 Les préfixes de livre dans les références — étapes 1, 2, 3 et 5 TERMINÉES (05/09/2026) ; reste 4
 
 **La règle du projet.** Chaque livre repart à 1 dans sa numérotation, précisément pour ne
 pas avoir à connaître le dernier numéro pris ailleurs. Cela n'est vrai que si les
@@ -4940,14 +4943,75 @@ visible au lieu d'un choix silencieux. Formes conservées : `RULES-WEAPB23 4` ga
 après l'espace, `RULES-WEAPB30/RULES-WEAPB12` préfixe chaque alternative. Vérifié côté
 **retraits** du diff : aucune ligne autre qu'un `<Quality>` n'a bougé. Testé par Nono à l'écran.
 
+#### Étape 3 — le recensement des points d'appel (FAIT le 05/09/2026)
+
+**111 appels** de `CompareRechercheValeur` sur 16 unités (`pdfpersonnage` 26,
+`winpersonnage` 21, `chargepersonnage` 19, `wincreation` 15, `chargemetier` 9,
+`chargerace` 8, puis `xmlexportimport`, `winspell`, `chargesort`, `chargearmebonus`,
+`chargearmurebonus`, `winarmor`, `winraces`, `winmutation`, `chargetalent`, `unitcalcul`).
+
+**Le critère qui trie**, à réutiliser tel quel pour toute relecture future : la tolérance
+ne porte que sur le SECOND argument, donc un appel est sain si l'argument **1** est celui
+dont on est sûr qu'il est préfixé (un `id=` chargé), et douteux si l'argument 1 peut être
+une **référence nue**. Ce n'est donc pas « l'ordre canonique » qu'il faut chercher, mais
+la provenance de chaque argument.
+
+**Deux inversions réelles, corrigées et testées sans régression par Nono :**
+
+- `chargemetier.pas` l.190, `AppartenancesCandidates` : le test « appartenance déjà
+  acquise ? » comparait un élément de `DejaAcquises` (potentiellement nu) contre
+  `PBonus.CodeBonus` préfixé. Correction de **robustesse** : dans le flux normal
+  `Personnage.Appartenance` (balise `MEMBERSHIP` de la fiche) est rempli depuis cette même
+  liste, donc déjà préfixé ; le bug ne se déclenchait que sur une fiche portant un code nu.
+  Ne pas chercher à le reproduire sans fabriquer ce cas à la main.
+- `pdfpersonnage.pas` l.673, `PdfPersonnageAttribut`, boucle sur `AugmentationAttribut` :
+  comparait dans le sens **inverse** de la boucle sur `CreationAttribut` cinquante lignes
+  plus haut — deux sens opposés sur le même couple, dans la même fonction. Les tableaux du
+  PDF passaient un `PAttribut.CodeAttribut` préfixé et étaient donc justes, mais
+  `PdfPersonnageRemplaceBonus` (l.463) passe les dix constantes **nues** `ConstCaracXxx` :
+  `Res.Augmentation` restait à 0 et, comme `Res.Total := Res.Base + Res.Augmentation`, la
+  valeur substituée dans les **textes** du PDF était amputée des augmentations achetées à
+  l'XP. Le PDF se contredisait donc lui-même, tableau contre texte.
+
+**Le reste est sain, mais pour des raisons qu'il faut connaître** (aucune n'est garantie
+par le code — c'est précisément l'objet de l'étape 4) :
+
+- `winpersonnage` 2927 / 3248 / 3814 : la grille `TabAttribut` porte des codes **nus**
+  (semés par `AttributInit` depuis les `ConstCaracXxx`), et ils sont systématiquement mis
+  en **second**. Correct, et ça ne tient qu'à ça.
+- `pdfpersonnage` 513-575, `chargesort` 86, `chargemetier` 298 : les deux côtés sont
+  préfixés dans les données actuelles (vérifié dans le XML pour `DATA_SPELL_TALENT`).
+- `xmlexportimport` 401 / 880 / 916 : clé étrangère d'une table fille en premier, `id=` du
+  parent en second. Si une table fille portait un code nu, **les lignes filles seraient
+  absentes de l'export**, en silence. À surveiller lors de tout nouvel import.
+- `chargepersonnage` 1295-1467 : le motif le plus répandu (code d'une table `*_MODIF` en
+  premier) ; sain tant que ces tables restent préfixées.
+- `winspell` 101-102 appelle déjà **dans les deux sens** : contournement conscient, déjà
+  commenté sur place. Trois autres endroits portaient déjà une alerte d'ordre
+  (`winpersonnage` 2336 et 2921, `winspell` 78) — la friction était connue localement bien
+  avant d'être vue comme un chantier.
+
+Point annexe à traiter en même temps que l'étape 4 : `winpersonnage.pas` l.3248 s'appuie sur
+`copy(CodeValeur,1,5) = copy(CodeRecherche,1,5)`, c'est-à-dire sur les **variables globales
+laissées par le dernier `Decoupe…`** — un état partagé qui ne survivra pas à un durcissement.
+
 #### Ce qui reste
 
-3. **Recenser les points d'appel de `CompareRechercheValeur`** et repérer ceux qui inversent
-   leurs arguments (référence nue en premier → aucun match, en silence). **C'est la prochaine
-   étape.**
 4. **Durcir `VerifieRecherche`** : une référence nue devient une erreur visible au lieu d'une
-   résolution au hasard. ⚠️ Vérifier D'ABORD que les cinq vocabulaires fermés ci-dessus ne
-   passent pas par ce chemin, sinon le durcissement les casse.
+   résolution au hasard.
+   ⚠️ **Le prérequis est tombé du mauvais côté, et cela change la nature de l'étape.** Le §2.49
+   supposait qu'il suffisait de vérifier que les cinq vocabulaires fermés ne passent pas par ce
+   chemin. **`ARMOL` y passe** : `BonusTete` / `BonusBras` / `BonusCorps` / `BonusJambes`
+   (`chargeconstantes.pas` l.394-397, valeurs `'ARMOL_HEAD'`… **nues**) sont passés en second
+   argument depuis `chargepersonnage.pas` l.1441 (`PersonnageMutationArmureModif`) et l.1467
+   (`PersonnageTalentArmureModif`), appelés par `pdfpersonnage.pas` l.1721-1730 et 2900-2903.
+   Un durcissement sec ferait donc **disparaître les points de protection d'armure donnés par
+   les mutations et les talents** (tête, bras, corps, jambes).
+   L'étape 4 n'est donc plus une correction mais une **décision de conception**, à trancher
+   avant d'écrire la moindre ligne : soit exempter explicitement les vocabulaires fermés du
+   durcissement, soit préfixer ces quatre constantes **et** les données qui les référencent.
+   Les quatre autres vocabulaires (`DISPO`, `CLASS`, `WEAPR`, `ARMOT`) n'ont pas encore été
+   vérifiés de la même façon — le faire avant de trancher.
 
 Deux fragilités relevées dans le code au passage, sans effet aujourd'hui, notées pour mémoire :
 `pdfpersonnage.pas` retire le paramètre d'une qualité par `copy(LocData,1,Length(LocData)-2)`,
