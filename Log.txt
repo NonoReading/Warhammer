@@ -1472,3 +1472,25 @@ CE QUE LA SESSION A APPRIS.
 (4) OBSERVER AVANT DE DURCIR PAYE. Le mouchard a coute une trentaine de lignes et a evite
     d ecrire un script de migration des anciennes fiches, devenu inutile des que Nono a dit
     qu il les supprimait.
+
+05/09/2026 - DEUX CHANTIERS CAPTURES DANS A FAIRE
+Aucun code touche. Deux demandes de Nono ecrites en tete de la section CONCEPTIONS A MENER
+d A FAIRE.txt, pour ne pas les perdre :
+(1) AFFICHER LES DISCLAIMERS DES LIVRES depuis un bouton du menu principal - quatre etapes
+    separees : recuperer le texte (TXT des deux repertoires avant tout PDF ; la page de
+    copyright est souvent une IMAGE perdue par l export), decider ou il est stocke (piste : un
+    champ dans chaque BOOK_*.Xml, pas de fichier a part), le charger, puis la fenetre. Lien
+    avec le champ OFFICIAL : le disclaimer est ce qui permettrait de confirmer le statut
+    officiel ou fan, aujourd hui saisi sur faisceau d indices.
+(2) GERER L ANCRAGE DES CONTROLES DANS LES FENETRES - etablir la regle d abord (ce qui
+    s etire, ce qui reste colle a un bord, ce qui garde sa taille), puis appliquer une fenetre
+    par point de compilation, en commencant par winpersonnage, winlivre et wincreation.
+    Interaction a tester avec le grossissement de police cumulatif du menu principal.
+LE PIEGE DE L ECRITURE PERDUE A ENCORE FRAPPE, une cinquieme fois, sur le deuxieme ajout :
+reponse "ecrit", date avancee, taille inchangee a 95366 au lieu de 96313. Reemission du meme
+envoi, puis controle par la taille : bon. La regle du 0 tient, ne jamais annoncer une
+livraison sur la seule reponse de l outil.
+A NETTOYER, REPERE CE JOUR : quatre .md parasites subsistent a la racine
+(CHANTIER_versionning_livres.md, CONCEPTION_creation_choix_talents.md,
+CONTEXT_MENU_INTEGRATION.md, REPRISE_session_20260809.md). A distiller dans CONTEXT.md puis
+supprimer - meme famille que les CHANGELOG.md / TODO.md retires le 03/09.

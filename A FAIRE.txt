@@ -6,6 +6,12 @@
 CORRECTIONS COURTES  (une ligne ou deux chacune)
 =========================================================================
 
+DISTILLER PUIS SUPPRIMER LES QUATRE .MD PARASITES DE LA RACINE. Repere le 05/09/2026 :
+CHANTIER_versionning_livres.md, CONCEPTION_creation_choix_talents.md,
+CONTEXT_MENU_INTEGRATION.md, REPRISE_session_20260809.md. Meme famille que les CHANGELOG.md et
+TODO.md retires le 03/09 : ce qui est encore vrai va dans CONTEXT.md, ce qui reste a faire ici,
+puis on supprime. Il ne doit rester que CONTEXT.md, Log.txt et A FAIRE.txt.
+
 RETIRER LE MOUCHARD DES REFERENCES NUES QUAND L ETAPE 4 DU 2.49 SERA CLOSE. Pose le
 05/09/2026 : TraceNuNb / TraceNuListe / TraceNuRaz / TraceNuRapport / TraceNuEcritFichier dans
 chargeconstantes.pas, la branche tolerante de VerifieRecherche qui les alimente, et l appel en
@@ -241,6 +247,35 @@ A reprendre avec le morceau "creatures" du lot 3 si on veut de vraies creatures.
 =========================================================================
 CONCEPTIONS A MENER  (chantiers a part entiere, ne pas les melanger)
 =========================================================================
+
+GERER L ANCRAGE DES CONTROLES DANS LES FENETRES. Demande de Nono le 05/09/2026. Aujourd hui
+les fenetres sont posees en coordonnees fixes : redimensionner ne redistribue rien, les
+tableaux ne suivent pas la hauteur et les boutons restent colles en haut a gauche. A reprendre
+fenetre par fenetre (Anchors / Align / Constraints des .lfm), pas toutes d un coup :
+ 1. Etablir la regle d abord, une fois pour toutes : ce qui s etire (grilles, memos), ce qui
+    reste colle a un bord (barres de boutons), ce qui garde sa taille (libelles, cases).
+ 2. Puis appliquer, une fenetre par point de compilation, en commencant par les plus utilisees
+    (winpersonnage, winlivre, wincreation).
+Point d attention : le grossissement de police cumulatif du menu principal (voir plus bas dans
+ce fichier) interagit avec l ancrage - un controle ancre et une police agrandie peuvent se
+chevaucher la ou les coordonnees fixes le cachaient. Tester les deux ensemble.
+
+AFFICHER LES DISCLAIMERS DES LIVRES DEPUIS LE MENU PRINCIPAL. Demande de Nono le
+05/09/2026. Quatre etapes distinctes, a ne pas melanger :
+ 1. RECUPERER le texte de disclaimer / copyright / mention Community Content de chaque livre.
+    Chercher d abord dans les TXT des deux repertoires (LIVRES et PDF_TEXTE) avant d ouvrir un
+    PDF, regle du CONTEXT.md 0. Attention : la page de copyright est souvent une IMAGE que
+    l export TXT a perdue - c est deja le cas de Nations of Mankind.
+ 2. DECIDER OU IL EST STOCKE. Un champ dans le bloc de description du livre de chaque
+    BOOK_*.Xml semble le plus coherent avec le reste de la base (pas de fichier a part). A
+    trancher avec la question de la langue : le disclaimer est en anglais dans tous les cas,
+    faut-il le marquer language ENGLISH ou le laisser hors langue ?
+ 3. LE LIRE au chargement, comme les autres donnees de livre.
+ 4. UN BOUTON DU MENU PRINCIPAL qui ouvre une fenetre listant les livres et affichant le
+    disclaimer du livre choisi.
+Lien avec le champ OFFICIAL existant : le disclaimer est justement ce qui permettrait de
+CONFIRMER le statut officiel ou fan d un livre, aujourd hui saisi sur faisceau d indices
+(cas ouvert de Nations of Mankind, saisi OFFICIAL=2 a confirmer).
 
 UNE LIGNE D EQUIPEMENT DOIT DIRE SI ELLE EST EQUIPEE OU NON. Constate le 05/09/2026 : deux
 casques poses dans l equipement CUMULENT leurs Points d Armure sur la tete, alors qu on n en

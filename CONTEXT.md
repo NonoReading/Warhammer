@@ -17,6 +17,10 @@ PROCHAINE ÉTAPE : §2.49 étape 4, mais **deux arbitrages avant d'écrire une l
    migration qu'on s'apprêtait à faire.
 Le mouchard (`TRACE_references_nues.txt`) est **à retirer** une fois l'étape 4 close : il est
 jetable, ce n'est pas un fichier de suivi du projet.
+Deux chantiers ont été **capturés dans `A FAIRE.txt`** le 05/09 (section CONCEPTIONS A MENER),
+sans une ligne de code : l'affichage des **disclaimers des livres** depuis un bouton du menu
+principal, et la **gestion de l'ancrage des contrôles** dans les fenêtres. Ni l'un ni l'autre
+ne change le point de reprise ci-dessus.
 Les points de reprise du chantier des appartenances (§2.44) sont INCHANGÉS : rendre
 l'appartenance visible sur la fiche et dans le PDF, le 3d-3 (ordres de chevalerie, bloqué par
 « le modèle ne porte pas d'effet de règle »), et les onze Regiments of Renown.
