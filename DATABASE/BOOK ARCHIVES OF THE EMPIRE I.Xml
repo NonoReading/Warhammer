@@ -21,7 +21,7 @@
 <Description language="ENGLISH">"Ghost Strider"</Description>
 <Explanation language="ENGLISH">"The forests are ancient and deadly, a haven for bandits and dangerous outcasts. They teem with natural predators such as bears, wolves and giant spiders. If, somehow, these threats weren’t enough to hurry a traveller on their way, there is no shortage of wholly unnatural creatures either, such as foul trolls, Beastman herds, or the walking dead. But perhaps the deadliest threat of all is the Ghost Strider. Even the city-born High Elves respect the beauty of nature, and Wood Elves are renowned for the ferocity with which they defend their lands. The Ghost Strider epitomises this defence. Master archers, they hunt all threats to the natural world with a determination and skill that would be terrifying to behold, if not for their almost supernatural speed and silence. Ghost Striders are so attuned to the natural world that nature itself seems to hide their passage from prying eyes. Indeed, so devoted are they to their task that even other Wood Elves consider them intimidating, perhaps skirting closer to obsession than is healthy for an intensely emotional people."</Explanation>
 <Skill>"RULES-COMPPROJ_ARC"</Skill>
-<Class>"CLASS_RANG"</Class>
+<Class>"RULES-CLASS_RANG"</Class>
 <SUBCHAPTER_LEVEL>
 <Level id="1">
 <Description language="ENGLISH">"Forest Ranger"</Description>
@@ -151,7 +151,7 @@
 <Description language="ENGLISH">"Fieldwarden"</Description>
 <Explanation language="ENGLISH">"Halflings prefer militias to standing armies, and have little apparent military strength to those unfamiliar with their ways. Visitors to the Moot often wonder at how the countryside and villages remain so peaceful and idyllic despite sharing a border with dread Sylvania where the dead never rest, with no obvious armies to repel them. A large part of the credit for this goes to the Field Wardens. These brave halflings patrol the borders of the Moot, using their intimate knowledge of the terrain and cunning guerrilla tactics to deter unwanted visitors. A Field Warden is first and foremost a Halfling of the people, a friendly face to reassure the public that all is well. They know every family in their area (and which baked treats they are likely to serve a Field Warden who happens to be passing by around tea time). It is a highly respected position, and any Field Warden can expect a busy off-duty calendar as families invite them to Bakeday meals, wedding feasts, funeral remembrance dinners or pie eating competitions."</Explanation>
 <Skill>"RULES-COMPPROJ_FROND"</Skill>
-<Class>"CLASS_RANG"</Class>
+<Class>"RULES-CLASS_RANG"</Class>
 <SUBCHAPTER_LEVEL>
 <Level id="1">
 <Description language="ENGLISH">"Novice Warden"</Description>
@@ -280,7 +280,7 @@
 <Description language="ENGLISH">"Karak Ranger"</Description>
 <Explanation language="ENGLISH">"The remote mountain strongholds of the dwarfs are protected by all manner of dangerous terrain both above and below ground. A landslide might render a surface route impassable, and every year more underground territory is lost to the greenskins, or a once-safe bridge is torn down by the relentless gnawing of the Raki. It is the duty of the Karak Ranger to patrol these routes and keep them safe, or establish new paths where an old one has become too dangerous. A Karak Rangers survival hinges on preparedness; there is little company or comfort to be found along the ancient dark tunnels or secret mountain passes, and even less chance of help should he encounter danger. One must be prepared to leap large chasms, climb sheer surfaces, or cross large bodies of water (or sewage, or even lava), depending on the route. Every bush, every shadow, may contain dangers, waiting to pounce. A Karak Ranger must be tough and adaptable to survive, by turns able to hunt, scout, and fight, or even repair a bridge mid-expedition."</Explanation>
 <Skill>"RULES-COMPMETIER_CARTO"</Skill>
-<Class>"CLASS_RANG"</Class>
+<Class>"RULES-CLASS_RANG"</Class>
 <SUBCHAPTER_LEVEL>
 <Level id="1">
 <Description language="ENGLISH">"Hold Runner"</Description>
@@ -404,7 +404,7 @@
 <Description language="ENGLISH">"Badger Rider"</Description>
 <Explanation language="ENGLISH">"The origin of the Badger Rider is puzzled over by the few scholars that have been told of them by trustworthy Halfling sources. Perhaps a Halfling was inspired by the noble knights of Bretonnia on their magnificent war horses. Some argue that it was a counter to savage Orcs riding upon their equally fearsome (and, it is often agreed, equally smelly) war-boars. Others still claim the whole thing began as a drunken bet that got completely out of hand. The truth of the matter may never be known, but those same scholars all agree — their reported effectiveness in battle is quite literally incredible. Badgers are highly social and share underground homes which they keep impeccably tidy, virtues greatly respected by Halflings. Observers might add that when threatened, both species become astonishingly ferocious, capable of taking on much larger opponents."</Explanation>
 <Skill>"RULES-COMPDRESS_BADGERS"</Skill>
-<Class>"CLASS_WARR"</Class>
+<Class>"RULES-CLASS_WARR"</Class>
 <SUBCHAPTER_LEVEL>
 <Level id="1">
 <Description language="ENGLISH">"Badger Botherer"</Description>
@@ -535,8 +535,8 @@
 <Description language="ENGLISH">"Eonir War Blade"</Description>
 <Skill>"RULES-COMPCOMB_BASE"</Skill>
 <Damage>"+(BATTR_S)+3"</Damage>
-<Availability>"DISPO_LIMITED"</Availability>
-<Reach>"WEAPR_MID"</Reach>
+<Availability>"RULES-DISPO_LIMITED"</Availability>
+<Reach>"RULES-WEAPR_MID"</Reach>
 <Price>"3co"</Price>
 <Encumbrance>"0"</Encumbrance>
 <Quality>"RULES-WEAPB14"</Quality>
@@ -547,8 +547,8 @@
 <Description language="ENGLISH">"Eonir Spear"</Description>
 <Skill>"RULES-COMPCOMB_HAST"</Skill>
 <Damage>"+(BATTR_S)+4"</Damage>
-<Availability>"DISPO_COMMON"</Availability>
-<Reach>"WEAPR_LONG"</Reach>
+<Availability>"RULES-DISPO_COMMON"</Availability>
+<Reach>"RULES-WEAPR_LONG"</Reach>
 <Price>"26c"</Price>
 <Encumbrance>"1"</Encumbrance>
 <Quality>"RULES-WEAPB22"</Quality>
@@ -559,8 +559,8 @@
 <Description language="ENGLISH">"Wildwood Sword"</Description>
 <Skill>"RULES-COMPCOMB_2M"</Skill>
 <Damage>"+(BATTR_S)+4"</Damage>
-<Availability>"DISPO_LIMITED"</Availability>
-<Reach>"WEAPR_LONG"</Reach>
+<Availability>"RULES-DISPO_LIMITED"</Availability>
+<Reach>"RULES-WEAPR_LONG"</Reach>
 <Price>"10GC"</Price>
 <Encumbrance>"2"</Encumbrance>
 <Quality>"RULES-WEAPB10,RULES-WEAPB20"</Quality>
@@ -571,8 +571,8 @@
 <Description language="ENGLISH">"Bearded Axe"</Description>
 <Skill>"RULES-COMPCOMB_BASE"</Skill>
 <Damage>"+(BATTR_S)+4"</Damage>
-<Availability>"DISPO_COMMON"</Availability>
-<Reach>"WEAPR_MID"</Reach>
+<Availability>"RULES-DISPO_COMMON"</Availability>
+<Reach>"RULES-WEAPR_MID"</Reach>
 <Price>"1GC"</Price>
 <Encumbrance>"2"</Encumbrance>
 <Quality>"RULES-WEAPB11"</Quality>
@@ -583,8 +583,8 @@
 <Description language="ENGLISH">"Dwarf Hammer"</Description>
 <Skill>"RULES-COMPCOMB_BASE"</Skill>
 <Damage>"+(BATTR_S)+4"</Damage>
-<Availability>"DISPO_LIMITED"</Availability>
-<Reach>"WEAPR_MID"</Reach>
+<Availability>"RULES-DISPO_LIMITED"</Availability>
+<Reach>"RULES-WEAPR_MID"</Reach>
 <Price>"3GC"</Price>
 <Encumbrance>"2"</Encumbrance>
 <Quality>"RULES-WEAPB04"</Quality>
@@ -595,8 +595,8 @@
 <Description language="ENGLISH">"Slayer’s Axe"</Description>
 <Skill>"RULES-COMPCOMB_2M"</Skill>
 <Damage>"+(BATTR_S)e6"</Damage>
-<Availability>"DISPO_LIMITED"</Availability>
-<Reach>"WEAPR_LONG"</Reach>
+<Availability>"RULES-DISPO_LIMITED"</Availability>
+<Reach>"RULES-WEAPR_LONG"</Reach>
 <Price>"12Gc"</Price>
 <Encumbrance>"4"</Encumbrance>
 <Quality>"RULES-WEAPB21,RULES-WEAPB22"</Quality>
@@ -607,8 +607,8 @@
 <Description language="ENGLISH">"Nan’s Cleaver"</Description>
 <Skill>"RULES-COMPCOMB_BASE"</Skill>
 <Damage>"+(BATTR_S)+3"</Damage>
-<Availability>"DISPO_COMMON"</Availability>
-<Reach>"WEAPR_MID"</Reach>
+<Availability>"RULES-DISPO_COMMON"</Availability>
+<Reach>"RULES-WEAPR_MID"</Reach>
 <Price>"1GC"</Price>
 <Encumbrance>"1"</Encumbrance>
 <Quality>"RULES-WEAPB30"</Quality>
@@ -619,8 +619,8 @@
 <Description language="ENGLISH">"Iron Skillet"</Description>
 <Skill>"RULES-COMPCOMB_BASE"</Skill>
 <Damage>"+(BATTR_S)+3"</Damage>
-<Availability>"DISPO_COMMON"</Availability>
-<Reach>"WEAPR_MID"</Reach>
+<Availability>"RULES-DISPO_COMMON"</Availability>
+<Reach>"RULES-WEAPR_MID"</Reach>
 <Price>"1GC"</Price>
 <Encumbrance>"1"</Encumbrance>
 <Quality>"RULES-WEAPB08"</Quality>
@@ -631,7 +631,7 @@
 <Description language="ENGLISH">"Dwarf Handgun"</Description>
 <Skill>"RULES-COMPPROJ_POUDRE"</Skill>
 <Damage>"+8"</Damage>
-<Availability>"DISPO_RARE"</Availability>
+<Availability>"RULES-DISPO_RARE"</Availability>
 <Reach>"30"</Reach>
 <Price>"9GC"</Price>
 <Encumbrance>"2"</Encumbrance>
@@ -643,7 +643,7 @@
 <Description language="ENGLISH">"Dwarf Pistol"</Description>
 <Skill>"RULES-COMPPROJ_POUDRE"</Skill>
 <Damage>"+8"</Damage>
-<Availability>"DISPO_RARE"</Availability>
+<Availability>"RULES-DISPO_RARE"</Availability>
 <Reach>"30"</Reach>
 <Price>"18GC"</Price>
 <Encumbrance>"1"</Encumbrance>
@@ -655,7 +655,7 @@
 <Description language="ENGLISH">"Dwarf Crossbow"</Description>
 <Skill>"RULES-COMPPROJ_ARB"</Skill>
 <Damage>"+9"</Damage>
-<Availability>"DISPO_RARE"</Availability>
+<Availability>"RULES-DISPO_RARE"</Availability>
 <Reach>"80"</Reach>
 <Price>"9GC"</Price>
 <Encumbrance>"3"</Encumbrance>
@@ -667,7 +667,7 @@
 <Description language="ENGLISH">"Drakefire Pistol"</Description>
 <Skill>"RULES-COMPPROJ_ING"</Skill>
 <Damage>"+8"</Damage>
-<Availability>"DISPO_EXOTIC"</Availability>
+<Availability>"RULES-DISPO_EXOTIC"</Availability>
 <Reach>"20"</Reach>
 <Price>"25GC"</Price>
 <Encumbrance>"1"</Encumbrance>
@@ -679,7 +679,7 @@
 <Description language="ENGLISH">"Cinderblast Bomb"</Description>
 <Skill>"RULES-COMPPROJ_EXPLO"</Skill>
 <Damage>"+14"</Damage>
-<Availability>"DISPO_EXOTIC"</Availability>
+<Availability>"RULES-DISPO_EXOTIC"</Availability>
 <Reach>"(BATTR_S)"</Reach>
 <Price>"3GC"</Price>
 <Encumbrance>"0"</Encumbrance>
@@ -691,7 +691,7 @@
 <Description language="ENGLISH">"Blackbriar Javelin"</Description>
 <Skill>"RULES-COMPPROJ_LANC"</Skill>
 <Damage>"+(BATTR_S)+3"</Damage>
-<Availability>"DISPO_EXOTIC"</Availability>
+<Availability>"RULES-DISPO_EXOTIC"</Availability>
 <Reach>"(BATTR_S)x3"</Reach>
 <Price>"2GC"</Price>
 <Encumbrance>"1"</Encumbrance>
@@ -711,7 +711,7 @@
 <Description language="ENGLISH">"Drakefire Shot"</Description>
 <Skill>"RULES-COMPPROJ_POUDRE/RULES-COMPPROJ_ING"</Skill>
 <Damage>"+2"</Damage>
-<Availability>"DISPO_RARE"</Availability>
+<Availability>"RULES-DISPO_RARE"</Availability>
 <Reach>"+0"</Reach>
 <Price>"4/-"</Price>
 <Encumbrance>"0"</Encumbrance>
@@ -723,7 +723,7 @@
 <Description language="ENGLISH">"Precision Shot and Powder"</Description>
 <Skill>"RULES-COMPPROJ_POUDRE/RULES-COMPPROJ_ING"</Skill>
 <Damage>"+1"</Damage>
-<Availability>"DISPO_COMMON"</Availability>
+<Availability>"RULES-DISPO_COMMON"</Availability>
 <Reach>"+0"</Reach>
 <Price>"3SC"</Price>
 <Encumbrance>"0"</Encumbrance>
@@ -735,7 +735,7 @@
 <Description language="ENGLISH">"Starfire Shafts"</Description>
 <Skill>"RULES-COMPPROJ_ARC"</Skill>
 <Damage>"-"</Damage>
-<Availability>"DISPO_EXOTIC"</Availability>
+<Availability>"RULES-DISPO_EXOTIC"</Availability>
 <Reach>"+50"</Reach>
 <Price>"8/-"</Price>
 <Encumbrance>"0"</Encumbrance>
@@ -747,7 +747,7 @@
 <Description language="ENGLISH">"Swiftshiver Shafts"</Description>
 <Skill>"RULES-COMPPROJ_ARC"</Skill>
 <Damage>"+1"</Damage>
-<Availability>"DISPO_COMMON"</Availability>
+<Availability>"RULES-DISPO_COMMON"</Availability>
 <Reach>"+0"</Reach>
 <Price>"6/-"</Price>
 <Encumbrance>"0"</Encumbrance>

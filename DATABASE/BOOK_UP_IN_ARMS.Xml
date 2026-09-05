@@ -486,7 +486,7 @@ Ifthe Character passes the Test, the crew members may then use the Characters Ra
 <Description language="ENGLISH">"Archer"</Description>
 <Explanation language="ENGLISH">"Employing strength and skill in equal measure, you bring finesse and accuracy to the battlefield. Respected for their skill and command of the battlefield or disdained for their unwillingness to get involved in the nitty gritty, archers pride themselves on being apart from (and even better than) the usual rabble that joins the army. Anyone can hold a halberd or fire a handgun, they say, but it takes years of training to be an archer."</Explanation>
 <Skill>"RULES-COMPPROJ_ARC"</Skill>
-<Class>"CLASS_WARR"</Class>
+<Class>"RULES-CLASS_WARR"</Class>
 <SUBCHAPTER_LEVEL>
 <Level id="1">
 <Description language="ENGLISH">"Bowman"</Description>
@@ -619,7 +619,7 @@ Ifthe Character passes the Test, the crew members may then use the Characters Ra
 <Description language="ENGLISH">"Greatsword"</Description>
 <Explanation language="ENGLISH">"Skilfully wielding your vicious zweihänder, you are the greatest of all the Empires foot soldiers. Greatswords are the signature elite infantry of the Imperial armies, the most prestigious and feared of all the Empire’ foot soldiers. They forsake the shield to wield huge zweihänder swords, ensuring their combats are short and deadly whichever way they go. Their large, two-handed weapons are unwieldy, so Greatswords need to be swift and athletic to compensate. For this reason, they dress in a much looser formation than other foot soldiers."</Explanation>
 <Skill>"RULES-COMPCOMB_2M"</Skill>
-<Class>"CLASS_WARR"</Class>
+<Class>"RULES-CLASS_WARR"</Class>
 <SUBCHAPTER_LEVEL>
 <Level id="1">
 <Description language="ENGLISH">"Greatsword Cadet"</Description>
@@ -754,7 +754,7 @@ Ifthe Character passes the Test, the crew members may then use the Characters Ra
 <Description language="ENGLISH">"Halberdier"</Description>
 <Explanation language="ENGLISH">"Famously reliable, you are a stalwart of the infantry, and not do be trifled with. The mainstay of all Imperial armies, Halberdiers are found in forces the length and breadth of the Empire, and beyond. They have a reputation for reliability and grit and make a formidable sight on the field of battle, massed closely together with their imposing weapons. ‘The Halberdier takes heart from fighting in large groups of tightly formed units, where they benefit from the reach of the halberd while not suffering too much from a lack of manoeuvrability."</Explanation>
 <Skill>"RULES-COMPCOMB_HAST"</Skill>
-<Class>"CLASS_WARR"</Class>
+<Class>"RULES-CLASS_WARR"</Class>
 <SUBCHAPTER_LEVEL>
 <Level id="1">
 <Description language="ENGLISH">"Halberdier Recruit"</Description>
@@ -885,7 +885,7 @@ Ifthe Character passes the Test, the crew members may then use the Characters Ra
 <Description language="ENGLISH">"Handgunner"</Description>
 <Explanation language="ENGLISH">"Wielding a handgun, you bring death to your enemies from  “Ihey are unreliable, noisy, full of hot air, and they leave a long range — or at least put the fear of Sigmar into them. foul smell behind them. And their guns aren’t much better” — Holger Kass, 1st Bôgenhafen Halberdiers The Handgunner is a comparative newcomer to the Imperial army. Though they have been around for hundreds of years, they are not yet entirely trusted by the rest of the military. Even so, as technology advances, they have become increasingly effective on the battlefield and are fielded in the Imperial armies in ever greater numbers."</Explanation>
 <Skill>"RULES-COMPPROJ_POUDRE"</Skill>
-<Class>"CLASS_WARR"</Class>
+<Class>"RULES-CLASS_WARR"</Class>
 <SUBCHAPTER_LEVEL>
 <Level id="1">
 <Description language="ENGLISH">"Handgunner Recruit"</Description>
@@ -1013,7 +1013,7 @@ Ifthe Character passes the Test, the crew members may then use the Characters Ra
 <Description language="ENGLISH">"Artillerist"</Description>
 <Explanation language="ENGLISH">"You bring the big guns to the fight. You maintain and fire I baven*t noticed any smell of manure — why is it even artillery and understand the best use of blackpowder. relevant? - Ludmilla Krabbe, old artillerist on being The pride and joy of the Empire, its artillery is famed asked about the noise of battle for an awe-inspiring spectacle that strikes fear into the heart of all her enemies. However, artillery regiments do not possess the glamour of the knightly orders or the Greatswords. It is hard graft involving heavy lifting, fetching, carrying, and tedious excavation. Despite this, it is vital to the Empires war effort and artillerists see themselves as the unsung heroes of the Empire’s armies."</Explanation>
 <Skill>"RULES-COMPPROJ_ARB/RULES-COMPPROJ_ING/RULES-COMPPROJ_POUDRE/RULES-COMPPROJ_CATAPULT"</Skill>
-<Class>"CLASS_ACAD"</Class>
+<Class>"RULES-CLASS_ACAD"</Class>
 <SUBCHAPTER_LEVEL>
 <Level id="1">
 <Description language="ENGLISH">"Apprentice Artillerist"</Description>
@@ -1144,7 +1144,7 @@ Ifthe Character passes the Test, the crew members may then use the Characters Ra
 <Description language="ENGLISH">"Camp Follower"</Description>
 <Explanation language="ENGLISH">"You accompany armies on campaign, looking for adventure, protection, or just an an gle. The logistics of military manoeuvres can be near incomprehensible. Like mobile cities, the armies of the Old World rely on complex supply chains and strict organisation to keep them fed and supplied. Much of this is directly under the remit of the army. But private enterprise is always on the lookout for profit, so much of any army will be made up of an eclectic band of hangers on, pedlars, bawds, tradespeople, artisans, and charlatans. Many of these can be described using other careers, but those dedicated to following the troops without any specific trade or vocation come under the auspices of Camp Follower."</Explanation>
 <Skill>"RULES-COMPSURVEXT"</Skill>
-<Class>"CLASS_RANG"</Class>
+<Class>"RULES-CLASS_RANG"</Class>
 <SUBCHAPTER_LEVEL>
 <Level id="1">
 <Description language="ENGLISH">"Ribaud"</Description>
@@ -1270,7 +1270,7 @@ Ifthe Character passes the Test, the crew members may then use the Characters Ra
 <Description language="ENGLISH">"Cartographer"</Description>
 <Explanation language="ENGLISH">"You are hired to survey and map far flung locations. The more the area is in need of mapping, the more dangerous the job is likely to be. As the world gets more sophisticated there is a need to map it in increasing detail. Whether this involves exploring largely unknown lands and making sweeping maps of the general area or going into exacting detail over small tracts in petty land disputes, cartographers are increasingly in demand."</Explanation>
 <Skill>"RULES-COMPART_CARTO"</Skill>
-<Class>"CLASS_ACAD"</Class>
+<Class>"RULES-CLASS_ACAD"</Class>
 <SUBCHAPTER_LEVEL>
 <Level id="1">
 <Description language="ENGLISH">"Surveyor"</Description>
@@ -1396,7 +1396,7 @@ Ifthe Character passes the Test, the crew members may then use the Characters Ra
 <Description language="ENGLISH">"Freelance"</Description>
 <Explanation language="ENGLISH">"You pursue the life of the knight, but without the obligations to, or the protection of; a Knightly Order. Not all knights belong to an order, there are those who are knighted independently by a noble, others declare themselves a knight, and there are some who leave (or are thrown out.) of an Order to forge their own path. These are known as ‘freelancers’, knights who fight for coin, honour, or some peculiar motive of their own. Some are hardened mercenaries or little better than bandits. Others are champions of the downtrodden or selfless unsung heroes of the people."</Explanation>
 <Skill>"RULES-COMPCOMB_CAVAL"</Skill>
-<Class>"CLASS_WARR"</Class>
+<Class>"RULES-CLASS_WARR"</Class>
 <SUBCHAPTER_LEVEL>
 <Level id="1">
 <Description language="ENGLISH">"Squire"</Description>
@@ -1530,7 +1530,7 @@ Ifthe Character passes the Test, the crew members may then use the Characters Ra
 <Description language="ENGLISH">"Knight of the Blazing Sun"</Description>
 <Explanation language="ENGLISH">"You embody the values of Myrmidia and ride at the forefront of her templar knights. The Knights of the Blazing Sun are templars of Myrmidia and the goddess’ largest Order in the Empire. They have a good reputation, but suspicion surrounds knights dedicated to a war goddess often regarded as foreign to the Empire. The Order favours nobles who are willing to declare their faith in Myrmidia and rise above petty inter-cult rivalries. À wealthy Order, a steady stream of gold flows into their vaults from Tilea and Estalia and expeditions further afield."</Explanation>
 <Skill>"RULES-COMPCOMB_CAVAL"</Skill>
-<Class>"CLASS_WARR"</Class>
+<Class>"RULES-CLASS_WARR"</Class>
 <SUBCHAPTER_LEVEL>
 <Level id="1">
 <Description language="ENGLISH">"Novice"</Description>
@@ -1666,7 +1666,7 @@ Ifthe Character passes the Test, the crew members may then use the Characters Ra
 <Description language="ENGLISH">"Knight of the White Wolf"</Description>
 <Explanation language="ENGLISH">"You embody the ferocity and strength of the god of battle, wolves and winter. There are few sights more evocative of the Ulrican faith than that of a heavily armoured and heroically hirsute knight galloping into battle swinging a cavalry hammer. The Knights of the White Wolf are the largest templar order in the Empire, charged with protecting Ulric’s holy sites wherever they are found."</Explanation>
 <Skill>"RULES-COMPCOMB_CAVAL"</Skill>
-<Class>"CLASS_WARR"</Class>
+<Class>"RULES-CLASS_WARR"</Class>
 <SUBCHAPTER_LEVEL>
 <Level id="1">
 <Description language="ENGLISH">"Novice"</Description>
@@ -1801,7 +1801,7 @@ Ifthe Character passes the Test, the crew members may then use the Characters Ra
 <Description language="ENGLISH">"Knight Panther"</Description>
 <Explanation language="ENGLISH">"You are dedicated to ensuring the fidelity of the Empire and defending it from Chaos. The Knights Panther are the most widespread secular order in the Empire, second only to the Reiksguard in power. They are not aligned with any province and will lend military aid to any general or leaders deserving of their support."</Explanation>
 <Skill>"RULES-COMPCOMB_CAVAL"</Skill>
-<Class>"CLASS_WARR"</Class>
+<Class>"RULES-CLASS_WARR"</Class>
 <SUBCHAPTER_LEVEL>
 <Level id="1">
 <Description language="ENGLISH">"Squire"</Description>
@@ -1938,7 +1938,7 @@ Ifthe Character passes the Test, the crew members may then use the Characters Ra
 <Description language="ENGLISH">"Light Cavalry"</Description>
 <Explanation language="ENGLISH">"You rely on speed to find the enemy, screen your allies from his scouts, and strike without warning where he least expects. With fewer heavily armed and armoured knights than the Empire, Tilean mercenary armies rely on fast, lightly armed horsemen to provide mobile striking power. Rather than charge headlong into the teeth — and pikes — of the foe, Tilean light cavalrymen, called S#radioti in their language, prefer to strike from the flanks or, best of all, the rear, where the enemy’s baggage train presents a tempting target."</Explanation>
 <Skill>"RULES-COMPCHEV_CHEVAL"</Skill>
-<Class>"CLASS_WARR"</Class>
+<Class>"RULES-CLASS_WARR"</Class>
 <SUBCHAPTER_LEVEL>
 <Level id="1">
 <Description language="ENGLISH">"Reiver"</Description>
@@ -2073,7 +2073,7 @@ Ifthe Character passes the Test, the crew members may then use the Characters Ra
 <Description language="ENGLISH">"Siege Specialist"</Description>
 <Explanation language="ENGLISH">"Ît is your job to bring down castle walls and to kecp others from doing so. Let other poor fools storm the walls — you’Il provide cover, or a more subtle way in. Though besieging fortified places is common throughout the Old World — an art Humans learned from the Dwarfs — it has reached its highest refinement in T’ilea, whose Siege Specialists even Dwarfs will grudgingly admit are ‘passable’."</Explanation>
 <Skill>"RULES-COMPPROJ_ARB"</Skill>
-<Class>"CLASS_WARR"</Class>
+<Class>"RULES-CLASS_WARR"</Class>
 <SUBCHAPTER_LEVEL>
 <Level id="1">
 <Description language="ENGLISH">"Crossbowman"</Description>
@@ -2210,7 +2210,7 @@ Ifthe Character passes the Test, the crew members may then use the Characters Ra
 <Description language="ENGLISH">"Pikeman"</Description>
 <Explanation language="ENGLISH">"Discipline and drill. If you keep your wits about you and the enemy in front, no force on a battlefield, not even the heaviest Imperial Knights, can stop a phalanx of Pikemen. All towns and villages in the Old World have their militias, masses of armed residents who can be turned out on short notice to defend homes and fields or fight for a few weeks in their lord’s service. Their lack of discipline and desire to return home to families and trades, however, makes them of limited use on long campaigns or when facing heavily armed and armoured horsemen."</Explanation>
 <Skill>"RULES-COMPCOMB_HAST"</Skill>
-<Class>"CLASS_WARR"</Class>
+<Class>"RULES-CLASS_WARR"</Class>
 <SUBCHAPTER_LEVEL>
 <Level id="1">
 <Description language="ENGLISH">"Recruit"</Description>
@@ -2346,7 +2346,7 @@ Ifthe Character passes the Test, the crew members may then use the Characters Ra
 <Description language="ENGLISH">"Priest of Myrmidia"</Description>
 <Explanation language="ENGLISH">"You value honour, obedience and tactical martial prowess, in emulation of your patron goddess, Myrmidia. Myrmidian Priests from the Order of the Righteous Spear and Order of Fury help organise cult meetings, spread its teachings, and lead its ceremonies. They are often sought as advisors by generals and mercenary commanders, particularly in Tilea and Estalia."</Explanation>
 <Skill>"RULES-COMPSAVOIR_GUERRE"</Skill>
-<Class>"CLASS_WARR"</Class>
+<Class>"RULES-CLASS_WARR"</Class>
 <SUBCHAPTER_LEVEL>
 <Level id="1">
 <Description language="ENGLISH">"First Eagle"</Description>
@@ -2478,8 +2478,8 @@ Ifthe Character passes the Test, the crew members may then use the Characters Ra
 <Description language="ENGLISH">"Axe"</Description>
 <Skill>"RULES-COMPCOMB_BASE"</Skill>
 <Damage>"+(BATTR_S)+4"</Damage>
-<Availability>"DISPO_COMMON"</Availability>
-<Reach>"WEAPR_MID"</Reach>
+<Availability>"RULES-DISPO_COMMON"</Availability>
+<Reach>"RULES-WEAPR_MID"</Reach>
 <Price>"10/-"</Price>
 <Encumbrance>"1"</Encumbrance>
 <Quality>"RULES-WEAPB30,UPINA-WEAPB31"</Quality>
@@ -2490,8 +2490,8 @@ Ifthe Character passes the Test, the crew members may then use the Characters Ra
 <Description language="ENGLISH">"Ballock Knife"</Description>
 <Skill>"RULES-COMPCOMB_BASE"</Skill>
 <Damage>"+(BATTR_S)+1"</Damage>
-<Availability>"DISPO_LIMITED"</Availability>
-<Reach>"WEAPR_CLOSE"</Reach>
+<Availability>"RULES-DISPO_LIMITED"</Availability>
+<Reach>"RULES-WEAPR_CLOSE"</Reach>
 <Price>"16/-"</Price>
 <Encumbrance>"0"</Encumbrance>
 <Quality>"RULES-WEAPB12,RULES-WEAPB22,RULES-WEAPB16"</Quality>
@@ -2502,8 +2502,8 @@ Ifthe Character passes the Test, the crew members may then use the Characters Ra
 <Description language="ENGLISH">"Club"</Description>
 <Skill>"RULES-COMPCOMB_BASE"</Skill>
 <Damage>"+(BATTR_S)+4"</Damage>
-<Availability>"DISPO_COMMON"</Availability>
-<Reach>"WEAPR_MID"</Reach>
+<Availability>"RULES-DISPO_COMMON"</Availability>
+<Reach>"RULES-WEAPR_MID"</Reach>
 <Price>"4/-"</Price>
 <Encumbrance>"0"</Encumbrance>
 <Quality>"RULES-WEAPB27,UPINA-WEAPB31"</Quality>
@@ -2514,8 +2514,8 @@ Ifthe Character passes the Test, the crew members may then use the Characters Ra
 <Description language="ENGLISH">"Dagger"</Description>
 <Skill>"RULES-COMPCOMB_BASE"</Skill>
 <Damage>"+(BATTR_S)+2"</Damage>
-<Availability>"DISPO_COMMON"</Availability>
-<Reach>"WEAPR_CLOSE"</Reach>
+<Availability>"RULES-DISPO_COMMON"</Availability>
+<Reach>"RULES-WEAPR_CLOSE"</Reach>
 <Price>"16/-"</Price>
 <Encumbrance>"0"</Encumbrance>
 <Quality>"-"</Quality>
@@ -2526,8 +2526,8 @@ Ifthe Character passes the Test, the crew members may then use the Characters Ra
 <Description language="ENGLISH">"Knife"</Description>
 <Skill>"RULES-COMPCOMB_BASE"</Skill>
 <Damage>"+(BATTR_S)+1"</Damage>
-<Availability>"DISPO_COMMON"</Availability>
-<Reach>"WEAPR_CLOSE"</Reach>
+<Availability>"RULES-DISPO_COMMON"</Availability>
+<Reach>"RULES-WEAPR_CLOSE"</Reach>
 <Price>"8/-"</Price>
 <Encumbrance>"0"</Encumbrance>
 <Quality>"RULES-WEAPB27"</Quality>
@@ -2538,8 +2538,8 @@ Ifthe Character passes the Test, the crew members may then use the Characters Ra
 <Description language="ENGLISH">"Mace"</Description>
 <Skill>"RULES-COMPCOMB_BASE"</Skill>
 <Damage>"+(BATTR_S)+4"</Damage>
-<Availability>"DISPO_COMMON"</Availability>
-<Reach>"WEAPR_MID"</Reach>
+<Availability>"RULES-DISPO_COMMON"</Availability>
+<Reach>"RULES-WEAPR_MID"</Reach>
 <Price>"15/-"</Price>
 <Encumbrance>"1"</Encumbrance>
 <Quality>"RULES-WEAPB04,UPINA-WEAPB31"</Quality>
@@ -2550,8 +2550,8 @@ Ifthe Character passes the Test, the crew members may then use the Characters Ra
 <Description language="ENGLISH">"Military Pick"</Description>
 <Skill>"RULES-COMPCOMB_BASE"</Skill>
 <Damage>"+(BATTR_S)+4"</Damage>
-<Availability>"DISPO_LIMITED"</Availability>
-<Reach>"WEAPR_MID"</Reach>
+<Availability>"RULES-DISPO_LIMITED"</Availability>
+<Reach>"RULES-WEAPR_MID"</Reach>
 <Price>"15/-"</Price>
 <Encumbrance>"1"</Encumbrance>
 <Quality>"RULES-WEAPB22,UPINA-WEAPB31"</Quality>
@@ -2562,8 +2562,8 @@ Ifthe Character passes the Test, the crew members may then use the Characters Ra
 <Description language="ENGLISH">"Scimitar"</Description>
 <Skill>"RULES-COMPCOMB_BASE"</Skill>
 <Damage>"+(BATTR_S)+4"</Damage>
-<Availability>"DISPO_LIMITED"</Availability>
-<Reach>"WEAPR_SHORT"</Reach>
+<Availability>"RULES-DISPO_LIMITED"</Availability>
+<Reach>"RULES-WEAPR_SHORT"</Reach>
 <Price>"1 GC"</Price>
 <Encumbrance>"1"</Encumbrance>
 <Quality>"UPINA-WEAPB32 1"</Quality>
@@ -2574,8 +2574,8 @@ Ifthe Character passes the Test, the crew members may then use the Characters Ra
 <Description language="ENGLISH">"Sword"</Description>
 <Skill>"RULES-COMPCOMB_BASE"</Skill>
 <Damage>"+(BATTR_S)+4"</Damage>
-<Availability>"DISPO_COMMON"</Availability>
-<Reach>"WEAPR_MID"</Reach>
+<Availability>"RULES-DISPO_COMMON"</Availability>
+<Reach>"RULES-WEAPR_MID"</Reach>
 <Price>"1 GC"</Price>
 <Encumbrance>"1"</Encumbrance>
 <Quality>"-"</Quality>
@@ -2586,8 +2586,8 @@ Ifthe Character passes the Test, the crew members may then use the Characters Ra
 <Description language="ENGLISH">"Warhammer"</Description>
 <Skill>"RULES-COMPCOMB_BASE"</Skill>
 <Damage>"+(BATTR_S)+4"</Damage>
-<Availability>"DISPO_LIMITED"</Availability>
-<Reach>"WEAPR_MID"</Reach>
+<Availability>"RULES-DISPO_LIMITED"</Availability>
+<Reach>"RULES-WEAPR_MID"</Reach>
 <Price>"1 GC"</Price>
 <Encumbrance>"1"</Encumbrance>
 <Quality>"UPINA-WEAPB31,RULES-WEAPB04,RULES-WEAPB22"</Quality>
@@ -2598,8 +2598,8 @@ Ifthe Character passes the Test, the crew members may then use the Characters Ra
 <Description language="ENGLISH">"Shield (Buckler)"</Description>
 <Skill>"RULES-COMPCOMB_BASE"</Skill>
 <Damage>"+(BATTR_S)+1"</Damage>
-<Availability>"DISPO_COMMON"</Availability>
-<Reach>"WEAPR_PERSO"</Reach>
+<Availability>"RULES-DISPO_COMMON"</Availability>
+<Reach>"RULES-WEAPR_PERSO"</Reach>
 <Price>"18/2"</Price>
 <Encumbrance>"0"</Encumbrance>
 <Quality>"RULES-WEAPB18 1,RULES-WEAPB08,RULES-WEAPB27"</Quality>
@@ -2610,8 +2610,8 @@ Ifthe Character passes the Test, the crew members may then use the Characters Ra
 <Description language="ENGLISH">"Shield"</Description>
 <Skill>"RULES-COMPCOMB_BASE"</Skill>
 <Damage>"+(BATTR_S)+2"</Damage>
-<Availability>"DISPO_COMMON"</Availability>
-<Reach>"WEAPR_CLOSE"</Reach>
+<Availability>"RULES-DISPO_COMMON"</Availability>
+<Reach>"RULES-WEAPR_CLOSE"</Reach>
 <Price>"2GC"</Price>
 <Encumbrance>"1"</Encumbrance>
 <Quality>"RULES-WEAPB18 2,RULES-WEAPB08,RULES-WEAPB27"</Quality>
@@ -2622,8 +2622,8 @@ Ifthe Character passes the Test, the crew members may then use the Characters Ra
 <Description language="ENGLISH">"Shield (Large)"</Description>
 <Skill>"RULES-COMPCOMB_BASE"</Skill>
 <Damage>"+(BATTR_S)+3"</Damage>
-<Availability>"DISPO_COMMON"</Availability>
-<Reach>"WEAPR_CLOSE"</Reach>
+<Availability>"RULES-DISPO_COMMON"</Availability>
+<Reach>"RULES-WEAPR_CLOSE"</Reach>
 <Price>"3GC"</Price>
 <Encumbrance>"3"</Encumbrance>
 <Quality>"RULES-WEAPB18 3,RULES-WEAPB08,RULES-WEAPB27"</Quality>
@@ -2634,7 +2634,7 @@ Ifthe Character passes the Test, the crew members may then use the Characters Ra
 <Description language="ENGLISH">"Pavise"</Description>
 <Skill>"RULES-COMPCOMB_BASE"</Skill>
 <Damage>"+(BATTR_S)+2"</Damage>
-<Availability>"DISPO_RARE"</Availability>
+<Availability>"RULES-DISPO_RARE"</Availability>
 <Reach>"-"</Reach>
 <Price>"3 GC 15/-"</Price>
 <Encumbrance>"4"</Encumbrance>
@@ -2646,8 +2646,8 @@ Ifthe Character passes the Test, the crew members may then use the Characters Ra
 <Description language="ENGLISH">"Cavalry Hammer"</Description>
 <Skill>"RULES-COMPCOMB_CAVAL"</Skill>
 <Damage>"+(BATTR_S)+5"</Damage>
-<Availability>"DISPO_LIMITED"</Availability>
-<Reach>"WEAPR_LONG"</Reach>
+<Availability>"RULES-DISPO_LIMITED"</Availability>
+<Reach>"RULES-WEAPR_LONG"</Reach>
 <Price>"3GC"</Price>
 <Encumbrance>"3"</Encumbrance>
 <Quality>"RULES-WEAPB04"</Quality>
@@ -2658,8 +2658,8 @@ Ifthe Character passes the Test, the crew members may then use the Characters Ra
 <Description language="ENGLISH">"Demi-Lance"</Description>
 <Skill>"RULES-COMPCOMB_CAVAL"</Skill>
 <Damage>"(BATTR_S)+5*"</Damage>
-<Availability>"DISPO_LIMITED"</Availability>
-<Reach>"WEAPR_LONG"</Reach>
+<Availability>"RULES-DISPO_LIMITED"</Availability>
+<Reach>"RULES-WEAPR_LONG"</Reach>
 <Price>"1GC"</Price>
 <Encumbrance>"2"</Encumbrance>
 <Quality>"RULES-WEAPB21,RULES-WEAPB12"</Quality>
@@ -2670,8 +2670,8 @@ Ifthe Character passes the Test, the crew members may then use the Characters Ra
 <Description language="ENGLISH">"Lance"</Description>
 <Skill>"RULES-COMPCOMB_CAVAL"</Skill>
 <Damage>"+(BATTR_S)+6*"</Damage>
-<Availability>"DISPO_LIMITED"</Availability>
-<Reach>"WEAPR_BIG"</Reach>
+<Availability>"RULES-DISPO_LIMITED"</Availability>
+<Reach>"RULES-WEAPR_BIG"</Reach>
 <Price>"1GC"</Price>
 <Encumbrance>"3"</Encumbrance>
 <Quality>"RULES-WEAPB21,RULES-WEAPB12"</Quality>
@@ -2682,8 +2682,8 @@ Ifthe Character passes the Test, the crew members may then use the Characters Ra
 <Description language="ENGLISH">"Sabre"</Description>
 <Skill>"RULES-COMPCOMB_CAVAL"</Skill>
 <Damage>"(BATTR_S)+4"</Damage>
-<Availability>"DISPO_LIMITED"</Availability>
-<Reach>"WEAPR_MID"</Reach>
+<Availability>"RULES-DISPO_LIMITED"</Availability>
+<Reach>"RULES-WEAPR_MID"</Reach>
 <Price>"2GC"</Price>
 <Encumbrance>"1"</Encumbrance>
 <Quality>"UPINA-WEAPB32 1"</Quality>
@@ -2694,8 +2694,8 @@ Ifthe Character passes the Test, the crew members may then use the Characters Ra
 <Description language="ENGLISH">"Foil"</Description>
 <Skill>"RULES-COMPCOMB_ESCR"</Skill>
 <Damage>"+(BATTR_S)+3"</Damage>
-<Availability>"DISPO_LIMITED"</Availability>
-<Reach>"WEAPR_MID"</Reach>
+<Availability>"RULES-DISPO_LIMITED"</Availability>
+<Reach>"RULES-WEAPR_MID"</Reach>
 <Price>"5GC"</Price>
 <Encumbrance>"1"</Encumbrance>
 <Quality>"RULES-WEAPB20,RULES-WEAPB12,RULES-WEAPB16,RULES-WEAPB27"</Quality>
@@ -2706,8 +2706,8 @@ Ifthe Character passes the Test, the crew members may then use the Characters Ra
 <Description language="ENGLISH">"Rapier"</Description>
 <Skill>"RULES-COMPCOMB_ESCR"</Skill>
 <Damage>"+(BATTR_S)+4"</Damage>
-<Availability>"DISPO_LIMITED"</Availability>
-<Reach>"WEAPR_LONG"</Reach>
+<Availability>"RULES-DISPO_LIMITED"</Availability>
+<Reach>"RULES-WEAPR_LONG"</Reach>
 <Price>"5GC"</Price>
 <Encumbrance>"1"</Encumbrance>
 <Quality>"RULES-WEAPB20,RULES-WEAPB12"</Quality>
@@ -2718,8 +2718,8 @@ Ifthe Character passes the Test, the crew members may then use the Characters Ra
 <Description language="ENGLISH">"Smallsword"</Description>
 <Skill>"RULES-COMPCOMB_ESCR"</Skill>
 <Damage>"+(BATTR_S)+2"</Damage>
-<Availability>"DISPO_LIMITED"</Availability>
-<Reach>"WEAPR_MID"</Reach>
+<Availability>"RULES-DISPO_LIMITED"</Availability>
+<Reach>"RULES-WEAPR_MID"</Reach>
 <Price>"4GC"</Price>
 <Encumbrance>"1"</Encumbrance>
 <Quality>"RULES-WEAPB20,RULES-WEAPB12,RULES-WEAPB16"</Quality>
@@ -2730,8 +2730,8 @@ Ifthe Character passes the Test, the crew members may then use the Characters Ra
 <Description language="ENGLISH">"Spiked Gauntlet"</Description>
 <Skill>"RULES-COMPCOMB_BAGAR"</Skill>
 <Damage>"+(BATTR_S)+3"</Damage>
-<Availability>"DISPO_LIMITED"</Availability>
-<Reach>"WEAPR_PERSO"</Reach>
+<Availability>"RULES-DISPO_LIMITED"</Availability>
+<Reach>"RULES-WEAPR_PERSO"</Reach>
 <Price>"2 GC"</Price>
 <Encumbrance>"1"</Encumbrance>
 <Quality>"RULES-WEAPB12,UPINA-WEAPB31"</Quality>
@@ -2742,8 +2742,8 @@ Ifthe Character passes the Test, the crew members may then use the Characters Ra
 <Description language="ENGLISH">"Boat Hook"</Description>
 <Skill>"RULES-COMPCOMB_BAGAR"</Skill>
 <Damage>"+(BATTR_S)+4"</Damage>
-<Availability>"DISPO_COMMON"</Availability>
-<Reach>"WEAPR_SHORT"</Reach>
+<Availability>"RULES-DISPO_COMMON"</Availability>
+<Reach>"RULES-WEAPR_SHORT"</Reach>
 <Price>"6/-"</Price>
 <Encumbrance>"0"</Encumbrance>
 <Quality>"UPINA-WEAPB34,RULES-WEAPB27"</Quality>
@@ -2754,8 +2754,8 @@ Ifthe Character passes the Test, the crew members may then use the Characters Ra
 <Description language="ENGLISH">"Garrote"</Description>
 <Skill>"RULES-COMPCOMB_BAGAR"</Skill>
 <Damage>"+(BATTR_S)+2"</Damage>
-<Availability>"DISPO_RARE"</Availability>
-<Reach>"WEAPR_PERSO"</Reach>
+<Availability>"RULES-DISPO_RARE"</Availability>
+<Reach>"RULES-WEAPR_PERSO"</Reach>
 <Price>"1/-"</Price>
 <Encumbrance>"0"</Encumbrance>
 <Quality>"RULES-WEAPB17,RULES-WEAPB28,UPINA-WEAPB31,RULES-WEAPB27"</Quality>
@@ -2766,8 +2766,8 @@ Ifthe Character passes the Test, the crew members may then use the Characters Ra
 <Description language="ENGLISH">"Knuckledusters"</Description>
 <Skill>"RULES-COMPCOMB_BAGAR"</Skill>
 <Damage>"+(BATTR_S)+2"</Damage>
-<Availability>"DISPO_COMMON"</Availability>
-<Reach>"WEAPR_PERSO"</Reach>
+<Availability>"RULES-DISPO_COMMON"</Availability>
+<Reach>"RULES-WEAPR_PERSO"</Reach>
 <Price>"2/6"</Price>
 <Encumbrance>"0"</Encumbrance>
 <Quality>"-"</Quality>
@@ -2778,8 +2778,8 @@ Ifthe Character passes the Test, the crew members may then use the Characters Ra
 <Description language="ENGLISH">"Locked Gauntlet"</Description>
 <Skill>"RULES-COMPCOMB_BAGAR"</Skill>
 <Damage>"+(BATTR_S)+2"</Damage>
-<Availability>"DISPO_LIMITED"</Availability>
-<Reach>"WEAPR_PERSO"</Reach>
+<Availability>"RULES-DISPO_LIMITED"</Availability>
+<Reach>"RULES-WEAPR_PERSO"</Reach>
 <Price>"1 GC"</Price>
 <Encumbrance>"1"</Encumbrance>
 <Quality>"RULES-WEAPB27"</Quality>
@@ -2790,8 +2790,8 @@ Ifthe Character passes the Test, the crew members may then use the Characters Ra
 <Description language="ENGLISH">"Sap"</Description>
 <Skill>"RULES-COMPCOMB_BAGAR"</Skill>
 <Damage>"+(BATTR_S)+1"</Damage>
-<Availability>"DISPO_RARE"</Availability>
-<Reach>"WEAPR_PERSO"</Reach>
+<Availability>"RULES-DISPO_RARE"</Availability>
+<Reach>"RULES-WEAPR_PERSO"</Reach>
 <Price>"1/-"</Price>
 <Encumbrance>"0"</Encumbrance>
 <Quality>"RULES-WEAPB04,UPINA-WEAPB31,RULES-WEAPB27"</Quality>
@@ -2802,8 +2802,8 @@ Ifthe Character passes the Test, the crew members may then use the Characters Ra
 <Description language="ENGLISH">"Grain Flail"</Description>
 <Skill>"RULES-COMPCOMB_FLEAU"</Skill>
 <Damage>"+(BATTR_S)+3"</Damage>
-<Availability>"DISPO_COMMON"</Availability>
-<Reach>"WEAPR_MID"</Reach>
+<Availability>"RULES-DISPO_COMMON"</Availability>
+<Reach>"RULES-WEAPR_MID"</Reach>
 <Price>"10/-"</Price>
 <Encumbrance>"1"</Encumbrance>
 <Quality>"RULES-WEAPB09,RULES-WEAPB26,RULES-WEAPB01"</Quality>
@@ -2814,8 +2814,8 @@ Ifthe Character passes the Test, the crew members may then use the Characters Ra
 <Description language="ENGLISH">"Flail"</Description>
 <Skill>"RULES-COMPCOMB_FLEAU"</Skill>
 <Damage>"+(BATTR_S)+5"</Damage>
-<Availability>"DISPO_LIMITED"</Availability>
-<Reach>"WEAPR_MID"</Reach>
+<Availability>"RULES-DISPO_LIMITED"</Availability>
+<Reach>"RULES-WEAPR_MID"</Reach>
 <Price>"2GC"</Price>
 <Encumbrance>"1"</Encumbrance>
 <Quality>"RULES-WEAPB09,RULES-WEAPB01"</Quality>
@@ -2826,8 +2826,8 @@ Ifthe Character passes the Test, the crew members may then use the Characters Ra
 <Description language="ENGLISH">"Military Flail"</Description>
 <Skill>"RULES-COMPCOMB_FLEAU"</Skill>
 <Damage>"+(BATTR_S)+6"</Damage>
-<Availability>"DISPO_RARE"</Availability>
-<Reach>"WEAPR_LONG"</Reach>
+<Availability>"RULES-DISPO_RARE"</Availability>
+<Reach>"RULES-WEAPR_LONG"</Reach>
 <Price>"3GC"</Price>
 <Encumbrance>"2"</Encumbrance>
 <Quality>"RULES-WEAPB09,RULES-WEAPB21,RULES-WEAPB25,RULES-WEAPB01"</Quality>
@@ -2838,8 +2838,8 @@ Ifthe Character passes the Test, the crew members may then use the Characters Ra
 <Description language="ENGLISH">"Cloak"</Description>
 <Skill>"RULES-COMPCOMB_PARAD"</Skill>
 <Damage>"+(BATTR_S)+0"</Damage>
-<Availability>"DISPO_COMMON"</Availability>
-<Reach>"WEAPR_SHORT"</Reach>
+<Availability>"RULES-DISPO_COMMON"</Availability>
+<Reach>"RULES-WEAPR_SHORT"</Reach>
 <Price>"10/-"</Price>
 <Encumbrance>"1"</Encumbrance>
 <Quality>"RULES-WEAPB17,RULES-WEAPB08,RULES-WEAPB27"</Quality>
@@ -2850,8 +2850,8 @@ Ifthe Character passes the Test, the crew members may then use the Characters Ra
 <Description language="ENGLISH">"Main Gauche"</Description>
 <Skill>"RULES-COMPCOMB_PARAD"</Skill>
 <Damage>"+(BATTR_S)+2"</Damage>
-<Availability>"DISPO_RARE"</Availability>
-<Reach>"WEAPR_CLOSE"</Reach>
+<Availability>"RULES-DISPO_RARE"</Availability>
+<Reach>"RULES-WEAPR_CLOSE"</Reach>
 <Price>"1GC"</Price>
 <Encumbrance>"0"</Encumbrance>
 <Quality>"RULES-WEAPB08"</Quality>
@@ -2862,8 +2862,8 @@ Ifthe Character passes the Test, the crew members may then use the Characters Ra
 <Description language="ENGLISH">"Swordbreaker"</Description>
 <Skill>"RULES-COMPCOMB_PARAD"</Skill>
 <Damage>"+(BATTR_S)+1"</Damage>
-<Availability>"DISPO_LIMITED"</Availability>
-<Reach>"WEAPR_SHORT"</Reach>
+<Availability>"RULES-DISPO_LIMITED"</Availability>
+<Reach>"RULES-WEAPR_SHORT"</Reach>
 <Price>"1GC 2/6"</Price>
 <Encumbrance>"1"</Encumbrance>
 <Quality>"RULES-WEAPB08,RULES-WEAPB11"</Quality>
@@ -2874,8 +2874,8 @@ Ifthe Character passes the Test, the crew members may then use the Characters Ra
 <Description language="ENGLISH">"Weighted Net"</Description>
 <Skill>"RULES-COMPCOMB_PARAD"</Skill>
 <Damage>"+(BATTR_S)+0"</Damage>
-<Availability>"DISPO_RARE"</Availability>
-<Reach>"WEAPR_SHORT"</Reach>
+<Availability>"RULES-DISPO_RARE"</Availability>
+<Reach>"RULES-WEAPR_SHORT"</Reach>
 <Price>"1GC 10/-"</Price>
 <Encumbrance>"1"</Encumbrance>
 <Quality>"RULES-WEAPB17,RULES-WEAPB08,RULES-WEAPB18 1,RULES-WEAPB28,RULES-WEAPB27,RULES-WEAPB01"</Quality>
@@ -2886,8 +2886,8 @@ Ifthe Character passes the Test, the crew members may then use the Characters Ra
 <Description language="ENGLISH">"Ahlspiess"</Description>
 <Skill>"RULES-COMPCOMB_HAST"</Skill>
 <Damage>"+(BATTR_S)+3"</Damage>
-<Availability>"DISPO_LIMITED"</Availability>
-<Reach>"WEAPR_BIG"</Reach>
+<Availability>"RULES-DISPO_LIMITED"</Availability>
+<Reach>"RULES-WEAPR_BIG"</Reach>
 <Price>"2GC"</Price>
 <Encumbrance>"2"</Encumbrance>
 <Quality>"RULES-WEAPB12,RULES-WEAPB22"</Quality>
@@ -2898,8 +2898,8 @@ Ifthe Character passes the Test, the crew members may then use the Characters Ra
 <Description language="ENGLISH">"Bill"</Description>
 <Skill>"RULES-COMPCOMB_HAST"</Skill>
 <Damage>"+(BATTR_S)+4"</Damage>
-<Availability>"DISPO_LIMITED"</Availability>
-<Reach>"WEAPR_LONG"</Reach>
+<Availability>"RULES-DISPO_LIMITED"</Availability>
+<Reach>"RULES-WEAPR_LONG"</Reach>
 <Price>"2GC"</Price>
 <Encumbrance>"3"</Encumbrance>
 <Quality>"RULES-WEAPB08,RULES-WEAPB30/UPINA-WEAPB34"</Quality>
@@ -2910,8 +2910,8 @@ Ifthe Character passes the Test, the crew members may then use the Characters Ra
 <Description language="ENGLISH">"Halberd"</Description>
 <Skill>"RULES-COMPCOMB_HAST"</Skill>
 <Damage>"+(BATTR_S)+4"</Damage>
-<Availability>"DISPO_COMMON"</Availability>
-<Reach>"WEAPR_LONG"</Reach>
+<Availability>"RULES-DISPO_COMMON"</Availability>
+<Reach>"RULES-WEAPR_LONG"</Reach>
 <Price>"2GC"</Price>
 <Encumbrance>"3"</Encumbrance>
 <Quality>"RULES-WEAPB08,RULES-WEAPB30/RULES-WEAPB12"</Quality>
@@ -2922,8 +2922,8 @@ Ifthe Character passes the Test, the crew members may then use the Characters Ra
 <Description language="ENGLISH">"Mancatcher"</Description>
 <Skill>"RULES-COMPCOMB_HAST"</Skill>
 <Damage>"+(BATTR_S)+2"</Damage>
-<Availability>"DISPO_RARE"</Availability>
-<Reach>"WEAPR_LONG"</Reach>
+<Availability>"RULES-DISPO_RARE"</Availability>
+<Reach>"RULES-WEAPR_LONG"</Reach>
 <Price>"2GC"</Price>
 <Encumbrance>"3"</Encumbrance>
 <Quality>"RULES-WEAPB08,RULES-WEAPB17"</Quality>
@@ -2934,8 +2934,8 @@ Ifthe Character passes the Test, the crew members may then use the Characters Ra
 <Description language="ENGLISH">"Partizan/Glaive"</Description>
 <Skill>"RULES-COMPCOMB_HAST"</Skill>
 <Damage>"+(BATTR_S)+4"</Damage>
-<Availability>"DISPO_LIMITED"</Availability>
-<Reach>"WEAPR_LONG"</Reach>
+<Availability>"RULES-DISPO_LIMITED"</Availability>
+<Reach>"RULES-WEAPR_LONG"</Reach>
 <Price>"2GC"</Price>
 <Encumbrance>"3"</Encumbrance>
 <Quality>"RULES-WEAPB08,RULES-WEAPB12/UPINA-WEAPB32 2"</Quality>
@@ -2946,8 +2946,8 @@ Ifthe Character passes the Test, the crew members may then use the Characters Ra
 <Description language="ENGLISH">"Pollaxe"</Description>
 <Skill>"RULES-COMPCOMB_HAST"</Skill>
 <Damage>"+(BATTR_S)+4"</Damage>
-<Availability>"DISPO_LIMITED"</Availability>
-<Reach>"WEAPR_LONG"</Reach>
+<Availability>"RULES-DISPO_LIMITED"</Availability>
+<Reach>"RULES-WEAPR_LONG"</Reach>
 <Price>"2GC"</Price>
 <Encumbrance>"2"</Encumbrance>
 <Quality>"RULES-WEAPB08,RULES-WEAPB30/RULES-WEAPB12/RULES-WEAPB04"</Quality>
@@ -2958,8 +2958,8 @@ Ifthe Character passes the Test, the crew members may then use the Characters Ra
 <Description language="ENGLISH">"Spear"</Description>
 <Skill>"RULES-COMPCOMB_HAST"</Skill>
 <Damage>"+(BATTR_S)+4"</Damage>
-<Availability>"DISPO_COMMON"</Availability>
-<Reach>"WEAPR_BIG"</Reach>
+<Availability>"RULES-DISPO_COMMON"</Availability>
+<Reach>"RULES-WEAPR_BIG"</Reach>
 <Price>"15/-"</Price>
 <Encumbrance>"0"</Encumbrance>
 <Quality>"RULES-WEAPB12"</Quality>
@@ -2970,8 +2970,8 @@ Ifthe Character passes the Test, the crew members may then use the Characters Ra
 <Description language="ENGLISH">"Pike"</Description>
 <Skill>"RULES-COMPCOMB_HAST"</Skill>
 <Damage>"+(BATTR_S)+4"</Damage>
-<Availability>"DISPO_RARE"</Availability>
-<Reach>"WEAPR_HUGE"</Reach>
+<Availability>"RULES-DISPO_RARE"</Availability>
+<Reach>"RULES-WEAPR_HUGE"</Reach>
 <Price>"18/-"</Price>
 <Encumbrance>"4"</Encumbrance>
 <Quality>"RULES-WEAPB12"</Quality>
@@ -2982,8 +2982,8 @@ Ifthe Character passes the Test, the crew members may then use the Characters Ra
 <Description language="ENGLISH">"Quarterstaff"</Description>
 <Skill>"RULES-COMPCOMB_HAST"</Skill>
 <Damage>"+(BATTR_S)+4"</Damage>
-<Availability>"DISPO_COMMON"</Availability>
-<Reach>"WEAPR_LONG"</Reach>
+<Availability>"RULES-DISPO_COMMON"</Availability>
+<Reach>"RULES-WEAPR_LONG"</Reach>
 <Price>"3/-"</Price>
 <Encumbrance>"2"</Encumbrance>
 <Quality>"RULES-WEAPB08,RULES-WEAPB04"</Quality>
@@ -2994,8 +2994,8 @@ Ifthe Character passes the Test, the crew members may then use the Characters Ra
 <Description language="ENGLISH">"Bastard Sword"</Description>
 <Skill>"RULES-COMPCOMB_2M"</Skill>
 <Damage>"+(BATTR_S)+5"</Damage>
-<Availability>"DISPO_LIMITED"</Availability>
-<Reach>"WEAPR_LONG"</Reach>
+<Availability>"RULES-DISPO_LIMITED"</Availability>
+<Reach>"RULES-WEAPR_LONG"</Reach>
 <Price>"8GC"</Price>
 <Encumbrance>"3"</Encumbrance>
 <Quality>"RULES-WEAPB10,RULES-WEAPB08"</Quality>
@@ -3006,8 +3006,8 @@ Ifthe Character passes the Test, the crew members may then use the Characters Ra
 <Description language="ENGLISH">"Great Axe"</Description>
 <Skill>"RULES-COMPCOMB_2M"</Skill>
 <Damage>"+(BATTR_S)+6"</Damage>
-<Availability>"DISPO_COMMON"</Availability>
-<Reach>"WEAPR_LONG"</Reach>
+<Availability>"RULES-DISPO_COMMON"</Availability>
+<Reach>"RULES-WEAPR_LONG"</Reach>
 <Price>"4GC"</Price>
 <Encumbrance>"3"</Encumbrance>
 <Quality>"RULES-WEAPB30,RULES-WEAPB21,RULES-WEAPB25"</Quality>
@@ -3018,8 +3018,8 @@ Ifthe Character passes the Test, the crew members may then use the Characters Ra
 <Description language="ENGLISH">"Flamberge Zweihander"</Description>
 <Skill>"RULES-COMPCOMB_2M"</Skill>
 <Damage>"+(BATTR_S)+5"</Damage>
-<Availability>"DISPO_EXOTIC"</Availability>
-<Reach>"WEAPR_LONG"</Reach>
+<Availability>"RULES-DISPO_EXOTIC"</Availability>
+<Reach>"RULES-WEAPR_LONG"</Reach>
 <Price>"30GC"</Price>
 <Encumbrance>"3"</Encumbrance>
 <Quality>"RULES-WEAPB10,RULES-WEAPB30,UPINA-WEAPB32 2"</Quality>
@@ -3030,8 +3030,8 @@ Ifthe Character passes the Test, the crew members may then use the Characters Ra
 <Description language="ENGLISH">"Pick"</Description>
 <Skill>"RULES-COMPCOMB_2M"</Skill>
 <Damage>"+(BATTR_S)+5"</Damage>
-<Availability>"DISPO_COMMON"</Availability>
-<Reach>"WEAPR_MID"</Reach>
+<Availability>"RULES-DISPO_COMMON"</Availability>
+<Reach>"RULES-WEAPR_MID"</Reach>
 <Price>"9/-"</Price>
 <Encumbrance>"3"</Encumbrance>
 <Quality>"RULES-WEAPB10,RULES-WEAPB12,RULES-WEAPB28"</Quality>
@@ -3042,8 +3042,8 @@ Ifthe Character passes the Test, the crew members may then use the Characters Ra
 <Description language="ENGLISH">"Warhammer"</Description>
 <Skill>"RULES-COMPCOMB_2M"</Skill>
 <Damage>"+(BATTR_S)+6"</Damage>
-<Availability>"DISPO_COMMON"</Availability>
-<Reach>"WEAPR_MID"</Reach>
+<Availability>"RULES-DISPO_COMMON"</Availability>
+<Reach>"RULES-WEAPR_MID"</Reach>
 <Price>"3GC"</Price>
 <Encumbrance>"3"</Encumbrance>
 <Quality>"RULES-WEAPB10,RULES-WEAPB04,RULES-WEAPB28"</Quality>
@@ -3054,8 +3054,8 @@ Ifthe Character passes the Test, the crew members may then use the Characters Ra
 <Description language="ENGLISH">"Zweihander"</Description>
 <Skill>"RULES-COMPCOMB_2M"</Skill>
 <Damage>"+(BATTR_S)+5"</Damage>
-<Availability>"DISPO_LIMITED"</Availability>
-<Reach>"WEAPR_LONG"</Reach>
+<Availability>"RULES-DISPO_LIMITED"</Availability>
+<Reach>"RULES-WEAPR_LONG"</Reach>
 <Price>"10GC"</Price>
 <Encumbrance>"3"</Encumbrance>
 <Quality>"RULES-WEAPB10,RULES-WEAPB30"</Quality>
@@ -3066,7 +3066,7 @@ Ifthe Character passes the Test, the crew members may then use the Characters Ra
 <Description language="ENGLISH">"Blunderbuss"</Description>
 <Skill>"RULES-COMPPROJ_POUDRE"</Skill>
 <Damage>"+8"</Damage>
-<Availability>"DISPO_LIMITED"</Availability>
+<Availability>"RULES-DISPO_LIMITED"</Availability>
 <Reach>"20"</Reach>
 <Price>"2GC"</Price>
 <Encumbrance>"1"</Encumbrance>
@@ -3078,7 +3078,7 @@ Ifthe Character passes the Test, the crew members may then use the Characters Ra
 <Description language="ENGLISH">"Hochland Long Rifle"</Description>
 <Skill>"RULES-COMPPROJ_POUDRE"</Skill>
 <Damage>"+9"</Damage>
-<Availability>"DISPO_EXOTIC"</Availability>
+<Availability>"RULES-DISPO_EXOTIC"</Availability>
 <Reach>"100"</Reach>
 <Price>"100GC"</Price>
 <Encumbrance>"3"</Encumbrance>
@@ -3090,7 +3090,7 @@ Ifthe Character passes the Test, the crew members may then use the Characters Ra
 <Description language="ENGLISH">"Handgun"</Description>
 <Skill>"RULES-COMPPROJ_POUDRE"</Skill>
 <Damage>"+9"</Damage>
-<Availability>"DISPO_LIMITED"</Availability>
+<Availability>"RULES-DISPO_LIMITED"</Availability>
 <Reach>"50"</Reach>
 <Price>"4GC"</Price>
 <Encumbrance>"2"</Encumbrance>
@@ -3102,7 +3102,7 @@ Ifthe Character passes the Test, the crew members may then use the Characters Ra
 <Description language="ENGLISH">"Pistol"</Description>
 <Skill>"RULES-COMPPROJ_POUDRE"</Skill>
 <Damage>"+8"</Damage>
-<Availability>"DISPO_RARE"</Availability>
+<Availability>"RULES-DISPO_RARE"</Availability>
 <Reach>"20"</Reach>
 <Price>"8 GC"</Price>
 <Encumbrance>"0"</Encumbrance>
@@ -3114,7 +3114,7 @@ Ifthe Character passes the Test, the crew members may then use the Characters Ra
 <Description language="ENGLISH">"Matchlock Handgun"</Description>
 <Skill>"RULES-COMPPROJ_POUDRE"</Skill>
 <Damage>"+8"</Damage>
-<Availability>"DISPO_RARE"</Availability>
+<Availability>"RULES-DISPO_RARE"</Availability>
 <Reach>"50"</Reach>
 <Price>"2GC"</Price>
 <Encumbrance>"2"</Encumbrance>
@@ -3126,7 +3126,7 @@ Ifthe Character passes the Test, the crew members may then use the Characters Ra
 <Description language="ENGLISH">"Matchlock Blunderbuss"</Description>
 <Skill>"RULES-COMPPROJ_POUDRE"</Skill>
 <Damage>"+7"</Damage>
-<Availability>"DISPO_RARE"</Availability>
+<Availability>"RULES-DISPO_RARE"</Availability>
 <Reach>"20"</Reach>
 <Price>"1GC"</Price>
 <Encumbrance>"1"</Encumbrance>
@@ -3138,7 +3138,7 @@ Ifthe Character passes the Test, the crew members may then use the Characters Ra
 <Description language="ENGLISH">"Arquebus"</Description>
 <Skill>"RULES-COMPPROJ_POUDRE"</Skill>
 <Damage>"+9"</Damage>
-<Availability>"DISPO_EXOTIC"</Availability>
+<Availability>"RULES-DISPO_EXOTIC"</Availability>
 <Reach>"40"</Reach>
 <Price>"5GC"</Price>
 <Encumbrance>"3"</Encumbrance>
@@ -3150,7 +3150,7 @@ Ifthe Character passes the Test, the crew members may then use the Characters Ra
 <Description language="ENGLISH">"Double Barrelled Handgun"</Description>
 <Skill>"RULES-COMPPROJ_POUDRE"</Skill>
 <Damage>"+9"</Damage>
-<Availability>"DISPO_EXOTIC"</Availability>
+<Availability>"RULES-DISPO_EXOTIC"</Availability>
 <Reach>"50"</Reach>
 <Price>"7 GC"</Price>
 <Encumbrance>"3"</Encumbrance>
@@ -3162,7 +3162,7 @@ Ifthe Character passes the Test, the crew members may then use the Characters Ra
 <Description language="ENGLISH">"Griffonsfoot Pistol"</Description>
 <Skill>"RULES-COMPPROJ_POUDRE"</Skill>
 <Damage>"+7"</Damage>
-<Availability>"DISPO_EXOTIC"</Availability>
+<Availability>"RULES-DISPO_EXOTIC"</Availability>
 <Reach>"10"</Reach>
 <Price>"10 GC"</Price>
 <Encumbrance>"1"</Encumbrance>
@@ -3174,7 +3174,7 @@ Ifthe Character passes the Test, the crew members may then use the Characters Ra
 <Description language="ENGLISH">"Gun Axe"</Description>
 <Skill>"RULES-COMPPROJ_POUDRE"</Skill>
 <Damage>"+9"</Damage>
-<Availability>"DISPO_EXOTIC"</Availability>
+<Availability>"RULES-DISPO_EXOTIC"</Availability>
 <Reach>"30"</Reach>
 <Price>"8"</Price>
 <Encumbrance>"1"</Encumbrance>
@@ -3186,7 +3186,7 @@ Ifthe Character passes the Test, the crew members may then use the Characters Ra
 <Description language="ENGLISH">"Gun Halberd"</Description>
 <Skill>"RULES-COMPPROJ_POUDRE"</Skill>
 <Damage>"+9"</Damage>
-<Availability>"DISPO_EXOTIC"</Availability>
+<Availability>"RULES-DISPO_EXOTIC"</Availability>
 <Reach>"30"</Reach>
 <Price>"10"</Price>
 <Encumbrance>"3"</Encumbrance>
@@ -3198,7 +3198,7 @@ Ifthe Character passes the Test, the crew members may then use the Characters Ra
 <Description language="ENGLISH">"Repeater Handgun"</Description>
 <Skill>"RULES-COMPPROJ_ING"</Skill>
 <Damage>"+9"</Damage>
-<Availability>"DISPO_RARE"</Availability>
+<Availability>"RULES-DISPO_RARE"</Availability>
 <Reach>"30"</Reach>
 <Price>"10 GC"</Price>
 <Encumbrance>"3"</Encumbrance>
@@ -3210,7 +3210,7 @@ Ifthe Character passes the Test, the crew members may then use the Characters Ra
 <Description language="ENGLISH">"Repeater Pistol"</Description>
 <Skill>"RULES-COMPPROJ_ING"</Skill>
 <Damage>"+8"</Damage>
-<Availability>"DISPO_RARE"</Availability>
+<Availability>"RULES-DISPO_RARE"</Availability>
 <Reach>"10"</Reach>
 <Price>"15 GC"</Price>
 <Encumbrance>"1"</Encumbrance>
@@ -3222,7 +3222,7 @@ Ifthe Character passes the Test, the crew members may then use the Characters Ra
 <Description language="ENGLISH">"Pepperbox"</Description>
 <Skill>"RULES-COMPPROJ_ING"</Skill>
 <Damage>"+8"</Damage>
-<Availability>"DISPO_RARE"</Availability>
+<Availability>"RULES-DISPO_RARE"</Availability>
 <Reach>"10"</Reach>
 <Price>"12 GC"</Price>
 <Encumbrance>"1"</Encumbrance>
@@ -3234,7 +3234,7 @@ Ifthe Character passes the Test, the crew members may then use the Characters Ra
 <Description language="ENGLISH">"Hand Mortar"</Description>
 <Skill>"RULES-COMPPROJ_ING"</Skill>
 <Damage>"+7"</Damage>
-<Availability>"DISPO_EXOTIC"</Availability>
+<Availability>"RULES-DISPO_EXOTIC"</Availability>
 <Reach>"30"</Reach>
 <Price>"50 GC"</Price>
 <Encumbrance>"3"</Encumbrance>
@@ -3246,7 +3246,7 @@ Ifthe Character passes the Test, the crew members may then use the Characters Ra
 <Description language="ENGLISH">"Cane Pistol"</Description>
 <Skill>"RULES-COMPPROJ_ING"</Skill>
 <Damage>"+8"</Damage>
-<Availability>"DISPO_EXOTIC"</Availability>
+<Availability>"RULES-DISPO_EXOTIC"</Availability>
 <Reach>"10"</Reach>
 <Price>"15 GC"</Price>
 <Encumbrance>"1"</Encumbrance>
@@ -3258,7 +3258,7 @@ Ifthe Character passes the Test, the crew members may then use the Characters Ra
 <Description language="ENGLISH">"Barbed Arrow"</Description>
 <Skill>"RULES-COMPPROJ_ARC"</Skill>
 <Damage>"+0"</Damage>
-<Availability>"DISPO_LIMITED"</Availability>
+<Availability>"RULES-DISPO_LIMITED"</Availability>
 <Reach>"+0"</Reach>
 <Price>"8/-"</Price>
 <Encumbrance>"0"</Encumbrance>
@@ -3270,7 +3270,7 @@ Ifthe Character passes the Test, the crew members may then use the Characters Ra
 <Description language="ENGLISH">"Bodkin Arrow"</Description>
 <Skill>"RULES-COMPPROJ_ARC"</Skill>
 <Damage>"+0"</Damage>
-<Availability>"DISPO_LIMITED"</Availability>
+<Availability>"RULES-DISPO_LIMITED"</Availability>
 <Reach>"+0"</Reach>
 <Price>"8/-"</Price>
 <Encumbrance>"0"</Encumbrance>
@@ -3282,7 +3282,7 @@ Ifthe Character passes the Test, the crew members may then use the Characters Ra
 <Description language="ENGLISH">"Sharp Stick"</Description>
 <Skill>"RULES-COMPPROJ_ARC"</Skill>
 <Damage>"-2"</Damage>
-<Availability>"DISPO_COMMON"</Availability>
+<Availability>"RULES-DISPO_COMMON"</Availability>
 <Reach>"/2"</Reach>
 <Price>"-"</Price>
 <Encumbrance>"0"</Encumbrance>
@@ -3294,7 +3294,7 @@ Ifthe Character passes the Test, the crew members may then use the Characters Ra
 <Description language="ENGLISH">"Pebble"</Description>
 <Skill>"RULES-COMPPROJ_FROND"</Skill>
 <Damage>"-2"</Damage>
-<Availability>"DISPO_COMMON"</Availability>
+<Availability>"RULES-DISPO_COMMON"</Availability>
 <Reach>"-10"</Reach>
 <Price>"-"</Price>
 <Encumbrance>"0"</Encumbrance>
@@ -3306,7 +3306,7 @@ Ifthe Character passes the Test, the crew members may then use the Characters Ra
 <Description language="ENGLISH">"Paper Cartridge"</Description>
 <Skill>"RULES-COMPPROJ_POUDRE/RULES-COMPPROJ_ING"</Skill>
 <Damage>"+1"</Damage>
-<Availability>"DISPO_LIMITED"</Availability>
+<Availability>"RULES-DISPO_LIMITED"</Availability>
 <Reach>"+0"</Reach>
 <Price>"5/-"</Price>
 <Encumbrance>"0"</Encumbrance>
@@ -3318,7 +3318,7 @@ Ifthe Character passes the Test, the crew members may then use the Characters Ra
 <Description language="ENGLISH">"Aqshy-Infused Powder"</Description>
 <Skill>"RULES-COMPPROJ_POUDRE/RULES-COMPPROJ_ING"</Skill>
 <Damage>"+2"</Damage>
-<Availability>"DISPO_EXOTIC"</Availability>
+<Availability>"RULES-DISPO_EXOTIC"</Availability>
 <Reach>"+10"</Reach>
 <Price>"1CO"</Price>
 <Encumbrance>"0"</Encumbrance>
@@ -3330,7 +3330,7 @@ Ifthe Character passes the Test, the crew members may then use the Characters Ra
 <Description language="ENGLISH">"Precision Shot and Powder"</Description>
 <Skill>"RULES-COMPPROJ_POUDRE/RULES-COMPPROJ_ING"</Skill>
 <Damage>"+1"</Damage>
-<Availability>"DISPO_COMMON"</Availability>
+<Availability>"RULES-DISPO_COMMON"</Availability>
 <Reach>"+0"</Reach>
 <Price>"3/-"</Price>
 <Encumbrance>"0"</Encumbrance>
@@ -3342,7 +3342,7 @@ Ifthe Character passes the Test, the crew members may then use the Characters Ra
 <Description language="ENGLISH">"Scrap and Powder"</Description>
 <Skill>"RULES-COMPPROJ_POUDRE/RULES-COMPPROJ_ING"</Skill>
 <Damage>"-1"</Damage>
-<Availability>"DISPO_COMMON"</Availability>
+<Availability>"RULES-DISPO_COMMON"</Availability>
 <Reach>"/2"</Reach>
 <Price>"2/-"</Price>
 <Encumbrance>"0"</Encumbrance>
@@ -3354,7 +3354,7 @@ Ifthe Character passes the Test, the crew members may then use the Characters Ra
 <Description language="ENGLISH">"Large Bullet and Powder"</Description>
 <Skill>"RULES-COMPPROJ_POUDRE/RULES-COMPPROJ_ING"</Skill>
 <Damage>"+2"</Damage>
-<Availability>"DISPO_LIMITED"</Availability>
+<Availability>"RULES-DISPO_LIMITED"</Availability>
 <Reach>"+0"</Reach>
 <Price>"1CO"</Price>
 <Encumbrance>"0"</Encumbrance>
@@ -3366,7 +3366,7 @@ Ifthe Character passes the Test, the crew members may then use the Characters Ra
 <Description language="ENGLISH">"Bomb"</Description>
 <Skill>"RULES-COMPPROJ_POUDRE/RULES-COMPPROJ_ING"</Skill>
 <Damage>"+5"</Damage>
-<Availability>"DISPO_RARE"</Availability>
+<Availability>"RULES-DISPO_RARE"</Availability>
 <Reach>"+0"</Reach>
 <Price>"3CO"</Price>
 <Encumbrance>"0"</Encumbrance>
@@ -3378,7 +3378,7 @@ Ifthe Character passes the Test, the crew members may then use the Characters Ra
 <Description language="ENGLISH">"Incendiary"</Description>
 <Skill>"RULES-COMPPROJ_POUDRE/RULES-COMPPROJ_ING"</Skill>
 <Damage>"-"</Damage>
-<Availability>"DISPO_LIMITED"</Availability>
+<Availability>"RULES-DISPO_LIMITED"</Availability>
 <Reach>"+0"</Reach>
 <Price>"1CO"</Price>
 <Encumbrance>"0"</Encumbrance>
@@ -3390,7 +3390,7 @@ Ifthe Character passes the Test, the crew members may then use the Characters Ra
 <Description language="ENGLISH">"Grapple"</Description>
 <Skill>"RULES-COMPPROJ_POUDRE/RULES-COMPPROJ_ING"</Skill>
 <Damage>"+2"</Damage>
-<Availability>"DISPO_LIMITED"</Availability>
+<Availability>"RULES-DISPO_LIMITED"</Availability>
 <Reach>"/2"</Reach>
 <Price>"2CO"</Price>
 <Encumbrance>"1"</Encumbrance>

@@ -419,7 +419,7 @@ The assistant provides a bonus of +20 to these Tests rather than the normal +10 
 <Description language="ENGLISH">"Beadle"</Description>
 <Explanation language="ENGLISH">"You are a specialised guard, balancing vigilance and a strong arm with the dignity expected of the institution you protect. Professors at the University of Altdorf and wizards at the Colleges of Magic tend to lose themselves in the study of their discipline. They prefer researching old volumes for obscure facts and theories or conducting experiments and furthering science over the day-to-day running of the organisation they are part of. ‘That is why these organisations require a staff of a more practical bent; beadles, who guard the college halls, libraries, and laboratories from burglars, spies."</Explanation>
 <Skill>"RULES-COMPPRECEP"</Skill>
-<Class>"CLASS_WARR"</Class>
+<Class>"RULES-CLASS_WARR"</Class>
 <SUBCHAPTER_LEVEL>
 <Level id="1">
 <Description language="ENGLISH">"Laboratory Assistant"</Description>
@@ -547,7 +547,7 @@ The assistant provides a bonus of +20 to these Tests rather than the normal +10 
 <Description language="ENGLISH">"Mundane Alchemist"</Description>
 <Explanation language="ENGLISH">"You are at the cutting edge of understanding the properties of matter, combining science and magic to great effect. Alchemists, being schooled in the properties of matter, are experts at producing new materials and improving existing ones. They can prepare chemical concoctions and often work together with metalworkers. Theirs is a specialised kind of knowledge, and one that is in high demand. The Artillery School in Nuln, for example, keeps a whole department of alchemists tasked with the creation of blackpowder, and improving its efficiency."</Explanation>
 <Skill>"RULES-COMPMETIER_ALCHEMIST"</Skill>
-<Class>"CLASS_ACAD"</Class>
+<Class>"RULES-CLASS_ACAD"</Class>
 <SUBCHAPTER_LEVEL>
 <Level id="1">
 <Description language="ENGLISH">"Tinkerer"</Description>
@@ -678,7 +678,7 @@ The assistant provides a bonus of +20 to these Tests rather than the normal +10 
 <Description language="ENGLISH">"Magister Vigilant"</Description>
 <Explanation language="ENGLISH">"The traditions that uphold the role of Magister Vigilant date back to the Wizards’ War of 1976 IC and are therefore older than the colleges themselves. At that time, the wizards of Middenheim realised that if they were going to continue to be tolerated in the city, they had better adopt the habit of hunting down and destroying rogue magic users, otherwise the people might demand that Sigmarite witch hunters be allowed to do the job for them. Unlike other wizards, Magisters Vigiliant are not expected to take on apprentices or display the panoply of a wizard. They combine the skills of spy, investigator, witch hunter, and wizard. The degree to which they are honoured has  less to do with the spells they can master and pass on, but how good they are at tracking down and killing witches, necromancers, and Chaos sorcerers. Magisters Vigilant report to the head of the college, who often is the only person who knows their secret role. And even though they confer with their superior, a Magister Vigilant is often judge, jury, and executioner in one."</Explanation>
 <Skill>"RULES-COMPPRECEP"</Skill>
-<Class>"CLASS_ACAD"</Class>
+<Class>"RULES-CLASS_ACAD"</Class>
 <SUBCHAPTER_LEVEL>
 <Level id="1">
 <Description language="ENGLISH">"Vigilant’s Apprentice"</Description>
@@ -801,7 +801,7 @@ The assistant provides a bonus of +20 to these Tests rather than the normal +10 
 <Description language="ENGLISH">"Scryer"</Description>
 <Explanation language="ENGLISH">"Scrying is a rare talent. This rarity makes it difficult to describe a typical scryer, because each of these individuals, and each of these talents, are unique. Some scryers can read the thoughts of people they touch, others can find out an object’s history, others again touch an object and catch a glimpse of that object’s previous owners. Some scryers use tools, such as cards or crystals, to help them get their visions. Others take herbal preparations, bulbs of Weirdroot, or perform personal rituals to get into a state of mind that is sensitive to visions. Others turn to alcohol after scrying, to dull their senses and forget what they have seen. Scryers are sought after by nobles, who employ them as a source ofinformation, a way to read the intentions of their political rivals, or as a status symbol. Other scryers live in cities or villages, offering their services to whoever wants to pay for them. This can be dangerous, however, for the public may get the idea that the scryer is practising a kind of witchcraft. Scryers can easily create mistrust if they are not careful. They must be truthful, but also diplomatie."</Explanation>
 <Skill>"RULES-COMPPRECEP"</Skill>
-<Class>"CLASS_PEAS"</Class>
+<Class>"RULES-CLASS_PEAS"</Class>
 <SUBCHAPTER_LEVEL>
 <Level id="1">
 <Description language="ENGLISH">"Haunted"</Description>
@@ -926,7 +926,7 @@ The assistant provides a bonus of +20 to these Tests rather than the normal +10 
 <Description language="ENGLISH">"Hierophant"</Description>
 <Explanation language="ENGLISH">"You are a member of the Order of Light, respected for its difficult practise and regarded as exotic and austere. Most common folk make no distinction between mages; they call them all “wizards’ (or less respectful names behind their backs). But among people who do make the distinction, Light Wizards are also known as white wizards, hierophants or, sometimes, exorcists. These wizards usually dress in pristine white clothes, a colour that tends to attract the Light Wind. Any decorations are in silver or gold embroidery, referring to symbols of the order — the Serpent of Light, the Tree of Learning, or one of the many others."</Explanation>
 <Skill>"RULES-COMPLANG_MAG"</Skill>
-<Class>"CLASS_ACAD"</Class>
+<Class>"RULES-CLASS_ACAD"</Class>
 <SUBCHAPTER_LEVEL>
 <Level id="1">
 <Description language="ENGLISH">"Acolyte of the Light Order"</Description>
@@ -1055,7 +1055,7 @@ The assistant provides a bonus of +20 to these Tests rather than the normal +10 
 <Description language="ENGLISH">"Alchemist"</Description>
 <Explanation language="ENGLISH">"You are a member of the Gold Order, widely acknowledged as masters of the manipulation of matter. Like the astromancers of the Celestial Order, the magister-alchemists of the Gold Wind have a scientific, intellectual reputation. But, whereas the students of Azyr peer into the heavens for signs of possible futures and indulge themselves in abstruse theoretical debates, the alchemists focus on practical research, with applications in the physical world."</Explanation>
 <Skill>"RULES-COMPLANG_MAG"</Skill>
-<Class>"CLASS_ACAD"</Class>
+<Class>"RULES-CLASS_ACAD"</Class>
 <SUBCHAPTER_LEVEL>
 <Level id="1">
 <Description language="ENGLISH">"Alchemist Apprentice"</Description>
@@ -1187,7 +1187,7 @@ The assistant provides a bonus of +20 to these Tests rather than the normal +10 
 <Description language="ENGLISH">"Druid"</Description>
 <Explanation language="ENGLISH">"You tap the vitality of the earth and the power of nature to manipulate the natural world through your magic. Jade Wizards are more welcome in villages across the Empire than any of the other Imperial Wizards. It is well known they can control plants, and that the land thrives in their presence. Any settlement that welcomes a druid should expect a bumper harvest in the coming year."</Explanation>
 <Skill>"RULES-COMPLANG_MAG"</Skill>
-<Class>"CLASS_ACAD"</Class>
+<Class>"RULES-CLASS_ACAD"</Class>
 <SUBCHAPTER_LEVEL>
 <Level id="1">
 <Description language="ENGLISH">"Druid’s Apprentice"</Description>
@@ -1318,7 +1318,7 @@ The assistant provides a bonus of +20 to these Tests rather than the normal +10 
 <Description language="ENGLISH">"Astromancer"</Description>
 <Explanation language="ENGLISH">"You scrutinise the heavens and draw down the Wind of Azyr to bend the elements to your will and manipulate fate itself. Magisters who channel Ayzr are astromancers, also known as Celestial Wizards, or ‘Blue Wizards’ by the uneducated. They favour skullcaps, high-collared cloaks, and expensive robes in deep blues and blacks, emblazoned with silver and gold motifs to represent the night sky. Somewhere on their person they wear the symbol of their order, the Comet of Power. Many present a well-groomed, aloof appearance to the world."</Explanation>
 <Skill>"RULES-COMPLANG_MAG"</Skill>
-<Class>"CLASS_ACAD"</Class>
+<Class>"RULES-CLASS_ACAD"</Class>
 <SUBCHAPTER_LEVEL>
 <Level id="1">
 <Description language="ENGLISH">"Celestial Acolyte"</Description>
@@ -1451,7 +1451,7 @@ The assistant provides a bonus of +20 to these Tests rather than the normal +10 
 <Description language="ENGLISH">"Shadowmancer"</Description>
 <Explanation language="ENGLISH">"Secretive and deceitful, you combine the abilities of wizard and spy. The only thing a Grey Wizard is certain of is that nothing is certain in this world, and that things are rarely as they seem. They know that lies often cover up other lies and become so used to falsehood and deception that they have trouble recognizing the truth as it is. Shadowmancers are distrustful people, who rarely believe what they see at face value and always look for false bottoms, hidden meanings, and concealed motives. In return, they are careful to withold their own beliefs and intentions. Truth has value, they’ve learned, and items of value shouldn’t be just given away."</Explanation>
 <Skill>"RULES-COMPLANG_MAG"</Skill>
-<Class>"CLASS_ACAD"</Class>
+<Class>"RULES-CLASS_ACAD"</Class>
 <SUBCHAPTER_LEVEL>
 <Level id="1">
 <Description language="ENGLISH">"Trickster’s Apprentice"</Description>
@@ -1583,7 +1583,7 @@ The assistant provides a bonus of +20 to these Tests rather than the normal +10 
 <Description language="ENGLISH">"Spiriter"</Description>
 <Explanation language="ENGLISH">"Sigmars own truth, Bart! They found this tofs corpse in the alley, no idea who he was nor who killed him. The Watch brings in this purple-robed wizard from the college, and he You are a member of the Amethyst Order, feared and respected just stands there, staring at it, not saying a thing. Finally for your familiarity with death. If the wizards of the Gold College are the most accepted by Imperial society, those of the Amethyst College are the least, shunned and avoided whenever possible. There is something about their steady gaze and quiet, grim demeanour that often makes outsiders feel like a corpse laid on a slab, ready for — what, exactly? he shakes bis head and tells the sergeant all about the killing. Within an hour they figured out who dunnit and nicked him”. — An Altdorf street pedlar. To know Shyish is to know the continuity of time, the constant transition of past to present to future, from birth through life to death and beyond. No, we are not seers — we leave that to the astromancers and the priests of the Lord of Dreams. We are, rather, philosophers. And our knowledge is a burden. — À Magister of Shyish lecturing apprentices"</Explanation>
 <Skill>"RULES-COMPLANG_MAG"</Skill>
-<Class>"CLASS_ACAD"</Class>
+<Class>"RULES-CLASS_ACAD"</Class>
 <SUBCHAPTER_LEVEL>
 <Level id="1">
 <Description language="ENGLISH">"Apprentice Spiriter"</Description>
@@ -1713,7 +1713,7 @@ The assistant provides a bonus of +20 to these Tests rather than the normal +10 
 <Description language="ENGLISH">"Pyromancer"</Description>
 <Explanation language="ENGLISH">"You feed off your raw passion and emotional energy to bring magical firepower to the battlefield. Bright Wizards are the most belligerent of all the wizards of the Empire. This is common knowledge. Though other colleges are known for their particular sort of aggression, and all serve the military in one capacity or another, the Bright College brings shock and awe to the battlefield like none other. This reputation may lack nuance and be the result of unsophisticated accounts by common soldiers and fraught enemies, but it is steeped in truth. The Bright Wizards often adopt a warlike and fearsome appearance, their staffs made of iron and topped with a brazier ready to wield all-consuming flame."</Explanation>
 <Skill>"RULES-COMPLANG_MAG"</Skill>
-<Class>"CLASS_ACAD"</Class>
+<Class>"RULES-CLASS_ACAD"</Class>
 <SUBCHAPTER_LEVEL>
 <Level id="1">
 <Description language="ENGLISH">"Apprentice Pyromancer"</Description>
@@ -1848,7 +1848,7 @@ The assistant provides a bonus of +20 to these Tests rather than the normal +10 
 <Description language="ENGLISH">"Shaman"</Description>
 <Explanation language="ENGLISH">"Ruled by your magical affinity you are drawn instinctively to the wild places and its great beasts. Amber Wizards are known for their feral appearance and lifestyle, more at home in the wilderness than the town, and with more affinity for animals than their fellow Humans. Many wander the Empires vast untamed landscape, but just as many find a place they like and settle there. Every village in the Empire has a story of a local monster, giant, or witch who lives in the forest and is to be feared but is seldom encountered. More often than not, this is an Amber Wizard."</Explanation>
 <Skill>"RULES-COMPLANG_MAG"</Skill>
-<Class>"CLASS_ACAD"</Class>
+<Class>"RULES-CLASS_ACAD"</Class>
 <SUBCHAPTER_LEVEL>
 <Level id="1">
 <Description language="ENGLISH">"Shaman’s Apprentice"</Description>
@@ -1976,7 +1976,7 @@ The assistant provides a bonus of +20 to these Tests rather than the normal +10 
 <Description language="ENGLISH">"Combat Familiar"</Description>
 <Explanation language="ENGLISH">"Only career possible for that Familiar"</Explanation>
 <Skill>"RULES-COMPCOMB_*"</Skill>
-<Class>"CLASS_WARR"</Class>
+<Class>"RULES-CLASS_WARR"</Class>
 <SUBCHAPTER_LEVEL>
 <Level id="1">
 <Description language="ENGLISH">"Newly Crafted"</Description>
@@ -2096,7 +2096,7 @@ The assistant provides a bonus of +20 to these Tests rather than the normal +10 
 <Description language="ENGLISH">"Spell Familiar"</Description>
 <Explanation language="ENGLISH">"Only career possible for that Familiar"</Explanation>
 <Skill>"RULES-COMPSAVOIR_MAGIE"</Skill>
-<Class>"CLASS_ACAD"</Class>
+<Class>"RULES-CLASS_ACAD"</Class>
 <SUBCHAPTER_LEVEL>
 <Level id="1">
 <Description language="ENGLISH">"Newly Conjured"</Description>
@@ -2216,7 +2216,7 @@ The assistant provides a bonus of +20 to these Tests rather than the normal +10 
 <Description language="ENGLISH">"Power Familiar"</Description>
 <Explanation language="ENGLISH">"Only career possible for that Familiar"</Explanation>
 <Skill>"RULES-COMPSAVOIR_MAGIE"</Skill>
-<Class>"CLASS_ACAD"</Class>
+<Class>"RULES-CLASS_ACAD"</Class>
 <SUBCHAPTER_LEVEL>
 <Level id="1">
 <Description language="ENGLISH">"Newly Powered"</Description>

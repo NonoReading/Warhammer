@@ -68,7 +68,7 @@ As wanderers and followers of Loec, individual Wardancers can often find themsel
 <Skill>"RULES-COMPCOMB_*"</Skill>
   <!-- Competence de tete de carriere : Melee (Any), releve sur le PDF par Nono le
        03/09/2026. L export TXT ne la portait pas. -->
-<Class>"CLASS_RANG"</Class>
+<Class>"RULES-CLASS_RANG"</Class>
   <!-- Classe non donnee par le livre. Rangers, tranche par Nono le 03/09/2026 : le texte
        les decrit comme des errants, et le niveau 1 porte Outdoor Survival, Track et
        Stealth (Rural). -->
@@ -219,8 +219,8 @@ As wanderers and followers of Loec, individual Wardancers can often find themsel
 <Description language="ENGLISH">"Asrai War Blade"</Description>
 <Skill>"RULES-COMPCOMB_BASE"</Skill>
 <Damage>"+(BATTR_S)+3"</Damage>
-<Availability>"DISPO_RARE"</Availability>
-<Reach>"WEAPR_MID"</Reach>
+<Availability>"RULES-DISPO_RARE"</Availability>
+<Reach>"RULES-WEAPR_MID"</Reach>
 <Price>"3co"</Price>
 <Encumbrance>"1"</Encumbrance>
 <Quality>"RULES-WEAPB14"</Quality>

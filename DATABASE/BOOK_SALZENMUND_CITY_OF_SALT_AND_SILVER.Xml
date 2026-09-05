@@ -21,7 +21,7 @@
 <Description language="ENGLISH">"Owler"</Description>
 <Explanation language="ENGLISH">"Like your waterborne brethren, you specialise in moving goods from place to place without bothering with petty annoyances such as taxes. The Smuggler career in the core book (WFRP, page 98) focuses on those who ply the Empire’s major rivers, with appropriate Skills and Talents. But ‘unofficial trade’ doesn’t just move along the waters. Roads great and small crisscross the Empire, providing alternatives to riverine travel and leading to places not easily accessed by boat. If you wish, you may play an Owler instead of Smuggler. Owlers traverse mountain passes that open the way to lands far from the sea, or obscure, nearly-forgotten paths and tracks through forests. They take their name from the nocturnal habits they share with owls, and by tradition many use the hoot of an owl when singaling acomplices."</Explanation>
 <Skill>"RULES-COMPSUBOR"</Skill>
-<Class>"CLASS_RIVE"</Class>
+<Class>"RULES-CLASS_RIVE"</Class>
 <SUBCHAPTER_LEVEL>
 <Level id="1">
 <Description language="ENGLISH">"Legger"</Description>

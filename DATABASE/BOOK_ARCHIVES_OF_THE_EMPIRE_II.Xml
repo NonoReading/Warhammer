@@ -185,7 +185,7 @@ Examples you could take include: Alcohol, Food, Narcotics, Pleasure."</Explanati
 <Description language="ENGLISH">"Maneater"</Description>
 <Explanation language="ENGLISH">"Maneaters are the Ogres most encountered by denizens of the Empire. These wandering warriors leave their tribes behind to travel across the Old World, in search of novel foes to fight and food to eat — often these two are one and the same. Ogre Maneaters take their name from Golgfag Maneater, one of most (in)famous Ogre mercenaries of recent times. They are popular among commanders who can afford to feed them, as Ogres make excellent shock troops. Still, it is an expensive endeavour to keep an idle Ogre happy for long, and so simply amassing a force of Maneaters is often seen as akin to a deceleration of war. Maneaters, like all Ogres, tend to adopt aspects of local customs that take their fancy, and so their appearance and armaments vary widely. Only the beloved Club and Gutplate are a constant, but like their owners, the apperance of both varies widely and is unique to the Ogre in question."</Explanation>
 <Skill>"RULES-COMPCOMB_BASE"</Skill>
-<Class>"CLASS_WARR"</Class>
+<Class>"RULES-CLASS_WARR"</Class>
 <SUBCHAPTER_LEVEL>
 <Level id="1">
 <Description language="ENGLISH">"Fresh Meat"</Description>
@@ -309,7 +309,7 @@ Examples you could take include: Alcohol, Food, Narcotics, Pleasure."</Explanati
 <Description language="ENGLISH">"Rhinox Herder"</Description>
 <Explanation language="ENGLISH">"Rhinox Flerders are those rare Ogres who manage to keep an eye ontomorrow even as they fill their gut today. Most Ogres, in possession husbandry and care, as well as fighting off other Ogres who wander t0o close to the animal pens or grazing areas looking for a meal. They trade in fine Rhinox Bulls for breeding, and are always on the lookout. Precious few Rhinox Herders make it to the Empire, and those who In the Mountains of Mourn their talents make Rhinox Herders as a mercenary, but others do manage to find work caring for lesser essential, as the beasts they keep are used for labour and warfare, beasts. Still, all long for the creatures they formerly raised, both for a as well as for food. It is a coveted position, and one only granted _ taste of home and for the respect their former position brought them. to Ogres who prove themselves capable of capturing, breeding and Those who do manage to maintain a Rhinox or two in the low lands maintaing the beasts, as well as keeping their own apatites in check. of the Empire are respected by their own kind, widely sought after as heavy cavalary, and rarely sleep well in the company of other Ogres."</Explanation>
 <Skill>"RULES-COMPPROJ_ENTRAV"</Skill>
-<Class>"CLASS_PEAS"</Class>
+<Class>"RULES-CLASS_PEAS"</Class>
 <SUBCHAPTER_LEVEL>
 <Level id="1">
 <Description language="ENGLISH">"Rhinox Rustler"</Description>
@@ -438,7 +438,7 @@ Examples you could take include: Alcohol, Food, Narcotics, Pleasure."</Explanati
 <Description language="ENGLISH">"Ogre Butcher"</Description>
 <Explanation language="ENGLISH">"Among the Ogres of the Mountains of Mourn, the position of Butcher lies somewhere between that of Priest and Mystic. Their faith is practiced in the preperation of meat, the hanging of a carcass, the Mawseeker later in life. The power and all consuming hunger of the Great Maw flows through them, and in their work they remind,"</Explanation>
 <Skill>"RULES-COMPART_BUTCHER"</Skill>
-<Class>"CLASS_ACAD"</Class>
+<Class>"RULES-CLASS_ACAD"</Class>
 <SUBCHAPTER_LEVEL>
 <Level id="1">
 <Description language="ENGLISH">"Slopscooper"</Description>
@@ -564,8 +564,8 @@ Examples you could take include: Alcohol, Food, Narcotics, Pleasure."</Explanati
 <Description language="ENGLISH">"Ogre Club"</Description>
 <Skill>"RULES-COMPCOMB_BASE"</Skill>
 <Damage>"+(BATTR_S)+4"</Damage>
-<Availability>"DISPO_COMMON"</Availability>
-<Reach>"WEAPR_MID"</Reach>
+<Availability>"RULES-DISPO_COMMON"</Availability>
+<Reach>"RULES-WEAPR_MID"</Reach>
 <Price>"1GC"</Price>
 <Encumbrance>"2"</Encumbrance>
 <Quality>"-"</Quality>
@@ -576,8 +576,8 @@ Examples you could take include: Alcohol, Food, Narcotics, Pleasure."</Explanati
 <Description language="ENGLISH">"Ironfist"</Description>
 <Skill>"RULES-COMPCOMB_BASE"</Skill>
 <Damage>"+(BATTR_S)+3"</Damage>
-<Availability>"DISPO_LIMITED"</Availability>
-<Reach>"WEAPR_SHORT"</Reach>
+<Availability>"RULES-DISPO_LIMITED"</Availability>
+<Reach>"RULES-WEAPR_SHORT"</Reach>
 <Price>"4GC"</Price>
 <Encumbrance>"2"</Encumbrance>
 <Quality>"RULES-WEAPB18 1,RULES-WEAPB08"</Quality>
@@ -588,8 +588,8 @@ Examples you could take include: Alcohol, Food, Narcotics, Pleasure."</Explanati
 <Description language="ENGLISH">"Big Ogre Club"</Description>
 <Skill>"RULES-COMPCOMB_2M"</Skill>
 <Damage>"+(BATTR_S)+6"</Damage>
-<Availability>"DISPO_COMMON"</Availability>
-<Reach>"WEAPR_LONG"</Reach>
+<Availability>"RULES-DISPO_COMMON"</Availability>
+<Reach>"RULES-WEAPR_LONG"</Reach>
 <Price>"5GC"</Price>
 <Encumbrance>"6"</Encumbrance>
 <Quality>"RULES-WEAPB10"</Quality>
@@ -600,7 +600,7 @@ Examples you could take include: Alcohol, Food, Narcotics, Pleasure."</Explanati
 <Description language="ENGLISH">"Great Throwing Spear"</Description>
 <Skill>"RULES-COMPPROJ_LANC"</Skill>
 <Damage>"+(BATTR_S)+4"</Damage>
-<Availability>"DISPO_LIMITED"</Availability>
+<Availability>"RULES-DISPO_LIMITED"</Availability>
 <Reach>"(BATTR_S)x3"</Reach>
 <Price>"6/-"</Price>
 <Encumbrance>"2"</Encumbrance>
@@ -612,7 +612,7 @@ Examples you could take include: Alcohol, Food, Narcotics, Pleasure."</Explanati
 <Description language="ENGLISH">"Leadbelcher Gun"</Description>
 <Skill>"RULES-COMPPROJ_POUDRE"</Skill>
 <Damage>"+10"</Damage>
-<Availability>"DISPO_EXOTIC"</Availability>
+<Availability>"RULES-DISPO_EXOTIC"</Availability>
 <Reach>"50"</Reach>
 <Price>"2"</Price>
 <Encumbrance>"8"</Encumbrance>
@@ -624,7 +624,7 @@ Examples you could take include: Alcohol, Food, Narcotics, Pleasure."</Explanati
 <Description language="ENGLISH">"Ogre Pistol"</Description>
 <Skill>"RULES-COMPPROJ_POUDRE"</Skill>
 <Damage>"+8"</Damage>
-<Availability>"DISPO_EXOTIC"</Availability>
+<Availability>"RULES-DISPO_EXOTIC"</Availability>
 <Reach>"20"</Reach>
 <Price>"9GC"</Price>
 <Encumbrance>"3"</Encumbrance>
@@ -636,7 +636,7 @@ Examples you could take include: Alcohol, Food, Narcotics, Pleasure."</Explanati
 <Description language="ENGLISH">"Harpoon Launcher"</Description>
 <Skill>"RULES-COMPPROJ_ENTRAV"</Skill>
 <Damage>"+10"</Damage>
-<Availability>"DISPO_EXOTIC"</Availability>
+<Availability>"RULES-DISPO_EXOTIC"</Availability>
 <Reach>"20"</Reach>
 <Price>"8GC"</Price>
 <Encumbrance>"3"</Encumbrance>
@@ -648,7 +648,7 @@ Examples you could take include: Alcohol, Food, Narcotics, Pleasure."</Explanati
 <Description language="ENGLISH">"Chain Trap"</Description>
 <Skill>"RULES-COMPPROJ_ENTRAV"</Skill>
 <Damage>"+7"</Damage>
-<Availability>"DISPO_LIMITED"</Availability>
+<Availability>"RULES-DISPO_LIMITED"</Availability>
 <Reach>"(BATTR_S)x2"</Reach>
 <Price>"1GC"</Price>
 <Encumbrance>"2"</Encumbrance>
@@ -660,8 +660,8 @@ Examples you could take include: Alcohol, Food, Narcotics, Pleasure."</Explanati
 <Description language="ENGLISH">"Cleaver"</Description>
 <Skill>"RULES-COMPCOMB_BASE"</Skill>
 <Damage>"+(BATTR_S)+4"</Damage>
-<Availability>"DISPO_COMMON"</Availability>
-<Reach>"WEAPR_MID"</Reach>
+<Availability>"RULES-DISPO_COMMON"</Availability>
+<Reach>"RULES-WEAPR_MID"</Reach>
 <Price>"1CO"</Price>
 <Encumbrance>"1"</Encumbrance>
 <Quality>"-"</Quality>
@@ -672,8 +672,8 @@ Examples you could take include: Alcohol, Food, Narcotics, Pleasure."</Explanati
 <Description language="ENGLISH">"Mallet"</Description>
 <Skill>"RULES-COMPCOMB_BASE"</Skill>
 <Damage>"+(BATTR_S)+4"</Damage>
-<Availability>"DISPO_COMMON"</Availability>
-<Reach>"WEAPR_MID"</Reach>
+<Availability>"RULES-DISPO_COMMON"</Availability>
+<Reach>"RULES-WEAPR_MID"</Reach>
 <Price>"1CO"</Price>
 <Encumbrance>"1"</Encumbrance>
 <Quality>"-"</Quality>
@@ -684,13 +684,13 @@ Examples you could take include: Alcohol, Food, Narcotics, Pleasure."</Explanati
 <DATA_ARMOR>
 <Armor id="ARCH2-ARMO_15">
 <Description language="ENGLISH">"Ogre Gutplate"</Description>
-<Availability>"DISPO_RARE"</Availability>
+<Availability>"RULES-DISPO_RARE"</Availability>
 <Price>"20GC"</Price>
 <Encumbrance>"4"</Encumbrance>
 <Quality>"RULES-ARMOB_02"</Quality>
-<Location>"ARMOL_BODY"</Location>
+<Location>"RULES-ARMOL_BODY"</Location>
 <ArmorPoint>"3"</ArmorPoint>
-<Type>"ARMOT_PLATE"</Type>
+<Type>"RULES-ARMOT_PLATE"</Type>
 </Armor>
 </DATA_ARMOR>
 <DATA_SPELL>

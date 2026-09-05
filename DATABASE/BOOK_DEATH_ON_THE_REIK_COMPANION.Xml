@@ -34,7 +34,7 @@ When you gain a mutation, you roll any dice twice and pick the preferred result.
 <Description language="ENGLISH">"Warrior of Tzeentch"</Description>
 <Explanation language="ENGLISH">"Tzeentch is the Architect of Fate, the Great Conspirator. Change itself is Tzeenth’s domain, and you have given yourself over to it body, mind, and soul. While Tzeentch delights in change brought about by secret conspirators and callous seekers of knowledge, The Great Mutator does not neglect the role of violence may play in bringing forth change. Many of his most favoured mortals are deceitful warriors or cunning generals who force violent, bloody change upon the Old World. These more militant servants weild  steel and magic in service to their blasphemous god, carving a path of smoking ruin toward their promised emphemeral future."</Explanation>
 <Skill>"RULES-COMPCOMB_BASE"</Skill>
-<Class>"CLASS_WARR"</Class>
+<Class>"RULES-CLASS_WARR"</Class>
 <SUBCHAPTER_LEVEL>
 <Level id="1">
 <Description language="ENGLISH">"Initiate of the Mysteries"</Description>

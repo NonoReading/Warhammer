@@ -1,25 +1,24 @@
 # Warhammer — Contexte projet
 
-**Dernière mise à jour : 05/09/2026 (soir) — le §2.49 a maintenant ses étapes 1, 2, 3 et 5
-CLOSES. L'étape 3 a recensé les 111 appels de `CompareRechercheValeur` : deux inversions
-réelles, corrigées et testées sans régression (`chargemetier.pas` l.190,
-`pdfpersonnage.pas` l.673). Seule l'étape 4 reste.**
+**Dernière mise à jour : 05/09/2026 (nuit) — le §2.49 est CLOS côté données : les cinq
+familles que l'étape 2 avait écartées comme « vocabulaires fermés » n'en étaient pas, et
+leurs 1 010 références sont préfixées sur 18 livres. Seule l'étape 4 reste.**
 
-PROCHAINE ÉTAPE : §2.49 étape 4 — durcir `VerifieRecherche`. ⚠️ MAIS le prérequis est
-tombé du mauvais côté : **`ARMOL` passe bien par `VerifieRecherche`** (constantes nues
-`BonusTete`/`BonusBras`/`BonusCorps`/`BonusJambes` de `chargeconstantes.pas` l.394-397,
-passées en second argument depuis `chargepersonnage.pas` l.1441 et 1467). Un durcissement
-sec casserait donc la protection d'armure donnée par les mutations et les talents. L'étape 4
-n'est plus une correction mais une **décision de conception** : exempter les vocabulaires
-fermés, ou préfixer ces quatre constantes et leurs données. À trancher avant d'écrire du code.
+PROCHAINE ÉTAPE : §2.49 étape 4 — durcir `VerifieRecherche`. **Le blocage de conception est
+levé** : `DISPO`, `CLASS`, `WEAPR`, `ARMOT` et `ARMOL` ont tous une définition `<Text name=>`
+préfixée, et toutes leurs références le sont désormais aussi. Il ne reste qu'un point avant le
+durcissement : préfixer les quatre constantes `BonusTete` / `BonusBras` / `BonusCorps` /
+`BonusJambes` (`chargeconstantes.pas` l.394-397, encore `'ARMOL_HEAD'`… nues), ce qui est
+maintenant sans risque puisque `pdfpersonnage.pas` les compare par `CompareRechercheValeur` et
+non plus par un `case`. Traiter en même temps le point annexe `winpersonnage.pas` l.3248
+(variables globales du dernier `Decoupe…`).
 Les points de reprise du chantier des appartenances (§2.44) sont INCHANGÉS : rendre
 l'appartenance visible sur la fiche et dans le PDF, le 3d-3 (ordres de chevalerie, bloqué par
 « le modèle ne porte pas d'effet de règle »), et les onze Regiments of Renown.
 
-⚠️ Lire le §0 sur **l'écriture qui répond « écrit » sans écrire** : QUATRIÈME occurrence le
-05/09 (deuxième envoi de la journée), et c'est encore la TAILLE du fichier, jamais la date, qui
-l'a vue. Réémettre exactement le même envoi a suffi. Six autres envois de la même session sont
-passés du premier coup : ce n'est ni systématique ni previsible, donc on vérifie à chaque fois.
+⚠️ Lire le §0 sur **l'écriture qui répond « écrit » sans écrire** : aucune occurrence lors des
+sept envois de la session du soir, tous passés du premier coup — mais la vérification par la
+TAILLE du fichier a été faite à chaque fois, et c'est elle qui autorise à le dire.
 Ce fichier remplace tous les anciens
 `CONTEXT*.md` / `INDEX*.md` / `RESUME*.md` / `SESSION*.md`. Il n'y en a plus
 qu'un : celui-ci. On ne le duplique jamais, on l'édite en place.
@@ -4871,7 +4870,7 @@ observable, `StrToIntDef` rendant 0 et le test exigeant `>= 1`. Corrigée en `2`
 lignes de commentaire pour que la borne 11 ne soit pas re-signalée comme un bug. 230 613
 octets.
 
-### 2.49 Les préfixes de livre dans les références — étapes 1, 2, 3 et 5 TERMINÉES (05/09/2026) ; reste 4
+### 2.49 Les préfixes de livre dans les références — étapes 1, 2, 3, 5 et le préfixage des cinq familles TERMINÉS (05/09/2026) ; reste 4
 
 **La règle du projet.** Chaque livre repart à 1 dans sa numérotation, précisément pour ne
 pas avoir à connaître le dernier numéro pris ailleurs. Cela n'est vrai que si les
@@ -4995,23 +4994,69 @@ Point annexe à traiter en même temps que l'étape 4 : `winpersonnage.pas` l.32
 `copy(CodeValeur,1,5) = copy(CodeRecherche,1,5)`, c'est-à-dire sur les **variables globales
 laissées par le dernier `Decoupe…`** — un état partagé qui ne survivra pas à un durcissement.
 
+#### Étape 2 bis — les cinq « vocabulaires fermés » n'en étaient pas (FAIT le 05/09/2026, nuit)
+
+**La conclusion de l'étape 2 était fausse, pour une raison de méthode.** Elle avait cherché des
+définitions `id=` pour `DISPO`, `CLASS`, `WEAPR`, `ARMOT`, `ARMOL`, n'en avait pas trouvé, et en
+avait déduit des vocabulaires fermés portés par le code. Ils sont définis **autrement**, comme
+des textes, et déjà préfixés :
+
+```
+BOOK_RULESBOOK.Xml l.143 : <Text name="RULES-DISPO_RARE">"Rare"</Text>
+BOOK_RULESBOOK.Xml l.138 : <Text name="RULES-ARMOL_HEAD">"Head"</Text>
+```
+
+Les 31 codes des cinq familles ont leur `<Text name=>`, tous `RULES-`. Un livre en a déjà étendu
+un : `NATIO-ARMOT_LAMELLAR`, préfixé des deux côtés, commentaire à l'appui
+(`BOOK_NATIONS_OF_MANKIND.Xml` l.10425). Seules les **références** avaient été oubliées.
+Elles sont résolues par `GetTexteLibelle` / `GetAllTexteLibelle` (`chargetexte.pas` l.42 et
+l.100), qui appellent `CompareRechercheValeur(PTexte.Code, CodeTexte)` — définition préfixée en
+premier, référence nue en second, soit exactement le cas que la tolérance couvre.
+
+**1 010 références préfixées sur 18 livres**, en trois lots testés séparément :
+
+| Balise | Famille | Lignes |
+|---|---|---|
+| `<Availability>` | DISPO | 418 |
+| `<Class>` | CLASS | 230 |
+| `<Reach>` | WEAPR | 176 |
+| `<Location>` | ARMOL | 97 |
+| `<Type>` | ARMOT | 89 |
+
+Aucun refus : tous les codes référencés sont définis dans le Rulebook, donc `RULES-` partout.
+**Règle du script corrigée** par rapport à l'étape 2 : le critère est « exactement un **préfixe**
+distinct », et non « exactement une définition » — chaque code en a deux, Rulebook et Rulebook
+FR, aux mêmes numéros de ligne. Diff contrôlé côté retraits à chaque lot : aucune ligne d'une
+autre balise n'a bougé.
+
+**Une correction de code a été nécessaire, et une seule.** `pdfpersonnage.pas` l.1633 et 2822
+portaient un `case LocData of BonusBras: …` — une **égalité stricte** sur chaîne, qu'aucun
+recensement d'appels de `CompareRechercheValeur` ne pouvait voir. Un `<Location>` préfixé
+n'aurait jamais matché `BonusBras = 'ARMOL_ARM'` et **toute la protection d'armure du PDF serait
+passée à zéro**, en silence. Remplacé par une cascade de `CompareRechercheValeur(LocData, …)`,
+qui marche avec les données préfixées comme avec les nues. Testé par Nono avant puis après le
+préfixage.
+
+Les autres lectures étaient tolérantes, vérifié **avant** d'écrire les données : `TypeMateriel`,
+`Disponibilite` et `Portee` ne passent que par `GetAllTexteLibelle` / `ReplaceTexteLibelle`, et
+`LibelleGroupe` par `GetTexteLibelle`. Seul `winpersonnage.pas` l.1059
+(`ChangeClasse := (PMetierNV.LibelleGroupe <> PMetierActuel.LibelleGroupe)`) compare strictement,
+mais entre deux valeurs de même nature : le préfixage **complet et uniforme** la laisse juste —
+c'est un préfixage partiel qui l'aurait cassée.
+
 #### Ce qui reste
 
 4. **Durcir `VerifieRecherche`** : une référence nue devient une erreur visible au lieu d'une
-   résolution au hasard.
-   ⚠️ **Le prérequis est tombé du mauvais côté, et cela change la nature de l'étape.** Le §2.49
-   supposait qu'il suffisait de vérifier que les cinq vocabulaires fermés ne passent pas par ce
-   chemin. **`ARMOL` y passe** : `BonusTete` / `BonusBras` / `BonusCorps` / `BonusJambes`
-   (`chargeconstantes.pas` l.394-397, valeurs `'ARMOL_HEAD'`… **nues**) sont passés en second
-   argument depuis `chargepersonnage.pas` l.1441 (`PersonnageMutationArmureModif`) et l.1467
-   (`PersonnageTalentArmureModif`), appelés par `pdfpersonnage.pas` l.1721-1730 et 2900-2903.
-   Un durcissement sec ferait donc **disparaître les points de protection d'armure donnés par
-   les mutations et les talents** (tête, bras, corps, jambes).
-   L'étape 4 n'est donc plus une correction mais une **décision de conception**, à trancher
-   avant d'écrire la moindre ligne : soit exempter explicitement les vocabulaires fermés du
-   durcissement, soit préfixer ces quatre constantes **et** les données qui les référencent.
-   Les quatre autres vocabulaires (`DISPO`, `CLASS`, `WEAPR`, `ARMOT`) n'ont pas encore été
-   vérifiés de la même façon — le faire avant de trancher.
+   résolution au hasard. **Le blocage est levé** — les cinq familles ne sont plus un obstacle,
+   puisque définitions et références sont préfixées des deux côtés.
+   Avant d'écrire le durcissement, deux préalables :
+   - préfixer `BonusTete` / `BonusBras` / `BonusCorps` / `BonusJambes` (`chargeconstantes.pas`
+     l.394-397) en `'RULES-ARMOL_HEAD'`… — ce sont les dernières valeurs nues du lot, et c'est
+     désormais sans risque : les deux endroits qui les comparent (`chargepersonnage.pas` l.1441
+     et 1467, plus la cascade de `pdfpersonnage.pas`) passent par `CompareRechercheValeur` ;
+   - réécrire `winpersonnage.pas` l.3248, qui s'appuie sur les **variables globales laissées par
+     le dernier `Decoupe…`** (`copy(CodeValeur,1,5) = copy(CodeRecherche,1,5)`) — un état partagé
+     qui ne survivra pas au durcissement.
 
 Deux fragilités relevées dans le code au passage, sans effet aujourd'hui, notées pour mémoire :
 `pdfpersonnage.pas` retire le paramètre d'une qualité par `copy(LocData,1,Length(LocData)-2)`,
@@ -5021,9 +5066,11 @@ aujourd'hui). Cas particulier à ne pas casser : `BonusProtection = 'WEAPB18 '`
 (`chargeconstantes.pas` l.393) est cherché par `Pos` de sous-chaîne sur la liste entière ;
 le préfixage le laisse fonctionner, mais un `XX-WEAPB18` d'un autre livre matcherait aussi.
 
-**En attendant l'étape 4**, les nouveaux livres numérotent à la suite pour les qualités d'arme
-et d'armure — en vérifiant dans TOUS les livres, pas seulement dans le Rulebook : c'est cette
-vérification manquante qui a produit les cinq collisions.
+**Les nouveaux livres numérotent à la suite** pour les qualités d'arme et d'armure — en
+vérifiant dans TOUS les livres, pas seulement dans le Rulebook : c'est cette vérification
+manquante qui a produit les cinq collisions. En revanche, un livre qui **étend** un des cinq
+vocabulaires (une nouvelle disponibilité, un nouveau type d'armure) le fait sous son propre
+préfixe, comme Nations l'a fait pour `NATIO-ARMOT_LAMELLAR`.
 
 ---
 

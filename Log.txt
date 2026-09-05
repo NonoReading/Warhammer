@@ -1373,3 +1373,46 @@ CE QUE LA SESSION A APPRIS.
     2900-2903. Un durcissement sec ferait disparaitre les points de protection d armure
     donnes par les mutations et les talents. L etape 4 n est donc plus une correction mais une
     decision de conception.
+
+05/09/2026 (SOIR, SUITE) - LES CINQ "VOCABULAIRES FERMES" N EN ETAIENT PAS : 1010 REFERENCES
+PREFIXEES, ET UN CASE SUR CHAINE QUI ALLAIT TOUT CASSER
+CE QUI A CHANGE.
+(1) LE PREREQUIS DE L ETAPE 4 EST LEVE, ET IL RENVERSE LA CONCLUSION DE L ETAPE 2. DISPO,
+    CLASS, WEAPR, ARMOT et ARMOL ne sont PAS des vocabulaires fermes portes par le code.
+    L etape 2 avait cherche des definitions id= et n en avait pas trouve ; ils sont definis
+    autrement, comme des TEXTES, et deja prefixes : <Text name="RULES-DISPO_RARE">,
+    <Text name="RULES-ARMOL_HEAD">. Les 31 codes des cinq familles ont leur <Text name=>, et
+    un livre en a deja etendu un (NATIO-ARMOT_LAMELLAR, prefixe des deux cotes). Seules les
+    REFERENCES avaient ete oubliees. Ce n etait donc pas une exemption a concevoir mais le
+    meme chantier que ARMOB/WEAPB.
+(2) 1010 REFERENCES PREFIXEES SUR 18 LIVRES, EN TROIS LOTS TESTES SEPAREMENT :
+    <Location> 97 (ARMOL), <Type> 89 (ARMOT), <Availability> 418 (DISPO), <Class> 230
+    (CLASS), <Reach> 176 (WEAPR). Aucun refus : les 31 codes ont tous leur definition dans le
+    Rulebook, donc RULES- partout. Regle du script CORRIGEE par rapport a l etape 2 : le
+    critere est "exactement un PREFIXE distinct", pas "exactement une definition" - chaque
+    code en a deux, Rulebook et Rulebook FR, aux memes numeros de ligne.
+(3) LES DEUX CASE DE PDFPERSONNAGE.PAS (l.1633 et 2822) REMPLACES PAR UNE CASCADE DE
+    CompareRechercheValeur. "case LocData of BonusBras: ..." est une egalite STRICTE :
+    un <Location> prefixe n aurait jamais matche BonusBras = 'ARMOL_ARM' et TOUTE la
+    protection d armure du PDF serait passee a zero, en silence.
+CE QUE LA SESSION A APPRIS.
+(1) UN RECENSEMENT NE VOIT QUE CE QU IL CHERCHE - DEUXIEME FOIS EN DEUX JOURS. L etape 3
+    avait recense les 111 appels de CompareRechercheValeur ; les deux case n en sont pas, donc
+    ils etaient invisibles. Comme la veille, ou le recensement des <Quality> n avait vu que
+    les codes seuls dans la balise. Avant de prefixer une donnee, chercher TOUTES les
+    lectures du champ (le nom du champ Pascal, pas la fonction de comparaison).
+(2) J AI LIVRE AVANT DE VERIFIER LA LECTURE, ET IL A FALLU REVENIR EN ARRIERE. Le lot
+    <Location> est parti sur le poste, puis j ai regarde comment le code lisait le champ. Le
+    revert a ete propre parce que la copie d origine etait encore la, mais l ordre correct est
+    l inverse : lire le code, puis ecrire les donnees. Applique ensuite pour <Type>,
+    <Availability>, <Reach>, <Class> : aucun n a demande de correction de code, et ca a ete
+    etabli AVANT l ecriture.
+(3) LES COMPTAGES PARTIELS SONT DES FAUX CHIFFRES. Annonce 42 <Location> puis 34 <Type> :
+    c etaient les 4 fichiers stages a ce moment-la, pas les 20. Reels : 97 et 89. Compter sur
+    TOUS les fichiers du repertoire, jamais sur ce qu on a sous la main.
+(4) UNE EGALITE STRICTE ENTRE DEUX VALEURS DE MEME NATURE RESTE SAINE. winpersonnage.pas
+    l.1059 (ChangeClasse) compare deux LibelleGroupe : le prefixage complet et uniforme la
+    laisse juste. C est le prefixage PARTIEL qui l aurait cassee - argument de plus pour finir
+    une famille plutot que d en prefixer la moitie.
+(5) L ECRITURE VERS LE POSTE A PRIS DU PREMIER COUP LES SIX FOIS. Verifie a chaque envoi par
+    la TAILLE du fichier dans le listing, jamais par la seule reponse de l outil.

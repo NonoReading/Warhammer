@@ -575,7 +575,7 @@
 <Description language="ENGLISH">"Wolf Kin"</Description>
 <Explanation language="ENGLISH">"Looking to Ulric for inspiration, you have decided to deal with life s difficulties by practising a form of extreme self-reliance. Flagellants are rarely seen in the north of the Empire. Zealots who follow Sigmar find it hard here, as they are not taken seriously and find it difficult to find fellow travellers. The few Flagellants who walk the roads of the northern provinces are often jeered, rather than seen as figures of awe. But Ulric has his own zealots. They adopt no uniform and preach no creed, for they are quiet and private in their fervour. They seek to embody the virtues espoused by their god by testing themselves against the wild, living amongst the wolves even in the depths of winter. In the wilds of the north, many people are left homeless and bereaved by Beastmen, sea raiding Norscans, or bands of Forest Goblins. Reasoning that, according to Ulrican"</Explanation>
 <Skill>"RULES-COMPSURVEXT"</Skill>
-<Class>"CLASS_WARR"</Class>
+<Class>"RULES-CLASS_WARR"</Class>
 <SUBCHAPTER_LEVEL>
 <Level id="1">
 <Description language="ENGLISH">"Survivor"</Description>

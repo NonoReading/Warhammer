@@ -920,7 +920,7 @@ This bonus applies to Crew Tests as well as individual Leadership Tests."</Expla
 <Description language="ENGLISH">"Beachcomber"</Description>
 <Explanation language="ENGLISH">"You scour the local beaches for anything of value, always on the lookout for a hidden gem or lucky find. Beachcombers live by their wits upon the littoral, finding most of what they need to survive through Manann’s providence. A diverse range of flotsam and jetsam gets washed up on the beaches of the Sea of Claws, and Beachcombers take full advantage of this. Almost any item that can be traded will find itself aboard a ship on the Sea of Claws, and therefore, provided it floats for a time, could end up washed up on a beach. Such castaway cargo can often fetch good money from a local merchant or be bartered for other useful stuff."</Explanation>
 <Skill>"RULES-COMPPRECEP"</Skill>
-<Class>"CLASS_SEAF"</Class>
+<Class>"SEAOF-CLASS_SEAF"</Class>
 <SUBCHAPTER_LEVEL>
 <Level id="1">
 <Description language="ENGLISH">"Scavenger"</Description>
@@ -1047,7 +1047,7 @@ This bonus applies to Crew Tests as well as individual Leadership Tests."</Expla
 <Description language="ENGLISH">"Chantyman"</Description>
 <Explanation language="ENGLISH">"You coordinate the actions of your ship’s crew, guide their activity, and raise their morale with rousing ditties. Any sailor worth their salt performs better to the sound  of a Chantyman. Some say they are just singers and musicians, like any others. However, it is a common belief amongst most ships crews that the best Chantymen can have an unnatural effect upon the crew."</Explanation>
 <Skill>"RULES-COMPDIVERT_CHANT"</Skill>
-<Class>"CLASS_SEAF"</Class>
+<Class>"SEAOF-CLASS_SEAF"</Class>
 <SUBCHAPTER_LEVEL>
 <Level id="1">
 <Description language="ENGLISH">"Chanter"</Description>
@@ -1170,7 +1170,7 @@ This bonus applies to Crew Tests as well as individual Leadership Tests."</Expla
 <Description language="ENGLISH">"Huffer"</Description>
 <Explanation language="ENGLISH">"You guide ships through the most treacherous waters of the world’s several seas. Huffers are known to work on the rivers of the Empire, but pilots and navigators are obviously even more invaluable to captains of ocean-going vessels. Not only is knowledge of areas of rock, reef, or sandbank necessary, but seafarers often sail beyond sight of any landmark, so navigators at sea must display practical knowledge of how to pinpoint their location from the position of the sun and the stars."</Explanation>
 <Skill>"RULES-COMPORIENT"</Skill>
-<Class>"CLASS_SEAF"</Class>
+<Class>"SEAOF-CLASS_SEAF"</Class>
 <SUBCHAPTER_LEVEL>
 <Level id="1">
 <Description language="ENGLISH">"Portguide"</Description>
@@ -1297,7 +1297,7 @@ This bonus applies to Crew Tests as well as individual Leadership Tests."</Expla
 <Description language="ENGLISH">"Officer"</Description>
 <Explanation language="ENGLISH">"You command a ship, and must inspire your crew to place their lives in your hands. Ship’s Officers, especially captains, are judge, jury, and executioner aboard their vessels. They have Manann-given power of life and death over the crew, but this is a double-edged sword. The Officer must also inspire the crew to trust their judgement and competence, or the hands might mutiny."</Explanation>
 <Skill>"RULES-COMPCOMM"</Skill>
-<Class>"CLASS_SEAF"</Class>
+<Class>"SEAOF-CLASS_SEAF"</Class>
 <SUBCHAPTER_LEVEL>
 <Level id="1">
 <Description language="ENGLISH">"Midshipman"</Description>
@@ -1423,7 +1423,7 @@ This bonus applies to Crew Tests as well as individual Leadership Tests."</Expla
 <Description language="ENGLISH">"Sailor"</Description>
 <Explanation language="ENGLISH">"You work on board a ship, keeping the decks clean and the sails suitably trimmed. Humans of the Old World had to learn the skills of sailing for themselves, for the Dwarfs were never a great maritime civilisation, and the Elves had no desire to encourage Human exploration of the wider world. Human civilisation before the age of Sigmar rarely ventured upon the waves. Even the mighty Khemrians built few vessels capable of ocean travel."</Explanation>
 <Skill>"RULES-COMPVOILE"</Skill>
-<Class>"CLASS_SEAF"</Class>
+<Class>"SEAOF-CLASS_SEAF"</Class>
 <SUBCHAPTER_LEVEL>
 <Level id="1">
 <Description language="ENGLISH">"Landsman"</Description>
@@ -1551,7 +1551,7 @@ This bonus applies to Crew Tests as well as individual Leadership Tests."</Expla
 <Description language="ENGLISH">"Sailor-Priest of Manann"</Description>
 <Explanation language="ENGLISH">"You bring the will of Manann to his followers and intercede to court his favour and avoid his wrath. Priests of Manann are found working and ministering on board vessels as often as they are found in his temples and shrines. Manann is a fickle and moody deity, but he seems to respect a degree of practical ability and  experience of the seas in his priests, and most of them spend a part of their career at sea."</Explanation>
 <Skill>"RULES-COMPPRIERE"</Skill>
-<Class>"CLASS_SEAF"</Class>
+<Class>"SEAOF-CLASS_SEAF"</Class>
 <SUBCHAPTER_LEVEL>
 <Level id="1">
 <Description language="ENGLISH">"Initiate"</Description>
@@ -1680,7 +1680,7 @@ This bonus applies to Crew Tests as well as individual Leadership Tests."</Expla
 <Description language="ENGLISH">"Ship’s Gunner"</Description>
 <Explanation language="ENGLISH">"You maintain and fire the guns aboard ship and are expert in their use. The Ship’s Gunner is part of the crew, and just like any other crew member they are expected to help with the sailing of their vessel and to put their hand to anything involved in running the ship. In addition, they are experts on blackpowder weapons and their use at sea."</Explanation>
 <Skill>"RULES-COMPPROJ_POUDRE"</Skill>
-<Class>"CLASS_SEAF"</Class>
+<Class>"SEAOF-CLASS_SEAF"</Class>
 <SUBCHAPTER_LEVEL>
 <Level id="1">
 <Description language="ENGLISH">"Powder Monkey"</Description>
@@ -1807,7 +1807,7 @@ This bonus applies to Crew Tests as well as individual Leadership Tests."</Expla
 <Description language="ENGLISH">"Wrecker"</Description>
 <Explanation language="ENGLISH">"You lure vessels to a watery doom and make off with their precious cargo. Bands of wreckers work around the coasts of all the nations of the Old World. They live by salvaging cargos from stricken vessels. Although there are some wreckers who live by treacherous lengths of coastline and wait patiently for ships to run aground, they may even manage to keep on the right side of the law as they do so, informing the authorities of their actions but seeking a cut of the salvage. But such people are not archetypal wreckers. The enterprise of wrecking is usually an opportunistic and criminal one, and the name is associated with those who take an active role in ensuring a steady supply of ships to wreck and plunder."</Explanation>
 <Skill>"RULES-COMPCOMB_BASE"</Skill>
-<Class>"CLASS_SEAF"</Class>
+<Class>"SEAOF-CLASS_SEAF"</Class>
 <SUBCHAPTER_LEVEL>
 <Level id="1">
 <Description language="ENGLISH">"Cargo Scavenger"</Description>
@@ -1940,7 +1940,7 @@ This bonus applies to Crew Tests as well as individual Leadership Tests."</Expla
 <Description language="ENGLISH">"Priest Of Stromfels"</Description>
 <Explanation language="ENGLISH">"You preach that the strong have the right to take advantage of the weak and call on Stromfels to aid you in your predations. Priests of Stromfels are actively involved in the business of piracy, raiding, or wrecking — to do less would be hypocrisy. You may not take the Priest of Stromfels as your first career, and it can only be undertaken after you have completed the first tier of a predatory occupation. This need not be a seafaring career; there are Outlaws, Protagonists, and Racketeers who might find much to admire in Stromfels, but most of his priests have either served as crew on a pirate vessel, or worked as Wreckers. ‘Feel that sou-wester blowing up? There’ll be gifts from Stromfels scattered on the shore tomorrow morning, and a few more souls in his jaws this night.’ — Thijs Vroom, Marienburg sailor"</Explanation>
 <Skill>"RULES-COMPCOMB_BASE"</Skill>
-<Class>"CLASS_SEAF"</Class>
+<Class>"SEAOF-CLASS_SEAF"</Class>
 <SUBCHAPTER_LEVEL>
 <Level id="1">
 <Description language="ENGLISH">"Initiate"</Description>

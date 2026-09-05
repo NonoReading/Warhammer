@@ -1903,7 +1903,7 @@ The Sea Guard are among the oldest military traditions, formed when the Elves fi
   <!-- competence de revenu : relevee par Nono sur le PDF le 30/08. Le livre la met
        en ITALIQUE dans la ligne Skills du niveau 1, et l italique ne survit pas a
        pdftotext - elle ne pouvait donc pas etre deduite du TXT. -->
-<Class>"CLASS_WARR"</Class>
+<Class>"RULES-CLASS_WARR"</Class>
 <PictureLevel>"NIV_HELF"</PictureLevel>
 <SUBCHAPTER_LEVEL>
 <Level id="1">
@@ -2038,7 +2038,7 @@ Swordmasters are warrior-scholars studied in the art of war, training countless 
   <!-- competence de revenu : relevee par Nono sur le PDF le 30/08. Le livre la met
        en ITALIQUE dans la ligne Skills du niveau 1, et l italique ne survit pas a
        pdftotext - elle ne pouvait donc pas etre deduite du TXT. -->
-<Class>"CLASS_WARR"</Class>
+<Class>"RULES-CLASS_WARR"</Class>
 <PictureLevel>"NIV_HELF"</PictureLevel>
 <SUBCHAPTER_LEVEL>
 <Level id="1">
@@ -2174,7 +2174,7 @@ Shadow Warriors are trained in the art of subterfuge and guerilla warfare, makin
   <!-- competence de revenu : relevee par Nono sur le PDF le 30/08. Le livre la met
        en ITALIQUE dans la ligne Skills du niveau 1, et l italique ne survit pas a
        pdftotext - elle ne pouvait donc pas etre deduite du TXT. -->
-<Class>"CLASS_RANG"</Class>
+<Class>"RULES-CLASS_RANG"</Class>
 <PictureLevel>"NIV_HELF"</PictureLevel>
 <SUBCHAPTER_LEVEL>
 <Level id="1">
@@ -2309,7 +2309,7 @@ The role of Merchant Adventurer goes back thousands of years to when Elves first
   <!-- competence de revenu : relevee par Nono sur le PDF le 30/08. Le livre la met
        en ITALIQUE dans la ligne Skills du niveau 1, et l italique ne survit pas a
        pdftotext - elle ne pouvait donc pas etre deduite du TXT. -->
-<Class>"CLASS_BURG"</Class>
+<Class>"RULES-CLASS_BURG"</Class>
 <PictureLevel>"NIV_HELF"</PictureLevel>
 <SUBCHAPTER_LEVEL>
 <Level id="1">
@@ -2447,7 +2447,7 @@ The role of an Aestheticist is to help other Elves attain and maintain spiritual
   <!-- competence de revenu : relevee par Nono sur le PDF le 30/08. Le livre la met
        en ITALIQUE dans la ligne Skills du niveau 1, et l italique ne survit pas a
        pdftotext - elle ne pouvait donc pas etre deduite du TXT. -->
-<Class>"CLASS_COUR"</Class>
+<Class>"RULES-CLASS_COUR"</Class>
 <PictureLevel>"NIV_HELF"</PictureLevel>
 <SUBCHAPTER_LEVEL>
 <Level id="1">
@@ -2579,7 +2579,7 @@ The role of an Aestheticist is to help other Elves attain and maintain spiritual
 <Explanation language="ENGLISH">"You are a student of the loremasters of the White Tower of Hoeth, practising the esoteric arts of Elven magic.
 High Elf Mages devote themselves to the Winds of Magic, whether as individual Winds or combined into the pure magic of Qhaysh. Mages are highly respected for their arcane expertise and earn further esteem for their keen level of insight in other fields, particularly in matters of divinity. Mages draw from the divine as well as the arcane for their spellcasting, enabling many to eventually become priests."</Explanation>
 <Skill>"RULES-COMPLANG_MAG"</Skill>
-<Class>"CLASS_ACAD"</Class>
+<Class>"RULES-CLASS_ACAD"</Class>
 <PictureLevel>"NIV_HELF"</PictureLevel>
 <SUBCHAPTER_LEVEL>
 <Level id="1">
@@ -2726,7 +2726,7 @@ High Elf Mages devote themselves to the Winds of Magic, whether as individual Wi
 <Explanation language="ENGLISH">"You seek to combine the power of High Magic, the talents of the smith, and inspiration from the divine example of Vaul to become a peerless crafter of artefacts magical and mundane.
 Smith-priests of Vaul forge powerful magical weapons and armour for the Elves. Their skill is rivalled only by Dwarf runesmiths, some of whom may even pay them grudging respect. To emulate their crippled patron god, Smith-priests may blind themselves, and they obtain divine power from this sacrifice."</Explanation>
 <Skill>"RULES-COMPMETIER_FORGE"</Skill>
-<Class>"CLASS_ACAD"</Class>
+<Class>"RULES-CLASS_ACAD"</Class>
 <Parent>"HELFG-WORK132"</Parent>
   <!-- CARRIERE AVANCEE : on n y entre pas, on y arrive en montant de niveau
        depuis le Mage. Le premier <Level> declare est le 3, et c est CE 3 qui
@@ -2817,7 +2817,7 @@ Smith-priests of Vaul forge powerful magical weapons and armour for the Elves. T
 <Explanation language="ENGLISH">"You command Mathlann's realm, assisting ships and sailors through your mastery of Elven sea magics.
 Storm Weavers often serve as senior chaplains for Ulthuan's navies, most often aboard ships from Lothern and Cothique. Elves from the other kingdoms pay tribute to Mathlann, but they tend to fear the mercurial Storm Weavers for their ability to summon his wrath at their whim. Though Mathlann is considered a Cadai god, He is also a child of Ellinill, the Lord of Destruction, and his dark moods and oft-callous nature reflect that ancestry."</Explanation>
 <Skill>"RULES-COMPVOILE"</Skill>
-<Class>"CLASS_ACAD"</Class>
+<Class>"RULES-CLASS_ACAD"</Class>
 <Parent>"HELFG-WORK132"</Parent>
   <!-- CARRIERE AVANCEE : on n y entre pas, on y arrive en montant de niveau
        depuis le Mage. Le premier <Level> declare est le 3, et c est CE 3 qui
@@ -2907,7 +2907,7 @@ Storm Weavers often serve as senior chaplains for Ulthuan's navies, most often a
 <Explanation language="ENGLISH">"You are a mage, warrior, and scholar, seeking to expand the library at the White Tower and vanquish the forbidden cults plaguing Ulthuan.
 Many of Saphery's Loremasters began their training as swordmasters of Hoeth, in pursuit of martial expertise. There are also Loremasters who first walked the path of the mage, and whose advanced research instead focuses on the academic understanding of strategy, tactics, and war magic. However, the spells and rites used by Loremasters are not intended for battlefields."</Explanation>
 <Skill>"RULES-COMPRECH"</Skill>
-<Class>"CLASS_ACAD"</Class>
+<Class>"RULES-CLASS_ACAD"</Class>
 <Parent>"HELFG-WORK132"</Parent>
   <!-- CARRIERE AVANCEE : on n y entre pas, on y arrive en montant de niveau
        depuis le Mage. Le premier <Level> declare est le 3, et c est CE 3 qui
@@ -3721,53 +3721,53 @@ You invoke a mystical prime language that existed before the arrival of the Old 
        ne contient de code QUALITY_. -->
 <Armor id="HELFG-ARMO_01">
 <Description language="ENGLISH">"Ithilmar Breastplate"</Description>
-<Availability>"DISPO_UNIQUE"</Availability>
+<Availability>"RULES-DISPO_UNIQUE"</Availability>
 <Price>"1280 GC"</Price>
 <Encumbrance>"1"</Encumbrance>
 <Quality>"RULES-ARMOB_02,RULES-ARMOB_04,RULES-ARMOB_05"</Quality>
-<Location>"ARMOL_BODY"</Location>
+<Location>"RULES-ARMOL_BODY"</Location>
 <ArmorPoint>"2"</ArmorPoint>
-<Type>"ARMOT_PLATE"</Type>
+<Type>"RULES-ARMOT_PLATE"</Type>
 </Armor>
 <Armor id="HELFG-ARMO_02">
 <Description language="ENGLISH">"Ithilmar Open Helm"</Description>
-<Availability>"DISPO_UNIQUE"</Availability>
+<Availability>"RULES-DISPO_UNIQUE"</Availability>
 <Price>"256 GC"</Price>
 <Encumbrance>"0"</Encumbrance>
 <Quality>"RULES-ARMOB_03,RULES-ARMOB_05,RULES-ARMOB_06"</Quality>
-<Location>"ARMOL_HEAD"</Location>
+<Location>"RULES-ARMOL_HEAD"</Location>
 <ArmorPoint>"2"</ArmorPoint>
-<Type>"ARMOT_PLATE"</Type>
+<Type>"RULES-ARMOT_PLATE"</Type>
 </Armor>
 <Armor id="HELFG-ARMO_03">
 <Description language="ENGLISH">"Ithilmar Bracers"</Description>
-<Availability>"DISPO_UNIQUE"</Availability>
+<Availability>"RULES-DISPO_UNIQUE"</Availability>
 <Price>"1024 GC"</Price>
 <Encumbrance>"1"</Encumbrance>
 <Quality>"RULES-ARMOB_02,RULES-ARMOB_04,RULES-ARMOB_05"</Quality>
-<Location>"ARMOL_ARM"</Location>
+<Location>"RULES-ARMOL_ARM"</Location>
 <ArmorPoint>"2"</ArmorPoint>
-<Type>"ARMOT_PLATE"</Type>
+<Type>"RULES-ARMOT_PLATE"</Type>
 </Armor>
 <Armor id="HELFG-ARMO_04">
 <Description language="ENGLISH">"Ithilmar Plate Leggings"</Description>
-<Availability>"DISPO_UNIQUE"</Availability>
+<Availability>"RULES-DISPO_UNIQUE"</Availability>
 <Price>"1280 GC"</Price>
 <Encumbrance>"1"</Encumbrance>
 <Quality>"RULES-ARMOB_02,RULES-ARMOB_04,RULES-ARMOB_05"</Quality>
-<Location>"ARMOL_LEG"</Location>
+<Location>"RULES-ARMOL_LEG"</Location>
 <ArmorPoint>"2"</ArmorPoint>
-<Type>"ARMOT_PLATE"</Type>
+<Type>"RULES-ARMOT_PLATE"</Type>
 </Armor>
 <Armor id="HELFG-ARMO_05">
 <Description language="ENGLISH">"Ithilmar Helm"</Description>
-<Availability>"DISPO_UNIQUE"</Availability>
+<Availability>"RULES-DISPO_UNIQUE"</Availability>
 <Price>"384 GC"</Price>
 <Encumbrance>"0"</Encumbrance>
 <Quality>"RULES-ARMOB_02,RULES-ARMOB_04,RULES-ARMOB_05,RULES-ARMOB_07"</Quality>
-<Location>"ARMOL_HEAD"</Location>
+<Location>"RULES-ARMOL_HEAD"</Location>
 <ArmorPoint>"2"</ArmorPoint>
-<Type>"ARMOT_PLATE"</Type>
+<Type>"RULES-ARMOT_PLATE"</Type>
 </Armor>
   <!-- ERRATUM DU LIVRE : la case AP de cette ligne est VIDE p.34 - verifie sur l image de la
        page, ce n est pas un defaut d extraction. Toutes les autres pieces valent 2, et le
@@ -3775,75 +3775,75 @@ You invoke a mystical prime language that existed before the arrival of the Old 
        C EST UNE DEDUCTION, pas une lecture : la remettre a 0 si Nono prefere la fidelite. -->
 <Armor id="HELFG-ARMO_06">
 <Description language="ENGLISH">"Ithiltaen Helm"</Description>
-<Availability>"DISPO_UNIQUE"</Availability>
+<Availability>"RULES-DISPO_UNIQUE"</Availability>
 <Price>"1536 GC"</Price>
 <Encumbrance>"0"</Encumbrance>
 <Quality>"RULES-ARMOB_02,RULES-ARMOB_04,RULES-ARMOB_05,RULES-ARMOB_07"</Quality>
-<Location>"ARMOL_HEAD"</Location>
+<Location>"RULES-ARMOL_HEAD"</Location>
 <ArmorPoint>"2"</ArmorPoint>
-<Type>"ARMOT_PLATE"</Type>
+<Type>"RULES-ARMOT_PLATE"</Type>
 </Armor>
 <Armor id="HELFG-ARMO_07">
 <Description language="ENGLISH">"Dragon Armour Breastplate"</Description>
-<Availability>"DISPO_UNIQUE"</Availability>
+<Availability>"RULES-DISPO_UNIQUE"</Availability>
 <Price>"10240 GC"</Price>
 <Encumbrance>"3"</Encumbrance>
 <Quality>"RULES-ARMOB_02,RULES-ARMOB_04,RULES-ARMOB_05"</Quality>
-<Location>"ARMOL_BODY"</Location>
+<Location>"RULES-ARMOL_BODY"</Location>
 <ArmorPoint>"2"</ArmorPoint>
-<Type>"ARMOT_PLATE"</Type>
+<Type>"RULES-ARMOT_PLATE"</Type>
 </Armor>
 <Armor id="HELFG-ARMO_08">
 <Description language="ENGLISH">"Dragon Armour Open Helm"</Description>
-<Availability>"DISPO_UNIQUE"</Availability>
+<Availability>"RULES-DISPO_UNIQUE"</Availability>
 <Price>"2048 GC"</Price>
 <Encumbrance>"1"</Encumbrance>
 <Quality>"RULES-ARMOB_03,RULES-ARMOB_05,RULES-ARMOB_06"</Quality>
-<Location>"ARMOL_HEAD"</Location>
+<Location>"RULES-ARMOL_HEAD"</Location>
 <ArmorPoint>"2"</ArmorPoint>
-<Type>"ARMOT_PLATE"</Type>
+<Type>"RULES-ARMOT_PLATE"</Type>
 </Armor>
 <Armor id="HELFG-ARMO_09">
 <Description language="ENGLISH">"Dragon Armour Bracers"</Description>
-<Availability>"DISPO_UNIQUE"</Availability>
+<Availability>"RULES-DISPO_UNIQUE"</Availability>
 <Price>"8192 GC"</Price>
 <Encumbrance>"3"</Encumbrance>
 <Quality>"RULES-ARMOB_02,RULES-ARMOB_04,RULES-ARMOB_05"</Quality>
-<Location>"ARMOL_ARM"</Location>
+<Location>"RULES-ARMOL_ARM"</Location>
 <ArmorPoint>"2"</ArmorPoint>
-<Type>"ARMOT_PLATE"</Type>
+<Type>"RULES-ARMOT_PLATE"</Type>
 </Armor>
 <Armor id="HELFG-ARMO_10">
 <Description language="ENGLISH">"Dragon Armour Plate Leggings"</Description>
-<Availability>"DISPO_UNIQUE"</Availability>
+<Availability>"RULES-DISPO_UNIQUE"</Availability>
 <Price>"10240 GC"</Price>
 <Encumbrance>"3"</Encumbrance>
 <Quality>"RULES-ARMOB_02,RULES-ARMOB_04,RULES-ARMOB_05"</Quality>
-<Location>"ARMOL_LEG"</Location>
+<Location>"RULES-ARMOL_LEG"</Location>
 <ArmorPoint>"2"</ArmorPoint>
-<Type>"ARMOT_PLATE"</Type>
+<Type>"RULES-ARMOT_PLATE"</Type>
 </Armor>
 <Armor id="HELFG-ARMO_11">
 <Description language="ENGLISH">"Dragon Armour Helm"</Description>
-<Availability>"DISPO_UNIQUE"</Availability>
+<Availability>"RULES-DISPO_UNIQUE"</Availability>
 <Price>"3072 GC"</Price>
 <Encumbrance>"2"</Encumbrance>
 <Quality>"RULES-ARMOB_02,RULES-ARMOB_04,RULES-ARMOB_05,RULES-ARMOB_07"</Quality>
-<Location>"ARMOL_HEAD"</Location>
+<Location>"RULES-ARMOL_HEAD"</Location>
 <ArmorPoint>"2"</ArmorPoint>
-<Type>"ARMOT_PLATE"</Type>
+<Type>"RULES-ARMOT_PLATE"</Type>
 </Armor>
   <!-- Le livre ne lui donne aucune penalite de Furtivite : pas de ARMOB_05, contrairement aux
        pieces d Ithilmar et de Dragon. Type cuir souple, faute de categorie 'peau'. -->
 <Armor id="HELFG-ARMO_12">
 <Description language="ENGLISH">"White Lion Hide Cloak"</Description>
-<Availability>"DISPO_EXOTIC"</Availability>
+<Availability>"RULES-DISPO_EXOTIC"</Availability>
 <Price>"20 GC"</Price>
 <Encumbrance>"2"</Encumbrance>
 <Quality>"RULES-ARMOB_03"</Quality>
-<Location>"ARMOL_BODY"</Location>
+<Location>"RULES-ARMOL_BODY"</Location>
 <ArmorPoint>"2"</ArmorPoint>
-<Type>"ARMOT_SOFTLEATHER"</Type>
+<Type>"RULES-ARMOT_SOFTLEATHER"</Type>
 </Armor>
 </DATA_ARMOR>
 <DATA_WEAPON>
@@ -3858,8 +3858,8 @@ You invoke a mystical prime language that existed before the arrival of the Old 
 <Description language="ENGLISH">"Greatsword of Hoeth"</Description>
 <Skill>"RULES-COMPCOMB_2M"</Skill>
 <Damage>"+(BATTR_S)+6"</Damage>
-<Availability>"DISPO_UNIQUE"</Availability>
-<Reach>"WEAPR_LONG"</Reach>
+<Availability>"RULES-DISPO_UNIQUE"</Availability>
+<Reach>"RULES-WEAPR_LONG"</Reach>
 <Price>"2000 GC"</Price>
 <Encumbrance>"2"</Encumbrance>
 <Quality>"RULES-WEAPB10,RULES-WEAPB30"</Quality>

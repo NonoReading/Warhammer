@@ -61,7 +61,7 @@ However, their differing visions of the Empire’s fate ensure that for all thei
 <Description language="ENGLISH">"Cult Magus of Tzeentch"</Description>
 <Explanation language="ENGLISH">"A scheming manipulator, master of deception, and wielder of the Sfoulest sorcery, you have given yourself to Tzeentch and debased your soul upon ifs altar. A most favoured servant of the Great Mutator, a Cult Magus can manipulate Tzeentch’s greatest gift: magic. They use their fell powers to subvert the ambitious, tempt the greedy, and convert the great and good of the Old World to their dark plans. Whether in a position of authority or not, the Magus is the locus of a Tzeentch cult. They pull at the strings of the other cultists as they lead bloody rituals and utter blasphemous prayer, all whilst following a diabolical plan that none fully grasp. And at the appointed time we shall rise from our secret places and throw down the towns and cities of The Empire. Our brethren shall pour forth from the forests to slay and bunt. Chaos will cover the land and we, the chosen servants, shall be exalted in HIS eyes. Hail to Tzeentch, Changer of the Ways — Njawrr’thakh Lzimbarr Tzeentch!. — Excerpt from The Book of Transmutation"</Explanation>
 <Skill>"RULES-COMPLANG_MAG"</Skill>
-<Class>"CLASS_ACAD"</Class>
+<Class>"RULES-CLASS_ACAD"</Class>
 <SUBCHAPTER_LEVEL>
 <Level id="1">
 <Description language="ENGLISH">"Cult Acolyte"</Description>

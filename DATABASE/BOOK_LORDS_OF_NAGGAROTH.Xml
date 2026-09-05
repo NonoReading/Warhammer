@@ -158,7 +158,7 @@ At the cost of one corruption point the Sorceress may add doublle their Willpowe
 <Description language="ENGLISH">"Black Ark Corsair"</Description>
 <Explanation language="ENGLISH">"To be a Corsair is a great honour amongst the Druchii, and it is a chance to win riches and fame and capture slaves during their raids, for one tenth of the loot captured by a Corsair belongs to him. Four tenths go to his captain and the remainder is the possession of the Witch King. These seafaring reavers excel at boarding other vessels, making them amongst the deadliest fighters in close combat. In the Old World they can often be found working as spies or enforcers for the Covenant of Nethu, either by their own volition or as marooned unfortunates trying to bargain their way back to the Black Fleet with some measure of their dignity intact."</Explanation>
 <Skill>"RULES-COMPCOMB_BASE"</Skill>
-<Class>"CLASS_RIVE"</Class>
+<Class>"RULES-CLASS_RIVE"</Class>
 <SUBCHAPTER_LEVEL>
 <Level id="1">
 <Description language="ENGLISH">"Raider"</Description>
@@ -286,7 +286,7 @@ At the cost of one corruption point the Sorceress may add doublle their Willpowe
 <Description language="ENGLISH">"Sorceress of Ghrond"</Description>
 <Explanation language="ENGLISH">"The Sorceresses of Ghrond lay claim to being the most powerful wielders of magic in the world and have much to substantiate their claim with. Trained in the Dark Arts in the Dark Convent of Sorceresses in Ghrond an order of sorcery consisting entirely of Druchii women by the Witch Kings edict. Fueled by cruel ambition and an unchained lust for power these cold hearted beauties often pursue vile pacts with daemons and seek out dread magical artifacts the across the world. For this reason it is not unheard of to find one of these mistresses of magic in the Old World, pursuing whatever foul aims that their black heart’s desire."</Explanation>
 <Skill>"RULES-COMPLANG_MAG"</Skill>
-<Class>"CLASS_ACAD"</Class>
+<Class>"RULES-CLASS_ACAD"</Class>
 <SUBCHAPTER_LEVEL>
 <Level id="1">
 <Description language="ENGLISH">"Apprentice Sorceress"</Description>
@@ -417,7 +417,7 @@ At the cost of one corruption point the Sorceress may add doublle their Willpowe
 <Description language="ENGLISH">"Beastmaster"</Description>
 <Explanation language="ENGLISH">"In Naggaroth the Beastmasters of Clar Karond and Karond Kar can command the unruliest of creatures to do their bidding. They are the masters of the lash and break raging Manticures, cunning Harpies, serpentine Hydras and even the wisest of Dragons to their will. When not tormenting the great beasts in their thrall, the Beastmasters roam the wilds of Naggaroth, ever looking for new creatures to enslave in their menageries. Those Beastmasters that find themselves in the Old World have traveled there to capture a creature not found in Naggaroth, Wyverns or Griffons are typical goals of such an expedition. Others are in the Old World in the employ of the Covenant of Nethu, driving and breaking beasts in their fighting rings much as they do for the arenas in Naggaroth."</Explanation>
 <Skill>"RULES-COMPANIM"</Skill>
-<Class>"CLASS_RANG"</Class>
+<Class>"RULES-CLASS_RANG"</Class>
 <SUBCHAPTER_LEVEL>
 <Level id="1">
 <Description language="ENGLISH">"Apprentice Beastmaster"</Description>
@@ -547,7 +547,7 @@ At the cost of one corruption point the Sorceress may add doublle their Willpowe
 <Description language="ENGLISH">"Disciple of Khaine"</Description>
 <Explanation language="ENGLISH">"Most famed of Khaines adherents are the Executioners and the Witch Elves, but Khaine too has a priesthood and devotees to his bloody worship. The disciples of the Lord of Murder are as much skilled warriors as they are holy men, for no pious adherent of the Bloody Handed God would find themselves ignorant of the ninety-nine sacred killing strikes. In Naggaroth, Khaines priesthood perform bloody rituals honoring Khaine and accompany the Witch Kings armies to war, inspiring Druchii warriors to ever greater acts of slaughter in Khaines sacred name. In the Old World, his Priesthood act as missionaries, ensuring that the crude native Cult of Khaine pays proper respects to the Lord of Murder and that the few exiles and spies of the Druchii in the Old World are reminded to whom they owe blood and souls in sacrifice"</Explanation>
 <Skill>"RULES-COMPPRIERE"</Skill>
-<Class>"CLASS_ROGU"</Class>
+<Class>"RULES-CLASS_ROGU"</Class>
 <SUBCHAPTER_LEVEL>
 <Level id="1">
 <Description language="ENGLISH">"Initiate"</Description>
@@ -862,8 +862,8 @@ In a great and (un)holy ritual of blood and death you cut out the hearts of sacr
 <Description language="ENGLISH">"Black Ark Sabre"</Description>
 <Skill>"RULES-COMPCOMB_BASE"</Skill>
 <Damage>"+(BATTR_S)+4"</Damage>
-<Availability>"DISPO_RARE"</Availability>
-<Reach>"WEAPR_MID"</Reach>
+<Availability>"RULES-DISPO_RARE"</Availability>
+<Reach>"RULES-WEAPR_MID"</Reach>
 <Price>"2CO/-"</Price>
 <Encumbrance>"1"</Encumbrance>
 <Quality>"RULES-WEAPB10"</Quality>
@@ -874,8 +874,8 @@ In a great and (un)holy ritual of blood and death you cut out the hearts of sacr
 <Description language="ENGLISH">"Lakelui"</Description>
 <Skill>"RULES-COMPCOMB_BASE"</Skill>
 <Damage>"+(BATTR_S)+4"</Damage>
-<Availability>"DISPO_EXOTIC"</Availability>
-<Reach>"WEAPR_MID"</Reach>
+<Availability>"RULES-DISPO_EXOTIC"</Availability>
+<Reach>"RULES-WEAPR_MID"</Reach>
 <Price>"7CO/-"</Price>
 <Encumbrance>"1"</Encumbrance>
 <Quality>"RULES-WEAPB21,RULES-WEAPB12"</Quality>
@@ -886,8 +886,8 @@ In a great and (un)holy ritual of blood and death you cut out the hearts of sacr
 <Description language="ENGLISH">"Ghlaith"</Description>
 <Skill>"RULES-COMPCOMB_BASE"</Skill>
 <Damage>"+(BATTR_S)+4"</Damage>
-<Availability>"DISPO_EXOTIC"</Availability>
-<Reach>"WEAPR_MID"</Reach>
+<Availability>"RULES-DISPO_EXOTIC"</Availability>
+<Reach>"RULES-WEAPR_MID"</Reach>
 <Price>"5CO/-"</Price>
 <Encumbrance>"1"</Encumbrance>
 <Quality>"RULES-WEAPB10,RULES-WEAPB16"</Quality>
@@ -898,8 +898,8 @@ In a great and (un)holy ritual of blood and death you cut out the hearts of sacr
 <Description language="ENGLISH">"Sea Dragon Cloak"</Description>
 <Skill>"RULES-COMPCOMB_BASE"</Skill>
 <Damage>"+(BATTR_S)"</Damage>
-<Availability>"DISPO_EXOTIC"</Availability>
-<Reach>"WEAPR_MID"</Reach>
+<Availability>"RULES-DISPO_EXOTIC"</Availability>
+<Reach>"RULES-WEAPR_MID"</Reach>
 <Price>"10CO"</Price>
 <Encumbrance>"2"</Encumbrance>
 <Quality>"RULES-WEAPB18 2,RULES-WEAPB08,RULES-WEAPB09"</Quality>
@@ -910,8 +910,8 @@ In a great and (un)holy ritual of blood and death you cut out the hearts of sacr
 <Description language="ENGLISH">"Fighting Spines"</Description>
 <Skill>"RULES-COMPCOMB_PARAD"</Skill>
 <Damage>"+(BATTR_S)+2"</Damage>
-<Availability>"DISPO_EXOTIC"</Availability>
-<Reach>"WEAPR_SHORT"</Reach>
+<Availability>"RULES-DISPO_EXOTIC"</Availability>
+<Reach>"RULES-WEAPR_SHORT"</Reach>
 <Price>"5CO"</Price>
 <Encumbrance>"3"</Encumbrance>
 <Quality>"RULES-WEAPB08,RULES-WEAPB11,RULES-WEAPB27"</Quality>
@@ -922,8 +922,8 @@ In a great and (un)holy ritual of blood and death you cut out the hearts of sacr
 <Description language="ENGLISH">"Draich"</Description>
 <Skill>"RULES-COMPCOMB_2M"</Skill>
 <Damage>"+(BATTR_S)+5"</Damage>
-<Availability>"DISPO_EXOTIC"</Availability>
-<Reach>"WEAPR_LONG"</Reach>
+<Availability>"RULES-DISPO_EXOTIC"</Availability>
+<Reach>"RULES-WEAPR_LONG"</Reach>
 <Price>"14CO"</Price>
 <Encumbrance>"3"</Encumbrance>
 <Quality>"RULES-WEAPB30,RULES-WEAPB21,RULES-WEAPB12"</Quality>
@@ -934,7 +934,7 @@ In a great and (un)holy ritual of blood and death you cut out the hearts of sacr
 <Description language="ENGLISH">"Repeater Crossbow"</Description>
 <Skill>"RULES-COMPPROJ_ARB"</Skill>
 <Damage>"+8"</Damage>
-<Availability>"DISPO_EXOTIC"</Availability>
+<Availability>"RULES-DISPO_EXOTIC"</Availability>
 <Reach>"60"</Reach>
 <Price>"12CO"</Price>
 <Encumbrance>"3"</Encumbrance>
@@ -946,7 +946,7 @@ In a great and (un)holy ritual of blood and death you cut out the hearts of sacr
 <Description language="ENGLISH">"Repeater Handbow"</Description>
 <Skill>"RULES-COMPPROJ_ARB"</Skill>
 <Damage>"+6"</Damage>
-<Availability>"DISPO_EXOTIC"</Availability>
+<Availability>"RULES-DISPO_EXOTIC"</Availability>
 <Reach>"10"</Reach>
 <Price>"14CO"</Price>
 <Encumbrance>"1"</Encumbrance>
@@ -958,7 +958,7 @@ In a great and (un)holy ritual of blood and death you cut out the hearts of sacr
 <Description language="ENGLISH">"Ravager Harpoon"</Description>
 <Skill>"RULES-COMPPROJ_ARB"</Skill>
 <Damage>"+11"</Damage>
-<Availability>"DISPO_EXOTIC"</Availability>
+<Availability>"RULES-DISPO_EXOTIC"</Availability>
 <Reach>"100"</Reach>
 <Price>"60CO"</Price>
 <Encumbrance>"4"</Encumbrance>
@@ -970,7 +970,7 @@ In a great and (un)holy ritual of blood and death you cut out the hearts of sacr
 <Description language="ENGLISH">"Barbed Bolts"</Description>
 <Skill>"RULES-COMPPROJ_ARB"</Skill>
 <Damage>"+2"</Damage>
-<Availability>"DISPO_EXOTIC"</Availability>
+<Availability>"RULES-DISPO_EXOTIC"</Availability>
 <Reach>"+0"</Reach>
 <Price>"8/-"</Price>
 <Encumbrance>"1"</Encumbrance>

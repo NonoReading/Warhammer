@@ -259,8 +259,8 @@
 <Description language="ENGLISH">"Obsinite Club"</Description>
 <Skill>"RULES-COMPCOMB_BASE"</Skill>
 <Damage>"+(BATTR_S)+3"</Damage>
-<Availability>"DISPO_LIMITED"</Availability>
-<Reach>"WEAPR_SHORT"</Reach>
+<Availability>"RULES-DISPO_LIMITED"</Availability>
+<Reach>"RULES-WEAPR_SHORT"</Reach>
 <Price>"1CO"</Price>
 <Encumbrance>"1"</Encumbrance>
 <Quality>"RULES-WEAPB22"</Quality>
@@ -271,8 +271,8 @@
 <Description language="ENGLISH">"Obsinite Spiked Maul"</Description>
 <Skill>"RULES-COMPCOMB_BASE"</Skill>
 <Damage>"+(BATTR_S)+4"</Damage>
-<Availability>"DISPO_LIMITED"</Availability>
-<Reach>"WEAPR_MID"</Reach>
+<Availability>"RULES-DISPO_LIMITED"</Availability>
+<Reach>"RULES-WEAPR_MID"</Reach>
 <Price>"2CO"</Price>
 <Encumbrance>"2"</Encumbrance>
 <Quality>"RULES-WEAPB22,RULES-WEAPB04"</Quality>
@@ -283,7 +283,7 @@
 <Description language="ENGLISH">"Blowpipe"</Description>
 <Skill>"LUSTR-COMPPROJ_SARBAC"</Skill>
 <Damage>"+0"</Damage>
-<Availability>"DISPO_EXOTIC"</Availability>
+<Availability>"RULES-DISPO_EXOTIC"</Availability>
 <Reach>"20"</Reach>
 <Price>"3CO"</Price>
 <Encumbrance>"1"</Encumbrance>
@@ -295,7 +295,7 @@
 <Description language="ENGLISH">"Blowpipe Dart (12)"</Description>
 <Skill>"LUSTR-COMPPROJ_SARBAC"</Skill>
 <Damage>"+1"</Damage>
-<Availability>"DISPO_EXOTIC"</Availability>
+<Availability>"RULES-DISPO_EXOTIC"</Availability>
 <Reach>"+0"</Reach>
 <Price>"10/-"</Price>
 <Encumbrance>"0"</Encumbrance>
@@ -307,8 +307,8 @@
 <Description language="ENGLISH">"Machete"</Description>
 <Skill>"RULES-COMPCOMB_BASE"</Skill>
 <Damage>"+(BATTR_S)+4"</Damage>
-<Availability>"DISPO_COMMON"</Availability>
-<Reach>"WEAPR_MID"</Reach>
+<Availability>"RULES-DISPO_COMMON"</Availability>
+<Reach>"RULES-WEAPR_MID"</Reach>
 <Price>"1CO"</Price>
 <Encumbrance>"1"</Encumbrance>
 <Quality>"-"</Quality>
@@ -323,43 +323,43 @@
 <DATA_ARMOR>
 <Armor id="LUSTR-ARMO_01">
 <Description language="ENGLISH">"Lustrian Skullcap"</Description>
-<Availability>"DISPO_LIMITED"</Availability>
+<Availability>"RULES-DISPO_LIMITED"</Availability>
 <Price>"8/-"</Price>
 <Encumbrance>"1"</Encumbrance>
 <Quality>"RULES-ARMOB_03,RULES-ARMOB_08"</Quality>
-<Location>"ARMOL_HEAD"</Location>
+<Location>"RULES-ARMOL_HEAD"</Location>
 <ArmorPoint>"1"</ArmorPoint>
-<Type>"ARMOT_SOFTLEATHER"</Type>
+<Type>"RULES-ARMOT_SOFTLEATHER"</Type>
 </Armor>
 <Armor id="LUSTR-ARMO_02">
 <Description language="ENGLISH">"Lustrian Leggings"</Description>
-<Availability>"DISPO_LIMITED"</Availability>
+<Availability>"RULES-DISPO_LIMITED"</Availability>
 <Price>"14/-"</Price>
 <Encumbrance>"2"</Encumbrance>
 <Quality>"RULES-ARMOB_08"</Quality>
-<Location>"ARMOL_LEG"</Location>
+<Location>"RULES-ARMOL_LEG"</Location>
 <ArmorPoint>"1"</ArmorPoint>
-<Type>"ARMOT_SOFTLEATHER"</Type>
+<Type>"RULES-ARMOT_SOFTLEATHER"</Type>
 </Armor>
 <Armor id="LUSTR-ARMO_03">
 <Description language="ENGLISH">"Lustrian Jerkin"</Description>
-<Availability>"DISPO_LIMITED"</Availability>
+<Availability>"RULES-DISPO_LIMITED"</Availability>
 <Price>"10/-"</Price>
 <Encumbrance>"2"</Encumbrance>
 <Quality>"RULES-ARMOB_08"</Quality>
-<Location>"ARMOL_BODY"</Location>
+<Location>"RULES-ARMOL_BODY"</Location>
 <ArmorPoint>"1"</ArmorPoint>
-<Type>"ARMOT_SOFTLEATHER"</Type>
+<Type>"RULES-ARMOT_SOFTLEATHER"</Type>
 </Armor>
 <Armor id="LUSTR-ARMO_04">
 <Description language="ENGLISH">"Lustrian Jack"</Description>
-<Availability>"DISPO_LIMITED"</Availability>
+<Availability>"RULES-DISPO_LIMITED"</Availability>
 <Price>"12/-"</Price>
 <Encumbrance>"2"</Encumbrance>
 <Quality>"RULES-ARMOB_08"</Quality>
-<Location>"ARMOL_ARM,ARMOL_BODY"</Location>
+<Location>"RULES-ARMOL_ARM,RULES-ARMOL_BODY"</Location>
 <ArmorPoint>"1"</ArmorPoint>
-<Type>"ARMOT_SOFTLEATHER"</Type>
+<Type>"RULES-ARMOT_SOFTLEATHER"</Type>
 </Armor>
 </DATA_ARMOR>
 <DATA_CAREER>
@@ -367,7 +367,7 @@
 <Description language="ENGLISH">"Interpreter"</Description>
 <Explanation language="ENGLISH">"You employ your fluency with multiple languages to bargain with native populations and decode the warnings of the ancients. Military expeditions that thoughtlessly butcher every stranger and curious native they meet are doomed to an appropriately violent demise. Communication is key to any successful enterprise, especially one undertaken on foreign soil. Intelligence from local guides can spare a company from environmental dangers, aggravated predators, and enemy manoeuvres. Unfortunately, language barriers can make attempts at dialogue extremely difficult, or even impossible. An Interpreter with the knowledge to bridge this linguistic divide can be a vital expeditionary asset. 'I think the inscription means “Abandon Hops All Ye Who Enter Here”? Let me check my notes…' - Rufius Algorini, novice Translator. 'They’re saying “The Marsh Is Death”. But there’s nuance to the meaning; their culture has many words for “Death”. I don’t think they’re referring to our inevitable demise, but to the lingering taint of Necromancy. How many wooden stakes did we bring with us?' - Geraltina Causs, experienced Polyglot. Interpreters may be residents of the Old World who embrace contact with other civilisations, or native-born peoples who emigrate to Old World colonies. Either way, their experience makes them uniquely positioned to facilitate cultural exchanges. As the world gets smaller, and demand for international trade increases, linguistics has evolved into a scholastic discipline. It is therefore possible for Interpreters to practise languages of cultures they have never met. Though learning from books provides a more limited understanding than practising with native speakers, there are some languages - such as ancient Nehekharan - which can no longer be learned from living creatures. Approaching these dialects academically may be the only way to understand the warnings these civilisations left before their demise. Culture Clash: An inexperienced Translator may believe their job is simply to explain the meanings of words and inscriptions their clients do not understand. A successful Interpreter understands this is but a fraction of their responsibilities. As the leading representative of their faction, Interpreters set the tone of their interactions with other peoples, even if they’re simply repeating the words of their commander. They practise their elocution, diction, body language, and conversational awareness to make sure they always leave the right impression. Stories of negotiations degenerating into violence because of one misguided word choice contain enough truth to keep wary Interpreters on edge. Once someone acquires the skill for picking up a second language, they usually find it easier to learn more. Polyglots fluent in many languages can command higher rates for their services, especially in cosmopolitan areas like Marienburg, the Border Princes, Albion, or the New World colonies. Because one of the best ways to understand a culture is to study its writings, experienced Interpreters are often well-read, and knowledgeable in a variety of subjects. They often surprise their companions with niche understanding of anthropological nuances, counter-intelligence codebreaking, and historical trivia. The most respected Interpreters transition into their nation’s diplomatic corps, representing their masters as Envoys (WFRP page 72). But most Interpreters associate with less rarefied company. They are stationed on the border, where cultural contact is most intense, and primed to escalate to violence. This is dangerous, frontier territory, and most Interpreters learn basic survival skills, if only in self-defence. Every culture requires Interpreters to communicate with immigrants and trading partners, but the great maritime powers need their skills the most. As self-declared lords of the ocean, the High Elves of Ulthuan boast a substantial number of Interpreters, condescending to learn the allegedly primitive tongues of other species. Interpreters in Lustria: Those born and raised in Lustria hear a great many tongues, as travellers from all over the world arrive on their shores. However unwelcome these invaders are, most natives would rather bargain than be impaled upon their blades. Learning to say ‘We mean you know harm’ in many languages is as valuable a piece of life-saving information as learning the dangers of the jungle. Explorers may hire their Interpreters from local populations, or find an appropriately learned individual in any of the Old World’s largest ports. Mercenary companies recruit from many different backgrounds, outfitting Imperials, Kislevites, Tileans, Estalians, disinherited Bretonnians, and Dwarf fortune hunters in their formations. Though fluency in a specific tongue is often a requirement for joining the corps, it never hurts to have an Interpreter on hand to communicate nuanced instructions that might be lost on non-native speakers. The holy grail of any Interpreter in Lustria is to converse with the Lizardmen. Whilst Skink translators can develop skill in the dialects of the Old World, non-Lizardmen struggle when attempting the growls, snorts, clicks, and whistles of Saurian. Written communication has been far more successful, and many Interpreters specialise in producing the glyphs and symbols that the Lizardmen use to keep records. If Interpreters can find a way to convey peaceful intentions through this medium, it may be key to establishing a concord with the Lizardmen."</Explanation>
 <Skill>"RULES-COMPLANG_*"</Skill>
-<Class>"CLASS_ACAD"</Class>
+<Class>"RULES-CLASS_ACAD"</Class>
 <SUBCHAPTER_LEVEL>
 <Level id="1">
 <Description language="ENGLISH">"Translator"</Description>
@@ -492,7 +492,7 @@
 <Description language="ENGLISH">"Oracle"</Description>
 <Explanation language="ENGLISH">"You receive visions from an ancient, alien power, leading you to investigate violations of the Great Plan. Before the cleaving of continents, before the coming of Chaos, there were the Old Ones. These ancient gods uplifted the genetic ancestors of Humans, Elves, and Dwarfs into their current sapient forms and set the fundamental natural laws of the world. In all places where Chaos does not hold sway, the will of the Old Ones is still extant to this day, though few have the capacity to perceive their magical influence. Outside of the Lizardmen, only a few individuals are attuned to the Old Ones' directions, and not all of them accept their calling. Those who do are known as Oracles. 'There is only one war — the war against Chaos — and it has been waged by gods and titans for innumerable aeons. You are the latest footsoldier spawned for this conflict. You are a lesser footnote in the Great Plan, and that is a more prestigious honour than you will ever comprehend.' - Chuqa-xi of Tlaxtlan, Slann Mage-Priest. 'For the glory of the twin-tailed comet!' - Battlecry of Amalda Forktongue, devotee of Sigmar. An Oracle's visions direct them to places where the Great Plan is under threat. They may be drawn to sacred places where protective magic has been disturbed, or an artefact of essential significance has been stolen. Sometimes they are simply led to sites of Chaos worship, the ultimate enemy of everything the Old Ones constructed. The guidance of the Old Ones is rarely explicit, and is prone to misinterpretation. Oracles try to compensate by searching for evidence of the Old Ones' intentions all around them. The movement of trees, the turning of weather, perhaps even the shifting Winds of Magic — all provide hints of where their destiny leads. Few Oracles understand the source of their visions in anything but the vaguest terms. Most believe they are being guided by their own culture's deities, or the faceless hand of fate. Anyone who persists in attempting to communicate with the Old Ones directly is driven insane by the experience. This may be because the alien omnipotence of their kind is fundamentally incompatible with mortal comprehension… or perhaps because the Old Ones have been so thoroughly supplanted by the Ruinous Powers that truthseekers are liable to go mad from the revelation. Eyes of the Ancients: No-one is sure how the representatives of the Old Ones are chosen, assuming it is not simply an accident of birth. It has been noted that a disproportionate number of them emerge from rural communities, where the call of the natural world is still strong and unsilenced. By adulthood, though, most Visionaries have left their homes behind, as they are drawn to places of power expressed in their lucid dreams. Here, they are 'awakened', magically imbued with a fraction of the truth regarding their purpose. If they accept this duty, they become true Oracles — and their journey is only just beginning. Most Oracles are not spellcasters themselves, merely arcane vessels through which the Old Ones exert their will. They may perceive traces of magical influence, or locate mystical artefacts using divining rods, but do not conjure power of their own. However, an Oracle who succeeds and understands their place in the universe may unlock the potential within themself, and become a powerful mage in their own right. This enlightenment may be found in the constellations above, or in the primaeval origins of the practitioner's own lizard brain. The pre-eminent non-Lizardman devotees of the Old Ones are the Truthsayers. The first of these druidic disciples were taught by the Old Ones directly, and their order has preserved this sacred knowledge through oral histories ever since. The protective aura of Albion's Ogham Stones is maintained by the Truthsayers, as are other locations key to preserving the Geomantic Web. An Oracle may learn their craft directly under a Truthsayer's tutelage, or from plaques retrieved in Lizardman temple-cities that appear incomprehensible to others. It's speculated that some Oracles may even be 'awoken' by the direct telepathic manipulation of Slann, a dire prospect that suggests an Oracle's will may not be their own. Oracles in Lustria: Most Oracles in Lustria are Skinks — specially-spawned individuals with forked tails, destined to serve as the eyes and ears of the Slann beyond the temple-cities. Yet warm-blooded Oracles feel drawn to Lustria too. Nowhere in the Old World possesses such a precious collection of artefacts, monuments, or access points to the Geomantic Web. Oracles born on distant shores commonly volunteer to join a voyage to the New World, claiming a lust for gold or glory rather than admitting the disturbing truth. Others are fugitives from the Empire's Witch Hunters, who show little tolerance for unlicensed spellcasters or servants of an alien deity. The caves of Lustria are the native habitat of the Troglodon (page 180), a hissing, spitting, pale-skinned monster commonly considered to be untameable. Yet Skink Oracles have been known to calm a Troglodon with a gesture, even taking the creatures as steeds. It is said the first Troglodons were conceived as tracking beasts for the Old Ones and will instinctively serve sentients bound to the same destiny. Of course, not all warm-blooded Oracles are in a rush to test this theory."</Explanation>
 <Skill>"RULES-COMPINTUI"</Skill>
-<Class>"CLASS_PEAS"</Class>
+<Class>"RULES-CLASS_PEAS"</Class>
 <SUBCHAPTER_LEVEL>
 <Level id="1">
 <Description language="ENGLISH">"Visionary"</Description>
@@ -618,7 +618,7 @@
 <Description language="ENGLISH">"Survivalist"</Description>
 <Explanation language="ENGLISH">"Bitter experience has taught you how to survive the worst of the natural world and its hazards. Survivalists are hardened veterans who have learned how to stay alive in the most lethal parts of the world. They cultivate an encyclopaedic knowledge of which foragables are safe to eat, the symptoms of infectious diseases, and how to avoid predator territories. Much of this life-saving knowledge is acquired through painful personal experience, requiring a Survivalist to be very lucky, supremely resilient, or both. Their discoveries are so vital they can reliably make a living selling their wisdom back to travelling companions. 'The trick with blindwyrms is rolling with the hit, and not letting them burrow inside you. Once they deposit their young under the skin, they reproduce so fast they'll be flooding your internal organs. You see that happen to a friend, make sure to keep your distance, lest they explode and shower you in — look, you asked, alright? Not my fault you'd just had your breakfast.' - Tuni the Morbid, Dwarfen Survivalist. 'The wretches of the Plague God lie that only with their repugnant patron's gifts can one survive in a place as miserable as this. But I know better. I have seen the truly divine in the spirit of the uncompromising. I have seen the miracle of Human biology.' - Flavia Zanassi, Priestess of Shallya. 'When in Lustria, do as the Lizards do.' - Orika the Grim. Survivalists are rarely sociable sorts. Crawling through dirt, bathing in bug-repellent juices, and extracting moisture from animal excrement is not a good way to make friends. But savvy expedition commanders know that the advantages of understanding the local terrain are worth the cost in coin and morale. Survivalists pair well with Trailblazers — whilst the latter provide the drive to keep pushing onwards, the former are a tempering influence, ensuring due regard is paid for what is practically achievable and relatively safe. A Traumatic Ordeal: To become intimately familiar with the perils of the natural world, most Survivalists go through an excruciating process of trial and error. As a Subsister, their goals are nothing more worthy than scavenging enough food to survive, without succumbing to infection, malnutrition, or exposure. It is a career one seldom chooses, but is commonly inflicted by unfortunate circumstances — poverty, shipwreck, exile, or unusually harsh coming-of-age rituals. Often they are the sole survivors of larger companies, haunted by terrible acts they committed to survive as their fellows perished. The few Subsisters who live cultivate a set of skills that other travellers will happily pay for. However insistently a Survivalist claims they will never return to the wild, desperation or survivor's guilt tends to change their mind. In the field, a Survivalist's sharped situational awareness helps them to pick up new skills, with nature always the best teacher. An experienced Survivalist may transition from consultation into instruction, disseminating knowledge that can save lives in their absence. Even then, they typically follow their pupils into the field, supervising their ordeals personally. Survivalists in Lustria: The death toll of foreign expeditions to Lustria is beyond horrific. Between the bugs, predators, poisonous wildlife, infectious diseases, treacherous terrain, Lizardman armies, and magical defences of the Slann, it is extraordinary any explorers survive long enough to warn their kin never to visit the continent. If anyone can help an expedition mitigate its losses, it is a Survivalist. Naturally, the most useful consultants are those with experience of jungle exploration specifically, but even rangers who learned wilderness survival in Athel Loren, the World's Edge Mountains, the Nehekharan desert, or the Chaos Wastes will find many of their skills relevant. Survival is a state of mind. Every New World colony is littered with lost souls who stumbled back to the coast after the rest of their expedition perished. It takes a shrewd eye to recognise these haunted degenerates as potential Survivalists, but an explorer who takes the time to feed and clothe them could learn plenty from the failures of their predecessors. Other Survivalists may be born and raised in the colonies, learning about the many hazards of the jungle as part of their upbringing. These lifelong residents of Lustria may possess the most comprehensive knowledge of all, and can charge commensurately higher rates for their service."</Explanation>
 <Skill>"RULES-COMPSURVEXT"</Skill>
-<Class>"CLASS_RANG"</Class>
+<Class>"RULES-CLASS_RANG"</Class>
 <SUBCHAPTER_LEVEL>
 <Level id="1">
 <Description language="ENGLISH">"Subsister"</Description>
@@ -752,7 +752,7 @@
 <Description language="ENGLISH">"Trailblazer"</Description>
 <Explanation language="ENGLISH">"You forge a path through untamed wilds in expeditions of discovery. For as long as civilisations have been carving out safe havens for themselves, there have been those daring enough to leave shelter behind and disappear into the wilderness. Perhaps they hope to discover a better place for settlement, a vital natural resource, or simply a cure for their pathological wanderlust. Most abandon their travels when confronted by an impassable obstacle. But others are too pig-headed to give up. Determined to find a way or make one, they persist in their travails until they reach their destination or perish in the attempt. In Lustria, the latter is far more likely. 'Who needs roads when we have machetes?' - Karl Ernst Bartus, self-proclaimed adventurer. 'I already started filing the paperwork for death-in-service. Much more efficient than waiting for the inevitable.' - Pessiminus the Economical, regimental quartermaster. There are two main schools of thought as to how best to penetrate the impenetrable. One philosophy, favoured by most Elves and Halflings, is to embrace the path of least resistance. They have an eye for any trail through dense terrain, however narrow or circuitous, and hone their bodies to slip through those routes. The other approach, famously preferred by Dwarfs and Humans, is to fashion a way forward with brute force. They chop through foliage with scant regard for environmental consequences, perhaps even laying roads for others to follow them. Each method has its advantages, though the latter surely draws more attention from native predators, even if it is more direct. Call of the Unknown: Most Trailblazers start out alone or in small parties, unable to convince many to join their perilous journeys into uncharted terrain. Only when a Pioneer returns from their travels with something of value can they expect financial backing from an intrigued patron. Whilst a Scout (WFRP page 83) might prefer solitude and familiar territory, a Trailblazer's dream is to go where no-one has been before and inspire others to follow in their footsteps. Many are driven by desire for fame and fortune, glory that can only be obtained with a suitable audience. A Trailblazer who successfully demonstrates the profitability of their ventures can expect a bigger stake in future endeavours. As a Pacesetter, they are the vanguard of their expedition, leading by example in and out of deadly environments. The ultimate goal is to be granted command of a whole expedition of explorers. Expedition Leaders know that if their undertaking is successful, they can expect their name to be reproduced in history books for hundreds of years or more. Trailblazers in Lustria: The world has no shortage of murderous landscapes for impetuous Trailblazers to explore. High Elf Shadow Warriors prowl the bleak wastelands of Naggaroth. Nomads persevere through the heat of the southern deserts. Dwarf Rangers brave the freezing peaks of the World's Edge Mountains, some even pushing north to survey the desolate Chaos Wastes. Yet Lustria lures more Trailblazers to its shores than anywhere else. Between its exotic array of lethal hazards, and the promise of gold for the successful plunderer, nowhere else so thoroughly captures the imagination of an aspiring adventurer. The perils for a Lustrian Trailblazer are frighteningly varied. The jungle is enchanted to repel would-be explorers, with diseases, insects, predators, and Lizardman defenders spelling the doom of their expeditions. Whilst Trailblazers have a reputation for recklessness, few are foolhardy enough to undertake an excursion without diligent preparation. Wherever possible, they will supplement their travelling packs with maps, survival tools, and the very latest local knowledge. That said, Lustria's jungles are renowned for their shifting landscape, quickly obliterating trails and paths previously marked through the foliage. A Lustrian Trailblazer expects that when they enter the jungle, they will be forging their own path."</Explanation>
 <Skill>"RULES-COMPORIENT"</Skill>
-<Class>"CLASS_RANG"</Class>
+<Class>"RULES-CLASS_RANG"</Class>
 <SUBCHAPTER_LEVEL>
 <Level id="1">
 <Description language="ENGLISH">"Pioneer"</Description>

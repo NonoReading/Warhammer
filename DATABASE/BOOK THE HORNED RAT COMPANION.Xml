@@ -21,7 +21,7 @@
 <Description language="ENGLISH">"Ironbreaker"</Description>
 <Explanation language="ENGLISH">"The Ironbreakers are a uniquely Dwarfen class of warriors, specialising in underground combat. Some Humans call them ‘Tunnel Fighters’, and they take no exception to this name, but ‘Tronbreaker’ is a more literal translation of the Khazalid Angthragor. Ironbreaker is a Warrior Career. If Careers are being determined randomly, then any Dwarf Character who rolls Guard or Soldier on the Random Class and Career Table (WFRP, pages 30-31) may choose to become an Ironbreaker instead."</Explanation>
 <Skill>"RULES-COMPCOMB_BASE"</Skill>
-<Class>"CLASS_WARR"</Class>
+<Class>"RULES-CLASS_WARR"</Class>
 <SUBCHAPTER_LEVEL>
 <Level id="1">
 <Description language="ENGLISH">"Tunnel Fighter"</Description>

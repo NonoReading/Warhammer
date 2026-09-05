@@ -44,7 +44,7 @@ Each assistant provides the normal +10 bonus (WFRP page 155) whether it knows th
 <Description language="ENGLISH">"Priest of Handrich"</Description>
 <Explanation language="ENGLISH">"You follow the ways of Handrich, always looking for the best deal in the transcendental pursuit of profit. Though not as common as other cults, Handrichan priests are sought after for their financial sense and discretion. Many do preach sermons, teaching Handrich’s tenets of self-reliance and the glories of material wealth, but they more often serve in private capacities, overseeing transactions to ensure honesty or offering financial advice. Most tend to temples found in large trading centres, or join caravans and trade expeditions as part of their service to Handrich."</Explanation>
 <Skill>"RULES-COMPMARCH"</Skill>
-<Class>"CLASS_ACAD"</Class>
+<Class>"RULES-CLASS_ACAD"</Class>
 <SUBCHAPTER_LEVEL>
 <Level id="1">
 <Description language="ENGLISH">"Clerk"</Description>
@@ -173,7 +173,7 @@ Each assistant provides the normal +10 bonus (WFRP page 155) whether it knows th
 <Description language="ENGLISH">"Priest of Solkan"</Description>
 <Explanation language="ENGLISH">"You live to enact the divine will of Solkan, restoring pure order to a world hopelessly corrupted. Priests of Solkan are austere, humourless individuals. During rituals, they wear white and gold robes in the style of ancient Tilea. Many don a golden mask in imitation of their god, with a stylised countenance of implacable fury. Certain priests revere the whole pantheon of Law, fighting a losing battle to reassert their influence in the Old World. Nevertheless, it is the Divine Avenger that dominates their thoughts and actions."</Explanation>
 <Skill>"RULES-COMPPRIERE"</Skill>
-<Class>"CLASS_ACAD"</Class>
+<Class>"RULES-CLASS_ACAD"</Class>
 <SUBCHAPTER_LEVEL>
 <Level id="1">
 <Description language="ENGLISH">"Acolyte"</Description>
@@ -304,7 +304,7 @@ Each assistant provides the normal +10 bonus (WFRP page 155) whether it knows th
 <Description language="ENGLISH">"Priestess of Rhya"</Description>
 <Explanation language="ENGLISH">"You are a vessel for the Earth Mother’s wishes and blessings amongst the mortals who depend on her benefucence for comfort and survival. Priestesses of Rhya live amongst the common folk. They wander  between farms, villages, and sacred sites, talking with people, offering blessings, and keeping a close eye on the land and the pastoral care of their flock. People depend on them to stave off famine, bring new life into the world, and give practical advice on love and matters of the family."</Explanation>
 <Skill>"RULES-COMPPRIERE"</Skill>
-<Class>"CLASS_ACAD"</Class>
+<Class>"RULES-CLASS_ACAD"</Class>
 <SUBCHAPTER_LEVEL>
 <Level id="1">
 <Description language="ENGLISH">"Initiate"</Description>
@@ -432,205 +432,205 @@ Each assistant provides the normal +10 bonus (WFRP page 155) whether it knows th
 <DATA_ARMOR>
 <Armor id="ARCH3-ARMO_16">
 <Description language="ENGLISH">"Soft Kit"</Description>
-<Availability>"DISPO_LIMITED"</Availability>
+<Availability>"RULES-DISPO_LIMITED"</Availability>
 <Price>"18/-"</Price>
 <Encumbrance>"1"</Encumbrance>
 <Quality>"RULES-ARMOB_08,ARCH3-ARMOB_09"</Quality>
-<Location>"ARMOL_ARM,ARMOL_BODY,ARMOL_LEG"</Location>
+<Location>"RULES-ARMOL_ARM,RULES-ARMOL_BODY,RULES-ARMOL_LEG"</Location>
 <ArmorPoint>"0"</ArmorPoint>
-<Type>"ARMOT_SOFTKITS"</Type>
+<Type>"RULES-ARMOT_SOFTKITS"</Type>
 </Armor>
 <Armor id="ARCH3-ARMO_17">
 <Description language="ENGLISH">"Reinforced Soft Kit"</Description>
-<Availability>"DISPO_LIMITED"</Availability>
+<Availability>"RULES-DISPO_LIMITED"</Availability>
 <Price>"2GC"</Price>
 <Encumbrance>"1"</Encumbrance>
 <Quality>"RULES-ARMOB_03,ARCH3-ARMOB_09,RULES-ARMOB_08"</Quality>
-<Location>"ARMOL_ARM,ARMOL_BODY,ARMOL_LEG"</Location>
+<Location>"RULES-ARMOL_ARM,RULES-ARMOL_BODY,RULES-ARMOL_LEG"</Location>
 <ArmorPoint>"1"</ArmorPoint>
-<Type>"ARMOT_SOFTKITS"</Type>
+<Type>"RULES-ARMOT_SOFTKITS"</Type>
   <!-- Renomme le 26/08/2026 : le livre p.37 intitule cette ligne "Reinforced Soft Kit",
        la base disait "Soft Kit" comme ARCH3-ARMO_16, ce qui donnait deux armures homonymes. -->
 </Armor>
 <Armor id="ARCH3-ARMO_18">
 <Description language="ENGLISH">"Leather Jack (A3)"</Description>
-<Availability>"DISPO_COMMON"</Availability>
+<Availability>"RULES-DISPO_COMMON"</Availability>
 <Price>"12/-"</Price>
 <Encumbrance>"1"</Encumbrance>
 <Quality>"RULES-ARMOB_08"</Quality>
-<Location>"ARMOL_ARM,ARMOL_BODY"</Location>
+<Location>"RULES-ARMOL_ARM,RULES-ARMOL_BODY"</Location>
 <ArmorPoint>"1"</ArmorPoint>
-<Type>"ARMOT_BOILLEDLEATHER"</Type>
+<Type>"RULES-ARMOT_BOILLEDLEATHER"</Type>
 </Armor>
 <Armor id="ARCH3-ARMO_19">
 <Description language="ENGLISH">"Leather Jerkin (A3)"</Description>
-<Availability>"DISPO_COMMON"</Availability>
+<Availability>"RULES-DISPO_COMMON"</Availability>
 <Price>"10/-"</Price>
 <Encumbrance>"1"</Encumbrance>
 <Quality>"RULES-ARMOB_08"</Quality>
-<Location>"ARMOL_BODY"</Location>
+<Location>"RULES-ARMOL_BODY"</Location>
 <ArmorPoint>"1"</ArmorPoint>
-<Type>"ARMOT_BOILLEDLEATHER"</Type>
+<Type>"RULES-ARMOT_BOILLEDLEATHER"</Type>
 </Armor>
 <Armor id="ARCH3-ARMO_20">
 <Description language="ENGLISH">"Leather Leggings (A3)"</Description>
-<Availability>"DISPO_COMMON"</Availability>
+<Availability>"RULES-DISPO_COMMON"</Availability>
 <Price>"14/-"</Price>
 <Encumbrance>"1"</Encumbrance>
 <Quality>"RULES-ARMOB_08"</Quality>
-<Location>"ARMOL_LEG"</Location>
+<Location>"RULES-ARMOL_LEG"</Location>
 <ArmorPoint>"1"</ArmorPoint>
-<Type>"ARMOT_BOILLEDLEATHER"</Type>
+<Type>"RULES-ARMOT_BOILLEDLEATHER"</Type>
 </Armor>
 <Armor id="ARCH3-ARMO_21">
 <Description language="ENGLISH">"Leather Skullcap (A3)"</Description>
-<Availability>"DISPO_COMMON"</Availability>
+<Availability>"RULES-DISPO_COMMON"</Availability>
 <Price>"8/-"</Price>
 <Encumbrance>"0"</Encumbrance>
 <Quality>"RULES-ARMOB_08"</Quality>
-<Location>"ARMOL_HEAD"</Location>
+<Location>"RULES-ARMOL_HEAD"</Location>
 <ArmorPoint>"1"</ArmorPoint>
-<Type>"ARMOT_BOILLEDLEATHER"</Type>
+<Type>"RULES-ARMOT_BOILLEDLEATHER"</Type>
 </Armor>
 <Armor id="ARCH3-ARMO_22">
 <Description language="ENGLISH">"Chainmail Chausses (A3)"</Description>
-<Availability>"DISPO_LIMITED"</Availability>
+<Availability>"RULES-DISPO_LIMITED"</Availability>
 <Price>"2GC"</Price>
 <Encumbrance>"3"</Encumbrance>
 <Quality>"RULES-ARMOB_01"</Quality>
-<Location>"ARMOL_LEG"</Location>
+<Location>"RULES-ARMOL_LEG"</Location>
 <ArmorPoint>"2"</ArmorPoint>
-<Type>"ARMOT_MAIL"</Type>
+<Type>"RULES-ARMOT_MAIL"</Type>
 </Armor>
 <Armor id="ARCH3-ARMO_23">
 <Description language="ENGLISH">"Chainmail Coat (A3)"</Description>
-<Availability>"DISPO_COMMON"</Availability>
+<Availability>"RULES-DISPO_COMMON"</Availability>
 <Price>"3GC"</Price>
 <Encumbrance>"4"</Encumbrance>
 <Quality>"RULES-ARMOB_01"</Quality>
-<Location>"ARMOL_ARM,ARMOL_BODY"</Location>
+<Location>"RULES-ARMOL_ARM,RULES-ARMOL_BODY"</Location>
 <ArmorPoint>"2"</ArmorPoint>
-<Type>"ARMOT_MAIL"</Type>
+<Type>"RULES-ARMOT_MAIL"</Type>
 </Armor>
 <Armor id="ARCH3-ARMO_24">
 <Description language="ENGLISH">"Chainmail Coif (A3)"</Description>
-<Availability>"DISPO_LIMITED"</Availability>
+<Availability>"RULES-DISPO_LIMITED"</Availability>
 <Price>"1GC"</Price>
 <Encumbrance>"2"</Encumbrance>
 <Quality>"RULES-ARMOB_03,RULES-ARMOB_06,RULES-ARMOB_01"</Quality>
-<Location>"ARMOL_HEAD"</Location>
+<Location>"RULES-ARMOL_HEAD"</Location>
 <ArmorPoint>"2"</ArmorPoint>
-<Type>"ARMOT_MAIL"</Type>
+<Type>"RULES-ARMOT_MAIL"</Type>
 </Armor>
 <Armor id="ARCH3-ARMO_25">
 <Description language="ENGLISH">"Chainmail Shirt (A3)"</Description>
-<Availability>"DISPO_LIMITED"</Availability>
+<Availability>"RULES-DISPO_LIMITED"</Availability>
 <Price>"2GC"</Price>
 <Encumbrance>"3"</Encumbrance>
 <Quality>"RULES-ARMOB_01"</Quality>
-<Location>"ARMOL_BODY"</Location>
+<Location>"RULES-ARMOL_BODY"</Location>
 <ArmorPoint>"2"</ArmorPoint>
-<Type>"ARMOT_MAIL"</Type>
+<Type>"RULES-ARMOT_MAIL"</Type>
 </Armor>
 <Armor id="ARCH3-ARMO_26">
 <Description language="ENGLISH">"Brigandine Jack"</Description>
-<Availability>"DISPO_LIMITED"</Availability>
+<Availability>"RULES-DISPO_LIMITED"</Availability>
 <Price>"3GC"</Price>
 <Encumbrance>"3"</Encumbrance>
 <Quality>"ARCH3-ARMOB_10"</Quality>
-<Location>"ARMOL_ARM,ARMOL_BODY"</Location>
+<Location>"RULES-ARMOL_ARM,RULES-ARMOL_BODY"</Location>
 <ArmorPoint>"2"</ArmorPoint>
-<Type>"ARMOT_BRIGANDINE"</Type>
+<Type>"RULES-ARMOT_BRIGANDINE"</Type>
 </Armor>
 <Armor id="ARCH3-ARMO_27">
 <Description language="ENGLISH">"Brigandine Jerkin"</Description>
-<Availability>"DISPO_LIMITED"</Availability>
+<Availability>"RULES-DISPO_LIMITED"</Availability>
 <Price>"2GC"</Price>
 <Encumbrance>"2"</Encumbrance>
 <Quality>"ARCH3-ARMOB_10"</Quality>
-<Location>"ARMOL_BODY"</Location>
+<Location>"RULES-ARMOL_BODY"</Location>
 <ArmorPoint>"2"</ArmorPoint>
-<Type>"ARMOT_BRIGANDINE"</Type>
+<Type>"RULES-ARMOT_BRIGANDINE"</Type>
 </Armor>
 <Armor id="ARCH3-ARMO_28">
 <Description language="ENGLISH">"Bracers (A3)"</Description>
-<Availability>"DISPO_RARE"</Availability>
+<Availability>"RULES-DISPO_RARE"</Availability>
 <Price>"8GC"</Price>
 <Encumbrance>"3"</Encumbrance>
 <Quality>"RULES-ARMOB_02,ARCH3-ARMOB_12,RULES-ARMOB_04"</Quality>
-<Location>"ARMOL_ARM"</Location>
+<Location>"RULES-ARMOL_ARM"</Location>
 <ArmorPoint>"3"</ArmorPoint>
-<Type>"ARMOT_PLATE"</Type>
+<Type>"RULES-ARMOT_PLATE"</Type>
 </Armor>
 <Armor id="ARCH3-ARMO_29">
 <Description language="ENGLISH">"Breastplate (A3)"</Description>
-<Availability>"DISPO_LIMITED"</Availability>
+<Availability>"RULES-DISPO_LIMITED"</Availability>
 <Price>"10GC"</Price>
 <Encumbrance>"3"</Encumbrance>
 <Quality>"RULES-ARMOB_02,ARCH3-ARMOB_10,RULES-ARMOB_04"</Quality>
-<Location>"ARMOL_BODY"</Location>
+<Location>"RULES-ARMOL_BODY"</Location>
 <ArmorPoint>"3"</ArmorPoint>
-<Type>"ARMOT_PLATE"</Type>
+<Type>"RULES-ARMOT_PLATE"</Type>
 </Armor>
 <Armor id="ARCH3-ARMO_30">
 <Description language="ENGLISH">"Open Helm (A3)"</Description>
-<Availability>"DISPO_COMMON"</Availability>
+<Availability>"RULES-DISPO_COMMON"</Availability>
 <Price>"2GC"</Price>
 <Encumbrance>"1"</Encumbrance>
 <Quality>"RULES-ARMOB_03,RULES-ARMOB_06"</Quality>
-<Location>"ARMOL_HEAD"</Location>
+<Location>"RULES-ARMOL_HEAD"</Location>
 <ArmorPoint>"3"</ArmorPoint>
-<Type>"ARMOT_PLATE"</Type>
+<Type>"RULES-ARMOT_PLATE"</Type>
 </Armor>
 <Armor id="ARCH3-ARMO_31">
 <Description language="ENGLISH">"Plate Leggings (A3)"</Description>
-<Availability>"DISPO_RARE"</Availability>
+<Availability>"RULES-DISPO_RARE"</Availability>
 <Price>"10GC"</Price>
 <Encumbrance>"3"</Encumbrance>
 <Quality>"RULES-ARMOB_02,ARCH3-ARMOB_12,RULES-ARMOB_04"</Quality>
-<Location>"ARMOL_LEG"</Location>
+<Location>"RULES-ARMOL_LEG"</Location>
 <ArmorPoint>"3"</ArmorPoint>
-<Type>"ARMOT_PLATE"</Type>
+<Type>"RULES-ARMOT_PLATE"</Type>
 </Armor>
 <Armor id="ARCH3-ARMO_32">
 <Description language="ENGLISH">"Great Helm"</Description>
-<Availability>"DISPO_RARE"</Availability>
+<Availability>"RULES-DISPO_RARE"</Availability>
 <Price>"2GC"</Price>
 <Encumbrance>"2"</Encumbrance>
 <Quality>"RULES-ARMOB_02,RULES-ARMOB_04,RULES-ARMOB_07"</Quality>
-<Location>"ARMOL_HEAD"</Location>
+<Location>"RULES-ARMOL_HEAD"</Location>
 <ArmorPoint>"3"</ArmorPoint>
-<Type>"ARMOT_PLATE"</Type>
+<Type>"RULES-ARMOT_PLATE"</Type>
 </Armor>
 <Armor id="ARCH3-ARMO_33">
 <Description language="ENGLISH">"Bascinet"</Description>
-<Availability>"DISPO_RARE"</Availability>
+<Availability>"RULES-DISPO_RARE"</Availability>
 <Price>"3GC"</Price>
 <Encumbrance>"2"</Encumbrance>
 <Quality>"RULES-ARMOB_02,ARCH3-ARMOB_11,RULES-ARMOB_04,RULES-ARMOB_07"</Quality>
-<Location>"ARMOL_HEAD"</Location>
+<Location>"RULES-ARMOL_HEAD"</Location>
 <ArmorPoint>"3"</ArmorPoint>
-<Type>"ARMOT_PLATE"</Type>
+<Type>"RULES-ARMOT_PLATE"</Type>
 </Armor>
 <Armor id="ARCH3-ARMO_34">
 <Description language="ENGLISH">"Armet"</Description>
-<Availability>"DISPO_RARE"</Availability>
+<Availability>"RULES-DISPO_RARE"</Availability>
 <Price>"3GC"</Price>
 <Encumbrance>"2"</Encumbrance>
 <Quality>"RULES-ARMOB_02,ARCH3-ARMOB_11,RULES-ARMOB_04,RULES-ARMOB_07"</Quality>
-<Location>"ARMOL_HEAD"</Location>
+<Location>"RULES-ARMOL_HEAD"</Location>
 <ArmorPoint>"3"</ArmorPoint>
-<Type>"ARMOT_PLATE"</Type>
+<Type>"RULES-ARMOT_PLATE"</Type>
 </Armor>
 <Armor id="ARCH3-ARMO_35">
 <Description language="ENGLISH">"Sallet"</Description>
-<Availability>"DISPO_RARE"</Availability>
+<Availability>"RULES-DISPO_RARE"</Availability>
 <Price>"4GC"</Price>
 <Encumbrance>"2"</Encumbrance>
 <Quality>"RULES-ARMOB_02,ARCH3-ARMOB_11,RULES-ARMOB_04,RULES-ARMOB_07"</Quality>
-<Location>"ARMOL_HEAD"</Location>
+<Location>"RULES-ARMOL_HEAD"</Location>
 <ArmorPoint>"3"</ArmorPoint>
-<Type>"ARMOT_PLATE"</Type>
+<Type>"RULES-ARMOT_PLATE"</Type>
 </Armor>
 </DATA_ARMOR>
 <DATA_ARMOR_BONUS>

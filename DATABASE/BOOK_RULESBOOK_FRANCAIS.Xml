@@ -5626,7 +5626,7 @@ See page 190 for Fear rules"</Explanation>
 <Description language="FRANCAIS">"Agitateur "</Description>
 <Explanation language="FRANCAIS">"Charismatique et beau parleur, vous défendez votre cause face à l’ordre établi. « Croyez-moi, si vous voulez éradiquer les agents des Fileuses du Destin, suivez la clameur des rues. Elles ne peuvent lui résister. Elles referont surface, tôt ou tard ». – Adrian Hoven, Clerc-Capitaine, Chevalier des Cœurs de feu. Les Agitateurs font pression pour diverses causes politiques, en utilisant des affiches, en manifestant et en prenant la parole en public. Ils gagnent la sympathie et le soutien des populations les plus pauvres, mais doivent faire attention à ne pas attirer l’attention des Sigmarites ou des nains, très conservateurs. Les Agitateurs les plus dangereux parviennent à mettre à mal l’autorité de nobles, de villes, et même quelquefois de provinces entières. Les Pamphlétaires placardent des tracts sur les panneaux d’affichage ou les distribuent sur les places de marché. Les Agitateurs se déplacent en permanence, à la recherche de foules importantes ou fuyant les autorités. Ils deviennent parfois chefs de groupes hétéroclites, composés de sans-abri et de révoltés, les exhortant – tout en les persuadant– d’aller se battre pour une grande cause. Le brouillard et les émeutes sont légendaires à Altdorf. Peut être est-ce dû au fait qu’il s’agit de la Capitale impériale, ou peut-être à cause du Collège Gris qui y attire les rafales du traître Ulgu, le Vent gris de la Magie. Quelle que soit la raison, lorsque les brumes provenant des plaines d’Altdorf envahissent les rues, le peuple se soulève. Malheur aux gardes qui essaieraient de l’empêcher de se faire entendre. Les Agitateurs religieux parviennent à gagner leur vie en étant prêcheurs de rue, recevant l’aumône de la part des fidèles les plus pieux et attirent des disciples en la personne des flagellants et des fanatiques. Les Agitateurs qui survivent assez longtemps pour devenir Démagogues sont la plupart du temps soutenus par des alliés qui restent dans l’ombre et qui cherchent à imposer un changement aux motivations, souvent connues d’eux seuls."</Explanation>
 <Skill>"RULES-COMPCHARM"</Skill>
-<Class>"CLASS_BURG"</Class>
+<Class>"RULES-CLASS_BURG"</Class>
 <SUBCHAPTER_LEVEL>
 <Level id="1">
 <Description language="FRANCAIS">"Pamphleteer"</Description>
@@ -5750,7 +5750,7 @@ See page 190 for Fear rules"</Explanation>
 <Description language="FRANCAIS">"Apothicaire "</Description>
 <Explanation language="FRANCAIS">"Vous êtes particulièrement doué en chimie et en préparations diverses. Vous fabriquez et vendez des médicaments de toutes sortes. Les Apothicaires se spécialisent dans la préparation de traitements médicamenteux – le plus souvent pilules, inhalations et onguents – qu’ils vendent indifféremment aux malades ou aux docteurs. Leurs ateliers débordent d’impressionnants étalages d’alambics bouillonnants, de béchers débordants, de pilons et de mortiers usagés ainsi que de tout un attirail destiné à diverses préparations physiques. Certains Apothicaires arrondissent leurs fins de mois en vendant des substances illicites – en passant des stimulants pour les étudiants aux abois jusqu’aux plantes hallucinogènes les plus étranges destinées aux nobles oisifs, ou lorsqu’ils répondent à des commandes louches destinées à des groupes encore plus louches. C’est un commerce fort lucratif, mais dangereux. Les ingrédients les plus rares sont chers, et c’est la raison pour laquelle, bien souvent, les Apothicaires rencontrent des problèmes de trésorerie et qu’ils partent eux-mêmes explorer les contrées sauvages afin de trouver leurs propres ingrédients. Ils sont nombreux à accepter des missions de courte durée au sein de certaines expéditions de mercenaires ou militaires, ce qui leur rapporte quelques pièces supplémentaires.  À cause de la pression imposée par la guilde des Médecins, la plupart des villes refusent que les Apothicaires exercent la médecine, mais cela n’empêche pas qu’ils puissent, au cours de la partie, endosser le rôle de guérisseurs. Ils sont très polyvalents, car ils se révèlent capables d’identifier des substances peu courantes et potentiellement dangereuses sur lesquelles le groupe peut tomber et même en transformer certaines en médicaments utiles. « La chimie des hommes ? Aussi rudimentaire que leur architecture. Ça vous tuera ! J’ai demandé une fois un revigorant après une nuit de beuverie un peu difficile. J’y ai gagné une intoxication alimentaire qui a duré une semaine ! » – Thorica Norrasdotr, Marchande naine"</Explanation>
 <Skill>"RULES-COMPMETIER_APOTH"</Skill>
-<Class>"CLASS_ACAD"</Class>
+<Class>"RULES-CLASS_ACAD"</Class>
 <SUBCHAPTER_LEVEL>
 <Level id="1">
 <Description language="FRANCAIS">"Apothecary Apprentice"</Description>
@@ -5875,7 +5875,7 @@ See page 190 for Fear rules"</Explanation>
 <Description language="FRANCAIS">"Artisan "</Description>
 <Explanation language="FRANCAIS">"Vous êtes un artisan de grand talent, fier de votre travail, et vous créez des produits à vendre tout en honorant des commandes particulières.  « Il te faut comprendre, mon garçon, que les vins de Wurtbard ont une réputation à tenir. On dirait que cette bouteille est passée par le canon d’un fusil Hochland. C’est proprement inacceptable. » – Dame Glasmeister, Maîtresse de guilde des Souffleurs de verre  Les Artisans fabriquent les biens, que ce soient ceux du quotidien, produits par les boulangers et les accastilleurs, aux armes et aux bateaux fluviaux conçus par les forgerons et les charpentiers de marine. Les plus grandes villes et cités de l’Empire possèdent des guildes pour protéger leurs Artisans des fraudeurs, car leur Carrière tout entière peut être mise en péril par des concurrents non qualifiés qui vendent en douce des marchandises de piètre qualité. Les Maîtres de guilde respectent des standards de qualité, et ceux qui ne s’y conforment pas se font évincer et se voient interdire d’exercer en ville.  Les Artisans en plein apprentissage peuvent être envoyés auprès d’autres maîtres. La pression qui les pousse à la perfection est tellement lourde à supporter que certains Artisans parmi les plus jeunes font parfois des pauses afin de se tourner vers des structures moins oppressantes, comme l’Armée ou la Marine. Les guildes de nains n’acceptent pas les humains en général, et les nains ont d’ordinaire le droit de pratiquer leur profession dans les villes impériales sans avoir besoin de rejoindre une guilde locale. Ce qui peut devenir une source de conflit, car les guildes acceptent généralement très mal les concurrents de talent. Les halflings ne sont pas aussi pointilleux et rejoindront les guildes humaines avec plaisir (s’ils y sont acceptés) et permettent de la même façon aux humains de rejoindre les leurs. Les elfes ne possèdent pas de guildes d’Artisans, et même s’ils pouvaient en rejoindre une, il est fort peu probable qu’ils s’y abaissent.  Les Artisans interviennent à tous les échelons de la société, car ils fabriquent des biens, mais en réparent également d’autres. Ils sont embauchés par les marines pour entretenir les flottes, par les armées pour gérer les machines de guerre et les engins de siège, et par des Chambres de Commerce de toutes tailles pour transformer des matériaux bruts en marchandises vendables."</Explanation>
 <Skill>"RULES-COMPMETIER_*"</Skill>
-<Class>"CLASS_BURG"</Class>
+<Class>"RULES-CLASS_BURG"</Class>
 <SUBCHAPTER_LEVEL>
 <Level id="1">
 <Description language="FRANCAIS">"Apprentice Craftsman"</Description>
@@ -5998,7 +5998,7 @@ See page 190 for Fear rules"</Explanation>
 <Description language="FRANCAIS">"Artiste "</Description>
 <Explanation language="FRANCAIS">"Vous possédez un talent artistique inné, un de ceux qui transcendent la vie de tous les jours et qui exaltent l’âme d’autrui. Les Artistes utilisent leurs talents – pour la peinture, la sculpture, l’écriture ou autre – pour créer des œuvres d’art raffinées. Souvent, ils débutent leur Carrière en tant qu’Étudiants en Arts auprès d’Artistes de renom, même si certains sont déjà de purs prodiges. Certains mécènes vont prendre les plus talentueux sous leur coupe alors que d’autres vont se tourner vers l’enseignement, se retrouvant à la tête de leur propre école, et faire venir les donateurs parmi les plus riches dans leurs galeries d’art à la mode.  Attirer les mécènes appropriés n’est pas toujours chose facile, et c’est la raison pour laquelle des Artistes de toutes conditions se retrouvent sur les routes à rechercher la perle rare. Même ceux qui ont de quoi subvenir à leurs besoins voyagent à travers le monde à la recherche de nouvelles vues à peindre, de silhouettes à sculpter ou d’inspiration. Ce sont bien souvent les églises, les abbayes et les temples les plus lointains qui vont chercher à commander des fresques sacrées ou des bas-reliefs.  Malheureusement, la plupart des Artistes passent leur vie à tenter de prouver leur valeur dans une société qui ne les apprécie que rarement. Ces derniers gèrent des fins de mois difficiles de différentes façons : ils tournent les nobles et les politiciens en ridicule dans des caricatures qu’ils font paraître dans les journaux d’Altdorf, font des portraits-robots des suspects pour les capitaines de la garde, rédigent des commentaires sociétaux ou encore s’adonnent à la contrefaçon du travail d’artistes de renom."</Explanation>
 <Skill>"RULES-COMPART_*"</Skill>
-<Class>"CLASS_COUR"</Class>
+<Class>"RULES-CLASS_COUR"</Class>
 <SUBCHAPTER_LEVEL>
 <Level id="1">
 <Description language="FRANCAIS">"Apprentice Artist"</Description>
@@ -6120,7 +6120,7 @@ See page 190 for Fear rules"</Explanation>
 <Description language="FRANCAIS">"Bailli "</Description>
 <Explanation language="FRANCAIS">"Vous êtes un fonctionnaire local jouissant de la confiance des dirigeants de la région pour administrer efficacement et fermement leurs terres.  « Je vais aller moi-même jeter un œil au pâturage en question. Jusqu’à mon retour, je ne veux aucune dispute entre vos turbulents descendants, suis-je assez clair, Bauer, Meier ? Et vous vous partagerez le coût des réparations de l’auberge, ou vous aurez à renoncer à tout ce que vous seriez en droit de prétendre, ou pas, sur ces terres. » – Lorenz Schulte, Préfet de la Vallée D’Elster  Les Nobles confient aux Baillis le soin de collecter les taxes issues de leurs terres. Certains Baillis sont respectés et honnêtes, et il ne se passe pas une semaine sans qu’ils se rendent dans un temple de Sigmar. D’autres sont des tyrans qui jouissent du pouvoir conféré par leur seigneur sur leurs propriétés et possessions pour faire usage de menaces et de violences lors de l’exercice de leur profession. Les Baillis en exercice depuis longtemps deviennent souvent de fidèles serviteurs de la famille dirigeante et disposent d’avantages en nature conséquents. Les Préfets bénéficient d’un champ d’action plus important et ont de plus grandes responsabilités. Ils assurent le maintien de l’ordre au niveau des frontières du territoire de leur seigneur et résolvent les conflits, qu’ils aient pour origine des histoires de bétail ou des limites de propriétés agricoles. La grande majorité des Baillis disposent d’une certaine liberté, ce qui leur permet de prendre le temps de s’occuper d’affaires privées ou d’embaucher d’autres personnes pour le faire en leur nom. Comme ils sont tout aussi nombreux à avoir toute autorité sur les territoires dont ils s’occupent, ils sont régulièrement envoyés par leurs employeurs afin de résoudre divers problèmes, ce qui peut les mener dans les endroits les plus inattendus."</Explanation>
 <Skill>"RULES-COMPINTIM"</Skill>
-<Class>"CLASS_PEAS"</Class>
+<Class>"RULES-CLASS_PEAS"</Class>
 <SUBCHAPTER_LEVEL>
 <Level id="1">
 <Description language="FRANCAIS">"Collector"</Description>
@@ -6246,7 +6246,7 @@ See page 190 for Fear rules"</Explanation>
 <Description language="FRANCAIS">"Batelier "</Description>
 <Explanation language="FRANCAIS">"Vous naviguez sur les eaux dangereuses du Vieux Monde, transportant tour à tour des passagers ou des marchandises, tout en relayant les dernières nouvelles.  « Attention à l’embranchement. C’est le Conducteur de barges qui a de la bouteille qui vous dit ça. Si vous approchez d’un rocher ou d’un autre danger, suivez la direction des étoiles et assurez-vous de rester dans cette direction, ou prenez la direction de la forêt et faites attention de bien maintenir le cap. Sinon, vous risquez de dériver et de couler. Et personne n’a envie de perdre sa barge. » – Jacob Walles, Conducteur de barges ayant coulé la sienne à un embranchement  De très nombreux bateaux et barges parcourent les voies navigables de l’Empire, transportant des biens provenant des coins les plus reculés des provinces vers les plus grandes villes. Ces navires à fond plat sont en mesure de naviguer bien plus facilement à contre-courant que les autres, et un important réseau de canaux leur permet d’atteindre les endroits les plus reculés. Les Capitaines sont des marins aguerris qui connaissent parfaitement les rivières qu’ils empruntent. Un Canotier n’est encore qu’un larbin, mais il ne faudra pas bien longtemps avant qu’il n’apprenne les ficelles. Les Bateliers pilotent des navires marchands chargés de marchandises vers, et depuis, les marchés, et sont soit à leur propre compte ou travaillent pour une chambre de commerce plus importante. De nombreux Bateliers sont également passeurs, faisant traverser les rivières à leurs passagers vers, ou depuis, les villes. Dans les cités les plus importantes, certains pilotent également des taxis de rivière, sont à la tête de bateaux de plaisance ou encore convoient des navires au nom d’un tiers. Un Batelier n’aura pas besoin d’aller au-devant de l’aventure, car c’est elle qui ne manquera pas de se présenter à lui. Tout le monde a besoin des bateaux, surtout ceux qui partent à l’aventure. De plus, ces esquifs constituent une excellente base d’opérations. Le Batelier n’aura même pas à savoir si les objectifs de l’aventure vont nécessiter de quitter les berges de la rivière ou pas. Et même si c’était temporairement le cas, les aventuriers pourraient facilement permettre à un Batelier talentueux de s’occuper des leurs affaires pendant qu’ils font une pause au cours de leur expédition fluviale."</Explanation>
 <Skill>"RULES-COMPVOILE"</Skill>
-<Class>"CLASS_RIVE"</Class>
+<Class>"RULES-CLASS_RIVE"</Class>
 <SUBCHAPTER_LEVEL>
 <Level id="1">
 <Description language="FRANCAIS">"Boater"</Description>
@@ -6370,7 +6370,7 @@ See page 190 for Fear rules"</Explanation>
 <Description language="FRANCAIS">"Bourgeois "</Description>
 <Explanation language="FRANCAIS">"Ambitieux et socialement mobile, vous êtes le ciment qui unit la société urbaine.  Les Bourgeois font partie d’une classe croissante de citoyens disposant à la fois de temps et d’argent. Beaucoup prennent un ou deux jours de congé par semaine et peuvent facilement s’adapter à une vie d’aventure entre les périodes de travail ou après la fermeture. Certains pourront souhaiter aller plus loin, et si un Bourgeois a de l’argent de côté, il devrait être facile de négocier une période de congé avec un employeur. Il est très courant que les citoyens de l’Empire partent en pèlerinage pendant des semaines ou des mois. Les travailleurs qualifiés sont toujours demandés, et il y aura très certainement un poste à pourvoir quand ils rentreront.  Les Bourgeois satisfont les florissants centres de commerce et la demande de travailleurs. Ils remplissent divers rôles pour les artisans privés ou les conseils municipaux : banquiers, employés, camelots, aubergistes, vendeurs de journaux, valets d’écurie, tenanciers d’échoppe, garde-barrières, nettoyeurs, et bien d’autres. Leurs taux de rémunération varient : certains peuvent marchander pour une commission supplémentaire, tandis que les employés civils comme les lampistes et les gardebarrières reçoivent des salaires fixes. Ils ont peu d’opportunités de promotion, mais ceux qui ont de la détermination, du bon sens et de la chance peuvent éventuellement être propriétaires ou tenir leur propre affaire. Les Bourgeois les plus prospères rejoignent souvent les conseils municipaux qui supervisent les affaires civiles, les Bourgmestres – les plus importants dirigeants municipaux – jouissant souvent du même statut social que les Princes Marchands et les Maîtres de guilde."</Explanation>
 <Skill>"RULES-COMPMARCH"</Skill>
-<Class>"CLASS_BURG"</Class>
+<Class>"RULES-CLASS_BURG"</Class>
 <SUBCHAPTER_LEVEL>
 <Level id="1">
 <Description language="FRANCAIS">"Employee"</Description>
@@ -6499,7 +6499,7 @@ See page 190 for Fear rules"</Explanation>
 <Description language="FRANCAIS">"Cavalier "</Description>
 <Explanation language="FRANCAIS">"« Un escorteur est venu s’assurer hier que nous étions en sécurité. Mon Dieu, il était si beau et si fringant. Qui donc ne serait pas tenté de chevaucher avec lui ? Il a saisi mes petits pains et a filé comme le vent. Il ne les paiera jamais, je suppose. » – Lena Fluffe, boulangère à Walfenburg  Cavalier fringant et sans peur, vous apportez vitesse, polyvalence et adresse dans le maniement des armes sur le champ de bataille. Que ce soit au sein d’unités de pistoliers, d’escorteurs, de demi-lanciers, d’archers montés ou similaires, les Cavaliers sont déployés afin d’obtenir un avantage stratégique maximal. En campagne, cela signifie effectuer les repérages, attaquer, harceler les lignes ennemies, ou défendre les paysans. Sur le champ de bataille, ils sont aussi particulièrement polyvalents, capables de frapper vite et de se disperser. En ce qui concerne la vélocité, le repérage, la versatilité et l’élan pur, personne n’égale les Cavaliers. La cavalerie légère, très rapide, est employée par beaucoup d’armées, y compris les forces armées des cultes et autres groupes moins formels, tels que les mercenaires de milices privées. Les armées bretonniennes emploient des hommes d’armes montés tandis que les Chevaliers elfes sylvains font partie des cavaliers légers les plus redoutés du Vieux Monde. Un Cavalier en service dans l’Armée impériale ne va pas tout laisser tomber sur un coup de tête. S’ils ont un but qu’ils souhaitent poursuivre personnellement, ils devront obtenir la permission de leurs officiers supérieurs, racheter leur commission s’ils en ont une, ou s’absenter sans autorisation. Ils peuvent aussi recevoir l’ordre d’enquêter sur des affaires importantes par leurs supérieurs. Les Cavaliers mercenaires ont plus de liberté pour partir à l’aventure, étant un peu plus que de simples épées à louer. "</Explanation>
 <Skill>"RULES-COMPCHEV_CHEVAL"</Skill>
-<Class>"CLASS_WARR"</Class>
+<Class>"RULES-CLASS_WARR"</Class>
 <SUBCHAPTER_LEVEL>
 <Level id="1">
 <Description language="FRANCAIS">"Apprentice Rider"</Description>
@@ -6628,7 +6628,7 @@ See page 190 for Fear rules"</Explanation>
 <Description language="FRANCAIS">"Charlatan "</Description>
 <Explanation language="FRANCAIS">"Peu scrupuleux et charmant, vous séparez les imbéciles de leur argent ; et Dieu merci, les imbéciles ne manquent pas… Un Charlatan opère dans la confiance, mais fait son beurre de la trahison. En s’attaquant aux faiblesses émotionnelles et psychologiques, les Charlatans proposent à leur « cible » un prix trop beau pour être vrai. Les privilèges sociaux ne fournissent pas de protection, et même les citoyens les plus nobles peuvent tomber dans les filets d’un Charlatan talentueux. Le manque de scrupule, allié à un don pour le mensonge, profite aussi aux Charlatans.  « Le dernier héritier vivant de Lord Schwalb, vous dites ? Foutaises ! Vous êtes le cinquième « héritier » à passer cet après-midi ! Combien avez-vous payé pour ce bout de papier ? Et surtout quel est l’escroc qui vous l’a vendu ? » – Gerold Behn, Majordome agacé Pour éviter d’éveiller les soupçons, les Charlatans restent rarement longtemps dans la même région. Peu de Filous avouent ouvertement leur vocation, préférant se faire passer pour quelqu’un d’autre. Très peu de raisons empêchent donc les Charlatans de poursuivre des intérêts parallèles ; ils peuvent ensuite retourner n’importe où de riches imbéciles sont prêts à payer pour rien d’autre qu’une promesse.  Les Charlatans regroupent les Filous, les Arnaqueurs, et autres Escrocs cherchant à s’en prendre aux crédules. Les halflings commettent souvent des escroqueries en petits groupes familiaux. Les jeunes hauts elfes, s’encanaillant avec des humains, considèrent leurs arnaques comme une grande chasse, motivés non par le profit, mais par le fait de prouver leur supériorité. Certains Charlatans expérimentés travaillent avec des artistes, qui falsifient des documents contre une part des profits."</Explanation>
 <Skill>"RULES-COMPCHARM"</Skill>
-<Class>"CLASS_ROGU"</Class>
+<Class>"RULES-CLASS_ROGU"</Class>
 <SUBCHAPTER_LEVEL>
 <Level id="1">
 <Description language="FRANCAIS">"Trickster"</Description>
@@ -6755,7 +6755,7 @@ See page 190 for Fear rules"</Explanation>
 <Description language="FRANCAIS">"Chasseur "</Description>
 <Explanation language="FRANCAIS">"Tueurs indépendants et coriaces qui gagnent leur vie en vendant la chair et la fourrure des créatures sauvages.  « Seriez-vous en train de me dire que la chasse n’est pas un sport sous prétexte que les deux parties ne savent pas qu’il ne s’agit que d’un jeu ? Puis-je alors vous suggérer que vous vous trompez peut-être de gibier ? » – Graf Bernard Leutze von Holthusen  « Que Taal te récompense » est une formule de politesse très répandue à Hochland, où les gens du coin sont fiers de leur tradition de chasse qui remonte à l’Âge de Sigmar. La plupart des habitants de l’Empire chassent, que ce soit pour eux un passe-temps, une profession ou une nécessité, et il arrive fréquemment que les Chasseurs pratiquent le braconnage quand les temps sont durs.  L’amputation de deux doigts est l’une des peines les plus répandues appliquée à un chasseur surpris en train de braconner. Réalisant qu’ils ne pourront plus jamais tirer à l’arc, la grande majorité d’entre eux prendront la fuite avant d’être capturés et ainsi éviter la sentence, préférant tenter leur chance dans la forêt. Autour des villages aux terres fertiles du Vorbergland sud, les Chasseurs perdent du terrain à cause de l’abattage des arbres pratiqué par les paysans et les réserves de chasse imposées par les nobles. L’Armée impériale est en permanence à la recherche de Chasseurs fiables pour rejoindre ses rangs lors des campagnes où ils endossent le rôle d’archers ou d’éclaireurs. Un Chasseur intéressé par les espèces sonnantes et trébuchantes trouvera toujours une aventure qui lui correspond.  Les Chasseurs les plus talentueux occupent régulièrement le poste de veneur pour la noblesse, ce qui leur permet d’avoir accès à des armes de qualité, des chevaux et même des faucons. Les elfes et les nains n’ont que faire des frontières des hommes et n’hésiteront pas à s’aventurer profondément dans les terres de ces derniers à la recherche d’une proie difficile. Les histoires relatant les chasses sauvages des elfes sylvains terrifient les enfants des Montagnes Grises, et non sans raison, car si jamais un intrus s’approche un peu trop des terres des elfes, alors le chasseur devient rapidement la proie."</Explanation>
 <Skill>"RULES-COMPSURVEXT"</Skill>
-<Class>"CLASS_PEAS"</Class>
+<Class>"RULES-CLASS_PEAS"</Class>
 <SUBCHAPTER_LEVEL>
 <Level id="1">
 <Description language="FRANCAIS">"Tracker"</Description>
@@ -6884,7 +6884,7 @@ See page 190 for Fear rules"</Explanation>
 <Description language="FRANCAIS">"Chasseur de primes "</Description>
 <Explanation language="FRANCAIS">"Déterminé et impitoyable, vous poursuivez votre proie sans relâche : pour la justice ou pour l’argent.  Les Chasseurs de primes, en fonction du criminel qu’ils recherchent, doivent quelquefois emprunter les chemins de l’aventure. Comme ils sont parfaitement autonomes, il est facile pour eux, temporairement, de laisser leur objectif de côté et de prendre une autre mission si elle se présente. De plus, comme les compétences qu’ils maîtrisent sont très souvent recherchées, il arrive fréquemment que les Chasseurs de primes se tournent définitivement vers une vie d’aventurier, louant leurs talents contre paiement. La Carrière de Chasseur de primes est une excellente Carrière de départ, car elle mélange parfaitement Compétences sociales et combat, ce qui vous permet d’être utile quelles que soient les circonstances.  Les Chasseurs de primes poursuivent les fugitifs, ou les hors-laloi, pour de l’argent. La plupart sont nommés en toute légalité par les cours de provinces et reçoivent des mandats qui leur confèrent le droit de capturer, voire quelquefois de tuer, leur cible. Alors que, certains sont motivés par la justice de Verena, la plupart sont quand même plus attirés par les récompenses et trouvent d’ailleurs que le « mort » de « mort ou vif » permet de s’enrichir encore plus vite. La plupart des Chasseurs de primes débutent en tant que Chasseur de voleurs, qui sont embauchés par les victimes de rapines afin de retrouver leurs biens dérobés. Au fil du temps, ceux qui ont acquis une bonne réputation arrivent parfois à trouver du travail régulier auprès de marchands, nobles, guildes ou autres cultes, ou montent encore une compagnie de Chasseurs de primes et travaillent en équipe dans le but de récupérer le maximum de récompenses."</Explanation>
 <Skill>"RULES-COMPCOMB_BASE"</Skill>
-<Class>"CLASS_RANG"</Class>
+<Class>"RULES-CLASS_RANG"</Class>
 <SUBCHAPTER_LEVEL>
 <Level id="1">
 <Description language="FRANCAIS">"thieves hunter"</Description>
@@ -7014,7 +7014,7 @@ See page 190 for Fear rules"</Explanation>
 <Description language="FRANCAIS">"Chevalier "</Description>
 <Explanation language="FRANCAIS">"Vous ruant dans la bataille sur un lourd destrier, vous dominez le champ de bataille, semant la peur sur votre passage. Beaucoup pensent que les principaux guerriers du Vieux Monde forment la cavalerie lourde. Une charge groupée est un spectacle impressionnant, mais même un unique Chevalier peut représenter une armée à lui seul. Il y a beaucoup d’ordres de chevalerie dans l’Empire, les plus célèbres étant la Reiksguard, les Loups Blancs, les Chevaliers Panthères et les Chevaliers Griffons, chacun possédant sa propre histoire glorifiée et ses puissants héros. Beaucoup de Chevaliers de l’Empire appartiennent à des ordres séculiers de Chevalerie, en partie parce que l’entraînement des lanciers lourds est trop coûteux pour la plupart des nobles. Les ordres templiers, ceux qui vouent leurs services à une seule divinité, sont tout aussi répandus, mais un peu plus indépendants. Parmi eux se trouvent un nombre incalculable d’indépendants, de chevaliers mercenaires, et de chevaliers déshonorés, la plupart vendant leur lance au plus offrant. « Dame Myrmaelia Jaeke est le meilleur chevalier de l’Ordre du Soleil flamboyant. Comment puis-je en être sûre ? Eh bien, je détenais ce titre, et elle m’a battue. » – Birgitte van der Hoogenband, Abbesse-générale du Monastère de la Vierge noire, ancien Chevalier du Soleil flamboyant Les Chevaliers peuvent être envoyés à l’aventure pour remplir une mission au nom de leur Ordre, ou être employés par des nobles afin d’accompagner un héritier impatient à travers l’Empire. De la même façon, les Templiers devront exaucer les volontés de leur dieu. Tout cela offre des opportunités parfaites pour les Chevaliers de partir à l’aventure. En comparaison, pour un indépendant, la vie d’aventure représente ce qu’il suit par défaut. "</Explanation>
 <Skill>"RULES-COMPCOMB_CAVAL"</Skill>
-<Class>"CLASS_WARR"</Class>
+<Class>"RULES-CLASS_WARR"</Class>
 <SUBCHAPTER_LEVEL>
 <Level id="1">
 <Description language="FRANCAIS">"Squire"</Description>
@@ -7149,7 +7149,7 @@ See page 190 for Fear rules"</Explanation>
 <Description language="FRANCAIS">"Cocher "</Description>
 <Explanation language="FRANCAIS">"Obstiné, vous menez vos passagers à bon port, en vous assurant de leur sécurité, et ce, malgré les dangers permanents auxquels vous faites face. Pour de très nombreuses personnes, la diligence est le seul moyen permettant de voyager d’une ville à l’autre. Même si les étendues sauvages traversées jusqu’à destination vont grouiller d’hommes-bêtes, de bandits et bien pire, un Cocher courageux et opiniâtre, dont les chevaux sont frais et le fidèle tromblon chargé, pourra rendre ce voyage possible. Afin d’éviter au maximum les risques, les relais de diligence sont à la recherche permanente de vitesse, et leurs employés, ne faisant confiance à personne, sont précédés d’une réputation de rudesse chez les voyageurs. Les Cochers commencent le plus souvent en tant que Postillons, montés sur le cheval de tête d’un attelage, et par tous les temps. Certains Cochers transportent des lettres au lieu de passagers, travaillent en tant que chauffeurs pour certains nobles, conduisent des calèches ou des chariots remplis de biens, ou se retrouvent dans les plus grandes villes à piloter les omnibus. Enfin, certains deviennent complices d’évasion. « Il y a trois jours, j’étais bloquée à Weissbruck pendant les orages. Rien ne partait ni n’arrivait. Alors que je pensais que j’allais manquer mon rendez-vous à Bögenhafen, je vis apparaître trois diligences sur la piste gelée, en même temps. Tellement classique ! Vous attendez pendant des jours, et il y en a trois qui arrivent d’un coup ! » – Stelle Grabbe, Marchande Les bons Cochers sont très recherchés pour des demandes inhabituelles, dangereuses ou illégales. Un Cocher qui cherche à changer de routine profitera de l’hiver pour faire une pause, car les longs voyages connaissent une forte baisse à cette saison. Les sociétés de transport hésitent peu à embaucher des cochers expérimentés. Il est donc facile pour ces derniers de retrouver du travail."</Explanation>
 <Skill>"RULES-COMPCOND"</Skill>
-<Class>"CLASS_RANG"</Class>
+<Class>"RULES-CLASS_RANG"</Class>
 <SUBCHAPTER_LEVEL>
 <Level id="1">
 <Description language="FRANCAIS">"Postilion"</Description>
@@ -7279,7 +7279,7 @@ See page 190 for Fear rules"</Explanation>
 <Description language="FRANCAIS">"Colporteur "</Description>
 <Explanation language="FRANCAIS">"Plein de sagesse et à l’abri de toute ingérence, vous voyagez à travers l’Empire afin de vendre vos biens où bon vous semble, sans entraves.  « Vous avez ici une œuvre d’art unique que vous ne verrez jamais nulle part ailleurs. Par contre, si vous en voulez d’autres, j’en ai une douzaine à l’arrière de ma charrette. » – Delberz Trötte, Négociant  Les Colporteurs voyagent de villages en hameaux, proposant biens et services comme l’aiguisage des couteaux, le reprisage et autres bricolages. La plupart transportent des biens relativement bon marché qu’on trouve facilement dans les plus grandes villes, comme des rubans ou des épingles pour les cheveux. Les colporteurs sont toujours les bienvenus, même auprès des gens les plus méfiants, car chacun aime acquérir babioles et colifichets, même s’ils sont superflus.  Un Colporteur doté d’un tant soit peu d’ambition sera forcément intéressé par les histoires qui prétendent à quel point il est facile de se faire de l’argent dans les terres les plus reculées. Comme ils ne comptent que sur eux-mêmes, il leur est facile d’accompagner n’importe quel groupe d’aventuriers, et de profiter de la route pour gagner quelques piécettes. Ils ont aussi la possibilité de se voir ouvrir les portes de diverses forteresses et autres campements sans qu’on leur pose la moindre question.  Certains Colporteurs endossent également le travail de messager ; d’autres exercent de facto le même rôle que le crieur en ville, diffusant ragots et nouvelles dans les coins les plus paisibles de l’Empire, en échange du gîte et du couvert. À cause des dangers les guettant sur les routes, les Colporteurs préfèrent travailler avec un étal dans un marché en ville. On peut également les croiser sur les routes de pèlerinage, vivant des ventes de reliques aux dévots. "</Explanation>
 <Skill>"RULES-COMPMARCH"</Skill>
-<Class>"CLASS_RANG"</Class>
+<Class>"RULES-CLASS_RANG"</Class>
 <SUBCHAPTER_LEVEL>
 <Level id="1">
 <Description language="FRANCAIS">"Vagabond"</Description>
@@ -7406,7 +7406,7 @@ See page 190 for Fear rules"</Explanation>
 <Description language="FRANCAIS">"Conseiller "</Description>
 <Explanation language="FRANCAIS">"Plein de sagesse et très bien renseigné, vous fournissez conseils et aides qui garantissent la prospérité de vos clients. Les Conseillers fournissent des conseils à ceux qui les emploient. Ils sont très au fait des conditions sociales et politiques du domaine de leur employeur et détiennent maintes informations confidentielles et sensibles. Alors que de nombreux Conseillers le sont de génération en génération, d’autres sont à la recherche active de nobles clients afin d’atteindre un certain niveau de richesse et de pouvoir. Certains jeunes héritiers vont nommer premier Assisant un ami d’enfance ou un camarade d’université, en qui ils ont une confiance aveugle.  Si quelque chose d’anormal ou de dangereux se produit sur le domaine de leur employeur, alors un Conseiller est le mieux placé pour enquêter. Aux plus hauts niveaux de la Carrière, un Consultant ou un Chancelier auront leur propre personnel de confiance sur lequel ils peuvent compter pour veiller sur leurs affaires pendant une courte absence. Les Conseillers peuvent approcher différentes catégories de personnes, y compris les plus difficiles d’accès, et sont déjà dans une position où ils sont censés poser des questions au nom de leur employeur.  De longues années passées à la cour ou au service d’un noble de petite envergure sont nécessaires pour parvenir aux plus hautes responsabilités. De nombreux conseillers ont choisi de ne pas se mettre au service de la noblesse, mais au contraire de proposer leur large éventail de connaissances à des criminels, des seigneurs de guerre, des marchands, des cultes ou encore des guildes."</Explanation>
 <Skill>"RULES-COMPSAVOIR_POLIT"</Skill>
-<Class>"CLASS_COUR"</Class>
+<Class>"RULES-CLASS_COUR"</Class>
 <SUBCHAPTER_LEVEL>
 <Level id="1">
 <Description language="FRANCAIS">"Assistant"</Description>
@@ -7529,7 +7529,7 @@ See page 190 for Fear rules"</Explanation>
 <Description language="FRANCAIS">"Contrebandier "</Description>
 <Explanation language="FRANCAIS">"Vous faites de la contrebande de cargaisons, cherchant à éviter les taxes et esquiver les patrouilleurs fluviaux afin d’encaisser le maximum de bénéfice.  « Écoute, c’est là qu’on va mettre les meilleures bouteilles de Bordeleaux. Les patrouilleurs fluviaux vont chercher derrière, les trouver et les confisquer. Et c’est ce qu’on veut, parce que cela signifie qu’ils ne vont pas trouver les douze bouteilles qu’on a cachées en dessous, là. Et si jamais ils les trouvaient, ce ne serait pas la fin du monde parce qu’ils seraient tellement satisfaits de leur prise qu’ils n’iraient même pas regarder où l’on a caché vingt-quatre autres bouteilles. » – Hansel Solomon, Contrebandier  Le commerce est taxé par les seigneurs locaux, tout comme il est ponctionné, mais illégalement, par les bandits et par ceux qui font du racket. Les Contrebandiers se considèrent comme des âmes charitables : les marchands font de meilleurs profits, les clients paient moins cher, les Patrouilleurs fluviaux, peu étouffés par la moralité, prennent une petite commission, les hors-la-loi sont évités, au minimum. Une bonne dose d’ingéniosité et un peu de bouteille sont nécessaires pour éviter les huissiers, les douanes officielles, les receveurs d’octroi et tous ceux qui chercheront à les arrêter. Mais les Contrebandiers acceptent cette prise de risques, car ils doivent subvenir à leurs besoins et à ceux de leur famille.  Bien souvent, les Contrebandiers se retrouvent embarqués dans des aventures même s’ils cherchent généralement à ce que tout reste le plus calme possible. De nombreuses péripéties peuvent survenir au cours d’une mission de contrebande, et même si tout se passe bien, il y aura toujours la tentation de la mission d’après, plus grosse et encore plus lucrative que la précédente. On peut vivre un grand nombre d’aventures en solo rien qu’avec des missions de contrebande. Il est également facile, pour un Contrebandier, de trouver du travail qui s’écarte un peu de ce qu’il fait habituellement. Celui qui a plus d’un tour dans son sac, l’œil aux aguets, et qui est capable de conserver son calme, même quand la situation se complique, sera toujours une recrue de choix pour n’importe quelle expédition dangereuse.  Il existe toutes sortes de Contrebandiers : certains vont transporter des objets de petite taille, mais de très forte valeur pour des familles de nobles, alors que d’autres vont convoyer d’énormes cargaisons pour des marchands plus ou moins louches. Certains font également la contrebande de biens  illégaux, et c’est là un crime pour lequel la peine encourue est bien plus lourde qu’un simple doigt brûlé ou que recevoir la marque du Contrebandier."</Explanation>
 <Skill>"RULES-COMPDISC_RURAL/RULES-COMPDISC_URB"</Skill>
-<Class>"CLASS_RIVE"</Class>
+<Class>"RULES-CLASS_RIVE"</Class>
 <SUBCHAPTER_LEVEL>
 <Level id="1">
 <Description language="FRANCAIS">"river runner"</Description>
@@ -7655,7 +7655,7 @@ See page 190 for Fear rules"</Explanation>
 <Description language="FRANCAIS">"Débardeur "</Description>
 <Explanation language="FRANCAIS">"Même si vous déchargez les marchandises des navires contre rémunération, tout le monde sait que ce sont les Débardeurs qui font la loi sur les docks.  « Mon garçon, faut pas croire que les débardeurs se la coulent douce. C’est un travail dangereux, en espace confiné, avec des charges très lourdes et des piles de caisses qui n’en finissent pas, et si c’est mal fait, la cargaison risque de se déséquilibrer et de faire chavirer le bateau. Ce que je veux te dire, c’est qu’il faut les payer correctement. Et si tu veux voir un bateau couler, rajoute quelques pièces. » – Aleida Fuchs, Marchande  Même si leur seule attribution consiste à charger et à décharger les navires, les guildes de Débardeurs ont le pouvoir de ralentir ou d’accélérer le commerce. Ce qui leur confère un certain pouvoir, car beaucoup de quais sont dirigés par ces guildes. Dans les villes les plus grandes, il peut y avoir des affrontements violents entre plusieurs gangs afin de décider duquel aura le pouvoir. Les Contremaîtres à la mine renfrognée gèrent les affaires courantes de la guilde lorsqu’ils ne sont pas à user de leur sifflet pour faire sortir leur gang des tavernes du quai lors de l’arrivée d’un nouveau bateau, ou encore pour défendre leur territoire.  Malgré la monotonie et la répétition qui régissent la vie sur les quais, certaines opportunités d’aventure s’offrent à un Débardeur. Certains gangs font littéralement la loi et n’hésiteront pas à se battre pour défendre chaque pouce de leur territoire. Les Débardeurs sont des Personnages intéressants à avoir sous la main, car ils sont très débrouillards et ont l’habitude de traiter avec les miséreux.  Un Débardeur peut travailler en solitaire dans un village riverain, ou appartenir à un gang plus important qui œuvre sur un quai fourmillant d’activité. Quelquefois, il peut même se retrouver dans une bande de criminels organisés qui va effectuer ce travail en tant que couverture. Certains décident de devenirs des exécuteurs, et s’assurent que tout le monde travaille à son maximum."</Explanation>
 <Skill>"RULES-COMPRESIST"</Skill>
-<Class>"CLASS_RIVE"</Class>
+<Class>"RULES-CLASS_RIVE"</Class>
 <SUBCHAPTER_LEVEL>
 <Level id="1">
 <Description language="FRANCAIS">"Carrier"</Description>
@@ -7779,7 +7779,7 @@ See page 190 for Fear rules"</Explanation>
 <Description language="FRANCAIS">"Duelliste "</Description>
 <Explanation language="FRANCAIS">"Entre vos mains entraînées à la manier avec une précision mortelle, votre lame est un instrument de justice hérité d’une tradition des plus anciennes. Les Duellistes se battent au nom des autres – réglant tout problème d’honneur entre des individus ou des organisations, ou agissent en tant que représentant de la loi, prenant cause pour l’accusé ou le défenseur lors de procès aboutissant à un jugement par combat. Pour certains Duellistes, le fait de se battre est une récompense suffisante vis-à-vis des risques qu’ils prennent. L’entraînement est dangereux, et laisse certains novices handicapés ou défigurés à vie. Ceux qui vivent assez longtemps pour apprendre de leurs erreurs peuvent espérer devenir Maîtres duellistes et apprendre leurs imparables techniques à des étudiants avides de savoir. Les Champions de Justice se battent pour les nobles et les gouvernements, et le destin de nations entières repose sur leurs lames. Certains Duellistes, plus à la pointe, dont les étudiants d’Altdorf au sang chaud, préfèrent les pistolets. Ce que les générations les plus anciennes trouvent irrespectueux autant qu’idiot. « Pour ma défense, monsieur, il a été le premier à faire couler le sang. » – Rosabel Viernau, Duelliste « Assurez-vous que le Docteur Schuller soit sur place. Nier ? Bonne question. Payez-la à l’avance, soyez courtois avec elle et elle détournera le regard. Elle ne verra donc rien tant que le duel ne sera pas terminé, quelle qu’en soit l’issue. » – Conseil de la Fine lame Aleksandr Amblestadt à ses étudiants. Les Duellistes, qu’ils soient expérimentés ou novices, parcourent l’Empire à la recherche d’adversaires qui leur permettront d’améliorer leur réputation. Pour d’autres, partir à la recherche d’un professeur expérimenté les mène à explorer les endroits les plus reculés du Vieux Monde. Les Maîtres duellistes pratiquant des techniques exotiques sont également très recherchés par les Duellistes qui espèrent ainsi ajouter des styles de combat uniques à leur répertoire. Les Duellistes, qui sont des combattants aguerris, améliorent régulièrement leur train de vie en devenant mercenaires, allant même quelquefois jusqu’à assurer la protection de caravanes ou de navires. Même si les nains n’ont pas pour habitude de pratiquer l’escrime avec des épées ridicules et qu’ils n’ont aucun intérêt pour les frivolités entourant les duels, résoudre les disputes par le combat est pour eux une tradition ancestrale et ils n’hésiteront donc pas à partir en voyage pour devenir encore meilleurs."</Explanation>
 <Skill>"RULES-COMPCOMB_*"</Skill>
-<Class>"CLASS_COUR"</Class>
+<Class>"RULES-CLASS_COUR"</Class>
 <SUBCHAPTER_LEVEL>
 <Level id="1">
 <Description language="FRANCAIS">"Fencer"</Description>
@@ -7908,7 +7908,7 @@ See page 190 for Fear rules"</Explanation>
 <Description language="FRANCAIS">"Eclaireur "</Description>
 <Explanation language="FRANCAIS">"Intrépide et plein de ressources, vous guidez les autres à travers les dangereuses contrées sauvages du Vieux Monde  « Je ne pense pas que vous souhaitiez descendre la route qui longe la falaise sans guide. Il y a des pièges à taille humaine qui ont été placés par le préfet pour capturer les braconniers. Ça a failli couper une jambe du vieux Billi la semaine dernière. » – Gwyn, Éclaireur  Dans une population ou l’illettrisme est très répandu et où les cartes sont très rares, connaître la région dans laquelle on se trouve peut, pour les voyageurs, faire la différence entre la vie et la mort. Les Éclaireurs sont des experts dans l’art de trouver des trajets sécurisés au travers des coins les plus reculés et des routes boueuses de l’Empire. Les guides locaux vont accompagner leurs clients, les prévenant des dangers éventuels, partageant avec eux les ragots des villages et leur montrant les meilleurs endroits permettant de trouver de la nourriture. Les Éclaireurs les plus expérimentés resteront le plus souvent invisibles aux yeux de leurs employeurs, car ils seront toujours en amont à explorer les pistes à venir, et à tenter de repérer les éventuels dangers. Alors que la plupart des Éclaireurs demeurent sur des terres avec lesquelles ils sont familiers, certains se spécialisent dans l’escorte sur des terres non encore cartographiées. Certains Explorateurs vont quelquefois même jusqu’à s’aventurer sur des territoires dangereux et hostiles Les Éclaireurs constituent une aide inestimable pour un groupe d’aventuriers, surtout lorsque ces derniers partent chercher fortune pour la première fois. Les Coureurs des bois qui possèdent de solides connaissances peuvent se voir demander d’agir en tant qu’Éclaireur, même s’ils sont nombreux à demeurer solitaires, effectuant des allers-retours dans les bois pour prévenir des éventuelles embuscades ou repérer les ennemis qui seraient plus en avant. afin de compléter les blancs de leurs cartes. La majorité des Éclaireurs n’affronteront pas eux-mêmes les dangers, préférant se replier en toute discrétion pour prévenir leurs compagnons et faire en sorte que leur employeur ne se retrouve pas démuni face à la menace approchante. "</Explanation>
 <Skill>"RULES-COMPPRECEP"</Skill>
-<Class>"CLASS_PEAS"</Class>
+<Class>"RULES-CLASS_PEAS"</Class>
 <SUBCHAPTER_LEVEL>
 <Level id="1">
 <Description language="FRANCAIS">"Runner of the woods"</Description>
@@ -8038,7 +8038,7 @@ See page 190 for Fear rules"</Explanation>
 <Description language="FRANCAIS">"Emissaire "</Description>
 <Explanation language="FRANCAIS">"Émissaire pour qui l’art de la parole est une seconde nature, vous n’hésitez pas à voyager partout afin de négocier d’avantageux traités et pactes.  « Regardez-la donc. Elle a la langue bifide comme celle d’un serpent et aucun scrupule. De plus, elle ne peut résister ni au vin elfe ni aux séduisants valets de pied. Je suis certain que vous pouvez organiser quelque chose de… scandaleux. » – Odmar Horst, Émissaire de guilde  Les Émissaires, qui sont des experts en négociation et en interaction sociale, agissent en tant qu’agents servant les intérêts de l’Empire, un État régional, un pays étranger ou encore une Chambre de Commerce. Les intrigues sont légion à la cour, et un choix de Carrière comme celui-ci est toujours risqué, et le devient plus encore dans les hautes sphères des gouvernements. Même s’ils ont en général une sorte d’immunité diplomatique pour tout ce qui concerne les lois et coutumes des pays dans lesquels ils se rendent, les Ambassadeurs doivent négocier avec prudence.  « Le conseil que je peux donner à Votre Majesté impériale, c’est de conserver ce lien commercial si important avec Karak Ziflin : laissez-vous donc pousser la barbe et tenez vos promesses. » – Lettre envoyée au Haut Seigneur de la Présidence, rédigée par l’Ambassadeur Willemijna von Kotzdam Les Émissaires voyagent énormément, croisent le chemin de très nombreuses personnes aux parcours tous différents et étendent leurs relations à travers le Vieux Monde. On attend quelquefois d’eux qu’ils se salissent les mains afin de contenter les souhaits de leurs maîtres. Si l’échec n’est pas synonyme de mort immédiate, ils peuvent parfois devoir prendre la fuite.  Dans un premier temps, les Émissaires vont devoir faire leurs preuves en tant que Héraut, prêtant assistance aux Diplomates en négociant les menus détails ennuyeux de certains accords, ou en représentant des marchands, des guildes ou des cultes, et améliorant leur réputation à chaque pacte conclu. Certains Émissaires se font embaucher par des compagnies de mercenaires ; les meilleurs d’entre eux sont capables de faire gagner de l’argent à leurs employeurs sans même qu’une goutte de sang ne soit versée."</Explanation>
 <Skill>"RULES-COMPCHARM"</Skill>
-<Class>"CLASS_COUR"</Class>
+<Class>"RULES-CLASS_COUR"</Class>
 <SUBCHAPTER_LEVEL>
 <Level id="1">
 <Description language="FRANCAIS">"Herald"</Description>
@@ -8164,7 +8164,7 @@ See page 190 for Fear rules"</Explanation>
 <Description language="FRANCAIS">"Enquêteur "</Description>
 <Explanation language="FRANCAIS">"Astucieux autant que méfiant, vous enquêtez au cœur des crimes afin d’y trouver des réponses.  « Nous pouvons déduire, à la vue de cette porte brisée en mille morceaux, que le voleur a reçu l’aide d’une créature énorme. Mais ladite créature n’aurait jamais pu descendre par cet escalier étroit. Ce qui ne nous laisse que deux conclusions possibles. Soit elle s’est matérialisée à partir de rien, soit notre voleur est un change-forme… » – Zavant Konniger, « Sage-Détective »  La plupart des Enquêteurs interviennent dans des affaires de vol de propriété privée, de personnes disparues ou de meurtres, même si certains enquêtent sur les gros titres des journaux ou encore sur les cas de chantage pour se faire un peu de « bonus ». Parmi les techniques d’enquête, on trouve le pistage des empreintes de pied, les recoupements, les déductions logiques, et, si nécessaire, les fouilles illégales. Alors que les Enquêteurs laïcs agissent à la limite de la loi pour des institutions comme les chambres de commerce, les enquêteurs religieux, pour la plupart au service de Sigmar et de Verena, suivent un code éthique très strict.  « J’imagine que vous n’êtes pas sans savoir que je suis le plus grand détective du monde. Vous avez déjà entendu parler d’Alphonse, non ? » – Alphonse Hercule de Gascoigne, minuscule détective Bretonien Les Enquêteurs sont quelquefois embauchés afin de résoudre des mystères qu’il serait trop dangereux de tenter de solutionner seul, ce qui peut devenir une manière informelle de créer un groupe d’aventuriers. Bien évidemment, la nature de ces mystères peut faire qu’une fois l’un d’entre eux résolu, un autre se présente. Certains Enquêteurs peuvent donc bénéficier d’un emploi stable, à la condition qu’ils soient capables d’identifier les clients potentiels derrière chaque nouveau mystère qu’ils découvrent.  Les Enquêteurs aguerris abusent quelquefois d’effets de manche pour améliorer leur crédibilité. Certains Maîtres Enquêteurs se présentent en tant que « spécialistes de l’observation » et se targuent de posséder des talents qui ne peuvent pas s’apprendre. Il faut une bonne dose d’autopromotion pour se hisser au rang de Détective et se voir proposer des affaires à travers le Vieux Monde."</Explanation>
 <Skill>"RULES-COMPPRECEP"</Skill>
-<Class>"CLASS_BURG"</Class>
+<Class>"RULES-CLASS_BURG"</Class>
 <SUBCHAPTER_LEVEL>
 <Level id="1">
 <Description language="FRANCAIS">"Bloodhound"</Description>
@@ -8289,7 +8289,7 @@ See page 190 for Fear rules"</Explanation>
 <Description language="FRANCAIS">"Entremetteur "</Description>
 <Explanation language="FRANCAIS">"Débrouillard et intéressé, vous gagnez votre vie en vendant des marchandises illicites dans les bas-fonds de la ville.  « Moquez-vous tant que vous le voulez, mais ces vêtements coûtent une fortune. Pour un gamin né sous un tas d’fumier, il mène une vie de luxe. » – Hertel Netzhoch, Aubergiste  Les Entremetteurs guident les gens vers les établissements offrant une variété de services illégaux et immoraux. Bien que beaucoup d’humains et de nains s’opposent à ce genre d’activités, la plupart des halflings et hauts elfes sont parfaitement neutres en ce qui concerne les repaires de drogués, les bordels et autres maisons du vice.  Les Entremetteurs vivant dans les zones urbaines voyagent parfois pour fuir la peste et les persécutions religieuses, ces dernières étant plus fréquentes dans les régions dominées par le Culte de Sigmar. D’autres, comme ceux qui vagabondent avec les saltimbanques, considèrent le voyage comme une partie intégrante de leur profession. Ceux qui parviennent à convaincre des mécènes peuvent bénéficier de beaucoup de temps à consacrer à leur propre sort.  Les Entremetteurs regroupent les vendeurs de drogue, les effeuilleuses, les prostituées et les modèles. Beaucoup de chefs-d’œuvre célèbres de l’ère moderne ont eu pour modèles des Entremetteurs arrachés à la rue. Les armées en déplacement sont suivies par des cantinières, parmi lesquelles les Entremetteuses cherchent à se faire de l’argent par tous les moyens. Les Meneurs, propriétaires d’établissements où les Entremetteurs se regroupent, peuvent se retrouver à la tête d’empires importants fournissant des services à tous genres de roublards, des receleurs qui ont besoin de rencontrer discrètement de riches clients, jusqu’à fournir des repaires sûrs aux chefs de gangs et barons du crime."</Explanation>
 <Skill>"RULES-COMPCHARM"</Skill>
-<Class>"CLASS_ROGU"</Class>
+<Class>"RULES-CLASS_ROGU"</Class>
 <SUBCHAPTER_LEVEL>
 <Level id="1">
 <Description language="FRANCAIS">"prostitute"</Description>
@@ -8409,7 +8409,7 @@ See page 190 for Fear rules"</Explanation>
 <Description language="FRANCAIS">"Erudit "</Description>
 <Explanation language="FRANCAIS">"Vous consacrez votre vie à parfaire vos connaissances, et ce, quels que soient les chemins que vous aurez à emprunter. Les Érudits étudient en général dans une des institutions d’apprentissage du Vieux Monde, parmi lesquelles se trouve bien évidemment l’université d’Altdorf. La plupart se spécialisent dans une ou deux matières, et nombreux sont ceux qui en apprennent juste assez pour leur permettre d’exercer un métier utile ou leur fournir assez de connaissances pour se sentir à l’aise pendant une conversation lors d’un diner mondain. Les Érudits les plus pauvres tiennent souvent le rôle de scribes, lisant et écrivant des lettres pour les autres, la plupart des citoyens de l’Empire étant illettrés. D’autres deviennent précepteurs et instruisent les familles les plus riches.  Les Érudits les plus pauvres qui ne peuvent, ou ne veulent pas enseigner auront souvent besoin de trouver des fonds pour financer leurs recherches. Quelques-uns iront chercher des secrets depuis longtemps oubliés ou des ouvrages très anciens dans les coins les plus reculés du monde. D’autres sont embauchés afin d’accompagner des groupes d’aventuriers conscients que leurs connaissances pourront être très utiles.  Les Érudits les plus talentueux sont régulièrement invités par les universités à rejoindre leurs rangs, des établissements où des Professeurs de renom tiennent des conférences devant des centaines d’Étudiants. Les nains et les hauts elfes sont moins susceptibles de se retrouver en poste dans des institutions impériales, ce qui ne les empêche pas de parcourir l’Empire à la recherche de connaissances ésotériques. Érudit est une Carrière très utile, car elle donne accès à des Compétences Savoir d’une grande rareté, et offre un excellent moyen au MJ de partager des informations avec les Joueurs. S’il est joué avec un minimum de bon sens, l’Érudit pourra tempérer les tendances un peu brutales et belliqueuses des autres Personnages qui résolvent tous les problèmes à coups d’épée. Les Érudits peuvent utiliser leurs connaissances pour résoudre des énigmes ou élaborer des stratégies et des tactiques sortant de l’ordinaire. "</Explanation>
 <Skill>"RULES-COMPSAVOIR_*"</Skill>
-<Class>"CLASS_ACAD"</Class>
+<Class>"RULES-CLASS_ACAD"</Class>
 <SUBCHAPTER_LEVEL>
 <Level id="1">
 <Description language="FRANCAIS">"Student"</Description>
@@ -8532,7 +8532,7 @@ See page 190 for Fear rules"</Explanation>
 <Description language="FRANCAIS">"Espion "</Description>
 <Explanation language="FRANCAIS">"Vous êtes les yeux et les oreilles d’un autre, révélant secrets et mensonges.  On trouve, un peu partout dans le Vieux Monde, des Espions au service d’organisations connues. Au cours de leurs enquêtes, les Espions se retrouvent impliqués dans des intrigues qui peuvent être sans risques, ou beaucoup plus sinistres. Ils sont souvent contraints à la fuite lorsque leur identité, ou leurs allégeances sont mises au jour. Ces individus utilisent leurs talents de déguisement pour cacher leur vraie nature et éviter de se faire capturer. Plus d’un Espion s’est retrouvé à partir à l’aventure après avoir rejoint un groupe de héros qui l’auront pris dans leur groupe bien malgré eux lors d’une tentative d’évasion.  Les Espions sont des personnes courageuses (ou imprudentes) qui, en secret, partent à la pêche aux informations pour leurs clients. Un espion bien infiltré devient un atout considérable pour quiconque cherche à obtenir des informations sur les activités d’un adversaire. Ils passent des mois, voire des années, à se façonner une identité des plus banales et à établir des liens avec un ou plusieurs groupes d’individus. Chacune de leurs actions est risquée. Même s’ils sont capturés, il est rare que les Espions soient immédiatement exécutés ; le plus souvent, ils sont longuement torturés. De nombreux Informateurs sont contraints, par chantage ou autre forme de menace, à pratiquer l’espionnage. Un espion talentueux va bien gagner sa vie, mais il s’avère encore plus difficile de mettre fin à ce genre d’activités que d’en poursuivre la pratique. Du fait que les Espions vont tout faire pour éviter d’attirer l’attention, ils sont très rarement précédés par leur réputation, à moins que cette dernière ne se révèle aussi anonyme qu’eux-mêmes. "</Explanation>
 <Skill>"RULES-COMPRAGOT"</Skill>
-<Class>"CLASS_COUR"</Class>
+<Class>"RULES-CLASS_COUR"</Class>
 <SUBCHAPTER_LEVEL>
 <Level id="1">
 <Description language="FRANCAIS">"Informant"</Description>
@@ -8659,7 +8659,7 @@ See page 190 for Fear rules"</Explanation>
 <Description language="FRANCAIS">"Femme du fleuve "</Description>
 <Explanation language="FRANCAIS">"Les rivières sont le centre névralgique du commerce du Vieux Monde, et vous vivez en plein milieu de cette fourmilière.  « Ils disent qu’on peut parcourir tout l’empire si on reste sur le Reik suffisamment longtemps. Eh bien, j’y suis resté, pendant vingt ans, à suivre le courant du regard. J’en ai vu des choses. J’ai assisté à de nombreuses guerres, et j’ai vu la paix. J’ai été témoin de périodes d’allégresse et d’époques plus rudes. J’ai vu la joie, et la tristesse. Et, pendant tout ce temps, je peux vous dire, le plus honnêtement du monde, que je n’ai pas pêché un seul poisson. » – Thys Lange, le plus mauvais pêcheur du Reikland  Les berges fertiles des grandes rivières de l’Empire sont très fortement peuplées, et les habitants qui travaillent jour et nuit sur les eaux et dans les marais proches fournissent la grande majorité du poisson frais, des anguilles et des crustacés qui vont permettre de nourrir les villes et les cités avoisinantes. À l’inverse des villages situés à l’intérieur des terres, les étrangers, qui viennent commercer ou livrer, sont très nombreux dans les villages côtiers. Les Femmes du fleuve sont de ce fait très polyvalentes et bien souvent les premières à apprendre les nouvelles en provenance des terres lointaines. Les rivières sont pourvoyeuses de bien des métiers différents. Nombreux sont ceux qui récoltent les richesses du Reik : les pêcheurs (qui utilisent des cannes, des lances ou des filets), les chasseurs d’anguilles (qui utilisent des nasses) ou encore les plongeurs pour les coquillages. La plupart vivent dans les villages riverains, draguant les lits des rivières, tractant et entretenant les milliers de navires qui parcourent le Reik. Une Femme du fleuve se sent chez elle lorsqu’elle se trouve à proximité d’une étendue d’eau, et l’étendue de ses compétences est telle qu’elle peut se permettre d’arrêter de travailler quand elle le souhaite, car elle pourra trouver du travail n’importe où ailleurs si elle en a besoin. Une Femme du fleuve sera l’une des premières à entendre les ragots qui émaillent les coins les moins fréquentables des berges d’une rivière et peut même avoir des contacts intéressants parmi les plus démunis. Leur expérience et leurs connaissances peuvent faire la différence entre le succès et l’échec lors d’une expédition fluviale."</Explanation>
 <Skill>"RULES-COMPRESIST"</Skill>
-<Class>"CLASS_RIVE"</Class>
+<Class>"RULES-CLASS_RIVE"</Class>
 <SUBCHAPTER_LEVEL>
 <Level id="1">
 <Description language="FRANCAIS">"alevin"</Description>
@@ -8783,7 +8783,7 @@ See page 190 for Fear rules"</Explanation>
 <Description language="FRANCAIS">"Flagellant "</Description>
 <Explanation language="FRANCAIS">"Alors que vous aviez perdu tout espoir, votre souffrance et la vertu de Sigmar vous ont sauvés !  « Nous avons eu des Flagellants qui sont passés dans le village il y a quelques mois. Ils étaient terrifiants : agonie, douleur, souffrance. Voilà ce que nous ressentions, rien qu’à les regarder. Nous ne savions quoi faire. Nous savions que nous devions ouvrir nos portes, les accueillir, les nourrir et prier avec eux. Mais nous nous sommes finalement cachés dans la cave jusqu’à ce qu’ils soient partis. Effrayants ! » – Wulfrum Barth, Villageois  Le pardon n’est pas chose facile, et n’est acquis que de haute lutte, dans la douleur et en respectant la volonté de Sigmar. Les Flagellants parcourent l’Empire, se fouettent en pénitence de leurs péchés et de celui des autres. Ils sont résolus à rester au service de Sigmar jusqu’à la fin du monde, qu’ils pensent imminente. Les bonnes personnes sont censées les accueillir, les aider, les nourrir et prier avec eux.  « La fin est proche ! » – Pancarte très souvent portée par des Flagellants.  La plupart des Flagellants voyagent en groupes importants et sont menés par un Prophète du Destin qui interprète la volonté de Sigmar. Certains escortent des armées, se fouettant avec frénésie lorsqu’une bataille se produit et combattant sans s’inquiéter de leur propre sécurité. D’autres errent en solitaires, convaincus qu’ils serviront Sigmar plus efficacement en combattant le mal que ce dernier place sur leurs routes. Il n’est pas compliqué pour un Flagellant de se retrouver embarqué dans une aventure, surtout si elle implique des ennemis de Sigmar. Les Flagellants peuvent se comporter alors comme à leur habitude, se reposant sur les honnêtes gens du peuple de l’Empire pour qu’ils leur offrent nourriture, boisson et un toit alors qu’ils marchent d’un pas traînant vers la fin de toutes choses."</Explanation>
 <Skill>"RULES-COMPCOMB_FLEAU"</Skill>
-<Class>"CLASS_RANG"</Class>
+<Class>"RULES-CLASS_RANG"</Class>
 <SUBCHAPTER_LEVEL>
 <Level id="1">
 <Description language="FRANCAIS">"Zealot"</Description>
@@ -8906,7 +8906,7 @@ See page 190 for Fear rules"</Explanation>
 <Description language="FRANCAIS">"Garde "</Description>
 <Explanation language="FRANCAIS">"Votre travail est simple : garder les indésirables dehors. La meilleure façon de protéger quelque chose est d’y poster un garde. Monter la garde peut sembler assez facile, il suffit généralement de rester debout et ne pas faire grand-chose. Les gardes vivent et meurent, littéralement, en fonction de leur attitude au moment où ils sont obligés de passer à l’action. Les meilleurs peuvent exiger des salaires élevés et se voir confier la vie des personnalités les plus importantes de l’Empire et des objets les plus précieux. Cela comprend les Gardes de cimetière qui défendent les Jardins de Morr en pleine nuit, surveillant d’éventuels pilleurs de tombes, ainsi que les Gardes de temple, protecteurs des sites sacrés et des prêtres importants. Les marchands ont souvent besoin de Gardes locaux, pour les marchandises de valeur stockées dans les entrepôts ou en transit. Certains prétendent que les gardes du corps personnels ont les postes les plus intéressants, parce qu’ils doivent juste rester aux côtés de leurs prestigieux employeurs, et sont aux premières loges pour voir évoluer ces personnes si importantes, juste sous leurs yeux. « Si vous n’êtes pas sur la liste, vous n’entrez pas ! » – Garde anonyme d’Altdorf au Grand Théogoniste, lors du couronnement de Karl Franz Ier, apocryphe Les Gardes peuvent intégrer l’aventure lorsque leur fonction est compromise. Tout garde qui se respecte voudrait suivre et enquêter sur ceux qui les pris en défaut, et restituer ce qu’ils gardaient à leurs véritables propriétaires. Cela peut facilement se muer en une aventure excitante. Beaucoup de ceux qui partent en expédition auront besoin de gardes pour les accompagner pour le profit ou vers une mort prématurée."</Explanation>
 <Skill>"RULES-COMPPRECEP"</Skill>
-<Class>"CLASS_WARR"</Class>
+<Class>"RULES-CLASS_WARR"</Class>
 <SUBCHAPTER_LEVEL>
 <Level id="1">
 <Description language="FRANCAIS">"Sentinel"</Description>
@@ -9032,7 +9032,7 @@ See page 190 for Fear rules"</Explanation>
 <Description language="FRANCAIS">"Gladiateur "</Description>
 <Explanation language="FRANCAIS">"Vous combattez pour l’argent, pour la gloire, et pour divertir les foules. Regarder des combats est un passe-temps populaire. Dans les cités, des combats organisés ont lieu toutes les nuits. On peut devenir riche sur le dos des spectateurs, et encore plus en pariant sur les résultats. Les vainqueurs gagnent de l’argent et obtiennent le statut de héros locaux. Les perdants sont blessés ou tués. Parce que le combat dans la fosse est officiellement désapprouvé, les combats sont souvent contrôlés par des gangs de criminels, mais les riches aiment s’encanailler à l’occasion, en particulier si cela implique une petite effusion de sang. Les Gladiateurs de Tilée sont les plus renommés, bien que les combattants à chaînes de Marienburg et les belluaires de Kislev attirent aussi les foules. Les pugilistes et les lutteurs peuvent travailler dans une foire itinérante, défiant le public de survivre trois minutes sur le ring avec eux, ou affronter un adversaire célèbre sous les acclamations de la foule. Couteaux, gourdins, chaînes, boxe, lutte, il existe une variété presque infinie de styles et de codes qu’un Gladiateur peut adopter. « Approchez ! Approchez ! Oserez-vous affronter la puissance de Gosser ? Pourriez-vous tenir trois minutes avec Resige Heuhaufer ? » – Raimund Heenan, Aboyeur d’arène Beaucoup de Gladiateurs arrivent dans ce métier parce qu’ils ont du talent ou simplement besoin d’argent. Certains sautent sur l’occasion de quitter leur monde miteux et de mettre leur talent à profit. Heureusement, les Gladiateurs sont généralement libres d’utiliser leur temps à leur guise, à condition qu’ils reviennent à l’heure pour le prochain grand combat, et même s’ils ne le font pas, il y a bien toujours d’autres fosses…"</Explanation>
 <Skill>"RULES-COMPCOMB_*"</Skill>
-<Class>"CLASS_WARR"</Class>
+<Class>"RULES-CLASS_WARR"</Class>
 <SUBCHAPTER_LEVEL>
 <Level id="1">
 <Description language="FRANCAIS">"Pugilist"</Description>
@@ -9156,7 +9156,7 @@ See page 190 for Fear rules"</Explanation>
 <Description language="FRANCAIS">"Herboriste "</Description>
 <Explanation language="FRANCAIS">"Botanistes de grand talent qui bénéficient de la munificence de Rhya afin de créer des remèdes soignant de nombreuses affections. Les médicaments concoctés par les Apothicaires sont hors de prix et rarement disponibles dans l’arrière-pays reiklander. C’est pourquoi les paysans se tournent régulièrement vers le pouvoir de guérison des plantes, ramassées, traitées et administrées par les Herboristes. La transmission du savoir des Herboristes s’opère en grande majorité de façon orale, ce qui fait que, bien souvent, les dénominations des maladies vont varier d’un village à l’autre. Les Herbalistes de renom, parmi les plus expérimentés, sont dépêchés en cas de maladies mystérieuses ou particulièrement résistantes. Les Herboristes passent une grande partie de leur temps à rendre visite à ceux qui sont malades, cherchant à diagnostiquer l’affection dont ils sont atteints avant d’aller quérir les herbes nécessaires à l’élaboration du traitement. Certains Herboristes exercent leur profession moins honorablement et sont recherchés par ceux qui ne peuvent pas s’offrir certaines substances illicites onéreuses. Même s’il s’agit d’un stéréotype erroné, il existe une blague récurrente dans la profession qui dit que les Herboristes halflings ne s’intéressent qu’à l’herbe à pipe et à la racine du Destin. Les Herboristes trouvent très facilement une place dans un groupe d’aventuriers ou de mercenaires grâce à leur connaissance des cataplasmes et des potions. Lorsque des maladies particulièrement virulentes se répandent, il arrive souvent que les Herboristes suprêmes envoient leurs apprentis à la recherche d’herbes rares dans des endroits reculés, et certains se retrouvent quelquefois dans des situations compliquées. L’expertise en herboristerie des elfes sylvains est devenue légendaire. Dans les Montagnes Grises, on raconte que la déesse Shallya a parcouru Athel Loren afin de leur demander conseil lorsque Ranald succombait à une maladie qu’elle était incapable de guérir. Les hauts elfes qui étudient l’herboristerie suivent les enseignements de Lileath la Vierge, et une rumeur prétend qu’il y aurait une bibliothèque elfique à Marienburg dans laquelle seraient répertoriées les utilisations médicales de toutes les plantes du Vieux Monde, même si aucun humain ne s’est encore vu accorder l’accès."</Explanation>
 <Skill>"RULES-COMPMETIER_HERB"</Skill>
-<Class>"CLASS_PEAS"</Class>
+<Class>"RULES-CLASS_PEAS"</Class>
 <SUBCHAPTER_LEVEL>
 <Level id="1">
 <Description language="FRANCAIS">"picker"</Description>
@@ -9281,7 +9281,7 @@ See page 190 for Fear rules"</Explanation>
 <Description language="FRANCAIS">"Hors-la-loi "</Description>
 <Explanation language="FRANCAIS">"Vous vous attaquez aux voyageurs, extorquant un droit de passage aux plus vulnérables et aux imprudents.  …et il dit, « Titus, pourquoi prends-tu ces cisailles ? » Et je fais, « Celles-ci ? » Et il dit, « Ouais, ce sont les seules cisailles que je vois. » Alors j’ai ri et répondu : « Parfois, ils ne veulent pas me donner leurs bagues comme je leur demande. Quand je leur montre les cisailles, ils changent rapidement leur fusil d’épaule. Et s’ils ne le font pas… » « Ha ! Ha ! Ha !» – Titus Widmann, Hors-la-loi  Les Hors-la-loi sillonnent les routes du Vieux Monde à la recherche de voyageurs vulnérables et de caravanes marchandes. Ils mènent des vies dangereuses et souvent misérables. Beaucoup ne se considèrent pas comme des criminels, mais comme un groupe d’oppressés essayant de vivre leurs existences libres, loin des contraintes. Beaucoup de Hors-la-loi elfes sylvains correspondent à cette description, repoussant la prolifération des Humains jusqu’aux lisières des forêts, prêts à entreprendre des actions bien plus drastiques que leurs congénères. Des Hors-la-loi particulièrement astucieux et brutaux peuvent former leurs propres groupes, unifiant même parfois plusieurs bandes sous une même bannière. Ces Rois des bandits sont craints et vilipendés par les nobles et les paysans. Bien que peu de Hors-la-loi fassent la distinction en choisissant leurs proies, certains prétendent protéger les gens du peuple. Ces bons samaritains concentrent leurs larcins sur les nobles avares et, en retour, les gens du coin leur fournissent de la nourriture, des informations et un refuge sûr. Les bandes de Hors-la-loi ne sont pas toutes constituées de monstres sauvages, et beaucoup peuvent donc être raisonnées si on les approche correctement. Un groupe d’aventuriers peut demander à un Hors-la-loi de les accompagner comme guide ou pour les protéger, en particulier si le groupe essaie de mettre fin à une activité impie dans le domaine d’un Roi des bandits. Les Hors-la-loi solitaires peuvent trouver facile le fait de rejoindre un groupe d’aventuriers. Mais ils peuvent avoir besoin de se déguiser s’ils sont recherchés là où ils se rendent."</Explanation>
 <Skill>"RULES-COMPINTIM"</Skill>
-<Class>"CLASS_ROGU"</Class>
+<Class>"RULES-CLASS_ROGU"</Class>
 <SUBCHAPTER_LEVEL>
 <Level id="1">
 <Description language="FRANCAIS">"Bandit"</Description>
@@ -9411,7 +9411,7 @@ See page 190 for Fear rules"</Explanation>
 <Description language="FRANCAIS">"Ingénieur "</Description>
 <Explanation language="FRANCAIS">"Vous créez des machines et des constructions aussi étranges qu’utiles et souvent carrément mortelles.  « Le Maître Ingénieur Volker von Meinkopt a trouvé l’inspiration en regardant des étudiants en train de recharger à l’École impériale d’Artillerie. Il a eu une révélation : plus de canons = plus de tirs = plus de morts potentiels. Il a donc très vite fabriqué la première arme de poing à répétition, « Cavalcade de la Mort tournoyante de von Meinkopt » ainsi que le premier pistolet « Micro-Ressort à innombrables Volées de Plomb pernicieux de von Meinkopt ». Et comme il n’était pas question qu’il se repose sur ses lauriers, il a ensuite inventé cet énorme canon à 9 fûts, le canon à répétition Feu d’Enfer, arme mortelle pour ceux qui se trouvent dans sa ligne de mire et, bien souvent, pour l’équipe qui le manie. » – « Grand Ingénieur de l’Empire » Dame Theodora Holzenauer, Ingénieur et Journaliste  Les Ingénieurs sont capables de concevoir et de fabriquer des appareils ou des structures mécaniques comme des ponts, des canaux ou même des fortifications. La plupart d’entre eux ont suivi une formation, les nains à la très rigide guilde des Ingénieurs nains, les humains dans des établissements avant-gardistes tels que l’École impériale d’Ingénieurs d’Altdorf, et ce, même si l’on déniche également certains autodidactes de talent. Les Ingénieurs humains attachent une grande importance à l’innovation et aux découvertes alors que les nains préfèrent se reposer sur des conceptions qui ont fait leurs preuves depuis des générations. Les Ingénieurs des compagnies minières sont très bien payés ; ceux de l’Armée qui entretiennent les machines de guerre de l’Empire et officient en tant que soldats du génie et constructeurs de ponts, beaucoup moins. Les Maîtres Ingénieurs doivent souvent gérer des équipes entières sur des projets de constructions ambitieux. Les Ingénieurs agréés sont les plus respectés de l’Empire, mandatés pour concevoir, tester et exécuter des Commandes impériales, telles que les Roues à aubes à vapeur, qui ont révolutionné la vitesse de transport sur les canaux du Vorbergland. Certains Ingénieurs effectuent des recherches dans des Forteresses naines, pour la plupart abandonnées, car elles renferment des secrets de fabrication de l’ancien temps. Ceux qui osent affronter les profondeurs de ces endroits trouvent quelquefois des merveilles datant de plusieurs millénaires, dont la plupart détournées par les gobelins et les skavens dans le but de réaliser leurs infâmes projets. Les gigantesques ponts de pierres qui surplombent ces forteresses sont tout aussi époustouflants, certains s’étirant sur plusieurs kilomètres, véritables merveilles et vestiges d’un temps révolu qui reliaient autrefois les villes, forts et fermes arables des nains."</Explanation>
 <Skill>"RULES-COMPSAVOIR_ING"</Skill>
-<Class>"CLASS_ACAD"</Class>
+<Class>"RULES-CLASS_ACAD"</Class>
 <SUBCHAPTER_LEVEL>
 <Level id="1">
 <Description language="FRANCAIS">"Engineering student"</Description>
@@ -9534,7 +9534,7 @@ See page 190 for Fear rules"</Explanation>
 <Description language="FRANCAIS">"Intendant "</Description>
 <Explanation language="FRANCAIS">"Vous surveillez le territoire d’autrui, vous assurant que tout y est en ordre, et, si nécessaire, protégé. Les Intendants sont en charge de la maintenance des propriétés de leur employeur. Ne pas parvenir à embellir – ou, tout au moins entretenir – leurs terres ou les ravitailler régulièrement mène en général à la disgrâce. Dans certaines circonstances, plusieurs Intendants peuvent travailler de concert à l’entretien des terres d’un même employeur.  Les Intendants ne quittent leur domaine que s’ils y sont obligés par devoir. Cela étant dit, même ceux qui sont assignés à la surveillance des terres d’un domaine, ou d’une réserve de chasse, doivent régulièrement effectuer des patrouilles pour contrôler l’état général de la propriété et décourager les braconniers. Lorsqu’ils sont entre deux missions, les Intendants se font employer en tant que guides ou chasseurs, source pour eux d’autant d’excitation que de terreur. Ceux qui éprouvent du ressentiment pour certains de leurs anciens maîtres sont même quelquefois enclins à fournir des informations confidentielles, relatives aux domaines dont ils ont eu la charge, aux ennemis de ces derniers.  Les devoirs d’un Intendant comprennent de nombreux domaines : assurer l’entretien d’un imposant domaine, surveiller les terres de chasse d’un seigneur ou encore s’assurer que la maison de vacances si rarement utilisée est toujours en parfait état. Les Intendants peuvent également assurer la surveillance des zones cultivables ou boisées, ou encore entretenir lacs, rivières et bassins. Ceux qui sont au service des personnes les plus riches et les plus puissantes ont la possibilité de se retrouver eux-mêmes dans des positions fort avantageuses."</Explanation>
 <Skill>"RULES-COMPPRECEP"</Skill>
-<Class>"CLASS_COUR"</Class>
+<Class>"RULES-CLASS_COUR"</Class>
 <SUBCHAPTER_LEVEL>
 <Level id="1">
 <Description language="FRANCAIS">"Guardian"</Description>
@@ -9666,7 +9666,7 @@ See page 190 for Fear rules"</Explanation>
 <Description language="FRANCAIS">"Juriste "</Description>
 <Explanation language="FRANCAIS">"Vous louvoyez au milieu d’un système juridique totalement déloyal, défendant vos clients et poursuivant les coupables en justice.  « Ce n’est pas ce que le juriste raconte à propos de mes droits qui m’inquiète, mais plus ce qui est raisonnable et qui entre dans le cadre de la justice. Ces éléments devraient servir de base à notre nouvelle loi. » – Lectrice Agatha von Böhrn, Chancelier suprême de l’Empire.  Les Juristes fournissent des conseils légaux, interprètent les lois et plaident en faveur de leurs clients devant les cours. Ils sont souvent spécialisés dans les lois de la province dans laquelle ils exercent ou encore dans la loi ecclésiastique. La plupart ont étudié dans les universités et sont donc riches et influents, bien que certains individus doués de basse extraction soient parfois leurs apprentis. Les Juristes du culte apprennent auprès de leurs semblables, et ceux instruits par les Cultes de Verena et de Sigmar sont particulièrement appréciés. Certains Juristes sont employés comme médiateurs, réglant des conflits informels hors des cours si onéreuses, l’un des rôles préférés des halflings. D’autres travaillent pour des gangs de criminels, exploitant les failles légales pour libérer leurs clients, toujours coupables. En haut de l’échelle, les Maître du Barreau sont les seuls Juristes à avoir le droit de plaider devant les cours d’appel des cités-États et réclament des commissions exorbitantes pour leurs services. Les Juristes excellent à sortir les autres du pétrin lorsque les aventuriers excellent à les y mettre. Ils peuvent se servir de leurs connaissances de certaines lois obscures de la région afin d’éviter des ennuis en suggérant des approches individuelles pour résoudre les problèmes épineux. Après tout, il est plus rentable, et moins dangereux, d’emmener un malfrat devant une cour que de le ligoter au fond d’une cave."</Explanation>
 <Skill>"RULES-COMPSAVOIR_LOI"</Skill>
-<Class>"CLASS_ACAD"</Class>
+<Class>"RULES-CLASS_ACAD"</Class>
 <SUBCHAPTER_LEVEL>
 <Level id="1">
 <Description language="FRANCAIS">"Law student"</Description>
@@ -9789,7 +9789,7 @@ See page 190 for Fear rules"</Explanation>
 <Description language="FRANCAIS">"Marchand "</Description>
 <Explanation language="FRANCAIS">"« Si Nuln veut une guerre commerciale, qu’il en soit ainsi. Je vois bien un blocus sur leur rivière et une augmentation des taxes sur les pistolets. Après tout, l’Empire me doit quelques faveurs… » – Leo van Haagen, Prince Marchand de Marienburg  Vous êtes malin, vous savez parfaitement compter, vous achetez à bas prix et revendez au plus fort, et vous gagnez plus d’argent que la plupart n’en verront jamais. La grande majorité des Marchands font commerce de biens plutôt simples comme l’alcool, le textile, les poteries ou les objets en bois. Pour les plus ambitieux, certaines marchandises rares et exotiques, comme le gromril nain ou les épices venues de l’Est, rapportent bien plus, mais sont bien plus longues à acheminer et exigent de solides relations à l’étranger. Dans la plupart des villes, les Marchands n’ont pas le droit de vendre sans avoir l’autorisation d’une guilde de Marchands (et d’avoir payé pour l’obtenir), qui sont des institutions tellement puissantes qu’elles en viennent à avoir une influence politique similaire à celle des nobles de la cour. Le commerce local est géré par des Négociants qui transportent les biens entre les villages reculés et les villes les plus proches.  « Comment je suis devenue millionnaire ? Eh bien, quand je n’étais encore qu’une petite fille à qui il ne restait plus qu’un seul sou, je suis allée voir un fermier du coin et je lui ai acheté une pomme. Ensuite, je suis allée au marché et j’ai revendu la pomme pour deux sous. Le jour d’après, j’ai acheté deux pommes au fermier, puis je suis retournée au marché où j’ai revendu ces deux pommes pour quatre sous. Et ainsi de suite, chaque jour, j’allais à la ferme où j’achetais des pommes avant de me rendre au marché pour les revendre et faire des bénéfices. Et à l’âge de 25 ans, mon grandpère est mort, me léguant un million de couronnes. » – Johanna Sainzburg, Magnat des fruits frais Les Marchands partagent une certaine affinité avec les aventuriers, et bien souvent ils préfèrent les embaucher au lieu de faire appel aux escortes de caravanes de commerce. Les aventuriers, audacieux de nature et capables de s’adapter facilement, sont des candidats idéaux pour les partenariats dans les entreprises de négoce et permettent ainsi aux Marchands de se retrouver en contact avec une foule de Personnages hauts en couleur.  Les Négociants peuvent rejoindre une guilde en suivant l’enseignement de Maîtres Marchands en tant qu’associés débutants. Les Princes Marchands, qui possèdent des entrepôts et des bureaux de vente dans de multiples villes, ont quasiment le même statut que la petite noblesse. En plus du commerce, "</Explanation>
 <Skill>"RULES-COMPMARCH"</Skill>
-<Class>"CLASS_BURG"</Class>
+<Class>"RULES-CLASS_BURG"</Class>
 <SUBCHAPTER_LEVEL>
 <Level id="1">
 <Description language="FRANCAIS">"Trader"</Description>
@@ -9918,7 +9918,7 @@ See page 190 for Fear rules"</Explanation>
 <Description language="FRANCAIS">"Marin "</Description>
 <Explanation language="FRANCAIS">"« Ouaip, j’ai navigué vers Marienburg. Ces maudits Wastelanders ont fait tout leur possible pour nous empêcher de prendre la haute mer. J’te jure, le Nautonier a dû faire trois fois le tour des îles avant qu’on sente enfin l’odeur de l’eau salée. Et ils nous ont taxés double sur tout. Même le chat de l’équipage y a eu droit. Honnêtement, je suis content d’être rentré à la maison. » – Thom Wesserbrug, Maître d’équipage  L’appel du large et une vie passée à parcourir les mers résonnent en vous, même si de nombreux Marins du Reikland n’ont jamais vu la mer. Les Marins parcourent la haute mer dans la Marine impériale, ou se mettent au service de Marchands. Même si le Reikland ne possède aucune côte, le Reik, entre le Wasteland et Altdorf, est large de plusieurs kilomètres et emprunté par de nombreux navires de grande taille. La Première Flotte impériale, qui patrouille ces eaux, ne voit que très rarement la haute mer, en grande partie à cause du fait que les taxes à payer pour faire passer un navire de guerre par Marienburg sont exorbitantes.  Une fois Marienburg franchie, c’est le monde entier qui attend le Marin : la dangereuse Mer des griffes, le Grand Océan aux profondeurs insondables, les Îles aux sirènes et leur exotisme, les Mers du Sud et le Golfe noir. Et même sur le Reik, un Marin peut passer sa vie entière à en parcourir les eaux sans jamais vivre la même journée.  Un Marin parvient toujours à trouver du travail, que ce soit comme membre d’équipage sur un vaisseau de combat de l’Empire ou comme simple équipier sur un sloop de commerce. Certains Marins parcourent le monde et paient leur transport en travaillant. Le Reik possède également de nombreuses « Missions », ces bâtiments fournis par la Marine impériale, et qui emploient de nombreux Marins. "</Explanation>
 <Skill>"RULES-COMPVOILE"</Skill>
-<Class>"CLASS_RIVE"</Class>
+<Class>"RULES-CLASS_RIVE"</Class>
 <SUBCHAPTER_LEVEL>
 <Level id="1">
 <Description language="FRANCAIS">"freshwater sailor"</Description>
@@ -10042,7 +10042,7 @@ See page 190 for Fear rules"</Explanation>
 <Description language="FRANCAIS">"Médecin "</Description>
 <Explanation language="FRANCAIS">"La main sûre et le cœur bien accroché, vous pratiquez la médecine, luttant pour sauver des vies.  « Méfiez-vous du docteur de Bronze. » – Proverbe reiklander qui met en garde contre les médecins trop abordables.  Les Médecins étudient les symptômes de leurs patients et leur prescrivent des remèdes, ou pratiquent des interventions chirurgicales. Alors que l’art de la guérison est ancestral, et dans son ensemble issu de pratiques elfiques, la science formelle qu’est la médecine est plutôt récente, et nombreux sont ceux qui ne sont pas convaincus de son efficacité. À cause du passif de l’Empire par rapport à la nécromancie et aux garanties demandées par le Culte de Morr, l’étude des cadavres est interdite, ce qui rend compliqué l’apprentissage de l’anatomie. La réputation de la médecine est également mise à mal par les escrocs qui vendent des remèdes miracles sans aucun effet, s’ils ne causent pas encore plus de souffrances à ceux qui les utilisent. Les Médecins apprennent leur profession dans une université ou étudient dans la guilde des Médecins. La plupart des opérations chirurgicales peu coûteuses sont assurées par des médecins d’arrière-cour, connus sous le nom de barbiers-chirurgiens à la formation totalement officieuse. Les Docteurs diplômés en médecine, au cœur bien accroché, sont très demandés au sein de l’Armée. Les Médecins les plus réputés n’exercent qu’auprès des marchands les plus riches et des nobles. « Ce sont des salauds, tous. Je ne peux même pas vous faire une bonne saignée sans leur permission. « Pratique de la médecine sans Licence », tu parles. Je sais que tu n’as pas les moyens de te payer leurs services, chéri. Tiens, mon chou, prends ce thé. Quoi ? Oh non, c’est juste du thé. Et si tu te sens mieux, tu remercies Shallya, hein ? » – Jana Palner, Chirurgienne à temps partiel Il est de notoriété publique que les honoraires de la guilde des Médecins sont exorbitants, ce qui implique que, quelquefois, les Médecins débutants, sans encore de clientèle bien établie, vont chercher des sources de revenus alternatives. Certains Médecins sont en permanence à la recherche de traitements plus efficaces et de nouveaux médicaments, ce qui peut les entraîner assez loin. D’autres préfèrent perfectionner leurs connaissances en anatomie en étant les premiers à étudier des blessures graves, et quel meilleur moyen d’y parvenir que de voyager avec des aventuriers ?"</Explanation>
 <Skill>"RULES-COMPGUERI"</Skill>
-<Class>"CLASS_ACAD"</Class>
+<Class>"RULES-CLASS_ACAD"</Class>
 <SUBCHAPTER_LEVEL>
 <Level id="1">
 <Description language="FRANCAIS">"Medecine studient"</Description>
@@ -10165,7 +10165,7 @@ See page 190 for Fear rules"</Explanation>
 <Description language="FRANCAIS">"Mendiant "</Description>
 <Explanation language="FRANCAIS">"Vous vivez dans la rue et vous subsistez grâce à la charité des autres, vous servant de votre charisme et de votre force de persuasion.  « J’ai perdu ma jambe au cours de la Bataille de Bögenwasser. J’ai eu les deux mains dévorées par un squig lorsque les gobelins nous ont tendu une embuscade pendant notre patrouille près de Bögenauser. Tout ça pour protéger le Reikland et notre Empereur. » – Klaas, Soldat vétéran  La rumeur, que l’on entend principalement dans les campagnes, prétendant que les rues d’Altdorf sont pavées d’or n’est qu’une moquerie cruelle envers ses Mendiants. Ils ne peuvent que se reposer sur la générosité des étrangers, et récupèrent les détritus issus de la fange de la ville, alors que certains dandys fanfarons n’hésitent pas à leur donner, sourire aux lèvres, quelques piécettes pour les faire déguerpir. Les lois ne leur accordent que peu de protection, et la garde n’a pas beaucoup de sympathie pour les vagabonds.  « Tu pourras aller sur Königsplatz la semaine prochaine – j’ai besoin que tu fiches du bordel sur Luitpoldstrasse aujourd’hui. Pourquoi ? Mieux vaut ne pas demander, tout ce que t’as à savoir c’est que les Cutters ont besoin que la Garde soit distraite. Et, pour le bien de mes affaires, je fais en sorte de ne pas offenser les Cutters, et si tu veux devenir prospère, je te conseille de suivre mon exemple. » – « Le Kaiser », Roi des Mendiants d’Altdorf  Les Mendiants, pour la plupart orphelins, échouent dans les rues après avoir effectué de nombreux allers-retours dans des Maisons de Miséricorde une bonne partie de leur vie. Une fois qu’ils ont appris les rudiments du quémandage et qu’ils savent à peu près faire la manche, les Mendiants améliorent leurs techniques à l’aide de déguisements et autres stratagèmes pour attirer la compassion d’autrui. Certains Mendiants ne sont cependant pas des démunis, mais des employés des échelons les plus bas de l’échelle sociale, comme les vidangeurs, les chiffonniers et les collecteurs d’os. "</Explanation>
 <Skill>"RULES-COMPCHARM"</Skill>
-<Class>"CLASS_BURG"</Class>
+<Class>"RULES-CLASS_BURG"</Class>
 <SUBCHAPTER_LEVEL>
 <Level id="1">
 <Description language="FRANCAIS">"Indigent"</Description>
@@ -10288,7 +10288,7 @@ See page 190 for Fear rules"</Explanation>
 <Description language="FRANCAIS">"Messager "</Description>
 <Explanation language="FRANCAIS">"Rapide et le pas assuré, rien ne vous empêchera de délivrer votre message en temps et en heure.  « Ça avait l’air d’un paquet de valeur, si tu vois ce que je veux dire. Je me suis dit que j’allais juste jeter un œil. C’était peut-être pour sa petite amie. Je me suis dit que ça pouvait être un truc un peu coquin, tu vois ? Comment aurais-je pu deviner que c’était juste des trucs en rapport avec l’espionnage. Au fait, c’est où la Bretonnie ? » – Rufus Drucht, Messager qui a réussi à faire capturer le réseau d’espions de Bretonniens sanglants à lui tout seul, avant de perdre son travail.  Lorsque le service de poste s’avère trop long ou trop risqué, les gens envoient un Messager. De nombreuses compagnies de courrier proposent des services express, chacune cherchant à démontrer qu’elle est la plus rapide et la plus sûre. La plupart des Messagers prennent leur métier avec le plus grand sérieux, protégeant leur paquet au péril de leur vie. Certaines compagnies de Messagers ont passé des accords avec des relais, fournissant au Messager un cheval frais contre sa monture épuisée, assurant ainsi les délais les plus courts possibles.  Les messages peuvent renfermer toutes sortes d’informations, et certains peuvent mener à diverses aventures s’ils sont interceptés. La façon la plus simple, pour un ennemi (ou un groupe qui n’est pas au courant) de mettre la main sur de telles informations va consister à détourner un Messager. Si cela se produit, le Messager n’aura de cesse de suivre la trace du message jusqu’à ce qu’il le récupère. Les Messagers travaillent d’ordinaire à leur propre compte et sont payés à la course. Il est donc aisé pour eux de faire une pause une fois une mission achevée et de reprendre lorsqu’ils en ont de nouveau envie.  Les Coureurs ont pour mission de transporter des messages urgents dans les villes. Dans les grandes agglomérations, des compétitions sont souvent organisées afin de déterminer lequel est le plus rapide de tous. Les vainqueurs sont récompensés de divers prix et de missions fort lucratives. Les Messagers travaillent aussi fréquemment pour les militaires, les Maisons de Nobles, les grandes Chambres de Commerce ou même pour certains gangs de criminels qui veulent rester discrets."</Explanation>
 <Skill>"RULES-COMPRESIST"</Skill>
-<Class>"CLASS_RANG"</Class>
+<Class>"RULES-CLASS_RANG"</Class>
 <SUBCHAPTER_LEVEL>
 <Level id="1">
 <Description language="FRANCAIS">"Runner"</Description>
@@ -10414,7 +10414,7 @@ See page 190 for Fear rules"</Explanation>
 <Description language="FRANCAIS">"Milicien "</Description>
 <Explanation language="FRANCAIS">"Vous êtes les garants de la paix et vous maintenez l’ordre parmi la populace pour que votre ville ne sombre pas dans l’anarchie. Les Miliciens sont employés par les autorités locales afin de patrouiller les rues de l’Empire. La plupart ne sont autres que des gardiens de la paix engagés volontaires et bien peu connaissent les lois qu’ils sont censés faire appliquer. La corruption est endémique, et de nombreux Miliciens s’engagent auprès des autorités dans le seul but de blesser les autres ou encore de venir en aide aux gangs de criminels du coin. Certains arrivent à tripler leurs soldes en fermant ainsi les yeux.  « Je suis désolé, monsieur, j’ai un assassin halfling, un réseau de contrebande de mystracine, une guerre de gang et un noble qui menace de me faire arrêter par ma propre Milice. Votre chat disparu devra attendre jusqu’à demain. » – Sergent Harri Makkenpieser, Milicien d’Altdorf Tous les Miliciens ne sont pas malhonnêtes, mais ceux qui ont une certaine éthique sont très vite désabusés par la corruption qui pollue le système. En rejoignant des groupes d’aventuriers, ces Miliciens peuvent défendre la justice selon leurs propres termes. L’expérience de la rue fait d’eux des combattants d’une grande efficacité au sein d’un petit groupe, et leur présence dans ledit groupe peut aider à donner une légitimité à cette bande de bons à rien.  Seules quelques villes et cités disposent de Miliciens professionnels qui sont payés pour comprendre et faire respecter les lois. Dans de nombreux cas, la Paix de l’Empereur est maintenue par l’Armée, dont les hommes surveillent les remparts, les portes et effectuent des patrouilles dans les rues en respectant les consignes de leurs supérieurs."</Explanation>
 <Skill>"RULES-COMPPRECEP"</Skill>
-<Class>"CLASS_BURG"</Class>
+<Class>"RULES-CLASS_BURG"</Class>
 <SUBCHAPTER_LEVEL>
 <Level id="1">
 <Description language="FRANCAIS">"Militia Recruit"</Description>
@@ -10543,7 +10543,7 @@ See page 190 for Fear rules"</Explanation>
 <Description language="FRANCAIS">"Mineur "</Description>
 <Explanation language="FRANCAIS">"C’est dans les profondeurs les plus sombres de la terre que, jour après jour, vous cassez de la pierre, un travail éreintant s’il en est.  De nombreux Mineurs indépendants se trouvent quelquefois en position fort délicate lorsqu’ils tombent sur des gobelins ou d’autres horreurs souterraines. Certains estiment cependant que cette vie est plus lucrative, même si plus dangereuse, que celle qui consiste à se mettre au service d’un propriétaire minier pour gagner sa pitance. De nombreuses possibilités d’aventure se présentent régulièrement aux Prospecteurs, et il arrive même quelquefois qu’ils montent une équipe ensemble afin d’aller quérir fortune et gloire.  De nombreux Prospecteurs ont entendu des histoires sur la présence d’or dans les collines de Skaag, mais la pratique du minage dans ces tunnels sombres et dangereux est un travail très éprouvant. Les Mineurs, experts dans la fabrication de soutènements et dans l’extraction des filons de minerai qu’ils récupèrent pour revente, sont très vigilants quant aux dangers inattendus qui pourraient survenir à cause des gaz générés par les peaux-vertes. Ils sont très endurants, aussi bien physiquement que mentalement. Les Prospecteurs travaillent généralement sur commande, et possèdent une licence d’exploitation qui leur permet de partager leurs découvertes avec le seigneur local. Certaines fortunes de la noblesse se sont construites sur les richesses tirées des mines de leurs terres, et, bien souvent, les Mineurs qui travaillent dans ces exploitations sont des criminels ou des débiteurs forcés d’y travailler. Les carriers qui taillent dans la pierre à ciel ouvert ont un travail moins dangereux que ceux qui exercent sous terre, mais les accidents restent fréquents et les hommes-bêtes, susceptibles d’attaquer depuis la lisière des forêts proches, représentent un danger de tous les instants. Aux yeux des nains, le travail à la mine n’est pas réservé aux roturiers. Au contraire, ils sont considérés comme des experts de grand talent et sont particulièrement respectés au sein des Dawi. Les nains, qui ont un sens inné de la pierre, possèdent une sorte de flair lorsqu’il s’agit de consolider certains passages souterrains. Certains nains sont si fiers de leur expertise dans l’art du minage que, lorsqu’ils partent en guerre, ils s’arment de pioches au lieu de haches."</Explanation>
 <Skill>"RULES-COMPCOMB_2M"</Skill>
-<Class>"CLASS_PEAS"</Class>
+<Class>"RULES-CLASS_PEAS"</Class>
 <SUBCHAPTER_LEVEL>
 <Level id="1">
 <Description language="FRANCAIS">"Prospector"</Description>
@@ -10670,7 +10670,7 @@ See page 190 for Fear rules"</Explanation>
 <Description language="FRANCAIS">"Mystique "</Description>
 <Explanation language="FRANCAIS">"Vous possédez un certain talent pour voir le futur, ou pour convaincre les autres que c’est le cas… Les gens, qui cherchent des réponses dans ce monde dangereux, se tournent vers les Mystiques lorsqu’ils souhaitent avoir un aperçu de leur futur. Les caravanes itinérantes de Strigany sont monnaie courante dans le Reikland, et de nombreux habitants vont rassembler le maximum de piécettes possibles afin de se faire prédire la bonne fortune, mais également acheter des charmes et des philtres d’amour. Les Mystiques sont généralement astucieux et intuitifs, ce qui leur permet de deviner les envies et les peurs de ceux qui viennent les voir et de leur donner juste assez de réponses pour être crédibles. Les Mystiques doivent être prudents, car ils marchent sur une ligne bien ténue entre supercherie et sorcellerie hérétique. Les Mystiques font preuve de leurs capacités de bien des façons différentes : les chiromanciens et les voyants sont très nombreux chez les Strigany, mais un elfe sylvain aura plutôt tendance à interpréter les différents signes et symboles qu’il trouvera dans la nature environnante ou à s’inspirer de ses rêves et autres visions. De nombreux cultes disposent de leurs propres Prophètes et Sages, chacun prédisant le futur au travers des paradigmes de leurs croyances respectives. « Je n’ai jamais rencontré un Prêtre capable de me prédire l’avenir. Bon, si on fait abstraction du Prêtre de Morr qui a prédit ma mort pour trois sous, mais ne disent-t-ils pas toujours que la mort et les taxes sont les seules choses certaines, dans cette vie ? – Sylvestr Jutzenbach, Noble d’Ostermark Il se peut que les Mystiques se retrouvent à emprunter les chemins de l’aventure si leurs visions attirent l’attention de Prêtres et de Répurgateurs. Les rêves et les visions des Mystiques leurs permettent souvent d’intégrer des groupes d’aventuriers. Le Mystique a peut-être eu la vision d’un sombre futur si rien n’est entrepris ? Quelles que soient leurs motivations, une fois sur les routes, les Mystiques ont toujours de très nombreuses occasions d’exercer leur métier."</Explanation>
 <Skill>"RULES-COMPINTUI"</Skill>
-<Class>"CLASS_PEAS"</Class>
+<Class>"RULES-CLASS_PEAS"</Class>
 <SUBCHAPTER_LEVEL>
 <Level id="1">
 <Description language="FRANCAIS">"Seeing"</Description>
@@ -10789,7 +10789,7 @@ See page 190 for Fear rules"</Explanation>
 <Description language="FRANCAIS">"Naufrageur "</Description>
 <Explanation language="FRANCAIS">"Vous attirez les navires et les faites couler par le fond avant d’en récupérer le chargement. Quelquefois, les dieux vont offrir une aubaine aux riverains sous la forme d’un navire au tragique destin. Mais parfois, les dieux ont besoin d’un coup de main : c’est là que les Naufrageurs entrent en jeu. Par la pose de pièges perfides et l’envoi de signaux perturbateurs, les Naufrageurs parviennent à attirer les navigateurs imprudents vers des bancs de sable ou des rochers avant de récupérer ce qui se trouve dans l’épave, sans se préoccuper des protestations d’éventuels survivants de l’équipage.  « Si on laisse vivre l’équipage, ils vont dire aux patrouilleurs où on opère, donc la seule chose raisonnable à faire c’est de tous les tuer. » – Mandel Stein, Pirate des rivières pragmatique La préparation et l’exécution d’un naufrage est une aventure en elle-même : éviter les autorités, disposer des biens, s’assurer que tout le monde tient sa langue et dépenser l’agent ainsi gagné, tout cela offre des opportunités de danger et d’aventure. Et comment savoir quelle cargaison va être découverte, et qui va venir les prendre en chasse une fois le larcin effectué ? Les Naufrageurs, dont la vie quotidienne est faite de ces péripéties, n’auront aucun mal à quitter cette existence et à y revenir lorsqu’il sera temps à nouveau.  Certains Naufrageurs sont particulièrement fiers de leurs pièges astucieux, qui parviennent à donner l’illusion d’un accident lors du naufrage et leur permettent de rester à une distance respectable. Certains prennent les navires à l’abordage et balancent l’équipage par-dessus bord, capables de repérer au premier coup d’œil les bateaux aux lourdes cargaisons et aux défenses les plus faibles. Ces Pirates des rivières sont pourchassés, autant par les Patrouilleurs de routes que par les fluviaux et sont en perpétuel mouvement afin d’échapper aux autorités."</Explanation>
 <Skill>"RULES-COMPCOMB_BASE"</Skill>
-<Class>"CLASS_RIVE"</Class>
+<Class>"RULES-CLASS_RIVE"</Class>
 <SUBCHAPTER_LEVEL>
 <Level id="1">
 <Description language="FRANCAIS">"Wreck Raider"</Description>
@@ -10916,7 +10916,7 @@ See page 190 for Fear rules"</Explanation>
 <Description language="FRANCAIS">"Nautonier "</Description>
 <Explanation language="FRANCAIS">"Vous pilotez des navires sur les eaux parmi les plus traîtres du Vieux Monde. Les Nautoniers sont des guides de rivières spécialisés qui connaissent sur le bout des doigts les rivières de la région. Ils sont très nombreux près des portions de rivières les plus dangereuses de l’Empire et n’hésitent pas à demander de fortes sommes pour accomplir une mission, même si certains pensent que la tâche est plutôt facile. D’autres estiment que ce n’est pas cher payé comparé à une cargaison perdue.  Les Nautoniers, experts dans leur domaine, sont souvent embauchés par de riches clients qui ont besoin d’un spécialiste en la matière lorsqu’ils s’embarquent pour des voyages vers des terres inconnues. Même lorsqu’ils traversent des eaux qu’ils ne connaissent pas, les Nautoniers sont très utiles, car leur connaissance des rivières et du pilotage est irremplaçable. Comme leur travail est principalement saisonnier, ils n’hésiteront pas à tout laisser tomber pour partir où bon leur semble. Cette liberté correspond parfaitement au style de vie des aventuriers, et permet tout aussi facilement de revenir au métier de Nautonier si les aventures vécues n’ont pas permis de subvenir à leurs besoins.  La plupart des Nautoniers vont rester attachés à une unique portion de rivière réputée, alors que d’autres vont faire le plus de profits au cours de la période de l’année où les eaux sont les plus dangereuses. D’autres Nautoniers, familiers avec plus de cours d’eau, guideront les navires tout le long de leur traversée, endossant alors le rôle de navigateur. C’est souvent le cas pour les navires marchands qui transportent une cargaison de valeur aux pires moments de l’année."</Explanation>
 <Skill>"RULES-COMPSAVOIR_VFLUV"</Skill>
-<Class>"CLASS_RIVE"</Class>
+<Class>"RULES-CLASS_RIVE"</Class>
 <SUBCHAPTER_LEVEL>
 <Level id="1">
 <Description language="FRANCAIS">"river guide"</Description>
@@ -11039,7 +11039,7 @@ See page 190 for Fear rules"</Explanation>
 <Description language="FRANCAIS">"Noble "</Description>
 <Explanation language="FRANCAIS">"En tant que descendant d’un noble lignage, vous vous pavanez avec fierté au-dessus de la populace. Le sang des ancêtres de haute lignée coule dans les veines de la noblesse, lui octroyant le droit de gouverner, d’édicter les lois et de rendre la justice. Les Nobles héritent généralement d’immenses propriétés et d’une fortune considérable, bien que seuls les descendants directs puissent prétendre exercer un quelconque pouvoir. Nombreux sont ceux qui passent leur vie à entretenir cette richesse et le pouvoir qu’ils exercent grâce à la politique, les conquêtes et les affaires. Ceux qui ne disposent d’aucun héritage important doivent tracer leur propre route dans le monde, rejoignant l’Armée, ou la Marine, en tant qu’officier commandant, ou bien se mettre au service d’un dieu. Il arrive fréquemment que des Nobles s’allient à d’autres maisons, plus importantes, en envoyant par exemple leurs filles y travailler en tant que demoiselles d’honneur pour les membres de la famille royale. De nombreux Nobles servent leur famille tout en étant loin de chez eux dans l’espoir d’améliorer leur situation et de recevoir des louanges de leurs pairs. D’autres, las de cette existence oisive, vont chercher le frisson dans une vie d’aventurier et de pseudo héros. Les héritiers dont les perspectives sont bouchées partent quelquefois chercher fortune loin des intrigues et des trahisons de la cour et exercent diverses activités leur permettant d’élargir leur champ de possibilités. Le MJ doit bien réfléchir avant de permettre à l’un de ses Joueurs de choisir la Carrière de Noble. Cette dernière permet en effet de posséder de nombreux biens et d’exercer un certain pouvoir, surtout dans les derniers niveaux de Carrière."</Explanation>
 <Skill>"RULES-COMPCOMM"</Skill>
-<Class>"CLASS_COUR"</Class>
+<Class>"RULES-CLASS_COUR"</Class>
 <SUBCHAPTER_LEVEL>
 <Level id="1">
 <Description language="FRANCAIS">"Heir"</Description>
@@ -11175,7 +11175,7 @@ See page 190 for Fear rules"</Explanation>
 <Description language="FRANCAIS">"Nonne "</Description>
 <Explanation language="FRANCAIS">"Vous êtes au service de votre divinité, ayant fait vœu d’une vie pieuse. Les Nonnes font partie d’ordres religieux et sont en temps normal cloîtrées au sein d’une abbaye, d’un couvent ou d’un monastère. La plupart se lèvent avant le soleil pour effectuer leurs Prières du matin avant d’effectuer leur labeur dans les champs, de soigner les malades ou de travailler à la préservation de manuscrits importants. Les serments de pèlerinage en contraignent certaines à voyager à travers l’Empire alors que d’autres ont fait vœu d’aider la communauté, marchant aux côtés du peuple et répondant à ses besoins spirituels. Certains ermites, tout comme ceux qui prennent soin des sanctuaires, sont souvent appelés Nonnes ou Moines par les habitants de l’Empire. De nombreuses Nonnes apprennent les métiers, indispensables de vignerons, de brasseurs ou de cartographes. Les Abbesses mettent ces activités en avant afin d’attirer les dons de la noblesse locale. Les chefs d’ordres militaires, ou très rassembleurs, bénéficient d’une influence importante au sein de leur propre culte ainsi qu’avec la classe dirigeante d’une province. Pour en savoir plus sur les différentes religions et les différents ordres, référez-vous au Chapitre 7 : Religions et Croyances. « Vite ! Dépêche-toi ! Les Sœurs de la Foi et de la Chasteté vont défiler dans les rues. Je suis curieux de voir si je parviens à coincer quelques pièces de cuivre entre leurs épines. Ça porte chance pour une année entière ! » – Bengt, vagabond d’Altdorf Lorsqu’un ordre religieux découvre de terribles secrets ou une partie d’une prophétie, ses dirigeants ressentent souvent la nécessité d’agir en envoyant frères et sœurs de par le monde. Les abbayes sises le long des routes de pèlerinage vont régulièrement envoyer leurs membres pour protéger les nombreux pèlerins qui parcourent les longues routes sacrées de l’Empire. De même, il y aura toujours des religieux itinérants parcourant le monde et partant à l’aventure dans chaque nouveau territoire qu’ils découvrent."</Explanation>
 <Skill>"RULES-COMPSAVOIR_THEO"</Skill>
-<Class>"CLASS_ACAD"</Class>
+<Class>"RULES-CLASS_ACAD"</Class>
 <SUBCHAPTER_LEVEL>
 <Level id="1">
 <Description language="FRANCAIS">"Novice"</Description>
@@ -11297,7 +11297,7 @@ See page 190 for Fear rules"</Explanation>
 <Description language="FRANCAIS">"Patrouilleur fluvial "</Description>
 <Explanation language="FRANCAIS">"Infatigable et sûr de vous, vous patrouillez les rivières sans relâche, pourchassant les hors-la-loi et les fauteurs de troubles.  « À une époque, alors que j’étais Patrouilleur fluvial, Grand Willi est venu me voir pour que je ne m’occupe pas d’une certaine cargaison. Il m’a dit que la seule chose que j’avais à faire était de le laisser passer et que tout se passerait bien. J’étais jeune, à l’époque. Du coup, j’ai tout raconté au propriétaire du bateau. Est-ce que j’ai été remercié pour mon honnêteté ? Nan, Grand Willi s’est pointé, il m’a collé une rouste, et le jour d’après, je me suis fait virer des Patrouilleurs. Ils étaient bien tous de mèche, hein ? » – Nikki Schnelling, ex-Patrouilleur fluvial  Le son d’un clairon sur une rivière annonce l’arrivée de la Patrouille fluviale impériale, groupe d’intervention armé aussi réputé pour les brutes qui la composent que pour son efficacité. La plupart des auberges et villages riverains leur gardent précieusement une place au mouillage, car, sans leur présence, les eaux resteraient sous la coupe de dangereux criminels. Ces patrouilles, surchargées de travail, se concentrent sur les crimes les plus horribles, et se contentent de résoudre les délits mineurs avec des amendes ponctuelles. Sur les principales routes de commerce, elles possèdent des navires plus importants dirigés par des Abordeurs entraînés à repousser des menaces plus importantes, comme les peaux-vertes ou les trolls.  Un Patrouilleur fluvial consciencieux, qui fouille les bâtiments et qui pousse plus loin ses recherches, risque à tout moment de tomber sur un truc pas clair ou sur une sinistre cargaison. Généralement, ils travaillent un mois d’affilée avant de se reposer un mois complet. Ce type d’emploi du temps est idéal pour pouvoir partir à l’aventure, d’autant que le Patrouilleur fluvial n’est pas obligé de déserter s’il a décidé de faire autre chose, ni même de perdre du temps à tenter de convaincre son Sergent qu’il est de son devoir d’enquêter sur les crimes. Ils peuvent donc se mettre en retrait, enquêter de leur côté et reprendre leur poste avant le début du prochain cycle.  Certains Patrouilleurs fluviaux ne mettent les bottes sur un bateau que très rarement, supervisant des avant-postes qui contrôlent des eaux d’une forte importance stratégique. D’autres patrouillent sur des navires rapides et sont chargés d’intercepter les contrebandiers qui agissent de nuit. Les plus grands bateaux des Patrouilleurs fluviaux sont de véritables vaisseaux de guerre hérissés de canons et de mortiers, prêts à toutes les éventualités."</Explanation>
 <Skill>"RULES-COMPCOMB_BASE"</Skill>
-<Class>"CLASS_RIVE"</Class>
+<Class>"RULES-CLASS_RIVE"</Class>
 <SUBCHAPTER_LEVEL>
 <Level id="1">
 <Description language="FRANCAIS">"River recruit"</Description>
@@ -11423,7 +11423,7 @@ See page 190 for Fear rules"</Explanation>
 <Description language="FRANCAIS">"Patrouilleur routier "</Description>
 <Explanation language="FRANCAIS">"L’œil toujours aux aguets et la main sur la garde de votre arme, vous parcourez les grandes routes de l’Empire en faisant respecter la loi.  « Donc j’ai été arrêté par une Patrouilleuse l’aut’ jour. Elle m’a dit d’faire attention à un bonhomme peu scrupuleux qui rôde sur les routes et demande aux malheureux voyageurs trois sous pour les laisser passer. Je l’ai remerciée pour son précieux conseil. « Que Taal vous guide, » me répondit-elle, « ça fera trois sous. » – Ullrich le Colporteur  Les Patrouilleurs routiers protègent les voyageurs des bandits, des peaux-vertes, des hommes-bêtes et des autres dangers qui rôdent près des principales grandes routes de l’Empire. Les Patrouilleurs sont payés grâce à un système de taxes de douane qu’ils collectent pour la plupart par eux-mêmes. Les Patrouilleurs routiers les plus reconnus sont très respectés et bien accueillis. On leur réserve bien souvent une couchette dans les auberges qu’ils rencontrent le long des routes. Une grande majorité de Patrouilleurs routiers, qui font partie de l’Armée impériale, parcourent les artères les plus importantes en temps de paix, parfaitement entraînés et impressionnants dans leurs uniformes impeccables. Les routes les moins fréquentées doivent se contenter des Patrouilleurs de la région, et il arrive que certains profitent de leur statut et délaissent la surveillance pour effectuer des tâches plus rémunératrices. Certains Patrouilleurs vont préférer demeurer dans leurs postes de garde fortifiés plutôt que d’aller surveiller les routes. Mais les voyageurs rechigneront à donner de l’argent si les routes sont mal entretenues et dangereuses.  Les Patrouilleurs routiers n’ont aucune difficulté à trouver de quoi partir à l’aventure. Lorsqu’un événement fâcheux se produit, il est souvent proche d’une route bien surveillée. Lorsque les problèmes arrivent, les Patrouilleurs routiers sont appelés pour régler les choses. S’ils répondent à l’appel et entreprennent des recherches, ils ne font que leur métier, gagnant ainsi quelques pièces supplémentaires pour leur peine, et ce, même si l’aventure qui s’ensuit les mène bien loin de leur secteur habituel."</Explanation>
 <Skill>"RULES-COMPPRECEP"</Skill>
-<Class>"CLASS_RANG"</Class>
+<Class>"RULES-CLASS_RANG"</Class>
 <SUBCHAPTER_LEVEL>
 <Level id="1">
 <Description language="FRANCAIS">"toll"</Description>
@@ -11557,7 +11557,7 @@ See page 190 for Fear rules"</Explanation>
 <Description language="FRANCAIS">"Pilleur de tombes "</Description>
 <Explanation language="FRANCAIS">"Le trafic de corps et de membres est lucratif, avec une forte demande des universités et médecins pour des cadavres frais. Outre le marché scientifique, des corps sont parfois enterrés avec toutes sortes d’objets de valeur sous les stèles funéraires des tombeaux des Jardins de Morr. Parce que leur travail est évidemment illégal et sacrilège, les Pilleurs de tombes opèrent généralement sous le couvert des ténèbres. Les Trafiquants de cadavres sont réputés supprimer l’intermédiaire et choisir les mendiants et autres infortunés directement dans les rues. Les Pilleurs de tombes évitent les risques juridiques du pillage des morts récents, et se rendent à la place dans les ruines et antiques tumulus, risquant d’y croiser les morts sans repos et les brigands. Étrangement, certains Chasseurs de trésors victorieux se voient acclamés en héros, leurs trésors vendus à l’aristocratie qui les exhibe ensuite. On raconte même que la grande fortune de l’un des ordres de chevalerie provenait de plusieurs de ses membres qui avaient pillé une tombe étrangère. « Les cauchemars de Khemri me hantent toujours. Les malédictions lancées par ces tyrans morts depuis longtemps ont scellé mon destin. Je ne peux qu’espérer que Morr puisse mettre un terme à la nécromancie qui pourrit mes os et noircit mon cœur. » - Lady Estelle Hauptleiter, Chasseuse de trésors (décédée) Les Pilleurs de tombes embrassent facilement une vie d’aventure, en particulier si leurs séjours nocturnes sont découverts par des autorités peu compatissantes. Ils peuvent aussi être sollicités par des antiquaires qui souhaitent engager leurs services spécialisés dans l’excavation d’un tombeau, ou peut-être se sentiront-ils obligés de traquer un nécromancien suspecté d’utiliser des corps à des fins abominables."</Explanation>
 <Skill>"RULES-COMPDISC_*"</Skill>
-<Class>"CLASS_ROGU"</Class>
+<Class>"RULES-CLASS_ROGU"</Class>
 <SUBCHAPTER_LEVEL>
 <Level id="1">
 <Description language="FRANCAIS">"smuggler of corpses"</Description>
@@ -11690,7 +11690,7 @@ See page 190 for Fear rules"</Explanation>
 <Description language="FRANCAIS">"Prêtre "</Description>
 <Explanation language="FRANCAIS">"Vous portez la parole de votre dieu et assouvissez les besoins spirituels des masses.  « La prêtresse de Shallya, juste une gamine, a posé sa main sur le front de mon petit Anton en murmurant et il s’est tout de suite arrêté de crier. Il m’a souri pour la première fois depuis des jours. Je n’oublierai jamais. Oh, il est mort quelques jours plus tard, mais il n’a pas souffert. Non, il n’a pas souffert. » – Sabine Schmidt, Poissonnière  Les Prêtres s’occupent de tous les fidèles du Vieux Monde. Même si la plupart sont affectés à des temples spécifiques, d’autres préfèrent une vie d’errance afin de toucher les fidèles qui ne peuvent, ou ne veulent pas se rendre dans les temples. On attend d’eux qu’ils incarnent les croyances de leur religion – ce qui va dépendre de la divinité qu’ils servent. Les Grands Prêtres sont responsables d’un temple, et de tous ses membres du culte et laïcs. Souvent, ils sont appelés, aux côtés des Lecteurs, afin de porter conseil aux classes dirigeantes, et nombreux sont ceux qui tiennent une place active dans la politique d’une région. Les Prêtres ont de nombreuses obligations relatives à leur dieu, comme le devoir de consécration des nouveaux navires des Prêtres de Manann ou la responsabilité de ceux de Shallya envers les malades et les blessés. Ils interviennent donc dans tous les aspects de la vie de l’Empire. Pour en apprendre plus sur la religion et les différents ordres, voir le Chapitre 7 : Religions et Croyances. « Écoutez, il n’y a rien à craindre. La Nuit des Sorcières, l’Hexensnacht a lieu tous les ans. Nous devons juste demander au Seigneur de la Mort de veiller sur nous. Et, lorsque minuit sonnera, nous appellerons MORR ! MORR ! MORR ! » – Père Wilhelm Abgott, Prêtre de Morr Certains Prêtres, qui doivent normalement rester en service dans des temples, cherchent des prétextes afin de séjourner à l’extérieur. Lorsqu’ils ont vent de problèmes étranges rapportés par leur congrégation, ils peuvent partir en quête de réponses. Certains Grands Prêtres trouvent les obligations administratives tellement éloignées de ce qu’ils avaient imaginé, lorsqu’ils ont rejoint le culte, qu’ils partent pour de longs pèlerinages loin de leur temple."</Explanation>
 <Skill>"RULES-COMPPRIERE"</Skill>
-<Class>"CLASS_ACAD"</Class>
+<Class>"RULES-CLASS_ACAD"</Class>
 <SUBCHAPTER_LEVEL>
 <Level id="1">
 <Description language="FRANCAIS">"Initiated"</Description>
@@ -11814,7 +11814,7 @@ See page 190 for Fear rules"</Explanation>
 <Description language="FRANCAIS">"Prêtre guerrier "</Description>
 <Explanation language="FRANCAIS">"Vous invoquez le divin au cœur de la bataille, tuant les ennemis de l’Empire dans une fureur vertueuse. Certains cultes de l’Empire comptent des religieux entraînés pour la guerre. Dans le Reikland, les Prêtres Guerriers de Sigmar en sont l’exemple le plus répandu, et nombre d’armées de l’Empire sont accompagnées par des prêtres portant des marteaux et encourageant les soldats au nom de Sigmar. Mais d’autres cultes, en particulier ceux de Myrmidia, Ulric, Taal et Morr comptent leurs propres Prêtres Guerriers, chacun avec leurs propres points de vue sur la façon dont une guerre doit être menée. En dehors du champ de bataille, les Prêtres Guerriers sont également censés s’occuper du bien-être spirituel des soldats, et veiller à ce que leur motivation reste intacte et la discipline respectée. Certains ordres de prêtres Guerriers prêtent serment d’arpenter l’Empire, dénichant l’hérésie partout où elle se trouve, aidant quand ils le peuvent. D’autres préfèrent non pas rejoindre les armées, mais les diriger… Bien que beaucoup de Prêtres Guerriers restent dans l’armée, certains servent leur culte par le biais d’œuvres missionnaires, et d’autres arpentent l’Empire à leur guise. À ce titre, les Prêtres Guerriers sont des aventuriers nés. Évidemment, pour poursuivre leurs buts jusqu’aux confins de l’Empire, ils peuvent avoir besoin de la permission de leur culte, et peut-être de leurs commandants."</Explanation>
 <Skill>"RULES-COMPCOMM"</Skill>
-<Class>"CLASS_WARR"</Class>
+<Class>"RULES-CLASS_WARR"</Class>
 <SUBCHAPTER_LEVEL>
 <Level id="1">
 <Description language="FRANCAIS">"Novice"</Description>
@@ -11939,7 +11939,7 @@ See page 190 for Fear rules"</Explanation>
 <Description language="FRANCAIS">"Rançonneur "</Description>
 <Explanation language="FRANCAIS">"Vous êtes membre d’un gang criminel organisé, collectant les dettes et extorquant de l’argent aux plus faibles.  « SI TU NE PEUX PAS PAYER LE PRIX, FAIS PAS LE PARI. » – Inscription aux Os de Bosco (tripot d’Altdorf )  Les Rançonneurs extorquent de l’argent aux citoyens et aux marchands respectueux de la loi, fournissant une « protection » ou tout autre « service » frauduleux similaire. Si les « honoraires » ne sont pas payés dans les temps, les victimes, leurs familles et leur gagne-pain courent un risque considérable. Des gangs importants soudoient ou intimident les autorités locales pour qu’elles ignorent leurs activités – leurs Coupe-jarret sont toujours prêts à tuer – ou pire – pour que leurs affaires continuent de bien fonctionner. Les Coupe-jarret sont employés pour collecter des dettes de toutes sortes, en particulier celles résultant de paris perdus ou de prêts à taux élevés. Dans un monde gangréné par la pauvreté, la promesse de richesse facile est un attrait que de nombreux imbéciles sont incapables d’ignorer. Plus la corruption est organisée, plus les organisations qui les dirigent sont vastes et complexes. Alors que les plus petits trafics sont gérés par de petits gangs dont le territoire se limite à un immeuble ou deux, les plus grands peuvent comprendre des cités et même des régions entières, et les Barons du crime qui les dirigent peuvent exercer un pouvoir extraordinaire. « ou bosco t’cassera t’ jambes. » – Ajout griffonné à la craie sous l’inscription aux Os de Bosco Les Coupe-jarret et les Rançonneurs sont toujours prêts à recourir aux menaces et à la violence, ce qui fait d’eux des membres utiles à beaucoup de groupes souhaitant affronter une opposition agressive. Les Chefs de gang peuvent même gérer leurs affaires sur les routes, pour essayer d’étendre leur territoire ou d’explorer de nouvelles opportunités de complots juteux. Étant donné la nature compétitive de certains trafics, même les Barons du crime les plus puissants peuvent se voir détrônés par des adversaires, ou par trahison. Forcés à se cacher ou à fuir, certains truands peuvent chercher à utiliser un groupe d’aventuriers expérimentés à leur propre avantage."</Explanation>
 <Skill>"RULES-COMPINTIM"</Skill>
-<Class>"CLASS_ROGU"</Class>
+<Class>"RULES-CLASS_ROGU"</Class>
 <SUBCHAPTER_LEVEL>
 <Level id="1">
 <Description language="FRANCAIS">"hock cutter"</Description>
@@ -12066,7 +12066,7 @@ See page 190 for Fear rules"</Explanation>
 <Description language="FRANCAIS">"Ratier "</Description>
 <Explanation language="FRANCAIS">"Vous empêchez que la civilisation soit envahie par la vermine à l’aide de vos fidèles compagnons canins.  « Désolé, mon ami. C’est le reste de la guilde qui s’occupe des rats. Mes amis et moi, on s’occupe des trucs plus gros dans les égouts. Il y en a des flopées, en dessous… » – Mårten Stormdal, Exterminateur d’Ubersreik  Les Ratiers patrouillent dans toutes les villes et les cités, et ce, pour une bonne raison. Les rues de l’Empire débordent de déchets puants de nourritures diverses, le parfait terreau pour la prolifération de la vermine. Les Ratiers gagnent leur croûte en tuant ces rats, en nettoyant les caves de leurs nids et en plongeant au cœur des égouts de l’Empire, qui en sont littéralement infestés… à condition qu’ils soient assez courageux pour affronter les autres créatures qui y pullulent. Au début de leur formation, la plupart des Ratiers adoptent un chiot qu’ils entraînent à la chasse aux rats. Les Ratiers sont engagés par les villes et deviennent des Égoutiers qui partent à la chasse aux rats géants et autres nuisances souterraines. Il arrive quelquefois que des villes entières soient envahies par les rats, auquel cas elles font appel à des Exterminateurs. Les Ratiers changent de ville lorsque les rats deviennent « trop gros » ou « trop intelligents », ou encore lorsque la compétition est trop féroce. Lorsqu’ils voyagent, ils peuvent se lier d’amitié avec ceux qui acceptent l’aide d’un frondeur des rues, d’autant que les ratiers sont partants pour s’aventurer là ou d’autres refusent de se rendre. Si vous voulez jouer un Personnage qui sait ce que sont ces « trop gros » ou « trop intelligents » skavens (voir page 336), le Ratier est fait pour vous. Cependant, les skavens ont pour habitude d’assassiner ceux qui lancent des rumeurs à leur sujet. De ce fait, les Ratiers les plus sages ne partageront généralement pas ce qu’ils savent, certains allant même jusqu’à s’appuyer sur leur expérience professionnelle pour discréditer ces histoires de « grands rats » ou « hommes-rats »."</Explanation>
 <Skill>"RULES-COMPCOMB_BASE"</Skill>
-<Class>"CLASS_BURG"</Class>
+<Class>"RULES-CLASS_BURG"</Class>
 <SUBCHAPTER_LEVEL>
 <Level id="1">
 <Description language="FRANCAIS">"Rat Hunter"</Description>
@@ -12192,7 +12192,7 @@ See page 190 for Fear rules"</Explanation>
 <Description language="FRANCAIS">"Receleur "</Description>
 <Explanation language="FRANCAIS">"Expert avisé en objets de valeur, vous achèterez tout, légal ou non, et inverserez la situation pour ramasser un joli profit.  « Pourquoi m’appelle-t-on Receleur ? Eh bien parce que je recèle des combines pour vous éviter d’être pris, pas vrai. Donc, vous volez, et je m’assure que vous n’ayez pas à vous inquiéter de la façon d’écouler la marchandise. Considérez-moi comme votre complice. » – « Furoncle » Vakram, Receleur  Un Receleur achète les butins des Voleurs et les revend pour faire du profit, souvent à ceux qui ignorent que les biens sont volés. Les Receleurs brillants travaillent parfois comme prêteurs sur gages, importateurs et autres marchands. D’autres préfèrent rester itinérants, trafiquant uniquement des objets transportables. Bien que le Receleur moyen revende des marchandises et des objets de valeur, on trouve aussi des spécialistes bien informés qui se concentrent sur les informations et savoirs interdits. Certains Receleurs déplacent les objets volés à travers l’Empire. Une peinture volée à Altdorf est plus facile à vendre à Talabheim à une clientèle ignorant le cambriolage. Quand des objets prestigieux disparaissent, les Receleurs sont aussi les premiers à être consultés par ceux qui cherchent à les acquérir. Certains Receleurs prennent même des commissions à leurs clients, pour les mettre en contact avec ceux qui peuvent voler sur demande. La recherche d’acheteurs et de vendeurs, ou le besoin d’échapper à une terrible situation, peut mener loin un Receleur. Ils peuvent se trouver partout à travers l’Empire et dans beaucoup de régions au-delà des frontières. Les Brocanteurs prometteurs transportent des marchandises illicites entre les cités du Vieux Monde à la recherche d’acheteurs. D’autres, cherchant à se faire un nom ailleurs, tentent de se faire une place dans les cités souterraines existantes. Étant donné que leurs intérêts sont souvent communs, les Receleurs et Marchands s’associent parfois. Mais avec cette activité criminelle et tous ces déplacements, les ennuis sont inévitables."</Explanation>
 <Skill>"RULES-COMPEVAL"</Skill>
-<Class>"CLASS_ROGU"</Class>
+<Class>"RULES-CLASS_ROGU"</Class>
 <SUBCHAPTER_LEVEL>
 <Level id="1">
 <Description language="FRANCAIS">"Flea market"</Description>
@@ -12315,7 +12315,7 @@ See page 190 for Fear rules"</Explanation>
 <Description language="FRANCAIS">"Répurgateur "</Description>
 <Explanation language="FRANCAIS">"Vous chassez les sorcières illégales qui infestent l’Empire en usant de tous les moyens nécessaires.  « Si tu n’es pas une sorcière, tu n’as rien à craindre. » – Walter Keller, Répurgateur vétéran, le nuit précédant l’incendie d’Almshof  Peu de personnes sont aussi craintes et respectées que les Répurgateurs, qui disposent d’une incroyable marge de manœuvre pour mener à bien leur devoir. Généralement équipés de lames en argent et d’une paire de pistolets – difficile en effet de dissiper le plomb – ils poursuivent leurs traques dans les coins les plus reculés du Vieux Monde, prêts à juger toute sorcière dont ils croiseraient la route ou quiconque oserait en héberger. La plupart des Répurgateurs de l’Empire appartiennent au Culte de Sigmar. Les plus profanes d’entre eux sont quelquefois embauchés par des gouvernements de province et ne sont ni plus ni moins que des chasseurs de primes spécialisés. Les Collèges de Magie ont leurs propres Répurgateurs qu’ils appellent Gardiens des Magisters et qui pourchassent les sorciers solitaires, les nécromanciens et les démonologues et ils pensent qu’il est plus sage d’envoyer un sorcier pour attraper un sorcier. L’existence d’un Répurgateur est une aventure permanente au cours de laquelle il va parcourir de long en large de nombreuses provinces. On fait appel à eux dès qu’apparaissent des signes de manifestations magiques non officielles, et on attend d’eux qu’ils les suivent jusqu’à la source. Plus la réputation d’un Répurgateur est importante, plus il se retrouve confronté à des ennemis dangereux qui lui font vivre des aventures animées. Si vous incarnez un Répurgateur, prenez la peine de vous assurer qu’aucun autre Joueur ne joue un Sorcier de village ou un Sorcier dissident, ce qui risquerait de déclencher un conflit immédiat au sein du groupe. "</Explanation>
 <Skill>"RULES-COMPINTIM"</Skill>
-<Class>"CLASS_RANG"</Class>
+<Class>"RULES-CLASS_RANG"</Class>
 <SUBCHAPTER_LEVEL>
 <Level id="1">
 <Description language="FRANCAIS">"Interrogator"</Description>
@@ -12443,7 +12443,7 @@ See page 190 for Fear rules"</Explanation>
 <Description language="FRANCAIS">"Saltimbanque "</Description>
 <Explanation language="FRANCAIS">"Que vous soyez de haute ou basse extraction, vous divertissez les gens pour leur faire oublier la dure réalité de la vie. On trouve des Saltimbanques partout dans le Vieux Monde, et ils sont nombreux à parcourir les routes du Reikland, cherchant à gagner leur croûte. Certains restent affectés à un unique théâtre, d’autres se produisent seuls et d’autres encore appartiennent à une troupe. Les plus pauvres ne sont rien de plus que des mendiants itinérants, alors qu’on chantera les louanges de ceux qui se produisent à la cour des comtes et autres princes. Ce n’est pas une vie facile et les gens n’ont que peu de pitié pour les mauvaises prestations, et n’hésiteront pas à expulser les mauvais artistes après leur avoir jeté des légumes pourris au visage.  « Comment on entre dans la troupe du Théâtre de Luitpold ? Par l’entraînement ! » – Blague très répandue à Altdorf « Vladimira Tchaukofiev, prodige de la musique, se produisit dans toutes les cours de l’Empire, interprétant ses compositions pour les riches et les puissants. À son retour triomphant dans son Kislev natal, au cours du règne de Katerin la Sanglante, elle joua la première de son opéra « Les Comtes vampires du Stirland », inspiré par ses voyages en Sylvania. Anticonformiste, elle dirige toujours avec une baguette en argent. » – « Plaidoyer contre la nécromancie », Patriarche Felip Iyrtu, 2415 CI, issu de la liste de lecture de la première année, Collège Améthyste  Les Saltimbanques les plus répandus sont les amuseurs de foules, comme les bouffons, les chanteurs, les acteurs, les musiciens, les acrobates, les danseurs et les jongleurs, même si, dans le Vieux Monde, on trouve également des spectacles bien plus étranges. La route à perte de vue, un nouveau village chaque nuit, l’odeur du fard et les rugissements de la foule – la vie en soi est une aventure pour un Saltimbanque qui amène joie et excitation dans la triste vie de ceux qu’il divertit. Compte tenu de leur existence en marge de la société respectable, les Saltimbanques un peu curieux de ce qui les entoure auront maintes opportunités de partir à l’aventure."</Explanation>
 <Skill>"RULES-COMPDIVERT_*"</Skill>
-<Class>"CLASS_RANG"</Class>
+<Class>"RULES-CLASS_RANG"</Class>
 <SUBCHAPTER_LEVEL>
 <Level id="1">
 <Description language="FRANCAIS">"street musician"</Description>
@@ -12568,7 +12568,7 @@ See page 190 for Fear rules"</Explanation>
 <Description language="FRANCAIS">"Serviteur "</Description>
 <Explanation language="FRANCAIS">"Vous êtes au service des puissants, et effectuez toutes sortes de tâches pour eux.  « Je ne sais réellement pas pourquoi elle s’obstine à vouloir prendre ce foutu chat. Entre sa garde-robe, sa bibliothèque de voyage et sa satanée collection de papillons, je ne sais plus où donner de la tête ! Et quand il se perdra – parce qu’il va se perdre, soyez-en sûr –, elle va vouloir que je lui en trouve un nouveau. Sigmar ! Où vais-je trouver un bébé léopard à Ubersreik ? » – Reynald, Valet de Dame Kirstin Gottlieb  La plupart des personnes au service de la noblesse sont d’extraction paysanne et heureux de pouvoir échapper à cette masse laborieuse trimant dans les champs. On leur apprend à cuisiner, nettoyer, faire le service et s’occuper des écuries. On leur fournit une chambre, le couvert et un salaire, mais la qualité de vie d’un Serviteur va principalement dépendre de la façon dont il est traité. Certains d’entre eux habillent leurs maîtres, cuisinent ou servent les repas, gèrent les stocks de vin et autres provisions, ou encore s’occupent des espaces verts.  Un Serviteur peut être réquisitionné pour accompagner son employeur lorsque ce dernier se rend dans sa résidence d’été ou en voyage dans une grande ville. Ce sont là des opportunités qui lui permettront de partir à l’aventure à travers l’Empire. De jeunes héritiers oisifs, trop protégés par leurs parents, se prennent quelquefois d’amitié pour leurs jeunes Serviteurs et vont même jusqu’à leur fournir de quoi partir à l’aventure, vivant ces dernières par procuration lorsque leurs employés reviennent et leur racontent leurs hauts faits. Certains Serviteurs privilégiés se voient quelquefois confier des responsabilités qui vont au-delà de leurs prérogatives, ou encore sont prêtés à d’autres membres de la famille ou à d’autres pairs.  Les Serviteurs les plus expérimentés peuvent prétendre devenir Valet, ou même Régisseurs, et gèrent alors les affaires courantes de leur employeur et supervisent les autres Serviteurs. Ceux qui sont au service direct de la royauté sont souvent issus de la noblesse plutôt que du monde paysan."</Explanation>
 <Skill>"RULES-COMPRESIST"</Skill>
-<Class>"CLASS_COUR"</Class>
+<Class>"RULES-CLASS_COUR"</Class>
 <SUBCHAPTER_LEVEL>
 <Level id="1">
 <Description language="FRANCAIS">"Domestic"</Description>
@@ -12691,7 +12691,7 @@ See page 190 for Fear rules"</Explanation>
 <Description language="FRANCAIS">"Soldat "</Description>
 <Explanation language="FRANCAIS">"Vous êtes payé pour vous entraîner, être discipliné et, quand c’est nécessaire, partir en guerre.  « Bien que Seigneurs et Dames viennent et vont, La vie de soldat, je ne connais que ça, Karl Franz ordonne, et nous obéissons, Par-dessus les collines et loin au-delà. » – Marche, 118e Régiment d’Infanterie du Reikland, « les Dos-verts ».  Sur l’ordre de l’Empereur Magnus le Pieux, depuis la Grande Guerre contre le Chaos, toutes les provinces de l’Empire doivent maintenir une Armée d’État permanente. Les Soldats sont la clef de voûte de ces armées, entraînés à combattre ensemble, et dont les compétences individuelles sont complétées par la force du nombre. Rarement encouragés à penser par eux-mêmes, les Soldats sont connus pour leur fatalisme impassible alors qu’on leur ordonne d’aller par monts et par vaux au service de leurs supérieurs. Les Soldats peuvent être archers, arbalétriers, hallebardiers, arquebusiers, épéistes ou lanciers, et ce ne sont là que quelques régiments typiques de l’État. Les nains recrutent des Soldats comme marteliers et arquebusiers, tandis que les troupes elfes sont généralement composées d’archers et de lanciers. Il y a beaucoup d’autres Soldats, tels que les mercenaires, les miliciens locaux (qui sont rarement meilleurs que les Recrues), les armées privées, les forces armées des cultes, etc. Les Soldats ont peu de temps libre, mais ont toujours des opportunités d’aventure. En dehors de la saison des campagnes, beaucoup bénéficient de congés prolongés. Les officiers des Armées de l’État peuvent aussi commander de petits groupes de Soldats pour enquêter sur des faits inhabituels sur le « territoire » de leur régiment, et certains officiers voient ce genre d’aventures comme un excellent moyen de garder en forme leurs Soldats. Les Soldats non humains seront souvent en mission dans l’Empire, des aventures donc, de par leur nature."</Explanation>
 <Skill>"RULES-COMPCOMB_BASE"</Skill>
-<Class>"CLASS_WARR"</Class>
+<Class>"RULES-CLASS_WARR"</Class>
 <SUBCHAPTER_LEVEL>
 <Level id="1">
 <Description language="FRANCAIS">"Recruit"</Description>
@@ -12822,7 +12822,7 @@ See page 190 for Fear rules"</Explanation>
 <Description language="FRANCAIS">"Sorcier "</Description>
 <Explanation language="FRANCAIS">"Détenteur de plein droit d’une magie aussi puissante que dangereuse, vous êtes craint des citoyens de l’Empire à qui vous inspirez la plus grande méfiance.  De nombreux Magisters quittent leur Collège de Magie endettés pour les cours reçus. Ces Sorciers cherchent rapidement un emploi ou partent chercher fortune sur terre, sur mer ou dans tout autre endroit où ils sont susceptibles de dénicher des reliques, des artefacts et d’anciens livres débordant de savoirs magiques. Les Magisters nomades, qui ne demandent qu’à faire leurs preuves, sont alors activement encouragés à tester leurs Compétences à travers l’Empire en chassant tout danger potentiel qui menace les populations locales.  Les Sorciers concentrent l’un des huit Vents de Magie, que seuls les lanceurs de sorts sont capables de percevoir, afin de lancer de puissants sortilèges. Pour avoir le droit d’utiliser la magie au sein de l’Empire, un humain doit suivre les Articles de l’Ordonnance impériale et appartenir à l’un des huit Collèges de Magie d’Altdorf – chacun spécialisé dans l’un des Vents, car les Magisters ne peuvent concentrer qu’un seul Vent sans risquer de se mettre en danger. Après avoir réussi leurs examens, les Sorciers novices deviennent des Magisters. Ils étudient et pratiquent leur art avec la plus grandes précautions, art que, selon les Articles, ils ne peuvent utiliser hors des collèges que pour défendre leur vie, ou contre les ennemis de l’Empire. De nombreux Magisters sont rattachés à l’Armée impériale, et même s’ils sont considérés avec grande méfiance, personne ne remet en cause leur efficacité sur le champ de bataille. Les Sorciers font d’excellents Personnages, car ils ajoutent de la puissance de feu à un groupe, mais ils peuvent paraître compliqués pour les Joueurs débutants dans le sens où il leur faut apprendre des règles supplémentaires pour les Sorts. Pour cette raison, le MJ devra garder en tête qu’il devra peut-être accompagner le Sorcier afin qu’il utilise efficacement ces règles et qu’il apporte un avantage au groupe. Vous choisissez la couleur de la magie que vous étudiez au moment où vous obtenez le Talent Magie des Arcanes. Pour en apprendre plus sur la magie, voir le Chapitre 8 : Magie."</Explanation>
 <Skill>"RULES-COMPLANG_MAG"</Skill>
-<Class>"CLASS_ACAD"</Class>
+<Class>"RULES-CLASS_ACAD"</Class>
 <SUBCHAPTER_LEVEL>
 <Level id="1">
 <Description language="FRANCAIS">"novice wizard"</Description>
@@ -12945,7 +12945,7 @@ See page 190 for Fear rules"</Explanation>
 <Description language="FRANCAIS">"Sorcier de village "</Description>
 <Explanation language="FRANCAIS">"D’une grande sagesse et nimbé d’une aura de mystère, vous guidez votre communauté grâce à une antique magie transmise de génération en génération.  Un Sorcier de village est souvent le premier à remarquer les manifestations surnaturelles suspectes. Les recherches qui s’ensuivent les mènent régulièrement à toutes sortes d’aventures dangereuses. Lorsqu’un Répurgateur arrive en ville, les Sorciers de village ont pour habitude de s’absenter, faisant profil bas ou partant en voyage le temps que tout danger soit écarté.  Les Répurgateurs utilisent le terme « Sorcier de village » pour désigner toute personne utilisant illégalement la magie, mais cela n’a pas toujours été le cas. Autrefois, les Sorciers de village étaient des membres très respectés des communautés rurales et pratiquaient une magie plus ancienne encore que les forêts. Mais des décennies de persécution, engendrées par l’émergence des Collèges de Magie, ont réduit leur nombre à quelques survivants, dispersés à travers le monde et totalement brisés. Ils se terrent désormais dans les endroits les plus calmes du Vieux Monde, dans leurs huttes fumantes et leurs masures grinçantes sises à la frontière entre les zones civilisées et les étendues sauvages. La plupart des Sorciers de village ont décidé de vivre en solitaires afin de se protéger des visiteurs indésirables. Mais leurs talents sont connus de tous les habitants du coin. Ils gardent pour eux les secrets leur permettant de se protéger du mal, mais, très souvent, on les sollicite pour bénéficier de leur savoir en herboristerie, ou pour aider à un accouchement, ou encore pour se voir administrer des soins. Ces Sorciers sont connus sous bien des noms au travers de l’Empire, ce qui ne les empêche pas d’être unis autour d’un seul but : empêcher la disparition de leurs anciennes traditions. Les Sorciers de village ne portent pas les Collèges de Magie dans leur cœur, car ils savent pertinemment que tout enfant qui leur sera ôté ne reviendra jamais et qu’il sera en outre enrôlé dans une guerre lointaine. Lorsque c’est possible, ils cachent les enfants qu’ils considèrent comme « bénis » afin qu’ils ne deviennent jamais des sbires des Collèges, même si quelquefois l’un d’entre eux sera envoyé – espion ou sacrifice, qui peut savoir ?"</Explanation>
 <Skill>"RULES-COMPINTUI"</Skill>
-<Class>"CLASS_PEAS"</Class>
+<Class>"RULES-CLASS_PEAS"</Class>
 <SUBCHAPTER_LEVEL>
 <Level id="1">
 <Description language="FRANCAIS">"Village Sorcerer’s Apprentice"</Description>
@@ -13069,7 +13069,7 @@ See page 190 for Fear rules"</Explanation>
 <Description language="FRANCAIS">"Sorcier sauvage "</Description>
 <Explanation language="FRANCAIS">"Volontaire et ambitieux, vous vous évertuez à maîtriser la magie sans licence officielle.  Les Sorciers dissidents mènent des existences dangereuses. Bien que certains se présentent comme des Sorciers officiels, de telles supercheries sont facilement discernables par quiconque connaît la magie. Toutefois, des groupes d’aventuriers – en particulier ceux sans foi inébranlable ou scrupules moraux – se soucient rarement des aspects précis de l’éducation d’un Sorcier tant que les méthodes utilisées sont efficaces et qu’elles ne sont pas associées aux Dieux Sombres. Bien que la sorcellerie non autorisée soit illégale – passible de la peine de mort – beaucoup de Magisters ont une brève expérience en tant que Sorcier dissident avant d’intégrer les Collèges de Magie. Ce fait est reconnu par les Collèges et les cultes, donc un Sorcier dissident, s’il est découvert, devrait se soumettre aux autorités. La formation dans les Collèges peut se dérouler entre deux aventures, ce qui signifie qu’un Sorcier dissident peut revenir plus tard dans une Carrière de Sorcier (reconnu par les Collèges), ou devenir l’objet principal d’une nouvelle aventure.  Quiconque possède le rare talent de manier la magie doit, selon la loi, être entraîné par les Magisters des Collèges de Magie. Tout le monde n’accepte pas un tel destin ; certaines personnes dissimulent leurs pouvoirs ou prennent la fuite. Ces personnes sont des Sorciers dissidents. Ils risquent la folie et la damnation, car la magie les consume par manque d’un apprentissage correct, et ils comprennent rarement la nature des forces qu’ils bricolent. D’autres embrassent pleinement leurs pouvoirs en plein essor, acceptant le risque. Il existe des Sorciers dissidents de toutes sortes, car le talent de manier la magie se décline de bien des façons sans inclination particulière. Certains ont des personnalités bienveillantes et aiment simplement la liberté. D’autres sont des nobles refusant l’idée d’être des Sorciers dissidents, car ils risquent d’être déshérités. D’autres encore sont terrifiés par ce qu’ils peuvent devenir, et prennent donc la fuite. Dans tous les cas, peu admettront ce qu’ils sont, car tous risquent d’être brûlés vifs par des Sigmarites trop zélés."</Explanation>
 <Skill>"RULES-COMPLANG_MAG"</Skill>
-<Class>"CLASS_ROGU"</Class>
+<Class>"RULES-CLASS_ROGU"</Class>
 <SUBCHAPTER_LEVEL>
 <Level id="1">
 <Description language="FRANCAIS">"Sorcerer"</Description>
@@ -13196,7 +13196,7 @@ See page 190 for Fear rules"</Explanation>
 <Description language="FRANCAIS">"Spadassin "</Description>
 <Explanation language="FRANCAIS">"Un gros-bras à embaucher, pour intimider, combattre et peut-être même tuer pour de l’argent.  « Ouais, Gros Yuri est venu et a détruit toute ma marchandise. On disait que cette ville était juste assez grande pour un trafiquant de lotus, un point c’est tout. J’étais parfaitement d’accord, alors j’ai doublé son salaire et l’ai renvoyé au repaire de Tigre Blanc. Et ça s’est fini comme ça. » – Toni Miragliano, Trafiquant de lotus  Les Spadassins vivent grâce à leur intelligence et leurs muscles et ne sont généralement pas regardants sur le genre de travail qu’ils effectuent. Un marchand peut vouloir effrayer son rival. Un employeur peut décider que ses employés ont besoin d’un peu d’encouragement pour finir plus rapidement un travail. Un noble peut vouloir faire fuir le prétendant de sa fille. Les Spadassins sont alors les personnes vers lesquelles ils se tournent. Ceux qui ont la pire réputation décrochent les meilleurs emplois. Un Spadassin peut être la brute d’une taverne locale, et tout le monde sait qu’il frappera pour de l’argent, ou celui est connu pour sa violence indéfectible. Certains Spadassins possèdent leur propre code de conduite, mais d’autres ne se soucient que de l’argent. Certains sont juste des brutes qui se contentent de chercher les querelles et de se battre avec des cibles potentielles pour voir s’ils peuvent tirer un peu d’argent de la situation. À première vue, les Spadassins sont toujours prêts pour l’aventure parce qu’ils sont toujours prêts à se battre. Mais ils s’attendent généralement à être payés pour les services rendus. Rejoindre un groupe sans garantie de paiement, c’est une question à laquelle ils auront besoin de réfléchir. Un Spadassin endurci pourrait-il trouver une cause qu’il poursuivrait volontairement ? Peut-être pourrait-il même prendre un nouveau départ ?"</Explanation>
 <Skill>"RULES-COMPCOMB_*"</Skill>
-<Class>"CLASS_WARR"</Class>
+<Class>"RULES-CLASS_WARR"</Class>
 <SUBCHAPTER_LEVEL>
 <Level id="1">
 <Description language="FRANCAIS">"Bullying"</Description>
@@ -13326,7 +13326,7 @@ See page 190 for Fear rules"</Explanation>
 <Description language="FRANCAIS">"Tueur "</Description>
 <Explanation language="FRANCAIS">"Vous êtes la rage et le déshonneur incarnés, cherchant une mort digne pour recouvrer votre honneur perdu.  « Herwig pensait pas à mal, parole ! Il a juste demandé pourquoi le Nain avait ces tatouages étranges. C’est arrivé si vite, j’ai même pas vu bouger le nain, juste Herwig heurter le sol. » – Regimius, Débardeur  Quand les nains subissent une humiliation inacceptable et perdent leur honneur, ils prêtent le Serment du Tueur et suivent la voie de Grimnir, leur dieu ancestral des guerriers. Recouvrant leurs corps de tatouages, rasant les côtés de leur tête, teignant la chevelure restante d’un orange vif, et la coiffant en pointes avec de la graisse animale, ils s’élancent par le monde, hache à la main, à la recherche d’une mort glorieuse.  « Nous allons tous mourir, petit homme. C’est comment cela arrive qui compte. » – Gotrek Gurnisson, Tueur  Les Tueurs arpentent le Vieux Monde à la recherche de bêtes dangereuses, telles que les trolls, les géants ou les dragons. À cause de la honte qu’ils endurent, beaucoup souffrent de dépression, se gorgeant de nourriture, d’alcool ou de stimulants plus puissants. Plus les Tueurs affrontent d’ennemis et survivent, plus ils deviennent dangereux et fous, cherchant progressivement des créatures plus dangereuses encore dans l’espoir de trouver quelque chose susceptible de les tuer.  Jusqu’à ce qu’il tombe au combat, la vie d’un Tueur est une aventure. Ils sont à l’affut d’opportunités d’affronter de puissants ennemis en combat. Les Tueurs occuperont occasionnellement d’autres emplois, pour boire leur argent ou payer leurs voyages, mais ils chercheront la mort en chemin. Tous les Tueurs avaient auparavant une vie et une Carrière, ils sont donc bien plus que de simples guerriers possédés par leur désir d’en finir. Jouer un Tueur est une expérience unique, car votre Personnage veut mourir. Acceptez-le. Recherchez une terrible destinée. Rachetez votre honneur. Mourez dignement."</Explanation>
 <Skill>"RULES-COMPCOMB_BASE"</Skill>
-<Class>"CLASS_WARR"</Class>
+<Class>"RULES-CLASS_WARR"</Class>
 <SUBCHAPTER_LEVEL>
 <Level id="1">
 <Description language="FRANCAIS">"Trollslayer"</Description>
@@ -13450,7 +13450,7 @@ See page 190 for Fear rules"</Explanation>
 <Description language="FRANCAIS">"Villageois "</Description>
 <Explanation language="FRANCAIS">"Vous constituez le cœur de la vie rurale et travaillez les terres pour nourrir les populations. Le très fertile Empire de Sigmar regorge de cultures, de bétail et de tout un tas d’autres biens facilement commercialisables. C’est pourquoi il y a toujours beaucoup de travail à effectuer sur ces terres. Les Villageois représentent la grande majorité de la population de l’Empire et occupent beaucoup de rôles importants, dont ceux de fermiers, charbonniers, bûcherons, meuniers, bergers et bien d’autres encore. La plupart des Villageois dépendent du domaine d’une noble famille, où l’administration des tâches quotidiennes est assurée par un Bailli. Les affaires du village sont le plus souvent gérées par un conseil, composé à parts égales de fermiers et de commerçants et dirigé par un Doyen. Un Échevin ou un Doyen peuvent exercer une influence considérable au niveau local en supervisant les nombreuses décisions concernant les terres environnantes. « Écoute, tu peux me rire au nez tant qu’tu veux, mais n’empêche que Konrad le Héros autodidacte est originaire du même village que moi. Alors arrête de parler de nous comme ça, tu veux ? On est des gens bien ! » – Erika Bauer, fermière Le calme bucolique d’un village protégé est bien souvent, pour les plus jeunes Villageois, un synonyme de l’ennui le plus profond, eux qui ne cessent d’écouter les légendes parlant de pays lointains. Bien évidemment, les histoires qu’ils entendent auprès des marchands ambulants ou des Strigany et qui ne font qu’alimenter leurs envies de liberté n’ont pas grand-chose à voir avec la rude réalité de la vie dans l’Empire. Au cours de l’hiver, lorsque la nourriture se fait rare et que les champs n’ont pas besoin d’entretien, les jeunes partent à l’aventure vers les villes et les cités les plus proches à la recherche de travail. Il arrive qu’ils ne reviennent jamais, incapables de se passer de l’excitation de ces grandes villes. "</Explanation>
 <Skill>"RULES-COMPRESIST"</Skill>
-<Class>"CLASS_PEAS"</Class>
+<Class>"RULES-CLASS_PEAS"</Class>
 <SUBCHAPTER_LEVEL>
 <Level id="1">
 <Description language="FRANCAIS">"Peasant"</Description>
@@ -13569,7 +13569,7 @@ See page 190 for Fear rules"</Explanation>
 <Description language="FRANCAIS">"Voleur "</Description>
 <Explanation language="FRANCAIS">"Vous volez les autres dans le but de remplir vos propres poches, et vous êtes plutôt doué pour ça.  « Qu’est-ce que… ? Ce ne sont pas des chiens… ce sont des ours ! » – Marx le Mutilé, Voleur malchanceux  Les Voleurs dérobent toutes sortes de richesses et de biens à leurs prochains. Du plus humble tire-laine au plus rusé des cambrioleurs, l’idée d’une journée de travail honnête en échange d’un salaire respectable n’est rien de plus qu’une mauvaise blague. Les Voleurs s’organisent souvent en gangs avec des Charlatans, des Rançonneurs et des Receleurs pour s’enrichir. Les querelles acharnées entre ces organisations illicites sont réputées durer des années, ou même des décennies. Les Voleurs les plus humbles ciblent des individus, leur faisant les poches ou guettant leurs victimes dans des ruelles infestées de rats. Les Cambrioleurs évitent la confrontation en entrant par effraction dans les entreprises et les résidences, emportant des objets transportables de valeur. Les Voleurs les plus ambitieux étudient leurs cibles pendant des jours voire des semaines, allant même jusqu’à infiltrer les établissements cibles pour avoir une meilleure connaissance de la configuration des lieux. Travaillant avec d’autres Cambrioleurs professionnels, de tels experts peuvent organiser des braquages auxquels leurs pairs inférieurs ne peuvent que rêver.  « Non, la liste des charges n’inclut pas « Voler le cœur du Juge ». Vous devez me confondre avec un juge qui a un cœur. » – Leonora Nithardt, Juge Les Voleurs ayant des démêlés avec la justice sont obligés de se cacher ou de fuir, avec donc toujours plus de potentiels détenus en cavale. Parfois, les objets dérobés par les Voleurs sont d’ une valeur exorbitante ou d’une qualité surnaturelle qui semblent attirer les ennuis comme un corps en décomposition attire les mouches. Ce qui peut conduire à toutes sortes d’aventures inattendues. Évidemment, les talents d’un Cambrioleur sont toujours utiles aux aventuriers, et des individus fiables peuvent espérer être bien rémunérés pour leurs compétences."</Explanation>
 <Skill>"RULES-COMPDISC_URB"</Skill>
-<Class>"CLASS_ROGU"</Class>
+<Class>"RULES-CLASS_ROGU"</Class>
 <SUBCHAPTER_LEVEL>
 <Level id="1">
 <Description language="FRANCAIS">"ranger"</Description>
@@ -13707,8 +13707,8 @@ See page 190 for Fear rules"</Explanation>
 <Description language="FRANCAIS">"Baton de combat"</Description>
 <Skill>"RULES-COMPCOMB_HAST"</Skill>
 <Damage>"+(BATTR_S)+4"</Damage>
-<Availability>"DISPO_COMMON"</Availability>
-<Reach>"WEAPR_LONG"</Reach>
+<Availability>"RULES-DISPO_COMMON"</Availability>
+<Reach>"RULES-WEAPR_LONG"</Reach>
 <Price>"3/-"</Price>
 <Encumbrance>"2"</Encumbrance>
 <Quality>"RULES-WEAPB04,RULES-WEAPB08"</Quality>
@@ -13719,8 +13719,8 @@ See page 190 for Fear rules"</Explanation>
 <Description language="FRANCAIS">"Hallebarde"</Description>
 <Skill>"RULES-COMPCOMB_HAST"</Skill>
 <Damage>"+(BATTR_S)+4"</Damage>
-<Availability>"DISPO_COMMON"</Availability>
-<Reach>"WEAPR_LONG"</Reach>
+<Availability>"RULES-DISPO_COMMON"</Availability>
+<Reach>"RULES-WEAPR_LONG"</Reach>
 <Price>"2CO"</Price>
 <Encumbrance>"3"</Encumbrance>
 <Quality>"RULES-WEAPB08,RULES-WEAPB30,RULES-WEAPB12"</Quality>
@@ -13731,8 +13731,8 @@ See page 190 for Fear rules"</Explanation>
 <Description language="FRANCAIS">"Lance"</Description>
 <Skill>"RULES-COMPCOMB_HAST"</Skill>
 <Damage>"+(BATTR_S)+4"</Damage>
-<Availability>"DISPO_COMMON"</Availability>
-<Reach>"WEAPR_BIG"</Reach>
+<Availability>"RULES-DISPO_COMMON"</Availability>
+<Reach>"RULES-WEAPR_BIG"</Reach>
 <Price>"15/-"</Price>
 <Encumbrance>"2"</Encumbrance>
 <Quality>"RULES-WEAPB12"</Quality>
@@ -13743,8 +13743,8 @@ See page 190 for Fear rules"</Explanation>
 <Description language="FRANCAIS">"Pique"</Description>
 <Skill>"RULES-COMPCOMB_HAST"</Skill>
 <Damage>"+(BATTR_S)+4"</Damage>
-<Availability>"DISPO_RARE"</Availability>
-<Reach>"WEAPR_HUGE"</Reach>
+<Availability>"RULES-DISPO_RARE"</Availability>
+<Reach>"RULES-WEAPR_HUGE"</Reach>
 <Price>"18/-"</Price>
 <Encumbrance>"4"</Encumbrance>
 <Quality>"RULES-WEAPB12"</Quality>
@@ -13755,8 +13755,8 @@ See page 190 for Fear rules"</Explanation>
 <Description language="FRANCAIS">"Coup-de-poing"</Description>
 <Skill>"RULES-COMPCOMB_BAGAR"</Skill>
 <Damage>"+(BATTR_S)+2"</Damage>
-<Availability>"DISPO_COMMON"</Availability>
-<Reach>"WEAPR_PERSO"</Reach>
+<Availability>"RULES-DISPO_COMMON"</Availability>
+<Reach>"RULES-WEAPR_PERSO"</Reach>
 <Price>"2/6"</Price>
 <Encumbrance>"0"</Encumbrance>
 <Quality>"-"</Quality>
@@ -13767,8 +13767,8 @@ See page 190 for Fear rules"</Explanation>
 <Description language="FRANCAIS">"Mains nues"</Description>
 <Skill>"RULES-COMPCOMB_BAGAR"</Skill>
 <Damage>"+(BATTR_S)+0"</Damage>
-<Availability>"DISPO_COMMON"</Availability>
-<Reach>"WEAPR_PERSO"</Reach>
+<Availability>"RULES-DISPO_COMMON"</Availability>
+<Reach>"RULES-WEAPR_PERSO"</Reach>
 <Price>"ND"</Price>
 <Encumbrance>"0"</Encumbrance>
 <Quality>"RULES-WEAPB27"</Quality>
@@ -13791,8 +13791,8 @@ See page 190 for Fear rules"</Explanation>
 <Description language="FRANCAIS">"Couteau"</Description>
 <Skill>"RULES-COMPCOMB_BASE"</Skill>
 <Damage>"+(BATTR_S)+1"</Damage>
-<Availability>"DISPO_COMMON"</Availability>
-<Reach>"WEAPR_CLOSE"</Reach>
+<Availability>"RULES-DISPO_COMMON"</Availability>
+<Reach>"RULES-WEAPR_CLOSE"</Reach>
 <Price>"8/-"</Price>
 <Encumbrance>"0"</Encumbrance>
 <Quality>"RULES-WEAPB27"</Quality>
@@ -13803,8 +13803,8 @@ See page 190 for Fear rules"</Explanation>
 <Description language="FRANCAIS">"Gaffe"</Description>
 <Skill>"RULES-COMPCOMB_BASE"</Skill>
 <Damage>"+(BATTR_S)+4"</Damage>
-<Availability>"DISPO_COMMON"</Availability>
-<Reach>"WEAPR_MID"</Reach>
+<Availability>"RULES-DISPO_COMMON"</Availability>
+<Reach>"RULES-WEAPR_MID"</Reach>
 <Price>"1CO"</Price>
 <Encumbrance>"1"</Encumbrance>
 <Quality>"-"</Quality>
@@ -13815,8 +13815,8 @@ See page 190 for Fear rules"</Explanation>
 <Description language="FRANCAIS">"Hache"</Description>
 <Skill>"RULES-COMPCOMB_BASE"</Skill>
 <Damage>"+(BATTR_S)+4"</Damage>
-<Availability>"DISPO_COMMON"</Availability>
-<Reach>"WEAPR_MID"</Reach>
+<Availability>"RULES-DISPO_COMMON"</Availability>
+<Reach>"RULES-WEAPR_MID"</Reach>
 <Price>"1CO"</Price>
 <Encumbrance>"1"</Encumbrance>
 <Quality>"-"</Quality>
@@ -13827,8 +13827,8 @@ See page 190 for Fear rules"</Explanation>
 <Description language="FRANCAIS">"Epée"</Description>
 <Skill>"RULES-COMPCOMB_BASE"</Skill>
 <Damage>"+(BATTR_S)+4"</Damage>
-<Availability>"DISPO_COMMON"</Availability>
-<Reach>"WEAPR_MID"</Reach>
+<Availability>"RULES-DISPO_COMMON"</Availability>
+<Reach>"RULES-WEAPR_MID"</Reach>
 <Price>"1CO"</Price>
 <Encumbrance>"1"</Encumbrance>
 <Quality>"-"</Quality>
@@ -13839,8 +13839,8 @@ See page 190 for Fear rules"</Explanation>
 <Description language="FRANCAIS">"Pioche"</Description>
 <Skill>"RULES-COMPCOMB_BASE"</Skill>
 <Damage>"+(BATTR_S)+4"</Damage>
-<Availability>"DISPO_COMMON"</Availability>
-<Reach>"WEAPR_MID"</Reach>
+<Availability>"RULES-DISPO_COMMON"</Availability>
+<Reach>"RULES-WEAPR_MID"</Reach>
 <Price>"1CO"</Price>
 <Encumbrance>"1"</Encumbrance>
 <Quality>"-"</Quality>
@@ -13851,8 +13851,8 @@ See page 190 for Fear rules"</Explanation>
 <Description language="FRANCAIS">"Faucille"</Description>
 <Skill>"RULES-COMPCOMB_BASE"</Skill>
 <Damage>"+(BATTR_S)+4"</Damage>
-<Availability>"DISPO_COMMON"</Availability>
-<Reach>"WEAPR_MID"</Reach>
+<Availability>"RULES-DISPO_COMMON"</Availability>
+<Reach>"RULES-WEAPR_MID"</Reach>
 <Price>"1CO"</Price>
 <Encumbrance>"1"</Encumbrance>
 <Quality>"-"</Quality>
@@ -13863,8 +13863,8 @@ See page 190 for Fear rules"</Explanation>
 <Description language="FRANCAIS">"Bouclier"</Description>
 <Skill>"RULES-COMPCOMB_BASE"</Skill>
 <Damage>"+(BATTR_S)+2"</Damage>
-<Availability>"DISPO_COMMON"</Availability>
-<Reach>"WEAPR_CLOSE"</Reach>
+<Availability>"RULES-DISPO_COMMON"</Availability>
+<Reach>"RULES-WEAPR_CLOSE"</Reach>
 <Price>"2CO"</Price>
 <Encumbrance>"1"</Encumbrance>
 <Quality>"RULES-WEAPB18 2,RULES-WEAPB08,RULES-WEAPB27"</Quality>
@@ -13875,8 +13875,8 @@ See page 190 for Fear rules"</Explanation>
 <Description language="FRANCAIS">"Bouclier (Grand)"</Description>
 <Skill>"RULES-COMPCOMB_BASE"</Skill>
 <Damage>"+(BATTR_S)+3"</Damage>
-<Availability>"DISPO_COMMON"</Availability>
-<Reach>"WEAPR_CLOSE"</Reach>
+<Availability>"RULES-DISPO_COMMON"</Availability>
+<Reach>"RULES-WEAPR_CLOSE"</Reach>
 <Price>"3CO"</Price>
 <Encumbrance>"3"</Encumbrance>
 <Quality>"RULES-WEAPB18 3,RULES-WEAPB08,RULES-WEAPB27"</Quality>
@@ -13887,8 +13887,8 @@ See page 190 for Fear rules"</Explanation>
 <Description language="FRANCAIS">"Bouclier (Targe)"</Description>
 <Skill>"RULES-COMPCOMB_BASE"</Skill>
 <Damage>"+(BATTR_S)+1"</Damage>
-<Availability>"DISPO_COMMON"</Availability>
-<Reach>"WEAPR_PERSO"</Reach>
+<Availability>"RULES-DISPO_COMMON"</Availability>
+<Reach>"RULES-WEAPR_PERSO"</Reach>
 <Price>"18/2"</Price>
 <Encumbrance>"0"</Encumbrance>
 <Quality>"RULES-WEAPB18 1,RULES-WEAPB08,RULES-WEAPB27"</Quality>
@@ -13899,8 +13899,8 @@ See page 190 for Fear rules"</Explanation>
 <Description language="FRANCAIS">"Dague"</Description>
 <Skill>"RULES-COMPCOMB_BASE"</Skill>
 <Damage>"+(BATTR_S)+2"</Damage>
-<Availability>"DISPO_COMMON"</Availability>
-<Reach>"WEAPR_CLOSE"</Reach>
+<Availability>"RULES-DISPO_COMMON"</Availability>
+<Reach>"RULES-WEAPR_CLOSE"</Reach>
 <Price>"16/-"</Price>
 <Encumbrance>"0"</Encumbrance>
 <Quality>"-"</Quality>
@@ -13923,8 +13923,8 @@ See page 190 for Fear rules"</Explanation>
 <Description language="FRANCAIS">"Marteau a bec-de-corbin"</Description>
 <Skill>"RULES-COMPCOMB_CAVAL"</Skill>
 <Damage>"+(BATTR_S)+5"</Damage>
-<Availability>"DISPO_LIMITED"</Availability>
-<Reach>"WEAPR_LONG"</Reach>
+<Availability>"RULES-DISPO_LIMITED"</Availability>
+<Reach>"RULES-WEAPR_LONG"</Reach>
 <Price>"3CO"</Price>
 <Encumbrance>"3"</Encumbrance>
 <Quality>"RULES-WEAPB04"</Quality>
@@ -13935,8 +13935,8 @@ See page 190 for Fear rules"</Explanation>
 <Description language="FRANCAIS">"Lance de cavalerie"</Description>
 <Skill>"RULES-COMPCOMB_CAVAL"</Skill>
 <Damage>"+(BATTR_S)+6"</Damage>
-<Availability>"DISPO_RARE"</Availability>
-<Reach>"WEAPR_BIG"</Reach>
+<Availability>"RULES-DISPO_RARE"</Availability>
+<Reach>"RULES-WEAPR_BIG"</Reach>
 <Price>"1CO"</Price>
 <Encumbrance>"3"</Encumbrance>
 <Quality>"RULES-WEAPB12,RULES-WEAPB21"</Quality>
@@ -13959,8 +13959,8 @@ See page 190 for Fear rules"</Explanation>
 <Description language="FRANCAIS">"Epée batarde"</Description>
 <Skill>"RULES-COMPCOMB_2M"</Skill>
 <Damage>"+(BATTR_S)+5"</Damage>
-<Availability>"DISPO_LIMITED"</Availability>
-<Reach>"WEAPR_LONG"</Reach>
+<Availability>"RULES-DISPO_LIMITED"</Availability>
+<Reach>"RULES-WEAPR_LONG"</Reach>
 <Price>"8CO"</Price>
 <Encumbrance>"3"</Encumbrance>
 <Quality>"RULES-WEAPB10,RULES-WEAPB08"</Quality>
@@ -13971,8 +13971,8 @@ See page 190 for Fear rules"</Explanation>
 <Description language="FRANCAIS">"Grande hache"</Description>
 <Skill>"RULES-COMPCOMB_2M"</Skill>
 <Damage>"+(BATTR_S)+6"</Damage>
-<Availability>"DISPO_LIMITED"</Availability>
-<Reach>"WEAPR_LONG"</Reach>
+<Availability>"RULES-DISPO_LIMITED"</Availability>
+<Reach>"RULES-WEAPR_LONG"</Reach>
 <Price>"4CO"</Price>
 <Encumbrance>"3"</Encumbrance>
 <Quality>"RULES-WEAPB25,RULES-WEAPB21,RULES-WEAPB30"</Quality>
@@ -13983,8 +13983,8 @@ See page 190 for Fear rules"</Explanation>
 <Description language="FRANCAIS">"Marteau de guerre"</Description>
 <Skill>"RULES-COMPCOMB_2M"</Skill>
 <Damage>"+(BATTR_S)+6"</Damage>
-<Availability>"DISPO_COMMON"</Availability>
-<Reach>"WEAPR_MID"</Reach>
+<Availability>"RULES-DISPO_COMMON"</Availability>
+<Reach>"RULES-WEAPR_MID"</Reach>
 <Price>"3CO"</Price>
 <Encumbrance>"3"</Encumbrance>
 <Quality>"RULES-WEAPB04,RULES-WEAPB10,RULES-WEAPB28"</Quality>
@@ -13995,8 +13995,8 @@ See page 190 for Fear rules"</Explanation>
 <Description language="FRANCAIS">"Pioche"</Description>
 <Skill>"RULES-COMPCOMB_2M"</Skill>
 <Damage>"+(BATTR_S)+5"</Damage>
-<Availability>"DISPO_COMMON"</Availability>
-<Reach>"WEAPR_MID"</Reach>
+<Availability>"RULES-DISPO_COMMON"</Availability>
+<Reach>"RULES-WEAPR_MID"</Reach>
 <Price>"9/-"</Price>
 <Encumbrance>"3"</Encumbrance>
 <Quality>"RULES-WEAPB10,RULES-WEAPB12,RULES-WEAPB28"</Quality>
@@ -14007,8 +14007,8 @@ See page 190 for Fear rules"</Explanation>
 <Description language="FRANCAIS">"Zweihander"</Description>
 <Skill>"RULES-COMPCOMB_2M"</Skill>
 <Damage>"+(BATTR_S)+5"</Damage>
-<Availability>"DISPO_LIMITED"</Availability>
-<Reach>"WEAPR_LONG"</Reach>
+<Availability>"RULES-DISPO_LIMITED"</Availability>
+<Reach>"RULES-WEAPR_LONG"</Reach>
 <Price>"10CO"</Price>
 <Encumbrance>"3"</Encumbrance>
 <Quality>"RULES-WEAPB10,RULES-WEAPB30"</Quality>
@@ -14031,7 +14031,7 @@ See page 190 for Fear rules"</Explanation>
 <Description language="FRANCAIS">"Fouet"</Description>
 <Skill>"RULES-COMPPROJ_ENTRAV"</Skill>
 <Damage>"+(BATTR_S)+2"</Damage>
-<Availability>"DISPO_COMMON"</Availability>
+<Availability>"RULES-DISPO_COMMON"</Availability>
 <Reach>"6"</Reach>
 <Price>"5/-"</Price>
 <Encumbrance>"0"</Encumbrance>
@@ -14043,7 +14043,7 @@ See page 190 for Fear rules"</Explanation>
 <Description language="FRANCAIS">"Lasso"</Description>
 <Skill>"RULES-COMPPROJ_ENTRAV"</Skill>
 <Damage>"0"</Damage>
-<Availability>"DISPO_COMMON"</Availability>
+<Availability>"RULES-DISPO_COMMON"</Availability>
 <Reach>"(BATTR_S)X2"</Reach>
 <Price>"6/-"</Price>
 <Encumbrance>"0"</Encumbrance>
@@ -14055,8 +14055,8 @@ See page 190 for Fear rules"</Explanation>
 <Description language="FRANCAIS">"Fleuret"</Description>
 <Skill>"RULES-COMPCOMB_ESCR"</Skill>
 <Damage>"+(BATTR_S)+3"</Damage>
-<Availability>"DISPO_LIMITED"</Availability>
-<Reach>"WEAPR_MID"</Reach>
+<Availability>"RULES-DISPO_LIMITED"</Availability>
+<Reach>"RULES-WEAPR_MID"</Reach>
 <Price>"5CO"</Price>
 <Encumbrance>"1"</Encumbrance>
 <Quality>"RULES-WEAPB20,RULES-WEAPB12,RULES-WEAPB14,RULES-WEAPB27"</Quality>
@@ -14067,8 +14067,8 @@ See page 190 for Fear rules"</Explanation>
 <Description language="FRANCAIS">"Rapiére"</Description>
 <Skill>"RULES-COMPCOMB_ESCR"</Skill>
 <Damage>"+(BATTR_S)+4"</Damage>
-<Availability>"DISPO_LIMITED"</Availability>
-<Reach>"WEAPR_LONG"</Reach>
+<Availability>"RULES-DISPO_LIMITED"</Availability>
+<Reach>"RULES-WEAPR_LONG"</Reach>
 <Price>"5CO"</Price>
 <Encumbrance>"1"</Encumbrance>
 <Quality>"RULES-WEAPB20,RULES-WEAPB12"</Quality>
@@ -14079,8 +14079,8 @@ See page 190 for Fear rules"</Explanation>
 <Description language="FRANCAIS">"Fléau d’armes"</Description>
 <Skill>"RULES-COMPCOMB_FLEAU"</Skill>
 <Damage>"+(BATTR_S)+6"</Damage>
-<Availability>"DISPO_RARE"</Availability>
-<Reach>"WEAPR_LONG"</Reach>
+<Availability>"RULES-DISPO_RARE"</Availability>
+<Reach>"RULES-WEAPR_LONG"</Reach>
 <Price>"3CO"</Price>
 <Encumbrance>"2"</Encumbrance>
 <Quality>"RULES-WEAPB09,RULES-WEAPB21,RULES-WEAPB25,RULES-WEAPB01"</Quality>
@@ -14091,8 +14091,8 @@ See page 190 for Fear rules"</Explanation>
 <Description language="FRANCAIS">"Fleau"</Description>
 <Skill>"RULES-COMPCOMB_FLEAU"</Skill>
 <Damage>"+(BATTR_S)+5"</Damage>
-<Availability>"DISPO_LIMITED"</Availability>
-<Reach>"WEAPR_MID"</Reach>
+<Availability>"RULES-DISPO_LIMITED"</Availability>
+<Reach>"RULES-WEAPR_MID"</Reach>
 <Price>"2CO"</Price>
 <Encumbrance>"1"</Encumbrance>
 <Quality>"RULES-WEAPB09,RULES-WEAPB01"</Quality>
@@ -14103,8 +14103,8 @@ See page 190 for Fear rules"</Explanation>
 <Description language="FRANCAIS">"Fleau a grain"</Description>
 <Skill>"RULES-COMPCOMB_FLEAU"</Skill>
 <Damage>"+(BATTR_S)+3"</Damage>
-<Availability>"DISPO_COMMON"</Availability>
-<Reach>"WEAPR_MID"</Reach>
+<Availability>"RULES-DISPO_COMMON"</Availability>
+<Reach>"RULES-WEAPR_MID"</Reach>
 <Price>"10/-"</Price>
 <Encumbrance>"1"</Encumbrance>
 <Quality>"RULES-WEAPB09,RULES-WEAPB16,RULES-WEAPB01"</Quality>
@@ -14115,8 +14115,8 @@ See page 190 for Fear rules"</Explanation>
 <Description language="FRANCAIS">"Brise-épée"</Description>
 <Skill>"RULES-COMPCOMB_PARAD"</Skill>
 <Damage>"+(BATTR_S)+3"</Damage>
-<Availability>"DISPO_LIMITED"</Availability>
-<Reach>"WEAPR_SHORT"</Reach>
+<Availability>"RULES-DISPO_LIMITED"</Availability>
+<Reach>"RULES-WEAPR_SHORT"</Reach>
 <Price>"1CO 2/6"</Price>
 <Encumbrance>"1"</Encumbrance>
 <Quality>"RULES-WEAPB08,RULES-WEAPB11"</Quality>
@@ -14127,8 +14127,8 @@ See page 190 for Fear rules"</Explanation>
 <Description language="FRANCAIS">"Main gauche"</Description>
 <Skill>"RULES-COMPCOMB_PARAD"</Skill>
 <Damage>"+(BATTR_S)+2"</Damage>
-<Availability>"DISPO_RARE"</Availability>
-<Reach>"WEAPR_CLOSE"</Reach>
+<Availability>"RULES-DISPO_RARE"</Availability>
+<Reach>"RULES-WEAPR_CLOSE"</Reach>
 <Price>"ICO"</Price>
 <Encumbrance>"0"</Encumbrance>
 <Quality>"RULES-WEAPB08"</Quality>
@@ -14139,7 +14139,7 @@ See page 190 for Fear rules"</Explanation>
 <Description language="FRANCAIS">"Arbaléte"</Description>
 <Skill>"RULES-COMPPROJ_ARB"</Skill>
 <Damage>"+9"</Damage>
-<Availability>"DISPO_COMMON"</Availability>
+<Availability>"RULES-DISPO_COMMON"</Availability>
 <Reach>"60"</Reach>
 <Price>"5CO"</Price>
 <Encumbrance>"2"</Encumbrance>
@@ -14151,7 +14151,7 @@ See page 190 for Fear rules"</Explanation>
 <Description language="FRANCAIS">"Arbaléte lourde"</Description>
 <Skill>"RULES-COMPPROJ_ARB"</Skill>
 <Damage>"+9"</Damage>
-<Availability>"DISPO_RARE"</Availability>
+<Availability>"RULES-DISPO_RARE"</Availability>
 <Reach>"100"</Reach>
 <Price>"7CO"</Price>
 <Encumbrance>"3"</Encumbrance>
@@ -14163,7 +14163,7 @@ See page 190 for Fear rules"</Explanation>
 <Description language="FRANCAIS">"Arbaléte de poing"</Description>
 <Skill>"RULES-COMPPROJ_ARBPG"</Skill>
 <Damage>"+7"</Damage>
-<Availability>"DISPO_LIMITED"</Availability>
+<Availability>"RULES-DISPO_LIMITED"</Availability>
 <Reach>"10"</Reach>
 <Price>"6CO"</Price>
 <Encumbrance>"0"</Encumbrance>
@@ -14175,7 +14175,7 @@ See page 190 for Fear rules"</Explanation>
 <Description language="FRANCAIS">"Arc"</Description>
 <Skill>"RULES-COMPPROJ_ARC"</Skill>
 <Damage>"+(BATTR_S)+3"</Damage>
-<Availability>"DISPO_COMMON"</Availability>
+<Availability>"RULES-DISPO_COMMON"</Availability>
 <Reach>"50"</Reach>
 <Price>"4CO"</Price>
 <Encumbrance>"2"</Encumbrance>
@@ -14187,7 +14187,7 @@ See page 190 for Fear rules"</Explanation>
 <Description language="FRANCAIS">"Arc elfique"</Description>
 <Skill>"RULES-COMPPROJ_ARC"</Skill>
 <Damage>"+(BATTR_S)+4"</Damage>
-<Availability>"DISPO_EXOTIC"</Availability>
+<Availability>"RULES-DISPO_EXOTIC"</Availability>
 <Reach>"150"</Reach>
 <Price>"10CO"</Price>
 <Encumbrance>"2"</Encumbrance>
@@ -14199,7 +14199,7 @@ See page 190 for Fear rules"</Explanation>
 <Description language="FRANCAIS">"Arc long"</Description>
 <Skill>"RULES-COMPPROJ_ARC"</Skill>
 <Damage>"+(BATTR_S)+4"</Damage>
-<Availability>"DISPO_LIMITED"</Availability>
+<Availability>"RULES-DISPO_LIMITED"</Availability>
 <Reach>"100"</Reach>
 <Price>"5CO"</Price>
 <Encumbrance>"3"</Encumbrance>
@@ -14211,7 +14211,7 @@ See page 190 for Fear rules"</Explanation>
 <Description language="FRANCAIS">"Are court"</Description>
 <Skill>"RULES-COMPPROJ_ARC"</Skill>
 <Damage>"+(BATTR_S)+2"</Damage>
-<Availability>"DISPO_COMMON"</Availability>
+<Availability>"RULES-DISPO_COMMON"</Availability>
 <Reach>"20"</Reach>
 <Price>"3CO"</Price>
 <Encumbrance>"1"</Encumbrance>
@@ -14223,7 +14223,7 @@ See page 190 for Fear rules"</Explanation>
 <Description language="FRANCAIS">"Bombe"</Description>
 <Skill>"RULES-COMPPROJ_EXPLO"</Skill>
 <Damage>"+12"</Damage>
-<Availability>"DISPO_RARE"</Availability>
+<Availability>"RULES-DISPO_RARE"</Availability>
 <Reach>"(BATTR_S)"</Reach>
 <Price>"3CO"</Price>
 <Encumbrance>"0"</Encumbrance>
@@ -14235,7 +14235,7 @@ See page 190 for Fear rules"</Explanation>
 <Description language="FRANCAIS">"Bombe incendiaire"</Description>
 <Skill>"RULES-COMPPROJ_EXPLO"</Skill>
 <Damage>"0"</Damage>
-<Availability>"DISPO_LIMITED"</Availability>
+<Availability>"RULES-DISPO_LIMITED"</Availability>
 <Reach>"(BATTR_S)"</Reach>
 <Price>"1CO"</Price>
 <Encumbrance>"0"</Encumbrance>
@@ -14247,7 +14247,7 @@ See page 190 for Fear rules"</Explanation>
 <Description language="FRANCAIS">"Fustibale"</Description>
 <Skill>"RULES-COMPPROJ_FROND"</Skill>
 <Damage>"+7"</Damage>
-<Availability>"DISPO_LIMITED"</Availability>
+<Availability>"RULES-DISPO_LIMITED"</Availability>
 <Reach>"100"</Reach>
 <Price>"4/-"</Price>
 <Encumbrance>"2"</Encumbrance>
@@ -14259,7 +14259,7 @@ See page 190 for Fear rules"</Explanation>
 <Description language="FRANCAIS">"Fronde"</Description>
 <Skill>"RULES-COMPPROJ_FROND"</Skill>
 <Damage>"+6"</Damage>
-<Availability>"DISPO_COMMON"</Availability>
+<Availability>"RULES-DISPO_COMMON"</Availability>
 <Reach>"60"</Reach>
 <Price>"l/-"</Price>
 <Encumbrance>"0"</Encumbrance>
@@ -14271,7 +14271,7 @@ See page 190 for Fear rules"</Explanation>
 <Description language="FRANCAIS">"Arquebuse à répétition"</Description>
 <Skill>"RULES-COMPPROJ_ING"</Skill>
 <Damage>"+9"</Damage>
-<Availability>"DISPO_RARE"</Availability>
+<Availability>"RULES-DISPO_RARE"</Availability>
 <Reach>"30"</Reach>
 <Price>"10CO"</Price>
 <Encumbrance>"3"</Encumbrance>
@@ -14283,7 +14283,7 @@ See page 190 for Fear rules"</Explanation>
 <Description language="FRANCAIS">"Pistolet a répétition"</Description>
 <Skill>"RULES-COMPPROJ_ING"</Skill>
 <Damage>"+8"</Damage>
-<Availability>"DISPO_RARE"</Availability>
+<Availability>"RULES-DISPO_RARE"</Availability>
 <Reach>"10"</Reach>
 <Price>"15CO"</Price>
 <Encumbrance>"1"</Encumbrance>
@@ -14307,7 +14307,7 @@ See page 190 for Fear rules"</Explanation>
 <Description language="FRANCAIS">"Bolas"</Description>
 <Skill>"RULES-COMPPROJ_LANC"</Skill>
 <Damage>"+(BATTR_S)"</Damage>
-<Availability>"DISPO_RARE"</Availability>
+<Availability>"RULES-DISPO_RARE"</Availability>
 <Reach>"(BATTR_S)X3"</Reach>
 <Price>"10/-"</Price>
 <Encumbrance>"0"</Encumbrance>
@@ -14319,7 +14319,7 @@ See page 190 for Fear rules"</Explanation>
 <Description language="FRANCAIS">"Couteau de lancer"</Description>
 <Skill>"RULES-COMPPROJ_LANC"</Skill>
 <Damage>"+(BATTR_S)+2"</Damage>
-<Availability>"DISPO_COMMON"</Availability>
+<Availability>"RULES-DISPO_COMMON"</Availability>
 <Reach>"(BATTR_S)X2"</Reach>
 <Price>"18/-"</Price>
 <Encumbrance>"0"</Encumbrance>
@@ -14331,7 +14331,7 @@ See page 190 for Fear rules"</Explanation>
 <Description language="FRANCAIS">"Flechette"</Description>
 <Skill>"RULES-COMPPROJ_LANC"</Skill>
 <Damage>"+(BATTR_S)+1"</Damage>
-<Availability>"DISPO_LIMITED"</Availability>
+<Availability>"RULES-DISPO_LIMITED"</Availability>
 <Reach>"(BATTR_S)X2"</Reach>
 <Price>"2/-"</Price>
 <Encumbrance>"0"</Encumbrance>
@@ -14343,7 +14343,7 @@ See page 190 for Fear rules"</Explanation>
 <Description language="FRANCAIS">"Hache de lancer"</Description>
 <Skill>"RULES-COMPPROJ_LANC"</Skill>
 <Damage>"+(BATTR_S)+3"</Damage>
-<Availability>"DISPO_COMMON"</Availability>
+<Availability>"RULES-DISPO_COMMON"</Availability>
 <Reach>"(BATTR_S)X2"</Reach>
 <Price>"1CO"</Price>
 <Encumbrance>"1"</Encumbrance>
@@ -14355,7 +14355,7 @@ See page 190 for Fear rules"</Explanation>
 <Description language="FRANCAIS">"Javelot"</Description>
 <Skill>"RULES-COMPPROJ_LANC"</Skill>
 <Damage>"+(BATTR_S)+3"</Damage>
-<Availability>"DISPO_LIMITED"</Availability>
+<Availability>"RULES-DISPO_LIMITED"</Availability>
 <Reach>"(BATTR_S)X3"</Reach>
 <Price>"10/6"</Price>
 <Encumbrance>"1"</Encumbrance>
@@ -14367,7 +14367,7 @@ See page 190 for Fear rules"</Explanation>
 <Description language="FRANCAIS">"Rocher"</Description>
 <Skill>"RULES-COMPPROJ_LANC"</Skill>
 <Damage>"+(BATTR_S)"</Damage>
-<Availability>"DISPO_COMMON"</Availability>
+<Availability>"RULES-DISPO_COMMON"</Availability>
 <Reach>"(BATTR_S)X3"</Reach>
 <Price>"/"</Price>
 <Encumbrance>"0"</Encumbrance>
@@ -14391,7 +14391,7 @@ See page 190 for Fear rules"</Explanation>
 <Description language="FRANCAIS">"Arquebuse"</Description>
 <Skill>"RULES-COMPPROJ_POUDRE"</Skill>
 <Damage>"+9"</Damage>
-<Availability>"DISPO_LIMITED"</Availability>
+<Availability>"RULES-DISPO_LIMITED"</Availability>
 <Reach>"50"</Reach>
 <Price>"4CO"</Price>
 <Encumbrance>"2"</Encumbrance>
@@ -14403,7 +14403,7 @@ See page 190 for Fear rules"</Explanation>
 <Description language="FRANCAIS">"Long fusil d’Hochland"</Description>
 <Skill>"RULES-COMPPROJ_POUDRE"</Skill>
 <Damage>"+9"</Damage>
-<Availability>"DISPO_EXOTIC"</Availability>
+<Availability>"RULES-DISPO_EXOTIC"</Availability>
 <Reach>"100"</Reach>
 <Price>"100CO"</Price>
 <Encumbrance>"3"</Encumbrance>
@@ -14415,7 +14415,7 @@ See page 190 for Fear rules"</Explanation>
 <Description language="FRANCAIS">"Tromblon"</Description>
 <Skill>"RULES-COMPPROJ_POUDRE"</Skill>
 <Damage>"+8"</Damage>
-<Availability>"DISPO_LIMITED"</Availability>
+<Availability>"RULES-DISPO_LIMITED"</Availability>
 <Reach>"20"</Reach>
 <Price>"2CO"</Price>
 <Encumbrance>"1"</Encumbrance>
@@ -14427,7 +14427,7 @@ See page 190 for Fear rules"</Explanation>
 <Description language="FRANCAIS">"Pistolet"</Description>
 <Skill>"RULES-COMPPROJ_POUDRE"</Skill>
 <Damage>"+8"</Damage>
-<Availability>"DISPO_RARE"</Availability>
+<Availability>"RULES-DISPO_RARE"</Availability>
 <Reach>"20"</Reach>
 <Price>"8CO"</Price>
 <Encumbrance>"0"</Encumbrance>
@@ -14439,7 +14439,7 @@ See page 190 for Fear rules"</Explanation>
 <Description language="FRANCAIS">"Carreau"</Description>
 <Skill>"RULES-COMPPROJ_ARB"</Skill>
 <Damage>"+0"</Damage>
-<Availability>"DISPO_COMMON"</Availability>
+<Availability>"RULES-DISPO_COMMON"</Availability>
 <Reach>"+0"</Reach>
 <Price>"5/-"</Price>
 <Encumbrance>"0"</Encumbrance>
@@ -14451,7 +14451,7 @@ See page 190 for Fear rules"</Explanation>
 <Description language="FRANCAIS">"Fleche"</Description>
 <Skill>"RULES-COMPPROJ_ARC"</Skill>
 <Damage>"+0"</Damage>
-<Availability>"DISPO_COMMON"</Availability>
+<Availability>"RULES-DISPO_COMMON"</Availability>
 <Reach>"+0"</Reach>
 <Price>"5/-"</Price>
 <Encumbrance>"0"</Encumbrance>
@@ -14463,7 +14463,7 @@ See page 190 for Fear rules"</Explanation>
 <Description language="FRANCAIS">"Fléche elfe"</Description>
 <Skill>"RULES-COMPPROJ_ARC"</Skill>
 <Damage>"+1"</Damage>
-<Availability>"DISPO_EXOTIC"</Availability>
+<Availability>"RULES-DISPO_EXOTIC"</Availability>
 <Reach>"+50"</Reach>
 <Price>"6/-"</Price>
 <Encumbrance>"0"</Encumbrance>
@@ -14475,7 +14475,7 @@ See page 190 for Fear rules"</Explanation>
 <Description language="FRANCAIS">"Balle de plomb"</Description>
 <Skill>"RULES-COMPPROJ_FROND"</Skill>
 <Damage>"+1"</Damage>
-<Availability>"DISPO_COMMON"</Availability>
+<Availability>"RULES-DISPO_COMMON"</Availability>
 <Reach>"-10"</Reach>
 <Price>"4SC"</Price>
 <Encumbrance>"0"</Encumbrance>
@@ -14487,7 +14487,7 @@ See page 190 for Fear rules"</Explanation>
 <Description language="FRANCAIS">"Projectile de pierre"</Description>
 <Skill>"RULES-COMPPROJ_FROND"</Skill>
 <Damage>"+0"</Damage>
-<Availability>"DISPO_COMMON"</Availability>
+<Availability>"RULES-DISPO_COMMON"</Availability>
 <Reach>"+0"</Reach>
 <Price>"2SC"</Price>
 <Encumbrance>"0"</Encumbrance>
@@ -14499,7 +14499,7 @@ See page 190 for Fear rules"</Explanation>
 <Description language="FRANCAIS">"Balle et Poudre"</Description>
 <Skill>"RULES-COMPPROJ_POUDRE/RULES-COMPPROJ_ING"</Skill>
 <Damage>"+1"</Damage>
-<Availability>"DISPO_COMMON"</Availability>
+<Availability>"RULES-DISPO_COMMON"</Availability>
 <Reach>"+0"</Reach>
 <Price>"3/3"</Price>
 <Encumbrance>"0"</Encumbrance>
@@ -14511,7 +14511,7 @@ See page 190 for Fear rules"</Explanation>
 <Description language="FRANCAIS">"Munitions improvisées et Poudre"</Description>
 <Skill>"RULES-COMPPROJ_POUDRE/RULES-COMPPROJ_ING"</Skill>
 <Damage>"+0"</Damage>
-<Availability>"DISPO_COMMON"</Availability>
+<Availability>"RULES-DISPO_COMMON"</Availability>
 <Reach>"/2"</Reach>
 <Price>"3SC"</Price>
 <Encumbrance>"0"</Encumbrance>
@@ -14523,7 +14523,7 @@ See page 190 for Fear rules"</Explanation>
 <Description language="FRANCAIS">"Petites munitions et Poudre"</Description>
 <Skill>"RULES-COMPPROJ_POUDRE/RULES-COMPPROJ_ING"</Skill>
 <Damage>"+0"</Damage>
-<Availability>"DISPO_COMMON"</Availability>
+<Availability>"RULES-DISPO_COMMON"</Availability>
 <Reach>"+0"</Reach>
 <Price>"3/3"</Price>
 <Encumbrance>"0"</Encumbrance>
@@ -14770,169 +14770,169 @@ Vous subissez toujours les Blessures normales (et étant donné que vos PA sont 
 <DATA_ARMOR>
 <Armor id="RULES-ARMO_01">
 <Description language="FRANCAIS">"Calotte de cuir"</Description>
-<Availability>"DISPO_COMMON"</Availability>
+<Availability>"RULES-DISPO_COMMON"</Availability>
 <Price>"8/-"</Price>
 <Encumbrance>"0"</Encumbrance>
 <Quality>"RULES-ARMOB_03,RULES-ARMOB_08"</Quality>
-<Location>"ARMOL_HEAD"</Location>
+<Location>"RULES-ARMOL_HEAD"</Location>
 <ArmorPoint>"1"</ArmorPoint>
-<Type>"ARMOT_SOFTLEATHER"</Type>
+<Type>"RULES-ARMOT_SOFTLEATHER"</Type>
 </Armor>
 <Armor id="RULES-ARMO_02">
 <Description language="FRANCAIS">"Jambières de cuir"</Description>
-<Availability>"DISPO_COMMON"</Availability>
+<Availability>"RULES-DISPO_COMMON"</Availability>
 <Price>"14/-"</Price>
 <Encumbrance>"1"</Encumbrance>
 <Quality>"RULES-ARMOB_08"</Quality>
-<Location>"ARMOL_LEG"</Location>
+<Location>"RULES-ARMOL_LEG"</Location>
 <ArmorPoint>"1"</ArmorPoint>
-<Type>"ARMOT_SOFTLEATHER"</Type>
+<Type>"RULES-ARMOT_SOFTLEATHER"</Type>
 </Armor>
 <Armor id="RULES-ARMO_03">
 <Description language="FRANCAIS">"Justaucorps de cuir"</Description>
-<Availability>"DISPO_COMMON"</Availability>
+<Availability>"RULES-DISPO_COMMON"</Availability>
 <Price>"10/-"</Price>
 <Encumbrance>"1"</Encumbrance>
 <Quality>"RULES-ARMOB_08"</Quality>
-<Location>"ARMOL_BODY"</Location>
+<Location>"RULES-ARMOL_BODY"</Location>
 <ArmorPoint>"1"</ArmorPoint>
-<Type>"ARMOT_SOFTLEATHER"</Type>
+<Type>"RULES-ARMOT_SOFTLEATHER"</Type>
 </Armor>
 <Armor id="RULES-ARMO_04">
 <Description language="FRANCAIS">"Veste de cuir"</Description>
-<Availability>"DISPO_COMMON"</Availability>
+<Availability>"RULES-DISPO_COMMON"</Availability>
 <Price>"12/-"</Price>
 <Encumbrance>"1"</Encumbrance>
 <Quality>"RULES-ARMOB_08"</Quality>
-<Location>"ARMOL_ARM,ARMOL_BODY"</Location>
+<Location>"RULES-ARMOL_ARM,RULES-ARMOL_BODY"</Location>
 <ArmorPoint>"1"</ArmorPoint>
-<Type>"ARMOT_SOFTLEATHER"</Type>
+<Type>"RULES-ARMOT_SOFTLEATHER"</Type>
 </Armor>
 <Armor id="RULES-ARMO_05">
 <Description language="FRANCAIS">"Plastron de cuir"</Description>
-<Availability>"DISPO_LIMITED"</Availability>
+<Availability>"RULES-DISPO_LIMITED"</Availability>
 <Price>"18/-"</Price>
 <Encumbrance>"2"</Encumbrance>
 <Quality>"RULES-ARMOB_04"</Quality>
-<Location>"ARMOL_BODY"</Location>
+<Location>"RULES-ARMOL_BODY"</Location>
 <ArmorPoint>"2"</ArmorPoint>
-<Type>"ARMOT_BOILLEDLEATHER"</Type>
+<Type>"RULES-ARMOT_BOILLEDLEATHER"</Type>
 </Armor>
 <Armor id="RULES-ARMO_06">
 <Description language="FRANCAIS">"Chausses de mailles"</Description>
-<Availability>"DISPO_LIMITED"</Availability>
+<Availability>"RULES-DISPO_LIMITED"</Availability>
 <Price>"2C0"</Price>
 <Encumbrance>"3"</Encumbrance>
 <Quality>"RULES-ARMOB_01,RULES-ARMOB_05"</Quality>
-<Location>"ARMOL_LEG"</Location>
+<Location>"RULES-ARMOL_LEG"</Location>
 <ArmorPoint>"2"</ArmorPoint>
-<Type>"ARMOT_MAIL"</Type>
+<Type>"RULES-ARMOT_MAIL"</Type>
 </Armor>
 <Armor id="RULES-ARMO_07">
 <Description language="FRANCAIS">"Chemise de mailles"</Description>
-<Availability>"DISPO_LIMITED"</Availability>
+<Availability>"RULES-DISPO_LIMITED"</Availability>
 <Price>"2C0"</Price>
 <Encumbrance>"2"</Encumbrance>
 <Quality>"RULES-ARMOB_01,RULES-ARMOB_05"</Quality>
-<Location>"ARMOL_BODY"</Location>
+<Location>"RULES-ARMOL_BODY"</Location>
 <ArmorPoint>"2"</ArmorPoint>
-<Type>"ARMOT_MAIL"</Type>
+<Type>"RULES-ARMOT_MAIL"</Type>
 </Armor>
 <Armor id="RULES-ARMO_08">
 <Description language="FRANCAIS">"Coiffe de mailles"</Description>
-<Availability>"DISPO_LIMITED"</Availability>
+<Availability>"RULES-DISPO_LIMITED"</Availability>
 <Price>"1CO"</Price>
 <Encumbrance>"2"</Encumbrance>
 <Quality>"RULES-ARMOB_01,RULES-ARMOB_03,RULES-ARMOB_05,RULES-ARMOB_06"</Quality>
-<Location>"ARMOL_HEAD"</Location>
+<Location>"RULES-ARMOL_HEAD"</Location>
 <ArmorPoint>"2"</ArmorPoint>
-<Type>"ARMOT_MAIL"</Type>
+<Type>"RULES-ARMOT_MAIL"</Type>
 </Armor>
 <Armor id="RULES-ARMO_09">
 <Description language="FRANCAIS">"Cotte de mailles"</Description>
-<Availability>"DISPO_COMMON"</Availability>
+<Availability>"RULES-DISPO_COMMON"</Availability>
 <Price>"3CO"</Price>
 <Encumbrance>"3"</Encumbrance>
 <Quality>"RULES-ARMOB_01,RULES-ARMOB_05"</Quality>
-<Location>"ARMOL_ARM,ARMOL_BODY"</Location>
+<Location>"RULES-ARMOL_ARM,RULES-ARMOL_BODY"</Location>
 <ArmorPoint>"2"</ArmorPoint>
-<Type>"ARMOT_MAIL"</Type>
+<Type>"RULES-ARMOT_MAIL"</Type>
 </Armor>
 <Armor id="RULES-ARMO_98">
 <Description language="FRANCAIS">"Coiffe de maille"</Description>
-<Availability>"DISPO_LIMITED"</Availability>
+<Availability>"RULES-DISPO_LIMITED"</Availability>
 <Price>"1CO"</Price>
 <Encumbrance>"1"</Encumbrance>
 <Quality>"RULES-ARMOB_01,RULES-ARMOB_03,RULES-ARMOB_06"</Quality>
-<Location>"ARMOL_HEAD"</Location>
+<Location>"RULES-ARMOL_HEAD"</Location>
 <ArmorPoint>"2"</ArmorPoint>
-<Type>"ARMOT_MAIL"</Type>
+<Type>"RULES-ARMOT_MAIL"</Type>
 </Armor>
 <Armor id="RULES-ARMO_99">
 <Description language="FRANCAIS">"Cotte de maille"</Description>
-<Availability>"DISPO_COMMON"</Availability>
+<Availability>"RULES-DISPO_COMMON"</Availability>
 <Price>"3CO"</Price>
 <Encumbrance>"2"</Encumbrance>
 <Quality>"RULES-ARMOB_01,RULES-ARMOB_05"</Quality>
-<Location>"ARMOL_ARM,ARMOL_BODY,ARMOL_LEG"</Location>
+<Location>"RULES-ARMOL_ARM,RULES-ARMOL_BODY,RULES-ARMOL_LEG"</Location>
 <ArmorPoint>"2"</ArmorPoint>
-<Type>"ARMOT_MAIL"</Type>
+<Type>"RULES-ARMOT_MAIL"</Type>
 </Armor>
 <Armor id="RULES-ARMO_10">
 <Description language="FRANCAIS">"Brassards"</Description>
-<Availability>"DISPO_RARE"</Availability>
+<Availability>"RULES-DISPO_RARE"</Availability>
 <Price>"8CO"</Price>
 <Encumbrance>"3"</Encumbrance>
 <Quality>"RULES-ARMOB_02,RULES-ARMOB_04,RULES-ARMOB_05"</Quality>
-<Location>"ARMOL_ARM"</Location>
+<Location>"RULES-ARMOL_ARM"</Location>
 <ArmorPoint>"2"</ArmorPoint>
-<Type>"ARMOT_PLATE"</Type>
+<Type>"RULES-ARMOT_PLATE"</Type>
 </Armor>
 <Armor id="RULES-ARMO_11">
 <Description language="FRANCAIS">"Heaume"</Description>
-<Availability>"DISPO_RARE"</Availability>
+<Availability>"RULES-DISPO_RARE"</Availability>
 <Price>"3CO"</Price>
 <Encumbrance>"2"</Encumbrance>
 <Quality>"RULES-ARMOB_02,RULES-ARMOB_04,RULES-ARMOB_05,RULES-ARMOB_07"</Quality>
-<Location>"ARMOL_HEAD"</Location>
+<Location>"RULES-ARMOL_HEAD"</Location>
 <ArmorPoint>"2"</ArmorPoint>
-<Type>"ARMOT_PLATE"</Type>
+<Type>"RULES-ARMOT_PLATE"</Type>
 </Armor>
 <Armor id="RULES-ARMO_12">
 <Description language="FRANCAIS">"Heaume ouvert"</Description>
-<Availability>"DISPO_COMMON"</Availability>
+<Availability>"RULES-DISPO_COMMON"</Availability>
 <Price>"2CO"</Price>
 <Encumbrance>"1"</Encumbrance>
 <Quality>"RULES-ARMOB_03,RULES-ARMOB_05,RULES-ARMOB_06"</Quality>
-<Location>"ARMOL_HEAD"</Location>
+<Location>"RULES-ARMOL_HEAD"</Location>
 <ArmorPoint>"2"</ArmorPoint>
-<Type>"ARMOT_PLATE"</Type>
+<Type>"RULES-ARMOT_PLATE"</Type>
 </Armor>
 <Armor id="RULES-ARMO_13">
 <Description language="FRANCAIS">"Jambières d’acier"</Description>
-<Availability>"DISPO_RARE"</Availability>
+<Availability>"RULES-DISPO_RARE"</Availability>
 <Price>"10CO"</Price>
 <Encumbrance>"3"</Encumbrance>
 <Quality>"RULES-ARMOB_02,RULES-ARMOB_04,RULES-ARMOB_05,RULES-ARMOB_05"</Quality>
-<Location>"ARMOL_LEG"</Location>
+<Location>"RULES-ARMOL_LEG"</Location>
 <ArmorPoint>"2"</ArmorPoint>
-<Type>"ARMOT_PLATE"</Type>
+<Type>"RULES-ARMOT_PLATE"</Type>
 </Armor>
 <Armor id="RULES-ARMO_14">
 <Description language="FRANCAIS">"Plastron"</Description>
-<Availability>"DISPO_LIMITED"</Availability>
+<Availability>"RULES-DISPO_LIMITED"</Availability>
 <Price>"10CO"</Price>
 <Encumbrance>"3"</Encumbrance>
 <Quality>"RULES-ARMOB_02,RULES-ARMOB_04,RULES-ARMOB_05"</Quality>
-<Location>"ARMOL_BODY"</Location>
+<Location>"RULES-ARMOL_BODY"</Location>
 <ArmorPoint>"2"</ArmorPoint>
-<Type>"ARMOT_PLATE"</Type>
+<Type>"RULES-ARMOT_PLATE"</Type>
 </Armor>
 </DATA_ARMOR>
 <DATA_ARMOR_SIMP>
 <ArmorSimp id="RULES-ARMO_01_SIMP">
 <Description language="FRANCAIS">"Light Armour"</Description>
-<Availability>"DISPO_COMMON"</Availability>
+<Availability>"RULES-DISPO_COMMON"</Availability>
 <Price>"2CO"</Price>
 <Encumbrance>"1"</Encumbrance>
 <Quality>"RULES-ARMOB_01"</Quality>
@@ -14940,7 +14940,7 @@ Vous subissez toujours les Blessures normales (et étant donné que vos PA sont 
 </ArmorSimp>
 <ArmorSimp id="RULES-ARMO_02_SIMP">
 <Description language="FRANCAIS">"Medium Armour"</Description>
-<Availability>"DISPO_LIMITED"</Availability>
+<Availability>"RULES-DISPO_LIMITED"</Availability>
 <Price>"5CO"</Price>
 <Encumbrance>"5"</Encumbrance>
 <Quality>"RULES-ARMOB_01,RULES-ARMOB_05,RULES-ARMOB_06"</Quality>
@@ -14948,7 +14948,7 @@ Vous subissez toujours les Blessures normales (et étant donné que vos PA sont 
 </ArmorSimp>
 <ArmorSimp id="RULES-ARMO_03_SIMP">
 <Description language="FRANCAIS">"Heavy Armour"</Description>
-<Availability>"DISPO_RARE"</Availability>
+<Availability>"RULES-DISPO_RARE"</Availability>
 <Price>"10CO"</Price>
 <Encumbrance>"6"</Encumbrance>
 <Quality>"RULES-ARMOB_02,RULES-ARMOB_04,RULES-ARMOB_07,RULES-ARMOB_19"</Quality>

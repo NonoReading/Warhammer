@@ -1630,12 +1630,18 @@ Procedure PdfPersonnageCreation(Personnage: StructurePersonnage; BackGround: Boo
                 For IndLoca := 1 to NbLoca do
                   begin
                     LocData := ExtractChaine(',',PArmure.Emplacement,IndLoca);
-                    case LocData of
-                      BonusBras:   ArmureBras  := ArmureBras  + PArmure.Protection;
-                      BonusCorps:  ArmureCorps := ArmureCorps + PArmure.Protection;
-                      BonusJambes: ArmureJambe := ArmureJambe + PArmure.Protection;
-                      BonusTete:   ArmureTete  := ArmureTete  + PArmure.Protection;
-                    end;
+                    // 05/09/2026 - ex-"case LocData of" : egalite stricte, incompatible
+                    // avec un <Location> prefixe par son livre (RULES-ARMOL_ARM).
+                    // CompareRechercheValeur tolere le libelle nu en SECOND argument,
+                    // donc ceci marche avec les donnees prefixees comme avec les nues.
+                    if CompareRechercheValeur(LocData, BonusBras) then
+                      ArmureBras  := ArmureBras  + PArmure.Protection
+                    else if CompareRechercheValeur(LocData, BonusCorps) then
+                      ArmureCorps := ArmureCorps + PArmure.Protection
+                    else if CompareRechercheValeur(LocData, BonusJambes) then
+                      ArmureJambe := ArmureJambe + PArmure.Protection
+                    else if CompareRechercheValeur(LocData, BonusTete) then
+                      ArmureTete  := ArmureTete  + PArmure.Protection;
                   end
               else
                 begin
@@ -2819,12 +2825,18 @@ Procedure PdfBlocArmuresDonnees(PdfPage: TPDFPage; Personnage: StructurePersonna
                 For IndLoca := 1 to NbLoca do
                   begin
                     LocData := ExtractChaine(',',PArmure.Emplacement,IndLoca);
-                    case LocData of
-                      BonusBras:   ArmureBras  := ArmureBras  + PArmure.Protection;
-                      BonusCorps:  ArmureCorps := ArmureCorps + PArmure.Protection;
-                      BonusJambes: ArmureJambe := ArmureJambe + PArmure.Protection;
-                      BonusTete:   ArmureTete  := ArmureTete  + PArmure.Protection;
-                    end;
+                    // 05/09/2026 - ex-"case LocData of" : egalite stricte, incompatible
+                    // avec un <Location> prefixe par son livre (RULES-ARMOL_ARM).
+                    // CompareRechercheValeur tolere le libelle nu en SECOND argument,
+                    // donc ceci marche avec les donnees prefixees comme avec les nues.
+                    if CompareRechercheValeur(LocData, BonusBras) then
+                      ArmureBras  := ArmureBras  + PArmure.Protection
+                    else if CompareRechercheValeur(LocData, BonusCorps) then
+                      ArmureCorps := ArmureCorps + PArmure.Protection
+                    else if CompareRechercheValeur(LocData, BonusJambes) then
+                      ArmureJambe := ArmureJambe + PArmure.Protection
+                    else if CompareRechercheValeur(LocData, BonusTete) then
+                      ArmureTete  := ArmureTete  + PArmure.Protection;
                   end
               else
                 begin
