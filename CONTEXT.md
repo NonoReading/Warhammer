@@ -1,23 +1,15 @@
 # Warhammer — Contexte projet
 
-**Dernière mise à jour : 04/09/2026 — fin de journée : LE CHANTIER DES APPARTENANCES EST
-COMPLET DES DEUX CÔTÉS (§2.44). WinCreation propose désormais le régiment lui aussi, et les
-QUATORZE régiments provinciaux sont saisis — un Wissenlandais Soldier se voit proposer
-Wissenland, Nuln et Marienburg, et Nuln, dont deux paliers portent un choix « A ou B » sur des
-TALENTS, passe. **Les points de reprise sont maintenant : rendre l'appartenance visible sur la
-fiche et dans le PDF, le 3d-3 (ordres de chevalerie, même table, conception à faire), les onze
-Regiments of Renown qui ne rentrent pas dans le moule, et la suppression de
-`GreffesDesAppartenances` devenue morte.** Un bug voisin est apparu et n'est PAS corrigé : une
-compétence d'ethnie « A ou B » ou « (Any) » peut recevoir ses points de création sans qu'on ait
-choisi la branche — conception au §2.45, item dans `A FAIRE.txt`.
-(Plus tôt dans la journée : lots 3a, 3b, 3c, 3d-1 ET 3d-2 de *Nations of Mankind* TERMINÉS
-au §2.37 : les onze ethnies humaines, les 72 sorts des six domaines de magie, l'armurerie —
-44 armes de mêlée, 17 à distance, 6 munitions, 28 armures, 3 accessoires — les sept
-provinces de l'Empire et les quatorze régiments. **Il ne reste que le 3d-3**, qui demande une
-conception. Les deux bugs laissés ouverts le 03/09 sont corrigés —
-qualités d'armes d'Archives I, et export du bloc `DATA_RACE` au §2.42 ; les compétences
-« A ou B » n'apparaissaient pas dans WinRaces, corrigé au §2.43. ⚠️ Lire le §0 sur
-**l'écriture qui répond « écrit » sans écrire**, qui s'est reproduite le 04/09 au soir.)** Ce fichier remplace tous les anciens
+**Dernière mise à jour : 05/09/2026 — LE §2.45 EST APPLIQUÉ (une compétence d'ethnie « A ou B »
+ou « (Any) » ne peut plus recevoir de points sans qu'on ait choisi la branche), ET UNE FAMILLE
+ENTIÈRE DE BUGS A ÉTÉ RATISSÉE : §2.46, les tests de préfixe qui ignoraient le préfixe de
+livre. Quatre endroits corrigés, deux arbitrages posés.** Les points de reprise du chantier des
+appartenances (§2.44) sont INCHANGÉS et restent les prochains : rendre l'appartenance visible
+sur la fiche et dans le PDF, le 3d-3 (ordres de chevalerie, conception à faire), et les onze
+Regiments of Renown. `GreffesDesAppartenances` est supprimée, cet item-là est clos.
+⚠️ Lire le §0 sur **l'écriture qui répond « écrit » sans écrire** : elle s'est reproduite DEUX
+fois le 05/09, et les deux fois c'est la TAILLE du fichier, jamais la date, qui l'a vue.
+Ce fichier remplace tous les anciens
 `CONTEXT*.md` / `INDEX*.md` / `RESUME*.md` / `SESSION*.md`. Il n'y en a plus
 qu'un : celui-ci. On ne le duplique jamais, on l'édite en place.
 
@@ -4630,7 +4622,7 @@ libellé, ni ne teste le doublon.
 
 ---
 
-### 2.45 Une compétence d'ethnie « A ou B » ou « (Any) » reçoit ses points sans choix — conception, non appliquée (04/09/2026)
+### 2.45 Une compétence d'ethnie « A ou B » ou « (Any) » reçoit ses points sans choix — terminé (conçu le 04/09/2026, appliqué le 05/09/2026)
 
 *Comment c'est sorti.* La grille des compétences de race de WinCreation affichait une **ligne
 vide** sur Humans (Averland) : douze compétences dans le livre, la douzième sans libellé. Ce
@@ -4676,11 +4668,77 @@ Dix lignes de script, et ça attrape aussi les branches absentes. **Ne pas gén�
 talents** : les talents composés (`RULES-T0117/RULES-T0002`…) ne sont déclarés dans aucun
 livre, c'est la convention en place et le filet de `ChargeAugmentation` les affiche.
 
-**Bug voisin découvert au passage, antérieur au chantier et noté dans `A FAIRE.txt`** :
-revenir dans une carrière déjà exercée redonne l'équipement de départ en double, et sans
-libellé (le code brut s'affiche en Description, « Various » en Kind). Boucle « Équipement » du
-changement de carrière, `winpersonnage.pas` vers l. 4675 : elle n'écrit ni la colonne du
-libellé, ni ne teste le doublon.
+*Ce qui a été écrit le 05/09/2026, exactement comme la conception le prévoyait.* Deux
+insertions dans `wincreation.pas`, rien dans `WinSpecialisations` : **(1)**
+`TabRaceCompetenceDblClick` teste `Pos(ValeurGenerique, Cells[1])` / `Pos(SeparateurMulti,
+Cells[1])`, ouvre `WinSpecialisations` en `ConstXmlSousChapitreCompetence` et réécrit `Cells[1]`
+(code) et `Cells[3]` (libellé), `CompetenceFenetre` restant en `else` ; **(2)** la branche 5 de
+`PageEtapesChange` refuse la phase suivante, avec `MESS_042`, tant qu'une ligne dont
+`CompetenceRaceStates[4]` ou `[5]` est vraie porte encore un code non résolu. Éprouvé sur
+Humans (Averland) / `Trade (Farming or Mining)` : le refus tombe, le double-clic propose
+Farming et Mining, et la phase passe une fois la branche choisie.
+
+*Le « bug voisin » de l'équipement n'était pas ce qu'on croyait — voir §2.46.* Il n'y avait pas
+deux causes indépendantes mais **une seule**, et elle n'était pas dans `winpersonnage.pas`.
+
+---
+
+### 2.46 Les tests de préfixe qui ignoraient le préfixe de livre — quatre corrections (05/09/2026)
+
+*La famille.* Tout identifiant du projet porte un préfixe de livre suivi de `-`
+(`SeparateurLivre`) : `RULES-COMB_BASE_10`, `NATIO-REGIM_AVER`. Or plusieurs endroits testaient
+les premiers caractères du code **complet** — `copy(Code, 1, 5)` comparé à `EquipementCC` =
+`'COMB_'`, `EquipementAR` = `'ARMO_'`… — ce qui donne toujours `'RULES'` et ne matche **jamais**.
+Le moule correct existait depuis toujours dans `GetTypeMetierEquipement` (`unitcalcul.pas`
+l. 218) : appeler `DecoupeCodeValeur(Code)`, qui remplit `LivreValeur` et `CodeValeur`, puis
+tester `CodeValeur`.
+
+*Comment c'est sorti, et pourquoi ça a mis si longtemps.* Le symptôme visible était un écran de
+choix d'équipement qui listait `RULES-COMB_BASE_01` à `_10` au lieu des libellés d'armes. En
+remontant : le type calculé était `TypeEquipDi` (« Various ») pour tout, **et c'est ce type qui
+décide du sous-chapitre à l'export**. Une dague repartait donc dans `SUBCHAPTER_MISC`, où la
+relecture n'a plus qu'un texte libre à afficher — d'où le « code brut en Description » qu'on
+avait noté comme un bug d'affichage séparé dans `A FAIRE.txt`. **Un seul défaut, trois
+symptômes à trois endroits différents.** La leçon : quand un type calculé sert aussi à ranger
+une donnée, un mauvais type se relit plus tard comme une mauvaise donnée.
+
+*Les quatre corrections.*
+- `unitequipement.pas`, `GetTypeEquipement` — `DecoupeCodeValeur` puis `copy(CodeValeur, 1, 5)`.
+  `UnitCalcul` ajouté au `uses`. C'est la cause racine.
+- `winspecialisation.pas`, branche `ConstXmlChapitreEquipement` — même correction sur `Res`.
+- `winweapon.pas`, `WinCharger` l. 128/130 — même correction sur `PArme.CodeArme` ; sans elle
+  **aucune** arme n'était classée et toutes prenaient le libellé du `else` (LAB_062).
+  `PROJ_` n'est volontairement pas testé, les armes à distance restent dans le `else`.
+- `winpersonnage.pas`, `XmlChargePersonnage` (deux fois, l. 2896 et l. 2967) —
+  `ChercheTalent(copy(Code, 1, 5) + '_*')` cherchait `RULES_*` : le talent parent d'un
+  sous-talent n'était jamais retrouvé, donc son maximum et son attribut étaient faux. Forme
+  correcte, déjà employée dans `pdfpersonnage.pas` l. 1278 :
+  `Copy(Code, 1, Pos('_', Code) - 1) + '_*'`.
+
+*Le balayage.* Tous les `.pas` et `.inc` de la racine ont été ratissés à la recherche du motif
+(tests de position fixe, `Pos(...) = 1`, comparaisons aux constantes `Equipement*`). Treize faux
+positifs écartés, dont les `Pos(EquipementXX, Code) > 0` de `winlivre.pas` et
+`pdfpersonnage.pas`, corrects parce que **non ancrés**. Aucun `LeftStr` ni `AnsiStartsStr` dans
+le projet. **Ce balayage est à relancer après toute campagne de saisie qui introduit un
+nouveau préfixe de livre.**
+
+*⚠️ Le piège de `Pos` qui rend 0 — régression créée et corrigée le même jour.* Le test « même
+talent parent » de `ChargeAugmentation` (`winpersonnage.pas` l. 4493) comparait 12 caractères
+fixes, ce qui donnait `RULES-T0088_` par coïncidence de longueurs. Remplacé par `Pos('_', X)`,
+il s'est mis à comparer des chaînes **vides** pour tout talent sans spécialité — `Pos` rend 0,
+`Copy(X, 1, 0)` rend `''` — donc tous les talents s'équivalaient et la grille d'augmentation
+affichait quatre fois le même. Forme finale : `Copy(X, 1, Pos('_', X + '_'))`, le `'_'` ajouté
+garantissant que le code entier soit comparé quand il n'y a pas de séparateur. **Règle
+générale : remplacer une longueur fixe par un `Pos` n'est pas gratuit — `Pos` a un cas de
+retour à zéro que la constante n'avait pas.**
+
+*Deux arbitrages de Nono, 05/09/2026.*
+- Le test des 12 caractères devait bien être durci, même s'il fonctionnait (fait ci-dessus).
+- **Une spécialité générique (`_*`) ne peut venir que du livre qui porte le code générique.**
+  `chargetalent.pas` l. 142 et `chargemetiercompetence.pas` l. 156 cherchent leurs branches
+  préfixe inclus : c'est **voulu**, et c'est désormais écrit en commentaire dans les deux
+  fichiers pour qu'un futur passage ne le prenne pas pour un bug. Conséquence assumée : un livre
+  ne peut pas ajouter de branche à un talent générique d'un autre livre.
 
 ---
 
@@ -4695,6 +4753,17 @@ chantier concerné, avec les détails techniques.
 ---
 
 ## 4. Pièges Lazarus / Free Pascal accumulés
+
+- **`Pos` rend 0 quand il ne trouve rien, et `Copy(X, 1, 0)` rend une chaîne VIDE.** Remplacer
+  une longueur fixe par un `Pos` paraît toujours plus sûr — ça ne l'est pas : la constante
+  n'avait pas de cas de retour à zéro. Deux chaînes vides étant égales, un test d'égalité se
+  met alors à répondre « oui » pour **tout**. Vu le 05/09/2026 (§2.46) : la grille
+  d'augmentation des talents affichait quatre fois le même talent. Parade employée :
+  `Pos('_', X + '_')`, qui rend `Length(X) + 1` quand le séparateur est absent, donc `Copy`
+  rend le code entier.
+- **Un identifiant du projet porte TOUJOURS son préfixe de livre.** Tout test sur ses premiers
+  caractères doit passer par `DecoupeCodeValeur` d'abord (§2.46). Un test de position fixe sur
+  un code complet ne lève aucune erreur : il répond simplement « non » pour toujours.
 
 - **Ne jamais appeler une primitive « sur toute l'image » à l'intérieur d'une boucle qui
   parcourt déjà toute l'image.** `RemplacerPixelParTransparent` (`pdfutils.pas`) appelait

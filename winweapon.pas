@@ -125,9 +125,14 @@ begin
               TabWeapon.RowCount := TabWeapon.RowCount + 1;
 
             TabWeapon.Cells[1, IndTab]   := PArme.CodeArme;
-            if copy(PArme.CodeArme,1,5) = EquipementMU then
+            // Le code porte son prefixe de livre (RULES-COMB_BASE_10) : tester les cinq
+            // premiers caracteres du code COMPLET donnait "RULES", donc AUCUNE arme ne
+            // matchait et toutes prenaient le libelle du else. Meme moule que
+            // GetTypeMetierEquipement (unitcalcul.pas l.218) : decouper d'abord.
+            DecoupeCodeValeur(PArme.CodeArme);
+            if copy(CodeValeur,1,5) = EquipementMU then
               TabWeapon.Cells[2, IndTab] := GetTexteLibelle('LAB_060')
-            else if copy(PArme.CodeArme,1,5) = EquipementCC then
+            else if copy(CodeValeur,1,5) = EquipementCC then
               TabWeapon.Cells[2, IndTab] := GetTexteLibelle('LAB_061')
             else
               TabWeapon.Cells[2, IndTab] := GetTexteLibelle('LAB_062');

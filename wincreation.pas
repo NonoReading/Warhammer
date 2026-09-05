@@ -1525,7 +1525,27 @@ end;
 
 procedure TWinCreations.TabRaceCompetenceDblClick(Sender: TObject);
   begin
-    CompetenceFenetre(TabRaceCompetence.Cells[1, TabRaceCompetence.Row]);
+    // Meme moule que TabMetierCompetenceDblClick, mais SANS colonne technique : un code
+    // d'ethnie encore au choix se reconnait a lui seul - il porte ValeurGenerique
+    // ("Trade (Any)") ou SeparateurMulti ("Trade (Farming or Mining)"). Une fois resolu il
+    // ne porte plus ni l'un ni l'autre, donc la condition s'eteint d'elle-meme.
+    // CONTEXT.md 2.45.
+    if (Pos(ValeurGenerique, TabRaceCompetence.Cells[1, TabRaceCompetence.Row]) > 0) or
+       (Pos(SeparateurMulti, TabRaceCompetence.Cells[1, TabRaceCompetence.Row]) > 0) then
+      begin
+        ChoixWinTypeFichier         := ConstXmlSousChapitreCompetence;
+        ChoixWinCompetence          := TabRaceCompetence.Cells[1, TabRaceCompetence.Row];
+        FenSpecialisation           := TWinSpecialisations.Create(Application);
+        FenSpecialisation.Position  := poOwnerFormCenter;
+        FenSpecialisation.ShowModal;
+        if SelectWinCompetence <> '' then
+          begin
+            TabRaceCompetence.Cells[1, TabRaceCompetence.Row] := SelectWinCompetence;
+            TabRaceCompetence.Cells[3, TabRaceCompetence.Row] := SelWinLibelle;
+          end;
+      end
+    else
+      CompetenceFenetre(TabRaceCompetence.Cells[1, TabRaceCompetence.Row]);
   end;
 
 procedure TWinCreations.TabTalentDblClick(Sender: TObject);
@@ -1654,6 +1674,17 @@ Function TWinCreations.PageEtapesChange(): boolean;
                 ShowMessage(Format(GetTexteLibelle('MESS_014'), [PRaceNb.NbPoint3]));
                 Ok := False;
               end;
+            // Pendant de la branche 6 : on refuse de quitter la phase tant qu'une ligne
+            // COCHEE porte encore un code non resolu. Ici la "quantite saisie" est une case
+            // a cocher, d'ou le test sur CompetenceRaceStates[4] / [5]. CONTEXT.md 2.45.
+            for IndTab := 1 to TabRaceCompetence.RowCount - 1 do
+              if (CompetenceRaceStates[4, IndTab] or CompetenceRaceStates[5, IndTab]) and
+                 ((Pos(ValeurGenerique, TabRaceCompetence.Cells[1, IndTab]) > 0) or
+                  (Pos(SeparateurMulti, TabRaceCompetence.Cells[1, IndTab]) > 0)) then
+                begin
+                  ShowMessage(GetTexteLibelle('MESS_042'));
+                  Ok := False;
+                end;
             result := Ok;
           end;
 

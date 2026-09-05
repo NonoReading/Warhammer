@@ -142,7 +142,13 @@ Procedure TWinSpecialisations.ChargeSpecialisation(CodeGenerique: String);
           For NbL := 1 to MaxL do
             begin
               Res                 := ExtractChaine(',',CodeGenerique, NbL);
-              case copy(res,1,5) of
+              // Le code porte son prefixe de livre (RULES-COMB_BASE_01) : tester les cinq
+              // premiers caracteres de Res donnait "RULES", jamais COMB_/PROJ_/MUNI_/ARMO_,
+              // donc TOUT tombait dans le else et s'affichait avec son code brut en libelle
+              // et "Various" en type. Meme moule que GetTypeMetierEquipement
+              // (unitcalcul.pas l.218) : on decoupe d'abord, on teste CodeValeur ensuite.
+              DecoupeCodeValeur(Res);
+              case copy(CodeValeur,1,5) of
                 EquipementCC,EquipementCT,EquipementMU:
                   begin
                     PArme         := chercheArme(res);

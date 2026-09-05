@@ -84,8 +84,6 @@ Function CheminNiveauImageMetierRace(CodeMetier: String; CodeRace: String; Nivea
 Function EstMetierEnfantDe(CodeMetier: String; CodeParent: String): Boolean;
 function ChercheCareerBonus(CodeBonus :String): StructureCareerBonus;
 function NiveauxDuCareerBonus(CodeBonus :String): TListCareerBonusNiveau;
-Procedure GreffesDesAppartenances(ListeAppartenance: String; Niveau: Integer;
-                                  out ListeCompetence: String; out ListeTalent: String);
 Function AppartenancesCandidates(CodeMetier: String; CodeRace: String;
                                  DejaAcquises: String): String;
 
@@ -140,74 +138,8 @@ Begin
       Result.Add(PNiveau);
 end;
 
-// Greffes apportees par les APPARTENANCES d'un personnage, tous paliers jusqu'au niveau
-// atteint inclus. Nations of Mankind p.6 : les competences et talents accordes par le
-// regiment sont traites "as if added to their Career". CONTEXT.md 2.44.
-//
-// ListeAppartenance = le champ Appartenance de la fiche, codes de CareerBonus separes par
-// des virgules. Niveau = le niveau de carriere ATTEINT.
-//
-// Cette procedure ne verifie NI le metier NI l'ethnie, et c'est voulu : le livre dit que
-// l'on conserve tout ce que le regiment a donne meme apres avoir quitte la carriere
-// ("If you leave your Regiment ... you maintain all additional Skills and Talents").
-// Les conditions Metier/Specie servent a PROPOSER l'appartenance a la saisie, pas a la
-// relire.
-//
-// Les deux resultats sortent dans la forme de liste habituelle du projet : elements
-// separes par des virgules, chaque element pouvant lui-meme porter un choix A/B avec
-// SeparateurMulti (Lore (Morr or Undead)). Rien n'est resolu ici.
-Procedure GreffesDesAppartenances(ListeAppartenance: String; Niveau: Integer;
-                                  out ListeCompetence: String; out ListeTalent: String);
-
-  // Concatene en evitant la virgule en tete et les elements vides.
-  Procedure Ajoute(var Cible: String; Ajout: String);
-  Begin
-    if Trim(Ajout) = '' then
-      Exit;
-    if Trim(Cible) = '' then
-      Cible := Trim(Ajout)
-    else
-      Cible := Cible + ',' + Trim(Ajout);
-  End;
-
-Var
-  Appartenances: TStringList;
-  Paliers:       TListCareerBonusNiveau;
-  PNiveau:       StructureCareerBonusNiveau;
-  Ind:           Integer;
-Begin
-  ListeCompetence := '';
-  ListeTalent     := '';
-  if (Trim(ListeAppartenance) = '') or (Niveau <= 0) then
-    Exit;
-
-  Appartenances := TStringList.Create;
-  try
-    ExtractStrings([','], [], PChar(ListeAppartenance), Appartenances);
-    for Ind := 0 to Appartenances.Count - 1 do
-      begin
-        if Trim(Appartenances[Ind]) = '' then
-          continue;
-        // NiveauxDuCareerBonus rend une liste dont l'APPELANT est proprietaire.
-        Paliers := NiveauxDuCareerBonus(Trim(Appartenances[Ind]));
-        try
-          for PNiveau in Paliers do
-            if (PNiveau.Niveau > 0) and (PNiveau.Niveau <= Niveau) then
-              begin
-                Ajoute(ListeCompetence, PNiveau.ListeCompetence);
-                Ajoute(ListeTalent,     PNiveau.ListeTalent);
-              end;
-        finally
-          Paliers.Free;
-        end;
-      end;
-  finally
-    Appartenances.Free;
-  end;
-End;
-
 // Appartenances qu'on peut PROPOSER a un personnage qui entre dans une carriere.
-// C'est le pendant de GreffesDesAppartenances : les deux conditions du livre ne servent
+// Les deux conditions du livre ne servent
 // qu'ICI, a la saisie, jamais a la relecture d'une fiche (on garde ce qu'un regiment a
 // donne meme apres l'avoir quitte). CONTEXT.md 2.44.
 //

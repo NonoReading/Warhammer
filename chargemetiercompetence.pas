@@ -153,6 +153,9 @@ function ListeMetierCompetence(CodeCompetence :String): TStringList;
     else if Pos(ValeurGenerique,CodeCompetence) > 0 then
       begin
         // compétence avec des spécialités
+        // Les branches sont cherchees PREFIXE DE LIVRE INCLUS, et c'est voulu (arbitre
+        // par Nono le 05/09/2026) : une specialite ne peut venir que du livre qui porte
+        // le code generique. Ne pas "corriger" en decoupant le prefixe.
         Deb   := Copy(CodeCompetence,1,Pos(ValeurGenerique, CodeCompetence));
         For PCompetence in ListCompetence do
           if (pos(Deb, PCompetence.CodeCompetence) = 1) and (pos(SeparateurMulti, PCompetence.codeCompetence) < 1) and (PCompetence.CodeCompetence <> CodeCompetence) then

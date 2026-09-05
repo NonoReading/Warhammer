@@ -6,28 +6,6 @@
 CORRECTIONS COURTES  (une ligne ou deux chacune)
 =========================================================================
 
-L EQUIPEMENT DE CARRIERE EST REDONNE EN DOUBLE ET SANS LIBELLE QUAND ON REVIENT DANS UNE
-CARRIERE DEJA EXERCEE. Constate le 04/09/2026 sur un Soldier passe Advisor puis revenu
-Soldier : la dague, la cuirasse et l uniforme apparaissent une seconde fois, et les deux
-premiers s affichent avec leur CODE brut (RULES-COMB_BASE_10, RULES-ARMO_05) en Description
-et "Various" en Kind. Une seule cause, la boucle "Equipement" du changement de carriere,
-winpersonnage.pas vers l.4675 : elle n ecrit que Cells[2] (le code) et Cells[3] (le type),
-jamais la colonne du LIBELLE. ARBITRE PAR NONO LE 04/09/2026 : revenir dans une carriere DOIT
-pouvoir redonner l equipement de depart - le doublon n est donc pas a interdire, c est
-l affichage sans libelle qui est le bug. Anterieur au chantier des appartenances.
-
-UNE COMPETENCE D ETHNIE "A OU B" OU "(ANY)" PEUT RECEVOIR SES POINTS SANS QU ON AIT CHOISI LA
-BRANCHE. Releve par Nono le 04/09/2026 sur la grille des competences de RACE de WinCreation :
-cocher 3 ou 5 points sur Trade (Farming or Mining) ou sur Trade (Any) enregistre la valeur sur
-le CODE COMPOSE, sans jamais demander laquelle. Anterieur a Nations of Mankind - les codes
-generiques sont dans des competences d ethnie du RULEBOOK lui-meme. CONCEPTION FAITE ET
-ARRETEE : CONTEXT.md 2.45, trois modifications dans wincreation.pas, rien a toucher dans
-WinSpecialisations. Reste a appliquer.
-
-SUPPRIMER GreffesDesAppartenances DANS chargemetier.pas. Sans appelant depuis la bascule de
-conception du 04/09/2026, et c est desormais verifie sur wincreation.pas aussi. Une ligne, a
-faire seule. CONTEXT.md 2.44.
-
 CRAFTSMAN (ARMOURER) ET MASTER TRADESMAN (GUNSMITH) SONT LE MEME METIER SOUS DEUX LIBELLES.
 RULES-T0092_ARMU est libelle "Craftsman (Armourer)" et son pendant RULES-T0157_ARMU "Master
 Tradesman (Gunsmith)". Releve le 04/09/2026 en saisissant Nuln, qui donne les deux ; on a

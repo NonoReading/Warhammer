@@ -2893,7 +2893,7 @@ begin
       PTalent                         := ChercheTalent(TabTalent.Cells[ColTalCode, NbTalent]);
       TabTalent.Cells[ColTalLib, NbTalent]    := PTalent.Libelle;
       if PTalent.SousTalent then
-        PTalent                       := ChercheTalent(copy(PTalent.CodeTalent,1,5)+'_*');
+        PTalent                       := ChercheTalent(Copy(PTalent.CodeTalent, 1, Pos('_', PTalent.CodeTalent) - 1)+'_*');
       TabTalent.Cells[ColTalMax, NbTalent]    := Ptalent.MaxiTalent;
       TalentAttribut(PTalent.Attribut);
       end;
@@ -2964,7 +2964,7 @@ begin
           PTalent                    := ChercheTalent(TabTalent.Cells[ColTalCode, Lig]);
           TabTalent.Cells[ColTalLib, Lig]    := PTalent.Libelle;
           if PTalent.SousTalent then
-            PTalent                  := ChercheTalent(copy(PTalent.CodeTalent,1,5)+'_*');
+            PTalent                  := ChercheTalent(Copy(PTalent.CodeTalent, 1, Pos('_', PTalent.CodeTalent) - 1)+'_*');
           TabTalent.Cells[ColTalMax, Lig]    := Ptalent.MaxiTalent;
           TabTalent.Cells[ColTalXp, Lig]    := IntToStr(CalculExperience(ConstXmlTalent, 0, StrToIntDef(TabTalent.Cells[ColTalNbAugm, Lig],0), PersonnageTalent.CodeTalent, ''));
           TalentAttribut(PTalent.Attribut);
@@ -4490,7 +4490,17 @@ Procedure TWinPersonnages.ChargeAugmentation();
                  TabAugmentationTalent.Cells[ColAugmTalNouveau, NbC] := TabTalent.Cells[ColTalNb, IndT];
                  break;
                end
-             else if (copy(TabTalent.Cells[ColTalCode, IndT],1,12) = copy(PersonnageTalent.CodeTalent,1,12)) then
+             // "Meme talent parent" : on compare les codes jusqu'au '_' inclus. C'etait
+             // ecrit en 12 caracteres FIXES, ce qui donnait "RULES-T0088_" par coincidence
+             // de longueurs et cassait des qu'un prefixe de livre ou un code n'avait pas la
+             // taille attendue.
+             // Le '_' ajoute dans le Pos n'est PAS decoratif : un talent SANS specialite n'a
+             // pas de '_', Pos rendrait 0, Copy(...,1,0) rendrait une chaine VIDE des deux
+             // cotes et TOUS les talents se seraient equivalus (constate le 05/09/2026 : la
+             // grille d'augmentation affichait quatre fois le meme talent). Avec le '_'
+             // ajoute, un code sans specialite se compare en entier.
+             else if (Copy(TabTalent.Cells[ColTalCode, IndT], 1, Pos('_', TabTalent.Cells[ColTalCode, IndT] + '_')) =
+                      Copy(PersonnageTalent.CodeTalent, 1, Pos('_', PersonnageTalent.CodeTalent + '_'))) then
                begin
                  TabAugmentationTalent.Cells[ColAugmTalCode, NbC]   := TabTalent.Cells[ColTalCode, IndT];
                  TabAugmentationTalent.Cells[ColAugmTalLib, NbC]    := TabTalent.Cells[ColTalLib, IndT];
@@ -4728,6 +4738,15 @@ Procedure TWinPersonnages.MajTables();
 
               TabEquipement.Cells[2, TabEquipement.RowCount-1] := CodEquip;
               TabEquipement.Cells[3, TabEquipement.RowCount-1] := TypEquip;
+              // La colonne du LIBELLE n'etait pas ecrite : la ligne restait vide jusqu'au
+              // rechargement du XML, qui y remettait le code brut. Un equipement divers n'a
+              // pas d'autre libelle que son propre texte ("uniform"), d'ou le else.
+              if TypEquip = TypeEquipWe then
+                TabEquipement.Cells[4, TabEquipement.RowCount-1] := ChercheArme(CodEquip).Libelle
+              else if TypEquip = TypeEquipAr then
+                TabEquipement.Cells[4, TabEquipement.RowCount-1] := ChercheArmure(CodEquip).Libelle
+              else
+                TabEquipement.Cells[4, TabEquipement.RowCount-1] := CodEquip;
             end;
 
           // Competence

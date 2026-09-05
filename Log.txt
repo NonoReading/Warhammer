@@ -1121,3 +1121,53 @@ CE QUE LA SESSION A APPRIS.
     livre : taille inchangee sur le poste, date avancee quand meme. Le meme envoi refait a
     l identique est passe. La verification de la TAILLE apres chaque ecriture reste
     obligatoire - c est elle, et elle seule, qui a vu le coup.
+
+05/09/2026 - LE 2.45 EST APPLIQUE, ET UNE FAMILLE ENTIERE DE BUGS "PREFIXE DE LIVRE" RATISSEE
+chargemetier.pas - GreffesDesAppartenances SUPPRIMEE (declaration, bloc de commentaire et
+   implementation, plus la phrase de AppartenancesCandidates qui la citait). Sans appelant
+   depuis la bascule de conception du 04/09. 14418 > 11688 octets.
+wincreation.pas - CONTEXT.md 2.45 applique, deux insertions. (1) TabRaceCompetenceDblClick
+   ouvre WinSpecialisations quand Cells[1] porte ValeurGenerique ou SeparateurMulti, et
+   reecrit code et libelle ; CompetenceFenetre reste en else. (2) Branche 5 de
+   PageEtapesChange : refus de phase avec MESS_042 tant qu une ligne dont
+   CompetenceRaceStates[4] ou [5] est vraie porte un code non resolu. Rien touche dans
+   WinSpecialisations, comme la conception le prevoyait. 146592 > 148479 octets.
+   EPROUVE : Humans (Averland) / Trade (Farming or Mining) - le refus tombe, le double-clic
+   propose les deux branches, la phase passe une fois choisie.
+unitequipement.pas, winspecialisation.pas, winweapon.pas, winpersonnage.pas - LA MEME FAUTE
+   A QUATRE ENDROITS : tester copy(Code,1,5) sur un identifiant COMPLET donne "RULES" et ne
+   matche jamais EquipementCC/CT/MU/AR. Corrige partout par DecoupeCodeValeur puis test sur
+   CodeValeur, moule de GetTypeMetierEquipement (unitcalcul.pas l.218). Et dans
+   XmlChargePersonnage, ChercheTalent(copy(Code,1,5)+'_*') cherchait RULES_* : remplace par
+   Copy(Code,1,Pos('_',Code)-1)+'_*', forme deja employee pdfpersonnage.pas l.1278.
+   winpersonnage.pas ecrit desormais aussi Cells[4], le LIBELLE, dans la boucle Equipement du
+   changement de carriere.
+chargetalent.pas, chargemetiercompetence.pas - COMMENTAIRE SEUL, aucun code touche : la
+   recherche des branches d un code generique se fait PREFIXE DE LIVRE INCLUS, arbitrage de
+   Nono du 05/09. Un livre ne peut donc pas ajouter de branche a un talent generique d un
+   autre livre. Ecrit dans le code pour que ca ne repasse pas pour un bug.
+CE QUE LA SESSION A APPRIS.
+(1) UN TYPE MAL CALCULE SE RELIT PLUS TARD COMME UNE DONNEE FAUSSE. Le "Various" de
+    GetTypeEquipement ne faisait pas qu afficher un mauvais libelle : c est ce type qui
+    choisit le sous-chapitre a l export, donc une dague repartait dans SUBCHAPTER_MISC et la
+    relecture n avait plus qu un texte libre a afficher. Ce qui etait note dans A FAIRE.txt
+    comme DEUX bugs distincts (doublon sans libelle d un cote, fenetre de choix illisible de
+    l autre) n en etait qu UN. Quand un type calcule sert aussi a ranger, remonter au calcul
+    avant de corriger l affichage.
+(2) LE XML TRANCHE PLUS VITE QUE L ECRAN. "Le XML a l air coherent mais pas l affichage" :
+    en ouvrant le fichier, les items etaient ecrits DEUX fois, une fois bien typee et une
+    fois dans MISC. L affichage etait fidele ; c est l ecriture qui fautait. Lire la donnee
+    sauvegardee avant de soupconner la couche d affichage.
+(3) REMPLACER UNE LONGUEUR FIXE PAR UN Pos N EST PAS GRATUIT. Pos rend 0 quand il ne trouve
+    pas, Copy(X,1,0) rend une chaine VIDE, et deux chaines vides sont egales : le test
+    "meme talent parent" s est mis a repondre oui pour TOUS les talents, quatre fois le meme
+    dans la grille d augmentation. Parade : Pos('_', X + '_'). Regression creee et corrigee
+    dans la meme session - le durcissement d un test doit se tester comme une correction.
+(4) L ECRITURE QUI REPOND "ECRIT" SANS ECRIRE S EST PRODUITE DEUX FOIS, les deux fois sur
+    winpersonnage.pas, le plus gros fichier envoye. Les deux fois la TAILLE relue sur le
+    poste etait celle d AVANT, et le meme envoi refait a l identique est passe. La date, elle,
+    avait avance dans les deux cas. Verifier la taille apres chaque ecriture n est pas une
+    precaution theorique.
+(5) UN SOUS-AGENT POUR RATISSER. La recherche du motif dans tous les .pas de la racine a ete
+    confiee a un sous-agent : il a rendu 3 vrais bugs, 2 cas douteux et 13 faux positifs
+    ecartes, sans charger la conversation principale des fichiers lus.

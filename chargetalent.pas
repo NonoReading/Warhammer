@@ -139,6 +139,9 @@ function ListeTalent(CodeTalent :String): TStringList;
     else if Pos(ValeurGenerique, CodeTalent) > 0 then
       begin
         // talent avec des spécialités
+        // Les branches sont cherchees PREFIXE DE LIVRE INCLUS, et c'est voulu (arbitre
+        // par Nono le 05/09/2026) : une specialite ne peut venir que du livre qui porte
+        // le code generique. Ne pas "corriger" en decoupant le prefixe.
         Deb := Copy(CodeTalent, 1, Pos(ValeurGenerique, CodeTalent));
         For PTalent in ListTalent do
           if (pos(Deb, PTalent.CodeTalent) = 1) and (pos(SeparateurMulti, PTalent.codeTalent) < 1) and (PTalent.CodeTalent <> CodeTalent) then
