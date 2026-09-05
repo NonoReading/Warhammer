@@ -6,23 +6,21 @@
 CORRECTIONS COURTES  (une ligne ou deux chacune)
 =========================================================================
 
-LE COUT XP DES CARRIERES ET DE L EQUIPEMENT EST DIVISE PAR 25 A CHAQUE SAUVEGARDE EN MODE
-XPDIV25. Trouve le 05/09/2026 sur Gunther Krieg, dont les trois lignes CHAPTER_OLDCAREER
-portent toutes "0" alors qu un changement de niveau coute 100. L affichage divise
-(winpersonnage.pas l.2910 pour les carrieres, l.3056 pour l equipement et les sorts :
-CalculOptionXpDiv25(CoutXp)) et la sauvegarde relit la cellule DEJA divisee (l.4728 et
-l.4867) : 100 devient 4, puis 0 au chargement suivant. Deux allers-retours et le cout est
-perdu. Non corrige. C est une PERTE DE DONNEE silencieuse, plus grave que le bug de la
-reduction MJ corrige le meme jour - a traiter en priorite.
+REPARER LES COUTS DE CARRIERE DEJA TOMBES A ZERO DANS LES DOSSIERS EXISTANTS. Sequelle du bug
+XpDiv25 corrige le 05/09/2026 (CONTEXT.md 2.48) : le correctif arrete l hemorragie, il ne
+restaure pas le passe. Gunther Krieg en a trois. Aucun calcul automatique possible, le montant
+depend du type de changement ; les tarifs de reference sont ConstXpNouveauNiveau,
+ConstXpChangerMetier, ConstXpChangerMetierIncomplet et ConstXpChangerClasse. A faire dossier
+par dossier, en editant CHAPTER_OLDCAREER a la main. Recenser d abord les dossiers touches :
+toute ligne CHAPTER_OLDCAREER a "0" est suspecte.
 
-DEUX BOUCLES SUR TABATTRIBUT S ARRETENT A LA COLONNE 11 ET COMMENCENT AU MAUVAIS ENDROIT.
-winpersonnage.pas l.4021 (For Ind := 1 to 11, controle d avancement) et l.4317 / l.4331
-(For Ind := 2 to 11, remplissage de TabAugmentationAttribut). Or ColAttLib = 1 est la colonne
-des libelles, les attributs vont de 2 a 14 : la premiere lit une colonne de texte, et les
-deux manquent Destin (12), Resilience (13) et Blessure (14). CalculTableExperience, elle,
-boucle correctement de 2 a ColCount-1. Repere le 05/09/2026, non corrige, a verifier avant
-de toucher : la borne 11 est peut-etre voulue pour exclure Destin et Resilience du controle
-d avancement de carriere.
+[REGLE LE 05/09/2026 - conserve comme point tranche, ne plus le ressortir en anomalie]
+LES BORNES "TO 11" SUR TABATTRIBUT NE SONT PAS UN BUG. ColAttCC..ColAttSoc = 2..11, puis
+Destin 12, Resilience 13, Blessure 14 : la borne s arrete pile apres Sociabilite, c est une
+FRONTIERE METIER. Destin et Resilience ne montent pas par l experience (confirme par Nono) et
+Blessure est derivee de F, E et FM. Les deux boucles de MajTables sont donc justes. Seule
+CalculAvancement avait une borne BASSE fautive (For Ind := 1 lisait ColAttLib, colonne de
+texte), sans effet observable : corrigee en 2. Voir CONTEXT.md 2.48.
 
 CRAFTSMAN (ARMOURER) ET MASTER TRADESMAN (GUNSMITH) SONT LE MEME METIER SOUS DEUX LIBELLES.
 RULES-T0092_ARMU est libelle "Craftsman (Armourer)" et son pendant RULES-T0157_ARMU "Master
@@ -200,32 +198,38 @@ quelle ligne d equipement. Vrai depuis toujours pour les qualites du Rulebook, m
 visible depuis que des accessoires y sont entres (04/09/2026). A traiter avec le branchement
 du calcul ci-dessus, pas avant.
 
-CORRIGER LES PREFIXES DE LIVRE DANS LES REFERENCES, PARTOUT ET PAS SEULEMENT DANS LES
-QUALITES. Regle du projet (rappelee par Nono le 04/09/2026) : chaque livre repart a 1 dans
-sa numerotation, justement pour ne pas avoir a connaitre le dernier numero pris ailleurs.
-Cela n est vrai que si les REFERENCES portent le prefixe du livre. Or elles ne le portent
-pas toujours. Constate sur les qualites d arme : Archives I ecrit <Quality>"WEAPB35"</Quality>
-pour designer sa propre ARCH1-WEAPB35, et Up in Arms <Quality>"WEAPB31"</Quality> pour
-UPINA-WEAPB31 ; ca ne marche que parce que ces deux livres ont numerote A LA SUITE du
-Rulebook (31 a 37 ne sont pris qu une fois dans toute la base) au lieu de repartir a 1. Si un
-livre repart a WEAPB01, la reference nue "WEAPB01" sera resolue en RULES-WEAPB01 (Wrap) - une
-resolution fausse, et SILENCIEUSE. A l inverse <Talent name="NATIO-T0001"> est ecrit prefixe
-et se comporte bien.
-A FAIRE, dans cet ordre :
- - recenser TOUTES les familles de codes et, pour chacune, si les references sont prefixees
-   ou nues (qualites d arme WEAPB, qualites d armure ARMOB, armes, armures, types ARMOT,
-   emplacements ARMOL, disponibilites DISPO, competences, talents, carrieres, sorts...) ;
- - lire CompareRechercheValeur pour etablir ce qu elle accepte exactement - c est elle qui
-   decide si un code prefixe et un code nu se resolvent pareil. Non lue a ce jour, le
-   commentaire de ChargeArmeBonus dit qu elle "accepte le code prefixe comme non prefixe" ;
- - decider la regle unique : reference toujours prefixee, et corriger les livres existants ;
- - attention au piege deja documente dans chargearmebonus.pas : un code prefixe d un autre
-   (WEAPB4 dans WEAPB40) ; l equilibre actuel ne tient qu au fait que les codes font deux
-   chiffres. GetAllArmureBonusLibelle, lui, fait ENCORE un StringReplace de sous-chaine.
-EN ATTENDANT, les nouveaux livres continuent de numeroter A LA SUITE pour les qualites
-d arme ET d armure. Fait le 04/09/2026 : Nations of Mankind est parti de WEAPB38 et de
-ARMOB_09. La table DATA_CRAFTMANSHIP, elle, repart bien a 01 sans risque - CodeFabrication
-porte l identifiant complet avec son prefixe (xmlexportimport.pas l.2436).
+CORRIGER LES SIX REFERENCES NUES EN COLLISION - URGENT, DONNEE FAUSSE EN PRODUCTION.
+Trouve le 05/09/2026 (CONTEXT.md 2.49). Trois codes sont definis dans DEUX livres et six
+references nues pointent dessus, donc la resolution depend de l ordre de chargement :
+ - ARMOB_10, references dans Archives III l.540 et l.550 : ARCH3-ARMOB_10 "Overcoat" contre
+   NATIO-ARMOB_10 "Corrupted", qui inflige 1d10+8 points de Corruption ;
+ - ARMOB_11, references dans Nations l.10495 et l.10537 : ARCH3-ARMOB_11 "Visor" contre
+   NATIO-ARMOB_11 "Missile Resistant" ;
+ - WEAPB38, reference dans Nations l.10870 : NAGGA-WEAPB38 "Barbed" contre NATIO-WEAPB38
+   "Concealed".
+A FAIRE : verifier dans les PDF quelle qualite etait voulue a chacun des six endroits, puis
+ecrire la reference PREFIXEE. Correctif de donnee, independant du chantier ci-dessous.
+
+PREFIXER LES 889 REFERENCES NUES DE DATABASE. Chantier de fond, conception faite le
+05/09/2026 dans CONTEXT.md 2.49 - lire cette section avant de commencer, elle porte le
+comportement exact de CompareRechercheValeur et le plan en 5 etapes. En resume :
+ - la tolerance de VerifieRecherche porte sur le SECOND argument seulement ; une reference
+   nue matche la premiere entree portant ce code nu, quel que soit son livre. La resolution
+   va donc VERS LE PREMIER LIVRE CHARGE, et non vers le Rulebook comme on le croyait ;
+ - 889 references nues, 65 codes distincts, huit familles seulement : DISPO 334, CLASS 166,
+   WEAPR 146, ARMOT 71, ARMOL 68, WEAPB 66, ARMOB 30. Tout le reste est propre ;
+ - l etape 2 (prefixage) est mecanisable sans changement de comportement : chaque code nu n a
+   aujourd hui qu une resolution possible, le script ecrit le prefixe du livre qui resout
+   actuellement ;
+ - NE PAS durcir VerifieRecherche avant d avoir prefixe : cela casserait 889 references d un
+   coup ;
+ - a part : le StringReplace de sous-chaine encore present dans GetAllArmureBonusLibelle,
+   dernier vestige du piege WEAPB4 / WEAPB40.
+EN ATTENDANT, les nouveaux livres continuent de numeroter A LA SUITE pour les qualites d arme
+et d armure, mais en verifiant dans TOUS LES LIVRES et plus seulement dans le Rulebook : c est
+cette verification manquante qui a produit les trois collisions ci-dessus. La table
+DATA_CRAFTMANSHIP, elle, repart bien a 01 sans risque - CodeFabrication porte l identifiant
+complet avec son prefixe (xmlexportimport.pas l.2436).
 
 NATIONS OF MANKIND 3D-2 : LES ONZE REGIMENTS OF RENOWN NE RENTRENT PAS DANS LA TABLE.
 Condition = niveau 3 atteint et non l ethnie seule ; l effet comprend des TRAPPINGS

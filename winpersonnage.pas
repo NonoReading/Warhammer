@@ -235,6 +235,7 @@ type
   Function CalculXpMj(TypeDonnee: String; CodeDonnee:String): Integer;
   Function CalculTalComp(Debut: Integer; Fin: Integer; Talent:String): integer;
   Function CalculOptionXpDiv25(Xp: Integer): Integer;
+  Function CalculOptionXpDiv25Inverse(Xp: Integer): Integer;
 
   // Xml
   Function XmlDebut(TypeDonnee: string): String;
@@ -4014,8 +4015,11 @@ procedure TWinPersonnages.CalculAvancement();
     Val                       := 5 * StrToInt(MetierNvEnCours);
 
     // Attributs
+    // Bornes : 2 = premiere caracteristique (1 est la colonne des libelles),
+    // 11 = Sociabilite. Destin (12), Resilience (13) et Blessure (14) sont exclus
+    // volontairement : ils ne montent pas par l'experience.
     Nb := 0;
-    for Ind := 1 to 11 do
+    for Ind := 2 to 11 do
         if (StrToIntDef(TabAttribut.Cells[Ind, LigAttImage],0) >= 1) and
            (StrToIntDef(TabAttribut.Cells[Ind, LigAttImage],0) <= StrToInt(MetierNvEnCours)) and
            (StrToIntDef(TabAttribut.Cells[Ind, LigAttBonus],0) >= Val) then
@@ -4726,7 +4730,7 @@ Procedure TWinPersonnages.MajTables();
             begin
               PersonnageMetier.CodeMetier   := TabCarriere.Cells[1, Ind];
               PersonnageMetier.NiveauMetier := StrToIntDef(TabCarriere.Cells[2, Ind],0);
-              PersonnageMetier.CoutXp       := StrToIntDef(TabCarriere.Cells[4, Ind],0);
+              PersonnageMetier.CoutXp       := CalculOptionXpDiv25Inverse(StrToIntDef(TabCarriere.Cells[4, Ind],0));
               Personnage.MetierAncien       += [PersonnageMetier];
             end;
 
@@ -4865,7 +4869,7 @@ Procedure TWinPersonnages.MajTables();
           begin
             PersonnageEquipement.TypeEquipement    := TypeEquipSp;
             PersonnageEquipement.QualiteEquipement := '';
-            PersonnageEquipement.CoutXp            := StrToIntDef(TabEquipement.Cells[5, Ind],0);
+            PersonnageEquipement.CoutXp            := CalculOptionXpDiv25Inverse(StrToIntDef(TabEquipement.Cells[5, Ind],0));
           end
         else
           begin
@@ -5135,6 +5139,16 @@ Function TWinPersonnages.CalculOptionXpDiv25(Xp: Integer): Integer;
   begin
     if CheckBoxXpDiv25.checked then
       Result := trunc(Xp / 25)
+    else
+      Result := Xp;
+  end;
+
+Function TWinPersonnages.CalculOptionXpDiv25Inverse(Xp: Integer): Integer;
+  // Inverse de CalculOptionXpDiv25 : les grilles portent des unites DIVISEES,
+  // le XML porte de l'XP ABSOLUE. A n'appeler qu'au moment d'ecrire dans Personnage.
+  begin
+    if CheckBoxXpDiv25.checked then
+      Result := Xp * 25
     else
       Result := Xp;
   end;

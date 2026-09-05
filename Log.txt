@@ -1226,3 +1226,62 @@ CE QUE LA SESSION A APPRIS.
     fautif. C est ce qui a aussi fait sortir le bug (a).
 (4) UNE TRACE TEMPORAIRE AVEC DES CROCHETS. Encadrer les valeurs affichees rend visibles le
     vide et l espace parasite, les deux cas qu une lecture du code ne peut pas exclure.
+05/09/2026 (SOIR) - LA PERTE DE DONNEE XPDIV25, ET LE RECENSEMENT DES PREFIXES DE REFERENCE
+BUG CORRIGE : EN MODE XPDIV25 LE COUT DES CARRIERES ET DE L EQUIPEMENT ETAIT DIVISE A CHAQUE
+   SAUVEGARDE. Trois lignes CHAPTER_OLDCAREER de Gunther Krieg a "0" alors qu un changement
+   de niveau coute 100. La cause n est PAS l affichage : les grilles de WinPersonnage sont
+   coherentes dans le monde divise (EditNeedRealXp est deja divise l.1340, CalculTableExperience
+   compare des cellules divisees a EditTotalXp25 divise, XpSortCout et CalculXpTotal rendent
+   du divise). Le seul maillon fautif etait la SAUVEGARDE, qui reversait une cellule en unites
+   divisees dans CoutXp, champ qui porte de l XP ABSOLUE : 100 devenait 4, puis 0.
+   CORRECTION : CalculOptionXpDiv25Inverse (Xp * 25 si l option est cochee), declaree l.238 et
+   ecrite en fin d unite, appelee l.4730 pour les carrieres et l.4869 pour l equipement et les
+   sorts. 229929 > 230391 octets. EPROUVE : une carriere a 100 ressort "100" dans le XML et y
+   reste apres plusieurs sauvegardes.
+   LIMITE ASSUMEE : un cout non multiple de 25 saisi en mode normal puis resauve en XpDiv25
+   s arrondit (110 > 100). La division tronquante a deja perdu l information a l affichage.
+   NON REPARE : les couts deja tombes a zero dans les dossiers existants. Aucun calcul
+   automatique possible, le montant depend du type de changement. Reste dans A FAIRE.txt.
+FAUX BUG ECARTE : LES BORNES "TO 11" SUR TABATTRIBUT. A FAIRE.txt signalait trois boucles
+   bornees a 11 alors que ColCount vaut 15. Verification : ColAttCC..ColAttSoc = 2..11, puis
+   Destin 12, Resilience 13, Blessure 14. La borne s arrete pile apres Sociabilite, c est une
+   FRONTIERE METIER - Destin et Resilience ne montent pas par l experience (confirme par Nono)
+   et Blessure est derivee de F, E et FM. Les deux boucles de MajTables sont justes. Seule
+   CalculAvancement avait une borne BASSE fautive (For Ind := 1 lisait ColAttLib, une colonne
+   de texte), sans effet observable puisque StrToIntDef rend 0 et que le test exige >= 1.
+   Corrigee en 2, avec un commentaire pour que la borne 11 ne soit pas re-signalee. 230613 octets.
+CONCEPTION MENEE : LES PREFIXES DE LIVRE DANS LES REFERENCES (CONTEXT.md 2.49). Code non ecrit.
+   CE QUE COMPARERECHERCHEVALEUR ACCEPTE : match si (livre_recherche = livre_valeur et codes
+   egaux) OU si (livre_valeur = '' et codes egaux). La tolerance porte sur le SECOND argument
+   seulement. Aux points d appel du type ChercheArmeBonus, ce second argument est la REFERENCE :
+   une reference nue matche donc la premiere entree de la liste portant ce code nu, quel que
+   soit son livre. La resolution n est donc pas "vers le Rulebook" comme on le croyait, mais
+   VERS LE PREMIER CHARGE - ajouter ou reordonner un livre peut changer le sens d une donnee
+   deja saisie. Et l asymetrie se RETOURNE si un appelant inverse ses arguments : la reference
+   nue passee en premier ne matche plus rien et l enregistrement revient vide, en silence.
+   RECENSEMENT SUR LES 19 FICHIERS DE DATABASE : 889 references nues, 65 codes distincts,
+   concentrees dans huit familles - DISPO 334, CLASS 166, WEAPR 146, ARMOT 71, ARMOL 68,
+   WEAPB 66, ARMOB 30. Tout le reste est prefixe proprement (WORK 3155, ATTR 2670, RACE,
+   SPECIE, COMB, MIRAC, BENED...). Le defaut est donc CIRCONSCRIT.
+   TROIS COLLISIONS SONT DEJA ACTIVES, ce que A FAIRE.txt disait encore theorique : ARMOB_10
+   est a la fois ARCH3 "Overcoat" et NATIO "Corrupted" (1d10+8 points de Corruption),
+   ARMOB_11 est ARCH3 "Visor" et NATIO "Missile Resistant", WEAPB38 est NAGGA "Barbed" et
+   NATIO "Concealed". Six references nues affichent donc aujourd hui la mauvaise qualite.
+CE QUE LA SESSION A APPRIS.
+(1) UNE GRILLE PEUT AVOIR SA PROPRE UNITE. Avant de corriger un affichage qui "divise trop",
+    verifier dans quelle unite travaille TOUTE la chaine. Ici tout etait divise et coherent ;
+    la faute etait a la FRONTIERE entre la grille et le XML, la ou l unite change. Chercher
+    le bug au point de conversion, pas au point d affichage.
+(2) UNE BORNE QUI TOMBE PILE SUR UNE FRONTIERE METIER N EST PAS UNE ERREUR DE COMPTAGE.
+    "ColCount vaut 15 donc 11 est faux" etait un raisonnement de structure applique a une
+    regle de jeu. Lire les constantes de colonnes avant de conclure.
+(3) UNE PARADE QUI DEMANDE DE CONNAITRE L ETAT GLOBAL N EST PAS UNE PARADE. "Numeroter a la
+    suite" devait eviter d avoir a connaitre le dernier numero pris ailleurs, et exigeait
+    exactement cela. Elle a tenu tant qu il y avait peu de livres, puis a lache en silence.
+(4) L ECRITURE VERS LE POSTE S EST PERDUE UNE TROISIEME FOIS. Envoi annonce ecrit, date
+    avancee, taille inchangee (230391 au lieu de 230613). Reemettre le meme envoi a suffi.
+    La taille reste le seul indicateur qui le voie.
+(5) TROIS FOIS DANS LA JOURNEE, L ENTREE D A FAIRE.TXT ETAIT PLUS FAUSSE QUE LE CODE : le
+    bug XpDiv25 etait mal localise, les bornes 11 n en etaient pas un, et les collisions de
+    prefixes etaient decrites comme futures alors qu elles etaient deja la. Une entree de
+    backlog est un SIGNALEMENT, pas un diagnostic ; la revalider avant de coder.

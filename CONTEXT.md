@@ -1,22 +1,26 @@
 # Warhammer — Contexte projet
 
-**Dernière mise à jour : 05/09/2026 — le §2.47 clôt la fiche XP : la réduction d'XP du MJ
-était appariée sur le RÉSUMÉ TRADUIT de l'attribut (`E` en français, `T` en anglais) et
-disparaissait silencieusement dès que la langue changeait. Elle porte désormais le code
-complet préfixé. Même famille que le §2.46 : un test qui compare autre chose que
-l'identifiant.** Deux défauts trouvés en chemin et NON corrigés sont dans `A FAIRE.txt`,
-dont un prioritaire : **en mode XpDiv25, le coût XP des carrières et de l'équipement est
-divisé par 25 à chaque sauvegarde** — perte de donnée silencieuse, voir §2.47.
-Les points de reprise du chantier des appartenances (§2.44) sont INCHANGÉS et restent les
-prochains : rendre l'appartenance visible sur la fiche et dans le PDF, le 3d-3 (ordres de
-chevalerie, conception à faire), et les onze Regiments of Renown. `GreffesDesAppartenances`
-est supprimée, cet item-là est clos.
-⚠️ Lire le §0 sur **l'écriture qui répond « écrit » sans écrire** : elle s'est reproduite DEUX
-fois le 05/09, et les deux fois c'est la TAILLE du fichier, jamais la date, qui l'a vue.
+**Dernière mise à jour : 05/09/2026 (soir) — le §2.48 clôt la perte de donnée XpDiv25 :
+les grilles de WinPersonnage travaillent en unités DIVISÉES et la sauvegarde reversait
+telles quelles ces unités dans un champ qui porte de l'XP ABSOLUE, donc 100 devenait 4
+puis 0. `CalculOptionXpDiv25Inverse` rétablit l'échelle à l'écriture. Le §2.49 ouvre le
+chantier des PRÉFIXES DE LIVRE DANS LES RÉFÉRENCES : la conception est faite, le code
+n'est pas écrit, et le constat est plus grave que ce qu'annonçait `A FAIRE.txt` —
+**trois collisions sont DÉJÀ actives en base** (`ARMOB_10`, `ARMOB_11`, `WEAPB38`),
+six références nues affichent donc aujourd'hui la mauvaise qualité.**
+
+PROCHAINE ÉTAPE, dans l'ordre : corriger ces six références (§2.49 étape 1, c'est de la
+donnée fausse en production), puis préfixer les 889 références nues. Les points de reprise
+du chantier des appartenances (§2.44) sont INCHANGÉS : rendre l'appartenance visible sur la
+fiche et dans le PDF, le 3d-3 (ordres de chevalerie, bloqué par « le modèle ne porte pas
+d'effet de règle »), et les onze Regiments of Renown.
+
+⚠️ Lire le §0 sur **l'écriture qui répond « écrit » sans écrire** : elle s'est reproduite
+une TROISIÈME fois le 05/09 au soir, et c'est encore la TAILLE du fichier, jamais la date,
+qui l'a vue. Réémettre exactement le même envoi a suffi.
 Ce fichier remplace tous les anciens
 `CONTEXT*.md` / `INDEX*.md` / `RESUME*.md` / `SESSION*.md`. Il n'y en a plus
 qu'un : celui-ci. On ne le duplique jamais, on l'édite en place.
-
 ---
 
 ## 0. Comment travailler avec moi (règles validées par Nono)
@@ -4816,6 +4820,132 @@ XML du personnage.
   ce qui a aussi fait sortir le défaut n°1 ci-dessus.
 - **Une trace temporaire avec des crochets.** Encadrer les valeurs affichées rend visibles le
   vide et l'espace parasite, les deux cas qu'une lecture du code ne peut pas exclure.
+
+
+### 2.48 En mode XpDiv25, le coût des carrières et de l'équipement était divisé à chaque sauvegarde — corrigé (05/09/2026)
+
+**Le symptôme.** Les trois lignes `CHAPTER_OLDCAREER` de Gunther Krieg portaient `"0"` alors
+qu'un changement de niveau coûte 100. Perte de donnée silencieuse, en deux allers-retours.
+
+**La cause, et ce qu'elle n'est PAS.** Le premier réflexe — « l'affichage divise, donc
+l'affichage est fautif » — est faux, et c'est le point à retenir. Les grilles de
+WinPersonnage sont **cohérentes dans le monde divisé**, et le vérifier a évité une
+correction à côté :
+- `EditNeedRealXp` est déjà divisé (l.1340 : `XpNeed := CalculOptionXpDiv25(XpNeed)` avant
+  de fixer `MaxValue`), donc `TabCarriere.Cells[4]` reçoit du divisé en l.4717 comme en
+  l.2907 — les deux écritures sont d'accord entre elles ;
+- `CalculTableExperience` (l.4235) somme ces cellules divisées et les compare à
+  `EditTotalXp25`, divisé lui aussi ;
+- `XpSortCout` (l.1229) et `CalculXpTotal` (l.4166) rendent également du divisé.
+
+Le seul maillon fautif était la **sauvegarde**, qui reversait une cellule en unités divisées
+dans `CoutXp`, champ qui porte de l'XP **absolue** dans le XML. Au rechargement,
+`CalculOptionXpDiv25` redivisait : 100 → 4 → 0.
+
+**Correction (4 endroits, un seul point de compilation).** `winpersonnage.pas` :
+déclaration l.238 et corps en fin d'unité de `CalculOptionXpDiv25Inverse` (`Xp * 25` si
+l'option est cochée, identité sinon) ; appel en l.4730 (`PersonnageMetier.CoutXp`) et en
+l.4869 (`PersonnageEquipement.CoutXp`). 229 929 → 230 391 octets. ÉPROUVÉ : une carrière à
+100 ressort `"100"` dans `CHAPTER_OLDCAREER` et y reste après plusieurs sauvegardes.
+
+**Limite connue, assumée.** Un coût non multiple de 25 saisi en mode normal, puis resauvé en
+mode XpDiv25, s'arrondit (110 → 100) : la division tronquante a déjà perdu l'information à
+l'affichage. Inhérent au mode, pas au correctif.
+
+**Non réparé.** Les coûts déjà tombés à zéro dans les dossiers existants. Aucun calcul
+automatique possible — le montant dépend du type de changement. Les tarifs de référence sont
+`ConstXpNouveauNiveau`, `ConstXpChangerMetier`, `ConstXpChangerMetierIncomplet` et
+`ConstXpChangerClasse`. Reste dans `A FAIRE.txt`.
+
+**Au passage : les bornes `to 11` sur `TabAttribut` ne sont PAS un bug.** `A FAIRE.txt`
+signalait trois boucles bornées à 11 alors que `ColCount` vaut 15. Vérification faite :
+`ColAttCC..ColAttSoc = 2..11`, puis Destin (12), Résilience (13) et Blessure (14). La borne
+s'arrête pile après Sociabilité, c'est une **frontière métier** : Destin et Résilience ne
+montent pas par l'expérience (confirmé par Nono), et Blessure est une valeur dérivée
+(F, E, FM) qu'augmenter directement ferait écraser au recalcul. Les deux boucles de
+`MajTables` (l.4315, l.4329) sont donc justes. Seule `CalculAvancement` avait une borne
+BASSE fautive — `for Ind := 1` lisait `ColAttLib`, une colonne de texte — sans effet
+observable, `StrToIntDef` rendant 0 et le test exigeant `>= 1`. Corrigée en `2`, avec trois
+lignes de commentaire pour que la borne 11 ne soit pas re-signalée comme un bug. 230 613
+octets.
+
+### 2.49 Les préfixes de livre dans les références — CONCEPTION FAITE, CODE NON ÉCRIT (05/09/2026)
+
+**La règle du projet.** Chaque livre repart à 1 dans sa numérotation, précisément pour ne
+pas avoir à connaître le dernier numéro pris ailleurs. Cela n'est vrai que si les
+**références** portent le préfixe du livre.
+
+**Ce que `CompareRechercheValeur` accepte exactement** (`unitcalcul.pas` l.453, qui délègue à
+`VerifieRecherche`, `chargeconstantes.pas` l.1071) :
+
+```
+match si  (livre_recherche = livre_valeur  et  codes égaux)
+   ou si  (livre_valeur = ''               et  codes égaux)
+```
+
+La tolérance porte sur le **second** argument, et sur lui seul. Aux points d'appel du type
+`ChercheArmeBonus`, le second argument est la **référence à résoudre** : une référence nue
+matche donc la première entrée de la liste portant ce code nu, **quel que soit son livre**.
+Deux conséquences que le commentaire de `chargearmebonus.pas` ne dit pas :
+- la résolution n'est pas « vers le Rulebook », elle est **vers le premier chargé**. Ajouter,
+  renommer ou réordonner un livre peut changer silencieusement le sens d'une donnée déjà
+  saisie ;
+- l'asymétrie se **retourne** si un appelant inverse ses arguments : une référence nue passée
+  en PREMIER contre une entrée préfixée ne matche plus du tout, et l'enregistrement revient
+  vide, également en silence. Recenser les points d'appel fait partie du travail.
+
+**Recensement (05/09/2026, sur les 19 fichiers de `DATABASE\`).** 889 références nues, sur
+65 codes distincts, concentrées dans huit familles :
+
+| Famille | préfixées | nues |
+|---|---|---|
+| DISPO | 5 | 334 |
+| CLASS | 10 | 166 |
+| WEAPR | 7 | 146 |
+| ARMOT | 16 | 71 |
+| ARMOL | 17 | 68 |
+| WEAPB | 44 | 66 |
+| ARMOB | 19 | 30 |
+
+Tout le reste est préfixé proprement : WORK (3 155), ATTR (2 670), COMPSAVOIR, RACE, SPECIE,
+COMB, MIRAC, BENED… **Le défaut est donc circonscrit**, ce qui rend la correction abordable.
+Faux positifs du comptage, à ne pas re-signaler : `NIV_HELF` est un nom de fichier image via
+`<PictureLevel>`, et `CORRUPTION_PHYSICAL` / `COMPDISC_URBAN` sont des vocabulaires fermés
+portés par le code.
+
+**LE POINT IMPORTANT : la collision n'est plus théorique.** `A FAIRE.txt` affirmait que ça
+tenait parce que les livres avaient numéroté à la suite du Rulebook. C'est FAUX depuis
+Nations of Mankind. Trois codes sont définis dans deux livres, et six références nues
+pointent dessus :
+
+| Référence nue | définie comme | et comme |
+|---|---|---|
+| `ARMOB_10` (Archives III l.540 et l.550) | `ARCH3-ARMOB_10` *Overcoat* | `NATIO-ARMOB_10` *Corrupted* |
+| `ARMOB_11` (Nations l.10495 et l.10537) | `ARCH3-ARMOB_11` *Visor* | `NATIO-ARMOB_11` *Missile Resistant* |
+| `WEAPB38` (Nations l.10870) | `NAGGA-WEAPB38` *Barbed* | `NATIO-WEAPB38` *Concealed* |
+
+Ce ne sont pas des nuances : « Overcoat » contre « Corrupted », qui inflige 1d10+8 points de
+Corruption. La parade « numéroter à la suite » a échoué **parce qu'elle demandait de
+connaître le dernier numéro pris dans tous les livres — exactement ce qu'elle prétendait
+éviter**.
+
+**Plan retenu, dans cet ordre.**
+1. Corriger les six références en collision, en vérifiant dans les PDF quelle qualité était
+   voulue. Correctif de DONNÉE, immédiat, indépendant du reste. **C'est la prochaine étape.**
+2. Préfixer les 889 références nues, famille par famille. Mécanisable : chaque code nu n'a
+   aujourd'hui qu'une résolution possible, donc le script écrit le préfixe du livre qui
+   résout actuellement — zéro changement de comportement par construction.
+3. Recenser les points d'appel de `CompareRechercheValeur` et repérer ceux qui inversent
+   leurs arguments.
+4. Seulement ENSUITE, durcir `VerifieRecherche` : une référence nue devient une erreur
+   visible au lieu d'une résolution au hasard. Fait avant l'étape 2, ce durcissement casse
+   889 références d'un coup.
+5. À part : le `StringReplace` de sous-chaîne encore présent dans
+   `GetAllArmureBonusLibelle`, dernier vestige du piège `WEAPB4` / `WEAPB40`.
+
+**En attendant l'étape 4**, les nouveaux livres continuent de numéroter à la suite pour les
+qualités d'arme et d'armure — en vérifiant désormais dans TOUS les livres, pas seulement
+dans le Rulebook : c'est cette vérification manquante qui a produit les trois collisions.
 
 ---
 
