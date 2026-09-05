@@ -1285,3 +1285,48 @@ CE QUE LA SESSION A APPRIS.
     bug XpDiv25 etait mal localise, les bornes 11 n en etaient pas un, et les collisions de
     prefixes etaient decrites comme futures alors qu elles etaient deja la. Une entree de
     backlog est un SIGNALEMENT, pas un diagnostic ; la revalider avant de coder.
+
+05/09/2026 - PREFIXES DE LIVRE DANS LES REFERENCES DE QUALITE : COLLISIONS CORRIGEES ET
+             REFERENCES PREFIXEES (CONTEXT.md 2.49, etapes 1, 2 et 5)
+   ETAPE 1 - LES COLLISIONS ETAIENT CINQ, PAS TROIS, ET VINGT-TROIS REFERENCES, PAS SIX.
+   Le recensement de la veille ne voyait que les <Quality> dont le code est SEUL ; les codes
+   places dans une liste separee par des virgules lui echappaient. En les comptant : ARMOB_09
+   (ARCH3 "Reinforced" / NATIO "Spiked") et ARMOB_12 (ARCH3 "Requires Kit" / NATIO "Blinds the
+   view") etaient en collision eux aussi. Les 23 references ont ete prefixees vers le livre de
+   l objet qui les porte ; l intention etait lisible sans ouvrir un PDF (une brigandine n est
+   pas "Corrupted", un casque a une visiere, des Barbed Bolts sont Barbed, les pieces de Chaos
+   de Nations sont Corrupted et Spiked, un Stechzeug Helm bouche la vue, une Hidden Wrist Blade
+   est Concealed).
+   ETAPE 5 AVANT L ETAPE 2 - GETALLARMUREBONUSLIBELLE BLOQUAIT LE PREFIXAGE. La fonction
+   (chargearmurebonus.pas) retirait le prefixe du code declare puis faisait un StringReplace de
+   SOUS-CHAINE sur la liste entiere : sur "RULES-ARMOB_02" elle aurait remplace le code et
+   laisse le prefixe devant le libelle, affichant "RULES-Partial" sur la fiche et dans le PDF.
+   Reecrite sur le modele de GetAllArmeBonusLibelle, deja corrigee : decoupage de la liste puis
+   resolution de chaque code ENTIER par ChercheArmureBonus, qui passe par CompareRechercheValeur
+   et accepte le code prefixe comme le code nu. Le point 5 du plan devait donc passer AVANT le
+   point 2, pas apres.
+   ETAPE 2 - 374 LIGNES PREFIXEES SUR 11 LIVRES, ET CINQ DES HUIT FAMILLES N ETAIENT PAS DES
+   REFERENCES. DISPO, CLASS, WEAPR, ARMOT et ARMOL n ont AUCUNE definition id= nulle part dans
+   DATABASE : ce sont des vocabulaires FERMES portes par le code, comme CORRUPTION_PHYSICAL.
+   Les prefixer les aurait casses. Le chantier ne portait donc que sur ARMOB et WEAPB. Le script
+   n ecrit un prefixe que si le code a EXACTEMENT une definition dans tout DATABASE, ce qui rend
+   le resultat independant de l ordre de chargement d INI.TXT. Les deux formes particulieres
+   sont conservees : "RULES-WEAPB23 4" garde son parametre apres l espace, et
+   "RULES-WEAPB30/RULES-WEAPB12" prefixe chaque alternative. Verifie cote retraits du diff :
+   aucune ligne autre qu un <Quality> n a bouge.
+CE QUE LA SESSION A APPRIS.
+(1) UN RECENSEMENT PAR MOTIF NE VOIT QUE LA FORME QU IL CHERCHE. Le chiffre "six references en
+    collision" venait d une regex qui supposait le code seul dans la balise. Trois fois de
+    suite - collisions, familles, total - le comptage de la veille etait faux dans le meme sens.
+    Quand un inventaire sert de base a un script d ecriture, le refaire en PARSANT la structure
+    (decouper la liste, examiner chaque jeton) plutot qu en cherchant un motif.
+(2) UN CODE SANS DEFINITION N EST PAS UNE REFERENCE. Cinq des huit familles a "corriger"
+    etaient des vocabulaires fermes. Avant de traiter une famille de codes comme des
+    references, verifier qu il existe quelque part un id= qui les definit.
+(3) L UNICITE VAUT MIEUX QUE L ORDRE. Le plan disait d ecrire "le prefixe du livre qui resout
+    actuellement", ce qui depend de l ordre de chargement. Ecrire "le prefixe de l unique livre
+    qui definit ce code", et refuser d ecrire sinon, donne le meme resultat sans dependre de
+    l ordre - et transforme chaque collision en refus visible au lieu d un choix silencieux.
+(4) L ECRITURE VERS LE POSTE S EST PERDUE UNE QUATRIEME FOIS, au deuxieme envoi de la journee,
+    exactement comme decrit : succes annonce, date avancee, taille inchangee. Reemettre le meme
+    envoi a suffi. Six autres envois dans la meme session sont passes du premier coup.

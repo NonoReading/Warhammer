@@ -10265,7 +10265,7 @@ These warriors are amongst the bravest of their kind, as they charge into battle
 <Availability>"DISPO_RARE"</Availability>
 <Price>"20 GC"</Price>
 <Encumbrance>"3"</Encumbrance>
-<Quality>"ARMOB_02"</Quality>
+<Quality>"RULES-ARMOB_02"</Quality>
 <Location>"ARMOL_BODY"</Location>
 <ArmorPoint>"4"</ArmorPoint>
 <Type>"ARMOT_PLATE"</Type>
@@ -10275,7 +10275,7 @@ These warriors are amongst the bravest of their kind, as they charge into battle
 <Availability>"DISPO_RARE"</Availability>
 <Price>"4 GC"</Price>
 <Encumbrance>"2"</Encumbrance>
-<Quality>"ARMOB_02,ARMOB_12"</Quality>
+<Quality>"RULES-ARMOB_02,NATIO-ARMOB_12"</Quality>
 <Location>"ARMOL_HEAD"</Location>
 <ArmorPoint>"4"</ArmorPoint>
 <Type>"ARMOT_PLATE"</Type>
@@ -10285,7 +10285,7 @@ These warriors are amongst the bravest of their kind, as they charge into battle
 <Availability>"DISPO_RARE"</Availability>
 <Price>"16 GC"</Price>
 <Encumbrance>"3"</Encumbrance>
-<Quality>"ARMOB_02,ARMOB_14"</Quality>
+<Quality>"RULES-ARMOB_02,NATIO-ARMOB_14"</Quality>
 <Location>"ARMOL_ARM"</Location>
 <ArmorPoint>"4"</ArmorPoint>
 <Type>"ARMOT_PLATE"</Type>
@@ -10295,7 +10295,7 @@ These warriors are amongst the bravest of their kind, as they charge into battle
 <Availability>"DISPO_EXOTIC"</Availability>
 <Price>"5 GC"</Price>
 <Encumbrance>"3"</Encumbrance>
-<Quality>"ARMOB_02,ARMOB_09,ARMOB_04"</Quality>
+<Quality>"RULES-ARMOB_02,NATIO-ARMOB_09,RULES-ARMOB_04"</Quality>
 <Location>"ARMOL_BODY"</Location>
 <ArmorPoint>"3"</ArmorPoint>
 <Type>"ARMOT_PLATE"</Type>
@@ -10305,7 +10305,7 @@ These warriors are amongst the bravest of their kind, as they charge into battle
 <Availability>"DISPO_EXOTIC"</Availability>
 <Price>"1 GC"</Price>
 <Encumbrance>"2"</Encumbrance>
-<Quality>"ARMOB_03,ARMOB_06"</Quality>
+<Quality>"RULES-ARMOB_03,RULES-ARMOB_06"</Quality>
 <Location>"ARMOL_HEAD"</Location>
 <ArmorPoint>"2"</ArmorPoint>
 <Type>"ARMOT_PLATE"</Type>
@@ -10315,7 +10315,7 @@ These warriors are amongst the bravest of their kind, as they charge into battle
 <Availability>"DISPO_EXOTIC"</Availability>
 <Price>"4 GC"</Price>
 <Encumbrance>"3"</Encumbrance>
-<Quality>"ARMOB_02,ARMOB_04"</Quality>
+<Quality>"RULES-ARMOB_02,RULES-ARMOB_04"</Quality>
 <Location>"ARMOL_ARM"</Location>
 <ArmorPoint>"3"</ArmorPoint>
 <Type>"ARMOT_PLATE"</Type>
@@ -10325,7 +10325,7 @@ These warriors are amongst the bravest of their kind, as they charge into battle
 <Availability>"DISPO_EXOTIC"</Availability>
 <Price>"5 GC"</Price>
 <Encumbrance>"3"</Encumbrance>
-<Quality>"ARMOB_02,ARMOB_04,ARMOB_19"</Quality>
+<Quality>"RULES-ARMOB_02,RULES-ARMOB_04,RULES-ARMOB_19"</Quality>
 <Location>"ARMOL_LEG"</Location>
 <ArmorPoint>"3"</ArmorPoint>
 <Type>"ARMOT_PLATE"</Type>
@@ -10335,7 +10335,7 @@ These warriors are amongst the bravest of their kind, as they charge into battle
 <Availability>"DISPO_EXOTIC"</Availability>
 <Price>"2 GC"</Price>
 <Encumbrance>"2"</Encumbrance>
-<Quality>"ARMOB_02,ARMOB_04,ARMOB_07"</Quality>
+<Quality>"RULES-ARMOB_02,RULES-ARMOB_04,RULES-ARMOB_07"</Quality>
 <Location>"ARMOL_HEAD"</Location>
 <ArmorPoint>"3"</ArmorPoint>
 <Type>"ARMOT_PLATE"</Type>
@@ -10347,7 +10347,7 @@ These warriors are amongst the bravest of their kind, as they charge into battle
 <Availability>"DISPO_EXOTIC"</Availability>
 <Price>"-"</Price>
 <Encumbrance>"3"</Encumbrance>
-<Quality>"ARMOB_10,ARMOB_02,ARMOB_09"</Quality>
+<Quality>"NATIO-ARMOB_10,RULES-ARMOB_02,NATIO-ARMOB_09"</Quality>
 <Location>"ARMOL_BODY"</Location>
 <ArmorPoint>"3"</ArmorPoint>
 <Type>"ARMOT_PLATE"</Type>
@@ -10357,7 +10357,7 @@ These warriors are amongst the bravest of their kind, as they charge into battle
 <Availability>"DISPO_EXOTIC"</Availability>
 <Price>"-"</Price>
 <Encumbrance>"2"</Encumbrance>
-<Quality>"ARMOB_10,ARMOB_02,ARMOB_07"</Quality>
+<Quality>"NATIO-ARMOB_10,RULES-ARMOB_02,RULES-ARMOB_07"</Quality>
 <Location>"ARMOL_HEAD"</Location>
 <ArmorPoint>"3"</ArmorPoint>
 <Type>"ARMOT_PLATE"</Type>
@@ -10367,7 +10367,7 @@ These warriors are amongst the bravest of their kind, as they charge into battle
 <Availability>"DISPO_EXOTIC"</Availability>
 <Price>"-"</Price>
 <Encumbrance>"3"</Encumbrance>
-<Quality>"ARMOB_10,ARMOB_02,ARMOB_09"</Quality>
+<Quality>"NATIO-ARMOB_10,RULES-ARMOB_02,NATIO-ARMOB_09"</Quality>
 <Location>"ARMOL_ARM"</Location>
 <ArmorPoint>"3"</ArmorPoint>
 <Type>"ARMOT_PLATE"</Type>
@@ -10377,7 +10377,7 @@ These warriors are amongst the bravest of their kind, as they charge into battle
 <Availability>"DISPO_EXOTIC"</Availability>
 <Price>"-"</Price>
 <Encumbrance>"3"</Encumbrance>
-<Quality>"ARMOB_10,ARMOB_02,ARMOB_09,ARMOB_13"</Quality>
+<Quality>"NATIO-ARMOB_10,RULES-ARMOB_02,NATIO-ARMOB_09,NATIO-ARMOB_13"</Quality>
 <Location>"ARMOL_LEG"</Location>
 <ArmorPoint>"3"</ArmorPoint>
 <Type>"ARMOT_PLATE"</Type>
@@ -10387,7 +10387,7 @@ These warriors are amongst the bravest of their kind, as they charge into battle
 <Availability>"DISPO_EXOTIC"</Availability>
 <Price>"80 GC"</Price>
 <Encumbrance>"3"</Encumbrance>
-<Quality>"ARMOB_02"</Quality>
+<Quality>"RULES-ARMOB_02"</Quality>
 <Location>"ARMOL_BODY"</Location>
 <ArmorPoint>"3"</ArmorPoint>
 <Type>"ARMOT_PLATE"</Type>
@@ -10397,7 +10397,7 @@ These warriors are amongst the bravest of their kind, as they charge into battle
 <Availability>"DISPO_EXOTIC"</Availability>
 <Price>"10 GC"</Price>
 <Encumbrance>"2"</Encumbrance>
-<Quality>"ARMOB_02,ARMOB_06"</Quality>
+<Quality>"RULES-ARMOB_02,RULES-ARMOB_06"</Quality>
 <Location>"ARMOL_HEAD"</Location>
 <ArmorPoint>"3"</ArmorPoint>
 <Type>"ARMOT_PLATE"</Type>
@@ -10407,7 +10407,7 @@ These warriors are amongst the bravest of their kind, as they charge into battle
 <Availability>"DISPO_EXOTIC"</Availability>
 <Price>"60 GC"</Price>
 <Encumbrance>"3"</Encumbrance>
-<Quality>"ARMOB_02"</Quality>
+<Quality>"RULES-ARMOB_02"</Quality>
 <Location>"ARMOL_ARM"</Location>
 <ArmorPoint>"3"</ArmorPoint>
 <Type>"ARMOT_PLATE"</Type>
@@ -10417,7 +10417,7 @@ These warriors are amongst the bravest of their kind, as they charge into battle
 <Availability>"DISPO_EXOTIC"</Availability>
 <Price>"80 GC"</Price>
 <Encumbrance>"3"</Encumbrance>
-<Quality>"ARMOB_02,ARMOB_05"</Quality>
+<Quality>"RULES-ARMOB_02,RULES-ARMOB_05"</Quality>
 <Location>"ARMOL_LEG"</Location>
 <ArmorPoint>"3"</ArmorPoint>
 <Type>"ARMOT_PLATE"</Type>
@@ -10432,7 +10432,7 @@ These warriors are amongst the bravest of their kind, as they charge into battle
 <Availability>"DISPO_EXOTIC"</Availability>
 <Price>"10 GC"</Price>
 <Encumbrance>"3"</Encumbrance>
-<Quality>"ARMOB_04"</Quality>
+<Quality>"RULES-ARMOB_04"</Quality>
 <Location>"ARMOL_BODY"</Location>
 <ArmorPoint>"2"</ArmorPoint>
 <Type>"NATIO-ARMOT_LAMELLAR"</Type>
@@ -10442,7 +10442,7 @@ These warriors are amongst the bravest of their kind, as they charge into battle
 <Availability>"DISPO_EXOTIC"</Availability>
 <Price>"2 GC"</Price>
 <Encumbrance>"1"</Encumbrance>
-<Quality>"ARMOB_03"</Quality>
+<Quality>"RULES-ARMOB_03"</Quality>
 <Location>"ARMOL_HEAD"</Location>
 <ArmorPoint>"2"</ArmorPoint>
 <Type>"NATIO-ARMOT_LAMELLAR"</Type>
@@ -10452,7 +10452,7 @@ These warriors are amongst the bravest of their kind, as they charge into battle
 <Availability>"DISPO_EXOTIC"</Availability>
 <Price>"8 GC"</Price>
 <Encumbrance>"3"</Encumbrance>
-<Quality>"ARMOB_04"</Quality>
+<Quality>"RULES-ARMOB_04"</Quality>
 <Location>"ARMOL_ARM"</Location>
 <ArmorPoint>"2"</ArmorPoint>
 <Type>"NATIO-ARMOT_LAMELLAR"</Type>
@@ -10462,7 +10462,7 @@ These warriors are amongst the bravest of their kind, as they charge into battle
 <Availability>"DISPO_EXOTIC"</Availability>
 <Price>"10 GC"</Price>
 <Encumbrance>"3"</Encumbrance>
-<Quality>"ARMOB_04"</Quality>
+<Quality>"RULES-ARMOB_04"</Quality>
 <Location>"ARMOL_LEG"</Location>
 <ArmorPoint>"2"</ArmorPoint>
 <Type>"NATIO-ARMOT_LAMELLAR"</Type>
@@ -10472,7 +10472,7 @@ These warriors are amongst the bravest of their kind, as they charge into battle
 <Availability>"DISPO_EXOTIC"</Availability>
 <Price>"3 GC"</Price>
 <Encumbrance>"2"</Encumbrance>
-<Quality>"ARMOB_04,ARMOB_06"</Quality>
+<Quality>"RULES-ARMOB_04,RULES-ARMOB_06"</Quality>
 <Location>"ARMOL_HEAD"</Location>
 <ArmorPoint>"2"</ArmorPoint>
 <Type>"NATIO-ARMOT_LAMELLAR"</Type>
@@ -10482,7 +10482,7 @@ These warriors are amongst the bravest of their kind, as they charge into battle
 <Availability>"DISPO_EXOTIC"</Availability>
 <Price>"8 GC"</Price>
 <Encumbrance>"2"</Encumbrance>
-<Quality>"ARMOB_11,ARMOB_05"</Quality>
+<Quality>"NATIO-ARMOB_11,RULES-ARMOB_05"</Quality>
 <Location>"ARMOL_LEG"</Location>
 <ArmorPoint>"2"</ArmorPoint>
 <Type>"NATIO-ARMOT_LAMELLAR"</Type>
@@ -10492,7 +10492,7 @@ These warriors are amongst the bravest of their kind, as they charge into battle
 <Availability>"DISPO_EXOTIC"</Availability>
 <Price>"10 GC"</Price>
 <Encumbrance>"3"</Encumbrance>
-<Quality>"ARMOB_11"</Quality>
+<Quality>"NATIO-ARMOB_11"</Quality>
 <Location>"ARMOL_ARM,ARMOL_BODY"</Location>
 <ArmorPoint>"2"</ArmorPoint>
 <Type>"NATIO-ARMOT_LAMELLAR"</Type>
@@ -10502,7 +10502,7 @@ These warriors are amongst the bravest of their kind, as they charge into battle
 <Availability>"DISPO_EXOTIC"</Availability>
 <Price>"3 GC"</Price>
 <Encumbrance>"2"</Encumbrance>
-<Quality>"ARMOB_11,ARMOB_03,ARMOB_06"</Quality>
+<Quality>"NATIO-ARMOB_11,RULES-ARMOB_03,RULES-ARMOB_06"</Quality>
 <Location>"ARMOL_HEAD"</Location>
 <ArmorPoint>"2"</ArmorPoint>
 <Type>"NATIO-ARMOT_LAMELLAR"</Type>
@@ -10512,7 +10512,7 @@ These warriors are amongst the bravest of their kind, as they charge into battle
 <Availability>"DISPO_COMMON"</Availability>
 <Price>"1 GC"</Price>
 <Encumbrance>"1"</Encumbrance>
-<Quality>"ARMOB_01"</Quality>
+<Quality>"RULES-ARMOB_01"</Quality>
 <Location>"ARMOL_ARM,ARMOL_BODY"</Location>
 <ArmorPoint>"1"</ArmorPoint>
 <Type>"ARMOT_SOFTKITS"</Type>
@@ -10522,7 +10522,7 @@ These warriors are amongst the bravest of their kind, as they charge into battle
 <Availability>"DISPO_RARE"</Availability>
 <Price>"8 GC"</Price>
 <Encumbrance>"3"</Encumbrance>
-<Quality>"ARMOB_01,ARMOB_02"</Quality>
+<Quality>"RULES-ARMOB_01,RULES-ARMOB_02"</Quality>
 <Location>"ARMOL_BODY"</Location>
 <ArmorPoint>"2"</ArmorPoint>
 <Type>"ARMOT_BRIGANDINE"</Type>
@@ -10534,7 +10534,7 @@ These warriors are amongst the bravest of their kind, as they charge into battle
 <Availability>"DISPO_EXOTIC"</Availability>
 <Price>"15 GC"</Price>
 <Encumbrance>"0"</Encumbrance>
-<Quality>"ARMOB_11"</Quality>
+<Quality>"NATIO-ARMOB_11"</Quality>
 <Location>"ARMOL_ARM,ARMOL_BODY"</Location>
 <ArmorPoint>"0"</ArmorPoint>
 <Type>"ARMOT_SOFTKITS"</Type>
@@ -10550,7 +10550,7 @@ These warriors are amongst the bravest of their kind, as they charge into battle
 <Availability>"DISPO_EXOTIC"</Availability>
 <Price>"10 GC"</Price>
 <Encumbrance>"3"</Encumbrance>
-<Quality>"ARMOB_03"</Quality>
+<Quality>"RULES-ARMOB_03"</Quality>
 <Location>"ARMOL_BODY"</Location>
 <ArmorPoint>"3"</ArmorPoint>
 <Type>"ARMOT_PLATE"</Type>
@@ -10628,7 +10628,7 @@ Furthermore, all ranged weapons lose their Damaging Quality when striking this a
 <Reach>"WEAPR_MID"</Reach>
 <Price>"2 GC"</Price>
 <Encumbrance>"1"</Encumbrance>
-<Quality>"WEAPB30"</Quality>
+<Quality>"RULES-WEAPB30"</Quality>
 <Hand>"1"</Hand>
 <Ammunition>"0"</Ammunition>
 </Weapon>
@@ -10640,7 +10640,7 @@ Furthermore, all ranged weapons lose their Damaging Quality when striking this a
 <Reach>"WEAPR_SHORT"</Reach>
 <Price>"4/-"</Price>
 <Encumbrance>"1"</Encumbrance>
-<Quality>"WEAPB04,WEAPB27"</Quality>
+<Quality>"RULES-WEAPB04,RULES-WEAPB27"</Quality>
 <Hand>"1"</Hand>
 <Ammunition>"0"</Ammunition>
 </Weapon>
@@ -10652,7 +10652,7 @@ Furthermore, all ranged weapons lose their Damaging Quality when striking this a
 <Reach>"WEAPR_MID"</Reach>
 <Price>"1 GC"</Price>
 <Encumbrance>"1"</Encumbrance>
-<Quality>"WEAPB39"</Quality>
+<Quality>"NATIO-WEAPB39"</Quality>
 <Hand>"1"</Hand>
 <Ammunition>"0"</Ammunition>
 </Weapon>
@@ -10664,7 +10664,7 @@ Furthermore, all ranged weapons lose their Damaging Quality when striking this a
 <Reach>"WEAPR_MID"</Reach>
 <Price>"3 GC 12/-"</Price>
 <Encumbrance>"1"</Encumbrance>
-<Quality>"WEAPB21,WEAPB25"</Quality>
+<Quality>"RULES-WEAPB21,RULES-WEAPB25"</Quality>
 <Hand>"1"</Hand>
 <Ammunition>"0"</Ammunition>
 </Weapon>
@@ -10676,7 +10676,7 @@ Furthermore, all ranged weapons lose their Damaging Quality when striking this a
 <Reach>"WEAPR_LONG"</Reach>
 <Price>"10/-"</Price>
 <Encumbrance>"1"</Encumbrance>
-<Quality>"WEAPB12"</Quality>
+<Quality>"RULES-WEAPB12"</Quality>
 <Hand>"1"</Hand>
 <Ammunition>"0"</Ammunition>
 </Weapon>
@@ -10693,7 +10693,7 @@ Furthermore, all ranged weapons lose their Damaging Quality when striking this a
 <Reach>"WEAPR_MID"</Reach>
 <Price>"1 GC 10/-"</Price>
 <Encumbrance>"1"</Encumbrance>
-<Quality>"WEAPB04"</Quality>
+<Quality>"RULES-WEAPB04"</Quality>
 <Hand>"1"</Hand>
 <Ammunition>"0"</Ammunition>
 </Weapon>
@@ -10705,7 +10705,7 @@ Furthermore, all ranged weapons lose their Damaging Quality when striking this a
 <Reach>"WEAPR_MID"</Reach>
 <Price>"3 GC"</Price>
 <Encumbrance>"1"</Encumbrance>
-<Quality>"WEAPB20"</Quality>
+<Quality>"RULES-WEAPB20"</Quality>
 <Hand>"1"</Hand>
 <Ammunition>"0"</Ammunition>
 </Weapon>
@@ -10717,7 +10717,7 @@ Furthermore, all ranged weapons lose their Damaging Quality when striking this a
 <Reach>"WEAPR_MID"</Reach>
 <Price>"2 GC"</Price>
 <Encumbrance>"1"</Encumbrance>
-<Quality>"WEAPB14"</Quality>
+<Quality>"RULES-WEAPB14"</Quality>
 <Hand>"1"</Hand>
 <Ammunition>"0"</Ammunition>
 </Weapon>
@@ -10732,7 +10732,7 @@ Furthermore, all ranged weapons lose their Damaging Quality when striking this a
 <Reach>"WEAPR_MID"</Reach>
 <Price>"2 GC"</Price>
 <Encumbrance>"1"</Encumbrance>
-<Quality>"WEAPB08"</Quality>
+<Quality>"RULES-WEAPB08"</Quality>
 <Hand>"1"</Hand>
 <Ammunition>"0"</Ammunition>
 </Weapon>
@@ -10744,7 +10744,7 @@ Furthermore, all ranged weapons lose their Damaging Quality when striking this a
 <Reach>"WEAPR_MID"</Reach>
 <Price>"2 GC"</Price>
 <Encumbrance>"1"</Encumbrance>
-<Quality>"WEAPB10"</Quality>
+<Quality>"RULES-WEAPB10"</Quality>
 <Hand>"1"</Hand>
 <Ammunition>"0"</Ammunition>
 </Weapon>
@@ -10756,7 +10756,7 @@ Furthermore, all ranged weapons lose their Damaging Quality when striking this a
 <Reach>"WEAPR_LONG"</Reach>
 <Price>"3 GC"</Price>
 <Encumbrance>"3"</Encumbrance>
-<Quality>"WEAPB12,WEAPB22"</Quality>
+<Quality>"RULES-WEAPB12,RULES-WEAPB22"</Quality>
 <Hand>"2"</Hand>
 <Ammunition>"0"</Ammunition>
 </Weapon>
@@ -10771,7 +10771,7 @@ Furthermore, all ranged weapons lose their Damaging Quality when striking this a
 <Reach>"WEAPR_LONG"</Reach>
 <Price>"5 GC"</Price>
 <Encumbrance>"1"</Encumbrance>
-<Quality>"WEAPB08,WEAPB20"</Quality>
+<Quality>"RULES-WEAPB08,RULES-WEAPB20"</Quality>
 <Hand>"1"</Hand>
 <Ammunition>"0"</Ammunition>
 </Weapon>
@@ -10783,7 +10783,7 @@ Furthermore, all ranged weapons lose their Damaging Quality when striking this a
 <Reach>"WEAPR_LONG"</Reach>
 <Price>"5 GC"</Price>
 <Encumbrance>"1"</Encumbrance>
-<Quality>"WEAPB08,WEAPB20,WEAPB12,WEAPB27"</Quality>
+<Quality>"RULES-WEAPB08,RULES-WEAPB20,RULES-WEAPB12,RULES-WEAPB27"</Quality>
 <Hand>"1"</Hand>
 <Ammunition>"0"</Ammunition>
 </Weapon>
@@ -10795,7 +10795,7 @@ Furthermore, all ranged weapons lose their Damaging Quality when striking this a
 <Reach>"WEAPR_CLOSE"</Reach>
 <Price>"3 GC 8/-"</Price>
 <Encumbrance>"0"</Encumbrance>
-<Quality>"WEAPB20"</Quality>
+<Quality>"RULES-WEAPB20"</Quality>
 <Hand>"1"</Hand>
 <Ammunition>"0"</Ammunition>
 </Weapon>
@@ -10807,7 +10807,7 @@ Furthermore, all ranged weapons lose their Damaging Quality when striking this a
 <Reach>"WEAPR_PERSO"</Reach>
 <Price>"10 GC"</Price>
 <Encumbrance>"0"</Encumbrance>
-<Quality>"WEAPB38,WEAPB12"</Quality>
+<Quality>"NATIO-WEAPB38,RULES-WEAPB12"</Quality>
 <Hand>"1"</Hand>
 <Ammunition>"0"</Ammunition>
 </Weapon>
@@ -10819,7 +10819,7 @@ Furthermore, all ranged weapons lose their Damaging Quality when striking this a
 <Reach>"WEAPR_SHORT"</Reach>
 <Price>"2 GC"</Price>
 <Encumbrance>"1"</Encumbrance>
-<Quality>"WEAPB12"</Quality>
+<Quality>"RULES-WEAPB12"</Quality>
 <Hand>"1"</Hand>
 <Ammunition>"0"</Ammunition>
 </Weapon>
@@ -10831,7 +10831,7 @@ Furthermore, all ranged weapons lose their Damaging Quality when striking this a
 <Reach>"WEAPR_PERSO"</Reach>
 <Price>"4 GC"</Price>
 <Encumbrance>"1"</Encumbrance>
-<Quality>"WEAPB04"</Quality>
+<Quality>"RULES-WEAPB04"</Quality>
 <Hand>"1"</Hand>
 <Ammunition>"0"</Ammunition>
 </Weapon>
@@ -10843,7 +10843,7 @@ Furthermore, all ranged weapons lose their Damaging Quality when striking this a
 <Reach>"WEAPR_MID"</Reach>
 <Price>"3 GC"</Price>
 <Encumbrance>"1"</Encumbrance>
-<Quality>"WEAPB08"</Quality>
+<Quality>"RULES-WEAPB08"</Quality>
 <Hand>"1"</Hand>
 <Ammunition>"0"</Ammunition>
 </Weapon>
@@ -10855,7 +10855,7 @@ Furthermore, all ranged weapons lose their Damaging Quality when striking this a
 <Reach>"WEAPR_PERSO"</Reach>
 <Price>"8/10"</Price>
 <Encumbrance>"0"</Encumbrance>
-<Quality>"WEAPB04"</Quality>
+<Quality>"RULES-WEAPB04"</Quality>
 <Hand>"1"</Hand>
 <Ammunition>"0"</Ammunition>
 </Weapon>
@@ -10867,7 +10867,7 @@ Furthermore, all ranged weapons lose their Damaging Quality when striking this a
 <Reach>"WEAPR_PERSO"</Reach>
 <Price>"12/-"</Price>
 <Encumbrance>"0"</Encumbrance>
-<Quality>"WEAPB38"</Quality>
+<Quality>"NATIO-WEAPB38"</Quality>
 <Hand>"1"</Hand>
 <Ammunition>"0"</Ammunition>
 </Weapon>
@@ -10879,7 +10879,7 @@ Furthermore, all ranged weapons lose their Damaging Quality when striking this a
 <Reach>"WEAPR_MID"</Reach>
 <Price>"3 GC"</Price>
 <Encumbrance>"2"</Encumbrance>
-<Quality>"WEAPB39,WEAPB09,WEAPB01"</Quality>
+<Quality>"NATIO-WEAPB39,RULES-WEAPB09,RULES-WEAPB01"</Quality>
 <Hand>"1"</Hand>
 <Ammunition>"0"</Ammunition>
 </Weapon>
@@ -10892,7 +10892,7 @@ Furthermore, all ranged weapons lose their Damaging Quality when striking this a
 <Reach>"WEAPR_BIG"</Reach>
 <Price>"2 GC 10/-"</Price>
 <Encumbrance>"1"</Encumbrance>
-<Quality>"WEAPB09,WEAPB17,WEAPB01"</Quality>
+<Quality>"RULES-WEAPB09,RULES-WEAPB17,RULES-WEAPB01"</Quality>
 <Hand>"1"</Hand>
 <Ammunition>"0"</Ammunition>
 </Weapon>
@@ -10904,7 +10904,7 @@ Furthermore, all ranged weapons lose their Damaging Quality when striking this a
 <Reach>"WEAPR_LONG"</Reach>
 <Price>"3 GC"</Price>
 <Encumbrance>"2"</Encumbrance>
-<Quality>"WEAPB20,WEAPB09,WEAPB01"</Quality>
+<Quality>"RULES-WEAPB20,RULES-WEAPB09,RULES-WEAPB01"</Quality>
 <Hand>"1"</Hand>
 <Ammunition>"0"</Ammunition>
 </Weapon>
@@ -10916,7 +10916,7 @@ Furthermore, all ranged weapons lose their Damaging Quality when striking this a
 <Reach>"WEAPR_LONG"</Reach>
 <Price>"4 GC"</Price>
 <Encumbrance>"3"</Encumbrance>
-<Quality>"WEAPB10,WEAPB09,WEAPB04,WEAPB28,WEAPB01"</Quality>
+<Quality>"RULES-WEAPB10,RULES-WEAPB09,RULES-WEAPB04,RULES-WEAPB28,RULES-WEAPB01"</Quality>
 <Hand>"2"</Hand>
 <Ammunition>"0"</Ammunition>
 </Weapon>
@@ -10928,7 +10928,7 @@ Furthermore, all ranged weapons lose their Damaging Quality when striking this a
 <Reach>"WEAPR_LONG"</Reach>
 <Price>"4 GC"</Price>
 <Encumbrance>"3"</Encumbrance>
-<Quality>"WEAPB08,WEAPB30,WEAPB21,WEAPB25"</Quality>
+<Quality>"RULES-WEAPB08,RULES-WEAPB30,RULES-WEAPB21,RULES-WEAPB25"</Quality>
 <Hand>"2"</Hand>
 <Ammunition>"0"</Ammunition>
 </Weapon>
@@ -10940,7 +10940,7 @@ Furthermore, all ranged weapons lose their Damaging Quality when striking this a
 <Reach>"WEAPR_BIG"</Reach>
 <Price>"2 GC"</Price>
 <Encumbrance>"2"</Encumbrance>
-<Quality>"WEAPB10"</Quality>
+<Quality>"RULES-WEAPB10"</Quality>
 <Hand>"2"</Hand>
 <Ammunition>"0"</Ammunition>
 </Weapon>
@@ -10952,7 +10952,7 @@ Furthermore, all ranged weapons lose their Damaging Quality when striking this a
 <Reach>"WEAPR_BIG"</Reach>
 <Price>"6 GC"</Price>
 <Encumbrance>"3"</Encumbrance>
-<Quality>"WEAPB39,WEAPB12,WEAPB04"</Quality>
+<Quality>"NATIO-WEAPB39,RULES-WEAPB12,RULES-WEAPB04"</Quality>
 <Hand>"2"</Hand>
 <Ammunition>"0"</Ammunition>
 </Weapon>
@@ -10964,7 +10964,7 @@ Furthermore, all ranged weapons lose their Damaging Quality when striking this a
 <Reach>"WEAPR_BIG"</Reach>
 <Price>"6 GC"</Price>
 <Encumbrance>"3"</Encumbrance>
-<Quality>"WEAPB12,WEAPB22"</Quality>
+<Quality>"RULES-WEAPB12,RULES-WEAPB22"</Quality>
 <Hand>"2"</Hand>
 <Ammunition>"0"</Ammunition>
 </Weapon>
@@ -10976,7 +10976,7 @@ Furthermore, all ranged weapons lose their Damaging Quality when striking this a
 <Reach>"WEAPR_LONG"</Reach>
 <Price>"12/-"</Price>
 <Encumbrance>"2"</Encumbrance>
-<Quality>"WEAPB04"</Quality>
+<Quality>"RULES-WEAPB04"</Quality>
 <Hand>"2"</Hand>
 <Ammunition>"0"</Ammunition>
 </Weapon>
@@ -10990,7 +10990,7 @@ Furthermore, all ranged weapons lose their Damaging Quality when striking this a
 <Reach>"WEAPR_BIG"</Reach>
 <Price>"1 GC 8/-"</Price>
 <Encumbrance>"3"</Encumbrance>
-<Quality>"WEAPB40"</Quality>
+<Quality>"NATIO-WEAPB40"</Quality>
 <Hand>"2"</Hand>
 <Ammunition>"0"</Ammunition>
 </Weapon>
@@ -11002,7 +11002,7 @@ Furthermore, all ranged weapons lose their Damaging Quality when striking this a
 <Reach>"WEAPR_BIG"</Reach>
 <Price>"4 GC"</Price>
 <Encumbrance>"3"</Encumbrance>
-<Quality>"WEAPB30,WEAPB40"</Quality>
+<Quality>"RULES-WEAPB30,NATIO-WEAPB40"</Quality>
 <Hand>"2"</Hand>
 <Ammunition>"0"</Ammunition>
 </Weapon>
@@ -11014,7 +11014,7 @@ Furthermore, all ranged weapons lose their Damaging Quality when striking this a
 <Reach>"WEAPR_BIG"</Reach>
 <Price>"3 GC"</Price>
 <Encumbrance>"2"</Encumbrance>
-<Quality>"WEAPB08,WEAPB12,WEAPB11"</Quality>
+<Quality>"RULES-WEAPB08,RULES-WEAPB12,RULES-WEAPB11"</Quality>
 <Hand>"2"</Hand>
 <Ammunition>"0"</Ammunition>
 </Weapon>
@@ -11026,7 +11026,7 @@ Furthermore, all ranged weapons lose their Damaging Quality when striking this a
 <Reach>"WEAPR_LONG"</Reach>
 <Price>"4 GC"</Price>
 <Encumbrance>"3"</Encumbrance>
-<Quality>"WEAPB10,WEAPB08"</Quality>
+<Quality>"RULES-WEAPB10,RULES-WEAPB08"</Quality>
 <Hand>"2"</Hand>
 <Ammunition>"0"</Ammunition>
 </Weapon>
@@ -11038,7 +11038,7 @@ Furthermore, all ranged weapons lose their Damaging Quality when striking this a
 <Reach>"WEAPR_LONG"</Reach>
 <Price>"100 GC"</Price>
 <Encumbrance>"2"</Encumbrance>
-<Quality>"WEAPB08,WEAPB21,WEAPB04"</Quality>
+<Quality>"RULES-WEAPB08,RULES-WEAPB21,RULES-WEAPB04"</Quality>
 <Hand>"2"</Hand>
 <Ammunition>"0"</Ammunition>
 </Weapon>
@@ -11050,7 +11050,7 @@ Furthermore, all ranged weapons lose their Damaging Quality when striking this a
 <Reach>"WEAPR_LONG"</Reach>
 <Price>"8 GC"</Price>
 <Encumbrance>"3"</Encumbrance>
-<Quality>"WEAPB10,WEAPB12"</Quality>
+<Quality>"RULES-WEAPB10,RULES-WEAPB12"</Quality>
 <Hand>"2"</Hand>
 <Ammunition>"0"</Ammunition>
 </Weapon>
@@ -11062,7 +11062,7 @@ Furthermore, all ranged weapons lose their Damaging Quality when striking this a
 <Reach>"WEAPR_LONG"</Reach>
 <Price>"15 GC"</Price>
 <Encumbrance>"3"</Encumbrance>
-<Quality>"WEAPB08,WEAPB30,WEAPB22"</Quality>
+<Quality>"RULES-WEAPB08,RULES-WEAPB30,RULES-WEAPB22"</Quality>
 <Hand>"2"</Hand>
 <Ammunition>"0"</Ammunition>
 </Weapon>
@@ -11074,7 +11074,7 @@ Furthermore, all ranged weapons lose their Damaging Quality when striking this a
 <Reach>"WEAPR_LONG"</Reach>
 <Price>"20 GC"</Price>
 <Encumbrance>"3"</Encumbrance>
-<Quality>"WEAPB10,WEAPB08,WEAPB30"</Quality>
+<Quality>"RULES-WEAPB10,RULES-WEAPB08,RULES-WEAPB30"</Quality>
 <Hand>"2"</Hand>
 <Ammunition>"0"</Ammunition>
 </Weapon>
@@ -11086,7 +11086,7 @@ Furthermore, all ranged weapons lose their Damaging Quality when striking this a
 <Reach>"WEAPR_LONG"</Reach>
 <Price>"2 GC"</Price>
 <Encumbrance>"2"</Encumbrance>
-<Quality>"WEAPB30,WEAPB14"</Quality>
+<Quality>"RULES-WEAPB30,RULES-WEAPB14"</Quality>
 <Hand>"2"</Hand>
 <Ammunition>"0"</Ammunition>
 </Weapon>
@@ -11098,7 +11098,7 @@ Furthermore, all ranged weapons lose their Damaging Quality when striking this a
 <Reach>"WEAPR_LONG"</Reach>
 <Price>"4 GC"</Price>
 <Encumbrance>"3"</Encumbrance>
-<Quality>"WEAPB30,WEAPB21,WEAPB28"</Quality>
+<Quality>"RULES-WEAPB30,RULES-WEAPB21,RULES-WEAPB28"</Quality>
 <Hand>"2"</Hand>
 <Ammunition>"0"</Ammunition>
 </Weapon>
@@ -11113,7 +11113,7 @@ Furthermore, all ranged weapons lose their Damaging Quality when striking this a
 <Reach>"WEAPR_MID"</Reach>
 <Price>"4 GC"</Price>
 <Encumbrance>"3"</Encumbrance>
-<Quality>"WEAPB39,WEAPB04,WEAPB28"</Quality>
+<Quality>"NATIO-WEAPB39,RULES-WEAPB04,RULES-WEAPB28"</Quality>
 <Hand>"2"</Hand>
 <Ammunition>"0"</Ammunition>
 </Weapon>
@@ -11126,7 +11126,7 @@ Furthermore, all ranged weapons lose their Damaging Quality when striking this a
 <Reach>"WEAPR_MID"</Reach>
 <Price>"7 GC"</Price>
 <Encumbrance>"3"</Encumbrance>
-<Quality>"WEAPB21,WEAPB04,WEAPB25"</Quality>
+<Quality>"RULES-WEAPB21,RULES-WEAPB04,RULES-WEAPB25"</Quality>
 <Hand>"2"</Hand>
 <Ammunition>"0"</Ammunition>
 </Weapon>
@@ -11142,7 +11142,7 @@ Furthermore, all ranged weapons lose their Damaging Quality when striking this a
 <Reach>"WEAPR_LONG"</Reach>
 <Price>"300 GC"</Price>
 <Encumbrance>"2"</Encumbrance>
-<Quality>"WEAPB10,WEAPB20,WEAPB22,WEAPB19"</Quality>
+<Quality>"RULES-WEAPB10,RULES-WEAPB20,RULES-WEAPB22,RULES-WEAPB19"</Quality>
 <Hand>"2"</Hand>
 <Ammunition>"0"</Ammunition>
 </Weapon>
@@ -11154,7 +11154,7 @@ Furthermore, all ranged weapons lose their Damaging Quality when striking this a
 <Reach>"WEAPR_LONG"</Reach>
 <Price>"15 GC"</Price>
 <Encumbrance>"3"</Encumbrance>
-<Quality>"WEAPB10,WEAPB20,WEAPB14"</Quality>
+<Quality>"RULES-WEAPB10,RULES-WEAPB20,RULES-WEAPB14"</Quality>
 <Hand>"2"</Hand>
 <Ammunition>"0"</Ammunition>
 </Weapon>
@@ -11166,7 +11166,7 @@ Furthermore, all ranged weapons lose their Damaging Quality when striking this a
 <Reach>"WEAPR_LONG"</Reach>
 <Price>"15 GC"</Price>
 <Encumbrance>"3"</Encumbrance>
-<Quality>"WEAPB20,WEAPB30,WEAPB14"</Quality>
+<Quality>"RULES-WEAPB20,RULES-WEAPB30,RULES-WEAPB14"</Quality>
 <Hand>"2"</Hand>
 <Ammunition>"0"</Ammunition>
 </Weapon>
@@ -11187,7 +11187,7 @@ Furthermore, all ranged weapons lose their Damaging Quality when striking this a
 <Reach>"10"</Reach>
 <Price>"14 GC"</Price>
 <Encumbrance>"1"</Encumbrance>
-<Quality>"WEAPB15 3,WEAPB13,WEAPB23 3,WEAPB02,WEAPB10"</Quality>
+<Quality>"RULES-WEAPB15 3,RULES-WEAPB13,RULES-WEAPB23 3,RULES-WEAPB02,RULES-WEAPB10"</Quality>
 <Hand>"1"</Hand>
 <Ammunition>"0"</Ammunition>
 </Weapon>
@@ -11199,7 +11199,7 @@ Furthermore, all ranged weapons lose their Damaging Quality when striking this a
 <Reach>"30"</Reach>
 <Price>"20 GC"</Price>
 <Encumbrance>"0"</Encumbrance>
-<Quality>"WEAPB16,WEAPB13,WEAPB23 1,WEAPB02,WEAPB10"</Quality>
+<Quality>"RULES-WEAPB16,RULES-WEAPB13,RULES-WEAPB23 1,RULES-WEAPB02,RULES-WEAPB10"</Quality>
 <Hand>"1"</Hand>
 <Ammunition>"0"</Ammunition>
 </Weapon>
@@ -11211,7 +11211,7 @@ Furthermore, all ranged weapons lose their Damaging Quality when striking this a
 <Reach>"20"</Reach>
 <Price>"12 GC"</Price>
 <Encumbrance>"1"</Encumbrance>
-<Quality>"WEAPB24,WEAPB41,WEAPB13,WEAPB23 2,WEAPB03 2,WEAPB02,WEAPB10"</Quality>
+<Quality>"RULES-WEAPB24,NATIO-WEAPB41,RULES-WEAPB13,RULES-WEAPB23 2,RULES-WEAPB03 2,RULES-WEAPB02,RULES-WEAPB10"</Quality>
 <Hand>"1"</Hand>
 <Ammunition>"0"</Ammunition>
 </Weapon>
@@ -11223,7 +11223,7 @@ Furthermore, all ranged weapons lose their Damaging Quality when striking this a
 <Reach>"10"</Reach>
 <Price>"20 GC"</Price>
 <Encumbrance>"1"</Encumbrance>
-<Quality>"WEAPB24,WEAPB21,WEAPB13,WEAPB23 3,WEAPB02,WEAPB10"</Quality>
+<Quality>"RULES-WEAPB24,RULES-WEAPB21,RULES-WEAPB13,RULES-WEAPB23 3,RULES-WEAPB02,RULES-WEAPB10"</Quality>
 <Hand>"1"</Hand>
 <Ammunition>"0"</Ammunition>
 </Weapon>
@@ -11235,7 +11235,7 @@ Furthermore, all ranged weapons lose their Damaging Quality when striking this a
 <Reach>"40"</Reach>
 <Price>"4 GC"</Price>
 <Encumbrance>"2"</Encumbrance>
-<Quality>"WEAPB14"</Quality>
+<Quality>"RULES-WEAPB14"</Quality>
 <Hand>"2"</Hand>
 <Ammunition>"0"</Ammunition>
 </Weapon>
@@ -11247,7 +11247,7 @@ Furthermore, all ranged weapons lose their Damaging Quality when striking this a
 <Reach>"100"</Reach>
 <Price>"15 GC"</Price>
 <Encumbrance>"2"</Encumbrance>
-<Quality>"WEAPB16,WEAPB10,WEAPB14"</Quality>
+<Quality>"RULES-WEAPB16,RULES-WEAPB10,RULES-WEAPB14"</Quality>
 <Hand>"2"</Hand>
 <Ammunition>"0"</Ammunition>
 </Weapon>
@@ -11259,7 +11259,7 @@ Furthermore, all ranged weapons lose their Damaging Quality when striking this a
 <Reach>"50"</Reach>
 <Price>"10 GC"</Price>
 <Encumbrance>"3"</Encumbrance>
-<Quality>"WEAPB23 3,WEAPB03 3"</Quality>
+<Quality>"RULES-WEAPB23 3,RULES-WEAPB03 3"</Quality>
 <Hand>"2"</Hand>
 <Ammunition>"0"</Ammunition>
 </Weapon>
@@ -11274,7 +11274,7 @@ Furthermore, all ranged weapons lose their Damaging Quality when striking this a
 <Reach>"50"</Reach>
 <Price>"100 GC"</Price>
 <Encumbrance>"3"</Encumbrance>
-<Quality>"WEAPB23 3,WEAPB42"</Quality>
+<Quality>"RULES-WEAPB23 3,NATIO-WEAPB42"</Quality>
 <Hand>"2"</Hand>
 <Ammunition>"0"</Ammunition>
 </Weapon>
@@ -11288,7 +11288,7 @@ Furthermore, all ranged weapons lose their Damaging Quality when striking this a
 <Reach>"30"</Reach>
 <Price>"100 GC"</Price>
 <Encumbrance>"3"</Encumbrance>
-<Quality>"WEAPB24,WEAPB23 3"</Quality>
+<Quality>"RULES-WEAPB24,RULES-WEAPB23 3"</Quality>
 <Hand>"2"</Hand>
 <Ammunition>"0"</Ammunition>
 </Weapon>
@@ -11300,7 +11300,7 @@ Furthermore, all ranged weapons lose their Damaging Quality when striking this a
 <Reach>"20"</Reach>
 <Price>"25 GC"</Price>
 <Encumbrance>"1"</Encumbrance>
-<Quality>"WEAPB24,WEAPB13,WEAPB23 6,WEAPB03 6"</Quality>
+<Quality>"RULES-WEAPB24,RULES-WEAPB13,RULES-WEAPB23 6,RULES-WEAPB03 6"</Quality>
 <Hand>"1"</Hand>
 <Ammunition>"0"</Ammunition>
 </Weapon>
@@ -11312,7 +11312,7 @@ Furthermore, all ranged weapons lose their Damaging Quality when striking this a
 <Reach>"10"</Reach>
 <Price>"20 GC"</Price>
 <Encumbrance>"1"</Encumbrance>
-<Quality>"WEAPB24,WEAPB41,WEAPB13,WEAPB23 3,WEAPB03 3"</Quality>
+<Quality>"RULES-WEAPB24,NATIO-WEAPB41,RULES-WEAPB13,RULES-WEAPB23 3,RULES-WEAPB03 3"</Quality>
 <Hand>"1"</Hand>
 <Ammunition>"0"</Ammunition>
 </Weapon>
@@ -11327,7 +11327,7 @@ Furthermore, all ranged weapons lose their Damaging Quality when striking this a
 <Reach>"(BATTR_S)"</Reach>
 <Price>"6 GC"</Price>
 <Encumbrance>"0"</Encumbrance>
-<Quality>"WEAPB15 5,WEAPB24,WEAPB21,WEAPB29"</Quality>
+<Quality>"RULES-WEAPB15 5,RULES-WEAPB24,RULES-WEAPB21,RULES-WEAPB29"</Quality>
 <Hand>"1"</Hand>
 <Ammunition>"0"</Ammunition>
 </Weapon>
@@ -11341,7 +11341,7 @@ Furthermore, all ranged weapons lose their Damaging Quality when striking this a
 <Reach>"(BATTR_S)X2"</Reach>
 <Price>"4 GC"</Price>
 <Encumbrance>"0"</Encumbrance>
-<Quality>"WEAPB15 5,WEAPB24,WEAPB43"</Quality>
+<Quality>"RULES-WEAPB15 5,RULES-WEAPB24,NATIO-WEAPB43"</Quality>
 <Hand>"1"</Hand>
 <Ammunition>"0"</Ammunition>
 </Weapon>
@@ -11353,7 +11353,7 @@ Furthermore, all ranged weapons lose their Damaging Quality when striking this a
 <Reach>"(BATTR_S)X3"</Reach>
 <Price>"2 GC"</Price>
 <Encumbrance>"1"</Encumbrance>
-<Quality>"WEAPB30"</Quality>
+<Quality>"RULES-WEAPB30"</Quality>
 <Hand>"1"</Hand>
 <Ammunition>"0"</Ammunition>
 </Weapon>
@@ -11365,7 +11365,7 @@ Furthermore, all ranged weapons lose their Damaging Quality when striking this a
 <Reach>"(BATTR_S)X2"</Reach>
 <Price>"1 GC"</Price>
 <Encumbrance>"1"</Encumbrance>
-<Quality>"WEAPB04"</Quality>
+<Quality>"RULES-WEAPB04"</Quality>
 <Hand>"1"</Hand>
 <Ammunition>"0"</Ammunition>
 </Weapon>
@@ -11377,7 +11377,7 @@ Furthermore, all ranged weapons lose their Damaging Quality when striking this a
 <Reach>"(BATTR_S)X4"</Reach>
 <Price>"5/-"</Price>
 <Encumbrance>"0"</Encumbrance>
-<Quality>"WEAPB27"</Quality>
+<Quality>"RULES-WEAPB27"</Quality>
 <Hand>"1"</Hand>
 <Ammunition>"0"</Ammunition>
 </Weapon>
@@ -11389,7 +11389,7 @@ Furthermore, all ranged weapons lose their Damaging Quality when striking this a
 <Reach>"(BATTR_S)X3"</Reach>
 <Price>"1 GC"</Price>
 <Encumbrance>"0"</Encumbrance>
-<Quality>"WEAPB12"</Quality>
+<Quality>"RULES-WEAPB12"</Quality>
 <Hand>"1"</Hand>
 <Ammunition>"0"</Ammunition>
 </Weapon>
@@ -11404,7 +11404,7 @@ Furthermore, all ranged weapons lose their Damaging Quality when striking this a
 <Reach>"+0"</Reach>
 <Price>"2/-"</Price>
 <Encumbrance>"0"</Encumbrance>
-<Quality>"WEAPB12,WEAPB22"</Quality>
+<Quality>"RULES-WEAPB12,RULES-WEAPB22"</Quality>
 <Hand>"0"</Hand>
 <Ammunition>"12"</Ammunition>
 </Weapon>
@@ -11416,7 +11416,7 @@ Furthermore, all ranged weapons lose their Damaging Quality when striking this a
 <Reach>"+0"</Reach>
 <Price>"2/-"</Price>
 <Encumbrance>"0"</Encumbrance>
-<Quality>"WEAPB29"</Quality>
+<Quality>"RULES-WEAPB29"</Quality>
 <Hand>"0"</Hand>
 <Ammunition>"12"</Ammunition>
 </Weapon>
@@ -11443,7 +11443,7 @@ Furthermore, all ranged weapons lose their Damaging Quality when striking this a
 <Reach>"+0"</Reach>
 <Price>"3 GC"</Price>
 <Encumbrance>"0"</Encumbrance>
-<Quality>"WEAPB15 3,WEAPB21"</Quality>
+<Quality>"RULES-WEAPB15 3,RULES-WEAPB21"</Quality>
 <Hand>"0"</Hand>
 <Ammunition>"1"</Ammunition>
 </Weapon>
@@ -11455,7 +11455,7 @@ Furthermore, all ranged weapons lose their Damaging Quality when striking this a
 <Reach>"+0"</Reach>
 <Price>"1/-"</Price>
 <Encumbrance>"0"</Encumbrance>
-<Quality>"WEAPB12"</Quality>
+<Quality>"RULES-WEAPB12"</Quality>
 <Hand>"0"</Hand>
 <Ammunition>"12"</Ammunition>
 </Weapon>
@@ -11467,7 +11467,7 @@ Furthermore, all ranged weapons lose their Damaging Quality when striking this a
 <Reach>"+0"</Reach>
 <Price>"10/-"</Price>
 <Encumbrance>"0"</Encumbrance>
-<Quality>"WEAPB12,WEAPB22"</Quality>
+<Quality>"RULES-WEAPB12,RULES-WEAPB22"</Quality>
 <Hand>"0"</Hand>
 <Ammunition>"6"</Ammunition>
 </Weapon>

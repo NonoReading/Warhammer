@@ -1,23 +1,22 @@
 # Warhammer — Contexte projet
 
-**Dernière mise à jour : 05/09/2026 (soir) — le §2.48 clôt la perte de donnée XpDiv25 :
-les grilles de WinPersonnage travaillent en unités DIVISÉES et la sauvegarde reversait
-telles quelles ces unités dans un champ qui porte de l'XP ABSOLUE, donc 100 devenait 4
-puis 0. `CalculOptionXpDiv25Inverse` rétablit l'échelle à l'écriture. Le §2.49 ouvre le
-chantier des PRÉFIXES DE LIVRE DANS LES RÉFÉRENCES : la conception est faite, le code
-n'est pas écrit, et le constat est plus grave que ce qu'annonçait `A FAIRE.txt` —
-**trois collisions sont DÉJÀ actives en base** (`ARMOB_10`, `ARMOB_11`, `WEAPB38`),
-six références nues affichent donc aujourd'hui la mauvaise qualité.**
+**Dernière mise à jour : 05/09/2026 (nuit) — le §2.49 est en grande partie CLOS : les cinq
+collisions de préfixe sont corrigées (23 références, pas six), `GetAllArmureBonusLibelle` est
+réécrite, et les références nues `ARMOB` / `WEAPB` sont toutes préfixées (374 lignes, 11 livres).
+Testé par Nono : qualités d'armures et d'armes correctes à l'écran et au PDF.**
 
-PROCHAINE ÉTAPE, dans l'ordre : corriger ces six références (§2.49 étape 1, c'est de la
-donnée fausse en production), puis préfixer les 889 références nues. Les points de reprise
-du chantier des appartenances (§2.44) sont INCHANGÉS : rendre l'appartenance visible sur la
-fiche et dans le PDF, le 3d-3 (ordres de chevalerie, bloqué par « le modèle ne porte pas
-d'effet de règle »), et les onze Regiments of Renown.
+PROCHAINE ÉTAPE : §2.49 étape 3 — recenser les points d'appel de `CompareRechercheValeur` et
+repérer ceux qui inversent leurs arguments — puis l'étape 4, durcir `VerifieRecherche`.
+⚠️ Avant de durcir : vérifier que les cinq vocabulaires fermés (`DISPO`, `CLASS`, `WEAPR`,
+`ARMOT`, `ARMOL`) ne passent pas par `VerifieRecherche`, sinon le durcissement les casse.
+Les points de reprise du chantier des appartenances (§2.44) sont INCHANGÉS : rendre
+l'appartenance visible sur la fiche et dans le PDF, le 3d-3 (ordres de chevalerie, bloqué par
+« le modèle ne porte pas d'effet de règle »), et les onze Regiments of Renown.
 
-⚠️ Lire le §0 sur **l'écriture qui répond « écrit » sans écrire** : elle s'est reproduite
-une TROISIÈME fois le 05/09 au soir, et c'est encore la TAILLE du fichier, jamais la date,
-qui l'a vue. Réémettre exactement le même envoi a suffi.
+⚠️ Lire le §0 sur **l'écriture qui répond « écrit » sans écrire** : QUATRIÈME occurrence le
+05/09 (deuxième envoi de la journée), et c'est encore la TAILLE du fichier, jamais la date, qui
+l'a vue. Réémettre exactement le même envoi a suffi. Six autres envois de la même session sont
+passés du premier coup : ce n'est ni systématique ni previsible, donc on vérifie à chaque fois.
 Ce fichier remplace tous les anciens
 `CONTEXT*.md` / `INDEX*.md` / `RESUME*.md` / `SESSION*.md`. Il n'y en a plus
 qu'un : celui-ci. On ne le duplique jamais, on l'édite en place.
@@ -4869,7 +4868,7 @@ observable, `StrToIntDef` rendant 0 et le test exigeant `>= 1`. Corrigée en `2`
 lignes de commentaire pour que la borne 11 ne soit pas re-signalée comme un bug. 230 613
 octets.
 
-### 2.49 Les préfixes de livre dans les références — CONCEPTION FAITE, CODE NON ÉCRIT (05/09/2026)
+### 2.49 Les préfixes de livre dans les références — étapes 1, 2 et 5 TERMINÉES (05/09/2026) ; restent 3 et 4
 
 **La règle du projet.** Chaque livre repart à 1 dans sa numérotation, précisément pour ne
 pas avoir à connaître le dernier numéro pris ailleurs. Cela n'est vrai que si les
@@ -4885,67 +4884,82 @@ match si  (livre_recherche = livre_valeur  et  codes égaux)
 
 La tolérance porte sur le **second** argument, et sur lui seul. Aux points d'appel du type
 `ChercheArmeBonus`, le second argument est la **référence à résoudre** : une référence nue
-matche donc la première entrée de la liste portant ce code nu, **quel que soit son livre**.
-Deux conséquences que le commentaire de `chargearmebonus.pas` ne dit pas :
-- la résolution n'est pas « vers le Rulebook », elle est **vers le premier chargé**. Ajouter,
-  renommer ou réordonner un livre peut changer silencieusement le sens d'une donnée déjà
-  saisie ;
-- l'asymétrie se **retourne** si un appelant inverse ses arguments : une référence nue passée
-  en PREMIER contre une entrée préfixée ne matche plus du tout, et l'enregistrement revient
-  vide, également en silence. Recenser les points d'appel fait partie du travail.
+matchait donc la première entrée de la liste portant ce code nu, **quel que soit son livre** —
+c'est-à-dire vers le **premier livre chargé**, pas vers le Rulebook. L'asymétrie se **retourne**
+si un appelant inverse ses arguments : une référence nue passée en PREMIER contre une entrée
+préfixée ne matche plus du tout, et l'enregistrement revient vide, en silence. C'est l'objet de
+l'étape 3.
 
-**Recensement (05/09/2026, sur les 19 fichiers de `DATABASE\`).** 889 références nues, sur
-65 codes distincts, concentrées dans huit familles :
+#### Étape 1 — les collisions (FAIT le 05/09/2026)
 
-| Famille | préfixées | nues |
+Elles étaient **cinq**, pas trois, et **23 références**, pas six. Le recensement de la veille
+n'avait vu que les `<Quality>` dont le code est **seul** dans la balise ; les codes placés dans
+une liste séparée par des virgules lui échappaient.
+
+| Code | ARCH3 / NAGGA | NATIO |
 |---|---|---|
-| DISPO | 5 | 334 |
-| CLASS | 10 | 166 |
-| WEAPR | 7 | 146 |
-| ARMOT | 16 | 71 |
-| ARMOL | 17 | 68 |
-| WEAPB | 44 | 66 |
-| ARMOB | 19 | 30 |
+| `ARMOB_09` | Reinforced | Spiked |
+| `ARMOB_10` | Overcoat | Corrupted (1d10+8 Corruption) |
+| `ARMOB_11` | Visor | Missile Resistant |
+| `ARMOB_12` | Requires Kit | Blinds the view |
+| `WEAPB38` | Barbed (NAGGA) | Concealed |
 
-Tout le reste est préfixé proprement : WORK (3 155), ATTR (2 670), COMPSAVOIR, RACE, SPECIE,
-COMB, MIRAC, BENED… **Le défaut est donc circonscrit**, ce qui rend la correction abordable.
-Faux positifs du comptage, à ne pas re-signaler : `NIV_HELF` est un nom de fichier image via
-`<PictureLevel>`, et `CORRUPTION_PHYSICAL` / `COMPDISC_URBAN` sont des vocabulaires fermés
-portés par le code.
+Toutes préfixées vers le livre de l'objet qui les porte. L'intention était lisible sans ouvrir
+un PDF : une brigandine n'est pas « Corrupted », un bascinet a une visière, des *Barbed Bolts*
+sont Barbed, les pièces de Chaos de Nations sont Corrupted et Spiked, un *Stechzeug Helm*
+bouche la vue, une *Hidden Wrist Blade* est Concealed.
 
-**LE POINT IMPORTANT : la collision n'est plus théorique.** `A FAIRE.txt` affirmait que ça
-tenait parce que les livres avaient numéroté à la suite du Rulebook. C'est FAUX depuis
-Nations of Mankind. Trois codes sont définis dans deux livres, et six références nues
-pointent dessus :
+Un doute de SAISIE, sans rapport avec le préfixage, est parti dans `A FAIRE.txt` : le **Soft
+Kit** simple d'Archives III porte `ARMOB_09` *Reinforced* comme le *Reinforced* Soft Kit qui le
+suit, ce qui efface la distinction entre les deux pièces. À vérifier dans le PDF.
 
-| Référence nue | définie comme | et comme |
-|---|---|---|
-| `ARMOB_10` (Archives III l.540 et l.550) | `ARCH3-ARMOB_10` *Overcoat* | `NATIO-ARMOB_10` *Corrupted* |
-| `ARMOB_11` (Nations l.10495 et l.10537) | `ARCH3-ARMOB_11` *Visor* | `NATIO-ARMOB_11` *Missile Resistant* |
-| `WEAPB38` (Nations l.10870) | `NAGGA-WEAPB38` *Barbed* | `NATIO-WEAPB38` *Concealed* |
+#### Étape 5 — `GetAllArmureBonusLibelle` (FAIT le 05/09/2026, AVANT l'étape 2)
 
-Ce ne sont pas des nuances : « Overcoat » contre « Corrupted », qui inflige 1d10+8 points de
-Corruption. La parade « numéroter à la suite » a échoué **parce qu'elle demandait de
-connaître le dernier numéro pris dans tous les livres — exactement ce qu'elle prétendait
-éviter**.
+Elle bloquait le préfixage et devait donc passer **avant**, pas après. L'ancienne version
+retirait le préfixe du code déclaré puis faisait un `StringReplace` de **sous-chaîne** sur la
+liste entière : sur `"RULES-ARMOB_02"` elle aurait remplacé le code et laissé le préfixe devant
+le libellé, affichant **« RULES-Partial »** sur la fiche et dans le PDF. Réécrite sur le modèle
+de `GetAllArmeBonusLibelle` (déjà corrigée) : découpage de la liste, puis résolution de chaque
+code **entier** par `ChercheArmureBonus`, qui passe par `CompareRechercheValeur`. Les formes
+`"CODE n"` (paramètre après espace) et `"CODE/CODE"` (alternatives) sont conservées.
 
-**Plan retenu, dans cet ordre.**
-1. Corriger les six références en collision, en vérifiant dans les PDF quelle qualité était
-   voulue. Correctif de DONNÉE, immédiat, indépendant du reste. **C'est la prochaine étape.**
-2. Préfixer les 889 références nues, famille par famille. Mécanisable : chaque code nu n'a
-   aujourd'hui qu'une résolution possible, donc le script écrit le préfixe du livre qui
-   résout actuellement — zéro changement de comportement par construction.
-3. Recenser les points d'appel de `CompareRechercheValeur` et repérer ceux qui inversent
-   leurs arguments.
-4. Seulement ENSUITE, durcir `VerifieRecherche` : une référence nue devient une erreur
-   visible au lieu d'une résolution au hasard. Fait avant l'étape 2, ce durcissement casse
-   889 références d'un coup.
-5. À part : le `StringReplace` de sous-chaîne encore présent dans
-   `GetAllArmureBonusLibelle`, dernier vestige du piège `WEAPB4` / `WEAPB40`.
+#### Étape 2 — le préfixage (FAIT le 05/09/2026)
 
-**En attendant l'étape 4**, les nouveaux livres continuent de numéroter à la suite pour les
-qualités d'arme et d'armure — en vérifiant désormais dans TOUS les livres, pas seulement
-dans le Rulebook : c'est cette vérification manquante qui a produit les trois collisions.
+**Cinq des huit familles n'étaient pas des références.** `DISPO`, `CLASS`, `WEAPR`, `ARMOT`,
+`ARMOL` n'ont **aucune définition `id=`** nulle part dans `DATABASE\` : ce sont des
+vocabulaires **fermés** portés par le code, comme `CORRUPTION_PHYSICAL`. Les préfixer les aurait
+cassés. Le chantier ne portait donc que sur **ARMOB et WEAPB** — bien plus petit que les 889
+annoncés.
+
+**374 lignes `<Quality>` préfixées sur 11 livres** (Rulebook 66, Rulebook FR 68, Up in Arms 74,
+Nations 91, Archives I 18, Archives II 8, Archives III 18, High Elf 13, Naggaroth 10, Lustria 7,
+Wardancer 1). Règle du script, plus sûre que celle prévue : il n'écrit un préfixe que si le code
+a **exactement une définition** dans tout `DATABASE\`, et refuse sinon. Le résultat ne dépend
+donc **pas de l'ordre de chargement d'`INI.TXT`**, et toute collision future devient un refus
+visible au lieu d'un choix silencieux. Formes conservées : `RULES-WEAPB23 4` garde son paramètre
+après l'espace, `RULES-WEAPB30/RULES-WEAPB12` préfixe chaque alternative. Vérifié côté
+**retraits** du diff : aucune ligne autre qu'un `<Quality>` n'a bougé. Testé par Nono à l'écran.
+
+#### Ce qui reste
+
+3. **Recenser les points d'appel de `CompareRechercheValeur`** et repérer ceux qui inversent
+   leurs arguments (référence nue en premier → aucun match, en silence). **C'est la prochaine
+   étape.**
+4. **Durcir `VerifieRecherche`** : une référence nue devient une erreur visible au lieu d'une
+   résolution au hasard. ⚠️ Vérifier D'ABORD que les cinq vocabulaires fermés ci-dessus ne
+   passent pas par ce chemin, sinon le durcissement les casse.
+
+Deux fragilités relevées dans le code au passage, sans effet aujourd'hui, notées pour mémoire :
+`pdfpersonnage.pas` retire le paramètre d'une qualité par `copy(LocData,1,Length(LocData)-2)`,
+ce qui suppose **exactement un chiffre** — un paramètre à deux chiffres casserait l'affichage ;
+et `winarmor.pas` l.269 ne retire pas du tout le paramètre (aucune qualité d'armure n'en porte
+aujourd'hui). Cas particulier à ne pas casser : `BonusProtection = 'WEAPB18 '`
+(`chargeconstantes.pas` l.393) est cherché par `Pos` de sous-chaîne sur la liste entière ;
+le préfixage le laisse fonctionner, mais un `XX-WEAPB18` d'un autre livre matcherait aussi.
+
+**En attendant l'étape 4**, les nouveaux livres numérotent à la suite pour les qualités d'arme
+et d'armure — en vérifiant dans TOUS les livres, pas seulement dans le Rulebook : c'est cette
+vérification manquante qui a produit les cinq collisions.
 
 ---
 

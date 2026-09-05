@@ -28,20 +28,69 @@ function GetAllArmureBonusLibelle(CodeArmureBonus :String): String;
 implementation
 
 function GetAllArmureBonusLibelle(CodeArmureBonus :String): String;
-  var
-    PArmureBonus:  StructureArmureBonus;
-    Res:           String;
-    Code:          String;
-  Begin
-    Res := CodeArmureBonus;
-    For PArmureBonus in ListArmureBonus do
+// Remplace chaque code de qualite par son libelle, dans une liste separee par des virgules.
+//
+// L'ancienne version faisait un StringReplace de SOUS-CHAINE sur la liste entiere, apres
+// avoir retire le prefixe de livre du code declare. Deux consequences :
+//   - un code prefixe d'un autre (ARMOB_1 dans ARMOB_10) aurait corrompu l'affichage ;
+//   - a partir du moment ou les references portent leur prefixe de livre (CONTEXT.md 2.49),
+//     le remplacement laissait le prefixe devant le libelle : "RULES-Partial".
+// Cette version decoupe la liste et resout chaque code entier via ChercheArmureBonus, qui
+// passe par CompareRechercheValeur et accepte donc le code prefixe comme non prefixe.
+// Transposition de GetAllArmeBonusLibelle (chargearmebonus.pas), corrigee le 04/09/2026.
+//
+// Deux formes particulieres sont conservees telles quelles, par symetrie avec les armes :
+//   "ARMOB_18 2"          un indice numerique suit le code, separe par un espace
+//   "ARMOB_02/ARMOB_04"   qualites alternatives, separees par SeparateurMulti
+var
+  Liste:          TStringList;
+  Alternatives:   TStringList;
+  Element:        String;
+  Suffixe:        String;
+  Morceau:        String;
+  Code:           String;
+  PArmureBonus:   StructureArmureBonus;
+  Ind:            Integer;
+  IndAlt:         Integer;
+Begin
+  Result       := '';
+  Liste        := TStringList.Create;
+  Alternatives := TStringList.Create;
+  try
+    ExtractStrings([','], [], PChar(CodeArmureBonus), Liste);
+    for Ind := 0 to Liste.Count - 1 do
       begin
-        Code := ExtractStringAfter(PArmureBonus.CodeArmureBonus, SeparateurLivre);
-        if Pos(Code, Res) > 0 then
-          Res := StringReplace(Res, Code, PArmureBonus.Libelle, [rfReplaceAll]);
+        Element := Trim(Liste[Ind]);
+        Suffixe := '';
+        if Pos(' ', Element) > 0 then
+          begin
+            Suffixe := ' ' + Trim(ExtractStringAfter(Element, ' '));
+            Element := Trim(ExtractStringBefore(Element, ' '));
+          end;
+
+        Alternatives.Clear;
+        ExtractStrings([SeparateurMulti], [], PChar(Element), Alternatives);
+        Morceau := '';
+        for IndAlt := 0 to Alternatives.Count - 1 do
+          begin
+            Code         := Trim(Alternatives[IndAlt]);
+            PArmureBonus := ChercheArmureBonus(Code);
+            if PArmureBonus.Libelle <> '' then
+              Code := PArmureBonus.Libelle;
+            if Morceau <> '' then
+              Morceau := Morceau + SeparateurMulti;
+            Morceau := Morceau + Code;
+          end;
+
+        if Result <> '' then
+          Result := Result + ',';
+        Result := Result + Morceau + Suffixe;
       end;
-    Result := Res;
+  finally
+    Alternatives.Free;
+    Liste.Free;
   end;
+end;
 
 function ChercheArmureBonus(CodeArmureBonus :String): StructureArmureBonus;
   var

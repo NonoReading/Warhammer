@@ -263,7 +263,7 @@
 <Reach>"WEAPR_SHORT"</Reach>
 <Price>"1CO"</Price>
 <Encumbrance>"1"</Encumbrance>
-<Quality>"WEAPB22"</Quality>
+<Quality>"RULES-WEAPB22"</Quality>
 <Hand>"1"</Hand>
 <Ammunition>"0"</Ammunition>
 </Weapon>
@@ -275,7 +275,7 @@
 <Reach>"WEAPR_MID"</Reach>
 <Price>"2CO"</Price>
 <Encumbrance>"2"</Encumbrance>
-<Quality>"WEAPB22,WEAPB04"</Quality>
+<Quality>"RULES-WEAPB22,RULES-WEAPB04"</Quality>
 <Hand>"1"</Hand>
 <Ammunition>"0"</Ammunition>
 </Weapon>
@@ -287,7 +287,7 @@
 <Reach>"20"</Reach>
 <Price>"3CO"</Price>
 <Encumbrance>"1"</Encumbrance>
-<Quality>"WEAPB23 1"</Quality>
+<Quality>"RULES-WEAPB23 1"</Quality>
 <Hand>"1"</Hand>
 <Ammunition>"0"</Ammunition>
 </Weapon>
@@ -326,7 +326,7 @@
 <Availability>"DISPO_LIMITED"</Availability>
 <Price>"8/-"</Price>
 <Encumbrance>"1"</Encumbrance>
-<Quality>"ARMOB_03,ARMOB_08"</Quality>
+<Quality>"RULES-ARMOB_03,RULES-ARMOB_08"</Quality>
 <Location>"ARMOL_HEAD"</Location>
 <ArmorPoint>"1"</ArmorPoint>
 <Type>"ARMOT_SOFTLEATHER"</Type>
@@ -336,7 +336,7 @@
 <Availability>"DISPO_LIMITED"</Availability>
 <Price>"14/-"</Price>
 <Encumbrance>"2"</Encumbrance>
-<Quality>"ARMOB_08"</Quality>
+<Quality>"RULES-ARMOB_08"</Quality>
 <Location>"ARMOL_LEG"</Location>
 <ArmorPoint>"1"</ArmorPoint>
 <Type>"ARMOT_SOFTLEATHER"</Type>
@@ -346,7 +346,7 @@
 <Availability>"DISPO_LIMITED"</Availability>
 <Price>"10/-"</Price>
 <Encumbrance>"2"</Encumbrance>
-<Quality>"ARMOB_08"</Quality>
+<Quality>"RULES-ARMOB_08"</Quality>
 <Location>"ARMOL_BODY"</Location>
 <ArmorPoint>"1"</ArmorPoint>
 <Type>"ARMOT_SOFTLEATHER"</Type>
@@ -356,7 +356,7 @@
 <Availability>"DISPO_LIMITED"</Availability>
 <Price>"12/-"</Price>
 <Encumbrance>"2"</Encumbrance>
-<Quality>"ARMOB_08"</Quality>
+<Quality>"RULES-ARMOB_08"</Quality>
 <Location>"ARMOL_ARM,ARMOL_BODY"</Location>
 <ArmorPoint>"1"</ArmorPoint>
 <Type>"ARMOT_SOFTLEATHER"</Type>

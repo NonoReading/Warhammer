@@ -6,6 +6,14 @@
 CORRECTIONS COURTES  (une ligne ou deux chacune)
 =========================================================================
 
+LE SOFT KIT SIMPLE PORTE LA QUALITE "REINFORCED", COMME LE REINFORCED SOFT KIT. Archives III,
+ARCH3-ARMO_xx lignes 438 et 448 du XML : "Soft Kit" a ARMOB_08,ARCH3-ARMOB_09 et "Reinforced
+Soft Kit" a ARMOB_03,ARCH3-ARMOB_09,ARMOB_08 - la seule difference est Partial. Si ARMOB_09 est
+bien "Reinforced", le premier ne devrait pas l avoir et la distinction entre les deux pieces
+disparait. Releve le 05/09/2026 en prefixant les references (CONTEXT.md 2.49) ; le prefixe pose
+est ARCH3, ce qui conserve la resolution actuelle. Reste a verifier dans le PDF d Archives of
+the Empire III quelle qualite le livre donne au Soft Kit de base.
+
 REPARER LES COUTS DE CARRIERE DEJA TOMBES A ZERO DANS LES DOSSIERS EXISTANTS. Sequelle du bug
 XpDiv25 corrige le 05/09/2026 (CONTEXT.md 2.48) : le correctif arrete l hemorragie, il ne
 restaure pas le passe. Gunther Krieg en a trois. Aucun calcul automatique possible, le montant
@@ -198,38 +206,24 @@ quelle ligne d equipement. Vrai depuis toujours pour les qualites du Rulebook, m
 visible depuis que des accessoires y sont entres (04/09/2026). A traiter avec le branchement
 du calcul ci-dessus, pas avant.
 
-CORRIGER LES SIX REFERENCES NUES EN COLLISION - URGENT, DONNEE FAUSSE EN PRODUCTION.
-Trouve le 05/09/2026 (CONTEXT.md 2.49). Trois codes sont definis dans DEUX livres et six
-references nues pointent dessus, donc la resolution depend de l ordre de chargement :
- - ARMOB_10, references dans Archives III l.540 et l.550 : ARCH3-ARMOB_10 "Overcoat" contre
-   NATIO-ARMOB_10 "Corrupted", qui inflige 1d10+8 points de Corruption ;
- - ARMOB_11, references dans Nations l.10495 et l.10537 : ARCH3-ARMOB_11 "Visor" contre
-   NATIO-ARMOB_11 "Missile Resistant" ;
- - WEAPB38, reference dans Nations l.10870 : NAGGA-WEAPB38 "Barbed" contre NATIO-WEAPB38
-   "Concealed".
-A FAIRE : verifier dans les PDF quelle qualite etait voulue a chacun des six endroits, puis
-ecrire la reference PREFIXEE. Correctif de donnee, independant du chantier ci-dessous.
-
-PREFIXER LES 889 REFERENCES NUES DE DATABASE. Chantier de fond, conception faite le
-05/09/2026 dans CONTEXT.md 2.49 - lire cette section avant de commencer, elle porte le
-comportement exact de CompareRechercheValeur et le plan en 5 etapes. En resume :
- - la tolerance de VerifieRecherche porte sur le SECOND argument seulement ; une reference
-   nue matche la premiere entree portant ce code nu, quel que soit son livre. La resolution
-   va donc VERS LE PREMIER LIVRE CHARGE, et non vers le Rulebook comme on le croyait ;
- - 889 references nues, 65 codes distincts, huit familles seulement : DISPO 334, CLASS 166,
-   WEAPR 146, ARMOT 71, ARMOL 68, WEAPB 66, ARMOB 30. Tout le reste est propre ;
- - l etape 2 (prefixage) est mecanisable sans changement de comportement : chaque code nu n a
-   aujourd hui qu une resolution possible, le script ecrit le prefixe du livre qui resout
-   actuellement ;
- - NE PAS durcir VerifieRecherche avant d avoir prefixe : cela casserait 889 references d un
-   coup ;
- - a part : le StringReplace de sous-chaine encore present dans GetAllArmureBonusLibelle,
-   dernier vestige du piege WEAPB4 / WEAPB40.
-EN ATTENDANT, les nouveaux livres continuent de numeroter A LA SUITE pour les qualites d arme
-et d armure, mais en verifiant dans TOUS LES LIVRES et plus seulement dans le Rulebook : c est
-cette verification manquante qui a produit les trois collisions ci-dessus. La table
-DATA_CRAFTMANSHIP, elle, repart bien a 01 sans risque - CodeFabrication porte l identifiant
-complet avec son prefixe (xmlexportimport.pas l.2436).
+[FAIT LE 05/09/2026 - les collisions et le prefixage sont clos, voir CONTEXT.md 2.49 et Log.txt]
+PREFIXES DE LIVRE : IL RESTE LES ETAPES 3 ET 4. Les 23 references en collision sont corrigees
+(elles etaient cinq codes et 23 references, pas trois et six), GetAllArmureBonusLibelle est
+reecrite, et les 374 references nues ARMOB / WEAPB portent leur prefixe. Restent :
+ - ETAPE 3 : recenser les points d appel de CompareRechercheValeur et reperer ceux qui
+   INVERSENT leurs arguments. La tolerance ne porte que sur le second : une reference nue
+   passee en PREMIER contre une entree prefixee ne matche rien, et l enregistrement revient
+   vide en silence.
+ - ETAPE 4 : durcir VerifieRecherche pour qu une reference nue devienne une erreur VISIBLE.
+   ATTENTION : verifier d abord que DISPO, CLASS, WEAPR, ARMOT et ARMOL ne passent pas par ce
+   chemin. Ces cinq familles n ont AUCUNE definition id= dans DATABASE : ce sont des
+   vocabulaires FERMES portes par le code, comme CORRUPTION_PHYSICAL. Le durcissement les
+   casserait.
+EN ATTENDANT L ETAPE 4, les nouveaux livres numerotent A LA SUITE pour les qualites d arme et
+d armure, en verifiant dans TOUS LES LIVRES et pas seulement dans le Rulebook : c est cette
+verification manquante qui a produit les collisions. La table DATA_CRAFTMANSHIP, elle, repart
+bien a 01 sans risque - CodeFabrication porte l identifiant complet avec son prefixe
+(xmlexportimport.pas l.2436).
 
 NATIONS OF MANKIND 3D-2 : LES ONZE REGIMENTS OF RENOWN NE RENTRENT PAS DANS LA TABLE.
 Condition = niveau 3 atteint et non l ethnie seule ; l effet comprend des TRAPPINGS
@@ -923,19 +917,11 @@ ARBITRAGES OUVERTS
 =========================================================================
 CHANTIERS DE FOND, PAS ENCORE OUVERTS
 =========================================================================
-1. PREFIXER LES CODES <Quality> PAR LEUR LIVRE. [MESURE LE 29/08 - risque theorique]
-   Aucune collision aujourd hui : les 55 codes sont declares chacun par un seul livre.
-   Le chantier reste possible mais n est plus urgent. Cout mesure : deux fonctions a
-   adapter (GetAllArmeBonusLibelle, deja reecrite, et son jumeau armure), plus une passe
-   sur les donnees. ChercheArmeBonus / ChercheArmureBonus acceptent DEJA le code prefixe,
-   elles passent par CompareRechercheValeur. Alternative bon marche : un controle
-   d unicite globale a chaque ajout, qui supprime le risque sans rien changer.
-
-   ANCIEN LIBELLE : Le champ stocke les codes SANS prefixe, donc la
-   numerotation WEAPB est un espace de noms GLOBAL : deux livres peuvent se marcher dessus, ce
-   qui est deja arrive (NAGGA-WEAPB31 contre UPINA-WEAPB31, renumerote le 23/08). Tant que ce
-   n'est pas fait, TOUT nouveau BonusMalus doit prendre le premier numero libre AU NIVEAU DE TOUS
-   LES LIVRES. Prochain libre : 39.
+1. [SUPPRIME LE 05/09/2026 - FAIT. Le prefixage des <Quality> est termine, les deux fonctions
+   GetAll*BonusLibelle sont reecrites. L affirmation "aucune collision aujourd hui, les 55 codes
+   sont declares chacun par un seul livre" etait FAUSSE des le 04/09 : cinq codes etaient
+   declares par deux livres. Ce qui reste tient dans l entree "PREFIXES DE LIVRE : IL RESTE LES
+   ETAPES 3 ET 4" plus haut.]
 
 2. MIGRER LES QUATRE PERSONNAGES HERITES (Ernold, Friederich, Harald, Markus).
 

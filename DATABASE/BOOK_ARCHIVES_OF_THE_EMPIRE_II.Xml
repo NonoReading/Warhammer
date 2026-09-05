@@ -580,7 +580,7 @@ Examples you could take include: Alcohol, Food, Narcotics, Pleasure."</Explanati
 <Reach>"WEAPR_SHORT"</Reach>
 <Price>"4GC"</Price>
 <Encumbrance>"2"</Encumbrance>
-<Quality>"WEAPB18 1,WEAPB08"</Quality>
+<Quality>"RULES-WEAPB18 1,RULES-WEAPB08"</Quality>
 <Hand>"1"</Hand>
 <Ammunition>"0"</Ammunition>
 </Weapon>
@@ -592,7 +592,7 @@ Examples you could take include: Alcohol, Food, Narcotics, Pleasure."</Explanati
 <Reach>"WEAPR_LONG"</Reach>
 <Price>"5GC"</Price>
 <Encumbrance>"6"</Encumbrance>
-<Quality>"WEAPB10"</Quality>
+<Quality>"RULES-WEAPB10"</Quality>
 <Hand>"1"</Hand>
 <Ammunition>"0"</Ammunition>
 </Weapon>
@@ -604,7 +604,7 @@ Examples you could take include: Alcohol, Food, Narcotics, Pleasure."</Explanati
 <Reach>"(BATTR_S)x3"</Reach>
 <Price>"6/-"</Price>
 <Encumbrance>"2"</Encumbrance>
-<Quality>"WEAPB12"</Quality>
+<Quality>"RULES-WEAPB12"</Quality>
 <Hand>"1"</Hand>
 <Ammunition>"0"</Ammunition>
 </Weapon>
@@ -616,7 +616,7 @@ Examples you could take include: Alcohol, Food, Narcotics, Pleasure."</Explanati
 <Reach>"50"</Reach>
 <Price>"2"</Price>
 <Encumbrance>"8"</Encumbrance>
-<Quality>"WEAPB24,WEAPB23 5"</Quality>
+<Quality>"RULES-WEAPB24,RULES-WEAPB23 5"</Quality>
 <Hand>"0"</Hand>
 <Ammunition>"0"</Ammunition>
 </Weapon>
@@ -628,7 +628,7 @@ Examples you could take include: Alcohol, Food, Narcotics, Pleasure."</Explanati
 <Reach>"20"</Reach>
 <Price>"9GC"</Price>
 <Encumbrance>"3"</Encumbrance>
-<Quality>"WEAPB13,WEAPB23 1"</Quality>
+<Quality>"RULES-WEAPB13,RULES-WEAPB23 1"</Quality>
 <Hand>"1"</Hand>
 <Ammunition>"0"</Ammunition>
 </Weapon>
@@ -640,7 +640,7 @@ Examples you could take include: Alcohol, Food, Narcotics, Pleasure."</Explanati
 <Reach>"20"</Reach>
 <Price>"8GC"</Price>
 <Encumbrance>"3"</Encumbrance>
-<Quality>"WEAPB17,WEAPB23 2"</Quality>
+<Quality>"RULES-WEAPB17,RULES-WEAPB23 2"</Quality>
 <Hand>"1"</Hand>
 <Ammunition>"0"</Ammunition>
 </Weapon>
@@ -652,7 +652,7 @@ Examples you could take include: Alcohol, Food, Narcotics, Pleasure."</Explanati
 <Reach>"(BATTR_S)x2"</Reach>
 <Price>"1GC"</Price>
 <Encumbrance>"2"</Encumbrance>
-<Quality>"WEAPB17"</Quality>
+<Quality>"RULES-WEAPB17"</Quality>
 <Hand>"1"</Hand>
 <Ammunition>"0"</Ammunition>
 </Weapon>
@@ -687,7 +687,7 @@ Examples you could take include: Alcohol, Food, Narcotics, Pleasure."</Explanati
 <Availability>"DISPO_RARE"</Availability>
 <Price>"20GC"</Price>
 <Encumbrance>"4"</Encumbrance>
-<Quality>"ARMOB_02"</Quality>
+<Quality>"RULES-ARMOB_02"</Quality>
 <Location>"ARMOL_BODY"</Location>
 <ArmorPoint>"3"</ArmorPoint>
 <Type>"ARMOT_PLATE"</Type>

@@ -3724,7 +3724,7 @@ You invoke a mystical prime language that existed before the arrival of the Old 
 <Availability>"DISPO_UNIQUE"</Availability>
 <Price>"1280 GC"</Price>
 <Encumbrance>"1"</Encumbrance>
-<Quality>"ARMOB_02,ARMOB_04,ARMOB_05"</Quality>
+<Quality>"RULES-ARMOB_02,RULES-ARMOB_04,RULES-ARMOB_05"</Quality>
 <Location>"ARMOL_BODY"</Location>
 <ArmorPoint>"2"</ArmorPoint>
 <Type>"ARMOT_PLATE"</Type>
@@ -3734,7 +3734,7 @@ You invoke a mystical prime language that existed before the arrival of the Old 
 <Availability>"DISPO_UNIQUE"</Availability>
 <Price>"256 GC"</Price>
 <Encumbrance>"0"</Encumbrance>
-<Quality>"ARMOB_03,ARMOB_05,ARMOB_06"</Quality>
+<Quality>"RULES-ARMOB_03,RULES-ARMOB_05,RULES-ARMOB_06"</Quality>
 <Location>"ARMOL_HEAD"</Location>
 <ArmorPoint>"2"</ArmorPoint>
 <Type>"ARMOT_PLATE"</Type>
@@ -3744,7 +3744,7 @@ You invoke a mystical prime language that existed before the arrival of the Old 
 <Availability>"DISPO_UNIQUE"</Availability>
 <Price>"1024 GC"</Price>
 <Encumbrance>"1"</Encumbrance>
-<Quality>"ARMOB_02,ARMOB_04,ARMOB_05"</Quality>
+<Quality>"RULES-ARMOB_02,RULES-ARMOB_04,RULES-ARMOB_05"</Quality>
 <Location>"ARMOL_ARM"</Location>
 <ArmorPoint>"2"</ArmorPoint>
 <Type>"ARMOT_PLATE"</Type>
@@ -3754,7 +3754,7 @@ You invoke a mystical prime language that existed before the arrival of the Old 
 <Availability>"DISPO_UNIQUE"</Availability>
 <Price>"1280 GC"</Price>
 <Encumbrance>"1"</Encumbrance>
-<Quality>"ARMOB_02,ARMOB_04,ARMOB_05"</Quality>
+<Quality>"RULES-ARMOB_02,RULES-ARMOB_04,RULES-ARMOB_05"</Quality>
 <Location>"ARMOL_LEG"</Location>
 <ArmorPoint>"2"</ArmorPoint>
 <Type>"ARMOT_PLATE"</Type>
@@ -3764,7 +3764,7 @@ You invoke a mystical prime language that existed before the arrival of the Old 
 <Availability>"DISPO_UNIQUE"</Availability>
 <Price>"384 GC"</Price>
 <Encumbrance>"0"</Encumbrance>
-<Quality>"ARMOB_02,ARMOB_04,ARMOB_05,ARMOB_07"</Quality>
+<Quality>"RULES-ARMOB_02,RULES-ARMOB_04,RULES-ARMOB_05,RULES-ARMOB_07"</Quality>
 <Location>"ARMOL_HEAD"</Location>
 <ArmorPoint>"2"</ArmorPoint>
 <Type>"ARMOT_PLATE"</Type>
@@ -3778,7 +3778,7 @@ You invoke a mystical prime language that existed before the arrival of the Old 
 <Availability>"DISPO_UNIQUE"</Availability>
 <Price>"1536 GC"</Price>
 <Encumbrance>"0"</Encumbrance>
-<Quality>"ARMOB_02,ARMOB_04,ARMOB_05,ARMOB_07"</Quality>
+<Quality>"RULES-ARMOB_02,RULES-ARMOB_04,RULES-ARMOB_05,RULES-ARMOB_07"</Quality>
 <Location>"ARMOL_HEAD"</Location>
 <ArmorPoint>"2"</ArmorPoint>
 <Type>"ARMOT_PLATE"</Type>
@@ -3788,7 +3788,7 @@ You invoke a mystical prime language that existed before the arrival of the Old 
 <Availability>"DISPO_UNIQUE"</Availability>
 <Price>"10240 GC"</Price>
 <Encumbrance>"3"</Encumbrance>
-<Quality>"ARMOB_02,ARMOB_04,ARMOB_05"</Quality>
+<Quality>"RULES-ARMOB_02,RULES-ARMOB_04,RULES-ARMOB_05"</Quality>
 <Location>"ARMOL_BODY"</Location>
 <ArmorPoint>"2"</ArmorPoint>
 <Type>"ARMOT_PLATE"</Type>
@@ -3798,7 +3798,7 @@ You invoke a mystical prime language that existed before the arrival of the Old 
 <Availability>"DISPO_UNIQUE"</Availability>
 <Price>"2048 GC"</Price>
 <Encumbrance>"1"</Encumbrance>
-<Quality>"ARMOB_03,ARMOB_05,ARMOB_06"</Quality>
+<Quality>"RULES-ARMOB_03,RULES-ARMOB_05,RULES-ARMOB_06"</Quality>
 <Location>"ARMOL_HEAD"</Location>
 <ArmorPoint>"2"</ArmorPoint>
 <Type>"ARMOT_PLATE"</Type>
@@ -3808,7 +3808,7 @@ You invoke a mystical prime language that existed before the arrival of the Old 
 <Availability>"DISPO_UNIQUE"</Availability>
 <Price>"8192 GC"</Price>
 <Encumbrance>"3"</Encumbrance>
-<Quality>"ARMOB_02,ARMOB_04,ARMOB_05"</Quality>
+<Quality>"RULES-ARMOB_02,RULES-ARMOB_04,RULES-ARMOB_05"</Quality>
 <Location>"ARMOL_ARM"</Location>
 <ArmorPoint>"2"</ArmorPoint>
 <Type>"ARMOT_PLATE"</Type>
@@ -3818,7 +3818,7 @@ You invoke a mystical prime language that existed before the arrival of the Old 
 <Availability>"DISPO_UNIQUE"</Availability>
 <Price>"10240 GC"</Price>
 <Encumbrance>"3"</Encumbrance>
-<Quality>"ARMOB_02,ARMOB_04,ARMOB_05"</Quality>
+<Quality>"RULES-ARMOB_02,RULES-ARMOB_04,RULES-ARMOB_05"</Quality>
 <Location>"ARMOL_LEG"</Location>
 <ArmorPoint>"2"</ArmorPoint>
 <Type>"ARMOT_PLATE"</Type>
@@ -3828,7 +3828,7 @@ You invoke a mystical prime language that existed before the arrival of the Old 
 <Availability>"DISPO_UNIQUE"</Availability>
 <Price>"3072 GC"</Price>
 <Encumbrance>"2"</Encumbrance>
-<Quality>"ARMOB_02,ARMOB_04,ARMOB_05,ARMOB_07"</Quality>
+<Quality>"RULES-ARMOB_02,RULES-ARMOB_04,RULES-ARMOB_05,RULES-ARMOB_07"</Quality>
 <Location>"ARMOL_HEAD"</Location>
 <ArmorPoint>"2"</ArmorPoint>
 <Type>"ARMOT_PLATE"</Type>
@@ -3840,7 +3840,7 @@ You invoke a mystical prime language that existed before the arrival of the Old 
 <Availability>"DISPO_EXOTIC"</Availability>
 <Price>"20 GC"</Price>
 <Encumbrance>"2"</Encumbrance>
-<Quality>"ARMOB_03"</Quality>
+<Quality>"RULES-ARMOB_03"</Quality>
 <Location>"ARMOL_BODY"</Location>
 <ArmorPoint>"2"</ArmorPoint>
 <Type>"ARMOT_SOFTLEATHER"</Type>
@@ -3862,7 +3862,7 @@ You invoke a mystical prime language that existed before the arrival of the Old 
 <Reach>"WEAPR_LONG"</Reach>
 <Price>"2000 GC"</Price>
 <Encumbrance>"2"</Encumbrance>
-<Quality>"WEAPB10,WEAPB30"</Quality>
+<Quality>"RULES-WEAPB10,RULES-WEAPB30"</Quality>
 <Hand>"2"</Hand>
 <Ammunition>"0"</Ammunition>
 </Weapon>
