@@ -4615,17 +4615,37 @@ pendant `T0157_ARMU` s'appelle « Master Tradesman (Gunsmith) ».
 
 ---
 
+**L'APPARTENANCE EST VISIBLE SUR LA FICHE À L'ÉCRAN — TERMINÉ (06/09/2026).**
+
+Nouveau champ `LibAppartenance: TEdit` (readonly) sous l'image du métier, avec son
+`TBCLabel LabelAppartenance` ("Appartenance") ; `TabNiveau` et son label décalés vers le bas
+pour laisser la place, `ImageBackMetier` agrandie d'autant — Nono a affiné le placement exact,
+les hauteurs et l'agrandissement du fond à l'écran dans l'IDE, après un premier jet de
+coordonnées qui se chevauchaient.
+
+`chargemetier.pas` — nouvelle fonction `LibelleAppartenances(Codes: String): String`, à côté
+d'`AppartenancesCandidates` : éclate la liste de codes séparés par des virgules, résout chacun
+par `ChercheCareerBonus`, joint les libellés obtenus par `, `.
+
+`winpersonnage.pas` — deux points d'appel : juste après `LibMetier.Caption:= PMetier.Libelle;`
+(l.2822, affichage normal de la fiche), et juste après `PersonnageAppliqueGreffes(Personnage)`
+dans `MajTables` (rafraîchit l'affichage tout de suite après un choix de régiment, sans
+attendre un nouveau passage dans `MajTables`).
+
+**Reste ouvert, noté dans `A FAIRE.txt`** : rien ne l'affiche encore dans le PDF, et une
+appartenance déjà acquise ne se corrige toujours que par une nouvelle entrée en carrière ou
+une édition du XML à la main.
+
+*Correction au passage* : `GreffesDesAppartenances` (ancien point 2 de la liste ci-dessous)
+était déjà supprimée depuis le 05/09/2026 (`Log.txt`) — l'info n'avait pas été répercutée ici.
+
+---
+
 **POINTS DE REPRISE, dans l'ordre :**
 
-1. **Rendre l'appartenance visible.** Rien ne l'affiche aujourd'hui, ni sur la fiche à l'écran
-   ni dans le PDF, et le choix n'est proposé qu'à l'entrée en carrière : cliquer à côté oblige
-   à rouvrir la carrière ou à éditer le XML à la main. Affichage en lecture au minimum ;
-   correction à trancher. Noté aussi dans `A FAIRE.txt`.
-2. **Supprimer `GreffesDesAppartenances`** dans `chargemetier.pas` — sans appelant, vérifié
-   partout. Une ligne, à faire seule.
-3. **Le 3d-3, les ordres de chevalerie.** Même table `DATA_CAREER_BONUS`, sur la carrière
+1. **Le 3d-3, les ordres de chevalerie.** Même table `DATA_CAREER_BONUS`, sur la carrière
    Knight au lieu de Soldier ; conception à mener avant saisie.
-4. **Les onze Regiments of Renown**, qui ne rentrent pas dans le moule — condition de niveau 3
+2. **Les onze Regiments of Renown**, qui ne rentrent pas dans le moule — condition de niveau 3
    atteint et non d'ethnie, *trappings* que le greffon compétence/talent ne porte pas, et rang
    ramené à Soldier avec conservation du statut social. Même famille que les psychologies.
 

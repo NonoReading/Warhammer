@@ -86,6 +86,11 @@ function ChercheCareerBonus(CodeBonus :String): StructureCareerBonus;
 function NiveauxDuCareerBonus(CodeBonus :String): TListCareerBonusNiveau;
 Function AppartenancesCandidates(CodeMetier: String; CodeRace: String;
                                  DejaAcquises: String): String;
+// Libelles resolus d'une liste d'appartenances (Personnage.Appartenance), joints
+// par une virgule-espace pour l'affichage. Meme convention de code nu tolere que
+// ChercheCareerBonus (CompareRechercheValeur, second argument). Chaine vide si
+// Codes est vide ou si aucun code ne resout.
+Function LibelleAppartenances(Codes: String): String;
 
 implementation
 
@@ -202,6 +207,34 @@ Begin
       end;
   finally
     Acquis.Free;
+  end;
+End;
+
+Function LibelleAppartenances(Codes: String): String;
+Var
+  PBonus:  StructureCareerBonus;
+  Liste:   TStringList;
+  Ind:     Integer;
+Begin
+  Result := '';
+  if Trim(Codes) = '' then
+    Exit;
+
+  Liste := TStringList.Create;
+  try
+    ExtractStrings([','], [], PChar(Codes), Liste);
+    for Ind := 0 to Liste.Count - 1 do
+      begin
+        if Trim(Liste[Ind]) = '' then
+          continue;
+        PBonus := ChercheCareerBonus(Trim(Liste[Ind]));
+        if Result = '' then
+          Result := PBonus.Libelle
+        else
+          Result := Result + ', ' + PBonus.Libelle;
+      end;
+  finally
+    Liste.Free;
   end;
 End;
 

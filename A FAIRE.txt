@@ -97,11 +97,12 @@ Tradesman (Gunsmith)". Releve le 04/09/2026 en saisissant Nuln, qui donne les de
 pointe dessus sans rien renommer (decision Nono). Renommer T0092_ARMU en "Craftsman
 (Gunsmith)" toucherait le RULEBOOK, d ou l attente d un arbitrage.
 
-RIEN NE PERMET DE VOIR NI DE CORRIGER L APPARTENANCE D UN PERSONNAGE DEJA CREE. Releve le
-04/09/2026 en testant l ecran de choix. MEMBERSHIP ne s affiche ni sur la fiche a l ecran ni
-dans le PDF, et le choix n est propose qu au moment d entrer dans une carriere : cliquer a
-cote oblige a rouvrir la carriere ou a editer le XML a la main. A concevoir - affichage en
-lecture au minimum, correction a trancher.
+L APPARTENANCE NE S AFFICHE PAS DANS LE PDF, ET NE SE CORRIGE PAS SUR UNE FICHE EXISTANTE.
+Releve le 04/09/2026 en testant l ecran de choix ; affichage a l ecran ajoute le 06/09/2026
+(CONTEXT.md 2.44, champ LibAppartenance). Reste : rien ne l affiche dans le PDF, et le choix
+n est toujours propose qu au moment d entrer dans une carriere - cliquer a cote oblige a
+rouvrir la carriere ou a editer le XML a la main. A concevoir : affichage PDF, et un moyen de
+corriger une appartenance deja acquise.
 
 TABCOMPETENCE.CELLS[COLCOMPCARAC, LIG] AU LIEU DE IND DANS WINPERSONNAGE. Bloc "competence
 liee a un talent" de XmlChargePersonnage : toutes les autres colonnes de la ligne creee

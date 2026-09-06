@@ -1573,3 +1573,20 @@ Chantier §2.49 : le prefixage des references (etapes 1, 2, 2 bis, 3, 5) reste a
 teste. Seule l etape 4 (durcissement) est en attente d un prealable supplementaire, decouvert
 ce jour : sortir les GetTexteLibelle('PDF_XXX') en dur en constantes prefixees avant de
 retenter. Voir CONTEXT.md §2.49 etape 4 pour le detail.
+
+06/09/2026 - L'APPARTENANCE (REGIMENT/ORDRE/CULTE) EST VISIBLE SUR LA FICHE A L'ECRAN
+Nouveau champ LibAppartenance (TEdit readonly) sous l'image du metier dans winpersonnage.lfm,
+avec son label TBCLabel "Appartenance" ; TabNiveau et son label decales vers le bas,
+ImageBackMetier agrandie d'autant. Coordonnees ajustees a l'ecran par Nono dans l'IDE apres un
+premier jet qui chevauchait legerement.
+chargemetier.pas : nouvelle fonction LibelleAppartenances(Codes: String): String, a cote
+d'AppartenancesCandidates - eclate la liste de codes separes par des virgules, resout chacun
+par ChercheCareerBonus, joint les libelles par ", ".
+winpersonnage.pas : deux points d'appel, juste apres LibMetier.Caption:= PMetier.Libelle;
+(l.2822) et juste apres PersonnageAppliqueGreffes(Personnage) dans MajTables (rafraichit sans
+attendre un nouveau passage dans MajTables).
+Teste par Nono : le champ affiche desormais le ou les libelles attendus.
+Au passage : GreffesDesAppartenances (retiree le 05/09) et l'etat des points de reprise du
+2.44 corriges dans CONTEXT.md, qui n'avait pas ete mis a jour ce jour-la.
+Reste ouvert (A FAIRE.txt) : affichage dans le PDF, et aucun moyen de corriger une appartenance
+deja acquise en dehors d'une nouvelle entree en carriere ou d'une edition du XML a la main.
