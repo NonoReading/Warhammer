@@ -156,13 +156,22 @@ Type
   Function PersonnageTalentAsterisque(var Personnage:StructurePersonnage; CodeTalent: String): Integer;
   // Effets à delta pur des mutations obtenues (CONTEXT.md §2.7, étape 8) - somme, pour un code
   // d'attribut/compétence donné, tous les <ModifyCarac>/<ModifySkill> des mutations présentes
-  // dans Personnage.Mutations. Contrairement à ListTalentAttributModif/ListArmureBonusModif
-  // (annotation d'affichage uniquement), ce sont ici de vrais modificateurs additionnés au Total
+  // dans Personnage.Mutations. Ce sont ici de vrais modificateurs additionnés au Total
   // (PdfPersonnageAttribut/PdfPersonnageCompetence, pdfpersonnage.pas).
   Function PersonnageMutationAttributModif(Personnage: StructurePersonnage; CodeAttribut: String): Integer;
   Function PersonnageMutationCompetenceModif(Personnage: StructurePersonnage; CodeCompetence: String): Integer;
   Function PersonnageMutationArmureModif(Personnage: StructurePersonnage; CodeLocalisation: String): Integer;
   Function PersonnageTalentArmureModif(Personnage: StructurePersonnage; CodeLocalisation: String): Integer;
+  // Même principe que PersonnageMutationAttributModif, mais sur les <ModifyCarac> déclarés
+  // directement sur un TALENT (DATA_TALENT, ListTalentAttributModif) plutôt que sur une
+  // mutation. Ajoutée le 06/09/2026 - CONTEXT.md, chantier "résolveur générique
+  // Attribut/Compétence" : premier pas, un seul appelant pour l'instant (Mouvement dans
+  // PdfPersonnageCreation/Feldo2P, en remplacement du cas TalentVeloce du case sur
+  // AugmentationTalent/CreationTalent). ListTalentAttributModif servait jusqu'ici uniquement
+  // à l'annotation d'affichage (PersonnageTalentAsterisque) ; elle devient ici, en plus, un
+  // vrai modificateur - aucun changement pour l'annotation existante, les deux lisent la
+  // même donnée sans interférer.
+  Function PersonnageTalentAttributModif(Personnage: StructurePersonnage; CodeAttribut: String): Integer;
   // Greffes des appartenances (regiments, ordres, cultes) - CONTEXT.md 2.44
   Procedure PersonnageAppliqueGreffes(var Personnage: StructurePersonnage);
 
@@ -1302,7 +1311,13 @@ begin
           begin
             if Personnage.CreationAttribut[indiceAttribut].Bonus <> '' then
               Personnage.CreationAttribut[indiceAttribut].Bonus += '-' ;
-            Personnage.CreationAttribut[indiceAttribut].Bonus += ListTalentAttributModif[indiceTalent].ValeurDonnee+' (' + IntToStr(Asterisque) + ')';
+            // ValeurDonnee (texte brut) -> Valeur (Integer) le 06/09/2026 : le signe n'est
+            // plus recopie tel quel depuis le XML, on le reconstruit - meme convention que
+            // PdfPersonnageCreation l.2326 pour Personnage.Corruption[].Montant.
+            if ListTalentAttributModif[indiceTalent].Valeur > 0 then
+              Personnage.CreationAttribut[indiceAttribut].Bonus += '+' + IntToStr(ListTalentAttributModif[indiceTalent].Valeur)+' (' + IntToStr(Asterisque) + ')'
+            else
+              Personnage.CreationAttribut[indiceAttribut].Bonus += IntToStr(ListTalentAttributModif[indiceTalent].Valeur)+' (' + IntToStr(Asterisque) + ')';
           end;
       end;
 
@@ -1384,6 +1399,24 @@ Function PersonnageMutationAttributModif(Personnage: StructurePersonnage; CodeAt
         if CompareRechercheValeur(ListCorruptionAttributModif[indiceModif].CodeCorruption, PersonnageMutation.Code)
            and CompareRechercheValeur(ListCorruptionAttributModif[indiceModif].CodeAttribut, CodeAttribut) then
           Result := Result + ListCorruptionAttributModif[indiceModif].Valeur;
+  end;
+
+Function PersonnageTalentAttributModif(Personnage: StructurePersonnage; CodeAttribut: String): Integer;
+  var
+    PersonnageTalent: StructurePersonnageTalent;
+    indiceModif:      Integer;
+  begin
+    Result := 0;
+    for PersonnageTalent in Personnage.CreationTalent do
+      for indiceModif := 0 to (ListTalentAttributModif.Count - 1) do
+        if CompareRechercheValeur(ListTalentAttributModif[indiceModif].CodeTalent, PersonnageTalent.CodeTalent)
+           and CompareRechercheValeur(ListTalentAttributModif[indiceModif].CodeAttribut, CodeAttribut) then
+          Result := Result + ListTalentAttributModif[indiceModif].Valeur;
+    for PersonnageTalent in Personnage.AugmentationTalent do
+      for indiceModif := 0 to (ListTalentAttributModif.Count - 1) do
+        if CompareRechercheValeur(ListTalentAttributModif[indiceModif].CodeTalent, PersonnageTalent.CodeTalent)
+           and CompareRechercheValeur(ListTalentAttributModif[indiceModif].CodeAttribut, CodeAttribut) then
+          Result := Result + ListTalentAttributModif[indiceModif].Valeur;
   end;
 
 Function PersonnageMutationCompetenceModif(Personnage: StructurePersonnage; CodeCompetence: String): Integer;

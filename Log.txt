@@ -1590,3 +1590,33 @@ Au passage : GreffesDesAppartenances (retiree le 05/09) et l'etat des points de 
 2.44 corriges dans CONTEXT.md, qui n'avait pas ete mis a jour ce jour-la.
 Reste ouvert (A FAIRE.txt) : affichage dans le PDF, et aucun moyen de corriger une appartenance
 deja acquise en dehors d'une nouvelle entree en carriere ou d'une edition du XML a la main.
+
+06/09/2026 - CHANTIER OUVERT : RESOLVEUR GENERIQUE ATTRIBUT/COMPETENCE (§2.50)
+Reprise du 3d-3 (ordres de chevalerie) bloquee par l'absence de representation d'un effet de
+regle. Nono a propose une idee plus large : deux champs generiques (talents, armes, armures,
+regiments, ordres) disant comment un element modifie un Attribut ou une Competence, plus une
+fonction qui additionne toutes les sources actives de la fiche pour un Attribut/une Competence
+donne. Phase 1 = Attribut + Competence seulement (six autres cas du case de pdfpersonnage.pas
+- Encombrement, degats CC/CT, Sprinteur, Dur a Cuire, Ame Pure - restent a part).
+Decouverte en cours de route : le mecanisme existe deja. <ModifyCarac>/<ModifySkill> sont deja
+lus pour les talents (ListTalentAttributModif/ListTalentCompetenceModif) exactement comme pour
+les mutations de corruption, mais ne servaient jusqu'ici qu'a une annotation d'affichage
+(asterisque), jamais a un vrai calcul. Decision : reutiliser ces balises telles quelles plutot
+que d'inventer MajAttribut/MajSkill.
+Piege de fondation trouve en creusant : Mouvement, Destin et Determination ne passent PAS par
+la boucle generique des dix caracteristiques (PdfPersonnageAttribut) - ils ont chacun un calcul
+a part dans pdfpersonnage.pas, qui ignore tout mecanisme de bonus de talent. C'est pour ca que
+TalentVeloce/TalentChanceux/TalentObstine existaient en cases a part dans le case d'origine.
+Pilote choisi : RULES-T0162 (Fleet Footed/Veloce), qui porte deja <ModifyCarac
+name="RULES-ATTR_Move">+1</ModifyCarac> dans le Rulebook - aucune donnee XML a toucher.
+Code ecrit : chargetalentattributmodif.pas (ValeurDonnee:String -> Valeur:Integer),
+xmlexportimport.pas (import via StrToIntDef), chargepersonnage.pas (nouvelle fonction
+PersonnageTalentAttributModif, calquee sur PersonnageMutationAttributModif), pdfpersonnage.pas
+(Mouv += PersonnageTalentAttributModif(...) dans les 4 blocs, retrait de la ligne TalentVeloce).
+Teste par Nono le soir meme : personnage Messager avec Fleet Footed, Mouvement 5/10/20,
+identique a avant - non-regression confirmee, pilote valide.
+Suite (CONTEXT.md §2.50) : generaliser en GetAttributValeur reutilisable par winpersonnage.pas,
+migrer TalentChanceux/TalentObstine, puis armes/armures, puis regiments/ordres avec filtre par
+palier (debloquera le +10 Fel/+10 WP du Knight of the Inner Circle), puis ListArmureBonusModif
+(fixera enfin le bug des Stechzeug Bracers), puis retrait des mecanismes decoratifs devenus
+inutiles.

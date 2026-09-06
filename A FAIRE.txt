@@ -6,6 +6,12 @@
 CORRECTIONS COURTES  (une ligne ou deux chacune)
 =========================================================================
 
+SUPPRIMER LE FICHIER ORPHELIN chargetalentmodif.pas. Repere le 06/09/2026 (chantier
+resolveur generique, CONTEXT.md 2.50) : meme unit name (ChargeTalentAttributModif) et meme
+contenu (avant ce chantier) que chargetalentattributmodif.pas, absent de WarhammerHelp.lpi
+(verifie) donc jamais compile - juste un vieux doublon qui traine. Pas d acces suppression
+depuis ce poste.
+
 DISTILLER PUIS SUPPRIMER LES QUATRE .MD PARASITES DE LA RACINE. Repere le 05/09/2026 :
 CHANTIER_versionning_livres.md, CONCEPTION_creation_choix_talents.md,
 CONTEXT_MENU_INTEGRATION.md, REPRISE_session_20260809.md. Meme famille que les CHANGELOG.md et
@@ -245,6 +251,50 @@ A reprendre avec le morceau "creatures" du lot 3 si on veut de vraies creatures.
 =========================================================================
 CONCEPTIONS A MENER  (chantiers a part entiere, ne pas les melanger)
 =========================================================================
+
+UN ACCESSEUR UNIQUE POUR LA VALEUR D UNE COMPETENCE. Idee de Nono le 06/09/2026, posee en
+parallele du chantier Effet/Cible/Forme (voir CONTEXT.md, section talents) pour ne pas les
+melanger. Aujourd hui la valeur d une competence est calculee DEUX FOIS, independamment :
+dans la grille de winpersonnage.pas (TabCompetence.Cells[ColCompTotal, IndLig], l.2396,
+addition directe dans les cellules) et dans PdfPersonnageCompetence (pdfpersonnage.pas
+l.536), qui renvoie deja un StructureDonnee (Base/Augmentation/Total) mais sans code, sans
+libellee, sans la carac liee, et avec le Bonus renvoye a part (var Bonus: String) au lieu
+d etre dans la structure. PdfPersonnageAttribut (l.594) a le meme defaut pour les attributs.
+L idee : une fonction unique qui, pour un code de competence donne, renvoie une
+structure/classe complete (code, libelle, carac liee, valeur de la carac, augmentation,
+bonus, total), appelee aussi bien par l ecran que par le PDF - winpersonnage.pas perdrait
+son calcul local. Plus gros risque que le chantier Effet : ca touche l ecran, donc toute
+regression se voit tout de suite en jeu, contrairement au PDF qui peut se comparer a froid.
+A mener APRES le chantier Effet/Cible/Forme des talents (CONTEXT.md), qui est plus petit et
+deja scope. Point de jonction a garder en tete pour plus tard : si un talent ou un palier
+d ordre de chevalerie doit un jour bonifier UNE competence precise plutot qu une case de
+calcul globale, c est le champ "bonus" de cette structure qui recevrait la cible du Effet,
+pas une nouvelle case ad hoc.
+
+GENERICISER LE CASE DE CALCUL DES TALENTS DE pdfpersonnage.pas. Repere le 06/09/2026 en
+discutant des ordres de chevalerie (3d-3). Le bloc qui calcule DurACuire/BonusEncomb/Mouv/
+Chance/Determine/TBonusCC/TBonusCT/BonusSprint/AmePure a partir des talents CreationTalent/
+AugmentationTalent (TalentDurACuire, TalentCostaud, etc.) est duplique QUATRE FOIS dans le
+fichier (CreationTalent x AugmentationTalent x normal/Feldo2P), avec deja une derive entre
+les copies (ValDurACuire present dans la version Feldo2P, absent de l autre). Modele propose
+et valide en discussion avec Nono : un tag <Effet Cible="..." Forme="..." Facteur="..."
+Attribut="..."/> pose sur la declaration du talent dans DATA_TALENT, trois formes suffisent
+pour les neuf cas actuels (Additif : Cible += Val*Facteur ; ProportionnelAttribut : Cible :=
+Floor(Attribut/10)*Val, un seul cas aujourd hui (Dur a Cuire) ; Drapeau : Cible := 1). Cible
+reste un vocabulaire FERME porte par le code (meme famille que DISPO/CLASS du 2.49), pas des
+id= de livre. Point de vigilance decouvert en creusant : NE PAS melanger avec les DEUX AUTRES
+mecanismes de "talent qui modifie quelque chose" deja presents dans le projet et jamais
+unifies -
+ - ListTalentAttributModif / ListTalentCompetenceModif (chargetalentattributmodif.pas,
+   chargetalentcompetencemodif.pas, appliques dans chargepersonnage.pas l.1290-1340,
+   PersonnageTalentAsterisque) : ne calculent rien, posent une ANNOTATION TEXTE a asterisque
+   dans le champ .Bonus d une carac/competence, sans lien avec le total.
+ - CompAjoutee sur StructureTalent (chargetalent.pas l.40) : un talent qui AJOUTE une
+   competence au personnage (chargepersonnage.pas l.779-852), effet binaire.
+Fusionner les trois serait plus juste mais c est un chantier a part entiere, plus gros. Se
+limiter au case de pdfpersonnage.pas pour ce chantier. Mis de cote le 06/09/2026 (Nono) pour
+reprendre les ordres de chevalerie en premier - aucun des neuf talents concernes n intervient
+dans les ordres, les deux chantiers ne se bloquent pas l un l autre.
 
 GERER L ANCRAGE DES CONTROLES DANS LES FENETRES. Demande de Nono le 05/09/2026. Aujourd hui
 les fenetres sont posees en coordonnees fixes : redimensionner ne redistribue rien, les

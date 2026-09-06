@@ -1415,7 +1415,7 @@ Procedure XmlImport(FileName: String; OnlyPrimary: Boolean; OnlyCode: Boolean);
                                 PTalentAttributModif.Livre        := Livre;
                                 PTalentAttributModif.CodeTalent   := PTalent.CodeTalent;
                                 PTalentAttributModif.CodeAttribut := RemoveQuotes(UTF8Encode(Node.Attributes.GetNamedItem(ConstXmlData).NodeValue));
-                                PTalentAttributModif.ValeurDonnee := RemoveQuotes(UTF8Encode(Node.TextContent));
+                                PTalentAttributModif.Valeur       := StrToIntDef(RemoveQuotes(UTF8Encode(Node.TextContent)), 0);
                                 if LangueDef = ConstAnglais then
                                    begin
                                     ListTalentAttributModif.add(PTalentAttributModif);

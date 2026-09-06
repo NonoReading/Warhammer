@@ -1,25 +1,29 @@
 # Warhammer — Contexte projet
 
-**Dernière mise à jour : 06/09/2026 — le §2.49 (préfixes de livre dans les références) est
-préfixage FAIT, mais le durcissement de l'étape 4 a été REVERTÉ le jour même : il cassait
-les PDF (normal ET Feldo2P) en silence. `VerifieRecherche` a retrouvé sa tolérance sur un
-second argument nu.**
+**Dernière mise à jour : 06/09/2026 (soir) — §2.50 : résolveur générique Attribut/
+Compétence. Pilote (talent Fleet Footed/T0162) COMPILÉ ET TESTÉ OK par Nono (Mouvement
+5/10/20, non-régression confirmée) — voir §2.50 pour la suite (étape 2 : généralisation).**
 
-PROCHAINE ÉTAPE : deux chantiers ouverts. Le plus proche, celui qui a fait annuler le
-durcissement : **sortir en constantes préfixées `RULES-` tous les `GetTexteLibelle('PDF_XXX')`
-écrits en dur dans `pdfpersonnage.pas`** (216 occurrences, 144 codes distincts recensés le
-06/09 ; probablement d'autres fichiers `pdf*.pas`/`win*.pas` à vérifier) — tant que ce n'est
-pas fait, ne PAS retenter le durcissement de `VerifieRecherche`, voir §2.49 étape 4 pour le
-détail de ce qui casse et pourquoi le mouchard ne l'avait pas vu. Le second, sans lien, est les
-**appartenances (§2.44)**, INCHANGÉ : rendre l'appartenance visible sur la fiche et dans le
-PDF, le 3d-3 (ordres de chevalerie, bloqué par « le modèle ne porte pas d'effet de règle »),
-et les onze Regiments of Renown.
-Petites choses en attente, sans urgence : distiller puis supprimer les quatre `.md` parasites
-de la racine (`CHANTIER_versionning_livres.md`, `CONCEPTION_creation_choix_talents.md`,
-`CONTEXT_MENU_INTEGRATION.md`, `REPRISE_session_20260809.md`) ; et deux chantiers capturés
-dans `A FAIRE.txt` le 05/09 sans une ligne de code : l'affichage des **disclaimers des
-livres** depuis le menu principal, et la **gestion de l'ancrage des contrôles** dans les
-fenêtres.
+PROCHAINE ÉTAPE : §2.50 étape 2 — généraliser `PersonnageTalentAttributModif` en une vraie
+`GetAttributValeur`, migrer `TalentChanceux`/`TalentObstine` sur le même modèle. Trois
+autres chantiers ouverts, sans lien direct :
+1. **§2.49 étape 4 (durcissement `VerifieRecherche`), en attente d'un préalable** : sortir en
+   constantes préfixées `RULES-` tous les `GetTexteLibelle('PDF_XXX')` écrits en dur dans
+   `pdfpersonnage.pas` (216 occurrences, 144 codes distincts recensés le 06/09 ; probablement
+   d'autres fichiers `pdf*.pas`/`win*.pas` à vérifier) — tant que ce n'est pas fait, ne PAS
+   retenter le durcissement, voir §2.49 étape 4 pour le détail de ce qui casse.
+2. **Appartenances (§2.44)** : visible à l'écran depuis le 06/09 (matin). Reste : affichage
+   PDF, un moyen de corriger une appartenance déjà acquise, le 3d-3 (ordres de chevalerie —
+   Squire seul saisissable tel quel, les trois autres paliers restent en descriptif sauf le
+   Knight of the Inner Circle qui attend le §2.50 généralisé aux régiments/ordres), et les
+   onze Regiments of Renown.
+3. Petites choses en attente, sans urgence : distiller puis supprimer les quatre `.md`
+   parasites de la racine (`CHANTIER_versionning_livres.md`, `CONCEPTION_creation_choix_talents.md`,
+   `CONTEXT_MENU_INTEGRATION.md`, `REPRISE_session_20260809.md`) ; supprimer le fichier
+   orphelin `chargetalentmodif.pas` (repéré le 06/09, voir §2.50) ; et deux chantiers capturés
+   dans `A FAIRE.txt` le 05/09 sans une ligne de code : l'affichage des **disclaimers des
+   livres** depuis le menu principal, et la **gestion de l'ancrage des contrôles** dans les
+   fenêtres.
 
 ⚠️ Lire le §0 sur **l'écriture qui répond « écrit » sans écrire** : quatre occurrences le
 05/09 au soir, toujours au **premier envoi suivant un restage**, toujours réparées en
@@ -5164,6 +5168,111 @@ vérifiant dans TOUS les livres, pas seulement dans le Rulebook : c'est cette v�
 manquante qui a produit les cinq collisions. En revanche, un livre qui **étend** un des cinq
 vocabulaires (une nouvelle disponibilité, un nouveau type d'armure) le fait sous son propre
 préfixe, comme Nations l'a fait pour `NATIO-ARMOT_LAMELLAR`.
+
+---
+
+### 2.50 Résolveur générique Attribut/Compétence — pilote écrit, PAS ENCORE TESTÉ (06/09/2026)
+
+**Origine.** Reprise du 3d-3 (§2.37/§2.44, ordres de chevalerie) bloquée par « le modèle ne
+porte pas d'effet de règle ». Nono, en montrant en parallèle le `case` de talents de
+`pdfpersonnage.pas` (calcul de `DurACuire`/`Mouv`/`Chance`/etc., dupliqué ×4, jamais visible à
+l'écran), a proposé l'idée inverse et plus large : deux champs génériques (portés par talents,
+armes, armures, régiments, ordres) disant comment un élément modifie un Attribut ou une
+Compétence, plus une fonction qui, pour un Attribut/une Compétence donné, additionne toutes
+les sources actives de la fiche. Décision : Phase 1 = Attribut + Compétence seulement : les
+six autres cases du `case` (Encombrement, bonus dégâts CC/CT, Sprinteur, Dur à Cuire, Âme
+Pure) restent à part pour l'instant, chantier séparé.
+
+**Ne pas confondre avec deux autres chantiers proches, tenus à l'écart exprès :**
+- Le résumé de compétence (« une fonction qui renvoie une structure complète — code, libellé,
+  carac, valeur, augmentation, bonus, total »), noté dans `A FAIRE.txt`, viendra APRÈS.
+- Le `case` de `pdfpersonnage.pas` (les 6 cases hors Attribut/Compétence), aussi dans
+  `A FAIRE.txt`, reste séparé.
+
+**Découverte qui a changé le plan : le mécanisme existe déjà, pas besoin d'en inventer un.**
+`<ModifyCarac name="CODE">VALEUR</ModifyCarac>` / `<ModifySkill name="CODE">VALEUR</ModifySkill>`
+(`ConstXmlModifieAttribut`/`ConstXmlModifieCompetence`, `chargeconstantes.pas` l.245-246) sont
+déjà lus pour les TALENTS (`xmlexportimport.pas` l.1413-1436, dans `ListTalentAttributModif`/
+`ListTalentCompetenceModif`) exactement comme pour les mutations de corruption — sauf que côté
+mutation c'est un vrai calcul (`PersonnageMutationAttributModif`, additionné au Total,
+`pdfpersonnage.pas` l.678) alors que côté talent ça ne sert QU'À une annotation d'affichage
+(`PersonnageTalentAsterisque`, `chargepersonnage.pas` l.1281+). Décision Nono (« oui, on
+peut ») : réutiliser `ModifyCarac`/`ModifySkill` tels quels plutôt qu'inventer `MajAttribut`/
+`MajSkill` — cohérent avec l'existant, zéro nouveau vocabulaire XML.
+
+**Correction au passage : 12 talents, pas 56.** `<Attribut>` (`ConstXmlAttribut`) est une
+balise partagée entre DEUX contextes différents : sous `DATA_SKILL`, c'est la caractéristique
+liée d'une compétence (des dizaines d'occurrences, aucun rapport) ; sous `DATA_TALENT`
+seulement, c'est le bonus d'attribut d'un talent (`PTalent.Attribut`, mécanique ancienne à
+liste `;`, +5 par occurrence, doublons pour cumuler — ex. `"RULES-ATTR_S;RULES-ATTR_S"` = +10).
+Seuls 12 talents du Rulebook l'utilisent (`RULES-T0002/T0045/T0067/T0074/T0117/T0127/T0153/
+T0158/T0159/T0162/T0166/T0BIG`). Cette ancienne mécanique N'EST PAS touchée par ce chantier
+pour l'instant (retrait prévu plus tard, avec `ListTalentAttributModif`/
+`ListTalentCompetenceModif`/`ListArmureBonusModif`, une fois le nouveau résolveur éprouvé).
+
+**Piège de fondation trouvé en creusant, à connaître avant de généraliser.** Mouvement, Destin
+et Détermination NE PASSENT PAS par la boucle générique des dix caractéristiques
+(`PdfPersonnageAttribut`, qui lit `PTalent.Attribut`) : ils ont chacun un calcul à part dans
+`pdfpersonnage.pas` (l.1068-1073 et son double Feldo2P), qui ignore tout mécanisme de bonus de
+talent — c'est PRÉCISÉMENT pourquoi `TalentVeloce`/`TalentChanceux`/`TalentObstine` existaient
+en cases à part dans le `case` d'origine. `GetAttributValeur`, quand il sera généralisé,
+devra couvrir ces trois-là en plus des dix classiques, pas seulement les dix.
+
+**Pilote choisi : `RULES-T0162` (Fleet Footed / Véloce).** Trouvaille en le regardant : il
+porte DÉJÀ dans le Rulebook `<ModifyCarac name="RULES-ATTR_Move">+1</ModifyCarac>`, en plus de
+l'ancien `<Attribut>"RULES-ATTR_Move"</Attribut>` (inerte pour Mouvement, vu le paragraphe
+précédent) — ce `<ModifyCarac>` était déjà lu dans `ListTalentAttributModif` mais jamais
+consommé pour un vrai calcul. **Aucune donnée XML à toucher pour ce pilote** : la donnée était
+déjà là, correcte, en attente du code.
+
+**Ce qui a été écrit (06/09/2026, PAS COMPILÉ) :**
+1. `chargetalentattributmodif.pas` — `StructureTalentAttributModif.ValeurDonnee` (String,
+   jamais utilisé que pour l'affichage) renommé en `Valeur` (Integer), même convention que
+   `StructureCorruptionAttributModif.Valeur`.
+2. `xmlexportimport.pas` l.1418 — import : `StrToIntDef(...)` au lieu de recopie brute.
+3. `chargepersonnage.pas` — le seul consommateur existant (`PersonnageTalentAsterisque`,
+   annotation `.Bonus`) adapté au nouveau type, signe reconstruit à la main (même convention
+   que `PdfPersonnageCreation` l.2326 pour `Personnage.Corruption[].Montant`) : comportement
+   d'affichage inchangé. Nouvelle fonction `PersonnageTalentAttributModif(Personnage,
+   CodeAttribut): Integer`, calquée exactement sur `PersonnageMutationAttributModif` (même
+   structure, boucle sur `CreationTalent`/`AugmentationTalent` au lieu de `Mutations`).
+4. `pdfpersonnage.pas` (×2, normal et Feldo2P) — `Mouv` reçoit en plus
+   `PersonnageTalentAttributModif(Personnage, ConstCaracMouvement)`, juste après l'appel
+   mutation existant. `TalentVeloce: Mouv := Mouv + Val;` retiré des quatre `case`
+   (CreationTalent/AugmentationTalent × normal/Feldo2P) — les trois autres talents du bloc
+   (`TalentCostaud`/`TalentChanceux`/`TalentObstine`/etc.) n'ont PAS bougé.
+
+**À FAIRE, dans l'ordre :**
+1. ✅ FAIT (06/09/2026 soir) — Nono a compilé et testé un personnage Messager avec Fleet
+   Footed à l'écran : Mouvement 5/10/20, identique à avant (+1, comme le donnait
+   `TalentVeloce` dans l'ancien `case`). Non-régression confirmée, pilote validé.
+2. Généraliser `PersonnageTalentAttributModif`/l'appel en une vraie
+   `GetAttributValeur` réutilisable par `winpersonnage.pas` (qui recalcule tout lui-même
+   aujourd'hui, voir `A FAIRE.txt`), migrer `TalentChanceux`/`TalentObstine` (Destin/
+   Détermination, même famille que Mouvement) sur le même modèle.
+3. Étendre aux armes/armures (`StructureArme`/`StructureArmureBonus` n'ont pas encore de champ
+   `ModifyCarac`/`ModifySkill` - à ajouter) puis aux régiments/ordres
+   (`StructureCareerBonusNiveau`, `chargemetier.pas` l.59-66) - c'est ce qui débloquera le
+   `+10 Fel/+10 WP` du Knight of the Inner Circle (§2.44), avec calage sur le niveau de
+   palier atteint (même filtre `Valeur <= niveau courant` que `MetierCompetence`/
+   `MetierTalent`, à généraliser).
+4. `ListArmureBonusModif` (`chargearmurebonusmodif.pas`) est le même problème que
+   `ListTalentAttributModif` mais sur les armures : le `Modifier name=` d'une qualité
+   d'armure n'accepte qu'un code de compétence (jamais un attribut) et ne sert QU'À
+   l'annotation PDF, jamais soustrait du Total — c'est la cause exacte de la pénalité de
+   Dextérité des Stechzeug Bracers non calculée (`A FAIRE.txt`). Migration prévue dans le
+   même mouvement que le point 3.
+5. Une fois tout ça éprouvé : retirer `ListTalentAttributModif`/`ListTalentCompetenceModif`/
+   `ListArmureBonusModif` (décoratifs, remplacés) - décision Nono, « on laisse le temps de la
+   mise à jour et on les nettoie ensuite ». `PTalent.Attribut` (l'ancien mécanisme ±5) n'est
+   PAS dans ce lot : il reste la seule voie pour les dix attributs classiques tant que
+   `GetAttributValeur` ne les couvre pas aussi.
+
+**Trouvaille annexe, sans rapport, notée pour mémoire** : `chargetalentmodif.pas` est un
+fichier ORPHELIN — même unit name (`ChargeTalentAttributModif`) et même contenu (avant ce
+chantier) que `chargetalentattributmodif.pas`, absent de `WarhammerHelp.lpi` (vérifié), donc
+inoffensif mais mort. Poubelle candidate, notée dans `A FAIRE.txt`, pas touchée ici (pas
+d'accès suppression depuis ce poste).
 
 ---
 

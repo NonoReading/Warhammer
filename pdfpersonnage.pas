@@ -1071,6 +1071,10 @@ Procedure PdfPersonnageCreation(Personnage: StructurePersonnage; BackGround: Boo
     // - même fonction que pour les autres attributs, ConstCaracMouvement ('ATTR_Move') utilisé
     // comme un code d'attribut de plus.
     Mouv           := Mouv + PersonnageMutationAttributModif(Personnage, ConstCaracMouvement);
+    // Talents portant un <ModifyCarac name="RULES-ATTR_Move"> (ex. Fleet Footed/Véloce,
+    // RULES-T0162) - ajouté le 06/09/2026, remplace le cas TalentVeloce du case ci-dessous
+    // sur ce seul attribut. Voir chargepersonnage.pas, PersonnageTalentAttributModif.
+    Mouv           := Mouv + PersonnageTalentAttributModif(Personnage, ConstCaracMouvement);
 
     Chance         := 0;
     Determine      := 0;
@@ -1107,7 +1111,6 @@ Procedure PdfPersonnageCreation(Personnage: StructurePersonnage; BackGround: Boo
         case ExtractStringAfter(PersonnageTalent.CodeTalent, SeparateurLivre) of
           TalentDurACuire:    DurACuire   := Floor(BE/10) * Val;
           TalentCostaud:      BonusEncomb := BonusEncomb + Val * 2;
-          TalentVeloce:       Mouv        := Mouv + Val;
           TalentChanceux:     Chance      := Chance  + Val;
           TalentObstine:      Determine   := Determine + Val;
           TalentCoutPuissant: TBonusCC    := Val;
@@ -1122,7 +1125,6 @@ Procedure PdfPersonnageCreation(Personnage: StructurePersonnage; BackGround: Boo
         case ExtractStringAfter(PersonnageTalent.CodeTalent, SeparateurLivre) of
           TalentDurACuire:    DurACuire   := Floor(BE/10) * Val;
           TalentCostaud:      BonusEncomb := BonusEncomb + Val * 2;
-          TalentVeloce:       Mouv        := Mouv + Val;
           TalentChanceux:     Chance      := Chance  + Val;
           TalentObstine:      Determine   := Determine + Val;
           TalentCoutPuissant: TBonusCC    := Val;
@@ -3867,6 +3869,10 @@ Procedure PdfPersonnageCreationFeldo2P(Personnage: StructurePersonnage);
     // - même fonction que pour les autres attributs, ConstCaracMouvement ('ATTR_Move') utilisé
     // comme un code d'attribut de plus.
     Mouv           := Mouv + PersonnageMutationAttributModif(Personnage, ConstCaracMouvement);
+    // Talents portant un <ModifyCarac name="RULES-ATTR_Move"> (ex. Fleet Footed/Véloce,
+    // RULES-T0162) - ajouté le 06/09/2026, remplace le cas TalentVeloce du case ci-dessous
+    // sur ce seul attribut. Voir chargepersonnage.pas, PersonnageTalentAttributModif.
+    Mouv           := Mouv + PersonnageTalentAttributModif(Personnage, ConstCaracMouvement);
 
     Chance         := 0;
     Determine      := 0;
@@ -3908,7 +3914,6 @@ Procedure PdfPersonnageCreationFeldo2P(Personnage: StructurePersonnage);
               DurACuire   := Floor(BE/10) * ValDurACuire;
             end;
           TalentCostaud:      BonusEncomb := BonusEncomb + Val * 2;
-          TalentVeloce:       Mouv        := Mouv + Val;
           TalentChanceux:     Chance      := Chance  + Val;
           TalentObstine:      Determine   := Determine + Val;
           TalentCoutPuissant: TBonusCC    := Val;
@@ -3927,7 +3932,6 @@ Procedure PdfPersonnageCreationFeldo2P(Personnage: StructurePersonnage);
               DurACuire   := Floor(BE/10) * ValDurACuire;
             end;
           TalentCostaud:      BonusEncomb := BonusEncomb + Val * 2;
-          TalentVeloce:       Mouv        := Mouv + Val;
           TalentChanceux:     Chance      := Chance  + Val;
           TalentObstine:      Determine   := Determine + Val;
           TalentCoutPuissant: TBonusCC    := Val;
