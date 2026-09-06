@@ -14,8 +14,8 @@ uses
   ChargeRace, ChargeEspece, ChargeRegle, WinRaces, ChargeRaceAttribut, ChargeRaceCompetence,
   ChargeRaceTalent, GlobalFonts, WinCreation, ChargeTalentCreation,
   WinPersonnage, ChargeAttributAugmentation, ChargeCompetenceAugmentation,
-  ChargeArme, WinWeapon, ChargeArmeBonus, ChargeMetierEquipement, ChargeArmure,
-  ChargeArmureBonus, WinArmor, ChargeSort, WinSpell, ChargeTexte,
+  ChargeArme, ChargeArmeAttributModif, WinWeapon, ChargeArmeBonus, ChargeMetierEquipement, ChargeArmure,
+  ChargeArmureBonus, ChargeArmureBonusAttributModif, WinArmor, ChargeSort, WinSpell, ChargeTexte,
   ChargeFabrication, Unitcalcul, ChargeMetierSousMetier,
   ChargeMetierRaceChoixMetier, ChargePersonnage, ChargeRaceCreation,
   ChargeTraduction, ChargeArmureSimplifie, ChargeLivre,
@@ -857,11 +857,13 @@ procedure TMenu.FormCreate(Sender: TObject);
        ListeAttributAugmentation    := TListeAttributAugmentation.Create;
        ListeCompetenceAugmentation  := TListeCompetenceAugmentation.Create;
        ListArme                     := TListArme.Create;
+       ListArmeAttributModif        := TListArmeAttributModif.Create;
        ListArmure                   := TListArmure.Create;
        ListArmureSimplifiee         := TListArmureSimplifiee.Create;
        ListArmeBonus                := TListArmeBonus.Create;
        ListMetierEquipement         := TListMetierEquipement.Create;
        ListArmureBonus              := TListArmureBonus.Create;
+       ListArmureBonusAttributModif := TListArmureBonusAttributModif.Create;
        ListSort                     := TListSort.Create;
        ListSortTalent               := TListSortTalent.Create;
        ListTrait                    := TListTrait.Create;

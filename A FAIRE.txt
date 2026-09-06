@@ -115,13 +115,6 @@ Tradesman (Gunsmith)". Releve le 04/09/2026 en saisissant Nuln, qui donne les de
 pointe dessus sans rien renommer (decision Nono). Renommer T0092_ARMU en "Craftsman
 (Gunsmith)" toucherait le RULEBOOK, d ou l attente d un arbitrage.
 
-L APPARTENANCE NE S AFFICHE PAS DANS LE PDF, ET NE SE CORRIGE PAS SUR UNE FICHE EXISTANTE.
-Releve le 04/09/2026 en testant l ecran de choix ; affichage a l ecran ajoute le 06/09/2026
-(CONTEXT.md 2.44, champ LibAppartenance). Reste : rien ne l affiche dans le PDF, et le choix
-n est toujours propose qu au moment d entrer dans une carriere - cliquer a cote oblige a
-rouvrir la carriere ou a editer le XML a la main. A concevoir : affichage PDF, et un moyen de
-corriger une appartenance deja acquise.
-
 TABCOMPETENCE.CELLS[COLCOMPCARAC, LIG] AU LIEU DE IND DANS WINPERSONNAGE. Bloc "competence
 liee a un talent" de XmlChargePersonnage : toutes les autres colonnes de la ligne creee
 utilisent Ind, celle-ci utilise Lig - la caracteristique est ecrite sur une autre ligne.
@@ -135,12 +128,6 @@ releve : Middenheim donne a Middenland Gossip, Haggle, Outdoor Survival, Ranged 
 Nations donne Athletics, Endurance, Melee (Two-Handed), Language (Bretonnian) ; pour Nordland
 Middenheim donne Evaluate, Ranged (Bow), Trade (Any), Fisherman/Rover la ou Nations donne
 Cool, Ranged (Throwing), Row, Hardy. A rouvrir seulement si l ecart gene en jeu.
-
-LA PENALITE DE DEXTERITE DES STECHZEUG BRACERS N EST PAS CALCULEE. NATIO-ARMOB_14, ecrite
-le 04/09/2026 : le champ Modifier name d une qualite d armure est resolu par ChercheCompetence
-(pdfpersonnage.pas l.1746) et n accepte QUE des codes de competence, jamais un attribut. La
-penalite reste descriptive, dans l explication. Premier cas du corpus ; il y en aura d autres
-si un livre impose une penalite d attribut.
 
 LES SKULL TROPHIES DE NATIONS OF MANKIND NE SONT PAS SAISIS. Page 61. Leur emplacement est
 "Any" et leur PA vide, or la LOCALISATION est un vocabulaire FERME - pdfpersonnage.pas
@@ -421,12 +408,14 @@ Condition = niveau 3 atteint et non l ethnie seule ; l effet comprend des TRAPPI
 (equipement) et une regle redigee (le rang 3 retombe a Soldier, le statut social reste
 celui du 3). A traiter apres les quatorze provinciaux.
 
-NATIONS OF MANKIND 3D-3, LES ORDRES DE CHEVALERIE : BLOQUE. Meme architecture sur la
-carriere Knight, mais seul le palier Squire est saisissable ; les trois autres sont des
-effets de regle (+10 en CC avec les lances, un miracle automatique sur les haches, un
-trait contre les ennemis hais, +10 Fel et WP permanents). Meme famille que les
-psychologies et que la penalite des Stechzeug Bracers. NE PAS COMMENCER avant d avoir
-tranche comment le modele porte un effet de regle.
+NATIONS OF MANKIND 3D-3, LES ORDRES DE CHEVALERIE : PARTIELLEMENT DEBLOQUE (06/09/2026).
+Meme architecture sur la carriere Knight, mais seul le palier Squire est saisissable ; les
+trois autres sont des effets de regle (+10 en CC avec les lances, un miracle automatique sur
+les haches, un trait contre les ennemis hais, +10 Fel et WP permanents). Le +10 Fel/+10 WP du
+Knight of the Inner Circle peut desormais se saisir avec <ModifyCarac> (CONTEXT.md 2.50 etape
+3, mecanisme regiments/ordres) - reste a l ecrire en XML. Les trois autres effets (bonus CC
+lie a une arme precise, miracle automatique, trait conditionnel) restent bloques : ce ne sont
+pas de simples modificateurs d Attribut/Competence, le modele ne les porte toujours pas.
 
 NATIONS OF MANKIND, HORS LOT : LES CREATURES. Taureaux de guerre estaliens, monture du
 Toreador. Reporte avec les montures.

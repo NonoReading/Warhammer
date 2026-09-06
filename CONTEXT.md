@@ -1,25 +1,50 @@
 # Warhammer — Contexte projet
 
-**Dernière mise à jour : 06/09/2026 (soir) — §2.50 : résolveur générique Attribut/
-Compétence. Pilote (Fleet Footed/T0162) ET migration Chanceux/Obstiné (Chance/
-Détermination, T0020/T0107) COMPILÉS ET TESTÉS OK par Nono (Mouvement 5/10/20 inchangé,
-Chance et Résolution augmentent correctement) — au passage, deux occurrences d'un bug de
-préfixe (§2.49) bloquant le Max des talents à formule d'attribut trouvées et corrigées par
-Nono (`winpersonnage.pas` l.3269 et l.3575). Voir §2.50 pour la suite (étape 3).**
+**Dernière mise à jour : 06/09/2026 (soir) — §2.50 ÉTAPE 3 TERMINÉE (régiments/ordres,
+armes, armures) : COMPILÉE PAR NONO. Le résolveur générique Attribut/Compétence couvre
+désormais talents (étapes 1-2), appartenances/paliers de carrière, armes et qualités
+d'armure, tous câblés dans `PdfPersonnageAttribut`/l'équivalent Compétence
+(pdfpersonnage.pas). Au passage, la migration de `ListArmureBonusModif` en vrai
+modificateur a permis de VRAIMENT CORRIGER le bug des Stechzeug Bracers (pénalité de
+Dextérité jusqu'ici purement descriptive, `A FAIRE.txt`) : `BOOK_NATIONS_OF_MANKIND.Xml`
+(`NATIO-ARMOB_14`) porte maintenant `<ModifyCarac name="RULES-ATTR_Dex">-10</ModifyCarac>`
+en plus du texte d'explication. **Écart assumé sur les trois** (régiments/ordres, armes,
+armures) : seul `<ModifyCarac>` (Attribut) est câblé pour les NOUVEAUX points d'extension,
+pas de pendant `<ModifySkill>` — décision de Nono le 06/09, tant que rien dans les livres
+n'en a besoin (le côté Compétence des qualités d'armure, lui, existait déjà via l'ancien
+`<Modifier name="...">` et vient d'être rendu réel, voir ci-dessus). Pilote (Fleet Footed/
+T0162) ET migration Chanceux/Obstiné (Chance/Détermination, T0020/T0107) restent COMPILÉS
+ET TESTÉS OK par Nono (Mouvement 5/10/20 inchangé, Chance et Résolution augmentent
+correctement) — au passage, deux occurrences d'un bug de préfixe (§2.49) bloquant le Max
+des talents à formule d'attribut trouvées et corrigées par Nono (`winpersonnage.pas`
+l.3269 et l.3575).
 
-PROCHAINE ÉTAPE : §2.50 étape 3 — étendre `ModifyCarac`/`ModifySkill` aux armes/armures
-(`StructureArme`/`StructureArmureBonus`) puis aux régiments/ordres avec filtre par palier.
-Trois autres chantiers ouverts, sans lien direct :
-1. **§2.49 étape 4 (durcissement `VerifieRecherche`), en attente d'un préalable** : sortir en
+⚠️ **Leçon du 06/09/2026 (soir), à ne pas reproduire** : après avoir édité les copies
+locales des fichiers pour les armes, elles ont été annoncées comme livrées SANS avoir été
+committées sur le poste de Nono - l'édition d'une copie de travail n'écrit rien chez lui,
+il faut toujours l'étape explicite d'écriture + vérification de taille (§0). Deuxième piège
+rencontré en corrigeant : RESTAGER un fichier déjà édité mais pas encore committé écrase
+l'édition locale (comportement déjà documenté plus bas pour l'écriture, vaut aussi pour la
+lecture) - ne jamais restager entre une édition et son envoi, committer d'abord.
+
+PROCHAINE ÉTAPE : **Appartenances (§2.44)** — l'affichage PDF vient d'être ajouté et testé
+OK par Nono (06/09/2026 soir, entre parenthèses à la suite du nom de la carrière, sur les
+deux formats). Nono a aussi vérifié que ressortir/rerentrer dans la même carrière permet
+déjà d'ajouter une autre appartenance (cumulatif, cohérent avec la règle du livre) : pas de
+chantier « correction » à mener. Reste sur ce chantier : le 3d-3 (ordres de chevalerie —
+Squire seul saisissable tel quel, les trois autres paliers
+restent en descriptif sauf le Knight of the Inner Circle, dont le code de résolution existe
+désormais (§2.50 étape 3) mais qui attend encore d'être saisi en XML), et les onze Regiments
+of Renown. Trois autres chantiers ouverts, sans lien direct :
+1. §2.50 point 6 — une fois le nouveau résolveur éprouvé un peu plus longtemps, retirer les
+   mécanismes décoratifs devenus redondants (`ListTalentAttributModif` en tant qu'annotation
+   seule/`ListTalentCompetenceModif`/l'ancien `PTalent.Attribut`). Décision de Nono : pas
+   maintenant, laisser le temps de la mise à jour. Voir §2.50 pour le détail.
+2. **§2.49 étape 4 (durcissement `VerifieRecherche`), en attente d'un préalable** : sortir en
    constantes préfixées `RULES-` tous les `GetTexteLibelle('PDF_XXX')` écrits en dur dans
    `pdfpersonnage.pas` (216 occurrences, 144 codes distincts recensés le 06/09 ; probablement
    d'autres fichiers `pdf*.pas`/`win*.pas` à vérifier) — tant que ce n'est pas fait, ne PAS
    retenter le durcissement, voir §2.49 étape 4 pour le détail de ce qui casse.
-2. **Appartenances (§2.44)** : visible à l'écran depuis le 06/09 (matin). Reste : affichage
-   PDF, un moyen de corriger une appartenance déjà acquise, le 3d-3 (ordres de chevalerie —
-   Squire seul saisissable tel quel, les trois autres paliers restent en descriptif sauf le
-   Knight of the Inner Circle qui attend le §2.50 généralisé aux régiments/ordres), et les
-   onze Regiments of Renown.
 3. Petites choses en attente, sans urgence : distiller puis supprimer les quatre `.md`
    parasites de la racine (`CHANTIER_versionning_livres.md`, `CONCEPTION_creation_choix_talents.md`,
    `CONTEXT_MENU_INTEGRATION.md`, `REPRISE_session_20260809.md`) ; supprimer le fichier
@@ -140,8 +165,8 @@ lecture, jamais depuis la source elle-même :
   trois Norses, Tilea) pointent toutes sur `RULES-SPECIE_HUMAN` ; les onze Hauts Elfes de
   HEPG plus celui du Rulebook pointent tous sur `RULES-SPECIE_HELF`.
 
-**Édition directe des fichiers sur le poste de Nono — deux règles, après trois occurrences
-du même incident (31/08, 01/09, 02/09/2026) :**
+**Édition directe des fichiers sur le poste de Nono — cinq règles, après plusieurs
+occurrences du même type d'incident (31/08, 01/09, 02/09, 06/09/2026) :**
 
 - **Restager avant CHAQUE édition, pas seulement en début de session.** La copie que j'ai
   sous la main vieillit dès que Nono touche à un fichier, ou dès que je committe moi-même.
@@ -151,6 +176,26 @@ du même incident (31/08, 01/09, 02/09/2026) :**
   voit à `diff | grep '^<'`, et à rien d'autre. Un diff dont les retraits ne sont pas
   exactement ceux que j'ai voulus ne part pas ; je refais l'édition depuis la version
   fraîche.
+- **Éditer une copie locale n'écrit RIEN chez Nono (06/09/2026).** L'édition d'un fichier
+  de travail est une étape séparée de l'envoi : après avoir modifié une copie, il faut
+  TOUJOURS l'étape explicite d'écriture vers le poste, puis vérifier la taille du fichier
+  côté Nono avant d'annoncer une livraison. Cinq fichiers avaient été présentés comme
+  modifiés (armes, §2.50 étape 3) sans qu'aucune écriture n'ait eu lieu - Nono n'a rien vu
+  car rien n'était parti.
+- **Ne jamais restager un fichier entre son édition et son envoi.** En corrigeant l'oubli
+  ci-dessus, restager pour "vérifier l'état du poste" a écrasé les éditions locales pas
+  encore envoyées, qu'il a fallu refaire. Une fois une édition faite localement, l'étape
+  suivante est l'envoi, jamais un nouveau restage du même chemin.
+- **Qui édite quoi, et comment (précisé le 06/09/2026, corrigeant une confusion de ma
+  part le jour même).** Sur les `.pas`, je fais **toujours** la modification moi-même
+  directement sur le poste de Nono (restage → édition de la copie → écriture → contrôle
+  de taille, les quatre règles ci-dessus) — je ne lui demande **pas** de coller un
+  correctif lui-même, quelle que soit la taille du changement. Sur les `.lfm`, **on en
+  discute d'abord** avant de toucher au fichier : conception validée avec Nono, puis
+  c'est moi qui édite directement sur son poste (jamais lui dans l'éditeur de formulaire
+  de l'IDE pendant que je touche le fichier en parallèle) — plusieurs incohérences
+  passées venaient justement de modifications faites des deux côtés sur le même fichier
+  entre deux passages.
 
 ⚠️ **L'ENREGISTREMENT DEPUIS WINLIVRE N'EST PAS ACTIVE (Nono, 04/09/2026).** Ne plus
 proposer « sauvegarde le livre depuis WinLivre et on regarde si le bloc ressort » comme
@@ -4639,12 +4684,44 @@ par `ChercheCareerBonus`, joint les libellés obtenus par `, `.
 dans `MajTables` (rafraîchit l'affichage tout de suite après un choix de régiment, sans
 attendre un nouveau passage dans `MajTables`).
 
-**Reste ouvert, noté dans `A FAIRE.txt`** : rien ne l'affiche encore dans le PDF, et une
-appartenance déjà acquise ne se corrige toujours que par une nouvelle entrée en carrière ou
-une édition du XML à la main.
-
 *Correction au passage* : `GreffesDesAppartenances` (ancien point 2 de la liste ci-dessous)
 était déjà supprimée depuis le 05/09/2026 (`Log.txt`) — l'info n'avait pas été répercutée ici.
+
+---
+
+**L'APPARTENANCE EST AFFICHÉE DANS LE PDF — TERMINÉ (06/09/2026).**
+
+Décision Nono : rester simple, à la suite du nom de la carrière en cours, entre parenthèses
+— pas de nouveau bloc/ligne PDF. Modification identique aux deux endroits qui écrivent le
+nom du métier dans `pdfpersonnage.pas`, réutilisant `LibelleAppartenances` (déjà écrite pour
+l'écran, ci-dessus) :
+
+- Ligne 1167 (`PdfPersonnageCreation`, ancien format) : `PdfPage.WriteText( 50, 241,
+  PMetier.Libelle)` devient conditionnel — si `Personnage.Appartenance` n'est pas vide,
+  `PMetier.Libelle + ' (' + LibelleAppartenances(Personnage.Appartenance) + ')'`, sinon
+  inchangé.
+- Ligne 2190 (`PdfBlocEntete`, nouveau format Bloc/Tableau) : même principe sur l'appel
+  `PdfEcrit`.
+
+Testé par Nono sur les deux formats de PDF : le régiment apparaît bien entre parenthèses à
+côté de la carrière. Aucune régression, aucun débordement de colonne signalé.
+
+*Correction de méthode le jour même* : la première proposition avait été faite à Nono sous
+forme de code à coller (règle habituelle pour une petite correction `.pas`) — Nono a
+clarifié que sur les `.pas`, c'est désormais moi qui édite toujours directement sur son
+poste, quelle que soit la taille du changement (voir §0). Les deux lignes ont donc été
+appliquées par moi-même après cette clarification.
+
+**« Corriger » une appartenance : vérifié par Nono, pas besoin de chantier dédié
+(06/09/2026).** En test, Nono a constaté que ressortir puis rerentrer dans la même carrière
+(Soldier → Soldier) rouvre bien l'écran de choix et permet d'ajouter une autre appartenance
+— cumulative, jamais un remplacement (§2.44, "on ne retire jamais"). Nono : cohérent, "vu
+qu'il y a un vrai changement entre les régiments" — ça correspond exactement à la règle du
+livre citée plus haut (quitter un régiment garde les compétences/talents acquis). L'entrée
+correspondante d'`A FAIRE.txt` est retirée : ce n'est pas un défaut à corriger, c'est le
+mécanisme voulu qui fonctionne. Reste la seule friction déjà connue et assumée : il faut
+rouvrir la carrière pour redéclencher le choix, pas de bouton dédié — non gênant tant que ça
+ne pose pas de problème en jeu.
 
 ---
 
@@ -5288,18 +5365,52 @@ déjà là, correcte, en attente du code.
    colonnes `ColAttDestin`/`ColAttResil` de `TabAttribut` traitent Destin/Résilience comme des
    attributs classiques), donc rien à câbler côté écran pour l'instant - à faire seulement si
    Nono veut un jour afficher ces pools sur la fiche.
-4. Étendre aux armes/armures (`StructureArme`/`StructureArmureBonus` n'ont pas encore de champ
-   `ModifyCarac`/`ModifySkill` - à ajouter) puis aux régiments/ordres
-   (`StructureCareerBonusNiveau`, `chargemetier.pas` l.59-66) - c'est ce qui débloquera le
-   `+10 Fel/+10 WP` du Knight of the Inner Circle (§2.44), avec calage sur le niveau de
-   palier atteint (même filtre `Valeur <= niveau courant` que `MetierCompetence`/
-   `MetierTalent`, à généraliser).
-5. `ListArmureBonusModif` (`chargearmurebonusmodif.pas`) est le même problème que
-   `ListTalentAttributModif` mais sur les armures : le `Modifier name=` d'une qualité
-   d'armure n'accepte qu'un code de compétence (jamais un attribut) et ne sert QU'À
-   l'annotation PDF, jamais soustrait du Total — c'est la cause exacte de la pénalité de
-   Dextérité des Stechzeug Bracers non calculée (`A FAIRE.txt`). Migration prévue dans le
-   même mouvement que le point 4.
+4. ✅ FAIT côté régiments/ordres (écrit et compilé par Nono, relu par Claude le 06/09/2026 -
+   voir l'encart en tête de fichier) : `StructureCareerBonusAttributModif`
+   (`chargemetier.pas` l.68-79), son import (`xmlexportimport.pas` l.2517-2561, calé sur le
+   niveau du palier même si `<ModifyCarac>` arrive avant `<Order>`), et
+   `PersonnageCareerBonusAttributModif` (`chargepersonnage.pas` l.1451-1488, filtre par
+   `PersonnageNiveauDansMetier` <= niveau du palier), câblé dans `PdfPersonnageAttribut`
+   (`pdfpersonnage.pas` l.686). Pas encore exercé en pratique : aucun livre ne pose de
+   `<ModifyCarac>` sous `DATA_CAREER_BONUS` (le Knight of the Inner Circle, §2.44/3d-3,
+   n'est toujours pas saisi en XML). **Ne couvre que l'Attribut, pas la Compétence**
+   (pas de pendant `ModifySkill`/`StructureCareerBonusCompetenceModif`) - à trancher avec
+   Nono : rien aujourd'hui n'en a besoin, mais ça laisse le chantier asymétrique.
+   ✅ FAIT côté ARMES (écrit par Claude, compilé par Nono, aucune régression constatée,
+   06/09/2026) : nouveau fichier `chargearmeattributmodif.pas` (`StructureArmeAttributModif`
+   - Livre/CodeArme/CodeAttribut/Valeur, même moule que les talents, Attribut seul comme
+   pour les régiments/ordres ci-dessus), import dans `xmlexportimport.pas` (ajout immédiat
+   à la liste dès `<ModifyCarac>` lu sous `DATA_ARME`, pas de palier donc pas besoin de
+   différer), `PersonnageArmeAttributModif` (`chargepersonnage.pas`, parcourt
+   `Personnage.Equipement` filtré `TypeEquipWe`, pas de distinction possédé/porté), câblé
+   dans `PdfPersonnageAttribut` (`pdfpersonnage.pas`) juste après l'appel appartenances.
+   `ListArmeAttributModif` créée dans `warhammersource.pas` avec les autres listes. Comme
+   pour les régiments/ordres, aucun livre ne pose encore de `<ModifyCarac>` sur une arme :
+   rien n'exerce ce code pour l'instant, la compilation propre est le seul test possible
+   aujourd'hui.
+   ✅ FAIT côté ARMURES (écrit par Claude, compilé par Nono, 06/09/2026) : nouveau fichier
+   `chargearmurebonusattributmodif.pas` (`StructureArmureBonusAttributModif` - même moule,
+   keyée sur `CodeArmureBonus` = la QUALITÉ d'armure, pas la pièce), nouveau cas
+   `<ModifyCarac>` dans `xmlexportimport.pas` (distinct du `<Modifier name="...">`
+   historique qui reste pour la Compétence), `PersonnageArmureQualites`
+   (`chargepersonnage.pas`, helper qui résout la `ListeBonus` de chaque pièce équipée -
+   normale ET simplifiée - en codes de qualité, suffixe numérique retiré, alternatives
+   `A/B` gardées telles quelles) suivi de `PersonnageArmureBonusAttributModif`, câblé dans
+   `PdfPersonnageAttribut`.
+5. ✅ FAIT (même commit que le point 4, armures) : `ListArmureBonusModif`
+   (`chargearmurebonusmodif.pas`, le `Modifier name=` historique lié à une Compétence,
+   jusqu'ici décoratif) migré en vrai modificateur via `PersonnageArmureBonusCompetenceModif`
+   (même helper `PersonnageArmureQualites`), câblé dans l'équivalent Compétence de
+   `PdfPersonnageAttribut` (Total, pas Augmentation - même raisonnement que les mutations).
+   ⚠️ **Point corrigé en cours de session** : cette migration Compétence NE corrige PAS à
+   elle seule le bug des Stechzeug Bracers, contrairement à ce qui avait été annoncé par
+   erreur à Nono - la pénalité des Stechzeug Bracers porte sur la DEXTÉRITÉ, un ATTRIBUT,
+   que `ListArmureBonusModif` ne sait pas représenter. C'est le point 4 (nouveau
+   `<ModifyCarac>` sur les qualités d'armure) qui rend le calcul possible. Corrigé pour de
+   bon en ajoutant `<ModifyCarac name="RULES-ATTR_Dex">-10</ModifyCarac>` à
+   `NATIO-ARMOB_14` dans `BOOK_NATIONS_OF_MANKIND.Xml` (06/09/2026) - l'ancien `<Modifier>`
+   texte libre et l'`<Explanation>` ont été nettoyés du commentaire "descriptive only",
+   devenu faux. Entrée retirée d'`A FAIRE.txt`.
 6. Une fois tout ça éprouvé : retirer `ListTalentAttributModif`/`ListTalentCompetenceModif`/
    `ListArmureBonusModif` (décoratifs, remplacés) - décision Nono, « on laisse le temps de la
    mise à jour et on les nettoie ensuite ». `PTalent.Attribut` (l'ancien mécanisme ±5) n'est

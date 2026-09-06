@@ -9,7 +9,8 @@ uses
   Classes, SysUtils, ChargeConstantes, XMLRead, DOM,
   Unitcalcul, ChargeRace, ChargeMetier, ChargeAttribut, ChargeCompetence,
   ChargeTalent, ChargeArme, ChargeArmure, ChargeArmureSimplifie,
-  ChargeTalentAttributModif, ChargeTalentCompetenceModif,
+  ChargeTalentAttributModif, ChargeTalentCompetenceModif, ChargeArmeAttributModif,
+  ChargeArmureBonusModif, ChargeArmureBonusAttributModif,
   ChargeSort, ChargeCorruptionTable, ChargeCorruptionAttributModif,
   ChargeCorruptionCompetenceModif, ChargeCorruptionArmureModif, ChargeTalentArmureModif, XmlExportImport;
 
@@ -185,6 +186,19 @@ Type
   // un palier de DATA_CAREER_BONUS (ListCareerBonusAttributModif) - n'additionne un modificateur
   // que si le personnage a l'appartenance ET a atteint le palier qui le porte.
   Function PersonnageCareerBonusAttributModif(Personnage: StructurePersonnage; CodeAttribut: String): Integer;
+  // Même principe que PersonnageTalentAttributModif, mais sur les <ModifyCarac> déclarés
+  // directement sur une ARME (DATA_ARME, ListArmeAttributModif) - CONTEXT.md 2.50 étape 3.
+  // Une arme n'a pas de niveau : toute arme présente dans Personnage.Equipement compte,
+  // comme pour l'armure (pas de distinction "possédé" / "porté" dans ce modèle).
+  Function PersonnageArmeAttributModif(Personnage: StructurePersonnage; CodeAttribut: String): Integer;
+  // Modificateurs des QUALITES d'armure (ListArmureBonusAttributModif, <ModifyCarac> sur
+  // DATA_ARMURE_BONUS) et migration en vrai calcul de l'ancien mecanisme decoratif
+  // ListArmureBonusModif (<Modifier name="..."> lie a une competence, jusqu'ici jamais
+  // soustrait du Total - cause du bug Stechzeug Bracers, A FAIRE.txt). CONTEXT.md 2.50
+  // etape 3, point 4/5. Toute piece d'armure equipee (normale ET simplifiee) compte,
+  // qualite par qualite dans sa ListeBonus.
+  Function PersonnageArmureBonusAttributModif(Personnage: StructurePersonnage; CodeAttribut: String): Integer;
+  Function PersonnageArmureBonusCompetenceModif(Personnage: StructurePersonnage; CodeCompetence: String): Integer;
 
 implementation
 
@@ -1484,6 +1498,110 @@ Function PersonnageCareerBonusAttributModif(Personnage: StructurePersonnage; Cod
         end;
     finally
       Appartenances.Free;
+    end;
+  end;
+
+Function PersonnageArmeAttributModif(Personnage: StructurePersonnage; CodeAttribut: String): Integer;
+  var
+    PersonnageEquipement: StructurePersonnageEquipement;
+    IndModif:             Integer;
+  begin
+    Result := 0;
+    for PersonnageEquipement in Personnage.Equipement do
+      if TrimRight(PersonnageEquipement.TypeEquipement) = TrimRight(TypeEquipWe) then
+        for IndModif := 0 to (ListArmeAttributModif.Count - 1) do
+          if CompareRechercheValeur(ListArmeAttributModif[IndModif].CodeArme, PersonnageEquipement.CodeEquipement)
+             and CompareRechercheValeur(ListArmeAttributModif[IndModif].CodeAttribut, CodeAttribut) then
+            Result := Result + ListArmeAttributModif[IndModif].Valeur;
+  end;
+
+Function PersonnageArmureQualites(Personnage: StructurePersonnage): TStringList;
+// Un code de qualite (ListeBonus) par occurrence, pour chaque piece d'armure equipee -
+// normale (TypeEquipAR, ChercheArmure) ou simplifiee (TypeEquipARS, ChercheArmureSimplifiee).
+// Pas de deduplication : deux pieces portant la meme qualite cumulent. Suffixe numerique
+// optionnel ("ARMOB_18 2") retire ; les alternatives ("ARMOB_02/ARMOB_04") sont gardees
+// telles quelles, comme l'annotation existante (pdfpersonnage.pas) qui ne les resout pas
+// non plus. L'APPELANT est proprietaire de la liste rendue et doit la liberer - meme
+// contrat que NiveauxDuCareerBonus (chargemetier.pas, 2.44).
+  var
+    PersonnageEquipement: StructurePersonnageEquipement;
+    PArmure:              StructureArmure;
+    PArmureSimplifiee:    StructureArmureSimplifiee;
+    ListeBonus:           String;
+    Liste:                TStringList;
+    Element:              String;
+    Ind:                  Integer;
+  begin
+    Result := TStringList.Create;
+    Liste  := TStringList.Create;
+    try
+      for PersonnageEquipement in Personnage.Equipement do
+        begin
+          ListeBonus := '';
+          if TrimRight(PersonnageEquipement.TypeEquipement) = TrimRight(TypeEquipAR) then
+            begin
+              PArmure    := ChercheArmure(PersonnageEquipement.CodeEquipement);
+              ListeBonus := PArmure.ListeBonus;
+            end
+          else if TrimRight(PersonnageEquipement.TypeEquipement) = TrimRight(TypeEquipARS) then
+            begin
+              PArmureSimplifiee := ChercheArmureSimplifiee(PersonnageEquipement.CodeEquipement);
+              ListeBonus         := PArmureSimplifiee.ListeBonus;
+            end;
+          if (ListeBonus <> '') and (ListeBonus <> '-') then
+            begin
+              Liste.Clear;
+              ExtractStrings([','], [], PChar(ListeBonus), Liste);
+              for Ind := 0 to Liste.Count - 1 do
+                begin
+                  Element := Trim(Liste[Ind]);
+                  if Pos(' ', Element) > 0 then
+                    Element := Trim(ExtractStringBefore(Element, ' '));
+                  if Element <> '' then
+                    Result.Add(Element);
+                end;
+            end;
+        end;
+    finally
+      Liste.Free;
+    end;
+  end;
+
+Function PersonnageArmureBonusAttributModif(Personnage: StructurePersonnage; CodeAttribut: String): Integer;
+  var
+    Qualites: TStringList;
+    Ind:      Integer;
+    IndModif: Integer;
+  begin
+    Result   := 0;
+    Qualites := PersonnageArmureQualites(Personnage);
+    try
+      for Ind := 0 to Qualites.Count - 1 do
+        for IndModif := 0 to (ListArmureBonusAttributModif.Count - 1) do
+          if CompareRechercheValeur(ListArmureBonusAttributModif[IndModif].CodeArmureBonus, Qualites[Ind])
+             and CompareRechercheValeur(ListArmureBonusAttributModif[IndModif].CodeAttribut, CodeAttribut) then
+            Result := Result + ListArmureBonusAttributModif[IndModif].Valeur;
+    finally
+      Qualites.Free;
+    end;
+  end;
+
+Function PersonnageArmureBonusCompetenceModif(Personnage: StructurePersonnage; CodeCompetence: String): Integer;
+  var
+    Qualites: TStringList;
+    Ind:      Integer;
+    IndModif: Integer;
+  begin
+    Result   := 0;
+    Qualites := PersonnageArmureQualites(Personnage);
+    try
+      for Ind := 0 to Qualites.Count - 1 do
+        for IndModif := 0 to (ListArmureBonusModif.Count - 1) do
+          if CompareRechercheValeur(ListArmureBonusModif[IndModif].CodeArmureBonus, Qualites[Ind])
+             and CompareRechercheValeur(ListArmureBonusModif[IndModif].CodeCompetence, CodeCompetence) then
+            Result := Result + ListArmureBonusModif[IndModif].Valeur;
+    finally
+      Qualites.Free;
     end;
   end;
 

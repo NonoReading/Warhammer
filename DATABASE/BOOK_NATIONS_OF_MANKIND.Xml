@@ -10600,15 +10600,14 @@ Furthermore, all ranged weapons lose their Damaging Quality when striking this a
 <Explanation language="ENGLISH">"Wearing this armour gives a -30 Stealth penalty each time"</Explanation>
 <Modifier name="RULES-COMPDISC_*">-30</Modifier>
 </BonusMalus>
-  <!-- ATTENTION, celle-ci n est PAS calculee. Le champ Modifier name d une qualite d armure
-       est resolu par ChercheCompetence (pdfpersonnage.pas l.1746) : il n accepte QUE des codes
-       de competence. La penalite de Dexterite des Stechzeug Bracers porte donc sur un ATTRIBUT,
-       ce que le modele ne sait pas exprimer ici. Elle reste descriptive, dans l explication.
-       Item ouvert dans A FAIRE.txt. -->
+  <!-- Penalite sur un ATTRIBUT (Dexterite), pas une competence : le <Modifier name="..."> ne
+       sachant porter qu un code de competence, calculee via <ModifyCarac> a la place
+       (CONTEXT.md 2.50 etape 3, ajoute le 06/09/2026). -->
 <BonusMalus id="NATIO-ARMOB_14">
 <Description language="ENGLISH">"Stiffens the arms"</Description>
-<Explanation language="ENGLISH">"Wearing this armour gives a -10 penalty to the Dexterity characteristic. Not computed : an armour quality modifier can only target a Skill, never a Characteristic."</Explanation>
-<Modifier>"Dexterity -10, descriptive only"</Modifier>
+<Explanation language="ENGLISH">"Wearing this armour gives a -10 penalty to the Dexterity characteristic."</Explanation>
+<Modifier>"Dexterity -10"</Modifier>
+<ModifyCarac name="RULES-ATTR_Dex">-10</ModifyCarac>
 </BonusMalus>
 </DATA_ARMOR_BONUS>
 <DATA_WEAPON>

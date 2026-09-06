@@ -1653,3 +1653,97 @@ apres la correction de multiplication).
 Suite (CONTEXT.md §2.50, etape 3) : etendre ModifyCarac/ModifySkill aux armes/armures puis aux
 regiments/ordres avec filtre par palier - debloquera le +10 Fel/+10 WP du Knight of the Inner
 Circle (§2.44).
+
+06/09/2026 - SUITE DU 2.50 (ETAPE 3) : ARMES FAITES, ET UN CHANTIER NON JOURNALISE RETROUVE
+En reprenant la session, restage systematique avant edition (regle du projet) : les fichiers
+chargemetier.pas, xmlexportimport.pas, chargepersonnage.pas, pdfpersonnage.pas et
+warhammersource.pas portaient des modifications plus recentes que la derniere sauvegarde de
+CONTEXT.md, non journalisees. Relecture : la moitie regiments/ordres de l'etape 3 (§2.50) y
+etait deja ecrite et compilee par Nono (StructureCareerBonusAttributModif, import XML tolerant
+a l'ordre des balises, PersonnageCareerBonusAttributModif filtree par palier atteint, cablee
+dans PdfPersonnageAttribut) - coherente avec les conventions du fichier, mais pas encore
+exercee (aucun livre ne pose de ModifyCarac sous DATA_CAREER_BONUS). Ecart releve et valide par
+Nono : seul l'Attribut est couvert, pas la Competence (pas de ModifySkill), meme limitation
+reprise pour la suite.
+CONTEXT.md mis a jour pour refleter cet etat avant de continuer.
+Ensuite, ecriture de la moitie ARMES de l'etape 3 : nouveau fichier chargearmeattributmodif.pas
+(StructureArmeAttributModif - Livre/CodeArme/CodeAttribut/Valeur, meme moule que les talents),
+import dans xmlexportimport.pas (ajout immediat, une arme n'a pas de palier a attendre),
+PersonnageArmeAttributModif dans chargepersonnage.pas (parcourt Personnage.Equipement filtre
+TypeEquipWe - pas de distinction possede/porte dans ce modele), cablee dans PdfPersonnageAttribut
+juste apres l'appel appartenances, liste creee dans warhammersource.pas avec les autres.
+Incident en cours de route, sans consequence sur le code final mais a eviter : les cinq fichiers
+avaient ete presentes comme livres apres simple edition des copies locales, sans l'etape
+d'ecriture vers le poste de Nono - rien n'etait donc arrive chez lui. Corrige en reeditant et en
+committant explicitement, avec verification de la taille des fichiers sur son poste. Piege
+annexe rencontre en corrigeant : restager un fichier deja edite mais pas encore envoye ecrase
+l'edition locale, qu'il a fallu refaire une deuxieme fois. Les deux lecons ajoutees au §0 de
+CONTEXT.md.
+Nono a compile : ca passe, aucune regression constatee. Comme pour les regiments/ordres, aucun
+livre ne pose encore de ModifyCarac sur une arme, donc rien n'exerce ce code en pratique
+aujourd'hui - la compilation propre et l'absence de regression sont le seul test possible.
+Suite (CONTEXT.md §2.50 etape 3, derniere moitie) : armures (StructureArmureBonus, aucun champ
+pour l'instant) a faire en meme temps que la migration de ListArmureBonusModif en vrai
+modificateur (point 5 du plan), qui corrigera au passage le bug Stechzeug Bracers.
+
+06/09/2026 - FIN DU 2.50 ETAPE 3 : ARMURES FAITES, BUG STECHZEUG BRACERS REELLEMENT CORRIGE
+Ecriture de la derniere moitie de l'etape 3 (armures) : nouveau fichier
+chargearmurebonusattributmodif.pas (StructureArmureBonusAttributModif, keyee sur le code de
+QUALITE d'armure et non la piece), nouveau cas <ModifyCarac> dans xmlexportimport.pas pour les
+qualites d'armure (distinct du <Modifier name="..."> historique qui reste pour la Competence),
+helper PersonnageArmureQualites dans chargepersonnage.pas (resout la ListeBonus de chaque piece
+equipee - normale et simplifiee - en codes de qualite), suivi de deux fonctions :
+PersonnageArmureBonusAttributModif (nouveau) et PersonnageArmureBonusCompetenceModif (migration
+de l'ancien ListArmureBonusModif, jusqu'ici decoratif, en vrai modificateur). Les deux cablees
+dans pdfpersonnage.pas. Nono a compile : ca passe.
+Erreur en cours de route, corrigee avant qu'elle ne s'installe dans CONTEXT.md : la migration
+Competence (ListArmureBonusModif) avait ete presentee a Nono comme LA correction du bug des
+Stechzeug Bracers - faux. Ce bug porte sur la DEXTERITE, un ATTRIBUT, que ListArmureBonusModif
+ne sait pas representer (il ne prend qu'un code de competence). C'est le nouveau mecanisme
+Attribut (point 4, pas le point 5) qui le rend possible. Corrige pour de bon en ajoutant
+<ModifyCarac name="RULES-ATTR_Dex">-10</ModifyCarac> a NATIO-ARMOB_14 dans
+BOOK_NATIONS_OF_MANKIND.Xml, et en nettoyant le <Modifier> texte libre et l'<Explanation> du
+commentaire "descriptive only" devenu faux. Entree retiree d'A FAIRE.txt ; la note sur le 3d-3
+(ordres de chevalerie) mise a jour pour ne plus citer Stechzeug comme exemple de bug bloque, et
+pour signaler que le +10 Fel/+10 WP du Knight of the Inner Circle peut desormais se saisir en
+XML (le mecanisme regiments/ordres existe depuis plus tot dans la session).
+Le §2.50 etape 3 est maintenant termine dans son ensemble : talents (etapes 1-2),
+appartenances/paliers de carriere, armes, qualites d'armure sont tous couverts par le
+resolveur generique Attribut, plus la Competence pour les qualites d'armure. Limitation
+assumee sur les trois nouveaux points (regiments/ordres, armes, armures) : Attribut seul, pas
+de ModifySkill, tant que rien dans les livres n'en a besoin.
+Nono a aussi fait une remarque sur la lisibilite des messages de la session (questions/demandes
+noyees dans du texte dense) - a garder plus court et plus direct desormais.
+Suite (CONTEXT.md 2.50, point 6) : une fois le resolveur eprouve plus longtemps, retirer les
+mecanismes decoratifs redondants (ListTalentAttributModif/ListTalentCompetenceModif en tant
+qu'annotation seule) - pas maintenant, decision Nono.
+
+06/09/2026 - APPARTENANCE AFFICHEE DANS LE PDF (CONTEXT.md 2.44), ET CLARIFICATION DU
+WORKFLOW D'EDITION .pas/.lfm
+Sur demande de Nono, garde simple : le regiment/ordre apparait entre parentheses a la suite
+du nom de la carriere en cours, sans nouveau bloc PDF. Modification identique aux deux
+formats (pdfpersonnage.pas l.1167 ancien format, l.2190 PdfBlocEntete nouveau format), en
+reutilisant LibelleAppartenances (chargemetier.pas), deja ecrite le meme jour pour l'affichage
+a l'ecran. Teste par Nono sur les deux PDF : le regiment ressort bien entre parentheses, sans
+regression ni debordement de colonne signale.
+Corrige en cours de route : Claude avait d'abord propose le correctif sous forme de code a
+coller, en appliquant la regle "petites corrections .pas -> Nono colle lui-meme". Nono a
+clarifie que ce n'est pas la bonne regle : sur les .pas, c'est toujours Claude qui edite
+directement sur son poste, quelle que soit la taille du changement - jamais de code a coller.
+Sur les .lfm en revanche, on en discute d'abord avant toute edition (meme mecanisme
+qu'avant : c'est Claude qui edite ensuite, jamais Nono en parallele dans l'IDE, a cause des
+incoherences deja rencontrees). Regle corrigee dans CONTEXT.md §0 (elle avait ete mal
+formulee dans un premier temps, dans le sens inverse) et dans la memoire de session.
+Suite (CONTEXT.md 2.44) : reste le 3d-3 (ordres de chevalerie) et les onze Regiments of
+Renown.
+
+06/09/2026 - APPARTENANCE : "CORRIGER" NE DEMANDE PAS DE CHANTIER, VERIFIE PAR NONO
+Nono a teste : ressortir puis rerentrer dans la meme carriere (Soldier -> Soldier) rouvre
+bien l'ecran de choix des appartenances et permet d'en ajouter une autre - cumulatif, jamais
+un remplacement (deja le comportement voulu depuis la conception du 04/09, "on ne retire
+jamais"). Nono juge ca coherent, vu qu'il y a un vrai changement entre les regiments - ca
+correspond exactement a la regle du livre (quitter un regiment garde les competences/talents
+acquis). L'entree d'A FAIRE.txt sur ce sujet est retiree : ce n'est pas un defaut, c'est le
+mecanisme voulu qui marche deja. CONTEXT.md 2.44 mis a jour pour refleter ca.
+Suite (CONTEXT.md 2.44) : reste le 3d-3 (ordres de chevalerie) et les onze Regiments of
+Renown.

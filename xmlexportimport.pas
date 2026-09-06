@@ -18,7 +18,8 @@ uses
   ChargeRaceCorruptionCreation, ChargeCorruptionTable, ChargeTalentAttributModif,
   ChargeTalentCompetenceModif, ChargeTalentCompetenceAjoute, ChargeRaceOpinion,
   ChargeArmureBonusModif, ChargeCorruptionAttributModif, ChargeCorruptionCompetenceModif,
-  ChargeCorruptionArmureModif, ChargeTalentArmureModif,
+  ChargeCorruptionArmureModif, ChargeTalentArmureModif, ChargeArmeAttributModif,
+  ChargeArmureBonusAttributModif,
   XMLRead, DOM, Unitcalcul,  Dialogs, strutils;
 
 Procedure XmlExportBook(Livre: String; Langue: String);
@@ -1036,9 +1037,11 @@ Procedure XmlImport(FileName: String; OnlyPrimary: Boolean; OnlyCode: Boolean);
     PMetiercompetence:        StructureMetierCompetence;
     PMetierEquipement:        StructureMetierEquipement;
     PArme:                    StructureArme;
+    PArmeAttributModif:       StructureArmeAttributModif;
     PArmeBonus:               StructureArmeBonus;
     PArmure:                  StructureArmure;
     PArmureBonus:             StructureArmureBonus;
+    PArmureBonusAttributModif: StructureArmureBonusAttributModif;
     PSort:                    StructureSort;
     PSortTalent:              StructureSortTalent;
     PTrait:                   StructureTrait;
@@ -2064,6 +2067,24 @@ Procedure XmlImport(FileName: String; OnlyPrimary: Boolean; OnlyCode: Boolean);
                               PArme.Portee          := RemoveQuotes(UTF8Encode(Node.TextContent));
                             ConstXmlPrix:
                               PArme.Prix            := RemoveQuotes(UTF8Encode(Node.TextContent));
+                            // <ModifyCarac name="CODE">VALEUR</ModifyCarac> pose directement sur
+                            // l'arme (rare - arme magique bonifiant un Attribut) - CONTEXT.md 2.50
+                            // etape 3. Pas de pendant ModifySkill pour l'instant (voir
+                            // ChargeArmeAttributModif). CodeArme deja connu a ce point de la
+                            // boucle, ajout immediat comme pour ListTalentAttributModif (pas
+                            // besoin de differer comme pour un palier de CareerBonus).
+                            ConstXmlModifieAttribut:
+                              begin
+                                PArmeAttributModif.Livre        := Livre;
+                                PArmeAttributModif.CodeArme     := PArme.CodeArme;
+                                PArmeAttributModif.CodeAttribut := RemoveQuotes(UTF8Encode(Node.Attributes.GetNamedItem(ConstXmlData).NodeValue));
+                                PArmeAttributModif.Valeur       := StrToIntDef(RemoveQuotes(UTF8Encode(Node.TextContent)), 0);
+                                if LangueDef = ConstAnglais then
+                                   begin
+                                    ListArmeAttributModif.add(PArmeAttributModif);
+                                    inc(NbArmeAttributModif);
+                                   end;
+                              end;
                           end;
 
                           Node := XmlElement(Node.NextSibling);
@@ -2282,6 +2303,22 @@ Procedure XmlImport(FileName: String; OnlyPrimary: Boolean; OnlyCode: Boolean);
                                 else
                                   // Modifier texte libre, sans compétence liée (note mécanique type "combinable with Plate") : comportement inchangé
                                   PArmureBonus.Malus := RemoveQuotes(UTF8Encode(Node.TextContent));
+                              end;
+                            // <ModifyCarac name="CODE">VALEUR</ModifyCarac> - meme convention que
+                            // pour les talents/armes/regiments, distincte du <Modifier name="...">
+                            // historique ci-dessus (qui reste pour la Competence). CONTEXT.md 2.50
+                            // etape 3.
+                            ConstXmlModifieAttribut:
+                              begin
+                                PArmureBonusAttributModif.Livre           := Livre;
+                                PArmureBonusAttributModif.CodeArmureBonus := PArmureBonus.CodeArmureBonus;
+                                PArmureBonusAttributModif.CodeAttribut    := RemoveQuotes(UTF8Encode(Node.Attributes.GetNamedItem(ConstXmlData).NodeValue));
+                                PArmureBonusAttributModif.Valeur          := StrToIntDef(RemoveQuotes(UTF8Encode(Node.TextContent)), 0);
+                                if LangueDef = ConstAnglais then
+                                   begin
+                                    ListArmureBonusAttributModif.add(PArmureBonusAttributModif);
+                                    inc(NbArmureBonusAttributModif);
+                                   end;
                               end;
                           end;
 

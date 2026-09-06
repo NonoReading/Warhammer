@@ -587,6 +587,12 @@ Function PdfPersonnageCompetence(Personnage: StructurePersonnage; Competence: St
     // n'est pas un avancement acheté) fausserait ce calcul. Signalé par Nono le 17/08/2026.
     Res.Total := Res.Total + PersonnageMutationCompetenceModif(Personnage, Competence);
 
+    // Qualité d'armure liée à une compétence (ex. pénalité de Dextérité des Stechzeug
+    // Bracers) - migration de l'ancien mécanisme décoratif ListArmureBonusModif en vrai
+    // modificateur, même raisonnement que ci-dessus (Total, pas Augmentation). CONTEXT.md
+    // §2.50 étape 3, point 5.
+    Res.Total := Res.Total + PersonnageArmureBonusCompetenceModif(Personnage, Competence);
+
     Result := res;
   end;
 
@@ -684,6 +690,17 @@ Function PdfPersonnageAttribut(Personnage: StructurePersonnage; Attribut: String
     // Fellowship et Willpower sont deux des dix attributs classiques, déjà calculés ici pour
     // tous les autres appelants (grille des caractéristiques, substitution des %-codes PDF).
     Res.Base := Res.Base + PersonnageCareerBonusAttributModif(Personnage, Attribut);
+
+    // Modificateurs d'arme (ex. arme magique bonifiant un Attribut) dont le personnage
+    // possède un exemplaire - CONTEXT.md §2.50 étape 3, même limitation que ci-dessus
+    // (les dix attributs classiques passés par ici ; pas Mouvement/Destin/Détermination,
+    // qui ont leur propre calcul séparé plus bas dans ce fichier).
+    Res.Base := Res.Base + PersonnageArmeAttributModif(Personnage, Attribut);
+
+    // Qualité d'armure bonifiant un Attribut (ex. armure magique) dont le personnage
+    // possède un exemplaire équipé - CONTEXT.md §2.50 étape 3, même limitation que
+    // ci-dessus (les dix attributs classiques passés par ici).
+    Res.Base := Res.Base + PersonnageArmureBonusAttributModif(Personnage, Attribut);
 
     Res.Total := Res.Base + Res.Augmentation;
     Result := res;
@@ -1147,7 +1164,10 @@ Procedure PdfPersonnageCreation(Personnage: StructurePersonnage; BackGround: Boo
     PdfPage.WriteText( 50, 246, Personnage.NomPersonnage);                               // Nom
     PdfPage.WriteText(118, 246, PRace.Libelle);                                      // Race
     PdfPage.WriteText(165, 246, GetTexteLibelle(PMetier.LibelleGroupe));                 // Classe
-    PdfPage.WriteText( 50, 241, PMetier.Libelle);                                  // Métier
+    if Trim(Personnage.Appartenance) <> '' then
+      PdfPage.WriteText( 50, 241, PMetier.Libelle + ' (' + LibelleAppartenances(Personnage.Appartenance) + ')')
+    else
+      PdfPage.WriteText( 50, 241, PMetier.Libelle);                                // Métier
     PdfPage.WriteText(135, 241, IntToStr(Personnage.MetierEnCours.NiveauMetier)+' - '+ PMetierNiveau.Libelle);     // Niveau
     PdfPage.WriteText( 50, 236, LocData);     // Schéma
     PdfPage.WriteText(165, 236, GetTexteLibelle(PMetierNiveau.SalaireMetier, '', ' '));  // Salaire
@@ -2167,7 +2187,10 @@ Function PdfBlocEntete(PdfPage: TPDFPage; Personnage: StructurePersonnage; PRace
     PdfEcrit(PdfPage,  32,  86, Y - (HauteurLigne * 1) + 1, Personnage.NomPersonnage, MinPolice);
     PdfEcrit(PdfPage,  89, 115, Y - (HauteurLigne * 1) + 1, PRace.Libelle, MinPolice);
     PdfEcrit(PdfPage, 126, XDroite, Y - (HauteurLigne * 1) + 1, GetTexteLibelle(PMetier.LibelleGroupe), MinPolice);
-    PdfEcrit(PdfPage,  32,  85, Y - (HauteurLigne * 2) + 1, PMetier.Libelle, MinPolice);
+    if Trim(Personnage.Appartenance) <> '' then
+      PdfEcrit(PdfPage,  32,  85, Y - (HauteurLigne * 2) + 1, PMetier.Libelle + ' (' + LibelleAppartenances(Personnage.Appartenance) + ')', MinPolice)
+    else
+      PdfEcrit(PdfPage,  32,  85, Y - (HauteurLigne * 2) + 1, PMetier.Libelle, MinPolice);
     PdfEcrit(PdfPage,  95, XDroite, Y - (HauteurLigne * 2) + 1, IntToStr(Personnage.MetierEnCours.NiveauMetier)+' - '+ PMetierNiveau.Libelle, MinPolice);
     PdfEcrit(PdfPage,  50, XDroite, Y - (HauteurLigne * 3) + 1, LocData, MinPolice);
     PdfEcrit(PdfPage, 125, XDroite, Y - (HauteurLigne * 3) + 1, GetTexteLibelle(PMetierNiveau.SalaireMetier, '', ' '), MinPolice);
