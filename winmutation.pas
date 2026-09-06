@@ -228,7 +228,7 @@ procedure TWinMutations.ButtonTypeHasardClick(Sender: TObject);
 procedure TWinMutations.ButtonMutationTypeValiderClick(Sender: TObject);
   begin
     if (EditMutationTypeResultat.Value = 0) then
-      ShowMessage(GetTexteLibelle('MESS_019'))
+      ShowMessage(GetTexteLibelle('RULES-MESS_019'))
     else
       AfficheTypeResolu(EditMutationTypeResultat.Value);
   end;
@@ -292,7 +292,7 @@ procedure TWinMutations.AfficheEntreeResolue(Entree: StructureCorruptionTable);
   begin
     if CompareRechercheValeur(Entree.Code, CorruptionChoixMJ) then
       begin
-        ShowMessage(GetTexteLibelle('MESS_054'));
+        ShowMessage(GetTexteLibelle('RULES-MESS_054'));
         RadioButtonMutationEntreeChoix.Checked := True;
         UpdateSheetMutationEntree();
       end
@@ -314,7 +314,7 @@ procedure TWinMutations.ButtonEntreeHasardClick(Sender: TObject);
 procedure TWinMutations.ButtonMutationEntreeValiderClick(Sender: TObject);
   begin
     if (EditMutationEntreeResultat.Value = 0) then
-      ShowMessage(GetTexteLibelle('MESS_019'))
+      ShowMessage(GetTexteLibelle('RULES-MESS_019'))
     else
       AfficheEntreeResolue(CorruptionTableResultat(TypeCorruptionResolu, EditMutationEntreeResultat.Value));
   end;

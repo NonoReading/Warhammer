@@ -64,7 +64,7 @@ begin
   if FileExists(PdfChemin) then
     if not DeleteFile(PdfChemin) then
     begin
-      ShowMessage(GetTexteLibelle('MESS_038'));
+      ShowMessage(GetTexteLibelle('RULES-MESS_038'));
       exit;
     end;
   PDFDoc           := TPDFDocument.Create(nil);

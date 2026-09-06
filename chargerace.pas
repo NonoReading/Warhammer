@@ -94,7 +94,7 @@ Begin
       end;
   if not trouve then
     begin
-      PVide.Libelle := GetTexteLibelle('LAB_138');
+      PVide.Libelle := GetTexteLibelle('RULES-LAB_138');
       result:= PVide;
     end;
 end;

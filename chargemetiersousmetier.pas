@@ -39,7 +39,7 @@ function TexteMetierSousMetier(CodeMetier: String; ListeLivre: String):String;
       For PMetierSousMetier in ListMetierSousMetier do
         if CompareRechercheValeur(PMetierSousMetier.CodeMetier, CodeMetier) and VerifieFiltre(PMetierSousMetier.Livre, ListeLivre) then
           begin
-            if Texte = '' then Texte := SeparateurRetourLigne + SeparateurRetourLigne + GetTexteLibelle('LAB_127') + ' : ';
+            if Texte = '' then Texte := SeparateurRetourLigne + SeparateurRetourLigne + GetTexteLibelle('RULES-LAB_127') + ' : ';
             String2     := TStringList.Create;
             ExtractStrings([SeparateurMulti], [], PChar(PMetierSousMetier.CodeSousMetier), string2);
             for Ind := 0 to string2.Count - 1 do

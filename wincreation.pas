@@ -521,7 +521,7 @@ procedure TWinCreations.ButtonMetierSousMetierValiderClick(Sender: TObject);
     PMetier:  StructureMetier;
   begin
     if (EditMetierSousMetierResultat.Value = 0) then
-       ShowMessage(GetTexteLibelle('MESS_019'))
+       ShowMessage(GetTexteLibelle('RULES-MESS_019'))
     else
     begin
       LastCheckMetierSousMetierResul := EditMetierSousMetierResultat.Value;
@@ -1243,7 +1243,7 @@ procedure TWinCreations.PhaseSave(NouvellePhase: Integer);
            Personnage.LivresAcceptes:=LivresPersonnages;
            directoryPath := GetCurrentDir+ConstCheminPersonnage+EditNomPersonnag.text;
            if not CreateDir(directoryPath) then
-               ShowMessage(GetTexteLibelle('MESS_001')+' '+directoryPath)
+               ShowMessage(GetTexteLibelle('RULES-MESS_001')+' '+directoryPath)
            else
              begin
                PersonnageXmlCreation(Personnage, Xp, Xp, directoryPath + '\' + FormatDateTime('yyyymmdd', Date) + '-' + FormatDateTime('hhnnss', Time) + '.xml', EditNomPersonnag.text);
@@ -1601,7 +1601,7 @@ Function TWinCreations.PageEtapesChange(): boolean;
            // (les livres actifs du menu principal), le joueur ne fait qu'en retirer.
            if LivresPersonnages = '' then
               begin
-                 ShowMessage(GetTexteLibelle('MESS_056'));
+                 ShowMessage(GetTexteLibelle('RULES-MESS_056'));
                  Result := False;
               end
            else
@@ -1612,7 +1612,7 @@ Function TWinCreations.PageEtapesChange(): boolean;
          begin
            if RaceEnCours = '' then
               begin
-                 ShowMessage(GetTexteLibelle('MESS_002'));
+                 ShowMessage(GetTexteLibelle('RULES-MESS_002'));
                  Result := False;
               end
            else
@@ -1623,7 +1623,7 @@ Function TWinCreations.PageEtapesChange(): boolean;
           begin
             if MetierEnCours = '' then
                begin
-                  ShowMessage(GetTexteLibelle('MESS_003'));
+                  ShowMessage(GetTexteLibelle('RULES-MESS_003'));
                   Result := False;
                end
             else
@@ -1639,7 +1639,7 @@ Function TWinCreations.PageEtapesChange(): boolean;
 
             if Vide > 0 then
                 begin
-                 ShowMessage(GetTexteLibelle('MESS_004'));
+                 ShowMessage(GetTexteLibelle('RULES-MESS_004'));
                  Result := False;
                 end
               else
@@ -1651,7 +1651,7 @@ Function TWinCreations.PageEtapesChange(): boolean;
                      Ok := True;
                      if not ChoixCreationComplet() then
                        begin
-                         ShowMessage(GetTexteLibelle('MESS_005'));
+                         ShowMessage(GetTexteLibelle('RULES-MESS_005'));
                          Ok := False;
                        end;
                      result := Ok;
@@ -1666,12 +1666,12 @@ Function TWinCreations.PageEtapesChange(): boolean;
             PRaceNb := ChercheRace(RaceEnCours);
             if (NbCinq <> PRaceNb.NbPoint5) and (Ok) then
               begin
-                ShowMessage(Format(GetTexteLibelle('MESS_013'), [PRaceNb.NbPoint5]));
+                ShowMessage(Format(GetTexteLibelle('RULES-MESS_013'), [PRaceNb.NbPoint5]));
                 Ok := False;
               end;
             if (NbTrois <> PRaceNb.NbPoint3) and (Ok) then
               begin
-                ShowMessage(Format(GetTexteLibelle('MESS_014'), [PRaceNb.NbPoint3]));
+                ShowMessage(Format(GetTexteLibelle('RULES-MESS_014'), [PRaceNb.NbPoint3]));
                 Ok := False;
               end;
             // Pendant de la branche 6 : on refuse de quitter la phase tant qu'une ligne
@@ -1682,7 +1682,7 @@ Function TWinCreations.PageEtapesChange(): boolean;
                  ((Pos(ValeurGenerique, TabRaceCompetence.Cells[1, IndTab]) > 0) or
                   (Pos(SeparateurMulti, TabRaceCompetence.Cells[1, IndTab]) > 0)) then
                 begin
-                  ShowMessage(GetTexteLibelle('MESS_042'));
+                  ShowMessage(GetTexteLibelle('RULES-MESS_042'));
                   Ok := False;
                 end;
             result := Ok;
@@ -1693,13 +1693,13 @@ Function TWinCreations.PageEtapesChange(): boolean;
             Ok := True;
             if TotalMetierCompetence <> 40 then
               begin
-                ShowMessage(GetTexteLibelle('MESS_015'));
+                ShowMessage(GetTexteLibelle('RULES-MESS_015'));
                 Ok := False;
               end;
             for IndTab := 1 to TabMetierCompetence.RowCount - 1 do
               if (StrToIntDef(TabMetierCompetence.Cells[4, IndTab],0) <> 0) and (TabMetierCompetence.Cells[5, IndTab] = ConstArbreAuChoix) then
                 begin
-                  ShowMessage(GetTexteLibelle('MESS_042'));
+                  ShowMessage(GetTexteLibelle('RULES-MESS_042'));
                   Ok := False;
                 end;
             result := Ok;
@@ -1711,7 +1711,7 @@ Function TWinCreations.PageEtapesChange(): boolean;
             for IndTab := 1 to TabMetierEquipement.RowCount - 1 do
               If (TabMetierEquipement.Cells[1, IndTab] = '') then
                 begin
-                  ShowMessage(GetTexteLibelle('MESS_016'));
+                  ShowMessage(GetTexteLibelle('RULES-MESS_016'));
                   Ok := False;
                   Break;
                 end;
@@ -1723,14 +1723,14 @@ Function TWinCreations.PageEtapesChange(): boolean;
             Ok := True;
             if EditNomPersonnag.text = '' then
               begin
-                ShowMessage(GetTexteLibelle('MESS_017'));
+                ShowMessage(GetTexteLibelle('RULES-MESS_017'));
                 Ok := False;
               end
             else
               begin
                 if DirectoryExists(GetCurrentDir+EditNomPersonnag.text) then
                   begin
-                    ShowMessage(GetTexteLibelle('MESS_018'));
+                    ShowMessage(GetTexteLibelle('RULES-MESS_018'));
                     Ok := False;
                   end;
               end;
@@ -1855,7 +1855,7 @@ procedure TWinCreations.ButtonRaceHasardClick(Sender: TObject);
 procedure TWinCreations.ButtonRaceValiderClick(Sender: TObject);
   begin
        if (EditRaceResultat.Value = 0) then
-          ShowMessage(GetTexteLibelle('MESS_19'))
+          ShowMessage(GetTexteLibelle('RULES-MESS_19'))
        else
        begin
          LastCheckRaceResultat := EditRaceResultat.Value;
@@ -2355,7 +2355,7 @@ end;
 procedure TWinCreations.ButtonMetierValiderClick(Sender: TObject);
 begin
      if (EditMetierResultat.Value = 0) then
-        ShowMessage(GetTexteLibelle('MESS_019'))
+        ShowMessage(GetTexteLibelle('RULES-MESS_019'))
      else
      begin
        LastCheckMetierResultat := EditMetierResultat.Value;
@@ -2447,7 +2447,7 @@ procedure TWinCreations.TabAttributLanceDeEditingDone(Sender: TObject);
       begin
         // Rétablir la valeur précédente
         TabAttributLanceDe.Cells[FEditingCol, FEditingRow] := '';
-        ShowMessage(GetTexteLibelle('MESS_020'));
+        ShowMessage(GetTexteLibelle('RULES-MESS_020'));
       end;
     end;
   end;
@@ -3231,7 +3231,7 @@ procedure TWinCreations.TabMetierCompetenceValidateEntry(Sender: TObject; aCol,
             if (Value < 0) or (Value > 10) then
               begin
                 // La valeur est en dehors de la plage autorisée, vous pouvez afficher un message d'erreur
-                ShowMessage(GetTexteLibelle('MESS_022'));
+                ShowMessage(GetTexteLibelle('RULES-MESS_022'));
                 // Rétablir la valeur précédente
                 NewValue := OldValue;
               end;
@@ -3239,7 +3239,7 @@ procedure TWinCreations.TabMetierCompetenceValidateEntry(Sender: TObject; aCol,
         else
           begin
             // La valeur n'est pas un entier valide, vous pouvez afficher un message d'erreur
-            ShowMessage(GetTexteLibelle('MESS_023'));
+            ShowMessage(GetTexteLibelle('RULES-MESS_023'));
             // Rétablir la valeur précédente
             NewValue := OldValue;
           end;

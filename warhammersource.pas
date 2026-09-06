@@ -272,9 +272,9 @@ procedure TMenu.ComboBoxLangueSelect(Sender: TObject);
                 BloqueLangue := true;
 
             if BloqueLangue then
-              ShowMessage(GetTexteLibelle('MESS_055'))
+              ShowMessage(GetTexteLibelle('RULES-MESS_055'))
             else
-              if MessageDlg(GetTexteLibelle('MESS_041')+' : '+Langue, mtConfirmation, mbYesNo, 0) = mrYes then
+              if MessageDlg(GetTexteLibelle('RULES-MESS_041')+' : '+Langue, mtConfirmation, mbYesNo, 0) = mrYes then
                 begin
                   OuvertLivre      := false;
                   OuvertCompetence := false;
@@ -1168,7 +1168,7 @@ procedure TMenu.ButtonModificationClick(Sender: TObject);
   begin
     // ouvrir un personnage
     if TabPersonnage.Cells[ColPersoLNe, TabPersonnage.Row] <> '' then
-      ShowMessage(GetTexteLibelle('MESS_046') + TabPersonnage.Cells[ColPersoLNe, TabPersonnage.Row])
+      ShowMessage(GetTexteLibelle('RULES-MESS_046') + TabPersonnage.Cells[ColPersoLNe, TabPersonnage.Row])
     else
       begin
       NomPersonnage         := TabPersonnage.Cells[1, TabPersonnage.Row];

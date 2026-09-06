@@ -367,7 +367,7 @@ Const
       NbMaxCompetence                   = 12;
 
       // Talents qui donnent des bonus
-      TalentGenerique                   = 'T*';
+      TalentGenerique                   = 'RULES-T*';
       TalentAmePure                     = 'T0005';
       TalentDurACuire                   = 'T0047';
       TalentCostaud                     = 'T0035';
@@ -406,8 +406,8 @@ Const
       // Les constantes RaceHumain/RaceElf/RaceNain/... ('SPECIE_HUMAN', 'SPECIE_ELF', ...)
       // ont été supprimées le 20/08/2026 : elles n'étaient utilisées nulle part, et la liste
       // des RACES est désormais portée par le bloc XML DATA_RACE (voir ChargeEspece.pas).
-      CorruptionPhysique                = 'CORRUPTION_PHYSICAL';
-      CorruptionMentale                 = 'CORRUPTION_MENTAL';
+      CorruptionPhysique                = 'RULES-CORRUPTION_PHYSICAL';
+      CorruptionMentale                 = 'RULES-CORRUPTION_MENTAL';
       // "GM's Choice" (Physical Corruption Table, 96-00) - pas une vraie mutation, une
       // instruction de consulter le MJ (CONTEXT.md §2.7). Seule la table Physical a ce cas ;
       // Mental n'a pas d'entrée équivalente à 96-00 ("Worried Jitters", une entrée normale).
@@ -1069,18 +1069,29 @@ function extractnumbers(line: string): String;
   end;
 
 Function VerifieRecherche():Boolean;
-// Durci le 06/09/2026 (CONTEXT.md §2.49 etape 4), puis REVERTE le 06/09/2026 dans la meme
-// journee : le durcissement casse tous les GetTexteLibelle('PDF_XXX') ecrits en dur sans
-// prefixe RULES- dans pdfpersonnage.pas (plusieurs centaines d'occurrences, PDF normal ET
-// Feldo2P), ainsi que d'autres comparaisons du meme type (valeurs de competences a 0) - un
-// perimetre bien plus large que ce que mesurait le mouchard TraceNu*, qui ne voyait que les
-// validations faites au chargement des livres, pas les appels faits pendant la generation
-// d'un PDF. Tant que ces appels n'ont pas ete prefixes un par un (ou sortis en constantes,
-// comme ConstCaracXxx), la tolerance sur une reference nue doit rester en place. CONTEXT.md
-// §2.49.
+// Durci une premiere fois le 06/09/2026 (CONTEXT.md §2.49 etape 4), puis REVERTE le jour
+// meme : le durcissement cassait tous les GetTexteLibelle('PDF_XXX'/'LAB_XXX'/'MESS_XXX'/
+// 'SHORTATTR_XXX'/'CORRUPTION_XXX') ecrits en dur sans prefixe RULES- (plusieurs centaines
+// d'occurrences au total, PDF normal ET Feldo2P) - perimetre bien plus large que ce que
+// mesurait le mouchard TraceNu*, qui ne voyait que les validations faites au chargement des
+// livres, pas les appels faits pendant la generation d'un PDF.
+// Redurci le 06/09/2026 (encore la meme nuit) une fois TOUTES ces occurrences prefixees
+// (223 PDF_, 22 LAB_, 57 MESS_, 11 SHORTATTR_, 2 CORRUPTION_ - CONTEXT.md §2.49 etape 4),
+// verifie fichier par fichier par diff, et apres tour d'ecran de Nono sans affichage errone.
+// RE-REVERTE le 06/09/2026 (meme nuit, encore plus tard) : Nono a signale les Basic Skills
+// entierement a 0/vides sur les deux PDF. Cause : ChercheCompetence (chargecompetence.pas)
+// suit la MEME convention que GetTexteLibelle - CompareRechercheValeur(code prefixe en 1er,
+// code court en 2nd) - mais avec des codes courts ecrits en dur eux aussi, jamais vus par
+// l'audit precedent qui ne portait que sur les appels a GetTexteLibelle. Trouve :
+// PdfPersonnageCompetenceTri (pdfpersonnage.pas l.417-442), 26 codes nus type 'COMPESQU',
+// tous des competences de base RULEBOOK (confirme par Nono), prefixes RULES-COMPXXX.
+// Redurci une 3e fois le 06/09/2026 (encore plus tard) une fois ces 26 codes prefixes.
+// Decision de Nono (06/09) : corriger au fil de l'eau plutot qu'auditer tout le projet -
+// si un autre ecran affiche 0/vide apres ce changement, meme cause probable (code litteral
+// nu passe a une fonction Cherche*), chercher le meme motif (ListXxx.Add('CODE') sans
+// prefixe RULES- juste avant l'appel a ChercheXxx) plutot que d'incriminer autre chose.
 begin
-  result := ((LivreRecherche = LivreValeur) and (CodeRecherche = CodeValeur))
-         or ((LivreValeur = '') and (CodeRecherche = CodeValeur));
+  result := (LivreRecherche = LivreValeur) and (CodeRecherche = CodeValeur);
   end;
 
 Function LivreRepertoireTravail(CodeLivre, Langue: String): String;

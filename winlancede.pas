@@ -60,21 +60,21 @@ procedure TWinLanceDes.ButtonValiderClick(Sender: TObject);
   begin
     if SpinEditJet.Value = 0 then
       begin
-        ShowMessage(GetTexteLibelle('MESS_019'));
+        ShowMessage(GetTexteLibelle('RULES-MESS_019'));
         Exit;
       end;
 
     CodeTire := TalentAleatoire(SpinEditJet.Value, ChoixWinJetRace);
     if CodeTire = '' then
       begin
-        ShowMessage(GetTexteLibelle('MESS_059'));
+        ShowMessage(GetTexteLibelle('RULES-MESS_059'));
         Exit;
       end;
 
     if TalentDejaPossede(CodeTire, ChoixWinJetDeja) then
       begin
         PTalent := ChercheTalent(CodeTire);
-        ShowMessage(Format(GetTexteLibelle('MESS_021'), [PTalent.Libelle]));
+        ShowMessage(Format(GetTexteLibelle('RULES-MESS_021'), [PTalent.Libelle]));
         Exit;                                      // la fenêtre reste ouverte
       end;
 

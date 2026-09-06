@@ -1,6 +1,10 @@
 # Warhammer — Contexte projet
 
-**Dernière mise à jour : 06/09/2026 (soir) — §2.50 ÉTAPE 3 TERMINÉE (régiments/ordres,
+**Dernière mise à jour : 06/09/2026 (nuit) — §2.49 ÉTAPE 4 TERMINÉE ET VALIDÉE : Nono a créé
+un personnage complet sans problème, VerifieRecherche durci de façon stable (3e tentative,
+tous les codes nus trouvés et préfixés RULES-). Nono commit. Détail en fin de §2.49.
+
+**06/09/2026 (soir) — §2.50 ÉTAPE 3 TERMINÉE (régiments/ordres,
 armes, armures) : COMPILÉE PAR NONO. Le résolveur générique Attribut/Compétence couvre
 désormais talents (étapes 1-2), appartenances/paliers de carrière, armes et qualités
 d'armure, tous câblés dans `PdfPersonnageAttribut`/l'équivalent Compétence
@@ -19,6 +23,54 @@ correctement) — au passage, deux occurrences d'un bug de préfixe (§2.49) blo
 des talents à formule d'attribut trouvées et corrigées par Nono (`winpersonnage.pas`
 l.3269 et l.3575).
 
+**06/09/2026 (nuit) — Préalable de l'étape 4 du §2.49 TERMINÉ** : les 223 appels nus
+`GetTexteLibelle('PDF_XXX')` (123 codes distincts, `pdfpersonnage.pas` + un dernier trouvé
+dans `winlivre.pas` l.384, absent du grep initial) préfixés en `RULES-PDF_XXX`. Vérifié
+avant modification : aucune construction dynamique de ces codes (tout est un littéral direct)
+et les 123 codes correspondent tous à une définition `RULES-PDF_XXX` déjà présente, dans les
+deux Rulesbooks uniquement. Nono a signalé au passage que dans `BOOK_RULESBOOK.Xml`, seuls
+deux `<Text name=...>` sur 445 n'étaient pas préfixés (`CORRUPTION_PHYSICAL`/
+`CORRUPTION_MENTAL`, hors périmètre `PDF_`) et les a préfixés lui-même côté XML. Repéré en
+vérifiant l'autre sens : `chargeconstantes.pas` l.409-410 (`CorruptionPhysique`/
+`CorruptionMentale`) portait encore les codes nus, consommés par `GetTexteLibelle` dans
+`winmutation.pas` l.100-101 (boutons de choix de mutation) — même défaut que les `PDF_`,
+corrigé au passage. Compilé et testé par Nono (arbre `BOOK_GREEN_IZ_BEST`/attributs affiché
+correctement) ; seul point resté non revérifié à l'écran, le libellé « Classe » de WinLivre
+(`PDF_MAIN1_CLASS`) — sans gravité selon Nono, cet écran n'étant pas terminé (§2.1).
+
+⚠️ **Correction (06/09/2026, plus tard la même nuit) : le préalable n'était PAS complet.**
+L'annonce ci-dessus ne portait que sur `PDF_`. En élargissant la vérification à
+`CompareRechercheValeur` (la fonction sous `VerifieRecherche`, utilisée dans quasiment tous
+les `charge*.pas`, pas seulement `GetTexteLibelle`) et à l'ensemble des 76 fichiers `.pas` du
+projet plutôt qu'aux seuls `pdf*.pas`/`win*.pas` : aucun appel direct à
+`CompareRechercheValeur` ne passe de littéral nu (sûr), mais trois autres familles nues
+passées à `GetTexteLibelle`, toutes avec leur définition déjà préfixée en `RULES-` dans le
+XML (même situation que `PDF_`) : `LAB_` (22 appels, 13 codes, 5 fichiers — le préfixage des
+`LAB_` de l'étape 4 précédente ne les avait pas couverts), `MESS_` (57 appels, 46 codes, 12
+fichiers, famille jamais traitée), `SHORTATTR_` (11 appels dans `pdfpersonnage.pas`, dont un
+construit dynamiquement mais sûr à préfixer, seule la partie littérale fixe change).
+
+**✅ Les trois familles préfixées dans la foulée (06/09, encore plus tard)** : 18 fichiers,
+même méthode et mêmes vérifications que `PDF_`. Nono a compilé/testé ce lot (rien de mal
+affiché), puis le durcissement a été retenté — et re-reverté : voir paragraphe suivant.
+
+⚠️ **Durcissement retenté puis re-reverté (06/09, encore plus tard) : nouvelle cause, plus
+large que prévu.** Une fois compilé avec `VerifieRecherche` en forme stricte, les libellés
+`WinLivre` s'affichent enfin bien, mais les Basic Skills des deux PDF sortent entièrement à
+0/vides. Cause : `ChercheCompetence` et vraisemblablement les autres fonctions `Cherche*`
+suivent la même convention que `GetTexteLibelle` (code préfixé en 1er argument, code court
+en 2nd) mais avec des codes courts écrits en dur, jamais vus par l'audit précédent (qui ne
+portait que sur `GetTexteLibelle`) — exemple : `PdfPersonnageCompetenceTri`
+(`pdfpersonnage.pas` l.417-442), 26 codes nus type `'COMPESQU'`. Reverté à la forme
+tolérante d'origine le temps de corriger.
+
+**✅ Corrigé et redurci une 3e fois (06/09, encore plus tard).** Les 26 codes de
+`PdfPersonnageCompetenceTri` préfixés `RULES-COMPXXX` (tous confirmés RULEBOOK par Nono,
+diff vérifié : 26 lignes changées, rien d'autre). `VerifieRecherche` redurci une 3e fois.
+Nono a choisi de corriger au fil de l'eau plutôt que d'auditer tout le projet pour les
+fonctions `Cherche*` — reste à compiler et tester largement (pas qu'un tour rapide). Détail
+dans §2.49 étape 4.
+
 ⚠️ **Leçon du 06/09/2026 (soir), à ne pas reproduire** : après avoir édité les copies
 locales des fichiers pour les armes, elles ont été annoncées comme livrées SANS avoir été
 committées sur le poste de Nono - l'édition d'une copie de travail n'écrit rien chez lui,
@@ -35,17 +87,23 @@ chantier « correction » à mener. Reste sur ce chantier : le 3d-3 (ordres de c
 Squire seul saisissable tel quel, les trois autres paliers
 restent en descriptif sauf le Knight of the Inner Circle, dont le code de résolution existe
 désormais (§2.50 étape 3) mais qui attend encore d'être saisi en XML), et les onze Regiments
-of Renown. Trois autres chantiers ouverts, sans lien direct :
+of Renown. **§2.49 étape 4 (durcissement `VerifieRecherche`) TERMINÉ ET CLOS (06/09 nuit,
+3e tentative)** : tous les codes nus trouvés en cours de route préfixés `RULES-` (`PDF_XXX`/
+`CorruptionPhysique`/`CorruptionMentale`/`LAB_`/`MESS_`/`SHORTATTR_`, les 26 codes de
+`PdfPersonnageCompetenceTri`, `TalentGenerique`), `VerifieRecherche` stable en forme
+stricte. Nono a créé un personnage complet sans problème (compétences de base, choix de
+talent aléatoire compris) et committe. Détail complet dans §2.49. Si un écran affiche encore
+du 0/vide ou un libellé générique non résolu à l'avenir, chercher le même motif (une valeur
+en dur sans `RULES-` passée à une fonction `Cherche*`/`CompareRechercheValeur`) plutôt que
+d'incriminer autre chose — cette classe de bug n'est pas garantie épuisée, seulement chaque
+occurrence trouvée jusqu'ici corrigée.
+
+Deux autres chantiers ouverts, sans lien direct :
 1. §2.50 point 6 — une fois le nouveau résolveur éprouvé un peu plus longtemps, retirer les
    mécanismes décoratifs devenus redondants (`ListTalentAttributModif` en tant qu'annotation
    seule/`ListTalentCompetenceModif`/l'ancien `PTalent.Attribut`). Décision de Nono : pas
    maintenant, laisser le temps de la mise à jour. Voir §2.50 pour le détail.
-2. **§2.49 étape 4 (durcissement `VerifieRecherche`), en attente d'un préalable** : sortir en
-   constantes préfixées `RULES-` tous les `GetTexteLibelle('PDF_XXX')` écrits en dur dans
-   `pdfpersonnage.pas` (216 occurrences, 144 codes distincts recensés le 06/09 ; probablement
-   d'autres fichiers `pdf*.pas`/`win*.pas` à vérifier) — tant que ce n'est pas fait, ne PAS
-   retenter le durcissement, voir §2.49 étape 4 pour le détail de ce qui casse.
-3. Petites choses en attente, sans urgence : distiller puis supprimer les quatre `.md`
+2. Petites choses en attente, sans urgence : distiller puis supprimer les quatre `.md`
    parasites de la racine (`CHANTIER_versionning_livres.md`, `CONCEPTION_creation_choix_talents.md`,
    `CONTEXT_MENU_INTEGRATION.md`, `REPRISE_session_20260809.md`) ; supprimer le fichier
    orphelin `chargetalentmodif.pas` (repéré le 06/09, voir §2.50) ; et deux chantiers capturés
@@ -5234,6 +5292,138 @@ l'écran (`warhammersource.pas`, 76) avant les 22 autres (601).
    testé à l'écran à chaque lot, en vérifiant d'abord (comme pour les `LAB_` de l'étape 4
    précédente) qu'aucun code n'est construit dynamiquement. Vérifier aussi les autres unités
    `pdf*.pas`/`win*.pas` : le grep du 06/09 n'a porté que sur `pdfpersonnage.pas`.
+
+   **✅ FAIT (06/09/2026, nuit).** Préfixage direct des littéraux retenu (deuxième option
+   ci-dessus). Vérification préalable : sur les 19 unités `pdf*.pas`/`win*.pas`, seuls
+   `pdfpersonnage.pas` (222 appels nus) et `winlivre.pas` (1 appel, l.384, `PDF_MAIN1_CLASS`)
+   en portaient — aucune construction dynamique nulle part (tout est un littéral direct passé
+   à `GetTexteLibelle`), et les 123 codes distincts correspondent tous à une définition
+   `RULES-PDF_XXX` existante dans `BOOK_RULESBOOK.Xml`/`BOOK_RULESBOOK_FRANCAIS.Xml` (seuls
+   livres à définir des `PDF_`). Les 223 occurrences préfixées, diffs vérifiés ligne à ligne
+   (chaque retrait = exactement l'ajout correspondant + `RULES-`, aucun autre changement).
+   Trouvaille annexe pendant la vérification côté données : sur les 445 `<Text name=...>` de
+   `BOOK_RULESBOOK.Xml`, seuls deux (`CORRUPTION_PHYSICAL`/`CORRUPTION_MENTAL`, hors `PDF_`)
+   n'étaient pas préfixés — Nono les a préfixés lui-même dans le XML. Ça a mis au jour le même
+   défaut côté code : `chargeconstantes.pas` l.409-410 (`CorruptionPhysique`/
+   `CorruptionMentale`) restait nu, consommé par `GetTexteLibelle` dans `winmutation.pas`
+   l.100-101 (boutons de choix de mutation physique/mentale) — corrigé au passage (préfixage
+   de la constante, `winmutation.pas` n'a rien à changer puisqu'il passe déjà la constante).
+   Compilé et testé par Nono : arbre de données `BOOK_GREEN_IZ_BEST` (attributs) affiché
+   correctement. Le libellé « Classe » de WinLivre (l'unique cas dans `winlivre.pas`) n'a pas
+   été revérifié précisément à l'écran — sans gravité selon Nono, WinLivre n'étant pas terminé
+   (§2.1). **Le durcissement lui-même n'a pas été retenté** : ce lot ne fait que lever le
+   préalable pour `PDF_`/`CORRUPTION_`.
+
+   ⚠️ **Correction : ce n'était qu'une partie du préalable.** En élargissant la vérification
+   (06/09, plus tard la même nuit) à `CompareRechercheValeur` elle-même — pas seulement
+   `GetTexteLibelle` — et aux 76 fichiers `.pas` du projet (pas seulement `pdf*.pas`/
+   `win*.pas`) : **aucun appel direct à `CompareRechercheValeur` ne passe de littéral nu**
+   nulle part dans le projet (bonne nouvelle, rien à faire de ce côté). Mais `GetTexteLibelle`
+   porte encore trois familles nues, chacune avec sa définition XML déjà entièrement préfixée
+   `RULES-` (même situation que `PDF_`, donc même sécurité de méthode) :
+   - **`LAB_`** : 22 appels nus, 13 codes distincts (`LAB_009/010/034/053/054/055/056/057/
+     058/060/118/127/138`) dans `chargearme.pas`, `chargemetier.pas`,
+     `chargemetierracechoixmetier.pas`, `chargemetiersousmetier.pas`, `chargerace.pas` — le
+     préfixage des `LAB_` de l'étape 4 précédente (677 occurrences, 23 unités) ne les avait
+     pas couverts, probablement du code écrit après cette passe.
+   - **`MESS_`** : 57 appels nus, 46 codes distincts, sur 12 fichiers (`pdfmetier.pas`,
+     `pdfpersonnage.pas`, `pdfrace.pas`, `warhammersource.pas`, `wincompetence.pas`,
+     `wincreation.pas`, `winfabrication.pas`, `winlancede.pas`, `winmetier.pas`,
+     `winmutation.pas`, `winpersonnage.pas`, `wintalent.pas`) — famille jamais traitée
+     jusqu'ici. 59 définitions `RULES-MESS_` dans `BOOK_RULESBOOK.Xml`, aucune nue.
+   - **`SHORTATTR_`** : 11 appels, tous dans `pdfpersonnage.pas` (l.924-934, dix littéraux
+     directs) plus un cas construit dynamiquement l.3420
+     (`GetTexteLibelle('SHORTATTR_'+ExtractStringAfter(PAttribut.CodeAttribut,'_'))`) — sûr à
+     préfixer car seule la partie littérale fixe (`'SHORTATTR_'`) change, la partie
+     dynamique n'est pas touchée. 15 définitions `RULES-SHORTATTR_` dans le XML.
+
+   Nono (06/09) : chantier plus conséquent que prévu.
+
+   **✅ FAIT (06/09/2026, encore plus tard la même nuit).** Les trois familles préfixées,
+   même méthode que `PDF_` (littéral direct, `sed` ciblé sur `GetTexteLibelle('XXX_` →
+   `GetTexteLibelle('RULES-XXX_`), diff vérifié fichier par fichier (lignes totales
+   inchangées, chaque retrait = l'ajout correspondant + `RULES-`, aucune autre différence) :
+   `LAB_` (22 appels, `chargearme.pas`/`chargemetier.pas`/`chargemetierracechoixmetier.pas`/
+   `chargemetiersousmetier.pas`/`chargerace.pas`), `MESS_` (57 appels, 12 fichiers dont
+   `pdfpersonnage.pas`/`winpersonnage.pas`/`wincreation.pas`), `SHORTATTR_` (11 appels dans
+   `pdfpersonnage.pas` l.924-934 et l.3420 — le cas construit dynamiquement traité
+   correctement, seule la partie littérale fixe `'SHORTATTR_'` a reçu le préfixe, la partie
+   `+ExtractStringAfter(...)` intacte). 18 fichiers au total, tous livrés et taille vérifiée
+   sur le poste de Nono — deux d'entre eux (`pdfpersonnage.pas`, puis lui à nouveau après le
+   lot `SHORTATTR_`) ont fait le coup de l'écriture qui répond « écrit » sans écrire (§0),
+   réémis et revérifiés à chaque fois.
+
+   Nono a compilé et fait un tour rapide de l'application : rien de mal affiché.
+
+   **✅ DURCISSEMENT RETENTÉ puis ❌ RE-REVERTÉ (06/09/2026, encore plus tard la même nuit).**
+   `VerifieRecherche` (`chargeconstantes.pas`) était repassé en forme stricte. Nono a compilé
+   et testé : les libellés de `WinLivre` s'affichent enfin correctement, mais les **Basic
+   Skills des deux PDF (normal et Feldo2P) sont sortis entièrement à 0/vides** (Nom, Attribut,
+   Stat, Upg, Adv, Total). Cause identifiée : `ChercheCompetence` (`chargecompetence.pas`)
+   suit la même convention que `GetTexteLibelle` — `CompareRechercheValeur(code préfixé en
+   1er, code court en 2nd)` — mais avec des codes courts écrits en dur eux aussi, jamais vus
+   par l'audit précédent (qui ne portait que sur les appels à `GetTexteLibelle`). Exemple :
+   `PdfPersonnageCompetenceTri` (`pdfpersonnage.pas` l.417-442), 25 codes nus en dur
+   (`'COMPART_*'`, `'COMPATHL'`, `'COMPESQU'`...) — c'est justement la liste qui alimente le
+   tableau des compétences de base. Cette famille de codes nus touche vraisemblablement
+   **toutes les fonctions `Cherche*`** (`ChercheAttribut`, `ChercheTalent`, `ChercheMetier`,
+   `ChercheRace`...), pas seulement `ChercheCompetence` — périmètre potentiellement bien plus
+   large que `PDF_`/`LAB_`/`MESS_`/`SHORTATTR_`/`CORRUPTION_` réunis, et pas mesuré à ce jour.
+   `VerifieRecherche` reverté à sa forme tolérante d'origine (`(LivreRecherche = LivreValeur)
+   and (...)) or ((LivreValeur = '') and (...))`), commentaire réécrit pour tracer les deux
+   tentatives et cette cause.
+
+   Nono, consulté avant de relancer quoi que ce soit (feedback direct : « des fois, pose des
+   question avant de tout relancer ») : les 26 codes de `PdfPersonnageCompetenceTri` sont
+   tous des compétences de base du RULEBOOK, donc sûrs à préfixer directement plutôt que
+   d'auditer tout le projet. **Décision de Nono : corriger au fil de l'eau, retester
+   largement, pas d'audit exhaustif des fonctions `Cherche*` pour l'instant.**
+
+   **✅ CORRIGÉ ET REDURCI UNE 3e FOIS (06/09/2026, encore plus tard la même nuit).** Les 26
+   codes de `PdfPersonnageCompetenceTri` (`pdfpersonnage.pas` l.417-442) préfixés
+   `RULES-COMPXXX` — vérifié au préalable que chacun a bien une définition `RULES-COMPXXX`
+   dans `BOOK_RULESBOOK.Xml` (confirmé, 10 à 124 occurrences chacun) et qu'aucun `Skill id=`
+   nu (sans `RULES-`) n'existe pour ces codes dans les livres. Diff vérifié : exactement 26
+   lignes changées (`ListComp.Add('COMPXXX')` → `ListComp.Add('RULES-COMPXXX')`), rien
+   d'autre, taille cohérente (+156 octets = 26 × 6 caractères). `VerifieRecherche`
+   (`chargeconstantes.pas`) redurci une 3e fois, commentaire mis à jour pour tracer les trois
+   tentatives et le motif à chercher en cas de nouvelle régression (une liste `ListXxx.Add`
+   en dur sans `RULES-` juste avant un appel `Cherche*`).
+
+   **Reste : Nono compile et teste largement** — pas seulement Basic Skills, mais tout écran
+   ou PDF qui pourrait passer par une fonction `Cherche*` (Talents, Attributs, Métiers,
+   Races, Armes, Armures...) — avant de considérer ce chantier clos. Si un nouvel écran
+   affiche du 0/vide, chercher le même motif plutôt qu'incriminer autre chose.
+
+   **✅ Deuxième cas trouvé et corrigé (06/09, encore plus tard) : `TalentGenerique`.** En
+   création (étape 5/9, choix de talent), trois lignes affichaient littéralement « Random
+   Talent » au lieu du talent tiré au hasard. Nono a lui-même identifié la cause :
+   `TalentGenerique = 'T*'` (`chargeconstantes.pas`), utilisée par `CompareRechercheValeur`
+   dans `chargetalentcreation.pas`/`wincreation.pas` (5 appels)/`winraces.pas` pour détecter
+   le marqueur générique « talent à tirer au hasard » (`RULES-T*` dans
+   `BOOK_RULESBOOK.Xml`, `Description` = « Random Talent »), était restée sans préfixe
+   `RULES-`. Sous le durcissement, la détection échoue (livres différents), le talent
+   générique n'est plus reconnu comme tel et son libellé brut s'affiche à la place du
+   tirage. Corrigée en `'RULES-T*'` (seule occurrence du motif dans le projet, seule
+   définition `RULES-T*` dans les livres). Les 10 autres constantes `Talent*` de la même
+   section vérifiées à la demande de Nono : toutes utilisées uniquement via
+   `case ExtractStringAfter(CodeTalent, SeparateurLivre) of ...` (`pdfpersonnage.pas`), qui
+   retirent le préfixe à la main — jamais concernées par `VerifieRecherche`, aucune à
+   toucher (`TalentHaineSacree` est même orpheline, plus utilisée nulle part).
+
+   **Reste : Nono compile et teste l'étape 5/9 de création** pour confirmer la résolution
+   correcte des talents aléatoires, en plus du test large déjà demandé ci-dessus.
+
+   **✅ CHANTIER CLOS (06/09/2026, nuit).** Nono a créé un personnage complet sans aucun
+   problème (compétences de base, choix de talent aléatoire compris) et committe. Trois
+   cycles régression/correction en tout ce soir avant stabilisation (`PDF_`/`CORRUPTION_` →
+   découverte `LAB_`/`MESS_`/`SHORTATTR_` → durcissement → régression Basic Skills
+   (`ChercheCompetence`) → durcissement → régression Random Talent (`TalentGenerique`) →
+   durcissement, stable). Leçon retenue pour la suite : chaque fonction `Cherche*`/
+   `CompareRechercheValeur` peut cacher un code littéral non préfixé quelque part dans le
+   projet, trouvé seulement à l'usage — si un nouvel écran affiche un jour un 0/vide ou un
+   libellé générique non résolu, chercher ce motif en premier (historique complet dans
+   `Log.txt`, entrées du 06/09/2026).
 
 Deux fragilités relevées dans le code au passage, sans effet aujourd'hui, notées pour mémoire :
 `pdfpersonnage.pas` retire le paramètre d'une qualité par `copy(LocData,1,Length(LocData)-2)`,

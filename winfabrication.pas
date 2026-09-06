@@ -142,7 +142,7 @@ begin
           if (Value < 0) or (Value > MAx) then
           begin
             // La valeur est en dehors de la plage autorisée, vous pouvez afficher un message d'erreur
-            ShowMessage(GetTexteLibelle('MESS_040'));
+            ShowMessage(GetTexteLibelle('RULES-MESS_040'));
             // Rétablir la valeur précédente
             NewValue := OldValue;
           end;
@@ -150,7 +150,7 @@ begin
         else
         begin
           // La valeur n'est pas un entier valide, vous pouvez afficher un message d'erreur
-          ShowMessage(GetTexteLibelle('MESS_040'));
+          ShowMessage(GetTexteLibelle('RULES-MESS_040'));
           // Rétablir la valeur précédente
           NewValue := OldValue;
         end;

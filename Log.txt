@@ -1747,3 +1747,172 @@ acquis). L'entree d'A FAIRE.txt sur ce sujet est retiree : ce n'est pas un defau
 mecanisme voulu qui marche deja. CONTEXT.md 2.44 mis a jour pour refleter ca.
 Suite (CONTEXT.md 2.44) : reste le 3d-3 (ordres de chevalerie) et les onze Regiments of
 Renown.
+
+06/09/2026 - PREALABLE DE L'ETAPE 4 DU 2.49 TERMINE : LES CODES PDF_ ET CORRUPTION_ PREFIXES
+Reprise du chantier laisse en l'etat le 06/09 (durcissement de VerifieRecherche revertee,
+prealable identifie : sortir les GetTexteLibelle('PDF_XXX') nus). Deux verifications faites
+avant de toucher au code, comme demande par les regles du projet : aucun des codes PDF_ n'est
+construit dynamiquement (tout est un litteral direct dans les appels GetTexteLibelle), et
+verification etendue a toutes les unites pdf*.pas/win*.pas (pas seulement pdfpersonnage.pas
+comme le grep du 06/09 initial) - un appel nu supplementaire trouve dans winlivre.pas l.384
+(PDF_MAIN1_CLASS).
+Nono a verifie de son cote, dans BOOK_RULESBOOK.Xml, que les definitions XML des labels PDF_
+etaient deja toutes prefixees RULES- (126/126, dans les deux Rulesbooks anglais et francais) -
+confirme par une recherche exhaustive : seuls deux <Text name=...> sur 445 dans le fichier
+n'etaient pas prefixes (CORRUPTION_PHYSICAL/CORRUPTION_MENTAL), hors perimetre PDF_. Nono les
+a prefixes lui-meme cote XML.
+Prefixage des appels : pdfpersonnage.pas (222 occurrences nues sur 224 au total, 2 deja
+prefixees) et winlivre.pas (1 occurrence) passes en RULES-PDF_XXX. Chaque edition verifiee
+par diff : nombre de lignes total inchange, chaque ligne retiree correspond exactement a la
+ligne ajoutee plus le prefixe RULES-, aucun autre changement dans le fichier. Verification
+croisee avec le XML : les 123 codes distincts appeles correspondent tous a une definition
+RULES-PDF_XXX existante.
+En verifiant le sens inverse (Nono ayant prefixe CORRUPTION_PHYSICAL/CORRUPTION_MENTAL cote
+XML), le meme defaut retrouve cote code : chargeconstantes.pas l.409-410 (constantes
+CorruptionPhysique/CorruptionMentale) restait nu, consomme par GetTexteLibelle dans
+winmutation.pas l.100-101 (boutons de choix de mutation physique/mentale). Corrige en
+prefixant les deux constantes ; winmutation.pas n'avait rien a changer, il consomme deja la
+constante.
+Nono a compile et teste : l'arbre de donnees BOOK_GREEN_IZ_BEST (attributs de "Common Orcs")
+s'affiche correctement. Le libellé "Classe" de WinLivre (seul point non revu precisement a
+l'ecran) n'a pas ete verifie en detail - Nono : sans gravite, cet ecran n'etant pas termine
+(CONTEXT.md 2.1).
+Le prealable de l'etape 4 du 2.49 est donc leve : le durcissement de VerifieRecherche peut
+etre retente quand Nono le decide. Le durcissement lui-meme n'a PAS ete retente dans cette
+session. A FAIRE.txt nettoye de l'entree correspondante. CONTEXT.md mis a jour (encart de tete
+et §2.49 etape 4).
+
+06/09/2026 - CORRECTION : LE PREALABLE DU 2.49 ETAPE 4 N'ETAIT PAS COMPLET
+En demarrant le durcissement demande par Nono, verification elargie avant de toucher au code :
+CompareRechercheValeur (la fonction sous VerifieRecherche) est utilisee dans presque tous les
+charge*.pas, pas seulement par GetTexteLibelle. Audit sur les 76 fichiers .pas du projet
+(pas seulement pdf*.pas/win*.pas comme la verification precedente) : aucun appel direct a
+CompareRechercheValeur ne passe de litteral nu nulle part - point rassurant.
+Mais GetTexteLibelle porte trois autres familles de codes nus, non vues lors du travail sur
+PDF_ : LAB_ (22 appels, 13 codes, 5 fichiers - le prefixage LAB_ de l'etape 4 precedente ne
+les avait pas couverts), MESS_ (57 appels, 46 codes, 12 fichiers, famille jamais traitee),
+SHORTATTR_ (11 appels dans pdfpersonnage.pas, dont un construit dynamiquement mais sur a
+prefixer). Chaque famille verifiee cote XML : definitions deja entierement prefixees RULES-
+dans BOOK_RULESBOOK.Xml, aucune nue - meme situation que PDF_, donc meme methode applicable.
+Nono : chantier plus consequent que prevu. Pas traite dans cette session. CONTEXT.md corrige
+(l'annonce "prealable rempli" du lot precedent ne valait que pour PDF_/CORRUPTION_) ; le
+durcissement de VerifieRecherche reste a ne pas retenter tant que ces trois familles ne sont
+pas prefixees.
+
+06/09/2026 - LAB_/MESS_/SHORTATTR_ PREFIXES, PREALABLE DU 2.49 ETAPE 4 COMPLET CETTE FOIS
+Les trois familles reperees dans la correction precedente traitees sur le meme modele que
+PDF_ : appels GetTexteLibelle('XXX_...') nus prefixes en RULES-XXX_..., verification par
+diff a chaque fichier (nombre de lignes total inchange, chaque retrait correspond
+exactement a l'ajout plus le prefixe, aucune autre difference).
+LAB_ : 22 appels, chargearme.pas/chargemetier.pas/chargemetierracechoixmetier.pas/
+chargemetiersousmetier.pas/chargerace.pas.
+MESS_ : 57 appels, 12 fichiers (pdfmetier.pas/pdfpersonnage.pas/pdfrace.pas/
+warhammersource.pas/wincompetence.pas/wincreation.pas/winfabrication.pas/winlancede.pas/
+winmetier.pas/winmutation.pas/winpersonnage.pas/wintalent.pas).
+SHORTATTR_ : 11 appels, uniquement pdfpersonnage.pas (l.924-934, plus le cas construit
+dynamiquement l.3420 - seule la partie litterale fixe 'SHORTATTR_' a recu le prefixe, la
+partie +ExtractStringAfter(...) intacte).
+18 fichiers au total. Deux pieges d'ecriture silencieuse rencontres en committant (meme
+defaut que documente au §0) : pdfpersonnage.pas (deux fois, une pour le lot MESS_ initial
+puis une pour l'ajout SHORTATTR_) et le lot CONTEXT.md/Log.txt/A FAIRE.txt de la correction
+precedente - reemis et retailles verifiees a chaque fois.
+Le prealable de l'etape 4 du 2.49 est maintenant complet dans son ensemble (PDF_/
+CORRUPTION_/LAB_/MESS_/SHORTATTR_). Nono n'a pas encore compile/teste ce dernier lot. Le
+durcissement de VerifieRecherche lui-meme reste a retenter apres compilation.
+
+06/09/2026 - VERIFIERECHERCHE REDURCI (2e TENTATIVE, PREALABLE COMPLET CETTE FOIS)
+Nono a compile et fait un tour rapide de l'application apres le lot LAB_/MESS_/SHORTATTR_ :
+rien de mal affiche. Durcissement retente sur cette base. chargeconstantes.pas,
+VerifieRecherche : retrait de la clause de tolerance sur reference sans prefixe de livre,
+retour a la forme stricte :
+result := (LivreRecherche = LivreValeur) and (CodeRecherche = CodeValeur);
+Commentaire de la fonction mis a jour pour tracer les deux tentatives (premiere le 06/09
+en journee, revertee faute de prealable complet ; celle-ci apres prefixage des cinq
+familles PDF_/CORRUPTION_/LAB_/MESS_/SHORTATTR_).
+Ecriture silencieuse rencontree en committant chargeconstantes.pas - reemise, taille
+verifiee a 50064 octets sur le poste.
+Important : Nono n'a pas encore compile/teste avec ce durcissement lui-meme actif - le tour
+d'ecran precedent portait sur le lot de prefixage seul, avant cette modification-ci.
+CompareRechercheValeur/VerifieRecherche est utilise dans la quasi-totalite des charge*.pas
+(talents, metiers, races, equipement, armures, armes, corruption, mutations...), pas
+seulement pour l'affichage de libelles PDF - une compilation et un tour d'ecran complets
+sont necessaires avant de considerer le §2.49 etape 4 comme clos, pas seulement un controle
+visuel rapide.
+
+06/09/2026 - REGRESSION DU DURCISSEMENT : BASIC SKILLS A 0, PUIS CORRIGE ET REDURCI (3e FOIS)
+Nono a compile et teste avec VerifieRecherche durci : les libelles WinLivre s'affichent enfin
+bien, mais les Basic Skills des deux PDF (normal et Feldo2P) sortent entierement a 0/vides
+(Nom, Attribut, Stat, Upg, Adv, Total). Cause : ChercheCompetence (chargecompetence.pas)
+suit la meme convention que GetTexteLibelle (CompareRechercheValeur(code prefixe en 1er,
+code court en 2nd)) mais avec des codes courts ecrits en dur, jamais vus par l'audit
+precedent qui ne portait que sur GetTexteLibelle. Trouve : PdfPersonnageCompetenceTri
+(pdfpersonnage.pas l.417-442), 26 codes nus type 'COMPESQU' - la liste qui alimente
+justement le tableau des competences de base.
+VerifieRecherche reverte immediatement a sa forme tolerante d'origine pour ne pas laisser
+l'appli cassee. Nono a fait remarquer a raison qu'il fallait le consulter avant de tout
+relancer plutot que de revert directement - note pour la suite. Les 26 codes confirmes par
+Nono comme etant tous des competences de base du RULEBOOK (verifie aussi cote XML : chacun a
+bien une definition RULES-COMPXXX dans BOOK_RULESBOOK.Xml, aucun Skill id= nu). Nono a
+choisi de corriger au fil de l'eau plutot que d'auditer tout le projet pour les fonctions
+Cherche*.
+Les 26 codes prefixes RULES-COMPXXX (diff verifie : exactement 26 lignes changees, rien
+d'autre, +156 octets = 26 x 6 caracteres). VerifieRecherche reduci une 3e fois, commentaire
+mis a jour pour tracer les trois tentatives et le motif a chercher en cas de nouvelle
+regression (une liste ListXxx.Add en dur sans RULES- juste avant un appel Cherche*).
+Ecriture silencieuse rencontree en committant chargeconstantes.pas (deux fois) et CONTEXT.md
+- reemises et retaillees verifiees a chaque fois.
+Reste : Nono compile et teste largement (pas seulement Basic Skills, tout ecran/PDF pouvant
+passer par une fonction Cherche* - Talents, Attributs, Metiers, Races, Armes, Armures) avant
+de considerer le 2.49 etape 4 comme clos. Si un nouvel ecran affiche du 0/vide, chercher le
+meme motif avant d'incriminer autre chose.
+
+06/09/2026 - RANDOM TALENT AFFICHE AU LIEU DU TALENT RESOLU (WinCreation) - TalentGenerique
+Nono a signale en creation (etape 5/9, choix de talent) trois lignes affichant litteralement
+"Random Talent" au lieu du talent effectivement tire au hasard. Nono a lui-meme repere la
+cause : TalentGenerique = 'T*' (chargeconstantes.pas), utilise par CompareRechercheValeur
+(chargetalentcreation.pas, wincreation.pas x5, winraces.pas) pour detecter si un talent est
+le marqueur generique "a tirer au hasard" (RULES-T* dans BOOK_RULESBOOK.Xml, Description
+"Random Talent"), etait reste sans prefixe RULES- alors que la definition XML en porte un.
+Meme defaut que ChercheCompetence avant lui : sous le durcissement, la comparaison echoue
+(livres differents), le talent generique n'est plus detecte comme tel, et son libelle brut
+"Random Talent" s'affiche a la place de declencher le tirage. TalentGenerique corrige en
+'RULES-T*' (seule occurrence du motif dans le projet, seule definition RULES-T* dans les
+livres, confirme par grep).
+Verification des 10 autres constantes Talent* de la meme section (TalentAmePure/
+TalentDurACuire/TalentCostaud/TalentVeloce/TalentChanceux/TalentObstine/
+TalentCoutPuissant/TalentHaineSacree/TalenttirPrecis/TalentSprinteur), a la demande de
+Nono : toutes utilisees uniquement dans des case ExtractStringAfter(CodeTalent,
+SeparateurLivre) of ... (pdfpersonnage.pas), qui retirent le prefixe de livre a la main
+avant comparaison - ne passent jamais par CompareRechercheValeur/VerifieRecherche, donc pas
+concernees par le durcissement. Aucune ne doit etre prefixee. TalentHaineSacree n'est meme
+plus utilisee nulle part (orpheline, sans effet).
+Ecriture silencieuse rencontree en committant chargeconstantes.pas - reemise, taille
+verifiee.
+Reste : Nono compile et teste l'etape 5/9 de creation (choix de talent aleatoire) pour
+confirmer que les talents se resolvent desormais correctement au lieu d'afficher "Random
+Talent".
+
+06/09/2026 - CHANTIER DURCISSEMENT VERIFIERECHERCHE CLOS : NONO CREE UN PERSONNAGE SANS
+PROBLEME ET COMMIT
+Nono a cree un personnage complet sans aucun probleme (competences de base, choix de talent
+aleatoire compris) apres la correction de TalentGenerique. Il valide et committe.
+Recapitulatif du chantier complet de la soiree (§2.49 etape 4) : trois cycles regression/
+correction avant stabilisation. PDF_XXX/CorruptionPhysique/CorruptionMentale prefixes en
+premier -> durcissement -> tour d'ecran OK mais audit incomplet decouvert -> LAB_/MESS_/
+SHORTATTR_ prefixes (18 fichiers) -> durcissement retente -> regression Basic Skills a 0
+(ChercheCompetence, 26 codes nus de PdfPersonnageCompetenceTri) -> corrige, redurci ->
+regression "Random Talent" affiche en dur en creation (TalentGenerique = 'T*' sans prefixe)
+-> corrige en 'RULES-T*', redurci une derniere fois -> stable, personnage cree sans
+probleme.
+Fichiers .pas modifies dans la soiree : chargeconstantes.pas, pdfpersonnage.pas,
+winlivre.pas, chargearme.pas, chargemetier.pas, chargemetierracechoixmetier.pas,
+chargemetiersousmetier.pas, chargerace.pas, pdfmetier.pas, pdfrace.pas,
+warhammersource.pas, wincompetence.pas, wincreation.pas, winfabrication.pas,
+winlancede.pas, winmetier.pas, winmutation.pas, winpersonnage.pas, wintalent.pas (19
+fichiers). Cote donnees (modifie par Nono lui-meme) : les deux <Text name=
+"CORRUPTION_PHYSICAL/MENTAL"> dans BOOK_RULESBOOK*.Xml.
+Lecon generale retenue pour la suite : toute fonction Cherche*/CompareRechercheValeur peut
+cacher un code litteral non prefixe ailleurs dans le projet, trouve seulement a l'usage.
+Cette classe de bug n'est pas garantie epuisee - seulement chaque occurrence rencontree
+jusqu'ici corrigee au fil de l'eau (decision de Nono, pas d'audit exhaustif fait).
+CONTEXT.md mis a jour et cloture (§2.49 etape 4 sorti de la liste des chantiers ouverts).

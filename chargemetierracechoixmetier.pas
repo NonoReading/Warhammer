@@ -42,7 +42,7 @@ function TexteMetierRaceChoixMetier(CodeMetier: String; CodeRace: String; ListeL
             if PMetierRaceChoixMetier.CodeRace <> RaceEnCours then
               begin
                 PRace := ChercheRace(PMetierRaceChoixMetier.CodeRace);
-                Texte := Texte + SeparateurRetourLigne + SeparateurRetourLigne + PRace.Libelle + SeparateurRetourLigne + GetTexteLibelle('LAB_127') + ' : ';
+                Texte := Texte + SeparateurRetourLigne + SeparateurRetourLigne + PRace.Libelle + SeparateurRetourLigne + GetTexteLibelle('RULES-LAB_127') + ' : ';
                 RaceEnCours := PRace.CodeRace;
               end;
             PMetier := ChercheMetier(PMetierRaceChoixMetier.CodeSousMetier);

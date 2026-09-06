@@ -381,7 +381,7 @@ begin
   LabelFormSkills.Caption := GetTexteLibelle('RULES-LAB_087');  // 'Specie's Skills'
   LabelFormCompPrinc.Caption := GetTexteLibelle('RULES-LAB_009');  // 'Compétence'
   // Libellé emprunté aux traductions PDF, faute de LAB_ dédié à 'Classe'.
-  LabelFormClasse.Caption := GetTexteLibelle('PDF_MAIN1_CLASS');  // 'Classe'
+  LabelFormClasse.Caption := GetTexteLibelle('RULES-PDF_MAIN1_CLASS');  // 'Classe'
   LabelFormAttribut.Caption := GetTexteLibelle('RULES-LAB_008');  // 'Attribut'
   LabelFormMax.Caption := GetTexteLibelle('RULES-LAB_044');  // 'Max'
   

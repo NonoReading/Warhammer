@@ -414,32 +414,32 @@ Procedure PdfPersonnageCompetenceTri(ListPage: TStringList);
     ListComp   := TStringList.Create;
     ListTri    := TStringList.Create;
 
-    ListComp.Add('COMPART_*');
-    ListComp.Add('COMPATHL');
-    ListComp.Add('COMPSUBOR');
-    ListComp.Add('COMPCHARM');
-    ListComp.Add('COMPANIM');
-    ListComp.Add('COMPESCAL');
-    ListComp.Add('COMPCALM');
-    ListComp.Add('COMPRESALC');
-    ListComp.Add('COMPESQU');
-    ListComp.Add('COMPCOND');
-    ListComp.Add('COMPRESIST');
-    ListComp.Add('COMPDIVERT_*');
-    ListComp.Add('COMPPARI');
-    ListComp.Add('COMPRAGOT');
-    ListComp.Add('COMPMARCH');
-    ListComp.Add('COMPINTIM');
-    ListComp.Add('COMPINTUI');
-    ListComp.Add('COMPCOMM');
-    ListComp.Add('COMPCOMB_BASE');
-    ListComp.Add('COMPCOMB_*');
-    ListComp.Add('COMPORIENT');
-    ListComp.Add('COMPSURVEXT');
-    ListComp.Add('COMPPRECEP');
-    ListComp.Add('COMPCHEV_*');
-    ListComp.Add('COMPRAMER');
-    ListComp.Add('COMPDISC_*');
+    ListComp.Add('RULES-COMPART_*');
+    ListComp.Add('RULES-COMPATHL');
+    ListComp.Add('RULES-COMPSUBOR');
+    ListComp.Add('RULES-COMPCHARM');
+    ListComp.Add('RULES-COMPANIM');
+    ListComp.Add('RULES-COMPESCAL');
+    ListComp.Add('RULES-COMPCALM');
+    ListComp.Add('RULES-COMPRESALC');
+    ListComp.Add('RULES-COMPESQU');
+    ListComp.Add('RULES-COMPCOND');
+    ListComp.Add('RULES-COMPRESIST');
+    ListComp.Add('RULES-COMPDIVERT_*');
+    ListComp.Add('RULES-COMPPARI');
+    ListComp.Add('RULES-COMPRAGOT');
+    ListComp.Add('RULES-COMPMARCH');
+    ListComp.Add('RULES-COMPINTIM');
+    ListComp.Add('RULES-COMPINTUI');
+    ListComp.Add('RULES-COMPCOMM');
+    ListComp.Add('RULES-COMPCOMB_BASE');
+    ListComp.Add('RULES-COMPCOMB_*');
+    ListComp.Add('RULES-COMPORIENT');
+    ListComp.Add('RULES-COMPSURVEXT');
+    ListComp.Add('RULES-COMPPRECEP');
+    ListComp.Add('RULES-COMPCHEV_*');
+    ListComp.Add('RULES-COMPRAMER');
+    ListComp.Add('RULES-COMPDISC_*');
 
     // chercher les libellés
     for IndC := 0 to ListComp.count-1 do
@@ -846,7 +846,7 @@ Procedure PdfPersonnageCreation(Personnage: StructurePersonnage; BackGround: Boo
     if FileExists(PdfChemin) then
       if not DeleteFile(PdfChemin) then
         begin
-          ShowMessage(GetTexteLibelle('MESS_038'));
+          ShowMessage(GetTexteLibelle('RULES-MESS_038'));
           exit;
         end;
 
@@ -895,20 +895,20 @@ Procedure PdfPersonnageCreation(Personnage: StructurePersonnage; BackGround: Boo
         PdfPage.DrawLine(149.5,240,149.5,230,1);
         PdfPage.DrawLine(61.5,235,61.5,230,1);
           // T
-        PdfPage.WriteText( 18, 246, GetTexteLibelle('PDF_MAIN1_NAME'));
-        PdfPage.WriteText(106.5, 246, GetTexteLibelle('PDF_MAIN1_SPECIES'));
-        PdfPage.WriteText(151.5, 246, GetTexteLibelle('PDF_MAIN1_CLASS'));
+        PdfPage.WriteText( 18, 246, GetTexteLibelle('RULES-PDF_MAIN1_NAME'));
+        PdfPage.WriteText(106.5, 246, GetTexteLibelle('RULES-PDF_MAIN1_SPECIES'));
+        PdfPage.WriteText(151.5, 246, GetTexteLibelle('RULES-PDF_MAIN1_CLASS'));
 
-        PdfPage.WriteText( 18, 241, GetTexteLibelle('PDF_MAIN2_CAREER'));
-        PdfPage.WriteText(106.5, 241, GetTexteLibelle('PDF_MAIN2_CAREERLEVEL'));
+        PdfPage.WriteText( 18, 241, GetTexteLibelle('RULES-PDF_MAIN2_CAREER'));
+        PdfPage.WriteText(106.5, 241, GetTexteLibelle('RULES-PDF_MAIN2_CAREERLEVEL'));
 
-        PdfPage.WriteText( 18, 236, GetTexteLibelle('PDF_MAIN3_CAREERPATH'));
-        PdfPage.WriteText(151.5, 236, GetTexteLibelle('PDF_MAIN3_STATUS'));
+        PdfPage.WriteText( 18, 236, GetTexteLibelle('RULES-PDF_MAIN3_CAREERPATH'));
+        PdfPage.WriteText(151.5, 236, GetTexteLibelle('RULES-PDF_MAIN3_STATUS'));
 
-        PdfPage.WriteText( 18, 231, GetTexteLibelle('PDF_MAIN4_AGE'));
-        PdfPage.WriteText(63, 231, GetTexteLibelle('PDF_MAIN4_HEIGHT'));
-        PdfPage.WriteText(106.5, 231, GetTexteLibelle('PDF_MAIN4_HAIR'));
-        PdfPage.WriteText(151.5, 231, GetTexteLibelle('PDF_MAIN4_EYES'));
+        PdfPage.WriteText( 18, 231, GetTexteLibelle('RULES-PDF_MAIN4_AGE'));
+        PdfPage.WriteText(63, 231, GetTexteLibelle('RULES-PDF_MAIN4_HEIGHT'));
+        PdfPage.WriteText(106.5, 231, GetTexteLibelle('RULES-PDF_MAIN4_HAIR'));
+        PdfPage.WriteText(151.5, 231, GetTexteLibelle('RULES-PDF_MAIN4_EYES'));
 
         // caractéristiques
           // H
@@ -920,21 +920,21 @@ Procedure PdfPersonnageCreation(Personnage: StructurePersonnage; BackGround: Boo
         For ind := 0 to 9 do
           PdfPage.DrawLine(31.5+(ind * 6.5),219,31.5+(ind * 6.5),193,1);
            // T
-        PdfCentre(PdfPage,17,96,221,GetTexteLibelle('PDF_CHARAC1_CHARAC'));
-        PdfCentre(PdfPage,31,38,215,GetTexteLibelle('SHORTATTR_WS'));
+        PdfCentre(PdfPage,17,96,221,GetTexteLibelle('RULES-PDF_CHARAC1_CHARAC'));
+        PdfCentre(PdfPage,31,38,215,GetTexteLibelle('RULES-SHORTATTR_WS'));
 
-        PdfCentre(PdfPage,38,45,215, GetTexteLibelle('SHORTATTR_BS'));
-        PdfCentre(PdfPage,45,51,215, GetTexteLibelle('SHORTATTR_S'));
-        PdfCentre(PdfPage,51,58,215, GetTexteLibelle('SHORTATTR_T'));
-        PdfCentre(PdfPage,58,64,215, GetTexteLibelle('SHORTATTR_I'));
-        PdfCentre(PdfPage,64,71,215, GetTexteLibelle('SHORTATTR_Ag'));
-        PdfCentre(PdfPage,71,77,215, GetTexteLibelle('SHORTATTR_Dex'));
-        PdfCentre(PdfPage,78,85,215, GetTexteLibelle('SHORTATTR_Int'));
-        PdfCentre(PdfPage,84,90,215, GetTexteLibelle('SHORTATTR_WP'));
-        PdfCentre(PdfPage,91,97,215, GetTexteLibelle('SHORTATTR_Fel'));
-        PdfPage.WriteText( 18, 209, GetTexteLibelle('PDF_CHARAC3_INITIAL'));
-        PdfPage.WriteText( 18, 202, GetTexteLibelle('PDF_CHARAC3_ADVANCES'));
-        PdfPage.WriteText( 18, 195, GetTexteLibelle('PDF_CHARAC3_CURRENT'));
+        PdfCentre(PdfPage,38,45,215, GetTexteLibelle('RULES-SHORTATTR_BS'));
+        PdfCentre(PdfPage,45,51,215, GetTexteLibelle('RULES-SHORTATTR_S'));
+        PdfCentre(PdfPage,51,58,215, GetTexteLibelle('RULES-SHORTATTR_T'));
+        PdfCentre(PdfPage,58,64,215, GetTexteLibelle('RULES-SHORTATTR_I'));
+        PdfCentre(PdfPage,64,71,215, GetTexteLibelle('RULES-SHORTATTR_Ag'));
+        PdfCentre(PdfPage,71,77,215, GetTexteLibelle('RULES-SHORTATTR_Dex'));
+        PdfCentre(PdfPage,78,85,215, GetTexteLibelle('RULES-SHORTATTR_Int'));
+        PdfCentre(PdfPage,84,90,215, GetTexteLibelle('RULES-SHORTATTR_WP'));
+        PdfCentre(PdfPage,91,97,215, GetTexteLibelle('RULES-SHORTATTR_Fel'));
+        PdfPage.WriteText( 18, 209, GetTexteLibelle('RULES-PDF_CHARAC3_INITIAL'));
+        PdfPage.WriteText( 18, 202, GetTexteLibelle('RULES-PDF_CHARAC3_ADVANCES'));
+        PdfPage.WriteText( 18, 195, GetTexteLibelle('RULES-PDF_CHARAC3_CURRENT'));
         // Destin
           // H
         PdfPage.DrawLine(101,219,118,219,1);
@@ -942,9 +942,9 @@ Procedure PdfPersonnageCreation(Personnage: StructurePersonnage; BackGround: Boo
           // V
         PdfPage.DrawLine(111,209,111,219,1);
           // T
-        PdfCentre(PdfPage,101,118,221,GetTexteLibelle('PDF_FATE1_FATE'));
-        PdfPage.WriteText(101,215,GetTexteLibelle('PDF_FATE2_FATE'));
-        PdfPage.WriteText(101,210,GetTexteLibelle('PDF_FATE3_FORTUNE'));
+        PdfCentre(PdfPage,101,118,221,GetTexteLibelle('RULES-PDF_FATE1_FATE'));
+        PdfPage.WriteText(101,215,GetTexteLibelle('RULES-PDF_FATE2_FATE'));
+        PdfPage.WriteText(101,210,GetTexteLibelle('RULES-PDF_FATE3_FORTUNE'));
         // Résilience
           // H
         PdfPage.DrawLine(123,219,162,219,1);
@@ -953,10 +953,10 @@ Procedure PdfPersonnageCreation(Personnage: StructurePersonnage; BackGround: Boo
         PdfPage.DrawLine(137,209,137,219,1);
         PdfPage.DrawLine(148,209,148,219,1);
           // T
-        PdfCentre(PdfPage,123,163,221,GetTexteLibelle('PDF_RESIL1_RESILIENCE'));
-        PdfCentre(PdfPage,123,137,215,GetTexteLibelle('PDF_RESIL2A_RESILIENCE'));
-        PdfCentre(PdfPage,137,148,215,GetTexteLibelle('PDF_RESIL2B_RESOLVE'));
-        PdfCentre(PdfPage,148,162,215,GetTexteLibelle('PDF_RESIL2C_MOTIVATION'));
+        PdfCentre(PdfPage,123,163,221,GetTexteLibelle('RULES-PDF_RESIL1_RESILIENCE'));
+        PdfCentre(PdfPage,123,137,215,GetTexteLibelle('RULES-PDF_RESIL2A_RESILIENCE'));
+        PdfCentre(PdfPage,137,148,215,GetTexteLibelle('RULES-PDF_RESIL2B_RESOLVE'));
+        PdfCentre(PdfPage,148,162,215,GetTexteLibelle('RULES-PDF_RESIL2C_MOTIVATION'));
         // Expérience
           // H
         PdfPage.DrawLine(165,219,194,219,1);
@@ -965,10 +965,10 @@ Procedure PdfPersonnageCreation(Personnage: StructurePersonnage; BackGround: Boo
         PdfPage.DrawLine(176,209,176,219,1);
         PdfPage.DrawLine(185,209,185,219,1);
           // T
-        PdfCentre(PdfPage,165,194,221,GetTexteLibelle('PDF_XP1_EXPERIENCE'));
-        PdfCentre(PdfPage,165,176,215,GetTexteLibelle('PDF_XP2A_CURRENT'));
-        PdfCentre(PdfPage,176,185,215,GetTexteLibelle('PDF_XP2B_SPENT'));
-        PdfCentre(PdfPage,185,194,215,GetTexteLibelle('PDF_XP2C_TOTAL'));
+        PdfCentre(PdfPage,165,194,221,GetTexteLibelle('RULES-PDF_XP1_EXPERIENCE'));
+        PdfCentre(PdfPage,165,176,215,GetTexteLibelle('RULES-PDF_XP2A_CURRENT'));
+        PdfCentre(PdfPage,176,185,215,GetTexteLibelle('RULES-PDF_XP2B_SPENT'));
+        PdfCentre(PdfPage,185,194,215,GetTexteLibelle('RULES-PDF_XP2C_TOTAL'));
         // Mouvement
           // H
         PdfPage.DrawLine(101,198,194,198,1);
@@ -980,10 +980,10 @@ Procedure PdfPersonnageCreation(Personnage: StructurePersonnage; BackGround: Boo
         PdfPage.DrawLine(181.5,198,181.5,193,1);
           // T
 
-        PdfCentre(PdfPage,101,194,200,GetTexteLibelle('PDF_MV1_MOVEMENT'));
-        PdfPage.WriteText(102,194,GetTexteLibelle('PDF_MV2A_MOVEMENT'));
-        PdfPage.WriteText(133.5,194,GetTexteLibelle('PDF_MV2B_WALK'));
-        PdfPage.WriteText(165.5,194,GetTexteLibelle('PDF_MV2C_RUN'));
+        PdfCentre(PdfPage,101,194,200,GetTexteLibelle('RULES-PDF_MV1_MOVEMENT'));
+        PdfPage.WriteText(102,194,GetTexteLibelle('RULES-PDF_MV2A_MOVEMENT'));
+        PdfPage.WriteText(133.5,194,GetTexteLibelle('RULES-PDF_MV2B_WALK'));
+        PdfPage.WriteText(165.5,194,GetTexteLibelle('RULES-PDF_MV2C_RUN'));
         // Basic 1
           // H
         For Ind := 0 to 13 do
@@ -994,11 +994,11 @@ Procedure PdfPersonnageCreation(Personnage: StructurePersonnage; BackGround: Boo
         PdfPage.DrawLine(57,181.5,57,111.5,1);
         PdfPage.DrawLine(64,181.5,64,111.5,1);
          // T
-        PdfCentre(PdfPage,17,72,183.5,GetTexteLibelle('PDF_SKILLS1_BASIC'));
-        PdfEcrit(PdfPage,18,41,177.5,GetTexteLibelle('PDF_SKILLS2_NAME'),MinPolice);
-        PdfCentre(PdfPage,42,57,177.5,GetTexteLibelle('PDF_SKILLS2_CHARAC'));
-        PdfCentre(PdfPage,57,64,177.5,GetTexteLibelle('PDF_SKILLS2_ADV'));
-        PdfCentre(PdfPage,64,72,177.5,GetTexteLibelle('PDF_SKILLS2_SKILL'));
+        PdfCentre(PdfPage,17,72,183.5,GetTexteLibelle('RULES-PDF_SKILLS1_BASIC'));
+        PdfEcrit(PdfPage,18,41,177.5,GetTexteLibelle('RULES-PDF_SKILLS2_NAME'),MinPolice);
+        PdfCentre(PdfPage,42,57,177.5,GetTexteLibelle('RULES-PDF_SKILLS2_CHARAC'));
+        PdfCentre(PdfPage,57,64,177.5,GetTexteLibelle('RULES-PDF_SKILLS2_ADV'));
+        PdfCentre(PdfPage,64,72,177.5,GetTexteLibelle('RULES-PDF_SKILLS2_SKILL'));
         // Basic 2
           // H
         For Ind := 0 to 13 do
@@ -1009,11 +1009,11 @@ Procedure PdfPersonnageCreation(Personnage: StructurePersonnage; BackGround: Boo
         PdfPage.DrawLine(118,181.5,118,111.5,1);
         PdfPage.DrawLine(125,181.5,125,111.5,1);
          // T
-         PdfCentre(PdfPage,78,133.5,183.5,GetTexteLibelle('PDF_SKILLS1_BASIC'));
-         PdfEcrit(PdfPage,78,102,177.5,GetTexteLibelle('PDF_SKILLS2_NAME'),MinPolice);
-         PdfCentre(PdfPage,102,118,177.5,GetTexteLibelle('PDF_SKILLS2_CHARAC'));
-         PdfCentre(PdfPage,118,125,177.5,GetTexteLibelle('PDF_SKILLS2_ADV'));
-         PdfCentre(PdfPage,125,133,177.5,GetTexteLibelle('PDF_SKILLS2_SKILL'));
+         PdfCentre(PdfPage,78,133.5,183.5,GetTexteLibelle('RULES-PDF_SKILLS1_BASIC'));
+         PdfEcrit(PdfPage,78,102,177.5,GetTexteLibelle('RULES-PDF_SKILLS2_NAME'),MinPolice);
+         PdfCentre(PdfPage,102,118,177.5,GetTexteLibelle('RULES-PDF_SKILLS2_CHARAC'));
+         PdfCentre(PdfPage,118,125,177.5,GetTexteLibelle('RULES-PDF_SKILLS2_ADV'));
+         PdfCentre(PdfPage,125,133,177.5,GetTexteLibelle('RULES-PDF_SKILLS2_SKILL'));
         // Groupé
           // H
         For Ind := 0 to 1 do
@@ -1024,11 +1024,11 @@ Procedure PdfPersonnageCreation(Personnage: StructurePersonnage; BackGround: Boo
         PdfPage.DrawLine(178,181.5,178,111.5,1);
         PdfPage.DrawLine(185,181.5,185,111.5,1);
           // T
-        PdfCentre(PdfPage,139,194,183.5,GetTexteLibelle('PDF_SKILLS1_ADVANCED'));
-        PdfEcrit(PdfPage,139,162,177.5,GetTexteLibelle('PDF_SKILLS2_NAME'),MinPolice);
-        PdfCentre(PdfPage,162,178,177.5,GetTexteLibelle('PDF_SKILLS2_CHARAC'));
-        PdfCentre(PdfPage,178,185,177.5,GetTexteLibelle('PDF_SKILLS2_ADV'));
-        PdfCentre(PdfPage,185,194,177.5,GetTexteLibelle('PDF_SKILLS2_SKILL'));
+        PdfCentre(PdfPage,139,194,183.5,GetTexteLibelle('RULES-PDF_SKILLS1_ADVANCED'));
+        PdfEcrit(PdfPage,139,162,177.5,GetTexteLibelle('RULES-PDF_SKILLS2_NAME'),MinPolice);
+        PdfCentre(PdfPage,162,178,177.5,GetTexteLibelle('RULES-PDF_SKILLS2_CHARAC'));
+        PdfCentre(PdfPage,178,185,177.5,GetTexteLibelle('RULES-PDF_SKILLS2_ADV'));
+        PdfCentre(PdfPage,185,194,177.5,GetTexteLibelle('RULES-PDF_SKILLS2_SKILL'));
         // Talents
           // H
         PdfPage.DrawLine(17,100,100,100,1);
@@ -1037,21 +1037,21 @@ Procedure PdfPersonnageCreation(Personnage: StructurePersonnage; BackGround: Boo
         PdfPage.DrawLine(45,100,45,20,1);
         PdfPage.DrawLine(56,100,56,20,1);
           // T
-        PdfCentre(PdfPage,17,100,102,GetTexteLibelle('PDF_TALENT1_TALENTS'));
-        PdfPage.WriteText(18,95,GetTexteLibelle('PDF_TALENT2_TALENTNAME'));
-        PdfCentre(PdfPage,45,56,96,GetTexteLibelle('PDF_TALENT2A_TAKEN'));
-        PdfCentre(PdfPage,45,56,93,GetTexteLibelle('PDF_TALENT2B_TAKEN'));
-        PdfPage.WriteText(58,95,GetTexteLibelle('PDF_TALENT2_DESC'));
+        PdfCentre(PdfPage,17,100,102,GetTexteLibelle('RULES-PDF_TALENT1_TALENTS'));
+        PdfPage.WriteText(18,95,GetTexteLibelle('RULES-PDF_TALENT2_TALENTNAME'));
+        PdfCentre(PdfPage,45,56,96,GetTexteLibelle('RULES-PDF_TALENT2A_TAKEN'));
+        PdfCentre(PdfPage,45,56,93,GetTexteLibelle('RULES-PDF_TALENT2B_TAKEN'));
+        PdfPage.WriteText(58,95,GetTexteLibelle('RULES-PDF_TALENT2_DESC'));
          // Ambitions
           // H
         PdfPage.DrawLine(106,100,194,100,1);
         PdfPage.DrawLine(106,88,194,88,1);
           // T
-        PdfCentre(PdfPage,106,194,102,GetTexteLibelle('PDF_AMBITION1_AMBITIONS'));
-        PdfPage.WriteText(108,94,GetTexteLibelle('PDF_AMBITION2A_SHORT'));
-        PdfPage.WriteText(108,91,GetTexteLibelle('PDF_AMBITION2B_SHORT'));
-        PdfPage.WriteText(108,83,GetTexteLibelle('PDF_AMBITION3A_LONG'));
-        PdfPage.WriteText(108,80,GetTexteLibelle('PDF_AMBITION3B_LONG'));
+        PdfCentre(PdfPage,106,194,102,GetTexteLibelle('RULES-PDF_AMBITION1_AMBITIONS'));
+        PdfPage.WriteText(108,94,GetTexteLibelle('RULES-PDF_AMBITION2A_SHORT'));
+        PdfPage.WriteText(108,91,GetTexteLibelle('RULES-PDF_AMBITION2B_SHORT'));
+        PdfPage.WriteText(108,83,GetTexteLibelle('RULES-PDF_AMBITION3A_LONG'));
+        PdfPage.WriteText(108,80,GetTexteLibelle('RULES-PDF_AMBITION3B_LONG'));
         // Party
           // H
         PdfPage.DrawLine(106,65,194,65,1);
@@ -1059,13 +1059,13 @@ Procedure PdfPersonnageCreation(Personnage: StructurePersonnage; BackGround: Boo
         PdfPage.DrawLine(106,47,194,47,1);
         PdfPage.DrawLine(106,36,194,36,1);
           // T
-        PdfCentre(PdfPage,106,194,67,GetTexteLibelle('PDF_PARTY1_PARTY'));
-        PdfPage.WriteText(108,61,GetTexteLibelle('PDF_PARTY2_PARTYNAME'));
-        PdfPage.WriteText(108,53,GetTexteLibelle('PDF_PARTY3A_SHORT'));
-        PdfPage.WriteText(108,50,GetTexteLibelle('PDF_PARTY3B_SHORT'));
-        PdfPage.WriteText(108,42,GetTexteLibelle('PDF_PARTY4A_LONG'));
-        PdfPage.WriteText(108,39,GetTexteLibelle('PDF_PARTY4B_LONG'));
-        PdfPage.WriteText(108,30,GetTexteLibelle('PDF_PARTY5_MEMBERS'));
+        PdfCentre(PdfPage,106,194,67,GetTexteLibelle('RULES-PDF_PARTY1_PARTY'));
+        PdfPage.WriteText(108,61,GetTexteLibelle('RULES-PDF_PARTY2_PARTYNAME'));
+        PdfPage.WriteText(108,53,GetTexteLibelle('RULES-PDF_PARTY3A_SHORT'));
+        PdfPage.WriteText(108,50,GetTexteLibelle('RULES-PDF_PARTY3B_SHORT'));
+        PdfPage.WriteText(108,42,GetTexteLibelle('RULES-PDF_PARTY4A_LONG'));
+        PdfPage.WriteText(108,39,GetTexteLibelle('RULES-PDF_PARTY4B_LONG'));
+        PdfPage.WriteText(108,30,GetTexteLibelle('RULES-PDF_PARTY5_MEMBERS'));
       end;
 
     // Écrire du texte sur la page PDF
@@ -1358,12 +1358,12 @@ Procedure PdfPersonnageCreation(Personnage: StructurePersonnage; BackGround: Boo
         PdfPage.DrawLine(79,260,79,229,1);
         PdfPage.DrawLine(89,260,89,229,1);
           // T
-        PdfCentre(PdfPage,17,134,262,GetTexteLibelle('PDF_ARMOUR1_ARMOUR'));
-        PdfPage.WriteText(18,255,GetTexteLibelle('PDF_ARMOUR2_NAME'));
-        PdfCentre(PdfPage,50,72,255,GetTexteLibelle('PDF_ARMOUR2_LOCATIONS'));
-        PdfCentre(PdfPage,72,79,255,GetTexteLibelle('PDF_ARMOUR2_ENCUMBRANCE'));
-        PdfCentre(PdfPage,79,89,255,GetTexteLibelle('PDF_ARMOUR2_ARMOURPOINT'));
-        PdfPage.WriteText(90,255,GetTexteLibelle('PDF_ARMOUR2_QUALITIES'));
+        PdfCentre(PdfPage,17,134,262,GetTexteLibelle('RULES-PDF_ARMOUR1_ARMOUR'));
+        PdfPage.WriteText(18,255,GetTexteLibelle('RULES-PDF_ARMOUR2_NAME'));
+        PdfCentre(PdfPage,50,72,255,GetTexteLibelle('RULES-PDF_ARMOUR2_LOCATIONS'));
+        PdfCentre(PdfPage,72,79,255,GetTexteLibelle('RULES-PDF_ARMOUR2_ENCUMBRANCE'));
+        PdfCentre(PdfPage,79,89,255,GetTexteLibelle('RULES-PDF_ARMOUR2_ARMOURPOINT'));
+        PdfPage.WriteText(90,255,GetTexteLibelle('RULES-PDF_ARMOUR2_QUALITIES'));
         // Equipement
           // H
         PdfPage.DrawLine(17,218,73,218,1);
@@ -1371,29 +1371,29 @@ Procedure PdfPersonnageCreation(Personnage: StructurePersonnage; BackGround: Boo
           // V
         PdfPage.DrawLine(65,218,65,136,1);
           // T
-        PdfCentre(PdfPage,17,73,220,GetTexteLibelle('PDF_TRAPPING1_TRAPPINGS'));
-        PdfPage.WriteText(18,213,GetTexteLibelle('PDF_TRAPPING2_NAME'));
-        PdfCentre(PdfPage,65,73,213,GetTexteLibelle('PDF_TRAPPING2_ENCUMBRANCE'));
+        PdfCentre(PdfPage,17,73,220,GetTexteLibelle('RULES-PDF_TRAPPING1_TRAPPINGS'));
+        PdfPage.WriteText(18,213,GetTexteLibelle('RULES-PDF_TRAPPING2_NAME'));
+        PdfCentre(PdfPage,65,73,213,GetTexteLibelle('RULES-PDF_TRAPPING2_ENCUMBRANCE'));
         // Psychologie
           // H
         for ind := 0 to 2 do
           PdfPage.DrawLine(77,218 - (ind * 5),134,218 - (ind * 5),1);
         // T
-        PdfCentre(PdfPage,77,134,220,GetTexteLibelle('PDF_PSYCHOLOGY'));
+        PdfCentre(PdfPage,77,134,220,GetTexteLibelle('RULES-PDF_PSYCHOLOGY'));
         // Corruption
           // H
         PdfPage.DrawLine(77,192,134,192,1);
           // T
-        PdfCentre(PdfPage,77,134,194,GetTexteLibelle('PDF_CORRUPTION'));
+        PdfCentre(PdfPage,77,134,194,GetTexteLibelle('RULES-PDF_CORRUPTION'));
         // Points d'Armure
-        PdfCentre(PdfPage,138,194,262,GetTexteLibelle('PDF_ARMOURPOINT_ARMOURPOINT'));
-        PdfEncadre(PdfPage, 145, 250, false, GetTexteLibelle('PDF_ARMOURPOINT_HEAD'),'','01-09');
-        PdfEncadre(PdfPage, 145, 229, false, GetTexteLibelle('PDF_ARMOURPOINT_RIGHTARM1'),GetTexteLibelle('PDF_ARMOURPOINT_RIGHTARM2'),'25-44');
-        PdfEncadre(PdfPage, 145, 207.5, false, GetTexteLibelle('PDF_ARMOURPOINT_RIGHTLEG'),'','90-00');
-        PdfEncadre(PdfPage, 145, 190, true, GetTexteLibelle('PDF_ARMOURPOINT_SHIELD'),'','');
-        PdfEncadre(PdfPage, 184.5, 241, false, GetTexteLibelle('PDF_ARMOURPOINT_LEFTARM1'),GetTexteLibelle('PDF_ARMOURPOINT_LEFTARM2'),'10-24');
-        PdfEncadre(PdfPage, 184.5, 219.5, false, GetTexteLibelle('PDF_ARMOURPOINT_BODY'),'','45-79');
-        PdfEncadre(PdfPage, 184.5, 195.5, false, GetTexteLibelle('PDF_ARMOURPOINT_LEFTLEG'),'','80-89');
+        PdfCentre(PdfPage,138,194,262,GetTexteLibelle('RULES-PDF_ARMOURPOINT_ARMOURPOINT'));
+        PdfEncadre(PdfPage, 145, 250, false, GetTexteLibelle('RULES-PDF_ARMOURPOINT_HEAD'),'','01-09');
+        PdfEncadre(PdfPage, 145, 229, false, GetTexteLibelle('RULES-PDF_ARMOURPOINT_RIGHTARM1'),GetTexteLibelle('RULES-PDF_ARMOURPOINT_RIGHTARM2'),'25-44');
+        PdfEncadre(PdfPage, 145, 207.5, false, GetTexteLibelle('RULES-PDF_ARMOURPOINT_RIGHTLEG'),'','90-00');
+        PdfEncadre(PdfPage, 145, 190, true, GetTexteLibelle('RULES-PDF_ARMOURPOINT_SHIELD'),'','');
+        PdfEncadre(PdfPage, 184.5, 241, false, GetTexteLibelle('RULES-PDF_ARMOURPOINT_LEFTARM1'),GetTexteLibelle('RULES-PDF_ARMOURPOINT_LEFTARM2'),'10-24');
+        PdfEncadre(PdfPage, 184.5, 219.5, false, GetTexteLibelle('RULES-PDF_ARMOURPOINT_BODY'),'','45-79');
+        PdfEncadre(PdfPage, 184.5, 195.5, false, GetTexteLibelle('RULES-PDF_ARMOURPOINT_LEFTLEG'),'','80-89');
         // Richesse
           // H
         for ind := 0 to 2 do
@@ -1401,10 +1401,10 @@ Procedure PdfPersonnageCreation(Personnage: StructurePersonnage; BackGround: Boo
           // V
         PdfPage.DrawLine(88,167,88,136,1);
           // T
-        PdfCentre(PdfPage,77,102,169,GetTexteLibelle('PDF_WEALTH1_WEALTH'));
-        PdfPage.WriteText(78,160,GetTexteLibelle('PDF_WEALTH2_D'));
-        PdfPage.WriteText(78,149,GetTexteLibelle('PDF_WEALTH3_SS'));
-        PdfPage.WriteText(78,138,GetTexteLibelle('PDF_WEALTH4_GC'));
+        PdfCentre(PdfPage,77,102,169,GetTexteLibelle('RULES-PDF_WEALTH1_WEALTH'));
+        PdfPage.WriteText(78,160,GetTexteLibelle('RULES-PDF_WEALTH2_D'));
+        PdfPage.WriteText(78,149,GetTexteLibelle('RULES-PDF_WEALTH3_SS'));
+        PdfPage.WriteText(78,138,GetTexteLibelle('RULES-PDF_WEALTH4_GC'));
         // Encombrement
           // H
         for ind := 0 to 4 do
@@ -1412,12 +1412,12 @@ Procedure PdfPersonnageCreation(Personnage: StructurePersonnage; BackGround: Boo
           // V
         PdfPage.DrawLine(120,167,120,136,1);
           // T
-        PdfCentre(PdfPage,106,134,169,GetTexteLibelle('PDF_ENCUMBRANCE1_ENCUMBRANCE'));
-        PdfPage.WriteText(107,163,GetTexteLibelle('PDF_ENCUMBRANCE2_ARMOUR'));
-        PdfPage.WriteText(107,157,GetTexteLibelle('PDF_ENCUMBRANCE3_WEAPONS'));
-        PdfPage.WriteText(107,151,GetTexteLibelle('PDF_ENCUMBRANCE4_TRAPPINGS'));
-        PdfPage.WriteText(107,144.2,GetTexteLibelle('PDF_ENCUMBRANCE5_MAXENC'));
-        PdfPage.WriteText(107,137.6,GetTexteLibelle('PDF_ENCUMBRANCE6_TOTAL'));
+        PdfCentre(PdfPage,106,134,169,GetTexteLibelle('RULES-PDF_ENCUMBRANCE1_ENCUMBRANCE'));
+        PdfPage.WriteText(107,163,GetTexteLibelle('RULES-PDF_ENCUMBRANCE2_ARMOUR'));
+        PdfPage.WriteText(107,157,GetTexteLibelle('RULES-PDF_ENCUMBRANCE3_WEAPONS'));
+        PdfPage.WriteText(107,151,GetTexteLibelle('RULES-PDF_ENCUMBRANCE4_TRAPPINGS'));
+        PdfPage.WriteText(107,144.2,GetTexteLibelle('RULES-PDF_ENCUMBRANCE5_MAXENC'));
+        PdfPage.WriteText(107,137.6,GetTexteLibelle('RULES-PDF_ENCUMBRANCE6_TOTAL'));
         // Blessure
           // H
         PdfPage.DrawLine(138,167,194,167,1);
@@ -1427,12 +1427,12 @@ Procedure PdfPersonnageCreation(Personnage: StructurePersonnage; BackGround: Boo
         PdfPage.DrawLine(152,167,152,136,1);
         PdfPage.DrawLine(160,167,160,136,1);
           // T
-        PdfCentre(PdfPage,138,160,169,GetTexteLibelle('PDF_WOUNDS1_WOUNDS'));
-        PdfPage.WriteText(139,163,GetTexteLibelle('PDF_WOUNDS2_SB'));
-        PdfPage.WriteText(139,157,GetTexteLibelle('PDF_WOUNDS3_TBX2'));
-        PdfPage.WriteText(139,151,GetTexteLibelle('PDF_WOUNDS4_WPB'));
-        PdfPage.WriteText(139,144.2,GetTexteLibelle('PDF_WOUNDS5_HARDY'));
-        PdfPage.WriteText(139,137.6,GetTexteLibelle('PDF_WOUNDS6_WOUNDS'));
+        PdfCentre(PdfPage,138,160,169,GetTexteLibelle('RULES-PDF_WOUNDS1_WOUNDS'));
+        PdfPage.WriteText(139,163,GetTexteLibelle('RULES-PDF_WOUNDS2_SB'));
+        PdfPage.WriteText(139,157,GetTexteLibelle('RULES-PDF_WOUNDS3_TBX2'));
+        PdfPage.WriteText(139,151,GetTexteLibelle('RULES-PDF_WOUNDS4_WPB'));
+        PdfPage.WriteText(139,144.2,GetTexteLibelle('RULES-PDF_WOUNDS5_HARDY'));
+        PdfPage.WriteText(139,137.6,GetTexteLibelle('RULES-PDF_WOUNDS6_WOUNDS'));
         // Armes
           // H
         for ind := 0 to 7 do
@@ -1444,13 +1444,13 @@ Procedure PdfPersonnageCreation(Personnage: StructurePersonnage; BackGround: Boo
         PdfPage.DrawLine(108,125,108,85,1);
         PdfPage.DrawLine(128,125,128,85,1);
           // T
-        PdfCentre(PdfPage,17,194,127,GetTexteLibelle('PDF_WEAPONS1_WEAPONS'));
-        PdfPage.WriteText(18,121,GetTexteLibelle('PDF_WEAPONS2_NAME'));
-        PdfCentre(PdfPage,66,79,121,GetTexteLibelle('PDF_WEAPONS2_GROUP'));
-        PdfCentre(PdfPage,79,90,121,GetTexteLibelle('PDF_WEAPONS2_ENCUMBRANCE'));
-        PdfCentre(PdfPage,90,108,121,GetTexteLibelle('PDF_WEAPONS2_RANGE'));
-        PdfCentre(PdfPage,108,128,121,GetTexteLibelle('PDF_WEAPONS2_DAMAGE'));
-        PdfPage.WriteText(129,121,GetTexteLibelle('PDF_WEAPONS2_QUALITIES'));
+        PdfCentre(PdfPage,17,194,127,GetTexteLibelle('RULES-PDF_WEAPONS1_WEAPONS'));
+        PdfPage.WriteText(18,121,GetTexteLibelle('RULES-PDF_WEAPONS2_NAME'));
+        PdfCentre(PdfPage,66,79,121,GetTexteLibelle('RULES-PDF_WEAPONS2_GROUP'));
+        PdfCentre(PdfPage,79,90,121,GetTexteLibelle('RULES-PDF_WEAPONS2_ENCUMBRANCE'));
+        PdfCentre(PdfPage,90,108,121,GetTexteLibelle('RULES-PDF_WEAPONS2_RANGE'));
+        PdfCentre(PdfPage,108,128,121,GetTexteLibelle('RULES-PDF_WEAPONS2_DAMAGE'));
+        PdfPage.WriteText(129,121,GetTexteLibelle('RULES-PDF_WEAPONS2_QUALITIES'));
         // Sorts
           // H
         for ind := 0 to 8 do
@@ -1461,14 +1461,14 @@ Procedure PdfPersonnageCreation(Personnage: StructurePersonnage; BackGround: Boo
         PdfPage.DrawLine(170,35,170,30,1);
         PdfPage.DrawLine(179,35,179,30,1);
           // T
-        PdfCentre(PdfPage,17,194,77,GetTexteLibelle('PDF_SPELL1_SPELL'));
-        PdfPage.WriteText(18,71,GetTexteLibelle('PDF_SPELL2_NAME'));
-        PdfCentre(PdfPage,55,70,71,GetTexteLibelle('PDF_SPELL2_CN'));
-        PdfCentre(PdfPage,70,85,71,GetTexteLibelle('PDF_SPELL2_RANGE'));
-        PdfCentre(PdfPage,85,100,71,GetTexteLibelle('PDF_SPELL2_TARGET'));
-        PdfCentre(PdfPage,100,115,71,GetTexteLibelle('PDF_SPELL2_DURATION'));
-        PdfPage.WriteText(116,71,GetTexteLibelle('PDF_SPELL2_EFFECT'));
-        PdfPage.WriteText(171,31,GetTexteLibelle('PDF_SPELL3_SIN'));
+        PdfCentre(PdfPage,17,194,77,GetTexteLibelle('RULES-PDF_SPELL1_SPELL'));
+        PdfPage.WriteText(18,71,GetTexteLibelle('RULES-PDF_SPELL2_NAME'));
+        PdfCentre(PdfPage,55,70,71,GetTexteLibelle('RULES-PDF_SPELL2_CN'));
+        PdfCentre(PdfPage,70,85,71,GetTexteLibelle('RULES-PDF_SPELL2_RANGE'));
+        PdfCentre(PdfPage,85,100,71,GetTexteLibelle('RULES-PDF_SPELL2_TARGET'));
+        PdfCentre(PdfPage,100,115,71,GetTexteLibelle('RULES-PDF_SPELL2_DURATION'));
+        PdfPage.WriteText(116,71,GetTexteLibelle('RULES-PDF_SPELL2_EFFECT'));
+        PdfPage.WriteText(171,31,GetTexteLibelle('RULES-PDF_SPELL3_SIN'));
 
       end;
 
@@ -2106,10 +2106,10 @@ Procedure PdfBlocResilience(PdfPage: TPDFPage; Personnage: StructurePersonnage; 
 
     // Texte Résilience
     PdfTaillePolice(PdfPage, PdfFontBack, ConstPoliceCarlson+ConstPoliceGras, 10);
-    PdfCentre(PdfPage, X+2, X+25, Y - (1 * HauteurLigne) + 1, GetTexteLibelle('PDF_RESIL1_RESILIENCE'));
-    PdfEcrit (PdfPage, X+2, X+18, Y - (2 * HauteurLigne) + 1, GetTexteLibelle('PDF_RESIL2A_RESILIENCE'), MinPolice);
-    PdfEcrit (PdfPage, X+2, X+18, Y - (3 * HauteurLigne) + 1, GetTexteLibelle('PDF_RESIL2B_RESOLVE'),    MinPolice);
-    PdfEcrit (PdfPage, X+2, X+50, Y - (NbLignes * HauteurLigne) + 1, GetTexteLibelle('PDF_RESIL2C_MOTIVATION'), MinPolice);
+    PdfCentre(PdfPage, X+2, X+25, Y - (1 * HauteurLigne) + 1, GetTexteLibelle('RULES-PDF_RESIL1_RESILIENCE'));
+    PdfEcrit (PdfPage, X+2, X+18, Y - (2 * HauteurLigne) + 1, GetTexteLibelle('RULES-PDF_RESIL2A_RESILIENCE'), MinPolice);
+    PdfEcrit (PdfPage, X+2, X+18, Y - (3 * HauteurLigne) + 1, GetTexteLibelle('RULES-PDF_RESIL2B_RESOLVE'),    MinPolice);
+    PdfEcrit (PdfPage, X+2, X+50, Y - (NbLignes * HauteurLigne) + 1, GetTexteLibelle('RULES-PDF_RESIL2C_MOTIVATION'), MinPolice);
 
     // Valeur Résilience
     PdfTaillePolice(PdfPage, PdfFontValue, ConstPoliceArial, 9);
@@ -2134,9 +2134,9 @@ Procedure PdfBlocDestin(PdfPage: TPDFPage; Personnage: StructurePersonnage; XGau
     // Géométrie resserrée le 16/08/2026 (38mm -> 26mm relatifs à XGauche), même chantier que
     // PdfBlocResilience (CONTEXT.md §2.6) - anciens repères 29/38 devenus 17/24.
     PdfTaillePolice(PdfPage, PdfFontBack, ConstPoliceCarlson+ConstPoliceGras, 10);
-    PdfCentre(PdfPage, XGauche+2,  XGauche+24, Y - (1 * HauteurLigne) + 1, GetTexteLibelle('PDF_FATE1_FATE'));
-    PdfEcrit (PdfPage, XGauche+2,  XGauche+17, Y - (2 * HauteurLigne) + 1, GetTexteLibelle('PDF_FATE2_FATE'),    MinPolice);
-    PdfEcrit (PdfPage, XGauche+2,  XGauche+17, Y - (3 * HauteurLigne) + 1, GetTexteLibelle('PDF_FATE3_FORTUNE'), MinPolice);
+    PdfCentre(PdfPage, XGauche+2,  XGauche+24, Y - (1 * HauteurLigne) + 1, GetTexteLibelle('RULES-PDF_FATE1_FATE'));
+    PdfEcrit (PdfPage, XGauche+2,  XGauche+17, Y - (2 * HauteurLigne) + 1, GetTexteLibelle('RULES-PDF_FATE2_FATE'),    MinPolice);
+    PdfEcrit (PdfPage, XGauche+2,  XGauche+17, Y - (3 * HauteurLigne) + 1, GetTexteLibelle('RULES-PDF_FATE3_FORTUNE'), MinPolice);
 
     // Valeur Destin
     PdfTaillePolice(PdfPage, PdfFontValue, ConstPoliceArial, 9);
@@ -2170,17 +2170,17 @@ Function PdfBlocEntete(PdfPage: TPDFPage; Personnage: StructurePersonnage; PRace
 
     // Texte Entête
     PdfTaillePolice(PdfPage, PdfFontBack, ConstPoliceCarlson+ConstPoliceGras, 10);
-    PdfPage.WriteText( 21, Y - (HauteurLigne * 1) + 1, GetTexteLibelle('PDF_MAIN1_NAME'));
-    PdfPage.WriteText( 78, Y - (HauteurLigne * 1) + 1, GetTexteLibelle('PDF_MAIN1_SPECIES'));
-    PdfPage.WriteText(115, Y - (HauteurLigne * 1) + 1, GetTexteLibelle('PDF_MAIN1_CLASS'));
-    PdfPage.WriteText( 21, Y - (HauteurLigne * 2) + 1, GetTexteLibelle('PDF_MAIN2_CAREER'));
-    PdfPage.WriteText( 78, Y - (HauteurLigne * 2) + 1, GetTexteLibelle('PDF_MAIN2_CAREERLEVEL'));
-    PdfPage.WriteText( 21, Y - (HauteurLigne * 3) + 1, GetTexteLibelle('PDF_MAIN3_CAREERPATH'));
-    PdfPage.WriteText(115, Y - (HauteurLigne * 3) + 1, GetTexteLibelle('PDF_MAIN3_STATUS'));
-    PdfPage.WriteText( 21, Y - (HauteurLigne * 4) + 1, GetTexteLibelle('PDF_MAIN4_AGE'));
-    PdfPage.WriteText( 53, Y - (HauteurLigne * 4) + 1, GetTexteLibelle('PDF_MAIN4_HEIGHT'));
-    PdfPage.WriteText( 78, Y - (HauteurLigne * 4) + 1, GetTexteLibelle('PDF_MAIN4_HAIR'));
-    PdfPage.WriteText(115, Y - (HauteurLigne * 4) + 1, GetTexteLibelle('PDF_MAIN4_EYES'));
+    PdfPage.WriteText( 21, Y - (HauteurLigne * 1) + 1, GetTexteLibelle('RULES-PDF_MAIN1_NAME'));
+    PdfPage.WriteText( 78, Y - (HauteurLigne * 1) + 1, GetTexteLibelle('RULES-PDF_MAIN1_SPECIES'));
+    PdfPage.WriteText(115, Y - (HauteurLigne * 1) + 1, GetTexteLibelle('RULES-PDF_MAIN1_CLASS'));
+    PdfPage.WriteText( 21, Y - (HauteurLigne * 2) + 1, GetTexteLibelle('RULES-PDF_MAIN2_CAREER'));
+    PdfPage.WriteText( 78, Y - (HauteurLigne * 2) + 1, GetTexteLibelle('RULES-PDF_MAIN2_CAREERLEVEL'));
+    PdfPage.WriteText( 21, Y - (HauteurLigne * 3) + 1, GetTexteLibelle('RULES-PDF_MAIN3_CAREERPATH'));
+    PdfPage.WriteText(115, Y - (HauteurLigne * 3) + 1, GetTexteLibelle('RULES-PDF_MAIN3_STATUS'));
+    PdfPage.WriteText( 21, Y - (HauteurLigne * 4) + 1, GetTexteLibelle('RULES-PDF_MAIN4_AGE'));
+    PdfPage.WriteText( 53, Y - (HauteurLigne * 4) + 1, GetTexteLibelle('RULES-PDF_MAIN4_HEIGHT'));
+    PdfPage.WriteText( 78, Y - (HauteurLigne * 4) + 1, GetTexteLibelle('RULES-PDF_MAIN4_HAIR'));
+    PdfPage.WriteText(115, Y - (HauteurLigne * 4) + 1, GetTexteLibelle('RULES-PDF_MAIN4_EYES'));
 
     // Valeur Entête
     PdfTaillePolice(PdfPage, PdfFontValue, ConstPoliceArial, 9);
@@ -2218,9 +2218,9 @@ Function PdfBlocAmbitions(PdfPage: TPDFPage; XGauche, XDroite, Y, HauteurLigne: 
 
     // Texte Ambitions
     PdfTaillePolice(PdfPage, PdfFontBack, ConstPoliceCarlson+ConstPoliceGras, 10);
-    PdfCentre(PdfPage, XGauche + 2, XDroite,        Y - (1 * HauteurLigne) + 1, GetTexteLibelle('PDF_AMBITION1_AMBITIONS'));
-    PdfEcrit (PdfPage, XGauche + 2, XGauche + 19.9, Y - (2 * HauteurLigne) + 1, GetTexteLibelle('PDF_AMBITION2A_SHORT')+GetTexteLibelle('PDF_AMBITION2B_SHORT'), MinPolice);
-    PdfEcrit (PdfPage, XGauche + 2, XGauche + 19.9, Y - (3 * HauteurLigne) + 1, GetTexteLibelle('PDF_AMBITION3A_LONG')+GetTexteLibelle('PDF_AMBITION3B_LONG'), MinPolice);
+    PdfCentre(PdfPage, XGauche + 2, XDroite,        Y - (1 * HauteurLigne) + 1, GetTexteLibelle('RULES-PDF_AMBITION1_AMBITIONS'));
+    PdfEcrit (PdfPage, XGauche + 2, XGauche + 19.9, Y - (2 * HauteurLigne) + 1, GetTexteLibelle('RULES-PDF_AMBITION2A_SHORT')+GetTexteLibelle('RULES-PDF_AMBITION2B_SHORT'), MinPolice);
+    PdfEcrit (PdfPage, XGauche + 2, XGauche + 19.9, Y - (3 * HauteurLigne) + 1, GetTexteLibelle('RULES-PDF_AMBITION3A_LONG')+GetTexteLibelle('RULES-PDF_AMBITION3B_LONG'), MinPolice);
 
     Result := Y - (NbLignes * HauteurLigne);
   end;
@@ -2240,10 +2240,10 @@ Function PdfBlocExperience(PdfPage: TPDFPage; Personnage: StructurePersonnage; X
 
     // Texte Expérience
     PdfTaillePolice(PdfPage, PdfFontBack, ConstPoliceCarlson+ConstPoliceGras, 10);
-    PdfCentre(PdfPage, XGauche + 1, XDroite,      Y - ((NbLignes - 3) * HauteurLigne) + 0.6, GetTexteLibelle('PDF_XP1_EXPERIENCE'));
-    PdfEcrit (PdfPage, XGauche + 1, XGauche + 15, Y - ((NbLignes - 2) * HauteurLigne) + 0.6, GetTexteLibelle('PDF_XP2C_TOTAL')  , MinPolice);
-    PdfEcrit (PdfPage, XGauche + 1, XGauche + 15, Y - ((NbLignes - 1) * HauteurLigne) + 0.6, GetTexteLibelle('PDF_XP2B_SPENT') , MinPolice);
-    PdfEcrit (PdfPage, XGauche + 1, XGauche + 15, Y - ( NbLignes      * HauteurLigne) + 0.6, GetTexteLibelle('PDF_XP2A_CURRENT'), MinPolice);
+    PdfCentre(PdfPage, XGauche + 1, XDroite,      Y - ((NbLignes - 3) * HauteurLigne) + 0.6, GetTexteLibelle('RULES-PDF_XP1_EXPERIENCE'));
+    PdfEcrit (PdfPage, XGauche + 1, XGauche + 15, Y - ((NbLignes - 2) * HauteurLigne) + 0.6, GetTexteLibelle('RULES-PDF_XP2C_TOTAL')  , MinPolice);
+    PdfEcrit (PdfPage, XGauche + 1, XGauche + 15, Y - ((NbLignes - 1) * HauteurLigne) + 0.6, GetTexteLibelle('RULES-PDF_XP2B_SPENT') , MinPolice);
+    PdfEcrit (PdfPage, XGauche + 1, XGauche + 15, Y - ( NbLignes      * HauteurLigne) + 0.6, GetTexteLibelle('RULES-PDF_XP2A_CURRENT'), MinPolice);
 
     // Valeur Expérience
     PdfTaillePolice(PdfPage, PdfFontValue, ConstPoliceArial, 9);
@@ -2269,10 +2269,10 @@ Function PdfBlocMouvement(PdfPage: TPDFPage; XGauche, XDroite, Y, HauteurLigne: 
 
     // Texte Mouvement
     PdfTaillePolice(PdfPage, PdfFontBack, ConstPoliceCarlson+ConstPoliceGras, 10);
-    PdfCentre(PdfPage, XGauche + 1, XDroite,      Y - ((NbLignes - 3) * HauteurLigne) + 0.6, GetTexteLibelle('PDF_MV1_MOVEMENT'));
-    PdfEcrit (PdfPage, XGauche + 1, XGauche + 15, Y - ((NbLignes - 2) * HauteurLigne) + 0.6, GetTexteLibelle('PDF_MV2A_MOVEMENT'), MinPolice);
-    PdfEcrit (PdfPage, XGauche + 1, XGauche + 15, Y - ((NbLignes - 1) * HauteurLigne) + 0.6, GetTexteLibelle('PDF_MV2B_WALK')    , MinPolice);
-    PdfEcrit (PdfPage, XGauche + 1, XGauche + 15, Y - ( NbLignes      * HauteurLigne) + 0.6, GetTexteLibelle('PDF_MV2C_RUN')     , MinPolice);
+    PdfCentre(PdfPage, XGauche + 1, XDroite,      Y - ((NbLignes - 3) * HauteurLigne) + 0.6, GetTexteLibelle('RULES-PDF_MV1_MOVEMENT'));
+    PdfEcrit (PdfPage, XGauche + 1, XGauche + 15, Y - ((NbLignes - 2) * HauteurLigne) + 0.6, GetTexteLibelle('RULES-PDF_MV2A_MOVEMENT'), MinPolice);
+    PdfEcrit (PdfPage, XGauche + 1, XGauche + 15, Y - ((NbLignes - 1) * HauteurLigne) + 0.6, GetTexteLibelle('RULES-PDF_MV2B_WALK')    , MinPolice);
+    PdfEcrit (PdfPage, XGauche + 1, XGauche + 15, Y - ( NbLignes      * HauteurLigne) + 0.6, GetTexteLibelle('RULES-PDF_MV2C_RUN')     , MinPolice);
 
     // Valeur Mouvement
     PdfTaillePolice(PdfPage, PdfFontValue, ConstPoliceArial, 9);
@@ -2303,13 +2303,13 @@ Function PdfBlocCorruption(PdfPage: TPDFPage; XGauche, XDroite, Y, HauteurLigne:
     // Lignes Lost/Left ajoutées le 16/08/2026 (historique de corruption, CONTEXT.md §2.6) :
     // Lost = somme des montants de Personnage.Corruption, Left = Total - Lost.
     PdfTaillePolice(PdfPage, PdfFontBack, ConstPoliceCarlson+ConstPoliceGras, 10);
-    PdfCentre(PdfPage, XGauche + 1, XDroite,      Y - ((NbLignes - 6) * HauteurLigne) + 0.6, GetTexteLibelle('PDF_CORRUPTION_TITLE'));
-    PdfEcrit (PdfPage, XGauche + 1, XGauche + 15, Y - ((NbLignes - 5) * HauteurLigne) + 0.6, GetTexteLibelle('PDF_CORRUPTION_T')    , MinPolice);
-    PdfEcrit (PdfPage, XGauche + 1, XGauche + 15, Y - ((NbLignes - 4) * HauteurLigne) + 0.6, GetTexteLibelle('PDF_CORRUPTION_WP')   , MinPolice);
-    PdfEcrit (PdfPage, XGauche + 1, XGauche + 15, Y - ((NbLignes - 3) * HauteurLigne) + 0.6, GetTexteLibelle('PDF_CORRUPTION_BONUS'), MinPolice);
-    PdfEcrit (PdfPage, XGauche + 1, XGauche + 15, Y - ((NbLignes - 2) * HauteurLigne) + 0.6, GetTexteLibelle('PDF_CORRUPTION_TOTAL'), MinPolice);
-    PdfEcrit (PdfPage, XGauche + 1, XGauche + 15, Y - ((NbLignes - 1) * HauteurLigne) + 0.6, GetTexteLibelle('PDF_CORRUPTION_LOST') , MinPolice);
-    PdfEcrit (PdfPage, XGauche + 1, XGauche + 15, Y - ( NbLignes      * HauteurLigne) + 0.6, GetTexteLibelle('PDF_CORRUPTION_LEFT') , MinPolice);
+    PdfCentre(PdfPage, XGauche + 1, XDroite,      Y - ((NbLignes - 6) * HauteurLigne) + 0.6, GetTexteLibelle('RULES-PDF_CORRUPTION_TITLE'));
+    PdfEcrit (PdfPage, XGauche + 1, XGauche + 15, Y - ((NbLignes - 5) * HauteurLigne) + 0.6, GetTexteLibelle('RULES-PDF_CORRUPTION_T')    , MinPolice);
+    PdfEcrit (PdfPage, XGauche + 1, XGauche + 15, Y - ((NbLignes - 4) * HauteurLigne) + 0.6, GetTexteLibelle('RULES-PDF_CORRUPTION_WP')   , MinPolice);
+    PdfEcrit (PdfPage, XGauche + 1, XGauche + 15, Y - ((NbLignes - 3) * HauteurLigne) + 0.6, GetTexteLibelle('RULES-PDF_CORRUPTION_BONUS'), MinPolice);
+    PdfEcrit (PdfPage, XGauche + 1, XGauche + 15, Y - ((NbLignes - 2) * HauteurLigne) + 0.6, GetTexteLibelle('RULES-PDF_CORRUPTION_TOTAL'), MinPolice);
+    PdfEcrit (PdfPage, XGauche + 1, XGauche + 15, Y - ((NbLignes - 1) * HauteurLigne) + 0.6, GetTexteLibelle('RULES-PDF_CORRUPTION_LOST') , MinPolice);
+    PdfEcrit (PdfPage, XGauche + 1, XGauche + 15, Y - ( NbLignes      * HauteurLigne) + 0.6, GetTexteLibelle('RULES-PDF_CORRUPTION_LEFT') , MinPolice);
 
     // Valeur Corruption
     PdfTaillePolice(PdfPage, PdfFontValue, ConstPoliceArial, 9);
@@ -2342,7 +2342,7 @@ Function PdfBlocCorruptionDetail(PdfPage: TPDFPage; Personnage: StructurePersonn
 
     // Titre + en-têtes de colonnes
     PdfTaillePolice(PdfPage, PdfFontBack, ConstPoliceCarlson+ConstPoliceGras, 10);
-    PdfCentre(PdfPage, XGauche + 1, XDroite,      Y - HauteurLigne + 0.6,             GetTexteLibelle('PDF_CORRUPTION_HISTORY'));
+    PdfCentre(PdfPage, XGauche + 1, XDroite,      Y - HauteurLigne + 0.6,             GetTexteLibelle('RULES-PDF_CORRUPTION_HISTORY'));
     PdfEcrit (PdfPage, XGauche + 1, XGauche + 12,  Y - (2 * HauteurLigne) + 0.6, GetTexteLibelle('RULES-LAB_162'), MinPolice); // Amount
     PdfEcrit (PdfPage, XGauche + 13, XDroite,      Y - (2 * HauteurLigne) + 0.6, GetTexteLibelle('RULES-LAB_163'), MinPolice); // Reason
 
@@ -2400,11 +2400,11 @@ Function PdfBlocTalents(PdfPage: TPDFPage; Personnage: StructurePersonnage; XGau
 
     // Texte Talents
     PdfTaillePolice(PdfPage, PdfFontBack, ConstPoliceCarlson+ConstPoliceGras, 10);
-    PdfCentre(PdfPage, XGauche,      XDroite,      Y - (1 * HauteurLigne) + 1, Trim(GetTexteLibelle('PDF_TALENT1_TALENTS')));
-    PdfCentre(PdfPage, XGauche,      XGauche + 40, Y - (2 * HauteurLigne) + 1, GetTexteLibelle('PDF_TALENT2_TALENTNAME'));
-    PdfCentre(PdfPage, XGauche + 41, XGauche + 47, Y - (2 * HauteurLigne) + 1, GetTexteLibelle('PDF_TALENT2_UPG'));
-    PdfCentre(PdfPage, XGauche + 47, XGauche + 51, Y - (2 * HauteurLigne) + 1, GetTexteLibelle('PDF_TALENT2_LEVEL'));
-    PdfCentre(PdfPage, XGauche + 53, XDroite,      Y - (2 * HauteurLigne) + 1, GetTexteLibelle('PDF_TALENT2_DESC'));
+    PdfCentre(PdfPage, XGauche,      XDroite,      Y - (1 * HauteurLigne) + 1, Trim(GetTexteLibelle('RULES-PDF_TALENT1_TALENTS')));
+    PdfCentre(PdfPage, XGauche,      XGauche + 40, Y - (2 * HauteurLigne) + 1, GetTexteLibelle('RULES-PDF_TALENT2_TALENTNAME'));
+    PdfCentre(PdfPage, XGauche + 41, XGauche + 47, Y - (2 * HauteurLigne) + 1, GetTexteLibelle('RULES-PDF_TALENT2_UPG'));
+    PdfCentre(PdfPage, XGauche + 47, XGauche + 51, Y - (2 * HauteurLigne) + 1, GetTexteLibelle('RULES-PDF_TALENT2_LEVEL'));
+    PdfCentre(PdfPage, XGauche + 53, XDroite,      Y - (2 * HauteurLigne) + 1, GetTexteLibelle('RULES-PDF_TALENT2_DESC'));
 
     // Valeur Talents
     PdfTaillePolice(PdfPage, PdfFontValue, ConstPoliceArial, 9);
@@ -2493,12 +2493,12 @@ Function PdfBlocArmures(PdfPage: TPDFPage; XGauche, XDroite, Y, HauteurLigne: Si
       PdfPage.DrawLine(XGauche, Y - (IndC * HauteurLigne), XDroite, Y - (IndC * HauteurLigne), 1);
 
     // Texte Armure
-    PdfCentre(PdfPage, XGauche +  0, XDroite,      Y - (1 * HauteurLigne) + 1, GetTexteLibelle('PDF_ARMOUR1_ARMOUR'));
-    PdfCentre(PdfPage, XGauche +  0, XGauche + 34, Y - (2 * HauteurLigne) + 1, GetTexteLibelle('PDF_ARMOUR2_NAME'));
-    PdfCentre(PdfPage, XGauche + 34, XGauche + 53, Y - (2 * HauteurLigne) + 1, GetTexteLibelle('PDF_ARMOUR2_LOCATIONS'));
-    PdfCentre(PdfPage, XGauche + 53, XGauche + 62, Y - (2 * HauteurLigne) + 1, GetTexteLibelle('PDF_ARMOUR2_ENCUMBRANCE'));
-    PdfCentre(PdfPage, XGauche + 62, XGauche + 70, Y - (2 * HauteurLigne) + 1, GetTexteLibelle('PDF_ARMOUR2_ARMOURPOINT'));
-    PdfCentre(PdfPage, XGauche + 70, XDroite,      Y - (2 * HauteurLigne) + 1, GetTexteLibelle('PDF_ARMOUR2_QUALITIES'));
+    PdfCentre(PdfPage, XGauche +  0, XDroite,      Y - (1 * HauteurLigne) + 1, GetTexteLibelle('RULES-PDF_ARMOUR1_ARMOUR'));
+    PdfCentre(PdfPage, XGauche +  0, XGauche + 34, Y - (2 * HauteurLigne) + 1, GetTexteLibelle('RULES-PDF_ARMOUR2_NAME'));
+    PdfCentre(PdfPage, XGauche + 34, XGauche + 53, Y - (2 * HauteurLigne) + 1, GetTexteLibelle('RULES-PDF_ARMOUR2_LOCATIONS'));
+    PdfCentre(PdfPage, XGauche + 53, XGauche + 62, Y - (2 * HauteurLigne) + 1, GetTexteLibelle('RULES-PDF_ARMOUR2_ENCUMBRANCE'));
+    PdfCentre(PdfPage, XGauche + 62, XGauche + 70, Y - (2 * HauteurLigne) + 1, GetTexteLibelle('RULES-PDF_ARMOUR2_ARMOURPOINT'));
+    PdfCentre(PdfPage, XGauche + 70, XDroite,      Y - (2 * HauteurLigne) + 1, GetTexteLibelle('RULES-PDF_ARMOUR2_QUALITIES'));
 
     Result := Y - ((NbLignes + 1) * HauteurLigne);
   end;
@@ -2518,11 +2518,11 @@ Function PdfBlocEquipement(PdfPage: TPDFPage; XGauche, XDroite, Y, HauteurLigne:
       PdfPage.DrawLine(XGauche, Y - (IndC * HauteurLigne), XDroite, Y - (IndC * HauteurLigne), 1);
 
     // Texte Equipement
-    PdfCentre(PdfPage, XGauche +   0, XDroite,       Y - (1 * HauteurLigne) + 1, GetTexteLibelle('PDF_TRAPPING1_TRAPPINGS'));
-    PdfCentre(PdfPage, XGauche +   0, XGauche +  48, Y - (2 * HauteurLigne) + 1, GetTexteLibelle('PDF_TRAPPING2_NAME'));
-    PdfCentre(PdfPage, XGauche +  48, XGauche +  55, Y - (2 * HauteurLigne) + 1, GetTexteLibelle('PDF_TRAPPING2_ENCUMBRANCE'));
-    PdfCentre(PdfPage, XGauche +  55, XGauche + 100, Y - (2 * HauteurLigne) + 1, GetTexteLibelle('PDF_TRAPPING2_NAME'));
-    PdfCentre(PdfPage, XGauche + 100, XDroite,       Y - (2 * HauteurLigne) + 1, GetTexteLibelle('PDF_TRAPPING2_ENCUMBRANCE'));
+    PdfCentre(PdfPage, XGauche +   0, XDroite,       Y - (1 * HauteurLigne) + 1, GetTexteLibelle('RULES-PDF_TRAPPING1_TRAPPINGS'));
+    PdfCentre(PdfPage, XGauche +   0, XGauche +  48, Y - (2 * HauteurLigne) + 1, GetTexteLibelle('RULES-PDF_TRAPPING2_NAME'));
+    PdfCentre(PdfPage, XGauche +  48, XGauche +  55, Y - (2 * HauteurLigne) + 1, GetTexteLibelle('RULES-PDF_TRAPPING2_ENCUMBRANCE'));
+    PdfCentre(PdfPage, XGauche +  55, XGauche + 100, Y - (2 * HauteurLigne) + 1, GetTexteLibelle('RULES-PDF_TRAPPING2_NAME'));
+    PdfCentre(PdfPage, XGauche + 100, XDroite,       Y - (2 * HauteurLigne) + 1, GetTexteLibelle('RULES-PDF_TRAPPING2_ENCUMBRANCE'));
 
     Result := Y - ((NbLignes + 1) * HauteurLigne);
   end;
@@ -2544,13 +2544,13 @@ Function PdfBlocArmes(PdfPage: TPDFPage; XGauche, XDroite, Y, HauteurLigne: Sing
       PdfPage.DrawLine(XGauche, Y - (IndC * HauteurLigne), XDroite, Y - (IndC * HauteurLigne), 1);
 
     // Texte Armes
-    PdfCentre(PdfPage, XGauche +   0, XDroite,       Y - (1 * HauteurLigne) + 1, GetTexteLibelle('PDF_WEAPONS1_WEAPONS'));
-    PdfCentre(PdfPage, XGauche +   0, XGauche +  45, Y - (2 * HauteurLigne) + 1, GetTexteLibelle('PDF_WEAPONS2_NAME'));
-    PdfCentre(PdfPage, XGauche +  45, XGauche +  64, Y - (2 * HauteurLigne) + 1, GetTexteLibelle('PDF_WEAPONS2_GROUP'));
-    PdfCentre(PdfPage, XGauche +  64, XGauche +  71, Y - (2 * HauteurLigne) + 1, GetTexteLibelle('PDF_WEAPONS2_ENCUMBRANCE'));
-    PdfCentre(PdfPage, XGauche +  71, XGauche +  96, Y - (2 * HauteurLigne) + 1, GetTexteLibelle('PDF_WEAPONS2_RANGE'));
-    PdfCentre(PdfPage, XGauche +  96, XGauche + 113, Y - (2 * HauteurLigne) + 1, GetTexteLibelle('PDF_WEAPONS2_DAMAGE'));
-    PdfCentre(PdfPage, XGauche + 113, XDroite,       Y - (2 * HauteurLigne) + 1, GetTexteLibelle('PDF_WEAPONS2_QUALITIES'));
+    PdfCentre(PdfPage, XGauche +   0, XDroite,       Y - (1 * HauteurLigne) + 1, GetTexteLibelle('RULES-PDF_WEAPONS1_WEAPONS'));
+    PdfCentre(PdfPage, XGauche +   0, XGauche +  45, Y - (2 * HauteurLigne) + 1, GetTexteLibelle('RULES-PDF_WEAPONS2_NAME'));
+    PdfCentre(PdfPage, XGauche +  45, XGauche +  64, Y - (2 * HauteurLigne) + 1, GetTexteLibelle('RULES-PDF_WEAPONS2_GROUP'));
+    PdfCentre(PdfPage, XGauche +  64, XGauche +  71, Y - (2 * HauteurLigne) + 1, GetTexteLibelle('RULES-PDF_WEAPONS2_ENCUMBRANCE'));
+    PdfCentre(PdfPage, XGauche +  71, XGauche +  96, Y - (2 * HauteurLigne) + 1, GetTexteLibelle('RULES-PDF_WEAPONS2_RANGE'));
+    PdfCentre(PdfPage, XGauche +  96, XGauche + 113, Y - (2 * HauteurLigne) + 1, GetTexteLibelle('RULES-PDF_WEAPONS2_DAMAGE'));
+    PdfCentre(PdfPage, XGauche + 113, XDroite,       Y - (2 * HauteurLigne) + 1, GetTexteLibelle('RULES-PDF_WEAPONS2_QUALITIES'));
 
     Result := Y - ((NbLignes + 1) * HauteurLigne);
   end;
@@ -2572,13 +2572,13 @@ Function PdfBlocSorts(PdfPage: TPDFPage; XGauche, XDroite, Y, HauteurLigne: Sing
       PdfPage.DrawLine(XGauche, Y - (IndC * HauteurLigne), XDroite, Y - (IndC * HauteurLigne), 1);
 
     // Texte Sorts
-    PdfCentre(PdfPage, XGauche +  0, XDroite,      Y - (1 * HauteurLigne) + 1, GetTexteLibelle('PDF_SPELL1_SPELL'));
-    PdfCentre(PdfPage, XGauche +  0, XGauche + 38, Y - (2 * HauteurLigne) + 1, GetTexteLibelle('PDF_SPELL2_NAME'));
-    PdfCentre(PdfPage, XGauche + 38, XGauche + 51, Y - (2 * HauteurLigne) + 1, GetTexteLibelle('PDF_SPELL2_CN'));
-    PdfCentre(PdfPage, XGauche + 51, XGauche + 66, Y - (2 * HauteurLigne) + 1, GetTexteLibelle('PDF_SPELL2_RANGE'));
-    PdfCentre(PdfPage, XGauche + 66, XGauche + 82, Y - (2 * HauteurLigne) + 1, GetTexteLibelle('PDF_SPELL2_TARGET'));
-    PdfCentre(PdfPage, XGauche + 82, XGauche + 98, Y - (2 * HauteurLigne) + 1, GetTexteLibelle('PDF_SPELL2_DURATION'));
-    PdfCentre(PdfPage, XGauche + 98, XDroite,      Y - (2 * HauteurLigne) + 1, GetTexteLibelle('PDF_SPELL2_EFFECT'));
+    PdfCentre(PdfPage, XGauche +  0, XDroite,      Y - (1 * HauteurLigne) + 1, GetTexteLibelle('RULES-PDF_SPELL1_SPELL'));
+    PdfCentre(PdfPage, XGauche +  0, XGauche + 38, Y - (2 * HauteurLigne) + 1, GetTexteLibelle('RULES-PDF_SPELL2_NAME'));
+    PdfCentre(PdfPage, XGauche + 38, XGauche + 51, Y - (2 * HauteurLigne) + 1, GetTexteLibelle('RULES-PDF_SPELL2_CN'));
+    PdfCentre(PdfPage, XGauche + 51, XGauche + 66, Y - (2 * HauteurLigne) + 1, GetTexteLibelle('RULES-PDF_SPELL2_RANGE'));
+    PdfCentre(PdfPage, XGauche + 66, XGauche + 82, Y - (2 * HauteurLigne) + 1, GetTexteLibelle('RULES-PDF_SPELL2_TARGET'));
+    PdfCentre(PdfPage, XGauche + 82, XGauche + 98, Y - (2 * HauteurLigne) + 1, GetTexteLibelle('RULES-PDF_SPELL2_DURATION'));
+    PdfCentre(PdfPage, XGauche + 98, XDroite,      Y - (2 * HauteurLigne) + 1, GetTexteLibelle('RULES-PDF_SPELL2_EFFECT'));
 
     Result := Y - ((NbLignes + 1) * HauteurLigne);
   end;
@@ -2596,12 +2596,12 @@ Function PdfBlocEncombrement(PdfPage: TPDFPage; XGauche, XDroite, Y, HauteurLign
 
     // Texte Encombrement
     PdfTaillePolice(PdfPage, PdfFontBack, ConstPoliceCarlson+ConstPoliceGras, 10);
-    PdfCentre(PdfPage, XGauche + 1, XDroite,      Y - ((NbLignes - 4) * HauteurLigne) + 0.6, GetTexteLibelle('PDF_ENCUMBRANCE1_ENCUMBRANCE'));
-    PdfEcrit(PdfPage,  XGauche + 1, XGauche + 15, Y - ((NbLignes - 3) * HauteurLigne) + 0.6, GetTexteLibelle('PDF_ENCUMBRANCE2_ARMOUR')    , MinPolice);
-    PdfEcrit(PdfPage,  XGauche + 1, XGauche + 15, Y - ((NbLignes - 2) * HauteurLigne) + 0.6, GetTexteLibelle('PDF_ENCUMBRANCE3_WEAPONS')   , MinPolice);
-    PdfEcrit(PdfPage,  XGauche + 1, XGauche + 15, Y - ((NbLignes - 1) * HauteurLigne) + 0.6, GetTexteLibelle('PDF_ENCUMBRANCE4_TRAPPINGS') , MinPolice);
-    PdfEcrit(PdfPage,  XGauche + 1, XGauche + 15, Y - ((NbLignes - 0) * HauteurLigne) + 0.6, GetTexteLibelle('PDF_ENCUMBRANCE5_MAXENC')    , MinPolice);
-    PdfEcrit(PdfPage,  XGauche + 1, XGauche + 15, Y - ((NbLignes + 1) * HauteurLigne) + 0.6, GetTexteLibelle('PDF_ENCUMBRANCE6_TOTAL')     , MinPolice);
+    PdfCentre(PdfPage, XGauche + 1, XDroite,      Y - ((NbLignes - 4) * HauteurLigne) + 0.6, GetTexteLibelle('RULES-PDF_ENCUMBRANCE1_ENCUMBRANCE'));
+    PdfEcrit(PdfPage,  XGauche + 1, XGauche + 15, Y - ((NbLignes - 3) * HauteurLigne) + 0.6, GetTexteLibelle('RULES-PDF_ENCUMBRANCE2_ARMOUR')    , MinPolice);
+    PdfEcrit(PdfPage,  XGauche + 1, XGauche + 15, Y - ((NbLignes - 2) * HauteurLigne) + 0.6, GetTexteLibelle('RULES-PDF_ENCUMBRANCE3_WEAPONS')   , MinPolice);
+    PdfEcrit(PdfPage,  XGauche + 1, XGauche + 15, Y - ((NbLignes - 1) * HauteurLigne) + 0.6, GetTexteLibelle('RULES-PDF_ENCUMBRANCE4_TRAPPINGS') , MinPolice);
+    PdfEcrit(PdfPage,  XGauche + 1, XGauche + 15, Y - ((NbLignes - 0) * HauteurLigne) + 0.6, GetTexteLibelle('RULES-PDF_ENCUMBRANCE5_MAXENC')    , MinPolice);
+    PdfEcrit(PdfPage,  XGauche + 1, XGauche + 15, Y - ((NbLignes + 1) * HauteurLigne) + 0.6, GetTexteLibelle('RULES-PDF_ENCUMBRANCE6_TOTAL')     , MinPolice);
 
     Result := Y - ((NbLignes + 1) * HauteurLigne);
   end;
@@ -3076,13 +3076,13 @@ Procedure PdfBlocArmourPoints(PdfPage: TPDFPage; PdfImgShadow: Integer; X, Y: Si
     PdfPage.DrawImage(ImgX, ImgY, 55, 72, PdfImgShadow);
 
     PdfTaillePolice(PdfPage, PdfFontBack, ConstPoliceCarlson+ConstPoliceGras, 10);
-    PdfEncadre(PdfPage, ImgX + 10  , ImgY + 60  , false, GetTexteLibelle('PDF_ARMOURPOINT_HEAD'), '', '01-09');
-    PdfEncadre(PdfPage, ImgX + 10  , ImgY + 39  , false, GetTexteLibelle('PDF_ARMOURPOINT_RIGHTARM1'), GetTexteLibelle('PDF_ARMOURPOINT_RIGHTARM2'), '25-44');
-    PdfEncadre(PdfPage, ImgX + 10  , ImgY + 17.5, false, GetTexteLibelle('PDF_ARMOURPOINT_RIGHTLEG'), '', '90-00');
-    PdfEncadre(PdfPage, ImgX + 10  , ImgY       , true , GetTexteLibelle('PDF_ARMOURPOINT_SHIELD'), '', '');
-    PdfEncadre(PdfPage, ImgX + 49.5, ImgY + 51  , false, GetTexteLibelle('PDF_ARMOURPOINT_LEFTARM1'), GetTexteLibelle('PDF_ARMOURPOINT_LEFTARM2'), '10-24');
-    PdfEncadre(PdfPage, ImgX + 49.5, ImgY + 29.5, false, GetTexteLibelle('PDF_ARMOURPOINT_BODY'), '', '45-79');
-    PdfEncadre(PdfPage, ImgX + 49.5, ImgY + 5.5 , false, GetTexteLibelle('PDF_ARMOURPOINT_LEFTLEG'), '', '80-89');
+    PdfEncadre(PdfPage, ImgX + 10  , ImgY + 60  , false, GetTexteLibelle('RULES-PDF_ARMOURPOINT_HEAD'), '', '01-09');
+    PdfEncadre(PdfPage, ImgX + 10  , ImgY + 39  , false, GetTexteLibelle('RULES-PDF_ARMOURPOINT_RIGHTARM1'), GetTexteLibelle('RULES-PDF_ARMOURPOINT_RIGHTARM2'), '25-44');
+    PdfEncadre(PdfPage, ImgX + 10  , ImgY + 17.5, false, GetTexteLibelle('RULES-PDF_ARMOURPOINT_RIGHTLEG'), '', '90-00');
+    PdfEncadre(PdfPage, ImgX + 10  , ImgY       , true , GetTexteLibelle('RULES-PDF_ARMOURPOINT_SHIELD'), '', '');
+    PdfEncadre(PdfPage, ImgX + 49.5, ImgY + 51  , false, GetTexteLibelle('RULES-PDF_ARMOURPOINT_LEFTARM1'), GetTexteLibelle('RULES-PDF_ARMOURPOINT_LEFTARM2'), '10-24');
+    PdfEncadre(PdfPage, ImgX + 49.5, ImgY + 29.5, false, GetTexteLibelle('RULES-PDF_ARMOURPOINT_BODY'), '', '45-79');
+    PdfEncadre(PdfPage, ImgX + 49.5, ImgY + 5.5 , false, GetTexteLibelle('RULES-PDF_ARMOURPOINT_LEFTLEG'), '', '80-89');
 
     PdfTaillePolice(PdfPage, PdfFontValue, ConstPoliceArial, 9);
     if ArmureBouclier > 0 then
@@ -3417,7 +3417,7 @@ Function PdfPreparerRecordSetCaracteristiques(Personnage: StructurePersonnage; P
         SetLength(Result[Ind-1].Valeurs, 6);
 
         Result[Ind-1].Valeurs[0].Champ  := 'Code';
-        Result[Ind-1].Valeurs[0].Valeur := GetTexteLibelle('SHORTATTR_'+ExtractStringAfter(PAttribut.CodeAttribut,'_'));
+        Result[Ind-1].Valeurs[0].Valeur := GetTexteLibelle('RULES-SHORTATTR_'+ExtractStringAfter(PAttribut.CodeAttribut,'_'));
 
         Result[Ind-1].Valeurs[1].Champ      := 'Initial';
         Result[Ind-1].Valeurs[1].Valeur     := IntToStr(AttributDonnee.Base);
@@ -3842,7 +3842,7 @@ Procedure PdfPersonnageCreationFeldo2P(Personnage: StructurePersonnage);
     if FileExists(PdfChemin) then
       if not DeleteFile(PdfChemin) then
         begin
-          ShowMessage(GetTexteLibelle('MESS_038'));
+          ShowMessage(GetTexteLibelle('RULES-MESS_038'));
           exit;
         end;
 
@@ -3998,12 +3998,12 @@ Procedure PdfPersonnageCreationFeldo2P(Personnage: StructurePersonnage);
     TableauCarac.HauteurLigne    := DessinHauteurCarac;
     TableauCarac.Police          := 9;
     SetLength(TableauCarac.Champs, 6);
-    TableauCarac.Champs[0].Libelle := GetTexteLibelle('PDF_CHARAC1_CHARAC');   TableauCarac.Champs[0].Champ := 'Code';     TableauCarac.Champs[0].EnTete := True;
-    TableauCarac.Champs[1].Libelle := GetTexteLibelle('PDF_CHARAC3_INITIAL');  TableauCarac.Champs[1].Champ := 'Initial';
-    TableauCarac.Champs[2].Libelle := GetTexteLibelle('PDF_CHARAC3_IMPROV');   TableauCarac.Champs[2].Champ := 'Improv';
-    TableauCarac.Champs[3].Libelle := GetTexteLibelle('PDF_CHARAC3_ADVANCES'); TableauCarac.Champs[3].Champ := 'Advances';
-    TableauCarac.Champs[4].Libelle := GetTexteLibelle('PDF_CHARAC3_CURRENT');  TableauCarac.Champs[4].Champ := 'Current';
-    TableauCarac.Champs[5].Libelle := GetTexteLibelle('PDF_CHARAC3_BONUS');    TableauCarac.Champs[5].Champ := 'Bonus';
+    TableauCarac.Champs[0].Libelle := GetTexteLibelle('RULES-PDF_CHARAC1_CHARAC');   TableauCarac.Champs[0].Champ := 'Code';     TableauCarac.Champs[0].EnTete := True;
+    TableauCarac.Champs[1].Libelle := GetTexteLibelle('RULES-PDF_CHARAC3_INITIAL');  TableauCarac.Champs[1].Champ := 'Initial';
+    TableauCarac.Champs[2].Libelle := GetTexteLibelle('RULES-PDF_CHARAC3_IMPROV');   TableauCarac.Champs[2].Champ := 'Improv';
+    TableauCarac.Champs[3].Libelle := GetTexteLibelle('RULES-PDF_CHARAC3_ADVANCES'); TableauCarac.Champs[3].Champ := 'Advances';
+    TableauCarac.Champs[4].Libelle := GetTexteLibelle('RULES-PDF_CHARAC3_CURRENT');  TableauCarac.Champs[4].Champ := 'Current';
+    TableauCarac.Champs[5].Libelle := GetTexteLibelle('RULES-PDF_CHARAC3_BONUS');    TableauCarac.Champs[5].Champ := 'Bonus';
 
     DonneesCarac := PdfPreparerRecordSetCaracteristiques(Personnage, PMetier, ListAsterisqueMutation);
     DessinDebutHautComp := DessinerTableau(PdfPage, TableauCarac, DonneesCarac) - 3;
@@ -4018,12 +4018,12 @@ Procedure PdfPersonnageCreationFeldo2P(Personnage: StructurePersonnage);
     TableauComp.HauteurLigne     := DessinHauteurComp;
     TableauComp.Police           := 9;
     TableauComp.PoliceMin        := MinPolice;
-    TableauComp.Titre            := Trim(GetTexteLibelle('PDF_SKILLS1_BASIC'));
+    TableauComp.Titre            := Trim(GetTexteLibelle('RULES-PDF_SKILLS1_BASIC'));
     TableauComp.TitreDecalageGauche := 15;
     TableauComp.NbLignesMax       := DessinNbLigComp - 2; // 2 lignes d'en-tête (titre + libellés)
 
     SetLength(TableauComp.Champs, 6);
-    TableauComp.Champs[0].Libelle           := GetTexteLibelle('PDF_SKILLS2_NAME');
+    TableauComp.Champs[0].Libelle           := GetTexteLibelle('RULES-PDF_SKILLS2_NAME');
     TableauComp.Champs[0].Champ             := 'Nom';
     TableauComp.Champs[0].EnTete            := True;
     TableauComp.Champs[0].Largeur           := 55 - DessinDebColG;
@@ -4033,7 +4033,7 @@ Procedure PdfPersonnageCreationFeldo2P(Personnage: StructurePersonnage);
     TableauComp.Champs[0].DecalageValeurMin := 2;
     TableauComp.Champs[0].DecalageValeurMax := 3.5;
 
-    TableauComp.Champs[1].Libelle           := GetTexteLibelle('PDF_SKILLS2_CHARAC');
+    TableauComp.Champs[1].Libelle           := GetTexteLibelle('RULES-PDF_SKILLS2_CHARAC');
     TableauComp.Champs[1].Champ             := 'Attribut';
     TableauComp.Champs[1].EnTete            := True;
     TableauComp.Champs[1].FusionAvecSuivante:= True;
@@ -4044,17 +4044,17 @@ Procedure PdfPersonnageCreationFeldo2P(Personnage: StructurePersonnage);
     TableauComp.Champs[2].DecalageValeurMin := 3.5;
     TableauComp.Champs[2].DecalageValeurMax := 3.5;
 
-    TableauComp.Champs[3].Libelle           := GetTexteLibelle('PDF_SKILLS2_UPG');
+    TableauComp.Champs[3].Libelle           := GetTexteLibelle('RULES-PDF_SKILLS2_UPG');
     TableauComp.Champs[3].Champ             := 'Upg';
     TableauComp.Champs[3].DecalageValeurMin := 3.5;
     TableauComp.Champs[3].DecalageValeurMax := 3.5;
 
-    TableauComp.Champs[4].Libelle           := GetTexteLibelle('PDF_SKILLS2_ADV');
+    TableauComp.Champs[4].Libelle           := GetTexteLibelle('RULES-PDF_SKILLS2_ADV');
     TableauComp.Champs[4].Champ             := 'Adv';
     TableauComp.Champs[4].DecalageValeurMin := 3.5;
     TableauComp.Champs[4].DecalageValeurMax := 3.5;
 
-    TableauComp.Champs[5].Libelle           := GetTexteLibelle('PDF_SKILLS2_TOTAL');
+    TableauComp.Champs[5].Libelle           := GetTexteLibelle('RULES-PDF_SKILLS2_TOTAL');
     TableauComp.Champs[5].Champ             := 'Total';
     TableauComp.Champs[5].DecalageValeurMin := 3.5;
     TableauComp.Champs[5].DecalageValeurMax := 3.5;
@@ -4141,12 +4141,12 @@ Procedure PdfPersonnageCreationFeldo2P(Personnage: StructurePersonnage);
     TableauCompG.HauteurLigne      := DessinHauteurComg;
     TableauCompG.Police            := 9;
     TableauCompG.PoliceMin         := MinPolice;
-    TableauCompG.Titre             := Trim(GetTexteLibelle('PDF_SKILLS1_ADVANCED'));
+    TableauCompG.Titre             := Trim(GetTexteLibelle('RULES-PDF_SKILLS1_ADVANCED'));
     TableauCompG.TitreDecalageGauche := 15;
     TableauCompG.NbLignesMax        := DessinNbLigComg - 2; // 2 lignes d'en-tête (titre + libellés)
 
     SetLength(TableauCompG.Champs, 6);
-    TableauCompG.Champs[0].Libelle           := GetTexteLibelle('PDF_SKILLS2_NAME');
+    TableauCompG.Champs[0].Libelle           := GetTexteLibelle('RULES-PDF_SKILLS2_NAME');
     TableauCompG.Champs[0].Champ             := 'Nom';
     TableauCompG.Champs[0].Largeur           := 143 - DessinDebColD;
     TableauCompG.Champs[0].AlignementEntete  := alGauche;
@@ -4155,7 +4155,7 @@ Procedure PdfPersonnageCreationFeldo2P(Personnage: StructurePersonnage);
     TableauCompG.Champs[0].DecalageValeurMin := 3;
     TableauCompG.Champs[0].DecalageValeurMax := 0;
 
-    TableauCompG.Champs[1].Libelle           := GetTexteLibelle('PDF_SKILLS2_CHARAC');
+    TableauCompG.Champs[1].Libelle           := GetTexteLibelle('RULES-PDF_SKILLS2_CHARAC');
     TableauCompG.Champs[1].Champ             := 'Attribut';
     TableauCompG.Champs[1].FusionAvecSuivante:= True;
     TableauCompG.Champs[1].DecalageValeurMin := 2.5;
@@ -4165,17 +4165,17 @@ Procedure PdfPersonnageCreationFeldo2P(Personnage: StructurePersonnage);
     TableauCompG.Champs[2].DecalageValeurMin := 2.5;
     TableauCompG.Champs[2].DecalageValeurMax := 2.5;
 
-    TableauCompG.Champs[3].Libelle           := GetTexteLibelle('PDF_SKILLS2_UPG');
+    TableauCompG.Champs[3].Libelle           := GetTexteLibelle('RULES-PDF_SKILLS2_UPG');
     TableauCompG.Champs[3].Champ             := 'Upg';
     TableauCompG.Champs[3].DecalageValeurMin := 2.5;
     TableauCompG.Champs[3].DecalageValeurMax := 2.5;
 
-    TableauCompG.Champs[4].Libelle           := GetTexteLibelle('PDF_SKILLS2_ADV');
+    TableauCompG.Champs[4].Libelle           := GetTexteLibelle('RULES-PDF_SKILLS2_ADV');
     TableauCompG.Champs[4].Champ             := 'Adv';
     TableauCompG.Champs[4].DecalageValeurMin := 2.5;
     TableauCompG.Champs[4].DecalageValeurMax := 2.5;
 
-    TableauCompG.Champs[5].Libelle           := GetTexteLibelle('PDF_SKILLS2_TOTAL');
+    TableauCompG.Champs[5].Libelle           := GetTexteLibelle('RULES-PDF_SKILLS2_TOTAL');
     TableauCompG.Champs[5].Champ             := 'Total';
     TableauCompG.Champs[5].DecalageValeurMin := 2.5;
     TableauCompG.Champs[5].DecalageValeurMax := 2.5;
@@ -4278,12 +4278,12 @@ Procedure PdfPersonnageCreationFeldo2P(Personnage: StructurePersonnage);
         PdfPage.DrawLine(DessinDebutGaucheBle,DessinDebutHautBle - (indC * DessinHauteurBle), DessinLargeurBle - 20, DessinDebutHautBle - (indC * DessinHauteurBle), 1);
     // Texte Blessure
     PdfTaillePolice(PdfPage, PdfFontBack, ConstPoliceCarlson+ConstPoliceGras, 10);
-    PdfCentre(PdfPage,DessinDebutGaucheBle + 2,DessinLargeurBle,DessinDebutHautBle - (1 * DessinHauteurBle) + 1, GetTexteLibelle('PDF_WOUNDS1_WOUNDS'));
-    PdfEcrit(PdfPage,DessinDebutGaucheBle + 2,DessinLargeurBle,DessinDebutHautBle - (2 * DessinHauteurBle) + 1, GetTexteLibelle('PDF_WOUNDS7_BS'),MinPolice);
-    PdfEcrit(PdfPage,DessinDebutGaucheBle + 2,DessinLargeurBle,DessinDebutHautBle - (3 * DessinHauteurBle) + 1, GetTexteLibelle('PDF_WOUNDS7_BT'),MinPolice);
-    PdfEcrit(PdfPage,DessinDebutGaucheBle + 2,DessinLargeurBle,DessinDebutHautBle - (4 * DessinHauteurBle) + 1, GetTexteLibelle('PDF_WOUNDS7_BWP'),MinPolice);
-    PdfEcrit(PdfPage,DessinDebutGaucheBle + 2,DessinLargeurBle - 20,DessinDebutHautBle - (5 * DessinHauteurBle) + 1, GetTexteLibelle('PDF_WOUNDS5_HARDY'),MinPolice);
-    PdfEcrit(PdfPage,DessinDebutGaucheBle + 2,DessinLargeurBle,DessinDebutHautBle - (6 * DessinHauteurBle) + 1, GetTexteLibelle('PDF_WOUNDS7_Tot'),MinPolice);
+    PdfCentre(PdfPage,DessinDebutGaucheBle + 2,DessinLargeurBle,DessinDebutHautBle - (1 * DessinHauteurBle) + 1, GetTexteLibelle('RULES-PDF_WOUNDS1_WOUNDS'));
+    PdfEcrit(PdfPage,DessinDebutGaucheBle + 2,DessinLargeurBle,DessinDebutHautBle - (2 * DessinHauteurBle) + 1, GetTexteLibelle('RULES-PDF_WOUNDS7_BS'),MinPolice);
+    PdfEcrit(PdfPage,DessinDebutGaucheBle + 2,DessinLargeurBle,DessinDebutHautBle - (3 * DessinHauteurBle) + 1, GetTexteLibelle('RULES-PDF_WOUNDS7_BT'),MinPolice);
+    PdfEcrit(PdfPage,DessinDebutGaucheBle + 2,DessinLargeurBle,DessinDebutHautBle - (4 * DessinHauteurBle) + 1, GetTexteLibelle('RULES-PDF_WOUNDS7_BWP'),MinPolice);
+    PdfEcrit(PdfPage,DessinDebutGaucheBle + 2,DessinLargeurBle - 20,DessinDebutHautBle - (5 * DessinHauteurBle) + 1, GetTexteLibelle('RULES-PDF_WOUNDS5_HARDY'),MinPolice);
+    PdfEcrit(PdfPage,DessinDebutGaucheBle + 2,DessinLargeurBle,DessinDebutHautBle - (6 * DessinHauteurBle) + 1, GetTexteLibelle('RULES-PDF_WOUNDS7_Tot'),MinPolice);
     // Valeur Blessure
     Ch := IntToStr(Floor(BF/10));
     if Length(Ch) = 1 then Ch := ' '+Ch;

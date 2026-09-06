@@ -60,32 +60,32 @@ function TexteArme(PArme: StructureArme):String;
     Texte    := '';
     if Pos(ValeurGenerique,PArme.CodeArme) = 0 then
       begin
-        Texte := GetTexteLibelle('LAB_118') + ' : ';
+        Texte := GetTexteLibelle('RULES-LAB_118') + ' : ';
         if PArme.Mains <> 0 then
-          Texte  := Texte + SeparateurRetourLigne + SeparateurRetourLigne + GetTexteLibelle('LAB_053') + ' : ' + IntToStr(PArme.Mains);
+          Texte  := Texte + SeparateurRetourLigne + SeparateurRetourLigne + GetTexteLibelle('RULES-LAB_053') + ' : ' + IntToStr(PArme.Mains);
         if PArme.CalculDegat <> '' then
-          Texte  := Texte + SeparateurRetourLigne + SeparateurRetourLigne + GetTexteLibelle('LAB_058') + ' : ' + ReplaceTexteLibelle(PArme.CalculDegat);
+          Texte  := Texte + SeparateurRetourLigne + SeparateurRetourLigne + GetTexteLibelle('RULES-LAB_058') + ' : ' + ReplaceTexteLibelle(PArme.CalculDegat);
         if (PArme.CodeCompetence <> '-') and (PArme.Munition = 0) then
           begin
             PCompetence := cherchecompetence(PArme.CodeCompetence);
-            Texte  := Texte + SeparateurRetourLigne + SeparateurRetourLigne + GetTexteLibelle('LAB_009') + ' : ' + PCompetence.Libelle;
+            Texte  := Texte + SeparateurRetourLigne + SeparateurRetourLigne + GetTexteLibelle('RULES-LAB_009') + ' : ' + PCompetence.Libelle;
           end;
         if PArme.Prix <> '' then
-          Texte  := Texte + SeparateurRetourLigne + SeparateurRetourLigne + GetTexteLibelle('LAB_054') + ' : ' + PArme.Prix;
+          Texte  := Texte + SeparateurRetourLigne + SeparateurRetourLigne + GetTexteLibelle('RULES-LAB_054') + ' : ' + PArme.Prix;
         if PArme.Disponibilite <> '' then
-          Texte  := Texte + SeparateurRetourLigne + SeparateurRetourLigne + GetTexteLibelle('LAB_056') + ' : ' + GetAllTexteLibelle(PArme.Disponibilite);
+          Texte  := Texte + SeparateurRetourLigne + SeparateurRetourLigne + GetTexteLibelle('RULES-LAB_056') + ' : ' + GetAllTexteLibelle(PArme.Disponibilite);
         if PArme.Encombrement <> 0 then
-          Texte  := Texte + SeparateurRetourLigne + SeparateurRetourLigne + GetTexteLibelle('LAB_055') + ' : ' + IntToStr(PArme.Encombrement);
+          Texte  := Texte + SeparateurRetourLigne + SeparateurRetourLigne + GetTexteLibelle('RULES-LAB_055') + ' : ' + IntToStr(PArme.Encombrement);
         if PArme.Portee <> '' then
-          Texte  := Texte + SeparateurRetourLigne + SeparateurRetourLigne + GetTexteLibelle('LAB_057') + ' : ' + GetAllTexteLibelle(PArme.Portee);
+          Texte  := Texte + SeparateurRetourLigne + SeparateurRetourLigne + GetTexteLibelle('RULES-LAB_057') + ' : ' + GetAllTexteLibelle(PArme.Portee);
         if (PArme.Munition <> 0) and (IntToStr(PArme.Munition) <> '-') then
-          Texte  := Texte + SeparateurRetourLigne + SeparateurRetourLigne + GetTexteLibelle('LAB_060') + ' : ' + IntToStr(PArme.Munition);
+          Texte  := Texte + SeparateurRetourLigne + SeparateurRetourLigne + GetTexteLibelle('RULES-LAB_060') + ' : ' + IntToStr(PArme.Munition);
         if PArme.ListeBonus <> '' then
-          Texte  := Texte + SeparateurRetourLigne + SeparateurRetourLigne + GetTexteLibelle('LAB_034') + ' : ' + GetAllArmeBonusLibelle(PArme.ListeBonus);
+          Texte  := Texte + SeparateurRetourLigne + SeparateurRetourLigne + GetTexteLibelle('RULES-LAB_034') + ' : ' + GetAllArmeBonusLibelle(PArme.ListeBonus);
       end
     else
       begin
-        Texte := GetTexteLibelle('LAB_010') + ' : ';
+        Texte := GetTexteLibelle('RULES-LAB_010') + ' : ';
         Debut := copy(PArme.CodeArme,1,Length(PArme.CodeArme) - Length(ValeurGenerique) + 1);
         For Ind := 0 to NbArme-1 do
           Begin
@@ -106,22 +106,22 @@ function TexteLigneArme(PArme: StructureArme):String;
   begin
     Texte := PArme.Libelle + ' : ';
     if PArme.Mains <> 0 then
-      Texte  := Texte + '|' + GetTexteLibelle('LAB_053') + ' : ' + IntToStr(PArme.Mains);
+      Texte  := Texte + '|' + GetTexteLibelle('RULES-LAB_053') + ' : ' + IntToStr(PArme.Mains);
     if PArme.CalculDegat <> '' then
-      Texte  := Texte + '|' + GetTexteLibelle('LAB_058') + ' : ' + ReplaceTexteLibelle(PArme.CalculDegat);
+      Texte  := Texte + '|' + GetTexteLibelle('RULES-LAB_058') + ' : ' + ReplaceTexteLibelle(PArme.CalculDegat);
     if (PArme.CodeCompetence <> '-') and (PArme.Munition = 0) then
       begin
         PCompetence := cherchecompetence(PArme.CodeCompetence);
-        Texte  := Texte + '|' + GetTexteLibelle('LAB_009') + ' : ' + PCompetence.Libelle;
+        Texte  := Texte + '|' + GetTexteLibelle('RULES-LAB_009') + ' : ' + PCompetence.Libelle;
       end;
     if PArme.Encombrement <> 0 then
-      Texte  := Texte + '|' + GetTexteLibelle('LAB_055') + ' : ' + IntToStr(PArme.Encombrement);
+      Texte  := Texte + '|' + GetTexteLibelle('RULES-LAB_055') + ' : ' + IntToStr(PArme.Encombrement);
     if PArme.Portee <> '' then
-      Texte  := Texte + '|' + GetTexteLibelle('LAB_057') + ' : ' + GetAllTexteLibelle(PArme.Portee);
+      Texte  := Texte + '|' + GetTexteLibelle('RULES-LAB_057') + ' : ' + GetAllTexteLibelle(PArme.Portee);
     if (PArme.Munition <> 0) and (IntToStr(PArme.Munition) <> '-') then
-      Texte  := Texte + '|' + GetTexteLibelle('LAB_060') + ' : ' + IntToStr(PArme.Munition);
+      Texte  := Texte + '|' + GetTexteLibelle('RULES-LAB_060') + ' : ' + IntToStr(PArme.Munition);
     if PArme.ListeBonus <> '' then
-      Texte  := Texte + '|' + GetTexteLibelle('LAB_034') + ' : ' + GetAllArmeBonusLibelle(PArme.ListeBonus);
+      Texte  := Texte + '|' + GetTexteLibelle('RULES-LAB_034') + ' : ' + GetAllArmeBonusLibelle(PArme.ListeBonus);
     Result   := Texte;
   end;
 

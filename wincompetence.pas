@@ -222,7 +222,7 @@ begin
   if ChoixWinTypeFichier <> '' then
     begin
       if TabSpe.Visible then
-        showmessage(GetTexteLibelle('MESS_034'))
+        showmessage(GetTexteLibelle('RULES-MESS_034'))
       else
         begin
           SelectWinCompetence := TabCompetence.Cells[1, TabCompetence.Row];

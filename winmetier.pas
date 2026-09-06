@@ -335,7 +335,7 @@ begin
 
     if IndTab = 0 then
       begin
-        ShowMessage(GetTexteLibelle('MESS_048'));  // aucun résultat
+        ShowMessage(GetTexteLibelle('RULES-MESS_048'));  // aucun résultat
         SelectWinLivre     := '';
         SelectWinRace      := '';
         SelectWinGroupe    := '';

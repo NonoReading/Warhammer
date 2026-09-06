@@ -566,32 +566,32 @@ begin
 
   // tests
   if radiobuttonsuivant.Checked and (MaxNiveau > 0) and (StrToIntDef(MetierNvEnCours, 0) >= MaxNiveau) then
-    ShowMEssage(GetTexteLibelle('MESS_043'))
+    ShowMEssage(GetTexteLibelle('RULES-MESS_043'))
   // Combo visible et rien de selectionne : le joueur n'a pas dit vers quelle carriere il
   // monte. On ne choisit pas a sa place - continuer dans la carriere en cours est une
   // decision, pas un defaut.
   else if radiobuttonsuivant.Checked and ComboBoxNvMetier.Visible and (ComboBoxNvMetier.ItemIndex < 0) then
-    ShowMEssage(GetTexteLibelle('MESS_058'))
+    ShowMEssage(GetTexteLibelle('RULES-MESS_058'))
   else if (StrToIntDef(tabExperience.Cells[ColXpDonnee,LigXpCout],0) = 0) and (tabExperience.Cells[ColXpDonnee,LigXpTotal] = EditTotalXp.Text) and not radiobuttonsuivant.Checked and not radiobuttonChanger.Checked and (NbEquipement = TabEquipement.RowCount-1) and (not FabAjoute) then
-    ShowMEssage(GetTexteLibelle('MESS_024'))
+    ShowMEssage(GetTexteLibelle('RULES-MESS_024'))
   else if (XpDispo < 0) then
-    ShowMEssage(GetTexteLibelle('MESS_025'))
+    ShowMEssage(GetTexteLibelle('RULES-MESS_025'))
   else if StrToIntDef(EditTotalXp.Text,0) < StrToIntDef(tabExperience.Cells[ColXpDonnee,LigXpTotal],0) then
-    ShowMEssage(GetTexteLibelle('MESS_026'))
+    ShowMEssage(GetTexteLibelle('RULES-MESS_026'))
   else if radiobuttonChanger.Checked and (NvMetier = '') then
-    ShowMEssage(GetTexteLibelle('MESS_027'))
+    ShowMEssage(GetTexteLibelle('RULES-MESS_027'))
   else if radiobuttonsuivant.Checked and Not CarriereComplete then
-    ShowMEssage(GetTexteLibelle('MESS_028'))
+    ShowMEssage(GetTexteLibelle('RULES-MESS_028'))
   else if radiobuttonsuivant.Checked and CarriereComplete and (XpDispo < EditNeedRealXp.Value) then
-    ShowMEssage(GetTexteLibelle('MESS_029')+IntToStr(EditNeedRealXp.Value))
+    ShowMEssage(GetTexteLibelle('RULES-MESS_029')+IntToStr(EditNeedRealXp.Value))
   else if radiobuttonChanger.Checked and CarriereComplete and (XpDispo < EditNeedRealXp.Value)  then
-    ShowMEssage(GetTexteLibelle('MESS_030')+IntToStr(EditNeedRealXp.Value))
+    ShowMEssage(GetTexteLibelle('RULES-MESS_030')+IntToStr(EditNeedRealXp.Value))
   else if radiobuttonChanger.Checked and Not CarriereComplete and (XpDispo < EditNeedRealXp.Value) then
-    ShowMEssage(GetTexteLibelle('MESS_031')+IntToStr(EditNeedRealXp.Value))
+    ShowMEssage(GetTexteLibelle('RULES-MESS_031')+IntToStr(EditNeedRealXp.Value))
   else if (radiobuttonChanger.Checked or radiobuttonsuivant.Checked) and ChoixNonFait() then
-    ShowMEssage(GetTexteLibelle('MESS_032'))
+    ShowMEssage(GetTexteLibelle('RULES-MESS_032'))
   else if AjoutMineur and (RechercherDansColonne(TabSort, ConstArbreAuChoix, 2) <> -1) then
-    ShowMEssage(GetTexteLibelle('MESS_033'))
+    ShowMEssage(GetTexteLibelle('RULES-MESS_033'))
   else
     MajTables();
 end;
@@ -792,7 +792,7 @@ procedure TWinPersonnages.ButtonDeleteClick(Sender: TObject);
       // Remplace la liste fermee des six TypSpell, qui laissait passer les rituels.
       and (TalentSort(TabEquipement.Cells[2, TabEquipement.Row]).CodeTalent = '') then
         begin
-          Reponse := MessageDlg(GetTexteLibelle('MESS_039'), mtConfirmation, mbYesNo, 0);
+          Reponse := MessageDlg(GetTexteLibelle('RULES-MESS_039'), mtConfirmation, mbYesNo, 0);
           if Reponse = mrYes then
             begin
               // Décale les lignes suivantes vers le haut
@@ -821,7 +821,7 @@ procedure TWinPersonnages.ButtonCorruptionSupprimeClick(Sender: TObject);
   begin
     if StringGridCorruption.Row > 0 then
       begin
-        Reponse := MessageDlg(GetTexteLibelle('MESS_053'), mtConfirmation, mbYesNo, 0);
+        Reponse := MessageDlg(GetTexteLibelle('RULES-MESS_053'), mtConfirmation, mbYesNo, 0);
         if Reponse = mrYes then
           begin
             // Décale les lignes suivantes vers le haut
@@ -1049,7 +1049,7 @@ procedure TWinPersonnages.ButtonRaceSelectionnerClick(Sender: TObject);
     // carrieres doivent rester VISIBLES et consultables, seule leur selection est refusee.
     if (ChoixWinMetierRace <> '') and (ChercheMinMetierNiveau(ChoixWinMetierRace) > 1) then
       begin
-        ShowMessage(GetTexteLibelle('MESS_057') + IntToStr(ChercheMinMetierNiveau(ChoixWinMetierRace)));
+        ShowMessage(GetTexteLibelle('RULES-MESS_057') + IntToStr(ChercheMinMetierNiveau(ChoixWinMetierRace)));
         ChoixWinMetierRace := '';
       end;
 
@@ -1278,7 +1278,7 @@ procedure TWinPersonnages.ButtonSortClick(Sender: TObject);
         end;
 
     if ListeTalent = '' then
-      showMessage(GetTexteLibelle('MESS_037'))
+      showMessage(GetTexteLibelle('RULES-MESS_037'))
     else
       begin
       SelectWinSort     := ListeTalent;
@@ -1301,7 +1301,7 @@ procedure TWinPersonnages.ButtonSortClick(Sender: TObject);
               CalculTableExperience();
             end
           else
-            ShowMEssage(GetTexteLibelle('MESS_036'));
+            ShowMEssage(GetTexteLibelle('RULES-MESS_036'));
         end;
       end;
     SelectWinSort := '';
@@ -2590,7 +2590,7 @@ procedure TWinPersonnages.TabAugmentationCompetenceDblClick(Sender: TObject);
                   break;
                 end;
             if Trouve then
-               ShowMessage(GetTexteLibelle('MESS_047'))  // déjà présent
+               ShowMessage(GetTexteLibelle('RULES-MESS_047'))  // déjà présent
             else
               begin
                 // ajouter la compétence et ajouter une nouvelle ligne dans la table
@@ -2682,7 +2682,7 @@ procedure TWinPersonnages.TabAugmentationTalentDblClick(Sender: TObject);
                   break;
                 end;
             if Trouve then
-               ShowMessage(GetTexteLibelle('MESS_047'))  // déjà présent
+               ShowMessage(GetTexteLibelle('RULES-MESS_047'))  // déjà présent
             else
               begin
                 // ajouter le talent et ajouter une nouvelle ligne dans la table

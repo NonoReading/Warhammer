@@ -575,8 +575,8 @@
 <Text name="RULES-PDF_CORRUPTION_LOST">"Perdu"</Text>
 <Text name="RULES-PDF_CORRUPTION_LEFT">"Restant"</Text>
 <Text name="RULES-PDF_CORRUPTION_HISTORY">"HISTORIQUE DE CORRUPTION"</Text>
-<Text name="CORRUPTION_PHYSICAL">"Corruption Physique"</Text>
-<Text name="CORRUPTION_MENTAL">"Corruption Mentale"</Text>
+<Text name="RULES-CORRUPTION_PHYSICAL">"Corruption Physique"</Text>
+<Text name="RULES-CORRUPTION_MENTAL">"Corruption Mentale"</Text>
 </Label>
 </DATA_LABEL>
 <DATA_SKILL>

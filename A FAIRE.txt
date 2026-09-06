@@ -36,17 +36,6 @@ SUPPRIMER TRACE_references_nues.txt A LA RACINE. Le mouchard qui l ecrivait est 
 mais je n ai pas pu le supprimer moi-meme (pas d acces suppression sur ce poste). Jetable des
 que tu veux.
 
-SORTIR LES GetTexteLibelle('PDF_XXX') EN DUR EN CONSTANTES PREFIXEES RULES-. Prealable
-decouvert le 06/09/2026 en tentant l etape 4 de 2.49 (durcissement de VerifieRecherche,
-revertee le jour meme) : 216 occurrences, 144 codes distincts rien que dans
-pdfpersonnage.pas, passent un code nu alors que chargetexte.pas les compare a une definition
-prefixee venue du XML - ca ne marche que grace a la tolerance de VerifieRecherche. Sans
-effet tant que la tolerance reste en place, mais bloque tout nouveau durcissement. A traiter
-sur le modele de ConstCaracXxx ou du prefixage des LAB_ (etape 4 de 2.49) : verifier d abord
-qu aucun code n est construit dynamiquement, traiter fichier par fichier, tester a l ecran a
-chaque lot. Verifier aussi les autres unites pdf*.pas/win*.pas, le grep du 06/09 n a porte
-que sur pdfpersonnage.pas. Voir CONTEXT.md 2.49 etape 4 pour le detail complet.
-
 LE TEST DE RADICAL DE TALENT SUPPOSE UN CODE DE 5 CARACTERES. winpersonnage.pas l.3245,
 copy(CodeSansLivre(...),1,5) : vrai pour les 868 codes en T+4 chiffres, faux pour les ids
 "A ou B" comme T0009/RULES-T0067 (seul le premier est compare) et pour le generique T*. Ce
