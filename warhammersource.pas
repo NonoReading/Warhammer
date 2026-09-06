@@ -1061,12 +1061,6 @@ procedure TMenu.FormCreate(Sender: TObject);
       gTTFontCache.BuildFontCache;
 
       ImageTmp := GetCurrentDir+'TMP.PNG';
-
-      // Mouchard des references nues (CONTEXT.md 2.49 etape 4). Tous les livres sont charges
-      // ici : on depose le releve a la racine, sans fenetre ni clic. A RETIRER une fois le
-      // durcissement de VerifieRecherche decide - ce n'est pas un fichier de suivi du projet,
-      // c'est une trace technique jetable.
-      TraceNuEcritFichier(GetCurrentDir + PathDelim + 'TRACE_references_nues.txt');
   end;
 
 procedure TMenu.ButtonCompetenceClick(Sender: TObject);

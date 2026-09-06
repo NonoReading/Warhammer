@@ -52,7 +52,7 @@
         <IsVisibleTab Value="True"/>
         <EditorIndex Value="1"/>
         <TopLine Value="211"/>
-        <CursorPos X="36" Y="231"/>
+        <CursorPos X="43" Y="225"/>
         <UsageCount Value="200"/>
         <Loaded Value="True"/>
       </Unit>
@@ -542,7 +542,7 @@
         <EditorIndex Value="-1"/>
         <TopLine Value="5"/>
         <CursorPos X="34" Y="11"/>
-        <UsageCount Value="129"/>
+        <UsageCount Value="130"/>
       </Unit>
       <Unit>
         <Filename Value="chargetalentattributmodif.pas"/>
@@ -551,7 +551,7 @@
         <EditorIndex Value="-1"/>
         <TopLine Value="3"/>
         <CursorPos X="43" Y="13"/>
-        <UsageCount Value="123"/>
+        <UsageCount Value="124"/>
       </Unit>
       <Unit>
         <Filename Value="chargetalentcompetencemodif.pas"/>
@@ -559,7 +559,7 @@
         <UnitName Value="ChargeTalentCompetenceModif"/>
         <EditorIndex Value="-1"/>
         <CursorPos X="31" Y="17"/>
-        <UsageCount Value="120"/>
+        <UsageCount Value="121"/>
       </Unit>
       <Unit>
         <Filename Value="chargetalentcompetenceajoute.pas"/>
@@ -567,7 +567,7 @@
         <UnitName Value="ChargeTalentCompetenceAjoute"/>
         <EditorIndex Value="-1"/>
         <CursorPos X="43" Y="14"/>
-        <UsageCount Value="119"/>
+        <UsageCount Value="120"/>
       </Unit>
       <Unit>
         <Filename Value="winlancede.pas"/>
@@ -578,7 +578,7 @@
         <UnitName Value="WinLanceDe"/>
         <TopLine Value="44"/>
         <CursorPos X="29" Y="52"/>
-        <UsageCount Value="77"/>
+        <UsageCount Value="78"/>
         <Loaded Value="True"/>
         <LoadedDesigner Value="True"/>
       </Unit>
@@ -592,7 +592,7 @@
         <EditorIndex Value="-1"/>
         <TopLine Value="82"/>
         <CursorPos X="27" Y="94"/>
-        <UsageCount Value="49"/>
+        <UsageCount Value="50"/>
       </Unit>
       <Unit>
         <Filename Value="unitcreationrace.pas"/>

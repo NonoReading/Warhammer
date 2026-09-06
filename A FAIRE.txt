@@ -12,25 +12,22 @@ CONTEXT_MENU_INTEGRATION.md, REPRISE_session_20260809.md. Meme famille que les C
 TODO.md retires le 03/09 : ce qui est encore vrai va dans CONTEXT.md, ce qui reste a faire ici,
 puis on supprime. Il ne doit rester que CONTEXT.md, Log.txt et A FAIRE.txt.
 
-RETIRER LE MOUCHARD DES REFERENCES NUES QUAND L ETAPE 4 DU 2.49 SERA CLOSE. Pose le
-05/09/2026 : TraceNuNb / TraceNuListe / TraceNuRaz / TraceNuRapport / TraceNuEcritFichier dans
-chargeconstantes.pas, la branche tolerante de VerifieRecherche qui les alimente, et l appel en
-fin de FormCreate de warhammersource.pas. Le fichier TRACE_references_nues.txt est jetable,
-ce n est pas un quatrieme fichier de suivi du projet.
+SUPPRIMER TRACE_references_nues.txt A LA RACINE. Le mouchard qui l ecrivait est retire le
+06/09/2026 (2.49 etape 4) et n a pas ete remis en place malgre le rollback du durcissement
+(son travail sur le perimetre qu il mesurait est fait) : le fichier ne sera plus regenere,
+mais je n ai pas pu le supprimer moi-meme (pas d acces suppression sur ce poste). Jetable des
+que tu veux.
 
-SUPPRIMER LES ANCIENS PERSONNAGES DE CURRENT. Decide par Nono le 05/09/2026. Leurs codes sont
-nus (fiches d avant le prefixage) et representent 44 des 95 couples du releve de references
-nues. Tant qu ils sont la, le durcissement de VerifieRecherche les casse ; une fois partis, la
-question disparait. C est cette decision qui rend inutile le script de migration des fiches.
-
-TRANCHER LE CAS DES CINQ ConstCaracXxx AVANT LE DURCISSEMENT (2.49 etape 4). Elles servent
-DEUX usages incompatibles : identifiant a resoudre, et fragment de texte cherche dans les
-donnees. Les prefixer casserait (a) StringReplace de '('+ConstCaracCC+')' contre le texte des
-livres ou le code est ecrit NU, pdfpersonnage.pas l.470-498, et (b) les trois case l.1078,
-1083 et 1094 qui retirent DEJA le prefixe de la donnee avant de comparer - BE, BF et BFM
-tomberaient a zero. Trois pistes : deux series de constantes (sur, mais doublonne quinze
-constantes) ; prefixer aux cinq points d appel seulement (le moins invasif, ma preference) ;
-ou tolerer explicitement ces cinq appels au durcissement.
+SORTIR LES GetTexteLibelle('PDF_XXX') EN DUR EN CONSTANTES PREFIXEES RULES-. Prealable
+decouvert le 06/09/2026 en tentant l etape 4 de 2.49 (durcissement de VerifieRecherche,
+revertee le jour meme) : 216 occurrences, 144 codes distincts rien que dans
+pdfpersonnage.pas, passent un code nu alors que chargetexte.pas les compare a une definition
+prefixee venue du XML - ca ne marche que grace a la tolerance de VerifieRecherche. Sans
+effet tant que la tolerance reste en place, mais bloque tout nouveau durcissement. A traiter
+sur le modele de ConstCaracXxx ou du prefixage des LAB_ (etape 4 de 2.49) : verifier d abord
+qu aucun code n est construit dynamiquement, traiter fichier par fichier, tester a l ecran a
+chaque lot. Verifier aussi les autres unites pdf*.pas/win*.pas, le grep du 06/09 n a porte
+que sur pdfpersonnage.pas. Voir CONTEXT.md 2.49 etape 4 pour le detail complet.
 
 LE TEST DE RADICAL DE TALENT SUPPOSE UN CODE DE 5 CARACTERES. winpersonnage.pas l.3245,
 copy(CodeSansLivre(...),1,5) : vrai pour les 868 codes en T+4 chiffres, faux pour les ids

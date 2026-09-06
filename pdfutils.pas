@@ -103,10 +103,16 @@ Procedure PdfEcrit(PdfPage: TPDFPage; Min: Single; Max: Single; Y: Single; Texte
     if DeuxLignes = true then
       begin
         SousTrait := 1;
-        while TailleTexte(UTF8Copy(Texte, 1, UTF8Length(Texte) - Soustrait), TailleTemp)  > Diff do
+        // Bornage du 06/09/2026 (CONTEXT.md - regression Feldo2P) : sans le test sur
+        // UTF8Length(Texte), un texte sans espace/'|'/',' (ex. un code non resolu affiche
+        // brut) faisait tourner ces deux while indefiniment - UTF8Copy renvoie '' au-dela
+        // du debut de la chaine, et '' n'est jamais egal a ' ', '|' ou ','.
+        while (Soustrait < UTF8Length(Texte))
+              and (TailleTexte(UTF8Copy(Texte, 1, UTF8Length(Texte) - Soustrait), TailleTemp)  > Diff) do
           Inc(Soustrait);
 
-        while (UTF8Copy(Texte, UTF8Length(Texte) - Soustrait, 1) <> ' ')
+        while (Soustrait < UTF8Length(Texte))
+              and (UTF8Copy(Texte, UTF8Length(Texte) - Soustrait, 1) <> ' ')
               and (UTF8Copy(Texte, UTF8Length(Texte) - Soustrait, 1) <> '|')
               and (UTF8Copy(Texte, UTF8Length(Texte) - Soustrait, 1) <> ',') do
           Inc(Soustrait);
@@ -120,10 +126,12 @@ Procedure PdfEcrit(PdfPage: TPDFPage; Min: Single; Max: Single; Y: Single; Texte
             Texte2 := Ligne2;
             SousTrait := 1;
 
-            while TailleTexte(UTF8Copy(Texte2, 1, UTF8Length(Texte2) - Soustrait), TailleTemp)  > Diff do
+            while (Soustrait < UTF8Length(Texte2))
+                  and (TailleTexte(UTF8Copy(Texte2, 1, UTF8Length(Texte2) - Soustrait), TailleTemp)  > Diff) do
               Inc(Soustrait);
 
-            while (UTF8Copy(Texte2, UTF8Length(Texte2) - Soustrait, 1) <> ' ')
+            while (Soustrait < UTF8Length(Texte2))
+                  and (UTF8Copy(Texte2, UTF8Length(Texte2) - Soustrait, 1) <> ' ')
                   and (UTF8Copy(Texte2, UTF8Length(Texte2) - Soustrait, 1) <> '|')
                   and (UTF8Copy(Texte2, UTF8Length(Texte2) - Soustrait, 1) <> ',') do
               Inc(Soustrait);

@@ -468,34 +468,34 @@ Function PdfPersonnageRemplaceBonus(Personnage: StructurePersonnage; ChW: String
   Begin
     Res    := ChW;
     Donnee := PdfPersonnageAttribut(Personnage, ConstCaracCC, Bonus);
-    Res    := StringReplace(Res, '('+ConstCaracCC+')',       InttoStr(Donnee.Total), [rfIgnoreCase]);
+    Res    := StringReplace(Res, '('+CodeSansLivre(ConstCaracCC)+')',       InttoStr(Donnee.Total), [rfIgnoreCase]);
     Res    := StringReplace(Res, '('+ConstBonusCaracCC+')',  InttoStr(floor(Donnee.Total/10)), [rfIgnoreCase]);
     Donnee := PdfPersonnageAttribut(Personnage, ConstCaracCT, Bonus);
-    Res    := StringReplace(Res, '('+ConstCaracCT+')',       InttoStr(Donnee.Total), [rfIgnoreCase]);
+    Res    := StringReplace(Res, '('+CodeSansLivre(ConstCaracCT)+')',       InttoStr(Donnee.Total), [rfIgnoreCase]);
     Res    := StringReplace(Res, '('+ConstBonusCaracCT+')',  InttoStr(floor(Donnee.Total/10)), [rfIgnoreCase]);
     Donnee := PdfPersonnageAttribut(Personnage, ConstCaracF, Bonus);
-    Res    := StringReplace(Res, '('+ConstCaracF+')',        InttoStr(Donnee.Total), [rfIgnoreCase]);
+    Res    := StringReplace(Res, '('+CodeSansLivre(ConstCaracF)+')',        InttoStr(Donnee.Total), [rfIgnoreCase]);
     Res    := StringReplace(Res, '('+ConstBonusCaracF+')',   InttoStr(floor(Donnee.Total/10)), [rfIgnoreCase]);
     Donnee := PdfPersonnageAttribut(Personnage, ConstCaracE, Bonus);
-    Res    := StringReplace(Res, '('+ConstCaracE+')',        InttoStr(Donnee.Total), [rfIgnoreCase]);
+    Res    := StringReplace(Res, '('+CodeSansLivre(ConstCaracE)+')',        InttoStr(Donnee.Total), [rfIgnoreCase]);
     Res    := StringReplace(Res, '('+ConstBonusCaracE+')',   InttoStr(floor(Donnee.Total/10)), [rfIgnoreCase]);
     Donnee := PdfPersonnageAttribut(Personnage, ConstCaracI, Bonus);
-    Res    := StringReplace(Res, '('+ConstCaracI+')',        InttoStr(Donnee.Total), [rfIgnoreCase]);
+    Res    := StringReplace(Res, '('+CodeSansLivre(ConstCaracI)+')',        InttoStr(Donnee.Total), [rfIgnoreCase]);
     Res    := StringReplace(Res, '('+ConstBonusCaracI+')',   InttoStr(floor(Donnee.Total/10)), [rfIgnoreCase]);
     Donnee := PdfPersonnageAttribut(Personnage, ConstCaracAg, Bonus);
-    Res    := StringReplace(Res, '('+ConstCaracAg+')',       InttoStr(Donnee.Total), [rfIgnoreCase]);
+    Res    := StringReplace(Res, '('+CodeSansLivre(ConstCaracAg)+')',       InttoStr(Donnee.Total), [rfIgnoreCase]);
     Res    := StringReplace(Res, '('+ConstBonusCaracAg+')',  InttoStr(floor(Donnee.Total/10)), [rfIgnoreCase]);
     Donnee := PdfPersonnageAttribut(Personnage, ConstCaracDex, Bonus);
-    Res    := StringReplace(Res, '('+ConstCaracDex+')',      InttoStr(Donnee.Total), [rfIgnoreCase]);
+    Res    := StringReplace(Res, '('+CodeSansLivre(ConstCaracDex)+')',      InttoStr(Donnee.Total), [rfIgnoreCase]);
     Res    := StringReplace(Res, '('+ConstBonusCaracDex+')', InttoStr(floor(Donnee.Total/10)), [rfIgnoreCase]);
     Donnee := PdfPersonnageAttribut(Personnage, ConstCaracInt, Bonus);
-    Res    := StringReplace(Res, '('+ConstCaracInt+')',      InttoStr(Donnee.Total), [rfIgnoreCase]);
+    Res    := StringReplace(Res, '('+CodeSansLivre(ConstCaracInt)+')',      InttoStr(Donnee.Total), [rfIgnoreCase]);
     Res    := StringReplace(Res, '('+ConstBonusCaracInt+')', InttoStr(floor(Donnee.Total/10)), [rfIgnoreCase]);
     Donnee := PdfPersonnageAttribut(Personnage, ConstCaracFM, Bonus);
-    Res    := StringReplace(Res, '('+ConstCaracFM+')',       InttoStr(Donnee.Total), [rfIgnoreCase]);
+    Res    := StringReplace(Res, '('+CodeSansLivre(ConstCaracFM)+')',       InttoStr(Donnee.Total), [rfIgnoreCase]);
     Res    := StringReplace(Res, '('+ConstBonusCaracFM+')',  InttoStr(floor(Donnee.Total/10)), [rfIgnoreCase]);
     Donnee := PdfPersonnageAttribut(Personnage, ConstCaracSoc, Bonus);
-    Res    := StringReplace(Res, '('+ConstCaracSoc+')',      InttoStr(Donnee.Total), [rfIgnoreCase]);
+    Res    := StringReplace(Res, '('+CodeSansLivre(ConstCaracSoc)+')',      InttoStr(Donnee.Total), [rfIgnoreCase]);
     Res    := StringReplace(Res, '('+ConstBonusCaracSoc+')', InttoStr(floor(Donnee.Total/10)), [rfIgnoreCase]);
     Result := Res;
   end;
@@ -1076,12 +1076,12 @@ Procedure PdfPersonnageCreation(Personnage: StructurePersonnage; BackGround: Boo
     Determine      := 0;
     For PRaceAttribut in ListRaceAttribut do
       if PRaceAttribut.CodeRace = Personnage.Race then
-        case ExtractStringAfter(PRaceAttribut.CodeAttribut, SeparateurLivre) of
+        case PRaceAttribut.CodeAttribut of
           ConstCaracDestin: Chance    := Chance    + StrToIntDef(PRaceAttribut.CalculRace,0);
           ConstCaracResil:  Determine := Determine + StrToIntDef(PRaceAttribut.CalculRace,0);
         end;
     for PersonnageAttribut in Personnage.CreationAttribut do
-      case ExtractStringAfter(PersonnageAttribut.CodeAttribut, SeparateurLivre) of
+      case PersonnageAttribut.CodeAttribut of
         ConstCaracDestin: Chance    := Chance    + PersonnageAttribut.Valeur;
         ConstCaracResil:  Determine := Determine + PersonnageAttribut.Valeur;
       end;
@@ -1092,7 +1092,7 @@ Procedure PdfPersonnageCreation(Personnage: StructurePersonnage; BackGround: Boo
         PAttribut      := ListeAttribut[Ind];
         AttributDonnee := PdfPersonnageAttribut(Personnage, PAttribut.CodeAttribut, Bonus);
         val            := AttributDonnee.Total;
-        case ExtractStringAfter(PAttribut.CodeAttribut, SeparateurLivre) of
+        case PAttribut.CodeAttribut of
           ConstCaracE:  BE  := Val;
           ConstCaracF:  BF  := Val;
           ConstCaracFM: BFM := Val;
@@ -1493,9 +1493,9 @@ Procedure PdfPersonnageCreation(Personnage: StructurePersonnage; BackGround: Boo
               PArme      := ChercheArme(PersonnageEquipement.CodeEquipement);
 
               Portee     := PArme.Portee;
-              if Pos('(B'+ConstCaracF+')',Portee) > 0 then
+              if Pos('('+ConstBonusCaracF+')',Portee) > 0 then
                 begin
-                  Portee       := StringReplace(Portee, '(B'+ConstCaracF+')', IntToStr(Trunc(BF/10)), [rfReplaceAll]);;
+                  Portee       := StringReplace(Portee, '('+ConstBonusCaracF+')', IntToStr(Trunc(BF/10)), [rfReplaceAll]);;
                   PorteMoyenne := MultiChaine(Portee);
                   Portee       := IntToStr(PorteMoyenne);
                 end
@@ -2651,9 +2651,9 @@ Procedure PdfBlocArmesDonnees(PdfPage: TPDFPage; Personnage: StructurePersonnage
           PArme      := ChercheArme(PersonnageEquipement.CodeEquipement);
 
           Portee     := PArme.Portee;
-          if Pos('(B'+ConstCaracF+')',Portee) > 0 then
+          if Pos('('+ConstBonusCaracF+')',Portee) > 0 then
             begin
-              Portee       := StringReplace(Portee, '(B'+ConstCaracF+')', IntToStr(Trunc(BF/10)), [rfReplaceAll]);;
+              Portee       := StringReplace(Portee, '('+ConstBonusCaracF+')', IntToStr(Trunc(BF/10)), [rfReplaceAll]);;
               PorteMoyenne := MultiChaine(Portee);
               Portee       := IntToStr(PorteMoyenne);
             end
@@ -3872,12 +3872,12 @@ Procedure PdfPersonnageCreationFeldo2P(Personnage: StructurePersonnage);
     Determine      := 0;
     For PRaceAttribut in ListRaceAttribut do
       if CompareRechercheValeur(Personnage.Race, PRaceAttribut.CodeRace) then
-        case ExtractStringAfter(PRaceAttribut.CodeAttribut, SeparateurLivre) of
+        case PRaceAttribut.CodeAttribut of
           ConstCaracDestin: Chance    := Chance    + StrToIntDef(PRaceAttribut.CalculRace,0);
           ConstCaracResil:  Determine := Determine + StrToIntDef(PRaceAttribut.CalculRace,0);
         end;
     for PersonnageAttribut in Personnage.CreationAttribut do
-      case ExtractStringAfter(PersonnageAttribut.CodeAttribut, SeparateurLivre) of
+      case PersonnageAttribut.CodeAttribut of
         ConstCaracDestin: Chance    := Chance    + PersonnageAttribut.Valeur;
         ConstCaracResil:  Determine := Determine + PersonnageAttribut.Valeur;
       end;
@@ -3889,7 +3889,7 @@ Procedure PdfPersonnageCreationFeldo2P(Personnage: StructurePersonnage);
         PAttribut      := ListeAttribut[Ind];
         AttributDonnee := PdfPersonnageAttribut(Personnage, PAttribut.CodeAttribut, Bonus);
         val            := AttributDonnee.Total;
-        case ExtractStringAfter(PAttribut.CodeAttribut, SeparateurLivre) of
+        case PAttribut.CodeAttribut of
           ConstCaracE:  BE  := Val;
           ConstCaracF:  BF  := Val;
           ConstCaracFM: BFM := Val;

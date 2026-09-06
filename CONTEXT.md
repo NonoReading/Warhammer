@@ -1,29 +1,25 @@
 # Warhammer — Contexte projet
 
-**Dernière mise à jour : 05/09/2026 (soir) — les deux préalables de l'étape 4 du §2.49 sont
-levés, un mouchard mesure ce que coûterait le durcissement, et les 677 références `LAB_` du
-code Pascal sont préfixées.**
+**Dernière mise à jour : 06/09/2026 — le §2.49 (préfixes de livre dans les références) est
+préfixage FAIT, mais le durcissement de l'étape 4 a été REVERTÉ le jour même : il cassait
+les PDF (normal ET Feldo2P) en silence. `VerifieRecherche` a retrouvé sa tolérance sur un
+second argument nu.**
 
-PROCHAINE ÉTAPE : §2.49 étape 4, mais **deux arbitrages avant d'écrire une ligne** :
-1. **Les cinq `ConstCaracXxx`** (`chargeconstantes.pas` l.259-273) ne se préfixent PAS comme les
-   `ARMOL_` : leur valeur sert aussi de **motif texte** (`StringReplace` de `'('+ConstCaracCC+')'`,
-   `pdfpersonnage.pas` l.470-498) et trois `case` (l.1078, 1083, 1094) retirent déjà le préfixe de
-   la donnée avant de comparer. Les préfixer viderait les substitutions du PDF et mettrait `BE`,
-   `BF`, `BFM` à zéro. Trois pistes dans `A FAIRE.txt` ; ma préférence va au préfixage **aux cinq
-   points d'appel** plutôt qu'à la constante.
-2. **La suppression des anciens personnages de `CURRENT\`**, décidée par Nono le 05/09 : tant
-   qu'ils sont là, le durcissement les casse ; une fois partis, la famille disparaît. Ni
-   migration ni tolérance à écrire — c'est la décision qui a rendu inutile le script de
-   migration qu'on s'apprêtait à faire.
-Le mouchard (`TRACE_references_nues.txt`) est **à retirer** une fois l'étape 4 close : il est
-jetable, ce n'est pas un fichier de suivi du projet.
-Deux chantiers ont été **capturés dans `A FAIRE.txt`** le 05/09 (section CONCEPTIONS A MENER),
-sans une ligne de code : l'affichage des **disclaimers des livres** depuis un bouton du menu
-principal, et la **gestion de l'ancrage des contrôles** dans les fenêtres. Ni l'un ni l'autre
-ne change le point de reprise ci-dessus.
-Les points de reprise du chantier des appartenances (§2.44) sont INCHANGÉS : rendre
-l'appartenance visible sur la fiche et dans le PDF, le 3d-3 (ordres de chevalerie, bloqué par
-« le modèle ne porte pas d'effet de règle »), et les onze Regiments of Renown.
+PROCHAINE ÉTAPE : deux chantiers ouverts. Le plus proche, celui qui a fait annuler le
+durcissement : **sortir en constantes préfixées `RULES-` tous les `GetTexteLibelle('PDF_XXX')`
+écrits en dur dans `pdfpersonnage.pas`** (216 occurrences, 144 codes distincts recensés le
+06/09 ; probablement d'autres fichiers `pdf*.pas`/`win*.pas` à vérifier) — tant que ce n'est
+pas fait, ne PAS retenter le durcissement de `VerifieRecherche`, voir §2.49 étape 4 pour le
+détail de ce qui casse et pourquoi le mouchard ne l'avait pas vu. Le second, sans lien, est les
+**appartenances (§2.44)**, INCHANGÉ : rendre l'appartenance visible sur la fiche et dans le
+PDF, le 3d-3 (ordres de chevalerie, bloqué par « le modèle ne porte pas d'effet de règle »),
+et les onze Regiments of Renown.
+Petites choses en attente, sans urgence : distiller puis supprimer les quatre `.md` parasites
+de la racine (`CHANTIER_versionning_livres.md`, `CONCEPTION_creation_choix_talents.md`,
+`CONTEXT_MENU_INTEGRATION.md`, `REPRISE_session_20260809.md`) ; et deux chantiers capturés
+dans `A FAIRE.txt` le 05/09 sans une ligne de code : l'affichage des **disclaimers des
+livres** depuis le menu principal, et la **gestion de l'ancrage des contrôles** dans les
+fenêtres.
 
 ⚠️ Lire le §0 sur **l'écriture qui répond « écrit » sans écrire** : quatre occurrences le
 05/09 au soir, toujours au **premier envoi suivant un restage**, toujours réparées en
@@ -4880,7 +4876,7 @@ observable, `StrToIntDef` rendant 0 et le test exigeant `>= 1`. Corrigée en `2`
 lignes de commentaire pour que la borne 11 ne soit pas re-signalée comme un bug. 230 613
 octets.
 
-### 2.49 Les préfixes de livre dans les références — étapes 1, 2, 3, 5, le préfixage des cinq familles et les deux préalables de l'étape 4 TERMINÉS (05/09/2026) ; reste 4
+### 2.49 Les préfixes de livre dans les références — TERMINÉ (06/09/2026)
 
 **La règle du projet.** Chaque livre repart à 1 dans sa numérotation, précisément pour ne
 pas avoir à connaître le dernier numéro pris ailleurs. Cela n'est vrai que si les
@@ -5054,7 +5050,7 @@ Les autres lectures étaient tolérantes, vérifié **avant** d'écrire les donn
 mais entre deux valeurs de même nature : le préfixage **complet et uniforme** la laisse juste —
 c'est un préfixage partiel qui l'aurait cassée.
 
-#### Ce qui reste
+#### Étape 4 — durcissement TENTÉ PUIS REVERTÉ le jour même (06/09/2026)
 
 **Les deux préalables sont FAITS (05/09/2026, soir).**
 
@@ -5078,8 +5074,8 @@ tolérante ; relevé écrit en fin de `FormCreate` dans `TRACE_references_nues.t
 |---|---|---|
 | Codes de livre comparés à leur nom de fichier | ~20 | Structurel, hors sujet |
 | Libellés `LAB_` en dur dans le Pascal | 31 | **Corrigé** : 677 occurrences préfixées, 23 unités |
-| Constantes `ConstCaracXxx` nues | 5 | **Bloqué**, voir le piège en tête de fichier |
-| Codes des anciennes fiches `CURRENT\` | ~44 | Fiches vouées à la suppression : rien à faire |
+| Constantes `ConstCaracXxx` nues | 5 | **Corrigé le 06/09/2026** : les 15 constantes préfixées (piste B, décision Nono), voir tête de fichier |
+| Codes des anciennes fiches `CURRENT\` | ~44 | **Corrigé le 06/09/2026** : dossier `CURRENT\` supprimé |
 
 Le relevé a rendu **concret** le risque décrit en tête du §2.49 : `UPINA-WORK71 <- WORK71` et
 `WINDS-WORK85 <- WORK85` — deux carrières nues d'une vieille fiche se résolvent vers Up in Arms
@@ -5091,8 +5087,49 @@ introuvable, et surtout qu'**aucune forme n'est construite dynamiquement** (`'LA
 c'est ce dernier point qui autorise un remplacement mécanique. Un fichier traité et testé à
 l'écran (`warhammersource.pas`, 76) avant les 22 autres (601).
 
-4. **Durcir `VerifieRecherche`** : il ne reste que ça, une fois les deux arbitrages rendus.
-   Retirer le mouchard à cette occasion.
+4. **`VerifieRecherche` durci puis reverté, le même jour (06/09/2026).** Durci d'abord : la
+   tolérance sur un second argument nu retirée (`chargeconstantes.pas`) — `result :=
+   (LivreRecherche = LivreValeur) and (CodeRecherche = CodeValeur)`, plus de branche à part.
+   Le mouchard `TraceNuRaz` / `TraceNuRapport` / `TraceNuEcritFichier` et les variables
+   `TraceNuNb`/`TraceNuListe` retirés du code, ainsi que l'appel en fin de `FormCreate` de
+   `warhammersource.pas`.
+
+   **Conséquence en test (Nono) : PDF cassé, normal ET Feldo2P.** Deux symptômes distincts :
+   - Un vrai gel (boucle infinie) sur le PDF Feldo2P, dû à un bug latent et INDÉPENDANT du
+     préfixage dans `PdfEcrit` (`pdfutils.pas`, corrigé au passage — voir plus bas) : les
+     boucles `while` qui reculent caractère par caractère pour couper une ligne trop longue
+     n'étaient bornées par rien. Un texte sans espace/`|`/`,` (typiquement un code non résolu
+     affiché brut à cause du point suivant) les faisait tourner indéfiniment. Corrigé en
+     ajoutant la condition `Soustrait < UTF8Length(Texte)` aux quatre `while` concernés — ce
+     correctif reste en place, il est sain indépendamment du durcissement.
+   - Une fois le gel débloqué : **tous les libellés `PDF_XXX` affichés bruts** (armure,
+     compétences, ambitions…) et des **valeurs de compétences de base à 0**. Cause : dans
+     `pdfpersonnage.pas`, l'immense majorité des appels `GetTexteLibelle('PDF_XXX')` passent un
+     code **nu en dur dans le Pascal**, alors que `chargetexte.pas` compare via
+     `CompareRechercheValeur(PTexte.Code, CodeTexte)` — définition préfixée `RULES-PDF_XXX` en
+     premier, littéral nu en second. Ça ne marchait QUE grâce à la tolérance qu'on venait de
+     retirer. **216 occurrences, 144 codes distincts, rien que dans `pdfpersonnage.pas`** —
+     recensées le 06/09 par grep, jamais vues par le mouchard `TraceNu*` : celui-ci ne comptait
+     que les comparaisons faites une fois, au chargement des livres dans `FormCreate`, pas les
+     appels faits à la demande pendant la génération d'un PDF. Le chiffre « 95 couples
+     distincts » de la mesure du mouchard ne couvrait donc qu'une partie du problème réel.
+
+   **Décision de Nono (06/09/2026, même jour) : rollback.** `VerifieRecherche` reprend sa
+   forme tolérante d'avant durcissement (`chargeconstantes.pas` l.1071) :
+   ```
+   result := ((LivreRecherche = LivreValeur) and (CodeRecherche = CodeValeur))
+          or ((LivreValeur = '') and (CodeRecherche = CodeValeur));
+   ```
+   Le mouchard n'est PAS remis en place (son travail sur le périmètre qu'il mesurait est fait) ;
+   `TRACE_references_nues.txt` à la racine est désormais un instantané figé (plus régénéré), à
+   supprimer à la main quand Nono veut (pas d'accès suppression depuis ce poste).
+
+   **Prérequis avant de retenter le durcissement** : sortir chaque `GetTexteLibelle('PDF_XXX')`
+   en dur en une constante préfixée (sur le modèle de `ConstCaracXxx`), ou préfixer chaque
+   littéral directement (`GetTexteLibelle('RULES-PDF_XXX')`) — à faire fichier par fichier,
+   testé à l'écran à chaque lot, en vérifiant d'abord (comme pour les `LAB_` de l'étape 4
+   précédente) qu'aucun code n'est construit dynamiquement. Vérifier aussi les autres unités
+   `pdf*.pas`/`win*.pas` : le grep du 06/09 n'a porté que sur `pdfpersonnage.pas`.
 
 Deux fragilités relevées dans le code au passage, sans effet aujourd'hui, notées pour mémoire :
 `pdfpersonnage.pas` retire le paramètre d'une qualité par `copy(LocData,1,Length(LocData)-2)`,

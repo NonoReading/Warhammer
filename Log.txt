@@ -1494,3 +1494,82 @@ A NETTOYER, REPERE CE JOUR : quatre .md parasites subsistent a la racine
 (CHANTIER_versionning_livres.md, CONCEPTION_creation_choix_talents.md,
 CONTEXT_MENU_INTEGRATION.md, REPRISE_session_20260809.md). A distiller dans CONTEXT.md puis
 supprimer - meme famille que les CHANGELOG.md / TODO.md retires le 03/09.
+
+06/09/2026 - LES DEUX PREALABLES DE L ETAPE 4 DU 2.49 SONT CLOS
+Nono confirme avoir supprimer le dossier CURRENT (les cinq anciennes fiches, codes nus
+d avant le prefixage) - confirme par le mouchard, tombe de 95 a 20 couples nus, les 20
+restants tous de la famille structurelle (code de livre compare a son propre nom de fichier).
+LES 15 ConstCaracXxx (chargeconstantes.pas l.259-273) SONT DESORMAIS PREFIXEES RULES-.
+Principe pose par Nono : la constante d une caracteristique suit toujours RULES-ATTR_XXX ;
+ce que ca casse cote code se corrige dans le code, ce que ca casse cote base se corrige dans
+la base (piste B, plutot que doubler les constantes ou tolerer les cinq appels au
+durcissement). Verification avant de choisir : deux familles de casse possibles.
+(1) Les usages via CompareRechercheValeur (winpersonnage l.974, wincreation l.1918,
+ChercheRaceAttribut, ChercheAttribut, PersonnageMutationAttributModif) ne cassent PAS - la
+fonction deprefixe deja les deux cotes avant de comparer, rien a toucher.
+(2) Les placeholders texte dans PdfPersonnageRemplaceBonus, '(ATTR_WP)' etc. dans les
+descriptions de sorts (108 occurrences sur 20 livres, concentrees Rulebook EN/FR et Sea of
+Claws) : ces marqueurs ne referencent jamais un livre precis (aucun risque de collision a
+couvrir, contrairement aux ARMOB_/WEAPB_ du 2.49), donc rien a corriger cote base - le code
+cherche desormais le code nu via CodeSansLivre(ConstCaracXX). ConstBonusCaracXxx (les
+BATTR_xxx, ~950 occurrences sur les memes livres, jamais un id= de la base, un marqueur
+"moitie arrondie" invente par Nono) n a pas bouge ; les deux Pos('(B'+ConstCaracF+')',...)
+utilisent maintenant ConstBonusCaracF directement.
+DEUX BUGS CORRIGES EN EFFET DE BORD, SANS RIEN FAIRE DE PLUS. wincreation.pas l.2731-2748
+comparait TabAttribut.Cells[7,...] (deja prefixe depuis ChargeTabAttribut) a une constante
+nue - ne matchait jamais (calcul BE/BF/BFM au jet de des, Blessure, allocation Destin/
+Resilience en creation de personnage). winpersonnage.pas l.982 ecrivait un code nu dans
+Personnage.CreationAttribut quand aucune entree Resilience n existait encore. Les deux
+etaient invisibles a l ecran dans le cas courant, releves en auditant tous les usages des
+ConstCaracXxx avant de durcir.
+Teste par Nono : PDF genere identique a l ancien, aucune regression.
+CE QUE LA SESSION A APPRIS. Un marqueur texte pose par le code dans une donnee libre
+(placeholder de mise en forme) n est pas une reference sujette au risque de collision entre
+livres, meme s il ressemble a un code de la base - la difference se voit a la question "ce
+marqueur a-t-il jamais besoin de savoir de quel livre il vient ?".
+Reste : l etape 4 elle-meme (durcir VerifieRecherche), puis retirer le mouchard.
+
+06/09/2026 - LE 2.49 EST TERMINE : VerifieRecherche DURCI, LE MOUCHARD RETIRE
+VerifieRecherche (chargeconstantes.pas) ne tolere plus un second argument nu : la fonction se
+reduit a result := (LivreRecherche = LivreValeur) and (CodeRecherche = CodeValeur). Plus de
+branche a part, plus de compteur. TraceNuRaz, TraceNuRapport, TraceNuEcritFichier et les
+variables TraceNuNb/TraceNuListe sont retires du code (interface et implementation), ainsi que
+l appel en fin de FormCreate de warhammersource.pas qui ecrivait TRACE_references_nues.txt a
+chaque demarrage. Verifie apres coup : plus aucune reference a TraceNu dans tout le depot.
+Le fichier TRACE_references_nues.txt reste present a la racine (ne sera plus regenere, pas
+d acces suppression depuis ce poste) - a supprimer a la main, note dans A FAIRE.txt.
+Chantier §2.49 clos dans son ensemble (ouvert le 05/09, ferme le 06/09) : les references du
+projet portent toutes le prefixe de leur livre, la tolerance qui masquait les references nues
+a disparu. Seul chantier encore ouvert avec un point de reprise concret : les appartenances
+(§2.44).
+
+06/09/2026 - ETAPE 4 DE 2.49 REVERTEE LE JOUR MEME : LE DURCISSEMENT CASSAIT LES PDF
+Teste par Nono immediatement apres le durcissement du matin : le PDF Feldo2P gelait (boucle
+infinie, oblige de fermer le debogueur). Cause trouvee et corrigee sans lien avec le
+prefixage : dans pdfutils.pas, PdfEcrit coupe une ligne trop longue en reculant caractere par
+caractere a la recherche d un espace/'|'/',' ; les quatre while correspondants n etaient bornes
+par rien, et un texte sans aucun de ces trois caracteres (typiquement un code non resolu
+affiche brut, cf point suivant) les faisait tourner indefiniment. Corrige en ajoutant
+Soustrait < UTF8Length(Texte) aux quatre boucles. Ce correctif reste en place, il est sain
+independamment du reste.
+Une fois le gel debloque : tous les libelles PDF_XXX du PDF (normal ET Feldo2P) s affichaient
+bruts (PDF_ARMOUR1_ARMOUR au lieu de "ARMOUR", etc.) et les competences de base tombaient a 0.
+Cause : dans pdfpersonnage.pas, l ecrasante majorite des appels GetTexteLibelle('PDF_XXX')
+passent un code NU en dur dans le Pascal, alors que chargetexte.pas compare une definition
+prefixee RULES-PDF_XXX (venue du XML) a ce code nu - ca ne marchait que grace a la tolerance
+qu on venait de retirer. 216 occurrences, 144 codes distincts, rien que dans pdfpersonnage.pas.
+Le mouchard TraceNu* ne les avait jamais vues : il ne comptait que les comparaisons faites une
+fois au chargement des livres (FormCreate), pas les appels faits a la demande pendant la
+generation d un PDF. La mesure "95 couples distincts" ne couvrait donc qu une partie du
+probleme reel - lecon a retenir avant de faire confiance a un mouchard place a un seul point
+d entree.
+Decision de Nono, le jour meme : rollback. VerifieRecherche (chargeconstantes.pas) reprend sa
+forme tolerante d avant durcissement (second argument nu accepte si les codes sont egaux).
+Deux allers-retours ont ete necessaires : le premier envoi du rollback a ete ecrase par
+Lazarus (fichier ouvert dans l IDE), Nono a ferme l IDE sans enregistrer et le second envoi a
+tenu. Le mouchard n est pas remis en place. TRACE_references_nues.txt reste a la racine,
+fige, a supprimer a la main.
+Chantier §2.49 : le prefixage des references (etapes 1, 2, 2 bis, 3, 5) reste acquis et
+teste. Seule l etape 4 (durcissement) est en attente d un prealable supplementaire, decouvert
+ce jour : sortir les GetTexteLibelle('PDF_XXX') en dur en constantes prefixees avant de
+retenter. Voir CONTEXT.md §2.49 etape 4 pour le detail.

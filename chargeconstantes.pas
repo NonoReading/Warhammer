@@ -256,21 +256,21 @@ Const
       ConstSuivant			= 1;
 
       // constantes de caractéristiques
-      ConstCaracCC			= 'ATTR_WS';
-      ConstCaracCT			= 'ATTR_BS';
-      ConstCaracF			= 'ATTR_S';
-      ConstCaracE			= 'ATTR_T';
-      ConstCaracI			= 'ATTR_I';
-      ConstCaracAg			= 'ATTR_Ag';
-      ConstCaracDex			= 'ATTR_Dex';
-      ConstCaracInt			= 'ATTR_Int';
-      ConstCaracFM			= 'ATTR_WP';
-      ConstCaracSoc			= 'ATTR_Fel';
-      ConstCaracDestin		        = 'ATTR_Fate';
-      ConstCaracResil			= 'ATTR_Resil';
-      ConstCaracPointSupp               = 'ATTR_Supp';
-      ConstCaracBlessure                = 'ATTR_Wound';
-      ConstCaracMouvement               = 'ATTR_Move';
+      ConstCaracCC			= 'RULES-ATTR_WS';
+      ConstCaracCT			= 'RULES-ATTR_BS';
+      ConstCaracF			= 'RULES-ATTR_S';
+      ConstCaracE			= 'RULES-ATTR_T';
+      ConstCaracI			= 'RULES-ATTR_I';
+      ConstCaracAg			= 'RULES-ATTR_Ag';
+      ConstCaracDex			= 'RULES-ATTR_Dex';
+      ConstCaracInt			= 'RULES-ATTR_Int';
+      ConstCaracFM			= 'RULES-ATTR_WP';
+      ConstCaracSoc			= 'RULES-ATTR_Fel';
+      ConstCaracDestin		        = 'RULES-ATTR_Fate';
+      ConstCaracResil			= 'RULES-ATTR_Resil';
+      ConstCaracPointSupp               = 'RULES-ATTR_Supp';
+      ConstCaracBlessure                = 'RULES-ATTR_Wound';
+      ConstCaracMouvement               = 'RULES-ATTR_Move';
       ConstBonusCaracCC			= 'BATTR_WS';
       ConstBonusCaracCT			= 'BATTR_BS';
       ConstBonusCaracF			= 'BATTR_S';
@@ -487,10 +487,6 @@ Const
 Var
   NomPersonnage:       String;
   CodeLivre:           String;
-  // Mouchard des references nues (2.49 etape 4). TraceNuNb compte TOUS les passages par la
-  // tolerance, TraceNuListe ne garde que les couples distincts pour que le rapport reste lisible.
-  TraceNuNb:           Integer = 0;
-  TraceNuListe:        TStringList = nil;
   NomLivre:            String;
   NeedUpdate:          Boolean = false;
   SelectWinMetierRace: String = '';
@@ -678,12 +674,6 @@ Function LivreOrdre(Livre: String): String;
 Function CheminFichier(TypeDonnee: String; Livre: String): String;
 function extractnumbers(line: string): String;
 function VerifieRecherche():Boolean;
-// Mouchard de l'etape 4 du 2.49 : recense les fois ou VerifieRecherche a du TOLERER une
-// reference nue (code sans prefixe de livre) au lieu de l'apparier franchement. Ne change
-// aucun resultat : on observe d'abord, on durcit ensuite, une fois qu'on sait ce qui tombe.
-Procedure TraceNuRaz();
-Function TraceNuRapport(): String;
-Procedure TraceNuEcritFichier(Chemin: String);
 Function LivreRepertoireTravail(CodeLivre, Langue: String): String;
 Function LivreFichierActuel(CodeLivre, Langue: String): String;
 
@@ -1078,64 +1068,19 @@ function extractnumbers(line: string): String;
     end;
   end;
 
-Procedure TraceNuRaz();
-  begin
-    TraceNuNb := 0;
-    if TraceNuListe <> nil then TraceNuListe.Clear;
-  end;
-
-Function TraceNuRapport(): String;
-  var
-    Ind: Integer;
-  begin
-    Result := 'References nues tolerees : ' + IntToStr(TraceNuNb) + ' appel(s)';
-    if (TraceNuListe = nil) or (TraceNuListe.Count = 0) then
-      begin
-        Result := Result + SeparateurRetourLigne + '(aucune)';
-        Exit;
-      end;
-    Result := Result + ', ' + IntToStr(TraceNuListe.Count) + ' couple(s) distinct(s) :'
-              + SeparateurRetourLigne;
-    for Ind := 0 to TraceNuListe.Count - 1 do
-      Result := Result + TraceNuListe[Ind] + SeparateurRetourLigne;
-  end;
-
-Procedure TraceNuEcritFichier(Chemin: String);
-  var
-    Fichier: TStringList;
-  begin
-    Fichier := TStringList.Create;
-    try
-      Fichier.Text := TraceNuRapport();
-      Fichier.SaveToFile(Chemin);
-    finally
-      Fichier.Free;
-    end;
-  end;
-
 Function VerifieRecherche():Boolean;
-var
-  Trouve: Boolean;
+// Durci le 06/09/2026 (CONTEXT.md §2.49 etape 4), puis REVERTE le 06/09/2026 dans la meme
+// journee : le durcissement casse tous les GetTexteLibelle('PDF_XXX') ecrits en dur sans
+// prefixe RULES- dans pdfpersonnage.pas (plusieurs centaines d'occurrences, PDF normal ET
+// Feldo2P), ainsi que d'autres comparaisons du meme type (valeurs de competences a 0) - un
+// perimetre bien plus large que ce que mesurait le mouchard TraceNu*, qui ne voyait que les
+// validations faites au chargement des livres, pas les appels faits pendant la generation
+// d'un PDF. Tant que ces appels n'ont pas ete prefixes un par un (ou sortis en constantes,
+// comme ConstCaracXxx), la tolerance sur une reference nue doit rester en place. CONTEXT.md
+// §2.49.
 begin
-  if (LivreRecherche = LivreValeur) and (CodeRecherche = CodeValeur) then
-    Trouve := True
-  else if (LivreValeur = '') and (CodeRecherche = CodeValeur) then
-    begin
-      // La tolerance a servi : le code cherche porte un livre, la valeur trouvee n'en a pas.
-      // On enregistre, on ne refuse pas. C'est le releve qui dira ce que couterait le refus.
-      Trouve := True;
-      TraceNuNb := TraceNuNb + 1;
-      if TraceNuListe = nil then
-        begin
-          TraceNuListe            := TStringList.Create;
-          TraceNuListe.Sorted     := True;
-          TraceNuListe.Duplicates := dupIgnore;
-        end;
-      TraceNuListe.Add(LivreRecherche + SeparateurLivre + CodeRecherche + ' <- ' + CodeValeur);
-    end
-  else
-    Trouve := False;
-  result := Trouve;
+  result := ((LivreRecherche = LivreValeur) and (CodeRecherche = CodeValeur))
+         or ((LivreValeur = '') and (CodeRecherche = CodeValeur));
   end;
 
 Function LivreRepertoireTravail(CodeLivre, Langue: String): String;
