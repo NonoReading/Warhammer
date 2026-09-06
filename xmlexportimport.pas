@@ -1045,6 +1045,9 @@ Procedure XmlImport(FileName: String; OnlyPrimary: Boolean; OnlyCode: Boolean);
     PTraitOption:             StructureTraitOption;
     PCareerBonus:             StructureCareerBonus;
     PCareerBonusNiveau:       StructureCareerBonusNiveau;
+    PCareerBonusAttributModif:    StructureCareerBonusAttributModif;
+    TempCareerBonusAttributModif: TListCareerBonusAttributModif;
+    IndTempModif:             Integer;
     PFabrication:             StructureFabrication;
     PMetierRaceChoixMetier:   StructureMetierRaceChoixMetier;
     PMetierSousMetier:        StructureMetierSousMetier;
@@ -2511,6 +2514,15 @@ Procedure XmlImport(FileName: String; OnlyPrimary: Boolean; OnlyCode: Boolean);
                                     PCareerBonusNiveau.ListeTalent     := '';
                                     PCareerBonusNiveau.CodeNiveau      := RemoveQuotes(UTF8Encode(NodeNv3.Attributes.GetNamedItem(ConstXmlId).NodeValue));
 
+                                    // Modificateurs d'Attribut/Competence du palier (ex. Knight
+                                    // of the Inner Circle, +10 Fel/+10 WP) - CONTEXT.md 2.50
+                                    // etape 3, meme famille que ListTalentAttributModif. Accumules
+                                    // a part le temps de la boucle : <ModifyCarac> peut arriver
+                                    // avant <Order> dans le XML, et Niveau n'est connu qu'une fois
+                                    // la boucle terminee (meme raison que ListCareerBonusNiveau.add
+                                    // plus bas, deja differe apres la boucle).
+                                    TempCareerBonusAttributModif := TListCareerBonusAttributModif.Create;
+
                                     Node := XmlElement(NodeNv3.FirstChild);
                                     while Assigned(Node) do
                                       begin
@@ -2521,6 +2533,14 @@ Procedure XmlImport(FileName: String; OnlyPrimary: Boolean; OnlyCode: Boolean);
                                             PCareerBonusNiveau.ListeCompetence := RemoveQuotes(UTF8Encode(Node.TextContent));
                                           ConstXmlTalent:
                                             PCareerBonusNiveau.ListeTalent     := RemoveQuotes(UTF8Encode(Node.TextContent));
+                                          ConstXmlModifieAttribut:
+                                            begin
+                                              PCareerBonusAttributModif.CodeBonus    := PCareerBonus.CodeBonus;
+                                              PCareerBonusAttributModif.Niveau       := 0;
+                                              PCareerBonusAttributModif.CodeAttribut := RemoveQuotes(UTF8Encode(Node.Attributes.GetNamedItem(ConstXmlData).NodeValue));
+                                              PCareerBonusAttributModif.Valeur       := StrToIntDef(RemoveQuotes(UTF8Encode(Node.TextContent)), 0);
+                                              TempCareerBonusAttributModif.Add(PCareerBonusAttributModif);
+                                            end;
                                         end;
 
                                         Node := XmlElement(Node.NextSibling);
@@ -2530,7 +2550,15 @@ Procedure XmlImport(FileName: String; OnlyPrimary: Boolean; OnlyCode: Boolean);
                                       begin
                                         ListCareerBonusNiveau.add(PCareerBonusNiveau);
                                         inc(NbCareerBonusNiveau);
+                                        for IndTempModif := 0 to TempCareerBonusAttributModif.Count - 1 do
+                                          begin
+                                            PCareerBonusAttributModif        := TempCareerBonusAttributModif[IndTempModif];
+                                            PCareerBonusAttributModif.Niveau := PCareerBonusNiveau.Niveau;
+                                            ListCareerBonusAttributModif.add(PCareerBonusAttributModif);
+                                            inc(NbCareerBonusAttributModif);
+                                          end;
                                       end;
+                                    TempCareerBonusAttributModif.Free;
                                   end;
                               end;
 

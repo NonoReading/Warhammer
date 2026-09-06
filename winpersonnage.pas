@@ -3266,7 +3266,7 @@ procedure TWinPersonnages.NiveauMetierTalentMax();
         begin
           for IndAttribut := 1 to TabAttribut.Colcount-1 do
             begin
-              if '(B'+TabAttribut.Cells[IndAttribut, LigAttCode]+')' = TabTalent.Cells[ColTalMax, aRow] then
+              if '(B'+CodeSansLivre(TabAttribut.Cells[IndAttribut, LigAttCode])+')' = TabTalent.Cells[ColTalMax, aRow] then
                 begin
                   TabTalent.Cells[ColTalMax, aRow] := IntToStr(Floor(StrToIntDef(TabAttribut.Cells[IndAttribut, LigAttTotal],0) / 10));
                   Break;
@@ -3572,8 +3572,7 @@ procedure TWinPersonnages.TabAugmentationTalentCalcul(ARow: Integer; var Value: 
             Calcul := PTalent.MaxiTalent;
             Carac  := StringReplace(ExtractStringAfter(Calcul, '(B'),')','',[rfReplaceAll]);
             For Ind := 1 to TabAttribut.ColCount - 1 do
-              if (tabAttribut.Cells[Ind, LigAttCode] = Carac) then
-                begin
+              if (CodeSansLivre(tabAttribut.Cells[Ind, LigAttCode]) = Carac) then                begin
                   ValeurMax := trunc(StrToIntDef(tabAttribut.Cells[Ind, LigAttTotal],0) / 10);
                   break;
                 end;

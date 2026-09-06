@@ -677,6 +677,14 @@ Function PdfPersonnageAttribut(Personnage: StructurePersonnage; Attribut: String
     // talents (Res.Base), vrai modificateur additionné au Total (pas juste une annotation).
     Res.Base := Res.Base + PersonnageMutationAttributModif(Personnage, Attribut);
 
+    // Modificateurs d'appartenance (régiment/ordre de chevalerie/culte) dont le palier est
+    // atteint - CONTEXT.md §2.50 étape 3, ex. Knight of the Inner Circle : +10 Fel/+10 WP.
+    // Seul appelant pour l'instant à passer par PdfPersonnageAttribut plutôt que par une
+    // variable à part (contrairement à Mouvement/Chance/Détermination, §2.50 étape 2) :
+    // Fellowship et Willpower sont deux des dix attributs classiques, déjà calculés ici pour
+    // tous les autres appelants (grille des caractéristiques, substitution des %-codes PDF).
+    Res.Base := Res.Base + PersonnageCareerBonusAttributModif(Personnage, Attribut);
+
     Res.Total := Res.Base + Res.Augmentation;
     Result := res;
   end;
@@ -1111,8 +1119,6 @@ Procedure PdfPersonnageCreation(Personnage: StructurePersonnage; BackGround: Boo
         case ExtractStringAfter(PersonnageTalent.CodeTalent, SeparateurLivre) of
           TalentDurACuire:    DurACuire   := Floor(BE/10) * Val;
           TalentCostaud:      BonusEncomb := BonusEncomb + Val * 2;
-          TalentChanceux:     Chance      := Chance  + Val;
-          TalentObstine:      Determine   := Determine + Val;
           TalentCoutPuissant: TBonusCC    := Val;
           TalenttirPrecis:    TBonusCT    := Val;
           TalentSprinteur:    BonusSprint := 1;
@@ -1125,14 +1131,17 @@ Procedure PdfPersonnageCreation(Personnage: StructurePersonnage; BackGround: Boo
         case ExtractStringAfter(PersonnageTalent.CodeTalent, SeparateurLivre) of
           TalentDurACuire:    DurACuire   := Floor(BE/10) * Val;
           TalentCostaud:      BonusEncomb := BonusEncomb + Val * 2;
-          TalentChanceux:     Chance      := Chance  + Val;
-          TalentObstine:      Determine   := Determine + Val;
           TalentCoutPuissant: TBonusCC    := Val;
           TalenttirPrecis:    TBonusCT    := Val;
           TalentSprinteur:    BonusSprint := 1;
           TalentAmePure:      AmePure     := Val;
         end;
       end;
+    // Talents portant <ModifyCarac name="RULES-ATTR_Fate"/"RULES-ATTR_Resil"> (ex. Luck/Chanceux
+    // RULES-T0020, Strong-Minded/Obstiné RULES-T0107) - ajouté le 06/09/2026, remplace les cas
+    // TalentChanceux/TalentObstine du case ci-dessus, même mécanisme que Mouvement (§2.50).
+    Chance    := Chance    + PersonnageTalentAttributModif(Personnage, ConstCaracDestin);
+    Determine := Determine + PersonnageTalentAttributModif(Personnage, ConstCaracResil);
 
     // Entête
     PdfPage.WriteText( 50, 246, Personnage.NomPersonnage);                               // Nom
@@ -3914,8 +3923,6 @@ Procedure PdfPersonnageCreationFeldo2P(Personnage: StructurePersonnage);
               DurACuire   := Floor(BE/10) * ValDurACuire;
             end;
           TalentCostaud:      BonusEncomb := BonusEncomb + Val * 2;
-          TalentChanceux:     Chance      := Chance  + Val;
-          TalentObstine:      Determine   := Determine + Val;
           TalentCoutPuissant: TBonusCC    := Val;
           TalenttirPrecis:    TBonusCT    := Val;
           TalentSprinteur:    BonusSprint := 1;
@@ -3932,14 +3939,17 @@ Procedure PdfPersonnageCreationFeldo2P(Personnage: StructurePersonnage);
               DurACuire   := Floor(BE/10) * ValDurACuire;
             end;
           TalentCostaud:      BonusEncomb := BonusEncomb + Val * 2;
-          TalentChanceux:     Chance      := Chance  + Val;
-          TalentObstine:      Determine   := Determine + Val;
           TalentCoutPuissant: TBonusCC    := Val;
           TalenttirPrecis:    TBonusCT    := Val;
           TalentSprinteur:    BonusSprint := 1;
           TalentAmePure:      AmePure     := Val;
         end;
       end;
+    // Talents portant <ModifyCarac name="RULES-ATTR_Fate"/"RULES-ATTR_Resil"> (ex. Luck/Chanceux
+    // RULES-T0020, Strong-Minded/Obstiné RULES-T0107) - ajouté le 06/09/2026, remplace les cas
+    // TalentChanceux/TalentObstine du case ci-dessus, même mécanisme que Mouvement (§2.50).
+    Chance    := Chance    + PersonnageTalentAttributModif(Personnage, ConstCaracDestin);
+    Determine := Determine + PersonnageTalentAttributModif(Personnage, ConstCaracResil);
 
     // Paramétrages : liste des compétences
     ListPage       := TStringList.Create;

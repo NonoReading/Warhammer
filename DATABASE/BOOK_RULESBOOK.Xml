@@ -1822,6 +1822,7 @@ As sailing one ship is not so different to sailing another, having any Sail Spec
 </Talent>
 <Talent id="RULES-T0020">
 <Attribut>""</Attribut>
+<ModifyCarac name="RULES-ATTR_Fate">+1</ModifyCarac>
 <Description language="ENGLISH">"Luck"</Description>
 <Short language="ENGLISH">""</Short>
 <Explanation language="ENGLISH">"They say when you were born, Ranald smiled. Your maximum Fortune Points now equal your current Fate points plus the number of times you’ve taken Luck."</Explanation>
@@ -2757,6 +2758,7 @@ Note: The GM may put a lower limit on prices here to show a seller refusing to s
 </Talent>
 <Talent id="RULES-T0107">
 <Attribut>""</Attribut>
+<ModifyCarac name="RULES-ATTR_Resil">+1</ModifyCarac>
 <Description language="ENGLISH">"Strong-minded"</Description>
 <Short language="ENGLISH">""</Short>
 <Explanation language="ENGLISH">"You are the epitome of determination and resolve. Add your level in Strong Minded to your maximum Resolve pool."</Explanation>

@@ -6,6 +6,18 @@
 CORRECTIONS COURTES  (une ligne ou deux chacune)
 =========================================================================
 
+VALEURTARIFSORT (winpersonnage.pas l.1093) A LE MEME BUG DE PREFIXE QUE LE MAX DES
+TALENTS. Repere le 06/09/2026 en corrigeant NiveauMetierTalentMax (l.3269) et
+TabAugmentationTalentCalcul (l.3575) : les trois comparent un code extrait brut du XML
+(ex. "ATTR_Fel", format "(BATTR_x)" des <Max> de talents et des tarifs de sort) a
+tabAttribut.Cells[Ind, LigAttCode], qui porte desormais le prefixe de livre depuis
+§2.49 ("RULES-ATTR_Fel") - seules les deux occurrences talent ont ete corrigees
+(CodeSansLivre ajoute autour du cote tabAttribut), testees par Nono (Chanceux OK).
+ValeurTarifSort (tarification des sorts, meme fonction que ci-dessus) a le meme defaut,
+pas touche : if TabAttribut.Cells[Ind, LigAttCode] = Carac then -> if
+CodeSansLivre(TabAttribut.Cells[Ind, LigAttCode]) = Carac then. Le commentaire au-dessus
+de la fonction (l.1073-1076) est egalement perime, a corriger au passage.
+
 SUPPRIMER LE FICHIER ORPHELIN chargetalentmodif.pas. Repere le 06/09/2026 (chantier
 resolveur generique, CONTEXT.md 2.50) : meme unit name (ChargeTalentAttributModif) et meme
 contenu (avant ce chantier) que chargetalentattributmodif.pas, absent de WarhammerHelp.lpi

@@ -138,7 +138,7 @@ object WinPersonnages: TWinPersonnages
   object LibAppartenance: TEdit
     Left = 8
     Height = 29
-    Top = 760
+    Top = 769
     Width = 214
     AutoSelect = False
     Enabled = False

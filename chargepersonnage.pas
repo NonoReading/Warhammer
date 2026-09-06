@@ -174,6 +174,17 @@ Type
   Function PersonnageTalentAttributModif(Personnage: StructurePersonnage; CodeAttribut: String): Integer;
   // Greffes des appartenances (regiments, ordres, cultes) - CONTEXT.md 2.44
   Procedure PersonnageAppliqueGreffes(var Personnage: StructurePersonnage);
+  // Niveau atteint par le personnage dans un metier donne (le plus haut entre la carriere en
+  // cours et les carrieres passees) - CONTEXT.md 2.50 etape 3. Sert de filtre de palier pour
+  // PersonnageCareerBonusAttributModif : contrairement a PersonnageAppliqueGreffes (qui greffe
+  // tous les paliers d'une appartenance sans filtrer, l'ecran/le PDF filtrant ensuite par le
+  // Valeur tague sur MetierCompetence/MetierTalent), un bonus d'ATTRIBUT est additionne
+  // directement au Total et ne peut pas se permettre ce flou.
+  Function PersonnageNiveauDansMetier(Personnage: StructurePersonnage; CodeMetier: String): Integer;
+  // Même principe que PersonnageTalentAttributModif, mais sur les <ModifyCarac> déclarés dans
+  // un palier de DATA_CAREER_BONUS (ListCareerBonusAttributModif) - n'additionne un modificateur
+  // que si le personnage a l'appartenance ET a atteint le palier qui le porte.
+  Function PersonnageCareerBonusAttributModif(Personnage: StructurePersonnage; CodeAttribut: String): Integer;
 
 implementation
 
@@ -1407,16 +1418,73 @@ Function PersonnageTalentAttributModif(Personnage: StructurePersonnage; CodeAttr
     indiceModif:      Integer;
   begin
     Result := 0;
+    // Multiplié par PersonnageTalent.Valeur (niveau du talent) depuis le 06/09/2026 : un talent
+    // à niveaux multiples (Max différent de "1", ex. Luck/Chanceux RULES-T0020, Strong-Minded/
+    // Obstiné RULES-T0107) donne son ModifyCarac autant de fois que de niveaux pris, comme le
+    // faisait l'ancien case (Chance := Chance + Val). Sans effet sur le pilote Fleet Footed
+    // (RULES-T0162, Max="1", Valeur toujours 1).
     for PersonnageTalent in Personnage.CreationTalent do
       for indiceModif := 0 to (ListTalentAttributModif.Count - 1) do
         if CompareRechercheValeur(ListTalentAttributModif[indiceModif].CodeTalent, PersonnageTalent.CodeTalent)
            and CompareRechercheValeur(ListTalentAttributModif[indiceModif].CodeAttribut, CodeAttribut) then
-          Result := Result + ListTalentAttributModif[indiceModif].Valeur;
+          Result := Result + ListTalentAttributModif[indiceModif].Valeur * PersonnageTalent.Valeur;
     for PersonnageTalent in Personnage.AugmentationTalent do
       for indiceModif := 0 to (ListTalentAttributModif.Count - 1) do
         if CompareRechercheValeur(ListTalentAttributModif[indiceModif].CodeTalent, PersonnageTalent.CodeTalent)
            and CompareRechercheValeur(ListTalentAttributModif[indiceModif].CodeAttribut, CodeAttribut) then
-          Result := Result + ListTalentAttributModif[indiceModif].Valeur;
+          Result := Result + ListTalentAttributModif[indiceModif].Valeur * PersonnageTalent.Valeur;
+  end;
+
+Function PersonnageNiveauDansMetier(Personnage: StructurePersonnage; CodeMetier: String): Integer;
+  var
+    IndMetier: Integer;
+  begin
+    Result := 0;
+    if CompareRechercheValeur(Personnage.MetierEnCours.CodeMetier, CodeMetier) then
+      Result := Personnage.MetierEnCours.NiveauMetier;
+    for IndMetier := 0 to High(Personnage.MetierAncien) do
+      if CompareRechercheValeur(Personnage.MetierAncien[IndMetier].CodeMetier, CodeMetier) then
+        if Personnage.MetierAncien[IndMetier].NiveauMetier > Result then
+          Result := Personnage.MetierAncien[IndMetier].NiveauMetier;
+  end;
+
+Function PersonnageCareerBonusAttributModif(Personnage: StructurePersonnage; CodeAttribut: String): Integer;
+  var
+    Appartenances:  TStringList;
+    IndApp:         Integer;
+    IndModif:       Integer;
+    NiveauAtteint:  Integer;
+    PBonus:         StructureCareerBonus;
+    CodeApp:        String;
+  begin
+    Result := 0;
+    if Trim(Personnage.Appartenance) = '' then
+      Exit;
+    Appartenances := TStringList.Create;
+    try
+      ExtractStrings([','], [], PChar(Personnage.Appartenance), Appartenances);
+      for IndApp := 0 to Appartenances.Count - 1 do
+        begin
+          CodeApp := Trim(Appartenances[IndApp]);
+          if CodeApp = '' then
+            continue;
+          // Niveau atteint DANS LE METIER de cette appartenance (pas le niveau du palier lui
+          // meme) : un palier ne compte que si le personnage a vraiment atteint ce rang dans
+          // la carriere qui porte l'appartenance (§2.44 - Soldier pour un regiment, Knight pour
+          // un ordre de chevalerie).
+          PBonus        := ChercheCareerBonus(CodeApp);
+          NiveauAtteint := PersonnageNiveauDansMetier(Personnage, PBonus.CodeMetier);
+          if NiveauAtteint <= 0 then
+            continue;
+          for IndModif := 0 to (ListCareerBonusAttributModif.Count - 1) do
+            if CompareRechercheValeur(ListCareerBonusAttributModif[IndModif].CodeBonus, CodeApp)
+               and CompareRechercheValeur(ListCareerBonusAttributModif[IndModif].CodeAttribut, CodeAttribut)
+               and (ListCareerBonusAttributModif[IndModif].Niveau <= NiveauAtteint) then
+              Result := Result + ListCareerBonusAttributModif[IndModif].Valeur;
+        end;
+    finally
+      Appartenances.Free;
+    end;
   end;
 
 Function PersonnageMutationCompetenceModif(Personnage: StructurePersonnage; CodeCompetence: String): Integer;

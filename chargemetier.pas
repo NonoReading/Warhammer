@@ -65,8 +65,22 @@ Type
         Livre:            String;
   End;
 
+  // Un <ModifyCarac>/<ModifySkill> pose dans un <LevelN> de DATA_CAREER_BONUS - meme
+  // famille et meme raisonnement que StructureTalentAttributModif
+  // (chargetalentattributmodif.pas), une entree par tag XML, cle par CodeBonus+Niveau
+  // plutot qu'un champ unique sur StructureCareerBonusNiveau : un palier peut porter
+  // plusieurs modificateurs a la fois (ex. Knight of the Inner Circle, +10 Fel ET +10
+  // WP sur le meme palier). CONTEXT.md 2.50 etape 3.
+  StructureCareerBonusAttributModif = Record
+        CodeBonus:      String;
+        Niveau:         Integer;
+        CodeAttribut:   String;
+        Valeur:         Integer;
+  End;
+
   TListCareerBonus       = specialize TList<StructureCareerBonus>;
   TListCareerBonusNiveau = specialize TList<StructureCareerBonusNiveau>;
+  TListCareerBonusAttributModif = specialize TList<StructureCareerBonusAttributModif>;
 
 var
   ListMetier:     TListMetier;
@@ -75,6 +89,8 @@ var
   NbCareerBonus:          Integer;
   ListCareerBonusNiveau:  TListCareerBonusNiveau;
   NbCareerBonusNiveau:    Integer;
+  ListCareerBonusAttributModif: TListCareerBonusAttributModif;
+  NbCareerBonusAttributModif:   Integer;
 
 function chercheMetier(CodeMetier :String): StructureMetier;
 Function CheminMetierImage(CodeMetier: String): String;

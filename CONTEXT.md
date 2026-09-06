@@ -1,12 +1,15 @@
 # Warhammer — Contexte projet
 
 **Dernière mise à jour : 06/09/2026 (soir) — §2.50 : résolveur générique Attribut/
-Compétence. Pilote (talent Fleet Footed/T0162) COMPILÉ ET TESTÉ OK par Nono (Mouvement
-5/10/20, non-régression confirmée) — voir §2.50 pour la suite (étape 2 : généralisation).**
+Compétence. Pilote (Fleet Footed/T0162) ET migration Chanceux/Obstiné (Chance/
+Détermination, T0020/T0107) COMPILÉS ET TESTÉS OK par Nono (Mouvement 5/10/20 inchangé,
+Chance et Résolution augmentent correctement) — au passage, deux occurrences d'un bug de
+préfixe (§2.49) bloquant le Max des talents à formule d'attribut trouvées et corrigées par
+Nono (`winpersonnage.pas` l.3269 et l.3575). Voir §2.50 pour la suite (étape 3).**
 
-PROCHAINE ÉTAPE : §2.50 étape 2 — généraliser `PersonnageTalentAttributModif` en une vraie
-`GetAttributValeur`, migrer `TalentChanceux`/`TalentObstine` sur le même modèle. Trois
-autres chantiers ouverts, sans lien direct :
+PROCHAINE ÉTAPE : §2.50 étape 3 — étendre `ModifyCarac`/`ModifySkill` aux armes/armures
+(`StructureArme`/`StructureArmureBonus`) puis aux régiments/ordres avec filtre par palier.
+Trois autres chantiers ouverts, sans lien direct :
 1. **§2.49 étape 4 (durcissement `VerifieRecherche`), en attente d'un préalable** : sortir en
    constantes préfixées `RULES-` tous les `GetTexteLibelle('PDF_XXX')` écrits en dur dans
    `pdfpersonnage.pas` (216 occurrences, 144 codes distincts recensés le 06/09 ; probablement
@@ -5171,7 +5174,7 @@ préfixe, comme Nations l'a fait pour `NATIO-ARMOT_LAMELLAR`.
 
 ---
 
-### 2.50 Résolveur générique Attribut/Compétence — pilote écrit, PAS ENCORE TESTÉ (06/09/2026)
+### 2.50 Résolveur générique Attribut/Compétence — pilote + migration Chance/Détermination validés, en cours (06/09/2026)
 
 **Origine.** Reprise du 3d-3 (§2.37/§2.44, ordres de chevalerie) bloquée par « le modèle ne
 porte pas d'effet de règle ». Nono, en montrant en parallèle le `case` de talents de
@@ -5246,23 +5249,58 @@ déjà là, correcte, en attente du code.
 1. ✅ FAIT (06/09/2026 soir) — Nono a compilé et testé un personnage Messager avec Fleet
    Footed à l'écran : Mouvement 5/10/20, identique à avant (+1, comme le donnait
    `TalentVeloce` dans l'ancien `case`). Non-régression confirmée, pilote validé.
-2. Généraliser `PersonnageTalentAttributModif`/l'appel en une vraie
-   `GetAttributValeur` réutilisable par `winpersonnage.pas` (qui recalcule tout lui-même
-   aujourd'hui, voir `A FAIRE.txt`), migrer `TalentChanceux`/`TalentObstine` (Destin/
-   Détermination, même famille que Mouvement) sur le même modèle.
-3. Étendre aux armes/armures (`StructureArme`/`StructureArmureBonus` n'ont pas encore de champ
+2. ✅ FAIT (06/09/2026) — `TalentChanceux`/`TalentObstine` migrés sur le même modèle que
+   Mouvement : dans `pdfpersonnage.pas` (4 blocs, normal/Feldo2P × Création/Augmentation),
+   retrait des cas `TalentChanceux`/`TalentObstine` du `case`, ajout après les boucles de
+   `Chance := Chance + PersonnageTalentAttributModif(Personnage, ConstCaracDestin)` et pareil
+   pour `Determine`/`ConstCaracResil`. Ajout dans `BOOK_RULESBOOK.Xml` (anglais uniquement -
+   `ListTalentAttributModif` n'est peuplée que si `LangueDef = ConstAnglais`, vérifié dans
+   `xmlexportimport.pas`) de `<ModifyCarac name="RULES-ATTR_Fate">+1</ModifyCarac>` sous T0020
+   (Luck) et `name="RULES-ATTR_Resil">+1` sous T0107 (Strong-Minded) - aucun des deux n'en
+   portait avant, contrairement au pilote Fleet Footed qui l'avait déjà.
+   **Correction de fondation nécessaire avant de brancher ces deux talents** :
+   `PersonnageTalentAttributModif` (chargepersonnage.pas) ajoutait la valeur du `ModifyCarac`
+   UNE FOIS par talent présent, sans la multiplier par le niveau (`PersonnageTalent.Valeur`).
+   Sans effet sur le pilote (Fleet Footed a `Max="1"`, impossible à multi-niveauter), mais
+   Luck/Strong-Minded ont `Max="(BATTR_Fel)"`/`"(BATTR_WP)"` - de vrais talents à niveaux
+   multiples, dont le texte RAW dit "+1 par niveau". Corrigé : la valeur XML est maintenant
+   multipliée par `PersonnageTalent.Valeur` dans les deux boucles (Création/Augmentation).
+   **Bug annexe découvert et corrigé en testant** (sans lien direct avec ce chantier, mais
+   trouvé en essayant d'augmenter Chanceux/Obstiné à l'écran - régression du même jour, §2.49) :
+   le Max des talents à formule d'attribut (`"(BATTR_x)"`) ne se résolvait plus du tout,
+   bloquant toute augmentation à 1 niveau pour CES talents-là (Chanceux/Obstiné compris,
+   indépendamment de la correction ci-dessus). Cause : `TabAttribut.Cells[.., LigAttCode]`
+   (semé par `AttributInit` à partir des `ConstCaracXxx`) porte désormais le préfixe de livre
+   depuis §2.49 (`'RULES-ATTR_Fel'`), mais deux endroits de `winpersonnage.pas` comparaient ce
+   code brut à la notation `"(BATTR_x)"` du XML (qui, elle, reste sans préfixe) sans passer par
+   `CodeSansLivre` - déjà le bon réflexe utilisé ailleurs pour ce même genre de comparaison
+   (`pdfpersonnage.pas` l.471+). Corrigé par Nono aux deux endroits : `NiveauMetierTalentMax`
+   (l.3269, affichage) et `TabAugmentationTalentCalcul` (l.3575, saisie de l'augmentation -
+   celui qui bloquait réellement le test). Un troisième endroit avec le même défaut,
+   `ValeurTarifSort` (l.1093, tarification des sorts, sans rapport avec les talents), repéré
+   mais pas corrigé - noté dans `A FAIRE.txt`.
+   **Testé par Nono (06/09/2026 soir)** : personnage avec Chanceux -> Chance augmentée
+   correctement: personnage avec Obstiné -> Résolution augmentée correctement; Messager Fleet
+   Footed rejoué -> Mouvement toujours 5 (non-régression confirmée après la correction de
+   multiplication).
+3. Généraliser en une vraie `GetAttributValeur` réutilisable par `winpersonnage.pas` - vérifié
+   le 06/09/2026 : l'écran n'affiche AUJOURD'HUI aucun pool Chance/Détermination séparé (les
+   colonnes `ColAttDestin`/`ColAttResil` de `TabAttribut` traitent Destin/Résilience comme des
+   attributs classiques), donc rien à câbler côté écran pour l'instant - à faire seulement si
+   Nono veut un jour afficher ces pools sur la fiche.
+4. Étendre aux armes/armures (`StructureArme`/`StructureArmureBonus` n'ont pas encore de champ
    `ModifyCarac`/`ModifySkill` - à ajouter) puis aux régiments/ordres
    (`StructureCareerBonusNiveau`, `chargemetier.pas` l.59-66) - c'est ce qui débloquera le
    `+10 Fel/+10 WP` du Knight of the Inner Circle (§2.44), avec calage sur le niveau de
    palier atteint (même filtre `Valeur <= niveau courant` que `MetierCompetence`/
    `MetierTalent`, à généraliser).
-4. `ListArmureBonusModif` (`chargearmurebonusmodif.pas`) est le même problème que
+5. `ListArmureBonusModif` (`chargearmurebonusmodif.pas`) est le même problème que
    `ListTalentAttributModif` mais sur les armures : le `Modifier name=` d'une qualité
    d'armure n'accepte qu'un code de compétence (jamais un attribut) et ne sert QU'À
    l'annotation PDF, jamais soustrait du Total — c'est la cause exacte de la pénalité de
    Dextérité des Stechzeug Bracers non calculée (`A FAIRE.txt`). Migration prévue dans le
-   même mouvement que le point 3.
-5. Une fois tout ça éprouvé : retirer `ListTalentAttributModif`/`ListTalentCompetenceModif`/
+   même mouvement que le point 4.
+6. Une fois tout ça éprouvé : retirer `ListTalentAttributModif`/`ListTalentCompetenceModif`/
    `ListArmureBonusModif` (décoratifs, remplacés) - décision Nono, « on laisse le temps de la
    mise à jour et on les nettoie ensuite ». `PTalent.Attribut` (l'ancien mécanisme ±5) n'est
    PAS dans ce lot : il reste la seule voie pour les dix attributs classiques tant que

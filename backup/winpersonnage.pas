@@ -2822,6 +2822,9 @@ begin
   MetierNvEnCours  := IntToStr(PersonnageMetier.NiveauMetier);
   PMetier          := ChercheMetier(MetierEnCours);
   LibMetier.Caption:= PMetier.Libelle;
+  // Appartenance (regiment, ordre de chevalerie, culte) - CONTEXT.md 2.44. Simple
+  // affichage en lecture, la liste elle-meme se construit dans MajTables.
+  LibAppartenance.Caption := LibelleAppartenances(Personnage.Appartenance);
 
   // Les icones de niveau sont rechargees ICI et pas plus haut : la resolution a besoin du
   // METIER autant que de l'ethnie, et MetierEnCours n'est connu qu'a partir de cette
@@ -3263,7 +3266,7 @@ procedure TWinPersonnages.NiveauMetierTalentMax();
         begin
           for IndAttribut := 1 to TabAttribut.Colcount-1 do
             begin
-              if '(B'+TabAttribut.Cells[IndAttribut, LigAttCode]+')' = TabTalent.Cells[ColTalMax, aRow] then
+              if '(B'+CodeSansLivre(TabAttribut.Cells[IndAttribut, LigAttCode])+')' = TabTalent.Cells[ColTalMax, aRow] then
                 begin
                   TabTalent.Cells[ColTalMax, aRow] := IntToStr(Floor(StrToIntDef(TabAttribut.Cells[IndAttribut, LigAttTotal],0) / 10));
                   Break;
@@ -4812,6 +4815,9 @@ Procedure TWinPersonnages.MajTables();
               // APRES les deux boucles ci-dessus, qui repartent d'une liste vide : place
               // avant, il serait efface. CONTEXT.md 2.44.
               PersonnageAppliqueGreffes(Personnage);
+              // Rafraichit l'affichage sans attendre un nouveau passage dans MajTables,
+              // pour capter le choix qui vient d'etre fait. CONTEXT.md 2.44.
+              LibAppartenance.Caption := LibelleAppartenances(Personnage.Appartenance);
             end;
         end;
 

@@ -8,7 +8,7 @@
       <Unit>
         <Filename Value="WarhammerHelp.lpr"/>
         <IsPartOfProject Value="True"/>
-        <EditorIndex Value="4"/>
+        <EditorIndex Value="5"/>
         <CursorPos X="37" Y="20"/>
         <UsageCount Value="200"/>
         <Loaded Value="True"/>
@@ -163,7 +163,7 @@
         <HasResources Value="True"/>
         <ResourceBaseClass Value="Form"/>
         <UnitName Value="WinRaces"/>
-        <EditorIndex Value="5"/>
+        <EditorIndex Value="6"/>
         <TopLine Value="825"/>
         <CursorPos X="28" Y="841"/>
         <UsageCount Value="200"/>
@@ -221,10 +221,11 @@
         <Filename Value="unitcalcul.pas"/>
         <IsPartOfProject Value="True"/>
         <UnitName Value="UnitCalcul"/>
-        <EditorIndex Value="-1"/>
+        <EditorIndex Value="3"/>
         <TopLine Value="442"/>
-        <CursorPos X="32" Y="453"/>
+        <CursorPos X="19" Y="453"/>
         <UsageCount Value="200"/>
+        <Loaded Value="True"/>
       </Unit>
       <Unit>
         <Filename Value="chargetalentcreation.pas"/>
@@ -242,9 +243,10 @@
         <HasResources Value="True"/>
         <ResourceBaseClass Value="Form"/>
         <UnitName Value="WinPersonnage"/>
-        <EditorIndex Value="3"/>
-        <TopLine Value="2317"/>
-        <CursorPos X="28" Y="2328"/>
+        <IsVisibleTab Value="True"/>
+        <EditorIndex Value="4"/>
+        <TopLine Value="3565"/>
+        <CursorPos X="34" Y="3577"/>
         <UsageCount Value="200"/>
         <Loaded Value="True"/>
         <LoadedDesigner Value="True"/>
@@ -482,10 +484,9 @@
         <Filename Value="pdfpersonnage.pas"/>
         <IsPartOfProject Value="True"/>
         <UnitName Value="PdfPersonnage"/>
-        <IsVisibleTab Value="True"/>
         <EditorIndex Value="2"/>
-        <TopLine Value="1118"/>
-        <CursorPos Y="1134"/>
+        <TopLine Value="1120"/>
+        <CursorPos X="38" Y="1128"/>
         <UsageCount Value="200"/>
         <Loaded Value="True"/>
       </Unit>
@@ -1225,7 +1226,7 @@
         <UsageCount Value="11"/>
       </Unit>
     </Units>
-    <JumpHistory HistoryIndex="10">
+    <JumpHistory HistoryIndex="13">
       <Position>
         <Filename Value="winlancede.pas"/>
         <Caret Line="52" Column="29" TopLine="44"/>
@@ -1269,6 +1270,18 @@
       <Position>
         <Filename Value="pdfpersonnage.pas"/>
         <Caret Line="1106" TopLine="1092"/>
+      </Position>
+      <Position>
+        <Filename Value="unitcalcul.pas"/>
+        <Caret Line="453" Column="19" TopLine="442"/>
+      </Position>
+      <Position>
+        <Filename Value="winpersonnage.pas"/>
+        <Caret Line="3269" Column="15" TopLine="3259"/>
+      </Position>
+      <Position>
+        <Filename Value="winpersonnage.pas"/>
+        <Caret Line="3267" Column="28" TopLine="3259"/>
       </Position>
     </JumpHistory>
     <RunParams>

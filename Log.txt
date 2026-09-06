@@ -1620,3 +1620,36 @@ migrer TalentChanceux/TalentObstine, puis armes/armures, puis regiments/ordres a
 palier (debloquera le +10 Fel/+10 WP du Knight of the Inner Circle), puis ListArmureBonusModif
 (fixera enfin le bug des Stechzeug Bracers), puis retrait des mecanismes decoratifs devenus
 inutiles.
+
+06/09/2026 - SUITE DU 2.50 : CHANCEUX/OBSTINE MIGRES, ET UN BUG DE PREFIXE DECOUVERT EN TESTANT
+Etape 2 du resolveur generique : TalentChanceux (RULES-T0020, Luck) et TalentObstine
+(RULES-T0107, Strong-Minded) migres sur le meme modele que Mouvement (Fleet Footed). Ni l'un
+ni l'autre ne portait de ModifyCarac dans le Rulebook, contrairement au pilote - ajoute
+<ModifyCarac name="RULES-ATTR_Fate">+1</ModifyCarac> (T0020) et name="RULES-ATTR_Resil">+1
+(T0107) dans BOOK_RULESBOOK.Xml uniquement (verifie dans xmlexportimport.pas :
+ListTalentAttributModif n'est peuplee que si LangueDef = ConstAnglais, la version francaise
+n'a pas besoin du tag). Dans pdfpersonnage.pas (4 blocs), retrait des cas TalentChanceux/
+TalentObstine du case, ajout apres les boucles de Chance/Determine += PersonnageTalentAttributModif(...).
+Correction de fondation faite avant de brancher les deux talents : PersonnageTalentAttributModif
+(chargepersonnage.pas) ajoutait la valeur du ModifyCarac UNE FOIS par talent, sans la
+multiplier par le niveau (PersonnageTalent.Valeur). Sans consequence sur le pilote (Fleet
+Footed a Max="1"), mais Luck/Strong-Minded ont Max="(BATTR_Fel)"/"(BATTR_WP)" - de vrais
+talents a niveaux multiples ("+1 par niveau" dans le texte RAW). Corrige : multiplication
+ajoutee dans les deux boucles de la fonction.
+En testant, Nono a signale ne plus pouvoir augmenter un talent du tout ("comme si le max
+n'etait plus calcule"). Cause trouvee : regression du meme jour, §2.49 (prefixage des
+references). TabAttribut.Cells[.., LigAttCode] (seme par AttributInit a partir des
+ConstCaracXxx) porte desormais le prefixe de livre ('RULES-ATTR_Fel'), mais deux endroits de
+winpersonnage.pas comparaient ce code brut a la notation "(BATTR_x)" du XML (qui reste sans
+prefixe, cote donnee) sans passer par CodeSansLivre - le reflexe deja utilise ailleurs pour ce
+meme genre de comparaison (pdfpersonnage.pas l.471+). Corrige par Nono lui-meme (petites
+corrections, une ligne chacune) : NiveauMetierTalentMax (l.3269, affichage du Max) et
+TabAugmentationTalentCalcul (l.3575, saisie de l'augmentation - celui qui bloquait vraiment le
+test). Un troisieme endroit avec le meme defaut, ValeurTarifSort (l.1093, tarification des
+sorts, sans rapport avec les talents), repere mais pas corrige - note dans A FAIRE.txt.
+Teste par Nono (soir) : Chanceux augmente bien la Chance, Obstine augmente bien la
+Determination/Resolution, et Fleet Footed rejoue est toujours a Mouvement 5 (non-regression
+apres la correction de multiplication).
+Suite (CONTEXT.md §2.50, etape 3) : etendre ModifyCarac/ModifySkill aux armes/armures puis aux
+regiments/ordres avec filtre par palier - debloquera le +10 Fel/+10 WP du Knight of the Inner
+Circle (§2.44).
