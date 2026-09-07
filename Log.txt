@@ -1916,3 +1916,136 @@ cacher un code litteral non prefixe ailleurs dans le projet, trouve seulement a 
 Cette classe de bug n'est pas garantie epuisee - seulement chaque occurrence rencontree
 jusqu'ici corrigee au fil de l'eau (decision de Nono, pas d'audit exhaustif fait).
 CONTEXT.md mis a jour et cloture (§2.49 etape 4 sorti de la liste des chantiers ouverts).
+
+07/09/2026 - NETTOYAGE DES FICHIERS PARASITES DE LA RACINE, FAIT PAR NONO DIRECTEMENT
+Nono a supprime lui-meme les six fichiers releves comme jetables : les quatre .md parasites
+(CHANTIER_versionning_livres.md, CONCEPTION_creation_choix_talents.md,
+CONTEXT_MENU_INTEGRATION.md, REPRISE_session_20260809.md), le fichier orphelin
+chargetalentmodif.pas (doublon mort de chargetalentattributmodif.pas, absent du .lpi) et
+TRACE_references_nues.txt (mouchard retire le 06/09). Pas d'acces suppression depuis ce
+poste, donc suppression faite directement par Nono plutot qu'en passant par une commande.
+Ecart assume : les quatre .md ont ete supprimes sans la passe de distillation prevue au
+depart (recuperer dans CONTEXT.md/A FAIRE.txt ce qui restait vrai) - decision de Nono, pas
+de contenu recupere. A FAIRE.txt et CONTEXT.md mis a jour pour retirer les trois entrees
+correspondantes. Il ne reste que CONTEXT.md, Log.txt et A FAIRE.txt a la racine pour le
+suivi du projet.
+
+07/09/2026 - REPRISE DU 3d-3 : CONCEPTION DU PALIER KNIGHT, PENDANT COMPETENCE ECRIT
+Reprise du point de reprise 1 du §2.44 : le 3d-3 (ordres de chevalerie, carriere Knight).
+Quatre paliers : Squire (saisissable tel quel), Knight ("+10 CC avec les lances"), First
+Knight (miracle sur les haches + trait Champion contre ennemis hais), Knight of the Inner
+Circle ("+10 Fel/+10 WP permanents", deja resolu par le ModifyCarac du 2.50 etape 3, juste
+pas encore saisi en XML).
+Discussion avec Nono sur Knight : la piste "accrocher le ModifyCarac a la lance elle-meme"
+(mecanisme Arme du 2.50) a ete ecartee - elle donnerait le bonus a N'IMPORTE QUEL personnage
+possedant une lance (pas seulement un Knight) et en permanence sur tous les tests (pas
+seulement avec une lance), deux ecarts avec le livre. Nono a alors propose de representer
+le bonus comme un vrai bonus de competence, sur le modele du bonus de caracteristique deja
+fait : "utiliser une arme (les armes de cavalerie dans ce cas) est une competence" - `Melee
+(Cavalry)` existe deja dans le Rulebook (`RULES-COMPCOMB_CAVAL`). Verifie : le mecanisme
+Competence de DATA_CAREER_BONUS existant (utilise pour les Lore de province) ne porte
+qu'un octroi d'acces, aucune valeur chiffree - confirme par Nono qu'il fallait bien un
+pendant Competence a StructureCareerBonusAttributModif, l'asymetrie deja notee au 2.50
+point 4 comme "a trancher avec Nono".
+Ecrit (par Claude, PAS ENCORE COMPILE) : StructureCareerBonusCompetenceModif
+(chargemetier.pas), import du <ModifySkill> d'un <LevelN> de DATA_CAREER_BONUS dans
+xmlexportimport.pas (meme bloc que <ModifyCarac>, meme report apres la boucle du palier),
+PersonnageCareerBonusCompetenceModif (chargepersonnage.pas, copie exacte de
+PersonnageCareerBonusAttributModif), cable dans PdfPersonnageCompetence (pdfpersonnage.pas),
+listes Clear/Create ajoutees dans warhammersource.pas. Fichiers ecrits et committes sur le
+poste de Nono, tailles verifiees (chargemetier.pas 14823, chargepersonnage.pas 88300,
+pdfpersonnage.pas 246765, warhammersource.pas 55584, xmlexportimport.pas 176086).
+Reste : Nono compile et teste (rien n'exerce encore ce code, aucun livre ne pose de
+<ModifySkill> sous DATA_CAREER_BONUS) ; First Knight (miracle + trait Champion) reste sans
+mecanisme, a laisser en descriptif pour l'instant (meme traitement que les Psychologies) ;
+puis saisir en XML Squire/Knight/Knight of the Inner Circle et les onze Regiments of Renown.
+
+07/09/2026 - COMPILE PAR NONO
+Le pendant Competence de DATA_CAREER_BONUS (StructureCareerBonusCompetenceModif) compile
+sans erreur. Pas encore exerce en pratique (aucun livre ne pose de <ModifySkill> sous
+DATA_CAREER_BONUS pour l'instant). Suite : saisir en XML les paliers du 3d-3 (Squire, Knight
+-> Melee (Cavalry), Knight of the Inner Circle -> Fel/WP) dans BOOK_NATIONS_OF_MANKIND.Xml.
+
+07/09/2026 - LE PLAN "MELEE (CAVALRY)" POUR LE PALIER KNIGHT EST FAUX, REMPLACE PAR
+ModifyWeapon (TYPE D'ARME)
+En concevant la saisie XML du Reiksguard (ordre pilote choisi avec Nono pour le 3d-3), le
+plan du dessus (ModifySkill plat sur Melee (Cavalry)) s'est revele faux avant meme d'etre
+saisi : le texte du livre est "+10 CC avec les Lances, les Epees a deux mains OU les
+Boucliers" - trois familles d'armes precises, pas toute une competence. Bonifier Melee
+(Cavalry) en entier aurait aussi donne le bonus au Marteau de cavalerie (meme competence),
+que le livre ne mentionne pas ; meme probleme sur Melee (2 mains), qui couvre aussi la
+Grande Hache, le Marteau de guerre et le Pic.
+Piste rejetee 1 (Nono) : identifier les boucliers/armes visees via leurs qualites de jeu
+(ListeBonus). Verifie par Claude sur BOOK_RULESBOOK.Xml + BOOK_NATIONS_OF_MANKIND.Xml :
+- "Defensive" (RULES-WEAPB08) seul : present sur Quarterstaff, Halberd, Bastard Sword,
+  Swordbreaker, main gauche - aucun n'est une arme de Base, donc pas un marqueur de bouclier.
+- "Defensive" ET "Undamaging" (RULES-WEAPB27) ensemble (raffinement propose par Nono) :
+  exclut bien le Cimeterre Arabyen (Defensive seul) et le Baton/Couteau (Undamaging seul),
+  MAIS l'Epee (NATIO-COMB_ESCR_02, Nations of Mankind, competence Escrime) porte les deux -
+  et ce n'est pas un bouclier. Conjonction fausse aussi.
+Conclusion : aucune combinaison de qualites de jeu n'identifie une famille d'arme de facon
+fiable et perenne (chaque nouveau livre peut ajouter une arme qui casse l'heuristique du
+jour) - a retenir pour toute tentative future du meme genre.
+Solution retenue (accord Nono, "oui :D" / "tu m'as convaincu") : un troisieme pendant de
+DATA_CAREER_BONUS, ModifyWeapon, qui filtre par un nouveau champ StructureArme.TypeArme
+(la NATURE de l'arme - epee/lance/bouclier -, orthogonal a CodeCompetence qui classe par
+MANIEMENT) plutot que par une heuristique sur les qualites. Point d'accroche trouve avec
+Nono ("dans les PDF, il y a un pourcentage calcule pour l'arme, on peut l'utiliser ici") :
+PdfPersonnageArmesDonnees (pdfpersonnage.pas) calcule deja UN pourcentage par LIGNE d'arme
+(PdfPersonnageCompetence sur PArme.CodeCompetence) - le bonus ModifyWeapon s'ajoute a cette
+ligne precise, jamais au total de competence generique affiche ailleurs sur la fiche. Ca
+resout au passage le probleme de fond (une fiche WFRP4e n'affiche qu'un total plat par
+competence) : le bonus reste situationnel, exactement comme la regle du livre le veut.
+Ecrit (par Claude, PAS ENCORE COMPILE) :
+- chargeconstantes.pas : ConstXmlModifieArme='ModifyWeapon', ConstXmlDataSkill='skill'.
+- chargearme.pas : nouveau champ StructureArme.TypeArme.
+- xmlexportimport.pas : parsing/export de <Type> sur <Weapon> ; parsing de <ModifyWeapon
+  name="..." skill="...">VALEUR</ModifyWeapon> dans le bloc <LevelN> de DATA_CAREER_BONUS
+  (meme report de Niveau apres boucle que ModifyCarac/ModifySkill).
+- chargemetier.pas : StructureCareerBonusArmeModif (CodeBonus/Niveau/CodeTypeArme/
+  CodeCompetence facultatif/Valeur) + TListCareerBonusArmeModif.
+- chargepersonnage.pas : PersonnageCareerBonusArmeModif(Personnage, PArme) - prend l'ARME en
+  parametre, pas juste un code de competence.
+- pdfpersonnage.pas : PersonnageCareerBonusArmeModif ajoute au Pourcent de la ligne d'arme
+  (juste apres l'appel PdfPersonnageCompetence existant), PAS au total generique.
+- warhammersource.pas : ListCareerBonusArmeModif Clear/Create ajoutes.
+- DATABASE/BOOK_RULESBOOK.Xml : <Type>"RULES-WTYPE_LANCE"</Type> sur Lance
+  (RULES-COMB_CAVAL_02), <Type>"RULES-WTYPE_SWORD"</Type> sur Bastard Sword et Zweihander
+  (RULES-COMB_2M_01/05), <Type>"RULES-WTYPE_SHIELD"</Type> sur Shield/Shield (Large)/Shield
+  (Buckler) (RULES-COMB_BASE_07/08/09). Les autres armes ne sont PAS typees - a faire au fur
+  et a mesure des ordres qui en ont besoin, pas systematiquement. Aucune table de libelles
+  pour TypeArme : usage interne au filtrage, rien n'affiche ce champ a l'ecran pour l'instant.
+Fichiers ecrits et committes sur le poste de Nono, tailles verifiees (chargearme.pas 6525,
+chargeconstantes.pas 51822, chargemetier.pas 16204, xmlexportimport.pas 178807,
+chargepersonnage.pas 90781, pdfpersonnage.pas 247354, warhammersource.pas 55698,
+DATABASE/BOOK_RULESBOOK.Xml verifie coherent apres les 5 <Type> ajoutes).
+Reste : (1) Nono compile et teste (aucune regression attendue, rien n'exerce encore ce code
+en pratique) ; (2) resoudre le blocage Nations (§2.44/CONTEXT.md) pour la condition d'ethnie
+du Reiksguard (l'Empire est represente par 8 ethnies distinctes, pas une seule - Nono veut
+une vraie table des Nations) ; (3) ecrire l'entree <CareerBonus> complete du Reiksguard
+(Squire/Knight/First Knight/Knight of the Inner Circle) dans BOOK_NATIONS_OF_MANKIND.Xml.
+
+07/09/2026 - COLLISION D IDENTIFIANT A LA COMPILATION, CORRIGEE
+ConstXmlDataSkill (choisi pour l'attribut skill= de <ModifyWeapon>) existait deja dans
+chargeconstantes.pas l.85 = 'DATA_SKILL' (le nom du bloc XML des competences) - erreur de
+compilation "Duplicate identifier" repere par Nono. Renomme en
+ConstXmlModifieArmeCompetence, les deux usages dans xmlexportimport.pas (l.2611-2612) mis a
+jour. Silent-write au premier envoi de chargeconstantes.pas/xmlexportimport.pas (tailles
+inchangees malgre confirmation), renvoye et verifie (52019 / 178831 octets). Nono a
+recompile ensuite avec succes (WarhammerHelp.exe reconstruit).
+
+07/09/2026 - CRASH EGridException SUR DOUBLE BARREL PISTOL, SANS RAPPORT AVEC ModifyWeapon
+- CORRIGE
+En testant apres compilation, Nono a eu un plantage EGridException "Index Out of range
+Cell[Col=1 Row=7]" (grids.pas l.10349) en selectionnant le Double Barrel Pistol dans
+WinWeapon. Cause trouvee dans winweapon.pas : TabBonus.RowCount est fixe a 7 une seule fois
+a l'ouverture de la fenetre (l.108) et n'est JAMAIS agrandi ensuite ; TabWeaponAfterSelection
+(l.257-277) ecrit une ligne par qualite de l'arme selectionnee (TabBonus.Cells[1, Ind+1],
+Ind allant de 0 a NbBonus-1) - une arme avec 7 qualites ou plus (le Double Barrel Pistol
+manifestement) ecrit donc en ligne 7, hors plage (RowCount=7 => lignes valides 0..6). Bug
+PRE-EXISTANT, sans aucun rapport avec le chantier ModifyWeapon/TypeArme en cours (aucune des
+armes touchees par ce chantier - Lance/Bastard Sword/Zweihander/3 Shields - n'est concernee).
+Corrige (par Claude) : ajout de `if TabBonus.RowCount <= NbBonus then TabBonus.RowCount :=
+NbBonus + 1;` juste avant la boucle d'ecriture, meme reflexe que TabWeapon.RowCount plus haut
+dans la meme unite (l.124-125). Fichier ecrit et committe, taille verifiee (winweapon.pas
+13501 octets). Pas encore reteste par Nono.

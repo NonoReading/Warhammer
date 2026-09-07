@@ -78,9 +78,43 @@ Type
         Valeur:         Integer;
   End;
 
+  // Le pendant Competence de StructureCareerBonusAttributModif ci-dessus, laisse de cote
+  // au 2.50 etape 3 faute de besoin (asymetrie notee dans CONTEXT.md a l'epoque). Necessaire
+  // au 3d-3 (ordres de chevalerie) : le palier Knight ("+10 CC avec les lances") se
+  // represente comme un bonus chiffre sur Melee (Cavalry), pas comme un simple octroi de
+  // competence (qui ne porte aucune valeur) - decision Nono, CONTEXT.md 2.44/2.50.
+  StructureCareerBonusCompetenceModif = Record
+        CodeBonus:      String;
+        Niveau:         Integer;
+        CodeCompetence: String;
+        Valeur:         Integer;
+  End;
+
+  // Le pendant "par type d'arme" des deux precedents - <ModifyWeapon> pose dans un
+  // <LevelN>. Necessaire parce que le palier Knight ("+10 CC avec les lances, les
+  // epees a deux mains ou les boucliers") ne concerne qu'UNE PARTIE des armes d'une
+  // meme competence (Melee (Cavalry) couvre aussi le marteau de cavalerie, Melee (2
+  // mains) couvre aussi la Grande Hache et le Marteau de guerre) : ModifySkill seul
+  // bonifierait ces armes-la aussi, ce que le livre ne dit pas. CodeTypeArme vise
+  // StructureArme.TypeArme (nouveau champ, chargearme.pas). CodeCompetence est un
+  // second filtre FACULTATIF (attribut skill= du tag) pour les cas comme "epees a
+  // deux mains" ou le type seul (Sword) engloberait aussi l'epee de base et les armes
+  // d'escrime - verifie le 07/09/2026 (Log.txt) qu'aucune combinaison de qualites
+  // n'identifie ca de facon fiable, d'ou ce champ dedie plutot qu'une heuristique sur
+  // ListeBonus. CONTEXT.md 2.50 etape 3 (3d-3, Ordres de Chevalerie).
+  StructureCareerBonusArmeModif = Record
+        CodeBonus:      String;
+        Niveau:         Integer;
+        CodeTypeArme:   String;
+        CodeCompetence: String;
+        Valeur:         Integer;
+  End;
+
   TListCareerBonus       = specialize TList<StructureCareerBonus>;
   TListCareerBonusNiveau = specialize TList<StructureCareerBonusNiveau>;
   TListCareerBonusAttributModif = specialize TList<StructureCareerBonusAttributModif>;
+  TListCareerBonusCompetenceModif = specialize TList<StructureCareerBonusCompetenceModif>;
+  TListCareerBonusArmeModif = specialize TList<StructureCareerBonusArmeModif>;
 
 var
   ListMetier:     TListMetier;
@@ -91,6 +125,10 @@ var
   NbCareerBonusNiveau:    Integer;
   ListCareerBonusAttributModif: TListCareerBonusAttributModif;
   NbCareerBonusAttributModif:   Integer;
+  ListCareerBonusCompetenceModif: TListCareerBonusCompetenceModif;
+  NbCareerBonusCompetenceModif:   Integer;
+  ListCareerBonusArmeModif: TListCareerBonusArmeModif;
+  NbCareerBonusArmeModif:   Integer;
 
 function chercheMetier(CodeMetier :String): StructureMetier;
 Function CheminMetierImage(CodeMetier: String): String;

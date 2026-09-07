@@ -259,6 +259,15 @@ begin
     else
       NbBonus                := 0;
 
+    // TabBonus.RowCount est initialise a 7 (une fois, a l'ouverture de la fenetre) et
+    // n'etait jamais agrandi ensuite : une arme avec 7 qualites ou plus (ex. Double Barrel
+    // Pistol) faisait planter TabBonus.Cells[1, Ind+1] en ecrivant sur la ligne 7, hors
+    // plage (EGridException Cell[Col=1 Row=7], leve par Nono le 07/09/2026 - sans rapport
+    // avec le chantier ModifyWeapon en cours, CONTEXT.md/Log.txt). Meme reflexe que
+    // TabWeapon.RowCount plus haut dans cette unite (l.124-125).
+    if TabBonus.RowCount <= NbBonus then
+      TabBonus.RowCount := NbBonus + 1;
+
     For I := 1 to TabBonus.ColCount -1 do
       for J := 1 to TabBonus.RowCount -1 do
         TabBonus.Cells[I, J] := '';

@@ -710,6 +710,8 @@ Procedure XmlExportBook(Livre: String; Langue: String);
               XmlContent.Add(XmlLigne(ConstXmlQualite, PArme.ListeBonus));
               XmlContent.Add(XmlLigne(ConstXmlMains, IntToStr(PArme.Mains)));
               XmlContent.Add(XmlLigne(ConstXmlMunition, IntToStr(PArme.Munition)));
+              if PArme.TypeArme <> '' then
+                XmlContent.Add(XmlLigne(ConstXmlType, PArme.TypeArme));
 
               XmlContent.Add(XmlFinCode(ConstXmlArme));
             end;
@@ -1050,6 +1052,10 @@ Procedure XmlImport(FileName: String; OnlyPrimary: Boolean; OnlyCode: Boolean);
     PCareerBonusNiveau:       StructureCareerBonusNiveau;
     PCareerBonusAttributModif:    StructureCareerBonusAttributModif;
     TempCareerBonusAttributModif: TListCareerBonusAttributModif;
+    PCareerBonusCompetenceModif:    StructureCareerBonusCompetenceModif;
+    TempCareerBonusCompetenceModif: TListCareerBonusCompetenceModif;
+    PCareerBonusArmeModif:    StructureCareerBonusArmeModif;
+    TempCareerBonusArmeModif: TListCareerBonusArmeModif;
     IndTempModif:             Integer;
     PFabrication:             StructureFabrication;
     PMetierRaceChoixMetier:   StructureMetierRaceChoixMetier;
@@ -2067,6 +2073,8 @@ Procedure XmlImport(FileName: String; OnlyPrimary: Boolean; OnlyCode: Boolean);
                               PArme.Portee          := RemoveQuotes(UTF8Encode(Node.TextContent));
                             ConstXmlPrix:
                               PArme.Prix            := RemoveQuotes(UTF8Encode(Node.TextContent));
+                            ConstXmlType:
+                              PArme.TypeArme        := RemoveQuotes(UTF8Encode(Node.TextContent));
                             // <ModifyCarac name="CODE">VALEUR</ModifyCarac> pose directement sur
                             // l'arme (rare - arme magique bonifiant un Attribut) - CONTEXT.md 2.50
                             // etape 3. Pas de pendant ModifySkill pour l'instant (voir
@@ -2558,7 +2566,16 @@ Procedure XmlImport(FileName: String; OnlyPrimary: Boolean; OnlyCode: Boolean);
                                     // avant <Order> dans le XML, et Niveau n'est connu qu'une fois
                                     // la boucle terminee (meme raison que ListCareerBonusNiveau.add
                                     // plus bas, deja differe apres la boucle).
-                                    TempCareerBonusAttributModif := TListCareerBonusAttributModif.Create;
+                                    // <ModifySkill> ajoute au 2.44/3d-3 (Knight, "+10 CC avec les
+                                    // lances" represente comme un bonus chiffre sur Melee (Cavalry))
+                                    // - meme mecanisme et meme raison de differer que ModifyCarac.
+                                    // <ModifyWeapon> ajoute le 07/09/2026, meme mecanisme, pour le
+                                    // meme palier Knight mais filtre par TYPE d'arme (name=) et
+                                    // FACULTATIVEMENT par competence (skill=) - voir ChargeMetier,
+                                    // StructureCareerBonusArmeModif.
+                                    TempCareerBonusAttributModif   := TListCareerBonusAttributModif.Create;
+                                    TempCareerBonusCompetenceModif := TListCareerBonusCompetenceModif.Create;
+                                    TempCareerBonusArmeModif       := TListCareerBonusArmeModif.Create;
 
                                     Node := XmlElement(NodeNv3.FirstChild);
                                     while Assigned(Node) do
@@ -2578,6 +2595,26 @@ Procedure XmlImport(FileName: String; OnlyPrimary: Boolean; OnlyCode: Boolean);
                                               PCareerBonusAttributModif.Valeur       := StrToIntDef(RemoveQuotes(UTF8Encode(Node.TextContent)), 0);
                                               TempCareerBonusAttributModif.Add(PCareerBonusAttributModif);
                                             end;
+                                          ConstXmlModifieCompetence:
+                                            begin
+                                              PCareerBonusCompetenceModif.CodeBonus      := PCareerBonus.CodeBonus;
+                                              PCareerBonusCompetenceModif.Niveau         := 0;
+                                              PCareerBonusCompetenceModif.CodeCompetence := RemoveQuotes(UTF8Encode(Node.Attributes.GetNamedItem(ConstXmlData).NodeValue));
+                                              PCareerBonusCompetenceModif.Valeur         := StrToIntDef(RemoveQuotes(UTF8Encode(Node.TextContent)), 0);
+                                              TempCareerBonusCompetenceModif.Add(PCareerBonusCompetenceModif);
+                                            end;
+                                          ConstXmlModifieArme:
+                                            begin
+                                              PCareerBonusArmeModif.CodeBonus    := PCareerBonus.CodeBonus;
+                                              PCareerBonusArmeModif.Niveau       := 0;
+                                              PCareerBonusArmeModif.CodeTypeArme := RemoveQuotes(UTF8Encode(Node.Attributes.GetNamedItem(ConstXmlData).NodeValue));
+                                              if Assigned(Node.Attributes) and Assigned(Node.Attributes.GetNamedItem(ConstXmlModifieArmeCompetence)) then
+                                                PCareerBonusArmeModif.CodeCompetence := RemoveQuotes(UTF8Encode(Node.Attributes.GetNamedItem(ConstXmlModifieArmeCompetence).NodeValue))
+                                              else
+                                                PCareerBonusArmeModif.CodeCompetence := '';
+                                              PCareerBonusArmeModif.Valeur        := StrToIntDef(RemoveQuotes(UTF8Encode(Node.TextContent)), 0);
+                                              TempCareerBonusArmeModif.Add(PCareerBonusArmeModif);
+                                            end;
                                         end;
 
                                         Node := XmlElement(Node.NextSibling);
@@ -2594,8 +2631,24 @@ Procedure XmlImport(FileName: String; OnlyPrimary: Boolean; OnlyCode: Boolean);
                                             ListCareerBonusAttributModif.add(PCareerBonusAttributModif);
                                             inc(NbCareerBonusAttributModif);
                                           end;
+                                        for IndTempModif := 0 to TempCareerBonusCompetenceModif.Count - 1 do
+                                          begin
+                                            PCareerBonusCompetenceModif        := TempCareerBonusCompetenceModif[IndTempModif];
+                                            PCareerBonusCompetenceModif.Niveau := PCareerBonusNiveau.Niveau;
+                                            ListCareerBonusCompetenceModif.add(PCareerBonusCompetenceModif);
+                                            inc(NbCareerBonusCompetenceModif);
+                                          end;
+                                        for IndTempModif := 0 to TempCareerBonusArmeModif.Count - 1 do
+                                          begin
+                                            PCareerBonusArmeModif        := TempCareerBonusArmeModif[IndTempModif];
+                                            PCareerBonusArmeModif.Niveau := PCareerBonusNiveau.Niveau;
+                                            ListCareerBonusArmeModif.add(PCareerBonusArmeModif);
+                                            inc(NbCareerBonusArmeModif);
+                                          end;
                                       end;
                                     TempCareerBonusAttributModif.Free;
+                                    TempCareerBonusCompetenceModif.Free;
+                                    TempCareerBonusArmeModif.Free;
                                   end;
                               end;
 

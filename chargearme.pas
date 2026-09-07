@@ -21,6 +21,17 @@ Type
     CalculDegat:    String;
     ListeBonus:	    String;
     Munition:	    Integer;
+    // Type generique de l'arme (ex. RULES-WTYPE_SWORD, RULES-WTYPE_LANCE,
+    // RULES-WTYPE_SHIELD) - CONTEXT.md 2.50 etape 3 (3d-3, Ordres de Chevalerie).
+    // Orthogonal a CodeCompetence (qui classe par MANIEMENT - Base/Cavalerie/2
+    // mains/...) : TypeArme classe par NATURE de l'arme (epee/lance/bouclier/...),
+    // ce que les qualites (ListeBonus) ne permettent pas de deduire de facon fiable
+    // (verifie le 07/09/2026 : Defensive et Undamaging se retrouvent chacun sur des
+    // armes d'autres familles, et meme leur conjonction sur l'Epee d'escrime -
+    // Log.txt). Facultatif : '' si l'arme n'a pas encore besoin d'etre filtree par un
+    // ModifyWeapon (voir ChargeMetier). Pas de table de libelles pour l'instant -
+    // usage interne au filtrage, rien a afficher tant qu'aucun ecran n'en a besoin.
+    TypeArme:       String;
     Livre:          String;
 end;
 

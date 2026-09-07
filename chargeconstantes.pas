@@ -246,6 +246,19 @@ Const
       ConstXmlModifieCompetence         = 'ModifySkill';
       ConstXmlModifieCompetenceAttribut = 'ModifySkillAttribut';
       ConstXmlModifieArmure             = 'ModifArmour';
+      // Pendant "par type d'arme" des deux ci-dessus, ajoute au 2.44/3d-3 pour le palier
+      // Knight des Ordres de Chevalerie ("+10 CC avec les lances, les epees a deux mains
+      // ou les boucliers") : un bonus qui ne s'applique qu'a CERTAINES armes d'une meme
+      // competence, donc impossible a representer par ModifySkill seul (qui bonifie toute
+      // la competence). name= vise StructureArme.TypeArme (nouveau champ, non un code de
+      // competence) ; l'attribut skill= optionnel restreint en plus a une competence
+      // precise (ex. "Two-handed Swords" = TypeArme SWORD + skill RULES-COMPCOMB_2M, pour
+      // exclure l'Epee de base ou les armes d'escrime qui portent aussi TypeArme SWORD).
+      ConstXmlModifieArme               = 'ModifyWeapon';
+      // Attribut (pas balise - collision avec ConstXmlDataSkill = 'DATA_SKILL' ci-dessus,
+      // repere a la compilation) portant le filtre CodeCompetence facultatif de
+      // <ModifyWeapon>.
+      ConstXmlModifieArmeCompetence     = 'skill';
       ConstXmlAjouteCompetence          = 'AddSkill';
       ConstXmlOpinions                  = 'OPINIONS';
       ConstXmlOpinion                   = 'Opinion';

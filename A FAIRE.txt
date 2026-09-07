@@ -18,24 +18,6 @@ pas touche : if TabAttribut.Cells[Ind, LigAttCode] = Carac then -> if
 CodeSansLivre(TabAttribut.Cells[Ind, LigAttCode]) = Carac then. Le commentaire au-dessus
 de la fonction (l.1073-1076) est egalement perime, a corriger au passage.
 
-SUPPRIMER LE FICHIER ORPHELIN chargetalentmodif.pas. Repere le 06/09/2026 (chantier
-resolveur generique, CONTEXT.md 2.50) : meme unit name (ChargeTalentAttributModif) et meme
-contenu (avant ce chantier) que chargetalentattributmodif.pas, absent de WarhammerHelp.lpi
-(verifie) donc jamais compile - juste un vieux doublon qui traine. Pas d acces suppression
-depuis ce poste.
-
-DISTILLER PUIS SUPPRIMER LES QUATRE .MD PARASITES DE LA RACINE. Repere le 05/09/2026 :
-CHANTIER_versionning_livres.md, CONCEPTION_creation_choix_talents.md,
-CONTEXT_MENU_INTEGRATION.md, REPRISE_session_20260809.md. Meme famille que les CHANGELOG.md et
-TODO.md retires le 03/09 : ce qui est encore vrai va dans CONTEXT.md, ce qui reste a faire ici,
-puis on supprime. Il ne doit rester que CONTEXT.md, Log.txt et A FAIRE.txt.
-
-SUPPRIMER TRACE_references_nues.txt A LA RACINE. Le mouchard qui l ecrivait est retire le
-06/09/2026 (2.49 etape 4) et n a pas ete remis en place malgre le rollback du durcissement
-(son travail sur le perimetre qu il mesurait est fait) : le fichier ne sera plus regenere,
-mais je n ai pas pu le supprimer moi-meme (pas d acces suppression sur ce poste). Jetable des
-que tu veux.
-
 LE TEST DE RADICAL DE TALENT SUPPOSE UN CODE DE 5 CARACTERES. winpersonnage.pas l.3245,
 copy(CodeSansLivre(...),1,5) : vrai pour les 868 codes en T+4 chiffres, faux pour les ids
 "A ou B" comme T0009/RULES-T0067 (seul le premier est compare) et pour le generique T*. Ce
@@ -239,6 +221,18 @@ A reprendre avec le morceau "creatures" du lot 3 si on veut de vraies creatures.
 =========================================================================
 CONCEPTIONS A MENER  (chantiers a part entiere, ne pas les melanger)
 =========================================================================
+
+UNE VRAIE TABLE DES NATIONS, POUR LA CONDITION D ETHNIE DU 3d-3 (ORDRES DE CHEVALERIE).
+Bloque le pilote Reiksguard (CONTEXT.md 2.44/2.50) : le livre exige "doit venir de
+l Empire", mais <Specie> sur DATA_CAREER_BONUS ne porte qu UN SEUL code d ethnie, alors
+que l Empire est deja represente par 8 ethnies distinctes (RULES-RACE_HUM "Humans
+(Reikland)" du Rulebook + les 7 provinces NATIO-RACE_HAVER/HHOCH/HOSTM/HOSTL/HSTIR/
+HTALA/HWISS de Nations of Mankind) - et la Bretagne (HBRPA/HBRNO), l Estalie (HESTA),
+la Tilee, la Norsca, l Arabie (HARAB) etc. sont dans le meme cas (plusieurs ethnies pour
+une seule "nation" au sens du joueur). Nono veut une vraie table (pas un bricolage du
+champ existant) - conception a mener AVEC LUI avant de toucher AppartenancesCandidates
+(chargemetier.pas ~193-230, le point unique qui filtre aujourd hui par CodeRace) ou tout
+code lie a l ethnie. Pas commencee.
 
 UN ACCESSEUR UNIQUE POUR LA VALEUR D UNE COMPETENCE. Idee de Nono le 06/09/2026, posee en
 parallele du chantier Effet/Cible/Forme (voir CONTEXT.md, section talents) pour ne pas les

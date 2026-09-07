@@ -593,6 +593,12 @@ Function PdfPersonnageCompetence(Personnage: StructurePersonnage; Competence: St
     // §2.50 étape 3, point 5.
     Res.Total := Res.Total + PersonnageArmureBonusCompetenceModif(Personnage, Competence);
 
+    // Modificateur d'appartenance (régiment/ordre de chevalerie/culte) dont le palier est
+    // atteint, sur une Compétence - pendant Competence de PersonnageCareerBonusAttributModif
+    // (PdfPersonnageAttribut plus bas). CONTEXT.md §2.44/3d-3, ex. Knight : +10 sur Melee
+    // (Cavalry) ("+10 CC avec les lances").
+    Res.Total := Res.Total + PersonnageCareerBonusCompetenceModif(Personnage, Competence);
+
     Result := res;
   end;
 
@@ -1542,7 +1548,13 @@ Procedure PdfPersonnageCreation(Personnage: StructurePersonnage; BackGround: Boo
 
               CompetenceDonnee := PdfPersonnageCompetence(Personnage, PArme.CodeCompetence, Bidon);
 
-              Pourcent := IntToStr(CompetenceDonnee.Total);
+              // Bonus des Ordres de Chevalerie/appartenances filtre par TYPE d'arme
+              // (ex. "+10 CC avec les lances" - Reiksguard, palier Knight) : ajoute ICI,
+              // ligne d'arme par ligne d'arme, et non dans PdfPersonnageCompetence (qui
+              // reste le total de competence generique affiche ailleurs sur la feuille) -
+              // CONTEXT.md 2.50 etape 3 (3d-3). CompetenceDonnee.Augmentation reste base
+              // sur le total generique, ce bonus ne change pas l'affichage "pas de bonus".
+              Pourcent := IntToStr(CompetenceDonnee.Total + PersonnageCareerBonusArmeModif(Personnage, PArme));
               PasBonus := (CompetenceDonnee.Augmentation = 0);
 
               if pos(EquipementCT, PArme.CodeArme) > 0 then

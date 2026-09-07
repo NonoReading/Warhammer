@@ -84,10 +84,24 @@ OK par Nono (06/09/2026 soir, entre parenthèses à la suite du nom de la carri�
 deux formats). Nono a aussi vérifié que ressortir/rerentrer dans la même carrière permet
 déjà d'ajouter une autre appartenance (cumulatif, cohérent avec la règle du livre) : pas de
 chantier « correction » à mener. Reste sur ce chantier : le 3d-3 (ordres de chevalerie —
-Squire seul saisissable tel quel, les trois autres paliers
-restent en descriptif sauf le Knight of the Inner Circle, dont le code de résolution existe
-désormais (§2.50 étape 3) mais qui attend encore d'être saisi en XML), et les onze Regiments
-of Renown. **§2.49 étape 4 (durcissement `VerifieRecherche`) TERMINÉ ET CLOS (06/09 nuit,
+Squire saisissable tel quel ; Knight of the Inner Circle ("+10 Fel/+10 WP") a son code de
+résolution (§2.50 étape 3, Attribut, compilé par Nono) mais attend encore d'être saisi en
+XML. **Knight ("+10 CC avec les lances/épées à 2 mains/boucliers") a changé de mécanisme le
+07/09/2026** : le plan du 06/09 (un `ModifySkill` plat sur `Melee (Cavalry)`) sur-attribuait
+le bonus à TOUTE arme de la même compétence (le marteau de cavalerie aurait aussi eu le
+bonus des lances) — repéré en vérifiant les qualités d'armes (Defensive/Undamaging,
+aucune combinaison ne distingue de façon fiable une famille d'armes, Log.txt 07/09).
+Remplacé par un troisième pendant, `ModifyWeapon`, filtré par un nouveau champ
+`StructureArme.TypeArme` (+ un filtre `skill=` facultatif pour les cas comme "épées à 2
+mains") — écrit ce jour (Claude), **pas encore compilé par Nono**. `Lance`/`Bastard
+Sword`/`Zweihänder`/les 3 `Shield*` du Rulebook portent déjà leur `<Type>` ; voir §2.50
+point 4bis. Il reste À ÉCRIRE l'entrée `<CareerBonus>` du Reiksguard elle-même (pilote
+choisi avec Nono) dans `BOOK_NATIONS_OF_MANKIND.Xml` — bloqué sur la condition d'ethnie
+("doit venir de l'Empire") : `<Specie>` ne porte qu'UN code, alors que l'Empire est
+aujourd'hui représenté par 8 ethnies distinctes (Reikland + 7 provinces de Nations of
+Mankind) ; Nono veut une vraie table des Nations plutôt qu'un bricolage - conception non
+commencée, voir §2.44. First Knight (miracle sur les haches + trait Champion) reste en
+descriptif, aucun mécanisme ne le porte), et les onze Regiments of Renown. **§2.49 étape 4 (durcissement `VerifieRecherche`) TERMINÉ ET CLOS (06/09 nuit,
 3e tentative)** : tous les codes nus trouvés en cours de route préfixés `RULES-` (`PDF_XXX`/
 `CorruptionPhysique`/`CorruptionMentale`/`LAB_`/`MESS_`/`SHORTATTR_`, les 26 codes de
 `PdfPersonnageCompetenceTri`, `TalentGenerique`), `VerifieRecherche` stable en forme
@@ -103,13 +117,16 @@ Deux autres chantiers ouverts, sans lien direct :
    mécanismes décoratifs devenus redondants (`ListTalentAttributModif` en tant qu'annotation
    seule/`ListTalentCompetenceModif`/l'ancien `PTalent.Attribut`). Décision de Nono : pas
    maintenant, laisser le temps de la mise à jour. Voir §2.50 pour le détail.
-2. Petites choses en attente, sans urgence : distiller puis supprimer les quatre `.md`
-   parasites de la racine (`CHANTIER_versionning_livres.md`, `CONCEPTION_creation_choix_talents.md`,
-   `CONTEXT_MENU_INTEGRATION.md`, `REPRISE_session_20260809.md`) ; supprimer le fichier
-   orphelin `chargetalentmodif.pas` (repéré le 06/09, voir §2.50) ; et deux chantiers capturés
-   dans `A FAIRE.txt` le 05/09 sans une ligne de code : l'affichage des **disclaimers des
-   livres** depuis le menu principal, et la **gestion de l'ancrage des contrôles** dans les
-   fenêtres.
+2. Petites choses en attente, sans urgence : deux chantiers capturés dans `A FAIRE.txt` le
+   05/09 sans une ligne de code : l'affichage des **disclaimers des livres** depuis le menu
+   principal, et la **gestion de l'ancrage des contrôles** dans les fenêtres.
+
+**Nettoyage fait par Nono (07/09/2026) sans passer par ce poste** : les quatre `.md`
+parasites de la racine (`CHANTIER_versionning_livres.md`, `CONCEPTION_creation_choix_talents.md`,
+`CONTEXT_MENU_INTEGRATION.md`, `REPRISE_session_20260809.md`), le fichier orphelin
+`chargetalentmodif.pas` et `TRACE_references_nues.txt` sont supprimés — directement, sans la
+passe de distillation prévue pour les `.md` (décision de Nono). Il ne reste que `CONTEXT.md`,
+`Log.txt` et `A FAIRE.txt` à la racine pour le suivi.
 
 ⚠️ Lire le §0 sur **l'écriture qui répond « écrit » sans écrire** : quatre occurrences le
 05/09 au soir, toujours au **premier envoi suivant un restage**, toujours réparées en
@@ -5563,9 +5580,55 @@ déjà là, correcte, en attente du code.
    `PersonnageNiveauDansMetier` <= niveau du palier), câblé dans `PdfPersonnageAttribut`
    (`pdfpersonnage.pas` l.686). Pas encore exercé en pratique : aucun livre ne pose de
    `<ModifyCarac>` sous `DATA_CAREER_BONUS` (le Knight of the Inner Circle, §2.44/3d-3,
-   n'est toujours pas saisi en XML). **Ne couvre que l'Attribut, pas la Compétence**
-   (pas de pendant `ModifySkill`/`StructureCareerBonusCompetenceModif`) - à trancher avec
-   Nono : rien aujourd'hui n'en a besoin, mais ça laisse le chantier asymétrique.
+   n'est toujours pas saisi en XML).
+   **✅ Pendant Compétence ajouté (07/09/2026, écrit par Claude, COMPILÉ par Nono)** :
+   l'asymétrie ci-dessus levée en ajoutant `StructureCareerBonusCompetenceModif`
+   (`chargemetier.pas`), import du `<ModifySkill>` d'un `<LevelN>` dans `xmlexportimport.pas`
+   (même bloc que `<ModifyCarac>`, même report après boucle), `PersonnageCareerBonusCompetenceModif`
+   (`chargepersonnage.pas`, copie de `PersonnageCareerBonusAttributModif`), câblé dans
+   `PdfPersonnageCompetence` (`pdfpersonnage.pas`). Mécanisme validé (compile), mais **son
+   usage initialement prévu pour le Knight du 3d-3 ("+10 CC avec les lances") s'est révélé
+   faux** avant d'être saisi en XML : bonifier toute la compétence `Melee (Cavalry)` aurait
+   aussi donné le bonus au marteau de cavalerie, que le livre ne mentionne pas — repéré en
+   concevant le pilote, pas en testant. `ModifySkill` reste utile pour un VRAI bonus de
+   compétence entière (aucun cas connu aujourd'hui), mais le 3d-3 est passé au point 4bis
+   ci-dessous.
+
+   **4bis. ✅ Pendant "par type d'arme" ajouté (07/09/2026, écrit par Claude, PAS ENCORE
+   COMPILÉ)** : `ModifyWeapon`, troisième pendant du même moule, pour les bonus qui ne
+   couvrent qu'UNE PARTIE des armes d'une compétence (le cas réel du Knight). Nouveau champ
+   `StructureArme.TypeArme` (`chargearme.pas`) - la NATURE de l'arme (épée/lance/bouclier),
+   orthogonal à `CodeCompetence` qui classe par MANIEMENT (Base/Cavalerie/2 mains/...) - lu
+   depuis un nouveau tag `<Type>` sur `<Weapon>` (`ConstXmlType`, déjà utilisé ailleurs pour
+   les armures mais scopé par élément parent, donc sans collision). Chemin suivi avant
+   d'y arriver, gardé pour mémoire : Defensive seul faux (Quarterstaff/Halberd/Bastard
+   Sword/Swordbreaker/main gauche l'ont aussi, hors familles Basique) ; Defensive+Undamaging
+   ensemble faux aussi (l'Épée d'escrime de Nations of Mankind porte les deux) - aucune
+   combinaison de qualités de jeu n'identifie une famille d'arme de façon fiable, d'où ce
+   champ dédié plutôt qu'une heuristique. `StructureCareerBonusArmeModif`
+   (`chargemetier.pas`) : `CodeTypeArme` (vise `TypeArme`) + `CodeCompetence` FACULTATIF
+   (attribut `skill=` du tag, `ConstXmlDataSkill`) pour les cas comme "épées à deux mains" où
+   le type seul (Sword) engloberait aussi l'épée de base à une main. Import dans
+   `xmlexportimport.pas` (même bloc `<LevelN>`, même report de `Niveau` après boucle que les
+   deux autres). `PersonnageCareerBonusArmeModif(Personnage, PArme)` (`chargepersonnage.pas`)
+   prend l'ARME ELLE-MÊME en paramètre (pas juste son code compétence) - câblé dans
+   `PdfPersonnageArmesDonnees` (`pdfpersonnage.pas`, bloc Armes de la fiche), AJOUTÉ ligne
+   d'arme par ligne d'arme au pourcentage déjà affiché par arme (Nono : "dans les PDF, il y a
+   un pourcentage calculé pour l'arme, on peut l'utiliser ici" - c'est le bon point
+   d'accroche, puisque chaque ligne d'arme calcule déjà SON PROPRE pourcentage, même s'il est
+   aujourd'hui identique pour toutes les armes d'une même compétence). Ce bonus n'apparaît
+   QUE sur cette ligne d'arme précise, jamais dans le total de compétence générique affiché
+   ailleurs sur la fiche - cohérent avec la règle du livre (bonus situationnel, pas un bonus
+   de compétence permanent). `Lance` (`RULES-COMB_CAVAL_02`), `Bastard Sword`/`Zweihänder`
+   (`RULES-COMB_2M_01`/`05`) et les 3 `Shield*` (`RULES-COMB_BASE_07/08/09`) du Rulebook
+   portent déjà `<Type>"RULES-WTYPE_LANCE"</Type>`/`SWORD`/`SHIELD` (07/09/2026) - les autres
+   armes ne sont PAS encore typées, à faire au fur et à mesure des ordres qui en ont besoin,
+   pas systématiquement. Aucune table de libellés pour `TypeArme` : usage interne au filtrage
+   pour l'instant, rien n'affiche ce champ à l'écran. **Reste à faire, dans l'ordre : (1) Nono
+   compile et teste (aucun livre n'exerce encore ce code, aucune régression attendue mais pas
+   vérifié) ; (2) résoudre le blocage Nations (§2.44) pour la condition d'ethnie du
+   Reiksguard ; (3) écrire l'entrée `<CareerBonus>` complète (Squire/Knight/First
+   Knight/Knight of the Inner Circle) dans `BOOK_NATIONS_OF_MANKIND.Xml`.**
    ✅ FAIT côté ARMES (écrit par Claude, compilé par Nono, aucune régression constatée,
    06/09/2026) : nouveau fichier `chargearmeattributmodif.pas` (`StructureArmeAttributModif`
    - Livre/CodeArme/CodeAttribut/Valeur, même moule que les talents, Attribut seul comme

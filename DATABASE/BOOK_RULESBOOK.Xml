@@ -13496,6 +13496,7 @@ Thieves steal all manner of wealth and goods from their fellow man. From the low
 <Quality>"RULES-WEAPB18 2,RULES-WEAPB08,RULES-WEAPB27"</Quality>
 <Hand>"1"</Hand>
 <Ammunition>"0"</Ammunition>
+<Type>"RULES-WTYPE_SHIELD"</Type>
 </Weapon>
 <Weapon id="RULES-COMB_BASE_08">
 <Description language="ENGLISH">"Shield (Large)"</Description>
@@ -13508,6 +13509,7 @@ Thieves steal all manner of wealth and goods from their fellow man. From the low
 <Quality>"RULES-WEAPB18 3,RULES-WEAPB08,RULES-WEAPB27"</Quality>
 <Hand>"1"</Hand>
 <Ammunition>"0"</Ammunition>
+<Type>"RULES-WTYPE_SHIELD"</Type>
 </Weapon>
 <Weapon id="RULES-COMB_BASE_09">
 <Description language="ENGLISH">"Shield (Buckler)"</Description>
@@ -13520,6 +13522,7 @@ Thieves steal all manner of wealth and goods from their fellow man. From the low
 <Quality>"RULES-WEAPB18 1,RULES-WEAPB08,RULES-WEAPB27"</Quality>
 <Hand>"1"</Hand>
 <Ammunition>"0"</Ammunition>
+<Type>"RULES-WTYPE_SHIELD"</Type>
 </Weapon>
 <Weapon id="RULES-COMB_BASE_10">
 <Description language="ENGLISH">"Dagger"</Description>
@@ -13568,6 +13571,7 @@ Thieves steal all manner of wealth and goods from their fellow man. From the low
 <Quality>"RULES-WEAPB12,RULES-WEAPB21"</Quality>
 <Hand>"1"</Hand>
 <Ammunition>"0"</Ammunition>
+<Type>"RULES-WTYPE_LANCE"</Type>
 </Weapon>
 <Weapon id="RULES-COMB_2M_*">
 <Description language="ENGLISH">"Two-handed weapons (Any)"</Description>
@@ -13592,6 +13596,7 @@ Thieves steal all manner of wealth and goods from their fellow man. From the low
 <Quality>"RULES-WEAPB10,RULES-WEAPB08"</Quality>
 <Hand>"2"</Hand>
 <Ammunition>"0"</Ammunition>
+<Type>"RULES-WTYPE_SWORD"</Type>
 </Weapon>
 <Weapon id="RULES-COMB_2M_02">
 <Description language="ENGLISH">"Great Axe"</Description>
@@ -13640,6 +13645,7 @@ Thieves steal all manner of wealth and goods from their fellow man. From the low
 <Quality>"RULES-WEAPB10,RULES-WEAPB30"</Quality>
 <Hand>"2"</Hand>
 <Ammunition>"0"</Ammunition>
+<Type>"RULES-WTYPE_SWORD"</Type>
 </Weapon>
 <Weapon id="RULES-COMB_ENTRA_*">
 <Description language="ENGLISH">"Entangling weapon (any)"</Description>
