@@ -6,6 +6,12 @@
 CORRECTIONS COURTES  (une ligne ou deux chacune)
 =========================================================================
 
+BOOK_RULESBOOK_FRANCAIS.XML N'A PAS LE BLOC DATA_NATION NI LA BALISE NATIONALITY. Ajoutes
+le 07/09/2026 dans BOOK_RULESBOOK.Xml (CONTEXT.md 2.51) pour la condition d'origine du
+Reiksguard - meme lacune que BOOK_NATIONS_OF_MANKIND.Xml, qui n'a lui-meme aucune
+traduction francaise. Sans effet tant que LANG=ENGLISH (INI.TXT) ; a faire si le francais
+redevient actif un jour.
+
 VALEURTARIFSORT (winpersonnage.pas l.1093) A LE MEME BUG DE PREFIXE QUE LE MAX DES
 TALENTS. Repere le 06/09/2026 en corrigeant NiveauMetierTalentMax (l.3269) et
 TabAugmentationTalentCalcul (l.3575) : les trois comparent un code extrait brut du XML

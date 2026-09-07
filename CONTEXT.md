@@ -1,6 +1,13 @@
 # Warhammer — Contexte projet
 
-**Dernière mise à jour : 06/09/2026 (nuit) — §2.49 ÉTAPE 4 TERMINÉE ET VALIDÉE : Nono a créé
+**Dernière mise à jour : 07/09/2026 — §2.51 COMPILÉ PAR NONO, AUCUN PROBLÈME CONSTATÉ :
+mécanisme générique « Nation » (regroupement politique d'ethnies, distinct de la Race
+biologique) pour la condition d'origine du Reiksguard (3d-3, §2.44 point de reprise 1).
+RULES-NATION_EMPIRE posé sur le Rulebook, les 7 provinces impériales de Nations of Mankind
+pointent dessus. Pas encore exercé en pratique (aucun `<CareerBonus>` ne l'utilise
+encore). Détail en §2.51.
+
+**06/09/2026 (nuit) — §2.49 ÉTAPE 4 TERMINÉE ET VALIDÉE : Nono a créé
 un personnage complet sans problème, VerifieRecherche durci de façon stable (3e tentative,
 tous les codes nus trouvés et préfixés RULES-). Nono commit. Détail en fin de §2.49.
 
@@ -4803,7 +4810,10 @@ ne pose pas de problème en jeu.
 **POINTS DE REPRISE, dans l'ordre :**
 
 1. **Le 3d-3, les ordres de chevalerie.** Même table `DATA_CAREER_BONUS`, sur la carrière
-   Knight au lieu de Soldier ; conception à mener avant saisie.
+   Knight au lieu de Soldier. Le blocage de conception (condition d'ethnie du Reiksguard,
+   « doit venir de l'Empire ») est résolu depuis le 07/09 par le mécanisme Nation — voir
+   §2.51 pour le détail et la suite exacte (compilé par Nono, pas encore exercé en
+   pratique faute de `<CareerBonus>` l'utilisant).
 2. **Les onze Regiments of Renown**, qui ne rentrent pas dans le moule — condition de niveau 3
    atteint et non d'ethnie, *trappings* que le greffon compétence/talent ne porte pas, et rang
    ramené à Soldier avec conservation du statut social. Même famille que les psychologies.
@@ -5675,6 +5685,78 @@ fichier ORPHELIN — même unit name (`ChargeTalentAttributModif`) et même cont
 chantier) que `chargetalentattributmodif.pas`, absent de `WarhammerHelp.lpi` (vérifié), donc
 inoffensif mais mort. Poubelle candidate, notée dans `A FAIRE.txt`, pas touchée ici (pas
 d'accès suppression depuis ce poste).
+
+---
+
+### 2.51 Mécanisme générique « Nation » pour la condition d'origine du Reiksguard — compilé par Nono, pas encore exercé en pratique (07/09/2026)
+
+Reprise du point de reprise 1 du §2.44 (3d-3, ordres de chevalerie). Le blocage : la
+condition « doit venir de l'Empire » du Reiksguard ne pouvait s'exprimer avec la donnée
+existante — `RULES-SPECIE_HUMAN` (`DATA_RACE`, §2.10) est un regroupement **biologique**
+qui inclut aussi la Tilée, hors Empire. Nono a tranché : une vraie table (pas un bricolage
+à base de `SeparateurMulti`), extensible à d'autres nations futures (Bretonnia, Kislev,
+Cathay — déjà présentes comme ethnies dans Nations of Mankind, sans regroupement), avec un
+libellé affichable, et le code générique `RULES-NATION_EMPIRE` porté par le **Rulebook**
+(pas par Nations of Mankind) puisque c'est un principe générique et que Reikland y est déjà.
+
+**Le mécanisme, sur le même moule que `DATA_RACE`/`ChargeEspece.pas`** — une table
+déclarable par n'importe quel livre, une ethnie citant son code sans que le livre qui le
+possède ait à être modifié :
+
+- Nouvelle unité `chargenation.pas` (`StructureNation` : CodeNation/Libelle/Livre,
+  `ListNation`, `ChercheNation`) — copie conforme de `chargeespece.pas`.
+- `chargeconstantes.pas` : `ConstXmlDataNation='DATA_NATION'` (bloc), `ConstXmlNation=
+  'Nation'` (balise d'entrée, comme `<Race>` pour `DATA_RACE`), `ConstXmlNationality=
+  'Nationality'` (pointeur posé sur une ethnie, comme `<Ethnic>` — deux balises séparées
+  pour la même raison que Race/Ethnic : ne pas confondre définition et référence dans un
+  livre édité à la main), `ConstPNation='PNation'`.
+- `chargerace.pas` : nouveau champ `StructureRace.Nation` (String), **FACULTATIF**
+  contrairement à `Espece` qui est obligatoire — la plupart des ethnies (Nains, Elfes,
+  Norses...) n'appartiennent à aucune nation.
+- `xmlexportimport.pas` : import ET export de `DATA_NATION` (même passe que `DATA_RACE`),
+  lecture/écriture de `<Nationality>` dans le bloc `<Specie>` (écrite seulement si non
+  vide), remise à zéro de `PRace.Nation` à chaque ethnie (même piège que `DossierNiveau`,
+  record réutilisé d'une itération à l'autre).
+- `warhammersource.pas` : `ListNation` Create/Clear/`NbNation`, `uses ChargeNation`.
+- `chargemetier.pas`, `AppartenancesCandidates` : le filtre `<Specie>` d'un `CareerBonus`
+  matche désormais soit l'ethnie du personnage directement (cas Averland, inchangé), soit
+  la **Nation** de cette ethnie via `ChercheRace(CodeRace).Nation` (cas nouveau, Reiksguard).
+  Vérifié : `CompareRechercheValeur(code, '')` renvoie bien `false` en mode durci actuel
+  (`VerifieRecherche` compare aussi le livre — deux chaînes vides ne peuvent égaler un
+  vrai code préfixé) — aucune ethnie sans Nation ne matchera par erreur.
+- `BOOK_RULESBOOK.Xml` : bloc `DATA_NATION` ajouté (`RULES-NATION_EMPIRE`, « Empire »),
+  `<Nationality>` posée sur Reikland (`RULES-RACE_HUM`), juste après son `<Ethnic>`.
+- `BOOK_NATIONS_OF_MANKIND.Xml` : `<Nationality>"RULES-NATION_EMPIRE"</Nationality>` posée
+  sur les 7 provinces impériales (Averland/Hochland/Ostermark/Ostland/Stirland/
+  Talabecland/Wissenland) — **pas** sur Marienburg/Westerland, indépendante de l'Empire
+  (le livre le dit explicitement, « who hires anyone », déjà noté au §2.44). Les dix
+  autres ethnies du livre (Kislev ×2, Albion, Araby, Bretonnia ×2, Cathay, Estalia, Ind,
+  Nippon) restent sans Nation — candidates à de futures nations propres, pas traitées ici.
+
+Fichiers écrits et committés sur le poste de Nono, tailles vérifiées (`chargeconstantes.pas`
+53095, `chargenation.pas` 1624 [nouveau], `chargerace.pas` 13007, `xmlexportimport.pas`
+182407, `warhammersource.pas` 55839, `chargemetier.pas` 16557, `BOOK_RULESBOOK.Xml`
+826335, `BOOK_NATIONS_OF_MANKIND.Xml` 566204).
+
+**Compilé par Nono le 07/09/2026, aucun problème constaté** (`WarhammerHelp.exe`
+reconstruit). Non-régression donc acquise, mais le mécanisme n'est **pas encore exercé en
+pratique** : `AppartenancesCandidates` est sa seule consommatrice, et aucun `<CareerBonus>`
+ne pose encore de `<Specie>` visant une Nation plutôt qu'une ethnie — le test réel viendra
+avec la saisie du Reiksguard (point 2 ci-dessous).
+
+**Point signalé, pas touché** : `BOOK_RULESBOOK_FRANCAIS.Xml` n'a reçu ni le bloc
+`DATA_NATION` ni la balise `<Nationality>` — même lacune que Nations of Mankind, qui n'a
+lui-même aucune traduction française. Sans effet tant que `LANG=ENGLISH` (`INI.TXT`).
+
+**Reste, dans l'ordre :**
+1. Écrire l'entrée `<CareerBonus>` complète du Reiksguard (Squire/Knight/First Knight/
+   Knight of the Inner Circle) dans `BOOK_NATIONS_OF_MANKIND.Xml`, avec
+   `<Specie>"RULES-NATION_EMPIRE"</Specie>` — ce qui était bloqué avant ce chantier, et le
+   seul moyen d'exercer le mécanisme Nation en pratique. Squire est saisissable tel quel ;
+   Knight utilise `ModifyWeapon`/`TypeArme` (§2.50 point 4bis, écrit le 07/09, pas encore
+   compilé) ; Knight of the Inner Circle utilise `ModifyCarac` (§2.50 étape 3, compilé) ;
+   First Knight (miracle + trait Champion) reste en descriptif, aucun mécanisme ne le porte.
+2. Les onze Regiments of Renown (§2.44 point de reprise 2), sans lien avec ce chantier.
 
 ---
 

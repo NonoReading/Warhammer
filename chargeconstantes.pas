@@ -26,6 +26,10 @@ Const
       // (ex. "Humans (Reikland)"), alors que ConstXmlEspece ('Race') désigne la
       // RACE générique qui regroupe plusieurs ethnies (ex. "Human").
       ConstXmlEspece			= 'Race';
+      // Balise d'entree du bloc DATA_NATION (ex. <Nation id="RULES-NATION_EMPIRE">) - PAS
+      // le meme role que ConstXmlNationality juste en dessous, qui est le POINTEUR pose sur
+      // une ethnie ; meme separation que <Race>/<Ethnic> ci-dessus, pour la meme raison.
+      ConstXmlNation			= 'Nation';
       // Ne pas confondre avec ConstXmlRegle ('RULES') plus bas, qui n'est pas une règle de
       // jeu mais la liste des livres acceptés d'un personnage (chargepersonnage.pas).
       ConstXmlRegleJeu			= 'Rule';
@@ -106,6 +110,12 @@ Const
       ConstXmlDataSpecieCreation        = 'DATA_RANDOM_SPECIE';
       ConstXmlDataCraftsmanship         = 'DATA_CRAFTMANSHIP';
       ConstXmlDataEspece                = 'DATA_RACE';
+      // Regroupement POLITIQUE/culturel d'ethnies (l'Empire, a terme Bretonnia/Kislev/
+      // Cathay...), distinct de DATA_RACE qui est BIOLOGIQUE (RULES-SPECIE_HUMAN reunit
+      // aussi la Tilee, hors Empire). Meme moule que DATA_RACE : table declarable par
+      // n'importe quel livre, une ethnie cite son code via <Nationality> (facultatif,
+      // contrairement a <Ethnic>). Voir ChargeNation.pas. CONTEXT.md 2.51.
+      ConstXmlDataNation                = 'DATA_NATION';
       ConstXmlDataRegle                 = 'DATA_RULE';
       ConstXmlDataRegleMetier           = 'DATA_CAREER_ROLL';
       ConstXmlDataSpecieCareerChoix     = 'DATA_SPECIE_CAREER_CHOICE';
@@ -176,6 +186,9 @@ Const
       // Valeur "vrai" d'une balise XML booleenne (meme convention que <OFFICIAL>/<COMPLETE>).
       ConstVrai                         = '1';
       ConstXmlEthnic                    = 'Ethnic';
+      // Pointeur FACULTATIF pose sur une ethnie vers son code DATA_NATION (vide = aucune
+      // nation, cas de la plupart des ethnies non-humaines). CONTEXT.md 2.51.
+      ConstXmlNationality               = 'Nationality';
       // Nombre de competences de race a choisir dans chaque colonne (3 et 3 partout, sauf
       // le Skink de Lustria qui en prend 2 et 2). Absentes = 3. Voir CONTEXT.md 2.15.
       ConstXmlNbSkill5                  = 'Skill5';
@@ -471,6 +484,7 @@ Const
       ConstPTalent                          = 'PTalent';
       ConstPRace                            = 'PRace';
       ConstPEspece                          = 'PEspece';
+      ConstPNation                          = 'PNation';
       ConstPTrait                           = 'PTrait';
       ConstPTraitOption                     = 'PTraitOption';
       ConstPCareerBonus                     = 'PCareerBonus';

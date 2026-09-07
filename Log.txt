@@ -2049,3 +2049,61 @@ Corrige (par Claude) : ajout de `if TabBonus.RowCount <= NbBonus then TabBonus.R
 NbBonus + 1;` juste avant la boucle d'ecriture, meme reflexe que TabWeapon.RowCount plus haut
 dans la meme unite (l.124-125). Fichier ecrit et committe, taille verifiee (winweapon.pas
 13501 octets). Pas encore reteste par Nono.
+
+07/09/2026 - MECANISME GENERIQUE "NATION" ECRIT POUR LA CONDITION D'ETHNIE DU REIKSGUARD,
+PAS ENCORE COMPILE
+Reprise du point de reprise 1 du 2.44 (3d-3, Reiksguard) : la condition d'origine ("doit
+venir de l'Empire") ne pouvait pas s'exprimer avec la donnee existante - RULES-SPECIE_HUMAN
+(DATA_RACE, 2.10) est un regroupement BIOLOGIQUE qui inclut aussi la Tilee, hors Empire.
+Nono a valide vouloir une vraie table (pas un bricolage type liste separee par /),
+extensible a d'autres nations futures (Bretonnia, Kislev, Cathay - deja presentes comme
+ethnies dans Nations of Mankind sans regroupement), avec libelle affichable, et le code
+generique RULES-NATION_EMPIRE porte par le Rulebook (pas par Nations of Mankind) puisque
+c'est un principe generique et que Reikland y est deja.
+Ecrit (par Claude, PAS ENCORE COMPILE), sur le meme moule que DATA_RACE/ChargeEspece.pas :
+- Nouvelle unite chargenation.pas (StructureNation: CodeNation/Libelle/Livre, ListNation,
+  ChercheNation) - copie conforme de chargeespece.pas.
+- chargeconstantes.pas : ConstXmlDataNation='DATA_NATION' (bloc), ConstXmlNation='Nation'
+  (balise d'entree, comme <Race> pour DATA_RACE), ConstXmlNationality='Nationality'
+  (pointeur pose sur une ethnie, comme <Ethnic> - deux balises separees pour la meme raison
+  que Race/Ethnic), ConstPNation='PNation'.
+- chargerace.pas : nouveau champ StructureRace.Nation (String, FACULTATIF - contrairement a
+  Espece qui est obligatoire, la plupart des ethnies n'appartiennent a aucune nation).
+- xmlexportimport.pas : import ET export de DATA_NATION (meme passe que DATA_RACE), lecture/
+  ecriture de <Nationality> dans le bloc <Specie> (ecrite seulement si non vide), remise a
+  zero de PRace.Nation a chaque ethnie (meme piege que DossierNiveau, record reutilise).
+- warhammersource.pas : ListNation Create/Clear/NbNation, uses ChargeNation.
+- chargemetier.pas, AppartenancesCandidates : le filtre <Specie> d'un CareerBonus matche
+  desormais soit l'ethnie du personnage directement (cas Averland, inchange), soit la
+  Nation de cette ethnie via ChercheRace(CodeRace).Nation (cas nouveau, Reiksguard).
+  Verifie que CompareRechercheValeur(code, '') renvoie bien false en mode durci actuel
+  (VerifieRecherche compare aussi le livre, deux chaines vides ne peuvent egaler un vrai
+  code) - aucune ethnie sans Nation ne matchera par erreur.
+- BOOK_RULESBOOK.Xml : bloc DATA_NATION ajoute (RULES-NATION_EMPIRE, "Empire"),
+  <Nationality> posee sur Reikland (RULES-RACE_HUM), juste apres son <Ethnic>.
+- BOOK_NATIONS_OF_MANKIND.Xml : <Nationality>"RULES-NATION_EMPIRE"</Nationality> posee sur
+  les 7 provinces imperiales (Averland/Hochland/Ostermark/Ostland/Stirland/Talabecland/
+  Wissenland) - PAS sur Marienburg/Westerland, independante de l'Empire (le livre le dit
+  explicitement, "who hires anyone", deja note au 2.44). Les 10 autres ethnies du livre
+  (Kislev x2, Albion, Araby, Bretonnia x2, Cathay, Estalia, Ind, Nippon) restent sans
+  Nation - candidates a de futures nations propres, pas traitees ici.
+Fichiers ecrits et committes sur le poste de Nono, tailles verifiees (chargeconstantes.pas
+53095, chargenation.pas 1624 [nouveau], chargerace.pas 13007, xmlexportimport.pas 182407,
+warhammersource.pas 55839, chargemetier.pas 16557, BOOK_RULESBOOK.Xml 826335,
+BOOK_NATIONS_OF_MANKIND.Xml 566204).
+Point signale, pas touche : BOOK_RULESBOOK_FRANCAIS.Xml n'a recu ni le bloc DATA_NATION ni
+la balise <Nationality> - meme lacune que Nations of Mankind, qui n'a lui-meme aucune
+traduction francaise. Sans effet tant que LANG=ENGLISH (INI.TXT).
+Reste : Nono compile et teste (aucun ecran n'exerce encore ce code en pratique, la seule
+consommatrice est AppartenancesCandidates - donc testable seulement une fois le
+CareerBonus du Reiksguard saisi en XML, ce qui n'est pas encore fait) ; puis reprendre le
+3d-3 : ecrire l'entree <CareerBonus> complete du Reiksguard (Squire/Knight/First
+Knight/Knight of the Inner Circle) dans BOOK_NATIONS_OF_MANKIND.Xml, avec
+<Specie>"RULES-NATION_EMPIRE"</Specie>.
+
+07/09/2026 - MECANISME NATION COMPILE, AUCUN PROBLEME CONSTATE
+Nono a compile le mecanisme Nation ecrit plus tot ce jour (voir entree precedente,
+CONTEXT.md 2.51) - aucun probleme constate, WarhammerHelp.exe reconstruit. Non-regression
+acquise. Reste non teste en pratique : aucun <CareerBonus> ne pose encore de <Specie>
+visant une Nation, seul le Reiksguard (3d-3) en aura besoin - prochaine etape.
+Nono commit et arrete la session pour ce soir.

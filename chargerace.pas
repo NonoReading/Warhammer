@@ -6,7 +6,7 @@ interface
 
 uses
   Classes, SysUtils, ChargeConstantes, Generics.Collections, ChargeTexte, PdfUtils, UnitCalcul,
-  ChargeEspece;
+  ChargeEspece, ChargeNation;
 
 Type
   StructureRace	= Record
@@ -18,6 +18,11 @@ Type
         Description:	String;
         Livre:          String;
         Espece:         String;
+        // Code DATA_NATION (ChargeNation.pas) - regroupement POLITIQUE, PAS le meme axe
+        // qu'Espece qui est biologique (RULES-SPECIE_HUMAN inclut la Tilee, "Empire" non).
+        // FACULTATIF : vide pour la plupart des ethnies (Nains, Elfes, Norses...).
+        // CONTEXT.md 2.51.
+        Nation:         String;
         Point3:         Integer;
         Point5:         Integer;
         // NOMBRE de competences a choisir dans chaque colonne, a ne pas confondre avec

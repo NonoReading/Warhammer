@@ -3662,6 +3662,7 @@ Description: You ask Dazh to illuminate the night, and he
        province, sa page 5 ne porte que les listes de competences et de talents.
        Cette explication est redigee depuis le cadre etabli - a valider par Nono. -->
 <Ethnic>"RULES-SPECIE_HUMAN"</Ethnic>
+<Nationality>"RULES-NATION_EMPIRE"</Nationality>
 <SUBCHAPTER_ATTR>
   <!-- Recopiees telles quelles de RULES-RACE_HUM (Humans (Reikland)) : le livre ne
        donne pas de caracteristiques par nation, et tous les humains partagent les
@@ -3855,6 +3856,7 @@ Description: You ask Dazh to illuminate the night, and he
        province, sa page 5 ne porte que les listes de competences et de talents.
        Cette explication est redigee depuis le cadre etabli - a valider par Nono. -->
 <Ethnic>"RULES-SPECIE_HUMAN"</Ethnic>
+<Nationality>"RULES-NATION_EMPIRE"</Nationality>
 <SUBCHAPTER_ATTR>
   <!-- Recopiees telles quelles de RULES-RACE_HUM (Humans (Reikland)) : le livre ne
        donne pas de caracteristiques par nation, et tous les humains partagent les
@@ -4048,6 +4050,7 @@ Description: You ask Dazh to illuminate the night, and he
        province, sa page 5 ne porte que les listes de competences et de talents.
        Cette explication est redigee depuis le cadre etabli - a valider par Nono. -->
 <Ethnic>"RULES-SPECIE_HUMAN"</Ethnic>
+<Nationality>"RULES-NATION_EMPIRE"</Nationality>
 <SUBCHAPTER_ATTR>
   <!-- Recopiees telles quelles de RULES-RACE_HUM (Humans (Reikland)) : le livre ne
        donne pas de caracteristiques par nation, et tous les humains partagent les
@@ -4241,6 +4244,7 @@ Description: You ask Dazh to illuminate the night, and he
        province, sa page 5 ne porte que les listes de competences et de talents.
        Cette explication est redigee depuis le cadre etabli - a valider par Nono. -->
 <Ethnic>"RULES-SPECIE_HUMAN"</Ethnic>
+<Nationality>"RULES-NATION_EMPIRE"</Nationality>
 <SUBCHAPTER_ATTR>
   <!-- Recopiees telles quelles de RULES-RACE_HUM (Humans (Reikland)) : le livre ne
        donne pas de caracteristiques par nation, et tous les humains partagent les
@@ -4434,6 +4438,7 @@ Description: You ask Dazh to illuminate the night, and he
        province, sa page 5 ne porte que les listes de competences et de talents.
        Cette explication est redigee depuis le cadre etabli - a valider par Nono. -->
 <Ethnic>"RULES-SPECIE_HUMAN"</Ethnic>
+<Nationality>"RULES-NATION_EMPIRE"</Nationality>
 <SUBCHAPTER_ATTR>
   <!-- Recopiees telles quelles de RULES-RACE_HUM (Humans (Reikland)) : le livre ne
        donne pas de caracteristiques par nation, et tous les humains partagent les
@@ -4627,6 +4632,7 @@ Description: You ask Dazh to illuminate the night, and he
        province, sa page 5 ne porte que les listes de competences et de talents.
        Cette explication est redigee depuis le cadre etabli - a valider par Nono. -->
 <Ethnic>"RULES-SPECIE_HUMAN"</Ethnic>
+<Nationality>"RULES-NATION_EMPIRE"</Nationality>
 <SUBCHAPTER_ATTR>
   <!-- Recopiees telles quelles de RULES-RACE_HUM (Humans (Reikland)) : le livre ne
        donne pas de caracteristiques par nation, et tous les humains partagent les
@@ -4820,6 +4826,7 @@ Description: You ask Dazh to illuminate the night, and he
        province, sa page 5 ne porte que les listes de competences et de talents.
        Cette explication est redigee depuis le cadre etabli - a valider par Nono. -->
 <Ethnic>"RULES-SPECIE_HUMAN"</Ethnic>
+<Nationality>"RULES-NATION_EMPIRE"</Nationality>
 <SUBCHAPTER_ATTR>
   <!-- Recopiees telles quelles de RULES-RACE_HUM (Humans (Reikland)) : le livre ne
        donne pas de caracteristiques par nation, et tous les humains partagent les

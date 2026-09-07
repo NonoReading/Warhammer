@@ -234,8 +234,12 @@ Begin
       begin
         if not CompareRechercheValeur(PBonus.CodeMetier, CodeMetier) then
           continue;
+        // <Specie> peut viser directement une ETHNIE (Averland...) ou, depuis le 2.51,
+        // une NATION (Reiksguard -> l'Empire) : match sur l'ethnie du personnage OU sur
+        // la Nation de cette ethnie (ChercheRace(CodeRace).Nation, vide si aucune).
         if (Trim(PBonus.CodeRace) <> '') and
-           (not CompareRechercheValeur(PBonus.CodeRace, CodeRace)) then
+           (not CompareRechercheValeur(PBonus.CodeRace, CodeRace)) and
+           (not CompareRechercheValeur(PBonus.CodeRace, ChercheRace(CodeRace).Nation)) then
           continue;
 
         Trouve := false;

@@ -4394,11 +4394,17 @@ See page 190 for Fear rules"</Explanation>
 <Description language="ENGLISH">"Halfling"</Description>
 </Race>
 </DATA_RACE>
+<DATA_NATION>
+<Nation id="RULES-NATION_EMPIRE">
+<Description language="ENGLISH">"Empire"</Description>
+</Nation>
+</DATA_NATION>
 <DATA_SPECIE>
 <Specie id="RULES-RACE_HUM">
 <Description language="ENGLISH">"Humans (Reikland)"</Description>
 <Explanation language="ENGLISH">"Humans are the most numerous and widespread of the civilised species of the Old World. From the plains of the Estalian Kingdoms to the frozen oblasts of Imperial Kislev, Humans occupy every corner of the continent, and they thrive. The largest, most powerful Human realm is the Empire, a patchwork of powerful provinces blanketed in seemingly endless forests. Standing proud at the heart of this Empire, the Reikland is its richest, most cosmopolitan region."</Explanation><OPINIONS><Opinion target="RULES-RACE_DWAR" source="Reikäger Jungling, State Soldier from Altdorf">They've been our allies since Sigmar walked this very city; fought with them meself back in '05. Sure, they're a bit stubborn, seriously vindictive and pretty blunt, but I won't hear a word said against them.</Opinion><Opinion target="RULES-RACE_HALF" source="Stefan Krause, Innkeeper from Stirgau">If I gets meself the sort wot eats and smokes all day, then I'm happy as Ranald in catnip. It's when I get them without proper manners nicking me crockery or knives and forks: that I just can't abide! They're all smiles and shrugs when the watch come to pick 'em up, like they don't understand what they done wrong.</Opinion><Opinion target="RULES-RACE_HELF" source="Dorothea Taalenstein, Merchant from Kemperbad">Yes, I do trade with them. And, no, don't be ridiculous, I've never been turned to a pillar of salt just by looking at them. Truly, I find them graceful and urbane. Proper civilised, I'd say. But, 'tween you and me, if Verena were to ask, I might also say I find them just… odd. So very intense. Like every deal we make really matters.</Opinion><Opinion target="RULES-RACE_WELF" source="Siggina Gerster, Bawd from Ubersreik">Elves of the forest you say? Ain't none of 'em around here, mate. You want to be goin' south to Bretonnia. I hear they gots loads of them, and that they're completely horrible!</Opinion></OPINIONS>
 <Ethnic>"RULES-SPECIE_HUMAN"</Ethnic>
+<Nationality>"RULES-NATION_EMPIRE"</Nationality>
 <SUBCHAPTER_ATTR>
 <Attribut name="RULES-ATTR_WS">"2d10+20"</Attribut>
 <Attribut name="RULES-ATTR_BS">"2d10+20"</Attribut>

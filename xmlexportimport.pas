@@ -7,7 +7,7 @@ interface
 
 uses
   Classes, SysUtils, ChargeConstantes, ChargeCompetence, ChargeTalent, ChargeRace,
-  ChargeEspece, ChargeRegle,
+  ChargeEspece, ChargeNation, ChargeRegle,
   ChargeRaceAttribut, ChargeRaceCompetence, ChargeRaceTalent, ChargeRaceMetier,
   ChargeMetier, ChargeMetierAttribut, ChargeMetierCompetence, ChargeMetierTalent,
   ChargeMetierEquipement, chargeMetierNiveau, ChargeArme, ChargeArmure,
@@ -168,6 +168,7 @@ Procedure XmlExportBook(Livre: String; Langue: String);
     PTalent:                  StructureTalent;
     PTalentArmureModifExp:    StructureTalentArmureModif;
     PEspece:                  StructureEspece;
+    PNation:                  StructureNation;
     PRace:                    StructureRace;
     PRaceAttribut:            StructureRaceAttribut;
     PRaceCompetence:          StructureRaceCompetence;
@@ -469,6 +470,24 @@ Procedure XmlExportBook(Livre: String; Langue: String);
         if Fist = false then
            XmlContent.Add(XmlFin(ConstXmlDataEspece));
 
+        // Nation (bloc DATA_NATION : regroupement POLITIQUE des ethnies, distinct de
+        // DATA_RACE qui est biologique - voir ChargeNation.pas. CONTEXT.md 2.51.)
+        Fist := true;
+        for PNation in ListNation do
+          if PNation.Livre = Livre then
+            begin
+              if Fist = true then
+                begin
+                  XmlContent.Add(XmlDebut(ConstXmlDataNation));
+                  Fist := false;
+                end;
+              XmlContent.Add(XmlDebutCode(ConstXmlNation, XmlCreeCodeLivre(PNation.Livre, PNation.CodeNation)));
+              XmlContent.Add(XmlLigneLangue(ConstXmlDescription, Langue, PNation.Libelle));
+              XmlContent.Add(XmlFinCode(ConstXmlNation));
+            end;
+        if Fist = false then
+           XmlContent.Add(XmlFin(ConstXmlDataNation));
+
         // race
         Fist := true;
         For PRace In ListRace do
@@ -484,6 +503,10 @@ Procedure XmlExportBook(Livre: String; Langue: String);
               XmlContent.Add(XmlLigneLangue(ConstXmlDescription, Langue, PRace.Libelle));
               XmlContent.Add(XmlLigneLangue(ConstXmlExplanation, Langue, PRace.Description));
               XmlContent.Add(XmlLigne(ConstXmlEthnic, PRace.Espece));
+              // ecrit seulement si l'ethnie appartient a une nation - la plupart n'en ont
+              // aucune (Nains, Elfes, Norses...). CONTEXT.md 2.51.
+              if Trim(PRace.Nation) <> '' then
+                XmlContent.Add(XmlLigne(ConstXmlNationality, PRace.Nation));
               // ecrites seulement si elles s'ecartent du defaut, pour ne pas alourdir les
               // dizaines de races qui prennent 3 et 3
               if PRace.NbPoint5 <> 3 then
@@ -1025,6 +1048,7 @@ Procedure XmlImport(FileName: String; OnlyPrimary: Boolean; OnlyCode: Boolean);
     PTalentCreation:          StructureTalentCreation;
     PRace:                    StructureRace;
     PEspece:                  StructureEspece;
+    PNation:                  StructureNation;
     PRegle:                   StructureRegle;
     PRegleMetier:             StructureRegleMetier;
     PRaceAttribut:            StructureRaceAttribut;
@@ -1630,6 +1654,49 @@ Procedure XmlImport(FileName: String; OnlyPrimary: Boolean; OnlyCode: Boolean);
                     end;
                 end;
 
+              // Nation (bloc DATA_NATION : regroupement POLITIQUE des ethnies, distinct
+              // de DATA_RACE juste au-dessus qui est biologique. CONTEXT.md 2.51.)
+              NodeNv1 := BookNode.FindNode(ConstXmlDataNation);
+              if Assigned(NodeNv1) then
+                begin
+                  NodeNv2 := XmlElement(NodeNv1.FirstChild);
+                  While Assigned(NodeNv2) do
+                    begin
+                      if NodeNv2.NodeName = ConstXmlNation then
+                       begin
+                      PNation.Livre      := Livre;
+                      PNation.Libelle    := '';
+                      PNation.CodeNation := RemoveQuotes(UTF8Encode(NodeNv2.Attributes.GetNamedItem(ConstXmlId).NodeValue));
+                      PTraduction        := InitTrad(ConstPNation, PNation.CodeNation, '', PNation.Livre);
+
+                      Node := XmlElement(NodeNv2.FirstChild);
+                      while Assigned(Node) do
+                        begin
+                          case Node.NodeName of
+                            ConstXmlDescription:
+                              begin
+                                PNation.Libelle     := RemoveQuotes(UTF8Encode(Node.TextContent));
+                                Langue              := RemoveQuotes(UTF8Encode(Node.Attributes.GetNamedItem(ConstXmlLanguage).NodeValue));
+                                PTraduction.Libelle := PNation.Libelle;
+                              end;
+                          end;
+
+                          Node := XmlElement(Node.NextSibling);
+                        end;
+
+                      if LangueDef = ConstAnglais then
+                        begin
+                          ListNation.add(PNation);
+                          inc(NbNation);
+                        end;
+
+                      AddTrad(PTraduction, Langue);
+                       end;
+
+                      NodeNv2 := XmlElement(NodeNv2.NextSibling);
+                    end;
+                end;
+
               // Race
               NodeNv1 := BookNode.FindNode(ConstXmlDataSpecie);
               if Assigned(NodeNv1) then
@@ -1647,6 +1714,9 @@ Procedure XmlImport(FileName: String; OnlyPrimary: Boolean; OnlyCode: Boolean);
                       // a zero, une ethnie sans balise <PictureLevel> heriterait du dossier
                       // de la precedente (meme piege que les fonctions Cherche*, cf 2.17).
                       PRace.DossierNiveau := '';
+                      // Meme remise a zero pour Nation : balise FACULTATIVE, la plupart des
+                      // ethnies n'en portent aucune. CONTEXT.md 2.51.
+                      PRace.Nation := '';
                       PTraduction    := InitTrad(ConstPRace, PRace.CodeRace, '', PRace.Livre);
 
                       NodeNv3 := XmlElement(NodeNv2.FirstChild);
@@ -1673,6 +1743,8 @@ Procedure XmlImport(FileName: String; OnlyPrimary: Boolean; OnlyCode: Boolean);
                               PRace.DossierNiveau       := RemoveQuotes(UTF8Encode(NodeNv3.TextContent));
                             ConstXmlEthnic:
                               PRace.Espece              := RemoveQuotes(UTF8Encode(NodeNv3.TextContent));
+                            ConstXmlNationality:
+                              PRace.Nation              := RemoveQuotes(UTF8Encode(NodeNv3.TextContent));
                             ConstXmlSousChapitreCarac:
                               begin
                                 Node := XmlElement(NodeNv3.FirstChild);

@@ -49,7 +49,6 @@
         <Filename Value="chargeconstantes.pas"/>
         <IsPartOfProject Value="True"/>
         <UnitName Value="ChargeConstantes"/>
-        <IsVisibleTab Value="True"/>
         <EditorIndex Value="1"/>
         <TopLine Value="246"/>
         <CursorPos X="31" Y="260"/>
@@ -682,9 +681,10 @@
       <Unit>
         <Filename Value="C:\lazarus\lcl\grids.pas"/>
         <UnitName Value="Grids"/>
+        <IsVisibleTab Value="True"/>
         <EditorIndex Value="2"/>
         <TopLine Value="10338"/>
-        <CursorPos Y="10349"/>
+        <CursorPos X="30" Y="10352"/>
         <UsageCount Value="79"/>
         <Loaded Value="True"/>
       </Unit>
@@ -1227,7 +1227,7 @@
         <UsageCount Value="11"/>
       </Unit>
     </Units>
-    <JumpHistory HistoryIndex="16">
+    <JumpHistory HistoryIndex="17">
       <Position>
         <Filename Value="winlancede.pas"/>
         <Caret Line="52" Column="29" TopLine="44"/>
@@ -1295,6 +1295,10 @@
       <Position>
         <Filename Value="pdfpersonnage.pas"/>
         <Caret Line="1141" Column="27" TopLine="1129"/>
+      </Position>
+      <Position>
+        <Filename Value="chargeconstantes.pas"/>
+        <Caret Line="260" Column="31" TopLine="246"/>
       </Position>
     </JumpHistory>
     <RunParams>

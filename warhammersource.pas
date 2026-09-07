@@ -11,7 +11,7 @@ uses
   ChargeCompetence, ChargeConstantes, ChargeAttribut, ChargeTalent, WinTalent,
   ChargeMetier, ChargeMetierNiveau, ChargeMetierAttribut,
   ChargeMetierCompetence, ChargeMetierTalent, WinMetier, ChargeRaceMetier,
-  ChargeRace, ChargeEspece, ChargeRegle, WinRaces, ChargeRaceAttribut, ChargeRaceCompetence,
+  ChargeRace, ChargeEspece, ChargeNation, ChargeRegle, WinRaces, ChargeRaceAttribut, ChargeRaceCompetence,
   ChargeRaceTalent, GlobalFonts, WinCreation, ChargeTalentCreation,
   WinPersonnage, ChargeAttributAugmentation, ChargeCompetenceAugmentation,
   ChargeArme, ChargeArmeAttributModif, WinWeapon, ChargeArmeBonus, ChargeMetierEquipement, ChargeArmure,
@@ -599,6 +599,7 @@ procedure TMenu.ChargerLivre(ForceMaJ: Boolean; ForceLivre: String);
       begin
         NbRace	                    := 0;
         NbEspece                    := 0;
+        NbNation                    := 0;
         NbRegle                     := 0;
         NbRegleMetier               := 0;
         NbTalent	            := 0;
@@ -641,6 +642,7 @@ procedure TMenu.ChargerLivre(ForceMaJ: Boolean; ForceLivre: String);
         // vider les données
         ListRace.Clear;
         ListEspece.Clear;
+        ListNation.Clear;
         ListRegle.Clear;
         ListRegleMetier.Clear;
         ListTalent.Clear;
@@ -841,6 +843,7 @@ procedure TMenu.FormCreate(Sender: TObject);
        // création de la base de donnée
        ListRace                     := TListRace.Create;
        ListEspece                   := TListEspece.Create;
+       ListNation                   := TListNation.Create;
        ListRegle                    := TListRegle.Create;
        ListRegleMetier              := TListRegleMetier.Create;
        ListTalent                   := TListTalent.Create;
