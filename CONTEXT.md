@@ -1,40 +1,59 @@
 # Warhammer — Contexte projet
 
-**Dernière mise à jour : 08/09/2026 — §2.51 EN PAUSE, CONCEPTION D'UN MÉCANISME "RÈGLE
-SPÉCIALE" À TRANCHER AVEC NONO AVANT DE CONTINUER.** En relisant p.8-9 de *Nations of
-Mankind* en entier (texte + vérification visuelle des deux pages du PDF), deux corrections
-au §2.51 ci-dessous : (1) il y a en réalité **17 Ordres de chevalerie**, pas onze comme
-écrit par erreur précédemment — donc **16 restent à saisir**, pas dix ; (2) pour la quasi-
-totalité de ces 16, le palier 4 "Knight of the Inner Circle" n'est PAS un `ModifyCarac`/
-`ModifySkill` comme pour le Reiksguard (qui était en fait un cas chanceux, seul parmi les
-17 à n'avoir que des bonus chiffrés à ce palier) : c'est une règle spéciale narrative sans
-équivalent chiffré (Trait automatique conditionnel, relance de dés, Critical Wounds
-supplémentaires, arme qui devient magique, ignorer une Qualité, immunité...) — aucun
-mécanisme actuel ne la porte. Un cas à part : l'**Order of the Hammer of Sigmar** (dernier
-de la page 9) a carrément son palier 4 ET son Heraldry absents du texte de la page —
-vérifié à l'image (Read du PDF, pages 8 et 9), l'entrée s'arrête net après First Knight,
-ce n'est pas un problème d'extraction `pdftotext`.
+**Dernière mise à jour : 08/09/2026 — MÉCANISME "RÈGLE SPÉCIALE" COMPILÉ PAR NONO, AUCUN
+PROBLÈME CONSTATÉ.** Non-régression acquise ; le mécanisme n'est pas encore exercé en
+pratique (aucun `<SpecialRule>` posé dans un livre) — le test réel viendra avec la saisie
+des 16 Ordres restants, prochaine étape. En relisant p.8-9 de *Nations of Mankind* en entier (texte +
+vérification visuelle des deux pages du PDF), deux corrections au §2.51 ci-dessous : (1) il
+y a en réalité **17 Ordres de chevalerie**, pas onze comme écrit par erreur précédemment —
+donc **16 restent à saisir**, pas dix ; (2) pour la quasi-totalité de ces 16, le palier 4
+"Knight of the Inner Circle" n'est PAS un `ModifyCarac`/`ModifySkill` comme pour le
+Reiksguard (qui était en fait un cas chanceux, seul parmi les 17 à n'avoir que des bonus
+chiffrés à ce palier) : c'est une règle spéciale narrative sans équivalent chiffré (Trait
+automatique conditionnel, relance de dés, Critical Wounds supplémentaires, arme qui devient
+magique, ignorer une Qualité, immunité...) — aucun mécanisme actuel ne la portait. Un cas à
+part : l'**Order of the Hammer of Sigmar** (dernier de la page 9) a carrément son palier 4
+ET son Heraldry absents du texte de la page — vérifié à l'image (Read du PDF, pages 8 et 9),
+l'entrée s'arrête net après First Knight, ce n'est pas un problème d'extraction `pdftotext`.
 
-Proposition en cours de discussion pour représenter ces paliers 4 (au lieu de les laisser
-tous en commentaire XML + item `A FAIRE.txt`, ce qui viderait le mécanisme CareerBonus de
-sa substance pour 16 Ordres sur 17) : une balise `<SpecialRule name="Nom court">Texte
-descriptif</SpecialRule>` posée dans un `<LevelN>`, même famille que `ModifyWeapon`
-(nouvelle structure `StructureCareerBonusSpecialRule` dans `chargemetier.pas` — CodeBonus,
-Niveau, Libelle, Texte ; parsing dans `xmlexportimport.pas` ~l.2589-2735 sur le même modèle
-que `ModifyWeapon` ; consommation via une nouvelle `PersonnageCareerBonusSpecialRule` dans
-`chargepersonnage.pas`, même filtre Appartenance+Niveau que `PersonnageCareerBonusArmeModif`).
-**Point non tranché : où l'afficher sur le PDF** — contrairement aux trois Modify* qui
-se glissent dans des cases déjà existantes (grille Attribut, % d'arme), une règle spéciale
-est un texte libre sans case dédiée aujourd'hui, et il faudra la brancher dans les DEUX
-gabarits (leçon du bug ci-dessous : `PdfPersonnageCreation` ET `PdfBlocArmesDonnees`/
-Feldo2P). Deux options proposées : (a) l'accrocher au bloc Talents existant
-(`PdfBlocTalents`, pdfpersonnage.pas l.2393) comme une ligne "talent virtuel" supplémentaire
-— recommandé, reste dans le mécanisme existant sans toucher aux `.lfm` ; (b) un nouveau
-bloc dédié "Règles spéciales", plus propre visuellement mais touche la mise en page des
-deux gabarits. **Rien n'est encore écrit ni en XML ni en Pascal sur ce point — en attente
-de la décision de Nono, qui a préféré ouvrir un nouveau prompt pour cette suite (session
-précédente déjà longue).** Prochaine étape à la reprise : trancher (a)/(b)/autre, puis
-implémenter, puis reprendre la saisie des 16 Ordres.
+**Décision de Nono (08/09/2026, nouveau prompt) : option (a)**, accrocher la règle au bloc
+Talents existant plutôt qu'un nouveau bloc dédié — reste dans le mécanisme existant, ne
+touche aucun `.lfm`. Écrit dans la foulée, quatrième pendant du même moule que
+`ModifyCarac`/`ModifySkill`/`ModifyWeapon` : balise `<SpecialRule name="Nom court">Texte
+descriptif</SpecialRule>` posée dans un `<LevelN>` — `name=` (réutilise `ConstXmlData`,
+comme les trois précédents) porte le libellé court, le contenu texte la description
+complète.
+- `chargeconstantes.pas` : `ConstXmlSpecialRule = 'SpecialRule'`.
+- `chargemetier.pas` : `StructureCareerBonusSpecialRule` (CodeBonus/Niveau/Libelle/Texte,
+  même moule que `StructureCareerBonusArmeModif`), `TListCareerBonusSpecialRule`,
+  `ListCareerBonusSpecialRule`/`NbCareerBonusSpecialRule`.
+- `xmlexportimport.pas` : parsing dans le même bloc `<LevelN>` que les trois autres Modify*
+  (~l.2650-2747), même report de `Niveau` après la boucle (un `<SpecialRule>` peut arriver
+  avant `<Order>`).
+- `warhammersource.pas` : `Create`/`Clear` de la nouvelle liste avec ses voisines.
+- `chargepersonnage.pas` : nouvelle `PersonnageCareerBonusSpecialRule(Personnage):
+  TListCareerBonusSpecialRule` — même filtre Appartenance+palier que
+  `PersonnageCareerBonusArmeModif`, mais renvoie la LISTE des règles acquises (l'appelant
+  la libère, même contrat que `NiveauxDuCareerBonus`) plutôt qu'une valeur chiffrée unique,
+  puisqu'un personnage peut cumuler plusieurs appartenances à règles spéciales.
+- `pdfpersonnage.pas` : câblée dans les **DEUX** blocs de rendu des Talents — leçon du bug
+  `ModifyWeapon`/Feldo2P de la veille appliquée d'emblée. `PdfBlocTalents` (l.2393, appelé
+  par `PdfPersonnageCreationFeldo2P`) reçoit la boucle juste après les talents acquis, avant
+  le passage en gris des talents non acquis. Mais **`PdfBlocTalents` n'est PAS le seul bloc
+  Talents du fichier** — découverte en cherchant les appelants : `PdfPersonnageCreation`
+  (gabarit normal, non-Feldo2P) a son PROPRE bloc Talents inline, plus ancien, jamais
+  extrait dans `PdfBlocTalents` (contrairement à ce que le paragraphe précédent supposait) —
+  même bloc rendu deux fois indépendamment, exactement le motif du bug Armes/Feldo2P de la
+  veille. Câblée aussi à cet endroit (avant la page 2), avec les mêmes colonnes que
+  `PTalent.Libelle`/`PTalent.Resume` de ce bloc.
+
+Fichiers écrits sur le poste de Nono, tailles vérifiées (`chargeconstantes.pas` 53861,
+`chargemetier.pas` 17637, `xmlexportimport.pas` 184506, `warhammersource.pas` 55957,
+`chargepersonnage.pas` 92855, `pdfpersonnage.pas` 250126). **Compilé par Nono le 08/09/2026,
+aucun problème constaté.** Rien n'exerce encore ce mécanisme (aucun `<SpecialRule>` posé
+dans un livre) : le test réel viendra avec la saisie des 16 Ordres restants, prochaine
+étape (palier 4 en `<SpecialRule>` cette fois, textes tirés de p.8-9 de *Nations of
+Mankind*).
 
 **08/09/2026 — BUG TROUVÉ, CORRIGÉ, COMPILÉ ET VALIDÉ PAR NONO : le
 bonus `ModifyWeapon` (§2.50 point 4bis, ex. Reiksguard "+10 CC avec Lances/Épées à 2 mains/
@@ -5851,8 +5870,12 @@ Nation/ModifyWeapon/ModifyCarac fonctionne intégralement, y compris en gabarit 
 (Bouclier 57 % → 67 %, confirmé par Nono).
 
 **Reste, dans l'ordre :**
-1. Les dix autres Ordres de chevalerie (p.8-9), même moule maintenant établi.
-2. Les onze Regiments of Renown (§2.44 point de reprise 2), sans lien avec ce chantier.
+1. ✅ Correction du décompte (08/09/2026) : **17 Ordres au total**, pas onze — 16 restent à
+   saisir. Pour 16 sur 17, le palier 4 n'a pas d'équivalent chiffré (voir encart de tête).
+2. ✅ Mécanisme `<SpecialRule>` écrit et **compilé par Nono le 08/09/2026, aucun problème
+   constaté** (voir encart de tête). Pas encore exercé en pratique.
+3. Les 16 autres Ordres de chevalerie (p.8-9) — prochaine étape.
+4. Les onze Regiments of Renown (§2.44 point de reprise 2), sans lien avec ce chantier.
 
 ---
 

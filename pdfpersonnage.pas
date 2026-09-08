@@ -842,6 +842,8 @@ Procedure PdfPersonnageCreation(Personnage: StructurePersonnage; BackGround: Boo
     ArmureSet:            Boolean = false;
     AmePure:              Integer = 0;
     Bonus:                String;
+    ListeRegle:           TListCareerBonusSpecialRule;
+    PRegle:               StructureCareerBonusSpecialRule;
 
   begin
     PdfChemin        := GetCurrentDir+ConstCheminPersonnage+Personnage.NomPersonnage+'\'+Personnage.NomPersonnage+'.PDF';
@@ -1329,6 +1331,29 @@ Procedure PdfPersonnageCreation(Personnage: StructurePersonnage; BackGround: Boo
             end;
         end;
       end;
+
+    // Regles speciales des appartenances (palier "Knight of the Inner Circle" et
+    // equivalents, sans bonus chiffre) - affichees comme des talents virtuels
+    // supplementaires, meme bloc, meme mise en forme. CONTEXT.md 2.51, 08/09/2026.
+    ListeRegle := PersonnageCareerBonusSpecialRule(Personnage);
+    try
+      for IndC := 0 to ListeRegle.Count - 1 do
+        begin
+          PRegle := ListeRegle[IndC];
+          inc(NbLigne);
+          PdfTaillePolice(PdfPage, PdfFontValue, ConstPoliceArial, 7);
+          PdfEcrit(PdfPage, 16, 49, 92-(NbLigne*3.5), PRegle.Libelle,MinPolice);
+          PdfTaillePolice(PdfPage, PdfFontValue, ConstPoliceArial, 9);
+          if PRegle.Texte <> '' then
+            begin
+              PdfTaillePolice(PdfPage, PdfFontValue, ConstPoliceArial, 7);
+              PdfEcrit(PdfPage, 58, 105, 92-(NbLigne*3.5), PRegle.Texte,MinPolice);
+              PdfTaillePolice(PdfPage, PdfFontValue, ConstPoliceArial, 9);
+            end;
+        end;
+    finally
+      ListeRegle.Free;
+    end;
 
   // PAGE 2
 
@@ -2400,6 +2425,8 @@ Function PdfBlocTalents(PdfPage: TPDFPage; Personnage: StructurePersonnage; XGau
     Bonus:         String;
     ListeTalent:   String;
     PMetierTalent: StructureMetierTalent;
+    ListeRegle:    TListCareerBonusSpecialRule;
+    PRegle:        StructureCareerBonusSpecialRule;
   begin
     // Dessin cadre
     PdfPage.DrawLine( XGauche,      Y,                     XGauche,      Y - (NbLignes * HauteurLigne), 1);
@@ -2460,6 +2487,28 @@ Function PdfBlocTalents(PdfPage: TPDFPage; Personnage: StructurePersonnage; XGau
             ListeTalent += AjouteAccolade(PTalent.CodeTalent);
           end;
       end;
+
+    // Regles speciales des appartenances (palier "Knight of the Inner Circle" et
+    // equivalents, sans bonus chiffre) - affichees comme des talents virtuels
+    // supplementaires, meme bloc, meme mise en forme. CONTEXT.md 2.51, 08/09/2026.
+    ListeRegle := PersonnageCareerBonusSpecialRule(Personnage);
+    try
+      for IndC := 0 to ListeRegle.Count - 1 do
+        begin
+          PRegle := ListeRegle[IndC];
+          inc(NbLigne);
+          PdfEcrit(PdfPage, XGauche + 2, XGauche + 41, Y - ((NbLigne + 2) * HauteurLigne) + 1, PRegle.Libelle, MinPolice);
+          if PRegle.Texte <> '' then
+            begin
+              if Length(PRegle.Texte) > 20 then
+                PdfEcrit(PdfPage, XGauche + 54, XDroite, Y - ((NbLigne + 2) * HauteurLigne) + 1.5, PRegle.Texte, MinPolice)
+              else
+                PdfEcrit(PdfPage, XGauche + 54, XDroite, Y - ((NbLigne + 2) * HauteurLigne) + 1, PRegle.Texte, MinPolice);
+            end;
+        end;
+    finally
+      ListeRegle.Free;
+    end;
 
     // Valeur Talents non acquis
     PdfPage.SetColor(RGB(150,150,150), False);

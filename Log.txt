@@ -2141,3 +2141,41 @@ ModifyCarac (2.51 point 1, Grand Order of the Reiksguard) est valide de bout en 
 compris en gabarit Feldo2P. Reste, dans l'ordre : les dix autres Ordres de chevalerie
 (p.8-9 de Nations of Mankind, meme moule) puis les onze Regiments of Renown (2.44 point de
 reprise 2).
+
+08/09/2026 - CORRECTION : 17 ORDRES DE CHEVALERIE, PAS ONZE
+En relisant integralement p.8-9 de Nations of Mankind (texte + verification visuelle des
+deux pages du PDF) : il y a en realite 17 Ordres, pas onze comme note par erreur - donc 16
+restent a saisir. Pour la quasi-totalite de ces 16, le palier 4 "Knight of the Inner
+Circle" n'est PAS un bonus chiffre comme pour le Reiksguard (qui etait un cas chanceux,
+seul parmi les 17 a n'avoir que des bonus chiffres a ce palier) : c'est une regle narrative
+sans equivalent chiffre (trait automatique conditionnel, relance de des, Critical Wounds
+en plus, arme qui devient magique, ignorer une Qualite, immunite...). Cas a part : l'Order
+of the Hammer of Sigmar (dernier de la p.9) a son palier 4 ET son Heraldry absents du texte
+- verifie a l'image, ce n'est pas un defaut d'extraction pdftotext.
+
+08/09/2026 - MECANISME SPECIALRULE ECRIT (CLAUDE), PAS ENCORE COMPILE
+Decision de Nono (nouveau prompt) : accrocher la regle du palier 4 au bloc Talents
+existant plutot qu'un nouveau bloc dedie - reste dans le mecanisme existant, ne touche
+aucun .lfm. Quatrieme pendant du meme moule que ModifyCarac/ModifySkill/ModifyWeapon :
+balise <SpecialRule name="Nom court">Texte descriptif</SpecialRule> posee dans un <LevelN>.
+Ecrit : ConstXmlSpecialRule (chargeconstantes.pas) ; StructureCareerBonusSpecialRule/
+TListCareerBonusSpecialRule/ListCareerBonusSpecialRule (chargemetier.pas) ; parsing dans le
+meme bloc <LevelN> que les trois autres Modify* (xmlexportimport.pas) ; Create/Clear de la
+liste (warhammersource.pas) ; PersonnageCareerBonusSpecialRule(Personnage) dans
+chargepersonnage.pas, qui renvoie la LISTE des regles acquises (appelant proprietaire,
+meme contrat que NiveauxDuCareerBonus) plutot qu'une valeur chiffree, puisqu'un personnage
+peut cumuler plusieurs appartenances a regles speciales. Cablee dans pdfpersonnage.pas -
+DEUX blocs de rendu des Talents trouves en cherchant les appelants (meme motif que le bug
+ModifyWeapon/Feldo2P de la veille) : PdfBlocTalents (gabarit Feldo2P) ET le bloc Talents
+inline de PdfPersonnageCreation (gabarit normal, jamais extrait dans PdfBlocTalents,
+decouverte faite en cherchant les appelants avant d'ecrire). Les deux cables des l'ecriture,
+pas en deux temps, pour ne pas reproduire le bug de la veille. Fichiers ecrits et
+committes, tailles verifiees (chargeconstantes.pas 53861, chargemetier.pas 17637,
+xmlexportimport.pas 184506, warhammersource.pas 55957, chargepersonnage.pas 92855,
+pdfpersonnage.pas 250126). Rien n'exerce encore ce mecanisme (aucun <SpecialRule> pose dans
+un livre). Reste : Nono compile et confirme l'absence de regression, puis reprise de la
+saisie des 16 Ordres restants (palier 4 en <SpecialRule>).
+
+08/09/2026 - MECANISME SPECIALRULE COMPILE PAR NONO, AUCUN PROBLEME CONSTATE
+Non-regression acquise. Pas encore exerce en pratique (aucun <SpecialRule> pose dans un
+livre) - reste la saisie des 16 Ordres restants, prochaine etape.

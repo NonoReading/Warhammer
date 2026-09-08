@@ -272,6 +272,15 @@ Const
       // repere a la compilation) portant le filtre CodeCompetence facultatif de
       // <ModifyWeapon>.
       ConstXmlModifieArmeCompetence     = 'skill';
+      // Quatrieme pendant du meme moule que ModifyCarac/ModifySkill/ModifyWeapon, pour les
+      // paliers de CareerBonus qui n'ont AUCUN equivalent chiffre (palier 4 "Knight of the
+      // Inner Circle" de la quasi-totalite des Ordres de Chevalerie - trait automatique
+      // conditionnel, relance de des, Blessures Critiques en plus, arme qui devient
+      // magique, ignorer une Qualite, immunite...). <SpecialRule name="Nom court">Texte
+      // descriptif</SpecialRule> : name= (ConstXmlData) porte le libelle court, le contenu
+      // texte la description complete. Affichee sur le PDF comme un "talent virtuel" de
+      // plus dans le bloc Talents - decision Nono, CONTEXT.md 2.51, 08/09/2026.
+      ConstXmlSpecialRule               = 'SpecialRule';
       ConstXmlAjouteCompetence          = 'AddSkill';
       ConstXmlOpinions                  = 'OPINIONS';
       ConstXmlOpinion                   = 'Opinion';

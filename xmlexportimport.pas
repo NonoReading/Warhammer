@@ -1080,6 +1080,8 @@ Procedure XmlImport(FileName: String; OnlyPrimary: Boolean; OnlyCode: Boolean);
     TempCareerBonusCompetenceModif: TListCareerBonusCompetenceModif;
     PCareerBonusArmeModif:    StructureCareerBonusArmeModif;
     TempCareerBonusArmeModif: TListCareerBonusArmeModif;
+    PCareerBonusSpecialRule:    StructureCareerBonusSpecialRule;
+    TempCareerBonusSpecialRule: TListCareerBonusSpecialRule;
     IndTempModif:             Integer;
     PFabrication:             StructureFabrication;
     PMetierRaceChoixMetier:   StructureMetierRaceChoixMetier;
@@ -2645,9 +2647,15 @@ Procedure XmlImport(FileName: String; OnlyPrimary: Boolean; OnlyCode: Boolean);
                                     // meme palier Knight mais filtre par TYPE d'arme (name=) et
                                     // FACULTATIVEMENT par competence (skill=) - voir ChargeMetier,
                                     // StructureCareerBonusArmeModif.
+                                    // <SpecialRule> ajoute le 08/09/2026, quatrieme pendant, pour
+                                    // le palier 4 ("Knight of the Inner Circle") de la quasi-
+                                    // totalite des Ordres de Chevalerie, qui n'a le plus souvent
+                                    // aucun equivalent chiffre - voir ChargeMetier,
+                                    // StructureCareerBonusSpecialRule.
                                     TempCareerBonusAttributModif   := TListCareerBonusAttributModif.Create;
                                     TempCareerBonusCompetenceModif := TListCareerBonusCompetenceModif.Create;
                                     TempCareerBonusArmeModif       := TListCareerBonusArmeModif.Create;
+                                    TempCareerBonusSpecialRule     := TListCareerBonusSpecialRule.Create;
 
                                     Node := XmlElement(NodeNv3.FirstChild);
                                     while Assigned(Node) do
@@ -2687,6 +2695,14 @@ Procedure XmlImport(FileName: String; OnlyPrimary: Boolean; OnlyCode: Boolean);
                                               PCareerBonusArmeModif.Valeur        := StrToIntDef(RemoveQuotes(UTF8Encode(Node.TextContent)), 0);
                                               TempCareerBonusArmeModif.Add(PCareerBonusArmeModif);
                                             end;
+                                          ConstXmlSpecialRule:
+                                            begin
+                                              PCareerBonusSpecialRule.CodeBonus := PCareerBonus.CodeBonus;
+                                              PCareerBonusSpecialRule.Niveau    := 0;
+                                              PCareerBonusSpecialRule.Libelle   := RemoveQuotes(UTF8Encode(Node.Attributes.GetNamedItem(ConstXmlData).NodeValue));
+                                              PCareerBonusSpecialRule.Texte     := RemoveQuotes(UTF8Encode(Node.TextContent));
+                                              TempCareerBonusSpecialRule.Add(PCareerBonusSpecialRule);
+                                            end;
                                         end;
 
                                         Node := XmlElement(Node.NextSibling);
@@ -2717,10 +2733,18 @@ Procedure XmlImport(FileName: String; OnlyPrimary: Boolean; OnlyCode: Boolean);
                                             ListCareerBonusArmeModif.add(PCareerBonusArmeModif);
                                             inc(NbCareerBonusArmeModif);
                                           end;
+                                        for IndTempModif := 0 to TempCareerBonusSpecialRule.Count - 1 do
+                                          begin
+                                            PCareerBonusSpecialRule        := TempCareerBonusSpecialRule[IndTempModif];
+                                            PCareerBonusSpecialRule.Niveau := PCareerBonusNiveau.Niveau;
+                                            ListCareerBonusSpecialRule.add(PCareerBonusSpecialRule);
+                                            inc(NbCareerBonusSpecialRule);
+                                          end;
                                       end;
                                     TempCareerBonusAttributModif.Free;
                                     TempCareerBonusCompetenceModif.Free;
                                     TempCareerBonusArmeModif.Free;
+                                    TempCareerBonusSpecialRule.Free;
                                   end;
                               end;
 

@@ -199,6 +199,14 @@ Type
   // possedee, pas par competence generale - PdfPersonnageArmes (pdfpersonnage.pas) est le
   // seul appelant prevu, une ligne d'arme a la fois.
   Function PersonnageCareerBonusArmeModif(Personnage: StructurePersonnage; PArme: StructureArme): Integer;
+  // Pendant "regle narrative" des trois PersonnageCareerBonusXxxModif ci-dessus
+  // (ListCareerBonusSpecialRule) - ajoute le 08/09/2026 pour le palier 4 ("Knight of the
+  // Inner Circle") des Ordres de Chevalerie, qui n'a le plus souvent aucun equivalent
+  // chiffre. Renvoie les regles acquises par le personnage (Appartenance + palier
+  // atteint) - l'APPELANT est proprietaire de la liste rendue et doit la liberer, meme
+  // contrat que NiveauxDuCareerBonus (ChargeMetier). Affichee sur le PDF comme un "talent
+  // virtuel" de plus (pdfpersonnage.pas, les deux gabarits).
+  Function PersonnageCareerBonusSpecialRule(Personnage: StructurePersonnage): TListCareerBonusSpecialRule;
   // Même principe que PersonnageTalentAttributModif, mais sur les <ModifyCarac> déclarés
   // directement sur une ARME (DATA_ARME, ListArmeAttributModif) - CONTEXT.md 2.50 étape 3.
   // Une arme n'a pas de niveau : toute arme présente dans Personnage.Equipement compte,
@@ -1582,6 +1590,41 @@ Function PersonnageCareerBonusArmeModif(Personnage: StructurePersonnage; PArme: 
                     or CompareRechercheValeur(ListCareerBonusArmeModif[IndModif].CodeCompetence, PArme.CodeCompetence))
                and (ListCareerBonusArmeModif[IndModif].Niveau <= NiveauAtteint) then
               Result := Result + ListCareerBonusArmeModif[IndModif].Valeur;
+        end;
+    finally
+      Appartenances.Free;
+    end;
+  end;
+
+Function PersonnageCareerBonusSpecialRule(Personnage: StructurePersonnage): TListCareerBonusSpecialRule;
+  var
+    Appartenances:  TStringList;
+    IndApp:         Integer;
+    IndRegle:       Integer;
+    NiveauAtteint:  Integer;
+    PBonus:         StructureCareerBonus;
+    CodeApp:        String;
+  begin
+    Result := TListCareerBonusSpecialRule.Create;
+    if Trim(Personnage.Appartenance) = '' then
+      Exit;
+    Appartenances := TStringList.Create;
+    try
+      ExtractStrings([','], [], PChar(Personnage.Appartenance), Appartenances);
+      for IndApp := 0 to Appartenances.Count - 1 do
+        begin
+          CodeApp := Trim(Appartenances[IndApp]);
+          if CodeApp = '' then
+            continue;
+          // Meme filtre de palier que PersonnageCareerBonusArmeModif ci-dessus.
+          PBonus        := ChercheCareerBonus(CodeApp);
+          NiveauAtteint := PersonnageNiveauDansMetier(Personnage, PBonus.CodeMetier);
+          if NiveauAtteint <= 0 then
+            continue;
+          for IndRegle := 0 to (ListCareerBonusSpecialRule.Count - 1) do
+            if CompareRechercheValeur(ListCareerBonusSpecialRule[IndRegle].CodeBonus, CodeApp)
+               and (ListCareerBonusSpecialRule[IndRegle].Niveau <= NiveauAtteint) then
+              Result.Add(ListCareerBonusSpecialRule[IndRegle]);
         end;
     finally
       Appartenances.Free;

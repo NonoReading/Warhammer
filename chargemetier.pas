@@ -110,11 +110,27 @@ Type
         Valeur:         Integer;
   End;
 
+  // Le pendant "regle narrative" des trois precedents - <SpecialRule name="Nom court">
+  // Texte descriptif</SpecialRule> pose dans un <LevelN>. Necessaire parce que le palier 4
+  // ("Knight of the Inner Circle") de la quasi-totalite des Ordres de Chevalerie n'est PAS
+  // un bonus chiffre (Trait automatique conditionnel, relance de des, Blessures Critiques
+  // supplementaires, arme qui devient magique, ignorer une Qualite, immunite...) - le
+  // Reiksguard (2.51 point 1) etait un cas chanceux, seul parmi les 17 a n'avoir que des
+  // bonus chiffres a ce palier. Affichee sur le PDF comme un "talent virtuel" de plus dans
+  // le bloc Talents (les deux gabarits) - decision Nono, CONTEXT.md 2.51, 08/09/2026.
+  StructureCareerBonusSpecialRule = Record
+        CodeBonus:      String;
+        Niveau:         Integer;
+        Libelle:        String;
+        Texte:          String;
+  End;
+
   TListCareerBonus       = specialize TList<StructureCareerBonus>;
   TListCareerBonusNiveau = specialize TList<StructureCareerBonusNiveau>;
   TListCareerBonusAttributModif = specialize TList<StructureCareerBonusAttributModif>;
   TListCareerBonusCompetenceModif = specialize TList<StructureCareerBonusCompetenceModif>;
   TListCareerBonusArmeModif = specialize TList<StructureCareerBonusArmeModif>;
+  TListCareerBonusSpecialRule = specialize TList<StructureCareerBonusSpecialRule>;
 
 var
   ListMetier:     TListMetier;
@@ -129,6 +145,8 @@ var
   NbCareerBonusCompetenceModif:   Integer;
   ListCareerBonusArmeModif: TListCareerBonusArmeModif;
   NbCareerBonusArmeModif:   Integer;
+  ListCareerBonusSpecialRule: TListCareerBonusSpecialRule;
+  NbCareerBonusSpecialRule:   Integer;
 
 function chercheMetier(CodeMetier :String): StructureMetier;
 Function CheminMetierImage(CodeMetier: String): String;
