@@ -11904,6 +11904,50 @@ Poison: Used to weaken and kill targets, anyone caught in the radius of this gre
 <Talent>"RULES-T0005"</Talent>
 </Level>
 </CareerBonus>
+  <!-- LOT 3d-3 : Grand Order of the Reiksguard (p.8), premier des onze Ordres de chevalerie
+       de l Empire. Condition du livre : "Your character must originate from the Empire to
+       qualify for these Orders" - <Specie> vise donc la NATION (RULES-NATION_EMPIRE,
+       CONTEXT.md 2.51), pas une ethnie, et <Career> le Knight du Rulebook (RULES-WORK12).
+       Squire (palier 1) est saisissable tel quel. Knight (palier 2) : "+10 WS Tests when
+       using any Lances, Two-handed Swords or Shields" - trois ModifyWeapon (CONTEXT.md
+       2.50 point 4bis), un par type d arme, sans filtre skill= car le bonus ne depend pas
+       de la competence utilisee. First Knight (palier 3) : "Drilled Talent" (RULES-T0036).
+       Knight of the Inner Circle (palier 4) : "+10 Fellowship and +10 Willpower to your
+       characteristics (these count as Talent Advances)" - deux ModifyCarac (CONTEXT.md 2.50
+       etape 3). Le reste du palier 4, "you may choose 3 Empire Province Racial Skills to
+       give a free +5 Advances to", est un CHOIX du joueur parmi une liste : aucun mecanisme
+       ne le porte (ModifySkill ne vise qu UN code fixe), reste descriptif - voir
+       A FAIRE.txt. -->
+<CareerBonus id="NATIO-ORDER_REIKS">
+<Description language="ENGLISH">"Grand Order of the Reiksguard"</Description>
+<Career>"RULES-WORK12"</Career>
+<Specie>"RULES-NATION_EMPIRE"</Specie>
+<Level id="NATIO-ORDER_REIKS_1">
+<Order>"1"</Order>
+<Skill>"RULES-COMPSAVOIR_EMPIRE"</Skill>
+<Talent>""</Talent>
+</Level>
+<Level id="NATIO-ORDER_REIKS_2">
+<Order>"2"</Order>
+<Skill>""</Skill>
+<Talent>""</Talent>
+<ModifyWeapon name="RULES-WTYPE_LANCE">+10</ModifyWeapon>
+<ModifyWeapon name="RULES-WTYPE_SWORD">+10</ModifyWeapon>
+<ModifyWeapon name="RULES-WTYPE_SHIELD">+10</ModifyWeapon>
+</Level>
+<Level id="NATIO-ORDER_REIKS_3">
+<Order>"3"</Order>
+<Skill>""</Skill>
+<Talent>"RULES-T0036"</Talent>
+</Level>
+<Level id="NATIO-ORDER_REIKS_4">
+<Order>"4"</Order>
+<Skill>""</Skill>
+<Talent>""</Talent>
+<ModifyCarac name="RULES-ATTR_Fel">+10</ModifyCarac>
+<ModifyCarac name="RULES-ATTR_WP">+10</ModifyCarac>
+</Level>
+</CareerBonus>
 </DATA_CAREER_BONUS>
 <DATA_CRAFTMANSHIP>
   <!-- Les trois accessoires d arme de la page 60, poses ici et non dans DATA_WEAPON : un

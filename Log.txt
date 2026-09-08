@@ -2107,3 +2107,37 @@ CONTEXT.md 2.51) - aucun probleme constate, WarhammerHelp.exe reconstruit. Non-r
 acquise. Reste non teste en pratique : aucun <CareerBonus> ne pose encore de <Specie>
 visant une Nation, seul le Reiksguard (3d-3) en aura besoin - prochaine etape.
 Nono commit et arrete la session pour ce soir.
+
+08/09/2026 - GRAND ORDER OF THE REIKSGUARD SAISI (NATIO-ORDER_REIKS)
+Texte exact retrouve p.8 (pdftotext -layout, le TXT du corpus melangeait les deux colonnes
+a cet endroit precis). Entree CareerBonus dans BOOK_NATIONS_OF_MANKIND.Xml : Squire (Lore
+Empire), Knight (trois ModifyWeapon Lance/Epee a 2 mains/Bouclier, +10 chacun), First Knight
+(talent Drilled RULES-T0036), Knight of the Inner Circle (deux ModifyCarac Fel/WP +10
+chacun). Specie="RULES-NATION_EMPIRE" - premier CareerBonus a viser une Nation plutot
+qu'une ethnie, exerce enfin le mecanisme du 07/09 (2.51). Le choix de 3 competences
+raciales provinciales a +5 (reste du palier 4) n'est pas modelisable (choix du joueur
+parmi une liste) - laisse en commentaire XML, note dans A FAIRE.txt. Fichier ecrit et
+committe, taille verifiee (BOOK_NATIONS_OF_MANKIND.Xml 568308).
+
+08/09/2026 - BUG TROUVE ET CORRIGE : MODIFYWEAPON ABSENT DU GABARIT FELDO2P
+Nono a teste NATIO-ORDER_REIKS a la main (Knight niveau 4, personnage avec Shield/Pike/
+Spear, gabarit [PdfFeldo2P]) : Fel/WP corrects (+10 visibles), mais le Bouclier restait a
+57% au lieu de 67% attendu. Trouve en relisant pdfpersonnage.pas : DEUX blocs de rendu des
+armes existent - PdfPersonnageCreation (l.1557, corrige le 07/09 avec
+PersonnageCareerBonusArmeModif) et PdfBlocArmesDonnees (l.2718, reste a l'ecart) - et
+PdfPersonnageCreationFeldo2P (l.4236) appelle le second. ModifyCarac (Fel/WP) fonctionnait
+car cable dans PdfPersonnageAttribut, fonction partagee par les deux gabarits - seul
+ModifyWeapon avait ete ajoute a un seul des deux blocs armes. Corrige en ajoutant le meme
+"+ PersonnageCareerBonusArmeModif(Personnage, PArme)" en l.2718. Point signale au passage :
+l'ecran WinPersonnage (grille Attribute) a son PROPRE calcul, independant des deux gabarits
+PDF - ne montrera ce bonus qu'apres le chantier "accesseur unique" (A FAIRE.txt), ce n'est
+pas une regression de ce correctif. Fichier ecrit et committe, taille verifiee
+(pdfpersonnage.pas 247878). Reste : Nono compile et reteste (Shield attendu a 67%).
+
+08/09/2026 - CORRECTIF MODIFYWEAPON FELDO2P CONFIRME PAR NONO
+Nono a recompile et regenere le PDF du Chevalier du Reiksguard (gabarit [PdfFeldo2P]) : le
+Bouclier affiche desormais 67% (au lieu de 57%). Le mecanisme Nation/ModifyWeapon/
+ModifyCarac (2.51 point 1, Grand Order of the Reiksguard) est valide de bout en bout, y
+compris en gabarit Feldo2P. Reste, dans l'ordre : les dix autres Ordres de chevalerie
+(p.8-9 de Nations of Mankind, meme moule) puis les onze Regiments of Renown (2.44 point de
+reprise 2).

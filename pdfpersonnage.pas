@@ -2715,7 +2715,12 @@ Procedure PdfBlocArmesDonnees(PdfPage: TPDFPage; Personnage: StructurePersonnage
 
           CompetenceDonnee := PdfPersonnageCompetence(Personnage, PArme.CodeCompetence, Bidon);
 
-          Pourcent := IntToStr(CompetenceDonnee.Total);
+          // Bonus des Ordres de Chevalerie/appartenances filtre par TYPE d'arme (ex. "+10 CC
+          // avec les lances" - Reiksguard, palier Knight) : meme ajout que PdfPersonnageCreation
+          // l.1557, manquant ici jusqu'au 08/09/2026 - PdfBlocArmesDonnees est le bloc arme
+          // utilise par PdfPersonnageCreationFeldo2P (l.4236), reste a l'ecart du calcul
+          // "normal" depuis l'ajout de ModifyWeapon le 07/09/2026 (CONTEXT.md 2.50 point 4bis).
+          Pourcent := IntToStr(CompetenceDonnee.Total + PersonnageCareerBonusArmeModif(Personnage, PArme));
           PasBonus := (CompetenceDonnee.Augmentation = 0);
 
           if pos(EquipementCT, PArme.CodeArme) > 0 then

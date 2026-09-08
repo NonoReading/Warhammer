@@ -1,6 +1,70 @@
 # Warhammer — Contexte projet
 
-**Dernière mise à jour : 07/09/2026 — §2.51 COMPILÉ PAR NONO, AUCUN PROBLÈME CONSTATÉ :
+**Dernière mise à jour : 08/09/2026 — §2.51 EN PAUSE, CONCEPTION D'UN MÉCANISME "RÈGLE
+SPÉCIALE" À TRANCHER AVEC NONO AVANT DE CONTINUER.** En relisant p.8-9 de *Nations of
+Mankind* en entier (texte + vérification visuelle des deux pages du PDF), deux corrections
+au §2.51 ci-dessous : (1) il y a en réalité **17 Ordres de chevalerie**, pas onze comme
+écrit par erreur précédemment — donc **16 restent à saisir**, pas dix ; (2) pour la quasi-
+totalité de ces 16, le palier 4 "Knight of the Inner Circle" n'est PAS un `ModifyCarac`/
+`ModifySkill` comme pour le Reiksguard (qui était en fait un cas chanceux, seul parmi les
+17 à n'avoir que des bonus chiffrés à ce palier) : c'est une règle spéciale narrative sans
+équivalent chiffré (Trait automatique conditionnel, relance de dés, Critical Wounds
+supplémentaires, arme qui devient magique, ignorer une Qualité, immunité...) — aucun
+mécanisme actuel ne la porte. Un cas à part : l'**Order of the Hammer of Sigmar** (dernier
+de la page 9) a carrément son palier 4 ET son Heraldry absents du texte de la page —
+vérifié à l'image (Read du PDF, pages 8 et 9), l'entrée s'arrête net après First Knight,
+ce n'est pas un problème d'extraction `pdftotext`.
+
+Proposition en cours de discussion pour représenter ces paliers 4 (au lieu de les laisser
+tous en commentaire XML + item `A FAIRE.txt`, ce qui viderait le mécanisme CareerBonus de
+sa substance pour 16 Ordres sur 17) : une balise `<SpecialRule name="Nom court">Texte
+descriptif</SpecialRule>` posée dans un `<LevelN>`, même famille que `ModifyWeapon`
+(nouvelle structure `StructureCareerBonusSpecialRule` dans `chargemetier.pas` — CodeBonus,
+Niveau, Libelle, Texte ; parsing dans `xmlexportimport.pas` ~l.2589-2735 sur le même modèle
+que `ModifyWeapon` ; consommation via une nouvelle `PersonnageCareerBonusSpecialRule` dans
+`chargepersonnage.pas`, même filtre Appartenance+Niveau que `PersonnageCareerBonusArmeModif`).
+**Point non tranché : où l'afficher sur le PDF** — contrairement aux trois Modify* qui
+se glissent dans des cases déjà existantes (grille Attribut, % d'arme), une règle spéciale
+est un texte libre sans case dédiée aujourd'hui, et il faudra la brancher dans les DEUX
+gabarits (leçon du bug ci-dessous : `PdfPersonnageCreation` ET `PdfBlocArmesDonnees`/
+Feldo2P). Deux options proposées : (a) l'accrocher au bloc Talents existant
+(`PdfBlocTalents`, pdfpersonnage.pas l.2393) comme une ligne "talent virtuel" supplémentaire
+— recommandé, reste dans le mécanisme existant sans toucher aux `.lfm` ; (b) un nouveau
+bloc dédié "Règles spéciales", plus propre visuellement mais touche la mise en page des
+deux gabarits. **Rien n'est encore écrit ni en XML ni en Pascal sur ce point — en attente
+de la décision de Nono, qui a préféré ouvrir un nouveau prompt pour cette suite (session
+précédente déjà longue).** Prochaine étape à la reprise : trancher (a)/(b)/autre, puis
+implémenter, puis reprendre la saisie des 16 Ordres.
+
+**08/09/2026 — BUG TROUVÉ, CORRIGÉ, COMPILÉ ET VALIDÉ PAR NONO : le
+bonus `ModifyWeapon` (§2.50 point 4bis, ex. Reiksguard "+10 CC avec Lances/Épées à 2 mains/
+Boucliers") n'apparaissait pas en testant `NATIO-ORDER_REIKS` sur un Knight de niveau 4.
+Cause : DEUX blocs de rendu des armes existent dans `pdfpersonnage.pas` — celui de
+`PdfPersonnageCreation` (l.1557, corrigé le 07/09) et celui de `PdfBlocArmesDonnees`
+(l.2718, resté à l'écart) — et c'est ce second bloc qu'utilise `PdfPersonnageCreationFeldo2P`
+(appelé l.4236), le gabarit `[PdfFeldo2P]` du personnage de test de Nono. `ModifyCarac`
+(Fel/WP, palier Knight of the Inner Circle), lui, fonctionnait déjà car câblé dans
+`PdfPersonnageAttribut`, une fonction partagée par les deux gabarits. Corrigé en ajoutant le
+même `+ PersonnageCareerBonusArmeModif(Personnage, PArme)` en l.2718. Nono a recompilé et
+regénéré le PDF du Chevalier du Reiksguard : le Bouclier affiche maintenant 67% (au lieu de
+57%), correctif confirmé. Point signalé au passage, pas touché : l'écran WinPersonnage
+(grille Attribute) a son PROPRE calcul, indépendant des deux gabarits PDF — ne montrera ce
+bonus qu'une fois le chantier "accesseur unique" fait (`A FAIRE.txt`), ce n'est pas une
+régression de ce correctif. Détail en §2.51.
+
+**08/09/2026 — §2.51 POINT 1 ÉCRIT, COMPILÉ ET VALIDÉ :
+l'entrée `<CareerBonus id="NATIO-ORDER_REIKS">` (Grand Order of the Reiksguard, premier des
+onze Ordres de chevalerie, p.8 de *Nations of Mankind*) saisie dans
+`BOOK_NATIONS_OF_MANKIND.Xml` — Squire (Lore Empire), Knight (trois `ModifyWeapon` Lance/
+Épée à 2 mains/Bouclier), First Knight (talent Drilled), Knight of the Inner Circle (deux
+`ModifyCarac` Sociabilité/Volonté +10). `<Specie>"RULES-NATION_EMPIRE"</Specie>` : premier
+usage réel du mécanisme Nation (§2.51 ci-dessous). Un point du livre reste hors mécanisme
+(choix de 3 compétences raciales provinciales à +5, palier 4) — voir `A FAIRE.txt`. Détail
+en §2.51. Au passage, correction d'une erreur relevée plus bas dans cet encart (07/09) : le
+First Knight du Reiksguard donne le talent Drilled, pas un miracle sur les haches — cette
+dernière description est celle d'un AUTRE Ordre, pas encore saisi.
+
+**07/09/2026 — §2.51 COMPILÉ PAR NONO, AUCUN PROBLÈME CONSTATÉ :
 mécanisme générique « Nation » (regroupement politique d'ethnies, distinct de la Race
 biologique) pour la condition d'origine du Reiksguard (3d-3, §2.44 point de reprise 1).
 RULES-NATION_EMPIRE posé sur le Rulebook, les 7 provinces impériales de Nations of Mankind
@@ -107,8 +171,10 @@ choisi avec Nono) dans `BOOK_NATIONS_OF_MANKIND.Xml` — bloqué sur la conditio
 ("doit venir de l'Empire") : `<Specie>` ne porte qu'UN code, alors que l'Empire est
 aujourd'hui représenté par 8 ethnies distinctes (Reikland + 7 provinces de Nations of
 Mankind) ; Nono veut une vraie table des Nations plutôt qu'un bricolage - conception non
-commencée, voir §2.44. First Knight (miracle sur les haches + trait Champion) reste en
-descriptif, aucun mécanisme ne le porte), et les onze Regiments of Renown. **§2.49 étape 4 (durcissement `VerifieRecherche`) TERMINÉ ET CLOS (06/09 nuit,
+commencée, voir §2.44. [Correction du 08/09/2026 : la description « First Knight, miracle
+sur les haches + trait Champion » ci-dessus était celle d'un AUTRE Ordre — voir le texte
+réel et l'entrée écrite au 08/09 en tête de fichier et en §2.51.] Et les onze Regiments of
+Renown. **§2.49 étape 4 (durcissement `VerifieRecherche`) TERMINÉ ET CLOS (06/09 nuit,
 3e tentative)** : tous les codes nus trouvés en cours de route préfixés `RULES-` (`PDF_XXX`/
 `CorruptionPhysique`/`CorruptionMentale`/`LAB_`/`MESS_`/`SHORTATTR_`, les 26 codes de
 `PdfPersonnageCompetenceTri`, `TalentGenerique`), `VerifieRecherche` stable en forme
@@ -5604,8 +5670,10 @@ déjà là, correcte, en attente du code.
    compétence entière (aucun cas connu aujourd'hui), mais le 3d-3 est passé au point 4bis
    ci-dessous.
 
-   **4bis. ✅ Pendant "par type d'arme" ajouté (07/09/2026, écrit par Claude, PAS ENCORE
-   COMPILÉ)** : `ModifyWeapon`, troisième pendant du même moule, pour les bonus qui ne
+   **4bis. ✅ Pendant "par type d'arme" ajouté (07/09/2026, écrit par Claude, COMPILÉ par
+   Nono après correction d'une collision d'identifiant — `ConstXmlDataSkill` doublait le
+   nom du bloc XML des compétences, renommé en `ConstXmlModifieArmeCompetence`)** :
+   `ModifyWeapon`, troisième pendant du même moule, pour les bonus qui ne
    couvrent qu'UNE PARTIE des armes d'une compétence (le cas réel du Knight). Nouveau champ
    `StructureArme.TypeArme` (`chargearme.pas`) - la NATURE de l'arme (épée/lance/bouclier),
    orthogonal à `CodeCompetence` qui classe par MANIEMENT (Base/Cavalerie/2 mains/...) - lu
@@ -5634,11 +5702,11 @@ déjà là, correcte, en attente du code.
    portent déjà `<Type>"RULES-WTYPE_LANCE"</Type>`/`SWORD`/`SHIELD` (07/09/2026) - les autres
    armes ne sont PAS encore typées, à faire au fur et à mesure des ordres qui en ont besoin,
    pas systématiquement. Aucune table de libellés pour `TypeArme` : usage interne au filtrage
-   pour l'instant, rien n'affiche ce champ à l'écran. **Reste à faire, dans l'ordre : (1) Nono
-   compile et teste (aucun livre n'exerce encore ce code, aucune régression attendue mais pas
-   vérifié) ; (2) résoudre le blocage Nations (§2.44) pour la condition d'ethnie du
-   Reiksguard ; (3) écrire l'entrée `<CareerBonus>` complète (Squire/Knight/First
-   Knight/Knight of the Inner Circle) dans `BOOK_NATIONS_OF_MANKIND.Xml`.**
+   pour l'instant, rien n'affiche ce champ à l'écran. **Reste à faire : (1) ✅ FAIT — Nono a
+   compilé, aucune régression constatée ; (2) ✅ FAIT — mécanisme générique Nation écrit et
+   compilé, voir §2.51 ; (3) écrire l'entrée `<CareerBonus>` complète (Squire/Knight/First
+   Knight/Knight of the Inner Circle) dans `BOOK_NATIONS_OF_MANKIND.Xml` — en cours, voir
+   §2.51.**
    ✅ FAIT côté ARMES (écrit par Claude, compilé par Nono, aucune régression constatée,
    06/09/2026) : nouveau fichier `chargearmeattributmodif.pas` (`StructureArmeAttributModif`
    - Livre/CodeArme/CodeAttribut/Valeur, même moule que les talents, Attribut seul comme
@@ -5748,14 +5816,42 @@ avec la saisie du Reiksguard (point 2 ci-dessous).
 `DATA_NATION` ni la balise `<Nationality>` — même lacune que Nations of Mankind, qui n'a
 lui-même aucune traduction française. Sans effet tant que `LANG=ENGLISH` (`INI.TXT`).
 
+**08/09/2026 — Point 1 ÉCRIT (Claude), COMPILÉ ET VALIDÉ PAR NONO.** Texte exact retrouvé p.8 (extrait
+proprement via `pdftotext -layout` — le TXT du corpus mélangeait les deux colonnes à cet
+endroit précis, colonnes bien identiques ailleurs sur ce livre par ailleurs, §0). `NATIO-
+ORDER_REIKS` dans `BOOK_NATIONS_OF_MANKIND.Xml`, `<Career>"RULES-WORK12"</Career>` (Knight,
+Rulebook), `<Specie>"RULES-NATION_EMPIRE"</Specie>` — premier `<CareerBonus>` à viser une
+Nation plutôt qu'une ethnie, exerce enfin le mécanisme du point ci-dessus :
+- Palier 1 (Squire) : `<Skill>"RULES-COMPSAVOIR_EMPIRE"</Skill>` (Lore Empire).
+- Palier 2 (Knight) : trois `<ModifyWeapon>` sans `skill=` (§2.50 point 4bis) —
+  `RULES-WTYPE_LANCE`/`SWORD`/`SHIELD`, +10 chacun. Les seules armes du Rulebook portant
+  ces types (Lance, Bastard Sword, Zweihänder, les 3 Shield*) correspondent exactement au
+  texte du livre ("any Lances, Two-handed Swords or Shields").
+- Palier 3 (First Knight) : `<Talent>"RULES-T0036"</Talent>` (Drilled) — **pas** un
+  miracle/trait Champion, cette description appartenait à un autre Ordre du même chapitre
+  (relevé le 08/09 en lisant le texte réel, corrigé dans l'encart de tête).
+- Palier 4 (Knight of the Inner Circle) : deux `<ModifyCarac>` (§2.50 étape 3) —
+  `RULES-ATTR_Fel`/`RULES-ATTR_WP`, +10 chacun (« count as Talent Advances », permanents).
+  Le reste du palier 4, « choisir 3 Empire Province Racial Skills et leur donner +5
+  avancées gratuites », est un CHOIX du joueur parmi une liste : aucun mécanisme actuel ne
+  le porte (`ModifySkill` ne vise qu'un seul code fixe) — laissé en commentaire XML, noté
+  dans `A FAIRE.txt`.
+
+**08/09/2026 — premier test par Nono (personnage `NATIO-ORDER_REIKS` fait main, Knight
+niveau 4, gabarit `[PdfFeldo2P]`) : le mécanisme Nation ET `ModifyCarac` (Fel/WP) confirmés
+fonctionnels (`PdfPersonnageAttribut`, partagé par les deux gabarits PDF) ; `ModifyWeapon`
+(Bouclier) absent du PDF généré — bug localisé et corrigé (voir l'encart en tête de fichier) :
+`PdfBlocArmesDonnees` (utilisé par `PdfPersonnageCreationFeldo2P`) avait son propre bloc de
+rendu des armes, resté à l'écart du `+ PersonnageCareerBonusArmeModif(...)` ajouté le 07/09
+dans l'AUTRE bloc (`PdfPersonnageCreation`). Écrit par Claude (08/09), compilé et testé par
+Nono le jour même : le Bouclier affiche 67 % (au lieu de 57 %) sur le PDF Feldo2P régénéré.**
+
+**08/09/2026 — CORRECTIF CONFIRMÉ, §2.51 POINT 1 VALIDÉ DE BOUT EN BOUT.** Le mécanisme
+Nation/ModifyWeapon/ModifyCarac fonctionne intégralement, y compris en gabarit Feldo2P
+(Bouclier 57 % → 67 %, confirmé par Nono).
+
 **Reste, dans l'ordre :**
-1. Écrire l'entrée `<CareerBonus>` complète du Reiksguard (Squire/Knight/First Knight/
-   Knight of the Inner Circle) dans `BOOK_NATIONS_OF_MANKIND.Xml`, avec
-   `<Specie>"RULES-NATION_EMPIRE"</Specie>` — ce qui était bloqué avant ce chantier, et le
-   seul moyen d'exercer le mécanisme Nation en pratique. Squire est saisissable tel quel ;
-   Knight utilise `ModifyWeapon`/`TypeArme` (§2.50 point 4bis, écrit le 07/09, pas encore
-   compilé) ; Knight of the Inner Circle utilise `ModifyCarac` (§2.50 étape 3, compilé) ;
-   First Knight (miracle + trait Champion) reste en descriptif, aucun mécanisme ne le porte.
+1. Les dix autres Ordres de chevalerie (p.8-9), même moule maintenant établi.
 2. Les onze Regiments of Renown (§2.44 point de reprise 2), sans lien avec ce chantier.
 
 ---

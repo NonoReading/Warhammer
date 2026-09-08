@@ -228,17 +228,18 @@ A reprendre avec le morceau "creatures" du lot 3 si on veut de vraies creatures.
 CONCEPTIONS A MENER  (chantiers a part entiere, ne pas les melanger)
 =========================================================================
 
-UNE VRAIE TABLE DES NATIONS, POUR LA CONDITION D ETHNIE DU 3d-3 (ORDRES DE CHEVALERIE).
-Bloque le pilote Reiksguard (CONTEXT.md 2.44/2.50) : le livre exige "doit venir de
-l Empire", mais <Specie> sur DATA_CAREER_BONUS ne porte qu UN SEUL code d ethnie, alors
-que l Empire est deja represente par 8 ethnies distinctes (RULES-RACE_HUM "Humans
-(Reikland)" du Rulebook + les 7 provinces NATIO-RACE_HAVER/HHOCH/HOSTM/HOSTL/HSTIR/
-HTALA/HWISS de Nations of Mankind) - et la Bretagne (HBRPA/HBRNO), l Estalie (HESTA),
-la Tilee, la Norsca, l Arabie (HARAB) etc. sont dans le meme cas (plusieurs ethnies pour
-une seule "nation" au sens du joueur). Nono veut une vraie table (pas un bricolage du
-champ existant) - conception a mener AVEC LUI avant de toucher AppartenancesCandidates
-(chargemetier.pas ~193-230, le point unique qui filtre aujourd hui par CodeRace) ou tout
-code lie a l ethnie. Pas commencee.
+[FAIT LE 07/09/2026 - mecanisme generique Nation ecrit et compile, voir CONTEXT.md 2.51.
+Reste : les autres regroupements du meme genre (Bretagne HBRPA/HBRNO, Estalie HESTA,
+Tilee, Norsca, Arabie HARAB...) n ont pas encore de Nation propre - a faire au fur et a
+mesure des besoins, pas systematiquement.]
+
+LE CHOIX DE 3 COMPETENCES RACIALES PROVINCIALES (+5 AVANCEES CHACUNE) N EST PAS MODELISE.
+Grand Order of the Reiksguard, palier Knight of the Inner Circle (p.8, NATIO-ORDER_REIKS
+palier 4, saisi le 08/09/2026) : en plus des +10 Sociabilite/+10 Volonte (ModifyCarac,
+en place), le livre donne un CHOIX du joueur parmi les competences raciales provinciales -
+aucun mecanisme actuel ne represente un choix parmi une liste (ModifySkill ne vise qu un
+seul code fixe). Laisse en commentaire XML dans BOOK_NATIONS_OF_MANKIND.Xml, purement
+descriptif pour l instant. Concerne aussi les dix autres Ordres de chevalerie a saisir.
 
 UN ACCESSEUR UNIQUE POUR LA VALEUR D UNE COMPETENCE. Idee de Nono le 06/09/2026, posee en
 parallele du chantier Effet/Cible/Forme (voir CONTEXT.md, section talents) pour ne pas les
@@ -258,6 +259,21 @@ deja scope. Point de jonction a garder en tete pour plus tard : si un talent ou 
 d ordre de chevalerie doit un jour bonifier UNE competence precise plutot qu une case de
 calcul globale, c est le champ "bonus" de cette structure qui recevrait la cible du Effet,
 pas une nouvelle case ad hoc.
+
+[PIEGE CONFIRME LE 08/09/2026, MEME FAMILLE QUE CI-DESSUS] LE RENDU DES ARMES EST AUSSI
+DUPLIQUE NORMAL/FELDO2P. PdfPersonnageCreation (l.1557) et PdfBlocArmesDonnees (l.2718,
+utilise par PdfPersonnageCreationFeldo2P l.4236) calculent chacun le pourcentage d une
+ligne d arme independamment. Le ModifyWeapon du Reiksguard (ajoute le 07/09 dans le
+premier bloc seulement) manquait dans le second - corrige le 08/09/2026 en testant
+NATIO-ORDER_REIKS. Retenir : toute future modification du calcul d une ligne d arme doit
+etre faite AUX DEUX ENDROITS, ou attendre l accesseur unique ci-dessus qui les fusionnerait.
+
+L ECRAN WINPERSONNAGE NE REFLETE PAS LES BONUS DE CAREERBONUS (MODIFYCARAC/MODIFYWEAPON/
+MODIFYSKILL). Releve le 08/09/2026 en testant le Reiksguard : la grille Attribute de
+winpersonnage.pas a son PROPRE calcul, independant de PdfPersonnageAttribut (PDF) - meme
+defaut que celui deja note ci-dessus pour les competences (calcul en double ecran/PDF).
+Les bonus de palier d ordre de chevalerie/regiment n apparaissent donc qu au PDF pour l
+instant. Se resoudra avec l accesseur unique ci-dessus, pas de correctif a part a chercher.
 
 GENERICISER LE CASE DE CALCUL DES TALENTS DE pdfpersonnage.pas. Repere le 06/09/2026 en
 discutant des ordres de chevalerie (3d-3). Le bloc qui calcule DurACuire/BonusEncomb/Mouv/
