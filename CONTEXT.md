@@ -1,6 +1,26 @@
 # Warhammer — Contexte projet
 
-**Dernière mise à jour : 08/09/2026 — MÉCANISME "RÈGLE SPÉCIALE" COMPILÉ PAR NONO, AUCUN
+**Dernière mise à jour : 08/09/2026 — LES 15 ORDRES DE CHEVALERIE RESTANTS SAISIS EN UN LOT,
+PAS ENCORE COMPILÉS PAR NONO.** Après le Reiksguard et l'Order of the Blazing Sun (déjà en
+place), Nono a validé un inventaire complet des 15 Ordres restants (p.8-9 de *Nations of
+Mankind*) avant écriture plutôt qu'un aller-retour par Ordre — les 17 Ordres du livre sont
+maintenant tous saisis dans `BOOK_NATIONS_OF_MANKIND.Xml`. Détail complet en §2.51.
+Nouveau vocabulaire ajouté au passage, validé par Nono avant écriture : 8 types d'armes dans
+`BOOK_RULESBOOK.Xml` (Halberd, Axe ×2, Sword de base, Cavalry Hammer, Warhammer, Rapier,
+Swordbreaker) ; dans `BOOK_NATIONS_OF_MANKIND.Xml`, deux compétences (Lore Mutants, Lore
+Ubersreik) et quatre Hatred (Chaos Cultists, Witches, Norscans, Mutants — ce dernier repéré en
+cours d'écriture, absent de l'inventaire présenté à Nono, rattrapé sur le même modèle).
+Deux mécanismes compilés le 07-08/09 mais jamais exercés avant ce lot sont maintenant sollicités
+en pratique : `ModifySkill` au niveau `CareerBonus` (bonus sur toute une compétence — Polearm/
+Flail/Hand Weapon — pour "any X" du livre, plus simple que de typer arme par arme) et le filtre
+`skill=` optionnel de `ModifyWeapon` (restreint un `WTYPE_SWORD` aux seules épées à deux mains,
+cas Knights of Morr/Reikshammer). Order of the Hammer of Sigmar n'a que 3 paliers saisis : le
+livre lui-même n'a ni palier 4 ni Heraldry pour cet Ordre (déjà vérifié à l'image les jours
+précédents). **Reste : Nono compile et teste** — voir §2.51 pour le détail par Ordre de ce qui
+doit apparaître à l'écran/au PDF. Prochain chantier une fois validé : les onze Regiments of
+Renown (§2.44 point de reprise 2).
+
+**08/09/2026 — MÉCANISME "RÈGLE SPÉCIALE" COMPILÉ PAR NONO, AUCUN
 PROBLÈME CONSTATÉ.** Non-régression acquise ; le mécanisme n'est pas encore exercé en
 pratique (aucun `<SpecialRule>` posé dans un livre) — le test réel viendra avec la saisie
 des 16 Ordres restants, prochaine étape. En relisant p.8-9 de *Nations of Mankind* en entier (texte +
@@ -5874,8 +5894,20 @@ Nation/ModifyWeapon/ModifyCarac fonctionne intégralement, y compris en gabarit 
    saisir. Pour 16 sur 17, le palier 4 n'a pas d'équivalent chiffré (voir encart de tête).
 2. ✅ Mécanisme `<SpecialRule>` écrit et **compilé par Nono le 08/09/2026, aucun problème
    constaté** (voir encart de tête). Pas encore exercé en pratique.
-3. Les 16 autres Ordres de chevalerie (p.8-9) — prochaine étape.
-4. Les onze Regiments of Renown (§2.44 point de reprise 2), sans lien avec ce chantier.
+3. ✅ **Les 15 autres Ordres saisis en un lot (08/09/2026)**, sur inventaire complet validé par
+   Nono avant écriture plutôt qu'un aller-retour par Ordre — voir l'encart de tête pour le
+   détail (vocabulaire créé, mécanismes `ModifySkill`/`ModifyWeapon skill=` exercés pour la
+   première fois). **Reste : Nono compile et teste.** Points à vérifier en priorité, parce que
+   ce sont les deux mécanismes jamais exercés avant ce lot : le bonus "toute la compétence"
+   (`ModifySkill`, ex. Order of the Black Bear/Black Rose avec Polearm, testable sans même
+   équiper une arme précise puisqu'il vise la compétence) et le filtre `skill=` sur
+   `ModifyWeapon` qui restreint un type d'arme à une sous-famille (Knights of Morr/Order of the
+   Reikshammer, "Two-handed Swords" seul et pas l'épée à une main bien que les deux portent
+   `RULES-WTYPE_SWORD`). Un personnage Knights of Morr ou Reikshammer avec une épée à une main
+   ET une arme à deux mains typée Sword est le test le plus révélateur : si le bonus apparaît
+   aussi sur l'épée à une main, le filtre `skill=` ne fonctionne pas.
+4. Les onze Regiments of Renown (§2.44 point de reprise 2), sans lien avec ce chantier —
+   chantier suivant une fois le point 3 validé.
 
 ---
 

@@ -59,6 +59,12 @@
 <Skill id="RULES-COMPSAVOIR_MONSTRE">
 <Description language="ENGLISH">"Lore (Monsters)"</Description>
 </Skill>
+<Skill id="RULES-COMPSAVOIR_MUTANT">
+<Description language="ENGLISH">"Lore (Mutants)"</Description>
+  <!-- N existait pas encore, necessaire pour les Knights Panther et l Order of the Broken
+       Sword (Knightly Orders, p.8-9, CONTEXT.md 2.51) : "Lore (Beastmen) and Lore (Mutants)".
+       Creee sur le meme moule que les Lore de ce livre, Nono a valide le 08/09/2026. -->
+</Skill>
 <Skill id="RULES-COMPSAVOIR_MYRMIDIA">
 <Description language="ENGLISH">"Lore (Myrmidia)"</Description>
 </Skill>
@@ -202,6 +208,12 @@
 </Skill>
 <Skill id="RULES-COMPSAVOIR_TALABECLAND">
 <Description language="ENGLISH">"Lore (Talabecland)"</Description>
+</Skill>
+<Skill id="RULES-COMPSAVOIR_UBERSREIK">
+<Description language="ENGLISH">"Lore (Ubersreik)"</Description>
+  <!-- N existait pas encore (seul Reikland/Middenland/Nordland etaient modelisees, CONTEXT.md
+       5020), necessaire pour l Order of the Reikshammer (Knightly Orders, p.9, CONTEXT.md
+       2.51) : "Lore (Reikland) and Lore (Ubersreik)". Nono a valide le 08/09/2026. -->
 </Skill>
 <Skill id="RULES-COMPSAVOIR_WISSENLAND">
 <Description language="ENGLISH">"Lore (Wissenland)"</Description>
@@ -1103,6 +1115,28 @@ Description: You ask Dazh to illuminate the night, and he
 <Talent id="RULES-T0069_DEMON">
 <Description language="ENGLISH">"Hatred (Daemons)"</Description>
   <!-- Hatred (Demons) du livre, Kingdom of Bhalluka. Creee sur le modele des 16 autres Hatred du Rulebook. -->
+</Talent>
+<Talent id="RULES-T0069_CULT">
+<Description language="ENGLISH">"Hatred (Chaos Cultists)"</Description>
+  <!-- Necessaire pour l Order of the Fiery Heart et l Order of the Reikshammer (Knightly
+       Orders, p.8-9, CONTEXT.md 2.51). Creee sur le meme modele que Hatred (Skaven)/
+       (Daemons) ci-dessus. Nono a valide le 08/09/2026. -->
+</Talent>
+<Talent id="RULES-T0069_WITCH">
+<Description language="ENGLISH">"Hatred (Witches)"</Description>
+  <!-- Necessaire pour les Knights of Morr (Knightly Orders, p.9, CONTEXT.md 2.51). Meme
+       modele. Nono a valide le 08/09/2026. -->
+</Talent>
+<Talent id="RULES-T0069_NORSCAN">
+<Description language="ENGLISH">"Hatred (Norscans)"</Description>
+  <!-- Necessaire pour l Order of the Reikshammer (Knightly Orders, p.9, CONTEXT.md 2.51).
+       Meme modele. Nono a valide le 08/09/2026. -->
+</Talent>
+<Talent id="RULES-T0069_MUTANT">
+<Description language="ENGLISH">"Hatred (Mutants)"</Description>
+  <!-- Manquait a l inventaire presente a Nono (repere en ecrivant les Knights Panther) :
+       necessaire en plus des trois valides le 08/09/2026, meme motif exact (Knightly
+       Orders, p.8, CONTEXT.md 2.51). Meme modele. -->
 </Talent>
 <Talent id="RULES-T0129_CHALEUR">
 <Description language="ENGLISH">"Resistance (Heat)"</Description>
@@ -11946,6 +11980,488 @@ Poison: Used to weaken and kill targets, anyone caught in the radius of this gre
 <Talent>""</Talent>
 <ModifyCarac name="RULES-ATTR_Fel">+10</ModifyCarac>
 <ModifyCarac name="RULES-ATTR_WP">+10</ModifyCarac>
+</Level>
+</CareerBonus>
+  <!-- Order of the Blazing Sun (p.8), deuxieme des dix-sept Ordres de chevalerie de l Empire
+       saisis (CONTEXT.md 2.51). Meme condition generale que le Reiksguard - "Your character
+       must originate from the Empire to qualify for these Orders", texte d intro commun aux
+       17 Ordres, pas propre au Reiksguard - donc <Specie> vise aussi RULES-NATION_EMPIRE ici.
+       <Career> le Knight du Rulebook (RULES-WORK12), comme pour tous les Ordres.
+       Squire (palier 1) : "Lore (Myrmidia)" - competence DEJA presente, RULES-COMPSAVOIR_MYRMIDIA
+       (definie dans ce livre meme, DATA_SKILL l.62, malgre son prefixe RULES- - meme motif que
+       COMPSAVOIR_MONSTRE/KISLEV/ESTALIA voisines, deja utilisee ailleurs dans ce fichier).
+       Cru absente au premier passage, verifie avant d ecrire : evite de dupliquer un identifiant
+       (CONTEXT.md 2.20, "le motif recurrent : le doublon d identifiant").
+       Knight (palier 2) : "+10 WS Tests when using Lances or Spears" - deux ModifyWeapon
+       (CONTEXT.md 2.50 point 4bis). RULES-WTYPE_LANCE existait deja ; RULES-WTYPE_SPEAR est
+       nouveau, pose sur RULES-COMB_HAST_03 (l unique "Spear" du Rulebook) dans
+       BOOK_RULESBOOK.Xml.
+       First Knight (palier 3) : "Fearless (Everything)" - talent DEJA present tel quel,
+       RULES-T0132_TOUT (pas le generique RULES-T0132_*), trouve en cherchant le texte exact
+       plutot que de supposer qu il manquait.
+       Knight of the Inner Circle (palier 4) : "Any Spears you wield automatically gain the
+       Spear of Myrmidia Miracle at the start of an encounter" - SpecialRule (CONTEXT.md,
+       encart de tete 08/09/2026), le Miracle "Spear of Myrmidia" existant deja dans le
+       Rulebook (l.14825), simplement cite par son nom, aucune mecanique de Miracle a
+       inventer. -->
+<CareerBonus id="NATIO-ORDER_BLAZE">
+<Description language="ENGLISH">"Order of the Blazing Sun"</Description>
+<Career>"RULES-WORK12"</Career>
+<Specie>"RULES-NATION_EMPIRE"</Specie>
+<Level id="NATIO-ORDER_BLAZE_1">
+<Order>"1"</Order>
+<Skill>"RULES-COMPSAVOIR_MYRMIDIA"</Skill>
+<Talent>""</Talent>
+</Level>
+<Level id="NATIO-ORDER_BLAZE_2">
+<Order>"2"</Order>
+<Skill>""</Skill>
+<Talent>""</Talent>
+<ModifyWeapon name="RULES-WTYPE_LANCE">+10</ModifyWeapon>
+<ModifyWeapon name="RULES-WTYPE_SPEAR">+10</ModifyWeapon>
+</Level>
+<Level id="NATIO-ORDER_BLAZE_3">
+<Order>"3"</Order>
+<Skill>""</Skill>
+<Talent>"RULES-T0132_TOUT"</Talent>
+</Level>
+<Level id="NATIO-ORDER_BLAZE_4">
+<Order>"4"</Order>
+<Skill>""</Skill>
+<Talent>""</Talent>
+<SpecialRule name="Spear of Myrmidia">"Any Spears you wield automatically gain the Spear of Myrmidia Miracle at the start of an encounter."</SpecialRule>
+</Level>
+</CareerBonus>
+  <!-- Les 15 Ordres restants (sur 17, p.8-9), saisis en un lot valide par Nono le 08/09/2026
+       (CONTEXT.md 2.51). Meme moule que Reiksguard/Blazing Sun ci-dessus : Career=RULES-WORK12,
+       Specie=RULES-NATION_EMPIRE pour les 17 (texte d intro commun, pas propre au Reiksguard).
+       ListeTalent/ListeCompetence supportent une liste separee par virgules (chargemetier.pas,
+       StructureCareerBonusNiveau) quand un palier accorde plusieurs Talents/Skills a la fois.
+       "any Polearms/Flails/Hand Weapons" (toute la famille) -> ModifySkill sur la competence
+       (RULES-COMPCOMB_HAST/FLEAU/BASE), jamais exerce avant ce lot. Un sous-ensemble nomme
+       d une famille plus large (ex. "Two-handed Swords" seul, pas les epees a une main) ->
+       ModifyWeapon avec le filtre optionnel skill= (CONTEXT.md 2.50 point 4bis), qui restreint
+       en plus du Type. Les effets narratifs sans equivalent chiffre (Traits, relances de des,
+       Critical Wounds bonus, immunites) vont en SpecialRule, jamais en Talent invente. -->
+<CareerBonus id="NATIO-ORDER_WWOLF">
+<Description language="ENGLISH">"Knights of the White Wolf"</Description>
+<Career>"RULES-WORK12"</Career>
+<Specie>"RULES-NATION_EMPIRE"</Specie>
+<Level id="NATIO-ORDER_WWOLF_1">
+<Order>"1"</Order>
+<Skill>"RULES-COMPSAVOIR_ULRIC"</Skill>
+<Talent>""</Talent>
+</Level>
+<Level id="NATIO-ORDER_WWOLF_2">
+<Order>"2"</Order>
+<Skill>""</Skill>
+<Talent>""</Talent>
+<ModifyWeapon name="RULES-WTYPE_HAMMER">+10</ModifyWeapon>
+<ModifyWeapon name="RULES-WTYPE_AXE">+10</ModifyWeapon>
+</Level>
+<Level id="NATIO-ORDER_WWOLF_3">
+<Order>"3"</Order>
+<Skill>""</Skill>
+<Talent>"RULES-T0069_HBETE,RULES-T0069_PVERTE"</Talent>
+</Level>
+<Level id="NATIO-ORDER_WWOLF_4">
+<Order>"4"</Order>
+<Skill>""</Skill>
+<Talent>""</Talent>
+<SpecialRule name="Winter's Bite">"Any Axes you wield automatically gain the Winter's Bite Miracle at the start of an encounter."</SpecialRule>
+</Level>
+</CareerBonus>
+<CareerBonus id="NATIO-ORDER_BBEAR">
+<Description language="ENGLISH">"Order of the Black Bear"</Description>
+<Career>"RULES-WORK12"</Career>
+<Specie>"RULES-NATION_EMPIRE"</Specie>
+<Level id="NATIO-ORDER_BBEAR_1">
+<Order>"1"</Order>
+<Skill>"RULES-COMPSAVOIR_MONSTRE"</Skill>
+<Talent>""</Talent>
+</Level>
+<Level id="NATIO-ORDER_BBEAR_2">
+<Order>"2"</Order>
+<Skill>""</Skill>
+<Talent>""</Talent>
+<ModifySkill name="RULES-COMPCOMB_HAST">+10</ModifySkill>
+</Level>
+<Level id="NATIO-ORDER_BBEAR_3">
+<Order>"3"</Order>
+<Skill>""</Skill>
+<Talent>"RULES-T0161"</Talent>
+</Level>
+<Level id="NATIO-ORDER_BBEAR_4">
+<Order>"4"</Order>
+<Skill>""</Skill>
+<Talent>""</Talent>
+<SpecialRule name="Monster Slayer">"You now deal two Critical Wounds on any Monster after a successful Melee Attack that deals a Critical Hit. You also ignore the Impenetrable Quality for all Critical Hits."</SpecialRule>
+</Level>
+</CareerBonus>
+<CareerBonus id="NATIO-ORDER_GRIFF">
+<Description language="ENGLISH">"Knights Griffon"</Description>
+<Career>"RULES-WORK12"</Career>
+<Specie>"RULES-NATION_EMPIRE"</Specie>
+<Level id="NATIO-ORDER_GRIFF_1">
+<Order>"1"</Order>
+<Skill>"RULES-COMPSAVOIR_SIGMAR"</Skill>
+<Talent>""</Talent>
+</Level>
+<Level id="NATIO-ORDER_GRIFF_2">
+<Order>"2"</Order>
+<Skill>""</Skill>
+<Talent>""</Talent>
+<ModifyWeapon name="RULES-WTYPE_SWORD">+10</ModifyWeapon>
+<ModifyWeapon name="RULES-WTYPE_SWORDBREAKER">+10</ModifyWeapon>
+</Level>
+<Level id="NATIO-ORDER_GRIFF_3">
+<Order>"3"</Order>
+<Skill>""</Skill>
+<Talent>"RULES-T0069_DEMON"</Talent>
+</Level>
+<Level id="NATIO-ORDER_GRIFF_4">
+<Order>"4"</Order>
+<Skill>""</Skill>
+<Talent>""</Talent>
+<SpecialRule name="Bane of Chaos">"You now deal two Critical Wounds on any Servants of Chaos after a successful Melee Attack that deals a Critical Hit. You also ignore the Impenetrable Quality for all Critical Hits."</SpecialRule>
+</Level>
+</CareerBonus>
+<CareerBonus id="NATIO-ORDER_PANTH">
+<Description language="ENGLISH">"Knights Panther"</Description>
+<Career>"RULES-WORK12"</Career>
+<Specie>"RULES-NATION_EMPIRE"</Specie>
+<Level id="NATIO-ORDER_PANTH_1">
+<Order>"1"</Order>
+<Skill>"RULES-COMPSAVOIR_BEASTMEN,RULES-COMPSAVOIR_MUTANT"</Skill>
+<Talent>""</Talent>
+</Level>
+<Level id="NATIO-ORDER_PANTH_2">
+<Order>"2"</Order>
+<Skill>""</Skill>
+<Talent>""</Talent>
+<ModifyWeapon name="RULES-WTYPE_LANCE">+10</ModifyWeapon>
+<ModifySkill name="RULES-COMPCOMB_FLEAU">+10</ModifySkill>
+<ModifySkill name="RULES-COMPCOMB_BASE">+10</ModifySkill>
+</Level>
+<Level id="NATIO-ORDER_PANTH_3">
+<Order>"3"</Order>
+<Skill>""</Skill>
+<Talent>"RULES-T0069_HBETE,RULES-T0069_MUTANT,RULES-T0069_CULT"</Talent>
+</Level>
+<Level id="NATIO-ORDER_PANTH_4">
+<Order>"4"</Order>
+<Skill>""</Skill>
+<Talent>""</Talent>
+<SpecialRule name="Champion Trait">"You gain the Champion Trait when fighting your most hated foes."</SpecialRule>
+</Level>
+</CareerBonus>
+<CareerBonus id="NATIO-ORDER_EVERL">
+<Description language="ENGLISH">"Templars of the Everlasting Light"</Description>
+<Career>"RULES-WORK12"</Career>
+<Specie>"RULES-NATION_EMPIRE"</Specie>
+<Level id="NATIO-ORDER_EVERL_1">
+<Order>"1"</Order>
+<Skill>"RULES-COMPSAVOIR_CHAOS"</Skill>
+<Talent>""</Talent>
+</Level>
+<Level id="NATIO-ORDER_EVERL_2">
+<Order>"2"</Order>
+<Skill>""</Skill>
+<Talent>""</Talent>
+<ModifyWeapon name="RULES-WTYPE_LANCE">+10</ModifyWeapon>
+<ModifySkill name="RULES-COMPCOMB_HAST">+10</ModifySkill>
+</Level>
+<Level id="NATIO-ORDER_EVERL_3">
+<Order>"3"</Order>
+<Skill>""</Skill>
+<Talent>"RULES-T0132_TOUT"</Talent>
+</Level>
+<Level id="NATIO-ORDER_EVERL_4">
+<Order>"4"</Order>
+<Skill>""</Skill>
+<Talent>""</Talent>
+<SpecialRule name="Everlasting Light">"In your hands, all lances count as magic weapons and do +2 additional damage while mounted and Charging. They also lose the Improvised Weapon effect if used on a round you haven't Charged. If you wield a lance that is already magical, its damage is increased by +1."</SpecialRule>
+</Level>
+</CareerBonus>
+<CareerBonus id="NATIO-ORDER_BSWORD">
+<Description language="ENGLISH">"Order of the Broken Sword"</Description>
+<Career>"RULES-WORK12"</Career>
+<Specie>"RULES-NATION_EMPIRE"</Specie>
+<Level id="NATIO-ORDER_BSWORD_1">
+<Order>"1"</Order>
+<Skill>"RULES-COMPSAVOIR_BEASTMEN,RULES-COMPSAVOIR_MUTANT"</Skill>
+<Talent>""</Talent>
+</Level>
+<Level id="NATIO-ORDER_BSWORD_2">
+<Order>"2"</Order>
+<Skill>""</Skill>
+<Talent>""</Talent>
+<ModifyWeapon name="RULES-WTYPE_SWORD">+10</ModifyWeapon>
+</Level>
+<Level id="NATIO-ORDER_BSWORD_3">
+<Order>"3"</Order>
+<Skill>""</Skill>
+<Talent>"RULES-T0069_HBETE"</Talent>
+</Level>
+<Level id="NATIO-ORDER_BSWORD_4">
+<Order>"4"</Order>
+<Skill>""</Skill>
+<Talent>""</Talent>
+<SpecialRule name="Broken Sword's Vengeance">"At the start of each encounter against Servants of Chaos, you may reverse the dice of any Opposed Melee Test, if it will help you succeed, up to three times each encounter."</SpecialRule>
+</Level>
+</CareerBonus>
+<CareerBonus id="NATIO-ORDER_SCYTHE">
+<Description language="ENGLISH">"Order of the Sacred Scythe"</Description>
+<Career>"RULES-WORK12"</Career>
+<Specie>"RULES-NATION_EMPIRE"</Specie>
+<Level id="NATIO-ORDER_SCYTHE_1">
+<Order>"1"</Order>
+<Skill>"RULES-COMPSAVOIR_MORR,RULES-COMPSAVOIR_UNDEAD"</Skill>
+<Talent>""</Talent>
+</Level>
+<Level id="NATIO-ORDER_SCYTHE_2">
+<Order>"2"</Order>
+<Skill>""</Skill>
+<Talent>""</Talent>
+<ModifyWeapon name="RULES-WTYPE_HALBERD">+10</ModifyWeapon>
+<ModifySkill name="RULES-COMPCOMB_FLEAU">+10</ModifySkill>
+</Level>
+<Level id="NATIO-ORDER_SCYTHE_3">
+<Order>"3"</Order>
+<Skill>""</Skill>
+<Talent>"RULES-T0069_MVIVAN"</Talent>
+</Level>
+<Level id="NATIO-ORDER_SCYTHE_4">
+<Order>"4"</Order>
+<Skill>""</Skill>
+<Talent>""</Talent>
+<SpecialRule name="Scythe of the Reaper">"You now deal two Critical Wounds on any Undead on a Melee Attack that deals a Critical Hit. You also ignore the Impenetrable Quality for all Critical Hits."</SpecialRule>
+</Level>
+</CareerBonus>
+<CareerBonus id="NATIO-ORDER_SIGBLD">
+<Description language="ENGLISH">"Knights of Sigmar's Blood"</Description>
+<Career>"RULES-WORK12"</Career>
+<Specie>"RULES-NATION_EMPIRE"</Specie>
+<Level id="NATIO-ORDER_SIGBLD_1">
+<Order>"1"</Order>
+<Skill>"RULES-COMPSAVOIR_SIGMAR"</Skill>
+<Talent>""</Talent>
+</Level>
+<Level id="NATIO-ORDER_SIGBLD_2">
+<Order>"2"</Order>
+<Skill>""</Skill>
+<Talent>""</Talent>
+<ModifyWeapon name="RULES-WTYPE_LANCE">+10</ModifyWeapon>
+<ModifySkill name="RULES-COMPCOMB_FLEAU">+10</ModifySkill>
+</Level>
+<Level id="NATIO-ORDER_SIGBLD_3">
+<Order>"3"</Order>
+<Skill>""</Skill>
+<Talent>"RULES-T0069_*"</Talent>
+</Level>
+<Level id="NATIO-ORDER_SIGBLD_4">
+<Order>"4"</Order>
+<Skill>""</Skill>
+<Talent>""</Talent>
+<SpecialRule name="Tough and Fast">"You gain the Tough and Fast Traits."</SpecialRule>
+</Level>
+</CareerBonus>
+<CareerBonus id="NATIO-ORDER_MORR">
+<Description language="ENGLISH">"Knights of Morr"</Description>
+<Career>"RULES-WORK12"</Career>
+<Specie>"RULES-NATION_EMPIRE"</Specie>
+<Level id="NATIO-ORDER_MORR_1">
+<Order>"1"</Order>
+<Skill>"RULES-COMPSAVOIR_MORR"</Skill>
+<Talent>""</Talent>
+</Level>
+<Level id="NATIO-ORDER_MORR_2">
+<Order>"2"</Order>
+<Skill>""</Skill>
+<Talent>""</Talent>
+<ModifyWeapon name="RULES-WTYPE_HALBERD">+10</ModifyWeapon>
+<ModifyWeapon name="RULES-WTYPE_SWORD" skill="RULES-COMPCOMB_2M">+10</ModifyWeapon>
+</Level>
+<Level id="NATIO-ORDER_MORR_3">
+<Order>"3"</Order>
+<Skill>""</Skill>
+<Talent>"RULES-T0069_MVIVAN,RULES-T0069_WITCH"</Talent>
+</Level>
+<Level id="NATIO-ORDER_MORR_4">
+<Order>"4"</Order>
+<Skill>""</Skill>
+<Talent>""</Talent>
+<SpecialRule name="Champion Trait">"You gain the Champion Trait when fighting your most hated foes."</SpecialRule>
+</Level>
+</CareerBonus>
+<CareerBonus id="NATIO-ORDER_GLION">
+<Description language="ENGLISH">"Order of the Golden Lion"</Description>
+<Career>"RULES-WORK12"</Career>
+<Specie>"RULES-NATION_EMPIRE"</Specie>
+<Level id="NATIO-ORDER_GLION_1">
+<Order>"1"</Order>
+<Skill>"RULES-COMPSAVOIR_GREENSKIN,RULES-COMPSAVOIR_SIGMAR"</Skill>
+<Talent>""</Talent>
+</Level>
+<Level id="NATIO-ORDER_GLION_2">
+<Order>"2"</Order>
+<Skill>""</Skill>
+<Talent>""</Talent>
+<ModifyWeapon name="RULES-WTYPE_SPEAR">+10</ModifyWeapon>
+<ModifyWeapon name="RULES-WTYPE_SHIELD">+10</ModifyWeapon>
+</Level>
+<Level id="NATIO-ORDER_GLION_3">
+<Order>"3"</Order>
+<Skill>""</Skill>
+<Talent>"RULES-T0069_PVERTE"</Talent>
+</Level>
+<Level id="NATIO-ORDER_GLION_4">
+<Order>"4"</Order>
+<Skill>""</Skill>
+<Talent>""</Talent>
+<SpecialRule name="Golden Lion's Fury">"At the start of each encounter against Greenskins, you may reverse the dice of any Opposed Melee Test, if it will help you succeed, up to three times each encounter."</SpecialRule>
+</Level>
+</CareerBonus>
+<CareerBonus id="NATIO-ORDER_ENCAR">
+<Description language="ENGLISH">"Knights Encarmine"</Description>
+<Career>"RULES-WORK12"</Career>
+<Specie>"RULES-NATION_EMPIRE"</Specie>
+<Level id="NATIO-ORDER_ENCAR_1">
+<Order>"1"</Order>
+<Skill>"RULES-COMPSAVOIR_POLIT,RULES-COMPSAVOIR_SAVVIV"</Skill>
+<Talent>""</Talent>
+</Level>
+<Level id="NATIO-ORDER_ENCAR_2">
+<Order>"2"</Order>
+<Skill>""</Skill>
+<Talent>""</Talent>
+<ModifyWeapon name="RULES-WTYPE_RAPIER">+10</ModifyWeapon>
+<ModifyWeapon name="RULES-WTYPE_SWORDBREAKER">+10</ModifyWeapon>
+</Level>
+<Level id="NATIO-ORDER_ENCAR_3">
+<Order>"3"</Order>
+<Skill>""</Skill>
+<Talent>"RULES-T0096,RULES-T0004"</Talent>
+</Level>
+<Level id="NATIO-ORDER_ENCAR_4">
+<Order>"4"</Order>
+<Skill>""</Skill>
+<Talent>""</Talent>
+<SpecialRule name="Immune to Psychology">"You are Immune to Psychology."</SpecialRule>
+</Level>
+</CareerBonus>
+  <!-- Order of the Hammer of Sigmar : le livre lui-meme n a ni palier 4 ni Heraldry pour cet
+       Ordre (verifie a l image, page 9 - l entree s arrete net apres First Knight, ce n est
+       pas un defaut d extraction, voir l encart de tete de CONTEXT.md 08/09/2026). Saisi tel
+       quel, paliers 1 a 3 seulement, sur validation de Nono. -->
+<CareerBonus id="NATIO-ORDER_HAMSIG">
+<Description language="ENGLISH">"Order of the Hammer of Sigmar"</Description>
+<Career>"RULES-WORK12"</Career>
+<Specie>"RULES-NATION_EMPIRE"</Specie>
+<Level id="NATIO-ORDER_HAMSIG_1">
+<Order>"1"</Order>
+<Skill>"RULES-COMPSAVOIR_GREENSKIN,RULES-COMPSAVOIR_SIGMAR"</Skill>
+<Talent>""</Talent>
+</Level>
+<Level id="NATIO-ORDER_HAMSIG_2">
+<Order>"2"</Order>
+<Skill>""</Skill>
+<Talent>""</Talent>
+<ModifyWeapon name="RULES-WTYPE_HAMMER">+10</ModifyWeapon>
+<ModifySkill name="RULES-COMPCOMB_FLEAU">+10</ModifySkill>
+</Level>
+<Level id="NATIO-ORDER_HAMSIG_3">
+<Order>"3"</Order>
+<Skill>""</Skill>
+<Talent>"RULES-T0069_PVERTE"</Talent>
+</Level>
+</CareerBonus>
+<CareerBonus id="NATIO-ORDER_FIERY">
+<Description language="ENGLISH">"Order of the Fiery Heart"</Description>
+<Career>"RULES-WORK12"</Career>
+<Specie>"RULES-NATION_EMPIRE"</Specie>
+<Level id="NATIO-ORDER_FIERY_1">
+<Order>"1"</Order>
+<Skill>"RULES-COMPSAVOIR_CHAOS,RULES-COMPSAVOIR_SIGMAR"</Skill>
+<Talent>""</Talent>
+</Level>
+<Level id="NATIO-ORDER_FIERY_2">
+<Order>"2"</Order>
+<Skill>""</Skill>
+<Talent>""</Talent>
+<ModifyWeapon name="RULES-WTYPE_HAMMER">+10</ModifyWeapon>
+<ModifyWeapon name="RULES-WTYPE_SHIELD">+10</ModifyWeapon>
+</Level>
+<Level id="NATIO-ORDER_FIERY_3">
+<Order>"3"</Order>
+<Skill>""</Skill>
+<Talent>"RULES-T0069_CULT,RULES-T0069_PVERTE"</Talent>
+</Level>
+<Level id="NATIO-ORDER_FIERY_4">
+<Order>"4"</Order>
+<Skill>""</Skill>
+<Talent>""</Talent>
+<SpecialRule name="Sigmar's Fiery Hammer">"Any Hammers you wield automatically gain the Sigmar's Fiery Hammer Miracle at the start of an encounter."</SpecialRule>
+</Level>
+</CareerBonus>
+<CareerBonus id="NATIO-ORDER_BROSE">
+<Description language="ENGLISH">"Order of the Black Rose"</Description>
+<Career>"RULES-WORK12"</Career>
+<Specie>"RULES-NATION_EMPIRE"</Specie>
+<Level id="NATIO-ORDER_BROSE_1">
+<Order>"1"</Order>
+<Skill>"RULES-COMPSAVOIR_UNDEAD"</Skill>
+<Talent>""</Talent>
+</Level>
+<Level id="NATIO-ORDER_BROSE_2">
+<Order>"2"</Order>
+<Skill>""</Skill>
+<Talent>""</Talent>
+<ModifySkill name="RULES-COMPCOMB_HAST">+10</ModifySkill>
+</Level>
+<Level id="NATIO-ORDER_BROSE_3">
+<Order>"3"</Order>
+<Skill>""</Skill>
+<Talent>"RULES-T0069_MVIVAN"</Talent>
+</Level>
+<Level id="NATIO-ORDER_BROSE_4">
+<Order>"4"</Order>
+<Skill>""</Skill>
+<Talent>""</Talent>
+<SpecialRule name="Black Rose's Vengeance">"At the start of each encounter against Undead, you may reverse the dice of any Opposed Melee Test, if it will help you succeed, up to three times each encounter."</SpecialRule>
+</Level>
+</CareerBonus>
+  <!-- Order of the Reikshammer, palier 2 : "Hand Weapons with a Shield, Halberds or
+       Two-handed Swords" lu comme deux bonus independants (Hand Weapon d un cote, Shield de
+       l autre, chacun +10), pas une condition combinee - valide par Nono le 08/09/2026. -->
+<CareerBonus id="NATIO-ORDER_REIKHAM">
+<Description language="ENGLISH">"Order of the Reikshammer"</Description>
+<Career>"RULES-WORK12"</Career>
+<Specie>"RULES-NATION_EMPIRE"</Specie>
+<Level id="NATIO-ORDER_REIKHAM_1">
+<Order>"1"</Order>
+<Skill>"RULES-COMPSAVOIR_REIKLAND,RULES-COMPSAVOIR_UBERSREIK"</Skill>
+<Talent>""</Talent>
+</Level>
+<Level id="NATIO-ORDER_REIKHAM_2">
+<Order>"2"</Order>
+<Skill>""</Skill>
+<Talent>""</Talent>
+<ModifySkill name="RULES-COMPCOMB_BASE">+10</ModifySkill>
+<ModifyWeapon name="RULES-WTYPE_SHIELD">+10</ModifyWeapon>
+<ModifyWeapon name="RULES-WTYPE_HALBERD">+10</ModifyWeapon>
+<ModifyWeapon name="RULES-WTYPE_SWORD" skill="RULES-COMPCOMB_2M">+10</ModifyWeapon>
+</Level>
+<Level id="NATIO-ORDER_REIKHAM_3">
+<Order>"3"</Order>
+<Skill>""</Skill>
+<Talent>"RULES-T0069_SKAVEN,RULES-T0069_NORSCAN,RULES-T0069_HBETE"</Talent>
+</Level>
+<Level id="NATIO-ORDER_REIKHAM_4">
+<Order>"4"</Order>
+<Skill>""</Skill>
+<Talent>""</Talent>
+<SpecialRule name="Reikshammer's Discipline">"When outnumbered in melee, the knight gains the same Combat Difficulty Modifiers to hit as their enemies would. This bonus applies even if the knight has the Combat Master Talent, which would deny their enemies the outnumbering bonus."</SpecialRule>
 </Level>
 </CareerBonus>
 </DATA_CAREER_BONUS>

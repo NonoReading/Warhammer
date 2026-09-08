@@ -13358,6 +13358,7 @@ Thieves steal all manner of wealth and goods from their fellow man. From the low
 <Quality>"RULES-WEAPB08,RULES-WEAPB30,RULES-WEAPB12"</Quality>
 <Hand>"2"</Hand>
 <Ammunition>"0"</Ammunition>
+<Type>"RULES-WTYPE_HALBERD"</Type>
 </Weapon>
 <Weapon id="RULES-COMB_HAST_03">
 <Description language="ENGLISH">"Spear"</Description>
@@ -13370,6 +13371,7 @@ Thieves steal all manner of wealth and goods from their fellow man. From the low
 <Quality>"RULES-WEAPB12"</Quality>
 <Hand>"2"</Hand>
 <Ammunition>"0"</Ammunition>
+<Type>"RULES-WTYPE_SPEAR"</Type>
 </Weapon>
 <Weapon id="RULES-COMB_HAST_04">
 <Description language="ENGLISH">"Pike"</Description>
@@ -13454,6 +13456,7 @@ Thieves steal all manner of wealth and goods from their fellow man. From the low
 <Quality>"-"</Quality>
 <Hand>"1"</Hand>
 <Ammunition>"0"</Ammunition>
+<Type>"RULES-WTYPE_AXE"</Type>
 </Weapon>
 <Weapon id="RULES-COMB_BASE_04">
 <Description language="ENGLISH">"Sword"</Description>
@@ -13466,6 +13469,7 @@ Thieves steal all manner of wealth and goods from their fellow man. From the low
 <Quality>"-"</Quality>
 <Hand>"1"</Hand>
 <Ammunition>"0"</Ammunition>
+<Type>"RULES-WTYPE_SWORD"</Type>
 </Weapon>
 <Weapon id="RULES-COMB_BASE_05">
 <Description language="ENGLISH">"Pickaxe"</Description>
@@ -13565,6 +13569,7 @@ Thieves steal all manner of wealth and goods from their fellow man. From the low
 <Quality>"RULES-WEAPB04"</Quality>
 <Hand>"2"</Hand>
 <Ammunition>"0"</Ammunition>
+<Type>"RULES-WTYPE_HAMMER"</Type>
 </Weapon>
 <Weapon id="RULES-COMB_CAVAL_02">
 <Description language="ENGLISH">"Lance"</Description>
@@ -13615,6 +13620,7 @@ Thieves steal all manner of wealth and goods from their fellow man. From the low
 <Quality>"RULES-WEAPB25,RULES-WEAPB21,RULES-WEAPB30"</Quality>
 <Hand>"2"</Hand>
 <Ammunition>"0"</Ammunition>
+<Type>"RULES-WTYPE_AXE"</Type>
 </Weapon>
 <Weapon id="RULES-COMB_2M_03">
 <Description language="ENGLISH">"Warhammer"</Description>
@@ -13627,6 +13633,7 @@ Thieves steal all manner of wealth and goods from their fellow man. From the low
 <Quality>"RULES-WEAPB04,RULES-WEAPB10,RULES-WEAPB28"</Quality>
 <Hand>"2"</Hand>
 <Ammunition>"0"</Ammunition>
+<Type>"RULES-WTYPE_HAMMER"</Type>
 </Weapon>
 <Weapon id="RULES-COMB_2M_04">
 <Description language="ENGLISH">"Pick"</Description>
@@ -13712,6 +13719,7 @@ Thieves steal all manner of wealth and goods from their fellow man. From the low
 <Quality>"RULES-WEAPB20,RULES-WEAPB12"</Quality>
 <Hand>"1"</Hand>
 <Ammunition>"0"</Ammunition>
+<Type>"RULES-WTYPE_RAPIER"</Type>
 </Weapon>
 <Weapon id="RULES-COMB_FLEAU_01">
 <Description language="ENGLISH">"Military Flail"</Description>
@@ -13760,6 +13768,7 @@ Thieves steal all manner of wealth and goods from their fellow man. From the low
 <Quality>"RULES-WEAPB08,RULES-WEAPB11"</Quality>
 <Hand>"1"</Hand>
 <Ammunition>"0"</Ammunition>
+<Type>"RULES-WTYPE_SWORDBREAKER"</Type>
 </Weapon>
 <Weapon id="RULES-COMB_PARAD_02">
 <Description language="ENGLISH">"main gauche"</Description>
