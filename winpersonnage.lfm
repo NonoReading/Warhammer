@@ -1208,6 +1208,7 @@ object WinPersonnages: TWinPersonnages
     RowCount = 1
     TabOrder = 15
     OnDrawCell = TabDrawCell
+    OnSelectCell = TabEquipementSelectCell
     OnSelectEditor = TabAttributSelectEditor
   end
   object ButtonPdf: TBCButton

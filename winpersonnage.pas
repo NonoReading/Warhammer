@@ -272,6 +272,8 @@ type
   //Equipement
   Procedure ChargerMetierEquipement(CodeMetier: String; NiveauMetier: Integer);
   Procedure TabEquipementAffiche();
+  procedure TabEquipementSelectCell({%H-}Sender: TObject; {%H-}aCol, aRow: Integer;
+    var {%H-}CanSelect: Boolean);
   function XpSortCout(CodeSort: String): String;
   function ValeurTarifSort(Expression: String; Defaut: Integer): Integer;
   function TalentSort(CodeSort: String): StructureTalent;
@@ -3993,6 +3995,18 @@ end;
 procedure TWinPersonnages.TabEquipementAffiche();
   begin
       TabMetierEquipement.visible := ( (RadioButtonSuivant.checked) or (RadioButtonChanger.Checked) );
+  end;
+
+procedure TWinPersonnages.TabEquipementSelectCell(Sender: TObject; aCol,
+  aRow: Integer; var CanSelect: Boolean);
+  var
+    EstSort: Boolean;
+  begin
+    // Meme test que ButtonFabricationClick/ButtonDeleteClick : une ligne qui cite un
+    // talent est un sort, ni fabrication ni suppression ne s'y appliquent.
+    EstSort := (aRow > 0) and (TalentSort(TabEquipement.Cells[2, aRow]).CodeTalent <> '');
+    ButtonFabrication.Enabled := not EstSort;
+    ButtonDelete.Enabled      := not EstSort;
   end;
 
 procedure TWinPersonnages.RadioButtonSuivantChange(Sender: TObject);

@@ -2353,3 +2353,39 @@ Nono ou une conception a part : Craftsman/Master Tradesman (T0092_ARMU), Nations
 OFFICIAL=2 et les trois libelles a arbitrer, le bouton Fabrication/Supprimer a griser sur un
 sort (ergonomie, non touche), et les items de conception (paliers de salaire, listes fermees
 en dur, entite domaine, etc.).
+
+10/09/2026 - TROIS ARBITRAGES DE A FAIRE.txt TRANCHES AVEC NONO
+Reprise de la section corrections courtes pour les items qui attendaient une decision de
+Nono (le lot precedent du meme jour ne contenait que des corrections verifiables sans lui).
+- CRAFTSMAN (ARMOURER) RENOMME "CRAFTSMAN (GUNSMITH)" (RULES-T0092_ARMU, BOOK_RULESBOOK.Xml).
+Verifie dans RULEBOOK.txt : "Armourer" n apparait qu une fois, dans une liste generique de
+metiers, jamais comme competence Trade formelle - la seule competence reelle est "Trade
+(Gunsmith)" (RULES-COMPMETIER_ARMU). Confirme par un commentaire retrouve dans
+BOOK_NATIONS_OF_MANKIND.Xml l.1153-1154, laisse par Nono le 04/09/2026 en saisissant Nuln :
+T0092_ARMU et T0157_ARMU avaient deja ete choisis pour porter Gunsmith plutot que de creer un
+talent dedie, et T0157_ARMU portait deja le bon libelle. Distinct de RULES-COMPMETIER_ARMOURER
+("Trade (Armourer)"), une competence differente et legitime (Up in Arms, "Weaponsmith or
+Armourer") - pas touchee. NOUVEAU : le Rulebook francais (RULES-COMPMETIER_ARMU et les deux
+talents) appelle encore tout ca "Armurier", jamais traduit en "Gunsmith" - ajoute a A
+FAIRE.txt, meme famille que les autres traductions orphelines, sans effet tant que
+LANG=ENGLISH.
+- NATIONS OF MANKIND CONFIRME NON-OFFICIEL (OFFICIAL=2). Recherche web : depot GitHub et page
+Foundry VTT decrivent explicitement "Nations of Mankind" comme "unofficial Supplement for
+WFRP4 by Big Boss". Rien a changer dans BOOK_NATIONS_OF_MANKIND.Xml. Item retire.
+- TROIS LIBELLES DE NATIONS OF MANKIND VALIDES PAR NONO TELS QUE SAISIS LE 03/09 : Trade
+(Bladesmith) (carriere nipponne), Fearless (Beasts) distinct de Fearless (Beastmen)
+(Toreador), Stealth (Everything) du Ninja lu comme Stealth (Any). Items retires.
+COMPILATION NON REFAITE POUR CETTE PASSE (aucune donnee encore testee sur un personnage) -
+Nono compile et confirme au prochain tour.
+
+10/09/2026 - FABRICATION ET SUPPRIMER GRISES SUR UNE LIGNE DE SORT, COMPILE ET VALIDE
+Point d ergonomie de A FAIRE.txt : les deux boutons restaient cliquables sans effet sur une
+ligne de sort (inhibes en silence depuis le 03/09/2026). TabEquipement n avait aucun
+evenement de selection cable dans le .lfm (seuls OnDrawCell et OnSelectEditor l etaient) -
+discute avec Nono avant de toucher au .lfm, feu vert donne.
+Nouvel OnSelectCell = TabEquipementSelectCell sur TabEquipement (winpersonnage.lfm), meme
+moule que TabAugmentationCompetenceSelectCell/TabAugmentationTalentSelectCell deja existants.
+Implementation (winpersonnage.pas) : meme test que ButtonFabricationClick/ButtonDeleteClick
+(TalentSort(TabEquipement.Cells[2, aRow]).CodeTalent <> '' = c est un sort), bascule
+ButtonFabrication.Enabled et ButtonDelete.Enabled en consequence.
+COMPILE ET VALIDE PAR NONO LE MEME JOUR, aucun probleme constate. Item retire d A FAIRE.txt.

@@ -55,11 +55,13 @@ Blessure est derivee de F, E et FM. Les deux boucles de MajTables sont donc just
 CalculAvancement avait une borne BASSE fautive (For Ind := 1 lisait ColAttLib, colonne de
 texte), sans effet observable : corrigee en 2. Voir CONTEXT.md 2.48.
 
-CRAFTSMAN (ARMOURER) ET MASTER TRADESMAN (GUNSMITH) SONT LE MEME METIER SOUS DEUX LIBELLES.
-RULES-T0092_ARMU est libelle "Craftsman (Armourer)" et son pendant RULES-T0157_ARMU "Master
-Tradesman (Gunsmith)". Releve le 04/09/2026 en saisissant Nuln, qui donne les deux ; on a
-pointe dessus sans rien renommer (decision Nono). Renommer T0092_ARMU en "Craftsman
-(Gunsmith)" toucherait le RULEBOOK, d ou l attente d un arbitrage.
+LE RULEBOOK FRANCAIS APPELLE "ARMURIER" LES DEUX COTES DE RULES-COMPMETIER_ARMU/T0092_ARMU/
+T0157_ARMU. Trouve le 10/09/2026 en arbitrant le libelle anglais ci-dessus (desormais
+"Craftsman (Gunsmith)") : la competence RULES-COMPMETIER_ARMU et les deux talents portent en
+francais "Metier (Armurier)"/"Maitre artisan (Armurier)"/"Travailleur qualifie (Armurier)",
+jamais "Gunsmith" traduit - meme lacune que les autres traductions orphelines deja notees ci-
+dessus, sans effet tant que LANG=ENGLISH. A corriger avec le reste si le francais redevient
+actif.
 
 L ECART MIDDENHEIM / NATIONS SUR MIDDENLAND ET NORDLAND N EST PAS ARBITRE. Les deux
 provinces existent en officiel sous leurs gentilés - MIDDE-RACE_HMIDL "Humans
@@ -137,22 +139,6 @@ PIEGE DE NOMMAGE FRANCO-ANGLAIS - A CHERCHER AILLEURS. Le tarif arcanique lisait
 se lit "Bonus Intelligence". Corrige le 02/09 par le passage en donnee. La FORME du piege
 reste : un calcul qui nomme sa variable d'apres le francais et lit une colonne nommee
 d'apres l'anglais.
-
-FABRICATION ET SUPPRIMER RESTENT CLIQUABLES SUR UN SORT, SANS RIEN FAIRE. Depuis le
-03/09/2026 les deux boutons sont correctement inhibes sur les lignes de sort, mais en
-silence : rien ne signale a l'utilisateur pourquoi le clic n'a pas d'effet. Les griser
-quand la ligne selectionnee est un sort (TabEquipementSelection) serait plus honnete.
-Ergonomie uniquement, aucun bug derriere.
-
-NATIONS OF MANKIND : CONFIRMER OFFICIAL=2. Saisi le 03/09 sur faisceau d indices (aucune
-mention d editeur, contenu non officiel type Vimto Monks), pas sur une preuve. Le PDF est
-dans LIVRES. Une ligne a changer dans BOOK_NATIONS_OF_MANKIND.Xml si c est faux.
-
-NATIONS OF MANKIND : TROIS LIBELLES A ARBITRER, tous en commentaire dans le XML.
-Trade (Bladesmith) cree tel quel plutot que corrige en Blacksmith - carriere nipponne, le
-forgeron de lames a du sens. Fearless (Beasts) cree a cote de Fearless (Beastmen) parce que
-c est le Toreador, qui affronte des taureaux. Stealth (Everything) du Ninja lu comme
-Stealth (Any).
 
 OU EST ECRITE LA LISTE DES PALIERS DE SALAIRE ? Nations ecrit "Copper 3" pour l Almogavar
 alors que la base ne connait que Brass/Silver/Gold ; lu comme Brass le 03/09. Avant
