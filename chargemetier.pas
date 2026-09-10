@@ -234,10 +234,13 @@ end;
 Function AppartenancesCandidates(CodeMetier: String; CodeRace: String;
                                  DejaAcquises: String): String;
 Var
-  PBonus:  StructureCareerBonus;
-  Acquis:  TStringList;
-  Ind:     Integer;
-  Trouve:  Boolean;
+  PBonus:   StructureCareerBonus;
+  Acquis:   TStringList;
+  Especes:  TStringList;
+  Ind:      Integer;
+  IndEsp:   Integer;
+  Trouve:   Boolean;
+  Eligible: Boolean;
 Begin
   Result := '';
   if Trim(CodeMetier) = '' then
@@ -252,13 +255,30 @@ Begin
       begin
         if not CompareRechercheValeur(PBonus.CodeMetier, CodeMetier) then
           continue;
-        // <Specie> peut viser directement une ETHNIE (Averland...) ou, depuis le 2.51,
-        // une NATION (Reiksguard -> l'Empire) : match sur l'ethnie du personnage OU sur
-        // la Nation de cette ethnie (ChercheRace(CodeRace).Nation, vide si aucune).
-        if (Trim(PBonus.CodeRace) <> '') and
-           (not CompareRechercheValeur(PBonus.CodeRace, CodeRace)) and
-           (not CompareRechercheValeur(PBonus.CodeRace, ChercheRace(CodeRace).Nation)) then
-          continue;
+        // <Specie> peut viser une ETHNIE (Averland...), une NATION (Reiksguard ->
+        // l'Empire, 2.51), ou depuis ce lot (Regiments of Renown, 2.44) PLUSIEURS
+        // ethnies separees par SeparateurMulti ("MIDDE-RACE_HMIDL/RULES-RACE_HUM",
+        // Carroburg Great Swords recrute Middenland OU Reikland) : match si l'ethnie
+        // du personnage OU la Nation de cette ethnie correspond a L'UNE des valeurs.
+        if Trim(PBonus.CodeRace) <> '' then
+          begin
+            Eligible := false;
+            Especes := TStringList.Create;
+            try
+              ExtractStrings([SeparateurMulti], [], PChar(PBonus.CodeRace), Especes);
+              for IndEsp := 0 to Especes.Count - 1 do
+                if CompareRechercheValeur(Especes[IndEsp], CodeRace) or
+                   CompareRechercheValeur(Especes[IndEsp], ChercheRace(CodeRace).Nation) then
+                  begin
+                    Eligible := true;
+                    break;
+                  end;
+            finally
+              Especes.Free;
+            end;
+            if not Eligible then
+              continue;
+          end;
 
         Trouve := false;
         // ORDRE DES ARGUMENTS : CompareRechercheValeur n'est PAS symetrique, sa

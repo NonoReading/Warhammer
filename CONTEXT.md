@@ -1,7 +1,20 @@
 # Warhammer — Contexte projet
 
-**Dernière mise à jour : 08/09/2026 — LES 15 ORDRES DE CHEVALERIE RESTANTS SAISIS EN UN LOT,
-PAS ENCORE COMPILÉS PAR NONO.** Après le Reiksguard et l'Order of the Blazing Sun (déjà en
+**Dernière mise à jour : 10/09/2026 — LES ONZE REGIMENTS OF RENOWN TERMINÉS ET VALIDÉS,
+EXTENSION `<Specie>` À LISTE CONFIRMÉE SUR CARROBURG.** Après le lot des 17 Ordres de
+chevalerie (§2.51), chantier suivant enchaîné le jour même : les onze Regiments of Renown
+(§2.44 point de reprise 2) saisis dans `BOOK_NATIONS_OF_MANKIND.Xml`, un seul `<Talent>`
+par régiment au palier 3 (décision de Nono : trappings et règle de rang narrative laissés
+descriptifs). Pilote Death Jacks compilé et confirmé (Talent Deadeye Shot), puis huit
+autres régiments à province unique saisis en lot. Les deux derniers (Carroburg Great
+Swords, Altdorf Company of Honor) recrutent sur deux provinces : `AppartenancesCandidates`
+(`chargemetier.pas`) étendu pour accepter plusieurs ethnies séparées par
+`SeparateurMulti` dans `<Specie>`. **Confirmé par Nono sur Carroburg** : un Soldier
+Middenlander et un Reiklander voient tous deux le régiment, un Nordlander non — extension
+et sélectivité validées. Détail complet en §2.51/§2.44. **Chantier suivant : à définir
+avec Nono.**
+
+**08/09/2026 — LES 15 ORDRES DE CHEVALERIE RESTANTS SAISIS EN UN LOT.** Après le Reiksguard et l'Order of the Blazing Sun (déjà en
 place), Nono a validé un inventaire complet des 15 Ordres restants (p.8-9 de *Nations of
 Mankind*) avant écriture plutôt qu'un aller-retour par Ordre — les 17 Ordres du livre sont
 maintenant tous saisis dans `BOOK_NATIONS_OF_MANKIND.Xml`. Détail complet en §2.51.
@@ -4914,14 +4927,12 @@ ne pose pas de problème en jeu.
 
 **POINTS DE REPRISE, dans l'ordre :**
 
-1. **Le 3d-3, les ordres de chevalerie.** Même table `DATA_CAREER_BONUS`, sur la carrière
-   Knight au lieu de Soldier. Le blocage de conception (condition d'ethnie du Reiksguard,
-   « doit venir de l'Empire ») est résolu depuis le 07/09 par le mécanisme Nation — voir
-   §2.51 pour le détail et la suite exacte (compilé par Nono, pas encore exercé en
-   pratique faute de `<CareerBonus>` l'utilisant).
-2. **Les onze Regiments of Renown**, qui ne rentrent pas dans le moule — condition de niveau 3
-   atteint et non d'ethnie, *trappings* que le greffon compétence/talent ne porte pas, et rang
-   ramené à Soldier avec conservation du statut social. Même famille que les psychologies.
+1. ✅ **Le 3d-3, les ordres de chevalerie** — les 17 Ordres saisis et entièrement validés,
+   voir §2.51.
+2. ✅ **Les onze Regiments of Renown — TERMINÉ ET VALIDÉ (10/09/2026).** Talent seul
+   modélisé (palier unique à l'Order="3"), trappings et règle de rang laissés
+   descriptifs (décision de Nono) — détail complet en §2.51bis ci-dessous. Chantier
+   suivant à définir avec Nono.
 
 **Bug voisin découvert au passage, antérieur au chantier et noté dans `A FAIRE.txt`** :
 revenir dans une carrière déjà exercée redonne l'équipement de départ en double, et sans
@@ -5897,17 +5908,52 @@ Nation/ModifyWeapon/ModifyCarac fonctionne intégralement, y compris en gabarit 
 3. ✅ **Les 15 autres Ordres saisis en un lot (08/09/2026)**, sur inventaire complet validé par
    Nono avant écriture plutôt qu'un aller-retour par Ordre — voir l'encart de tête pour le
    détail (vocabulaire créé, mécanismes `ModifySkill`/`ModifyWeapon skill=` exercés pour la
-   première fois). **Reste : Nono compile et teste.** Points à vérifier en priorité, parce que
-   ce sont les deux mécanismes jamais exercés avant ce lot : le bonus "toute la compétence"
-   (`ModifySkill`, ex. Order of the Black Bear/Black Rose avec Polearm, testable sans même
-   équiper une arme précise puisqu'il vise la compétence) et le filtre `skill=` sur
-   `ModifyWeapon` qui restreint un type d'arme à une sous-famille (Knights of Morr/Order of the
-   Reikshammer, "Two-handed Swords" seul et pas l'épée à une main bien que les deux portent
-   `RULES-WTYPE_SWORD`). Un personnage Knights of Morr ou Reikshammer avec une épée à une main
-   ET une arme à deux mains typée Sword est le test le plus révélateur : si le bonus apparaît
-   aussi sur l'épée à une main, le filtre `skill=` ne fonctionne pas.
-4. Les onze Regiments of Renown (§2.44 point de reprise 2), sans lien avec ce chantier —
-   chantier suivant une fois le point 3 validé.
+   première fois).
+   - **✅ 10/09/2026 — `ModifyWeapon` CONFIRMÉ par Nono, les deux formes**, testé sur Knights
+     of Morr palier 2 (`NATIO-ORDER_MORR_2` : `ModifyWeapon RULES-WTYPE_HALBERD +10` sans
+     filtre, `ModifyWeapon RULES-WTYPE_SWORD skill="RULES-COMPCOMB_2M" +10` filtré). Personnage
+     sans la compétence Polearm/Fencing/Two-Handed maîtrisée (valeur de base = WS non divisée
+     par une compétence, ici 53 %) :
+     - Halberd (bonus sans filtre) : 53 % → **63 %** avec l'Ordre, +10 exact.
+     - Smallsword (Fencing, hors filtre `skill=`) : reste à **53 %**, pas de bonus — attendu.
+     - Zweihänder (Two-Handed, `RULES-COMPCOMB_2M`, dans le filtre) : 53 % → **63 %** — le
+       filtre `skill=` cible bien la bonne sous-famille et exclut l'épée à une main.
+   - **✅ 10/09/2026 — `ModifySkill` CONFIRMÉ par Nono**, testé sur un Knight of the Order
+     of the Black Rose (`NATIO-ORDER_BROSE_2`, `ModifySkill RULES-COMPCOMB_HAST +10`) avec
+     une Halberd : WS de base 43 % (compétence Polearm non maîtrisée) → **53 %** affiché
+     sur le PDF, +10 exact de l'Ordre. Test complémentaire de sélectivité fait dans la
+     foulée : une autre arme (compétence de combat différente, hors `COMPCOMB_HAST`) reste
+     à **43 %** — le bonus ne déborde pas sur les autres compétences. Les trois mécanismes
+     du lot (`ModifyWeapon` simple, `ModifyWeapon skill=`, `ModifySkill`) sont donc
+     validés de bout en bout, application ET sélectivité comprises.
+   - **Lot des 17 Ordres de chevalerie entièrement validé (10/09/2026).**
+4. **✅ Les onze Regiments of Renown — TERMINÉ ET VALIDÉ (10/09/2026)**, chantier
+   ouvert en §2.44 point de reprise 2. Décision de Nono avant écriture : seul le
+   `<Talent>` du palier 3 (niveau d'enrôlement) est modélisé ; les *trappings*
+   (équipement unique) et la règle narrative du livre (rang 3 ramené à "Soldier",
+   Statut Social de rang 3 conservé, trappings de rang 3 différés au rang 4) restent
+   volontairement descriptifs, en commentaire XML — aucun mécanisme du projet ne
+   greffe de l'équipement via une appartenance.
+   - **Pilote : Death Jacks (`NATIO-RENOWN_DJACK`, Stirland), compilé et confirmé par
+     Nono** — Talent Deadeye Shot (`RULES-T0148`) apparaît correctement.
+   - **Huit régiments à province unique saisis en lot** sur le même moule (palier
+     unique Order="3") : Fireloques of Ferlangen, Grundel's Defenders, Helhunten's
+     Redeemers, Sterntower Marksmen, The Death's Heads, The Swords of Ulric, Van
+     Klumpf's Buccaneers (Marienburg, `Specie=""`, ouvert à tous comme son régiment
+     provincial), Von Kragsburg Guard — compilés et confirmés par Nono.
+   - **Extension `<Specie>` à liste (10/09/2026)** : deux régiments recrutent sur DEUX
+     provinces (Carroburg Great Swords : Middenland/Reikland ; Altdorf Company of
+     Honor : Altdorf/Reikland). `AppartenancesCandidates` (`chargemetier.pas` ~l.234)
+     ne matchait qu'UNE ethnie (ou une Nation entière, §2.51) — étendu pour accepter
+     plusieurs ethnies séparées par `SeparateurMulti` ('/'), réutilisant la même
+     convention que `<Skill>`. **Vérifié avant saisie** : Altdorf n'a pas d'ethnie
+     propre dans cette base (`NATIO-REGIM_ALTD` porte déjà `RULES-RACE_HUM`, la même
+     que Reikland) — seul Carroburg (`Specie="MIDDE-RACE_HMIDL/RULES-RACE_HUM"`)
+     exerce réellement la liste.
+   - **✅ Confirmé par Nono sur Carroburg** : un Soldier Middenlander ET un Soldier
+     Reiklander voient tous deux le régiment à l'écran de choix ; un Nordlander (hors
+     liste) ne le voit pas — sélectivité de la liste validée.
+   - **Chantier suivant : à définir avec Nono.**
 
 ---
 

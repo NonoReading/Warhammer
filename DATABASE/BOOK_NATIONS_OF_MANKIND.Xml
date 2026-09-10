@@ -11862,6 +11862,153 @@ Poison: Used to weaken and kill targets, anyone caught in the radius of this gre
 <Talent>"RULES-T0129_MALA"</Talent>
 </Level>
 </CareerBonus>
+  <!-- Regiments of Renown (p.6-7), distincts des regiments provinciaux ci-dessus - prefixe
+       RENOWN_ au lieu de REGIM_ pour ne pas les confondre. Palier unique a l'Order="3" du
+       livre (enrolement au niveau 3 de Soldier) ; les paliers 1/2/4 n'existent pas pour ce
+       CareerBonus, NiveauxDuCareerBonus ne renvoie que les <Level> presents dans le fichier.
+       Decision de Nono (10/09/2026, CONTEXT.md 2.44) : seul le <Talent> est modelise pour
+       l'instant. Restent volontairement HORS mecanisme, en descriptif dans ce commentaire :
+       le Trapping "Death Jack Bow" (deja saisi comme arme, l.11283, mais rien ne greffe un
+       objet via une appartenance) et la regle narrative du livre (le rang 3 est ramene a
+       "Soldier" au lieu de Sergeant, le Statut Social de rang 3 est conserve, les trappings
+       normaux de rang 3 sont differes jusqu'au rang 4). -->
+<CareerBonus id="NATIO-RENOWN_DJACK">
+<Description language="ENGLISH">"Death Jacks"</Description>
+<Career>"RULES-WORK57"</Career>
+<Specie>"NATIO-RACE_HSTIR"</Specie>
+<Level id="NATIO-RENOWN_DJACK_3">
+<Order>"3"</Order>
+<Skill>""</Skill>
+<Talent>"RULES-T0148"</Talent>
+</Level>
+</CareerBonus>
+  <!-- Huit autres Regiments of Renown a province unique (p.6-7), meme moule que
+       NATIO-RENOWN_DJACK ci-dessus (palier unique Order="3", seul le Talent modelise).
+       Trappings laisses en descriptif ici, non greffes en jeu : Fireloques of Ferlangen
+       (Bone Charms, Quality Handgun) ; Grundel's Defenders (Any Rare Polearm, Large
+       Shield) ; Helhunten's Redeemers (Religious Symbol, Silver Bullets/Bolts/Arrows,
+       Silvered Melee Weapon (Any), Wooden Stakes) ; Sterntower Marksmen (Signal Flares,
+       Quality Handgun or Heavy Crossbow) ; The Death's Heads (Metal Skull Mask, Quality
+       Halberd or Large Shield) ; The Swords of Ulric (Quality Sword or Axe or Hammer,
+       Yellow Shield with Ulric's Symbol) ; Van Klumpf's Buccaneers (Any Exotic Item,
+       100 GC) ; Von Kragsburg Guard (Any Two Rare Items, 50 GC). Restent aussi hors
+       mecanisme, meme regle narrative que Death Jacks (rang 3 ramene a Soldier, Statut
+       Social de rang 3 conserve, trappings de rang 3 differes au rang 4).
+       Carroburg Great Swords (Middenland/Reikland) et Altdorf Company of Honor
+       (Altdorf/Reikland) restent A SAISIR, en attente de l'extension <Specie> a liste
+       (plusieurs ethnies), <Specie> ne matchant aujourd'hui qu'une seule ethnie ou une
+       Nation entiere. -->
+<CareerBonus id="NATIO-RENOWN_FIRE">
+<Description language="ENGLISH">"Fireloques of Ferlangen"</Description>
+<Career>"RULES-WORK57"</Career>
+<Specie>"NATIO-RACE_HOSTL"</Specie>
+<Level id="NATIO-RENOWN_FIRE_3">
+<Order>"3"</Order>
+<Skill>""</Skill>
+<Talent>"RULES-T0149"</Talent>
+</Level>
+</CareerBonus>
+<CareerBonus id="NATIO-RENOWN_GRUN">
+<Description language="ENGLISH">"Grundel's Defenders"</Description>
+<Career>"RULES-WORK57"</Career>
+<Specie>"NATIO-RACE_HWISS"</Specie>
+<Level id="NATIO-RENOWN_GRUN_3">
+<Order>"3"</Order>
+<Skill>""</Skill>
+<Talent>"RULES-T0086"</Talent>
+</Level>
+</CareerBonus>
+<CareerBonus id="NATIO-RENOWN_HELH">
+<Description language="ENGLISH">"Helhunten's Redeemers"</Description>
+<Career>"RULES-WORK57"</Career>
+<Specie>"NATIO-RACE_HSTIR"</Specie>
+<Level id="NATIO-RENOWN_HELH_3">
+<Order>"3"</Order>
+<Skill>""</Skill>
+<Talent>"RULES-T0069_MVIVAN"</Talent>
+</Level>
+</CareerBonus>
+<CareerBonus id="NATIO-RENOWN_STERN">
+<Description language="ENGLISH">"Sterntower Marksmen"</Description>
+<Career>"RULES-WORK57"</Career>
+<Specie>"NATIO-RACE_HWISS"</Specie>
+<Level id="NATIO-RENOWN_STERN_3">
+<Order>"3"</Order>
+<Skill>""</Skill>
+<Talent>"RULES-T0154"</Talent>
+</Level>
+</CareerBonus>
+<CareerBonus id="NATIO-RENOWN_DHEAD">
+<Description language="ENGLISH">"The Death's Heads"</Description>
+<Career>"RULES-WORK57"</Career>
+<Specie>"NATIO-RACE_HOSTM"</Specie>
+<Level id="NATIO-RENOWN_DHEAD_3">
+<Order>"3"</Order>
+<Skill>""</Skill>
+<Talent>"RULES-T0132_MVIV"</Talent>
+</Level>
+</CareerBonus>
+<CareerBonus id="NATIO-RENOWN_SULRIC">
+<Description language="ENGLISH">"The Swords of Ulric"</Description>
+<Career>"RULES-WORK57"</Career>
+<Specie>"MIDDE-RACE_HMIDL"</Specie>
+<Level id="NATIO-RENOWN_SULRIC_3">
+<Order>"3"</Order>
+<Skill>""</Skill>
+<Talent>"RULES-T0060"</Talent>
+</Level>
+</CareerBonus>
+<CareerBonus id="NATIO-RENOWN_KLUMPF">
+<Description language="ENGLISH">"Van Klumpf's Buccaneers"</Description>
+<Career>"RULES-WORK57"</Career>
+<Specie>""</Specie>
+<Level id="NATIO-RENOWN_KLUMPF_3">
+<Order>"3"</Order>
+<Skill>""</Skill>
+<Talent>"RULES-T0119"</Talent>
+</Level>
+</CareerBonus>
+<CareerBonus id="NATIO-RENOWN_KRAGS">
+<Description language="ENGLISH">"Von Kragsburg Guard"</Description>
+<Career>"RULES-WORK57"</Career>
+<Specie>"NATIO-RACE_HAVER"</Specie>
+<Level id="NATIO-RENOWN_KRAGS_3">
+<Order>"3"</Order>
+<Skill>""</Skill>
+<Talent>"NATIO-T0008"</Talent>
+</Level>
+</CareerBonus>
+  <!-- Deux derniers Regiments of Renown, condition d'origine sur DEUX provinces.
+       Carroburg Great Swords (Middenland/Reikland) : ce sont deux ethnies vraiment
+       distinctes (MIDDE-RACE_HMIDL, RULES-RACE_HUM) - exerce pour la premiere fois
+       l'extension <Specie> a liste SeparateurMulti (chargemetier.pas,
+       AppartenancesCandidates, 2.44). Altdorf Company of Honor (Altdorf/Reikland) :
+       verifie avant saisie que NATIO-REGIM_ALTD (l.11609) porte deja RULES-RACE_HUM,
+       la meme ethnie que Reikland dans cette base (Altdorf n'a pas d'ethnie propre
+       ici) - un seul <Specie>, PAS de liste, l'extension ne sert donc a rien pour
+       celui-ci. Trappings (Any Two Rare Items+50 GC / Reiksplate Cuirass+Yellow
+       Plumed Helm) et regle de rang toujours en descriptif, meme traitement que les
+       neuf autres. -->
+<CareerBonus id="NATIO-RENOWN_CARR">
+<Description language="ENGLISH">"Carroburg Great Swords"</Description>
+<Career>"RULES-WORK57"</Career>
+<Specie>"MIDDE-RACE_HMIDL/RULES-RACE_HUM"</Specie>
+<Level id="NATIO-RENOWN_CARR_3">
+<Order>"3"</Order>
+<Skill>""</Skill>
+<Talent>"RULES-T0095"</Talent>
+</Level>
+</CareerBonus>
+<CareerBonus id="NATIO-RENOWN_ALTD">
+<Description language="ENGLISH">"Altdorf Company of Honor"</Description>
+<Career>"RULES-WORK57"</Career>
+<Specie>"RULES-RACE_HUM"</Specie>
+<Level id="NATIO-RENOWN_ALTD_3">
+<Order>"3"</Order>
+<Skill>""</Skill>
+<Talent>"RULES-T0122"</Talent>
+</Level>
+</CareerBonus>
 <CareerBonus id="NATIO-REGIM_TALB">
 <Description language="ENGLISH">"Talabecland State Army"</Description>
 <Career>"RULES-WORK57"</Career>

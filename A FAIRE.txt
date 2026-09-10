@@ -239,7 +239,18 @@ palier 4, saisi le 08/09/2026) : en plus des +10 Sociabilite/+10 Volonte (Modify
 en place), le livre donne un CHOIX du joueur parmi les competences raciales provinciales -
 aucun mecanisme actuel ne represente un choix parmi une liste (ModifySkill ne vise qu un
 seul code fixe). Laisse en commentaire XML dans BOOK_NATIONS_OF_MANKIND.Xml, purement
-descriptif pour l instant. Concerne aussi les dix autres Ordres de chevalerie a saisir.
+descriptif pour l instant. Les 17 Ordres de chevalerie sont tous saisis (10/09/2026) ;
+verifie qu'aucun autre n'a le meme genre de choix parmi une liste.
+
+LES TRAPPINGS DES REGIMENTS OF RENOWN NE SONT PAS MODELISES. Les onze Regiments of Renown
+(p.6-7, saisis et valides le 10/09/2026, CONTEXT.md 2.44) donnent chacun un equipement
+unique a l'enrolement (ex. Death Jack Bow, Carroburg Greatsword) - aucun mecanisme du
+projet ne greffe un objet d'equipement via une appartenance, seul le <Talent> l'est.
+Laisse en commentaire XML dans BOOK_NATIONS_OF_MANKIND.Xml, purement descriptif. Meme
+regiment, la regle narrative du livre n'est pas non plus modelisee : au palier 3, le rang
+est ramene a "Soldier" au lieu de Sergeant, le Statut Social de rang 3 est conserve, et les
+trappings normaux de rang 3 sont differes jusqu'au rang 4 (Officer). Decision de Nono avant
+saisie : a mener seulement si Nono en a besoin en jeu, pas de chantier dedie pour l'instant.
 
 UN ACCESSEUR UNIQUE POUR LA VALEUR D UNE COMPETENCE. Idee de Nono le 06/09/2026, posee en
 parallele du chantier Effet/Cible/Forme (voir CONTEXT.md, section talents) pour ne pas les

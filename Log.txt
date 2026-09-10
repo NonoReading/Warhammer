@@ -2206,3 +2206,52 @@ Reste : Nono compile et teste. Points a verifier en priorite parce que ce sont l
 mecanismes jamais exerces avant ce lot - voir CONTEXT.md 2.51 pour le detail du test le
 plus revelateur (Knights of Morr/Reikshammer avec une epee a une main ET une arme a deux
 mains typee Sword, pour confirmer que le filtre skill= exclut bien la premiere).
+
+10/09/2026 - MODIFYWEAPON CONFIRME SUR KNIGHTS OF MORR (HALBERD + FILTRE SKILL=)
+Nono a teste le personnage Knights of Morr (palier 2, NATIO-ORDER_MORR_2). Halberd
+(ModifyWeapon RULES-WTYPE_HALBERD +10, sans filtre) : 53% de base (WS, competence Polearm
+non maitrisee) -> 63% avec l'Ordre, bonus exact. Filtre skill= sur les epees confirme :
+Smallsword (Fencing, hors filtre) reste a 53% sans bonus, comme attendu ; Zweihander
+(Two-Handed, RULES-COMPCOMB_2M, dans le filtre) passe a 63% - le filtre cible bien la bonne
+sous-famille et exclut l'epee a une main. Les deux mecanismes ModifyWeapon (bonus simple et
+filtre skill=) sont donc valides de bout en bout. Reste, avant de considerer le lot des 15
+Ordres entierement valide : le mecanisme ModifySkill ("toute la competence", ex. Order of
+the Black Bear/Black Rose avec Polearm), pas encore exerce en pratique. Une fois valide :
+chantier suivant, les onze Regiments of Renown (2.44 point de reprise 2).
+
+10/09/2026 - MODIFYSKILL CONFIRME SUR ORDER OF THE BLACK ROSE, LOT DES 17 ORDRES VALIDE
+Nono a teste un Knight of the Order of the Black Rose (NATIO-ORDER_BROSE_2, ModifySkill
+RULES-COMPCOMB_HAST +10) avec une Halberd : WS de base 43% (Polearm non maitrisee) -> 53%
+sur le PDF, +10 exact de l'Ordre. Test complementaire de selectivite : une autre arme
+(competence de combat differente, hors COMPCOMB_HAST) reste a 43%, le bonus ne deborde pas
+sur les autres competences. Les trois mecanismes du lot (ModifyWeapon simple, ModifyWeapon
+skill=, ModifySkill) sont donc valides de bout en bout, application ET selectivite
+comprises. Lot des 17 Ordres de chevalerie entierement termine et valide. Chantier
+suivant : les onze Regiments of Renown (2.44 point de reprise 2).
+
+10/09/2026 - LES ONZE REGIMENTS OF RENOWN SAISIS ET VALIDES, EXTENSION SPECIE A LISTE
+Chantier ouvert en 2.44 (point de reprise 2), enchaine le jour meme apres le lot des 17
+Ordres. Decision de Nono avant ecriture : seul le <Talent> du palier 3 (enrolement) est
+modelise ; les trappings (equipement unique par regiment) et la regle narrative du livre
+(rang 3 ramene a "Soldier", Statut Social de rang 3 conserve, trappings de rang 3 differes
+au rang 4) restent volontairement descriptifs en commentaire XML - aucun mecanisme du
+projet ne greffe d'equipement via une appartenance.
+Pilote : Death Jacks (NATIO-RENOWN_DJACK, Stirland, Talent Deadeye Shot RULES-T0148) -
+compile et confirme par Nono.
+Huit regiments a province unique saisis en lot sur le meme moule (palier unique Order="3") :
+Fireloques of Ferlangen, Grundel's Defenders, Helhunten's Redeemers, Sterntower Marksmen,
+The Death's Heads, The Swords of Ulric, Van Klumpf's Buccaneers (Marienburg, Specie="",
+ouvert a tous comme son regiment provincial), Von Kragsburg Guard - compiles et confirmes
+par Nono.
+Deux derniers regiments recrutent sur DEUX provinces : Carroburg Great Swords (Middenland/
+Reikland) et Altdorf Company of Honor (Altdorf/Reikland). AppartenancesCandidates
+(chargemetier.pas ~l.234) ne matchait qu'UNE ethnie ou une Nation entiere (2.51) - etendu
+pour accepter plusieurs ethnies separees par SeparateurMulti ('/') dans <Specie>, meme
+convention que <Skill>. Verifie avant saisie : Altdorf n'a pas d'ethnie propre dans cette
+base (NATIO-REGIM_ALTD porte deja RULES-RACE_HUM, la meme que Reikland) - seul Carroburg
+(Specie="MIDDE-RACE_HMIDL/RULES-RACE_HUM") exerce reellement la liste.
+Confirme par Nono sur Carroburg : un Soldier Middenlander ET un Soldier Reiklander voient
+tous deux le regiment a l'ecran de choix ; un Nordlander (hors liste) ne le voit pas -
+extension et selectivite validees.
+Les onze Regiments of Renown sont donc entierement termines et valides. Chantier suivant :
+a definir avec Nono.
