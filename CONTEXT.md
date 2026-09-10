@@ -1,6 +1,13 @@
 # Warhammer — Contexte projet
 
-**Dernière mise à jour : 10/09/2026 — GÉNÉRICISATION DU CALCUL DES TALENTS (`<Effet>`),
+**Dernière mise à jour : 10/09/2026 — ACCESSEUR UNIQUE ATTRIBUT/COMPETENCE, PILOTE ATTRIBUTS
+COMPILÉ ET VALIDÉ PAR NONO SUR GUNTHER KRIEG (§2.52).** Les bonus d'Ordre/Régiment
+(`CareerBonus`), d'arme et d'armure magiques, déjà sommés côté PDF, apparaissent maintenant
+aussi sur l'écran WinPersonnage (`CalculTotaux` appelle `PdfPersonnageAttribut` au lieu d'une
+addition locale de cellules). Reste à faire : les Compétences, même démarche. Détail complet
+en §2.52. **Chantier suivant : à définir avec Nono.**
+
+**10/09/2026 — GÉNÉRICISATION DU CALCUL DES TALENTS (`<Effet>`),
 COMPILÉE ET VALIDÉE.** Chantier A FAIRE.txt repris après les Ordres/Regiments. But posé par
 Nono en cours de route : plus AUCUN code de talent en dur, pas seulement fusionner les blocs
 dupliqués. Mécanisme : `<Effet Cible="..." Forme="Additif|ProportionnelAttribut|Drapeau"
@@ -5207,10 +5214,12 @@ l.4869 (`PersonnageEquipement.CoutXp`). 229 929 → 230 391 octets. ÉPROUVÉ : 
 mode XpDiv25, s'arrondit (110 → 100) : la division tronquante a déjà perdu l'information à
 l'affichage. Inhérent au mode, pas au correctif.
 
-**Non réparé.** Les coûts déjà tombés à zéro dans les dossiers existants. Aucun calcul
-automatique possible — le montant dépend du type de changement. Les tarifs de référence sont
-`ConstXpNouveauNiveau`, `ConstXpChangerMetier`, `ConstXpChangerMetierIncomplet` et
-`ConstXpChangerClasse`. Reste dans `A FAIRE.txt`.
+**Réparé le 10/09/2026.** Les trois lignes `CHAPTER_OLDCAREER` à `"0"` de Gunther Krieg
+(seul dossier réel touché, les autres sont des créations de test) éditées à la main dans
+`SAVED_CARACTERS\Gunther Krieg\20260910-183612.xml` : `RULES-WORK17/1` (Stevedore) laissé à
+`0` (carrière de création, gratuite), `RULES-WORK27/1` (Guard) mis à `200` (changement de
+métier complet 100 + changement de classe Riverfolk→Warriors 100, confirmé par Nono),
+`RULES-WORK27/2` (Guard) mis à `100` (montée de niveau simple).
 
 **Au passage : les bornes `to 11` sur `TabAttribut` ne sont PAS un bug.** `A FAIRE.txt`
 signalait trois boucles bornées à 11 alors que `ColCount` vaut 15. Vérification faite :
@@ -5997,6 +6006,62 @@ Nation/ModifyWeapon/ModifyCarac fonctionne intégralement, y compris en gabarit 
      Reiklander voient tous deux le régiment à l'écran de choix ; un Nordlander (hors
      liste) ne le voit pas — sélectivité de la liste validée.
    - **Chantier suivant : à définir avec Nono.**
+
+### 2.52 Accesseur unique Attribut/Compétence — pilote Attributs compilé et validé par Nono sur Gunther Krieg (10/09/2026)
+
+**Origine.** Reprise de l'idée de Nono du 06/09/2026 (notée dans `A FAIRE.txt`, gardée à
+l'écart du résolveur générique de talents §2.50 pour ne pas les mélanger) : la valeur d'un
+Attribut/d'une Compétence est calculée DEUX FOIS, indépendamment, dans `winpersonnage.pas`
+(grille écran) et `pdfpersonnage.pas` (`PdfPersonnageAttribut`/`PdfPersonnageCompetence`) — ce
+qui fait que les bonus d'Ordre/Régiment (`CareerBonus`), d'arme et d'armure magiques, déjà
+lus et sommés côté PDF, restent invisibles à l'écran.
+
+**Décision de méthode, proposée par Nono en discussion.** Plutôt qu'une structure de données
+tenue à jour partout (source du décalage), chaque donnée affichée relit directement les
+éléments présents sur `Personnage` au moment de l'affichage — pas de cache à synchroniser.
+Une fiche n'étant pas un monstre en volume, refaire ce calcul à chaque fois est plus sûr que
+d'essayer de garder une structure à jour à chaque endroit où une grille change (c'est
+exactement ce dernier point qui avait dérivé). Précision importante de Nono en cours de
+discussion : la source unique doit être `Personnage` (le record), pas les grilles de
+`WinPersonnage` — le PDF peut être lancé depuis le menu principal sans que `WinPersonnage`
+soit ouvert, donc l'accesseur ne peut pas dépendre de grilles qui n'existent pas toujours.
+
+**Obstacle trouvé en creusant, avant tout code.** `winpersonnage.pas` a déjà `PdfPersonnage`
+dans son `uses` — aucune extraction d'unité nécessaire, `PdfPersonnageAttribut` est
+directement appelable depuis l'écran. Le vrai obstacle : `Personnage.AugmentationAttribut`
+(achats XP) et `Personnage.Equipement`/`.AugmentationTalent` (mêmes symptôme) ne sont
+resynchronisés depuis les grilles qu'À L'INTÉRIEUR de `CalculTableExperience` (l.4196+, la
+grosse procédure qui prépare aussi la sauvegarde XML), à des points précis appelés APRÈS
+`CalculTotaux` dans plusieurs séquences (ex. l.3140 `CalculTotaux(); CalculTableExperience();`)
+— brancher l'accesseur tel quel aurait affiché des valeurs en retard d'un cycle.
+`Personnage.Appartenance`, lui, est déjà mis à jour EN DIRECT au clic du bouton de choix
+d'Ordre/Régiment — c'est ce qui rend le pilote testable sans toucher à ce problème de sync.
+
+**Pilote : les Attributs seuls (pas les Compétences), dans `CalculTotaux` (`winpersonnage.pas`
+l.2357).** Un seul fichier, un seul endroit :
+1. Resync dédié de `Personnage.AugmentationAttribut` ajouté en tête de `CalculTotaux`, rejoué
+   à chaque appel (même logique que le resync existant avant sauvegarde, l.4859, dupliquée ici
+   pour ne pas dépendre de son ordre d'appel).
+2. `TabAttribut.Cells[IndCol, LigAttTotal]` vient désormais de
+   `PdfPersonnageAttribut(Personnage, TabAttribut.Cells[IndCol, LigAttCode], Bonus).Total` au
+   lieu d'une addition locale de cellules (Race+Lance+Talent+Mutation+Bonus). `LigAttBase`
+   (détail affiché à l'écran) reste calculé comme avant, pour la lisibilité.
+
+**COMPILÉ ET VALIDÉ PAR NONO sur Gunther Krieg (Reiksguard) le 10/09/2026.**
+
+**Non traité dans ce pilote, résidu du même défaut, à reprendre au même endroit :**
+- Les Compétences (`TabCompetence.Cells[ColCompTotal, IndLig]`, même fichier ~l.2419) — vers
+  `PdfPersonnageCompetence`, même démarche.
+- `Personnage.AugmentationTalent` et `Personnage.Equipement` ne sont pas resynchronisés comme
+  `AugmentationAttribut` : un talent à bonus d'Attribut direct ou une arme/armure magique tout
+  juste achetés n'apparaîtront pas immédiatement dans le Total Attribut tant que ces deux-là ne
+  le sont pas aussi. Pas une régression du 10/09 (comportement identique à avant), juste un
+  angle mort du pilote.
+- `StructureDonnee` (`pdfpersonnage.pas`) ne porte toujours que Base/Augmentation/Total, pas
+  code/libellé/carac liée — pas nécessaire pour ce pilote, à revoir si un futur appelant en a
+  besoin (voir l'idée d'origine du 06/09 dans `A FAIRE.txt`).
+- **Chantier suivant : à définir avec Nono** — vraisemblablement les Compétences, pour boucler
+  la même logique.
 
 ---
 

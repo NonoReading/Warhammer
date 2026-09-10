@@ -2356,12 +2356,31 @@ Function TWinPersonnages.CalculXpMj(TypeDonnee: String; CodeDonnee:String): Inte
 
 procedure TWinPersonnages.CalculTotaux();
   Var
-    IndCol:     Integer;
-    Total:      Integer = 0;
-    IndLig:     Integer;
-    TabAtt:     String;
-    TabComp:    String;
+    IndCol:            Integer;
+    Total:             Integer = 0;
+    IndLig:            Integer;
+    TabAtt:            String;
+    TabComp:           String;
+    IndAugm:           Integer;
+    PersonnageAttribut:StructurePersonnageAttribut;
+    DonneeAttribut:    StructureDonnee;
+    Bonus:             String;
   begin
+    // Personnage.AugmentationAttribut n'est normalement resynchronise depuis la grille
+    // TabAttribut qu'a l'interieur de CalculTableExperience (juste avant la sauvegarde) -
+    // trop tard pour PdfPersonnageAttribut ci-dessous, appele ICI. Meme source que le
+    // resync fait avant sauvegarde (winpersonnage.pas ~l.4859), refait ici pour que
+    // Personnage soit a jour a chaque recalcul d'ecran, pas seulement a la sauvegarde.
+    // CONTEXT.md, chantier accesseur unique, pilote Attributs.
+    Personnage.AugmentationAttribut := [];
+    For IndAugm := 1 to TabAttribut.Rowcount - 1 do
+      if StrToIntDef(TabAttribut.Cells[IndAugm, LigAttBonus],0) > 0 then
+        begin
+          PersonnageAttribut.CodeAttribut  := TabAttribut.Cells[IndAugm, LigAttCode];
+          PersonnageAttribut.Valeur        := StrToIntDef(TabAttribut.Cells[IndAugm, LigAttBonus],0);
+          Personnage.AugmentationAttribut  += [PersonnageAttribut];
+        end;
+
     // Attributs
     for IndCol := 2 to TabAttribut.ColCount-1 do
       begin
@@ -2370,9 +2389,13 @@ procedure TWinPersonnages.CalculTotaux();
                   StrToIntdef(TabAttribut.Cells[IndCol, LigAttTalent],0)+
                   StrToIntdef(TabAttribut.Cells[IndCol, LigAttMutation],0);
         TabAttribut.Cells[IndCol, LigAttBase] := IntToStr(Total);
-        Total  := Total +
-                  StrToIntdef(TabAttribut.Cells[IndCol, LigAttBonus],0);
-        TabAttribut.Cells[IndCol, LigAttTotal]:= IntToStr(Total);
+        // Total desormais calcule par l'accesseur unique PdfPersonnageAttribut (deja
+        // utilise par le PDF) plutot que par une addition locale de cellules - il ajoute
+        // notamment les bonus d'appartenance (Ordre/Regiment), d'arme et d'armure, absents
+        // du calcul precedent. LigAttBase ci-dessus reste un calcul local, pour le detail
+        // affiche a l'ecran uniquement.
+        DonneeAttribut := PdfPersonnageAttribut(Personnage, TabAttribut.Cells[IndCol, LigAttCode], Bonus);
+        TabAttribut.Cells[IndCol, LigAttTotal]:= IntToStr(DonneeAttribut.Total);
       end;
 
     // Compétences

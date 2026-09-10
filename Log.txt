@@ -2389,3 +2389,39 @@ Implementation (winpersonnage.pas) : meme test que ButtonFabricationClick/Button
 (TalentSort(TabEquipement.Cells[2, aRow]).CodeTalent <> '' = c est un sort), bascule
 ButtonFabrication.Enabled et ButtonDelete.Enabled en consequence.
 COMPILE ET VALIDE PAR NONO LE MEME JOUR, aucun probleme constate. Item retire d A FAIRE.txt.
+
+10/09/2026 - COUTS DE CARRIERE A ZERO SUR GUNTHER KRIEG REPARES (SEQUELLE XPDIV25,
+CONTEXT.md 2.48). Les trois lignes CHAPTER_OLDCAREER a "0" du fichier SAVED_CARACTERS\
+Gunther Krieg\20260910-183612.xml editees a la main : RULES-WORK17/1 (Stevedore) laisse a 0
+(carriere de creation, gratuite - pas un bug) ; RULES-WORK27/1 (Guard) mis a 200
+(ConstXpChangerMetier 100, carriere jugee complete par Nono, + ConstXpChangerClasse 100 car
+Stevedore est RULES-CLASS_RIVE et Guard RULES-CLASS_WARR - verifie dans BOOK_RULESBOOK.Xml) ;
+RULES-WORK27/2 (Guard) mis a 100 (ConstXpNouveauNiveau, montee de niveau simple, sans
+ambiguite). Les autres dossiers de SAVED_CARACTERS sont des creations de test, non touches
+(confirme par Nono). Item retire d A FAIRE.txt.
+
+10/09/2026 - ACCESSEUR UNIQUE ATTRIBUT/COMPETENCE, PILOTE ATTRIBUTS COMPILE ET VALIDE PAR
+NONO SUR GUNTHER KRIEG (CONTEXT.md 2.52). Reprise de l idee de Nono du 06/09/2026 (A
+FAIRE.txt) : la valeur d un Attribut est calculee deux fois independamment, dans
+winpersonnage.pas (grille ecran) et pdfpersonnage.pas (PdfPersonnageAttribut), si bien que
+les bonus d Ordre/Regiment (CareerBonus), d arme et d armure magiques n apparaissaient qu au
+PDF. Decision de methode discutee avec Nono : pas de structure tenue a jour partout (source
+du decalage), chaque donnee affichee relit Personnage au moment de l affichage - et la
+source doit etre Personnage (pas les grilles de WinPersonnage), car le PDF peut se lancer
+depuis le menu principal sans que WinPersonnage soit ouvert.
+Obstacle trouve en creusant avant tout code : winpersonnage.pas a deja PdfPersonnage dans
+son uses (pas d extraction d unite necessaire), mais Personnage.AugmentationAttribut n etait
+resynchronise depuis la grille TabAttribut qu a l interieur de CalculTableExperience (la
+grosse procedure qui prepare aussi la sauvegarde XML), appelee APRES CalculTotaux dans
+plusieurs sequences - brancher l accesseur tel quel aurait affiche des valeurs en retard d
+un cycle. Personnage.Appartenance, lui, est deja mis a jour en direct au clic du bouton de
+choix d Ordre/Regiment - c est ce qui rend le pilote testable sans toucher a ce probleme.
+Pilote sur les Attributs seuls (pas les Competences), dans CalculTotaux (winpersonnage.pas
+l.2357) : resync dedie de Personnage.AugmentationAttribut ajoute en tete de la procedure,
+rejoue a chaque appel ; TabAttribut.Cells[IndCol, LigAttTotal] vient desormais de
+PdfPersonnageAttribut(Personnage, ...).Total au lieu d une addition locale de cellules -
+LigAttBase (detail affiche) reste calcule comme avant.
+COMPILE ET VALIDE PAR NONO SUR GUNTHER KRIEG (Reiksguard), aucun probleme constate. Reste :
+les Competences, meme demarche ; Personnage.AugmentationTalent/.Equipement ont le meme
+defaut de sync que AugmentationAttribut, pas corrige dans ce pilote. A FAIRE.txt mis a jour
+en consequence (item "accesseur unique" et l ecran ne reflete pas les bonus CareerBonus).
