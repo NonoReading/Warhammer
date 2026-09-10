@@ -6,12 +6,6 @@
 CORRECTIONS COURTES  (une ligne ou deux chacune)
 =========================================================================
 
-BOOK_RULESBOOK_FRANCAIS.XML N'A PAS LE BLOC DATA_NATION NI LA BALISE NATIONALITY. Ajoutes
-le 07/09/2026 dans BOOK_RULESBOOK.Xml (CONTEXT.md 2.51) pour la condition d'origine du
-Reiksguard - meme lacune que BOOK_NATIONS_OF_MANKIND.Xml, qui n'a lui-meme aucune
-traduction francaise. Sans effet tant que LANG=ENGLISH (INI.TXT) ; a faire si le francais
-redevient actif un jour.
-
 LE TEST DE RADICAL DE TALENT SUPPOSE UN CODE DE 5 CARACTERES. winpersonnage.pas l.3245,
 copy(CodeSansLivre(...),1,5) : vrai pour les 868 codes en T+4 chiffres, faux pour les ids
 "A ou B" comme T0009/RULES-T0067 (seul le premier est compare) et pour le generique T*. Ce
@@ -54,14 +48,6 @@ FRONTIERE METIER. Destin et Resilience ne montent pas par l experience (confirme
 Blessure est derivee de F, E et FM. Les deux boucles de MajTables sont donc justes. Seule
 CalculAvancement avait une borne BASSE fautive (For Ind := 1 lisait ColAttLib, colonne de
 texte), sans effet observable : corrigee en 2. Voir CONTEXT.md 2.48.
-
-LE RULEBOOK FRANCAIS APPELLE "ARMURIER" LES DEUX COTES DE RULES-COMPMETIER_ARMU/T0092_ARMU/
-T0157_ARMU. Trouve le 10/09/2026 en arbitrant le libelle anglais ci-dessus (desormais
-"Craftsman (Gunsmith)") : la competence RULES-COMPMETIER_ARMU et les deux talents portent en
-francais "Metier (Armurier)"/"Maitre artisan (Armurier)"/"Travailleur qualifie (Armurier)",
-jamais "Gunsmith" traduit - meme lacune que les autres traductions orphelines deja notees ci-
-dessus, sans effet tant que LANG=ENGLISH. A corriger avec le reste si le francais redevient
-actif.
 
 L ECART MIDDENHEIM / NATIONS SUR MIDDENLAND ET NORDLAND N EST PAS ARBITRE. Les deux
 provinces existent en officiel sous leurs gentilés - MIDDE-RACE_HMIDL "Humans
@@ -375,12 +361,6 @@ pas de simples modificateurs d Attribut/Competence, le modele ne les porte toujo
 NATIONS OF MANKIND, HORS LOT : LES CREATURES. Taureaux de guerre estaliens, monture du
 Toreador. Reporte avec les montures.
 
-NOMS DE NIVEAU DE CARRIERE AU MASCULIN ET AU FEMININ. Conception arretee le 03/09, NON
-APPLIQUEE : voir CONTEXT.md 2.38. A mener AVEC le chantier de traduction francaise, pas
-pour un livre - BOOK_RULESBOOK_FRANCAIS.Xml porte ses 256 noms de niveaux encore en anglais.
-Touche le chargeur, WinPersonnage, WinLivre et le PDF de personnage.
-
-
 =========================================================================
 EN VRAC  (ancien, non trie)
 =========================================================================
@@ -459,15 +439,6 @@ PDF Personnage (PRIORITAIRE) :
   nettoyage des blocs morts (Blessure, PCM) une fois PdfPersonnageCreationFeldo2P
   entièrement découpée. (ArmureBouclier faisait partie de cette liste ; retiré le
   15/08/2026 lors de l'extraction du remplissage Armes en PdfBlocArmesDonnees.)
-- (idée nettoyage, 15/08/2026, pas conçue) BOOK_RULESBOOK_FRANCAIS.Xml contient en fait
-  toutes les mêmes données que BOOK_RULESBOOK.Xml (pas seulement les traductions), alors
-  que seul le chargement du livre anglais (LangueDef = ConstAnglais) alimente réellement
-  les listes utilisées par le programme - le reste du fichier français n'est là que pour
-  les libellés/descriptions traduits (via AddTrad/Traduit, chargetraduction.pas). Nono
-  aimerait ne garder dans ce fichier que les données de traduction, mais craint de tout
-  casser en le faisant à la main. À concevoir séparément (identifier précisément quels
-  champs sont réellement lus pour un livre non-anglais avant de supprimer quoi que ce
-  soit) avant de toucher au fichier.
 - (idée du 15/08/2026 - FAITE en deux temps, gardée ici pour la trace de ce qui reste)
   la gestion des sorts liés aux talents ne passe plus par les constantes en dur
   TalentSortDomaine/Miracle/MagieMineure/Benediction : le mode d'ajout est une donnée du
@@ -781,12 +752,6 @@ PDF Personnage (PRIORITAIRE) :
   est unidirectionnelle. A retirer, avec ComboRaceCreation.Enabled qui est sur la meme ligne et qui,
   lui, garde peut-etre un sens.
 
-- Traductions des 7 degres de Taille (RULES-T0SIZ_TINY a T0SIZ_MONS, les deux Rulebooks) : j'ai mis
-  Minuscule / Menu / Petit / Moyen / Grand / Enorme / Monstrueux pour Tiny / Little / Small /
-  Average / Large / Enormous / Monstrous. Les deux du milieu (Little et Small) sont un pari, pas une
-  certitude - a verifier dans le livre de regles francais. C'est T0SIZ_SMAL qui sert au Skink.
-  Saisi le 21/08/2026 (CONTEXT.md 2.15).
-
 - Champ PDF du trait Arboricole (RULES-T0ARB) : laisse vide. Le champ accepte des listes
   (COMPDISC_*,COMPPRECEP,COMPINTUI existe deja), donc COMPESCAL,COMPDISC_* serait legitime puisque le
   trait ajoute le Bonus d'Agilite aux tests d'Escalade ET de Discretion en zone boisee. Propose le
@@ -1011,8 +976,7 @@ ARBITRAGES OUVERTS
    le DOMAINE de magie, et il ecrit meme "Arcane Magic (Any Arcane Lore)" a la carriere Wizard.
    Les 17 libelles RULES-T0088_* de la base disent deja tous "Arcane Magic (X)" : conforme.
    Winds of Magic et Enemy in Shadows sont les divergents, pas la base.
-   Reste au degel du francais : RULES-T0088_TZEENTCH est libelle "Arcane Lore (Tzeentch)" dans
-   BOOK_RULESBOOK_FRANCAIS.Xml, libelle anglais reste en francais avec la mauvaise convention.
+   Reste cote francais, voir section GELE - LE FRANCAIS plus bas.
 
 3. TIN WHISTLE / PENNYWHISTLE (Sea of Claws). Le choix du Chantyman pointe aujourd'hui sur
    RULES-COMPMUSIC_PENNYW pour son troisieme instrument, plutot que de creer une specialisation
@@ -1064,12 +1028,13 @@ CHANTIERS DE FOND, PAS ENCORE OUVERTS
 
 
 =========================================================================
-GELE - LES LIBELLES FRANCAIS
+GELE - LE FRANCAIS
 =========================================================================
 Decision de Nono du 24/08/2026 : "pour le francais, c'est un sujet que tu oublies pour l'instant".
 On continue a corriger les identifiants et la structure dans les deux fichiers Rulebook, mais
 plus le texte francais. Ce qui attend le degel, regroupe ici pour ne pas ressortir a chaque
-chantier :
+chantier (regroupement du 10/09/2026 : les items francais etaient disperses dans plusieurs
+sections du fichier, tous ramenes ici a la demande de Nono) :
   * 172 <Description> et 13 <Test> du fichier francais portent un espace parasite en tete ou en
     queue. La liste se regenere en une commande.
   * des libelles francais restes EN ANGLAIS, notamment dans la famille Bless/Invoke :
@@ -1080,6 +1045,36 @@ chantier :
     "Invocation de Sigmar (Empire)" alors que l'anglais est passe a "Bless (Sigmar)" /
     "Invoke (Sigmar)". Si la convention anglaise fait foi, la francaise devrait suivre -
     "Benediction (Sigmar)" et "Invocation (Sigmar)" - mais c'est une decision de traduction.
+  * RULES-T0088_TZEENTCH est libelle "Arcane Lore (Tzeentch)" cote francais, alors que la
+    convention anglaise validee (ARBITRAGES OUVERTS point 2) est "Arcane Magic (X)".
+  * les <Short> de RULES-WEAPB06 et _07 sont INVERSES dans le fichier francais (06 Arbaletes
+    dit "(lancer)", 07 Lancer dit "(arbalete)"). Corrige cote anglais le 28/08, pas cote
+    francais.
+  * BOOK_RULESBOOK_FRANCAIS.Xml n'a ni le bloc DATA_NATION ni la balise NATIONALITY (ajoutes
+    le 07/09/2026 cote anglais dans BOOK_RULESBOOK.Xml pour la condition d'origine du
+    Reiksguard, CONTEXT.md 2.51) - meme lacune que BOOK_NATIONS_OF_MANKIND.Xml, qui n'a
+    lui-meme aucune traduction francaise.
+  * le Rulebook francais appelle "Armurier" les DEUX cotes de RULES-COMPMETIER_ARMU/T0092_ARMU/
+    T0157_ARMU (competence "Metier (Armurier)", talents "Maitre artisan (Armurier)"/
+    "Travailleur qualifie (Armurier)"), jamais "Gunsmith" traduit malgre l'arbitrage anglais
+    du 10/09/2026 ("Craftsman (Gunsmith)").
+  * les 256 noms de niveau de carriere de BOOK_RULESBOOK_FRANCAIS.Xml sont encore en anglais ;
+    le chantier "noms de niveau au masculin et au feminin" (CONTEXT.md 2.38, conception
+    arretee non appliquee) est a mener AVEC le degel plutot que pour un seul livre - touche le
+    chargeur, WinPersonnage, WinLivre et le PDF de personnage.
+  * les 7 degres de Taille (RULES-T0SIZ_TINY a T0SIZ_MONS, les deux Rulebooks) : traduits
+    Minuscule / Menu / Petit / Moyen / Grand / Enorme / Monstrueux pour Tiny / Little / Small /
+    Average / Large / Enormous / Monstrous. Les deux du milieu (Little et Small) sont un pari,
+    pas une certitude - a verifier dans le livre de regles francais au degel. C'est T0SIZ_SMAL
+    qui sert au Skink.
+  * (idee de nettoyage, pas concue) BOOK_RULESBOOK_FRANCAIS.Xml porte en fait TOUTES les memes
+    donnees que BOOK_RULESBOOK.Xml, pas seulement les traductions - seul le chargement du
+    livre anglais (LangueDef = ConstAnglais) alimente reellement les listes utilisees par le
+    programme, le reste du fichier francais n'est la que pour les libelles/descriptions
+    traduits (AddTrad/Traduit, chargetraduction.pas). Nono aimerait ne garder dans ce fichier
+    que les donnees de traduction, mais craint de tout casser en le faisant a la main. A
+    concevoir separement (identifier precisement quels champs sont reellement lus pour un
+    livre non-anglais avant de supprimer quoi que ce soit) avant de toucher au fichier.
 
 
 =========================================================================
@@ -1350,9 +1345,6 @@ EXPLICATIONS ANGLAISES - SUITES ENCORE OUVERTES
 Les 611 explications du Rulebook viennent maintenant du livre. Le constat, la preuve et la
 methode sont dans Log.txt au 28/08. Ne restent ici que les suites.
 
-  * A FAIRE QUAND LE FRANCAIS SERA DEGELE : les <Short> de RULES-WEAPB06 et _07 sont
-    INVERSES dans le fichier francais (06 Arbaletes dit "(lancer)", 07 Lancer dit
-    "(arbalete)"). Corrige cote anglais le 28/08, pas cote francais.
   * La qualite d armure "Critical Deflection" du livre n existe pas dans la base.
 
 DEUX POINTS TRANCHES - NE PLUS LES RESSORTIR EN ANOMALIE :
