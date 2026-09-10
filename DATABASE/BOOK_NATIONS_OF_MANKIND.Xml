@@ -1295,7 +1295,7 @@ Description: You ask Dazh to illuminate the night, and he
   </Option>
   <Option id="NATIO-TRAIT_DUCHE_GISOREUX">
   <Description language="ENGLISH">"Gisoreux"</Description>
-  <Talent>"RULES-T0168/RULES-T0013_MOUNTAIN,RULES-T*"</Talent>
+  <Talent>"RULES-T0168/RULES-T0013_MOUNTAINS,RULES-T*"</Talent>
     <!-- Seasoned Traveler lu comme Seasoned Traveller, or Strider (Mountains), One Random Talent -->
   </Option>
   <Option id="NATIO-TRAIT_DUCHE_LYONESSE">

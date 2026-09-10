@@ -137,7 +137,7 @@
 <Text name="RULES-ARMOL_BODY">"Body"</Text>
 <Text name="RULES-ARMOL_HEAD">"Head"</Text>
 <Text name="RULES-ARMOL_LEG">"Leg"</Text>
-<Text name="RULES-DISPO_COMMON">"Commmon"</Text>
+<Text name="RULES-DISPO_COMMON">"Common"</Text>
 <Text name="RULES-DISPO_EXOTIC">"Exotic"</Text>
 <Text name="RULES-DISPO_LIMITED">"Limit"</Text>
 <Text name="RULES-DISPO_RARE">"Rare"</Text>
@@ -3641,9 +3641,6 @@ See page 190 for Fear rules"</Explanation>
 </Talent>
 <Talent id="RULES-T0013_MAR">
 <Description language="ENGLISH">"Strider (Swamps)"</Description>
-</Talent>
-<Talent id="RULES-T0013_MOUNTAIN">
-<Description language="ENGLISH">"Strider (Mountains)"</Description>
 </Talent>
 <Talent id="RULES-T0013_MOUNTAINS">
 <Description language="ENGLISH">"Strider (Mountains)"</Description>
@@ -13759,7 +13756,7 @@ Thieves steal all manner of wealth and goods from their fellow man. From the low
 <Reach>"RULES-WEAPR_MID"</Reach>
 <Price>"10/-"</Price>
 <Encumbrance>"1"</Encumbrance>
-<Quality>"RULES-WEAPB09,RULES-WEAPB16,RULES-WEAPB01"</Quality>
+<Quality>"RULES-WEAPB09,RULES-WEAPB26,RULES-WEAPB01"</Quality>
 <Hand>"1"</Hand>
 <Ammunition>"0"</Ammunition>
 </Weapon>

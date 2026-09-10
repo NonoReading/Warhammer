@@ -1072,8 +1072,9 @@ procedure TWinPersonnages.ButtonRaceSelectionnerClick(Sender: TObject);
 // Valeur d'un champ de tarification : soit un nombre ecrit tel quel, soit un bonus
 // d'attribut note (BATTR_x) - la MEME notation que <Max> des talents, et la decoupe est
 // recopiee de TabAugmentationTalentSetEditText ligne ~3480 pour qu'elles ne divergent pas.
-// Le 'B' est mange par le delimiteur '(B', ce qui laisse 'ATTR_Int', qui est exactement ce
-// que la ligne de codes de TabAttribut contient.
+// Le 'B' est mange par le delimiteur '(B', ce qui laisse 'ATTR_Int', a comparer sans le
+// prefixe de livre (CodeSansLivre) a la ligne de codes de TabAttribut, qui le porte depuis
+// §2.49 ("RULES-ATTR_Int").
 //
 // Defaut est rendu quand l'expression est vide OU quand l'attribut cite n'existe pas : un
 // libelle mal orthographie dans les donnees ne doit pas faire planter une fiche.
@@ -1090,7 +1091,7 @@ function TWinPersonnages.ValeurTarifSort(Expression: String; Defaut: Integer): I
     Carac  := StringReplace(ExtractStringAfter(Expression, '(B'), ')', '', [rfReplaceAll]);
     Result := Defaut;
     For Ind := 1 to TabAttribut.ColCount - 1 do
-      if TabAttribut.Cells[Ind, LigAttCode] = Carac then
+      if CodeSansLivre(TabAttribut.Cells[Ind, LigAttCode]) = Carac then
         begin
           Result := Trunc(StrToIntDef(TabAttribut.Cells[Ind, LigAttTotal], 0) / 10);
           Exit;
@@ -3013,7 +3014,7 @@ begin
            TabCompetence.Cells[ColCompTalent, Ind]:= PersonnageTalentCompetence.CodeTalent;
            TabCompetence.Cells[ColCompStat, Ind]  := PCompetence.CodeAttribut;
            PAttribut                              := ChercheAttribut(PCompetence.CodeAttribut);
-           TabCompetence.Cells[ColCompCarac, Lig] := PAttribut.Resume;
+           TabCompetence.Cells[ColCompCarac, Ind] := PAttribut.Resume;
          end;
        TabCompetence.Cells[ColCompLib, Ind]       := TabCompetence.Cells[ColCompLib, Ind] + '*';
     end;

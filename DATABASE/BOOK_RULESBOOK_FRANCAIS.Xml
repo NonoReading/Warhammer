@@ -4114,9 +4114,6 @@ See page 190 for Fear rules"</Explanation>
 <Talent id="RULES-T0013_MAR">
 <Description language="FRANCAIS">"Bon marcheur (Marécages)"</Description>
 </Talent>
-<Talent id="RULES-T0013_MOUNTAIN">
-<Description language="FRANCAIS">"Strider (Mountains)"</Description>
-</Talent>
 <Talent id="RULES-T0013_MOUNTAINS">
 <Description language="FRANCAIS">"Strider (Mountains)"</Description>
 </Talent>
@@ -14107,7 +14104,7 @@ See page 190 for Fear rules"</Explanation>
 <Reach>"RULES-WEAPR_MID"</Reach>
 <Price>"10/-"</Price>
 <Encumbrance>"1"</Encumbrance>
-<Quality>"RULES-WEAPB09,RULES-WEAPB16,RULES-WEAPB01"</Quality>
+<Quality>"RULES-WEAPB09,RULES-WEAPB26,RULES-WEAPB01"</Quality>
 <Hand>"1"</Hand>
 <Ammunition>"0"</Ammunition>
 </Weapon>

@@ -393,7 +393,7 @@ Examples you could take include: Alcohol, Food, Narcotics, Pleasure."</Explanati
   <!-- Marksman -->
 <Talent name="RULES-T0105">"1"</Talent>
   <!-- Rover -->
-<Talent name="RULES-T0013_MOUNTAIN">"1"</Talent>
+<Talent name="RULES-T0013_MOUNTAINS">"1"</Talent>
   <!-- Strider (Mountains) -->
 <Talent name="RULES-T0132_LARGEBEAST">"2"</Talent>
   <!-- Fearless (Large Beasts) -->

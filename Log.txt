@@ -2323,3 +2323,33 @@ degats CC toujours +1, Blessures toujours justes avec le bonus Hardy - les deux 
 RESTE : la Forme Drapeau (Sprinter) et les deux autres Additif (Sturdy, Accurate Shot, Pure
 Soul) ne sont testes sur aucun personnage existant - a surveiller au prochain personnage qui
 les prend. TalentHaineSacree et TalentGenerique restent utilisees, non touchees.
+
+10/09/2026 - CINQ CORRECTIONS COURTES DE A FAIRE.txt TRAITEES, COMPILEES ET VALIDEES
+Reprise du fichier A FAIRE.txt (section corrections courtes) : cinq items verifies dans les
+sources puis corriges, les autres laisses en l etat (arbitrage de Nono necessaire, conception
+a part, ou point deja tranche).
+- COQUILLE : RULES-DISPO_COMMON affichait "Commmon" (trois m) dans BOOK_RULESBOOK.Xml -
+corrige en "Common".
+- GRAIN FLAIL (RULES-COMB_FLEAU_03) portait la Qualite Accurate (WEAPB16) au lieu d Imprecise
+(WEAPB26) - verifie dans RULEBOOK.txt et Up_In_Arms.txt ("Distract, Imprecise, Wrap"), corrige
+dans BOOK_RULESBOOK.Xml et BOOK_RULESBOOK_FRANCAIS.Xml.
+- DOUBLON STRIDER (MOUNTAINS) : RULES-T0013_MOUNTAIN et RULES-T0013_MOUNTAINS coexistaient
+dans le Rulebook (EN/FR). Six sources (Nations of Mankind, Salzenmund, Archives of the Empire
+II, Temple of Spite, Owler) ecrivent "Mountains" au pluriel contre une seule occurrence
+singuliere (note de dev diary, pas une regle) - RULES-T0013_MOUNTAINS garde comme canonique,
+RULES-T0013_MOUNTAIN retire des deux Rulebook, les deux appelants (BOOK_ARCHIVES_OF_THE_
+EMPIRE_II.Xml et BOOK_NATIONS_OF_MANKIND.Xml) migres.
+- VALEURTARIFSORT (winpersonnage.pas l.1093) avait le meme bug de prefixe que
+NiveauMetierTalentMax et TabAugmentationTalentCalcul, deja corriges le 06/09/2026 - meme
+correctif applique (CodeSansLivre autour de tabAttribut.Cells[Ind, LigAttCode]), commentaire
+perime au-dessus de la fonction (l.1073-1076) reecrit au passage.
+- TABCOMPETENCE.CELLS[COLCOMPCARAC, LIG] AU LIEU DE IND (winpersonnage.pas ~l.3016, bloc
+"competence liee a un talent") : confirme comme coquille de copier-coller en relisant le bloc
+- toutes les autres colonnes de la meme ligne creee (ColCompCode/ColCompLib/ColCompTalent/
+ColCompStat) utilisent deja Ind - corrige.
+COMPILE ET VALIDE PAR NONO LE MEME JOUR, aucun probleme constate.
+Items retires d A FAIRE.txt (les cinq ci-dessus). Reste en l etat, necessitant un arbitrage de
+Nono ou une conception a part : Craftsman/Master Tradesman (T0092_ARMU), Nations of Mankind
+OFFICIAL=2 et les trois libelles a arbitrer, le bouton Fabrication/Supprimer a griser sur un
+sort (ergonomie, non touche), et les items de conception (paliers de salaire, listes fermees
+en dur, entite domaine, etc.).
