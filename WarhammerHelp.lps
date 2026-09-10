@@ -49,9 +49,10 @@
         <Filename Value="chargeconstantes.pas"/>
         <IsPartOfProject Value="True"/>
         <UnitName Value="ChargeConstantes"/>
+        <IsVisibleTab Value="True"/>
         <EditorIndex Value="1"/>
-        <TopLine Value="246"/>
-        <CursorPos X="31" Y="260"/>
+        <TopLine Value="284"/>
+        <CursorPos X="39" Y="296"/>
         <UsageCount Value="200"/>
         <Loaded Value="True"/>
       </Unit>
@@ -483,10 +484,9 @@
         <Filename Value="pdfpersonnage.pas"/>
         <IsPartOfProject Value="True"/>
         <UnitName Value="PdfPersonnage"/>
-        <IsVisibleTab Value="True"/>
         <EditorIndex Value="3"/>
-        <TopLine Value="1135"/>
-        <CursorPos X="38" Y="1146"/>
+        <TopLine Value="1136"/>
+        <CursorPos X="19" Y="1140"/>
         <UsageCount Value="200"/>
         <Loaded Value="True"/>
       </Unit>
@@ -554,6 +554,12 @@
         <TopLine Value="3"/>
         <CursorPos X="43" Y="13"/>
         <UsageCount Value="129"/>
+      </Unit>
+      <Unit>
+        <Filename Value="chargetalenteffet.pas"/>
+        <IsPartOfProject Value="True"/>
+        <UnitName Value="ChargeTalentEffet"/>
+        <UsageCount Value="20"/>
       </Unit>
       <Unit>
         <Filename Value="chargetalentcompetencemodif.pas"/>
@@ -1227,7 +1233,7 @@
         <UsageCount Value="11"/>
       </Unit>
     </Units>
-    <JumpHistory HistoryIndex="17">
+    <JumpHistory HistoryIndex="19">
       <Position>
         <Filename Value="winlancede.pas"/>
         <Caret Line="52" Column="29" TopLine="44"/>
@@ -1299,6 +1305,14 @@
       <Position>
         <Filename Value="chargeconstantes.pas"/>
         <Caret Line="260" Column="31" TopLine="246"/>
+      </Position>
+      <Position>
+        <Filename Value="pdfpersonnage.pas"/>
+        <Caret Line="1140" Column="19" TopLine="1136"/>
+      </Position>
+      <Position>
+        <Filename Value="chargeconstantes.pas"/>
+        <Caret Line="296" Column="50" TopLine="284"/>
       </Position>
     </JumpHistory>
     <RunParams>

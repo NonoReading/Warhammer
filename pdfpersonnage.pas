@@ -13,7 +13,7 @@ uses
   ChargePersonnage, ChargeArmureSimplifie, ChargeAttributAugmentation,
   ChargeCompetenceAugmentation, ChargeCorruptionTable,
   ChargeCorruptionAttributModif, ChargeCorruptionCompetenceModif,
-  ChargeCorruptionArmureModif,
+  ChargeCorruptionArmureModif, ChargeTalentEffet,
   Dialogs, UnitCalcul, Math, LCLIntf;
 
 Type
@@ -125,6 +125,16 @@ end;
 
 Procedure PdfPersonnageCompetenceTri(ListPage: TStringList);
 Function PdfPersonnageAttribut(Personnage: StructurePersonnage; Attribut: String; var Bonus: String): StructureDonnee;
+// Generalisation du case de calcul de talents (A FAIRE.txt "GENERICISER LE CASE DE CALCUL
+// DES TALENTS", ChargeTalentEffet) : total pour une Cible (vocabulaire ferme, voir
+// ChargeConstantes ConstCibleEffet*) toutes sources confondues (creation + augmentation),
+// sans plus regarder le CODE du talent - n'importe quel talent portant <Effet Cible="..."/>
+// contribue. Remplace le case cablé sur TalentDurACuire/TalentCostaud/etc.
+Function PersonnageTalentEffet(Personnage: StructurePersonnage; Cible: String): Integer;
+// Meme perimetre que ci-dessus mais renvoie le RANG BRUT (PersonnageTalent.Valeur) plutot
+// que le total calcule - sert uniquement a l'affichage Feldo2P qui montre le rang du talent
+// a cote du total (ex. Hardy/Dur a Cuire), CONTEXT.md.
+Function PersonnageTalentEffetRang(Personnage: StructurePersonnage; Cible: String): Integer;
 // Plafond de corruption (Bonus Endurance/10 + Bonus Force Mentale/10 + talent Âme Pure),
 // même calcul que PdfBlocCorruption mais exposé pour être réutilisé hors PDF (WinPersonnage,
 // CONTEXT.md §2.7) - PdfPersonnageCreationFeldo2P n'est PAS modifiée, nouvelle fonction
@@ -712,6 +722,64 @@ Function PdfPersonnageAttribut(Personnage: StructurePersonnage; Attribut: String
     Result := res;
   end;
 
+Function PersonnageTalentEffet(Personnage: StructurePersonnage; Cible: String): Integer;
+  var
+    PersonnageTalent: StructurePersonnageTalent;
+    IndiceEffet:      Integer;
+    AttributDonnee:   StructureDonnee;
+    Bonus:            String;
+  begin
+    Result := 0;
+    for PersonnageTalent in Personnage.CreationTalent do
+      for IndiceEffet := 0 to (ListTalentEffet.Count - 1) do
+        if CompareRechercheValeur(ListTalentEffet[IndiceEffet].CodeTalent, PersonnageTalent.CodeTalent)
+           and (ListTalentEffet[IndiceEffet].Cible = Cible) then
+          case ListTalentEffet[IndiceEffet].Forme of
+            ConstFormeEffetAdditif:
+              Result := Result + ListTalentEffet[IndiceEffet].Facteur * PersonnageTalent.Valeur;
+            ConstFormeEffetProportionnelAttribut:
+              begin
+                AttributDonnee := PdfPersonnageAttribut(Personnage, ListTalentEffet[IndiceEffet].Carac, Bonus);
+                Result := Result + Floor(AttributDonnee.Total/10) * PersonnageTalent.Valeur * ListTalentEffet[IndiceEffet].Facteur;
+              end;
+            ConstFormeEffetDrapeau:
+              Result := 1;
+          end;
+    for PersonnageTalent in Personnage.AugmentationTalent do
+      for IndiceEffet := 0 to (ListTalentEffet.Count - 1) do
+        if CompareRechercheValeur(ListTalentEffet[IndiceEffet].CodeTalent, PersonnageTalent.CodeTalent)
+           and (ListTalentEffet[IndiceEffet].Cible = Cible) then
+          case ListTalentEffet[IndiceEffet].Forme of
+            ConstFormeEffetAdditif:
+              Result := Result + ListTalentEffet[IndiceEffet].Facteur * PersonnageTalent.Valeur;
+            ConstFormeEffetProportionnelAttribut:
+              begin
+                AttributDonnee := PdfPersonnageAttribut(Personnage, ListTalentEffet[IndiceEffet].Carac, Bonus);
+                Result := Result + Floor(AttributDonnee.Total/10) * PersonnageTalent.Valeur * ListTalentEffet[IndiceEffet].Facteur;
+              end;
+            ConstFormeEffetDrapeau:
+              Result := 1;
+          end;
+  end;
+
+Function PersonnageTalentEffetRang(Personnage: StructurePersonnage; Cible: String): Integer;
+  var
+    PersonnageTalent: StructurePersonnageTalent;
+    IndiceEffet:      Integer;
+  begin
+    Result := 0;
+    for PersonnageTalent in Personnage.CreationTalent do
+      for IndiceEffet := 0 to (ListTalentEffet.Count - 1) do
+        if CompareRechercheValeur(ListTalentEffet[IndiceEffet].CodeTalent, PersonnageTalent.CodeTalent)
+           and (ListTalentEffet[IndiceEffet].Cible = Cible) then
+          Result := Result + PersonnageTalent.Valeur;
+    for PersonnageTalent in Personnage.AugmentationTalent do
+      for IndiceEffet := 0 to (ListTalentEffet.Count - 1) do
+        if CompareRechercheValeur(ListTalentEffet[IndiceEffet].CodeTalent, PersonnageTalent.CodeTalent)
+           and (ListTalentEffet[IndiceEffet].Cible = Cible) then
+          Result := Result + PersonnageTalent.Valeur;
+  end;
+
 Function PersonnageCorruptionTotal(Personnage: StructurePersonnage): Integer;
   var
     Bonus:            String;
@@ -719,7 +787,6 @@ Function PersonnageCorruptionTotal(Personnage: StructurePersonnage): Integer;
     BFM:              Integer;
     AmePure:          Integer;
     AttributDonnee:   StructureDonnee;
-    PersonnageTalent: StructurePersonnageTalent;
     PAttribut:        StructureAttribut;
   begin
     // PdfPersonnageAttribut compare en interne le code d'attribut passé en argument à
@@ -738,13 +805,7 @@ Function PersonnageCorruptionTotal(Personnage: StructurePersonnage): Integer;
     AttributDonnee := PdfPersonnageAttribut(Personnage, PAttribut.CodeAttribut, Bonus);
     BFM            := AttributDonnee.Total;
 
-    AmePure := 0;
-    for PersonnageTalent in Personnage.CreationTalent do
-      if ExtractStringAfter(PersonnageTalent.CodeTalent, SeparateurLivre) = TalentAmePure then
-        AmePure := PersonnageTalent.Valeur;
-    for PersonnageTalent in Personnage.AugmentationTalent do
-      if ExtractStringAfter(PersonnageTalent.CodeTalent, SeparateurLivre) = TalentAmePure then
-        AmePure := PersonnageTalent.Valeur;
+    AmePure := PersonnageTalentEffet(Personnage, ConstCibleEffetAmePure);
 
     Result := Floor(BE/10) + Floor(BFM/10) + AmePure;
   end;
@@ -1136,32 +1197,16 @@ Procedure PdfPersonnageCreation(Personnage: StructurePersonnage; BackGround: Boo
         end;
       end;
 
-    // chercher les talents et calculer les bonus correspondants
-    BonusEncomb := 0;
-    for PersonnageTalent in Personnage.CreationTalent do
-      begin
-        Val := PersonnageTalent.Valeur;
-        case ExtractStringAfter(PersonnageTalent.CodeTalent, SeparateurLivre) of
-          TalentDurACuire:    DurACuire   := Floor(BE/10) * Val;
-          TalentCostaud:      BonusEncomb := BonusEncomb + Val * 2;
-          TalentCoutPuissant: TBonusCC    := Val;
-          TalenttirPrecis:    TBonusCT    := Val;
-          TalentSprinteur:    BonusSprint := 1;
-          TalentAmePure:      AmePure     := Val;
-        end;
-      end;
-    for PersonnageTalent in Personnage.AugmentationTalent do
-      begin
-        Val := PersonnageTalent.Valeur;
-        case ExtractStringAfter(PersonnageTalent.CodeTalent, SeparateurLivre) of
-          TalentDurACuire:    DurACuire   := Floor(BE/10) * Val;
-          TalentCostaud:      BonusEncomb := BonusEncomb + Val * 2;
-          TalentCoutPuissant: TBonusCC    := Val;
-          TalenttirPrecis:    TBonusCT    := Val;
-          TalentSprinteur:    BonusSprint := 1;
-          TalentAmePure:      AmePure     := Val;
-        end;
-      end;
+    // chercher les talents et calculer les bonus correspondants - genericise le
+    // 10/09/2026 (A FAIRE.txt "GENERICISER LE CASE DE CALCUL DES TALENTS") : plus de code
+    // de talent en dur, PersonnageTalentEffet lit <Effet Cible="..."/> sur n'importe quel
+    // talent (ChargeTalentEffet), creation et augmentation confondues.
+    DurACuire   := PersonnageTalentEffet(Personnage, ConstCibleEffetDurACuire);
+    BonusEncomb := PersonnageTalentEffet(Personnage, ConstCibleEffetBonusEncomb);
+    TBonusCC    := PersonnageTalentEffet(Personnage, ConstCibleEffetTBonusCC);
+    TBonusCT    := PersonnageTalentEffet(Personnage, ConstCibleEffetTBonusCT);
+    BonusSprint := PersonnageTalentEffet(Personnage, ConstCibleEffetBonusSprint);
+    AmePure     := PersonnageTalentEffet(Personnage, ConstCibleEffetAmePure);
     // Talents portant <ModifyCarac name="RULES-ATTR_Fate"/"RULES-ATTR_Resil"> (ex. Luck/Chanceux
     // RULES-T0020, Strong-Minded/Obstiné RULES-T0107) - ajouté le 06/09/2026, remplace les cas
     // TalentChanceux/TalentObstine du case ci-dessus, même mécanisme que Mouvement (§2.50).
@@ -4000,40 +4045,19 @@ Procedure PdfPersonnageCreationFeldo2P(Personnage: StructurePersonnage);
         end;
       end;
 
-    // chercher les talents et calculer les bonus correspondants
-    BonusEncomb := 0;
-    for PersonnageTalent in Personnage.CreationTalent do
-      begin
-        Val := PersonnageTalent.Valeur;
-        case ExtractStringAfter(PersonnageTalent.CodeTalent, SeparateurLivre) of
-          TalentDurACuire:
-            begin
-              ValDurACuire:= Val;
-              DurACuire   := Floor(BE/10) * ValDurACuire;
-            end;
-          TalentCostaud:      BonusEncomb := BonusEncomb + Val * 2;
-          TalentCoutPuissant: TBonusCC    := Val;
-          TalenttirPrecis:    TBonusCT    := Val;
-          TalentSprinteur:    BonusSprint := 1;
-          TalentAmePure:      AmePure     := Val;
-        end;
-      end;
-    for PersonnageTalent in Personnage.AugmentationTalent do
-      begin
-        Val := PersonnageTalent.Valeur;
-        case ExtractStringAfter(PersonnageTalent.CodeTalent, SeparateurLivre) of
-          TalentDurACuire:
-            begin
-              ValDurACuire:= Val;
-              DurACuire   := Floor(BE/10) * ValDurACuire;
-            end;
-          TalentCostaud:      BonusEncomb := BonusEncomb + Val * 2;
-          TalentCoutPuissant: TBonusCC    := Val;
-          TalenttirPrecis:    TBonusCT    := Val;
-          TalentSprinteur:    BonusSprint := 1;
-          TalentAmePure:      AmePure     := Val;
-        end;
-      end;
+    // chercher les talents et calculer les bonus correspondants - genericise le
+    // 10/09/2026 (A FAIRE.txt "GENERICISER LE CASE DE CALCUL DES TALENTS") : plus de code
+    // de talent en dur, PersonnageTalentEffet lit <Effet Cible="..."/> sur n'importe quel
+    // talent (ChargeTalentEffet), creation et augmentation confondues. ValDurACuire (rang
+    // brut affiche a cote du total sur ce gabarit) vient du meme mecanisme, via
+    // PersonnageTalentEffetRang.
+    DurACuire    := PersonnageTalentEffet(Personnage, ConstCibleEffetDurACuire);
+    ValDurACuire := PersonnageTalentEffetRang(Personnage, ConstCibleEffetDurACuire);
+    BonusEncomb  := PersonnageTalentEffet(Personnage, ConstCibleEffetBonusEncomb);
+    TBonusCC     := PersonnageTalentEffet(Personnage, ConstCibleEffetTBonusCC);
+    TBonusCT     := PersonnageTalentEffet(Personnage, ConstCibleEffetTBonusCT);
+    BonusSprint  := PersonnageTalentEffet(Personnage, ConstCibleEffetBonusSprint);
+    AmePure      := PersonnageTalentEffet(Personnage, ConstCibleEffetAmePure);
     // Talents portant <ModifyCarac name="RULES-ATTR_Fate"/"RULES-ATTR_Resil"> (ex. Luck/Chanceux
     // RULES-T0020, Strong-Minded/Obstiné RULES-T0107) - ajouté le 06/09/2026, remplace les cas
     // TalentChanceux/TalentObstine du case ci-dessus, même mécanisme que Mouvement (§2.50).

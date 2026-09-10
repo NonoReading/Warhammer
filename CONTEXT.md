@@ -1,6 +1,27 @@
 # Warhammer — Contexte projet
 
-**Dernière mise à jour : 10/09/2026 — CRÉATION DE `BOOK_PERSO.Xml`, LIVRE MAISON DE NONO,
+**Dernière mise à jour : 10/09/2026 — GÉNÉRICISATION DU CALCUL DES TALENTS (`<Effet>`),
+COMPILÉE ET VALIDÉE.** Chantier A FAIRE.txt repris après les Ordres/Regiments. But posé par
+Nono en cours de route : plus AUCUN code de talent en dur, pas seulement fusionner les blocs
+dupliqués. Mécanisme : `<Effet Cible="..." Forme="Additif|ProportionnelAttribut|Drapeau"
+Facteur="N" Carac="..."/>` posable sur n'importe quel talent, `Cible` restant un vocabulaire
+fermé côté code (les six variables historiques DurACuire/BonusEncomb/TBonusCC/TBonusCT/
+BonusSprint/AmePure — Mouv/Chance/Determine déjà sorties du `case` le 06/09 vers
+`ModifyCarac`). Nouvelle unité `ChargeTalentEffet`, fonction générique
+`PersonnageTalentEffet` (`pdfpersonnage.pas`) câblée à **cinq** endroits (les 4 blocs dupliqués
++ un 5e calcul d'Âme Pure en dur trouvé dans `PersonnageCorruptionTotal`, pas repéré à
+l'exploration initiale). Six talents tagués dans `BOOK_RULESBOOK.Xml`, six constantes
+`TalentXxx` retirées de `chargeconstantes.pas` (+ trois autres déjà mortes depuis le 06/09,
+trouvées au passage). Périmètre volontairement réduit : le mécanisme `<Attribut>` existant
+(bonus de test, +5) rentrerait dans le même moule mais migrer tous les talents qui le portent
+et réécrire `PdfPersonnageAttribut` est un chantier à part entière — laissé pour plus tard,
+décision de Nono. **Testé par Nono sur Gunther Krieg** (Hardy + Strike Mighty Blow, les deux
+Formes Additif/ProportionnelAttribut) : aucune régression. **Reste non testé sur un
+personnage réel : la Forme Drapeau (Sprinter) et Sturdy/Accurate Shot/Pure Soul** — à
+surveiller au prochain personnage qui les prend. Détail complet en `Log.txt`. **Chantier
+suivant : à définir avec Nono.**
+
+**10/09/2026 — CRÉATION DE `BOOK_PERSO.Xml`, LIVRE MAISON DE NONO,
 COMPILÉ ET VALIDÉ.** BOOK PERSO coché dans WinLivre, Gunther Krieg affiche bien la Coiffe et
 la Cotte de maille (`PERSO-ARMO_01`/`02`).
 Sur l'item A FAIRE « décider où vivent les sets d'armure du MJ » : nouveau livre `BOOK PERSO`

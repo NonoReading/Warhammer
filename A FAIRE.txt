@@ -267,30 +267,30 @@ defaut que celui deja note ci-dessus pour les competences (calcul en double ecra
 Les bonus de palier d ordre de chevalerie/regiment n apparaissent donc qu au PDF pour l
 instant. Se resoudra avec l accesseur unique ci-dessus, pas de correctif a part a chercher.
 
-GENERICISER LE CASE DE CALCUL DES TALENTS DE pdfpersonnage.pas. Repere le 06/09/2026 en
-discutant des ordres de chevalerie (3d-3). Le bloc qui calcule DurACuire/BonusEncomb/Mouv/
-Chance/Determine/TBonusCC/TBonusCT/BonusSprint/AmePure a partir des talents CreationTalent/
-AugmentationTalent (TalentDurACuire, TalentCostaud, etc.) est duplique QUATRE FOIS dans le
-fichier (CreationTalent x AugmentationTalent x normal/Feldo2P), avec deja une derive entre
-les copies (ValDurACuire present dans la version Feldo2P, absent de l autre). Modele propose
-et valide en discussion avec Nono : un tag <Effet Cible="..." Forme="..." Facteur="..."
-Attribut="..."/> pose sur la declaration du talent dans DATA_TALENT, trois formes suffisent
-pour les neuf cas actuels (Additif : Cible += Val*Facteur ; ProportionnelAttribut : Cible :=
-Floor(Attribut/10)*Val, un seul cas aujourd hui (Dur a Cuire) ; Drapeau : Cible := 1). Cible
-reste un vocabulaire FERME porte par le code (meme famille que DISPO/CLASS du 2.49), pas des
-id= de livre. Point de vigilance decouvert en creusant : NE PAS melanger avec les DEUX AUTRES
-mecanismes de "talent qui modifie quelque chose" deja presents dans le projet et jamais
-unifies -
- - ListTalentAttributModif / ListTalentCompetenceModif (chargetalentattributmodif.pas,
-   chargetalentcompetencemodif.pas, appliques dans chargepersonnage.pas l.1290-1340,
-   PersonnageTalentAsterisque) : ne calculent rien, posent une ANNOTATION TEXTE a asterisque
-   dans le champ .Bonus d une carac/competence, sans lien avec le total.
- - CompAjoutee sur StructureTalent (chargetalent.pas l.40) : un talent qui AJOUTE une
-   competence au personnage (chargepersonnage.pas l.779-852), effet binaire.
-Fusionner les trois serait plus juste mais c est un chantier a part entiere, plus gros. Se
-limiter au case de pdfpersonnage.pas pour ce chantier. Mis de cote le 06/09/2026 (Nono) pour
-reprendre les ordres de chevalerie en premier - aucun des neuf talents concernes n intervient
-dans les ordres, les deux chantiers ne se bloquent pas l un l autre.
+[FAIT LE 10/09/2026 - <Effet Cible="..." Forme="..." Facteur="..." Carac="..."/>, generalise
+au dela des neuf cas d origine (n importe quel talent, plus de code de talent en dur), voir
+CONTEXT.md et Log.txt. Restent ouverts, voir plus bas dans ce fichier : la Forme Drapeau et
+trois des six Additif jamais exerces sur un personnage reel ; le mecanisme <Attribut>
+(bonus de test) volontairement laisse hors perimetre ; ListTalentAttributModif/
+ListTalentCompetenceModif et CompAjoutee toujours pas unifies, inchange.]
+
+NON TESTES SUR UN PERSONNAGE REEL : QUATRE DES SIX <Effet> DU 10/09/2026. Seuls Hardy
+(ProportionnelAttribut) et Strike Mighty Blow (Additif) ont ete verifies sur Gunther Krieg.
+Sturdy, Accurate Shot, Pure Soul (Additif) et Sprinter (Drapeau, jamais exerce du tout) sont
+a surveiller au prochain personnage qui les prend - pas d action a mener avant.
+
+FAIRE RENTRER <Attribut> (BONUS DE TEST DE TALENT) DANS LE MECANISME <Effet> DU 10/09/2026.
+Discute avec Nono a l ouverture du chantier <Effet> : architecturalement ca rentrerait dans
+le meme moule (Cible="TestAttribut" Carac="..." Facteur="5"), mais plus gros que les six
+cibles traitees - il faudrait migrer TOUS les talents qui portent <Attribut> (plusieurs
+livres, pas seulement six) et reecrire PdfPersonnageAttribut (bien plus utilisee/centrale que
+le case d origine). Volontairement laisse pour plus tard, une fois <Effet> eprouve en
+pratique sur davantage de personnages.
+
+TROIS CONSTANTES DEJA MORTES RETIREES EN PASSANT LE 10/09/2026 (TalentVeloce/TalentChanceux/
+TalentObstine) - reste TalentHaineSacree (RULES-T0070) : verifie a cette occasion, encore
+utilisee, pas touchee. Si un jour ce talent est lui aussi generalise en <Effet>, verifier au
+meme moment que TalentHaineSacree ne reste pas un cinquieme "presque mort" oublie.
 
 GERER L ANCRAGE DES CONTROLES DANS LES FENETRES. Demande de Nono le 05/09/2026. Aujourd hui
 les fenetres sont posees en coordonnees fixes : redimensionner ne redistribue rien, les

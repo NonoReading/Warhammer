@@ -16,7 +16,7 @@ uses
   ChargeAttributAugmentation, ChargeCompetenceAugmentation, ChargeTexte,
   ChargeMetierSousMetier, ChargeTraduction, ChargeArmureSimplifie, ChargeLivre,
   ChargeRaceCorruptionCreation, ChargeCorruptionTable, ChargeTalentAttributModif,
-  ChargeTalentCompetenceModif, ChargeTalentCompetenceAjoute, ChargeRaceOpinion,
+  ChargeTalentEffet, ChargeTalentCompetenceModif, ChargeTalentCompetenceAjoute, ChargeRaceOpinion,
   ChargeArmureBonusModif, ChargeCorruptionAttributModif, ChargeCorruptionCompetenceModif,
   ChargeCorruptionArmureModif, ChargeTalentArmureModif, ChargeArmeAttributModif,
   ChargeArmureBonusAttributModif,
@@ -1099,6 +1099,7 @@ Procedure XmlImport(FileName: String; OnlyPrimary: Boolean; OnlyCode: Boolean);
     PCorruptionTable:         StructureCorruptionTable;
     PCorruptionChance:        StructureCorruptionChance;
     PTalentAttributModif:     StructureTalentAttributModif;
+    PTalentEffet:             StructureTalentEffet;
     PTalentCompetenceModif:   StructureTalentCompetenceModif;
     PTalentCompetenceAjoute:  StructureTalentCompetenceAjoute;
     PTalentArmureModif:       StructureTalentArmureModif;
@@ -1458,6 +1459,23 @@ Procedure XmlImport(FileName: String; OnlyPrimary: Boolean; OnlyCode: Boolean);
                                    begin
                                     ListTalentAttributModif.add(PTalentAttributModif);
                                     inc(NbTalentAttributModif);
+                                   end;
+                              end;
+                            ConstXmlEffetTalent:
+                              begin
+                                PTalentEffet.Livre      := Livre;
+                                PTalentEffet.CodeTalent := PTalent.CodeTalent;
+                                PTalentEffet.Cible      := RemoveQuotes(UTF8Encode(Node.Attributes.GetNamedItem(ConstXmlEffetCible).NodeValue));
+                                PTalentEffet.Forme      := RemoveQuotes(UTF8Encode(Node.Attributes.GetNamedItem(ConstXmlEffetForme).NodeValue));
+                                PTalentEffet.Facteur    := StrToIntDef(RemoveQuotes(UTF8Encode(Node.Attributes.GetNamedItem(ConstXmlEffetFacteur).NodeValue)), 0);
+                                if Assigned(Node.Attributes) and Assigned(Node.Attributes.GetNamedItem(ConstXmlEffetCarac)) then
+                                  PTalentEffet.Carac    := RemoveQuotes(UTF8Encode(Node.Attributes.GetNamedItem(ConstXmlEffetCarac).NodeValue))
+                                else
+                                  PTalentEffet.Carac    := '';
+                                if LangueDef = ConstAnglais then
+                                   begin
+                                    ListTalentEffet.add(PTalentEffet);
+                                    inc(NbTalentEffet);
                                    end;
                               end;
                             ConstXmlModifieCompetence:

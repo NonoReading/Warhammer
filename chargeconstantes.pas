@@ -287,6 +287,36 @@ Const
       ConstXmlTarget                    = 'target';
       ConstXmlSource                    = 'source';
 
+      // Generalisation du case de calcul de talents de pdfpersonnage.pas (voir
+      // ChargeTalentEffet) : <Effet Cible="..." Forme="..." Facteur="..." Carac="..."/>
+      // pose sur N'IMPORTE QUEL talent, remplace le repérage par code de talent en dur.
+      // "Carac" et non "Attribut" pour ne pas reprendre le nom de la balise <Attribut>
+      // existante (ConstXmlCarac ci-dessus), qui porte les caracteristiques de TEST du
+      // talent - notion differente, meme mot aurait pretait a confusion.
+      // "ConstXmlEffetTalent" et non "ConstXmlEffet" : ce dernier existe deja (l.132),
+      // jamais utilise ailleurs dans le projet (verifie), mais on ne le reprend pas sans
+      // savoir a quoi il etait destine a l'origine.
+      ConstXmlEffetTalent               = 'Effet';
+      ConstXmlEffetCible                = 'Cible';
+      ConstXmlEffetForme                = 'Forme';
+      ConstXmlEffetFacteur              = 'Facteur';
+      ConstXmlEffetCarac                = 'Carac';
+
+      // Les trois Formes de <Effet>, vocabulaire ferme.
+      ConstFormeEffetAdditif                = 'Additif';
+      ConstFormeEffetProportionnelAttribut  = 'ProportionnelAttribut';
+      ConstFormeEffetDrapeau                = 'Drapeau';
+
+      // Les Cibles de <Effet> aujourd'hui prises en charge, vocabulaire ferme : les noms
+      // des variables de calcul historiques de pdfpersonnage.pas (Mouv/Chance/Determine ne
+      // sont pas ici, deja sorties du case le 06/09/2026 vers le mecanisme ModifyCarac).
+      ConstCibleEffetDurACuire           = 'DurACuire';
+      ConstCibleEffetBonusEncomb         = 'BonusEncomb';
+      ConstCibleEffetTBonusCC            = 'TBonusCC';
+      ConstCibleEffetTBonusCT            = 'TBonusCT';
+      ConstCibleEffetBonusSprint         = 'BonusSprint';
+      ConstCibleEffetAmePure             = 'AmePure';
+
       // constantes de passage d'étapes de création de personnages
       ConstSuivant			= 1;
 
@@ -403,16 +433,15 @@ Const
 
       // Talents qui donnent des bonus
       TalentGenerique                   = 'RULES-T*';
-      TalentAmePure                     = 'T0005';
-      TalentDurACuire                   = 'T0047';
-      TalentCostaud                     = 'T0035';
-      TalentVeloce                      = 'T0162';
-      TalentChanceux                    = 'T0020';
-      TalentObstine                     = 'T0107';
-      TalentCoutPuissant                = 'T0037';
+      // TalentAmePure / TalentDurACuire / TalentCostaud / TalentCoutPuissant /
+      // TalenttirPrecis / TalentSprinteur SUPPRIMEES le 10/09/2026 : generalisees en
+      // <Effet Cible="..."/> (ChargeTalentEffet, PersonnageTalentEffet dans
+      // pdfpersonnage.pas), plus de code de talent en dur pour ces six-la. Voir
+      // A FAIRE.txt "GENERICISER LE CASE DE CALCUL DES TALENTS".
+      // TalentVeloce / TalentChanceux / TalentObstine deja mortes depuis le 06/09/2026
+      // (migrees vers ModifyCarac/PersonnageTalentAttributModif) mais pas encore
+      // retirees ici - hors perimetre de ce chantier, voir A FAIRE.txt.
       TalentHaineSacree                 = 'T0070';
-      TalenttirPrecis                   = 'T0149';
-      TalentSprinteur                   = 'T0145';
       // TalentSortBenediction / TalentSortMiracle / TalentSortMagieMineure / TalentSortDomaine
       // ('T0012'/'T0080'/'T0089'/'T0088') SUPPRIMEES le 23/08/2026 : la liste des talents qui
       // donnent acces aux sorts vit maintenant dans les donnees, balises <Magic>/<SpellMode>

@@ -2282,3 +2282,44 @@ pour qu'il soit charge - c'est la meme case a cocher que pour tout autre livre, 
 special au premier chargement d'un livre de fan.
 COMPILE ET VALIDE PAR NONO LE MEME JOUR : BOOK PERSO coche, Gunther Krieg affiche bien la
 Coiffe et la Cotte de maille. Chantier clos.
+
+10/09/2026 - GENERICISATION DU CALCUL DES TALENTS (Effet/Cible/Forme), COMPILE ET VALIDE
+Chantier ouvert en A FAIRE.txt le 06/09/2026, mis de cote pour faire les Ordres de chevalerie
+et les Regiments of Renown en premier ("les deux chantiers ne se bloquent pas l'un l'autre") -
+repris une fois ceux-ci clos. But pose par Nono en cours de route : generique au point de ne
+PLUS AVOIR DE CODE DE TALENT EN DUR, pas seulement fusionner les quatre blocs dupliques.
+MECANISME : balise <Effet Cible="..." Forme="Additif|ProportionnelAttribut|Drapeau"
+Facteur="N" Carac="..."/> posable sur N'IMPORTE QUEL talent (pas seulement les six vises a
+l'origine). Cible reste un vocabulaire ferme cote code (comme DISPO/CLASS) - les six variables
+historiques DurACuire/BonusEncomb/TBonusCC/TBonusCT/BonusSprint/AmePure (Mouv/Chance/Determine
+deja sorties du case le 06/09/2026 vers ModifyCarac). Perimetre volontairement REDUIT apres
+discussion avec Nono : le mecanisme <Attribut> existant (liste des caracteristiques de TEST
+d'un talent, +5 au score) rentrerait dans le meme moule mais migrer tous les talents qui le
+portent + reecrire PdfPersonnageAttribut (bien plus utilise) est un chantier a part entiere -
+laisse pour plus tard, decision de Nono.
+Collision de nom trouvee et evitee avant d'ecrire : une constante ConstXmlEffet = 'Effet'
+existait deja (chargeconstantes.pas l.132), jamais utilisee nulle part dans le projet -
+laissee intacte (pas su a quoi elle etait destinee a l'origine), la nouvelle balise nommee
+ConstXmlEffetTalent a la place. Et l'attribut Carac= choisi plutot que Attribut= sur <Effet>
+pour ne pas reprendre le nom de la balise <Attribut> existante (notion differente).
+NOUVELLE UNITE ChargeTalentEffet (StructureTalentEffet/ListTalentEffet), enregistree dans le
+.lpi, parsing branche dans xmlexportimport.pas (meme moule que ModifyCarac), cycle de vie dans
+warhammersource.pas. Fonction generique PersonnageTalentEffet(Personnage, Cible) dans
+pdfpersonnage.pas (a besoin de PdfPersonnageAttribut pour le cas ProportionnelAttribut, d'ou
+sa place dans ce fichier plutot que chargepersonnage.pas) + PersonnageTalentEffetRang pour le
+rang brut (ValDurACuire, affichage Feldo2P uniquement).
+CABLEE A CINQ ENDROITS, pas quatre : en explorant le fichier, un CINQUIEME calcul d'Ame Pure
+en dur a ete trouve dans PersonnageCorruptionTotal (plafond de corruption), pas repere dans le
+rapport d'exploration initial - meme mecanisme cable au passage.
+Les six talents (RULES-T0005 Pure Soul, T0035 Sturdy, T0037 Strike Mighty Blow, T0047 Hardy,
+T0145 Sprinter, T0149 Accurate Shot) tagues <Effet> dans BOOK_RULESBOOK.Xml. Six constantes
+TalentXxx retirees de chargeconstantes.pas (plus de code de talent en dur pour celles-la). Au
+passage, trois AUTRES constantes deja mortes depuis la migration Mouv/Chance/Determine du
+06/09/2026 (TalentVeloce/TalentChanceux/TalentObstine, plus utilisees que dans des commentaires)
+retirees aussi - trouvees en verifiant qu'aucune des six premieres n'etait referencee ailleurs.
+TESTE PAR NONO sur Gunther Krieg (porte Hardy rang 1 et Strike Mighty Blow rang 1) : bonus de
+degats CC toujours +1, Blessures toujours justes avec le bonus Hardy - les deux Formes
+(Additif et ProportionnelAttribut) valables sur un cas reel, aucune regression.
+RESTE : la Forme Drapeau (Sprinter) et les deux autres Additif (Sturdy, Accurate Shot, Pure
+Soul) ne sont testes sur aucun personnage existant - a surveiller au prochain personnage qui
+les prend. TalentHaineSacree et TalentGenerique restent utilisees, non touchees.

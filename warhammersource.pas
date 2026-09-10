@@ -19,7 +19,7 @@ uses
   ChargeFabrication, Unitcalcul, ChargeMetierSousMetier,
   ChargeMetierRaceChoixMetier, ChargePersonnage, ChargeRaceCreation,
   ChargeTraduction, ChargeArmureSimplifie, ChargeLivre,
-  ChargeTalentAttributModif, ChargeTalentCompetenceModif,
+  ChargeTalentAttributModif, ChargeTalentEffet, ChargeTalentCompetenceModif,
   ChargeTalentCompetenceAjoute, ChargeRaceCorruptionCreation,
   ChargeCorruptionTable, ChargeRaceOpinion, ChargeArmureBonusModif,
   ChargeCorruptionAttributModif, ChargeCorruptionCompetenceModif,
@@ -634,6 +634,7 @@ procedure TMenu.ChargerLivre(ForceMaJ: Boolean; ForceLivre: String);
         nbCorruptionTable           := 0;
         nbCorruptionChance          := 0;
         NbTalentAttributModif       := 0;
+        NbTalentEffet                := 0;
         NbTalentCompetenceModif     := 0;
         NbTalentCompetenceAjoute    := 0;
         NbTalentArmureModif         := 0;
@@ -686,6 +687,7 @@ procedure TMenu.ChargerLivre(ForceMaJ: Boolean; ForceLivre: String);
         ListCorruptionTable.Clear;
         ListCorruptionChance.Clear;
         ListTalentAttributModif.Clear;
+        ListTalentEffet.Clear;
         ListTalentCompetenceModif.Clear;
         ListTalentCompetenceAjoute.Clear;
         ListRaceOpinion.Clear;
@@ -892,6 +894,7 @@ procedure TMenu.FormCreate(Sender: TObject);
        ListCorruptionTable          := TListCorruptionTable.Create;
        ListCorruptionChance         := TListCorruptionChance.Create;
        ListTalentAttributModif      := TListTalentAttributModif.Create;
+       ListTalentEffet               := TListTalentEffet.Create;
        ListTalentCompetenceModif    := TListTalentCompetenceModif.Create;
        ListTalentCompetenceAjoute   := TListTalentCompetenceAjoute.Create;
        ListRaceOpinion              := TListRaceOpinion.Create;
