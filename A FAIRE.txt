@@ -31,25 +31,6 @@ test ignore aussi le livre, alors que le CompareRechercheValeur juste a cote le 
 NATIO-T0012_X matcherait un RULES-T0012_Y. Sans effet connu aujourd hui, releve le 05/09/2026
 en supprimant la dependance aux variables globales.
 
-RULES-ARMO_98 ET RULES-ARMO_99 SONT DES SETS D ARMURE, REGLE DU MJ, A MODELISER. Coiffe de
-maille et Cotte de maille, ajoutes le 05/09/2026 dans les deux Rulebooks pour equiper Gunther.
-Ce ne sont ni les pieces de la p.299 (Mail Coif = ARMO_08, Mail Coat = ARMO_09, encombrements
-2 et 3) ni l option Quick Armour de la p.300 (deja modelisee en ArmorSimp ARMO_01_SIMP a
-ARMO_03_SIMP). Nono confirme que c est une regle de sa table. Les valeurs saisies different du
-livre : Enc 1 au lieu de 2 pour la coiffe, Enc 2 et bras+corps+jambes au lieu de Enc 3 et
-bras+corps pour la cotte.
-
-DECIDER OU VIVENT LES SETS D ARMURE DU MJ. Ils sont aujourd hui dans RULES- avec des numeros
-98 et 99 choisis pour ne pas decaler la suite, ce qui les fait passer pour des pieces du
-Rulebook et cree deux armures de meme nom que ARMO_08 et ARMO_09. A trancher : livre propre au
-MJ avec son prefixe et une numerotation normale, ou marquage explicite dans le Rulebook.
-
-LES DEUX SETS DU RULEBOOK ANGLAIS PORTENT UNE DESCRIPTION EN FRANCAIS. BOOK_RULESBOOK.Xml,
-ARMO_98 et ARMO_99 : <Description language="FRANCAIS"> recopie du fichier francais, alors que
-leurs voisines du meme fichier sont en ENGLISH. Avec LANG=ENGLISH dans INI.TXT le libelle
-risque de ne pas sortir. Une ligne a corriger dans chacune, quand la question du livre
-d accueil sera tranchee.
-
 WINPERSONNAGE L.3248 S APPUIE SUR LES VARIABLES GLOBALES DU DERNIER DECOUPE. Le test
 copy(CodeValeur,1,5) = copy(CodeRecherche,1,5) lit l etat laisse par l appel precedent a
 CompareRechercheValeur au lieu de comparer ses propres chaines. Sans effet aujourd hui, mais
@@ -1141,10 +1122,6 @@ chantier :
     "Invocation de Sigmar (Empire)" alors que l'anglais est passe a "Bless (Sigmar)" /
     "Invoke (Sigmar)". Si la convention anglaise fait foi, la francaise devrait suivre -
     "Benediction (Sigmar)" et "Invocation (Sigmar)" - mais c'est une decision de traduction.
-  * RULES-ARMO_98 "Coiffe de maille" et RULES-ARMO_99 "Cotte de maille" subsistent dans
-    BOOK_RULESBOOK_FRANCAIS.Xml apres leur retrait du fichier anglais. Elles n'y sont
-    referencees par rien : ce sont des TRADUCTIONS ORPHELINES, invisibles dans le programme.
-    Les supprimer est du menage, pas un correctif.
 
 
 =========================================================================

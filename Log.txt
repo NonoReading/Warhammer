@@ -2255,3 +2255,30 @@ tous deux le regiment a l'ecran de choix ; un Nordlander (hors liste) ne le voit
 extension et selectivite validees.
 Les onze Regiments of Renown sont donc entierement termines et valides. Chantier suivant :
 a definir avec Nono.
+
+10/09/2026 - SETS D'ARMURE DU MJ RELOGES DANS UN LIVRE PERSO DEDIE
+Decision de Nono : au lieu de continuer a cacher la Coiffe et la Cotte de maille (regle de sa
+table) dans RULES-ARMO_98/99 sous un faux air de Rulebook officiel, creation d'un livre BOOK
+PERSO (prefixe PERSO, <OFFICIAL>2</OFFICIAL>) destine a recevoir au fil du temps tous ses
+ajouts et regles maison, sur le meme mecanisme deja utilise par BOOK_GREEN_IZ_BEST.Xml
+(livre de fan, marque "(F)" devant son nom par chargetexte.pas). Aucun code nouveau : le
+chargement scanne le dossier DATABASE\ dynamiquement (warhammersource.pas l.717) et lit le
+prefixe directement dans <CODE_BOOK> (xmlexportimport.pas l.1130), donc deposer un fichier de
+plus suffit. Point d'attention releve au passage et sans consequence pour jouer : le switch
+XmlCodeLivre (xmlexportimport.pas l.121-141), utilise seulement a l'EXPORT depuis WinLivre,
+ne connait pas "BOOK PERSO" - a completer si Nono reexporte un jour ce livre depuis l'ecran.
+PERSO-ARMO_01 (Coiffe) et PERSO-ARMO_02 (Cotte) crees avec les memes caracteristiques
+qu'avant (Enc 1/tete, Enc 2/bras+corps+jambes). Decision de langue de Nono : texte en
+francais, marque language="ENGLISH" pour s'afficher sous LANG=ENGLISH (le livre etant
+personnel, pas une traduction d'un ouvrage officiel, la convention "que de l'anglais dans un
+livre anglais" du 25/08 ne s'y applique pas).
+RULES-ARMO_98/99 retires des deux fichiers Rulebook (anglais et francais - l'entree francaise
+etait deja une traduction orpheline depuis le 25/08, cf A FAIRE.txt). Les 9 sauvegardes de
+Gunther Krieg qui les referencaient (SAVED_CARACTERS\Gunther Krieg\*.xml) migrees vers
+PERSO-ARMO_01/02. Item A FAIRE.txt "decider ou vivent les sets d'armure du MJ" et ses deux
+voisins (description francaise egaree, traduction orpheline) retires, resolus.
+RESTE : Nono doit encore selectionner/cocher BOOK PERSO dans le tableau des livres (WinLivre)
+pour qu'il soit charge - c'est la meme case a cocher que pour tout autre livre, rien de
+special au premier chargement d'un livre de fan.
+COMPILE ET VALIDE PAR NONO LE MEME JOUR : BOOK PERSO coche, Gunther Krieg affiche bien la
+Coiffe et la Cotte de maille. Chantier clos.

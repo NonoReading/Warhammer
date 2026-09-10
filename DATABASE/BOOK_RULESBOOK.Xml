@@ -14475,26 +14475,6 @@ Armour is generally damaged in one of two ways:
 <ArmorPoint>"2"</ArmorPoint>
 <Type>"RULES-ARMOT_MAIL"</Type>
 </Armor>
-<Armor id="RULES-ARMO_98">
-<Description language="FRANCAIS">"Coiffe de maille"</Description>
-<Availability>"RULES-DISPO_LIMITED"</Availability>
-<Price>"1CO"</Price>
-<Encumbrance>"1"</Encumbrance>
-<Quality>"RULES-ARMOB_01,RULES-ARMOB_03,RULES-ARMOB_06"</Quality>
-<Location>"RULES-ARMOL_HEAD"</Location>
-<ArmorPoint>"2"</ArmorPoint>
-<Type>"RULES-ARMOT_MAIL"</Type>
-</Armor>
-<Armor id="RULES-ARMO_99">
-<Description language="FRANCAIS">"Cotte de maille"</Description>
-<Availability>"RULES-DISPO_COMMON"</Availability>
-<Price>"3CO"</Price>
-<Encumbrance>"2"</Encumbrance>
-<Quality>"RULES-ARMOB_01,RULES-ARMOB_05"</Quality>
-<Location>"RULES-ARMOL_ARM,RULES-ARMOL_BODY,RULES-ARMOL_LEG"</Location>
-<ArmorPoint>"2"</ArmorPoint>
-<Type>"RULES-ARMOT_MAIL"</Type>
-</Armor>
 <Armor id="RULES-ARMO_10">
 <Description language="ENGLISH">"Bracers"</Description>
 <Availability>"RULES-DISPO_RARE"</Availability>

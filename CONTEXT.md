@@ -1,6 +1,25 @@
 # Warhammer — Contexte projet
 
-**Dernière mise à jour : 10/09/2026 — LES ONZE REGIMENTS OF RENOWN TERMINÉS ET VALIDÉS,
+**Dernière mise à jour : 10/09/2026 — CRÉATION DE `BOOK_PERSO.Xml`, LIVRE MAISON DE NONO,
+COMPILÉ ET VALIDÉ.** BOOK PERSO coché dans WinLivre, Gunther Krieg affiche bien la Coiffe et
+la Cotte de maille (`PERSO-ARMO_01`/`02`).
+Sur l'item A FAIRE « décider où vivent les sets d'armure du MJ » : nouveau livre `BOOK PERSO`
+(préfixe `PERSO`, `<OFFICIAL>2</OFFICIAL>`) destiné à recevoir au fil du temps tous les ajouts
+et règles maison de Nono, réutilisant tel quel le mécanisme déjà en place pour les livres de
+fan (`BOOK_GREEN_IZ_BEST.Xml`, marqué `(F)` devant son nom — `chargetexte.pas`) : aucun code
+nouveau, le chargement scanne `DATABASE\` dynamiquement et lit le préfixe dans `<CODE_BOOK>`.
+`PERSO-ARMO_01`/`02` (Coiffe/Cotte de maille) y remplacent `RULES-ARMO_98`/`99`, retirées des
+deux fichiers Rulebook ; les 9 sauvegardes de Gunther Krieg qui les référençaient migrées.
+Décision de langue de Nono : texte français, marqué `language="ENGLISH"` pour s'afficher sous
+`LANG=ENGLISH` (livre personnel, pas une traduction d'un ouvrage officiel — la convention
+« que de l'anglais dans un livre anglais » du 25/08 ne s'y applique pas). **Reste : Nono doit
+cocher `BOOK PERSO` dans le tableau des livres (WinLivre) pour qu'il soit chargé.** Point
+signalé, sans effet pour jouer : le switch `XmlCodeLivre` (export uniquement,
+`xmlexportimport.pas` l.121-141) ne connaît pas encore `BOOK PERSO`, à compléter si Nono
+réexporte un jour ce livre depuis WinLivre. Détail en `Log.txt`. **Chantier suivant : à
+définir avec Nono** (reste ouvert depuis le 10/09, avant cet aparté).
+
+**10/09/2026 — LES ONZE REGIMENTS OF RENOWN TERMINÉS ET VALIDÉS,
 EXTENSION `<Specie>` À LISTE CONFIRMÉE SUR CARROBURG.** Après le lot des 17 Ordres de
 chevalerie (§2.51), chantier suivant enchaîné le jour même : les onze Regiments of Renown
 (§2.44 point de reprise 2) saisis dans `BOOK_NATIONS_OF_MANKIND.Xml`, un seul `<Talent>`

@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<DATA_BOOK>
+<CODE_BOOK>"PERSO"</CODE_BOOK>
+<BOOK>"BOOK PERSO"</BOOK>
+<language>"ENGLISH"</language>
+<VERSION>"20260910"</VERSION>
+<OFFICIAL>"2"</OFFICIAL>
+<COMPLETE>"1"</COMPLETE>
+<DATA_ARMOR>
+<Armor id="PERSO-ARMO_01">
+<Description language="ENGLISH">"Coiffe de maille"</Description>
+<Availability>"RULES-DISPO_LIMITED"</Availability>
+<Price>"1CO"</Price>
+<Encumbrance>"1"</Encumbrance>
+<Quality>"RULES-ARMOB_01,RULES-ARMOB_03,RULES-ARMOB_06"</Quality>
+<Location>"RULES-ARMOL_HEAD"</Location>
+<ArmorPoint>"2"</ArmorPoint>
+<Type>"RULES-ARMOT_MAIL"</Type>
+</Armor>
+<Armor id="PERSO-ARMO_02">
+<Description language="ENGLISH">"Cotte de maille"</Description>
+<Availability>"RULES-DISPO_COMMON"</Availability>
+<Price>"3CO"</Price>
+<Encumbrance>"2"</Encumbrance>
+<Quality>"RULES-ARMOB_01,RULES-ARMOB_05"</Quality>
+<Location>"RULES-ARMOL_ARM,RULES-ARMOL_BODY,RULES-ARMOL_LEG"</Location>
+<ArmorPoint>"2"</ArmorPoint>
+<Type>"RULES-ARMOT_MAIL"</Type>
+</Armor>
+</DATA_ARMOR>
+</DATA_BOOK>
