@@ -2458,3 +2458,28 @@ sort/equipement via TalentSort).
 COMPILE ET VALIDE PAR NONO, aucun probleme constate : le talent Big ajoute a un personnage
 apparait directement dans le tableau sans sauvegarder. Accesseur unique Attribut/Competence
 donc termine sur son perimetre complet (Attributs, Competences, Talent, Equipement).
+
+11/09/2026 - SKULL TROPHIES (NATIONS OF MANKIND, PAGE 61) SAISIES, COMPILEES ET VALIDEES
+PAR NONO (CONTEXT.md 2.53). Derniere ligne non saisie du tableau d armures/accessoires,
+bloquee jusque-la sur trois points discutes avec Nono avant d ecrire : emplacement "Any" hors
+du vocabulaire ferme (nouveau code RULES-ARMOL_ANY, BOOK_RULESBOOK.Xml, sans effet sur le
+calcul de PA puisque cet objet n en donne aucun) ; qualite Ugly imprimee directement sur la
+ligne, contrairement aux 28 pieces forgees ou Ugly est une qualite de FABRICATION posee par le
+joueur (RULES-DEFECT_02), jamais sur le catalogue - nouveau code NATIO-ARMOB_15, distinct de
+RULES-DEFECT_02 ; qualite Fear 1 sans equivalent code, Fear (trait de creature) n etant
+mecanise nulle part dans le projet - nouveau code NATIO-ARMOB_16, purement descriptif, premier
+usage reel du suffixe numerique deja code mais jamais exerce dans GetAllArmureBonusLibelle
+(chargearmurebonus.pas).
+Ce premier usage a debusque un bug dans WinArmor (winarmor.pas, TabArmorSelection) : le
+suffixe numerique n etait pas retire avant ChercheArmureBonus (comparaison stricte), la ligne
+Fear ressortait vide alors qu Ugly (sans suffixe) s affichait normalement. Corrige en
+extrayant le suffixe avant la recherche et en le rattachant au libelle trouve, meme principe
+que GetAllArmureBonusLibelle. Verifie en creusant : le rendu PDF d un personnage portant
+reellement l objet (pdfpersonnage.pas) n avait pas ce bug, via une methode plus fragile deja
+en place (retire un suffixe de longueur fixe, casserait sur un indice a deux chiffres) -
+signe dans A FAIRE.txt comme point de vigilance, non corrige (aucune donnee de ce type
+aujourd hui).
+COMPILE ET VALIDE PAR NONO : Ugly puis Fear s affichent correctement dans WinArmor.
+Question ouverte soulevee par Nono en cloturant : les traits de creature (Fear, Terror...)
+arrivent par trois portes non reliees (mutation, qualite d objet, talent/sort) et aucune n est
+mecanisee - chantier de genericisation possible, pas engage, note dans A FAIRE.txt.

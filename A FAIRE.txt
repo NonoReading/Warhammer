@@ -50,11 +50,21 @@ Nations donne Athletics, Endurance, Melee (Two-Handed), Language (Bretonnian) ; 
 Middenheim donne Evaluate, Ranged (Bow), Trade (Any), Fisherman/Rover la ou Nations donne
 Cool, Ranged (Throwing), Row, Hardy. A rouvrir seulement si l ecart gene en jeu.
 
-LES SKULL TROPHIES DE NATIONS OF MANKIND NE SONT PAS SAISIS. Page 61. Leur emplacement est
-"Any" et leur PA vide, or la LOCALISATION est un vocabulaire FERME - pdfpersonnage.pas
-l.1626-1629 fait un case sur les quatre constantes BonusTete/BonusBras/BonusCorps/BonusJambes,
-un cinquieme emplacement ne serait pas compte. Leurs qualites Fear 1 et Ugly n ont pas
-davantage de place, Fear etant un trait de creature. Seule ligne du tableau non saisie.
+[FAIT LE 11/09/2026 - Skull Trophies saisies (NATIO-ARMO_29), compilees et validees par Nono.
+Nouveau code d emplacement RULES-ARMOL_ANY, nouvelles qualites d armure NATIO-ARMOB_15 (Ugly,
+distincte de RULES-DEFECT_02 qui reste reserve a la fabrication) et NATIO-ARMOB_16 (Fear,
+purement descriptive, premier usage reel du suffixe numerique de GetAllArmureBonusLibelle).
+Bug trouve et corrige au passage dans WinArmor (winarmor.pas, TabArmorSelection) : le suffixe
+numerique n etait pas retire avant ChercheArmureBonus, la ligne Fear ressortait vide. Detail
+CONTEXT.md 2.53, Log.txt.]
+
+WINARMOR/PDFPERSONNAGE : LE RETRAIT DU SUFFIXE NUMERIQUE D UNE QUALITE D ARMURE SUPPOSE UN
+INDICE A UN SEUL CHIFFRE. pdfpersonnage.pas l.1799-1800 et l.3034-3035 retirent le suffixe
+d une qualite (ex. "ARMOB_16 1") en coupant les 2 derniers caracteres, pas en cherchant
+l espace comme le fait GetAllArmureBonusLibelle (corrige dans winarmor.pas le 11/09/2026,
+CONTEXT.md 2.53). Fonctionne pour un chiffre unique (Fear 1), casserait sur un indice a deux
+chiffres ou plus. Sans effet aujourd hui, aucune donnee de ce type n existe. A corriger la
+ou verifier si un futur indice a deux chiffres apparait.
 
 LA QUANTITE DES MUNITIONS DE NATIONS OF MANKIND EST UNE DEDUCTION. Les trois Arrow (Armor
 Piercing / Incendiary / Screamer) portent Ammunition 12, repris du Rulebook : le livre ne dit
@@ -144,6 +154,20 @@ A reprendre avec le morceau "creatures" du lot 3 si on veut de vraies creatures.
 =========================================================================
 CONCEPTIONS A MENER  (chantiers a part entiere, ne pas les melanger)
 =========================================================================
+
+LES TRAITS DE CREATURE (FEAR, TERROR...) ARRIVENT PAR TROIS PORTES NON RELIEES ET AUCUNE
+N EST MECANISEE. Souleve par Nono le 11/09/2026 en cloturant Skull Trophies (CONTEXT.md 2.53) :
+un trait de creature peut venir d une mutation (tables de corruption de Nations of Mankind,
+"Gain the Fear 2 Creature Trait"), d une qualite d objet (NATIO-ARMOB_16 "Fear", ce chantier),
+ou d un talent/sort qui l octroie (ex. High Elf Player s Guide, "temporarily gain the Fear 1
+Creature Trait") - toujours en texte descriptif dans une Explanation, jamais en donnee
+structuree. Une representation generique (vocabulaire ferme, peut-etre reutilisable pour
+Terror/Frightening) serait un chantier a part entiere, pas engage.
+Piste proposee par Nono (11/09/2026, reflexion rapide, a affiner) : une table A PART pour les
+traits, plutot que rattachee a la mutation/l objet qui les donne. Les traits d un personnage
+seraient ajoutes dans une table cote Personnage, chaque ligne portant son ORIGINE (mutation,
+arme, armure, ...) - plutot qu une simple liste de codes, pour pouvoir remonter a la source
+et gerer le cumul/retrait si l origine disparait (arme revendue, mutation soignee...).
 
 [FAIT LE 07/09/2026 - mecanisme generique Nation ecrit et compile, voir CONTEXT.md 2.51.
 Reste : les autres regroupements du meme genre (Bretagne HBRPA/HBRNO, Estalie HESTA,

@@ -1,16 +1,22 @@
 # Warhammer — Contexte projet
 
-**Dernière mise à jour : 11/09/2026 — ACCESSEUR UNIQUE ATTRIBUT/COMPETENCE INTÉGRALEMENT
-TERMINÉ, LES QUATRE RESYNCS COMPILÉS ET VALIDÉS PAR NONO (§2.52).** Après les deux étapes
-Attributs (10/09) et Compétences (11/09), le résidu noté en fin de §2.52
-(`AugmentationTalent`/`Equipement` non resynchronisés dans `CalculTotaux`) a été traité le jour
-même, même fichier même endroit (`winpersonnage.pas`, `CalculTotaux`) : deux resyncs
-supplémentaires ajoutés à l'identique de ceux déjà faits avant sauvegarde
-(`CalculTableExperience` ~l.4922/~l.4932), placés avant les boucles Attributs/Compétences
-puisque `PdfPersonnageAttribut`/`PdfPersonnageCompetence` en dépendent (talent à bonus direct,
-arme/armure magique). **Confirmé par Nono : le talent Big ajouté à un personnage apparaît
-directement dans le tableau sans sauvegarder.** Le chantier accesseur unique est donc clos sur
-son périmètre complet. Détail en §2.52. **Chantier suivant : à définir avec Nono.**
+**Dernière mise à jour : 11/09/2026 — SKULL TROPHIES (NATIONS OF MANKIND, PAGE 61) SAISIES,
+COMPILÉES ET VALIDÉES PAR NONO (§2.53).** Seule ligne non saisie du tableau d'armures restait
+bloquée sur trois points : emplacement "Any" hors du vocabulaire fermé, qualité Ugly imprimée
+directement sur la ligne (contrairement aux 28 pièces forgées où Ugly est une qualité de
+FABRICATION posée par le joueur, jamais sur le catalogue), et qualité Fear 1 sans aucun
+équivalent codé (trait de créature, jamais mécanisé dans le projet). Décidé avec Nono : nouveau
+code d'emplacement `RULES-ARMOL_ANY` (`BOOK_RULESBOOK.Xml`), nouvelles qualités d'armure
+`NATIO-ARMOB_15` (Ugly, distincte de `RULES-DEFECT_02` qui reste réservé à la fabrication) et
+`NATIO-ARMOB_16` (Fear, purement descriptive), cette dernière premier usage réel du suffixe
+numérique de `GetAllArmureBonusLibelle` (`"NATIO-ARMOB_16 1"` → "Fear 1"). Ce premier usage a
+débusqué un bug dans `WinArmor` (`TabArmorSelection`, `winarmor.pas`) : la fenêtre ne retirait
+pas ce suffixe avant `ChercheArmureBonus`, donc la ligne Fear ressortait vide — corrigé au même
+endroit. **Confirmé par Nono : Ugly puis Fear s'affichent correctement dans WinArmor.** Détail
+en §2.53. **Question ouverte soulevée par Nono en fin de chantier** : les traits de créature
+(Fear, Terror...) arrivent par trois portes non reliées (mutation, qualité d'objet, talent/sort)
+et aucune n'est mécanisée — chantier de généricisation possible, pas encore engagé, voir
+`A FAIRE.txt`. **Chantier suivant : à définir avec Nono.**
 
 **10/09/2026 — GÉNÉRICISATION DU CALCUL DES TALENTS (`<Effet>`),
 COMPILÉE ET VALIDÉE.** Chantier A FAIRE.txt repris après les Ordres/Regiments. But posé par
@@ -6090,7 +6096,73 @@ son périmètre.
 - `StructureDonnee` (`pdfpersonnage.pas`) ne porte toujours que Base/Augmentation/Total, pas
   code/libellé/carac liée — pas nécessaire pour ce chantier, à revoir si un futur appelant en a
   besoin (voir l'idée d'origine du 06/09 dans `A FAIRE.txt`).
-- **Chantier suivant : à définir avec Nono.**
+
+---
+
+### 2.53 Skull Trophies (Nations of Mankind, page 61) — saisies, compilées et validées par Nono (11/09/2026)
+
+**Origine.** Dernière ligne non saisie du tableau "Auxiliary Armor and Accessories" (page 61,
+`PDF_TEXTE\Nations of Mankind.txt` l.4160-4164) : Prix/Disponibilité/PA tous à `--`, emplacement
+"Any", qualités "Fear 1, Ugly". Notée bloquée dans `A FAIRE.txt` depuis la saisie du reste du
+tableau (`NATIO-ARMO_01` à `_28`).
+
+**Trois obstacles, discutés et tranchés avec Nono avant d'écrire (pas une simple saisie) :**
+
+1. **Emplacement "Any" hors du vocabulaire fermé** — `pdfpersonnage.pas` (l.1750-1757 et
+   l.2977-2984, les deux seuls endroits qui lisent `<Location>`) compare directement aux quatre
+   codes connus (`RULES-ARMOL_HEAD/ARM/BODY/LEG`) sans validation ni plantage sur un code
+   inconnu : un code non reconnu est simplement ignoré du total de PA. Sans effet chiffré ici
+   puisque Skull Trophies ne donne aucun PA. Décision : étendre proprement le vocabulaire plutôt
+   que laisser le champ vide — nouveau `<Text name="RULES-ARMOL_ANY">"Any"</Text>` dans
+   `BOOK_RULESBOOK.Xml`.
+2. **Ugly n'est pas une qualité d'armure ici — piège déjà signalé dans un commentaire du XML
+   existant** (l.10298-10302) : sur les 28 pièces forgées, Ugly/Bulky/Durable/Fine/Practical
+   sont des qualités de FABRICATION posées par le joueur via la fenêtre Fabrication
+   (`RULES-DEFECT_02` pour Ugly), jamais sur l'entrée de catalogue. Mais sur la ligne Skull
+   Trophies, Ugly est imprimée directement dans la même colonne que les vraies qualités
+   d'armure des autres accessoires (Missile Resistant, Durable, Partial...) : c'est une qualité
+   intrinsèque de l'objet, pas un choix de fabrication. Décision : nouveau code d'armure
+   `NATIO-ARMOB_15` "Ugly", distinct de `RULES-DEFECT_02` — garde la frontière que le
+   commentaire existant avait justement posée.
+3. **Fear 1 sans aucun équivalent codé** — Fear (trait de créature) n'est mécanisé nulle part
+   dans le projet, toujours du texte descriptif dans l'Explanation d'un talent, d'une mutation
+   ou d'un sort (vérifié : aucun fichier `.pas` ne contient "Fear"). Décision : nouveau code
+   `NATIO-ARMOB_16` "Fear", purement descriptif comme Spiked/Corrupted/Missile Resistant
+   ci-dessus, avec le suffixe numérique séparé par un espace (`"NATIO-ARMOB_16 1"`) — mécanisme
+   déjà écrit dans `GetAllArmureBonusLibelle` (`chargearmurebonus.pas`, commentaire "ARMOB_18 2")
+   mais **jamais exercé par aucune donnée jusqu'ici**.
+
+**Écriture.** `NATIO-ARMO_29` ajoutée dans `DATA_ARMOR` (`BOOK_NATIONS_OF_MANKIND.Xml`), après
+Mirror Armor : Prix/Disponibilité `"-"` (convention déjà utilisée ailleurs pour "non vendu",
+ex. Chaos Breastplate), Encombrement et PA à `"0"`, `<Location>"RULES-ARMOL_ANY"</Location>`,
+`<Quality>"NATIO-ARMOB_16 1,NATIO-ARMOB_15"</Quality>`, `<Type>"RULES-ARMOT_SOFTKITS"</Type>`
+(même type que Horo Cloak, autre accessoire à 0 PA). Les deux nouvelles `BonusMalus` ajoutées à
+la suite de `NATIO-ARMOB_14`. Commentaires de comptage mis à jour (28→29 pièces, six→huit
+qualités d'armure).
+
+**Bug débusqué par ce premier usage réel du suffixe numérique, corrigé le même jour.**
+`WinArmor.TabArmorSelection` (`winarmor.pas`) découpe la liste de qualités par virgule pour
+remplir `TabBonus`, mais — contrairement à `GetAllArmureBonusLibelle` — ne retirait pas le
+suffixe numérique avant `ChercheArmureBonus` (comparaison stricte sur le code) : la ligne Fear
+ressortait vide, alors qu'Ugly (sans suffixe) s'affichait normalement. Corrigé en extrayant le
+suffixe avant la recherche et en le rattachant au libellé trouvé, même principe que
+`GetAllArmureBonusLibelle`. Point vérifié en creusant : le rendu PDF d'un personnage portant
+réellement l'objet (`pdfpersonnage.pas` l.1786-1810 et le bloc Feldo2P miroir l.3021-3045)
+n'avait PAS ce bug — il fait déjà, avec une méthode plus fragile (retire un suffixe de longueur
+fixe 2 caractères, donc cassable par un futur indice à deux chiffres, ex. "10"), la même
+extraction. Signalé dans `A FAIRE.txt` comme point de vigilance, non corrigé (spéculatif tant
+qu'aucune donnée à deux chiffres n'existe).
+
+**COMPILÉ ET VALIDÉ PAR NONO** : Ugly puis Fear s'affichent correctement dans `WinArmor`.
+
+**Question ouverte soulevée par Nono en fin de chantier, non engagée :** les traits de créature
+(Fear, Terror...) arrivent par (au moins) trois portes non reliées entre elles — mutation (ex.
+tables de corruption de ce même livre, "Gain the Fear 2 Creature Trait"), qualité d'objet (ce
+chantier), talent/sort qui l'octroie — et aucune n'est mécanisée, toutes en texte descriptif.
+Une représentation générique serait un chantier à part entière, plus large que celui-ci. Noté
+dans `A FAIRE.txt`, section conceptions à mener.
+
+**Chantier suivant : à définir avec Nono.**
 
 ---
 

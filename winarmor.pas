@@ -239,6 +239,7 @@ var
   PArmureBonus: StructureArmureBonus;
   PArmureBonusModif: StructureArmureBonusModif;
   Bonus:        String;
+  Suffixe:      String;
   CheminImage1: String;
   CheminImage2: String;
   CheminImage3: String;
@@ -266,9 +267,19 @@ begin
 
     For ind := 0 to NbBonus - 1 do
       begin
-        Bonus := ExtractChaine(',', ListeBonus, Ind+1);
+        Bonus := Trim(ExtractChaine(',', ListeBonus, Ind+1));
+        // Une qualite peut porter un indice numerique separe par un espace (ex. "ARMOB_16 1"
+        // pour Fear 1, meme convention que GetAllArmureBonusLibelle, chargearmurebonus.pas) :
+        // a retirer avant ChercheArmureBonus (comparaison exacte sur le code) et reafficher
+        // apres, sinon la ligne ressort vide - trouve le 11/09/2026 sur Skull Trophies (Fear).
+        Suffixe := '';
+        if Pos(' ', Bonus) > 0 then
+          begin
+            Suffixe := ' ' + Trim(ExtractStringAfter(Bonus, ' '));
+            Bonus   := Trim(ExtractStringBefore(Bonus, ' '));
+          end;
         PArmureBonus := ChercheArmureBonus(Bonus);
-        TabBonus.Cells[1, Ind+1] := PArmureBonus.Libelle;
+        TabBonus.Cells[1, Ind+1] := PArmureBonus.Libelle + Suffixe;
         TabBonus.Cells[2, Ind+1] := PArmureBonus.Description;
         TabBonus.Cells[3, Ind+1] := PArmureBonus.Malus;
         if TabBonus.Cells[3, Ind+1] = '' then

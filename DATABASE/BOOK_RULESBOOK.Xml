@@ -137,6 +137,7 @@
 <Text name="RULES-ARMOL_BODY">"Body"</Text>
 <Text name="RULES-ARMOL_HEAD">"Head"</Text>
 <Text name="RULES-ARMOL_LEG">"Leg"</Text>
+<Text name="RULES-ARMOL_ANY">"Any"</Text>
 <Text name="RULES-DISPO_COMMON">"Common"</Text>
 <Text name="RULES-DISPO_EXOTIC">"Exotic"</Text>
 <Text name="RULES-DISPO_LIMITED">"Limit"</Text>

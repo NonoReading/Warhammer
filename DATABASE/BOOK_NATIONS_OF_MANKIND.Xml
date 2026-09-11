@@ -10293,8 +10293,9 @@ These warriors are amongst the bravest of their kind, as they charge into battle
 </Sort>
 </DATA_SPELL_TALENT>
 <DATA_ARMOR>
-  <!-- Armures, pages 60-61. 28 pieces en sept ensembles. Premier livre autre que le
-       Rulebook a declarer des armures et des qualites d armure. -->
+  <!-- Armures, pages 60-61. 29 pieces en sept ensembles (28 de la page 60, plus Skull
+       Trophies page 61, ajoutee le 11/09/2026). Premier livre autre que le Rulebook a
+       declarer des armures et des qualites d armure. -->
   <!-- Les 28 pieces de la page 60 portent des qualites de FABRICATION que le tableau imprime
        dans la meme colonne que les qualites d armure : Bulky, Durable, Fine, Practical, Ugly.
        Elles ne sont pas saisies ici - elles se posent sur l objet que possede un personnage,
@@ -10580,12 +10581,6 @@ These warriors are amongst the bravest of their kind, as they charge into battle
 <ArmorPoint>"0"</ArmorPoint>
 <Type>"RULES-ARMOT_SOFTKITS"</Type>
 </Armor>
-  <!-- Derniere piece saisie. Les SKULL TROPHIES de la meme section ne le sont PAS : leur
-       emplacement est "Any" et leur PA vide. Contrairement au type d armure, la LOCALISATION
-       est un vocabulaire FERME - pdfpersonnage.pas l.1626-1629 fait un case sur les quatre
-       constantes BonusTete/BonusBras/BonusCorps/BonusJambes. Un cinquieme emplacement ne
-       serait pas compte. Leurs qualites Fear 1 et Ugly n ont pas davantage de place : Fear est
-       un trait de creature. Note dans A FAIRE.txt. -->
 <Armor id="NATIO-ARMO_28">
 <Description language="ENGLISH">"Mirror Armor"</Description>
 <Availability>"RULES-DISPO_EXOTIC"</Availability>
@@ -10596,9 +10591,26 @@ These warriors are amongst the bravest of their kind, as they charge into battle
 <ArmorPoint>"3"</ArmorPoint>
 <Type>"RULES-ARMOT_PLATE"</Type>
 </Armor>
+  <!-- Skull Trophies, page 61 : ni prix, ni disponibilite, ni PA dans le livre (tirees de
+       trophees de guerre, pas achetees). Emplacement "Any" saisi avec le nouveau code
+       RULES-ARMOL_ANY (BOOK_RULESBOOK.Xml) : sans effet sur le calcul de PA
+       (pdfpersonnage.pas, boucles BonusTete/BonusBras/BonusCorps/BonusJambes) puisque cet
+       objet n en donne aucun. Qualites Ugly/Fear : voir NATIO-ARMOB_15/_16 ci-dessus,
+       decision du 11/09/2026. -->
+<Armor id="NATIO-ARMO_29">
+<Description language="ENGLISH">"Skull Trophies"</Description>
+<Availability>"-"</Availability>
+<Price>"-"</Price>
+<Encumbrance>"0"</Encumbrance>
+<Quality>"NATIO-ARMOB_16 1,NATIO-ARMOB_15"</Quality>
+<Location>"RULES-ARMOL_ANY"</Location>
+<ArmorPoint>"0"</ArmorPoint>
+<Type>"RULES-ARMOT_SOFTKITS"</Type>
+</Armor>
 </DATA_ARMOR>
 <DATA_ARMOR_BONUS>
-  <!-- Six qualites d armure nouvelles, pages 60-61. Comme pour les qualites d arme, la
+  <!-- Huit qualites d armure nouvelles, pages 60-61 (six a la saisie initiale, plus
+       ARMOB_15/_16 le 11/09/2026 pour Skull Trophies). Comme pour les qualites d arme, la
        numerotation CONTINUE celle du Rulebook (qui va de ARMOB_01 a _08, plus _19) au lieu de
        repartir a 1 : les references de qualite d armure sont ecrites SANS prefixe partout, et
        GetAllArmureBonusLibelle fait meme encore un StringReplace de SOUS-CHAINE. Un ARMOB_01
@@ -10649,6 +10661,27 @@ Furthermore, all ranged weapons lose their Damaging Quality when striking this a
 <Explanation language="ENGLISH">"Wearing this armour gives a -10 penalty to the Dexterity characteristic."</Explanation>
 <Modifier>"Dexterity -10"</Modifier>
 <ModifyCarac name="RULES-ATTR_Dex">-10</ModifyCarac>
+</BonusMalus>
+  <!-- Ugly et Fear, page 61 (Skull Trophies, NATIO-ARMO_29) : imprimees directement dans la
+       colonne Qualites de cette ligne, contrairement aux qualites de fabrication (Bulky,
+       Durable, Fine, Practical, Ugly) des 28 pieces forgees ci-dessus, posees via la fenetre
+       Fabrication et jamais sur une entree de catalogue (RULES-DEFECT_02 pour Ugly). Deux codes
+       distincts et volontaires : celui-ci qualifie l objet lui-meme, RULES-DEFECT_02 reste
+       reserve au choix de fabrication du joueur. Discute et valide avec Nono le 11/09/2026. -->
+<BonusMalus id="NATIO-ARMOB_15">
+<Description language="ENGLISH">"Ugly"</Description>
+<Explanation language="ENGLISH">"Crafted from the skulls of fallen enemies, these grisly trophies attract negative attention, and related Fellowship Tests might even suffer a -10 penalty."</Explanation>
+<Modifier>"related Fellowship Tests up to -10"</Modifier>
+</BonusMalus>
+  <!-- Fear n a aucune mecanique codee dans le projet (toujours du texte dans l Explanation d
+       un talent/mutation) : purement descriptif, comme Spiked/Corrupted ci-dessus. Le suffixe
+       numerique separe par un espace ("NATIO-ARMOB_16 1" sur l objet) passe par
+       GetAllArmureBonusLibelle (chargearmurebonus.pas), mecanisme deja code mais jamais exerce
+       jusqu ici par aucune donnee. -->
+<BonusMalus id="NATIO-ARMOB_16">
+<Description language="ENGLISH">"Fear"</Description>
+<Explanation language="ENGLISH">"The grisly sight of trophies taken from fallen foes unsettles those who behold them. The wearer gains the Fear Creature Trait, at the Rating printed alongside this Quality."</Explanation>
+<Modifier>"grants the Fear Creature Trait, at the printed Rating"</Modifier>
 </BonusMalus>
 </DATA_ARMOR_BONUS>
 <DATA_WEAPON>
