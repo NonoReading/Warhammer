@@ -1,6 +1,52 @@
 # Warhammer — Contexte projet
 
-**Dernière mise à jour : 11/09/2026 — MOTEUR GÉNÉRIQUE DE MODIFICATEURS : MODIFYCARAC
+**Dernière mise à jour : 11/09/2026 — MOTEUR GÉNÉRIQUE DE MODIFICATEURS : MUTATION
+BRANCHÉE SUR MODIFYSKILL/MODIFARMOUR, COMPILÉ ET VALIDÉ PAR NONO ; BUG D'ASTÉRISQUE
+MANQUANTE SUR UNE COMPÉTENCE-FAMILLE TROUVÉ EN TESTANT, CORRIGÉ ET VALIDÉ.** Suite
+immédiate de la migration ModifyCarac d'Attribut ci-dessous (même jour) : les deux autres
+tags de `<Corruption>` migrés vers `ListCorruptionModificateur` (créée pour ModifyCarac,
+réutilisée telle quelle - aucune nouvelle unité).
+- **`<ModifySkill>`** (`StructureCorruptionCompetenceModif`, ex. "-10 to all Language
+  Tests") migré avec `TypeModif = ConstXmlModifieCompetence`. `PersonnageMutationCompetenceModif`
+  (`chargepersonnage.pas`) reste une fonction dédiée (pas un simple appel à
+  `PersonnageMutationModificateur`) : elle gère en plus la correspondance par FAMILLE de
+  sous-compétences (`CodeGenerique`) et le pendant `<ModifySkillAttribut>`
+  (`ListCorruptionCompetenceAttributModif`, broadcast par attribut de rattachement) —
+  ce dernier volontairement laissé hors moteur générique, un `Cible` unique ne suffit pas
+  à exprimer un broadcast.
+- **`<ModifArmour>`** (`StructureCorruptionArmureModif`, Points d'Armure par
+  emplacement) migré avec `TypeModif = ConstXmlModifieArmure` ; `PersonnageMutationArmureModif`
+  réduite à un appel de `PersonnageMutationModificateur`, même principe que
+  `PersonnageCareerBonusCompetenceModif`/`ArmeModif`.
+- `PdfPersonnageMutationAsterisques` (`pdfpersonnage.pas`) : les deux boucles
+  d'annotation d'astérisque (Compétence et Armure) migrées vers `ListCorruptionModificateur`,
+  même précaution que pour l'astérisque d'Attribut (logique inchangée, source de données
+  seule change).
+- **Unité supprimée** : `chargecorruptionarmuremodif.pas` (plus aucun appelant).
+  `chargecorruptioncompetencemodif.pas` conservée mais allégée : ne porte plus que
+  `StructureCorruptionCompetenceAttributModif` (`<ModifySkillAttribut>`, hors chantier).
+- **Compilé (lazbuild, 0 erreur), validé par Nono** sur une mutation à bonus de Compétence
+  et une à Points d'Armure : Total correct dans les deux cas.
+- **Bug trouvé en testant, corrigé et validé par Nono le jour même** : la mutation de Compétence testée
+  (langues, "-10 to all Language Tests") vise en XML le code générique de la famille
+  (`RULES-COMPLANG_*`), pas une sous-compétence précise. La boucle d'annotation
+  (`PdfPersonnageMutationAsterisques`, `pdfpersonnage.pas`) écrivait l'astérisque sous ce
+  code générique, qui n'apparaît jamais tel quel dans le tableau des compétences (seules
+  les sous-compétences réellement possédées, ex. `RULES-COMPLANG_BRET`, y figurent) - la
+  valeur du Total était juste (calculée par `PersonnageMutationCompetenceModif`, qui
+  connaît déjà la correspondance générique↔sous-compétence), seul l'astérisque manquait
+  sur la fiche. Corrigé en remplaçant l'écriture directe par un parcours du catalogue
+  (`ListCompetence`, même schéma que la boucle `<ModifySkillAttribut>` juste en dessous) :
+  chaque compétence dont le code propre OU la forme générique (calculée comme dans
+  `PersonnageMutationCompetenceModif`) correspond à la Cible reçoit l'annotation - couvre
+  à la fois le cas générique (toutes les sous-compétences d'une famille) et le cas direct
+  (une compétence précisément ciblée) avec le même code.
+**Chantier suivant : reste à ajouter ModifyWeapon/un futur ModifyDamage sur Talent, et
+vérifier qu'aucune autre cible ne reste dupliquée entre les sources du moteur générique.**
+
+---
+
+**11/09/2026 — MOTEUR GÉNÉRIQUE DE MODIFICATEURS : MODIFYCARAC
 D'ATTRIBUT MIGRÉ SUR LES 5 SOURCES, COMPILÉ ET VALIDÉ PAR NONO (GUNTHER KRIEG + UNE
 MUTATION).** Suite du
 chantier "moteur générique" (entrées du 11/09/2026 plus bas) : dernière cible encore

@@ -243,10 +243,9 @@
         <HasResources Value="True"/>
         <ResourceBaseClass Value="Form"/>
         <UnitName Value="WinPersonnage"/>
-        <IsVisibleTab Value="True"/>
         <EditorIndex Value="6"/>
         <TopLine Value="3572"/>
-        <CursorPos X="41" Y="3586"/>
+        <CursorPos X="35" Y="3585"/>
         <UsageCount Value="200"/>
         <Loaded Value="True"/>
         <LoadedDesigner Value="True"/>
@@ -484,8 +483,9 @@
         <Filename Value="pdfpersonnage.pas"/>
         <IsPartOfProject Value="True"/>
         <UnitName Value="PdfPersonnage"/>
+        <IsVisibleTab Value="True"/>
         <EditorIndex Value="3"/>
-        <TopLine Value="1140"/>
+        <TopLine Value="1141"/>
         <CursorPos X="47" Y="1153"/>
         <UsageCount Value="200"/>
         <Loaded Value="True"/>
@@ -548,15 +548,6 @@
         <UsageCount Value="140"/>
       </Unit>
       <Unit>
-        <Filename Value="chargetalentattributmodif.pas"/>
-        <IsPartOfProject Value="True"/>
-        <UnitName Value="ChargeTalentAttributModif"/>
-        <EditorIndex Value="-1"/>
-        <TopLine Value="3"/>
-        <CursorPos X="43" Y="13"/>
-        <UsageCount Value="134"/>
-      </Unit>
-      <Unit>
         <Filename Value="chargetalenteffet.pas"/>
         <IsPartOfProject Value="True"/>
         <UnitName Value="ChargeTalentEffet"/>
@@ -602,6 +593,14 @@
         <TopLine Value="82"/>
         <CursorPos X="27" Y="94"/>
         <UsageCount Value="60"/>
+      </Unit>
+      <Unit>
+        <Filename Value="chargetalentattributmodif.pas"/>
+        <UnitName Value="ChargeTalentAttributModif"/>
+        <EditorIndex Value="-1"/>
+        <TopLine Value="3"/>
+        <CursorPos X="43" Y="13"/>
+        <UsageCount Value="134"/>
       </Unit>
       <Unit>
         <Filename Value="unitcreationrace.pas"/>

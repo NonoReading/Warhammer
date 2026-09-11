@@ -13,7 +13,7 @@ uses
   ChargePersonnage, ChargeArmureSimplifie, ChargeAttributAugmentation,
   ChargeCompetenceAugmentation, ChargeCorruptionTable,
   ChargeModificateur, ChargeCorruptionModificateur, ChargeCorruptionCompetenceModif,
-  ChargeCorruptionArmureModif, ChargeTalentEffet,
+  ChargeTalentEffet,
   Dialogs, UnitCalcul, Math, LCLIntf;
 
 Type
@@ -2121,10 +2121,9 @@ Function PdfPersonnageMutationAsterisques(Personnage: StructurePersonnage; Aster
   var
     PersonnageMutation:                 StructurePersonnageMutation;
     PCorruptionModificateur:            StructureModificateur;
-    PCorruptionCompetenceModif:         StructureCorruptionCompetenceModif;
     PCorruptionCompetenceAttributModif: StructureCorruptionCompetenceAttributModif;
-    PCorruptionArmureModif:             StructureCorruptionArmureModif;
     PCompetence:                        StructureCompetence;
+    CodeGenerique:                      String;
     AsterisqueCourant:                  Integer;
     AsterisqueMutation:                 Integer;
     IndCompetence:                      Integer;
@@ -2160,19 +2159,39 @@ Function PdfPersonnageMutationAsterisques(Personnage: StructurePersonnage; Aster
                 Result.Values[PCorruptionModificateur.Cible] := Result.Values[PCorruptionModificateur.Cible]
                   + ' ' + IntToStr(PCorruptionModificateur.Facteur) + ' (' + IntToStr(AsterisqueMutation) + ')';
             end;
-        for PCorruptionCompetenceModif in ListCorruptionCompetenceModif do
-          if CompareRechercheValeur(PCorruptionCompetenceModif.CodeCorruption, PersonnageMutation.Code) then
-            begin
-              if AsterisqueMutation = 0 then
-                begin
-                  Inc(AsterisqueCourant);
-                  AsterisqueMutation := AsterisqueCourant;
-                  AsterisqueParMutation.Values[PersonnageMutation.Code] := '(' + IntToStr(AsterisqueMutation) + ')';
-                end;
-              // même format que les armures (ListArmureBonusModif) : "(N) valeur%".
-              Result.Values[PCorruptionCompetenceModif.CodeCompetence] := Result.Values[PCorruptionCompetenceModif.CodeCompetence]
-                + ' (' + IntToStr(AsterisqueMutation) + ') ' + IntToStr(PCorruptionCompetenceModif.Valeur) + '%';
-            end;
+        // ListCorruptionCompetenceModif -> filtre sur ListCorruptionModificateur (TypeModif =
+        // ConstXmlModifieCompetence) depuis le 11/09/2026, meme migration que ModifyCarac plus
+        // haut. Signale par Nono le 11/09/2026 : une Cible generique (ex. "RULES-COMPLANG_*",
+        // famille de sous-competences comme les langues) n'annotait jamais aucune ligne
+        // affichee - Result n'est lu que par CodeCompetence exact d'une sous-competence
+        // (PdfPreparerRecordSetCompetencesBase/Groupees), jamais par le code generique
+        // lui-meme. Meme parcours du catalogue que <ModifySkillAttribut> juste en dessous :
+        // pour chaque competence, la Cible matche soit son propre code (cas direct), soit sa
+        // forme generique si c'est une sous-competence (meme calcul que
+        // PersonnageMutationCompetenceModif ci-dessus, chargepersonnage.pas).
+        for PCorruptionModificateur in ListCorruptionModificateur do
+          if (PCorruptionModificateur.TypeModif = ConstXmlModifieCompetence)
+             and CompareRechercheValeur(PCorruptionModificateur.CodeSource, PersonnageMutation.Code) then
+            for IndCompetence := 0 to ListCompetence.Count - 1 do
+              begin
+                PCompetence   := ListCompetence[IndCompetence];
+                CodeGenerique := '';
+                if PCompetence.SousCompetence then
+                  CodeGenerique := ExtractStringBefore(PCompetence.CodeCompetence, ValeurSousCompetence) + ValeurGenerique;
+                if CompareRechercheValeur(PCompetence.CodeCompetence, PCorruptionModificateur.Cible)
+                   or ((CodeGenerique <> '') and CompareRechercheValeur(CodeGenerique, PCorruptionModificateur.Cible)) then
+                  begin
+                    if AsterisqueMutation = 0 then
+                      begin
+                        Inc(AsterisqueCourant);
+                        AsterisqueMutation := AsterisqueCourant;
+                        AsterisqueParMutation.Values[PersonnageMutation.Code] := '(' + IntToStr(AsterisqueMutation) + ')';
+                      end;
+                    // même format que les armures (ListArmureBonusModif) : "(N) valeur%".
+                    Result.Values[PCompetence.CodeCompetence] := Result.Values[PCompetence.CodeCompetence]
+                      + ' (' + IntToStr(AsterisqueMutation) + ') ' + IntToStr(PCorruptionModificateur.Facteur) + '%';
+                  end;
+              end;
         // Effets visant toutes les compétences d'un attribut de rattachement (ex. "-20 to all
         // Fellowship Tests", CORPHY_011, <ModifySkillAttribut>) - pas de code de compétence
         // unique ici, donc on parcourt le catalogue complet pour annoter chaque compétence
@@ -2198,8 +2217,11 @@ Function PdfPersonnageMutationAsterisques(Personnage: StructurePersonnage; Aster
         // marqueur pour tout le bloc PdfBlocArmourPoints, peu importe combien de cases
         // sont touchées (choix de Nono, pas d'astérisque par case). Même AsterisqueMutation
         // que ci-dessus si la mutation touche aussi un Attribut/une Compétence.
-        for PCorruptionArmureModif in ListCorruptionArmureModif do
-          if CompareRechercheValeur(PCorruptionArmureModif.CodeCorruption, PersonnageMutation.Code) then
+        // ListCorruptionArmureModif -> filtre sur ListCorruptionModificateur (TypeModif =
+        // ConstXmlModifieArmure) depuis le 11/09/2026.
+        for PCorruptionModificateur in ListCorruptionModificateur do
+          if (PCorruptionModificateur.TypeModif = ConstXmlModifieArmure)
+             and CompareRechercheValeur(PCorruptionModificateur.CodeSource, PersonnageMutation.Code) then
             begin
               if AsterisqueMutation = 0 then
                 begin

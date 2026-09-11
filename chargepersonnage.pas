@@ -11,7 +11,7 @@ uses
   ChargeTalent, ChargeArme, ChargeArmure, ChargeArmureSimplifie,
   ChargeTalentCompetenceModif, ChargeArmureBonusModif,
   ChargeSort, ChargeCorruptionTable,
-  ChargeCorruptionCompetenceModif, ChargeCorruptionArmureModif, ChargeCorruptionTalent,
+  ChargeCorruptionCompetenceModif, ChargeCorruptionTalent,
   ChargeCorruptionEquipement, ChargeTalentArmureModif, ChargeArmureBonusTalent,
   ChargeModificateur, ChargeTalentModificateur, ChargeCareerBonusModificateur,
   ChargeArmeModificateur, ChargeArmureBonusModificateur, ChargeCorruptionModificateur,
@@ -181,7 +181,15 @@ Type
   // toujours). CodeSource = StructureCorruptionTable.Code. CONTEXT.md, chantier moteur
   // generique, etape "migrer ModifyCarac d'Attribut" (11/09/2026).
   Function PersonnageMutationModificateur(Personnage: StructurePersonnage; TypeModif, Cible: String; Filtre: String = ''): Integer;
+  // <ModifySkill> des mutations - lit desormais ListCorruptionModificateur (TypeModif =
+  // ConstXmlModifieCompetence) depuis le 11/09/2026. Reste une fonction dediee (pas un
+  // simple appel a PersonnageMutationModificateur) : gere en plus la famille de
+  // sous-competences (CodeGenerique) et le pendant <ModifySkillAttribut>
+  // (ListCorruptionCompetenceAttributModif, broadcast par attribut de rattachement, hors
+  // moteur generique - pas dans ce chantier).
   Function PersonnageMutationCompetenceModif(Personnage: StructurePersonnage; CodeCompetence: String): Integer;
+  // <ModifArmour> des mutations - implementation deleguee a PersonnageMutationModificateur
+  // depuis le 11/09/2026 (migration ModifySkill/ModifyArmour sur le moteur generique).
   Function PersonnageMutationArmureModif(Personnage: StructurePersonnage; CodeLocalisation: String): Integer;
   // Talents accordes automatiquement par les mutations du personnage (ex. Fleshy Tentacle ->
   // Tentacles, cas par cas dans le XML - <Talent> sous <Corruption>, chargecorruptiontalent.pas).
@@ -1810,11 +1818,12 @@ Function PersonnageMutationCompetenceModif(Personnage: StructurePersonnage; Code
     if (AttributCompetence = '') and (CodeGenerique <> '') then
       AttributCompetence := ChercheCompetence(CodeGenerique).CodeAttribut;
     for PersonnageMutation in Personnage.Mutations do
-      for indiceModif := 0 to (ListCorruptionCompetenceModif.Count - 1) do
-        if CompareRechercheValeur(ListCorruptionCompetenceModif[indiceModif].CodeCorruption, PersonnageMutation.Code)
-           and (CompareRechercheValeur(ListCorruptionCompetenceModif[indiceModif].CodeCompetence, CodeCompetence)
-                or ((CodeGenerique <> '') and CompareRechercheValeur(ListCorruptionCompetenceModif[indiceModif].CodeCompetence, CodeGenerique))) then
-          Result := Result + ListCorruptionCompetenceModif[indiceModif].Valeur;
+      for indiceModif := 0 to (ListCorruptionModificateur.Count - 1) do
+        if (ListCorruptionModificateur[indiceModif].TypeModif = ConstXmlModifieCompetence)
+           and CompareRechercheValeur(ListCorruptionModificateur[indiceModif].CodeSource, PersonnageMutation.Code)
+           and (CompareRechercheValeur(ListCorruptionModificateur[indiceModif].Cible, CodeCompetence)
+                or ((CodeGenerique <> '') and CompareRechercheValeur(ListCorruptionModificateur[indiceModif].Cible, CodeGenerique))) then
+          Result := Result + ListCorruptionModificateur[indiceModif].Facteur;
 
     // Effets visant TOUTES les compétences d'un attribut de rattachement (ex. "-20 to all
     // Fellowship Tests", CORPHY_011) - sans toucher l'attribut lui-même (CONTEXT.md §2.7,
@@ -1831,16 +1840,8 @@ Function PersonnageMutationArmureModif(Personnage: StructurePersonnage; CodeLoca
   // Effets de mutation donnant des Points d'Armure (ex. "+2 Armour Points to all locations",
   // CORPHY_012/016/017, CONTEXT.md §2.7, étape 8) - PDF uniquement, réutilise les 4
   // emplacements de l'armure portée (BonusTete/BonusBras/BonusCorps/BonusJambes).
-  var
-    PersonnageMutation: StructurePersonnageMutation;
-    indiceModif:        Integer;
   begin
-    Result := 0;
-    for PersonnageMutation in Personnage.Mutations do
-      for indiceModif := 0 to (ListCorruptionArmureModif.Count - 1) do
-        if CompareRechercheValeur(ListCorruptionArmureModif[indiceModif].CodeCorruption, PersonnageMutation.Code)
-           and CompareRechercheValeur(ListCorruptionArmureModif[indiceModif].CodeLocalisation, CodeLocalisation) then
-          Result := Result + ListCorruptionArmureModif[indiceModif].Valeur;
+    Result := PersonnageMutationModificateur(Personnage, ConstXmlModifieArmure, CodeLocalisation);
   end;
 
 Function PersonnageMutationTalent(Personnage: StructurePersonnage): TArrayPersonnageTalent;

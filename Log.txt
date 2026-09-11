@@ -2720,3 +2720,38 @@ pas de fichier dedie). ChargeTalentAttributModif retire de WarhammerHelp.lpi.
 Compile avec lazbuild (0 erreur), puis valide par Nono sur Gunther Krieg (bonus de talent,
 asterisques) et sur un personnage avec une mutation donnant un bonus d Attribut : RAS dans
 les deux cas.
+
+11/09/2026 - MUTATION BRANCHEE SUR MODIFYSKILL/MODIFARMOUR (MOTEUR GENERIQUE DE
+MODIFICATEURS), COMPILE - VALIDATION DE NONO EN ATTENTE. Suite immediate de la migration
+ModifyCarac d Attribut (entree precedente, meme jour) : les deux autres tags de <Corruption>
+migres vers ListCorruptionModificateur (creee pour ModifyCarac, reutilisee telle quelle, pas
+de nouvelle unite).
+<ModifySkill> (StructureCorruptionCompetenceModif) migre avec TypeModif =
+ConstXmlModifieCompetence. PersonnageMutationCompetenceModif (chargepersonnage.pas) reste une
+fonction dediee (pas un simple appel a PersonnageMutationModificateur) : elle gere en plus la
+correspondance par famille de sous-competences (CodeGenerique) et le pendant
+<ModifySkillAttribut> (ListCorruptionCompetenceAttributModif, broadcast par attribut de
+rattachement) - volontairement laisse hors moteur generique, un Cible unique ne suffit pas a
+exprimer un broadcast.
+<ModifArmour> (StructureCorruptionArmureModif) migre avec TypeModif = ConstXmlModifieArmure ;
+PersonnageMutationArmureModif reduite a un appel de PersonnageMutationModificateur, meme
+principe que PersonnageCareerBonusCompetenceModif/ArmeModif.
+PdfPersonnageMutationAsterisques (pdfpersonnage.pas) : les deux boucles d annotation d
+asterisque (Competence et Armure) migrees vers ListCorruptionModificateur, meme precaution que
+pour l asterisque d Attribut (logique inchangee, source de donnees seule change).
+Unite supprimee : chargecorruptionarmuremodif.pas (plus aucun appelant).
+chargecorruptioncompetencemodif.pas conservee mais allegee : ne porte plus que
+StructureCorruptionCompetenceAttributModif (<ModifySkillAttribut>, hors chantier).
+Compile avec lazbuild (0 erreur), puis valide par Nono sur une mutation a bonus de Competence
+et une a Points d Armure : Total correct dans les deux cas.
+Bug trouve en testant, corrige et valide par Nono le jour meme : la mutation de Competence testee (langues,
+"-10 to all Language Tests") vise en XML le code generique de la famille
+(RULES-COMPLANG_*), pas une sous-competence precise. La boucle d annotation
+(PdfPersonnageMutationAsterisques, pdfpersonnage.pas) ecrivait l asterisque sous ce code
+generique, qui n apparait jamais tel quel dans le tableau des competences (seules les
+sous-competences reellement possedees y figurent) - la valeur du Total etait juste
+(PersonnageMutationCompetenceModif connait deja la correspondance generique/sous-competence),
+seul l asterisque manquait sur la fiche. Corrige en remplacant l ecriture directe par un
+parcours du catalogue (ListCompetence, meme schema que la boucle ModifySkillAttribut juste en
+dessous) : chaque competence dont le code propre OU la forme generique correspond a la Cible
+recoit l annotation - couvre le cas generique et le cas direct avec le meme code.

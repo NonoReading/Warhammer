@@ -19,6 +19,19 @@ Gunther Krieg. Detail CONTEXT.md (entree du 11/09/2026 en tete de fichier), Log.
 deleguent desormais a ChargeModificateur. Compile et valide par Nono sur Gunther Krieg et sur
 une mutation, RAS. Detail CONTEXT.md (entree du 11/09/2026 en tete de fichier), Log.txt.]
 
+[FAIT LE 11/09/2026 - Mutation branchee sur ModifySkill/ModifArmour, RESOLU.
+PersonnageMutationCompetenceModif et PersonnageMutationArmureModif (chargepersonnage.pas)
+lisent desormais ListCorruptionModificateur. Compile et valide par Nono sur une mutation a
+bonus de Competence et une a Points d'Armure, Total correct dans les deux cas. Detail
+CONTEXT.md (entree du 11/09/2026 en tete de fichier), Log.txt.]
+
+[FAIT LE 11/09/2026 - Asterisque manquante sur une mutation visant une famille de
+sous-competences (ex. langues, "-10 to all Language Tests"), RESOLU. La boucle d'annotation
+(PdfPersonnageMutationAsterisques, pdfpersonnage.pas) ecrivait sous le code generique
+(RULES-COMPLANG_*) au lieu des sous-competences reellement affichees - Total deja correct,
+seul l'asterisque manquait. Corrige en parcourant le catalogue comme pour ModifySkillAttribut.
+Detail CONTEXT.md (entree du 11/09/2026 en tete de fichier), Log.txt.]
+
 LIBELLES TRONQUES SUR CERTAINS BOUTONS DE WINMUTATION. Signale par Nono le 11/09/2026 :
 sur la fenetre Corruption (ajout de mutation), "Spend a Resilience point"/"Accept a
 mutation"/"Physical Corruption"/"Mental Corruption" (ButtonMutationResilience/Accepter/

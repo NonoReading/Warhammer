@@ -18,7 +18,7 @@ uses
   ChargeRaceCorruptionCreation, ChargeCorruptionTable,
   ChargeTalentEffet, ChargeTalentCompetenceModif, ChargeTalentCompetenceAjoute, ChargeRaceOpinion,
   ChargeArmureBonusModif, ChargeCorruptionCompetenceModif,
-  ChargeCorruptionArmureModif, ChargeCorruptionTalent, ChargeCorruptionEquipement,
+  ChargeCorruptionTalent, ChargeCorruptionEquipement,
   ChargeTalentArmureModif,
   ChargeArmureBonusTalent,
   ChargeModificateur, ChargeTalentModificateur, ChargeCareerBonusModificateur,
@@ -1105,9 +1105,7 @@ Procedure XmlImport(FileName: String; OnlyPrimary: Boolean; OnlyCode: Boolean);
     PTalentModificateur:      StructureModificateur;
     PArmureBonusModif:        StructureArmureBonusModif;
     PCorruptionModificateur:    StructureModificateur;
-    PCorruptionCompetenceModif: StructureCorruptionCompetenceModif;
     PCorruptionCompetenceAttributModif: StructureCorruptionCompetenceAttributModif;
-    PCorruptionArmureModif:    StructureCorruptionArmureModif;
     PCorruptionTalent:         StructureCorruptionTalent;
     PCorruptionEquipement:     StructureCorruptionEquipement;
     PLivre:                   StructureLivre;
@@ -3181,16 +3179,23 @@ Procedure XmlImport(FileName: String; OnlyPrimary: Boolean; OnlyCode: Boolean);
                                     inc(NbCorruptionModificateur);
                                    end;
                               end;
+                            // Moteur generique depuis le 11/09/2026, remplace l'ancienne
+                            // ListCorruptionCompetenceModif dediee (meme migration que
+                            // ModifyCarac plus haut). <ModifySkillAttribut> ci-dessous reste a
+                            // part : broadcast par attribut de rattachement, pas un Cible unique.
                             ConstXmlModifieCompetence:
                               begin
-                                PCorruptionCompetenceModif.Livre          := Livre;
-                                PCorruptionCompetenceModif.CodeCorruption := PCorruptionTable.Code;
-                                PCorruptionCompetenceModif.CodeCompetence := RemoveQuotes(UTF8Encode(Node.Attributes.GetNamedItem(ConstXmlData).NodeValue));
-                                PCorruptionCompetenceModif.Valeur         := StrToInt(RemoveQuotes(UTF8Encode(Node.TextContent)));
+                                PCorruptionModificateur.TypeModif  := ConstXmlModifieCompetence;
+                                PCorruptionModificateur.Cible      := RemoveQuotes(UTF8Encode(Node.Attributes.GetNamedItem(ConstXmlData).NodeValue));
+                                PCorruptionModificateur.Filtre     := '';
+                                PCorruptionModificateur.Forme      := ConstFormeEffetAdditif;
+                                PCorruptionModificateur.Facteur    := StrToInt(RemoveQuotes(UTF8Encode(Node.TextContent)));
+                                PCorruptionModificateur.CodeSource := PCorruptionTable.Code;
+                                PCorruptionModificateur.Niveau     := 0;
                                 if LangueDef = ConstAnglais then
                                    begin
-                                    ListCorruptionCompetenceModif.add(PCorruptionCompetenceModif);
-                                    inc(NbCorruptionCompetenceModif);
+                                    ListCorruptionModificateur.add(PCorruptionModificateur);
+                                    inc(NbCorruptionModificateur);
                                    end;
                               end;
                             ConstXmlModifieCompetenceAttribut:
@@ -3205,16 +3210,21 @@ Procedure XmlImport(FileName: String; OnlyPrimary: Boolean; OnlyCode: Boolean);
                                     inc(NbCorruptionCompetenceAttributModif);
                                    end;
                               end;
+                            // Moteur generique depuis le 11/09/2026, remplace l'ancienne
+                            // ListCorruptionArmureModif dediee.
                             ConstXmlModifieArmure:
                               begin
-                                PCorruptionArmureModif.Livre            := Livre;
-                                PCorruptionArmureModif.CodeCorruption   := PCorruptionTable.Code;
-                                PCorruptionArmureModif.CodeLocalisation := RemoveQuotes(UTF8Encode(Node.Attributes.GetNamedItem(ConstXmlData).NodeValue));
-                                PCorruptionArmureModif.Valeur           := StrToInt(RemoveQuotes(UTF8Encode(Node.TextContent)));
+                                PCorruptionModificateur.TypeModif  := ConstXmlModifieArmure;
+                                PCorruptionModificateur.Cible      := RemoveQuotes(UTF8Encode(Node.Attributes.GetNamedItem(ConstXmlData).NodeValue));
+                                PCorruptionModificateur.Filtre     := '';
+                                PCorruptionModificateur.Forme      := ConstFormeEffetAdditif;
+                                PCorruptionModificateur.Facteur    := StrToInt(RemoveQuotes(UTF8Encode(Node.TextContent)));
+                                PCorruptionModificateur.CodeSource := PCorruptionTable.Code;
+                                PCorruptionModificateur.Niveau     := 0;
                                 if LangueDef = ConstAnglais then
                                    begin
-                                    ListCorruptionArmureModif.add(PCorruptionArmureModif);
-                                    inc(NbCorruptionArmureModif);
+                                    ListCorruptionModificateur.add(PCorruptionModificateur);
+                                    inc(NbCorruptionModificateur);
                                    end;
                               end;
                             ConstXmlTalent:
@@ -3302,16 +3312,23 @@ Procedure XmlImport(FileName: String; OnlyPrimary: Boolean; OnlyCode: Boolean);
                                     inc(NbCorruptionModificateur);
                                    end;
                               end;
+                            // Moteur generique depuis le 11/09/2026, remplace l'ancienne
+                            // ListCorruptionCompetenceModif dediee (meme migration que
+                            // ModifyCarac plus haut). <ModifySkillAttribut> ci-dessous reste a
+                            // part : broadcast par attribut de rattachement, pas un Cible unique.
                             ConstXmlModifieCompetence:
                               begin
-                                PCorruptionCompetenceModif.Livre          := Livre;
-                                PCorruptionCompetenceModif.CodeCorruption := PCorruptionTable.Code;
-                                PCorruptionCompetenceModif.CodeCompetence := RemoveQuotes(UTF8Encode(Node.Attributes.GetNamedItem(ConstXmlData).NodeValue));
-                                PCorruptionCompetenceModif.Valeur         := StrToInt(RemoveQuotes(UTF8Encode(Node.TextContent)));
+                                PCorruptionModificateur.TypeModif  := ConstXmlModifieCompetence;
+                                PCorruptionModificateur.Cible      := RemoveQuotes(UTF8Encode(Node.Attributes.GetNamedItem(ConstXmlData).NodeValue));
+                                PCorruptionModificateur.Filtre     := '';
+                                PCorruptionModificateur.Forme      := ConstFormeEffetAdditif;
+                                PCorruptionModificateur.Facteur    := StrToInt(RemoveQuotes(UTF8Encode(Node.TextContent)));
+                                PCorruptionModificateur.CodeSource := PCorruptionTable.Code;
+                                PCorruptionModificateur.Niveau     := 0;
                                 if LangueDef = ConstAnglais then
                                    begin
-                                    ListCorruptionCompetenceModif.add(PCorruptionCompetenceModif);
-                                    inc(NbCorruptionCompetenceModif);
+                                    ListCorruptionModificateur.add(PCorruptionModificateur);
+                                    inc(NbCorruptionModificateur);
                                    end;
                               end;
                             ConstXmlModifieCompetenceAttribut:
@@ -3326,16 +3343,21 @@ Procedure XmlImport(FileName: String; OnlyPrimary: Boolean; OnlyCode: Boolean);
                                     inc(NbCorruptionCompetenceAttributModif);
                                    end;
                               end;
+                            // Moteur generique depuis le 11/09/2026, remplace l'ancienne
+                            // ListCorruptionArmureModif dediee.
                             ConstXmlModifieArmure:
                               begin
-                                PCorruptionArmureModif.Livre            := Livre;
-                                PCorruptionArmureModif.CodeCorruption   := PCorruptionTable.Code;
-                                PCorruptionArmureModif.CodeLocalisation := RemoveQuotes(UTF8Encode(Node.Attributes.GetNamedItem(ConstXmlData).NodeValue));
-                                PCorruptionArmureModif.Valeur           := StrToInt(RemoveQuotes(UTF8Encode(Node.TextContent)));
+                                PCorruptionModificateur.TypeModif  := ConstXmlModifieArmure;
+                                PCorruptionModificateur.Cible      := RemoveQuotes(UTF8Encode(Node.Attributes.GetNamedItem(ConstXmlData).NodeValue));
+                                PCorruptionModificateur.Filtre     := '';
+                                PCorruptionModificateur.Forme      := ConstFormeEffetAdditif;
+                                PCorruptionModificateur.Facteur    := StrToInt(RemoveQuotes(UTF8Encode(Node.TextContent)));
+                                PCorruptionModificateur.CodeSource := PCorruptionTable.Code;
+                                PCorruptionModificateur.Niveau     := 0;
                                 if LangueDef = ConstAnglais then
                                    begin
-                                    ListCorruptionArmureModif.add(PCorruptionArmureModif);
-                                    inc(NbCorruptionArmureModif);
+                                    ListCorruptionModificateur.add(PCorruptionModificateur);
+                                    inc(NbCorruptionModificateur);
                                    end;
                               end;
                             ConstXmlTalent:
