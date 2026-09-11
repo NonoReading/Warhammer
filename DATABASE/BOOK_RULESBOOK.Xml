@@ -3562,10 +3562,10 @@ See page 190 for Fear rules"</Explanation>
 <Talent id="RULES-T0ARM">
 <Trait>"1"</Trait>
 <Attribut>""</Attribut>
-<ModifArmour name="RULES-ARMOL_HEAD">1</ModifArmour>
-<ModifArmour name="RULES-ARMOL_ARM">1</ModifArmour>
-<ModifArmour name="RULES-ARMOL_BODY">1</ModifArmour>
-<ModifArmour name="RULES-ARMOL_LEG">1</ModifArmour>
+<Modificateur Type="ModifArmour" Cible="RULES-ARMOL_HEAD" Facteur="1"/>
+<Modificateur Type="ModifArmour" Cible="RULES-ARMOL_ARM" Facteur="1"/>
+<Modificateur Type="ModifArmour" Cible="RULES-ARMOL_BODY" Facteur="1"/>
+<Modificateur Type="ModifArmour" Cible="RULES-ARMOL_LEG" Facteur="1"/>
 <Description language="ENGLISH">"Armour (Rating)"</Description>
 <Short language="ENGLISH">""</Short>
 <Explanation language="ENGLISH">"The creature is protected by armour or thick hide. It has Rating Armour Points on all Hit Locations."</Explanation>

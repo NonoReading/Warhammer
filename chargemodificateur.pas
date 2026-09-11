@@ -9,10 +9,10 @@ uses
 
 Type
   // Fondation du moteur generique de bonus/malus (CONTEXT.md, chantier "inversion des
-  // recherches"). Aujourd'hui, savoir si une arme a un bonus de competence oblige a
+  // recherches"). Avant ce moteur, savoir si une arme a un bonus de competence obligeait a
   // interroger une fonction differente par source (PersonnageCareerBonusArmeModif,
-  // PersonnageTalentArmureModif, PersonnageMutationTalent...) - une fonction de plus a
-  // chaque nouveau croisement source x cible.
+  // PersonnageMutationTalent...) - une fonction de plus a chaque nouveau croisement
+  // source x cible.
   //
   // Avec cette structure, chaque source (Talent, Mutation, CareerBonus, equipement...)
   // porte sa propre liste de StructureModificateur, mais TOUTES au meme format : le
@@ -21,8 +21,8 @@ Type
   // sources a chaque recherche n'a pas d'impact mesurable.
   StructureModificateur = Record
         // Vocabulaire ferme : ModifyCarac / ModifySkill / ModifyWeapon / ModifArmour /
-        // ModifyDamage (a ajouter). Distingue quel calcul (competence, arme, armure...)
-        // ce modificateur alimente.
+        // ModifyDamage. Distingue quel calcul (competence, arme, armure...) ce
+        // modificateur alimente.
         TypeModif:  String;
         // Code de l'element vise : CodeAttribut, CodeCompetence, TypeArme,
         // CodeLocalisation selon TypeModif.

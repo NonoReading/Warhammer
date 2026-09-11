@@ -1,6 +1,42 @@
 # Warhammer — Contexte projet
 
-**Dernière mise à jour : 11/09/2026 — MOTEUR GÉNÉRIQUE DE MODIFICATEURS : MODIFYDAMAGE
+**Dernière mise à jour : 11/09/2026 — MOTEUR GÉNÉRIQUE DE MODIFICATEURS : MODIFARMOUR
+BRANCHÉ SUR TALENT, CHANTIER TERMINÉ, COMPILÉ ET VALIDÉ PAR NONO SUR UN SKINK CRÉÉ POUR LE
+TEST.** Suite immédiate de `ModifyDamage` (entrée du 11/09/2026 juste en dessous) : dernière
+cible du chantier "moteur générique" restée dupliquée entre sources - Talent portait encore
+son propre mécanisme dédié (`ListTalentArmureModif`/`ChargeTalentArmureModif`) pour les
+Points d'Armure, en parallèle du moteur générique déjà branché sur Mutation pour la même
+cible `ModifArmour`.
+- **Bug trouvé en amont de la migration, corrigé en premier** : `PersonnageTalentModificateur`
+  (`chargepersonnage.pas`) ne bouclait que sur `Personnage.CreationTalent`/`AugmentationTalent`,
+  jamais sur `Personnage.MetierTalent` (talent choisi dans la grille de carrière) - trou déjà
+  présent, silencieux, dans les 4 migrations précédentes du jour (ModifyCarac/ModifySkill/
+  ModifyWeapon/ModifyDamage). Ajout d'une troisième boucle sur `MetierTalent`, même filtre
+  TypeModif/CodeSource/Cible/Filtre que les deux autres.
+- **`PersonnageTalentArmureModif`** réduite à un appel de `PersonnageTalentModificateur(
+  Personnage, ConstXmlModifieArmure, CodeLocalisation)`, même moule que ModifyWeapon/
+  ModifyDamage.
+- **`BOOK_RULESBOOK.Xml`** : le talent `RULES-T0ARM` (Armour (Rating), seul talent de tout le
+  projet à porter `<ModifArmour>`) passe de 4× `<ModifArmour name="...">1</ModifArmour>` à
+  4× `<Modificateur Type="ModifArmour" Cible="..." Facteur="1"/>` ; `BOOK_RULESBOOK_FRANCAIS.Xml`
+  : les 4 balises retirées (la traduction ne porte pas le tag structurel, même convention que
+  Mighty Blow/Accurate Shot).
+- **Unité `chargetalentarmuremodif.pas` supprimée** (plus aucun appelant) ; `xmlexportimport.pas`/
+  `warhammersource.pas` nettoyés (export/import dédiés, `.Clear`/`.Create`).
+- **Validé par Nono** : personnage Skink créé dans WinCreation (race `LUSTR-RACE_SKINK`, porte
+  `RULES-T0ARM` en talent de race) - +1 Point d'Armure confirmé sur chaque emplacement (Tête/
+  Bras/Corps/Jambes).
+- **Compilé (lazbuild, 0 erreur).**
+**Chantier "moteur générique de modificateurs" terminé : les 5 cibles (ModifyCarac/ModifySkill/
+ModifyWeapon/ModifyDamage/ModifArmour) sont chacune sur un seul pathway par source, aucune
+duplication restante trouvée. Reste hors périmètre, déjà noté avant ce chantier :
+`ListTalentAttributModif`/`ListTalentCompetenceModif`/`CompAjoutee` (mécanisme `Effet` distinct)
+et `<ModifySkillAttribut>` (broadcast par attribut, un `Cible` unique ne suffit pas) - voir
+A FAIRE.txt.**
+
+---
+
+**11/09/2026 — MOTEUR GÉNÉRIQUE DE MODIFICATEURS : MODIFYDAMAGE
 BRANCHÉ SUR TALENT (MIGRATION DE MIGHTY BLOW/ACCURATE SHOT), COMPILÉ ET VALIDÉ PAR NONO SUR
 GUNTHER KRIEG.** Suite immédiate du chantier `ModifyWeapon` (entrée du 11/09/2026 juste en
 dessous) : Nono a d'emblée posé l'objectif "ne plus avoir de talents en dur" - Strike Mighty

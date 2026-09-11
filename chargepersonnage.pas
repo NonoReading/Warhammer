@@ -12,7 +12,7 @@ uses
   ChargeTalentCompetenceModif, ChargeArmureBonusModif,
   ChargeSort, ChargeCorruptionTable,
   ChargeCorruptionCompetenceModif, ChargeCorruptionTalent,
-  ChargeCorruptionEquipement, ChargeTalentArmureModif, ChargeArmureBonusTalent,
+  ChargeCorruptionEquipement, ChargeArmureBonusTalent,
   ChargeModificateur, ChargeTalentModificateur, ChargeCareerBonusModificateur,
   ChargeArmeModificateur, ChargeArmureBonusModificateur, ChargeCorruptionModificateur,
   XmlExportImport;
@@ -1566,6 +1566,19 @@ Function PersonnageTalentModificateur(Personnage: StructurePersonnage; TypeModif
            and ((Trim(ListTalentModificateur[indiceModif].Filtre) = '')
                 or CompareRechercheValeur(ListTalentModificateur[indiceModif].Filtre, Filtre)) then
           Result := Result + ListTalentModificateur[indiceModif].Facteur * PersonnageTalent.Valeur;
+    // MetierTalent (talent choisi dans la grille de carriere, distinct de CreationTalent/
+    // AugmentationTalent) manquait ici - trou trouve le 11/09/2026 en migrant ModifArmour,
+    // deja present sur les 4 cibles migrees avant (ModifyCarac/ModifySkill/ModifyWeapon/
+    // ModifyDamage). PersonnageTalentArmureModif, la version dediee encore a migrer, boucle
+    // deja les trois listes.
+    for PersonnageTalent in Personnage.MetierTalent do
+      for indiceModif := 0 to (ListTalentModificateur.Count - 1) do
+        if (ListTalentModificateur[indiceModif].TypeModif = TypeModif)
+           and CompareRechercheValeur(ListTalentModificateur[indiceModif].CodeSource, PersonnageTalent.CodeTalent)
+           and CompareRechercheValeur(ListTalentModificateur[indiceModif].Cible, Cible)
+           and ((Trim(ListTalentModificateur[indiceModif].Filtre) = '')
+                or CompareRechercheValeur(ListTalentModificateur[indiceModif].Filtre, Filtre)) then
+          Result := Result + ListTalentModificateur[indiceModif].Facteur * PersonnageTalent.Valeur;
     for PersonnageTalent in Personnage.AugmentationTalent do
       for indiceModif := 0 to (ListTalentModificateur.Count - 1) do
         if (ListTalentModificateur[indiceModif].TypeModif = TypeModif)
@@ -1971,36 +1984,14 @@ Function PersonnageArmureBonusTalent(Personnage: StructurePersonnage): TArrayPer
   end;
 
 Function PersonnageTalentArmureModif(Personnage: StructurePersonnage; CodeLocalisation: String): Integer;
-  // Talents donnant des Points d'Armure - meme principe et memes 4 emplacements que
-  // PersonnageMutationArmureModif juste au-dessus, mais la source est un talent du
-  // personnage au lieu d'une mutation. Premier usage : le trait Armour (Rating)
-  // (RULES-T0ARM), que le Skink porte en "Armour 1 (Scaly Skin)". CONTEXT.md 2.15.
-  //
-  // Les trois listes de talents du personnage sont parcourues (creation, metier,
-  // augmentation) : un trait de race arrive par CreationTalent, mais rien n'interdit
-  // qu'un talent donnant de l'armure vienne d'ailleurs.
-  //
-  // La valeur declaree vaut pour UN niveau, elle est multipliee par le niveau possede :
-  // "Armour (Rating)" pris au niveau 2 donne 2 Points d'Armure.
-  var
-    Total: Integer = 0;
-
-  Procedure Cumule(Talents: array of StructurePersonnageTalent);
-    var
-      IndTal, IndMod: Integer;
-    begin
-      for IndTal := 0 to High(Talents) do
-        for IndMod := 0 to (ListTalentArmureModif.Count - 1) do
-          if CompareRechercheValeur(ListTalentArmureModif[IndMod].CodeTalent, Talents[IndTal].CodeTalent)
-             and CompareRechercheValeur(ListTalentArmureModif[IndMod].CodeLocalisation, CodeLocalisation) then
-            Total := Total + ListTalentArmureModif[IndMod].Valeur * Talents[IndTal].Valeur;
-    end;
-
+  // Talents donnant des Points d'Armure - meme principe que PersonnageMutationArmureModif
+  // juste au-dessus, mais la source est un talent du personnage au lieu d'une mutation.
+  // Premier usage : le trait Armour (Rating) (RULES-T0ARM), que le Skink porte en
+  // "Armour 1 (Scaly Skin)". CONTEXT.md 2.15. Migre sur le moteur generique le 11/09/2026
+  // (meme pathway que ModifyWeapon/ModifyDamage) - l'ancienne liste dediee
+  // ListTalentArmureModif et son unite ChargeTalentArmureModif sont retirees.
   begin
-    Cumule(Personnage.CreationTalent);
-    Cumule(Personnage.MetierTalent);
-    Cumule(Personnage.AugmentationTalent);
-    Result := Total;
+    Result := PersonnageTalentModificateur(Personnage, ConstXmlModifieArmure, CodeLocalisation);
   end;
 
 end.

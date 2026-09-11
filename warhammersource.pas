@@ -24,7 +24,7 @@ uses
   ChargeCorruptionTable, ChargeRaceOpinion, ChargeArmureBonusModif,
   ChargeCorruptionCompetenceModif,
   ChargeCorruptionTalent, ChargeCorruptionEquipement,
-  ChargeTalentArmureModif, ChargeModificateur, ChargeTalentModificateur, ChargeCareerBonusModificateur,
+  ChargeModificateur, ChargeTalentModificateur, ChargeCareerBonusModificateur,
   ChargeArmeModificateur, ChargeArmureBonusModificateur, ChargeCorruptionModificateur,
   CustomDrawn_Common, BCButton, BCLabel, fpTTF,
   PdfPersonnage, XmlExportImport, fppdf, WinLivre;
@@ -638,7 +638,6 @@ procedure TMenu.ChargerLivre(ForceMaJ: Boolean; ForceLivre: String);
         NbTalentEffet                := 0;
         NbTalentCompetenceModif     := 0;
         NbTalentCompetenceAjoute    := 0;
-        NbTalentArmureModif         := 0;
         NbTalentModificateur        := 0;
         NbArmeModificateur          := 0;
         NbArmureBonusModificateur   := 0;
@@ -697,7 +696,6 @@ procedure TMenu.ChargerLivre(ForceMaJ: Boolean; ForceLivre: String);
         ListCorruptionTalent.Clear;
         ListCorruptionEquipement.Clear;
         ListArmureBonusTalent.Clear;
-        ListTalentArmureModif.Clear;
         ListTalentModificateur.Clear;
         // ListArmeModificateur/ListArmureBonusModificateur n'avaient pas d'equivalent .Clear
         // avant leur creation (migration ModifyCarac, 11/09/2026) : rattrapage au passage,
@@ -910,7 +908,6 @@ procedure TMenu.FormCreate(Sender: TObject);
        ListCorruptionCompetenceAttributModif := TListCorruptionCompetenceAttributModif.Create;
        ListCorruptionTalent         := TListCorruptionTalent.Create;
        ListCorruptionEquipement     := TListCorruptionEquipement.Create;
-       ListTalentArmureModif        := TListTalentArmureModif.Create;
        ListArmureBonusTalent        := TListArmureBonusTalent.Create;
        ListTalentModificateur       := TListModificateur.Create;
 

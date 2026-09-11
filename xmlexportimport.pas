@@ -19,7 +19,6 @@ uses
   ChargeTalentEffet, ChargeTalentCompetenceModif, ChargeTalentCompetenceAjoute, ChargeRaceOpinion,
   ChargeArmureBonusModif, ChargeCorruptionCompetenceModif,
   ChargeCorruptionTalent, ChargeCorruptionEquipement,
-  ChargeTalentArmureModif,
   ChargeArmureBonusTalent,
   ChargeModificateur, ChargeTalentModificateur, ChargeCareerBonusModificateur,
   ChargeArmeModificateur, ChargeArmureBonusModificateur, ChargeCorruptionModificateur,
@@ -169,7 +168,6 @@ Procedure XmlExportBook(Livre: String; Langue: String);
     FileName:                 String;
     PCompetence:              StructureCompetence;
     PTalent:                  StructureTalent;
-    PTalentArmureModifExp:    StructureTalentArmureModif;
     PEspece:                  StructureEspece;
     PNation:                  StructureNation;
     PRace:                    StructureRace;
@@ -402,11 +400,6 @@ Procedure XmlExportBook(Livre: String; Langue: String);
                   if PTalent.XpGroupe <> '' then
                     XmlContent.Add(XmlLigne(ConstXmlXpGroupe, PTalent.XpGroupe));
                 end;
-              for PTalentArmureModifExp in ListTalentArmureModif do
-                if CompareRechercheValeur(PTalentArmureModifExp.CodeTalent, PTalent.CodeTalent) then
-                  XmlContent.Add(XmlLigneDonnee(ConstXmlModifieArmure,
-                    XmlCreeCodeLivre(ConstRulesBook, PTalentArmureModifExp.CodeLocalisation),
-                    IntToStr(PTalentArmureModifExp.Valeur)));
               XmlContent.Add(XmlLigneLangue(ConstXmlTest, Langue, PTalent.Tests));
 
               XmlContent.Add(XmlFinCode(ConstXmlTalent));
@@ -1101,7 +1094,6 @@ Procedure XmlImport(FileName: String; OnlyPrimary: Boolean; OnlyCode: Boolean);
     PTalentEffet:             StructureTalentEffet;
     PTalentCompetenceModif:   StructureTalentCompetenceModif;
     PTalentCompetenceAjoute:  StructureTalentCompetenceAjoute;
-    PTalentArmureModif:       StructureTalentArmureModif;
     PTalentModificateur:      StructureModificateur;
     PArmureBonusModif:        StructureArmureBonusModif;
     PCorruptionModificateur:    StructureModificateur;
@@ -1494,21 +1486,6 @@ Procedure XmlImport(FileName: String; OnlyPrimary: Boolean; OnlyCode: Boolean);
                                    begin
                                     ListTalentCompetenceModif.add(PTalentCompetenceModif);
                                     inc(NbTalentCompetenceModif);
-                                   end;
-                              end;
-                            ConstXmlModifieArmure:
-                              begin
-                                // Talent donnant des Points d'Armure (trait Armour (Rating),
-                                // marque de Quetzl) - meme balise et meme forme que la version
-                                // mutation, voir ChargeTalentArmureModif.
-                                PTalentArmureModif.Livre            := Livre;
-                                PTalentArmureModif.CodeTalent       := PTalent.CodeTalent;
-                                PTalentArmureModif.CodeLocalisation := RemoveQuotes(UTF8Encode(Node.Attributes.GetNamedItem(ConstXmlData).NodeValue));
-                                PTalentArmureModif.Valeur           := StrToIntDef(RemoveQuotes(UTF8Encode(Node.TextContent)), 0);
-                                if LangueDef = ConstAnglais then
-                                   begin
-                                    ListTalentArmureModif.add(PTalentArmureModif);
-                                    inc(NbTalentArmureModif);
                                    end;
                               end;
                             ConstXmlModificateur:

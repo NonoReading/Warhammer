@@ -8,11 +8,9 @@ uses
   Classes, SysUtils, ChargeModificateur;
 
 // Porteur des StructureModificateur (ChargeModificateur) que N'IMPORTE QUEL talent peut
-// declarer : ModifySkill et ModifyWeapon d'abord (aujourd'hui reserves aux paliers de
-// CareerBonus, chargepersonnage.pas PersonnageCareerBonusCompetenceModif/ArmeModif),
-// ModifyDamage ensuite (n'existe encore pour aucune source). ModifyCarac et ModifArmour
-// restent portes par ChargeTalentAttributModif/ChargeTalentArmureModif pour l'instant :
-// migration separee, pas dans ce chantier.
+// declarer : ModifyCarac, ModifySkill, ModifyWeapon, ModifyDamage et ModifArmour passent
+// tous par cette liste depuis le 11/09/2026 (moteur generique de modificateurs), les
+// anciennes unites dediees par cible ont ete retirees au fur et a mesure.
 Var
   ListTalentModificateur:   TListModificateur;
   NbTalentModificateur:     Integer;

@@ -46,6 +46,16 @@ Nono sur Gunther Krieg : regression nulle sur les armes de contact deja porteuse
 Blow, et une arme a distance ajoutee sans Accurate Shot ne recoit correctement aucun bonus.
 Detail CONTEXT.md (entree du 11/09/2026 en tete de fichier), Log.txt.]
 
+[FAIT LE 11/09/2026 - ModifArmour sur Talent, RESOLU - chantier "moteur generique de
+modificateurs" termine (les 5 cibles ModifyCarac/ModifySkill/ModifyWeapon/ModifyDamage/
+ModifArmour sont chacune sur un seul pathway par source). Bug trouve au passage :
+PersonnageTalentModificateur ne bouclait jamais sur Personnage.MetierTalent (talent choisi
+en carriere), trou deja present dans les 4 migrations precedentes du jour, corrige en
+premier. PersonnageTalentArmureModif deleguee au moteur generique, unite
+ChargeTalentArmureModif supprimee. Valide par Nono sur un Skink cree pour le test
+(RULES-T0ARM, talent de race) : +1 Point d'Armure confirme sur les 4 emplacements. Detail
+CONTEXT.md (entree du 11/09/2026 en tete de fichier), Log.txt.]
+
 LIBELLES TRONQUES SUR CERTAINS BOUTONS DE WINMUTATION. Signale par Nono le 11/09/2026 :
 sur la fenetre Corruption (ajout de mutation), "Spend a Resilience point"/"Accept a
 mutation"/"Physical Corruption"/"Mental Corruption" (ButtonMutationResilience/Accepter/

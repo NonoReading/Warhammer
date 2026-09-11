@@ -4033,10 +4033,6 @@ See page 190 for Fear rules"</Explanation>
 <Talent id="RULES-T0ARM">
 <Trait>"1"</Trait>
 <Attribut>""</Attribut>
-<ModifArmour name="RULES-ARMOL_HEAD">1</ModifArmour>
-<ModifArmour name="RULES-ARMOL_ARM">1</ModifArmour>
-<ModifArmour name="RULES-ARMOL_BODY">1</ModifArmour>
-<ModifArmour name="RULES-ARMOL_LEG">1</ModifArmour>
 <Description language="FRANCAIS">"Armure (Valeur)"</Description>
 <Short language="FRANCAIS">""</Short>
 <Explanation language="FRANCAIS">"La créature est protégée par une armure ou un cuir épais. Elle possède un nombre de Points d'Armure égal à sa Valeur sur toutes les Localisations."</Explanation>
