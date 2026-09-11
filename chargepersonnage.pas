@@ -9,12 +9,13 @@ uses
   Classes, SysUtils, ChargeConstantes, XMLRead, DOM,
   Unitcalcul, ChargeRace, ChargeMetier, ChargeAttribut, ChargeCompetence,
   ChargeTalent, ChargeArme, ChargeArmure, ChargeArmureSimplifie,
-  ChargeTalentAttributModif, ChargeTalentCompetenceModif, ChargeArmeAttributModif,
-  ChargeArmureBonusModif, ChargeArmureBonusAttributModif,
-  ChargeSort, ChargeCorruptionTable, ChargeCorruptionAttributModif,
+  ChargeTalentCompetenceModif, ChargeArmureBonusModif,
+  ChargeSort, ChargeCorruptionTable,
   ChargeCorruptionCompetenceModif, ChargeCorruptionArmureModif, ChargeCorruptionTalent,
   ChargeCorruptionEquipement, ChargeTalentArmureModif, ChargeArmureBonusTalent,
-  ChargeModificateur, ChargeTalentModificateur, ChargeCareerBonusModificateur, XmlExportImport;
+  ChargeModificateur, ChargeTalentModificateur, ChargeCareerBonusModificateur,
+  ChargeArmeModificateur, ChargeArmureBonusModificateur, ChargeCorruptionModificateur,
+  XmlExportImport;
 
 Type
   StructurePersonnageAttribut   = Record
@@ -171,8 +172,15 @@ Type
   // Effets à delta pur des mutations obtenues (CONTEXT.md §2.7, étape 8) - somme, pour un code
   // d'attribut/compétence donné, tous les <ModifyCarac>/<ModifySkill> des mutations présentes
   // dans Personnage.Mutations. Ce sont ici de vrais modificateurs additionnés au Total
-  // (PdfPersonnageAttribut/PdfPersonnageCompetence, pdfpersonnage.pas).
+  // (PdfPersonnageAttribut/PdfPersonnageCompetence, pdfpersonnage.pas). Implementation deleguee
+  // a PersonnageMutationModificateur depuis le 11/09/2026 (migration ModifyCarac sur le moteur
+  // generique, meme chantier que Talent/CareerBonus).
   Function PersonnageMutationAttributModif(Personnage: StructurePersonnage; CodeAttribut: String): Integer;
+  // Moteur generique (ChargeCorruptionModificateur) cote Mutation - pendant de
+  // PersonnageTalentModificateur, sans filtre de palier (une mutation presente compte
+  // toujours). CodeSource = StructureCorruptionTable.Code. CONTEXT.md, chantier moteur
+  // generique, etape "migrer ModifyCarac d'Attribut" (11/09/2026).
+  Function PersonnageMutationModificateur(Personnage: StructurePersonnage; TypeModif, Cible: String; Filtre: String = ''): Integer;
   Function PersonnageMutationCompetenceModif(Personnage: StructurePersonnage; CodeCompetence: String): Integer;
   Function PersonnageMutationArmureModif(Personnage: StructurePersonnage; CodeLocalisation: String): Integer;
   // Talents accordes automatiquement par les mutations du personnage (ex. Fleshy Tentacle ->
@@ -195,14 +203,13 @@ Type
   Function PersonnageArmureBonusTalent(Personnage: StructurePersonnage): TArrayPersonnageTalent;
   Function PersonnageTalentArmureModif(Personnage: StructurePersonnage; CodeLocalisation: String): Integer;
   // Même principe que PersonnageMutationAttributModif, mais sur les <ModifyCarac> déclarés
-  // directement sur un TALENT (DATA_TALENT, ListTalentAttributModif) plutôt que sur une
-  // mutation. Ajoutée le 06/09/2026 - CONTEXT.md, chantier "résolveur générique
-  // Attribut/Compétence" : premier pas, un seul appelant pour l'instant (Mouvement dans
-  // PdfPersonnageCreation/Feldo2P, en remplacement du cas TalentVeloce du case sur
-  // AugmentationTalent/CreationTalent). ListTalentAttributModif servait jusqu'ici uniquement
-  // à l'annotation d'affichage (PersonnageTalentAsterisque) ; elle devient ici, en plus, un
-  // vrai modificateur - aucun changement pour l'annotation existante, les deux lisent la
-  // même donnée sans interférer.
+  // directement sur un TALENT (DATA_TALENT) plutôt que sur une mutation. Ajoutée le
+  // 06/09/2026 - CONTEXT.md, chantier "résolveur générique Attribut/Compétence" : premier
+  // pas, un seul appelant pour l'instant (Mouvement dans PdfPersonnageCreation/Feldo2P, en
+  // remplacement du cas TalentVeloce du case sur AugmentationTalent/CreationTalent).
+  // Implementation deleguee a PersonnageTalentModificateur depuis le 11/09/2026 (migration
+  // ModifyCarac sur le moteur generique) - l'annotation d'affichage
+  // (PersonnageTalentAsterisque) lit desormais la meme ListTalentModificateur.
   Function PersonnageTalentAttributModif(Personnage: StructurePersonnage; CodeAttribut: String): Integer;
   // Moteur generique "par source" (chargemodificateur.pas, CONTEXT.md chantier "inversion
   // des recherches") : boucle sur les Talents possedes par le personnage et additionne les
@@ -221,8 +228,9 @@ Type
   // directement au Total et ne peut pas se permettre ce flou.
   Function PersonnageNiveauDansMetier(Personnage: StructurePersonnage; CodeMetier: String): Integer;
   // Même principe que PersonnageTalentAttributModif, mais sur les <ModifyCarac> déclarés dans
-  // un palier de DATA_CAREER_BONUS (ListCareerBonusAttributModif) - n'additionne un modificateur
-  // que si le personnage a l'appartenance ET a atteint le palier qui le porte.
+  // un palier de DATA_CAREER_BONUS - n'additionne un modificateur que si le personnage a
+  // l'appartenance ET a atteint le palier qui le porte. Implementation deleguee a
+  // PersonnageCareerBonusModificateur depuis le 11/09/2026 (migration ModifyCarac).
   Function PersonnageCareerBonusAttributModif(Personnage: StructurePersonnage; CodeAttribut: String): Integer;
   // Moteur generique (ChargeCareerBonusModificateur) cote CareerBonus - pendant de
   // PersonnageTalentModificateur ci-dessus, avec en plus le filtre de palier que les Talents
@@ -255,17 +263,25 @@ Type
   // virtuel" de plus (pdfpersonnage.pas, les deux gabarits).
   Function PersonnageCareerBonusSpecialRule(Personnage: StructurePersonnage): TListCareerBonusSpecialRule;
   // Même principe que PersonnageTalentAttributModif, mais sur les <ModifyCarac> déclarés
-  // directement sur une ARME (DATA_ARME, ListArmeAttributModif) - CONTEXT.md 2.50 étape 3.
-  // Une arme n'a pas de niveau : toute arme présente dans Personnage.Equipement compte,
-  // comme pour l'armure (pas de distinction "possédé" / "porté" dans ce modèle).
+  // directement sur une ARME (DATA_ARME) - CONTEXT.md 2.50 étape 3. Une arme n'a pas de
+  // niveau : toute arme présente dans Personnage.Equipement compte, comme pour l'armure (pas
+  // de distinction "possédé" / "porté" dans ce modèle). Implementation deleguee a
+  // PersonnageArmeModificateur depuis le 11/09/2026 (migration ModifyCarac).
   Function PersonnageArmeAttributModif(Personnage: StructurePersonnage; CodeAttribut: String): Integer;
-  // Modificateurs des QUALITES d'armure (ListArmureBonusAttributModif, <ModifyCarac> sur
-  // DATA_ARMURE_BONUS) et migration en vrai calcul de l'ancien mecanisme decoratif
-  // ListArmureBonusModif (<Modifier name="..."> lie a une competence, jusqu'ici jamais
-  // soustrait du Total - cause du bug Stechzeug Bracers, A FAIRE.txt). CONTEXT.md 2.50
-  // etape 3, point 4/5. Toute piece d'armure equipee (normale ET simplifiee) compte,
-  // qualite par qualite dans sa ListeBonus.
+  // Moteur generique (ChargeArmeModificateur) cote Arme - pendant de
+  // PersonnageTalentModificateur, sans filtre de niveau/palier. CodeSource = CodeArme.
+  Function PersonnageArmeModificateur(Personnage: StructurePersonnage; TypeModif, Cible: String; Filtre: String = ''): Integer;
+  // Modificateurs des QUALITES d'armure (<ModifyCarac> sur DATA_ARMURE_BONUS) et migration en
+  // vrai calcul de l'ancien mecanisme decoratif ListArmureBonusModif (<Modifier name="..."> lie
+  // a une competence, jusqu'ici jamais soustrait du Total - cause du bug Stechzeug Bracers,
+  // A FAIRE.txt). CONTEXT.md 2.50 etape 3, point 4/5. Toute piece d'armure equipee (normale ET
+  // simplifiee) compte, qualite par qualite dans sa ListeBonus. Implementation deleguee a
+  // PersonnageArmureBonusModificateur depuis le 11/09/2026 (migration ModifyCarac).
   Function PersonnageArmureBonusAttributModif(Personnage: StructurePersonnage; CodeAttribut: String): Integer;
+  // Moteur generique (ChargeArmureBonusModificateur) cote qualite d'armure - pendant de
+  // PersonnageTalentModificateur. CodeSource = CodeArmureBonus ; a appeler avec les codes
+  // rendus par PersonnageArmureQualites (une entree par qualite portee, pas par piece).
+  Function PersonnageArmureBonusModificateur(Personnage: StructurePersonnage; TypeModif, Cible: String; Filtre: String = ''): Integer;
   Function PersonnageArmureBonusCompetenceModif(Personnage: StructurePersonnage; CodeCompetence: String): Integer;
 
 implementation
@@ -1395,13 +1411,17 @@ begin
   // Stun/Very Resilient/Knight of the Order of the Hammer partageant tous "(4)" a tort,
   // signale par Nono le 11/09/2026). Meme famille de piege que ChercheCompetence, §2.17.
   Asterisque := 0;
-  // traiter les talents qui augmentent les attributs
-  For indiceTalent := 0 to (ListTalentAttributModif.count - 1) Do
-    if CompareRechercheValeur(ListTalentAttributModif[indiceTalent].CodeTalent, CodeTalent) then
+  // traiter les talents qui augmentent les attributs. ListTalentAttributModif -> filtre sur
+  // ListTalentModificateur (TypeModif = ConstXmlModifieAttribut) depuis le 11/09/2026,
+  // migration ModifyCarac sur le moteur generique - meme donnee, CodeSource remplace
+  // CodeTalent et Cible/Facteur remplacent CodeAttribut/Valeur.
+  For indiceTalent := 0 to (ListTalentModificateur.count - 1) Do
+    if (ListTalentModificateur[indiceTalent].TypeModif = ConstXmlModifieAttribut)
+       and CompareRechercheValeur(ListTalentModificateur[indiceTalent].CodeSource, CodeTalent) then
       begin
         Trouve := False;
         for indiceAttribut := 0 to High(Personnage.CreationAttribut) do
-          if CompareRechercheValeur(ListTalentAttributModif[indiceTalent].CodeAttribut, Personnage.CreationAttribut[indiceAttribut].CodeAttribut) then
+          if CompareRechercheValeur(ListTalentModificateur[indiceTalent].Cible, Personnage.CreationAttribut[indiceAttribut].CodeAttribut) then
             begin
               Asterisque := Personnage.Asterisque + 1;
               Trouve     := true;
@@ -1414,10 +1434,10 @@ begin
             // ValeurDonnee (texte brut) -> Valeur (Integer) le 06/09/2026 : le signe n'est
             // plus recopie tel quel depuis le XML, on le reconstruit - meme convention que
             // PdfPersonnageCreation l.2326 pour Personnage.Corruption[].Montant.
-            if ListTalentAttributModif[indiceTalent].Valeur > 0 then
-              Personnage.CreationAttribut[indiceAttribut].Bonus += '+' + IntToStr(ListTalentAttributModif[indiceTalent].Valeur)+' (' + IntToStr(Asterisque) + ')'
+            if ListTalentModificateur[indiceTalent].Facteur > 0 then
+              Personnage.CreationAttribut[indiceAttribut].Bonus += '+' + IntToStr(ListTalentModificateur[indiceTalent].Facteur)+' (' + IntToStr(Asterisque) + ')'
             else
-              Personnage.CreationAttribut[indiceAttribut].Bonus += IntToStr(ListTalentAttributModif[indiceTalent].Valeur)+' (' + IntToStr(Asterisque) + ')';
+              Personnage.CreationAttribut[indiceAttribut].Bonus += IntToStr(ListTalentModificateur[indiceTalent].Facteur)+' (' + IntToStr(Asterisque) + ')';
           end;
       end;
 
@@ -1489,39 +1509,34 @@ begin
 end;
 
 Function PersonnageMutationAttributModif(Personnage: StructurePersonnage; CodeAttribut: String): Integer;
+  begin
+    Result := PersonnageMutationModificateur(Personnage, ConstXmlModifieAttribut, CodeAttribut);
+  end;
+
+Function PersonnageMutationModificateur(Personnage: StructurePersonnage; TypeModif, Cible: String; Filtre: String = ''): Integer;
   var
     PersonnageMutation: StructurePersonnageMutation;
     indiceModif:        Integer;
   begin
     Result := 0;
     for PersonnageMutation in Personnage.Mutations do
-      for indiceModif := 0 to (ListCorruptionAttributModif.Count - 1) do
-        if CompareRechercheValeur(ListCorruptionAttributModif[indiceModif].CodeCorruption, PersonnageMutation.Code)
-           and CompareRechercheValeur(ListCorruptionAttributModif[indiceModif].CodeAttribut, CodeAttribut) then
-          Result := Result + ListCorruptionAttributModif[indiceModif].Valeur;
+      for indiceModif := 0 to (ListCorruptionModificateur.Count - 1) do
+        if (ListCorruptionModificateur[indiceModif].TypeModif = TypeModif)
+           and CompareRechercheValeur(ListCorruptionModificateur[indiceModif].CodeSource, PersonnageMutation.Code)
+           and CompareRechercheValeur(ListCorruptionModificateur[indiceModif].Cible, Cible)
+           and ((Trim(ListCorruptionModificateur[indiceModif].Filtre) = '')
+                or CompareRechercheValeur(ListCorruptionModificateur[indiceModif].Filtre, Filtre)) then
+          Result := Result + ListCorruptionModificateur[indiceModif].Facteur;
   end;
 
 Function PersonnageTalentAttributModif(Personnage: StructurePersonnage; CodeAttribut: String): Integer;
-  var
-    PersonnageTalent: StructurePersonnageTalent;
-    indiceModif:      Integer;
   begin
-    Result := 0;
-    // Multiplié par PersonnageTalent.Valeur (niveau du talent) depuis le 06/09/2026 : un talent
-    // à niveaux multiples (Max différent de "1", ex. Luck/Chanceux RULES-T0020, Strong-Minded/
-    // Obstiné RULES-T0107) donne son ModifyCarac autant de fois que de niveaux pris, comme le
-    // faisait l'ancien case (Chance := Chance + Val). Sans effet sur le pilote Fleet Footed
-    // (RULES-T0162, Max="1", Valeur toujours 1).
-    for PersonnageTalent in Personnage.CreationTalent do
-      for indiceModif := 0 to (ListTalentAttributModif.Count - 1) do
-        if CompareRechercheValeur(ListTalentAttributModif[indiceModif].CodeTalent, PersonnageTalent.CodeTalent)
-           and CompareRechercheValeur(ListTalentAttributModif[indiceModif].CodeAttribut, CodeAttribut) then
-          Result := Result + ListTalentAttributModif[indiceModif].Valeur * PersonnageTalent.Valeur;
-    for PersonnageTalent in Personnage.AugmentationTalent do
-      for indiceModif := 0 to (ListTalentAttributModif.Count - 1) do
-        if CompareRechercheValeur(ListTalentAttributModif[indiceModif].CodeTalent, PersonnageTalent.CodeTalent)
-           and CompareRechercheValeur(ListTalentAttributModif[indiceModif].CodeAttribut, CodeAttribut) then
-          Result := Result + ListTalentAttributModif[indiceModif].Valeur * PersonnageTalent.Valeur;
+    // Multiplie par PersonnageTalent.Valeur (niveau du talent) dans PersonnageTalentModificateur
+    // depuis le 06/09/2026 : un talent a niveaux multiples (Max different de "1", ex. Luck/
+    // Chanceux RULES-T0020, Strong-Minded/Obstine RULES-T0107) donne son ModifyCarac autant de
+    // fois que de niveaux pris, comme le faisait l'ancien case (Chance := Chance + Val). Sans
+    // effet sur le pilote Fleet Footed (RULES-T0162, Max="1", Valeur toujours 1).
+    Result := PersonnageTalentModificateur(Personnage, ConstXmlModifieAttribut, CodeAttribut);
   end;
 
 Function PersonnageTalentModificateur(Personnage: StructurePersonnage; TypeModif, Cible: String; Filtre: String = ''): Integer;
@@ -1562,42 +1577,8 @@ Function PersonnageNiveauDansMetier(Personnage: StructurePersonnage; CodeMetier:
   end;
 
 Function PersonnageCareerBonusAttributModif(Personnage: StructurePersonnage; CodeAttribut: String): Integer;
-  var
-    Appartenances:  TStringList;
-    IndApp:         Integer;
-    IndModif:       Integer;
-    NiveauAtteint:  Integer;
-    PBonus:         StructureCareerBonus;
-    CodeApp:        String;
   begin
-    Result := 0;
-    if Trim(Personnage.Appartenance) = '' then
-      Exit;
-    Appartenances := TStringList.Create;
-    try
-      ExtractStrings([','], [], PChar(Personnage.Appartenance), Appartenances);
-      for IndApp := 0 to Appartenances.Count - 1 do
-        begin
-          CodeApp := Trim(Appartenances[IndApp]);
-          if CodeApp = '' then
-            continue;
-          // Niveau atteint DANS LE METIER de cette appartenance (pas le niveau du palier lui
-          // meme) : un palier ne compte que si le personnage a vraiment atteint ce rang dans
-          // la carriere qui porte l'appartenance (§2.44 - Soldier pour un regiment, Knight pour
-          // un ordre de chevalerie).
-          PBonus        := ChercheCareerBonus(CodeApp);
-          NiveauAtteint := PersonnageNiveauDansMetier(Personnage, PBonus.CodeMetier);
-          if NiveauAtteint <= 0 then
-            continue;
-          for IndModif := 0 to (ListCareerBonusAttributModif.Count - 1) do
-            if CompareRechercheValeur(ListCareerBonusAttributModif[IndModif].CodeBonus, CodeApp)
-               and CompareRechercheValeur(ListCareerBonusAttributModif[IndModif].CodeAttribut, CodeAttribut)
-               and (ListCareerBonusAttributModif[IndModif].Niveau <= NiveauAtteint) then
-              Result := Result + ListCareerBonusAttributModif[IndModif].Valeur;
-        end;
-    finally
-      Appartenances.Free;
-    end;
+    Result := PersonnageCareerBonusModificateur(Personnage, ConstXmlModifieAttribut, CodeAttribut);
   end;
 
 Function PersonnageCareerBonusModificateur(Personnage: StructurePersonnage; TypeModif, Cible: String; Filtre: String = ''): Integer;
@@ -1687,6 +1668,11 @@ Function PersonnageCareerBonusSpecialRule(Personnage: StructurePersonnage): TLis
   end;
 
 Function PersonnageArmeAttributModif(Personnage: StructurePersonnage; CodeAttribut: String): Integer;
+  begin
+    Result := PersonnageArmeModificateur(Personnage, ConstXmlModifieAttribut, CodeAttribut);
+  end;
+
+Function PersonnageArmeModificateur(Personnage: StructurePersonnage; TypeModif, Cible: String; Filtre: String = ''): Integer;
   var
     PersonnageEquipement: StructurePersonnageEquipement;
     IndModif:             Integer;
@@ -1694,10 +1680,13 @@ Function PersonnageArmeAttributModif(Personnage: StructurePersonnage; CodeAttrib
     Result := 0;
     for PersonnageEquipement in Personnage.Equipement do
       if TrimRight(PersonnageEquipement.TypeEquipement) = TrimRight(TypeEquipWe) then
-        for IndModif := 0 to (ListArmeAttributModif.Count - 1) do
-          if CompareRechercheValeur(ListArmeAttributModif[IndModif].CodeArme, PersonnageEquipement.CodeEquipement)
-             and CompareRechercheValeur(ListArmeAttributModif[IndModif].CodeAttribut, CodeAttribut) then
-            Result := Result + ListArmeAttributModif[IndModif].Valeur;
+        for IndModif := 0 to (ListArmeModificateur.Count - 1) do
+          if (ListArmeModificateur[IndModif].TypeModif = TypeModif)
+             and CompareRechercheValeur(ListArmeModificateur[IndModif].CodeSource, PersonnageEquipement.CodeEquipement)
+             and CompareRechercheValeur(ListArmeModificateur[IndModif].Cible, Cible)
+             and ((Trim(ListArmeModificateur[IndModif].Filtre) = '')
+                  or CompareRechercheValeur(ListArmeModificateur[IndModif].Filtre, Filtre)) then
+            Result := Result + ListArmeModificateur[IndModif].Facteur;
   end;
 
 Function PersonnageArmureQualites(Personnage: StructurePersonnage): TStringList;
@@ -1753,6 +1742,11 @@ Function PersonnageArmureQualites(Personnage: StructurePersonnage): TStringList;
   end;
 
 Function PersonnageArmureBonusAttributModif(Personnage: StructurePersonnage; CodeAttribut: String): Integer;
+  begin
+    Result := PersonnageArmureBonusModificateur(Personnage, ConstXmlModifieAttribut, CodeAttribut);
+  end;
+
+Function PersonnageArmureBonusModificateur(Personnage: StructurePersonnage; TypeModif, Cible: String; Filtre: String = ''): Integer;
   var
     Qualites: TStringList;
     Ind:      Integer;
@@ -1762,10 +1756,13 @@ Function PersonnageArmureBonusAttributModif(Personnage: StructurePersonnage; Cod
     Qualites := PersonnageArmureQualites(Personnage);
     try
       for Ind := 0 to Qualites.Count - 1 do
-        for IndModif := 0 to (ListArmureBonusAttributModif.Count - 1) do
-          if CompareRechercheValeur(ListArmureBonusAttributModif[IndModif].CodeArmureBonus, Qualites[Ind])
-             and CompareRechercheValeur(ListArmureBonusAttributModif[IndModif].CodeAttribut, CodeAttribut) then
-            Result := Result + ListArmureBonusAttributModif[IndModif].Valeur;
+        for IndModif := 0 to (ListArmureBonusModificateur.Count - 1) do
+          if (ListArmureBonusModificateur[IndModif].TypeModif = TypeModif)
+             and CompareRechercheValeur(ListArmureBonusModificateur[IndModif].CodeSource, Qualites[Ind])
+             and CompareRechercheValeur(ListArmureBonusModificateur[IndModif].Cible, Cible)
+             and ((Trim(ListArmureBonusModificateur[IndModif].Filtre) = '')
+                  or CompareRechercheValeur(ListArmureBonusModificateur[IndModif].Filtre, Filtre)) then
+            Result := Result + ListArmureBonusModificateur[IndModif].Facteur;
     finally
       Qualites.Free;
     end;

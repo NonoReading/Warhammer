@@ -65,25 +65,11 @@ Type
         Livre:            String;
   End;
 
-  // Un <ModifyCarac>/<ModifySkill> pose dans un <LevelN> de DATA_CAREER_BONUS - meme
-  // famille et meme raisonnement que StructureTalentAttributModif
-  // (chargetalentattributmodif.pas), une entree par tag XML, cle par CodeBonus+Niveau
-  // plutot qu'un champ unique sur StructureCareerBonusNiveau : un palier peut porter
-  // plusieurs modificateurs a la fois (ex. Knight of the Inner Circle, +10 Fel ET +10
-  // WP sur le meme palier). CONTEXT.md 2.50 etape 3.
-  StructureCareerBonusAttributModif = Record
-        CodeBonus:      String;
-        Niveau:         Integer;
-        CodeAttribut:   String;
-        Valeur:         Integer;
-  End;
-
-  // StructureCareerBonusCompetenceModif (<ModifySkill>) et StructureCareerBonusArmeModif
-  // (<ModifyWeapon>) sont passees au moteur generique le 11/09/2026 - voir
+  // StructureCareerBonusCompetenceModif (<ModifySkill>), StructureCareerBonusArmeModif
+  // (<ModifyWeapon>) et StructureCareerBonusAttributModif (<ModifyCarac>, supprimee le
+  // 11/09/2026) sont toutes trois passees au moteur generique - voir
   // ChargeModificateur.StructureModificateur (champ Niveau) et
-  // ChargeCareerBonusModificateur.ListCareerBonusModificateur. StructureCareerBonusAttributModif
-  // (<ModifyCarac>) ci-dessus reste a part pour l'instant, meme decision que ModifyCarac cote
-  // Talent (ChargeTalentModificateur) : migration separee, pas dans ce chantier.
+  // ChargeCareerBonusModificateur.ListCareerBonusModificateur.
 
   // Le pendant "regle narrative" des precedents - <SpecialRule name="Nom court">
   // Texte descriptif</SpecialRule> pose dans un <LevelN>. Necessaire parce que le palier 4
@@ -102,7 +88,6 @@ Type
 
   TListCareerBonus       = specialize TList<StructureCareerBonus>;
   TListCareerBonusNiveau = specialize TList<StructureCareerBonusNiveau>;
-  TListCareerBonusAttributModif = specialize TList<StructureCareerBonusAttributModif>;
   TListCareerBonusSpecialRule = specialize TList<StructureCareerBonusSpecialRule>;
 
 var
@@ -112,8 +97,6 @@ var
   NbCareerBonus:          Integer;
   ListCareerBonusNiveau:  TListCareerBonusNiveau;
   NbCareerBonusNiveau:    Integer;
-  ListCareerBonusAttributModif: TListCareerBonusAttributModif;
-  NbCareerBonusAttributModif:   Integer;
   ListCareerBonusSpecialRule: TListCareerBonusSpecialRule;
   NbCareerBonusSpecialRule:   Integer;
 

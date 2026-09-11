@@ -1,6 +1,62 @@
 # Warhammer — Contexte projet
 
-**Dernière mise à jour : 11/09/2026 — BUG DES ASTÉRISQUES DE TALENTS DUPLIQUÉES RÉSOLU,
+**Dernière mise à jour : 11/09/2026 — MOTEUR GÉNÉRIQUE DE MODIFICATEURS : MODIFYCARAC
+D'ATTRIBUT MIGRÉ SUR LES 5 SOURCES, COMPILÉ ET VALIDÉ PAR NONO (GUNTHER KRIEG + UNE
+MUTATION).** Suite du
+chantier "moteur générique" (entrées du 11/09/2026 plus bas) : dernière cible encore
+dupliquée (`PersonnageMutationAttributModif`/`PersonnageTalentAttributModif`/
+`PersonnageCareerBonusAttributModif`/`PersonnageArmeAttributModif`/
+`PersonnageArmureBonusAttributModif`, 5 fonctions quasi identiques sur 5 structures
+`Structure*AttributModif` séparées) migrée vers `ChargeModificateur.StructureModificateur`
+(`TypeModif = ConstXmlModifieAttribut`), même format que Talent/CareerBonus déjà branchés.
+- **Deux sources avaient déjà un moteur générique** (Talent → `ListTalentModificateur`,
+  CareerBonus → `ListCareerBonusModificateur`) : leur parsing `<ModifyCarac>`
+  (`xmlexportimport.pas`) redirigé vers ces listes existantes, et les 2 fonctions
+  `Personnage*AttributModif` réduites à un appel de `Personnage*Modificateur` (même
+  principe que `PersonnageCareerBonusCompetenceModif`/`ArmeModif` depuis l'étape 3).
+- **Trois sources n'avaient encore aucun moteur générique** (Mutation, Arme, qualité
+  d'armure) : 3 nouvelles unités créées sur le moule de `ChargeTalentModificateur`
+  (`ChargeCorruptionModificateur`/`ChargeArmeModificateur`/`ChargeArmureBonusModificateur`,
+  chacune une seule `TListModificateur`), et 3 nouvelles fonctions génériques
+  `PersonnageMutationModificateur`/`PersonnageArmeModificateur`/
+  `PersonnageArmureBonusModificateur` dans `chargepersonnage.pas`, même moule que
+  `PersonnageTalentModificateur` (Mutation et Arme n'ont pas de notion de palier, comme
+  les Talents ; la qualité d'armure boucle sur `PersonnageArmureQualites` au lieu de
+  `Personnage.CreationTalent`/`Equipement`).
+- **Point sensible traité avec précaution** : `PersonnageTalentAsterisque`
+  (`chargepersonnage.pas`), la fonction du bug résolu ci-dessus le jour même, lisait
+  aussi `ListTalentAttributModif` pour annoter l'astérisque sur un Attribut augmenté par
+  talent. Migrée vers `ListTalentModificateur` en conservant strictement la même logique
+  (reset `Asterisque := 0` en tête, calcul de l'astérisque via `Personnage.Asterisque + 1`
+  dans une variable locale fraîche) — aucun changement de comportement, juste la source
+  de données. `PdfPersonnageMutationAsterisques` (`pdfpersonnage.pas`), qui annotait de
+  la même façon les Attributs modifiés par mutation, migrée pareillement vers
+  `ListCorruptionModificateur`.
+- **Rattrapage trouvé en cours de route** : `ListArmeAttributModif`/
+  `ListArmureBonusAttributModif` n'avaient jamais de `.Clear` au rechargement d'un livre
+  (`warhammersource.pas`) — bug dormant de la même famille que celui documenté le
+  21/08/2026 juste au-dessus dans ce fichier (doublon d'affichage possible au
+  rechargement), jamais visible faute d'avoir jamais été déclenché. Les listes de
+  remplacement (`ListArmeModificateur`/`ListArmureBonusModificateur`) ont leur `.Clear`
+  dès leur création.
+- **Unités supprimées** (plus aucun appelant après migration) :
+  `chargetalentattributmodif.pas`, `chargearmeattributmodif.pas`,
+  `chargearmurebonusattributmodif.pas`, `chargecorruptionattributmodif.pas`, et
+  `StructureCareerBonusAttributModif`/`TListCareerBonusAttributModif` (`chargemetier.pas`,
+  pas de fichier dédié). `ChargeTalentAttributModif` retiré de `WarhammerHelp.lpi` (seule
+  des quatre unités effectivement listée dans le fichier projet).
+- **Compilé (lazbuild, 0 erreur) puis validé par Nono** sur Gunther Krieg (bonus de
+  talent, astérisques) et sur un personnage avec une mutation donnant un bonus
+  d'Attribut : RAS dans les deux cas, Total et astérisques identiques à avant ce
+  chantier.
+**Chantier suivant : reste à brancher Mutation sur ModifySkill/ModifyArmour (elle n'a
+jamais eu de pendant Compétence générique, contrairement à Talent/CareerBonus), ajouter
+ModifyWeapon/un futur ModifyDamage sur Talent, et vérifier qu'aucune autre cible
+qu'Attribut ne reste dupliquée entre les 5 sources.**
+
+---
+
+**11/09/2026 — BUG DES ASTÉRISQUES DE TALENTS DUPLIQUÉES RÉSOLU,
 COMPILÉ ET VALIDÉ PAR NONO SUR GUNTHER KRIEG.** Reprise à froid de l'entrée §ci-dessous
 ("PARTIELLEMENT corrigé... PAS RÉSOLU"). Nono a apporté une précision décisive en
 rouvrant le sujet : le symptôme apparaissait **au chargement du personnage**, pas
@@ -35,7 +91,7 @@ fichiers, expliquaient le même symptôme :
   de l'ancienne valeur (déjà correcte) par correspondance de `CodeTalent` sur le tableau
   d'avant reconstruction, pour ne pas perdre le numéro légitime (ex. Very Resilient "(3)")
   en même temps que les faux.
-**Non commité au moment de cette mise à jour — voir avec Nono.**
+**Committé (`f858d75`).**
 
 ---
 

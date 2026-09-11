@@ -2686,3 +2686,37 @@ zero TOUS les champs qui ne viennent pas de cette grille (ici Asterisque), pas s
 qu il repeuple - meme famille de piege que les variables locales non reinitialisees deja
 rencontrees dans ce chantier, mais du cote d une variable partagee entre plusieurs appels
 plutot que d une constante typee.
+
+11/09/2026 - MODIFYCARAC D ATTRIBUT MIGRE SUR LES 5 SOURCES (MOTEUR GENERIQUE DE
+MODIFICATEURS), COMPILE ET VALIDE PAR NONO (GUNTHER KRIEG + UNE MUTATION). Suite du chantier
+moteur generique
+(Talent et CareerBonus branches plus haut le meme jour) : derniere cible encore dupliquee 5
+fois (Mutation/Talent/CareerBonus/Arme/ArmureBonus, une fonction Personnage*AttributModif par
+source sur des structures Structure*AttributModif quasi identiques) migree vers
+ChargeModificateur.StructureModificateur (TypeModif = ConstXmlModifieAttribut).
+Talent et CareerBonus avaient deja un moteur generique (ListTalentModificateur/
+ListCareerBonusModificateur) : leur parsing ModifyCarac redirige vers ces listes, les deux
+fonctions Personnage*AttributModif reduites a un appel de Personnage*Modificateur.
+Mutation, Arme et qualite d armure n avaient encore aucun moteur generique : trois nouvelles
+unites creees sur le moule de ChargeTalentModificateur (ChargeCorruptionModificateur/
+ChargeArmeModificateur/ChargeArmureBonusModificateur) et trois nouvelles fonctions generiques
+dans chargepersonnage.pas (PersonnageMutationModificateur/PersonnageArmeModificateur/
+PersonnageArmureBonusModificateur).
+Point traite avec precaution : PersonnageTalentAsterisque (chargepersonnage.pas), la fonction
+du bug resolu plus haut le jour meme, lisait aussi ListTalentAttributModif pour annoter l
+asterisque sur un Attribut augmente par talent - migree vers ListTalentModificateur en
+conservant strictement la meme logique (reset Asterisque := 0 en tete, calcul via
+Personnage.Asterisque + 1 dans une variable locale fraiche), aucun changement de comportement.
+PdfPersonnageMutationAsterisques (pdfpersonnage.pas), meme annotation cote mutation, migree
+pareillement vers ListCorruptionModificateur.
+Rattrapage trouve en cours de route : ListArmeAttributModif et ListArmureBonusAttributModif n
+avaient jamais de .Clear au rechargement d un livre (warhammersource.pas) - bug dormant jamais
+declenche, meme famille que celui documente le 21/08/2026 (ListArmureSimplifiee/ListArmeBonus).
+Les listes de remplacement ont leur .Clear des leur creation.
+Unites supprimees (plus aucun appelant) : chargetalentattributmodif.pas,
+chargearmeattributmodif.pas, chargearmurebonusattributmodif.pas,
+chargecorruptionattributmodif.pas, et StructureCareerBonusAttributModif (chargemetier.pas,
+pas de fichier dedie). ChargeTalentAttributModif retire de WarhammerHelp.lpi.
+Compile avec lazbuild (0 erreur), puis valide par Nono sur Gunther Krieg (bonus de talent,
+asterisques) et sur un personnage avec une mutation donnant un bonus d Attribut : RAS dans
+les deux cas.

@@ -14,6 +14,11 @@ depuis la grille ecran a CHAQUE ouverture de personnage sans jamais remettre Ast
 zero, ecrasant le calcul correct fait a l'instant d'avant. Compile et valide par Nono sur
 Gunther Krieg. Detail CONTEXT.md (entree du 11/09/2026 en tete de fichier), Log.txt.]
 
+[FAIT LE 11/09/2026 - Migration ModifyCarac d'Attribut sur le moteur generique, RESOLU. Les
+5 fonctions Personnage*AttributModif (Mutation/Talent/CareerBonus/Arme/ArmureBonus)
+deleguent desormais a ChargeModificateur. Compile et valide par Nono sur Gunther Krieg et sur
+une mutation, RAS. Detail CONTEXT.md (entree du 11/09/2026 en tete de fichier), Log.txt.]
+
 LIBELLES TRONQUES SUR CERTAINS BOUTONS DE WINMUTATION. Signale par Nono le 11/09/2026 :
 sur la fenetre Corruption (ajout de mutation), "Spend a Resilience point"/"Accept a
 mutation"/"Physical Corruption"/"Mental Corruption" (ButtonMutationResilience/Accepter/

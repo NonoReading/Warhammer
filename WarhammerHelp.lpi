@@ -370,11 +370,6 @@
         <UnitName Value="ChargeRaceCorruptionCreation"/>
       </Unit>
       <Unit>
-        <Filename Value="chargetalentattributmodif.pas"/>
-        <IsPartOfProject Value="True"/>
-        <UnitName Value="ChargeTalentAttributModif"/>
-      </Unit>
-      <Unit>
         <Filename Value="chargetalenteffet.pas"/>
         <IsPartOfProject Value="True"/>
         <UnitName Value="ChargeTalentEffet"/>

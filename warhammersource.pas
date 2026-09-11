@@ -14,17 +14,18 @@ uses
   ChargeRace, ChargeEspece, ChargeNation, ChargeRegle, WinRaces, ChargeRaceAttribut, ChargeRaceCompetence,
   ChargeRaceTalent, GlobalFonts, WinCreation, ChargeTalentCreation,
   WinPersonnage, ChargeAttributAugmentation, ChargeCompetenceAugmentation,
-  ChargeArme, ChargeArmeAttributModif, WinWeapon, ChargeArmeBonus, ChargeMetierEquipement, ChargeArmure,
-  ChargeArmureBonus, ChargeArmureBonusAttributModif, ChargeArmureBonusTalent, WinArmor, ChargeSort, WinSpell, ChargeTexte,
+  ChargeArme, WinWeapon, ChargeArmeBonus, ChargeMetierEquipement, ChargeArmure,
+  ChargeArmureBonus, ChargeArmureBonusTalent, WinArmor, ChargeSort, WinSpell, ChargeTexte,
   ChargeFabrication, Unitcalcul, ChargeMetierSousMetier,
   ChargeMetierRaceChoixMetier, ChargePersonnage, ChargeRaceCreation,
   ChargeTraduction, ChargeArmureSimplifie, ChargeLivre,
-  ChargeTalentAttributModif, ChargeTalentEffet, ChargeTalentCompetenceModif,
+  ChargeTalentEffet, ChargeTalentCompetenceModif,
   ChargeTalentCompetenceAjoute, ChargeRaceCorruptionCreation,
   ChargeCorruptionTable, ChargeRaceOpinion, ChargeArmureBonusModif,
-  ChargeCorruptionAttributModif, ChargeCorruptionCompetenceModif,
+  ChargeCorruptionCompetenceModif,
   ChargeCorruptionArmureModif, ChargeCorruptionTalent, ChargeCorruptionEquipement,
   ChargeTalentArmureModif, ChargeModificateur, ChargeTalentModificateur, ChargeCareerBonusModificateur,
+  ChargeArmeModificateur, ChargeArmureBonusModificateur, ChargeCorruptionModificateur,
   CustomDrawn_Common, BCButton, BCLabel, fpTTF,
   PdfPersonnage, XmlExportImport, fppdf, WinLivre;
 
@@ -634,12 +635,14 @@ procedure TMenu.ChargerLivre(ForceMaJ: Boolean; ForceLivre: String);
         NbRaceCorruptionCreation    := 0;
         nbCorruptionTable           := 0;
         nbCorruptionChance          := 0;
-        NbTalentAttributModif       := 0;
         NbTalentEffet                := 0;
         NbTalentCompetenceModif     := 0;
         NbTalentCompetenceAjoute    := 0;
         NbTalentArmureModif         := 0;
         NbTalentModificateur        := 0;
+        NbArmeModificateur          := 0;
+        NbArmureBonusModificateur   := 0;
+        NbCorruptionModificateur    := 0;
         NbRaceOpinion               := 0;
 
         // vider les données
@@ -677,7 +680,6 @@ procedure TMenu.ChargerLivre(ForceMaJ: Boolean; ForceLivre: String);
         ListTraitOption.Clear;
         ListCareerBonus.Clear;
         ListCareerBonusNiveau.Clear;
-        ListCareerBonusAttributModif.Clear;
         ListCareerBonusModificateur.Clear;
         ListCareerBonusSpecialRule.Clear;
         ListFabrication.Clear;
@@ -687,12 +689,10 @@ procedure TMenu.ChargerLivre(ForceMaJ: Boolean; ForceLivre: String);
         ListRaceCorruptionCreation.Clear;
         ListCorruptionTable.Clear;
         ListCorruptionChance.Clear;
-        ListTalentAttributModif.Clear;
         ListTalentEffet.Clear;
         ListTalentCompetenceModif.Clear;
         ListTalentCompetenceAjoute.Clear;
         ListRaceOpinion.Clear;
-        ListCorruptionAttributModif.Clear;
         ListCorruptionCompetenceModif.Clear;
         ListCorruptionCompetenceAttributModif.Clear;
         ListCorruptionArmureModif.Clear;
@@ -701,6 +701,13 @@ procedure TMenu.ChargerLivre(ForceMaJ: Boolean; ForceLivre: String);
         ListArmureBonusTalent.Clear;
         ListTalentArmureModif.Clear;
         ListTalentModificateur.Clear;
+        // ListArmeModificateur/ListArmureBonusModificateur n'avaient pas d'equivalent .Clear
+        // avant leur creation (migration ModifyCarac, 11/09/2026) : rattrapage au passage,
+        // meme risque de doublon au rechargement que l'oubli documente ci-dessus pour
+        // ListArmureSimplifiee/ListArmeBonus le 21/08/2026.
+        ListArmeModificateur.Clear;
+        ListArmureBonusModificateur.Clear;
+        ListCorruptionModificateur.Clear;
       end;
 
     // chercher les livres
@@ -870,20 +877,19 @@ procedure TMenu.FormCreate(Sender: TObject);
        ListeAttributAugmentation    := TListeAttributAugmentation.Create;
        ListeCompetenceAugmentation  := TListeCompetenceAugmentation.Create;
        ListArme                     := TListArme.Create;
-       ListArmeAttributModif        := TListArmeAttributModif.Create;
+       ListArmeModificateur         := TListModificateur.Create;
        ListArmure                   := TListArmure.Create;
        ListArmureSimplifiee         := TListArmureSimplifiee.Create;
        ListArmeBonus                := TListArmeBonus.Create;
        ListMetierEquipement         := TListMetierEquipement.Create;
        ListArmureBonus              := TListArmureBonus.Create;
-       ListArmureBonusAttributModif := TListArmureBonusAttributModif.Create;
+       ListArmureBonusModificateur  := TListModificateur.Create;
        ListSort                     := TListSort.Create;
        ListSortTalent               := TListSortTalent.Create;
        ListTrait                    := TListTrait.Create;
        ListTraitOption              := TListTraitOption.Create;
        ListCareerBonus              := TListCareerBonus.Create;
        ListCareerBonusNiveau        := TListCareerBonusNiveau.Create;
-       ListCareerBonusAttributModif := TListCareerBonusAttributModif.Create;
        ListCareerBonusModificateur   := TListModificateur.Create;
        ListCareerBonusSpecialRule    := TListCareerBonusSpecialRule.Create;
        ListFabrication              := TListFabrication.Create;
@@ -897,13 +903,12 @@ procedure TMenu.FormCreate(Sender: TObject);
        ListRaceCorruptionCreation   := TListRaceCorruptionCreation.Create;
        ListCorruptionTable          := TListCorruptionTable.Create;
        ListCorruptionChance         := TListCorruptionChance.Create;
-       ListTalentAttributModif      := TListTalentAttributModif.Create;
        ListTalentEffet               := TListTalentEffet.Create;
        ListTalentCompetenceModif    := TListTalentCompetenceModif.Create;
        ListTalentCompetenceAjoute   := TListTalentCompetenceAjoute.Create;
        ListRaceOpinion              := TListRaceOpinion.Create;
        ListArmureBonusModif         := TListArmureBonusModif.Create;
-       ListCorruptionAttributModif  := TListCorruptionAttributModif.Create;
+       ListCorruptionModificateur   := TListModificateur.Create;
        ListCorruptionCompetenceModif:= TListCorruptionCompetenceModif.Create;
        ListCorruptionCompetenceAttributModif := TListCorruptionCompetenceAttributModif.Create;
        ListCorruptionArmureModif    := TListCorruptionArmureModif.Create;

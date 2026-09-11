@@ -12,7 +12,7 @@ uses
   ChargeConstantes, ChargeMetierAttribut, ChargeTexte, ChargeMetierTalent,
   ChargePersonnage, ChargeArmureSimplifie, ChargeAttributAugmentation,
   ChargeCompetenceAugmentation, ChargeCorruptionTable,
-  ChargeCorruptionAttributModif, ChargeCorruptionCompetenceModif,
+  ChargeModificateur, ChargeCorruptionModificateur, ChargeCorruptionCompetenceModif,
   ChargeCorruptionArmureModif, ChargeTalentEffet,
   Dialogs, UnitCalcul, Math, LCLIntf;
 
@@ -2120,7 +2120,7 @@ Function PdfPersonnageArmureAsterisques(Personnage: StructurePersonnage; Asteris
 Function PdfPersonnageMutationAsterisques(Personnage: StructurePersonnage; AsterisqueDepart: Integer; out AsterisqueParMutation: TStringList; out AsterisqueArmure: String; out AsterisqueFinal: Integer): TStringList;
   var
     PersonnageMutation:                 StructurePersonnageMutation;
-    PCorruptionAttributModif:           StructureCorruptionAttributModif;
+    PCorruptionModificateur:            StructureModificateur;
     PCorruptionCompetenceModif:         StructureCorruptionCompetenceModif;
     PCorruptionCompetenceAttributModif: StructureCorruptionCompetenceAttributModif;
     PCorruptionArmureModif:             StructureCorruptionArmureModif;
@@ -2137,8 +2137,13 @@ Function PdfPersonnageMutationAsterisques(Personnage: StructurePersonnage; Aster
     for PersonnageMutation in Personnage.Mutations do
       begin
         AsterisqueMutation := 0; // une seule astérisque par mutation, partagée par tous les codes qu'elle touche
-        for PCorruptionAttributModif in ListCorruptionAttributModif do
-          if CompareRechercheValeur(PCorruptionAttributModif.CodeCorruption, PersonnageMutation.Code) then
+        // ListCorruptionAttributModif -> filtre sur ListCorruptionModificateur (TypeModif =
+        // ConstXmlModifieAttribut) depuis le 11/09/2026, migration ModifyCarac sur le moteur
+        // generique - meme donnee, CodeSource remplace CodeCorruption et Cible/Facteur
+        // remplacent CodeAttribut/Valeur.
+        for PCorruptionModificateur in ListCorruptionModificateur do
+          if (PCorruptionModificateur.TypeModif = ConstXmlModifieAttribut)
+             and CompareRechercheValeur(PCorruptionModificateur.CodeSource, PersonnageMutation.Code) then
             begin
               if AsterisqueMutation = 0 then
                 begin
@@ -2146,14 +2151,14 @@ Function PdfPersonnageMutationAsterisques(Personnage: StructurePersonnage; Aster
                   AsterisqueMutation := AsterisqueCourant;
                   AsterisqueParMutation.Values[PersonnageMutation.Code] := '(' + IntToStr(AsterisqueMutation) + ')';
                 end;
-              // même format que les talents (ListTalentAttributModif) : la valeur signée
-              // suivie du numéro d'astérisque, ex. "+10 (3)".
-              if PCorruptionAttributModif.Valeur >= 0 then
-                Result.Values[PCorruptionAttributModif.CodeAttribut] := Result.Values[PCorruptionAttributModif.CodeAttribut]
-                  + ' +' + IntToStr(PCorruptionAttributModif.Valeur) + ' (' + IntToStr(AsterisqueMutation) + ')'
+              // même format que les talents : la valeur signée suivie du numéro d'astérisque,
+              // ex. "+10 (3)".
+              if PCorruptionModificateur.Facteur >= 0 then
+                Result.Values[PCorruptionModificateur.Cible] := Result.Values[PCorruptionModificateur.Cible]
+                  + ' +' + IntToStr(PCorruptionModificateur.Facteur) + ' (' + IntToStr(AsterisqueMutation) + ')'
               else
-                Result.Values[PCorruptionAttributModif.CodeAttribut] := Result.Values[PCorruptionAttributModif.CodeAttribut]
-                  + ' ' + IntToStr(PCorruptionAttributModif.Valeur) + ' (' + IntToStr(AsterisqueMutation) + ')';
+                Result.Values[PCorruptionModificateur.Cible] := Result.Values[PCorruptionModificateur.Cible]
+                  + ' ' + IntToStr(PCorruptionModificateur.Facteur) + ' (' + IntToStr(AsterisqueMutation) + ')';
             end;
         for PCorruptionCompetenceModif in ListCorruptionCompetenceModif do
           if CompareRechercheValeur(PCorruptionCompetenceModif.CodeCorruption, PersonnageMutation.Code) then
