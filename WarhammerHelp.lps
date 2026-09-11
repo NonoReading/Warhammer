@@ -486,8 +486,8 @@
         <UnitName Value="PdfPersonnage"/>
         <IsVisibleTab Value="True"/>
         <EditorIndex Value="3"/>
-        <TopLine Value="1145"/>
-        <CursorPos X="47" Y="1156"/>
+        <TopLine Value="1149"/>
+        <CursorPos X="28" Y="1160"/>
         <UsageCount Value="200"/>
         <Loaded Value="True"/>
       </Unit>

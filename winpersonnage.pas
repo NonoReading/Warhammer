@@ -2934,6 +2934,12 @@ begin
     tabExperience.Cells[ColXpDonnee, LigXpTotal] := Format('%.0n',[Personnage.Xp25Total/1])+' '
   else
     tabExperience.Cells[ColXpDonnee, LigXpTotal] := Format('%.0n',[Personnage.XpTotal/1])+' ';
+  // EditTotalXp/EditTotalXp25 lus par CalculTableExperience (Restant Xp) des le premier
+  // recalcul declenche pendant ce chargement (l.~3291 plus bas) - sans cette init, le champ
+  // est encore vide a ce moment-la et le Restant sort negatif (bug constate avec Nono le
+  // 11/09/2026, apparu au premier calcul apres ouverture d'un personnage).
+  EditTotalXp.text   := IntToStr(Personnage.XpTotal);
+  EditTotalXp25.text := IntToStr(Personnage.Xp25Total);
 
   // Race
   RaceEnCours               := Personnage.Race;
@@ -4447,10 +4453,14 @@ procedure TWinPersonnages.CalculTableExperience();
       end;
 
     // Restant Xp
+    // Total lu depuis EditTotalXp/EditTotalXp25 (valeur affichee, a jour) et non
+    // Personnage.XpTotal/Xp25Total (charge une seule fois a l'ouverture du fichier,
+    // jamais resynchronise si le Total est releve en cours de session - cf CONTEXT.md,
+    // bug PDF Feldo du 11/09/2026).
     if CheckBoxXpDiv25.Checked = true then
-      Restante := Personnage.Xp25Total - Depense
+      Restante := StrToIntDef(EditTotalXp25.Text,0) - Depense
     else
-      Restante := Personnage.XpTotal - Depense;
+      Restante := StrToIntDef(EditTotalXp.Text,0) - Depense;
 
 
     // Table des XP

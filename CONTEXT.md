@@ -1,6 +1,82 @@
 # Warhammer — Contexte projet
 
-**Dernière mise à jour : 11/09/2026 — MOTEUR GÉNÉRIQUE DE MODIFICATEURS : MODIFARMOUR
+**Dernière mise à jour : 11/09/2026 — RESTANT XP FAUX DANS WINPERSONNAGE (PAS LE PDF) : TOTAL
+FIGÉ À L'OUVERTURE DU FICHIER, CORRIGÉ ET VALIDÉ PAR NONO.** Suite immédiate du chantier PDF
+Feldo (entrée du 11/09/2026 juste en dessous) : Nono a testé sur un personnage SANS l'option
+`XpDiv25` (Charlatant chanceux) et a vu 5000/500/4500 sur la fiche WinPersonnage mais
+5000/5000/0 sur les DEUX PDF (normal ET Feldo). Ce n'était donc pas un bug PDF.
+- **Cause** : `CalculTableExperience` (`winpersonnage.pas`) calculait `Restante :=
+  Personnage.XpTotal - Depense` - un champ chargé **une seule fois à l'ouverture du fichier**
+  et jamais resynchronisé quand `EditTotalXp` est modifié en cours de session (aucune
+  assignation à `Personnage.XpTotal` nulle part dans `winpersonnage.pas`, vérifié par grep).
+  Sur Charlatant chanceux : Total relevé de 50 à 5000 en cours de session (carrière), mais
+  `Restante` a continué à se baser sur l'ancien 50 en interne - une fois 50 Xp dépensés,
+  Restante = 50 - 50 = 0, resté bloqué à 0 dans tous les fichiers sauvegardés depuis, y
+  compris le dernier (`CurrentXp="0"` dans le XML). Les deux PDF ne faisaient donc que
+  refléter fidèlement une donnée déjà fausse à la source.
+- **Correction n°1** : `Restante` lit désormais `EditTotalXp.Text`/`EditTotalXp25.Text`
+  (valeur affichée, à jour) au lieu de `Personnage.XpTotal`/`Xp25Total`.
+- **Bug d'ordre trouvé en testant, corrigé dans la foulée** : `EditTotalXp`/`EditTotalXp25`
+  ne sont initialisés (`IntToStr(Personnage.XpTotal)`) qu'à la **fin** de
+  `CalculTableExperience` - au tout premier calcul après ouverture d'un personnage (déclenché
+  dès le chargement, `XmlChargePersonnage` l.~3291), le champ est encore vide et
+  `StrToIntDef` renvoie 0, donnant un Restant négatif (`-Depense`) juste après l'ouverture.
+  Corrigé en initialisant `EditTotalXp.text`/`EditTotalXp25.text` dès le chargement
+  (`XmlChargePersonnage`, juste après le remplissage de `tabExperience.Cells[LigXpTotal]`),
+  avant le premier appel à `CalculTableExperience`.
+- **Validé par Nono** sur Charlatant chanceux : Restant n'est plus négatif à l'ouverture.
+- **Compilé (lazbuild, 0 erreur)** aux deux étapes.
+**Donnée déjà corrompue, non réparée automatiquement** : le dernier fichier sauvegardé de
+Charlatant chanceux (`SAVED_CARACTERS\Charlatant chanceux\20260911-142341.xml`) porte encore
+`CurrentXp="0"` - il faut rouvrir le personnage dans WinPersonnage et **sauvegarder** pour
+qu'un nouveau fichier avec le Restant correct soit écrit ; jusque-là, le menu qui génère le
+PDF depuis le dernier fichier sauvegardé (`TMenu.ButtonPdfClick`, `warhammersource.pas`
+l.1247, charge `PersonnageXmlChargement` directement, sans passer par WinPersonnage)
+affichera toujours l'ancienne valeur fausse.
+**Piste de conception soulevée par Nono, pas commencée** : `CalculTableExperience` (~800
+lignes) mélange trois sources du même total (`Personnage.XpTotal`, `EditTotalXp.Text`,
+`tabExperience.Cells[LigXpTotal]`) synchronisées à des endroits différents de la fonction,
+ce qui a produit ces deux bugs d'ordre en cascade. Une fonction dédiée Dépense/Restante,
+sans dépendre d'un champ déjà rempli par ailleurs, réglerait le problème de fond - mais
+chantier à part (risque de régression sur la quinzaine de points d'appel de
+`CalculTableExperience`), voir `A FAIRE.txt`.
+
+---
+
+**11/09/2026 — PDF FELDO : TOTAL/SPENT/CURRENT XP FAUX (ABSOLU VS
+DIVISÉ SOUS L'OPTION XPDIV25), CORRIGÉ ET VALIDÉ PAR NONO.** Signalé par Nono : sur le PDF
+Feldo (uniquement), le panneau Expérience affichait Total=0,
+Spent=-50, Current=50 pour un personnage à 50 Xp actuels.
+- **Cause n°1** : `PdfBlocExperience` (`pdfpersonnage.pas`, utilisée seulement par
+  `PdfPersonnageCreationFeldo2P`) lisait `Personnage.Xp25Total` pour Total au lieu de
+  `Personnage.XpTotal`. `Xp25Total` n'est écrit dans le XML que si l'option `XpDiv25` est
+  cochée (`chargepersonnage.pas` l.434) - pour tout personnage sans cette option, il reste à
+  0, d'où Total=0 et Spent=Xp25Total-XpActuel négatif. Le gabarit normal utilisait déjà
+  `XpTotal` correctement. Première correction : basculer sur `XpTotal`.
+- **Cause n°2, trouvée en testant le cas XpDiv25 coché** (Nono : "tu dois gérer l'option
+  XpDiv25 dans le PDF Feldo, si elle est cochée le montant doit être divisé par 25") : diviser
+  `XpTotal`/`XpActuel` par 25 dans le PDF redivisait un `XpActuel` **déjà divisé**. Il
+  n'existe pas de second champ "Xp25Actuel" : `Personnage.XpActuel` porte de l'XP absolue en
+  mode normal, mais de l'XP déjà divisée par 25 en mode XpDiv25, car `winpersonnage.pas`
+  calcule `Restante := Personnage.Xp25Total - Depense` (Depense provenant de grilles déjà
+  divisées) et sauvegarde ce résultat tel quel dans `XpActuel` - même famille de piège que le
+  §2.48 (`CoutXp`), sur un champ différent, jamais documenté jusqu'ici.
+- **Correction finale** : plus aucune division arithmétique dans `PdfBlocExperience`. La
+  fonction choisit la paire de champs déjà coherente entre elle selon l'option -
+  `Xp25Total`/`XpActuel` (tous deux divisés) si `XpDiv25` est cochée, `XpTotal`/`XpActuel`
+  (tous deux absolus) sinon - `Spent` se déduit de `Total - Current` dans l'unité choisie.
+- **Validé par Nono** sur un personnage à option XpDiv25 cochée : fiche WinPersonnage à
+  Total=98/Depense=94/Restant=4, PDF Feldo désormais identique (98/94/4).
+- **Compilé (lazbuild, 0 erreur).**
+**Hors périmètre, signalé mais non traité** : le gabarit normal (non-Feldo2P) ignore
+totalement l'option `XpDiv25` dans son panneau Expérience (utilise toujours `XpTotal`/
+`XpActuel` bruts) - même risque d'affichage faux si un personnage XpDiv25 est un jour imprimé
+avec ce gabarit. Nono a explicitement limité la demande au PDF Feldo ; à reprendre si le
+besoin se présente sur le gabarit normal.
+
+---
+
+**11/09/2026 — MOTEUR GÉNÉRIQUE DE MODIFICATEURS : MODIFARMOUR
 BRANCHÉ SUR TALENT, CHANTIER TERMINÉ, COMPILÉ ET VALIDÉ PAR NONO SUR UN SKINK CRÉÉ POUR LE
 TEST.** Suite immédiate de `ModifyDamage` (entrée du 11/09/2026 juste en dessous) : dernière
 cible du chantier "moteur générique" restée dupliquée entre sources - Talent portait encore

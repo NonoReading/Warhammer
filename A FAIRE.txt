@@ -6,6 +6,22 @@
 CORRECTIONS COURTES  (une ligne ou deux chacune)
 =========================================================================
 
+[FAIT LE 11/09/2026 - Restant Xp faux dans WinPersonnage (pas le PDF), RESOLU.
+CalculTableExperience calculait Restante avec Personnage.XpTotal, fige a l ouverture du
+fichier, jamais resynchronise si le Total est releve en session. Corrige en lisant
+EditTotalXp/EditTotalXp25. Bug d ordre trouve en testant (EditTotalXp pas encore initialise
+au tout premier calcul) corrige aussi. Valide par Nono. Detail CONTEXT.md/Log.txt (entree du
+11/09/2026). ATTENTION : le dernier fichier de Charlatant chanceux porte encore
+CurrentXp="0", a rouvrir et resauvegarder pour corriger la donnee.]
+
+[FAIT LE 11/09/2026 - PDF Feldo : Total/Spent/Current XP faux, RESOLU. PdfBlocExperience
+lisait Xp25Total (reste a 0 hors option XpDiv25) au lieu de XpTotal, puis probleme distinct
+sous XpDiv25 coche ou XpActuel porte deja une valeur divisee par 25 (pas de champ
+Xp25Actuel). Corrige en choisissant la paire de champs deja coherente selon l option, sans
+division dans le PDF. Compile et valide par Nono (fiche et PDF identiques, 98/94/4). Detail
+CONTEXT.md (entree du 11/09/2026 en tete de fichier), Log.txt. Hors perimetre : le gabarit
+normal ignore toujours XpDiv25 dans son panneau Experience.]
+
 [FAIT LE 11/09/2026 - Asterisques de talents dupliquees, RESOLU. Deux bugs distincts :
 Personnage.Asterisque relu au lieu de la variable locale fraiche dans les 3 blocs
 competence de PersonnageTalentAsterisque (chargepersonnage.pas) ; et surtout
@@ -212,6 +228,16 @@ A reprendre avec le morceau "creatures" du lot 3 si on veut de vraies creatures.
 =========================================================================
 CONCEPTIONS A MENER  (chantiers a part entiere, ne pas les melanger)
 =========================================================================
+
+[PROCHAIN CHANTIER (demande par Nono le 11/09/2026, PRIORITAIRE) - Fonction dediee
+Depense/Restante Xp. CalculTableExperience (winpersonnage.pas, ~800 lignes) melange
+actuellement trois sources du meme total (Personnage.XpTotal, EditTotalXp.Text,
+tabExperience.Cells[LigXpTotal]) synchronisees a des endroits differents de la fonction -
+a produit deux bugs d'ordre en cascade le 11/09/2026 (Restant Xp faux, voir CONTEXT.md/
+Log.txt entrees du jour). Objectif : une fonction Depense/Restante qui ne depend d'aucun
+champ deja rempli par ailleurs, appelable depuis les ~15 points d'appel actuels de
+CalculTableExperience sans regression - a cadrer avec Nono avant de coder (quelle
+signature, quels champs entrent/sortent).]
 
 [PORTE MUTATION FAITE LE 11/09/2026 - voir CONTEXT.md 2.54. Une mutation peut accorder un
 Talent (<Talent> sous <Corruption>) ou une Arme/Armure (<Weapon>/<Armor>), calcule a la volee

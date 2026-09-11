@@ -2406,7 +2406,18 @@ Function PdfBlocAmbitions(PdfPage: TPDFPage; XGauche, XDroite, Y, HauteurLigne: 
 Function PdfBlocExperience(PdfPage: TPDFPage; Personnage: StructurePersonnage; XGauche, XDroite, Y, HauteurLigne: Single; NbLignes: Integer; MinPolice: Integer): Single;
   var
     IndC: Integer;
+    XpTotalAffiche: Integer;
   begin
+    // Option XpDiv25 (CONTEXT.md §2.48) : en mode coché, Xp25Total et XpActuel sont déjà
+    // tous les deux exprimés en unités divisées par 25 au moment de la sauvegarde
+    // (winpersonnage.pas, Restante := Personnage.Xp25Total - Depense) - il n'existe pas de
+    // second champ "Xp25Actuel", XpActuel sert les deux modes. Pas de division ici : on
+    // choisit juste la paire de champs déjà cohérente entre elle, sous peine de mélanger
+    // absolu et divisé (bug observé avec Nono le 11/09/2026).
+    if Pos(AjouteAccolade(ConstXmlOptionXpDiv25), Personnage.Options) > 0 then
+      XpTotalAffiche := Personnage.Xp25Total
+    else
+      XpTotalAffiche := Personnage.XpTotal;
     // Dessin cadre
     PdfPage.DrawLine(XGauche,      Y,                 XGauche,      Y - (NbLignes * HauteurLigne), 1);
     PdfPage.DrawLine(XGauche + 15, Y - HauteurLigne,   XGauche + 15, Y - (NbLignes * HauteurLigne), 1);
@@ -2423,9 +2434,9 @@ Function PdfBlocExperience(PdfPage: TPDFPage; Personnage: StructurePersonnage; X
 
     // Valeur Expérience
     PdfTaillePolice(PdfPage, PdfFontValue, ConstPoliceArial, 9);
-    PdfCentre(PdfPage, XGauche + 15, XDroite, Y - ((NbLignes - 2) * HauteurLigne) + 0.6, IntToStr(Trunc(Personnage.Xp25Total)));                       // Total Xp
-    PdfCentre(PdfPage, XGauche + 15, XDroite, Y - ((NbLignes - 1) * HauteurLigne) + 0.6, IntToStr(Trunc(Personnage.Xp25Total - Personnage.XpActuel))); // Utilisé
-    PdfCentre(PdfPage, XGauche + 15, XDroite, Y - ( NbLignes      * HauteurLigne) + 0.6, IntToStr(Trunc(Personnage.XpActuel)));                        // Restant
+    PdfCentre(PdfPage, XGauche + 15, XDroite, Y - ((NbLignes - 2) * HauteurLigne) + 0.6, IntToStr(XpTotalAffiche));                              // Total Xp
+    PdfCentre(PdfPage, XGauche + 15, XDroite, Y - ((NbLignes - 1) * HauteurLigne) + 0.6, IntToStr(XpTotalAffiche - Personnage.XpActuel));        // Utilisé
+    PdfCentre(PdfPage, XGauche + 15, XDroite, Y - ( NbLignes      * HauteurLigne) + 0.6, IntToStr(Personnage.XpActuel));                         // Restant
 
     Result := Y - (NbLignes * HauteurLigne);
   end;

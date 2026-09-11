@@ -2836,3 +2836,34 @@ valeur temporaire type armure portee/retiree (deja gere par l equipement). Sorts
 effet permanent laisses de cote - StructureSort n a que du texte descriptif (TypeSort/
 Duree), rien de mecanise, et Nono ne connait pas assez les rituels pour trancher une
 mecanique sans cas reel. A rouvrir si un cas se presente. Aucun code touche.
+
+11/09/2026 - PDF FELDO : TOTAL/SPENT/CURRENT XP FAUX, CORRIGE ET VALIDE PAR NONO.
+PdfBlocExperience (pdfpersonnage.pas, gabarit Feldo2P uniquement) lisait Xp25Total pour
+Total au lieu de XpTotal - Xp25Total reste a 0 tant que l option XpDiv25 n est pas cochee,
+d ou Total=0 et Spent negatif signales par Nono. Deuxieme piege trouve en testant le cas
+XpDiv25 coche : XpActuel porte de l XP absolue en mode normal mais de l XP deja divisee par
+25 en mode XpDiv25 (pas de second champ Xp25Actuel, winpersonnage.pas sauvegarde Restante :=
+Xp25Total - Depense tel quel dans XpActuel) - diviser par 25 dans le PDF redivisait une
+valeur deja divisee. Corrige en choisissant la paire de champs deja coherente entre elle
+(Xp25Total/XpActuel divises si l option est cochee, XpTotal/XpActuel absolus sinon) sans
+aucune division arithmetique dans le PDF. Valide par Nono sur un personnage XpDiv25 : fiche
+98/94/4, PDF desormais identique. Compile avec lazbuild (0 erreur). Detail CONTEXT.md (entree
+du 11/09/2026 en tete de fichier). Hors perimetre : le gabarit normal ignore toujours l
+option XpDiv25 dans son panneau Experience, pas demande par Nono pour l instant.
+
+11/09/2026 - RESTANT XP FAUX DANS WINPERSONNAGE (PAS LE PDF), CORRIGE ET VALIDE PAR NONO.
+Sur un personnage sans XpDiv25 (Charlatant chanceux), 5000/500/4500 sur la fiche mais
+5000/5000/0 sur les deux PDF - pas un bug PDF cette fois. CalculTableExperience
+(winpersonnage.pas) calculait Restante avec Personnage.XpTotal, charge une seule fois a
+l ouverture et jamais resynchronise quand EditTotalXp est modifie en session (Total releve
+de 50 a 5000 sur ce personnage, Restante reste calcule sur l ancien 50). Corrige en lisant
+EditTotalXp/EditTotalXp25 (valeur affichee) au lieu du champ fige. Bug d ordre trouve en
+testant : EditTotalXp n est initialise qu a la fin de CalculTableExperience, donc le tout
+premier calcul apres ouverture le lisait vide (Restant negatif) - corrige en initialisant
+EditTotalXp/EditTotalXp25 des le chargement, avant le premier appel. Valide par Nono.
+Compile avec lazbuild (0 erreur) aux deux etapes. Detail CONTEXT.md (entree du 11/09/2026 en
+tete de fichier). Donnee deja corrompue non reparee automatiquement : le dernier fichier de
+Charlatant chanceux porte encore CurrentXp="0", il faut rouvrir et resauvegarder le
+personnage. Piste de conception soulevee par Nono, pas commencee : une fonction dediee
+Depense/Restante au lieu des trois sources actuelles du total (Personnage.XpTotal,
+EditTotalXp.Text, tabExperience.Cells) - voir A FAIRE.txt.
