@@ -232,18 +232,18 @@ cout Xp). Au passage : la fonction lisait d'abord PersonnageEquipement.QualiteEq
 (qualites de FABRICATION uniquement) au lieu de StructureArmure.ListeBonus (qualite inherente du
 catalogue, celle que "Fear 1" affiche reellement) - corrige, les deux sources sont scannees.]
 
-LA TROISIEME PORTE (TALENT/SORT) RESTE NON MECANISEE. Les deux autres sont faites (voir
-juste au-dessus). Un talent comme Frightening achete normalement (Fear Rating qui augmente
-par achat repete) ou un sort comme Terrifying (Terror 1 temporaire, duree du sort) ne
-remontent nulle part. Pas de vocabulaire ferme Fear/Terror commun aux trois portes - chaque
-porte reste un mecanisme separe pour l instant. A reprendre si Nono veut unifier plus tard.
-Note : l'idee d'un talent "de type trait" non selectionnable pour unifier existe deja depuis
-longtemps (CONTEXT.md 2.15, ConstXmlTrait/StructureTalent.Trait) - pas besoin d'en reinventer
-un si Nono relance cette generalisation.
-Note du 11/09/2026 : en reprenant ce chantier, Nono a pose un but plus large (moteur
-generique de modificateurs par source, voir CONTEXT.md derniere entree) - la 3e porte
-elle-meme reste non traitee, mais le mecanisme <Modificateur Type="..." Cible="..."/>
-qui en est sorti pourrait resservir ici le jour ou on y revient.
+[REFERME LE 11/09/2026 - LA TROISIEME PORTE (TALENT/SORT), PAS DE CAS REEL POUR L INSTANT.
+Reprise avec Nono apres la fin du chantier "moteur generique de modificateurs" : les deux
+besoins reels identifies sont deja couverts par l existant, pas de nouvelle porte a
+construire. Augmentation generale par talent achete normalement (competences/attributs/
+degats) -> deja le moteur generique (ModifyCarac/ModifySkill/ModifyDamage/...), fonctionne
+quel que soit le talent et sa source (creation/carriere/Xp). Valeur temporaire type armure
+portee/retiree -> deja gere par l equipement normal. Sorts/rituels a effet permanent -
+StructureSort porte bien TypeSort/Duree mais en texte descriptif seul, rien de mecanise ;
+Nono ne connait pas assez les rituels pour trancher une mecanique a l aveugle. A rouvrir
+seulement si un cas reel de rituel a effet permanent se presente. Note gardee pour plus
+tard : l'idee d'un talent "de type trait" non selectionnable existe deja depuis longtemps
+(CONTEXT.md 2.15, ConstXmlTrait/StructureTalent.Trait) si le besoin revient.]
 
 [FAIT LE 07/09/2026 - mecanisme generique Nation ecrit et compile, voir CONTEXT.md 2.51.
 Reste : les autres regroupements du meme genre (Bretagne HBRPA/HBRNO, Estalie HESTA,

@@ -2828,3 +2828,11 @@ Chantier termine : les 5 cibles (ModifyCarac/ModifySkill/ModifyWeapon/ModifyDama
 ModifArmour) sont chacune sur un seul pathway par source, aucune duplication restante
 trouvee. Reste hors perimetre : ListTalentAttributModif/ListTalentCompetenceModif/
 CompAjoutee (mecanisme Effet distinct) et <ModifySkillAttribut> (broadcast par attribut).
+
+11/09/2026 - TROISIEME PORTE (TALENT/SORT) REFERMEE, PAS DE CAS REEL. Reprise avec Nono a
+la suite du chantier moteur generique. Les deux besoins reels qu il avait en tete sont deja
+couverts : augmentation generale par talent achete normalement (deja le moteur generique),
+valeur temporaire type armure portee/retiree (deja gere par l equipement). Sorts/rituels a
+effet permanent laisses de cote - StructureSort n a que du texte descriptif (TypeSort/
+Duree), rien de mecanise, et Nono ne connait pas assez les rituels pour trancher une
+mecanique sans cas reel. A rouvrir si un cas se presente. Aucun code touche.
