@@ -1997,7 +1997,7 @@ Note: using this Talent will be seen as cheating in any formal bout."</Explanati
 </Talent>
 <Talent id="RULES-T0037">
 <Attribut>""</Attribut>
-<Effet Cible="TBonusCC" Forme="Additif" Facteur="1"/>
+<Modificateur Type="ModifyDamage" Cible="CC" Facteur="1"/>
 <Description language="ENGLISH">"Strike Mighty Blow"</Description>
 <Short language="ENGLISH">""</Short>
 <Explanation language="ENGLISH">"You know how to hit hard! You deal your level of Strike Mighty Blow in extra Damage with melee weapons."</Explanation>
@@ -3173,7 +3173,7 @@ Talent Taken Number influenced 1 As normal × 5 2 As normal × 10 3 As normal ×
 </Talent>
 <Talent id="RULES-T0149">
 <Attribut>""</Attribut>
-<Effet Cible="TBonusCT" Forme="Additif" Facteur="1"/>
+<Modificateur Type="ModifyDamage" Cible="CT" Facteur="1"/>
 <Description language="ENGLISH">"Accurate Shot"</Description>
 <Short language="ENGLISH">""</Short>
 <Explanation language="ENGLISH">"You are an exceptional shot and know where to shoot an enemy in order to inflict maximum damage. You deal your Accurate Shot level in extra Damage with all ranged weapons."</Explanation>

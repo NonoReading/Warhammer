@@ -8,7 +8,7 @@
       <Unit>
         <Filename Value="WarhammerHelp.lpr"/>
         <IsPartOfProject Value="True"/>
-        <EditorIndex Value="7"/>
+        <EditorIndex Value="8"/>
         <CursorPos X="37" Y="20"/>
         <UsageCount Value="200"/>
         <Loaded Value="True"/>
@@ -163,7 +163,7 @@
         <HasResources Value="True"/>
         <ResourceBaseClass Value="Form"/>
         <UnitName Value="WinRaces"/>
-        <EditorIndex Value="8"/>
+        <EditorIndex Value="9"/>
         <TopLine Value="825"/>
         <CursorPos X="28" Y="841"/>
         <UsageCount Value="200"/>
@@ -244,8 +244,8 @@
         <ResourceBaseClass Value="Form"/>
         <UnitName Value="WinPersonnage"/>
         <EditorIndex Value="6"/>
-        <TopLine Value="3572"/>
-        <CursorPos X="35" Y="3585"/>
+        <TopLine Value="2431"/>
+        <CursorPos Y="2438"/>
         <UsageCount Value="200"/>
         <Loaded Value="True"/>
         <LoadedDesigner Value="True"/>
@@ -418,10 +418,11 @@
         <Filename Value="chargepersonnage.pas"/>
         <IsPartOfProject Value="True"/>
         <UnitName Value="ChargePersonnage"/>
-        <EditorIndex Value="-1"/>
-        <TopLine Value="1034"/>
-        <CursorPos X="43" Y="1051"/>
+        <EditorIndex Value="7"/>
+        <TopLine Value="1411"/>
+        <CursorPos X="64" Y="1423"/>
         <UsageCount Value="201"/>
+        <Loaded Value="True"/>
       </Unit>
       <Unit>
         <Filename Value="winfiltre.pas"/>
@@ -485,8 +486,8 @@
         <UnitName Value="PdfPersonnage"/>
         <IsVisibleTab Value="True"/>
         <EditorIndex Value="3"/>
-        <TopLine Value="1141"/>
-        <CursorPos X="38" Y="1151"/>
+        <TopLine Value="1142"/>
+        <CursorPos X="34" Y="1158"/>
         <UsageCount Value="200"/>
         <Loaded Value="True"/>
       </Unit>
@@ -1233,7 +1234,7 @@
         <UsageCount Value="11"/>
       </Unit>
     </Units>
-    <JumpHistory HistoryIndex="20">
+    <JumpHistory HistoryIndex="23">
       <Position>
         <Filename Value="winlancede.pas"/>
         <Caret Line="52" Column="29" TopLine="44"/>
@@ -1317,6 +1318,18 @@
       <Position>
         <Filename Value="pdfpersonnage.pas"/>
         <Caret Line="1153" Column="47" TopLine="1140"/>
+      </Position>
+      <Position>
+        <Filename Value="pdfpersonnage.pas"/>
+        <Caret Line="1155" Column="41" TopLine="1142"/>
+      </Position>
+      <Position>
+        <Filename Value="winpersonnage.pas"/>
+        <Caret Line="2441" Column="48" TopLine="2431"/>
+      </Position>
+      <Position>
+        <Filename Value="chargepersonnage.pas"/>
+        <Caret Line="1423" Column="64" TopLine="1411"/>
       </Position>
     </JumpHistory>
     <RunParams>

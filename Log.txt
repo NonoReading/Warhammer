@@ -2775,3 +2775,28 @@ Valide par Nono : le Shield (RULES-COMB_BASE_07, TypeArme = RULES-WTYPE_SHIELD) 
 supplementaire, le Boat Hook (RULES-COMB_BASE_02, meme competence Melee (Basic) mais sans
 TypeArme) ne le gagne pas - application ET selectivite verifiees.
 Compile avec lazbuild (0 erreur) avant et apres le retrait du talent de test.
+
+11/09/2026 - MODIFYDAMAGE BRANCHE SUR TALENT (MIGRATION DE MIGHTY BLOW/ACCURATE SHOT),
+COMPILE ET VALIDE PAR NONO SUR GUNTHER KRIEG. Suite immediate de ModifyWeapon : but pose par
+Nono d emblee, ne plus avoir de talents en dur. Strike Mighty Blow (RULES-T0037) et Accurate
+Shot (RULES-T0149) fonctionnaient deja (mecanisme Effet dedie, TBonusCC/TBonusCT,
+multi-niveaux via PersonnageTalent.Valeur) mais par un pathway separe du moteur generique par
+source - migration plutot que nouveau mecanisme parallele.
+ConstXmlModifieDegat = 'ModifyDamage' (chargeconstantes.pas), meme moule que ModifyWeapon mais
+Facteur s ajoute au Degat (CalculDegat) au lieu d un pourcentage. Cible ne vise pas un TypeArme
+precis (les deux talents bonifient TOUTES les armes de contact/a distance) mais une categorie
+large : ConstCibleModifieDegatCC/CT ('CC'/'CT'), meme convention que EquipementCC/EquipementCT
+(prefixe de CodeArme). Anciennes ConstCibleEffetTBonusCC/CT retirees (plus aucun producteur
+XML apres migration).
+pdfpersonnage.pas : TBonusCC/TBonusCT restent des variables calculees une fois (memes points
+d usage dans le calcul du Degat) mais leur source devient PersonnageTalentModificateur au lieu
+de PersonnageTalentEffet, dans les deux gabarits.
+BOOK_RULESBOOK.Xml : <Effet Cible="TBonusCC/CT" Forme="Additif" Facteur="1"/> remplace par
+<Modificateur Type="ModifyDamage" Cible="CC/CT" Facteur="1"/> sur les deux talents - aucun
+autre livre ne portait ces Cibles (verifie par recherche globale).
+Valide par Nono sur Gunther Krieg en deux temps : regression d abord (Boat Hook, Shield,
+Ghlaith - tous avec Mighty Blow - Degat strictement identique a avant migration), puis cas
+neuf (arme a distance ajoutee sans Accurate Shot - aucun bonus affiche, confirme normal par
+Nono).
+Premier essai de compilation echoue (WarhammerHelp.exe ouvert verrouillait l executable,
+erreur 5) - recompile avec succes (0 erreur) apres fermeture par Nono.

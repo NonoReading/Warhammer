@@ -272,6 +272,13 @@ Const
       // repere a la compilation) portant le filtre CodeCompetence facultatif de
       // <ModifyWeapon>.
       ConstXmlModifieArmeCompetence     = 'skill';
+      // Pendant "degat" de ModifyWeapon, meme moule mais Facteur additionne au Degat
+      // (CalculDegat) au lieu d'un pourcentage - CONTEXT.md, chantier moteur generique,
+      // migration de Mighty Blow/Accurate Shot (11/09/2026). Cible ne vise pas un type
+      // d'arme precis (StructureArme.TypeArme) mais une CATEGORIE large - voir
+      // ConstCibleModifieDegatCC/CT ci-dessous - ces deux talents bonifient TOUTES les
+      // armes de contact/a distance, pas une famille en particulier.
+      ConstXmlModifieDegat              = 'ModifyDamage';
       // Quatrieme pendant du meme moule que ModifyCarac/ModifySkill/ModifyWeapon, pour les
       // paliers de CareerBonus qui n'ont AUCUN equivalent chiffre (palier 4 "Knight of the
       // Inner Circle" de la quasi-totalite des Ordres de Chevalerie - trait automatique
@@ -320,12 +327,18 @@ Const
       // Les Cibles de <Effet> aujourd'hui prises en charge, vocabulaire ferme : les noms
       // des variables de calcul historiques de pdfpersonnage.pas (Mouv/Chance/Determine ne
       // sont pas ici, deja sorties du case le 06/09/2026 vers le mecanisme ModifyCarac).
+      // TBonusCC/TBonusCT ne sont plus ici depuis le 11/09/2026 - Mighty Blow/Accurate Shot
+      // migres vers ModifyDamage (ConstCibleModifieDegatCC/CT ci-dessous), meme mecanisme
+      // "par source" que ModifyWeapon plutot que ce moteur Effet dedie.
       ConstCibleEffetDurACuire           = 'DurACuire';
       ConstCibleEffetBonusEncomb         = 'BonusEncomb';
-      ConstCibleEffetTBonusCC            = 'TBonusCC';
-      ConstCibleEffetTBonusCT            = 'TBonusCT';
       ConstCibleEffetBonusSprint         = 'BonusSprint';
       ConstCibleEffetAmePure             = 'AmePure';
+      // Cibles de <Modificateur Type="ModifyDamage">, vocabulaire ferme : categorie large de
+      // l'arme (Corps-a-Corps/Corps-a-Tir), pas un type precis - meme convention que
+      // EquipementCC/EquipementCT (prefixe de CodeArme) plus bas dans ce fichier.
+      ConstCibleModifieDegatCC           = 'CC';
+      ConstCibleModifieDegatCT           = 'CT';
 
       // constantes de passage d'étapes de création de personnages
       ConstSuivant			= 1;

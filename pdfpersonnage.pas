@@ -1211,8 +1211,11 @@ Procedure PdfPersonnageCreation(Personnage: StructurePersonnage; BackGround: Boo
     // talent (ChargeTalentEffet), creation et augmentation confondues.
     DurACuire   := PersonnageTalentEffet(Personnage, ConstCibleEffetDurACuire);
     BonusEncomb := PersonnageTalentEffet(Personnage, ConstCibleEffetBonusEncomb);
-    TBonusCC    := PersonnageTalentEffet(Personnage, ConstCibleEffetTBonusCC);
-    TBonusCT    := PersonnageTalentEffet(Personnage, ConstCibleEffetTBonusCT);
+    // Mighty Blow/Accurate Shot migres du mecanisme Effet vers le moteur generique "par
+    // source" (ConstXmlModifieDegat = ModifyDamage) le 11/09/2026 - meme pathway que
+    // ModifyWeapon, Cible = categorie large (CC/CT) plutot qu'un type d'arme precis.
+    TBonusCC    := PersonnageTalentModificateur(Personnage, ConstXmlModifieDegat, ConstCibleModifieDegatCC);
+    TBonusCT    := PersonnageTalentModificateur(Personnage, ConstXmlModifieDegat, ConstCibleModifieDegatCT);
     BonusSprint := PersonnageTalentEffet(Personnage, ConstCibleEffetBonusSprint);
     AmePure     := PersonnageTalentEffet(Personnage, ConstCibleEffetAmePure);
     // Talents portant <ModifyCarac name="RULES-ATTR_Fate"/"RULES-ATTR_Resil"> (ex. Luck/Chanceux
@@ -4192,8 +4195,10 @@ Procedure PdfPersonnageCreationFeldo2P(Personnage: StructurePersonnage);
     DurACuire    := PersonnageTalentEffet(Personnage, ConstCibleEffetDurACuire);
     ValDurACuire := PersonnageTalentEffetRang(Personnage, ConstCibleEffetDurACuire);
     BonusEncomb  := PersonnageTalentEffet(Personnage, ConstCibleEffetBonusEncomb);
-    TBonusCC     := PersonnageTalentEffet(Personnage, ConstCibleEffetTBonusCC);
-    TBonusCT     := PersonnageTalentEffet(Personnage, ConstCibleEffetTBonusCT);
+    // Mighty Blow/Accurate Shot migres vers ModifyDamage le 11/09/2026, meme raison qu'au
+    // dessus (PdfPersonnageCreation).
+    TBonusCC     := PersonnageTalentModificateur(Personnage, ConstXmlModifieDegat, ConstCibleModifieDegatCC);
+    TBonusCT     := PersonnageTalentModificateur(Personnage, ConstXmlModifieDegat, ConstCibleModifieDegatCT);
     BonusSprint  := PersonnageTalentEffet(Personnage, ConstCibleEffetBonusSprint);
     AmePure      := PersonnageTalentEffet(Personnage, ConstCibleEffetAmePure);
     // Talents portant <ModifyCarac name="RULES-ATTR_Fate"/"RULES-ATTR_Resil"> (ex. Luck/Chanceux

@@ -1,6 +1,43 @@
 # Warhammer — Contexte projet
 
-**Dernière mise à jour : 11/09/2026 — MOTEUR GÉNÉRIQUE DE MODIFICATEURS : MODIFYWEAPON
+**Dernière mise à jour : 11/09/2026 — MOTEUR GÉNÉRIQUE DE MODIFICATEURS : MODIFYDAMAGE
+BRANCHÉ SUR TALENT (MIGRATION DE MIGHTY BLOW/ACCURATE SHOT), COMPILÉ ET VALIDÉ PAR NONO SUR
+GUNTHER KRIEG.** Suite immédiate du chantier `ModifyWeapon` (entrée du 11/09/2026 juste en
+dessous) : Nono a d'emblée posé l'objectif "ne plus avoir de talents en dur" - Strike Mighty
+Blow (`RULES-T0037`) et Accurate Shot (`RULES-T0149`) fonctionnaient déjà (mécanisme `Effet`
+dédié, `TBonusCC`/`TBonusCT`, multi-niveaux via `PersonnageTalent.Valeur`), mais par un
+pathway séparé du moteur générique "par source" utilisé par `ModifyCarac`/`ModifySkill`/
+`ModifyWeapon`. Migration plutôt que nouveau mécanisme parallèle.
+- **`ConstXmlModifieDegat = 'ModifyDamage'`** (`chargeconstantes.pas`) : même moule que
+  `ModifyWeapon`, mais `Facteur` s'ajoute au Degât (`CalculDegat`) au lieu d'un pourcentage.
+  `Cible` ne vise pas un `TypeArme` précis (Mighty Blow/Accurate Shot bonifient TOUTES les
+  armes de contact/à distance) mais une catégorie large : `ConstCibleModifieDegatCC`/`CT`
+  (`'CC'`/`'CT'`), même convention que `EquipementCC`/`EquipementCT` (préfixe de `CodeArme`,
+  déjà utilisés ailleurs pour distinguer corps-à-corps/tir). Les anciennes
+  `ConstCibleEffetTBonusCC`/`CT` retirées (plus aucun producteur XML après migration).
+- **`pdfpersonnage.pas`** : dans les deux gabarits, `TBonusCC`/`TBonusCT` restent des
+  variables calculées une fois (mêmes points d'usage dans le calcul du Degât, rien d'autre
+  changé) mais leur source devient `PersonnageTalentModificateur(Personnage,
+  ConstXmlModifieDegat, ConstCibleModifieDegatCC/CT)` au lieu de `PersonnageTalentEffet`.
+- **`BOOK_RULESBOOK.Xml`** : `<Effet Cible="TBonusCC/CT" Forme="Additif" Facteur="1"/>`
+  remplacé par `<Modificateur Type="ModifyDamage" Cible="CC/CT" Facteur="1"/>` sur les deux
+  talents - aucun autre livre ne portait ces Cibles (vérifié par recherche globale), rien
+  d'autre à migrer.
+- **Validé par Nono sur Gunther Krieg, en deux temps** : régression d'abord (Boat Hook,
+  Shield, Ghlaith - tous porteurs de Mighty Blow niveau cumulé - Degât strictement identique
+  à avant la migration), puis cas neuf (arme à distance ajoutée sans qu'il ait Accurate Shot -
+  aucun bonus affiché, confirmé "normal" par Nono : la sélectivité par talent fonctionne, pas
+  de bonus fantôme).
+- **Compilé (lazbuild, 0 erreur)** - un premier essai a échoué (`WarhammerHelp.exe` ouvert
+  verrouillait l'exécutable, erreur 5), recompilé après fermeture par Nono.
+**Chantier suivant : vérifier qu'aucune autre cible ne reste dupliquée entre les sources du
+moteur générique (dernier point resté ouvert de ce chantier "moteur générique multi-étapes").
+Le mécanisme `Effet`/`PersonnageTalentEffet` reste utilisé pour `DurACuire`/`BonusEncomb`/
+`BonusSprint`/`AmePure` - pas concerné par cette migration, aucune raison de le retirer.**
+
+---
+
+**11/09/2026 — MOTEUR GÉNÉRIQUE DE MODIFICATEURS : MODIFYWEAPON
 BRANCHÉ SUR TALENT, COMPILÉ ET VALIDÉ PAR NONO SUR GUNTHER KRIEG.** Suite du chantier
 "moteur générique" (entrée du 11/09/2026 juste en dessous) : le lecteur XML du Talent avait
 déjà le tag générique `<Modificateur Type="ModifyWeapon" .../>` (alimente

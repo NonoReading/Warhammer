@@ -36,9 +36,15 @@ Detail CONTEXT.md (entree du 11/09/2026 en tete de fichier), Log.txt.]
 PersonnageTalentArmeModif (chargepersonnage.pas), meme moule que
 PersonnageCareerBonusArmeModif, cablee d'emblee dans les deux blocs de rendu des armes de
 pdfpersonnage.pas. Teste avec un talent de test temporaire (PERSO-T0001, retire apres coup) et
-valide par Nono sur Gunther Krieg : Shield +10 supplementaire, Boat Hook non affecte. Reste :
-ModifyDamage sur Talent, pas encore defini. Detail CONTEXT.md (entree du 11/09/2026 en tete de
-fichier), Log.txt.]
+valide par Nono sur Gunther Krieg : Shield +10 supplementaire, Boat Hook non affecte. Detail
+CONTEXT.md (entree du 11/09/2026 en tete de fichier), Log.txt.]
+
+[FAIT LE 11/09/2026 - ModifyDamage sur Talent, RESOLU. Migration de Strike Mighty Blow
+(RULES-T0037) et Accurate Shot (RULES-T0149) du mecanisme Effet dedie (TBonusCC/TBonusCT) vers
+le moteur generique par source, meme pathway que ModifyWeapon (BOOK_RULESBOOK.Xml). Valide par
+Nono sur Gunther Krieg : regression nulle sur les armes de contact deja porteuses de Mighty
+Blow, et une arme a distance ajoutee sans Accurate Shot ne recoit correctement aucun bonus.
+Detail CONTEXT.md (entree du 11/09/2026 en tete de fichier), Log.txt.]
 
 LIBELLES TRONQUES SUR CERTAINS BOUTONS DE WINMUTATION. Signale par Nono le 11/09/2026 :
 sur la fenetre Corruption (ajout de mutation), "Spend a Resilience point"/"Accept a
