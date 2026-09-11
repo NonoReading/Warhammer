@@ -302,6 +302,16 @@ Const
       ConstXmlEffetFacteur              = 'Facteur';
       ConstXmlEffetCarac                = 'Carac';
 
+      // Moteur generique de bonus/malus "par source" (chargemodificateur.pas, CONTEXT.md) :
+      // <Modificateur Type="ModifySkill|ModifyWeapon|..." Cible="..." Facteur="N"/>, posable
+      // sur n'importe quel Talent. Balise NEUVE et non <ModifySkill>/<ModifyWeapon> : ces deux
+      // noms sont deja pris - ModifySkill par CareerBonus (bonus chiffre) ET par <Talent> lui
+      // meme (ConstXmlModifieCompetence, annotation "Inverse de"/"Bonus" a l'affichage, sans
+      // rapport). Type reutilise les valeurs ConstXmlModifieCompetence/ConstXmlModifieArme
+      // existantes, Cible/Facteur les constantes ci-dessus.
+      ConstXmlModificateur              = 'Modificateur';
+      ConstXmlModificateurFiltre        = 'Filtre';
+
       // Les trois Formes de <Effet>, vocabulaire ferme.
       ConstFormeEffetAdditif                = 'Additif';
       ConstFormeEffetProportionnelAttribut  = 'ProportionnelAttribut';

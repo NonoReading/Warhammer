@@ -2571,3 +2571,50 @@ COMPILE ET VALIDE PAR NONO, cas reel teste de bout en bout : Skull Trophies equi
 Frightening apparait dans l onglet Talents de WinPersonnage ET dans les deux formats de PDF.
 Reste hors perimetre : la troisieme porte (talent/sort, ex. Terrifying) n est pas mecanisee,
 note dans A FAIRE.txt.
+
+11/09/2026 - FONDATION DU MOTEUR GENERIQUE DE MODIFICATEURS (ETAPES 1 ET 2), COMPILE ET
+VALIDE PAR NONO. En reprenant la troisieme porte, Nono a pose un but plus large : ne plus
+ajouter une fonction Pascal dediee par croisement source x cible. Inventaire fait dans
+chargepersonnage.pas : 15 fonctions PersonnageXxxModif deja presentes, Attribut duplique
+5 fois (Mutation/Talent/CareerBonus/Arme/ArmureBonus), Talent x Competence et Talent x Arme
+manquants alors que ce sont justement les cas que Nono veut (ex. +10% competence armes de
+base via un Talent, comme le font deja certains Ordres via CareerBonus). Decision : inverser
+le sens de recherche - pour une Cible donnee, boucler sur ce que le PERSONNAGE possede
+(quelques dizaines d elements) plutot que d interroger tout le catalogue ; cout juge
+negligeable avec Nono avant de commencer.
+Etape 1, fondation seule : nouveau fichier chargemodificateur.pas, StructureModificateur
+(TypeModif/Cible/Filtre/Forme/Facteur/CodeSource) et TListModificateur, type partage
+reutilisable par n importe quelle source. Compile seul, rien branche.
+Etape 2, premiere source branchee - les Talents, pour ModifySkill : nouveau fichier
+chargetalentmodificateur.pas (ListTalentModificateur). Nouvelle balise XML <Modificateur
+Type="ModifySkill" Cible="..." Facteur="N"/>, posable sur n importe quel Talent - balise
+NEUVE et pas <ModifySkill> : deja pris deux fois (bonus chiffre de CareerBonus, ET
+annotation decorative "Inverse de"/"Bonus" deja existante sur Talent, sans rapport).
+Fonction generique unique PersonnageTalentModificateur(Personnage, TypeModif, Cible,
+Filtre='') dans chargepersonnage.pas, branchee dans PdfPersonnageCompetence - l accesseur
+deja partage entre l ecran (WinPersonnage) et le PDF, un seul cablage suffit pour les deux.
+Parsing dans xmlexportimport.pas sous <Talent>. .Create/.Clear/reset ajoutes dans
+warhammersource.pas (vigilance particuliere apres le bug du .Create oublie le 11/09 sur
+ListArmureBonusTalent, entree precedente).
+Cas reel pilote teste de bout en bout : nouveau talent maison PERSO-T0001 "Knight of the
+Order of the Hammer" (BOOK_PERSO.Xml, libre, Max 1), <Modificateur Type="ModifySkill"
+Cible="RULES-COMPCOMB_BASE" Facteur="10"/> (Melee (Basic) = "armes de base"). CONFIRME PAR
+NONO SUR GUNTHER KRIEG : +10% sur la competence ET sur les armes qui l utilisent.
+Bug trouve et PARTIELLEMENT corrige en testant, PAS RESOLU. Plusieurs talents sans rapport
+(Strike Mighty Blow, Strike to Stun, Very Resilient, Knight of the Order of the Hammer)
+partagent la meme asterisque "(4)" sur la fiche de Gunther, alors que la regle de Nono est
+qu un numero n apparait qu une fois, sur un seul talent, et a l identique sur l element
+modifie. Piste trouvee et corrigee : variables locales "var X: Type = valeur;" en Free
+Pascal, initialisees une seule fois au demarrage et pas a chaque appel - corrige dans
+PersonnageTalentAsterisque (chargepersonnage.pas), PdfPersonnageTalentBonus et
+PdfPersonnageCompetenceBonus (pdfpersonnage.pas). Le symptome persiste identique apres les
+trois corrections : la vraie cause est ailleurs, ou il y a un quatrieme endroit avec le
+meme piege non trouve. Session arretee la-dessus par prudence plutot que de continuer a
+deviner depuis le code seul - point de reprise detaille dans A FAIRE.txt.
+Point tranche en passant, PAS un bug : ButtonPdf.visible := false dans MajTables()
+(winpersonnage.pas) fait disparaitre le bouton PDF apres un clic sur "Maj Fiche", rien ne
+le remet a true avant fermeture/reouverture du personnage - confirme volontaire par Nono,
+le PDF ne doit pas refleter des donnees pas encore sauvegardees.
+Rattrapage au passage : chargearmurebonustalent.pas (unite de la porte "qualite d objet",
+entree precedente) n avait jamais ete commite depuis sa creation - inclus dans le commit de
+cette session.

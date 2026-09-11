@@ -42,4 +42,17 @@
 <Ammunition>"0"</Ammunition>
 </Weapon>
 </DATA_WEAPON>
+<DATA_TALENT>
+<Talent id="PERSO-T0001">
+<Attribut>""</Attribut>
+<Modificateur Type="ModifySkill" Cible="RULES-COMPCOMB_BASE" Facteur="10"/>
+<Description language="ENGLISH">"Knight of the Order of the Hammer"</Description>
+<Short language="ENGLISH">""</Short>
+<Explanation language="ENGLISH">"Your training in the Order of the Hammer has honed your skill with basic weapons, granting +10% to Melee (Basic)."</Explanation>
+<Skill>""</Skill>
+<Max>"1"</Max>
+<PDF>""</PDF>
+<Test language="ENGLISH">""</Test>
+</Talent>
+</DATA_TALENT>
 </DATA_BOOK>

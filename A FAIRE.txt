@@ -6,6 +6,27 @@
 CORRECTIONS COURTES  (une ligne ou deux chacune)
 =========================================================================
 
+ASTERISQUES DE TALENTS DUPLIQUEES (PLUSIEURS TALENTS PARTAGENT LE MEME NUMERO). Mis de
+cote le 11/09/2026, pas resolu - a reprendre avec un oeil frais. Signale par Nono sur
+Gunther Krieg : "Strike Mighty Blow"/"Strike to Stun"/"Very Resilient"/"Knight of the
+Order of the Hammer" affichent tous "(4)" sur la fiche, alors que seul Very Resilient
+devrait en avoir une (ModifyCarac Toughness +5) - la regle de Nono : un numero
+n'apparait qu'une fois, sur UN SEUL talent, et se retrouve a l'identique sur l'element
+qu'il modifie. Pire, apres correction, Toughness affichait "(3)" et Very Resilient
+"(4)" - deux numeros differents pour le meme evenement.
+Piste explorée et CORRIGEE mais insuffisante : dans PersonnageTalentAsterisque
+(chargepersonnage.pas) et PdfPersonnageTalentBonus/PdfPersonnageCompetenceBonus
+(pdfpersonnage.pas), les variables locales "var X: Type = valeur;" ne sont
+initialisees qu'une fois au demarrage en Free Pascal, pas a chaque appel - un appel qui
+ne trouve rien peut renvoyer la valeur laissee par l'appel precedent. Les trois ont ete
+corrigees (reset explicite en tete de fonction) mais le symptome persiste tel quel :
+donc soit la cause reelle est ailleurs, soit il y a un quatrieme endroit avec le meme
+piege. Grep sur ": (String|Integer) = ('' ;|0;)" remonte 245 occurrences dans 25
+fichiers au total - toutes non auditees.
+A la reprise : restager Gunther Krieg, verifier si les 3 corrections sont bien sur le
+poste, puis retracer PAS A PAS (avec Nono si besoin d'un test cible) plutot que de
+deviner depuis le code seul - c'est ce qui a fait tourner en rond cette session.
+
 LIBELLES TRONQUES SUR CERTAINS BOUTONS DE WINMUTATION. Signale par Nono le 11/09/2026 :
 sur la fenetre Corruption (ajout de mutation), "Spend a Resilience point"/"Accept a
 mutation"/"Physical Corruption"/"Mental Corruption" (ButtonMutationResilience/Accepter/
@@ -190,6 +211,10 @@ porte reste un mecanisme separe pour l instant. A reprendre si Nono veut unifier
 Note : l'idee d'un talent "de type trait" non selectionnable pour unifier existe deja depuis
 longtemps (CONTEXT.md 2.15, ConstXmlTrait/StructureTalent.Trait) - pas besoin d'en reinventer
 un si Nono relance cette generalisation.
+Note du 11/09/2026 : en reprenant ce chantier, Nono a pose un but plus large (moteur
+generique de modificateurs par source, voir CONTEXT.md derniere entree) - la 3e porte
+elle-meme reste non traitee, mais le mecanisme <Modificateur Type="..." Cible="..."/>
+qui en est sorti pourrait resservir ici le jour ou on y revient.
 
 [FAIT LE 07/09/2026 - mecanisme generique Nation ecrit et compile, voir CONTEXT.md 2.51.
 Reste : les autres regroupements du meme genre (Bretagne HBRPA/HBRNO, Estalie HESTA,

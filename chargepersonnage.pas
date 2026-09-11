@@ -13,7 +13,8 @@ uses
   ChargeArmureBonusModif, ChargeArmureBonusAttributModif,
   ChargeSort, ChargeCorruptionTable, ChargeCorruptionAttributModif,
   ChargeCorruptionCompetenceModif, ChargeCorruptionArmureModif, ChargeCorruptionTalent,
-  ChargeCorruptionEquipement, ChargeTalentArmureModif, ChargeArmureBonusTalent, XmlExportImport;
+  ChargeCorruptionEquipement, ChargeTalentArmureModif, ChargeArmureBonusTalent,
+  ChargeModificateur, ChargeTalentModificateur, XmlExportImport;
 
 Type
   StructurePersonnageAttribut   = Record
@@ -203,6 +204,13 @@ Type
   // vrai modificateur - aucun changement pour l'annotation existante, les deux lisent la
   // même donnée sans interférer.
   Function PersonnageTalentAttributModif(Personnage: StructurePersonnage; CodeAttribut: String): Integer;
+  // Moteur generique "par source" (chargemodificateur.pas, CONTEXT.md chantier "inversion
+  // des recherches") : boucle sur les Talents possedes par le personnage et additionne les
+  // <Modificateur Type="..." Cible="..."/> qui correspondent, au lieu d'une fonction dediee
+  // par croisement source/cible. Filtre optionnel (ex. skill= pour restreindre un ModifyWeapon
+  // a une competence precise), vide si non utilise. Premiere source branchee sur ce format ;
+  // les autres (CareerBonus, Mutation...) suivront dans un chantier separe.
+  Function PersonnageTalentModificateur(Personnage: StructurePersonnage; TypeModif, Cible: String; Filtre: String = ''): Integer;
   // Greffes des appartenances (regiments, ordres, cultes) - CONTEXT.md 2.44
   Procedure PersonnageAppliqueGreffes(var Personnage: StructurePersonnage);
   // Niveau atteint par le personnage dans un metier donne (le plus haut entre la carriere en
@@ -1371,6 +1379,13 @@ var
   indiceTalent:           Integer = 0;
   indiceCompetence:       Integer = 0;
 begin
+  // En Free Pascal, une variable locale initialisee (= valeur) est une constante typee :
+  // elle n'est initialisee qu'une fois au demarrage du programme, pas a chaque appel.
+  // Sans cette remise a zero explicite, un talent qui ne matche rien heritait de la
+  // derniere asterisque laissee par l'appel precedent (Strike Mighty Blow/Strike to
+  // Stun/Very Resilient/Knight of the Order of the Hammer partageant tous "(4)" a tort,
+  // signale par Nono le 11/09/2026). Meme famille de piege que ChercheCompetence, §2.17.
+  Asterisque := 0;
   // traiter les talents qui augmentent les attributs
   For indiceTalent := 0 to (ListTalentAttributModif.count - 1) Do
     if CompareRechercheValeur(ListTalentAttributModif[indiceTalent].CodeTalent, CodeTalent) then
@@ -1498,6 +1513,30 @@ Function PersonnageTalentAttributModif(Personnage: StructurePersonnage; CodeAttr
         if CompareRechercheValeur(ListTalentAttributModif[indiceModif].CodeTalent, PersonnageTalent.CodeTalent)
            and CompareRechercheValeur(ListTalentAttributModif[indiceModif].CodeAttribut, CodeAttribut) then
           Result := Result + ListTalentAttributModif[indiceModif].Valeur * PersonnageTalent.Valeur;
+  end;
+
+Function PersonnageTalentModificateur(Personnage: StructurePersonnage; TypeModif, Cible: String; Filtre: String = ''): Integer;
+  var
+    PersonnageTalent: StructurePersonnageTalent;
+    indiceModif:      Integer;
+  begin
+    Result := 0;
+    for PersonnageTalent in Personnage.CreationTalent do
+      for indiceModif := 0 to (ListTalentModificateur.Count - 1) do
+        if (ListTalentModificateur[indiceModif].TypeModif = TypeModif)
+           and CompareRechercheValeur(ListTalentModificateur[indiceModif].CodeSource, PersonnageTalent.CodeTalent)
+           and CompareRechercheValeur(ListTalentModificateur[indiceModif].Cible, Cible)
+           and ((Trim(ListTalentModificateur[indiceModif].Filtre) = '')
+                or CompareRechercheValeur(ListTalentModificateur[indiceModif].Filtre, Filtre)) then
+          Result := Result + ListTalentModificateur[indiceModif].Facteur * PersonnageTalent.Valeur;
+    for PersonnageTalent in Personnage.AugmentationTalent do
+      for indiceModif := 0 to (ListTalentModificateur.Count - 1) do
+        if (ListTalentModificateur[indiceModif].TypeModif = TypeModif)
+           and CompareRechercheValeur(ListTalentModificateur[indiceModif].CodeSource, PersonnageTalent.CodeTalent)
+           and CompareRechercheValeur(ListTalentModificateur[indiceModif].Cible, Cible)
+           and ((Trim(ListTalentModificateur[indiceModif].Filtre) = '')
+                or CompareRechercheValeur(ListTalentModificateur[indiceModif].Filtre, Filtre)) then
+          Result := Result + ListTalentModificateur[indiceModif].Facteur * PersonnageTalent.Valeur;
   end;
 
 Function PersonnageNiveauDansMetier(Personnage: StructurePersonnage; CodeMetier: String): Integer;

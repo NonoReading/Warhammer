@@ -21,6 +21,7 @@ uses
   ChargeCorruptionArmureModif, ChargeCorruptionTalent, ChargeCorruptionEquipement,
   ChargeTalentArmureModif, ChargeArmeAttributModif,
   ChargeArmureBonusAttributModif, ChargeArmureBonusTalent,
+  ChargeModificateur, ChargeTalentModificateur,
   XMLRead, DOM, Unitcalcul,  Dialogs, strutils;
 
 Procedure XmlExportBook(Livre: String; Langue: String);
@@ -1105,6 +1106,7 @@ Procedure XmlImport(FileName: String; OnlyPrimary: Boolean; OnlyCode: Boolean);
     PTalentCompetenceModif:   StructureTalentCompetenceModif;
     PTalentCompetenceAjoute:  StructureTalentCompetenceAjoute;
     PTalentArmureModif:       StructureTalentArmureModif;
+    PTalentModificateur:      StructureModificateur;
     PArmureBonusModif:        StructureArmureBonusModif;
     PCorruptionAttributModif:   StructureCorruptionAttributModif;
     PCorruptionCompetenceModif: StructureCorruptionCompetenceModif;
@@ -1507,6 +1509,26 @@ Procedure XmlImport(FileName: String; OnlyPrimary: Boolean; OnlyCode: Boolean);
                                    begin
                                     ListTalentArmureModif.add(PTalentArmureModif);
                                     inc(NbTalentArmureModif);
+                                   end;
+                              end;
+                            ConstXmlModificateur:
+                              begin
+                                // Moteur generique "par source" (chargemodificateur.pas) : Type
+                                // porte le mecanisme vise (ModifySkill, ModifyWeapon...), Filtre
+                                // est optionnel (absent pour un bonus de competence simple).
+                                PTalentModificateur.TypeModif  := RemoveQuotes(UTF8Encode(Node.Attributes.GetNamedItem(ConstXmlType).NodeValue));
+                                PTalentModificateur.Cible      := RemoveQuotes(UTF8Encode(Node.Attributes.GetNamedItem(ConstXmlEffetCible).NodeValue));
+                                if Assigned(Node.Attributes) and Assigned(Node.Attributes.GetNamedItem(ConstXmlModificateurFiltre)) then
+                                  PTalentModificateur.Filtre   := RemoveQuotes(UTF8Encode(Node.Attributes.GetNamedItem(ConstXmlModificateurFiltre).NodeValue))
+                                else
+                                  PTalentModificateur.Filtre   := '';
+                                PTalentModificateur.Forme      := ConstFormeEffetAdditif;
+                                PTalentModificateur.Facteur    := StrToIntDef(RemoveQuotes(UTF8Encode(Node.Attributes.GetNamedItem(ConstXmlEffetFacteur).NodeValue)), 0);
+                                PTalentModificateur.CodeSource := PTalent.CodeTalent;
+                                if LangueDef = ConstAnglais then
+                                   begin
+                                    ListTalentModificateur.add(PTalentModificateur);
+                                    inc(NbTalentModificateur);
                                    end;
                               end;
                             ConstXmlAjouteCompetence:

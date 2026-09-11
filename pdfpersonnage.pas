@@ -609,6 +609,12 @@ Function PdfPersonnageCompetence(Personnage: StructurePersonnage; Competence: St
     // (Cavalry) ("+10 CC avec les lances").
     Res.Total := Res.Total + PersonnageCareerBonusCompetenceModif(Personnage, Competence);
 
+    // Moteur generique "par source" (chargemodificateur.pas, CONTEXT.md chantier "inversion
+    // des recherches") : premiere source branchee, les Talents portant <Modificateur
+    // Type="ModifySkill" Cible="..."/> (balise neuve, pas <ModifySkill> - deja pris par
+    // CareerBonus ci-dessus ET par l'annotation decorative de Talent, sens different).
+    Res.Total := Res.Total + PersonnageTalentModificateur(Personnage, ConstXmlModifieCompetence, Competence);
+
     Result := res;
   end;
 
@@ -1992,6 +1998,10 @@ var
   Indice: Integer;
   Bonus:  String = '';
 begin
+  // Meme piege que PersonnageTalentAsterisque (chargepersonnage.pas) : sans cette remise a
+  // zero explicite, un talent sans astérisque propre affichait celle laissee par le DERNIER
+  // appel qui en avait une - signale par Nono le 11/09/2026.
+  Bonus := '';
   For Indice := 0 to high(Personnage.CreationTalent) do
     if CompareRechercheValeur(Personnage.CreationTalent[Indice].CodeTalent, CodeTalent) then
       if Personnage.CreationTalent[Indice].Asterisque <> 0 then
@@ -2011,6 +2021,8 @@ var
   Indice: Integer;
   Bonus:  String = '';
 begin
+  // Meme piege que PdfPersonnageTalentBonus ci-dessus.
+  Bonus := '';
   For Indice := 0 to high(Personnage.CreationCompetence35) do
     if CompareRechercheValeur(Personnage.CreationCompetence35[Indice].CodeCompetence, CodeCompetence) then
       if Personnage.CreationCompetence35[Indice].Bonus <> '' then

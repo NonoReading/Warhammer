@@ -1,6 +1,58 @@
 # Warhammer — Contexte projet
 
-**Dernière mise à jour : 11/09/2026 — PORTE "QUALITÉ D'OBJET" DES TRAITS DE CRÉATURE FAITE,
+**Dernière mise à jour : 11/09/2026 — FONDATION DU MOTEUR GÉNÉRIQUE DE MODIFICATEURS
+(ÉTAPES 1 ET 2), COMPILÉ ET VALIDÉ PAR NONO. Chantier "troisième porte" reformulé et élargi
+(voir entrée §2.55 juste en dessous pour l'ancien plan).** En creusant la 3e porte, Nono a
+posé un but plus large : arrêter d'ajouter une fonction Pascal dédiée par croisement
+source×cible (15 fonctions `Personnage*Modif` déjà recensées dans `chargepersonnage.pas` —
+Attribut dupliqué **5 fois** entre Mutation/Talent/CareerBonus/Arme/ArmureBonus, Talent×
+Compétence et Talent×Arme manquants alors que ce sont justement les cas voulus). Décision :
+inverser le sens de recherche — pour une Cible donnée, boucler sur ce que le PERSONNAGE
+possède (quelques dizaines d'éléments) plutôt que d'interroger tout le catalogue ; le coût
+de balayer plusieurs sources est négligeable (confirmé avec Nono).
+- **Étape 1 — fondation, rien de branché.** Nouveau fichier `chargemodificateur.pas` :
+  `StructureModificateur` (TypeModif/Cible/Filtre/Forme/Facteur/CodeSource) et
+  `TListModificateur`, type partagé réutilisable par n'importe quelle source.
+- **Étape 2 — première source branchée : les Talents, pour `ModifySkill`.** Nouveau fichier
+  `chargetalentmodificateur.pas` (`ListTalentModificateur`). Nouvelle balise XML
+  `<Modificateur Type="ModifySkill" Cible="..." Facteur="N"/>`, posable sur n'importe quel
+  `<Talent>` — balise NEUVE et pas `<ModifySkill>` : ce nom est déjà pris deux fois (bonus
+  chiffré de CareerBonus, ET annotation décorative "Inverse de"/"Bonus" déjà existante sur
+  Talent, `ListTalentCompetenceModif`, sans rapport). Fonction générique unique
+  `PersonnageTalentModificateur(Personnage, TypeModif, Cible, Filtre='')` dans
+  `chargepersonnage.pas`, branchée dans `PdfPersonnageCompetence` — l'accesseur déjà partagé
+  entre l'écran (`WinPersonnage`) et le PDF, donc un seul point de câblage suffit pour les
+  deux affichages. Parsing dans `xmlexportimport.pas` (sous `<Talent>`, à côté de
+  `ConstXmlModifieArmure`). `.Create`/`.Clear`/reset ajoutés dans `warhammersource.pas`
+  (vigilance particulière après le bug du `.Create` oublié le 11/09 sur `ListArmureBonusTalent`,
+  §2.55 ci-dessous).
+- **Cas réel pilote, testé de bout en bout** : nouveau talent maison `PERSO-T0001` "Knight of
+  the Order of the Hammer" (`BOOK_PERSO.Xml`, libre, Max 1), `<Modificateur Type="ModifySkill"
+  Cible="RULES-COMPCOMB_BASE" Facteur="10"/>` (Melee (Basic) = "armes de base"). **Confirmé par
+  Nono sur Gunther Krieg : +10% sur la compétence ET sur les armes qui l'utilisent.**
+- **Bug trouvé et PARTIELLEMENT corrigé en testant, PAS RÉSOLU — voir `A FAIRE.txt`.** Plusieurs
+  talents sans rapport (Strike Mighty Blow, Strike to Stun, Very Resilient, Knight of the Order
+  of the Hammer) partagent la même astérisque "(4)" sur la fiche de Gunther, alors que la règle
+  de Nono est qu'un numéro n'apparaît qu'une fois, sur un seul talent, et à l'identique sur
+  l'élément modifié. Piste trouvée et corrigée (variables locales `var X: Type = valeur;` en
+  Free Pascal, initialisées une seule fois au démarrage et pas à chaque appel —
+  `PersonnageTalentAsterisque`, `PdfPersonnageTalentBonus`, `PdfPersonnageCompetenceBonus`,
+  toutes les trois corrigées) mais **le symptôme persiste identique après correction** : la
+  vraie cause est ailleurs, ou il y a un quatrième endroit avec le même piège non trouvé.
+  Session arrêtée là-dessus par prudence ("j'ai peur qu'on tourne en rond" - Nono) plutôt que
+  de continuer à deviner depuis le code seul. **Point de reprise détaillé dans `A FAIRE.txt`.**
+- **Point tranché en passant, PAS un bug** : `ButtonPdf.visible := false` dans `MajTables()`
+  (`winpersonnage.pas` ~l.4980) fait disparaître le bouton PDF après un clic sur "Maj Fiche",
+  et rien ne le remet à `true` avant fermeture/réouverture du personnage — confirmé volontaire
+  par Nono, le PDF ne doit pas refléter des données pas encore sauvegardées.
+- **Rattrapage au passage** : `chargearmurebonustalent.pas` (unité de la porte "qualité
+  d'objet", §2.55 ci-dessous) n'avait jamais été commité depuis sa création — inclus dans le
+  commit de cette session.
+**Chantier suivant : reprendre le bug des astérisques dupliquées avec un œil frais (voir
+`A FAIRE.txt`), ou continuer le moteur générique (brancher CareerBonus/Mutation dans le même
+moteur, ajouter `ModifyWeapon`/un futur `ModifyDamage` sur Talent) — à définir avec Nono.**
+
+**11/09/2026 — PORTE "QUALITÉ D'OBJET" DES TRAITS DE CRÉATURE FAITE,
 COMPILÉE ET VALIDÉE PAR NONO (§2.55).** Deuxième des trois portes (§2.54 pour la première,
 mutation). Idée de Nono : même logique que Fleshy Tentacle, mais au lieu d'accorder une arme on
 accorde un Talent — même moule que `ChargeCorruptionTalent`, appliqué à `ArmureBonus` plutôt

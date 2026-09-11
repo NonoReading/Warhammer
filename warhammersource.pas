@@ -24,7 +24,7 @@ uses
   ChargeCorruptionTable, ChargeRaceOpinion, ChargeArmureBonusModif,
   ChargeCorruptionAttributModif, ChargeCorruptionCompetenceModif,
   ChargeCorruptionArmureModif, ChargeCorruptionTalent, ChargeCorruptionEquipement,
-  ChargeTalentArmureModif,
+  ChargeTalentArmureModif, ChargeModificateur, ChargeTalentModificateur,
   CustomDrawn_Common, BCButton, BCLabel, fpTTF,
   PdfPersonnage, XmlExportImport, fppdf, WinLivre;
 
@@ -639,6 +639,7 @@ procedure TMenu.ChargerLivre(ForceMaJ: Boolean; ForceLivre: String);
         NbTalentCompetenceModif     := 0;
         NbTalentCompetenceAjoute    := 0;
         NbTalentArmureModif         := 0;
+        NbTalentModificateur        := 0;
         NbRaceOpinion               := 0;
 
         // vider les données
@@ -700,6 +701,7 @@ procedure TMenu.ChargerLivre(ForceMaJ: Boolean; ForceLivre: String);
         ListCorruptionEquipement.Clear;
         ListArmureBonusTalent.Clear;
         ListTalentArmureModif.Clear;
+        ListTalentModificateur.Clear;
       end;
 
     // chercher les livres
@@ -911,6 +913,7 @@ procedure TMenu.FormCreate(Sender: TObject);
        ListCorruptionEquipement     := TListCorruptionEquipement.Create;
        ListTalentArmureModif        := TListTalentArmureModif.Create;
        ListArmureBonusTalent        := TListArmureBonusTalent.Create;
+       ListTalentModificateur       := TListModificateur.Create;
 
        // chercher les livres
        // Le RULESBOOK doit être chargé en premier : d'autres livres (ex. BOOK
