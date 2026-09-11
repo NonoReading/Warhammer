@@ -169,21 +169,14 @@ est ramene a "Soldier" au lieu de Sergeant, le Statut Social de rang 3 est conse
 trappings normaux de rang 3 sont differes jusqu'au rang 4 (Officer). Decision de Nono avant
 saisie : a mener seulement si Nono en a besoin en jeu, pas de chantier dedie pour l'instant.
 
-[FAIT LES 10-11/09/2026 - accesseur unique Attribut/Competence, les deux etapes compilees et
-validees par Nono (Gunther Krieg pour les Attributs, un Chevalier a bonus Polearm pour les
-Competences) : CalculTotaux (winpersonnage.pas l.2357) appelle desormais
-PdfPersonnageAttribut/PdfPersonnageCompetence au lieu d additions locales de cellules, avec
-resync dedie de Personnage.AugmentationAttribut/.AugmentationCompetence en tete de la
-procedure. L ecran reflete maintenant les bonus de CareerBonus (Ordre/Regiment) et d
-arme/armure magique sur les Attributs ET les Competences. Detail CONTEXT.md 2.52, Log.txt.
-Residus du meme defaut, non traites, voir les deux items ci-dessous.]
-
-PERSONNAGE.AUGMENTATIONTALENT ET .EQUIPEMENT ONT LE MEME DEFAUT DE SYNC QUE
-AUGMENTATIONATTRIBUT AVANT LE 10/09/2026 (resynchronises seulement dans
-CalculTableExperience, pas dans CalculTotaux) : un talent a bonus d Attribut/Competence
-direct ou une arme/armure magique tout juste achetes n apparaitront pas immediatement dans
-le Total tant que ces deux-la ne sont pas resynchronises pareil. Pas un bug nouveau, residu
-de l accesseur unique (CONTEXT.md 2.52) a traiter au meme endroit si Nono le demande.
+[FAIT LES 10-11/09/2026 - accesseur unique Attribut/Competence, termine sur son perimetre
+complet et valide par Nono (Gunther Krieg pour les Attributs, un Chevalier a bonus Polearm
+pour les Competences, le talent Big pour le residu Talent/Equipement) : CalculTotaux
+(winpersonnage.pas l.2357) appelle desormais PdfPersonnageAttribut/PdfPersonnageCompetence au
+lieu d additions locales de cellules, avec resync dedie de Personnage.AugmentationAttribut/
+.AugmentationCompetence/.AugmentationTalent/.Equipement en tete de la procedure. L ecran
+reflete maintenant les bonus de CareerBonus (Ordre/Regiment), de talent a bonus direct et d
+arme/armure magique, sans attendre une sauvegarde. Detail CONTEXT.md 2.52, Log.txt.]
 
 PDFPERSONNAGECOMPETENCE/PDFPERSONNAGEATTRIBUT NE PORTENT TOUJOURS PAS CODE/LIBELLE/CARAC
 LIEE DANS LEUR STRUCTUREDONNEE (Base/Augmentation/Total seulement). Pas necessaire pour l

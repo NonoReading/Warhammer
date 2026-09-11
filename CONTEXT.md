@@ -1,16 +1,16 @@
 # Warhammer — Contexte projet
 
-**Dernière mise à jour : 11/09/2026 — ACCESSEUR UNIQUE ATTRIBUT/COMPETENCE TERMINÉ, LES DEUX
-ÉTAPES COMPILÉES ET VALIDÉES PAR NONO (§2.52).** Après le pilote Attributs le 10/09 (Gunther
-Krieg), même démarche appliquée aux Compétences le 11/09 : `CalculTotaux` (`winpersonnage.pas`)
-resynchronise `Personnage.AugmentationCompetence` depuis `TabCompetence` en tête de procédure
-(même raison que pour `AugmentationAttribut` — sans ça `PdfPersonnageCompetence`, appelé juste
-après, lirait une valeur en retard d'un cycle), puis le Total d'une compétence appelle
-`PdfPersonnageCompetence` au lieu d'additionner localement `ColCompBonus + ColCompAtt +
-ColCompMutation`. **Confirmé par Nono sur un Chevalier d'un Ordre à bonus d'arme (Polearm) :
-+10% apparaît bien à l'écran.** Reste hors périmètre, même défaut de synchro non traité :
-`AugmentationTalent`/`AugmentationEquipement`. Détail complet en §2.52. **Chantier suivant : à
-définir avec Nono.**
+**Dernière mise à jour : 11/09/2026 — ACCESSEUR UNIQUE ATTRIBUT/COMPETENCE INTÉGRALEMENT
+TERMINÉ, LES QUATRE RESYNCS COMPILÉS ET VALIDÉS PAR NONO (§2.52).** Après les deux étapes
+Attributs (10/09) et Compétences (11/09), le résidu noté en fin de §2.52
+(`AugmentationTalent`/`Equipement` non resynchronisés dans `CalculTotaux`) a été traité le jour
+même, même fichier même endroit (`winpersonnage.pas`, `CalculTotaux`) : deux resyncs
+supplémentaires ajoutés à l'identique de ceux déjà faits avant sauvegarde
+(`CalculTableExperience` ~l.4922/~l.4932), placés avant les boucles Attributs/Compétences
+puisque `PdfPersonnageAttribut`/`PdfPersonnageCompetence` en dépendent (talent à bonus direct,
+arme/armure magique). **Confirmé par Nono : le talent Big ajouté à un personnage apparaît
+directement dans le tableau sans sauvegarder.** Le chantier accesseur unique est donc clos sur
+son périmètre complet. Détail en §2.52. **Chantier suivant : à définir avec Nono.**
 
 **10/09/2026 — GÉNÉRICISATION DU CALCUL DES TALENTS (`<Effet>`),
 COMPILÉE ET VALIDÉE.** Chantier A FAIRE.txt repris après les Ordres/Regiments. But posé par
@@ -6012,7 +6012,7 @@ Nation/ModifyWeapon/ModifyCarac fonctionne intégralement, y compris en gabarit 
      liste) ne le voit pas — sélectivité de la liste validée.
    - **Chantier suivant : à définir avec Nono.**
 
-### 2.52 Accesseur unique Attribut/Compétence — les deux étapes compilées et validées par Nono (10-11/09/2026)
+### 2.52 Accesseur unique Attribut/Compétence — terminé, compilé et validé par Nono (10-11/09/2026)
 
 **Origine.** Reprise de l'idée de Nono du 06/09/2026 (notée dans `A FAIRE.txt`, gardée à
 l'écart du résolveur générique de talents §2.50 pour ne pas les mélanger) : la valeur d'un
@@ -6076,12 +6076,17 @@ n'introduit pas de perte nouvelle.
 **COMPILÉ ET VALIDÉ PAR NONO le 11/09/2026** sur un Chevalier d'un Ordre à bonus d'arme
 (Polearm) : +10% apparaît bien à l'écran.
 
-**Non traité, résidu du même défaut, à reprendre au même endroit si besoin :**
-- `Personnage.AugmentationTalent` et `Personnage.Equipement` ne sont pas resynchronisés comme
-  `AugmentationAttribut`/`AugmentationCompetence` : un talent à bonus d'Attribut/Compétence
-  direct ou une arme/armure magique tout juste achetés n'apparaîtront pas immédiatement dans le
-  Total tant que ces deux-là ne le sont pas aussi. Pas une régression de ce chantier
-  (comportement identique à avant), juste un angle mort qui subsiste.
+**Résidu Talent/Équipement, traité le même jour (11/09/2026).** Même fichier, même endroit
+(`CalculTotaux`) : deux resyncs supplémentaires, à l'identique de ceux déjà faits avant
+sauvegarde dans `CalculTableExperience` (`Personnage.AugmentationTalent` depuis
+`TabTalent.Cells[ColTalNbAugm, ...]` ~l.4922, `Personnage.Equipement` depuis `TabEquipement`
+~l.4932, même distinction sort/équipement via `TalentSort`), ajoutés avant les boucles
+Attributs/Compétences puisque `PdfPersonnageAttribut`/`PdfPersonnageCompetence` en dépendent.
+**COMPILÉ ET VALIDÉ PAR NONO** : le talent Big ajouté à un personnage apparaît directement dans
+le tableau sans sauvegarder. L'accesseur unique Attribut/Compétence est donc terminé sur tout
+son périmètre.
+
+**Reste hors périmètre, non lié à ce chantier :**
 - `StructureDonnee` (`pdfpersonnage.pas`) ne porte toujours que Base/Augmentation/Total, pas
   code/libellé/carac liée — pas nécessaire pour ce chantier, à revoir si un futur appelant en a
   besoin (voir l'idée d'origine du 06/09 dans `A FAIRE.txt`).

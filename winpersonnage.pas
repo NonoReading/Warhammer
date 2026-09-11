@@ -2364,6 +2364,8 @@ procedure TWinPersonnages.CalculTotaux();
     IndAugm:             Integer;
     PersonnageAttribut:  StructurePersonnageAttribut;
     PersonnageCompetence:StructurePersonnageCompetence;
+    PersonnageTalent:    StructurePersonnageTalent;
+    PersonnageEquipement:StructurePersonnageEquipement;
     DonneeAttribut:      StructureDonnee;
     DonneeCompetence:    StructureDonnee;
     Bonus:               String;
@@ -2397,6 +2399,40 @@ procedure TWinPersonnages.CalculTotaux();
           PersonnageCompetence.Valeur         := StrToIntDef(TabCompetence.Cells[ColCompWork, IndAugm],0);
           Personnage.AugmentationCompetence   += [PersonnageCompetence];
         end;
+
+    // Meme raisonnement pour Personnage.AugmentationTalent et Personnage.Equipement : lus
+    // par PdfPersonnageAttribut/PdfPersonnageCompetence ci-dessous (talent a bonus direct
+    // d'Attribut/Competence, arme/armure magique), residu du chantier accesseur unique
+    // laisse ouvert le 11/09/2026 (CONTEXT.md 2.52). Meme source et meme forme que le
+    // resync deja fait avant sauvegarde (winpersonnage.pas ~l.4922 et ~l.4932).
+    Personnage.AugmentationTalent := [];
+    for IndAugm := 1 to TabTalent.Rowcount - 1 do
+      if StrToIntDef(TabTalent.Cells[ColTalNbAugm, IndAugm],0) > 0 then
+        begin
+          PersonnageTalent.CodeTalent    := TabTalent.Cells[ColTalCode, IndAugm];
+          PersonnageTalent.Valeur        := StrToIntDef(TabTalent.Cells[ColTalNbAugm, IndAugm],0);
+          Personnage.AugmentationTalent  += [PersonnageTalent];
+        end;
+
+    Personnage.Equipement := [];
+    for IndAugm := 1 to TabEquipement.RowCount - 1 do
+      begin
+        PersonnageEquipement.CodeEquipement := TabEquipement.Cells[2, IndAugm];
+        If TalentSort(TabEquipement.Cells[2, IndAugm]).CodeTalent <> ''
+           then
+          begin
+            PersonnageEquipement.TypeEquipement    := TypeEquipSp;
+            PersonnageEquipement.QualiteEquipement := '';
+            PersonnageEquipement.CoutXp            := CalculOptionXpDiv25Inverse(StrToIntDef(TabEquipement.Cells[5, IndAugm],0));
+          end
+        else
+          begin
+            PersonnageEquipement.TypeEquipement    := TabEquipement.Cells[3, IndAugm];
+            PersonnageEquipement.QualiteEquipement := TabEquipement.Cells[7, IndAugm];
+            PersonnageEquipement.CoutXp            := 0;
+          end;
+        Personnage.Equipement += [PersonnageEquipement];
+      end;
 
     // Attributs
     for IndCol := 2 to TabAttribut.ColCount-1 do

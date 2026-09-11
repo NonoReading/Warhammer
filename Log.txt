@@ -2443,3 +2443,18 @@ COMPILE ET VALIDE PAR NONO sur un Chevalier d un Ordre a bonus d arme (Polearm) 
 apparait bien a l ecran. Accesseur unique Attribut/Competence donc termine sur les deux
 paliers prevus. Reste, hors perimetre : Personnage.AugmentationTalent/.Equipement ont le
 meme defaut de sync, pas traite. A FAIRE.txt mis a jour en consequence.
+
+11/09/2026 - ACCESSEUR UNIQUE ATTRIBUT/COMPETENCE : RESIDU TALENT/EQUIPEMENT TRAITE,
+CHANTIER TERMINE (CONTEXT.md 2.52). Meme jour, meme fichier, meme endroit (winpersonnage.pas,
+CalculTotaux) que les deux etapes precedentes. Personnage.AugmentationTalent et
+Personnage.Equipement n etaient resynchronises depuis les grilles TabTalent/TabEquipement qu
+a l interieur de CalculTableExperience (avant sauvegarde), ce qui fait que PdfPersonnageAttribut/
+PdfPersonnageCompetence, appeles juste apres dans CalculTotaux, lisaient une valeur en retard
+d un cycle pour un talent a bonus direct d Attribut/Competence ou une arme/armure magique tout
+juste achetes. Deux resyncs ajoutes en tete de CalculTotaux, a l identique de ceux deja faits
+avant sauvegarde (CalculTableExperience ~l.4922 et ~l.4932) : AugmentationTalent depuis
+TabTalent.Cells[ColTalNbAugm, ...], Equipement depuis TabEquipement (meme distinction
+sort/equipement via TalentSort).
+COMPILE ET VALIDE PAR NONO, aucun probleme constate : le talent Big ajoute a un personnage
+apparait directement dans le tableau sans sauvegarder. Accesseur unique Attribut/Competence
+donc termine sur son perimetre complet (Attributs, Competences, Talent, Equipement).
