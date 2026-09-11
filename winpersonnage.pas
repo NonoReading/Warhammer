@@ -2388,10 +2388,12 @@ procedure TWinPersonnages.CalculTotaux();
     TabAtt:              String;
     TabComp:             String;
     IndAugm:             Integer;
+    IndOld:              Integer;
     PersonnageAttribut:  StructurePersonnageAttribut;
     PersonnageCompetence:StructurePersonnageCompetence;
     PersonnageTalent:    StructurePersonnageTalent;
     PersonnageEquipement:StructurePersonnageEquipement;
+    OldAugmentationTalent: TArrayPersonnageTalent;
     DonneeAttribut:      StructureDonnee;
     DonneeCompetence:    StructureDonnee;
     Bonus:               String;
@@ -2431,12 +2433,27 @@ procedure TWinPersonnages.CalculTotaux();
     // d'Attribut/Competence, arme/armure magique), residu du chantier accesseur unique
     // laisse ouvert le 11/09/2026 (CONTEXT.md 2.52). Meme source et meme forme que le
     // resync deja fait avant sauvegarde (winpersonnage.pas ~l.4922 et ~l.4932).
+    // OldAugmentationTalent conserve l'Asterisque deja calcule par PersonnageXmlChargement
+    // (chargepersonnage.pas) avant que ce resync ne remplace le tableau - sans quoi la
+    // variable locale PersonnageTalent, jamais remise a zero explicitement ci-dessous,
+    // ferait heriter chaque talent reconstruit de l'Asterisque laisse par l'appel
+    // precedent (meme famille de piege que PersonnageTalentAsterisque). Signale par Nono
+    // le 11/09/2026 sur Gunther Krieg (Strike Mighty Blow/Strike to Stun/Very Resilient/
+    // Knight of the Order of the Hammer partageant tous "(4)" a tort).
+    OldAugmentationTalent := Personnage.AugmentationTalent;
     Personnage.AugmentationTalent := [];
     for IndAugm := 1 to TabTalent.Rowcount - 1 do
       if StrToIntDef(TabTalent.Cells[ColTalNbAugm, IndAugm],0) > 0 then
         begin
           PersonnageTalent.CodeTalent    := TabTalent.Cells[ColTalCode, IndAugm];
           PersonnageTalent.Valeur        := StrToIntDef(TabTalent.Cells[ColTalNbAugm, IndAugm],0);
+          PersonnageTalent.Asterisque    := 0;
+          for IndOld := 0 to high(OldAugmentationTalent) do
+            if CompareRechercheValeur(OldAugmentationTalent[IndOld].CodeTalent, PersonnageTalent.CodeTalent) then
+              begin
+                PersonnageTalent.Asterisque := OldAugmentationTalent[IndOld].Asterisque;
+                break;
+              end;
           Personnage.AugmentationTalent  += [PersonnageTalent];
         end;
 
@@ -4709,6 +4726,7 @@ Procedure TWinPersonnages.MajTables();
   Var
     IndAugm:           Integer;
     IndActu:           Integer;
+    IndOld:            Integer;
     Trouve:            Boolean;
     PTalent:           StructureTalent;
     PCompetence:       StructureCompetence;
@@ -4716,6 +4734,7 @@ Procedure TWinPersonnages.MajTables();
     PSort:             StructureSort;
     PMetierCompetence: StructureMetierCompetence;
     PMetierTalent:     StructureMetierTalent;
+    OldAugmentationTalent: TArrayPersonnageTalent;
     CodEquip:          String;
     TypEquip:          String;
     Ind:               Integer;
@@ -5007,12 +5026,24 @@ Procedure TWinPersonnages.MajTables();
         end;
 
     // Maj personnage Talent
+    // OldAugmentationTalent conserve l'Asterisque deja calcule avant ce resync - meme
+    // logique et meme raison que CalculTotaux ci-dessus (~l.2438), PersonnageTalent etant
+    // ici la variable GLOBALE de l'unite (declaree ~l.450, non redeclaree localement dans
+    // MajTables), donc partagee avec tout le reste du code.
+    OldAugmentationTalent := Personnage.AugmentationTalent;
     Personnage.AugmentationTalent := [];
     for Ind := 1 to TabTalent.Rowcount - 1 do
       if StrToIntDef(TabTalent.Cells[ColTalNbAugm, Ind],0) > 0 then
         begin
           PersonnageTalent.CodeTalent    := TabTalent.Cells[ColTalCode, Ind];
           PersonnageTalent.Valeur        := StrToIntDef(TabTalent.Cells[ColTalNbAugm, Ind],0);
+          PersonnageTalent.Asterisque    := 0;
+          for IndOld := 0 to high(OldAugmentationTalent) do
+            if CompareRechercheValeur(OldAugmentationTalent[IndOld].CodeTalent, PersonnageTalent.CodeTalent) then
+              begin
+                PersonnageTalent.Asterisque := OldAugmentationTalent[IndOld].Asterisque;
+                break;
+              end;
           Personnage.AugmentationTalent  += [PersonnageTalent];
         end;
 

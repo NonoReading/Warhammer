@@ -6,26 +6,13 @@
 CORRECTIONS COURTES  (une ligne ou deux chacune)
 =========================================================================
 
-ASTERISQUES DE TALENTS DUPLIQUEES (PLUSIEURS TALENTS PARTAGENT LE MEME NUMERO). Mis de
-cote le 11/09/2026, pas resolu - a reprendre avec un oeil frais. Signale par Nono sur
-Gunther Krieg : "Strike Mighty Blow"/"Strike to Stun"/"Very Resilient"/"Knight of the
-Order of the Hammer" affichent tous "(4)" sur la fiche, alors que seul Very Resilient
-devrait en avoir une (ModifyCarac Toughness +5) - la regle de Nono : un numero
-n'apparait qu'une fois, sur UN SEUL talent, et se retrouve a l'identique sur l'element
-qu'il modifie. Pire, apres correction, Toughness affichait "(3)" et Very Resilient
-"(4)" - deux numeros differents pour le meme evenement.
-Piste explorée et CORRIGEE mais insuffisante : dans PersonnageTalentAsterisque
-(chargepersonnage.pas) et PdfPersonnageTalentBonus/PdfPersonnageCompetenceBonus
-(pdfpersonnage.pas), les variables locales "var X: Type = valeur;" ne sont
-initialisees qu'une fois au demarrage en Free Pascal, pas a chaque appel - un appel qui
-ne trouve rien peut renvoyer la valeur laissee par l'appel precedent. Les trois ont ete
-corrigees (reset explicite en tete de fonction) mais le symptome persiste tel quel :
-donc soit la cause reelle est ailleurs, soit il y a un quatrieme endroit avec le meme
-piege. Grep sur ": (String|Integer) = ('' ;|0;)" remonte 245 occurrences dans 25
-fichiers au total - toutes non auditees.
-A la reprise : restager Gunther Krieg, verifier si les 3 corrections sont bien sur le
-poste, puis retracer PAS A PAS (avec Nono si besoin d'un test cible) plutot que de
-deviner depuis le code seul - c'est ce qui a fait tourner en rond cette session.
+[FAIT LE 11/09/2026 - Asterisques de talents dupliquees, RESOLU. Deux bugs distincts :
+Personnage.Asterisque relu au lieu de la variable locale fraiche dans les 3 blocs
+competence de PersonnageTalentAsterisque (chargepersonnage.pas) ; et surtout
+CalculTotaux/MajTables (winpersonnage.pas) qui reconstruisaient Personnage.AugmentationTalent
+depuis la grille ecran a CHAQUE ouverture de personnage sans jamais remettre Asterisque a
+zero, ecrasant le calcul correct fait a l'instant d'avant. Compile et valide par Nono sur
+Gunther Krieg. Detail CONTEXT.md (entree du 11/09/2026 en tete de fichier), Log.txt.]
 
 LIBELLES TRONQUES SUR CERTAINS BOUTONS DE WINMUTATION. Signale par Nono le 11/09/2026 :
 sur la fenetre Corruption (ajout de mutation), "Spend a Resilience point"/"Accept a

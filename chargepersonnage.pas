@@ -1432,15 +1432,15 @@ begin
               begin
                 if Asterisque = 0 then
                   Asterisque := Personnage.Asterisque + 1;
-                if CountOccurrences(Personnage.CreationCompetence35[indiceCompetence].Bonus, '(' + IntToStr(Personnage.Asterisque) + ')') = 0 then
+                if CountOccurrences(Personnage.CreationCompetence35[indiceCompetence].Bonus, '(' + IntToStr(Asterisque) + ')') = 0 then
                   begin
                     if Personnage.CreationCompetence35[indiceCompetence].Bonus <> '' then
                       Personnage.CreationCompetence35[indiceCompetence].Bonus += '-';
                     case ListTalentCompetenceModif[indiceTalent].TypeModif of
                       ConstCompetenceInverseDe:
-                        Personnage.CreationCompetence35[indiceCompetence].Bonus += '><(' + IntToStr(Personnage.Asterisque) + ')';
+                        Personnage.CreationCompetence35[indiceCompetence].Bonus += '><(' + IntToStr(Asterisque) + ')';
                       ConstCompetenceBonus:
-                        Personnage.CreationCompetence35[indiceCompetence].Bonus += 'B(' + IntToStr(Personnage.Asterisque) + ')';
+                        Personnage.CreationCompetence35[indiceCompetence].Bonus += 'B(' + IntToStr(Asterisque) + ')';
                     end;
                   end;
               end;
@@ -1450,15 +1450,15 @@ begin
               begin
                 if Asterisque = 0 then
                   Asterisque := Personnage.Asterisque + 1;
-                if CountOccurrences(Personnage.CreationCompetence40[indiceCompetence].Bonus, '(' + IntToStr(Personnage.Asterisque) + ')') = 0 then
+                if CountOccurrences(Personnage.CreationCompetence40[indiceCompetence].Bonus, '(' + IntToStr(Asterisque) + ')') = 0 then
                   begin
                     if Personnage.CreationCompetence40[indiceCompetence].Bonus <> '' then
                       Personnage.CreationCompetence40[indiceCompetence].Bonus += '-';
                     case ListTalentCompetenceModif[indiceTalent].TypeModif of
                       ConstCompetenceInverseDe:
-                        Personnage.CreationCompetence40[indiceCompetence].Bonus += '><(' + IntToStr(Personnage.Asterisque) + ')';
+                        Personnage.CreationCompetence40[indiceCompetence].Bonus += '><(' + IntToStr(Asterisque) + ')';
                       ConstCompetenceBonus:
-                        Personnage.CreationCompetence40[indiceCompetence].Bonus += 'B(' + IntToStr(Personnage.Asterisque) + ')';
+                        Personnage.CreationCompetence40[indiceCompetence].Bonus += 'B(' + IntToStr(Asterisque) + ')';
                     end;
                   end;
               end;
@@ -1468,15 +1468,15 @@ begin
               begin
                 if Asterisque = 0 then
                   Asterisque := Personnage.Asterisque + 1;
-                if CountOccurrences(Personnage.AugmentationCompetence[indiceCompetence].Bonus, '(' + IntToStr(Personnage.Asterisque) + ')') = 0 then
+                if CountOccurrences(Personnage.AugmentationCompetence[indiceCompetence].Bonus, '(' + IntToStr(Asterisque) + ')') = 0 then
                   begin
                     if Personnage.AugmentationCompetence[indiceCompetence].Bonus <> '' then
                       Personnage.AugmentationCompetence[indiceCompetence].Bonus += '-';
                     case ListTalentCompetenceModif[indiceTalent].TypeModif of
                       ConstCompetenceInverseDe:
-                        Personnage.AugmentationCompetence[indiceCompetence].Bonus += '><(' + IntToStr(Personnage.Asterisque) + ')';
+                        Personnage.AugmentationCompetence[indiceCompetence].Bonus += '><(' + IntToStr(Asterisque) + ')';
                       ConstCompetenceBonus:
-                        Personnage.AugmentationCompetence[indiceCompetence].Bonus += 'B(' + IntToStr(Personnage.Asterisque) + ')';
+                        Personnage.AugmentationCompetence[indiceCompetence].Bonus += 'B(' + IntToStr(Asterisque) + ')';
                     end;
                   end;
               end;

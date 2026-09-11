@@ -2652,3 +2652,37 @@ Reste ouvert, decision a prendre avec Nono a la prochaine session : le bug des a
 dupliquees (toujours pas resolu, voir A FAIRE.txt), brancher Mutation sur le meme moteur,
 ajouter ModifyWeapon/un futur ModifyDamage sur Talent, et migrer ModifyCarac d Attribut
 (toujours duplique 5 fois entre les sources, seule cible non touchee par ce chantier).
+
+11/09/2026 - BUG DES ASTERISQUES DE TALENTS DUPLIQUEES RESOLU, COMPILE ET VALIDE PAR NONO SUR
+GUNTHER KRIEG. Reprise a froid de l entree precedente (corrections partielles, symptome
+persistant). Precision decisive de Nono en rouvrant le sujet : le symptome apparaissait au
+chargement du personnage, pas seulement au PDF, et pas sur tous les personnages (Wissenlander
+Soldier atteint, Messager veloce epargne) - cette observation a oriente la recherche vers ce
+qui distingue les deux fiches plutot que vers une hypothese generale.
+Deux bugs distincts dans deux fichiers expliquaient le meme symptome :
+- PersonnageTalentAsterisque (chargepersonnage.pas) : dans les 3 blocs qui annotent une
+competence (CreationCompetence35/40, AugmentationCompetence), le numero frais calcule en local
+etait bien affecte, mais le texte ecrit dans le Bonus de la competence relisait
+Personnage.Asterisque, le compteur partage pas encore mis a jour par l appelant a ce stade -
+donc encore celui du talent PRECEDENT. Corrige (9 occurrences).
+- CalculTotaux/MajTables (winpersonnage.pas), la vraie cause du cas Gunther : ces deux
+procedures reconstruisent entierement Personnage.AugmentationTalent depuis la grille ecran
+TabTalent (residu du chantier accesseur unique, CONTEXT.md 2.52), et cette reconstruction
+tourne a CHAQUE ouverture de personnage (XmlChargePersonnage appelle CalculTotaux juste apres
+le chargement XML) - d ou le symptome visible des le chargement, identique apres fermeture et
+reouverture. La variable PersonnageTalent utilisee pour rebatir chaque entree n avait jamais
+son champ Asterisque remis a zero avant d etre pousse dans le tableau : tous les talents
+reconstruits heritaient du meme reliquat, ecrasant le calcul correct fait juste avant par
+PersonnageXmlChargement. Corrige aux deux endroits (CalculTotaux et MajTables) : reset
+explicite a 0, puis recuperation de l ancienne valeur deja correcte par correspondance de
+CodeTalent sur le tableau d avant reconstruction, pour ne pas perdre le numero legitime (ex.
+Very Resilient "(3)") en meme temps que les faux.
+Methode qui a debloque la session : deux traces de diagnostic temporaires (fichier ecrit au
+chargement du personnage, fichier ecrit a la generation du PDF) plutot que de continuer a
+deviner depuis la lecture du code seul - comparer les deux etats a localise le point exact ou
+les valeurs divergeaient en un aller-retour. Traces retirees une fois la cause confirmee.
+Lecon a retenir : un resync qui reconstruit un tableau depuis la grille ecran doit re-mettre a
+zero TOUS les champs qui ne viennent pas de cette grille (ici Asterisque), pas seulement ceux
+qu il repeuple - meme famille de piege que les variables locales non reinitialisees deja
+rencontrees dans ce chantier, mais du cote d une variable partagee entre plusieurs appels
+plutot que d une constante typee.

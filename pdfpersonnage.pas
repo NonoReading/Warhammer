@@ -4533,7 +4533,6 @@ Procedure PdfPersonnageCreationFeldo2P(Personnage: StructurePersonnage);
     // Dessin Explication (extrait dans PdfBlocDessinExplication, CONTEXT.md §2.4 - cadre + contenu)
     PdfBlocDessinExplication(PdfPage, DessinLargeurArm, DessinLargeurWea, DessinDebutHautArm, DessinDebutHautWea, DessinHauteurExl, ArmureBonii, ArmeBonii, FabricationBonii);
 
-
     PDFDoc.SaveToFile(PdfChemin);
     PDFDoc.Free;
 

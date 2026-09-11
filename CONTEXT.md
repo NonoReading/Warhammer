@@ -1,6 +1,45 @@
 # Warhammer — Contexte projet
 
-**Dernière mise à jour : 11/09/2026 — MOTEUR GÉNÉRIQUE DE MODIFICATEURS : CAREERBONUS
+**Dernière mise à jour : 11/09/2026 — BUG DES ASTÉRISQUES DE TALENTS DUPLIQUÉES RÉSOLU,
+COMPILÉ ET VALIDÉ PAR NONO SUR GUNTHER KRIEG.** Reprise à froid de l'entrée §ci-dessous
+("PARTIELLEMENT corrigé... PAS RÉSOLU"). Nono a apporté une précision décisive en
+rouvrant le sujet : le symptôme apparaissait **au chargement du personnage**, pas
+seulement au PDF, et pas sur tous les personnages (Wissenlander Soldier atteint, Messager
+véloce épargné) — cette dernière observation a orienté la recherche vers ce qui distingue
+les deux fiches plutôt que vers une hypothèse générale. Deux bugs distincts, dans deux
+fichiers, expliquaient le même symptôme :
+- **`PersonnageTalentAsterisque` (`chargepersonnage.pas`)** : dans les 3 blocs qui
+  annotent une compétence (CreationCompetence35/40, AugmentationCompetence), le numéro
+  fraîchement calculé (`Asterisque`, variable locale) était bien affecté, mais le texte
+  écrit dans le Bonus de la compétence relisait `Personnage.Asterisque` — le compteur
+  partagé, pas encore mis à jour par l'appelant à ce stade de l'appel, donc encore celui
+  du talent PRÉCÉDENT. Corrigé (9 occurrences, `Personnage.Asterisque` → `Asterisque`).
+  Ce bug ne s'est pas manifesté sur les cas testés ensuite (Suave/Very Strong/Very
+  Resilient de Gunther modifient tous des ATTRIBUTS, branche saine dès le départ) — mais
+  reste un vrai bug, corrigé pour la prochaine fois qu'un talent modifiant une compétence
+  suivra un autre talent numéroté dans la même fiche.
+- **`CalculTotaux`/`MajTables` (`winpersonnage.pas`) — la vraie cause du cas Gunther.**
+  Ces deux procédures reconstruisent entièrement `Personnage.AugmentationTalent` depuis la
+  grille écran `TabTalent` (résidu du chantier accesseur unique, §2.52), et **cette
+  reconstruction tourne à chaque ouverture de personnage** (`XmlChargePersonnage` appelle
+  `CalculTotaux` juste après le chargement XML) — d'où le symptôme visible dès le
+  chargement, et identique après fermeture/réouverture. La variable `PersonnageTalent`
+  utilisée pour rebâtir chaque entrée n'avait jamais son champ `Asterisque` remis à zéro
+  avant d'être poussée dans le tableau — tous les talents reconstruits héritaient donc du
+  même reliquat (le dernier laissé par un usage antérieur de cette variable), écrasant le
+  calcul correct fait par `PersonnageXmlChargement` à l'instant d'avant. Deux traces de
+  diagnostic temporaires (fichier écrit au chargement, fichier écrit à la génération PDF)
+  ont permis de comparer les deux états et de localiser le point exact où les valeurs
+  divergeaient, plutôt que de continuer à deviner depuis le code seul — retirées une fois
+  la cause confirmée. Corrigé aux deux endroits : reset explicite à 0, puis récupération
+  de l'ancienne valeur (déjà correcte) par correspondance de `CodeTalent` sur le tableau
+  d'avant reconstruction, pour ne pas perdre le numéro légitime (ex. Very Resilient "(3)")
+  en même temps que les faux.
+**Non commité au moment de cette mise à jour — voir avec Nono.**
+
+---
+
+**11/09/2026 — MOTEUR GÉNÉRIQUE DE MODIFICATEURS : CAREERBONUS
 BRANCHÉ (ÉTAPES 1 À 3), COMPILÉ ET VALIDÉ PAR NONO SUR UN CHEVALIER RÉEL. Chantier
 "troisième porte" reformulé et élargi (voir entrée §2.55 plus bas pour l'ancien plan).**
 En creusant la 3e porte, Nono a posé un but plus large : arrêter d'ajouter une fonction
@@ -56,7 +95,8 @@ d'interroger tout le catalogue ; le coût de balayer plusieurs sources est négl
   Lances, Two-handed Swords or Shields") — le bonus de +10% apparaît sur le Bouclier,
   vérifié dans le XML comme comportement attendu (trois `<ModifyWeapon>` du palier,
   `RULES-WTYPE_SHIELD` inclus) et pas un bug.
-- **Bug trouvé et PARTIELLEMENT corrigé en testant, PAS RÉSOLU — voir `A FAIRE.txt`.** Plusieurs
+- **Bug trouvé et PARTIELLEMENT corrigé en testant — RÉSOLU depuis, voir l'entrée du
+  11/09/2026 tout en haut de ce fichier.** Sur le moment, plusieurs
   talents sans rapport (Strike Mighty Blow, Strike to Stun, Very Resilient, Knight of the Order
   of the Hammer) partagent la même astérisque "(4)" sur la fiche de Gunther, alors que la règle
   de Nono est qu'un numéro n'apparaît qu'une fois, sur un seul talent, et à l'identique sur
@@ -74,11 +114,11 @@ d'interroger tout le catalogue ; le coût de balayer plusieurs sources est négl
 - **Rattrapage au passage** : `chargearmurebonustalent.pas` (unité de la porte "qualité
   d'objet", §2.55 ci-dessous) n'avait jamais été commité depuis sa création — inclus dans le
   commit de cette session.
-**Chantier suivant : reprendre le bug des astérisques dupliquées avec un œil frais (voir
-`A FAIRE.txt`), ou continuer le moteur générique (brancher Mutation dans le même moteur,
-ajouter `ModifyWeapon`/un futur `ModifyDamage` sur Talent, migrer `ModifyCarac` d'Attribut
-— aujourd'hui dupliqué 5 fois, seule cible non touchée par ce chantier) — à définir avec
-Nono.**
+**Chantier suivant : le bug des astérisques dupliquées est résolu (voir l'entrée du
+11/09/2026 tout en haut de ce fichier) — reste à définir avec Nono la suite du moteur
+générique (brancher Mutation dans le même moteur, ajouter `ModifyWeapon`/un futur
+`ModifyDamage` sur Talent, migrer `ModifyCarac` d'Attribut — aujourd'hui dupliqué 5 fois,
+seule cible non touchée par ce chantier).**
 
 **11/09/2026 — PORTE "QUALITÉ D'OBJET" DES TRAITS DE CRÉATURE FAITE,
 COMPILÉE ET VALIDÉE PAR NONO (§2.55).** Deuxième des trois portes (§2.54 pour la première,
