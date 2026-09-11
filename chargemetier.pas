@@ -78,39 +78,14 @@ Type
         Valeur:         Integer;
   End;
 
-  // Le pendant Competence de StructureCareerBonusAttributModif ci-dessus, laisse de cote
-  // au 2.50 etape 3 faute de besoin (asymetrie notee dans CONTEXT.md a l'epoque). Necessaire
-  // au 3d-3 (ordres de chevalerie) : le palier Knight ("+10 CC avec les lances") se
-  // represente comme un bonus chiffre sur Melee (Cavalry), pas comme un simple octroi de
-  // competence (qui ne porte aucune valeur) - decision Nono, CONTEXT.md 2.44/2.50.
-  StructureCareerBonusCompetenceModif = Record
-        CodeBonus:      String;
-        Niveau:         Integer;
-        CodeCompetence: String;
-        Valeur:         Integer;
-  End;
+  // StructureCareerBonusCompetenceModif (<ModifySkill>) et StructureCareerBonusArmeModif
+  // (<ModifyWeapon>) sont passees au moteur generique le 11/09/2026 - voir
+  // ChargeModificateur.StructureModificateur (champ Niveau) et
+  // ChargeCareerBonusModificateur.ListCareerBonusModificateur. StructureCareerBonusAttributModif
+  // (<ModifyCarac>) ci-dessus reste a part pour l'instant, meme decision que ModifyCarac cote
+  // Talent (ChargeTalentModificateur) : migration separee, pas dans ce chantier.
 
-  // Le pendant "par type d'arme" des deux precedents - <ModifyWeapon> pose dans un
-  // <LevelN>. Necessaire parce que le palier Knight ("+10 CC avec les lances, les
-  // epees a deux mains ou les boucliers") ne concerne qu'UNE PARTIE des armes d'une
-  // meme competence (Melee (Cavalry) couvre aussi le marteau de cavalerie, Melee (2
-  // mains) couvre aussi la Grande Hache et le Marteau de guerre) : ModifySkill seul
-  // bonifierait ces armes-la aussi, ce que le livre ne dit pas. CodeTypeArme vise
-  // StructureArme.TypeArme (nouveau champ, chargearme.pas). CodeCompetence est un
-  // second filtre FACULTATIF (attribut skill= du tag) pour les cas comme "epees a
-  // deux mains" ou le type seul (Sword) engloberait aussi l'epee de base et les armes
-  // d'escrime - verifie le 07/09/2026 (Log.txt) qu'aucune combinaison de qualites
-  // n'identifie ca de facon fiable, d'ou ce champ dedie plutot qu'une heuristique sur
-  // ListeBonus. CONTEXT.md 2.50 etape 3 (3d-3, Ordres de Chevalerie).
-  StructureCareerBonusArmeModif = Record
-        CodeBonus:      String;
-        Niveau:         Integer;
-        CodeTypeArme:   String;
-        CodeCompetence: String;
-        Valeur:         Integer;
-  End;
-
-  // Le pendant "regle narrative" des trois precedents - <SpecialRule name="Nom court">
+  // Le pendant "regle narrative" des precedents - <SpecialRule name="Nom court">
   // Texte descriptif</SpecialRule> pose dans un <LevelN>. Necessaire parce que le palier 4
   // ("Knight of the Inner Circle") de la quasi-totalite des Ordres de Chevalerie n'est PAS
   // un bonus chiffre (Trait automatique conditionnel, relance de des, Blessures Critiques
@@ -128,8 +103,6 @@ Type
   TListCareerBonus       = specialize TList<StructureCareerBonus>;
   TListCareerBonusNiveau = specialize TList<StructureCareerBonusNiveau>;
   TListCareerBonusAttributModif = specialize TList<StructureCareerBonusAttributModif>;
-  TListCareerBonusCompetenceModif = specialize TList<StructureCareerBonusCompetenceModif>;
-  TListCareerBonusArmeModif = specialize TList<StructureCareerBonusArmeModif>;
   TListCareerBonusSpecialRule = specialize TList<StructureCareerBonusSpecialRule>;
 
 var
@@ -141,10 +114,6 @@ var
   NbCareerBonusNiveau:    Integer;
   ListCareerBonusAttributModif: TListCareerBonusAttributModif;
   NbCareerBonusAttributModif:   Integer;
-  ListCareerBonusCompetenceModif: TListCareerBonusCompetenceModif;
-  NbCareerBonusCompetenceModif:   Integer;
-  ListCareerBonusArmeModif: TListCareerBonusArmeModif;
-  NbCareerBonusArmeModif:   Integer;
   ListCareerBonusSpecialRule: TListCareerBonusSpecialRule;
   NbCareerBonusSpecialRule:   Integer;
 

@@ -2618,3 +2618,37 @@ le PDF ne doit pas refleter des donnees pas encore sauvegardees.
 Rattrapage au passage : chargearmurebonustalent.pas (unite de la porte "qualite d objet",
 entree precedente) n avait jamais ete commite depuis sa creation - inclus dans le commit de
 cette session.
+
+11/09/2026 - CAREERBONUS BRANCHE SUR LE MOTEUR GENERIQUE DE MODIFICATEURS (ETAPE 3), COMPILE
+ET VALIDE PAR NONO SUR UN CHEVALIER REEL. Suite immediate de la fondation et du branchement
+Talent (entree precedente) : deuxieme source branchee, ModifySkill et ModifyWeapon cote
+CareerBonus. Contrairement aux Talents, un bonus de CareerBonus est conditionne par un
+palier (StructureCareerBonusCompetenceModif/ArmeModif portaient deja un champ Niveau,
+absent de StructureModificateur) - champ Niveau ajoute a StructureModificateur (0 = pas de
+condition, ignore par les Talents), meme principe que Filtre deja optionnel.
+Nouveau fichier chargecareerbonusmodificateur.pas (ListCareerBonusModificateur). Fonction
+generique PersonnageCareerBonusModificateur(Personnage, TypeModif, Cible, Filtre='') dans
+chargepersonnage.pas, meme moule que PersonnageTalentModificateur avec en plus la boucle sur
+les Appartenances et le filtre NiveauAtteint (PersonnageNiveauDansMetier) que les Talents
+n ont pas. PersonnageCareerBonusCompetenceModif et PersonnageCareerBonusArmeModif deleguent
+desormais a cette fonction generique - signatures inchangees, aucun appelant (
+PdfPersonnageCompetence/PdfPersonnageArmes) a toucher. Les anciennes
+StructureCareerBonusCompetenceModif/ArmeModif et leurs listes dediees (chargemetier.pas)
+supprimees, plus aucun autre appelant apres la migration. Parsing XML (xmlexportimport.pas) :
+les balises <ModifySkill>/<ModifyWeapon> sous <LevelN> n ont pas change, seule la liste
+d arrivee change - aucune donnee de livre a migrer. .Create/.Clear mis a jour dans
+warhammersource.pas.
+Rattrapage trouve en cours de route : PTalentModificateur.Niveau (champ ajoute par cette
+etape a une structure deja remplie par le parsing Talent de l etape precedente) n etait pas
+reinitialise a chaque tour de boucle du parsing - record local non reinitialise, meme classe
+de piege que le bug des asterisques ci-dessus non resolu. Corrige avant qu il ne cause quoi
+que ce soit de visible.
+Teste de bout en bout par Nono sur un chevalier reel avec un Ordre de Chevalerie
+(BOOK_NATIONS_OF_MANKIND.Xml, palier Knight "+10 WS Tests when using any Lances, Two-handed
+Swords or Shields") : Nono a signale +10% sur le Bouclier, verifie dans le XML comme
+comportement attendu (trois ModifyWeapon du palier, RULES-WTYPE_SHIELD inclus parmi Lance et
+Epee a deux mains) et pas un bug.
+Reste ouvert, decision a prendre avec Nono a la prochaine session : le bug des asterisques
+dupliquees (toujours pas resolu, voir A FAIRE.txt), brancher Mutation sur le meme moteur,
+ajouter ModifyWeapon/un futur ModifyDamage sur Talent, et migrer ModifyCarac d Attribut
+(toujours duplique 5 fois entre les sources, seule cible non touchee par ce chantier).

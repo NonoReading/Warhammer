@@ -21,7 +21,7 @@ uses
   ChargeCorruptionArmureModif, ChargeCorruptionTalent, ChargeCorruptionEquipement,
   ChargeTalentArmureModif, ChargeArmeAttributModif,
   ChargeArmureBonusAttributModif, ChargeArmureBonusTalent,
-  ChargeModificateur, ChargeTalentModificateur,
+  ChargeModificateur, ChargeTalentModificateur, ChargeCareerBonusModificateur,
   XMLRead, DOM, Unitcalcul,  Dialogs, strutils;
 
 Procedure XmlExportBook(Livre: String; Langue: String);
@@ -1079,10 +1079,8 @@ Procedure XmlImport(FileName: String; OnlyPrimary: Boolean; OnlyCode: Boolean);
     PCareerBonusNiveau:       StructureCareerBonusNiveau;
     PCareerBonusAttributModif:    StructureCareerBonusAttributModif;
     TempCareerBonusAttributModif: TListCareerBonusAttributModif;
-    PCareerBonusCompetenceModif:    StructureCareerBonusCompetenceModif;
-    TempCareerBonusCompetenceModif: TListCareerBonusCompetenceModif;
-    PCareerBonusArmeModif:    StructureCareerBonusArmeModif;
-    TempCareerBonusArmeModif: TListCareerBonusArmeModif;
+    PCareerBonusModificateur:    StructureModificateur;
+    TempCareerBonusModificateur: TListModificateur;
     PCareerBonusSpecialRule:    StructureCareerBonusSpecialRule;
     TempCareerBonusSpecialRule: TListCareerBonusSpecialRule;
     IndTempModif:             Integer;
@@ -1525,6 +1523,11 @@ Procedure XmlImport(FileName: String; OnlyPrimary: Boolean; OnlyCode: Boolean);
                                 PTalentModificateur.Forme      := ConstFormeEffetAdditif;
                                 PTalentModificateur.Facteur    := StrToIntDef(RemoveQuotes(UTF8Encode(Node.Attributes.GetNamedItem(ConstXmlEffetFacteur).NodeValue)), 0);
                                 PTalentModificateur.CodeSource := PTalent.CodeTalent;
+                                // Niveau n'a de sens que pour un palier de CareerBonus (voir
+                                // ChargeCareerBonusModificateur) - un Talent l'ignore, mais le
+                                // champ doit etre initialise explicitement (record local,
+                                // sinon valeur residuelle du tour de boucle precedent).
+                                PTalentModificateur.Niveau     := 0;
                                 if LangueDef = ConstAnglais then
                                    begin
                                     ListTalentModificateur.add(PTalentModificateur);
@@ -2704,16 +2707,17 @@ Procedure XmlImport(FileName: String; OnlyPrimary: Boolean; OnlyCode: Boolean);
                                     // - meme mecanisme et meme raison de differer que ModifyCarac.
                                     // <ModifyWeapon> ajoute le 07/09/2026, meme mecanisme, pour le
                                     // meme palier Knight mais filtre par TYPE d'arme (name=) et
-                                    // FACULTATIVEMENT par competence (skill=) - voir ChargeMetier,
-                                    // StructureCareerBonusArmeModif.
+                                    // FACULTATIVEMENT par competence (skill=). <ModifySkill> et
+                                    // <ModifyWeapon> alimentent tous deux ListCareerBonusModificateur
+                                    // depuis le 11/09/2026 (moteur generique, ChargeModificateur) -
+                                    // seul <ModifyCarac> reste sur son propre type ci-dessus.
                                     // <SpecialRule> ajoute le 08/09/2026, quatrieme pendant, pour
                                     // le palier 4 ("Knight of the Inner Circle") de la quasi-
                                     // totalite des Ordres de Chevalerie, qui n'a le plus souvent
                                     // aucun equivalent chiffre - voir ChargeMetier,
                                     // StructureCareerBonusSpecialRule.
                                     TempCareerBonusAttributModif   := TListCareerBonusAttributModif.Create;
-                                    TempCareerBonusCompetenceModif := TListCareerBonusCompetenceModif.Create;
-                                    TempCareerBonusArmeModif       := TListCareerBonusArmeModif.Create;
+                                    TempCareerBonusModificateur    := TListModificateur.Create;
                                     TempCareerBonusSpecialRule     := TListCareerBonusSpecialRule.Create;
 
                                     Node := XmlElement(NodeNv3.FirstChild);
@@ -2736,23 +2740,29 @@ Procedure XmlImport(FileName: String; OnlyPrimary: Boolean; OnlyCode: Boolean);
                                             end;
                                           ConstXmlModifieCompetence:
                                             begin
-                                              PCareerBonusCompetenceModif.CodeBonus      := PCareerBonus.CodeBonus;
-                                              PCareerBonusCompetenceModif.Niveau         := 0;
-                                              PCareerBonusCompetenceModif.CodeCompetence := RemoveQuotes(UTF8Encode(Node.Attributes.GetNamedItem(ConstXmlData).NodeValue));
-                                              PCareerBonusCompetenceModif.Valeur         := StrToIntDef(RemoveQuotes(UTF8Encode(Node.TextContent)), 0);
-                                              TempCareerBonusCompetenceModif.Add(PCareerBonusCompetenceModif);
+                                              // Moteur generique (ChargeModificateur/ChargeCareerBonusModificateur) -
+                                              // meme structure que le <Modificateur> des Talents, Niveau en plus
+                                              // (rempli apres la boucle, comme les autres modificateurs de palier).
+                                              PCareerBonusModificateur.TypeModif  := ConstXmlModifieCompetence;
+                                              PCareerBonusModificateur.Cible      := RemoveQuotes(UTF8Encode(Node.Attributes.GetNamedItem(ConstXmlData).NodeValue));
+                                              PCareerBonusModificateur.Filtre     := '';
+                                              PCareerBonusModificateur.Forme      := ConstFormeEffetAdditif;
+                                              PCareerBonusModificateur.Facteur    := StrToIntDef(RemoveQuotes(UTF8Encode(Node.TextContent)), 0);
+                                              PCareerBonusModificateur.CodeSource := PCareerBonus.CodeBonus;
+                                              TempCareerBonusModificateur.Add(PCareerBonusModificateur);
                                             end;
                                           ConstXmlModifieArme:
                                             begin
-                                              PCareerBonusArmeModif.CodeBonus    := PCareerBonus.CodeBonus;
-                                              PCareerBonusArmeModif.Niveau       := 0;
-                                              PCareerBonusArmeModif.CodeTypeArme := RemoveQuotes(UTF8Encode(Node.Attributes.GetNamedItem(ConstXmlData).NodeValue));
+                                              PCareerBonusModificateur.TypeModif  := ConstXmlModifieArme;
+                                              PCareerBonusModificateur.Cible      := RemoveQuotes(UTF8Encode(Node.Attributes.GetNamedItem(ConstXmlData).NodeValue));
                                               if Assigned(Node.Attributes) and Assigned(Node.Attributes.GetNamedItem(ConstXmlModifieArmeCompetence)) then
-                                                PCareerBonusArmeModif.CodeCompetence := RemoveQuotes(UTF8Encode(Node.Attributes.GetNamedItem(ConstXmlModifieArmeCompetence).NodeValue))
+                                                PCareerBonusModificateur.Filtre := RemoveQuotes(UTF8Encode(Node.Attributes.GetNamedItem(ConstXmlModifieArmeCompetence).NodeValue))
                                               else
-                                                PCareerBonusArmeModif.CodeCompetence := '';
-                                              PCareerBonusArmeModif.Valeur        := StrToIntDef(RemoveQuotes(UTF8Encode(Node.TextContent)), 0);
-                                              TempCareerBonusArmeModif.Add(PCareerBonusArmeModif);
+                                                PCareerBonusModificateur.Filtre := '';
+                                              PCareerBonusModificateur.Forme      := ConstFormeEffetAdditif;
+                                              PCareerBonusModificateur.Facteur    := StrToIntDef(RemoveQuotes(UTF8Encode(Node.TextContent)), 0);
+                                              PCareerBonusModificateur.CodeSource := PCareerBonus.CodeBonus;
+                                              TempCareerBonusModificateur.Add(PCareerBonusModificateur);
                                             end;
                                           ConstXmlSpecialRule:
                                             begin
@@ -2778,19 +2788,12 @@ Procedure XmlImport(FileName: String; OnlyPrimary: Boolean; OnlyCode: Boolean);
                                             ListCareerBonusAttributModif.add(PCareerBonusAttributModif);
                                             inc(NbCareerBonusAttributModif);
                                           end;
-                                        for IndTempModif := 0 to TempCareerBonusCompetenceModif.Count - 1 do
+                                        for IndTempModif := 0 to TempCareerBonusModificateur.Count - 1 do
                                           begin
-                                            PCareerBonusCompetenceModif        := TempCareerBonusCompetenceModif[IndTempModif];
-                                            PCareerBonusCompetenceModif.Niveau := PCareerBonusNiveau.Niveau;
-                                            ListCareerBonusCompetenceModif.add(PCareerBonusCompetenceModif);
-                                            inc(NbCareerBonusCompetenceModif);
-                                          end;
-                                        for IndTempModif := 0 to TempCareerBonusArmeModif.Count - 1 do
-                                          begin
-                                            PCareerBonusArmeModif        := TempCareerBonusArmeModif[IndTempModif];
-                                            PCareerBonusArmeModif.Niveau := PCareerBonusNiveau.Niveau;
-                                            ListCareerBonusArmeModif.add(PCareerBonusArmeModif);
-                                            inc(NbCareerBonusArmeModif);
+                                            PCareerBonusModificateur        := TempCareerBonusModificateur[IndTempModif];
+                                            PCareerBonusModificateur.Niveau := PCareerBonusNiveau.Niveau;
+                                            ListCareerBonusModificateur.add(PCareerBonusModificateur);
+                                            inc(NbCareerBonusModificateur);
                                           end;
                                         for IndTempModif := 0 to TempCareerBonusSpecialRule.Count - 1 do
                                           begin
@@ -2801,8 +2804,7 @@ Procedure XmlImport(FileName: String; OnlyPrimary: Boolean; OnlyCode: Boolean);
                                           end;
                                       end;
                                     TempCareerBonusAttributModif.Free;
-                                    TempCareerBonusCompetenceModif.Free;
-                                    TempCareerBonusArmeModif.Free;
+                                    TempCareerBonusModificateur.Free;
                                     TempCareerBonusSpecialRule.Free;
                                   end;
                               end;

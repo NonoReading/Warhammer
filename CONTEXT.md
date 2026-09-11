@@ -1,15 +1,16 @@
 # Warhammer — Contexte projet
 
-**Dernière mise à jour : 11/09/2026 — FONDATION DU MOTEUR GÉNÉRIQUE DE MODIFICATEURS
-(ÉTAPES 1 ET 2), COMPILÉ ET VALIDÉ PAR NONO. Chantier "troisième porte" reformulé et élargi
-(voir entrée §2.55 juste en dessous pour l'ancien plan).** En creusant la 3e porte, Nono a
-posé un but plus large : arrêter d'ajouter une fonction Pascal dédiée par croisement
-source×cible (15 fonctions `Personnage*Modif` déjà recensées dans `chargepersonnage.pas` —
-Attribut dupliqué **5 fois** entre Mutation/Talent/CareerBonus/Arme/ArmureBonus, Talent×
-Compétence et Talent×Arme manquants alors que ce sont justement les cas voulus). Décision :
-inverser le sens de recherche — pour une Cible donnée, boucler sur ce que le PERSONNAGE
-possède (quelques dizaines d'éléments) plutôt que d'interroger tout le catalogue ; le coût
-de balayer plusieurs sources est négligeable (confirmé avec Nono).
+**Dernière mise à jour : 11/09/2026 — MOTEUR GÉNÉRIQUE DE MODIFICATEURS : CAREERBONUS
+BRANCHÉ (ÉTAPES 1 À 3), COMPILÉ ET VALIDÉ PAR NONO SUR UN CHEVALIER RÉEL. Chantier
+"troisième porte" reformulé et élargi (voir entrée §2.55 plus bas pour l'ancien plan).**
+En creusant la 3e porte, Nono a posé un but plus large : arrêter d'ajouter une fonction
+Pascal dédiée par croisement source×cible (15 fonctions `Personnage*Modif` déjà recensées
+dans `chargepersonnage.pas` — Attribut dupliqué **5 fois** entre Mutation/Talent/
+CareerBonus/Arme/ArmureBonus, Talent×Compétence et Talent×Arme manquants alors que ce sont
+justement les cas voulus). Décision : inverser le sens de recherche — pour une Cible
+donnée, boucler sur ce que le PERSONNAGE possède (quelques dizaines d'éléments) plutôt que
+d'interroger tout le catalogue ; le coût de balayer plusieurs sources est négligeable
+(confirmé avec Nono).
 - **Étape 1 — fondation, rien de branché.** Nouveau fichier `chargemodificateur.pas` :
   `StructureModificateur` (TypeModif/Cible/Filtre/Forme/Facteur/CodeSource) et
   `TListModificateur`, type partagé réutilisable par n'importe quelle source.
@@ -26,10 +27,35 @@ de balayer plusieurs sources est négligeable (confirmé avec Nono).
   `ConstXmlModifieArmure`). `.Create`/`.Clear`/reset ajoutés dans `warhammersource.pas`
   (vigilance particulière après le bug du `.Create` oublié le 11/09 sur `ListArmureBonusTalent`,
   §2.55 ci-dessous).
-- **Cas réel pilote, testé de bout en bout** : nouveau talent maison `PERSO-T0001` "Knight of
-  the Order of the Hammer" (`BOOK_PERSO.Xml`, libre, Max 1), `<Modificateur Type="ModifySkill"
-  Cible="RULES-COMPCOMB_BASE" Facteur="10"/>` (Melee (Basic) = "armes de base"). **Confirmé par
-  Nono sur Gunther Krieg : +10% sur la compétence ET sur les armes qui l'utilisent.**
+- **Cas réel pilote Talent, testé de bout en bout** : nouveau talent maison `PERSO-T0001`
+  "Knight of the Order of the Hammer" (`BOOK_PERSO.Xml`, libre, Max 1), `<Modificateur
+  Type="ModifySkill" Cible="RULES-COMPCOMB_BASE" Facteur="10"/>` (Melee (Basic) = "armes de
+  base"). **Confirmé par Nono sur Gunther Krieg : +10% sur la compétence ET sur les armes
+  qui l'utilisent.**
+- **Étape 3 — deuxième source branchée : CareerBonus, pour `ModifySkill`/`ModifyWeapon`.**
+  Champ `Niveau: Integer` ajouté à `StructureModificateur` (0 = pas de condition de palier,
+  ignoré par les Talents) pour porter le filtre de palier propre à CareerBonus, absent chez
+  les Talents. Nouveau fichier `chargecareerbonusmodificateur.pas`
+  (`ListCareerBonusModificateur`). Fonction générique `PersonnageCareerBonusModificateur
+  (Personnage, TypeModif, Cible, Filtre='')` dans `chargepersonnage.pas` — même moule que
+  `PersonnageTalentModificateur`, avec en plus la boucle sur les Appartenances et le filtre
+  `NiveauAtteint` (`PersonnageNiveauDansMetier`) que les Talents n'ont pas.
+  `PersonnageCareerBonusCompetenceModif`/`ArmeModif` délèguent maintenant à cette fonction
+  générique, **signatures inchangées** donc aucun appelant (`PdfPersonnageCompetence`/
+  `PdfPersonnageArmes`) à toucher. Les anciennes `StructureCareerBonusCompetenceModif`/
+  `ArmeModif` et leurs listes dédiées (`chargemetier.pas`) supprimées, plus aucun autre
+  appelant. Le parsing XML des balises `<ModifySkill>`/`<ModifyWeapon>` sous `<LevelN>`
+  (`xmlexportimport.pas`) n'a pas changé de balise, seulement de liste d'arrivée — **aucune
+  donnée de livre à migrer**. `.Create`/`.Clear` mis à jour dans `warhammersource.pas`.
+  Rattrapage au passage : `PTalentModificateur.Niveau` (champ ajouté par l'étape 3 à une
+  structure déjà remplie par le parsing de l'étape 2) n'était pas réinitialisé à chaque tour
+  de boucle — même classe de piège que le bug des astérisques ci-dessous (record local non
+  réinitialisé), corrigé avant qu'il ne cause quoi que ce soit de visible.
+- **Cas réel CareerBonus, testé de bout en bout par Nono sur un chevalier** : Ordre de
+  Chevalerie (`BOOK_NATIONS_OF_MANKIND.Xml`, palier Knight "+10 WS Tests when using any
+  Lances, Two-handed Swords or Shields") — le bonus de +10% apparaît sur le Bouclier,
+  vérifié dans le XML comme comportement attendu (trois `<ModifyWeapon>` du palier,
+  `RULES-WTYPE_SHIELD` inclus) et pas un bug.
 - **Bug trouvé et PARTIELLEMENT corrigé en testant, PAS RÉSOLU — voir `A FAIRE.txt`.** Plusieurs
   talents sans rapport (Strike Mighty Blow, Strike to Stun, Very Resilient, Knight of the Order
   of the Hammer) partagent la même astérisque "(4)" sur la fiche de Gunther, alors que la règle
@@ -49,8 +75,10 @@ de balayer plusieurs sources est négligeable (confirmé avec Nono).
   d'objet", §2.55 ci-dessous) n'avait jamais été commité depuis sa création — inclus dans le
   commit de cette session.
 **Chantier suivant : reprendre le bug des astérisques dupliquées avec un œil frais (voir
-`A FAIRE.txt`), ou continuer le moteur générique (brancher CareerBonus/Mutation dans le même
-moteur, ajouter `ModifyWeapon`/un futur `ModifyDamage` sur Talent) — à définir avec Nono.**
+`A FAIRE.txt`), ou continuer le moteur générique (brancher Mutation dans le même moteur,
+ajouter `ModifyWeapon`/un futur `ModifyDamage` sur Talent, migrer `ModifyCarac` d'Attribut
+— aujourd'hui dupliqué 5 fois, seule cible non touchée par ce chantier) — à définir avec
+Nono.**
 
 **11/09/2026 — PORTE "QUALITÉ D'OBJET" DES TRAITS DE CRÉATURE FAITE,
 COMPILÉE ET VALIDÉE PAR NONO (§2.55).** Deuxième des trois portes (§2.54 pour la première,

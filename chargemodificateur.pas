@@ -37,6 +37,10 @@ Type
         // Code du Talent/Mutation/CareerBonus qui porte ce modificateur, pour
         // affichage/debug - pas utilise par le calcul lui-meme.
         CodeSource: String;
+        // Palier minimum requis pour que ce modificateur s'applique (CareerBonus,
+        // <LevelN>) - 0 = pas de condition de palier, valeur par defaut pour les
+        // sources qui n'en ont pas besoin (Talent).
+        Niveau:     Integer;
 end;
 
   TListModificateur = Specialize TList<StructureModificateur>;

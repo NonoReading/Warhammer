@@ -14,7 +14,7 @@ uses
   ChargeSort, ChargeCorruptionTable, ChargeCorruptionAttributModif,
   ChargeCorruptionCompetenceModif, ChargeCorruptionArmureModif, ChargeCorruptionTalent,
   ChargeCorruptionEquipement, ChargeTalentArmureModif, ChargeArmureBonusTalent,
-  ChargeModificateur, ChargeTalentModificateur, XmlExportImport;
+  ChargeModificateur, ChargeTalentModificateur, ChargeCareerBonusModificateur, XmlExportImport;
 
 Type
   StructurePersonnageAttribut   = Record
@@ -224,18 +224,27 @@ Type
   // un palier de DATA_CAREER_BONUS (ListCareerBonusAttributModif) - n'additionne un modificateur
   // que si le personnage a l'appartenance ET a atteint le palier qui le porte.
   Function PersonnageCareerBonusAttributModif(Personnage: StructurePersonnage; CodeAttribut: String): Integer;
-  // Pendant Competence de PersonnageCareerBonusAttributModif ci-dessus (ListCareerBonusCompetenceModif)
-  // - ajouté au 2.44/3d-3 : le palier Knight ("+10 CC avec les lances") se représente comme un
-  // bonus chiffré sur Melee (Cavalry) plutôt qu'un simple octroi de compétence.
+  // Moteur generique (ChargeCareerBonusModificateur) cote CareerBonus - pendant de
+  // PersonnageTalentModificateur ci-dessus, avec en plus le filtre de palier que les Talents
+  // n'ont pas : boucle sur les Appartenances du personnage, ne compte un modificateur que si
+  // son Niveau est atteint (PersonnageNiveauDansMetier). CONTEXT.md, chantier moteur
+  // generique, etape "brancher CareerBonus" (11/09/2026). Remplace en interne les anciennes
+  // PersonnageCareerBonusCompetenceModif/ArmeModif, dont les signatures ne changent pas.
+  Function PersonnageCareerBonusModificateur(Personnage: StructurePersonnage; TypeModif, Cible: String; Filtre: String = ''): Integer;
+  // Pendant Competence de PersonnageCareerBonusAttributModif ci-dessus - ajouté au 2.44/3d-3 :
+  // le palier Knight ("+10 CC avec les lances") se représente comme un bonus chiffré sur
+  // Melee (Cavalry) plutôt qu'un simple octroi de compétence. Implementation deleguee a
+  // PersonnageCareerBonusModificateur depuis le 11/09/2026 (branchement CareerBonus sur le
+  // moteur generique).
   Function PersonnageCareerBonusCompetenceModif(Personnage: StructurePersonnage; CodeCompetence: String): Integer;
-  // Pendant "par type d'arme" des deux precedents (ListCareerBonusArmeModif) - ajoute le
-  // 07/09/2026 : le palier Knight ne bonifie que CERTAINES armes d'une meme competence
-  // ("+10 CC avec les lances, les epees a deux mains ou les boucliers", pas tout Melee
-  // (Cavalry)/Melee (2 mains)/Melee (Base)). Prend l'ARME ELLE-MEME en parametre (pas son
-  // seul CodeCompetence) car le filtre porte sur StructureArme.TypeArme, et
-  // FACULTATIVEMENT sur CodeCompetence en plus (voir ChargeMetier). A appeler par ARME
-  // possedee, pas par competence generale - PdfPersonnageArmes (pdfpersonnage.pas) est le
-  // seul appelant prevu, une ligne d'arme a la fois.
+  // Pendant "par type d'arme" des deux precedents - ajoute le 07/09/2026 : le palier Knight ne
+  // bonifie que CERTAINES armes d'une meme competence ("+10 CC avec les lances, les epees a
+  // deux mains ou les boucliers", pas tout Melee (Cavalry)/Melee (2 mains)/Melee (Base)).
+  // Prend l'ARME ELLE-MEME en parametre (pas son seul CodeCompetence) car le filtre porte sur
+  // StructureArme.TypeArme, et FACULTATIVEMENT sur CodeCompetence en plus (voir ChargeMetier).
+  // A appeler par ARME possedee, pas par competence generale - PdfPersonnageArmes
+  // (pdfpersonnage.pas) est le seul appelant prevu, une ligne d'arme a la fois. Implementation
+  // deleguee a PersonnageCareerBonusModificateur depuis le 11/09/2026.
   Function PersonnageCareerBonusArmeModif(Personnage: StructurePersonnage; PArme: StructureArme): Integer;
   // Pendant "regle narrative" des trois PersonnageCareerBonusXxxModif ci-dessus
   // (ListCareerBonusSpecialRule) - ajoute le 08/09/2026 pour le palier 4 ("Knight of the
@@ -1591,7 +1600,7 @@ Function PersonnageCareerBonusAttributModif(Personnage: StructurePersonnage; Cod
     end;
   end;
 
-Function PersonnageCareerBonusCompetenceModif(Personnage: StructurePersonnage; CodeCompetence: String): Integer;
+Function PersonnageCareerBonusModificateur(Personnage: StructurePersonnage; TypeModif, Cible: String; Filtre: String = ''): Integer;
   var
     Appartenances:  TStringList;
     IndApp:         Integer;
@@ -1611,58 +1620,35 @@ Function PersonnageCareerBonusCompetenceModif(Personnage: StructurePersonnage; C
           CodeApp := Trim(Appartenances[IndApp]);
           if CodeApp = '' then
             continue;
-          // Meme filtre de palier que PersonnageCareerBonusAttributModif ci-dessus.
           PBonus        := ChercheCareerBonus(CodeApp);
           NiveauAtteint := PersonnageNiveauDansMetier(Personnage, PBonus.CodeMetier);
           if NiveauAtteint <= 0 then
             continue;
-          for IndModif := 0 to (ListCareerBonusCompetenceModif.Count - 1) do
-            if CompareRechercheValeur(ListCareerBonusCompetenceModif[IndModif].CodeBonus, CodeApp)
-               and CompareRechercheValeur(ListCareerBonusCompetenceModif[IndModif].CodeCompetence, CodeCompetence)
-               and (ListCareerBonusCompetenceModif[IndModif].Niveau <= NiveauAtteint) then
-              Result := Result + ListCareerBonusCompetenceModif[IndModif].Valeur;
+          for IndModif := 0 to (ListCareerBonusModificateur.Count - 1) do
+            if (ListCareerBonusModificateur[IndModif].TypeModif = TypeModif)
+               and CompareRechercheValeur(ListCareerBonusModificateur[IndModif].CodeSource, CodeApp)
+               and CompareRechercheValeur(ListCareerBonusModificateur[IndModif].Cible, Cible)
+               and ((Trim(ListCareerBonusModificateur[IndModif].Filtre) = '')
+                    or CompareRechercheValeur(ListCareerBonusModificateur[IndModif].Filtre, Filtre))
+               and (ListCareerBonusModificateur[IndModif].Niveau <= NiveauAtteint) then
+              Result := Result + ListCareerBonusModificateur[IndModif].Facteur;
         end;
     finally
       Appartenances.Free;
     end;
   end;
 
+Function PersonnageCareerBonusCompetenceModif(Personnage: StructurePersonnage; CodeCompetence: String): Integer;
+  begin
+    Result := PersonnageCareerBonusModificateur(Personnage, ConstXmlModifieCompetence, CodeCompetence);
+  end;
+
 Function PersonnageCareerBonusArmeModif(Personnage: StructurePersonnage; PArme: StructureArme): Integer;
-  var
-    Appartenances:  TStringList;
-    IndApp:         Integer;
-    IndModif:       Integer;
-    NiveauAtteint:  Integer;
-    PBonus:         StructureCareerBonus;
-    CodeApp:        String;
   begin
     Result := 0;
-    if (Trim(Personnage.Appartenance) = '') or (Trim(PArme.TypeArme) = '') then
+    if Trim(PArme.TypeArme) = '' then
       Exit;
-    Appartenances := TStringList.Create;
-    try
-      ExtractStrings([','], [], PChar(Personnage.Appartenance), Appartenances);
-      for IndApp := 0 to Appartenances.Count - 1 do
-        begin
-          CodeApp := Trim(Appartenances[IndApp]);
-          if CodeApp = '' then
-            continue;
-          // Meme filtre de palier que PersonnageCareerBonusCompetenceModif ci-dessus.
-          PBonus        := ChercheCareerBonus(CodeApp);
-          NiveauAtteint := PersonnageNiveauDansMetier(Personnage, PBonus.CodeMetier);
-          if NiveauAtteint <= 0 then
-            continue;
-          for IndModif := 0 to (ListCareerBonusArmeModif.Count - 1) do
-            if CompareRechercheValeur(ListCareerBonusArmeModif[IndModif].CodeBonus, CodeApp)
-               and CompareRechercheValeur(ListCareerBonusArmeModif[IndModif].CodeTypeArme, PArme.TypeArme)
-               and ((Trim(ListCareerBonusArmeModif[IndModif].CodeCompetence) = '')
-                    or CompareRechercheValeur(ListCareerBonusArmeModif[IndModif].CodeCompetence, PArme.CodeCompetence))
-               and (ListCareerBonusArmeModif[IndModif].Niveau <= NiveauAtteint) then
-              Result := Result + ListCareerBonusArmeModif[IndModif].Valeur;
-        end;
-    finally
-      Appartenances.Free;
-    end;
+    Result := PersonnageCareerBonusModificateur(Personnage, ConstXmlModifieArme, PArme.TypeArme, PArme.CodeCompetence);
   end;
 
 Function PersonnageCareerBonusSpecialRule(Personnage: StructurePersonnage): TListCareerBonusSpecialRule;

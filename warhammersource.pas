@@ -24,7 +24,7 @@ uses
   ChargeCorruptionTable, ChargeRaceOpinion, ChargeArmureBonusModif,
   ChargeCorruptionAttributModif, ChargeCorruptionCompetenceModif,
   ChargeCorruptionArmureModif, ChargeCorruptionTalent, ChargeCorruptionEquipement,
-  ChargeTalentArmureModif, ChargeModificateur, ChargeTalentModificateur,
+  ChargeTalentArmureModif, ChargeModificateur, ChargeTalentModificateur, ChargeCareerBonusModificateur,
   CustomDrawn_Common, BCButton, BCLabel, fpTTF,
   PdfPersonnage, XmlExportImport, fppdf, WinLivre;
 
@@ -678,8 +678,7 @@ procedure TMenu.ChargerLivre(ForceMaJ: Boolean; ForceLivre: String);
         ListCareerBonus.Clear;
         ListCareerBonusNiveau.Clear;
         ListCareerBonusAttributModif.Clear;
-        ListCareerBonusCompetenceModif.Clear;
-        ListCareerBonusArmeModif.Clear;
+        ListCareerBonusModificateur.Clear;
         ListCareerBonusSpecialRule.Clear;
         ListFabrication.Clear;
         ListRaceCreation.Clear;
@@ -885,8 +884,7 @@ procedure TMenu.FormCreate(Sender: TObject);
        ListCareerBonus              := TListCareerBonus.Create;
        ListCareerBonusNiveau        := TListCareerBonusNiveau.Create;
        ListCareerBonusAttributModif := TListCareerBonusAttributModif.Create;
-       ListCareerBonusCompetenceModif := TListCareerBonusCompetenceModif.Create;
-       ListCareerBonusArmeModif      := TListCareerBonusArmeModif.Create;
+       ListCareerBonusModificateur   := TListModificateur.Create;
        ListCareerBonusSpecialRule    := TListCareerBonusSpecialRule.Create;
        ListFabrication              := TListFabrication.Create;
        ListRaceCreation             := TListRaceCreation.Create;
