@@ -169,34 +169,26 @@ est ramene a "Soldier" au lieu de Sergeant, le Statut Social de rang 3 est conse
 trappings normaux de rang 3 sont differes jusqu'au rang 4 (Officer). Decision de Nono avant
 saisie : a mener seulement si Nono en a besoin en jeu, pas de chantier dedie pour l'instant.
 
-UN ACCESSEUR UNIQUE POUR LA VALEUR D UNE COMPETENCE/ATTRIBUT - PILOTE ATTRIBUTS FAIT LE
-10/09/2026, COMPILE ET TESTE PAR NONO SUR GUNTHER KRIEG. Idee de Nono du 06/09/2026, reprise
-et precisee le 10/09/2026 : plutot qu une structure de donnees tenue a jour partout (source
-de la derive winpersonnage.pas/pdfpersonnage.pas), chaque donnee affichee relit directement
-les elements presents sur Personnage (talents, armes, armures, appartenances...) au moment de
-l affichage - pas de cache a synchroniser. CalculTotaux (winpersonnage.pas l.2357) appelle
-desormais PdfPersonnageAttribut(Personnage, ...) pour le Total de chaque attribut, au lieu
-d une addition locale de cellules - la meme fonction que le PDF. Obstacle trouve et leve :
-Personnage.AugmentationAttribut (achats XP) n etait resynchronise depuis la grille TabAttribut
-qu a l interieur de CalculTableExperience (juste avant la sauvegarde), trop tard pour ce
-calcul - un resync dedie a ete ajoute en tete de CalculTotaux, rejoue a chaque appel (une
-fiche n est pas un monstre, le refaire a chaque fois est plus sur que d essayer de le tenir a
-jour partout ou une grille change). Personnage.Appartenance, lui, etait deja synchronise en
-direct (bouton de choix d Ordre/Regiment) - c est ce qui rend le bonus du Reiksguard visible a
-l ecran des maintenant.
-RESTE A FAIRE, meme mecanisme, pas rouvert dans ce pilote :
-  * les Competences (TabCompetence.Cells[ColCompTotal, IndLig], meme fichier ~l.2419) - vers
-    PdfPersonnageCompetence, meme demarche.
-  * Personnage.AugmentationTalent et Personnage.Equipement ont le MEME defaut de sync que
-    AugmentationAttribut (resynchronises seulement dans CalculTableExperience) mais n ont pas
-    ete corriges dans ce pilote : un talent a bonus d Attribut direct ou une arme/armure
-    magique tout juste achetes n apparaitront pas immediatement dans le Total Attribut tant
-    que ces deux-la ne sont pas resynchronises pareil. Pas de bug nouveau (comportement
-    identique a avant le 10/09), juste un residu du meme defaut a traiter au meme endroit.
-  * PdfPersonnageCompetence/PdfPersonnageAttribut ne portent toujours pas code/libelle/carac
-    liee dans leur StructureDonnee (Base/Augmentation/Total seulement) - pas necessaire pour
-    ce pilote (CalculTotaux ecrit dans les cellules qu il connait deja), a revoir si un futur
-    appelant en a besoin.
+[FAIT LES 10-11/09/2026 - accesseur unique Attribut/Competence, les deux etapes compilees et
+validees par Nono (Gunther Krieg pour les Attributs, un Chevalier a bonus Polearm pour les
+Competences) : CalculTotaux (winpersonnage.pas l.2357) appelle desormais
+PdfPersonnageAttribut/PdfPersonnageCompetence au lieu d additions locales de cellules, avec
+resync dedie de Personnage.AugmentationAttribut/.AugmentationCompetence en tete de la
+procedure. L ecran reflete maintenant les bonus de CareerBonus (Ordre/Regiment) et d
+arme/armure magique sur les Attributs ET les Competences. Detail CONTEXT.md 2.52, Log.txt.
+Residus du meme defaut, non traites, voir les deux items ci-dessous.]
+
+PERSONNAGE.AUGMENTATIONTALENT ET .EQUIPEMENT ONT LE MEME DEFAUT DE SYNC QUE
+AUGMENTATIONATTRIBUT AVANT LE 10/09/2026 (resynchronises seulement dans
+CalculTableExperience, pas dans CalculTotaux) : un talent a bonus d Attribut/Competence
+direct ou une arme/armure magique tout juste achetes n apparaitront pas immediatement dans
+le Total tant que ces deux-la ne sont pas resynchronises pareil. Pas un bug nouveau, residu
+de l accesseur unique (CONTEXT.md 2.52) a traiter au meme endroit si Nono le demande.
+
+PDFPERSONNAGECOMPETENCE/PDFPERSONNAGEATTRIBUT NE PORTENT TOUJOURS PAS CODE/LIBELLE/CARAC
+LIEE DANS LEUR STRUCTUREDONNEE (Base/Augmentation/Total seulement). Pas necessaire pour l
+accesseur unique (CalculTotaux ecrit dans les cellules qu il connait deja) - a revoir si un
+futur appelant en a besoin (idee d origine du 06/09/2026).
 
 [PIEGE CONFIRME LE 08/09/2026, MEME FAMILLE QUE CI-DESSUS] LE RENDU DES ARMES EST AUSSI
 DUPLIQUE NORMAL/FELDO2P. PdfPersonnageCreation (l.1557) et PdfBlocArmesDonnees (l.2718,
@@ -204,14 +196,7 @@ utilise par PdfPersonnageCreationFeldo2P l.4236) calculent chacun le pourcentage
 ligne d arme independamment. Le ModifyWeapon du Reiksguard (ajoute le 07/09 dans le
 premier bloc seulement) manquait dans le second - corrige le 08/09/2026 en testant
 NATIO-ORDER_REIKS. Retenir : toute future modification du calcul d une ligne d arme doit
-etre faite AUX DEUX ENDROITS, ou attendre l accesseur unique ci-dessus qui les fusionnerait.
-
-L ECRAN WINPERSONNAGE NE REFLETE PAS LES BONUS DE CAREERBONUS (MODIFYCARAC/MODIFYWEAPON/
-MODIFYSKILL) SUR LES COMPETENCES. Releve le 08/09/2026 en testant le Reiksguard. CORRIGE POUR
-LES ATTRIBUTS le 10/09/2026 (accesseur unique ci-dessus, pilote Attributs) : Sociabilite/
-Volonte affichent desormais le bonus a l ecran. Les Competences ont toujours leur PROPRE
-calcul dans winpersonnage.pas, independant de PdfPersonnageCompetence - se resoudra avec le
-meme accesseur applique aux Competences (reste a faire, voir ci-dessus).
+etre faite AUX DEUX ENDROITS.
 
 [FAIT LE 10/09/2026 - <Effet Cible="..." Forme="..." Facteur="..." Carac="..."/>, generalise
 au dela des neuf cas d origine (n importe quel talent, plus de code de talent en dur), voir

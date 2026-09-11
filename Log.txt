@@ -2425,3 +2425,21 @@ COMPILE ET VALIDE PAR NONO SUR GUNTHER KRIEG (Reiksguard), aucun probleme consta
 les Competences, meme demarche ; Personnage.AugmentationTalent/.Equipement ont le meme
 defaut de sync que AugmentationAttribut, pas corrige dans ce pilote. A FAIRE.txt mis a jour
 en consequence (item "accesseur unique" et l ecran ne reflete pas les bonus CareerBonus).
+
+11/09/2026 - ACCESSEUR UNIQUE ATTRIBUT/COMPETENCE : ETAPE COMPETENCES TERMINEE, COMPILEE ET
+VALIDEE PAR NONO (CONTEXT.md 2.52). Suite du pilote Attributs de la veille, meme fichier
+(winpersonnage.pas, CalculTotaux l.2357), meme demarche : resync de
+Personnage.AugmentationCompetence depuis TabCompetence.Cells[ColCompWork, ...] ajoute en tete
+de la procedure (meme raison que pour AugmentationAttribut - sans lui PdfPersonnageCompetence,
+appele juste apres, lirait une valeur en retard d un cycle), puis
+TabCompetence.Cells[ColCompTotal, ...] vient desormais de PdfPersonnageCompetence(...).Total
+au lieu d une addition locale (ColCompBonus + ColCompAtt + ColCompMutation).
+Point verifie avant d ecrire : Personnage.AugmentationCompetence[].Bonus (annotation d
+asterisque de renvoi, posee au chargement XML, lue par PdfPersonnageCompetenceBonus cote PDF)
+est deja perdue a chaque CalculTableExperience existant (l.4892, meme wipe sans le champ
+Bonus) - le resync ajoute ici reproduit ce wipe deja en production, n introduit pas de perte
+nouvelle.
+COMPILE ET VALIDE PAR NONO sur un Chevalier d un Ordre a bonus d arme (Polearm) : +10%
+apparait bien a l ecran. Accesseur unique Attribut/Competence donc termine sur les deux
+paliers prevus. Reste, hors perimetre : Personnage.AugmentationTalent/.Equipement ont le
+meme defaut de sync, pas traite. A FAIRE.txt mis a jour en consequence.

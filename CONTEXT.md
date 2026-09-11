@@ -1,11 +1,16 @@
 # Warhammer — Contexte projet
 
-**Dernière mise à jour : 10/09/2026 — ACCESSEUR UNIQUE ATTRIBUT/COMPETENCE, PILOTE ATTRIBUTS
-COMPILÉ ET VALIDÉ PAR NONO SUR GUNTHER KRIEG (§2.52).** Les bonus d'Ordre/Régiment
-(`CareerBonus`), d'arme et d'armure magiques, déjà sommés côté PDF, apparaissent maintenant
-aussi sur l'écran WinPersonnage (`CalculTotaux` appelle `PdfPersonnageAttribut` au lieu d'une
-addition locale de cellules). Reste à faire : les Compétences, même démarche. Détail complet
-en §2.52. **Chantier suivant : à définir avec Nono.**
+**Dernière mise à jour : 11/09/2026 — ACCESSEUR UNIQUE ATTRIBUT/COMPETENCE TERMINÉ, LES DEUX
+ÉTAPES COMPILÉES ET VALIDÉES PAR NONO (§2.52).** Après le pilote Attributs le 10/09 (Gunther
+Krieg), même démarche appliquée aux Compétences le 11/09 : `CalculTotaux` (`winpersonnage.pas`)
+resynchronise `Personnage.AugmentationCompetence` depuis `TabCompetence` en tête de procédure
+(même raison que pour `AugmentationAttribut` — sans ça `PdfPersonnageCompetence`, appelé juste
+après, lirait une valeur en retard d'un cycle), puis le Total d'une compétence appelle
+`PdfPersonnageCompetence` au lieu d'additionner localement `ColCompBonus + ColCompAtt +
+ColCompMutation`. **Confirmé par Nono sur un Chevalier d'un Ordre à bonus d'arme (Polearm) :
++10% apparaît bien à l'écran.** Reste hors périmètre, même défaut de synchro non traité :
+`AugmentationTalent`/`AugmentationEquipement`. Détail complet en §2.52. **Chantier suivant : à
+définir avec Nono.**
 
 **10/09/2026 — GÉNÉRICISATION DU CALCUL DES TALENTS (`<Effet>`),
 COMPILÉE ET VALIDÉE.** Chantier A FAIRE.txt repris après les Ordres/Regiments. But posé par
@@ -6007,7 +6012,7 @@ Nation/ModifyWeapon/ModifyCarac fonctionne intégralement, y compris en gabarit 
      liste) ne le voit pas — sélectivité de la liste validée.
    - **Chantier suivant : à définir avec Nono.**
 
-### 2.52 Accesseur unique Attribut/Compétence — pilote Attributs compilé et validé par Nono sur Gunther Krieg (10/09/2026)
+### 2.52 Accesseur unique Attribut/Compétence — les deux étapes compilées et validées par Nono (10-11/09/2026)
 
 **Origine.** Reprise de l'idée de Nono du 06/09/2026 (notée dans `A FAIRE.txt`, gardée à
 l'écart du résolveur générique de talents §2.50 pour ne pas les mélanger) : la valeur d'un
@@ -6047,21 +6052,40 @@ l.2357).** Un seul fichier, un seul endroit :
    lieu d'une addition locale de cellules (Race+Lance+Talent+Mutation+Bonus). `LigAttBase`
    (détail affiché à l'écran) reste calculé comme avant, pour la lisibilité.
 
-**COMPILÉ ET VALIDÉ PAR NONO sur Gunther Krieg (Reiksguard) le 10/09/2026.**
+**COMPILÉ ET VALIDÉ PAR NONO sur Gunther Krieg (Reiksguard) le 10/09/2026 (pilote Attributs).**
 
-**Non traité dans ce pilote, résidu du même défaut, à reprendre au même endroit :**
-- Les Compétences (`TabCompetence.Cells[ColCompTotal, IndLig]`, même fichier ~l.2419) — vers
-  `PdfPersonnageCompetence`, même démarche.
+**Étape Compétences, même endroit, même démarche (11/09/2026).** `CalculTotaux`
+(`winpersonnage.pas` l.2357) :
+1. Resync dédié de `Personnage.AugmentationCompetence` ajouté juste après celui des Attributs,
+   depuis `TabCompetence.Cells[ColCompWork, ...]` — même raison, même forme que le resync déjà
+   fait avant sauvegarde (`CalculTableExperience`, l.4892).
+2. `TabCompetence.Cells[ColCompTotal, IndLig]` vient désormais de
+   `PdfPersonnageCompetence(Personnage, TabCompetence.Cells[ColCompCode, IndLig],
+   NivMetier).Total` au lieu d'une addition locale (`ColCompBonus + ColCompAtt +
+   ColCompMutation`). `ColCompBonus`/`ColCompAtt`/`ColCompMutation` restent calculés comme
+   avant, pour le détail affiché à l'écran uniquement (même principe que `LigAttBase` pour les
+   Attributs).
+
+Point vérifié en creusant avant d'écrire : `Personnage.AugmentationCompetence[].Bonus` (annotation
+d'astérisque de renvoi, posée une fois au chargement XML par `PersonnageTalentAsterisque`,
+lue par `PdfPersonnageCompetenceBonus` côté PDF) est déjà perdue à chaque appel de
+`CalculTableExperience` existant (l.4892, wipe-et-reconstruction sans le champ `Bonus`) — le
+resync ajouté dans `CalculTotaux` reproduit fidèlement ce même wipe déjà en production, il
+n'introduit pas de perte nouvelle.
+
+**COMPILÉ ET VALIDÉ PAR NONO le 11/09/2026** sur un Chevalier d'un Ordre à bonus d'arme
+(Polearm) : +10% apparaît bien à l'écran.
+
+**Non traité, résidu du même défaut, à reprendre au même endroit si besoin :**
 - `Personnage.AugmentationTalent` et `Personnage.Equipement` ne sont pas resynchronisés comme
-  `AugmentationAttribut` : un talent à bonus d'Attribut direct ou une arme/armure magique tout
-  juste achetés n'apparaîtront pas immédiatement dans le Total Attribut tant que ces deux-là ne
-  le sont pas aussi. Pas une régression du 10/09 (comportement identique à avant), juste un
-  angle mort du pilote.
+  `AugmentationAttribut`/`AugmentationCompetence` : un talent à bonus d'Attribut/Compétence
+  direct ou une arme/armure magique tout juste achetés n'apparaîtront pas immédiatement dans le
+  Total tant que ces deux-là ne le sont pas aussi. Pas une régression de ce chantier
+  (comportement identique à avant), juste un angle mort qui subsiste.
 - `StructureDonnee` (`pdfpersonnage.pas`) ne porte toujours que Base/Augmentation/Total, pas
-  code/libellé/carac liée — pas nécessaire pour ce pilote, à revoir si un futur appelant en a
+  code/libellé/carac liée — pas nécessaire pour ce chantier, à revoir si un futur appelant en a
   besoin (voir l'idée d'origine du 06/09 dans `A FAIRE.txt`).
-- **Chantier suivant : à définir avec Nono** — vraisemblablement les Compétences, pour boucler
-  la même logique.
+- **Chantier suivant : à définir avec Nono.**
 
 ---
 

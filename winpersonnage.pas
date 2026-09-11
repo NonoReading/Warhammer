@@ -2356,15 +2356,18 @@ Function TWinPersonnages.CalculXpMj(TypeDonnee: String; CodeDonnee:String): Inte
 
 procedure TWinPersonnages.CalculTotaux();
   Var
-    IndCol:            Integer;
-    Total:             Integer = 0;
-    IndLig:            Integer;
-    TabAtt:            String;
-    TabComp:           String;
-    IndAugm:           Integer;
-    PersonnageAttribut:StructurePersonnageAttribut;
-    DonneeAttribut:    StructureDonnee;
-    Bonus:             String;
+    IndCol:              Integer;
+    Total:               Integer = 0;
+    IndLig:              Integer;
+    TabAtt:              String;
+    TabComp:             String;
+    IndAugm:             Integer;
+    PersonnageAttribut:  StructurePersonnageAttribut;
+    PersonnageCompetence:StructurePersonnageCompetence;
+    DonneeAttribut:      StructureDonnee;
+    DonneeCompetence:    StructureDonnee;
+    Bonus:               String;
+    NivMetier:           Integer;
   begin
     // Personnage.AugmentationAttribut n'est normalement resynchronise depuis la grille
     // TabAttribut qu'a l'interieur de CalculTableExperience (juste avant la sauvegarde) -
@@ -2379,6 +2382,20 @@ procedure TWinPersonnages.CalculTotaux();
           PersonnageAttribut.CodeAttribut  := TabAttribut.Cells[IndAugm, LigAttCode];
           PersonnageAttribut.Valeur        := StrToIntDef(TabAttribut.Cells[IndAugm, LigAttBonus],0);
           Personnage.AugmentationAttribut  += [PersonnageAttribut];
+        end;
+
+    // Meme raisonnement pour Personnage.AugmentationCompetence, lu par PdfPersonnageCompetence
+    // plus bas (etape Competences de l'accesseur unique, CONTEXT.md 10/09/2026) : sans ce
+    // resync ici, PdfPersonnageCompetence lirait une valeur en retard d'un cycle, celle laissee
+    // par le dernier CalculTableExperience. Meme source (TabCompetence.Cells[ColCompWork, ...])
+    // et meme forme que le resync deja fait avant sauvegarde (winpersonnage.pas ~l.4892).
+    Personnage.AugmentationCompetence := [];
+    For IndAugm := 1 to TabCompetence.Rowcount - 1 do
+      if StrToIntDef(TabCompetence.Cells[ColCompWork, IndAugm],0) > 0 then
+        begin
+          PersonnageCompetence.CodeCompetence := TabCompetence.Cells[ColCompCode, IndAugm];
+          PersonnageCompetence.Valeur         := StrToIntDef(TabCompetence.Cells[ColCompWork, IndAugm],0);
+          Personnage.AugmentationCompetence   += [PersonnageCompetence];
         end;
 
     // Attributs
@@ -2419,9 +2436,12 @@ procedure TWinPersonnages.CalculTotaux();
         TabCompetence.Cells[ColCompBonus, IndLig] := IntToStr(StrToIntDef(TabCompetence.Cells[ColComp35, IndLig],0) +
                                                               StrToIntDef(TabCompetence.Cells[ColComp40, IndLig],0) +
                                                               StrToIntDef(TabCompetence.Cells[ColCompWork, IndLig],0));
-        TabCompetence.Cells[ColCompTotal, IndLig] := IntToStr(StrToIntDef(TabCompetence.Cells[ColCompBonus, IndLig],0) +
-                                                              StrToIntDef(TabCompetence.Cells[ColCompAtt, IndLig],0) +
-                                                              StrToIntDef(TabCompetence.Cells[ColCompMutation, IndLig],0));
+        // Total desormais calcule par l'accesseur unique PdfPersonnageCompetence (deja utilise
+        // par le PDF), meme demarche que pour les Attributs ci-dessus : il ajoute notamment les
+        // bonus d'appartenance (Ordre/Regiment) et d'armure sur une Competence, absents de
+        // l'addition locale precedente (ColCompBonus + ColCompAtt + ColCompMutation).
+        DonneeCompetence := PdfPersonnageCompetence(Personnage, TabCompetence.Cells[ColCompCode, IndLig], NivMetier);
+        TabCompetence.Cells[ColCompTotal, IndLig] := IntToStr(DonneeCompetence.Total);
       end;
 
   end;
