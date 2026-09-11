@@ -1676,7 +1676,10 @@ Procedure PdfPersonnageCreation(Personnage: StructurePersonnage; BackGround: Boo
               // reste le total de competence generique affiche ailleurs sur la feuille) -
               // CONTEXT.md 2.50 etape 3 (3d-3). CompetenceDonnee.Augmentation reste base
               // sur le total generique, ce bonus ne change pas l'affichage "pas de bonus".
-              Pourcent := IntToStr(CompetenceDonnee.Total + PersonnageCareerBonusArmeModif(Personnage, PArme));
+              // PersonnageTalentArmeModif ajoute ici depuis le 11/09/2026 (ModifyWeapon sur
+              // Talent, moteur generique) - meme reflexe "les DEUX blocs" que le bug
+              // ModifyWeapon/Feldo2P du 08/09/2026 (CONTEXT.md).
+              Pourcent := IntToStr(CompetenceDonnee.Total + PersonnageCareerBonusArmeModif(Personnage, PArme) + PersonnageTalentArmeModif(Personnage, PArme));
               // Une arme accordee par une mutation est une partie du corps, pas un choix
               // d'entrainement : le malus "pas de competence" ne s'applique pas, ses qualites
               // s'affichent toujours. CONTEXT.md, chantier "traits de creature".
@@ -2946,7 +2949,9 @@ Procedure PdfBlocArmesDonnees(PdfPage: TPDFPage; Personnage: StructurePersonnage
           // l.1557, manquant ici jusqu'au 08/09/2026 - PdfBlocArmesDonnees est le bloc arme
           // utilise par PdfPersonnageCreationFeldo2P (l.4236), reste a l'ecart du calcul
           // "normal" depuis l'ajout de ModifyWeapon le 07/09/2026 (CONTEXT.md 2.50 point 4bis).
-          Pourcent := IntToStr(CompetenceDonnee.Total + PersonnageCareerBonusArmeModif(Personnage, PArme));
+          // PersonnageTalentArmeModif ajoute ici aussi depuis le 11/09/2026, meme cablage
+          // dans les DEUX blocs des le depart.
+          Pourcent := IntToStr(CompetenceDonnee.Total + PersonnageCareerBonusArmeModif(Personnage, PArme) + PersonnageTalentArmeModif(Personnage, PArme));
           // Meme exception que PdfPersonnageCreation : arme de mutation = partie du corps.
           PasBonus := (CompetenceDonnee.Augmentation = 0) and (PersonnageEquipement.Source = '');
 

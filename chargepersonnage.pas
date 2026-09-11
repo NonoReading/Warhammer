@@ -275,6 +275,11 @@ Type
   // niveau : toute arme présente dans Personnage.Equipement compte, comme pour l'armure (pas
   // de distinction "possédé" / "porté" dans ce modèle). Implementation deleguee a
   // PersonnageArmeModificateur depuis le 11/09/2026 (migration ModifyCarac).
+  // Pendant "par type d'arme" de PersonnageTalentModificateur, meme principe que
+  // PersonnageCareerBonusArmeModif - chantier "moteur generique", etape ModifyWeapon sur
+  // Talent (CONTEXT.md, 11/09/2026). Prend l'ARME ELLE-MEME en parametre (TypeArme +
+  // CodeCompetence en filtre optionnel), a appeler par arme possedee.
+  Function PersonnageTalentArmeModif(Personnage: StructurePersonnage; PArme: StructureArme): Integer;
   Function PersonnageArmeAttributModif(Personnage: StructurePersonnage; CodeAttribut: String): Integer;
   // Moteur generique (ChargeArmeModificateur) cote Arme - pendant de
   // PersonnageTalentModificateur, sans filtre de niveau/palier. CodeSource = CodeArme.
@@ -1569,6 +1574,14 @@ Function PersonnageTalentModificateur(Personnage: StructurePersonnage; TypeModif
            and ((Trim(ListTalentModificateur[indiceModif].Filtre) = '')
                 or CompareRechercheValeur(ListTalentModificateur[indiceModif].Filtre, Filtre)) then
           Result := Result + ListTalentModificateur[indiceModif].Facteur * PersonnageTalent.Valeur;
+  end;
+
+Function PersonnageTalentArmeModif(Personnage: StructurePersonnage; PArme: StructureArme): Integer;
+  begin
+    Result := 0;
+    if Trim(PArme.TypeArme) = '' then
+      Exit;
+    Result := PersonnageTalentModificateur(Personnage, ConstXmlModifieArme, PArme.TypeArme, PArme.CodeCompetence);
   end;
 
 Function PersonnageNiveauDansMetier(Personnage: StructurePersonnage; CodeMetier: String): Integer;

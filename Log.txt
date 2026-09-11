@@ -2755,3 +2755,23 @@ seul l asterisque manquait sur la fiche. Corrige en remplacant l ecriture direct
 parcours du catalogue (ListCompetence, meme schema que la boucle ModifySkillAttribut juste en
 dessous) : chaque competence dont le code propre OU la forme generique correspond a la Cible
 recoit l annotation - couvre le cas generique et le cas direct avec le meme code.
+
+11/09/2026 - MODIFYWEAPON BRANCHE SUR TALENT (MOTEUR GENERIQUE DE MODIFICATEURS), COMPILE ET
+VALIDE PAR NONO SUR GUNTHER KRIEG. Suite du chantier moteur generique : le lecteur XML du
+Talent avait deja le tag generique <Modificateur Type="ModifyWeapon" .../> (alimente
+ListTalentModificateur), seule la fonction de consommation manquait cote armes.
+PersonnageTalentArmeModif(Personnage, PArme) ajoutee dans chargepersonnage.pas, meme moule que
+PersonnageCareerBonusArmeModif : appelle PersonnageTalentModificateur(Personnage,
+ConstXmlModifieArme, PArme.TypeArme, PArme.CodeCompetence).
+Cablee d emblee dans les DEUX blocs de rendu des armes de pdfpersonnage.pas
+(PdfPersonnageCreation et PdfBlocArmesDonnees) - reflexe pris directement apres le bug
+ModifyWeapon/Feldo2P du 08/09/2026 qui avait piege PersonnageCareerBonusArmeModif sur le meme
+point.
+Teste avec un talent de test temporaire : second <Modificateur Type="ModifyWeapon"
+Cible="RULES-WTYPE_SHIELD" Facteur="10"/> ajoute sur PERSO-T0001 (deja possede par Gunther
+Krieg) le temps du test, puis retire une fois valide - BOOK_PERSO.Xml revenu bit-a-bit a l
+etat d avant (git diff vide).
+Valide par Nono : le Shield (RULES-COMB_BASE_07, TypeArme = RULES-WTYPE_SHIELD) gagne le +10
+supplementaire, le Boat Hook (RULES-COMB_BASE_02, meme competence Melee (Basic) mais sans
+TypeArme) ne le gagne pas - application ET selectivite verifiees.
+Compile avec lazbuild (0 erreur) avant et apres le retrait du talent de test.

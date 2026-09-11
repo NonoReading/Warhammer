@@ -1,6 +1,36 @@
 # Warhammer — Contexte projet
 
-**Dernière mise à jour : 11/09/2026 — MOTEUR GÉNÉRIQUE DE MODIFICATEURS : MUTATION
+**Dernière mise à jour : 11/09/2026 — MOTEUR GÉNÉRIQUE DE MODIFICATEURS : MODIFYWEAPON
+BRANCHÉ SUR TALENT, COMPILÉ ET VALIDÉ PAR NONO SUR GUNTHER KRIEG.** Suite du chantier
+"moteur générique" (entrée du 11/09/2026 juste en dessous) : le lecteur XML du Talent avait
+déjà le tag générique `<Modificateur Type="ModifyWeapon" .../>` (alimente
+`ListTalentModificateur`, jamais consommé côté armes) - seule la fonction de consommation
+manquait, sur le moule de `PersonnageCareerBonusArmeModif`.
+- **`PersonnageTalentArmeModif(Personnage, PArme)`** ajoutée dans `chargepersonnage.pas`
+  (déclaration + implémentation juste après `PersonnageTalentModificateur`) : appelle
+  `PersonnageTalentModificateur(Personnage, ConstXmlModifieArme, PArme.TypeArme,
+  PArme.CodeCompetence)`, filtre optionnel sur `CodeCompetence` comme son pendant CareerBonus.
+- **Câblée dans les DEUX blocs de rendu des armes de `pdfpersonnage.pas`** dès l'écriture
+  (`PdfPersonnageCreation` et `PdfBlocArmesDonnees`) - réflexe pris directement après le bug
+  `ModifyWeapon`/Feldo2P du 08/09/2026 qui avait piégé `PersonnageCareerBonusArmeModif` sur le
+  même point (un seul des deux blocs câblé au départ).
+- **Testé avec un talent de test temporaire** : un second `<Modificateur Type="ModifyWeapon"
+  Cible="RULES-WTYPE_SHIELD" Facteur="10"/>` ajouté sur `PERSO-T0001` (déjà possédé par
+  Gunther Krieg, déjà le talent ayant servi à valider `ModifySkill` sur Talent) le temps du
+  test, puis retiré une fois validé - `BOOK_PERSO.Xml` est revenu bit-à-bit à l'état d'avant
+  (`git diff` vide). **Confirmé par Nono** : le Shield (RULES-COMB_BASE_07, `TypeArme =
+  RULES-WTYPE_SHIELD`) gagne le +10 supplémentaire, le Boat Hook (RULES-COMB_BASE_02, même
+  compétence Melee (Basic) mais sans `TypeArme`) ne le gagne pas - application ET sélectivité
+  toutes deux vérifiées.
+- **Compilé (lazbuild, 0 erreur)** avant et après le retrait du talent de test (la donnée XML
+  n'affecte pas la compilation, seul le code Pascal en avait besoin).
+**Chantier suivant : `ModifyDamage` sur Talent reste à définir avec Nono (aucune constante ni
+mécanisme existant pour l'instant, contrairement à `ModifyWeapon`) ; vérifier qu'aucune autre
+cible ne reste dupliquée entre les sources du moteur générique.**
+
+---
+
+**11/09/2026 — MOTEUR GÉNÉRIQUE DE MODIFICATEURS : MUTATION
 BRANCHÉE SUR MODIFYSKILL/MODIFARMOUR, COMPILÉ ET VALIDÉ PAR NONO ; BUG D'ASTÉRISQUE
 MANQUANTE SUR UNE COMPÉTENCE-FAMILLE TROUVÉ EN TESTANT, CORRIGÉ ET VALIDÉ.** Suite
 immédiate de la migration ModifyCarac d'Attribut ci-dessous (même jour) : les deux autres

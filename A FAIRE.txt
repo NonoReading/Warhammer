@@ -32,6 +32,14 @@ sous-competences (ex. langues, "-10 to all Language Tests"), RESOLU. La boucle d
 seul l'asterisque manquait. Corrige en parcourant le catalogue comme pour ModifySkillAttribut.
 Detail CONTEXT.md (entree du 11/09/2026 en tete de fichier), Log.txt.]
 
+[FAIT LE 11/09/2026 - ModifyWeapon branche sur Talent, RESOLU. Nouvelle fonction
+PersonnageTalentArmeModif (chargepersonnage.pas), meme moule que
+PersonnageCareerBonusArmeModif, cablee d'emblee dans les deux blocs de rendu des armes de
+pdfpersonnage.pas. Teste avec un talent de test temporaire (PERSO-T0001, retire apres coup) et
+valide par Nono sur Gunther Krieg : Shield +10 supplementaire, Boat Hook non affecte. Reste :
+ModifyDamage sur Talent, pas encore defini. Detail CONTEXT.md (entree du 11/09/2026 en tete de
+fichier), Log.txt.]
+
 LIBELLES TRONQUES SUR CERTAINS BOUTONS DE WINMUTATION. Signale par Nono le 11/09/2026 :
 sur la fenetre Corruption (ajout de mutation), "Spend a Resilience point"/"Accept a
 mutation"/"Physical Corruption"/"Mental Corruption" (ButtonMutationResilience/Accepter/
