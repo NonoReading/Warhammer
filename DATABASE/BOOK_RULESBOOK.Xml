@@ -266,6 +266,7 @@
 <Text name="RULES-MESS_057">"This career cannot be started. It is only reached by advancing from another career, at level "</Text>
 <Text name="RULES-MESS_058">"This level opens onto several careers. Please choose the one you are advancing into."</Text>
 <Text name="RULES-MESS_059">"No talent matches this die roll."</Text>
+<Text name="RULES-MESS_060">"Do you want to remove this mutation? Anything it granted (talent, weapon, armour) will be removed too."</Text>
 <Text name="RULES-LAB_001">"Code"</Text>
 <Text name="RULES-LAB_002">"Label"</Text>
 <Text name="RULES-LAB_003">"Description"</Text>
@@ -17013,6 +17014,7 @@ Strength Bonus is abbreviated to SB in the weapon tables."</Explanation>
 <Corruption name="RULES-CORPHY_008">
 <Description language="ENGLISH">"Fleshy Tentacle"</Description>
 <Explanation language="ENGLISH">"Gain the Tentacles Creature Trait. See page 342"</Explanation>
+<Weapon>"PERSO-COMB_TENTACLE"</Weapon>
 </Corruption>
 <Corruption name="RULES-CORPHY_009">
 <Description language="ENGLISH">"Glowing Skin"</Description>

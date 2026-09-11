@@ -208,6 +208,7 @@ type
   procedure TabMetierEquipementSelectEditor({%H-}Sender: TObject; {%H-}aCol,
     {%H-}aRow: Integer; var Editor: TWinControl);
   procedure TabMutationClick(Sender: TObject);
+  procedure TabMutationDblClick({%H-}Sender: TObject);
   procedure TabSheetMjCostContextPopup(Sender: TObject; MousePos: TPoint;
     var Handled: Boolean);
   procedure TabSortDblClick({%H-}Sender: TObject);
@@ -902,6 +903,31 @@ procedure TWinPersonnages.TabMutationClick(Sender: TObject);
 
     PCorruptionTable       := ChercheCorruptionTable(TabMutation.Cells[3, TabMutation.Row]);
     MemoMutationEffet.Text := PCorruptionTable.Effet;
+  end;
+
+// Retrait d'une mutation - premiere fois que Personnage.Mutations peut se retrecir. Ce qu'elle
+// accordait (PersonnageMutationTalent/PersonnageMutationEquipement, chargepersonnage.pas) est
+// calcule a la volee depuis cette meme liste : la cascade est donc automatique, rien d'autre a
+// purger. CONTEXT.md, chantier "traits de creature".
+procedure TWinPersonnages.TabMutationDblClick(Sender: TObject);
+  var
+    Reponse: Integer;
+    Ind:     Integer;
+    IndSupp: Integer;
+  begin
+    if (TabMutation.Row < 1) then Exit;
+
+    Reponse := MessageDlg(GetTexteLibelle('RULES-MESS_060'), mtConfirmation, mbYesNo, 0);
+    if Reponse <> mrYes then Exit;
+
+    // TabMutation.Row est 1-based (ligne 0 = en-tete), Personnage.Mutations est 0-based -
+    // meme correspondance que le remplissage dans AfficheMutations juste au-dessus.
+    IndSupp := TabMutation.Row - 1;
+    for Ind := IndSupp to High(Personnage.Mutations) - 1 do
+      Personnage.Mutations[Ind] := Personnage.Mutations[Ind + 1];
+    SetLength(Personnage.Mutations, Length(Personnage.Mutations) - 1);
+
+    AfficheMutations();
   end;
 
 procedure TWinPersonnages.ButtonArmureClick(Sender: TObject);

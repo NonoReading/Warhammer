@@ -1,6 +1,22 @@
 # Warhammer — Contexte projet
 
-**Dernière mise à jour : 11/09/2026 — SKULL TROPHIES (NATIONS OF MANKIND, PAGE 61) SAISIES,
+**Dernière mise à jour : 11/09/2026 — PORTE "MUTATION" DES TRAITS DE CRÉATURE FAITE,
+COMPILÉE ET VALIDÉE PAR NONO (§2.54).** Suite immédiate de la question ouverte soulevée en
+clôturant Skull Trophies (§2.53, juste en dessous) : une mutation peut désormais accorder
+automatiquement un Talent (`<Talent>` sous `<Corruption>`) ou une Arme/Armure (`<Weapon>`/
+`<Armor>`), cas par cas dans le XML — jamais déduit d'un nom de trait. Calculé à la volée
+depuis `Personnage.Mutations` (`PersonnageMutationTalent`/`PersonnageMutationEquipement`,
+`chargepersonnage.pas`) plutôt que stocké : le retrait d'une mutation (nouveau — double-clic
+sur `TabMutation`, `winpersonnage.pas`, confirmation `RULES-MESS_060`) fait disparaître ce
+qu'elle accordait sans code de purge à écrire. Cas réel saisi et testé : Fleshy Tentacle
+(`RULES-CORPHY_008`) donne l'arme naturelle `PERSO-COMB_TENTACLE` (`BOOK_PERSO.Xml`, `+
+(BATTR_S)+0`, qualité Entangle `RULES-WEAPB17`) — au passage, le malus "pas de compétence"
+(`PasBonus`, `pdfpersonnage.pas`) qui masquait les qualités d'une arme non entraînée a dû être
+contourné pour une arme de mutation (`Source <> ''`), une tentacule n'étant pas un choix
+d'entraînement. Les deux autres portes (qualité d'objet, talent/sort) restent non mécanisées,
+voir `A FAIRE.txt`. **Chantier suivant : à définir avec Nono.**
+
+**11/09/2026 — SKULL TROPHIES (NATIONS OF MANKIND, PAGE 61) SAISIES,
 COMPILÉES ET VALIDÉES PAR NONO (§2.53).** Seule ligne non saisie du tableau d'armures restait
 bloquée sur trois points : emplacement "Any" hors du vocabulaire fermé, qualité Ugly imprimée
 directement sur la ligne (contrairement aux 28 pièces forgées où Ugly est une qualité de
@@ -6161,6 +6177,116 @@ tables de corruption de ce même livre, "Gain the Fear 2 Creature Trait"), quali
 chantier), talent/sort qui l'octroie — et aucune n'est mécanisée, toutes en texte descriptif.
 Une représentation générique serait un chantier à part entière, plus large que celui-ci. Noté
 dans `A FAIRE.txt`, section conceptions à mener.
+
+**Chantier suivant : à définir avec Nono.**
+
+### 2.54 Traits de créature — porte "mutation" (Talent/Arme/Armure), cascade au retrait (11/09/2026)
+
+**Origine.** Question ouverte par Nono en clôturant Skull Trophies (§2.53) : les traits de
+créature (Fear, Terror, Tentacles...) arrivent par trois portes non reliées (mutation, qualité
+d'objet, talent/sort), aucune mécanisée. En creusant avec Nono : "Creature Trait" n'est pas
+juste Fear/Terror mais tout un chapitre du Rulebook (p.338, des dizaines d'entrées — Ward,
+Flight, Bite, Weapon, Big, Fury...), la plupart accordées par des sorts temporaires plutôt que
+par mutation. Périmètre retenu avec Nono, volontairement réduit : seule la porte mutation,
+seulement le permanent (pas les sorts), vocabulaire ouvert (cas par cas dans le XML, jamais
+déduit d'un nom de trait) plutôt que fermé.
+
+**Idée de Nono qui a fixé la conception :** pour un trait qui se matérialise comme une arme ou
+une armure (Bite, Weapon, Tentacles...), le générer comme une vraie ligne d'équipement liée à
+la mutation plutôt que comme un texte descriptif — et si la mutation est retirée, l'équipement
+qu'elle a généré doit disparaître avec elle. Pour les autres traits, même principe via un
+Talent (précédent déjà existant : `RULES-T0BEL` Belligerent, un Creature Trait du catalogue,
+déjà représenté comme Talent ordinaire accordé automatiquement par la race dans
+`<Specie><SUBCHAPTER_TALENT>`).
+
+**Décision technique qui a simplifié tout le reste : calculé à la volée, rien stocké.**
+`Personnage.Talents`/`Personnage.Equipement` n'avaient aucune notion d'origine (`CodeTalent`/
+`Valeur`/`Asterisque` et `TypeEquipement`/`CodeEquipement`/`QualiteEquipement`/`CoutXp`
+seulement) — plutôt que d'ajouter une liste stockée et sérialisée en XML pour les octrois de
+mutation (avec la purge explicite que ça implique au retrait), un talent/équipement de mutation
+est recalculé à chaque affichage depuis `Personnage.Mutations`, exactement comme
+`PersonnageMutationAttributModif`/`PersonnageMutationArmureModif` le faisaient déjà pour les
+`<ModifyCarac>`/`<ModifArmour>` de mutation. Conséquence directe : le retrait d'une mutation
+fait disparaître ce qu'elle accordait sans une ligne de code de purge — seul le retrait
+lui-même restait à écrire.
+
+**Étapes, chacune compilée et validée séparément par Nono le même jour :**
+
+1. **`Source: String`** ajouté à `StructurePersonnageTalent` et `StructurePersonnageEquipement`
+   (`chargepersonnage.pas`) — vide pour l'existant (type géré, auto-initialisé), pas encore
+   alimenté. Prépare le contournement du malus "pas de compétence" (étape 5bis) sans toucher à
+   la sérialisation XML (rien n'est stocké côté mutation, voir ci-dessus).
+2. Même champ sur `StructurePersonnageEquipement`.
+3. **Mutation → Talent.** Nouvelle unité `ChargeCorruptionTalent.pas` (`StructureCorruptionTalent`
+   Livre/CodeCorruption/CodeTalent, même moule que `ChargeCorruptionArmureModif`). Balise
+   `<Talent>"CODE"</Talent>` acceptée sous une entrée `<Corruption>` (`xmlexportimport.pas`,
+   les deux boucles Physique et Mentale, réutilise la constante `ConstXmlTalent` existante).
+   Listes créées/vidées dans `warhammersource.pas`. Fonction calculée
+   `PersonnageMutationTalent(Personnage): TArrayPersonnageTalent` (`chargepersonnage.pas`) —
+   type nommé requis : un retour de fonction `array of StructureX` anonyme ne compile pas en
+   FPC ici (`Error: Type identifier expected... Syntax error, ";" expected but "ARRAY" found`),
+   il faut déclarer le type au préalable (`TArrayPersonnageTalent = array of
+   StructurePersonnageTalent;`).
+4. **Mutation → Équipement.** Même principe : `ChargeCorruptionEquipement.pas`
+   (`StructureCorruptionEquipement` avec `EstArme: Boolean` plutôt qu'un champ Type — les
+   variables `TypeEquipWe`/`TypeEquipAr` (`chargeconstantes.pas`) sont des libellés LOCALISÉS
+   chargés depuis un texte traduit à l'exécution, pas des codes fixes utilisables au moment du
+   parsing XML ; la conversion se fait seulement au moment de l'affichage). Balises `<Weapon>`/
+   `<Armor>` réutilisées telles quelles (`ConstXmlArme`/`ConstXmlArmure`, déjà le vocabulaire du
+   catalogue). `PersonnageMutationEquipement(Personnage): TArrayPersonnageEquipement`.
+5. **Cas réel : Fleshy Tentacle (`RULES-CORPHY_008`).** "Tentacles" (Rulebook p.342) est une
+   arme naturelle rated ("gains one Free Attack Action per tentacle... Rating Damage... can
+   also give... Entangled Condition, initiating a Grapple"), pas un talent. Aucune arme
+   naturelle n'existait dans le catalogue (`Unharmed`/`RULES-COMB_BAGAR_02` trouvée comme
+   modèle exact : Brawling, `+(BATTR_S)+0`, Reach Personal). La valeur de Dégâts n'étant pas
+   fixée par le livre pour une mutation de PJ (texte générique pour monstres), décision de
+   Nono : `+(BATTR_S)` et qualité Entangle (`RULES-WEAPB17`, trouvée dans le catalogue, colle
+   exactement à la description du trait). Posée dans `BOOK_PERSO.Xml` (nouveau `<DATA_WEAPON>`,
+   id `PERSO-COMB_TENTACLE`) et non `BOOK_RULESBOOK.Xml` : ces stats sont une interprétation de
+   Nono, pas un texte officiel imprimé — même logique que `PERSO-ARMO_01/02`. Référence posée
+   sur `RULES-CORPHY_008` : `<Weapon>"PERSO-COMB_TENTACLE"</Weapon>`.
+5bis. **Bug de jeu découvert en testant le cas réel.** Confirmé par Nono : les Dégâts
+   s'affichaient mais pas la qualité Entangle, parce que le personnage n'a pas la compétence
+   Brawling — `PasBonus := (CompetenceDonnee.Augmentation = 0)` (`pdfpersonnage.pas`, les deux
+   blocs armes dupliqués comme pour les Talents) masque les qualités d'une arme non entraînée
+   au profit d'un texte de malus. Corrigé : `PasBonus := (CompetenceDonnee.Augmentation = 0)
+   and (PersonnageEquipement.Source = '')` — une arme de mutation est une partie du corps, pas
+   un choix d'entraînement, le malus ne s'applique jamais à elle.
+6. **Affichage.** Talents de mutation ajoutés dans les deux blocs Talents du PDF
+   (`PdfPersonnageCreation` et `PdfBlocTalents`), même principe que les règles spéciales
+   d'appartenance (`PersonnageCareerBonusSpecialRule`, §2.51) : lignes en lecture seule
+   ajoutées après les talents achetés. Armes de mutation : pas de bloc dédié dupliqué — la
+   source de la boucle existante (`for PersonnageEquipement in Personnage.Equipement do`,
+   `PdfPersonnageCreation` et `PdfBlocEncombrement`) élargie à `Personnage.Equipement +
+   PersonnageMutationEquipement(Personnage)` (`{$ModeSwitch ArrayOperators}`), pour que
+   l'arme traverse tout le calcul existant (dégâts, encombrement, portée) sans code dupliqué.
+   Rien touché dans la grille interactive de `winpersonnage.pas` (création/montée de niveau) —
+   seulement le PDF, comme les talents de régiment.
+7. **Retrait d'une mutation.** Première fois que `Personnage.Mutations` peut se rétrécir.
+   Double-clic sur une ligne de `TabMutation` (`winpersonnage.pas`, nouveau `OnDblClick` dans
+   le `.lfm`) → confirmation (`RULES-MESS_060`, nouveau texte EN/FR, pas de réutilisation de
+   `RULES-MESS_053` qui sert déjà à l'historique de corruption, notion différente) → ligne
+   retirée du tableau dynamique. Cascade automatique et gratuite grâce à l'étape "calculé à la
+   volée" ci-dessus : rien d'autre à purger.
+
+**COMPILÉ ET VALIDÉ PAR NONO à chaque étape, cas réel testé de bout en bout** (dégâts,
+encombrement, qualité Entangle, puis retrait de la mutation). Fichiers nouveaux :
+`chargecorruptiontalent.pas`, `chargecorruptionequipement.pas`. Fichiers modifiés :
+`chargepersonnage.pas`, `xmlexportimport.pas`, `warhammersource.pas`, `pdfpersonnage.pas`,
+`winpersonnage.pas`/`.lfm`, `BOOK_RULESBOOK.Xml`/`BOOK_RULESBOOK_FRANCAIS.Xml`,
+`BOOK_PERSO.Xml`.
+
+**Reste, hors périmètre de ce chantier :** les deux autres portes (qualité d'objet — ex.
+`NATIO-ARMOB_16` Fear, toujours un simple libellé sans valeur stockée ; talent/sort — ex.
+Frightening, Terrifying, toujours du texte descriptif) ne sont pas mécanisées et ne partagent
+aucun vocabulaire commun avec la porte mutation. Signalé dans `A FAIRE.txt`.
+
+**Bug d'affichage signalé par Nono en cours de route, non lié à ce chantier, noté sans être
+traité :** sur `WinMutation` (fenêtre d'ajout de mutation, pas très ancienne), les boutons
+`ButtonMutationResilience`/`Accepter`/`TypePhysical`/`TypeMental` (`TBCButton`,
+`winmutation.lfm`) affichent leur libellé avec la première ET la dernière lettre coupées
+("pend a Resilience poin", "hysical Corruptio"), contrairement à Cancel/Ok (mêmes composants)
+qui s'affichent entiers. Pas diagnostiqué. Voir `A FAIRE.txt`.
 
 **Chantier suivant : à définir avec Nono.**
 

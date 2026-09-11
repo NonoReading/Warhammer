@@ -6,6 +6,14 @@
 CORRECTIONS COURTES  (une ligne ou deux chacune)
 =========================================================================
 
+LIBELLES TRONQUES SUR CERTAINS BOUTONS DE WINMUTATION. Signale par Nono le 11/09/2026 :
+sur la fenetre Corruption (ajout de mutation), "Spend a Resilience point"/"Accept a
+mutation"/"Physical Corruption"/"Mental Corruption" (ButtonMutationResilience/Accepter/
+TypePhysical/TypeMental, tous des TBCButton, winmutation.lfm) affichent leur libelle avec
+la premiere ET la derniere lettre coupees ("pend a Resilience poin", "hysical Corruptio"),
+alors que Cancel/Ok (memes composants) s'affichent entiers. Pas encore diagnostique - a
+regarder cote Rounding/largeur du bouton vs largeur du texte.
+
 LE TEST DE RADICAL DE TALENT SUPPOSE UN CODE DE 5 CARACTERES. winpersonnage.pas l.3245,
 copy(CodeSansLivre(...),1,5) : vrai pour les 868 codes en T+4 chiffres, faux pour les ids
 "A ou B" comme T0009/RULES-T0067 (seul le premier est compare) et pour le generique T*. Ce
@@ -155,19 +163,21 @@ A reprendre avec le morceau "creatures" du lot 3 si on veut de vraies creatures.
 CONCEPTIONS A MENER  (chantiers a part entiere, ne pas les melanger)
 =========================================================================
 
-LES TRAITS DE CREATURE (FEAR, TERROR...) ARRIVENT PAR TROIS PORTES NON RELIEES ET AUCUNE
-N EST MECANISEE. Souleve par Nono le 11/09/2026 en cloturant Skull Trophies (CONTEXT.md 2.53) :
-un trait de creature peut venir d une mutation (tables de corruption de Nations of Mankind,
-"Gain the Fear 2 Creature Trait"), d une qualite d objet (NATIO-ARMOB_16 "Fear", ce chantier),
-ou d un talent/sort qui l octroie (ex. High Elf Player s Guide, "temporarily gain the Fear 1
-Creature Trait") - toujours en texte descriptif dans une Explanation, jamais en donnee
-structuree. Une representation generique (vocabulaire ferme, peut-etre reutilisable pour
-Terror/Frightening) serait un chantier a part entiere, pas engage.
-Piste proposee par Nono (11/09/2026, reflexion rapide, a affiner) : une table A PART pour les
-traits, plutot que rattachee a la mutation/l objet qui les donne. Les traits d un personnage
-seraient ajoutes dans une table cote Personnage, chaque ligne portant son ORIGINE (mutation,
-arme, armure, ...) - plutot qu une simple liste de codes, pour pouvoir remonter a la source
-et gerer le cumul/retrait si l origine disparait (arme revendue, mutation soignee...).
+[PORTE MUTATION FAITE LE 11/09/2026 - voir CONTEXT.md 2.54. Une mutation peut accorder un
+Talent (<Talent> sous <Corruption>) ou une Arme/Armure (<Weapon>/<Armor>), calcule a la volee
+depuis Personnage.Mutations (PersonnageMutationTalent/PersonnageMutationEquipement,
+chargepersonnage.pas) - retrait de la mutation (double-clic sur TabMutation, winpersonnage.pas)
+= cascade automatique et gratuite, rien de stocke a purger. Cas reel : Fleshy Tentacle ->
+PERSO-COMB_TENTACLE (BOOK_PERSO.Xml), teste et valide par Nono, malus "pas de competence"
+contourne pour une arme de mutation (Source <> '').]
+
+LES DEUX AUTRES PORTES (QUALITE D OBJET, TALENT/SORT) RESTENT NON MECANISEES. Seule la porte
+mutation est faite (voir juste au-dessus). NATIO-ARMOB_16 "Fear" (qualite d objet, Skull
+Trophies) reste un simple libelle imprime sur la fiche, sans valeur stockee. Un talent comme
+Frightening (Fear Rating qui augmente par achat repete) ou un sort comme Terrifying (Terror 1
+temporaire, duree du sort) ne remontent nulle part non plus. Pas de vocabulaire ferme Fear/
+Terror commun aux trois portes - chaque porte reste un mecanisme separe pour l instant. A
+reprendre si Nono veut unifier plus tard.
 
 [FAIT LE 07/09/2026 - mecanisme generique Nation ecrit et compile, voir CONTEXT.md 2.51.
 Reste : les autres regroupements du meme genre (Bretagne HBRPA/HBRNO, Estalie HESTA,

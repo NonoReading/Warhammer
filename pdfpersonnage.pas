@@ -905,6 +905,7 @@ Procedure PdfPersonnageCreation(Personnage: StructurePersonnage; BackGround: Boo
     Bonus:                String;
     ListeRegle:           TListCareerBonusSpecialRule;
     PRegle:               StructureCareerBonusSpecialRule;
+    PMutationTalent:      StructurePersonnageTalent;
 
   begin
     PdfChemin        := GetCurrentDir+ConstCheminPersonnage+Personnage.NomPersonnage+'\'+Personnage.NomPersonnage+'.PDF';
@@ -1400,6 +1401,27 @@ Procedure PdfPersonnageCreation(Personnage: StructurePersonnage; BackGround: Boo
       ListeRegle.Free;
     end;
 
+    // Talents accordes par une mutation (ex. Fleshy Tentacle -> Tentacles), meme bloc, meme
+    // mise en forme que les regles speciales d'appartenance juste au-dessus. Calcule a la
+    // volee (PersonnageMutationTalent, chargepersonnage.pas) - CONTEXT.md, chantier
+    // "traits de creature".
+    for PMutationTalent in PersonnageMutationTalent(Personnage) do
+      begin
+        PTalent := ChercheTalent(PMutationTalent.CodeTalent);
+        inc(NbLigne);
+        PdfTaillePolice(PdfPage, PdfFontValue, ConstPoliceArial, 7);
+        PdfEcrit(PdfPage, 16, 49, 92-(NbLigne*3.5), PTalent.Libelle,MinPolice);
+        PdfTaillePolice(PdfPage, PdfFontValue, ConstPoliceArial, 9);
+        if PTalent.SousTalent then
+          PTalent := ChercheTalent(Copy(PTalent.CodeTalent, 1, Pos('_', PTalent.CodeTalent) - 1)+'_*');
+        if PTalent.Resume <> '' then
+          begin
+            PdfTaillePolice(PdfPage, PdfFontValue, ConstPoliceArial, 7);
+            PdfEcrit(PdfPage, 58, 105, 92-(NbLigne*3.5), PTalent.Resume,MinPolice);
+            PdfTaillePolice(PdfPage, PdfFontValue, ConstPoliceArial, 9);
+          end;
+      end;
+
   // PAGE 2
 
     // charger l'image de fond
@@ -1588,7 +1610,9 @@ Procedure PdfPersonnageCreation(Personnage: StructurePersonnage; BackGround: Boo
     NbArmure    := 0;
     NbSort      := 0;
     Quality     := '';
-    for PersonnageEquipement in Personnage.Equipement do
+    // Inclut les armes accordees par une mutation (ex. Fleshy Tentacle -> Tentacles),
+    // calculees a la volee - CONTEXT.md, chantier "traits de creature".
+    for PersonnageEquipement in (Personnage.Equipement + PersonnageMutationEquipement(Personnage)) do
       begin
         Enc := 0;
         EncP:= 0;
@@ -1625,7 +1649,10 @@ Procedure PdfPersonnageCreation(Personnage: StructurePersonnage; BackGround: Boo
               // CONTEXT.md 2.50 etape 3 (3d-3). CompetenceDonnee.Augmentation reste base
               // sur le total generique, ce bonus ne change pas l'affichage "pas de bonus".
               Pourcent := IntToStr(CompetenceDonnee.Total + PersonnageCareerBonusArmeModif(Personnage, PArme));
-              PasBonus := (CompetenceDonnee.Augmentation = 0);
+              // Une arme accordee par une mutation est une partie du corps, pas un choix
+              // d'entrainement : le malus "pas de competence" ne s'applique pas, ses qualites
+              // s'affichent toujours. CONTEXT.md, chantier "traits de creature".
+              PasBonus := (CompetenceDonnee.Augmentation = 0) and (PersonnageEquipement.Source = '');
 
               if pos(EquipementCT, PArme.CodeArme) > 0 then
                 begin
@@ -2472,6 +2499,7 @@ Function PdfBlocTalents(PdfPage: TPDFPage; Personnage: StructurePersonnage; XGau
     PMetierTalent: StructureMetierTalent;
     ListeRegle:    TListCareerBonusSpecialRule;
     PRegle:        StructureCareerBonusSpecialRule;
+    PMutationTalent: StructurePersonnageTalent;
   begin
     // Dessin cadre
     PdfPage.DrawLine( XGauche,      Y,                     XGauche,      Y - (NbLignes * HauteurLigne), 1);
@@ -2554,6 +2582,26 @@ Function PdfBlocTalents(PdfPage: TPDFPage; Personnage: StructurePersonnage; XGau
     finally
       ListeRegle.Free;
     end;
+
+    // Talents accordes par une mutation (ex. Fleshy Tentacle -> Tentacles), meme bloc, meme
+    // mise en forme que les regles speciales d'appartenance juste au-dessus. Calcule a la
+    // volee (PersonnageMutationTalent, chargepersonnage.pas) - CONTEXT.md, chantier
+    // "traits de creature".
+    for PMutationTalent in PersonnageMutationTalent(Personnage) do
+      begin
+        PTalent := ChercheTalent(PMutationTalent.CodeTalent);
+        inc(NbLigne);
+        PdfEcrit(PdfPage, XGauche + 2, XGauche + 41, Y - ((NbLigne + 2) * HauteurLigne) + 1, PTalent.Libelle, MinPolice);
+        if PTalent.SousTalent then
+          PTalent := ChercheTalent(Copy(PTalent.CodeTalent, 1, Pos('_', PTalent.CodeTalent) - 1)+'_*');
+        if PTalent.Resume <> '' then
+          begin
+            if Length(PTalent.Resume) > 20 then
+              PdfEcrit(PdfPage, XGauche + 54, XDroite, Y - ((NbLigne + 2) * HauteurLigne) + 1.5, PTalent.Resume, MinPolice)
+            else
+              PdfEcrit(PdfPage, XGauche + 54, XDroite, Y - ((NbLigne + 2) * HauteurLigne) + 1, PTalent.Resume, MinPolice);
+          end;
+      end;
 
     // Valeur Talents non acquis
     PdfPage.SetColor(RGB(150,150,150), False);
@@ -2783,7 +2831,9 @@ Procedure PdfBlocArmesDonnees(PdfPage: TPDFPage; Personnage: StructurePersonnage
     ArmureBouclier := 0;
     NbArme         := 0;
     Bidon          := 0;
-    for PersonnageEquipement in Personnage.Equipement do
+    // Inclut les armes accordees par une mutation, meme principe que dans
+    // PdfPersonnageCreation - CONTEXT.md, chantier "traits de creature".
+    for PersonnageEquipement in (Personnage.Equipement + PersonnageMutationEquipement(Personnage)) do
       if PersonnageEquipement.TypeEquipement = TypeEquipWe then
         begin
           TexteRange1:= '';
@@ -2815,7 +2865,8 @@ Procedure PdfBlocArmesDonnees(PdfPage: TPDFPage; Personnage: StructurePersonnage
           // utilise par PdfPersonnageCreationFeldo2P (l.4236), reste a l'ecart du calcul
           // "normal" depuis l'ajout de ModifyWeapon le 07/09/2026 (CONTEXT.md 2.50 point 4bis).
           Pourcent := IntToStr(CompetenceDonnee.Total + PersonnageCareerBonusArmeModif(Personnage, PArme));
-          PasBonus := (CompetenceDonnee.Augmentation = 0);
+          // Meme exception que PdfPersonnageCreation : arme de mutation = partie du corps.
+          PasBonus := (CompetenceDonnee.Augmentation = 0) and (PersonnageEquipement.Source = '');
 
           if pos(EquipementCT, PArme.CodeArme) > 0 then
             begin

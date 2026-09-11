@@ -23,7 +23,8 @@ uses
   ChargeTalentCompetenceAjoute, ChargeRaceCorruptionCreation,
   ChargeCorruptionTable, ChargeRaceOpinion, ChargeArmureBonusModif,
   ChargeCorruptionAttributModif, ChargeCorruptionCompetenceModif,
-  ChargeCorruptionArmureModif, ChargeTalentArmureModif,
+  ChargeCorruptionArmureModif, ChargeCorruptionTalent, ChargeCorruptionEquipement,
+  ChargeTalentArmureModif,
   CustomDrawn_Common, BCButton, BCLabel, fpTTF,
   PdfPersonnage, XmlExportImport, fppdf, WinLivre;
 
@@ -695,6 +696,8 @@ procedure TMenu.ChargerLivre(ForceMaJ: Boolean; ForceLivre: String);
         ListCorruptionCompetenceModif.Clear;
         ListCorruptionCompetenceAttributModif.Clear;
         ListCorruptionArmureModif.Clear;
+        ListCorruptionTalent.Clear;
+        ListCorruptionEquipement.Clear;
         ListTalentArmureModif.Clear;
       end;
 
@@ -903,6 +906,8 @@ procedure TMenu.FormCreate(Sender: TObject);
        ListCorruptionCompetenceModif:= TListCorruptionCompetenceModif.Create;
        ListCorruptionCompetenceAttributModif := TListCorruptionCompetenceAttributModif.Create;
        ListCorruptionArmureModif    := TListCorruptionArmureModif.Create;
+       ListCorruptionTalent         := TListCorruptionTalent.Create;
+       ListCorruptionEquipement     := TListCorruptionEquipement.Create;
        ListTalentArmureModif        := TListTalentArmureModif.Create;
 
        // chercher les livres

@@ -1136,6 +1136,7 @@ object WinPersonnages: TWinPersonnages
         Width = 410
         TabOrder = 0
         OnClick = TabMutationClick
+        OnDblClick = TabMutationDblClick
       end
       object MemoMutationEffet: TMemo
         Left = 21

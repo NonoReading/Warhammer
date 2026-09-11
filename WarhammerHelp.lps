@@ -243,10 +243,9 @@
         <HasResources Value="True"/>
         <ResourceBaseClass Value="Form"/>
         <UnitName Value="WinPersonnage"/>
-        <IsVisibleTab Value="True"/>
         <EditorIndex Value="5"/>
-        <TopLine Value="3569"/>
-        <CursorPos X="34" Y="3574"/>
+        <TopLine Value="3571"/>
+        <CursorPos X="44" Y="3587"/>
         <UsageCount Value="200"/>
         <Loaded Value="True"/>
         <LoadedDesigner Value="True"/>
@@ -484,9 +483,10 @@
         <Filename Value="pdfpersonnage.pas"/>
         <IsPartOfProject Value="True"/>
         <UnitName Value="PdfPersonnage"/>
+        <IsVisibleTab Value="True"/>
         <EditorIndex Value="3"/>
-        <TopLine Value="1136"/>
-        <CursorPos X="19" Y="1140"/>
+        <TopLine Value="1140"/>
+        <CursorPos X="47" Y="1153"/>
         <UsageCount Value="200"/>
         <Loaded Value="True"/>
       </Unit>

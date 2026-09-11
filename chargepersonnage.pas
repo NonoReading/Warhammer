@@ -12,7 +12,8 @@ uses
   ChargeTalentAttributModif, ChargeTalentCompetenceModif, ChargeArmeAttributModif,
   ChargeArmureBonusModif, ChargeArmureBonusAttributModif,
   ChargeSort, ChargeCorruptionTable, ChargeCorruptionAttributModif,
-  ChargeCorruptionCompetenceModif, ChargeCorruptionArmureModif, ChargeTalentArmureModif, XmlExportImport;
+  ChargeCorruptionCompetenceModif, ChargeCorruptionArmureModif, ChargeCorruptionTalent,
+  ChargeCorruptionEquipement, ChargeTalentArmureModif, XmlExportImport;
 
 Type
   StructurePersonnageAttribut   = Record
@@ -34,7 +35,14 @@ Type
      CodeTalent:            String;
      Valeur:                Integer;
      Asterisque:            Integer;
+     // Code de ce qui a accorde ce talent automatiquement (ex. une mutation), vide si le
+     // joueur l'a choisi/achete normalement. Pas encore alimente ni serialise en XML : premiere
+     // etape du chantier "traits de creature", CONTEXT.md/A FAIRE.txt.
+     Source:                String;
   end;
+  // Nomme, requis par le compilateur comme type de retour de fonction (PersonnageMutationTalent) -
+  // un "array of ..." anonyme n'est pas accepte a cet endroit.
+  TArrayPersonnageTalent = array of StructurePersonnageTalent;
 
 Type
   StructurePersonnageEquipement = Record
@@ -42,7 +50,11 @@ Type
      CodeEquipement:        String;
      QualiteEquipement:     String;
      CoutXp:                Integer;
+     // Meme principe que StructurePersonnageTalent.Source : code de ce qui a accorde cette
+     // ligne automatiquement (ex. une mutation), vide si achetee/choisie normalement.
+     Source:                String;
   end;
+  TArrayPersonnageEquipement = array of StructurePersonnageEquipement;
 
 Type
   // historique de corruption : Montant positif = corruption gagnée, négatif = perdue/purifiée
@@ -162,6 +174,18 @@ Type
   Function PersonnageMutationAttributModif(Personnage: StructurePersonnage; CodeAttribut: String): Integer;
   Function PersonnageMutationCompetenceModif(Personnage: StructurePersonnage; CodeCompetence: String): Integer;
   Function PersonnageMutationArmureModif(Personnage: StructurePersonnage; CodeLocalisation: String): Integer;
+  // Talents accordes automatiquement par les mutations du personnage (ex. Fleshy Tentacle ->
+  // Tentacles, cas par cas dans le XML - <Talent> sous <Corruption>, chargecorruptiontalent.pas).
+  // Calcule a la volee depuis Personnage.Mutations, meme principe que
+  // PersonnageMutationArmureModif juste au-dessus : rien n'est stocke sur la fiche, donc si une
+  // mutation disparait un jour de Personnage.Mutations, le talent calcule disparait avec elle
+  // sans purge explicite a ecrire. CONTEXT.md, chantier "traits de creature".
+  Function PersonnageMutationTalent(Personnage: StructurePersonnage): TArrayPersonnageTalent;
+  // Meme principe que PersonnageMutationTalent juste au-dessus, mais pour l'arme/armure
+  // accordee par une mutation (<Weapon>/<Armor> sous <Corruption>, chargecorruptionequipement.pas).
+  // Calcule a la volee, rien de stocke sur la fiche : meme cascade gratuite au retrait d'une
+  // mutation. CONTEXT.md, chantier "traits de creature".
+  Function PersonnageMutationEquipement(Personnage: StructurePersonnage): TArrayPersonnageEquipement;
   Function PersonnageTalentArmureModif(Personnage: StructurePersonnage; CodeLocalisation: String): Integer;
   // Même principe que PersonnageMutationAttributModif, mais sur les <ModifyCarac> déclarés
   // directement sur un TALENT (DATA_TALENT, ListTalentAttributModif) plutôt que sur une
@@ -1789,6 +1813,48 @@ Function PersonnageMutationArmureModif(Personnage: StructurePersonnage; CodeLoca
         if CompareRechercheValeur(ListCorruptionArmureModif[indiceModif].CodeCorruption, PersonnageMutation.Code)
            and CompareRechercheValeur(ListCorruptionArmureModif[indiceModif].CodeLocalisation, CodeLocalisation) then
           Result := Result + ListCorruptionArmureModif[indiceModif].Valeur;
+  end;
+
+Function PersonnageMutationTalent(Personnage: StructurePersonnage): TArrayPersonnageTalent;
+  var
+    PersonnageMutation: StructurePersonnageMutation;
+    indiceModif:        Integer;
+    PTalent:             StructurePersonnageTalent;
+  begin
+    Result := [];
+    for PersonnageMutation in Personnage.Mutations do
+      for indiceModif := 0 to (ListCorruptionTalent.Count - 1) do
+        if CompareRechercheValeur(ListCorruptionTalent[indiceModif].CodeCorruption, PersonnageMutation.Code) then
+          begin
+            PTalent.CodeTalent := ListCorruptionTalent[indiceModif].CodeTalent;
+            PTalent.Valeur     := 1;
+            PTalent.Asterisque := 0;
+            PTalent.Source     := PersonnageMutation.Code;
+            Result             += [PTalent];
+          end;
+  end;
+
+Function PersonnageMutationEquipement(Personnage: StructurePersonnage): TArrayPersonnageEquipement;
+  var
+    PersonnageMutation:  StructurePersonnageMutation;
+    indiceModif:         Integer;
+    PEquipement:          StructurePersonnageEquipement;
+  begin
+    Result := [];
+    for PersonnageMutation in Personnage.Mutations do
+      for indiceModif := 0 to (ListCorruptionEquipement.Count - 1) do
+        if CompareRechercheValeur(ListCorruptionEquipement[indiceModif].CodeCorruption, PersonnageMutation.Code) then
+          begin
+            if ListCorruptionEquipement[indiceModif].EstArme then
+              PEquipement.TypeEquipement := TypeEquipWe
+            else
+              PEquipement.TypeEquipement := TypeEquipAr;
+            PEquipement.CodeEquipement    := ListCorruptionEquipement[indiceModif].CodeEquipement;
+            PEquipement.QualiteEquipement := '';
+            PEquipement.CoutXp            := 0;
+            PEquipement.Source            := PersonnageMutation.Code;
+            Result                        += [PEquipement];
+          end;
   end;
 
 Function PersonnageTalentArmureModif(Personnage: StructurePersonnage; CodeLocalisation: String): Integer;

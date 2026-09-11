@@ -28,4 +28,18 @@
 <Type>"RULES-ARMOT_MAIL"</Type>
 </Armor>
 </DATA_ARMOR>
+<DATA_WEAPON>
+<Weapon id="PERSO-COMB_TENTACLE">
+<Description language="ENGLISH">"Tentacle"</Description>
+<Skill>"RULES-COMPCOMB_BAGAR"</Skill>
+<Damage>"+(BATTR_S)+0"</Damage>
+<Availability>"RULES-DISPO_COMMON"</Availability>
+<Reach>"RULES-WEAPR_PERSO"</Reach>
+<Price>"ND"</Price>
+<Encumbrance>"0"</Encumbrance>
+<Quality>"RULES-WEAPB17"</Quality>
+<Hand>"1"</Hand>
+<Ammunition>"0"</Ammunition>
+</Weapon>
+</DATA_WEAPON>
 </DATA_BOOK>

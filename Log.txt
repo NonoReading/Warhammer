@@ -2483,3 +2483,56 @@ COMPILE ET VALIDE PAR NONO : Ugly puis Fear s affichent correctement dans WinArm
 Question ouverte soulevee par Nono en cloturant : les traits de creature (Fear, Terror...)
 arrivent par trois portes non reliees (mutation, qualite d objet, talent/sort) et aucune n est
 mecanisee - chantier de genericisation possible, pas engage, note dans A FAIRE.txt.
+
+11/09/2026 - TRAITS DE CREATURE : PORTE MUTATION FAITE, COMPILEE ET VALIDEE PAR NONO
+(CONTEXT.md 2.54). Suite directe de la question ouverte ci-dessus, reprise le jour meme.
+Perimetre discute et reduit avec Nono : "Creature Trait" est tout un chapitre du Rulebook
+(p.338, des dizaines d entrees), la plupart accordees par des sorts temporaires - seule la
+porte mutation est traitee, seulement le permanent, vocabulaire ouvert (cas par cas dans le
+XML) plutot que ferme.
+Decision de Nono qui a structure le chantier : un trait qui se materialise comme une arme/
+armure (Bite, Tentacles...) devient une vraie ligne d equipement liee a la mutation, avec
+retrait en cascade si la mutation disparait ; les autres deviennent des Talents accordes
+automatiquement (precedent trouve : RULES-T0BEL Belligerent, deja un Talent de race).
+Decision technique qui a simplifie tout le reste : calcule a la volee depuis
+Personnage.Mutations (PersonnageMutationTalent/PersonnageMutationEquipement,
+chargepersonnage.pas), rien stocke ni serialise - meme principe que
+PersonnageMutationAttributModif/ArmureModif deja en place. Consequence : le retrait d une
+mutation fait disparaitre ce qu elle accordait sans code de purge.
+Etapes, compilees separement : Source: String ajoute a StructurePersonnageTalent et
+StructurePersonnageEquipement (chargepersonnage.pas, vide pour l existant) ; nouvelle unite
+ChargeCorruptionTalent.pas et balise <Talent> sous <Corruption> (xmlexportimport.pas, deux
+boucles Physique/Mentale) ; meme chose pour ChargeCorruptionEquipement.pas et <Weapon>/<Armor>
+(EstArme: Boolean plutot qu un champ Type - TypeEquipWe/TypeEquipAr sont des libelles
+LOCALISES charges a l execution, pas des codes fixes utilisables au parsing XML). Piege FPC
+rencontre : un retour de fonction "array of StructureX" anonyme ne compile pas
+("Type identifier expected"), il faut un type nomme declare au prealable
+(TArrayPersonnageTalent/TArrayPersonnageEquipement).
+Cas reel saisi : Fleshy Tentacle (RULES-CORPHY_008) -> "Tentacles" (p.342) est une arme
+naturelle rated, pas un talent. Aucune arme naturelle n existait dans le catalogue -
+Unharmed/RULES-COMB_BAGAR_02 trouvee comme modele exact. Valeur de Degats non fixee par le
+livre pour une mutation de PJ : decision de Nono, +(BATTR_S) et qualite Entangle
+(RULES-WEAPB17, trouvee dans le catalogue). Posee dans BOOK_PERSO.Xml (nouveau DATA_WEAPON,
+PERSO-COMB_TENTACLE) et non BOOK_RULESBOOK.Xml, ces stats etant une interpretation de Nono -
+meme logique que PERSO-ARMO_01/02.
+Bug de jeu trouve en testant : confirme par Nono, les Degats s affichaient mais pas la
+qualite Entangle, le personnage n ayant pas la competence Brawling - PasBonus
+(pdfpersonnage.pas, les deux blocs armes) masque les qualites d une arme non entrainee.
+Corrige : le malus ne s applique jamais a une arme dont Source <> '' (arme de mutation =
+partie du corps, pas un choix d entrainement).
+Affichage : Talents de mutation ajoutes dans les deux blocs Talents du PDF (meme principe que
+les regles speciales d appartenance, §2.51) ; armes de mutation incluses en elargissant la
+source de la boucle existante (Personnage.Equipement + PersonnageMutationEquipement(Personnage),
+ArrayOperators) plutot qu en dupliquant le rendu - traverse tout le calcul existant (degats,
+encombrement, portee) sans code duplique. Rien touche dans la grille interactive de
+winpersonnage.pas, seulement le PDF.
+Retrait d une mutation : premiere fois que Personnage.Mutations peut se retrecir - double-clic
+sur TabMutation (winpersonnage.pas, nouveau OnDblClick), confirmation RULES-MESS_060 (nouveau
+texte EN/FR, pas de reutilisation de RULES-MESS_053 qui sert deja a l historique de
+corruption). Cascade automatique et gratuite grace au calcul a la volee.
+COMPILE ET VALIDE PAR NONO a chaque etape, cas reel teste de bout en bout (degats,
+encombrement, qualite Entangle, retrait de la mutation). Reste hors perimetre : qualite d
+objet et talent/sort restent non mecanises, note dans A FAIRE.txt.
+Signale par Nono en cours de route, non traite : libelles tronques (1ere et derniere lettre)
+sur certains boutons TBCButton de WinMutation (fenetre d ajout de mutation) - note dans
+A FAIRE.txt.

@@ -18,7 +18,8 @@ uses
   ChargeRaceCorruptionCreation, ChargeCorruptionTable, ChargeTalentAttributModif,
   ChargeTalentEffet, ChargeTalentCompetenceModif, ChargeTalentCompetenceAjoute, ChargeRaceOpinion,
   ChargeArmureBonusModif, ChargeCorruptionAttributModif, ChargeCorruptionCompetenceModif,
-  ChargeCorruptionArmureModif, ChargeTalentArmureModif, ChargeArmeAttributModif,
+  ChargeCorruptionArmureModif, ChargeCorruptionTalent, ChargeCorruptionEquipement,
+  ChargeTalentArmureModif, ChargeArmeAttributModif,
   ChargeArmureBonusAttributModif,
   XMLRead, DOM, Unitcalcul,  Dialogs, strutils;
 
@@ -1108,6 +1109,8 @@ Procedure XmlImport(FileName: String; OnlyPrimary: Boolean; OnlyCode: Boolean);
     PCorruptionCompetenceModif: StructureCorruptionCompetenceModif;
     PCorruptionCompetenceAttributModif: StructureCorruptionCompetenceAttributModif;
     PCorruptionArmureModif:    StructureCorruptionArmureModif;
+    PCorruptionTalent:         StructureCorruptionTalent;
+    PCorruptionEquipement:     StructureCorruptionEquipement;
     PLivre:                   StructureLivre;
     PRaceOpinion:             StructureRaceOpinion;  // ✨ NOUVEAU
     Langue:                   String;
@@ -3157,6 +3160,33 @@ Procedure XmlImport(FileName: String; OnlyPrimary: Boolean; OnlyCode: Boolean);
                                     inc(NbCorruptionArmureModif);
                                    end;
                               end;
+                            ConstXmlTalent:
+                              begin
+                                // Talent accorde par la mutation (ex. Fleshy Tentacle -> Tentacles),
+                                // cas par cas dans le XML - CONTEXT.md, chantier "traits de creature".
+                                PCorruptionTalent.Livre          := Livre;
+                                PCorruptionTalent.CodeCorruption := PCorruptionTable.Code;
+                                PCorruptionTalent.CodeTalent     := RemoveQuotes(UTF8Encode(Node.TextContent));
+                                if LangueDef = ConstAnglais then
+                                   begin
+                                    ListCorruptionTalent.add(PCorruptionTalent);
+                                    inc(NbCorruptionTalent);
+                                   end;
+                              end;
+                            ConstXmlArme, ConstXmlArmure:
+                              begin
+                                // Arme ou armure accordee par la mutation, cas par cas dans le XML -
+                                // meme chantier que ConstXmlTalent juste au-dessus.
+                                PCorruptionEquipement.Livre          := Livre;
+                                PCorruptionEquipement.CodeCorruption := PCorruptionTable.Code;
+                                PCorruptionEquipement.CodeEquipement := RemoveQuotes(UTF8Encode(Node.TextContent));
+                                PCorruptionEquipement.EstArme        := Node.NodeName = ConstXmlArme;
+                                if LangueDef = ConstAnglais then
+                                   begin
+                                    ListCorruptionEquipement.add(PCorruptionEquipement);
+                                    inc(NbCorruptionEquipement);
+                                   end;
+                              end;
                           end;
                           Node := XmlElement(Node.NextSibling);
                         end;
@@ -3243,6 +3273,29 @@ Procedure XmlImport(FileName: String; OnlyPrimary: Boolean; OnlyCode: Boolean);
                                    begin
                                     ListCorruptionArmureModif.add(PCorruptionArmureModif);
                                     inc(NbCorruptionArmureModif);
+                                   end;
+                              end;
+                            ConstXmlTalent:
+                              begin
+                                PCorruptionTalent.Livre          := Livre;
+                                PCorruptionTalent.CodeCorruption := PCorruptionTable.Code;
+                                PCorruptionTalent.CodeTalent     := RemoveQuotes(UTF8Encode(Node.TextContent));
+                                if LangueDef = ConstAnglais then
+                                   begin
+                                    ListCorruptionTalent.add(PCorruptionTalent);
+                                    inc(NbCorruptionTalent);
+                                   end;
+                              end;
+                            ConstXmlArme, ConstXmlArmure:
+                              begin
+                                PCorruptionEquipement.Livre          := Livre;
+                                PCorruptionEquipement.CodeCorruption := PCorruptionTable.Code;
+                                PCorruptionEquipement.CodeEquipement := RemoveQuotes(UTF8Encode(Node.TextContent));
+                                PCorruptionEquipement.EstArme        := Node.NodeName = ConstXmlArme;
+                                if LangueDef = ConstAnglais then
+                                   begin
+                                    ListCorruptionEquipement.add(PCorruptionEquipement);
+                                    inc(NbCorruptionEquipement);
                                    end;
                               end;
                           end;
