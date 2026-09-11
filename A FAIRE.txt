@@ -171,13 +171,25 @@ chargepersonnage.pas) - retrait de la mutation (double-clic sur TabMutation, win
 PERSO-COMB_TENTACLE (BOOK_PERSO.Xml), teste et valide par Nono, malus "pas de competence"
 contourne pour une arme de mutation (Source <> '').]
 
-LES DEUX AUTRES PORTES (QUALITE D OBJET, TALENT/SORT) RESTENT NON MECANISEES. Seule la porte
-mutation est faite (voir juste au-dessus). NATIO-ARMOB_16 "Fear" (qualite d objet, Skull
-Trophies) reste un simple libelle imprime sur la fiche, sans valeur stockee. Un talent comme
-Frightening (Fear Rating qui augmente par achat repete) ou un sort comme Terrifying (Terror 1
-temporaire, duree du sort) ne remontent nulle part non plus. Pas de vocabulaire ferme Fear/
-Terror commun aux trois portes - chaque porte reste un mecanisme separe pour l instant. A
-reprendre si Nono veut unifier plus tard.
+[PORTE QUALITE D OBJET FAITE LE 11/09/2026 - voir CONTEXT.md 2.55. Meme principe que la porte
+mutation, transpose a ArmureBonus : <Talent> sous <BonusMalus> (chargearmurebonustalent.pas),
+PersonnageArmureBonusTalent (chargepersonnage.pas) calculee a la volee depuis l'equipement
+porte. Cas reel : NATIO-ARMOB_16 "Fear" (Skull Trophies) accorde RULES-T0049 Frightening,
+teste et valide par Nono a l'ecran (TabTalent, winpersonnage.pas) et au PDF. Les talents de
+mutation ET de qualite d'objet s'affichent maintenant aussi a l'ecran, pas seulement au PDF -
+fusion avec une ligne existante sans toucher ColTalNbAugm/ColTalXp (octroi automatique = pas de
+cout Xp). Au passage : la fonction lisait d'abord PersonnageEquipement.QualiteEquipement
+(qualites de FABRICATION uniquement) au lieu de StructureArmure.ListeBonus (qualite inherente du
+catalogue, celle que "Fear 1" affiche reellement) - corrige, les deux sources sont scannees.]
+
+LA TROISIEME PORTE (TALENT/SORT) RESTE NON MECANISEE. Les deux autres sont faites (voir
+juste au-dessus). Un talent comme Frightening achete normalement (Fear Rating qui augmente
+par achat repete) ou un sort comme Terrifying (Terror 1 temporaire, duree du sort) ne
+remontent nulle part. Pas de vocabulaire ferme Fear/Terror commun aux trois portes - chaque
+porte reste un mecanisme separe pour l instant. A reprendre si Nono veut unifier plus tard.
+Note : l'idee d'un talent "de type trait" non selectionnable pour unifier existe deja depuis
+longtemps (CONTEXT.md 2.15, ConstXmlTrait/StructureTalent.Trait) - pas besoin d'en reinventer
+un si Nono relance cette generalisation.
 
 [FAIT LE 07/09/2026 - mecanisme generique Nation ecrit et compile, voir CONTEXT.md 2.51.
 Reste : les autres regroupements du meme genre (Bretagne HBRPA/HBRNO, Estalie HESTA,

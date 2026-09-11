@@ -3080,6 +3080,32 @@ begin
           TalentAttribut(PTalent.Attribut);
         end;
 
+  // Talents accordes par une mutation (ex. Fleshy Tentacle -> Tentacles) ou par une qualite
+  // d'objet porte (ex. NATIO-ARMOB_16 "Fear" -> Frightening, Skull Trophies) - calcules a la
+  // volee (PersonnageMutationTalent/PersonnageArmureBonusTalent, chargepersonnage.pas), deja
+  // affiches au PDF, maintenant aussi a l'ecran. Fusionnes avec une ligne existante si le
+  // joueur possede deja le meme talent achete normalement (ex. Frightening) - jamais dans
+  // ColTalNbAugm/ColTalXp, qui restent reserves aux augmentations payees en Xp : un octroi
+  // automatique ne coute rien.
+  For PersonnageTalent in PersonnageMutationTalent(Personnage) + PersonnageArmureBonusTalent(Personnage) do
+    begin
+      Lig  := FindRowByText(TabTalent, PersonnageTalent.CodeTalent, 1);
+      if Lig = -1 then
+        begin
+          NbTalent            := NbTalent + 1;
+          TabTalent.RowCount  := TabTalent.RowCount + 1;
+          Lig                 := NbTalent;
+        end;
+      TabTalent.Cells[ColTalCode, Lig] := PersonnageTalent.CodeTalent;
+      TabTalent.Cells[ColTalNb, Lig]   := IntToStr(StrToIntDef(TabTalent.Cells[ColTalNb, Lig],0) + PersonnageTalent.Valeur);
+      PTalent                          := ChercheTalent(TabTalent.Cells[ColTalCode, Lig]);
+      TabTalent.Cells[ColTalLib, Lig]  := PTalent.Libelle;
+      if PTalent.SousTalent then
+        PTalent                       := ChercheTalent(Copy(PTalent.CodeTalent, 1, Pos('_', PTalent.CodeTalent) - 1)+'_*');
+      TabTalent.Cells[ColTalMax, Lig]  := Ptalent.MaxiTalent;
+      TalentAttribut(PTalent.Attribut);
+    end;
+
   // Mutation (CONTEXT.md §2.7) - effets à delta pur des mutations obtenues, même fonction
   // que celle utilisée pour le PDF (PersonnageMutationAttributModif, chargepersonnage.pas)
   // pour rester cohérent entre l'écran et le PDF.

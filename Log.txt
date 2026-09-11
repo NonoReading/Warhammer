@@ -2536,3 +2536,38 @@ objet et talent/sort restent non mecanises, note dans A FAIRE.txt.
 Signale par Nono en cours de route, non traite : libelles tronques (1ere et derniere lettre)
 sur certains boutons TBCButton de WinMutation (fenetre d ajout de mutation) - note dans
 A FAIRE.txt.
+
+11/09/2026 - TRAITS DE CREATURE : PORTE QUALITE D OBJET FAITE, COMPILEE ET VALIDEE PAR NONO
+(CONTEXT.md 2.55). Deuxieme des trois portes, suite directe de la porte mutation ci-dessus.
+Nono a repere le parallele lui-meme : meme logique que Fleshy Tentacle, mais au lieu d
+accorder une arme on accorde un Talent - meme moule que ChargeCorruptionTalent, transpose a
+ArmureBonus plutot qu a Corruption.
+Digression exploree sans suite : Nono s est demande si un talent "de type trait" non
+selectionnable ne serait pas la vraie solution generale. Deja fait depuis longtemps
+(CONTEXT.md 2.15, ConstXmlTrait/StructureTalent.Trait) - sans rapport ici, RULES-T0049
+Frightening restant un talent normal achetable en carriere.
+Etapes : nouvelle unite chargearmurebonustalent.pas (StructureArmureBonusTalent, copie
+conforme de ChargeCorruptionTalent) ; balise <Talent> acceptee sous <BonusMalus>
+(DATA_ARMOR_BONUS, xmlexportimport.pas), pas d export dedie (les autres sous-tables d
+ArmureBonus n en ont pas non plus dans ce bloc) ; PersonnageArmureBonusTalent
+(chargepersonnage.pas), calculee a la volee depuis l equipement porte, meme principe "rien
+stocke" que la porte mutation ; donnee NATIO-ARMOB_16 (Fear, Skull Trophies) porte desormais
+<Talent>RULES-T0049</Talent> (Frightening).
+Deux bugs trouves en testant le cas reel : liste jamais creee
+(ListArmureBonusTalent.Create oublie dans warhammersource.pas, seul le .Clear de rechargement
+avait ete ajoute) -> Access Violation au premier import de livre, signale par Nono avec la
+boite d erreur Lazarus, corrige. Puis, une fois l AV corrigee : Frightening n apparaissait
+toujours nulle part - la fonction lisait PersonnageEquipement.QualiteEquipement, qui ne porte
+que les qualites de FABRICATION choisies par le joueur (colonne 7 de TabEquipement,
+winpersonnage.pas), jamais la qualite inherente du catalogue (StructureArmure/
+StructureArmureSimplifiee.ListeBonus, le champ que "Fear 1" affiche reellement via
+ChercheArmure). Corrige : les deux sources sont scannees.
+Extension demandee par Nono une fois le PDF valide : "fais-le pour les deux portes" - les
+talents accordes par mutation ET par qualite d objet s affichent maintenant aussi a l ecran
+dans l onglet Talents de WinPersonnage (jusque-la seul le PDF les montrait). Fusion avec une
+ligne existante si le talent est deja possede normalement, sans toucher ColTalNbAugm/ColTalXp :
+un octroi automatique ne coute pas de Xp.
+COMPILE ET VALIDE PAR NONO, cas reel teste de bout en bout : Skull Trophies equipe ->
+Frightening apparait dans l onglet Talents de WinPersonnage ET dans les deux formats de PDF.
+Reste hors perimetre : la troisieme porte (talent/sort, ex. Terrifying) n est pas mecanisee,
+note dans A FAIRE.txt.

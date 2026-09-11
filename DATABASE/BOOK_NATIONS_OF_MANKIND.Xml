@@ -10673,15 +10673,18 @@ Furthermore, all ranged weapons lose their Damaging Quality when striking this a
 <Explanation language="ENGLISH">"Crafted from the skulls of fallen enemies, these grisly trophies attract negative attention, and related Fellowship Tests might even suffer a -10 penalty."</Explanation>
 <Modifier>"related Fellowship Tests up to -10"</Modifier>
 </BonusMalus>
-  <!-- Fear n a aucune mecanique codee dans le projet (toujours du texte dans l Explanation d
-       un talent/mutation) : purement descriptif, comme Spiked/Corrupted ci-dessus. Le suffixe
-       numerique separe par un espace ("NATIO-ARMOB_16 1" sur l objet) passe par
-       GetAllArmureBonusLibelle (chargearmurebonus.pas), mecanisme deja code mais jamais exerce
-       jusqu ici par aucune donnee. -->
+  <!-- Fear mecanise le 11/09/2026 (CONTEXT.md 2.55, porte "qualite d objet" du chantier
+       "traits de creature") : accorde RULES-T0049 (Frightening, Rating 1) au porteur, calcule
+       a la volee par PersonnageArmureBonusTalent (chargepersonnage.pas) - meme principe que
+       <Talent> sous <Corruption> pour la porte mutation (2.54), symetrie voulue par Nono. Le
+       suffixe numerique separe par un espace ("NATIO-ARMOB_16 1" sur l objet) reste purement
+       d affichage (GetAllArmureBonusLibelle) : Skull Trophies ne donne que Fear 1, la valeur
+       du suffixe n est pas reportee sur le talent accorde. -->
 <BonusMalus id="NATIO-ARMOB_16">
 <Description language="ENGLISH">"Fear"</Description>
 <Explanation language="ENGLISH">"The grisly sight of trophies taken from fallen foes unsettles those who behold them. The wearer gains the Fear Creature Trait, at the Rating printed alongside this Quality."</Explanation>
 <Modifier>"grants the Fear Creature Trait, at the printed Rating"</Modifier>
+<Talent>"RULES-T0049"</Talent>
 </BonusMalus>
 </DATA_ARMOR_BONUS>
 <DATA_WEAPON>

@@ -906,6 +906,7 @@ Procedure PdfPersonnageCreation(Personnage: StructurePersonnage; BackGround: Boo
     ListeRegle:           TListCareerBonusSpecialRule;
     PRegle:               StructureCareerBonusSpecialRule;
     PMutationTalent:      StructurePersonnageTalent;
+    PArmureBonusTalent:   StructurePersonnageTalent;
 
   begin
     PdfChemin        := GetCurrentDir+ConstCheminPersonnage+Personnage.NomPersonnage+'\'+Personnage.NomPersonnage+'.PDF';
@@ -1408,6 +1409,27 @@ Procedure PdfPersonnageCreation(Personnage: StructurePersonnage; BackGround: Boo
     for PMutationTalent in PersonnageMutationTalent(Personnage) do
       begin
         PTalent := ChercheTalent(PMutationTalent.CodeTalent);
+        inc(NbLigne);
+        PdfTaillePolice(PdfPage, PdfFontValue, ConstPoliceArial, 7);
+        PdfEcrit(PdfPage, 16, 49, 92-(NbLigne*3.5), PTalent.Libelle,MinPolice);
+        PdfTaillePolice(PdfPage, PdfFontValue, ConstPoliceArial, 9);
+        if PTalent.SousTalent then
+          PTalent := ChercheTalent(Copy(PTalent.CodeTalent, 1, Pos('_', PTalent.CodeTalent) - 1)+'_*');
+        if PTalent.Resume <> '' then
+          begin
+            PdfTaillePolice(PdfPage, PdfFontValue, ConstPoliceArial, 7);
+            PdfEcrit(PdfPage, 58, 105, 92-(NbLigne*3.5), PTalent.Resume,MinPolice);
+            PdfTaillePolice(PdfPage, PdfFontValue, ConstPoliceArial, 9);
+          end;
+      end;
+
+    // Talents accordes par une qualite d'objet porte (ex. NATIO-ARMOB_16 "Fear" -> Frightening,
+    // Skull Trophies), meme bloc, meme mise en forme que les talents de mutation juste au-dessus.
+    // Calcule a la volee (PersonnageArmureBonusTalent, chargepersonnage.pas) - CONTEXT.md,
+    // chantier "traits de creature".
+    for PArmureBonusTalent in PersonnageArmureBonusTalent(Personnage) do
+      begin
+        PTalent := ChercheTalent(PArmureBonusTalent.CodeTalent);
         inc(NbLigne);
         PdfTaillePolice(PdfPage, PdfFontValue, ConstPoliceArial, 7);
         PdfEcrit(PdfPage, 16, 49, 92-(NbLigne*3.5), PTalent.Libelle,MinPolice);
@@ -2500,6 +2522,7 @@ Function PdfBlocTalents(PdfPage: TPDFPage; Personnage: StructurePersonnage; XGau
     ListeRegle:    TListCareerBonusSpecialRule;
     PRegle:        StructureCareerBonusSpecialRule;
     PMutationTalent: StructurePersonnageTalent;
+    PArmureBonusTalent: StructurePersonnageTalent;
   begin
     // Dessin cadre
     PdfPage.DrawLine( XGauche,      Y,                     XGauche,      Y - (NbLignes * HauteurLigne), 1);
@@ -2590,6 +2613,26 @@ Function PdfBlocTalents(PdfPage: TPDFPage; Personnage: StructurePersonnage; XGau
     for PMutationTalent in PersonnageMutationTalent(Personnage) do
       begin
         PTalent := ChercheTalent(PMutationTalent.CodeTalent);
+        inc(NbLigne);
+        PdfEcrit(PdfPage, XGauche + 2, XGauche + 41, Y - ((NbLigne + 2) * HauteurLigne) + 1, PTalent.Libelle, MinPolice);
+        if PTalent.SousTalent then
+          PTalent := ChercheTalent(Copy(PTalent.CodeTalent, 1, Pos('_', PTalent.CodeTalent) - 1)+'_*');
+        if PTalent.Resume <> '' then
+          begin
+            if Length(PTalent.Resume) > 20 then
+              PdfEcrit(PdfPage, XGauche + 54, XDroite, Y - ((NbLigne + 2) * HauteurLigne) + 1.5, PTalent.Resume, MinPolice)
+            else
+              PdfEcrit(PdfPage, XGauche + 54, XDroite, Y - ((NbLigne + 2) * HauteurLigne) + 1, PTalent.Resume, MinPolice);
+          end;
+      end;
+
+    // Talents accordes par une qualite d'objet porte (ex. NATIO-ARMOB_16 "Fear" -> Frightening,
+    // Skull Trophies), meme bloc, meme mise en forme que les talents de mutation juste au-dessus.
+    // Calcule a la volee (PersonnageArmureBonusTalent, chargepersonnage.pas) - CONTEXT.md,
+    // chantier "traits de creature".
+    for PArmureBonusTalent in PersonnageArmureBonusTalent(Personnage) do
+      begin
+        PTalent := ChercheTalent(PArmureBonusTalent.CodeTalent);
         inc(NbLigne);
         PdfEcrit(PdfPage, XGauche + 2, XGauche + 41, Y - ((NbLigne + 2) * HauteurLigne) + 1, PTalent.Libelle, MinPolice);
         if PTalent.SousTalent then

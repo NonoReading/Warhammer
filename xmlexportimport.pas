@@ -20,7 +20,7 @@ uses
   ChargeArmureBonusModif, ChargeCorruptionAttributModif, ChargeCorruptionCompetenceModif,
   ChargeCorruptionArmureModif, ChargeCorruptionTalent, ChargeCorruptionEquipement,
   ChargeTalentArmureModif, ChargeArmeAttributModif,
-  ChargeArmureBonusAttributModif,
+  ChargeArmureBonusAttributModif, ChargeArmureBonusTalent,
   XMLRead, DOM, Unitcalcul,  Dialogs, strutils;
 
 Procedure XmlExportBook(Livre: String; Langue: String);
@@ -1069,6 +1069,7 @@ Procedure XmlImport(FileName: String; OnlyPrimary: Boolean; OnlyCode: Boolean);
     PArmure:                  StructureArmure;
     PArmureBonus:             StructureArmureBonus;
     PArmureBonusAttributModif: StructureArmureBonusAttributModif;
+    PArmureBonusTalent:       StructureArmureBonusTalent;
     PSort:                    StructureSort;
     PSortTalent:              StructureSortTalent;
     PTrait:                   StructureTrait;
@@ -2421,6 +2422,21 @@ Procedure XmlImport(FileName: String; OnlyPrimary: Boolean; OnlyCode: Boolean);
                                    begin
                                     ListArmureBonusAttributModif.add(PArmureBonusAttributModif);
                                     inc(NbArmureBonusAttributModif);
+                                   end;
+                              end;
+                            ConstXmlTalent:
+                              begin
+                                // Talent accorde par une qualite d'objet (ex. NATIO-ARMOB_16 "Fear"
+                                // -> RULES-T0049 "Frightening", Skull Trophies), cas par cas dans le
+                                // XML - meme chantier "traits de creature" que ConstXmlTalent sous
+                                // <Corruption> plus haut.
+                                PArmureBonusTalent.Livre           := Livre;
+                                PArmureBonusTalent.CodeArmureBonus := PArmureBonus.CodeArmureBonus;
+                                PArmureBonusTalent.CodeTalent      := RemoveQuotes(UTF8Encode(Node.TextContent));
+                                if LangueDef = ConstAnglais then
+                                   begin
+                                    ListArmureBonusTalent.add(PArmureBonusTalent);
+                                    inc(NbArmureBonusTalent);
                                    end;
                               end;
                           end;

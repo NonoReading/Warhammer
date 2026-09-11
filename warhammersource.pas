@@ -15,7 +15,7 @@ uses
   ChargeRaceTalent, GlobalFonts, WinCreation, ChargeTalentCreation,
   WinPersonnage, ChargeAttributAugmentation, ChargeCompetenceAugmentation,
   ChargeArme, ChargeArmeAttributModif, WinWeapon, ChargeArmeBonus, ChargeMetierEquipement, ChargeArmure,
-  ChargeArmureBonus, ChargeArmureBonusAttributModif, WinArmor, ChargeSort, WinSpell, ChargeTexte,
+  ChargeArmureBonus, ChargeArmureBonusAttributModif, ChargeArmureBonusTalent, WinArmor, ChargeSort, WinSpell, ChargeTexte,
   ChargeFabrication, Unitcalcul, ChargeMetierSousMetier,
   ChargeMetierRaceChoixMetier, ChargePersonnage, ChargeRaceCreation,
   ChargeTraduction, ChargeArmureSimplifie, ChargeLivre,
@@ -698,6 +698,7 @@ procedure TMenu.ChargerLivre(ForceMaJ: Boolean; ForceLivre: String);
         ListCorruptionArmureModif.Clear;
         ListCorruptionTalent.Clear;
         ListCorruptionEquipement.Clear;
+        ListArmureBonusTalent.Clear;
         ListTalentArmureModif.Clear;
       end;
 
@@ -909,6 +910,7 @@ procedure TMenu.FormCreate(Sender: TObject);
        ListCorruptionTalent         := TListCorruptionTalent.Create;
        ListCorruptionEquipement     := TListCorruptionEquipement.Create;
        ListTalentArmureModif        := TListTalentArmureModif.Create;
+       ListArmureBonusTalent        := TListArmureBonusTalent.Create;
 
        // chercher les livres
        // Le RULESBOOK doit être chargé en premier : d'autres livres (ex. BOOK
