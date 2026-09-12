@@ -20,18 +20,23 @@
 <DATA_SKILL_SPECIALIZATION>
 <Skill id="RULES-COMPSAVOIR_NORSCA">
 <Description language="ENGLISH">"Lore (Norsca)"</Description>
+<Generique>"RULES-COMPSAVOIR_*"</Generique>
 </Skill>
 <Skill id="RULES-COMPSAVOIR_KHORNE">
 <Description language="ENGLISH">"Lore (Khorne)"</Description>
+<Generique>"RULES-COMPSAVOIR_*"</Generique>
 </Skill>
 <Skill id="RULES-COMPLANG_GOSPO">
 <Description language="ENGLISH">"Language (Gospodarinyi)"</Description>
+<Generique>"RULES-COMPLANG_*"</Generique>
 </Skill>
 <Skill id="RULES-COMPMUSIC_FIDDLE">
 <Description language="ENGLISH">"Play (Fiddle)"</Description>
+<Generique>"RULES-COMPMUSIC_*"</Generique>
 </Skill>
 <Skill id="RULES-COMPMUSIC_SQUEEZE">
 <Description language="ENGLISH">"Play (Squeezebox)"</Description>
+<Generique>"RULES-COMPMUSIC_*"</Generique>
 </Skill>
 <Skill id="RULES-COMPMUSIC_FIDDLE/RULES-COMPMUSIC_SQUEEZE/RULES-COMPMUSIC_PENNYW">
 <Description language="ENGLISH">"Play (Fiddle, Squeezebox or Tin Whistle)"</Description>
@@ -47,6 +52,7 @@
        le Sailor niveau 1 p.72, "Tin Whistle" ici. Creer les deux aurait refait un
        doublon d'identifiant du type de ceux nettoyes ce mois-ci. A ARBITRER si Nono
        prefere deux specialisations distinctes. -->
+<Generique>"RULES-COMPMUSIC_*"</Generique>
 </Skill>
 </DATA_SKILL_SPECIALIZATION>
 <DATA_RULE>

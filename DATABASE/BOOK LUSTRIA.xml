@@ -10,18 +10,23 @@
 <DATA_SKILL_SPECIALIZATION>
 <Skill id="RULES-COMPSIGNES_LIZARD">
 <Description language="ENGLISH">"Secret Signs (Lizardman)"</Description>
+<Generique>"RULES-COMPSIGNES_*"</Generique>
 </Skill>
 <Skill id="LUSTR-COMPPROJ_SARBAC">
 <Description language="ENGLISH">"Ranged (Blowpipe)"</Description>
+<Generique>"RULES-COMPPROJ_*"</Generique>
 </Skill>
 <Skill id="RULES-COMPPROJ_ARC/LUSTR-COMPPROJ_SARBAC/RULES-COMPPROJ_LANC">
 <Description language="ENGLISH">"Ranged (Bow, Blowpipe, or Throwing)"</Description>
+<Generique>"RULES-COMPPROJ_*"</Generique>
 </Skill>
 <Skill id="RULES-COMPSAVOIR_OLDONES">
 <Description language="ENGLISH">"Lore (Old Ones)"</Description>
+<Generique>"RULES-COMPSAVOIR_*"</Generique>
 </Skill>
 <Skill id="RULES-COMPFOCAL_CIEUX/RULES-COMPFOCAL_BETE">
 <Description language="ENGLISH">"Channelling (Azyr or Ghur)"</Description>
+<Generique>"RULES-COMPFOCAL_*"</Generique>
 </Skill>
 </DATA_SKILL_SPECIALIZATION>
 <!-- Deux traits de créature apportés par Lustria et absents du livre de règles

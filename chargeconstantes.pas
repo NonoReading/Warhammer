@@ -135,6 +135,11 @@ Const
       ConstXmlDescription               = 'Description';
       ConstXmlExplanation               = 'Explanation';
       ConstXmlShort                     = 'Short';
+      // Code complet (prefixe de livre inclus) de l'entree generique dont depend une
+      // specialisation de DATA_SKILL_SPECIALIZATION/DATA_TALENT_SPECIALIZATION - remplace
+      // la deduction par radical quand la specialisation vient d'un livre different de sa
+      // generique. Voir CONTEXT.md 2.67.
+      ConstXmlGenerique                 = 'Generique';
       ConstXmlMax                       = 'Max';
       ConstXmlForPdf                    = 'PDF';
       ConstXmlTest                      = 'Test';

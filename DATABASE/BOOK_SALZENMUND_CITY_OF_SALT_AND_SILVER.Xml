@@ -178,6 +178,7 @@
 <DATA_SKILL_SPECIALIZATION>
 <Skill id="RULES-COMPMETIER_SILVERSMITH">
 <Description language="ENGLISH">"Trade (Silversmith)"</Description>
+<Generique>"RULES-COMPMETIER_*"</Generique>
 </Skill>
 </DATA_SKILL_SPECIALIZATION>
 <DATA_SPECIE>

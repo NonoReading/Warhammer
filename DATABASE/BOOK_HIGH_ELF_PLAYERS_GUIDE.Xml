@@ -23,10 +23,12 @@
 <DATA_SKILL_SPECIALIZATION>
 <Skill id="RULES-COMPART_POETRY">
 <Description language="ENGLISH">"Art (Poetry)"</Description>
+<Generique>"RULES-COMPART_*"</Generique>
 </Skill>
   <!-- specialisation nouvelle - Swordmaster niveau 2 -->
 <Skill id="RULES-COMPART_PEINT/RULES-COMPART_SCUL">
 <Description language="ENGLISH">"Art (Painting or Sculpture)"</Description>
+<Generique>"RULES-COMPART_*"</Generique>
 </Skill>
   <!-- declaration combinee - Swordmaster niveaux 1 et 3 -->
 <Skill id="RULES-COMPMARCH/RULES-COMPPARI">
@@ -35,14 +37,17 @@
   <!-- declaration combinee - Merchant Adventurer niveau 2 -->
 <Skill id="RULES-COMPSIGNES_SHADOWWAR">
 <Description language="ENGLISH">"Secret Signs (Shadow Warriors)"</Description>
+<Generique>"RULES-COMPSIGNES_*"</Generique>
 </Skill>
   <!-- specialisation nouvelle - Shadow Warrior niveau 2 -->
 <Skill id="RULES-COMPMETIER_JEWELLER">
 <Description language="ENGLISH">"Trade (Jeweller)"</Description>
+<Generique>"RULES-COMPMETIER_*"</Generique>
 </Skill>
   <!-- specialisation nouvelle - Aestheticist niveau 1 -->
 <Skill id="RULES-COMPFOCAL_QHAYSH">
 <Description language="ENGLISH">"Channelling (Qhaysh)"</Description>
+<Generique>"RULES-COMPFOCAL_*"</Generique>
 </Skill>
   <!-- specialisation nouvelle - p.83, (WP) advanced, unique.
        Requise pour le talent High Magic. Aucune carriere du LOT 1 ne l appelle : elle est
@@ -51,10 +56,12 @@
        d avances en Qhaysh que dans chacun des huit vents de couleur -->
 <Skill id="RULES-COMPART_CALLI/RULES-COMPART_GRAV">
 <Description language="ENGLISH">"Art (Calligraphy or Engraving)"</Description>
+<Generique>"RULES-COMPART_*"</Generique>
 </Skill>
   <!-- declaration combinee - Mage niveau 1 -->
 <Skill id="RULES-COMPFOCAL_BETE/RULES-COMPFOCAL_MORT/RULES-COMPFOCAL_FEU/RULES-COMPFOCAL_CIEUX/RULES-COMPFOCAL_VIE/RULES-COMPFOCAL_LUMIERE/RULES-COMPFOCAL_METAL/RULES-COMPFOCAL_OMBRE">
 <Description language="ENGLISH">"Channelling (Any Colour)"</Description>
+<Generique>"RULES-COMPFOCAL_*"</Generique>
 </Skill>
   <!-- declaration combinee - Mage niveaux 1 et 2. HUIT membres, un par vent de COULEUR,
        dans l ordre ou le livre les enumere (p.83). Le generique RULES-COMPFOCAL_* aurait
@@ -67,22 +74,27 @@
 <DATA_TALENT_SPECIALIZATION>
 <Talent id="RULES-T0132_DELF">
 <Description language="ENGLISH">"Fearless (Dark Elves)"</Description>
+<Generique>"RULES-T0132_*"</Generique>
 </Talent>
   <!-- Shadow Warrior niveau 2 -->
 <Talent id="RULES-T0132_SEAMONSTR">
 <Description language="ENGLISH">"Fearless (Sea Monsters)"</Description>
+<Generique>"RULES-T0132_*"</Generique>
 </Talent>
   <!-- Merchant Adventurer niveau 4 -->
 <Talent id="RULES-T0134_OCEAN">
 <Description language="ENGLISH">"Savant (Oceans)"</Description>
+<Generique>"RULES-T0134_*"</Generique>
 </Talent>
   <!-- Sea Guard niveau 3 -->
 <Talent id="RULES-T0069_DELF">
 <Description language="ENGLISH">"Hatred (Dark Elves)"</Description>
+<Generique>"RULES-T0069_*"</Generique>
 </Talent>
   <!-- talent d espece de Nagarythe. La base avait deja Hatred (High Elves) -->
 <Talent id="RULES-T0134_MAGIE">
 <Description language="ENGLISH">"Savant (Magic)"</Description>
+<Generique>"RULES-T0134_*"</Generique>
 </Talent>
   <!-- Mage niveau 5. Code arbitre par Nono. -->
 </DATA_TALENT_SPECIALIZATION>

@@ -893,738 +893,983 @@ As sailing one ship is not so different to sailing another, having any Sail Spec
 <DATA_SKILL_SPECIALIZATION>
 <Skill id="RULES-COMPART_CALLI">
 <Description language="ENGLISH">"Art (Calligraphy)"</Description>
+<Generique>"RULES-COMPART_*"</Generique>
 </Skill>
 <Skill id="RULES-COMPART_ECR">
 <Description language="ENGLISH">"Art (Writing)"</Description>
+<Generique>"RULES-COMPART_*"</Generique>
 </Skill>
 <Skill id="RULES-COMPART_ICON">
 <Description language="ENGLISH">"Art (Icons)"</Description>
+<Generique>"RULES-COMPART_*"</Generique>
 </Skill>
 <Skill id="RULES-COMPART_CARTO">
 <Description language="ENGLISH">"Art (Cartography)"</Description>
+<Generique>"RULES-COMPART_*"</Generique>
 </Skill>
 <Skill id="RULES-COMPART_GRAV">
 <Description language="ENGLISH">"Art (Engraving)"</Description>
+<Generique>"RULES-COMPART_*"</Generique>
 </Skill>
 <Skill id="RULES-COMPART_MOSAI">
 <Description language="ENGLISH">"Art (Mosaics)"</Description>
+<Generique>"RULES-COMPART_*"</Generique>
 </Skill>
 <Skill id="RULES-COMPART_PEINT">
 <Description language="ENGLISH">"Art (Painting)"</Description>
+<Generique>"RULES-COMPART_*"</Generique>
 </Skill>
 <Skill id="RULES-COMPART_SCUL">
 <Description language="ENGLISH">"Art (Sculpture)"</Description>
+<Generique>"RULES-COMPART_*"</Generique>
 </Skill>
 <Skill id="RULES-COMPART_TATOU">
 <Description language="ENGLISH">"Art (Tattoo)"</Description>
+<Generique>"RULES-COMPART_*"</Generique>
 </Skill>
 <Skill id="RULES-COMPART_TISSA">
 <Description language="ENGLISH">"Art (Weaving)"</Description>
+<Generique>"RULES-COMPART_*"</Generique>
 </Skill>
 <Skill id="RULES-COMPCHEV_CHEVAL">
 <Description language="ENGLISH">"Ride (Horse)"</Description>
+<Generique>"RULES-COMPCHEV_*"</Generique>
 </Skill>
 <Skill id="RULES-COMPCHEV_LOUP">
 <Description language="ENGLISH">"Ride (Great Wolf)"</Description>
+<Generique>"RULES-COMPCHEV_*"</Generique>
 </Skill>
 <Skill id="RULES-COMPCHEV_BADGERS">
 <Description language="ENGLISH">"Ride (Badger)"</Description>
+<Generique>"RULES-COMPCHEV_*"</Generique>
 </Skill>
 <Skill id="RULES-COMPCHEV_GRIFF">
 <Description language="ENGLISH">"Ride (Griffon)"</Description>
+<Generique>"RULES-COMPCHEV_*"</Generique>
 </Skill>
 <Skill id="RULES-COMPCHEV_DEMIG">
 <Description language="ENGLISH">"Ride (Demigryph)"</Description>
+<Generique>"RULES-COMPCHEV_*"</Generique>
 </Skill>
 <Skill id="RULES-COMPCHEV_PEGA">
 <Description language="ENGLISH">"Ride (Pegasus)"</Description>
+<Generique>"RULES-COMPCHEV_*"</Generique>
 </Skill>
 <Skill id="RULES-COMPCOMB_2M">
 <Description language="ENGLISH">"Melee (Two-Handed)"</Description>
+<Generique>"RULES-COMPCOMB_*"</Generique>
 </Skill>
 <Skill id="RULES-COMPCOMB_2M/RULES-COMPCOMB_FLEAU">
 <Description language="ENGLISH">"Melee (Flail or Two Handed)"</Description>
+<Generique>"RULES-COMPCOMB_*"</Generique>
 </Skill>
 <Skill id="RULES-COMPCOMB_BAGAR">
 <Description language="ENGLISH">"Melee (Brawling)"</Description>
+<Generique>"RULES-COMPCOMB_*"</Generique>
 </Skill>
 <Skill id="RULES-COMPCOMB_BASE">
 <Description language="ENGLISH">"Melee (Basic)"</Description>
+<Generique>"RULES-COMPCOMB_*"</Generique>
 </Skill>
 <Skill id="RULES-COMPCOMB_CAVAL">
 <Description language="ENGLISH">"Melee (Cavalry)"</Description>
+<Generique>"RULES-COMPCOMB_*"</Generique>
 </Skill>
 <Skill id="RULES-COMPCOMB_ESCR">
 <Description language="ENGLISH">"Melee (Fencing)"</Description>
+<Generique>"RULES-COMPCOMB_*"</Generique>
 </Skill>
 <Skill id="RULES-COMPCOMB_FLEAU">
 <Description language="ENGLISH">"Melee (Flail)"</Description>
+<Generique>"RULES-COMPCOMB_*"</Generique>
 </Skill>
 <Skill id="RULES-COMPCOMB_HAST">
 <Description language="ENGLISH">"Melee (Polearm)"</Description>
+<Generique>"RULES-COMPCOMB_*"</Generique>
 </Skill>
 <Skill id="RULES-COMPCOMB_PARAD">
 <Description language="ENGLISH">"Melee (Parry)"</Description>
+<Generique>"RULES-COMPCOMB_*"</Generique>
 </Skill>
 <Skill id="RULES-COMPDISC_RURAL">
 <Description language="ENGLISH">"Stealth (Rural)"</Description>
+<Generique>"RULES-COMPDISC_*"</Generique>
 </Skill>
 <Skill id="RULES-COMPDISC_RURAL/RULES-COMPDISC_URB">
 <Description language="ENGLISH">"Stealth (Rural or Urban)"</Description>
+<Generique>"RULES-COMPDISC_*"</Generique>
 </Skill>
 <Skill id="RULES-COMPDISC_SOUTER">
 <Description language="ENGLISH">"Stealth (Underground)"</Description>
+<Generique>"RULES-COMPDISC_*"</Generique>
 </Skill>
 <Skill id="RULES-COMPDISC_URB">
 <Description language="ENGLISH">"Stealth (Urban)"</Description>
+<Generique>"RULES-COMPDISC_*"</Generique>
 </Skill>
 <Skill id="RULES-COMPDISC_URB/RULES-COMPDISC_SOUTER">
 <Description language="ENGLISH">"Stealth (Urban or Underground)"</Description>
+<Generique>"RULES-COMPDISC_*"</Generique>
 </Skill>
 <Skill id="RULES-COMPDIVERT_CHANT">
 <Description language="ENGLISH">"Entertain (Singing)"</Description>
+<Generique>"RULES-COMPDIVERT_*"</Generique>
 </Skill>
 <Skill id="RULES-COMPDIVERT_CONF">
 <Description language="ENGLISH">"Entertain (Lecture)"</Description>
+<Generique>"RULES-COMPDIVERT_*"</Generique>
 </Skill>
 <Skill id="RULES-COMPDIVERT_DISC">
 <Description language="ENGLISH">"Entertain (Speeches)"</Description>
+<Generique>"RULES-COMPDIVERT_*"</Generique>
 </Skill>
 <Skill id="RULES-COMPDIVERT_INTERP">
 <Description language="ENGLISH">"Entertain (Acting)"</Description>
+<Generique>"RULES-COMPDIVERT_*"</Generique>
 </Skill>
 <Skill id="RULES-COMPDIVERT_NARRA">
 <Description language="ENGLISH">"Entertain (Storytelling)"</Description>
+<Generique>"RULES-COMPDIVERT_*"</Generique>
 </Skill>
 <Skill id="RULES-COMPDIVERT_PROPH">
 <Description language="ENGLISH">"Entertain (Prophecy)"</Description>
+<Generique>"RULES-COMPDIVERT_*"</Generique>
 </Skill>
 <Skill id="RULES-COMPDIVERT_RAILL">
 <Description language="ENGLISH">"Entertain (Taunt)"</Description>
+<Generique>"RULES-COMPDIVERT_*"</Generique>
 </Skill>
 <Skill id="RULES-COMPDIVERT_RHETOR">
 <Description language="ENGLISH">"Entertain (Rhetoric)"</Description>
+<Generique>"RULES-COMPDIVERT_*"</Generique>
 </Skill>
 <Skill id="RULES-COMPDIVERT_VOYAN">
 <Description language="ENGLISH">"Entertain (Fortune Telling)"</Description>
+<Generique>"RULES-COMPDIVERT_*"</Generique>
 </Skill>
 <Skill id="RULES-COMPDIVERT_COMME">
 <Description language="ENGLISH">"Entertain (Comedy)"</Description>
+<Generique>"RULES-COMPDIVERT_*"</Generique>
 </Skill>
 <Skill id="RULES-COMPDRESS_CHEVAL">
 <Description language="ENGLISH">"Animal Training (Horse)"</Description>
+<Generique>"RULES-COMPDRESS_*"</Generique>
 </Skill>
 <Skill id="RULES-COMPDRESS_CHIEN">
 <Description language="ENGLISH">"Animal Training (Dog)"</Description>
+<Generique>"RULES-COMPDRESS_*"</Generique>
 </Skill>
 <Skill id="RULES-COMPDRESS_PIGEON">
 <Description language="ENGLISH">"Animal Training (Pigeon)"</Description>
+<Generique>"RULES-COMPDRESS_*"</Generique>
 </Skill>
 <Skill id="RULES-COMPDRESS_DEMIG">
 <Description language="ENGLISH">"Animal Training (Demigryph)"</Description>
+<Generique>"RULES-COMPDRESS_*"</Generique>
 </Skill>
 <Skill id="RULES-COMPDRESS_PEGA">
 <Description language="ENGLISH">"Animal Training (Pegasus)"</Description>
+<Generique>"RULES-COMPDRESS_*"</Generique>
 </Skill>
 <Skill id="RULES-COMPDRESS_BADGERS">
 <Description language="ENGLISH">"Animal Training (Badgers)"</Description>
+<Generique>"RULES-COMPDRESS_*"</Generique>
 </Skill>
 <Skill id="RULES-COMPFOCAL_FEU">
 <Description language="ENGLISH">"Channelling (Aqshy)"</Description>
+<Generique>"RULES-COMPFOCAL_*"</Generique>
 </Skill>
 <Skill id="RULES-COMPFOCAL_CIEUX">
 <Description language="ENGLISH">"Channelling (Azyr)"</Description>
+<Generique>"RULES-COMPFOCAL_*"</Generique>
 </Skill>
 <Skill id="RULES-COMPFOCAL_METAL">
 <Description language="ENGLISH">"Channelling (Chamon)"</Description>
+<Generique>"RULES-COMPFOCAL_*"</Generique>
 </Skill>
 <Skill id="RULES-COMPFOCAL_NECRO">
 <Description language="ENGLISH">"Channelling (Dhar)"</Description>
+<Generique>"RULES-COMPFOCAL_*"</Generique>
 </Skill>
 <Skill id="RULES-COMPFOCAL_BETE">
 <Description language="ENGLISH">"Channelling (Ghur)"</Description>
+<Generique>"RULES-COMPFOCAL_*"</Generique>
 </Skill>
 <Skill id="RULES-COMPFOCAL_VIE">
 <Description language="ENGLISH">"Channelling (Ghyran)"</Description>
+<Generique>"RULES-COMPFOCAL_*"</Generique>
 </Skill>
 <Skill id="RULES-COMPFOCAL_LUMIERE">
 <Description language="ENGLISH">"Channelling (Hysh)"</Description>
+<Generique>"RULES-COMPFOCAL_*"</Generique>
 </Skill>
 <Skill id="RULES-COMPFOCAL_MORT">
 <Description language="ENGLISH">"Channelling (Shyish)"</Description>
+<Generique>"RULES-COMPFOCAL_*"</Generique>
 </Skill>
 <Skill id="RULES-COMPFOCAL_OMBRE">
 <Description language="ENGLISH">"Channelling (Ulgu)"</Description>
+<Generique>"RULES-COMPFOCAL_*"</Generique>
 </Skill>
 <Skill id="RULES-COMPLANG_BATAIL">
 <Description language="ENGLISH">"Language (Battle)"</Description>
+<Generique>"RULES-COMPLANG_*"</Generique>
 </Skill>
 <Skill id="RULES-COMPLANG_BRET">
 <Description language="ENGLISH">"Language (Bretonnian)"</Description>
+<Generique>"RULES-COMPLANG_*"</Generique>
 </Skill>
 <Skill id="RULES-COMPLANG_CLASS">
 <Description language="ENGLISH">"Language (Classical)"</Description>
+<Generique>"RULES-COMPLANG_*"</Generique>
 </Skill>
 <Skill id="RULES-COMPLANG_ELTHA">
 <Description language="ENGLISH">"Language (Eltharin)"</Description>
+<Generique>"RULES-COMPLANG_*"</Generique>
 </Skill>
 <Skill id="RULES-COMPLANG_ESTA">
 <Description language="ENGLISH">"Language (Estalian)"</Description>
+<Generique>"RULES-COMPLANG_*"</Generique>
 </Skill>
 <Skill id="RULES-COMPLANG_ESTA/RULES-COMPLANG_TILE">
 <Description language="ENGLISH">"Language (Estalian or Tilean)"</Description>
+<Generique>"RULES-COMPLANG_*"</Generique>
 </Skill>
 <Skill id="RULES-COMPLANG_GUILD">
 <Description language="ENGLISH">"Language (Guilder)"</Description>
+<Generique>"RULES-COMPLANG_*"</Generique>
 </Skill>
 <Skill id="RULES-COMPLANG_HALF">
 <Description language="ENGLISH">"Language (Halfling)"</Description>
+<Generique>"RULES-COMPLANG_*"</Generique>
 </Skill>
 <Skill id="RULES-COMPLANG_KHAZ">
 <Description language="ENGLISH">"Language (Khazalid)"</Description>
+<Generique>"RULES-COMPLANG_*"</Generique>
 </Skill>
 <Skill id="RULES-COMPLANG_MAG">
 <Description language="ENGLISH">"Language (Magick)"</Description>
+<Generique>"RULES-COMPLANG_*"</Generique>
 </Skill>
 <Skill id="RULES-COMPLANG_TILE">
 <Description language="ENGLISH">"Language (Tilean)"</Description>
+<Generique>"RULES-COMPLANG_*"</Generique>
 </Skill>
 <Skill id="RULES-COMPLANG_VOL">
 <Description language="ENGLISH">"Language (Thief)"</Description>
+<Generique>"RULES-COMPLANG_*"</Generique>
 </Skill>
 <Skill id="RULES-COMPLANG_WEST">
 <Description language="ENGLISH">"Language (Wastelander)"</Description>
+<Generique>"RULES-COMPLANG_*"</Generique>
 </Skill>
 <Skill id="RULES-COMPMETIER_APOTH">
 <Description language="ENGLISH">"Trade (Apothecary)"</Description>
+<Generique>"RULES-COMPMETIER_*"</Generique>
 </Skill>
 <Skill id="RULES-COMPMETIER_ARMU">
 <Description language="ENGLISH">"Trade (Gunsmith)"</Description>
+<Generique>"RULES-COMPMETIER_*"</Generique>
 </Skill>
 <Skill id="RULES-COMPMETIER_BARB">
 <Description language="ENGLISH">"Trade (Barber)"</Description>
+<Generique>"RULES-COMPMETIER_*"</Generique>
 </Skill>
 <Skill id="RULES-COMPMETIER_BATEA">
 <Description language="ENGLISH">"Trade (Boatbuilding)"</Description>
+<Generique>"RULES-COMPMETIER_*"</Generique>
 </Skill>
 <Skill id="RULES-COMPMETIER_BRAS">
 <Description language="ENGLISH">"Trade (Brewer)"</Description>
+<Generique>"RULES-COMPMETIER_*"</Generique>
 </Skill>
 <Skill id="RULES-COMPMETIER_BRICO">
 <Description language="ENGLISH">"Trade (Tinker)"</Description>
+<Generique>"RULES-COMPMETIER_*"</Generique>
 </Skill>
 <Skill id="RULES-COMPMETIER_CARTO">
 <Description language="ENGLISH">"Trade (Cartographer)"</Description>
+<Generique>"RULES-COMPMETIER_*"</Generique>
 </Skill>
 <Skill id="RULES-COMPMETIER_CHARP">
 <Description language="ENGLISH">"Trade (Carpenter)"</Description>
+<Generique>"RULES-COMPMETIER_*"</Generique>
 </Skill>
 <Skill id="RULES-COMPMETIER_COLIF">
 <Description language="ENGLISH">"Trade (Charms)"</Description>
+<Generique>"RULES-COMPMETIER_*"</Generique>
 </Skill>
 <Skill id="RULES-COMPMETIER_CUIS">
 <Description language="ENGLISH">"Trade (Cook)"</Description>
+<Generique>"RULES-COMPMETIER_*"</Generique>
 </Skill>
 <Skill id="RULES-COMPMETIER_EMPOI">
 <Description language="ENGLISH">"Trade (Poisoner)"</Description>
+<Generique>"RULES-COMPMETIER_*"</Generique>
 </Skill>
 <Skill id="RULES-COMPMETIER_POIS">
 <Description language="ENGLISH">"Trade (Poisons)"</Description>
+<Generique>"RULES-COMPMETIER_*"</Generique>
 </Skill>
 <Skill id="RULES-COMPMETIER_EXPL">
 <Description language="ENGLISH">"Trade (Explosives)"</Description>
+<Generique>"RULES-COMPMETIER_*"</Generique>
 </Skill>
 <Skill id="RULES-COMPMETIER_GRAV">
 <Description language="ENGLISH">"Trade (Engraver)"</Description>
+<Generique>"RULES-COMPMETIER_*"</Generique>
 </Skill>
 <Skill id="RULES-COMPMETIER_HERB">
 <Description language="ENGLISH">"Trade (Herbalist)"</Description>
+<Generique>"RULES-COMPMETIER_*"</Generique>
 </Skill>
 <Skill id="RULES-COMPMETIER_IMPR">
 <Description language="ENGLISH">"Trade (Printing)"</Description>
+<Generique>"RULES-COMPMETIER_*"</Generique>
 </Skill>
 <Skill id="RULES-COMPMETIER_ING">
 <Description language="ENGLISH">"Trade (Engineer)"</Description>
+<Generique>"RULES-COMPMETIER_*"</Generique>
 </Skill>
 <Skill id="RULES-COMPMETIER_MATART">
 <Description language="ENGLISH">"Trade (Art Supplies)"</Description>
+<Generique>"RULES-COMPMETIER_*"</Generique>
 </Skill>
 <Skill id="RULES-COMPMETIER_MFERR">
 <Description language="ENGLISH">"Trade (Farrier)"</Description>
+<Generique>"RULES-COMPMETIER_*"</Generique>
 </Skill>
 <Skill id="RULES-COMPMETIER_VIGN">
 <Description language="ENGLISH">"Trade (Vintner)"</Description>
+<Generique>"RULES-COMPMETIER_*"</Generique>
 </Skill>
 <Skill id="RULES-COMPMETIER_CALLI">
 <Description language="ENGLISH">"Trade (Calligrapher)"</Description>
+<Generique>"RULES-COMPMETIER_*"</Generique>
 </Skill>
 <Skill id="RULES-COMPMETIER_CIRIE">
 <Description language="ENGLISH">"Trade (Chandler)"</Description>
+<Generique>"RULES-COMPMETIER_*"</Generique>
 </Skill>
 <Skill id="RULES-COMPMETIER_EMBAU">
 <Description language="ENGLISH">"Trade (Embalmer)"</Description>
+<Generique>"RULES-COMPMETIER_*"</Generique>
 </Skill>
 <Skill id="RULES-COMPMETIER_FORGE">
 <Description language="ENGLISH">"Trade (Blacksmith)"</Description>
+<Generique>"RULES-COMPMETIER_*"</Generique>
 </Skill>
 <Skill id="RULES-COMPMETIER_TANNE">
 <Description language="ENGLISH">"Trade (Tanner)"</Description>
+<Generique>"RULES-COMPMETIER_*"</Generique>
 </Skill>
 <Skill id="RULES-COMPMUSIC_FIFR">
 <Description language="ENGLISH">"Play (Fife)"</Description>
+<Generique>"RULES-COMPMUSIC_*"</Generique>
 </Skill>
 <Skill id="RULES-COMPMUSIC_TAMB">
 <Description language="ENGLISH">"Play (Drum)"</Description>
+<Generique>"RULES-COMPMUSIC_*"</Generique>
 </Skill>
 <Skill id="RULES-COMPMUSIC_TAMB/RULES-COMPMUSIC_FIFR">
 <Description language="ENGLISH">"Play (Drum or Fife)"</Description>
+<Generique>"RULES-COMPMUSIC_*"</Generique>
 </Skill>
 <Skill id="RULES-COMPMUSIC_CLAVE">
 <Description language="ENGLISH">"Play (Harpsichord)"</Description>
+<Generique>"RULES-COMPMUSIC_*"</Generique>
 </Skill>
 <Skill id="RULES-COMPMUSIC_COR">
 <Description language="ENGLISH">"Play (Horn)"</Description>
+<Generique>"RULES-COMPMUSIC_*"</Generique>
 </Skill>
 <Skill id="RULES-COMPMUSIC_CRNE">
 <Description language="ENGLISH">"Play (Bagpipe)"</Description>
+<Generique>"RULES-COMPMUSIC_*"</Generique>
 </Skill>
 <Skill id="RULES-COMPMUSIC_LUTH">
 <Description language="ENGLISH">"Play (Lute)"</Description>
+<Generique>"RULES-COMPMUSIC_*"</Generique>
 </Skill>
 <Skill id="RULES-COMPMUSIC_VIOL">
 <Description language="ENGLISH">"Play (Violin)"</Description>
+<Generique>"RULES-COMPMUSIC_*"</Generique>
 </Skill>
 <Skill id="RULES-COMPPROJ_ARB">
 <Description language="ENGLISH">"Ranged (Crossbow)"</Description>
+<Generique>"RULES-COMPPROJ_*"</Generique>
 </Skill>
 <Skill id="RULES-COMPPROJ_ARBPG">
 <Description language="ENGLISH">"Ranged (Crossbow Pistol)"</Description>
+<Generique>"RULES-COMPPROJ_*"</Generique>
 </Skill>
 <Skill id="RULES-COMPPROJ_ARC">
 <Description language="ENGLISH">"Ranged (Bow)"</Description>
+<Generique>"RULES-COMPPROJ_*"</Generique>
 </Skill>
 <Skill id="RULES-COMPPROJ_ENTRAV">
 <Description language="ENGLISH">"Ranged (Entangling)"</Description>
+<Generique>"RULES-COMPPROJ_*"</Generique>
 </Skill>
 <Skill id="RULES-COMPPROJ_FROND">
 <Description language="ENGLISH">"Ranged (Sling)"</Description>
+<Generique>"RULES-COMPPROJ_*"</Generique>
 </Skill>
 <Skill id="RULES-COMPPROJ_ING">
 <Description language="ENGLISH">"Ranged (Engineering)"</Description>
+<Generique>"RULES-COMPPROJ_*"</Generique>
 </Skill>
 <Skill id="RULES-COMPPROJ_LANC">
 <Description language="ENGLISH">"Ranged (Throwing)"</Description>
+<Generique>"RULES-COMPPROJ_*"</Generique>
 </Skill>
 <Skill id="RULES-COMPPROJ_POUDRE">
 <Description language="ENGLISH">"Ranged (Blackpowder)"</Description>
+<Generique>"RULES-COMPPROJ_*"</Generique>
 </Skill>
 <Skill id="RULES-COMPPROJ_EXPLO">
 <Description language="ENGLISH">"Ranged (Explosives)"</Description>
+<Generique>"RULES-COMPPROJ_*"</Generique>
 </Skill>
 <Skill id="RULES-COMPPROJ_POUDRE/RULES-COMPPROJ_ING">
 <Description language="ENGLISH">"Ranged (Blackpowder or Engineering)"</Description>
+<Generique>"RULES-COMPPROJ_*"</Generique>
 </Skill>
 <Skill id="RULES-COMPREPRES_ACROB">
 <Description language="ENGLISH">"Perform (Acrobatics)"</Description>
+<Generique>"RULES-COMPREPRES_*"</Generique>
 </Skill>
 <Skill id="RULES-COMPREPRES_COMB">
 <Description language="ENGLISH">"Perform (Fight)"</Description>
+<Generique>"RULES-COMPREPRES_*"</Generique>
 </Skill>
 <Skill id="RULES-COMPREPRES_DANS">
 <Description language="ENGLISH">"Perform (Dancing)"</Description>
+<Generique>"RULES-COMPREPRES_*"</Generique>
 </Skill>
 <Skill id="RULES-COMPREPRES_CFEU">
 <Description language="ENGLISH">"Perform (Firebreathing)"</Description>
+<Generique>"RULES-COMPREPRES_*"</Generique>
 </Skill>
 <Skill id="RULES-COMPREPRES_FUNAN">
 <Description language="ENGLISH">"Perform (Rope Walking)"</Description>
+<Generique>"RULES-COMPREPRES_*"</Generique>
 </Skill>
 <Skill id="RULES-COMPREPRES_JONGL">
 <Description language="ENGLISH">"Perform (Juggling)"</Description>
+<Generique>"RULES-COMPREPRES_*"</Generique>
 </Skill>
 <Skill id="RULES-COMPREPRES_MIME">
 <Description language="ENGLISH">"Perform (Miming)"</Description>
+<Generique>"RULES-COMPREPRES_*"</Generique>
 </Skill>
 <Skill id="RULES-COMPREPRES_PITRE">
 <Description language="ENGLISH">"Perform (Clowning)"</Description>
+<Generique>"RULES-COMPREPRES_*"</Generique>
 </Skill>
 <Skill id="RULES-COMPSAVOIR_ANAT">
 <Description language="ENGLISH">"Lore (Anatomy)"</Description>
+<Generique>"RULES-COMPSAVOIR_*"</Generique>
 </Skill>
 <Skill id="RULES-COMPSAVOIR_ART">
 <Description language="ENGLISH">"Lore (Art)"</Description>
+<Generique>"RULES-COMPSAVOIR_*"</Generique>
 </Skill>
 <Skill id="RULES-COMPSAVOIR_ASTRO">
 <Description language="ENGLISH">"Lore (Astrology)"</Description>
+<Generique>"RULES-COMPSAVOIR_*"</Generique>
 </Skill>
 <Skill id="RULES-COMPSAVOIR_BETE">
 <Description language="ENGLISH">"Lore (Beasts)"</Description>
+<Generique>"RULES-COMPSAVOIR_*"</Generique>
 </Skill>
 <Skill id="RULES-COMPSAVOIR_CHAOS">
 <Description language="ENGLISH">"Lore (Chaos)"</Description>
+<Generique>"RULES-COMPSAVOIR_*"</Generique>
 </Skill>
 <Skill id="RULES-COMPSAVOIR_CHIM">
 <Description language="ENGLISH">"Lore (Chemistry)"</Description>
+<Generique>"RULES-COMPSAVOIR_*"</Generique>
 </Skill>
 <Skill id="RULES-COMPSAVOIR_DEMO">
 <Description language="ENGLISH">"Lore (Daemonology)"</Description>
+<Generique>"RULES-COMPSAVOIR_*"</Generique>
 </Skill>
 <Skill id="RULES-COMPSAVOIR_DRAG">
 <Description language="ENGLISH">"Lore (Dragons)"</Description>
+<Generique>"RULES-COMPSAVOIR_*"</Generique>
 </Skill>
 <Skill id="RULES-COMPSAVOIR_EMPIRE">
 <Description language="ENGLISH">"Lore (Empire)"</Description>
+<Generique>"RULES-COMPSAVOIR_*"</Generique>
 </Skill>
 <Skill id="RULES-COMPSAVOIR_EPAVE">
 <Description language="ENGLISH">"Lore (Wrecks)"</Description>
+<Generique>"RULES-COMPSAVOIR_*"</Generique>
 </Skill>
 <Skill id="RULES-COMPSAVOIR_ESPR">
 <Description language="ENGLISH">"Lore (Spirits)"</Description>
+<Generique>"RULES-COMPSAVOIR_*"</Generique>
 </Skill>
 <Skill id="RULES-COMPSAVOIR_FOLK">
 <Description language="ENGLISH">"Lore (Folklore)"</Description>
+<Generique>"RULES-COMPSAVOIR_*"</Generique>
 </Skill>
 <Skill id="RULES-COMPSAVOIR_GEAN">
 <Description language="ENGLISH">"Lore (Giants)"</Description>
+<Generique>"RULES-COMPSAVOIR_*"</Generique>
 </Skill>
 <Skill id="RULES-COMPSAVOIR_GENE">
 <Description language="ENGLISH">"Lore (Genealogy)"</Description>
+<Generique>"RULES-COMPSAVOIR_*"</Generique>
 </Skill>
 <Skill id="RULES-COMPSAVOIR_GEOG">
 <Description language="ENGLISH">"Lore (Geography)"</Description>
+<Generique>"RULES-COMPSAVOIR_*"</Generique>
 </Skill>
 <Skill id="RULES-COMPSAVOIR_GEOL">
 <Description language="ENGLISH">"Lore (Geology)"</Description>
+<Generique>"RULES-COMPSAVOIR_*"</Generique>
 </Skill>
 <Skill id="RULES-COMPSAVOIR_GUERRE">
 <Description language="ENGLISH">"Lore (Warfare)"</Description>
+<Generique>"RULES-COMPSAVOIR_*"</Generique>
 </Skill>
 <Skill id="RULES-COMPSAVOIR_HERAL">
 <Description language="ENGLISH">"Lore (Heraldry)"</Description>
+<Generique>"RULES-COMPSAVOIR_*"</Generique>
 </Skill>
 <Skill id="RULES-COMPSAVOIR_HERB">
 <Description language="ENGLISH">"Lore (Herbs)"</Description>
+<Generique>"RULES-COMPSAVOIR_*"</Generique>
 </Skill>
 <Skill id="RULES-COMPSAVOIR_HIST">
 <Description language="ENGLISH">"Lore (History)"</Description>
+<Generique>"RULES-COMPSAVOIR_*"</Generique>
 </Skill>
 <Skill id="RULES-COMPSAVOIR_ING">
 <Description language="ENGLISH">"Lore (Engineering)"</Description>
+<Generique>"RULES-COMPSAVOIR_*"</Generique>
 </Skill>
 <Skill id="RULES-COMPSAVOIR_INIT">
 <Description language="ENGLISH">"Lore (Routes)"</Description>
+<Generique>"RULES-COMPSAVOIR_*"</Generique>
 </Skill>
 <Skill id="RULES-COMPSAVOIR_LOI">
 <Description language="ENGLISH">"Lore (Law)"</Description>
+<Generique>"RULES-COMPSAVOIR_*"</Generique>
 </Skill>
 <Skill id="RULES-COMPSAVOIR_MAGIE">
 <Description language="ENGLISH">"Lore (Magic)"</Description>
+<Generique>"RULES-COMPSAVOIR_*"</Generique>
 </Skill>
 <Skill id="RULES-COMPSAVOIR_MAGNOIR">
 <Description language="ENGLISH">"Lore (Dark Magic)"</Description>
+<Generique>"RULES-COMPSAVOIR_*"</Generique>
 </Skill>
 <Skill id="RULES-COMPSAVOIR_METAL">
 <Description language="ENGLISH">"Lore (Metallurgy)"</Description>
+<Generique>"RULES-COMPSAVOIR_*"</Generique>
 </Skill>
 <Skill id="RULES-COMPSAVOIR_NAIN">
 <Description language="ENGLISH">"Lore (Dwarfs)"</Description>
+<Generique>"RULES-COMPSAVOIR_*"</Generique>
 </Skill>
 <Skill id="RULES-COMPSAVOIR_NOBL">
 <Description language="ENGLISH">"Lore (Noble)"</Description>
+<Generique>"RULES-COMPSAVOIR_*"</Generique>
 </Skill>
 <Skill id="RULES-COMPSAVOIR_PLANT">
 <Description language="ENGLISH">"Lore (Plants)"</Description>
+<Generique>"RULES-COMPSAVOIR_*"</Generique>
 </Skill>
 <Skill id="RULES-COMPSAVOIR_POIS">
 <Description language="ENGLISH">"Lore (Poison)"</Description>
+<Generique>"RULES-COMPSAVOIR_*"</Generique>
 </Skill>
 <Skill id="RULES-COMPSAVOIR_POLIT">
 <Description language="ENGLISH">"Lore (Politics)"</Description>
+<Generique>"RULES-COMPSAVOIR_*"</Generique>
 </Skill>
 <Skill id="RULES-COMPSAVOIR_PROPH">
 <Description language="ENGLISH">"Lore (Prophecy)"</Description>
+<Generique>"RULES-COMPSAVOIR_*"</Generique>
 </Skill>
 <Skill id="RULES-COMPSAVOIR_SAVVIV">
 <Description language="ENGLISH">"Lore (Etiquette)"</Description>
+<Generique>"RULES-COMPSAVOIR_*"</Generique>
 </Skill>
 <Skill id="RULES-COMPSAVOIR_SCIENC">
 <Description language="ENGLISH">"Lore (Science)"</Description>
+<Generique>"RULES-COMPSAVOIR_*"</Generique>
 </Skill>
 <Skill id="RULES-COMPSAVOIR_SIGMAR">
 <Description language="ENGLISH">"Lore (Sigmar)"</Description>
+<Generique>"RULES-COMPSAVOIR_*"</Generique>
 </Skill>
 <Skill id="RULES-COMPSAVOIR_SORC">
 <Description language="ENGLISH">"Lore (Witches)"</Description>
+<Generique>"RULES-COMPSAVOIR_*"</Generique>
 </Skill>
 <Skill id="RULES-COMPSAVOIR_TAXE">
 <Description language="ENGLISH">"Lore (Taxes)"</Description>
+<Generique>"RULES-COMPSAVOIR_*"</Generique>
 </Skill>
 <Skill id="RULES-COMPSAVOIR_THEO">
 <Description language="ENGLISH">"Lore (Theology)"</Description>
+<Generique>"RULES-COMPSAVOIR_*"</Generique>
 </Skill>
 <Skill id="RULES-COMPSAVOIR_TZEENTCH">
 <Description language="ENGLISH">"Lore (Tzeentch)"</Description>
+<Generique>"RULES-COMPSAVOIR_*"</Generique>
 </Skill>
 <Skill id="RULES-COMPSAVOIR_TORTU">
 <Description language="ENGLISH">"Lore (Torture)"</Description>
+<Generique>"RULES-COMPSAVOIR_*"</Generique>
 </Skill>
 <Skill id="RULES-COMPSAVOIR_TROLL">
 <Description language="ENGLISH">"Lore (Trolls)"</Description>
+<Generique>"RULES-COMPSAVOIR_*"</Generique>
 </Skill>
 <Skill id="RULES-COMPSAVOIR_VFLUV">
 <Description language="ENGLISH">"Lore (Riverways)"</Description>
+<Generique>"RULES-COMPSAVOIR_*"</Generique>
 </Skill>
 <Skill id="RULES-COMPSIGNES_CHASS">
 <Description language="ENGLISH">"Secret Signs (Hunter)"</Description>
+<Generique>"RULES-COMPSIGNES_*"</Generique>
 </Skill>
 <Skill id="RULES-COMPSIGNES_CONTREB">
 <Description language="ENGLISH">"Secret Signs (Smuggler)"</Description>
+<Generique>"RULES-COMPSIGNES_*"</Generique>
 </Skill>
 <Skill id="RULES-COMPSIGNES_GUILD">
 <Description language="ENGLISH">"Secret Signs (Guilder)"</Description>
+<Generique>"RULES-COMPSIGNES_*"</Generique>
 </Skill>
 <Skill id="RULES-COMPSIGNES_MINE">
 <Description language="ENGLISH">"Secret Signs (Miner)"</Description>
+<Generique>"RULES-COMPSIGNES_*"</Generique>
 </Skill>
 <Skill id="RULES-COMPSIGNES_ORDCHEVAL">
 <Description language="ENGLISH">"Secret Signs (Knightly Order)"</Description>
+<Generique>"RULES-COMPSIGNES_*"</Generique>
 </Skill>
 <Skill id="RULES-COMPSIGNES_VAGAB">
 <Description language="ENGLISH">"Secret Signs (Vagabond)"</Description>
+<Generique>"RULES-COMPSIGNES_*"</Generique>
 </Skill>
 <Skill id="RULES-COMPSIGNES_VOL">
 <Description language="ENGLISH">"Secret Signs (Thief)"</Description>
+<Generique>"RULES-COMPSIGNES_*"</Generique>
 </Skill>
 <Skill id="RULES-COMPSIGNES_AMBER">
 <Description language="ENGLISH">"Secret Signs (Amber Order)"</Description>
+<Generique>"RULES-COMPSIGNES_*"</Generique>
 </Skill>
 <Skill id="RULES-COMPSIGNES_GRIS">
 <Description language="ENGLISH">"Secret Signs (Grey Order)"</Description>
+<Generique>"RULES-COMPSIGNES_*"</Generique>
 </Skill>
 <Skill id="RULES-COMPSIGNES_RURAUX">
 <Description language="ENGLISH">"Secret Signs (Rural)"</Description>
+<Generique>"RULES-COMPSIGNES_*"</Generique>
 </Skill>
 <Skill id="RULES-COMPSIGNES_ECLAI">
 <Description language="ENGLISH">"Secret Signs (Pathfinders)"</Description>
+<Generique>"RULES-COMPSIGNES_*"</Generique>
 </Skill>
 <Skill id="RULES-COMPMETIER_BOWYER">
 <Description language="ENGLISH">"Trade (Bowyer)"</Description>
+<Generique>"RULES-COMPMETIER_*"</Generique>
 </Skill>
 <Skill id="RULES-COMPSIGNES_RANGER">
 <Description language="ENGLISH">"Secret Signs (Ranger)"</Description>
+<Generique>"RULES-COMPSIGNES_*"</Generique>
 </Skill>
 <Skill id="RULES-COMPSAVOIR_MOOT">
 <Description language="ENGLISH">"Lore (Moot)"</Description>
+<Generique>"RULES-COMPSAVOIR_*"</Generique>
 </Skill>
 <Skill id="RULES-COMPSIGNES_SCOUT">
 <Description language="ENGLISH">"Secret Signs (Scout)"</Description>
+<Generique>"RULES-COMPSIGNES_*"</Generique>
 </Skill>
 <Skill id="RULES-COMPSAVOIR_NECROMANCY">
 <Description language="ENGLISH">"Lore (Necromancy)"</Description>
+<Generique>"RULES-COMPSAVOIR_*"</Generique>
 </Skill>
 <Skill id="RULES-COMPSIGNES_RANGER/RULES-COMPSIGNES_SCOUT">
 <Description language="ENGLISH">"Secret Signs (Scout or Ranger)"</Description>
+<Generique>"RULES-COMPSIGNES_*"</Generique>
 </Skill>
 <Skill id="RULES-COMPLANG_GRUMBARTH">
 <Description language="ENGLISH">"Language (Grumbarth)"</Description>
+<Generique>"RULES-COMPLANG_*"</Generique>
 </Skill>
 <Skill id="RULES-COMPSAVOIR_OGRE">
 <Description language="ENGLISH">"Lore (Ogres)"</Description>
+<Generique>"RULES-COMPSAVOIR_*"</Generique>
 </Skill>
 <Skill id="RULES-COMPDIVERT_BELLOW">
 <Description language="ENGLISH">"Entertain (Bellow)"</Description>
+<Generique>"RULES-COMPDIVERT_*"</Generique>
 </Skill>
 <Skill id="RULES-COMPDRESS_RHINOX">
 <Description language="ENGLISH">"Animal Training (Rhinox)"</Description>
+<Generique>"RULES-COMPDRESS_*"</Generique>
 </Skill>
 <Skill id="RULES-COMPSAVOIR_RHINOX">
 <Description language="ENGLISH">"Lore (Rhinox)"</Description>
+<Generique>"RULES-COMPSAVOIR_*"</Generique>
 </Skill>
 <Skill id="RULES-COMPCHEV_RHINOX">
 <Description language="ENGLISH">"Ride (Rhinox)"</Description>
+<Generique>"RULES-COMPCHEV_*"</Generique>
 </Skill>
 <Skill id="RULES-COMPMETIER_BUTCHER">
 <Description language="ENGLISH">"Trade (Butcher)"</Description>
+<Generique>"RULES-COMPMETIER_*"</Generique>
 </Skill>
 <Skill id="RULES-COMPART_BUTCHER">
 <Description language="ENGLISH">"Art (Butchery)"</Description>
+<Generique>"RULES-COMPART_*"</Generique>
 </Skill>
 <Skill id="RULES-COMPFOCAL_MAW">
 <Description language="ENGLISH">"Channelling (Lore of the Great Maw)"</Description>
+<Generique>"RULES-COMPFOCAL_*"</Generique>
 </Skill>
 <Skill id="RULES-COMPSAVOIR_MAW">
 <Description language="ENGLISH">"Lore (The Great Maw)"</Description>
+<Generique>"RULES-COMPSAVOIR_*"</Generique>
 </Skill>
 <Skill id="RULES-COMPSIGNES_MAW">
 <Description language="ENGLISH">"Secret Signs (The Great Maw)"</Description>
+<Generique>"RULES-COMPSIGNES_*"</Generique>
 </Skill>
 <Skill id="RULES-COMPSIGNES_CULTIST">
 <Description language="ENGLISH">"Secret Signs (Cultist)"</Description>
+<Generique>"RULES-COMPSIGNES_*"</Generique>
 </Skill>
 <Skill id="RULES-COMPSIGNES_TZEENTCH">
 <Description language="ENGLISH">"Secret Signs (Tzeentch)"</Description>
+<Generique>"RULES-COMPSIGNES_*"</Generique>
 </Skill>
 <Skill id="RULES-COMPLANG_DARKTOUNGE">
 <Description language="ENGLISH">"Language (Dark Tongue)"</Description>
+<Generique>"RULES-COMPLANG_*"</Generique>
 </Skill>
 <Skill id="RULES-COMPSAVOIR_GREENSKIN">
 <Description language="ENGLISH">"Lore (Greenskins)"</Description>
+<Generique>"RULES-COMPSAVOIR_*"</Generique>
 </Skill>
 <Skill id="RULES-COMPLANG_GOBLIN">
 <Description language="ENGLISH">"Language (Goblin Tongue)"</Description>
+<Generique>"RULES-COMPLANG_*"</Generique>
 </Skill>
 <Skill id="RULES-COMPSIGNES_CONVENTSORC">
 <Description language="ENGLISH">"Secret Signs (Convent of Sorceresses)"</Description>
+<Generique>"RULES-COMPSIGNES_*"</Generique>
 </Skill>
 <Skill id="RULES-COMPCHEV_COLDONE">
 <Description language="ENGLISH">"Ride (Cold One)"</Description>
+<Generique>"RULES-COMPCHEV_*"</Generique>
 </Skill>
 <Skill id="RULES-COMPCHEV_DPEGASE">
 <Description language="ENGLISH">"Ride (Dark Pegasus)"</Description>
+<Generique>"RULES-COMPCHEV_*"</Generique>
 </Skill>
 <Skill id="RULES-COMPFOCAL_KHAINITE">
 <Description language="ENGLISH">"Channelling (Khainite Sorcery)"</Description>
+<Generique>"RULES-COMPFOCAL_*"</Generique>
 </Skill>
 <Skill id="RULES-COMPSIGNES_KHAINE">
 <Description language="ENGLISH">"Secret Signs (Cult of Khaine)"</Description>
+<Generique>"RULES-COMPSIGNES_*"</Generique>
 </Skill>
 <Skill id="RULES-COMPREPRES_TORTURE">
 <Description language="ENGLISH">"Perform (Torture)"</Description>
+<Generique>"RULES-COMPREPRES_*"</Generique>
 </Skill>
 <Skill id="RULES-COMPSAVOIR_ULRIC">
 <Description language="ENGLISH">"Lore (Ulric)"</Description>
+<Generique>"RULES-COMPSAVOIR_*"</Generique>
 </Skill>
 <Skill id="RULES-COMPSAVOIR_MIDDENHEIM">
 <Description language="ENGLISH">"Lore (Middenheim)"</Description>
+<Generique>"RULES-COMPSAVOIR_*"</Generique>
 </Skill>
 <Skill id="RULES-COMPSAVOIR_MIDDENLAND">
 <Description language="ENGLISH">"Lore (Middenland)"</Description>
+<Generique>"RULES-COMPSAVOIR_*"</Generique>
 </Skill>
 <Skill id="RULES-COMPSAVOIR_NORDLAND">
 <Description language="ENGLISH">"Lore (Nordland)"</Description>
+<Generique>"RULES-COMPSAVOIR_*"</Generique>
 </Skill>
 <Skill id="RULES-COMPLANG_NORSE">
 <Description language="ENGLISH">"Language (Norse)"</Description>
+<Generique>"RULES-COMPLANG_*"</Generique>
 </Skill>
 <Skill id="RULES-COMPLANG_GHASSALLY">
 <Description language="ENGLISH">"Language (Ghassally)"</Description>
+<Generique>"RULES-COMPLANG_*"</Generique>
 </Skill>
 <Skill id="RULES-COMPSAVOIR_ROADWAY">
 <Description language="ENGLISH">"Lore (Roadways)"</Description>
+<Generique>"RULES-COMPSAVOIR_*"</Generique>
 </Skill>
 <Skill id="RULES-COMPSAVOIR_OCEAN">
 <Description language="ENGLISH">"Lore (Oceans)"</Description>
+<Generique>"RULES-COMPSAVOIR_*"</Generique>
 </Skill>
 <Skill id="RULES-COMPSAVOIR_COASTTIDES">
 <Description language="ENGLISH">"Lore (Coasts and Tides)"</Description>
+<Generique>"RULES-COMPSAVOIR_*"</Generique>
 </Skill>
 <Skill id="RULES-COMPMUSIC_PENNYW">
 <Description language="ENGLISH">"Play (Pennywhistle)"</Description>
+<Generique>"RULES-COMPMUSIC_*"</Generique>
 </Skill>
 <Skill id="RULES-COMPSAVOIR_MANANN">
 <Description language="ENGLISH">"Lore (Manann)"</Description>
+<Generique>"RULES-COMPSAVOIR_*"</Generique>
 </Skill>
 <Skill id="RULES-COMPSAVOIR_STROMFELS">
 <Description language="ENGLISH">"Lore (Stromfels)"</Description>
+<Generique>"RULES-COMPSAVOIR_*"</Generique>
 </Skill>
 <Skill id="RULES-COMPLANG_ARABY">
 <Description language="ENGLISH">"Language (Arabyan)"</Description>
+<Generique>"RULES-COMPLANG_*"</Generique>
 </Skill>
 <Skill id="RULES-COMPLANG_REIK">
 <Description language="ENGLISH">"Language (Reikspiel)"</Description>
+<Generique>"RULES-COMPLANG_*"</Generique>
 </Skill>
 <Skill id="RULES-COMPSAVOIR_TILEA">
 <Description language="ENGLISH">"Lore (Tilea)"</Description>
+<Generique>"RULES-COMPSAVOIR_*"</Generique>
 </Skill>
 <Skill id="RULES-COMPMETIER_FLECHE">
 <Description language="ENGLISH">"Trade (Fletcher)"</Description>
+<Generique>"RULES-COMPMETIER_*"</Generique>
 </Skill>
 <Skill id="RULES-COMPREPRES_PARAD">
 <Description language="ENGLISH">"Perform (Parade)"</Description>
+<Generique>"RULES-COMPREPRES_*"</Generique>
 </Skill>
 <Skill id="RULES-COMPMUSIC_FLUTE">
 <Description language="ENGLISH">"Play (Flute)"</Description>
+<Generique>"RULES-COMPMUSIC_*"</Generique>
 </Skill>
 <Skill id="RULES-COMPPROJ_CATAPULT">
 <Description language="ENGLISH">"Ranged (Catapult)"</Description>
+<Generique>"RULES-COMPPROJ_*"</Generique>
 </Skill>
 <Skill id="RULES-COMPPROJ_ARB/RULES-COMPPROJ_ING/RULES-COMPPROJ_POUDRE/RULES-COMPPROJ_CATAPULT">
 <Description language="ENGLISH">"Ranged (Blackpowder, Catapult, Crossbow or Engineering)"</Description>
+<Generique>"RULES-COMPPROJ_*"</Generique>
 </Skill>
 <Skill id="RULES-COMPSAVOIR_ARTILLERY">
 <Description language="ENGLISH">"Lore (Artillery)"</Description>
+<Generique>"RULES-COMPSAVOIR_*"</Generique>
 </Skill>
 <Skill id="RULES-COMPSIGNES_BLAZING">
 <Description language="ENGLISH">"Secret Signs (Blazing Sun)"</Description>
+<Generique>"RULES-COMPSIGNES_*"</Generique>
 </Skill>
 <Skill id="RULES-COMPSIGNES_ULRIC">
 <Description language="ENGLISH">"Secret Signs (Ulric)"</Description>
+<Generique>"RULES-COMPSIGNES_*"</Generique>
 </Skill>
 <Skill id="RULES-COMPSIGNES_PANTHER">
 <Description language="ENGLISH">"Secret Signs (Knights Panther)"</Description>
+<Generique>"RULES-COMPSIGNES_*"</Generique>
 </Skill>
 <Skill id="RULES-COMPSAVOIR_HERAL/RULES-COMPSAVOIR_LOI">
 <Description language="ENGLISH">"Lore (Law or Heraldry)"</Description>
+<Generique>"RULES-COMPSAVOIR_*"</Generique>
 </Skill>
 <Skill id="RULES-COMPMETIER_MINNER">
 <Description language="ENGLISH">"Trade (Miner)"</Description>
+<Generique>"RULES-COMPMETIER_*"</Generique>
 </Skill>
 <Skill id="RULES-COMPMETIER_WEAPONSMITH">
 <Description language="ENGLISH">"Trade (Weaponsmith)"</Description>
+<Generique>"RULES-COMPMETIER_*"</Generique>
 </Skill>
 <Skill id="RULES-COMPMETIER_ARMOURER">
 <Description language="ENGLISH">"Trade (Armourer)"</Description>
+<Generique>"RULES-COMPMETIER_*"</Generique>
 </Skill>
 <Skill id="RULES-COMPMETIER_WEAPONSMITH/RULES-COMPMETIER_ARMOURER">
 <Description language="ENGLISH">"Trade (Weaponsmith or Armourer)"</Description>
+<Generique>"RULES-COMPMETIER_*"</Generique>
 </Skill>
 <Skill id="RULES-COMPSAVOIR_ASTRONOMY">
 <Description language="ENGLISH">"Lore (Astronomy)"</Description>
+<Generique>"RULES-COMPSAVOIR_*"</Generique>
 </Skill>
 <Skill id="RULES-COMPSAVOIR_UNDEAD">
 <Description language="ENGLISH">"Lore (Undead)"</Description>
+<Generique>"RULES-COMPSAVOIR_*"</Generique>
 </Skill>
 <Skill id="RULES-COMPMETIER_ALCHEMIST">
 <Description language="ENGLISH">"Trade (Alchemist)"</Description>
+<Generique>"RULES-COMPMETIER_*"</Generique>
 </Skill>
 <Skill id="RULES-COMPSAVOIR_MEDICINE">
 <Description language="ENGLISH">"Lore (Medicine)"</Description>
+<Generique>"RULES-COMPSAVOIR_*"</Generique>
 </Skill>
 <Skill id="RULES-COMPSAVOIR_LOCAL">
 <Description language="ENGLISH">"Lore (Local)"</Description>
+<Generique>"RULES-COMPSAVOIR_*"</Generique>
 </Skill>
 <Skill id="RULES-COMPSAVOIR_NEHEKHARA">
 <Description language="ENGLISH">"Lore (Nehekhara)"</Description>
+<Generique>"RULES-COMPSAVOIR_*"</Generique>
 </Skill>
 <Skill id="RULES-COMPMETIER_FORGE/RULES-COMPMETIER_GOLDSMITH/RULES-COMPMETIER_ING">
 <Description language="ENGLISH">"Trade (Blacksmith, Goldsmith, or Engineer)"</Description>
+<Generique>"RULES-COMPMETIER_*"</Generique>
 </Skill>
 <Skill id="RULES-COMPMETIER_GOLDSMITH">
 <Description language="ENGLISH">"Trade (Goldsmith)"</Description>
+<Generique>"RULES-COMPMETIER_*"</Generique>
 </Skill>
 <Skill id="RULES-COMPSAVOIR_VONCARSTEIN">
 <Description language="ENGLISH">"Lore (Von Carstein)"</Description>
+<Generique>"RULES-COMPSAVOIR_*"</Generique>
 </Skill>
 <Skill id="RULES-COMPSAVOIR_LAHMIAN">
 <Description language="ENGLISH">"Lore (Lahmian Sisterhood)"</Description>
+<Generique>"RULES-COMPSAVOIR_*"</Generique>
 </Skill>
 <Skill id="RULES-COMPSAVOIR_BLOODDRAGON">
 <Description language="ENGLISH">"Lore (Blood Dragon)"</Description>
+<Generique>"RULES-COMPSAVOIR_*"</Generique>
 </Skill>
 <Skill id="RULES-COMPLANG_NEHEKRARAN">
 <Description language="ENGLISH">"Language (Nehekharan)"</Description>
+<Generique>"RULES-COMPLANG_*"</Generique>
 </Skill>
 <Skill id="RULES-COMPSAVOIR_NECRARCH">
 <Description language="ENGLISH">"Lore (Necrarch)"</Description>
+<Generique>"RULES-COMPSAVOIR_*"</Generique>
 </Skill>
 <Skill id="RULES-COMPMETIER_EMBAU/RULES-COMPMETIER_APOTH">
 <Description language="ENGLISH">"Trade (Apothecary or Embalmer)"</Description>
+<Generique>"RULES-COMPMETIER_*"</Generique>
 </Skill>
 <Skill id="RULES-COMPSAVOIR_STROIGOI">
 <Description language="ENGLISH">"Lore (Strigoi)"</Description>
+<Generique>"RULES-COMPSAVOIR_*"</Generique>
 </Skill>
 <Skill id="RULES-COMPSAVOIR_VAMPIRE">
 <Description language="ENGLISH">"Lore (Vampires)"</Description>
+<Generique>"RULES-COMPSAVOIR_*"</Generique>
 </Skill>
 </DATA_SKILL_SPECIALIZATION>
 <DATA_TALENT>
@@ -3595,69 +3840,91 @@ See page 190 for Fear rules"</Explanation>
 <DATA_TALENT_SPECIALIZATION>
 <Talent id="RULES-T0012_HANDRICH">
 <Description language="ENGLISH">"Bless (Handrich)"</Description>
+<Generique>"RULES-T0012_*"</Generique>
 </Talent>
 <Talent id="RULES-T0012_MANANN">
 <Description language="ENGLISH">"Bless (Manann)"</Description>
+<Generique>"RULES-T0012_*"</Generique>
 </Talent>
 <Talent id="RULES-T0012_MORR">
 <Description language="ENGLISH">"Bless (Morr)"</Description>
+<Generique>"RULES-T0012_*"</Generique>
 </Talent>
 <Talent id="RULES-T0012_MYRMIDIA">
 <Description language="ENGLISH">"Bless (Myrmidia)"</Description>
+<Generique>"RULES-T0012_*"</Generique>
 </Talent>
 <Talent id="RULES-T0012_RANALD">
 <Description language="ENGLISH">"Bless (Ranald)"</Description>
+<Generique>"RULES-T0012_*"</Generique>
 </Talent>
 <Talent id="RULES-T0012_RHYA">
 <Description language="ENGLISH">"Bless (Rhya)"</Description>
+<Generique>"RULES-T0012_*"</Generique>
 </Talent>
 <Talent id="RULES-T0012_SHALLYA">
 <Description language="ENGLISH">"Bless (Shallya)"</Description>
+<Generique>"RULES-T0012_*"</Generique>
 </Talent>
 <Talent id="RULES-T0012_SIGMAR">
 <Description language="ENGLISH">"Bless (Sigmar)"</Description>
+<Generique>"RULES-T0012_*"</Generique>
 </Talent>
 <Talent id="RULES-T0012_SOLKAN">
 <Description language="ENGLISH">"Bless (Solkan)"</Description>
+<Generique>"RULES-T0012_*"</Generique>
 </Talent>
 <Talent id="RULES-T0012_STROMFELS">
 <Description language="ENGLISH">"Bless (Stromfels)"</Description>
+<Generique>"RULES-T0012_*"</Generique>
 </Talent>
 <Talent id="RULES-T0012_TAAL">
 <Description language="ENGLISH">"Bless (Taal)"</Description>
+<Generique>"RULES-T0012_*"</Generique>
 </Talent>
 <Talent id="RULES-T0012_ULRIC">
 <Description language="ENGLISH">"Bless (Ulric)"</Description>
+<Generique>"RULES-T0012_*"</Generique>
 </Talent>
 <Talent id="RULES-T0012_VERENA">
 <Description language="ENGLISH">"Bless (Verena)"</Description>
+<Generique>"RULES-T0012_*"</Generique>
 </Talent>
 <Talent id="RULES-T0013_BOID">
 <Description language="ENGLISH">"Strider (Woodlands)"</Description>
+<Generique>"RULES-T0013_*"</Generique>
 </Talent>
 <Talent id="RULES-T0013_COASTAL">
 <Description language="ENGLISH">"Strider (Coastal)"</Description>
+<Generique>"RULES-T0013_*"</Generique>
 </Talent>
 <Talent id="RULES-T0013_DES">
 <Description language="ENGLISH">"Strider (Deserts)"</Description>
+<Generique>"RULES-T0013_*"</Generique>
 </Talent>
 <Talent id="RULES-T0013_FORESTS">
 <Description language="ENGLISH">"Strider (Forests)"</Description>
+<Generique>"RULES-T0013_*"</Generique>
 </Talent>
 <Talent id="RULES-T0013_LIT">
 <Description language="ENGLISH">"Strider (Littoral)"</Description>
+<Generique>"RULES-T0013_*"</Generique>
 </Talent>
 <Talent id="RULES-T0013_MAR">
 <Description language="ENGLISH">"Strider (Swamps)"</Description>
+<Generique>"RULES-T0013_*"</Generique>
 </Talent>
 <Talent id="RULES-T0013_MOUNTAINS">
 <Description language="ENGLISH">"Strider (Mountains)"</Description>
+<Generique>"RULES-T0013_*"</Generique>
 </Talent>
 <Talent id="RULES-T0013_ROC">
 <Description language="ENGLISH">"Strider (Rocky)"</Description>
+<Generique>"RULES-T0013_*"</Generique>
 </Talent>
 <Talent id="RULES-T0013_TOUN">
 <Description language="ENGLISH">"Strider (Tundra)"</Description>
+<Generique>"RULES-T0013_*"</Generique>
 </Talent>
 <Talent id="RULES-T0024/RULES-T0105">
 <Description language="ENGLISH">"Crack the Whip or Rover"</Description>
@@ -3667,102 +3934,135 @@ See page 190 for Fear rules"</Explanation>
 </Talent>
 <Talent id="RULES-T0134_DWARFHOLD">
 <Description language="ENGLISH">"Savant (Dwarf Holds and Routes)"</Description>
+<Generique>"RULES-T0134_*"</Generique>
 </Talent>
 <Talent id="RULES-T0134_MOOT">
 <Description language="ENGLISH">"Savant (Moot terrain)"</Description>
+<Generique>"RULES-T0134_*"</Generique>
 </Talent>
 <Talent id="RULES-T0069_BAND">
 <Description language="ENGLISH">"Hatred (Outlaw)"</Description>
+<Generique>"RULES-T0069_*"</Generique>
 </Talent>
 <Talent id="RULES-T0069_CHAOS">
 <Description language="ENGLISH">"Hatred (Chaos)"</Description>
+<Generique>"RULES-T0069_*"</Generique>
 </Talent>
 <Talent id="RULES-T0069_DWARF">
 <Description language="ENGLISH">"Hatred (Dwarfs)"</Description>
+<Generique>"RULES-T0069_*"</Generique>
 </Talent>
 <Talent id="RULES-T0069_HBETE">
 <Description language="ENGLISH">"Hatred (Beastmen)"</Description>
+<Generique>"RULES-T0069_*"</Generique>
 </Talent>
 <Talent id="RULES-T0069_HELF">
 <Description language="ENGLISH">"Hatred (High Elves)"</Description>
+<Generique>"RULES-T0069_*"</Generique>
 </Talent>
 <Talent id="RULES-T0069_HERET">
 <Description language="ENGLISH">"Hatred (Heretics)"</Description>
+<Generique>"RULES-T0069_*"</Generique>
 </Talent>
 <Talent id="RULES-T0069_MANANN">
 <Description language="ENGLISH">"Hatred (Manannites)"</Description>
+<Generique>"RULES-T0069_*"</Generique>
 </Talent>
 <Talent id="RULES-T0069_MANANN/RULES-T0069_CHAOS">
 <Description language="ENGLISH">"Hatred (Manannites or Followers of Chaos)"</Description>
+<Generique>"RULES-T0069_*"</Generique>
 </Talent>
 <Talent id="RULES-T0069_MONSTR">
 <Description language="ENGLISH">"Hatred (Monsters)"</Description>
+<Generique>"RULES-T0069_*"</Generique>
 </Talent>
 <Talent id="RULES-T0069_MVIVAN">
 <Description language="ENGLISH">"Hatred (Undead)"</Description>
+<Generique>"RULES-T0069_*"</Generique>
 </Talent>
 <Talent id="RULES-T0069_PVERTE">
 <Description language="ENGLISH">"Hatred (Greenskins)"</Description>
+<Generique>"RULES-T0069_*"</Generique>
 </Talent>
 <Talent id="RULES-T0069_SDISSI">
 <Description language="ENGLISH">"Hatred (Dissident Wizards)"</Description>
+<Generique>"RULES-T0069_*"</Generique>
 </Talent>
 <Talent id="RULES-T0069_SIGMAR">
 <Description language="ENGLISH">"Hatred (Sigmarites)"</Description>
+<Generique>"RULES-T0069_*"</Generique>
 </Talent>
 <Talent id="RULES-T0069_STROMFELS">
 <Description language="ENGLISH">"Hatred (Followers of Stromfels)"</Description>
+<Generique>"RULES-T0069_*"</Generique>
 </Talent>
 <Talent id="RULES-T0080_HANDRICH">
 <Description language="ENGLISH">"Invoke (Handrich)"</Description>
+<Generique>"RULES-T0080_*"</Generique>
 </Talent>
 <Talent id="RULES-T0080_MANANN">
 <Description language="ENGLISH">"Invoke (Manann)"</Description>
+<Generique>"RULES-T0080_*"</Generique>
 </Talent>
 <Talent id="RULES-T0080_MORR">
 <Description language="ENGLISH">"Invoke (Morr)"</Description>
+<Generique>"RULES-T0080_*"</Generique>
 </Talent>
 <Talent id="RULES-T0080_MYRMIDIA">
 <Description language="ENGLISH">"Invoke (Myrmidia)"</Description>
+<Generique>"RULES-T0080_*"</Generique>
 </Talent>
 <Talent id="RULES-T0080_RANALD">
 <Description language="ENGLISH">"Invoke (Ranald)"</Description>
+<Generique>"RULES-T0080_*"</Generique>
 </Talent>
 <Talent id="RULES-T0080_RHYA">
 <Description language="ENGLISH">"Invoke (Rhya)"</Description>
+<Generique>"RULES-T0080_*"</Generique>
 </Talent>
 <Talent id="RULES-T0080_SHALLYA">
 <Description language="ENGLISH">"Invoke (Shallya)"</Description>
+<Generique>"RULES-T0080_*"</Generique>
 </Talent>
 <Talent id="RULES-T0080_SIGMAR">
 <Description language="ENGLISH">"Invoke (Sigmar)"</Description>
+<Generique>"RULES-T0080_*"</Generique>
 </Talent>
 <Talent id="RULES-T0080_SOLKAN">
 <Description language="ENGLISH">"Invoke (Solkan)"</Description>
+<Generique>"RULES-T0080_*"</Generique>
 </Talent>
 <Talent id="RULES-T0080_STROMFELS">
 <Description language="ENGLISH">"Invoke (Stromfels)"</Description>
+<Generique>"RULES-T0080_*"</Generique>
 </Talent>
 <Talent id="RULES-T0080_TAAL">
 <Description language="ENGLISH">"Invoke (Taal)"</Description>
+<Generique>"RULES-T0080_*"</Generique>
 </Talent>
 <Talent id="RULES-T0080_ULRIC">
 <Description language="ENGLISH">"Invoke (Ulric)"</Description>
+<Generique>"RULES-T0080_*"</Generique>
 </Talent>
 <Talent id="RULES-T0080_VERENA">
 <Description language="ENGLISH">"Invoke (Verena)"</Description>
+<Generique>"RULES-T0080_*"</Generique>
 </Talent>
 <Talent id="RULES-T0088_BETE">
 <Description language="ENGLISH">"Arcane Magic (Beast)"</Description>
+<Generique>"RULES-T0088_*"</Generique>
 </Talent>
 <Talent id="RULES-T0088_CIEUX">
 <Description language="ENGLISH">"Arcane Magic (Heavens)"</Description>
+<Generique>"RULES-T0088_*"</Generique>
 </Talent>
 <Talent id="RULES-T0088_DEMON">
 <Description language="ENGLISH">"Arcane Magic (Daemonology)"</Description>
+<Generique>"RULES-T0088_*"</Generique>
 </Talent>
 <Talent id="RULES-T0088_FEU">
 <Description language="ENGLISH">"Arcane Magic (Fire)"</Description>
+<Generique>"RULES-T0088_*"</Generique>
 </Talent>
 <Talent id="RULES-T0088_DARK">
 <Description language="ENGLISH">"Arcane Magic (Dark Magic)"</Description>
@@ -3771,123 +4071,163 @@ See page 190 for Fear rules"</Explanation>
        en anglais dans le fichier francais, comme le fait deja RULES-T0088_KHAINE juste apres :
        les libelles francais sont geles, et l'identifiant doit exister des deux cotes pour que
        les deux fichiers Rulebook declarent le meme jeu d'identifiants. -->
+<Generique>"RULES-T0088_*"</Generique>
 </Talent>
 <Talent id="RULES-T0088_KHAINE">
 <Description language="ENGLISH">"Arcane Magic (Khainite Sorcery)"</Description>
+<Generique>"RULES-T0088_*"</Generique>
 </Talent>
 <Talent id="RULES-T0088_LUMIERE">
 <Description language="ENGLISH">"Arcane Magic (Light)"</Description>
+<Generique>"RULES-T0088_*"</Generique>
 </Talent>
 <Talent id="RULES-T0088_MAGIE">
 <Description language="ENGLISH">"Arcane Magic (Hedgecraft)"</Description>
+<Generique>"RULES-T0088_*"</Generique>
 </Talent>
 <Talent id="RULES-T0088_MAW">
 <Description language="ENGLISH">"Arcane Magic (Lore of the Great Maw)"</Description>
+<Generique>"RULES-T0088_*"</Generique>
 </Talent>
 <Talent id="RULES-T0088_METAL">
 <Description language="ENGLISH">"Arcane Magic (Metal)"</Description>
+<Generique>"RULES-T0088_*"</Generique>
 </Talent>
 <Talent id="RULES-T0088_MORT">
 <Description language="ENGLISH">"Arcane Magic (Death)"</Description>
+<Generique>"RULES-T0088_*"</Generique>
 </Talent>
 <Talent id="RULES-T0088_NECRO">
 <Description language="ENGLISH">"Arcane Magic (Necromancy)"</Description>
+<Generique>"RULES-T0088_*"</Generique>
 </Talent>
 <Talent id="RULES-T0088_OMBRE">
 <Description language="ENGLISH">"Arcane Magic (Shadow)"</Description>
+<Generique>"RULES-T0088_*"</Generique>
 </Talent>
 <Talent id="RULES-T0088_SORCEL">
 <Description language="ENGLISH">"Arcane Magic (Witchcraft)"</Description>
+<Generique>"RULES-T0088_*"</Generique>
 </Talent>
 <Talent id="RULES-T0088_TZEENTCH">
 <Description language="ENGLISH">"Arcane Magic (Tzeentch)"</Description>
+<Generique>"RULES-T0088_*"</Generique>
 </Talent>
 <Talent id="RULES-T0088_VIE">
 <Description language="ENGLISH">"Arcane Magic (Life)"</Description>
+<Generique>"RULES-T0088_*"</Generique>
 </Talent>
 <Talent id="RULES-T0092_ALCHEMIST">
 <Description language="ENGLISH">"Craftsman (Alchemist)"</Description>
+<Generique>"RULES-T0092_*"</Generique>
 </Talent>
 <Talent id="RULES-T0092_APOTH">
 <Description language="ENGLISH">"Craftsman (Apothecary)"</Description>
+<Generique>"RULES-T0092_*"</Generique>
 </Talent>
 <Talent id="RULES-T0092_ARMU">
 <Description language="ENGLISH">"Craftsman (Gunsmith)"</Description>
+<Generique>"RULES-T0092_*"</Generique>
 </Talent>
 <Talent id="RULES-T0092_BARB">
 <Description language="ENGLISH">"Craftsman (Barber)"</Description>
+<Generique>"RULES-T0092_*"</Generique>
 </Talent>
 <Talent id="RULES-T0092_BATEA">
 <Description language="ENGLISH">"Craftsman (Boatbuilding)"</Description>
+<Generique>"RULES-T0092_*"</Generique>
 </Talent>
 <Talent id="RULES-T0092_BRAS">
 <Description language="ENGLISH">"Craftsman (Brewer)"</Description>
+<Generique>"RULES-T0092_*"</Generique>
 </Talent>
 <Talent id="RULES-T0092_BRICO">
 <Description language="ENGLISH">"Craftsman (Tinker)"</Description>
+<Generique>"RULES-T0092_*"</Generique>
 </Talent>
 <Talent id="RULES-T0092_CALLI">
 <Description language="ENGLISH">"Craftsman (Calligrapher)"</Description>
+<Generique>"RULES-T0092_*"</Generique>
 </Talent>
 <Talent id="RULES-T0092_CARTO">
 <Description language="ENGLISH">"Craftsman (Cartographer)"</Description>
+<Generique>"RULES-T0092_*"</Generique>
 </Talent>
 <Talent id="RULES-T0092_CHARP">
 <Description language="ENGLISH">"Craftsman (Carpenter)"</Description>
+<Generique>"RULES-T0092_*"</Generique>
 </Talent>
 <Talent id="RULES-T0092_CIRIE">
 <Description language="ENGLISH">"Craftsman (Chandler)"</Description>
+<Generique>"RULES-T0092_*"</Generique>
 </Talent>
 <Talent id="RULES-T0092_COLIF">
 <Description language="ENGLISH">"Craftsman (Charms)"</Description>
+<Generique>"RULES-T0092_*"</Generique>
 </Talent>
 <Talent id="RULES-T0092_CUIS">
 <Description language="ENGLISH">"Craftsman (Cook)"</Description>
+<Generique>"RULES-T0092_*"</Generique>
 </Talent>
 <Talent id="RULES-T0092_EMBAU">
 <Description language="ENGLISH">"Craftsman (Embalmer)"</Description>
+<Generique>"RULES-T0092_*"</Generique>
 </Talent>
 <Talent id="RULES-T0092_EMPOI">
 <Description language="ENGLISH">"Craftsman (Poisoner)"</Description>
+<Generique>"RULES-T0092_*"</Generique>
 </Talent>
 <Talent id="RULES-T0092_EXPLO">
 <Description language="ENGLISH">"Craftsman (Explosives)"</Description>
+<Generique>"RULES-T0092_*"</Generique>
 </Talent>
 <Talent id="RULES-T0092_FORGE">
 <Description language="ENGLISH">"Craftsman (Blacksmith)"</Description>
+<Generique>"RULES-T0092_*"</Generique>
 </Talent>
 <Talent id="RULES-T0092_FORGE/RULES-T0092_GOLDSMITH/RULES-T0092_INGE">
 <Description language="ENGLISH">"Craftsman (Blacksmith, Goldsmith, or Engineer)"</Description>
+<Generique>"RULES-T0092_*"</Generique>
 </Talent>
 <Talent id="RULES-T0092_GOLDSMITH">
 <Description language="ENGLISH">"Craftsman (Goldsmith)"</Description>
+<Generique>"RULES-T0092_*"</Generique>
 </Talent>
 <Talent id="RULES-T0092_GRAV">
 <Description language="ENGLISH">"Craftsman (Engraver)"</Description>
+<Generique>"RULES-T0092_*"</Generique>
 </Talent>
 <Talent id="RULES-T0092_HERBO">
 <Description language="ENGLISH">"Craftsman (Herbalist)"</Description>
+<Generique>"RULES-T0092_*"</Generique>
 </Talent>
 <Talent id="RULES-T0092_IMPR">
 <Description language="ENGLISH">"Craftsman (Printing)"</Description>
+<Generique>"RULES-T0092_*"</Generique>
 </Talent>
 <Talent id="RULES-T0092_INGE">
 <Description language="ENGLISH">"Craftsman (Engineer)"</Description>
+<Generique>"RULES-T0092_*"</Generique>
 </Talent>
 <Talent id="RULES-T0092_MATART">
 <Description language="ENGLISH">"Craftsman (Art Supplies)"</Description>
+<Generique>"RULES-T0092_*"</Generique>
 </Talent>
 <Talent id="RULES-T0092_MFERR">
 <Description language="ENGLISH">"Craftsman (Farrier)"</Description>
+<Generique>"RULES-T0092_*"</Generique>
 </Talent>
 <Talent id="RULES-T0092_POIS">
 <Description language="ENGLISH">"Craftsman (Poisons)"</Description>
+<Generique>"RULES-T0092_*"</Generique>
 </Talent>
 <Talent id="RULES-T0092_TANNE">
 <Description language="ENGLISH">"Craftsman (Tanner)"</Description>
+<Generique>"RULES-T0092_*"</Generique>
 </Talent>
 <Talent id="RULES-T0092_VIGN">
 <Description language="ENGLISH">"Craftsman (Vintner)"</Description>
+<Generique>"RULES-T0092_*"</Generique>
 </Talent>
 <Talent id="RULES-T0096/RULES-T0121">
 <Description language="ENGLISH">"Dual Wielder or Shieldsman"</Description>
@@ -3900,293 +4240,387 @@ See page 190 for Fear rules"</Explanation>
 </Talent>
 <Talent id="RULES-T0129_CHAOS">
 <Description language="ENGLISH">"Resistance (Chaos)"</Description>
+<Generique>"RULES-T0129_*"</Generique>
 </Talent>
 <Talent id="RULES-T0129_CORR">
 <Description language="ENGLISH">"Resistance (Corruption)"</Description>
+<Generique>"RULES-T0129_*"</Generique>
 </Talent>
 <Talent id="RULES-T0129_INGESTED">
 <Description language="ENGLISH">"Resistance (Poison Ingested)"</Description>
+<Generique>"RULES-T0129_*"</Generique>
 </Talent>
 <Talent id="RULES-T0129_MAGI">
 <Description language="ENGLISH">"Resistance (Magic)"</Description>
+<Generique>"RULES-T0129_*"</Generique>
 </Talent>
 <Talent id="RULES-T0129_MALA">
 <Description language="ENGLISH">"Resistance (Disease)"</Description>
+<Generique>"RULES-T0129_*"</Generique>
 </Talent>
 <Talent id="RULES-T0129_MALA/RULES-T0129_POIS">
 <Description language="ENGLISH">"Resistance (Poison or Disease)"</Description>
+<Generique>"RULES-T0129_*"</Generique>
 </Talent>
 <Talent id="RULES-T0129_MUTA">
 <Description language="ENGLISH">"Resistance (Mutation)"</Description>
+<Generique>"RULES-T0129_*"</Generique>
 </Talent>
 <Talent id="RULES-T0129_POIS">
 <Description language="ENGLISH">"Resistance (Poison)"</Description>
+<Generique>"RULES-T0129_*"</Generique>
 </Talent>
 <Talent id="RULES-T0131/RULES-T0077">
 <Description language="ENGLISH">"Robust or Strong Back"</Description>
 </Talent>
 <Talent id="RULES-T0132_ANIM">
 <Description language="ENGLISH">"Fearless (Animals)"</Description>
+<Generique>"RULES-T0132_*"</Generique>
 </Talent>
 <Talent id="RULES-T0132_BAND">
 <Description language="ENGLISH">"Fearless (Outlaw)"</Description>
+<Generique>"RULES-T0132_*"</Generique>
 </Talent>
 <Talent id="RULES-T0132_CAVALRY">
 <Description language="ENGLISH">"Fearless (Cavalry)"</Description>
+<Generique>"RULES-T0132_*"</Generique>
 </Talent>
 <Talent id="RULES-T0132_CHAOS">
 <Description language="ENGLISH">"Fearless (Chaos)"</Description>
+<Generique>"RULES-T0132_*"</Generique>
 </Talent>
 <Talent id="RULES-T0132_CRIM">
 <Description language="ENGLISH">"Fearless (Criminals)"</Description>
+<Generique>"RULES-T0132_*"</Generique>
 </Talent>
 <Talent id="RULES-T0132_HERET">
 <Description language="ENGLISH">"Fearless (Heretics)"</Description>
+<Generique>"RULES-T0132_*"</Generique>
 </Talent>
 <Talent id="RULES-T0132_HOMBET">
 <Description language="ENGLISH">"Fearless (Beastmen)"</Description>
+<Generique>"RULES-T0132_*"</Generique>
 </Talent>
 <Talent id="RULES-T0132_INTRU">
 <Description language="ENGLISH">"Fearless (Intruder)"</Description>
+<Generique>"RULES-T0132_*"</Generique>
 </Talent>
 <Talent id="RULES-T0132_LARGEBEAST">
 <Description language="ENGLISH">"Fearless (Large Beasts)"</Description>
+<Generique>"RULES-T0132_*"</Generique>
 </Talent>
 <Talent id="RULES-T0132_LARGER">
 <Description language="ENGLISH">"Fearless (Larger)"</Description>
+<Generique>"RULES-T0132_*"</Generique>
 </Talent>
 <Talent id="RULES-T0132_MAGICUSER">
 <Description language="ENGLISH">"Fearless (Magic Users)"</Description>
+<Generique>"RULES-T0132_*"</Generique>
 </Talent>
 <Talent id="RULES-T0132_MILIC">
 <Description language="ENGLISH">"Fearless (Militia)"</Description>
+<Generique>"RULES-T0132_*"</Generique>
 </Talent>
 <Talent id="RULES-T0132_MONSTR">
 <Description language="ENGLISH">"Fearless (Monsters)"</Description>
+<Generique>"RULES-T0132_*"</Generique>
 </Talent>
 <Talent id="RULES-T0132_MVIV">
 <Description language="ENGLISH">"Fearless (Undead)"</Description>
+<Generique>"RULES-T0132_*"</Generique>
 </Talent>
 <Talent id="RULES-T0132_NAUF">
 <Description language="ENGLISH">"Fearless (Wreckers)"</Description>
+<Generique>"RULES-T0132_*"</Generique>
 </Talent>
 <Talent id="RULES-T0132_PATFLU">
 <Description language="ENGLISH">"Fearless (River Patrollers)"</Description>
+<Generique>"RULES-T0132_*"</Generique>
 </Talent>
 <Talent id="RULES-T0132_PATROU">
 <Description language="ENGLISH">"Fearless (Road Patrols)"</Description>
+<Generique>"RULES-T0132_*"</Generique>
 </Talent>
 <Talent id="RULES-T0132_PRIM">
 <Description language="ENGLISH">"Fearless (Bounties)"</Description>
+<Generique>"RULES-T0132_*"</Generique>
 </Talent>
 <Talent id="RULES-T0132_RATS">
 <Description language="ENGLISH">"Fearless (Rats)"</Description>
+<Generique>"RULES-T0132_*"</Generique>
 </Talent>
 <Talent id="RULES-T0132_ROADWARDENS">
 <Description language="ENGLISH">"Fearless (Road Wardens)"</Description>
+<Generique>"RULES-T0132_*"</Generique>
 </Talent>
 <Talent id="RULES-T0132_SKAV">
 <Description language="ENGLISH">"Fearless (Skaven)"</Description>
+<Generique>"RULES-T0132_*"</Generique>
 </Talent>
 <Talent id="RULES-T0132_SMALLER">
 <Description language="ENGLISH">"Fearless (Smaller)"</Description>
+<Generique>"RULES-T0132_*"</Generique>
 </Talent>
 <Talent id="RULES-T0132_SORC">
 <Description language="ENGLISH">"Fearless (Witches)"</Description>
+<Generique>"RULES-T0132_*"</Generique>
 </Talent>
 <Talent id="RULES-T0132_TOUT">
 <Description language="ENGLISH">"Fearless (Everything)"</Description>
+<Generique>"RULES-T0132_*"</Generique>
 </Talent>
 <Talent id="RULES-T0134_ALCHEMIST">
 <Description language="ENGLISH">"Savant (Alchemy)"</Description>
+<Generique>"RULES-T0134_*"</Generique>
 </Talent>
 <Talent id="RULES-T0134_APOTH">
 <Description language="ENGLISH">"Savant (Apothecary)"</Description>
+<Generique>"RULES-T0134_*"</Generique>
 </Talent>
 <Talent id="RULES-T0134_COASTAL">
 <Description language="ENGLISH">"Savant (Coasts and Tides)"</Description>
+<Generique>"RULES-T0134_*"</Generique>
 </Talent>
 <Talent id="RULES-T0134_FLUV">
 <Description language="ENGLISH">"Savant (Waterways)"</Description>
+<Generique>"RULES-T0134_*"</Generique>
 </Talent>
 <Talent id="RULES-T0134_HERB">
 <Description language="ENGLISH">"Savant (Herbs)"</Description>
+<Generique>"RULES-T0134_*"</Generique>
 </Talent>
 <Talent id="RULES-T0134_INGE">
 <Description language="ENGLISH">"Savant (Engineering)"</Description>
+<Generique>"RULES-T0134_*"</Generique>
 </Talent>
 <Talent id="RULES-T0134_LOI">
 <Description language="ENGLISH">"Savant (Law)"</Description>
+<Generique>"RULES-T0134_*"</Generique>
 </Talent>
 <Talent id="RULES-T0134_MEDE">
 <Description language="ENGLISH">"Savant (Medicine)"</Description>
+<Generique>"RULES-T0134_*"</Generique>
 </Talent>
 <Talent id="RULES-T0134_REG">
 <Description language="ENGLISH">"Savant (Region)"</Description>
+<Generique>"RULES-T0134_*"</Generique>
 </Talent>
 <Talent id="RULES-T0134_THEO">
 <Description language="ENGLISH">"Savant (Theology)"</Description>
+<Generique>"RULES-T0134_*"</Generique>
 </Talent>
 <Talent id="RULES-T0134_TZEENTCH">
 <Description language="ENGLISH">"Savant (Tzeentch)"</Description>
+<Generique>"RULES-T0134_*"</Generique>
 </Talent>
 <Talent id="RULES-T0136_*/RULES-T0077">
 <Description language="ENGLISH">"Etiquette (Any) or Strong Back"</Description>
+<Generique>"RULES-T0136_*"</Generique>
 </Talent>
 <Talent id="RULES-T0136_BEASTMEN">
 <Description language="ENGLISH">"Etiquette (Beastmen)"</Description>
+<Generique>"RULES-T0136_*"</Generique>
 </Talent>
 <Talent id="RULES-T0136_CREW">
 <Description language="ENGLISH">"Etiquette (Crew)"</Description>
+<Generique>"RULES-T0136_*"</Generique>
 </Talent>
 <Talent id="RULES-T0136_CRIM">
 <Description language="ENGLISH">"Etiquette (Criminals)"</Description>
+<Generique>"RULES-T0136_*"</Generique>
 </Talent>
 <Talent id="RULES-T0136_CULTIST">
 <Description language="ENGLISH">"Etiquette (Cultists)"</Description>
+<Generique>"RULES-T0136_*"</Generique>
 </Talent>
 <Talent id="RULES-T0136_EMP">
 <Description language="ENGLISH">"Etiquette (Erudite)"</Description>
+<Generique>"RULES-T0136_*"</Generique>
 </Talent>
 <Talent id="RULES-T0136_ERUD">
 <Description language="ENGLISH">"Etiquette (Scholars)"</Description>
+<Generique>"RULES-T0136_*"</Generique>
 </Talent>
 <Talent id="RULES-T0136_FIDEL">
 <Description language="ENGLISH">"Etiquette (Faithful)"</Description>
+<Generique>"RULES-T0136_*"</Generique>
 </Talent>
 <Talent id="RULES-T0136_GUILD">
 <Description language="ENGLISH">"Etiquette (Guilder)"</Description>
+<Generique>"RULES-T0136_*"</Generique>
 </Talent>
 <Talent id="RULES-T0136_MERC">
 <Description language="ENGLISH">"Etiquette (Mercenaries)"</Description>
+<Generique>"RULES-T0136_*"</Generique>
 </Talent>
 <Talent id="RULES-T0136_NOBLE">
 <Description language="ENGLISH">"Etiquette (Nobles)"</Description>
+<Generique>"RULES-T0136_*"</Generique>
 </Talent>
 <Talent id="RULES-T0136_SERV">
 <Description language="ENGLISH">"Etiquette (Servants)"</Description>
+<Generique>"RULES-T0136_*"</Generique>
 </Talent>
 <Talent id="RULES-T0136_SLIMS">
 <Description language="ENGLISH">"Etiquette (Slims)"</Description>
+<Generique>"RULES-T0136_*"</Generique>
 </Talent>
 <Talent id="RULES-T0136_SOLD">
 <Description language="ENGLISH">"Etiquette (Soldiers)"</Description>
+<Generique>"RULES-T0136_*"</Generique>
 </Talent>
 <Talent id="RULES-T0139_GOUT">
 <Description language="ENGLISH">"Acute Sense (Taste)"</Description>
+<Generique>"RULES-T0139_*"</Generique>
 </Talent>
 <Talent id="RULES-T0139_GOUT/RULES-T0139_VUE">
 <Description language="ENGLISH">"Acute Sense (Taste or Touch)"</Description>
+<Generique>"RULES-T0139_*"</Generique>
 </Talent>
 <Talent id="RULES-T0139_ODORA">
 <Description language="ENGLISH">"Acute Sense (Smell)"</Description>
+<Generique>"RULES-T0139_*"</Generique>
 </Talent>
 <Talent id="RULES-T0139_OUIE">
 <Description language="ENGLISH">"Acute Sense (Hearing)"</Description>
+<Generique>"RULES-T0139_*"</Generique>
 </Talent>
 <Talent id="RULES-T0139_TOUCH">
 <Description language="ENGLISH">"Acute Sense (Touch)"</Description>
+<Generique>"RULES-T0139_*"</Generique>
 </Talent>
 <Talent id="RULES-T0139_VUE">
 <Description language="ENGLISH">"Acute Sense (Sight)"</Description>
+<Generique>"RULES-T0139_*"</Generique>
 </Talent>
 <Talent id="RULES-T0157_ALCHEMIST">
 <Description language="ENGLISH">"Master Tradesman (Alchemist)"</Description>
+<Generique>"RULES-T0157_*"</Generique>
 </Talent>
 <Talent id="RULES-T0157_APOTH">
 <Description language="ENGLISH">"Master Tradesman (Apothecary)"</Description>
+<Generique>"RULES-T0157_*"</Generique>
 </Talent>
 <Talent id="RULES-T0157_ARMU">
 <Description language="ENGLISH">"Master Tradesman (Gunsmith)"</Description>
+<Generique>"RULES-T0157_*"</Generique>
 </Talent>
 <Talent id="RULES-T0157_BARB">
 <Description language="ENGLISH">"Master Tradesman (Barber)"</Description>
+<Generique>"RULES-T0157_*"</Generique>
 </Talent>
 <Talent id="RULES-T0157_BATEA">
 <Description language="ENGLISH">"Master Tradesman (Boatbuilding)"</Description>
+<Generique>"RULES-T0157_*"</Generique>
 </Talent>
 <Talent id="RULES-T0157_BRAS">
 <Description language="ENGLISH">"Master Tradesman (Brewer)"</Description>
+<Generique>"RULES-T0157_*"</Generique>
 </Talent>
 <Talent id="RULES-T0157_BRICO">
 <Description language="ENGLISH">"Master Tradesman (Tinker)"</Description>
+<Generique>"RULES-T0157_*"</Generique>
 </Talent>
 <Talent id="RULES-T0157_CALLI">
 <Description language="ENGLISH">"Master Tradesman (Calligrapher)"</Description>
+<Generique>"RULES-T0157_*"</Generique>
 </Talent>
 <Talent id="RULES-T0157_CARTO">
 <Description language="ENGLISH">"Master Tradesman (Cartographer)"</Description>
+<Generique>"RULES-T0157_*"</Generique>
 </Talent>
 <Talent id="RULES-T0157_CHARP">
 <Description language="ENGLISH">"Master Tradesman (Carpenter)"</Description>
+<Generique>"RULES-T0157_*"</Generique>
 </Talent>
 <Talent id="RULES-T0157_CIRIE">
 <Description language="ENGLISH">"Master Tradesman (Chandler)"</Description>
+<Generique>"RULES-T0157_*"</Generique>
 </Talent>
 <Talent id="RULES-T0157_COLIF">
 <Description language="ENGLISH">"Master Tradesman (Charms)"</Description>
+<Generique>"RULES-T0157_*"</Generique>
 </Talent>
 <Talent id="RULES-T0157_CUIS">
 <Description language="ENGLISH">"Master Tradesman (Cook)"</Description>
+<Generique>"RULES-T0157_*"</Generique>
 </Talent>
 <Talent id="RULES-T0157_EMBAU">
 <Description language="ENGLISH">"Master Tradesman (Embalmer)"</Description>
+<Generique>"RULES-T0157_*"</Generique>
 </Talent>
 <Talent id="RULES-T0157_EMP">
 <Description language="ENGLISH">"Master Tradesman (Poisoner)"</Description>
+<Generique>"RULES-T0157_*"</Generique>
 </Talent>
 <Talent id="RULES-T0157_EXPL">
 <Description language="ENGLISH">"Master Tradesman (Explosives)"</Description>
+<Generique>"RULES-T0157_*"</Generique>
 </Talent>
 <Talent id="RULES-T0157_FORGE">
 <Description language="ENGLISH">"Master Tradesman (Blacksmith)"</Description>
+<Generique>"RULES-T0157_*"</Generique>
 </Talent>
 <Talent id="RULES-T0157_GRAV">
 <Description language="ENGLISH">"Master Tradesman (Engraver)"</Description>
+<Generique>"RULES-T0157_*"</Generique>
 </Talent>
 <Talent id="RULES-T0157_HERB">
 <Description language="ENGLISH">"Master Tradesman (Herbalist)"</Description>
+<Generique>"RULES-T0157_*"</Generique>
 </Talent>
 <Talent id="RULES-T0157_IMPR">
 <Description language="ENGLISH">"Master Tradesman (Printing)"</Description>
+<Generique>"RULES-T0157_*"</Generique>
 </Talent>
 <Talent id="RULES-T0157_INGE">
 <Description language="ENGLISH">"Master Tradesman (Engineering)"</Description>
+<Generique>"RULES-T0157_*"</Generique>
 </Talent>
 <Talent id="RULES-T0157_MATART">
 <Description language="ENGLISH">"Master Tradesman (Art Supplies)"</Description>
+<Generique>"RULES-T0157_*"</Generique>
 </Talent>
 <Talent id="RULES-T0157_MFERR">
 <Description language="ENGLISH">"Master Tradesman (Farrier)"</Description>
+<Generique>"RULES-T0157_*"</Generique>
 </Talent>
 <Talent id="RULES-T0157_POIS">
 <Description language="ENGLISH">"Master Tradesman (Poisons)"</Description>
+<Generique>"RULES-T0157_*"</Generique>
 </Talent>
 <Talent id="RULES-T0157_TANNE">
 <Description language="ENGLISH">"Master Tradesman (Tanner)"</Description>
+<Generique>"RULES-T0157_*"</Generique>
 </Talent>
 <Talent id="RULES-T0157_VIGN">
 <Description language="ENGLISH">"Master Tradesman (Vintner)"</Description>
+<Generique>"RULES-T0157_*"</Generique>
 </Talent>
 <Talent id="RULES-T0171/RULES-T*">
 <Description language="ENGLISH">"Doomed or Random Talent"</Description>
 </Talent>
 <Talent id="RULES-T0172_NURGLE">
 <Description language="ENGLISH">"Chaos Magic (Nurgle)"</Description>
+<Generique>"RULES-T0172_*"</Generique>
 </Talent>
 <Talent id="RULES-T0172_SLAANESH">
 <Description language="ENGLISH">"Chaos Magic (Slaanesh)"</Description>
+<Generique>"RULES-T0172_*"</Generique>
 </Talent>
 <Talent id="RULES-T0172_TZEENTCH">
 <Description language="ENGLISH">"Chaos Magic (Tzeentch)"</Description>
+<Generique>"RULES-T0172_*"</Generique>
 </Talent>
 <Talent id="RULES-T0AFR_ELF">
 <Trait>"1"</Trait>
 <Description language="ENGLISH">"Afraid (Elves)"</Description>
+<Generique>"RULES-T0AFR_*"</Generique>
 </Talent>
 <Talent id="RULES-T0HAT_GREENSKIN">
 <Trait>"1"</Trait>
 <Description language="ENGLISH">"Animosity (Greenskins)"</Description>
+<Generique>"RULES-T0HAT_*"</Generique>
 </Talent>
 <Talent id="RULES-T0009/RULES-T0067">
 <Description language="ENGLISH">"Attractive or Warrior Born"</Description>
@@ -4200,30 +4634,37 @@ See page 190 for Fear rules"</Explanation>
 <Talent id="RULES-T0SIZ_TINY">
 <Trait>"1"</Trait>
 <Description language="ENGLISH">"Size (Tiny)"</Description>
+<Generique>"RULES-T0SIZ_*"</Generique>
 </Talent>
 <Talent id="RULES-T0SIZ_LITT">
 <Trait>"1"</Trait>
 <Description language="ENGLISH">"Size (Little)"</Description>
+<Generique>"RULES-T0SIZ_*"</Generique>
 </Talent>
 <Talent id="RULES-T0SIZ_SMAL">
 <Trait>"1"</Trait>
 <Description language="ENGLISH">"Size (Small)"</Description>
+<Generique>"RULES-T0SIZ_*"</Generique>
 </Talent>
 <Talent id="RULES-T0SIZ_AVER">
 <Trait>"1"</Trait>
 <Description language="ENGLISH">"Size (Average)"</Description>
+<Generique>"RULES-T0SIZ_*"</Generique>
 </Talent>
 <Talent id="RULES-T0SIZ_LARG">
 <Trait>"1"</Trait>
 <Description language="ENGLISH">"Size (Large)"</Description>
+<Generique>"RULES-T0SIZ_*"</Generique>
 </Talent>
 <Talent id="RULES-T0SIZ_ENOR">
 <Trait>"1"</Trait>
 <Description language="ENGLISH">"Size (Enormous)"</Description>
+<Generique>"RULES-T0SIZ_*"</Generique>
 </Talent>
 <Talent id="RULES-T0SIZ_MONS">
 <Trait>"1"</Trait>
 <Description language="ENGLISH">"Size (Monstrous)"</Description>
+<Generique>"RULES-T0SIZ_*"</Generique>
 </Talent>
 </DATA_TALENT_SPECIALIZATION>
 <DATA_RANDOM_TALENT>

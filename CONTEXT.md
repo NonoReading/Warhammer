@@ -1,13 +1,15 @@
 # Warhammer — Contexte projet
 
 **Dernière mise à jour : 12/09/2026 — FILTRAGE PAR LIVRE DANS WINPERSONNAGE TERMINÉ,
-CORRESPONDANCE GÉNÉRIQUE/SPÉCIALISATION CORRIGÉE AU FIL DE L'EAU (CONCEPTION DU LIEN
-EXPLICITE NON APPLIQUÉE), ANCRAGE DES CONTRÔLES TOUJOURS EN PAUSE.** Deux chantiers ouverts
-et clos dans la foulée (§2.66, §2.67) : WinPersonnage respecte maintenant les livres du
-personnage pour les armes/armures/sorts/spécialités, et plusieurs comparaisons générique↔
-spécialisation qui ignoraient les spécialisations venant d'un autre livre ont été corrigées.
-Une conception plus solide (lien explicite en donnée plutôt que radical déduit) reste à
-faire, décrite et arrêtée en §2.67.
+LIEN EXPLICITE GÉNÉRIQUE↔SPÉCIALISATION (§2.67) APPLIQUÉ ET VALIDÉ PAR NONO, ANCRAGE DES
+CONTRÔLES TOUJOURS EN PAUSE.** Trois chantiers ouverts et clos dans la foulée (§2.66, §2.67,
+§2.68) : WinPersonnage respecte maintenant les livres du personnage pour les armes/armures/
+sorts/spécialités (§2.66), et la conception "lien explicite" envisagée en §2.67 pour remplacer
+la déduction par radical a finalement été appliquée le jour même sur demande de Nono (§2.68) -
+nouveau champ `<Generique>` rempli automatiquement sur 592 des 624 spécialisations (le reste
+n'a pas de generique '_*' identifiable, laissé sans le champ), tous les points de comparaison
+basculés dessus avec repli sur l'ancien radical si absent. **Validé par Nono** : personnage
+avec Lustria coché voit "Ranged (Blowpipe)", décoché il ne le voit plus.
 
 Chantier en pause (sans changement depuis la dernière session) : **ancrage des contrôles**,
 commencé sur WinPersonnage (fenêtre principale, choix de Nono). Nono : *« je crois que je vais
@@ -7525,17 +7527,85 @@ systématique - même choix que §0/CONTEXT.md pour `VerifieRecherche`) :**
 code source, même risque qu'une spécialisation d'un autre livre que sa générique échoue.
 Voir `A FAIRE.txt`.
 
-**Risque soulevé par Nono, conception arrêtée mais NON appliquée.** Comparer les radicaux
-sans le préfixe de livre retire une protection involontaire : deux radicaux identiques par
-coïncidence dans deux livres SANS RAPPORT (ex. un futur livre choisit `COMPPROJ` pour tout
-autre chose que "Ranged") seraient désormais traités comme la même famille. **La vraie
-solution** : donner à chaque entrée de `DATA_SKILL_SPECIALIZATION`/`DATA_TALENT_SPECIALIZATION`
-un champ explicite portant le code complet de sa générique, au lieu de le déduire du
-radical. Chantier plus lourd qu'un correctif de code : nouveau champ XML, rétro-remplissage
-de toutes les spécialisations déjà saisies dans tous les livres, mise à jour de
-`xmlexportimport.pas` et de tous les points de comparaison listés ci-dessus pour lire ce
-champ en priorité. **Décision de Nono (12/09/2026) : noter la conception, garder les
-correctifs par radical en attendant, ne pas démarrer ce chantier maintenant.**
+**Risque soulevé par Nono, conception arrêtée puis finalement appliquée le jour même
+(voir §2.68).** Comparer les radicaux sans le préfixe de livre retire une protection
+involontaire : deux radicaux identiques par coïncidence dans deux livres SANS RAPPORT
+(ex. un futur livre choisit `COMPPROJ` pour tout autre chose que "Ranged") seraient
+désormais traités comme la même famille. **La vraie solution**, notée ici comme un chantier
+à part puis démarrée dans la foulée sur décision de Nono : donner à chaque entrée de
+`DATA_SKILL_SPECIALIZATION`/`DATA_TALENT_SPECIALIZATION` un champ explicite portant le code
+complet de sa générique, au lieu de le déduire du radical.
+
+---
+
+### 2.68 Lien explicite générique↔spécialisation appliqué : champ `<Generique>`, rétro-rempli et branché partout — terminé, validé par Nono (12/09/2026)
+
+**Origine.** Suite immédiate de §2.67 : Nono a demandé de démarrer tout de suite le chantier
+lourd décrit et mis de côté quelques échanges plus tôt, plutôt que d'attendre.
+
+**Conception validée avec Nono avant le code** (voir échange précédent, quatre points
+tranchés) :
+1. Les ~32 entrées sans générique `_*` identifiable (ids combinés type
+   `RULES-T0024/RULES-T0105`, ou familles sans forme `_*` comme `NATIO-T0014_TORTOISE`)
+   restent sans le champ - aucune régression, comportement actuel préservé.
+2. `BOOK_RULESBOOK_FRANCAIS.Xml` n'a pas besoin du champ (traduction pure, jamais ajoutée à
+   `ListTalent`/`ListCompetence` structurellement - même statut que `DISCLAIMER`, §2.65).
+3. Bascule de tous les points de comparaison **en une fois**, avec repli sur l'ancienne
+   déduction par radical si le champ est vide (décision de Nono, pas de bascule point par
+   point cette fois).
+
+**Rétro-remplissage automatique (script Perl, hors du projet Lazarus, aucune écriture
+manuelle) :**
+- Rapport à blanc d'abord : sur 346 spécialisations de compétence + 278 de talent, **0 cas
+  ambigu** (le risque soulevé par Nono en §2.67 ne s'est matérialisé nulle part), 345+247=592
+  à match générique unique, 32 sans match (combos et familles sans `_*`, voir point 1
+  ci-dessus).
+- Script d'écriture : insère `<Generique>"CODE_COMPLET_*"</Generique>` juste après la
+  `<Description>` des 592 entrées à match unique, dans les 9 livres anglais concernés
+  (`BOOK LUSTRIA.xml` 5, `BOOK_ARCHIVES_OF_THE_EMPIRE_II.Xml` 4,
+  `BOOK_HIGH_ELF_PLAYERS_GUIDE.Xml` 12, `BOOK_NATIONS_OF_MANKIND.Xml` 113,
+  `BOOK_RULESBOOK.Xml` 441, `BOOK_SALZENMUND_CITY_OF_SALT_AND_SILVER.Xml` 1,
+  `BOOK_SEA_OF_CLAWS.Xml` 6, `BOOK_WINDS_OF_MAGIC.Xml` 9, `BOOK_WOOD_ELF_WARDANCER.Xml` 1).
+  Vérifié : `git diff --stat` donne exactement 592 insertions, 0 retrait, sur les 9 fichiers ;
+  validation XML (`[xml]` PowerShell, faute d'`xmllint` sur ce poste) OK sur les 9.
+- **Piège rencontré et corrigé en cours de route** : le script Perl a réécrit les 9 fichiers
+  en LF pur (le layer `:encoding(UTF-8)` de Perl sous Windows n'ajoute pas la conversion CRLF
+  a l'ecriture), alors que le reste du dépôt est en CRLF (`core.autocrlf=true`). `git diff`
+  restait propre grâce à la normalisation de Git, mais un éditeur qui ne normalise pas
+  aurait affiché "tout le fichier a changé". Corrigé avec `unix2dos` sur les 9 fichiers avant
+  de committer - **retenir pour un futur script du même genre : rouvrir en `:crlf:utf8` ou
+  repasser `unix2dos` derrière, pas juste `:encoding(UTF-8)`.**
+
+**Code :**
+- `chargeconstantes.pas` : constante `ConstXmlGenerique = 'Generique'`.
+- `chargecompetence.pas`/`chargetalent.pas` : nouveau champ `CodeGenerique: string` sur
+  `StructureCompetence`/`StructureTalent`.
+- `xmlexportimport.pas` : lu à l'import et écrit à l'export pour les deux types de
+  spécialisation (réinitialisé à `''` à chaque entrée, même piège d'enregistrement réutilisé
+  que d'habitude, CONTEXT.md 2.17) ; `PCompetenceMere` (l'ancien point pendant listé en §2.67,
+  l.1359) utilise désormais le champ en priorité.
+- `chargetalent.pas` : `ChercheTalent` (fallback d'héritage Resume/Magie/tarif) et
+  `CodeTalentGenerique` utilisent le champ en priorité, repli sur le radical sinon.
+  `CodeTalentGenerique` a changé de signature (prend le `StructureTalent` complet au lieu du
+  seul code, pour accéder à `CodeGenerique`) - **seul appelant** `winpersonnage.pas:1249`
+  (`PoolTalent`) corrigé dans la même réponse.
+- `wincompetence.pas`/`wintalent.pas` (l.98/l.100, `SelectWinCompetence`/`SelectWinTalent`) et
+  `pdfpersonnage.pas` (l.561 `PdfPersonnageCompetence`, l.2207 boucle `ListCorruptionModificateur`
+  hors ModifySkillAttribut) et `chargepersonnage.pas` (`PersonnageMutationCompetenceModif`,
+  qui avait déjà un correctif intermédiaire "chercher la vraie entrée par radical dans
+  ListCompetence" - remplacé par le champ direct) : tous basculés, repli sur l'ancien radical
+  si `CodeGenerique` est vide.
+- **Non touchés, à raison** : `winspecialisation.pas` `AjouteLigne`, `wincompetence.pas`
+  l.186/205, `wintalent.pas` l.239 - déjà corrigés en §2.67 par comparaison radicale
+  SYMÉTRIQUE (appartenance à la même famille, pas déduction "LA" générique), déjà justes sans
+  le nouveau champ. `winpersonnage.pas` `TalentAsterisc` - bug différent (référence PDF sans
+  préfixe de livre), sans rapport avec ce chantier.
+
+**Compilé (lazbuild, 0 erreur, uniquement des warnings préexistants dans `winlivre.pas`/
+`warhammersource.pas` sans rapport).**
+
+**Validé par Nono** : personnage avec le livre Lustria coché voit "Ranged (Blowpipe)" dans les
+spécialisations de "Ranged (Any)" ; décoché, il ne le voit plus - le cas d'origine du §2.67 fonctionne dans les deux sens.
 
 ---
 

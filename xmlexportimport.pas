@@ -347,6 +347,8 @@ Procedure XmlExportBook(Livre: String; Langue: String);
                 end;
               XmlContent.Add(XmlDebutCode(ConstXmlCompetence, XmlCreeCodeLivre(PCompetence.Livre, PCompetence.CodeCompetence)));
               XmlContent.Add(XmlLigneLangue(ConstXmlDescription, Langue, PCompetence.Libelle));
+              if PCompetence.CodeGenerique <> '' then
+                XmlContent.Add(XmlLigne(ConstXmlGenerique, PCompetence.CodeGenerique));
               XmlContent.Add(XmlFinCode(ConstXmlCompetence));
             end;
         if Fist = false then
@@ -421,6 +423,8 @@ Procedure XmlExportBook(Livre: String; Langue: String);
                 end;
               XmlContent.Add(XmlDebutCode(ConstXmlTalent, XmlCreeCodeLivre(PTalent.Livre, PTalent.CodeTalent)));
               XmlContent.Add(XmlLigneLangue(ConstXmlDescription, Langue, PTalent.Libelle));
+              if PTalent.CodeGenerique <> '' then
+                XmlContent.Add(XmlLigne(ConstXmlGenerique, PTalent.CodeGenerique));
               XmlContent.Add(XmlFinCode(ConstXmlTalent));
             end;
         if Fist = false then
@@ -1339,6 +1343,7 @@ Procedure XmlImport(FileName: String; OnlyPrimary: Boolean; OnlyCode: Boolean);
                       PCompetence.SousCompetence := True;
                       PCompetence.Description := '';
                       PCompetence.CodeAttribut   := '';
+                      PCompetence.CodeGenerique  := '';
                       PCompetence.CodeCompetence := RemoveQuotes(UTF8Encode(NodeNv2.Attributes.GetNamedItem(ConstXmlId).NodeValue));
                       PTraduction                := InitTrad(ConstPCompetence, PCompetence.CodeCompetence, '', PCompetence.Livre);
 
@@ -1352,11 +1357,19 @@ Procedure XmlImport(FileName: String; OnlyPrimary: Boolean; OnlyCode: Boolean);
                                 Langue                  := RemoveQuotes(UTF8Encode(Node.Attributes.GetNamedItem(ConstXmlLanguage).NodeValue));
                                 PTraduction.Libelle     := PCompetence.Libelle;
                               end;
+                            ConstXmlGenerique:
+                              PCompetence.CodeGenerique := RemoveQuotes(UTF8Encode(Node.TextContent));
                           end;
 
                           Node := XmlElement(Node.NextSibling);
                         end;
-                      PCompetenceMere := ChercheCompetence(ExtractStringBefore(PCompetence.CodeCompetence,ValeurSousCompetence)+ValeurGenerique);
+                      // Lien explicite (CONTEXT.md 2.67) prioritaire sur la deduction par radical -
+                      // seul repli quand le champ <Generique> n'est pas renseigne (donnee pas encore
+                      // migree, ou specialisation sans generique '_*' identifiee, ex. ids combines).
+                      if PCompetence.CodeGenerique <> '' then
+                        PCompetenceMere := ChercheCompetence(PCompetence.CodeGenerique)
+                      else
+                        PCompetenceMere := ChercheCompetence(ExtractStringBefore(PCompetence.CodeCompetence,ValeurSousCompetence)+ValeurGenerique);
                       PCompetence.CodeAttribut := PCompetenceMere.CodeAttribut;
                        if LangueDef = ConstAnglais then
                          begin
@@ -1577,6 +1590,7 @@ Procedure XmlImport(FileName: String; OnlyPrimary: Boolean; OnlyCode: Boolean);
                       PTalent.MaxiTalent        := '';
                       PTalent.TalentPdf         := '';
                       PTalent.Tests             := '';
+                      PTalent.CodeGenerique     := '';
                       PTalent.CodeTalent        := RemoveQuotes(UTF8Encode(NodeNv2.Attributes.GetNamedItem(ConstXmlId).NodeValue));
                       PTraduction               := InitTrad(ConstPTalent, PTalent.CodeTalent, '', PTalent.Livre);
 
@@ -1593,6 +1607,8 @@ Procedure XmlImport(FileName: String; OnlyPrimary: Boolean; OnlyCode: Boolean);
                             // une specialisation de trait reste un trait (ex. Immunity (Poison))
                             ConstXmlTrait:
                               PTalent.Trait       := (RemoveQuotes(UTF8Encode(Node.TextContent)) = ConstVrai);
+                            ConstXmlGenerique:
+                              PTalent.CodeGenerique := RemoveQuotes(UTF8Encode(Node.TextContent));
                           end;
 
                           Node := XmlElement(Node.NextSibling);

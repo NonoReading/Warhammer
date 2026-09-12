@@ -1989,18 +1989,24 @@ Function PersonnageMutationCompetenceModif(Personnage: StructurePersonnage; Code
     PCompetence   := ChercheCompetence(CodeCompetence);
     if PCompetence.SousCompetence then
       begin
-        CodeGenerique := ExtractStringBefore(PCompetence.CodeCompetence, ValeurSousCompetence) + ValeurGenerique;
-        // La specialisation et son entree generique peuvent venir de deux livres differents
-        // (ex. LUSTR-COMPPROJ_SARBAC specialise RULES-COMPPROJ_*) : le prefixe herite ci-dessus
-        // est alors celui de la specialisation, pas celui de la generique, et ChercheCompetence/
-        // CompareRechercheValeur plus bas exigent le MEME livre pour matcher. On retrouve ici le
-        // prefixe REEL de l'entree generique dans la base, radical par radical, livre ignore.
-        for PGenerique in ListCompetence do
-          if CodeSansLivre(PGenerique.CodeCompetence) = CodeSansLivre(CodeGenerique) then
-            begin
-              CodeGenerique := PGenerique.CodeCompetence;
-              break;
-            end;
+        // Lien explicite (CONTEXT.md 2.67), remplace la recherche par radical utilisee avant
+        // que le champ <Generique> existe : la specialisation et son entree generique peuvent
+        // venir de deux livres differents (ex. LUSTR-COMPPROJ_SARBAC specialise
+        // RULES-COMPPROJ_*), et ChercheCompetence/CompareRechercheValeur plus bas exigent le
+        // MEME livre pour matcher. Repli sur l'ancienne recherche par radical si le champ n'est
+        // pas renseigne (donnee pas encore migree, ou specialisation sans generique identifiee).
+        if PCompetence.CodeGenerique <> '' then
+          CodeGenerique := PCompetence.CodeGenerique
+        else
+          begin
+            CodeGenerique := ExtractStringBefore(PCompetence.CodeCompetence, ValeurSousCompetence) + ValeurGenerique;
+            for PGenerique in ListCompetence do
+              if CodeSansLivre(PGenerique.CodeCompetence) = CodeSansLivre(CodeGenerique) then
+                begin
+                  CodeGenerique := PGenerique.CodeCompetence;
+                  break;
+                end;
+          end;
       end;
     // Une sous-compétence (ex. RULES-COMPLANG_BRET) n'a pas son propre <Attribut> dans le XML,
     // seule l'entrée générique (RULES-COMPLANG_*) l'a - on va le chercher là si besoin.

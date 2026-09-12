@@ -3353,3 +3353,32 @@ points de comparaison). Decision de Nono : noter la conception (CONTEXT.md 2.67)
 les correctifs par radical en attendant, ne pas demarrer ce chantier maintenant.
 Fichiers modifies : winspecialisation.pas, wincompetence.pas, wintalent.pas,
 chargepersonnage.pas, winpersonnage.pas, A FAIRE.txt, CONTEXT.md.
+
+12/09/2026 - LIEN EXPLICITE GENERIQUE/SPECIALISATION FINALEMENT APPLIQUE LE JOUR MEME,
+VALIDE PAR NONO. Suite immediate de l entree precedente : Nono a demande de demarrer tout
+de suite le chantier lourd mis de cote (nouveau champ XML plutot que deduction par radical).
+Rapport a blanc d abord (script Perl, hors projet Lazarus) : sur 346+278 specialisations,
+0 cas ambigu (le risque de collision souleve par Nono ne s est materialise nulle part),
+592 a match generique unique, 32 sans match (ids combines type RULES-T0024/RULES-T0105,
+ou familles sans forme generique '_*' comme NATIO-T0014_TORTOISE - laissees sans le champ,
+aucune regression).
+Champ <Generique>"CODE_COMPLET_*"</Generique> insere automatiquement par script dans les
+592 entrees a match unique, 9 livres anglais (BOOK_RULESBOOK.Xml 441, NATIONS_OF_MANKIND 113,
+HIGH_ELF_PLAYERS_GUIDE 12, WINDS_OF_MAGIC 9, LUSTRIA 5, SEA_OF_CLAWS 6, ARCHIVES_EMPIRE_II 4,
+SALZENMUND 1, WOOD_ELF_WARDANCER 1). BOOK_RULESBOOK_FRANCAIS exclu (traduction pure, jamais
+ajoutee structurellement, meme statut que DISCLAIMER). git diff verifie : 592 insertions,
+0 retrait. Piege rencontre : le script Perl a ecrit les 9 fichiers en LF pur au lieu du CRLF
+du reste du depot - corrige avec unix2dos avant de committer.
+Code : chargeconstantes.pas (ConstXmlGenerique), chargecompetence.pas/chargetalent.pas
+(champ CodeGenerique sur les deux structures), xmlexportimport.pas (lu/ecrit a l
+import/export), chargetalent.pas (ChercheTalent, CodeTalentGenerique - signature changee,
+seul appelant winpersonnage.pas corrige avec), wincompetence.pas/wintalent.pas (l.98/100),
+pdfpersonnage.pas (l.561/2207), chargepersonnage.pas (PersonnageMutationCompetenceModif) -
+tous bascules sur le champ explicite avec repli sur l ancien radical si vide. Points deja
+corriges en symetrique (winspecialisation.pas, wincompetence.pas l.186/205, wintalent.pas
+l.239) non touches, deja justes sans le champ.
+Compile (lazbuild, 0 erreur). Valide par Nono : personnage avec Lustria coche voit
+"Ranged (Blowpipe)", decoche il ne le voit plus.
+Fichiers modifies : chargeconstantes.pas, chargecompetence.pas, chargetalent.pas,
+xmlexportimport.pas, wincompetence.pas, wintalent.pas, pdfpersonnage.pas,
+chargepersonnage.pas, winpersonnage.pas, 9 BOOK_*.Xml (DATABASE), A FAIRE.txt, CONTEXT.md.

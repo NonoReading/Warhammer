@@ -558,7 +558,12 @@ Function PdfPersonnageCompetence(Personnage: StructurePersonnage; Competence: St
     PCompetence      := ChercheCompetence(Competence);
     if PCompetence.SousCompetence then
       begin
-        CodeCompetence := ExtractStringBefore(PCompetence.CodeCompetence, ValeurSousCompetence) + ValeurGenerique;
+        // Lien explicite (CONTEXT.md 2.67) prioritaire sur la deduction par radical - seul
+        // repli quand <Generique> n'est pas renseigne.
+        if PCompetence.CodeGenerique <> '' then
+          CodeCompetence := PCompetence.CodeGenerique
+        else
+          CodeCompetence := ExtractStringBefore(PCompetence.CodeCompetence, ValeurSousCompetence) + ValeurGenerique;
         PCompetence    := ChercheCompetence(CodeCompetence);
       end;
     DonneeAttribut := PdfPersonnageAttribut(Personnage, PCompetence.CodeAttribut, Bonus);
@@ -2204,7 +2209,14 @@ Function PdfPersonnageMutationAsterisques(Personnage: StructurePersonnage; Aster
                 PCompetence   := ListCompetence[IndCompetence];
                 CodeGenerique := '';
                 if PCompetence.SousCompetence then
-                  CodeGenerique := ExtractStringBefore(PCompetence.CodeCompetence, ValeurSousCompetence) + ValeurGenerique;
+                  begin
+                    // Lien explicite (CONTEXT.md 2.67) prioritaire sur la deduction par
+                    // radical - seul repli quand <Generique> n'est pas renseigne.
+                    if PCompetence.CodeGenerique <> '' then
+                      CodeGenerique := PCompetence.CodeGenerique
+                    else
+                      CodeGenerique := ExtractStringBefore(PCompetence.CodeCompetence, ValeurSousCompetence) + ValeurGenerique;
+                  end;
                 if CompareRechercheValeur(PCompetence.CodeCompetence, PCorruptionModificateur.Cible)
                    or ((CodeGenerique <> '') and CompareRechercheValeur(CodeGenerique, PCorruptionModificateur.Cible)) then
                   begin

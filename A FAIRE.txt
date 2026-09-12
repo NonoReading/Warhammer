@@ -6,13 +6,6 @@
 CORRECTIONS COURTES  (une ligne ou deux chacune)
 =========================================================================
 
-MEME RECONSTRUCTION DE CODE GENERIQUE EN GARDANT LE PREFIXE DE LA SPECIALISATION, PAS
-CORRIGEE PARTOUT (CONTEXT.md 2.67). pdfpersonnage.pas l.561/2207, xmlexportimport.pas
-l.1359 (PCompetenceMere), chargetalent.pas l.85/190 (ChercheTalent), wincompetence.pas
-l.98, wintalent.pas l.100 : meme piege que ButtonArmeClick/AjouteLigne deja corriges - si
-la specialisation vient d un livre different de sa generique, la recherche echoue. A
-corriger au fil de l eau si un cas concret se presente, meme methode qu ailleurs.
-
 WINTALENT/WINCOMPETENCE N ONT AUCUN FILTRE PAR LIVRE (CONTEXT.md 2.66). Contrairement a
 WinWeapon/WinArmor/WinSpell, ces deux fenetres catalogue n ont ni FiltreLivre ni bouton
 Filtre - tous les talents/competences de tous les livres s affichent toujours. WinFabrication

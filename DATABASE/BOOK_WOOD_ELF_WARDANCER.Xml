@@ -24,6 +24,7 @@
 <DATA_SKILL_SPECIALIZATION>
 <Skill id="RULES-COMPSIGNES_WOODELF">
 <Description language="ENGLISH">"Secret Signs (Wood Elves)"</Description>
+<Generique>"RULES-COMPSIGNES_*"</Generique>
 </Skill>
   <!-- specialisation nouvelle - Wardancer niveau 2. Prefixe RULES car c est une
        specialisation d une competence du Rulebook, declaree dans le fichier du livre qui

@@ -97,7 +97,16 @@ begin
     GridAjouteColonne(TabSpe, GetTexteLibelle('RULES-LAB_006'), 250);
 
     if Pos(ValeurSousCompetence, SelectWinTalent) > 0 then
-      SelectWinTalent := ExtractStringBefore(SelectWinTalent, ValeurSousCompetence) + ValeurGenerique;
+      begin
+        // Lien explicite (CONTEXT.md 2.67) prioritaire sur la deduction par radical, qui
+        // gardait le prefixe de livre de SelectWinTalent au lieu de celui de la generique -
+        // seul repli quand <Generique> n'est pas renseigne.
+        PTalent := ChercheTalent(SelectWinTalent);
+        if PTalent.CodeGenerique <> '' then
+          SelectWinTalent := PTalent.CodeGenerique
+        else
+          SelectWinTalent := ExtractStringBefore(SelectWinTalent, ValeurSousCompetence) + ValeurGenerique;
+      end;
 
     For PTalent in ListTalent do
       begin

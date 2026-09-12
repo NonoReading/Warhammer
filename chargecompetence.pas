@@ -15,6 +15,10 @@ type
   	Description:	               string;
   	SousCompetence:	               boolean;
         Livre:                         string;
+        // Code complet de la competence generique dont celle-ci est une specialisation,
+        // lu depuis <Generique> quand present (CONTEXT.md 2.67). Vide si non renseigne
+        // (competence non specialisee, ou specialisation sans generique '_*' identifiee).
+        CodeGenerique:                 string;
     end;
 
   TListCompetence = Specialize TList<StructureCompetence>;

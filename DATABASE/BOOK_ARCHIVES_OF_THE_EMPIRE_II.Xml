@@ -45,15 +45,19 @@ Examples you could take include: Alcohol, Food, Narcotics, Pleasure."</Explanati
 <DATA_TALENT_SPECIALIZATION>
 <Talent id="ARCH2-T0175_FOOD">
 <Description language="ENGLISH">"Vice (Food)"</Description>
+<Generique>"ARCH2-T0175_*"</Generique>
 </Talent>
 <Talent id="ARCH2-T0175_ALCOHOL">
 <Description language="ENGLISH">"Vice (Alcohol)"</Description>
+<Generique>"ARCH2-T0175_*"</Generique>
 </Talent>
 <Talent id="ARCH2-T0175_NARCO">
 <Description language="ENGLISH">"Vice (Narcotics)"</Description>
+<Generique>"ARCH2-T0175_*"</Generique>
 </Talent>
 <Talent id="ARCH2-T0175_PLEASURE">
 <Description language="ENGLISH">"Vice (Pleasure)"</Description>
+<Generique>"ARCH2-T0175_*"</Generique>
 </Talent>
 </DATA_TALENT_SPECIALIZATION>
 <DATA_RACE>

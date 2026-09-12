@@ -1246,7 +1246,7 @@ function TWinPersonnages.PoolTalent(PTalent: StructureTalent): String;
     else if PTalent.XpGroupe <> '' then
       Result := PTalent.XpGroupe
     else
-      Result := CodeTalentGenerique(PTalent.CodeTalent);
+      Result := CodeTalentGenerique(PTalent);
   end;
 
 // COUT D'UN SORT, LU DANS LE TALENT QUI L'OUVRE (chantier du 02/09/2026, CONTEXT.md 2.31).

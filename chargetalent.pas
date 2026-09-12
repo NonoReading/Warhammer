@@ -39,6 +39,10 @@ Type
         Resume:               String;
         CompAjoutee:          String;
         ModifyCarac:          String;
+        // Code complet du talent generique dont celui-ci est une specialisation, lu depuis
+        // <Generique> quand present (CONTEXT.md 2.67). Vide si non renseigne (talent non
+        // specialise, ou specialisation sans generique '_*' identifiee).
+        CodeGenerique:        String;
 end;
 
   TListTalent = Specialize TList<StructureTalent>;
@@ -58,7 +62,7 @@ Var
 function ChercheTalent(CodeTalent :String): StructureTalent;
 function ListeTalent(CodeTalent :String): TStringList;
 function LibelleTalent(CodeTalent :String): String;
-function CodeTalentGenerique(CodeTalent :String): String;
+function CodeTalentGenerique(PTalent: StructureTalent): String;
 
 implementation
 
@@ -82,7 +86,13 @@ Begin
     if Pos(ValeurGenerique, CodeTalent) = 0 then
       if Pos(ValeurSousCompetence, CodeTalent) > 0 then
         begin
-          code          := ExtractStringBefore(CodeTalent, ValeurSousCompetence) + ValeurGenerique;
+          // Lien explicite (CONTEXT.md 2.67) prioritaire sur la deduction par radical - seul
+          // repli quand <Generique> n'est pas renseigne (donnee pas encore migree, ou
+          // specialisation sans generique '_*' identifiee).
+          if Result.CodeGenerique <> '' then
+            code        := Result.CodeGenerique
+          else
+            code        := ExtractStringBefore(CodeTalent, ValeurSousCompetence) + ValeurGenerique;
           PTalent       := ChercheTalent(Code);
           Result.Resume := PTalent.Resume;
           // L'acces aux sorts est declare sur l'entree generique (T0012_*, T0080_*, T0088_*) :
@@ -181,13 +191,17 @@ function LibelleTalent(CodeTalent :String): String;
 // Sert a identifier le GROUPE DE COMPTAGE des sorts : deux sorts dont les talents remontent
 // a la meme generique se comptent ensemble. C'est ce qui fait que l'arcanique et le domaine
 // partagent leur compteur sans qu'aucune donnee ne le declare - ils citent le meme talent.
-function CodeTalentGenerique(CodeTalent :String): String;
+function CodeTalentGenerique(PTalent: StructureTalent): String;
 Begin
-  Result := CodeTalent;
-  if Pos(ValeurGenerique, CodeTalent) > 0 then
+  Result := PTalent.CodeTalent;
+  if Pos(ValeurGenerique, PTalent.CodeTalent) > 0 then
     Exit;
-  if Pos(ValeurSousCompetence, CodeTalent) > 0 then
-    Result := ExtractStringBefore(CodeTalent, ValeurSousCompetence) + ValeurGenerique;
+  // Lien explicite (CONTEXT.md 2.67) prioritaire sur la deduction par radical - seul repli
+  // quand <Generique> n'est pas renseigne.
+  if PTalent.CodeGenerique <> '' then
+    Result := PTalent.CodeGenerique
+  else if Pos(ValeurSousCompetence, PTalent.CodeTalent) > 0 then
+    Result := ExtractStringBefore(PTalent.CodeTalent, ValeurSousCompetence) + ValeurGenerique;
 end;
 
 end.

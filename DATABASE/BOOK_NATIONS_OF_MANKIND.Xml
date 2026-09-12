@@ -29,156 +29,206 @@
        declarees dans le fichier du livre qui les introduit (principe du 21/08/2026). -->
 <Skill id="RULES-COMPSAVOIR_AGRI">
 <Description language="ENGLISH">"Lore (Agriculture)"</Description>
+<Generique>"RULES-COMPSAVOIR_*"</Generique>
 </Skill>
 <Skill id="RULES-COMPSAVOIR_ALBION">
 <Description language="ENGLISH">"Lore (Albion)"</Description>
+<Generique>"RULES-COMPSAVOIR_*"</Generique>
 </Skill>
 <Skill id="RULES-COMPSAVOIR_ARABY">
 <Description language="ENGLISH">"Lore (Araby)"</Description>
+<Generique>"RULES-COMPSAVOIR_*"</Generique>
 </Skill>
 <Skill id="RULES-COMPSAVOIR_CRIM">
 <Description language="ENGLISH">"Lore (Criminals)"</Description>
+<Generique>"RULES-COMPSAVOIR_*"</Generique>
 </Skill>
 <Skill id="RULES-COMPSAVOIR_CITYSTATE">
 <Description language="ENGLISH">"Lore (City State)"</Description>
+<Generique>"RULES-COMPSAVOIR_*"</Generique>
 </Skill>
 <Skill id="RULES-COMPSAVOIR_DUKEDOM">
 <Description language="ENGLISH">"Lore (Dukedom)"</Description>
+<Generique>"RULES-COMPSAVOIR_*"</Generique>
 </Skill>
 <Skill id="RULES-COMPSAVOIR_ESTALIA">
 <Description language="ENGLISH">"Lore (Estalia)"</Description>
+<Generique>"RULES-COMPSAVOIR_*"</Generique>
 </Skill>
 <Skill id="RULES-COMPSAVOIR_IND">
 <Description language="ENGLISH">"Lore (Ind)"</Description>
+<Generique>"RULES-COMPSAVOIR_*"</Generique>
 </Skill>
 <Skill id="RULES-COMPSAVOIR_KISLEV">
 <Description language="ENGLISH">"Lore (Kislev)"</Description>
+<Generique>"RULES-COMPSAVOIR_*"</Generique>
 </Skill>
 <Skill id="RULES-COMPSAVOIR_KINGDOM">
 <Description language="ENGLISH">"Lore (Kingdom)"</Description>
+<Generique>"RULES-COMPSAVOIR_*"</Generique>
 </Skill>
 <Skill id="RULES-COMPSAVOIR_MONSTRE">
 <Description language="ENGLISH">"Lore (Monsters)"</Description>
+<Generique>"RULES-COMPSAVOIR_*"</Generique>
 </Skill>
 <Skill id="RULES-COMPSAVOIR_MUTANT">
 <Description language="ENGLISH">"Lore (Mutants)"</Description>
   <!-- N existait pas encore, necessaire pour les Knights Panther et l Order of the Broken
        Sword (Knightly Orders, p.8-9, CONTEXT.md 2.51) : "Lore (Beastmen) and Lore (Mutants)".
        Creee sur le meme moule que les Lore de ce livre, Nono a valide le 08/09/2026. -->
+<Generique>"RULES-COMPSAVOIR_*"</Generique>
 </Skill>
 <Skill id="RULES-COMPSAVOIR_MYRMIDIA">
 <Description language="ENGLISH">"Lore (Myrmidia)"</Description>
+<Generique>"RULES-COMPSAVOIR_*"</Generique>
 </Skill>
 <Skill id="RULES-COMPSAVOIR_NIPPON">
 <Description language="ENGLISH">"Lore (Nippon)"</Description>
+<Generique>"RULES-COMPSAVOIR_*"</Generique>
 </Skill>
 <Skill id="RULES-COMPSAVOIR_SIMCA">
 <Description language="ENGLISH">"Lore (Orange Simca)"</Description>
+<Generique>"RULES-COMPSAVOIR_*"</Generique>
 </Skill>
 <Skill id="RULES-COMPSAVOIR_ORMAZD">
 <Description language="ENGLISH">"Lore (Ormazd)"</Description>
+<Generique>"RULES-COMPSAVOIR_*"</Generique>
 </Skill>
 <Skill id="RULES-COMPSAVOIR_PROVINCE">
 <Description language="ENGLISH">"Lore (Province)"</Description>
+<Generique>"RULES-COMPSAVOIR_*"</Generique>
 </Skill>
 <Skill id="RULES-COMPSAVOIR_REGION">
 <Description language="ENGLISH">"Lore (Region)"</Description>
+<Generique>"RULES-COMPSAVOIR_*"</Generique>
 </Skill>
 <Skill id="RULES-COMPSAVOIR_SARTOSA">
 <Description language="ENGLISH">"Lore (Sartosa)"</Description>
+<Generique>"RULES-COMPSAVOIR_*"</Generique>
 </Skill>
 <Skill id="RULES-COMPSAVOIR_SEACLAWS">
 <Description language="ENGLISH">"Lore (Sea of Claws)"</Description>
+<Generique>"RULES-COMPSAVOIR_*"</Generique>
 </Skill>
 <Skill id="RULES-COMPSAVOIR_WESTERLAND">
 <Description language="ENGLISH">"Lore (Westerland)"</Description>
+<Generique>"RULES-COMPSAVOIR_*"</Generique>
 </Skill>
 <Skill id="RULES-COMPSAVOIR_SKAVEN">
 <Description language="ENGLISH">"Lore (Skaven)"</Description>
+<Generique>"RULES-COMPSAVOIR_*"</Generique>
 </Skill>
 <Skill id="RULES-COMPSAVOIR_LADY">
 <Description language="ENGLISH">"Lore (The Lady)"</Description>
+<Generique>"RULES-COMPSAVOIR_*"</Generique>
 </Skill>
 <Skill id="RULES-COMPCHEV_TAUREAU">
 <Description language="ENGLISH">"Ride (Bull)"</Description>
+<Generique>"RULES-COMPCHEV_*"</Generique>
 </Skill>
 <Skill id="RULES-COMPCHEV_CHAMEAU">
 <Description language="ENGLISH">"Ride (Camel)"</Description>
+<Generique>"RULES-COMPCHEV_*"</Generique>
 </Skill>
 <Skill id="RULES-COMPCHEV_ELEPH">
 <Description language="ENGLISH">"Ride (Elephant)"</Description>
+<Generique>"RULES-COMPCHEV_*"</Generique>
 </Skill>
 <Skill id="RULES-COMPCHEV_HIPPOG">
 <Description language="ENGLISH">"Ride (Hippogryph)"</Description>
+<Generique>"RULES-COMPCHEV_*"</Generique>
 </Skill>
 <Skill id="RULES-COMPCHEV_MAMMOUTH">
 <Description language="ENGLISH">"Ride (Mammoth)"</Description>
+<Generique>"RULES-COMPCHEV_*"</Generique>
 </Skill>
 <Skill id="RULES-COMPREPRES_CORRIDA">
 <Description language="ENGLISH">"Perform (Bull Fight)"</Description>
+<Generique>"RULES-COMPREPRES_*"</Generique>
 </Skill>
 <Skill id="RULES-COMPREPRES_JOTA">
 <Description language="ENGLISH">"Perform (Jota)"</Description>
+<Generique>"RULES-COMPREPRES_*"</Generique>
 </Skill>
 <Skill id="RULES-COMPREPRES_MEDIT">
 <Description language="ENGLISH">"Perform (Meditation)"</Description>
+<Generique>"RULES-COMPREPRES_*"</Generique>
 </Skill>
 <Skill id="RULES-COMPREPRES_ESCRTRIC">
 <Description language="ENGLISH">"Perform (Sword Tricks)"</Description>
+<Generique>"RULES-COMPREPRES_*"</Generique>
 </Skill>
 <Skill id="RULES-COMPART_ECRSAINT">
 <Description language="ENGLISH">"Art (Holy Scriptures)"</Description>
+<Generique>"RULES-COMPART_*"</Generique>
 </Skill>
 <Skill id="RULES-COMPART_THE">
 <Description language="ENGLISH">"Art (Tea Making)"</Description>
+<Generique>"RULES-COMPART_*"</Generique>
 </Skill>
 <Skill id="RULES-COMPMUSIC_ACCORD">
 <Description language="ENGLISH">"Play (Accordion)"</Description>
+<Generique>"RULES-COMPMUSIC_*"</Generique>
 </Skill>
 <Skill id="RULES-COMPMUSIC_BANDUR">
 <Description language="ENGLISH">"Play (Bandurria)"</Description>
+<Generique>"RULES-COMPMUSIC_*"</Generique>
 </Skill>
 <Skill id="RULES-COMPMUSIC_HARMO">
 <Description language="ENGLISH">"Play (Harmonica)"</Description>
+<Generique>"RULES-COMPMUSIC_*"</Generique>
 </Skill>
 <Skill id="RULES-COMPMUSIC_SITAR">
 <Description language="ENGLISH">"Play (Sitar)"</Description>
+<Generique>"RULES-COMPMUSIC_*"</Generique>
 </Skill>
 <Skill id="RULES-COMPSIGNES_ASSAS">
 <Description language="ENGLISH">"Secret Signs (Assassins)"</Description>
+<Generique>"RULES-COMPSIGNES_*"</Generique>
 </Skill>
 <Skill id="RULES-COMPSIGNES_NINJA">
 <Description language="ENGLISH">"Secret Signs (Ninja)"</Description>
+<Generique>"RULES-COMPSIGNES_*"</Generique>
 </Skill>
 <Skill id="RULES-COMPSIGNES_SKAVEN">
 <Description language="ENGLISH">"Secret Signs (Skaven)"</Description>
+<Generique>"RULES-COMPSIGNES_*"</Generique>
 </Skill>
 <Skill id="RULES-COMPLANG_CATHAY">
 <Description language="ENGLISH">"Language (Cathayan)"</Description>
+<Generique>"RULES-COMPLANG_*"</Generique>
 </Skill>
 <Skill id="RULES-COMPLANG_INDAN">
 <Description language="ENGLISH">"Language (Indan)"</Description>
+<Generique>"RULES-COMPLANG_*"</Generique>
 </Skill>
 <Skill id="RULES-COMPLANG_NIPPON">
 <Description language="ENGLISH">"Language (Nipponese)"</Description>
+<Generique>"RULES-COMPLANG_*"</Generique>
 </Skill>
 <Skill id="RULES-COMPLANG_UNGOL">
 <Description language="ENGLISH">"Language (Ungol)"</Description>
+<Generique>"RULES-COMPLANG_*"</Generique>
 </Skill>
 <Skill id="RULES-COMPLANG_VOLEUR">
 <Description language="ENGLISH">"Language (Thieves Tongue)"</Description>
+<Generique>"RULES-COMPLANG_*"</Generique>
 </Skill>
 <Skill id="RULES-COMPDIVERT_DANSTRIB">
 <Description language="ENGLISH">"Entertain (Tribal Dance)"</Description>
+<Generique>"RULES-COMPDIVERT_*"</Generique>
 </Skill>
 <Skill id="RULES-COMPMETIER_SANCT">
 <Description language="ENGLISH">"Trade (Shrine Building)"</Description>
+<Generique>"RULES-COMPMETIER_*"</Generique>
 </Skill>
 <Skill id="RULES-COMPMETIER_FARMING">
 <Description language="ENGLISH">"Trade (Farming)"</Description>
+<Generique>"RULES-COMPMETIER_*"</Generique>
 </Skill>
 <Skill id="RULES-COMPMETIER_LAMIER">
 <Description language="ENGLISH">"Trade (Bladesmith)"</Description>
+<Generique>"RULES-COMPMETIER_*"</Generique>
 </Skill>
   <!-- Animal Training et Stealth : le livre les ecrit sans specialisation
        (Highlander niveau 4 "Animal Training", Ninja niveau 1 "Stealth (Everything)").
@@ -191,33 +241,42 @@
        comme les precedentes : specialisations d une competence du Rulebook. -->
 <Skill id="RULES-COMPSAVOIR_AVERLAND">
 <Description language="ENGLISH">"Lore (Averland)"</Description>
+<Generique>"RULES-COMPSAVOIR_*"</Generique>
 </Skill>
 <Skill id="RULES-COMPSAVOIR_HOCHLAND">
 <Description language="ENGLISH">"Lore (Hochland)"</Description>
+<Generique>"RULES-COMPSAVOIR_*"</Generique>
 </Skill>
 <Skill id="RULES-COMPSAVOIR_OSTERMARK">
 <Description language="ENGLISH">"Lore (Ostermark)"</Description>
+<Generique>"RULES-COMPSAVOIR_*"</Generique>
 </Skill>
 <Skill id="RULES-COMPSAVOIR_OSTLAND">
 <Description language="ENGLISH">"Lore (Ostland)"</Description>
+<Generique>"RULES-COMPSAVOIR_*"</Generique>
 </Skill>
 <Skill id="RULES-COMPSAVOIR_REIKLAND">
 <Description language="ENGLISH">"Lore (Reikland)"</Description>
+<Generique>"RULES-COMPSAVOIR_*"</Generique>
 </Skill>
 <Skill id="RULES-COMPSAVOIR_STIRLAND">
 <Description language="ENGLISH">"Lore (Stirland)"</Description>
+<Generique>"RULES-COMPSAVOIR_*"</Generique>
 </Skill>
 <Skill id="RULES-COMPSAVOIR_TALABECLAND">
 <Description language="ENGLISH">"Lore (Talabecland)"</Description>
+<Generique>"RULES-COMPSAVOIR_*"</Generique>
 </Skill>
 <Skill id="RULES-COMPSAVOIR_UBERSREIK">
 <Description language="ENGLISH">"Lore (Ubersreik)"</Description>
   <!-- N existait pas encore (seul Reikland/Middenland/Nordland etaient modelisees, CONTEXT.md
        5020), necessaire pour l Order of the Reikshammer (Knightly Orders, p.9, CONTEXT.md
        2.51) : "Lore (Reikland) and Lore (Ubersreik)". Nono a valide le 08/09/2026. -->
+<Generique>"RULES-COMPSAVOIR_*"</Generique>
 </Skill>
 <Skill id="RULES-COMPSAVOIR_WISSENLAND">
 <Description language="ENGLISH">"Lore (Wissenland)"</Description>
+<Generique>"RULES-COMPSAVOIR_*"</Generique>
 </Skill>
   <!-- Code de CHOIX 'A/B' : convention du Rulebook, qui declare chaque choix comme une
        entree a part entiere avec son libelle (Play (Drum or Fife), Acute Sense (Taste or
@@ -225,6 +284,7 @@
        s'affiche sans libelle. Utilise par le palier 3 du regiment NATIO-REGIM_AVER. -->
 <Skill id="RULES-COMPSAVOIR_NAIN/RULES-COMPSAVOIR_GREENSKIN">
 <Description language="ENGLISH">"Lore (Dwarfs or Greenskins)"</Description>
+<Generique>"RULES-COMPSAVOIR_*"</Generique>
 </Skill>
   <!-- Les dix autres choix 'A/B' cites par les ethnies et les carrieres de ce livre, non
        declares au lot 3a : sans leur entree, la grille de creation affichait une LIGNE
@@ -233,33 +293,43 @@
        existent deja dans la base, verifie le 04/09/2026. -->
 <Skill id="RULES-COMPCHEV_CHAMEAU/RULES-COMPCHEV_CHEVAL">
 <Description language="ENGLISH">"Ride (Camel or Horse)"</Description>
+<Generique>"RULES-COMPCHEV_*"</Generique>
 </Skill>
 <Skill id="RULES-COMPCOMB_BASE/RULES-COMPCOMB_2M">
 <Description language="ENGLISH">"Melee (Basic or Two-handed)"</Description>
+<Generique>"RULES-COMPCOMB_*"</Generique>
 </Skill>
 <Skill id="RULES-COMPCOMB_BASE/RULES-COMPCOMB_HAST">
 <Description language="ENGLISH">"Melee (Basic or Polearm)"</Description>
+<Generique>"RULES-COMPCOMB_*"</Generique>
 </Skill>
 <Skill id="RULES-COMPLANG_ARABY/RULES-COMPLANG_BRET">
 <Description language="ENGLISH">"Language (Arabyan or Bretonnian)"</Description>
+<Generique>"RULES-COMPLANG_*"</Generique>
 </Skill>
 <Skill id="RULES-COMPLANG_CATHAY/RULES-COMPLANG_NIPPON">
 <Description language="ENGLISH">"Language (Cathayan or Nipponese)"</Description>
+<Generique>"RULES-COMPLANG_*"</Generique>
 </Skill>
 <Skill id="RULES-COMPLANG_INDAN/RULES-COMPLANG_WEST">
 <Description language="ENGLISH">"Language (Indan or Wastelander)"</Description>
+<Generique>"RULES-COMPLANG_*"</Generique>
 </Skill>
 <Skill id="RULES-COMPLANG_NORSE/RULES-COMPLANG_WEST">
 <Description language="ENGLISH">"Language (Norse or Wastelander)"</Description>
+<Generique>"RULES-COMPLANG_*"</Generique>
 </Skill>
 <Skill id="RULES-COMPMETIER_FARMING/RULES-COMPMETIER_MINNER">
 <Description language="ENGLISH">"Trade (Farming or Mining)"</Description>
+<Generique>"RULES-COMPMETIER_*"</Generique>
 </Skill>
 <Skill id="RULES-COMPPROJ_POUDRE/RULES-COMPPROJ_ARC">
 <Description language="ENGLISH">"Ranged (Blackpowder or Bow)"</Description>
+<Generique>"RULES-COMPPROJ_*"</Generique>
 </Skill>
 <Skill id="RULES-COMPSAVOIR_BETE/RULES-COMPSAVOIR_MONSTRE">
 <Description language="ENGLISH">"Lore (Beasts or Monsters)"</Description>
+<Generique>"RULES-COMPSAVOIR_*"</Generique>
 </Skill>
   <!-- LOT 3d-2 : les six Lore et les quatre choix 'A ou B' cites par les regiments
        (p.6-7) et absents de tout DATABASE au 04/09/2026. Lore (Beastmen) et
@@ -268,33 +338,43 @@
        peuple et Norsca une region. -->
 <Skill id="RULES-COMPSAVOIR_POUDRE">
 <Description language="ENGLISH">"Lore (Blackpowder)"</Description>
+<Generique>"RULES-COMPSAVOIR_*"</Generique>
 </Skill>
 <Skill id="RULES-COMPSAVOIR_ARMORY">
 <Description language="ENGLISH">"Lore (Armory)"</Description>
+<Generique>"RULES-COMPSAVOIR_*"</Generique>
 </Skill>
 <Skill id="RULES-COMPSAVOIR_MORR">
 <Description language="ENGLISH">"Lore (Morr)"</Description>
+<Generique>"RULES-COMPSAVOIR_*"</Generique>
 </Skill>
 <Skill id="RULES-COMPSAVOIR_TAAL">
 <Description language="ENGLISH">"Lore (Taal)"</Description>
+<Generique>"RULES-COMPSAVOIR_*"</Generique>
 </Skill>
 <Skill id="RULES-COMPSAVOIR_BEASTMEN">
 <Description language="ENGLISH">"Lore (Beastmen)"</Description>
+<Generique>"RULES-COMPSAVOIR_*"</Generique>
 </Skill>
 <Skill id="RULES-COMPSAVOIR_NORSCANS">
 <Description language="ENGLISH">"Lore (Norscans)"</Description>
+<Generique>"RULES-COMPSAVOIR_*"</Generique>
 </Skill>
 <Skill id="RULES-COMPSAVOIR_BEASTMEN/RULES-COMPSAVOIR_ULRIC">
 <Description language="ENGLISH">"Lore (Beastmen or Ulric)"</Description>
+<Generique>"RULES-COMPSAVOIR_*"</Generique>
 </Skill>
 <Skill id="RULES-COMPSAVOIR_MANANN/RULES-COMPSAVOIR_NORSCANS">
 <Description language="ENGLISH">"Lore (Manann or Norscans)"</Description>
+<Generique>"RULES-COMPSAVOIR_*"</Generique>
 </Skill>
 <Skill id="RULES-COMPSAVOIR_MORR/RULES-COMPSAVOIR_UNDEAD">
 <Description language="ENGLISH">"Lore (Morr or Undead)"</Description>
+<Generique>"RULES-COMPSAVOIR_*"</Generique>
 </Skill>
 <Skill id="RULES-COMPSAVOIR_BEASTMEN/RULES-COMPSAVOIR_NORSCANS">
 <Description language="ENGLISH">"Lore (Beastmen or Norscans)"</Description>
+<Generique>"RULES-COMPSAVOIR_*"</Generique>
 </Skill>
 </DATA_SKILL_SPECIALIZATION>
 <DATA_TALENT>
@@ -977,27 +1057,35 @@ Description: You ask Dazh to illuminate the night, and he
 <DATA_TALENT_SPECIALIZATION>
 <Talent id="RULES-T0132_GARDE">
 <Description language="ENGLISH">"Fearless (Guards)"</Description>
+<Generique>"RULES-T0132_*"</Generique>
 </Talent>
 <Talent id="RULES-T0132_CULTIST">
 <Description language="ENGLISH">"Fearless (Cultists)"</Description>
+<Generique>"RULES-T0132_*"</Generique>
 </Talent>
 <Talent id="RULES-T0132_BETE">
 <Description language="ENGLISH">"Fearless (Beasts)"</Description>
+<Generique>"RULES-T0132_*"</Generique>
 </Talent>
 <Talent id="RULES-T0069_SKAVEN">
 <Description language="ENGLISH">"Hatred (Skaven)"</Description>
+<Generique>"RULES-T0069_*"</Generique>
 </Talent>
 <Talent id="RULES-T0012_LADY">
 <Description language="ENGLISH">"Bless (The Lady)"</Description>
+<Generique>"RULES-T0012_*"</Generique>
 </Talent>
 <Talent id="RULES-T0012_SIMCA">
 <Description language="ENGLISH">"Bless (Orange Simca)"</Description>
+<Generique>"RULES-T0012_*"</Generique>
 </Talent>
 <Talent id="RULES-T0080_SIMCA">
 <Description language="ENGLISH">"Invoke (Orange Simca)"</Description>
+<Generique>"RULES-T0080_*"</Generique>
 </Talent>
 <Talent id="RULES-T0134_POLIT">
 <Description language="ENGLISH">"Savant (Politics)"</Description>
+<Generique>"RULES-T0134_*"</Generique>
 </Talent>
 <Talent id="NATIO-T0014_TORTOISE">
 <Description language="ENGLISH">"Kenjutsu (Way of the Tortoise)"</Description>
@@ -1075,80 +1163,101 @@ Description: You ask Dazh to illuminate the night, and he
        chantier DATA_SPELL_TALENT, prioritaire, qui les branchera. -->
 <Talent id="RULES-T0012_DAZH">
 <Description language="ENGLISH">"Bless (Dazh)"</Description>
+<Generique>"RULES-T0012_*"</Generique>
 </Talent>
 <Talent id="RULES-T0080_DAZH">
 <Description language="ENGLISH">"Invoke (Dazh)"</Description>
+<Generique>"RULES-T0080_*"</Generique>
 </Talent>
 <Talent id="RULES-T0012_TOR">
 <Description language="ENGLISH">"Bless (Tor)"</Description>
+<Generique>"RULES-T0012_*"</Generique>
 </Talent>
 <Talent id="RULES-T0080_TOR">
 <Description language="ENGLISH">"Invoke (Tor)"</Description>
+<Generique>"RULES-T0080_*"</Generique>
 </Talent>
 <Talent id="RULES-T0012_URSUN">
 <Description language="ENGLISH">"Bless (Ursun)"</Description>
+<Generique>"RULES-T0012_*"</Generique>
 </Talent>
 <Talent id="RULES-T0080_URSUN">
 <Description language="ENGLISH">"Invoke (Ursun)"</Description>
+<Generique>"RULES-T0080_*"</Generique>
 </Talent>
 <Talent id="RULES-T0012_ORMAZD">
 <Description language="ENGLISH">"Bless (Ormazd)"</Description>
+<Generique>"RULES-T0012_*"</Generique>
 </Talent>
 <Talent id="RULES-T0080_ORMAZD">
 <Description language="ENGLISH">"Invoke (Ormazd)"</Description>
+<Generique>"RULES-T0080_*"</Generique>
 </Talent>
 <Talent id="RULES-T0012_DEVAS">
 <Description language="ENGLISH">"Bless (the Devas)"</Description>
+<Generique>"RULES-T0012_*"</Generique>
 </Talent>
 <Talent id="RULES-T0080_DEVAS">
 <Description language="ENGLISH">"Invoke (the Devas)"</Description>
+<Generique>"RULES-T0080_*"</Generique>
 </Talent>
 <Talent id="RULES-T0088_ICE">
 <Description language="ENGLISH">"Arcane Magic (Ice)"</Description>
+<Generique>"RULES-T0088_*"</Generique>
 </Talent>
 <Talent id="RULES-T0088_DESERT">
 <Description language="ENGLISH">"Arcane Magic (Lore of the Desert)"</Description>
+<Generique>"RULES-T0088_*"</Generique>
 </Talent>
 <Talent id="RULES-T0092_MINNER">
 <Description language="ENGLISH">"Craftsman (Miner)"</Description>
   <!-- Craftsman (Mining) du livre. La famille Craftsman n avait pas de Miner alors que Trade (Miner) existe (RULES-COMPMETIER_MINNER) : creee pour aligner les deux familles. Decision Nono du 04/09/2026. -->
+<Generique>"RULES-T0092_*"</Generique>
 </Talent>
 <Talent id="RULES-T0069_DEMON">
 <Description language="ENGLISH">"Hatred (Daemons)"</Description>
   <!-- Hatred (Demons) du livre, Kingdom of Bhalluka. Creee sur le modele des 16 autres Hatred du Rulebook. -->
+<Generique>"RULES-T0069_*"</Generique>
 </Talent>
 <Talent id="RULES-T0069_CULT">
 <Description language="ENGLISH">"Hatred (Chaos Cultists)"</Description>
   <!-- Necessaire pour l Order of the Fiery Heart et l Order of the Reikshammer (Knightly
        Orders, p.8-9, CONTEXT.md 2.51). Creee sur le meme modele que Hatred (Skaven)/
        (Daemons) ci-dessus. Nono a valide le 08/09/2026. -->
+<Generique>"RULES-T0069_*"</Generique>
 </Talent>
 <Talent id="RULES-T0069_WITCH">
 <Description language="ENGLISH">"Hatred (Witches)"</Description>
   <!-- Necessaire pour les Knights of Morr (Knightly Orders, p.9, CONTEXT.md 2.51). Meme
        modele. Nono a valide le 08/09/2026. -->
+<Generique>"RULES-T0069_*"</Generique>
 </Talent>
 <Talent id="RULES-T0069_NORSCAN">
 <Description language="ENGLISH">"Hatred (Norscans)"</Description>
   <!-- Necessaire pour l Order of the Reikshammer (Knightly Orders, p.9, CONTEXT.md 2.51).
        Meme modele. Nono a valide le 08/09/2026. -->
+<Generique>"RULES-T0069_*"</Generique>
 </Talent>
 <Talent id="RULES-T0069_MUTANT">
 <Description language="ENGLISH">"Hatred (Mutants)"</Description>
   <!-- Manquait a l inventaire presente a Nono (repere en ecrivant les Knights Panther) :
        necessaire en plus des trois valides le 08/09/2026, meme motif exact (Knightly
        Orders, p.8, CONTEXT.md 2.51). Meme modele. -->
+<Generique>"RULES-T0069_*"</Generique>
 </Talent>
 <Talent id="RULES-T0129_CHALEUR">
 <Description language="ENGLISH">"Resistance (Heat)"</Description>
+<Generique>"RULES-T0129_*"</Generique>
 </Talent>
 <Talent id="RULES-T0129_FROID">
 <Description language="ENGLISH">"Resistance (Cold)"</Description>
+<Generique>"RULES-T0129_*"</Generique>
 </Talent>
   <!-- LOT 3d-2 : Etiquette (Dwarfs), accorde par le regiment d Averland (p.6). Verifie
        absent de tout DATABASE\ avant creation. -->
 <Talent id="RULES-T0136_DWARFS">
 <Description language="ENGLISH">"Etiquette (Dwarfs)"</Description>
+<Generique>"RULES-T0136_*"</Generique>
 </Talent>
   <!-- LOT 3d-2 : Nuln donne Craftsman / Master Tradesman (Bladesmith or Gunsmith), p.6.
        GUNSMITH n est PAS cree : decision Nono du 04/09, on pointe sur RULES-T0092_ARMU et
@@ -1157,15 +1266,19 @@ Description: You ask Dazh to illuminate the night, and he
        RULES-COMPMETIER_LAMIER "Trade (Bladesmith)". -->
 <Talent id="RULES-T0092_LAMIER">
 <Description language="ENGLISH">"Craftsman (Bladesmith)"</Description>
+<Generique>"RULES-T0092_*"</Generique>
 </Talent>
 <Talent id="RULES-T0157_LAMIER">
 <Description language="ENGLISH">"Master Tradesman (Bladesmith)"</Description>
+<Generique>"RULES-T0157_*"</Generique>
 </Talent>
 <Talent id="RULES-T0092_LAMIER/RULES-T0092_ARMU">
 <Description language="ENGLISH">"Craftsman (Bladesmith or Gunsmith)"</Description>
+<Generique>"RULES-T0092_*"</Generique>
 </Talent>
 <Talent id="RULES-T0157_LAMIER/RULES-T0157_ARMU">
 <Description language="ENGLISH">"Master Tradesman (Bladesmith or Gunsmith)"</Description>
+<Generique>"RULES-T0157_*"</Generique>
 </Talent>
 </DATA_TALENT_SPECIALIZATION>
 <DATA_SPECIE_TRAIT>

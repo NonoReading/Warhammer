@@ -96,30 +96,39 @@ The assistant provides a bonus of +20 to these Tests rather than the normal +10 
 <DATA_TALENT_SPECIALIZATION>
 <Talent id="WINDS-T0176_FEU">
 <Description language="ENGLISH">"Suffuse With (Aqshy)"</Description>
+<Generique>"WINDS-T0176_*"</Generique>
 </Talent>
 <Talent id="WINDS-T0176_CIEUX">
 <Description language="ENGLISH">"Suffuse With (Azyr)"</Description>
+<Generique>"WINDS-T0176_*"</Generique>
 </Talent>
 <Talent id="WINDS-T0176_METAL">
 <Description language="ENGLISH">"Suffuse With (Chamon)"</Description>
+<Generique>"WINDS-T0176_*"</Generique>
 </Talent>
 <Talent id="WINDS-T0176_NECRO">
 <Description language="ENGLISH">"Suffuse With (Dhar)"</Description>
+<Generique>"WINDS-T0176_*"</Generique>
 </Talent>
 <Talent id="WINDS-T0176_BETE">
 <Description language="ENGLISH">"Suffuse With (Ghur)"</Description>
+<Generique>"WINDS-T0176_*"</Generique>
 </Talent>
 <Talent id="WINDS-T0176_VIE">
 <Description language="ENGLISH">"Suffuse With (Ghyran)"</Description>
+<Generique>"WINDS-T0176_*"</Generique>
 </Talent>
 <Talent id="WINDS-T0176_LUMIERE">
 <Description language="ENGLISH">"Suffuse With (Hysh)"</Description>
+<Generique>"WINDS-T0176_*"</Generique>
 </Talent>
 <Talent id="WINDS-T0176_MORT">
 <Description language="ENGLISH">"Suffuse With (Shyish)"</Description>
+<Generique>"WINDS-T0176_*"</Generique>
 </Talent>
 <Talent id="WINDS-T0176_OMBRE">
 <Description language="ENGLISH">"Suffuse With (Ulgu)"</Description>
+<Generique>"WINDS-T0176_*"</Generique>
 </Talent>
 </DATA_TALENT_SPECIALIZATION>
 <DATA_RACE>
