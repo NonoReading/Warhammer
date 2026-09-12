@@ -68,6 +68,21 @@ begin
             end;
       end
 
+    // Fond uni derriere les RadioButton d'un GroupBox, meme procede que pour les TabSheet
+    // ci-dessus (un TShape en Align=alClient, windowed donc peint sous les RadioButton qui
+    // restent des HWND natifs par-dessus) : la legende d'un RadioButton Windows une fois actif
+    // ignore Font.Color et se dessine dans une teinte sombre, invisible sur le fond noir du
+    // formulaire - un fond clair derriere la rend lisible sans avoir a maitriser sa couleur.
+    // Signale par Nono le 12/09/2026 (WinMutations, GroupBoxMutationType/Entree), tentatives
+    // Font.Color puis SetWindowTheme sur le RadioButton lui-meme restees sans effet visible.
+    else if (AContainer.Components[I] is TGroupBox) then
+      begin
+          Shape             := TShape.Create(AContainer);
+          Shape.Parent      := TGroupBox(AContainer.Components[I]);
+          Shape.Align       := alClient;
+          Shape.Brush.Color := CouleurDefColor;
+      end
+
     // Champs de saisie
     else if (AContainer.Components[I] is TComboBox)
        or (AContainer.Components[I] is TTreeView) then
@@ -142,6 +157,10 @@ begin
           TRadioButton(AContainer.Components[I]).Font.Name := ConstPoliceNom;
           TRadioButton(AContainer.Components[I]).Font.Size := ConstPoliceTaille;
           TRadioButton(AContainer.Components[I]).Font.Bold := True;
+          // Le theme Windows dessine la legende d'un RadioButton actif dans sa propre teinte
+          // (Font.Color ignore) - CouleurDefInverse suppose desormais le fond clair pose par le
+          // TGroupBox ci-dessus (meme convention que TEdit/TMemo : texte fonce sur fond clair).
+          TRadioButton(AContainer.Components[I]).Font.Color := CouleurDefInverse;
           TRadioButton(AContainer.Components[I]).Color     := CouleurDefColor;
         end
 

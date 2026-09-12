@@ -6,93 +6,6 @@
 CORRECTIONS COURTES  (une ligne ou deux chacune)
 =========================================================================
 
-[FAIT LE 11/09/2026 - Restant Xp faux dans WinPersonnage (pas le PDF), RESOLU.
-CalculTableExperience calculait Restante avec Personnage.XpTotal, fige a l ouverture du
-fichier, jamais resynchronise si le Total est releve en session. Corrige en lisant
-EditTotalXp/EditTotalXp25. Bug d ordre trouve en testant (EditTotalXp pas encore initialise
-au tout premier calcul) corrige aussi. Valide par Nono. Detail CONTEXT.md/Log.txt (entree du
-11/09/2026).]
-
-[FAIT LE 12/09/2026 - Fonction dediee CalculXpEtat (chantier priorise le 11/09), et trois
-bugs de fond decouverts en la cablant, RESOLUS ET VALIDES PAR NONO. (1) Gabarit Pdf normal :
-colonnes Total/Restant inversees (pdfpersonnage.pas), corrige. (2) Personnage.XpTotal/
-Xp25Total/XpActuel jamais resynchronises pendant la session (PersonnageXmlCreation prend
-Personnage par valeur) - le Pdf depuis WinPersonnage affichait des valeurs figees a
-l ouverture, corrige dans ButtonPdfClick. (3) Cause racine du "probleme d enregistrement de
-l XP" : XmlSauvegarde relisait un texte forme avec separateur de milliers via StrToIntDef,
-qui echouait silencieusement (0) des que Restante atteignait 1000 - CurrentXp="0" ecrit dans
-le XML quel que soit le vrai Restant (le fichier de Charlatant chanceux signale le 11/09 en
-etait un exemple, desormais corrige par une resauvegarde). Corrige en lisant CalculXpEtat()
-directement. (4) Meme defaut de format rendait peu fiables deux tests de validation de
-carriere des que le Total etait >= 1000 juste apres l ouverture - corrige a la source
-(ecriture de LigXpTotal en brut au chargement). Detail CONTEXT.md 2.56, Log.txt.]
-
-[FAIT LE 11/09/2026 - PDF Feldo : Total/Spent/Current XP faux, RESOLU. PdfBlocExperience
-lisait Xp25Total (reste a 0 hors option XpDiv25) au lieu de XpTotal, puis probleme distinct
-sous XpDiv25 coche ou XpActuel porte deja une valeur divisee par 25 (pas de champ
-Xp25Actuel). Corrige en choisissant la paire de champs deja coherente selon l option, sans
-division dans le PDF. Compile et valide par Nono (fiche et PDF identiques, 98/94/4). Detail
-CONTEXT.md (entree du 11/09/2026 en tete de fichier), Log.txt. Hors perimetre : le gabarit
-normal ignore toujours XpDiv25 dans son panneau Experience.]
-
-[FAIT LE 11/09/2026 - Asterisques de talents dupliquees, RESOLU. Deux bugs distincts :
-Personnage.Asterisque relu au lieu de la variable locale fraiche dans les 3 blocs
-competence de PersonnageTalentAsterisque (chargepersonnage.pas) ; et surtout
-CalculTotaux/MajTables (winpersonnage.pas) qui reconstruisaient Personnage.AugmentationTalent
-depuis la grille ecran a CHAQUE ouverture de personnage sans jamais remettre Asterisque a
-zero, ecrasant le calcul correct fait a l'instant d'avant. Compile et valide par Nono sur
-Gunther Krieg. Detail CONTEXT.md (entree du 11/09/2026 en tete de fichier), Log.txt.]
-
-[FAIT LE 11/09/2026 - Migration ModifyCarac d'Attribut sur le moteur generique, RESOLU. Les
-5 fonctions Personnage*AttributModif (Mutation/Talent/CareerBonus/Arme/ArmureBonus)
-deleguent desormais a ChargeModificateur. Compile et valide par Nono sur Gunther Krieg et sur
-une mutation, RAS. Detail CONTEXT.md (entree du 11/09/2026 en tete de fichier), Log.txt.]
-
-[FAIT LE 11/09/2026 - Mutation branchee sur ModifySkill/ModifArmour, RESOLU.
-PersonnageMutationCompetenceModif et PersonnageMutationArmureModif (chargepersonnage.pas)
-lisent desormais ListCorruptionModificateur. Compile et valide par Nono sur une mutation a
-bonus de Competence et une a Points d'Armure, Total correct dans les deux cas. Detail
-CONTEXT.md (entree du 11/09/2026 en tete de fichier), Log.txt.]
-
-[FAIT LE 11/09/2026 - Asterisque manquante sur une mutation visant une famille de
-sous-competences (ex. langues, "-10 to all Language Tests"), RESOLU. La boucle d'annotation
-(PdfPersonnageMutationAsterisques, pdfpersonnage.pas) ecrivait sous le code generique
-(RULES-COMPLANG_*) au lieu des sous-competences reellement affichees - Total deja correct,
-seul l'asterisque manquait. Corrige en parcourant le catalogue comme pour ModifySkillAttribut.
-Detail CONTEXT.md (entree du 11/09/2026 en tete de fichier), Log.txt.]
-
-[FAIT LE 11/09/2026 - ModifyWeapon branche sur Talent, RESOLU. Nouvelle fonction
-PersonnageTalentArmeModif (chargepersonnage.pas), meme moule que
-PersonnageCareerBonusArmeModif, cablee d'emblee dans les deux blocs de rendu des armes de
-pdfpersonnage.pas. Teste avec un talent de test temporaire (PERSO-T0001, retire apres coup) et
-valide par Nono sur Gunther Krieg : Shield +10 supplementaire, Boat Hook non affecte. Detail
-CONTEXT.md (entree du 11/09/2026 en tete de fichier), Log.txt.]
-
-[FAIT LE 11/09/2026 - ModifyDamage sur Talent, RESOLU. Migration de Strike Mighty Blow
-(RULES-T0037) et Accurate Shot (RULES-T0149) du mecanisme Effet dedie (TBonusCC/TBonusCT) vers
-le moteur generique par source, meme pathway que ModifyWeapon (BOOK_RULESBOOK.Xml). Valide par
-Nono sur Gunther Krieg : regression nulle sur les armes de contact deja porteuses de Mighty
-Blow, et une arme a distance ajoutee sans Accurate Shot ne recoit correctement aucun bonus.
-Detail CONTEXT.md (entree du 11/09/2026 en tete de fichier), Log.txt.]
-
-[FAIT LE 11/09/2026 - ModifArmour sur Talent, RESOLU - chantier "moteur generique de
-modificateurs" termine (les 5 cibles ModifyCarac/ModifySkill/ModifyWeapon/ModifyDamage/
-ModifArmour sont chacune sur un seul pathway par source). Bug trouve au passage :
-PersonnageTalentModificateur ne bouclait jamais sur Personnage.MetierTalent (talent choisi
-en carriere), trou deja present dans les 4 migrations precedentes du jour, corrige en
-premier. PersonnageTalentArmureModif deleguee au moteur generique, unite
-ChargeTalentArmureModif supprimee. Valide par Nono sur un Skink cree pour le test
-(RULES-T0ARM, talent de race) : +1 Point d'Armure confirme sur les 4 emplacements. Detail
-CONTEXT.md (entree du 11/09/2026 en tete de fichier), Log.txt.]
-
-LIBELLES TRONQUES SUR CERTAINS BOUTONS DE WINMUTATION. Signale par Nono le 11/09/2026 :
-sur la fenetre Corruption (ajout de mutation), "Spend a Resilience point"/"Accept a
-mutation"/"Physical Corruption"/"Mental Corruption" (ButtonMutationResilience/Accepter/
-TypePhysical/TypeMental, tous des TBCButton, winmutation.lfm) affichent leur libelle avec
-la premiere ET la derniere lettre coupees ("pend a Resilience poin", "hysical Corruptio"),
-alors que Cancel/Ok (memes composants) s'affichent entiers. Pas encore diagnostique - a
-regarder cote Rounding/largeur du bouton vs largeur du texte.
-
 LE TEST DE RADICAL DE TALENT SUPPOSE UN CODE DE 5 CARACTERES. winpersonnage.pas l.3245,
 copy(CodeSansLivre(...),1,5) : vrai pour les 868 codes en T+4 chiffres, faux pour les ids
 "A ou B" comme T0009/RULES-T0067 (seul le premier est compare) et pour le generique T*. Ce
@@ -136,14 +49,6 @@ releve : Middenheim donne a Middenland Gossip, Haggle, Outdoor Survival, Ranged 
 Nations donne Athletics, Endurance, Melee (Two-Handed), Language (Bretonnian) ; pour Nordland
 Middenheim donne Evaluate, Ranged (Bow), Trade (Any), Fisherman/Rover la ou Nations donne
 Cool, Ranged (Throwing), Row, Hardy. A rouvrir seulement si l ecart gene en jeu.
-
-[FAIT LE 11/09/2026 - Skull Trophies saisies (NATIO-ARMO_29), compilees et validees par Nono.
-Nouveau code d emplacement RULES-ARMOL_ANY, nouvelles qualites d armure NATIO-ARMOB_15 (Ugly,
-distincte de RULES-DEFECT_02 qui reste reserve a la fabrication) et NATIO-ARMOB_16 (Fear,
-purement descriptive, premier usage reel du suffixe numerique de GetAllArmureBonusLibelle).
-Bug trouve et corrige au passage dans WinArmor (winarmor.pas, TabArmorSelection) : le suffixe
-numerique n etait pas retire avant ChercheArmureBonus, la ligne Fear ressortait vide. Detail
-CONTEXT.md 2.53, Log.txt.]
 
 WINARMOR/PDFPERSONNAGE : LE RETRAIT DU SUFFIXE NUMERIQUE D UNE QUALITE D ARMURE SUPPOSE UN
 INDICE A UN SEUL CHIFFRE. pdfpersonnage.pas l.1799-1800 et l.3034-3035 retirent le suffixe
@@ -578,13 +483,6 @@ PDF Personnage (PRIORITAIRE) :
   réorganisation). Piste évoquée mais pas discutée en détail : regrouper les onglets par
   catégorie (ex. Fiche/Progression/Journal/Référence) plutôt qu'une seule rangée plate. À
   concevoir avec Nono avant de toucher au .lfm.
-
-- (chantier mutation, étape 9, 17/08/2026) astérisque numérotée pour les effets Armour Points
-  (CORPHY_012/016/017, CONTEXT.md §2.7) : Nono la veut ("on pourra la aussi mettre une
-  astérisque") mais PdfBlocArmourPoints (silhouette de protection, page 2) n'a aujourd'hui
-  aucune capacité de dessiner une annotation, contrairement aux tableaux
-  Caractéristiques/Compétences (DessinerTableau). À concevoir avec Nono (où/comment afficher le
-  numéro sur les 4 cases Tête/Bras/Corps/Jambes) avant d'implémenter.
 
 - (repéré par Nono, 17/08/2026, terminé pour la partie balises) textes <Effet> des tables de
   mutation (Physical/Mental Corruption Table) contenant un terme de jeu traductible en dur dans

@@ -1,6 +1,21 @@
 # Warhammer — Contexte projet
 
-**Dernière mise à jour : 11/09/2026 — RESTANT XP FAUX DANS WINPERSONNAGE (PAS LE PDF) : TOTAL
+**Dernière mise à jour : 12/09/2026 — DEUX CORRECTIONS COURTES SUR WINMUTATION, CONFIRMÉES PAR
+NONO A L'ÉCRAN.** (1) Libellés tronqués/vidés sur quatre `TBCButton` (largeur fixe trop petite
+pour la légende localisée, surtout en français) : `WordBreak` activé sur ces boutons +
+hauteur/position ajustées dans le `.lfm`. (2) Libellés des `TRadioButton` invisibles une fois
+leur `GroupBox` actif (le thème Windows ignore `Font.Color` en état actif) : fond `TShape`
+ajouté derrière les `TGroupBox` dans `globalfonts.pas`, même procédé que celui déjà utilisé pour
+les `TTabSheet`. Détail §4 (pièges) et Log.txt. Aucun chantier ouvert pour la suite - prochain
+travail à choisir dans `A FAIRE.txt` (candidats : équipement porté/non porté, qualités de
+fabrication, ancrage des contrôles).
+
+Chantier précédent (2.7, mutation à corruption max) entièrement terminé le 12/09/2026 - détail
+§2.7.
+
+---
+
+**11/09/2026 — RESTANT XP FAUX DANS WINPERSONNAGE (PAS LE PDF) : TOTAL
 FIGÉ À L'OUVERTURE DU FICHIER, CORRIGÉ ET VALIDÉ PAR NONO.** Suite immédiate du chantier PDF
 Feldo (entrée du 11/09/2026 juste en dessous) : Nono a testé sur un personnage SANS l'option
 `XpDiv25` (Charlatant chanceux) et a vu 5000/500/4500 sur la fiche WinPersonnage mais
@@ -1694,7 +1709,7 @@ le nouvel historique doit venir consommer.
 Les étapes 4-6 (PDF) se sont ajustées comme d'habitude par allers-retours captures d'écran sur
 le rendu réel, pas de spec pixel-perfect figée à l'avance.
 
-### 2.7 Mutation quand la corruption atteint son maximum — en cours (démarré le 16/08/2026, dernière mise à jour le 12/09/2026, étape 10)
+### 2.7 Mutation quand la corruption atteint son maximum — terminé (démarré le 16/08/2026, terminé le 12/09/2026)
 
 **Mécanisme** (conception validée par Nono) : quand `Left` (voir §2.6) atteint 0, le joueur
 choisit entre dépenser un point de Résilience définitivement, ou accepter une mutation.
@@ -2153,12 +2168,18 @@ restent, eux, bloquants comme avant. Compilé avec lazbuild (0 erreur). **Confir
 (12/09/2026)** : le message s'affiche toujours (attendu, avertissement pur) mais la validation
 aboutit et la sauvegarde se fait bien.
 
-**Étape 10 terminée.** Reste ouvert pour ce chantier : l'astérisque numérotée pour les effets
-Armour Points (§ étape 9), seul point non tranché.
+**Étape 10 terminée.**
 
-**Reste à faire** : Astérisque numérotée pour les effets Armour Points (§ étape 9 ci-dessus) :
-conception de l'affichage sur `PdfBlocArmourPoints` à faire avec Nono avant de coder - seul
-point encore ouvert de ce chantier.
+**Astérisque Armour Points (§ étape 9) : en fait déjà codée, constaté le 12/09/2026.** En
+reprenant ce chantier pour trancher ce point soi-disant ouvert, relecture du code a montré que
+le marqueur `(N)` est déjà calculé (`PdfPersonnageMutationAsterisques`, un seul numéro pour tout
+le bloc quel que soit le nombre de cases touchées - exactement le choix retenu à l'étape 9),
+dessiné en coin haut-droit du cadre par `PdfBlocArmourPoints`, et repris à côté du nom de la
+mutation dans `PdfBlocMutations` - correctement câblé à l'appel
+(`PdfPersonnageCreationFeldo2P`). Vraisemblablement ajouté pendant le chantier "moteur générique"
+du 11/09/2026 (migration `ModifArmour` sur Talent, §2.55) sans être documenté ici à ce moment-là.
+**Confirmé par Nono (12/09/2026)** : déjà testé sur Charlatant chanceux, fonctionne. **Chantier
+2.7 entièrement terminé, plus aucun point ouvert.**
 
 ---
 
@@ -7046,6 +7067,23 @@ chantier concerné, avec les détails techniques.
   méthode connue (et seule connue) pour avoir un fond noir homogène sur les onglets de ce
   projet, donc pas un bug à corriger à la source, juste un réflexe à avoir pour tout nouvel
   ajout.
+- **Un `TRadioButton`/`TCheckBox` natif Windows devient illisible dès qu'il passe `Enabled :=
+  True`, même avec `Font.Color` fixé.** Signalé par Nono le 12/09/2026 sur `WinMutation`
+  (`GroupBoxMutationType`/`Entree`, désactivés à l'ouverture puis activés en cours de scénario) :
+  les trois libellés (Randomly/Give the result of your throw/Select) restaient lisibles tant que
+  le `GroupBox` était désactivé (rendu Windows en gris imposé, visible sur fond noir), puis
+  disparaissaient dès qu'il devenait actif. Le thème Windows (UxTheme) dessine la légende d'un
+  `TRadioButton` actif dans sa propre teinte et ignore `Font.Color` - confirmé en écartant deux
+  pistes qui n'ont eu aucun effet visible : fixer `Font.Color` directement, puis désactiver le
+  thème du contrôle via l'API Win32 `SetWindowTheme` (première dépendance directe à l'unité
+  `Windows` du projet, abandonnée ensuite). Corrigé en réutilisant le procédé déjà en place pour
+  les `TTabSheet` ci-dessus : un `TShape` en fond (`Align := alClient`) posé sur le `TGroupBox`
+  parent (`MiseAJourUnContenaire`, `globalfonts.pas`) - étant fenêtré, le `RadioButton` reste au
+  premier plan par-dessus, et un fond clair rend sa légende lisible quelle que soit la teinte que
+  le thème lui impose, sans avoir à la maîtriser. Réflexe à retenir : si un texte de contrôle
+  natif Windows disparaît sans raison apparente (surtout après un changement d'état
+  Enabled/Visible), poser un fond derrière plutôt que de chercher à teinter le contrôle
+  lui-même - `CheckBox` n'est pas encore touché mais appartient à la même famille.
 - **Pattern récurrent - variable record réutilisée d'un tour de boucle à l'autre pendant un
   chargement XML, jamais remise à vide/zéro avant d'être ajoutée au tableau** : ce projet
   charge presque tout le XML avec UNE SEULE variable record locale par type de donnée

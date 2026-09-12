@@ -83,6 +83,25 @@ procedure TWinMutations.FormCreate(Sender: TObject);
   begin
     MiseEnFormeDesChamp(self);
 
+    // Libellés longs (surtout en français, ex. "Dépenser un point de Résilience") plus larges
+    // que le bouton : sans retour à la ligne, TBCButton centre le texte et le déborde des deux
+    // côtés, coupant la première ET la dernière lettre (signalé par Nono le 11/09/2026), voire
+    // le faisant disparaître entièrement pour les boutons les plus étroits (Physical/Mental).
+    // WordBreak à True bascule automatiquement SingleLine à False (bctypes.pas) ; hauteur des
+    // quatre boutons agrandie en conséquence dans le .lfm.
+    ButtonMutationResilience.StateNormal.FontEx.WordBreak  := True;
+    ButtonMutationResilience.StateHover.FontEx.WordBreak   := True;
+    ButtonMutationResilience.StateClicked.FontEx.WordBreak := True;
+    ButtonMutationAccepter.StateNormal.FontEx.WordBreak    := True;
+    ButtonMutationAccepter.StateHover.FontEx.WordBreak     := True;
+    ButtonMutationAccepter.StateClicked.FontEx.WordBreak   := True;
+    ButtonMutationTypePhysical.StateNormal.FontEx.WordBreak  := True;
+    ButtonMutationTypePhysical.StateHover.FontEx.WordBreak   := True;
+    ButtonMutationTypePhysical.StateClicked.FontEx.WordBreak := True;
+    ButtonMutationTypeMental.StateNormal.FontEx.WordBreak  := True;
+    ButtonMutationTypeMental.StateHover.FontEx.WordBreak   := True;
+    ButtonMutationTypeMental.StateClicked.FontEx.WordBreak := True;
+
     Self.Caption                     := GetTexteLibelle('RULES-LAB_156');
     ButtonMutationResilience.Caption := GetTexteLibelle('RULES-LAB_167');
     ButtonMutationAccepter.Caption   := GetTexteLibelle('RULES-LAB_168');

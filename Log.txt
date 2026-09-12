@@ -2924,3 +2924,62 @@ Compile avec lazbuild (0 erreur). CONFIRME PAR NONO : le message s'affiche toujo
 avertissement pur) mais la validation aboutit et la sauvegarde se fait bien. Etape 10 du chantier
 2.7 terminee ; reste ouvert : asterisque Armour Points (etape 9). Detail CONTEXT.md 2.7 etape 10.
 Fichier modifie : winpersonnage.pas.
+
+12/09/2026 - ASTERISQUE ARMOUR POINTS (CHANTIER 2.7 ETAPE 9), CONSTATEE DEJA CODEE, CHANTIER 2.7
+DESORMAIS ENTIEREMENT TERMINE. En reprenant ce point soi-disant ouvert, relecture de
+pdfpersonnage.pas a montre que le marqueur (N) est deja calcule
+(PdfPersonnageMutationAsterisques), dessine en coin haut-droit du cadre par
+PdfBlocArmourPoints, et repris a cote du nom de la mutation dans PdfBlocMutations -
+vraisemblablement ajoute pendant le chantier moteur generique du 11/09/2026 (migration
+ModifArmour) sans avoir ete documente a ce moment-la. Confirme par Nono : deja teste sur
+Charlatant chanceux, fonctionne. Aucun code touche cette session. Detail CONTEXT.md (entree en
+tete de fichier), Log.txt.
+
+12/09/2026 - LIBELLES TRONQUES/VIDES SUR QUATRE BOUTONS DE WINMUTATION, CORRIGE, COMPILE ET
+CONFIRME PAR NONO A L ECRAN. Signale le 11/09/2026 (A FAIRE.txt) puis complete par Nono le
+12/09/2026 : les libelles se vident aussi sur les boutons selecteurs. Cause trouvee dans
+bcbutton.pas/bctools.pas (package BGRAControls) : MiseAJourUnContenaire (globalfonts.pas)
+impose une police de taille 20 en gras a tous les TBCButton du projet sans jamais toucher leur
+largeur ; TBCButton ne reduit ni n ellipse le texte, RenderText centre la legende dans le
+bitmap du bouton et la coupe a parts egales des deux cotes si elle deborde
+(ButtonMutationResilience/Accepter, 210px, legendes RULES-LAB_167/168) voire la fait disparaitre
+entierement quand le debordement est trop grand (ButtonMutationTypePhysical/Mental, 154px,
+legendes RULES-CORRUPTION_PHYSICAL/MENTAL) - un probleme de largeur fixe face a une legende
+localisee (le francais est partout plus long que l anglais ici), pas un bug de chaine.
+Corrige en activant WordBreak (retour a la ligne) sur les trois etats (Normal/Hover/Clicked) du
+FontEx de ces quatre boutons dans winmutation.pas (WordBreak a True desactive SingleLine
+automatiquement, bctypes.pas), et en agrandissant leur hauteur dans winmutation.lfm pour laisser
+la place aux lignes supplementaires (Resilience 41->88, Accepter/Physical/Mental 41->56), les
+boutons suivants de chaque colonne decales d autant (Annuler, TypeHasard, Mental) - marge
+verifiee sur les coordonnees du .lfm, aucun chevauchement avec les controles voisins (GroupBox,
+SpinEdit). Compile avec lazbuild (0 erreur). Item retire de A FAIRE.txt.
+Fichiers modifies : winmutation.pas, winmutation.lfm, A FAIRE.txt.
+
+12/09/2026 - LIBELLES DES RADIOBUTTON INVISIBLES UNE FOIS ACTIFS (WINMUTATION,
+GROUPBOXMUTATIONTYPE/ENTREE), CORRIGE, COMPILE ET CONFIRME PAR NONO A L ECRAN. Suite
+immediate de l entree precedente (boutons WinMutation) : Nono a signale que les libelles des
+trois choix (Randomly/Give the result of your throw/Select) disparaissent des que leur
+GroupBox passe actif (apres Accept a mutation, puis apres un choix Physical/Mental Corruption) -
+visible tant que le GroupBox reste desactive, invisible des qu il devient actif.
+Deux pistes tentees sur le RadioButton lui-meme, rejetees par Nono (toujours vide a l ecran) :
+Font.Color jamais fixe dans MiseAJourUnContenaire (globalfonts.pas), puis SetWindowTheme(Handle,
+'', '') pour desactiver le theme Windows sur ce controle - la legende active d un RadioButton
+theme Windows ignore Font.Color quoi qu on fasse depuis le controle lui-meme.
+Corrige en suivant la proposition de Nono : reprendre le procede deja utilise pour les
+TTabSheet dans ce meme fichier (un TShape en Align=alClient pose comme fond, windowed donc
+peint sous les controles natifs qui restent par-dessus) - nouvelle branche TGroupBox dans
+MiseAJourUnContenaire qui pose ce fond (CouleurDefColor, clair) derriere le GroupBox. Peu
+importe la teinte exacte que le theme impose a la legende du RadioButton actif (sombre,
+constatee invisible sur noir) : un fond clair la rend lisible sans avoir a la maitriser.
+Font.Color du RadioButton corrige a CouleurDefInverse (sombre) par coherence avec ce nouveau
+fond clair, meme si sans effet demontre sur le rendu theme. Tentative SetWindowTheme et la
+dependance a l unite Windows abandonnees (retour a LCLIntf/LCLType seuls, comme partout
+ailleurs dans le projet). Compile avec lazbuild (0 erreur, build complet). Fichier modifie :
+globalfonts.pas.
+CONFIRME PAR NONO : les trois choix redeviennent lisibles une fois le GroupBox actif. A garder
+en tete pour la suite (remarque de Nono) : la gestion des couleurs/theme de RadioButton/
+CheckBox natifs sous Lazarus/Win32 est peu previsible (Font.Color ignore une fois le controle
+actif, cause reelle jamais confirmee avec certitude) - le reflexe "fond TShape derriere,
+comme pour les TabSheet" plutot que de chercher a maitriser la couleur du controle lui-meme
+est la solution qui a marche ici, a retenir si le meme symptome (texte qui disparait sur un
+controle natif) revient ailleurs (CheckBox notamment, meme famille de controle).

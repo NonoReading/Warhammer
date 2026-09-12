@@ -12,7 +12,7 @@ object WinMutations: TWinMutations
   OnCreate = FormCreate
   object ButtonMutationResilience: TBCButton
     Left = 408
-    Height = 41
+    Height = 88
     Top = 48
     Width = 210
     StateClicked.Background.Gradient1.StartColor = 8404992
@@ -103,8 +103,8 @@ object WinMutations: TWinMutations
   end
   object ButtonMutationAccepter: TBCButton
     Left = 408
-    Height = 41
-    Top = 104
+    Height = 56
+    Top = 151
     Width = 210
     StateClicked.Background.Gradient1.StartColor = 8404992
     StateClicked.Background.Gradient1.EndColor = 4194304
@@ -195,7 +195,7 @@ object WinMutations: TWinMutations
   object ButtonMutationAnnuler: TBCButton
     Left = 408
     Height = 41
-    Top = 160
+    Top = 222
     Width = 210
     StateClicked.Background.Gradient1.StartColor = 8404992
     StateClicked.Background.Gradient1.EndColor = 4194304
@@ -286,7 +286,7 @@ object WinMutations: TWinMutations
   object ButtonTypeHasard: TBCButton
     Left = 408
     Height = 41
-    Top = 216
+    Top = 278
     Width = 210
     StateClicked.Background.Gradient1.StartColor = 8404992
     StateClicked.Background.Gradient1.EndColor = 4194304
@@ -726,7 +726,7 @@ object WinMutations: TWinMutations
   end
   object ButtonMutationTypePhysical: TBCButton
     Left = 1048
-    Height = 41
+    Height = 56
     Top = 203
     Width = 154
     StateClicked.Background.Gradient1.StartColor = 8404992
@@ -817,8 +817,8 @@ object WinMutations: TWinMutations
   end
   object ButtonMutationTypeMental: TBCButton
     Left = 1048
-    Height = 41
-    Top = 256
+    Height = 56
+    Top = 271
     Width = 154
     StateClicked.Background.Gradient1.StartColor = 8404992
     StateClicked.Background.Gradient1.EndColor = 4194304
