@@ -1694,7 +1694,7 @@ le nouvel historique doit venir consommer.
 Les étapes 4-6 (PDF) se sont ajustées comme d'habitude par allers-retours captures d'écran sur
 le rendu réel, pas de spec pixel-perfect figée à l'avance.
 
-### 2.7 Mutation quand la corruption atteint son maximum — en cours (démarré le 16/08/2026, dernière mise à jour le 17/08/2026, étape 9)
+### 2.7 Mutation quand la corruption atteint son maximum — en cours (démarré le 16/08/2026, dernière mise à jour le 12/09/2026, étape 10)
 
 **Mécanisme** (conception validée par Nono) : quand `Left` (voir §2.6) atteint 0, le joueur
 choisit entre dépenser un point de Résilience définitivement, ou accepter une mutation.
@@ -2112,11 +2112,53 @@ l'étape 8 (Movement, familles de compétences, effets "Tests de X", Armour Poin
   Caractéristiques/Compétences - donc nécessite d'abord une conception de l'affichage avant
   d'implémenter, remis à une prochaine session).
 
-**Reste à faire** : le mécanisme de perte de mutation lui-même (rare, confirmé possible par le
-livre) n'est ni conçu ni implémenté - c'est justement ce qui a motivé `Personnage.Mutations`
-comme liste dédiée plutôt qu'un ledger texte, mais aucune UI/logique de retrait n'existe
-encore. Astérisque numérotée pour les effets Armour Points (§ étape 9 ci-dessus) : conception de
-l'affichage sur `PdfBlocArmourPoints` à faire avec Nono avant de coder.
+**Étape 10 (✅ terminée, compilée, pas encore testée par Nono en conditions réelles, 12/09/2026)** :
+retrait d'une mutation.
+
+**Découverte en reprenant ce chantier** : le retrait lui-même (`TWinPersonnages.TabMutationDblClick`,
+`winpersonnage.pas`) existait déjà, câblé sur `TabMutation.OnDblClick`, avec confirmation
+(`RULES-MESS_060`) - visiblement ajouté en marge du chantier traits de créature (§2.54/2.55,
+11/09/2026) sans jamais être documenté ici. Il retire l'entrée de `Personnage.Mutations` ; les
+effets chiffrés (Attribut/Compétence/Armure, étapes 8-9 ci-dessus) disparaissent automatiquement
+puisqu'ils sont recalculés à la volée depuis cette même liste - aucune cascade à coder à part.
+
+**Conception validée avec Nono (12/09/2026)**, réponses aux trois questions du retrait :
+déclencheur purement narratif (libre au MJ, pas de règle mécanique) ; portée libre (n'importe
+quelle mutation peut être retirée, peu importe laquelle) ; aucun impact sur les points de
+Corruption actuels - seule demande : garder une trace pour mémoire. Seule pièce manquante :
+une ligne à 0 dans l'historique de Corruption, sur le modèle des lignes compensatoires
+"Résilience dépensée"/"Mutation acceptée" (étape 4), mais celle-ci change explicitement PAS le
+total. Nono a choisi d'y faire figurer le nom de la mutation (option retenue face à un libellé
+générique) - nécessaire capturer AVANT le retrait, sinon la seule trace de laquelle c'était
+disparaît avec la ligne de `Personnage.Mutations`.
+
+**Implémentation** : `LibelleMutation` lu depuis `TabMutation.Cells[2, TabMutation.Row]` (déjà
+résolu par `AfficheMutations`, pas besoin de rappeler `ChercheCorruptionTable`) avant le retrait.
+Nouvelle clé `RULES-LAB_179` ("Mutation removed"/"Mutation supprimée", les deux `BOOK_RULESBOOK*.Xml`).
+Ligne ajoutée à `StringGridCorruption` : montant `'0'`, libellé `GetTexteLibelle('RULES-LAB_179') +
+' : ' + LibelleMutation`, suivie d'un appel à `CalculCorruptionLeft()` (même convention que les
+autres points d'écriture dans cette grille, même si le delta nul ne change rien à `Restant`).
+Compilé avec lazbuild (0 erreur, uniquement des hints pré-existants sans rapport).
+
+**Testé par Nono (12/09/2026) : le principe marche, mais bloqué par un contrôle sans rapport.**
+`ButtonAugmentationClick` (`winpersonnage.pas`, bouton Valider de l'onglet Expérience) a un
+contrôle "rien n'a changé" (`RULES-MESS_024`, ligne ~586) qui ne regarde que le coût XP de
+l'avancement, le Total Xp, le changement de carrière/niveau et le nombre de lignes d'équipement -
+un retrait de mutation ne touche à aucun de ces quatre, donc le contrôle le voit à tort comme
+"rien n'a changé" et **bloquait Valider net** (branche `elseif` qui empêchait `MajTables()` de
+s'exécuter). Corrigé en sortant ce contrôle précis de la chaîne `elseif` bloquante : il reste
+affiché comme avertissement, mais `MajTables()` s'exécute quand même juste après - les onze
+autres contrôles de la même chaîne (XP négatif, carrière incomplète, choix non fait, etc.)
+restent, eux, bloquants comme avant. Compilé avec lazbuild (0 erreur). **Confirmé par Nono
+(12/09/2026)** : le message s'affiche toujours (attendu, avertissement pur) mais la validation
+aboutit et la sauvegarde se fait bien.
+
+**Étape 10 terminée.** Reste ouvert pour ce chantier : l'astérisque numérotée pour les effets
+Armour Points (§ étape 9), seul point non tranché.
+
+**Reste à faire** : Astérisque numérotée pour les effets Armour Points (§ étape 9 ci-dessus) :
+conception de l'affichage sur `PdfBlocArmourPoints` à faire avec Nono avant de coder - seul
+point encore ouvert de ce chantier.
 
 ---
 

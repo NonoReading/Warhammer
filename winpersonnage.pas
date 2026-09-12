@@ -583,8 +583,6 @@ begin
   // decision, pas un defaut.
   else if radiobuttonsuivant.Checked and ComboBoxNvMetier.Visible and (ComboBoxNvMetier.ItemIndex < 0) then
     ShowMEssage(GetTexteLibelle('RULES-MESS_058'))
-  else if (StrToIntDef(tabExperience.Cells[ColXpDonnee,LigXpCout],0) = 0) and (tabExperience.Cells[ColXpDonnee,LigXpTotal] = EditTotalXp.Text) and not radiobuttonsuivant.Checked and not radiobuttonChanger.Checked and (NbEquipement = TabEquipement.RowCount-1) and (not FabAjoute) then
-    ShowMEssage(GetTexteLibelle('RULES-MESS_024'))
   else if (XpDispo < 0) then
     ShowMEssage(GetTexteLibelle('RULES-MESS_025'))
   else if StrToIntDef(EditTotalXp.Text,0) < StrToIntDef(tabExperience.Cells[ColXpDonnee,LigXpTotal],0) then
@@ -604,7 +602,14 @@ begin
   else if AjoutMineur and (RechercherDansColonne(TabSort, ConstArbreAuChoix, 2) <> -1) then
     ShowMEssage(GetTexteLibelle('RULES-MESS_033'))
   else
-    MajTables();
+    begin
+      // Avertissement, pas un blocage (conception revue avec Nono le 12/09/2026) : un
+      // personnage peut changer sans que ce controle le voie (ex. retrait d'une mutation,
+      // §2.7), Valider doit quand meme s'appliquer plutot que de refuser tout net.
+      if (StrToIntDef(tabExperience.Cells[ColXpDonnee,LigXpCout],0) = 0) and (tabExperience.Cells[ColXpDonnee,LigXpTotal] = EditTotalXp.Text) and not radiobuttonsuivant.Checked and not radiobuttonChanger.Checked and (NbEquipement = TabEquipement.RowCount-1) and (not FabAjoute) then
+        ShowMEssage(GetTexteLibelle('RULES-MESS_024'));
+      MajTables();
+    end;
 end;
 
 procedure TWinPersonnages.ButtonPdfClick(Sender: TObject);
@@ -927,14 +932,20 @@ procedure TWinPersonnages.TabMutationClick(Sender: TObject);
 // purger. CONTEXT.md, chantier "traits de creature".
 procedure TWinPersonnages.TabMutationDblClick(Sender: TObject);
   var
-    Reponse: Integer;
-    Ind:     Integer;
-    IndSupp: Integer;
+    Reponse:        Integer;
+    Ind:            Integer;
+    IndSupp:        Integer;
+    LibelleMutation: String;
   begin
     if (TabMutation.Row < 1) then Exit;
 
     Reponse := MessageDlg(GetTexteLibelle('RULES-MESS_060'), mtConfirmation, mbYesNo, 0);
     if Reponse <> mrYes then Exit;
+
+    // Libellé capturé AVANT le retrait : une fois l'entrée sortie de Personnage.Mutations, plus
+    // aucun moyen de savoir laquelle c'était - la ligne à 0 ci-dessous est la seule trace qui
+    // survit dans l'historique de Corruption (conception validée avec Nono le 12/09/2026).
+    LibelleMutation := TabMutation.Cells[2, TabMutation.Row];
 
     // TabMutation.Row est 1-based (ligne 0 = en-tete), Personnage.Mutations est 0-based -
     // meme correspondance que le remplissage dans AfficheMutations juste au-dessus.
@@ -942,6 +953,13 @@ procedure TWinPersonnages.TabMutationDblClick(Sender: TObject);
     for Ind := IndSupp to High(Personnage.Mutations) - 1 do
       Personnage.Mutations[Ind] := Personnage.Mutations[Ind + 1];
     SetLength(Personnage.Mutations, Length(Personnage.Mutations) - 1);
+
+    // Ligne compensatoire à 0 : ne change pas le total de points de Corruption (contrairement à
+    // "Mutation acceptée"/"Résilience dépensée"), juste une trace narrative pour le souvenir.
+    StringGridCorruption.RowCount                                   := StringGridCorruption.RowCount + 1;
+    StringGridCorruption.Cells[1, StringGridCorruption.RowCount - 1] := '0';
+    StringGridCorruption.Cells[2, StringGridCorruption.RowCount - 1] := GetTexteLibelle('RULES-LAB_179') + ' : ' + LibelleMutation;
+    CalculCorruptionLeft();
 
     AfficheMutations();
   end;

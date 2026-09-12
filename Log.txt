@@ -2899,3 +2899,28 @@ corrige a la source en ecrivant LigXpTotal en brut (IntToStr) au chargement, com
 le cas apres MajTables. Compile et valide par Nono (Pdf normal et Feldo2P depuis la fenetre
 ouverte, Pdf depuis le menu principal apres resauvegarde). Detail CONTEXT.md (entree 2.56).
 Fichiers modifies : winpersonnage.pas, pdfpersonnage.pas.
+
+12/09/2026 - RETRAIT D UNE MUTATION, TRACE DANS L HISTORIQUE DE CORRUPTION. Reprise du chantier
+2.7 (mutation a corruption max). Le retrait lui-meme (TabMutationDblClick, winpersonnage.pas)
+existait deja depuis le chantier traits de creature (11/09/2026, non documente jusqu ici) : il
+retire l entree de Personnage.Mutations, et les effets chiffres (Attribut/Competence/Armure)
+disparaissent automatiquement puisqu ils sont recalcules depuis cette meme liste. Manquait la
+trace pour memoire demandee par Nono : nouvelle cle RULES-LAB_179 ("Mutation removed"/"Mutation
+supprimee", les deux BOOK_RULESBOOK*.Xml) et ligne a 0 ajoutee a StringGridCorruption au retrait
+(libelle "Mutation supprimee : <nom>", nom capture avant le retrait sinon perdu) - montant nul,
+ne change pas le total de points de Corruption. Conception validee avec Nono avant codage :
+declencheur purement narratif, portee libre (n importe quelle mutation), aucun impact sur les
+points actuels. Compile avec lazbuild (0 erreur). Detail CONTEXT.md 2.7 etape 10. Fichiers
+modifies : winpersonnage.pas, BOOK_RULESBOOK.Xml, BOOK_RULESBOOK_FRANCAIS.Xml.
+
+12/09/2026 - MESSAGE "RIEN N A CHANGE" DEVENU UN AVERTISSEMENT NON BLOQUANT. Teste par Nono en
+suivant : le retrait de mutation marche, mais Valider (ButtonAugmentationClick, onglet
+Experience) refusait d'aboutir - le controle RULES-MESS_024 ("rien n'a change") ne regarde que
+XP/carriere/equipement, ignore tout le reste (dont un retrait de mutation), et etait une branche
+elseif qui empechait MajTables() de s'executer. Sorti de la chaine bloquante : le message
+s'affiche toujours, mais MajTables() s'execute quand meme juste apres. Les onze autres controles
+de la meme chaine (XP negatif, carriere incomplete, choix non fait, etc.) restent bloquants.
+Compile avec lazbuild (0 erreur). CONFIRME PAR NONO : le message s'affiche toujours (attendu,
+avertissement pur) mais la validation aboutit et la sauvegarde se fait bien. Etape 10 du chantier
+2.7 terminee ; reste ouvert : asterisque Armour Points (etape 9). Detail CONTEXT.md 2.7 etape 10.
+Fichier modifie : winpersonnage.pas.
