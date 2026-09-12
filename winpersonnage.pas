@@ -326,14 +326,16 @@ var
   LigAttLance:    Integer = 2;
   LigAttTalent:   Integer = 3;
   LigAttMutation: Integer = 4;
-  LigAttBase:     Integer = 5;
-  LigAttImage:    Integer = 6;
-  LigAttBonus:    Integer = 7;
-  LigAttTotal:    Integer = 8;
-  LigAttXp:       Integer = 9;
-  LigAttActuel:   Integer =10;
-  LigAttCode:     Integer =11;
-  LigAttAsterisc: Integer =12;
+  LigAttCareer:   Integer = 5;
+  LigAttObjet:    Integer = 6;
+  LigAttBase:     Integer = 7;
+  LigAttImage:    Integer = 8;
+  LigAttBonus:    Integer = 9;
+  LigAttTotal:    Integer =10;
+  LigAttXp:       Integer =11;
+  LigAttActuel:   Integer =12;
+  LigAttCode:     Integer =13;
+  LigAttAsterisc: Integer =14;
   ColAttLib:      Integer = 1;
   ColAttCC:       Integer = 2;
   ColAttCT:       Integer = 3;
@@ -690,6 +692,8 @@ begin
   TabAttribut.RowHeights[LigAttLance]    := Hauteur;
   TabAttribut.RowHeights[LigAttTalent]   := Hauteur;
   TabAttribut.RowHeights[LigAttMutation] := Hauteur;
+  TabAttribut.RowHeights[LigAttCareer]   := Hauteur;
+  TabAttribut.RowHeights[LigAttObjet]    := Hauteur;
 
   TabAttribut.ColWidths[ColAttDestin]  := Largeur;
   TabAttribut.ColWidths[ColAttResil]   := Largeur;
@@ -724,7 +728,7 @@ procedure TWinPersonnages.FormClose(Sender: TObject;
   var CloseAction: TCloseAction);
 begin
   NettoyerElementsFenetre(self);
-  EffaceDonnee(TabAttribut, 13);
+  EffaceDonnee(TabAttribut, 15);
   EffaceDonnee(TabCompetence, 1);
   EffaceDonnee(TabTalent, 1);
   EffaceDonnee(TabCarriere, 1);
@@ -745,7 +749,7 @@ procedure TWinPersonnages.EffaceDonnee(Tableau: TStringGrid; NbLig: Integer);
 
 procedure TWinPersonnages.ButtonHistoriqueClick(Sender: TObject);
 begin
-  EffaceDonnee(TabAttribut, 13);
+  EffaceDonnee(TabAttribut, 15);
   EffaceDonnee(TabCompetence, 1);
   EffaceDonnee(TabTalent, 1);
   EffaceDonnee(TabCarriere, 1);
@@ -1696,7 +1700,7 @@ begin
   TabAttribut.Clear;
   TabAttribut.Options          := TabAttribut.Options + [goEditing, goAlwaysShowEditor];
   TabAttribut.ColCount         := 1;
-  TabAttribut.RowCount         := 13;
+  TabAttribut.RowCount         := 15;
   For I := 0 to 13 do
     begin
       if TabAttribut.Columns.Count <= I then
@@ -1720,6 +1724,8 @@ begin
   TabAttribut.Cells[ColAttLib, LigAttLance]   := GetTexteLibelle('RULES-LAB_022');
   TabAttribut.Cells[ColAttLib, LigAttTalent]  := GetTexteLibelle('RULES-LAB_007');
   TabAttribut.Cells[ColAttLib, LigAttMutation]:= GetTexteLibelle('RULES-LAB_172');
+  TabAttribut.Cells[ColAttLib, LigAttCareer]  := GetTexteLibelle('RULES-LAB_181');
+  TabAttribut.Cells[ColAttLib, LigAttObjet]   := GetTexteLibelle('RULES-LAB_182');
   TabAttribut.Cells[ColAttLib, LigAttBase]    := GetTexteLibelle('RULES-LAB_043');
   TabAttribut.Cells[ColAttLib, LigAttImage]   := GetTexteLibelle('RULES-LAB_019');
   TabAttribut.Cells[ColAttLib, LigAttBonus]   := GetTexteLibelle('RULES-LAB_040');
@@ -1731,6 +1737,8 @@ begin
   TabAttribut.RowHeights[LigAttLance]   := 1;
   TabAttribut.RowHeights[LigAttTalent]  := 1;
   TabAttribut.RowHeights[LigAttMutation]:= 1;
+  TabAttribut.RowHeights[LigAttCareer]  := 1;
+  TabAttribut.RowHeights[LigAttObjet]   := 1;
   TabAttribut.RowHeights[LigAttXp]      := 1;
   TabAttribut.RowHeights[LigAttImage]   := 1;
   TabAttribut.RowHeights[LigAttActuel]  := 1;
@@ -2450,6 +2458,8 @@ procedure TWinPersonnages.CalculTotaux();
     DonneeCompetence:    StructureDonnee;
     Bonus:               String;
     NivMetier:           Integer;
+    ValCareer:           Integer;
+    ValObjet:            Integer;
   begin
     // Personnage.AugmentationAttribut n'est normalement resynchronise depuis la grille
     // TabAttribut qu'a l'interieur de CalculTableExperience (juste avant la sauvegarde) -
@@ -2534,16 +2544,31 @@ procedure TWinPersonnages.CalculTotaux();
     // Attributs
     for IndCol := 2 to TabAttribut.ColCount-1 do
       begin
+        // Bonus d'appartenance (Ordre/Regiment/Culte, CONTEXT.md §2.50/§2.51) et bonus
+        // d'objet magique (arme/armure) - jusqu'ici invisibles a l'ecran, seulement pris en
+        // compte dans LigAttTotal via PdfPersonnageAttribut plus bas, ce qui rendait le total
+        // incomprehensible (Initial + Augmented <> Current des qu'un de ces bonus existait).
+        // Signale par Nono le 12/09/2026 sur un Knight du Reiksguard (+10 Fel/+10 WP a
+        // Knight of the Inner Circle) - CONTEXT.md §2.61 (suite).
+        ValCareer := PersonnageCareerBonusAttributModif(Personnage, TabAttribut.Cells[IndCol, LigAttCode]);
+        ValObjet  := PersonnageArmeAttributModif(Personnage, TabAttribut.Cells[IndCol, LigAttCode])
+                     + PersonnageArmureBonusAttributModif(Personnage, TabAttribut.Cells[IndCol, LigAttCode]);
+        if ValCareer <> 0 then
+          TabAttribut.Cells[IndCol, LigAttCareer] := IntToStr(ValCareer);
+        if ValObjet <> 0 then
+          TabAttribut.Cells[IndCol, LigAttObjet] := IntToStr(ValObjet);
+
         Total  := StrToIntdef(TabAttribut.Cells[IndCol, LigAttRace],0) +
                   StrToIntdef(TabAttribut.Cells[IndCol, LigAttLance],0)+
                   StrToIntdef(TabAttribut.Cells[IndCol, LigAttTalent],0)+
-                  StrToIntdef(TabAttribut.Cells[IndCol, LigAttMutation],0);
+                  StrToIntdef(TabAttribut.Cells[IndCol, LigAttMutation],0)+
+                  StrToIntdef(TabAttribut.Cells[IndCol, LigAttCareer],0)+
+                  StrToIntdef(TabAttribut.Cells[IndCol, LigAttObjet],0);
         TabAttribut.Cells[IndCol, LigAttBase] := IntToStr(Total);
-        // Total desormais calcule par l'accesseur unique PdfPersonnageAttribut (deja
-        // utilise par le PDF) plutot que par une addition locale de cellules - il ajoute
-        // notamment les bonus d'appartenance (Ordre/Regiment), d'arme et d'armure, absents
-        // du calcul precedent. LigAttBase ci-dessus reste un calcul local, pour le detail
-        // affiche a l'ecran uniquement.
+        // Total toujours calcule par l'accesseur unique PdfPersonnageAttribut (deja utilise
+        // par le PDF), qui reste la source de verite - LigAttBase ci-dessus n'est qu'un
+        // detail affiche a l'ecran, desormais complet (Career/Objet inclus ci-dessus) donc
+        // Initial + Augmented = Current.
         DonneeAttribut := PdfPersonnageAttribut(Personnage, TabAttribut.Cells[IndCol, LigAttCode], Bonus);
         TabAttribut.Cells[IndCol, LigAttTotal]:= IntToStr(DonneeAttribut.Total);
       end;

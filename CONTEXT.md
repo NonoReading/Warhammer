@@ -7203,7 +7203,43 @@ Quatre points d'appel touchés, tous partageant exactement le même code :
 - `winmetier.pas` l.830 (arbre des métiers, WinMetier)
 - `pdfmetier.pas` l.361 (livret de carrière)
 
-**Compilé (lazbuild, 0 erreur).** Pas encore revalidé par Nono à l'écran/au Pdf.
+**Compilé (lazbuild, 0 erreur).** ✅ **Revalidé par Nono le 12/09/2026** sur un Knight du
+Reiksguard niveau 4 (Reikland) : le Status affiche bien "Brass X"/"Silver X"/"Gold X".
+
+### 2.62 Tableau Attribut (WinPersonnage) : le total ne se recomposait pas - deux lignes ajoutées, terminé (12/09/2026)
+
+**Origine.** En revalidant le §2.61 sur son Knight du Reiksguard niveau 4, Nono a remarqué que
+la ligne Fel du tableau Attribut ne s'additionnait pas : Initial 25 + Augmented 20 = 45 affiché,
+mais Current affichait 55. Même écart de 10 sur WP. Le personnage est correct (l'Ordre du
+Reiksguard donne bien +10 Fel/+10 WP au palier Knight of the Inner Circle, §2.51) - c'est
+l'affichage qui ne montrait pas d'où venait l'écart.
+
+**Cause, déjà documentée dans un commentaire du code jamais suivi d'effet** (`winpersonnage.pas`,
+`CalculTotaux`) : la ligne "Initial" (`LigAttBase`) est un calcul LOCAL = Specie + Throw dice +
+Talent + Mutations. La ligne "Current" (`LigAttTotal`) passe par l'accesseur unique
+`PdfPersonnageAttribut` (§2.52), qui ajoute en plus les bonus d'appartenance (Ordre/Régiment/
+Culte, `PersonnageCareerBonusAttributModif`) et les bonus d'objet magique (arme/armure,
+`PersonnageArmeAttributModif`/`PersonnageArmureBonusAttributModif`) - trois sources invisibles
+à l'écran, seulement reflétées dans Current.
+
+**Corrigé** en ajoutant deux nouvelles lignes au tableau (visibles quand `CheckBoxCalcul` est
+coché, comme Specie/Throw dice/Talent/Mutations) :
+- **"Career"** (`LigAttCareer`) - `PersonnageCareerBonusAttributModif`.
+- **"Item"** (`LigAttObjet`) - `PersonnageArmeAttributModif` + `PersonnageArmureBonusAttributModif`
+  cumulés (arme et armure magique regroupées, décision de Nono : sources rares, pas besoin de
+  les distinguer davantage).
+Les deux sont incluses dans la somme d'"Initial", qui redevient donc cohérente avec "Current"
+(Initial + Augmented = Current, toujours).
+Nouveau vocabulaire `RULES-LAB_181`("Career"/"Carrière") et `RULES-LAB_182`("Item"/"Objet") dans
+`BOOK_RULESBOOK.Xml`/`BOOK_RULESBOOK_FRANCAIS.Xml` (prochain numéro libre après LAB_180).
+Constantes de ligne renumérotées (`LigAttCareer`=5, `LigAttObjet`=6, décalant `LigAttBase`..
+`LigAttAsterisc` de 5-12 à 7-14) ; `RowCount` 13→15 aux trois endroits concernés (init + 2×
+`EffaceDonnee`). Uniquement `winpersonnage.pas` touché côté code (pas de `.lfm`, `RowCount` et
+libellés posés par code) - le tableau équivalent de `WinCreation` a une orientation différente
+(lignes = attributs, pas de ligne "Initial" calculée localement) et n'est pas concerné.
+
+**Compilé (lazbuild, 0 erreur).** ✅ **Validé par Nono le 12/09/2026** : la ligne "Career"
+affiche bien +10 sur Fel et WP pour le Knight du Reiksguard.
 
 ---
 

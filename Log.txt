@@ -3152,3 +3152,29 @@ non touches. Quatre points d appel, meme code partout : pdfpersonnage.pas (gabar
 Feldo2P), winmetier.pas (arbre des metiers), pdfmetier.pas (livret de carriere).
 Compile (lazbuild, 0 erreur). Pas encore revalide par Nono a l ecran/au Pdf.
 Fichiers modifies : pdfpersonnage.pas, winmetier.pas, pdfmetier.pas, CONTEXT.md.
+
+12/09/2026 - STATUS BRASS/SILVER/GOLD, REVALIDE PAR NONO SUR UN KNIGHT DU REIKSGUARD
+NIVEAU 4 (REIKLAND) - le Pdf affiche bien "Brass X"/"Silver X"/"Gold X" (voir 2.61).
+
+12/09/2026 - TABLEAU ATTRIBUT DE WINPERSONNAGE : LE TOTAL NE SE RECOMPOSAIT PAS, DEUX
+LIGNES AJOUTEES, TERMINE. Signale par Nono en revalidant le Reiksguard ci-dessus : Fel
+affichait Initial 25 + Augmented 20 = 45, mais Current 55 - ecart de 10, meme chose sur WP.
+Le personnage etait juste (Ordre du Reiksguard, +10 Fel/+10 WP au palier Knight of the
+Inner Circle, 2.51) ; c est l affichage qui ne montrait pas d ou venait l ecart.
+Cause deja documentee dans un commentaire du code jamais suivi d effet
+(winpersonnage.pas, CalculTotaux) : "Initial" est un calcul local (Specie+Throw dice+
+Talent+Mutations) qui ignore les bonus d appartenance (Ordre/Regiment/Culte) et d objet
+magique (arme/armure), que "Current" inclut via l accesseur unique PdfPersonnageAttribut
+(2.52).
+Corrige en ajoutant deux lignes au tableau (visibles avec CheckBoxCalcul, comme les
+quatre existantes) : "Career" (PersonnageCareerBonusAttributModif) et "Item"
+(PersonnageArmeAttributModif + PersonnageArmureBonusAttributModif cumules), toutes deux
+incluses dans la somme d "Initial". Nouveau vocabulaire RULES-LAB_181/182 dans
+BOOK_RULESBOOK.Xml et sa traduction francaise. Uniquement winpersonnage.pas cote code
+(pas de .lfm) - le tableau de WinCreation, oriente differemment, n est pas concerne.
+Compile (lazbuild, 0 erreur). Pas encore revalide par Nono a l ecran.
+Fichiers modifies : winpersonnage.pas, DATABASE/BOOK_RULESBOOK.Xml,
+DATABASE/BOOK_RULESBOOK_FRANCAIS.Xml, CONTEXT.md.
+
+12/09/2026 - TABLEAU ATTRIBUT, LIGNE "CAREER" - VALIDE PAR NONO (voir 2.62 ci-dessus) :
+le Knight du Reiksguard affiche bien +10 sur Fel et WP dans la nouvelle ligne.
