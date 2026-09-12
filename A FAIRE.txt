@@ -13,12 +13,6 @@ test ignore aussi le livre, alors que le CompareRechercheValeur juste a cote le 
 NATIO-T0012_X matcherait un RULES-T0012_Y. Sans effet connu aujourd hui, releve le 05/09/2026
 en supprimant la dependance aux variables globales.
 
-WINPERSONNAGE L.3248 S APPUIE SUR LES VARIABLES GLOBALES DU DERNIER DECOUPE. Le test
-copy(CodeValeur,1,5) = copy(CodeRecherche,1,5) lit l etat laisse par l appel precedent a
-CompareRechercheValeur au lieu de comparer ses propres chaines. Sans effet aujourd hui, mais
-cet etat partage ne survivra pas au durcissement de VerifieRecherche. Repere le 05/09/2026
-(2.49 etape 3), a reecrire en meme temps que l etape 4.
-
 LES EXPORTS DE TABLES FILLES PEUVENT PERDRE DES LIGNES EN SILENCE. xmlexportimport.pas l.401,
 880 et 916 comparent la cle etrangere de la table fille (argument 1) a l id= du parent
 (argument 2) : si une table fille portait un code nu, aucune ligne fille ne serait exportee,
@@ -120,10 +114,12 @@ se lit "Bonus Intelligence". Corrige le 02/09 par le passage en donnee. La FORME
 reste : un calcul qui nomme sa variable d'apres le francais et lit une colonne nommee
 d'apres l'anglais.
 
-OU EST ECRITE LA LISTE DES PALIERS DE SALAIRE ? Nations ecrit "Copper 3" pour l Almogavar
-alors que la base ne connait que Brass/Silver/Gold ; lu comme Brass le 03/09. Avant
-d envisager un TIERS_COPPER, chercher ou l enumeration est recopiee dans le code - meme
-forme que les six TypSpell, qui avaient produit trois bugs a trois endroits.
+[TRANCHE LE 12/09/2026 - CONSERVE COMME POINT TRANCHE, NE PLUS LE RESSORTIR EN ANOMALIE]
+"COPPER" DE NATIONS OF MANKIND EST BRASS. Confirme par Nono : Nations ecrit "Copper 3" pour
+l Almogavar, mais c est le meme palier que Brass/Silver/Gold sous un autre nom narratif, pas
+un quatrieme palier. Aucun TIERS_COPPER a creer ; le lire comme Brass (deja le cas depuis le
+03/09) est correct. RULES-TIERS_BRASS/SILVER/GOLD (chargetexte.pas, resolus via SalaireMetier
+prefixe - CONTEXT.md 2.61) restent la seule enumeration, rien a recopier ailleurs.
 
 VERIFIER LES AUTRES LISTES FERMEES DE TYPES ECRITES EN DUR. Celle des six TypSpell a
 produit trois bugs a trois endroits differents ; la meme forme - une enumeration recopiee
@@ -250,17 +246,21 @@ TalentObstine) - reste TalentHaineSacree (RULES-T0070) : verifie a cette occasio
 utilisee, pas touchee. Si un jour ce talent est lui aussi generalise en <Effet>, verifier au
 meme moment que TalentHaineSacree ne reste pas un cinquieme "presque mort" oublie.
 
-GERER L ANCRAGE DES CONTROLES DANS LES FENETRES. Demande de Nono le 05/09/2026. Aujourd hui
-les fenetres sont posees en coordonnees fixes : redimensionner ne redistribue rien, les
-tableaux ne suivent pas la hauteur et les boutons restent colles en haut a gauche. A reprendre
-fenetre par fenetre (Anchors / Align / Constraints des .lfm), pas toutes d un coup :
- 1. Etablir la regle d abord, une fois pour toutes : ce qui s etire (grilles, memos), ce qui
-    reste colle a un bord (barres de boutons), ce qui garde sa taille (libelles, cases).
- 2. Puis appliquer, une fenetre par point de compilation, en commencant par les plus utilisees
-    (winpersonnage, winlivre, wincreation).
-Point d attention : le grossissement de police cumulatif du menu principal (voir plus bas dans
-ce fichier) interagit avec l ancrage - un controle ancre et une police agrandie peuvent se
-chevaucher la ou les coordonnees fixes le cachaient. Tester les deux ensemble.
+ANCRAGE DES CONTROLES DANS LES FENETRES - MIS EN PAUSE PAR NONO LE 12/09/2026, PLUS PROFOND
+QUE PREVU. Demande d origine le 05/09/2026. Commence sur WinPersonnage (voir CONTEXT.md 2.64) :
+OnResize branche sur AjustePositionTables (moteur de positionnement maison deja existant,
+utilise par les cases Xp/Calcul), plus trois bugs trouves et corriges au passage (conflit
+Anchors natif/positionnement en dur sur TabEquipement et 6 boutons, ButtonPorte oublie de la
+cascade, MaxHeight=0 tirant sur Form.Height EN DIRECT pendant le resize). Compile, jamais
+entierement revalide par Nono a l ecran depuis le dernier correctif - etat garde tel quel
+(vrais bugs, utiles meme hors resize), pas de retour arriere.
+Point de reprise si ce chantier rouvre : les grilles ne s agrandissent pas encore reellement
+(dimensionnees a leur contenu, seul leur plafond PageExperience.Height peut suivre - et
+PageExperience lui-meme n a pas encore d ancrage/calcul vertical). D autres decrochages du
+meme genre que ceux trouves peuvent rester ailleurs sur la fenetre, non testes. WinLivre/
+WinCreation pas regardes du tout - verifier s ils ont le meme genre de moteur maison avant de
+choisir leur approche. Point d attention non verifie : le grossissement de police cumulatif du
+menu principal (voir plus bas dans ce fichier) pourrait interagir avec l ancrage.
 
 AFFICHER LES DISCLAIMERS DES LIVRES DEPUIS LE MENU PRINCIPAL. Demande de Nono le
 05/09/2026. Quatre etapes distinctes, a ne pas melanger :
@@ -782,10 +782,6 @@ PDF Personnage (PRIORITAIRE) :
   (seul cas multiple aujourd'hui) affiche sa chaine brute. Pas une regression du 23/08 : c'etait
   deja le cas avant le prefixage. Signale, non corrige.
 
-- Migrer les 5 fiches anterieures a la convention des prefixes (Ernold, Friederich, Harald, Kuno,
-  Markus) : il suffit de les ouvrir puis de les enregistrer, la normalisation se fait a l'ecriture
-  (CONTEXT.md 2.19). A faire avant de rejuger le filtre des sorts de winspell.pas.
-
 
 =========================================================================
 COMMENT CE FICHIER SE TIENT
@@ -1000,9 +996,7 @@ CHANTIERS DE FOND, PAS ENCORE OUVERTS
    declares par deux livres. Ce qui reste tient dans l entree "PREFIXES DE LIVRE : IL RESTE LES
    ETAPES 3 ET 4" plus haut.]
 
-2. MIGRER LES QUATRE PERSONNAGES HERITES (Ernold, Friederich, Harald, Markus).
-
-3. LA REFERENCE PENDANTE RULES-PROJ_LANC.
+2. LA REFERENCE PENDANTE RULES-PROJ_LANC.
 
 
 =========================================================================

@@ -159,6 +159,7 @@ type
     );
   procedure FormClose({%H-}Sender: TObject; var {%H-}CloseAction: TCloseAction);
   procedure FormCreate({%H-}Sender: TObject);
+  procedure FormResize({%H-}Sender: TObject);
   procedure AjustePositionTables();
   procedure EditHeightKeyPress(Sender: TObject; var Key: char);
   procedure Label1Click(Sender: TObject);
@@ -2113,6 +2114,16 @@ procedure TWinPersonnages.FormCreate(Sender: TObject);
     XmlChargePersonnage(Chemin);
 
     KeyPreview := true;
+  end;
+
+// Ancrage des controles (A FAIRE.txt, demande de Nono le 05/09/2026) - premiere etape sur
+// WinPersonnage : rappeler le moteur de positionnement existant (AjustePositionTables, deja
+// utilise par les deux cases de detail Xp/Calcul) aussi sur le redimensionnement de la
+// fenetre, plutot que d ajouter des Anchors qui seraient de toute facon ecrases par les
+// affectations .Left/.Top/.Width en dur de cette fonction.
+procedure TWinPersonnages.FormResize(Sender: TObject);
+  begin
+    AjustePositionTables();
   end;
 
 
@@ -4082,14 +4093,24 @@ procedure TWinPersonnages.AjustePositionTables();
     StartTB:    Integer = 0;
     EditLeft:   Integer = 0;
   begin
-    AdjustGridColumnsWidth(TabAttribut, 0, false, false, false, 0, 0, ssnone);
-    AdjustGridColumnsWidth(TabTalent, 0, false, false);
-    AdjustGridColumnsWidth(TabCarriere, 0, false, false);
-    AdjustGridColumnsWidth(TabCompetence, 0, false, false);
-    AdjustGridColumnsWidth(TabNiveau, 0, false, false);
-    AdjustGridColumnsWidth(TabAvancement, 0, false, false);
-    AdjustGridColumnsWidth(TabExperience, 0, false, false);
-    AdjustGridColumnsWidth(TabEquipement, 0, false, false);
+    // MaxHeight=0 fait retomber AdjustGridColumnsWidth sur Form.Height (chargeconstantes.pas)
+    // pour decider si une marge de 20 doit s'ajouter a la Largeur (place reservee a un
+    // ascenseur si le contenu depasserait la hauteur de fenetre). Form.Height est la hauteur
+    // EN DIRECT, qui change a chaque tick pendant un redimensionnement (AjustePositionTables
+    // est maintenant rappelee sur OnResize) - cette marge de 20 apparaissait/disparaissait
+    // donc au fil du drag, decalant TabCompetence/TabEquipement et tout ce qui en depend en
+    // cascade (PageExperience, TabEquipement, les 6 boutons d'equipement). Bug trouve en
+    // testant l'ancrage le 12/09/2026 (Nono : "meme sans Anchors, ca bouge"). Corrige en
+    // passant une hauteur fixe, largement superieure au contenu de ces grilles, plutot que 0 -
+    // la marge ascenseur ne peut alors plus jamais se declencher au fil d'un redimensionnement.
+    AdjustGridColumnsWidth(TabAttribut, 9999, false, false, false, 0, 0, ssnone);
+    AdjustGridColumnsWidth(TabTalent, 9999, false, false);
+    AdjustGridColumnsWidth(TabCarriere, 9999, false, false);
+    AdjustGridColumnsWidth(TabCompetence, 9999, false, false);
+    AdjustGridColumnsWidth(TabNiveau, 9999, false, false);
+    AdjustGridColumnsWidth(TabAvancement, 9999, false, false);
+    AdjustGridColumnsWidth(TabExperience, 9999, false, false);
+    AdjustGridColumnsWidth(TabEquipement, 9999, false, false);
     AdjustGridColumnsWidth(TabAugmentationAttribut, PageExperience.Height - 40, false, false);
     AdjustGridColumnsWidth(TabAugmentationCompetence, PageExperience.Height - 40, false, false);
     AdjustGridColumnsWidth(TabAugmentationTalent, PageExperience.Height - 40, false, false);
@@ -4152,6 +4173,11 @@ procedure TWinPersonnages.AjustePositionTables();
       StartTB                 := TabAttribut.left + TabAttribut.Width;
     ToggleBoxDroite.Left      := StartTB + 10;
     PageExperience.left       := ToggleBoxDroite.Left + 20;
+    // La Largeur doit suivre le Left, sinon le bord droit part hors fenetre quand
+    // ToggleBoxDroite.Left grandit (cases de detail Xp/Calcul, Nono le 12/09/2026) -
+    // PageExperience garde 20 de marge avec le bord droit du client, comme les autres
+    // marges de cette fonction.
+    PageExperience.Width      := Self.ClientWidth - PageExperience.left - 20;
 
     LabAugmentation.Left      := ToggleBoxDroite.Left + 20;
     LabAugmentation.top       := 0;
@@ -4196,13 +4222,21 @@ procedure TWinPersonnages.AjustePositionTables();
     ButtonDelete.Top          := ButtonArmure.Top + ButtonArmure.Height + 10;
     ButtonFabrication.Top     := ButtonDelete.Top + ButtonDelete.Height + 10;
     ButtonSort.Top            := ButtonFabrication.Top + ButtonFabrication.Height + 10;
+    // ButtonPorte n'etait pas dans la cascade (oubli anterieur) - restait donc positionne
+    // par son seul Anchors=[akTop,akRight] natif, independant de TabEquipement, d'ou le
+    // decrochage signale par Nono le 12/09/2026. Meme colonne, a la suite de ButtonSort.
+    ButtonPorte.left          := ButtonArme.left;
+    ButtonPorte.Top           := ButtonSort.Top + ButtonSort.Height + 10;
 
     ImageSheetTitle.Width     := ToggleBoxDroite.Left;
     ImageSheetPage.Width      := ToggleBoxDroite.Left;
     ImageSheetXp.Left         := ToggleBoxDroite.Left;
     ImageSheetXp.Width        := Self.Width - ToggleBoxDroite.Left;
     ImageSheetXp.Height       := Self.Height;
-    AdjustGridColumnsWidth(TabCompetence, 0, false, false);
+    // Meme correctif que plus haut (MaxHeight fixe au lieu de 0/Form.Height) - ce second
+    // appel, deja en doublon connu (A FAIRE.txt), retomberait sinon sur la meme cause du
+    // decalage au fil du redimensionnement pour le PROCHAIN appel de AjustePositionTables.
+    AdjustGridColumnsWidth(TabCompetence, 9999, false, false);
 
   end;
 

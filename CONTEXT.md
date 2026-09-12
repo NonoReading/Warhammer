@@ -1,10 +1,14 @@
 # Warhammer — Contexte projet
 
-**Dernière mise à jour : 12/09/2026 — PAGE 2 DU PDF FELDO2P ALIGNÉE SUR LA NOUVELLE MARGE
-GAUCHE DE LA PAGE 1 (12mm au lieu de 20mm), VALIDÉ PAR NONO.** Suite du §2.60 - détail §2.63.
+**Dernière mise à jour : 12/09/2026 — ANCRAGE DES CONTRÔLES, WINPERSONNAGE EN PAUSE.**
+Nono : *« je crois que je vais abandonner :D »* - plus profond que prévu (trois mécanismes
+différents en cause). État actuel conservé (compilé, `PageExperience` confirmé corrigé, le
+reste corrige de vrais bugs même indépendamment du redimensionnement) - détail §2.64, point
+de reprise en fin de section.
 
-Aucun chantier ouvert. Prochain travail à choisir dans `A FAIRE.txt` (candidat restant :
-ancrage des contrôles).
+Chantier en pause : **ancrage des contrôles**, commencé sur WinPersonnage (fenêtre principale,
+choix de Nono). WinLivre/WinCreation pas encore regardés - à voir s'ils ont le même moteur de
+positionnement maison avant de décider de leur approche.
 
 ---
 
@@ -3369,9 +3373,9 @@ Nono : *« vu que les augmentations ne sont que par 5, on peut partir là-dessus
 si un livre demande un jour autre chose qu'un multiple de 5 ; la réponse serait alors de porter une
 **valeur**, pas un autre marqueur de signe.
 
-**Point de reprise** : migrer les 4 fiches anciennes restantes (**Ernold, Friederich, Harald,
-Markus**) en les ouvrant puis en les enregistrant — Kuno l'a été le 23/08. `winspell.pas` est corrigé
-(voir §2.18).
+**Point de reprise, clos le 12/09/2026** : les 4 fiches anciennes restantes (Ernold, Friederich,
+Harald, Markus) n'ont finalement pas été migrées — Nono les a supprimées, plus besoin d'en garder
+trace. `winspell.pas` est corrigé (voir §2.18).
 
 ---
 
@@ -7269,6 +7273,106 @@ de la déclaration mis à jour pour refléter les deux usages.
 **Compilé (lazbuild, 0 erreur)**, uniquement des hints/notes/warnings préexistants sans rapport
 (variables locales inutilisées, `DessinFinColD` non utilisé depuis le §2.60). ✅ **Validé par
 Nono le 12/09/2026.**
+
+### 2.64 Ancrage des contrôles, WinPersonnage - en pause (12/09/2026)
+
+**Origine.** Demande de Nono du 05/09/2026 (`A FAIRE.txt`) : les fenêtres sont en coordonnées
+fixes, redimensionner ne redistribue rien. Nono a choisi WinPersonnage en premier - la fenêtre
+principale du programme.
+
+**Découverte qui a changé l'approche.** `winpersonnage.pas` a déjà un moteur de positionnement
+écrit à la main, `AjustePositionTables()` (l.4080+) : il repositionne en cascade quasiment tout
+le formulaire (Attribut → Carrière → Expérience → Talent → Compétence → PageExperience →
+boutons → Équipement), chaque contrôle calculé par rapport au précédent. Il est déjà appelé par
+`CheckBoxCalculChange`/`CheckBoxXpChange` (les cases de détail Xp/Calcul qui montrent/cachent
+des lignes et colonnes), après sélection dans l'historique, et après sauvegarde d'une
+augmentation. Poser des `Anchors` classiques n'aurait servi à rien : cette fonction réécrit
+`.Left`/`.Top`/`.Width` en dur à chaque appel et aurait systématiquement écrasé les ancres.
+
+**Étape 1 - approche retenue, validée avec Nono.** Plutôt que concurrencer ce moteur, le
+brancher aussi sur le redimensionnement : `WinPersonnages.OnResize = FormResize`
+(`winpersonnage.lfm`/`.pas`), qui appelle `AjustePositionTables()`. Compilé, testé par Nono à
+l'écran - trois anomalies remontées, corrigées dans la foulée :
+
+1. **`PageExperience` sortait de la fenêtre** quand une case de détail (Calcul/Xp) était
+   cochée. Cause : `PageExperience.left` est recalculé à partir de `ToggleBoxDroite.Left`
+   (qui grandit quand les colonnes de détail s'affichent), mais sa `Width` restait figée -
+   le bord droit partait donc plus loin à chaque fois. Corrigé en ajoutant
+   `PageExperience.Width := Self.ClientWidth - PageExperience.left - 20` juste après, pour
+   que le bord droit reste à 20 du bord de fenêtre quel que soit le Left.
+2. **`TabEquipement` semblait grandir puis rapetisser** - seule grille dans ce cas. Cause :
+   c'était la seule des grilles de cette fonction à porter `Anchors = [akTop, akLeft,
+   akRight, akBottom]` dans le `.lfm`, alors que sa taille est de toute façon recalculée sur
+   son CONTENU par `AdjustGridColumnsWidth` à chaque appel de `AjustePositionTables` - les
+   deux mécanismes se battaient (l'ancre native l'étire au resize, le calcul de contenu la
+   rétrécit juste après). Retiré `akRight` du `.lfm` (garde `[akTop, akLeft, akBottom]`,
+   même profil que `TabTalent`/`TabCompetence`, les seules autres grilles de la fonction à
+   porter une ancre).
+3. **`ButtonPorte` ("marquer un équipement comme porté") ancré indépendamment**, ne suivait
+   pas `TabEquipement` contrairement à `ButtonArme`/`Armure`/`Fabrication`/`Delete`/`Sort`.
+   Cause : oubli antérieur - `AjustePositionTables()` ne le positionnait jamais, donc seul son
+   `Anchors = [akTop, akRight]` natif du `.lfm` le gouvernait, indépendant de `TabEquipement`.
+   Ajouté à la cascade, à la suite de `ButtonSort` (son ordre visuel d'origine dans le `.lfm`,
+   confirmé par les `Top` de conception : Arme 688, Armure 744, Delete 800, Fabrication 872,
+   Sort 939, Porte 1006).
+
+**Compilé (lazbuild, 0 erreur)** après les trois corrections. ✅ **Point 1 (`PageExperience`)
+confirmé par Nono** : "l'onglet reste maintenant dans la taille de la page".
+
+**Retour de Nono sur les points 2/3 - correction complémentaire.** `TabEquipement` ne bougeait
+plus, mais `ButtonArme`/`Armure`/`Delete`/`Fabrication`/`Sort`/`Porte` continuaient eux à
+bouger pendant le redimensionnement au lieu de rester alignés sur `TabEquipement` devenu
+statique. Même cause racine que le point 2, appliquée aux six boutons cette fois : ils
+portaient tous encore `Anchors = [akTop, akRight]` dans le `.lfm`, alors que
+`AjustePositionTables()` réécrit déjà leur `.Left`/`.Top` en dur à chaque appel (relatif à
+`TabEquipement`) - l'ancre native les faisait dériver un instant avant que le calcul en dur
+ne les rattrape, d'où le mouvement visible pendant le drag. Retiré `Anchors = [akTop,
+akRight]` des six (`ButtonHistorique`, ailleurs sur la fenêtre et non concerné par ce
+chantier, conservé tel quel - pas dans la cascade de `AjustePositionTables`).
+
+**Compilé (lazbuild, 0 erreur).**
+
+**Retour de Nono : "non, cela bouge, j'ai même tenté en supprimant l'Anchors sur tous ces
+boutons. C'est peut-être ma fonction de position qui pose problème ?"** - correct, la vraie
+cause n'était pas l'ancrage.
+
+**Cause réelle trouvée dans `AdjustGridColumnsWidth` (`chargeconstantes.pas`), pas dans les
+`Anchors`.** Les 8 appels de `AjustePositionTables()` pour `TabAttribut`/`Talent`/`Carriere`/
+`Competence`/`Niveau`/`Avancement`/`Experience`/`Equipement` passent `MaxHeight=0`, qui fait
+retomber la fonction sur `Form.Height` (la hauteur de la fenêtre EN DIRECT) pour décider
+d'ajouter 20 à la `Largeur` de la grille (place réservée à un ascenseur si son contenu
+dépasserait cette hauteur). Or `Form.Height` change à **chaque tick** pendant un
+redimensionnement, puisque `AjustePositionTables()` est maintenant rappelée sur `OnResize` -
+cette marge de 20 apparaissait/disparaissait donc au fil du drag, décalant `TabCompetence`
+(dont dépend `ToggleBoxDroite.Left` → `PageExperience.left` → `TabEquipement.Left`) et
+`TabEquipement` lui-même, entraînant les 6 boutons avec eux à chaque flip - **indépendamment
+de tout `Anchors`**, ce qui explique que le retirer n'ait rien changé.
+
+**Corrigé** en passant une hauteur fixe (`9999`, largement supérieure au contenu réel de ces
+grilles) au lieu de `0` aux 8 appels, plus le second appel dupliqué de `TabCompetence` en fin
+de fonction (doublon déjà connu, `A FAIRE.txt` - même cause, donc même correctif, sans
+chercher à unifier le doublon lui-même, hors périmètre ici). La marge ascenseur ne peut plus
+jamais se déclencher au fil d'un redimensionnement.
+
+**Compilé (lazbuild, 0 erreur).**
+
+**Mis en pause par Nono le 12/09/2026** - *« je crois que je vais abandonner :D »*, plus
+profond que prévu. Décision prise ensemble : **garder l'état actuel** plutôt que revenir en
+arrière - `PageExperience` est confirmé corrigé, et les autres correctifs (ancrages en
+conflit sur `TabEquipement`/les 6 boutons, `ButtonPorte` oublié de la cascade, `MaxHeight`
+tirant sur `Form.Height` en direct) sont de vrais bugs, légitimes même indépendamment de la
+question du redimensionnement. Compilé, **jamais entièrement revalidé par Nono à l'écran**
+depuis le dernier correctif (`MaxHeight`) - à garder en tête si un comportement bizarre de
+WinPersonnage est signalé plus tard, ça pourrait être le fil à tirer.
+
+**Point de reprise, si ce chantier rouvre un jour.** Le chantier n'était qu'à son premier
+passage - les grilles ne s'agrandissent pas encore réellement (elles restent dimensionnées à
+leur contenu par `AdjustGridColumnsWidth`, seul leur PLAFOND `PageExperience.Height` suit
+potentiellement plus d'espace - mais `PageExperience` lui-même n'a pas encore d'ancre/calcul
+vertical, seulement horizontal). D'autres décrochages du même type que ceux trouvés ici
+peuvent rester ailleurs sur la fenêtre, non testés. WinLivre/WinCreation n'ont pas été
+regardés du tout - à vérifier s'ils ont le même genre de moteur maison avant de choisir leur
+approche (`A FAIRE.txt`).
 
 ---
 

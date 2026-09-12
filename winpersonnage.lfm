@@ -11,6 +11,7 @@ object WinPersonnages: TWinPersonnages
   LCLVersion = '4.8.0.0'
   OnClose = FormClose
   OnCreate = FormCreate
+  OnResize = FormResize
   object ImageSheetXp: TImage
     AnchorSideLeft.Side = asrCenter
     AnchorSideTop.Side = asrCenter
@@ -286,9 +287,9 @@ object WinPersonnages: TWinPersonnages
     Height = 368
     Top = 128
     Width = 665
-    ActivePage = TabSheetEvolution
+    ActivePage = TabSheetHistorique
     Anchors = [akTop, akLeft, akRight]
-    TabIndex = 4
+    TabIndex = 5
     TabOrder = 10
     OnChange = PageExperienceChange
     object TabSheetAttribut: TTabSheet
@@ -1200,7 +1201,7 @@ object WinPersonnages: TWinPersonnages
     Height = 317
     Top = 649
     Width = 534
-    Anchors = [akTop, akLeft, akRight, akBottom]
+    Anchors = [akTop, akLeft, akBottom]
     ColCount = 1
     Font.CharSet = ANSI_CHARSET
     Font.Pitch = fpVariable
@@ -1209,8 +1210,8 @@ object WinPersonnages: TWinPersonnages
     RowCount = 1
     TabOrder = 15
     OnDrawCell = TabDrawCell
-    OnSelectCell = TabEquipementSelectCell
     OnSelectEditor = TabAttributSelectEditor
+    OnSelectCell = TabEquipementSelectCell
   end
   object ButtonPdf: TBCButton
     Left = 904
@@ -1491,7 +1492,7 @@ object WinPersonnages: TWinPersonnages
     Height = 45
     Top = 688
     Width = 174
-    Anchors = [akTop, akRight]
+    Anchors = []
     StateClicked.Background.Gradient1.StartColor = 8404992
     StateClicked.Background.Gradient1.EndColor = 4194304
     StateClicked.Background.Gradient1.GradientType = gtRadial
@@ -1583,7 +1584,7 @@ object WinPersonnages: TWinPersonnages
     Height = 45
     Top = 744
     Width = 176
-    Anchors = [akTop, akRight]
+    Anchors = []
     StateClicked.Background.Gradient1.StartColor = 8404992
     StateClicked.Background.Gradient1.EndColor = 4194304
     StateClicked.Background.Gradient1.GradientType = gtRadial
@@ -1675,7 +1676,7 @@ object WinPersonnages: TWinPersonnages
     Height = 45
     Top = 800
     Width = 176
-    Anchors = [akTop, akRight]
+    Anchors = []
     StateClicked.Background.Gradient1.StartColor = 8404992
     StateClicked.Background.Gradient1.EndColor = 4194304
     StateClicked.Background.Gradient1.GradientType = gtRadial
@@ -1767,7 +1768,7 @@ object WinPersonnages: TWinPersonnages
     Height = 45
     Top = 872
     Width = 176
-    Anchors = [akTop, akRight]
+    Anchors = []
     StateClicked.Background.Gradient1.StartColor = 8404992
     StateClicked.Background.Gradient1.EndColor = 4194304
     StateClicked.Background.Gradient1.GradientType = gtRadial
@@ -1859,7 +1860,7 @@ object WinPersonnages: TWinPersonnages
     Height = 45
     Top = 939
     Width = 176
-    Anchors = [akTop, akRight]
+    Anchors = []
     StateClicked.Background.Gradient1.StartColor = 8404992
     StateClicked.Background.Gradient1.EndColor = 4194304
     StateClicked.Background.Gradient1.GradientType = gtRadial
@@ -1951,7 +1952,7 @@ object WinPersonnages: TWinPersonnages
     Height = 45
     Top = 1006
     Width = 176
-    Anchors = [akTop, akRight]
+    Anchors = []
     StateClicked.Background.Gradient1.StartColor = 8404992
     StateClicked.Background.Gradient1.EndColor = 4194304
     StateClicked.Background.Gradient1.GradientType = gtRadial
@@ -2474,6 +2475,7 @@ object WinPersonnages: TWinPersonnages
     Height = 20
     Top = 649
     Width = 21
+    Anchors = []
     Font.CharSet = ANSI_CHARSET
     Font.Color = clWhite
     Font.Pitch = fpVariable

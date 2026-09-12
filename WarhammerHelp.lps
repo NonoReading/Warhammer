@@ -243,8 +243,9 @@
         <HasResources Value="True"/>
         <ResourceBaseClass Value="Form"/>
         <UnitName Value="WinPersonnage"/>
+        <IsVisibleTab Value="True"/>
         <EditorIndex Value="6"/>
-        <TopLine Value="2431"/>
+        <TopLine Value="2432"/>
         <CursorPos X="69" Y="2443"/>
         <UsageCount Value="200"/>
         <Loaded Value="True"/>
@@ -418,10 +419,9 @@
         <Filename Value="chargepersonnage.pas"/>
         <IsPartOfProject Value="True"/>
         <UnitName Value="ChargePersonnage"/>
-        <IsVisibleTab Value="True"/>
         <EditorIndex Value="7"/>
-        <TopLine Value="1422"/>
-        <CursorPos X="25" Y="1428"/>
+        <TopLine Value="1425"/>
+        <CursorPos X="22" Y="1438"/>
         <UsageCount Value="201"/>
         <Loaded Value="True"/>
       </Unit>

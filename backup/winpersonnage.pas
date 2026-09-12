@@ -19,6 +19,13 @@ uses
   ChargeRaceMetier;
 type
 
+  StructureXpEtat = record
+    Total:        Integer;
+    Depense:      Integer;
+    Restante:     Integer;
+    Augmentation: Integer;
+  end;
+
   { TWinPersonnages }
 
   TWinPersonnages = class(TForm)
@@ -34,6 +41,7 @@ type
     ButtonAugmentation: TBCButton;
     ButtonDelete: TBCButton;
     ButtonFabrication: TBCButton;
+    ButtonPorte: TBCButton;
     ButtonHistorique: TBCButton;
     ButtonPdf: TBCButton;
     ButtonRaceSelectionner: TBCButton;
@@ -132,6 +140,7 @@ type
   procedure ButtonArmureClick({%H-}Sender: TObject);
   procedure ButtonArmeClick({%H-}Sender: TObject);
   procedure ButtonFabricationClick({%H-}Sender: TObject);
+  procedure ButtonPorteClick({%H-}Sender: TObject);
   procedure ButtonDeleteClick({%H-}Sender: TObject);
   procedure ButtonCorruptionAjouteClick({%H-}Sender: TObject);
   procedure ButtonCorruptionSupprimeClick({%H-}Sender: TObject);
@@ -150,6 +159,7 @@ type
     );
   procedure FormClose({%H-}Sender: TObject; var {%H-}CloseAction: TCloseAction);
   procedure FormCreate({%H-}Sender: TObject);
+  procedure FormResize({%H-}Sender: TObject);
   procedure AjustePositionTables();
   procedure EditHeightKeyPress(Sender: TObject; var Key: char);
   procedure Label1Click(Sender: TObject);
@@ -208,6 +218,7 @@ type
   procedure TabMetierEquipementSelectEditor({%H-}Sender: TObject; {%H-}aCol,
     {%H-}aRow: Integer; var Editor: TWinControl);
   procedure TabMutationClick(Sender: TObject);
+  procedure TabMutationDblClick({%H-}Sender: TObject);
   procedure TabSheetMjCostContextPopup(Sender: TObject; MousePos: TPoint;
     var Handled: Boolean);
   procedure TabSortDblClick({%H-}Sender: TObject);
@@ -231,6 +242,7 @@ type
   // Expérience
   procedure CalculAvancement();
   function  CalculExperience(TypeXp: String; Gratuit: Integer; Total: Integer; Code:String; Tal: String): Integer;
+  function  CalculXpEtat(): StructureXpEtat;
   procedure CalculTableExperience();
   procedure CalculTotaux();
   procedure CalculXpNecessaire(ChangementClasse: Boolean);
@@ -272,6 +284,8 @@ type
   //Equipement
   Procedure ChargerMetierEquipement(CodeMetier: String; NiveauMetier: Integer);
   Procedure TabEquipementAffiche();
+  procedure TabEquipementSelectCell({%H-}Sender: TObject; {%H-}aCol, aRow: Integer;
+    var {%H-}CanSelect: Boolean);
   function XpSortCout(CodeSort: String): String;
   function ValeurTarifSort(Expression: String; Defaut: Integer): Integer;
   function TalentSort(CodeSort: String): StructureTalent;
@@ -313,14 +327,16 @@ var
   LigAttLance:    Integer = 2;
   LigAttTalent:   Integer = 3;
   LigAttMutation: Integer = 4;
-  LigAttBase:     Integer = 5;
-  LigAttImage:    Integer = 6;
-  LigAttBonus:    Integer = 7;
-  LigAttTotal:    Integer = 8;
-  LigAttXp:       Integer = 9;
-  LigAttActuel:   Integer =10;
-  LigAttCode:     Integer =11;
-  LigAttAsterisc: Integer =12;
+  LigAttCareer:   Integer = 5;
+  LigAttObjet:    Integer = 6;
+  LigAttBase:     Integer = 7;
+  LigAttImage:    Integer = 8;
+  LigAttBonus:    Integer = 9;
+  LigAttTotal:    Integer =10;
+  LigAttXp:       Integer =11;
+  LigAttActuel:   Integer =12;
+  LigAttCode:     Integer =13;
+  LigAttAsterisc: Integer =14;
   ColAttLib:      Integer = 1;
   ColAttCC:       Integer = 2;
   ColAttCT:       Integer = 3;
@@ -566,38 +582,51 @@ begin
 
   // tests
   if radiobuttonsuivant.Checked and (MaxNiveau > 0) and (StrToIntDef(MetierNvEnCours, 0) >= MaxNiveau) then
-    ShowMEssage(GetTexteLibelle('MESS_043'))
+    ShowMEssage(GetTexteLibelle('RULES-MESS_043'))
   // Combo visible et rien de selectionne : le joueur n'a pas dit vers quelle carriere il
   // monte. On ne choisit pas a sa place - continuer dans la carriere en cours est une
   // decision, pas un defaut.
   else if radiobuttonsuivant.Checked and ComboBoxNvMetier.Visible and (ComboBoxNvMetier.ItemIndex < 0) then
-    ShowMEssage(GetTexteLibelle('MESS_058'))
-  else if (StrToIntDef(tabExperience.Cells[ColXpDonnee,LigXpCout],0) = 0) and (tabExperience.Cells[ColXpDonnee,LigXpTotal] = EditTotalXp.Text) and not radiobuttonsuivant.Checked and not radiobuttonChanger.Checked and (NbEquipement = TabEquipement.RowCount-1) and (not FabAjoute) then
-    ShowMEssage(GetTexteLibelle('MESS_024'))
+    ShowMEssage(GetTexteLibelle('RULES-MESS_058'))
   else if (XpDispo < 0) then
-    ShowMEssage(GetTexteLibelle('MESS_025'))
+    ShowMEssage(GetTexteLibelle('RULES-MESS_025'))
   else if StrToIntDef(EditTotalXp.Text,0) < StrToIntDef(tabExperience.Cells[ColXpDonnee,LigXpTotal],0) then
-    ShowMEssage(GetTexteLibelle('MESS_026'))
+    ShowMEssage(GetTexteLibelle('RULES-MESS_026'))
   else if radiobuttonChanger.Checked and (NvMetier = '') then
-    ShowMEssage(GetTexteLibelle('MESS_027'))
+    ShowMEssage(GetTexteLibelle('RULES-MESS_027'))
   else if radiobuttonsuivant.Checked and Not CarriereComplete then
-    ShowMEssage(GetTexteLibelle('MESS_028'))
+    ShowMEssage(GetTexteLibelle('RULES-MESS_028'))
   else if radiobuttonsuivant.Checked and CarriereComplete and (XpDispo < EditNeedRealXp.Value) then
-    ShowMEssage(GetTexteLibelle('MESS_029')+IntToStr(EditNeedRealXp.Value))
+    ShowMEssage(GetTexteLibelle('RULES-MESS_029')+IntToStr(EditNeedRealXp.Value))
   else if radiobuttonChanger.Checked and CarriereComplete and (XpDispo < EditNeedRealXp.Value)  then
-    ShowMEssage(GetTexteLibelle('MESS_030')+IntToStr(EditNeedRealXp.Value))
+    ShowMEssage(GetTexteLibelle('RULES-MESS_030')+IntToStr(EditNeedRealXp.Value))
   else if radiobuttonChanger.Checked and Not CarriereComplete and (XpDispo < EditNeedRealXp.Value) then
-    ShowMEssage(GetTexteLibelle('MESS_031')+IntToStr(EditNeedRealXp.Value))
+    ShowMEssage(GetTexteLibelle('RULES-MESS_031')+IntToStr(EditNeedRealXp.Value))
   else if (radiobuttonChanger.Checked or radiobuttonsuivant.Checked) and ChoixNonFait() then
-    ShowMEssage(GetTexteLibelle('MESS_032'))
+    ShowMEssage(GetTexteLibelle('RULES-MESS_032'))
   else if AjoutMineur and (RechercherDansColonne(TabSort, ConstArbreAuChoix, 2) <> -1) then
-    ShowMEssage(GetTexteLibelle('MESS_033'))
+    ShowMEssage(GetTexteLibelle('RULES-MESS_033'))
   else
-    MajTables();
+    begin
+      // Avertissement, pas un blocage (conception revue avec Nono le 12/09/2026) : un
+      // personnage peut changer sans que ce controle le voie (ex. retrait d'une mutation,
+      // §2.7), Valider doit quand meme s'appliquer plutot que de refuser tout net.
+      if (StrToIntDef(tabExperience.Cells[ColXpDonnee,LigXpCout],0) = 0) and (tabExperience.Cells[ColXpDonnee,LigXpTotal] = EditTotalXp.Text) and not radiobuttonsuivant.Checked and not radiobuttonChanger.Checked and (NbEquipement = TabEquipement.RowCount-1) and (not FabAjoute) then
+        ShowMEssage(GetTexteLibelle('RULES-MESS_024'));
+      MajTables();
+    end;
 end;
 
 procedure TWinPersonnages.ButtonPdfClick(Sender: TObject);
 begin
+  // Personnage.XpTotal/Xp25Total/XpActuel ne sont ecrits qu'au chargement du XML
+  // (chargepersonnage.pas), jamais resynchronises pendant la session - sans ceci, le Pdf
+  // genere depuis cette fenetre affiche les valeurs du fichier a l'ouverture, pas celles
+  // de l'ecran (CONTEXT.md, chantier Depense/Restante Xp).
+  Personnage.XpTotal   := StrToIntDef(EditTotalXp.Text, 0);
+  Personnage.Xp25Total := StrToIntDef(EditTotalXp25.Text, 0);
+  Personnage.XpActuel  := CalculXpEtat().Restante;
+
   if (CheckBoxPdfFeldo2p.Checked = false) then
     PdfPersonnageCreation(Personnage, true)
   else
@@ -664,6 +693,8 @@ begin
   TabAttribut.RowHeights[LigAttLance]    := Hauteur;
   TabAttribut.RowHeights[LigAttTalent]   := Hauteur;
   TabAttribut.RowHeights[LigAttMutation] := Hauteur;
+  TabAttribut.RowHeights[LigAttCareer]   := Hauteur;
+  TabAttribut.RowHeights[LigAttObjet]    := Hauteur;
 
   TabAttribut.ColWidths[ColAttDestin]  := Largeur;
   TabAttribut.ColWidths[ColAttResil]   := Largeur;
@@ -698,7 +729,7 @@ procedure TWinPersonnages.FormClose(Sender: TObject;
   var CloseAction: TCloseAction);
 begin
   NettoyerElementsFenetre(self);
-  EffaceDonnee(TabAttribut, 13);
+  EffaceDonnee(TabAttribut, 15);
   EffaceDonnee(TabCompetence, 1);
   EffaceDonnee(TabTalent, 1);
   EffaceDonnee(TabCarriere, 1);
@@ -719,7 +750,7 @@ procedure TWinPersonnages.EffaceDonnee(Tableau: TStringGrid; NbLig: Integer);
 
 procedure TWinPersonnages.ButtonHistoriqueClick(Sender: TObject);
 begin
-  EffaceDonnee(TabAttribut, 13);
+  EffaceDonnee(TabAttribut, 15);
   EffaceDonnee(TabCompetence, 1);
   EffaceDonnee(TabTalent, 1);
   EffaceDonnee(TabCarriere, 1);
@@ -782,6 +813,19 @@ procedure TWinPersonnages.ButtonFabricationClick(Sender: TObject);
         end;
   end;
 
+procedure TWinPersonnages.ButtonPorteClick(Sender: TObject);
+  begin
+    if (TabEquipement.Row > 0)
+      // Meme garde que ButtonFabrication/ButtonDelete : une ligne de sort ne se porte pas.
+      and (TalentSort(TabEquipement.Cells[2, TabEquipement.Row]).CodeTalent = '') then
+        begin
+          if TabEquipement.Cells[8, TabEquipement.Row] = '' then
+            TabEquipement.Cells[8, TabEquipement.Row] := 'X'
+          else
+            TabEquipement.Cells[8, TabEquipement.Row] := '';
+        end;
+  end;
+
 procedure TWinPersonnages.ButtonDeleteClick(Sender: TObject);
   var
     Reponse:  Integer;
@@ -792,7 +836,7 @@ procedure TWinPersonnages.ButtonDeleteClick(Sender: TObject);
       // Remplace la liste fermee des six TypSpell, qui laissait passer les rituels.
       and (TalentSort(TabEquipement.Cells[2, TabEquipement.Row]).CodeTalent = '') then
         begin
-          Reponse := MessageDlg(GetTexteLibelle('MESS_039'), mtConfirmation, mbYesNo, 0);
+          Reponse := MessageDlg(GetTexteLibelle('RULES-MESS_039'), mtConfirmation, mbYesNo, 0);
           if Reponse = mrYes then
             begin
               // Décale les lignes suivantes vers le haut
@@ -821,7 +865,7 @@ procedure TWinPersonnages.ButtonCorruptionSupprimeClick(Sender: TObject);
   begin
     if StringGridCorruption.Row > 0 then
       begin
-        Reponse := MessageDlg(GetTexteLibelle('MESS_053'), mtConfirmation, mbYesNo, 0);
+        Reponse := MessageDlg(GetTexteLibelle('RULES-MESS_053'), mtConfirmation, mbYesNo, 0);
         if Reponse = mrYes then
           begin
             // Décale les lignes suivantes vers le haut
@@ -900,6 +944,44 @@ procedure TWinPersonnages.TabMutationClick(Sender: TObject);
 
     PCorruptionTable       := ChercheCorruptionTable(TabMutation.Cells[3, TabMutation.Row]);
     MemoMutationEffet.Text := PCorruptionTable.Effet;
+  end;
+
+// Retrait d'une mutation - premiere fois que Personnage.Mutations peut se retrecir. Ce qu'elle
+// accordait (PersonnageMutationTalent/PersonnageMutationEquipement, chargepersonnage.pas) est
+// calcule a la volee depuis cette meme liste : la cascade est donc automatique, rien d'autre a
+// purger. CONTEXT.md, chantier "traits de creature".
+procedure TWinPersonnages.TabMutationDblClick(Sender: TObject);
+  var
+    Reponse:        Integer;
+    Ind:            Integer;
+    IndSupp:        Integer;
+    LibelleMutation: String;
+  begin
+    if (TabMutation.Row < 1) then Exit;
+
+    Reponse := MessageDlg(GetTexteLibelle('RULES-MESS_060'), mtConfirmation, mbYesNo, 0);
+    if Reponse <> mrYes then Exit;
+
+    // Libellé capturé AVANT le retrait : une fois l'entrée sortie de Personnage.Mutations, plus
+    // aucun moyen de savoir laquelle c'était - la ligne à 0 ci-dessous est la seule trace qui
+    // survit dans l'historique de Corruption (conception validée avec Nono le 12/09/2026).
+    LibelleMutation := TabMutation.Cells[2, TabMutation.Row];
+
+    // TabMutation.Row est 1-based (ligne 0 = en-tete), Personnage.Mutations est 0-based -
+    // meme correspondance que le remplissage dans AfficheMutations juste au-dessus.
+    IndSupp := TabMutation.Row - 1;
+    for Ind := IndSupp to High(Personnage.Mutations) - 1 do
+      Personnage.Mutations[Ind] := Personnage.Mutations[Ind + 1];
+    SetLength(Personnage.Mutations, Length(Personnage.Mutations) - 1);
+
+    // Ligne compensatoire à 0 : ne change pas le total de points de Corruption (contrairement à
+    // "Mutation acceptée"/"Résilience dépensée"), juste une trace narrative pour le souvenir.
+    StringGridCorruption.RowCount                                   := StringGridCorruption.RowCount + 1;
+    StringGridCorruption.Cells[1, StringGridCorruption.RowCount - 1] := '0';
+    StringGridCorruption.Cells[2, StringGridCorruption.RowCount - 1] := GetTexteLibelle('RULES-LAB_179') + ' : ' + LibelleMutation;
+    CalculCorruptionLeft();
+
+    AfficheMutations();
   end;
 
 procedure TWinPersonnages.ButtonArmureClick(Sender: TObject);
@@ -1049,7 +1131,7 @@ procedure TWinPersonnages.ButtonRaceSelectionnerClick(Sender: TObject);
     // carrieres doivent rester VISIBLES et consultables, seule leur selection est refusee.
     if (ChoixWinMetierRace <> '') and (ChercheMinMetierNiveau(ChoixWinMetierRace) > 1) then
       begin
-        ShowMessage(GetTexteLibelle('MESS_057') + IntToStr(ChercheMinMetierNiveau(ChoixWinMetierRace)));
+        ShowMessage(GetTexteLibelle('RULES-MESS_057') + IntToStr(ChercheMinMetierNiveau(ChoixWinMetierRace)));
         ChoixWinMetierRace := '';
       end;
 
@@ -1072,8 +1154,9 @@ procedure TWinPersonnages.ButtonRaceSelectionnerClick(Sender: TObject);
 // Valeur d'un champ de tarification : soit un nombre ecrit tel quel, soit un bonus
 // d'attribut note (BATTR_x) - la MEME notation que <Max> des talents, et la decoupe est
 // recopiee de TabAugmentationTalentSetEditText ligne ~3480 pour qu'elles ne divergent pas.
-// Le 'B' est mange par le delimiteur '(B', ce qui laisse 'ATTR_Int', qui est exactement ce
-// que la ligne de codes de TabAttribut contient.
+// Le 'B' est mange par le delimiteur '(B', ce qui laisse 'ATTR_Int', a comparer sans le
+// prefixe de livre (CodeSansLivre) a la ligne de codes de TabAttribut, qui le porte depuis
+// §2.49 ("RULES-ATTR_Int").
 //
 // Defaut est rendu quand l'expression est vide OU quand l'attribut cite n'existe pas : un
 // libelle mal orthographie dans les donnees ne doit pas faire planter une fiche.
@@ -1090,7 +1173,7 @@ function TWinPersonnages.ValeurTarifSort(Expression: String; Defaut: Integer): I
     Carac  := StringReplace(ExtractStringAfter(Expression, '(B'), ')', '', [rfReplaceAll]);
     Result := Defaut;
     For Ind := 1 to TabAttribut.ColCount - 1 do
-      if TabAttribut.Cells[Ind, LigAttCode] = Carac then
+      if CodeSansLivre(TabAttribut.Cells[Ind, LigAttCode]) = Carac then
         begin
           Result := Trunc(StrToIntDef(TabAttribut.Cells[Ind, LigAttTotal], 0) / 10);
           Exit;
@@ -1278,7 +1361,7 @@ procedure TWinPersonnages.ButtonSortClick(Sender: TObject);
         end;
 
     if ListeTalent = '' then
-      showMessage(GetTexteLibelle('MESS_037'))
+      showMessage(GetTexteLibelle('RULES-MESS_037'))
     else
       begin
       SelectWinSort     := ListeTalent;
@@ -1301,7 +1384,7 @@ procedure TWinPersonnages.ButtonSortClick(Sender: TObject);
               CalculTableExperience();
             end
           else
-            ShowMEssage(GetTexteLibelle('MESS_036'));
+            ShowMEssage(GetTexteLibelle('RULES-MESS_036'));
         end;
       end;
     SelectWinSort := '';
@@ -1618,7 +1701,7 @@ begin
   TabAttribut.Clear;
   TabAttribut.Options          := TabAttribut.Options + [goEditing, goAlwaysShowEditor];
   TabAttribut.ColCount         := 1;
-  TabAttribut.RowCount         := 13;
+  TabAttribut.RowCount         := 15;
   For I := 0 to 13 do
     begin
       if TabAttribut.Columns.Count <= I then
@@ -1642,6 +1725,8 @@ begin
   TabAttribut.Cells[ColAttLib, LigAttLance]   := GetTexteLibelle('RULES-LAB_022');
   TabAttribut.Cells[ColAttLib, LigAttTalent]  := GetTexteLibelle('RULES-LAB_007');
   TabAttribut.Cells[ColAttLib, LigAttMutation]:= GetTexteLibelle('RULES-LAB_172');
+  TabAttribut.Cells[ColAttLib, LigAttCareer]  := GetTexteLibelle('RULES-LAB_181');
+  TabAttribut.Cells[ColAttLib, LigAttObjet]   := GetTexteLibelle('RULES-LAB_182');
   TabAttribut.Cells[ColAttLib, LigAttBase]    := GetTexteLibelle('RULES-LAB_043');
   TabAttribut.Cells[ColAttLib, LigAttImage]   := GetTexteLibelle('RULES-LAB_019');
   TabAttribut.Cells[ColAttLib, LigAttBonus]   := GetTexteLibelle('RULES-LAB_040');
@@ -1653,6 +1738,8 @@ begin
   TabAttribut.RowHeights[LigAttLance]   := 1;
   TabAttribut.RowHeights[LigAttTalent]  := 1;
   TabAttribut.RowHeights[LigAttMutation]:= 1;
+  TabAttribut.RowHeights[LigAttCareer]  := 1;
+  TabAttribut.RowHeights[LigAttObjet]   := 1;
   TabAttribut.RowHeights[LigAttXp]      := 1;
   TabAttribut.RowHeights[LigAttImage]   := 1;
   TabAttribut.RowHeights[LigAttActuel]  := 1;
@@ -1916,7 +2003,7 @@ begin
 
   // Mise en forme de la table des Equipements
   TabEquipement.Options        := TabEquipement.Options + [goEditing, goAlwaysShowEditor];
-  TabEquipement.ColCount       := 8;
+  TabEquipement.ColCount       := 9;
   TabEquipement.RowCount       := 2;
   TabEquipement.ColWidths[0]   := 20;
   TabEquipement.Cells[1, 0]    := GetTexteLibelle('RULES-LAB_052');
@@ -1933,6 +2020,8 @@ begin
   TabEquipement.ColWidths[6]   := 100;
   TabEquipement.Cells[7, 0]    := '';
   TabEquipement.ColWidths[7]   := 0;
+  TabEquipement.Cells[8, 0]    := GetTexteLibelle('RULES-LAB_180');
+  TabEquipement.ColWidths[8]   := 60;
 
   // Mise en forme dy tableau de choix des équipement de métier
   TabMetierEquipement.Options          := TabMetierEquipement.Options + [goEditing, goAlwaysShowEditor];
@@ -2027,6 +2116,16 @@ procedure TWinPersonnages.FormCreate(Sender: TObject);
     KeyPreview := true;
   end;
 
+// Ancrage des controles (A FAIRE.txt, demande de Nono le 05/09/2026) - premiere etape sur
+// WinPersonnage : rappeler le moteur de positionnement existant (AjustePositionTables, deja
+// utilise par les deux cases de detail Xp/Calcul) aussi sur le redimensionnement de la
+// fenetre, plutot que d ajouter des Anchors qui seraient de toute facon ecrases par les
+// affectations .Left/.Top/.Width en dur de cette fonction.
+procedure TWinPersonnages.FormResize(Sender: TObject);
+  begin
+    AjustePositionTables();
+  end;
+
 
 Procedure TWinPersonnages.AfficheImageRace();
   Var
@@ -2108,6 +2207,7 @@ Procedure TWinPersonnages.AfficheImageRace();
     RadioButtonChanger.Caption                 := GetTexteLibelle('RULES-LAB_115');
     ButtonFabrication.Caption                  := '+'+GetTexteLibelle('RULES-LAB_125');
     ButtonDelete.Caption                       := '-'+GetTexteLibelle('RULES-LAB_126');
+    ButtonPorte.Caption                        := GetTexteLibelle('RULES-LAB_180');
     LabelNeedTheoXp.caption                    := GetTexteLibelle('RULES-LAB_131');
     LabelNeedRealXp.Caption                    := GetTexteLibelle('RULES-LAB_132');
     TabSheetLivre.Caption                      := GetTexteLibelle('RULES-LAB_128');
@@ -2353,23 +2453,135 @@ Function TWinPersonnages.CalculXpMj(TypeDonnee: String; CodeDonnee:String): Inte
 
 procedure TWinPersonnages.CalculTotaux();
   Var
-    IndCol:     Integer;
-    Total:      Integer = 0;
-    IndLig:     Integer;
-    TabAtt:     String;
-    TabComp:    String;
+    IndCol:              Integer;
+    Total:               Integer = 0;
+    IndLig:              Integer;
+    TabAtt:              String;
+    TabComp:             String;
+    IndAugm:             Integer;
+    IndOld:              Integer;
+    PersonnageAttribut:  StructurePersonnageAttribut;
+    PersonnageCompetence:StructurePersonnageCompetence;
+    PersonnageTalent:    StructurePersonnageTalent;
+    PersonnageEquipement:StructurePersonnageEquipement;
+    OldAugmentationTalent: TArrayPersonnageTalent;
+    DonneeAttribut:      StructureDonnee;
+    DonneeCompetence:    StructureDonnee;
+    Bonus:               String;
+    NivMetier:           Integer;
+    ValCareer:           Integer;
+    ValObjet:            Integer;
   begin
+    // Personnage.AugmentationAttribut n'est normalement resynchronise depuis la grille
+    // TabAttribut qu'a l'interieur de CalculTableExperience (juste avant la sauvegarde) -
+    // trop tard pour PdfPersonnageAttribut ci-dessous, appele ICI. Meme source que le
+    // resync fait avant sauvegarde (winpersonnage.pas ~l.4859), refait ici pour que
+    // Personnage soit a jour a chaque recalcul d'ecran, pas seulement a la sauvegarde.
+    // CONTEXT.md, chantier accesseur unique, pilote Attributs.
+    Personnage.AugmentationAttribut := [];
+    For IndAugm := 1 to TabAttribut.Rowcount - 1 do
+      if StrToIntDef(TabAttribut.Cells[IndAugm, LigAttBonus],0) > 0 then
+        begin
+          PersonnageAttribut.CodeAttribut  := TabAttribut.Cells[IndAugm, LigAttCode];
+          PersonnageAttribut.Valeur        := StrToIntDef(TabAttribut.Cells[IndAugm, LigAttBonus],0);
+          Personnage.AugmentationAttribut  += [PersonnageAttribut];
+        end;
+
+    // Meme raisonnement pour Personnage.AugmentationCompetence, lu par PdfPersonnageCompetence
+    // plus bas (etape Competences de l'accesseur unique, CONTEXT.md 10/09/2026) : sans ce
+    // resync ici, PdfPersonnageCompetence lirait une valeur en retard d'un cycle, celle laissee
+    // par le dernier CalculTableExperience. Meme source (TabCompetence.Cells[ColCompWork, ...])
+    // et meme forme que le resync deja fait avant sauvegarde (winpersonnage.pas ~l.4892).
+    Personnage.AugmentationCompetence := [];
+    For IndAugm := 1 to TabCompetence.Rowcount - 1 do
+      if StrToIntDef(TabCompetence.Cells[ColCompWork, IndAugm],0) > 0 then
+        begin
+          PersonnageCompetence.CodeCompetence := TabCompetence.Cells[ColCompCode, IndAugm];
+          PersonnageCompetence.Valeur         := StrToIntDef(TabCompetence.Cells[ColCompWork, IndAugm],0);
+          Personnage.AugmentationCompetence   += [PersonnageCompetence];
+        end;
+
+    // Meme raisonnement pour Personnage.AugmentationTalent et Personnage.Equipement : lus
+    // par PdfPersonnageAttribut/PdfPersonnageCompetence ci-dessous (talent a bonus direct
+    // d'Attribut/Competence, arme/armure magique), residu du chantier accesseur unique
+    // laisse ouvert le 11/09/2026 (CONTEXT.md 2.52). Meme source et meme forme que le
+    // resync deja fait avant sauvegarde (winpersonnage.pas ~l.4922 et ~l.4932).
+    // OldAugmentationTalent conserve l'Asterisque deja calcule par PersonnageXmlChargement
+    // (chargepersonnage.pas) avant que ce resync ne remplace le tableau - sans quoi la
+    // variable locale PersonnageTalent, jamais remise a zero explicitement ci-dessous,
+    // ferait heriter chaque talent reconstruit de l'Asterisque laisse par l'appel
+    // precedent (meme famille de piege que PersonnageTalentAsterisque). Signale par Nono
+    // le 11/09/2026 sur Gunther Krieg (Strike Mighty Blow/Strike to Stun/Very Resilient/
+    // Knight of the Order of the Hammer partageant tous "(4)" a tort).
+    OldAugmentationTalent := Personnage.AugmentationTalent;
+    Personnage.AugmentationTalent := [];
+    for IndAugm := 1 to TabTalent.Rowcount - 1 do
+      if StrToIntDef(TabTalent.Cells[ColTalNbAugm, IndAugm],0) > 0 then
+        begin
+          PersonnageTalent.CodeTalent    := TabTalent.Cells[ColTalCode, IndAugm];
+          PersonnageTalent.Valeur        := StrToIntDef(TabTalent.Cells[ColTalNbAugm, IndAugm],0);
+          PersonnageTalent.Asterisque    := 0;
+          for IndOld := 0 to high(OldAugmentationTalent) do
+            if CompareRechercheValeur(OldAugmentationTalent[IndOld].CodeTalent, PersonnageTalent.CodeTalent) then
+              begin
+                PersonnageTalent.Asterisque := OldAugmentationTalent[IndOld].Asterisque;
+                break;
+              end;
+          Personnage.AugmentationTalent  += [PersonnageTalent];
+        end;
+
+    Personnage.Equipement := [];
+    for IndAugm := 1 to TabEquipement.RowCount - 1 do
+      begin
+        PersonnageEquipement.CodeEquipement := TabEquipement.Cells[2, IndAugm];
+        If TalentSort(TabEquipement.Cells[2, IndAugm]).CodeTalent <> ''
+           then
+          begin
+            PersonnageEquipement.TypeEquipement    := TypeEquipSp;
+            PersonnageEquipement.QualiteEquipement := '';
+            PersonnageEquipement.CoutXp            := CalculOptionXpDiv25Inverse(StrToIntDef(TabEquipement.Cells[5, IndAugm],0));
+            PersonnageEquipement.Porte              := False;
+          end
+        else
+          begin
+            PersonnageEquipement.TypeEquipement    := TabEquipement.Cells[3, IndAugm];
+            PersonnageEquipement.QualiteEquipement := TabEquipement.Cells[7, IndAugm];
+            PersonnageEquipement.CoutXp            := 0;
+            PersonnageEquipement.Porte              := TabEquipement.Cells[8, IndAugm] <> '';
+          end;
+        Personnage.Equipement += [PersonnageEquipement];
+      end;
+
     // Attributs
     for IndCol := 2 to TabAttribut.ColCount-1 do
       begin
+        // Bonus d'appartenance (Ordre/Regiment/Culte, CONTEXT.md §2.50/§2.51) et bonus
+        // d'objet magique (arme/armure) - jusqu'ici invisibles a l'ecran, seulement pris en
+        // compte dans LigAttTotal via PdfPersonnageAttribut plus bas, ce qui rendait le total
+        // incomprehensible (Initial + Augmented <> Current des qu'un de ces bonus existait).
+        // Signale par Nono le 12/09/2026 sur un Knight du Reiksguard (+10 Fel/+10 WP a
+        // Knight of the Inner Circle) - CONTEXT.md §2.61 (suite).
+        ValCareer := PersonnageCareerBonusAttributModif(Personnage, TabAttribut.Cells[IndCol, LigAttCode]);
+        ValObjet  := PersonnageArmeAttributModif(Personnage, TabAttribut.Cells[IndCol, LigAttCode])
+                     + PersonnageArmureBonusAttributModif(Personnage, TabAttribut.Cells[IndCol, LigAttCode]);
+        if ValCareer <> 0 then
+          TabAttribut.Cells[IndCol, LigAttCareer] := IntToStr(ValCareer);
+        if ValObjet <> 0 then
+          TabAttribut.Cells[IndCol, LigAttObjet] := IntToStr(ValObjet);
+
         Total  := StrToIntdef(TabAttribut.Cells[IndCol, LigAttRace],0) +
                   StrToIntdef(TabAttribut.Cells[IndCol, LigAttLance],0)+
                   StrToIntdef(TabAttribut.Cells[IndCol, LigAttTalent],0)+
-                  StrToIntdef(TabAttribut.Cells[IndCol, LigAttMutation],0);
+                  StrToIntdef(TabAttribut.Cells[IndCol, LigAttMutation],0)+
+                  StrToIntdef(TabAttribut.Cells[IndCol, LigAttCareer],0)+
+                  StrToIntdef(TabAttribut.Cells[IndCol, LigAttObjet],0);
         TabAttribut.Cells[IndCol, LigAttBase] := IntToStr(Total);
-        Total  := Total +
-                  StrToIntdef(TabAttribut.Cells[IndCol, LigAttBonus],0);
-        TabAttribut.Cells[IndCol, LigAttTotal]:= IntToStr(Total);
+        // Total toujours calcule par l'accesseur unique PdfPersonnageAttribut (deja utilise
+        // par le PDF), qui reste la source de verite - LigAttBase ci-dessus n'est qu'un
+        // detail affiche a l'ecran, desormais complet (Career/Objet inclus ci-dessus) donc
+        // Initial + Augmented = Current.
+        DonneeAttribut := PdfPersonnageAttribut(Personnage, TabAttribut.Cells[IndCol, LigAttCode], Bonus);
+        TabAttribut.Cells[IndCol, LigAttTotal]:= IntToStr(DonneeAttribut.Total);
       end;
 
     // Compétences
@@ -2393,9 +2605,12 @@ procedure TWinPersonnages.CalculTotaux();
         TabCompetence.Cells[ColCompBonus, IndLig] := IntToStr(StrToIntDef(TabCompetence.Cells[ColComp35, IndLig],0) +
                                                               StrToIntDef(TabCompetence.Cells[ColComp40, IndLig],0) +
                                                               StrToIntDef(TabCompetence.Cells[ColCompWork, IndLig],0));
-        TabCompetence.Cells[ColCompTotal, IndLig] := IntToStr(StrToIntDef(TabCompetence.Cells[ColCompBonus, IndLig],0) +
-                                                              StrToIntDef(TabCompetence.Cells[ColCompAtt, IndLig],0) +
-                                                              StrToIntDef(TabCompetence.Cells[ColCompMutation, IndLig],0));
+        // Total desormais calcule par l'accesseur unique PdfPersonnageCompetence (deja utilise
+        // par le PDF), meme demarche que pour les Attributs ci-dessus : il ajoute notamment les
+        // bonus d'appartenance (Ordre/Regiment) et d'armure sur une Competence, absents de
+        // l'addition locale precedente (ColCompBonus + ColCompAtt + ColCompMutation).
+        DonneeCompetence := PdfPersonnageCompetence(Personnage, TabCompetence.Cells[ColCompCode, IndLig], NivMetier);
+        TabCompetence.Cells[ColCompTotal, IndLig] := IntToStr(DonneeCompetence.Total);
       end;
 
   end;
@@ -2590,7 +2805,7 @@ procedure TWinPersonnages.TabAugmentationCompetenceDblClick(Sender: TObject);
                   break;
                 end;
             if Trouve then
-               ShowMessage(GetTexteLibelle('MESS_047'))  // déjà présent
+               ShowMessage(GetTexteLibelle('RULES-MESS_047'))  // déjà présent
             else
               begin
                 // ajouter la compétence et ajouter une nouvelle ligne dans la table
@@ -2682,7 +2897,7 @@ procedure TWinPersonnages.TabAugmentationTalentDblClick(Sender: TObject);
                   break;
                 end;
             if Trouve then
-               ShowMessage(GetTexteLibelle('MESS_047'))  // déjà présent
+               ShowMessage(GetTexteLibelle('RULES-MESS_047'))  // déjà présent
             else
               begin
                 // ajouter le talent et ajouter une nouvelle ligne dans la table
@@ -2805,10 +3020,21 @@ begin
   EditHeight.Text           := IntToStr(Personnage.Height);
   EditHairColors.Text       := Personnage.HairColors;
   EditEyeColors.Text        := Personnage.EyeColors;
+  // Texte brut (IntToStr), pas Format('%.0n',...) : cette case est relue et reparsee par
+  // StrToIntDef/comparee en texte a EditTotalXp.Text (winpersonnage.pas, tests de validation
+  // de carriere) - un separateur de milliers y faisait echouer StrToIntDef (0 renvoye) et
+  // ratait toute comparaison avec EditTotalXp.Text, toujours brut. Meme format que l'ecriture
+  // faite apres validation de carriere (MajTables) plus bas, qui etait deja brute.
   if (EditTotalXp25.Enabled = True) then
-    tabExperience.Cells[ColXpDonnee, LigXpTotal] := Format('%.0n',[Personnage.Xp25Total/1])+' '
+    tabExperience.Cells[ColXpDonnee, LigXpTotal] := IntToStr(Personnage.Xp25Total)
   else
-    tabExperience.Cells[ColXpDonnee, LigXpTotal] := Format('%.0n',[Personnage.XpTotal/1])+' ';
+    tabExperience.Cells[ColXpDonnee, LigXpTotal] := IntToStr(Personnage.XpTotal);
+  // EditTotalXp/EditTotalXp25 lus par CalculTableExperience (Restant Xp) des le premier
+  // recalcul declenche pendant ce chargement (l.~3291 plus bas) - sans cette init, le champ
+  // est encore vide a ce moment-la et le Restant sort negatif (bug constate avec Nono le
+  // 11/09/2026, apparu au premier calcul apres ouverture d'un personnage).
+  EditTotalXp.text   := IntToStr(Personnage.XpTotal);
+  EditTotalXp25.text := IntToStr(Personnage.Xp25Total);
 
   // Race
   RaceEnCours               := Personnage.Race;
@@ -2972,6 +3198,32 @@ begin
           TalentAttribut(PTalent.Attribut);
         end;
 
+  // Talents accordes par une mutation (ex. Fleshy Tentacle -> Tentacles) ou par une qualite
+  // d'objet porte (ex. NATIO-ARMOB_16 "Fear" -> Frightening, Skull Trophies) - calcules a la
+  // volee (PersonnageMutationTalent/PersonnageArmureBonusTalent, chargepersonnage.pas), deja
+  // affiches au PDF, maintenant aussi a l'ecran. Fusionnes avec une ligne existante si le
+  // joueur possede deja le meme talent achete normalement (ex. Frightening) - jamais dans
+  // ColTalNbAugm/ColTalXp, qui restent reserves aux augmentations payees en Xp : un octroi
+  // automatique ne coute rien.
+  For PersonnageTalent in PersonnageMutationTalent(Personnage) + PersonnageArmureBonusTalent(Personnage) do
+    begin
+      Lig  := FindRowByText(TabTalent, PersonnageTalent.CodeTalent, 1);
+      if Lig = -1 then
+        begin
+          NbTalent            := NbTalent + 1;
+          TabTalent.RowCount  := TabTalent.RowCount + 1;
+          Lig                 := NbTalent;
+        end;
+      TabTalent.Cells[ColTalCode, Lig] := PersonnageTalent.CodeTalent;
+      TabTalent.Cells[ColTalNb, Lig]   := IntToStr(StrToIntDef(TabTalent.Cells[ColTalNb, Lig],0) + PersonnageTalent.Valeur);
+      PTalent                          := ChercheTalent(TabTalent.Cells[ColTalCode, Lig]);
+      TabTalent.Cells[ColTalLib, Lig]  := PTalent.Libelle;
+      if PTalent.SousTalent then
+        PTalent                       := ChercheTalent(Copy(PTalent.CodeTalent, 1, Pos('_', PTalent.CodeTalent) - 1)+'_*');
+      TabTalent.Cells[ColTalMax, Lig]  := Ptalent.MaxiTalent;
+      TalentAttribut(PTalent.Attribut);
+    end;
+
   // Mutation (CONTEXT.md §2.7) - effets à delta pur des mutations obtenues, même fonction
   // que celle utilisée pour le PDF (PersonnageMutationAttributModif, chargepersonnage.pas)
   // pour rester cohérent entre l'écran et le PDF.
@@ -3013,7 +3265,7 @@ begin
            TabCompetence.Cells[ColCompTalent, Ind]:= PersonnageTalentCompetence.CodeTalent;
            TabCompetence.Cells[ColCompStat, Ind]  := PCompetence.CodeAttribut;
            PAttribut                              := ChercheAttribut(PCompetence.CodeAttribut);
-           TabCompetence.Cells[ColCompCarac, Lig] := PAttribut.Resume;
+           TabCompetence.Cells[ColCompCarac, Ind] := PAttribut.Resume;
          end;
        TabCompetence.Cells[ColCompLib, Ind]       := TabCompetence.Cells[ColCompLib, Ind] + '*';
     end;
@@ -3031,24 +3283,30 @@ begin
           begin
             PArme := chercheArme(PersonnageEquipement.CodeEquipement);
             TabEquipement.Cells[4, NbEquipement]   := PArme.Libelle;
-            TabEquipement.Cells[5, NbEquipement]   := PersonnageEquipement.QualiteEquipement;
+            TabEquipement.Cells[7, NbEquipement]   := PersonnageEquipement.QualiteEquipement;
+            if PersonnageEquipement.Porte then
+              TabEquipement.Cells[8, NbEquipement] := 'X';
           end
       else if TrimRight(PersonnageEquipement.TypeEquipement) = TrimRight(TypeEquipAr) then
           Begin
             PArmure := ChercheArmure(PersonnageEquipement.CodeEquipement);
             TabEquipement.Cells[4, NbEquipement]   := PArmure.Libelle;
-            TabEquipement.Cells[5, NbEquipement]   := PersonnageEquipement.QualiteEquipement;
+            TabEquipement.Cells[7, NbEquipement]   := PersonnageEquipement.QualiteEquipement;
+            if PersonnageEquipement.Porte then
+              TabEquipement.Cells[8, NbEquipement] := 'X';
           end
       else if TrimRight(PersonnageEquipement.TypeEquipement) = TrimRight(TypeEquipArS) then
           Begin
             PArmureSimplifiee := ChercheArmureSimplifiee(PersonnageEquipement.CodeEquipement);
             TabEquipement.Cells[4, NbEquipement]   := PArmureSimplifiee.Libelle;
-            TabEquipement.Cells[5, NbEquipement]   := PersonnageEquipement.QualiteEquipement;
+            TabEquipement.Cells[7, NbEquipement]   := PersonnageEquipement.QualiteEquipement;
+            if PersonnageEquipement.Porte then
+              TabEquipement.Cells[8, NbEquipement] := 'X';
           end
       else if TrimRight(PersonnageEquipement.TypeEquipement) = TrimRight(TypeEquipDi) then
           Begin
             TabEquipement.Cells[4, NbEquipement]   := PersonnageEquipement.CodeEquipement;
-            TabEquipement.Cells[5, NbEquipement]   := PersonnageEquipement.QualiteEquipement;
+            TabEquipement.Cells[7, NbEquipement]   := PersonnageEquipement.QualiteEquipement;
           end
       else if TrimRight(PersonnageEquipement.TypeEquipement) =TrimRight(TypeEquipSp) then
           begin
@@ -3572,8 +3830,7 @@ procedure TWinPersonnages.TabAugmentationTalentCalcul(ARow: Integer; var Value: 
             Calcul := PTalent.MaxiTalent;
             Carac  := StringReplace(ExtractStringAfter(Calcul, '(B'),')','',[rfReplaceAll]);
             For Ind := 1 to TabAttribut.ColCount - 1 do
-              if (tabAttribut.Cells[Ind, LigAttCode] = Carac) then
-                begin
+              if (CodeSansLivre(tabAttribut.Cells[Ind, LigAttCode]) = Carac) then                begin
                   ValeurMax := trunc(StrToIntDef(tabAttribut.Cells[Ind, LigAttTotal],0) / 10);
                   break;
                 end;
@@ -3906,6 +4163,11 @@ procedure TWinPersonnages.AjustePositionTables();
       StartTB                 := TabAttribut.left + TabAttribut.Width;
     ToggleBoxDroite.Left      := StartTB + 10;
     PageExperience.left       := ToggleBoxDroite.Left + 20;
+    // La Largeur doit suivre le Left, sinon le bord droit part hors fenetre quand
+    // ToggleBoxDroite.Left grandit (cases de detail Xp/Calcul, Nono le 12/09/2026) -
+    // PageExperience garde 20 de marge avec le bord droit du client, comme les autres
+    // marges de cette fonction.
+    PageExperience.Width      := Self.ClientWidth - PageExperience.left - 20;
 
     LabAugmentation.Left      := ToggleBoxDroite.Left + 20;
     LabAugmentation.top       := 0;
@@ -3950,6 +4212,11 @@ procedure TWinPersonnages.AjustePositionTables();
     ButtonDelete.Top          := ButtonArmure.Top + ButtonArmure.Height + 10;
     ButtonFabrication.Top     := ButtonDelete.Top + ButtonDelete.Height + 10;
     ButtonSort.Top            := ButtonFabrication.Top + ButtonFabrication.Height + 10;
+    // ButtonPorte n'etait pas dans la cascade (oubli anterieur) - restait donc positionne
+    // par son seul Anchors=[akTop,akRight] natif, independant de TabEquipement, d'ou le
+    // decrochage signale par Nono le 12/09/2026. Meme colonne, a la suite de ButtonSort.
+    ButtonPorte.left          := ButtonArme.left;
+    ButtonPorte.Top           := ButtonSort.Top + ButtonSort.Height + 10;
 
     ImageSheetTitle.Width     := ToggleBoxDroite.Left;
     ImageSheetPage.Width      := ToggleBoxDroite.Left;
@@ -3993,6 +4260,19 @@ end;
 procedure TWinPersonnages.TabEquipementAffiche();
   begin
       TabMetierEquipement.visible := ( (RadioButtonSuivant.checked) or (RadioButtonChanger.Checked) );
+  end;
+
+procedure TWinPersonnages.TabEquipementSelectCell(Sender: TObject; aCol,
+  aRow: Integer; var CanSelect: Boolean);
+  var
+    EstSort: Boolean;
+  begin
+    // Meme test que ButtonFabricationClick/ButtonDeleteClick : une ligne qui cite un
+    // talent est un sort, ni fabrication ni suppression ne s'y appliquent.
+    EstSort := (aRow > 0) and (TalentSort(TabEquipement.Cells[2, aRow]).CodeTalent <> '');
+    ButtonFabrication.Enabled := not EstSort;
+    ButtonPorte.Enabled       := not EstSort;
+    ButtonDelete.Enabled      := not EstSort;
   end;
 
 procedure TWinPersonnages.RadioButtonSuivantChange(Sender: TObject);
@@ -4179,16 +4459,16 @@ function TWinPersonnages.CalculExperience(TypeXp: String; Gratuit: Integer; Tota
     result := CalculOptionXpDiv25(Xp);
   end;
 
-procedure TWinPersonnages.CalculTableExperience();
+function TWinPersonnages.CalculXpEtat(): StructureXpEtat;
   var
     Ind:            Integer;
     Xp:             Integer;
     Gratuit:        Integer;
     Total:          Integer;
-    Depense:        Integer = 0;
-    Restante:       Integer = 0;
-    Augmentation:   Integer = 0;
   Begin
+    Result.Depense      := 0;
+    Result.Augmentation := 0;
+
     // Attributs
     For Ind := 2 to TabAttribut.ColCount-1 do
       begin
@@ -4202,7 +4482,7 @@ procedure TWinPersonnages.CalculTableExperience();
             else
               begin
                 TabAttribut.Cells[Ind, LigAttXp] := IntToStr(Xp);
-                Depense := Depense + Xp;
+                Result.Depense := Result.Depense + Xp;
               end;
            end;
 
@@ -4222,7 +4502,7 @@ procedure TWinPersonnages.CalculTableExperience();
             else
               begin
                 TabCompetence.Cells[ColCompXp, Ind] := IntToStr(Xp);
-                Depense := Depense + Xp;
+                Result.Depense := Result.Depense + Xp;
               end;
           end;
       end;
@@ -4237,7 +4517,7 @@ procedure TWinPersonnages.CalculTableExperience();
         else
           begin
             TabTalent.Cells[ColTalXp, Ind] := IntToStr(Xp);
-            Depense := Depense + Xp;
+            Result.Depense := Result.Depense + Xp;
           end;
 
       end;
@@ -4247,7 +4527,7 @@ procedure TWinPersonnages.CalculTableExperience();
       Begin
         Xp := StrToIntDef(TabCarriere.Cells[4, Ind],0);
         if Xp > 0 then
-          Depense := Depense + Xp;
+          Result.Depense := Result.Depense + Xp;
       end;
 
     // Augmentation
@@ -4256,21 +4536,21 @@ procedure TWinPersonnages.CalculTableExperience();
         begin
           Xp := StrToIntDef(TabAugmentationAttribut.Cells[ColAugmAttReel, Ind],0);
           if Xp > 0 then
-            Augmentation := Augmentation + Xp;
+            Result.Augmentation := Result.Augmentation + Xp;
         end;
       // Compétence
       For ind := 1 to TabAugmentationCompetence.RowCount-1 do
         begin
           Xp := StrToIntDef(TabAugmentationCompetence.Cells[ColAugmCompReel, Ind],0);
           if Xp > 0 then
-            Augmentation := Augmentation + Xp;
+            Result.Augmentation := Result.Augmentation + Xp;
         end;
       // Talents
       For ind := 1 to TabAugmentationTalent.RowCount-1 do
         begin
           Xp := StrToIntDef(TabAugmentationTalent.Cells[ColAugmTalReel, Ind],0);
           if Xp > 0 then
-            Augmentation := Augmentation + Xp;
+            Result.Augmentation := Result.Augmentation + Xp;
         end;
 
     // Sorts
@@ -4279,27 +4559,39 @@ procedure TWinPersonnages.CalculTableExperience();
         Xp := StrToIntDef(TabEquipement.Cells[5, Ind],0);
         if Xp > 0 then
           if TabEquipement.Cells[0, Ind] = '+' then
-            Augmentation := Augmentation + Xp
+            Result.Augmentation := Result.Augmentation + Xp
           else
-            Depense      := Depense + Xp;
+            Result.Depense      := Result.Depense + Xp;
       end;
 
-    // Restant Xp
+    // Total et Restant Xp
+    // Total lu depuis EditTotalXp/EditTotalXp25 (valeur affichee, a jour) et non
+    // Personnage.XpTotal/Xp25Total (charge une seule fois a l'ouverture du fichier,
+    // jamais resynchronise si le Total est releve en cours de session - cf CONTEXT.md,
+    // bug PDF Feldo du 11/09/2026).
     if CheckBoxXpDiv25.Checked = true then
-      Restante := Personnage.Xp25Total - Depense
+      Result.Total := StrToIntDef(EditTotalXp25.Text,0)
     else
-      Restante := Personnage.XpTotal - Depense;
+      Result.Total := StrToIntDef(EditTotalXp.Text,0);
 
+    Result.Restante := Result.Total - Result.Depense;
+  end;
+
+procedure TWinPersonnages.CalculTableExperience();
+  var
+    XpEtat: StructureXpEtat;
+  Begin
+    XpEtat := CalculXpEtat();
 
     // Table des XP
-    tabExperience.Cells[ColXpDonnee, LigXpDepense] := Format('%.0n',[Depense/1])+' ';
-    tabExperience.Cells[ColXpDonnee, LigXpRestant] := Format('%.0n',[Restante/1])+' ';
-    tabExperience.Cells[ColXpDonnee, LigXpCout]    := Format('%.0n',[Augmentation/1])+' ';
+    tabExperience.Cells[ColXpDonnee, LigXpDepense] := Format('%.0n',[XpEtat.Depense/1])+' ';
+    tabExperience.Cells[ColXpDonnee, LigXpRestant] := Format('%.0n',[XpEtat.Restante/1])+' ';
+    tabExperience.Cells[ColXpDonnee, LigXpCout]    := Format('%.0n',[XpEtat.Augmentation/1])+' ';
 
     // couleur
-    if (Augmentation = 0) then
+    if (XpEtat.Augmentation = 0) then
       tabExperience.Cells[2, LigXpCout] := ''
-    else if (Augmentation > Restante) then
+    else if (XpEtat.Augmentation > XpEtat.Restante) then
       tabExperience.Cells[2, LigXpCout] := CouleurNot
     else
       tabExperience.Cells[2, LigXpCout] := CouleurOk;
@@ -4564,6 +4856,7 @@ Procedure TWinPersonnages.MajTables();
   Var
     IndAugm:           Integer;
     IndActu:           Integer;
+    IndOld:            Integer;
     Trouve:            Boolean;
     PTalent:           StructureTalent;
     PCompetence:       StructureCompetence;
@@ -4571,6 +4864,7 @@ Procedure TWinPersonnages.MajTables();
     PSort:             StructureSort;
     PMetierCompetence: StructureMetierCompetence;
     PMetierTalent:     StructureMetierTalent;
+    OldAugmentationTalent: TArrayPersonnageTalent;
     CodEquip:          String;
     TypEquip:          String;
     Ind:               Integer;
@@ -4862,12 +5156,24 @@ Procedure TWinPersonnages.MajTables();
         end;
 
     // Maj personnage Talent
+    // OldAugmentationTalent conserve l'Asterisque deja calcule avant ce resync - meme
+    // logique et meme raison que CalculTotaux ci-dessus (~l.2438), PersonnageTalent etant
+    // ici la variable GLOBALE de l'unite (declaree ~l.450, non redeclaree localement dans
+    // MajTables), donc partagee avec tout le reste du code.
+    OldAugmentationTalent := Personnage.AugmentationTalent;
     Personnage.AugmentationTalent := [];
     for Ind := 1 to TabTalent.Rowcount - 1 do
       if StrToIntDef(TabTalent.Cells[ColTalNbAugm, Ind],0) > 0 then
         begin
           PersonnageTalent.CodeTalent    := TabTalent.Cells[ColTalCode, Ind];
           PersonnageTalent.Valeur        := StrToIntDef(TabTalent.Cells[ColTalNbAugm, Ind],0);
+          PersonnageTalent.Asterisque    := 0;
+          for IndOld := 0 to high(OldAugmentationTalent) do
+            if CompareRechercheValeur(OldAugmentationTalent[IndOld].CodeTalent, PersonnageTalent.CodeTalent) then
+              begin
+                PersonnageTalent.Asterisque := OldAugmentationTalent[IndOld].Asterisque;
+                break;
+              end;
           Personnage.AugmentationTalent  += [PersonnageTalent];
         end;
 
@@ -4882,12 +5188,14 @@ Procedure TWinPersonnages.MajTables();
             PersonnageEquipement.TypeEquipement    := TypeEquipSp;
             PersonnageEquipement.QualiteEquipement := '';
             PersonnageEquipement.CoutXp            := CalculOptionXpDiv25Inverse(StrToIntDef(TabEquipement.Cells[5, Ind],0));
+            PersonnageEquipement.Porte              := False;
           end
         else
           begin
             PersonnageEquipement.TypeEquipement    := TabEquipement.Cells[3, Ind];
             PersonnageEquipement.QualiteEquipement := TabEquipement.Cells[7, Ind];
             PersonnageEquipement.CoutXp            := 0;
+            PersonnageEquipement.Porte              := TabEquipement.Cells[8, Ind] <> '';
           end;
         Personnage.Equipement += [PersonnageEquipement];
       end;
@@ -4955,8 +5263,7 @@ procedure TWinPersonnages.XmlSauvegarde();
   var
     fileName:              String;
     directoryPath:         String;
-    TotalXp:               Integer;
-    XpRestant:             Integer;
+    XpEtat:                StructureXpEtat;
     PersonnageCorruption:  StructurePersonnageCorruption;
     Ind:                   Integer;
   begin
@@ -4974,9 +5281,11 @@ procedure TWinPersonnages.XmlSauvegarde();
     // nouveau fichier
     directoryPath         := GetCurrentDir+ConstCheminPersonnage+NomPersonnage;
     fileName              := directoryPath + '\' + FormatDateTime('yyyymmdd', Date) + '-' + FormatDateTime('hhnnss', Time) + '.xml';
-    TotalXp               := StrToIntDef(trim(tabExperience.Cells[ColXpDonnee, LigXpTotal]),0);
-    XpRestant             := StrToIntDef(trim(tabExperience.Cells[ColXpDonnee, LigXpRestant]),0);
-    PersonnageXmlCreation(Personnage, TotalXp, XpRestant, fileName, Personnage.NomPersonnage);
+    // Total/Restant lus directement sur CalculXpEtat (entiers) et non sur le texte affiche
+    // de tabExperience : celui-ci porte un separateur de milliers (Format('%.0n',...)) que
+    // StrToIntDef ne sait pas reparser - CurrentXp finissait a "0" des que Restant >= 1000.
+    XpEtat                := CalculXpEtat();
+    PersonnageXmlCreation(Personnage, XpEtat.Total, XpEtat.Restante, fileName, Personnage.NomPersonnage);
     NeedUpdate            := true;
     RecherchePersonnage   := NomPersonnage;
   end;

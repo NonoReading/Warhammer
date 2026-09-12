@@ -3194,3 +3194,86 @@ Fichiers modifies : pdfpersonnage.pas, CONTEXT.md, A FAIRE.txt.
 
 12/09/2026 - PAGE 2 DU PDF FELDO2P, ALIGNEMENT SUR LA NOUVELLE MARGE - VALIDE PAR NONO
 (voir 2.63 ci-dessus).
+
+12/09/2026 - PASSE DE NETTOYAGE SUR A FAIRE.TXT, DEMANDEE PAR NONO. Deux items retires car
+deja traites, verifies par lecture directe du code/CONTEXT.md avant suppression :
+- "winpersonnage.pas l.3248 s appuie sur les variables globales du dernier decoupe" : deja
+  corrige le 05/09/2026 (2.49 etape 3) - winpersonnage.pas l.3504 compare aujourd hui deux
+  CodeSansLivre() autonomes, plus aucune lecture des globales CodeValeur/CodeRecherche.
+  L item voisin (le test de radical suppose 5 caracteres, meme paragraphe plus haut dans le
+  fichier) reste lui bien ouvert, non touche.
+- "Migrer les 5 fiches anterieures aux prefixes (Ernold, Friederich, Harald, Kuno, Markus)" :
+  doublon perime de l item exact plus bas dans le fichier ("MIGRER LES QUATRE PERSONNAGES
+  HERITES") - Kuno a ete migre des le 23/08/2026 (CONTEXT.md 2.19, "Point de reprise").
+Reste de A FAIRE.txt controle (une quinzaine d items a reference technique precise
+verifiee par grep dans le code) sans autre faux positif trouve. Deux points restent
+douteux, non tranches, a confirmer avec Nono plutot qu a corriger par deduction : la
+question Copper/Almogavar de "OU EST ECRITE LA LISTE DES PALIERS DE SALAIRE" (2.61 a
+identifie l emplacement mais ne tranche pas le sujet Copper) et le statut reel des 4
+fiches heritees restantes (aucune trace dans SAVED_CARACTERS/ permettant de confirmer
+si elles ont deja ete migrees).
+
+12/09/2026 - LES DEUX POINTS DOUTEUX CI-DESSUS TRANCHES PAR NONO. "Copper" de Nations of
+Mankind est Brass, meme palier sous un autre nom narratif - pas de TIERS_COPPER a creer,
+la lecture actuelle (Brass) est deja correcte. Item transforme en point tranche dans
+A FAIRE.txt (meme convention que les autres "REGLE LE ..."), CONTEXT.md 2.19 non concerne
+(sujet distinct). Les 4 fiches heritees (Ernold, Friederich, Harald, Markus) n ont pas ete
+migrees : Nono les a supprimees, plus besoin de migration ni de trace. Item retire de
+A FAIRE.txt, CONTEXT.md 2.19 "Point de reprise" mis a jour pour refleter la suppression.
+Fichiers modifies : A FAIRE.txt, CONTEXT.md.
+
+12/09/2026 - ANCRAGE DES CONTROLES, DEMARRE SUR WINPERSONNAGE (fenetre principale, choix de
+Nono). winpersonnage.pas a deja un moteur de positionnement maison, AjustePositionTables(),
+qui repositionne en cascade quasiment tout le formulaire et ecrase donc toute ancre native -
+poser des Anchors classiques n'aurait rien change. Approche retenue : brancher ce moteur
+aussi sur OnResize (WinPersonnages.OnResize = FormResize, nouvelle procedure qui appelle
+AjustePositionTables()). Compile, teste par Nono a l ecran (redimensionnement largeur et
+hauteur) : "globalement ca fonctionne", trois anomalies remontees et corrigees dans la
+foulee :
+1. PageExperience sortait de la fenetre quand une case de detail (Calcul/Xp) etait cochee -
+   Left recalcule mais pas Width. Ajoute PageExperience.Width := Self.ClientWidth -
+   PageExperience.left - 20.
+2. TabEquipement seule a grandir puis retrecir au redimensionnement - seule grille a porter
+   Anchors=[akTop,akLeft,akRight,akBottom] alors que sa taille est de toute facon recalculee
+   sur son contenu a chaque appel (AdjustGridColumnsWidth) : les deux mecanismes se
+   battaient. Retire akRight du lfm (garde akBottom, meme profil que TabTalent/TabCompetence).
+3. ButtonPorte ("marquer un equipement comme porte") ne suivait pas TabEquipement comme les
+   autres boutons (Arme/Armure/Fabrication/Delete/Sort) - oubli, jamais inclus dans la
+   cascade de AjustePositionTables, seul son Anchors natif le gouvernait. Ajoute a la suite
+   de ButtonSort (ordre visuel d origine confirme par les Top de conception).
+Compile (lazbuild, 0 erreur) apres les trois corrections. Voir CONTEXT.md 2.64.
+Fichiers modifies : winpersonnage.pas, winpersonnage.lfm, CONTEXT.md.
+
+12/09/2026 - ANCRAGE DES CONTROLES, SUITE. PageExperience (point 1) confirme par Nono :
+"l onglet reste maintenant dans la taille de la page". Mais les boutons Arme/Armure/Delete/
+Fabrication/Sort/Porte continuaient de bouger pendant le redimensionnement alors que
+TabEquipement (point 2, corrige) restait statique - meme cause racine : les six portaient
+encore Anchors=[akTop,akRight] dans le lfm alors que AjustePositionTables reecrit deja leur
+Left/Top en dur relatif a TabEquipement a chaque appel. Retire des six (ButtonHistorique,
+ailleurs sur la fenetre et hors cascade, non touche). Compile (lazbuild, 0 erreur). Pas
+encore revalide par Nono. Voir CONTEXT.md 2.64.
+Fichiers modifies : winpersonnage.lfm, CONTEXT.md.
+
+12/09/2026 - ANCRAGE DES CONTROLES, VRAIE CAUSE TROUVEE. Nono : "non, cela bouge, meme sans
+Anchors sur les boutons - c est peut etre ma fonction de position qui pose probleme ?" -
+juste. AdjustGridColumnsWidth (chargeconstantes.pas) recoit MaxHeight=0 aux 8 appels de
+AjustePositionTables (Attribut/Talent/Carriere/Competence/Niveau/Avancement/Experience/
+Equipement), ce qui la fait retomber sur Form.Height - la hauteur de fenetre EN DIRECT,
+qui change a chaque tick pendant un redimensionnement puisque AjustePositionTables tourne
+maintenant sur OnResize - pour decider d ajouter 20 a la Largeur (place ascenseur). Ce
+20 apparait/disparait donc au fil du drag, decalant TabCompetence puis en cascade
+ToggleBoxDroite/PageExperience/TabEquipement et les 6 boutons - independamment de tout
+Anchors, d ou le "ca bouge quand meme". Corrige en passant 9999 (largement superieur au
+contenu reel) au lieu de 0 aux 8 appels, plus le doublon TabCompetence deja connu en fin de
+fonction (A FAIRE.txt, meme cause). Compile (lazbuild, 0 erreur). Pas encore revalide par
+Nono. Voir CONTEXT.md 2.64.
+Fichiers modifies : winpersonnage.pas, CONTEXT.md.
+
+12/09/2026 - ANCRAGE DES CONTROLES MIS EN PAUSE PAR NONO ("je crois que je vais abandonner :D"),
+plus profond que prevu. Decision prise ensemble : garder l etat actuel plutot que revenir en
+arriere - PageExperience confirme corrige, le reste (conflits Anchors/positionnement en dur,
+ButtonPorte oublie, MaxHeight sur Form.Height en direct) sont de vrais bugs, utiles meme hors
+resize. Jamais entierement revalide par Nono a l ecran depuis le dernier correctif - a garder
+en tete si un comportement bizarre de WinPersonnage remonte plus tard. Point de reprise ecrit
+dans A FAIRE.txt et CONTEXT.md 2.64.
+Fichiers modifies : A FAIRE.txt, CONTEXT.md.
