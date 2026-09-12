@@ -3178,3 +3178,19 @@ DATABASE/BOOK_RULESBOOK_FRANCAIS.Xml, CONTEXT.md.
 
 12/09/2026 - TABLEAU ATTRIBUT, LIGNE "CAREER" - VALIDE PAR NONO (voir 2.62 ci-dessus) :
 le Knight du Reiksguard affiche bien +10 sur Fel et WP dans la nouvelle ligne.
+
+12/09/2026 - PAGE 2 DU PDF FELDO2P ALIGNEE SUR LA NOUVELLE MARGE GAUCHE DE LA PAGE 1,
+COMPILE. Point laisse ouvert au 2.60 : la Page 2 (Armure, Equipement, Armes, Sorts,
+Encombrement, Armour Points, Mutations) restait sur l ancienne marge (20mm) pendant que la
+Page 1 etait passee a 12mm.
+Les fonctions de cadre Page 2 prennent (XGauche, XDroite) - le deuxieme parametre est deja
+un bord droit absolu malgre son nom "DessinLargeur*", meme piege que DessinLargeurExp au
+2.60. Change uniquement DessinDebColG (20) en DessinDebColCompG (12) au point d appel : les
+bords droits ne bougent pas, chaque bloc gagne 8mm sur sa gauche, aucun risque de
+debordement meme pour Armes/Sorts deja proches du bord de page (bord droit reste a 200 sur
+une page de 210mm). Voir CONTEXT.md 2.63.
+Compile (lazbuild, 0 erreur), uniquement des hints preexistants sans rapport.
+Fichiers modifies : pdfpersonnage.pas, CONTEXT.md, A FAIRE.txt.
+
+12/09/2026 - PAGE 2 DU PDF FELDO2P, ALIGNEMENT SUR LA NOUVELLE MARGE - VALIDE PAR NONO
+(voir 2.63 ci-dessus).

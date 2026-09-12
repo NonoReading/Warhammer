@@ -1,13 +1,10 @@
 # Warhammer — Contexte projet
 
-**Dernière mise à jour : 12/09/2026 — STATUS (BRASS/SILVER/GOLD) AFFICHAIT LE CODE BRUT SUR LES
-DEUX PDF, L'ARBRE WINMETIER ET LE LIVRET DE CARRIÈRE : CORRIGÉ.** Signalé par Nono en relisant
-un Pdf - détail §2.61.
+**Dernière mise à jour : 12/09/2026 — PAGE 2 DU PDF FELDO2P ALIGNÉE SUR LA NOUVELLE MARGE
+GAUCHE DE LA PAGE 1 (12mm au lieu de 20mm), VALIDÉ PAR NONO.** Suite du §2.60 - détail §2.63.
 
-Chantier précédent (2.60, colonne "avec équipement" dans le Pdf Feldo2P) terminé et validé par
-Nono - détail §2.60. Aucun chantier ouvert pour la suite - prochain travail à choisir dans
-`A FAIRE.txt` (candidat restant : ancrage des contrôles ; l'alignement Page 2 sur la nouvelle
-marge gauche/droite de la Page 1 reste aussi à faire si besoin, voir fin §2.60).
+Aucun chantier ouvert. Prochain travail à choisir dans `A FAIRE.txt` (candidat restant :
+ancrage des contrôles).
 
 ---
 
@@ -7240,6 +7237,38 @@ libellés posés par code) - le tableau équivalent de `WinCreation` a une orien
 
 **Compilé (lazbuild, 0 erreur).** ✅ **Validé par Nono le 12/09/2026** : la ligne "Career"
 affiche bien +10 sur Fel et WP pour le Knight du Reiksguard.
+
+### 2.63 Page 2 du Pdf Feldo2P alignée sur la nouvelle marge gauche de la Page 1, terminé et validé par Nono (12/09/2026)
+
+**Origine.** Point laissé ouvert au §2.60 : le décalage de la marge gauche de la Page 1 (20→12mm,
+gain de 8mm pour la colonne "W/ Gear") n'avait pas été répercuté sur la Page 2 (Armure,
+Équipement, Armes, Sorts, Encombrement, Armour Points, Mutations), qui restait posée sur
+l'ancienne marge - périmètre volontairement limité à la Page 1 à l'époque.
+
+**Analyse.** Les fonctions `PdfBlocArmures`/`PdfBlocEquipement`/`PdfBlocArmes`/`PdfBlocSorts`/
+`PdfBlocEncombrement` prennent `(XGauche, XDroite, ...)` - malgré leur nom, les constantes
+`DessinLargeurArm`/`Equ`/`Wea`/`Sor`/`Enc` passées en second argument sont déjà des bords DROITS
+absolus (128/128/200/200/44), pas des largeurs, même piège de nommage trompeur que
+`DessinLargeurExp` (§2.60). Changer uniquement le bord GAUCHE (`DessinDebColG`=20 →
+`DessinDebColCompG`=12) sans toucher ces bords droits reproduit donc exactement la méthode du
+§2.60 : chaque bloc gagne 8mm sur sa gauche, ses bords droits ne bougent pas - **aucun risque de
+débordement** pour Armes/Sorts (déjà proches du bord de page à 200mm sur 210mm) puisque leur bord
+droit reste à 200, inchangé.
+
+**Corrigé.** Remplacé `DessinDebColG` par `DessinDebColCompG` à tous les points d'appel de la
+Page 2 (`pdfpersonnage.pas`, `PdfPersonnageCreationFeldo2P`) : les 5 cadres
+(`PdfBlocArmures`/`Equipement`/`Armes`/`Sorts`/`Encombrement`), leur remplissage
+(`PdfBlocSortsDonnees`/`DiversDonnees`/`ArmesDonnees`/`ArmuresDonnees`), les 4 centrages de
+texte de l'Encombrement (`PdfCentre`, décalage `+15` inchangé - relatif au nouveau bord gauche
+du bloc), `PdfBlocArmourPoints` et `PdfBlocMutations` (décalage `+63+3` inchangé, XDroite
+réutilise toujours `DessinLargeurArm`=128, inchangé). `DessinDebColG` (20) ne sert plus qu'à la
+largeur de la colonne "Nom" du tableau Compétences de base sur la Page 1 (`55 - DessinDebColG`
+= 35, une largeur figée volontairement non touchée, sans lien avec une position) - commentaire
+de la déclaration mis à jour pour refléter les deux usages.
+
+**Compilé (lazbuild, 0 erreur)**, uniquement des hints/notes/warnings préexistants sans rapport
+(variables locales inutilisées, `DessinFinColD` non utilisé depuis le §2.60). ✅ **Validé par
+Nono le 12/09/2026.**
 
 ---
 

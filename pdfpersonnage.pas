@@ -4053,11 +4053,17 @@ Procedure PdfPersonnageCreationFeldo2P(Personnage: StructurePersonnage);
       // Bord gauche PARTAGE par tous les blocs de la colonne gauche de la page 1 (Entete,
       // Caracteristiques, tableau Competences de base, Ambitions, Resilience/Destin, Mouvement,
       // Experience, Corruption) depuis la colonne "W/ Gear" (CONTEXT.md 2.59) - decale par
-      // rapport a l'ancien DessinDebColG (20, reste utilise tel quel par la PAGE 2, non touchee
-      // par ce chantier). Les bords DROITS existants (DessinFinColG, DessinLargeurExp utilisee
-      // comme bord droit absolu) restent inchanges : chaque bloc gagne la largeur en plus sur
-      // sa gauche, comme le tableau de competences lui-meme. Marge page restante : 12mm,
-      // superieure au minimum d'1cm (Nono, 12/09/2026).
+      // rapport a l'ancien DessinDebColG (20). Les bords DROITS existants (DessinFinColG,
+      // DessinLargeurExp utilisee comme bord droit absolu) restent inchanges : chaque bloc
+      // gagne la largeur en plus sur sa gauche, comme le tableau de competences lui-meme. Marge
+      // page restante : 12mm, superieure au minimum d'1cm (Nono, 12/09/2026).
+      // Etendue a tous les blocs de la PAGE 2 (Armure/Equipement/Armes/Sorts/Encombrement/
+      // Armour Points/Mutations) le 12/09/2026 (CONTEXT.md 2.63) - leurs bords DROITS
+      // (DessinLargeurArm/Equ/Wea/Sor/Enc, utilisees comme bord droit absolu) restent eux
+      // aussi inchanges, seul le bord gauche partage bouge, meme principe qu'au-dessus.
+      // DessinDebColG (20) ne sert plus qu'a la largeur de la colonne "Nom" du tableau
+      // Competences de base (ligne ~4348, 55-DessinDebColG=35, formule volontairement
+      // inchangee - ce n'est pas une position mais une largeur figee).
       DessinDebColCompG:    Integer = 12;
       // Bord droit du tableau Competences groupees une fois elargi (7e colonne) - Talents
       // (juste en dessous) s'elargit a l'identique pour rester aligne. Marge page restante :
@@ -4540,29 +4546,29 @@ Procedure PdfPersonnageCreationFeldo2P(Personnage: StructurePersonnage);
      // Dessin Armures (extrait dans PdfBlocArmures, CONTEXT.md §2.4 - cadre uniquement,
      // le remplissage des lignes reste plus bas, dans la boucle Equipement/Armes/Sorts)
      DessinDebutHautArm := DessinDebutHautEntete;
-     PdfBlocArmures(PdfPage, DessinDebColG, DessinLargeurArm, DessinDebutHautArm, DessinHauteurArm, DessinNbLigArm);
+     PdfBlocArmures(PdfPage, DessinDebColCompG, DessinLargeurArm, DessinDebutHautArm, DessinHauteurArm, DessinNbLigArm);
      // Dessin Equipement (extrait dans PdfBlocEquipement, CONTEXT.md §2.4 - cadre uniquement)
      DessinDebutHautEqu := DessinDebutHautArm - ((DessinNbLigArm + 1) * DessinHauteurArm) - 3;
-     PdfBlocEquipement(PdfPage, DessinDebColG, DessinLargeurEqu, DessinDebutHautEqu, DessinHauteurEqu, DessinNbLigEqu);
+     PdfBlocEquipement(PdfPage, DessinDebColCompG, DessinLargeurEqu, DessinDebutHautEqu, DessinHauteurEqu, DessinNbLigEqu);
      // Dessin Armes (extrait dans PdfBlocArmes, CONTEXT.md §2.4 - cadre uniquement)
      DessinDebutHautWea := DessinDebutHautEqu - ((DessinNbLigEqu + 1) * DessinHauteurEqu) - 3;
-     PdfBlocArmes(PdfPage, DessinDebColG, DessinLargeurWea, DessinDebutHautWea, DessinHauteurWea, DessinNbLigWea);
+     PdfBlocArmes(PdfPage, DessinDebColCompG, DessinLargeurWea, DessinDebutHautWea, DessinHauteurWea, DessinNbLigWea);
      // Dessin Sorts (extrait dans PdfBlocSorts, CONTEXT.md §2.4 - cadre uniquement)
      DessinDebutHautSor := DessinDebutHautWea - ((DessinNbLigWea + 1) * DessinHauteurWea) - 3;
-     PdfBlocSorts(PdfPage, DessinDebColG, DessinLargeurSor, DessinDebutHautSor, DessinHauteurSor, DessinNbLigSor);
+     PdfBlocSorts(PdfPage, DessinDebColCompG, DessinLargeurSor, DessinDebutHautSor, DessinHauteurSor, DessinNbLigSor);
      // Encombrement (extrait dans PdfBlocEncombrement, CONTEXT.md §2.4 - cadre uniquement)
      DessinDebutHautEnc := DessinDebutHautSor - ((DessinNbLigSor + 1) * DessinHauteurSor) - 3;
-     PdfBlocEncombrement(PdfPage, DessinDebColG, DessinLargeurEnc, DessinDebutHautEnc, DessinHauteurEnc, DessinNbLigEnc, MinPolice);
+     PdfBlocEncombrement(PdfPage, DessinDebColCompG, DessinLargeurEnc, DessinDebutHautEnc, DessinHauteurEnc, DessinNbLigEnc, MinPolice);
 
      // Dessin Sorts (extrait dans PdfBlocSortsDonnees, CONTEXT.md §2.4 - remplissage)
-     PdfBlocSortsDonnees(PdfPage, Personnage, DessinDebColG, DessinDebutHautSor, DessinHauteurSor, MinPolice);
+     PdfBlocSortsDonnees(PdfPage, Personnage, DessinDebColCompG, DessinDebutHautSor, DessinHauteurSor, MinPolice);
      // Dessin Divers (extrait dans PdfBlocDiversDonnees, CONTEXT.md §2.4 - remplissage)
-     PdfBlocDiversDonnees(PdfPage, Personnage, DessinDebColG, DessinDebutHautEqu, DessinHauteurEqu, DessinNbLigEqu, MinPolice);
+     PdfBlocDiversDonnees(PdfPage, Personnage, DessinDebColCompG, DessinDebutHautEqu, DessinHauteurEqu, DessinNbLigEqu, MinPolice);
      // Dessin Armes (extrait dans PdfBlocArmesDonnees, CONTEXT.md §2.4 - remplissage)
-     PdfBlocArmesDonnees(PdfPage, Personnage, DessinDebColG, DessinLargeurWea, DessinDebutHautWea, DessinHauteurWea, BF, TBonusCC, TBonusCT, FabricationBonii, EncArme, ArmeBonii, ArmureBouclier, MinPolice);
+     PdfBlocArmesDonnees(PdfPage, Personnage, DessinDebColCompG, DessinLargeurWea, DessinDebutHautWea, DessinHauteurWea, BF, TBonusCC, TBonusCT, FabricationBonii, EncArme, ArmeBonii, ArmureBouclier, MinPolice);
      // Dessin Armures (extrait dans PdfBlocArmuresDonnees, CONTEXT.md §2.4 - remplissage) -
      // dernière des 4 boucles, les 4 sont maintenant toutes extraites de la boucle partagée
-     PdfBlocArmuresDonnees(PdfPage, Personnage, DessinDebColG, DessinLargeurArm, DessinDebutHautArm, DessinHauteurArm, ArmureSet, FabricationBonii, EncArmure, ArmureBras, ArmureCorps, ArmureJambe, ArmureTete, ArmureBonii, MinPolice, AsterisqueParEquipement);
+     PdfBlocArmuresDonnees(PdfPage, Personnage, DessinDebColCompG, DessinLargeurArm, DessinDebutHautArm, DessinHauteurArm, ArmureSet, FabricationBonii, EncArmure, ArmureBras, ArmureCorps, ArmureJambe, ArmureTete, ArmureBonii, MinPolice, AsterisqueParEquipement);
      ListAsterisqueArmure.Destroy;
      AsterisqueParEquipement.Destroy;
 
@@ -4570,10 +4576,10 @@ Procedure PdfPersonnageCreationFeldo2P(Personnage: StructurePersonnage);
     PdfTaillePolice(PdfPage, PdfFontValue, ConstPoliceArial, 7);
 
     //  gérer les encombrement
-    PdfCentre(PdfPage, DessinDebColG + 15, DessinLargeurEnc, DessinDebutHautEnc - ((DessinNbLigEnc - 3) * DessinHauteurEnc) + 0.9, IntToStr(EncArmure));
-    PdfCentre(PdfPage, DessinDebColG + 15, DessinLargeurEnc, DessinDebutHautEnc - ((DessinNbLigEnc - 2) * DessinHauteurEnc) + 0.9, IntToStr(EncArme));
-    PdfCentre(PdfPage, DessinDebColG + 15, DessinLargeurEnc, DessinDebutHautEnc - ((DessinNbLigEnc - 0) * DessinHauteurEnc) + 0.9, IntToStr(Floor(BF/10) + Floor(BE/10) + BonusEncomb));
-    PdfCentre(PdfPage, DessinDebColG + 15, DessinLargeurEnc, DessinDebutHautEnc - ((DessinNbLigEnc + 1) * DessinHauteurEnc) + 0.9, IntToStr(EncArmure + EncArme));
+    PdfCentre(PdfPage, DessinDebColCompG + 15, DessinLargeurEnc, DessinDebutHautEnc - ((DessinNbLigEnc - 3) * DessinHauteurEnc) + 0.9, IntToStr(EncArmure));
+    PdfCentre(PdfPage, DessinDebColCompG + 15, DessinLargeurEnc, DessinDebutHautEnc - ((DessinNbLigEnc - 2) * DessinHauteurEnc) + 0.9, IntToStr(EncArme));
+    PdfCentre(PdfPage, DessinDebColCompG + 15, DessinLargeurEnc, DessinDebutHautEnc - ((DessinNbLigEnc - 0) * DessinHauteurEnc) + 0.9, IntToStr(Floor(BF/10) + Floor(BE/10) + BonusEncomb));
+    PdfCentre(PdfPage, DessinDebColCompG + 15, DessinLargeurEnc, DessinDebutHautEnc - ((DessinNbLigEnc + 1) * DessinHauteurEnc) + 0.9, IntToStr(EncArmure + EncArme));
 
     // Dessin Armour Points (nouveau bloc PdfBlocArmourPoints, CONTEXT.md §2.4 - cadre +
     // contenu) - positionné sous l'Encombrement, demandé par Nono le 15/08/2026.
@@ -4584,16 +4590,16 @@ Procedure PdfPersonnageCreationFeldo2P(Personnage: StructurePersonnage);
     // laisser un espace. Formule corrigée pour utiliser exactement le même "-3" que
     // partout ailleurs entre deux blocs (le même écart qu'entre Sorts et Encombrement) ;
     // (X,Y) passé au bloc est maintenant le coin HAUT-GAUCHE de son cadre, aligné sur
-    // DessinDebColG comme tous les autres blocs de la page (au lieu d'un décalage de
+    // DessinDebColCompG comme tous les autres blocs de la page (au lieu d'un décalage de
     // 4mm vers la gauche par rapport au bloc Encombrement).
     DessinHautArmourPoints := DessinDebutHautEnc - ((DessinNbLigEnc + 1) * DessinHauteurEnc) - 3;
-    PdfBlocArmourPoints(PdfPage, PdfImgShadow, DessinDebColG, DessinHautArmourPoints, ArmureTete, ArmureBras, ArmureCorps, ArmureJambe, ArmureBouclier, AsterisqueArmure);
+    PdfBlocArmourPoints(PdfPage, PdfImgShadow, DessinDebColCompG, DessinHautArmourPoints, ArmureTete, ArmureBras, ArmureCorps, ArmureJambe, ArmureBouclier, AsterisqueArmure);
 
     // Table des mutations obtenues (CONTEXT.md §2.7, étape 9) - à droite d'Armour Points, même
     // écart de 3mm que partout ailleurs entre deux blocs de la page ; XDroite réutilise
     // DessinLargeurArm (bord droit déjà établi pour Armure/Équipement plus haut sur la page)
     // plutôt qu'une nouvelle largeur arbitraire. Capacité fixe à 3 lignes, demandée par Nono.
-    PdfBlocMutations(PdfPage, Personnage, DessinDebColG + 63 + 3, DessinLargeurArm, DessinHautArmourPoints, DessinHauteurEnc, 3, MinPolice, AsterisqueParMutation);
+    PdfBlocMutations(PdfPage, Personnage, DessinDebColCompG + 63 + 3, DessinLargeurArm, DessinHautArmourPoints, DessinHauteurEnc, 3, MinPolice, AsterisqueParMutation);
     // Dernière utilisation de ListAsterisqueMutation/AsterisqueParMutation sur cette page -
     // libérées ici (même moment que ListAsterisqueArmure/AsterisqueParEquipement, juste avant,
     // après leur dernier usage respectif).

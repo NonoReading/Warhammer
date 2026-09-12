@@ -6,11 +6,6 @@
 CORRECTIONS COURTES  (une ligne ou deux chacune)
 =========================================================================
 
-PAGE 2 DU PDF FELDO2P PAS ALIGNEE SUR LA NOUVELLE MARGE GAUCHE DE LA PAGE 1 (12mm au lieu de
-20mm, colonne "avec equipement", CONTEXT.md 2.60). Perimetre volontairement limite a la Page 1
-le 12/09/2026 ; a reprendre si besoin - Armes/Sorts (largeur 200mm) sont deja proches du bord
-de page et devront etre reverifies pour ne pas deborder.
-
 LE TEST DE RADICAL DE TALENT SUPPOSE UN CODE DE 5 CARACTERES. winpersonnage.pas l.3245,
 copy(CodeSansLivre(...),1,5) : vrai pour les 868 codes en T+4 chiffres, faux pour les ids
 "A ou B" comme T0009/RULES-T0067 (seul le premier est compare) et pour le generique T*. Ce
