@@ -3426,3 +3426,62 @@ drag), pas un bug de positionnement. Pas de correctif simple sans degrader le ra
 en direct (ne recalculer qu au relachement de la souris, ecarte par Nono).
 Compile (lazbuild, 0 erreur) a chaque etape, y compris apres retrait du diagnostic.
 Fichiers modifies : winpersonnage.pas, A FAIRE.txt, CONTEXT.md.
+
+12/09/2026 - VERSIONING WFRP4/WFRP5 : CONCEPTION ARRETEE, RIEN CODE (CONTEXT.md 2.70). La V5
+de Warhammer Fantasy Roleplay vient de sortir, tres proche de la V4 mais pas identique -
+verifie en comparant le metier Merchant present dans les deux (RULES-WORK34 vs Core Rulebook
+V5 p.72) : environ 95% du catalogue Competence/Talent/Trapping identique, mais les
+competences sont redistribuees entre les niveaux, un talent et une trapping substitues
+(Sharp -> Super Numerate, Shield -> Abacus).
+Decision d'architecture : separation complete des donnees par edition (futurs
+DATABASE_WFRP5\ et SAVED_CARACTERS_WFRP5\, y compris PICTURES\ en entier), pas de
+scission/surcharge par entree dans une base commune - choix motive par l'experience
+professionnelle de Nono sur des architectures "standard + specifiques par client" qui ont
+fini ingerables a force de "SI {client} ALORS". Enseignement a retenir au-dela de ce projet :
+face a deux referentiels proches mais pas identiques, preferer la separation complete a un
+socle commun avec exceptions.
+Conception retenue, rien code : champ Version (deja present dans StructureLivre, mort -
+seulement un horodatage d'export jamais affiche) reutilise pour porter l'edition en texte
+libre (WFRP4/WFRP5) ; selecteur d'edition dans le menu principal (ComboBox façon
+ComboBoxLangue, memorise en .INI) ; changement d'edition = rechargement a chaud en reprenant
+le mecanisme deja valide du changement de langue en direct (CONTEXT.md 2.8) - bloque si
+WinPersonnage/WinCreation ouvert, fenetres catalogue fermees puis rouvertes ; chemins deja
+centralises dans chargeconstantes.pas (ConstCheminLivre, ConstCheminPersonnage) a passer de
+Const a Var.
+Point de reprise : rien code. Prochaine etape la plus simple : renseigner WFRP4 dans le
+champ VERSION des 21 BOOK*.Xml de DATABASE\ (portent actuellement des dates d'export
+perimees).
+En marge du chantier : le script Documents\Famille\Nono\JDR\Warhammer 4\Livres\5th
+Edition\ConvertPDF.bat (PDF vers TXT pour les livres V5) etait casse - collage Markdown
+(balises de bloc de code en tete/fin de fichier) et un `^` de continuation PowerShell manquant
+dans le bloc colle en une ligne cmd, puis un second piege une fois le premier corrige (%~dp0
+se termine toujours par un antislash, ce qui cassait le parametre -Source passe a
+PowerShell). Corrige ; logique PowerShell deplacee dans ConvertPDF.ps1 a cote du .bat, plus
+robuste que le bloc colle via des `^`.
+Fichiers modifies : CONTEXT.md, Log.txt.
+
+12/09/2026 - VERSIONING WFRP4/WFRP5 : COMPARATIF TIERS LU, DECISION SUR WINPERSONNAGE
+(CONTEXT.md 2.70). Suite immediate de l'entree precedente. Nono a fourni un second document,
+LIVRES\WFRP-4e-vs-5e.txt (comparatif tiers des mecaniques V4/V5, ~1100 lignes), qui confirme
+et approfondit le "proche mais pas identique" vu sur le metier Merchant : catalogue quasi
+identique (memes 45 competences, memes 64 metiers a 3 renommages pres, sorts a 92%
+identiques), mais les vrais ecarts sont dans le moteur de calcul, pas la donnee - le scaling
+des talents par rang (166 talents avec un champ Max en V4, zero en V5, exactement ce que
+porte le moteur generique de modificateurs du projet) disparait entierement, la difficulte
+modifie le SL au lieu du seuil de jet, Advantage devient Momentum, les avances passent de +1
+a +5, la completion de niveau de carriere change de modele, Resilience/Resolution sont
+remplacees par Fate/Fortune.
+Question posee par Nono en consequence : garder WinPersonnage unique pour les deux editions,
+ou le dupliquer ? Reponse motivee : le garder unique. Dupliquer la donnee est peu couteux
+(un fait errone se corrige a un seul endroit), dupliquer du code recree le probleme du "SI
+{client} ALORS" que la separation des donnees visait justement a eviter - chaque futur bug
+d'UI (le projet en a corrige des dizaines) se corrigerait deux fois dans deux fichiers qui
+divergent. Les ecarts reels sont concentres dans un petit nombre de fonctions de calcul
+(CalculTableExperience/CalculAvancement, le moteur generique de modificateurs qui devient
+largement inutile en V5 plutot que different, les champs Resilience/Resolution vs
+Fate/Fortune), pas dans la grille/mise en page/export PDF qui forme l'essentiel de la
+fenetre. A isoler derriere un point de bascule par edition plutot que dupliquer. Decision a
+revalider une fois la donnee V5 effectivement en main.
+Nono a precise que ce chantier fiche de personnage ne demarre qu'une fois le chantier
+donnees V5 termine - pas de melange des deux.
+Fichiers modifies : CONTEXT.md, Log.txt.

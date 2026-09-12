@@ -1,6 +1,29 @@
 # Warhammer — Contexte projet
 
-**Dernière mise à jour : 12/09/2026 — ANCRAGE DES CONTRÔLES (WINPERSONNAGE) : SYMPTÔME
+**Dernière mise à jour : 12/09/2026 — VERSIONING WFRP4/WFRP5 : CONCEPTION ARRÊTÉE, RIEN
+CODÉ (§2.70).** La V5 de Warhammer Fantasy Roleplay vient de sortir, très proche de la V4
+mais pas identique (vérifié sur le métier Merchant, puis confirmé et approfondi par un
+comparatif tiers des mécaniques, `LIVRES\WFRP-4e-vs-5e.txt`). Décision : séparation complète
+des données par édition (`DATABASE_WFRP5\`/`SAVED_CARACTERS_WFRP5\`), pas de
+scission/surcharge par entrée - conforme à l'expérience de Nono sur les architectures "base
+commune + exceptions" qui dérivent en "SI {client} ALORS" ingérable. Sélecteur d'édition
+prévu dans le menu principal, rechargement à chaud en réutilisant le mécanisme déjà validé
+du changement de langue (§2.8). Le comparatif révèle que les vrais écarts V4/V5 sont surtout
+dans le **moteur de calcul** (scaling des talents par rang, formule de difficulté, paliers
+d'avance, Fate/Fortune) plutôt que dans le catalogue (compétences/métiers quasi identiques) -
+d'où la décision, pour le futur chantier fiche de personnage (pas commencé, viendra après
+celui-ci), de garder WinPersonnage unique et d'isoler les quelques fonctions de calcul
+concernées plutôt que de dupliquer la fenêtre. Détails complets et point de reprise en
+§2.70. Rien codé encore - prochaine étape : renseigner `WFRP4` sur les 21 livres de
+`DATABASE\`.
+
+Plus tôt dans la journée : ancrage des contrôles (WinPersonnage) fermé - symptôme résiduel
+sur `CheckBoxQuickArmor`/boutons équipement investigué (§2.64), conclusion : artefact
+d'affichage Windows, pas un bug.
+
+---
+
+**12/09/2026 — ANCRAGE DES CONTRÔLES (WINPERSONNAGE) : SYMPTÔME
 RÉSIDUEL SUR CHECKBOXQUICKARMOR/BOUTONS ÉQUIPEMENT INVESTIGUÉ ET FERMÉ (§2.64).** Nono a
 signalé que `CheckBoxQuickArmor` et les boutons Arme/Armure/Fabrication/Delete/Sort/Porte
 semblaient sauter pendant le redimensionnement de la fenêtre (jamais au clic Xp/Calcul) - et
@@ -7689,6 +7712,96 @@ ajustement de position.
 **Hors périmètre, reste ouvert** : WinFabrication n'a toujours aucune notion de livre
 (pas de champ `Livre` dans sa structure de données) - chantier plus lourd que les deux
 ici, voir `A FAIRE.txt`.
+
+---
+
+### 2.70 Versioning WFRP4/WFRP5 : conception arrêtée, rien codé (12/09/2026)
+
+**Origine.** La V5 de Warhammer Fantasy Roleplay vient de sortir, très proche de la V4 mais
+pas identique. Comparaison faite sur le métier Merchant (présent dans les deux :
+`RULES-WORK34` dans `BOOK_RULESBOOK.Xml` vs Core Rulebook V5 p.72) : ~95% du catalogue
+Compétence/Talent/Trapping identique, mais les compétences sont redistribuées entre les
+niveaux, un talent et une trapping substitués (Sharp→Super Numerate, Shield→Abacus). Proche
+mais pas identique - exactement le type d'écart qui, par l'expérience professionnelle de
+Nono, conduit à un enfer de "SI {client} ALORS" quand on tente de faire vivre deux
+référentiels proches sur une base commune avec exceptions. **Décision : séparation
+complète, pas de scission/surcharge par entrée.**
+
+**Conception arrêtée, rien codé :**
+1. **Champ `Version`** (`StructureLivre`, `chargelivre.pas`) déjà présent mais mort
+   (uniquement un horodatage d'export jamais affiché, `xmlexportimport.pas` l.237-242) -
+   réutilisé pour porter l'édition en texte libre, style officiel (`WFRP4`/`WFRP5`, pas
+   d'énumération fermée). Les 21 `BOOK*.Xml` actuels de `DATABASE\` doivent recevoir
+   `WFRP4` (remplaçant leurs dates d'export actuelles, ex. `"20250623"`) - **pas encore
+   fait**.
+2. **Deux arbres de données complets et indépendants** : `DATABASE_WFRP5\` et
+   `SAVED_CARACTERS_WFRP5\` à côté des actuels `DATABASE\`/`SAVED_CARACTERS\` - y compris
+   `PICTURES\` en entier (NIV, NIV_HELF, PDF inclus, rien d'exclu : ce sont des images
+   officielles de gabarit/livre, pas des icônes neutres).
+3. **Sélecteur d'édition dans le menu principal** (`TMenu`, `warhammersource.pas`) : un
+   ComboBox au-dessus du panneau Book, façon `ComboBoxLangue` existant - dernier choix
+   mémorisé dans le `.INI` (même mécanisme que `SauveIni`/`ConstIniLangue`, l.190-205).
+4. **Changement d'édition = rechargement à chaud**, en réutilisant le mécanisme déjà
+   validé du changement de langue en direct (§2.8, `ComboBoxLangueSelect` l.236) : bloqué
+   si `WinPersonnage`/`WinCreation` est ouvert (variable globale `Personnage` partagée
+   entre ces fenêtres, fermeture sans sauvegarde = perte de saisie), fenêtres catalogue
+   secondaires fermées puis rouvertes, `ChargerLivre` repointé sur le nouveau chemin,
+   `RafraichirLibellesMenu` pour les libellés déjà posés sur le menu (pas `FormCreate`,
+   qui duplique les colonnes de grille à chaque appel).
+5. **Chemins déjà centralisés** dans `chargeconstantes.pas` (`ConstCheminLivre =
+   '\DATABASE\'`, `ConstCheminPersonnage = '\SAVED_CARACTERS\'`, + 3 constantes d'images
+   `%BOOK%`) - à passer de `Const` à `Var`, plus 2-3 littéraux isolés à corriger
+   (`warhammersource.pas` l.820/852-854, `chargesort.pas`).
+
+**Écarts confirmés par un comparatif tiers (`LIVRES\WFRP-4e-vs-5e.txt`, ~1100 lignes, "rev
+3", lu en entier le 12/09/2026).** Confirme le proche-mais-pas-identique constaté sur
+Merchant : mêmes 45 compétences, mêmes 64 métiers (3 renommages seulement : Huffer→Pilot,
+Seaman→Sailor, Bawd→Knave), sorts à 92% identiques. Mais les vrais écarts sont dans le
+**moteur de calcul**, pas seulement la donnée :
+- **Le scaling des talents par rang disparaît entièrement en V5.** La V4 a 166 talents avec
+  un champ `Max` + test lié, +1 SL par rang acheté - exactement ce que porte le "moteur
+  générique de modificateurs" du projet (ModifyCarac/ModifySkill/ModifyWeapon/ModifyDamage/
+  ModifArmour, `PersonnageTalent.Valeur`, chantier fini le 11/09/2026). La V5 a zéro talent
+  de ce type : talents discrets, 100 XP fixe, sans rang.
+- Difficulté modifie le SL (V5) au lieu du seuil de jet (V4) - arithmétique de réussite
+  différente.
+- Advantage (jetons cumulables, V4) devient Momentum (binaire, V5).
+- Avances en paliers de +5 (V5) au lieu de +1 (V4), table de coût XP différente.
+- Complétion de niveau de carrière : checklist stricte (V4, N avances par caractéristique +
+  8 compétences + 1 talent) devient un tracker à cases libres (V5) - touche
+  `CalculAvancement`/`MajTables` si porté.
+- Résilience/Résolution (V4) supprimées, remplacées par Fate/Fortune (V5, valeurs fixes par
+  espèce, découplées, pas d'achat de points).
+
+**Décision sur WinPersonnage (à revalider une fois la donnée V5 en main) : garder une seule
+fenêtre, pas de duplication.** Contrairement à la donnée (`DATABASE\`), dupliquer du code
+recréerait le problème du "SI {client} ALORS" que la séparation des données visait
+justement à éviter : chaque futur bug d'UI (le projet en a corrigé des dizaines - §2.8,
+§2.62, §2.64...) se corrigerait deux fois dans deux fichiers qui divergent. Les vrais écarts
+V4/V5 sont concentrés dans un petit nombre de fonctions de calcul (`CalculTableExperience`/
+`CalculAvancement`, le moteur générique de modificateurs - qui devient largement inutile en
+V5 plutôt que différent -, les champs Résilience/Résolution vs Fate/Fortune), pas dans la
+grille/mise en page/export PDF qui forme l'essentiel de la fenêtre. Piste : isoler ces
+fonctions derrière un point de bascule par édition plutôt que dupliquer la fenêtre entière.
+**Ce chantier fiche de personnage ne démarre qu'une fois celui-ci (données V5) terminé** -
+décision explicite de Nono.
+
+**Point de reprise** : rien codé. Prochaine étape mécanique la plus simple : remplacer les
+dates dans `<VERSION>` des 21 `BOOK*.Xml` de `DATABASE\` par `"WFRP4"`. Puis décider comment
+amorcer `DATABASE_WFRP5\`/`SAVED_CARACTERS_WFRP5\` (copie de `DATABASE\` comme point de
+départ ?), avant de toucher au code du sélecteur.
+
+**Sources de travail pour la V5** : `LIVRES\WFRP5_Core_Rulebook_01_09_26.txt` (export texte
+fourni par Nono, ~22 000 lignes, ~2,2 Mo) et `LIVRES\WFRP-4e-vs-5e.txt` (comparatif tiers des
+mécaniques, ~1100 lignes - utile pour anticiper les fonctions de calcul à isoler avant de
+les découvrir une par une en codant). Conversion PDF→TXT pour les futurs livres V5 :
+`Documents\Famille\Nono\JDR\Warhammer 4\Livres\5th Edition\ConvertPDF.bat` - trouvé corrompu
+par un collage Markdown (balises ```bat en tête/fin du fichier, un `^` de continuation
+manquant dans le bloc PowerShell) et un second piège de chemin (`%~dp0` se termine toujours
+par `\`, ce qui cassait le passage du paramètre `-Source` à PowerShell - un `\` juste avant
+un guillemet fermant s'interprète comme un guillemet échappé). Les deux corrigés ; la
+logique PowerShell a été déplacée dans un `ConvertPDF.ps1` à côté du `.bat` (plus robuste
+que le bloc collé en une seule ligne cmd via `^`, qui s'était déjà cassé deux fois).
 
 ---
 
