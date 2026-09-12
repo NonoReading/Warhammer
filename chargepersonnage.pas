@@ -55,6 +55,9 @@ Type
      // Meme principe que StructurePersonnageTalent.Source : code de ce qui a accorde cette
      // ligne automatiquement (ex. une mutation), vide si achetee/choisie normalement.
      Source:                String;
+     // Vrai si la piece est portee (par opposition a transportee). Ne s'applique qu'aux
+     // armes/armures/sets d'armure (TypeEquipWe/Ar/ArS) ; sans effet sur Divers/Sorts.
+     Porte:                 Boolean;
   end;
   TArrayPersonnageEquipement = array of StructurePersonnageEquipement;
 
@@ -336,6 +339,16 @@ begin
     Result := '';
 end;
 
+Function XmlAttributEquipementPorte(Porte: Boolean): String;
+  // Attribut XML optionnel ajoute a la ligne d'equipement : absent si non porte, pour que
+  // les fiches deja sauvegardees (sans le champ) soient lues comme "rien d'equipe".
+  begin
+    if Porte then
+      Result := ' '+ConstXmlEquipementPorte+'="1"'
+    else
+      Result := '';
+  end;
+
 Function PersonnageLivre(ListeLivre: String; Livre: String): String;
 Var
   AjoutLivre: String;
@@ -600,7 +613,8 @@ begin
                PArme := ChercheArme(PersonnageEquipement.CodeEquipement);
                XMLContent.Add(XmlLigneDonnee(ConstXmlItem,
                  CodeNormalise(PersonnageEquipement.CodeEquipement, PArme.Livre),
-                 PersonnageEquipement.QualiteEquipement));
+                 PersonnageEquipement.QualiteEquipement,
+                 XmlAttributEquipementPorte(PersonnageEquipement.Porte)));
                ListeLivres:= PersonnageLivre(ListeLivres, PArme.livre);
                if (PArme.CodeArme <> '') then
                  XMLContent.Add(XmlCommentaire(PArme.Libelle));
@@ -616,7 +630,8 @@ begin
                PArmure := ChercheArmure(PersonnageEquipement.CodeEquipement);
                XMLContent.Add(XmlLigneDonnee(ConstXmlItem,
                  CodeNormalise(PersonnageEquipement.CodeEquipement, PArmure.Livre),
-                 PersonnageEquipement.QualiteEquipement));
+                 PersonnageEquipement.QualiteEquipement,
+                 XmlAttributEquipementPorte(PersonnageEquipement.Porte)));
                ListeLivres:= PersonnageLivre(ListeLivres, PArmure.livre);
                if (PArmure.CodeArmure<>'') then
                  XMLContent.Add(XmlCommentaire(PArmure.Libelle));
@@ -632,7 +647,8 @@ begin
                 PArmureSimplifiee := ChercheArmureSimplifiee(PersonnageEquipement.CodeEquipement);
                 XMLContent.Add(XmlLigneDonnee(ConstXmlItem,
                   CodeNormalise(PersonnageEquipement.CodeEquipement, PArmureSimplifiee.Livre),
-                  PersonnageEquipement.QualiteEquipement));
+                  PersonnageEquipement.QualiteEquipement,
+                  XmlAttributEquipementPorte(PersonnageEquipement.Porte)));
                 // etait PArmure.livre : le livre de l'armure du bloc PRECEDENT. CONTEXT.md 2.19.
                 ListeLivres:= PersonnageLivre(ListeLivres, PArmureSimplifiee.livre);
                 if (PArmureSimplifiee.CodeArmure<>'') then
@@ -1026,6 +1042,7 @@ begin
                           PersonnageEquipement.CodeEquipement     := RemoveQuotes(UTF8Encode(Node.Attributes.GetNamedItem(ConstXmlData).NodeValue));
                           PersonnageEquipement.TypeEquipement     := TrimRight(TypeEquipWe);
                           PersonnageEquipement.QualiteEquipement  := RemoveQuotes(UTF8Encode(Node.TextContent));
+                          PersonnageEquipement.Porte              := Assigned(Node.Attributes.GetNamedItem(ConstXmlEquipementPorte));
                           Personnage.Equipement                   += [PersonnageEquipement];
                         end;
                       Node  := Node.NextSibling;
@@ -1044,6 +1061,7 @@ begin
                           PersonnageEquipement.CodeEquipement     := RemoveQuotes(UTF8Encode(Node.Attributes.GetNamedItem(ConstXmlData).NodeValue));
                           PersonnageEquipement.TypeEquipement     := TrimRight(TypeEquipAr);
                           PersonnageEquipement.QualiteEquipement  := RemoveQuotes(UTF8Encode(Node.TextContent));
+                          PersonnageEquipement.Porte              := Assigned(Node.Attributes.GetNamedItem(ConstXmlEquipementPorte));
                           Personnage.Equipement                   += [PersonnageEquipement];
                         end;
                       Node  := Node.NextSibling;
@@ -1062,6 +1080,7 @@ begin
                           PersonnageEquipement.CodeEquipement     := RemoveQuotes(UTF8Encode(Node.Attributes.GetNamedItem(ConstXmlData).NodeValue));
                           PersonnageEquipement.TypeEquipement     := TrimRight(TypeEquipArS);
                           PersonnageEquipement.QualiteEquipement  := RemoveQuotes(UTF8Encode(Node.TextContent));
+                          PersonnageEquipement.Porte              := Assigned(Node.Attributes.GetNamedItem(ConstXmlEquipementPorte));
                           Personnage.Equipement                   += [PersonnageEquipement];
                         end;
                       Node  := Node.NextSibling;
@@ -1078,6 +1097,7 @@ begin
                       PersonnageEquipement.CodeEquipement     := RemoveQuotes(UTF8Encode(Node.Attributes.GetNamedItem(ConstXmlData).NodeValue));
                       PersonnageEquipement.TypeEquipement     := TrimRight(TypeEquipDi);
                       PersonnageEquipement.QualiteEquipement  := RemoveQuotes(UTF8Encode(Node.TextContent));
+                      PersonnageEquipement.Porte              := False;
                       Personnage.Equipement                   += [PersonnageEquipement];
                       Node  := Node.NextSibling;
                     end;
@@ -1095,6 +1115,7 @@ begin
                         PersonnageEquipement.CodeEquipement     := RemoveQuotes(UTF8Encode(Node.Attributes.GetNamedItem(ConstXmlData).NodeValue));
                         PersonnageEquipement.TypeEquipement     := TrimRight(TypeEquipSp);
                         PersonnageEquipement.CoutXp             := StrToIntdef(RemoveQuotes(UTF8Encode(Node.TextContent)),0);
+                        PersonnageEquipement.Porte              := False;
                         Personnage.Equipement                   += [PersonnageEquipement];
                       end;
                     Node := Node.NextSibling;
@@ -1908,6 +1929,10 @@ Function PersonnageMutationEquipement(Personnage: StructurePersonnage): TArrayPe
             PEquipement.QualiteEquipement := '';
             PEquipement.CoutXp            := 0;
             PEquipement.Source            := PersonnageMutation.Code;
+            // Une arme/armure de mutation fait partie du corps, ne se retire pas comme un
+            // achat normal : toujours consideree portee. A confirmer si un cas reel contredit
+            // cette hypothese.
+            PEquipement.Porte             := True;
             Result                        += [PEquipement];
           end;
   end;

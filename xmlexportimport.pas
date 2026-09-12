@@ -31,7 +31,7 @@ Function XmlDebut(TypeDonnee: string): String;
 Function XmlFin(TypeDonnee: string): String;
 Function XmlLigne(TypeDonnee: string; Valeur: String): String;
 Function XmlCommentaire(Valeur: String): String;
-Function XmlLigneDonnee(TypeDonnee: String; Name: String; Valeur: String): String;
+Function XmlLigneDonnee(TypeDonnee: String; Name: String; Valeur: String; Attribut: String = ''): String;
 Function XmlLigneLangue(TypeDonnee: String; Name: String; Valeur: String): String;
 Function xmlDataBase(): String;
 Function XmlDebutCode(TypeDonnee: string; Valeur: String): String;
@@ -85,9 +85,9 @@ Function XmlCommentaire(Valeur: String): String;
     Result := XmlReplace('  <!-- ' + Valeur + ' -->');
   end;
 
-Function XmlLigneDonnee(TypeDonnee: String; Name: String; Valeur: String): String;
+Function XmlLigneDonnee(TypeDonnee: String; Name: String; Valeur: String; Attribut: String): String;
   begin
-    Result := XmlReplace(XmlDebut(TypeDonnee+' name="'+Name+'"') + '"' + Valeur + '"' + XmlFin(TypeDonnee));
+    Result := XmlReplace(XmlDebut(TypeDonnee+' name="'+Name+'"'+Attribut) + '"' + Valeur + '"' + XmlFin(TypeDonnee));
   end;
 
 Function XmlLigneLangue(TypeDonnee: String; Name: String; Valeur: String): String;

@@ -1715,7 +1715,7 @@ Procedure PdfPersonnageCreation(Personnage: StructurePersonnage; BackGround: Boo
                 PdfPage.WriteText(114,121-(NbArme*5), 'DR + '+IntToStr(Deg));
 
               PosProtection := pos(BonusProtection, PArme.ListeBonus);
-              if PosProtection > 0 then
+              if (PosProtection > 0) and PersonnageEquipement.Porte then
                 ArmureBouclier := StrToInt(copy(PArme.ListeBonus, PosProtection + Length(BonusProtection), 1));
               PdfTaillePolice(PdfPage, PdfFontValue, ConstPoliceArial, 6);
 
@@ -1795,29 +1795,34 @@ Procedure PdfPersonnageCreation(Personnage: StructurePersonnage; BackGround: Boo
                   Enc                 := PArmureSimplifiee.Encombrement + FabricationEncombrement(PersonnageEquipement.QualiteEquipement,Quality);
                 end;
 
+              // Regle "Worn Items" (Rulebook p.292) : seule une piece PORTEE voit son
+              // Encombrement reduit de 1 (plancher 0) - transportee, elle compte plein pot.
               EncP      := Enc;
-              if EncP > 0 then
+              if PersonnageEquipement.Porte and (EncP > 0) then
                 EncP    := EncP - 1;
               EncArmure := EncArmure + EncP;
               NbLoca    := CountOccurrences(PArmure.Emplacement,',') + 1;
               if PersonnageEquipement.TypeEquipement = TypeEquipAR then
-                For IndLoca := 1 to NbLoca do
-                  begin
-                    LocData := ExtractChaine(',',PArmure.Emplacement,IndLoca);
-                    // 05/09/2026 - ex-"case LocData of" : egalite stricte, incompatible
-                    // avec un <Location> prefixe par son livre (RULES-ARMOL_ARM).
-                    // CompareRechercheValeur tolere le libelle nu en SECOND argument,
-                    // donc ceci marche avec les donnees prefixees comme avec les nues.
-                    if CompareRechercheValeur(LocData, BonusBras) then
-                      ArmureBras  := ArmureBras  + PArmure.Protection
-                    else if CompareRechercheValeur(LocData, BonusCorps) then
-                      ArmureCorps := ArmureCorps + PArmure.Protection
-                    else if CompareRechercheValeur(LocData, BonusJambes) then
-                      ArmureJambe := ArmureJambe + PArmure.Protection
-                    else if CompareRechercheValeur(LocData, BonusTete) then
-                      ArmureTete  := ArmureTete  + PArmure.Protection;
-                  end
-              else
+                begin
+                  if PersonnageEquipement.Porte then
+                    For IndLoca := 1 to NbLoca do
+                      begin
+                        LocData := ExtractChaine(',',PArmure.Emplacement,IndLoca);
+                        // 05/09/2026 - ex-"case LocData of" : egalite stricte, incompatible
+                        // avec un <Location> prefixe par son livre (RULES-ARMOL_ARM).
+                        // CompareRechercheValeur tolere le libelle nu en SECOND argument,
+                        // donc ceci marche avec les donnees prefixees comme avec les nues.
+                        if CompareRechercheValeur(LocData, BonusBras) then
+                          ArmureBras  := ArmureBras  + PArmure.Protection
+                        else if CompareRechercheValeur(LocData, BonusCorps) then
+                          ArmureCorps := ArmureCorps + PArmure.Protection
+                        else if CompareRechercheValeur(LocData, BonusJambes) then
+                          ArmureJambe := ArmureJambe + PArmure.Protection
+                        else if CompareRechercheValeur(LocData, BonusTete) then
+                          ArmureTete  := ArmureTete  + PArmure.Protection;
+                      end
+                end
+              else if PersonnageEquipement.Porte then
                 begin
                   ArmureBras  := ArmureBras  + PArmureSimplifiee.Protection;
                   ArmureCorps := ArmureCorps + PArmureSimplifiee.Protection;
@@ -2996,7 +3001,7 @@ Procedure PdfBlocArmesDonnees(PdfPage: TPDFPage; Personnage: StructurePersonnage
             PdfCentre(PdfPage, XGauche +  96, XGauche + 113, Y - ((NbArme + 2) * HauteurLigne) + 0.6, 'DR + '+IntToStr(Deg));
 
           PosProtection := pos(BonusProtection, PArme.ListeBonus);
-          if PosProtection > 0 then
+          if (PosProtection > 0) and PersonnageEquipement.Porte then
             ArmureBouclier := StrToInt(copy(PArme.ListeBonus, PosProtection + Length(BonusProtection), 1));
           PdfTaillePolice(PdfPage, PdfFontValue, ConstPoliceArial, 6);
 
@@ -3114,28 +3119,33 @@ Procedure PdfBlocArmuresDonnees(PdfPage: TPDFPage; Personnage: StructurePersonna
                   LigneBonus          := PArmureSimplifiee.Listebonus;
                 end;
 
+              // Regle "Worn Items" (Rulebook p.292) : seule une piece PORTEE voit son
+              // Encombrement reduit de 1 (plancher 0) - transportee, elle compte plein pot.
               EncP      := Enc;
-              if EncP > 0 then
+              if PersonnageEquipement.Porte and (EncP > 0) then
                 EncP    := EncP - 1;
               EncArmure := EncArmure + EncP;
               if (PersonnageEquipement.TypeEquipement = TypeEquipAR) then
-                For IndLoca := 1 to NbLoca do
-                  begin
-                    LocData := ExtractChaine(',',PArmure.Emplacement,IndLoca);
-                    // 05/09/2026 - ex-"case LocData of" : egalite stricte, incompatible
-                    // avec un <Location> prefixe par son livre (RULES-ARMOL_ARM).
-                    // CompareRechercheValeur tolere le libelle nu en SECOND argument,
-                    // donc ceci marche avec les donnees prefixees comme avec les nues.
-                    if CompareRechercheValeur(LocData, BonusBras) then
-                      ArmureBras  := ArmureBras  + PArmure.Protection
-                    else if CompareRechercheValeur(LocData, BonusCorps) then
-                      ArmureCorps := ArmureCorps + PArmure.Protection
-                    else if CompareRechercheValeur(LocData, BonusJambes) then
-                      ArmureJambe := ArmureJambe + PArmure.Protection
-                    else if CompareRechercheValeur(LocData, BonusTete) then
-                      ArmureTete  := ArmureTete  + PArmure.Protection;
-                  end
-              else
+                begin
+                  if PersonnageEquipement.Porte then
+                    For IndLoca := 1 to NbLoca do
+                      begin
+                        LocData := ExtractChaine(',',PArmure.Emplacement,IndLoca);
+                        // 05/09/2026 - ex-"case LocData of" : egalite stricte, incompatible
+                        // avec un <Location> prefixe par son livre (RULES-ARMOL_ARM).
+                        // CompareRechercheValeur tolere le libelle nu en SECOND argument,
+                        // donc ceci marche avec les donnees prefixees comme avec les nues.
+                        if CompareRechercheValeur(LocData, BonusBras) then
+                          ArmureBras  := ArmureBras  + PArmure.Protection
+                        else if CompareRechercheValeur(LocData, BonusCorps) then
+                          ArmureCorps := ArmureCorps + PArmure.Protection
+                        else if CompareRechercheValeur(LocData, BonusJambes) then
+                          ArmureJambe := ArmureJambe + PArmure.Protection
+                        else if CompareRechercheValeur(LocData, BonusTete) then
+                          ArmureTete  := ArmureTete  + PArmure.Protection;
+                      end
+                end
+              else if PersonnageEquipement.Porte then
                 begin
                   ArmureBras  := ArmureBras  + PArmureSimplifiee.Protection;
                   ArmureCorps := ArmureCorps + PArmureSimplifiee.Protection;

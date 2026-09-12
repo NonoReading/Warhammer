@@ -243,6 +243,7 @@
         <HasResources Value="True"/>
         <ResourceBaseClass Value="Form"/>
         <UnitName Value="WinPersonnage"/>
+        <IsVisibleTab Value="True"/>
         <EditorIndex Value="6"/>
         <TopLine Value="2431"/>
         <CursorPos Y="2438"/>
@@ -484,10 +485,9 @@
         <Filename Value="pdfpersonnage.pas"/>
         <IsPartOfProject Value="True"/>
         <UnitName Value="PdfPersonnage"/>
-        <IsVisibleTab Value="True"/>
         <EditorIndex Value="3"/>
-        <TopLine Value="1154"/>
-        <CursorPos X="39" Y="1167"/>
+        <TopLine Value="1164"/>
+        <CursorPos X="15" Y="1174"/>
         <UsageCount Value="200"/>
         <Loaded Value="True"/>
       </Unit>
@@ -505,8 +505,8 @@
         <IsPartOfProject Value="True"/>
         <UnitName Value="XmlExportImport"/>
         <EditorIndex Value="4"/>
-        <TopLine Value="2444"/>
-        <CursorPos X="26" Y="2457"/>
+        <TopLine Value="2446"/>
+        <CursorPos X="23" Y="2454"/>
         <UsageCount Value="200"/>
         <Loaded Value="True"/>
       </Unit>

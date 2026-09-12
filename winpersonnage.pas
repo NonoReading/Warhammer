@@ -41,6 +41,7 @@ type
     ButtonAugmentation: TBCButton;
     ButtonDelete: TBCButton;
     ButtonFabrication: TBCButton;
+    ButtonPorte: TBCButton;
     ButtonHistorique: TBCButton;
     ButtonPdf: TBCButton;
     ButtonRaceSelectionner: TBCButton;
@@ -139,6 +140,7 @@ type
   procedure ButtonArmureClick({%H-}Sender: TObject);
   procedure ButtonArmeClick({%H-}Sender: TObject);
   procedure ButtonFabricationClick({%H-}Sender: TObject);
+  procedure ButtonPorteClick({%H-}Sender: TObject);
   procedure ButtonDeleteClick({%H-}Sender: TObject);
   procedure ButtonCorruptionAjouteClick({%H-}Sender: TObject);
   procedure ButtonCorruptionSupprimeClick({%H-}Sender: TObject);
@@ -803,6 +805,19 @@ procedure TWinPersonnages.ButtonFabricationClick(Sender: TObject);
           SelectWinFabrication:= '';
           ChoixWinFabrication := '';
           AfficheFabrication();
+        end;
+  end;
+
+procedure TWinPersonnages.ButtonPorteClick(Sender: TObject);
+  begin
+    if (TabEquipement.Row > 0)
+      // Meme garde que ButtonFabrication/ButtonDelete : une ligne de sort ne se porte pas.
+      and (TalentSort(TabEquipement.Cells[2, TabEquipement.Row]).CodeTalent = '') then
+        begin
+          if TabEquipement.Cells[8, TabEquipement.Row] = '' then
+            TabEquipement.Cells[8, TabEquipement.Row] := 'X'
+          else
+            TabEquipement.Cells[8, TabEquipement.Row] := '';
         end;
   end;
 
@@ -1979,7 +1994,7 @@ begin
 
   // Mise en forme de la table des Equipements
   TabEquipement.Options        := TabEquipement.Options + [goEditing, goAlwaysShowEditor];
-  TabEquipement.ColCount       := 8;
+  TabEquipement.ColCount       := 9;
   TabEquipement.RowCount       := 2;
   TabEquipement.ColWidths[0]   := 20;
   TabEquipement.Cells[1, 0]    := GetTexteLibelle('RULES-LAB_052');
@@ -1996,6 +2011,8 @@ begin
   TabEquipement.ColWidths[6]   := 100;
   TabEquipement.Cells[7, 0]    := '';
   TabEquipement.ColWidths[7]   := 0;
+  TabEquipement.Cells[8, 0]    := GetTexteLibelle('RULES-LAB_180');
+  TabEquipement.ColWidths[8]   := 60;
 
   // Mise en forme dy tableau de choix des équipement de métier
   TabMetierEquipement.Options          := TabMetierEquipement.Options + [goEditing, goAlwaysShowEditor];
@@ -2171,6 +2188,7 @@ Procedure TWinPersonnages.AfficheImageRace();
     RadioButtonChanger.Caption                 := GetTexteLibelle('RULES-LAB_115');
     ButtonFabrication.Caption                  := '+'+GetTexteLibelle('RULES-LAB_125');
     ButtonDelete.Caption                       := '-'+GetTexteLibelle('RULES-LAB_126');
+    ButtonPorte.Caption                        := GetTexteLibelle('RULES-LAB_180');
     LabelNeedTheoXp.caption                    := GetTexteLibelle('RULES-LAB_131');
     LabelNeedRealXp.Caption                    := GetTexteLibelle('RULES-LAB_132');
     TabSheetLivre.Caption                      := GetTexteLibelle('RULES-LAB_128');
@@ -2501,12 +2519,14 @@ procedure TWinPersonnages.CalculTotaux();
             PersonnageEquipement.TypeEquipement    := TypeEquipSp;
             PersonnageEquipement.QualiteEquipement := '';
             PersonnageEquipement.CoutXp            := CalculOptionXpDiv25Inverse(StrToIntDef(TabEquipement.Cells[5, IndAugm],0));
+            PersonnageEquipement.Porte              := False;
           end
         else
           begin
             PersonnageEquipement.TypeEquipement    := TabEquipement.Cells[3, IndAugm];
             PersonnageEquipement.QualiteEquipement := TabEquipement.Cells[7, IndAugm];
             PersonnageEquipement.CoutXp            := 0;
+            PersonnageEquipement.Porte              := TabEquipement.Cells[8, IndAugm] <> '';
           end;
         Personnage.Equipement += [PersonnageEquipement];
       end;
@@ -3228,18 +3248,24 @@ begin
             PArme := chercheArme(PersonnageEquipement.CodeEquipement);
             TabEquipement.Cells[4, NbEquipement]   := PArme.Libelle;
             TabEquipement.Cells[5, NbEquipement]   := PersonnageEquipement.QualiteEquipement;
+            if PersonnageEquipement.Porte then
+              TabEquipement.Cells[8, NbEquipement] := 'X';
           end
       else if TrimRight(PersonnageEquipement.TypeEquipement) = TrimRight(TypeEquipAr) then
           Begin
             PArmure := ChercheArmure(PersonnageEquipement.CodeEquipement);
             TabEquipement.Cells[4, NbEquipement]   := PArmure.Libelle;
             TabEquipement.Cells[5, NbEquipement]   := PersonnageEquipement.QualiteEquipement;
+            if PersonnageEquipement.Porte then
+              TabEquipement.Cells[8, NbEquipement] := 'X';
           end
       else if TrimRight(PersonnageEquipement.TypeEquipement) = TrimRight(TypeEquipArS) then
           Begin
             PArmureSimplifiee := ChercheArmureSimplifiee(PersonnageEquipement.CodeEquipement);
             TabEquipement.Cells[4, NbEquipement]   := PArmureSimplifiee.Libelle;
             TabEquipement.Cells[5, NbEquipement]   := PersonnageEquipement.QualiteEquipement;
+            if PersonnageEquipement.Porte then
+              TabEquipement.Cells[8, NbEquipement] := 'X';
           end
       else if TrimRight(PersonnageEquipement.TypeEquipement) = TrimRight(TypeEquipDi) then
           Begin
@@ -4199,6 +4225,7 @@ procedure TWinPersonnages.TabEquipementSelectCell(Sender: TObject; aCol,
     // talent est un sort, ni fabrication ni suppression ne s'y appliquent.
     EstSort := (aRow > 0) and (TalentSort(TabEquipement.Cells[2, aRow]).CodeTalent <> '');
     ButtonFabrication.Enabled := not EstSort;
+    ButtonPorte.Enabled       := not EstSort;
     ButtonDelete.Enabled      := not EstSort;
   end;
 
@@ -5115,12 +5142,14 @@ Procedure TWinPersonnages.MajTables();
             PersonnageEquipement.TypeEquipement    := TypeEquipSp;
             PersonnageEquipement.QualiteEquipement := '';
             PersonnageEquipement.CoutXp            := CalculOptionXpDiv25Inverse(StrToIntDef(TabEquipement.Cells[5, Ind],0));
+            PersonnageEquipement.Porte              := False;
           end
         else
           begin
             PersonnageEquipement.TypeEquipement    := TabEquipement.Cells[3, Ind];
             PersonnageEquipement.QualiteEquipement := TabEquipement.Cells[7, Ind];
             PersonnageEquipement.CoutXp            := 0;
+            PersonnageEquipement.Porte              := TabEquipement.Cells[8, Ind] <> '';
           end;
         Personnage.Equipement += [PersonnageEquipement];
       end;

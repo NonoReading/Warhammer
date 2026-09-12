@@ -2983,3 +2983,45 @@ actif, cause reelle jamais confirmee avec certitude) - le reflexe "fond TShape d
 comme pour les TabSheet" plutot que de chercher a maitriser la couleur du controle lui-meme
 est la solution qui a marche ici, a retenir si le meme symptome (texte qui disparait sur un
 controle natif) revient ailleurs (CheckBox notamment, meme famille de controle).
+
+12/09/2026 - EQUIPEMENT PORTE/NON PORTE, CHANTIER TERMINE EN 4 ETAPES, COMPILE ET VALIDE PAR
+NONO A CHAQUE ETAPE. Constat du 05/09/2026 (A FAIRE.txt) : deux casques poses dans l equipement
+cumulaient leurs Points d Armure alors qu on n en porte qu un, aucune notion de "porte"
+n existait.
+Conception discutee et validee avec Nono avant de coder, en 4 etapes avec point de compilation
+entre chacune :
+1. Stockage : nouveau champ Porte:Boolean sur StructurePersonnageEquipement
+(chargepersonnage.pas), persiste en XML comme attribut optionnel (worn="1", absent = non
+porte - une fiche deja sauvegardee se lit comme "rien d equipe") via un nouveau parametre
+optionnel de XmlLigneDonnee (xmlexportimport.pas). Toujours False pour Divers/Sorts, toujours
+True pour l equipement de mutation (une griffe ne se retire pas).
+2. Affichage/edition : TabEquipement (winpersonnage.pas) passe a 9 colonnes, nouveau bouton
+ButtonPorte bascule l etat de la ligne selectionnee (meme garde que Fabrication/Supprime,
+desactive sur une ligne de sort). Nouveau libelle RULES-LAB_180. Fenetre agrandie de 70px
+(985->1055), la colonne de boutons etant deja collee au bord.
+3. Calcul Protection : Points d Armure (Bras/Corps/Jambes/Tete) et bonus bouclier (WEAPB18)
+n additionnent que les lignes portees, dans les DEUX gabarits Pdf (normal et Feldo2P, meme
+piege de duplication que ModifyWeapon au 2.50). Valide par Nono avec deux casques (un seul
+porte) et un bouclier.
+4. Calcul Encombrement : regle relue dans le Rulebook (p.292 "Worn Items") avant de coder,
+plutot que devinee - la reduction "-1 (plancher 0)" ne s applique qu aux ARMURES portees, pas
+aux armes (Nono avait suppose le contraire dans A FAIRE.txt, corrige apres verification). Le
+code faisait deja cette reduction mais sans condition (toute armure traitee comme portee) -
+gardee sous condition Porte.
+Piege trouve en cours de route : le libelle du bouton ButtonPorte n etait pas dans le bloc
+FormCreate qui reecrit les captions des boutons selon la langue (comme Fabrication/Supprime/
+Historique) - restait donc en francais code en dur du .lfm quelle que soit la langue
+affichee. Repere par Nono ("je vois portee alors que j affiche l anglais"), corrige en
+ajoutant ButtonPorte.Caption := GetTexteLibelle('RULES-LAB_180') au meme endroit que les
+autres. A retenir : tout nouveau bouton doit etre ajoute a ce bloc, sinon son texte de
+conception (souvent en francais) reste fige quelle que soit la langue.
+Hors perimetre, tranche avec Nono : la superposition de deux pieces sur la meme localisation
+(RULES-ARMOB_08 "Under armor") abandonnee - Nono a verifie que ce bonus n existe pas tel quel
+dans le Rulebook et retire la donnee, les joueurs jugent eux-memes. Le cas "Bulky" (plancher
+Encombrement a 1 au lieu de 0) reste hors perimetre, depend du chantier "qualites de
+fabrication" non branche.
+Compile (lazbuild, 0 erreur) a chaque etape, valide par Nono a l ecran (persistance a la
+sauvegarde, Protection avec casques et bouclier, Encombrement, libelle du bouton en anglais).
+Fichiers modifies : chargeconstantes.pas, xmlexportimport.pas, chargepersonnage.pas,
+winpersonnage.pas, winpersonnage.lfm, wincreation.pas, pdfpersonnage.pas,
+DATABASE/BOOK_RULESBOOK.Xml, DATABASE/BOOK_RULESBOOK_FRANCAIS.Xml, CONTEXT.md, A FAIRE.txt.

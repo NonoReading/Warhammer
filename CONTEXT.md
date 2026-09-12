@@ -1,17 +1,14 @@
 # Warhammer — Contexte projet
 
-**Dernière mise à jour : 12/09/2026 — DEUX CORRECTIONS COURTES SUR WINMUTATION, CONFIRMÉES PAR
-NONO A L'ÉCRAN.** (1) Libellés tronqués/vidés sur quatre `TBCButton` (largeur fixe trop petite
-pour la légende localisée, surtout en français) : `WordBreak` activé sur ces boutons +
-hauteur/position ajustées dans le `.lfm`. (2) Libellés des `TRadioButton` invisibles une fois
-leur `GroupBox` actif (le thème Windows ignore `Font.Color` en état actif) : fond `TShape`
-ajouté derrière les `TGroupBox` dans `globalfonts.pas`, même procédé que celui déjà utilisé pour
-les `TTabSheet`. Détail §4 (pièges) et Log.txt. Aucun chantier ouvert pour la suite - prochain
-travail à choisir dans `A FAIRE.txt` (candidats : équipement porté/non porté, qualités de
-fabrication, ancrage des contrôles).
+**Dernière mise à jour : 12/09/2026 — ÉQUIPEMENT PORTÉ/NON PORTÉ TERMINÉ, COMPILÉ ET VALIDÉ PAR
+NONO.** Nouveau champ `Porte` sur chaque ligne d'équipement (persisté en XML), colonne + bouton
+dédié dans `TabEquipement`, Protection (Points d'Armure, bonus bouclier) et Encombrement des
+armures désormais gardés par cet état, dans les deux gabarits Pdf. Détail §2.57 et Log.txt.
+Aucun chantier ouvert pour la suite - prochain travail à choisir dans `A FAIRE.txt` (candidats :
+qualités de fabrication, ancrage des contrôles).
 
-Chantier précédent (2.7, mutation à corruption max) entièrement terminé le 12/09/2026 - détail
-§2.7.
+Chantier précédent (2.56, fonction dédiée Dépense/Restante Xp) entièrement terminé le
+12/09/2026 - détail §2.56.
 
 ---
 
@@ -6922,6 +6919,57 @@ menu principal après resauvegarde, Total ≥ 1000 réaffiché et testé pour l'
 baisse). Fichiers modifiés : `winpersonnage.pas`, `pdfpersonnage.pas`.
 
 **Chantier suivant : à définir avec Nono.**
+
+---
+
+### 2.57 Équipement porté/non porté — terminé, compilé et validé par Nono (12/09/2026)
+
+**Origine.** Constat du 05/09/2026 (`A FAIRE.txt`) : deux casques posés dans l'équipement
+cumulaient leurs Points d'Armure alors qu'on n'en porte qu'un — aucune notion de "porté"
+n'existait, toute ligne d'équipement comptait dans tous les calculs.
+
+**Conception validée avec Nono avant de coder, en 4 étapes avec point de compilation entre
+chacune :**
+
+1. **Stockage.** Nouveau champ `Porte: Boolean` sur `StructurePersonnageEquipement`
+   (`chargepersonnage.pas`). Persisté en XML comme attribut optionnel (`worn="1"`, absent =
+   non porté — une fiche déjà sauvegardée se lit donc comme "rien d'équipé", règle voulue par
+   Nono) via un nouveau paramètre optionnel de `XmlLigneDonnee` (`xmlexportimport.pas`). Porté
+   par les trois types équipables (Arme/Armure/Set d'armure) ; toujours `False` pour
+   Divers/Sorts, toujours `True` pour l'équipement de mutation (une griffe ne se retire pas).
+2. **Affichage/édition.** `TabEquipement` (`winpersonnage.pas`) passe à 9 colonnes ; nouveau
+   bouton `ButtonPorte` (à côté de Fabrication/Supprime) bascule l'état de la ligne
+   sélectionnée, même garde que les deux autres (désactivé sur une ligne de sort). Nouveau
+   libellé `RULES-LAB_180` ("Worn"/"Porté"). Fenêtre agrandie de 70px (985→1055), la colonne de
+   boutons à droite de la grille étant déjà collée au bord. Piège trouvé en cours de route :
+   le libellé du bouton n'était pas dans le bloc `FormCreate` qui réécrit les captions selon la
+   langue (comme Fabrication/Supprime/Historique) — restait donc en français codé en dur du
+   `.lfm` quelle que soit la langue affichée, corrigé.
+3. **Calcul Protection.** Les Points d'Armure (Bras/Corps/Jambes/Tête) et le bonus de
+   protection bouclier (`WEAPB18`) n'additionnent que les lignes portées — dans les DEUX
+   gabarits Pdf (normal et Feldo2P, même piège de duplication que `ModifyWeapon` au §2.50).
+   Validé par Nono avec deux casques (un seul porté) et un bouclier.
+4. **Calcul Encombrement.** Règle relue dans le Rulebook (p.292, "Worn Items") avant de coder
+   plutôt que devinée : la réduction "-1 (plancher 0)" ne s'applique qu'aux ARMURES portées,
+   pas aux armes (Nono avait supposé le contraire dans `A FAIRE.txt`, corrigé après
+   vérification). Le code faisait déjà cette réduction, mais inconditionnellement (toute
+   armure traitée comme portée) — gardée sous condition `Porte`, une armure non portée compte
+   désormais son Encombrement plein.
+
+**Hors périmètre, tranché avec Nono :** la superposition de deux pièces sur la même
+localisation (`RULES-ARMOB_08` "Under armor") est abandonnée — Nono a vérifié que ce bonus
+n'existe pas tel quel dans le Rulebook et retire la donnée, laissant les joueurs juges. Le cas
+"Bulky" (plancher Encombrement à 1 au lieu de 0) reste hors périmètre, dépend du chantier
+"qualités de fabrication" non branché (voir `A FAIRE.txt`).
+
+**Compilé (lazbuild, 0 erreur) à chaque étape, validé par Nono à l'écran** (persistance à la
+sauvegarde, Protection avec casques et bouclier, Encombrement, libellé du bouton en anglais).
+Fichiers modifiés : `chargeconstantes.pas`, `xmlexportimport.pas`, `chargepersonnage.pas`,
+`winpersonnage.pas`, `winpersonnage.lfm`, `wincreation.pas`, `pdfpersonnage.pas`,
+`DATABASE/BOOK_RULESBOOK.Xml`, `DATABASE/BOOK_RULESBOOK_FRANCAIS.Xml`.
+
+**Chantier suivant : à définir avec Nono — candidats dans `A FAIRE.txt` (qualités de
+fabrication, ancrage des contrôles).**
 
 ---
 

@@ -279,44 +279,6 @@ Lien avec le champ OFFICIAL existant : le disclaimer est justement ce qui permet
 CONFIRMER le statut officiel ou fan d un livre, aujourd hui saisi sur faisceau d indices
 (cas ouvert de Nations of Mankind, saisi OFFICIAL=2 a confirmer).
 
-UNE LIGNE D EQUIPEMENT DOIT DIRE SI ELLE EST EQUIPEE OU NON. Constate le 05/09/2026 : deux
-casques poses dans l equipement CUMULENT leurs Points d Armure sur la tete, alors qu on n en
-porte qu un. Aujourd hui toute ligne d equipement compte dans tous les calculs, il n existe
-aucune notion de "porte" ou "dans le sac". Ajouter une colonne booleenne dans TabEquipement,
-sauvegardee dans la fiche.
-
-Le drapeau sert a DEUX calculs, pas un seul, et c est ce qui le rend utile aux armes autant
-qu aux armures :
- - PROTECTION (armures) : n additionner les Points d Armure que des lignes equipees. C est le
-   cumul des deux casques. Cote arme, meme logique pour le bonus de protection WEAPB18 d un
-   bouclier range.
- - ENCOMBREMENT (armes ET armures) : une piece portee encombre MOINS qu une piece transportee.
-   La regle chiffree est a relire dans le Rulebook avant de coder, ne pas la deviner ; c est
-   la raison pour laquelle une arme aussi a besoin du drapeau, meme si elle ne protege pas.
-
-TRANCHE par Nono le 05/09/2026 : les anciennes fiches, qui n ont pas le champ, sont lues comme
-RIEN D EQUIPE. Consequence assumee, a ne pas prendre pour un bug quand on ouvrira un ancien
-dossier : plus aucun Point d Armure et un encombrement plus eleve, jusqu a ce qu on recoche les
-pieces portees a la main. Le lot de personnages existants est petit.
-
-TRANCHE aussi le 05/09/2026 : tout achat arrive NON EQUIPE. Une ligne ajoutee par +Weapon,
-+Armor ou +Quick Armour est decochee, on l equipe ensuite explicitement. Meme regle que la
-reprise des anciennes fiches ci-dessus, donc un seul comportement a expliquer : rien n est
-porte tant qu on ne l a pas dit.
-
-TRANCHE aussi le 05/09/2026 : deux pieces sur la meme localisation ne sont PAS interdites, la
-superposition existe et Nono l a deja materialisee en donnee par la qualite d armure
-RULES-ARMOB_08 "Under armor" (Rulebook, DATA_ARMOR_BONUS l.14588, "This armour can be worn
-under another"). Le calcul de protection doit donc autoriser le cumul quand la piece du dessous
-porte ARMOB_08, et le refuser sinon - c est la regle qui remplace l interdiction pure.
-
-Obstacle a lever d abord : ARMOB_08 porte son <Modifier> en TEXTE LIBRE, "combinable with
-Leather", sans attribut name=, alors que les autres ARMOB portent un name= exploitable
-(RULES-COMPPRECEP...). Le code sait donc qu une piece est portable dessous, mais pas AVEC QUOI.
-A modeliser avant d ecrire le calcul : soit un name= pointant le type d armure compatible
-(ARMOT), soit une regle "ARMOB_08 se combine avec n importe quoi" si la restriction au cuir
-n est pas voulue. A verifier dans le Rulebook.
-
 BRANCHER LE CALCUL DES QUALITES DE FABRICATION. Constate le 04/09/2026 en saisissant les
 accessoires d arme de Nations of Mankind. La table DATA_CRAFTMANSHIP est chargee, la fenetre
 WinFabrication l affiche, le bouton +Qualite de WinPersonnage pose les codes sur une ligne

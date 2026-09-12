@@ -484,10 +484,9 @@
         <Filename Value="pdfpersonnage.pas"/>
         <IsPartOfProject Value="True"/>
         <UnitName Value="PdfPersonnage"/>
-        <IsVisibleTab Value="True"/>
         <EditorIndex Value="3"/>
-        <TopLine Value="1153"/>
-        <CursorPos X="51" Y="1169"/>
+        <TopLine Value="1164"/>
+        <CursorPos X="15" Y="1174"/>
         <UsageCount Value="200"/>
         <Loaded Value="True"/>
       </Unit>
@@ -504,9 +503,10 @@
         <Filename Value="xmlexportimport.pas"/>
         <IsPartOfProject Value="True"/>
         <UnitName Value="XmlExportImport"/>
+        <IsVisibleTab Value="True"/>
         <EditorIndex Value="4"/>
-        <TopLine Value="2444"/>
-        <CursorPos X="26" Y="2457"/>
+        <TopLine Value="2445"/>
+        <CursorPos X="23" Y="2454"/>
         <UsageCount Value="200"/>
         <Loaded Value="True"/>
       </Unit>

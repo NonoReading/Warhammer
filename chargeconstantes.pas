@@ -69,6 +69,7 @@ Const
       ConstXmlSousChapitreNiveau        = 'SUBCHAPTER_LEVEL';
       ConstXmlSousChapitreRace          = 'SUBCHAPTER_SPECIE';
       ConstXmlData                      = 'name';
+      ConstXmlEquipementPorte            = 'worn';
       ConstXmlCodeLivre                 = 'CODE_BOOK';
       ConstXmlLibelleLivre              = 'BOOK';
       ConstXmlVersionLivre              = 'VERSION';

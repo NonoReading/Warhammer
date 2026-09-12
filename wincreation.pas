@@ -1234,6 +1234,9 @@ procedure TWinCreations.PhaseSave(NouvellePhase: Integer);
              begin
                PersonnageEquipement.CodeEquipement          := TabMetierEquipement.Cells[1, IndTab];
                PersonnageEquipement.TypeEquipement          := TabMetierEquipement.Cells[6, IndTab];
+               // Comme un achat en jeu (winpersonnage.pas) : l'equipement de depart arrive
+               // non porte, a cocher explicitement ensuite.
+               PersonnageEquipement.Porte                   := False;
                Personnage.Equipement                        += [PersonnageEquipement];
              end;
          end;
