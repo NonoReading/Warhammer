@@ -244,6 +244,8 @@ Procedure XmlExportBook(Livre: String; Langue: String);
         XmlContent.Add(XmlLigne(ConstXmlOfficielLivre, IntToStr(PLivre.Officiel)));
         PLivre.Complet  := 1;
         XmlContent.Add(XmlLigne(ConstXmlCompletLivre, IntToStr(PLivre.Complet)));
+        if PLivre.Disclaimer <> '' then
+          XmlContent.Add(XmlLigne(ConstXmlDisclaimerLivre, PLivre.Disclaimer));
 
         // Attribut
         Fist := true;
@@ -1108,6 +1110,7 @@ Procedure XmlImport(FileName: String; OnlyPrimary: Boolean; OnlyCode: Boolean);
     Version:                  String;
     Officiel:                 Integer;
     Complet:                  Integer = 1;
+    Disclaimer:               String = '';
   begin
     LivreNbMetier := 0;
     LivreNbRace   := 0;
@@ -1130,6 +1133,9 @@ Procedure XmlImport(FileName: String; OnlyPrimary: Boolean; OnlyCode: Boolean);
           NodeCode  := BookNode.FindNode(ConstXmlCompletLivre);
           if Assigned(NodeCode) then
             Complet := StrToInt(RemoveQuotes(UTF8Encode(BookNode.FindNode(ConstXmlCompletLivre).TextContent)));
+          NodeCode  := BookNode.FindNode(ConstXmlDisclaimerLivre);
+          if Assigned(NodeCode) then
+            Disclaimer := RemoveQuotes(UTF8Encode(BookNode.FindNode(ConstXmlDisclaimerLivre).TextContent));
           Node      := BookNode.FindNode(ConstXmlLanguage);
           LangueDef := RemoveQuotes(UTF8Encode(Node.TextContent));
 
@@ -1142,6 +1148,7 @@ Procedure XmlImport(FileName: String; OnlyPrimary: Boolean; OnlyCode: Boolean);
               PLivre.Version   := Version;
               PLivre.Officiel  := Officiel;
               PLivre.Complet   := Complet;
+              PLivre.Disclaimer:= Disclaimer;
               ListLivre.add(PLivre);
               inc(NbLivre);
             end;

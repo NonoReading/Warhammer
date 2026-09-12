@@ -75,6 +75,7 @@ Const
       ConstXmlVersionLivre              = 'VERSION';
       ConstXmlOfficielLivre             = 'OFFICIAL';
       ConstXmlCompletLivre              = 'COMPLETE';
+      ConstXmlDisclaimerLivre           = 'DISCLAIMER';
       ConstXmlRegle                     = 'RULES';
       ConstXmlOptions                   = 'OPTIONS';
       // Appartenances du personnage (regiment, ordre de chevalerie, culte) : les codes

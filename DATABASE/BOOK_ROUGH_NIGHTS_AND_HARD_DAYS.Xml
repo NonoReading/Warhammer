@@ -6,6 +6,7 @@
 <VERSION>"20250623"</VERSION>
 <OFFICIAL>"1"</OFFICIAL>
 <COMPLETE>"1"</COMPLETE>
+<DISCLAIMER>"No part of this publication may be reproduced, stored in a retrieval system, or transmitted in any form by any means, electronic, mechanical, photocopying, recording or otherwise without the prior permission of the publishers. Warhammer Fantasy Roleplay 4th Edition (c) Copyright Games Workshop Limited 2019. Warhammer Fantasy Roleplay 4th Edition, the Warhammer Fantasy Roleplay 4th Edition logo, GW, Games Workshop, Warhammer, The Game of Fantasy Battles, the twin-tailed comet logo, and all associated logos, illustrations, images, names, creatures, races, vehicles, locations, weapons, characters, and the distinctive likeness thereof, are either (R) or TM, and/or (c) Games Workshop Limited, variably registered around the world, and used under licence. Cubicle 7 Entertainment and the Cubicle 7 Entertainment logo are trademarks of Cubicle 7 Entertainment Limited. All rights reserved."</DISCLAIMER>
 <DATA_RACE>
 <Race id="ROUGH-SPECIE_GNOME">
 <Description language="ENGLISH">"Gnome"</Description>

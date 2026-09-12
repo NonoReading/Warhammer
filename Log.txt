@@ -3277,3 +3277,32 @@ resize. Jamais entierement revalide par Nono a l ecran depuis le dernier correct
 en tete si un comportement bizarre de WinPersonnage remonte plus tard. Point de reprise ecrit
 dans A FAIRE.txt et CONTEXT.md 2.64.
 Fichiers modifies : A FAIRE.txt, CONTEXT.md.
+
+12/09/2026 - DISCLAIMERS DES LIVRES DEPUIS LE MENU PRINCIPAL, TERMINE. Demande du 05/09/2026.
+Conception validee avec Nono avant le code : champ DISCLAIMER simple (pas de langue) dans le
+bloc d en-tete de chaque BOOK_*.Xml, meme endroit que CODE_BOOK/BOOK/VERSION/OFFICIAL/COMPLETE ;
+affichage via un bouton sur le menu principal (pas de fenetre dediee) qui montre le disclaimer
+du livre selectionne dans TabLivre. StructureLivre (chargelivre.pas) porte le nouveau champ,
+lu/ecrit dans xmlexportimport.pas comme Officiel/Complet. Bouton ButtonDisclaimerLivre
+(warhammersource.lfm/.pas) : ChercheLivreLibelle sur la ligne selectionnee, ShowMessage du
+disclaimer ou d un message par defaut si vide. Compile, bouton confirme visible par Nono a l
+ecran - positionnement fin reporte par Nono a plus tard.
+19 livres sur 21 remplis : texte legal recopie depuis les TXT (LIVRES et PDF_TEXTE, jamais un
+PDF directement), (c)/(R)/TM a la place de (c)(r)(tm) unicode par prudence d encodage, chaque
+ligne verifiee (exactement deux guillemets droits, aucun & non echappe). Trois livres
+(BOOK_GREEN_IZ_BEST, BOOK_LORDS_OF_NAGGAROTH, BOOK_WOOD_ELF_WARDANCER) ont un disclaimer
+"fan made, in no way endorsed by Games Workshop or Cubicle 7" - confirme leur OFFICIAL=2.
+BOOK_NATIONS_OF_MANKIND : page copyright en image dans le PDF (pas de texte dans le TXT
+extrait), texte fourni directement par Nono (credits "Big Boss", licence Creative Commons) -
+confirme aussi OFFICIAL=2.
+Piege de methode trouve en route : le premier recensement des fichiers BOOK_*.Xml par
+grep "^BOOK_" a exclu quatre livres nommes avec un espace au lieu d un underscore (BOOK
+ARCHIVES OF THE EMPIRE I, BOOK ENEMY IN SHADOWS COMPANION, BOOK LUSTRIA, BOOK THE HORNED RAT
+COMPANION) - rattrapes manuellement apres coup. Retenir : ne jamais lister les fichiers BOOK*
+par un motif qui suppose une convention de nommage uniforme.
+Regle tranchee par Nono : les livres de traduction et le livre perso n ont pas de disclaimer -
+BOOK_RULESBOOK_FRANCAIS et BOOK_PERSO restent donc sans ce champ, par regle et non par oubli.
+Voir CONTEXT.md 2.65.
+Fichiers modifies : chargelivre.pas, chargeconstantes.pas, xmlexportimport.pas,
+warhammersource.pas, warhammersource.lfm, 19 fichiers DATABASE\BOOK*.Xml, A FAIRE.txt,
+CONTEXT.md.

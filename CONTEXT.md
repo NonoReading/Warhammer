@@ -1,14 +1,17 @@
 # Warhammer — Contexte projet
 
-**Dernière mise à jour : 12/09/2026 — ANCRAGE DES CONTRÔLES, WINPERSONNAGE EN PAUSE.**
-Nono : *« je crois que je vais abandonner :D »* - plus profond que prévu (trois mécanismes
-différents en cause). État actuel conservé (compilé, `PageExperience` confirmé corrigé, le
-reste corrige de vrais bugs même indépendamment du redimensionnement) - détail §2.64, point
-de reprise en fin de section.
+**Dernière mise à jour : 12/09/2026 — DISCLAIMERS DES LIVRES TERMINÉ, ANCRAGE DES
+CONTRÔLES TOUJOURS EN PAUSE.** Chantier disclaimers ouvert et clos dans la foulée (§2.65) :
+19 des 21 livres portent maintenant leur mention légale, bouton dédié sur le menu principal,
+compilé et vu par Nono à l'écran.
 
-Chantier en pause : **ancrage des contrôles**, commencé sur WinPersonnage (fenêtre principale,
-choix de Nono). WinLivre/WinCreation pas encore regardés - à voir s'ils ont le même moteur de
-positionnement maison avant de décider de leur approche.
+Chantier en pause (sans changement depuis la dernière session) : **ancrage des contrôles**,
+commencé sur WinPersonnage (fenêtre principale, choix de Nono). Nono : *« je crois que je vais
+abandonner :D »* - plus profond que prévu (trois mécanismes différents en cause). État actuel
+conservé (compilé, `PageExperience` confirmé corrigé, le reste corrige de vrais bugs même
+indépendamment du redimensionnement) - détail §2.64, point de reprise en fin de section.
+WinLivre/WinCreation pas encore regardés - à voir s'ils ont le même moteur de positionnement
+maison avant de décider de leur approche.
 
 ---
 
@@ -7373,6 +7376,60 @@ vertical, seulement horizontal). D'autres décrochages du même type que ceux tr
 peuvent rester ailleurs sur la fenêtre, non testés. WinLivre/WinCreation n'ont pas été
 regardés du tout - à vérifier s'ils ont le même genre de moteur maison avant de choisir leur
 approche (`A FAIRE.txt`).
+
+---
+
+### 2.65 Disclaimers des livres depuis le menu principal — terminé (12/09/2026)
+
+**Origine.** Demande de Nono du 05/09/2026 (`A FAIRE.txt`) : pouvoir afficher le
+copyright/mention légale de chaque livre depuis l'application.
+
+**Conception validée avec Nono avant le code** : champ simple `DISCLAIMER` dans le bloc
+d'en-tête de chaque `BOOK_*.Xml` (même endroit que `CODE_BOOK`/`BOOK`/`language`/`VERSION`/
+`OFFICIAL`/`COMPLETE`), sans attribut `language` (le disclaimer est toujours en anglais dans
+sa langue d'origine, pas de traduction prévue). Affichage : un bouton "Disclaimer" sur le
+menu principal (pas de fenêtre dédiée) qui montre le disclaimer du livre sélectionné dans
+`TabLivre`.
+
+**Code (compilé, 0 erreur, vu par Nono à l'écran) :**
+- `StructureLivre` (`chargelivre.pas`) porte le nouveau champ `Disclaimer: String`.
+- `ConstXmlDisclaimerLivre = 'DISCLAIMER'` (`chargeconstantes.pas`).
+- Lu à l'import et écrit à l'export dans `xmlexportimport.pas`, même schéma que
+  `Officiel`/`Complet` (export non branché en pratique aujourd'hui, comme le reste de
+  l'export de livre - voir §0, "L'enregistrement depuis WinLivre n'est pas actif").
+- Bouton `ButtonDisclaimerLivre` sur le menu principal (`warhammersource.lfm`/`.pas`), à côté
+  du bouton PDF : `ChercheLivreLibelle` sur la ligne sélectionnée de `TabLivre`, `ShowMessage`
+  du disclaimer ou d'un message par défaut si le champ est vide. Nono a validé que le bouton
+  apparaît et a explicitement reporté le positionnement fin ("je referai les positionnements
+  plus tard").
+
+**Données saisies (19 livres sur 21).** Texte légal complet recopié depuis les TXT
+(`LIVRES\` et `PDF_TEXTE\`, jamais depuis un PDF directement) ; `©`/`®`/`™` remplacés par
+`(c)`/`(R)`/`TM` par prudence d'encodage. Chaque ligne vérifiée après coup : exactement deux
+guillemets droits (les deux qui encadrent la valeur - `RemoveQuotes` les retire tous les deux
+à la lecture, donc aucun guillemet droit ne doit rester à l'intérieur du texte), aucun `&`
+non échappé.
+- 17 livres au disclaimer standard Games Workshop/Cubicle 7 ("No part of this publication...").
+- **`BOOK_GREEN_IZ_BEST.Xml`, `BOOK_LORDS_OF_NAGGAROTH.Xml`, `BOOK_WOOD_ELF_WARDANCER.Xml`** :
+  disclaimer différent ("this is a fan made supplement and in no way endorsed by Games
+  Workshop or Cubicle 7...", auteur "Naggaroth Anon") - confirme que leur `OFFICIAL="2"`
+  déjà en place est cohérent avec un vrai statut non officiel.
+- **`BOOK_NATIONS_OF_MANKIND.Xml`** : pas de texte légal dans le TXT extrait (page de
+  copyright probablement une image dans le PDF, piège déjà connu du §0). Nono a fourni le
+  texte directement (crédits "Big Boss" et contributeurs, licence Creative Commons
+  Attribution-Share Alike 4.0) - confirme là aussi le statut `OFFICIAL="2"`.
+- **Piège de méthode trouvé en cours de chantier** : la première recherche des fichiers
+  `BOOK_*.Xml` par `grep "^BOOK_"` a exclu quatre livres nommés avec un espace au lieu d'un
+  underscore (`BOOK ARCHIVES OF THE EMPIRE I.Xml`, `BOOK ENEMY IN SHADOWS COMPANION.Xml`,
+  `BOOK LUSTRIA.xml`, `BOOK THE HORNED RAT COMPANION.Xml`) - repérés seulement grâce au
+  rapport du sous-agent qui les avait vus dans `DATABASE\` sans les traiter. Rattrapés
+  manuellement. **Retenir : ne jamais lister les fichiers `BOOK*` par un motif qui suppose
+  une convention de nommage uniforme - `ls`/`Glob` sur `BOOK*` en entier, pas un `grep` sur
+  un préfixe précis.**
+- **Règle de Nono, tranchée le 12/09/2026 : les livres dans une langue de traduction
+  n'ont pas de disclaimer propre, ni le livre perso.** `BOOK_RULESBOOK_FRANCAIS.Xml` et
+  `BOOK_PERSO.Xml` restent donc sans le champ `DISCLAIMER`, pas par oubli mais par règle -
+  ne pas ressortir ça en anomalie si un futur inventaire les trouve vides.
 
 ---
 

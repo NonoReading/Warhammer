@@ -49,6 +49,7 @@ type
     ButtonCompetence: TBCButton;
     ButtonCreation: TBCButton;
     ButtonOuvrirLivre: TBCButton;
+    ButtonDisclaimerLivre: TBCButton;
     ButtonExportLivre: TBCButton;
     ButtonCreationLivre: TBCButton;
     ButtonPdf: TBCButton;
@@ -85,6 +86,7 @@ type
     procedure ButtonCreationLivreClick(Sender: TObject);
     procedure ButtonModificationClick({%H-}Sender: TObject);
     procedure ButtonOuvrirLivreClick({%H-}Sender: TObject);
+    procedure ButtonDisclaimerLivreClick({%H-}Sender: TObject);
     procedure ButtonPdfClick({%H-}Sender: TObject);
     procedure ButtonRaceClick({%H-}Sender: TObject);
     procedure ButtonSortClick({%H-}Sender: TObject);
@@ -1210,6 +1212,20 @@ procedure TMenu.ButtonOuvrirLivreClick(Sender: TObject);
         FenLivre         := TWinLivres.Create(Application);
         FenLivre.Position:= poOwnerFormCenter;
         FenLivre.Show;
+      end;
+  end;
+
+procedure TMenu.ButtonDisclaimerLivreClick(Sender: TObject);
+  var
+    PLivre: StructureLivre;
+  begin
+    if TabLivre.Cells[ColLivreCod, TabLivre.Row] <> '' then
+      begin
+        PLivre := ChercheLivreLibelle(TabLivre.Cells[ColLivreCod, TabLivre.Row]);
+        if PLivre.Disclaimer <> '' then
+          ShowMessage(PLivre.Disclaimer)
+        else
+          ShowMessage('Aucun disclaimer saisi pour ce livre.');
       end;
   end;
 

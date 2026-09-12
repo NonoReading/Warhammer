@@ -262,23 +262,6 @@ WinCreation pas regardes du tout - verifier s ils ont le meme genre de moteur ma
 choisir leur approche. Point d attention non verifie : le grossissement de police cumulatif du
 menu principal (voir plus bas dans ce fichier) pourrait interagir avec l ancrage.
 
-AFFICHER LES DISCLAIMERS DES LIVRES DEPUIS LE MENU PRINCIPAL. Demande de Nono le
-05/09/2026. Quatre etapes distinctes, a ne pas melanger :
- 1. RECUPERER le texte de disclaimer / copyright / mention Community Content de chaque livre.
-    Chercher d abord dans les TXT des deux repertoires (LIVRES et PDF_TEXTE) avant d ouvrir un
-    PDF, regle du CONTEXT.md 0. Attention : la page de copyright est souvent une IMAGE que
-    l export TXT a perdue - c est deja le cas de Nations of Mankind.
- 2. DECIDER OU IL EST STOCKE. Un champ dans le bloc de description du livre de chaque
-    BOOK_*.Xml semble le plus coherent avec le reste de la base (pas de fichier a part). A
-    trancher avec la question de la langue : le disclaimer est en anglais dans tous les cas,
-    faut-il le marquer language ENGLISH ou le laisser hors langue ?
- 3. LE LIRE au chargement, comme les autres donnees de livre.
- 4. UN BOUTON DU MENU PRINCIPAL qui ouvre une fenetre listant les livres et affichant le
-    disclaimer du livre choisi.
-Lien avec le champ OFFICIAL existant : le disclaimer est justement ce qui permettrait de
-CONFIRMER le statut officiel ou fan d un livre, aujourd hui saisi sur faisceau d indices
-(cas ouvert de Nations of Mankind, saisi OFFICIAL=2 a confirmer).
-
 [LIGHTWEIGHT/BULKY BRANCHES LE 12/09/2026 - voir CONTEXT.md 2.58. Les deux seules qualites a
 effet purement numerique dans le modele actuel (Encombrement) sont calculees dans les deux
 gabarits Pdf. Deux bugs prexistants trouves et corriges au passage, sans rapport avec ce

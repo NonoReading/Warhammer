@@ -14,6 +14,7 @@ Type
     Version:            String;
     Officiel:           Integer;
     Complet:            Integer;
+    Disclaimer:         String;
 end;
 
   TListLivre = specialize TList<StructureLivre>;
