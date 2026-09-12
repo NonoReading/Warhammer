@@ -1265,9 +1265,9 @@ Procedure PdfPersonnageCreation(Personnage: StructurePersonnage; BackGround: Boo
     PdfPage.WriteText(142, 210, IntToStr(Determine));                     // Détermination
 
     // Expérience
-    PdfCentre(PdfPage,165,176,210,IntToStr(Personnage.XpActuel));                      // Total Xp
+    PdfCentre(PdfPage,165,176,210,IntToStr(Personnage.XpTotal));                       // Total Xp
     PdfCentre(PdfPage,176,185,210,IntToStr(Personnage.XpTotal - personnage.XpActuel)); // Utilisé
-    PdfCentre(PdfPage,185,194,210,IntToStr(Personnage.XpTotal));                       // Restant
+    PdfCentre(PdfPage,185,194,210,IntToStr(Personnage.XpActuel));                      // Restant
 
     // Mouvement
     PdfPage.WriteText(127, 194, IntToStr(Mouv));                              // Mouvement

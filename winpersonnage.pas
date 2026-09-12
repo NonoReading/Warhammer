@@ -19,6 +19,13 @@ uses
   ChargeRaceMetier;
 type
 
+  StructureXpEtat = record
+    Total:        Integer;
+    Depense:      Integer;
+    Restante:     Integer;
+    Augmentation: Integer;
+  end;
+
   { TWinPersonnages }
 
   TWinPersonnages = class(TForm)
@@ -232,6 +239,7 @@ type
   // Expérience
   procedure CalculAvancement();
   function  CalculExperience(TypeXp: String; Gratuit: Integer; Total: Integer; Code:String; Tal: String): Integer;
+  function  CalculXpEtat(): StructureXpEtat;
   procedure CalculTableExperience();
   procedure CalculTotaux();
   procedure CalculXpNecessaire(ChangementClasse: Boolean);
@@ -601,6 +609,14 @@ end;
 
 procedure TWinPersonnages.ButtonPdfClick(Sender: TObject);
 begin
+  // Personnage.XpTotal/Xp25Total/XpActuel ne sont ecrits qu'au chargement du XML
+  // (chargepersonnage.pas), jamais resynchronises pendant la session - sans ceci, le Pdf
+  // genere depuis cette fenetre affiche les valeurs du fichier a l'ouverture, pas celles
+  // de l'ecran (CONTEXT.md, chantier Depense/Restante Xp).
+  Personnage.XpTotal   := StrToIntDef(EditTotalXp.Text, 0);
+  Personnage.Xp25Total := StrToIntDef(EditTotalXp25.Text, 0);
+  Personnage.XpActuel  := CalculXpEtat().Restante;
+
   if (CheckBoxPdfFeldo2p.Checked = false) then
     PdfPersonnageCreation(Personnage, true)
   else
@@ -2930,10 +2946,15 @@ begin
   EditHeight.Text           := IntToStr(Personnage.Height);
   EditHairColors.Text       := Personnage.HairColors;
   EditEyeColors.Text        := Personnage.EyeColors;
+  // Texte brut (IntToStr), pas Format('%.0n',...) : cette case est relue et reparsee par
+  // StrToIntDef/comparee en texte a EditTotalXp.Text (winpersonnage.pas, tests de validation
+  // de carriere) - un separateur de milliers y faisait echouer StrToIntDef (0 renvoye) et
+  // ratait toute comparaison avec EditTotalXp.Text, toujours brut. Meme format que l'ecriture
+  // faite apres validation de carriere (MajTables) plus bas, qui etait deja brute.
   if (EditTotalXp25.Enabled = True) then
-    tabExperience.Cells[ColXpDonnee, LigXpTotal] := Format('%.0n',[Personnage.Xp25Total/1])+' '
+    tabExperience.Cells[ColXpDonnee, LigXpTotal] := IntToStr(Personnage.Xp25Total)
   else
-    tabExperience.Cells[ColXpDonnee, LigXpTotal] := Format('%.0n',[Personnage.XpTotal/1])+' ';
+    tabExperience.Cells[ColXpDonnee, LigXpTotal] := IntToStr(Personnage.XpTotal);
   // EditTotalXp/EditTotalXp25 lus par CalculTableExperience (Restant Xp) des le premier
   // recalcul declenche pendant ce chargement (l.~3291 plus bas) - sans cette init, le champ
   // est encore vide a ce moment-la et le Restant sort negatif (bug constate avec Nono le
@@ -4347,16 +4368,16 @@ function TWinPersonnages.CalculExperience(TypeXp: String; Gratuit: Integer; Tota
     result := CalculOptionXpDiv25(Xp);
   end;
 
-procedure TWinPersonnages.CalculTableExperience();
+function TWinPersonnages.CalculXpEtat(): StructureXpEtat;
   var
     Ind:            Integer;
     Xp:             Integer;
     Gratuit:        Integer;
     Total:          Integer;
-    Depense:        Integer = 0;
-    Restante:       Integer = 0;
-    Augmentation:   Integer = 0;
   Begin
+    Result.Depense      := 0;
+    Result.Augmentation := 0;
+
     // Attributs
     For Ind := 2 to TabAttribut.ColCount-1 do
       begin
@@ -4370,7 +4391,7 @@ procedure TWinPersonnages.CalculTableExperience();
             else
               begin
                 TabAttribut.Cells[Ind, LigAttXp] := IntToStr(Xp);
-                Depense := Depense + Xp;
+                Result.Depense := Result.Depense + Xp;
               end;
            end;
 
@@ -4390,7 +4411,7 @@ procedure TWinPersonnages.CalculTableExperience();
             else
               begin
                 TabCompetence.Cells[ColCompXp, Ind] := IntToStr(Xp);
-                Depense := Depense + Xp;
+                Result.Depense := Result.Depense + Xp;
               end;
           end;
       end;
@@ -4405,7 +4426,7 @@ procedure TWinPersonnages.CalculTableExperience();
         else
           begin
             TabTalent.Cells[ColTalXp, Ind] := IntToStr(Xp);
-            Depense := Depense + Xp;
+            Result.Depense := Result.Depense + Xp;
           end;
 
       end;
@@ -4415,7 +4436,7 @@ procedure TWinPersonnages.CalculTableExperience();
       Begin
         Xp := StrToIntDef(TabCarriere.Cells[4, Ind],0);
         if Xp > 0 then
-          Depense := Depense + Xp;
+          Result.Depense := Result.Depense + Xp;
       end;
 
     // Augmentation
@@ -4424,21 +4445,21 @@ procedure TWinPersonnages.CalculTableExperience();
         begin
           Xp := StrToIntDef(TabAugmentationAttribut.Cells[ColAugmAttReel, Ind],0);
           if Xp > 0 then
-            Augmentation := Augmentation + Xp;
+            Result.Augmentation := Result.Augmentation + Xp;
         end;
       // Compétence
       For ind := 1 to TabAugmentationCompetence.RowCount-1 do
         begin
           Xp := StrToIntDef(TabAugmentationCompetence.Cells[ColAugmCompReel, Ind],0);
           if Xp > 0 then
-            Augmentation := Augmentation + Xp;
+            Result.Augmentation := Result.Augmentation + Xp;
         end;
       // Talents
       For ind := 1 to TabAugmentationTalent.RowCount-1 do
         begin
           Xp := StrToIntDef(TabAugmentationTalent.Cells[ColAugmTalReel, Ind],0);
           if Xp > 0 then
-            Augmentation := Augmentation + Xp;
+            Result.Augmentation := Result.Augmentation + Xp;
         end;
 
     // Sorts
@@ -4447,31 +4468,39 @@ procedure TWinPersonnages.CalculTableExperience();
         Xp := StrToIntDef(TabEquipement.Cells[5, Ind],0);
         if Xp > 0 then
           if TabEquipement.Cells[0, Ind] = '+' then
-            Augmentation := Augmentation + Xp
+            Result.Augmentation := Result.Augmentation + Xp
           else
-            Depense      := Depense + Xp;
+            Result.Depense      := Result.Depense + Xp;
       end;
 
-    // Restant Xp
+    // Total et Restant Xp
     // Total lu depuis EditTotalXp/EditTotalXp25 (valeur affichee, a jour) et non
     // Personnage.XpTotal/Xp25Total (charge une seule fois a l'ouverture du fichier,
     // jamais resynchronise si le Total est releve en cours de session - cf CONTEXT.md,
     // bug PDF Feldo du 11/09/2026).
     if CheckBoxXpDiv25.Checked = true then
-      Restante := StrToIntDef(EditTotalXp25.Text,0) - Depense
+      Result.Total := StrToIntDef(EditTotalXp25.Text,0)
     else
-      Restante := StrToIntDef(EditTotalXp.Text,0) - Depense;
+      Result.Total := StrToIntDef(EditTotalXp.Text,0);
 
+    Result.Restante := Result.Total - Result.Depense;
+  end;
+
+procedure TWinPersonnages.CalculTableExperience();
+  var
+    XpEtat: StructureXpEtat;
+  Begin
+    XpEtat := CalculXpEtat();
 
     // Table des XP
-    tabExperience.Cells[ColXpDonnee, LigXpDepense] := Format('%.0n',[Depense/1])+' ';
-    tabExperience.Cells[ColXpDonnee, LigXpRestant] := Format('%.0n',[Restante/1])+' ';
-    tabExperience.Cells[ColXpDonnee, LigXpCout]    := Format('%.0n',[Augmentation/1])+' ';
+    tabExperience.Cells[ColXpDonnee, LigXpDepense] := Format('%.0n',[XpEtat.Depense/1])+' ';
+    tabExperience.Cells[ColXpDonnee, LigXpRestant] := Format('%.0n',[XpEtat.Restante/1])+' ';
+    tabExperience.Cells[ColXpDonnee, LigXpCout]    := Format('%.0n',[XpEtat.Augmentation/1])+' ';
 
     // couleur
-    if (Augmentation = 0) then
+    if (XpEtat.Augmentation = 0) then
       tabExperience.Cells[2, LigXpCout] := ''
-    else if (Augmentation > Restante) then
+    else if (XpEtat.Augmentation > XpEtat.Restante) then
       tabExperience.Cells[2, LigXpCout] := CouleurNot
     else
       tabExperience.Cells[2, LigXpCout] := CouleurOk;
@@ -5141,8 +5170,7 @@ procedure TWinPersonnages.XmlSauvegarde();
   var
     fileName:              String;
     directoryPath:         String;
-    TotalXp:               Integer;
-    XpRestant:             Integer;
+    XpEtat:                StructureXpEtat;
     PersonnageCorruption:  StructurePersonnageCorruption;
     Ind:                   Integer;
   begin
@@ -5160,9 +5188,11 @@ procedure TWinPersonnages.XmlSauvegarde();
     // nouveau fichier
     directoryPath         := GetCurrentDir+ConstCheminPersonnage+NomPersonnage;
     fileName              := directoryPath + '\' + FormatDateTime('yyyymmdd', Date) + '-' + FormatDateTime('hhnnss', Time) + '.xml';
-    TotalXp               := StrToIntDef(trim(tabExperience.Cells[ColXpDonnee, LigXpTotal]),0);
-    XpRestant             := StrToIntDef(trim(tabExperience.Cells[ColXpDonnee, LigXpRestant]),0);
-    PersonnageXmlCreation(Personnage, TotalXp, XpRestant, fileName, Personnage.NomPersonnage);
+    // Total/Restant lus directement sur CalculXpEtat (entiers) et non sur le texte affiche
+    // de tabExperience : celui-ci porte un separateur de milliers (Format('%.0n',...)) que
+    // StrToIntDef ne sait pas reparser - CurrentXp finissait a "0" des que Restant >= 1000.
+    XpEtat                := CalculXpEtat();
+    PersonnageXmlCreation(Personnage, XpEtat.Total, XpEtat.Restante, fileName, Personnage.NomPersonnage);
     NeedUpdate            := true;
     RecherchePersonnage   := NomPersonnage;
   end;

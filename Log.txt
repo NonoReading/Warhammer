@@ -2867,3 +2867,35 @@ Charlatant chanceux porte encore CurrentXp="0", il faut rouvrir et resauvegarder
 personnage. Piste de conception soulevee par Nono, pas commencee : une fonction dediee
 Depense/Restante au lieu des trois sources actuelles du total (Personnage.XpTotal,
 EditTotalXp.Text, tabExperience.Cells) - voir A FAIRE.txt.
+
+12/09/2026 - FONCTION DEDIEE DEPENSE/RESTANTE XP, TERMINEE ET VALIDEE PAR NONO. Chantier
+priorise par Nono le 11/09/2026 (A FAIRE.txt). Nouveau type StructureXpEtat (Total/Depense/
+Restante/Augmentation) et nouvelle fonction CalculXpEtat() (winpersonnage.pas) qui porte tout
+le calcul auparavant mele a l ecriture de la grille dans CalculTableExperience ; celle-ci
+devient un simple appelant qui alimente tabExperience (affichage + memoire du dernier Total
+confirme, role garde tel quel a la demande de Nono) et gere la couleur. Aucun des ~15 points
+d appel existants de CalculTableExperience n a du changer. Detail CONTEXT.md (entree 2.56).
+
+12/09/2026 - TROIS BUGS DE FOND DECOUVERTS EN TESTANT LE PDF APRES CE CHANTIER, CORRIGES ET
+VALIDES PAR NONO. (1) Gabarit Pdf normal : colonnes Total et Restant inversees dans le code
+(pdfpersonnage.pas, PdfPersonnageCreation) - les commentaires eux-memes revelaient l inversion,
+corrige par simple echange des deux valeurs ; Feldo2P n etait pas concerne. (2) Personnage.
+XpTotal/Xp25Total/XpActuel ne sont ecrits qu au chargement du XML et jamais resynchronises
+pendant la session (PersonnageXmlCreation prend Personnage par valeur, meme sauvegarder ne les
+met pas a jour dans la fenetre ouverte) - le bouton Pdf de WinPersonnage affichait donc des
+valeurs figees a l ouverture du fichier. Corrige dans ButtonPdfClick : les trois champs sont
+recalcules depuis l ecran juste avant de generer le Pdf, quel que soit le gabarit. (3) Cause
+racine du "probleme dans l enregistrement de l XP" signale par Nono, trouvee en inspectant le
+XML sauvegarde directement : XmlSauvegarde relisait tabExperience.Cells avec StrToIntDef sur un
+texte forme par Format('%.0n',...) - le separateur de milliers faisait echouer la conversion
+des que Restante atteignait 1000, CurrentXp="0" ecrit dans le XML quel que soit le vrai Restant
+(verifie sur Charlatant chanceux : Xp 5000, Restant reel 4450, CurrentXp enregistre a 0).
+Corrige en faisant lire XmlSauvegarde directement sur CalculXpEtat() (entiers, jamais
+reformates) au lieu de reparser le texte affiche. (4) Meme defaut de format rendait peu
+fiables deux tests de validation de carriere (message "rien change" et avertissement "Total
+baisse") des que le Total etait >= 1000 juste apres l ouverture d un personnage, la meme case
+LigXpTotal etant ecrite formatee au chargement mais brute apres une validation de carriere -
+corrige a la source en ecrivant LigXpTotal en brut (IntToStr) au chargement, comme c etait deja
+le cas apres MajTables. Compile et valide par Nono (Pdf normal et Feldo2P depuis la fenetre
+ouverte, Pdf depuis le menu principal apres resauvegarde). Detail CONTEXT.md (entree 2.56).
+Fichiers modifies : winpersonnage.pas, pdfpersonnage.pas.

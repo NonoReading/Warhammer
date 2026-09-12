@@ -6794,6 +6794,70 @@ acheté normalement donnant Fear, Terrifying donnant Terror 1 temporaire) n'est 
 Pas de vocabulaire fermé Fear/Terror commun aux trois portes — chaque porte reste un mécanisme
 séparé, voir `A FAIRE.txt`.
 
+**Chantier suivant : voir §2.56 juste en dessous.**
+
+### 2.56 Fonction dédiée Dépense/Restante Xp, et trois bugs de fond découverts en la câblant — terminé (12/09/2026)
+
+**Origine.** Chantier posé PRIORITAIRE par Nono le 11/09/2026 (`A FAIRE.txt`) : `CalculTableExperience`
+(winpersonnage.pas, ~130 lignes) mélangeait le calcul de Depense/Restante/Augmentation avec
+l'écriture dans la grille `tabExperience`, trois sources du même total synchronisées à des
+endroits différents — origine de plusieurs bugs en cascade le 11/09 (Restant Xp faux, PDF
+Feldo faux).
+
+**Extraction pure, validée avec Nono avant de coder.** Nouveau type `StructureXpEtat`
+(Total/Depense/Restante/Augmentation) et nouvelle fonction `CalculXpEtat(): StructureXpEtat`
+qui porte tout le calcul (mêmes boucles, même lecture de `EditTotalXp`/`EditTotalXp25`selon
+`CheckBoxXpDiv25`) ; `CalculTableExperience` devient un simple appelant qui écrit le résultat
+dans la grille (affichage + mémoire du dernier Total confirmé, rôle que Nono a demandé de
+garder tel quel) et gère la couleur. Les ~15 points d'appel existants de
+`CalculTableExperience` n'ont rien eu à changer.
+
+**En testant le résultat au Pdf, trois bugs de fond distincts découverts, tous pré-existants
+et sans lien avec l'extraction elle-même :**
+
+1. **Gabarit Pdf « normal » : colonnes Total et Restant inversées dans le code**
+   (`pdfpersonnage.pas`, bloc Expérience de `PdfPersonnageCreation` — le gabarit Feldo2P
+   n'était pas concerné, il a sa propre fonction `PdfBlocExperience` correcte depuis le
+   11/09). Les commentaires eux-mêmes révélaient l'inversion (`// Total Xp` dessinait
+   `Personnage.XpActuel`, `// Restant` dessinait `Personnage.XpTotal`). Corrigé en échangeant
+   les deux valeurs ; la case « Utilisé » au milieu était déjà correcte.
+2. **`Personnage.XpTotal`/`Xp25Total`/`XpActuel` ne sont écrits qu'au chargement du XML**
+   (`chargepersonnage.pas`) et ne sont jamais resynchronisés pendant la session — le calcul
+   de `CalculXpEtat` alimente la grille écran, jamais ces champs. Aggravé par
+   `PersonnageXmlCreation` qui prend `Personnage` **par valeur**, donc même sauvegarder ne les
+   met pas à jour dans la fenêtre encore ouverte. Conséquence concrète : le bouton Pdf de
+   `WinPersonnage` affichait les valeurs du fichier à l'ouverture, peu importe ce qui avait
+   changé à l'écran depuis. Corrigé dans `ButtonPdfClick` (winpersonnage.pas) : les trois
+   champs sont recalculés depuis l'écran (`EditTotalXp`/`EditTotalXp25`/`CalculXpEtat().Restante`)
+   juste avant de générer le Pdf, quel que soit le gabarit choisi.
+3. **Cause racine du « problème dans l'enregistrement de l'XP » signalé par Nono, repéré en
+   inspectant directement le XML sauvegardé.** `XmlSauvegarde` relisait
+   `tabExperience.Cells[..., LigXpTotal/LigXpRestant]` avec `StrToIntDef(trim(...), 0)` — or
+   `LigXpRestant` est toujours écrit par `CalculTableExperience` avec
+   `Format('%.0n', [Restante/1])`, qui insère un **séparateur de milliers** que `trim` ne
+   retire pas et que `StrToIntDef` ne sait pas reparser : dès que Restante atteignait 1000,
+   la conversion échouait silencieusement et renvoyait 0 — `CurrentXp="0"` écrit dans le XML
+   quel que soit le vrai Restant (vérifié sur Charlatant chanceux : Xp 5000, Restant réel
+   4450, `CurrentXp` enregistré à 0). Corrigé en faisant lire `XmlSauvegarde` directement sur
+   `CalculXpEtat()` (des entiers, jamais reformatés) au lieu de reparser le texte affiché.
+4. **Même défaut de format, deux tests de validation de carrière rendus peu fiables** — le
+   *même* champ `LigXpTotal` était écrit formaté (avec séparateur) au chargement mais brut
+   (`EditTotalXp.Text` tel quel) après une validation de carrière (`MajTables`), deux formats
+   différents pour la même case selon le moment. Conséquence : juste après l'ouverture d'un
+   personnage avec Total ≥ 1000, le message « tu n'as rien changé » (comparaison de texte,
+   ligne ~586) ne se déclenchait jamais même à raison, et l'avertissement « tu as baissé le
+   Total Xp » (`StrToIntDef` sur le texte formaté, ligne ~590) ne pouvait jamais se déclencher
+   non plus. Corrigé à la source plutôt que sur les deux lectures : l'écriture au chargement
+   passe en `IntToStr` brut, comme l'écriture après `MajTables` — les deux écritures
+   produisent désormais toujours le même format que `EditTotalXp.Text`, donc les deux
+   comparaisons redeviennent fiables sans y toucher. Effet de bord assumé : la case Total de
+   l'onglet Expérience s'affiche sans séparateur de milliers dès l'ouverture, comme c'était
+   déjà le cas après toute validation de carrière.
+
+**COMPILÉ ET VALIDÉ PAR NONO** (Pdf normal et Feldo2P depuis la fenêtre ouverte, Pdf depuis le
+menu principal après resauvegarde, Total ≥ 1000 réaffiché et testé pour l'avertissement de
+baisse). Fichiers modifiés : `winpersonnage.pas`, `pdfpersonnage.pas`.
+
 **Chantier suivant : à définir avec Nono.**
 
 ---
