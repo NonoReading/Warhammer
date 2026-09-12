@@ -3066,3 +3066,36 @@ Pdf Feldo (alignement de l entete Crafting).
 Compile (lazbuild, 0 erreur) a chaque etape.
 Fichiers modifies : chargeconstantes.pas, chargefabrication.pas, winpersonnage.pas,
 pdfpersonnage.pas, DATABASE/BOOK_RULESBOOK.Xml, CONTEXT.md, A FAIRE.txt.
+
+12/09/2026 - PRACTICAL/UNRELIABLE : CHANTIER COMMENCE PUIS ABANDONNE EN COURS DE ROUTE PAR
+NONO, RETOUR EN ARRIERE SUR LE MALUS ARMOB AUTOMATIQUE. Suite immediate du chantier Lightweight/
+Bulky (entree juste au-dessus) : probleme technique identifie avant de coder, conforme au
+CONTEXT.md 2.58 - reduire/doubler le malus ARMOB d une piece precise suppose de distinguer par
+piece, alors que PersonnageArmureBonusCompetenceModif (branchee depuis le 2.50) aplatissait
+toutes les pieces portees en une seule liste. Conception validee avec Nono : boucler piece par
+piece (meme moule que PersonnageArmureBonusTalent), reduire de 10 (plancher 0) si Practical,
+doubler si Unreliable.
+Implemente et compile en 4 etapes (lazbuild, 0 erreur a chaque etape) : Modifier de
+RULES-QUALITY_02/RULES-DEFECT_03 dans BOOK_RULESBOOK.Xml, constantes FabricationPractical/
+FabricationUnreliable, FabricationEstPractical/FabricationEstUnreliable (meme moule que
+FabricationEstBulky), boucle piece par piece dans PersonnageArmureBonusCompetenceModif.
+Bug preexistant trouve en preparant le test pour Nono : la boucle (comme l ancienne version
+aplatie) ne filtrait pas sur PersonnageEquipement.Porte - le malus etait compte sur toute piece
+possedee, portee ou non, contrairement a la Protection et l Encombrement (corriges au 2.57).
+Corrige (ajout du filtre Porte), compile.
+Nono a alors arrete le chantier pour une raison de fond : le malus depend de la piece etant
+PORTEE au moment du jet, un etat trop volatile (armure retiree en ville, etc.) pour etre
+integre silencieusement dans un total fige sur la fiche - le filtre Porte ne change rien a ce
+probleme. Decision : revenir sur le 2.50 etape 3 point 5 plutot que de continuer a automatiser
+ce malus.
+Fait : tout le code du jour (Practical/Unreliable) annule par git checkout. pdfpersonnage.pas
+(PdfPersonnageCompetence) : retrait de la ligne qui ajoutait PersonnageArmureBonusCompetenceModif
+au Total - le malus redevient une information affichee (libelle de qualite sur la fiche armure,
+GetAllArmureBonusLibelle), le joueur l applique lui-meme au jet, comme avant le 2.50.
+PersonnageArmureBonusCompetenceModif n a plus d appelant, pas supprimee (decision renvoyee a
+Nono). Compile (lazbuild, 0 erreur) a chaque etape, y compris le retrait final.
+Idee de conception capturee pour la suite, pas commencee : une colonne "avec equipement" dans
+le tableau Competences du Pdf, montrant le total ajuste quand l equipement porte donne un malus
+- remplacerait le Total automatique sans le meme risque. Practical/Unreliable et le sort du code
+mort se trancheront a ce moment. Voir CONTEXT.md 2.59 et A FAIRE.txt.
+Fichiers modifies : pdfpersonnage.pas, CONTEXT.md, A FAIRE.txt.

@@ -597,11 +597,15 @@ Function PdfPersonnageCompetence(Personnage: StructurePersonnage; Competence: St
     // n'est pas un avancement acheté) fausserait ce calcul. Signalé par Nono le 17/08/2026.
     Res.Total := Res.Total + PersonnageMutationCompetenceModif(Personnage, Competence);
 
-    // Qualité d'armure liée à une compétence (ex. pénalité de Dextérité des Stechzeug
-    // Bracers) - migration de l'ancien mécanisme décoratif ListArmureBonusModif en vrai
-    // modificateur, même raisonnement que ci-dessus (Total, pas Augmentation). CONTEXT.md
-    // §2.50 étape 3, point 5.
-    Res.Total := Res.Total + PersonnageArmureBonusCompetenceModif(Personnage, Competence);
+    // Qualité d'armure liée à une compétence (ex. pénalité de Stealth du Mail Chausses) - NE
+    // s'applique plus automatiquement au Total depuis le 12/09/2026 (retour en arrière sur
+    // §2.50 étape 3 point 5, décision Nono) : le malus dépend de la pièce étant PORTÉE au
+    // moment du jet, un état trop volatile (armure retirée en ville, etc.) pour être fiable
+    // s'il est intégré silencieusement dans un total sauvegardé. Redevient une information
+    // affichée (libellé de qualité sur la fiche armure, GetAllArmureBonusLibelle) que le
+    // joueur applique lui-même au jet - comme avant §2.50. Conception à reprendre : une
+    // colonne "avec équipement" dans le tableau Compétences montrant le total ajusté quand
+    // l'équipement porté donne un malus (voir A FAIRE.txt), qui suppose de revoir le gabarit.
 
     // Modificateur d'appartenance (régiment/ordre de chevalerie/culte) dont le palier est
     // atteint, sur une Compétence - pendant Competence de PersonnageCareerBonusAttributModif

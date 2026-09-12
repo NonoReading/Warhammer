@@ -286,17 +286,30 @@ calcul : les qualites posees n etaient plus retrouvees a la reouverture d un per
 (mauvaise colonne dans XmlChargePersonnage, winpersonnage.pas), et l entete Crafting Bonus
 Explanations du Pdf Feldo2P s incrustait dans le tableau Armure (coordonnee X en dur, connue
 depuis le 15/08/2026, cf. CONTEXT.md 0).]
-RESTE A BRANCHER SUR LES QUALITES DE FABRICATION : PRACTICAL/UNRELIABLE, FINE/DURABLE/SHODDY/
-UGLY, LES 3 ACCESSOIRES. Practical/Unreliable visent en realite les malus ARMOB deja calcules
-(PersonnageArmureBonusCompetenceModif, chargepersonnage.pas l.1804, branche depuis le 2.50) -
-pas une penalite d armure a inventer. Mais reduire/doubler leur magnitude suppose de savoir
-QUELLE piece precise porte la qualite, alors que la fonction actuelle scanne toutes les
-qualites ARMOB de tout l equipement porte sans distinguer par piece - a concevoir avec Nono le
-jour ou le besoin se presente. Fine/Durable/Shoddy/Ugly restent narratifs (statut social, jet
-de sauvegarde contre la casse, casse sur double rate, malus Sociabilite conditionnel) : rien a
-calculer sur la fiche. Les 3 accessoires Nations of Mankind (Barrel Extension +20 portee,
-Bayonet devient une Lance, Telescopic Sight ajoute Accurate/Precise) demandent un mecanisme
-neuf, rien aujourd hui ne permet a un equipement d en modifier un autre.
+[MALUS ARMOB RETIRE DU TOTAL AUTOMATIQUE LE 12/09/2026 - voir CONTEXT.md 2.59. Chantier
+Practical/Unreliable commence puis interrompu par Nono en cours de route : le malus ARMOB
+(ex. Mail Chausses, -10 Stealth) dependait de la piece etant PORTEE au moment du jet, un etat
+trop volatile (armure retiree en ville, etc.) pour etre integre silencieusement dans un total
+sauvegarde - retour en arriere sur le §2.50 etape 3 point 5. PersonnageArmureBonusCompetenceModif
+(chargepersonnage.pas) n est plus appelee nulle part (pdfpersonnage.pas) ; le malus redevient
+une simple information affichee (libelle de qualite sur la fiche armure, GetAllArmureBonusLibelle)
+que le joueur applique lui-meme. Practical/Unreliable restent donc a concevoir EN MEME TEMPS que
+la conception ci-dessous, pas separement.]
+CONCEVOIR UNE COLONNE "AVEC EQUIPEMENT" DANS LE TABLEAU COMPETENCES DU PDF. Idee de Nono,
+12/09/2026, en reponse au retrait ci-dessus : quand l equipement porte donne un malus a une
+competence, une colonne supplementaire affiche le total ajuste ; si l equipement n a pas d effet
+sur cette competence, la colonne reste vide/identique. Remplacerait l ancien Total automatique
+sans le meme risque (le joueur voit les deux valeurs, porte ou non porte, au lieu d un seul
+chiffre qui suppose silencieusement que Porte est a jour). Suppose de revoir le gabarit Pdf
+(les deux, normal et Feldo2P). Practical/Unreliable (reduction/doublement du malus ARMOB d une
+piece precise, RULES-QUALITY_02/RULES-DEFECT_03) et FINE/DURABLE/SHODDY/UGLY se concoivent a ce
+moment-la, pas avant : Practical/Unreliable alimenteraient cette colonne, pas un Total.
+Fine/Durable/Shoddy/Ugly restent narratifs (statut social, jet de sauvegarde contre la casse,
+casse sur double rate, malus Sociabilite conditionnel) : rien a calculer, meme dans cette
+colonne. LES 3 ACCESSOIRES NATIONS OF MANKIND (Barrel Extension +20 portee, Bayonet devient
+une Lance, Telescopic Sight ajoute Accurate/Precise) restent un chantier separe, sans rapport
+avec les competences : aucun mecanisme aujourd hui ne permet a un equipement d en modifier un
+autre.
 
 WINFABRICATION NE FILTRE PAS PAR NATURE D OBJET. Rien n empeche de monter une baionnette sur
 une hache ni de poser Durable sur une fleche : la fenetre affiche toute la liste sur n importe

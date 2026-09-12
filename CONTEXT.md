@@ -1,18 +1,13 @@
 # Warhammer — Contexte projet
 
-**Dernière mise à jour : 12/09/2026 — QUALITÉS DE FABRICATION (LIGHTWEIGHT/BULKY) BRANCHÉES,
-COMPILÉ ET VALIDÉ PAR NONO.** Périmètre réduit à ce qui a un effet numérique réel dans le
-modèle actuel (voir §2.58) : les deux qualités agissent maintenant sur l'Encombrement dans les
-deux gabarits Pdf. Deux bugs préexistants trouvés et corrigés au passage, sans rapport avec ce
-calcul : les qualités de fabrication n'étaient plus retrouvées après réouverture d'un
-personnage (colonne de grille erronée dans `XmlChargePersonnage`), et l'entête "Crafting Bonus
-Explanations" du Pdf Feldo2P s'incrustait dans le tableau Armure (coordonnée X codée en dur,
-déjà signalée au §0 depuis le 15/08/2026). Détail §2.58 et Log.txt.
-Aucun chantier ouvert pour la suite - prochain travail à choisir dans `A FAIRE.txt` (candidats :
-ancrage des contrôles, ou la suite des qualités de fabrication - Practical/Unreliable).
+**Dernière mise à jour : 12/09/2026 — CHANTIER PRACTICAL/UNRELIABLE COMMENCÉ PUIS ABANDONNÉ EN
+COURS DE ROUTE PAR NONO : LE MALUS ARMOB N'EST PLUS AJOUTÉ AUTOMATIQUEMENT AU TOTAL DE
+COMPÉTENCE.** Retour en arrière sur le §2.50 étape 3 point 5 - voir §2.59. Aucun chantier ouvert
+pour la suite - prochain travail à choisir dans `A FAIRE.txt` (candidats : ancrage des
+contrôles, ou la conception de la colonne "avec équipement" qui remplacerait ce Total, et avec
+elle Practical/Unreliable).
 
-Chantier précédent (2.57, Équipement porté/non porté) entièrement terminé le 12/09/2026 -
-détail §2.57.
+Chantier précédent (2.58, Lightweight/Bulky) entièrement terminé le 12/09/2026 - détail §2.58.
 
 ---
 
@@ -7039,6 +7034,63 @@ suppose de distinguer par pièce, alors que `PersonnageArmureBonusModificateur` 
 aujourd'hui toutes les qualités ARMOB de tout l'équipement porté sans distinction) ; Fine/
 Durable/Shoddy/Ugly (narratifs, rien à calculer) ; les 3 accessoires Nations of Mankind
 (portée d'arme, qualités accordées — mécanisme à inventer).
+
+---
+
+### 2.59 Practical/Unreliable : chantier commencé puis abandonné en cours de route — retour en arrière sur le malus ARMOB automatique (12/09/2026)
+
+**Origine.** Chantier choisi par Nono parmi les candidats du §2.58. Problème technique
+identifié avant de coder (conforme au §2.58) : réduire/doubler le malus ARMOB d'UNE pièce
+précise suppose de distinguer par pièce, alors que `PersonnageArmureBonusCompetenceModif`
+(chargepersonnage.pas, branchée depuis le §2.50) aplatissait les qualités de tout l'équipement
+porté en une seule liste (`PersonnageArmureQualites`) sans garder le lien pièce↔qualité.
+Conception discutée et validée avec Nono avant de coder : boucler pièce par pièce (même moule
+que `PersonnageArmureBonusTalent`, déjà écrit ainsi), réduire de 10 (plancher 0) si la pièce
+porte Practical, doubler si elle porte Unreliable.
+
+**Implémenté puis entièrement annulé.** Les 4 étapes ont été codées et compilées (lazbuild, 0
+erreur à chaque étape) : `Modifier` de `RULES-QUALITY_02`/`RULES-DEFECT_03` dans
+`BOOK_RULESBOOK.Xml`, constantes `FabricationPractical`/`FabricationUnreliable`
+(`chargeconstantes.pas`), `FabricationEstPractical`/`FabricationEstUnreliable`
+(`chargefabrication.pas`, même moule que `FabricationEstBulky`), et la boucle pièce par pièce
+dans `PersonnageArmureBonusCompetenceModif`.
+
+**En proposant le test à Nono, un bug préexistant est apparu en le cherchant** : la boucle
+pièce par pièce (comme l'ancienne version aplatie qu'elle remplaçait) ne filtrait pas sur
+`PersonnageEquipement.Porte` — le malus ARMOB (ex. Stealth du Mail Chausses) était donc compté
+sur TOUTE pièce possédée, portée ou non, contrairement à la Protection et l'Encombrement
+(corrigés au §2.57). Un premier correctif (ajout du filtre `Porte`) a été codé et compilé.
+
+**Nono a alors arrêté le chantier, pour une raison de fond plutôt qu'un détail d'implémentation** :
+le malus ARMOB dépend de la pièce étant PORTÉE au moment du jet, un état trop volatile (une
+armure se retire en ville, par exemple) pour être intégré silencieusement dans un total figé sur
+la fiche — que ce filtre soit correct ou non ne change rien au problème. Décision : revenir en
+arrière sur le §2.50 étape 3 point 5 (qui avait transformé ce malus, jusque-là décoratif, en une
+vraie soustraction du Total) plutôt que de continuer à l'automatiser.
+
+**Fait :**
+- Tout le code du jour (Practical/Unreliable, ci-dessus) annulé par `git checkout` — aucune
+  trace dans les sources, le mécanisme n'étant plus appelé nulle part une fois le point suivant
+  fait.
+- `pdfpersonnage.pas` (`PdfPersonnageCompetence`, seul appelant) : retrait de la ligne
+  `Res.Total := Res.Total + PersonnageArmureBonusCompetenceModif(...)`. Le malus ARMOB
+  redevient une information affichée (libellé de qualité sur la fiche armure,
+  `GetAllArmureBonusLibelle`) que le joueur applique lui-même au jet, comme avant le §2.50.
+  `PersonnageArmureBonusCompetenceModif` (chargepersonnage.pas) n'a plus d'appelant mais n'a
+  pas été supprimée — décision de garder ou non le code mort renvoyée à Nono, une future
+  conception de colonne "avec équipement" (ci-dessous) pouvant en réutiliser tout ou partie.
+- **Compilé (lazbuild, 0 erreur)** à chaque étape, y compris le retrait final.
+
+**Idée de conception capturée pour la suite (Nono), pas commencée : une colonne "avec
+équipement" dans le tableau Compétences du Pdf**, affichant le total ajusté quand l'équipement
+porté donne un malus (colonne vide/identique sinon) - remplacerait le Total automatique sans le
+même risque, le joueur voyant les deux valeurs au lieu d'un seul chiffre qui suppose
+silencieusement que `Porte` est à jour. Suppose de revoir les deux gabarits Pdf. Practical/
+Unreliable et la question du code mort ci-dessus se trancheront à ce moment, pas avant - voir
+`A FAIRE.txt`.
+
+**Chantier suivant : à définir avec Nono — candidats dans `A FAIRE.txt` (ancrage des contrôles,
+conception de la colonne "avec équipement").**
 
 ---
 
