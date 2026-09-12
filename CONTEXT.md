@@ -1,25 +1,28 @@
 # Warhammer — Contexte projet
 
-**Dernière mise à jour : 12/09/2026 — FILTRE PAR LIVRE AJOUTÉ SUR WINTALENT ET
-WINCOMPETENCE, TERMINÉ ET VALIDÉ PAR NONO (§2.69).** Suite du filtrage par livre de
-WinPersonnage (§2.66) : les deux fenêtres catalogue qui n'avaient encore aucun filtre en
-héritent, même mécanisme que WinWeapon/WinArmor/WinSpell. WinFabrication reste sans
-notion de livre (`A FAIRE.txt`).
+**Dernière mise à jour : 12/09/2026 — ANCRAGE DES CONTRÔLES (WINPERSONNAGE) : SYMPTÔME
+RÉSIDUEL SUR CHECKBOXQUICKARMOR/BOUTONS ÉQUIPEMENT INVESTIGUÉ ET FERMÉ (§2.64).** Nono a
+signalé que `CheckBoxQuickArmor` et les boutons Arme/Armure/Fabrication/Delete/Sort/Porte
+semblaient sauter pendant le redimensionnement de la fenêtre (jamais au clic Xp/Calcul) - et
+avait remarqué, à juste titre, que les onglets Corruption/Mutations n'ont jamais ce défaut
+car ils sont hors de `AjustePositionTables` (jamais recalculés). `ScaleDpi=false` ajouté par
+précaution aux 16 appels d'`AdjustGridColumnsWidth` de la fonction (même correctif que
+`RafraichirLibellesMenu`, §2.8) - **sans effet sur ce symptôme, gardé quand même**. Diagnostic
+en direct (valeurs affichées pendant le drag) : le modèle reste correct pendant tout le
+redimensionnement, seul `Self.Width` bouge. **Conclusion : artefact d'affichage Windows**
+(image de la fenêtre étirée en direct tant que le vrai réaffichage, ~16 grilles à recalculer
+par tick, n'a pas rattrapé le drag) - pas un bug de positionnement, pas de correctif simple
+sans dégrader le rafraîchissement en direct. **Fermé par Nono.**
 
-Plus tôt dans la journée : lien explicite générique↔spécialisation (§2.67) appliqué et
-validé par Nono (§2.68) - nouveau champ `<Generique>` rempli automatiquement sur 592 des
-624 spécialisations (le reste n'a pas de generique '_*' identifiable, laissé sans le
-champ), tous les points de comparaison basculés dessus avec repli sur l'ancien radical si
-absent. **Validé par Nono** : personnage avec Lustria coché voit "Ranged (Blowpipe)",
-décoché il ne le voit plus.
+Plus tôt dans la journée (11-12/09/2026) : filtre par livre ajouté sur WinTalent/WinCompetence
+(§2.69), lien explicite générique↔spécialisation appliqué et validé (§2.67/§2.68) - nouveau
+champ `<Generique>` rempli automatiquement sur 592 des 624 spécialisations, tous les points de
+comparaison basculés dessus avec repli sur l'ancien radical si absent.
 
-Chantier en pause (sans changement depuis la dernière session) : **ancrage des contrôles**,
-commencé sur WinPersonnage (fenêtre principale, choix de Nono). Nono : *« je crois que je vais
-abandonner :D »* - plus profond que prévu (trois mécanismes différents en cause). État actuel
-conservé (compilé, `PageExperience` confirmé corrigé, le reste corrige de vrais bugs même
-indépendamment du redimensionnement) - détail §2.64, point de reprise en fin de section.
-WinLivre/WinCreation pas encore regardés - à voir s'ils ont le même moteur de positionnement
-maison avant de décider de leur approche.
+Chantier **ancrage des contrôles** toujours en pause pour le reste (Nono : *« je crois que je
+vais abandonner :D »*) - seul le symptôme ci-dessus a été rouvert et refermé. WinLivre/
+WinCreation pas encore regardés - à voir s'ils ont le même moteur de positionnement maison
+avant de décider de leur approche. Point de reprise complet en fin de §2.64.
 
 ---
 
@@ -7384,6 +7387,41 @@ vertical, seulement horizontal). D'autres décrochages du même type que ceux tr
 peuvent rester ailleurs sur la fenêtre, non testés. WinLivre/WinCreation n'ont pas été
 regardés du tout - à vérifier s'ils ont le même genre de moteur maison avant de choisir leur
 approche (`A FAIRE.txt`).
+
+**Reprise du 12/09/2026 - symptôme résiduel signalé par Nono, fermé.** Nono a rouvert la
+session sur un symptôme précis : `CheckBoxQuickArmor` et les boutons `ButtonArme`/`Armure`/
+`Fabrication`/`Delete`/`Sort`/`Porte` semblent "sauter" vers la droite puis se repositionner
+pendant le redimensionnement (rappetissement : passage visible **à l'intérieur** de
+`TabEquipement`) - uniquement au redimensionnement, jamais au clic sur les cases Xp/Calcul.
+Nono avait déjà remarqué que `StringGridCorruption`/`TabMutation` (onglets Corruption/
+Mutations de `PageExperience`) n'ont jamais ce défaut - hypothèse juste, confirmée : ces deux
+grilles ne sont référencées **nulle part** dans `AjustePositionTables` (ni `AdjustGridColumnsWidth`,
+ni positionnement), donc jamais recalculées, contrairement à toutes les autres grilles de la
+fonction.
+
+Deux pistes explorées pour le symptôme lui-même :
+1. **`ScaleDpi=false` ajouté aux 16 appels d'`AdjustGridColumnsWidth` de `AjustePositionTables`**
+   (même paramètre, même anti-motif que `RafraichirLibellesMenu`, §2.8 : `Grid.ScaleFormToDesign(96)`
+   rescale la fenêtre PROPRIÉTAIRE entière à chaque appel, cumulatif si rappelé sans repartir
+   d'un état neuf - or `AjustePositionTables` est rappelée à chaque tick de resize). Compilé,
+   **testé par Nono : échec, effet identique**. Gardé quand même (correctif légitime en soi,
+   même s'il n'explique pas ce symptôme précis) - pas de retour arrière.
+2. **Diagnostic en direct** : `Self.Caption` affichant `Self.Width`/`TabEquipement.Left`/
+   `.Width`/`ButtonArme.Left`/`CheckBoxQuickArmor.Left` en temps réel pendant le drag (retiré
+   après usage, ne pas réintroduire tel quel). **Résultat de Nono : seul `Self.Width` bouge**,
+   les quatre autres valeurs restent fixes tout du long du redimensionnement - le modèle (les
+   propriétés `.Left`/`.Width` réellement utilisées par `AjustePositionTables`) est donc
+   correct en permanence pendant le drag.
+
+**Conclusion, fermée par Nono le 12/09/2026 : artefact d'affichage Windows, pas un bug de
+positionnement.** Les valeurs stables pendant le drag excluent un problème de calcul côté
+application. L'explication retenue : pendant un redimensionnement en direct, Windows étire
+une image de la fenêtre en temps réel tant que le vrai réaffichage n'a pas suivi -
+`AjustePositionTables` recalcule ~16 grilles (boucles `AutoSizeColumn`) à chaque tick de
+souris, assez de travail pour prendre un peu de retard sur le drag, d'où l'impression de saut
+puis de repositionnement une fois le vrai calcul rattrapé. Pas de correctif simple côté appli
+sans dégrader le rafraîchissement en direct (ne recalculer qu'au relâchement de la souris,
+écarté par Nono - contrepartie jugée pire que le symptôme). **Fermé tel quel.**
 
 ---
 

@@ -4125,21 +4125,29 @@ procedure TWinPersonnages.AjustePositionTables();
     // testant l'ancrage le 12/09/2026 (Nono : "meme sans Anchors, ca bouge"). Corrige en
     // passant une hauteur fixe, largement superieure au contenu de ces grilles, plutot que 0 -
     // la marge ascenseur ne peut alors plus jamais se declencher au fil d'un redimensionnement.
-    AdjustGridColumnsWidth(TabAttribut, 9999, false, false, false, 0, 0, ssnone);
-    AdjustGridColumnsWidth(TabTalent, 9999, false, false);
-    AdjustGridColumnsWidth(TabCarriere, 9999, false, false);
-    AdjustGridColumnsWidth(TabCompetence, 9999, false, false);
-    AdjustGridColumnsWidth(TabNiveau, 9999, false, false);
-    AdjustGridColumnsWidth(TabAvancement, 9999, false, false);
-    AdjustGridColumnsWidth(TabExperience, 9999, false, false);
-    AdjustGridColumnsWidth(TabEquipement, 9999, false, false);
-    AdjustGridColumnsWidth(TabAugmentationAttribut, PageExperience.Height - 40, false, false);
-    AdjustGridColumnsWidth(TabAugmentationCompetence, PageExperience.Height - 40, false, false);
-    AdjustGridColumnsWidth(TabAugmentationTalent, PageExperience.Height - 40, false, false);
-    AdjustGridColumnsWidth(TabHistorique, PageExperience.Height - 40, false, false);
-    AdjustGridColumnsWidth(TabSort, PageExperience.Height - 40, false, false);
-    AdjustGridColumnsWidth(TabLivre, PageExperience.Height - 40, false, false);
-    AdjustGridColumnsWidth(TabAugmentationMjXp, PageExperience.Height - 40, false, false);
+    // ScaleDpi=false sur les 16 appels de cette fonction (meme correctif que RafraichirLibellesMenu,
+    // CONTEXT.md 2.8) : AdjustGridColumnsWidth appelle Grid.ScaleFormToDesign(96), qui remet a
+    // l'echelle DPI la fenetre PROPRIETAIRE ENTIERE a chaque appel - inoffensif une fois au
+    // demarrage, cumulatif si rappele sans repartir d'un etat neuf. Garde par precaution (meme
+    // anti-motif que 2.8) mais N'EST PAS la cause du saut de CheckBoxQuickArmor/boutons
+    // equipement au redimensionnement signale par Nono le 12/09/2026 - diagnostic en direct
+    // (CONTEXT.md 2.64) : Self.Width est la seule valeur qui bouge pendant le drag, tout le
+    // reste (TabEquipement, boutons) reste fixe. Artefact d'affichage Windows, ferme tel quel.
+    AdjustGridColumnsWidth(TabAttribut, 9999, false, false, false, 0, 0, ssnone, false);
+    AdjustGridColumnsWidth(TabTalent, 9999, false, false, true, 0, 0, ssautoboth, false);
+    AdjustGridColumnsWidth(TabCarriere, 9999, false, false, true, 0, 0, ssautoboth, false);
+    AdjustGridColumnsWidth(TabCompetence, 9999, false, false, true, 0, 0, ssautoboth, false);
+    AdjustGridColumnsWidth(TabNiveau, 9999, false, false, true, 0, 0, ssautoboth, false);
+    AdjustGridColumnsWidth(TabAvancement, 9999, false, false, true, 0, 0, ssautoboth, false);
+    AdjustGridColumnsWidth(TabExperience, 9999, false, false, true, 0, 0, ssautoboth, false);
+    AdjustGridColumnsWidth(TabEquipement, 9999, false, false, true, 0, 0, ssautoboth, false);
+    AdjustGridColumnsWidth(TabAugmentationAttribut, PageExperience.Height - 40, false, false, true, 0, 0, ssautoboth, false);
+    AdjustGridColumnsWidth(TabAugmentationCompetence, PageExperience.Height - 40, false, false, true, 0, 0, ssautoboth, false);
+    AdjustGridColumnsWidth(TabAugmentationTalent, PageExperience.Height - 40, false, false, true, 0, 0, ssautoboth, false);
+    AdjustGridColumnsWidth(TabHistorique, PageExperience.Height - 40, false, false, true, 0, 0, ssautoboth, false);
+    AdjustGridColumnsWidth(TabSort, PageExperience.Height - 40, false, false, true, 0, 0, ssautoboth, false);
+    AdjustGridColumnsWidth(TabLivre, PageExperience.Height - 40, false, false, true, 0, 0, ssautoboth, false);
+    AdjustGridColumnsWidth(TabAugmentationMjXp, PageExperience.Height - 40, false, false, true, 0, 0, ssautoboth, false);
 
     // Ligne 2
        // Colonne données générique
@@ -4255,10 +4263,10 @@ procedure TWinPersonnages.AjustePositionTables();
     ImageSheetXp.Left         := ToggleBoxDroite.Left;
     ImageSheetXp.Width        := Self.Width - ToggleBoxDroite.Left;
     ImageSheetXp.Height       := Self.Height;
-    // Meme correctif que plus haut (MaxHeight fixe au lieu de 0/Form.Height) - ce second
-    // appel, deja en doublon connu (A FAIRE.txt), retomberait sinon sur la meme cause du
-    // decalage au fil du redimensionnement pour le PROCHAIN appel de AjustePositionTables.
-    AdjustGridColumnsWidth(TabCompetence, 9999, false, false);
+    // Meme correctif que plus haut (MaxHeight fixe au lieu de 0/Form.Height, ScaleDpi=false) -
+    // ce second appel, deja en doublon connu (A FAIRE.txt), retomberait sinon sur la meme cause
+    // du decalage au fil du redimensionnement pour le PROCHAIN appel de AjustePositionTables.
+    AdjustGridColumnsWidth(TabCompetence, 9999, false, false, true, 0, 0, ssautoboth, false);
 
   end;
 

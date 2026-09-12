@@ -3400,3 +3400,29 @@ Reste hors perimetre : WinFabrication n a toujours aucune notion de livre dans s
 de donnee - chantier plus lourd, voir A FAIRE.txt.
 Fichiers modifies : wincompetence.pas, wincompetence.lfm, wintalent.pas, wintalent.lfm,
 A FAIRE.txt, CONTEXT.md.
+
+12/09/2026 - ANCRAGE DES CONTROLES (WINPERSONNAGE) : SYMPTOME RESIDUEL SUR CHECKBOXQUICKARMOR
+ET BOUTONS EQUIPEMENT INVESTIGUE ET FERME. Nono a signale, en reprenant le chantier mis en
+pause plus tot dans la journee (CONTEXT.md 2.64) : CheckBoxQuickArmor et les boutons Arme/
+Armure/Fabrication/Delete/Sort/Porte semblent sauter vers la droite puis se repositionner
+pendant le redimensionnement de la fenetre (au rapetissement, passage visible a l interieur de
+TabEquipement) - jamais au clic sur les cases Xp/Calcul. Nono avait aussi remarque que les
+onglets Corruption/Mutations n ont jamais ce defaut - hypothese confirmee : StringGridCorruption
+et TabMutation ne sont references nulle part dans AjustePositionTables, jamais recalcules,
+contrairement aux autres grilles de la fonction.
+Piste 1 : ScaleDpi=false ajoute aux 16 appels d AdjustGridColumnsWidth de AjustePositionTables
+(meme anti-motif que RafraichirLibellesMenu, CONTEXT.md 2.8 : Grid.ScaleFormToDesign(96)
+rescale toute la fenetre proprietaire a chaque appel, cumulatif si rappele sans repartir d un
+etat neuf - or AjustePositionTables est rappelee a chaque tick de resize). Compile, teste par
+Nono : echec, effet identique. Garde quand meme (correctif legitime en soi), pas de retour
+arriere.
+Piste 2 : diagnostic temporaire (Self.Caption affichant Self.Width/TabEquipement.Left/.Width/
+ButtonArme.Left/CheckBoxQuickArmor.Left en direct pendant le drag, retire apres usage). Resultat
+de Nono : seul Self.Width bouge, les quatre autres valeurs restent fixes tout du long - le
+modele est donc correct en permanence pendant le redimensionnement.
+Conclusion, fermee par Nono : artefact d affichage Windows (image de la fenetre etiree en
+direct tant que le vrai reaffichage, ~16 grilles a recalculer par tick, n a pas rattrape le
+drag), pas un bug de positionnement. Pas de correctif simple sans degrader le rafraichissement
+en direct (ne recalculer qu au relachement de la souris, ecarte par Nono).
+Compile (lazbuild, 0 erreur) a chaque etape, y compris apres retrait du diagnostic.
+Fichiers modifies : winpersonnage.pas, A FAIRE.txt, CONTEXT.md.

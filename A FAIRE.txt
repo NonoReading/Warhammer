@@ -259,9 +259,20 @@ Anchors natif/positionnement en dur sur TabEquipement et 6 boutons, ButtonPorte 
 cascade, MaxHeight=0 tirant sur Form.Height EN DIRECT pendant le resize). Compile, jamais
 entierement revalide par Nono a l ecran depuis le dernier correctif - etat garde tel quel
 (vrais bugs, utiles meme hors resize), pas de retour arriere.
-Point de reprise si ce chantier rouvre : les grilles ne s agrandissent pas encore reellement
-(dimensionnees a leur contenu, seul leur plafond PageExperience.Height peut suivre - et
-PageExperience lui-meme n a pas encore d ancrage/calcul vertical). D autres decrochages du
+SYMPTOME RESIDUEL FERME LE 12/09/2026 (CONTEXT.md 2.64) : CheckBoxQuickArmor et les boutons
+Arme/Armure/Fabrication/Delete/Sort/Porte semblaient sauter puis se repositionner pendant le
+redimensionnement (pas au clic Xp/Calcul). ScaleDpi=false ajoute par precaution sur les 16
+appels d AdjustGridColumnsWidth de AjustePositionTables (meme anti-motif que RafraichirLibellesMenu,
+CONTEXT.md 2.8), garde car legitime mais sans effet sur ce symptome. Diagnostic en direct
+(valeurs affichees dans la barre de titre pendant le drag) : Self.Width est la seule valeur qui
+bouge, TabEquipement/ButtonArme/CheckBoxQuickArmor restent fixes tout du long - le modele est
+donc correct pendant le drag. Conclusion : artefact d affichage Windows (image de la fenetre
+etiree en direct tant que le vrai reaffichage, plus lent avec ~16 grilles a recalculer par
+tick, n a pas rattrape), pas un bug de positionnement. Accepte tel quel par Nono, pas de piste
+simple cote appli (ralentirait le retour a l ecran pendant tout le drag pour le supprimer).
+Point de reprise si ce chantier rouvre un jour : les grilles ne s agrandissent pas encore
+reellement (dimensionnees a leur contenu, seul leur plafond PageExperience.Height peut suivre -
+et PageExperience lui-meme n a pas encore d ancrage/calcul vertical). D autres decrochages du
 meme genre que ceux trouves peuvent rester ailleurs sur la fenetre, non testes. WinLivre/
 WinCreation pas regardes du tout - verifier s ils ont le meme genre de moteur maison avant de
 choisir leur approche. Point d attention non verifie : le grossissement de police cumulatif du
