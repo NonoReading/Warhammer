@@ -490,6 +490,11 @@ Const
       SortCouleur                       = 'COLOR_';
       FabricationBonus                  = 'BONUS';
       FabricationMalus                  = 'MALUS';
+      // Meme convention que FabricationBonus/FabricationMalus (valeur du champ <Modifier>),
+      // mais signale en plus le cas Bulky (Rulebook p.284) : la piece reste a Enc 1 meme
+      // portee, au lieu du plancher 0 habituel. FabricationEstBulky (chargefabrication.pas)
+      // le lit. A FAIRE.txt, chantier qualites de fabrication.
+      FabricationBulky                  = 'BULKY';
       SortChaos                         = 'CHAOS_';
       // Les constantes RaceHumain/RaceElf/RaceNain/... ('SPECIE_HUMAN', 'SPECIE_ELF', ...)
       // ont été supprimées le 20/08/2026 : elles n'étaient utilisées nulle part, et la liste

@@ -3247,7 +3247,7 @@ begin
           begin
             PArme := chercheArme(PersonnageEquipement.CodeEquipement);
             TabEquipement.Cells[4, NbEquipement]   := PArme.Libelle;
-            TabEquipement.Cells[5, NbEquipement]   := PersonnageEquipement.QualiteEquipement;
+            TabEquipement.Cells[7, NbEquipement]   := PersonnageEquipement.QualiteEquipement;
             if PersonnageEquipement.Porte then
               TabEquipement.Cells[8, NbEquipement] := 'X';
           end
@@ -3255,7 +3255,7 @@ begin
           Begin
             PArmure := ChercheArmure(PersonnageEquipement.CodeEquipement);
             TabEquipement.Cells[4, NbEquipement]   := PArmure.Libelle;
-            TabEquipement.Cells[5, NbEquipement]   := PersonnageEquipement.QualiteEquipement;
+            TabEquipement.Cells[7, NbEquipement]   := PersonnageEquipement.QualiteEquipement;
             if PersonnageEquipement.Porte then
               TabEquipement.Cells[8, NbEquipement] := 'X';
           end
@@ -3263,14 +3263,14 @@ begin
           Begin
             PArmureSimplifiee := ChercheArmureSimplifiee(PersonnageEquipement.CodeEquipement);
             TabEquipement.Cells[4, NbEquipement]   := PArmureSimplifiee.Libelle;
-            TabEquipement.Cells[5, NbEquipement]   := PersonnageEquipement.QualiteEquipement;
+            TabEquipement.Cells[7, NbEquipement]   := PersonnageEquipement.QualiteEquipement;
             if PersonnageEquipement.Porte then
               TabEquipement.Cells[8, NbEquipement] := 'X';
           end
       else if TrimRight(PersonnageEquipement.TypeEquipement) = TrimRight(TypeEquipDi) then
           Begin
             TabEquipement.Cells[4, NbEquipement]   := PersonnageEquipement.CodeEquipement;
-            TabEquipement.Cells[5, NbEquipement]   := PersonnageEquipement.QualiteEquipement;
+            TabEquipement.Cells[7, NbEquipement]   := PersonnageEquipement.QualiteEquipement;
           end
       else if TrimRight(PersonnageEquipement.TypeEquipement) =TrimRight(TypeEquipSp) then
           begin

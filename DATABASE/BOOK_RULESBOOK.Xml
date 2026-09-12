@@ -16896,7 +16896,8 @@ Certain Miracles may have additional, optional, benefits for additional SL writt
 <Explanation language="ENGLISH">"Cleverly crafted for ease of carrying. Reduce Encumbrance points by 1."</Explanation>
 <Short language="ENGLISH">"Enc -1"</Short>
 <Max>"1"</Max>
-<Modifier>""</Modifier>
+<Encumbrance>"1"</Encumbrance>
+<Modifier>"BONUS"</Modifier>
 </Craftsmanship>
 <Craftsmanship id="RULES-QUALITY_02">
 <Description language="ENGLISH">"Practical"</Description>
@@ -16959,7 +16960,8 @@ Weapons used across the Empire vary according to provincial preference, religiou
 Strength Bonus is abbreviated to SB in the weapon tables."</Explanation>
 <Short language="ENGLISH">"Enc +1"</Short>
 <Max>"1"</Max>
-<Modifier>""</Modifier>
+<Encumbrance>"1"</Encumbrance>
+<Modifier>"BULKY"</Modifier>
 </Craftsmanship>
 </DATA_CRAFTMANSHIP>
 <DATA_CORRUPTION_PHYSICAL>

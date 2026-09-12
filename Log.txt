@@ -3025,3 +3025,44 @@ sauvegarde, Protection avec casques et bouclier, Encombrement, libelle du bouton
 Fichiers modifies : chargeconstantes.pas, xmlexportimport.pas, chargepersonnage.pas,
 winpersonnage.pas, winpersonnage.lfm, wincreation.pas, pdfpersonnage.pas,
 DATABASE/BOOK_RULESBOOK.Xml, DATABASE/BOOK_RULESBOOK_FRANCAIS.Xml, CONTEXT.md, A FAIRE.txt.
+
+12/09/2026 - QUALITES DE FABRICATION LIGHTWEIGHT/BULKY BRANCHEES, PLUS DEUX BUGS PREEXISTANTS
+TROUVES ET CORRIGES, COMPILE ET VALIDE PAR NONO A CHAQUE ETAPE. Suite immediate du chantier
+Porte/Non porte (entree juste au-dessus) : perimetre discute et reduit avec Nono avant de
+coder, parmi les candidats "qualites de fabrication" et "ancrage des controles". Le champ
+Modifier de DATA_CRAFTMANSHIP n etait branche sur aucun calcul (A FAIRE.txt) ; sur les 11
+qualites existantes, seules Lightweight (Enc -1) et Bulky (Enc +1, plancher 1 meme porte) ont
+un effet purement numerique qui rentre dans le calcul d Encombrement deja en place.
+3 etapes avec compilation entre chacune :
+1. chargeconstantes.pas : nouvelle constante FabricationBulky = 'BULKY'. chargefabrication.pas
+: nouvelle fonction FabricationEstBulky, meme moule que FabricationEncombrement/
+FabricationDetail. Bug trouve et corrige au passage : FabricationEncombrement comptait toute
+qualite (meme purement descriptive, Encombrement=0, comme Fine/Practical) comme un malus pour
+le libelle (Q+)/(Q-) affiche a cote de l objet - garde desormais sous condition
+Encombrement <> 0.
+2. DATABASE/BOOK_RULESBOOK.Xml : RULES-QUALITY_01 (Lightweight) et RULES-DEFECT_04 (Bulky)
+recoivent Encumbrance=1 et un Modifier (BONUS/BULKY) au lieu d etre vides.
+3. pdfpersonnage.pas, dans les DEUX gabarits (normal et Feldo2P, meme piege de duplication que
+ModifyWeapon/Porte) : la regle "Worn Items" plafonne desormais a 1 au lieu de 0 quand
+FabricationEstBulky repond vrai sur la piece.
+Bug preexistant trouve pendant le test de Nono, sans rapport avec le code ci-dessus, corrige
+dans la foulee : les qualites de fabrication n etaient plus retrouvees apres reouverture d un
+personnage. XmlChargePersonnage (winpersonnage.pas, 4 occurrences ~l.3250-3273) recopiait
+QualiteEquipement dans la colonne 5 de TabEquipement (colonne "Xp") au lieu de la colonne 7
+(liste brute des codes, cachee) - colonne que le bouton +Qualite, la sauvegarde et l affichage
+(AfficheFabrication) lisent tous. Une qualite posee puis sauvegardee disparaissait donc des la
+reouverture du fichier, et la sauvegarde suivante l effacait pour de bon. Present depuis
+longtemps (confirme par git log, sans rapport avec le chantier Porte ni avec celui-ci) -
+jamais remarque faute d avoir teste un aller-retour sauvegarde/reouverture avec une qualite
+posee. Corrige : les 4 occurrences ecrivent maintenant dans la colonne 7.
+Bug preexistant n 2, repere sur une capture Pdf Feldo envoyee par Nono apres validation de
+Lightweight/Bulky, deja signale au CONTEXT.md 0 depuis le 15/08/2026 mais jamais corrige :
+l entete "Crafting Bonus Explanations" du gabarit Feldo2P utilisait X=15 (bord de page) en
+dur au lieu de XGauche + 4 comme les deux entetes juste au-dessus dans le meme bloc - le texte
+s incrustait dans le tableau Armure a gauche au lieu de l encadre Explanations a droite.
+Corrige (pdfpersonnage.pas l.3312).
+Valide par Nono a l ecran (Lightweight/Bulky sur WinArmor, colonne (Q+) correcte) et sur le
+Pdf Feldo (alignement de l entete Crafting).
+Compile (lazbuild, 0 erreur) a chaque etape.
+Fichiers modifies : chargeconstantes.pas, chargefabrication.pas, winpersonnage.pas,
+pdfpersonnage.pas, DATABASE/BOOK_RULESBOOK.Xml, CONTEXT.md, A FAIRE.txt.

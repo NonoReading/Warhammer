@@ -243,6 +243,7 @@
         <HasResources Value="True"/>
         <ResourceBaseClass Value="Form"/>
         <UnitName Value="WinPersonnage"/>
+        <IsVisibleTab Value="True"/>
         <EditorIndex Value="6"/>
         <TopLine Value="2431"/>
         <CursorPos Y="2438"/>
@@ -503,9 +504,8 @@
         <Filename Value="xmlexportimport.pas"/>
         <IsPartOfProject Value="True"/>
         <UnitName Value="XmlExportImport"/>
-        <IsVisibleTab Value="True"/>
         <EditorIndex Value="4"/>
-        <TopLine Value="2445"/>
+        <TopLine Value="2446"/>
         <CursorPos X="23" Y="2454"/>
         <UsageCount Value="200"/>
         <Loaded Value="True"/>

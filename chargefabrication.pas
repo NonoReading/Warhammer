@@ -28,6 +28,7 @@ Var
 function ChercheFabrication(CodeFabrication :String): StructureFabrication;
 function TexteFabrication(PFabrication: StructureFabrication):String;
 Function FabricationEncombrement(ListeCode :String; Var Quality: String): Integer;
+Function FabricationEstBulky(ListeCode :String): Boolean;
 procedure FabricationDetail(ListeCode :String; var BonusItem :String; var ListeBonus :String);
 
 implementation
@@ -86,12 +87,16 @@ Function FabricationEncombrement(ListeCode :String; Var Quality: String): Intege
             if PFabrication.TypeQualite = FabricationBonus then
               begin
                 tot := tot + (PFabrication.Encombrement * (-1) );
-                Inc(BTot)
+                // Le libelle (Q+)/(Q-) ne doit reagir qu'aux qualites qui pesent
+                // reellement sur l'Encombrement - une qualite purement descriptive
+                // (Fine, Practical...), Encombrement=0, affichait (Q-) a tort avant ce
+                // garde-fou (TypeQualite vide comptait comme malus dans la boucle 'else').
+                if PFabrication.Encombrement <> 0 then Inc(BTot);
               end
             else
               begin
                 tot := tot + (PFabrication.Encombrement * (1) );
-                Dec(BTot);
+                if PFabrication.Encombrement <> 0 then Dec(BTot);
               end;
           end;
         strings.Free;
@@ -103,6 +108,29 @@ Function FabricationEncombrement(ListeCode :String; Var Quality: String): Intege
     else
       Quality := '';
     Result := Tot;
+  end;
+
+Function FabricationEstBulky(ListeCode :String): Boolean;
+  var
+    Code:         String;
+    PFabrication: StructureFabrication;
+    strings:      TStringList;
+    IndTab:       Integer;
+  begin
+    Result := False;
+    if not InList(ListeCode,',0') then
+      begin
+        strings            := TStringList.Create;
+        ExtractStrings([','], [], PChar(ListeCode), Strings);
+        for IndTab := 0 to Strings.Count -1 do
+          Begin
+            Code := ExtractStringBefore(Strings[IndTab],' ');
+            PFabrication := ChercheFabrication(Code);
+            if PFabrication.TypeQualite = FabricationBulky then
+              Result := True;
+          end;
+        strings.Free;
+      end;
   end;
 
 procedure FabricationDetail(ListeCode :String; var BonusItem :String; var ListeBonus :String);

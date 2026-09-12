@@ -1797,9 +1797,15 @@ Procedure PdfPersonnageCreation(Personnage: StructurePersonnage; BackGround: Boo
 
               // Regle "Worn Items" (Rulebook p.292) : seule une piece PORTEE voit son
               // Encombrement reduit de 1 (plancher 0) - transportee, elle compte plein pot.
+              // Exception Bulky (RULES-DEFECT_04) : la piece reste a Enc 1 meme portee,
+              // le plancher est 1 et non 0.
               EncP      := Enc;
               if PersonnageEquipement.Porte and (EncP > 0) then
-                EncP    := EncP - 1;
+                begin
+                  EncP := EncP - 1;
+                  if (EncP < 1) and FabricationEstBulky(PersonnageEquipement.QualiteEquipement) then
+                    EncP := 1;
+                end;
               EncArmure := EncArmure + EncP;
               NbLoca    := CountOccurrences(PArmure.Emplacement,',') + 1;
               if PersonnageEquipement.TypeEquipement = TypeEquipAR then
@@ -3121,9 +3127,15 @@ Procedure PdfBlocArmuresDonnees(PdfPage: TPDFPage; Personnage: StructurePersonna
 
               // Regle "Worn Items" (Rulebook p.292) : seule une piece PORTEE voit son
               // Encombrement reduit de 1 (plancher 0) - transportee, elle compte plein pot.
+              // Exception Bulky (RULES-DEFECT_04) : la piece reste a Enc 1 meme portee,
+              // le plancher est 1 et non 0.
               EncP      := Enc;
               if PersonnageEquipement.Porte and (EncP > 0) then
-                EncP    := EncP - 1;
+                begin
+                  EncP := EncP - 1;
+                  if (EncP < 1) and FabricationEstBulky(PersonnageEquipement.QualiteEquipement) then
+                    EncP := 1;
+                end;
               EncArmure := EncArmure + EncP;
               if (PersonnageEquipement.TypeEquipement = TypeEquipAR) then
                 begin
@@ -3297,7 +3309,7 @@ Procedure PdfBlocDessinExplication(PdfPage: TPDFPage; XGauche, XDroite, YHaut, Y
       begin
         Inc(NbBonus);
         Inc(NbBonus);
-        PdfPage.WriteText(15,YHaut-(NbBonus*HauteurLigne), ' ---------- ' + GetTexteLibelle('RULES-LAB_124') + ' ---------- ');
+        PdfPage.WriteText(XGauche + 4,YHaut-(NbBonus*HauteurLigne), ' ---------- ' + GetTexteLibelle('RULES-LAB_124') + ' ---------- ');
         Inc(NbBonus);
         NbLoca := CountOccurrences(FabricationBonii,',')+1;
         For IndLoca := 1 to NbLoca do

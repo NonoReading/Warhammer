@@ -279,21 +279,24 @@ Lien avec le champ OFFICIAL existant : le disclaimer est justement ce qui permet
 CONFIRMER le statut officiel ou fan d un livre, aujourd hui saisi sur faisceau d indices
 (cas ouvert de Nations of Mankind, saisi OFFICIAL=2 a confirmer).
 
-BRANCHER LE CALCUL DES QUALITES DE FABRICATION. Constate le 04/09/2026 en saisissant les
-accessoires d arme de Nations of Mankind. La table DATA_CRAFTMANSHIP est chargee, la fenetre
-WinFabrication l affiche, le bouton +Qualite de WinPersonnage pose les codes sur une ligne
-d equipement et chargepersonnage.pas les sauvegarde dans la fiche. Mais le champ Modifier
-n est branche sur AUCUN calcul : FabricationDetail et FabricationEncombrement n ont pas
-d appelant, et aucun code QUALITY_ n est reference dans les fichiers de livre. Les qualites
-sont donc purement DESCRIPTIVES.
-Ce qui en depend aujourd hui : Lightweight (Enc -1), Practical (penalite d armure reduite
-d un cran), Durable et Fine, les defauts Shoddy / Ugly / Unreliable / Bulky, et les trois
-accessoires NATIO-QUALITY_01 a 03 (Barrel Extension +20 de portee, Bayonet, Telescopic Sight
-qui ajoute Accurate et Precise).
-A concevoir : ou le calcul s applique (fiche PDF, WinPersonnage, les deux), et comment une
-qualite prise plusieurs fois se cumule - Fine et Durable ont Max 99.
-Point d entree : FabricationDetail et FabricationEncombrement existent deja et sont ecrites ;
-c est leur point d appel qui manque, pas leur corps.
+[LIGHTWEIGHT/BULKY BRANCHES LE 12/09/2026 - voir CONTEXT.md 2.58. Les deux seules qualites a
+effet purement numerique dans le modele actuel (Encombrement) sont calculees dans les deux
+gabarits Pdf. Deux bugs prexistants trouves et corriges au passage, sans rapport avec ce
+calcul : les qualites posees n etaient plus retrouvees a la reouverture d un personnage
+(mauvaise colonne dans XmlChargePersonnage, winpersonnage.pas), et l entete Crafting Bonus
+Explanations du Pdf Feldo2P s incrustait dans le tableau Armure (coordonnee X en dur, connue
+depuis le 15/08/2026, cf. CONTEXT.md 0).]
+RESTE A BRANCHER SUR LES QUALITES DE FABRICATION : PRACTICAL/UNRELIABLE, FINE/DURABLE/SHODDY/
+UGLY, LES 3 ACCESSOIRES. Practical/Unreliable visent en realite les malus ARMOB deja calcules
+(PersonnageArmureBonusCompetenceModif, chargepersonnage.pas l.1804, branche depuis le 2.50) -
+pas une penalite d armure a inventer. Mais reduire/doubler leur magnitude suppose de savoir
+QUELLE piece precise porte la qualite, alors que la fonction actuelle scanne toutes les
+qualites ARMOB de tout l equipement porte sans distinguer par piece - a concevoir avec Nono le
+jour ou le besoin se presente. Fine/Durable/Shoddy/Ugly restent narratifs (statut social, jet
+de sauvegarde contre la casse, casse sur double rate, malus Sociabilite conditionnel) : rien a
+calculer sur la fiche. Les 3 accessoires Nations of Mankind (Barrel Extension +20 portee,
+Bayonet devient une Lance, Telescopic Sight ajoute Accurate/Precise) demandent un mecanisme
+neuf, rien aujourd hui ne permet a un equipement d en modifier un autre.
 
 WINFABRICATION NE FILTRE PAS PAR NATURE D OBJET. Rien n empeche de monter une baionnette sur
 une hache ni de poser Durable sur une fleche : la fenetre affiche toute la liste sur n importe

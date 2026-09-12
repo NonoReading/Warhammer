@@ -1,14 +1,18 @@
 # Warhammer — Contexte projet
 
-**Dernière mise à jour : 12/09/2026 — ÉQUIPEMENT PORTÉ/NON PORTÉ TERMINÉ, COMPILÉ ET VALIDÉ PAR
-NONO.** Nouveau champ `Porte` sur chaque ligne d'équipement (persisté en XML), colonne + bouton
-dédié dans `TabEquipement`, Protection (Points d'Armure, bonus bouclier) et Encombrement des
-armures désormais gardés par cet état, dans les deux gabarits Pdf. Détail §2.57 et Log.txt.
+**Dernière mise à jour : 12/09/2026 — QUALITÉS DE FABRICATION (LIGHTWEIGHT/BULKY) BRANCHÉES,
+COMPILÉ ET VALIDÉ PAR NONO.** Périmètre réduit à ce qui a un effet numérique réel dans le
+modèle actuel (voir §2.58) : les deux qualités agissent maintenant sur l'Encombrement dans les
+deux gabarits Pdf. Deux bugs préexistants trouvés et corrigés au passage, sans rapport avec ce
+calcul : les qualités de fabrication n'étaient plus retrouvées après réouverture d'un
+personnage (colonne de grille erronée dans `XmlChargePersonnage`), et l'entête "Crafting Bonus
+Explanations" du Pdf Feldo2P s'incrustait dans le tableau Armure (coordonnée X codée en dur,
+déjà signalée au §0 depuis le 15/08/2026). Détail §2.58 et Log.txt.
 Aucun chantier ouvert pour la suite - prochain travail à choisir dans `A FAIRE.txt` (candidats :
-qualités de fabrication, ancrage des contrôles).
+ancrage des contrôles, ou la suite des qualités de fabrication - Practical/Unreliable).
 
-Chantier précédent (2.56, fonction dédiée Dépense/Restante Xp) entièrement terminé le
-12/09/2026 - détail §2.56.
+Chantier précédent (2.57, Équipement porté/non porté) entièrement terminé le 12/09/2026 -
+détail §2.57.
 
 ---
 
@@ -1340,12 +1344,12 @@ compilation et comparé visuellement à l'original — rendu identique)** :
   `var` principal (devenus inutilisés) ; `LocData` gardé (reréutilisé plus loin dans
   une boucle Métier sans rapport) ; `DessinHauteurExl` gardé (passé en paramètre
   `HauteurLigne` à l'appel de `PdfBlocDessinExplication`, donc toujours en usage).
-  **Incohérence pré-existante signalée à Nono, non corrigée** : l'entête de la section
-  Fabrication utilise un `X=15` en dur (`PdfPage.WriteText(15, ...)`) au lieu de
-  `XGauche + 4` comme les entêtes Armures/Armes et comme toutes les lignes de détail
-  des trois sections (y compris celles de Fabrication elle-même) — désalignement
-  visuel préservé exactement tel quel, avec un commentaire dans le code signalant le
-  problème. Poussé le 15/08/2026, pas encore testé/compilé par Nono.
+  **Incohérence pré-existante signalée à Nono, CORRIGÉE le 12/09/2026 (§2.58)** : l'entête de
+  la section Fabrication utilisait un `X=15` en dur (`PdfPage.WriteText(15, ...)`) au lieu de
+  `XGauche + 4` comme les entêtes Armures/Armes et comme toutes les lignes de détail des trois
+  sections — désalignement resté invisible du 15/08/2026 jusqu'à ce que Nono régénère un PDF
+  Feldo avec une pièce à qualité de fabrication et voie le texte s'incruster dans le tableau
+  Armure. Voir §2.58 pour le détail.
 
 **Nettoyage variables inutilisées** : un passage de compilation du 15/08/2026 a
 remonté plusieurs "Note: Local variable ... not used" dans
@@ -6970,6 +6974,71 @@ Fichiers modifiés : `chargeconstantes.pas`, `xmlexportimport.pas`, `chargeperso
 
 **Chantier suivant : à définir avec Nono — candidats dans `A FAIRE.txt` (qualités de
 fabrication, ancrage des contrôles).**
+
+---
+
+### 2.58 Qualités de fabrication : Lightweight/Bulky branchées, deux bugs préexistants trouvés et corrigés — terminé (12/09/2026)
+
+**Origine.** Chantier choisi par Nono parmi les candidats du §2.57. Périmètre discuté et
+réduit avec Nono avant de coder : le champ `Modifier` de `DATA_CRAFTMANSHIP` n'était branché
+sur AUCUN calcul (`A FAIRE.txt`) ; sur les 11 qualités existantes, seules Lightweight (Enc -1)
+et Bulky (Enc +1, plancher 1 même porté) ont un effet purement numérique qui rentre dans le
+calcul d'Encombrement déjà en place. Le reste (Practical/Unreliable sur les malus ARMOB, Fine/
+Durable/Shoddy/Ugly narratifs, les 3 accessoires Nations of Mankind) reste hors périmètre — a
+minima la pénalité de port d'armure existe déjà en réalité (`PersonnageArmureBonusCompetenceModif`,
+chargepersonnage.pas l.1804, branché depuis le §2.50), contrairement à ce qu'une première
+recherche incomplète avait laissé croire.
+
+**Implémentation, 3 étapes avec compilation entre chacune :**
+1. `chargeconstantes.pas` : nouvelle constante `FabricationBulky = 'BULKY'` (même convention que
+   `FabricationBonus`/`FabricationMalus`, ce dernier resté inutilisé). `chargefabrication.pas` :
+   nouvelle fonction `FabricationEstBulky` (même moule que `FabricationEncombrement`/
+   `FabricationDetail`, sa propre boucle sur la liste de codes). **Bug trouvé et corrigé au
+   passage** : `FabricationEncombrement` comptait TOUTE qualité (même `Encombrement=0`, donc
+   purement descriptive comme Fine/Practical) comme un malus pour le libellé `(Q+)/(Q-)` affiché
+   à côté de l'objet — `TypeQualite` vide tombait dans la branche `else`. Gardé sous condition
+   `Encombrement <> 0`.
+2. `DATABASE/BOOK_RULESBOOK.Xml` : `RULES-QUALITY_01` (Lightweight) et `RULES-DEFECT_04`
+   (Bulky) reçoivent `<Encumbrance>"1"</Encumbrance>` et un `<Modifier>` (`BONUS`/`BULKY`) au
+   lieu d'être vides. Traduction française non touchée (les tags structurels ne sont lus que
+   sur la passe anglaise, même convention que la migration Mighty Blow/Accurate Shot).
+3. `pdfpersonnage.pas`, dans les DEUX gabarits (normal et Feldo2P, même piège de duplication que
+   `ModifyWeapon`/Porté) : la règle "Worn Items" (Rulebook p.292, Enc -1 porté, plancher 0)
+   plafonne désormais à 1 au lieu de 0 quand `FabricationEstBulky` répond vrai sur la pièce.
+
+**Bug préexistant trouvé pendant le test de Nono, sans rapport avec le code ci-dessus, corrigé
+dans la foulée : les qualités de fabrication n'étaient plus retrouvées après réouverture d'un
+personnage.** `XmlChargePersonnage` (`winpersonnage.pas`, 4 occurrences ~l.3250-3273) recopiait
+`PersonnageEquipement.QualiteEquipement` dans la colonne **5** de `TabEquipement` (colonne
+"Xp") au lieu de la colonne **7** (liste brute des codes de fabrication, cachée) — colonne que
+le bouton `+Qualité` (`ButtonFabricationClick`), la sauvegarde (l.2527/5150) et l'affichage
+(`AfficheFabrication`) lisent tous. Une qualité posée puis sauvegardée disparaissait donc dès
+la réouverture du fichier (colonne 7 restée vide au chargement), et la sauvegarde suivante
+l'effaçait pour de bon. Présent depuis longtemps (confirmé par `git log`, aucun rapport avec le
+chantier Porté du §2.57 ni avec celui-ci) — jamais remarqué faute d'avoir testé un aller-retour
+sauvegarde/réouverture avec une qualité posée. Corrigé : les 4 occurrences écrivent maintenant
+dans la colonne 7.
+
+**Bug préexistant #2, repéré sur la capture PDF Feldo envoyée par Nono après validation de
+Lightweight/Bulky, déjà documenté au §0 (voir ci-dessus) mais jamais corrigé : l'entête
+"Crafting Bonus Explanations" du gabarit Feldo2P utilisait `X=15` (bord de page) en dur au lieu
+de `XGauche + 4` comme les deux entêtes juste au-dessus dans le même bloc — le texte
+s'incrustait dans le tableau Armure à gauche au lieu de l'encadré Explanations à droite.**
+Corrigé (`pdfpersonnage.pas` l.3312), même coordonnée que les entêtes Armor/Weapon Bonus
+Explanations.
+
+**Validé par Nono à l'écran** (Lightweight/Bulky sur une capture WinArmor, colonne "(Q+)"
+correcte) et sur le PDF Feldo (alignement de l'entête Crafting).
+**Compilé (lazbuild, 0 erreur) à chaque étape.**
+Fichiers modifiés : `chargeconstantes.pas`, `chargefabrication.pas`, `winpersonnage.pas`,
+`pdfpersonnage.pas`, `DATABASE/BOOK_RULESBOOK.Xml`.
+
+**Hors périmètre, laissé dans `A FAIRE.txt` pour un chantier ultérieur si Nono en a besoin :**
+Practical/Unreliable (réduire/doubler la magnitude des `Modifier` ARMOB d'UNE pièce précise —
+suppose de distinguer par pièce, alors que `PersonnageArmureBonusModificateur` scanne
+aujourd'hui toutes les qualités ARMOB de tout l'équipement porté sans distinction) ; Fine/
+Durable/Shoddy/Ugly (narratifs, rien à calculer) ; les 3 accessoires Nations of Mankind
+(portée d'arme, qualités accordées — mécanisme à inventer).
 
 ---
 
