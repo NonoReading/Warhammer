@@ -6,9 +6,9 @@ interface
 
 uses
   Classes, SysUtils, Forms, Controls, Graphics, Dialogs, ComCtrls,
-  Grids, StdCtrls, ExtCtrls, ChargeTalent, ChargeConstantes, GlobalFonts,
-  ChargeTexte, UnitCalcul, ChargeMetierTalent, ChargeMetier, WinMetier,
-  ChargeTalentCreation;
+  Grids, StdCtrls, ExtCtrls, BCButton, ChargeTalent, ChargeConstantes,
+  GlobalFonts, ChargeTexte, UnitCalcul, ChargeMetierTalent, ChargeMetier,
+  WinMetier, ChargeTalentCreation, WinFiltre;
 
 type
 
@@ -23,6 +23,7 @@ type
     AffLib: TEdit;
     AffTest: TEdit;
     AffDecrShort: TEdit;
+    ButtonFiltre: TBCButton;
     ImageWar: TImage;
     LabAttribut: TLabel;
     LabDescription1: TLabel;
@@ -37,12 +38,15 @@ type
     TabMetierTalent: TStringGrid;
     TabSpe: TStringGrid;
   TabTalent: TStringGrid;
+  procedure ButtonFiltreClick({%H-}Sender: TObject);
   procedure FormClose({%H-}Sender: TObject; var CloseAction: TCloseAction);
   procedure FormCreate({%H-}Sender: TObject);
   procedure FormKeyPress({%H-}Sender: TObject; var Key: char);
   procedure TabMetierTalentDblClick({%H-}Sender: TObject);
   procedure TabTalentDblClick({%H-}Sender: TObject);
   procedure TabTalentSelection({%H-}Sender: TObject; aCol, aRow: Integer);
+  procedure WinCharger();
+  Procedure WinVider();
 
   private
   public
@@ -50,7 +54,9 @@ type
   end;
 
 var
-  FenMetier: TWinMetiers;
+  FenMetier:    TWinMetiers;
+  FiltreLivre:  String;
+  FenFiltre:    TWinFiltre;
 
 implementation
 
@@ -59,6 +65,12 @@ implementation
 { TWintTalent }
 
 procedure TWintTalent.FormCreate(Sender: TObject);
+begin
+    FiltreLivre := SelectWinLivre;
+    WinCharger();
+end;
+
+procedure TWintTalent.WinCharger();
 var
   PTalent:   StructureTalent;
   Accord:    Boolean;
@@ -70,31 +82,40 @@ begin
 
     // on met toutes les données dans la table pour les afficher directement dans les champs
     TabTalent.RowCount     := 1;
-    TabTalent.ColCount     := 1;
+    if TabTalent.ColCount < 2 then
+      begin
+        TabTalent.ColCount     := 1;
+        GridAjouteColonne(TabTalent, GetTexteLibelle('RULES-LAB_001'));
+        GridAjouteColonne(TabTalent, GetTexteLibelle('RULES-LAB_002'), 265);
+        GridAjouteColonne(TabTalent, GetTexteLibelle('RULES-LAB_008'));
+        GridAjouteColonne(TabTalent, GetTexteLibelle('RULES-LAB_003'));
+        GridAjouteColonne(TabTalent, GetTexteLibelle('RULES-LAB_110'));
+        GridAjouteColonne(TabTalent, GetTexteLibelle('RULES-LAB_111'));
+        GridAjouteColonne(TabTalent, GetTexteLibelle('RULES-LAB_128'), 100);
+        GridAjouteColonne(TabTalent, GetTexteLibelle('RULES-LAB_001'), 100);
+        GridAjouteColonne(TabTalent, GetTexteLibelle('RULES-LAB_002'), 100);
+        GridAjouteColonne(TabTalent, GetTexteLibelle('RULES-LAB_001'), 0);
+      end;
     TabTalent.ColWidths[0] := 20;
-    GridAjouteColonne(TabTalent, GetTexteLibelle('RULES-LAB_001'));
-    GridAjouteColonne(TabTalent, GetTexteLibelle('RULES-LAB_002'), 265);
-    GridAjouteColonne(TabTalent, GetTexteLibelle('RULES-LAB_008'));
-    GridAjouteColonne(TabTalent, GetTexteLibelle('RULES-LAB_003'));
-    GridAjouteColonne(TabTalent, GetTexteLibelle('RULES-LAB_110'));
-    GridAjouteColonne(TabTalent, GetTexteLibelle('RULES-LAB_111'));
-    GridAjouteColonne(TabTalent, GetTexteLibelle('RULES-LAB_128'), 100);
-    GridAjouteColonne(TabTalent, GetTexteLibelle('RULES-LAB_001'), 100);
-    GridAjouteColonne(TabTalent, GetTexteLibelle('RULES-LAB_002'), 100);
-    GridAjouteColonne(TabTalent, GetTexteLibelle('RULES-LAB_001'), 0);
 
+    if TabMetierTalent.ColCount < 2 then
+      begin
+        TabMetierTalent.ColCount        := 1;
+        GridAjouteColonne(TabMetierTalent, GetTexteLibelle('RULES-LAB_001'), 0);
+        GridAjouteColonne(TabMetierTalent, GetTexteLibelle('RULES-LAB_006'), 250);
+        GridAjouteColonne(TabMetierTalent, GetTexteLibelle('RULES-LAB_019'), 70);
+      end;
     TabMetierTalent.RowCount        := 2;
-    TabMetierTalent.ColCount        := 1;
     TabMetierTalent.ColWidths[0]    := 20;
-    GridAjouteColonne(TabMetierTalent, GetTexteLibelle('RULES-LAB_001'), 0);
-    GridAjouteColonne(TabMetierTalent, GetTexteLibelle('RULES-LAB_006'), 250);
-    GridAjouteColonne(TabMetierTalent, GetTexteLibelle('RULES-LAB_019'), 70);
 
+    if TabSpe.ColCount < 2 then
+      begin
+        TabSpe.ColCount        := 1;
+        GridAjouteColonne(TabSpe, GetTexteLibelle('RULES-LAB_001'), 20);
+        GridAjouteColonne(TabSpe, GetTexteLibelle('RULES-LAB_006'), 250);
+      end;
     TabSpe.RowCount        := 2;
-    TabSpe.ColCount        := 1;
     TabSpe.ColWidths[0]    := 20;
-    GridAjouteColonne(TabSpe, GetTexteLibelle('RULES-LAB_001'), 20);
-    GridAjouteColonne(TabSpe, GetTexteLibelle('RULES-LAB_006'), 250);
 
     if Pos(ValeurSousCompetence, SelectWinTalent) > 0 then
       begin
@@ -114,7 +135,7 @@ begin
           Accord := false
         else
           Accord := true;
-        if Accord and (PTalent.SousTalent = false) then
+        if Accord and (PTalent.SousTalent = false) and VerifieFiltre(PTalent.Livre, FiltreLivre) then
             Begin
               Inc(IndTab);
               TabTalent.RowCount := TabTalent.RowCount + 1;
@@ -144,6 +165,7 @@ begin
     LabMetierTalent.caption   := GetTexteLibelle('RULES-LAB_006');
     LabLivre.caption          := GetTexteLibelle('RULES-LAB_128');
     LabSpe.caption            := GetTexteLibelle('RULES-LAB_078');
+    ButtonFiltre.Caption      := GetTexteLibelle('RULES-LAB_133');
 
     if SelectWinTalent <> '' then
      begin
@@ -157,6 +179,28 @@ begin
     TabTalentSelection(TabTalent, 1, 1);
     KeyPreview := true;
 end;
+
+Procedure TWintTalent.WinVider();
+  begin
+      TabTalent.Clear;
+      TabTalent.RowCount:= 1;
+      AffDescription.Clear;
+  end;
+
+procedure TWintTalent.ButtonFiltreClick(Sender: TObject);
+  begin
+    SelectWinLivre      := FiltreLivre;
+    WinFiltreAppelant   := ConstXmlTalent;
+    FenFiltre           := TWinFiltre.Create(Application);
+    FenFiltre.Position  := poOwnerFormCenter;
+    FenFiltre.ShowModal;
+    if (ChoixWinLivre <> FiltreLivre) then
+     Begin
+       FiltreLivre := ChoixWinLivre;
+       WinVider();
+       WinCharger();
+     end;
+  end;
 
 procedure TWintTalent.FormKeyPress(Sender: TObject; var Key: char);
 begin

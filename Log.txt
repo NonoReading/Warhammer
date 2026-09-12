@@ -3382,3 +3382,21 @@ Compile (lazbuild, 0 erreur). Valide par Nono : personnage avec Lustria coche vo
 Fichiers modifies : chargeconstantes.pas, chargecompetence.pas, chargetalent.pas,
 xmlexportimport.pas, wincompetence.pas, wintalent.pas, pdfpersonnage.pas,
 chargepersonnage.pas, winpersonnage.pas, 9 BOOK_*.Xml (DATABASE), A FAIRE.txt, CONTEXT.md.
+
+12/09/2026 - FILTRE PAR LIVRE AJOUTE SUR WINTALENT ET WINCOMPETENCE, TERMINE ET VALIDE PAR
+NONO. Suite du filtrage par livre de WinPersonnage (2.66) : les deux fenetres catalogue
+qui n avaient encore aucun filtre en heritent, meme mecanisme que WinWeapon/WinArmor/
+WinSpell - variable FiltreLivre, bouton ButtonFiltre (copie du style de winweapon.lfm),
+FormCreate scinde en WinCharger()/WinVider() pour pouvoir recharger la grille au clic sans
+dupliquer la mise en colonnes (protegee par if ColCount < 2 pour cette raison),
+VerifieFiltre ajoute a la condition d affichage. ButtonFiltreClick ouvre TWinFiltre avec
+WinFiltreAppelant := ConstXmlCompetence / ConstXmlTalent (constantes deja existantes,
+aucune modification necessaire dans winfiltre.pas).
+Fait une fenetre a la fois avec compilation et validation ecran entre les deux (WinCompetence
+d abord, WinTalent ensuite), a la demande de Nono. Compile (lazbuild, 0 erreur) aux deux
+etapes. Nono ajustera lui-meme plus tard le positionnement fin du bouton sur les deux
+fenetres - laisse tel quel, non bloquant.
+Reste hors perimetre : WinFabrication n a toujours aucune notion de livre dans sa structure
+de donnee - chantier plus lourd, voir A FAIRE.txt.
+Fichiers modifies : wincompetence.pas, wincompetence.lfm, wintalent.pas, wintalent.lfm,
+A FAIRE.txt, CONTEXT.md.

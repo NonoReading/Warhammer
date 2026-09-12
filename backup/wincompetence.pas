@@ -6,9 +6,9 @@ interface
 
 uses
   Classes, SysUtils, Forms, Controls, Graphics, Dialogs, ComCtrls,
-  Grids, StdCtrls, ExtCtrls, ChargeCompetence, ChargeConstantes, GlobalFonts,
-  ChargeTexte, UnitCalcul, LCLType, ChargeMetierCompetence, ChargeMetier,
-  WinMetier;
+  Grids, StdCtrls, ExtCtrls, BCButton, ChargeCompetence, ChargeConstantes,
+  GlobalFonts, ChargeTexte, UnitCalcul, LCLType, ChargeMetierCompetence,
+  ChargeMetier, WinMetier, WinFiltre;
 
 type
 
@@ -20,6 +20,7 @@ type
     AffLib: TEdit;
     AffLivre: TEdit;
     AffSpecialisation: TEdit;
+    ButtonFiltre: TBCButton;
     ImageWar: TImage;
     LabCode: TLabel;
     LabAttribut: TLabel;
@@ -33,6 +34,7 @@ type
     TabMetierCompetence: TStringGrid;
     TabCompetence: TStringGrid;
     TabSpe: TStringGrid;
+    procedure ButtonFiltreClick({%H-}Sender: TObject);
     procedure FormClose({%H-}Sender: TObject; var CloseAction: TCloseAction);
     procedure FormCreate({%H-}Sender: TObject);
     procedure FormKeyPress({%H-}Sender: TObject; var Key: char);
@@ -40,6 +42,8 @@ type
     procedure TabCompetenceDblClick({%H-}Sender: TObject);
     procedure TabMetierCompetenceDblClick({%H-}Sender: TObject);
     procedure TabSpeDblClick({%H-}Sender: TObject);
+    procedure WinCharger();
+    Procedure WinVider();
 
   private
 
@@ -48,7 +52,9 @@ type
   end;
 
   var
-    FenMetier: TWinMetiers;
+    FenMetier:    TWinMetiers;
+    FiltreLivre:  String;
+    FenFiltre:    TWinFiltre;
 
 
 implementation
@@ -58,6 +64,12 @@ implementation
 { TWinCompetence }
 
 procedure TWinCompetence.FormCreate(Sender: TObject);
+begin
+    FiltreLivre := SelectWinLivre;
+    WinCharger();
+end;
+
+procedure TWinCompetence.WinCharger();
 var
   PCompetence:   StructureCompetence;
   IndTab:        Integer;
@@ -70,32 +82,50 @@ begin
     IndTab                 := 0;
 
     // on met toutes les données dans la table pour les afficher directement dans les champs
-    TabCompetence.ColCount     := 1;
+    if TabCompetence.ColCount < 2 then
+      begin
+        TabCompetence.ColCount     := 1;
+        GridAjouteColonne(TabCompetence, GetTexteLibelle('RULES-LAB_001'));
+        GridAjouteColonne(TabCompetence, GetTexteLibelle('RULES-LAB_002'), 265);
+        GridAjouteColonne(TabCompetence, GetTexteLibelle('RULES-LAB_002'));
+        GridAjouteColonne(TabCompetence, GetTexteLibelle('RULES-LAB_003'));
+        GridAjouteColonne(TabCompetence, GetTexteLibelle('RULES-LAB_078'));
+        GridAjouteColonne(TabCompetence, GetTexteLibelle('RULES-LAB_128'), 130);
+        GridAjouteColonne(TabCompetence, GetTexteLibelle('RULES-LAB_001'), 130);
+        GridAjouteColonne(TabCompetence, GetTexteLibelle('RULES-LAB_001'));
+      end;
     TabCompetence.ColWidths[0] := 20;
-    GridAjouteColonne(TabCompetence, GetTexteLibelle('LAB_001'));
-    GridAjouteColonne(TabCompetence, GetTexteLibelle('LAB_002'), 265);
-    GridAjouteColonne(TabCompetence, GetTexteLibelle('LAB_002'));
-    GridAjouteColonne(TabCompetence, GetTexteLibelle('LAB_003'));
-    GridAjouteColonne(TabCompetence, GetTexteLibelle('LAB_078'));
-    GridAjouteColonne(TabCompetence, GetTexteLibelle('LAB_128'), 130);
-    GridAjouteColonne(TabCompetence, GetTexteLibelle('LAB_001'), 130);
-    GridAjouteColonne(TabCompetence, GetTexteLibelle('LAB_001'));
 
+    if TabMetierCompetence.ColCount < 2 then
+      begin
+        TabMetierCompetence.ColCount        := 1;
+        GridAjouteColonne(TabMetierCompetence, GetTexteLibelle('RULES-LAB_001'), 0);
+        GridAjouteColonne(TabMetierCompetence, GetTexteLibelle('RULES-LAB_006'), 250);
+        GridAjouteColonne(TabMetierCompetence, GetTexteLibelle('RULES-LAB_019'), 70);
+      end;
     TabMetierCompetence.RowCount        := 2;
-    TabMetierCompetence.ColCount        := 1;
     TabMetierCompetence.ColWidths[0]    := 20;
-    GridAjouteColonne(TabMetierCompetence, GetTexteLibelle('LAB_001'), 0);
-    GridAjouteColonne(TabMetierCompetence, GetTexteLibelle('LAB_006'), 250);
-    GridAjouteColonne(TabMetierCompetence, GetTexteLibelle('LAB_019'), 70);
 
+    if TabSpe.ColCount < 2 then
+      begin
+        TabSpe.ColCount        := 1;
+        GridAjouteColonne(TabSpe, GetTexteLibelle('RULES-LAB_001'), 0);
+        GridAjouteColonne(TabSpe, GetTexteLibelle('RULES-LAB_006'), 70);
+      end;
     TabSpe.RowCount        := 2;
-    TabSpe.ColCount        := 1;
     TabSpe.ColWidths[0]    := 20;
-    GridAjouteColonne(TabSpe, GetTexteLibelle('LAB_001'), 0);
-    GridAjouteColonne(TabSpe, GetTexteLibelle('LAB_006'), 70);
 
     if Pos(ValeurSousCompetence, SelectWinCompetence) > 0 then
-      SelectWinCompetence := ExtractStringBefore(SelectWinCompetence, ValeurSousCompetence) + ValeurGenerique;
+      begin
+        // Lien explicite (CONTEXT.md 2.67) prioritaire sur la deduction par radical, qui
+        // gardait le prefixe de livre de SelectWinCompetence au lieu de celui de la
+        // generique - seul repli quand <Generique> n'est pas renseigne.
+        PCompetence := ChercheCompetence(SelectWinCompetence);
+        if PCompetence.CodeGenerique <> '' then
+          SelectWinCompetence := PCompetence.CodeGenerique
+        else
+          SelectWinCompetence := ExtractStringBefore(SelectWinCompetence, ValeurSousCompetence) + ValeurGenerique;
+      end;
 
     For PCompetence in ListCompetence do
       begin
@@ -103,7 +133,7 @@ begin
           Accord := False
         else
           Accord := True;
-        if Accord and (PCompetence.SousCompetence = false) then
+        if Accord and (PCompetence.SousCompetence = false) and VerifieFiltre(PCompetence.Livre, FiltreLivre) then
             Begin
               Inc(IndTab);
               TabCompetence.RowCount := TabCompetence.RowCount + 1;
@@ -121,15 +151,16 @@ begin
     if FileExists(GetCurrentDir+ConstCheminLogo1) then
       ImageWar.Picture.LoadFromFile(GetCurrentDir+ConstCheminLogo1);
 
-    Self.Caption                := GetTexteLibelle('LAB_009');
-    Labcode.Caption             := GetTexteLibelle('LAB_001');
-    LabLib.Caption              := GetTexteLibelle('LAB_002');
-    LabAttribut.Caption         := GetTexteLibelle('LAB_008');
-    LabSpecialisation.caption   := GetTexteLibelle('LAB_078');
-    LabDescription.caption      := GetTexteLibelle('LAB_003');
-    LabMetierCompetence.caption := GetTexteLibelle('LAB_006');
-    LabLivre.caption            := GetTexteLibelle('LAB_128');
-    LabSpe.caption              := GetTexteLibelle('LAB_078');
+    Self.Caption                := GetTexteLibelle('RULES-LAB_009');
+    Labcode.Caption             := GetTexteLibelle('RULES-LAB_001');
+    LabLib.Caption              := GetTexteLibelle('RULES-LAB_002');
+    LabAttribut.Caption         := GetTexteLibelle('RULES-LAB_008');
+    LabSpecialisation.caption   := GetTexteLibelle('RULES-LAB_078');
+    LabDescription.caption      := GetTexteLibelle('RULES-LAB_003');
+    LabMetierCompetence.caption := GetTexteLibelle('RULES-LAB_006');
+    LabLivre.caption            := GetTexteLibelle('RULES-LAB_128');
+    LabSpe.caption              := GetTexteLibelle('RULES-LAB_078');
+    ButtonFiltre.Caption        := GetTexteLibelle('RULES-LAB_133');
 
     if SelectWinCompetence <> '' then
       begin
@@ -145,6 +176,28 @@ begin
 
     KeyPreview := true;
 end;
+
+Procedure TWinCompetence.WinVider();
+  begin
+      TabCompetence.Clear;
+      TabCompetence.RowCount:= 1;
+      AffDescription.Clear;
+  end;
+
+procedure TWinCompetence.ButtonFiltreClick(Sender: TObject);
+  begin
+    SelectWinLivre      := FiltreLivre;
+    WinFiltreAppelant   := ConstXmlCompetence;
+    FenFiltre           := TWinFiltre.Create(Application);
+    FenFiltre.Position  := poOwnerFormCenter;
+    FenFiltre.ShowModal;
+    if (ChoixWinLivre <> FiltreLivre) then
+     Begin
+       FiltreLivre := ChoixWinLivre;
+       WinVider();
+       WinCharger();
+     end;
+  end;
 
 procedure TWinCompetence.FormKeyPress(Sender: TObject; var Key: char);
 begin
@@ -183,7 +236,9 @@ procedure TWinCompetence.TabCompetenceAfterSelection(Sender: TObject; aCol,
     TabMetierCompetence.RowCount := 2;
     Ind := 0;
     For PMetierCompetence in ListMetierCompetence do
-      if ExtractStringBefore(PMetierCompetence.CodeCompetence,'_') = extractStringBefore(AffCode.Text,'_') then
+      // Radicaux compares SANS le prefixe de livre : une carriere d'un livre peut citer une
+      // competence generique d'un autre (meme piege que winspecialisation.pas AjouteLigne).
+      if ExtractStringBefore(CodeSansLivre(PMetierCompetence.CodeCompetence),'_') = extractStringBefore(CodeSansLivre(AffCode.Text),'_') then
         begin
           PMetier := chercheMetier(PMetierCompetence.CodeMetier);
           Inc(Ind);
@@ -202,7 +257,9 @@ procedure TWinCompetence.TabCompetenceAfterSelection(Sender: TObject; aCol,
     if Pos(ValeurGenerique, AffCode.Text) > 0 then
       begin
         For PCompetence in ListCompetence do
-          if (PCompetence.CodeCompetence <> AffCode.Text) and (ExtractStringBefore(PCompetence.CodeCompetence,ValeurSousCompetence) = ExtractStringBefore(AffCode.Text,ValeurSousCompetence)) then
+          // Meme radical SANS le livre : une specialisation (ex. LUSTR-COMPPROJ_SARBAC) peut
+          // venir d'un livre different de sa competence generique (ex. RULES-COMPPROJ_*).
+          if (PCompetence.CodeCompetence <> AffCode.Text) and (ExtractStringBefore(CodeSansLivre(PCompetence.CodeCompetence),ValeurSousCompetence) = ExtractStringBefore(CodeSansLivre(AffCode.Text),ValeurSousCompetence)) then
             begin
               Inc(Ind);
               if Ind = TabSpe.RowCount then
@@ -222,7 +279,7 @@ begin
   if ChoixWinTypeFichier <> '' then
     begin
       if TabSpe.Visible then
-        showmessage(GetTexteLibelle('MESS_034'))
+        showmessage(GetTexteLibelle('RULES-MESS_034'))
       else
         begin
           SelectWinCompetence := TabCompetence.Cells[1, TabCompetence.Row];

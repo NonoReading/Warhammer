@@ -245,7 +245,6 @@
         <HasResources Value="True"/>
         <ResourceBaseClass Value="Form"/>
         <UnitName Value="WinPersonnage"/>
-        <IsVisibleTab Value="True"/>
         <EditorIndex Value="6"/>
         <TopLine Value="2434"/>
         <CursorPos X="53" Y="2448"/>
@@ -506,9 +505,10 @@
         <Filename Value="xmlexportimport.pas"/>
         <IsPartOfProject Value="True"/>
         <UnitName Value="XmlExportImport"/>
+        <IsVisibleTab Value="True"/>
         <EditorIndex Value="4"/>
-        <TopLine Value="2446"/>
-        <CursorPos X="23" Y="2454"/>
+        <TopLine Value="2449"/>
+        <CursorPos X="44" Y="2457"/>
         <UsageCount Value="200"/>
         <Loaded Value="True"/>
       </Unit>
@@ -548,13 +548,13 @@
         <EditorIndex Value="-1"/>
         <TopLine Value="5"/>
         <CursorPos X="34" Y="11"/>
-        <UsageCount Value="142"/>
+        <UsageCount Value="144"/>
       </Unit>
       <Unit>
         <Filename Value="chargetalenteffet.pas"/>
         <IsPartOfProject Value="True"/>
         <UnitName Value="ChargeTalentEffet"/>
-        <UsageCount Value="27"/>
+        <UsageCount Value="29"/>
       </Unit>
       <Unit>
         <Filename Value="chargetalentcompetencemodif.pas"/>
@@ -562,7 +562,7 @@
         <UnitName Value="ChargeTalentCompetenceModif"/>
         <EditorIndex Value="-1"/>
         <CursorPos X="31" Y="17"/>
-        <UsageCount Value="133"/>
+        <UsageCount Value="135"/>
       </Unit>
       <Unit>
         <Filename Value="chargetalentcompetenceajoute.pas"/>
@@ -570,7 +570,7 @@
         <UnitName Value="ChargeTalentCompetenceAjoute"/>
         <EditorIndex Value="-1"/>
         <CursorPos X="43" Y="14"/>
-        <UsageCount Value="132"/>
+        <UsageCount Value="134"/>
       </Unit>
       <Unit>
         <Filename Value="winlancede.pas"/>
@@ -581,7 +581,7 @@
         <UnitName Value="WinLanceDe"/>
         <TopLine Value="44"/>
         <CursorPos X="29" Y="52"/>
-        <UsageCount Value="90"/>
+        <UsageCount Value="92"/>
         <Loaded Value="True"/>
         <LoadedDesigner Value="True"/>
       </Unit>
@@ -595,7 +595,7 @@
         <EditorIndex Value="-1"/>
         <TopLine Value="82"/>
         <CursorPos X="27" Y="94"/>
-        <UsageCount Value="62"/>
+        <UsageCount Value="64"/>
       </Unit>
       <Unit>
         <Filename Value="chargetalentattributmodif.pas"/>
@@ -694,7 +694,7 @@
         <EditorIndex Value="2"/>
         <TopLine Value="10338"/>
         <CursorPos X="11" Y="10346"/>
-        <UsageCount Value="82"/>
+        <UsageCount Value="83"/>
         <Loaded Value="True"/>
       </Unit>
       <Unit>

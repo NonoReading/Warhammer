@@ -1,15 +1,17 @@
 # Warhammer — Contexte projet
 
-**Dernière mise à jour : 12/09/2026 — FILTRAGE PAR LIVRE DANS WINPERSONNAGE TERMINÉ,
-LIEN EXPLICITE GÉNÉRIQUE↔SPÉCIALISATION (§2.67) APPLIQUÉ ET VALIDÉ PAR NONO, ANCRAGE DES
-CONTRÔLES TOUJOURS EN PAUSE.** Trois chantiers ouverts et clos dans la foulée (§2.66, §2.67,
-§2.68) : WinPersonnage respecte maintenant les livres du personnage pour les armes/armures/
-sorts/spécialités (§2.66), et la conception "lien explicite" envisagée en §2.67 pour remplacer
-la déduction par radical a finalement été appliquée le jour même sur demande de Nono (§2.68) -
-nouveau champ `<Generique>` rempli automatiquement sur 592 des 624 spécialisations (le reste
-n'a pas de generique '_*' identifiable, laissé sans le champ), tous les points de comparaison
-basculés dessus avec repli sur l'ancien radical si absent. **Validé par Nono** : personnage
-avec Lustria coché voit "Ranged (Blowpipe)", décoché il ne le voit plus.
+**Dernière mise à jour : 12/09/2026 — FILTRE PAR LIVRE AJOUTÉ SUR WINTALENT ET
+WINCOMPETENCE, TERMINÉ ET VALIDÉ PAR NONO (§2.69).** Suite du filtrage par livre de
+WinPersonnage (§2.66) : les deux fenêtres catalogue qui n'avaient encore aucun filtre en
+héritent, même mécanisme que WinWeapon/WinArmor/WinSpell. WinFabrication reste sans
+notion de livre (`A FAIRE.txt`).
+
+Plus tôt dans la journée : lien explicite générique↔spécialisation (§2.67) appliqué et
+validé par Nono (§2.68) - nouveau champ `<Generique>` rempli automatiquement sur 592 des
+624 spécialisations (le reste n'a pas de generique '_*' identifiable, laissé sans le
+champ), tous les points de comparaison basculés dessus avec repli sur l'ancien radical si
+absent. **Validé par Nono** : personnage avec Lustria coché voit "Ranged (Blowpipe)",
+décoché il ne le voit plus.
 
 Chantier en pause (sans changement depuis la dernière session) : **ancrage des contrôles**,
 commencé sur WinPersonnage (fenêtre principale, choix de Nono). Nono : *« je crois que je vais
@@ -7606,6 +7608,47 @@ manuelle) :**
 
 **Validé par Nono** : personnage avec le livre Lustria coché voit "Ranged (Blowpipe)" dans les
 spécialisations de "Ranged (Any)" ; décoché, il ne le voit plus - le cas d'origine du §2.67 fonctionne dans les deux sens.
+
+---
+
+### 2.69 Filtre par livre sur WinTalent et WinCompetence — terminé, validé par Nono (12/09/2026)
+
+**Origine.** Relevé en §2.66 : contrairement à WinWeapon/WinArmor/WinSpell, les deux
+fenêtres catalogue WinTalent et WinCompetence n'avaient ni `FiltreLivre` ni bouton
+`ButtonFiltre` - tous les talents/compétences de tous les livres s'affichaient toujours.
+Même mécanisme dupliqué à l'identique sur les deux fenêtres, une à la fois avec point de
+compilation entre les deux (validation Nono du 12/09/2026 : « oui, je valide »).
+
+**Mécanisme, identique à WinWeapon/WinArmor/WinSpell :**
+- Variable `FiltreLivre: String` + `FenFiltre: TWinFiltre` dans la section `var` de
+  l'unité (`wincompetence.pas`, `wintalent.pas`).
+- `FormCreate` réduit à `FiltreLivre := SelectWinLivre; WinCharger();` - tout le contenu
+  précédent de `FormCreate` déplacé dans une nouvelle procédure `WinCharger()`, plus
+  `WinVider()` (vide la grille avant un rechargement).
+- Mise en colonnes des trois grilles (`TabCompetence`/`TabMetierCompetence`/`TabSpe` et
+  l'équivalent Talent) protégée par `if TabXxx.ColCount < 2 then` - nécessaire parce que
+  `WinCharger()` peut désormais être rappelée plusieurs fois dans la vie du formulaire (à
+  chaque clic sur Filtre), alors qu'elle ne s'exécutait qu'une fois avant.
+- Condition d'affichage de la boucle principale étendue avec
+  `VerifieFiltre(PCompetence.Livre, FiltreLivre)` / `VerifieFiltre(PTalent.Livre, FiltreLivre)`.
+- `ButtonFiltreClick` ouvre `TWinFiltre` avec `WinFiltreAppelant := ConstXmlCompetence` /
+  `ConstXmlTalent` (constantes déjà existantes dans `chargeconstantes.pas`, réutilisées
+  telles quelles comme valeur d'appelant - aucune modification dans `winfiltre.pas` : le
+  filtre Livre s'affiche déjà par défaut pour tout appelant qui n'est ni `ConstXmlWork` ni
+  `ConstXmlSort`).
+- Bouton `ButtonFiltre: TBCButton` ajouté aux deux `.lfm`, copié du style de
+  `winweapon.lfm`, dans la zone libre au-dessus de la grille catalogue (Left=9,
+  Top=30, Height=64 ; Width=600 pour WinCompetence, Width=420 pour WinTalent - grille plus
+  étroite). Nono a prévenu que l'ajustement fin du positionnement viendrait plus tard de
+  son côté - non bloquant, laissé tel quel.
+
+**Compilé (lazbuild, 0 erreur)** après chacun des deux fichiers. **Validé par Nono à
+l'écran** sur les deux fenêtres : filtre sur un livre restreint la grille, revalider sans
+rien cocher restaure la liste complète.
+
+**Hors périmètre, reste ouvert** : WinFabrication n'a toujours aucune notion de livre
+(pas de champ `Livre` dans sa structure de données) - chantier plus lourd que les deux
+ici, voir `A FAIRE.txt`.
 
 ---
 

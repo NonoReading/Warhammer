@@ -6,11 +6,10 @@
 CORRECTIONS COURTES  (une ligne ou deux chacune)
 =========================================================================
 
-WINTALENT/WINCOMPETENCE N ONT AUCUN FILTRE PAR LIVRE (CONTEXT.md 2.66). Contrairement a
-WinWeapon/WinArmor/WinSpell, ces deux fenetres catalogue n ont ni FiltreLivre ni bouton
-Filtre - tous les talents/competences de tous les livres s affichent toujours. WinFabrication
-n a meme pas de notion de livre. Chantier a part : ajouter l infrastructure, pas juste
-appeler SelectWinLivre depuis WinPersonnage.
+WINFABRICATION N A AUCUNE NOTION DE LIVRE (CONTEXT.md 2.69). Contrairement a WinWeapon/
+WinArmor/WinSpell/WinTalent/WinCompetence (filtre par livre ajoute le 12/09/2026), la
+fenetre catalogue de fabrication n a ni champ Livre ni filtre - chantier plus lourd, la
+structure de donnee elle-meme ne porte pas le livre.
 
 LE TEST DE RADICAL DE TALENT SUPPOSE UN CODE DE 5 CARACTERES. winpersonnage.pas l.3245,
 copy(CodeSansLivre(...),1,5) : vrai pour les 868 codes en T+4 chiffres, faux pour les ids

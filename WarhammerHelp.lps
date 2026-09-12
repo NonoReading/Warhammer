@@ -8,7 +8,7 @@
       <Unit>
         <Filename Value="WarhammerHelp.lpr"/>
         <IsPartOfProject Value="True"/>
-        <EditorIndex Value="9"/>
+        <EditorIndex Value="11"/>
         <CursorPos X="37" Y="20"/>
         <UsageCount Value="200"/>
         <Loaded Value="True"/>
@@ -20,7 +20,7 @@
         <HasResources Value="True"/>
         <ResourceBaseClass Value="Form"/>
         <UnitName Value="WarhammerSource"/>
-        <EditorIndex Value="7"/>
+        <EditorIndex Value="9"/>
         <TopLine Value="524"/>
         <CursorPos X="28" Y="536"/>
         <UsageCount Value="200"/>
@@ -34,10 +34,13 @@
         <HasResources Value="True"/>
         <ResourceBaseClass Value="Form"/>
         <UnitName Value="WinCompetence"/>
-        <EditorIndex Value="-1"/>
+        <IsVisibleTab Value="True"/>
+        <EditorIndex Value="7"/>
         <TopLine Value="202"/>
         <CursorPos X="31" Y="213"/>
         <UsageCount Value="200"/>
+        <Loaded Value="True"/>
+        <LoadedDesigner Value="True"/>
       </Unit>
       <Unit>
         <Filename Value="chargecompetence.pas"/>
@@ -81,10 +84,12 @@
         <HasResources Value="True"/>
         <ResourceBaseClass Value="Form"/>
         <UnitName Value="WinTalent"/>
-        <EditorIndex Value="-1"/>
+        <EditorIndex Value="6"/>
         <TopLine Value="64"/>
         <CursorPos X="22" Y="77"/>
         <UsageCount Value="200"/>
+        <Loaded Value="True"/>
+        <LoadedDesigner Value="True"/>
       </Unit>
       <Unit>
         <Filename Value="chargemetier.pas"/>
@@ -165,7 +170,7 @@
         <HasResources Value="True"/>
         <ResourceBaseClass Value="Form"/>
         <UnitName Value="WinRaces"/>
-        <EditorIndex Value="10"/>
+        <EditorIndex Value="12"/>
         <TopLine Value="825"/>
         <CursorPos X="28" Y="841"/>
         <UsageCount Value="200"/>
@@ -245,7 +250,7 @@
         <HasResources Value="True"/>
         <ResourceBaseClass Value="Form"/>
         <UnitName Value="WinPersonnage"/>
-        <EditorIndex Value="6"/>
+        <EditorIndex Value="8"/>
         <TopLine Value="2434"/>
         <CursorPos X="53" Y="2448"/>
         <UsageCount Value="200"/>
@@ -420,7 +425,7 @@
         <Filename Value="chargepersonnage.pas"/>
         <IsPartOfProject Value="True"/>
         <UnitName Value="ChargePersonnage"/>
-        <EditorIndex Value="8"/>
+        <EditorIndex Value="10"/>
         <TopLine Value="1425"/>
         <CursorPos X="22" Y="1438"/>
         <UsageCount Value="201"/>
@@ -505,9 +510,8 @@
         <Filename Value="xmlexportimport.pas"/>
         <IsPartOfProject Value="True"/>
         <UnitName Value="XmlExportImport"/>
-        <IsVisibleTab Value="True"/>
         <EditorIndex Value="4"/>
-        <TopLine Value="2447"/>
+        <TopLine Value="2450"/>
         <CursorPos X="44" Y="2457"/>
         <UsageCount Value="200"/>
         <Loaded Value="True"/>
@@ -1234,6 +1238,12 @@
         <TopLine Value="50"/>
         <CursorPos X="40" Y="66"/>
         <UsageCount Value="11"/>
+      </Unit>
+      <Unit>
+        <Filename Value="wintalent.lfm"/>
+        <EditorIndex Value="-1"/>
+        <UsageCount Value="10"/>
+        <DefaultSyntaxHighlighter Value="LFM"/>
       </Unit>
     </Units>
     <JumpHistory HistoryIndex="23">
