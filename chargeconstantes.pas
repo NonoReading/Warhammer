@@ -495,6 +495,12 @@ Const
       // portee, au lieu du plancher 0 habituel. FabricationEstBulky (chargefabrication.pas)
       // le lit. A FAIRE.txt, chantier qualites de fabrication.
       FabricationBulky                  = 'BULKY';
+      // Modulent le malus ARMOB (PersonnageArmureBonusCompetenceModifPortee, chargepersonnage.pas)
+      // de LA piece qui porte la qualite/le defaut : Practical le reduit de 10 (plancher 0),
+      // Unreliable le double (Rulebook, DATA_CRAFTMANSHIP). FabricationEstPractical/
+      // FabricationEstUnreliable (chargefabrication.pas) les lisent. CONTEXT.md 2.59.
+      FabricationPractical               = 'PRACTICAL';
+      FabricationUnreliable              = 'UNRELIABLE';
       SortChaos                         = 'CHAOS_';
       // Les constantes RaceHumain/RaceElf/RaceNain/... ('SPECIE_HUMAN', 'SPECIE_ELF', ...)
       // ont été supprimées le 20/08/2026 : elles n'étaient utilisées nulle part, et la liste

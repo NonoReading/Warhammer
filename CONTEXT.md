@@ -1,13 +1,13 @@
 # Warhammer — Contexte projet
 
-**Dernière mise à jour : 12/09/2026 — CHANTIER PRACTICAL/UNRELIABLE COMMENCÉ PUIS ABANDONNÉ EN
-COURS DE ROUTE PAR NONO : LE MALUS ARMOB N'EST PLUS AJOUTÉ AUTOMATIQUEMENT AU TOTAL DE
-COMPÉTENCE.** Retour en arrière sur le §2.50 étape 3 point 5 - voir §2.59. Aucun chantier ouvert
-pour la suite - prochain travail à choisir dans `A FAIRE.txt` (candidats : ancrage des
-contrôles, ou la conception de la colonne "avec équipement" qui remplacerait ce Total, et avec
-elle Practical/Unreliable).
+**Dernière mise à jour : 12/09/2026 — STATUS (BRASS/SILVER/GOLD) AFFICHAIT LE CODE BRUT SUR LES
+DEUX PDF, L'ARBRE WINMETIER ET LE LIVRET DE CARRIÈRE : CORRIGÉ.** Signalé par Nono en relisant
+un Pdf - détail §2.61.
 
-Chantier précédent (2.58, Lightweight/Bulky) entièrement terminé le 12/09/2026 - détail §2.58.
+Chantier précédent (2.60, colonne "avec équipement" dans le Pdf Feldo2P) terminé et validé par
+Nono - détail §2.60. Aucun chantier ouvert pour la suite - prochain travail à choisir dans
+`A FAIRE.txt` (candidat restant : ancrage des contrôles ; l'alignement Page 2 sur la nouvelle
+marge gauche/droite de la Page 1 reste aussi à faire si besoin, voir fin §2.60).
 
 ---
 
@@ -7089,8 +7089,121 @@ silencieusement que `Porte` est à jour. Suppose de revoir les deux gabarits Pdf
 Unreliable et la question du code mort ci-dessus se trancheront à ce moment, pas avant - voir
 `A FAIRE.txt`.
 
-**Chantier suivant : à définir avec Nono — candidats dans `A FAIRE.txt` (ancrage des contrôles,
-conception de la colonne "avec équipement").**
+### 2.60 Colonne "avec équipement" (W/ Gear) dans le Pdf Feldo2P, chantier terminé et validé par Nono (12/09/2026)
+
+**Origine.** Suite du §2.59 : remplace le Total automatique abandonné (malus ARMOB dépendant
+d'un état `Porte` trop volatile pour un chiffre figé) par une colonne à part, qui n'affiche un
+total ajusté que quand l'équipement porté modifie réellement la compétence - le joueur voit les
+deux valeurs au lieu d'un seul chiffre silencieusement supposé à jour. Conception discutée et
+validée point par point avec Nono avant de coder (portée Pdf Feldo2P uniquement - le gabarit
+normal est le PDF officiel, non modifiable ; filtre `Porte` ; Practical/Unreliable réintégrés
+dans le même mouvement ; cellule vide si aucun malus/bonus, valeur ajustée sinon ; libellé
+"W/ Gear" / "Avec Éq.").
+
+**Étape 1 - qualités d'armure PORTÉE, pièce par pièce.** `PersonnageArmureQualitesPortees`
+(`chargepersonnage.pas`) : nouvelle fonction, ne boucle que sur `PersonnageEquipement.Porte =
+True` (armures normales et simplifiées) et garde le lien pièce→qualité (perdu par l'ancienne
+`PersonnageArmureQualites`, qui aplatit et compte aussi l'équipement possédé non porté).
+`PersonnageArmureQualites` elle-même n'a pas été touchée : encore utilisée telle quelle par
+`PersonnageArmureBonusModificateur` (moteur ModifArmour), dont le périmètre (possédé ou porté)
+n'était pas remis en cause ici.
+
+**Étape 2 - Practical/Unreliable réimplémenté.** `FabricationPractical`/`FabricationUnreliable`
+(`chargeconstantes.pas`) et `FabricationEstPractical`/`FabricationEstUnreliable`
+(`chargefabrication.pas`), même moule que `FabricationBulky`/`FabricationEstBulky` (§2.58).
+`BOOK_RULESBOOK.Xml` : `RULES-QUALITY_02` (Practical) et `RULES-DEFECT_03` (Unreliable)
+portent désormais `<Modifier>"PRACTICAL"</Modifier>`/`<Modifier>"UNRELIABLE"</Modifier>` - la
+traduction française n'a pas besoin d'être touchée (`ListFabrication`, `xmlexportimport.pas`,
+n'est alimentée qu'à partir du livre anglais, `LangueDef = ConstAnglais`).
+
+**Étape 3 - calcul modulé.** `PersonnageArmureBonusCompetenceModifPortee` (`chargepersonnage.pas`) :
+pour une compétence donnée, additionne le malus/bonus ARMOB (`ListArmureBonusModif`) pièce
+PORTÉE par pièce PORTÉE, puis module le sous-total de CHAQUE pièce par Practical/Unreliable
+DE CETTE MÊME PIÈCE (réduit de 10, plancher 0, si Practical ; doublé si Unreliable - Rulebook :
+"penalties for wearing it are reduced"/"penalties ... are doubled" - ne module que les
+pénalités, jamais un bonus). Ordre Practical-puis-Unreliable arbitraire si une pièce cumulait
+les deux, cas non couvert par le Rulebook et non rencontré dans les livres actuels.
+
+**Étape 4 - mise en page (`pdfpersonnage.pas`, `PdfPersonnageCreationFeldo2P`).** 7e colonne
+"W/ Gear" ajoutée à `TableauComp` (Basic Skills) et `TableauCompG` (Advanced Skills). Nouvelle
+constante `DessinDebColCompG` (12, au lieu de `DessinDebColG`=20) pour le tableau Basic -
+Advanced s'élargit naturellement à droite (son bord gauche `DessinDebColD` est inchangé, il
+gagne juste la largeur de la nouvelle colonne). Libellés bilingues ajoutés :
+`RULES-PDF_SKILLS2_GEAR` = "W/ Gear" (EN) / "Avec Éq." (FR), dans les deux Rulebooks.
+
+**Étape 5 - branchement.** `PdfPreparerRecordSetCompetencesBase` et
+`PdfPreparerRecordSetCompetencesGroupees` (passe 1, compétences déjà augmentées) alimentent le
+champ `AvecEquipement` avec `PersonnageArmureBonusCompetenceModifPortee` : vide si 0, sinon
+Total + ajustement. La passe 2 (compétences non prises, grisées) reste inchangée - pas de Total
+affiché, donc rien à ajuster.
+
+**Code mort retiré.** `PersonnageArmureBonusCompetenceModif` (`chargepersonnage.pas`, aplatie,
+non filtrée sur `Porte`, plus aucun appelant depuis le §2.59) supprimée - déclaration,
+implémentation et commentaires qui la référençaient.
+
+**Alignement Page 1 (demandé par Nono après la 1re validation).** Le décalage du tableau Basic
+Skills (12 au lieu de 20) avait décroché tous les blocs voisins de la colonne gauche. Périmètre
+choisi par Nono : Page 1 uniquement, Page 2 non touchée. Règle dégagée en lisant le code :
+`DessinFinColG`(98) et `DessinLargeurExp`(45, nom trompeur - utilisée comme bord droit ABSOLU,
+pas comme largeur) sont déjà des bords droits fixes ; il suffit de décaler les bords GAUCHES,
+tout le reste s'aligne automatiquement sans recalcul. Repointés sur `DessinDebColCompG` : Entête,
+Caractéristiques, Ambitions, Résilience/Destin, Mouvement, Expérience, Corruption. Talents
+(colonne droite, sous Advanced) élargi à droite via une nouvelle constante `DessinFinColCompD`
+(197, au lieu de `DessinFinColD`=188) pour suivre la nouvelle largeur d'Advanced Skills.
+- **Retour de Nono après capture d'écran** : bord droit de Basic Skills pas pile aligné avec
+  Ambitions (98,6 au lieu de 98 - la 7e colonne prenait par défaut la largeur standard 8,6mm).
+  Corrigé en fixant sa largeur à 8 explicitement (`TableauComp.Champs[6].Largeur`).
+- **Retour de Nono, Mouvement puis Corruption/Expérience** : leur bord droit ne suivait pas
+  (Mouvement construit par décalage+largeur, pas par bord droit absolu comme Ambitions/
+  Expérience/Corruption - sa largeur `DessinLargeurMou` est restée fixe pendant que son bord
+  gauche se décalait, d'où un manque de 8mm). Résolu en élargissant le séparateur
+  libellés/valeur interne (15→23mm dans `PdfBlocMouvement`/`PdfBlocCorruption`/
+  `PdfBlocExperience`) et `DessinLargeurMou` (22→30) : la colonne VALEUR garde exactement sa
+  largeur d'origine (10mm/7mm), tout le gain va aux libellés - même traitement appliqué aux
+  trois blocs par cohérence (Corruption et Expérience partagent le même bord droit fixe que
+  Mouvement visait).
+- **Validé par Nono par capture d'écran** ("parfait").
+
+**Compilé (lazbuild, 0 erreur)** à chaque étape.
+
+**Hors périmètre, laissé pour plus tard si besoin** : l'alignement de la Page 2 (Armure,
+Équipement, Armes, Sorts, Encombrement...) sur la nouvelle marge gauche de la Page 1 n'a pas
+été fait - Page 2 utilise encore `DessinDebColG`=20 partout, inchangé. Certains blocs Page 2
+(Armes/Sorts, largeur 200mm) sont déjà proches du bord de page et devront être revérifiés pour
+ne pas déborder si ce chantier est repris.
+
+**Chantier suivant : à définir avec Nono — candidat dans `A FAIRE.txt` (ancrage des
+contrôles).**
+
+---
+
+### 2.61 Status (Brass/Silver/Gold) affichait le code brut, corrigé (12/09/2026)
+
+**Origine.** Signalé par Nono en relisant un Pdf généré pendant le §2.60 : le champ Status de
+la fiche affichait "TIERS_BRASS 3" / "TIERS_SILVER 2" au lieu de "Brass 3" / "Silver 2" - bug
+préexistant, sans rapport avec le §2.60.
+
+**Cause.** `PMetierNiveau.SalaireMetier` (`chargemetierniveau.pas`) est chargé et réexporté
+NU depuis la balise `<Salary>` du Xml (`xmlexportimport.pas` l.614/1991, ex. `"TIERS_BRASS
+3"`), sans préfixe de livre - alors que le libellé catalogué est `RULES-TIERS_BRASS`/`SILVER`/
+`GOLD` (`chargetexte.pas`, seul livre à les définir, vérifié par recherche globale).
+`VerifieRecherche` (`chargeconstantes.pas` l.1194) exige `LivreRecherche = LivreValeur` en plus
+de l'égalité des codes - sans préfixe, la comparaison échoue et `GetTexteLibelle` replie sur le
+code brut. Même famille de bug que les "codes nus" du §2.49 (223+22+57+11+2 occurrences
+corrigées à l'époque), jamais auditée pour `SalaireMetier` jusqu'ici.
+
+**Correction, au call site plutôt que sur la donnée.** Préfixe `'RULES-'` ajouté devant
+`PMetierNiveau.SalaireMetier` à chaque appel de `GetTexteLibelle`, pas dans le chargement/
+export Xml (`xmlexportimport.pas` non touché) - `SalaireMetier` reste stocké tel qu'il est
+écrit dans le Xml, seule la RÉSOLUTION du libellé change, comme la convention établie au §2.49
+("corriger au fil de l'eau" au point d'appel, jamais en assouplissant `VerifieRecherche`).
+Quatre points d'appel touchés, tous partageant exactement le même code :
+- `pdfpersonnage.pas` l.1241 (gabarit Pdf normal, panneau Status)
+- `pdfpersonnage.pas` l.2387 (`PdfBlocEntete`, gabarit Feldo2P)
+- `winmetier.pas` l.830 (arbre des métiers, WinMetier)
+- `pdfmetier.pas` l.361 (livret de carrière)
+
+**Compilé (lazbuild, 0 erreur).** Pas encore revalidé par Nono à l'écran/au Pdf.
 
 ---
 

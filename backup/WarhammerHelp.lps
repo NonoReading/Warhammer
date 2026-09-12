@@ -49,7 +49,6 @@
         <Filename Value="chargeconstantes.pas"/>
         <IsPartOfProject Value="True"/>
         <UnitName Value="ChargeConstantes"/>
-        <IsVisibleTab Value="True"/>
         <EditorIndex Value="1"/>
         <TopLine Value="284"/>
         <CursorPos X="37" Y="300"/>
@@ -419,9 +418,10 @@
         <Filename Value="chargepersonnage.pas"/>
         <IsPartOfProject Value="True"/>
         <UnitName Value="ChargePersonnage"/>
+        <IsVisibleTab Value="True"/>
         <EditorIndex Value="7"/>
-        <TopLine Value="1411"/>
-        <CursorPos X="64" Y="1423"/>
+        <TopLine Value="1418"/>
+        <CursorPos X="25" Y="1428"/>
         <UsageCount Value="201"/>
         <Loaded Value="True"/>
       </Unit>

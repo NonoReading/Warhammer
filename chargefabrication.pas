@@ -29,6 +29,8 @@ function ChercheFabrication(CodeFabrication :String): StructureFabrication;
 function TexteFabrication(PFabrication: StructureFabrication):String;
 Function FabricationEncombrement(ListeCode :String; Var Quality: String): Integer;
 Function FabricationEstBulky(ListeCode :String): Boolean;
+Function FabricationEstPractical(ListeCode :String): Boolean;
+Function FabricationEstUnreliable(ListeCode :String): Boolean;
 procedure FabricationDetail(ListeCode :String; var BonusItem :String; var ListeBonus :String);
 
 implementation
@@ -127,6 +129,52 @@ Function FabricationEstBulky(ListeCode :String): Boolean;
             Code := ExtractStringBefore(Strings[IndTab],' ');
             PFabrication := ChercheFabrication(Code);
             if PFabrication.TypeQualite = FabricationBulky then
+              Result := True;
+          end;
+        strings.Free;
+      end;
+  end;
+
+Function FabricationEstPractical(ListeCode :String): Boolean;
+  var
+    Code:         String;
+    PFabrication: StructureFabrication;
+    strings:      TStringList;
+    IndTab:       Integer;
+  begin
+    Result := False;
+    if not InList(ListeCode,',0') then
+      begin
+        strings            := TStringList.Create;
+        ExtractStrings([','], [], PChar(ListeCode), Strings);
+        for IndTab := 0 to Strings.Count -1 do
+          Begin
+            Code := ExtractStringBefore(Strings[IndTab],' ');
+            PFabrication := ChercheFabrication(Code);
+            if PFabrication.TypeQualite = FabricationPractical then
+              Result := True;
+          end;
+        strings.Free;
+      end;
+  end;
+
+Function FabricationEstUnreliable(ListeCode :String): Boolean;
+  var
+    Code:         String;
+    PFabrication: StructureFabrication;
+    strings:      TStringList;
+    IndTab:       Integer;
+  begin
+    Result := False;
+    if not InList(ListeCode,',0') then
+      begin
+        strings            := TStringList.Create;
+        ExtractStrings([','], [], PChar(ListeCode), Strings);
+        for IndTab := 0 to Strings.Count -1 do
+          Begin
+            Code := ExtractStringBefore(Strings[IndTab],' ');
+            PFabrication := ChercheFabrication(Code);
+            if PFabrication.TypeQualite = FabricationUnreliable then
               Result := True;
           end;
         strings.Free;

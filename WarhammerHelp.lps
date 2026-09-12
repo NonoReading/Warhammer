@@ -420,8 +420,8 @@
         <UnitName Value="ChargePersonnage"/>
         <IsVisibleTab Value="True"/>
         <EditorIndex Value="7"/>
-        <TopLine Value="1412"/>
-        <CursorPos X="64" Y="1423"/>
+        <TopLine Value="1419"/>
+        <CursorPos X="25" Y="1428"/>
         <UsageCount Value="201"/>
         <Loaded Value="True"/>
       </Unit>

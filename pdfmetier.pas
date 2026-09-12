@@ -358,7 +358,9 @@ begin
             PdfPage.SetColor(clBlack,false);
             PdfTaillePolice(PdfPage, PdfFontBold, ConstPoliceCarlson+ConstPoliceGras, 10);
             PdfEcrit(PdfPage,DebutFeuille + 12, 999, PdfPositionFeuille(DebutTexte,NbLigne,NbDetail) + 0.5, PMetierNiveau.Libelle,MinPolice);
-            PdfEcrit(PdfPage,DebutFeuille + 75, 999, PdfPositionFeuille(DebutTexte,NbLigne,NbDetail) + 0.5, GetTexteLibelle(PMetierNiveau.SalaireMetier, '', ' '),MinPolice);
+            // Prefixe RULES- ajoute le 12/09/2026 - meme correctif que pdfpersonnage.pas, voir
+            // son commentaire (CONTEXT.md 2.49/2.61).
+            PdfEcrit(PdfPage,DebutFeuille + 75, 999, PdfPositionFeuille(DebutTexte,NbLigne,NbDetail) + 0.5, GetTexteLibelle('RULES-' + PMetierNiveau.SalaireMetier, '', ' '),MinPolice);
 
 
             // COMPETENCE

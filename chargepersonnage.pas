@@ -15,6 +15,7 @@ uses
   ChargeCorruptionEquipement, ChargeArmureBonusTalent,
   ChargeModificateur, ChargeTalentModificateur, ChargeCareerBonusModificateur,
   ChargeArmeModificateur, ChargeArmureBonusModificateur, ChargeCorruptionModificateur,
+  ChargeFabrication,
   XmlExportImport;
 
 Type
@@ -60,6 +61,17 @@ Type
      Porte:                 Boolean;
   end;
   TArrayPersonnageEquipement = array of StructurePersonnageEquipement;
+
+Type
+  // Une entree par qualite d'armure PORTEE, en gardant le lien vers la piece qui la porte -
+  // contrairement a PersonnageArmureQualites (liste aplatie, toute pochette possedee comptee,
+  // lien piece->qualite perdu). Necessaire pour moduler un malus par Practical/Unreliable de LA
+  // piece qui le porte (CONTEXT.md 2.59/A FAIRE.txt).
+  StructurePersonnageArmureQualitePortee = Record
+     CodeEquipement:        String;
+     CodeQualite:           String;
+  end;
+  TArrayPersonnageArmureQualitePortee = array of StructurePersonnageArmureQualitePortee;
 
 Type
   // historique de corruption : Montant positif = corruption gagnée, négatif = perdue/purifiée
@@ -298,7 +310,15 @@ Type
   // PersonnageTalentModificateur. CodeSource = CodeArmureBonus ; a appeler avec les codes
   // rendus par PersonnageArmureQualites (une entree par qualite portee, pas par piece).
   Function PersonnageArmureBonusModificateur(Personnage: StructurePersonnage; TypeModif, Cible: String; Filtre: String = ''): Integer;
-  Function PersonnageArmureBonusCompetenceModif(Personnage: StructurePersonnage; CodeCompetence: String): Integer;
+  // Qualites d'armure PORTEE, piece par piece (contrairement a PersonnageArmureQualites, qui
+  // aplatit et compte l'equipement possede non porte) - base pour moduler le malus ARMOB par
+  // Practical/Unreliable de la piece (CONTEXT.md 2.59). Meme extraction catalogue+fabrication
+  // et meme resolution des alternatives que PersonnageArmureBonusTalent.
+  Function PersonnageArmureQualitesPortees(Personnage: StructurePersonnage): TArrayPersonnageArmureQualitePortee;
+  // Malus/bonus ARMOB d'une competence, piece PORTEE par piece PORTEE, module par
+  // Practical/Unreliable DE LA piece qui le porte (reduit de 10 plancher 0 / double - Rulebook,
+  // CONTEXT.md 2.59). Destine a la colonne "avec equipement" du Pdf Feldo2P.
+  Function PersonnageArmureBonusCompetenceModifPortee(Personnage: StructurePersonnage; CodeCompetence: String): Integer;
 
 implementation
 
@@ -1796,6 +1816,134 @@ Function PersonnageArmureQualites(Personnage: StructurePersonnage): TStringList;
     end;
   end;
 
+Function PersonnageArmureQualitesPortees(Personnage: StructurePersonnage): TArrayPersonnageArmureQualitePortee;
+  var
+    PersonnageEquipement: StructurePersonnageEquipement;
+    ListeQualites:        String;
+    Liste:                TStringList;
+    Alternatives:         TStringList;
+    Element:              String;
+    Code:                 String;
+    Ind, IndAlt:          Integer;
+    Entree:               StructurePersonnageArmureQualitePortee;
+  begin
+    Result       := [];
+    Liste        := TStringList.Create;
+    Alternatives := TStringList.Create;
+    try
+      for PersonnageEquipement in Personnage.Equipement do
+        if PersonnageEquipement.Porte
+           and ((TrimRight(PersonnageEquipement.TypeEquipement) = TrimRight(TypeEquipAR))
+                or (TrimRight(PersonnageEquipement.TypeEquipement) = TrimRight(TypeEquipARS))) then
+          begin
+            // Meme double source que PersonnageArmureBonusTalent : qualites du catalogue
+            // (StructureArmure/ArmureSimplifiee.ListeBonus) et qualites de fabrication ajoutees
+            // par le joueur (PersonnageEquipement.QualiteEquipement).
+            if TrimRight(PersonnageEquipement.TypeEquipement) = TrimRight(TypeEquipAR) then
+              ListeQualites := ChercheArmure(PersonnageEquipement.CodeEquipement).ListeBonus
+            else
+              ListeQualites := ChercheArmureSimplifiee(PersonnageEquipement.CodeEquipement).ListeBonus;
+            if PersonnageEquipement.QualiteEquipement <> '' then
+              begin
+                if ListeQualites <> '' then
+                  ListeQualites := ListeQualites + ',';
+                ListeQualites := ListeQualites + PersonnageEquipement.QualiteEquipement;
+              end;
+
+            Liste.Clear;
+            ExtractStrings([','], [], PChar(ListeQualites), Liste);
+            for Ind := 0 to Liste.Count - 1 do
+              begin
+                Element := Trim(Liste[Ind]);
+                if Pos(' ', Element) > 0 then
+                  Element := Trim(ExtractStringBefore(Element, ' '));
+
+                Alternatives.Clear;
+                ExtractStrings([SeparateurMulti], [], PChar(Element), Alternatives);
+                for IndAlt := 0 to Alternatives.Count - 1 do
+                  begin
+                    Code := Trim(Alternatives[IndAlt]);
+                    if Code <> '' then
+                      begin
+                        Entree.CodeEquipement := PersonnageEquipement.CodeEquipement;
+                        Entree.CodeQualite    := Code;
+                        Result                += [Entree];
+                      end;
+                  end;
+              end;
+          end;
+    finally
+      Alternatives.Free;
+      Liste.Free;
+    end;
+  end;
+
+Function PersonnageArmureBonusCompetenceModifPortee(Personnage: StructurePersonnage; CodeCompetence: String): Integer;
+  var
+    QualitesPortees:     TArrayPersonnageArmureQualitePortee;
+    PiecesTraitees:      TStringList;
+    Ind, IndModif:       Integer;
+    IndListe:            Integer;
+    Piece:               String;
+    SousTotalPiece:      Integer;
+    PieceEstPractical:   Boolean;
+    PieceEstUnreliable:  Boolean;
+  begin
+    Result          := 0;
+    QualitesPortees := PersonnageArmureQualitesPortees(Personnage);
+    PiecesTraitees  := TStringList.Create;
+    try
+      for Ind := 0 to Length(QualitesPortees) - 1 do
+        begin
+          Piece := QualitesPortees[Ind].CodeEquipement;
+          if PiecesTraitees.IndexOf(Piece) >= 0 then
+            continue;
+          PiecesTraitees.Add(Piece);
+
+          // Malus/bonus ARMOB de CETTE piece pour CodeCompetence, et qualites Practical/
+          // Unreliable de la MEME piece (peuvent cohabiter parmi ses qualites de catalogue
+          // et de fabrication, cf. PersonnageArmureQualitesPortees).
+          SousTotalPiece     := 0;
+          PieceEstPractical  := False;
+          PieceEstUnreliable := False;
+          for IndModif := 0 to Length(QualitesPortees) - 1 do
+            if QualitesPortees[IndModif].CodeEquipement = Piece then
+              begin
+                if FabricationEstPractical(QualitesPortees[IndModif].CodeQualite) then
+                  PieceEstPractical := True;
+                if FabricationEstUnreliable(QualitesPortees[IndModif].CodeQualite) then
+                  PieceEstUnreliable := True;
+              end;
+          for IndModif := 0 to Length(QualitesPortees) - 1 do
+            if QualitesPortees[IndModif].CodeEquipement = Piece then
+              For IndListe := 0 to (ListArmureBonusModif.Count - 1) do
+                if CompareRechercheValeur(ListArmureBonusModif[IndListe].CodeArmureBonus, QualitesPortees[IndModif].CodeQualite)
+                   and CompareRechercheValeur(ListArmureBonusModif[IndListe].CodeCompetence, CodeCompetence) then
+                  SousTotalPiece := SousTotalPiece + ListArmureBonusModif[IndListe].Valeur;
+
+          // Practical/Unreliable ne modulent que des PENALITES (Rulebook : "penalties for
+          // wearing it are reduced"/"penalties ... are doubled"), jamais un bonus.
+          if SousTotalPiece < 0 then
+            begin
+              if PieceEstPractical then
+                begin
+                  SousTotalPiece := SousTotalPiece + 10;
+                  if SousTotalPiece > 0 then
+                    SousTotalPiece := 0;
+                end;
+              // Ordre Practical puis Unreliable arbitraire si une piece cumulait les deux (cas
+              // non couvert par le Rulebook, non rencontre dans les livres actuels).
+              if PieceEstUnreliable then
+                SousTotalPiece := SousTotalPiece * 2;
+            end;
+
+          Result := Result + SousTotalPiece;
+        end;
+    finally
+      PiecesTraitees.Free;
+    end;
+  end;
+
 Function PersonnageArmureBonusAttributModif(Personnage: StructurePersonnage; CodeAttribut: String): Integer;
   begin
     Result := PersonnageArmureBonusModificateur(Personnage, ConstXmlModifieAttribut, CodeAttribut);
@@ -1818,25 +1966,6 @@ Function PersonnageArmureBonusModificateur(Personnage: StructurePersonnage; Type
              and ((Trim(ListArmureBonusModificateur[IndModif].Filtre) = '')
                   or CompareRechercheValeur(ListArmureBonusModificateur[IndModif].Filtre, Filtre)) then
             Result := Result + ListArmureBonusModificateur[IndModif].Facteur;
-    finally
-      Qualites.Free;
-    end;
-  end;
-
-Function PersonnageArmureBonusCompetenceModif(Personnage: StructurePersonnage; CodeCompetence: String): Integer;
-  var
-    Qualites: TStringList;
-    Ind:      Integer;
-    IndModif: Integer;
-  begin
-    Result   := 0;
-    Qualites := PersonnageArmureQualites(Personnage);
-    try
-      for Ind := 0 to Qualites.Count - 1 do
-        for IndModif := 0 to (ListArmureBonusModif.Count - 1) do
-          if CompareRechercheValeur(ListArmureBonusModif[IndModif].CodeArmureBonus, Qualites[Ind])
-             and CompareRechercheValeur(ListArmureBonusModif[IndModif].CodeCompetence, CodeCompetence) then
-            Result := Result + ListArmureBonusModif[IndModif].Valeur;
     finally
       Qualites.Free;
     end;

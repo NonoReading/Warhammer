@@ -486,6 +486,7 @@
 <Text name="RULES-PDF_SKILLS2_ADV">"Adv"</Text>
 <Text name="RULES-PDF_SKILLS2_SKILL">"Skill"</Text>
 <Text name="RULES-PDF_SKILLS2_TOTAL">"Total"</Text>
+<Text name="RULES-PDF_SKILLS2_GEAR">"W/ Gear"</Text>
 <Text name="RULES-PDF_TALENT1_TALENTS">"TALENTS"</Text>
 <Text name="RULES-PDF_TALENT2_TALENTNAME">"Talent Name"</Text>
 <Text name="RULES-PDF_TALENT2A_TAKEN">"Times"</Text>
@@ -16906,7 +16907,7 @@ A Trapping is called a Flawed Trapping if it has more Item Flaws than Qualities.
 Note: Exotic items do not have their Availability modified by being Flawed — they are always difficult to find, even shoddy examples."</Explanation>
 <Short language="ENGLISH">"failed Test +1 SL; armour penalty reduced"</Short>
 <Max>"1"</Max>
-<Modifier>""</Modifier>
+<Modifier>"PRACTICAL"</Modifier>
 </Craftsmanship>
 <Craftsmanship id="RULES-QUALITY_03">
 <Description language="ENGLISH">"Fine"</Description>
@@ -16941,7 +16942,7 @@ Note: Exotic items do not have their Availability modified by being Flawed — t
 <Explanation language="ENGLISH">"Crafted without attention to functionality, a failed test using this item receives –1 SL. Further, penalties for wearing Unreliable armour are doubled."</Explanation>
 <Short language="ENGLISH">"failed Test -1 SL; armour penalties doubled"</Short>
 <Max>"1"</Max>
-<Modifier>""</Modifier>
+<Modifier>"UNRELIABLE"</Modifier>
 </Craftsmanship>
 <Craftsmanship id="RULES-DEFECT_04">
 <Description language="ENGLISH">"Bulky"</Description>

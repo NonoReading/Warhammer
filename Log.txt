@@ -3099,3 +3099,56 @@ le tableau Competences du Pdf, montrant le total ajuste quand l equipement porte
 - remplacerait le Total automatique sans le meme risque. Practical/Unreliable et le sort du code
 mort se trancheront a ce moment. Voir CONTEXT.md 2.59 et A FAIRE.txt.
 Fichiers modifies : pdfpersonnage.pas, CONTEXT.md, A FAIRE.txt.
+
+12/09/2026 - COLONNE "AVEC EQUIPEMENT" (W/ GEAR) DANS LE PDF FELDO2P, CHANTIER TERMINE ET
+VALIDE PAR NONO. Suite immediate du 2.59 (entree juste au-dessus) : remplace le Total
+automatique abandonne par une colonne a part, qui n affiche un total ajuste que quand l
+equipement porte modifie reellement la competence - conception discutee et validee point par
+point avec Nono avant de coder (Pdf Feldo2P uniquement, le gabarit normal est le Pdf officiel
+non modifiable ; filtre Porte ; Practical/Unreliable reintegres dans le meme mouvement ;
+cellule vide si aucun ajustement).
+Implemente et compile en 5 etapes (lazbuild, 0 erreur a chaque etape) : PersonnageArmureQualitesPortees
+(qualites d armure PORTEE piece par piece, garde le lien piece->qualite, chargepersonnage.pas) ;
+Practical/Unreliable reimplementes (constantes FabricationPractical/FabricationUnreliable,
+FabricationEstPractical/FabricationEstUnreliable meme moule que FabricationEstBulky, Modifier
+sur RULES-QUALITY_02/RULES-DEFECT_03 dans BOOK_RULESBOOK.Xml - la traduction francaise n a pas
+besoin d etre touchee, ListFabrication n est alimentee qu a partir du livre anglais) ;
+PersonnageArmureBonusCompetenceModifPortee (malus/bonus ARMOB piece portee par piece portee,
+module par Practical/Unreliable de la MEME piece - reduit de 10 plancher 0 ou double, ne
+module que les penalites jamais un bonus) ; mise en page (7e colonne "W/ Gear"/"Avec Eq." sur
+les deux tableaux de competences Feldo2P, Basic Skills decale a gauche via une nouvelle
+constante DessinDebColCompG, Advanced Skills elargi a droite naturellement) ; branchement dans
+PdfPreparerRecordSetCompetencesBase/Groupees.
+Code mort retire : PersonnageArmureBonusCompetenceModif (aplatie, non filtree sur Porte, plus
+aucun appelant depuis le 2.59) supprimee a la demande de Nono.
+Alignement Page 1 demande par Nono apres la 1re validation : le decalage du tableau Basic
+Skills avait decroche les blocs voisins (Entete, Caracteristiques, Ambitions, Resilience/
+Destin, Mouvement, Experience, Corruption, Talents). Regle degagee en lisant le code :
+DessinFinColG et DessinLargeurExp (nom trompeur, utilisee comme bord droit absolu) sont deja
+des bords droits fixes, il suffit de decaler les bords gauches. Deux allers-retours de
+correction demandes par Nono sur capture d ecran : bord droit de Basic Skills pas pile aligne
+avec Ambitions (largeur de la 7e colonne fixee explicitement a 8) ; puis Mouvement/Corruption/
+Experience dont le bord droit ne suivait pas (construits par decalage+largeur plutot que par
+bord droit absolu) - resolu en elargissant le separateur libelles/valeur interne (15->23mm) et
+DessinLargeurMou (22->30), la colonne valeur gardant exactement sa largeur d origine.
+Valide par Nono par capture d ecran ("parfait").
+Page 2 non touchee (perimetre choisi par Nono) - a reprendre si besoin, voir CONTEXT.md 2.60.
+Fichiers modifies : chargepersonnage.pas, chargeconstantes.pas, chargefabrication.pas,
+pdfpersonnage.pas, DATABASE/BOOK_RULESBOOK.Xml, DATABASE/BOOK_RULESBOOK_FRANCAIS.Xml,
+CONTEXT.md, A FAIRE.txt.
+
+12/09/2026 - STATUS (BRASS/SILVER/GOLD) AFFICHAIT LE CODE BRUT SUR LES DEUX PDF, CORRIGE.
+Signale par Nono en relisant un Pdf genere pendant le chantier precedent, sans rapport avec
+lui : le champ Status affichait "TIERS_BRASS 3" au lieu de "Brass 3".
+Cause : PMetierNiveau.SalaireMetier est charge et reexporte NU depuis la balise <Salary> du
+Xml (xmlexportimport.pas), sans prefixe de livre, alors que le libelle catalogue est
+RULES-TIERS_BRASS/SILVER/GOLD (seul livre a les definir). VerifieRecherche
+(chargeconstantes.pas) exige que le livre corresponde en plus du code - meme famille de bug
+que les "codes nus" du 2.49 (223+22+57+11+2 occurrences corrigees a l epoque), jamais auditee
+pour SalaireMetier jusqu ici.
+Corrige au point d appel plutot que sur la donnee (meme convention qu au 2.49) : prefixe
+'RULES-' ajoute devant SalaireMetier a chaque appel de GetTexteLibelle, chargement/export Xml
+non touches. Quatre points d appel, meme code partout : pdfpersonnage.pas (gabarit normal et
+Feldo2P), winmetier.pas (arbre des metiers), pdfmetier.pas (livret de carriere).
+Compile (lazbuild, 0 erreur). Pas encore revalide par Nono a l ecran/au Pdf.
+Fichiers modifies : pdfpersonnage.pas, winmetier.pas, pdfmetier.pas, CONTEXT.md.

@@ -827,7 +827,9 @@ Begin
     for PMetierNiveau in ListMetierNiveau do
       if PMetierNiveau.CodeMetier = MetierEnCours then
         Begin
-            NodeBranche := TreeViewMetier1.Items.AddChild(Node, IntToStr(PMetierNiveau.NiveauMetier)+'.'+PMetierNiveau.Libelle+' - '+GetTexteLibelle(PMetierNiveau.SalaireMetier, '', ' '));
+            // Prefixe RULES- ajoute le 12/09/2026 - meme correctif que pdfpersonnage.pas, voir
+            // son commentaire (CONTEXT.md 2.49/2.61).
+            NodeBranche := TreeViewMetier1.Items.AddChild(Node, IntToStr(PMetierNiveau.NiveauMetier)+'.'+PMetierNiveau.Libelle+' - '+GetTexteLibelle('RULES-' + PMetierNiveau.SalaireMetier, '', ' '));
             NodeBranche.ImageIndex := PMetierNiveau.NiveauMetier;
             ChargeMetierAttribut(PMetierNiveau.NiveauMetier,NodeBranche);
             ChargeMetierCompetence(PMetierNiveau.NiveauMetier,NodeBranche);

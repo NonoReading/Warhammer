@@ -1238,7 +1238,13 @@ Procedure PdfPersonnageCreation(Personnage: StructurePersonnage; BackGround: Boo
       PdfPage.WriteText( 50, 241, PMetier.Libelle);                                // Métier
     PdfPage.WriteText(135, 241, IntToStr(Personnage.MetierEnCours.NiveauMetier)+' - '+ PMetierNiveau.Libelle);     // Niveau
     PdfPage.WriteText( 50, 236, LocData);     // Schéma
-    PdfPage.WriteText(165, 236, GetTexteLibelle(PMetierNiveau.SalaireMetier, '', ' '));  // Salaire
+    // Prefixe RULES- ajoute le 12/09/2026 : SalaireMetier ('TIERS_BRASS 2', etc.) est stocke
+    // NU dans le Xml (xmlexportimport.pas), sans prefixe de livre, alors que le libelle
+    // catalogue est RULES-TIERS_BRASS/SILVER/GOLD (seul livre a les definir) - VerifieRecherche
+    // exige que LivreRecherche = LivreValeur (chargeconstantes.pas), pas seulement le code, donc
+    // sans prefixe le code brut "TIERS_BRASS 2" s'affichait tel quel (meme famille de bug que
+    // CONTEXT.md 2.49). Signale par Nono sur les deux PDF.
+    PdfPage.WriteText(165, 236, GetTexteLibelle('RULES-' + PMetierNiveau.SalaireMetier, '', ' '));  // Salaire
 
     // Caractéristiques
     for Ind := 1 to 10 do
@@ -2384,7 +2390,9 @@ Function PdfBlocEntete(PdfPage: TPDFPage; Personnage: StructurePersonnage; PRace
       PdfEcrit(PdfPage,  32,  85, Y - (HauteurLigne * 2) + 1, PMetier.Libelle, MinPolice);
     PdfEcrit(PdfPage,  95, XDroite, Y - (HauteurLigne * 2) + 1, IntToStr(Personnage.MetierEnCours.NiveauMetier)+' - '+ PMetierNiveau.Libelle, MinPolice);
     PdfEcrit(PdfPage,  50, XDroite, Y - (HauteurLigne * 3) + 1, LocData, MinPolice);
-    PdfEcrit(PdfPage, 125, XDroite, Y - (HauteurLigne * 3) + 1, GetTexteLibelle(PMetierNiveau.SalaireMetier, '', ' '), MinPolice);
+    // Prefixe RULES- ajoute le 12/09/2026 - meme correctif que le gabarit normal, voir son
+    // commentaire (CONTEXT.md 2.49/2.61).
+    PdfEcrit(PdfPage, 125, XDroite, Y - (HauteurLigne * 3) + 1, GetTexteLibelle('RULES-' + PMetierNiveau.SalaireMetier, '', ' '), MinPolice);
     PdfEcrit(PdfPage,  32,  53, Y - (HauteurLigne * 4) + 1, IntToStr(Personnage.Age), MinPolice);
     PdfEcrit(PdfPage,  63,  78, Y - (HauteurLigne * 4) + 1, IntToStr(Personnage.Height), MinPolice);
     PdfEcrit(PdfPage,  98, 115, Y - (HauteurLigne * 4) + 1, Personnage.HairColors, MinPolice);
@@ -2433,9 +2441,12 @@ Function PdfBlocExperience(PdfPage: TPDFPage; Personnage: StructurePersonnage; X
       XpTotalAffiche := Personnage.Xp25Total
     else
       XpTotalAffiche := Personnage.XpTotal;
+    // Separateur libelles/valeur elargi le 12/09/2026 (23 au lieu de 15, Nono) - meme
+    // traitement que PdfBlocMouvement/PdfBlocCorruption, colonne valeur inchangee (10mm),
+    // tout le gain de largeur va aux libelles (CONTEXT.md 2.59).
     // Dessin cadre
     PdfPage.DrawLine(XGauche,      Y,                 XGauche,      Y - (NbLignes * HauteurLigne), 1);
-    PdfPage.DrawLine(XGauche + 15, Y - HauteurLigne,   XGauche + 15, Y - (NbLignes * HauteurLigne), 1);
+    PdfPage.DrawLine(XGauche + 23, Y - HauteurLigne,   XGauche + 23, Y - (NbLignes * HauteurLigne), 1);
     PdfPage.DrawLine(XDroite,      Y,                 XDroite,      Y - (NbLignes * HauteurLigne), 1);
     for IndC := 0 to NbLignes do
       PdfPage.DrawLine(XGauche, Y - (IndC * HauteurLigne), XDroite, Y - (IndC * HauteurLigne), 1);
@@ -2443,15 +2454,15 @@ Function PdfBlocExperience(PdfPage: TPDFPage; Personnage: StructurePersonnage; X
     // Texte Expérience
     PdfTaillePolice(PdfPage, PdfFontBack, ConstPoliceCarlson+ConstPoliceGras, 10);
     PdfCentre(PdfPage, XGauche + 1, XDroite,      Y - ((NbLignes - 3) * HauteurLigne) + 0.6, GetTexteLibelle('RULES-PDF_XP1_EXPERIENCE'));
-    PdfEcrit (PdfPage, XGauche + 1, XGauche + 15, Y - ((NbLignes - 2) * HauteurLigne) + 0.6, GetTexteLibelle('RULES-PDF_XP2C_TOTAL')  , MinPolice);
-    PdfEcrit (PdfPage, XGauche + 1, XGauche + 15, Y - ((NbLignes - 1) * HauteurLigne) + 0.6, GetTexteLibelle('RULES-PDF_XP2B_SPENT') , MinPolice);
-    PdfEcrit (PdfPage, XGauche + 1, XGauche + 15, Y - ( NbLignes      * HauteurLigne) + 0.6, GetTexteLibelle('RULES-PDF_XP2A_CURRENT'), MinPolice);
+    PdfEcrit (PdfPage, XGauche + 1, XGauche + 23, Y - ((NbLignes - 2) * HauteurLigne) + 0.6, GetTexteLibelle('RULES-PDF_XP2C_TOTAL')  , MinPolice);
+    PdfEcrit (PdfPage, XGauche + 1, XGauche + 23, Y - ((NbLignes - 1) * HauteurLigne) + 0.6, GetTexteLibelle('RULES-PDF_XP2B_SPENT') , MinPolice);
+    PdfEcrit (PdfPage, XGauche + 1, XGauche + 23, Y - ( NbLignes      * HauteurLigne) + 0.6, GetTexteLibelle('RULES-PDF_XP2A_CURRENT'), MinPolice);
 
     // Valeur Expérience
     PdfTaillePolice(PdfPage, PdfFontValue, ConstPoliceArial, 9);
-    PdfCentre(PdfPage, XGauche + 15, XDroite, Y - ((NbLignes - 2) * HauteurLigne) + 0.6, IntToStr(XpTotalAffiche));                              // Total Xp
-    PdfCentre(PdfPage, XGauche + 15, XDroite, Y - ((NbLignes - 1) * HauteurLigne) + 0.6, IntToStr(XpTotalAffiche - Personnage.XpActuel));        // Utilisé
-    PdfCentre(PdfPage, XGauche + 15, XDroite, Y - ( NbLignes      * HauteurLigne) + 0.6, IntToStr(Personnage.XpActuel));                         // Restant
+    PdfCentre(PdfPage, XGauche + 23, XDroite, Y - ((NbLignes - 2) * HauteurLigne) + 0.6, IntToStr(XpTotalAffiche));                              // Total Xp
+    PdfCentre(PdfPage, XGauche + 23, XDroite, Y - ((NbLignes - 1) * HauteurLigne) + 0.6, IntToStr(XpTotalAffiche - Personnage.XpActuel));        // Utilisé
+    PdfCentre(PdfPage, XGauche + 23, XDroite, Y - ( NbLignes      * HauteurLigne) + 0.6, IntToStr(Personnage.XpActuel));                         // Restant
 
     Result := Y - (NbLignes * HauteurLigne);
   end;
@@ -2462,9 +2473,13 @@ Function PdfBlocMouvement(PdfPage: TPDFPage; XGauche, XDroite, Y, HauteurLigne: 
   var
     IndC: Integer;
   begin
+    // Separateur libelles/valeur elargi le 12/09/2026 (23 au lieu de 15, Nono) pour que le
+    // bord droit du cadre (XDroite) retombe sur celui d'Ambitions une fois DessinLargeurMou
+    // elargi d'autant (CONTEXT.md 2.59) - meme "+15" que Resilience/Corruption a l'origine,
+    // desormais propre a Mouvement.
     // Dessin cadre
     PdfPage.DrawLine(XGauche,      Y,                 XGauche,      Y - (NbLignes * HauteurLigne), 1);
-    PdfPage.DrawLine(XGauche + 15, Y - HauteurLigne,   XGauche + 15, Y - (NbLignes * HauteurLigne), 1);
+    PdfPage.DrawLine(XGauche + 23, Y - HauteurLigne,   XGauche + 23, Y - (NbLignes * HauteurLigne), 1);
     PdfPage.DrawLine(XDroite,      Y,                 XDroite,      Y - (NbLignes * HauteurLigne), 1);
     for IndC := 0 to NbLignes do
       PdfPage.DrawLine(XGauche, Y - (IndC * HauteurLigne), XDroite, Y - (IndC * HauteurLigne), 1);
@@ -2472,15 +2487,15 @@ Function PdfBlocMouvement(PdfPage: TPDFPage; XGauche, XDroite, Y, HauteurLigne: 
     // Texte Mouvement
     PdfTaillePolice(PdfPage, PdfFontBack, ConstPoliceCarlson+ConstPoliceGras, 10);
     PdfCentre(PdfPage, XGauche + 1, XDroite,      Y - ((NbLignes - 3) * HauteurLigne) + 0.6, GetTexteLibelle('RULES-PDF_MV1_MOVEMENT'));
-    PdfEcrit (PdfPage, XGauche + 1, XGauche + 15, Y - ((NbLignes - 2) * HauteurLigne) + 0.6, GetTexteLibelle('RULES-PDF_MV2A_MOVEMENT'), MinPolice);
-    PdfEcrit (PdfPage, XGauche + 1, XGauche + 15, Y - ((NbLignes - 1) * HauteurLigne) + 0.6, GetTexteLibelle('RULES-PDF_MV2B_WALK')    , MinPolice);
-    PdfEcrit (PdfPage, XGauche + 1, XGauche + 15, Y - ( NbLignes      * HauteurLigne) + 0.6, GetTexteLibelle('RULES-PDF_MV2C_RUN')     , MinPolice);
+    PdfEcrit (PdfPage, XGauche + 1, XGauche + 23, Y - ((NbLignes - 2) * HauteurLigne) + 0.6, GetTexteLibelle('RULES-PDF_MV2A_MOVEMENT'), MinPolice);
+    PdfEcrit (PdfPage, XGauche + 1, XGauche + 23, Y - ((NbLignes - 1) * HauteurLigne) + 0.6, GetTexteLibelle('RULES-PDF_MV2B_WALK')    , MinPolice);
+    PdfEcrit (PdfPage, XGauche + 1, XGauche + 23, Y - ( NbLignes      * HauteurLigne) + 0.6, GetTexteLibelle('RULES-PDF_MV2C_RUN')     , MinPolice);
 
     // Valeur Mouvement
     PdfTaillePolice(PdfPage, PdfFontValue, ConstPoliceArial, 9);
-    PdfCentre(PdfPage, XGauche + 15, XDroite, Y - ((NbLignes - 2) * HauteurLigne) + 0.6, IntToStr(Mouv));
-    PdfCentre(PdfPage, XGauche + 15, XDroite, Y - ((NbLignes - 1) * HauteurLigne) + 0.6, IntToStr(Mouv * 2));
-    PdfCentre(PdfPage, XGauche + 15, XDroite, Y - ( NbLignes      * HauteurLigne) + 0.6, IntToStr((Mouv + BonusSprint) * 4));
+    PdfCentre(PdfPage, XGauche + 23, XDroite, Y - ((NbLignes - 2) * HauteurLigne) + 0.6, IntToStr(Mouv));
+    PdfCentre(PdfPage, XGauche + 23, XDroite, Y - ((NbLignes - 1) * HauteurLigne) + 0.6, IntToStr(Mouv * 2));
+    PdfCentre(PdfPage, XGauche + 23, XDroite, Y - ( NbLignes      * HauteurLigne) + 0.6, IntToStr((Mouv + BonusSprint) * 4));
 
     Result := Y - (NbLignes * HauteurLigne);
   end;
@@ -2492,9 +2507,12 @@ Function PdfBlocCorruption(PdfPage: TPDFPage; XGauche, XDroite, Y, HauteurLigne:
     IndC:  Integer;
     Total: Integer;
   begin
+    // Separateur libelles/valeur elargi le 12/09/2026 (23 au lieu de 15, Nono) : meme
+    // traitement que PdfBlocMouvement, colonne valeur gardee a largeur identique (10mm),
+    // tout le gain de largeur va aux libelles (CONTEXT.md 2.59).
     // Dessin cadre
     PdfPage.DrawLine(XGauche,      Y,                 XGauche,      Y - (NbLignes * HauteurLigne), 1);
-    PdfPage.DrawLine(XGauche + 15, Y - HauteurLigne,   XGauche + 15, Y - (NbLignes * HauteurLigne), 1);
+    PdfPage.DrawLine(XGauche + 23, Y - HauteurLigne,   XGauche + 23, Y - (NbLignes * HauteurLigne), 1);
     PdfPage.DrawLine(XDroite,      Y,                 XDroite,      Y - (NbLignes * HauteurLigne), 1);
     for IndC := 0 to NbLignes do
       PdfPage.DrawLine(XGauche, Y - (IndC * HauteurLigne), XDroite, Y - (IndC * HauteurLigne), 1);
@@ -2506,21 +2524,21 @@ Function PdfBlocCorruption(PdfPage: TPDFPage; XGauche, XDroite, Y, HauteurLigne:
     // Lost = somme des montants de Personnage.Corruption, Left = Total - Lost.
     PdfTaillePolice(PdfPage, PdfFontBack, ConstPoliceCarlson+ConstPoliceGras, 10);
     PdfCentre(PdfPage, XGauche + 1, XDroite,      Y - ((NbLignes - 6) * HauteurLigne) + 0.6, GetTexteLibelle('RULES-PDF_CORRUPTION_TITLE'));
-    PdfEcrit (PdfPage, XGauche + 1, XGauche + 15, Y - ((NbLignes - 5) * HauteurLigne) + 0.6, GetTexteLibelle('RULES-PDF_CORRUPTION_T')    , MinPolice);
-    PdfEcrit (PdfPage, XGauche + 1, XGauche + 15, Y - ((NbLignes - 4) * HauteurLigne) + 0.6, GetTexteLibelle('RULES-PDF_CORRUPTION_WP')   , MinPolice);
-    PdfEcrit (PdfPage, XGauche + 1, XGauche + 15, Y - ((NbLignes - 3) * HauteurLigne) + 0.6, GetTexteLibelle('RULES-PDF_CORRUPTION_BONUS'), MinPolice);
-    PdfEcrit (PdfPage, XGauche + 1, XGauche + 15, Y - ((NbLignes - 2) * HauteurLigne) + 0.6, GetTexteLibelle('RULES-PDF_CORRUPTION_TOTAL'), MinPolice);
-    PdfEcrit (PdfPage, XGauche + 1, XGauche + 15, Y - ((NbLignes - 1) * HauteurLigne) + 0.6, GetTexteLibelle('RULES-PDF_CORRUPTION_LOST') , MinPolice);
-    PdfEcrit (PdfPage, XGauche + 1, XGauche + 15, Y - ( NbLignes      * HauteurLigne) + 0.6, GetTexteLibelle('RULES-PDF_CORRUPTION_LEFT') , MinPolice);
+    PdfEcrit (PdfPage, XGauche + 1, XGauche + 23, Y - ((NbLignes - 5) * HauteurLigne) + 0.6, GetTexteLibelle('RULES-PDF_CORRUPTION_T')    , MinPolice);
+    PdfEcrit (PdfPage, XGauche + 1, XGauche + 23, Y - ((NbLignes - 4) * HauteurLigne) + 0.6, GetTexteLibelle('RULES-PDF_CORRUPTION_WP')   , MinPolice);
+    PdfEcrit (PdfPage, XGauche + 1, XGauche + 23, Y - ((NbLignes - 3) * HauteurLigne) + 0.6, GetTexteLibelle('RULES-PDF_CORRUPTION_BONUS'), MinPolice);
+    PdfEcrit (PdfPage, XGauche + 1, XGauche + 23, Y - ((NbLignes - 2) * HauteurLigne) + 0.6, GetTexteLibelle('RULES-PDF_CORRUPTION_TOTAL'), MinPolice);
+    PdfEcrit (PdfPage, XGauche + 1, XGauche + 23, Y - ((NbLignes - 1) * HauteurLigne) + 0.6, GetTexteLibelle('RULES-PDF_CORRUPTION_LOST') , MinPolice);
+    PdfEcrit (PdfPage, XGauche + 1, XGauche + 23, Y - ( NbLignes      * HauteurLigne) + 0.6, GetTexteLibelle('RULES-PDF_CORRUPTION_LEFT') , MinPolice);
 
     // Valeur Corruption
     PdfTaillePolice(PdfPage, PdfFontValue, ConstPoliceArial, 9);
-    PdfCentre(PdfPage, XGauche + 15, XDroite, Y - ((NbLignes - 5) * HauteurLigne) + 0.6, IntToStr(Floor(BE/10)));
-    PdfCentre(PdfPage, XGauche + 15, XDroite, Y - ((NbLignes - 4) * HauteurLigne) + 0.6, IntToStr(Floor(BFM/10)));
-    PdfCentre(PdfPage, XGauche + 15, XDroite, Y - ((NbLignes - 3) * HauteurLigne) + 0.6, IntToStr(AmePure));
-    PdfCentre(PdfPage, XGauche + 15, XDroite, Y - ((NbLignes - 2) * HauteurLigne) + 0.6, IntToStr(Total));
-    PdfCentre(PdfPage, XGauche + 15, XDroite, Y - ((NbLignes - 1) * HauteurLigne) + 0.6, IntToStr(Lost));
-    PdfCentre(PdfPage, XGauche + 15, XDroite, Y - ( NbLignes      * HauteurLigne) + 0.6, IntToStr(Total - Lost));
+    PdfCentre(PdfPage, XGauche + 23, XDroite, Y - ((NbLignes - 5) * HauteurLigne) + 0.6, IntToStr(Floor(BE/10)));
+    PdfCentre(PdfPage, XGauche + 23, XDroite, Y - ((NbLignes - 4) * HauteurLigne) + 0.6, IntToStr(Floor(BFM/10)));
+    PdfCentre(PdfPage, XGauche + 23, XDroite, Y - ((NbLignes - 3) * HauteurLigne) + 0.6, IntToStr(AmePure));
+    PdfCentre(PdfPage, XGauche + 23, XDroite, Y - ((NbLignes - 2) * HauteurLigne) + 0.6, IntToStr(Total));
+    PdfCentre(PdfPage, XGauche + 23, XDroite, Y - ((NbLignes - 1) * HauteurLigne) + 0.6, IntToStr(Lost));
+    PdfCentre(PdfPage, XGauche + 23, XDroite, Y - ( NbLignes      * HauteurLigne) + 0.6, IntToStr(Total - Lost));
 
     Result := Y - (NbLignes * HauteurLigne);
   end;
@@ -3755,6 +3773,7 @@ Function PdfPreparerRecordSetCompetencesBase(Personnage: StructurePersonnage; PM
     ValBonus:         String;
     Bonus:            String;
     StyleLigne:       TPdfStylePolice;
+    AvecEquipement:   Integer;
   begin
     TotalEsquive      := 0;
     TotalCalme        := 0;
@@ -3795,7 +3814,7 @@ Function PdfPreparerRecordSetCompetencesBase(Personnage: StructurePersonnage; PM
         if AnnotationArmure.Values[Comp] <> '' then
           Bonus := Bonus + AnnotationArmure.Values[Comp];
 
-        SetLength(Result[Ind].Valeurs, 6);
+        SetLength(Result[Ind].Valeurs, 7);
 
         Result[Ind].Valeurs[0].Champ      := 'Nom';
         Result[Ind].Valeurs[0].Valeur     := PdfSupprimeGenerique(PCompetence.CodeCompetence, PCompetence.Libelle);
@@ -3821,6 +3840,13 @@ Function PdfPreparerRecordSetCompetencesBase(Personnage: StructurePersonnage; PM
 
         Result[Ind].Valeurs[5].Champ  := 'Total';
         Result[Ind].Valeurs[5].Valeur := IntToStr(CompetenceDonnee.Total);
+
+        // Colonne "avec equipement" (CONTEXT.md 2.59) : vide si l'equipement porte ne modifie
+        // pas cette competence, Total ajuste sinon (Valeur reste '' par defaut si AvecEquipement = 0).
+        Result[Ind].Valeurs[6].Champ := 'AvecEquipement';
+        AvecEquipement := PersonnageArmureBonusCompetenceModifPortee(Personnage, Comp);
+        if AvecEquipement <> 0 then
+          Result[Ind].Valeurs[6].Valeur := IntToStr(CompetenceDonnee.Total + AvecEquipement);
       end;
   end;
 
@@ -3835,6 +3861,7 @@ Function PdfPreparerRecordSetCompetencesGroupees(Personnage: StructurePersonnage
     ValBonus:             String;
     Bonus:                String;
     PersonnageCompetence: StructurePersonnageCompetence;
+    AvecEquipement:       Integer;
   begin
     SetLength(Result, 0);
     NbLigne := 0;
@@ -3859,7 +3886,7 @@ Function PdfPreparerRecordSetCompetencesGroupees(Personnage: StructurePersonnage
                   Bonus := Bonus + AnnotationArmure.Values[PCompetence.CodeCompetence];
 
                 SetLength(Result, Length(Result)+1);
-                SetLength(Result[High(Result)].Valeurs, 6);
+                SetLength(Result[High(Result)].Valeurs, 7);
 
                 Result[High(Result)].Valeurs[0].Champ      := 'Nom';
                 Result[High(Result)].Valeurs[0].Valeur     := PdfSupprimeGenerique(PCompetence.CodeCompetence, PCompetence.Libelle);
@@ -3883,6 +3910,11 @@ Function PdfPreparerRecordSetCompetencesGroupees(Personnage: StructurePersonnage
 
                 Result[High(Result)].Valeurs[5].Champ  := 'Total';
                 Result[High(Result)].Valeurs[5].Valeur := IntToStr(CompetenceDonnee.Total);
+
+                Result[High(Result)].Valeurs[6].Champ := 'AvecEquipement';
+                AvecEquipement := PersonnageArmureBonusCompetenceModifPortee(Personnage, PCompetence.CodeCompetence);
+                if AvecEquipement <> 0 then
+                  Result[High(Result)].Valeurs[6].Valeur := IntToStr(CompetenceDonnee.Total + AvecEquipement);
 
                 NbLigne := NbLigne + 1;
               end;
@@ -4018,6 +4050,19 @@ Procedure PdfPersonnageCreationFeldo2P(Personnage: StructurePersonnage);
       DessinFinColG:        Integer = 98;
       DessinDebColD:        Integer = 102;
       DessinFinColD:        Integer = 188;
+      // Bord gauche PARTAGE par tous les blocs de la colonne gauche de la page 1 (Entete,
+      // Caracteristiques, tableau Competences de base, Ambitions, Resilience/Destin, Mouvement,
+      // Experience, Corruption) depuis la colonne "W/ Gear" (CONTEXT.md 2.59) - decale par
+      // rapport a l'ancien DessinDebColG (20, reste utilise tel quel par la PAGE 2, non touchee
+      // par ce chantier). Les bords DROITS existants (DessinFinColG, DessinLargeurExp utilisee
+      // comme bord droit absolu) restent inchanges : chaque bloc gagne la largeur en plus sur
+      // sa gauche, comme le tableau de competences lui-meme. Marge page restante : 12mm,
+      // superieure au minimum d'1cm (Nono, 12/09/2026).
+      DessinDebColCompG:    Integer = 12;
+      // Bord droit du tableau Competences groupees une fois elargi (7e colonne) - Talents
+      // (juste en dessous) s'elargit a l'identique pour rester aligne. Marge page restante :
+      // 13mm, superieure au minimum d'1cm.
+      DessinFinColCompD:    Integer = 197;
       // Colonne gauche
         // Images
         PdfImgWarhammer: Integer;
@@ -4064,7 +4109,11 @@ Procedure PdfPersonnageCreationFeldo2P(Personnage: StructurePersonnage);
         DessinDebutGaucheMou: Single;
         DessinHauteurMou:     Single = 4.4;
         DessinNbLigMou:       Integer = 3;
-        DessinLargeurMou:     Single = 22;
+        // Elargi de 22 a 30 le 12/09/2026 (Nono) : le bord droit (DessinDebutGaucheMou +
+        // DessinLargeurMou) retombe ainsi sur DessinFinColG (98), comme Ambitions au-dessus -
+        // le separateur libelles/valeur de PdfBlocMouvement a ete elargi a l'identique (+23
+        // au lieu de +15) pour que les libelles gagnent cette largeur, pas la colonne valeur.
+        DessinLargeurMou:     Single = 30;
         // Corruption
         DessinDebutHautCor:   Single;
         DessinDebutGaucheCor: Single;
@@ -4257,13 +4306,13 @@ Procedure PdfPersonnageCreationFeldo2P(Personnage: StructurePersonnage);
 
     // Bloc Entête (extrait dans PdfBlocEntete, CONTEXT.md §2.4)
     DessinDebutHautCarac := PdfBlocEntete(PdfPage, Personnage, PRace, PMetier, PMetierNiveau, LocData,
-      DessinDebColG, DessinFinEntete, DessinDebutHautEntete, DessinHauteurEntete, DessinNbLigEntete, MinPolice) - 3;
+      DessinDebColCompG, DessinFinEntete, DessinDebutHautEntete, DessinHauteurEntete, DessinNbLigEntete, MinPolice) - 3;
 
     // Tableau Caractéristiques (extrait dans DessinerTableau / PdfPreparerRecordSetCaracteristiques, CONTEXT.md §2.4)
-    TableauCarac.X               := DessinDebColG;
+    TableauCarac.X               := DessinDebColCompG;
     TableauCarac.Y               := DessinDebutHautCarac;
     TableauCarac.Orientation     := orColonne;
-    TableauCarac.LargeurLibelles := 40 - DessinDebColG;
+    TableauCarac.LargeurLibelles := 40 - DessinDebColCompG;
     TableauCarac.LargeurEntree   := DessinLargeurCarac;
     TableauCarac.HauteurLigne    := DessinHauteurCarac;
     TableauCarac.Police          := 9;
@@ -4281,7 +4330,7 @@ Procedure PdfPersonnageCreationFeldo2P(Personnage: StructurePersonnage);
 
     // Tableau Compétences de base (extrait dans DessinerTableau (orLigne) /
     // PdfPreparerRecordSetCompetencesBase, CONTEXT.md §2.4)
-    TableauComp.X                := DessinDebColG;
+    TableauComp.X                := DessinDebColCompG;
     TableauComp.Y                := DessinDebutHautComp;
     TableauComp.Orientation      := orLigne;
     TableauComp.LargeurEntree    := DessinLargeurComp;
@@ -4292,7 +4341,7 @@ Procedure PdfPersonnageCreationFeldo2P(Personnage: StructurePersonnage);
     TableauComp.TitreDecalageGauche := 15;
     TableauComp.NbLignesMax       := DessinNbLigComp - 2; // 2 lignes d'en-tête (titre + libellés)
 
-    SetLength(TableauComp.Champs, 6);
+    SetLength(TableauComp.Champs, 7);
     TableauComp.Champs[0].Libelle           := GetTexteLibelle('RULES-PDF_SKILLS2_NAME');
     TableauComp.Champs[0].Champ             := 'Nom';
     TableauComp.Champs[0].EnTete            := True;
@@ -4329,6 +4378,17 @@ Procedure PdfPersonnageCreationFeldo2P(Personnage: StructurePersonnage);
     TableauComp.Champs[5].DecalageValeurMin := 3.5;
     TableauComp.Champs[5].DecalageValeurMax := 3.5;
 
+    // Colonne "avec equipement" (CONTEXT.md 2.59) : vide si l'equipement porte ne modifie pas
+    // la competence, total ajuste sinon - remplie par PdfPreparerRecordSetCompetencesBase.
+    TableauComp.Champs[6].Libelle           := GetTexteLibelle('RULES-PDF_SKILLS2_GEAR');
+    TableauComp.Champs[6].Champ             := 'AvecEquipement';
+    // Largeur explicite (8, au lieu du DessinLargeurComp=8.6 par defaut) pour que le bord
+    // droit du tableau (12 + 35 + 5*8.6 + 8 = 98) tombe pile sur celui d'Ambitions
+    // (DessinFinColG=98) - sans elle l'ecart etait de 0.6mm (Nono, 12/09/2026).
+    TableauComp.Champs[6].Largeur           := 8;
+    TableauComp.Champs[6].DecalageValeurMin := 3.5;
+    TableauComp.Champs[6].DecalageValeurMax := 3.5;
+
     // Astérisques numérotées des malus d'armure sur les compétences (CONTEXT.md §2.5,
     // conception validée avec Nono le 15-16/08/2026) - calculées ici, avant les tableaux de
     // Compétences de la page 1, car Personnage.Equipement est disponible dès le départ (pas
@@ -4352,15 +4412,15 @@ Procedure PdfPersonnageCreationFeldo2P(Personnage: StructurePersonnage);
     DessinDebutHautAmb := DessinerTableau(PdfPage, TableauComp, DonneesComp) - 3;
 
     // Bloc Ambitions (extrait dans PdfBlocAmbitions, CONTEXT.md §2.4)
-    DessinDebutHautRes := PdfBlocAmbitions(PdfPage, DessinDebColG, DessinFinColG, DessinDebutHautAmb, DessinHauteurAmb, DessinNbLigAmb, MinPolice) - 3;
+    DessinDebutHautRes := PdfBlocAmbitions(PdfPage, DessinDebColCompG, DessinFinColG, DessinDebutHautAmb, DessinHauteurAmb, DessinNbLigAmb, MinPolice) - 3;
     DessinDebutHautDes := DessinDebutHautRes;
 
     // Bloc Résilience / Destin (extrait dans PdfBlocResilience / PdfBlocDestin, CONTEXT.md §2.4)
     // Réagencement du 16/08/2026 : Résilience/Destin raccourci (78mm -> 53mm) pour laisser
     // la place à Mouvement sur la même rangée (voir CONTEXT.md §2.6).
-    PdfBlocResilience(PdfPage, Personnage, DessinDebColG, DessinDebutHautRes, DessinNbLigRes, DessinHauteurRes, MinPolice, Determine, IndC);
-    PdfBlocDestin(PdfPage, Personnage, DessinDebColG + 27, DessinDebutHautDes, DessinHauteurDes, MinPolice, Chance);
-    DessinDebutGaucheMou := DessinDebColG + 56;
+    PdfBlocResilience(PdfPage, Personnage, DessinDebColCompG, DessinDebutHautRes, DessinNbLigRes, DessinHauteurRes, MinPolice, Determine, IndC);
+    PdfBlocDestin(PdfPage, Personnage, DessinDebColCompG + 27, DessinDebutHautDes, DessinHauteurDes, MinPolice, Chance);
+    DessinDebutGaucheMou := DessinDebColCompG + 56;
     PdfBlocMouvement(PdfPage, DessinDebutGaucheMou, DessinDebutGaucheMou + DessinLargeurMou, DessinDebutHautRes, DessinHauteurMou, DessinNbLigMou + 1, MinPolice, Mouv, BonusSprint);
 
     // calcul expérience
@@ -4381,7 +4441,7 @@ Procedure PdfPersonnageCreationFeldo2P(Personnage: StructurePersonnage);
 
     // Bloc Expérience (extrait dans PdfBlocExperience, CONTEXT.md §2.4), sous Résilience/Destin.
     DessinDebutHautExp   := DessinDebutHautDes - (DessinNbLigRes * DessinHauteurDes) - 3;
-    PdfBlocExperience(PdfPage, Personnage, DessinDebColG, DessinLargeurExp, DessinDebutHautExp, DessinHauteurExp, DessinNbLigExp + 1, MinPolice);
+    PdfBlocExperience(PdfPage, Personnage, DessinDebColCompG, DessinLargeurExp, DessinDebutHautExp, DessinHauteurExp, DessinNbLigExp + 1, MinPolice);
 
     // Bloc Corruption (extrait dans PdfBlocCorruption, CONTEXT.md §2.4), sous Expérience
     // (réagencement du 16/08/2026 : anciennement à côté d'Expérience/Mouvement, voir §2.6).
@@ -4391,7 +4451,7 @@ Procedure PdfPersonnageCreationFeldo2P(Personnage: StructurePersonnage);
       LostCorruption := LostCorruption + PersonnageCorruption.Montant;
     DessinDebutHautCor := DessinDebutHautExp - ((DessinNbLigExp + 1) * DessinHauteurExp) - 3;
     DessinLargeurCor   := DessinLargeurExp;
-    PdfBlocCorruption(PdfPage, DessinDebColG, DessinLargeurCor, DessinDebutHautCor, DessinHauteurCor, DessinNbLigCor + 1, MinPolice, BE, BFM, AmePure, LostCorruption);
+    PdfBlocCorruption(PdfPage, DessinDebColCompG, DessinLargeurCor, DessinDebutHautCor, DessinHauteurCor, DessinNbLigCor + 1, MinPolice, BE, BFM, AmePure, LostCorruption);
 
     // Bloc Corruption Détail (extrait dans PdfBlocCorruptionDetail, CONTEXT.md §2.6) :
     // tableau Montant | Libellé, à droite d'Expérience/Corruption, dans l'espace libéré
@@ -4415,7 +4475,7 @@ Procedure PdfPersonnageCreationFeldo2P(Personnage: StructurePersonnage);
     TableauCompG.TitreDecalageGauche := 15;
     TableauCompG.NbLignesMax        := DessinNbLigComg - 2; // 2 lignes d'en-tête (titre + libellés)
 
-    SetLength(TableauCompG.Champs, 6);
+    SetLength(TableauCompG.Champs, 7);
     TableauCompG.Champs[0].Libelle           := GetTexteLibelle('RULES-PDF_SKILLS2_NAME');
     TableauCompG.Champs[0].Champ             := 'Nom';
     TableauCompG.Champs[0].Largeur           := 143 - DessinDebColD;
@@ -4450,13 +4510,21 @@ Procedure PdfPersonnageCreationFeldo2P(Personnage: StructurePersonnage);
     TableauCompG.Champs[5].DecalageValeurMin := 2.5;
     TableauCompG.Champs[5].DecalageValeurMax := 2.5;
 
+    // Colonne "avec equipement" (CONTEXT.md 2.59) : meme principe que TableauComp - remplie
+    // par PdfPreparerRecordSetCompetencesGroupees. La table s'elargit d'autant vers la droite
+    // (DessinDebColD, son bord gauche, reste inchange) ; marge page restante ~13mm (>1cm).
+    TableauCompG.Champs[6].Libelle           := GetTexteLibelle('RULES-PDF_SKILLS2_GEAR');
+    TableauCompG.Champs[6].Champ             := 'AvecEquipement';
+    TableauCompG.Champs[6].DecalageValeurMin := 2.5;
+    TableauCompG.Champs[6].DecalageValeurMax := 2.5;
+
     DonneesCompG := PdfPreparerRecordSetCompetencesGroupees(Personnage, ListPris, DessinNbLigComg - 2, ListAsterisqueArmure);
     // ListAsterisqueArmure et AsterisqueParEquipement libérées plus loin, après
     // PdfBlocArmuresDonnees (page 2) qui utilise encore la seconde
     DessinDebutHautTal := DessinerTableau(PdfPage, TableauCompG, DonneesCompG) - 3;
 
     // Bloc Talents (extrait dans PdfBlocTalents, CONTEXT.md §2.4)
-    PdfBlocTalents(PdfPage, Personnage, DessinDebColD, DessinFinColD, DessinDebutHautTal, DessinHauteurTal, DessinNbLigTal, MinPolice);
+    PdfBlocTalents(PdfPage, Personnage, DessinDebColD, DessinFinColCompD, DessinDebutHautTal, DessinHauteurTal, DessinNbLigTal, MinPolice);
 
 
    // PAGE 2
