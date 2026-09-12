@@ -7637,14 +7637,16 @@ compilation entre les deux (validation Nono du 12/09/2026 : « oui, je valide »
   filtre Livre s'affiche déjà par défaut pour tout appelant qui n'est ni `ConstXmlWork` ni
   `ConstXmlSort`).
 - Bouton `ButtonFiltre: TBCButton` ajouté aux deux `.lfm`, copié du style de
-  `winweapon.lfm`, dans la zone libre au-dessus de la grille catalogue (Left=9,
-  Top=30, Height=64 ; Width=600 pour WinCompetence, Width=420 pour WinTalent - grille plus
-  étroite). Nono a prévenu que l'ajustement fin du positionnement viendrait plus tard de
-  son côté - non bloquant, laissé tel quel.
+  `winweapon.lfm`, placé dans la zone libre au-dessus de la grille catalogue. Position
+  initiale posée par moi (Left=9, Top=30), **ajustement fin fait par Nono lui-même
+  ensuite dans l'IDE** (WinCompetence : Top=96 ; WinTalent : Left=12/Top=112, grille
+  décalée en conséquence) - les deux `.lfm` portent maintenant `LCLVersion = '4.8.0.0'`
+  (resave par sa version de Lazarus, sans rapport avec le chantier).
 
 **Compilé (lazbuild, 0 erreur)** après chacun des deux fichiers. **Validé par Nono à
 l'écran** sur les deux fenêtres : filtre sur un livre restreint la grille, revalider sans
-rien cocher restaure la liste complète.
+rien cocher restaure la liste complète. **Commité et re-testé par Nono** après son
+ajustement de position.
 
 **Hors périmètre, reste ouvert** : WinFabrication n'a toujours aucune notion de livre
 (pas de champ `Livre` dans sa structure de données) - chantier plus lourd que les deux
