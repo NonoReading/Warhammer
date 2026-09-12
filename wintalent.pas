@@ -236,7 +236,9 @@ begin
     if Pos(ValeurGenerique, AffCode.Text) > 0 then
       begin
         For PTalent in ListTalent do
-          if (PTalent.CodeTalent <> AffCode.Text) and (ExtractStringBefore(Ptalent.CodeTalent,ValeurSousCompetence) = ExtractStringBefore(AffCode.Text,ValeurSousCompetence)) then
+          // Meme radical SANS le livre : une specialisation de talent peut venir d'un livre
+          // different de son talent generique (meme piege que wincompetence.pas).
+          if (PTalent.CodeTalent <> AffCode.Text) and (ExtractStringBefore(CodeSansLivre(Ptalent.CodeTalent),ValeurSousCompetence) = ExtractStringBefore(CodeSansLivre(AffCode.Text),ValeurSousCompetence)) then
             begin
               Inc(Ind);
               if Ind = TabSpe.RowCount then

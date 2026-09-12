@@ -43,8 +43,11 @@ implementation
 Procedure TWinSpecialisations.AjouteLigne(Gen: String; Code: String; Lib :string; Typ :String; SansTest :Boolean);
 // ajouter une ligne dans la table
   Begin
+    // Comparer les radicaux SANS le prefixe de livre : Code et Gen peuvent venir de deux
+    // livres differents (ex. RULES-COMPPROJ_* generique, LUSTR-COMPPROJ_SARBAC specialisation),
+    // le prefixe seul suffit sinon a faire echouer le rapprochement.
     if (SansTest = true) or
-       ((ExtractStringBefore(Code,'_') = ExtractStringBefore(Gen,'_'))
+       ((ExtractStringBefore(CodeSansLivre(Code),'_') = ExtractStringBefore(CodeSansLivre(Gen),'_'))
            and (Pos(SeparateurMulti, Code) = 0)
            and (Pos(ValeurGenerique, Code) = 0)) then
       begin

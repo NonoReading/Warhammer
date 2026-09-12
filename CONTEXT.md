@@ -1,9 +1,13 @@
 # Warhammer — Contexte projet
 
-**Dernière mise à jour : 12/09/2026 — DISCLAIMERS DES LIVRES TERMINÉ, ANCRAGE DES
-CONTRÔLES TOUJOURS EN PAUSE.** Chantier disclaimers ouvert et clos dans la foulée (§2.65) :
-19 des 21 livres portent maintenant leur mention légale, bouton dédié sur le menu principal,
-compilé et vu par Nono à l'écran.
+**Dernière mise à jour : 12/09/2026 — FILTRAGE PAR LIVRE DANS WINPERSONNAGE TERMINÉ,
+CORRESPONDANCE GÉNÉRIQUE/SPÉCIALISATION CORRIGÉE AU FIL DE L'EAU (CONCEPTION DU LIEN
+EXPLICITE NON APPLIQUÉE), ANCRAGE DES CONTRÔLES TOUJOURS EN PAUSE.** Deux chantiers ouverts
+et clos dans la foulée (§2.66, §2.67) : WinPersonnage respecte maintenant les livres du
+personnage pour les armes/armures/sorts/spécialités, et plusieurs comparaisons générique↔
+spécialisation qui ignoraient les spécialisations venant d'un autre livre ont été corrigées.
+Une conception plus solide (lien explicite en donnée plutôt que radical déduit) reste à
+faire, décrite et arrêtée en §2.67.
 
 Chantier en pause (sans changement depuis la dernière session) : **ancrage des contrôles**,
 commencé sur WinPersonnage (fenêtre principale, choix de Nono). Nono : *« je crois que je vais
@@ -7430,6 +7434,108 @@ non échappé.
   n'ont pas de disclaimer propre, ni le livre perso.** `BOOK_RULESBOOK_FRANCAIS.Xml` et
   `BOOK_PERSO.Xml` restent donc sans le champ `DISCLAIMER`, pas par oubli mais par règle -
   ne pas ressortir ça en anomalie si un futur inventaire les trouve vides.
+
+---
+
+### 2.66 Filtrage par livre dans WinPersonnage (armes, armures, sorts, spécialités) — terminé, validé par Nono (12/09/2026)
+
+**Origine.** Nono : quand on ajoute une arme depuis WinPersonnage, toutes les armes de tous
+les livres apparaissent, pas seulement celles des livres cochés sur le personnage.
+
+**Cause.** `SelectWinLivre` (variable globale lue par les fenêtres de choix au chargement)
+n'était jamais positionné par WinPersonnage avant d'ouvrir la fenêtre - contrairement à
+`ButtonRaceSelectionnerClick` (choix de carrière), seul appelant déjà correct, qui fait
+`SelectWinLivre := Personnage.LivresAcceptes` avant d'ouvrir WinMetier. Sans ça, le filtre
+reste sur ce qu'une fenêtre précédente y a laissé (ou vide au démarrage), et `VerifieFiltre`
+traite une liste vide comme "tout accepter" (`chargeconstantes.pas`).
+
+**Corrigé dans `winpersonnage.pas`** (même schéma partout : positionner avant `.ShowModal`,
+remettre à vide juste après) :
+- `ButtonArmeClick` (armes) et `ButtonArmureClick` (armures) - **validés par Nono à l'écran**.
+- `TabSortDblClick` et `ButtonSortClick` (sorts) - **validé par Nono**. A nécessité un second
+  correctif : `WinSpell.FormCreate` ne lisait même pas `SelectWinLivre` (contrairement à
+  WinWeapon/WinArmor), corrigé en ajoutant `FiltreLivre := SelectWinLivre;` avant
+  `WinCharger()`.
+- Les 4 ouvertures de `WinSpecialisation` (spécialité de compétence, spécialité de talent,
+  équipement au choix d'une carrière, appartenance/régiment-ordre-culte) - `WinSpecialisation`
+  lisait déjà `SelectWinLivre` correctement à l'ouverture, seul le côté WinPersonnage
+  manquait.
+
+**Hors périmètre, gap plus profond repéré en passant, pas corrigé.** `WinTalent` et
+`WinCompetence` (fenêtres catalogue) n'ont **aucun mécanisme de filtre par livre** dans le
+fichier - juste une colonne d'affichage du livre, pas de `FiltreLivre`/bouton Filtre comme
+WinWeapon en a. `WinFabrication` n'a même pas de notion de livre. Ajouter cette
+infrastructure est un chantier à part (voir `A FAIRE.txt`).
+
+---
+
+### 2.67 Générique ↔ spécialisation à travers les livres : radical sans préfixe corrigé au fil de l'eau, lien explicite en donnée arrêté mais non appliqué (12/09/2026)
+
+**Origine.** En testant le filtrage du §2.66, Nono a un personnage avec le livre Lustria
+coché mais qui ne voit "Ranged (Blowpipe)" (`LUSTR-COMPPROJ_SARBAC`) nulle part parmi les
+spécialisations de "Ranged (Any)" (`RULES-COMPPROJ_*`) - alors que le filtre par livre est
+maintenant correct.
+
+**Cause de fond.** Plusieurs endroits du projet déterminent qu'un code appartient à la
+famille d'un autre en comparant leur radical (la partie avant le `_`) **préfixe de livre
+inclus** (`ExtractStringBefore(Code,'_') = ExtractStringBefore(Gen,'_')`). Tant que la
+spécialisation et sa générique viennent du même livre, ça marche ; dès qu'un livre étend une
+famille définie dans un autre livre (Lustria étend "Ranged (Any)" du Rulebook), les deux
+préfixes diffèrent et la comparaison échoue toujours - même famille de piège que les
+précédents bugs de préfixe (§2.49), pas encore vue sous cet angle.
+
+**Corrigé, radical comparé via `CodeSansLivre` (déjà dans `UnitCalcul`) des deux côtés :**
+- `winspecialisation.pas` `AjouteLigne` - fenêtre de choix de spécialité. **Validé par Nono**
+  ("Ranged (Blowpipe)" apparaît).
+- `wincompetence.pas` (l.186 et l.205) - fenêtre catalogue de compétences (carrières qui la
+  portent, spécialisations sœurs). **Validé par Nono** (même test, "Ranged (Blowpipe)"
+  apparaît dans le tableau du bas).
+- `wintalent.pas` (l.239) - même correctif côté talents, par cohérence. Compilé, **rien à
+  valider aujourd'hui** : aucune spécialisation de talent ne vient d'un livre différent de
+  son talent générique dans les données actuelles.
+- `chargepersonnage.pas` `PersonnageMutationCompetenceModif` - reconstruit le code générique
+  d'une sous-compétence pour trouver son `Attribut` (effets de mutation par famille). Ici
+  `CodeSansLivre` seul ne suffit pas : le code est ensuite passé à `ChercheCompetence`/
+  `CompareRechercheValeur`, qui **exigent le même livre** pour matcher (fonctions volontai-
+  rement pas touchées - trois retours en arrière documentés en `chargeconstantes.pas` pour
+  ce genre de durcissement). Le correctif retrouve donc le VRAI code complet (livre correct)
+  de l'entrée générique en cherchant dans `ListCompetence` par radical, puis l'utilise à la
+  place du code reconstruit. Compilé, **pas testé à l'écran** (demande une mutation ciblant
+  une famille de compétence ET une spécialisation de cette famille venant d'un autre livre -
+  cas rare à construire) - à surveiller si un effet de mutation semble ne pas s'appliquer.
+- `winpersonnage.pas` `TalentAsterisc` (astérisques croisées talent → compétence, PDF) - **un
+  second bug empilé ici, sans rapport avec le livre**, trouvé en creusant : les références
+  compétence du champ `<PDF>` d'un talent (ex. `"COMPCOMB_*"`) ne portent **jamais** de
+  préfixe de livre dans les données, alors que les codes de `TabCompetence` en portent un
+  depuis le chantier des préfixes (§2.49, 06/09/2026). Le test d'égalité exacte
+  (`Cells[...] = Strings[IndS]`) et le test de marqueur générique (`Pos(Cells[...],
+  ValeurGenerique)`, arguments inversés) ne pouvaient donc plus jamais réussir pour AUCUNE
+  compétence depuis cette date - pas seulement les cas inter-livres. Corrigé : comparaison
+  via `CodeSansLivre` côté compétence, et `Pos(ValeurGenerique, Strings[IndS])` (arguments
+  remis dans le bon sens - c'est la référence du talent qui dit si elle vise toute la
+  famille, pas le code de la compétence). Compilé, **à valider** : personnage avec le talent
+  "Step Aside" (`RULES-T0112`) et la compétence Dodge (`COMPESQU`) - un numéro d'astérisque
+  doit relier les deux.
+
+**Repéré, même défaut, PAS corrigé cette session (à traiter au fil de l'eau, pas en audit
+systématique - même choix que §0/CONTEXT.md pour `VerifieRecherche`) :**
+`pdfpersonnage.pas` (l.561, l.2207), `xmlexportimport.pas` (l.1359, `PCompetenceMere`),
+`chargetalent.pas` (l.85, l.190, `ChercheTalent`), `wincompetence.pas` (l.98),
+`wintalent.pas` (l.100) - même reconstruction de code générique en gardant le préfixe du
+code source, même risque qu'une spécialisation d'un autre livre que sa générique échoue.
+Voir `A FAIRE.txt`.
+
+**Risque soulevé par Nono, conception arrêtée mais NON appliquée.** Comparer les radicaux
+sans le préfixe de livre retire une protection involontaire : deux radicaux identiques par
+coïncidence dans deux livres SANS RAPPORT (ex. un futur livre choisit `COMPPROJ` pour tout
+autre chose que "Ranged") seraient désormais traités comme la même famille. **La vraie
+solution** : donner à chaque entrée de `DATA_SKILL_SPECIALIZATION`/`DATA_TALENT_SPECIALIZATION`
+un champ explicite portant le code complet de sa générique, au lieu de le déduire du
+radical. Chantier plus lourd qu'un correctif de code : nouveau champ XML, rétro-remplissage
+de toutes les spécialisations déjà saisies dans tous les livres, mise à jour de
+`xmlexportimport.pas` et de tous les points de comparaison listés ci-dessus pour lire ce
+champ en priorité. **Décision de Nono (12/09/2026) : noter la conception, garder les
+correctifs par radical en attendant, ne pas démarrer ce chantier maintenant.**
 
 ---
 

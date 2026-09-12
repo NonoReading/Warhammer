@@ -183,7 +183,9 @@ procedure TWinCompetence.TabCompetenceAfterSelection(Sender: TObject; aCol,
     TabMetierCompetence.RowCount := 2;
     Ind := 0;
     For PMetierCompetence in ListMetierCompetence do
-      if ExtractStringBefore(PMetierCompetence.CodeCompetence,'_') = extractStringBefore(AffCode.Text,'_') then
+      // Radicaux compares SANS le prefixe de livre : une carriere d'un livre peut citer une
+      // competence generique d'un autre (meme piege que winspecialisation.pas AjouteLigne).
+      if ExtractStringBefore(CodeSansLivre(PMetierCompetence.CodeCompetence),'_') = extractStringBefore(CodeSansLivre(AffCode.Text),'_') then
         begin
           PMetier := chercheMetier(PMetierCompetence.CodeMetier);
           Inc(Ind);
@@ -202,7 +204,9 @@ procedure TWinCompetence.TabCompetenceAfterSelection(Sender: TObject; aCol,
     if Pos(ValeurGenerique, AffCode.Text) > 0 then
       begin
         For PCompetence in ListCompetence do
-          if (PCompetence.CodeCompetence <> AffCode.Text) and (ExtractStringBefore(PCompetence.CodeCompetence,ValeurSousCompetence) = ExtractStringBefore(AffCode.Text,ValeurSousCompetence)) then
+          // Meme radical SANS le livre : une specialisation (ex. LUSTR-COMPPROJ_SARBAC) peut
+          // venir d'un livre different de sa competence generique (ex. RULES-COMPPROJ_*).
+          if (PCompetence.CodeCompetence <> AffCode.Text) and (ExtractStringBefore(CodeSansLivre(PCompetence.CodeCompetence),ValeurSousCompetence) = ExtractStringBefore(CodeSansLivre(AffCode.Text),ValeurSousCompetence)) then
             begin
               Inc(Ind);
               if Ind = TabSpe.RowCount then

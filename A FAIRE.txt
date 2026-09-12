@@ -6,6 +6,19 @@
 CORRECTIONS COURTES  (une ligne ou deux chacune)
 =========================================================================
 
+MEME RECONSTRUCTION DE CODE GENERIQUE EN GARDANT LE PREFIXE DE LA SPECIALISATION, PAS
+CORRIGEE PARTOUT (CONTEXT.md 2.67). pdfpersonnage.pas l.561/2207, xmlexportimport.pas
+l.1359 (PCompetenceMere), chargetalent.pas l.85/190 (ChercheTalent), wincompetence.pas
+l.98, wintalent.pas l.100 : meme piege que ButtonArmeClick/AjouteLigne deja corriges - si
+la specialisation vient d un livre different de sa generique, la recherche echoue. A
+corriger au fil de l eau si un cas concret se presente, meme methode qu ailleurs.
+
+WINTALENT/WINCOMPETENCE N ONT AUCUN FILTRE PAR LIVRE (CONTEXT.md 2.66). Contrairement a
+WinWeapon/WinArmor/WinSpell, ces deux fenetres catalogue n ont ni FiltreLivre ni bouton
+Filtre - tous les talents/competences de tous les livres s affichent toujours. WinFabrication
+n a meme pas de notion de livre. Chantier a part : ajouter l infrastructure, pas juste
+appeler SelectWinLivre depuis WinPersonnage.
+
 LE TEST DE RADICAL DE TALENT SUPPOSE UN CODE DE 5 CARACTERES. winpersonnage.pas l.3245,
 copy(CodeSansLivre(...),1,5) : vrai pour les 868 codes en T+4 chiffres, faux pour les ids
 "A ou B" comme T0009/RULES-T0067 (seul le premier est compare) et pour le generique T*. Ce

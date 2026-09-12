@@ -3306,3 +3306,50 @@ Voir CONTEXT.md 2.65.
 Fichiers modifies : chargelivre.pas, chargeconstantes.pas, xmlexportimport.pas,
 warhammersource.pas, warhammersource.lfm, 19 fichiers DATABASE\BOOK*.Xml, A FAIRE.txt,
 CONTEXT.md.
+
+12/09/2026 - FILTRAGE PAR LIVRE DANS WINPERSONNAGE (ARMES, ARMURES, SORTS, SPECIALITES),
+TERMINE ET VALIDE PAR NONO. Signale par Nono : ajouter une arme depuis WinPersonnage montre
+toutes les armes de tous les livres, pas seulement celles des livres coches sur le personnage.
+Cause : SelectWinLivre (variable globale lue par les fenetres de choix au chargement) n etait
+jamais positionne par WinPersonnage avant d ouvrir la fenetre, contrairement au choix de
+carriere (ButtonRaceSelectionnerClick), seul appelant deja correct.
+Corrige dans winpersonnage.pas : ButtonArmeClick, ButtonArmureClick (valides par Nono), puis
+TabSortDblClick/ButtonSortClick pour les sorts (valide) - a necessite aussi un correctif dans
+winspell.pas, dont le FormCreate ne lisait meme pas SelectWinLivre - et les 4 ouvertures de
+WinSpecialisation (specialite de competence/talent, equipement au choix d une carriere,
+appartenance).
+Gap plus profond repere en passant, pas corrige : WinTalent et WinCompetence n ont aucun
+mecanisme de filtre par livre (contrairement a WinWeapon/WinArmor/WinSpell), WinFabrication
+n a meme pas de notion de livre. Voir A FAIRE.txt et CONTEXT.md 2.66.
+Fichiers modifies : winpersonnage.pas, winspell.pas, A FAIRE.txt, CONTEXT.md.
+
+12/09/2026 - GENERIQUE / SPECIALISATION A TRAVERS LES LIVRES : RADICAL CORRIGE AU FIL DE
+L EAU, LIEN EXPLICITE EN DONNEE ARRETE MAIS NON APPLIQUE. Suite immediate du filtrage par
+livre : Nono a un personnage avec Lustria coche qui ne voit "Ranged (Blowpipe)"
+(LUSTR-COMPPROJ_SARBAC) nulle part parmi les specialisations de "Ranged (Any)"
+(RULES-COMPPROJ_*).
+Cause : plusieurs comparaisons de radical (la partie avant le _) incluent encore le prefixe de
+livre - marche tant que specialisation et generique viennent du meme livre, echoue toujours
+sinon. Meme famille de piege que les bugs de prefixe deja connus (CONTEXT.md 2.49).
+Corrige, radical compare via CodeSansLivre : winspecialisation.pas AjouteLigne (valide par
+Nono), wincompetence.pas l.186/205 (valide par Nono), wintalent.pas l.239 (rien a valider
+aujourd hui, aucune donnee concernee dans la base actuelle), chargepersonnage.pas
+PersonnageMutationCompetenceModif (retrouve le vrai code complet de la generique via
+ListCompetence plutot que CodeSansLivre seul, parce que ChercheCompetence/
+CompareRechercheValeur exigent le meme livre - pas teste a l ecran, cas rare a construire).
+Deuxieme bug trouve en creusant winpersonnage.pas TalentAsterisc (asterisques croisees
+talent -> competence), sans rapport avec le livre : depuis le chantier des prefixes (2.49),
+le test d egalite exacte et le test de marqueur generique (arguments de Pos inverses) ne
+pouvaient plus jamais reussir pour AUCUNE competence. Corrige les deux.
+Pas corrige cette session, meme piege releve : pdfpersonnage.pas, xmlexportimport.pas
+(PCompetenceMere), chargetalent.pas (ChercheTalent), wincompetence.pas l.98, wintalent.pas
+l.100 - a corriger au fil de l eau. Voir A FAIRE.txt.
+Risque souleve par Nono : comparer sans le livre retire une protection involontaire contre
+une collision de radical entre deux livres sans rapport. Vraie solution : un champ explicite
+liant chaque specialisation a sa generique dans les donnees (DATA_SKILL_SPECIALIZATION/
+DATA_TALENT_SPECIALIZATION), plutot qu une deduction par radical - chantier plus lourd
+(nouveau champ XML, retro-remplissage de tous les livres, xmlexportimport.pas, tous les
+points de comparaison). Decision de Nono : noter la conception (CONTEXT.md 2.67), garder
+les correctifs par radical en attendant, ne pas demarrer ce chantier maintenant.
+Fichiers modifies : winspecialisation.pas, wincompetence.pas, wintalent.pas,
+chargepersonnage.pas, winpersonnage.pas, A FAIRE.txt, CONTEXT.md.

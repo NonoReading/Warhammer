@@ -639,6 +639,7 @@ Var
 begin
   // ouvrir les métiers
   SelectWinSort     := TabSort.Cells[3, TabSort.Row];
+  SelectWinLivre    := Personnage.LivresAcceptes;
   FenSort           := TWinSpells.Create(Application);
   FenSort.Position  := poOwnerFormCenter;
   FenSort.ShowModal;
@@ -649,8 +650,9 @@ begin
       TabSort.Cells[1, TabSort.Row] := PSort.CodeSort;
       TabSort.Cells[2, TabSort.Row] := PSort.Libelle;
     end;
-  SelectWinSort := '';
-  ChoixWinSort  := '';
+  SelectWinSort  := '';
+  SelectWinLivre := '';
+  ChoixWinSort   := '';
 end;
 
 procedure TWinPersonnages.TabTalentDblClick(Sender: TObject);
@@ -770,6 +772,7 @@ procedure TWinPersonnages.ButtonArmeClick(Sender: TObject);
   begin
     // ouvrir les métiers
     SelectWinArme     := ConstSelectionne;
+    SelectWinLivre    := Personnage.LivresAcceptes;
     FenArme           := TWinWeapons.Create(Application);
     FenArme.Position  := poOwnerFormCenter;
     FenArme.ShowModal;
@@ -785,8 +788,9 @@ procedure TWinPersonnages.ButtonArmeClick(Sender: TObject);
         TabEquipement.Cells[4, TabEquipement.RowCount-1]:= PArme.Libelle;
         AdjustGridColumnsWidth(TabEquipement, 0, false, false);
       end;
-    SelectWinArme := '';
-    ChoixWinArme  := '';
+    SelectWinArme  := '';
+    SelectWinLivre := '';
+    ChoixWinArme   := '';
 end;
 
 procedure TWinPersonnages.ButtonFabricationClick(Sender: TObject);
@@ -992,6 +996,7 @@ procedure TWinPersonnages.ButtonArmureClick(Sender: TObject);
     // ouvrir les métiers
     SelectWinQuickArmor := CheckBoxQuickArmor.Checked;
     SelectWinArmure     := ConstSelectionne;
+    SelectWinLivre      := Personnage.LivresAcceptes;
     FenArmure           := TWinArmors.Create(Application);
     FenArmure.Position  := poOwnerFormCenter;
     FenArmure.ShowModal;
@@ -1018,6 +1023,7 @@ procedure TWinPersonnages.ButtonArmureClick(Sender: TObject);
         AdjustGridColumnsWidth(TabEquipement, 0, false, false);
       end;
     SelectWinArmure := '';
+    SelectWinLivre  := '';
     ChoixWinArmure  := '';
 end;
 
@@ -1365,6 +1371,7 @@ procedure TWinPersonnages.ButtonSortClick(Sender: TObject);
     else
       begin
       SelectWinSort     := ListeTalent;
+      SelectWinLivre    := Personnage.LivresAcceptes;
       FenSort           := TWinSpells.Create(Application);
       FenSort.Position  := poOwnerFormCenter;
       FenSort.ShowModal;
@@ -1387,8 +1394,9 @@ procedure TWinPersonnages.ButtonSortClick(Sender: TObject);
             ShowMEssage(GetTexteLibelle('RULES-MESS_036'));
         end;
       end;
-    SelectWinSort := '';
-    ChoixWinSort  := '';
+    SelectWinSort  := '';
+    SelectWinLivre := '';
+    ChoixWinSort   := '';
 end;
 
 procedure TWinPersonnages.CalculXpGlobal(Mode25: boolean);
@@ -2750,9 +2758,11 @@ procedure TWinPersonnages.TabAugmentationCompetenceDblClick(Sender: TObject);
         // ajouter une spécialité
         ChoixWinTypeFichier         := ConstXmlSousChapitreCompetence;
         ChoixWinCompetence          := TabAugmentationCompetence.Cells[ColAugmCompCode, TabAugmentationCompetence.Row];
+        SelectWinLivre              := Personnage.LivresAcceptes;
         FenSpecialisation           := TWinSpecialisations.Create(Application);
         FenSpecialisation.Position  := poOwnerFormCenter;
         FenSpecialisation.ShowModal;
+        SelectWinLivre := '';
         if SelectWinCompetence <> '' then
           begin
             TabAugmentationCompetence.Cells[ColAugmCompSpe, TabAugmentationCompetence.Row]    := GetTexteLibelle('RULES-LAB_130');
@@ -2838,9 +2848,11 @@ procedure TWinPersonnages.TabAugmentationTalentDblClick(Sender: TObject);
       begin
         ChoixWinTypeFichier         := ConstXmlSousChapitreTalent;
         ChoixWinTalent              := TabAugmentationTalent.Cells[ColAugmTalCode, TabAugmentationTalent.Row];
+        SelectWinLivre              := Personnage.LivresAcceptes;
         FenSpecialisation           := TWinSpecialisations.Create(Application);
         FenSpecialisation.Position  := poOwnerFormCenter;
         FenSpecialisation.ShowModal;
+        SelectWinLivre := '';
         if SelectWinTalent <> '' then
           begin
             TabAugmentationTalent.Cells[ColAugmTalSpe, TabAugmentationTalent.Row] := GetTexteLibelle('RULES-LAB_130');
@@ -3459,12 +3471,20 @@ Procedure TWinPersonnages.TalentAsterisc();
                   begin
                     for IndA := 1 to TabCompetence.RowCount-1 do
                       begin
-                        if ExtractStringBefore(tabCompetence.Cells[ColCompCode, IndA],'_') = ExtractStringBefore(Strings[IndS], '_') then
+                        // Radicaux compares SANS le prefixe de livre : la reference du talent
+                        // et la competence de la fiche peuvent venir de deux livres differents
+                        // (meme piege que winspecialisation.pas/wincompetence.pas).
+                        if ExtractStringBefore(CodeSansLivre(tabCompetence.Cells[ColCompCode, IndA]),'_') = ExtractStringBefore(CodeSansLivre(Strings[IndS]), '_') then
                           begin
                             Acc := false;
-                            if (tabCompetence.Cells[ColCompCode, IndA] = Strings[IndS]) then
+                            // Strings[IndS] (le "COMPXXX" du <PDF> du talent) ne porte jamais de
+                            // prefixe de livre - comparer sa partie centrale, pas le code complet
+                            // prefixe de la fiche. Et c'est la reference du talent qui dit si elle
+                            // vise toute la famille (ValeurGenerique dans Strings[IndS]), pas le
+                            // code de la competence.
+                            if (CodeSansLivre(tabCompetence.Cells[ColCompCode, IndA]) = Strings[IndS]) then
                               Acc := True
-                            else if Pos(tabCompetence.Cells[ColCompCode, IndA], ValeurGenerique) > 0 then
+                            else if Pos(ValeurGenerique, Strings[IndS]) > 0 then
                               Acc := true;
                             if Acc = True then
                               Begin
@@ -3784,9 +3804,11 @@ procedure TWinPersonnages.TabMetierEquipementDblClick(Sender: TObject);
       Begin
         ChoixWinTypeFichier         := ConstXmlChapitreEquipement;
         ChoixWinEquipement          := TabMetierEquipement.Cells[3, TabMetierEquipement.Row];
+        SelectWinLivre              := Personnage.LivresAcceptes;
         FenSpecialisation           := TWinSpecialisations.Create(Application);
         FenSpecialisation.Position  := poOwnerFormCenter;
         FenSpecialisation.ShowModal;
+        SelectWinLivre := '';
         if SelectWinEquipement <> '' then
           begin
             TabMetierEquipement.Cells[1, TabMetierEquipement.Row] := SelectWinEquipement;
@@ -5107,9 +5129,11 @@ Procedure TWinPersonnages.MajTables();
                   // touche pas a SelectWin..., qui garderait sinon la reponse du choix
                   // precedent.
                   SelectWinCareerBonus        := '';
+                  SelectWinLivre              := Personnage.LivresAcceptes;
                   FenSpecialisation           := TWinSpecialisations.Create(Application);
                   FenSpecialisation.Position  := poOwnerFormCenter;
                   FenSpecialisation.ShowModal;
+                  SelectWinLivre := '';
                   if SelectWinCareerBonus <> '' then
                     if Trim(Personnage.Appartenance) = '' then
                       Personnage.Appartenance := SelectWinCareerBonus

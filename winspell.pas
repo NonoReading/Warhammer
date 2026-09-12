@@ -232,6 +232,7 @@ procedure TWinSpells.WinCharger();
 
 procedure TWinSpells.FormCreate(Sender: TObject);
   Begin
+      FiltreLivre := SelectWinLivre;
       WinCharger();
   end;
 
