@@ -144,6 +144,24 @@ profils complets (caracteristiques, Traits, Optional) et la table d10 des elemen
 sont en fin d Explanation des sorts Form of the Frostfiend et Summon Djinn, faute de champ.
 A reprendre avec le morceau "creatures" du lot 3 si on veut de vraies creatures.
 
+LES ASTERISQUES DE COMPETENCE DEVIENNENT ILLISIBLES A PLUSIEURS SOURCES (Nono,
+13/09/2026). winpersonnage.pas l.3282 (Competence liee a un talent) concatene un '*' au
+libelle a chaque entree Personnage.TalentCompetence qui matche la competence - 3 talents
+sur la meme competence donnent 3 asterisques colles ("Charm***"), illisible. Faire un
+total (une seule marque ou un chiffre agrege) plutot que d'empiler les asterisques.
+
+WINRACE DEVRAIT LISTER LES RACES, PAS LES ETHNIES (Nono, 13/09/2026). Affiche
+actuellement les ethnies (DATA_SPECIE, ex. Humans (Reikland), Humans (Middenlander)...)
+une par une - devrait n'afficher que les races (DATA_RACE), sauf un cas particulier ou un
+metier est specifique a une seule ethnie d'une race (regle exacte oubliee par Nono, a
+clarifier avec lui avant de coder).
+
+REFAIRE L'ANCRAGE DE LA FENETRE PRINCIPALE (TMenu, Nono, 13/09/2026). TabLivre et
+TabPersonnage (warhammersource.lfm) sont aujourd'hui Anchors=[akTop,akLeft,akBottom], sans
+akRight : ils restent figes en largeur quand la fenetre s'elargit. A refaire pour qu'ils se
+partagent l'ecart moitie-moitie a l'elargissement, et deplacer/reancrer les controles
+places entre les deux (et apres) en consequence.
+
 =========================================================================
 CONCEPTIONS A MENER  (chantiers a part entiere, ne pas les melanger)
 =========================================================================
