@@ -3616,3 +3616,27 @@ Diff verifie propre sur les trois fichiers modifies (uniquement des ajouts, rien
 Pas encore compile/teste par Nono a la fin de cette session.
 Fichiers modifies : chargeconstantes.pas, warhammersource.pas, warhammersource.lfm,
 CONTEXT.md, Log.txt.
+
+13/09/2026 - VERSIONING WFRP4/WFRP5 : AFFICHAGE DE LA LANGUE D'INTERFACE BRANCHE, COMPILE ET
+VALIDE PAR NONO (CONTEXT.md 2.70). Suite immediate de la session precedente : Nono avait
+repositionne Panel3/ComboBoxLangueInterface (haut a droite) et ajoute Label5 "Interface"
+(RULES-LAB_184) lui-meme, teste (les deux langues s'affichent dans le combo), puis a demande
+de finir la partie affichage qu'il avait explicitement laissee de cote.
+- Nouvelle constante ConstInterfaceBook = 'INTERFACE' (chargeconstantes.pas) = valeur du tag
+  <BOOK> d'INTERFACE.Xml/INTERFACE_FRANCAIS.Xml, utilisee comme filtre Livre de Traduit() pour
+  ne retraduire QUE les libelles d'interface sans toucher aux autres livres.
+- ComboBoxLangueInterfaceSelect appelle desormais Traduit(ValLangueInterface,
+  ConstInterfaceBook) puis RafraichirLibellesMenu() des que la selection change.
+- Bug de couplage trouve en analysant le mecanisme existant : ChargerLivre appelle en interne
+  Traduit(ValLangue,'') avec un filtre Livre='' (TOUS les livres, INTERFACE compris) - sans
+  correctif, changer la langue des LIVRES (ComboBoxLangueSelect) ou le chargement initial
+  (FormCreate) aurait silencieusement ecrase la langue d'interface choisie. Les deux endroits
+  reappliquent maintenant Traduit(ValLangueInterface, ConstInterfaceBook) juste apres.
+- Limite connue, volontairement laissee de cote : les fenetres secondaires deja ouvertes
+  (WinLivre, WinCompetence, WinTalent...) ne sont pas fermees/rouvertes comme lors d'un
+  changement de langue de livre - leurs libelles restent dans l'ancienne langue d'interface
+  jusqu'a reouverture.
+- Diff verifie propre (uniquement des ajouts, rien retire).
+- Compile (lazbuild, 0 erreur, aucun warning sur les lignes modifiees).
+- Valide par Nono : "j'ai teste, cela marche parfaitement".
+Fichiers modifies : chargeconstantes.pas, warhammersource.pas, CONTEXT.md, Log.txt.

@@ -66,7 +66,9 @@ type
     Label2: TBCLabel;
     Label3: TBCLabel;
     Label4: TBCLabel;
+    Label5: TBCLabel;
     Panel2: TPanel;
+    Panel3: TPanel;
     TabLivre: TStringGrid;
     TotLivreArmure: TEdit;
     TotLivreSort: TEdit;
@@ -346,6 +348,10 @@ procedure TMenu.ComboBoxLangueSelect(Sender: TObject);
 
                   ValLangue := Langue;
                   ChargerLivre(true, '');
+                  // ChargerLivre vient d'appliquer Traduit(ValLangue,'') à TOUS les livres, y
+                  // compris INTERFACE - la langue d'interface doit rester décorrélée de la
+                  // langue des livres (CONTEXT.md §2.70).
+                  Traduit(ValLangueInterface, ConstInterfaceBook);
                   ChargerPersonnages();
                   RafraichirLibellesMenu();
                   SauveIni();
@@ -504,6 +510,14 @@ procedure TMenu.ComboBoxLangueInterfaceSelect(Sender: TObject);
           begin
             ValLangueInterface := Langue;
             SauveIni();
+            // Retraduire uniquement les libellés d'interface (RULES-LAB_*/RULES-MESS_*, Livre
+            // = ConstInterfaceBook) et rafraîchir les captions déjà posées sur le menu -
+            // affichage demandé par Nono (CONTEXT.md §2.70). Les fenêtres secondaires
+            // (WinLivre, WinCompetence, ...) ne sont pas fermées/rouvertes ici, contrairement
+            // au changement de langue des livres : leurs libellés RULES-LAB_*/RULES-MESS_*
+            // resteront dans l'ancienne langue d'interface jusqu'à réouverture.
+            Traduit(ValLangueInterface, ConstInterfaceBook);
+            RafraichirLibellesMenu();
           end;
       end;
   end;
@@ -646,6 +660,7 @@ Procedure TMenu.RafraichirLibellesMenu();
     ButtonOuvrirLivre.Caption   := GetTexteLibelle('RULES-LAB_155');
 
     Label4.Caption              := GetTexteLibelle('RULES-LAB_183');
+    Label5.Caption              := GetTexteLibelle('RULES-LAB_184');
 
     // Remettre les colonnes auto-dimensionnées à leur largeur de départ (celle donnée à
     // GridAjouteColonne dans FormCreate) avant de rappeler AdjustGridColumnsWidth : sa
@@ -1235,6 +1250,11 @@ procedure TMenu.FormCreate(Sender: TObject);
        // charger les livres
        ChargerLivre(false, '');
 
+       // Retraduire les libellés d'interface selon ValLangueInterface : ChargerLivre vient
+       // d'appliquer Traduit(ValLangue,'') à TOUS les livres, y compris INTERFACE - la langue
+       // d'interface doit rester décorrélée de la langue des livres (CONTEXT.md §2.70).
+       Traduit(ValLangueInterface, ConstInterfaceBook);
+
        // chargesr les personnages
        ChargerPersonnages();
 
@@ -1279,6 +1299,7 @@ procedure TMenu.FormCreate(Sender: TObject);
        ButtonOuvrirLivre.Caption   := GetTexteLibelle('RULES-LAB_155');
 
        Label4.Caption              := GetTexteLibelle('RULES-LAB_183');
+       Label5.Caption              := GetTexteLibelle('RULES-LAB_184');
 
        AdjustGridColumnsWidth(TabLivre, Self.Height, true, true, True, 0, 10);
        AdjustGridColumnsWidth(TabPersonnage, Self.Height, true, true, True, 0, 10);

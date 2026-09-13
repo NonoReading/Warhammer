@@ -1,17 +1,36 @@
 # Warhammer — Contexte projet
 
-**Dernière mise à jour : 13/09/2026 — VERSIONING WFRP4/WFRP5 : SÉLECTEUR DE VERSION
-(COMBOBOXVERSION) ÉCRIT ET COMPILÉ, PAS ENCORE BRANCHÉ SUR UN RECHARGEMENT (§2.70).**
-`ComboBoxVersion` scanne les sous-répertoires de `DATABASE\` (un par édition), lit
-`<OFFICIAL>"0"</OFFICIAL>`/`<VERSION>` du livre de règles de chacun pour peupler la liste, et
-mémorise le dernier choix dans `INI.TXT` (`VERSION=`, même mécanisme que `LANG=`) - par
-défaut sur la première ligne si le `.INI` est muet. Sélectionner une version différente
-écrit le `.INI` mais ne recharge encore rien (`ConstCheminLivre` reste fixé sur `WFRP4\`) :
-portée volontairement limitée au sélecteur, décidée avec Nono avant de coder - le
-rechargement à chaud est un chantier séparé (`A FAIRE.txt`). Compilé (lazbuild, 0 erreur) ;
-pas encore lancé/testé par Nono. Combo posé en haut à gauche, à l'emplacement de `Logo1`
-(chevauche le logo pour l'instant - Nono refera la présentation lui-même). Détails en
-§2.70.
+**Dernière mise à jour : 13/09/2026 — VERSIONING WFRP4/WFRP5 : AFFICHAGE DE LA LANGUE
+D'INTERFACE BRANCHÉ, COMPILÉ ET VALIDÉ PAR NONO (§2.70).** `ComboBoxLangueInterfaceSelect`
+appelle désormais `Traduit(ValLangueInterface, ConstInterfaceBook)` (nouvelle constante,
+`chargeconstantes.pas`, = valeur du tag `<BOOK>` d'`INTERFACE.Xml`) puis
+`RafraichirLibellesMenu()` : les libellés déjà posés sur le menu (colonnes, boutons,
+`Label4`/`Label5`...) changent réellement de langue, indépendamment de la langue des
+livres. Même retraduction appliquée dans `FormCreate` (après le chargement initial des
+livres) et dans `ComboBoxLangueSelect` (changement de langue des livres) - les deux
+appellent `Traduit(ValLangue,'')` sur TOUS les livres y compris `INTERFACE`, ce qui
+écraserait sinon silencieusement le choix de langue d'interface. **Limite connue,
+volontaire** : les fenêtres secondaires déjà ouvertes (WinLivre, WinCompetence...) ne sont
+pas fermées/rouvertes comme lors d'un changement de langue de livre - leurs libellés
+restent dans l'ancienne langue d'interface jusqu'à réouverture. Compilé (lazbuild, 0
+erreur) et **testé par Nono : "cela marche parfaitement"**. Détails en §2.70.
+
+Plus tôt le même jour : Panel3/`ComboBoxLangueInterface` repositionné par Nono en haut à
+droite (Left=792, Top=168) et `Label5` "Interface" ajouté au-dessus (nouveau libellé
+`RULES-LAB_184`, dans les deux fichiers `INTERFACE.Xml`/`INTERFACE_FRANCAIS.Xml`) - avant le
+branchement de l'affichage ci-dessus.
+
+Plus tôt encore le même jour : le sélecteur de version (`ComboBoxVersion`) écrit et compilé
+la veille a été testé par Nono - un seul choix "WFRP4" affiché, comme attendu tant que
+`WFRP5\` n'existe pas au disque. `ComboBoxVersion` scanne les sous-répertoires de
+`DATABASE\` (un par édition), lit `<OFFICIAL>"0"</OFFICIAL>`/`<VERSION>` du livre de règles
+de chacun pour peupler la liste, et mémorise le dernier choix dans `INI.TXT` (`VERSION=`,
+même mécanisme que `LANG=`) - par défaut sur la première ligne si le `.INI` est muet.
+Sélectionner une version différente écrit le `.INI` mais ne recharge encore rien
+(`ConstCheminLivre` reste fixé sur `WFRP4\`) : portée volontairement limitée au sélecteur,
+décidée avec Nono avant de coder - le rechargement à chaud est un chantier séparé (`A
+FAIRE.txt`). Combo posé en haut à gauche, à l'emplacement de `Logo1` (chevauche le logo
+pour l'instant - Nono refera la présentation lui-même). Détails en §2.70.
 
 Plus tôt le même jour : la V5 de Warhammer Fantasy Roleplay vient de sortir, très proche de la V4
 mais pas identique (vérifié sur le métier Merchant, puis confirmé et approfondi par un
@@ -7929,14 +7948,36 @@ une interface en français, ou l'inverse.
   variable globale `ValLangueInterface`. Lue en brut dans `ChargeIni` (résolution différée à
   `ChargerListeLanguesInterface`, appelée plus tard dans `FormCreate`), écrite dans
   `SauveIni`.
-- **`ComboBoxLangueInterfaceSelect`** : ne fait que mettre à jour `ValLangueInterface` et
-  réécrire le `.INI`, comme `ComboBoxVersionSelect` - **aucun rafraîchissement d'affichage
-  branché**. Nono a explicitement gardé cette partie ("je finirai la partie affichage") :
-  reste à faire, retraduire les libellés déjà posés selon `ValLangueInterface` plutôt que
-  `ValLangue` pour tout ce qui vient de `RULES-LAB_*`/`RULES-MESS_*` (aujourd'hui
-  `RafraichirLibellesMenu`/`Traduit` ne connaissent qu'une seule langue globale, `ValLangue`,
-  pour tout - livres ET interface confondus).
-- Pas encore compilé/testé par Nono à l'instant de cet écrit.
+- **`ComboBoxLangueInterfaceSelect`** : met à jour `ValLangueInterface` et réécrit le
+  `.INI`, comme `ComboBoxVersionSelect`, **puis retraduit et rafraîchit l'affichage**
+  (ajouté le 13/09/2026, sur demande de Nono - "vas-y, fais cette partie affichage
+  maintenant").
+- **Panel3/`ComboBoxLangueInterface` repositionné par Nono lui-même** en haut à droite
+  (`Left=792, Top=168`, était superposé à `Logo1` en haut à gauche) et **`Label5`
+  "Interface" ajouté au-dessus** (`Top=120`) : nouveau libellé `RULES-LAB_184` dans
+  `INTERFACE.Xml`/`INTERFACE_FRANCAIS.Xml`, câblé dans `RafraichirLibellesMenu` et
+  `FormCreate` comme `Label4`/`RULES-LAB_183`.
+- **Affichage branché (13/09/2026)** : nouvelle constante `ConstInterfaceBook = 'INTERFACE'`
+  (`chargeconstantes.pas`) = valeur du tag `<BOOK>` d'`INTERFACE.Xml`, utilisée comme filtre
+  `Livre` de `Traduit()` pour ne retraduire QUE les libellés d'interface, sans toucher aux
+  autres livres.
+  - `ComboBoxLangueInterfaceSelect` appelle `Traduit(ValLangueInterface,
+    ConstInterfaceBook)` puis `RafraichirLibellesMenu()` dès la sélection change.
+  - `FormCreate` réapplique `Traduit(ValLangueInterface, ConstInterfaceBook)` juste après
+    `ChargerLivre(false,'')`, pour que l'affichage initial reflète la langue d'interface
+    choisie et pas la langue des livres.
+  - `ComboBoxLangueSelect` (changement de langue des LIVRES) réapplique lui aussi
+    `Traduit(ValLangueInterface, ConstInterfaceBook)` juste après `ChargerLivre(true,'')` :
+    sans ça, changer la langue des livres écrasait silencieusement la langue d'interface,
+    car `ChargerLivre` appelle en interne `Traduit(ValLangue,'')` avec un filtre `Livre=''`
+    (tous les livres, `INTERFACE` compris).
+  - **Limite connue, volontairement laissée de côté** : les fenêtres secondaires déjà
+    ouvertes (WinLivre, WinCompetence, WinTalent...) ne sont pas fermées/rouvertes comme
+    lors d'un changement de langue de livre (`ComboBoxLangueSelect`) - leurs libellés
+    RULES-LAB_*/RULES-MESS_* restent dans l'ancienne langue d'interface jusqu'à
+    réouverture. À reprendre si Nono le juge gênant en usage réel.
+  - Diff vérifié propre (uniquement des ajouts). **Compilé (lazbuild, 0 erreur) et testé
+    par Nono (13/09/2026) : "cela marche parfaitement".**
 
 **Sources de travail pour la V5** : `LIVRES\WFRP5_Core_Rulebook_01_09_26.txt` (export texte
 fourni par Nono, ~22 000 lignes, ~2,2 Mo) et `LIVRES\WFRP-4e-vs-5e.txt` (comparatif tiers des

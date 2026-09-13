@@ -22,8 +22,8 @@
         <UnitName Value="WarhammerSource"/>
         <IsVisibleTab Value="True"/>
         <EditorIndex Value="9"/>
-        <TopLine Value="556"/>
-        <CursorPos X="66" Y="573"/>
+        <TopLine Value="640"/>
+        <CursorPos X="65" Y="656"/>
         <UsageCount Value="200"/>
         <Loaded Value="True"/>
         <LoadedDesigner Value="True"/>
@@ -1248,22 +1248,6 @@
     </Units>
     <JumpHistory HistoryIndex="29">
       <Position>
-        <Filename Value="chargeconstantes.pas"/>
-        <Caret Line="219" Column="35" TopLine="201"/>
-      </Position>
-      <Position>
-        <Filename Value="winpersonnage.pas"/>
-        <Caret Line="776" Column="23" TopLine="770"/>
-      </Position>
-      <Position>
-        <Filename Value="winpersonnage.pas"/>
-        <Caret Line="235" Column="22" TopLine="225"/>
-      </Position>
-      <Position>
-        <Filename Value="winpersonnage.pas"/>
-        <Caret Line="2334" Column="6" TopLine="2327"/>
-      </Position>
-      <Position>
         <Filename Value="winpersonnage.pas"/>
         <Caret Line="4585" Column="8" TopLine="4583"/>
       </Position>
@@ -1366,6 +1350,22 @@
       <Position>
         <Filename Value="warhammersource.pas"/>
         <Caret Line="538" Column="28" TopLine="526"/>
+      </Position>
+      <Position>
+        <Filename Value="warhammersource.pas"/>
+        <Caret Line="572" Column="19" TopLine="557"/>
+      </Position>
+      <Position>
+        <Filename Value="warhammersource.pas"/>
+        <Caret Line="573" Column="42" TopLine="559"/>
+      </Position>
+      <Position>
+        <Filename Value="warhammersource.pas"/>
+        <Caret Line="651" Column="66" TopLine="632"/>
+      </Position>
+      <Position>
+        <Filename Value="warhammersource.pas"/>
+        <Caret Line="1285" Column="69" TopLine="1266"/>
       </Position>
     </JumpHistory>
     <RunParams>

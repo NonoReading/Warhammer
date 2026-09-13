@@ -438,6 +438,10 @@ Const
       ConstCheminInterface              = '\DATABASE\';
       ConstFichierInterface             = 'INTERFACE';
       ConstFichierInterfaceFrancais     = 'INTERFACE_FRANCAIS';
+      // Valeur du tag <BOOK> d'INTERFACE.Xml/INTERFACE_FRANCAIS.Xml (Livre dans ListTexte/
+      // ListTraduction) - sert de filtre à Traduit() pour retraduire les libellés
+      // d'interface sans toucher aux autres livres (CONTEXT.md §2.70).
+      ConstInterfaceBook                 = 'INTERFACE';
       ConstFichierIni                   = '\INI.TXT';
       ConstCheminTravail                = '\TRAVAIL\';
       ConstIniLangue                    = 'LANG=';
