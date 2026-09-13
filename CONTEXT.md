@@ -1,6 +1,49 @@
 # Warhammer — Contexte projet
 
-**Dernière mise à jour : 13/09/2026 — VERSIONING WFRP4/WFRP5 : AFFICHAGE DE LA LANGUE
+**Dernière mise à jour : 13/09/2026 — VERSIONING WFRP4/WFRP5 : LES DONNÉES PURES DU
+RULEBOOK V5 (ONZE CATÉGORIES PASSÉES EN REVUE) RENTRENT DANS LE SCHÉMA ACTUEL SANS NOUVEAU
+CHAMP, VÉRIFIÉ PAR UN SEED MINIMAL COMPILÉ ET TESTÉ PAR NONO (§2.70).** Comparaison menée
+entre le schéma `DATA_*` de `BOOK_RULESBOOK.Xml` (WFRP4) et le texte du nouveau Rulebook
+(`LIVRES\WFRP5_Core_Rulebook_01_09_26.txt`), catégorie par catégorie, hors moteur
+XP/avancement (explicitement mis de côté par Nono - "la gestion de l'XP et du changement de
+niveau est totalement différent"). Conclusion : races/ethnies, métiers, compétences,
+talents, armes, armures, sorts, craftsmanship et corruption/mutation se logent tels quels
+dans les champs existants (craftsmanship et corruption/mutation sont même identiques au mot
+près entre les deux éditions) - aucune modification de schéma requise pour les afficher dans
+les fenêtres catalogue actuelles (WinLivre, WinCompetence, WinTalent, WinWeapon, WinArmor,
+WinSpell, WinRaces). Nations confirmé comme concept de *Nations of Mankind* (fan book) et non
+du Rulebook - une seule entrée (Empire) suffit. Psychologie : la partie personnage (Hatred,
+Fearless...) est déjà couverte par `DATA_TALENT` ; la partie créature/bestiaire n'est pas
+modélisée mais c'est un gap préexistant, indépendant de la V5. **Les deux frontières moteur
+sont tranchées avec Nono** : Fate/Fortune (nouveau `DATA_ATTRIBUT` propre à l'arbre WFRP5,
+sans Resilience/Extra Points, moteur V4 intact - adaptation moteur reportée au chantier
+avancement V5) et `SUBCHAPTER_ATTR` de carrière (champ et plage 0-4 réutilisés tels quels -
+correction faite en cours de route : ce n'est PAS une éligibilité binaire mais le niveau de
+carrière à partir duquel l'attribut devient avançable, exactement comme `SUBCHAPTER_SKILL`/
+`TALENT`/`ITEM` portent déjà un numéro de niveau ; ma première lecture, faite sur un extrait
+au layout PDF aplati, était fausse). Vérifié concrètement : `DATA_CAREER` porte déjà un
+`SUBCHAPTER_ITEM` (trappings par niveau) — je l'avais d'abord cru absent, erreur corrigée en
+relisant le XML.
+**Seed minimal créé et testé** : `DATABASE\WFRP5\BOOK_RULESBOOK.Xml`/`_FRANCAIS.Xml` avec
+une race (Human/Humans (Reiklanders), attributs `2d10+20` identiques à la V4), un métier
+(Agitator, 4 niveaux réels) et une arme (Quarterstaff) - données reprises telles quelles du
+texte du livre. Volontairement omis : `DATA_ATTRIBUT`/`DATA_LABEL`/tables de coût (hors
+périmètre de ce test), Fate/Fortune/Resilience sur l'espèce (frontière désormais tranchée
+ci-dessus, mais pas encore appliquée dans ce seed), listes de compétences/talents de
+l'espèce et du métier (poserait la question "réutiliser les codes V4 ou ouvrir un catalogue
+V5 à part", pas tranchée). Testé en basculant
+temporairement `ConstCheminLivre` sur `\DATABASE\WFRP5\` (`chargeconstantes.pas`), compilé
+(lazbuild, 0 erreur), lancé - **Nono confirme : "ça marche"** (race/métier/arme visibles dans
+WinLivre). `ConstCheminLivre` remis sur `\DATABASE\WFRP4\` juste après et recompilé.
+**Découverte faite pendant ce test** : les personnages affichés restaient ceux de la V4 alors
+que `ConstCheminLivre` pointait sur WFRP5 - confirme concrètement le point 5 déjà noté plus
+bas dans cette section (`ConstCheminPersonnage` doit passer de `Const` à `Var` en même temps
+que `ConstCheminLivre`, sans quoi le rechargement à chaud changerait les livres sans changer
+les personnages proposés). Pas encore corrigé, juste confirmé par l'usage.
+
+---
+
+**13/09/2026 — VERSIONING WFRP4/WFRP5 : AFFICHAGE DE LA LANGUE
 D'INTERFACE BRANCHÉ, COMPILÉ ET VALIDÉ PAR NONO (§2.70).** `ComboBoxLangueInterfaceSelect`
 appelle désormais `Traduit(ValLangueInterface, ConstInterfaceBook)` (nouvelle constante,
 `chargeconstantes.pas`, = valeur du tag `<BOOK>` d'`INTERFACE.Xml`) puis
@@ -7990,6 +8033,143 @@ par `\`, ce qui cassait le passage du paramètre `-Source` à PowerShell - un `\
 un guillemet fermant s'interprète comme un guillemet échappé). Les deux corrigés ; la
 logique PowerShell a été déplacée dans un `ConvertPDF.ps1` à côté du `.bat` (plus robuste
 que le bloc collé en une seule ligne cmd via `^`, qui s'était déjà cassé deux fois).
+
+**Comparaison données pures V4/V5 et seed minimal (13/09/2026), sur demande de Nono : "il
+faudrait regarder les données qui se trouve dans le RULEBOOK et voir si elles rentrent dans
+la base actuelle... hors calcul XP".** Sept catégories comparées entre `BOOK_RULESBOOK.Xml`
+(WFRP4) et `LIVRES\WFRP5_Core_Rulebook_01_09_26.txt` :
+- **Compétences** (`DATA_SKILL`) : nom + caractéristique + description, identique. La V5 a
+  ramené le catalogue à ~45 compétences "chapeaux" avec spécialisations entre parenthèses -
+  même mécanisme que `DATA_SKILL_SPECIALIZATION` (suffixe `_*`). Nono précise que le
+  distingo Basic/Advanced de la V5 (compétence testable à 0 avance ou non) existe déjà en
+  pratique côté V4 dans l'autre sens : sans avance achetée, une compétence n'est ni affichée
+  sur la fiche ni utilisable, seulement grisée à titre informatif dans le PDF, comme les
+  talents - donc rien de nouveau à modéliser pour l'instant, ça touche la résolution de
+  test (moteur), pas le catalogue.
+- **Talents** (`DATA_TALENT`) : nom + description texte, motif générique/spécialisation
+  ("Nom (Paramètre)") déjà géré par le lien générique↔spécialisation (§2.68). `Max` perd son
+  sens de plafond par rang (confirmé : plus de scaling par rang en V5) mais reste utilisable
+  pour les quelques talents "peut être pris plusieurs fois" avec une valeur plus simple.
+- **Métiers** (`DATA_CAREER`) : correspondance quasi parfaite. `SUBCHAPTER_LEVEL` (4
+  niveaux, nom+salaire), `SUBCHAPTER_SKILL`/`SUBCHAPTER_TALENT` (liste à plat, valeur = n°
+  de niveau) et `SUBCHAPTER_ITEM` (trappings par niveau, déjà présent - je l'avais d'abord
+  cru absent, erreur corrigée en relisant le XML de l'Agitator V4) correspondent tous au
+  détail près à la mise en page "Career Path" de la V5. `Class` (ex. "Burgher Class: Dwarf,
+  Halfling, Human") combine classe et restriction d'espèce en V5, mais la restriction
+  d'espèce est déjà portée par l'espèce en V4 (`DATA_SPECIE_CAREER_CHOICE/DIRECT`), pas par
+  la carrière - pas de champ à ajouter, juste à peupler dans l'autre sens. Les enchaînements
+  de carrière (Career Path menant d'une carrière à une autre) correspondent au mécanisme
+  carrière-parente déjà en place (§2.24).
+- **Armes/Armures** (`DATA_WEAPON`/`DATA_ARMOR`) : la table "Consumer's Guide" de la V5 a
+  exactement les mêmes colonnes (Description, Prix, Encombrement, Disponibilité, Portée,
+  Dégâts, Qualités). Le format de dégâts passe de `+(BATTR_S)+4` à `+SB + 3` (barème
+  différent, paliers d'avance obligent) mais la formule reste portée par le même champ.
+- **Sorts/Prières** (`DATA_SPELL`) : `Range`/`Target`/`Duration`/`Description` identiques
+  dans leur rôle. Le "CN" (Casting Number) des sorts arcanes V5 correspond au champ `Level`
+  déjà existant (vérifié sur `RULES-ARCAN_01` en V4, qui porte déjà une difficulté de
+  lancement dans ce champ).
+- **Races/ethnies** (`DATA_RACE`/`DATA_SPECIE`) : Description/Explanation/Opinions/
+  attributs/compétences/talents se logent tels quels. Les caractéristiques primaires
+  (WS/BS/S/T/I/Ag/Dex/Int/WP/Fel) gardent le même format `2d10+20` en V5 pour l'Humain -
+  vérifié sur la table des caractéristiques du livre, page 38. Nono confirme que les
+  caractéristiques physiques (âge, taille, couleurs) évoquées dans le Rulebook V5 existaient
+  aussi en V4 mais n'ont jamais été implémentées - gap pré-existant, pas nouveau, pas
+  bloquant pour la comparaison.
+- **Frontières moteur XP/avancement, tranchées avec Nono le 13/09/2026** :
+  - *Fate/Fortune* (V5, valeurs fixes par espèce, Fortune est un attribut entièrement
+    nouveau) remplace Fate/Resilience/Extra Points (V4, dé + points à répartir). Vérifié
+    avant de trancher : `ConstCaracDestin`/`ConstCaracResil`/`ConstCaracPointSupp`
+    (`chargeconstantes.pas:364-366`) sont des codes d'attribut **en dur**, utilisés dans
+    `winpersonnage.pas` (répartition des points à la création) et `pdfpersonnage.pas`
+    (talents type Chanceux modifiant Fate/Resilience) - pas purement génériques, donc un
+    vrai sujet moteur, pas un simple renommage de donnée. **Décision** : nouveau
+    `DATA_ATTRIBUT` propre à l'arbre WFRP5 (`RULES-ATTR_Fate` + nouveau
+    `RULES-ATTR_Fortune`, sans Resilience ni Extra Points), moteur V4 inchangé,
+    adaptation moteur (répartition des points, PDF, talents) reportée au chantier
+    avancement V5 séparé - cohérent avec la séparation complète déjà décidée pour ce
+    chantier (pas de "SI {client} ALORS").
+  - *`SUBCHAPTER_ATTR` de carrière* : **corrigé en cours de discussion** - ma première
+    lecture ("simple éligibilité" binaire) venait d'un extrait au layout PDF aplati (le
+    piège classique du projet, §0). Le texte propre ("Anatomy of a Career", page 43)
+    explique que l'Advance Scheme d'une carrière indique, pour chacune des dix
+    caractéristiques, **à partir de quel niveau de carrière (1 à 4) elle devient
+    avançable** - trois caractéristiques se débloquent au niveau 1, une de plus à
+    chaque niveau suivant, les autres ne sont jamais avançables dans cette carrière
+    (vérifié sur l'exemple Soldier du livre : WS/BS/S marqués niveau 1). Nono a fait
+    remarquer à juste titre que ça ne justifiait pas un binaire 0/1 vu que la carrière a
+    bien 4 niveaux (potentiellement 5 un jour). **Décision** : `SUBCHAPTER_ATTR` réutilisé
+    tel quel, même plage 0-4, aucune modification de schéma - seul le **sens** de la
+    valeur change entre éditions (V4 : nombre d'avances autorisées ; V5 : niveau de
+    carrière à partir duquel l'attribut se débloque, "0" = jamais avançable dans les deux
+    cas), à charge du futur moteur d'avancement de l'interpréter différemment selon
+    l'édition. Même genre de réutilisation qu'un champ à sens différent selon le livre
+    déjà pratiqué avec `DATA_SPECIE_TRAIT` (trait d'ethnie vs trait de créature).
+- **Craftsmanship** (`DATA_CRAFTMANSHIP`) : texte identique au mot près entre les deux
+  éditions (Lightweight, Practical, Fine, Durable / Shoddy, Ugly, Unreliable, Bulky), jusqu'aux
+  exemples chiffrés ("saving throw improves by 1, e.g. From 9+ to 8+"). Rentre tel quel,
+  aucune modification.
+- **Corruption/Mutation** (`DATA_CORRUPTION_PHYSICAL`/`MENTAL` +
+  `DATA_CORRUPTION_TABLE_PHYSICAL`/`MENTAL`) : identique au mot près aussi - mêmes mutations
+  (Animalistic Legs +1 Movement, Corpulent +5S+5T-1Move, Distended Digits +10 Dex...) et
+  surtout les mêmes tables de répartition par espèce (Humain 01-50 corps/51-100 esprit, Nain
+  01-05/06-100, Halfling 01-10/11-100, Elfes 01-100 esprit seul). Rentre tel quel, aucune
+  modification.
+- **Nations** (`DATA_NATION`) : hypothèse de Nono confirmée - le Rulebook V5 ne parle que de
+  "Our Great Nation" (l'Empire, en contexte/lore), Bretonnie/Tilée n'apparaissent qu'en toile
+  de fond (Lore (Tilea), cultes...), jamais comme catalogue à plusieurs nations. Une seule
+  entrée (Empire) suffit pour le Rulebook lui-même, comme dans le seed. Un vrai catalogue de
+  nations ne viendrait que d'un futur équivalent V5 de *Nations of Mankind*.
+- **Psychologie** : deux notions distinctes sous ce mot. Côté personnage (Hatred, Fearless,
+  Frenzy...) ce sont déjà des talents en V4 comme en V5, déjà couverts par `DATA_TALENT`,
+  rien à ajouter. Côté créature (Fear (Rating), Terror, Corruption (Minor) comme trait inné
+  d'un monstre) : pas modélisé aujourd'hui, mais gap **pré-existant et non spécifique à la
+  V5** - déjà noté dans `A FAIRE.txt` le 04/09/2026 sur les Psychologies de *Nations of
+  Mankind*, et plus largement tout le bestiaire/catalogue de monstres n'a jamais été
+  modélisé (l'appli suit des personnages joueurs, pas des PNJ de MJ). La V5 intègre son
+  bestiaire directement dans le Rulebook (avant, livre à part) mais le manque de schéma est
+  identique des deux côtés.
+- **Reste ouvert** : le mécanisme "choisis N compétences parmi cette liste" que la V5
+  utilise pour les compétences de départ d'une espèce (V4 donne une liste fixe) - ne bloque
+  pas l'affichage en lecture dans WinRaces (on afficherait la liste des candidates telle
+  quelle), deviendrait un sujet seulement si on branchait la création de personnage dessus.
+
+**Bilan des onze catégories passées en revue** (races, métiers, compétences, talents,
+armes, armures, sorts, craftsmanship, corruption/mutation, nations, psychologie-personnage) :
+tout rentre dans le schéma actuel sans nouveau champ, y compris les deux frontières moteur
+ci-dessus une fois tranchées (Fate/Fortune : nouveau `DATA_ATTRIBUT` ; `SUBCHAPTER_ATTR` de
+carrière : champ réutilisé tel quel). Seule reste hors schéma la psychologie-créature/
+bestiaire (gap pré-existant, hors périmètre de l'appli).
+
+**Seed minimal `DATABASE\WFRP5\BOOK_RULESBOOK.Xml`/`_FRANCAIS.Xml` créé et testé** (une
+race, un métier, une arme, sur demande explicite de Nono) :
+- Race : `DATA_RACE` Human + `DATA_NATION` Empire (requis par `Nationality`) + `DATA_SPECIE`
+  "Humans (Reiklanders)", attributs `2d10+20` réels + Mouvement 4. Fate/Fortune/Resilience
+  volontairement omis (frontière moteur ci-dessus, pas tranchée) ainsi que les listes de
+  compétences/talents de l'espèce (poserait la question "réutiliser les codes V4 ou ouvrir
+  un catalogue V5 à part", pas tranchée).
+- Métier : `DATA_CAREER` Agitator, classe `RULES-CLASS_BURG` (code V4 réutilisé, même
+  notion de jeu), 4 niveaux réels (Pamphleteer/Agitator/Rabble Rouser/Demagogue, Brass
+  1/2/3/5). Compétences/talents/trappings par niveau omis pour la même raison que ci-dessus.
+- Arme : `DATA_WEAPON` Quarterstaff (Prix 3/-, Enc 2, Common, Long, `+(BATTR_S)+3`, qualités
+  `RULES-WEAPB04,RULES-WEAPB08` = Pummel/Defensive, codes V4 réutilisés, 2 mains).
+- `COMPLETE="0"` (brouillon assumé) et pas de `DISCLAIMER` (texte légal V5 pas encore en
+  main) sur le `DATA_BOOK`.
+- **Testé en basculant temporairement `ConstCheminLivre` sur `\DATABASE\WFRP5\`**
+  (`chargeconstantes.pas`) - compilé (lazbuild, 0 erreur), lancé, **Nono confirme : "ça
+  marche"** (race/métier/arme visibles dans WinLivre). `ConstCheminLivre` remis sur
+  `\DATABASE\WFRP4\` juste après et recompilé (0 erreur) - le dépôt est revenu à son état
+  d'avant test, seuls les nouveaux fichiers `DATABASE\WFRP5\BOOK_RULESBOOK*.Xml` restent.
+- **Découverte faite pendant ce test** : les personnages proposés au chargement restaient
+  ceux de la V4 alors que `ConstCheminLivre` pointait sur WFRP5 - confirme concrètement le
+  point 5 du plan ci-dessus (`ConstCheminPersonnage` doit passer de `Const` à `Var` en même
+  temps que `ConstCheminLivre`), jusque-là seulement noté en théorie, jamais vérifié à
+  l'usage. Pas corrigé, juste confirmé.
+
+**Point de reprise** : comparaison terminée (onze catégories) et les deux frontières moteur
+tranchées (voir bilan ci-dessus) - plus rien ne bloque le peuplement du catalogue V5 pour de
+vrai sur ces points. Reste seul en suspens : le mécanisme de choix de compétences de départ
+par espèce ("choisis N parmi cette liste"), sans urgence tant qu'on n'attaque pas la création
+de personnage V5.
 
 ---
 
