@@ -7866,12 +7866,77 @@ complet tout de suite).
   donc superposé dessus pour l'instant), même style que `ComboBoxLangue`.
 - **Compilé (lazbuild, 0 erreur)** - pas encore lancé/testé par Nono.
 
-**Prochaine étape** : faire tester le sélecteur par Nono (un seul item "WFRP4" attendu dans
-la liste tant que `WFRP5\` n'existe pas), puis soit amorcer
+**Prochaine étape (révisée 13/09/2026)** : Nono a fait remarquer que tester le sélecteur pour
+de vrai suppose qu'un second item existe dans la liste, donc un vrai rulebook côté `WFRP5\` -
+avec un seul dossier `WFRP4\` au disque, le scan ne peut renvoyer qu'un seul item, ce qui ne
+teste rien de la logique de scan. Reste donc à amorcer
 `DATABASE\WFRP5\`/`SAVED_CARACTERS\WFRP5\`/`PICTURES\WFRP5\{NIV,NIV_HELF,PDF}\` (copie de la
-V4 comme point de départ, ou dossiers vides ? pas encore tranché), soit brancher le
-rechargement à chaud (`ConstCheminLivre` en variable + réutilisation du mécanisme §2.8) si
-Nono veut finalement l'avoir tout de suite.
+V4 comme point de départ, ou juste un rulebook minimal avec `<OFFICIAL>0</OFFICIAL>` - pas
+encore tranché) avant de pouvoir faire tester le sélecteur par Nono, puis soit continuer le
+peuplement des données V5, soit brancher le rechargement à chaud
+(`ConstCheminLivre` en variable + réutilisation du mécanisme §2.8) si Nono veut finalement
+l'avoir tout de suite.
+
+**Détour identifié en préparant ce test - libellés/messages d'interface sortis du RULESBOOK,
+FAIT le 13/09/2026.** En cherchant comment amorcer `WFRP5\`, Nono a réalisé qu'une partie du
+bloc `<DATA_LABEL>` du RULESBOOK (`RULES-LAB_*` : 183 libellés d'écran génériques - colonnes,
+boutons, titres de phase..., et `RULES-MESS_*` : 60 messages/dialogues) n'a rien de spécifique
+à l'édition, et se serait retrouvée dupliquée entre le futur rulebook WFRP4 et le futur
+rulebook WFRP5 si rien n'était fait. Le reste de `DATA_LABEL` (`ATTR_*`, `ARMOL_*`, `WEAPR_*`,
+`CLASS_*`, `TIERS_*`, `PDF_*`, `TypeSort_*`...) reste dans le rulebook de chaque édition,
+potentiellement du vocabulaire de jeu qui peut varier (ex. `RULES-ATTR_Resil` "Resilience",
+qui disparaît en V5 au profit de Fate/Fortune).
+- **Nouveau "livre" `INTERFACE.Xml`/`INTERFACE_FRANCAIS.Xml`**, posé directement sous
+  `DATABASE\` (donc hors `WFRP4\`/`WFRP5\`, jamais dupliqué, jamais listé dans l'écran de
+  choix des livres) - même enveloppe `<DATA_BOOK>` qu'un livre normal pour réutiliser le
+  parseur existant sans le modifier (demande explicite de Nono), `CODE_BOOK="INTF"`/
+  `BOOK="INTERFACE"` (distinct de `"RULES"` pour ne pas entrer en collision avec le vrai
+  RULESBOOK dans `ListLivre` - le dédoublonnage se fait par `Libelle`, `ChercheLivreLibelle`,
+  chargetexte.pas). Les 243 lignes `RULES-LAB_001..183`/`RULES-MESS_001..060` (bloc contigu)
+  déplacées telles quelles depuis `BOOK_RULESBOOK.Xml`/`BOOK_RULESBOOK_FRANCAIS.Xml` -
+  **codes inchangés** (toujours préfixés `RULES-`, décision explicite de Nono pour ne
+  toucher aucun appelant de `GetTexteLibelle` dans le reste du projet). Diff vérifié propre
+  sur les deux fichiers sources (243 lignes retirées, 0 ajoutée, rien d'autre touché) ; les 4
+  fichiers XML validés bien formés avant écriture.
+- **Chargement** : pas de scan (les deux fichiers sont à emplacement fixe, décision de
+  Nono) - `XmlImport` (`xmlexportimport.pas`) reçoit un nouveau paramètre optionnel
+  `CheminComplet: String = ''` (défaut vide → comportement inchangé pour tous les appels
+  existants) qui, s'il est renseigné, remplace `GetCurrentDir + ConstCheminLivre + FileName`
+  comme chemin lu - même esprit que `XmlLivreBalise` déjà ajoutée pour le sélecteur de
+  version. Deux nouvelles constantes (`chargeconstantes.pas`) : `ConstCheminInterface =
+  '\DATABASE\'`, `ConstFichierInterface = 'INTERFACE'`,
+  `ConstFichierInterfaceFrancais = 'INTERFACE_FRANCAIS'`. Deux appels explicites ajoutés
+  dans `warhammersource.pas`, juste après la boucle de chargement des livres de l'édition
+  et avant les premiers `GetTexteLibelle('RULES-LAB_...')` qui en dépendent (anglais chargé
+  avant le français, comme pour le RULESBOOK).
+- **Compilé et testé par Nono (13/09/2026).**
+
+**Sélecteur de langue de l'interface, ajouté le 13/09/2026 (demande de Nono, même principe
+que la langue des livres).** Nono a fait remarquer que la langue de l'interface
+(`RULES-LAB_*`/`RULES-MESS_*`, désormais dans `INTERFACE.Xml`/`INTERFACE_FRANCAIS.Xml`)
+doit pouvoir être choisie indépendamment de la langue des livres/données
+(`ComboBoxLangue`/`ConstIniLangue`) - un joueur pourrait vouloir un rulebook en anglais mais
+une interface en français, ou l'inverse.
+- **`ComboBoxLangueInterface`** (nouveau `Panel3`, posé en haut à gauche du menu par
+  défaut - Nono repositionnera/stylera lui-même, comme pour `ComboBoxVersion`) peuplé par
+  `ChargerListeLanguesInterface` : pas de scan (les deux fichiers d'interface sont à
+  emplacement fixe), juste la balise `<language>` de `INTERFACE.Xml` puis
+  `INTERFACE_FRANCAIS.Xml` lue via `XmlLivreBalise` - même mécanisme que le sélecteur de
+  version. Sélection résolue contre le `.INI` (première ligne de la liste si absent/périmé,
+  même règle que la version).
+- **Persistance** : nouvelle variable `.INI` `LANGINTERFACE=` (`ConstIniLangueInterface`,
+  `chargeconstantes.pas`), décorrélée de `LANG=` (qui reste la langue des livres) - nouvelle
+  variable globale `ValLangueInterface`. Lue en brut dans `ChargeIni` (résolution différée à
+  `ChargerListeLanguesInterface`, appelée plus tard dans `FormCreate`), écrite dans
+  `SauveIni`.
+- **`ComboBoxLangueInterfaceSelect`** : ne fait que mettre à jour `ValLangueInterface` et
+  réécrire le `.INI`, comme `ComboBoxVersionSelect` - **aucun rafraîchissement d'affichage
+  branché**. Nono a explicitement gardé cette partie ("je finirai la partie affichage") :
+  reste à faire, retraduire les libellés déjà posés selon `ValLangueInterface` plutôt que
+  `ValLangue` pour tout ce qui vient de `RULES-LAB_*`/`RULES-MESS_*` (aujourd'hui
+  `RafraichirLibellesMenu`/`Traduit` ne connaissent qu'une seule langue globale, `ValLangue`,
+  pour tout - livres ET interface confondus).
+- Pas encore compilé/testé par Nono à l'instant de cet écrit.
 
 **Sources de travail pour la V5** : `LIVRES\WFRP5_Core_Rulebook_01_09_26.txt` (export texte
 fourni par Nono, ~22 000 lignes, ~2,2 Mo) et `LIVRES\WFRP-4e-vs-5e.txt` (comparatif tiers des

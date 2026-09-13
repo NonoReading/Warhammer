@@ -25,7 +25,7 @@ uses
   XMLRead, DOM, Unitcalcul,  Dialogs, strutils;
 
 Procedure XmlExportBook(Livre: String; Langue: String);
-Procedure XmlImport(FileName: String; OnlyPrimary: Boolean; OnlyCode: Boolean);
+Procedure XmlImport(FileName: String; OnlyPrimary: Boolean; OnlyCode: Boolean; CheminComplet: String = '');
 Function XmlElement(Node: TDOMNode): TDOMNode;
 Function XmlDebut(TypeDonnee: string): String;
 Function XmlFin(TypeDonnee: string): String;
@@ -1034,7 +1034,7 @@ Procedure XmlExportBook(Livre: String; Langue: String);
     end;
   end;
 
-Procedure XmlImport(FileName: String; OnlyPrimary: Boolean; OnlyCode: Boolean);
+Procedure XmlImport(FileName: String; OnlyPrimary: Boolean; OnlyCode: Boolean; CheminComplet: String = '');
   var
     XMLDoc:                   TXMLDocument;
     BookNode:                 TDOMNode;
@@ -1121,7 +1121,14 @@ Procedure XmlImport(FileName: String; OnlyPrimary: Boolean; OnlyCode: Boolean);
     LivreNbRace   := 0;
     XMLDoc   := TXMLDocument.Create;
     try
-      ReadXMLFile(XMLDoc, GetCurrentDir + ConstCheminLivre + FileName + '.xml');
+      // CheminComplet permet de lire un fichier hors de ConstCheminLivre (dossier de
+      // l'edition active) - cas de INTERFACE.Xml/INTERFACE_FRANCAIS.Xml, poses directement
+      // sous DATABASE\ pour ne pas etre dupliques entre WFRP4\ et WFRP5\ (13/09/2026,
+      // CONTEXT.md §2.70). Vide (defaut) : comportement inchange pour tous les autres appels.
+      if CheminComplet <> '' then
+        ReadXMLFile(XMLDoc, CheminComplet)
+      else
+        ReadXMLFile(XMLDoc, GetCurrentDir + ConstCheminLivre + FileName + '.xml');
       BookNode := XMLDoc.DocumentElement;
       if Assigned(BookNode) and (BookNode.NodeName = ConstXmlDataBook) then
         Begin

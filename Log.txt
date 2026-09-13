@@ -3561,3 +3561,58 @@ WFRP5\ n'existe pas), puis soit amorcer DATABASE\WFRP5\, soit brancher le rechar
 chaud si Nono le veut tout de suite.
 Fichiers modifies : chargeconstantes.pas, warhammersource.pas, warhammersource.lfm,
 xmlexportimport.pas, CONTEXT.md, Log.txt.
+
+13/09/2026 - VERSIONING WFRP4/WFRP5 : LIBELLES/MESSAGES D'INTERFACE SORTIS DU RULESBOOK VERS
+INTERFACE.XML, PAS ENCORE COMPILE (CONTEXT.md 2.70). En preparant l'amorcage de WFRP5\, Nono a
+releve qu'une partie du bloc DATA_LABEL du RULESBOOK (RULES-LAB_* : 183 libelles d'ecran
+generiques, RULES-MESS_* : 60 messages/dialogues) n'a rien de specifique a l'edition et se
+serait retrouvee dupliquee entre le futur rulebook WFRP4 et le futur rulebook WFRP5.
+- Nouveau "livre" INTERFACE.Xml/INTERFACE_FRANCAIS.Xml, pose directement sous DATABASE\ (hors
+  WFRP4\/WFRP5\, jamais duplique entre editions, jamais liste dans l'ecran de choix des
+  livres) - meme enveloppe DATA_BOOK qu'un livre normal pour reutiliser le parseur existant
+  sans le modifier (demande de Nono), CODE_BOOK="INTF"/BOOK="INTERFACE" (distinct de "RULES"
+  pour ne pas entrer en collision avec le vrai RULESBOOK dans ListLivre).
+- Les 243 lignes RULES-LAB_001..183/RULES-MESS_001..060 (bloc contigu dans les deux fichiers
+  sources) deplacees telles quelles depuis BOOK_RULESBOOK.Xml/BOOK_RULESBOOK_FRANCAIS.Xml -
+  codes inchanges (toujours prefixes RULES-, decision de Nono pour ne toucher aucun appelant
+  de GetTexteLibelle dans le reste du projet). Diff verifie propre sur les deux fichiers
+  sources (243 lignes retirees, 0 ajoutee) ; les 4 fichiers XML valides bien formes avant
+  ecriture.
+- Chargement sans scan (decision de Nono, emplacement fixe) : nouveau parametre optionnel
+  CheminComplet: String = '' sur XmlImport (xmlexportimport.pas, defaut vide => comportement
+  inchange pour tous les appels existants), meme esprit que XmlLivreBalise deja ajoutee pour
+  le selecteur de version. Nouvelles constantes ConstCheminInterface/ConstFichierInterface/
+  ConstFichierInterfaceFrancais (chargeconstantes.pas). Deux appels explicites ajoutes dans
+  warhammersource.pas juste apres la boucle de chargement des livres de l'edition et avant
+  les premiers GetTexteLibelle('RULES-LAB_...') qui en dependent.
+Pas encore compile/teste par Nono - prochaine etape avant de revenir a l'amorcage de
+DATABASE\WFRP5\ (necessaire pour tester pour de vrai le selecteur d'edition, cf. CONTEXT.md
+2.70).
+Fichiers modifies : DATABASE\WFRP4\BOOK_RULESBOOK.Xml, DATABASE\WFRP4\BOOK_RULESBOOK_
+FRANCAIS.Xml, DATABASE\INTERFACE.Xml (nouveau), DATABASE\INTERFACE_FRANCAIS.Xml (nouveau),
+chargeconstantes.pas, xmlexportimport.pas, warhammersource.pas, CONTEXT.md, Log.txt.
+
+13/09/2026 - VERSIONING WFRP4/WFRP5 : SELECTEUR DE LANGUE D'INTERFACE (COMBOBOXLANGUEINTERFACE)
+AJOUTE, PAS ENCORE COMPILE (CONTEXT.md 2.70). Sur demande de Nono, meme principe que la langue
+des livres (ComboBoxLangue) : la langue de l'interface (RULES-LAB_*/RULES-MESS_*, desormais
+dans INTERFACE.Xml/INTERFACE_FRANCAIS.Xml) doit pouvoir etre choisie independamment de la
+langue des livres/donnees.
+- Nouveau ComboBoxLangueInterface (Panel3, pose en haut a gauche du menu par defaut -
+  Nono repositionnera/stylera lui-meme, comme pour ComboBoxVersion), peuple par
+  ChargerListeLanguesInterface : pas de scan, juste la balise <language> de INTERFACE.Xml
+  puis INTERFACE_FRANCAIS.Xml lue via XmlLivreBalise - meme mecanisme que le selecteur de
+  version. Selection resolue contre le .INI (premiere ligne de la liste si absent/perime).
+- Nouvelle variable .INI LANGINTERFACE= (ConstIniLangueInterface, chargeconstantes.pas),
+  decorrelee de LANG= (qui reste la langue des livres) - nouvelle variable globale
+  ValLangueInterface. Lue en brut dans ChargeIni (resolution differee a
+  ChargerListeLanguesInterface, appelee plus tard dans FormCreate), ecrite dans SauveIni.
+- ComboBoxLangueInterfaceSelect : ne fait que mettre a jour ValLangueInterface et reecrire
+  le .INI, comme ComboBoxVersionSelect - aucun rafraichissement d'affichage branche, Nono a
+  explicitement garde cette partie ("je finirai la partie affichage"). Reste a faire :
+  retraduire les libelles deja poses selon ValLangueInterface plutot que ValLangue pour tout
+  ce qui vient de RULES-LAB_*/RULES-MESS_* (RafraichirLibellesMenu/Traduit ne connaissent
+  aujourd'hui qu'une seule langue globale, ValLangue, pour livres ET interface confondus).
+Diff verifie propre sur les trois fichiers modifies (uniquement des ajouts, rien retire).
+Pas encore compile/teste par Nono a la fin de cette session.
+Fichiers modifies : chargeconstantes.pas, warhammersource.pas, warhammersource.lfm,
+CONTEXT.md, Log.txt.

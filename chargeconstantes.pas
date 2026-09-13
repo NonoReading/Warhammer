@@ -431,11 +431,21 @@ Const
       // chemin des textes
       ConstCheminLivre                  = '\DATABASE\WFRP4\';
       ConstCheminLivreExport            = '\DATABASE_EXPORT\';
+      // Libellés/messages d'interface (RULES-LAB_*/RULES-MESS_*) : sortis du RULESBOOK vers un
+      // livre a part le 13/09/2026 (demande de Nono, CONTEXT.md §2.70) pour ne pas etre
+      // duplique entre WFRP4\ et WFRP5\. Vit directement sous DATABASE\, hors du dossier
+      // d'edition, charge par un appel explicite (pas de scan) - warhammersource.pas.
+      ConstCheminInterface              = '\DATABASE\';
+      ConstFichierInterface             = 'INTERFACE';
+      ConstFichierInterfaceFrancais     = 'INTERFACE_FRANCAIS';
       ConstFichierIni                   = '\INI.TXT';
       ConstCheminTravail                = '\TRAVAIL\';
       ConstIniLangue                    = 'LANG=';
       ConstIniLivre                     = 'BOOK=';
       ConstIniVersion                   = 'VERSION=';
+      // Langue de l'interface (RULES-LAB_*/RULES-MESS_*), décorrélée de ConstIniLangue (qui
+      // reste la langue des livres/données) - Nono, 13/09/2026, CONTEXT.md §2.70.
+      ConstIniLangueInterface           = 'LANGINTERFACE=';
       ConstAnglais                      = 'ENGLISH';
 
       // Chemin des personnages
@@ -691,6 +701,7 @@ Var
 
   ValLangue:               String = ConstAnglais;
   ValVersion:              String = '';
+  ValLangueInterface:      String = ConstAnglais;
 
   // Deux interrupteurs jamais affectés ailleurs dans le projet : declarés, testés, mais
   // laissés à false, ce qui désactivait silencieusement les mécanismes correspondants.

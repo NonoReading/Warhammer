@@ -1796,4 +1796,31 @@ object Menu: TMenu
       OnSelect = ComboBoxVersionSelect
     end
   end
+  object Panel3: TPanel
+    Left = 16
+    Height = 72
+    Top = 8
+    Width = 200
+    BevelInner = bvLowered
+    BevelWidth = 2
+    ClientHeight = 72
+    ClientWidth = 200
+    ParentBackground = False
+    TabOrder = 14
+    object ComboBoxLangueInterface: TComboBox
+      Left = 16
+      Height = 28
+      Top = 24
+      Width = 166
+      Font.CharSet = ANSI_CHARSET
+      Font.Color = clBlack
+      Font.Pitch = fpVariable
+      Font.Quality = fqDraft
+      ItemHeight = 20
+      ParentFont = False
+      TabOrder = 0
+      Text = 'ComboLangueInterface'
+      OnSelect = ComboBoxLangueInterfaceSelect
+    end
+  end
 end

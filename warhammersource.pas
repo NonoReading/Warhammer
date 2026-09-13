@@ -60,6 +60,7 @@ type
     ButtonTalent: TBCButton;
     ComboBoxLangue: TComboBox;
     ComboBoxVersion: TComboBox;
+    ComboBoxLangueInterface: TComboBox;
     ImageFond: TImage;
     Label1: TBCLabel;
     Label2: TBCLabel;
@@ -102,6 +103,7 @@ type
     procedure ChargerImage();
     procedure ComboBoxLangueSelect({%H-}Sender: TObject);
     procedure ComboBoxVersionSelect({%H-}Sender: TObject);
+    procedure ComboBoxLangueInterfaceSelect({%H-}Sender: TObject);
     procedure FormActivate({%H-}Sender: TObject);
     procedure FormCreate({%H-}Sender: TObject);
     procedure ChargerPersonnages();
@@ -115,6 +117,7 @@ type
     function XmlPersonnageFichierActuel(const Directory: string): string;
     procedure RafraichirLibellesMenu();
     procedure ChargerListeVersions();
+    procedure ChargerListeLanguesInterface();
   private
   public
   end;
@@ -210,6 +213,8 @@ begin
   Writeln(MyFile, ConstIniLangue + comboboxlangue.items[ComboBoxLangue.Itemindex]);
   if ComboBoxVersion.Itemindex <> -1 then
     Writeln(MyFile, ConstIniVersion + ComboBoxVersion.items[ComboBoxVersion.Itemindex]);
+  if ComboBoxLangueInterface.Itemindex <> -1 then
+    Writeln(MyFile, ConstIniLangueInterface + ComboBoxLangueInterface.items[ComboBoxLangueInterface.Itemindex]);
   for Ind := 1 to TabLivre.RowCount -1 do
       if TabLivre.Cells[ColLivreSel, Ind] = ConstSelectionne then
         Liste := Liste + AjouteAccolade(TabLivre.Cells[ColLivreCod, Ind]);
@@ -483,6 +488,76 @@ procedure TMenu.ChargerListeVersions();
       end;
   end;
 
+procedure TMenu.ComboBoxLangueInterfaceSelect(Sender: TObject);
+  // Sélecteur de langue de l'interface (RULES-LAB_*/RULES-MESS_*, décorrélé de la langue
+  // des livres - Nono, 13/09/2026, CONTEXT.md §2.70) : même principe que
+  // ComboBoxVersionSelect, seule la persistance .INI est branchée ici. Le rafraîchissement
+  // de l'affichage (retraduire les libellés déjà posés dans la langue choisie) est laissé
+  // à Nono.
+  var
+    Langue: String;
+  begin
+    if ComboBoxLangueInterface.ItemIndex <> -1 then
+      begin
+        Langue := ComboBoxLangueInterface.Items[ComboBoxLangueInterface.ItemIndex];
+        if Langue <> ValLangueInterface then
+          begin
+            ValLangueInterface := Langue;
+            SauveIni();
+          end;
+      end;
+  end;
+
+procedure TMenu.ChargerListeLanguesInterface();
+  // Peuple ComboBoxLangueInterface (Nono, 13/09/2026, CONTEXT.md §2.70) : pas de scan,
+  // contrairement à ChargerListeVersions - INTERFACE.Xml/INTERFACE_FRANCAIS.Xml sont à
+  // emplacement fixe (ConstCheminInterface), on lit juste leur balise <language> à tour de
+  // rôle (XmlLivreBalise, comme le sélecteur de version). Sélection : reprend la valeur du
+  // .INI (lue plus tôt dans ChargeIni, dans ValLangueInterface) si elle correspond à une
+  // langue trouvée ; sinon (première ligne du .INI absente, ou langue disparue) se
+  // positionne sur la première ligne de la liste - même règle que la version.
+  var
+    CheminFichier: String;
+    Langue:        String;
+    ValIni:        String;
+  begin
+    ComboBoxLangueInterface.Style := csDropDownList;
+    ValIni              := ValLangueInterface;
+    ValLangueInterface  := '';
+
+    CheminFichier := GetCurrentDir + ConstCheminInterface + ConstFichierInterface + '.xml';
+    Langue        := XmlLivreBalise(CheminFichier, ConstXmlLanguage);
+    if (Langue <> '') and (ComboBoxLangueInterface.Items.IndexOf(Langue) = -1) then
+      begin
+        ComboBoxLangueInterface.Items.Add(Langue);
+        if Langue = ValIni then
+          begin
+            ComboBoxLangueInterface.ItemIndex := ComboBoxLangueInterface.Items.Count - 1;
+            ValLangueInterface                := Langue;
+          end;
+      end;
+
+    CheminFichier := GetCurrentDir + ConstCheminInterface + ConstFichierInterfaceFrancais + '.xml';
+    Langue        := XmlLivreBalise(CheminFichier, ConstXmlLanguage);
+    if (Langue <> '') and (ComboBoxLangueInterface.Items.IndexOf(Langue) = -1) then
+      begin
+        ComboBoxLangueInterface.Items.Add(Langue);
+        if Langue = ValIni then
+          begin
+            ComboBoxLangueInterface.ItemIndex := ComboBoxLangueInterface.Items.Count - 1;
+            ValLangueInterface                := Langue;
+          end;
+      end;
+
+    // Rien dans le .INI, ou valeur disparue : première ligne de la liste (même règle que
+    // la version, Nono, 13/09/2026).
+    if (ValLangueInterface = '') and (ComboBoxLangueInterface.Items.Count > 0) then
+      begin
+        ComboBoxLangueInterface.ItemIndex := 0;
+        ValLangueInterface                := ComboBoxLangueInterface.Items[0];
+      end;
+  end;
+
 Procedure TMenu.RafraichirLibellesMenu();
   // Rafraîchit les libellés déjà posés sur le menu principal après un changement de
   // langue en direct (CONTEXT.md §2.8). Duplique DÉLIBÉRÉMENT un sous-ensemble de
@@ -631,10 +706,12 @@ Procedure TMenu.ChargeIni();
     ligne:         string;
     LocLangue:     String;
     LocVersion:    String;
+    LocLangueInterface: String;
   begin
     // récupérer la langue dans la fichier ini s'il existe
     LocLangue     := ValLangue;
     LocVersion    := '';
+    LocLangueInterface := '';
     DirectoryPath := GetCurrentDir+ConstFichierIni;
     if FileExists(DirectoryPath) then
       begin
@@ -651,6 +728,8 @@ Procedure TMenu.ChargeIni();
               ListeLivre := ExtractStringAfter(Ligne,ConstIniLivre);
             if pos(ConstIniVersion, Ligne) > 0 then
               LocVersion := ExtractStringAfter(Ligne,ConstIniVersion);
+            if pos(ConstIniLangueInterface, Ligne) > 0 then
+              LocLangueInterface := ExtractStringAfter(Ligne,ConstIniLangueInterface);
           end;
         CloseFile(fichier);
       end;
@@ -659,6 +738,10 @@ Procedure TMenu.ChargeIni();
     // plus tard dans FormCreate, une fois ComboBoxVersion peuplé) - même ordre que la
     // langue : lecture brute du .INI ici, résolution contre la liste déroulante ensuite.
     ValVersion := LocVersion;
+    // Même principe pour la langue de l'interface (RULES-LAB_*/RULES-MESS_*, CONTEXT.md
+    // §2.70) : résolution définitive dans ChargerListeLanguesInterface, appelée plus tard
+    // dans FormCreate, une fois ComboBoxLangueInterface peuplé.
+    ValLangueInterface := LocLangueInterface;
 
     // retrouver la langue dans la liste déroulante
     for ind := 0 to ComboBoxLangue.items.count -1 do
@@ -1053,6 +1136,17 @@ procedure TMenu.FormCreate(Sender: TObject);
          ListeFichiersLivres.Free;
        end;
 
+       // Libellés/messages d'interface (RULES-LAB_*/RULES-MESS_*) : vivent dans
+       // INTERFACE.Xml/INTERFACE_FRANCAIS.Xml, directement sous DATABASE\ (pas sous
+       // WFRP4\/WFRP5\) pour ne pas être dupliqués entre éditions - décision de Nono le
+       // 13/09/2026 (CONTEXT.md §2.70). Pas de scan : deux fichiers à emplacement fixe,
+       // chargés explicitement ici (anglais d'abord, comme pour le RULESBOOK) via le
+       // chemin complet plutôt que ConstCheminLivre.
+       XmlImport(ConstFichierInterface, true, false,
+                 GetCurrentDir + ConstCheminInterface + ConstFichierInterface + '.xml');
+       XmlImport(ConstFichierInterfaceFrancais, true, false,
+                 GetCurrentDir + ConstCheminInterface + ConstFichierInterfaceFrancais + '.xml');
+
        TypeEquipCC         := GetTexteLibelle('RULES-LAB_061');
        TypeEquipCT         := GetTexteLibelle('RULES-LAB_062');
        TypeEquipMU         := GetTexteLibelle('RULES-LAB_060');
@@ -1134,6 +1228,9 @@ procedure TMenu.FormCreate(Sender: TObject);
 
        // sélecteur de version WFRP4/WFRP5 (CONTEXT.md §2.70)
        ChargerListeVersions();
+
+       // sélecteur de langue de l'interface, décorrélé de la langue des livres (CONTEXT.md §2.70)
+       ChargerListeLanguesInterface();
 
        // charger les livres
        ChargerLivre(false, '');
