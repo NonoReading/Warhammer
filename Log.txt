@@ -3851,3 +3851,53 @@ Nettoyage repere en relisant le diff avant commit : la ligne de transition a nom
 SauveIni - warhammersource.pas filtre desormais les entrees a nom vide avant ecriture.
 Compile, 0 erreur.
 Fichiers modifies : warhammersource.pas, CONTEXT.md, Log.txt.
+
+13/09/2026 - CATALOGUE V5 : PEUPLEMENT DES 64 METIERS ET DE LEUR DONNEE DE SUPPORT
+(CONTEXT.md 2.70). Sur DATABASE\WFRP5\BOOK_RULESBOOK.Xml, section par section, compile et
+lance apres chaque bloc :
+- DATA_ATTRIBUT (13) + DATA_ATTRIBUT_COST/DATA_SKILL_COST (15 paliers, format MinMax
+  conserve sur decision de Nono - le sens change entre editions, adaptation Pascal non
+  faite).
+- DATA_SKILL (45) + DATA_SKILL_SPECIALIZATION (250, repris de la V4 + quelques nouvelles
+  dont Channelling (Magick), sans equivalent V4).
+- DATA_TALENT (167, transcription fraiche) + DATA_RANDOM_TALENT (40).
+- DATA_RACE/DATA_NATION/DATA_SPECIE (5 especes) + DATA_RANDOM_SPECIE.
+- DATA_CAREER : 64 metiers, 8 classes completes (Academics, Burghers, Courtiers, Peasants,
+  Rangers, Warriors, Rogues, Riverfolk), correspondance confirmee avec les 64 metiers V4 aux
+  3 renommages pres deja connus (Huffer->Pilot, Seaman->Sailor, Bawd->Knave).
+Piege trouve et corrige en cours de route : l'Advance Scheme d'un metier (icones croix/
+hache-croisee/crane/bouclier = niveau 1 a 4 de deblocage par caracteristique) est illisible
+depuis l'extraction texte du PDF - seule l'icone croix (niveau 1) a un caractere de repli,
+les trois autres non. Les 24 premiers metiers faits par extraction texte ont ete relus en
+image (pdftoppm) et corriges ; les 40 suivants faits en image des le depart. A retenir pour
+tout futur livre V5 : rendre la page en PNG, ne jamais lire ce tableau en texte seul.
+Trois libelles de specialisation copies de la V4 sans etre verifies mot a mot se sont reveles
+faux au contact du texte reel et ont ete corriges : Lore (Daemonology)->Lore (Daemons),
+Language (Thief)->Language (Thieves Tongue), Trade (Boatbuilding)->Trade (Boatbuilder).
+Politique arretee avec Nono en cours de route : plus aucun contenu francais sur un livre
+officiel (traductions maison divergeant des sorties officielles par le passe) -
+BOOK_RULESBOOK_FRANCAIS.Xml (V5) reste au seed minimal, verifie sans risque cote moteur
+(chargetraduction.pas retombe sur l'anglais si le francais manque).
+Gap decouvert en fin de session, PAS CORRIGE : les talents a parametre (Etiquette, Fearless,
+Savant, Craftsman... 14 au total) auraient du suivre le meme mecanisme generique/
+specialisation que les competences (DATA_TALENT_SPECIALIZATION, deja cable cote Pascal
+depuis le 12/09/2026, CONTEXT.md 2.68) - saisis a la place avec un id generique nu et un
+commentaire XML jamais lu par le programme. Plan de correction et liste des 14 talents dans
+CONTEXT.md 2.70, a traiter en une fois sur les 64 metiers.
+Compile (lazbuild, 0 erreur) apres chaque classe de metiers ; pas encore verifie par Nono au
+moment d'ecrire cette entree.
+Fichiers modifies : DATABASE\WFRP5\BOOK_RULESBOOK.Xml, CONTEXT.md, Log.txt.
+
+13/09/2026 - SPECIALISATION DES 14 (EN FAIT 16) TALENTS A PARAMETRE DU RULEBOOK V5 :
+INVENTAIRE ET DECISIONS DE CONCEPTION FAITS AVEC NONO, AUCUNE ECRITURE XML ENCORE FAITE
+(CONTEXT.md 2.70). Session coupee sur alerte quota Nono avant le debut de l'ecriture. Decisions
+prises : Artistic/Impassioned Zeal inclus dans la conversion generique malgre l'absence de
+variante concrete dans ce livre (Nono : les autres livres sont adaptables) ; choix "A ou B"
+via la syntaxe RULES-Txxxx/RULES-Tyyyy deja utilisee dans le projet (NATIO l.5897) ; talents
+"(as Trade)" (Craftsman/Master Tradesman) marques par un commentaire (?) signifiant "reprend
+le choix precedent", pas de mecanisme de resolution dynamique. Typo Etiquette (Guilders)->
+(Guilder) a corriger au passage. Inventaire complet des 61 ids de specialisation a creer,
+liste dans CONTEXT.md 2.70 (en tete de fichier). Decouverte annexe non traitee : les 30
+metiers NATIO-WORK001 a 030 (Nations of Mankind) ne sont lies a aucune race (aucune Specie ne
+les liste dans son SUBCHAPTER_CAREER) - a ajouter a A FAIRE.txt.
+Fichiers modifies : CONTEXT.md, Log.txt.

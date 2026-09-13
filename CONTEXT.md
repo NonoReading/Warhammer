@@ -1,5 +1,116 @@
 # Warhammer — Contexte projet
 
+**13/09/2026 — SPÉCIALISATION DES 14 TALENTS À PARAMÈTRE DU RULEBOOK V5 : INVENTAIRE ET
+DÉCISIONS DE CONCEPTION FAITS, AUCUNE ÉCRITURE XML ENCORE FAITE, SESSION COUPÉE SUR ALERTE
+QUOTA NONO (§2.70).** Reprise du gap identifié en fin de peuplement du catalogue V5 (entrée
+13/09 plus bas) : les talents à paramètre saisis avec un id nu au lieu du mécanisme
+générique/spécialisation. Tout ce qui suit est **prêt à écrire, rien n'est encore sur le
+disque** - prochaine session : exécuter directement ce plan, pas besoin de redemander à Nono.
+
+**Décisions validées par Nono pendant cette session :**
+1. **`T0009` Artistic et `T0066` Impassioned Zeal sont AUSSI concernés** (pas exclus comme je
+   l'avais d'abord proposé) - même si le Rulebook ne les utilise jamais avec une variante
+   concrète, Nono veut le mécanisme générique posé quand même : "on est dans le RULEBOOK et
+   théoriquement les autres livres sont adaptables et certains ont des spécialités." Donc
+   **16 talents au total** convertis en id générique `_*`, pas 12.
+2. **Typo confirmée à corriger** : une occurrence `Etiquette (Guilders)` (pluriel) contre 8
+   `Etiquette (Guilder)` (singulier) - le livre dit toujours singulier (vérifié
+   `LIVRES\WFRP5_Core_Rulebook_01_09_26.txt`). Corriger vers le singulier.
+3. **Choix "A ou B" entre deux talents distincts** (5 cas : `Acute Sense (Sight or Touch)`,
+   `(Taste or Touch)`, `Etiquette (Criminals or Scholars)`, `(Nobles or Soldiers)`,
+   `Resistant (Disease or Poison)`) : utiliser la syntaxe `"RULES-Txxxx/RULES-Tyyyy"` déjà
+   présente dans le projet (vérifiée dans `BOOK_NATIONS_OF_MANKIND.Xml` l.5897,
+   `RULES-T0161/NATIO-T0015` = "Slayer or Mark of the Gods", **une vraie carrière**, pas
+   qu'une table de tirage). **Limite confirmée et acceptée par Nono** : ce découpage par `/`
+   n'est lu que par `winlivre.pas` l.746 (affichage catalogue) - PAS par `winpersonnage.pas`/
+   `wincreation.pas` (aucune occurrence de `Pos('/'` ailleurs que dans ce fichier). Donc ça
+   s'affichera bien dans WinLivre, mais l'avancement réel de personnage ne saura pas encore
+   le résoudre - cohérent avec le fait que l'avancement n'est de toute façon pas branché
+   aujourd'hui (§0). **À noter dans `A FAIRE.txt`** : le jour où l'avancement de carrière sera
+   codé, il faudra aussi lui apprendre à lire cette syntaxe `/`.
+   Chaque moitié du `/` doit être un id de spécialisation qui existe réellement (résolu par
+   `ChercheTalent` côté `winlivre.pas`) - donc pas de nouvelle entrée dédiée aux 5 paires,
+   je réutilise les ids atomiques déjà créés pour les mentions isolées (ex.
+   `RULES-T0046_CRIM/RULES-T0046_SCHOL` réutilise les ids créés pour `Etiquette (Criminals)`
+   et `Etiquette (Scholars)` seules).
+4. **`Craftsman`/`Master Tradesman` "(as Trade)"** (la spécialisation reprend le Trade choisi
+   plus tôt dans la MÊME carrière, ex. `RULES-WORK03` Artisan : niveau 1 `Trade (Any One)`,
+   niveaux suivants `Craftsman (as Trade)`/`Master Tradesman (as Trade)`/`Trade Tools (as
+   Trade)` - valeur dynamique, pas une liste fermée du livre). Nono a proposé un marqueur
+   visuel `(?)` pour signifier "reprend le choix précédent" plutôt que de créer une fausse
+   entrée de spécialisation figée. **Convention retenue** : référencer l'id générique `_*`
+   (comme pour "(Any One)"), commentaire XML `<!-- Craftsman (?) -->` /
+   `<!-- Master Tradesman (?) -->` à la place de `(as Trade)`. Aucun mécanisme de résolution
+   dynamique n'existe dans le programme - gap connu, assumé pour cette passe, **à documenter
+   dans `A FAIRE.txt`** avec l'exemple Artisan ci-dessus pour que la convention `(?)` soit
+   compréhensible plus tard.
+
+**Découverte annexe de Nono en cours de session, PAS ENCORE TRAITÉE - à ajouter à
+`A FAIRE.txt`** : les 30 métiers créés par *Nations of Mankind* (`NATIO-WORK001` à `030`)
+n'affichent aucune race dans WinLivre. Cause identifiée : `ConstruireMetierRacesMap`
+(`winlivre.pas` l.1320) construit le lien métier→races en lisant le `SUBCHAPTER_CAREER` de
+CHAQUE race (le lien est porté par la race, pas par le métier) - or aucune fiche `<Specie>`
+de `BOOK_NATIONS_OF_MANKIND.Xml` ne liste les 30 `NATIO-WORK*` dans son propre
+`SUBCHAPTER_CAREER` (vérifié : 0 référence `NATIO-WORK` hors de leur propre définition
+`<Career id=...>`). Ces 30 métiers sont orphelins de toute race. Pas de fix fait - juste
+constaté.
+
+**Travail technique déjà fait, prêt à écrire (dans `DATABASE\WFRP5\BOOK_RULESBOOK.Xml`) :**
+- Recensement complet des variantes concrètes réellement utilisées par les 64 métiers ET les
+  5 espèces (`SUBCHAPTER_TALENT` des `<Specie>`, format `<Talent>"CODE"</Talent>` SANS
+  `name=`, distinct du format carrière `<Talent name="CODE">"N"</Talent>` - les deux formats
+  existent et doivent tous les deux être réécrits). Total 184 références à corriger (180
+  carrières + 4 espèces) + 14 déclarations `<Talent id=...>` + 3 `<DATA_RANDOM_TALENT id=...>`
+  (dont le `id=` doit rester identique au `<Talent name=...>` qu'il contient, comme en V4).
+- **Bonne nouvelle vérifiée sur le texte du livre** : la plupart des `<Description>`
+  actuelles des 14 (ex. `"Craftsman (Trade)"`, `"Master Tradesman (Trade)"`,
+  `"Savant (Lore Specialisation)"`, `"Striding Gait (Terrain)"`, `"Arcane Magic (Lore)"`,
+  `"Bless (Deity)"`, `"Invoke (Deity)"`, `"Etiquette (Social Group)"`, `"Fearless (Enemy)"`,
+  `"Hatred (Group)"`, `"Acute Sense (Sense)"`, `"Artistic (Art)"`, `"Impassioned Zeal
+  (Cause)"`) **correspondent mot pour mot aux en-têtes officiels du livre** (vérifié dans
+  `LIVRES\WFRP5_Core_Rulebook_01_09_26.txt`, ex. l.6373/6434/6652/6778/6833/6995/7091) -
+  contrairement à ce que l'entrée du 13/09 plus bas supposait ("libellé de mon cru"). **Donc
+  pas besoin de réécrire ces `<Description>`** : seul le `id="RULES-Txxxx"` doit gagner le
+  suffixe `_*`. Seule `RULES-T0107` (Resistant) reste à vérifier contre le livre (non confirmé
+  avant coupure) - vérifier vite avant d'écrire, sinon garder `"Resistant (Threat)"` tel quel
+  par défaut (cohérent avec le motif des 13 autres).
+- **Liste des ids de spécialisation à créer** (radical_SUFFIXE, majuscules, sur le modèle V4
+  `RULES-T0012_HANDRICH`) - 61 entrées concrètes, regroupées par talent générique. Talents
+  sans AUCUNE variante concrète dans ce livre (générique seul suffit) : `T0015` Bless,
+  `T0071` Invoke, `T0009` Artistic, `T0066` Impassioned Zeal.
+  - `T0002` Acute Sense : SIGHT, HEARING, TASTE, TOUCH (Touch nécessaire même sans mention
+    isolée - réutilisé dans les deux paires "or")
+  - `T0007` Arcane Magic : HEAVENS, HEDGECRAFT, WITCHCRAFT ("Any Colour Lore" → générique
+    `_*`, simplification acceptée : le mécanisme actuel ne distingue pas "toute Lore" de
+    "Lore de Couleur seulement", comme en V4)
+  - `T0032` Craftsman : BOATBUILDER, HERBALIST, APOTHECARY, BARBER, CARTOGRAPHER, ENGINEER,
+    EXPLOSIVES (+ générique pour "(Any One)" et "(?)" pour "(as Trade)")
+  - `T0046` Etiquette : ALL, CRIMINALS, CULTISTS, GUILDER, NOBLES, SCHOLARS, SERVANTS,
+    SOLDIERS
+  - `T0049` Fearless : BEASTS, BOUNTIES, CRIMINALS, EVERYTHING, INTRUDERS, MERCHANTS,
+    OUTLAWS, PAUPERS, RATS, RIVERWARDENS, ROADWARDENS, UNDEAD, WATCHMEN, WITCHES, WRECKERS
+  - `T0062` Hatred : HERETICS, OUTLAWS
+  - `T0086` Master Tradesman : APOTHECARY, BOATBUILDER, ENGINEER, HERBALIST (+ "(?)" pour
+    "(as Trade)")
+  - `T0107` Resistant : DISEASE, POISON, CHAOS (celui-ci trouvé seulement dans le
+    `SUBCHAPTER_TALENT` d'une espèce, pas un métier - "Resistant (Chaos)")
+  - `T0115` Savant : ART, CHEMISTRY, ENGINEERING, FOLKLORE, HERBS, LAW, LOCAL, MEDICINE,
+    POLITICS, RIVERWAYS, THEOLOGY
+  - `T0134` Striding Gait : ALL, COASTAL, ROCKY, WETLAND
+
+**Prochaine étape exacte** : (1) vérifier vite le libellé officiel de `Resistant` si besoin ;
+(2) dans `DATA_TALENT`, ajouter `_*` à l'`id` des 16 talents (Description inchangée dans
+quasi tous les cas) ; (3) créer le chapitre `DATA_TALENT_SPECIALIZATION` (n'existe pas encore
+dans ce livre) avec les 61 entrées listées ci-dessus, `<Generique>` pointant vers le radical
+`_*` correspondant ; (4) réécrire les 184 références (`<Talent name=` et `<Talent>` bruts) et
+les 3 `id=` de `DATA_RANDOM_TALENT`, en résolvant chaque variante vers son nouvel id (générique
+`_*`, id de spécialisation précis, paire `id1/id2` pour les 5 "A ou B", ou `_*` + commentaire
+`(?)` pour les "(as Trade)"), plus le correctif `Guilders`→`Guilder`. Compiler, laisser Nono
+tester. Faire tout d'un coup sur ce seul fichier, pas par carrière, pour éviter un état
+incohérent (comme décidé pour le peuplement initial).
+
+---
+
 **Dernière mise à jour : 13/09/2026 — VERSIONING WFRP4/WFRP5 : LA SÉLECTION DE LIVRES
 COCHÉS DEVIENT PROPRE À CHAQUE ÉDITION DANS LE `.INI`, TESTÉ ET VALIDÉ PAR NONO (§2.70).**
 Nono, après le correctif précédent : « si je sélectionne la V4 et que je ferme, puis je
@@ -8453,6 +8564,94 @@ mécanisme existant (`TabRaceCompetence`/`NbPoint5`/`NbPoint3`), aucun nouveau c
   "Trickster's Glamour", "Stay Lucky" → "Cheat the Odds", "You Ain't Seen Me, Right?" →
   "You Saw Nothing"), 17 sorts avec CN modifié (liste nommée dans le comparatif), 11 sorts
   nouveaux sur 146 au total (135 en V4).
+
+**Peuplement du catalogue V5 mené à bien (13/09/2026), sur `DATABASE\WFRP5\BOOK_RULESBOOK.Xml`,
+section par section avec compilation et lancement après chaque bloc :**
+- `DATA_ATTRIBUT` (13 caractéristiques, sans Résilience/Extra Points - cf. décision Fate/
+  Fortune ci-dessus) + `DATA_ATTRIBUT_COST`/`DATA_SKILL_COST` (15 paliers "5" à "75", conservés
+  au format MinMax de la V4 sur décision de Nono - **le sens change** : V4 = coût par tranche
+  de VALEUR de caractéristique, V5 = coût par NOMBRE D'AVANCES achetées ; adaptation Pascal du
+  côté lecture reportée, non faite).
+- `DATA_SKILL` (45) + `DATA_SKILL_SPECIALIZATION` (250) - repris tel quel de la V4 (liste
+  confirmée identique par Nono via la "COMPLETE SKILL LIST" du livre V5), plus quelques
+  spécialisations neuves rencontrées au fil des métiers (Art (Drawing), Lore (Rats), Animal
+  Training (Hawk), Secret Signs (Hedgefolk), Channelling (Magick) - celle-ci nouvelle de fond
+  en comble, aucun équivalent V4, `RULES-COMPFOCAL_MAGICK`).
+- `DATA_TALENT` (167, transcription fraîche depuis le texte V5 - le mécanisme +1SL/rang
+  disparaît, cf. plus haut, donc pas de reprise directe des 166 talents V4) +
+  `DATA_RANDOM_TALENT` (40 entrées D100).
+- `DATA_RACE`/`DATA_NATION`/`DATA_SPECIE` (5 espèces : Human, Dwarf, Halfling, High Elf, Wood
+  Elf, valeurs Fate/Move officielles du livre) + `DATA_RANDOM_SPECIE`.
+- `DATA_CAREER` : **64 métiers, les 8 classes au complet**, un métier par un métier depuis les
+  pages réelles du PDF (jamais depuis l'extraction texte seule pour l'Advance Scheme - voir
+  piège ci-dessous). Correspondance confirmée avec les 64 métiers V4 aux 3 renommages près
+  déjà documentés par le comparatif (`WFRP-4e-vs-5e.txt`) : Huffer→Pilot, Seaman→Sailor,
+  Bawd→Knave.
+- **Piège rencontré et corrigé EN COURS DE ROUTE, à ne pas reproduire** : l'Advance Scheme
+  d'une carrière (tableau des 10 caractéristiques avec 4 icônes croix/hache-croisée/crâne/
+  bouclier = niveau 1 à 4 où l'attribut se débloque) est **illisible depuis le texte extrait
+  du PDF** - seule l'icône "croix" (niveau 1) a un caractère de repli dans la couche texte,
+  les trois autres n'en ont aucun. Une première passe sur les 24 premiers métiers (Academics/
+  Burghers/Courtiers) a été faite par extraction de texte et a silencieusement tronqué tout
+  niveau 2 à 4 en "jamais avançable" - **repéré et corrigé en relisant les pages en image**
+  (`pdftoppm` de `C:\poppler-26.02.0`, PAS `pdftotext`), les 24 corrigés puis les 40 métiers
+  suivants faits image dès le départ. **Retenir pour toute lecture future de ce tableau dans
+  un autre livre V5 : rendre la page en PNG et lire visuellement, l'extraction texte ment par
+  omission sur ce tableau précis.**
+- **Trois erreurs de libellé de spécialisation trouvées et corrigées en confrontant le texte
+  réel du livre** (copies V4 jamais vérifiées mot à mot) : `RULES-COMPSAVOIR_DEMO` "Lore
+  (Daemonology)" → "Lore (Daemons)" ; `RULES-COMPLANG_VOL` "Language (Thief)" → "Language
+  (Thieves Tongue)" ; `RULES-COMPMETIER_BATEA` "Trade (Boatbuilding)" → "Trade (Boatbuilder)".
+  Les 250 spécialisations n'ont pas été vérifiées une par une au-delà de ces trois rencontres
+  fortuites - **une passe systématique reste à faire si on veut la garantie qu'il n'y en a pas
+  d'autres** (suggestion faite à Nono en fin de session, pas encore actée).
+- **Politique arrêtée en cours de route (Nono) : plus aucun contenu français sur un livre
+  officiel.** Nono a traduit des livres par le passé et constaté que ses traductions
+  divergeaient des versions officielles sorties ensuite - décision : `BOOK_RULESBOOK_
+  FRANCAIS.Xml` (V5) reste au seed minimal, jamais peuplé en parallèle de l'anglais. Vérifié
+  sans risque côté moteur : `Traduit`/`AddTrad` (`chargetraduction.pas`) construisent la liste
+  canonique sur la passe ANGLAISE uniquement, le français ne fait que surcoucher
+  Description/Libelle/Resume s'il existe pour le même code - une entrée sans français retombe
+  silencieusement sur l'anglais. Le français reste dû uniquement à l'interface (`DATA_LABEL`/
+  `RULES-MESS_*`, hors périmètre RULESBOOK depuis §2.70 plus haut).
+- **Compilé (lazbuild, 0 erreur) et lancé après chaque classe de métiers** ; pas encore
+  vérifié par Nono au moment d'écrire ceci.
+
+**Gap découvert en fin de peuplement, PAS ENCORE CORRIGÉ - point de reprise pour la suite.**
+Nono a remarqué en relisant l'arbre du livre (WinLivre) qu'il voyait des Talents mais aucune
+"spécialisation de talent" - alors que §2.68 documente précisément le mécanisme
+générique↔spécialisation déjà câblé pour ça (`DATA_TALENT_SPECIALIZATION`, chargé en dur par
+`xmlexportimport.pas` l.1573, `ConstXmlDataTalentSpe`). Vérification faite : le mécanisme
+existe bel et bien et suit exactement le même moule que `DATA_SKILL_SPECIALIZATION` -
+`DATA_TALENT` porte l'entrée générique `_*` ("Etiquette (Any)" par ex.), un chapitre séparé
+`DATA_TALENT_SPECIALIZATION` porte chaque variante concrète (`RULES-T0136_NOBLE` = "Etiquette
+(Nobles)" côté V4), reliées par déduction de radical ou par le champ explicite `<Generique>`
+(§2.68).
+- **Ce qui a été fait à la place, à corriger** : les 14 talents V5 à paramètre (liste ci-
+  dessous) ont été saisis dans `DATA_TALENT` avec un **id nu sans suffixe** (`RULES-T0046`
+  au lieu de `RULES-T0046_*`) et un libellé générique de mon cru ("Etiquette (Social
+  Group)"). Chaque métier référence cet id nu accompagné d'un commentaire XML donnant la
+  vraie variante (`<!-- Etiquette (Servants) -->`) - **commentaire jamais lu par le
+  programme**. Résultat actuel : tous les métiers prenant une variante d'Etiquette (ou de
+  Fearless, Savant, Craftsman...) afficheraient au joueur le même libellé générique
+  fourre-tout au lieu du nom réel de la variante prise.
+- **Les 14 talents concernés** (id actuel → description générique actuelle) : `T0002`
+  Acute Sense, `T0007` Arcane Magic, `T0009` Artistic, `T0015` Bless, `T0032` Craftsman,
+  `T0046` Etiquette, `T0049` Fearless, `T0062` Hatred, `T0066` Impassioned Zeal, `T0071`
+  Invoke, `T0086` Master Tradesman, `T0107` Resistant, `T0115` Savant, `T0134` Striding
+  Gait.
+- **~76 variantes concrètes déjà recensées** dans les 64 métiers actuels (relevé fait en fin
+  de session par un grep de tous les commentaires suivant ces 14 id - liste complète dans la
+  session, pas recopiée ici pour ne pas alourdir ce fichier ; à refaire au besoin avec `grep
+  -A1 'Talent name="RULES-T00xx"' DATABASE\WFRP5\BOOK_RULESBOOK.Xml | grep '<!--'`).
+- **Plan retenu, pas encore exécuté** : (1) renommer les 14 id génériques en `_*` dans
+  `DATA_TALENT` (garder une description "(Any)"/"(Any One)" cohérente avec le choix libre) ;
+  (2) créer le chapitre `DATA_TALENT_SPECIALIZATION` avec une entrée par variante concrète
+  listée ci-dessus (`<Generique>` explicite si besoin, sinon déduction par radical comme en
+  V4) ; (3) réécrire chaque référence `SUBCHAPTER_TALENT` des 64 métiers : `_*` quand le
+  livre dit "(Any One)", id de spécialisation précis sinon. Refonte mécanique mais qui
+  touche les 64 métiers déjà écrits - à faire d'un coup, pas classe par classe, pour éviter
+  un état intermédiaire incohérent entre carrières corrigées et non corrigées.
 
 ---
 

@@ -6,6 +6,20 @@
 CORRECTIONS COURTES  (une ligne ou deux chacune)
 =========================================================================
 
+LES 30 METIERS NATIO-WORK001 A 030 (NATIONS OF MANKIND) NE SONT LIES A AUCUNE RACE. Vu par
+Nono le 13/09/2026 en testant WinLivre. Cause : le lien metier->races se construit en lisant
+le SUBCHAPTER_CAREER de CHAQUE race (winlivre.pas, ConstruireMetierRacesMap l.1320), pas
+l'inverse - aucune fiche Specie de BOOK_NATIONS_OF_MANKIND.Xml ne liste ces 30 metiers dans
+son propre SUBCHAPTER_CAREER. A corriger cote donnees (ajouter les references dans les bonnes
+especes) le jour ou on y revient.
+
+LA SYNTAXE DE CHOIX "RULES-Txxxx/RULES-Tyyyy" (deux talents distincts au choix, ex. NATIO
+l.5897) N EST LUE QUE PAR WINLIVRE.PAS (AFFICHAGE). Verifie le 13/09/2026 : aucune occurrence
+de ce decoupage par '/' dans winpersonnage.pas/wincreation.pas. Le jour ou l'avancement de
+carriere sera code, il faudra lui apprendre a lire cette syntaxe aussi - utilisee pour les
+choix "A ou B" du Rulebook V5 (§2.70) et pour des cas V4 existants (duches bretonniens,
+carrieres Nations of Mankind).
+
 WINFABRICATION N A AUCUNE NOTION DE LIVRE (CONTEXT.md 2.69). Contrairement a WinWeapon/
 WinArmor/WinSpell/WinTalent/WinCompetence (filtre par livre ajoute le 12/09/2026), la
 fenetre catalogue de fabrication n a ni champ Livre ni filtre - chantier plus lourd, la
