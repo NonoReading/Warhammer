@@ -3640,3 +3640,40 @@ de finir la partie affichage qu'il avait explicitement laissee de cote.
 - Compile (lazbuild, 0 erreur, aucun warning sur les lignes modifiees).
 - Valide par Nono : "j'ai teste, cela marche parfaitement".
 Fichiers modifies : chargeconstantes.pas, warhammersource.pas, CONTEXT.md, Log.txt.
+
+13/09/2026 - VERSIONING WFRP4/WFRP5 : LES DONNEES PURES RENTRENT DANS LE SCHEMA, SEED MINIMAL
+TESTE, DEUX FRONTIERES MOTEUR ET LE CHOIX DE COMPETENCES DE DEPART TRANCHES (CONTEXT.md
+2.70). Nono a demande de verifier si les donnees du nouveau Rulebook V5 (hors calcul XP)
+rentreraient dans la base actuelle.
+- Comparaison categorie par categorie entre BOOK_RULESBOOK.Xml (WFRP4) et le texte du
+  Rulebook V5 (LIVRES\WFRP5_Core_Rulebook_01_09_26.txt) : races/ethnies, metiers,
+  competences, talents, armes, armures, sorts, craftsmanship, corruption/mutation, nations et
+  psychologie-personnage rentrent tous tels quels dans le schema DATA_* existant, aucun
+  nouveau champ necessaire. Craftsmanship et corruption/mutation sont identiques au mot pres
+  entre les deux editions. Nations confirme comme concept du fan book Nations of Mankind, pas
+  du Rulebook. Seule la psychologie-creature/bestiaire reste hors schema, mais c'est un gap
+  preexistant (Nations of Mankind, 04/09/2026), pas propre a la V5.
+- Seed minimal cree : DATABASE\WFRP5\BOOK_RULESBOOK.Xml/_FRANCAIS.Xml avec une race
+  (Human/Humans Reiklanders), un metier (Agitator, 4 niveaux) et une arme (Quarterstaff),
+  donnees reprises du livre. Teste en basculant temporairement ConstCheminLivre sur
+  DATABASE\WFRP5\, compile (lazbuild, 0 erreur), lance - Nono confirme : "ca marche" (visible
+  dans WinLivre). ConstCheminLivre remis sur DATABASE\WFRP4\ juste apres.
+- Decouverte pendant ce test : les personnages proposes restaient ceux de la V4 - confirme
+  concretement que ConstCheminPersonnage devra passer de Const a Var en meme temps que
+  ConstCheminLivre le jour du rechargement a chaud (deja prevu au plan, jamais verifie avant).
+- Deux frontieres moteur tranchees avec Nono : Fate/Fortune (nouveau DATA_ATTRIBUT propre a
+  l'arbre WFRP5, sans Resilience/Extra Points, moteur V4 intact) ; SUBCHAPTER_ATTR de carriere
+  (meme champ, meme plage 0-4, reutilise tel quel - correction en cours de route : ce n'est
+  pas une eligibilite binaire mais le niveau de carriere a partir duquel l'attribut se
+  debloque, verifie dans le livre p.43 "Anatomy of a Career").
+- Mecanisme de choix de competences de depart par espece identifie et tranche : PAS une
+  extension du "(Any)" existant (qui remplit une specialisation), mais le meme mecanisme que
+  le choix de competences de RACE deja cable en V4 (NbPoint5/NbPoint3 + TabRaceCompetence,
+  wincreation.pas/chargerace.pas) - confirme par LIVRES\WFRP-4e-vs-5e.txt ("five, all at
+  +5") : NbPoint5=5, NbPoint3=0 pour les especes V5, aucun nouveau champ.
+- Donnees de reference notees pour le futur peuplement (LIVRES\WFRP-4e-vs-5e.txt) : table
+  Fate/Fortune/Movement des 5 especes, attributs primaires non uniformes par espece (Dwarf/
+  Halfling different de l'Humain), nouvelles qualites d'arme (Parry, Unbreakable, Inflict),
+  gap mineur sur les trappings de Classe, deltas sorts/miracles deja recenses.
+Fichiers modifies : CONTEXT.md, DATABASE\WFRP5\BOOK_RULESBOOK.Xml (nouveau),
+DATABASE\WFRP5\BOOK_RULESBOOK_FRANCAIS.Xml (nouveau).

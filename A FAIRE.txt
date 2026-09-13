@@ -370,6 +370,11 @@ pas de simples modificateurs d Attribut/Competence, le modele ne les porte toujo
 NATIONS OF MANKIND, HORS LOT : LES CREATURES. Taureaux de guerre estaliens, monture du
 Toreador. Reporte avec les montures.
 
+TRAPPINGS DE CLASSE EN V5 (releve le 13/09/2026, comparatif LIVRES\WFRP-4e-vs-5e.txt). Le
+Rulebook V5 donne un petit equipement de depart par Classe (Burgher, Warrior...), en plus de
+celui du metier - rien dans DATA_CAREER ne porte ca aujourd'hui (Class n'est qu'un filtre).
+A voir si on l'ajoute quand on peuplera le catalogue V5, sinon negligeable.
+
 =========================================================================
 EN VRAC  (ancien, non trie)
 =========================================================================
