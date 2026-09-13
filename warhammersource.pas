@@ -817,7 +817,7 @@ begin
     else
     begin
       // Construire le chemin : DATABASE\BOOK RULESBOOK.Xml
-      BookPath := 'DATABASE\' + TabLivre.Cells[ColLivreChe, TabLivre.Row];;
+      BookPath := 'DATABASE\WFRP4\' + TabLivre.Cells[ColLivreChe, TabLivre.Row];;
 
       // Créer/Ouvrir WinLivre et charger le livre
       if not Assigned(FenLivre) then
@@ -849,9 +849,9 @@ procedure TMenu.FormCreate(Sender: TObject);
 
        // Charger Les données
        ChargeIni();
-       ConstCheminImageRace    := '\DATABASE\PICTURES\SPECIE\';
-       ConstCheminImageMetier  := '\DATABASE\PICTURES\CLASS\';
-       ConstCheminImageSort    := '\DATABASE\PICTURES\SPELL\';
+       ConstCheminImageRace    := '\DATABASE\WFRP4\PICTURES\SPECIE\';
+       ConstCheminImageMetier  := '\DATABASE\WFRP4\PICTURES\CLASS\';
+       ConstCheminImageSort    := '\DATABASE\WFRP4\PICTURES\SPELL\';
 
        // création de la base de donnée
        ListRace                     := TListRace.Create;

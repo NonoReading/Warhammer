@@ -383,7 +383,7 @@ Const
       ConstXpChangerMetierIncomplet     = 200;
       ConstXpChangerClasse              = 100;
 
-      // image de fond et icones
+      // image de fond et icones - generales, communes a toutes les editions
       ConstCheminLogo1                  = '\PICTURES\BACK\LOGO1.png';
       ConstCheminLogo2                  = '\PICTURES\BACK\LOGO2.png';
       ConstCheminBack                   = '\PICTURES\BACK\BACK.jpg';
@@ -401,35 +401,35 @@ Const
       ConstCheminBoutonSort             = '\PICTURES\BACK\BUTTON_SPELL.png';
       ConstCheminImageArme              = '\PICTURES\WEAPON\';
       ConstCheminImageArmure            = '\PICTURES\ARMOR\';
-      ConstCheminImageNiveau            = '\PICTURES\NIV\';
+      ConstCheminImageNiveau            = '\PICTURES\WFRP4\NIV\';
       // Racine des dossiers d'icones de niveau. ConstCheminImageNiveau juste au-dessus
       // reste le dossier PAR DEFAUT ; une ethnie peut en designer un autre sous cette
       // racine via la balise <PictureLevel> (ex : NIV_HELF pour les Hauts Elfes, dont le
       // livre utilise des glyphes et des couleurs qui lui sont propres).
-      ConstCheminImageNiveauRacine      = '\PICTURES\';
+      ConstCheminImageNiveauRacine      = '\PICTURES\WFRP4\';
       ConstCheminImagePolice            = '\FONT\';
 
-      // pdf du personnage
-      ConstCheminPdfFront               = '\PICTURES\PDF\FRONT.png';
-      ConstCheminPdfBack                = '\PICTURES\PDF\BACK.png';
-      ConstCheminPdfShadow              = '\PICTURES\PDF\SHADOW.png';
-      ConstCheminPdfMetierBack          = '\PICTURES\PDF\PDF_BACKSHEET.jpg';
-      ConstCheminPdfMetierAdvance       = '\PICTURES\PDF\PDF_ADVANCE_SCHEME.png';
-      ConstCheminPdfMetierLigneG        = '\PICTURES\PDF\PDF_LINE_LEFT.png';
-      ConstCheminPdfMetierLigneD        = '\PICTURES\PDF\PDF_LINE_RIGHT.png';
-      ConstCheminPdfWarhammer           = '\PICTURES\PDF\PDF_WARHAMMER.png';
-      ConstCheminPdfRolePlay            = '\PICTURES\PDF\PDF_ROLEPLAY.png';
-      ConstCheminPdfUbersreik           = '\PICTURES\PDF\PDF_UBERSREIK.png';
+      // pdf du personnage - par edition
+      ConstCheminPdfFront               = '\PICTURES\WFRP4\PDF\FRONT.png';
+      ConstCheminPdfBack                = '\PICTURES\WFRP4\PDF\BACK.png';
+      ConstCheminPdfShadow              = '\PICTURES\WFRP4\PDF\SHADOW.png';
+      ConstCheminPdfMetierBack          = '\PICTURES\WFRP4\PDF\PDF_BACKSHEET.jpg';
+      ConstCheminPdfMetierAdvance       = '\PICTURES\WFRP4\PDF\PDF_ADVANCE_SCHEME.png';
+      ConstCheminPdfMetierLigneG        = '\PICTURES\WFRP4\PDF\PDF_LINE_LEFT.png';
+      ConstCheminPdfMetierLigneD        = '\PICTURES\WFRP4\PDF\PDF_LINE_RIGHT.png';
+      ConstCheminPdfWarhammer           = '\PICTURES\WFRP4\PDF\PDF_WARHAMMER.png';
+      ConstCheminPdfRolePlay            = '\PICTURES\WFRP4\PDF\PDF_ROLEPLAY.png';
+      ConstCheminPdfUbersreik           = '\PICTURES\WFRP4\PDF\PDF_UBERSREIK.png';
 
       // chemin des fichiers de données de base
-      ConstCheminAttribut               = '\DATABASE\LANGUAGE\%LANG%\ATTR.TXT';
+      ConstCheminAttribut               = '\DATABASE\WFRP4\LANGUAGE\%LANG%\ATTR.TXT';
 
       // chemin des fichiers liés à l'expérience
-      ConstCheminXpAttribut             = '\DATABASE\ATTR_AUGM.TXT';
-      ConstCheminXpCompetence           = '\DATABASE\SKILL_AUGM.txt';
+      ConstCheminXpAttribut             = '\DATABASE\WFRP4\ATTR_AUGM.TXT';
+      ConstCheminXpCompetence           = '\DATABASE\WFRP4\SKILL_AUGM.txt';
 
       // chemin des textes
-      ConstCheminLivre                  = '\DATABASE\';
+      ConstCheminLivre                  = '\DATABASE\WFRP4\';
       ConstCheminLivreExport            = '\DATABASE_EXPORT\';
       ConstFichierIni                   = '\INI.TXT';
       ConstCheminTravail                = '\TRAVAIL\';
@@ -438,7 +438,7 @@ Const
       ConstAnglais                      = 'ENGLISH';
 
       // Chemin des personnages
-      ConstCheminPersonnage             = '\SAVED_CARACTERS\';
+      ConstCheminPersonnage             = '\SAVED_CARACTERS\WFRP4\';
 
       // Police
       ConstPoliceTaille                 = 10;
@@ -733,9 +733,9 @@ Var
   LivreNbMetier:           Integer;
 
   // chemins génériques
-  ConstCheminImageRace:    String    = '\DATABASE\BOOKS\%BOOK%\PICTURE\SPECIE\';
-  ConstCheminImageMetier:  String    = '\DATABASE\BOOKS\%BOOK%\PICTURE\CLASS\';
-  ConstCheminImageSort:    String    = '\DATABASE\BOOKS\%BOOK%\PICTURE\SPELL\';
+  ConstCheminImageRace:    String    = '\DATABASE\WFRP4\BOOKS\%BOOK%\PICTURE\SPECIE\';
+  ConstCheminImageMetier:  String    = '\DATABASE\WFRP4\BOOKS\%BOOK%\PICTURE\CLASS\';
+  ConstCheminImageSort:    String    = '\DATABASE\WFRP4\BOOKS\%BOOK%\PICTURE\SPELL\';
 
   AttributNiveau:          String;
 

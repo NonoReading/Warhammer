@@ -7786,10 +7786,42 @@ fonctions derrière un point de bascule par édition plutôt que dupliquer la fe
 **Ce chantier fiche de personnage ne démarre qu'une fois celui-ci (données V5) terminé** -
 décision explicite de Nono.
 
-**Point de reprise** : rien codé. Prochaine étape mécanique la plus simple : remplacer les
-dates dans `<VERSION>` des 21 `BOOK*.Xml` de `DATABASE\` par `"WFRP4"`. Puis décider comment
-amorcer `DATABASE_WFRP5\`/`SAVED_CARACTERS_WFRP5\` (copie de `DATABASE\` comme point de
-départ ?), avant de toucher au code du sélecteur.
+**Point de reprise (mis à jour 13/09/2026)** : les 21 `<VERSION>` de `DATABASE\BOOK*.Xml`
+portent désormais `"WFRP4"`. **Schéma de séparation retenu : sous-dossier `WFRP4\`/`WFRP5\`
+dans chacun des trois arbres existants (proposition de Nono), pas de dossier `_WFRP5` en
+frère.** Effectué :
+- `DATABASE\*` → `DATABASE\WFRP4\*` (21 livres + `PICTURES\{CLASS,SPECIE,SPELL}`, via
+  `git mv`, historique préservé).
+- `SAVED_CARACTERS\*` → `SAVED_CARACTERS\WFRP4\*` (14 personnages, `mv` simple : ce dossier
+  est entièrement gitignoré, `.gitignore` l.25, rien à préserver en historique).
+- `PICTURES\` : seuls `NIV\` et `NIV_HELF\` (icônes de niveau — Nono confirme que les puces
+  changent aussi en V5) et `PDF\` (gabarits d'impression, également par livre) passent sous
+  `PICTURES\WFRP4\`. **`ARMOR\`, `WEAPON\` et `BACK\` restent généraux pour l'instant**,
+  directement sous `PICTURES\` — décidé par Nono après plusieurs allers-retours en session
+  (hypothèse de départ "tout PICTURES par édition" écartée). Le tout via `git mv` (dossier
+  suivi par git).
+- Tous les chemins littéraux `\DATABASE\` et `\SAVED_CARACTERS\` de `chargeconstantes.pas`
+  préfixés de `WFRP4\`, ainsi que `ConstCheminImageNiveau`/`ConstCheminImageNiveauRacine`/
+  les 10 `ConstCheminPdf*` (sous `\PICTURES\WFRP4\`) et les deux littéraux isolés de
+  `warhammersource.pas` (l.820 et l.852-854, repérés en explorant le code pour ce chantier).
+  Restent sans préfixe (généraux) : `ConstCheminImageArme`/`ConstCheminImageArmure`
+  (`\PICTURES\WEAPON\`/`\PICTURES\ARMOR\`) et les constantes `\PICTURES\BACK\...` (logos,
+  boutons, fonds). Inclus par cohérence : `ConstCheminAttribut`/`ConstCheminXpAttribut`/
+  `ConstCheminXpCompetence`, qui pointaient déjà vers des fichiers absents du disque
+  (`DATABASE\LANGUAGE\`, `ATTR_AUGM.TXT`, `SKILL_AUGM.txt` - probablement morts depuis le
+  résolveur générique §2.50/2.52, non vérifié).
+- **Hors périmètre, volontairement** : `DATABASE_EXPORT\` (fonctionnalité jamais branchée,
+  §A FAIRE.txt) et `FONT\`/`FONT2\` (pas spécifique à l'édition).
+- **⚠️ Cette répartition PICTURES est un arbitrage "pour l'instant" (mots de Nono), pas un
+  principe stable** : ARMOR/WEAPON/BACK pourraient basculer par édition plus tard si la V5
+  s'avère différente sur ces images. Le revoir quand la donnée V5 sera en main.
+- Diff vérifié propre (`git diff` sur les fichiers de code : uniquement les lignes de chemin
+  attendues en retrait).
+**Compilé et lancé par Nono le 13/09/2026 : fonctionne** (avant les derniers ajustements
+PICTURES ci-dessus - à recompiler pour les valider, mais changement de même nature que ce
+qui a déjà tourné). Prochaine étape : amorcer `DATABASE\WFRP5\`/`SAVED_CARACTERS\WFRP5\`/
+`PICTURES\WFRP5\{NIV,NIV_HELF,PDF}\` (copie de la V4 comme point de départ, ou dossiers
+vides ? pas encore tranché), avant de toucher au code du sélecteur.
 
 **Sources de travail pour la V5** : `LIVRES\WFRP5_Core_Rulebook_01_09_26.txt` (export texte
 fourni par Nono, ~22 000 lignes, ~2,2 Mo) et `LIVRES\WFRP-4e-vs-5e.txt` (comparatif tiers des

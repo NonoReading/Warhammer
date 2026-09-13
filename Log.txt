@@ -3485,3 +3485,46 @@ revalider une fois la donnee V5 effectivement en main.
 Nono a precise que ce chantier fiche de personnage ne demarre qu'une fois le chantier
 donnees V5 termine - pas de melange des deux.
 Fichiers modifies : CONTEXT.md, Log.txt.
+
+13/09/2026 - VERSIONING WFRP4/WFRP5 : LES 21 BOOK*.XML PORTENT DESORMAIS "WFRP4" (CONTEXT.md
+2.70). Premiere etape mecanique du chantier : le champ VERSION des 21 BOOK*.Xml de DATABASE\
+portait jusqu'ici une date d'export (ex. "20250623"), remplacee par "WFRP4" dans chacun -
+une seule ligne modifiee par fichier, diff verifie propre (21 fichiers, 21 insertions, 21
+suppressions, aucun autre retrait).
+Fichiers modifies : les 21 DATABASE\BOOK*.Xml, CONTEXT.md, Log.txt.
+
+13/09/2026 - VERSIONING WFRP4/WFRP5 : RESTRUCTURATION EN SOUS-DOSSIERS WFRP4\/WFRP5\, PAS
+ENCORE COMPILE (CONTEXT.md 2.70). Nono a propose un schema different de la conception
+arretee le 12/09 (DATABASE_WFRP5\ en frere de DATABASE\) : un sous-dossier WFRP4\/WFRP5\
+dans chacun des trois arbres existants, applique au meme schema partout (DATABASE\,
+SAVED_CARACTERS\, PICTURES\).
+- DATABASE\* deplace vers DATABASE\WFRP4\* via git mv (21 livres + PICTURES\{CLASS,SPECIE,
+  SPELL}, historique preserve).
+- SAVED_CARACTERS\* deplace vers SAVED_CARACTERS\WFRP4\* - decouvert en le faisant que ce
+  dossier est entierement gitignore (.gitignore l.25) : git mv y echoue partout ("source
+  directory is empty"/"not under version control"), un mv simple a ete utilise a la place,
+  rien a preserver en historique puisque jamais suivi.
+- PICTURES\ : hypothese de depart "tout par edition" (ARMOR/BACK/NIV/NIV_HELF/PDF/WEAPON
+  deplaces vers PICTURES\WFRP4\* via git mv) corrigee par Nono en plusieurs temps dans la
+  meme session : seuls NIV/NIV_HELF (puces de niveau, qui changent aussi en V5) et PDF
+  (gabarits d'impression, egalement par livre) restent sous PICTURES\WFRP4\ ; ARMOR, WEAPON
+  et BACK reviennent generaux sous PICTURES\ - arbitrage "pour l'instant", a revoir avec la
+  donnee V5 en main.
+- chargeconstantes.pas (~30 constantes : PICTURES/BACK, boutons, PDF, ConstCheminLivre,
+  ConstCheminPersonnage, ConstCheminAttribut/XpAttribut/XpCompetence, les 3 constantes
+  typees ConstCheminImageRace/Metier/Sort) et warhammersource.pas (litteral l.820 du
+  double-clic WinLivre, litteraux l.852-854 qui ecrasent ConstCheminImageRace/Metier/Sort
+  au FormCreate) prefixes en WFRP4\ - valeurs seulement, restent des Const, le passage en
+  Var attend le sélecteur (pas commence). Diff verifie propre sur les deux fichiers.
+- Inclus par coherence textuelle : ConstCheminAttribut/XpAttribut/XpCompetence pointent
+  deja vers des fichiers absents du disque (DATABASE\LANGUAGE\, ATTR_AUGM.TXT,
+  SKILL_AUGM.txt) - probablement morts depuis le resolveur generique §2.50/2.52, non
+  verifie, sans risque puisqu'ils ne trouvaient deja rien.
+- Hors perimetre : DATABASE_EXPORT\ (fonctionnalite jamais branchee) et FONT\/FONT2\ (pas
+  specifique a l'edition).
+Compile et lance par Nono le 13/09/2026 : fonctionne (avant la correction PICTURES
+ci-dessus, a recompiler pour la valider). Prochaine etape : amorcer
+DATABASE\WFRP5\/SAVED_CARACTERS\WFRP5\/PICTURES\WFRP5\{NIV,NIV_HELF,PDF}\ (copie de la V4
+comme point de depart, ou dossiers vides - pas tranche), avant le code du selecteur.
+Fichiers modifies : chargeconstantes.pas, warhammersource.pas, CONTEXT.md, Log.txt (+
+deplacements DATABASE\, SAVED_CARACTERS\, PICTURES\).
