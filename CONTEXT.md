@@ -8167,9 +8167,62 @@ race, un métier, une arme, sur demande explicite de Nono) :
 
 **Point de reprise** : comparaison terminée (onze catégories) et les deux frontières moteur
 tranchées (voir bilan ci-dessus) - plus rien ne bloque le peuplement du catalogue V5 pour de
-vrai sur ces points. Reste seul en suspens : le mécanisme de choix de compétences de départ
-par espèce ("choisis N parmi cette liste"), sans urgence tant qu'on n'attaque pas la création
-de personnage V5.
+vrai sur ces points.
+
+**Choix de compétences de départ par espèce - discussion ouverte, pas conclue (13/09/2026).**
+Nono a identifié que le mécanisme manquant n'est pas le "(Any)" existant (qui remplit UNE
+spécialisation dans UNE compétence), mais un vrai "coche N parmi cette liste de M compétences
+hétérogènes" - proposition initiale de Nono : un arbre/liste avec un compteur "choix restant"
+qui décroît et retire l'élément choisi de la liste au fur et à mesure.
+**Découverte en creusant le code existant, qui change la donne** : ce mécanisme **existe
+déjà côté race en V4**, je m'étais trompé en pensant qu'il fallait tout inventer.
+`chargerace.pas`/`wincreation.pas` (étape 5 de la création, "choix des compétences de race",
+AVANT le métier) : chaque race porte deux compteurs `NbPoint5`/`NbPoint3` (3 et 3 pour les
+races normales, 2 et 2 pour le Skink de Lustria - §2.15) ; `TabRaceCompetence` présente la
+liste candidate de la race avec des cases à cocher sur deux colonnes ("3x 5pts"/"3x 3pts") ;
+tant que le compte de cases cochées ne correspond pas à `NbPoint5`/`NbPoint3`, l'étape ne
+valide pas (`RULES-MESS_013`/`014`) ; une case cochée qui reste un "(Any)" non résolu bloque
+aussi (`RULES-MESS_042`) jusqu'à résolution de la spécialisation via `TWinSpecialisations`.
+Vérifié : la liste des 12 compétences candidates de Humans (Reikland) en V4
+(`SUBCHAPTER_SKILL` de `RULES-RACE_HUM`) est quasi identique à la liste des 12 compétences de
+"Starting Skills" du Human V5 (Animal Care, Charm, Cool, Evaluate, Gossip, Haggle, Language
+(Bretonnian/Wastelander), Leadership, Lore, Melee (Basic), Ranged (Bow)) - **le format
+`SUBCHAPTER_SKILL` actuel EST déjà une liste de candidats "au choix", je l'avais interprété à
+tort comme une liste de dotation fixe lors de la comparaison initiale.** La V5 n'aurait besoin
+que d'un seul palier (`NbPoint5` = 5, pas de `NbPoint3`) au lieu des deux paliers V4 - a priori
+pas de nouveau champ, juste `NbPoint3 = 0` pour les espèces V5.
+**Distinct du métier** : le choix de compétences de métier (étape 6) utilise un mécanisme
+différent, `TabMetierCompetence`, un budget de 40 points à répartir librement sur la liste
+(pas un compte de cases à cocher) - même résolution de spécialisation au double-clic si la
+case reste "(Any)". Pas vérifié si la V5 change quelque chose à ce mécanisme côté métier.
+
+**Point tranché (13/09/2026), confirmé par une deuxième source indépendante.** Nono a
+partagé `LIVRES\WFRP-4e-vs-5e.txt` (comparatif tiers déjà référencé plus haut) pour vérifier
+avant sa propre relecture du livre officiel. La ligne "Species skills drop from six (three
+at +5, three at +3) to five, all at +5" confirme très précisément ce qui précède : **décision
+finale : `NbPoint5 = 5`, `NbPoint3 = 0` pour les espèces V5**, réutilisation telle quelle du
+mécanisme existant (`TabRaceCompetence`/`NbPoint5`/`NbPoint3`), aucun nouveau champ.
+
+**Autres données utiles extraites de ce comparatif pour le futur peuplement du catalogue V5**
+(à noter, sans effet sur le schéma) :
+- **Table Fate/Fortune/Movement des 5 espèces du Rulebook**, prête à l'emploi : Human
+  (Reiklander) 4/3/4, Dwarf 2/2/3, Halfling 2/3/3, High Elf 1/2/5, Wood Elf 1/2/5.
+- **Les attributs primaires ne restent pas tous à `2d10+20` comme l'Humain** : Dwarf
+  Initiative passe à `2d10+10`, Halfling Toughness à `2d10+10`, Halfling Initiative à
+  `2d10+40`. Vérifié seulement sur l'Humain jusqu'ici (§2.70 plus haut) - prendre les vraies
+  valeurs V5 par espèce le moment venu, ne pas recopier les dés V4 par facilité.
+- **Nouvelles qualités d'arme/armure à prévoir dans un futur catalogue de qualités V5** :
+  Parry, Unbreakable, Inflict (Condition), en plus de Unbalanced qui remplace Slow/Tiring
+  (V4). Simple ajout de données, pas de nouveau champ.
+- **Gap réel mineur identifié** : "New Class Trappings give each of the eight Classes a
+  small starting kit on top of career gear" - un trapping de départ par Classe, en plus de
+  celui du métier. Rien ne porte ça dans `DATA_CAREER` aujourd'hui (`Class` n'est qu'un
+  filtre). À traiter si on veut être fidèle, négligeable sinon.
+- **Deltas sorts/miracles déjà recensés**, utile pour peupler `DATA_SPELL` sans tout
+  comparer à la main : 3 Miracles renommés ("Rich Man, Poor Man, Beggar Man, Thief" →
+  "Trickster's Glamour", "Stay Lucky" → "Cheat the Odds", "You Ain't Seen Me, Right?" →
+  "You Saw Nothing"), 17 sorts avec CN modifié (liste nommée dans le comparatif), 11 sorts
+  nouveaux sur 146 au total (135 en V4).
 
 ---
 
