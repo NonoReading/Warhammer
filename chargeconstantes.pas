@@ -429,7 +429,6 @@ Const
       ConstCheminXpCompetence           = '\DATABASE\WFRP4\SKILL_AUGM.txt';
 
       // chemin des textes
-      ConstCheminLivre                  = '\DATABASE\WFRP4\';
       ConstCheminLivreExport            = '\DATABASE_EXPORT\';
       // Libellés/messages d'interface (RULES-LAB_*/RULES-MESS_*) : sortis du RULESBOOK vers un
       // livre a part le 13/09/2026 (demande de Nono, CONTEXT.md §2.70) pour ne pas etre
@@ -445,7 +444,10 @@ Const
       ConstFichierIni                   = '\INI.TXT';
       ConstCheminTravail                = '\TRAVAIL\';
       ConstIniLangue                    = 'LANG=';
-      ConstIniLivre                     = 'BOOK=';
+      // Préfixe seul (pas de '=') depuis le 13/09/2026 : une ligne par édition dans le .INI,
+      // ex. 'BOOKWFRP4=', 'BOOKWFRP5=' (ChargeIni/SauveIni, warhammersource.pas, CONTEXT.md
+      // §2.70).
+      ConstIniLivre                     = 'BOOK';
       ConstIniVersion                   = 'VERSION=';
       // Langue de l'interface (RULES-LAB_*/RULES-MESS_*), décorrélée de ConstIniLangue (qui
       // reste la langue des livres/données) - Nono, 13/09/2026, CONTEXT.md §2.70.
@@ -644,6 +646,14 @@ Var
   SelectWinLivre:      String = '';
   ChoixWinLivre:       String = '';
   ListeLivre:          String = '';
+  // Sélection de livres cochés, une entrée par édition (Name=Version, Value=liste des
+  // codes) - une seule liste partagée entre éditions au catalogue très différent (WFRP4
+  // ~20 livres, WFRP5 1 seul aujourd'hui) faisait qu'un enregistrement fait sur l'une
+  // écrasait la sélection utile à l'autre au redémarrage (Nono, 13/09/2026, CONTEXT.md
+  // §2.70). ListeLivre ci-dessus reste la sélection RÉSOLUE de l'édition active (lue par
+  // PeuplerTabLivre/WinFiltre, inchangés) - synchronisée depuis cette table à chaque
+  // changement de version (ChargeIni/ComboBoxVersionSelect, warhammersource.pas).
+  ListeLivreParVersion: TStringList;
   WinFiltreAppelant:   String = '';
   SelectWinGroupe:     String = '';
   ChoixWinGroupe:      String = '';
@@ -704,10 +714,11 @@ Var
   ValVersion:              String = '';
   ValLangueInterface:      String = ConstAnglais;
 
-  // Chemin des personnages - Var (pas Const) depuis le 13/09/2026 (CONTEXT.md §2.70) : doit
-  // pouvoir changer avec ValVersion (WFRP4/WFRP5) le jour ou le rechargement a chaud est
-  // cable, contrairement a ConstCheminLivre qui reste fige tant que ce chantier n'est pas
-  // fait. Meme valeur par defaut qu'avant, seule la nature de la declaration change ici.
+  // ConstCheminLivre/ConstCheminPersonnage - Var (pas Const) depuis le 13/09/2026
+  // (CONTEXT.md §2.70) : doivent changer ensemble avec ValVersion (WFRP4/WFRP5) le jour ou
+  // le rechargement a chaud est cable. Memes valeurs par defaut qu'avant, seule la nature
+  // de la declaration change ici.
+  ConstCheminLivre:       String = '\DATABASE\WFRP4\';
   ConstCheminPersonnage:  String = '\SAVED_CARACTERS\WFRP4\';
 
   // Deux interrupteurs jamais affectés ailleurs dans le projet : declarés, testés, mais

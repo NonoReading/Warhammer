@@ -1,6 +1,177 @@
 # Warhammer — Contexte projet
 
-**Dernière mise à jour : 13/09/2026 — VERSIONING WFRP4/WFRP5 : `CONSTCHEMINPERSONNAGE`
+**Dernière mise à jour : 13/09/2026 — VERSIONING WFRP4/WFRP5 : LA SÉLECTION DE LIVRES
+COCHÉS DEVIENT PROPRE À CHAQUE ÉDITION DANS LE `.INI`, TESTÉ ET VALIDÉ PAR NONO (§2.70).**
+Nono, après le correctif précédent : « si je sélectionne la V4 et que je ferme, puis je
+reviens, il ne charge pas les autres livres » — puis a confirmé le diagnostic : « ils sont
+dans la table, mais les colonnes de données sont vide » (les livres WFRP4 réapparaissent
+bien comme lignes dans `TabLivre`, mais non cochés, donc non chargés par `ChargerLivre`).
+**Cause de fond, différente des trois bugs précédents** : la sélection de livres cochés
+(`.INI` `BOOK=`, variable globale `ListeLivre`) était une **seule valeur partagée entre
+toutes les éditions**, alors que chaque édition a son propre catalogue (WFRP4 ~20 livres,
+WFRP5 1 seul aujourd'hui, le seed `RULES`). En sauvegardant depuis WFRP5 (où seul `RULES`
+est cochable), le `.INI` s'est retrouvé avec `BOOK={RULES}` - cette valeur, réappliquée en
+rebasculant sur WFRP4, ne cochait que `RULES` parmi tous les livres WFRP4 retrouvés,
+laissant les ~19 autres affichés mais décochés. Nono a confirmé vouloir la solution complète
+(séparation par édition, cohérente avec le reste du chantier) plutôt qu'un raccourci qui
+aurait pu écraser une désélection volontaire au changement de version.
+- **Nouvelle structure `ListeLivreParVersion: TStringList`** (`chargeconstantes.pas`,
+  Name=Version, Value=liste des codes cochés) - créée dans `FormCreate` avant `ChargeIni()`,
+  qui la peuple désormais depuis des lignes `.INI` au format `BOOK<version>=<liste>` (une par
+  édition) au lieu de l'ancienne ligne unique `BOOK=<liste>`. `ConstIniLivre`
+  (`chargeconstantes.pas`) passe de `'BOOK='` à `'BOOK'` (préfixe seul, la version suit avant
+  le `=`).
+- **`ListeLivre` (la variable existante, inchangée de nom) reste la sélection RÉSOLUE de
+  l'édition ACTIVE** - lue telle quelle par `PeuplerTabLivre` et par le filtre livre de
+  `WinFiltre` (`winfiltre.pas`), tous deux inchangés. Elle est synchronisée depuis
+  `ListeLivreParVersion.Values[ValVersion]` à deux endroits : dans `FormCreate` (juste après
+  que `ChargerListeVersions()` a validé `ValVersion`) et dans `ComboBoxVersionSelect` (juste
+  après avoir affecté la nouvelle `ValVersion`, avant `PeuplerTabLivre()`).
+- **`SauveIni`** : met à jour `ListeLivreParVersion.Values[<édition active>]` depuis l'état
+  courant de `TabLivre`, puis réécrit TOUTES les entrées de la table (une ligne `.INI` par
+  édition déjà rencontrée) - sans quoi la ligne de l'édition non active serait perdue à
+  chaque sauvegarde (c'est exactement ce qui s'est produit avec l'ancienne ligne unique).
+- **Transition depuis l'ancien `.INI`** : une éventuelle ancienne ligne `BOOK={...}` (sans
+  suffixe d'édition) ne matche aucune version connue - traitée comme absente, donc "tout
+  sélectionné par défaut" pour chaque édition au premier chargement après ce correctif (perte
+  ponctuelle et sans gravité de l'ancienne sélection globale, remplacée par une sélection
+  propre par édition dès la prochaine sauvegarde).
+- Diff vérifié propre sur les deux fichiers. Compilé (lazbuild, rebuild complet car
+  `chargeconstantes.pas` touché, 0 erreur, mêmes warnings/hints préexistants).
+  **Testé par Nono : "j'ai testé, ça marche".**
+- **Nettoyage repéré en relisant le diff avant commit** : la ligne de transition à nom vide
+  (`BOOK=...`, issue de l'ancien `.INI` sans suffixe d'édition) restait réécrite
+  indéfiniment par `SauveIni` - `warhammersource.pas` filtre désormais les entrées à nom vide
+  avant écriture. Compilé, 0 erreur.
+
+**Chantier "rechargement à chaud" de la version considéré clos pour aujourd'hui** : quatre
+bugs trouvés et corrigés en cascade en testant (`TabLivre` non rescannée, `TabPersonnage`
+non rescannée, version non appliquée au démarrage, sélection de livres partagée entre
+éditions) - tous validés par Nono. Reste hors périmètre, assumé : les chemins d'images
+(races/métiers/sorts, icônes de niveau, PDF) toujours figés sur `WFRP4\` (pas d'assets
+WFRP5 au disque) - chantier séparé le jour où `PICTURES\WFRP5\` existera. Prochaine étape
+naturelle : peupler le catalogue V5 pour de vrai (au-delà du seed race/métier/arme), ou
+reprendre un autre chantier - à voir avec Nono.
+
+---
+
+**13/09/2026 — VERSIONING WFRP4/WFRP5 : LA VERSION PERSISTÉE EN
+`.INI` N'ÉTAIT JAMAIS APPLIQUÉE AU DÉMARRAGE, CORRIGÉ, COMPILÉ, PAS ENCORE RETESTÉ (§2.70).**
+Nono a validé le rescan de `TabPersonnage`, puis fermé/rouvert l'appli en étant sur WFRP5 :
+« il affiche bien V5 dans la combo mais les données chargées sont celle du RULEBOOK V4 et
+les autres livres V4 sont affichés mais non chargé. Et les personnages V4 apparaissent
+aussi ». Cause distincte des deux bugs précédents (`TabLivre`/`TabPersonnage` non
+rescannées) : `ConstCheminLivre`/`ConstCheminPersonnage` ne sont recalculés depuis
+`ValVersion` que dans `ComboBoxVersionSelect` (le handler du changement interactif) -
+jamais au démarrage. `ChargeIni()` lit bien `ValVersion="WFRP5"` depuis le `.INI`, mais tout
+le chargement des livres dans `FormCreate` (import brut, `PeuplerTabLivre`, `ChargerLivre`,
+`ChargerPersonnages`) se faisait avec la valeur par défaut compilée des deux chemins
+(`WFRP4\`) - `ChargerListeVersions()` (qui valide `ValVersion` contre les répertoires
+réellement présents) n'était appelée QU'APRÈS tout ce chargement, trop tard pour influer
+dessus ; elle ne faisait que positionner la combo sur "WFRP5" sans rien recharger.
+- **Correctif** : `ChargerListeVersions()` déplacée tout en haut de `FormCreate` (juste
+  après `ChargeIni()`, avant la création des listes et tout chargement de livre) - elle ne
+  dépend d'aucune liste créée plus loin, elle scanne `DATABASE\` directement via
+  `XmlLivreBalise`, indépendamment de `ConstCheminLivre`. `ConstCheminLivre`/
+  `ConstCheminPersonnage` recalculés depuis `ValVersion` (désormais validée) juste après cet
+  appel, avant que quoi que ce soit d'autre ne lise ces deux chemins.
+  L'ancien appel à `ChargerListeVersions()` (après `PeuplerTabLivre()`) retiré - il ne sert
+  plus qu'une fois, tout en haut.
+- Diff vérifié propre. Compilé (lazbuild, 0 erreur, mêmes hints préexistants).
+  **Pas encore retesté par Nono** - à valider en relançant l'appli étant resté sur WFRP5.
+
+---
+
+**13/09/2026 — VERSIONING WFRP4/WFRP5 : TABPERSONNAGE CORRIGÉ DU
+MÊME BUG QUE TABLIVRE, COMPILÉ, PAS ENCORE RETESTÉ (§2.70).** Nono a validé le rescan de
+`TabLivre` puis relevé « reste le cas des personnages » - même famille de bug : `ChargerPersonnages`
+(`warhammersource.pas`) ne remettait jamais `TabPersonnage.RowCount` à 1 avant de rescanner,
+elle ne fait qu'ajouter/écraser des lignes au fil des appels. `SAVED_CARACTERS\WFRP5\`
+n'existe pas encore au disque (vérifié : seul `SAVED_CARACTERS\WFRP4\` existe) - le scan ne
+trouvait donc rien au changement de version, et les personnages WFRP4 restaient affichés.
+- **Correctif** : `TabPersonnage.RowCount := 1;` ajouté en tête de `ChargerPersonnages`,
+  avant le calcul de `directoryPath`. Une ligne, diff vérifié propre.
+- Compilé (lazbuild, 0 erreur, mêmes hints préexistants). **Pas encore retesté par Nono.**
+
+---
+
+**13/09/2026 — VERSIONING WFRP4/WFRP5 : TABLIVRE SE RESCANNE
+DÉSORMAIS AU CHANGEMENT DE VERSION, COMPILÉ, PAS ENCORE RETESTÉ PAR NONO (§2.70).** Nono a
+testé le rechargement précédent : « ça marche, par contre je vois les autres livres V4 ? »
+- symptôme attendu, déjà signalé avant le test (limite connue de l'étape précédente) : la
+grille `TabLivre` du menu principal n'était pas rescannée au changement de version, donc
+gardait l'affichage (et les cases cochées) de l'édition précédente, même si seules les
+données du livre réellement présent dans la nouvelle édition se rechargeaient. Nono a
+confirmé vouloir corriger tout de suite plutôt que de laisser passer.
+- **Extraction** : le bloc de scan qui peuplait `TabLivre`/`ComboBoxLangue` dans
+  `FormCreate` (mécanique inchangée) devient la nouvelle procédure
+  `TMenu.PeuplerTabLivre()` (`warhammersource.pas`), appelée à la fois par `FormCreate` et
+  par `ComboBoxVersionSelect`. Remise à zéro à l'entrée de la procédure limitée à
+  `TabLivre.RowCount`/`LivresLivres`/`LivresCharges` (propres à l'édition scannée) -
+  `ListeLangue`/`ComboBoxLangue.Items` ne sont volontairement PAS réinitialisés, pour que les
+  langues déjà connues d'une édition précédente restent dans la liste sans être dupliquées.
+- **Ordre important dans `ComboBoxVersionSelect`** : `PeuplerTabLivre()` est appelée AVANT
+  `ChargerLivre(true,'')`, parce que celui-ci relit la sélection depuis
+  `TabLivre.Cells[ColLivreSel,...]` pour savoir quels livres importer - l'appeler avant le
+  rescan aurait recalculé la sélection depuis les lignes encore périmées de l'édition
+  précédente.
+- FormCreate nettoyé en conséquence : les variables locales `I`/`Ordre`/`Nom`/`PLivre`,
+  utilisées uniquement par le bloc extrait, retirées de sa déclaration `Var` (`SearchResult`/
+  `DirectoryPath` restent, encore utilisées par la boucle d'import de livres juste avant).
+- Diff vérifié propre (extraction pure + un appel ajouté aux deux endroits). Compilé
+  (lazbuild, 0 erreur, mêmes hints préexistants, rien de nouveau sur les lignes touchées).
+  **Pas encore retesté par Nono.**
+
+---
+
+**13/09/2026 — VERSIONING WFRP4/WFRP5 : RECHARGEMENT À CHAUD DE LA
+VERSION BRANCHÉ (`COMBOBOXVERSIONSELECT`), COMPILÉ, PAS ENCORE TESTÉ PAR NONO (§2.70).**
+Portée validée avec Nono avant de coder : livres et personnages seulement pour cette étape ;
+les chemins d'images (races/métiers/sorts, icônes de niveau, PDF) restent figés sur
+`WFRP4\` tant que `PICTURES\WFRP5\` n'existe pas au disque - chantier séparé.
+- `ComboBoxVersionSelect` (`warhammersource.pas`) reprend intégralement le mécanisme de
+  `ComboBoxLangueSelect` (§2.8) : bloqué par un message (`RULES-MESS_062`, nouveau) si
+  `WinPersonnage`/`WinCreation` est ouvert ; sinon confirmation (`RULES-MESS_061`, nouveau)
+  puis fermeture/réouverture à l'identique des fenêtres catalogue (Livre/Compétence/Talent/
+  Race/Sort/Arme/Armure/Métier), `ConstCheminLivre`/`ConstCheminPersonnage` recalculés
+  depuis `ValVersion` (`'\DATABASE\'+ValVersion+'\'` / `'\SAVED_CARACTERS\'+ValVersion+'\'`),
+  `ChargerLivre(true,'')` puis `ChargerPersonnages()`, réapplication de
+  `Traduit(ValLangueInterface, ConstInterfaceBook)` (même correctif de couplage que pour la
+  langue, sinon `ChargerLivre` écraserait la langue d'interface), `RafraichirLibellesMenu()`,
+  `SauveIni()`.
+- Deux nouveaux messages `RULES-MESS_061`/`062` ajoutés à `INTERFACE.Xml`/
+  `INTERFACE_FRANCAIS.Xml` (sur le modèle de `RULES-MESS_041`/`055`, propres à la version
+  plutôt qu'à la langue) - diff vérifié propre sur les deux fichiers.
+- **Correctif en marge** : `TabLivreDblClick` (`warhammersource.pas`) construisait le chemin
+  du livre ouvert au double-clic en dur sur `'DATABASE\WFRP4\'` - suit désormais
+  `GetCurrentDir + ConstCheminLivre` comme le reste du fichier.
+- **Limite connue, assumée pour cette étape** : `TabLivre` garde la liste de livres de
+  l'édition précédente (pas rescannée par `ComboBoxVersionSelect`) - seuls les livres dont
+  le fichier XML existe aussi dans la nouvelle édition rechargent réellement des données ;
+  les autres restent cochés à l'écran sans effet. Sans conséquence aujourd'hui : le seed
+  WFRP5 ne porte qu'un seul livre (`RULES`), déjà sélectionné par défaut.
+- Compilé (lazbuild, 0 erreur, aucun warning sur les lignes modifiées). **Pas encore lancé/
+  testé par Nono** - bascule réelle du sélecteur à essayer en pratique.
+
+---
+
+**13/09/2026 — VERSIONING WFRP4/WFRP5 : `CONSTCHEMINLIVRE` PASSÉ DE
+`CONST` À `VAR` LUI AUSSI, COMPILÉ (§2.70).** Suite immédiate du point précédent : même
+traitement que `ConstCheminPersonnage` appliqué à `ConstCheminLivre`
+(`chargeconstantes.pas`) - sorti du bloc `Const`, redéclaré dans le bloc `Var` juste au-
+dessus de `ConstCheminPersonnage`, même valeur par défaut (`\DATABASE\WFRP4\`). Diff
+vérifié propre. Compilé (lazbuild, 0 erreur). **Les deux chemins sont maintenant des `Var`,
+mais rien ne les réassigne encore** : le branchement réel (`ComboBoxVersionSelect`
+recalculant les deux depuis `ValVersion` et rejouant le mécanisme de rechargement du
+changement de langue, §2.8) reste à faire - prochaine étape proposée à Nono, pas encore
+validée. Point d'attention identifié en marge, pas encore corrigé : `TabLivreDblClick`
+(`warhammersource.pas` ~l.1020) construit encore un chemin en dur `'DATABASE\WFRP4\'` au
+lieu de `ConstCheminLivre` - donnerait le mauvais livre au double-clic si on bascule sur
+WFRP5 sans le corriger dans la même passe que le branchement.
+
+---
+
+**13/09/2026 — VERSIONING WFRP4/WFRP5 : `CONSTCHEMINPERSONNAGE`
 PASSÉ DE `CONST` À `VAR`, COMPILÉ, NONO S'ARRÊTE LÀ POUR CE POINT (§2.70).** Correctif du
 point noté plus bas le même jour (voir bloc suivant) : `ConstCheminPersonnage`
 (`chargeconstantes.pas`) est sorti du bloc `Const` et redéclaré dans le bloc `Var`, aux
@@ -8181,10 +8352,48 @@ race, un métier, une arme, sur demande explicite de Nono) :
   point 5 du plan ci-dessus (`ConstCheminPersonnage` doit passer de `Const` à `Var` en même
   temps que `ConstCheminLivre`), jusque-là seulement noté en théorie, jamais vérifié à
   l'usage.
-- **`ConstCheminPersonnage` passé de `Const` à `Var` le 13/09/2026** (`chargeconstantes.pas`,
-  bloc `Var` aux côtés de `ValLangue`/`ValVersion`/`ValLangueInterface`, même valeur par
-  défaut) - compilé, 0 erreur. `ConstCheminLivre`, lui, reste `Const` : le rechargement à
-  chaud des deux ensemble reste à câbler, Nono a arrêté là pour ce point.
+- **`ConstCheminPersonnage` puis `ConstCheminLivre` passés de `Const` à `Var` le
+  13/09/2026** (`chargeconstantes.pas`, bloc `Var` aux côtés de
+  `ValLangue`/`ValVersion`/`ValLangueInterface`, mêmes valeurs par défaut) - compilé, 0
+  erreur, les deux fois.
+- **Rechargement à chaud branché le 13/09/2026, testé et validé par Nono** :
+  `ComboBoxVersionSelect` recalcule les deux `Var` depuis `ValVersion` et rejoue le
+  mécanisme §2.8 (fermeture/réouverture des fenêtres catalogue, `ChargerLivre`/
+  `ChargerPersonnages`, retraduction) - **« ça marche »**. `TabLivreDblClick` corrigé au
+  passage (suit `ConstCheminLivre` au lieu d'un littéral `WFRP4` figé). Portée toujours
+  limitée aux livres et aux personnages (images encore figées sur WFRP4\ - chantier séparé).
+- **Symptôme relevé par Nono après ce test** (« je vois les autres livres V4 ? ») :
+  attendu, déjà noté comme limite connue avant le test - `TabLivre` n'était pas rescannée au
+  changement de version. **Corrigé et validé par Nono le 13/09/2026** : le scan qui
+  peuplait `TabLivre`/`ComboBoxLangue` dans `FormCreate` extrait en
+  `TMenu.PeuplerTabLivre()`, appelée par `FormCreate` ET par `ComboBoxVersionSelect` (avant
+  `ChargerLivre`, qui relit la sélection depuis `TabLivre` pour savoir quoi importer).
+- **Même famille de bug relevée ensuite par Nono côté personnages** (« reste le cas des
+  personnages ») : `ChargerPersonnages` ne remettait jamais `TabPersonnage.RowCount` à 1
+  avant de rescanner - sans effet tant que `ConstCheminPersonnage` ne changeait pas, mais
+  `SAVED_CARACTERS\WFRP5\` n'existe pas encore au disque, donc le scan ne trouvait rien au
+  changement de version et les personnages WFRP4 restaient affichés. **Corrigé le
+  13/09/2026** : `TabPersonnage.RowCount := 1;` ajouté en tête de `ChargerPersonnages`.
+- **Troisième symptôme relevé par Nono, au redémarrage cette fois** (fermé/rouvert en étant
+  sur WFRP5) : la combo affichait bien "WFRP5" mais les données chargées restaient celles de
+  WFRP4 (rulebook, autres livres, personnages). Cause distincte : `ConstCheminLivre`/
+  `ConstCheminPersonnage` n'étaient recalculés depuis `ValVersion` que dans
+  `ComboBoxVersionSelect` (le changement interactif), jamais au démarrage - `FormCreate`
+  chargeait tout avec la valeur par défaut compilée (`WFRP4\`) avant même d'appeler
+  `ChargerListeVersions()`. **Corrigé le 13/09/2026** : `ChargerListeVersions()` déplacée
+  tout en haut de `FormCreate` (juste après `ChargeIni()`), `ConstCheminLivre`/
+  `ConstCheminPersonnage` recalculés depuis la `ValVersion` désormais validée juste après,
+  avant toute création de liste ou chargement de livre.
+- **Quatrième symptôme relevé par Nono, en revenant sur WFRP4** : « il ne charge pas les
+  autres livres » - confirmé « ils sont dans la table, mais les colonnes de données sont
+  vide ». Cause de fond distincte (pas un oubli de rescan cette fois) : la sélection de
+  livres cochés (`.INI` `BOOK=`) était une seule valeur partagée entre éditions, contaminée
+  par la session WFRP5 (où seul `RULES` est cochable). **Corrigé le 13/09/2026** : nouvelle
+  structure `ListeLivreParVersion` (une sélection par édition), `.INI` au format
+  `BOOK<version>=<liste>`. Détail complet plus haut dans cette même section, en tête.
+  Compilé, **testé et validé par Nono**. Chantier "rechargement à chaud" de la version
+  considéré clos pour aujourd'hui (quatre bugs trouvés et corrigés en cascade, tous
+  validés) - reste hors périmètre, assumé : chemins d'images toujours figés sur `WFRP4\`.
 
 **Point de reprise** : comparaison terminée (onze catégories) et les deux frontières moteur
 tranchées (voir bilan ci-dessus) - plus rien ne bloque le peuplement du catalogue V5 pour de
