@@ -3528,3 +3528,36 @@ DATABASE\WFRP5\/SAVED_CARACTERS\WFRP5\/PICTURES\WFRP5\{NIV,NIV_HELF,PDF}\ (copie
 comme point de depart, ou dossiers vides - pas tranche), avant le code du selecteur.
 Fichiers modifies : chargeconstantes.pas, warhammersource.pas, CONTEXT.md, Log.txt (+
 deplacements DATABASE\, SAVED_CARACTERS\, PICTURES\).
+
+13/09/2026 - VERSIONING WFRP4/WFRP5 : SELECTEUR DE VERSION (COMBOBOXVERSION) ECRIT ET
+COMPILE, PAS ENCORE BRANCHE SUR UN RECHARGEMENT (CONTEXT.md 2.70). Demande de Nono : peupler
+un nouveau combo en scannant les sous-repertoires de DATABASE\, en cherchant dans les livres
+la balise <OFFICIAL>"0"</OFFICIAL> (le livre de regles de chaque edition, un seul par
+repertoire) pour en lire la balise <VERSION> ; memoriser le dernier choix dans le .INI comme
+pour la langue ; par defaut sur la premiere ligne si le .INI est muet.
+- Design valide avec Nono avant de toucher au .lfm (regle du projet) : placement en haut a
+  gauche, a l'emplacement de Logo1 (chevauche le logo pour l'instant, Nono refera la
+  presentation lui-meme). Portee explicitement limitee au selecteur (pas de rechargement des
+  livres au changement pour l'instant) - question posee, fermee sans etre tranchee par Nono,
+  retenue par defaut comme la plus petite etape coherente vu qu'il n'y a qu'une version au
+  disque aujourd'hui.
+- ChargerListeVersions (warhammersource.pas, appelee dans FormCreate juste apres le scan des
+  livres) : parcourt les sous-repertoires de DATABASE\ (FindFirst/faDirectory, meme idiome
+  que ChargerPersonnages), scanne les *.xml de chacun jusqu'a trouver OFFICIAL="0" puis lit
+  VERSION et arrete la recherche pour ce repertoire.
+- Nouvelle fonction XmlLivreBalise(CheminFichier, Balise) (xmlexportimport.pas) : lit une
+  balise racine a un chemin complet arbitraire - XmlLivre existante est figee sur
+  ConstCheminLivre, inutilisable pour scanner un repertoire autre que celui deja actif.
+- Nouvelle constante ConstIniVersion = 'VERSION=' (chargeconstantes.pas), meme mecanisme que
+  ConstIniLangue : lue dans ChargeIni (ValVersion), resolue contre les items du combo dans
+  ChargerListeVersions, ecrite dans SauveIni.
+- ComboBoxVersionSelect : si la selection differe de ValVersion, met a jour la variable et
+  reecrit le .INI - ne recharge rien d'autre (pas de fermeture/reouverture de fenetres, pas
+  de rebranchement de ChargerLivre, contrairement a ComboBoxLangueSelect/§2.8).
+  ConstCheminLivre reste une constante figee sur 'DATABASE\WFRP4\'.
+Compile (lazbuild, 0 erreur) - pas encore lance/teste par Nono.
+Prochaine etape : faire tester le selecteur par Nono (un seul item "WFRP4" attendu tant que
+WFRP5\ n'existe pas), puis soit amorcer DATABASE\WFRP5\, soit brancher le rechargement a
+chaud si Nono le veut tout de suite.
+Fichiers modifies : chargeconstantes.pas, warhammersource.pas, warhammersource.lfm,
+xmlexportimport.pas, CONTEXT.md, Log.txt.

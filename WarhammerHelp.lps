@@ -20,9 +20,10 @@
         <HasResources Value="True"/>
         <ResourceBaseClass Value="Form"/>
         <UnitName Value="WarhammerSource"/>
+        <IsVisibleTab Value="True"/>
         <EditorIndex Value="9"/>
-        <TopLine Value="524"/>
-        <CursorPos X="28" Y="536"/>
+        <TopLine Value="556"/>
+        <CursorPos X="66" Y="573"/>
         <UsageCount Value="200"/>
         <Loaded Value="True"/>
         <LoadedDesigner Value="True"/>
@@ -34,7 +35,6 @@
         <HasResources Value="True"/>
         <ResourceBaseClass Value="Form"/>
         <UnitName Value="WinCompetence"/>
-        <IsVisibleTab Value="True"/>
         <EditorIndex Value="7"/>
         <TopLine Value="202"/>
         <CursorPos X="15" Y="213"/>
@@ -511,7 +511,7 @@
         <IsPartOfProject Value="True"/>
         <UnitName Value="XmlExportImport"/>
         <EditorIndex Value="4"/>
-        <TopLine Value="2450"/>
+        <TopLine Value="2453"/>
         <CursorPos X="44" Y="2457"/>
         <UsageCount Value="200"/>
         <Loaded Value="True"/>
@@ -1246,11 +1246,7 @@
         <DefaultSyntaxHighlighter Value="LFM"/>
       </Unit>
     </Units>
-    <JumpHistory HistoryIndex="23">
-      <Position>
-        <Filename Value="winlancede.pas"/>
-        <Caret Line="52" Column="29" TopLine="44"/>
-      </Position>
+    <JumpHistory HistoryIndex="29">
       <Position>
         <Filename Value="chargeconstantes.pas"/>
         <Caret Line="219" Column="35" TopLine="201"/>
@@ -1342,6 +1338,34 @@
       <Position>
         <Filename Value="chargepersonnage.pas"/>
         <Caret Line="1423" Column="64" TopLine="1411"/>
+      </Position>
+      <Position>
+        <Filename Value="warhammersource.pas"/>
+        <Caret Line="536" Column="28" TopLine="524"/>
+      </Position>
+      <Position>
+        <Filename Value="warhammersource.pas"/>
+        <Caret Line="537" Column="28" TopLine="525"/>
+      </Position>
+      <Position>
+        <Filename Value="warhammersource.pas"/>
+        <Caret Line="539" Column="28" TopLine="527"/>
+      </Position>
+      <Position>
+        <Filename Value="warhammersource.pas"/>
+        <Caret Line="538" Column="28" TopLine="526"/>
+      </Position>
+      <Position>
+        <Filename Value="warhammersource.pas"/>
+        <Caret Line="537" Column="28" TopLine="525"/>
+      </Position>
+      <Position>
+        <Filename Value="warhammersource.pas"/>
+        <Caret Line="539" Column="28" TopLine="527"/>
+      </Position>
+      <Position>
+        <Filename Value="warhammersource.pas"/>
+        <Caret Line="538" Column="28" TopLine="526"/>
       </Position>
     </JumpHistory>
     <RunParams>

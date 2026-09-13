@@ -1,7 +1,19 @@
 # Warhammer — Contexte projet
 
-**Dernière mise à jour : 12/09/2026 — VERSIONING WFRP4/WFRP5 : CONCEPTION ARRÊTÉE, RIEN
-CODÉ (§2.70).** La V5 de Warhammer Fantasy Roleplay vient de sortir, très proche de la V4
+**Dernière mise à jour : 13/09/2026 — VERSIONING WFRP4/WFRP5 : SÉLECTEUR DE VERSION
+(COMBOBOXVERSION) ÉCRIT ET COMPILÉ, PAS ENCORE BRANCHÉ SUR UN RECHARGEMENT (§2.70).**
+`ComboBoxVersion` scanne les sous-répertoires de `DATABASE\` (un par édition), lit
+`<OFFICIAL>"0"</OFFICIAL>`/`<VERSION>` du livre de règles de chacun pour peupler la liste, et
+mémorise le dernier choix dans `INI.TXT` (`VERSION=`, même mécanisme que `LANG=`) - par
+défaut sur la première ligne si le `.INI` est muet. Sélectionner une version différente
+écrit le `.INI` mais ne recharge encore rien (`ConstCheminLivre` reste fixé sur `WFRP4\`) :
+portée volontairement limitée au sélecteur, décidée avec Nono avant de coder - le
+rechargement à chaud est un chantier séparé (`A FAIRE.txt`). Compilé (lazbuild, 0 erreur) ;
+pas encore lancé/testé par Nono. Combo posé en haut à gauche, à l'emplacement de `Logo1`
+(chevauche le logo pour l'instant - Nono refera la présentation lui-même). Détails en
+§2.70.
+
+Plus tôt le même jour : la V5 de Warhammer Fantasy Roleplay vient de sortir, très proche de la V4
 mais pas identique (vérifié sur le métier Merchant, puis confirmé et approfondi par un
 comparatif tiers des mécaniques, `LIVRES\WFRP-4e-vs-5e.txt`). Décision : séparation complète
 des données par édition (`DATABASE_WFRP5\`/`SAVED_CARACTERS_WFRP5\`), pas de
@@ -14,8 +26,7 @@ d'avance, Fate/Fortune) plutôt que dans le catalogue (compétences/métiers qua
 d'où la décision, pour le futur chantier fiche de personnage (pas commencé, viendra après
 celui-ci), de garder WinPersonnage unique et d'isoler les quelques fonctions de calcul
 concernées plutôt que de dupliquer la fenêtre. Détails complets et point de reprise en
-§2.70. Rien codé encore - prochaine étape : renseigner `WFRP4` sur les 21 livres de
-`DATABASE\`.
+§2.70.
 
 Plus tôt dans la journée : ancrage des contrôles (WinPersonnage) fermé - symptôme résiduel
 sur `CheckBoxQuickArmor`/boutons équipement investigué (§2.64), conclusion : artefact
@@ -7819,9 +7830,48 @@ frère.** Effectué :
   attendues en retrait).
 **Compilé et lancé par Nono le 13/09/2026 : fonctionne** (avant les derniers ajustements
 PICTURES ci-dessus - à recompiler pour les valider, mais changement de même nature que ce
-qui a déjà tourné). Prochaine étape : amorcer `DATABASE\WFRP5\`/`SAVED_CARACTERS\WFRP5\`/
-`PICTURES\WFRP5\{NIV,NIV_HELF,PDF}\` (copie de la V4 comme point de départ, ou dossiers
-vides ? pas encore tranché), avant de toucher au code du sélecteur.
+qui a déjà tourné).
+
+**Sélecteur de version écrit le 13/09/2026 (avant d'amorcer `WFRP5\`, sur demande de Nono -
+ordre inverse de ce qui était prévu ci-dessus, sans problème vu qu'il n'y a qu'une version
+au disque pour l'instant).** Design validé avec Nono avant de toucher au `.lfm` (§0) :
+placement du combo (haut à gauche, à l'emplacement de `Logo1` - Nono refera la présentation
+lui-même) et portée (sélecteur seul, pas de rechargement à cette étape - question posée
+explicitement, Nono a fermé la question sans trancher entre les deux options proposées puis a
+répondu seulement sur le placement ; la portée "sélecteur seul" a été retenue par défaut
+comme la plus petite étape cohérente, à confirmer si Nono voulait en fait le rechargement
+complet tout de suite).
+- **Peuplement** (`TMenu.ChargerListeVersions`, `warhammersource.pas`, appelée dans
+  `FormCreate` juste après le scan des livres) : parcourt les sous-répertoires de
+  `DATABASE\` (`FindFirst`/`faDirectory`, même idiome que `ChargerPersonnages`), et pour
+  chacun scanne ses `*.xml` jusqu'à trouver un livre dont `<OFFICIAL>` vaut `"0"` (le livre
+  de règles - seul à porter cette valeur, `chargeconstantes.pas` `ConstLivreFanOfficiel`)
+  puis lit son `<VERSION>` et arrête la recherche pour ce répertoire (inutile de lire les
+  autres livres). Nouvelle fonction `XmlLivreBalise(CheminFichier, Balise)`
+  (`xmlexportimport.pas`) : lit une balise racine à un chemin complet arbitraire, contrairement
+  à `XmlLivre` existante qui est figée sur `ConstCheminLivre` (donc inutilisable pour scanner
+  un répertoire autre que celui déjà actif).
+- **Persistance `.INI`** : nouvelle constante `ConstIniVersion = 'VERSION='`
+  (`chargeconstantes.pas`), même mécanisme que `ConstIniLangue`/`LANG=` - lue dans
+  `ChargeIni` (valeur brute dans `ValVersion`), résolue contre les items du combo dans
+  `ChargerListeVersions` (comme `LivreLangue = ValLangue` pour la langue), écrite dans
+  `SauveIni`. Si le `.INI` est muet ou porte une version disparue : positionnement sur la
+  première ligne de la liste (règle explicite de Nono).
+- **`ComboBoxVersionSelect`** : si la sélection diffère de `ValVersion`, met à jour la
+  variable et réécrit le `.INI` - **ne recharge rien d'autre** (pas de fermeture/réouverture
+  de fenêtres, pas de rebranchement de `ChargerLivre`, contrairement à
+  `ComboBoxLangueSelect`/§2.8). `ConstCheminLivre` reste une constante figée sur
+  `'DATABASE\WFRP4\'`.
+- **`.lfm`** : `ComboBoxVersion` posé en `Left=24, Top=16` (mêmes coordonnées que `Logo1`,
+  donc superposé dessus pour l'instant), même style que `ComboBoxLangue`.
+- **Compilé (lazbuild, 0 erreur)** - pas encore lancé/testé par Nono.
+
+**Prochaine étape** : faire tester le sélecteur par Nono (un seul item "WFRP4" attendu dans
+la liste tant que `WFRP5\` n'existe pas), puis soit amorcer
+`DATABASE\WFRP5\`/`SAVED_CARACTERS\WFRP5\`/`PICTURES\WFRP5\{NIV,NIV_HELF,PDF}\` (copie de la
+V4 comme point de départ, ou dossiers vides ? pas encore tranché), soit brancher le
+rechargement à chaud (`ConstCheminLivre` en variable + réutilisation du mécanisme §2.8) si
+Nono veut finalement l'avoir tout de suite.
 
 **Sources de travail pour la V5** : `LIVRES\WFRP5_Core_Rulebook_01_09_26.txt` (export texte
 fourni par Nono, ~22 000 lignes, ~2,2 Mo) et `LIVRES\WFRP-4e-vs-5e.txt` (comparatif tiers des

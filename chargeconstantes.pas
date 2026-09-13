@@ -435,6 +435,7 @@ Const
       ConstCheminTravail                = '\TRAVAIL\';
       ConstIniLangue                    = 'LANG=';
       ConstIniLivre                     = 'BOOK=';
+      ConstIniVersion                   = 'VERSION=';
       ConstAnglais                      = 'ENGLISH';
 
       // Chemin des personnages
@@ -689,6 +690,7 @@ Var
   NbLivreMetier:           Integer;
 
   ValLangue:               String = ConstAnglais;
+  ValVersion:              String = '';
 
   // Deux interrupteurs jamais affectés ailleurs dans le projet : declarés, testés, mais
   // laissés à false, ce qui désactivait silencieusement les mécanismes correspondants.

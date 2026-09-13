@@ -39,6 +39,7 @@ Function XmlFinCode(TypeDonnee: String): String;
 Function XmlReplace(Source: String): String;
 Function XmlDebutLangue(TypeDonnee: String; Name: String): String;
 Function XmlLivre(FileName: String): string;
+Function XmlLivreBalise(CheminFichier: String; Balise: String): String;
 Function XmlCodeLivre(Livre: String): String;
 Function XmlCreeCodeLivre(Livre: String; Code: String): String;
 
@@ -3483,6 +3484,33 @@ Function XmlLivre(FileName: String): string;
       XMLDoc.Free;
     end;
     Result := Livre;
+  end;
+
+Function XmlLivreBalise(CheminFichier: String; Balise: String): String;
+  // Lit une balise a la racine d'un fichier livre XML, sans dependre de ConstCheminLivre
+  // (contrairement a XmlLivre, toujours lu dans le repertoire du livre actif) - utilisee
+  // pour scanner les sous-repertoires DATABASE\<version>\ a la recherche de <OFFICIAL>/
+  // <VERSION> (selecteur de version, TMenu.ChargerListeVersions, warhammersource.pas,
+  // demande de Nono le 13/09/2026).
+  var
+    XMLDoc: TXMLDocument;
+    Racine: TDOMNode;
+    Node:   TDOMNode;
+  begin
+    Result := '';
+    XMLDoc := TXMLDocument.Create;
+    try
+      ReadXMLFile(XMLDoc, CheminFichier);
+      Racine := XMLDoc.DocumentElement;
+      if Assigned(Racine) then
+        begin
+          Node := Racine.FindNode(Balise);
+          if Assigned(Node) then
+            Result := RemoveQuotes(UTF8Encode(Node.TextContent));
+        end;
+    finally
+      XMLDoc.Free;
+    end;
   end;
 
 end.

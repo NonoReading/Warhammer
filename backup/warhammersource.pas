@@ -59,10 +59,13 @@ type
     ButtonSort: TBCButton;
     ButtonTalent: TBCButton;
     ComboBoxLangue: TComboBox;
+    ComboBoxVersion: TComboBox;
     ImageFond: TImage;
     Label1: TBCLabel;
     Label2: TBCLabel;
     Label3: TBCLabel;
+    Label4: TBCLabel;
+    Panel2: TPanel;
     TabLivre: TStringGrid;
     TotLivreArmure: TEdit;
     TotLivreSort: TEdit;
@@ -98,6 +101,7 @@ type
     procedure ButtonXmlClick({%H-}Sender: TObject);
     procedure ChargerImage();
     procedure ComboBoxLangueSelect({%H-}Sender: TObject);
+    procedure ComboBoxVersionSelect({%H-}Sender: TObject);
     procedure FormActivate({%H-}Sender: TObject);
     procedure FormCreate({%H-}Sender: TObject);
     procedure ChargerPersonnages();
@@ -110,6 +114,7 @@ type
     procedure TabPersonnageSelection({%H-}Sender: TObject; {%H-}aCol, {%H-}aRow: Integer);
     function XmlPersonnageFichierActuel(const Directory: string): string;
     procedure RafraichirLibellesMenu();
+    procedure ChargerListeVersions();
   private
   public
   end;
@@ -203,6 +208,8 @@ begin
 
   // Écriture dans le fichier
   Writeln(MyFile, ConstIniLangue + comboboxlangue.items[ComboBoxLangue.Itemindex]);
+  if ComboBoxVersion.Itemindex <> -1 then
+    Writeln(MyFile, ConstIniVersion + ComboBoxVersion.items[ComboBoxVersion.Itemindex]);
   for Ind := 1 to TabLivre.RowCount -1 do
       if TabLivre.Cells[ColLivreSel, Ind] = ConstSelectionne then
         Liste := Liste + AjouteAccolade(TabLivre.Cells[ColLivreCod, Ind]);
@@ -391,6 +398,91 @@ procedure TMenu.ComboBoxLangueSelect(Sender: TObject);
       end;
   end;
 
+procedure TMenu.ComboBoxVersionSelect(Sender: TObject);
+  // Sélecteur de version WFRP4/WFRP5 (Nono, 13/09/2026, CONTEXT.md §2.70) : pour
+  // l'instant, seule la persistance .INI est branchée, sur le même mécanisme que
+  // ConstIniLangue. Le rechargement des livres depuis DATABASE\<version>\ au changement
+  // (ConstCheminLivre est encore une constante figée sur 'DATABASE\WFRP4\',
+  // chargeconstantes.pas) est un chantier séparé, volontairement laissé de côté à cette
+  // étape - voir A FAIRE.txt.
+  var
+    Version: String;
+  begin
+    if ComboBoxVersion.ItemIndex <> -1 then
+      begin
+        Version := ComboBoxVersion.Items[ComboBoxVersion.ItemIndex];
+        if Version <> ValVersion then
+          begin
+            ValVersion := Version;
+            SauveIni();
+          end;
+      end;
+  end;
+
+procedure TMenu.ChargerListeVersions();
+  // Peuple ComboBoxVersion (Nono, 13/09/2026, CONTEXT.md §2.70) : scanne chaque
+  // sous-répertoire de DATABASE\ (une version par répertoire, ex. WFRP4, futur WFRP5) et,
+  // dès qu'un livre de ce répertoire porte <OFFICIAL>"0"</OFFICIAL> (le livre de règles
+  // de cette version, seul à porter cette valeur - chargeconstantes.pas), lit sa balise
+  // <VERSION> et arrête la recherche pour ce répertoire : inutile de lire les autres
+  // livres, un seul par répertoire suffit à nommer la version.
+  // Sélection : reprend la valeur du .INI (lue plus tôt dans ChargeIni, dans ValVersion)
+  // si elle correspond à une version trouvée ; sinon (première ligne du .INI absente,
+  // ou version disparue) se positionne sur la première ligne de la liste.
+  var
+    DirectoryPath: String;
+    SearchDir:     TSearchRec;
+    SearchFile:    TSearchRec;
+    CheminFichier: String;
+    Version:       String;
+    ValIni:        String;
+  begin
+    ComboBoxVersion.Style := csDropDownList;
+    ValIni     := ValVersion;
+    ValVersion := '';
+
+    DirectoryPath := GetCurrentDir + '\DATABASE\';
+    if FindFirst(DirectoryPath + DirectorySeparator + '*', faDirectory, SearchDir) = 0 then
+      begin
+        repeat
+          if ((SearchDir.Attr and faDirectory) = faDirectory) and (SearchDir.Name <> '.') and (SearchDir.Name <> '..') then
+            begin
+              Version := '';
+              if FindFirst(DirectoryPath + SearchDir.Name + DirectorySeparator + '*.xml', faAnyFile, SearchFile) = 0 then
+                begin
+                  repeat
+                    CheminFichier := DirectoryPath + SearchDir.Name + DirectorySeparator + SearchFile.Name;
+                    if XmlLivreBalise(CheminFichier, ConstXmlOfficielLivre) = '0' then
+                      begin
+                        Version := XmlLivreBalise(CheminFichier, ConstXmlVersionLivre);
+                        break;
+                      end;
+                  until FindNext(SearchFile) <> 0;
+                  FindClose(SearchFile);
+                end;
+
+              if (Version <> '') and (ComboBoxVersion.Items.IndexOf(Version) = -1) then
+                begin
+                  ComboBoxVersion.Items.Add(Version);
+                  if Version = ValIni then
+                    begin
+                      ComboBoxVersion.ItemIndex := ComboBoxVersion.Items.Count - 1;
+                      ValVersion                := Version;
+                    end;
+                end;
+            end;
+        until FindNext(SearchDir) <> 0;
+        FindClose(SearchDir);
+      end;
+
+    // Rien dans le .INI, ou valeur disparue : première ligne de la liste (Nono, 13/09/2026).
+    if (ValVersion = '') and (ComboBoxVersion.Items.Count > 0) then
+      begin
+        ComboBoxVersion.ItemIndex := 0;
+        ValVersion                := ComboBoxVersion.Items[0];
+      end;
+  end;
+
 Procedure TMenu.RafraichirLibellesMenu();
   // Rafraîchit les libellés déjà posés sur le menu principal après un changement de
   // langue en direct (CONTEXT.md §2.8). Duplique DÉLIBÉRÉMENT un sous-ensemble de
@@ -478,6 +570,8 @@ Procedure TMenu.RafraichirLibellesMenu();
     ButtonCreationLivre.Caption := GetTexteLibelle('RULES-LAB_154');
     ButtonOuvrirLivre.Caption   := GetTexteLibelle('RULES-LAB_155');
 
+    Label4.Caption              := GetTexteLibelle('RULES-LAB_183');
+
     // Remettre les colonnes auto-dimensionnées à leur largeur de départ (celle donnée à
     // GridAjouteColonne dans FormCreate) avant de rappeler AdjustGridColumnsWidth : sa
     // Grid.AutoSizeColumn ne fait qu'agrandir une colonne, jamais la rétrécir - sans ce
@@ -536,9 +630,11 @@ Procedure TMenu.ChargeIni();
     fichier:       TextFile;
     ligne:         string;
     LocLangue:     String;
+    LocVersion:    String;
   begin
     // récupérer la langue dans la fichier ini s'il existe
     LocLangue     := ValLangue;
+    LocVersion    := '';
     DirectoryPath := GetCurrentDir+ConstFichierIni;
     if FileExists(DirectoryPath) then
       begin
@@ -553,10 +649,16 @@ Procedure TMenu.ChargeIni();
               LocLangue := ExtractStringAfter(Ligne,ConstIniLangue);
             if pos(ConstIniLivre, Ligne) > 0 then
               ListeLivre := ExtractStringAfter(Ligne,ConstIniLivre);
+            if pos(ConstIniVersion, Ligne) > 0 then
+              LocVersion := ExtractStringAfter(Ligne,ConstIniVersion);
           end;
         CloseFile(fichier);
       end;
-    ValLangue := LocLangue;
+    ValLangue  := LocLangue;
+    // ValVersion n'est affectée définitivement que dans ChargerListeVersions (appelée
+    // plus tard dans FormCreate, une fois ComboBoxVersion peuplé) - même ordre que la
+    // langue : lecture brute du .INI ici, résolution contre la liste déroulante ensuite.
+    ValVersion := LocVersion;
 
     // retrouver la langue dans la liste déroulante
     for ind := 0 to ComboBoxLangue.items.count -1 do
@@ -817,7 +919,7 @@ begin
     else
     begin
       // Construire le chemin : DATABASE\BOOK RULESBOOK.Xml
-      BookPath := 'DATABASE\' + TabLivre.Cells[ColLivreChe, TabLivre.Row];;
+      BookPath := 'DATABASE\WFRP4\' + TabLivre.Cells[ColLivreChe, TabLivre.Row];;
 
       // Créer/Ouvrir WinLivre et charger le livre
       if not Assigned(FenLivre) then
@@ -849,9 +951,9 @@ procedure TMenu.FormCreate(Sender: TObject);
 
        // Charger Les données
        ChargeIni();
-       ConstCheminImageRace    := '\DATABASE\PICTURES\SPECIE\';
-       ConstCheminImageMetier  := '\DATABASE\PICTURES\CLASS\';
-       ConstCheminImageSort    := '\DATABASE\PICTURES\SPELL\';
+       ConstCheminImageRace    := '\DATABASE\WFRP4\PICTURES\SPECIE\';
+       ConstCheminImageMetier  := '\DATABASE\WFRP4\PICTURES\CLASS\';
+       ConstCheminImageSort    := '\DATABASE\WFRP4\PICTURES\SPELL\';
 
        // création de la base de donnée
        ListRace                     := TListRace.Create;
@@ -1029,6 +1131,9 @@ procedure TMenu.FormCreate(Sender: TObject);
          FindClose(searchResult);
        end;
        TabLivre.SortColRow(true,ColLivreOrd);
+
+       // sélecteur de version WFRP4/WFRP5 (CONTEXT.md §2.70)
+       ChargerListeVersions();
 
        // charger les livres
        ChargerLivre(false, '');
