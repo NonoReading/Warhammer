@@ -3677,3 +3677,20 @@ rentreraient dans la base actuelle.
   gap mineur sur les trappings de Classe, deltas sorts/miracles deja recenses.
 Fichiers modifies : CONTEXT.md, DATABASE\WFRP5\BOOK_RULESBOOK.Xml (nouveau),
 DATABASE\WFRP5\BOOK_RULESBOOK_FRANCAIS.Xml (nouveau).
+
+13/09/2026 - VERSIONING WFRP4/WFRP5 : CONSTCHEMINPERSONNAGE PASSE DE CONST A VAR, COMPILE
+(CONTEXT.md 2.70). Correctif du point souleve en testant le seed WFRP5 (entree precedente) :
+Nono a demande de faire cette correction precise.
+- ConstCheminPersonnage (chargeconstantes.pas) sort du bloc Const et est redeclare dans le
+  bloc Var, aux cotes de ValLangue/ValVersion/ValLangueInterface, meme valeur par defaut
+  (\SAVED_CARACTERS\WFRP4\).
+- Diff verifie propre : 3 lignes retirees du bloc Const, 6 lignes ajoutees au bloc Var, rien
+  d'autre touche.
+- Compile (lazbuild, 0 erreur, aucun warning sur chargeconstantes.pas). Aucun appel a
+  corriger : tous les usages (pdfmetier.pas, pdfpersonnage.pas, pdfrace.pas,
+  warhammersource.pas, wincreation.pas, winpersonnage.pas) referencent l'identifiant par son
+  nom, inchange.
+- Preparation seule, pas encore testee par Nono en pratique : rien n'assigne encore
+  ConstCheminPersonnage a l'execution (comme ConstCheminLivre, toujours fige sur WFRP4\) - le
+  rechargement a chaud lui-meme reste a cabler. Nono : "on s'arrete la pour ce point".
+Fichiers modifies : chargeconstantes.pas, CONTEXT.md, Log.txt.

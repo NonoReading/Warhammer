@@ -1,6 +1,23 @@
 # Warhammer — Contexte projet
 
-**Dernière mise à jour : 13/09/2026 — VERSIONING WFRP4/WFRP5 : LES DONNÉES PURES DU
+**Dernière mise à jour : 13/09/2026 — VERSIONING WFRP4/WFRP5 : `CONSTCHEMINPERSONNAGE`
+PASSÉ DE `CONST` À `VAR`, COMPILÉ, NONO S'ARRÊTE LÀ POUR CE POINT (§2.70).** Correctif du
+point noté plus bas le même jour (voir bloc suivant) : `ConstCheminPersonnage`
+(`chargeconstantes.pas`) est sorti du bloc `Const` et redéclaré dans le bloc `Var`, aux
+côtés de `ValLangue`/`ValVersion`/`ValLangueInterface`, avec la même valeur par défaut
+(`\SAVED_CARACTERS\WFRP4\`). Diff vérifié propre (3 lignes retirées du bloc `Const`, 6
+lignes ajoutées au bloc `Var`, rien d'autre). Compilé (lazbuild, 0 erreur, aucun warning
+sur `chargeconstantes.pas`). Aucun appel à corriger : tous les usages
+(`pdfmetier.pas`, `pdfpersonnage.pas`, `pdfrace.pas`, `warhammersource.pas`,
+`wincreation.pas`, `winpersonnage.pas`) référencent l'identifiant par son nom, inchangé.
+**Préparation seule, pas encore testée par Nono en pratique** : rien n'assigne encore
+`ConstCheminPersonnage` à l'exécution (comme `ConstCheminLivre`, toujours figé sur
+`WFRP4\`) - le rechargement à chaud lui-même reste à câbler, chantier séparé. Nono : « on
+s'arrête là pour ce point ».
+
+---
+
+**13/09/2026 — VERSIONING WFRP4/WFRP5 : LES DONNÉES PURES DU
 RULEBOOK V5 (ONZE CATÉGORIES PASSÉES EN REVUE) RENTRENT DANS LE SCHÉMA ACTUEL SANS NOUVEAU
 CHAMP, VÉRIFIÉ PAR UN SEED MINIMAL COMPILÉ ET TESTÉ PAR NONO (§2.70).** Comparaison menée
 entre le schéma `DATA_*` de `BOOK_RULESBOOK.Xml` (WFRP4) et le texte du nouveau Rulebook
@@ -8163,7 +8180,11 @@ race, un métier, une arme, sur demande explicite de Nono) :
   ceux de la V4 alors que `ConstCheminLivre` pointait sur WFRP5 - confirme concrètement le
   point 5 du plan ci-dessus (`ConstCheminPersonnage` doit passer de `Const` à `Var` en même
   temps que `ConstCheminLivre`), jusque-là seulement noté en théorie, jamais vérifié à
-  l'usage. Pas corrigé, juste confirmé.
+  l'usage.
+- **`ConstCheminPersonnage` passé de `Const` à `Var` le 13/09/2026** (`chargeconstantes.pas`,
+  bloc `Var` aux côtés de `ValLangue`/`ValVersion`/`ValLangueInterface`, même valeur par
+  défaut) - compilé, 0 erreur. `ConstCheminLivre`, lui, reste `Const` : le rechargement à
+  chaud des deux ensemble reste à câbler, Nono a arrêté là pour ce point.
 
 **Point de reprise** : comparaison terminée (onze catégories) et les deux frontières moteur
 tranchées (voir bilan ci-dessus) - plus rien ne bloque le peuplement du catalogue V5 pour de

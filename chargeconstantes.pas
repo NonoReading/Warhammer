@@ -452,9 +452,6 @@ Const
       ConstIniLangueInterface           = 'LANGINTERFACE=';
       ConstAnglais                      = 'ENGLISH';
 
-      // Chemin des personnages
-      ConstCheminPersonnage             = '\SAVED_CARACTERS\WFRP4\';
-
       // Police
       ConstPoliceTaille                 = 10;
       ConstPoliceBtTaille               = 20;
@@ -706,6 +703,12 @@ Var
   ValLangue:               String = ConstAnglais;
   ValVersion:              String = '';
   ValLangueInterface:      String = ConstAnglais;
+
+  // Chemin des personnages - Var (pas Const) depuis le 13/09/2026 (CONTEXT.md §2.70) : doit
+  // pouvoir changer avec ValVersion (WFRP4/WFRP5) le jour ou le rechargement a chaud est
+  // cable, contrairement a ConstCheminLivre qui reste fige tant que ce chantier n'est pas
+  // fait. Meme valeur par defaut qu'avant, seule la nature de la declaration change ici.
+  ConstCheminPersonnage:  String = '\SAVED_CARACTERS\WFRP4\';
 
   // Deux interrupteurs jamais affectés ailleurs dans le projet : declarés, testés, mais
   // laissés à false, ce qui désactivait silencieusement les mécanismes correspondants.
