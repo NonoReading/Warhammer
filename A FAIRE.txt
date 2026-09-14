@@ -219,20 +219,12 @@ langue des LIVRES (ComboBoxLangueSelect), il ne ferme/rouvre pas WinLivre/WinCom
 WinTalent/etc. : leurs libelles RULES-LAB_*/RULES-MESS_* restent dans l'ancienne langue
 d'interface jusqu'a reouverture. A reprendre si Nono le juge genant en usage reel.
 
-NE PAS CORRIGER LES CHEMINS D'IMAGES A LA MAIN EN CHANGEANT LE "WFRP4" EN DUR DANS LA
-CONSTANTE (remarque de Nono, 14/09/2026). Plusieurs chemins (ConstCheminImageNiveau,
-ConstCheminImageNiveauRacine, les 10 ConstCheminPdf*, ConstCheminAttribut/XpAttribut/
-XpCompetence dans chargeconstantes.pas) portent encore "WFRP4" en dur dans le litteral au
-lieu de suivre ValVersion - contrairement a ConstCheminLivre/ConstCheminPersonnage, deja
-passees de Const a Var et recalculees depuis ValVersion (CONTEXT.md 2.70). Meme piege sur
-ConstCheminImageRace/Metier/Sort : deja declarees Var mais toujours assignees a un
-litteral "WFRP4" en dur dans TMenu.FormCreate (warhammersource.pas) plutot que derivees de
-ValVersion - c'est ce qui a ete modifie a la main (WFRP4 -> WFRP5) en session le
-14/09/2026 pour tester les nouvelles icones de niveau/classe WFRP5, changement local non
-pense comme un correctif definitif. Le vrai correctif : etendre le meme mecanisme
-Const->Var + recalcul depuis ValVersion (deja fait pour ConstCheminLivre/
-ConstCheminPersonnage) a toutes ces constantes d'images/PDF, plutot que de rebasculer le
-litteral a la main chaque fois qu'on change de version pour tester.
+LES 10 CONSTCHEMINPDF* ET CONSTCHEMINATTRIBUT/XPATTRIBUT/XPCOMPETENCE RESTENT FIGES SUR
+"WFRP4" EN DUR DANS CHARGECONSTANTES.PAS. Les chemins d'images races/metiers/sorts/niveaux
+(ConstCheminImageRace/Metier/Sort/Niveau/NiveauRacine) suivent desormais ValVersion (Var +
+recalcul depuis warhammersource.pas, corrige le 14/09/2026, CONTEXT.md 2.70) - reste ce
+sous-ensemble PDF/attributs, non demande pour l'instant. Meme correctif a appliquer
+(Const -> Var + recalcul depuis ValVersion) le jour ou Nono le demande.
 
 CHERCHETALENT TESTE PTALENT.RESUME AU LIEU DE RESULT.RESUME APRES LA BOUCLE. Vu le
 14/09/2026 en auditant les Cherche* (CONTEXT.md 2.77bis). chargetalent.pas l.85 :

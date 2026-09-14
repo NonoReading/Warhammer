@@ -4507,3 +4507,19 @@ verifie cote PdfPersonnageMutationAsterisques (note ajoutee a A FAIRE.txt).
 Compile (lazbuild, 0 erreur) apres chaque correction, testes et valides par Nono.
 Fichiers modifies : chargearme.pas, chargearmure.pas, chargemetier.pas, chargepersonnage.pas,
 winpersonnage.pas, pdfpersonnage.pas, A FAIRE.txt, Log.txt.
+
+14/09/2026 - CHEMINS D'IMAGES RACES/METIERS/SORTS/NIVEAUX ALIGNES SUR LA VERSION (SUITE DU
+CHANTIER VERSIONNING WFRP4/WFRP5, CONTEXT.md 2.70). Nono a ajoute les images WFRP5 des
+metiers et des icones de niveau, puis demande de lever la limite posee le 13/09/2026
+("chemins d'images figes sur WFRP4 - chantier separe"). ConstCheminImageRace/Metier/Sort et
+ConstCheminImageNiveau/ConstCheminImageNiveauRacine (ces deux dernieres passees de Const a
+Var a cette occasion, chargeconstantes.pas) recalcules depuis ValVersion - meme mecanisme
+que ConstCheminLivre/ConstCheminPersonnage - dans TMenu.FormCreate et
+ComboBoxVersionSelect (warhammersource.pas). Incoherence trouvee et corrigee au passage :
+ConstCheminImageMetier etait deja fige en dur sur WFRP5 (a tort, independamment de
+ValVersion) alors que Race et Sort restaient sur WFRP4 - les trois suivent desormais la
+meme regle. Portee volontairement limitee a races/metiers/sorts/niveaux (demande explicite
+de Nono) : les images du PDF de personnage (ConstCheminPdf*) restent figees sur WFRP4, non
+demandees. Compile (lazbuild, 0 erreur) apres chaque lot ; Nono va tester en jeu (images
+WFRP5 metiers/niveaux tout juste ajoutees).
+Fichiers modifies : chargeconstantes.pas, warhammersource.pas, CONTEXT.md, Log.txt.

@@ -9821,6 +9821,25 @@ existe bel et bien et suit exactement le même moule que `DATA_SKILL_SPECIALIZAT
   et des espèces réécrites. Détail complet et résultat du test visuel tout en tête de ce
   fichier.
 
+**Chemins d'images (races/métiers/sorts/niveaux) alignés sur la version, codé et compilé le
+14/09/2026 - test en jeu par Nono en cours.** Nono a ajouté les images WFRP5 des métiers et
+des icônes de niveau, puis demandé de lever la limite posée le 13/09/2026 ("chemins d'images
+figés sur WFRP4\ - chantier séparé", cf. plus haut).
+- `ConstCheminImageRace`/`ConstCheminImageMetier`/`ConstCheminImageSort` et
+  `ConstCheminImageNiveau`/`ConstCheminImageNiveauRacine` (ces deux dernières passées de
+  `Const` à `Var` à cette occasion, `chargeconstantes.pas`) recalculés depuis `ValVersion` -
+  même mécanisme que `ConstCheminLivre`/`ConstCheminPersonnage` - dans `TMenu.FormCreate`
+  (après `ChargerListeVersions()`, pour lire une `ValVersion` déjà validée) et dans
+  `ComboBoxVersionSelect` (rechargement à chaud, `warhammersource.pas`).
+- **Incohérence trouvée et corrigée au passage** : `ConstCheminImageMetier` était déjà figé
+  en dur sur `WFRP5\` (à tort, indépendamment de `ValVersion`) alors que Race et Sort
+  restaient sur `WFRP4\` - les trois suivent désormais la même règle.
+- Portée volontairement limitée à races/métiers/sorts/niveaux (demande explicite de Nono) :
+  les images du PDF de personnage (`ConstCheminPdf*`) restent figées sur `WFRP4\`, non
+  demandées.
+- Compilé (`lazbuild`, 0 erreur) après chaque lot. Nono va tester en jeu (métiers/niveaux
+  WFRP5 tout juste ajoutés) - résultat à consigner ici à la prochaine session.
+
 ---
 
 ## 3. TODO / Backlog

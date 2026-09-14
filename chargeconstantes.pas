@@ -408,12 +408,9 @@ Const
       ConstCheminBoutonSort             = '\PICTURES\BACK\BUTTON_SPELL.png';
       ConstCheminImageArme              = '\PICTURES\WEAPON\';
       ConstCheminImageArmure            = '\PICTURES\ARMOR\';
-      ConstCheminImageNiveau            = '\PICTURES\WFRP4\NIV\';
-      // Racine des dossiers d'icones de niveau. ConstCheminImageNiveau juste au-dessus
-      // reste le dossier PAR DEFAUT ; une ethnie peut en designer un autre sous cette
-      // racine via la balise <PictureLevel> (ex : NIV_HELF pour les Hauts Elfes, dont le
-      // livre utilise des glyphes et des couleurs qui lui sont propres).
-      ConstCheminImageNiveauRacine      = '\PICTURES\WFRP4\';
+      // ConstCheminImageNiveau/ConstCheminImageNiveauRacine sont passées en Var (section
+      // plus bas) le 14/09/2026 (CONTEXT.md §2.70) pour suivre ValVersion, comme
+      // ConstCheminImageRace/Metier/Sort - déclaration déplacée, pas supprimée.
       ConstCheminImagePolice            = '\FONT\';
 
       // pdf du personnage - par edition
@@ -777,6 +774,15 @@ Var
   ConstCheminImageRace:    String    = '\DATABASE\WFRP4\BOOKS\%BOOK%\PICTURE\SPECIE\';
   ConstCheminImageMetier:  String    = '\DATABASE\WFRP4\BOOKS\%BOOK%\PICTURE\CLASS\';
   ConstCheminImageSort:    String    = '\DATABASE\WFRP4\BOOKS\%BOOK%\PICTURE\SPELL\';
+
+  // Icones de niveau - Var (pas Const) depuis le 14/09/2026 (CONTEXT.md §2.70), même
+  // raison que ConstCheminLivre plus haut : doivent changer avec ValVersion. Racine des
+  // dossiers d'icones de niveau : ConstCheminImageNiveau reste le dossier PAR DEFAUT ; une
+  // ethnie peut en designer un autre sous cette racine via la balise <PictureLevel> (ex :
+  // NIV_HELF pour les Hauts Elfes, dont le livre utilise des glyphes et des couleurs qui
+  // lui sont propres).
+  ConstCheminImageNiveau:       String = '\PICTURES\WFRP4\NIV\';
+  ConstCheminImageNiveauRacine: String = '\PICTURES\WFRP4\';
 
   AttributNiveau:          String;
 

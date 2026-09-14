@@ -430,9 +430,10 @@ procedure TMenu.ComboBoxVersionSelect(Sender: TObject);
   // ouvert, fenêtres catalogue fermées puis rouvertes, ConstCheminLivre/ConstCheminPersonnage
   // (Var depuis le 13/09/2026) recalculés depuis la version choisie, TabLivre rescannée
   // (PeuplerTabLivre) puis ChargerLivre/ChargerPersonnages rejoués.
-  // Portée volontairement limitée aux livres et aux personnages (validé avec Nono le
-  // 13/09/2026) : les chemins d'images (races/métiers/sorts, icônes de niveau, PDF) restent
-  // figés sur WFRP4\ tant que PICTURES\WFRP5\ n'existe pas au disque - chantier séparé.
+  // Chemins d'images races/métiers/sorts/niveaux recalculés depuis la version ici aussi
+  // (Nono, 14/09/2026, CONTEXT.md §2.70) - même correctif qu'au démarrage (FormCreate) : plus
+  // figés sur WFRP4\. Reste hors périmètre (pas demandé) : images du PDF de personnage
+  // (ConstCheminPdf*), toujours sous WFRP4\.
   var
     Version:           String;
     Ind:               Integer;
@@ -513,9 +514,14 @@ procedure TMenu.ComboBoxVersionSelect(Sender: TObject);
                         end;
                     end;
 
-                  ValVersion            := Version;
-                  ConstCheminLivre      := '\DATABASE\' + ValVersion + '\';
-                  ConstCheminPersonnage := '\SAVED_CARACTERS\' + ValVersion + '\';
+                  ValVersion             := Version;
+                  ConstCheminLivre       := '\DATABASE\' + ValVersion + '\';
+                  ConstCheminPersonnage  := '\SAVED_CARACTERS\' + ValVersion + '\';
+                  ConstCheminImageRace   := '\DATABASE\' + ValVersion + '\PICTURES\SPECIE\';
+                  ConstCheminImageMetier := '\DATABASE\' + ValVersion + '\PICTURES\CLASS\';
+                  ConstCheminImageSort   := '\DATABASE\' + ValVersion + '\PICTURES\SPELL\';
+                  ConstCheminImageNiveau       := '\PICTURES\' + ValVersion + '\NIV\';
+                  ConstCheminImageNiveauRacine := '\PICTURES\' + ValVersion + '\';
                   // Sélection de livres cochés de la NOUVELLE édition (CONTEXT.md §2.70) -
                   // sans ce recalcul, PeuplerTabLivre() rescannait bien les livres de la
                   // nouvelle édition mais gardait la sélection de l'ancienne (ListeLivre non
@@ -1286,9 +1292,6 @@ procedure TMenu.FormCreate(Sender: TObject);
 
        // Charger Les données
        ChargeIni();
-       ConstCheminImageRace    := '\DATABASE\WFRP4\PICTURES\SPECIE\';
-       ConstCheminImageMetier  := '\DATABASE\WFRP5\PICTURES\CLASS\';
-       ConstCheminImageSort    := '\DATABASE\WFRP4\PICTURES\SPELL\';
 
        // Sélecteur de version WFRP4/WFRP5 (CONTEXT.md §2.70) : appelée ICI, avant tout
        // chargement de livre, pour que ValVersion soit validée contre les répertoires
@@ -1299,8 +1302,21 @@ procedure TMenu.FormCreate(Sender: TObject);
        // WFRP4). ChargerListeVersions ne dépend d'aucune liste créée plus bas : elle scanne
        // DATABASE\ directement via XmlLivreBalise, indépendamment de ConstCheminLivre.
        ChargerListeVersions();
-       ConstCheminLivre      := '\DATABASE\' + ValVersion + '\';
-       ConstCheminPersonnage := '\SAVED_CARACTERS\' + ValVersion + '\';
+       ConstCheminLivre       := '\DATABASE\' + ValVersion + '\';
+       ConstCheminPersonnage  := '\SAVED_CARACTERS\' + ValVersion + '\';
+       // Chemins d'images races/métiers/sorts alignés sur la version comme ConstCheminLivre
+       // ci-dessus (Nono, 14/09/2026, CONTEXT.md §2.70) - ne sont plus figés sur WFRP4\ (l'un
+       // d'eux, ConstCheminImageMetier, était même figé sur WFRP5\ à tort, indépendamment de
+       // ValVersion). Un dossier de version pas encore garni (WFRP5\PICTURES\SPECIE\ n'existe
+       // pas encore au disque) se comporte comme aujourd'hui : FileExists échoue dans
+       // CheminRaceImage/CheminMetierImage/CheminSortImage, aucune image trouvée.
+       ConstCheminImageRace   := '\DATABASE\' + ValVersion + '\PICTURES\SPECIE\';
+       ConstCheminImageMetier := '\DATABASE\' + ValVersion + '\PICTURES\CLASS\';
+       ConstCheminImageSort   := '\DATABASE\' + ValVersion + '\PICTURES\SPELL\';
+       // Icones de niveau, même correctif (Nono, 14/09/2026, CONTEXT.md §2.70) - images
+       // WFRP5 ajoutées par Nono sous PICTURES\WFRP5\NIV\.
+       ConstCheminImageNiveau       := '\PICTURES\' + ValVersion + '\NIV\';
+       ConstCheminImageNiveauRacine := '\PICTURES\' + ValVersion + '\';
        // Sélection de livres cochés de CETTE édition (résolue depuis ListeLivreParVersion,
        // peuplée par ChargeIni - CONTEXT.md §2.70) - lue par PeuplerTabLivre plus bas.
        ListeLivre             := ListeLivreParVersion.Values[ValVersion];
