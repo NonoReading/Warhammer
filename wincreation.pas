@@ -1028,6 +1028,9 @@ procedure TWinCreations.PhaseSave(NouvellePhase: Integer);
     Xp:                    Integer;
     PRace:                 StructureRace;
     CandidatsAppart:       String;
+    StringsCodeEns:        TStringList;
+    StringsTypeEns:        TStringList;
+    IndEns:                Integer;
   Begin
     // supprimer les éléments des phases suivants
     // NouvellePhase est la phase où l'on ARRIVE : chaque branche enregistre donc le résultat de
@@ -1232,15 +1235,38 @@ procedure TWinCreations.PhaseSave(NouvellePhase: Integer);
       8: Begin         // Équipements
            for IndTab := 1 to TabMetierEquipement.RowCount - 1 do
              begin
-               PersonnageEquipement.CodeEquipement          := TabMetierEquipement.Cells[1, IndTab];
-               PersonnageEquipement.TypeEquipement          := TabMetierEquipement.Cells[6, IndTab];
-               // Comme un achat en jeu (winpersonnage.pas) : l'equipement de depart arrive
-               // non porte, a cocher explicitement ensuite.
-               PersonnageEquipement.Porte                   := False;
-               // Col 5, cachee : quantite posee par AfficheImageMetier (CONTEXT.md 2.77).
-               // Vide (choix multiple, ou aucune quantite du livre) = 1 exemplaire.
-               PersonnageEquipement.Quantite                := StrToIntDef(TabMetierEquipement.Cells[5, IndTab], 1);
-               Personnage.Equipement                        += [PersonnageEquipement];
+               if Pos(SeparateurEnsemble, TabMetierEquipement.Cells[1, IndTab]) > 0 then
+                 begin
+                   // ensemble : la ligne porte deux codes joints par SeparateurEnsemble
+                   // (AfficheImageMetier) - une seule ligne de creation, mais les deux
+                   // objets doivent exister separement dans Personnage.Equipement.
+                   StringsCodeEns := TStringList.Create;
+                   StringsTypeEns := TStringList.Create;
+                   ExtractStrings([SeparateurEnsemble], [], PChar(TabMetierEquipement.Cells[1, IndTab]), StringsCodeEns);
+                   ExtractStrings([SeparateurEnsemble], [], PChar(TabMetierEquipement.Cells[6, IndTab]), StringsTypeEns);
+                   for IndEns := 0 to StringsCodeEns.Count - 1 do
+                     begin
+                       PersonnageEquipement.CodeEquipement    := StringsCodeEns[IndEns];
+                       PersonnageEquipement.TypeEquipement    := StringsTypeEns[IndEns];
+                       PersonnageEquipement.Porte             := False;
+                       PersonnageEquipement.Quantite          := StrToIntDef(TabMetierEquipement.Cells[5, IndTab], 1);
+                       Personnage.Equipement                  += [PersonnageEquipement];
+                     end;
+                   StringsCodeEns.Free;
+                   StringsTypeEns.Free;
+                 end
+               else
+                 begin
+                   PersonnageEquipement.CodeEquipement          := TabMetierEquipement.Cells[1, IndTab];
+                   PersonnageEquipement.TypeEquipement          := TabMetierEquipement.Cells[6, IndTab];
+                   // Comme un achat en jeu (winpersonnage.pas) : l'equipement de depart arrive
+                   // non porte, a cocher explicitement ensuite.
+                   PersonnageEquipement.Porte                   := False;
+                   // Col 5, cachee : quantite posee par AfficheImageMetier (CONTEXT.md 2.77).
+                   // Vide (choix multiple, ou aucune quantite du livre) = 1 exemplaire.
+                   PersonnageEquipement.Quantite                := StrToIntDef(TabMetierEquipement.Cells[5, IndTab], 1);
+                   Personnage.Equipement                        += [PersonnageEquipement];
+                 end;
              end;
          end;
 
@@ -2234,6 +2260,15 @@ var
   Lib:                String;
   Typ:                String;
   CheminImage1:       String;
+  StringsCodeEns:     TStringList;
+  StringsTypeEns:     TStringList;
+  IndEns:             Integer;
+  CodeUnit:           String;
+  LibUnit:            String;
+  TypUnit:            String;
+  LibEns:             String;
+  CodeEns:            String;
+  TypEns:             String;
 
 begin
   if MetierEnCours <> '' then
@@ -2322,47 +2357,101 @@ begin
         Begin
            NbMetierEquipementTab        := NbMetierEquipementTab + 1;
            TabMetierEquipement.RowCount := NbMetierEquipementTab + 1;
-           ListeCode                    := GetListeEquipement(PMetierEquipement.Equipement, PMetierEquipement.TypeEquipement);
-
-           if Pos(',',ListeCode) > 0 then
+           if Pos(SeparateurEnsemble, PMetierEquipement.Equipement) > 0 then
              begin
-               TabMetierEquipement.Cells[2, NbMetierEquipementTab]   := ConstArbreAuchoix;
-               TabMetierEquipement.Cells[3, NbMetierEquipementTab]   := ListeCode;
+               // ensemble : les deux objets sont acquis en meme temps (ex. Storm Lantern +
+               // Lamp Oil), une seule ligne de creation = une seule coche d'avancement
+               // (CONTEXT.md, chantier equipement/avancement) - pas un choix, donc pas de
+               // ConstArbreAuChoix/double-clic ici, contrairement au bloc ci-dessous.
+               StringsCodeEns := TStringList.Create;
+               StringsTypeEns := TStringList.Create;
+               ExtractStrings([SeparateurEnsemble], [], PChar(PMetierEquipement.Equipement), StringsCodeEns);
+               ExtractStrings([SeparateurEnsemble], [], PChar(PMetierEquipement.TypeEquipement), StringsTypeEns);
+               LibEns  := '';
+               CodeEns := '';
+               TypEns  := '';
+               For IndEns := 0 to StringsCodeEns.Count - 1 do
+                 begin
+                   CodeUnit := StringsCodeEns[IndEns];
+                   if InList(StringsTypeEns[IndEns],TypeEquipCC+','+TypeEquipCT+','+TypeEquipMU) then
+                       begin
+                         PArme    := ChercheArme(CodeUnit);
+                         LibUnit  := PArme.Libelle;
+                         TypUnit  := TypeEquipWe;
+                       end
+                     else if StringsTypeEns[IndEns] = TypeEquipAR then
+                       begin
+                         PArmure  := ChercheArmure(CodeUnit);
+                         LibUnit  := PArmure.Libelle;
+                         TypUnit  := TypeEquipAr;
+                       end
+                     else if StringsTypeEns[IndEns] = TypeEquipDI then
+                       begin
+                         PTrapping := ChercheTrapping(CodeUnit);
+                         if PTrapping.CodeTrapping <> '' then
+                           LibUnit := PTrapping.Libelle
+                         else
+                           LibUnit := CodeUnit;
+                         TypUnit  := TypeEquipDi;
+                       end;
+                   if LibEns  <> '' then LibEns  := LibEns  + ' + ';
+                   LibEns  := LibEns  + LibUnit;
+                   if CodeEns <> '' then CodeEns := CodeEns + SeparateurEnsemble;
+                   CodeEns := CodeEns + CodeUnit;
+                   if TypEns  <> '' then TypEns  := TypEns  + SeparateurEnsemble;
+                   TypEns  := TypEns  + TypUnit;
+                 end;
+               StringsCodeEns.Free;
+               StringsTypeEns.Free;
+               TabMetierEquipement.Cells[1, NbMetierEquipementTab] := CodeEns;
+               TabMetierEquipement.Cells[2, NbMetierEquipementTab] := LibEns + QuantiteSuffixe(PMetierEquipement.Quantite);
+               TabMetierEquipement.Cells[5, NbMetierEquipementTab] := IntToStr(PMetierEquipement.Quantite);
+               TabMetierEquipement.Cells[6, NbMetierEquipementTab] := TypEns;
              end
            else
              begin
-               Code := PMetierEquipement.Equipement;
-               if InList(PMetierEquipement.TypeEquipement,TypeEquipCC+','+TypeEquipCT+','+TypeEquipMU) then
-                   begin
-                     PArme   := ChercheArme(Code);
-                     Lib     := PArme.Libelle;
-                     Typ     := TypeEquipWe;
-                   end
-                 else if PMetierEquipement.TypeEquipement = TypeEquipAR then
-                   begin
-                     PArmure := ChercheArmure(Code);
-                     Lib     := PArmure.Libelle;
-                     Typ     := TypeEquipAr;
-                   end
-                 else if PMetierEquipement.TypeEquipement = TypeEquipDI then
-                   begin
-                     // Un code Divers peut en realite etre un Trapping catalogue
-                     // (RULES-TRAP_xxx) - la classification reste TypeEquipDI (CONTEXT.md
-                     // 2.77bis), seul l'affichage est resolu ici, comme winlivre.pas:1200.
-                     PTrapping := ChercheTrapping(Code);
-                     if PTrapping.CodeTrapping <> '' then
-                       Lib := PTrapping.Libelle
-                     else
-                       Lib := Code;
-                     Typ     := TypeEquipDi;
-                   end;
-               Lib := Lib + QuantiteSuffixe(PMetierEquipement.Quantite);
-               TabMetierEquipement.Cells[1, NbMetierEquipementTab] := Code;
-               TabMetierEquipement.Cells[2, NbMetierEquipementTab] := Lib;
-               // Col 5, cachee : quantite (CONTEXT.md 2.77), lue a l'etape 8 pour
-               // PersonnageEquipement.Quantite au lieu de rester figee a 1.
-               TabMetierEquipement.Cells[5, NbMetierEquipementTab] := IntToStr(PMetierEquipement.Quantite);
-               TabMetierEquipement.Cells[6, NbMetierEquipementTab] := Typ;
+               ListeCode                    := GetListeEquipement(PMetierEquipement.Equipement, PMetierEquipement.TypeEquipement);
+
+               if Pos(',',ListeCode) > 0 then
+                 begin
+                   TabMetierEquipement.Cells[2, NbMetierEquipementTab]   := ConstArbreAuchoix;
+                   TabMetierEquipement.Cells[3, NbMetierEquipementTab]   := ListeCode;
+                 end
+               else
+                 begin
+                   Code := PMetierEquipement.Equipement;
+                   if InList(PMetierEquipement.TypeEquipement,TypeEquipCC+','+TypeEquipCT+','+TypeEquipMU) then
+                       begin
+                         PArme   := ChercheArme(Code);
+                         Lib     := PArme.Libelle;
+                         Typ     := TypeEquipWe;
+                       end
+                     else if PMetierEquipement.TypeEquipement = TypeEquipAR then
+                       begin
+                         PArmure := ChercheArmure(Code);
+                         Lib     := PArmure.Libelle;
+                         Typ     := TypeEquipAr;
+                       end
+                     else if PMetierEquipement.TypeEquipement = TypeEquipDI then
+                       begin
+                         // Un code Divers peut en realite etre un Trapping catalogue
+                         // (RULES-TRAP_xxx) - la classification reste TypeEquipDI (CONTEXT.md
+                         // 2.77bis), seul l'affichage est resolu ici, comme winlivre.pas:1200.
+                         PTrapping := ChercheTrapping(Code);
+                         if PTrapping.CodeTrapping <> '' then
+                           Lib := PTrapping.Libelle
+                         else
+                           Lib := Code;
+                         Typ     := TypeEquipDi;
+                       end;
+                   Lib := Lib + QuantiteSuffixe(PMetierEquipement.Quantite);
+                   TabMetierEquipement.Cells[1, NbMetierEquipementTab] := Code;
+                   TabMetierEquipement.Cells[2, NbMetierEquipementTab] := Lib;
+                   // Col 5, cachee : quantite (CONTEXT.md 2.77), lue a l'etape 8 pour
+                   // PersonnageEquipement.Quantite au lieu de rester figee a 1.
+                   TabMetierEquipement.Cells[5, NbMetierEquipementTab] := IntToStr(PMetierEquipement.Quantite);
+                   TabMetierEquipement.Cells[6, NbMetierEquipementTab] := Typ;
+                 end;
              end;
 
         end;

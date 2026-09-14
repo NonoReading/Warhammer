@@ -11,6 +11,9 @@ uses
 Const
       // séparateurs connus
       SeparateurMulti     	        = '/';
+      // "les deux ensemble" (ex. Storm Lantern+Lamp Oil) - a ne pas confondre avec
+      // SeparateurMulti qui veut dire "au choix" partout dans le projet (CONTEXT.md).
+      SeparateurEnsemble                = '+';
       Separateurtabulation              = #9;
       SeparateurRetourLigne             = #13#10;
       SeparateurChance                  = '-';
@@ -689,6 +692,7 @@ Var
   ConstArbreCompetence:     String;
   ConstArbreTalent:         String;
   ConstArbreAuChoix:        String;
+  ConstArbreEnsemble:       String;
   ConstArbreMetierPossible: String;
   ConstArbreRacePossible:   String;
   ConstArbreEquipement:     String;

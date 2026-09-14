@@ -33,11 +33,12 @@ son propre SUBCHAPTER_CAREER. A corriger cote donnees (ajouter les references da
 especes) le jour ou on y revient.
 
 LA SYNTAXE DE CHOIX "RULES-Txxxx/RULES-Tyyyy" (deux talents distincts au choix, ex. NATIO
-l.5897) N EST LUE QUE PAR WINLIVRE.PAS (AFFICHAGE). Verifie le 13/09/2026 : aucune occurrence
-de ce decoupage par '/' dans winpersonnage.pas/wincreation.pas. Le jour ou l'avancement de
-carriere sera code, il faudra lui apprendre a lire cette syntaxe aussi - utilisee pour les
-choix "A ou B" du Rulebook V5 (§2.70) et pour des cas V4 existants (duches bretonniens,
-carrieres Nations of Mankind).
+l.5897) N EST LUE QUE PAR WINLIVRE.PAS ET WINMETIER.PAS (AFFICHAGE). WinMetier corrige le
+14/09/2026 (CONTEXT.md 2.77 suite 5, ChargeMetierTalent ne l'affichait pas du tout). Reste
+verifie le 13/09/2026 : aucune occurrence de ce decoupage par '/' dans
+winpersonnage.pas/wincreation.pas. Le jour ou l'avancement de carriere sera code, il faudra
+lui apprendre a lire cette syntaxe aussi - utilisee pour les choix "A ou B" du Rulebook V5
+(§2.70) et pour des cas V4 existants (duches bretonniens, carrieres Nations of Mankind).
 
 CRAFTSMAN/MASTER TRADESMAN "(as Trade)" (RULEBOOK V5) N'A PAS DE RESOLUTION DYNAMIQUE. Ecrit
 le 14/09/2026 (§2.70) avec l'id generique RULES-T0032_*/RULES-T0086_* et un commentaire XML
@@ -209,6 +210,21 @@ rafraichit le menu principal (RafraichirLibellesMenu), mais contrairement au cha
 langue des LIVRES (ComboBoxLangueSelect), il ne ferme/rouvre pas WinLivre/WinCompetence/
 WinTalent/etc. : leurs libelles RULES-LAB_*/RULES-MESS_* restent dans l'ancienne langue
 d'interface jusqu'a reouverture. A reprendre si Nono le juge genant en usage reel.
+
+NE PAS CORRIGER LES CHEMINS D'IMAGES A LA MAIN EN CHANGEANT LE "WFRP4" EN DUR DANS LA
+CONSTANTE (remarque de Nono, 14/09/2026). Plusieurs chemins (ConstCheminImageNiveau,
+ConstCheminImageNiveauRacine, les 10 ConstCheminPdf*, ConstCheminAttribut/XpAttribut/
+XpCompetence dans chargeconstantes.pas) portent encore "WFRP4" en dur dans le litteral au
+lieu de suivre ValVersion - contrairement a ConstCheminLivre/ConstCheminPersonnage, deja
+passees de Const a Var et recalculees depuis ValVersion (CONTEXT.md 2.70). Meme piege sur
+ConstCheminImageRace/Metier/Sort : deja declarees Var mais toujours assignees a un
+litteral "WFRP4" en dur dans TMenu.FormCreate (warhammersource.pas) plutot que derivees de
+ValVersion - c'est ce qui a ete modifie a la main (WFRP4 -> WFRP5) en session le
+14/09/2026 pour tester les nouvelles icones de niveau/classe WFRP5, changement local non
+pense comme un correctif definitif. Le vrai correctif : etendre le meme mecanisme
+Const->Var + recalcul depuis ValVersion (deja fait pour ConstCheminLivre/
+ConstCheminPersonnage) a toutes ces constantes d'images/PDF, plutot que de rebasculer le
+litteral a la main chaque fois qu'on change de version pour tester.
 
 =========================================================================
 CONCEPTIONS A MENER  (chantiers a part entiere, ne pas les melanger)

@@ -859,6 +859,7 @@ Procedure TMenu.RafraichirLibellesMenu();
     ConstArbreCompetence        := GetTexteLibelle('RULES-LAB_009');
     ConstArbreTalent            := GetTexteLibelle('RULES-LAB_007');
     ConstArbreAuChoix           := GetTexteLibelle('RULES-LAB_010');
+    ConstArbreEnsemble          := GetTexteLibelle('RULES-LAB_186');
     ConstArbreMetierPossible    := GetTexteLibelle('RULES-LAB_011');
     ConstArbreRacePossible      := GetTexteLibelle('RULES-LAB_012');
     ConstArbreEquipement        := GetTexteLibelle('RULES-LAB_013');
@@ -1286,7 +1287,7 @@ procedure TMenu.FormCreate(Sender: TObject);
        // Charger Les données
        ChargeIni();
        ConstCheminImageRace    := '\DATABASE\WFRP4\PICTURES\SPECIE\';
-       ConstCheminImageMetier  := '\DATABASE\WFRP4\PICTURES\CLASS\';
+       ConstCheminImageMetier  := '\DATABASE\WFRP5\PICTURES\CLASS\';
        ConstCheminImageSort    := '\DATABASE\WFRP4\PICTURES\SPELL\';
 
        // Sélecteur de version WFRP4/WFRP5 (CONTEXT.md §2.70) : appelée ICI, avant tout
@@ -1485,6 +1486,7 @@ procedure TMenu.FormCreate(Sender: TObject);
        ConstArbreCompetence        := GetTexteLibelle('RULES-LAB_009');
        ConstArbreTalent            := GetTexteLibelle('RULES-LAB_007');
        ConstArbreAuChoix           := GetTexteLibelle('RULES-LAB_010');
+       ConstArbreEnsemble          := GetTexteLibelle('RULES-LAB_186');
        ConstArbreMetierPossible    := GetTexteLibelle('RULES-LAB_011');
        ConstArbreRacePossible      := GetTexteLibelle('RULES-LAB_012');
        ConstArbreEquipement        := GetTexteLibelle('RULES-LAB_013');

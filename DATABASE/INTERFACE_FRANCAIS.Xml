@@ -255,6 +255,7 @@
 <Text name="RULES-LAB_183">"Version"</Text>
 <Text name="RULES-LAB_184">"Interface"</Text>
 <Text name="RULES-LAB_185">"Capacité"</Text>
+<Text name="RULES-LAB_186">"{Ensemble}"</Text>
 </Label>
 </DATA_LABEL>
 </DATA_BOOK>

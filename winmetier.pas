@@ -685,11 +685,32 @@ var
   PTalent:        StructureTalent;
   PMetierTalent:  StructureMetierTalent;
   NodeData:       TMyNodeData;
+  ListOpt:        TStringList;
+  IndL:           Integer;
 Begin
     NodeSBrance            := TreeViewMetier1.Items.AddChild(NodeBase, ConstArbreTalent);
     NodeSBrance.ImageIndex := Niveau;
     For PMetierTalent in ListMetierTalent do
       if (PMetierTalent.CodeMetier = MetierEnCours) and (PMetierTalent.NiveauMetier = Niveau) then
+        if Pos(SeparateurMulti, PMetierTalent.CodeTalent) > 0 then
+          Begin
+            // choix multiple : une sous-branche, une feuille par option (meme motif que
+            // ChargeMetierCompetence ci-dessus)
+            NodeSTBranche            := TreeViewMetier1.Items.AddChild(NodeSBrance, ConstArbreAuChoix);
+            NodeSTBranche.ImageIndex := 0;
+            ListOpt                  := ListeTalent(PMetierTalent.CodeTalent);
+            for IndL := 0 to ListOpt.Count - 1 do
+              begin
+                NodeData                 := TMyNodeData.Create;
+                PTalent                  := ChercheTalent(ListOpt[IndL]);
+                NodeSTFeuille            := TreeViewMetier1.Items.AddChild(NodeSTBranche, PTalent.Libelle);
+                NodeSTFeuille.ImageIndex := 0;
+                NodeData.AdditionalData  := PTalent.CodeTalent;
+                NodeSTFeuille.Data       := NodeData;
+              end;
+            ListOpt.Free;
+          end
+        else
           Begin
               NodeData     := TMyNodeData.Create;
               PTalent      := ChercheTalent(PMetierTalent.CodeTalent);
@@ -764,6 +785,66 @@ Begin
                       begin
                         // Un code Divers peut etre un Trapping catalogue (RULES-TRAP_xxx),
                         // resolu sans changer sa classification TypeEquipDI (CONTEXT.md 2.77bis).
+                        PTrapping := ChercheTrapping(Code);
+                        if PTrapping.CodeTrapping <> '' then
+                          begin
+                            NodeData                 := TMyNodeData.Create;
+                            NodeData.AdditionalData  := PTrapping.CodeTrapping;
+                            NodeSTFeuille            := TreeViewMetier1.Items.AddChild(NodeSTBranche, EquipDivers + PTrapping.Libelle);
+                            NodeSTFeuille.Data       := NodeData;
+                          end
+                        else
+                          NodeSTFeuille := TreeViewMetier1.Items.AddChild(NodeSTBranche, stringsI[IndL]);
+                        NodeSTFeuille.ImageIndex := 0;
+                      end
+                   end;
+               stringsI.Free;
+               stringsT.Free;
+            end
+         else if pos(SeparateurEnsemble, PMetierEquipement.Equipement) > 0 then
+            begin
+              // ensemble : les deux objets sont acquis en meme temps (ex. Storm Lantern +
+              // Lamp Oil), une seule entree de trapping du livre = une seule coche
+              // d'avancement (CONTEXT.md, chantier equipement/avancement) - a ne pas
+              // confondre avec le "choix multiple" ci-dessus (SeparateurMulti).
+               stringsI                := TStringList.Create;
+               stringsT                := TStringList.Create;
+               NodeSTBranche           := TreeViewMetier1.Items.AddChild(NodeSBrance, ConstArbreEnsemble);
+               NodeSTBranche.ImageIndex := 0;
+               ExtractStrings([SeparateurEnsemble], [], PChar(PMetierEquipement.Equipement), stringsI);
+               ExtractStrings([SeparateurEnsemble], [], PChar(PMetierEquipement.TypeEquipement), stringsT);
+               For IndL := 0 to 1 do
+                 Begin
+                   if pos(EquipementQualite, StringsT[IndL]) > 0 then
+                     begin
+                       Code   := Trim(copy(stringsI[IndL],1,length(stringsI[IndL]) - length(Equipementqualite)));
+                       Qualite:= GetTexteLibelle('RULES-LAB_038');
+                     end
+                   else
+                     begin
+                       Code   := stringsI[IndL];
+                       Qualite:= '';
+                     end;
+                   if InList(stringsT[IndL],TypeEquipCC+','+TypeEquipCT+','+TypeEquipMU) then
+                      begin
+                        PArme                    := ChercheArme(Code);
+                        NodeData                 := TMyNodeData.Create;
+                        NodeData.AdditionalData  := PArme.CodeArme;
+                        NodeSTFeuille            := TreeViewMetier1.Items.AddChild(NodeSTBranche, EquipArme + PArme.Libelle + Qualite);
+                        NodeSTFeuille.ImageIndex := 0;
+                        NodeSTFeuille.Data       := NodeData;
+                      end
+                   else if stringsT[IndL] = TypeEquipAR then
+                      begin
+                        PArmure                  := ChercheArmure(Code);
+                        NodeData                 := TMyNodeData.Create;
+                        NodeData.AdditionalData  := PArmure.CodeArmure;
+                        NodeSTFeuille            := TreeViewMetier1.Items.AddChild(NodeSTBranche, EquipArmure + PArmure.Libelle + Qualite);
+                        NodeSTFeuille.ImageIndex := 0;
+                        NodeSTFeuille.Data       := NodeData;
+                      end
+                   else if stringsT[IndL] = TypeEquipDI then
+                      begin
                         PTrapping := ChercheTrapping(Code);
                         if PTrapping.CodeTrapping <> '' then
                           begin
@@ -991,12 +1072,15 @@ Begin
                 end
             else if AffType.text = ConstArbreTalent then
                 Begin
-                  PTalent            := ChercheTalent(NodeData.AdditionalData);
-                  AffCode.Text       := PTalent.CodeTalent;
-                  AffLib.Text        := PTalent.Libelle;
-                  AffLivre.Text      := getTexteLibelle(PTalent.Livre,'','',true);
-                  AffAttribut.Text   := GetTExteLibelle(PTalent.Attribut);
-                  AffDescription.Text:= DescriptionTalent(PTalent.CodeTalent, ConstCodeRaceCreationGenerique);
+                  if Node.Data <> nil then
+                    begin
+                      PTalent            := ChercheTalent(NodeData.AdditionalData);
+                      AffCode.Text       := PTalent.CodeTalent;
+                      AffLib.Text        := PTalent.Libelle;
+                      AffLivre.Text      := getTexteLibelle(PTalent.Livre,'','',true);
+                      AffAttribut.Text   := GetTExteLibelle(PTalent.Attribut);
+                      AffDescription.Text:= DescriptionTalent(PTalent.CodeTalent, ConstCodeRaceCreationGenerique);
+                    end;
                 end
             else if AffType.text = ConstArbreEquipement then
               Begin

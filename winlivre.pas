@@ -1277,6 +1277,26 @@ begin
         Choix.Free;
       end;
     end
+    else if Pos(SeparateurEnsemble, NomItem) > 0 then
+    begin
+      // Ensemble : "A+B" -> sous-branche "ensemble" - les deux objets sont acquis en
+      // meme temps (ex. Storm Lantern+Lamp Oil), pas un choix, a ne pas confondre avec
+      // SeparateurMulti ci-dessus (CONTEXT.md, chantier equipement/avancement).
+      NodeChoix := TreeViewLivre.Items.AddChild(NodeBranche, ConstArbreEnsemble);
+      SetNodeInfo(NodeChoix, 25);
+
+      Choix := TStringList.Create;
+      try
+        Choix.Delimiter       := SeparateurEnsemble;
+        Choix.StrictDelimiter := True;
+        Choix.DelimitedText   := NomItem;
+
+        for J := 0 to Choix.Count - 1 do
+          AjouterFeuilleEquipement(Choix[J], NodeChoix);
+      finally
+        Choix.Free;
+      end;
+    end
     else
       AjouterFeuilleEquipement(NomItem, NodeBranche,
         StrToIntDef(TDOMElement(Elements.Item[I]).GetAttribute('quantite'), 1));

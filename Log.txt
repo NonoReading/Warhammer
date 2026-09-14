@@ -4293,3 +4293,33 @@ distincts, 433 -> 393 occurrences. Reste de l'audit C (Trade Tools/Workshop gene
 catalogues, Book normalisation ponctuation, vehicules composes, ~120 nouvelles entrees) non
 retouche cette session, en attente de confirmation de perimetre avec Nono. Fichiers modifies :
 DATABASE/WFRP5/BOOK_RULESBOOK.Xml, trapping_unmatched.txt, CONTEXT.md, Log.txt.
+
+14/09/2026 - AUDIT C, SUITE DU RESTE (CONTEXT.md 2.77) : POINTS 1 A 3 FAITS, DEUX BUGS
+WINMETIER SUR LES CHOIX DE TALENT CORRIGES, POINT 3 A RECONFIRMER. Confirme avec Nono avant
+de reprendre : le reste de l'audit C ne touche que BOOK_RULESBOOK.Xml, independant de la
+pause personnage/avancement. Point 1 : 28 occurrences Trade Tools (X)/Workshop (X) (12
+specialisations + variantes as Trade) rattachees aux deux entrees generiques deja
+cataloguees RULES-TRAP_135/_136, niveau de carriere inchange. Teste OK par Nono. En testant
+ce point, deux bugs WinMetier trouves et corriges : (1) ChargeMetierTalent (winmetier.pas)
+ne gerait pas la syntaxe de choix RULES-Txxxx/RULES-Tyyyy (talent affiche vide), corrige en
+reprenant le motif deja en place pour les competences (branche "Au choix" + ListeTalent,
+fonction existante mais jamais appelee depuis WinMetier) ; (2) consequence du (1), access
+violation en cliquant sur la ligne "Au choix" elle-meme (winmetier.pas:1015,
+TreeViewMetier1Change) - meme motif que l'incident deja documente plus haut (868) pour la
+branche Competence, sauf que cette fois c'est la branche Talent qui n'avait pas le garde
+"if Node.Data <> nil". Les deux corriges et testes OK par Nono. Point 2 : 9 occurrences
+Book (X) (Apothecary/Engineer/Law/Religion x4/Medicine/Cryptography) rattachees a
+RULES-TRAP_122/124/125/126/128/129 ; Book (Blank), Book (Herbs) et un Book nu laisses en
+texte libre (aucune correspondance exacte), a revoir au point 4. Point 3 : 10 occurrences de
+vehicules composes scindees en deux Item chacune - Mule and Cart (x3) -> Mule
+(RULES-TRAP_148) + Cart (RULES-TRAP_137), Horse and Cart (x2) -> Draught Horse
+(RULES-TRAP_143, choix valide par Nono) + Cart, Storm Lantern and Oil (x5) -> Storm Lantern
+(RULES-TRAP_21) + RULES-TRAP_19 (seule entree "Oil" de toute la base, description anglaise
+"Lamp Oil"). Compile et 0 erreur apres chaque point. Nono souleve un doute juste avant de
+partir sur le rattachement Storm Lantern and Oil ("je pense que c'est Storm Lantern et de
+l'huile, pas une lampe a huile") - piste ouverte, non close : verifier comment le libelle FR
+de RULES-TRAP_19 s'affiche reellement dans WinMetier avant de confirmer ou changer ce
+rattachement, aucun fichier de traduction dedie trouve en cherchant "Huile"/"Lamp Oil" dans
+DATABASE/WFRP5. Reste dans l'audit C : point 4, ~120 objets manquants a saisir par lots, pas
+commence. Fichiers modifies : DATABASE/WFRP5/BOOK_RULESBOOK.Xml, winmetier.pas, CONTEXT.md,
+Log.txt.

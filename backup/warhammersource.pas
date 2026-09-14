@@ -15,7 +15,7 @@ uses
   ChargeRaceTalent, GlobalFonts, WinCreation, ChargeTalentCreation,
   WinPersonnage, ChargeAttributAugmentation, ChargeCompetenceAugmentation,
   ChargeArme, WinWeapon, ChargeArmeBonus, ChargeMetierEquipement, ChargeArmure,
-  ChargeArmureBonus, ChargeArmureBonusTalent, WinArmor, ChargeSort, WinSpell, ChargeTexte,
+  ChargeArmureBonus, ChargeArmureBonusTalent, WinArmor, ChargeTrapping, ChargeSort, WinSpell, ChargeTexte,
   ChargeFabrication, Unitcalcul, ChargeMetierSousMetier,
   ChargeMetierRaceChoixMetier, ChargePersonnage, ChargeRaceCreation,
   ChargeTraduction, ChargeArmureSimplifie, ChargeLivre,
@@ -120,6 +120,7 @@ type
     procedure RafraichirLibellesMenu();
     procedure ChargerListeVersions();
     procedure ChargerListeLanguesInterface();
+    procedure PeuplerTabLivre();
   private
   public
   end;
@@ -217,10 +218,24 @@ begin
     Writeln(MyFile, ConstIniVersion + ComboBoxVersion.items[ComboBoxVersion.Itemindex]);
   if ComboBoxLangueInterface.Itemindex <> -1 then
     Writeln(MyFile, ConstIniLangueInterface + ComboBoxLangueInterface.items[ComboBoxLangueInterface.Itemindex]);
-  for Ind := 1 to TabLivre.RowCount -1 do
-      if TabLivre.Cells[ColLivreSel, Ind] = ConstSelectionne then
-        Liste := Liste + AjouteAccolade(TabLivre.Cells[ColLivreCod, Ind]);
-  Writeln(MyFile, ConstIniLivre + Liste);
+
+  // Sélection de livres cochés, une ligne par édition (CONTEXT.md §2.70) : la table garde
+  // en mémoire la sélection de TOUTES les éditions déjà rencontrées - on ne met à jour ici
+  // que celle de l'édition active (reflétée par TabLivre en ce moment), puis on réécrit
+  // TOUTE la table, sans quoi la ligne de l'autre édition serait perdue à chaque sauvegarde.
+  if ComboBoxVersion.Itemindex <> -1 then
+    begin
+      for Ind := 1 to TabLivre.RowCount -1 do
+          if TabLivre.Cells[ColLivreSel, Ind] = ConstSelectionne then
+            Liste := Liste + AjouteAccolade(TabLivre.Cells[ColLivreCod, Ind]);
+      ListeLivreParVersion.Values[ComboBoxVersion.items[ComboBoxVersion.Itemindex]] := Liste;
+    end;
+  for Ind := 0 to ListeLivreParVersion.Count - 1 do
+    // Nom vide : reliquat de l'ancien format .INI à une seule ligne 'BOOK=...' (sans
+    // édition), lu comme tel une seule fois à la transition - ne rien réécrire, sans quoi
+    // cette ligne morte resterait indéfiniment (13/09/2026, CONTEXT.md §2.70).
+    if ListeLivreParVersion.Names[Ind] <> '' then
+      Writeln(MyFile, ConstIniLivre + ListeLivreParVersion.Names[Ind] + '=' + ListeLivreParVersion.ValueFromIndex[Ind]);
 
   // Fermeture du fichier
   CloseFile(MyFile);
@@ -410,22 +425,167 @@ procedure TMenu.ComboBoxLangueSelect(Sender: TObject);
   end;
 
 procedure TMenu.ComboBoxVersionSelect(Sender: TObject);
-  // Sélecteur de version WFRP4/WFRP5 (Nono, 13/09/2026, CONTEXT.md §2.70) : pour
-  // l'instant, seule la persistance .INI est branchée, sur le même mécanisme que
-  // ConstIniLangue. Le rechargement des livres depuis DATABASE\<version>\ au changement
-  // (ConstCheminLivre est encore une constante figée sur 'DATABASE\WFRP4\',
-  // chargeconstantes.pas) est un chantier séparé, volontairement laissé de côté à cette
-  // étape - voir A FAIRE.txt.
+  // Rechargement à chaud de la version WFRP4/WFRP5 (Nono, 13/09/2026, CONTEXT.md §2.70) :
+  // même mécanisme que ComboBoxLangueSelect (§2.8) - bloqué si WinPersonnage/WinCreation est
+  // ouvert, fenêtres catalogue fermées puis rouvertes, ConstCheminLivre/ConstCheminPersonnage
+  // (Var depuis le 13/09/2026) recalculés depuis la version choisie, TabLivre rescannée
+  // (PeuplerTabLivre) puis ChargerLivre/ChargerPersonnages rejoués.
+  // Portée volontairement limitée aux livres et aux personnages (validé avec Nono le
+  // 13/09/2026) : les chemins d'images (races/métiers/sorts, icônes de niveau, PDF) restent
+  // figés sur WFRP4\ tant que PICTURES\WFRP5\ n'existe pas au disque - chantier séparé.
   var
-    Version: String;
+    Version:           String;
+    Ind:               Integer;
+    BloqueVersion:     Boolean;
+    OuvertLivre:       Boolean;
+    OuvertCompetence:  Boolean;
+    OuvertTalent:      Boolean;
+    OuvertRace:        Boolean;
+    OuvertSort:        Boolean;
+    OuvertArme:        Boolean;
+    OuvertArmure:      Boolean;
+    OuvertMetier:      Boolean;
   begin
     if ComboBoxVersion.ItemIndex <> -1 then
       begin
         Version := ComboBoxVersion.Items[ComboBoxVersion.ItemIndex];
         if Version <> ValVersion then
           begin
-            ValVersion := Version;
-            SauveIni();
+            BloqueVersion := false;
+            for Ind := 0 to Screen.FormCount - 1 do
+              if (Screen.Forms[Ind] is TWinPersonnages) or (Screen.Forms[Ind] is TWinCreations) then
+                BloqueVersion := true;
+
+            if BloqueVersion then
+              ShowMessage(GetTexteLibelle('RULES-MESS_062'))
+            else
+              if MessageDlg(GetTexteLibelle('RULES-MESS_061')+' : '+Version, mtConfirmation, mbYesNo, 0) = mrYes then
+                begin
+                  OuvertLivre      := false;
+                  OuvertCompetence := false;
+                  OuvertTalent     := false;
+                  OuvertRace       := false;
+                  OuvertSort       := false;
+                  OuvertArme       := false;
+                  OuvertArmure     := false;
+                  OuvertMetier     := false;
+                  for Ind := Screen.FormCount - 1 downto 0 do
+                    begin
+                      if Screen.Forms[Ind] is TWinLivres then
+                        begin
+                          OuvertLivre := true;
+                          Screen.Forms[Ind].Close;
+                        end
+                      else if Screen.Forms[Ind] is TWinCompetence then
+                        begin
+                          OuvertCompetence := true;
+                          Screen.Forms[Ind].Close;
+                        end
+                      else if Screen.Forms[Ind] is TWintTalent then
+                        begin
+                          OuvertTalent := true;
+                          Screen.Forms[Ind].Close;
+                        end
+                      else if Screen.Forms[Ind] is TWinRace then
+                        begin
+                          OuvertRace := true;
+                          Screen.Forms[Ind].Close;
+                        end
+                      else if Screen.Forms[Ind] is TWinSpells then
+                        begin
+                          OuvertSort := true;
+                          Screen.Forms[Ind].Close;
+                        end
+                      else if Screen.Forms[Ind] is TWinWeapons then
+                        begin
+                          OuvertArme := true;
+                          Screen.Forms[Ind].Close;
+                        end
+                      else if Screen.Forms[Ind] is TWinArmors then
+                        begin
+                          OuvertArmure := true;
+                          Screen.Forms[Ind].Close;
+                        end
+                      else if Screen.Forms[Ind] is TWinMetiers then
+                        begin
+                          OuvertMetier := true;
+                          Screen.Forms[Ind].Close;
+                        end;
+                    end;
+
+                  ValVersion            := Version;
+                  ConstCheminLivre      := '\DATABASE\' + ValVersion + '\';
+                  ConstCheminPersonnage := '\SAVED_CARACTERS\' + ValVersion + '\';
+                  // Sélection de livres cochés de la NOUVELLE édition (CONTEXT.md §2.70) -
+                  // sans ce recalcul, PeuplerTabLivre() rescannait bien les livres de la
+                  // nouvelle édition mais gardait la sélection de l'ancienne (ListeLivre non
+                  // à jour), cochant seulement les codes qu'elle avait en commun avec
+                  // l'édition précédente - les autres livres restaient affichés mais
+                  // décochés, donc non chargés (symptôme relevé par Nono après le switch).
+                  ListeLivre            := ListeLivreParVersion.Values[ValVersion];
+                  // Rescanner TabLivre AVANT ChargerLivre : celui-ci relit la sélection
+                  // depuis TabLivre.Cells[ColLivreSel,...] (ForceMaj=true) pour savoir quoi
+                  // importer - sans ce rescan, TabLivre resterait affichée avec les livres
+                  // de l'édition précédente (symptôme relevé par Nono en testant WFRP5).
+                  PeuplerTabLivre();
+                  ChargerLivre(true, '');
+                  // ChargerLivre vient d'appliquer Traduit(ValLangue,'') à TOUS les livres, y
+                  // compris INTERFACE - la langue d'interface doit rester décorrélée de la
+                  // langue des livres (même correctif que ComboBoxLangueSelect, §2.70).
+                  Traduit(ValLangueInterface, ConstInterfaceBook);
+                  ChargerPersonnages();
+                  RafraichirLibellesMenu();
+                  SauveIni();
+
+                  if OuvertLivre then
+                    begin
+                      FenLivre          := TWinLivres.Create(Application);
+                      FenLivre.Position := poOwnerFormCenter;
+                      FenLivre.Show;
+                    end;
+                  if OuvertCompetence then
+                    begin
+                      FenCompetence          := TWinCompetence.Create(Application);
+                      FenCompetence.Position := poOwnerFormCenter;
+                      FenCompetence.Show;
+                    end;
+                  if OuvertTalent then
+                    begin
+                      FenTalent          := TWintTalent.Create(Application);
+                      FenTalent.Position := poOwnerFormCenter;
+                      FenTalent.Show;
+                    end;
+                  if OuvertRace then
+                    begin
+                      FenRace          := TWinRace.Create(Application);
+                      FenRace.Position := poOwnerFormCenter;
+                      FenRace.Show;
+                    end;
+                  if OuvertSort then
+                    begin
+                      FenSort          := TWinSpells.Create(Application);
+                      FenSort.Position := poOwnerFormCenter;
+                      FenSort.Show;
+                    end;
+                  if OuvertArme then
+                    begin
+                      FenArme          := TWinWeapons.Create(Application);
+                      FenArme.Position := poOwnerFormCenter;
+                      FenArme.Show;
+                    end;
+                  if OuvertArmure then
+                    begin
+                      FenArmure          := TWinArmors.Create(Application);
+                      FenArmure.Position := poOwnerFormCenter;
+                      FenArmure.Show;
+                    end;
+                  if OuvertMetier then
+                    begin
+                      FenMetier          := TWinMetiers.Create(Application);
+                      FenMetier.Position := poOwnerFormCenter;
+                      FenMetier.Show;
+                    end;
+                end;
           end;
       end;
   end;
@@ -570,6 +730,69 @@ procedure TMenu.ChargerListeLanguesInterface();
         ComboBoxLangueInterface.ItemIndex := 0;
         ValLangueInterface                := ComboBoxLangueInterface.Items[0];
       end;
+  end;
+
+procedure TMenu.PeuplerTabLivre();
+  // Peuple TabLivre (grille "Livres" du menu) et ComboBoxLangue en scannant ConstCheminLivre
+  // (Var depuis le 13/09/2026, CONTEXT.md §2.70) - extrait de FormCreate (mécanique
+  // inchangée) pour être rejouable au changement de version (ComboBoxVersionSelect), sans
+  // quoi TabLivre restait figée sur les livres de l'ancienne édition après un rechargement.
+  // Remise à zéro volontairement limitée à TabLivre/LivresLivres/LivresCharges (propres à
+  // l'édition) : ListeLangue et ComboBoxLangue.Items ne sont PAS réinitialisés, une langue
+  // déjà connue d'une édition précédente doit rester dans la liste plutôt que dupliquée.
+  var
+    SearchResult:  TSearchRec;
+    DirectoryPath: String;
+    I:             Integer;
+    Ordre:         String;
+    Nom:           String;
+    PLivre:        StructureLivre;
+  begin
+    TabLivre.RowCount := 1;
+    LivresLivres       := '';
+    LivresCharges       := '';
+    I := 0;
+
+    DirectoryPath := GetCurrentDir + ConstCheminLivre;
+    if FindFirst(DirectoryPath + '*.xml', faAnyFile, SearchResult) = 0 then
+    begin
+      repeat
+        Nom := XmlLivre(ExtractStringBefore(SearchResult.Name,'.'));
+        if Pos(AjouteAccolade(LivreLangue), ListeLangue) = 0 then
+          begin
+             ComboBoxLangue.Items.add(LivreLangue);
+             if LivreLangue = ValLangue then
+               ComboBoxLangue.itemindex := ComboBoxLangue.items.count - 1;
+             ListeLangue := ListeLangue + AjouteAccolade(LivreLangue);
+          end;
+
+        if pos(AjouteAccolade(Nom), LivresLivres) = 0 then
+        begin
+          Inc(I);
+          if TabLivre.RowCount <= I then
+            TabLivre.RowCount      := TabLivre.RowCount + 1;
+          if (ListeLivre = '') or (Pos(AjouteAccolade(Nom), ListeLivre) > 0) then
+            begin
+              TabLivre.Cells[ColLivreSel, I] := ConstSelectionne;
+              LivresCharges        := LivresCharges + AjouteAccolade(Nom);
+            end;
+          LivresLivres                       := LivresLivres + AjouteAccolade(Nom);
+          TabLivre.Cells[ColLivreLib, I]     := GetTexteLibelle(Nom,'','',true);
+          TabLivre.Cells[ColLivreCod, I]     := Nom;
+          PLivre                             := ChercheLivreLibelle(Nom);
+          Ordre                              := IntToStr(PLivre.Officiel);
+          if Ordre = '2' then
+            TabLivre.Cells[ColLivreO_F, I]   := ConstLivreFacultatif
+          else
+            TabLivre.Cells[ColLivreO_F, I]   := ConstLivreOfficiel;
+          TabLivre.Cells[ColLivreOrd, I]     := Ordre+Nom;
+            TabLivre.Cells[ColLivreChe, I]   := SearchResult.Name;
+          ListBook                 += [Nom];
+        end;
+      until FindNext(SearchResult) <> 0;
+      FindClose(SearchResult);
+    end;
+    TabLivre.SortColRow(true,ColLivreOrd);
   end;
 
 Procedure TMenu.RafraichirLibellesMenu();
@@ -722,6 +945,7 @@ Procedure TMenu.ChargeIni();
     LocLangue:     String;
     LocVersion:    String;
     LocLangueInterface: String;
+    PosEgal:       Integer;
   begin
     // récupérer la langue dans la fichier ini s'il existe
     LocLangue     := ValLangue;
@@ -739,8 +963,17 @@ Procedure TMenu.ChargeIni();
             Ligne := ReplaceTilde(Ligne);
             if pos(ConstIniLangue, Ligne) > 0 then
               LocLangue := ExtractStringAfter(Ligne,ConstIniLangue);
-            if pos(ConstIniLivre, Ligne) > 0 then
-              ListeLivre := ExtractStringAfter(Ligne,ConstIniLivre);
+            // BOOK<version>=<liste> - une ligne par édition (13/09/2026, CONTEXT.md §2.70) ;
+            // ListeLivre (la sélection RÉSOLUE de l'édition active) n'est affectée
+            // définitivement que plus tard dans FormCreate, une fois ValVersion validée par
+            // ChargerListeVersions - même principe que ValVersion ci-dessous.
+            if pos(ConstIniLivre, Ligne) = 1 then
+              begin
+                PosEgal := Pos('=', Ligne);
+                if PosEgal > Length(ConstIniLivre) then
+                  ListeLivreParVersion.Values[Copy(Ligne, Length(ConstIniLivre)+1, PosEgal-Length(ConstIniLivre)-1)]
+                    := Copy(Ligne, PosEgal+1, MaxInt);
+              end;
             if pos(ConstIniVersion, Ligne) > 0 then
               LocVersion := ExtractStringAfter(Ligne,ConstIniVersion);
             if pos(ConstIniLangueInterface, Ligne) > 0 then
@@ -866,6 +1099,7 @@ procedure TMenu.ChargerLivre(ForceMaJ: Boolean; ForceLivre: String);
         ListTalentCreation.Clear;
         ListArme.Clear;
         ListArmure.Clear;
+        ListTrapping.Clear;
         // Oubliées jusqu'au 21/08/2026 : toutes deux remplies par XmlImport comme leurs
         // voisines, mais jamais vidées ici - chaque rechargement (changement de livre actif
         // ou de langue) rajoutait donc leur contenu par-dessus l'ancien. Visible sur le PDF
@@ -1016,8 +1250,10 @@ begin
     // Si double-click sur une AUTRE colonne → ouvrir WinLivre avec le livre
     else
     begin
-      // Construire le chemin : DATABASE\BOOK RULESBOOK.Xml
-      BookPath := 'DATABASE\WFRP4\' + TabLivre.Cells[ColLivreChe, TabLivre.Row];;
+      // Construire le chemin : DATABASE\<version>\BOOK RULESBOOK.Xml - suit ConstCheminLivre
+      // (Var depuis le 13/09/2026, CONTEXT.md §2.70) au lieu d'un littéral WFRP4 figé, sans
+      // quoi le double-clic ouvrirait le mauvais livre une fois sur une autre version.
+      BookPath := GetCurrentDir + ConstCheminLivre + TabLivre.Cells[ColLivreChe, TabLivre.Row];
 
       // Créer/Ouvrir WinLivre et charger le livre
       if not Assigned(FenLivre) then
@@ -1035,10 +1271,6 @@ procedure TMenu.FormCreate(Sender: TObject);
   Var
     SearchResult:        TSearchRec;
     DirectoryPath:       string;
-    I:                   Integer = 0;
-    Ordre:               String;
-    Nom:                 String;
-    PLivre:              StructureLivre;
     ListeFichiersLivres: TStringList;
     Idx:                 Integer;
     RulesBookIndex:      Integer;
@@ -1047,11 +1279,30 @@ procedure TMenu.FormCreate(Sender: TObject);
        ChargerImage();
        Randomize;
 
+       // Sélection de livres cochés, une par édition (Nono, 13/09/2026, CONTEXT.md §2.70) -
+       // créée AVANT ChargeIni() qui la peuple depuis le .INI.
+       ListeLivreParVersion := TStringList.Create;
+
        // Charger Les données
        ChargeIni();
        ConstCheminImageRace    := '\DATABASE\WFRP4\PICTURES\SPECIE\';
        ConstCheminImageMetier  := '\DATABASE\WFRP4\PICTURES\CLASS\';
        ConstCheminImageSort    := '\DATABASE\WFRP4\PICTURES\SPELL\';
+
+       // Sélecteur de version WFRP4/WFRP5 (CONTEXT.md §2.70) : appelée ICI, avant tout
+       // chargement de livre, pour que ValVersion soit validée contre les répertoires
+       // DATABASE\* réellement présents au disque AVANT de calculer ConstCheminLivre/
+       // ConstCheminPersonnage juste en dessous - sans quoi le programme rouvrait toujours
+       // WFRP4\ au démarrage même si le .INI mémorisait WFRP5 (symptôme relevé par Nono :
+       // la combo affichait bien "WFRP5" mais les données chargées restaient celles de
+       // WFRP4). ChargerListeVersions ne dépend d'aucune liste créée plus bas : elle scanne
+       // DATABASE\ directement via XmlLivreBalise, indépendamment de ConstCheminLivre.
+       ChargerListeVersions();
+       ConstCheminLivre      := '\DATABASE\' + ValVersion + '\';
+       ConstCheminPersonnage := '\SAVED_CARACTERS\' + ValVersion + '\';
+       // Sélection de livres cochés de CETTE édition (résolue depuis ListeLivreParVersion,
+       // peuplée par ChargeIni - CONTEXT.md §2.70) - lue par PeuplerTabLivre plus bas.
+       ListeLivre             := ListeLivreParVersion.Values[ValVersion];
 
        // création de la base de donnée
        ListRace                     := TListRace.Create;
@@ -1077,6 +1328,7 @@ procedure TMenu.FormCreate(Sender: TObject);
        ListArme                     := TListArme.Create;
        ListArmeModificateur         := TListModificateur.Create;
        ListArmure                   := TListArmure.Create;
+       ListTrapping                 := TListTrapping.Create;
        ListArmureSimplifiee         := TListArmureSimplifiee.Create;
        ListArmeBonus                := TListArmeBonus.Create;
        ListMetierEquipement         := TListMetierEquipement.Create;
@@ -1200,49 +1452,7 @@ procedure TMenu.FormCreate(Sender: TObject);
 
        ComboBoxLangue.Style    := csDropDownList;
        // chercher les livres
-       directoryPath := GetCurrentDir + ConstCheminLivre;
-       if FindFirst(directoryPath + '*.xml', faAnyFile, searchResult) = 0 then
-       begin
-         repeat
-           Nom := XmlLivre(ExtractStringBefore(searchResult.Name,'.'));
-           if Pos(AjouteAccolade(LivreLangue), ListeLangue) = 0 then
-             begin
-                ComboBoxLangue.Items.add(LivreLangue);
-                if LivreLangue = ValLangue then
-                  ComboBoxLangue.itemindex := ComboBoxLangue.items.count - 1;
-                ListeLangue := ListeLangue + AjouteAccolade(LivreLangue);
-             end;
-
-           if pos(AjouteAccolade(Nom), LivresLivres) = 0 then
-           begin
-             Inc(i);
-             if TabLivre.RowCount <= i then
-               TabLivre.RowCount      := TabLivre.RowCount + 1;
-             if (ListeLivre = '') or (Pos(AjouteAccolade(Nom), ListeLivre) > 0) then
-               begin
-                 TabLivre.Cells[ColLivreSel, I] := ConstSelectionne;
-                 LivresCharges        := LivresCharges + AjouteAccolade(Nom);
-               end;
-             LivresLivres                       := LivresLivres + AjouteAccolade(Nom);
-             TabLivre.Cells[ColLivreLib, I]     := GetTexteLibelle(Nom,'','',true);
-             TabLivre.Cells[ColLivreCod, I]     := Nom;
-             PLivre                             := ChercheLivreLibelle(Nom);
-             Ordre                              := IntToStr(PLivre.Officiel);
-             if Ordre = '2' then
-               TabLivre.Cells[ColLivreO_F, I]   := ConstLivreFacultatif
-             else
-               TabLivre.Cells[ColLivreO_F, I]   := ConstLivreOfficiel;
-             TabLivre.Cells[ColLivreOrd, I]     := Ordre+Nom;
-               TabLivre.Cells[ColLivreChe, I]   := searchResult.Name;
-             ListBook                 += [Nom];
-           end;
-         until FindNext(searchResult) <> 0;
-         FindClose(searchResult);
-       end;
-       TabLivre.SortColRow(true,ColLivreOrd);
-
-       // sélecteur de version WFRP4/WFRP5 (CONTEXT.md §2.70)
-       ChargerListeVersions();
+       PeuplerTabLivre();
 
        // sélecteur de langue de l'interface, décorrélé de la langue des livres (CONTEXT.md §2.70)
        ChargerListeLanguesInterface();
@@ -1552,6 +1762,12 @@ procedure TMenu.ChargerPersonnages();
     j:             Integer;
     LivreTrouve:   Boolean;
   begin
+    // Remise à zéro avant rescan (13/09/2026, CONTEXT.md §2.70) : sans elle, TabPersonnage
+    // ne fait qu'ajouter/écraser des lignes au fil des appels - au changement de version,
+    // si le nouveau ConstCheminPersonnage pointe vers un dossier vide ou absent (cas de
+    // SAVED_CARACTERS\WFRP5\ aujourd'hui), les personnages de l'édition précédente
+    // restaient affichés (même symptôme que TabLivre, relevé par Nono en testant).
+    TabPersonnage.RowCount := 1;
     directoryPath := GetCurrentDir + ConstCheminPersonnage;
 
     if FindFirst(directoryPath + DirectorySeparator + '*', faDirectory, searchResult) = 0 then

@@ -448,17 +448,32 @@ begin
                   StringEquip := TStringList.Create;
                   StringType  := TStringList.Create;
 
-                  ExtractStrings([SeparateurMulti], [], PChar(PMetierEquipement.Equipement), StringEquip);
-                  ExtractStrings([SeparateurMulti], [], PChar(PMetierEquipement.TypeEquipement), StringType);
-
-                  if StringEquip.Count > 1 then
+                  if Pos(SeparateurEnsemble, PMetierEquipement.Equipement) > 0 then
                     begin
+                      // ensemble : "A+B" acquis en meme temps, pas un choix - a ne pas
+                      // decouper par SeparateurMulti (CONTEXT.md, chantier equipement/
+                      // avancement), sinon les deux codes restent colles et disparaissent
+                      // silencieusement plus bas (aucun InList ne les reconnait).
+                      ExtractStrings([SeparateurEnsemble], [], PChar(PMetierEquipement.Equipement), StringEquip);
+                      ExtractStrings([SeparateurEnsemble], [], PChar(PMetierEquipement.TypeEquipement), StringType);
                       Inc(IndDetail);
-                      PdfEcrit(PdfPage,DebutFeuille + DecDetail + DebutDetail, DebutFeuille + DecDetail + 110, PdfPositionFeuille(DebutTexte,NbLigne,IndDetail+NbDetail), '¤ '+ConstArbreAuChoix,MinPolice);
+                      PdfEcrit(PdfPage,DebutFeuille + DecDetail + DebutDetail, DebutFeuille + DecDetail + 110, PdfPositionFeuille(DebutTexte,NbLigne,IndDetail+NbDetail), '¤ '+ConstArbreEnsemble,MinPolice);
                       Decalage := '     -';
                     end
                   else
-                    Decalage := '¤';
+                    begin
+                      ExtractStrings([SeparateurMulti], [], PChar(PMetierEquipement.Equipement), StringEquip);
+                      ExtractStrings([SeparateurMulti], [], PChar(PMetierEquipement.TypeEquipement), StringType);
+
+                      if StringEquip.Count > 1 then
+                        begin
+                          Inc(IndDetail);
+                          PdfEcrit(PdfPage,DebutFeuille + DecDetail + DebutDetail, DebutFeuille + DecDetail + 110, PdfPositionFeuille(DebutTexte,NbLigne,IndDetail+NbDetail), '¤ '+ConstArbreAuChoix,MinPolice);
+                          Decalage := '     -';
+                        end
+                      else
+                        Decalage := '¤';
+                    end;
 
                   LigneIndice := 0;
                   For LigneEquip in StringEquip do

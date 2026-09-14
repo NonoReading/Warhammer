@@ -1,5 +1,68 @@
 # Warhammer — Contexte projet
 
+**14/09/2026 (suite 5) — AUDIT C, SUITE DU "RESTE" (§2.77) : POINTS 1 A 3 FAITS ET COMPILES,
+DEUX BUGS WINMETIER TROUVES EN COURS DE ROUTE, POINT 3 A RE-VERIFIER (DOUTE DE NONO).**
+Reprise du "reste de l'audit C" laissé de côté suite 4 (Trade Tools/Workshop, Book (X),
+véhicules composés, ~120 objets manquants). Confirmé avec Nono avant de reprendre : ces
+rattachements ne touchent que `BOOK_RULESBOOK.Xml`, donc bien indépendants de la pause
+personnage/avancement de la suite 4.
+- **Point 1 (FAIT, testé OK par Nono)** : 28 occurrences `Trade Tools (X)`/`Workshop (X)`
+  (12 spécialisations + variantes `(as Trade)`) rattachées à `RULES-TRAP_135`/`_136`
+  (entrées génériques déjà cataloguées), niveau de carrière inchangé sur chaque ligne. Diff
+  vérifié (28 retraits = 28 ajouts, 1-pour-1). Compilé, 0 erreur.
+- **🐛 Bug trouvé en testant le point 1 : `ChargeMetierTalent` (`winmetier.pas`) ne gérait pas
+  la syntaxe de choix `RULES-Txxxx/RULES-Tyyyy`** (ex. `RULES-T0046_CRIMINALS/RULES-T0046_
+  SCHOLARS`, Etiquette Criminals ou Scholars), alors que `ChargeMetierCompetence` juste
+  au-dessus gère déjà ce cas pour les compétences. `ChercheTalent` recevait la chaîne
+  entière avec le `/`, ne trouvait rien, libellé vide affiché. Corrigé en reprenant
+  exactement le motif de `ChargeMetierCompetence` (branche `{Au choix}` + une feuille par
+  option), via `ListeTalent` (`chargetalent.pas:121`) — fonction qui existait déjà et
+  savait scinder ce `/`, mais n'était utilisée que côté `wincreation`/`winpersonnage`/
+  `winspecialisation`, jamais dans `WinMetier`. Diff : uniquement des ajouts. Compilé, 0
+  erreur.
+- **🐛 Second bug, conséquence directe du premier : ACCESS VIOLATION en cliquant sur la
+  ligne "Au choix" elle-même** (`winmetier.pas:1015`, `TreeViewMetier1Change`). Même
+  incident que celui déjà documenté dans `Log.txt` (868) pour la branche Compétence
+  ("quand on recopie une forme qui marche, recopier aussi ses gardes") — sauf qu'ici c'est
+  la branche **Talent** qui n'avait pas le garde `if Node.Data <> nil` que la branche
+  Compétence a déjà. Le nœud "Au choix" n'a pas de `Data` ; `NodeData.AdditionalData` sur
+  nil plantait. Corrigé en ajoutant le même garde. Testé OK par Nono (clic sur "Au choix"
+  et sur les deux options).
+- **Point 2 (FAIT, compilé)** : 9 occurrences `Book (X)` (Apothecary/Engineer/Law/
+  Religion×4/Medicine/Cryptography) rattachées à `RULES-TRAP_122/_125/_126/_129/_128/_124`.
+  Laissés en texte libre, sans correspondance exacte au catalogue : `Book (Blank)`,
+  `Book (Herbs)`, un `Book` nu — candidats pour le point 4 plutôt qu'un rattachement forcé.
+  Diff vérifié (9 retraits = 9 ajouts). Pas de confirmation visuelle explicite de Nono sur
+  ce point précis (il a dit "continue" directement).
+- **Point 3 (FAIT, compilé) — À RE-VERIFIER, doute de Nono en fin de session** : les 10
+  occurrences de véhicules composés scindées en deux `<Item>` chacune, même niveau
+  conservé : `Mule and Cart` (×3) → `RULES-TRAP_148` (Mule) + `RULES-TRAP_137` (Cart) ;
+  `Horse and Cart` (×2) → `RULES-TRAP_143` (Draught Horse, choix validé par Nono après
+  discussion : le cheval de trait plutôt que Riding Horse) + `RULES-TRAP_137` (Cart) ;
+  `Storm Lantern and Oil` (×5) → `RULES-TRAP_21` (Storm Lantern) + `RULES-TRAP_19` (seule
+  entrée catalogue contenant "Oil", décrite `"Lamp Oil"`). Diff vérifié (10 lignes retirées,
+  20 ajoutées, 1 pour 2 partout). Compilé, 0 erreur, **pas encore testé visuellement par
+  Nono**.
+  **Doute soulevé par Nono juste avant de partir** : "je pense que c'est Storm Lantern et
+  de l'huile, pas une lampe à huile" — à clarifier à la reprise. Piste en cours au moment de
+  l'interruption : `RULES-TRAP_19` est la SEULE entrée "Oil" de tout `DATABASE/WFRP5`
+  (vérifié par recherche exhaustive), son `<Description language="ENGLISH">` est bien
+  `"Lamp Oil"` (huile combustible pour lampe/lanterne, pas un objet "lampe à huile" séparé)
+  - donc le rattachement mécanique semble correct côté donnée anglaise, mais la remarque de
+  Nono porte peut-être sur l'AFFICHAGE en français dans WinMetier (libellé traduit à
+  vérifier : est-ce qu'il se lit comme "huile de lampe/lanterne" ou comme "lampe à huile" ?
+  je n'ai pas eu le temps de retrouver comment/où ce libellé FR est généré avant qu'il ne
+  parte). **Point de reprise exact** : retrouver le mécanisme de traduction du libellé de
+  `RULES-TRAP_19` (probablement une table de labels `RULES-LAB_*` ou une génération
+  automatique depuis l'anglais — pas trouvé de fichier de traduction dédié dans
+  `DATABASE/WFRP5/` en cherchant "Huile"/"Lamp Oil"), l'afficher à Nono, et confirmer ou
+  corriger le rattachement des 5 occurrences de `Storm Lantern and Oil`.
+- **Reste dans l'audit C** : point 4, ~120 vrais objets manquants (`Rope`, `Symbol of
+  Rank`, `Religious Relic`, `Spyglass`...) à saisir par lots — pas commencé. Proposé à Nono
+  de découper en lots avant de commencer, pas encore tranché.
+
+---
+
 **14/09/2026 (suite 4) — AUDIT C : RATTACHEMENT ARMES/ARMURES (§2.77), DATA_CRAFTMANSHIP AJOUTÉ
 EN V5, ET PAUSE DÉCIDÉE PAR NONO SUR LE VOLET "QUALITÉ" CÔTÉ PERSONNAGE.**
 

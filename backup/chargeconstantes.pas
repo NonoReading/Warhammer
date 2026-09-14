@@ -22,6 +22,17 @@ Const
 
       // Fichier XML de personnages
       ConstXmlRace			= 'Specie';
+      // Attention au vocabulaire : ConstXmlRace ('Specie') désigne l'ETHNIE
+      // (ex. "Humans (Reikland)"), alors que ConstXmlEspece ('Race') désigne la
+      // RACE générique qui regroupe plusieurs ethnies (ex. "Human").
+      ConstXmlEspece			= 'Race';
+      // Balise d'entree du bloc DATA_NATION (ex. <Nation id="RULES-NATION_EMPIRE">) - PAS
+      // le meme role que ConstXmlNationality juste en dessous, qui est le POINTEUR pose sur
+      // une ethnie ; meme separation que <Race>/<Ethnic> ci-dessus, pour la meme raison.
+      ConstXmlNation			= 'Nation';
+      // Ne pas confondre avec ConstXmlRegle ('RULES') plus bas, qui n'est pas une règle de
+      // jeu mais la liste des livres acceptés d'un personnage (chargepersonnage.pas).
+      ConstXmlRegleJeu			= 'Rule';
       ConstXmlWork			= 'Career';
       ConstXmlCarac			= 'Attribut';
       ConstXmlTalent			= 'Talent';
@@ -47,6 +58,8 @@ Const
       ConstXmlSousChapitreCompCreation  = 'SUBCHAPTER_SKILLCREATION';
       ConstXmlChapitreOldWork		= 'CHAPTER_OLDCAREER';
       ConstXmlChapitreEquipement	= 'CHAPTER_ITEM';
+      ConstXmlChapitreCorruption	= 'CHAPTER_CORRUPTION';
+      ConstXmlChapitreMutation	        = 'CHAPTER_MUTATION';
       ConstXmlSousChapitreArme          = 'SUBCHAPTER_WEAPON';
       ConstXmlSousChapitreArmure        = 'SUBCHAPTER_ARMOR';
       ConstXmlSousChapitreArmureSimp    = 'SUBCHAPTER_ARMOR_SET';
@@ -56,13 +69,19 @@ Const
       ConstXmlSousChapitreNiveau        = 'SUBCHAPTER_LEVEL';
       ConstXmlSousChapitreRace          = 'SUBCHAPTER_SPECIE';
       ConstXmlData                      = 'name';
+      ConstXmlEquipementPorte            = 'worn';
+      ConstXmlEquipementQuantite         = 'quantite';
       ConstXmlCodeLivre                 = 'CODE_BOOK';
       ConstXmlLibelleLivre              = 'BOOK';
       ConstXmlVersionLivre              = 'VERSION';
       ConstXmlOfficielLivre             = 'OFFICIAL';
       ConstXmlCompletLivre              = 'COMPLETE';
+      ConstXmlDisclaimerLivre           = 'DISCLAIMER';
       ConstXmlRegle                     = 'RULES';
       ConstXmlOptions                   = 'OPTIONS';
+      // Appartenances du personnage (regiment, ordre de chevalerie, culte) : les codes
+      // des CareerBonus auxquels il adhere. Voir CONTEXT.md 2.44.
+      ConstXmlAppartenance              = 'MEMBERSHIP';
       ConstXmlDataBook                  = 'DATA_BOOK';
       ConstXmlDataAttributCost          = 'DATA_ATTRIBUT_COST';
       ConstXmlDataSkillCost             = 'DATA_SKILL_COST';
@@ -79,21 +98,119 @@ Const
       ConstXmlDataArmor                 = 'DATA_ARMOR';
       ConstXmlDataArmorSimplified       = 'DATA_ARMOR_SIMP';
       ConstXmlDataArmorBonus            = 'DATA_ARMOR_BONUS';
+      ConstXmlDataTrapping              = 'DATA_TRAPPING';
       ConstXmlDataSpell                 = 'DATA_SPELL';
+      ConstXmlDataSpellTalent           = 'DATA_SPELL_TALENT';
+      // Les "Trait (Any)" des ethnies (Provincial / Dukedom / City State / Clan /
+      // Region / Kingdom Trait). Bloc de LIVRE, cite depuis SUBCHAPTER_TALENT d'une
+      // ethnie : une meme liste sert plusieurs ethnies. CONTEXT.md 2.41.
+      ConstXmlDataSpecieTrait           = 'DATA_SPECIE_TRAIT';
+      // Appartenance qui greffe des donnees sur une carriere (regiment, ordre de
+      // chevalerie, culte). Bloc de LIVRE, purement ADDITIF : le livre qui l'apporte
+      // n'a pas a modifier le fichier du livre qui declare la carriere ou l'ethnie.
+      // CONTEXT.md 2.44.
+      ConstXmlDataCareerBonus           = 'DATA_CAREER_BONUS';
       ConstXmlDataRandomTalent          = 'DATA_RANDOM_TALENT';
       ConstXmlDataSpecieCreation        = 'DATA_RANDOM_SPECIE';
       ConstXmlDataCraftsmanship         = 'DATA_CRAFTMANSHIP';
+      ConstXmlDataEspece                = 'DATA_RACE';
+      // Regroupement POLITIQUE/culturel d'ethnies (l'Empire, a terme Bretonnia/Kislev/
+      // Cathay...), distinct de DATA_RACE qui est BIOLOGIQUE (RULES-SPECIE_HUMAN reunit
+      // aussi la Tilee, hors Empire). Meme moule que DATA_RACE : table declarable par
+      // n'importe quel livre, une ethnie cite son code via <Nationality> (facultatif,
+      // contrairement a <Ethnic>). Voir ChargeNation.pas. CONTEXT.md 2.51.
+      ConstXmlDataNation                = 'DATA_NATION';
+      ConstXmlDataRegle                 = 'DATA_RULE';
+      ConstXmlDataRegleMetier           = 'DATA_CAREER_ROLL';
       ConstXmlDataSpecieCareerChoix     = 'DATA_SPECIE_CAREER_CHOICE';
+      ConstXmlDataSpecieCareerDirect    = 'DATA_SPECIE_CAREER_DIRECT';
       ConstXmlDataCareerSubChoice       = 'DATA_CAREER_SUBCHOICE';
       ConstXmlDataPhysicalCorruption    = 'DATA_CORRUPTION_PHYSICAL';
       ConstXmlDataMentalCorruption      = 'DATA_CORRUPTION_MENTAL';
+      ConstXmlDataCorruptionTablePhys   = 'DATA_CORRUPTION_TABLE_PHYSICAL';
+      ConstXmlDataCorruptionTableMent   = 'DATA_CORRUPTION_TABLE_MENTAL';
+      ConstXmlDataCorruptionPhysChance  = 'DATA_CORRUPTION_PHYSICAL_CHANCE';
+      ConstXmlDataCorruptionMentChance  = 'DATA_CORRUPTION_MENTAL_CHANCE';
+      ConstXmlChance                    = 'Chance';
+      ConstXmlLibelle                   = 'Libelle';
+      ConstXmlEffet                     = 'Effet';
       ConstXmlDescription               = 'Description';
       ConstXmlExplanation               = 'Explanation';
       ConstXmlShort                     = 'Short';
+      // Code complet (prefixe de livre inclus) de l'entree generique dont depend une
+      // specialisation de DATA_SKILL_SPECIALIZATION/DATA_TALENT_SPECIALIZATION - remplace
+      // la deduction par radical quand la specialisation vient d'un livre different de sa
+      // generique. Voir CONTEXT.md 2.67.
+      ConstXmlGenerique                 = 'Generique';
       ConstXmlMax                       = 'Max';
       ConstXmlForPdf                    = 'PDF';
       ConstXmlTest                      = 'Test';
+      // Marque un talent comme TRAIT DE CREATURE (Rulebook p.338-341) : acquis a la naissance
+      // par la race, jamais achete ni choisi. Voir CONTEXT.md 2.15.
+      ConstXmlTrait                     = 'Trait';
+      // Acces aux sorts porte par le TALENT, en donnees, a la place des quatre constantes
+      // TalentSortXxx comparees par prefixe (winpersonnage.pas). Deux axes independants :
+      //  <Magic>     priorite d'ouverture du catalogue de sorts
+      //              1 = exclusif (un Domaine ecarte tout le reste)
+      //              2 = cumulable (Miracle, Magie Mineure)
+      //              0 = n'ouvre jamais le catalogue (Benediction)
+      //  <SpellMode> comment les sorts arrivent a l'achat du talent
+      //              AUTO   = les sorts qui citent ce talent sont ajoutes (Benediction)
+      //              CHOICE = une ligne "a choisir" est ajoutee (Miracle)
+      //              NONE   = rien (Domaine, Magie Mineure)
+      // Voir CONTEXT.md 2.18.
+      ConstXmlMagie                     = 'Magic';
+      ConstXmlModeSort                  = 'SpellMode';
+      //  TARIF DES SORTS OUVERTS PAR CE TALENT. Cinq champs, tous portes par les entrees
+      //  GENERIQUES (T0012_*, T0080_*, T0088_*, T0089, T0172_*) et reportes sur les
+      //  specialisations par ChercheTalent, comme Magic et SpellMode.
+      //
+      //     cout = XpMultiplier x max( XpFloor , ceil( n / XpDivisor ) )
+      //
+      //  ou n est le nombre de sorts DEJA connus dans le meme XpPool.
+      //     XpMultiplier  0 = gratuit (Benediction), sinon 50 ou 100
+      //     XpFloor       plancher : 1 = le premier sort est deja payant (Domaine, Chaos)
+      //                              0 = le premier est gratuit (Miracle)
+      //     XpDivisor     largeur d'un palier. Vide = aucune progression, donc forfait.
+      //                   Accepte un nombre ou un bonus d'attribut note (BATTR_x).
+      //     XpFree        sorts offerts a l'achat du talent, donc gratuits. Accepte la
+      //                   meme notation. C'est la regle "you memorise a number of spells
+      //                   equal to your Willpower Bonus" de Petty Magic.
+      //     XpPool        compteur partage. Deux talents portant le meme pool comptent
+      //                   leurs sorts ENSEMBLE - c'est le cas d'Arcane et de Domain.
+      //                   Vide = le talent compte seul.
+      //  Voir CONTEXT.md 2.31 pour les tables du Rulebook dont ces valeurs sortent.
+      ConstXmlXpMultiplicateur          = 'XpMultiplier';
+      ConstXmlXpPlancher                = 'XpFloor';
+      ConstXmlXpDiviseur                = 'XpDivisor';
+      ConstXmlXpOfferts                 = 'XpFree';
+      ConstXmlXpGroupe                  = 'XpPool';
+      ConstModeSortAuto                 = 'AUTO';
+      ConstModeSortChoix                = 'CHOICE';
+      ConstModeSortAucun                = 'NONE';
+      // Valeurs de <Magic>, nommees pour que le code ne compare pas des chiffres nus.
+      ConstMagieAucune                  = 0;
+      ConstMagieExclusive               = 1;
+      ConstMagieCumulable               = 2;
+      // Valeur "vrai" d'une balise XML booleenne (meme convention que <OFFICIAL>/<COMPLETE>).
+      ConstVrai                         = '1';
       ConstXmlEthnic                    = 'Ethnic';
+      // Pointeur FACULTATIF pose sur une ethnie vers son code DATA_NATION (vide = aucune
+      // nation, cas de la plupart des ethnies non-humaines). CONTEXT.md 2.51.
+      ConstXmlNationality               = 'Nationality';
+      // Nombre de competences de race a choisir dans chaque colonne (3 et 3 partout, sauf
+      // le Skink de Lustria qui en prend 2 et 2). Absentes = 3. Voir CONTEXT.md 2.15.
+      ConstXmlNbSkill5                  = 'Skill5';
+      ConstXmlNbSkill3                  = 'Skill3';
+      // Dossier d'icones de niveau propre a l'ethnie, sous \PICTURES\. Balise absente ou
+      // vide = dossier NIV generique. Voir CheminNiveauImage dans ChargeRace.
+      ConstXmlPictureLevel              = 'PictureLevel';
+      // Carriere DONT CELLE-CI EST LA SUITE. Balise facultative de <Career>, absente pour
+      // l'immense majorite des metiers. Contient un code de metier, ou plusieurs separes
+      // par SeparateurMulti. Sa presence, combinee a un premier <Level> superieur a 1, dit
+      // qu'on n'entre pas dans ce metier : on y arrive en montant de niveau depuis le
+      // parent. Voir CONTEXT.md, chantier des carrieres avancees.
+      ConstXmlMetierParent              = 'Parent';
       ConstXmlSousChapitreMetier        = 'SUBCHAPTER_CAREER';
       ConstXmlClass                     = 'Class';
       ConstXmlEquipement                = 'Item';
@@ -103,11 +220,13 @@ Const
       ConstXmlPorteeArme                = 'Reach';
       ConstXmlPrix                      = 'Price';
       ConstXmlEncombrement              = 'Encumbrance';
+      ConstXmlCapacite                  = 'Carries';
       ConstXmlQualite                   = 'Quality';
       ConstXmlMains                     = 'Hand';
       ConstXmlMunition                  = 'Ammunition';
       ConstXmlArmure                    = 'Armor';
       ConstXmlArmureSimplifiee          = 'ArmorSimp';
+      ConstXmlTrapping                  = 'Trapping';
       ConstXmlEmplacement               = 'Location';
       ConstXmlProtection                = 'ArmorPoint';
       ConstXmlType                      = 'Type';
@@ -122,6 +241,16 @@ Const
       ConstXmlDuree                     = 'Duration';
       ConstXmlChoix                     = 'Choice';
       ConstXmlAlternative               = 'Alternative';
+      ConstXmlEntry                     = 'Entry';
+      // Trait d'ETHNIE (bloc DATA_SPECIE_TRAIT, CONTEXT.md 2.41). La balise ne s'appelle
+      // PAS 'Trait' : ce nom est deja pris plus haut par ConstXmlTrait, le drapeau
+      // "trait de creature" d'un talent (2.15). Deux notions differentes, deux balises.
+      ConstXmlSpecieTrait               = 'SpecieTrait';
+      ConstXmlTraitOption               = 'Option';
+      // Un CareerBonus (bloc DATA_CAREER_BONUS, CONTEXT.md 2.44) porte N paliers. Le
+      // palier reutilise ConstXmlNiveau ('Level') comme balise, et ConstXmlOrder pour
+      // SON numero - 'Level' ne peut pas servir aux deux.
+      ConstXmlCareerBonus               = 'CareerBonus';
       ConstXmlId                        = 'id';
       ConstXmlAttribut                  = 'Attribut';
       ConstXmlOrder                     = 'Order';
@@ -139,31 +268,108 @@ Const
       ConstXmlEyeColors                 = 'EyeColors';
       ConstXmlModifieAttribut           = 'ModifyCarac';
       ConstXmlModifieCompetence         = 'ModifySkill';
+      ConstXmlModifieCompetenceAttribut = 'ModifySkillAttribut';
+      ConstXmlModifieArmure             = 'ModifArmour';
+      // Pendant "par type d'arme" des deux ci-dessus, ajoute au 2.44/3d-3 pour le palier
+      // Knight des Ordres de Chevalerie ("+10 CC avec les lances, les epees a deux mains
+      // ou les boucliers") : un bonus qui ne s'applique qu'a CERTAINES armes d'une meme
+      // competence, donc impossible a representer par ModifySkill seul (qui bonifie toute
+      // la competence). name= vise StructureArme.TypeArme (nouveau champ, non un code de
+      // competence) ; l'attribut skill= optionnel restreint en plus a une competence
+      // precise (ex. "Two-handed Swords" = TypeArme SWORD + skill RULES-COMPCOMB_2M, pour
+      // exclure l'Epee de base ou les armes d'escrime qui portent aussi TypeArme SWORD).
+      ConstXmlModifieArme               = 'ModifyWeapon';
+      // Attribut (pas balise - collision avec ConstXmlDataSkill = 'DATA_SKILL' ci-dessus,
+      // repere a la compilation) portant le filtre CodeCompetence facultatif de
+      // <ModifyWeapon>.
+      ConstXmlModifieArmeCompetence     = 'skill';
+      // Pendant "degat" de ModifyWeapon, meme moule mais Facteur additionne au Degat
+      // (CalculDegat) au lieu d'un pourcentage - CONTEXT.md, chantier moteur generique,
+      // migration de Mighty Blow/Accurate Shot (11/09/2026). Cible ne vise pas un type
+      // d'arme precis (StructureArme.TypeArme) mais une CATEGORIE large - voir
+      // ConstCibleModifieDegatCC/CT ci-dessous - ces deux talents bonifient TOUTES les
+      // armes de contact/a distance, pas une famille en particulier.
+      ConstXmlModifieDegat              = 'ModifyDamage';
+      // Quatrieme pendant du meme moule que ModifyCarac/ModifySkill/ModifyWeapon, pour les
+      // paliers de CareerBonus qui n'ont AUCUN equivalent chiffre (palier 4 "Knight of the
+      // Inner Circle" de la quasi-totalite des Ordres de Chevalerie - trait automatique
+      // conditionnel, relance de des, Blessures Critiques en plus, arme qui devient
+      // magique, ignorer une Qualite, immunite...). <SpecialRule name="Nom court">Texte
+      // descriptif</SpecialRule> : name= (ConstXmlData) porte le libelle court, le contenu
+      // texte la description complete. Affichee sur le PDF comme un "talent virtuel" de
+      // plus dans le bloc Talents - decision Nono, CONTEXT.md 2.51, 08/09/2026.
+      ConstXmlSpecialRule               = 'SpecialRule';
       ConstXmlAjouteCompetence          = 'AddSkill';
       ConstXmlOpinions                  = 'OPINIONS';
       ConstXmlOpinion                   = 'Opinion';
       ConstXmlTarget                    = 'target';
       ConstXmlSource                    = 'source';
 
+      // Generalisation du case de calcul de talents de pdfpersonnage.pas (voir
+      // ChargeTalentEffet) : <Effet Cible="..." Forme="..." Facteur="..." Carac="..."/>
+      // pose sur N'IMPORTE QUEL talent, remplace le repérage par code de talent en dur.
+      // "Carac" et non "Attribut" pour ne pas reprendre le nom de la balise <Attribut>
+      // existante (ConstXmlCarac ci-dessus), qui porte les caracteristiques de TEST du
+      // talent - notion differente, meme mot aurait pretait a confusion.
+      // "ConstXmlEffetTalent" et non "ConstXmlEffet" : ce dernier existe deja (l.132),
+      // jamais utilise ailleurs dans le projet (verifie), mais on ne le reprend pas sans
+      // savoir a quoi il etait destine a l'origine.
+      ConstXmlEffetTalent               = 'Effet';
+      ConstXmlEffetCible                = 'Cible';
+      ConstXmlEffetForme                = 'Forme';
+      ConstXmlEffetFacteur              = 'Facteur';
+      ConstXmlEffetCarac                = 'Carac';
+
+      // Moteur generique de bonus/malus "par source" (chargemodificateur.pas, CONTEXT.md) :
+      // <Modificateur Type="ModifySkill|ModifyWeapon|..." Cible="..." Facteur="N"/>, posable
+      // sur n'importe quel Talent. Balise NEUVE et non <ModifySkill>/<ModifyWeapon> : ces deux
+      // noms sont deja pris - ModifySkill par CareerBonus (bonus chiffre) ET par <Talent> lui
+      // meme (ConstXmlModifieCompetence, annotation "Inverse de"/"Bonus" a l'affichage, sans
+      // rapport). Type reutilise les valeurs ConstXmlModifieCompetence/ConstXmlModifieArme
+      // existantes, Cible/Facteur les constantes ci-dessus.
+      ConstXmlModificateur              = 'Modificateur';
+      ConstXmlModificateurFiltre        = 'Filtre';
+
+      // Les trois Formes de <Effet>, vocabulaire ferme.
+      ConstFormeEffetAdditif                = 'Additif';
+      ConstFormeEffetProportionnelAttribut  = 'ProportionnelAttribut';
+      ConstFormeEffetDrapeau                = 'Drapeau';
+
+      // Les Cibles de <Effet> aujourd'hui prises en charge, vocabulaire ferme : les noms
+      // des variables de calcul historiques de pdfpersonnage.pas (Mouv/Chance/Determine ne
+      // sont pas ici, deja sorties du case le 06/09/2026 vers le mecanisme ModifyCarac).
+      // TBonusCC/TBonusCT ne sont plus ici depuis le 11/09/2026 - Mighty Blow/Accurate Shot
+      // migres vers ModifyDamage (ConstCibleModifieDegatCC/CT ci-dessous), meme mecanisme
+      // "par source" que ModifyWeapon plutot que ce moteur Effet dedie.
+      ConstCibleEffetDurACuire           = 'DurACuire';
+      ConstCibleEffetBonusEncomb         = 'BonusEncomb';
+      ConstCibleEffetBonusSprint         = 'BonusSprint';
+      ConstCibleEffetAmePure             = 'AmePure';
+      // Cibles de <Modificateur Type="ModifyDamage">, vocabulaire ferme : categorie large de
+      // l'arme (Corps-a-Corps/Corps-a-Tir), pas un type precis - meme convention que
+      // EquipementCC/EquipementCT (prefixe de CodeArme) plus bas dans ce fichier.
+      ConstCibleModifieDegatCC           = 'CC';
+      ConstCibleModifieDegatCT           = 'CT';
+
       // constantes de passage d'étapes de création de personnages
       ConstSuivant			= 1;
 
       // constantes de caractéristiques
-      ConstCaracCC			= 'ATTR_WS';
-      ConstCaracCT			= 'ATTR_BS';
-      ConstCaracF			= 'ATTR_S';
-      ConstCaracE			= 'ATTR_T';
-      ConstCaracI			= 'ATTR_I';
-      ConstCaracAg			= 'ATTR_Ag';
-      ConstCaracDex			= 'ATTR_Dex';
-      ConstCaracInt			= 'ATTR_Int';
-      ConstCaracFM			= 'ATTR_WP';
-      ConstCaracSoc			= 'ATTR_Fel';
-      ConstCaracDestin		        = 'ATTR_Fate';
-      ConstCaracResil			= 'ATTR_Resil';
-      ConstCaracPointSupp               = 'ATTR_Supp';
-      ConstCaracBlessure                = 'ATTR_Wound';
-      ConstCaracMouvement               = 'ATTR_Move';
+      ConstCaracCC			= 'RULES-ATTR_WS';
+      ConstCaracCT			= 'RULES-ATTR_BS';
+      ConstCaracF			= 'RULES-ATTR_S';
+      ConstCaracE			= 'RULES-ATTR_T';
+      ConstCaracI			= 'RULES-ATTR_I';
+      ConstCaracAg			= 'RULES-ATTR_Ag';
+      ConstCaracDex			= 'RULES-ATTR_Dex';
+      ConstCaracInt			= 'RULES-ATTR_Int';
+      ConstCaracFM			= 'RULES-ATTR_WP';
+      ConstCaracSoc			= 'RULES-ATTR_Fel';
+      ConstCaracDestin		        = 'RULES-ATTR_Fate';
+      ConstCaracResil			= 'RULES-ATTR_Resil';
+      ConstCaracPointSupp               = 'RULES-ATTR_Supp';
+      ConstCaracBlessure                = 'RULES-ATTR_Wound';
+      ConstCaracMouvement               = 'RULES-ATTR_Move';
       ConstBonusCaracCC			= 'BATTR_WS';
       ConstBonusCaracCT			= 'BATTR_BS';
       ConstBonusCaracF			= 'BATTR_S';
@@ -181,7 +387,7 @@ Const
       ConstXpChangerMetierIncomplet     = 200;
       ConstXpChangerClasse              = 100;
 
-      // image de fond et icones
+      // image de fond et icones - generales, communes a toutes les editions
       ConstCheminLogo1                  = '\PICTURES\BACK\LOGO1.png';
       ConstCheminLogo2                  = '\PICTURES\BACK\LOGO2.png';
       ConstCheminBack                   = '\PICTURES\BACK\BACK.jpg';
@@ -199,39 +405,58 @@ Const
       ConstCheminBoutonSort             = '\PICTURES\BACK\BUTTON_SPELL.png';
       ConstCheminImageArme              = '\PICTURES\WEAPON\';
       ConstCheminImageArmure            = '\PICTURES\ARMOR\';
-      ConstCheminImageNiveau            = '\PICTURES\NIV\';
+      ConstCheminImageNiveau            = '\PICTURES\WFRP5\NIV\';
+      // Racine des dossiers d'icones de niveau. ConstCheminImageNiveau juste au-dessus
+      // reste le dossier PAR DEFAUT ; une ethnie peut en designer un autre sous cette
+      // racine via la balise <PictureLevel> (ex : NIV_HELF pour les Hauts Elfes, dont le
+      // livre utilise des glyphes et des couleurs qui lui sont propres).
+      ConstCheminImageNiveauRacine      = '\PICTURES\WFRP4\';
       ConstCheminImagePolice            = '\FONT\';
 
-      // pdf du personnage
-      ConstCheminPdfFront               = '\PICTURES\PDF\FRONT.png';
-      ConstCheminPdfBack                = '\PICTURES\PDF\BACK.png';
-      ConstCheminPdfShadow              = '\PICTURES\PDF\SHADOW.png';
-      ConstCheminPdfMetierBack          = '\PICTURES\PDF\PDF_BACKSHEET.jpg';
-      ConstCheminPdfMetierAdvance       = '\PICTURES\PDF\PDF_ADVANCE_SCHEME.png';
-      ConstCheminPdfMetierLigneG        = '\PICTURES\PDF\PDF_LINE_LEFT.png';
-      ConstCheminPdfMetierLigneD        = '\PICTURES\PDF\PDF_LINE_RIGHT.png';
-      ConstCheminPdfWarhammer           = '\PICTURES\PDF\PDF_WARHAMMER.png';
-      ConstCheminPdfRolePlay            = '\PICTURES\PDF\PDF_ROLEPLAY.png';
-      ConstCheminPdfUbersreik           = '\PICTURES\PDF\PDF_UBERSREIK.png';
+      // pdf du personnage - par edition
+      ConstCheminPdfFront               = '\PICTURES\WFRP4\PDF\FRONT.png';
+      ConstCheminPdfBack                = '\PICTURES\WFRP4\PDF\BACK.png';
+      ConstCheminPdfShadow              = '\PICTURES\WFRP4\PDF\SHADOW.png';
+      ConstCheminPdfMetierBack          = '\PICTURES\WFRP4\PDF\PDF_BACKSHEET.jpg';
+      ConstCheminPdfMetierAdvance       = '\PICTURES\WFRP4\PDF\PDF_ADVANCE_SCHEME.png';
+      ConstCheminPdfMetierLigneG        = '\PICTURES\WFRP4\PDF\PDF_LINE_LEFT.png';
+      ConstCheminPdfMetierLigneD        = '\PICTURES\WFRP4\PDF\PDF_LINE_RIGHT.png';
+      ConstCheminPdfWarhammer           = '\PICTURES\WFRP4\PDF\PDF_WARHAMMER.png';
+      ConstCheminPdfRolePlay            = '\PICTURES\WFRP4\PDF\PDF_ROLEPLAY.png';
+      ConstCheminPdfUbersreik           = '\PICTURES\WFRP4\PDF\PDF_UBERSREIK.png';
 
       // chemin des fichiers de données de base
-      ConstCheminAttribut               = '\DATABASE\LANGUAGE\%LANG%\ATTR.TXT';
+      ConstCheminAttribut               = '\DATABASE\WFRP4\LANGUAGE\%LANG%\ATTR.TXT';
 
       // chemin des fichiers liés à l'expérience
-      ConstCheminXpAttribut             = '\DATABASE\ATTR_AUGM.TXT';
-      ConstCheminXpCompetence           = '\DATABASE\SKILL_AUGM.txt';
+      ConstCheminXpAttribut             = '\DATABASE\WFRP4\ATTR_AUGM.TXT';
+      ConstCheminXpCompetence           = '\DATABASE\WFRP4\SKILL_AUGM.txt';
 
       // chemin des textes
-      ConstCheminLivre                  = '\DATABASE\';
       ConstCheminLivreExport            = '\DATABASE_EXPORT\';
+      // Libellés/messages d'interface (RULES-LAB_*/RULES-MESS_*) : sortis du RULESBOOK vers un
+      // livre a part le 13/09/2026 (demande de Nono, CONTEXT.md §2.70) pour ne pas etre
+      // duplique entre WFRP4\ et WFRP5\. Vit directement sous DATABASE\, hors du dossier
+      // d'edition, charge par un appel explicite (pas de scan) - warhammersource.pas.
+      ConstCheminInterface              = '\DATABASE\';
+      ConstFichierInterface             = 'INTERFACE';
+      ConstFichierInterfaceFrancais     = 'INTERFACE_FRANCAIS';
+      // Valeur du tag <BOOK> d'INTERFACE.Xml/INTERFACE_FRANCAIS.Xml (Livre dans ListTexte/
+      // ListTraduction) - sert de filtre à Traduit() pour retraduire les libellés
+      // d'interface sans toucher aux autres livres (CONTEXT.md §2.70).
+      ConstInterfaceBook                 = 'INTERFACE';
       ConstFichierIni                   = '\INI.TXT';
       ConstCheminTravail                = '\TRAVAIL\';
       ConstIniLangue                    = 'LANG=';
-      ConstIniLivre                     = 'BOOK=';
+      // Préfixe seul (pas de '=') depuis le 13/09/2026 : une ligne par édition dans le .INI,
+      // ex. 'BOOKWFRP4=', 'BOOKWFRP5=' (ChargeIni/SauveIni, warhammersource.pas, CONTEXT.md
+      // §2.70).
+      ConstIniLivre                     = 'BOOK';
+      ConstIniVersion                   = 'VERSION=';
+      // Langue de l'interface (RULES-LAB_*/RULES-MESS_*), décorrélée de ConstIniLangue (qui
+      // reste la langue des livres/données) - Nono, 13/09/2026, CONTEXT.md §2.70.
+      ConstIniLangueInterface           = 'LANGINTERFACE=';
       ConstAnglais                      = 'ENGLISH';
-
-      // Chemin des personnages
-      ConstCheminPersonnage             = '\SAVED_CARACTERS\';
 
       // Police
       ConstPoliceTaille                 = 10;
@@ -255,33 +480,34 @@ Const
       NbMaxCompetence                   = 12;
 
       // Talents qui donnent des bonus
-      TalentGenerique                   = 'T*';
-      TalentAmePure                     = 'T0005';
-      TalentDurACuire                   = 'T0047';
-      TalentCostaud                     = 'T0035';
-      TalentVeloce                      = 'T0162';
-      TalentChanceux                    = 'T0020';
-      TalentObstine                     = 'T0107';
-      TalentCoutPuissant                = 'T0037';
+      TalentGenerique                   = 'RULES-T*';
+      // TalentAmePure / TalentDurACuire / TalentCostaud / TalentCoutPuissant /
+      // TalenttirPrecis / TalentSprinteur SUPPRIMEES le 10/09/2026 : generalisees en
+      // <Effet Cible="..."/> (ChargeTalentEffet, PersonnageTalentEffet dans
+      // pdfpersonnage.pas), plus de code de talent en dur pour ces six-la. Voir
+      // A FAIRE.txt "GENERICISER LE CASE DE CALCUL DES TALENTS".
+      // TalentVeloce / TalentChanceux / TalentObstine deja mortes depuis le 06/09/2026
+      // (migrees vers ModifyCarac/PersonnageTalentAttributModif) mais pas encore
+      // retirees ici - hors perimetre de ce chantier, voir A FAIRE.txt.
       TalentHaineSacree                 = 'T0070';
-      TalenttirPrecis                   = 'T0149';
-      TalentSprinteur                   = 'T0145';
-      TalentSortBenediction             = 'T0012';
-      TalentSortMiracle                 = 'T0080';
-      TalentSortMagieMineure            = 'T0089';
-      TalentSortDomaine                 = 'T0088';
+      // TalentSortBenediction / TalentSortMiracle / TalentSortMagieMineure / TalentSortDomaine
+      // ('T0012'/'T0080'/'T0089'/'T0088') SUPPRIMEES le 23/08/2026 : la liste des talents qui
+      // donnent acces aux sorts vit maintenant dans les donnees, balises <Magic>/<SpellMode>
+      // (voir ConstXmlMagie plus haut). Ajouter un talent magique ne demande plus de recompiler.
+      // CONTEXT.md 2.18.
 
       // Type d'équipement et de sorts
       EquipementCC                      = 'COMB_';
       EquipementCT                      = 'PROJ_';
       EquipementMU                      = 'MUNI_';
       EquipementAR                      = 'ARMO_';
+      EquipementTR                      = 'TRAP_';
       EquipementQualite                 = '(Q)';
       BonusProtection                   = 'WEAPB18 ';
-      BonusBras                         = 'ARMOL_ARM';
-      BonusCorps                        = 'ARMOL_BODY';
-      BonusJambes                       = 'ARMOL_LEG';
-      BonusTete                         = 'ARMOL_HEAD';
+      BonusBras                         = 'RULES-ARMOL_ARM';
+      BonusCorps                        = 'RULES-ARMOL_BODY';
+      BonusJambes                       = 'RULES-ARMOL_LEG';
+      BonusTete                         = 'RULES-ARMOL_HEAD';
       SortBenediction                   = 'BENED_';
       SortMiracle                       = 'MIRAC_';
       SortMineur                        = 'SPELL_';
@@ -289,19 +515,27 @@ Const
       SortCouleur                       = 'COLOR_';
       FabricationBonus                  = 'BONUS';
       FabricationMalus                  = 'MALUS';
+      // Meme convention que FabricationBonus/FabricationMalus (valeur du champ <Modifier>),
+      // mais signale en plus le cas Bulky (Rulebook p.284) : la piece reste a Enc 1 meme
+      // portee, au lieu du plancher 0 habituel. FabricationEstBulky (chargefabrication.pas)
+      // le lit. A FAIRE.txt, chantier qualites de fabrication.
+      FabricationBulky                  = 'BULKY';
+      // Modulent le malus ARMOB (PersonnageArmureBonusCompetenceModifPortee, chargepersonnage.pas)
+      // de LA piece qui porte la qualite/le defaut : Practical le reduit de 10 (plancher 0),
+      // Unreliable le double (Rulebook, DATA_CRAFTMANSHIP). FabricationEstPractical/
+      // FabricationEstUnreliable (chargefabrication.pas) les lisent. CONTEXT.md 2.59.
+      FabricationPractical               = 'PRACTICAL';
+      FabricationUnreliable              = 'UNRELIABLE';
       SortChaos                         = 'CHAOS_';
-      RaceHumain                        = 'SPECIE_HUMAN';
-      RaceElf                           = 'SPECIE_ELF';
-      RaceNain                          = 'SPECIE_DWARF';
-      RaceOgre                          = 'SPECIE_OGRE';
-      RaceGnome                         = 'SPECIE_GNOME';
-      RaceHalfling                      = 'SPECIE_HALFLING';
-      RaceGoblin                        = 'SPECIE_GOBLIN';
-      RaceOrc                           = 'SPECIE_ORC';
-      RaceVampire                       = 'SPECIE_VAMPIRE';
-      RaceFamilier                      = 'SPECIE_FAMILIAR';
-      CorruptionPhysique                = 'CORRUPTION_PHYSICAL';
-      CorruptionMentale                 = 'CORRUPTION_MENTAL';
+      // Les constantes RaceHumain/RaceElf/RaceNain/... ('SPECIE_HUMAN', 'SPECIE_ELF', ...)
+      // ont été supprimées le 20/08/2026 : elles n'étaient utilisées nulle part, et la liste
+      // des RACES est désormais portée par le bloc XML DATA_RACE (voir ChargeEspece.pas).
+      CorruptionPhysique                = 'RULES-CORRUPTION_PHYSICAL';
+      CorruptionMentale                 = 'RULES-CORRUPTION_MENTAL';
+      // "GM's Choice" (Physical Corruption Table, 96-00) - pas une vraie mutation, une
+      // instruction de consulter le MJ (CONTEXT.md §2.7). Seule la table Physical a ce cas ;
+      // Mental n'a pas d'entrée équivalente à 96-00 ("Worried Jitters", une entrée normale).
+      CorruptionChoixMJ                 = 'CORPHY_020';
 
       KEY_ESC                           = #27;
 
@@ -328,9 +562,17 @@ Const
 
       ConstLivreOfficiel                    = 'O';
       ConstLivreFacultatif                  = 'F';
+      // Valeur de la balise <OFFICIAL> d'un livre de fan (0 = livre de règles, 1 = supplément
+      // officiel, 2 = livre de fan). Sert à la fois au 'F' de la colonne O/F du tableau des
+      // livres et au préfixe "(F)" devant le nom du livre (chargetexte.pas, GetTexteLibelle).
+      ConstLivreFanOfficiel                 = 2;
 
-      ConstLabSelSpe                        = 'LAB_129';
-      ConstLabAdd                           = 'LAB_143';
+      ConstLabSelSpe                        = 'RULES-LAB_129';
+      ConstLabAdd                           = 'RULES-LAB_143';
+      // Ligne "aucune" en tete de la liste des appartenances proposees. Elle est
+      // toujours presente : le programme ne sait pas deviner qu'un soldat est un
+      // mercenaire sans regiment. CONTEXT.md 2.44.
+      ConstLabSansAppartenance              = 'RULES-LAB_178';
 
       ConstTransparent                      = '_TRANS';
 
@@ -339,14 +581,22 @@ Const
       ConstPCompetence                      = 'PCompetence';
       ConstPTalent                          = 'PTalent';
       ConstPRace                            = 'PRace';
+      ConstPEspece                          = 'PEspece';
+      ConstPNation                          = 'PNation';
+      ConstPTrait                           = 'PTrait';
+      ConstPTraitOption                     = 'PTraitOption';
+      ConstPCareerBonus                     = 'PCareerBonus';
+      ConstPRegle                           = 'PRegle';
       ConstPMetier                          = 'PMetier';
       ConstPArme                            = 'PArme';
       ConstPArmeBonus                       = 'PArmeBonus';
       ConstPArmure                          = 'PArmure';
       ConstPArmureSimplifiee                = 'PArmureSimplifiee';
+      ConstPTrapping                        = 'PTrapping';
       ConstPArmureBonus                     = 'PArmureBonus';
       ConstPSort                            = 'PSort';
       ConstPFabrication                     = 'PFabrication';
+      ConstPCorruptionTable                 = 'PCorruptionTable';
 
       ConstCEsquive                         = 'RULES-COMPESQU';
       ConstCCalme                           = 'RULES-COMPCALM';
@@ -392,9 +642,24 @@ Var
   SelWinLibelle:       String = '';
   SelWinType:          String = '';
   ChoixWinEquipement:  String = '';
+  // Choix d'une APPARTENANCE (regiment, ordre, culte) dans WinSpecialisation. Choix... =
+  // la liste des codes candidats, separes par des virgules, calculee par
+  // AppartenancesCandidates ; Select... = le code retenu, VIDE si le joueur a repondu
+  // "aucune" ou ferme la fenetre. ChoixWinTypeFichier vaut alors ConstXmlDataCareerBonus,
+  // aucune constante de type n'a eu a etre creee. CONTEXT.md 2.44.
+  SelectWinCareerBonus:String = '';
+  ChoixWinCareerBonus: String = '';
   SelectWinLivre:      String = '';
   ChoixWinLivre:       String = '';
   ListeLivre:          String = '';
+  // Sélection de livres cochés, une entrée par édition (Name=Version, Value=liste des
+  // codes) - une seule liste partagée entre éditions au catalogue très différent (WFRP4
+  // ~20 livres, WFRP5 1 seul aujourd'hui) faisait qu'un enregistrement fait sur l'une
+  // écrasait la sélection utile à l'autre au redémarrage (Nono, 13/09/2026, CONTEXT.md
+  // §2.70). ListeLivre ci-dessus reste la sélection RÉSOLUE de l'édition active (lue par
+  // PeuplerTabLivre/WinFiltre, inchangés) - synchronisée depuis cette table à chaque
+  // changement de version (ChargeIni/ComboBoxVersionSelect, warhammersource.pas).
+  ListeLivreParVersion: TStringList;
   WinFiltreAppelant:   String = '';
   SelectWinGroupe:     String = '';
   ChoixWinGroupe:      String = '';
@@ -402,6 +667,22 @@ Var
   SelectWinF:          Integer = 0;
   SelectWinE:          Integer = 0;
   SelectWinFM:         Integer = 0;
+
+  // Fenêtre WinMutation (CONTEXT.md §2.7) - même principe Select.../Choix... que les autres
+  // fenêtres modales : WinPersonnage renseigne les entrées avant ShowModal, WinMutation
+  // renseigne le résultat avant de se fermer.
+  MutationCodeRace:             String  = '';    // entrée : Personnage.Race, pour le tirage Physical/Mental
+  MutationResilienceDisponible: Boolean = false;  // entrée : Résilience totale actuelle > 0
+  MutationChoix:                String  = '';    // sortie : '' (annulé) / 'RESILIENCE' / 'MUTATION'
+  // sortie (si MUTATION) : référence stockée sur le personnage (Personnage.Mutations, CONTEXT.md
+  // §2.7) - le code stable du catalogue (ex. "RULES-CORMEN_007"), pas le texte résolu ni la
+  // plage de jet, pour rester cohérent avec le reste du projet (codes stockés, texte retraduit
+  // à l'affichage) et rester valide même si un futur livre renumérote les tables de chance, et
+  // permettre de retrouver/retirer une mutation précise plus tard (mutation perdue, rare mais
+  // prévu par le livre).
+  MutationCode:                 String  = '';
+  MutationLibelle:              String  = '';    // sortie : nom de la mutation tirée (si MUTATION)
+  MutationEffet:                String  = '';    // sortie : texte de l'effet de la mutation tirée
 
   // Constantes de thèmes des données des arbres d'affichages
   ConstArbreAttribut:       String;
@@ -436,9 +717,29 @@ Var
   NbLivreMetier:           Integer;
 
   ValLangue:               String = ConstAnglais;
+  ValVersion:              String = '';
+  ValLangueInterface:      String = ConstAnglais;
 
-  AvecSousMetier:          Boolean = false;
-  AvecRaceChoixMetier:     Boolean = false;
+  // ConstCheminLivre/ConstCheminPersonnage - Var (pas Const) depuis le 13/09/2026
+  // (CONTEXT.md §2.70) : doivent changer ensemble avec ValVersion (WFRP4/WFRP5) le jour ou
+  // le rechargement a chaud est cable. Memes valeurs par defaut qu'avant, seule la nature
+  // de la declaration change ici.
+  ConstCheminLivre:       String = '\DATABASE\WFRP4\';
+  ConstCheminPersonnage:  String = '\SAVED_CARACTERS\WFRP4\';
+
+  // Deux interrupteurs jamais affectés ailleurs dans le projet : declarés, testés, mais
+  // laissés à false, ce qui désactivait silencieusement les mécanismes correspondants.
+  //  - AvecSousMetier      -> DATA_CAREER_SUBCHOICE (second jet de dé pour un sous-métier),
+  //                           chargemetiersousmetier.pas. Activé le 21/08/2026 : 22 entrées
+  //                           dans Up in Arms et 8 dans Winds of Magic, saisies de longue date
+  //                           et jamais utilisées jusque-là.
+  //  - AvecRaceChoixMetier -> DATA_SPECIE_CAREER_CHOICE (substitution d'un métier par un
+  //                           autre selon l'ethnie), chargemetierracechoixmetier.pas.
+  //                           Activé le 21/08/2026 : les entrées existaient depuis Lustria
+  //                           mais n'avaient jamais rien produit (repéré par Nono en testant
+  //                           la substitution Boatman -> Beachcomber des Norses).
+  AvecSousMetier:          Boolean = true;
+  AvecRaceChoixMetier:     Boolean = true;
 
   ConstPoliceNom:          String = 'Arial.ttf';
   ConstPoliceGras:         String = ' Bold';
@@ -469,9 +770,9 @@ Var
   LivreNbMetier:           Integer;
 
   // chemins génériques
-  ConstCheminImageRace:    String    = '\DATABASE\BOOKS\%BOOK%\PICTURE\SPECIE\';
-  ConstCheminImageMetier:  String    = '\DATABASE\BOOKS\%BOOK%\PICTURE\CLASS\';
-  ConstCheminImageSort:    String    = '\DATABASE\BOOKS\%BOOK%\PICTURE\SPELL\';
+  ConstCheminImageRace:    String    = '\DATABASE\WFRP4\BOOKS\%BOOK%\PICTURE\SPECIE\';
+  ConstCheminImageMetier:  String    = '\DATABASE\WFRP4\BOOKS\%BOOK%\PICTURE\CLASS\';
+  ConstCheminImageSort:    String    = '\DATABASE\WFRP4\BOOKS\%BOOK%\PICTURE\SPELL\';
 
   AttributNiveau:          String;
 
@@ -489,15 +790,21 @@ Var
   ChoixWinJetDeja:    TStringList;
   ChoixWinJetValeur:  Integer;
 
-  CouleurOk:      String = '6';
-  CouleurNot:     String = '5';
-  CouleurKo:      String = '7';
-  CouleurFondNot: TColor = TColor($8487F0);   // rouge saumon (5.png) - action requise
-  CouleurFondOk:  TColor = TColor($57ED71);   // vert (6.png)
-  CouleurFondKo:  TColor = TColor($7F7F7F);   // gris (7.png)
+  // Indices d'image des pastilles d'etat des tableaux d'avancement. Elles vivent dans le
+  // MEME dossier et la MEME liste d'images que les icones de niveau de carriere, et elles
+  // occupaient 5, 6 et 7 - c'est-a-dire juste au-dessus des quatre niveaux de l'epoque.
+  // Deplacees a 20-22 le 31/08/2026 : High Elf Player's Guide apporte une carriere a CINQ
+  // niveaux, et le niveau 5 serait venu reclamer l'indice de CouleurNot. Vingt niveaux de
+  // carriere mettraient des annees a arriver, s'ils arrivent.
+  CouleurNot:     String = '20';
+  CouleurOk:      String = '21';
+  CouleurKo:      String = '22';
+  CouleurFondNot: TColor = TColor($8487F0);   // rouge saumon (20.png) - action requise
+  CouleurFondOk:  TColor = TColor($57ED71);   // vert (21.png)
+  CouleurFondKo:  TColor = TColor($7F7F7F);   // gris (22.png)
 
 procedure NettoyerElementsFenetre(Fenetre: TWinControl);
-procedure AdjustGridColumnsWidth(Grid: TStringGrid; MaxHeight: Integer; ForceMax: Boolean; MaxWidth: boolean; AutoSizeCol: Boolean = true; AddHeight: Integer = 0; AddWidth: Integer = 0; ForceScroll: TScrollStyle = ssautoboth);
+procedure AdjustGridColumnsWidth(Grid: TStringGrid; MaxHeight: Integer; ForceMax: Boolean; MaxWidth: boolean; AutoSizeCol: Boolean = true; AddHeight: Integer = 0; AddWidth: Integer = 0; ForceScroll: TScrollStyle = ssautoboth; ScaleDpi: Boolean = true);
 procedure AdjustTKGridColumnsWidth(Grid: TKGrid; MaxHeight: Integer; ForceMax: Boolean; MaxWidth: boolean; AutoSizeCol: Boolean = true; AddHeight: Integer = 0; AddWidth: Integer = 0; ForceScroll: TScrollStyle = ssautoboth);
 Function GridAjouteColonne(Grid: TStringGrid; Caption: String = ''; Widths: Integer = 0; Align: TAlignment = taLeftJustify): Integer;
 procedure ClearStringGrid(Grid: TStringGrid);
@@ -510,6 +817,8 @@ Function LivreOrdre(Livre: String): String;
 Function CheminFichier(TypeDonnee: String; Livre: String): String;
 function extractnumbers(line: string): String;
 function VerifieRecherche():Boolean;
+Function LivreRepertoireTravail(CodeLivre, Langue: String): String;
+Function LivreFichierActuel(CodeLivre, Langue: String): String;
 
 implementation
 
@@ -533,7 +842,7 @@ procedure NettoyerElementsFenetre(Fenetre: TWinControl);
       end;
   end;
 
-procedure AdjustGridColumnsWidth(Grid: TStringGrid; MaxHeight: Integer; ForceMax: Boolean; MaxWidth: boolean; AutoSizeCol: Boolean = true; AddHeight: Integer = 0; AddWidth: Integer = 0; ForceScroll: TScrollStyle = ssautoboth);
+procedure AdjustGridColumnsWidth(Grid: TStringGrid; MaxHeight: Integer; ForceMax: Boolean; MaxWidth: boolean; AutoSizeCol: Boolean = true; AddHeight: Integer = 0; AddWidth: Integer = 0; ForceScroll: TScrollStyle = ssautoboth; ScaleDpi: Boolean = true);
   var
     Col:   Integer;
     Lig:   Integer;
@@ -581,7 +890,16 @@ procedure AdjustGridColumnsWidth(Grid: TStringGrid; MaxHeight: Integer; ForceMax
       Grid.Width := TotalC + 5
     else if Grid.Width > (TotalC + 5) then
       Grid.Width := TotalC + 5;
-    Grid.ScaleFormToDesign(96);
+    // ScaleFormToDesign recalcule la taille de la fenêtre PROPRIÉTAIRE (pas juste la
+    // grille) à partir de sa taille actuelle - un rappel de cette fonction sur une fenêtre
+    // déjà mise à l'échelle une première fois (au FormCreate) la remet à l'échelle une
+    // deuxième fois par-dessus, cumulant l'agrandissement (bug du 18/08/2026, découvert
+    // via RafraichirLibellesMenu qui rappelle AdjustGridColumnsWidth à chaque changement
+    // de langue en direct, CONTEXT.md §2.8) - ScaleDpi=false permet de sauter ce rappel
+    // pour un simple rafraîchissement de contenu, sans toucher les appels existants
+    // (paramètre optionnel, true par défaut = comportement inchangé partout ailleurs).
+    if ScaleDpi then
+      Grid.ScaleFormToDesign(96);
     if not MaxWidth then
       if  Asc > 0 then
         Grid.Width := Grid.Width + Asc;
@@ -894,16 +1212,29 @@ function extractnumbers(line: string): String;
   end;
 
 Function VerifieRecherche():Boolean;
-var
-  Trouve: Boolean;
+// Durci une premiere fois le 06/09/2026 (CONTEXT.md §2.49 etape 4), puis REVERTE le jour
+// meme : le durcissement cassait tous les GetTexteLibelle('PDF_XXX'/'LAB_XXX'/'MESS_XXX'/
+// 'SHORTATTR_XXX'/'CORRUPTION_XXX') ecrits en dur sans prefixe RULES- (plusieurs centaines
+// d'occurrences au total, PDF normal ET Feldo2P) - perimetre bien plus large que ce que
+// mesurait le mouchard TraceNu*, qui ne voyait que les validations faites au chargement des
+// livres, pas les appels faits pendant la generation d'un PDF.
+// Redurci le 06/09/2026 (encore la meme nuit) une fois TOUTES ces occurrences prefixees
+// (223 PDF_, 22 LAB_, 57 MESS_, 11 SHORTATTR_, 2 CORRUPTION_ - CONTEXT.md §2.49 etape 4),
+// verifie fichier par fichier par diff, et apres tour d'ecran de Nono sans affichage errone.
+// RE-REVERTE le 06/09/2026 (meme nuit, encore plus tard) : Nono a signale les Basic Skills
+// entierement a 0/vides sur les deux PDF. Cause : ChercheCompetence (chargecompetence.pas)
+// suit la MEME convention que GetTexteLibelle - CompareRechercheValeur(code prefixe en 1er,
+// code court en 2nd) - mais avec des codes courts ecrits en dur eux aussi, jamais vus par
+// l'audit precedent qui ne portait que sur les appels a GetTexteLibelle. Trouve :
+// PdfPersonnageCompetenceTri (pdfpersonnage.pas l.417-442), 26 codes nus type 'COMPESQU',
+// tous des competences de base RULEBOOK (confirme par Nono), prefixes RULES-COMPXXX.
+// Redurci une 3e fois le 06/09/2026 (encore plus tard) une fois ces 26 codes prefixes.
+// Decision de Nono (06/09) : corriger au fil de l'eau plutot qu'auditer tout le projet -
+// si un autre ecran affiche 0/vide apres ce changement, meme cause probable (code litteral
+// nu passe a une fonction Cherche*), chercher le meme motif (ListXxx.Add('CODE') sans
+// prefixe RULES- juste avant l'appel a ChercheXxx) plutot que d'incriminer autre chose.
 begin
-  if (LivreRecherche = LivreValeur) and (CodeRecherche = CodeValeur) then
-    Trouve := True
-  else if (LivreValeur = '') and (CodeRecherche = CodeValeur) then
-    Trouve := True
-  else
-    Trouve := False;
-  result := Trouve;
+  result := (LivreRecherche = LivreValeur) and (CodeRecherche = CodeValeur);
   end;
 
 Function LivreRepertoireTravail(CodeLivre, Langue: String): String;

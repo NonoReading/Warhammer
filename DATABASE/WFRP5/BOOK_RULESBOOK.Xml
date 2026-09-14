@@ -4234,10 +4234,10 @@ As sailing one ship is not so different to sailing another, having any Sail Spec
 <Item name="RULES-ARMO_06">"1"</Item>
 <Item name="RULES-TRAP_107">"1"</Item>
 <Item name="RULES-TRAP_130">"2"</Item>
-<Item name="Trade Tools (Apothecary)">"2"</Item>
+<Item name="RULES-TRAP_135">"2"</Item>
 <Item name="Apprentice">"3"</Item>
-<Item name="Book (Apothecary)">"3"</Item>
-<Item name="Workshop (Apothecary)">"3"</Item>
+<Item name="RULES-TRAP_122">"3"</Item>
+<Item name="RULES-TRAP_136">"3"</Item>
 <Item name="Commission Papers">"4"</Item>
 <Item name="Large Workshop (Apothecary)">"4"</Item>
 </SUBCHAPTER_ITEM>
@@ -4357,11 +4357,11 @@ As sailing one ship is not so different to sailing another, having any Sail Spec
   <!-- Savant (Engineering) -->
 </SUBCHAPTER_TALENT>
 <SUBCHAPTER_ITEM>
-<Item name="Book (Engineer)">"1"</Item>
+<Item name="RULES-TRAP_125">"1"</Item>
 <Item name="Hammer and Spikes">"1"</Item>
 <Item name="RULES-TRAP_130">"2"</Item>
-<Item name="Trade Tools (Engineer)">"2"</Item>
-<Item name="Workshop (Engineer)">"3"</Item>
+<Item name="RULES-TRAP_135">"2"</Item>
+<Item name="RULES-TRAP_136">"3"</Item>
 <Item name="Library (Engineering)">"4"</Item>
 <Item name="Quality Trade Tools (Engineer)">"4"</Item>
 <Item name="Large Workshop (Engineer)">"4"</Item>
@@ -4482,7 +4482,7 @@ As sailing one ship is not so different to sailing another, having any Sail Spec
   <!-- Savvy -->
 </SUBCHAPTER_TALENT>
 <SUBCHAPTER_ITEM>
-<Item name="Book (Law)">"1"</Item>
+<Item name="RULES-TRAP_126">"1"</Item>
 <Item name="Magnifying Glass">"1"</Item>
 <Item name="Court Robes">"2"</Item>
 <Item name="RULES-TRAP_130">"2"</Item>
@@ -4610,7 +4610,7 @@ As sailing one ship is not so different to sailing another, having any Sail Spec
 <SUBCHAPTER_ITEM>
 <Item name="RULES-TRAP_061">"1"</Item>
 <Item name="RULES-TRAP_062">"1"</Item>
-<Item name="Book (Religion)">"2"</Item>
+<Item name="RULES-TRAP_129">"2"</Item>
 <Item name="Religious Relic">"2"</Item>
 <Item name="Abbey">"3"</Item>
 <Item name="Library (Theology)">"3"</Item>
@@ -4734,11 +4734,11 @@ As sailing one ship is not so different to sailing another, having any Sail Spec
 <SUBCHAPTER_ITEM>
 <Item name="Bandages">"1"</Item>
 <Item name="Healing Draught">"1"</Item>
-<Item name="Book (Medicine)">"2"</Item>
+<Item name="RULES-TRAP_128">"2"</Item>
 <Item name="RULES-TRAP_130">"2"</Item>
-<Item name="Trade Tools (Physician)">"2"</Item>
+<Item name="RULES-TRAP_135">"2"</Item>
 <Item name="Apprentice">"3"</Item>
-<Item name="Workshop (Physician)">"3"</Item>
+<Item name="RULES-TRAP_136">"3"</Item>
 <Item name="Courtly Attire">"4"</Item>
 <Item name="Letter of Appointment">"4"</Item>
 </SUBCHAPTER_ITEM>
@@ -4860,7 +4860,7 @@ As sailing one ship is not so different to sailing another, having any Sail Spec
 <SUBCHAPTER_ITEM>
 <Item name="RULES-TRAP_061">"1"</Item>
 <Item name="RULES-TRAP_062">"1"</Item>
-<Item name="Book (Religion)">"2"</Item>
+<Item name="RULES-TRAP_129">"2"</Item>
 <Item name="Ceremonial Robes">"2"</Item>
 <Item name="Quality Robes">"3"</Item>
 <Item name="Religious Relic">"3"</Item>
@@ -5118,7 +5118,7 @@ As sailing one ship is not so different to sailing another, having any Sail Spec
 <Item name="RULES-TRAP_146">"3"</Item>
 <Item name="Magical Item">"3"</Item>
 <Item name="Library (Magic)">"4"</Item>
-<Item name="Workshop (Magic)">"4"</Item>
+<Item name="RULES-TRAP_136">"4"</Item>
 </SUBCHAPTER_ITEM>
 </Career>
 <Career id="RULES-WORK01">
@@ -5368,9 +5368,9 @@ As sailing one ship is not so different to sailing another, having any Sail Spec
 <Item name="RULES-ARMO_06">"1"</Item>
 <Item name="1d10 Rags">"1"</Item>
 <Item name="RULES-TRAP_130">"2"</Item>
-<Item name="Trade Tools (as Trade)">"2"</Item>
+<Item name="RULES-TRAP_135">"2"</Item>
 <Item name="Apprentice">"3"</Item>
-<Item name="Workshop (as Trade)">"3"</Item>
+<Item name="RULES-TRAP_136">"3"</Item>
 <Item name="Guild">"4"</Item>
 <Item name="Quality Clothing">"4"</Item>
 </SUBCHAPTER_ITEM>
@@ -5747,7 +5747,8 @@ As sailing one ship is not so different to sailing another, having any Sail Spec
 <SUBCHAPTER_ITEM>
 <Item name="RULES-TRAP_081">"1"</Item>
 <Item name="Canvas Tarpaulin">"1"</Item>
-<Item name="Mule and Cart">"1"</Item>
+<Item name="RULES-TRAP_148">"1"</Item>
+<Item name="RULES-TRAP_137">"1"</Item>
 <Item name="3d10 Shillings">"1"</Item>
 <Item name="Barge or 2 Wagons">"2"</Item>
 <Item name="20 GC">"2"</Item>
@@ -6389,7 +6390,7 @@ As sailing one ship is not so different to sailing another, having any Sail Spec
 <Item name="Sling Bag containing Trade Tools (Artist)">"2"</Item>
 <Item name="Apprentice">"3"</Item>
 <Item name="Patron">"3"</Item>
-<Item name="Workshop (Artist)">"3"</Item>
+<Item name="RULES-TRAP_136">"3"</Item>
 <Item name="3 Apprentices">"4"</Item>
 <Item name="Large Workshop (Artist)">"4"</Item>
 <Item name="Library (Art)">"4"</Item>
@@ -7030,7 +7031,7 @@ As sailing one ship is not so different to sailing another, having any Sail Spec
 <Item name="RULES-TRAP_091">"2"</Item>
 <Item name="Informer">"2"</Item>
 <Item name="RULES-TRAP_119">"2"</Item>
-<Item name="Book (Cryptography)">"3"</Item>
+<Item name="RULES-TRAP_124">"3"</Item>
 <Item name="Loft of Homing Pigeons">"3"</Item>
 <Item name="Ring of Spies and Informers">"3"</Item>
 <Item name="RULES-TRAP_121">"3"</Item>
@@ -7413,7 +7414,7 @@ As sailing one ship is not so different to sailing another, having any Sail Spec
 <Item name="RULES-COMB_BASE_03">"1"</Item>
 <Item name="RULES-COMB_HAST_03">"1"</Item>
 <Item name="RULES-TRAP_168">"2"</Item>
-<Item name="Trade Tools (Herbalist)">"2"</Item>
+<Item name="RULES-TRAP_135">"2"</Item>
 <Item name="Apprentice">"3"</Item>
 <Item name="Isolated Hut">"3"</Item>
 <Item name="Assortment of Animal Skulls">"4"</Item>
@@ -7539,10 +7540,10 @@ As sailing one ship is not so different to sailing another, having any Sail Spec
 <Item name="RULES-TRAP_048">"1"</Item>
 <Item name="RULES-COMB_BASE_03">"1"</Item>
 <Item name="Sling Bag containing Assortment of Herbs">"1"</Item>
-<Item name="Trade Tools (Herbalist)">"2"</Item>
+<Item name="RULES-TRAP_135">"2"</Item>
 <Item name="3 Herbal Remedies">"3"</Item>
 <Item name="Herb Gatherer">"3"</Item>
-<Item name="Workshop (Herbalist)">"3"</Item>
+<Item name="RULES-TRAP_136">"3"</Item>
 <Item name="Book (Herbs)">"4"</Item>
 <Item name="Pony and Cart">"4"</Item>
 </SUBCHAPTER_ITEM>
@@ -7800,7 +7801,7 @@ As sailing one ship is not so different to sailing another, having any Sail Spec
 <Item name="RULES-TRAP_19">"2"</Item>
 <Item name="RULES-ARMO_05">"2"</Item>
 <Item name="RULES-ARMO_15">"2"</Item>
-<Item name="Trade Tools (Engineer)">"3"</Item>
+<Item name="RULES-TRAP_135">"3"</Item>
 <Item name="Crew of Miners">"4"</Item>
 <Item name="RULES-TRAP_121">"4"</Item>
 </SUBCHAPTER_ITEM>
@@ -7924,7 +7925,7 @@ As sailing one ship is not so different to sailing another, having any Sail Spec
 <Item name="Deck of Cards or Dice">"1"</Item>
 <Item name="Selection of Amulets">"2"</Item>
 <Item name="RULES-TRAP_121">"3"</Item>
-<Item name="Trade Tools (Astrology)">"4"</Item>
+<Item name="RULES-TRAP_135">"4"</Item>
 </SUBCHAPTER_ITEM>
 </Career>
 <Career id="RULES-WORK19">
@@ -8055,7 +8056,7 @@ As sailing one ship is not so different to sailing another, having any Sail Spec
 <Item name="Saddlebags with 2 weeks' Rations">"3"</Item>
 <Item name="RULES-TRAP_30">"3"</Item>
 <Item name="Selection of Maps">"4"</Item>
-<Item name="Trade Tools (Cartographer)">"4"</Item>
+<Item name="RULES-TRAP_135">"4"</Item>
 </SUBCHAPTER_ITEM>
 </Career>
 <Career id="RULES-WORK63">
@@ -8177,10 +8178,11 @@ As sailing one ship is not so different to sailing another, having any Sail Spec
 <Item name="RULES-COMB_BASE_03">"2"</Item>
 <Item name="Lasso or Sling with 10 Stone Bullets">"2"</Item>
 <Item name="RULES-ARMO_06">"2"</Item>
-<Item name="Trade Tools (as Trade)">"2"</Item>
+<Item name="RULES-TRAP_135">"2"</Item>
 <Item name="Cottage">"3"</Item>
-<Item name="Mule and Cart">"3"</Item>
-<Item name="Workshop (as Trade)">"3"</Item>
+<Item name="RULES-TRAP_148">"3"</Item>
+<Item name="RULES-TRAP_137">"3"</Item>
+<Item name="RULES-TRAP_136">"3"</Item>
 <Item name="The Respect of the Village">"4"</Item>
 </SUBCHAPTER_ITEM>
 </Career>
@@ -8702,7 +8704,7 @@ Note: This profile reflects Sigmarite Flagellants, by far the most common in the
 <Item name="RULES-COMB_FLEAU_03">"2"</Item>
 <Item name="RULES-TRAP_061">"2"</Item>
 <Item name="Religious Relic">"3"</Item>
-<Item name="Book (Religion)">"4"</Item>
+<Item name="RULES-TRAP_129">"4"</Item>
 <Item name="Followers (including Penitents, Flagellants, and Zealots)">"4"</Item>
 </SUBCHAPTER_ITEM>
 </Career>
@@ -8962,8 +8964,9 @@ Always on the move, Pedlars take naturally to the adventuring life in search of 
 <Item name="RULES-TRAP_04">"2"</Item>
 <Item name="Goods worth 8d20 Pennies">"2"</Item>
 <Item name="Pots and Pans">"2"</Item>
-<Item name="Trade Tools (Tinker)">"2"</Item>
-<Item name="Mule and Cart">"3"</Item>
+<Item name="RULES-TRAP_135">"2"</Item>
+<Item name="RULES-TRAP_148">"3"</Item>
+<Item name="RULES-TRAP_137">"3"</Item>
 <Item name="Goods worth at least 2d10 Shillings">"3"</Item>
 <Item name="RULES-PROJ_FROND_01">"3"</Item>
 <Item name="Draught Horse and Wagon">"4"</Item>
@@ -9616,7 +9619,7 @@ Even the strictest order grants its Knights a degree of independence. Some adven
 <Item name="RULES-ARMO_11">"1"</Item>
 <Item name="RULES-TRAP_150">"1"</Item>
 <Item name="RULES-ARMO_02">"1"</Item>
-<Item name="Trade Tools (Farrier)">"1"</Item>
+<Item name="RULES-TRAP_135">"1"</Item>
 <Item name="RULES-TRAP_141">"2"</Item>
 <Item name="RULES-COMB_*">"2"</Item>
 <Item name="RULES-COMB_CAVAL_02">"2"</Item>
@@ -10265,7 +10268,7 @@ Playing a Warrior Priest lets you stand at the forefront of battle, inspiring yo
   <!-- War Leader -->
 </SUBCHAPTER_TALENT>
 <SUBCHAPTER_ITEM>
-<Item name="Book (Religion)">"1"</Item>
+<Item name="RULES-TRAP_129">"1"</Item>
 <Item name="RULES-COMB_*">"1"</Item>
 <Item name="RULES-ARMO_06">"1"</Item>
 <Item name="RULES-TRAP_061">"1"</Item>
@@ -10530,9 +10533,10 @@ Playing a Fence lets you move comfortably between respectable society and the cr
 <Item name="RULES-COMB_BASE_03">"1"</Item>
 <Item name="Stolen Goods worth 1d10 Shillings">"1"</Item>
 <Item name="Eyeglass">"2"</Item>
-<Item name="Trade Tools (Engraver)">"2"</Item>
+<Item name="RULES-TRAP_135">"2"</Item>
 <Item name="RULES-TRAP_121">"2"</Item>
-<Item name="Horse and Cart">"3"</Item>
+<Item name="RULES-TRAP_143">"3"</Item>
+<Item name="RULES-TRAP_137">"3"</Item>
 <Item name="Pawnbroker's Shop">"3"</Item>
 <Item name="Gang of Racketeers">"4"</Item>
 <Item name="Network of Informers">"4"</Item>
@@ -10663,17 +10667,19 @@ Playing a Grave Robber lets you explore the darkest places of the Old World in s
 <Item name="RULES-TRAP_033">"2"</Item>
 <Item name="Handcart">"2"</Item>
 <Item name="RULES-COMB_BASE_03">"2"</Item>
-<Item name="Storm Lantern and Oil">"2"</Item>
+<Item name="RULES-TRAP_21">"2"</Item>
+<Item name="RULES-TRAP_19">"2"</Item>
 <Item name="Tarpaulin">"2"</Item>
-<Item name="Trade Tools (Thief)">"2"</Item>
-<Item name="Horse and Cart">"3"</Item>
+<Item name="RULES-TRAP_135">"2"</Item>
+<Item name="RULES-TRAP_143">"3"</Item>
+<Item name="RULES-TRAP_137">"3"</Item>
 <Item name="RULES-ARMO_05">"3"</Item>
 <Item name="Pick">"3"</Item>
 <Item name="Rope">"3"</Item>
 <Item name="RULES-TRAP_04">"4"</Item>
 <Item name="Maps">"4"</Item>
 <Item name="RULES-TRAP_30">"4"</Item>
-<Item name="Trade Tools (Engineer)">"4"</Item>
+<Item name="RULES-TRAP_135">"4"</Item>
 <Item name="RULES-TRAP_121">"4"</Item>
 </SUBCHAPTER_ITEM>
 </Career>
@@ -11192,7 +11198,7 @@ Playing a Thief makes you a very useful recruit to an adventuring party, since m
 <Item name="RULES-TRAP_040">"1"</Item>
 <Item name="Fence Contact">"2"</Item>
 <Item name="Rope">"2"</Item>
-<Item name="Trade Tools (Thief)">"2"</Item>
+<Item name="RULES-TRAP_135">"2"</Item>
 <Item name="RULES-PROJ_ARBPG_01">"3"</Item>
 <Item name="RULES-TRAP_17">"3"</Item>
 <Item name="Several Fence Contacts">"3"</Item>
@@ -11455,8 +11461,8 @@ As a Boatman, you are strong, tough, and accustomed to handling yourself in roug
 <Item name="Rope">"2"</Item>
 <Item name="Rowboat">"2"</Item>
 <Item name="RULES-TRAP_033">"3"</Item>
-<Item name="Trade Tools (Carpenter)">"3"</Item>
-<Item name="Trade Tools (Physician)">"3"</Item>
+<Item name="RULES-TRAP_135">"3"</Item>
+<Item name="RULES-TRAP_135">"3"</Item>
 <Item name="Barge and Crew">"4"</Item>
 <Item name="RULES-TRAP_056">"4"</Item>
 </SUBCHAPTER_ITEM>
@@ -11585,7 +11591,8 @@ As a Pilot, you are canny and perceptive, with a keen eye and deep local knowled
 <Item name="Rope">"2"</Item>
 <Item name="Rowboat">"2"</Item>
 <Item name="Pole">"3"</Item>
-<Item name="Storm Lantern and Oil">"3"</Item>
+<Item name="RULES-TRAP_21">"3"</Item>
+<Item name="RULES-TRAP_19">"3"</Item>
 <Item name="Boathand">"4"</Item>
 <Item name="Small Riverboat">"4"</Item>
 </SUBCHAPTER_ITEM>
@@ -11848,7 +11855,8 @@ Playing a Riverwoman makes you a practical and dependable companion. Whether row
 <Item name="Net">"2"</Item>
 <Item name="RULES-COMB_HAST_04">"2"</Item>
 <Item name="Rowboat">"3"</Item>
-<Item name="Storm Lantern and Oil">"3"</Item>
+<Item name="RULES-TRAP_21">"3"</Item>
+<Item name="RULES-TRAP_19">"3"</Item>
 <Item name="Barge or Hut">"4"</Item>
 </SUBCHAPTER_ITEM>
 </Career>
@@ -11976,8 +11984,8 @@ Playing a Sailor makes you a hardy and dependable companion. Used to hard work, 
 <Item name="RULES-TRAP_104">"1"</Item>
 <Item name="RULES-COMB_BASE_03">"2"</Item>
 <Item name="RULES-ARMO_06">"2"</Item>
-<Item name="Trade Tools (Carpenter)">"3"</Item>
-<Item name="Trade Tools (Physician)">"3"</Item>
+<Item name="RULES-TRAP_135">"3"</Item>
+<Item name="RULES-TRAP_135">"3"</Item>
 <Item name="Sailing Ship and Crew">"4"</Item>
 <Item name="Sextant">"4"</Item>
 <Item name="Shipping Charts">"4"</Item>
@@ -12105,7 +12113,8 @@ Playing a Smuggler lets you stay one step ahead of the law. You are resourceful,
 <SUBCHAPTER_ITEM>
 <Item name="Large Sack">"1"</Item>
 <Item name="Mask or Scarves">"1"</Item>
-<Item name="Storm Lantern and Oil">"1"</Item>
+<Item name="RULES-TRAP_21">"1"</Item>
+<Item name="RULES-TRAP_19">"1"</Item>
 <Item name="RULES-TRAP_31">"1"</Item>
 <Item name="2 Barrels">"2"</Item>
 <Item name="RULES-COMB_BASE_03">"2"</Item>
@@ -12372,7 +12381,8 @@ Playing a Wrecker means you are adept at ambushes, stealth, and intimidation, wi
 <Item name="Leather Gloves">"1"</Item>
 <Item name="RULES-COMB_BASE_03">"2"</Item>
 <Item name="RULES-ARMO_05">"2"</Item>
-<Item name="Storm Lantern and Oil">"2"</Item>
+<Item name="RULES-TRAP_21">"2"</Item>
+<Item name="RULES-TRAP_19">"2"</Item>
 <Item name="Crossbow with 10 Bolts or Javelin">"3"</Item>
 <Item name="Grappling Hook and Rope">"3"</Item>
 <Item name="Barge and Wrecker Crew">"4"</Item>
