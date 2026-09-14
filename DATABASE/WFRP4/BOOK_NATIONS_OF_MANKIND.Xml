@@ -1808,6 +1808,12 @@ Description: You ask Dazh to illuminate the night, and he
   <!-- Soldier -->
 <Career name="RULES-WORK50">"100"</Career>
   <!-- Warrior Priest -->
+<Career name="NATIO-WORK002">"X"</Career>
+  <!-- Kossar -->
+<Career name="NATIO-WORK003">"X"</Career>
+  <!-- Winged Lancer -->
+<Career name="NATIO-WORK004">"X"</Career>
+  <!-- Chekist -->
 </SUBCHAPTER_CAREER>
 </Specie>
 <Specie id="NATIO-RACE_HALBI">
@@ -2008,6 +2014,8 @@ Description: You ask Dazh to illuminate the night, and he
   <!-- Soldier -->
 <Career name="RULES-WORK50">"100"</Career>
   <!-- Warrior Priest -->
+<Career name="NATIO-WORK030">"X"</Career>
+  <!-- Highlander -->
 </SUBCHAPTER_CAREER>
 </Specie>
 <Specie id="NATIO-RACE_HARAB">
@@ -2206,6 +2214,16 @@ Description: You ask Dazh to illuminate the night, and he
   <!-- Soldier -->
 <Career name="RULES-WORK50">"100"</Career>
   <!-- Warrior Priest -->
+<Career name="NATIO-WORK007">"X"</Career>
+  <!-- Janissary -->
+<Career name="NATIO-WORK008">"X"</Career>
+  <!-- Arabyan Corsair -->
+<Career name="NATIO-WORK009">"X"</Career>
+  <!-- Desert Rider -->
+<Career name="NATIO-WORK010">"X"</Career>
+  <!-- Dervish -->
+<Career name="NATIO-WORK011">"X"</Career>
+  <!-- Mamluk -->
 </SUBCHAPTER_CAREER>
 </Specie>
 <Specie id="NATIO-RACE_HBRPA">
@@ -2602,6 +2620,8 @@ Description: You ask Dazh to illuminate the night, and he
   <!-- Soldier -->
 <Career name="RULES-WORK50">"100"</Career>
   <!-- Warrior Priest -->
+<Career name="NATIO-WORK001">"X"</Career>
+  <!-- Bretonnian Knight -->
 </SUBCHAPTER_CAREER>
 </Specie>
 <Specie id="NATIO-RACE_HCATH">
@@ -2798,6 +2818,12 @@ Description: You ask Dazh to illuminate the night, and he
   <!-- Soldier -->
 <Career name="RULES-WORK50">"100"</Career>
   <!-- Warrior Priest -->
+<Career name="NATIO-WORK014">"X"</Career>
+  <!-- Celestial Dragon Monk -->
+<Career name="NATIO-WORK015">"X"</Career>
+  <!-- Cathayan Jinyiwei -->
+<Career name="NATIO-WORK016">"X"</Career>
+  <!-- Swordsaint -->
 </SUBCHAPTER_CAREER>
 </Specie>
 <Specie id="NATIO-RACE_HESTA">
@@ -2994,6 +3020,16 @@ Description: You ask Dazh to illuminate the night, and he
   <!-- Soldier -->
 <Career name="RULES-WORK50">"100"</Career>
   <!-- Warrior Priest -->
+<Career name="NATIO-WORK021">"X"</Career>
+  <!-- Almogavar -->
+<Career name="NATIO-WORK022">"X"</Career>
+  <!-- Conquistador -->
+<Career name="NATIO-WORK023">"X"</Career>
+  <!-- Inquisidor -->
+<Career name="NATIO-WORK024">"X"</Career>
+  <!-- Diestro -->
+<Career name="NATIO-WORK025">"X"</Career>
+  <!-- Toreador -->
 </SUBCHAPTER_CAREER>
 </Specie>
 <Specie id="NATIO-RACE_HIND">
@@ -3192,6 +3228,10 @@ Description: You ask Dazh to illuminate the night, and he
   <!-- Soldier -->
 <Career name="RULES-WORK50">"100"</Career>
   <!-- Warrior Priest -->
+<Career name="NATIO-WORK012">"X"</Career>
+  <!-- Rajput Warrior -->
+<Career name="NATIO-WORK013">"X"</Career>
+  <!-- Beast Tamer -->
 </SUBCHAPTER_CAREER>
 </Specie>
 <Specie id="NATIO-RACE_HGOSP">
@@ -3390,6 +3430,10 @@ Description: You ask Dazh to illuminate the night, and he
   <!-- Soldier -->
 <Career name="RULES-WORK50">"100"</Career>
   <!-- Warrior Priest -->
+<Career name="NATIO-WORK003">"X"</Career>
+  <!-- Winged Lancer -->
+<Career name="NATIO-WORK004">"X"</Career>
+  <!-- Chekist -->
 </SUBCHAPTER_CAREER>
 </Specie>
 <Specie id="NATIO-RACE_HNIPP">
@@ -3586,6 +3630,14 @@ Description: You ask Dazh to illuminate the night, and he
   <!-- Soldier -->
 <Career name="RULES-WORK50">"100"</Career>
   <!-- Warrior Priest -->
+<Career name="NATIO-WORK017">"X"</Career>
+  <!-- Samurai -->
+<Career name="NATIO-WORK018">"X"</Career>
+  <!-- Ronin -->
+<Career name="NATIO-WORK019">"X"</Career>
+  <!-- Vimto Monks -->
+<Career name="NATIO-WORK020">"X"</Career>
+  <!-- Ninja -->
 </SUBCHAPTER_CAREER>
 </Specie>
 <Specie id="NATIO-RACE_HWEST">
@@ -5173,6 +5225,54 @@ Description: You ask Dazh to illuminate the night, and he
          Hardy pour Nordland) : ecart note dans A FAIRE.txt, l officiel fait foi.
        Les Lore (Reikland), (Middenland) et (Nordland) restent utiles : le lot 3d-2
        en a besoin, chaque regiment donnant le Lore de sa province. -->
+  <!-- STUBS : Norscan Mercenary/Whaler et Condottieri/Paymaster/Sartosan Pirate/Assassin
+       (NATIO-WORK005/006/026/027/028/029) sont crees dans CE livre, mais aucune ethnie
+       Norsca/Tilee n'y est definie - elles viennent de Sea of Claws et Up in Arms. Regle
+       de Nono du 14/09/2026 : une carriere se rattache dans le livre qui la CREE, jamais
+       en allant modifier le livre qui definit la race. D'ou ces <Specie> reduits a l'id +
+       SUBCHAPTER_CAREER, sans redeclarer Description/SUBCHAPTER_ATTR/etc (deja portes par
+       le livre d'origine) - meme mecanisme que la fiche Tilea d'Up in Arms, qui portait
+       deja des Career d'Archives III/Salzenmund/Sea of Claws avant cette session.
+       Le guard anti-doublon de race (xmlexportimport.pas, import du DATA_SPECIE) a ete
+       durci pour supporter ces stubs quel que soit l'ordre de chargement des livres (non
+       garanti, CONTEXT.md §2.9) : un stub sans libelle est remplace par la definition
+       complete des qu'elle arrive, jamais l'inverse. -->
+<Specie id="SEAOF-RACE_HBJOR">
+<SUBCHAPTER_CAREER>
+<Career name="NATIO-WORK005">"X"</Career>
+  <!-- Norscan Mercenary -->
+<Career name="NATIO-WORK006">"X"</Career>
+  <!-- Norscan Whaler -->
+</SUBCHAPTER_CAREER>
+</Specie>
+<Specie id="SEAOF-RACE_HSARL">
+<SUBCHAPTER_CAREER>
+<Career name="NATIO-WORK005">"X"</Career>
+  <!-- Norscan Mercenary -->
+<Career name="NATIO-WORK006">"X"</Career>
+  <!-- Norscan Whaler -->
+</SUBCHAPTER_CAREER>
+</Specie>
+<Specie id="SEAOF-RACE_HSKAE">
+<SUBCHAPTER_CAREER>
+<Career name="NATIO-WORK005">"X"</Career>
+  <!-- Norscan Mercenary -->
+<Career name="NATIO-WORK006">"X"</Career>
+  <!-- Norscan Whaler -->
+</SUBCHAPTER_CAREER>
+</Specie>
+<Specie id="UPINA-RACE_HTIL">
+<SUBCHAPTER_CAREER>
+<Career name="NATIO-WORK026">"X"</Career>
+  <!-- Condottieri -->
+<Career name="NATIO-WORK027">"X"</Career>
+  <!-- Paymaster -->
+<Career name="NATIO-WORK028">"X"</Career>
+  <!-- Sartosan Pirate -->
+<Career name="NATIO-WORK029">"X"</Career>
+  <!-- Assassin -->
+</SUBCHAPTER_CAREER>
+</Specie>
 </DATA_SPECIE>
 <DATA_CAREER>
   <!-- LOT 2 : les 30 carrieres. Statuts : le livre ecrit "Copper 3/5" pour les deux

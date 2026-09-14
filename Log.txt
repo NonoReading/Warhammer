@@ -4523,3 +4523,43 @@ de Nono) : les images du PDF de personnage (ConstCheminPdf*) restent figees sur 
 demandees. Compile (lazbuild, 0 erreur) apres chaque lot ; Nono va tester en jeu (images
 WFRP5 metiers/niveaux tout juste ajoutees).
 Fichiers modifies : chargeconstantes.pas, warhammersource.pas, CONTEXT.md, Log.txt.
+
+14/09/2026 - WINMETIER : RACES REGROUPEES PAR ESPECE, ET LES 30 CARRIERES NATIONS OF
+MANKIND RATTACHEES A UNE ETHNIE. Nono a signale que WinMetier affichait une ligne par
+ethnie (une vingtaine pour un metier humain) au lieu d'une par race. ChargeRaceMetier
+(winmetier.pas) regroupe desormais par Espece, ethnies en sous-noeuds replies par defaut
+(decide avec Nono) ; cliquer sur la race affiche son libelle/livre, cliquer sur une ethnie
+garde la fiche complete d'avant. En testant, Nono a remarque que les carrieres Nations of
+Mankind n'avaient aucune race visible - meme cause que le symptome deja note le 13/09/2026
+dans WinLivre (A FAIRE.txt) : le lien carriere->race se construit en lisant le
+SUBCHAPTER_CAREER de chaque race, jamais l'inverse, et aucune des 18 especes du livre ne
+listait les 30 carrieres NATIO-WORK. Verifie dans PDF_TEXTE/Nations of Mankind.txt : le
+livre ne donne aucun champ d'eligibilite race par carriere, contrairement au Rulebook -
+rattachement propose au juge depuis le nom/texte de chaque carriere, valide par Nono avant
+saisie. 26 entrees ajoutees dans BOOK_NATIONS_OF_MANKIND.Xml pour les 18 especes du livre.
+Pour Norscan Mercenary/Whaler (Norsca) et Condottieri/Paymaster/Sartosan Pirate/Assassin
+(Tilea), qui n'ont pas d'ethnie propre dans ce livre, PREMIERE VERSION FAUSSE corrigee par
+Nono en session : j'avais ajoute ces references directement dans BOOK_UP_IN_ARMS.Xml et
+BOOK_SEA_OF_CLAWS.Xml (les livres qui definissent Tilea/Norsca) - Nono a rappele la regle
+qu'une carriere se rattache toujours dans le livre qui la CREE, jamais en modifiant le
+livre qui definit la race visee. Revert immediat des deux fichiers. Bonne version : 4
+Specie "stubs" (juste l'id + SUBCHAPTER_CAREER, sans redeclarer Description/etc) ajoutes
+DANS BOOK_NATIONS_OF_MANKIND.Xml (SEAOF-RACE_HBJOR/HSARL/HSKAE, UPINA-RACE_HTIL). En
+verifiant la surete de ce mecanisme (deja utilise pour la fiche Tilea d'Up in Arms, qui
+porte des Career d'Archives III/Salzenmund/Sea of Claws), deux risques trouves et corriges
+dans xmlexportimport.pas AVANT de saisir les stubs : l'ordre de chargement des livres n'est
+pas garanti (CONTEXT.md 2.9), donc (1) le garde anti-doublon de race aurait pu bloquer la
+VRAIE definition si le stub se chargeait avant - durci pour remplacer un stub (Libelle
+vide) par la definition complete des qu'elle arrive, quel que soit l'ordre ; (2) AddTrad
+etait appele sans condition pour chaque Specie, y compris les stubs - une traduction a
+Libelle vide se serait reappliquee au prochain Traduit(ConstAnglais) et aurait efface le
+vrai libelle de la race - corrige, AddTrad seulement si PRace.Libelle <> ''. Toutes les
+entrees en 'X' (eligible hors tirage, jamais dans la table de jet d100 recopiee de
+Reikland, CONTEXT.md 2.37). 52 lignes ajoutees dans BOOK_NATIONS_OF_MANKIND.Xml pour les 18
+especes (insertion par script sed sur les numeros de ligne exacts, blocs SUBCHAPTER_CAREER
+identiques octet pour octet entre especes) + 4 stubs (10 references). XML revalide (bien
+forme + comptage : 36 references NATIO-WORK au total) avant chaque remplacement. Item "NE
+SONT LIES A AUCUNE RACE" retire d'A FAIRE.txt (traite). Compile (lazbuild, 0 erreur) apres
+chaque etape. Nono va tester en jeu.
+Fichiers modifies : winmetier.pas, xmlexportimport.pas, DATABASE/WFRP4/
+BOOK_NATIONS_OF_MANKIND.Xml, A FAIRE.txt, CONTEXT.md, Log.txt.

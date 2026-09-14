@@ -1080,6 +1080,8 @@ Procedure XmlImport(FileName: String; OnlyPrimary: Boolean; OnlyCode: Boolean; C
     PTalent:                  StructureTalent;
     PTalentCreation:          StructureTalentCreation;
     PRace:                    StructureRace;
+    IndRaceExistante:         Integer;
+    IndBoucleRace:            Integer;
     PEspece:                  StructureEspece;
     PNation:                  StructureNation;
     PRegle:                   StructureRegle;
@@ -1951,18 +1953,48 @@ Procedure XmlImport(FileName: String; OnlyPrimary: Boolean; OnlyCode: Boolean; C
                         end;
                        if LangueDef = ConstAnglais then
                          begin
-                          // Ne pas recréer une ligne de race si ce CodeRace existe déjà
-                          // (cas d'un livre qui ne fait qu'ajouter des données - ex. SUBCHAPTER_CAREER -
-                          // sur une race définie ailleurs, sans redéclarer Description/SUBCHAPTER_ATTR/etc.)
-                          if ChercheRace(PRace.CodeRace).CodeRace = '' then
+                          // Ne pas recréer une ligne de race si ce CodeRace existe déjà ET
+                          // porte déjà un libellé (cas d'un livre qui ne fait qu'ajouter des
+                          // données - ex. SUBCHAPTER_CAREER - sur une race définie ailleurs,
+                          // sans redéclarer Description/SUBCHAPTER_ATTR/etc.)
+                          //
+                          // L'ordre de chargement des livres n'est PAS garanti (CONTEXT.md
+                          // §2.9) : si le livre qui pose un stub minimal (juste l'id +
+                          // SUBCHAPTER_CAREER, cas ci-dessus) se charge AVANT celui qui
+                          // définit vraiment la race, ChercheRace() trouverait ce stub et la
+                          // vraie définition (Libelle/Description/etc.) serait perdue pour
+                          // toujours si on se contentait de sauter l'ajout. On remplace donc
+                          // un stub (Libelle vide) par la définition complète dès qu'elle
+                          // arrive, quel que soit l'ordre - releve le 14/09/2026 en ajoutant
+                          // le rattachement Norsca/Tilee des carrieres Nations of Mankind.
+                          IndRaceExistante := -1;
+                          For IndBoucleRace := 0 to ListRace.Count - 1 do
+                            if ListRace[IndBoucleRace].CodeRace = PRace.CodeRace then
+                              begin
+                                IndRaceExistante := IndBoucleRace;
+                                break;
+                              end;
+                          if IndRaceExistante < 0 then
                             begin
                              ListRace.add(PRace);
                              inc(NbRace);
                              Inc(LivreNbrace);
-                            end;
+                            end
+                          else if (ListRace[IndRaceExistante].Libelle = '') and (PRace.Libelle <> '') then
+                            ListRace[IndRaceExistante] := PRace;
                          end;
 
-                      AddTrad(PTraduction, Langue);
+                      // Un stub (juste l'id + SUBCHAPTER_CAREER, race definie dans un
+                      // autre livre) n'a pas de Libelle a traduire : l'enregistrer ici
+                      // ecrirait une entree ListTraduction avec un Libelle vide qui,
+                      // rappliquee au prochain Traduit(ConstAnglais, ...) (ex. retour a
+                      // l'anglais apres un changement de langue), effacerait le vrai
+                      // libelle/description de la race chargee par son livre d'origine -
+                      // CompareRechercheValeur matche sur le seul CodeRace, sans notion
+                      // d'ordre de chargement. Releve le 14/09/2026 avec le rattachement
+                      // Norsca/Tilee des carrieres Nations of Mankind.
+                      if PRace.Libelle <> '' then
+                        AddTrad(PTraduction, Langue);
 
                       NodeNv2 := XmlElement(NodeNv2.NextSibling);
                     end;

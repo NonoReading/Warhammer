@@ -1,5 +1,78 @@
 # Warhammer — Contexte projet
 
+**14/09/2026 (suite 9) — WINMETIER : RACES REGROUPÉES PAR ESPÈCE (ETHNIES REPLIÉES PAR
+DÉFAUT), ET LES 30 CARRIÈRES NATIONS OF MANKIND RATTACHÉES À UNE ETHNIE. Codé et compilé,
+test en jeu par Nono en cours.**
+
+**1. WinMetier affichait une ligne par ethnie, pas par race** : pour un métier humain
+accessible à toutes les ethnies, la branche "races possibles" listait une vingtaine de
+lignes (Reikland, Middenland, Nordland...) au lieu d'une seule "Human". `ChargeRaceMetier`
+(winmetier.pas:584) regroupe désormais par `Espece` (la RACE au sens du vocabulaire fixé le
+20/08 - voir chargeespece.pas) : un nœud par race, dépliable en ethnies qui acceptent le
+métier. Décidé avec Nono : les ethnies restent repliées par défaut (`TabMetierSelection`,
+winmetier.pas:966, collapse après le `FullExpand` global de l'arbre). Cliquer sur le nœud
+"race" affiche son libellé/livre (`ListEspece` n'a ni description ni image propre) ;
+cliquer sur une ethnie affiche la fiche complète comme avant (`TreeViewMetier1Change`,
+winmetier.pas:1052, détection via `Node.Parent.Parent.Text = ConstArbreRacepossible`).
+
+**2. Les 30 carrières NATIO-WORK001 à 030 (Nations of Mankind) n'étaient liées à aucune
+race** (repéré par Nono le 13/09/2026 en testant WinLivre, symptôme identique vu cette fois
+dans WinMetier). Cause confirmée : le lien carrière→race se construit en lisant, pour
+CHAQUE race, son `SUBCHAPTER_CAREER` (xmlexportimport.pas:1902) - jamais l'inverse. Vérifié
+dans `PDF_TEXTE/Nations of Mankind.txt` : le livre ne donne AUCUN champ d'éligibilité
+race/espèce par carrière (contrairement au Rulebook), seule la présence du terme "Species"
+dans le nom d'un talent trompe la recherche. Rattachement fait au jugé depuis le nom et le
+texte de chaque carrière (validé par Nono un par un avant saisie), toujours en 'X' (éligible
+hors tirage, jamais dans la table de jet d100 recopiée de Reikland) :
+- Bretonnian Knight → Bretonnia Nobility (`NATIO-RACE_HBRNO`). Kossar → Ungol
+  (`NATIO-RACE_HUNG`). Winged Lancer et Chekist → Ungol ET Gospodar (texte sans tribu
+  précisée, ou titre de niveau 4 différent par ethnie pour le Lancer). Janissary/Arabyan
+  Corsair/Desert Rider/Dervish/Mamluk → Araby (`NATIO-RACE_HARAB`). Rajput Warrior/Beast
+  Tamer → Ind (`NATIO-RACE_HIND`). Celestial Dragon Monk/Cathayan Jinyiwei/Swordsaint →
+  Cathay (`NATIO-RACE_HCATH`). Samurai/Ronin/Vimto Monks/Ninja → Nippon
+  (`NATIO-RACE_HNIPP`). Almogavar/Conquistador/Inquisidor/Diestro/Toreador → Estalia
+  (`NATIO-RACE_HESTA`). Highlander → Albion (`NATIO-RACE_HALBI`). Toutes saisies dans
+  `BOOK_NATIONS_OF_MANKIND.Xml`, sur les espèces qui y sont déjà définies.
+- **Trois carrières sans ethnie dans ce livre** (Norsca générique, Tilea et Sartosa
+  n'existent pas comme `<Specie>` propre dans Nations of Mankind). **Première tentative
+  fausse, corrigée par Nono en session** : j'ai d'abord ajouté ces références directement
+  dans `BOOK_UP_IN_ARMS.Xml`/`BOOK_SEA_OF_CLAWS.Xml` (les livres qui définissent Tilea/
+  Norsca), par analogie avec les entrées `ARCH3-WORK*`/`SALZE-WORK*`/`SEAOF-WORK*` déjà
+  présentes sur la fiche Tilea. **Règle de Nono** : une carrière se rattache TOUJOURS dans
+  le livre qui la CRÉE, jamais en allant modifier le livre qui définit la race visée -
+  revert immédiat des deux fichiers. Bonne version : 4 `<Specie>` **stubs** ajoutés dans
+  `BOOK_NATIONS_OF_MANKIND.Xml` lui-même, juste avant `</DATA_SPECIE>` - réduits à
+  l'`id` + `SUBCHAPTER_CAREER`, sans redéclarer Description/SUBCHAPTER_ATTR/etc (déjà
+  portés par le livre d'origine) : `SEAOF-RACE_HBJOR`/`HSARL`/`HSKAE` (Norscan Mercenary/
+  Whaler, pas de tribu précisée dans le texte) et `UPINA-RACE_HTIL` (Condottieri/
+  Paymaster/Sartosan Pirate/Assassin - Sartosa y est explicitement décrite comme faisant
+  partie de la Tilée).
+- **Risque d'ordre de chargement identifié et corrigé avant saisie** (`xmlexportimport.pas`,
+  import de `DATA_SPECIE`) : l'ordre de chargement des livres n'est pas garanti (§2.9). Si
+  un stub se charge AVANT le livre qui définit vraiment la race, l'ancien garde anti-doublon
+  (`if ChercheRace(...).CodeRace = '' then ListRace.add(...)`) aurait bloqué l'ajout de la
+  VRAIE définition en la trouvant déjà "présente" (le stub) - la race serait restée sans
+  libellé/description à vie. Durci : un stub (`Libelle` vide) est désormais REMPLACÉ par la
+  définition complète dès qu'elle arrive, quel que soit l'ordre. Deuxième risque trouvé en
+  creusant : `AddTrad` était appelé sans condition pour CHAQUE `<Specie>`, y compris les
+  stubs - une entrée de traduction à `Libelle` vide se serait réappliquée au prochain
+  `Traduit(ConstAnglais, ...)` (ex. retour à l'anglais après changement de langue) et
+  aurait effacé le vrai libellé de la race. Corrigé : `AddTrad` n'est plus appelé que si
+  `PRace.Libelle <> ''`.
+- 52 lignes ajoutées dans `BOOK_NATIONS_OF_MANKIND.Xml` pour les 18 ethnies du livre
+  (insertion par script `sed` sur les numéros de ligne exacts - les blocs
+  `SUBCHAPTER_CAREER` sont des copies octet pour octet de la table Reikland, donc pas de
+  texte unique à cibler par un éditeur classique), + les 4 stubs (10 références de plus).
+  XML revalidé (bien formé + comptage des références : 36 `Career name="NATIO-WORK*"` au
+  total) avant chaque remplacement. `BOOK_UP_IN_ARMS.Xml`/`BOOK_SEA_OF_CLAWS.Xml` inchangés.
+- **A FAIRE.txt nettoyé** : l'item "NE SONT LIES A AUCUNE RACE" retiré (traité).
+
+Compilé (`lazbuild`, 0 erreur) après le code et après la donnée. Nono va tester en jeu
+(regroupement des races dans WinMetier + apparition des 30 carrières Nations of Mankind
+sous leur ethnie) - résultat à consigner ici à la prochaine session.
+
+---
+
 **14/09/2026 (suite 8) — AUDIT C : 13 CHOIX D'ARMES SUPPLÉMENTAIRES RÉSOLUS (VIA `/`),
 3 CAS RESTENT BLOQUÉS (LIMITE DE MÉCANISME OU CODE MANQUANT). Export `Audit_
 Trapping_Carrieres.xlsx` créé pour l'audit visuel de Nono.**

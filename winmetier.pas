@@ -8,7 +8,7 @@ interface
 uses
   Classes, SysUtils, Forms, Controls, Graphics, Dialogs, ComCtrls, Grids,
   ChargeMetier, ChargeConstantes, FPImage, LCLType, ExtCtrls, StdCtrls,
-  BCButton, PReport, ChargeRaceMetier, ChargeRace, ChargeMetierNiveau,
+  BCButton, PReport, ChargeRaceMetier, ChargeRace, ChargeEspece, ChargeMetierNiveau,
   ChargeMetierAttribut, ChargeAttribut, ChargeMetierCompetence,
   ChargeCompetence, ChargeTalent, ChargeMetierTalent, GlobalFonts,
   ChargeMetierEquipement, ChargeArme, ChargeArmure, ChargeTrapping, ChargeTexte, UnitCalcul,
@@ -580,24 +580,45 @@ begin
     DeleteData(TreeViewMetier1,TreeViewMetier1.Items.GetFirstNode);
 end;
 
-// Niveau 1 : charger les races
+// Niveau 1 : charger les races (regroupees par espece, ethnies en sous-noeuds
+// repliés par defaut - CONTEXT.md, sinon une carriere humaine affiche une
+// vingtaine d'ethnies au lieu d'une seule ligne "Human")
 procedure TWinMetiers.ChargeRaceMetier();
 Var
   PRace:        StructureRace;
   PRaceMetier:  StructureRaceMetier;
+  PEspece:      StructureEspece;
   NodeData:     TMyNodeData;
+  NodeRace:     TTreeNode;
+  CodeEspece:   String;
 Begin
     NodeBranche            := TreeViewMetier1.Items.AddChild(Node, ConstArbreRacePossible);
     NodeBranche.ImageIndex := 0;
     For PRaceMetier in ListRaceMetier do
       if PRaceMetier.CodeMetier = MetierEnCours then
         Begin
-          NodeData                := TMyNodeData.Create;
-          PRace                   := ChercheRace(PRaceMetier.CodeRace);
-          NodeFeuille             := TreeViewMetier1.Items.AddChild(NodeBranche, PRace.Libelle);
-          NodeFeuille.ImageIndex  := 0;
-          NodeData.AdditionalData := PRace.CodeRace;
-          NodeFeuille.Data        := NodeData;
+          PRace      := ChercheRace(PRaceMetier.CodeRace);
+          CodeEspece := Trim(PRace.Espece);
+
+          // Cherche le noeud "espece" deja cree pour ce metier, sinon le cree
+          NodeRace := NodeBranche.GetFirstChild;
+          while Assigned(NodeRace) and (TMyNodeData(NodeRace.Data).AdditionalData <> CodeEspece) do
+            NodeRace := NodeBranche.GetNextChild(NodeRace);
+          if not Assigned(NodeRace) then
+            begin
+              PEspece                 := ChercheEspece(CodeEspece);
+              NodeData                := TMyNodeData.Create;
+              NodeData.AdditionalData := CodeEspece;
+              NodeRace                := TreeViewMetier1.Items.AddChild(NodeBranche, PEspece.Libelle);
+              NodeRace.ImageIndex     := 0;
+              NodeRace.Data           := NodeData;
+            end;
+
+          NodeData                 := TMyNodeData.Create;
+          NodeFeuille               := TreeViewMetier1.Items.AddChild(NodeRace, PRace.Libelle);
+          NodeFeuille.ImageIndex    := 0;
+          NodeData.AdditionalData   := PRace.CodeRace;
+          NodeFeuille.Data          := NodeData;
         end;
 end;
 
@@ -969,6 +990,22 @@ procedure TWinMetiers.TabMetierSelection(Sender: TObject; aCol, aRow: Integer);
       ChargeRaceMetier();
       ChargeMetierNiveau();
       TreeViewMetier1.FullExpand;
+
+      // Les ethnies (sous chaque espece de la branche "races possibles") restent
+      // repliees par defaut - FullExpand les a ouvertes avec le reste de l'arbre.
+      NodeBranche := Node.GetFirstChild;
+      while Assigned(NodeBranche) and (NodeBranche.Text <> ConstArbreRacepossible) do
+        NodeBranche := Node.GetNextChild(NodeBranche);
+      if Assigned(NodeBranche) then
+        begin
+          NodeFeuille := NodeBranche.GetFirstChild;
+          while Assigned(NodeFeuille) do
+            begin
+              NodeFeuille.Collapse(False);
+              NodeFeuille := NodeBranche.GetNextChild(NodeFeuille);
+            end;
+        end;
+
       TreeViewMetier1.Selected := TreeViewMetier1.Items.GetFirstNode;
   end;
 
@@ -1015,6 +1052,7 @@ end;
 procedure TWinMetiers.TreeViewMetier1Change(Sender: TObject; Node: TTreeNode);
 Var
   PRace:        StructureRace;
+  PEspece:      StructureEspece;
   PTalent:      StructureTalent;
   PAttribut:    StructureAttribut;
   PCompetence:  StructureCompetence;
@@ -1042,14 +1080,26 @@ Begin
             AffType.text   := Node.Parent.Text;
             if AffType.text = ConstArbreRacepossible then
                 begin
+                  // Noeud "espece" (regroupement de plusieurs ethnies) : pas de fiche
+                  // detaillee a ce niveau, juste son libelle et son livre - le detail
+                  // (age/taille/description/image) reste sur la feuille ethnie ci-dessous.
+                  PEspece            := ChercheEspece(NodeData.AdditionalData);
+                  AffCode.Text       := PEspece.CodeEspece;
+                  AffLib.Text        := PEspece.Libelle;
+                  AffLivre.Text      := getTexteLibelle(PEspece.Livre,'','',true);
+                  AffDescription.Text:= '';
+                end
+            else if Assigned(Node.Parent.Parent) and (Node.Parent.Parent.Text = ConstArbreRacepossible) then
+                begin
+                  // Feuille ethnie, sous le noeud "espece" - comportement inchange.
+                  AffType.text       := ConstArbreRacepossible;
                   PRace              := ChercheRace(NodeData.AdditionalData);
                   AffCode.Text       := PRace.CodeRace;
                   AffLib.Text        := PRace.Libelle;
                   AffLivre.Text      := getTexteLibelle(PRace.Livre,'','',true);
                   CheminImage1       := CheminRaceImage(PRace.CodeRace,'2');
                   CheminImage2       := CheminRaceImage(PRace.CodeRace,'1');
-                  AffLivre.Text      := getTexteLibelle(PRace.Livre,'','',true);
-                  AffDescription.Text:= PRAce.Description;
+                  AffDescription.Text:= PRace.Description;
                 end
             else if AffType.text = ConstArbreAttribut then
                 begin
