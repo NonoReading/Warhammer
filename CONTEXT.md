@@ -1,113 +1,34 @@
 # Warhammer — Contexte projet
 
-**13/09/2026 — SPÉCIALISATION DES 14 TALENTS À PARAMÈTRE DU RULEBOOK V5 : INVENTAIRE ET
-DÉCISIONS DE CONCEPTION FAITS, AUCUNE ÉCRITURE XML ENCORE FAITE, SESSION COUPÉE SUR ALERTE
-QUOTA NONO (§2.70).** Reprise du gap identifié en fin de peuplement du catalogue V5 (entrée
-13/09 plus bas) : les talents à paramètre saisis avec un id nu au lieu du mécanisme
-générique/spécialisation. Tout ce qui suit est **prêt à écrire, rien n'est encore sur le
-disque** - prochaine session : exécuter directement ce plan, pas besoin de redemander à Nono.
+**14/09/2026 — SPÉCIALISATION DES 14 TALENTS À PARAMÈTRE DU RULEBOOK V5 : ÉCRIT SUR LE
+DISQUE, COMPILÉ, LANCEMENT SANS PLANTAGE - PAS ENCORE TESTÉ EN PROFONDEUR PAR NONO (§2.70).**
+Écriture faite via un script Perl jetable (résolution automatique de chaque référence à
+partir de son commentaire XML existant, plutôt qu'à la main sur 184 lignes) :
+- Les 14 talents (le chiffre "16" de la session précédente était une erreur de calcul -
+  la liste réelle listée plus bas en compte 14, `T0009`/`T0066` inclus) ont leur `id` en
+  `DATA_TALENT` suffixé `_*` (`Description` inchangée).
+- Nouveau chapitre `DATA_TALENT_SPECIALIZATION` créé avec les 61 entrées prévues (`<Generique>`
+  vers le radical `_*`).
+- Les 184 références (`<Talent name=` carrières + `<Talent>` bruts espèces) et les 3 `id=`
+  de `DATA_RANDOM_TALENT` réécrites vers l'id résolu : générique `_*`, spécialisation précise,
+  paire `id1/id2` pour les 5 "A ou B", ou `_*` + commentaire `(?)` pour les 4 "(as Trade)".
+  Typo `Etiquette (Guilders)`→`(Guilder)` corrigée au passage.
+- `RULES-T0107` (Resistant) vérifié dans le livre avant écriture : en-tête officiel bien
+  `"Resistant (Threat)"` (l.6932 du texte extrait) - `Description` inchangée comme prévu.
+- Diff vérifié avant remplacement (206 lignes modifiées + 246 lignes neuves du nouveau
+  chapitre, rien d'autre touché). `lazbuild` : 0 erreur. `WarhammerHelp.exe` lancé et resté
+  stable 5s (le chargement du livre RULES passe sans lever d'exception) puis fermé - **test
+  visuel dans WinLivre/WinPersonnage encore à faire par Nono**, en particulier vérifier que
+  les 5 paires `id1/id2` s'affichent bien dans WinLivre (`winlivre.pas` l.746, seul lecteur
+  connu de cette syntaxe) et que les spécialisations apparaissent bien groupées sous leur
+  générique.
+- Fichiers modifiés : `DATABASE\WFRP5\BOOK_RULESBOOK.Xml`, `CONTEXT.md`, `Log.txt`.
 
-**Décisions validées par Nono pendant cette session :**
-1. **`T0009` Artistic et `T0066` Impassioned Zeal sont AUSSI concernés** (pas exclus comme je
-   l'avais d'abord proposé) - même si le Rulebook ne les utilise jamais avec une variante
-   concrète, Nono veut le mécanisme générique posé quand même : "on est dans le RULEBOOK et
-   théoriquement les autres livres sont adaptables et certains ont des spécialités." Donc
-   **16 talents au total** convertis en id générique `_*`, pas 12.
-2. **Typo confirmée à corriger** : une occurrence `Etiquette (Guilders)` (pluriel) contre 8
-   `Etiquette (Guilder)` (singulier) - le livre dit toujours singulier (vérifié
-   `LIVRES\WFRP5_Core_Rulebook_01_09_26.txt`). Corriger vers le singulier.
-3. **Choix "A ou B" entre deux talents distincts** (5 cas : `Acute Sense (Sight or Touch)`,
-   `(Taste or Touch)`, `Etiquette (Criminals or Scholars)`, `(Nobles or Soldiers)`,
-   `Resistant (Disease or Poison)`) : utiliser la syntaxe `"RULES-Txxxx/RULES-Tyyyy"` déjà
-   présente dans le projet (vérifiée dans `BOOK_NATIONS_OF_MANKIND.Xml` l.5897,
-   `RULES-T0161/NATIO-T0015` = "Slayer or Mark of the Gods", **une vraie carrière**, pas
-   qu'une table de tirage). **Limite confirmée et acceptée par Nono** : ce découpage par `/`
-   n'est lu que par `winlivre.pas` l.746 (affichage catalogue) - PAS par `winpersonnage.pas`/
-   `wincreation.pas` (aucune occurrence de `Pos('/'` ailleurs que dans ce fichier). Donc ça
-   s'affichera bien dans WinLivre, mais l'avancement réel de personnage ne saura pas encore
-   le résoudre - cohérent avec le fait que l'avancement n'est de toute façon pas branché
-   aujourd'hui (§0). **À noter dans `A FAIRE.txt`** : le jour où l'avancement de carrière sera
-   codé, il faudra aussi lui apprendre à lire cette syntaxe `/`.
-   Chaque moitié du `/` doit être un id de spécialisation qui existe réellement (résolu par
-   `ChercheTalent` côté `winlivre.pas`) - donc pas de nouvelle entrée dédiée aux 5 paires,
-   je réutilise les ids atomiques déjà créés pour les mentions isolées (ex.
-   `RULES-T0046_CRIM/RULES-T0046_SCHOL` réutilise les ids créés pour `Etiquette (Criminals)`
-   et `Etiquette (Scholars)` seules).
-4. **`Craftsman`/`Master Tradesman` "(as Trade)"** (la spécialisation reprend le Trade choisi
-   plus tôt dans la MÊME carrière, ex. `RULES-WORK03` Artisan : niveau 1 `Trade (Any One)`,
-   niveaux suivants `Craftsman (as Trade)`/`Master Tradesman (as Trade)`/`Trade Tools (as
-   Trade)` - valeur dynamique, pas une liste fermée du livre). Nono a proposé un marqueur
-   visuel `(?)` pour signifier "reprend le choix précédent" plutôt que de créer une fausse
-   entrée de spécialisation figée. **Convention retenue** : référencer l'id générique `_*`
-   (comme pour "(Any One)"), commentaire XML `<!-- Craftsman (?) -->` /
-   `<!-- Master Tradesman (?) -->` à la place de `(as Trade)`. Aucun mécanisme de résolution
-   dynamique n'existe dans le programme - gap connu, assumé pour cette passe, **à documenter
-   dans `A FAIRE.txt`** avec l'exemple Artisan ci-dessus pour que la convention `(?)` soit
-   compréhensible plus tard.
-
-**Découverte annexe de Nono en cours de session, PAS ENCORE TRAITÉE - à ajouter à
-`A FAIRE.txt`** : les 30 métiers créés par *Nations of Mankind* (`NATIO-WORK001` à `030`)
-n'affichent aucune race dans WinLivre. Cause identifiée : `ConstruireMetierRacesMap`
-(`winlivre.pas` l.1320) construit le lien métier→races en lisant le `SUBCHAPTER_CAREER` de
-CHAQUE race (le lien est porté par la race, pas par le métier) - or aucune fiche `<Specie>`
-de `BOOK_NATIONS_OF_MANKIND.Xml` ne liste les 30 `NATIO-WORK*` dans son propre
-`SUBCHAPTER_CAREER` (vérifié : 0 référence `NATIO-WORK` hors de leur propre définition
-`<Career id=...>`). Ces 30 métiers sont orphelins de toute race. Pas de fix fait - juste
-constaté.
-
-**Travail technique déjà fait, prêt à écrire (dans `DATABASE\WFRP5\BOOK_RULESBOOK.Xml`) :**
-- Recensement complet des variantes concrètes réellement utilisées par les 64 métiers ET les
-  5 espèces (`SUBCHAPTER_TALENT` des `<Specie>`, format `<Talent>"CODE"</Talent>` SANS
-  `name=`, distinct du format carrière `<Talent name="CODE">"N"</Talent>` - les deux formats
-  existent et doivent tous les deux être réécrits). Total 184 références à corriger (180
-  carrières + 4 espèces) + 14 déclarations `<Talent id=...>` + 3 `<DATA_RANDOM_TALENT id=...>`
-  (dont le `id=` doit rester identique au `<Talent name=...>` qu'il contient, comme en V4).
-- **Bonne nouvelle vérifiée sur le texte du livre** : la plupart des `<Description>`
-  actuelles des 14 (ex. `"Craftsman (Trade)"`, `"Master Tradesman (Trade)"`,
-  `"Savant (Lore Specialisation)"`, `"Striding Gait (Terrain)"`, `"Arcane Magic (Lore)"`,
-  `"Bless (Deity)"`, `"Invoke (Deity)"`, `"Etiquette (Social Group)"`, `"Fearless (Enemy)"`,
-  `"Hatred (Group)"`, `"Acute Sense (Sense)"`, `"Artistic (Art)"`, `"Impassioned Zeal
-  (Cause)"`) **correspondent mot pour mot aux en-têtes officiels du livre** (vérifié dans
-  `LIVRES\WFRP5_Core_Rulebook_01_09_26.txt`, ex. l.6373/6434/6652/6778/6833/6995/7091) -
-  contrairement à ce que l'entrée du 13/09 plus bas supposait ("libellé de mon cru"). **Donc
-  pas besoin de réécrire ces `<Description>`** : seul le `id="RULES-Txxxx"` doit gagner le
-  suffixe `_*`. Seule `RULES-T0107` (Resistant) reste à vérifier contre le livre (non confirmé
-  avant coupure) - vérifier vite avant d'écrire, sinon garder `"Resistant (Threat)"` tel quel
-  par défaut (cohérent avec le motif des 13 autres).
-- **Liste des ids de spécialisation à créer** (radical_SUFFIXE, majuscules, sur le modèle V4
-  `RULES-T0012_HANDRICH`) - 61 entrées concrètes, regroupées par talent générique. Talents
-  sans AUCUNE variante concrète dans ce livre (générique seul suffit) : `T0015` Bless,
-  `T0071` Invoke, `T0009` Artistic, `T0066` Impassioned Zeal.
-  - `T0002` Acute Sense : SIGHT, HEARING, TASTE, TOUCH (Touch nécessaire même sans mention
-    isolée - réutilisé dans les deux paires "or")
-  - `T0007` Arcane Magic : HEAVENS, HEDGECRAFT, WITCHCRAFT ("Any Colour Lore" → générique
-    `_*`, simplification acceptée : le mécanisme actuel ne distingue pas "toute Lore" de
-    "Lore de Couleur seulement", comme en V4)
-  - `T0032` Craftsman : BOATBUILDER, HERBALIST, APOTHECARY, BARBER, CARTOGRAPHER, ENGINEER,
-    EXPLOSIVES (+ générique pour "(Any One)" et "(?)" pour "(as Trade)")
-  - `T0046` Etiquette : ALL, CRIMINALS, CULTISTS, GUILDER, NOBLES, SCHOLARS, SERVANTS,
-    SOLDIERS
-  - `T0049` Fearless : BEASTS, BOUNTIES, CRIMINALS, EVERYTHING, INTRUDERS, MERCHANTS,
-    OUTLAWS, PAUPERS, RATS, RIVERWARDENS, ROADWARDENS, UNDEAD, WATCHMEN, WITCHES, WRECKERS
-  - `T0062` Hatred : HERETICS, OUTLAWS
-  - `T0086` Master Tradesman : APOTHECARY, BOATBUILDER, ENGINEER, HERBALIST (+ "(?)" pour
-    "(as Trade)")
-  - `T0107` Resistant : DISEASE, POISON, CHAOS (celui-ci trouvé seulement dans le
-    `SUBCHAPTER_TALENT` d'une espèce, pas un métier - "Resistant (Chaos)")
-  - `T0115` Savant : ART, CHEMISTRY, ENGINEERING, FOLKLORE, HERBS, LAW, LOCAL, MEDICINE,
-    POLITICS, RIVERWAYS, THEOLOGY
-  - `T0134` Striding Gait : ALL, COASTAL, ROCKY, WETLAND
-
-**Prochaine étape exacte** : (1) vérifier vite le libellé officiel de `Resistant` si besoin ;
-(2) dans `DATA_TALENT`, ajouter `_*` à l'`id` des 16 talents (Description inchangée dans
-quasi tous les cas) ; (3) créer le chapitre `DATA_TALENT_SPECIALIZATION` (n'existe pas encore
-dans ce livre) avec les 61 entrées listées ci-dessus, `<Generique>` pointant vers le radical
-`_*` correspondant ; (4) réécrire les 184 références (`<Talent name=` et `<Talent>` bruts) et
-les 3 `id=` de `DATA_RANDOM_TALENT`, en résolvant chaque variante vers son nouvel id (générique
-`_*`, id de spécialisation précis, paire `id1/id2` pour les 5 "A ou B", ou `_*` + commentaire
-`(?)` pour les "(as Trade)"), plus le correctif `Guilders`→`Guilder`. Compiler, laisser Nono
-tester. Faire tout d'un coup sur ce seul fichier, pas par carrière, pour éviter un état
-incohérent (comme décidé pour le peuplement initial).
+**En cours / prochaine étape** : test visuel par Nono dans WinLivre (catalogue des 14
+talents + leurs spécialisations, affichage des 5 paires `id1/id2`) puis dans WinPersonnage
+si un personnage utilise un de ces talents. Détail complet de la conception (pourquoi ces
+choix, les 4 cas particuliers "(as Trade)"/"A ou B"/"Any Colour Lore"/Guilders) dans
+`Log.txt`, entrées du 13 et du 14/09/2026.
 
 ---
 

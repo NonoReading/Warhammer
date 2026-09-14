@@ -3901,3 +3901,35 @@ liste dans CONTEXT.md 2.70 (en tete de fichier). Decouverte annexe non traitee :
 metiers NATIO-WORK001 a 030 (Nations of Mankind) ne sont lies a aucune race (aucune Specie ne
 les liste dans son SUBCHAPTER_CAREER) - a ajouter a A FAIRE.txt.
 Fichiers modifies : CONTEXT.md, Log.txt.
+
+14/09/2026 - SPECIALISATION DES 14 TALENTS A PARAMETRE DU RULEBOOK V5 : ECRITURE XML FAITE
+(CONTEXT.md 2.70). Suite de la session du 13/09 (inventaire et decisions faits, rien ecrit).
+Ecrit via un script Perl jetable (pas a la main sur 184 references) qui resout chaque
+occurrence a partir du commentaire XML deja present sur la ligne suivante (ex. <!-- Etiquette
+(Guilder) -->) plutot que par une table ecrite a la main - fiabilise la couverture des 184
+references + 14 declarations DATA_TALENT + 3 DATA_RANDOM_TALENT sans erreur de recopie.
+Correction au passage : le chiffre "16 talents" de la session du 13/09 etait une erreur de
+calcul, la liste reelle en compte 14 (T0009 Artistic et T0066 Impassioned Zeal inclus, comme
+decide). RULES-T0107 (Resistant) verifie dans le texte du livre avant ecriture : en-tete
+officiel confirme "Resistant (Threat)" (l.6932), Description inchangee comme pour les 13
+autres. Nouveau chapitre DATA_TALENT_SPECIALIZATION cree avec 61 entrees (Generique pointant
+vers le radical _*). Cas particuliers traites : 5 paires "A ou B" en RULES-Txxxx/RULES-Tyyyy
+(Acute Sense Sight-or-Touch/Taste-or-Touch, Etiquette Criminals-or-Scholars/Nobles-or-
+Soldiers, Resistant Disease-or-Poison) ; 4 "(as Trade)" (Craftsman/Master Tradesman) resolus
+en id generique + commentaire "(?)" (limite connue, mecanisme de resolution dynamique absent,
+ajoutee a A FAIRE.txt) ; "Arcane Magic (Any Colour Lore)" traite comme un troisieme marqueur
+generique au meme titre que "(Any One)" (simplification deja actee le 13/09). Typo Etiquette
+(Guilders)->(Guilder) corrigee partout.
+Verification avant ecriture definitive : diff de la version generee contre l'original limite
+exactement aux lignes attendues (206 lignes modifiees + 246 lignes neuves du nouveau chapitre,
+rien d'autre touche) - travail fait sur une copie puis bascule apres controle, pas d'edition
+directe du fichier de jeu. Compile (lazbuild, 0 erreur). WarhammerHelp.exe lance et reste
+stable plusieurs secondes (le chargement du livre RULES au demarrage ne leve pas d'exception),
+ferme ensuite - test visuel dans WinLivre/WinPersonnage (affichage des specialisations
+groupees, rendu des 5 paires id1/id2) laisse a Nono, pas fait dans cette session.
+A retenir pour un futur chantier similaire : quand une transformation mecanique et repetitive
+(des centaines de references a resoudre depuis un motif deja present dans le fichier, ici un
+commentaire XML) doit etre appliquee sur un gros fichier, un petit script jetable execute puis
+verifie par diff est plus fiable qu'une suite d'edits manuels - le diff sert de preuve que rien
+d'autre n'a bouge.
+Fichiers modifies : DATABASE\WFRP5\BOOK_RULESBOOK.Xml, CONTEXT.md, Log.txt, A FAIRE.txt.

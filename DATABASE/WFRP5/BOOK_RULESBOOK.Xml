@@ -1436,7 +1436,7 @@ As sailing one ship is not so different to sailing another, having any Sail Spec
 <PDF>""</PDF>
 <Test language="ENGLISH">""</Test>
 </Talent>
-<Talent id="RULES-T0002">
+<Talent id="RULES-T0002_*">
 <Attribut>""</Attribut>
 <Description language="ENGLISH">"Acute Sense (Sense)"</Description>
 <Short language="ENGLISH">""</Short>
@@ -1486,7 +1486,7 @@ As sailing one ship is not so different to sailing another, having any Sail Spec
 <PDF>""</PDF>
 <Test language="ENGLISH">""</Test>
 </Talent>
-<Talent id="RULES-T0007">
+<Talent id="RULES-T0007_*">
 <Attribut>""</Attribut>
 <Description language="ENGLISH">"Arcane Magic (Lore)"</Description>
 <Short language="ENGLISH">""</Short>
@@ -1506,7 +1506,7 @@ As sailing one ship is not so different to sailing another, having any Sail Spec
 <PDF>""</PDF>
 <Test language="ENGLISH">""</Test>
 </Talent>
-<Talent id="RULES-T0009">
+<Talent id="RULES-T0009_*">
 <Attribut>""</Attribut>
 <Description language="ENGLISH">"Artistic (Art)"</Description>
 <Short language="ENGLISH">""</Short>
@@ -1566,7 +1566,7 @@ As sailing one ship is not so different to sailing another, having any Sail Spec
 <PDF>""</PDF>
 <Test language="ENGLISH">""</Test>
 </Talent>
-<Talent id="RULES-T0015">
+<Talent id="RULES-T0015_*">
 <Attribut>""</Attribut>
 <Description language="ENGLISH">"Bless (Deity)"</Description>
 <Short language="ENGLISH">""</Short>
@@ -1737,7 +1737,7 @@ As sailing one ship is not so different to sailing another, having any Sail Spec
 <PDF>""</PDF>
 <Test language="ENGLISH">""</Test>
 </Talent>
-<Talent id="RULES-T0032">
+<Talent id="RULES-T0032_*">
 <Attribut>""</Attribut>
 <Description language="ENGLISH">"Craftsman (Trade)"</Description>
 <Short language="ENGLISH">""</Short>
@@ -1877,7 +1877,7 @@ As sailing one ship is not so different to sailing another, having any Sail Spec
 <PDF>""</PDF>
 <Test language="ENGLISH">""</Test>
 </Talent>
-<Talent id="RULES-T0046">
+<Talent id="RULES-T0046_*">
 <Attribut>""</Attribut>
 <Description language="ENGLISH">"Etiquette (Social Group)"</Description>
 <Short language="ENGLISH">""</Short>
@@ -1907,7 +1907,7 @@ As sailing one ship is not so different to sailing another, having any Sail Spec
 <PDF>""</PDF>
 <Test language="ENGLISH">""</Test>
 </Talent>
-<Talent id="RULES-T0049">
+<Talent id="RULES-T0049_*">
 <Attribut>""</Attribut>
 <Description language="ENGLISH">"Fearless (Enemy)"</Description>
 <Short language="ENGLISH">""</Short>
@@ -2037,7 +2037,7 @@ As sailing one ship is not so different to sailing another, having any Sail Spec
 <PDF>""</PDF>
 <Test language="ENGLISH">""</Test>
 </Talent>
-<Talent id="RULES-T0062">
+<Talent id="RULES-T0062_*">
 <Attribut>""</Attribut>
 <Description language="ENGLISH">"Hatred (Group)"</Description>
 <Short language="ENGLISH">""</Short>
@@ -2077,7 +2077,7 @@ As sailing one ship is not so different to sailing another, having any Sail Spec
 <PDF>""</PDF>
 <Test language="ENGLISH">""</Test>
 </Talent>
-<Talent id="RULES-T0066">
+<Talent id="RULES-T0066_*">
 <Attribut>""</Attribut>
 <Description language="ENGLISH">"Impassioned Zeal (Cause)"</Description>
 <Short language="ENGLISH">""</Short>
@@ -2127,7 +2127,7 @@ As sailing one ship is not so different to sailing another, having any Sail Spec
 <PDF>""</PDF>
 <Test language="ENGLISH">""</Test>
 </Talent>
-<Talent id="RULES-T0071">
+<Talent id="RULES-T0071_*">
 <Attribut>""</Attribut>
 <Description language="ENGLISH">"Invoke (Deity)"</Description>
 <Short language="ENGLISH">""</Short>
@@ -2279,7 +2279,7 @@ As sailing one ship is not so different to sailing another, having any Sail Spec
 <PDF>""</PDF>
 <Test language="ENGLISH">""</Test>
 </Talent>
-<Talent id="RULES-T0086">
+<Talent id="RULES-T0086_*">
 <Attribut>""</Attribut>
 <Description language="ENGLISH">"Master Tradesman (Trade)"</Description>
 <Short language="ENGLISH">""</Short>
@@ -2490,7 +2490,7 @@ As sailing one ship is not so different to sailing another, having any Sail Spec
 <PDF>""</PDF>
 <Test language="ENGLISH">""</Test>
 </Talent>
-<Talent id="RULES-T0107">
+<Talent id="RULES-T0107_*">
 <Attribut>""</Attribut>
 <Description language="ENGLISH">"Resistant (Threat)"</Description>
 <Short language="ENGLISH">""</Short>
@@ -2570,7 +2570,7 @@ As sailing one ship is not so different to sailing another, having any Sail Spec
 <PDF>""</PDF>
 <Test language="ENGLISH">""</Test>
 </Talent>
-<Talent id="RULES-T0115">
+<Talent id="RULES-T0115_*">
 <Attribut>""</Attribut>
 <Description language="ENGLISH">"Savant (Lore Specialisation)"</Description>
 <Short language="ENGLISH">""</Short>
@@ -2762,7 +2762,7 @@ As sailing one ship is not so different to sailing another, having any Sail Spec
 <PDF>""</PDF>
 <Test language="ENGLISH">""</Test>
 </Talent>
-<Talent id="RULES-T0134">
+<Talent id="RULES-T0134_*">
 <Attribut>""</Attribut>
 <Description language="ENGLISH">"Striding Gait (Terrain)"</Description>
 <Short language="ENGLISH">""</Short>
@@ -3107,10 +3107,256 @@ As sailing one ship is not so different to sailing another, having any Sail Spec
 <Test language="ENGLISH">""</Test>
 </Talent>
 </DATA_TALENT>
+<DATA_TALENT_SPECIALIZATION>
+<Talent id="RULES-T0002_HEARING">
+<Description language="ENGLISH">"Acute Sense (Hearing)"</Description>
+<Generique>"RULES-T0002_*"</Generique>
+</Talent>
+<Talent id="RULES-T0002_SIGHT">
+<Description language="ENGLISH">"Acute Sense (Sight)"</Description>
+<Generique>"RULES-T0002_*"</Generique>
+</Talent>
+<Talent id="RULES-T0002_TASTE">
+<Description language="ENGLISH">"Acute Sense (Taste)"</Description>
+<Generique>"RULES-T0002_*"</Generique>
+</Talent>
+<Talent id="RULES-T0002_TOUCH">
+<Description language="ENGLISH">"Acute Sense (Touch)"</Description>
+<Generique>"RULES-T0002_*"</Generique>
+</Talent>
+<Talent id="RULES-T0007_HEAVENS">
+<Description language="ENGLISH">"Arcane Magic (Heavens)"</Description>
+<Generique>"RULES-T0007_*"</Generique>
+</Talent>
+<Talent id="RULES-T0007_HEDGECRAFT">
+<Description language="ENGLISH">"Arcane Magic (Hedgecraft)"</Description>
+<Generique>"RULES-T0007_*"</Generique>
+</Talent>
+<Talent id="RULES-T0007_WITCHCRAFT">
+<Description language="ENGLISH">"Arcane Magic (Witchcraft)"</Description>
+<Generique>"RULES-T0007_*"</Generique>
+</Talent>
+<Talent id="RULES-T0032_APOTHECARY">
+<Description language="ENGLISH">"Craftsman (Apothecary)"</Description>
+<Generique>"RULES-T0032_*"</Generique>
+</Talent>
+<Talent id="RULES-T0032_BARBER">
+<Description language="ENGLISH">"Craftsman (Barber)"</Description>
+<Generique>"RULES-T0032_*"</Generique>
+</Talent>
+<Talent id="RULES-T0032_BOATBUILDER">
+<Description language="ENGLISH">"Craftsman (Boatbuilder)"</Description>
+<Generique>"RULES-T0032_*"</Generique>
+</Talent>
+<Talent id="RULES-T0032_CARTOGRAPHER">
+<Description language="ENGLISH">"Craftsman (Cartographer)"</Description>
+<Generique>"RULES-T0032_*"</Generique>
+</Talent>
+<Talent id="RULES-T0032_ENGINEER">
+<Description language="ENGLISH">"Craftsman (Engineer)"</Description>
+<Generique>"RULES-T0032_*"</Generique>
+</Talent>
+<Talent id="RULES-T0032_EXPLOSIVES">
+<Description language="ENGLISH">"Craftsman (Explosives)"</Description>
+<Generique>"RULES-T0032_*"</Generique>
+</Talent>
+<Talent id="RULES-T0032_HERBALIST">
+<Description language="ENGLISH">"Craftsman (Herbalist)"</Description>
+<Generique>"RULES-T0032_*"</Generique>
+</Talent>
+<Talent id="RULES-T0046_ALL">
+<Description language="ENGLISH">"Etiquette (All)"</Description>
+<Generique>"RULES-T0046_*"</Generique>
+</Talent>
+<Talent id="RULES-T0046_CRIMINALS">
+<Description language="ENGLISH">"Etiquette (Criminals)"</Description>
+<Generique>"RULES-T0046_*"</Generique>
+</Talent>
+<Talent id="RULES-T0046_CULTISTS">
+<Description language="ENGLISH">"Etiquette (Cultists)"</Description>
+<Generique>"RULES-T0046_*"</Generique>
+</Talent>
+<Talent id="RULES-T0046_GUILDER">
+<Description language="ENGLISH">"Etiquette (Guilder)"</Description>
+<Generique>"RULES-T0046_*"</Generique>
+</Talent>
+<Talent id="RULES-T0046_NOBLES">
+<Description language="ENGLISH">"Etiquette (Nobles)"</Description>
+<Generique>"RULES-T0046_*"</Generique>
+</Talent>
+<Talent id="RULES-T0046_SCHOLARS">
+<Description language="ENGLISH">"Etiquette (Scholars)"</Description>
+<Generique>"RULES-T0046_*"</Generique>
+</Talent>
+<Talent id="RULES-T0046_SERVANTS">
+<Description language="ENGLISH">"Etiquette (Servants)"</Description>
+<Generique>"RULES-T0046_*"</Generique>
+</Talent>
+<Talent id="RULES-T0046_SOLDIERS">
+<Description language="ENGLISH">"Etiquette (Soldiers)"</Description>
+<Generique>"RULES-T0046_*"</Generique>
+</Talent>
+<Talent id="RULES-T0049_BEASTS">
+<Description language="ENGLISH">"Fearless (Beasts)"</Description>
+<Generique>"RULES-T0049_*"</Generique>
+</Talent>
+<Talent id="RULES-T0049_BOUNTIES">
+<Description language="ENGLISH">"Fearless (Bounties)"</Description>
+<Generique>"RULES-T0049_*"</Generique>
+</Talent>
+<Talent id="RULES-T0049_CRIMINALS">
+<Description language="ENGLISH">"Fearless (Criminals)"</Description>
+<Generique>"RULES-T0049_*"</Generique>
+</Talent>
+<Talent id="RULES-T0049_EVERYTHING">
+<Description language="ENGLISH">"Fearless (Everything)"</Description>
+<Generique>"RULES-T0049_*"</Generique>
+</Talent>
+<Talent id="RULES-T0049_INTRUDERS">
+<Description language="ENGLISH">"Fearless (Intruders)"</Description>
+<Generique>"RULES-T0049_*"</Generique>
+</Talent>
+<Talent id="RULES-T0049_MERCHANTS">
+<Description language="ENGLISH">"Fearless (Merchants)"</Description>
+<Generique>"RULES-T0049_*"</Generique>
+</Talent>
+<Talent id="RULES-T0049_OUTLAWS">
+<Description language="ENGLISH">"Fearless (Outlaws)"</Description>
+<Generique>"RULES-T0049_*"</Generique>
+</Talent>
+<Talent id="RULES-T0049_PAUPERS">
+<Description language="ENGLISH">"Fearless (Paupers)"</Description>
+<Generique>"RULES-T0049_*"</Generique>
+</Talent>
+<Talent id="RULES-T0049_RATS">
+<Description language="ENGLISH">"Fearless (Rats)"</Description>
+<Generique>"RULES-T0049_*"</Generique>
+</Talent>
+<Talent id="RULES-T0049_RIVERWARDENS">
+<Description language="ENGLISH">"Fearless (Riverwardens)"</Description>
+<Generique>"RULES-T0049_*"</Generique>
+</Talent>
+<Talent id="RULES-T0049_ROADWARDENS">
+<Description language="ENGLISH">"Fearless (Roadwardens)"</Description>
+<Generique>"RULES-T0049_*"</Generique>
+</Talent>
+<Talent id="RULES-T0049_UNDEAD">
+<Description language="ENGLISH">"Fearless (Undead)"</Description>
+<Generique>"RULES-T0049_*"</Generique>
+</Talent>
+<Talent id="RULES-T0049_WATCHMEN">
+<Description language="ENGLISH">"Fearless (Watchmen)"</Description>
+<Generique>"RULES-T0049_*"</Generique>
+</Talent>
+<Talent id="RULES-T0049_WITCHES">
+<Description language="ENGLISH">"Fearless (Witches)"</Description>
+<Generique>"RULES-T0049_*"</Generique>
+</Talent>
+<Talent id="RULES-T0049_WRECKERS">
+<Description language="ENGLISH">"Fearless (Wreckers)"</Description>
+<Generique>"RULES-T0049_*"</Generique>
+</Talent>
+<Talent id="RULES-T0062_HERETICS">
+<Description language="ENGLISH">"Hatred (Heretics)"</Description>
+<Generique>"RULES-T0062_*"</Generique>
+</Talent>
+<Talent id="RULES-T0062_OUTLAWS">
+<Description language="ENGLISH">"Hatred (Outlaws)"</Description>
+<Generique>"RULES-T0062_*"</Generique>
+</Talent>
+<Talent id="RULES-T0086_APOTHECARY">
+<Description language="ENGLISH">"Master Tradesman (Apothecary)"</Description>
+<Generique>"RULES-T0086_*"</Generique>
+</Talent>
+<Talent id="RULES-T0086_BOATBUILDER">
+<Description language="ENGLISH">"Master Tradesman (Boatbuilder)"</Description>
+<Generique>"RULES-T0086_*"</Generique>
+</Talent>
+<Talent id="RULES-T0086_ENGINEER">
+<Description language="ENGLISH">"Master Tradesman (Engineer)"</Description>
+<Generique>"RULES-T0086_*"</Generique>
+</Talent>
+<Talent id="RULES-T0086_HERBALIST">
+<Description language="ENGLISH">"Master Tradesman (Herbalist)"</Description>
+<Generique>"RULES-T0086_*"</Generique>
+</Talent>
+<Talent id="RULES-T0107_CHAOS">
+<Description language="ENGLISH">"Resistant (Chaos)"</Description>
+<Generique>"RULES-T0107_*"</Generique>
+</Talent>
+<Talent id="RULES-T0107_DISEASE">
+<Description language="ENGLISH">"Resistant (Disease)"</Description>
+<Generique>"RULES-T0107_*"</Generique>
+</Talent>
+<Talent id="RULES-T0107_POISON">
+<Description language="ENGLISH">"Resistant (Poison)"</Description>
+<Generique>"RULES-T0107_*"</Generique>
+</Talent>
+<Talent id="RULES-T0115_ART">
+<Description language="ENGLISH">"Savant (Art)"</Description>
+<Generique>"RULES-T0115_*"</Generique>
+</Talent>
+<Talent id="RULES-T0115_CHEMISTRY">
+<Description language="ENGLISH">"Savant (Chemistry)"</Description>
+<Generique>"RULES-T0115_*"</Generique>
+</Talent>
+<Talent id="RULES-T0115_ENGINEERING">
+<Description language="ENGLISH">"Savant (Engineering)"</Description>
+<Generique>"RULES-T0115_*"</Generique>
+</Talent>
+<Talent id="RULES-T0115_FOLKLORE">
+<Description language="ENGLISH">"Savant (Folklore)"</Description>
+<Generique>"RULES-T0115_*"</Generique>
+</Talent>
+<Talent id="RULES-T0115_HERBS">
+<Description language="ENGLISH">"Savant (Herbs)"</Description>
+<Generique>"RULES-T0115_*"</Generique>
+</Talent>
+<Talent id="RULES-T0115_LAW">
+<Description language="ENGLISH">"Savant (Law)"</Description>
+<Generique>"RULES-T0115_*"</Generique>
+</Talent>
+<Talent id="RULES-T0115_LOCAL">
+<Description language="ENGLISH">"Savant (Local)"</Description>
+<Generique>"RULES-T0115_*"</Generique>
+</Talent>
+<Talent id="RULES-T0115_MEDICINE">
+<Description language="ENGLISH">"Savant (Medicine)"</Description>
+<Generique>"RULES-T0115_*"</Generique>
+</Talent>
+<Talent id="RULES-T0115_POLITICS">
+<Description language="ENGLISH">"Savant (Politics)"</Description>
+<Generique>"RULES-T0115_*"</Generique>
+</Talent>
+<Talent id="RULES-T0115_RIVERWAYS">
+<Description language="ENGLISH">"Savant (Riverways)"</Description>
+<Generique>"RULES-T0115_*"</Generique>
+</Talent>
+<Talent id="RULES-T0115_THEOLOGY">
+<Description language="ENGLISH">"Savant (Theology)"</Description>
+<Generique>"RULES-T0115_*"</Generique>
+</Talent>
+<Talent id="RULES-T0134_ALL">
+<Description language="ENGLISH">"Striding Gait (All)"</Description>
+<Generique>"RULES-T0134_*"</Generique>
+</Talent>
+<Talent id="RULES-T0134_COASTAL">
+<Description language="ENGLISH">"Striding Gait (Coastal)"</Description>
+<Generique>"RULES-T0134_*"</Generique>
+</Talent>
+<Talent id="RULES-T0134_ROCKY">
+<Description language="ENGLISH">"Striding Gait (Rocky)"</Description>
+<Generique>"RULES-T0134_*"</Generique>
+</Talent>
+<Talent id="RULES-T0134_WETLAND">
+<Description language="ENGLISH">"Striding Gait (Wetland)"</Description>
+<Generique>"RULES-T0134_*"</Generique>
+</Talent>
+</DATA_TALENT_SPECIALIZATION>
 <DATA_RANDOM_TALENT>
-<DATA_RANDOM_TALENT id="RULES-T0002">
+<DATA_RANDOM_TALENT id="RULES-T0002_SIGHT">
 <Specie>"-x"</Specie>
-<Talent name="RULES-T0002">"01-02"</Talent>
+<Talent name="RULES-T0002_SIGHT">"01-02"</Talent>
   <!-- Acute Sense (Sight) -->
 </DATA_RANDOM_TALENT>
 <DATA_RANDOM_TALENT id="RULES-T0005">
@@ -3118,9 +3364,9 @@ As sailing one ship is not so different to sailing another, having any Sail Spec
 <Talent name="RULES-T0005">"03-05"</Talent>
   <!-- Ambidextrous -->
 </DATA_RANDOM_TALENT>
-<DATA_RANDOM_TALENT id="RULES-T0009">
+<DATA_RANDOM_TALENT id="RULES-T0009_*">
 <Specie>"-x"</Specie>
-<Talent name="RULES-T0009">"06-07"</Talent>
+<Talent name="RULES-T0009_*">"06-07"</Talent>
   <!-- Artistic -->
 </DATA_RANDOM_TALENT>
 <DATA_RANDOM_TALENT id="RULES-T0010">
@@ -3228,9 +3474,9 @@ As sailing one ship is not so different to sailing another, having any Sail Spec
 <Talent name="RULES-T0105">"58-60"</Talent>
   <!-- Read/Write -->
 </DATA_RANDOM_TALENT>
-<DATA_RANDOM_TALENT id="RULES-T0107">
+<DATA_RANDOM_TALENT id="RULES-T0107_POISON">
 <Specie>"-x"</Specie>
-<Talent name="RULES-T0107">"61-62"</Talent>
+<Talent name="RULES-T0107_POISON">"61-62"</Talent>
   <!-- Resistant (Poison) -->
 </DATA_RANDOM_TALENT>
 <DATA_RANDOM_TALENT id="RULES-T0114">
@@ -3501,11 +3747,11 @@ As sailing one ship is not so different to sailing another, having any Sail Spec
   <!-- Trade (Cook) -->
 </SUBCHAPTER_SKILL>
 <SUBCHAPTER_TALENT>
-<Talent>"RULES-T0002"</Talent>
+<Talent>"RULES-T0002_TASTE"</Talent>
   <!-- Acute Sense (Taste) -->
 <Talent>"RULES-T0089"</Talent>
   <!-- Night Vision -->
-<Talent>"RULES-T0107"</Talent>
+<Talent>"RULES-T0107_CHAOS"</Talent>
   <!-- Resistant (Chaos) -->
 <Talent>"RULES-T*"</Talent>
   <!-- Random Talent -->
@@ -3561,7 +3807,7 @@ As sailing one ship is not so different to sailing another, having any Sail Spec
   <!-- Swim -->
 </SUBCHAPTER_SKILL>
 <SUBCHAPTER_TALENT>
-<Talent>"RULES-T0002"</Talent>
+<Talent>"RULES-T0002_SIGHT"</Talent>
   <!-- Acute Sense (Sight) -->
 <Talent>"RULES-T0030/RULES-T0116"</Talent>
   <!-- Coolheaded / Savvy -->
@@ -3621,7 +3867,7 @@ As sailing one ship is not so different to sailing another, having any Sail Spec
   <!-- Track -->
 </SUBCHAPTER_SKILL>
 <SUBCHAPTER_TALENT>
-<Talent>"RULES-T0002"</Talent>
+<Talent>"RULES-T0002_SIGHT"</Talent>
   <!-- Acute Sense (Sight) -->
 <Talent>"RULES-T0061/RULES-T0164"</Talent>
   <!-- Hardy / Second Sight -->
@@ -3723,11 +3969,11 @@ As sailing one ship is not so different to sailing another, having any Sail Spec
   <!-- Intimidate -->
 </SUBCHAPTER_SKILL>
 <SUBCHAPTER_TALENT>
-<Talent name="RULES-T0002">"1"</Talent>
+<Talent name="RULES-T0002_TASTE">"1"</Talent>
   <!-- Acute Sense (Taste) -->
 <Talent name="RULES-T0028">"1"</Talent>
   <!-- Concoct -->
-<Talent name="RULES-T0032">"1"</Talent>
+<Talent name="RULES-T0032_APOTHECARY">"1"</Talent>
   <!-- Craftsman (Apothecary) -->
 <Talent name="RULES-T0105">"1"</Talent>
   <!-- Read/Write -->
@@ -3735,23 +3981,23 @@ As sailing one ship is not so different to sailing another, having any Sail Spec
   <!-- Criminal -->
 <Talent name="RULES-T0035">"2"</Talent>
   <!-- Dealmaker -->
-<Talent name="RULES-T0046">"2"</Talent>
+<Talent name="RULES-T0046_GUILDER">"2"</Talent>
   <!-- Etiquette (Guilder) -->
 <Talent name="RULES-T0099">"2"</Talent>
   <!-- Pharmacist -->
 <Talent name="RULES-T0016">"3"</Talent>
   <!-- Bookish -->
-<Talent name="RULES-T0046">"3"</Talent>
+<Talent name="RULES-T0046_CRIMINALS/RULES-T0046_SCHOLARS">"3"</Talent>
   <!-- Etiquette (Criminals or Scholars) -->
-<Talent name="RULES-T0086">"3"</Talent>
+<Talent name="RULES-T0086_APOTHECARY">"3"</Talent>
   <!-- Master Tradesman (Apothecary) -->
-<Talent name="RULES-T0107">"3"</Talent>
+<Talent name="RULES-T0107_POISON">"3"</Talent>
   <!-- Resistant (Poison) -->
 <Talent name="RULES-T0030">"4"</Talent>
   <!-- Coolheaded -->
 <Talent name="RULES-T0075">"4"</Talent>
   <!-- Kingpin -->
-<Talent name="RULES-T0115">"4"</Talent>
+<Talent name="RULES-T0115_CHEMISTRY">"4"</Talent>
   <!-- Savant (Chemistry) -->
 <Talent name="RULES-T0116">"4"</Talent>
   <!-- Savvy -->
@@ -3850,7 +4096,7 @@ As sailing one ship is not so different to sailing another, having any Sail Spec
   <!-- Perception -->
 </SUBCHAPTER_SKILL>
 <SUBCHAPTER_TALENT>
-<Talent name="RULES-T0032">"1"</Talent>
+<Talent name="RULES-T0032_ENGINEER">"1"</Talent>
   <!-- Craftsman (Engineer) -->
 <Talent name="RULES-T0105">"1"</Talent>
   <!-- Read/Write -->
@@ -3858,15 +4104,15 @@ As sailing one ship is not so different to sailing another, having any Sail Spec
   <!-- Tinker -->
 <Talent name="RULES-T0154">"1"</Talent>
   <!-- Unshakeable -->
-<Talent name="RULES-T0046">"2"</Talent>
+<Talent name="RULES-T0046_GUILDER">"2"</Talent>
   <!-- Etiquette (Guilder) -->
-<Talent name="RULES-T0046">"2"</Talent>
+<Talent name="RULES-T0046_SCHOLARS">"2"</Talent>
   <!-- Etiquette (Scholars) -->
 <Talent name="RULES-T0060">"2"</Talent>
   <!-- Gunner -->
 <Talent name="RULES-T0083">"2"</Talent>
   <!-- Marksman -->
-<Talent name="RULES-T0086">"3"</Talent>
+<Talent name="RULES-T0086_ENGINEER">"3"</Talent>
   <!-- Master Tradesman (Engineer) -->
 <Talent name="RULES-T0095">"3"</Talent>
   <!-- Orientation -->
@@ -3880,7 +4126,7 @@ As sailing one ship is not so different to sailing another, having any Sail Spec
   <!-- Magnum Opus -->
 <Talent name="RULES-T0103">"4"</Talent>
   <!-- Rapid Reload -->
-<Talent name="RULES-T0115">"4"</Talent>
+<Talent name="RULES-T0115_ENGINEERING">"4"</Talent>
   <!-- Savant (Engineering) -->
 </SUBCHAPTER_TALENT>
 <SUBCHAPTER_ITEM>
@@ -3977,7 +4223,7 @@ As sailing one ship is not so different to sailing another, having any Sail Spec
 <SUBCHAPTER_TALENT>
 <Talent name="RULES-T0166">"1"</Talent>
   <!-- Blather -->
-<Talent name="RULES-T0046">"1"</Talent>
+<Talent name="RULES-T0046_SCHOLARS">"1"</Talent>
   <!-- Etiquette (Scholars) -->
 <Talent name="RULES-T0105">"1"</Talent>
   <!-- Read/Write -->
@@ -3987,17 +4233,17 @@ As sailing one ship is not so different to sailing another, having any Sail Spec
   <!-- Argumentative -->
 <Talent name="RULES-T0018">"2"</Talent>
   <!-- Briber -->
-<Talent name="RULES-T0046">"2"</Talent>
+<Talent name="RULES-T0046_CRIMINALS">"2"</Talent>
   <!-- Etiquette (Criminals) -->
-<Talent name="RULES-T0046">"2"</Talent>
+<Talent name="RULES-T0046_GUILDER">"2"</Talent>
   <!-- Etiquette (Guilder) -->
 <Talent name="RULES-T0022">"3"</Talent>
   <!-- Cat-tongued -->
-<Talent name="RULES-T0066">"3"</Talent>
+<Talent name="RULES-T0066_*">"3"</Talent>
   <!-- Impassioned Zeal -->
 <Talent name="RULES-T0087">"3"</Talent>
   <!-- Menacing -->
-<Talent name="RULES-T0115">"3"</Talent>
+<Talent name="RULES-T0115_LAW">"3"</Talent>
   <!-- Savant (Law) -->
 <Talent name="RULES-T0016">"4"</Talent>
   <!-- Bookish -->
@@ -4101,7 +4347,7 @@ As sailing one ship is not so different to sailing another, having any Sail Spec
   <!-- Research -->
 </SUBCHAPTER_SKILL>
 <SUBCHAPTER_TALENT>
-<Talent name="RULES-T0015">"1"</Talent>
+<Talent name="RULES-T0015_*">"1"</Talent>
   <!-- Bless (Any One) -->
 <Talent name="RULES-T0064">"1"</Talent>
   <!-- Holy Visions -->
@@ -4109,19 +4355,19 @@ As sailing one ship is not so different to sailing another, having any Sail Spec
   <!-- Panhandle -->
 <Talent name="RULES-T0105">"1"</Talent>
   <!-- Read/Write -->
-<Talent name="RULES-T0046">"2"</Talent>
+<Talent name="RULES-T0046_CULTISTS">"2"</Talent>
   <!-- Etiquette (Cultists) -->
 <Talent name="RULES-T0051">"2"</Talent>
   <!-- Field Dressing -->
-<Talent name="RULES-T0071">"2"</Talent>
+<Talent name="RULES-T0071_*">"2"</Talent>
   <!-- Invoke (Any One) -->
 <Talent name="RULES-T0120">"2"</Talent>
   <!-- Seasoned Traveller -->
 <Talent name="RULES-T0069">"3"</Talent>
   <!-- Inspiring -->
-<Talent name="RULES-T0107">"3"</Talent>
+<Talent name="RULES-T0107_*">"3"</Talent>
   <!-- Resistant (Any One) -->
-<Talent name="RULES-T0115">"3"</Talent>
+<Talent name="RULES-T0115_THEOLOGY">"3"</Talent>
   <!-- Savant (Theology) -->
 <Talent name="RULES-T0133">"3"</Talent>
   <!-- Stout-hearted -->
@@ -4227,15 +4473,15 @@ As sailing one ship is not so different to sailing another, having any Sail Spec
 <SUBCHAPTER_TALENT>
 <Talent name="RULES-T0016">"1"</Talent>
   <!-- Bookish -->
-<Talent name="RULES-T0032">"1"</Talent>
+<Talent name="RULES-T0032_BARBER">"1"</Talent>
   <!-- Craftsman (Barber) -->
 <Talent name="RULES-T0051">"1"</Talent>
   <!-- Field Dressing -->
 <Talent name="RULES-T0105">"1"</Talent>
   <!-- Read/Write -->
-<Talent name="RULES-T0046">"2"</Talent>
+<Talent name="RULES-T0046_GUILDER">"2"</Talent>
   <!-- Etiquette (Guilder) -->
-<Talent name="RULES-T0046">"2"</Talent>
+<Talent name="RULES-T0046_SCHOLARS">"2"</Talent>
   <!-- Etiquette (Scholars) -->
 <Talent name="RULES-T0090">"2"</Talent>
   <!-- Nimble-fingered -->
@@ -4243,7 +4489,7 @@ As sailing one ship is not so different to sailing another, having any Sail Spec
   <!-- Surgery -->
 <Talent name="RULES-T0005">"3"</Talent>
   <!-- Ambidextrous -->
-<Talent name="RULES-T0107">"3"</Talent>
+<Talent name="RULES-T0107_DISEASE">"3"</Talent>
   <!-- Resistant (Disease) -->
 <Talent name="RULES-T0116">"3"</Talent>
   <!-- Savvy -->
@@ -4251,9 +4497,9 @@ As sailing one ship is not so different to sailing another, having any Sail Spec
   <!-- Strike to Injure -->
 <Talent name="RULES-T0021">"4"</Talent>
   <!-- Carouser -->
-<Talent name="RULES-T0046">"4"</Talent>
+<Talent name="RULES-T0046_NOBLES">"4"</Talent>
   <!-- Etiquette (Nobles) -->
-<Talent name="RULES-T0115">"4"</Talent>
+<Talent name="RULES-T0115_MEDICINE">"4"</Talent>
   <!-- Savant (Medicine) -->
 <Talent name="RULES-T0140">"4"</Talent>
   <!-- Strong-minded -->
@@ -4351,7 +4597,7 @@ As sailing one ship is not so different to sailing another, having any Sail Spec
   <!-- Lore (Heraldry) -->
 </SUBCHAPTER_SKILL>
 <SUBCHAPTER_TALENT>
-<Talent name="RULES-T0015">"1"</Talent>
+<Talent name="RULES-T0015_*">"1"</Talent>
   <!-- Bless (Any One) -->
 <Talent name="RULES-T0064">"1"</Talent>
   <!-- Holy Visions -->
@@ -4363,15 +4609,15 @@ As sailing one ship is not so different to sailing another, having any Sail Spec
   <!-- Blather -->
 <Talent name="RULES-T0016">"2"</Talent>
   <!-- Bookish -->
-<Talent name="RULES-T0046">"2"</Talent>
+<Talent name="RULES-T0046_CULTISTS">"2"</Talent>
   <!-- Etiquette (Cultists) -->
-<Talent name="RULES-T0071">"2"</Talent>
+<Talent name="RULES-T0071_*">"2"</Talent>
   <!-- Invoke (Any One) -->
-<Talent name="RULES-T0002">"3"</Talent>
+<Talent name="RULES-T0002_*">"3"</Talent>
   <!-- Acute Sense (Any One) -->
-<Talent name="RULES-T0062">"3"</Talent>
+<Talent name="RULES-T0062_*">"3"</Talent>
   <!-- Hatred (Any One) -->
-<Talent name="RULES-T0066">"3"</Talent>
+<Talent name="RULES-T0066_*">"3"</Talent>
   <!-- Impassioned Zeal -->
 <Talent name="RULES-T0140">"3"</Talent>
   <!-- Strong-minded -->
@@ -4379,9 +4625,9 @@ As sailing one ship is not so different to sailing another, having any Sail Spec
   <!-- Master Orator -->
 <Talent name="RULES-T0102">"4"</Talent>
   <!-- Pure Soul -->
-<Talent name="RULES-T0107">"4"</Talent>
+<Talent name="RULES-T0107_*">"4"</Talent>
   <!-- Resistant (Any One) -->
-<Talent name="RULES-T0115">"4"</Talent>
+<Talent name="RULES-T0115_THEOLOGY">"4"</Talent>
   <!-- Savant (Theology) -->
 </SUBCHAPTER_TALENT>
 <SUBCHAPTER_ITEM>
@@ -4480,7 +4726,7 @@ As sailing one ship is not so different to sailing another, having any Sail Spec
 <SUBCHAPTER_TALENT>
 <Talent name="RULES-T0016">"1"</Talent>
   <!-- Bookish -->
-<Talent name="RULES-T0046">"1"</Talent>
+<Talent name="RULES-T0046_SCHOLARS">"1"</Talent>
   <!-- Etiquette (Scholars) -->
 <Talent name="RULES-T0105">"1"</Talent>
   <!-- Read/Write -->
@@ -4498,7 +4744,7 @@ As sailing one ship is not so different to sailing another, having any Sail Spec
   <!-- Blather -->
 <Talent name="RULES-T0101">"3"</Talent>
   <!-- Public Speaker -->
-<Talent name="RULES-T0115">"3"</Talent>
+<Talent name="RULES-T0115_*">"3"</Talent>
   <!-- Savant (Any One) -->
 <Talent name="RULES-T0150">"3"</Talent>
   <!-- Tower of Memories -->
@@ -4508,7 +4754,7 @@ As sailing one ship is not so different to sailing another, having any Sail Spec
   <!-- Magnum Opus -->
 <Talent name="RULES-T0085">"4"</Talent>
   <!-- Master Orator -->
-<Talent name="RULES-T0115">"4"</Talent>
+<Talent name="RULES-T0115_*">"4"</Talent>
   <!-- Savant (Any One) -->
 </SUBCHAPTER_TALENT>
 <SUBCHAPTER_ITEM>
@@ -4610,15 +4856,15 @@ As sailing one ship is not so different to sailing another, having any Sail Spec
   <!-- Read/Write -->
 <Talent name="RULES-T0164">"1"</Talent>
   <!-- Second Sight -->
-<Talent name="RULES-T0007">"2"</Talent>
+<Talent name="RULES-T0007_*">"2"</Talent>
   <!-- Arcane Magic (Any Colour Lore) -->
-<Talent name="RULES-T0046">"2"</Talent>
+<Talent name="RULES-T0046_SCHOLARS">"2"</Talent>
   <!-- Etiquette (Scholars) -->
 <Talent name="RULES-T0120">"2"</Talent>
   <!-- Seasoned Traveller -->
 <Talent name="RULES-T0125">"2"</Talent>
   <!-- Sixth Sense -->
-<Talent name="RULES-T0032">"3"</Talent>
+<Talent name="RULES-T0032_*">"3"</Talent>
   <!-- Craftsman (Any One) -->
 <Talent name="RULES-T0070">"3"</Talent>
   <!-- Instinctive Diction -->
@@ -4741,7 +4987,7 @@ As sailing one ship is not so different to sailing another, having any Sail Spec
   <!-- Alley Cat -->
 <Talent name="RULES-T0008">"2"</Talent>
   <!-- Argumentative -->
-<Talent name="RULES-T0066">"2"</Talent>
+<Talent name="RULES-T0066_*">"2"</Talent>
   <!-- Impassioned Zeal -->
 <Talent name="RULES-T0101">"2"</Talent>
   <!-- Public Speaker -->
@@ -4753,7 +4999,7 @@ As sailing one ship is not so different to sailing another, having any Sail Spec
   <!-- Flee! -->
 <Talent name="RULES-T0131">"3"</Talent>
   <!-- Step Aside -->
-<Talent name="RULES-T0046">"4"</Talent>
+<Talent name="RULES-T0046_ALL">"4"</Talent>
   <!-- Etiquette (All) -->
 <Talent name="RULES-T0085">"4"</Talent>
   <!-- Master Orator -->
@@ -4857,8 +5103,8 @@ As sailing one ship is not so different to sailing another, having any Sail Spec
   <!-- Intimidate -->
 </SUBCHAPTER_SKILL>
 <SUBCHAPTER_TALENT>
-<Talent name="RULES-T0032">"1"</Talent>
-  <!-- Craftsman (as Trade) -->
+<Talent name="RULES-T0032_*">"1"</Talent>
+  <!-- Craftsman (?) -->
 <Talent name="RULES-T0138">"1"</Talent>
   <!-- Strong Back -->
 <Talent name="RULES-T0148">"1"</Talent>
@@ -4867,16 +5113,16 @@ As sailing one ship is not so different to sailing another, having any Sail Spec
   <!-- Very Strong -->
 <Talent name="RULES-T0035">"2"</Talent>
   <!-- Dealmaker -->
-<Talent name="RULES-T0046">"2"</Talent>
+<Talent name="RULES-T0046_GUILDER">"2"</Talent>
   <!-- Etiquette (Guilder) -->
 <Talent name="RULES-T0090">"2"</Talent>
   <!-- Nimble-fingered -->
 <Talent name="RULES-T0147">"2"</Talent>
   <!-- Sturdy -->
-<Talent name="RULES-T0002">"3"</Talent>
+<Talent name="RULES-T0002_TASTE/RULES-T0002_TOUCH">"3"</Talent>
   <!-- Acute Sense (Taste or Touch) -->
-<Talent name="RULES-T0086">"3"</Talent>
-  <!-- Master Tradesman (as Trade) -->
+<Talent name="RULES-T0086_*">"3"</Talent>
+  <!-- Master Tradesman (?) -->
 <Talent name="RULES-T0105">"3"</Talent>
   <!-- Read/Write -->
 <Talent name="RULES-T0149">"3"</Talent>
@@ -4987,7 +5233,7 @@ As sailing one ship is not so different to sailing another, having any Sail Spec
   <!-- Beneath Notice -->
 <Talent name="RULES-T0096">"1"</Talent>
   <!-- Panhandle -->
-<Talent name="RULES-T0107">"1"</Talent>
+<Talent name="RULES-T0107_DISEASE">"1"</Talent>
   <!-- Resistant (Disease) -->
 <Talent name="RULES-T0132">"1"</Talent>
   <!-- Stone Soup -->
@@ -4997,7 +5243,7 @@ As sailing one ship is not so different to sailing another, having any Sail Spec
   <!-- Blather -->
 <Talent name="RULES-T0033">"2"</Talent>
   <!-- Criminal -->
-<Talent name="RULES-T0046">"2"</Talent>
+<Talent name="RULES-T0046_CRIMINALS">"2"</Talent>
   <!-- Etiquette (Criminals) -->
 <Talent name="RULES-T0038">"3"</Talent>
   <!-- Dirty Fighting -->
@@ -5011,7 +5257,7 @@ As sailing one ship is not so different to sailing another, having any Sail Spec
   <!-- Cat-tongued -->
 <Talent name="RULES-T0035">"4"</Talent>
   <!-- Dealmaker -->
-<Talent name="RULES-T0049">"4"</Talent>
+<Talent name="RULES-T0049_WATCHMEN">"4"</Talent>
   <!-- Fearless (Watchmen) -->
 <Talent name="RULES-T0142">"4"</Talent>
   <!-- Suave -->
@@ -5117,7 +5363,7 @@ As sailing one ship is not so different to sailing another, having any Sail Spec
   <!-- Read/Write -->
 <Talent name="RULES-T0122">"1"</Talent>
   <!-- Sharp -->
-<Talent name="RULES-T0046">"2"</Talent>
+<Talent name="RULES-T0046_*">"2"</Talent>
   <!-- Etiquette (Any One) -->
 <Talent name="RULES-T0092">"2"</Talent>
   <!-- Nose for Trouble -->
@@ -5133,9 +5379,9 @@ As sailing one ship is not so different to sailing another, having any Sail Spec
   <!-- Sixth Sense -->
 <Talent name="RULES-T0142">"3"</Talent>
   <!-- Suave -->
-<Talent name="RULES-T0002">"4"</Talent>
+<Talent name="RULES-T0002_*">"4"</Talent>
   <!-- Acute Sense (Any One) -->
-<Talent name="RULES-T0115">"4"</Talent>
+<Talent name="RULES-T0115_*">"4"</Talent>
   <!-- Savant (Any One) -->
 <Talent name="RULES-T0129">"4"</Talent>
   <!-- Speedreader -->
@@ -5250,13 +5496,13 @@ As sailing one ship is not so different to sailing another, having any Sail Spec
   <!-- Briber -->
 <Talent name="RULES-T0044">"2"</Talent>
   <!-- Embezzle -->
-<Talent name="RULES-T0046">"2"</Talent>
+<Talent name="RULES-T0046_GUILDER">"2"</Talent>
   <!-- Etiquette (Guilder) -->
 <Talent name="RULES-T0116">"2"</Talent>
   <!-- Savvy -->
 <Talent name="RULES-T0022">"3"</Talent>
   <!-- Cat-tongued -->
-<Talent name="RULES-T0046">"3"</Talent>
+<Talent name="RULES-T0046_*">"3"</Talent>
   <!-- Etiquette (Any One) -->
 <Talent name="RULES-T0093">"3"</Talent>
   <!-- Numismatics -->
@@ -5374,15 +5620,15 @@ As sailing one ship is not so different to sailing another, having any Sail Spec
   <!-- Enclosed Fighter -->
 <Talent name="RULES-T0089">"1"</Talent>
   <!-- Night Vision -->
-<Talent name="RULES-T0107">"1"</Talent>
+<Talent name="RULES-T0107_DISEASE">"1"</Talent>
   <!-- Resistant (Disease) -->
 <Talent name="RULES-T0151">"1"</Talent>
   <!-- Trapper -->
-<Talent name="RULES-T0002">"2"</Talent>
+<Talent name="RULES-T0002_HEARING">"2"</Talent>
   <!-- Acute Sense (Hearing) -->
-<Talent name="RULES-T0046">"2"</Talent>
+<Talent name="RULES-T0046_GUILDER">"2"</Talent>
   <!-- Etiquette (Guilder) -->
-<Talent name="RULES-T0049">"2"</Talent>
+<Talent name="RULES-T0049_RATS">"2"</Talent>
   <!-- Fearless (Rats) -->
 <Talent name="RULES-T0153">"2"</Talent>
   <!-- Tunnel Fighter -->
@@ -5396,7 +5642,7 @@ As sailing one ship is not so different to sailing another, having any Sail Spec
   <!-- Very Resilient -->
 <Talent name="RULES-T0087">"4"</Talent>
   <!-- Menacing -->
-<Talent name="RULES-T0107">"4"</Talent>
+<Talent name="RULES-T0107_POISON">"4"</Talent>
   <!-- Resistant (Poison) -->
 <Talent name="RULES-T0112">"4"</Talent>
   <!-- Robust -->
@@ -5508,13 +5754,13 @@ As sailing one ship is not so different to sailing another, having any Sail Spec
   <!-- Speedreader -->
 <Talent name="RULES-T0166">"2"</Talent>
   <!-- Blather -->
-<Talent name="RULES-T0046">"2"</Talent>
+<Talent name="RULES-T0046_*">"2"</Talent>
   <!-- Etiquette (Any One) -->
 <Talent name="RULES-T0059">"2"</Talent>
   <!-- Gregarious -->
 <Talent name="RULES-T0116">"2"</Talent>
   <!-- Savvy -->
-<Talent name="RULES-T0046">"3"</Talent>
+<Talent name="RULES-T0046_*">"3"</Talent>
   <!-- Etiquette (Any One) -->
 <Talent name="RULES-T0078">"3"</Talent>
   <!-- Lip Reading -->
@@ -5642,9 +5888,9 @@ As sailing one ship is not so different to sailing another, having any Sail Spec
   <!-- Night Vision -->
 <Talent name="RULES-T0039">"3"</Talent>
   <!-- Disarm -->
-<Talent name="RULES-T0046">"3"</Talent>
+<Talent name="RULES-T0046_SOLDIERS">"3"</Talent>
   <!-- Etiquette (Soldiers) -->
-<Talent name="RULES-T0049">"3"</Talent>
+<Talent name="RULES-T0049_CRIMINALS">"3"</Talent>
   <!-- Fearless (Criminals) -->
 <Talent name="RULES-T0092">"3"</Talent>
   <!-- Nose for Trouble -->
@@ -5756,7 +6002,7 @@ As sailing one ship is not so different to sailing another, having any Sail Spec
 <SUBCHAPTER_TALENT>
 <Talent name="RULES-T0013">"1"</Talent>
   <!-- Beneath Notice -->
-<Talent name="RULES-T0046">"1"</Talent>
+<Talent name="RULES-T0046_ALL">"1"</Talent>
   <!-- Etiquette (All) -->
 <Talent name="RULES-T0059">"1"</Talent>
   <!-- Gregarious -->
@@ -5878,7 +6124,7 @@ As sailing one ship is not so different to sailing another, having any Sail Spec
   <!-- Secret Signs (Any One) -->
 </SUBCHAPTER_SKILL>
 <SUBCHAPTER_TALENT>
-<Talent name="RULES-T0009">"1"</Talent>
+<Talent name="RULES-T0009_*">"1"</Talent>
   <!-- Artistic -->
 <Talent name="RULES-T0105">"1"</Talent>
   <!-- Read/Write -->
@@ -5894,11 +6140,11 @@ As sailing one ship is not so different to sailing another, having any Sail Spec
   <!-- Gregarious -->
 <Talent name="RULES-T0090">"2"</Talent>
   <!-- Nimble-fingered -->
-<Talent name="RULES-T0002">"3"</Talent>
+<Talent name="RULES-T0002_SIGHT/RULES-T0002_TOUCH">"3"</Talent>
   <!-- Acute Sense (Sight or Touch) -->
 <Talent name="RULES-T0035">"3"</Talent>
   <!-- Dealmaker -->
-<Talent name="RULES-T0046">"3"</Talent>
+<Talent name="RULES-T0046_*">"3"</Talent>
   <!-- Etiquette (Any One) -->
 <Talent name="RULES-T0148">"3"</Talent>
   <!-- Tenacious -->
@@ -5906,7 +6152,7 @@ As sailing one ship is not so different to sailing another, having any Sail Spec
   <!-- Ambidextrous -->
 <Talent name="RULES-T0082">"4"</Talent>
   <!-- Magnum Opus -->
-<Talent name="RULES-T0115">"4"</Talent>
+<Talent name="RULES-T0115_ART">"4"</Talent>
   <!-- Savant (Art) -->
 <Talent name="RULES-T0161">"4"</Talent>
   <!-- Wealthy -->
@@ -6015,7 +6261,7 @@ As sailing one ship is not so different to sailing another, having any Sail Spec
   <!-- Combat Reflexes -->
 <Talent name="RULES-T0043">"2"</Talent>
   <!-- Dual Wielder -->
-<Talent name="RULES-T0046">"2"</Talent>
+<Talent name="RULES-T0046_*">"2"</Talent>
   <!-- Etiquette (Any One) -->
 <Talent name="RULES-T0048">"2"</Talent>
   <!-- Fast Shot -->
@@ -6131,13 +6377,13 @@ As sailing one ship is not so different to sailing another, having any Sail Spec
 <SUBCHAPTER_TALENT>
 <Talent name="RULES-T0166">"1"</Talent>
   <!-- Blather -->
-<Talent name="RULES-T0046">"1"</Talent>
+<Talent name="RULES-T0046_NOBLES">"1"</Talent>
   <!-- Etiquette (Nobles) -->
 <Talent name="RULES-T0105">"1"</Talent>
   <!-- Read/Write -->
 <Talent name="RULES-T0142">"1"</Talent>
   <!-- Suave -->
-<Talent name="RULES-T0046">"2"</Talent>
+<Talent name="RULES-T0046_*">"2"</Talent>
   <!-- Etiquette (Any One) -->
 <Talent name="RULES-T0059">"2"</Talent>
   <!-- Gregarious -->
@@ -6159,7 +6405,7 @@ As sailing one ship is not so different to sailing another, having any Sail Spec
   <!-- Commanding Presence -->
 <Talent name="RULES-T0091">"4"</Talent>
   <!-- Noble Blood -->
-<Talent name="RULES-T0115">"4"</Talent>
+<Talent name="RULES-T0115_POLITICS">"4"</Talent>
   <!-- Savant (Politics) -->
 </SUBCHAPTER_TALENT>
 <SUBCHAPTER_ITEM>
@@ -6257,7 +6503,7 @@ As sailing one ship is not so different to sailing another, having any Sail Spec
   <!-- Intuition -->
 </SUBCHAPTER_SKILL>
 <SUBCHAPTER_TALENT>
-<Talent name="RULES-T0046">"1"</Talent>
+<Talent name="RULES-T0046_NOBLES">"1"</Talent>
   <!-- Etiquette (Nobles) -->
 <Talent name="RULES-T0079">"1"</Talent>
   <!-- Luck -->
@@ -6275,7 +6521,7 @@ As sailing one ship is not so different to sailing another, having any Sail Spec
   <!-- Suave -->
 <Talent name="RULES-T0027">"3"</Talent>
   <!-- Commanding Presence -->
-<Talent name="RULES-T0049">"3"</Talent>
+<Talent name="RULES-T0049_PAUPERS">"3"</Talent>
   <!-- Fearless (Paupers) -->
 <Talent name="RULES-T0101">"3"</Talent>
   <!-- Public Speaker -->
@@ -6394,13 +6640,13 @@ As sailing one ship is not so different to sailing another, having any Sail Spec
 <SUBCHAPTER_TALENT>
 <Talent name="RULES-T0013">"1"</Talent>
   <!-- Beneath Notice -->
-<Talent name="RULES-T0046">"1"</Talent>
+<Talent name="RULES-T0046_SERVANTS">"1"</Talent>
   <!-- Etiquette (Servants) -->
 <Talent name="RULES-T0138">"1"</Talent>
   <!-- Strong Back -->
 <Talent name="RULES-T0148">"1"</Talent>
   <!-- Tenacious -->
-<Talent name="RULES-T0046">"2"</Talent>
+<Talent name="RULES-T0046_*">"2"</Talent>
   <!-- Etiquette (Any One) -->
 <Talent name="RULES-T0059">"2"</Talent>
   <!-- Gregarious -->
@@ -6410,7 +6656,7 @@ As sailing one ship is not so different to sailing another, having any Sail Spec
   <!-- Well-prepared -->
 <Talent name="RULES-T0105">"3"</Talent>
   <!-- Read/Write -->
-<Talent name="RULES-T0107">"3"</Talent>
+<Talent name="RULES-T0107_POISON">"3"</Talent>
   <!-- Resistant (Poison) -->
 <Talent name="RULES-T0142">"3"</Talent>
   <!-- Suave -->
@@ -6520,7 +6766,7 @@ As sailing one ship is not so different to sailing another, having any Sail Spec
 <SUBCHAPTER_TALENT>
 <Talent name="RULES-T0013">"1"</Talent>
   <!-- Beneath Notice -->
-<Talent name="RULES-T0046">"1"</Talent>
+<Talent name="RULES-T0046_*">"1"</Talent>
   <!-- Etiquette (Any One) -->
 <Talent name="RULES-T0059">"1"</Talent>
   <!-- Gregarious -->
@@ -6647,7 +6893,7 @@ As sailing one ship is not so different to sailing another, having any Sail Spec
 <SUBCHAPTER_TALENT>
 <Talent name="RULES-T0006">"1"</Talent>
   <!-- Animal Affinity -->
-<Talent name="RULES-T0046">"1"</Talent>
+<Talent name="RULES-T0046_SERVANTS">"1"</Talent>
   <!-- Etiquette (Servants) -->
 <Talent name="RULES-T0089">"1"</Talent>
   <!-- Night Vision -->
@@ -6657,13 +6903,13 @@ As sailing one ship is not so different to sailing another, having any Sail Spec
   <!-- Menacing -->
 <Talent name="RULES-T0114">"2"</Talent>
   <!-- Rover -->
-<Talent name="RULES-T0134">"2"</Talent>
+<Talent name="RULES-T0134_*">"2"</Talent>
   <!-- Striding Gait (Any One) -->
 <Talent name="RULES-T0137">"2"</Talent>
   <!-- Strike to Stun -->
 <Talent name="RULES-T0044">"3"</Talent>
   <!-- Embezzle -->
-<Talent name="RULES-T0046">"3"</Talent>
+<Talent name="RULES-T0046_*">"3"</Talent>
   <!-- Etiquette (Any One) -->
 <Talent name="RULES-T0101">"3"</Talent>
   <!-- Public Speaker -->
@@ -6673,7 +6919,7 @@ As sailing one ship is not so different to sailing another, having any Sail Spec
   <!-- Carouser -->
 <Talent name="RULES-T0027">"4"</Talent>
   <!-- Commanding Presence -->
-<Talent name="RULES-T0115">"4"</Talent>
+<Talent name="RULES-T0115_LOCAL">"4"</Talent>
   <!-- Savant (Local) -->
 <Talent name="RULES-T0161">"4"</Talent>
   <!-- Wealthy -->
@@ -6902,7 +7148,7 @@ As sailing one ship is not so different to sailing another, having any Sail Spec
   <!-- Lore (Genealogy) -->
 </SUBCHAPTER_SKILL>
 <SUBCHAPTER_TALENT>
-<Talent name="RULES-T0032">"1"</Talent>
+<Talent name="RULES-T0032_HERBALIST">"1"</Talent>
   <!-- Craftsman (Herbalist) -->
 <Talent name="RULES-T0098">"1"</Talent>
   <!-- Petty Magic -->
@@ -6912,25 +7158,25 @@ As sailing one ship is not so different to sailing another, having any Sail Spec
   <!-- Second Sight -->
 <Talent name="RULES-T0003">"2"</Talent>
   <!-- Aethyric Attunement -->
-<Talent name="RULES-T0007">"2"</Talent>
+<Talent name="RULES-T0007_HEDGECRAFT">"2"</Talent>
   <!-- Arcane Magic (Hedgecraft) -->
 <Talent name="RULES-T0125">"2"</Talent>
   <!-- Sixth Sense -->
-<Talent name="RULES-T0134">"2"</Talent>
+<Talent name="RULES-T0134_*">"2"</Talent>
   <!-- Striding Gait (Any One) -->
 <Talent name="RULES-T0070">"3"</Talent>
   <!-- Instinctive Diction -->
 <Talent name="RULES-T0081">"3"</Talent>
   <!-- Magical Sense -->
-<Talent name="RULES-T0086">"3"</Talent>
+<Talent name="RULES-T0086_HERBALIST">"3"</Talent>
   <!-- Master Tradesman (Herbalist) -->
-<Talent name="RULES-T0115">"3"</Talent>
+<Talent name="RULES-T0115_FOLKLORE">"3"</Talent>
   <!-- Savant (Folklore) -->
-<Talent name="RULES-T0002">"4"</Talent>
+<Talent name="RULES-T0002_*">"4"</Talent>
   <!-- Acute Sense (Any One) -->
 <Talent name="RULES-T0102">"4"</Talent>
   <!-- Pure Soul -->
-<Talent name="RULES-T0107">"4"</Talent>
+<Talent name="RULES-T0107_DISEASE">"4"</Talent>
   <!-- Resistant (Disease) -->
 <Talent name="RULES-T0140">"4"</Talent>
   <!-- Strong-minded -->
@@ -7028,15 +7274,15 @@ As sailing one ship is not so different to sailing another, having any Sail Spec
   <!-- Drive -->
 </SUBCHAPTER_SKILL>
 <SUBCHAPTER_TALENT>
-<Talent name="RULES-T0032">"1"</Talent>
+<Talent name="RULES-T0032_HERBALIST">"1"</Talent>
   <!-- Craftsman (Herbalist) -->
 <Talent name="RULES-T0061">"1"</Talent>
   <!-- Hardy -->
 <Talent name="RULES-T0095">"1"</Talent>
   <!-- Orientation -->
-<Talent name="RULES-T0134">"1"</Talent>
+<Talent name="RULES-T0134_*">"1"</Talent>
   <!-- Striding Gait (Any One) -->
-<Talent name="RULES-T0002">"2"</Talent>
+<Talent name="RULES-T0002_TASTE">"2"</Talent>
   <!-- Acute Sense (Taste) -->
 <Talent name="RULES-T0051">"2"</Talent>
   <!-- Field Dressing -->
@@ -7048,17 +7294,17 @@ As sailing one ship is not so different to sailing another, having any Sail Spec
   <!-- Concoct -->
 <Talent name="RULES-T0035">"3"</Talent>
   <!-- Dealmaker -->
-<Talent name="RULES-T0086">"3"</Talent>
+<Talent name="RULES-T0086_HERBALIST">"3"</Talent>
   <!-- Master Tradesman (Herbalist) -->
 <Talent name="RULES-T0116">"3"</Talent>
   <!-- Savvy -->
-<Talent name="RULES-T0046">"4"</Talent>
+<Talent name="RULES-T0046_SCHOLARS">"4"</Talent>
   <!-- Etiquette (Scholars) -->
 <Talent name="RULES-T0105">"4"</Talent>
   <!-- Read/Write -->
-<Talent name="RULES-T0107">"4"</Talent>
+<Talent name="RULES-T0107_POISON">"4"</Talent>
   <!-- Resistant (Poison) -->
-<Talent name="RULES-T0115">"4"</Talent>
+<Talent name="RULES-T0115_HERBS">"4"</Talent>
   <!-- Savant (Herbs) -->
 </SUBCHAPTER_TALENT>
 <SUBCHAPTER_ITEM>
@@ -7159,7 +7405,7 @@ As sailing one ship is not so different to sailing another, having any Sail Spec
   <!-- Hardy -->
 <Talent name="RULES-T0114">"1"</Talent>
   <!-- Rover -->
-<Talent name="RULES-T0134">"1"</Talent>
+<Talent name="RULES-T0134_ALL">"1"</Talent>
   <!-- Striding Gait (All) -->
 <Talent name="RULES-T0151">"1"</Talent>
   <!-- Trapper -->
@@ -7171,15 +7417,15 @@ As sailing one ship is not so different to sailing another, having any Sail Spec
   <!-- Marksman -->
 <Talent name="RULES-T0123">"2"</Talent>
   <!-- Sharpshooter -->
-<Talent name="RULES-T0002">"3"</Talent>
+<Talent name="RULES-T0002_*">"3"</Talent>
   <!-- Acute Sense (Any One) -->
 <Talent name="RULES-T0034">"3"</Talent>
   <!-- Deadeye Shot -->
-<Talent name="RULES-T0049">"3"</Talent>
+<Talent name="RULES-T0049_BEASTS">"3"</Talent>
   <!-- Fearless (Beasts) -->
 <Talent name="RULES-T0145">"3"</Talent>
   <!-- Sure Shot -->
-<Talent name="RULES-T0046">"4"</Talent>
+<Talent name="RULES-T0046_SERVANTS">"4"</Talent>
   <!-- Etiquette (Servants) -->
 <Talent name="RULES-T0048">"4"</Talent>
   <!-- Fast Shot -->
@@ -7285,7 +7531,7 @@ As sailing one ship is not so different to sailing another, having any Sail Spec
 <SUBCHAPTER_TALENT>
 <Talent name="RULES-T0112">"1"</Talent>
   <!-- Robust -->
-<Talent name="RULES-T0134">"1"</Talent>
+<Talent name="RULES-T0134_ROCKY">"1"</Talent>
   <!-- Striding Gait (Rocky) -->
 <Talent name="RULES-T0138">"1"</Talent>
   <!-- Strong Back -->
@@ -7301,7 +7547,7 @@ As sailing one ship is not so different to sailing another, having any Sail Spec
   <!-- Very Strong -->
 <Talent name="RULES-T0020">"3"</Talent>
   <!-- Careful Strike -->
-<Talent name="RULES-T0032">"3"</Talent>
+<Talent name="RULES-T0032_EXPLOSIVES">"3"</Talent>
   <!-- Craftsman (Explosives) -->
 <Talent name="RULES-T0149">"3"</Talent>
   <!-- Tinker -->
@@ -7437,7 +7683,7 @@ As sailing one ship is not so different to sailing another, having any Sail Spec
   <!-- Petty Magic -->
 <Talent name="RULES-T0105">"3"</Talent>
   <!-- Read/Write -->
-<Talent name="RULES-T0007">"4"</Talent>
+<Talent name="RULES-T0007_HEAVENS">"4"</Talent>
   <!-- Arcane Magic (Heavens) -->
 <Talent name="RULES-T0087">"4"</Talent>
   <!-- Menacing -->
@@ -7543,9 +7789,9 @@ As sailing one ship is not so different to sailing another, having any Sail Spec
   <!-- Night Vision -->
 <Talent name="RULES-T0114">"1"</Talent>
   <!-- Rover -->
-<Talent name="RULES-T0134">"1"</Talent>
+<Talent name="RULES-T0134_ALL">"1"</Talent>
   <!-- Striding Gait (All) -->
-<Talent name="RULES-T0002">"2"</Talent>
+<Talent name="RULES-T0002_SIGHT">"2"</Talent>
   <!-- Acute Sense (Sight) -->
 <Talent name="RULES-T0054">"2"</Talent>
   <!-- Flee! -->
@@ -7561,7 +7807,7 @@ As sailing one ship is not so different to sailing another, having any Sail Spec
   <!-- Shadow -->
 <Talent name="RULES-T0122">"3"</Talent>
   <!-- Sharp -->
-<Talent name="RULES-T0032">"4"</Talent>
+<Talent name="RULES-T0032_CARTOGRAPHER">"4"</Talent>
   <!-- Craftsman (Cartographer) -->
 <Talent name="RULES-T0077">"4"</Talent>
   <!-- Linguistics -->
@@ -7676,9 +7922,9 @@ As sailing one ship is not so different to sailing another, having any Sail Spec
   <!-- Tenacious -->
 <Talent name="RULES-T0006">"2"</Talent>
   <!-- Animal Affinity -->
-<Talent name="RULES-T0032">"2"</Talent>
-  <!-- Craftsman (as Trade) -->
-<Talent name="RULES-T0134">"2"</Talent>
+<Talent name="RULES-T0032_*">"2"</Talent>
+  <!-- Craftsman (?) -->
+<Talent name="RULES-T0134_*">"2"</Talent>
   <!-- Striding Gait (Any One) -->
 <Talent name="RULES-T0147">"2"</Talent>
   <!-- Sturdy -->
@@ -7690,13 +7936,13 @@ As sailing one ship is not so different to sailing another, having any Sail Spec
   <!-- Supportive -->
 <Talent name="RULES-T0155">"3"</Talent>
   <!-- Very Resilient -->
-<Talent name="RULES-T0086">"4"</Talent>
-  <!-- Master Tradesman (as Trade) -->
+<Talent name="RULES-T0086_*">"4"</Talent>
+  <!-- Master Tradesman (?) -->
 <Talent name="RULES-T0090">"4"</Talent>
   <!-- Nimble-fingered -->
 <Talent name="RULES-T0101">"4"</Talent>
   <!-- Public Speaker -->
-<Talent name="RULES-T0115">"4"</Talent>
+<Talent name="RULES-T0115_LOCAL">"4"</Talent>
   <!-- Savant (Local) -->
 </SUBCHAPTER_TALENT>
 <SUBCHAPTER_ITEM>
@@ -7821,7 +8067,7 @@ The life of a Bounty Hunter is one of constant adventure. Their work carries the
   <!-- Sprinter -->
 <Talent name="RULES-T0034">"4"</Talent>
   <!-- Deadeye Shot -->
-<Talent name="RULES-T0049">"4"</Talent>
+<Talent name="RULES-T0049_BOUNTIES">"4"</Talent>
   <!-- Fearless (Bounties) -->
 <Talent name="RULES-T0061">"4"</Talent>
   <!-- Hardy -->
@@ -7946,7 +8192,7 @@ The Empire's roads are perilous, so there is rarely a shortage of work replacing
   <!-- Strong-minded -->
 <Talent name="RULES-T0001">"3"</Talent>
   <!-- Accurate Shot -->
-<Talent name="RULES-T0049">"3"</Talent>
+<Talent name="RULES-T0049_OUTLAWS">"3"</Talent>
   <!-- Fearless (Outlaws) -->
 <Talent name="RULES-T0083">"3"</Talent>
   <!-- Marksman -->
@@ -7954,7 +8200,7 @@ The Empire's roads are perilous, so there is rarely a shortage of work replacing
   <!-- Nose for Trouble -->
 <Talent name="RULES-T0035">"4"</Talent>
   <!-- Dealmaker -->
-<Talent name="RULES-T0046">"4"</Talent>
+<Talent name="RULES-T0046_*">"4"</Talent>
   <!-- Etiquette (Any One) -->
 <Talent name="RULES-T0095">"4"</Talent>
   <!-- Orientation -->
@@ -8085,7 +8331,7 @@ The open road, a new village every night, the smell of greasepaint, and the roar
   <!-- Read/Write -->
 <Talent name="RULES-T0035">"4"</Talent>
   <!-- Dealmaker -->
-<Talent name="RULES-T0046">"4"</Talent>
+<Talent name="RULES-T0046_*">"4"</Talent>
   <!-- Etiquette (Any One) -->
 <Talent name="RULES-T0120">"4"</Talent>
   <!-- Seasoned Traveller -->
@@ -8200,11 +8446,11 @@ Note: This profile reflects Sigmarite Flagellants, by far the most common in the
   <!-- Stone Soup -->
 <Talent name="RULES-T0043">"2"</Talent>
   <!-- Dual Wielder -->
-<Talent name="RULES-T0049">"2"</Talent>
+<Talent name="RULES-T0049_EVERYTHING">"2"</Talent>
   <!-- Fearless (Everything) -->
 <Talent name="RULES-T0061">"2"</Talent>
   <!-- Hardy -->
-<Talent name="RULES-T0062">"2"</Talent>
+<Talent name="RULES-T0062_HERETICS">"2"</Talent>
   <!-- Hatred (Heretics) -->
 <Talent name="RULES-T0058">"3"</Talent>
   <!-- Furious Assault -->
@@ -8218,7 +8464,7 @@ Note: This profile reflects Sigmarite Flagellants, by far the most common in the
   <!-- Battle Rage -->
 <Talent name="RULES-T0057">"4"</Talent>
   <!-- Frightening -->
-<Talent name="RULES-T0066">"4"</Talent>
+<Talent name="RULES-T0066_*">"4"</Talent>
   <!-- Impassioned Zeal -->
 <Talent name="RULES-T0074">"4"</Talent>
   <!-- Jump Up -->
@@ -8331,7 +8577,7 @@ The messages they carry can contain secrets worth killing for, and a stolen or i
   <!-- Read/Write -->
 <Talent name="RULES-T0120">"2"</Talent>
   <!-- Seasoned Traveller -->
-<Talent name="RULES-T0134">"2"</Talent>
+<Talent name="RULES-T0134_ALL">"2"</Talent>
   <!-- Striding Gait (All) -->
 <Talent name="RULES-T0092">"3"</Talent>
   <!-- Nose for Trouble -->
@@ -8343,7 +8589,7 @@ The messages they carry can contain secrets worth killing for, and a stolen or i
   <!-- Trick Rider -->
 <Talent name="RULES-T0035">"4"</Talent>
   <!-- Dealmaker -->
-<Talent name="RULES-T0062">"4"</Talent>
+<Talent name="RULES-T0062_OUTLAWS">"4"</Talent>
   <!-- Hatred (Outlaws) -->
 <Talent name="RULES-T0095">"4"</Talent>
   <!-- Orientation -->
@@ -8453,7 +8699,7 @@ Always on the move, Pedlars take naturally to the adventuring life in search of 
   <!-- Gregarious -->
 <Talent name="RULES-T0132">"1"</Talent>
   <!-- Stone Soup -->
-<Talent name="RULES-T0134">"1"</Talent>
+<Talent name="RULES-T0134_*">"1"</Talent>
   <!-- Striding Gait (Any One) -->
 <Talent name="RULES-T0120">"2"</Talent>
   <!-- Seasoned Traveller -->
@@ -8471,7 +8717,7 @@ Always on the move, Pedlars take naturally to the adventuring life in search of 
   <!-- Sixth Sense -->
 <Talent name="RULES-T0148">"3"</Talent>
   <!-- Tenacious -->
-<Talent name="RULES-T0046">"4"</Talent>
+<Talent name="RULES-T0046_*">"4"</Talent>
   <!-- Etiquette (Any One) -->
 <Talent name="RULES-T0093">"4"</Talent>
   <!-- Numismatics -->
@@ -8597,11 +8843,11 @@ Roadwardens rarely need to seek out adventure — it usually finds them first. A
   <!-- Roughrider -->
 <Talent name="RULES-T0120">"2"</Talent>
   <!-- Seasoned Traveller -->
-<Talent name="RULES-T0046">"3"</Talent>
+<Talent name="RULES-T0046_SOLDIERS">"3"</Talent>
   <!-- Etiquette (Soldiers) -->
-<Talent name="RULES-T0049">"3"</Talent>
+<Talent name="RULES-T0049_OUTLAWS">"3"</Talent>
   <!-- Fearless (Outlaws) -->
-<Talent name="RULES-T0062">"3"</Talent>
+<Talent name="RULES-T0062_*">"3"</Talent>
   <!-- Hatred (Any One) -->
 <Talent name="RULES-T0092">"3"</Talent>
   <!-- Nose for Trouble -->
@@ -8728,7 +8974,7 @@ Witch Hunters travel constantly, following rumours of unsanctioned magic, hearin
   <!-- Nose for Trouble -->
 <Talent name="RULES-T0121">"2"</Talent>
   <!-- Shadow -->
-<Talent name="RULES-T0049">"3"</Talent>
+<Talent name="RULES-T0049_WITCHES">"3"</Talent>
   <!-- Fearless (Witches) -->
 <Talent name="RULES-T0106">"3"</Talent>
   <!-- Relentless -->
@@ -8852,7 +9098,7 @@ A Cavalryman may find themselves on the road if a superior orders them to invest
   <!-- Lightning Reflexes -->
 <Talent name="RULES-T0113">"1"</Talent>
   <!-- Roughrider -->
-<Talent name="RULES-T0046">"2"</Talent>
+<Talent name="RULES-T0046_SOLDIERS">"2"</Talent>
   <!-- Etiquette (Soldiers) -->
 <Talent name="RULES-T0060">"2"</Talent>
   <!-- Gunner -->
@@ -8864,7 +9110,7 @@ A Cavalryman may find themselves on the road if a superior orders them to invest
   <!-- Combat Reflexes -->
 <Talent name="RULES-T0048">"3"</Talent>
   <!-- Fast Shot -->
-<Talent name="RULES-T0062">"3"</Talent>
+<Talent name="RULES-T0062_*">"3"</Talent>
   <!-- Hatred (Any One) -->
 <Talent name="RULES-T0159">"3"</Talent>
   <!-- War Leader -->
@@ -8974,7 +9220,7 @@ Guard duty is not always exciting — most of the time it involves standing arou
 <SUBCHAPTER_TALENT>
 <Talent name="RULES-T0037">"1"</Talent>
   <!-- Dicer -->
-<Talent name="RULES-T0046">"1"</Talent>
+<Talent name="RULES-T0046_SERVANTS">"1"</Talent>
   <!-- Etiquette (Servants) -->
 <Talent name="RULES-T0112">"1"</Talent>
   <!-- Robust -->
@@ -8988,9 +9234,9 @@ Guard duty is not always exciting — most of the time it involves standing arou
   <!-- Shieldsman -->
 <Talent name="RULES-T0133">"2"</Talent>
   <!-- Stout-hearted -->
-<Talent name="RULES-T0046">"3"</Talent>
+<Talent name="RULES-T0046_*">"3"</Talent>
   <!-- Etiquette (Any One) -->
-<Talent name="RULES-T0049">"3"</Talent>
+<Talent name="RULES-T0049_INTRUDERS">"3"</Talent>
   <!-- Fearless (Intruders) -->
 <Talent name="RULES-T0104">"3"</Talent>
   <!-- Reaction Strike -->
@@ -9105,7 +9351,7 @@ Even the strictest order grants its Knights a degree of independence. Some adven
   <!-- Secret Signs (Knightly Order) -->
 </SUBCHAPTER_SKILL>
 <SUBCHAPTER_TALENT>
-<Talent name="RULES-T0046">"1"</Talent>
+<Talent name="RULES-T0046_NOBLES/RULES-T0046_SOLDIERS">"1"</Talent>
   <!-- Etiquette (Nobles or Soldiers) -->
 <Talent name="RULES-T0090">"1"</Talent>
   <!-- Noble Blood -->
@@ -9121,7 +9367,7 @@ Even the strictest order grants its Knights a degree of independence. Some adven
   <!-- Seasoned Traveller -->
 <Talent name="RULES-T0147">"2"</Talent>
   <!-- Sturdy -->
-<Talent name="RULES-T0049">"3"</Talent>
+<Talent name="RULES-T0049_*">"3"</Talent>
   <!-- Fearless (Any One) -->
 <Talent name="RULES-T0133">"3"</Talent>
   <!-- Stout-hearted -->
@@ -9375,7 +9621,7 @@ A Protagonist's career is rarely a long one. Sooner or later, someone stronger, 
   <!-- Menacing -->
 <Talent name="RULES-T0026">"2"</Talent>
   <!-- Combat Reflexes -->
-<Talent name="RULES-T0046">"2"</Talent>
+<Talent name="RULES-T0046_CRIMINALS">"2"</Talent>
   <!-- Etiquette (Criminals) -->
 <Talent name="RULES-T0137">"2"</Talent>
   <!-- Strike to Stun -->
@@ -9499,7 +9745,7 @@ Note: The Slayer Oath is only satisfied by honourable death. Once a dwarf become
 <SUBCHAPTER_TALENT>
 <Talent name="RULES-T0043">"1"</Talent>
   <!-- Dual Wielder -->
-<Talent name="RULES-T0049">"1"</Talent>
+<Talent name="RULES-T0049_EVERYTHING">"1"</Talent>
   <!-- Fearless (Everything) -->
 <Talent name="RULES-T0056">"1"</Talent>
   <!-- Frenzy -->
@@ -9626,7 +9872,7 @@ Playing a Soldier makes you a disciplined and dependable warrior. Used to fighti
 <SUBCHAPTER_TALENT>
 <Talent name="RULES-T0042">"1"</Talent>
   <!-- Drilled -->
-<Talent name="RULES-T0046">"1"</Talent>
+<Talent name="RULES-T0046_SOLDIERS">"1"</Talent>
   <!-- Etiquette (Soldiers) -->
 <Talent name="RULES-T0138">"1"</Talent>
   <!-- Strong Back -->
@@ -9758,9 +10004,9 @@ Playing a Warrior Priest lets you stand at the forefront of battle, inspiring yo
   <!-- Lore (Warfare) -->
 </SUBCHAPTER_SKILL>
 <SUBCHAPTER_TALENT>
-<Talent name="RULES-T0015">"1"</Talent>
+<Talent name="RULES-T0015_*">"1"</Talent>
   <!-- Bless (Any One) -->
-<Talent name="RULES-T0046">"1"</Talent>
+<Talent name="RULES-T0046_CULTISTS">"1"</Talent>
   <!-- Etiquette (Cultists) -->
 <Talent name="RULES-T0064">"1"</Talent>
   <!-- Holy Visions -->
@@ -9770,7 +10016,7 @@ Playing a Warrior Priest lets you stand at the forefront of battle, inspiring yo
   <!-- Dual Wielder -->
 <Talent name="RULES-T0069">"2"</Talent>
   <!-- Inspiring -->
-<Talent name="RULES-T0071">"2"</Talent>
+<Talent name="RULES-T0071_*">"2"</Talent>
   <!-- Invoke (Any One) -->
 <Talent name="RULES-T0147">"2"</Talent>
   <!-- Sturdy -->
@@ -9782,7 +10028,7 @@ Playing a Warrior Priest lets you stand at the forefront of battle, inspiring yo
   <!-- Seasoned Traveller -->
 <Talent name="RULES-T0133">"3"</Talent>
   <!-- Stout-hearted -->
-<Talent name="RULES-T0049">"4"</Talent>
+<Talent name="RULES-T0049_*">"4"</Talent>
   <!-- Fearless (Any One) -->
 <Talent name="RULES-T0058">"4"</Talent>
   <!-- Furious Assault -->
@@ -9898,7 +10144,7 @@ Playing a Charlatan lets you bluff, deceive, and talk your way through almost an
   <!-- Fast Hands -->
 <Talent name="RULES-T0166">"2"</Talent>
   <!-- Blather -->
-<Talent name="RULES-T0046">"2"</Talent>
+<Talent name="RULES-T0046_CRIMINALS">"2"</Talent>
   <!-- Etiquette (Criminals) -->
 <Talent name="RULES-T0088">"2"</Talent>
   <!-- Mimic -->
@@ -10032,13 +10278,13 @@ Playing a Fence lets you move comfortably between respectable society and the cr
   <!-- Briber -->
 <Talent name="RULES-T0035">"2"</Talent>
   <!-- Dealmaker -->
-<Talent name="RULES-T0046">"2"</Talent>
+<Talent name="RULES-T0046_CRIMINALS">"2"</Talent>
   <!-- Etiquette (Criminals) -->
 <Talent name="RULES-T0105">"2"</Talent>
   <!-- Read/Write -->
 <Talent name="RULES-T0022">"3"</Talent>
   <!-- Cat-tongued -->
-<Talent name="RULES-T0046">"3"</Talent>
+<Talent name="RULES-T0046_*">"3"</Talent>
   <!-- Etiquette (Any One) -->
 <Talent name="RULES-T0075">"3"</Talent>
   <!-- Kingpin -->
@@ -10159,11 +10405,11 @@ Playing a Grave Robber lets you explore the darkest places of the Old World in s
   <!-- Strong Back -->
 <Talent name="RULES-T0017">"2"</Talent>
   <!-- Break and Enter -->
-<Talent name="RULES-T0046">"2"</Talent>
+<Talent name="RULES-T0046_CRIMINALS">"2"</Talent>
   <!-- Etiquette (Criminals) -->
 <Talent name="RULES-T0089">"2"</Talent>
   <!-- Night Vision -->
-<Talent name="RULES-T0107">"2"</Talent>
+<Talent name="RULES-T0107_DISEASE">"2"</Talent>
   <!-- Resistant (Disease) -->
 <Talent name="RULES-T0105">"3"</Talent>
   <!-- Read/Write -->
@@ -10173,7 +10419,7 @@ Playing a Grave Robber lets you explore the darkest places of the Old World in s
   <!-- Trapper -->
 <Talent name="RULES-T0148">"3"</Talent>
   <!-- Tenacious -->
-<Talent name="RULES-T0049">"4"</Talent>
+<Talent name="RULES-T0049_UNDEAD">"4"</Talent>
   <!-- Fearless (Undead) -->
 <Talent name="RULES-T0125">"4"</Talent>
   <!-- Sixth Sense -->
@@ -10299,9 +10545,9 @@ Playing a Knave lets you navigate the Old World's criminal underworld with ease.
   <!-- Gregarious -->
 <Talent name="RULES-T0021">"2"</Talent>
   <!-- Carouser -->
-<Talent name="RULES-T0046">"2"</Talent>
+<Talent name="RULES-T0046_*">"2"</Talent>
   <!-- Etiquette (Any One) -->
-<Talent name="RULES-T0107">"2"</Talent>
+<Talent name="RULES-T0107_DISEASE/RULES-T0107_POISON">"2"</Talent>
   <!-- Resistant (Disease or Poison) -->
 <Talent name="RULES-T0142">"2"</Talent>
   <!-- Suave -->
@@ -10317,7 +10563,7 @@ Playing a Knave lets you navigate the Old World's criminal underworld with ease.
   <!-- Kingpin -->
 <Talent name="RULES-T0105">"4"</Talent>
   <!-- Read/Write -->
-<Talent name="RULES-T0115">"4"</Talent>
+<Talent name="RULES-T0115_LOCAL">"4"</Talent>
   <!-- Savant (Local) -->
 <Talent name="RULES-T0118">"4"</Talent>
   <!-- Schemer -->
@@ -10428,7 +10674,7 @@ Playing an Outlaw lets you thrive beyond the reach of civilisation. You know peo
   <!-- Marksman -->
 <Talent name="RULES-T0112">"2"</Talent>
   <!-- Robust -->
-<Talent name="RULES-T0134">"2"</Talent>
+<Talent name="RULES-T0134_*">"2"</Talent>
   <!-- Striding Gait (Any One) -->
 <Talent name="RULES-T0151">"2"</Talent>
   <!-- Trapper -->
@@ -10436,7 +10682,7 @@ Playing an Outlaw lets you thrive beyond the reach of civilisation. You know peo
   <!-- Deadeye Shot -->
 <Talent name="RULES-T0043">"3"</Talent>
   <!-- Dual Wielder -->
-<Talent name="RULES-T0049">"3"</Talent>
+<Talent name="RULES-T0049_ROADWARDENS">"3"</Talent>
   <!-- Fearless (Roadwardens) -->
 <Talent name="RULES-T0120">"3"</Talent>
   <!-- Seasoned Traveller -->
@@ -10560,11 +10806,11 @@ Playing a Racketeer lets you command respect through fear. You understand how th
   <!-- Alley Cat -->
 <Talent name="RULES-T0044">"2"</Talent>
   <!-- Embezzle -->
-<Talent name="RULES-T0046">"2"</Talent>
+<Talent name="RULES-T0046_CRIMINALS">"2"</Talent>
   <!-- Etiquette (Criminals) -->
 <Talent name="RULES-T0137">"2"</Talent>
   <!-- Strike to Stun -->
-<Talent name="RULES-T0049">"3"</Talent>
+<Talent name="RULES-T0049_WATCHMEN">"3"</Talent>
   <!-- Fearless (Watchmen) -->
 <Talent name="RULES-T0092">"3"</Talent>
   <!-- Nose for Trouble -->
@@ -10690,7 +10936,7 @@ Playing a Thief makes you a very useful recruit to an adventuring party, since m
   <!-- Flee! -->
 <Talent name="RULES-T0017">"2"</Talent>
   <!-- Break and Enter -->
-<Talent name="RULES-T0046">"2"</Talent>
+<Talent name="RULES-T0046_CRIMINALS">"2"</Talent>
   <!-- Etiquette (Criminals) -->
 <Talent name="RULES-T0089">"2"</Talent>
   <!-- Night Vision -->
@@ -10821,7 +11067,7 @@ Playing a Witch lets you wield magic beyond the strictures of the Colleges. Free
   <!-- Read/Write -->
 <Talent name="RULES-T0164">"1"</Talent>
   <!-- Second Sight -->
-<Talent name="RULES-T0007">"2"</Talent>
+<Talent name="RULES-T0007_WITCHCRAFT">"2"</Talent>
   <!-- Arcane Magic (Witchcraft) -->
 <Talent name="RULES-T0010">"2"</Talent>
   <!-- Attractive -->
@@ -10952,13 +11198,13 @@ As a Boatman, you are strong, tough, and accustomed to handling yourself in roug
   <!-- Waterman -->
 <Talent name="RULES-T0038">"2"</Talent>
   <!-- Dirty Fighting -->
-<Talent name="RULES-T0046">"2"</Talent>
+<Talent name="RULES-T0046_GUILDER">"2"</Talent>
   <!-- Etiquette (Guilder) -->
 <Talent name="RULES-T0120">"2"</Talent>
   <!-- Seasoned Traveller -->
 <Talent name="RULES-T0156">"2"</Talent>
   <!-- Very Strong -->
-<Talent name="RULES-T0032">"3"</Talent>
+<Talent name="RULES-T0032_BOATBUILDER">"3"</Talent>
   <!-- Craftsman (Boatbuilder) -->
 <Talent name="RULES-T0035">"3"</Talent>
   <!-- Dealmaker -->
@@ -10972,7 +11218,7 @@ As a Boatman, you are strong, tough, and accustomed to handling yourself in roug
   <!-- Pilot -->
 <Talent name="RULES-T0101">"4"</Talent>
   <!-- Public Speaker -->
-<Talent name="RULES-T0115">"4"</Talent>
+<Talent name="RULES-T0115_RIVERWAYS">"4"</Talent>
   <!-- Savant (Riverways) -->
 </SUBCHAPTER_TALENT>
 <SUBCHAPTER_ITEM>
@@ -11081,7 +11327,7 @@ As a Pilot, you are canny and perceptive, with a keen eye and deep local knowled
   <!-- River Guide -->
 <Talent name="RULES-T0160">"1"</Talent>
   <!-- Waterman -->
-<Talent name="RULES-T0046">"2"</Talent>
+<Talent name="RULES-T0046_GUILDER">"2"</Talent>
   <!-- Etiquette (Guilder) -->
 <Talent name="RULES-T0089">"2"</Talent>
   <!-- Night Vision -->
@@ -11089,11 +11335,11 @@ As a Pilot, you are canny and perceptive, with a keen eye and deep local knowled
   <!-- Nose for Trouble -->
 <Talent name="RULES-T0099">"2"</Talent>
   <!-- Pilot -->
-<Talent name="RULES-T0002">"3"</Talent>
+<Talent name="RULES-T0002_SIGHT">"3"</Talent>
   <!-- Acute Sense (Sight) -->
 <Talent name="RULES-T0035">"3"</Talent>
   <!-- Dealmaker -->
-<Talent name="RULES-T0115">"3"</Talent>
+<Talent name="RULES-T0115_RIVERWAYS">"3"</Talent>
   <!-- Savant (Riverways) -->
 <Talent name="RULES-T0141">"3"</Talent>
   <!-- Strong Swimmer -->
@@ -11217,9 +11463,9 @@ Playing a Riverwarden combines the skills of a sailor, investigator, and fighter
   <!-- Night Vision -->
 <Talent name="RULES-T0120">"2"</Talent>
   <!-- Seasoned Traveller -->
-<Talent name="RULES-T0049">"3"</Talent>
+<Talent name="RULES-T0049_WRECKERS">"3"</Talent>
   <!-- Fearless (Wreckers) -->
-<Talent name="RULES-T0062">"3"</Talent>
+<Talent name="RULES-T0062_*">"3"</Talent>
   <!-- Hatred (Any One) -->
 <Talent name="RULES-T0092">"3"</Talent>
   <!-- Nose for Trouble -->
@@ -11337,11 +11583,11 @@ Playing a Riverwoman makes you a practical and dependable companion. Whether row
   <!-- Fisherman -->
 <Talent name="RULES-T0059">"1"</Talent>
   <!-- Gregarious -->
-<Talent name="RULES-T0134">"1"</Talent>
+<Talent name="RULES-T0134_WETLAND">"1"</Talent>
   <!-- Striding Gait (Wetland) -->
 <Talent name="RULES-T0141">"1"</Talent>
   <!-- Strong Swimmer -->
-<Talent name="RULES-T0032">"2"</Talent>
+<Talent name="RULES-T0032_BOATBUILDER">"2"</Talent>
   <!-- Craftsman (Boatbuilder) -->
 <Talent name="RULES-T0114">"2"</Talent>
   <!-- Rover -->
@@ -11357,11 +11603,11 @@ Playing a Riverwoman makes you a practical and dependable companion. Whether row
   <!-- Stout-hearted -->
 <Talent name="RULES-T0140">"3"</Talent>
   <!-- Strong-minded -->
-<Talent name="RULES-T0086">"4"</Talent>
+<Talent name="RULES-T0086_BOATBUILDER">"4"</Talent>
   <!-- Master Tradesman (Boatbuilder) -->
 <Talent name="RULES-T0101">"4"</Talent>
   <!-- Public Speaker -->
-<Talent name="RULES-T0115">"4"</Talent>
+<Talent name="RULES-T0115_RIVERWAYS">"4"</Talent>
   <!-- Savant (Riverways) -->
 <Talent name="RULES-T0160">"4"</Talent>
   <!-- Waterman -->
@@ -11466,7 +11712,7 @@ Playing a Sailor makes you a hardy and dependable companion. Used to hard work, 
 <SUBCHAPTER_TALENT>
 <Talent name="RULES-T0119">"1"</Talent>
   <!-- Sea Legs -->
-<Talent name="RULES-T0134">"1"</Talent>
+<Talent name="RULES-T0134_COASTAL">"1"</Talent>
   <!-- Striding Gait (Coastal) -->
 <Talent name="RULES-T0138">"1"</Talent>
   <!-- Strong Back -->
@@ -11480,7 +11726,7 @@ Playing a Sailor makes you a hardy and dependable companion. Used to hard work, 
   <!-- Strong Legs -->
 <Talent name="RULES-T0148">"2"</Talent>
   <!-- Tenacious -->
-<Talent name="RULES-T0032">"3"</Talent>
+<Talent name="RULES-T0032_BOATBUILDER">"3"</Talent>
   <!-- Craftsman (Boatbuilder) -->
 <Talent name="RULES-T0094">"3"</Talent>
   <!-- Old Salt -->
@@ -11600,13 +11846,13 @@ Playing a Smuggler lets you stay one step ahead of the law. You are resourceful,
   <!-- Criminal -->
 <Talent name="RULES-T0052">"1"</Talent>
   <!-- Fisherman -->
-<Talent name="RULES-T0134">"1"</Talent>
+<Talent name="RULES-T0134_WETLAND">"1"</Talent>
   <!-- Striding Gait (Wetland) -->
 <Talent name="RULES-T0138">"1"</Talent>
   <!-- Strong Back -->
 <Talent name="RULES-T0018">"2"</Talent>
   <!-- Briber -->
-<Talent name="RULES-T0046">"2"</Talent>
+<Talent name="RULES-T0046_CRIMINALS">"2"</Talent>
   <!-- Etiquette (Criminals) -->
 <Talent name="RULES-T0089">"2"</Talent>
   <!-- Night Vision -->
@@ -11620,7 +11866,7 @@ Playing a Smuggler lets you stay one step ahead of the law. You are resourceful,
   <!-- Pilot -->
 <Talent name="RULES-T0120">"3"</Talent>
   <!-- Seasoned Traveller -->
-<Talent name="RULES-T0049">"4"</Talent>
+<Talent name="RULES-T0049_RIVERWARDENS">"4"</Talent>
   <!-- Fearless (Riverwardens) -->
 <Talent name="RULES-T0075">"4"</Talent>
   <!-- Kingpin -->
@@ -11739,10 +11985,10 @@ Playing a Stevedore makes you a tough and dependable companion. You can handle y
   <!-- Tenacious -->
 <Talent name="RULES-T0033">"2"</Talent>
   <!-- Criminal -->
-<Talent name="RULES-T0046">"2"</Talent>
+<Talent name="RULES-T0046_CRIMINALS">"2"</Talent>
   <!-- Etiquette (Criminals) -->
-<Talent name="RULES-T0046">"2"</Talent>
-  <!-- Etiquette (Guilders) -->
+<Talent name="RULES-T0046_GUILDER">"2"</Talent>
+  <!-- Etiquette (Guilder) -->
 <Talent name="RULES-T0156">"2"</Talent>
   <!-- Very Strong -->
 <Talent name="RULES-T0035">"3"</Talent>
@@ -11753,7 +11999,7 @@ Playing a Stevedore makes you a tough and dependable companion. You can handle y
   <!-- Menacing -->
 <Talent name="RULES-T0101">"3"</Talent>
   <!-- Public Speaker -->
-<Talent name="RULES-T0049">"4"</Talent>
+<Talent name="RULES-T0049_MERCHANTS">"4"</Talent>
   <!-- Fearless (Merchants) -->
 <Talent name="RULES-T0075">"4"</Talent>
   <!-- Kingpin -->
@@ -11868,7 +12114,7 @@ Playing a Wrecker means you are adept at ambushes, stealth, and intimidation, wi
   <!-- Flee! -->
 <Talent name="RULES-T0114">"1"</Talent>
   <!-- Rover -->
-<Talent name="RULES-T0046">"2"</Talent>
+<Talent name="RULES-T0046_CRIMINALS">"2"</Talent>
   <!-- Etiquette (Criminals) -->
 <Talent name="RULES-T0089">"2"</Talent>
   <!-- Night Vision -->
