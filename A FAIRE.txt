@@ -6,6 +6,12 @@
 CORRECTIONS COURTES  (une ligne ou deux chacune)
 =========================================================================
 
+LE MATERIAU (TYPE) DES BOUCLIERS/ECUS DU RULEBOOK V5 N'EST PAS DEFINI. Releve par Nono le
+14/09/2026 en testant WinArmor. RULES-ARMO_01/02/03 (Buckler/Shield/Large Shield,
+BOOK_RULESBOOK.Xml V5) n'ont pas de balise <Type>, contrairement aux pieces Leather/Mail/
+Plate - le livre les liste sous "SHIELDS" sans preciser de materiau. A trancher avec Nono
+(bois ? bois cercle de metal ? un RULES-ARMOT_* dedie ?) avant d'ajouter la balise.
+
 LES 30 METIERS NATIO-WORK001 A 030 (NATIONS OF MANKIND) NE SONT LIES A AUCUNE RACE. Vu par
 Nono le 13/09/2026 en testant WinLivre. Cause : le lien metier->races se construit en lisant
 le SUBCHAPTER_CAREER de CHAQUE race (winlivre.pas, ConstruireMetierRacesMap l.1320), pas

@@ -3933,3 +3933,93 @@ commentaire XML) doit etre appliquee sur un gros fichier, un petit script jetabl
 verifie par diff est plus fiable qu'une suite d'edits manuels - le diff sert de preuve que rien
 d'autre n'a bouge.
 Fichiers modifies : DATABASE\WFRP5\BOOK_RULESBOOK.Xml, CONTEXT.md, Log.txt, A FAIRE.txt.
+
+14/09/2026 - SPECIALISATION DES 14 TALENTS A PARAMETRE DU RULEBOOK V5 : TEST VISUEL FAIT PAR
+NONO, CHANTIER CLOS (CONTEXT.md 2.70). Suite de l'ecriture XML faite plus tot dans la journee
+(entree precedente) : Nono a ouvert WinLivre/WinPersonnage et confirme "ca marche" - les
+specialisations des 14 talents (Etiquette, Fearless, Savant, Craftsman...) s'affichent
+groupees sous leur generique, et les 5 paires de choix "A ou B" (RULES-Txxxx/RULES-Tyyyy)
+se lisent correctement dans WinLivre. Aucune anomalie remontee. Reste hors perimetre, deja
+note dans A FAIRE.txt : les 4 talents "(as Trade)" (Craftsman/Master Tradesman) sans
+resolution dynamique du choix de Trade precedent.
+Fichiers modifies : CONTEXT.md, Log.txt.
+
+14/09/2026 - DATA_WEAPON DU RULEBOOK V5 PEUPLE : 62 ARMES, ECRIT, COMPILE, LANCEMENT SANS
+PLANTAGE, PAS ENCORE TESTE VISUELLEMENT (CONTEXT.md 2.70). Nono a choisi de continuer le
+peuplement du catalogue V5 sur les Armes (DATA_WEAPON ne portait qu'une seule arme de seed,
+Quarterstaff). Transcription des tables "Melee Weapons"/"Ranged Weapons"/"Ammunition" du
+Rulebook V5 (p.300-303) : 29 armes de melee (7 groupes : Basic, Brawling, Cavalry, Fencing,
+Flail, Polearm, Two-Handed), 23 armes a distance (8 groupes : Blackpowder, Bow, Crossbow,
+Engineering, Entangling, Explosives, Sling, Throwing), 8 munitions.
+Gap decouvert en preparant ce chantier : BOOK_RULESBOOK.Xml (V5) n'avait AUCUN chapitre
+DATA_LABEL, alors que le deplacement des RULES-LAB_*/RULES-MESS_* vers INTERFACE.Xml le
+13/09/2026 (CONTEXT.md 2.70 plus haut) supposait que le reste du vocabulaire de jeu
+(DISPO_*, WEAPR_*, etc, propre a chaque edition) resterait dans le rulebook de l'edition -
+jamais fait cote V5. La seed Quarterstaff referencait donc RULES-DISPO_COMMON sans aucun
+libelle associe. Cree avec 11 Text : 4 DISPO_* (Common/Scarce/Rare/Exotic - V5 n'a que 4
+paliers, pas de Limited/Unique comme en V4) et 7 WEAPR_* (Personal/Very Short/Short/Average/
+Long/Very Long/Massive - noms V5 directs plutot que de reprendre les intitules V4 qui
+divergeaient deja du texte officiel, ex. BIG/CLOSE/HUGE/MID).
+DATA_WEAPON_BONUS cree avec 22 Qualites/Defauts (numerotation fraiche RULES-WEAPB01 a 22,
+independante de la V4) : le jeu de qualites V5 differe notablement de la V4 (Impale, Fast,
+Hack, Precise, Penetrating, Pistol, Trap Blade, Unbreakable sont nouveaux ou redefinis).
+Rating (Blast/Repeater/Reload) ecrit avec le suffixe numerique deja supporte par
+GetAllArmeBonusLibelle (forme "CODE N"). Les qualites "Inflict (Condition)" (Entangled,
+Prone, Deafened, Ablaze) et le "Blast +1" d'une munition ont ete laissees en texte litteral
+dans le champ Quality plutot que de creer un code par variante : verifie que
+GetAllArmeBonusLibelle tolere un texte libre sans code correspondant (meme fallback deja
+utilise par les munitions V4, ex. Reach="+0" en texte brut) - aucun nouveau mecanisme
+necessaire. Le champ Type (TypeArme, filtrage interne ModifyWeapon) volontairement omis,
+facultatif et sans usage V5 actuel.
+Travail fait sur une copie (deux blocs XML generes puis fusionnes par un script Perl
+jetable), diff verifie avant bascule : seules les 2 lignes de l'ancienne seed Quarterstaff
+retirees, 884 lignes ajoutees, rien d'autre touche. Balance des balises verifiee (Weapon
+62/62, BonusMalus 22/22, Text 11/11 - pas d'outil de validation XML disponible dans
+l'environnement, verification manuelle par comptage). Compile (lazbuild, 0 erreur).
+WarhammerHelp.exe lance et reste stable plusieurs secondes (chargement du RULESBOOK V5 sans
+exception) puis ferme.
+Fichiers modifies : DATABASE\WFRP5\BOOK_RULESBOOK.Xml, CONTEXT.md, Log.txt.
+
+14/09/2026 - DATA_WEAPON DU RULEBOOK V5 : TEST VISUEL FAIT PAR NONO, CHANTIER CLOS
+(CONTEXT.md 2.70). Nono a confirme "j'ai teste c'est bon" pour le catalogue des 62 armes dans
+WinWeapon (INI.TXT verifie sur VERSION=WFRP5, LANG=ENGLISH, LANGINTERFACE=ENGLISH avant le
+test, pour etre sur de tester les bonnes donnees). Choisit de continuer sur les Armures.
+Fichiers modifies : CONTEXT.md, Log.txt.
+
+14/09/2026 - DATA_ARMOR DU RULEBOOK V5 PEUPLE : 16 PIECES D'ARMURE, ECRIT, COMPILE, LANCEMENT
+SANS PLANTAGE, PAS ENCORE TESTE VISUELLEMENT (CONTEXT.md 2.70). Transcription de la table
+"Armour" complete + "Quick Armour" du Rulebook V5 (p.306-307) : 3 boucliers/ecus (SHIELDS),
+4 pieces en cuir (LEATHER), 4 en maille (MAIL), 5 en plaque (PLATE), 3 bandes simplifiees
+(Light/Medium/Heavy).
+Point note en ecrivant : Buckler existe comme arme ET comme armure (deux fiches distinctes
+dans le livre, l'une dans Melee Weapons/Fencing avec Defensive/Parry/Undamaging, l'autre
+dans Armour avec AP 1) - les deux entrees ont ete creees separement, coherent avec le livre.
+Shield/Large Shield n'existent qu'en armure, pas d'equivalent arme.
+DATA_ARMOR_BONUS cree avec 5 Qualites/Defauts (RULES-ARMOB01 a 05) : Flexible, Impenetrable,
+Shield (bonus +1 SL en opposition Dodge/Melee), Partial, Weakpoints.
+Decision prise en ecrivant les penalites de competence (Helm -2 Perception, Mail/Plate -1
+Stealth chacun, bandes Quick Armour) : laissees en texte litteral dans Quality plutot que
+reliees au mecanisme <Modifier name="CodeCompetence">Valeur</Modifier> deja cable pour
+l'armure V4 (chargepersonnage.pas, PersonnageArmureBonusCompetenceModifPortee,
+ListArmureBonusModif) - ce mecanisme additionne Valeur directement au total de competence,
+qui reste calcule en POURCENTAGE V4 dans ce moteur. Une penalite V5 exprimee en Success
+Level (SL) n'est pas une penalite en points de pourcentage : la cabler telle quelle
+calculerait un nombre faux plutot que rien. Meme prudence que celle deja actee pour
+DATA_ATTRIBUT_COST le 13/09/2026 (le sens change entre V4 et V5, adaptation Pascal reportee)
+- a reprendre ensemble le jour ou l'avancement de carriere/les tests V5 seront codes en SL.
+DATA_LABEL complete avec 4 ARMOL_* (Head/Body/Arms/Legs) et 3 ARMOT_* (Leather/Mail/Plate -
+V5 n'a qu'une seule categorie de cuir contre plusieurs materiaux distincts en V4).
+Travail fait sur une copie (meme methode Perl jetable que pour les Armes), diff verifie
+avant bascule : 0 ligne retiree, 220 lignes ajoutees. Balance des balises verifiee (Armor
+16/16, ArmorSimp 3/3, BonusMalus 27/27 cumule, Text 18/18 cumule). Compile (lazbuild, 0
+erreur). WarhammerHelp.exe lance et reste stable plusieurs secondes (chargement sans
+exception) puis ferme.
+Fichiers modifies : DATABASE\WFRP5\BOOK_RULESBOOK.Xml, CONTEXT.md, Log.txt.
+
+14/09/2026 - DATA_ARMOR DU RULEBOOK V5 : TEST VISUEL FAIT PAR NONO, CHANTIER CLOS
+(CONTEXT.md 2.70). Nono a confirme "j'ai teste c'est bon" pour le catalogue des 16 pieces +
+Quick Armour dans WinArmor. Point releve par Nono en testant, pas corrige : le materiau
+(Type) des 3 boucliers/ecus (RULES-ARMO_01/02/03) n'est pas defini, contrairement aux pieces
+Leather/Mail/Plate - le livre les liste sous "SHIELDS" sans preciser de materiau. Ajoute a
+A FAIRE.txt. Session terminee, Nono s'arrete la (commit).
+Fichiers modifies : CONTEXT.md, Log.txt.

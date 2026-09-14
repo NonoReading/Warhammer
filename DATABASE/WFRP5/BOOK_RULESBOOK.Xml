@@ -120,6 +120,28 @@
 <Cost name="70">"6500"</Cost>
 <Cost name="75">"8500"</Cost>
 </DATA_SKILL_COST>
+<DATA_LABEL>
+<Label language="ENGLISH">
+<Text name="RULES-DISPO_COMMON">"Common"</Text>
+<Text name="RULES-DISPO_SCARCE">"Scarce"</Text>
+<Text name="RULES-DISPO_RARE">"Rare"</Text>
+<Text name="RULES-DISPO_EXOTIC">"Exotic"</Text>
+<Text name="RULES-WEAPR_PERSO">"Personal"</Text>
+<Text name="RULES-WEAPR_VSHORT">"Very Short"</Text>
+<Text name="RULES-WEAPR_SHORT">"Short"</Text>
+<Text name="RULES-WEAPR_AVERAGE">"Average"</Text>
+<Text name="RULES-WEAPR_LONG">"Long"</Text>
+<Text name="RULES-WEAPR_VLONG">"Very Long"</Text>
+<Text name="RULES-WEAPR_MASSIVE">"Massive"</Text>
+<Text name="RULES-ARMOL_HEAD">"Head"</Text>
+<Text name="RULES-ARMOL_BODY">"Body"</Text>
+<Text name="RULES-ARMOL_ARM">"Arms"</Text>
+<Text name="RULES-ARMOL_LEG">"Legs"</Text>
+<Text name="RULES-ARMOT_LEATHER">"Leather (or Quilted or Padded)"</Text>
+<Text name="RULES-ARMOT_MAIL">"Mail"</Text>
+<Text name="RULES-ARMOT_PLATE">"Plate"</Text>
+</Label>
+</DATA_LABEL>
 <DATA_SKILL>
 <Skill id="RULES-COMPANIM">
 <Attribut>"RULES-ATTR_WP"</Attribut>
@@ -12155,17 +12177,1095 @@ Playing a Wrecker means you are adept at ambushes, stealth, and intimidation, wi
 </Career>
 </DATA_CAREER>
 <DATA_WEAPON>
+<Weapon id="RULES-COMB_*">
+<Description language="ENGLISH">"Melee weapon (Any)"</Description>
+<Skill>"-"</Skill>
+<Damage>"-"</Damage>
+<Availability>"-"</Availability>
+<Reach>"-"</Reach>
+<Price>"-"</Price>
+<Encumbrance>"0"</Encumbrance>
+<Quality>"-"</Quality>
+<Hand>"0"</Hand>
+<Ammunition>"0"</Ammunition>
+</Weapon>
+<Weapon id="RULES-COMB_BASE_01">
+<Description language="ENGLISH">"Dagger"</Description>
+<Skill>"RULES-COMPCOMB_BASE"</Skill>
+<Damage>"+(BATTR_S)+2"</Damage>
+<Availability>"RULES-DISPO_COMMON"</Availability>
+<Reach>"RULES-WEAPR_VSHORT"</Reach>
+<Price>"16/-"</Price>
+<Encumbrance>"0"</Encumbrance>
+<Quality>"-"</Quality>
+<Hand>"1"</Hand>
+<Ammunition>"0"</Ammunition>
+</Weapon>
+<Weapon id="RULES-COMB_BASE_02">
+<Description language="ENGLISH">"Knife"</Description>
+<Skill>"RULES-COMPCOMB_BASE"</Skill>
+<Damage>"+(BATTR_S)+1"</Damage>
+<Availability>"RULES-DISPO_COMMON"</Availability>
+<Reach>"RULES-WEAPR_VSHORT"</Reach>
+<Price>"8/-"</Price>
+<Encumbrance>"0"</Encumbrance>
+<Quality>"RULES-WEAPB22"</Quality>
+<Hand>"1"</Hand>
+<Ammunition>"0"</Ammunition>
+</Weapon>
+<Weapon id="RULES-COMB_BASE_03">
+<Description language="ENGLISH">"Hand Weapon"</Description>
+<Skill>"RULES-COMPCOMB_BASE"</Skill>
+<Damage>"+(BATTR_S)+4"</Damage>
+<Availability>"RULES-DISPO_COMMON"</Availability>
+<Reach>"RULES-WEAPR_AVERAGE"</Reach>
+<Price>"2CO"</Price>
+<Encumbrance>"1"</Encumbrance>
+<Quality>"RULES-WEAPB21"</Quality>
+<Hand>"1"</Hand>
+<Ammunition>"0"</Ammunition>
+</Weapon>
+<Weapon id="RULES-COMB_BASE_04">
+<Description language="ENGLISH">"Improvised Weapon"</Description>
+<Skill>"RULES-COMPCOMB_BASE"</Skill>
+<Damage>"+(BATTR_S)+1"</Damage>
+<Availability>"-"</Availability>
+<Reach>"Varies"</Reach>
+<Price>"-"</Price>
+<Encumbrance>"0"</Encumbrance>
+<Quality>"RULES-WEAPB21,RULES-WEAPB22"</Quality>
+<Hand>"1"</Hand>
+<Ammunition>"0"</Ammunition>
+</Weapon>
+<Weapon id="RULES-COMB_BASE_05">
+<Description language="ENGLISH">"Net"</Description>
+<Skill>"RULES-COMPCOMB_BASE"</Skill>
+<Damage>"-"</Damage>
+<Availability>"RULES-DISPO_COMMON"</Availability>
+<Reach>"RULES-WEAPR_SHORT"</Reach>
+<Price>"6/-"</Price>
+<Encumbrance>"1"</Encumbrance>
+<Quality>"RULES-WEAPB04,Inflict (Entangled 50)"</Quality>
+<Hand>"1"</Hand>
+<Ammunition>"0"</Ammunition>
+</Weapon>
+<Weapon id="RULES-COMB_BASE_06">
+<Description language="ENGLISH">"Sword"</Description>
+<Skill>"RULES-COMPCOMB_BASE"</Skill>
+<Damage>"+(BATTR_S)+4"</Damage>
+<Availability>"RULES-DISPO_COMMON"</Availability>
+<Reach>"RULES-WEAPR_AVERAGE"</Reach>
+<Price>"4CO"</Price>
+<Encumbrance>"1"</Encumbrance>
+<Quality>"-"</Quality>
+<Hand>"1"</Hand>
+<Ammunition>"0"</Ammunition>
+</Weapon>
+<Weapon id="RULES-COMB_BAGAR_01">
+<Description language="ENGLISH">"Garrote"</Description>
+<Skill>"RULES-COMPCOMB_BAGAR"</Skill>
+<Damage>"+(BATTR_S)+2"</Damage>
+<Availability>"RULES-DISPO_RARE"</Availability>
+<Reach>"RULES-WEAPR_PERSO"</Reach>
+<Price>"1/-"</Price>
+<Encumbrance>"0"</Encumbrance>
+<Quality>"Inflict (Entangled your Strength),RULES-WEAPB22"</Quality>
+<Hand>"2"</Hand>
+<Ammunition>"0"</Ammunition>
+</Weapon>
+<Weapon id="RULES-COMB_BAGAR_02">
+<Description language="ENGLISH">"Knuckledusters"</Description>
+<Skill>"RULES-COMPCOMB_BAGAR"</Skill>
+<Damage>"+(BATTR_S)+2"</Damage>
+<Availability>"RULES-DISPO_COMMON"</Availability>
+<Reach>"RULES-WEAPR_PERSO"</Reach>
+<Price>"2/6"</Price>
+<Encumbrance>"0"</Encumbrance>
+<Quality>"-"</Quality>
+<Hand>"1"</Hand>
+<Ammunition>"0"</Ammunition>
+</Weapon>
+<Weapon id="RULES-COMB_BAGAR_03">
+<Description language="ENGLISH">"Unarmed"</Description>
+<Skill>"RULES-COMPCOMB_BAGAR"</Skill>
+<Damage>"+(BATTR_S)"</Damage>
+<Availability>"-"</Availability>
+<Reach>"RULES-WEAPR_PERSO"</Reach>
+<Price>"-"</Price>
+<Encumbrance>"0"</Encumbrance>
+<Quality>"RULES-WEAPB22"</Quality>
+<Hand>"1"</Hand>
+<Ammunition>"0"</Ammunition>
+</Weapon>
+<Weapon id="RULES-COMB_CAVAL_01">
+<Description language="ENGLISH">"Cavalry Hammer"</Description>
+<Skill>"RULES-COMPCOMB_CAVAL"</Skill>
+<Damage>"+(BATTR_S)+5"</Damage>
+<Availability>"RULES-DISPO_RARE"</Availability>
+<Reach>"RULES-WEAPR_LONG"</Reach>
+<Price>"4CO"</Price>
+<Encumbrance>"3"</Encumbrance>
+<Quality>"RULES-WEAPB13"</Quality>
+<Hand>"2"</Hand>
+<Ammunition>"0"</Ammunition>
+</Weapon>
+<Weapon id="RULES-COMB_CAVAL_02">
+<Description language="ENGLISH">"Lance"</Description>
+<Skill>"RULES-COMPCOMB_CAVAL"</Skill>
+<Damage>"+(BATTR_S)+6"</Damage>
+<Availability>"RULES-DISPO_RARE"</Availability>
+<Reach>"RULES-WEAPR_VLONG"</Reach>
+<Price>"1CO"</Price>
+<Encumbrance>"3"</Encumbrance>
+<Quality>"RULES-WEAPB03,RULES-WEAPB07"</Quality>
+<Hand>"1"</Hand>
+<Ammunition>"0"</Ammunition>
+</Weapon>
+<Weapon id="RULES-COMB_ESCR_01">
+<Description language="ENGLISH">"Buckler"</Description>
+<Skill>"RULES-COMPCOMB_ESCR"</Skill>
+<Damage>"+(BATTR_S)+1"</Damage>
+<Availability>"RULES-DISPO_COMMON"</Availability>
+<Reach>"RULES-WEAPR_PERSO"</Reach>
+<Price>"1CO"</Price>
+<Encumbrance>"1"</Encumbrance>
+<Quality>"RULES-WEAPB04,RULES-WEAPB09,RULES-WEAPB22"</Quality>
+<Hand>"1"</Hand>
+<Ammunition>"0"</Ammunition>
+</Weapon>
+<Weapon id="RULES-COMB_ESCR_02">
+<Description language="ENGLISH">"Foil"</Description>
+<Skill>"RULES-COMPCOMB_ESCR"</Skill>
+<Damage>"+(BATTR_S)+3"</Damage>
+<Availability>"RULES-DISPO_SCARCE"</Availability>
+<Reach>"RULES-WEAPR_AVERAGE"</Reach>
+<Price>"5CO"</Price>
+<Encumbrance>"1"</Encumbrance>
+<Quality>"RULES-WEAPB05,RULES-WEAPB07,RULES-WEAPB12,RULES-WEAPB22"</Quality>
+<Hand>"1"</Hand>
+<Ammunition>"0"</Ammunition>
+</Weapon>
+<Weapon id="RULES-COMB_ESCR_03">
+<Description language="ENGLISH">"Main Gauche"</Description>
+<Skill>"RULES-COMPCOMB_ESCR"</Skill>
+<Damage>"+(BATTR_S)+2"</Damage>
+<Availability>"RULES-DISPO_SCARCE"</Availability>
+<Reach>"RULES-WEAPR_SHORT"</Reach>
+<Price>"1CO"</Price>
+<Encumbrance>"0"</Encumbrance>
+<Quality>"RULES-WEAPB04,RULES-WEAPB07,RULES-WEAPB09"</Quality>
+<Hand>"1"</Hand>
+<Ammunition>"0"</Ammunition>
+</Weapon>
+<Weapon id="RULES-COMB_ESCR_04">
+<Description language="ENGLISH">"Rapier"</Description>
+<Skill>"RULES-COMPCOMB_ESCR"</Skill>
+<Damage>"+(BATTR_S)+4"</Damage>
+<Availability>"RULES-DISPO_SCARCE"</Availability>
+<Reach>"RULES-WEAPR_LONG"</Reach>
+<Price>"5CO"</Price>
+<Encumbrance>"1"</Encumbrance>
+<Quality>"RULES-WEAPB05,RULES-WEAPB07"</Quality>
+<Hand>"1"</Hand>
+<Ammunition>"0"</Ammunition>
+</Weapon>
+<Weapon id="RULES-COMB_ESCR_05">
+<Description language="ENGLISH">"Swordbreaker"</Description>
+<Skill>"RULES-COMPCOMB_ESCR"</Skill>
+<Damage>"+(BATTR_S)+1"</Damage>
+<Availability>"RULES-DISPO_RARE"</Availability>
+<Reach>"RULES-WEAPR_SHORT"</Reach>
+<Price>"1CO 2/6"</Price>
+<Encumbrance>"0"</Encumbrance>
+<Quality>"RULES-WEAPB04,RULES-WEAPB09,RULES-WEAPB15"</Quality>
+<Hand>"1"</Hand>
+<Ammunition>"0"</Ammunition>
+</Weapon>
+<Weapon id="RULES-COMB_FLEAU_01">
+<Description language="ENGLISH">"Flail"</Description>
+<Skill>"RULES-COMPCOMB_FLEAU"</Skill>
+<Damage>"+(BATTR_S)+4"</Damage>
+<Availability>"RULES-DISPO_SCARCE"</Availability>
+<Reach>"RULES-WEAPR_AVERAGE"</Reach>
+<Price>"2CO"</Price>
+<Encumbrance>"1"</Encumbrance>
+<Quality>"RULES-WEAPB13,RULES-WEAPB17,RULES-WEAPB21"</Quality>
+<Hand>"1"</Hand>
+<Ammunition>"0"</Ammunition>
+</Weapon>
+<Weapon id="RULES-COMB_FLEAU_02">
+<Description language="ENGLISH">"Grain Flail"</Description>
+<Skill>"RULES-COMPCOMB_FLEAU"</Skill>
+<Damage>"+(BATTR_S)+3"</Damage>
+<Availability>"RULES-DISPO_COMMON"</Availability>
+<Reach>"RULES-WEAPR_LONG"</Reach>
+<Price>"5/-"</Price>
+<Encumbrance>"2"</Encumbrance>
+<Quality>"RULES-WEAPB13,RULES-WEAPB19"</Quality>
+<Hand>"2"</Hand>
+<Ammunition>"0"</Ammunition>
+</Weapon>
+<Weapon id="RULES-COMB_FLEAU_03">
+<Description language="ENGLISH">"Military Flail"</Description>
+<Skill>"RULES-COMPCOMB_FLEAU"</Skill>
+<Damage>"+(BATTR_S)+5"</Damage>
+<Availability>"RULES-DISPO_RARE"</Availability>
+<Reach>"RULES-WEAPR_LONG"</Reach>
+<Price>"3CO"</Price>
+<Encumbrance>"3"</Encumbrance>
+<Quality>"RULES-WEAPB03,RULES-WEAPB13,RULES-WEAPB17,RULES-WEAPB21"</Quality>
+<Hand>"2"</Hand>
+<Ammunition>"0"</Ammunition>
+</Weapon>
+<Weapon id="RULES-COMB_FLEAU_04">
+<Description language="ENGLISH">"Whip"</Description>
+<Skill>"RULES-COMPCOMB_FLEAU"</Skill>
+<Damage>"+(BATTR_S)+2"</Damage>
+<Availability>"RULES-DISPO_COMMON"</Availability>
+<Reach>"RULES-WEAPR_VLONG"</Reach>
+<Price>"5/-"</Price>
+<Encumbrance>"1"</Encumbrance>
+<Quality>"RULES-WEAPB17,RULES-WEAPB21,RULES-WEAPB22"</Quality>
+<Hand>"1"</Hand>
+<Ammunition>"0"</Ammunition>
+</Weapon>
 <Weapon id="RULES-COMB_HAST_01">
+<Description language="ENGLISH">"Halberd"</Description>
+<Skill>"RULES-COMPCOMB_HAST"</Skill>
+<Damage>"+(BATTR_S)+5"</Damage>
+<Availability>"RULES-DISPO_COMMON"</Availability>
+<Reach>"RULES-WEAPR_LONG"</Reach>
+<Price>"2CO"</Price>
+<Encumbrance>"3"</Encumbrance>
+<Quality>"RULES-WEAPB04,RULES-WEAPB06,RULES-WEAPB07"</Quality>
+<Hand>"2"</Hand>
+<Ammunition>"0"</Ammunition>
+</Weapon>
+<Weapon id="RULES-COMB_HAST_02">
+<Description language="ENGLISH">"Pike"</Description>
+<Skill>"RULES-COMPCOMB_HAST"</Skill>
+<Damage>"+(BATTR_S)+4"</Damage>
+<Availability>"RULES-DISPO_RARE"</Availability>
+<Reach>"RULES-WEAPR_MASSIVE"</Reach>
+<Price>"18/-"</Price>
+<Encumbrance>"4"</Encumbrance>
+<Quality>"RULES-WEAPB07"</Quality>
+<Hand>"2"</Hand>
+<Ammunition>"0"</Ammunition>
+</Weapon>
+<Weapon id="RULES-COMB_HAST_03">
 <Description language="ENGLISH">"Quarterstaff"</Description>
-<Skill>""</Skill>
+<Skill>"RULES-COMPCOMB_HAST"</Skill>
 <Damage>"+(BATTR_S)+3"</Damage>
 <Availability>"RULES-DISPO_COMMON"</Availability>
 <Reach>"RULES-WEAPR_LONG"</Reach>
 <Price>"3/-"</Price>
 <Encumbrance>"2"</Encumbrance>
-<Quality>"RULES-WEAPB04,RULES-WEAPB08"</Quality>
+<Quality>"RULES-WEAPB04,RULES-WEAPB13"</Quality>
 <Hand>"2"</Hand>
 <Ammunition>"0"</Ammunition>
 </Weapon>
+<Weapon id="RULES-COMB_HAST_04">
+<Description language="ENGLISH">"Spear"</Description>
+<Skill>"RULES-COMPCOMB_HAST"</Skill>
+<Damage>"+(BATTR_S)+4"</Damage>
+<Availability>"RULES-DISPO_COMMON"</Availability>
+<Reach>"RULES-WEAPR_VLONG"</Reach>
+<Price>"15/-"</Price>
+<Encumbrance>"2"</Encumbrance>
+<Quality>"RULES-WEAPB05,RULES-WEAPB07"</Quality>
+<Hand>"2"</Hand>
+<Ammunition>"0"</Ammunition>
+</Weapon>
+<Weapon id="RULES-COMB_2M_01">
+<Description language="ENGLISH">"Bastard Sword"</Description>
+<Skill>"RULES-COMPCOMB_2M"</Skill>
+<Damage>"+(BATTR_S)+5"</Damage>
+<Availability>"RULES-DISPO_SCARCE"</Availability>
+<Reach>"RULES-WEAPR_LONG"</Reach>
+<Price>"10CO"</Price>
+<Encumbrance>"2"</Encumbrance>
+<Quality>"RULES-WEAPB03,RULES-WEAPB04"</Quality>
+<Hand>"2"</Hand>
+<Ammunition>"0"</Ammunition>
+</Weapon>
+<Weapon id="RULES-COMB_2M_02">
+<Description language="ENGLISH">"Greataxe"</Description>
+<Skill>"RULES-COMPCOMB_2M"</Skill>
+<Damage>"+(BATTR_S)+6"</Damage>
+<Availability>"RULES-DISPO_SCARCE"</Availability>
+<Reach>"RULES-WEAPR_LONG"</Reach>
+<Price>"4CO"</Price>
+<Encumbrance>"3"</Encumbrance>
+<Quality>"RULES-WEAPB03,RULES-WEAPB06,RULES-WEAPB21"</Quality>
+<Hand>"2"</Hand>
+<Ammunition>"0"</Ammunition>
+</Weapon>
+<Weapon id="RULES-COMB_2M_03">
+<Description language="ENGLISH">"Pick"</Description>
+<Skill>"RULES-COMPCOMB_2M"</Skill>
+<Damage>"+(BATTR_S)+5"</Damage>
+<Availability>"RULES-DISPO_COMMON"</Availability>
+<Reach>"RULES-WEAPR_LONG"</Reach>
+<Price>"2CO"</Price>
+<Encumbrance>"3"</Encumbrance>
+<Quality>"RULES-WEAPB03,RULES-WEAPB10,RULES-WEAPB21"</Quality>
+<Hand>"2"</Hand>
+<Ammunition>"0"</Ammunition>
+</Weapon>
+<Weapon id="RULES-COMB_2M_04">
+<Description language="ENGLISH">"Warhammer"</Description>
+<Skill>"RULES-COMPCOMB_2M"</Skill>
+<Damage>"+(BATTR_S)+6"</Damage>
+<Availability>"RULES-DISPO_SCARCE"</Availability>
+<Reach>"RULES-WEAPR_LONG"</Reach>
+<Price>"4CO"</Price>
+<Encumbrance>"3"</Encumbrance>
+<Quality>"RULES-WEAPB03,RULES-WEAPB13,RULES-WEAPB21"</Quality>
+<Hand>"2"</Hand>
+<Ammunition>"0"</Ammunition>
+</Weapon>
+<Weapon id="RULES-COMB_2M_05">
+<Description language="ENGLISH">"Zweihander"</Description>
+<Skill>"RULES-COMPCOMB_2M"</Skill>
+<Damage>"+(BATTR_S)+5"</Damage>
+<Availability>"RULES-DISPO_SCARCE"</Availability>
+<Reach>"RULES-WEAPR_LONG"</Reach>
+<Price>"16CO"</Price>
+<Encumbrance>"3"</Encumbrance>
+<Quality>"RULES-WEAPB03,RULES-WEAPB06"</Quality>
+<Hand>"2"</Hand>
+<Ammunition>"0"</Ammunition>
+</Weapon>
+<Weapon id="RULES-PROJ_*">
+<Description language="ENGLISH">"Ranged weapon (Any)"</Description>
+<Skill>"-"</Skill>
+<Damage>"-"</Damage>
+<Availability>"-"</Availability>
+<Reach>"-"</Reach>
+<Price>"-"</Price>
+<Encumbrance>"0"</Encumbrance>
+<Quality>"-"</Quality>
+<Hand>"0"</Hand>
+<Ammunition>"0"</Ammunition>
+</Weapon>
+<Weapon id="RULES-PROJ_POUDRE_01">
+<Description language="ENGLISH">"Blunderbuss"</Description>
+<Skill>"RULES-COMPPROJ_POUDRE"</Skill>
+<Damage>"+8"</Damage>
+<Availability>"RULES-DISPO_SCARCE"</Availability>
+<Reach>"20"</Reach>
+<Price>"10CO"</Price>
+<Encumbrance>"2"</Encumbrance>
+<Quality>"RULES-WEAPB02 3,RULES-WEAPB18,RULES-WEAPB20 3"</Quality>
+<Hand>"2"</Hand>
+<Ammunition>"0"</Ammunition>
+</Weapon>
+<Weapon id="RULES-PROJ_POUDRE_02">
+<Description language="ENGLISH">"Handgun"</Description>
+<Skill>"RULES-COMPPROJ_POUDRE"</Skill>
+<Damage>"+10"</Damage>
+<Availability>"RULES-DISPO_SCARCE"</Availability>
+<Reach>"40"</Reach>
+<Price>"16CO"</Price>
+<Encumbrance>"2"</Encumbrance>
+<Quality>"RULES-WEAPB20 3"</Quality>
+<Hand>"2"</Hand>
+<Ammunition>"0"</Ammunition>
+</Weapon>
+<Weapon id="RULES-PROJ_POUDRE_03">
+<Description language="ENGLISH">"Pistol"</Description>
+<Skill>"RULES-COMPPROJ_POUDRE"</Skill>
+<Damage>"+9"</Damage>
+<Availability>"RULES-DISPO_RARE"</Availability>
+<Reach>"20"</Reach>
+<Price>"20CO"</Price>
+<Encumbrance>"0"</Encumbrance>
+<Quality>"RULES-WEAPB11,RULES-WEAPB20 2"</Quality>
+<Hand>"1"</Hand>
+<Ammunition>"0"</Ammunition>
+</Weapon>
+<Weapon id="RULES-PROJ_ARC_01">
+<Description language="ENGLISH">"Bow"</Description>
+<Skill>"RULES-COMPPROJ_ARC"</Skill>
+<Damage>"+(BATTR_S)+4"</Damage>
+<Availability>"RULES-DISPO_COMMON"</Availability>
+<Reach>"50"</Reach>
+<Price>"4CO"</Price>
+<Encumbrance>"2"</Encumbrance>
+<Quality>"-"</Quality>
+<Hand>"2"</Hand>
+<Ammunition>"0"</Ammunition>
+</Weapon>
+<Weapon id="RULES-PROJ_ARC_02">
+<Description language="ENGLISH">"Longbow"</Description>
+<Skill>"RULES-COMPPROJ_ARC"</Skill>
+<Damage>"+(BATTR_S)+4"</Damage>
+<Availability>"RULES-DISPO_SCARCE"</Availability>
+<Reach>"60"</Reach>
+<Price>"8CO"</Price>
+<Encumbrance>"3"</Encumbrance>
+<Quality>"-"</Quality>
+<Hand>"2"</Hand>
+<Ammunition>"0"</Ammunition>
+</Weapon>
+<Weapon id="RULES-PROJ_ARC_03">
+<Description language="ENGLISH">"Shortbow"</Description>
+<Skill>"RULES-COMPPROJ_ARC"</Skill>
+<Damage>"+(BATTR_S)+3"</Damage>
+<Availability>"RULES-DISPO_COMMON"</Availability>
+<Reach>"40"</Reach>
+<Price>"3CO"</Price>
+<Encumbrance>"1"</Encumbrance>
+<Quality>"-"</Quality>
+<Hand>"2"</Hand>
+<Ammunition>"0"</Ammunition>
+</Weapon>
+<Weapon id="RULES-PROJ_ARB_01">
+<Description language="ENGLISH">"Crossbow"</Description>
+<Skill>"RULES-COMPPROJ_ARB"</Skill>
+<Damage>"+9"</Damage>
+<Availability>"RULES-DISPO_COMMON"</Availability>
+<Reach>"50"</Reach>
+<Price>"5CO"</Price>
+<Encumbrance>"2"</Encumbrance>
+<Quality>"RULES-WEAPB20 1"</Quality>
+<Hand>"2"</Hand>
+<Ammunition>"0"</Ammunition>
+</Weapon>
+<Weapon id="RULES-PROJ_ARBPG_01">
+<Description language="ENGLISH">"Crossbow Pistol"</Description>
+<Skill>"RULES-COMPPROJ_ARBPG"</Skill>
+<Damage>"+7"</Damage>
+<Availability>"RULES-DISPO_RARE"</Availability>
+<Reach>"20"</Reach>
+<Price>"6CO"</Price>
+<Encumbrance>"0"</Encumbrance>
+<Quality>"RULES-WEAPB11,RULES-WEAPB20 1"</Quality>
+<Hand>"1"</Hand>
+<Ammunition>"0"</Ammunition>
+</Weapon>
+<Weapon id="RULES-PROJ_ARB_02">
+<Description language="ENGLISH">"Heavy Crossbow"</Description>
+<Skill>"RULES-COMPPROJ_ARB"</Skill>
+<Damage>"+10"</Damage>
+<Availability>"RULES-DISPO_SCARCE"</Availability>
+<Reach>"60"</Reach>
+<Price>"8CO"</Price>
+<Encumbrance>"3"</Encumbrance>
+<Quality>"RULES-WEAPB20 2"</Quality>
+<Hand>"2"</Hand>
+<Ammunition>"0"</Ammunition>
+</Weapon>
+<Weapon id="RULES-PROJ_ING_01">
+<Description language="ENGLISH">"Repeater Handgun"</Description>
+<Skill>"RULES-COMPPROJ_ING"</Skill>
+<Damage>"+10"</Damage>
+<Availability>"RULES-DISPO_RARE"</Availability>
+<Reach>"40"</Reach>
+<Price>"50CO"</Price>
+<Encumbrance>"3"</Encumbrance>
+<Quality>"RULES-WEAPB14 4,RULES-WEAPB18,RULES-WEAPB20 5"</Quality>
+<Hand>"2"</Hand>
+<Ammunition>"0"</Ammunition>
+</Weapon>
+<Weapon id="RULES-PROJ_ING_02">
+<Description language="ENGLISH">"Repeater Pistol"</Description>
+<Skill>"RULES-COMPPROJ_ING"</Skill>
+<Damage>"+9"</Damage>
+<Availability>"RULES-DISPO_RARE"</Availability>
+<Reach>"20"</Reach>
+<Price>"40CO"</Price>
+<Encumbrance>"1"</Encumbrance>
+<Quality>"RULES-WEAPB11,RULES-WEAPB14 4,RULES-WEAPB18,RULES-WEAPB20 4"</Quality>
+<Hand>"1"</Hand>
+<Ammunition>"0"</Ammunition>
+</Weapon>
+<Weapon id="RULES-PROJ_ING_03">
+<Description language="ENGLISH">"Hochland Long Rifle"</Description>
+<Skill>"RULES-COMPPROJ_ING"</Skill>
+<Damage>"+10"</Damage>
+<Availability>"RULES-DISPO_EXOTIC"</Availability>
+<Reach>"100"</Reach>
+<Price>"100CO"</Price>
+<Encumbrance>"3"</Encumbrance>
+<Quality>"RULES-WEAPB12,RULES-WEAPB20 4"</Quality>
+<Hand>"2"</Hand>
+<Ammunition>"0"</Ammunition>
+</Weapon>
+<Weapon id="RULES-PROJ_ENTRAV_01">
+<Description language="ENGLISH">"Bolas"</Description>
+<Skill>"RULES-COMPPROJ_ENTRAV"</Skill>
+<Damage>"+(BATTR_S)"</Damage>
+<Availability>"RULES-DISPO_RARE"</Availability>
+<Reach>"(BATTR_S)X3"</Reach>
+<Price>"10/-"</Price>
+<Encumbrance>"0"</Encumbrance>
+<Quality>"Inflict (Entangled 35),Inflict (Prone),RULES-WEAPB22"</Quality>
+<Hand>"1"</Hand>
+<Ammunition>"0"</Ammunition>
+</Weapon>
+<Weapon id="RULES-PROJ_ENTRAV_02">
+<Description language="ENGLISH">"Lasso"</Description>
+<Skill>"RULES-COMPPROJ_ENTRAV"</Skill>
+<Damage>"-"</Damage>
+<Availability>"RULES-DISPO_COMMON"</Availability>
+<Reach>"(BATTR_S)X2"</Reach>
+<Price>"6/-"</Price>
+<Encumbrance>"1"</Encumbrance>
+<Quality>"Inflict (Entangled 45)"</Quality>
+<Hand>"2"</Hand>
+<Ammunition>"0"</Ammunition>
+</Weapon>
+<Weapon id="RULES-PROJ_ENTRAV_03">
+<Description language="ENGLISH">"Net"</Description>
+<Skill>"RULES-COMPPROJ_ENTRAV"</Skill>
+<Damage>"-"</Damage>
+<Availability>"RULES-DISPO_COMMON"</Availability>
+<Reach>"(BATTR_S)"</Reach>
+<Price>"6/-"</Price>
+<Encumbrance>"1"</Encumbrance>
+<Quality>"Inflict (Entangled 50)"</Quality>
+<Hand>"1"</Hand>
+<Ammunition>"0"</Ammunition>
+</Weapon>
+<Weapon id="RULES-PROJ_EXPLO_01">
+<Description language="ENGLISH">"Bomb"</Description>
+<Skill>"RULES-COMPPROJ_EXPLO"</Skill>
+<Damage>"12"</Damage>
+<Availability>"RULES-DISPO_RARE"</Availability>
+<Reach>"(BATTR_S)"</Reach>
+<Price>"3CO"</Price>
+<Encumbrance>"0"</Encumbrance>
+<Quality>"RULES-WEAPB02 5,Inflict (Deafened),RULES-WEAPB18"</Quality>
+<Hand>"1"</Hand>
+<Ammunition>"0"</Ammunition>
+</Weapon>
+<Weapon id="RULES-PROJ_EXPLO_02">
+<Description language="ENGLISH">"Incendiary"</Description>
+<Skill>"RULES-COMPPROJ_EXPLO"</Skill>
+<Damage>"8"</Damage>
+<Availability>"RULES-DISPO_SCARCE"</Availability>
+<Reach>"(BATTR_S)"</Reach>
+<Price>"1CO"</Price>
+<Encumbrance>"0"</Encumbrance>
+<Quality>"RULES-WEAPB02 4,Inflict (Ablaze),RULES-WEAPB18"</Quality>
+<Hand>"1"</Hand>
+<Ammunition>"0"</Ammunition>
+</Weapon>
+<Weapon id="RULES-PROJ_FROND_01">
+<Description language="ENGLISH">"Sling"</Description>
+<Skill>"RULES-COMPPROJ_FROND"</Skill>
+<Damage>"+6"</Damage>
+<Availability>"RULES-DISPO_COMMON"</Availability>
+<Reach>"40"</Reach>
+<Price>"1/-"</Price>
+<Encumbrance>"0"</Encumbrance>
+<Quality>"-"</Quality>
+<Hand>"1"</Hand>
+<Ammunition>"0"</Ammunition>
+</Weapon>
+<Weapon id="RULES-PROJ_FROND_02">
+<Description language="ENGLISH">"Staff Sling"</Description>
+<Skill>"RULES-COMPPROJ_FROND"</Skill>
+<Damage>"+7"</Damage>
+<Availability>"RULES-DISPO_COMMON"</Availability>
+<Reach>"50"</Reach>
+<Price>"4/-"</Price>
+<Encumbrance>"2"</Encumbrance>
+<Quality>"-"</Quality>
+<Hand>"2"</Hand>
+<Ammunition>"0"</Ammunition>
+</Weapon>
+<Weapon id="RULES-PROJ_LANC_01">
+<Description language="ENGLISH">"Javelin"</Description>
+<Skill>"RULES-COMPPROJ_LANC"</Skill>
+<Damage>"+(BATTR_S)+3"</Damage>
+<Availability>"RULES-DISPO_SCARCE"</Availability>
+<Reach>"(BATTR_S)X3"</Reach>
+<Price>"10/6"</Price>
+<Encumbrance>"1"</Encumbrance>
+<Quality>"RULES-WEAPB07"</Quality>
+<Hand>"1"</Hand>
+<Ammunition>"0"</Ammunition>
+</Weapon>
+<Weapon id="RULES-PROJ_LANC_02">
+<Description language="ENGLISH">"Rock"</Description>
+<Skill>"RULES-COMPPROJ_LANC"</Skill>
+<Damage>"+(BATTR_S)"</Damage>
+<Availability>"-"</Availability>
+<Reach>"(BATTR_S)X3"</Reach>
+<Price>"-"</Price>
+<Encumbrance>"0"</Encumbrance>
+<Quality>"RULES-WEAPB22"</Quality>
+<Hand>"1"</Hand>
+<Ammunition>"0"</Ammunition>
+</Weapon>
+<Weapon id="RULES-PROJ_LANC_03">
+<Description language="ENGLISH">"Throwing Axe"</Description>
+<Skill>"RULES-COMPPROJ_LANC"</Skill>
+<Damage>"+(BATTR_S)+3"</Damage>
+<Availability>"RULES-DISPO_SCARCE"</Availability>
+<Reach>"(BATTR_S)X2"</Reach>
+<Price>"1CO"</Price>
+<Encumbrance>"1"</Encumbrance>
+<Quality>"RULES-WEAPB06"</Quality>
+<Hand>"1"</Hand>
+<Ammunition>"0"</Ammunition>
+</Weapon>
+<Weapon id="RULES-PROJ_LANC_04">
+<Description language="ENGLISH">"Throwing Knife"</Description>
+<Skill>"RULES-COMPPROJ_LANC"</Skill>
+<Damage>"+(BATTR_S)+2"</Damage>
+<Availability>"RULES-DISPO_SCARCE"</Availability>
+<Reach>"(BATTR_S)X2"</Reach>
+<Price>"18/-"</Price>
+<Encumbrance>"0"</Encumbrance>
+<Quality>"-"</Quality>
+<Hand>"1"</Hand>
+<Ammunition>"0"</Ammunition>
+</Weapon>
+<Weapon id="RULES-MUNI_01">
+<Description language="ENGLISH">"Bullet and Powder"</Description>
+<Skill>"RULES-COMPPROJ_POUDRE/RULES-COMPPROJ_ING"</Skill>
+<Damage>"-"</Damage>
+<Availability>"RULES-DISPO_COMMON"</Availability>
+<Reach>"-"</Reach>
+<Price>"3/3"</Price>
+<Encumbrance>"0"</Encumbrance>
+<Quality>"RULES-WEAPB07,RULES-WEAPB10"</Quality>
+<Hand>"0"</Hand>
+<Ammunition>"12"</Ammunition>
+</Weapon>
+<Weapon id="RULES-MUNI_02">
+<Description language="ENGLISH">"Improvised Shot and Powder"</Description>
+<Skill>"RULES-COMPPROJ_POUDRE/RULES-COMPPROJ_ING"</Skill>
+<Damage>"-"</Damage>
+<Availability>"RULES-DISPO_COMMON"</Availability>
+<Reach>"Half weapon -1"</Reach>
+<Price>"3d"</Price>
+<Encumbrance>"0"</Encumbrance>
+<Quality>"-"</Quality>
+<Hand>"0"</Hand>
+<Ammunition>"1"</Ammunition>
+</Weapon>
+<Weapon id="RULES-MUNI_03">
+<Description language="ENGLISH">"Small Shot and Powder"</Description>
+<Skill>"RULES-COMPPROJ_POUDRE/RULES-COMPPROJ_ING"</Skill>
+<Damage>"-"</Damage>
+<Availability>"RULES-DISPO_COMMON"</Availability>
+<Reach>"-"</Reach>
+<Price>"3/3"</Price>
+<Encumbrance>"0"</Encumbrance>
+<Quality>"Blast +1"</Quality>
+<Hand>"0"</Hand>
+<Ammunition>"12"</Ammunition>
+</Weapon>
+<Weapon id="RULES-MUNI_04">
+<Description language="ENGLISH">"Arrow"</Description>
+<Skill>"RULES-COMPPROJ_ARC"</Skill>
+<Damage>"-"</Damage>
+<Availability>"RULES-DISPO_COMMON"</Availability>
+<Reach>"-"</Reach>
+<Price>"5/-"</Price>
+<Encumbrance>"0"</Encumbrance>
+<Quality>"RULES-WEAPB07"</Quality>
+<Hand>"0"</Hand>
+<Ammunition>"12"</Ammunition>
+</Weapon>
+<Weapon id="RULES-MUNI_05">
+<Description language="ENGLISH">"Elf Arrow"</Description>
+<Skill>"RULES-COMPPROJ_ARC"</Skill>
+<Damage>"-"</Damage>
+<Availability>"RULES-DISPO_EXOTIC"</Availability>
+<Reach>"+10"</Reach>
+<Price>"6/-"</Price>
+<Encumbrance>"0"</Encumbrance>
+<Quality>"RULES-WEAPB07"</Quality>
+<Hand>"0"</Hand>
+<Ammunition>"1"</Ammunition>
+</Weapon>
+<Weapon id="RULES-MUNI_06">
+<Description language="ENGLISH">"Bolt"</Description>
+<Skill>"RULES-COMPPROJ_ARB"</Skill>
+<Damage>"-"</Damage>
+<Availability>"RULES-DISPO_COMMON"</Availability>
+<Reach>"-"</Reach>
+<Price>"5/-"</Price>
+<Encumbrance>"0"</Encumbrance>
+<Quality>"RULES-WEAPB07"</Quality>
+<Hand>"0"</Hand>
+<Ammunition>"12"</Ammunition>
+</Weapon>
+<Weapon id="RULES-MUNI_07">
+<Description language="ENGLISH">"Lead Bullet"</Description>
+<Skill>"RULES-COMPPROJ_FROND"</Skill>
+<Damage>"+1"</Damage>
+<Availability>"RULES-DISPO_COMMON"</Availability>
+<Reach>"-"</Reach>
+<Price>"4d"</Price>
+<Encumbrance>"0"</Encumbrance>
+<Quality>"RULES-WEAPB13"</Quality>
+<Hand>"0"</Hand>
+<Ammunition>"12"</Ammunition>
+</Weapon>
+<Weapon id="RULES-MUNI_08">
+<Description language="ENGLISH">"Stone Bullet"</Description>
+<Skill>"RULES-COMPPROJ_FROND"</Skill>
+<Damage>"-"</Damage>
+<Availability>"RULES-DISPO_COMMON"</Availability>
+<Reach>"-"</Reach>
+<Price>"1d"</Price>
+<Encumbrance>"0"</Encumbrance>
+<Quality>"RULES-WEAPB13"</Quality>
+<Hand>"0"</Hand>
+<Ammunition>"12"</Ammunition>
+</Weapon>
 </DATA_WEAPON>
+<DATA_WEAPON_BONUS>
+<BonusMalus id="RULES-WEAPB01">
+<Description language="ENGLISH">"Blackpowder"</Description>
+<Explanation language="ENGLISH">"If you are targeted by a Blackpowder weapon, you must pass an Average (+20) Psychology Test or take a Broken Condition, even if the shot misses."</Explanation>
+<Short language="ENGLISH">"target: Average (+20) Psychology Test or Broken"</Short>
+<Modifier>"+"</Modifier>
+</BonusMalus>
+<BonusMalus id="RULES-WEAPB02">
+<Description language="ENGLISH">"Blast (Rating)"</Description>
+<Explanation language="ENGLISH">"Blast weapons target all individuals within a diameter of Rating yards and ordinarily may not be Opposed. Targets take Weapon Damage - but not SL Damage - and any Conditions the weapon inflicts. Blast weapons with the Damaging Weapon Quality may still add Damage from the units die."</Explanation>
+<Short language="ENGLISH">"hits all within Rating yards, Weapon Damage only"</Short>
+<Modifier>"+"</Modifier>
+</BonusMalus>
+<BonusMalus id="RULES-WEAPB03">
+<Description language="ENGLISH">"Damaging"</Description>
+<Explanation language="ENGLISH">"A Damaging weapon can use the higher score from either the units die or the SL to determine the Damage caused from a successful hit. An Undamaging weapon can never also be Damaging (Undamaging takes precedent)."</Explanation>
+<Short language="ENGLISH">"Damage from the units die or the SL, whichever is higher"</Short>
+<Modifier>"+"</Modifier>
+</BonusMalus>
+<BonusMalus id="RULES-WEAPB04">
+<Description language="ENGLISH">"Defensive"</Description>
+<Explanation language="ENGLISH">"Defensive weapons are designed to parry incoming attacks. If you are wielding such a weapon, gain a bonus of +1 SL to any Melee Test to Oppose an incoming attack. You can only benefit from a single Defensive Quality at a time. A Defensive weapon may never also be Unbalanced (Unbalanced takes precedent)."</Explanation>
+<Short language="ENGLISH">"+1 SL when opposing an attack"</Short>
+<Modifier>"+"</Modifier>
+</BonusMalus>
+<BonusMalus id="RULES-WEAPB05">
+<Description language="ENGLISH">"Fast"</Description>
+<Explanation language="ENGLISH">"Characters armed with a weapon with the Fast Quality may add 20 to their combat initiative when making attacks with (and only with) that weapon. If a weapon is used in two-weapon fighting it loses the Fast Quality."</Explanation>
+<Short language="ENGLISH">"+20 combat initiative with this weapon"</Short>
+<Modifier>"+"</Modifier>
+</BonusMalus>
+<BonusMalus id="RULES-WEAPB06">
+<Description language="ENGLISH">"Hack"</Description>
+<Explanation language="ENGLISH">"Hack weapons have heavy blades that can hack through armour with horrific ease. If you hit an opponent, you damage a struck piece of armour or shield by 1 point before applying Damage to the target."</Explanation>
+<Short language="ENGLISH">"damages a struck armour/shield by 1 point before Damage"</Short>
+<Modifier>"+"</Modifier>
+</BonusMalus>
+<BonusMalus id="RULES-WEAPB07">
+<Description language="ENGLISH">"Impale"</Description>
+<Explanation language="ENGLISH">"Impale weapons cause a Critical Hit on any number divisible by 10 (10, 20, 30, etc.) as well as on doubles (11, 22, 33, etc.) rolled equal or under an appropriate Test in combat."</Explanation>
+<Short language="ENGLISH">"Critical Hit on multiples of 10 or doubles"</Short>
+<Modifier>"+"</Modifier>
+</BonusMalus>
+<BonusMalus id="RULES-WEAPB08">
+<Description language="ENGLISH">"Magical"</Description>
+<Explanation language="ENGLISH">"A weapon with the Magical Quality is capable of damaging creatures who are immune to non-magical attacks."</Explanation>
+<Short language="ENGLISH">"damages creatures immune to non-magical attacks"</Short>
+<Modifier>"+"</Modifier>
+</BonusMalus>
+<BonusMalus id="RULES-WEAPB09">
+<Description language="ENGLISH">"Parry"</Description>
+<Explanation language="ENGLISH">"Parry weapons are light, defensive implements designed for dual wielding. Parry weapons used to defend against attacks ignore the normal -2 SL off hand penalty. When dual wielding, if your first attack hits, the second attack is Unopposed if made with a Parry weapon."</Explanation>
+<Short language="ENGLISH">"ignores off-hand penalty; enables Unopposed 2nd attack"</Short>
+<Modifier>"+"</Modifier>
+</BonusMalus>
+<BonusMalus id="RULES-WEAPB10">
+<Description language="ENGLISH">"Penetrating"</Description>
+<Explanation language="ENGLISH">"The weapon is highly effective at penetrating armour. It ignores 2 AP."</Explanation>
+<Short language="ENGLISH">"ignores 2 AP"</Short>
+<Modifier>"+"</Modifier>
+</BonusMalus>
+<BonusMalus id="RULES-WEAPB11">
+<Description language="ENGLISH">"Pistol"</Description>
+<Explanation language="ENGLISH">"You can use this weapon to attack in melee; if so, it does not use range modifiers and it may be Opposed as if a melee attack."</Explanation>
+<Short language="ENGLISH">"usable in melee, opposable"</Short>
+<Modifier>"+"</Modifier>
+</BonusMalus>
+<BonusMalus id="RULES-WEAPB12">
+<Description language="ENGLISH">"Precise"</Description>
+<Explanation language="ENGLISH">"The weapon is easy to get on target. Gain a bonus of +1 SL to any successful Test when attacking with this weapon. A Precise weapon can never be Imprecise (Imprecise takes precedent)."</Explanation>
+<Short language="ENGLISH">"+1 SL on successful attack Tests"</Short>
+<Modifier>"+"</Modifier>
+</BonusMalus>
+<BonusMalus id="RULES-WEAPB13">
+<Description language="ENGLISH">"Pummel"</Description>
+<Explanation language="ENGLISH">"If you score a head hit with a Pummel weapon and deal Wounds equal to your opponent's Toughness Bonus, they gain a Stunned Condition."</Explanation>
+<Short language="ENGLISH">"head hit + Wounds >= Toughness Bonus: Stunned"</Short>
+<Modifier>"+"</Modifier>
+</BonusMalus>
+<BonusMalus id="RULES-WEAPB14">
+<Description language="ENGLISH">"Repeater (Rating)"</Description>
+<Explanation language="ENGLISH">"Your weapon holds Rating shots, automatically reloading after each time you fire. When you use all your shots, you must fully reload the weapon using the normal rules."</Explanation>
+<Short language="ENGLISH">"holds Rating shots, reloads automatically"</Short>
+<Modifier>"+"</Modifier>
+</BonusMalus>
+<BonusMalus id="RULES-WEAPB15">
+<Description language="ENGLISH">"Trap Blade"</Description>
+<Explanation language="ENGLISH">"If you score a Critical when using a Trap Blade weapon to defend against a bladed weapon, you can choose to trap it instead of causing a Critical Hit. You must be the same Size as, or larger than, your opponent to do this."</Explanation>
+<Short language="ENGLISH">"Critical when defending: trap the blade instead"</Short>
+<Modifier>"+"</Modifier>
+</BonusMalus>
+<BonusMalus id="RULES-WEAPB16">
+<Description language="ENGLISH">"Unbreakable"</Description>
+<Explanation language="ENGLISH">"The weapon is exquisitely well-made or constructed from an especially strong material. Under almost all circumstances, this weapon will not break, corrode, or lose its edge."</Explanation>
+<Short language="ENGLISH">"will not break, corrode, or lose its edge"</Short>
+<Modifier>"+"</Modifier>
+</BonusMalus>
+<BonusMalus id="RULES-WEAPB17">
+<Description language="ENGLISH">"Wrap"</Description>
+<Explanation language="ENGLISH">"Melee Tests Opposing an attack from a Wrap weapon suffer a penalty of -1 SL, as parried strikes wrap over the top of shields, or around blades."</Explanation>
+<Short language="ENGLISH">"opponent -1 SL when parrying"</Short>
+<Modifier>"+"</Modifier>
+</BonusMalus>
+<BonusMalus id="RULES-WEAPB18">
+<Description language="ENGLISH">"Dangerous"</Description>
+<Explanation language="ENGLISH">"Some weapons are almost as likely to hurt you as your opponent. Any failed Test including a 9 on either 10s or units die results in a Fumble."</Explanation>
+<Short language="ENGLISH">"failed Test with a 9 in 10s or units die: Fumble"</Short>
+<Modifier>"-"</Modifier>
+</BonusMalus>
+<BonusMalus id="RULES-WEAPB19">
+<Description language="ENGLISH">"Imprecise"</Description>
+<Explanation language="ENGLISH">"Imprecise weapons are difficult to bring to bear as they are unwieldy or hard to aim. Suffer a -1 SL penalty when using the weapon to attack."</Explanation>
+<Short language="ENGLISH">"-1 SL when attacking with this weapon"</Short>
+<Modifier>"-"</Modifier>
+</BonusMalus>
+<BonusMalus id="RULES-WEAPB20">
+<Description language="ENGLISH">"Reload (Rating)"</Description>
+<Explanation language="ENGLISH">"The weapon is slow to reload. Once you have used such a weapon, you must then spend a number of Actions equal to the weapon's Reload Rating before you can use it again. If a Repeater weapon has unfired shots, it needs 1 less Action to reload."</Explanation>
+<Short language="ENGLISH">"spend Rating Actions to reload before reuse"</Short>
+<Modifier>"-"</Modifier>
+</BonusMalus>
+<BonusMalus id="RULES-WEAPB21">
+<Description language="ENGLISH">"Unbalanced"</Description>
+<Explanation language="ENGLISH">"Some weapons are inefficient for parrying, usually because of weight concentrated at the head. Suffer a -1 SL penalty when using the weapon to defend."</Explanation>
+<Short language="ENGLISH">"-1 SL when defending with this weapon"</Short>
+<Modifier>"-"</Modifier>
+</BonusMalus>
+<BonusMalus id="RULES-WEAPB22">
+<Description language="ENGLISH">"Undamaging"</Description>
+<Explanation language="ENGLISH">"Some weapons are not very good at penetrating armour. All AP are doubled against Undamaging weapons. You do not automatically inflict a minimum of 1 Wound on a successful hit in combat. Further, if a Critical Wound is inflicted by a weapon with this trait, roll twice on the Critical Wound table and choose the lower result."</Explanation>
+<Short language="ENGLISH">"AP doubled against it; no automatic minimum 1 Wound"</Short>
+<Modifier>"-"</Modifier>
+</BonusMalus>
+</DATA_WEAPON_BONUS>
+<DATA_ARMOR>
+<Armor id="RULES-ARMO_01">
+<Description language="ENGLISH">"Buckler"</Description>
+<Availability>"RULES-DISPO_COMMON"</Availability>
+<Price>"1CO"</Price>
+<Encumbrance>"1"</Encumbrance>
+<Quality>"RULES-ARMOB03"</Quality>
+<Location>"-"</Location>
+<ArmorPoint>"1"</ArmorPoint>
+</Armor>
+<Armor id="RULES-ARMO_02">
+<Description language="ENGLISH">"Shield"</Description>
+<Availability>"RULES-DISPO_COMMON"</Availability>
+<Price>"2CO"</Price>
+<Encumbrance>"2"</Encumbrance>
+<Quality>"RULES-ARMOB03"</Quality>
+<Location>"-"</Location>
+<ArmorPoint>"2"</ArmorPoint>
+</Armor>
+<Armor id="RULES-ARMO_03">
+<Description language="ENGLISH">"Large Shield"</Description>
+<Availability>"RULES-DISPO_COMMON"</Availability>
+<Price>"3CO"</Price>
+<Encumbrance>"3"</Encumbrance>
+<Quality>"RULES-ARMOB03"</Quality>
+<Location>"-"</Location>
+<ArmorPoint>"3"</ArmorPoint>
+</Armor>
+<Armor id="RULES-ARMO_04">
+<Description language="ENGLISH">"Leather Coif"</Description>
+<Availability>"RULES-DISPO_COMMON"</Availability>
+<Price>"2CO"</Price>
+<Encumbrance>"0"</Encumbrance>
+<Quality>"RULES-ARMOB04"</Quality>
+<Location>"RULES-ARMOL_HEAD"</Location>
+<ArmorPoint>"1"</ArmorPoint>
+<Type>"RULES-ARMOT_LEATHER"</Type>
+</Armor>
+<Armor id="RULES-ARMO_05">
+<Description language="ENGLISH">"Leather Jack"</Description>
+<Availability>"RULES-DISPO_COMMON"</Availability>
+<Price>"3CO"</Price>
+<Encumbrance>"1"</Encumbrance>
+<Quality>"-"</Quality>
+<Location>"RULES-ARMOL_ARM,RULES-ARMOL_BODY"</Location>
+<ArmorPoint>"1"</ArmorPoint>
+<Type>"RULES-ARMOT_LEATHER"</Type>
+</Armor>
+<Armor id="RULES-ARMO_06">
+<Description language="ENGLISH">"Leather Jerkin"</Description>
+<Availability>"RULES-DISPO_COMMON"</Availability>
+<Price>"2CO 10/-"</Price>
+<Encumbrance>"1"</Encumbrance>
+<Quality>"-"</Quality>
+<Location>"RULES-ARMOL_BODY"</Location>
+<ArmorPoint>"1"</ArmorPoint>
+<Type>"RULES-ARMOT_LEATHER"</Type>
+</Armor>
+<Armor id="RULES-ARMO_07">
+<Description language="ENGLISH">"Leather Leggings"</Description>
+<Availability>"RULES-DISPO_COMMON"</Availability>
+<Price>"3CO"</Price>
+<Encumbrance>"1"</Encumbrance>
+<Quality>"-"</Quality>
+<Location>"RULES-ARMOL_LEG"</Location>
+<ArmorPoint>"1"</ArmorPoint>
+<Type>"RULES-ARMOT_LEATHER"</Type>
+</Armor>
+<Armor id="RULES-ARMO_08">
+<Description language="ENGLISH">"Mail Chausses"</Description>
+<Availability>"RULES-DISPO_SCARCE"</Availability>
+<Price>"10CO"</Price>
+<Encumbrance>"3"</Encumbrance>
+<Quality>"RULES-ARMOB01,-1 SL Stealth"</Quality>
+<Location>"RULES-ARMOL_LEG"</Location>
+<ArmorPoint>"2"</ArmorPoint>
+<Type>"RULES-ARMOT_MAIL"</Type>
+</Armor>
+<Armor id="RULES-ARMO_09">
+<Description language="ENGLISH">"Mail Coat"</Description>
+<Availability>"RULES-DISPO_SCARCE"</Availability>
+<Price>"20CO"</Price>
+<Encumbrance>"3"</Encumbrance>
+<Quality>"RULES-ARMOB01,-1 SL Stealth"</Quality>
+<Location>"RULES-ARMOL_ARM,RULES-ARMOL_BODY"</Location>
+<ArmorPoint>"2"</ArmorPoint>
+<Type>"RULES-ARMOT_MAIL"</Type>
+</Armor>
+<Armor id="RULES-ARMO_10">
+<Description language="ENGLISH">"Mail Coif"</Description>
+<Availability>"RULES-DISPO_SCARCE"</Availability>
+<Price>"6CO"</Price>
+<Encumbrance>"1"</Encumbrance>
+<Quality>"RULES-ARMOB01,RULES-ARMOB04,-1 SL Stealth"</Quality>
+<Location>"RULES-ARMOL_HEAD"</Location>
+<ArmorPoint>"2"</ArmorPoint>
+<Type>"RULES-ARMOT_MAIL"</Type>
+</Armor>
+<Armor id="RULES-ARMO_11">
+<Description language="ENGLISH">"Mail Shirt"</Description>
+<Availability>"RULES-DISPO_COMMON"</Availability>
+<Price>"16CO"</Price>
+<Encumbrance>"2"</Encumbrance>
+<Quality>"RULES-ARMOB01,-1 SL Stealth"</Quality>
+<Location>"RULES-ARMOL_BODY"</Location>
+<ArmorPoint>"2"</ArmorPoint>
+<Type>"RULES-ARMOT_MAIL"</Type>
+</Armor>
+<Armor id="RULES-ARMO_12">
+<Description language="ENGLISH">"Bracers"</Description>
+<Availability>"RULES-DISPO_RARE"</Availability>
+<Price>"12CO"</Price>
+<Encumbrance>"2"</Encumbrance>
+<Quality>"RULES-ARMOB02,RULES-ARMOB05,-1 SL Stealth"</Quality>
+<Location>"RULES-ARMOL_ARM"</Location>
+<ArmorPoint>"2"</ArmorPoint>
+<Type>"RULES-ARMOT_PLATE"</Type>
+</Armor>
+<Armor id="RULES-ARMO_13">
+<Description language="ENGLISH">"Breastplate"</Description>
+<Availability>"RULES-DISPO_SCARCE"</Availability>
+<Price>"15CO"</Price>
+<Encumbrance>"3"</Encumbrance>
+<Quality>"RULES-ARMOB02,RULES-ARMOB05,-1 SL Stealth"</Quality>
+<Location>"RULES-ARMOL_BODY"</Location>
+<ArmorPoint>"2"</ArmorPoint>
+<Type>"RULES-ARMOT_PLATE"</Type>
+</Armor>
+<Armor id="RULES-ARMO_14">
+<Description language="ENGLISH">"Helm"</Description>
+<Availability>"RULES-DISPO_RARE"</Availability>
+<Price>"5CO"</Price>
+<Encumbrance>"2"</Encumbrance>
+<Quality>"RULES-ARMOB02,RULES-ARMOB05,-2 SL Perception,-1 SL Stealth"</Quality>
+<Location>"RULES-ARMOL_HEAD"</Location>
+<ArmorPoint>"2"</ArmorPoint>
+<Type>"RULES-ARMOT_PLATE"</Type>
+</Armor>
+<Armor id="RULES-ARMO_15">
+<Description language="ENGLISH">"Open Helm"</Description>
+<Availability>"RULES-DISPO_COMMON"</Availability>
+<Price>"3CO"</Price>
+<Encumbrance>"1"</Encumbrance>
+<Quality>"RULES-ARMOB04,-1 SL Stealth"</Quality>
+<Location>"RULES-ARMOL_HEAD"</Location>
+<ArmorPoint>"2"</ArmorPoint>
+<Type>"RULES-ARMOT_PLATE"</Type>
+</Armor>
+<Armor id="RULES-ARMO_16">
+<Description language="ENGLISH">"Plate Leggings"</Description>
+<Availability>"RULES-DISPO_RARE"</Availability>
+<Price>"12CO"</Price>
+<Encumbrance>"3"</Encumbrance>
+<Quality>"RULES-ARMOB02,RULES-ARMOB05,-1 SL Stealth"</Quality>
+<Location>"RULES-ARMOL_LEG"</Location>
+<ArmorPoint>"2"</ArmorPoint>
+<Type>"RULES-ARMOT_PLATE"</Type>
+</Armor>
+</DATA_ARMOR>
+<DATA_ARMOR_SIMP>
+<ArmorSimp id="RULES-ARMO_01_SIMP">
+<Description language="ENGLISH">"Light Armour"</Description>
+<Availability>"RULES-DISPO_COMMON"</Availability>
+<Price>"8CO"</Price>
+<Encumbrance>"0"</Encumbrance>
+<Quality>"-"</Quality>
+<ArmorPoint>"1"</ArmorPoint>
+</ArmorSimp>
+<ArmorSimp id="RULES-ARMO_02_SIMP">
+<Description language="ENGLISH">"Medium Armour"</Description>
+<Availability>"RULES-DISPO_SCARCE"</Availability>
+<Price>"44CO"</Price>
+<Encumbrance>"4"</Encumbrance>
+<Quality>"RULES-ARMOB01,-1 SL Stealth,-2 SL Perception"</Quality>
+<ArmorPoint>"3"</ArmorPoint>
+</ArmorSimp>
+<ArmorSimp id="RULES-ARMO_03_SIMP">
+<Description language="ENGLISH">"Heavy Armour"</Description>
+<Availability>"RULES-DISPO_RARE"</Availability>
+<Price>"88CO"</Price>
+<Encumbrance>"10"</Encumbrance>
+<Quality>"RULES-ARMOB02,RULES-ARMOB05,-2 SL Stealth"</Quality>
+<ArmorPoint>"5"</ArmorPoint>
+</ArmorSimp>
+</DATA_ARMOR_SIMP>
+<DATA_ARMOR_BONUS>
+<BonusMalus id="RULES-ARMOB01">
+<Description language="ENGLISH">"Flexible"</Description>
+<Explanation language="ENGLISH">"Flexible armour can be worn under a layer of non-Flexible armour if you wish. If you do so, you gain the benefit of both."</Explanation>
+<Modifier>"combinable with non-Flexible armour"</Modifier>
+</BonusMalus>
+<BonusMalus id="RULES-ARMOB02">
+<Description language="ENGLISH">"Impenetrable"</Description>
+<Explanation language="ENGLISH">"The armour is especially resilient, meaning most attacks simply cannot penetrate it. All Critical Hits caused by an odd number to hit you, such as 11 or 33, are ignored."</Explanation>
+<Modifier>"Critical Hit on an odd hit number: ignored"</Modifier>
+</BonusMalus>
+<BonusMalus id="RULES-ARMOB03">
+<Description language="ENGLISH">"Shield"</Description>
+<Explanation language="ENGLISH">"When Opposing an attack with Dodge or Melee, a shield provides +1 SL (does not stack with the Defensive Quality) and applies its AP should the attack hit you. If it lists 2 or more AP, you may Oppose ranged attacks with Dodge at any range. You can only benefit from a single shield at a time."</Explanation>
+<Modifier>"+1 SL when opposing with Dodge or Melee"</Modifier>
+</BonusMalus>
+<BonusMalus id="RULES-ARMOB04">
+<Description language="ENGLISH">"Partial"</Description>
+<Explanation language="ENGLISH">"The armour does not cover the entire Hit Location. If a strike's Hit Location number is even, it ignores the Partial armour's AP."</Explanation>
+<Modifier>"even Hit Location number: AP ignored"</Modifier>
+</BonusMalus>
+<BonusMalus id="RULES-ARMOB05">
+<Description language="ENGLISH">"Weakpoints"</Description>
+<Explanation language="ENGLISH">"The armour has small weakpoints where a blade can slip in if your opponent is sufficiently skilled or lucky. If your opponent has a weapon with the Impale Quality and scores a Critical Hit, they ignore the armour's AP."</Explanation>
+<Modifier>"opponent Impale weapon + Critical Hit: AP ignored"</Modifier>
+</BonusMalus>
+</DATA_ARMOR_BONUS>
 </DATA_BOOK>

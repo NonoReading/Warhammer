@@ -1,7 +1,115 @@
 # Warhammer — Contexte projet
 
-**14/09/2026 — SPÉCIALISATION DES 14 TALENTS À PARAMÈTRE DU RULEBOOK V5 : ÉCRIT SUR LE
-DISQUE, COMPILÉ, LANCEMENT SANS PLANTAGE - PAS ENCORE TESTÉ EN PROFONDEUR PAR NONO (§2.70).**
+**14/09/2026 — DATA_ARMOR DU RULEBOOK V5 PEUPLÉ : ÉCRIT, COMPILÉ, TESTÉ VISUELLEMENT PAR NONO,
+CHANTIER CLOS (§2.70).**
+Suite du peuplement du catalogue V5, chantier choisi par Nono après les Armes. `DATA_ARMOR`
+n'existait pas du tout côté V5. Table "Armour" complète + "Quick Armour" (p.306-307 du PDF)
+transcrites.
+- **16 pièces d'armure créées** (`id` `RULES-ARMO_NN`) : 3 boucliers/écus (Buckler/Shield/
+  Large Shield, catégorie SHIELDS), 4 pièces en cuir (LEATHER), 4 en maille (MAIL), 5 en
+  plaque (PLATE). `Buckler` existe à la fois comme arme (`RULES-COMB_ESCR_01`, créé lors du
+  chantier Armes - utilisable en Fencing) et comme armure (`RULES-ARMO_01`, AP 1) : double
+  entrée volontaire, conforme au livre qui liste les deux fiches séparément. `Shield`/`Large
+  Shield` n'existent qu'en armure (aucune entrée arme correspondante dans le livre).
+  3 pièces `DATA_ARMOR_SIMP` pour la Quick Armour (Light/Medium/Heavy).
+- **`DATA_ARMOR_BONUS` créé avec 5 Qualités/Défauts** (`RULES-ARMOB01..05`) : Flexible,
+  Impenetrable, Shield (bonus +1 SL en opposition avec Dodge/Melee - la condition "seulement
+  en opposition" n'est pas mécanisée, uniquement descriptive, comme les qualités d'armes
+  conditionnelles), Partial, Weakpoints.
+- **Pénalités de compétence (Helm -2 Perception, Mail/Plate -1 Stealth chacun, bandes Quick
+  Armour) volontairement laissées en texte littéral dans `Quality`** (ex. `"-2 SL
+  Perception"`) plutôt que reliées au mécanisme `<Modifier name="CodeCompetence">Valeur</
+  Modifier>` déjà câblé pour l'armure V4 (`chargepersonnage.pas`
+  `PersonnageArmureBonusCompetenceModifPortee` l.1881, `ListArmureBonusModif`) : ce mécanisme
+  additionne `Valeur` directement au total de compétence, qui reste calculé en POURCENTAGE V4
+  dans ce moteur - une pénalité V5 exprimée en SL (Success Level) n'est PAS une pénalité en
+  points de pourcentage, la câbler telle quelle calculerait un nombre faux plutôt que rien.
+  Même prudence déjà actée pour `DATA_ATTRIBUT_COST` le 13/09 (§2.70 plus bas :
+  "le sens change... adaptation Pascal côté lecture reportée, non faite") - à reprendre
+  ensemble le jour où l'avancement de carrière/les tests V5 seront codés en SL.
+- **`DATA_LABEL` complété** : 4 `ARMOL_*` (Head/Body/Arms/Legs - noms V5 directs, pluriels
+  pour Arms/Legs comme le livre) et 3 `ARMOT_*` (Leather/Mail/Plate, plus simples que les 6
+  matériaux V4 - V5 n'a qu'une seule catégorie "Leather (or Quilted or Padded)").
+- Travail fait sur une copie (blocs XML générés puis fusionnés par un script Perl jetable,
+  même méthode que pour les Armes), diff vérifié avant bascule : 0 ligne retirée, 220 lignes
+  ajoutées. Balance des balises vérifiée (`Armor` 16/16, `ArmorSimp` 3/3, `BonusMalus` 27/27
+  cumulé avec les Armes, `Text` 18/18 cumulé). `lazbuild` : 0 erreur. `WarhammerHelp.exe`
+  lancé, resté stable plusieurs secondes (chargement sans exception) puis fermé.
+- **Testé par Nono : "j'ai testé c'est bon"** - catalogue des 16 pièces + Quick Armour
+  validé dans WinArmor.
+- **Point relevé par Nono en testant, pas corrigé : le matériel (`Type`) des 3 boucliers/écus
+  n'est pas défini** (`RULES-ARMO_01/02/03` n'ont pas de balise `<Type>`, contrairement aux
+  pièces Leather/Mail/Plate) - le livre les liste sous la catégorie "SHIELDS" sans préciser de
+  matériau, d'où l'omission au moment de l'écriture. À trancher avec Nono (bois ? bois cerclé
+  de métal ? un nouveau `RULES-ARMOT_*` dédié ?) avant d'ajouter la balise.
+- Fichiers modifiés : `DATABASE\WFRP5\BOOK_RULESBOOK.Xml`, `CONTEXT.md`, `Log.txt`.
+
+**Prochaine étape** : trancher le matériel des boucliers/écus (voir point ci-dessus) puis
+choisir le prochain chapitre du Rulebook V5 : Sorts/Prières (`DATA_SPELL`, gros morceau, lié
+au point ouvert d'`A FAIRE.txt` sur les spécialisations de sorts), ou Équipement/Trappings
+(chapitre pas encore créé).
+
+---
+
+**14/09/2026 — DATA_WEAPON DU RULEBOOK V5 PEUPLÉ (ARMES DE MÊLÉE, ARMES À DISTANCE, MUNITIONS) :
+ÉCRIT, COMPILÉ, TESTÉ VISUELLEMENT PAR NONO, CHANTIER CLOS (§2.70).**
+Suite du peuplement du catalogue V5 (Attributs/Compétences/Talents/Races/64 Métiers déjà faits) :
+Nono a choisi de continuer sur les Armes. `DATA_WEAPON` ne portait jusqu'ici qu'une seule arme
+de seed (Quarterstaff) ; les tables complètes "Melee Weapons"/"Ranged Weapons"/"Ammunition" du
+Rulebook V5 (p.300-303 du PDF, `LIVRES\WFRP5_Core_Rulebook_01_09_26.txt`) ont été transcrites.
+- **62 armes créées** : 29 armes de mêlée (groupes Basic/Brawling/Cavalry/Fencing/Flail/
+  Polearm/Two-Handed, `id` `RULES-COMB_<GROUPE>_NN`), 23 armes à distance (Blackpowder/Bow/
+  Crossbow/Engineering/Entangling/Explosives/Sling/Throwing, `id` `RULES-PROJ_<GROUPE>_NN`),
+  8 munitions (`id` `RULES-MUNI_NN`, `Ammunition` = taille du lot comme en V4). Les 2 entrées
+  génériques `RULES-COMB_*`/`RULES-PROJ_*` (déjà existantes pour COMB_*, ajoutée pour PROJ_*)
+  conservées pour les futurs "Melee weapon (Any)"/"Ranged weapon (Any)" de métier.
+  Skills liés aux spécialisations `RULES-COMPCOMB_*`/`RULES-COMPPROJ_*` déjà présentes dans
+  `DATA_SKILL` (peuplées le 13/09) - aucune nouvelle compétence necessaire.
+- **`DATA_LABEL` créé dans `BOOK_RULESBOOK.Xml` (V5) - chapitre qui n'existait pas du tout**
+  (gap découvert en préparant ce chantier : seul `RULES-LAB_*`/`RULES-MESS_*` avait été
+  déplacé vers `INTERFACE.Xml` le 13/09, le reste du vocabulaire de jeu - `DISPO_*`, `WEAPR_*`
+  etc. - n'avait jamais été créé côté V5, la seed Quarterstaff référençait donc un
+  `RULES-DISPO_COMMON` sans libellé). 11 `Text` ajoutés : 4 `DISPO_*` (Common/Scarce/Rare/
+  Exotic - V5 n'a que 4 paliers contre 5 en V4, pas de Limited/Unique) et 7 `WEAPR_*`
+  (Personal/Very Short/Short/Average/Long/Very Long/Massive - noms V5 directs, pas repris
+  des intitulés V4 `BIG`/`CLOSE`/`HUGE`/`MID` qui divergaient du texte officiel).
+- **`DATA_WEAPON_BONUS` créé avec 22 Qualités/Défauts** (17 Qualités `RULES-WEAPB01..17` +
+  5 Défauts `RULES-WEAPB18..22`, numérotation fraîche propre à V5) : Blackpowder, Blast,
+  Damaging, Defensive, Fast, Hack, Impale, Magical, Parry, Penetrating, Pistol, Precise,
+  Pummel, Repeater, Trap Blade, Unbreakable, Wrap : puis Dangerous, Imprecise, Reload,
+  Unbalanced, Undamaging - texte des règles repris du Rulebook V5 (differe notablement de la
+  V4 : Impale/Fast/Hack/Precise/Penetrating/Pistol/Trap Blade/Unbreakable sont nouveaux ou
+  redéfinis, le mécanisme d'armure comme trait numérique disparaît).
+  Rating (Blast/Repeater/Reload) écrit avec le suffixe numérique déjà supporté par
+  `GetAllArmeBonusLibelle` (`chargearmebonus.pas`, forme `"CODE N"`), ex.
+  `RULES-WEAPB02 3` pour Blast 3.
+- **Qualités "Inflict (Condition)" laissées en texte littéral dans le champ `Quality`**
+  (ex. `"Inflict (Entangled 50)"`, `"Inflict (Prone)"`, `"Blast +1"` pour l'ammunition qui
+  modifie le Blast de l'arme) plutôt que de créer un code par variante : vérifié que
+  `GetAllArmeBonusLibelle` tolère très bien un texte libre sans code correspondant (le
+  fallback "code introuvable -> garder le texte tel quel" fonctionne déjà pour les munitions
+  V4, ex. `Reach="+0"`) - pas de nouveau mécanisme nécessaire.
+- **`Type` (`TypeArme`, filtrage interne `ModifyWeapon`) volontairement omis** : facultatif
+  d'après le commentaire de `chargearme.pas` l.24-33, aucun métier V5 n'en a besoin
+  aujourd'hui - à ajouter le jour où un `ModifyWeapon` de métier V5 le demandera.
+- Travail fait sur une copie (`label_block.xml`/`weapon_block.xml` générés puis un script Perl
+  jetable pour la fusion), diff vérifié avant bascule : seules les 2 lignes de l'ancienne seed
+  Quarterstaff retirées (`Skill=""` et son `Quality` d'origine), 884 lignes ajoutées, rien
+  d'autre touché. Balance des balises vérifiée (`Weapon` 62/62, `BonusMalus` 22/22, `Text`
+  11/11). `lazbuild` : 0 erreur. `WarhammerHelp.exe` lancé, resté stable plusieurs secondes
+  (chargement du RULESBOOK V5 sans exception) puis fermé.
+- **Testé par Nono : "j'ai testé c'est bon"** - catalogue des 62 armes validé dans WinWeapon.
+- Fichiers modifiés : `DATABASE\WFRP5\BOOK_RULESBOOK.Xml`, `CONTEXT.md`, `Log.txt`.
+
+**Prochaine étape** : Armures (`DATA_ARMOR`, chapitre pas encore créé) - chantier choisi par
+Nono à la suite des Armes. Reste ensuite sur le Rulebook V5 : Sorts/Prières (`DATA_SPELL`,
+gros morceau, lié au point ouvert d'`A FAIRE.txt` sur les spécialisations de sorts), ou
+Équipement/Trappings (chapitre pas encore créé).
+
+---
+
+**14/09/2026 — SPÉCIALISATION DES 14 TALENTS À PARAMÈTRE DU RULEBOOK V5 : ÉCRITE, COMPILÉE,
+TESTÉE VISUELLEMENT PAR NONO, CHANTIER CLOS (§2.70).**
 Écriture faite via un script Perl jetable (résolution automatique de chaque référence à
 partir de son commentaire XML existant, plutôt qu'à la main sur 184 lignes) :
 - Les 14 talents (le chiffre "16" de la session précédente était une erreur de calcul -
@@ -16,19 +124,15 @@ partir de son commentaire XML existant, plutôt qu'à la main sur 184 lignes) :
 - `RULES-T0107` (Resistant) vérifié dans le livre avant écriture : en-tête officiel bien
   `"Resistant (Threat)"` (l.6932 du texte extrait) - `Description` inchangée comme prévu.
 - Diff vérifié avant remplacement (206 lignes modifiées + 246 lignes neuves du nouveau
-  chapitre, rien d'autre touché). `lazbuild` : 0 erreur. `WarhammerHelp.exe` lancé et resté
-  stable 5s (le chargement du livre RULES passe sans lever d'exception) puis fermé - **test
-  visuel dans WinLivre/WinPersonnage encore à faire par Nono**, en particulier vérifier que
-  les 5 paires `id1/id2` s'affichent bien dans WinLivre (`winlivre.pas` l.746, seul lecteur
-  connu de cette syntaxe) et que les spécialisations apparaissent bien groupées sous leur
-  générique.
+  chapitre, rien d'autre touché). `lazbuild` : 0 erreur.
+- **Testé par Nono : "ça marche"** - affichage des spécialisations groupées et des 5 paires
+  `id1/id2` validé dans WinLivre/WinPersonnage.
 - Fichiers modifiés : `DATABASE\WFRP5\BOOK_RULESBOOK.Xml`, `CONTEXT.md`, `Log.txt`.
 
-**En cours / prochaine étape** : test visuel par Nono dans WinLivre (catalogue des 14
-talents + leurs spécialisations, affichage des 5 paires `id1/id2`) puis dans WinPersonnage
-si un personnage utilise un de ces talents. Détail complet de la conception (pourquoi ces
-choix, les 4 cas particuliers "(as Trade)"/"A ou B"/"Any Colour Lore"/Guilders) dans
-`Log.txt`, entrées du 13 et du 14/09/2026.
+**Reste hors périmètre, assumé** (voir `A FAIRE.txt`) : les 4 talents "(as Trade)"
+(Craftsman/Master Tradesman) portent un commentaire `(?)` sans résolution dynamique - à
+coder avec l'avancement de carrière. Prochaine étape naturelle sur ce livre ou reprise d'un
+autre chantier - à voir avec Nono.
 
 ---
 
@@ -8538,8 +8642,9 @@ section par section avec compilation et lancement après chaque bloc :**
 - **Compilé (lazbuild, 0 erreur) et lancé après chaque classe de métiers** ; pas encore
   vérifié par Nono au moment d'écrire ceci.
 
-**Gap découvert en fin de peuplement, PAS ENCORE CORRIGÉ - point de reprise pour la suite.**
-Nono a remarqué en relisant l'arbre du livre (WinLivre) qu'il voyait des Talents mais aucune
+**Gap découvert en fin de peuplement, CORRIGÉ ET TESTÉ LE 14/09/2026 (voir tout en tête de ce
+fichier pour le détail de l'écriture).** Nono a remarqué en relisant l'arbre du livre
+(WinLivre) qu'il voyait des Talents mais aucune
 "spécialisation de talent" - alors que §2.68 documente précisément le mécanisme
 générique↔spécialisation déjà câblé pour ça (`DATA_TALENT_SPECIALIZATION`, chargé en dur par
 `xmlexportimport.pas` l.1573, `ConstXmlDataTalentSpe`). Vérification faite : le mécanisme
@@ -8565,14 +8670,10 @@ existe bel et bien et suit exactement le même moule que `DATA_SKILL_SPECIALIZAT
   de session par un grep de tous les commentaires suivant ces 14 id - liste complète dans la
   session, pas recopiée ici pour ne pas alourdir ce fichier ; à refaire au besoin avec `grep
   -A1 'Talent name="RULES-T00xx"' DATABASE\WFRP5\BOOK_RULESBOOK.Xml | grep '<!--'`).
-- **Plan retenu, pas encore exécuté** : (1) renommer les 14 id génériques en `_*` dans
-  `DATA_TALENT` (garder une description "(Any)"/"(Any One)" cohérente avec le choix libre) ;
-  (2) créer le chapitre `DATA_TALENT_SPECIALIZATION` avec une entrée par variante concrète
-  listée ci-dessus (`<Generique>` explicite si besoin, sinon déduction par radical comme en
-  V4) ; (3) réécrire chaque référence `SUBCHAPTER_TALENT` des 64 métiers : `_*` quand le
-  livre dit "(Any One)", id de spécialisation précis sinon. Refonte mécanique mais qui
-  touche les 64 métiers déjà écrits - à faire d'un coup, pas classe par classe, pour éviter
-  un état intermédiaire incohérent entre carrières corrigées et non corrigées.
+- **Plan exécuté le 14/09/2026** : les 14 id génériques renommés en `_*` dans `DATA_TALENT`,
+  chapitre `DATA_TALENT_SPECIALIZATION` créé (61 entrées), les 184 références des 64 métiers
+  et des espèces réécrites. Détail complet et résultat du test visuel tout en tête de ce
+  fichier.
 
 ---
 
