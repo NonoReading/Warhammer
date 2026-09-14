@@ -1,5 +1,108 @@
 # Warhammer — Contexte projet
 
+**14/09/2026 — SORTS ARCANIQUES DU RULEBOOK V5 (SORTS PARTAGÉS + 8 LORES COULEUR) : ÉCRIT,
+COMPILÉ, TESTÉ VISUELLEMENT PAR NONO ("ce que je vois me semble bon"), CHANTIER CLOS POUR
+CETTE SESSION (§2.72).**
+Deuxième morceau du chantier Sorts/Prières V5, à la suite des Petty Spells (§2.71, testés
+dans la même passe). Nono a dit de continuer ; enchaîné sur la partie la plus lourde du
+chantier (p.242-254 du PDF).
+- **24 sorts "Arcane Spells" créés** (`id` `RULES-SPEL_ARCANE_NN`) : liste partagée par
+  n'importe quel Lore arcanique (Aethyric Armour/Arms, Arrow Shield, Blast, Bolt, Breath,
+  Bridge, Chain Attack, Corrosive Blood, Dark Vision, Distracting, Dome, Drop, Entangle,
+  Fearsome, Flight, Magic Shield, Move Object, Mundane Aura, Push, Silence, Teleport,
+  Terrifying, Ward). `Talent` `"RULES-T0007_*"` (générique, matche N'IMPORTE QUELLE
+  spécialisation de Lore via `SortTalentAccessible`, `winspell.pas` l.84-114 - vérifié dans
+  le code avant d'écrire, c'est exactement ce que `_*` sert à faire). Le livre dit ces sorts
+  aussi accessibles via Chaos Magic - **volontairement pas câblé** : `Chaos Magic (Lore)`
+  (`RULES-T0023`) n'a encore aucune spécialisation, chantier Chaos Magic prévu en dernier ;
+  à étendre le `<Talent>` (liste séparée par virgule, déjà supportée) le jour venu.
+- **64 sorts des 8 Lores Couleur créés** (`id` `RULES-SPEL_<LORE>_NN`, 8 par Lore) : Beasts,
+  Death, Fire, Heavens (les 3 avaient déjà leur sort de seed generique, complétés ici),
+  Life, Light, Metal, Shadows. `Talent` pointe la spécialisation précise
+  (`RULES-T0007_BEASTS` etc.), pas le générique.
+- **7 spécialisations manquantes ajoutées à `DATA_TALENT_SPECIALIZATION`** pour `RULES-T0007`
+  (Beasts/Death/Fire/Life/Light/Metal/Shadows - Heavens déjà posé le 14/09 matin).
+- **Tarif XP du talent `RULES-T0007` (Arcane Magic (Lore)) câblé**, absent jusqu'ici. Texte
+  du livre : "up to 5 Spells known 100 XP, 6 to 10 known 200 XP..." - même forme fixe-par-5
+  que Petty Magic. `XpFree="1"` (littéral, pas un bonus d'attribut) : "you gain one Spell of
+  your choice" à l'achat du talent. `Magic="1"` (exclusif) : "You may normally learn only
+  one Arcane Lore of Magic".
+- **Lore Attribute et Ingredients de chaque Lore volontairement PAS saisis** : gap déjà
+  identifié et documenté dans `A FAIRE.txt` le 04/09 pour Nations of Mankind ("LORE ATTRIBUTE
+  ET INGREDIENTS DES DEUX VENTS, SANS ENDROIT OU ALLER") - ce sont des propriétés du Lore/
+  Domaine, et le modèle n'a pas d'entité domaine, seulement le talent d'accès. Même manque,
+  pas retraité ici : pas de nouveau mécanisme inventé à la volée pour ce chantier.
+- **Un accroc de mise en page repéré et résolu à la lecture du PDF** : "Forge of Chamon"
+  (Lore of Metal) a son bloc titre/CN scindé au milieu de sa propre description dans
+  l'extraction texte du PDF (artefact de re-fusion de deux colonnes à la limite de page
+  252/253) - reconstitué par recoupement de sens (le texte parle de travailler l'or, cohérent
+  avec le reste de la description qui suit). Vérifié contre l'index des sorts en fin de livre
+  (grep sur `(Spell)` + numéro de page) pour confirmer les 8 titres de chaque Lore avant
+  saisie - aucune autre page de transition (245/246, 246/247, 248/249, 249/250, 250/251,
+  254/255) n'a le même défaut.
+- Diff vérifié avant écriture : uniquement des ajouts (88 nouveaux `Sort`, 7 nouvelles
+  spécialisations, tags Xp sur `RULES-T0007`), rien retiré. Balance vérifiée (`Sort` 113/113
+  cumulé avec les Petty Spells, `DATA_SPELL` 1/1). `lazbuild` : 0 erreur. `WarhammerHelp.exe`
+  lancé, resté stable plusieurs secondes (chargement sans exception) puis fermé.
+- Fichiers modifiés : `DATABASE\WFRP5\BOOK_RULESBOOK.Xml`, `CONTEXT.md`, `Log.txt`.
+
+**Testé par Nono : "ce que je vois me semble bon"** - catalogue des 113 sorts (Petty + Arcane
+Spells + 8 Lores Couleur) validé dans WinSpell/WinTalent. Session terminée, Nono s'arrête là
+(commit).
+
+**Prochaine étape** : reste du chantier Sorts/Prières V5 : Hedgecraft/Witchcraft (8 sorts
+chacun, talents déjà posés), créer les talents `Bless`/`Invoke`, Blessings/Miracles des 10
+cultes, Dark/Chaos Magic en dernier.
+
+---
+
+**14/09/2026 — PETTY SPELLS DU RULEBOOK V5 PEUPLÉS : ÉCRIT, COMPILÉ, TESTÉ VISUELLEMENT PAR
+NONO EN MÊME TEMPS QUE §2.72 (SORTS ARCANIQUES).**
+Premier morceau du chantier Sorts/Prières V5 (choisi par Nono à la suite des Armures) :
+le plus petit et le plus autonome des sous-chapitres (p.240-241 du PDF), pour ouvrir le
+chantier sans s'attaquer d'emblée aux 8 Lores/Prayers.
+- **25 sorts créés** (`id` `RULES-SPEL_PETTY_NN`) dans un nouveau chapitre `DATA_SPELL`
+  (n'existait pas du tout côté V5). Tous `Level` (CN) `"0"`, `Talent` `"RULES-T0098"`
+  (Petty Magic), `TypSpell` `"Petty Magic"` (nom V5 direct, pas repris du "Minor Magic"
+  de la V4 - même logique que les chantiers Armes/Armures : `TypSpell` est un champ libre,
+  affiché tel quel si aucun `DATA_LABEL` ne le résout, `GetTexteLibelle` dans
+  `chargetexte.pas` l.105-109).
+- **Tarif XP du talent `RULES-T0098` (Petty Magic) câblé**, absent jusqu'ici (le talent
+  n'avait aucune balise `Xp*`, donc tout sort qui le citait aurait coûté 0 XP - mécanisme
+  `XpMultiplier`/`XpFloor`/`XpDivisor`/`XpFree` du 02/09, CONTEXT.md 2.31). Texte du livre :
+  "up to 5 known 50 XP, 6 to 10 known 100 XP..." - paliers FIXES de 5, contrairement à la V4
+  où Minor Magic divise par le Bonus de Volonté. `XpDivisor` écrit en dur `"5"` (pas
+  `"(BATTR_WP)"`) pour cette raison ; `XpFree="(BATTR_WP)"` reste lié à l'attribut ("you
+  manifest ... a number of Spells equal to your Willpower Bonus"), seul point inchangé.
+  `Magic="2"` (cumulable) : le livre confirme Petty Magic compatible avec Arcane/Chaos
+  Magic (p.123, "Talents").
+- **Point de conception réglé pour la suite du chantier** (répond à l'item d'`A FAIRE.txt`
+  sur les spécialisations liées aux sorts, PAS ENCORE APPLIQUÉ - Petty Magic n'en avait pas
+  besoin) : la V5 réutilise exactement les mécanismes déjà construits, pas de nouveau bloc.
+  Sorts arcanes (8 Lores + Hedgecraft/Witchcraft + Dark/Chaos) → `Arcane Magic (Lore)`
+  (`RULES-T0007`) paramétré comme les 14 talents à paramètre du 14/09 (`DATA_TALENT_
+  SPECIALIZATION`), 3 spécialisations déjà posées (Heavens/Hedgecraft/Witchcraft), le reste
+  à ajouter avec les Lores. Blessings (17-19 génériques, chacune accordée par PLUSIEURS
+  cultes à la fois, table "Blessings by Cult" p.220) → talent `Bless` à créer, paramétré par
+  culte, relation many-to-many via `DATA_SPELL_TALENT` (mécanisme du 03/09, CONTEXT.md 2.39,
+  déjà prévu pour exactement ce cas). Miracles (liste propre à chaque culte, ~6 par culte,
+  pas de partage) → talent `Invoke` à créer, paramétré par culte, relation simple `<Talent>`
+  comme Petty Magic. Talents `Bless`/`Invoke` eux-mêmes n'existent pas encore en V5 (cités en
+  toutes lettres p.219 mais absents de `DATA_TALENT`) - à créer avant les Blessings/Miracles.
+- Diff vérifié avant écriture : uniquement des ajouts (nouveau chapitre + 6 balises sur
+  `RULES-T0098`), rien retiré. Balance vérifiée (`Sort` 25/25, `DATA_SPELL` 1/1). `lazbuild` :
+  0 erreur. `WarhammerHelp.exe` lancé, resté stable plusieurs secondes (chargement sans
+  exception) puis fermé.
+- Fichiers modifiés : `DATABASE\WFRP5\BOOK_RULESBOOK.Xml`, `CONTEXT.md`, `Log.txt`.
+
+**Prochaine étape** : test visuel par Nono (WinSpell, catalogue V5) avant de poursuivre.
+Puis suite du chantier Sorts/Prières V5 : créer les talents `Bless`/`Invoke` et les 8 Lores
+arcanes (Beasts/Death/Fire/Life/Light/Metal/Shadows/Heavens - Heavens partiellement fait),
+Hedgecraft/Witchcraft, Blessings/Miracles des 10 cultes, puis Dark/Chaos Magic en dernier
+(usage PNJ, moins urgent).
+
+---
+
 **14/09/2026 — DATA_ARMOR DU RULEBOOK V5 PEUPLÉ : ÉCRIT, COMPILÉ, TESTÉ VISUELLEMENT PAR NONO,
 CHANTIER CLOS (§2.70).**
 Suite du peuplement du catalogue V5, chantier choisi par Nono après les Armes. `DATA_ARMOR`

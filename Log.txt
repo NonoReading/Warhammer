@@ -4023,3 +4023,36 @@ Quick Armour dans WinArmor. Point releve par Nono en testant, pas corrige : le m
 Leather/Mail/Plate - le livre les liste sous "SHIELDS" sans preciser de materiau. Ajoute a
 A FAIRE.txt. Session terminee, Nono s'arrete la (commit).
 Fichiers modifies : CONTEXT.md, Log.txt.
+
+14/09/2026 - PETTY SPELLS DU RULEBOOK V5 PEUPLES (CONTEXT.md 2.71). Nono choisit d'ouvrir le
+chantier Sorts/Prieres V5 par le morceau le plus simple. 25 sorts crees (RULES-SPEL_PETTY_NN)
+dans un nouveau chapitre DATA_SPELL cote V5 (n'existait pas). Tarif XP du talent Petty Magic
+(RULES-T0098) cable au passage (absent jusqu'ici, tout sort l'aurait cite pour 0 XP) : paliers
+FIXES de 5 sorts (texte du livre), pas un divisieur par Bonus de Volonte comme en V4 -
+XpDivisor="5" en dur, XpFree reste "(BATTR_WP)". Point de conception regle pour la suite
+(repond a l'item d'A FAIRE.txt sur les specialisations liees aux sorts, pas encore applique) :
+la V5 reutilise les mecanismes existants sans nouveau bloc - Arcane Magic (Lore) parametre
+comme les talents a parametre du 14/09, Bless via DATA_SPELL_TALENT (many-to-many, meme
+mecanisme que le 03/09) pour les Blessings partagees entre cultes, Invoke en relation simple
+pour les Miracles propres a chaque culte. Talents Bless/Invoke eux-memes pas encore crees.
+Balance verifiee (Sort 25/25). Compile (lazbuild, 0 erreur). WarhammerHelp.exe lance et reste
+stable puis ferme. Teste visuellement par Nono en meme temps que les sorts arcaniques
+ci-dessous.
+Fichiers modifies : DATABASE\WFRP5\BOOK_RULESBOOK.Xml, CONTEXT.md, Log.txt.
+
+14/09/2026 - SORTS ARCANIQUES DU RULEBOOK V5 PEUPLES : ARCANE SPELLS PARTAGES (24) + 8 LORES
+COULEUR (64) (CONTEXT.md 2.72). Nono dit de continuer apres les Petty Spells. 88 sorts crees
+(RULES-SPEL_ARCANE_NN generiques, RULES-SPEL_<LORE>_NN specifiques). 7 specialisations
+RULES-T0007_* ajoutees (Beasts/Death/Fire/Life/Light/Metal/Shadows). Tarif XP du talent
+RULES-T0007 (Arcane Magic (Lore)) cable, meme forme fixe-par-5 que Petty Magic, XpFree="1"
+litteral (un sort offert a l'achat, pas un bonus d'attribut). Lore Attribute/Ingredients de
+chaque Lore volontairement pas saisis (meme gap deja documente pour Nations of Mankind le
+04/09, pas de nouveau mecanisme invente). Accroc trouve et resolu : "Forge of Chamon" avait
+son titre/CN scinde au milieu de sa description dans l'extraction texte du PDF (limite de
+page 252/253) - reconstitue par recoupement de sens, verifie contre l'index des sorts en fin
+de livre. Balance verifiee (Sort 113/113 cumule). Compile (lazbuild, 0 erreur).
+WarhammerHelp.exe lance et reste stable puis ferme.
+Teste par Nono : "ce que je vois me semble bon" - catalogue des 113 sorts (Petty + Arcane
+Spells + 8 Lores Couleur) valide dans WinSpell/WinTalent. Session terminee, Nono s'arrete la
+(commit).
+Fichiers modifies : DATABASE\WFRP5\BOOK_RULESBOOK.Xml, CONTEXT.md, Log.txt.

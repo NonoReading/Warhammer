@@ -403,14 +403,6 @@ Rulebook V5 donne un petit equipement de depart par Classe (Burgher, Warrior...)
 celui du metier - rien dans DATA_CAREER ne porte ca aujourd'hui (Class n'est qu'un filtre).
 A voir si on l'ajoute quand on peuplera le catalogue V5, sinon negligeable.
 
-SPECIALISATIONS LIEES AUX SORTS DU RULEBOOK V5, PAS ENCORE TRAITEES (releve le 14/09/2026,
-suite du chantier talents a parametre CONTEXT.md 2.70). Le mecanisme DATA_TALENT_SPECIALIZATION
-vient d'etre applique aux 14 talents a parametre (Etiquette, Fearless, Savant...), mais pas aux
-sorts eux-memes ni aux talents magiques generiques (Arcane Magic, Bless, Invoke...) du point de
-vue de leurs propres specialites liees aux sorts - a definir precisement avec Nono ce que ca
-recouvre (sorts par Lore/Deite ? DATA_SPELL_SPECIALIZATION separe ou reutilisation du meme
-mecanisme que les talents ?) avant d'ecrire quoi que ce soit.
-
 =========================================================================
 EN VRAC  (ancien, non trie)
 =========================================================================
