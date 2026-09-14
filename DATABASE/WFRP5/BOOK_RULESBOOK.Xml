@@ -10397,7 +10397,7 @@ Playing a Charlatan lets you bluff, deceive, and talk your way through almost an
 <SUBCHAPTER_ITEM>
 <Item name="RULES-TRAP_11">"1"</Item>
 <Item name="RULES-TRAP_14">"1"</Item>
-<Item name="2 Sets of Clothing">"1"</Item>
+<Item name="RULES-TRAP_049" quantite="2">"1"</Item>
 <Item name="Forged Document">"2"</Item>
 <Item name="Colourful Mixtures">"2"</Item>
 <Item name="Trinkets and Charms">"2"</Item>

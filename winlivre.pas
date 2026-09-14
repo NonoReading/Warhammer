@@ -6,7 +6,7 @@ interface
 
 uses
   Classes, SysUtils, Forms, Controls, StdCtrls, ComCtrls, ExtCtrls, Menus,
-  Dialogs, Graphics, BCButton, ChargeConstantes, ChargeTexte, ChargeCompetence, ChargeTalent, ChargeMetier, ChargeLivre, ChargeArme, ChargeArmure, ChargeTrapping, ChargeRace, UnitCalcul, Grids,
+  Dialogs, Graphics, BCButton, ChargeConstantes, ChargeTexte, ChargeCompetence, ChargeTalent, ChargeMetier, ChargeMetierEquipement, ChargeLivre, ChargeArme, ChargeArmure, ChargeTrapping, ChargeRace, UnitCalcul, Grids,
   Generics.Collections, DOM, XMLRead, XMLWrite, FGL, GlobalFonts;
 
 type
@@ -192,7 +192,7 @@ type
     procedure LoadMetierNiveauCompetences(CareerElement: TDOMElement; Niveau: Integer; SkillPrincipal: String; CodeNiveau: String; NodeBase: TTreeNode);
     procedure LoadMetierNiveauTalents(CareerElement: TDOMElement; Niveau: Integer; CodeNiveau: String; NodeBase: TTreeNode);
     procedure LoadMetierNiveauEquipement(CareerElement: TDOMElement; Niveau: Integer; CodeNiveau: String; NodeBase: TTreeNode);
-    procedure AjouterFeuilleEquipement(NomItem: String; NodeBase: TTreeNode);
+    procedure AjouterFeuilleEquipement(NomItem: String; NodeBase: TTreeNode; Quantite: Integer = 1);
     procedure LoadSkillsForRace(RaceElement: TDOMElement; RaceCode: String);
     procedure LoadCareersForRace(RaceElement: TDOMElement);
     procedure AfficherSkillsForRace(RaceCode: String);
@@ -1213,21 +1213,21 @@ begin
 end;
 
 // Ajoute une feuille d'équipement sous NodeBase.
-procedure TWinLivres.AjouterFeuilleEquipement(NomItem: String; NodeBase: TTreeNode);
+procedure TWinLivres.AjouterFeuilleEquipement(NomItem: String; NodeBase: TTreeNode; Quantite: Integer = 1);
 var
   NodeFeuille: TTreeNode;
   Libelle: String;
   TypeEquip: Char;
 begin
   if Trim(NomItem) = '' then Exit;
-  
-  Libelle := LibelleEquipement(NomItem, TypeEquip);
-  
+
+  Libelle := LibelleEquipement(NomItem, TypeEquip) + QuantiteSuffixe(Quantite);
+
   case TypeEquip of
     'W': Libelle := EquipArme + Libelle;
     'P': Libelle := EquipArmure + Libelle;
   end;
-  
+
   NodeFeuille := TreeViewLivre.Items.AddChild(NodeBase, Libelle);
   SetNodeInfo(NodeFeuille, 25, Trim(NomItem));
 end;
@@ -1264,13 +1264,13 @@ begin
       // Choix multiple : "A/B" -> sous-branche "au choix"
       NodeChoix := TreeViewLivre.Items.AddChild(NodeBranche, ConstArbreAuChoix);
       SetNodeInfo(NodeChoix, 25);  // 25 : nœud passif, pas la branche Equipement
-      
+
       Choix := TStringList.Create;
       try
         Choix.Delimiter       := SeparateurMulti;
         Choix.StrictDelimiter := True;
         Choix.DelimitedText   := NomItem;
-        
+
         for J := 0 to Choix.Count - 1 do
           AjouterFeuilleEquipement(Choix[J], NodeChoix);
       finally
@@ -1278,7 +1278,8 @@ begin
       end;
     end
     else
-      AjouterFeuilleEquipement(NomItem, NodeBranche);
+      AjouterFeuilleEquipement(NomItem, NodeBranche,
+        StrToIntDef(TDOMElement(Elements.Item[I]).GetAttribute('quantite'), 1));
   end;
 end;
 
@@ -2726,8 +2727,9 @@ begin
     end
     else
     begin
-      ColLib := LibelleEquipement(NomItem, TypeEquip);
-      
+      ColLib := LibelleEquipement(NomItem, TypeEquip) +
+        QuantiteSuffixe(StrToIntDef(TDOMElement(Elements.Item[I]).GetAttribute('quantite'), 1));
+
       case TypeEquip of
         'W': ColType := GetTexteLibelle('RULES-LAB_063');  // Arme
         'P': ColType := GetTexteLibelle('RULES-LAB_065');  // Armure

@@ -214,6 +214,7 @@ Procedure XmlExportBook(Livre: String; Langue: String);
     LigneType:                String;
     Qualite:                  String;
     Equipement:               String;
+    QuantiteAttr:             String;
     StringTalent:             TStringList;
     LigneTalent:              String;
     ListeTalent:              String;
@@ -701,7 +702,14 @@ Procedure XmlExportBook(Livre: String; Langue: String);
                         end;
                       StringEquip.free;
                       StringType.Free;
-                      XmlContent.Add(XmlLigneDonnee(ConstXmlEquipement, LigneEquipement, IntToStr(PMetierEquipement.NiveauMetier)));
+                      // Meme principe que Porte/Quantite cote personnage (chargepersonnage.pas
+                      // XmlAttributEquipementQuantite) : attribut absent si Quantite=1, pour que
+                      // les livres deja exportes sans le champ restent lisibles comme "1 exemplaire".
+                      if PMetierEquipement.Quantite <> 1 then
+                        QuantiteAttr := ' '+ConstXmlEquipementQuantite+'="'+IntToStr(PMetierEquipement.Quantite)+'"'
+                      else
+                        QuantiteAttr := '';
+                      XmlContent.Add(XmlLigneDonnee(ConstXmlEquipement, LigneEquipement, IntToStr(PMetierEquipement.NiveauMetier), QuantiteAttr));
                       LigneEquipement  := '';
                     end;
 
@@ -2136,6 +2144,10 @@ Procedure XmlImport(FileName: String; OnlyPrimary: Boolean; OnlyCode: Boolean; C
                                            PMetierEquipement.CodeMetier     := PMetier.CodeMetier;
                                            PMetierEquipement.Equipement     := RemoveQuotes(UTF8Encode(Node.Attributes.GetNamedItem(ConstXmlData).NodeValue));
                                            PMetierEquipement.NiveauMetier   := StrToIntDef(RemoveQuotes(UTF8Encode(Node.TextContent)),0);
+                                           if Assigned(Node.Attributes.GetNamedItem(ConstXmlEquipementQuantite)) then
+                                             PMetierEquipement.Quantite     := StrToIntDef(UTF8Encode(Node.Attributes.GetNamedItem(ConstXmlEquipementQuantite).NodeValue), 1)
+                                           else
+                                             PMetierEquipement.Quantite     := 1;
 
                                            if LangueDef = ConstAnglais then
                                              begin

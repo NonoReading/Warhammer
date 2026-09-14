@@ -4235,3 +4235,28 @@ disponibles) puis Phase B (fenetre WinEquipement, calque WinArmor.pas). CONTEXT.
 point de reprise precis en tete de section 2.77. Fichiers modifies dans ce commit :
 DATABASE/WFRP5/BOOK_RULESBOOK.Xml, CONTEXT.md, Log.txt (le schema Pascal listait plus haut
 avait deja ete commit avec les 3 premieres tables).
+14/09/2026 - MECANISME DE QUANTITE SUR L'EQUIPEMENT DE CARRIERE (CONTEXT.md 2.77) : AJOUTE ET
+TESTE VISUELLEMENT PAR NONO SUR LE CHARLATAN. Nono a repere en parcourant l'equipement du
+Charlatan niveau 1 que "2 Sets of Clothing" restait en texte libre sans notion de quantite -
+le champ Quantite existait deja cote personnage (StructurePersonnageEquipement, Phase A2) mais
+rien ne le renseignait a partir des donnees de carriere (Quantite := 1 pose en dur partout).
+Champ Quantite ajoute a StructureMetierEquipement (chargemetierequipement.pas), attribut XML
+optionnel quantite="N" sur la balise Item de SUBCHAPTER_ITEM (meme convention que Porte/
+Quantite cote personnage, absent = 1), lu et ecrit symetriquement dans xmlexportimport.pas
+(import et export XmlExportBook, pour le round-trip). Fonction utilitaire QuantiteSuffixe
+(marqueur non traduit "x2", meme convention que les prefixes (W)/(P)/(D)) partagee par
+winlivre.pas (arbre et grille de l'editeur de carriere), winmetier.pas (arbre de navigation)
+et wincreation.pas (grille TabMetierEquipement, colonne cachee 5 pour transporter la quantite
+sans toucher aux signatures existantes) - affichent "Clothing x2" au lieu du texte brut.
+Donnee : Charlatan niveau 1 (RULES-WORK09) reecrit de <Item name="2 Sets of Clothing"> vers
+<Item name="RULES-TRAP_049" quantite="2"> (RULES-TRAP_049 = Clothing, deja au catalogue).
+wincreation.pas : Personnage.Equipement recoit desormais Quantite=2 pour cet item a la
+creation. Perimetre volontairement limite (tranche avec Nono avant de coder) : pas de colonne
+Quantite dans la grille TabEquipement de la fiche personnage ni dans le PDF pour l'instant
+(reste a la Phase E du plan Trappings) ; "2 Sets of Quality Clothing" (Charlatan niveau 2) non
+traite, "Quality Clothing" n'a pas encore d'entree catalogue. Compile (lazbuild --build-all, 0
+erreur), WarhammerHelp.exe lance, teste visuellement par Nono (WinMetier, WinLivre,
+WinCreation) : bon. Ne change pas le point de reprise du plan en 9 phases (toujours Phase B
+puis reprise de l'audit C) - correctif isole remonte par Nono en cours de route. Fichiers
+modifies : chargemetierequipement.pas, xmlexportimport.pas, winlivre.pas, winmetier.pas,
+wincreation.pas, DATABASE/WFRP5/BOOK_RULESBOOK.Xml, CONTEXT.md, Log.txt.

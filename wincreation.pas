@@ -1237,7 +1237,9 @@ procedure TWinCreations.PhaseSave(NouvellePhase: Integer);
                // Comme un achat en jeu (winpersonnage.pas) : l'equipement de depart arrive
                // non porte, a cocher explicitement ensuite.
                PersonnageEquipement.Porte                   := False;
-               PersonnageEquipement.Quantite                := 1;
+               // Col 5, cachee : quantite posee par AfficheImageMetier (CONTEXT.md 2.77).
+               // Vide (choix multiple, ou aucune quantite du livre) = 1 exemplaire.
+               PersonnageEquipement.Quantite                := StrToIntDef(TabMetierEquipement.Cells[5, IndTab], 1);
                Personnage.Equipement                        += [PersonnageEquipement];
              end;
          end;
@@ -2354,8 +2356,12 @@ begin
                        Lib := Code;
                      Typ     := TypeEquipDi;
                    end;
+               Lib := Lib + QuantiteSuffixe(PMetierEquipement.Quantite);
                TabMetierEquipement.Cells[1, NbMetierEquipementTab] := Code;
                TabMetierEquipement.Cells[2, NbMetierEquipementTab] := Lib;
+               // Col 5, cachee : quantite (CONTEXT.md 2.77), lue a l'etape 8 pour
+               // PersonnageEquipement.Quantite au lieu de rester figee a 1.
+               TabMetierEquipement.Cells[5, NbMetierEquipementTab] := IntToStr(PMetierEquipement.Quantite);
                TabMetierEquipement.Cells[6, NbMetierEquipementTab] := Typ;
              end;
 

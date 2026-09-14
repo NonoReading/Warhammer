@@ -826,7 +826,7 @@ Begin
                     begin
                       NodeData                := TMyNodeData.Create;
                       NodeData.AdditionalData := PTrapping.CodeTrapping;
-                      NodeSFeuille            := TreeViewMetier1.Items.AddChild(NodeSBrance, EquipDivers + PTrapping.Libelle);
+                      NodeSFeuille            := TreeViewMetier1.Items.AddChild(NodeSBrance, EquipDivers + PTrapping.Libelle + QuantiteSuffixe(PMetierEquipement.Quantite));
                       NodeSFeuille.Data       := NodeData;
                     end
                   else

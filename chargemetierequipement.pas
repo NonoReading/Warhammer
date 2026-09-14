@@ -15,6 +15,7 @@ Type
     Equipement:             String;
     TypeEquipement:         String;
     Livre:                  String;
+    Quantite:               Integer;
   end;
 
   TListMetierEquipement = specialize TList<StructureMetierEquipement>;
@@ -24,6 +25,7 @@ Var
   NbMetierEquipement:   Integer;
 
 function GetListeEquipement(ListeCodes: String; ListeTypes: String):String;
+function QuantiteSuffixe(Quantite: Integer): String;
 
 implementation
 
@@ -103,6 +105,17 @@ function GetListeEquipement(ListeCodes: String; ListeTypes: String):String;
     stringsT.Free;
 
     Result := ListeRes;
+  end;
+
+// Suffixe affiche a cote du libelle d'un equipement de metier quand le livre en donne
+// plusieurs exemplaires (ex. "2 Sets of Clothing", CONTEXT.md 2.77) - meme convention que
+// les prefixes (W)/(P)/(D) : marqueur non traduit, pas une phrase.
+function QuantiteSuffixe(Quantite: Integer): String;
+  begin
+    if Quantite <> 1 then
+      Result := ' x' + IntToStr(Quantite)
+    else
+      Result := '';
   end;
 
 end.

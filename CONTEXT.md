@@ -1,5 +1,49 @@
 # Warhammer — Contexte projet
 
+**14/09/2026 (suite 3) — MÉCANISME DE QUANTITÉ SUR L'ÉQUIPEMENT DE CARRIÈRE (§2.77) : AJOUTÉ
+ET CÂBLÉ, TESTÉ VISUELLEMENT PAR NONO SUR LE CHARLATAN.**
+Nono a repéré en parcourant l'équipement du Charlatan (niveau 1) que "2 Sets of Clothing"
+restait en texte libre, sans notion de quantité séparée de l'objet - le champ `Quantite`
+existait déjà côté personnage (`StructurePersonnageEquipement`, Phase A2) mais rien ne le
+renseignait à partir des données de carrière (`Quantite := 1` posé en dur partout).
+- **Schéma** : champ `Quantite: Integer` ajouté à `StructureMetierEquipement`
+  (`chargemetierequipement.pas`). Attribut XML optionnel `quantite="N"` sur la balise
+  `<Item>` de `SUBCHAPTER_ITEM` - même convention que `Porte`/`Quantite` côté personnage
+  (absent = 1, fiches/livres déjà exportés restent lisibles). Lu et écrit symétriquement
+  dans `xmlexportimport.pas` (import ~l.2137, export ~l.704 de `XmlExportBook`) pour que le
+  round-trip export/réimport reste cohérent, comme pour `DATA_TRAPPING` le 14/09 (oubli du
+  bloc export = doublons au rechargement, déjà documenté).
+- **Affichage** : fonction utilitaire `QuantiteSuffixe` (`chargemetierequipement.pas`,
+  marqueur non traduit `' x2'`, même convention que les préfixes `(W)`/`(P)`/`(D)` déjà en
+  place) partagée par `winlivre.pas` (arbre ET grille de l'éditeur de carrière),
+  `winmetier.pas` (arbre de navigation) et `wincreation.pas` (grille `TabMetierEquipement`
+  à la création) - affichent maintenant "Clothing x2" au lieu du texte brut du livre.
+- **Donnée** : Charlatan niveau 1 (`RULES-WORK09`, `BOOK_RULESBOOK.Xml`) réécrit de
+  `<Item name="2 Sets of Clothing">` vers `<Item name="RULES-TRAP_049" quantite="2">`
+  (`RULES-TRAP_049` = "Clothing", déjà au catalogue depuis la saisie de la Consumer Guide).
+- **Personnage** : `wincreation.pas`, étape "Équipements" de la création - la quantité
+  transite par une colonne cachée (col 5, jusque-là inutilisée) de `TabMetierEquipement`
+  plutôt que par un nouveau paramètre de fonction, pour ne pas toucher aux signatures
+  existantes. `Personnage.Equipement` reçoit donc `Quantite=2` pour cet item au lieu du `1`
+  posé en dur avant.
+- **Périmètre volontairement limité (tranché avec Nono avant de coder)** : pas de colonne
+  Quantite dans la grille `TabEquipement` de la fiche personnage ni dans le PDF pour
+  l'instant - seuls l'affichage carrière (WinMetier/WinLivre) et la donnée côté personnage
+  (déjà latente depuis la Phase A2) sont concernés. Reste dans le même esprit que la
+  décision Phase A2 (colonne différée à la Phase E, voir plan plus bas).
+- **Non traité** : `"2 Sets of Quality Clothing"` (Charlatan niveau 2, même carrière) -
+  "Quality Clothing" n'a pas encore d'entrée catalogue (catégorie E de l'audit C ci-dessous,
+  préfixe "Quality X" récurrent, pas encore tranché avec Nono).
+- Compilé (`lazbuild --build-all`, 0 erreur, 2 warnings de plus mais de la même catégorie
+  déjà pervasive dans `winlivre.pas` - implicit UnicodeString->AnsiString sur un
+  `GetAttribute` de plus, rien de nouveau). `WarhammerHelp.exe` lancé, stable, testé
+  visuellement par Nono (WinMetier, WinLivre, WinCreation) : bon.
+- **Ne change pas le point de reprise du plan en 9 phases ci-dessous** (toujours Phase B
+  puis reprise de l'audit C) : ce correctif est un cas isolé remonté par Nono en cours de
+  route, pas une étape du plan.
+
+---
+
 **14/09/2026 (suite 2) — CHANTIER TRAPPINGS : CHAMP `Carries` AJOUTÉ (SCHÉMA), SAISIE DES
 TABLES DE LA CONSUMER GUIDE V5 EN COURS (§2.77, POINT DE REPRISE CI-DESSOUS).**
 Nono a précisé le périmètre de la Phase D (audit C) : **tout le bloc de la Consumer Guide du
