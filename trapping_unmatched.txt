@@ -1,315 +1,220 @@
-      8 Rope
-      7 Quality Clothing
-      6 Apprentice
-      5 Storm Lantern and Oil
-      4 Symbol of Rank
-      4 Rowboat
-      4 Religious Relic
-      4 Livery
-      4 Book (Religion)
-      3 Trade Tools (Physician)
-      3 Trade Tools (Engineer)
-      3 Quality Courtly Garb
-      3 Network of Informers
-      3 Mule and Cart
-      3 Lair
-      3 Assistant
-      3 Aide
-      2 Workshop (as Trade)
-      2 Warehouse
-      2 Trade Tools (as Trade)
-      2 Trade Tools (Thief)
-      2 Trade Tools (Herbalist)
-      2 Trade Tools (Carpenter)
-      2 Sturdy Boots and Cloak
-      2 Spyglass
-      2 Servant
-      2 Quality Robes
-      2 Pole
-      2 Patron
-      2 Office and Staff
-      2 Office
-      2 Net
-      2 Maps
-      2 Magnifying Glass
-      2 Library (Theology)
-      2 Library (Magic)
-      2 Leather Gloves
-      2 Large Sack
-      2 Horse and Cart
-      2 Grimoire
-      2 Flask of Spirits
-      2 Bandages
-      1 Workshop (Physician)
-      1 Workshop (Magic)
-      1 Workshop (Herbalist)
-      1 Workshop (Engineer)
-      1 Workshop (Artist)
-      1 Workshop (Apothecary)
-      1 Whistle
-      1 Warrant Papers
-      1 Warm Coat
-      1 Wardrobe of Costumes and Props
-      1 Unit of Roadwardens
-      1 Trusty Second
-      1 Troupe of Entertainers
-      1 Trinkets and Charms
-      1 Trained Animal
-      1 Trade Tools (Tinker)
-      1 Trade Tools (Farrier)
-      1 Trade Tools (Engraver)
-      1 Trade Tools (Cartographer)
-      1 Trade Tools (Astrology)
-      1 Trade Tools (Apothecary)
-      1 Townhouse with Servants
-      1 Townhouse with Discreet Back Entrance
-      1 Tomes of Forbidden Knowledge
-      1 The Respect of the Village
-      1 Temple
-      1 Tattoos
-      1 Tattered Robes
-      1 Tarpaulin
-      1 Subordinate Witch Hunters
-      1 Subordinate Priests
-      1 Subordinate Interrogators
-      1 Subordinate High Priests
-      1 Subordinate Gang Bosses
-      1 Sturdy Crate
-      1 Study
-      1 Storm Lantern with Oil
-      1 Stolen Goods worth 1d10 Shillings
-      1 Staff of Diplomats
-      1 Staff of Custodians
-      1 Staff of Advisers and Aides
-      1 Staff
-      1 Squire
-      1 Squad of Roadwardens
-      1 Squad of Guards
-      1 Speedy Barge
-      1 Small but Vicious Dog
-      1 Small Unit of Knights
-      1 Small Tent
-      1 Small Riverboat
-      1 Small Lock Box
-      1 Small Fleet of Barges
-      1 Small Animal Traps
-      1 Sling Bag containing Trade Tools (Artist)
-      1 Sling Bag containing Clothing and 1d10 Bandages
-      1 Sling Bag containing Assortment of Herbs
-      1 Sling Bag containing 2 different sets of Clothing and Hooded Cloak
-      1 Shovel
-      1 Shipping Charts
-      1 Sextant
-      1 Several Fence Contacts
-      1 Selection of Maps
-      1 Selection of Animal Traps
-      1 Selection of Amulets
-      1 Seal of Office
-      1 Sash
-      1 Sailing Ship and Crew
-      1 Saddlebags with 2 weeks' Rations
-      1 Sack of Poisoned Bait
-      1 Rune Axe
-      1 Rod of Office
-      1 River Runners
-      1 Ring of Spies and Informers
-      1 Remote Lair
-      1 Religious Order
-      1 Regiment of Soldiers
-      1 Regiment of Recruits
-      1 Rapier or Silvered Sword
-      1 Quality Uniform
-      1 Quality Trade Tools (Engineer)
-      1 Quality Symbol of Rank
-      1 Quality Rapier
-      1 Quality Livery
-      1 Quality Helmet
-      1 Quality Hat and Cloak
-      1 Quality Hat
-      1 Quality Hand Weapon
-      1 Quality Clothing and Hat
-      1 Quality Clothes
-      1 Quality Cloak
-      1 Province
-      1 Printing Press
-      1 Pots and Pans
-      1 Porter Cap
-      1 Poor Quality Blanket
-      1 Pony and Cart
-      1 Pole for Dead Rats
-      1 Poison
-      1 Plate Armour
-      1 Pile of Leaflets
-      1 Pick
-      1 Personal Servant
-      1 Pawnbroker's Shop
-      1 Pauper Follower
-      1 Patrol Boats and Crew
-      1 Pamphleteer
-      1 Ostentatious Wig
-      1 Orders
-      1 Notes Stuffed in Locked Drawer
-      1 None
-      1 Net or Whip
-      1 Musical Instrument
-      1 Multiple Forged Documents
-      1 Mortarboard
-      1 Modest Shop
-      1 Minions
-      1 Mask or Scarves
-      1 Main-gauche or Pistol with 10 Shots
-      1 Main Gauche or Sword-breaker
-      1 Magical Item
-      1 Magic Licence
-      1 Loft of Homing Pigeons
-      1 Lodgings
-      1 Lockpick
-      1 Library (Law)
-      1 Library (Engineering)
-      1 Library (Art)
-      1 Letter of Commission
-      1 Letter of Appointment
-      1 Leather Skullcap
-      1 Leather Breastplate
-      1 Lasso or Sling with 10 Stone Bullets
-      1 Large Workshop (Engineer)
-      1 Large Workshop (Artist)
-      1 Large Workshop (Apothecary)
-      1 Large Unit of Knights or Several Small Units of Knights
-      1 Large Townhouse with Gardens and Servants
-      1 Large Town Estate
-      1 Large Group of Beggar Followers
-      1 Lantern and Pole
-      1 Lantern and Oil
-      1 Keys
-      1 Keg of Ale
-      1 Journal
-      1 Jewellery worth 500 GC
-      1 Jewellery worth 50 GC
-      1 Jewellery worth 3d10 GC
-      1 Jewellery worth 200 GC
-      1 Isolated Hut
-      1 Instruments of Torture
-      1 Inn or Townhouse
-      1 Informer
-      1 Impressive Hat
-      1 Hooded Cloak
-      1 Hiding Place
-      1 Herb Gatherer
-      1 Herald
-      1 Healing Draught
-      1 Hawk Mews or Kennel of Hunting Dogs
-      1 Handcart
-      1 Hand Weapon or Quarterstaff
-      1 Hammer and Spikes
-      1 Hammer and Nails
-      1 Guild
-      1 Great Weapon or Halberd
-      1 Grappling Hook and Rope
-      1 Governor's Residence
-      1 Goods worth at least 3d10 Shillings
-      1 Goods worth at least 2d10 Shillings
-      1 Goods worth 8d20 Pennies
-      1 Goods worth 2d10 Pennies
-      1 Garotte
-      1 Gang of Thugs and Racketeers
-      1 Gang of Stevedores
-      1 Gang of Racketeers
-      1 Forged Seal
-      1 Forged Document
-      1 Followers (including Penitents, Flagellants, and Zealots)
-      1 Foil or Hand Mirror
-      1 Fleet of Coaches and Horses
-      1 Flail or Great Weapon
-      1 Fishing Rod and Bait
-      1 Fine Clothes
-      1 Fiefdom
-      1 Fence Contact
-      1 Feinkopf Lantern
-      1 Eyeglass
-      1 Eel Trap
-      1 Draught Horses and Wagon (Stage)
-      1 Draught Horse and Wagon
-      1 Draught Horse and Cart
-      1 Dose of Weirdroot
-      1 Degree
-      1 Deck of Cards or Dice
-      1 Davrich Lamp
-      1 Dark Clothing
-      1 Crude Map
-      1 Crossbow with 10 Bolts or Spear
-      1 Crossbow with 10 Bolts or Pistol with 10 Shots or 5 Throwing Knives
-      1 Crossbow with 10 Bolts or Javelin
-      1 Crew of Miners
-      1 Courtly Attire
-      1 Court Robes
-      1 Couriers
-      1 Cottage
-      1 Copper Badge
-      1 Commission Papers
-      1 Colourful Mixtures
-      1 Coach or Riding Horse
-      1 Coach and Footman
-      1 Coach Horn
-      1 Cheap Jewellery
-      1 Chains of Office
-      1 Ceremonial Robes
-      1 Ceremonial Cloak and Garland
-      1 Canvas Tarpaulin
-      1 Calling Card
-      1 Buckler
-      1 Brush or Chisel or Writing Kit
-      1 Brush
-      1 Bow with 10 Arrows or Pistol with 10 Shots
-      1 Bow with 10 Arrows or Hand Weapon
-      1 Bow with 10 Arrows or Crossbow with 10 Bolts or Shield
-      1 Book (Medicine)
-      1 Book (Law)
-      1 Book (Herbs)
-      1 Book (Engineer)
-      1 Book (Cryptography)
-      1 Book (Blank)
-      1 Book (Apothecary)
-      1 Book
-      1 Boathand
-      1 Best Quality Courtly Clothes
-      1 Basket
-      1 Barge or Hut
-      1 Barge or 2 Wagons
-      1 Barge and Wrecker Crew
-      1 Barge and Crew
-      1 Barding
-      1 Band of Outlaws
-      1 Bailiff
-      1 Backpack or Handcart
-      1 Assortment of Animal Skulls
-      1 Assistant (Student or Servant)
-      1 Alcohol
-      1 Access to a Library
-      1 Abbey
-      1 A Ring of Knaves
-      1 A Ring of Hustlers
-      1 500 GC
-      1 4d10 Shillings
-      1 4 Pairs of Manacles
-      1 4 Household Servants
-      1 3d10 Shillings
-      1 3 Tax Collectors
-      1 3 Pamphleteers
-      1 3 Herbal Remedies
-      1 3 Apprentices
-      1 200 GC
-      1 20 GC
-      1 2 sets of Quality Courtly Garb
-      1 2 Wooden Training Swords
-      1 2 Warehouses
-      1 2 Sets of Quality Clothing
-      1 2 Quality Weapons
-      1 2 Bolas or Crossbow with 10 Bolts or Lasso
-      1 2 Barrels
-      1 2 Barges and 4 Wagons
-      1 1d10 Rags
-      1 1000 GC
-      1 100 GC
-      1 10 Sheets of Parchment
-      1 'Fiefdom' of Outlaw Chiefs
+﻿     7 Quality Clothing
+     6 Apprentice
+     4 Symbol of Rank
+     4 Religious Relic
+     3 Network of Informers
+     3 Quality Courtly Garb
+     3 Assistant
+     3 Lair
+     3 Aide
+     2 Office and Staff
+     2 Library (Magic)
+     2 Warehouse
+     2 Quality Robes
+     2 Grimoire
+     2 Office
+     2 Patron
+     2 Library (Theology)
+     2 Servant
+     1 4d10 Shillings
+     1 Goods worth 8d20 Pennies
+     1 Goods worth at least 2d10 Shillings
+     1 Draught Horse and Wagon
+     1 Goods worth at least 3d10 Shillings
+     1 Pots and Pans
+     1 Squad of Roadwardens
+     1 Plate Armour
+     1 Squad of Guards
+     1 Great Weapon or Halberd
+     1 Large Unit of Knights or Several Small Units of Knights
+     1 Small Unit of Knights
+     1 Barding
+     1 Sash
+     1 Instruments of Torture
+     1 Unit of Roadwardens
+     1 Quality Hat and Cloak
+     1 Subordinate Witch Hunters
+     1 Subordinate Interrogators
+     1 Rapier or Silvered Sword
+     1 None
+     1 Saddlebags with 2 weeks' Rations
+     1 Crew of Miners
+     1 Cottage
+     1 Leather Skullcap
+     1 2 Bolas or Crossbow with 10 Bolts or Lasso
+     1 The Respect of the Village
+     1 Herb Gatherer
+     1 3 Herbal Remedies
+     1 Sling Bag containing Assortment of Herbs
+     1 Book (Herbs)
+     1 Davrich Lamp
+     1 Hawk Mews or Kennel of Hunting Dogs
+     1 Pony and Cart
+     1 Followers (including Penitents, Flagellants, and Zealots)
+     1 Tattered Robes
+     1 Wardrobe of Costumes and Props
+     1 Couriers
+     1 Backpack or Handcart
+     1 Goods worth 2d10 Pennies
+     1 Basket
+     1 Quality Cloak
+     1 Coach Horn
+     1 Warrant Papers
+     1 Fleet of Coaches and Horses
+     1 Troupe of Entertainers
+     1 Draught Horses and Wagon (Stage)
+     1 Trained Animal
+     1 Boathand
+     1 Barge and Crew
+     1 Remote Lair
+     1 Fishing Rod and Bait
+     1 Patrol Boats and Crew
+     1 Small Riverboat
+     1 Minions
+     1 Several Fence Contacts
+     1 Fence Contact
+     1 Subordinate Gang Bosses
+     1 Tomes of Forbidden Knowledge
+     1 Notes Stuffed in Locked Drawer
+     1 Calling Card
+     1 Porter Cap
+     1 Small Fleet of Barges
+     1 Speedy Barge
+     1 Barge and Wrecker Crew
+     1 Whistle
+     1 Gang of Stevedores
+     1 River Runners
+     1 Sailing Ship and Crew
+     1 Brush
+     1 Barge or Hut
+     1 2 Barrels
+     1 Shipping Charts
+     1 Sextant
+     1 Quality Clothing and Hat
+     1 Letter of Commission
+     1 Regiment of Recruits
+     1 Leather Breastplate
+     1 Regiment of Soldiers
+     1 Quality Uniform
+     1 Orders
+     1 Rune Axe
+     1 Quality Helmet
+     1 Flail or Great Weapon
+     1 Squire
+     1 Poison
+     1 Garotte
+     1 Crossbow with 10 Bolts or Pistol with 10 Shots or 5 Throwing Knives
+     1 Townhouse with Discreet Back Entrance
+     1 A Ring of Knaves
+     1 A Ring of Hustlers
+     1 Gang of Thugs and Racketeers
+     1 'Fiefdom' of Outlaw Chiefs
+     1 Band of Outlaws
+     1 Gang of Racketeers
+     1 2 Sets of Quality Clothing
+     1 Trinkets and Charms
+     1 Colourful Mixtures
+     1 Pawnbroker's Shop
+     1 Eyeglass
+     1 Stolen Goods worth 1d10 Shillings
+     1 Pauper Follower
+     1 Hiding Place
+     1 Poor Quality Blanket
+     1 3d10 Shillings
+     1 Journal
+     1 Large Group of Beggar Followers
+     1 3 Pamphleteers
+     1 Impressive Hat
+     1 Pamphleteer
+     1 Guild
+     1 1d10 Rags
+     1 Printing Press
+     1 Barge or 2 Wagons
+     1 Feinkopf Lantern
+     1 Small but Vicious Dog
+     1 2 Warehouses
+     1 Modest Shop
+     1 Lodgings
+     1 Sack of Poisoned Bait
+     1 Townhouse with Servants
+     1 100 GC
+     1 20 GC
+     1 1000 GC
+     1 Large Town Estate
+     1 2 Barges and 4 Wagons
+     1 Ostentatious Wig
+     1 Assistant (Student or Servant)
+     1 Court Robes
+     1 Healing Draught
+     1 Religious Order
+     1 Abbey
+     1 Large Workshop (Apothecary)
+     1 Commission Papers
+     1 Book (Blank)
+     1 Large Workshop (Engineer)
+     1 Quality Trade Tools (Engineer)
+     1 Library (Engineering)
+     1 Courtly Attire
+     1 Mortarboard
+     1 Degree
+     1 Access to a Library
+     1 Sturdy Crate
+     1 Magical Item
+     1 Study
+     1 Subordinate Priests
+     1 Ceremonial Robes
+     1 Letter of Appointment
+     1 Book
+     1 Subordinate High Priests
+     1 Temple
+     1 Inn or Townhouse
+     1 Province
+     1 Jewellery worth 500 GC
+     1 500 GC
+     1 Informer
+     1 Sling Bag containing 2 different sets of Clothing and Hooded Cloak
+     1 Quality Livery
+     1 Fiefdom
+     1 Jewellery worth 50 GC
+     1 4 Household Servants
+     1 2 sets of Quality Courtly Garb
+     1 Jewellery worth 200 GC
+     1 200 GC
+     1 Loft of Homing Pigeons
+     1 Seal of Office
+     1 Library (Law)
+     1 Bailiff
+     1 Ceremonial Cloak and Garland
+     1 Assortment of Animal Skulls
+     1 Isolated Hut
+     1 Staff of Custodians
+     1 Rod of Office
+     1 Ring of Spies and Informers
+     1 3 Tax Collectors
+     1 Small Lock Box
+     1 Governor's Residence
+     1 Staff of Advisers and Aides
+     1 Quality Symbol of Rank
+     1 Quality Hat
+     1 Large Workshop (Artist)
+     1 3 Apprentices
+     1 Sling Bag containing Trade Tools (Artist)
+     1 Coach and Footman
+     1 Chains of Office
+     1 Staff
+     1 Quality Hand Weapon
+     1 Copper Badge
+     1 Large Townhouse with Gardens and Servants
+     1 Library (Art)
+     1 Herald
+     1 Best Quality Courtly Clothes
+     1 Quality Clothes
+     1 Personal Servant
+     1 Jewellery worth 3d10 GC
+     1 Staff of Diplomats
+     1 Trusty Second
+     1 Quality Rapier
+     1 Sling Bag containing Clothing and 1d10 Bandages
+     1 10 Sheets of Parchment
+     1 2 Quality Weapons
+     1 2 Wooden Training Swords

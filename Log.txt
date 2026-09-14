@@ -4352,3 +4352,130 @@ detecte le separateur present ('+' ou '/') et calcule le type par code, rejoint 
 meme separateur. Compile, 0 erreur, teste OK par Nono (Pilot et une carriere Mule/Horse and
 Cart). Fichiers modifies : DATABASE/WFRP5/BOOK_RULESBOOK.Xml, unitcalcul.pas, CONTEXT.md,
 Log.txt.
+
+14/09/2026 - AUDIT C, POINT 4 REPRIS : 59 OCCURRENCES RATTACHEES EN 3 LOTS, PERIMETRE
+TRANCHE AVEC NONO (CONTEXT.md suite 7). trapping_unmatched.txt etait perime (regenere avant
+de commencer : 393 -> 346 occurrences, les rattachements des sessions precedentes n'y
+avaient pas ete repercutes). Perimetre tranche avec Nono avant de saisir : (1) PNJ/suivants,
+batiments/proprietes et argent en texte hors perimetre de DATA_TRAPPING, laisses en texte
+libre ; (2) objets reels manquants decoupes par theme ; (3) choix "X or Y" resolus via le
+separateur '/' deja en place (GetListeEquipement, chargemetierequipement.pas:48 ;
+wincreation.pas l.2413-2418) plutot que laisses de cote. Decouverte en travaillant les
+themes : la plupart des "objets manquants" existent deja au catalogue sous un intitule
+narratif different de l'intitule de vente (ex. "Rope" carriere = "Rope, 10 yards" catalogue,
+RULES-TRAP_29) - meme motif que Hand Weapon (X) le 14/09 (suite 4), moins de vraies
+nouvelles entrees a creer que prevu. Lot 1 (41 occ, renommage simple) : Rope, Bandages,
+Musical Instrument, Spyglass, Rowboat, Lockpick, Shovel, Keys, Large Sack, Small Tent,
+Tarpaulin/Canvas Tarpaulin, Keg of Ale, Dose of Weirdroot, Maps/Selection of Maps/Crude Map,
+Small Animal Traps/Selection of Animal Traps/Eel Trap, Warm Coat, Tattoos, Pile of
+Leaflets, Magic Licence, Pole/Pole for Dead Rats -> codes catalogue existants. Piege ecarte :
+"Staff" (Merchant) ressemblait a Walking Cane mais son contexte (Lodgings, Modest Shop,
+Chains of Office, Coach and Footman) montre que c'est du personnel, pas une canne - exclu,
+laisse en texte libre. Lot 2 (7 occ, mecanisme +/separateur choix) : Lantern and Pole,
+Lantern and Oil, Hammer and Nails, Hammer and Spikes, Grappling Hook and Rope (ensemble +) ;
+Deck of Cards or Dice, Coach or Riding Horse (choix /, premier usage du separateur sur un
+item Divers, pas encore verifie en jeu). Lot 3 (11 occ) : Magnifying Glass, Leather Gloves,
+Selection of Amulets, Cheap Jewellery (renommage simple), Storm Lantern with Oil (variante
+orthographique de "and" oubliee par la migration de la session precedente, meme paire),
+Draught Horse and Cart, Flask of Spirits (ensemble +), 4 Pairs of Manacles -> RULES-TRAP_102
+quantite="4" (mecanisme quantite de la session Charlatan reutilise, pas un ensemble).
+Compile (lazbuild --build-all, 0 erreur) et WarhammerHelp.exe relance stable apres chaque
+lot - pas encore teste visuellement par Nono. trapping_unmatched.txt regenere : 346 -> 287
+occurrences, 287 -> 246 noms distincts. Reste categorise dans CONTEXT.md pour la suite :
+rattachements ambigus a trancher avec Nono (Livery, Fine Clothes, Handcart, Alcohol...),
+familles regalia sans equivalent catalogue (Symbol of Rank, Religious Relic, Chains/Rod/Seal
+of Office), Quality X toujours en pause, et des objets genuinely absents necessitant un
+prix a sourcer dans le livre (Sextant, Shipping Charts, Basket, Whistle, Garotte...).
+Fichiers modifies : DATABASE/WFRP5/BOOK_RULESBOOK.Xml, trapping_unmatched.txt, CONTEXT.md,
+Log.txt.
+
+14/09/2026 - AUDIT C, LOTS 1 A 3 TESTES OK PAR NONO, LOT 4 (RATTACHEMENTS AMBIGUS) SAISI
+(CONTEXT.md suite 7). Teste par Nono : choix / sur un item Divers (Coach or Riding Horse,
+Deck of Cards or Dice - premier usage hors Arme/Armure), ensembles + (Lantern and Pole,
+Storm Lantern with Oil, Grappling Hook and Rope, Draught Horse and Cart), quantite
+(Manacles x4), renommages simples - tout bon, aucune correction. Lot 4 (14 occ) : Livery (4
+occ, carrieres de domestiques) -> Uniform, pas Costume (reserve aux artistes) ; Fine Clothes
+-> Clothing, pas Courtly Garb (domestique haut place, pas un noble) ; Hooded Cloak ->
+Cloak, Dark Clothing -> Clothing, Handcart -> Cart (perte de nuance descriptive, meme
+principe que les lots precedents) ; Sturdy Boots and Cloak -> ensemble Boots+Cloak ; Alcohol
+(carriere academique) -> Spirits, pint ; Forged Document/Multiple Forged Documents -> Legal
+Document, Forged Seal -> Stamp, engraved - nuance perdue a surveiller (legitime vs
+contrefait, aucune entree "faux" au catalogue, different des autres pertes de nuance qui
+ne changeaient pas le sens). Rapier or Silvered Sword NON rattache : aucune entree
+"argente" nulle part dans BOOK_RULESBOOK.Xml (verifie), reclasse en "genuinely absent"
+plutot que choix ambigu - une des deux branches n'a simplement pas de code. Compile
+(lazbuild --build-all, 0 erreur), WarhammerHelp.exe relance stable - lot 4 pas encore
+teste par Nono. trapping_unmatched.txt regenere : 287 -> 273 occurrences, 246 -> 236 noms
+distincts. Fichiers modifies : DATABASE/WFRP5/BOOK_RULESBOOK.Xml, trapping_unmatched.txt,
+CONTEXT.md, Log.txt.
+
+14/09/2026 - AUDIT C : EXPORT XLS POUR AUDIT VISUEL, 13 CHOIX D'ARMES SUPPLEMENTAIRES
+RESOLUS, 3 CAS BLOQUES (CONTEXT.md suite 8). Nono a confirme que Forged Document/Seal
+sont bien voulus tels que rattaches (lot 4). Demande d'un export XLS pour auditer TOUS
+les rattachements, pas seulement ceux signales : une ligne par element d'equipement
+(composes +/eclates), colonnes Code metier/Metier/Niveau/Trapping (libelle resolu)/Texte
+origine (code ou texte brut). ImportExcel installe (absent avant, Install-Module +
+NuGet provider). Script PowerShell genere Audit_Trapping_Carrieres.xlsx (689 lignes, 0
+code non resolu), envoye a Nono. En le relisant il a repere que Bow/Crossbow n'etaient
+pas convertis, puis plus generalement d'autres choix d'armes laisses de cote depuis la
+suite 4 (avant que le mecanisme de choix / soit valide sur l'equipement). Verifie avant
+de saisir le cas mixte Arme+Armure (Bow with 10 Arrows or Crossbow with 10 Bolts or
+Shield) : GetTypeMetierEquipement calcule le type par code individuel via son prefixe,
+pas un type global - un choix heterogene fonctionne nativement, verifie par lecture du
+code avant saisie. 13 choix resolus : Crossbow with 10 Bolts or Spear, Bow with 10
+Arrows or Hand Weapon/or Pistol with 10 Shots/or Crossbow with 10 Bolts or Shield,
+Crossbow with 10 Bolts or Javelin (reprennent les codes Bow/Crossbow/Pistol etablis en
+suite 4) ; Hand Weapon or Quarterstaff, Lasso or Sling with 10 Stone Bullets, Main-gauche
+or Pistol with 10 Shots, Main Gauche or Sword-breaker, Foil or Hand Mirror, Net or Whip
+(catalogue a deux entrees "Net" homonymes, melee RULES-COMB_BASE_05 vs lance
+RULES-PROJ_ENTRAV_03 - choisi melee au vu du contexte bagarre/gladiateur), Brush or
+Chisel or Writing Kit. Mask or Scarves : pas un choix, renomme vers RULES-TRAP_057
+"Hood or Mask" qui couvre deja l'alternative en une seule reference. 3 cas bloques,
+a trancher avec Nono : (1) Great Weapon or Halberd / Flail or Great Weapon - aucune
+entree generique "Great Weapon" au catalogue, un des deux membres n'a pas de code ;
+(2) 2 Bolas or Crossbow with 10 Bolts or Lasso / Crossbow with 10 Bolts or Pistol with
+10 Shots or 5 Throwing Knives - une branche du choix porte sa propre quantite, le
+mecanisme / actuel ne porte qu'un seul quantite pour tout l'Item, pas par branche ;
+(3) Rapier or Silvered Sword - Rapier a un code mais aucune entree "Silvered Sword"
+nulle part dans le livre (arme argentee probablement une regle d'artisanat, pas un
+achat catalogue). Compile (lazbuild --build-all, 0 erreur) et WarhammerHelp.exe
+relance stable a chaque lot. trapping_unmatched.txt regenere : 273 -> 260 occurrences,
+236 -> 223 noms. Audit_Trapping_Carrieres.xlsx pas encore rafraichi (verrouille, ouvert
+par Nono dans Excel). Fichiers modifies : DATABASE/WFRP5/BOOK_RULESBOOK.Xml,
+trapping_unmatched.txt, CONTEXT.md, Log.txt.
+
+14/09/2026 - AUDIT C : BUCKLER/PICK/NET DESAMBIGUES, STAFF RECONFIRME (CONTEXT.md suite
+8, suite immediate). Nono a colle un extrait du classeur (perime, la plupart des lignes
+etaient deja resolues par le lot precedent). Restant reel : Buckler (Guard, a cote d'une
+armure et d'un arc) -> RULES-ARMO_01 (bouclier), pas RULES-COMB_ESCR_01 (arme) - le
+catalogue a les deux sous le meme nom mais RULES-ARMO_01/02/03 forment une famille de
+boucliers. Pick (Grave Robber, au milieu de Handcart/Tarpaulin/Rope) -> RULES-TRAP_108
+(outil), pas RULES-COMB_2M_03 (pic de guerre) - creuser des tombes, pas se battre. Net
+isole (Bounty Hunter et Riverwoman, 2 occurrences) -> RULES-PROJ_ENTRAV_03 (filet lance),
+pas RULES-COMB_BASE_05 (filet de melee, deja utilise pour "Net or Whip" du Pit Fighter) -
+capturer a distance/pecher, pas combattre au corps a corps ; meme mot anglais, deux
+objets catalogue differents selon l'usage. Staff (Townsman, pas Merchant - erreur de
+frappe de la session precedente corrigee) reconfirme comme personnel, toujours pas
+converti. Laisses en l'etat sur demande de Nono (convertir seulement si on trouve une
+correspondance) : Plate Armour/Leather Breastplate/Leather Skullcap/Rune Axe (aucune
+entree exacte), Quality Hand Weapon/Quality Rapier/Quality Helmet (famille Quality X,
+toujours en pause). Compile (lazbuild --build-all, 0 erreur), WarhammerHelp.exe relance
+stable. trapping_unmatched.txt regenere : 260 -> 256 occurrences, 223 -> 220 noms.
+Audit_Trapping_Carrieres_v2.xlsx publie a un nouveau chemin (l'original restait
+verrouille dans Excel) - a fusionner/nettoyer une fois que Nono aura ferme le premier.
+Fichiers modifies : DATABASE/WFRP5/BOOK_RULESBOOK.Xml, trapping_unmatched.txt,
+CONTEXT.md, Log.txt.
+
+14/09/2026 - AUDIT C : CHANTIER MIS EN PAUSE PAR NONO (CONTEXT.md suite 8, fin de
+session). Audit_Trapping_Carrieres.xlsx republie dans le fichier original une fois que
+Nono a libere le verrou Excel ; le _v2.xlsx intermediaire supprime. Nono a ensuite
+decide de suspendre le chantier : au vu de l'ampleur des cas ambigus/bloques remontes
+dans la session (regalia, choix d'armes, Quality X, quantite par branche...), il
+realise que sa version du Rulebook V5 peut encore evoluer (errata, mise a jour du PDF
+source) - saisir dans le detail une base qui bougera peut-etre est premature. Chantier
+suspendu, pas abandonne : reprendre le point 4 de l'audit C quand Nono aura confirme que
+sa version du livre est stable. Script TRAVAIL/export_trapping_audit.ps1 copie dans le
+depot (ecrit cette session, necessite le module PowerShell ImportExcel installe cette
+session, absent avant) pour pouvoir regenerer trapping_unmatched.txt et le classeur
+d'audit sans tout reecrire. Fichiers modifies : Audit_Trapping_Carrieres.xlsx (supprime
+le _v2), TRAVAIL/export_trapping_audit.ps1 (nouveau), CONTEXT.md, Log.txt.

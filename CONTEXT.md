@@ -1,5 +1,250 @@
 # Warhammer — Contexte projet
 
+**14/09/2026 (suite 8) — AUDIT C : 13 CHOIX D'ARMES SUPPLÉMENTAIRES RÉSOLUS (VIA `/`),
+3 CAS RESTENT BLOQUÉS (LIMITE DE MÉCANISME OU CODE MANQUANT). Export `Audit_
+Trapping_Carrieres.xlsx` créé pour l'audit visuel de Nono.**
+
+**Contexte** : Nono a demandé un export XLS pour auditer visuellement tous les
+rattachements (pas seulement ceux que j'avais signalés) - une ligne par élément
+d'équipement de carrière (composés `+`/`/` éclatés), colonnes Code métier/Métier/Niveau/
+Trapping (libellé résolu)/Texte origine (code ou texte brut). Généré par script
+PowerShell (`ImportExcel`, installé via `Install-Module` cette session - absent avant),
+689 lignes, 0 code non résolu. En le relisant, Nono a repéré que plusieurs choix `Bow`/
+`Crossbow` n'étaient pas convertis, puis (message suivant) d'autres choix d'armes en
+général - la conversion s'était arrêtée en suite 4 avant que le mécanisme de choix `/`
+soit validé sur l'équipement.
+
+**Vérification technique avant de saisir un choix mêlant Arme ET Armure** (le cas "Bow
+with 10 Arrows or Crossbow with 10 Bolts or **Shield**") : `GetTypeMetierEquipement`
+(`unitcalcul.pas:205`, corrigée en suite 6) calcule le type **par code individuel** via
+son préfixe (`COMB_`/`PROJ_`/`MUNI_`/`ARMO_`, sinon Divers), pas un type global pour toute
+la liste - un choix hétérogène Arme/Armure fonctionne donc nativement, chaque option
+gardant son propre type jusqu'à ce que le joueur en choisisse une. Pas de risque
+identifié, confirmé par la lecture du code avant saisie (pas seulement par le test).
+
+**13 choix résolus (tous testés compilables, `WarhammerHelp.exe` relancé stable après
+chaque lot) :**
+- Crossbow with 10 Bolts or Spear, Bow with 10 Arrows or Hand Weapon, Bow with 10 Arrows
+  or Pistol with 10 Shots, Bow with 10 Arrows or Crossbow with 10 Bolts or Shield,
+  Crossbow with 10 Bolts or Javelin (5, en réutilisant les codes déjà établis en suite 4
+  pour Bow/Crossbow/Pistol nus : `RULES-PROJ_ARC_01`/`_ARB_01`/`_POUDRE_03`).
+- Hand Weapon or Quarterstaff, Lasso or Sling with 10 Stone Bullets, Main-gauche or
+  Pistol with 10 Shots, Main Gauche or Sword-breaker, Foil or Hand Mirror, Net or Whip,
+  Brush or Chisel or Writing Kit (7 choix supplémentaires trouvés par Nono en repassant
+  la liste). **Net or Whip** : le catalogue a **deux entrées "Net"** homonymes
+  (`RULES-COMB_BASE_05`, mêlée, groupe Dague/Arme de base ; `RULES-PROJ_ENTRAV_03`,
+  lancé, groupe Bolas/Lasso) - choisi la mêlée (`_BASE_05`) au vu du contexte de carrière
+  (bagarre/gladiateur, `RULES-COMB_BAGAR_02` juste au-dessus).
+- Mask or Scarves → **pas un choix, renommage simple** vers `RULES-TRAP_057` "Hood or
+  Mask" : le catalogue couvre déjà cette alternative sous une seule référence
+  achetable, "or Scarves" n'étant qu'une variante narrative régionale du même objet.
+
+**3 cas laissés en l'état, bloqués pour des raisons différentes - à trancher avec
+Nono :**
+1. **Great Weapon or Halberd** et **Flail or Great Weapon** : aucune entrée générique
+   "Great Weapon (Any)" n'existe au catalogue (confirmé en suite 4 déjà, reconfirmé ici) -
+   contrairement à "Hand Weapon"/"Melee weapon (Any)" (`RULES-COMB_*`), il n'y a pas
+   d'équivalent 2 mains. Un des deux membres du choix n'a simplement pas de code.
+2. **2 Bolas or Crossbow with 10 Bolts or Lasso** et **Crossbow with 10 Bolts or Pistol
+   with 10 Shots or 5 Throwing Knives** : une des branches du choix porte sa propre
+   quantité ("2 Bolas", "5 Throwing Knives") - le mécanisme `/` actuel
+   (`GetListeEquipement`, `chargemetierequipement.pas:48`) ne porte qu'un seul attribut
+   `quantite` pour tout l'`<Item>`, pas un par branche. Résoudre proprement demanderait
+   une extension du mécanisme (quantité par branche de choix), pas juste de la donnée -
+   pas fait sans validation de Nono.
+3. **Rapier or Silvered Sword** : `Rapier` a un code (`RULES-COMB_ESCR_04`) mais
+   "Silvered Sword" n'a aucune entrée dans tout `BOOK_RULESBOOK.Xml` (vérifié : seul
+   "Silver" du fichier est "Asur Silver Helms", un nom propre elfique) - une arme
+   argentée est probablement une règle d'artisanat (matériau spécial), pas un achat de
+   boutique standard. Reclassé "genuinely absent".
+
+**`trapping_unmatched.txt` régénéré** : 273 → 260 occurrences, 236 → 223 noms distincts.
+**`Audit_Trapping_Carrieres.xlsx` à rafraîchir** - verrouillé côté Nono (ouvert dans
+Excel) au moment de la régénération, pas encore republié après ce lot.
+
+**Suite immédiate (même session)** : Nono a relu la liste des rattachements armes encore
+vides dans le classeur (extrait collé en conversation, capturé avant qu'il ferme Excel -
+la plupart des lignes qu'il listait étaient déjà résolues par le lot ci-dessus, le
+classeur qu'il regardait était juste périmé). En triant ce qui restait vraiment :
+- **`Buckler` (Guard, niveau 1, à côté d'une armure et d'un arc) → `RULES-ARMO_01`**
+  (Armor), pas `RULES-COMB_ESCR_01` (Weapon) - le catalogue a les deux sous le même nom
+  anglais, mais `RULES-ARMO_01/02/03` forment une famille de boucliers
+  (Buckler/Shield/Large Shield) : un Buckler porté par un garde est un petit bouclier,
+  pas une technique d'escrime.
+- **`Pick` (Grave Robber, niveau 3, au milieu de Handcart/Tarpaulin/Rope) →
+  `RULES-TRAP_108`** (outil de fouille), pas `RULES-COMB_2M_03` (pic de guerre 2 mains) -
+  contexte sans ambiguïté (creuser des tombes, pas se battre).
+- **`Net` isolé (2 occurrences, Bounty Hunter niveau 2 et Riverwoman niveau 2) →
+  `RULES-PROJ_ENTRAV_03`** (filet lancé, famille Bolas/Lasso), pas
+  `RULES-COMB_BASE_05` (filet de mêlée) - un chasseur de primes immobilise une cible à
+  distance, une riveraine pêche : les deux usages sont du lancer, contrairement au
+  Pit Fighter de "Net or Whip" (mêlée d'arène, déjà résolu en `_BASE_05`) - même mot
+  anglais, deux objets catalogue différents selon l'usage, décidé au cas par cas.
+- **`Staff` (Townsman, niveau 3) - PAS converti, confirmé à nouveau** : personnel de
+  maison (à côté de Lodgings/Modest Shop/Inn or Townhouse/Chains of Office/Coach and
+  Footman), pas une canne. **Correction d'une erreur de frappe de la suite 7** : cette
+  ligne y était attribuée par erreur à la carrière "Merchant" - c'est "Townsman"
+  (`RULES-WORK07`), la conclusion (personnel, pas objet) reste inchangée.
+- **Laissés en l'état, pas de code trouvé (Nono a dit de ne convertir que si on trouve
+  une correspondance, sinon en discuter)** : `Plate Armour`, `Leather Breastplate`,
+  `Leather Skullcap`, `Rune Axe` (aucune entrée catalogue exacte, confirmé) ; `Quality
+  Hand Weapon`, `Quality Rapier`, `Quality Helmet` (famille `Quality X`, toujours en
+  pause - décision de Nono du 14/09 suite 4, pas relevée par cette relecture).
+
+`trapping_unmatched.txt` régénéré à nouveau : 260 → 256 occurrences, 223 → 220 noms.
+`Audit_Trapping_Carrieres.xlsx` republié dans l'original une fois que Nono a libéré le
+fichier dans Excel (le `_v2.xlsx` intermédiaire a été supprimé, pas de classeur qui
+diverge).
+
+**⏸️ PAUSE décidée par Nono en fin de session, motif différent de l'avancement du
+travail** : en voyant l'ampleur de l'audit (les nombreux cas ambigus/bloqués remontés
+ci-dessus), il a réalisé que **sa version du Rulebook V5 peut encore évoluer** (errata,
+mise à jour du PDF source) - continuer à saisir dans le détail une base qui bougera
+peut-être est prématuré. Chantier suspendu, pas abandonné : reprendre l'audit C (point 4)
+quand Nono aura confirmé que sa version du livre est stable.
+
+**Point de reprise pour la prochaine session sur ce chantier** :
+- `trapping_unmatched.txt` (256 occurrences, 220 noms) et `Audit_Trapping_Carrieres.xlsx`
+  (703 lignes) sont à jour à l'instant de la pause - régénérer les deux avant de
+  continuer si le livre a changé entre-temps (script `TRAVAIL\export_trapping_audit.ps1`,
+  copié dans le dépôt cette session - nécessite le module PowerShell `ImportExcel`,
+  installé cette session via `Install-Module`, absent avant).
+- 3 cas bloqués par une vraie limite (pas juste "pas encore fait", cf. ci-dessus) :
+  Great Weapon générique absent, quantité par branche de choix non supportée,
+  Silvered Sword absent - **restent valables quel que soit ce que le futur Rulebook
+  changera sur ces points précis**, à revérifier seulement si Nono signale que la
+  V5 corrige justement ces entrées.
+- Catégories encore non traitées, inchangées depuis la suite 7 : régalia (Symbol of
+  Rank, Religious Relic, Chains/Rod/Seal of Office), `Quality X` (toujours en pause,
+  décision distincte du chantier trapping), PNJ/bâtiments/argent (hors périmètre,
+  tranché).
+
+---
+
+**14/09/2026 (suite 7) — AUDIT C, POINT 4 REPRIS : 59 OCCURRENCES RATTACHÉES EN 3 LOTS,
+PÉRIMÈTRE TRANCHÉ AVEC NONO, `trapping_unmatched.txt` À 287 OCC/246 NOMS (ÉTAIT 346/287).**
+Reprise du point 4 (~120 "vrais objets manquants" estimés en suite 5). `trapping_unmatched.txt`
+était périmé (regénéré : 393→346 occurrences avant de commencer, les rattachements des suites 5
+et 6 n'avaient pas été répercutés dans le fichier).
+
+**Périmètre tranché avec Nono avant de saisir quoi que ce soit** :
+1. PNJ/suivants (Apprentice, Servant, Patron, Regiment of Soldiers...), bâtiments/propriétés
+   (Warehouse, Temple, Workshop, Library (X)...) et argent en texte ("500 GC", "3d10
+   Shillings") **hors périmètre de `DATA_TRAPPING`** - ce ne sont pas des objets, laissés en
+   texte libre tels quels.
+2. Objets réels manquants : découpage par **thème**, pas par fréquence ni en un seul lot.
+3. Choix "X or Y" (Rapier or Silvered Sword, Coach or Riding Horse...) : **réutiliser le
+   séparateur `/` déjà en place** (même mécanisme que les choix de talent/compétence) plutôt
+   que de les laisser de côté - confirmé que `GetListeEquipement`
+   (`chargemetierequipement.pas:48`) et `wincreation.pas` (l.2413-2418, `ConstArbreAuchoix`)
+   savent déjà résoudre un choix d'équipement séparé par `/` en liste à sélectionner : aucun
+   code à écrire, uniquement de la donnée, dès que les deux branches ont un code catalogue.
+
+**Découverte en repérant les thèmes : la plupart des "objets manquants" ne le sont pas -
+ils existent déjà au catalogue sous un intitulé légèrement différent** (même motif que
+Hand Weapon (X) le 14/09, suite 4). Exemple qui a changé le diagnostic : "Rope" (carrière)
+vs `RULES-TRAP_29` "Rope, 10 yards" (catalogue) - même objet, juste le nom du catalogue est
+plus précis. Situation logique : les 12 tables de la Consumer Guide (suite 2) donnent le nom
+*officiel de vente*, les tables de carrière donnent un nom *narratif* du même objet. Réduit
+d'autant le nombre de vraies nouvelles entrées à créer.
+
+**3 lots saisis dans `BOOK_RULESBOOK.Xml`, compilés (`lazbuild --build-all`, 0 erreur à
+chaque lot) et `WarhammerHelp.exe` relancé stable à chaque lot - pas encore testé
+visuellement par Nono :**
+- **Lot 1 (41 occurrences, renommage simple vers un code déjà catalogué)** : Rope→`_29`,
+  Bandages→`_02` (Bandage), Musical Instrument→`_18` (Instrument), Spyglass→`_119`
+  (Telescope), Rowboat→`_152` (Row Boat), Lockpick→`_101` (Lockpicks), Shovel→`_115` (Spade),
+  Keys→`_099` (Key), Large Sack→`_041` (Sack, Large), Small Tent→`_30` (Tent),
+  Tarpaulin/Canvas Tarpaulin→`_07` (Canvas Tarp), Keg of Ale→`_070` (Ale, keg), Dose of
+  Weirdroot→`_165` (Weirdroot), Maps/Selection of Maps/Crude Map→`_133` (Map), Small Animal
+  Traps/Selection of Animal Traps/Eel Trap→`_082` (Animal Trap), Warm Coat→`_050` (Coat),
+  Tattoos→`_066` (Tattoo), Pile of Leaflets→`_131` (Leaflet), Magic Licence→`_130` (Guild
+  Licence), Pole/Pole for Dead Rats→`_109` (Pole, 3 yards).
+  - **Un piège écarté avant saisie** : `<Item name="Staff">"3"</Item>` (Merchant, l.6012)
+    ressemblait à "Walking Cane" au premier coup d'œil, mais son contexte (`Lodgings`,
+    `Modest Shop`, `Inn or Townhouse`, `Chains of Office`, `Coach and Footman` autour) montre
+    que c'est du **personnel** (staff = employés), pas une canne - exclu du lot, laissé en
+    texte libre (catégorie 1 ci-dessus). Vérifier le contexte de chaque nom avant rattachement
+    reste la règle, pas une formalité : un même mot anglais change de sens selon la carrière.
+- **Lot 2 (7 occurrences, mécanisme `+`/`/`)** : Lantern and Pole→`_20+_109`, Lantern and
+  Oil→`_20+_19`, Hammer and Nails→`_096+_105`, Hammer and Spikes→`_096+_116`, Grappling Hook
+  and Rope→`_17+_29` (ensemble) ; Deck of Cards or Dice→`_11/_14`, Coach or Riding Horse→
+  `_139/_150` (choix `/`, premier test du point 3 ci-dessus - pas encore vérifié en jeu que le
+  double-clic "au choix" s'affiche bien pour un item Divers, seulement pour Arme/Armure
+  jusqu'ici).
+- **Lot 3 (11 occurrences)** : Magnifying Glass→`_112` (Reading Lens), Leather Gloves→`_054`
+  (Gloves), Selection of Amulets→`_046` (Amulet), Cheap Jewellery→`_058` (Jewellery), Storm
+  Lantern **with** Oil→`_21+_19` (variante orthographique de "and" oubliée par la migration
+  ensemble de la suite 6, même paire), Draught Horse and Cart→`_143+_137` (ensemble), Flask of
+  Spirits→`_036+_077` (ensemble) ; **4 Pairs of Manacles→`_102` avec `quantite="4"`** (le
+  mécanisme quantité de la suite 3 réutilisé, pas un ensemble - 4 unités du même objet, pas
+  deux objets différents).
+
+**`trapping_unmatched.txt` régénéré après chaque lot** : 346→298 (lots 1+2)→287 occurrences ;
+287→246 noms distincts. Fichier à jour à la fin de cette suite.
+
+**Lots 1-3 testés visuellement par Nono ("tout est bon")** : choix `/` sur un item Divers
+(Noble/Coach or Riding Horse, Mystic/Deck of Cards or Dice - premier usage de ce mécanisme
+hors Arme/Armure, OK) ; ensembles `+` (Watchman/Lantern and Pole, Guard/Storm Lantern with
+Oil, Wrecker/Grappling Hook and Rope, Bounty Hunter/Draught Horse and Cart) ; quantité
+(Bounty Hunter/Manacles x4) ; renommages simples (Rope/Bandages/Spyglass). Aucune correction
+nécessaire.
+
+**Lot 4 (14 occurrences, rattachements ambigus, choix faits avec vérification du contexte
+de carrière avant chaque décision) :**
+- **Livery (4 occ) → `RULES-TRAP_067` (Uniform)**, pas Costume : les 4 occurrences sont
+  toutes dans des carrières de domestiques/valets (contexte : `Aide`, `Servant`, `Quality
+  Courtly Garb` autour) - Costume est pour les artistes/comédiens, pas la tenue d'un
+  employé de maison.
+- **Fine Clothes (1 occ, carrière Butler-like avec `Quality Livery`/`Servant`) →
+  `RULES-TRAP_049` (Clothing)** plutôt que Courtly Garb - "fine" pour un domestique haut
+  placé reste en deçà de la tenue de cour d'un noble.
+- **Hooded Cloak → `_048` (Cloak)**, Dark Clothing → `_049` (Clothing), Handcart → `_137`
+  (Cart) : perte de la nuance descriptive, même principe que les lots précédents.
+- **Sturdy Boots and Cloak (2 occ) → ensemble `_047+_048`** (Boots+Cloak).
+- **Alcohol (1 occ, carrière académique avec `Book`/`Access to a Library`/`Degree`) →
+  `_077` (Spirits, pint)** : consommation générique, pas un contenant précis.
+- **Forged Document/Multiple Forged Documents → `_132` (Legal Document) ; Forged Seal →
+  `_117` (Stamp, engraved)** - **nuance perdue à surveiller** : le catalogue n'a aucune
+  entrée "faux document/faux sceau", contrairement aux autres pertes de nuance ci-dessus
+  celle-ci change le sens (légitime vs contrefait). Carrière concernée : celle qui rattache
+  aussi `Network of Informers`/`2 Sets of Quality Clothing` (con-artist/agitateur).
+- **Rapier or Silvered Sword — PAS rattaché.** Aucune entrée "argenté" n'existe dans tout
+  `BOOK_RULESBOOK.Xml` (vérifié : le seul autre "Silver" du fichier est "Asur Silver Helms",
+  un nom propre elfique sans rapport) - contrairement aux autres choix `X or Y`, une des deux
+  branches n'a tout simplement pas de code catalogue. Reclassé dans "genuinely absents"
+  ci-dessous plutôt que dans les choix ambigus : ce n'est pas un choix de synonyme, c'est une
+  entrée manquante.
+- Compilé (`lazbuild --build-all`, 0 erreur), `WarhammerHelp.exe` relancé stable - **pas
+  encore testé visuellement par Nono** (demandé après ce lot).
+- `trapping_unmatched.txt` régénéré : 287 → 273 occurrences, 246 → 236 noms distincts.
+
+**Reste, catégorisé pour la suite (pas encore commencé)** :
+- **Familles à statut social/regalia, pas franchement des objets** : Symbol of Rank (4 occ),
+  Religious Relic (4 occ), Chains of Office, Rod of Office, Copper Badge, Seal of Office -
+  aucun équivalent catalogue, probablement de nouvelles entrées si Nono les juge utiles, sinon
+  à laisser en texte libre comme la catégorie PNJ/bâtiments.
+- **Groupes de talents figés `Quality X` (paused, cf. suite 4)** : Quality Clothing (7),
+  Quality Courtly Garb (3), Quality Robes (2), et une dizaine d'occurrences isolées - toujours
+  en attente que Nono tranche le mécanisme `(Q)` côté personnage avant d'y toucher.
+- **Objets ambigus au catalogue lui-même, déjà signalés le 14/09 (suite 4)** : Net, Pick,
+  Buckler, Plate Armour, Barding, Rune Axe - inchangé.
+- **Genuinely absents, nécessitant un prix/Enc/Dispo à sourcer dans le livre** (ne sont dans
+  aucune des 12 tables de la Consumer Guide déjà saisies) : Symbol of Rank, Religious Relic,
+  Sextant, Shipping Charts, Basket, Whistle, Garotte, Sash, Mortarboard, Printing Press,
+  Colourful Mixtures, **Rapier or Silvered Sword (le "Silvered Sword")** - liste non
+  exhaustive, à confirmer en repassant `trapping_unmatched.txt` entier.
+- **PNJ/bâtiments/argent en texte** : hors périmètre, tranché en suite 7 - ne plus les
+  compter dans "l'audit C restant".
+
+**Point de reprise** : faire tester le Lot 4 par Nono (Livery/Fine Clothes/Handcart en
+particulier, plus discutable que Rope/Bandages), puis décider avec lui pour les familles
+regalia/objets "genuinely absents" (nouvelles entrées `DATA_TRAPPING`, nécessite de rouvrir
+le Rulebook pour un prix - pas seulement une donnée déjà en base) et pour Forged Document/
+Seal (accepter la perte de nuance "faux", ou créer une entrée dédiée ?).
+
+---
+
 **14/09/2026 (suite 6) — MÉCANISME "ENSEMBLE" (`+`) POUR L'ÉQUIPEMENT DE CARRIÈRE COMPOSÉ,
 DOUTE DE LA SUITE 5 SUR `STORM LANTERN AND OIL` RÉSOLU.**
 Nono a lu la règle d'avancement V5 et identifié que le point 3 de la suite 5 (scinder chaque

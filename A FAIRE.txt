@@ -25,6 +25,33 @@ BOOK_RULESBOOK.Xml V5) n'ont pas de balise <Type>, contrairement aux pieces Leat
 Plate - le livre les liste sous "SHIELDS" sans preciser de materiau. A trancher avec Nono
 (bois ? bois cercle de metal ? un RULES-ARMOT_* dedie ?) avant d'ajouter la balise.
 
+LE CHOIX D'EQUIPEMENT "/" NE PORTE QU'UNE SEULE QUANTITE POUR TOUT L'ITEM, PAS UNE PAR
+BRANCHE. Vu le 14/09/2026 en reprenant l'audit C (CONTEXT.md suite 8). "2 Bolas or Crossbow
+with 10 Bolts or Lasso" et "Crossbow with 10 Bolts or Pistol with 10 Shots or 5 Throwing
+Knives" (BOOK_RULESBOOK.Xml V5) ont une quantite differente selon la branche choisie ;
+GetListeEquipement (chargemetierequipement.pas:48) ne porte qu'un seul attribut quantite
+pour tout l'<Item>. Resoudre proprement demande d'etendre le mecanisme, pas juste saisir de
+la donnee - laisse en texte libre en attendant.
+
+AUCUNE ENTREE GENERIQUE "GREAT WEAPON (ANY)" AU CATALOGUE V5, CONTRAIREMENT A "HAND WEAPON".
+Confirme le 14/09/2026 (CONTEXT.md suite 8, deja releve en suite 4). "Great Weapon or
+Halberd" et "Flail or Great Weapon" (BOOK_RULESBOOK.Xml) restent non rattaches : un des deux
+membres du choix n'a simplement pas de code. A creer si Nono le juge utile.
+
+AUCUNE ENTREE "SILVERED SWORD" NULLE PART DANS BOOK_RULESBOOK.Xml. Vu le 14/09/2026
+(CONTEXT.md suite 8) sur "Rapier or Silvered Sword" (Witch Hunter). Une arme argentee est
+probablement une regle d'artisanat/materiau special, pas un achat catalogue standard - a
+statuer avec Nono avant de creer une entree.
+
+PLUSIEURS NOMS ANGLAIS DE CARRIERE DESIGNENT DEUX OBJETS CATALOGUE DIFFERENTS SELON LE
+CONTEXTE. Releve le 14/09/2026 en rattachant l'audit C (CONTEXT.md suite 8) : "Net" existe
+en arme de melee (RULES-COMB_BASE_05) ET en filet lance (RULES-PROJ_ENTRAV_03) ; "Buckler"
+existe en arme d'escrime (RULES-COMB_ESCR_01) ET en petit bouclier (RULES-ARMO_01) ; "Pick"
+existe en pic de guerre 2 mains (RULES-COMB_2M_03) ET en outil de fouille (RULES-TRAP_108).
+Toujours verifier le contexte de la carriere (equipement voisin) avant de rattacher
+automatiquement un nom deja vu ailleurs - ne pas supposer qu'un meme mot anglais designe le
+meme code partout.
+
 LES 30 METIERS NATIO-WORK001 A 030 (NATIONS OF MANKIND) NE SONT LIES A AUCUNE RACE. Vu par
 Nono le 13/09/2026 en testant WinLivre. Cause : le lien metier->races se construit en lisant
 le SUBCHAPTER_CAREER de CHAQUE race (winlivre.pas, ConstruireMetierRacesMap l.1320), pas
