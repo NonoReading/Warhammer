@@ -31,16 +31,47 @@ ex. Riding Horse, Mule and Cart, relevé dans l'audit C plus haut).
     nul sur les 3 traitées).
   - Clothing and Accessories (23 items, `RULES-TRAP_046` à `_068`).
   - Food, Drink, and Lodging (12 items, `RULES-TRAP_069` à `_080`).
-- **Reste à faire, dans l'ordre du livre, prochain code libre `RULES-TRAP_081`** :
-  - Tools and Kits (~35 items, p.310) - la plus grosse table restante.
-  - Books and Documents (~11 items, p.311).
-  - Trade Tools and Workshops (2 items : Trade Tools, Workshop - `Workshop` a un Enc "n/a",
-    même traitement que les chambres ci-dessus, à 0).
-  - Animals and Vehicles (~19 items, p.312) - **a du `Carries` non nul**, comme Packs and
-    Containers.
-  - Poisons (~10 items, p.313).
-  - Herbs and Remedies (~9 items, p.314).
-  - Prosthetics (6 items, p.315).
+  - Tools and Kits (41 items, `RULES-TRAP_081` à `_121`, pas de `Carries` sur cette table -
+    colonnes du livre : Item/Cost/Enc/Availability seulement). Source : extraction texte déjà
+    en cache `LIVRES\WFRP5_Core_Rulebook_01_09_26.txt` (pas de PDF à re-rendre), table repérée
+    autour de la ligne 17905. Vérifié : aucune collision de nom avec les entrées déjà en base
+    dans `DATA_TRAPPING` (dont `Knife`, homonyme d'une arme du catalogue `DATA_WEAPON` - autre
+    catalogue, pas un conflit). Diff vérifié avant écriture : que des ajouts (246 lignes),
+    rien retiré.
+  - Books and Documents (13 items, `RULES-TRAP_122` à `_134`, pas de `Carries`). **Cas
+    particulier `Guild Licence`** : le livre donne "n/a" en Cost ET en Availability (objet
+    non acheté, remis par la guilde) - un cas jamais rencontré avant sur ces deux champs.
+    Résolu en étendant la convention déjà en place pour un `Prix` non numérique (`Varies`) :
+    `Prix := "n/a"` et `Disponibilite := "n/a"` en texte brut plutôt qu'une constante
+    `RULES-DISPO_*`. Vérifié dans `chargetexte.pas` (`ReplaceTexteLibelle`) que ce champ
+    accepte du texte libre sans y correspondre à un label - la valeur s'affiche telle quelle,
+    aucun risque de plantage ni de code brut illisible. Pas de nouvelle constante
+    `RULES-DISPO_NA` créée (aucun précédent, aurait été une invention non demandée à Nono).
+  - Trade Tools and Workshops (2 items, `RULES-TRAP_135` et `_136`) : Trade Tools (3CO, Enc 1,
+    Scarce), Workshop (80CO, Enc "n/a" dans le livre → saisi à 0, même traitement que les
+    chambres plus haut, Rare).
+  - Animals and Vehicles (19 items, `RULES-TRAP_137` à `_155`). Table à 5 colonnes (Item,
+    Cost, Enc, Carries, Availability) - 2e table avec `Carries` après Packs and Containers.
+    **Règle appliquée pour les tirets `–` du livre** (16 sur les 19 lignes, sur Enc et/ou
+    Carries) : sur Enc, même traitement forcé qu'ailleurs (`–` → 0, le champ est un Integer
+    toujours renseigné). Sur Carries en revanche, le tag XML est optionnel (`Capacite` remis
+    à 0 par défaut avant chaque entrée, cf. schéma) : un `–` du livre (Dog Collar, Saddle and
+    Harness, Worms) signifie que la notion ne s'applique pas à l'objet, distinct d'un `0`
+    explicite (Chicken, Homing Pigeon, Hunting Dog) qui EST une donnée du livre - donc balise
+    `<Carries>` omise dans le premier cas, posée à `"0"` dans le second, résultat identique en
+    mémoire (0) mais fidélité à ce que le livre affirme vraiment. Diff vérifié : que des
+    ajouts (466 lignes), rien retiré. `WarhammerHelp.exe` stable.
+  - Poisons (10 items, `RULES-TRAP_156` à `_165`, pas de `Carries`, Enc uniformément 0).
+    Apostrophe de `Daemon's tand` saisie droite (`'`), pas la courbe (`'`) de l'extraction PDF
+    - convention déjà en place ailleurs dans le fichier (`Hunter's Eye`, `Ship's Master`...).
+    Diff vérifié : que des ajouts (60 lignes), rien retiré. `WarhammerHelp.exe` stable.
+  - Herbs and Remedies (9 items, `RULES-TRAP_166` à `_174`, pas de `Carries`, Enc uniformément
+    0). Diff vérifié : que des ajouts (54 lignes), rien retiré. `WarhammerHelp.exe` stable.
+  - Prosthetics (6 items, `RULES-TRAP_175` à `_180`). Nom repris de l'en-tête de tableau
+    (`Eyepatch`, un mot) plutôt que du texte descriptif juste en dessous (`Eye Patch`, deux
+    mots) - même règle que pour toutes les tables précédentes (nom = colonne Item). Diff
+    vérifié : que des ajouts (36 lignes), rien retiré. `WarhammerHelp.exe` stable.
+- **Reste à faire, dans l'ordre du livre, prochain code libre `RULES-TRAP_181`** :
   - Magical Items (4 items, p.315).
 - **Après la saisie complète** : reprendre l'audit C (rattachement des 666 `<Item>` de
   carrière aux codes catalogue) avec les ~140 nouvelles entrées disponibles, puis Phase B

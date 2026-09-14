@@ -4204,3 +4204,34 @@ cours, Nono a demande si mieux vaut continuer ou repartir sur une conversation n
 oui, propose de repartir a neuf avec CONTEXT.md a jour. Pas de commit demande pour l'instant.
 Fichiers modifies : wincreation.pas, winpersonnage.pas, winmetier.pas, chargepersonnage.pas,
 chargeconstantes.pas, CONTEXT.md, Log.txt.
+
+14/09/2026 - CHANTIER TRAPPINGS : CHAMP CARRIES AJOUTE AU SCHEMA, 10 TABLES DE LA CONSUMER
+GUIDE V5 SAISIES (148 ENTREES, RULES-TRAP_033 A _180). Suite du plan en 9 phases (CONTEXT.md
+2.77). Schema : champ Capacite: Integer ajoute a StructureTrapping (chargetrapping.pas),
+constante ConstXmlCapacite='Carries' (chargeconstantes.pas), lu dans xmlexportimport.pas avec
+remise a zero explicite en tete de boucle (le tag n'existe que sur 2 des 12 tables, sans ce
+reset une entree sans tag aurait herite de la valeur de l'entree precedente). Libelle
+RULES-LAB_185 Carries/Capacite (FR+EN). Convention de saisie : prix convertis au format du
+catalogue (d=pence, X/-=shillings, XCO=Gold Crowns au lieu de "X GC"), Carries omis sauf
+donnee explicite du livre (y compris 0), Enc "-" du livre saisi a 0 (le champ est un Integer
+toujours renseigne). Tables saisies dans l'ordre du livre : Packs and Containers (13),
+Clothing and Accessories (23), Food/Drink/Lodging (12), Tools and Kits (41), Books and
+Documents (13, cas particulier Guild Licence avec Cost ET Availability "n/a" dans le livre -
+resolu en texte brut sur les deux champs, verifie que ReplaceTexteLibelle accepte du texte
+libre sans plantage plutot que d'inventer une constante RULES-DISPO_NA), Trade Tools and
+Workshops (2), Animals and Vehicles (19, deuxieme table avec Carries - tirets du livre traites
+differemment selon le champ : Enc "-" force a 0 comme ailleurs, mais Carries "-" fait omettre
+la balise alors qu'un 0 explicite du livre pose la balise a "0", meme valeur en memoire mais
+fidelite a ce que le livre affirme), Poisons (10), Herbs and Remedies (9), Prosthetics (6, nom
+repris de l'en-tete de tableau "Eyepatch" plutot que du texte descriptif "Eye Patch"). Source
+des tables : cache texte LIVRES\WFRP5_Core_Rulebook_01_09_26.txt (pdftoppm absent du poste,
+pas de rendu PDF page par page necessaire). A chaque table : diff verifie avant ecriture
+(uniquement des ajouts, rien retire), verification de collision de nom dans DATA_TRAPPING,
+WarhammerHelp.exe lance et reste stable. Reste dans DATA_TRAPPING : Magical Items (4 items,
+p.315, prochain code libre RULES-TRAP_181) puis Miscellaneous Trappings deja en base (32
+entrees, chantier clos pour cette table). Apres la saisie complete : reprendre l'audit C
+(rattachement des 666 Item de carriere aux codes catalogue, ~148 nouvelles entrees
+disponibles) puis Phase B (fenetre WinEquipement, calque WinArmor.pas). CONTEXT.md a jour,
+point de reprise precis en tete de section 2.77. Fichiers modifies dans ce commit :
+DATABASE/WFRP5/BOOK_RULESBOOK.Xml, CONTEXT.md, Log.txt (le schema Pascal listait plus haut
+avait deja ete commit avec les 3 premieres tables).
