@@ -6,7 +6,7 @@ interface
 
 uses
   Classes, SysUtils, Forms, Controls, StdCtrls, ComCtrls, ExtCtrls, Menus,
-  Dialogs, Graphics, BCButton, ChargeConstantes, ChargeTexte, ChargeCompetence, ChargeTalent, ChargeMetier, ChargeLivre, ChargeArme, ChargeArmure, ChargeRace, UnitCalcul, Grids,
+  Dialogs, Graphics, BCButton, ChargeConstantes, ChargeTexte, ChargeCompetence, ChargeTalent, ChargeMetier, ChargeLivre, ChargeArme, ChargeArmure, ChargeTrapping, ChargeRace, UnitCalcul, Grids,
   Generics.Collections, DOM, XMLRead, XMLWrite, FGL, GlobalFonts;
 
 type
@@ -1158,6 +1158,7 @@ var
   CodeItem, Qualite: String;
   Arme: StructureArme;
   Armure: StructureArmure;
+  Trapping: StructureTrapping;
 begin
   Result    := '';
   TypeEquip := 'D';
@@ -1193,6 +1194,16 @@ begin
     Armure := ChercheArmure(CodeItem);
     if Armure.CodeArmure <> '' then
       Result := Armure.Libelle + Qualite
+    else
+      Result := CodeItem + Qualite;  // fallback
+  end
+  else if Pos(EquipementTR, CodeItem) > 0 then
+  begin
+    // Trapping (équipement divers du catalogue DATA_TRAPPING)
+    TypeEquip := 'T';
+    Trapping := ChercheTrapping(CodeItem);
+    if Trapping.CodeTrapping <> '' then
+      Result := Trapping.Libelle + Qualite
     else
       Result := CodeItem + Qualite;  // fallback
   end

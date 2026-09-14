@@ -12106,7 +12106,7 @@ Playing a Smuggler lets you stay one step ahead of the law. You are resourceful,
 <Item name="Large Sack">"1"</Item>
 <Item name="Mask or Scarves">"1"</Item>
 <Item name="Storm Lantern and Oil">"1"</Item>
-<Item name="Tinderbox">"1"</Item>
+<Item name="RULES-TRAP_31">"1"</Item>
 <Item name="2 Barrels">"2"</Item>
 <Item name="Hand Weapon">"2"</Item>
 <Item name="Rowboat">"2"</Item>
@@ -13420,6 +13420,200 @@ Playing a Wrecker means you are adept at ambushes, stealth, and intimidation, wi
 <Type>"RULES-ARMOT_PLATE"</Type>
 </Armor>
 </DATA_ARMOR>
+<DATA_TRAPPING>
+<Trapping id="RULES-TRAP_01">
+<Description language="ENGLISH">"Ball"</Description>
+<Availability>"RULES-DISPO_COMMON"</Availability>
+<Price>"5d"</Price>
+<Encumbrance>"0"</Encumbrance>
+</Trapping>
+<Trapping id="RULES-TRAP_02">
+<Description language="ENGLISH">"Bandage"</Description>
+<Availability>"RULES-DISPO_COMMON"</Availability>
+<Price>"4d"</Price>
+<Encumbrance>"0"</Encumbrance>
+</Trapping>
+<Trapping id="RULES-TRAP_03">
+<Description language="ENGLISH">"Baton"</Description>
+<Availability>"RULES-DISPO_COMMON"</Availability>
+<Price>"1/-"</Price>
+<Encumbrance>"0"</Encumbrance>
+</Trapping>
+<Trapping id="RULES-TRAP_04">
+<Description language="ENGLISH">"Bedroll"</Description>
+<Availability>"RULES-DISPO_COMMON"</Availability>
+<Price>"6/-"</Price>
+<Encumbrance>"1"</Encumbrance>
+</Trapping>
+<Trapping id="RULES-TRAP_05">
+<Description language="ENGLISH">"Blanket"</Description>
+<Availability>"RULES-DISPO_COMMON"</Availability>
+<Price>"8d"</Price>
+<Encumbrance>"0"</Encumbrance>
+</Trapping>
+<Trapping id="RULES-TRAP_06">
+<Description language="ENGLISH">"Candle (dozen)"</Description>
+<Availability>"RULES-DISPO_COMMON"</Availability>
+<Price>"1/-"</Price>
+<Encumbrance>"0"</Encumbrance>
+</Trapping>
+<Trapping id="RULES-TRAP_07">
+<Description language="ENGLISH">"Canvas Tarp"</Description>
+<Availability>"RULES-DISPO_COMMON"</Availability>
+<Price>"8/-"</Price>
+<Encumbrance>"1"</Encumbrance>
+</Trapping>
+<Trapping id="RULES-TRAP_08">
+<Description language="ENGLISH">"Chalk"</Description>
+<Availability>"RULES-DISPO_COMMON"</Availability>
+<Price>"10d"</Price>
+<Encumbrance>"0"</Encumbrance>
+</Trapping>
+<Trapping id="RULES-TRAP_09">
+<Description language="ENGLISH">"Charcoal Stick"</Description>
+<Availability>"RULES-DISPO_COMMON"</Availability>
+<Price>"10d"</Price>
+<Encumbrance>"0"</Encumbrance>
+</Trapping>
+<Trapping id="RULES-TRAP_10">
+<Description language="ENGLISH">"Cutlery"</Description>
+<Availability>"RULES-DISPO_COMMON"</Availability>
+<Price>"3/6"</Price>
+<Encumbrance>"0"</Encumbrance>
+</Trapping>
+<Trapping id="RULES-TRAP_11">
+<Description language="ENGLISH">"Deck of Cards"</Description>
+<Availability>"RULES-DISPO_COMMON"</Availability>
+<Price>"1/-"</Price>
+<Encumbrance>"0"</Encumbrance>
+</Trapping>
+<Trapping id="RULES-TRAP_12">
+<Description language="ENGLISH">"Cooking Pot"</Description>
+<Availability>"RULES-DISPO_COMMON"</Availability>
+<Price>"8/-"</Price>
+<Encumbrance>"1"</Encumbrance>
+</Trapping>
+<Trapping id="RULES-TRAP_13">
+<Description language="ENGLISH">"Cup"</Description>
+<Availability>"RULES-DISPO_COMMON"</Availability>
+<Price>"8d"</Price>
+<Encumbrance>"0"</Encumbrance>
+</Trapping>
+<Trapping id="RULES-TRAP_14">
+<Description language="ENGLISH">"Dice"</Description>
+<Availability>"RULES-DISPO_COMMON"</Availability>
+<Price>"10d"</Price>
+<Encumbrance>"0"</Encumbrance>
+</Trapping>
+<Trapping id="RULES-TRAP_15">
+<Description language="ENGLISH">"Doll"</Description>
+<Availability>"RULES-DISPO_COMMON"</Availability>
+<Price>"2/-"</Price>
+<Encumbrance>"0"</Encumbrance>
+</Trapping>
+<Trapping id="RULES-TRAP_16">
+<Description language="ENGLISH">"Feinkopf Lamp"</Description>
+<Availability>"RULES-DISPO_RARE"</Availability>
+<Price>"2CO"</Price>
+<Encumbrance>"1"</Encumbrance>
+</Trapping>
+<Trapping id="RULES-TRAP_17">
+<Description language="ENGLISH">"Grappling Hook"</Description>
+<Availability>"RULES-DISPO_SCARCE"</Availability>
+<Price>"1CO"</Price>
+<Encumbrance>"1"</Encumbrance>
+</Trapping>
+<Trapping id="RULES-TRAP_18">
+<Description language="ENGLISH">"Instrument"</Description>
+<Availability>"RULES-DISPO_RARE"</Availability>
+<Price>"2CO"</Price>
+<Encumbrance>"1"</Encumbrance>
+</Trapping>
+<Trapping id="RULES-TRAP_19">
+<Description language="ENGLISH">"Lamp Oil"</Description>
+<Availability>"RULES-DISPO_COMMON"</Availability>
+<Price>"2/-"</Price>
+<Encumbrance>"0"</Encumbrance>
+</Trapping>
+<Trapping id="RULES-TRAP_20">
+<Description language="ENGLISH">"Lantern"</Description>
+<Availability>"RULES-DISPO_COMMON"</Availability>
+<Price>"12/-"</Price>
+<Encumbrance>"1"</Encumbrance>
+</Trapping>
+<Trapping id="RULES-TRAP_21">
+<Description language="ENGLISH">"Storm Lantern"</Description>
+<Availability>"RULES-DISPO_SCARCE"</Availability>
+<Price>"1CO"</Price>
+<Encumbrance>"1"</Encumbrance>
+</Trapping>
+<Trapping id="RULES-TRAP_22">
+<Description language="ENGLISH">"Match"</Description>
+<Availability>"RULES-DISPO_COMMON"</Availability>
+<Price>"1d"</Price>
+<Encumbrance>"0"</Encumbrance>
+</Trapping>
+<Trapping id="RULES-TRAP_23">
+<Description language="ENGLISH">"Pan"</Description>
+<Availability>"RULES-DISPO_COMMON"</Availability>
+<Price>"7/6"</Price>
+<Encumbrance>"1"</Encumbrance>
+</Trapping>
+<Trapping id="RULES-TRAP_24">
+<Description language="ENGLISH">"Pipe and Tobacco"</Description>
+<Availability>"RULES-DISPO_SCARCE"</Availability>
+<Price>"3/4"</Price>
+<Encumbrance>"0"</Encumbrance>
+</Trapping>
+<Trapping id="RULES-TRAP_25">
+<Description language="ENGLISH">"Placard"</Description>
+<Availability>"RULES-DISPO_COMMON"</Availability>
+<Price>"1/-"</Price>
+<Encumbrance>"2"</Encumbrance>
+</Trapping>
+<Trapping id="RULES-TRAP_26">
+<Description language="ENGLISH">"Plate"</Description>
+<Availability>"RULES-DISPO_COMMON"</Availability>
+<Price>"1/-"</Price>
+<Encumbrance>"0"</Encumbrance>
+</Trapping>
+<Trapping id="RULES-TRAP_27">
+<Description language="ENGLISH">"Bowl"</Description>
+<Availability>"RULES-DISPO_COMMON"</Availability>
+<Price>"1/-"</Price>
+<Encumbrance>"0"</Encumbrance>
+</Trapping>
+<Trapping id="RULES-TRAP_28">
+<Description language="ENGLISH">"Rags"</Description>
+<Availability>"RULES-DISPO_COMMON"</Availability>
+<Price>"1d"</Price>
+<Encumbrance>"0"</Encumbrance>
+</Trapping>
+<Trapping id="RULES-TRAP_29">
+<Description language="ENGLISH">"Rope, 10 yards"</Description>
+<Availability>"RULES-DISPO_COMMON"</Availability>
+<Price>"8/4"</Price>
+<Encumbrance>"1"</Encumbrance>
+</Trapping>
+<Trapping id="RULES-TRAP_30">
+<Description language="ENGLISH">"Tent"</Description>
+<Availability>"RULES-DISPO_SCARCE"</Availability>
+<Price>"3CO"</Price>
+<Encumbrance>"2"</Encumbrance>
+</Trapping>
+<Trapping id="RULES-TRAP_31">
+<Description language="ENGLISH">"Tinderbox"</Description>
+<Availability>"RULES-DISPO_COMMON"</Availability>
+<Price>"4/2"</Price>
+<Encumbrance>"0"</Encumbrance>
+</Trapping>
+<Trapping id="RULES-TRAP_32">
+<Description language="ENGLISH">"Torch (stick and rags)"</Description>
+<Availability>"RULES-DISPO_COMMON"</Availability>
+<Price>"2d"</Price>
+<Encumbrance>"1"</Encumbrance>
+</Trapping>
+</DATA_TRAPPING>
 <DATA_ARMOR_SIMP>
 <ArmorSimp id="RULES-ARMO_01_SIMP">
 <Description language="ENGLISH">"Light Armour"</Description>

@@ -4134,3 +4134,35 @@ Compile (lazbuild, 0 erreur). WarhammerHelp.exe lance et reste stable puis ferme
 visuellement par Nono ("parfait"). Chantier Sorts/Prieres V5 entierement clos, du premier
 morceau (Petty Spells) a celui-ci. Nono s'arrete la (commit).
 Fichiers modifies : DATABASE\WFRP5\BOOK_RULESBOOK.Xml, CONTEXT.md, Log.txt.
+14/09/2026 - CHANTIER TRAPPINGS (EQUIPEMENT) DU RULEBOOK V5 OUVERT (CONTEXT.md 2.77). Nono
+signale qu'en V5 les Trappings ne sont plus decoratifs comme en V4 : ils font partie du
+Career Advancement Tracker (page 43) et conditionnent le Statut de carriere - pas juste du
+flavor text. Cree DATA_TRAPPING (32 entrees, catalogue "Miscellaneous Trappings" p.316,
+Description/Availability/Price/Encumbrance comme DATA_ARMOR). Cable a l'identique de
+l'Armure dans tout le pipeline (nouvelle unite chargetrapping.pas, constantes dans
+chargeconstantes.pas, listes dans warhammersource.pas, import ET export dans
+xmlexportimport.pas, dispatcheur de traduction dans chargetraduction.pas, resolution du
+prefixe RULES-TRAP_ dans winlivre.pas) - infrastructure inexistante avant aujourd'hui,
+contrairement aux Sorts/Talents. Pas de fenetre WinTrapping dediee (decision de Nono,
+juste la resolution dans l'arbre des metiers). Un item relie en test (Smuggler niveau 3,
+Tinderbox -> RULES-TRAP_31), WarhammerHelp.exe lance sur WFRP5 et reste stable, remis sur
+WFRP4 apres coup - pas encore verifie visuellement par Nono. Gap identifie : les 666 Item
+des 64 metiers V5 sont deja peuples (13/09) mais tous en texte libre, aucun ne reference le
+nouveau catalogue ni DATA_WEAPON/DATA_ARMOR (contrairement a la V4 qui relie deja 180 de
+ses 762 Item a des RULES-ARMO_*). Au moins 17 correspondances exactes trouvees avec
+DATA_TRAPPING, chantier de rattachement metier par metier a faire, gros morceau a
+fractionner. Doute releve sur le prix du Grappling Hook (extraction PDF ambigue, garde
+1CO sans le "-/10" en trop). Compile (lazbuild, 0 erreur).
+Fichiers modifies : DATABASE\WFRP5\BOOK_RULESBOOK.Xml, chargetrapping.pas (nouveau),
+chargeconstantes.pas, warhammersource.pas, xmlexportimport.pas, chargetraduction.pas,
+winlivre.pas, CONTEXT.md, Log.txt.
+14/09/2026 - PIVOT SUR LE CHANTIER TRAPPINGS : NONO SIGNALE QUE LE PRIX/ENCOMBREMENT AURA
+UN VRAI IMPACT SUR LE PERSONNAGE (CONTEXT.md 2.77, "Decision a prendre en priorite").
+Verifie dans la foulee : le code Divers d'un personnage (TypeEquipDI) n'est jamais
+resolu contre un catalogue (winpersonnage.pas Lib := Code) et le calcul du total
+d'encombrement (pdfpersonnage.pas, PdfBlocEncombrement) ignore le Divers - sans brancher
+DATA_TRAPPING jusqu'au personnage, Prix/Encombrement resteront decoratifs. Nono pense
+qu'un WinTrapping sera necessaire, mais session arretee avant de trancher le perimetre
+exact (catalogue seul ou branchement complet jusqu'a la fiche personnage). A reprendre en
+premier la prochaine session, question ouverte notee dans CONTEXT.md. Nono s'arrete la
+(quota ~98%), pas de commit demande.

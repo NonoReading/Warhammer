@@ -97,6 +97,7 @@ Const
       ConstXmlDataArmor                 = 'DATA_ARMOR';
       ConstXmlDataArmorSimplified       = 'DATA_ARMOR_SIMP';
       ConstXmlDataArmorBonus            = 'DATA_ARMOR_BONUS';
+      ConstXmlDataTrapping              = 'DATA_TRAPPING';
       ConstXmlDataSpell                 = 'DATA_SPELL';
       ConstXmlDataSpellTalent           = 'DATA_SPELL_TALENT';
       // Les "Trait (Any)" des ethnies (Provincial / Dukedom / City State / Clan /
@@ -223,6 +224,7 @@ Const
       ConstXmlMunition                  = 'Ammunition';
       ConstXmlArmure                    = 'Armor';
       ConstXmlArmureSimplifiee          = 'ArmorSimp';
+      ConstXmlTrapping                  = 'Trapping';
       ConstXmlEmplacement               = 'Location';
       ConstXmlProtection                = 'ArmorPoint';
       ConstXmlType                      = 'Type';
@@ -497,6 +499,7 @@ Const
       EquipementCT                      = 'PROJ_';
       EquipementMU                      = 'MUNI_';
       EquipementAR                      = 'ARMO_';
+      EquipementTR                      = 'TRAP_';
       EquipementQualite                 = '(Q)';
       BonusProtection                   = 'WEAPB18 ';
       BonusBras                         = 'RULES-ARMOL_ARM';
@@ -587,6 +590,7 @@ Const
       ConstPArmeBonus                       = 'PArmeBonus';
       ConstPArmure                          = 'PArmure';
       ConstPArmureSimplifiee                = 'PArmureSimplifiee';
+      ConstPTrapping                        = 'PTrapping';
       ConstPArmureBonus                     = 'PArmureBonus';
       ConstPSort                            = 'PSort';
       ConstPFabrication                     = 'PFabrication';

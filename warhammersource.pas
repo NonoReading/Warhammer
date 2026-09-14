@@ -15,7 +15,7 @@ uses
   ChargeRaceTalent, GlobalFonts, WinCreation, ChargeTalentCreation,
   WinPersonnage, ChargeAttributAugmentation, ChargeCompetenceAugmentation,
   ChargeArme, WinWeapon, ChargeArmeBonus, ChargeMetierEquipement, ChargeArmure,
-  ChargeArmureBonus, ChargeArmureBonusTalent, WinArmor, ChargeSort, WinSpell, ChargeTexte,
+  ChargeArmureBonus, ChargeArmureBonusTalent, WinArmor, ChargeTrapping, ChargeSort, WinSpell, ChargeTexte,
   ChargeFabrication, Unitcalcul, ChargeMetierSousMetier,
   ChargeMetierRaceChoixMetier, ChargePersonnage, ChargeRaceCreation,
   ChargeTraduction, ChargeArmureSimplifie, ChargeLivre,
@@ -1099,6 +1099,7 @@ procedure TMenu.ChargerLivre(ForceMaJ: Boolean; ForceLivre: String);
         ListTalentCreation.Clear;
         ListArme.Clear;
         ListArmure.Clear;
+        ListTrapping.Clear;
         // Oubliées jusqu'au 21/08/2026 : toutes deux remplies par XmlImport comme leurs
         // voisines, mais jamais vidées ici - chaque rechargement (changement de livre actif
         // ou de langue) rajoutait donc leur contenu par-dessus l'ancien. Visible sur le PDF
@@ -1327,6 +1328,7 @@ procedure TMenu.FormCreate(Sender: TObject);
        ListArme                     := TListArme.Create;
        ListArmeModificateur         := TListModificateur.Create;
        ListArmure                   := TListArmure.Create;
+       ListTrapping                 := TListTrapping.Create;
        ListArmureSimplifiee         := TListArmureSimplifiee.Create;
        ListArmeBonus                := TListArmeBonus.Create;
        ListMetierEquipement         := TListMetierEquipement.Create;

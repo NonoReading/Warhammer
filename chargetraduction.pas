@@ -7,7 +7,7 @@ interface
 uses
   Classes, SysUtils, ChargeConstantes, Generics.Collections, LazUTF8,
   ChargeAttribut, ChargeTexte, ChargeCompetence, ChargeTalent, ChargeRace, ChargeEspece, ChargeRegle,
-  ChargeMetier, ChargeArme, ChargeArmeBonus, ChargeArmure, ChargeArmureBonus,
+  ChargeMetier, ChargeArme, ChargeArmeBonus, ChargeArmure, ChargeTrapping, ChargeArmureBonus,
   ChargeSort, ChargeFabrication, ChargeCorruptionTable, UnitCalcul;
 
 Type
@@ -97,6 +97,7 @@ Procedure Traduit(Langue: String; Livre: String);
     PArme:        StructureArme;
     PArmeBonus:   StructureArmeBonus;
     PArmure:      StructureArmure;
+    PTrapping:    StructureTrapping;
     PArmureBonus: StructureArmureBonus;
     PSort:        StructureSort;
     PFabrication: StructureFabrication;
@@ -210,6 +211,14 @@ Procedure Traduit(Langue: String; Livre: String);
                       PArmure             := ListArmure[Ind];
                       PArmure.Libelle     := PTraduction.Libelle;
                       ListArmure[Ind]     := PArmure;
+                    end;
+              ConstPTrapping:
+                for Ind :=0 to ListTrapping.Count - 1 do
+                  if CompareRechercheValeur(PTraduction.Code, ListTrapping[Ind].CodeTrapping) then
+                    begin
+                      PTrapping             := ListTrapping[Ind];
+                      PTrapping.Libelle     := PTraduction.Libelle;
+                      ListTrapping[Ind]     := PTrapping;
                     end;
               ConstPArmureBonus:
                 for Ind :=0 to ListArmureBonus.Count - 1 do

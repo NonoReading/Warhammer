@@ -10,7 +10,7 @@ uses
   ChargeEspece, ChargeNation, ChargeRegle,
   ChargeRaceAttribut, ChargeRaceCompetence, ChargeRaceTalent, ChargeRaceMetier,
   ChargeMetier, ChargeMetierAttribut, ChargeMetierCompetence, ChargeMetierTalent,
-  ChargeMetierEquipement, chargeMetierNiveau, ChargeArme, ChargeArmure,
+  ChargeMetierEquipement, chargeMetierNiveau, ChargeArme, ChargeArmure, ChargeTrapping,
   ChargeTalentCreation, ChargeRaceCreation, ChargeArmeBonus, ChargeArmureBonus,
   ChargeFabrication, ChargeSort, ChargeMetierRaceChoixMetier, ChargeAttribut,
   ChargeAttributAugmentation, ChargeCompetenceAugmentation, ChargeTexte,
@@ -187,6 +187,7 @@ Procedure XmlExportBook(Livre: String; Langue: String);
     PArme:                    StructureArme;
     PArmeBonus:               StructureArmeBonus;
     PArmure:                  StructureArmure;
+    PTrapping:                StructureTrapping;
     PArmureBonus:             StructureArmureBonus;
     PFabrication:             StructureFabrication;
     PMetierRaceChoixMetier:   StructureMetierRaceChoixMetier;
@@ -790,6 +791,27 @@ Procedure XmlExportBook(Livre: String; Langue: String);
         if Fist = false then
            XmlContent.Add(XmlFin(ConstXmlDataArmor));
 
+        // Trapping (equipement divers, hors armes/armures)
+        Fist := true;
+        for PTrapping in ListTrapping do
+          if (PTrapping.Livre = Livre) then
+            begin
+              if Fist = true then
+                begin
+                  XmlContent.Add(XmlDebut(ConstXmlDataTrapping));
+                  Fist := false;
+                end;
+              XmlContent.Add(XmlDebutCode(ConstXmlTrapping, XmlCreeCodeLivre(PTrapping.Livre, PTrapping.CodeTrapping)));
+              XmlContent.Add(XmlLigneLangue(ConstXmlDescription, Langue, PTrapping.Libelle));
+              XmlContent.Add(XmlLigne(ConstXmlDisponibilite, PTrapping.Disponibilite));
+              XmlContent.Add(XmlLigne(ConstXmlPrix, PTrapping.Prix));
+              XmlContent.Add(XmlLigne(ConstXmlEncombrement, IntToStr(PTrapping.Encombrement)));
+
+              XmlContent.Add(XmlFinCode(ConstXmlTrapping));
+            end;
+        if Fist = false then
+           XmlContent.Add(XmlFin(ConstXmlDataTrapping));
+
         // Armure Simplifiée
         Fist := true;
         for PArmureSimplifiee in ListArmureSimplifiee  do
@@ -1069,6 +1091,7 @@ Procedure XmlImport(FileName: String; OnlyPrimary: Boolean; OnlyCode: Boolean; C
     PArmeModificateur:        StructureModificateur;
     PArmeBonus:               StructureArmeBonus;
     PArmure:                  StructureArmure;
+    PTrapping:                StructureTrapping;
     PArmureBonus:             StructureArmureBonus;
     PArmureBonusModificateur: StructureModificateur;
     PArmureBonusTalent:       StructureArmureBonusTalent;
@@ -2387,6 +2410,49 @@ Procedure XmlImport(FileName: String; OnlyPrimary: Boolean; OnlyCode: Boolean; C
                         begin
                           ListArmure.add(PArmure);
                           inc(NbArmure);
+                        end;
+
+                      AddTrad(PTraduction, Langue);
+
+                      NodeNv2 := XmlElement(NodeNv2.NextSibling);
+                    end;
+                end;
+
+              // Trapping (equipement divers, hors armes/armures)
+              NodeNv1 := BookNode.FindNode(ConstXmlDataTrapping);
+              if Assigned(NodeNv1) then
+                begin
+                  NodeNv2 := XmlElement(NodeNv1.FirstChild);
+                  While Assigned(NodeNv2) do
+                    begin
+                      PTrapping.Livre         := Livre;
+                      PTrapping.CodeTrapping  := RemoveQuotes(UTF8Encode(NodeNv2.Attributes.GetNamedItem(ConstXmlId).NodeValue));
+                      PTraduction             := InitTrad(ConstPTrapping, PTrapping.CodeTrapping, '', PTrapping.Livre);
+
+                      Node := XmlElement(NodeNv2.FirstChild);
+                      while Assigned(Node) do
+                        begin
+                          case Node.NodeName of
+                            ConstXmlDescription:
+                              begin
+                                PTrapping.Libelle     := RemoveQuotes(UTF8Encode(Node.TextContent));
+                                Langue                := RemoveQuotes(UTF8Encode(Node.Attributes.GetNamedItem(ConstXmlLanguage).NodeValue));
+                                PTraduction.Libelle   := PTrapping.Libelle;
+                              end;
+                            ConstXmlDisponibilite:
+                              PTrapping.Disponibilite := RemoveQuotes(UTF8Encode(Node.TextContent));
+                            ConstXmlEncombrement:
+                              PTrapping.Encombrement  := StrToIntDef(RemoveQuotes(UTF8Encode(Node.TextContent)),0);
+                            ConstXmlPrix:
+                              PTrapping.Prix          := RemoveQuotes(UTF8Encode(Node.TextContent));
+                          end;
+
+                          Node := XmlElement(Node.NextSibling);
+                        end;
+                      if LangueDef = ConstAnglais then
+                        begin
+                          ListTrapping.add(PTrapping);
+                          inc(NbTrapping);
                         end;
 
                       AddTrad(PTraduction, Langue);

@@ -1,5 +1,104 @@
 # Warhammer — Contexte projet
 
+**14/09/2026 — CHANTIER TRAPPINGS (ÉQUIPEMENT) DU RULEBOOK V5 OUVERT : CATALOGUE
+`DATA_TRAPPING` CRÉÉ ET CÂBLÉ, COMPILÉ, LANCÉ SANS EXCEPTION - RESTE LA PASSE DE
+RATTACHEMENT SUR LES 64 MÉTIERS (§2.77, EN COURS).**
+Nono a signalé qu'en V5 les Trappings ne sont pas de la simple décoration comme en V4 :
+p.43 du PDF, on ne passe au niveau de carrière suivant qu'en "collecting the trappings it
+requires" (une des 10 cases du Career Advancement Tracker), et le Statut de carrière est
+perdu si on n'a pas au moins un Trapping du niveau courant (p.45). Point de périmètre
+tranché avec Nono avant d'écrire : le moteur d'avancement/changement de carrière lui-même
+reste hors périmètre (mis de côté le 13/09, §2.70, rien codé encore pour Compétences/
+Talents non plus) - le chantier du jour est seulement catalogue + données, pas moteur de
+validation.
+- **`DATA_TRAPPING` créé** (32 entrées, `RULES-TRAP_01` à `_32`, table "Miscellaneous
+  Trappings" p.316 du PDF, ordre du livre conservé) : champs `Description`/`Availability`/
+  `Price`/`Encumbrance`, exactement le sous-ensemble de `DATA_ARMOR` pertinent pour du
+  matériel sans protection/emplacement/qualité. `RULES-DISPO_COMMON/SCARCE/RARE/EXOTIC`
+  réutilisés tels quels (déjà les 4 valeurs utilisées par `DATA_ARMOR`). Prix transcrits
+  tels qu'imprimés (`5d`, `1/-`, `3/6`...), avec les deux seules substitutions déjà
+  établies par `DATA_ARMOR` V5 : "N GC" -> "NCO" et "/–" -> "/-".
+- **Incertitude relevée, tranchée par défaut** : la ligne "Grappling Hook" du texte brut
+  extrait du PDF porte `1 GC –/10` au lieu d'un prix simple - collision probable avec la
+  colonne de description en regard (texte à deux colonnes fusionnées, piège déjà documenté
+  au §2.75). Gardé `1CO` (la partie non ambiguë) sans le `–/10` ; à vérifier sur le PDF
+  paginé si Nono a un doute.
+- **Câblage complet à la Armor**, unité par unité (le champ n'existait dans aucun code
+  avant aujourd'hui, contrairement aux Sorts/Talents qui avaient déjà leur infrastructure) :
+  - `chargetrapping.pas` (nouveau, mirroir exact de `chargearmure.pas`) : `StructureTrapping`,
+    `ListTrapping`, `ChercheTrapping`, `TexteTrapping`/`TexteLigneTrapping`.
+  - `chargeconstantes.pas` : `ConstXmlDataTrapping`/`ConstXmlTrapping`/`ConstPTrapping`
+    (mêmes rôles que leurs équivalents Armor) + `EquipementTR = 'TRAP_'` (préfixe de code,
+    à côté de `EquipementCC`/`EquipementAR`).
+  - `warhammersource.pas` : `ListTrapping` créée/vidée avec les autres listes catalogue.
+  - `xmlexportimport.pas` : bloc de lecture `DATA_TRAPPING`/`Trapping` (import) ET bloc
+    d'écriture symétrique (export) juste après celui de `DATA_ARMOR` - l'oubli du bloc
+    export sur une liste analogue avait déjà causé un bug documenté le 21/08/2026
+    (doublons au rechargement), donc fait dans le même geste cette fois.
+  - `chargetraduction.pas` : branche `ConstPTrapping` dans le dispatcheur de traduction
+    (`Traduit`), pour que le mécanisme de changement de langue de livre reste cohérent.
+  - `winlivre.pas` : `LibelleEquipement` résout maintenant le préfixe `RULES-TRAP_`
+    (comme `RULES-ARMO_`/`RULES-COMB_` déjà) - `TypeEquip='T'`, non préfixé dans l'arbre
+    (tombe dans la case "Divers", `RULES-LAB_064`, déjà le bon libellé pour du matériel
+    générique - aucune nouvelle catégorie/libellé à créer).
+  - **Pas de fenêtre `WinTrapping` dédiée pour l'instant** : décision initiale de Nono, le
+    catalogue n'est consultable qu'à travers sa résolution dans l'arbre/la grille des
+    métiers. **Revenue dessus dans la foulée (même session)** : voir "Décision à prendre
+    en priorité" ci-dessous, WinTrapping sera probablement nécessaire après tout.
+- **Un item réellement relié en test** : `RULES-WORK16` (Smuggler) niveau 3, `Tinderbox`
+  -> `RULES-TRAP_31`, vérifié affiché correctement (`WarhammerHelp.exe` basculé
+  temporairement sur `\DATABASE\WFRP5\`, lancé, resté stable plusieurs secondes, remis sur
+  `\DATABASE\WFRP4\` et recompilé juste après - **pas encore vérifié visuellement par
+  Nono**, à faire).
+- Diff vérifié avant chaque écriture : uniquement des ajouts côté Pascal (un seul retrait
+  par fichier, la ligne de `uses` remplacée par elle-même + `ChargeTrapping`) et côté XML
+  (194 lignes ajoutées, 0 retrait, hors le retrait volontaire `Tinderbox` -> `RULES-TRAP_31`
+  du test ci-dessus). `lazbuild` : 0 erreur à chaque étape.
+- **Gap réel identifié, pas encore traité** : les 64 métiers V5 portent déjà 666 lignes
+  `<Item>` (peuplées lors du chantier carrières du 13/09/2026, §2.70) mais **toutes en
+  texte libre**, aucune ne référence encore un id `DATA_WEAPON`/`DATA_ARMOR`/
+  `DATA_TRAPPING` (contrairement à la V4, qui relie déjà 180 de ses 762 `<Item>` à des
+  `RULES-ARMO_*`). Recoupement fait : au moins 17 noms d'objets de carrière correspondent
+  mot pour mot à une entrée `DATA_TRAPPING` (`Bedroll`, `Blanket`, `Bowl`, `Chalk`,
+  `Charcoal Stick`, `Cup`, `Deck of Cards`, `Dice`, `Grappling Hook`, `Instrument`,
+  `Lamp Oil`, `Lantern`, `Pan`, `Pipe and Tobacco`, `Storm Lantern`, `Tent`, `Tinderbox`),
+  plus des cas proches nécessitant un jugement (`Rope` de carrière vs `Rope, 10 yards` du
+  catalogue) et sans doute des correspondances côté armes/armures jamais faites non plus.
+
+**Décision à prendre en priorité (session suivante)** : Nono a signalé juste après ce
+premier morceau que le Prix/Encombrement des Trappings ne sont pas juste de l'info annexe
+en V5 - l'Encombrement porté par un personnage a un vrai impact (charge, malus). Creusé
+dans la foulée : `StructurePersonnageEquipement.CodeEquipement` (chargepersonnage.pas
+l.51-62) est déjà typé par catégorie (Arme/Armure/Divers/Sort), MAIS pour la catégorie
+Divers (`TypeEquipDI`) le code n'est **jamais résolu** contre un catalogue -
+`winpersonnage.pas` l.5422-5425 fait juste `Lib := Code` (texte brut affiché tel quel,
+que ce soit à la création du personnage ou dans la liste de métier). Et le calcul du
+total d'encombrement du personnage (`pdfpersonnage.pas`, fonction `PdfBlocEncombrement`,
+remplissage vers l.1682/1717/1805/1810/2997/3028/3151/3158) passe par `ChercheArme`/
+`ChercheArmure` pour les armes/armures mais n'a aucun équivalent pour le Divers - rien à
+chercher n'existait avant `DATA_TRAPPING`. Conclusion : sans brancher le catalogue
+jusqu'au personnage, Prix/Encombrement resteront décoratifs quoi qu'on fasse côté
+catalogue seul. Nono a dit qu'on aura "quand meme" besoin d'un `WinTrapping`, mais la
+session s'est arretee (quota Nono ~98%) avant de trancher le perimetre exact. Question
+ouverte a poser a Nono en debut de session suivante, avant d'ecrire du code : WinTrapping
+doit-il rester un catalogue consultable en lecture seule (comme `WinArmor` aujourd'hui),
+ou faut-il aussi brancher la selection de Divers sur la fiche personnage (remplacer
+`Lib := Code` par un vrai `ChercheTrapping`, et etendre `PdfBlocEncombrement` pour compter
+le Divers dans le total) ? La deuxieme option est plus proche de ce que le probleme
+souleve par Nono demande reellement, mais touche `winpersonnage.pas`/`wincreation.pas`/
+`chargemetierequipement.pas`/`pdfpersonnage.pas` en plus de la nouvelle fenetre - a
+chiffrer avec Nono avant de commencer, pas a decider seul.
+
+**Ensuite** : passe métier par métier sur les 666 `<Item>` V5 pour relier au catalogue
+(`DATA_WEAPON`/`DATA_ARMOR`/`DATA_TRAPPING`) chaque nom qui correspond réellement, en
+laissant en texte libre les objets propres à une carrière sans équivalent catalogue
+(`Patron`, `Apprentice`, `Workshop`...). Travail volumineux, à fractionner par lot de
+métiers. Et dans tous les cas, avant de continuer : Nono à vérifier visuellement le rendu
+(Smuggler niveau 3 dans l'arbre des métiers, WinLivre) et trancher le doute sur le prix du
+Grappling Hook.
+
+---
+
 **14/09/2026 — DARK/CHAOS MAGIC DU RULEBOOK V5 : ÉCRIT, COMPILÉ, TESTÉ VISUELLEMENT PAR NONO
 ("parfait"), CHANTIER SORTS/PRIÈRES V5 INTÉGRALEMENT CLOS (§2.76).**
 Dernier morceau du chantier Sorts/Prières V5, à la suite des 60 Miracles (§2.75). Nono a dit
