@@ -1145,15 +1145,18 @@ begin
                   Node := SubChapterNode.FirstChild;
                   while Assigned(Node) do
                     begin
-                      PersonnageEquipement.CodeEquipement     := RemoveQuotes(UTF8Encode(Node.Attributes.GetNamedItem(ConstXmlData).NodeValue));
-                      PersonnageEquipement.TypeEquipement     := TrimRight(TypeEquipDi);
-                      PersonnageEquipement.QualiteEquipement  := RemoveQuotes(UTF8Encode(Node.TextContent));
-                      PersonnageEquipement.Porte              := False;
-                      if Assigned(Node.Attributes.GetNamedItem(ConstXmlEquipementQuantite)) then
-                        PersonnageEquipement.Quantite         := StrToIntDef(UTF8Encode(Node.Attributes.GetNamedItem(ConstXmlEquipementQuantite).NodeValue), 1)
-                      else
-                        PersonnageEquipement.Quantite         := 1;
-                      Personnage.Equipement                   += [PersonnageEquipement];
+                      if (Node.NodeType = ELEMENT_NODE) then
+                        begin
+                          PersonnageEquipement.CodeEquipement     := RemoveQuotes(UTF8Encode(Node.Attributes.GetNamedItem(ConstXmlData).NodeValue));
+                          PersonnageEquipement.TypeEquipement     := TrimRight(TypeEquipDi);
+                          PersonnageEquipement.QualiteEquipement  := RemoveQuotes(UTF8Encode(Node.TextContent));
+                          PersonnageEquipement.Porte              := False;
+                          if Assigned(Node.Attributes.GetNamedItem(ConstXmlEquipementQuantite)) then
+                            PersonnageEquipement.Quantite         := StrToIntDef(UTF8Encode(Node.Attributes.GetNamedItem(ConstXmlEquipementQuantite).NodeValue), 1)
+                          else
+                            PersonnageEquipement.Quantite         := 1;
+                          Personnage.Equipement                   += [PersonnageEquipement];
+                        end;
                       Node  := Node.NextSibling;
                     end;
                 end;

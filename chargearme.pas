@@ -53,6 +53,9 @@ function ChercheArme(CodeArme :String): StructureArme;
 var
   PArme:        StructureArme;
 Begin
+  // Sans cette ligne, Result garde le contenu du PRECEDENT appel quand rien n'est trouve
+  // (une fonction Pascal renvoyant un record ne l'initialise pas). CONTEXT.md 2.17.
+  Result := Default(StructureArme);
   for PArme in ListArme do
     if CompareRechercheValeur(PArme.CodeArme, CodeArme) then
        Begin

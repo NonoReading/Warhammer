@@ -4479,3 +4479,31 @@ depot (ecrit cette session, necessite le module PowerShell ImportExcel installe 
 session, absent avant) pour pouvoir regenerer trapping_unmatched.txt et le classeur
 d'audit sans tout reecrire. Fichiers modifies : Audit_Trapping_Carrieres.xlsx (supprime
 le _v2), TRAVAIL/export_trapping_audit.ps1 (nouveau), CONTEXT.md, Log.txt.
+
+14/09/2026 - CORRECTIONS COURTES D'A FAIRE.TXT : QUATRE BUGS CORRIGES ET VALIDES. Audit
+des fonctions Cherche* (meme famille que ChercheTrapping du 14/09) : ChercheArme
+(chargearme.pas) et ChercheArmure (chargearmure.pas) ne reinitialisaient jamais Result -
+corrige (Result := Default(...)). ChercheMetier (chargemetier.pas) pire : la variable
+Trouve n'etait meme pas initialisee (valeur indeterminee) - corrige (Trouve: Boolean=false).
+Toutes les autres Cherche* du projet avaient deja ce correctif depuis le 22/08 (CONTEXT.md
+2.17). Trouve au passage, pas corrige : ChercheTalent (chargetalent.pas l.85) teste
+PTalent.Resume au lieu de Result.Resume apres la boucle - meme resultat si trouve, mais le
+repli generique d'une specialisation non-trouvee ne se declenche que par hasard. Note dans
+A FAIRE.txt, pas touche (chantier §2.68 sensible).
+Garde ELEMENT_NODE manquante sur le bloc "Divers" de chargepersonnage.pas (seul des cinq
+blocs Arme/Armure/Armure simplifiee/Divers/Sorts a ne pas filtrer Node.NodeType avant de
+lire Node.Attributes) - corrigee, meme motif que les autres blocs.
+Asterisques de competence empiles : winpersonnage.pas (ColCompLib, competence liee a
+plusieurs talents) ajoutait un '*' par talent au lieu d'un seul ("Charm***" illisible a
+partir de 3 talents) - corrige, un seul '*' desormais quel que soit le nombre de talents.
+Nono a ensuite montre une capture d'ecran du PDF revelant le meme symptome ailleurs :
+PdfPersonnageArmureAsterisques (pdfpersonnage.pas) ecrivait une ligne "(N) -10%" par piece
+d'armure touchant la meme competence, qui debordaient de la colonne et se chevauchaient
+(3 pieces = 3 lignes empilees sur "Stealth"). Design different de l'asterisque simple
+(numero PAR PIECE voulu, CONTEXT.md 2.5) - Nono a choisi de regrouper en une seule
+annotation avec le total cumule plutot que d'empiler les lignes ou de renvoyer le detail en
+legende. Corrige : "(5,6,7) -30%" au lieu de trois lignes. Meme empilement potentiel non
+verifie cote PdfPersonnageMutationAsterisques (note ajoutee a A FAIRE.txt).
+Compile (lazbuild, 0 erreur) apres chaque correction, testes et valides par Nono.
+Fichiers modifies : chargearme.pas, chargearmure.pas, chargemetier.pas, chargepersonnage.pas,
+winpersonnage.pas, pdfpersonnage.pas, A FAIRE.txt, Log.txt.

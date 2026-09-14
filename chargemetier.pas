@@ -123,7 +123,10 @@ function ChercheMetier(CodeMetier :String): StructureMetier;
 Var
   PMetier:  StructureMetier;
   PVide:    StructureMetier;
-  Trouve:   Boolean;
+  // Sans l'initialisation explicite, Trouve demarre a une valeur indeterminee (variable
+  // locale non initialisee) : "if not trouve" pouvait tomber juste par hasard. Meme famille
+  // que le Result non reinitialise des autres Cherche*, CONTEXT.md 2.17.
+  Trouve:   Boolean=false;
 Begin
   for PMetier in ListMetier do
     if CompareRechercheValeur(PMetier.CodeMetier, CodeMetier) then

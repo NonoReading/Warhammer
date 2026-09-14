@@ -6,19 +6,6 @@
 CORRECTIONS COURTES  (une ligne ou deux chacune)
 =========================================================================
 
-CHERCHEARME/CHERCHEARMURE (ET AUTRES CHERCHE*) PEUVENT PARTAGER LE BUG DE RESULT NON
-REINITIALISE CORRIGE DANS CHERCHETRAPPING LE 14/09/2026 (CONTEXT.md 2.77). Meme motif "for X
-in Liste do if match then Result := X" sans reset prealable = un appel sans resultat herite du
-dernier match trouve par l'appelant precedent. A auditer function par function le jour ou un
-symptome similaire (libelle errone juste apres un item resolu) se represente ailleurs.
-
-LE BLOC DE LECTURE XML "DIVERS" DE CHARGEPERSONNAGE.PAS N'A PAS LA GARDE ELEMENT_NODE. Vu
-le 14/09/2026 en travaillant sur le chantier Trapping (CONTEXT.md 2.77). Les autres blocs
-(Arme/Armure/Set d'armure/Sorts) filtrent Node.NodeType = ELEMENT_NODE avant de lire
-Node.Attributes ; celui de Divers ne le fait pas - meme motif que le crash DATA_LABEL du
-21/08/2026 (acces a Node.Attributes sur un commentaire XML, nil). Aucun symptome connu
-aujourd'hui (pas de commentaire XML dans cette section des fiches personnage actuelles).
-
 LE MATERIAU (TYPE) DES BOUCLIERS/ECUS DU RULEBOOK V5 N'EST PAS DEFINI. Releve par Nono le
 14/09/2026 en testant WinArmor. RULES-ARMO_01/02/03 (Buckler/Shield/Large Shield,
 BOOK_RULESBOOK.Xml V5) n'ont pas de balise <Type>, contrairement aux pieces Leather/Mail/
@@ -213,12 +200,6 @@ profils complets (caracteristiques, Traits, Optional) et la table d10 des elemen
 sont en fin d Explanation des sorts Form of the Frostfiend et Summon Djinn, faute de champ.
 A reprendre avec le morceau "creatures" du lot 3 si on veut de vraies creatures.
 
-LES ASTERISQUES DE COMPETENCE DEVIENNENT ILLISIBLES A PLUSIEURS SOURCES (Nono,
-13/09/2026). winpersonnage.pas l.3282 (Competence liee a un talent) concatene un '*' au
-libelle a chaque entree Personnage.TalentCompetence qui matche la competence - 3 talents
-sur la meme competence donnent 3 asterisques colles ("Charm***"), illisible. Faire un
-total (une seule marque ou un chiffre agrege) plutot que d'empiler les asterisques.
-
 WINRACE DEVRAIT LISTER LES RACES, PAS LES ETHNIES (Nono, 13/09/2026). Affiche
 actuellement les ethnies (DATA_SPECIE, ex. Humans (Reikland), Humans (Middenlander)...)
 une par une - devrait n'afficher que les races (DATA_RACE), sauf un cas particulier ou un
@@ -252,6 +233,27 @@ pense comme un correctif definitif. Le vrai correctif : etendre le meme mecanism
 Const->Var + recalcul depuis ValVersion (deja fait pour ConstCheminLivre/
 ConstCheminPersonnage) a toutes ces constantes d'images/PDF, plutot que de rebasculer le
 litteral a la main chaque fois qu'on change de version pour tester.
+
+CHERCHETALENT TESTE PTALENT.RESUME AU LIEU DE RESULT.RESUME APRES LA BOUCLE. Vu le
+14/09/2026 en auditant les Cherche* (CONTEXT.md 2.77bis). chargetalent.pas l.85 :
+"if PTalent.Resume = '' then" porte sur la variable de boucle, qui garde le DERNIER element
+de ListTalent si rien ne matche (pas de break) - alors que Result reste bien vide (Default)
+dans ce cas. Meme resultat que Result.Resume quand le talent EST trouve (PTalent = Result a
+ce moment-la), mais dans le cas "non trouve", le repli vers le generique (specialisation
+sans entree propre) ne se declenche que si par hasard le dernier talent de la liste a un
+Resume vide - sinon le repli est silencieusement saute. A corriger (tester Result.Resume,
+pas PTalent.Resume) mais pas fait sans verifier l'effet sur une vraie specialisation
+non-trouvee, chantier §2.68 sensible.
+
+LE MEME EMPILEMENT DE "(N) VALEUR%" QUE L'ARMURE (CORRIGE LE 14/09/2026, VOIR PLUS BAS)
+EXISTE PEUT-ETRE AUSSI COTE MUTATIONS. PdfPersonnageMutationAsterisques
+(pdfpersonnage.pas, fonctions ModifieCompetence directe et ModifySkillAttribut) concatene
+"+ ' (' + IntToStr(Asterisque) + ') ' + IntToStr(Valeur) + '%'" a Result.Values[Competence]
+exactement comme le faisait PdfPersonnageArmureAsterisques avant le correctif du
+14/09/2026 - si un personnage a plusieurs mutations touchant la meme competence, le meme
+debordement pourrait se reproduire. Pas de cas reel connu aujourd'hui (aucun personnage a
+plusieurs mutations sur la meme competence teste). A regrouper de la meme facon
+(numeros + total cumule) si un tel personnage se presente.
 
 =========================================================================
 CONCEPTIONS A MENER  (chantiers a part entiere, ne pas les melanger)

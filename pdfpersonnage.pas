@@ -2099,10 +2099,18 @@ Function PdfPersonnageArmureAsterisques(Personnage: StructurePersonnage; Asteris
     LocData:               String;
     AsterisqueCourant:      Integer;
     AsterisquePiece:        Integer;
+    // Une piece par competence touchee sur la ligne, plutot qu'une ligne "(N) -10%" par
+    // piece : trois pieces a -10% chacune sur la meme competence debordaient de la colonne
+    // et se chevauchaient (retour de Nono, capture d'ecran du 14/09/2026). Name=CodeCompetence.
+    NumerosParCompetence:  TStringList;
+    TotalParCompetence:    TStringList;
+    IndComp:                Integer;
   begin
     Result                   := TStringList.Create;
     AsterisqueParEquipement  := TStringList.Create;
     AsterisqueCourant        := AsterisqueDepart;
+    NumerosParCompetence     := TStringList.Create;
+    TotalParCompetence       := TStringList.Create;
 
     for PersonnageEquipement in Personnage.Equipement do
       if (PersonnageEquipement.TypeEquipement = TypeEquipAR) or (PersonnageEquipement.TypeEquipement = TypeEquipARS) then
@@ -2138,15 +2146,29 @@ Function PdfPersonnageArmureAsterisques(Personnage: StructurePersonnage; Asteris
                             // 16/08/2026, à côté de la pièce elle-même
                             AsterisqueParEquipement.Values[PersonnageEquipement.CodeEquipement] := '(' + IntToStr(AsterisquePiece) + ')';
                           end;
-                        // "(5) -10%" à côté de la compétence (idée d'origine de Nono) - la
-                        // colonne d'annotation a été élargie le 16/08/2026 (DessinerTableau,
-                        // orLigne) pour que ça tienne sur une seule ligne sans wrap PdfEcrit
-                        Result.Values[PArmureBonusModif.CodeCompetence] := Result.Values[PArmureBonusModif.CodeCompetence]
-                          + ' (' + IntToStr(AsterisquePiece) + ') ' + IntToStr(PArmureBonusModif.Valeur) + '%';
+                        // Accumule ici (numeros + total) au lieu d'ecrire directement dans
+                        // Result - la chaine finale ("(5,6,7) -30%") est construite apres la
+                        // boucle equipement, une fois toutes les pieces vues.
+                        if NumerosParCompetence.Values[PArmureBonusModif.CodeCompetence] = '' then
+                          NumerosParCompetence.Values[PArmureBonusModif.CodeCompetence] := IntToStr(AsterisquePiece)
+                        else
+                          NumerosParCompetence.Values[PArmureBonusModif.CodeCompetence] := NumerosParCompetence.Values[PArmureBonusModif.CodeCompetence] + ',' + IntToStr(AsterisquePiece);
+                        TotalParCompetence.Values[PArmureBonusModif.CodeCompetence] := IntToStr(StrToIntDef(TotalParCompetence.Values[PArmureBonusModif.CodeCompetence], 0) + PArmureBonusModif.Valeur);
                       end;
                 end;
             end;
         end;
+
+    // "(5,6,7) -30%" à côté de la compétence (idée d'origine de Nono) - la colonne
+    // d'annotation a été élargie le 16/08/2026 (DessinerTableau, orLigne) pour que ça tienne
+    // sur une seule ligne sans wrap PdfEcrit ; un numéro par pièce et un total groupés en
+    // une seule annotation plutôt qu'une ligne par pièce (14/09/2026).
+    for IndComp := 0 to NumerosParCompetence.Count - 1 do
+      Result.Values[NumerosParCompetence.Names[IndComp]] := ' (' + NumerosParCompetence.ValueFromIndex[IndComp] + ') '
+        + IntToStr(StrToIntDef(TotalParCompetence.Values[NumerosParCompetence.Names[IndComp]], 0)) + '%';
+
+    NumerosParCompetence.Free;
+    TotalParCompetence.Free;
   end;
 
 Function PdfPersonnageMutationAsterisques(Personnage: StructurePersonnage; AsterisqueDepart: Integer; out AsterisqueParMutation: TStringList; out AsterisqueArmure: String; out AsterisqueFinal: Integer): TStringList;

@@ -3283,7 +3283,11 @@ begin
            PAttribut                              := ChercheAttribut(PCompetence.CodeAttribut);
            TabCompetence.Cells[ColCompCarac, Ind] := PAttribut.Resume;
          end;
-       TabCompetence.Cells[ColCompLib, Ind]       := TabCompetence.Cells[ColCompLib, Ind] + '*';
+       // Un seul asterisque par competence, meme si plusieurs talents la ciblent : sans
+       // cette garde, chaque talent ajoutait un '*' ("Charm***" illisible a partir de
+       // trois talents lies a la meme competence). Releve par Nono le 13/09/2026.
+       if Copy(TabCompetence.Cells[ColCompLib, Ind], Length(TabCompetence.Cells[ColCompLib, Ind]), 1) <> '*' then
+         TabCompetence.Cells[ColCompLib, Ind]     := TabCompetence.Cells[ColCompLib, Ind] + '*';
     end;
 
   // équipement et sorts
