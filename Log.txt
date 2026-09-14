@@ -4116,3 +4116,21 @@ Fichiers modifies : DATABASE\WFRP5\BOOK_RULESBOOK.Xml, CONTEXT.md, Log.txt.
 2.75). Nono a confirme "c'est bon". Aucun point releve. Session terminee, Nono s'arrete la
 (commit).
 Fichiers modifies : CONTEXT.md, Log.txt.
+
+14/09/2026 - DARK/CHAOS MAGIC DU RULEBOOK V5 PEUPLE, CHANTIER SORTS/PRIERES V5 INTEGRALEMENT
+CLOS (CONTEXT.md 2.76). Dernier morceau, a la suite des 60 Miracles. 17 sorts crees (p.257-259)
+: 4 Daemonology, 4 Necromancy (RULES-SPEL_DAEMONOLOGY_NN/RULES-SPEL_NECROMANCY_NN, rattaches
+au talent generique existant RULES-T0007_* avec 2 nouvelles specialisations, meme mecanique
+que Hedgecraft/Witchcraft), 9 Chaos Magic (RULES-SPEL_CHAOS_<DIEU>_NN, 3 par lore : Nurgle,
+Slaanesh, Tzeentch - Khorne n'a pas de lore). Talent Chaos Magic (RULES-T0023) converti en
+radical RULES-T0023_* avec 3 specialisations, aucune autre reference dans le livre V5
+verifiee avant ce changement d'id. Tarif ajoute sur ce talent (absent jusqu'ici) : meme regle
+que Arcane Magic (palier par 5) d'apres le texte V5 - different du forfait 100 XP de
+l'equivalent WFRP4, verifie dans les deux livres separement pour ne pas transposer la mauvaise
+regle. TypSpell="Chaos Magic" reutilise (deja une valeur WFRP4) : verifie que ce champ n'est
+plus une enumeration fermee cote code depuis le 02/09 (2.31), sans risque a l'introduire ici.
+Diff verifie (un seul retrait, l'id renomme), balance verifiee (Sort 240/240, Talent 262/262).
+Compile (lazbuild, 0 erreur). WarhammerHelp.exe lance et reste stable puis ferme. Teste
+visuellement par Nono ("parfait"). Chantier Sorts/Prieres V5 entierement clos, du premier
+morceau (Petty Spells) a celui-ci. Nono s'arrete la (commit).
+Fichiers modifies : DATABASE\WFRP5\BOOK_RULESBOOK.Xml, CONTEXT.md, Log.txt.

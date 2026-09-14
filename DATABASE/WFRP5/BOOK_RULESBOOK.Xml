@@ -1680,7 +1680,7 @@ As sailing one ship is not so different to sailing another, having any Sail Spec
 <PDF>""</PDF>
 <Test language="ENGLISH">""</Test>
 </Talent>
-<Talent id="RULES-T0023">
+<Talent id="RULES-T0023_*">
 <Attribut>""</Attribut>
 <Description language="ENGLISH">"Chaos Magic (Lore)"</Description>
 <Short language="ENGLISH">""</Short>
@@ -1689,6 +1689,20 @@ As sailing one ship is not so different to sailing another, having any Sail Spec
 <Max>"1"</Max>
 <PDF>""</PDF>
 <Test language="ENGLISH">""</Test>
+  <!-- TARIF DES SORTS, ajoute le 14/09/2026 en meme temps que DATA_SPELL RULES-SPEL_CHAOS_*
+       (chantier Dark/Chaos Magic). id passe en radical "_*" (aucune reference ailleurs dans
+       le livre a "RULES-T0023" nu, verifie avant edition) pour les 3 specialisations Nurgle/
+       Slaanesh/Tzeentch (DATA_TALENT_SPECIALIZATION). Texte du livre V5 : "the same XP costs
+       as Arcane Magic" - donc memes valeurs que RULES-T0007_* (XpDivisor="5", pas de forfait
+       fixe) - PAS le "100 XP a chaque fois" de RULES-T0172_* cote WFRP4 (regle differente
+       d'une edition a l'autre, verifie dans les deux livres avant d'ecrire). XpFree="1" :
+       "you gain one Spell of your choice from your chosen Lore" a l'achat du talent. -->
+<Magic>"1"</Magic>
+<SpellMode>"NONE"</SpellMode>
+<XpMultiplier>"100"</XpMultiplier>
+<XpFloor>"1"</XpFloor>
+<XpDivisor>"5"</XpDivisor>
+<XpFree>"1"</XpFree>
 </Talent>
 <Talent id="RULES-T0024">
 <Attribut>""</Attribut>
@@ -3544,6 +3558,26 @@ As sailing one ship is not so different to sailing another, having any Sail Spec
 <Talent id="RULES-T0169_VERENA">
 <Description language="ENGLISH">"Invoke (Verena)"</Description>
 <Generique>"RULES-T0169_*"</Generique>
+</Talent>
+<Talent id="RULES-T0007_DAEMONOLOGY">
+<Description language="ENGLISH">"Arcane Magic (Daemonology)"</Description>
+<Generique>"RULES-T0007_*"</Generique>
+</Talent>
+<Talent id="RULES-T0007_NECROMANCY">
+<Description language="ENGLISH">"Arcane Magic (Necromancy)"</Description>
+<Generique>"RULES-T0007_*"</Generique>
+</Talent>
+<Talent id="RULES-T0023_NURGLE">
+<Description language="ENGLISH">"Chaos Magic (Nurgle)"</Description>
+<Generique>"RULES-T0023_*"</Generique>
+</Talent>
+<Talent id="RULES-T0023_SLAANESH">
+<Description language="ENGLISH">"Chaos Magic (Slaanesh)"</Description>
+<Generique>"RULES-T0023_*"</Generique>
+</Talent>
+<Talent id="RULES-T0023_TZEENTCH">
+<Description language="ENGLISH">"Chaos Magic (Tzeentch)"</Description>
+<Generique>"RULES-T0023_*"</Generique>
 </Talent>
 </DATA_TALENT_SPECIALIZATION>
 <DATA_RANDOM_TALENT>
@@ -15486,6 +15520,176 @@ Playing a Wrecker means you are adept at ambushes, stealth, and intimidation, wi
 <Talent>"RULES-T0169_VERENA"</Talent>
 <Level>""</Level>
 <TypSpell>"Miracle"</TypSpell>
+</Sort>
+<Sort id="RULES-SPEL_DAEMONOLOGY_01">
+<Description language="ENGLISH">"Destroy Lesser Daemon"</Description>
+<Explanation language="ENGLISH">"Your Spell disrupts the Dhar holding a daemon together and draws it back to you. The target makes an Opposed Easy (+4 SL) Endurance Test against the Casting Test. If you win, you immediately destroy the target and you may increase one of your Characteristics by +10 for the duration as you syphon profane energies from your victim."</Explanation>
+<Target>"1 Size (Average) or smaller Daemon"</Target>
+<Duration>"Willpower Bonus Rounds"</Duration>
+<Range>"Willpower Bonus yards"</Range>
+<Talent>"RULES-T0007_DAEMONOLOGY"</Talent>
+<Level>"6"</Level>
+<TypSpell>"Arcane Magic"</TypSpell>
+</Sort>
+<Sort id="RULES-SPEL_DAEMONOLOGY_02">
+<Description language="ENGLISH">"Detect Daemon"</Description>
+<Explanation language="ENGLISH">"Your Spell homes in on the daemonic influences in the surrounding area. You automatically know if there is a manifested daemon within range, be it summoned, bound into an artefact, possessing another, or similar."</Explanation>
+<Target>"Special"</Target>
+<Duration>"Instant"</Duration>
+<Range>"Willpower yards"</Range>
+<Talent>"RULES-T0007_DAEMONOLOGY"</Talent>
+<Level>"4"</Level>
+<TypSpell>"Arcane Magic"</TypSpell>
+</Sort>
+<Sort id="RULES-SPEL_DAEMONOLOGY_03">
+<Description language="ENGLISH">"Manifest Lesser Daemon"</Description>
+<Explanation language="ENGLISH">"You channel a sickening flow of Dhar, briefly forcing a rent into the fabric of reality. A Lesser Daemon immediately manifests through the rent (see page 349 for two examples: a Bloodletter or a Daemonette). Perform an Opposed Channelling (Dhar)/Cool Test with the daemon. If successful, the daemon will respond to one command issued by you, quite literally, then vanish (assuming the command is completed before the Duration ends). If failed, the daemon immediately attacks."</Explanation>
+<Target>"Special"</Target>
+<Duration>"Willpower Bonus Rounds"</Duration>
+<Range>"Willpower Bonus yards"</Range>
+<Talent>"RULES-T0007_DAEMONOLOGY"</Talent>
+<Level>"8"</Level>
+<TypSpell>"Arcane Magic"</TypSpell>
+</Sort>
+<Sort id="RULES-SPEL_DAEMONOLOGY_04">
+<Description language="ENGLISH">"Octagram"</Description>
+<Explanation language="ENGLISH">"Daubing an octagram to the floor, and marking it with unholy symbols, you ward against all daemonic influence. Those with the Daemonic Trait cannot enter or leave the octagram."</Explanation>
+<Target>"AoE (Intelligence Bonus yards across, maximum)"</Target>
+<Duration>"Willpower minutes"</Duration>
+<Range>"Touch"</Range>
+<Talent>"RULES-T0007_DAEMONOLOGY"</Talent>
+<Level>"10"</Level>
+<TypSpell>"Arcane Magic"</TypSpell>
+</Sort>
+<Sort id="RULES-SPEL_NECROMANCY_01">
+<Description language="ENGLISH">"Raise Dead"</Description>
+<Explanation language="ENGLISH">"You channel a heavy flow of Dhar into bare earth, causing old bones to gather and rise. 1 + SL Skeletons (see page 339) claw upwards into the affected area at the end of the Round, which are organised as you prefer within the Area of Effect. They start with the Prone Condition. The summoned undead are entirely under your control and can perform simple orders as you command. If you are killed or gain the Unconscious Condition, the Spell comes to an end and the summoned undead collapse. For each +2 SL, you may summon an extra Skeleton."</Explanation>
+<Target>"AoE (Willpower Bonus yards)"</Target>
+<Duration>"Until sunrise"</Duration>
+<Range>"Willpower yards"</Range>
+<Talent>"RULES-T0007_NECROMANCY"</Talent>
+<Level>"7"</Level>
+<TypSpell>"Arcane Magic"</TypSpell>
+</Sort>
+<Sort id="RULES-SPEL_NECROMANCY_02">
+<Description language="ENGLISH">"Reanimate"</Description>
+<Explanation language="ENGLISH">"You channel worming strands of thick Dhar before you, sinking it into corpses, reanimating that which was once dead. Reanimate WPB + SL dead bodies (as Zombies, see page 340) or skeletons (as Skeletons, see page 339) within range. They start with the Prone Condition. The summoned undead are entirely under your control and can perform simple orders as you command. If you die or gain an Unconscious Condition, the Spell comes to an end and the reanimated corpses fall dead again. For each +2 SL, you may reanimate an extra WPB + SL Skeletons or Zombies."</Explanation>
+<Target>"AoE (Willpower Bonus yards)"</Target>
+<Duration>"Until sunrise"</Duration>
+<Range>"Willpower yards"</Range>
+<Talent>"RULES-T0007_NECROMANCY"</Talent>
+<Level>"8"</Level>
+<TypSpell>"Arcane Magic"</TypSpell>
+</Sort>
+<Sort id="RULES-SPEL_NECROMANCY_03">
+<Description language="ENGLISH">"Screaming Skull"</Description>
+<Explanation language="ENGLISH">"You shriek the high-pitched words of the spell and a large, black skull wreathed with greenish-purple fire forms before you, then flies forwards, screaming and cackling as it goes. The skull moves in a straight line for the Spell range, following the contours of the land, passing through any obstacles in its way. Screaming Skull is a magic missile with Damage +WPB that only affects targets without the Undead Creature Trait. Any suffering Wounds from the Spell must pass a Challenging (+0 SL) Psychology Test or take a Broken Condition."</Explanation>
+<Target>"Special"</Target>
+<Duration>"Instant"</Duration>
+<Range>"Willpower yards"</Range>
+<Talent>"RULES-T0007_NECROMANCY"</Talent>
+<Level>"8"</Level>
+<TypSpell>"Arcane Magic"</TypSpell>
+</Sort>
+<Sort id="RULES-SPEL_NECROMANCY_04">
+<Description language="ENGLISH">"Vanhel's Call"</Description>
+<Explanation language="ENGLISH">"You manipulate complicated flows of Dhar into your targets, filling them with overwhelming energy. Intelligence Bonus targets with the Undead Trait gain a free Move or Action — choose one to affect all targets — taken the moment the Spell is cast. For each +2 SL, you may invigorate an extra Intelligence Bonus targets."</Explanation>
+<Target>"Special"</Target>
+<Duration>"Instant"</Duration>
+<Range>"Willpower yards"</Range>
+<Talent>"RULES-T0007_NECROMANCY"</Talent>
+<Level>"6"</Level>
+<TypSpell>"Arcane Magic"</TypSpell>
+</Sort>
+<Sort id="RULES-SPEL_CHAOS_NURGLE_01">
+<Description language="ENGLISH">"Festering Inflammation"</Description>
+<Explanation language="ENGLISH">"You conjure up septic fluids in the wounds of your opponent. One of the target's Wounds becomes a Festering Wound."</Explanation>
+<Target>"1"</Target>
+<Duration>"Instant"</Duration>
+<Range>"Willpower Bonus yards"</Range>
+<Talent>"RULES-T0023_NURGLE"</Talent>
+<Level>"5"</Level>
+<TypSpell>"Chaos Magic"</TypSpell>
+</Sort>
+<Sort id="RULES-SPEL_CHAOS_NURGLE_02">
+<Description language="ENGLISH">"Miasma of Pestilence"</Description>
+<Explanation language="ENGLISH">"A thin mist gathers around you. All living creatures within the Area of Effect must pass a Hard (-2 SL) Endurance Test or suffer from the Nausea Symptom (see page 182). Those dedicated to Nurgle, and skaven plague monks, are not affected."</Explanation>
+<Target>"AoE (Willpower Bonus yards)"</Target>
+<Duration>"Willpower Bonus Rounds"</Duration>
+<Range>"You"</Range>
+<Talent>"RULES-T0023_NURGLE"</Talent>
+<Level>"6"</Level>
+<TypSpell>"Chaos Magic"</TypSpell>
+</Sort>
+<Sort id="RULES-SPEL_CHAOS_NURGLE_03">
+<Description language="ENGLISH">"Stream of Corruption"</Description>
+<Explanation language="ENGLISH">"Your maw distends horrifically before you vomit forth a foul stream of diseased filth and horror. Immediately make an Unopposed Acid- and Poison-type Breath attack (see page 357). It counts as a magic missile with a Damage equal to your Toughness Bonus, and it ignores Armour Points. Further, any targets that take more than their TB in Wounds must pass a Challenging (+0 SL) Endurance Test or contract Blood Rot (see page 179)."</Explanation>
+<Target>"Special"</Target>
+<Duration>"Instant"</Duration>
+<Range>"Special"</Range>
+<Talent>"RULES-T0023_NURGLE"</Talent>
+<Level>"9"</Level>
+<TypSpell>"Chaos Magic"</TypSpell>
+</Sort>
+<Sort id="RULES-SPEL_CHAOS_SLAANESH_01">
+<Description language="ENGLISH">"Acquiescence"</Description>
+<Explanation language="ENGLISH">"Your magic pierces deep within your target, flooding their senses with strange, euphoric sensations. At the start of each Round, the target must make a Challenging (+0 SL) Endurance Test. If they fail, they lose their Move and Action as they are overwhelmed with blissful sensation."</Explanation>
+<Target>"1"</Target>
+<Duration>"Willpower Bonus Rounds"</Duration>
+<Range>"Touch"</Range>
+<Talent>"RULES-T0023_SLAANESH"</Talent>
+<Level>"5"</Level>
+<TypSpell>"Chaos Magic"</TypSpell>
+</Sort>
+<Sort id="RULES-SPEL_CHAOS_SLAANESH_02">
+<Description language="ENGLISH">"From Pain, Pleasure"</Description>
+<Explanation language="ENGLISH">"You confound the target's senses, transforming pain to pleasure. The target gains the Painless Creature Trait (see page 360) for the duration of the Spell. As they endure injuries, they experience a wave of pleasurable sensation. Should they suffer a Critical Wound, they must pass an Average (+2 SL) Endurance Test or drop their weapons, standing Helplessly as their enemies rain blows down upon them, lost in the ecstatic rending of their own flesh."</Explanation>
+<Target>"1"</Target>
+<Duration>"Willpower Bonus Rounds"</Duration>
+<Range>"Touch"</Range>
+<Talent>"RULES-T0023_SLAANESH"</Talent>
+<Level>"6"</Level>
+<TypSpell>"Chaos Magic"</TypSpell>
+</Sort>
+<Sort id="RULES-SPEL_CHAOS_SLAANESH_03">
+<Description language="ENGLISH">"Phantasmagoria"</Description>
+<Explanation language="ENGLISH">"In response to your invocation, unearthly visions of beguiling and fearsome creatures fill the area of effect, giving you and all allies the Distracting Creature Trait (see page 358) for the duration of the Spell. Targets do not distract one another."</Explanation>
+<Target>"AoE (Willpower Bonus yards)"</Target>
+<Duration>"Willpower Bonus Rounds"</Duration>
+<Range>"You"</Range>
+<Talent>"RULES-T0023_SLAANESH"</Talent>
+<Level>"8"</Level>
+<TypSpell>"Chaos Magic"</TypSpell>
+</Sort>
+<Sort id="RULES-SPEL_CHAOS_TZEENTCH_01">
+<Description language="ENGLISH">"Boon of Tzeentch"</Description>
+<Explanation language="ENGLISH">"The Changer of the Ways twists your mind, granting you access to arcane knowledge. Choose one Spell from any Lore. For the Duration, you may cast it as if you had memorised it, but may not record it in a grimoire. If you channel to cast the new Spell, you may use either Channelling (Dhar) or the Channelling Skill appropriate to the Spell, should you possess it. If you suffer a Miscast when casting this new Spell, Boon of Tzeentch quits your mind in disgust, and also erases itself from your grimoire should it have allowed itself to be recorded there."</Explanation>
+<Target>"You"</Target>
+<Duration>"Intelligence Bonus days"</Duration>
+<Range>"You"</Range>
+<Talent>"RULES-T0023_TZEENTCH"</Talent>
+<Level>"9"</Level>
+<TypSpell>"Chaos Magic"</TypSpell>
+</Sort>
+<Sort id="RULES-SPEL_CHAOS_TZEENTCH_02">
+<Description language="ENGLISH">"Transformation of Tzeentch"</Description>
+<Explanation language="ENGLISH">"At your command, bonds of aethyric fire coil from the earth, shrouding your target in a cocoon of magical energy. The target gains the Prone Condition and is considered Helpless for the duration. At the end of each Round, they must pass a Challenging (+0 SL) Endurance Test or gain 1 Corruption Point."</Explanation>
+<Target>"1"</Target>
+<Duration>"Willpower Bonus Rounds"</Duration>
+<Range>"Willpower Bonus yards"</Range>
+<Talent>"RULES-T0023_TZEENTCH"</Talent>
+<Level>"12"</Level>
+<TypSpell>"Chaos Magic"</TypSpell>
+</Sort>
+<Sort id="RULES-SPEL_CHAOS_TZEENTCH_03">
+<Description language="ENGLISH">"Treason of Tzeentch"</Description>
+<Explanation language="ENGLISH">"You channel fine strands of traitorous thoughts into your targets' minds, twisting their motivations and fanning fires of discontent. Targets gain Animosity (Allies). Further, unless immune to that Psychology, they cannot transfer Advantage to their allies and, if they score a Critical when attacking, they must pass a Hard (-2 SL) Cool Test or target their nearest ally."</Explanation>
+<Target>"AoE (Initiative Bonus yards)"</Target>
+<Duration>"Intelligence Bonus Rounds"</Duration>
+<Range>"Willpower yards"</Range>
+<Talent>"RULES-T0023_TZEENTCH"</Talent>
+<Level>"6"</Level>
+<TypSpell>"Chaos Magic"</TypSpell>
 </Sort>
 </DATA_SPELL>
   <!-- Acces des benedictions par culte (table "Blessings by Cult" p.220). Bloc additif,

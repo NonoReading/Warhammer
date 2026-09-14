@@ -1,5 +1,55 @@
 # Warhammer — Contexte projet
 
+**14/09/2026 — DARK/CHAOS MAGIC DU RULEBOOK V5 : ÉCRIT, COMPILÉ, TESTÉ VISUELLEMENT PAR NONO
+("parfait"), CHANTIER SORTS/PRIÈRES V5 INTÉGRALEMENT CLOS (§2.76).**
+Dernier morceau du chantier Sorts/Prières V5, à la suite des 60 Miracles (§2.75). Nono a dit
+de continuer.
+- **17 sorts créés** (p.257-259 du PDF) : 4 Daemonology (`RULES-SPEL_DAEMONOLOGY_NN` : Destroy
+  Lesser Daemon, Detect Daemon, Manifest Lesser Daemon, Octagram), 4 Necromancy
+  (`RULES-SPEL_NECROMANCY_NN` : Raise Dead, Reanimate, Screaming Skull, Vanhel's Call), 9 Chaos
+  Magic (`RULES-SPEL_CHAOS_<DIEU>_NN`, 3 par lore) : Nurgle (Festering Inflammation, Miasma of
+  Pestilence, Stream of Corruption), Slaanesh (Acquiescence, From Pain Pleasure, Phantasmagoria),
+  Tzeentch (Boon of Tzeentch, Transformation of Tzeentch, Treason of Tzeentch). Khorne n'a pas
+  de lore ("abhorring magic as an insult to warrior honour", texte du livre) - aucun sort à
+  créer pour lui.
+- **`<Level>` renseigné avec le CN de chaque sort** (pas `"0"` comme les Miracles) : vérifié sur
+  les sorts Witchcraft/Shadows déjà en base que ce champ porte bien le Casting Number chiffré,
+  pas une catégorie.
+- **Daemonology/Necromancy rattachés au talent générique existant `RULES-T0007_*` (Arcane
+  Magic)**, 2 nouvelles spécialisations `_DAEMONOLOGY`/`_NECROMANCY` : le texte les classe
+  explicitement comme des "Dark Lores" de ce talent ("a Dark Lore like Daemonology or
+  Necromancy"), même mécanique que Hedgecraft/Witchcraft (§2.73) - aucun nouveau talent de
+  base à créer.
+- **Talent `Chaos Magic (Lore)` (`RULES-T0023`) converti en radical `RULES-T0023_*`** avec 3
+  spécialisations (`_NURGLE`/`_SLAANESH`/`_TZEENTCH`) : changement d'`id`, vérifié au préalable
+  qu'aucune carrière/espèce V5 ne le référençait nu (seul son propre bloc) avant d'écrire.
+  Tarif ajouté (`Magic`/`SpellMode`/`Xp*`, absents jusqu'ici, talent jusque-là sans mécanique
+  chiffrée) : le texte V5 dit "the same XP costs as Arcane Magic" - mêmes valeurs que
+  `RULES-T0007_*` (`XpDivisor="5"`, palier par tranche de 5 sorts connus) - **différent** du
+  "100 XP à chaque fois" (forfait sans diviseur) de l'équivalent WFRP4 `RULES-T0172_*` : les
+  deux livres ont été vérifiés séparément avant d'écrire pour ne pas transposer la règle d'une
+  édition à l'autre par réflexe.
+- **`TypSpell="Chaos Magic"` réutilisé** (valeur déjà existante côté WFRP4) : vérifié dans le
+  code (`winpersonnage.pas`) que ce champ n'est plus une énumération fermée depuis le chantier
+  du 02/09/2026 (§2.31) - c'est le talent cité par le sort qui pilote le tarif XP et les
+  interactions (fabrication, don, suppression), `TypSpell` n'étant plus qu'un libellé
+  d'affichage libre. Introduire une valeur neuve ici ne pouvait donc pas casser de logique de
+  code, contrairement à l'avertissement plus général sur les champs-énumération (§0).
+- Diff vérifié avant écriture : un seul retrait (`RULES-T0023` → `RULES-T0023_*`), rien
+  d'autre touché. Balance vérifiée (`Sort` 240/240 = 223+17, `Talent` 262/262 = 257+5).
+  `lazbuild` : 0 erreur. `WarhammerHelp.exe` lancé, resté stable plusieurs secondes (chargement
+  sans exception) puis fermé.
+- **Testé par Nono : "parfait"** - chantier Sorts/Prières V5 (Petty Spells, sorts arcaniques +
+  8 Lores Couleur, Hedgecraft/Witchcraft, Bless/Invoke + Bénédictions, Miracles, Dark/Chaos
+  Magic) entièrement clos, du premier morceau du 14/09 à celui-ci.
+- Fichiers modifiés : `DATABASE\WFRP5\BOOK_RULESBOOK.Xml`, `CONTEXT.md`, `Log.txt`.
+
+**Prochaine étape** : chantier Sorts/Prières V5 clos, à choisir avec Nono. Reste sur le
+Rulebook V5 (voir §2.70) : Équipement/Trappings (`DATA_TRAPPING` ou équivalent, chapitre pas
+encore créé). D'autres livres V5 restent aussi entièrement à peupler au-delà du Rulebook.
+
+---
+
 **14/09/2026 — 60 MIRACLES DU RULEBOOK V5 (10 CULTES) : ÉCRIT, COMPILÉ, TESTÉ VISUELLEMENT PAR
 NONO ("c'est bon"), CHANTIER CLOS (§2.75).**
 Suite du chantier Sorts/Prières V5, à la suite de Bless/Invoke + Bénédictions (§2.74). Nono a
