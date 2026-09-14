@@ -5747,8 +5747,7 @@ As sailing one ship is not so different to sailing another, having any Sail Spec
 <SUBCHAPTER_ITEM>
 <Item name="RULES-TRAP_081">"1"</Item>
 <Item name="Canvas Tarpaulin">"1"</Item>
-<Item name="RULES-TRAP_148">"1"</Item>
-<Item name="RULES-TRAP_137">"1"</Item>
+<Item name="RULES-TRAP_148+RULES-TRAP_137">"1"</Item>
 <Item name="3d10 Shillings">"1"</Item>
 <Item name="Barge or 2 Wagons">"2"</Item>
 <Item name="20 GC">"2"</Item>
@@ -8180,8 +8179,7 @@ As sailing one ship is not so different to sailing another, having any Sail Spec
 <Item name="RULES-ARMO_06">"2"</Item>
 <Item name="RULES-TRAP_135">"2"</Item>
 <Item name="Cottage">"3"</Item>
-<Item name="RULES-TRAP_148">"3"</Item>
-<Item name="RULES-TRAP_137">"3"</Item>
+<Item name="RULES-TRAP_148+RULES-TRAP_137">"3"</Item>
 <Item name="RULES-TRAP_136">"3"</Item>
 <Item name="The Respect of the Village">"4"</Item>
 </SUBCHAPTER_ITEM>
@@ -8965,8 +8963,7 @@ Always on the move, Pedlars take naturally to the adventuring life in search of 
 <Item name="Goods worth 8d20 Pennies">"2"</Item>
 <Item name="Pots and Pans">"2"</Item>
 <Item name="RULES-TRAP_135">"2"</Item>
-<Item name="RULES-TRAP_148">"3"</Item>
-<Item name="RULES-TRAP_137">"3"</Item>
+<Item name="RULES-TRAP_148+RULES-TRAP_137">"3"</Item>
 <Item name="Goods worth at least 2d10 Shillings">"3"</Item>
 <Item name="RULES-PROJ_FROND_01">"3"</Item>
 <Item name="Draught Horse and Wagon">"4"</Item>
@@ -10535,8 +10532,7 @@ Playing a Fence lets you move comfortably between respectable society and the cr
 <Item name="Eyeglass">"2"</Item>
 <Item name="RULES-TRAP_135">"2"</Item>
 <Item name="RULES-TRAP_121">"2"</Item>
-<Item name="RULES-TRAP_143">"3"</Item>
-<Item name="RULES-TRAP_137">"3"</Item>
+<Item name="RULES-TRAP_143+RULES-TRAP_137">"3"</Item>
 <Item name="Pawnbroker's Shop">"3"</Item>
 <Item name="Gang of Racketeers">"4"</Item>
 <Item name="Network of Informers">"4"</Item>
@@ -10667,12 +10663,10 @@ Playing a Grave Robber lets you explore the darkest places of the Old World in s
 <Item name="RULES-TRAP_033">"2"</Item>
 <Item name="Handcart">"2"</Item>
 <Item name="RULES-COMB_BASE_03">"2"</Item>
-<Item name="RULES-TRAP_21">"2"</Item>
-<Item name="RULES-TRAP_19">"2"</Item>
+<Item name="RULES-TRAP_21+RULES-TRAP_19">"2"</Item>
 <Item name="Tarpaulin">"2"</Item>
 <Item name="RULES-TRAP_135">"2"</Item>
-<Item name="RULES-TRAP_143">"3"</Item>
-<Item name="RULES-TRAP_137">"3"</Item>
+<Item name="RULES-TRAP_143+RULES-TRAP_137">"3"</Item>
 <Item name="RULES-ARMO_05">"3"</Item>
 <Item name="Pick">"3"</Item>
 <Item name="Rope">"3"</Item>
@@ -11591,8 +11585,7 @@ As a Pilot, you are canny and perceptive, with a keen eye and deep local knowled
 <Item name="Rope">"2"</Item>
 <Item name="Rowboat">"2"</Item>
 <Item name="Pole">"3"</Item>
-<Item name="RULES-TRAP_21">"3"</Item>
-<Item name="RULES-TRAP_19">"3"</Item>
+<Item name="RULES-TRAP_21+RULES-TRAP_19">"3"</Item>
 <Item name="Boathand">"4"</Item>
 <Item name="Small Riverboat">"4"</Item>
 </SUBCHAPTER_ITEM>
@@ -11855,8 +11848,7 @@ Playing a Riverwoman makes you a practical and dependable companion. Whether row
 <Item name="Net">"2"</Item>
 <Item name="RULES-COMB_HAST_04">"2"</Item>
 <Item name="Rowboat">"3"</Item>
-<Item name="RULES-TRAP_21">"3"</Item>
-<Item name="RULES-TRAP_19">"3"</Item>
+<Item name="RULES-TRAP_21+RULES-TRAP_19">"3"</Item>
 <Item name="Barge or Hut">"4"</Item>
 </SUBCHAPTER_ITEM>
 </Career>
@@ -12113,8 +12105,7 @@ Playing a Smuggler lets you stay one step ahead of the law. You are resourceful,
 <SUBCHAPTER_ITEM>
 <Item name="Large Sack">"1"</Item>
 <Item name="Mask or Scarves">"1"</Item>
-<Item name="RULES-TRAP_21">"1"</Item>
-<Item name="RULES-TRAP_19">"1"</Item>
+<Item name="RULES-TRAP_21+RULES-TRAP_19">"1"</Item>
 <Item name="RULES-TRAP_31">"1"</Item>
 <Item name="2 Barrels">"2"</Item>
 <Item name="RULES-COMB_BASE_03">"2"</Item>
@@ -12381,8 +12372,7 @@ Playing a Wrecker means you are adept at ambushes, stealth, and intimidation, wi
 <Item name="Leather Gloves">"1"</Item>
 <Item name="RULES-COMB_BASE_03">"2"</Item>
 <Item name="RULES-ARMO_05">"2"</Item>
-<Item name="RULES-TRAP_21">"2"</Item>
-<Item name="RULES-TRAP_19">"2"</Item>
+<Item name="RULES-TRAP_21+RULES-TRAP_19">"2"</Item>
 <Item name="Crossbow with 10 Bolts or Javelin">"3"</Item>
 <Item name="Grappling Hook and Rope">"3"</Item>
 <Item name="Barge and Wrecker Crew">"4"</Item>

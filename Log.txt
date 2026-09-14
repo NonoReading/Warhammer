@@ -4323,3 +4323,32 @@ rattachement, aucun fichier de traduction dedie trouve en cherchant "Huile"/"Lam
 DATABASE/WFRP5. Reste dans l'audit C : point 4, ~120 objets manquants a saisir par lots, pas
 commence. Fichiers modifies : DATABASE/WFRP5/BOOK_RULESBOOK.Xml, winmetier.pas, CONTEXT.md,
 Log.txt.
+
+14/09/2026 - MECANISME "ENSEMBLE" (+) POUR L'EQUIPEMENT DE CARRIERE COMPOSE, DOUTE STORM
+LANTERN AND OIL RESOLU (CONTEXT.md suite 6). Nono a lu la regle d'avancement V5 : le point 3
+de la session precedente (scinder chaque objet compose en deux Item avec chacun son niveau)
+etait le mauvais modele - deux objets acquis ensemble sous une seule coche d'avancement (ex.
+Storm Lantern + Lamp Oil) ne doivent pas devenir deux niveaux independants. Le doute souleve
+en fin de session precedente portait sur cette modelisation, pas sur la traduction FR (piste
+abandonnee). Mecanisme ajoute : SeparateurEnsemble = '+' (chargeconstantes.pas), parallele a
+SeparateurMulti (choix, '/') mais pour deux codes joints acquis en meme temps - un seul
+Item name="CODE1+CODE2" remplace les deux lignes. Couvre WinMetier, WinLivre, WinCreation
+(affichage + sauvegarde) et le PDF de carriere (pdfmetier.pas). Migration des 10 occurrences
+de la session precedente vers cette syntaxe dans BOOK_RULESBOOK.Xml : Mule and Cart (x3) ->
+RULES-TRAP_148+RULES-TRAP_137, Horse and Cart (x2) -> RULES-TRAP_143+RULES-TRAP_137, Storm
+Lantern and Oil (x5) -> RULES-TRAP_21+RULES-TRAP_19. Meme niveau conserve sur chaque ligne
+fusionnee. Diff verifie (20 lignes retirees, 10 ajoutees, exactement les paires de la session
+precedente - les occurrences isolees de RULES-TRAP_19/RULES-TRAP_21 sans doublon adjacent,
+ex. ligne ~6905 (Lamp Oil et Storm Lantern achetes separement dans une autre carriere), non
+touchees). Compile (lazbuild --build-all), 0 erreur.
+
+Bug trouve au premier test de Nono (carriere Pilot) : EListError "List index (1) out of
+bounds", pas specifique a Pilot - touchait les 10 occurrences migrees. Cause :
+GetTypeMetierEquipement (unitcalcul.pas:205) ne decoupait le type qu'avec SeparateurMulti
+('/'), jamais SeparateurEnsemble ('+') - pour un item CODE1+CODE2, le type calcule restait
+un seul caractere au lieu de deux joints par '+', et le code d'affichage (winmetier.pas:816,
+boucle For IndL := 0 to 1) plantait sur stringsT[1] inexistant. Corrige : la fonction
+detecte le separateur present ('+' ou '/') et calcule le type par code, rejoint avec le
+meme separateur. Compile, 0 erreur, teste OK par Nono (Pilot et une carriere Mule/Horse and
+Cart). Fichiers modifies : DATABASE/WFRP5/BOOK_RULESBOOK.Xml, unitcalcul.pas, CONTEXT.md,
+Log.txt.

@@ -1,5 +1,40 @@
 # Warhammer — Contexte projet
 
+**14/09/2026 (suite 6) — MÉCANISME "ENSEMBLE" (`+`) POUR L'ÉQUIPEMENT DE CARRIÈRE COMPOSÉ,
+DOUTE DE LA SUITE 5 SUR `STORM LANTERN AND OIL` RÉSOLU.**
+Nono a lu la règle d'avancement V5 et identifié que le point 3 de la suite 5 (scinder chaque
+objet composé en deux `<Item>` séparés, chacun avec son propre niveau) était le mauvais
+modèle : deux objets acquis **ensemble sous une seule coche d'avancement** (ex. Storm Lantern
++ Lamp Oil) ne doivent pas devenir deux lignes de niveau indépendantes. Le doute qu'il avait
+soulevé en fin de suite 5 ("je pense que c'est Storm Lantern et de l'huile, pas une lampe à
+huile") portait donc sur la modélisation, pas sur la traduction FR — la piste "table de
+labels `RULES-LAB_*`" explorée en suite 5 n'était pas la bonne direction.
+- **Mécanisme ajouté** : `SeparateurEnsemble = '+'` (`chargeconstantes.pas`), parallèle à
+  `SeparateurMulti` (choix, `/`) mais pour deux codes joints acquis en même temps. Un seul
+  `<Item name="CODE1+CODE2">"niveau"</Item>` remplace les deux lignes. Couvre `WinMetier`,
+  `WinLivre`, `WinCreation` (affichage + sauvegarde) et le PDF de carrière (`pdfmetier.pas`).
+- **Migration des 10 occurrences** de la suite 5 (point 3) vers cette syntaxe, dans
+  `BOOK_RULESBOOK.Xml` : `Mule and Cart` (×3) → `RULES-TRAP_148+RULES-TRAP_137` ;
+  `Horse and Cart` (×2) → `RULES-TRAP_143+RULES-TRAP_137` ; `Storm Lantern and Oil` (×5) →
+  `RULES-TRAP_21+RULES-TRAP_19`. Même niveau conservé sur chaque ligne fusionnée. Diff
+  vérifié (20 lignes retirées, 10 ajoutées, exactement les paires de la suite 5 — les
+  occurrences isolées de `RULES-TRAP_19`/`RULES-TRAP_21` sans doublon adjacent, ex. ligne
+  ~6905 (Lamp Oil et Storm Lantern achetés séparément dans une autre carrière), n'ont pas été
+  touchées). Compilé (`lazbuild --build-all`), 0 erreur.
+- **🐛 Bug trouvé au premier test de Nono (carrière Pilot)** : `EListError List index (1) out
+  of bounds`. Cause : `GetTypeMetierEquipement` (`unitcalcul.pas:205`) ne découpait le type
+  qu'avec `SeparateurMulti` ('/'), jamais `SeparateurEnsemble` ('+') — pour un item
+  `CODE1+CODE2`, le type calculé restait un seul caractère au lieu de deux joints par `+`,
+  et le code d'affichage (`winmetier.pas:816`, boucle `For IndL := 0 to 1`) plantait sur
+  `stringsT[1]` inexistant. Touchait les 10 occurrences migrées, pas seulement Pilot.
+  Corrigé : `GetTypeMetierEquipement` détecte le séparateur présent (`+` ou `/`) et calcule
+  le type par code, rejoint avec le même séparateur. Compilé, 0 erreur, **testé OK par
+  Nono**.
+- Le reste de l'audit C (point 4, ~120 objets manquants) n'a pas bougé — voir suite 5
+  ci-dessous.
+
+---
+
 **14/09/2026 (suite 5) — AUDIT C, SUITE DU "RESTE" (§2.77) : POINTS 1 A 3 FAITS ET COMPILES,
 DEUX BUGS WINMETIER TROUVES EN COURS DE ROUTE, POINT 3 A RE-VERIFIER (DOUTE DE NONO).**
 Reprise du "reste de l'audit C" laissé de côté suite 4 (Trade Tools/Workshop, Book (X),
@@ -34,29 +69,12 @@ personnage/avancement de la suite 4.
   `Book (Herbs)`, un `Book` nu — candidats pour le point 4 plutôt qu'un rattachement forcé.
   Diff vérifié (9 retraits = 9 ajouts). Pas de confirmation visuelle explicite de Nono sur
   ce point précis (il a dit "continue" directement).
-- **Point 3 (FAIT, compilé) — À RE-VERIFIER, doute de Nono en fin de session** : les 10
-  occurrences de véhicules composés scindées en deux `<Item>` chacune, même niveau
-  conservé : `Mule and Cart` (×3) → `RULES-TRAP_148` (Mule) + `RULES-TRAP_137` (Cart) ;
-  `Horse and Cart` (×2) → `RULES-TRAP_143` (Draught Horse, choix validé par Nono après
-  discussion : le cheval de trait plutôt que Riding Horse) + `RULES-TRAP_137` (Cart) ;
-  `Storm Lantern and Oil` (×5) → `RULES-TRAP_21` (Storm Lantern) + `RULES-TRAP_19` (seule
-  entrée catalogue contenant "Oil", décrite `"Lamp Oil"`). Diff vérifié (10 lignes retirées,
-  20 ajoutées, 1 pour 2 partout). Compilé, 0 erreur, **pas encore testé visuellement par
-  Nono**.
-  **Doute soulevé par Nono juste avant de partir** : "je pense que c'est Storm Lantern et
-  de l'huile, pas une lampe à huile" — à clarifier à la reprise. Piste en cours au moment de
-  l'interruption : `RULES-TRAP_19` est la SEULE entrée "Oil" de tout `DATABASE/WFRP5`
-  (vérifié par recherche exhaustive), son `<Description language="ENGLISH">` est bien
-  `"Lamp Oil"` (huile combustible pour lampe/lanterne, pas un objet "lampe à huile" séparé)
-  - donc le rattachement mécanique semble correct côté donnée anglaise, mais la remarque de
-  Nono porte peut-être sur l'AFFICHAGE en français dans WinMetier (libellé traduit à
-  vérifier : est-ce qu'il se lit comme "huile de lampe/lanterne" ou comme "lampe à huile" ?
-  je n'ai pas eu le temps de retrouver comment/où ce libellé FR est généré avant qu'il ne
-  parte). **Point de reprise exact** : retrouver le mécanisme de traduction du libellé de
-  `RULES-TRAP_19` (probablement une table de labels `RULES-LAB_*` ou une génération
-  automatique depuis l'anglais — pas trouvé de fichier de traduction dédié dans
-  `DATABASE/WFRP5/` en cherchant "Huile"/"Lamp Oil"), l'afficher à Nono, et confirmer ou
-  corriger le rattachement des 5 occurrences de `Storm Lantern and Oil`.
+- **Point 3 — REMPLACÉ par le mécanisme "ensemble" (voir suite 6 ci-dessus)** : la scission en
+  deux `<Item>` par objet composé (`Mule and Cart`, `Horse and Cart`, `Storm Lantern and Oil`)
+  n'était pas le bon modèle — Nono a clarifié que ces objets sont acquis ensemble sous une
+  seule coche d'avancement, pas comme deux niveaux indépendants. Le doute qu'il avait soulevé
+  sur `Storm Lantern and Oil` portait sur ce point, pas sur la traduction FR. Migré vers
+  `CODE1+CODE2` (`SeparateurEnsemble`) en suite 6.
 - **Reste dans l'audit C** : point 4, ~120 vrais objets manquants (`Rope`, `Symbol of
   Rank`, `Religious Relic`, `Spyglass`...) à saisir par lots — pas commencé. Proposé à Nono
   de découper en lots avant de commencer, pas encore tranché.

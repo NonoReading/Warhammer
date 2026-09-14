@@ -208,14 +208,23 @@ Function GetTypeMetierEquipement(Equip: String): String;
     Debut:            String;
     Strings:          TStringList;
     Ind:              Integer;
+    Separateur:       Char;
   begin
+    // Choix (SeparateurMulti, "A/B") et ensemble (SeparateurEnsemble, "A+B") produisent
+    // chacun un type par code, joints par le meme separateur que celui du code (lu par
+    // winmetier.pas/wincreation.pas/pdfmetier.pas qui decoupent TypeEquipement en miroir
+    // de Equipement - CONTEXT.md, chantier equipement/avancement).
+    if Pos(SeparateurEnsemble, Equip) > 0 then
+      Separateur := SeparateurEnsemble
+    else
+      Separateur := SeparateurMulti;
     Strings := TStringList.create;
-    ExtractStrings([SeparateurMulti], [], PChar(Equip), Strings);
+    ExtractStrings([Separateur], [], PChar(Equip), Strings);
     TypeEquipement := '';
     for Ind := 0 to Strings.Count - 1 do
     begin
       if TypeEquipement <> '' then
-        TypeEquipement := TypeEquipement+SeparateurMulti;
+        TypeEquipement := TypeEquipement+Separateur;
       DecoupeCodeValeur(Strings[Ind]);
       Debut := copy(CodeValeur,1,5);
         case Debut of
