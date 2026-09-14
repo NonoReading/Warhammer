@@ -6007,7 +6007,7 @@ As sailing one ship is not so different to sailing another, having any Sail Spec
 <SUBCHAPTER_ITEM>
 <Item name="Lodgings">"1"</Item>
 <Item name="Modest Shop">"2"</Item>
-<Item name="Blunderbuss with 10 Shots">"3"</Item>
+<Item name="RULES-PROJ_POUDRE_01">"3"</Item>
 <Item name="Inn or Townhouse">"3"</Item>
 <Item name="Staff">"3"</Item>
 <Item name="Chains of Office">"4"</Item>
@@ -6513,7 +6513,7 @@ As sailing one ship is not so different to sailing another, having any Sail Spec
 <Item name="RULES-COMB_*">"1"</Item>
 <Item name="Sling Bag containing Clothing and 1d10 Bandages">"1"</Item>
 <Item name="Main Gauche or Sword-breaker">"2"</Item>
-<Item name="Pistol with 10 Shots">"2"</Item>
+<Item name="RULES-PROJ_POUDRE_03">"2"</Item>
 <Item name="RULES-COMB_BASE_03">"3"</Item>
 <Item name="Quality Rapier">"3"</Item>
 <Item name="Trusty Second">"3"</Item>
@@ -7410,7 +7410,7 @@ As sailing one ship is not so different to sailing another, having any Sail Spec
 </SUBCHAPTER_TALENT>
 <SUBCHAPTER_ITEM>
 <Item name="RULES-TRAP_046">"1"</Item>
-<Item name="Hand Weapon (Sickle)">"1"</Item>
+<Item name="RULES-COMB_BASE_03">"1"</Item>
 <Item name="RULES-COMB_HAST_03">"1"</Item>
 <Item name="RULES-TRAP_168">"2"</Item>
 <Item name="Trade Tools (Herbalist)">"2"</Item>
@@ -7537,7 +7537,7 @@ As sailing one ship is not so different to sailing another, having any Sail Spec
 <SUBCHAPTER_ITEM>
 <Item name="RULES-TRAP_047">"1"</Item>
 <Item name="RULES-TRAP_048">"1"</Item>
-<Item name="Hand Weapon (Sickle)">"1"</Item>
+<Item name="RULES-COMB_BASE_03">"1"</Item>
 <Item name="Sling Bag containing Assortment of Herbs">"1"</Item>
 <Item name="Trade Tools (Herbalist)">"2"</Item>
 <Item name="3 Herbal Remedies">"3"</Item>
@@ -7662,11 +7662,11 @@ As sailing one ship is not so different to sailing another, having any Sail Spec
   <!-- Sniper -->
 </SUBCHAPTER_TALENT>
 <SUBCHAPTER_ITEM>
-<Item name="Hand Weapon (Axe)">"1"</Item>
+<Item name="RULES-COMB_BASE_03">"1"</Item>
 <Item name="Selection of Animal Traps">"1"</Item>
 <Item name="Sturdy Boots and Cloak">"1"</Item>
 <Item name="RULES-TRAP_145">"2"</Item>
-<Item name="Ranged Weapon (Any One)">"2"</Item>
+<Item name="RULES-PROJ_*">"2"</Item>
 <Item name="RULES-COMB_HAST_04">"2"</Item>
 <Item name="RULES-TRAP_033">"3"</Item>
 <Item name="RULES-TRAP_04">"3"</Item>
@@ -7792,14 +7792,14 @@ As sailing one ship is not so different to sailing another, having any Sail Spec
 <SUBCHAPTER_ITEM>
 <Item name="RULES-TRAP_09">"1"</Item>
 <Item name="Crude Map">"1"</Item>
-<Item name="Great Weapon (Two-handed Pick)">"1"</Item>
-<Item name="Hand Weapon (Pick)">"1"</Item>
+<Item name="RULES-COMB_2M_03">"1"</Item>
+<Item name="RULES-COMB_BASE_03">"1"</Item>
 <Item name="RULES-TRAP_23">"1"</Item>
 <Item name="RULES-TRAP_115">"1"</Item>
 <Item name="Davrich Lamp">"2"</Item>
 <Item name="RULES-TRAP_19">"2"</Item>
 <Item name="RULES-ARMO_05">"2"</Item>
-<Item name="Open Helm (Miner's Helm)">"2"</Item>
+<Item name="RULES-ARMO_15">"2"</Item>
 <Item name="Trade Tools (Engineer)">"3"</Item>
 <Item name="Crew of Miners">"4"</Item>
 <Item name="RULES-TRAP_121">"4"</Item>
@@ -8048,7 +8048,7 @@ As sailing one ship is not so different to sailing another, having any Sail Spec
 <Item name="RULES-ARMO_05">"1"</Item>
 <Item name="Sturdy Boots and Cloak">"1"</Item>
 <Item name="Rope">"1"</Item>
-<Item name="Ranged Weapon (Any One)">"2"</Item>
+<Item name="RULES-PROJ_*">"2"</Item>
 <Item name="RULES-ARMO_11">"2"</Item>
 <Item name="RULES-TRAP_133">"3"</Item>
 <Item name="RULES-TRAP_150">"3"</Item>
@@ -8174,7 +8174,7 @@ As sailing one ship is not so different to sailing another, having any Sail Spec
 </SUBCHAPTER_TALENT>
 <SUBCHAPTER_ITEM>
 <Item name="None">"1"</Item>
-<Item name="Hand Weapon (Axe)">"2"</Item>
+<Item name="RULES-COMB_BASE_03">"2"</Item>
 <Item name="Lasso or Sling with 10 Stone Bullets">"2"</Item>
 <Item name="RULES-ARMO_06">"2"</Item>
 <Item name="Trade Tools (as Trade)">"2"</Item>
@@ -8439,9 +8439,9 @@ The Empire's roads are perilous, so there is rarely a shortage of work replacing
 <Item name="RULES-TRAP_056">"1"</Item>
 <Item name="RULES-ARMO_06">"1"</Item>
 <Item name="Warm Coat">"1"</Item>
-<Item name="Blunderbuss with 10 Shots">"2"</Item>
+<Item name="RULES-PROJ_POUDRE_01">"2"</Item>
 <Item name="RULES-COMB_FLEAU_04">"2"</Item>
-<Item name="Pistol with 10 Shots">"3"</Item>
+<Item name="RULES-PROJ_POUDRE_03">"3"</Item>
 <Item name="Quality Cloak">"3"</Item>
 <Item name="Fleet of Coaches and Horses">"4"</Item>
 <Item name="Maps">"4"</Item>
@@ -8570,7 +8570,7 @@ The open road, a new village every night, the smell of greasepaint, and the roar
 <Item name="Musical Instrument">"1"</Item>
 <Item name="RULES-TRAP_051">"2"</Item>
 <Item name="RULES-TRAP_18">"2"</Item>
-<Item name="5 Throwing Knives">"2"</Item>
+<Item name="RULES-PROJ_LANC_04" quantite="5">"2"</Item>
 <Item name="Trained Animal">"3"</Item>
 <Item name="RULES-TRAP_121">"3"</Item>
 <Item name="Draught Horses and Wagon (Stage)">"4"</Item>
@@ -8699,7 +8699,7 @@ Note: This profile reflects Sigmarite Flagellants, by far the most common in the
 <SUBCHAPTER_ITEM>
 <Item name="RULES-COMB_FLEAU_01">"1"</Item>
 <Item name="Tattered Robes">"1"</Item>
-<Item name="Great Weapon (Military Flail)">"2"</Item>
+<Item name="RULES-COMB_FLEAU_03">"2"</Item>
 <Item name="RULES-TRAP_061">"2"</Item>
 <Item name="Religious Relic">"3"</Item>
 <Item name="Book (Religion)">"4"</Item>
@@ -8965,7 +8965,7 @@ Always on the move, Pedlars take naturally to the adventuring life in search of 
 <Item name="Trade Tools (Tinker)">"2"</Item>
 <Item name="Mule and Cart">"3"</Item>
 <Item name="Goods worth at least 2d10 Shillings">"3"</Item>
-<Item name="Sling with 10 Bullets">"3"</Item>
+<Item name="RULES-PROJ_FROND_01">"3"</Item>
 <Item name="Draught Horse and Wagon">"4"</Item>
 <Item name="Goods worth at least 3d10 Shillings">"4"</Item>
 <Item name="4d10 Shillings">"4"</Item>
@@ -9088,12 +9088,12 @@ Roadwardens rarely need to seek out adventure — it usually finds them first. A
   <!-- Roughrider -->
 </SUBCHAPTER_TALENT>
 <SUBCHAPTER_ITEM>
-<Item name="Crossbow with 10 Bolts">"1"</Item>
+<Item name="RULES-PROJ_ARB_01">"1"</Item>
 <Item name="RULES-COMB_BASE_03">"1"</Item>
 <Item name="RULES-ARMO_05">"1"</Item>
 <Item name="RULES-TRAP_146">"2"</Item>
 <Item name="RULES-ARMO_11">"2"</Item>
-<Item name="Pistol with 10 Shots">"2"</Item>
+<Item name="RULES-PROJ_POUDRE_03">"2"</Item>
 <Item name="Rope">"2"</Item>
 <Item name="Squad of Roadwardens">"3"</Item>
 <Item name="Symbol of Rank">"3"</Item>
@@ -9221,7 +9221,7 @@ Witch Hunters travel constantly, following rumours of unsanctioned magic, hearin
 <SUBCHAPTER_ITEM>
 <Item name="RULES-COMB_BASE_03">"1"</Item>
 <Item name="Instruments of Torture">"1"</Item>
-<Item name="Pistol with 10 Shots">"2"</Item>
+<Item name="RULES-PROJ_POUDRE_03">"2"</Item>
 <Item name="RULES-TRAP_056">"2"</Item>
 <Item name="RULES-ARMO_05">"2"</Item>
 <Item name="RULES-TRAP_150">"2"</Item>
@@ -9482,12 +9482,12 @@ Guard duty is not always exciting — most of the time it involves standing arou
 <Item name="Buckler">"1"</Item>
 <Item name="RULES-ARMO_06">"1"</Item>
 <Item name="Storm Lantern with Oil">"1"</Item>
-<Item name="Bow with 10 Arrows">"2"</Item>
-<Item name="Sleeved Mail Shirt">"2"</Item>
+<Item name="RULES-PROJ_ARC_01">"2"</Item>
+<Item name="RULES-ARMO_11">"2"</Item>
 <Item name="RULES-ARMO_02">"2"</Item>
 <Item name="RULES-COMB_HAST_04">"2"</Item>
 <Item name="Great Weapon or Halberd">"3"</Item>
-<Item name="Helmet">"3"</Item>
+<Item name="RULES-ARMO_14">"3"</Item>
 <Item name="RULES-TRAP_067">"3"</Item>
 <Item name="RULES-ARMO_13">"4"</Item>
 <Item name="Squad of Guards">"4"</Item>
@@ -9625,7 +9625,7 @@ Even the strictest order grants its Knights a degree of independence. Some adven
 <Item name="Barding">"3"</Item>
 <Item name="Small Unit of Knights">"3"</Item>
 <Item name="Large Unit of Knights or Several Small Units of Knights">"4"</Item>
-<Item name="Plumed Great Helm">"4"</Item>
+<Item name="RULES-ARMO_14">"4"</Item>
 <Item name="Squire">"4"</Item>
 </SUBCHAPTER_ITEM>
 </Career>
@@ -9752,7 +9752,7 @@ The pit is a hard master, and many fighters seize any chance to escape the viole
 <Item name="Net or Whip">"2"</Item>
 <Item name="RULES-ARMO_02">"2"</Item>
 <Item name="RULES-ARMO_13">"3"</Item>
-<Item name="Helmet">"3"</Item>
+<Item name="RULES-ARMO_14">"3"</Item>
 <Item name="Quality Helmet">"4"</Item>
 </SUBCHAPTER_ITEM>
 </Career>
@@ -10005,10 +10005,10 @@ Note: The Slayer Oath is only satisfied by honourable death. Once a dwarf become
 </SUBCHAPTER_TALENT>
 <SUBCHAPTER_ITEM>
 <Item name="Flask of Spirits">"1"</Item>
-<Item name="Hand Weapon (Dwarf Axe)">"1"</Item>
+<Item name="RULES-COMB_BASE_03">"1"</Item>
 <Item name="Tattoos">"1"</Item>
-<Item name="Great Weapon (Dwarf Greataxe)">"2"</Item>
-<Item name="2 Dwarf Throwing Axes">"3"</Item>
+<Item name="RULES-COMB_2M_02">"2"</Item>
+<Item name="RULES-PROJ_LANC_03" quantite="2">"3"</Item>
 <Item name="Rune Axe">"4"</Item>
 </SUBCHAPTER_ITEM>
 </Career>
@@ -10133,10 +10133,10 @@ Playing a Soldier makes you a disciplined and dependable warrior. Used to fighti
 <SUBCHAPTER_ITEM>
 <Item name="Leather Breastplate">"1"</Item>
 <Item name="RULES-TRAP_067">"1"</Item>
-<Item name="Weapon (Any One)">"1"</Item>
+<Item name="RULES-COMB_*">"1"</Item>
 <Item name="RULES-ARMO_13">"2"</Item>
-<Item name="Helmet">"2"</Item>
-<Item name="Weapon (Any)">"2"</Item>
+<Item name="RULES-ARMO_14">"2"</Item>
+<Item name="RULES-COMB_*">"2"</Item>
 <Item name="Symbol of Rank">"3"</Item>
 <Item name="Regiment of Recruits">"3"</Item>
 <Item name="Letter of Commission">"4"</Item>
@@ -10271,7 +10271,7 @@ Playing a Warrior Priest lets you stand at the forefront of battle, inspiring yo
 <Item name="RULES-TRAP_061">"1"</Item>
 <Item name="RULES-TRAP_062">"1"</Item>
 <Item name="RULES-ARMO_13">"2"</Item>
-<Item name="Weapon (Any)">"2"</Item>
+<Item name="RULES-COMB_*">"2"</Item>
 <Item name="RULES-TRAP_146">"3"</Item>
 <Item name="Religious Relic">"4"</Item>
 </SUBCHAPTER_ITEM>
@@ -10930,8 +10930,8 @@ Playing an Outlaw lets you thrive beyond the reach of civilisation. You know peo
 <Item name="Bow with 10 Arrows or Crossbow with 10 Bolts or Shield">"2"</Item>
 <Item name="RULES-TRAP_30">"2"</Item>
 <Item name="Band of Outlaws">"3"</Item>
-<Item name="Helmet">"3"</Item>
-<Item name="Sleeved Mail Shirt">"3"</Item>
+<Item name="RULES-ARMO_14">"3"</Item>
+<Item name="RULES-ARMO_11">"3"</Item>
 <Item name="'Fiefdom' of Outlaw Chiefs">"4"</Item>
 <Item name="Lair">"4"</Item>
 </SUBCHAPTER_ITEM>
@@ -11060,7 +11060,7 @@ Playing a Racketeer lets you command respect through fear. You understand how th
 <Item name="RULES-ARMO_05">"1"</Item>
 <Item name="RULES-TRAP_056">"2"</Item>
 <Item name="RULES-ARMO_11">"2"</Item>
-<Item name="Crossbow Pistol with 10 Bolts">"3"</Item>
+<Item name="RULES-PROJ_ARBPG_01">"3"</Item>
 <Item name="Gang of Thugs and Racketeers">"3"</Item>
 <Item name="Lair">"3"</Item>
 <Item name="Network of Informers">"4"</Item>
@@ -11193,7 +11193,7 @@ Playing a Thief makes you a very useful recruit to an adventuring party, since m
 <Item name="Fence Contact">"2"</Item>
 <Item name="Rope">"2"</Item>
 <Item name="Trade Tools (Thief)">"2"</Item>
-<Item name="Crossbow Pistol with 10 Bolts">"3"</Item>
+<Item name="RULES-PROJ_ARBPG_01">"3"</Item>
 <Item name="RULES-TRAP_17">"3"</Item>
 <Item name="Several Fence Contacts">"3"</Item>
 <Item name="Calling Card">"4"</Item>
@@ -11449,7 +11449,7 @@ As a Boatman, you are strong, tough, and accustomed to handling yourself in roug
   <!-- Savant (Riverways) -->
 </SUBCHAPTER_TALENT>
 <SUBCHAPTER_ITEM>
-<Item name="Hand Weapon (Boat Hook)">"1"</Item>
+<Item name="RULES-COMB_BASE_03">"1"</Item>
 <Item name="RULES-ARMO_05">"1"</Item>
 <Item name="Pole">"1"</Item>
 <Item name="Rope">"2"</Item>
@@ -11580,7 +11580,7 @@ As a Pilot, you are canny and perceptive, with a keen eye and deep local knowled
   <!-- Tenacious -->
 </SUBCHAPTER_TALENT>
 <SUBCHAPTER_ITEM>
-<Item name="Hand Weapon (Boat Hook)">"1"</Item>
+<Item name="RULES-COMB_BASE_03">"1"</Item>
 <Item name="RULES-ARMO_06">"2"</Item>
 <Item name="Rope">"2"</Item>
 <Item name="Rowboat">"2"</Item>
@@ -11712,10 +11712,10 @@ Playing a Riverwarden combines the skills of a sailor, investigator, and fighter
 <Item name="RULES-ARMO_05">"1"</Item>
 <Item name="RULES-TRAP_067">"1"</Item>
 <Item name="Lantern and Oil">"2"</Item>
-<Item name="Pistol with 10 Shots">"2"</Item>
+<Item name="RULES-PROJ_POUDRE_03">"2"</Item>
 <Item name="RULES-ARMO_02">"2"</Item>
 <Item name="RULES-TRAP_17">"3"</Item>
-<Item name="Helmet">"3"</Item>
+<Item name="RULES-ARMO_14">"3"</Item>
 <Item name="RULES-ARMO_11">"3"</Item>
 <Item name="Patrol Boats and Crew">"4"</Item>
 <Item name="Symbol of Rank">"4"</Item>
@@ -11974,7 +11974,7 @@ Playing a Sailor makes you a hardy and dependable companion. Used to hard work, 
 <Item name="Brush">"1"</Item>
 <Item name="RULES-TRAP_086">"1"</Item>
 <Item name="RULES-TRAP_104">"1"</Item>
-<Item name="Hand Weapon (Boat Hook)">"2"</Item>
+<Item name="RULES-COMB_BASE_03">"2"</Item>
 <Item name="RULES-ARMO_06">"2"</Item>
 <Item name="Trade Tools (Carpenter)">"3"</Item>
 <Item name="Trade Tools (Physician)">"3"</Item>
@@ -12110,7 +12110,7 @@ Playing a Smuggler lets you stay one step ahead of the law. You are resourceful,
 <Item name="2 Barrels">"2"</Item>
 <Item name="RULES-COMB_BASE_03">"2"</Item>
 <Item name="Rowboat">"2"</Item>
-<Item name="Pistol with 10 Shots">"3"</Item>
+<Item name="RULES-PROJ_POUDRE_03">"3"</Item>
 <Item name="River Runners">"3"</Item>
 <Item name="Speedy Barge">"3"</Item>
 <Item name="RULES-TRAP_091">"4"</Item>
@@ -12236,7 +12236,7 @@ Playing a Stevedore makes you a tough and dependable companion. You can handle y
   <!-- Read/Write -->
 </SUBCHAPTER_TALENT>
 <SUBCHAPTER_ITEM>
-<Item name="Hand Weapon (Boat Hook)">"1"</Item>
+<Item name="RULES-COMB_BASE_03">"1"</Item>
 <Item name="Leather Gloves">"1"</Item>
 <Item name="RULES-TRAP_130">"2"</Item>
 <Item name="RULES-ARMO_06">"2"</Item>
@@ -12370,7 +12370,7 @@ Playing a Wrecker means you are adept at ambushes, stealth, and intimidation, wi
 <Item name="RULES-TRAP_089">"1"</Item>
 <Item name="Large Sack">"1"</Item>
 <Item name="Leather Gloves">"1"</Item>
-<Item name="Hand Weapon (Boat Hook)">"2"</Item>
+<Item name="RULES-COMB_BASE_03">"2"</Item>
 <Item name="RULES-ARMO_05">"2"</Item>
 <Item name="Storm Lantern and Oil">"2"</Item>
 <Item name="Crossbow with 10 Bolts or Javelin">"3"</Item>
@@ -16889,4 +16889,64 @@ Playing a Wrecker means you are adept at ambushes, stealth, and intimidation, wi
 <Talent>"RULES-T0168_RANALD,RULES-T0168_VERENA"</Talent>
 </Sort>
 </DATA_SPELL_TALENT>
+<DATA_CRAFTMANSHIP>
+<Craftsmanship id="RULES-QUALITY_01">
+<Description language="ENGLISH">"Lightweight"</Description>
+<Explanation language="ENGLISH">"Cleverly crafted for ease of carrying. Reduce Encumbrance Points by 1."</Explanation>
+<Short language="ENGLISH">"Enc -1"</Short>
+<Max>"1"</Max>
+<Encumbrance>"1"</Encumbrance>
+<Modifier>"BONUS"</Modifier>
+</Craftsmanship>
+<Craftsmanship id="RULES-QUALITY_02">
+<Description language="ENGLISH">"Practical"</Description>
+<Explanation language="ENGLISH">"Expertly crafted with utility in mind. A failed Test using this item receives +1 SL. If the item is a piece of armour, any penalties for wearing it are reduced by one level (for example from −3 SL to −2 SL)."</Explanation>
+<Short language="ENGLISH">"failed Test +1 SL; armour penalty reduced"</Short>
+<Max>"1"</Max>
+<Modifier>"PRACTICAL"</Modifier>
+</Craftsmanship>
+<Craftsmanship id="RULES-QUALITY_03">
+<Description language="ENGLISH">"Fine"</Description>
+<Explanation language="ENGLISH">"Meticulously crafted to please the eye. This Quality is a sign of social status and can be taken multiple times. The higher the Quality, the more impressive it seems."</Explanation>
+<Short language="ENGLISH">"sign of social status"</Short>
+<Max>"99"</Max>
+<Modifier>""</Modifier>
+</Craftsmanship>
+<Craftsmanship id="RULES-QUALITY_04">
+<Description language="ENGLISH">"Durable"</Description>
+<Explanation language="ENGLISH">"Laboriously crafted using strong materials, the item can take +Durable Damage points before it suffers any negatives and gains a saving throw of 9+ on a 1d10 roll against instant breakage from sources like Trap Blade. This Quality can be taken multiple times. Each time it is taken, the saving throw improves by 1 (e.g. From 9+ to 8+)."</Explanation>
+<Short language="ENGLISH">"takes damage before breaking"</Short>
+<Max>"99"</Max>
+<Modifier>""</Modifier>
+</Craftsmanship>
+<Craftsmanship id="RULES-DEFECT_01">
+<Description language="ENGLISH">"Shoddy"</Description>
+<Explanation language="ENGLISH">"Hastily crafted by an amateur or fraudster. The item breaks when used in any failed Test rolling a double. Similarly, Shoddy armour breaks if any Critical Hit is sustained to a Hit Location it protects."</Explanation>
+<Short language="ENGLISH">"breaks on a failed Test with a double"</Short>
+<Max>"1"</Max>
+<Modifier>""</Modifier>
+</Craftsmanship>
+<Craftsmanship id="RULES-DEFECT_02">
+<Description language="ENGLISH">"Ugly"</Description>
+<Explanation language="ENGLISH">"Crafted without any aesthetic awareness whatsoever, Ugly items attract negative attention, and related Fellowship Tests might even suffer a –1 SL penalty."</Explanation>
+<Short language="ENGLISH">"negative attention, Fellowship -1 SL"</Short>
+<Max>"1"</Max>
+<Modifier>""</Modifier>
+</Craftsmanship>
+<Craftsmanship id="RULES-DEFECT_03">
+<Description language="ENGLISH">"Unreliable"</Description>
+<Explanation language="ENGLISH">"Crafted without attention to functionality, a failed Test using this item receives –1 SL. Further, penalties for wearing Unreliable armour are doubled."</Explanation>
+<Short language="ENGLISH">"failed Test -1 SL; armour penalties doubled"</Short>
+<Max>"1"</Max>
+<Modifier>"UNRELIABLE"</Modifier>
+</Craftsmanship>
+<Craftsmanship id="RULES-DEFECT_04">
+<Description language="ENGLISH">"Bulky"</Description>
+<Explanation language="ENGLISH">"An awkward design crafted clumsily. Increase Encumbrance by +1 (small trinkets cannot normally have this flaw). Bulky clothing and armour are Enc 1 even when worn."</Explanation>
+<Short language="ENGLISH">"Enc +1"</Short>
+<Max>"1"</Max>
+<Encumbrance>"1"</Encumbrance>
+<Modifier>"BULKY"</Modifier>
+</Craftsmanship>
+</DATA_CRAFTMANSHIP>
 </DATA_BOOK>

@@ -4260,3 +4260,36 @@ WinCreation) : bon. Ne change pas le point de reprise du plan en 9 phases (toujo
 puis reprise de l'audit C) - correctif isole remonte par Nono en cours de route. Fichiers
 modifies : chargemetierequipement.pas, xmlexportimport.pas, winlivre.pas, winmetier.pas,
 wincreation.pas, DATABASE/WFRP5/BOOK_RULESBOOK.Xml, CONTEXT.md, Log.txt.
+14/09/2026 - AUDIT C : RATTACHEMENT ARMES/ARMURES ET DATA_CRAFTMANSHIP EN V5 (CONTEXT.md 2.77).
+DATA_CRAFTMANSHIP peuple en V5 (8 entrees Lightweight/Practical/Fine/Durable/Shoddy/Ugly/
+Unreliable/Bulky, texte repris du Rulebook V5 lui-meme). En cherchant a brancher "Quality
+Clothing" etc, decouverte que ce n'est pas DATA_CRAFTMANSHIP qu'il fallait utiliser mais un
+suffixe (Q) deja existant et actif en V4 sur les codes d'equipement de carriere (vu en usage
+reel dans Archives of the Empire, Horned Rat Companion), resolu par LibelleEquipement
+(winlivre.pas) en "Libelle de qualite" - mais jamais porte jusqu'a la creation de personnage
+(wincreation.pas/winpersonnage.pas ne le connaissent pas). Nono a mis ce point en pause pour
+une autre raison : les equipements sont en train d'entrer dans les elements comptant pour les
+avancements du personnage (mecanique V5 encore en cours de comprehension) - a reprendre apres
+qu'il ait clarifie ce lien, avant de toucher a nouveau a la partie equipement personnage.
+En parallele, sur demande explicite de Nono limitee aux armes/armures (pas le volet qualite/
+personnage) : 21 noms distincts / 40 occurrences rattaches dans BOOK_RULESBOOK.Xml (texte
+libre -> code catalogue), sans toucher au moteur ni au personnage. Hand Weapon (X) -> code
+generique RULES-COMB_BASE_03 (le livre definit "Hand Weapon" comme terme generique, p.297).
+Great Weapon (X) -> l'arme 2 mains precise nommee (pas de generique "Great Weapon" au
+catalogue). Weapon (Any)/(Any One) -> RULES-COMB_*, Ranged Weapon (Any One) -> RULES-PROJ_*
+(codes generiques deja en usage etabli). Armures quasi-nommees (Helmet, Plumed Great Helm,
+Open Helm (Miner's Helm), Sleeved Mail Shirt) rattachees aux entrees Armor existantes. Armes a
+munitions narratives (Pistol with 10 Shots, Crossbow with 10 Bolts, Bow with 10 Arrows...)
+rattachees a l'arme nue, la mention de munition abandonnee (le livre vend les munitions par
+lot de 12 avec un prix de lot, pas a l'unite - decomposer aurait demande un vrai modele de
+conversion hors perimetre). Deux cas simples de multiplicateur avec l'attribut quantite= deja
+en place (2 Dwarf Throwing Axes, 5 Throwing Knives). Laisses de cote : Net/Pick/Buckler bruts
+(ambigus, deja actes le 14/09), Rune Axe (objet magique), Quality Rapier/Hand Weapon/Helmet
+(suffixe (Q), dans le perimetre de la pause), Plate Armour/Leather Breastplate (aucune entree
+catalogue exacte), Barding (aucun equivalent), toutes les combinaisons "X or Y". Compile
+(lazbuild --build-all, 0 erreur) apres chaque lot, WarhammerHelp.exe relance sans erreur -
+pas encore teste visuellement par Nono. trapping_unmatched.txt regenere : 336 -> 315 noms
+distincts, 433 -> 393 occurrences. Reste de l'audit C (Trade Tools/Workshop generiques deja
+catalogues, Book normalisation ponctuation, vehicules composes, ~120 nouvelles entrees) non
+retouche cette session, en attente de confirmation de perimetre avec Nono. Fichiers modifies :
+DATABASE/WFRP5/BOOK_RULESBOOK.Xml, trapping_unmatched.txt, CONTEXT.md, Log.txt.

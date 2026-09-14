@@ -1,5 +1,89 @@
 # Warhammer — Contexte projet
 
+**14/09/2026 (suite 4) — AUDIT C : RATTACHEMENT ARMES/ARMURES (§2.77), DATA_CRAFTMANSHIP AJOUTÉ
+EN V5, ET PAUSE DÉCIDÉE PAR NONO SUR LE VOLET "QUALITÉ" CÔTÉ PERSONNAGE.**
+
+**`DATA_CRAFTMANSHIP` peuplé en V5** (`DATABASE/WFRP5/BOOK_RULESBOOK.Xml`, 8 entrées
+`RULES-QUALITY_01..04`/`RULES-DEFECT_01..04` : Lightweight/Practical/Fine/Durable/Shoddy/Ugly/
+Unreliable/Bulky), absent jusque-là malgré le §2.70 qui l'annonçait "compatible tel quel" -
+c'était vrai côté texte, mais jamais réellement saisi. Texte reprix depuis le Rulebook V5 lui-
+même (pages 297-298), pas une copie aveugle de la V4 (ex. Practical "−3 SL à −2 SL" au lieu du
+libellé V4 en valeurs à l'ancienne). Compilé, 0 erreur.
+
+**Piste explorée puis abandonnée pour "Quality Clothing" etc. (28 occurrences) : ce n'est PAS
+`DATA_CRAFTMANSHIP` qu'il fallait brancher.** En cherchant comment rattacher les noms
+`Quality X` de l'audit C, découverte d'un mécanisme déjà existant et actif en V4 : un suffixe
+`(Q)` posé directement sur le code d'équipement de carrière (vu en usage réel :
+`RULES-ARMO_05 (Q)`, `RULES-ARMO_14(Q)`... dans Archives of the Empire, Horned Rat Companion),
+résolu par `LibelleEquipement` (`winlivre.pas:1170`) en `Libelle + " de qualité"` (label
+`RULES-LAB_038`) et porté aussi par les listes de choix (`GetListeEquipement`,
+`chargemetierequipement.pas:58`). C'est un simple suffixe d'affichage, pas une référence à
+`DATA_CRAFTMANSHIP` - mécanisme beaucoup plus léger que prévu. **Trou identifié** : ce `(Q)`
+est géré côté éditeur de catalogue (WinLivre/WinMetier) et pour les listes de choix, mais
+**jamais côté création de personnage** - `wincreation.pas`/`winpersonnage.pas` ne le
+connaissent pas (zéro occurrence), donc rien ne transmettrait la mention "de qualité" jusqu'à
+`PersonnageEquipement.QualiteEquipement` aujourd'hui.
+
+**⏸️ PAUSE décidée par Nono sur ce point précis, pour une raison différente de la difficulté
+technique** : les équipements sont en train d'entrer dans les éléments comptant pour les
+avancements du personnage (mécanique V5 que Nono est en train de mieux cerner). Tant que ce
+lien équipement/avancement n'est pas compris, refaire "la partie équipement" maintenant
+risquerait d'être à refaire. **Ne pas reprendre le branchement `(Q)` → `PersonnageEquipement`
+ni la Phase B (`WinEquipement`) avant que Nono ait clarifié ce point** - à l'écouter en premier
+à la prochaine reprise de ce chantier.
+
+**Ce qui a continué en parallèle (pur rattachement catalogue, sans toucher au personnage),
+sur demande explicite de Nono : "reprendre les équipements existants dans les métiers et les
+mettre dans les armes ou armures s'ils correspondent".** 21 noms distincts / 40 occurrences
+rattachés dans `BOOK_RULESBOOK.Xml`, uniquement par remplacement du `name=` d'un `<Item>` (diff
+vérifié à chaque lot : que les retraits attendus) :
+- **Hand Weapon (X) → `RULES-COMB_BASE_03`** (Boat Hook ×5, Axe ×2, Sickle ×2, Pick, Dwarf
+  Axe) : le livre définit "Hand Weapon" comme un terme générique couvrant haches, marteaux,
+  masses... "assumed to be effectively the same in-game" (p.297) - la parenthèse est un habillage
+  narratif, pas une variante mécanique.
+- **Great Weapon (X) → l'arme 2 mains précise nommée** (pas de générique "Great Weapon" au
+  catalogue, contrairement à Hand Weapon - vérifié, aucune ligne de prix "Great Weapon" dans
+  la table des armes) : Military Flail → `RULES-COMB_FLEAU_03`, Dwarf Greataxe →
+  `RULES-COMB_2M_02` (Greataxe), Two-handed Pick → `RULES-COMB_2M_03` (Pick).
+- **Weapon (Any)/(Any One) → `RULES-COMB_*`, Ranged Weapon (Any One) → `RULES-PROJ_*`** (5
+  occurrences) : codes génériques déjà en usage établi (vérifiés en V4 et V5 existants).
+- **Armures quasi-nommées** : Helmet ×5 et Plumed Great Helm → `RULES-ARMO_14` (Helm), Open
+  Helm (Miner's Helm) → `RULES-ARMO_15` (Open Helm), Sleeved Mail Shirt ×2 → `RULES-ARMO_11`
+  (Mail Shirt).
+- **Armes à "munitions" narratives, munition abandonnée** (le Rulebook vend les munitions par
+  lot de 12 avec un prix de lot, pas à l'unité - décomposer "with 10 Shots" en objets
+  chiffrés aurait exigé un vrai modèle de conversion, hors du périmètre demandé) : Pistol with
+  10 Shots ×6, Crossbow Pistol with 10 Bolts ×2, Blunderbuss with 10 Shots ×2, Sling with 10
+  Bullets, Crossbow with 10 Bolts, Bow with 10 Arrows → rattachés à l'arme nue
+  (`RULES-PROJ_POUDRE_03`/`RULES-PROJ_ARBPG_01`/`RULES-PROJ_POUDRE_01`/`RULES-PROJ_FROND_01`/
+  `RULES-PROJ_ARB_01`/`RULES-PROJ_ARC_01`), mention de munition perdue pour l'instant.
+- **Multiplicateur simple, `quantite=` réutilisé** (même mécanisme que "2 Sets of Clothing",
+  §2.77bis, pas une décomposition en munitions) : "2 Dwarf Throwing Axes" →
+  `RULES-PROJ_LANC_03 quantite="2"`, "5 Throwing Knives" → `RULES-PROJ_LANC_04 quantite="5"`.
+- **Laissés délibérément de côté** : `Net`/`Pick`/`Buckler` bruts (ambiguïté catalogue déjà
+  actée le 14/09 - plusieurs entrées portent le même nom dans des catalogues différents),
+  `Rune Axe` (objet magique, pas une arme catalogue standard), `2 Wooden Training Swords`
+  (arme d'entraînement, stats probablement différentes d'une vraie épée, pas vérifié), `Quality
+  Rapier`/`Quality Hand Weapon`/`Quality Helmet` (suffixe `(Q)`, dans le périmètre de la pause
+  ci-dessus), `Plate Armour`/`Leather Breastplate` (aucune entrée catalogue exacte : le
+  Rulebook n'a pas de "Plate Armour" en une pièce ni de Breastplate en cuir, seulement en
+  plate), `Barding` (armure de monture, aucun équivalent), toutes les combinaisons "X or Y"
+  (aucun mécanisme de résolution de choix d'objet aujourd'hui).
+- Compilé (`lazbuild --build-all`, 0 erreur) après chaque lot, `WarhammerHelp.exe` relancé et
+  stable (pas de sortie d'erreur) - **pas encore testé visuellement par Nono**.
+- `trapping_unmatched.txt` régénéré : 336 → 315 noms distincts, 433 → 393 occurrences.
+
+**Point de reprise** : le reste de l'audit C (rattachement Trade Tools (X)/Workshop (X) → les
+deux entrées génériques déjà cataloguées `RULES-TRAP_135`/`_136` ; Book (X) → normalisation de
+ponctuation contre les 8 `Book, X` déjà catalogués ; véhicules composés type "Mule and Cart" →
+scission en plusieurs `<Item>` déjà validée par Nono ; ~120 vrais objets manquants type Rope/
+Symbol of Rank/Religious Relic à saisir par lots) **n'a pas été retouché cette session** - ce
+n'était pas ce que Nono a demandé ensuite. Ces rattachements-là ne touchent que
+`BOOK_RULESBOOK.Xml`, comme ceux d'aujourd'hui, donc a priori pas concernés par la pause
+personnage/avancement, mais à confirmer avec Nono avant de les reprendre.
+
+---
+
 **14/09/2026 (suite 3) — MÉCANISME DE QUANTITÉ SUR L'ÉQUIPEMENT DE CARRIÈRE (§2.77) : AJOUTÉ
 ET CÂBLÉ, TESTÉ VISUELLEMENT PAR NONO SUR LE CHARLATAN.**
 Nono a repéré en parcourant l'équipement du Charlatan (niveau 1) que "2 Sets of Clothing"
