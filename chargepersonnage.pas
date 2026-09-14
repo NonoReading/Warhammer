@@ -59,6 +59,11 @@ Type
      // Vrai si la piece est portee (par opposition a transportee). Ne s'applique qu'aux
      // armes/armures/sets d'armure (TypeEquipWe/Ar/ArS) ; sans effet sur Divers/Sorts.
      Porte:                 Boolean;
+     // Nombre d'exemplaires de CETTE ligne possedes par le personnage (ex. "10 Shots" d'une
+     // carriere = 1 ligne Pistol + 1 ligne Shot a Quantite=10). Le catalogue reste unitaire
+     // (StructureTrapping.Prix/Encombrement pour UN exemplaire) ; toujours 1 pour l'instant,
+     // rien ne pose encore une autre valeur (CONTEXT.md 2.77bis, en attendant la Phase E).
+     Quantite:              Integer;
   end;
   TArrayPersonnageEquipement = array of StructurePersonnageEquipement;
 
@@ -369,6 +374,16 @@ Function XmlAttributEquipementPorte(Porte: Boolean): String;
       Result := '';
   end;
 
+Function XmlAttributEquipementQuantite(Quantite: Integer): String;
+  // Meme principe que XmlAttributEquipementPorte : absent si Quantite=1 (cas normal), pour
+  // que les fiches deja sauvegardees (sans le champ) soient lues comme "un seul exemplaire".
+  begin
+    if Quantite <> 1 then
+      Result := ' '+ConstXmlEquipementQuantite+'="'+IntToStr(Quantite)+'"'
+    else
+      Result := '';
+  end;
+
 Function PersonnageLivre(ListeLivre: String; Livre: String): String;
 Var
   AjoutLivre: String;
@@ -634,7 +649,8 @@ begin
                XMLContent.Add(XmlLigneDonnee(ConstXmlItem,
                  CodeNormalise(PersonnageEquipement.CodeEquipement, PArme.Livre),
                  PersonnageEquipement.QualiteEquipement,
-                 XmlAttributEquipementPorte(PersonnageEquipement.Porte)));
+                 XmlAttributEquipementPorte(PersonnageEquipement.Porte)
+                 +XmlAttributEquipementQuantite(PersonnageEquipement.Quantite)));
                ListeLivres:= PersonnageLivre(ListeLivres, PArme.livre);
                if (PArme.CodeArme <> '') then
                  XMLContent.Add(XmlCommentaire(PArme.Libelle));
@@ -651,7 +667,8 @@ begin
                XMLContent.Add(XmlLigneDonnee(ConstXmlItem,
                  CodeNormalise(PersonnageEquipement.CodeEquipement, PArmure.Livre),
                  PersonnageEquipement.QualiteEquipement,
-                 XmlAttributEquipementPorte(PersonnageEquipement.Porte)));
+                 XmlAttributEquipementPorte(PersonnageEquipement.Porte)
+                 +XmlAttributEquipementQuantite(PersonnageEquipement.Quantite)));
                ListeLivres:= PersonnageLivre(ListeLivres, PArmure.livre);
                if (PArmure.CodeArmure<>'') then
                  XMLContent.Add(XmlCommentaire(PArmure.Libelle));
@@ -668,7 +685,8 @@ begin
                 XMLContent.Add(XmlLigneDonnee(ConstXmlItem,
                   CodeNormalise(PersonnageEquipement.CodeEquipement, PArmureSimplifiee.Livre),
                   PersonnageEquipement.QualiteEquipement,
-                  XmlAttributEquipementPorte(PersonnageEquipement.Porte)));
+                  XmlAttributEquipementPorte(PersonnageEquipement.Porte)
+                  +XmlAttributEquipementQuantite(PersonnageEquipement.Quantite)));
                 // etait PArmure.livre : le livre de l'armure du bloc PRECEDENT. CONTEXT.md 2.19.
                 ListeLivres:= PersonnageLivre(ListeLivres, PArmureSimplifiee.livre);
                 if (PArmureSimplifiee.CodeArmure<>'') then
@@ -680,7 +698,8 @@ begin
           XMLContent.Add(XmlDebut(ConstXmlSousChapitreDivers));
           for PersonnageEquipement in Personnage.Equipement do
             if TrimRight(PersonnageEquipement.TypeEquipement) = TrimRight(TypeEquipDi) then
-               XMLContent.Add(XmlLigneDonnee(ConstXmlItem, PersonnageEquipement.CodeEquipement, PersonnageEquipement.QualiteEquipement));
+               XMLContent.Add(XmlLigneDonnee(ConstXmlItem, PersonnageEquipement.CodeEquipement, PersonnageEquipement.QualiteEquipement,
+                 XmlAttributEquipementQuantite(PersonnageEquipement.Quantite)));
           XMLContent.Add(XmlFin(ConstXmlSousChapitreDivers));
 
           // Sorts
@@ -1063,6 +1082,10 @@ begin
                           PersonnageEquipement.TypeEquipement     := TrimRight(TypeEquipWe);
                           PersonnageEquipement.QualiteEquipement  := RemoveQuotes(UTF8Encode(Node.TextContent));
                           PersonnageEquipement.Porte              := Assigned(Node.Attributes.GetNamedItem(ConstXmlEquipementPorte));
+                          if Assigned(Node.Attributes.GetNamedItem(ConstXmlEquipementQuantite)) then
+                            PersonnageEquipement.Quantite         := StrToIntDef(UTF8Encode(Node.Attributes.GetNamedItem(ConstXmlEquipementQuantite).NodeValue), 1)
+                          else
+                            PersonnageEquipement.Quantite         := 1;
                           Personnage.Equipement                   += [PersonnageEquipement];
                         end;
                       Node  := Node.NextSibling;
@@ -1082,6 +1105,10 @@ begin
                           PersonnageEquipement.TypeEquipement     := TrimRight(TypeEquipAr);
                           PersonnageEquipement.QualiteEquipement  := RemoveQuotes(UTF8Encode(Node.TextContent));
                           PersonnageEquipement.Porte              := Assigned(Node.Attributes.GetNamedItem(ConstXmlEquipementPorte));
+                          if Assigned(Node.Attributes.GetNamedItem(ConstXmlEquipementQuantite)) then
+                            PersonnageEquipement.Quantite         := StrToIntDef(UTF8Encode(Node.Attributes.GetNamedItem(ConstXmlEquipementQuantite).NodeValue), 1)
+                          else
+                            PersonnageEquipement.Quantite         := 1;
                           Personnage.Equipement                   += [PersonnageEquipement];
                         end;
                       Node  := Node.NextSibling;
@@ -1101,6 +1128,10 @@ begin
                           PersonnageEquipement.TypeEquipement     := TrimRight(TypeEquipArS);
                           PersonnageEquipement.QualiteEquipement  := RemoveQuotes(UTF8Encode(Node.TextContent));
                           PersonnageEquipement.Porte              := Assigned(Node.Attributes.GetNamedItem(ConstXmlEquipementPorte));
+                          if Assigned(Node.Attributes.GetNamedItem(ConstXmlEquipementQuantite)) then
+                            PersonnageEquipement.Quantite         := StrToIntDef(UTF8Encode(Node.Attributes.GetNamedItem(ConstXmlEquipementQuantite).NodeValue), 1)
+                          else
+                            PersonnageEquipement.Quantite         := 1;
                           Personnage.Equipement                   += [PersonnageEquipement];
                         end;
                       Node  := Node.NextSibling;
@@ -1118,6 +1149,10 @@ begin
                       PersonnageEquipement.TypeEquipement     := TrimRight(TypeEquipDi);
                       PersonnageEquipement.QualiteEquipement  := RemoveQuotes(UTF8Encode(Node.TextContent));
                       PersonnageEquipement.Porte              := False;
+                      if Assigned(Node.Attributes.GetNamedItem(ConstXmlEquipementQuantite)) then
+                        PersonnageEquipement.Quantite         := StrToIntDef(UTF8Encode(Node.Attributes.GetNamedItem(ConstXmlEquipementQuantite).NodeValue), 1)
+                      else
+                        PersonnageEquipement.Quantite         := 1;
                       Personnage.Equipement                   += [PersonnageEquipement];
                       Node  := Node.NextSibling;
                     end;
@@ -2082,6 +2117,7 @@ Function PersonnageMutationEquipement(Personnage: StructurePersonnage): TArrayPe
             // achat normal : toujours consideree portee. A confirmer si un cas reel contredit
             // cette hypothese.
             PEquipement.Porte             := True;
+            PEquipement.Quantite          := 1;
             Result                        += [PEquipement];
           end;
   end;

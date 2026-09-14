@@ -4166,3 +4166,41 @@ qu'un WinTrapping sera necessaire, mais session arretee avant de trancher le per
 exact (catalogue seul ou branchement complet jusqu'a la fiche personnage). A reprendre en
 premier la prochaine session, question ouverte notee dans CONTEXT.md. Nono s'arrete la
 (quota ~98%), pas de commit demande.
+
+14/09/2026 - CHANTIER TRAPPINGS, PERIMETRE COMPLET TRANCHE : BRANCHEMENT JUSQU'A LA FICHE
+PERSONNAGE (PRIX ET ENCOMBREMENT), PAS UN CATALOGUE SEUL. Nono precise : les Divers ont
+vocation a disparaitre des metiers puis des personnages, remplaces par un lien vers le
+catalogue Trapping. Nouvelle fenetre WinEquipement a creer (calque WinArmor). Chantier
+etendu a la V4 (aucun DATA_TRAPPING actuellement, verifie). Objets custom du joueur via
+BOOK_PERSO.Xml (mecanisme deja existant pour Weapon/Armor/Talent, aucune UI de creation
+aujourd'hui). Nouvelles entrees Trapping sur 3 chiffres, les 32 existantes restent en 2.
+Plan en 9 phases pose avec Nono (CONTEXT.md 2.77).
+PHASE A1 FAITE : GetTypeMetierEquipement/GetTypeEquipement ne reconnaissaient pas le
+prefixe TRAP_, un Trapping retombait en Divers texte brut. Decision : pas de nouveau type
+TypeEquipTR (16 fichiers touchent TypeEquipDI, risque de perte silencieuse a l'export/PDF
+comme le bug du 21/08). A la place, 6 points d'affichage corriges pour essayer
+ChercheTrapping avant le texte brut (wincreation.pas, winpersonnage.pas x3,
+winmetier.pas x2), modele deja en place dans winlivre.pas. Compile, teste visuellement par
+Nono : bon.
+PHASE A2 FAITE : champ Quantite ajoute a StructurePersonnageEquipement (absent avant, une
+ligne = un objet). Necessaire pour des cas comme "Pistol with 10 Shots" (carriere V5) :
+catalogue unitaire, quantite cote personnage. Persiste en XML (attribut optionnel
+quantite="N", absent = 1, retrocompatible). Toujours 1 partout pour l'instant, pas de
+colonne dans la grille TabEquipement (viendra avec la Phase E qui en aura besoin). Compile,
+lance, stable.
+AUDIT (debut Phase C) : script PowerShell (pas de Python/Node sur le poste) comparant les
+666 <Item> des 64 carrieres V5 au catalogue (32 Trapping + 62 Weapon + 16 Armor). 130 deja
+couverts, 536 occurrences (374 noms) non couvertes - categorisees en 5 tiroirs (objets
+physiques manquants / quasi-correspondances a normaliser / montures-vehicules a part /
+abstractions restant en texte libre / gabarits parametres par carriere), pas encore
+valide en detail avec Nono. Confirme au passage : aucune race n'a de SUBCHAPTER_ITEM en V5
+(seules les carrieres), et les armes/armures de carriere V5 sont aussi en texte libre
+(contrairement a la V4) - meme geste de rattachement que le Trapping, pas un chantier a
+part. Bug preexistant repere en passant, pas corrige : le bloc de lecture XML Divers de
+chargepersonnage.pas n'a pas la garde ELEMENT_NODE que les autres blocs ont (meme motif que
+le crash DATA_LABEL du 21/08/2026), aucun symptome connu aujourd'hui.
+CONTEXT.md mis a jour en detail (plan complet, point de reprise Phase B). Session encore en
+cours, Nono a demande si mieux vaut continuer ou repartir sur une conversation neuve - reponse
+oui, propose de repartir a neuf avec CONTEXT.md a jour. Pas de commit demande pour l'instant.
+Fichiers modifies : wincreation.pas, winpersonnage.pas, winmetier.pas, chargepersonnage.pas,
+chargeconstantes.pas, CONTEXT.md, Log.txt.

@@ -1,5 +1,147 @@
 # Warhammer — Contexte projet
 
+**14/09/2026 (suite) — CHANTIER TRAPPINGS : PÉRIMÈTRE COMPLET TRANCHÉ AVEC NONO, PHASES A1
+ET A2 FAITES ET TESTÉES (§2.77, EN COURS - VOIR PLAN CI-DESSOUS POUR LE POINT DE REPRISE).**
+Suite directe du morceau précédent (catalogue `DATA_TRAPPING` créé, ci-dessous). Nono a
+tranché la question ouverte : branchement complet jusqu'à la fiche personnage (Prix ET
+Encombrement doivent compter réellement, pas juste l'un des deux), pas un catalogue en
+lecture seule. Précisions apportées pendant la session :
+- Les "Divers" (texte libre) ont vocation à **disparaître entièrement** des métiers puis des
+  personnages, remplacés par un lien vers le catalogue Trapping.
+- **Nouvelle fenêtre `WinEquipement` à créer** (calque de `WinArmor`) pour consulter le
+  catalogue Trapping.
+- **Chantier étendu à la V4** (qui n'a aujourd'hui AUCUN `DATA_TRAPPING`, vérifié : 0
+  occurrence tous livres confondus) - à faire après la V5, nécessite de dépouiller la source
+  V4 (PDF Rulebook V4) comme ça avait été fait pour la V5.
+- **Objets custom créés par le joueur** (rien dans aucun catalogue officiel) : passent par
+  `BOOK_PERSO.Xml`, préfixe `PERSO-` - le mécanisme existe déjà et fonctionne pour
+  Weapon/Armor/Talent (chargé comme un livre normal, aucun code spécial dans le Pascal),
+  mais **aucune UI ne crée ces entrées aujourd'hui** (les 2 Armor custom actuelles ont
+  l'air d'avoir été ajoutées à la main dans le XML) - à trancher plus tard : édition
+  manuelle du XML ou vrai écran de création. Pas de `BOOK_PERSO.Xml` côté V5, à créer.
+- **Nouvelles entrées Trapping sur 3 chiffres** (`RULES-TRAP_033`, `NATIO-TRAP_001`...) ;
+  les 32 entrées existantes (`RULES-TRAP_01` à `_32`) restent en 2 chiffres, pas de
+  renumérotation demandée.
+
+**Plan en 9 phases posé avec Nono (ordre confirmé, "on va faire ton ordre")** :
+- **A1 (FAIT)** : rattachement mécanique. `GetTypeMetierEquipement`
+  (`unitcalcul.pas:205`) et `GetTypeEquipement` (`unitequipement.pas:14`) reconnaissent déjà
+  `EquipementCC/CT/MU/AR` mais **jamais `EquipementTR`** (constante `TRAP_` existante,
+  `chargeconstantes.pas:502`, jamais testée) - un code Trapping retombe en `TypeEquipDI`
+  (Divers). **Décision de conception retenue : ne PAS créer de type `TypeEquipTR` distinct**
+  (16 fichiers touchent `TypeEquipDI` - `chargecorruptionequipement.pas`, `pdfpersonnage.pas`,
+  `pdfmetier.pas`, `winspecialisation.pas`, `xmlexportimport.pas`... - reclasser aurait risqué
+  de faire disparaître silencieusement des Trappings de l'export XML ou du calcul PDF, comme
+  le bug documenté au 21/08/2026). À la place : la classification `TypeEquipDI` reste
+  inchangée partout, seuls les 6 points d'AFFICHAGE ont été corrigés pour essayer
+  `ChercheTrapping(Code)` avant de montrer le code brut (repli inchangé si non trouvé) -
+  exactement le modèle déjà en place dans `winlivre.pas:1200-1209` (`LibelleEquipement`,
+  seule fonction qui le faisait déjà, mais seulement pour l'éditeur de livre). Points
+  corrigés : `wincreation.pas` (`ButtonMetierHasardClick`), `winpersonnage.pas`
+  (`ChargerMetierEquipement`, `CalculTableExperience`, grille équipement possédé du
+  personnage), `winmetier.pas` (`ChargeMetierEquipement`, 2 branches de l'arbre). `uses
+  ChargeTrapping` ajouté aux 3 unités. Diff vérifié (8 retraits, tous attendus : 3 lignes
+  `uses` remplacées par elles-mêmes + `ChargeTrapping`, 5 lignes `Lib := Code`/affichage brut
+  remplacées). Compilé (`lazbuild --build-all`, 0 erreur, aucun nouveau warning),
+  `WarhammerHelp.exe` lancé et stable. **Testé visuellement par Nono : bon.**
+- **A2 (FAIT)** : champ `Quantite: Integer` ajouté à `StructurePersonnageEquipement`
+  (`chargepersonnage.pas:51-68`) - avant A2, cette structure n'avait aucune notion de nombre
+  d'exemplaires (une ligne = un objet). Nécessaire pour modéliser proprement un objet de
+  carrière du type "Pistol with 10 Shots" : le catalogue reste unitaire (un `Shot`), le "10"
+  devient une quantité côté personnage, plutôt que rester coincé dans un nom de carrière en
+  texte libre. Persisté en XML avec le même principe que `Porte`/`worn` (attribut optionnel
+  `quantite="N"`, absent = 1, donc les fiches personnage déjà sauvegardées restent lisibles) :
+  nouvelle constante `ConstXmlEquipementQuantite='quantite'` (`chargeconstantes.pas`),
+  fonction `XmlAttributEquipementQuantite` jumelle de `XmlAttributEquipementPorte`
+  (`chargepersonnage.pas:367+`), câblée dans les 4 blocs Arme/Armure/Set d'armure/Divers en
+  écriture ET lecture (pas le bloc Sorts, aucune notion de quantité pour un sort). Partout où
+  une nouvelle ligne d'équipement personnage se construit (`chargepersonnage.pas`
+  `PersonnageMutationEquipement`, `wincreation.pas` équipement de carrière niveau 1,
+  `winpersonnage.pas` les deux points de reconstruction du tableau depuis la grille
+  `TabEquipement`) : `Quantite := 1` posé explicitement, rien ne pose encore une autre
+  valeur - **pas de colonne Quantite dans la grille `TabEquipement` pour l'instant**
+  (décision : inutile tant que rien ne produit un nombre différent de 1, la colonne + son
+  libellé localisé `RULES-LAB_xxx` viendront avec la Phase E qui en aura réellement besoin).
+  Diff vérifié (que des ajouts, sauf 4 retraits attendus : les 3 appels
+  `XmlAttributEquipementPorte(...)` étendus en `+XmlAttributEquipementQuantite(...)`, et la
+  ligne Divers passée à 4 arguments). Compilé, lancé, stable. Pas d'impact visible (tout
+  reste à 1 comme avant) donc pas de test visuel spécifique demandé à Nono au-delà de A1.
+- **B (À FAIRE, prochaine étape)** : fenêtre `WinEquipement`, calque de `WinArmor.pas`,
+  listant `ListTrapping` (`chargetrapping.pas`).
+- **C (esquissé, à affiner avec Nono)** : audit de correspondance des 666 `<Item name="...">`
+  des 64 `<SUBCHAPTER_ITEM>` de `BOOK_RULESBOOK.Xml` (V5) - **confirmé : aucune race n'a de
+  `SUBCHAPTER_ITEM` dans ce livre**, seules les 64 carrières. Format XML réel (vérifié,
+  corrige une description trop rapide donnée à Nono en séance) :
+  `<Item name="Nom ou RULES-XXX_nn">"Niveau"</Item>` - un seul attribut `name` qui porte soit
+  du texte libre soit, une fois rattaché, le code catalogue lui-même (pas d'attribut `data`
+  séparé ; précédent déjà en place côté V4 : `RULES-ARMO_04` etc. directement en valeur de
+  `name`). Script d'audit (PowerShell, pas de Python/Node disponible sur le poste) comparant
+  aux 32 Trapping + 62 Weapon + 16 Armor déjà catalogués (110 codes) : **130 items déjà
+  couverts** (33 Trapping, 36 Weapon, 60 Armor, 1 déjà lié), **536 occurrences (374 noms
+  distincts) non couvertes**, liste complète dans `trapping_unmatched.txt` (racine du
+  dépôt, non commité, régénérable par le script) - à charger en mémoire seulement si besoin
+  fin, sinon les agrégats ci-dessous suffisent. Catégorisation proposée à Nono (pas encore
+  validée dans le détail, juste l'approche) :
+  - **A - vrais objets physiques manquants** (candidats nouvelles entrées `RULES-TRAP_0xx`,
+    3 chiffres) : *Writing Kit* (15x), *Guild Licence* (7x), *Quality Clothing* (7x),
+    *Robes*, *Hat*, *Uniform*, *Backpack*, *Crowbar*, *Map*, *Sack*, *Manacles*,
+    *Disguise Kit*, *Grimoire*, *Religious Symbol/Relic*, *Book (Religion)*...
+  - **B - quasi-correspondances à normaliser** contre un code existant plutôt qu'à
+    recréer : *Rope* (8x) ↔ `RULES-TRAP_29 "Rope, 10 yards"` ; variantes avec parenthèse
+    type *Hand Weapon (Boat Hook)*.
+  - **C - montures/véhicules, catégorie à part** : *Riding Horse* (11x), *Light Warhorse*
+    (5x), *Rowboat* (4x), *Mule and Cart* (3x) - vient probablement d'une table "Mounts and
+    Vehicles" du Rulebook jamais dépouillée, PAS de la table "Miscellaneous Trappings".
+    Proposé de sortir ça du chantier Trapping - pas encore tranché avec Nono.
+  - **D - abstractions propres à une carrière, pas des objets** : *Apprentice* (6x),
+    *Aide*, *Assistant*, *Network of Informers*, *Lair*, *Patron* - restent en texte libre,
+    comme les cas déjà notés en A FAIRE.txt.
+  - **E - gabarits paramétrés par carrière** : *Trade Tools (Engineer)*, *Trade Tools
+    (Physician)*... - à trancher : une entrée générique + note, ou une entrée par métier ?
+  - **Cas "Pistol with 10 Shots" (6x)** : exactement le cas d'usage de la Phase A2 - se
+    décompose en `Pistol` (déjà catalogué) + quantité 10 d'un futur `Shot` unitaire
+    (catégorie A, à créer).
+  - Nono confirme en plus qu'en V5 les armes/armures de carrière sont AUSSI en texte libre
+    (contrairement à la V4, où 180/762 `<Item>` sont déjà rattachés à des `RULES-ARMO_*`) :
+    les 36 Weapon + 60 Armor déjà trouvés par le script font donc partie du même geste de
+    rattachement (Phases D/E), pas un chantier séparé.
+- **D (à faire)** : compléter le catalogue Rulebook V5 avec les entrées de la catégorie A
+  (et sous-catégories à trancher), format 3 chiffres.
+- **E (à faire)** : rattacher les 666 `<Item>`, métier par métier, aux codes catalogue
+  (Trapping/Weapon/Armor), en gérant les quantités (Phase A2) pour les cas type "10 Shots".
+  C'est à ce moment qu'il faudra ajouter la colonne Quantite à la grille `TabEquipement`
+  (avec son libellé `RULES-LAB_xxx`, comme celui déjà posé pour la case "porté",
+  `RULES-LAB_180`).
+- **F (à faire)** : Prix. **Aucun total "argent dépensé" n'existe nulle part** (vérifié :
+  zéro occurrence dans `winpersonnage.pas`/`wincreation.pas`/`pdfpersonnage.pas`). Le champ
+  `Prix` est du texte libre hétérogène même dans Arme/Armure (`StructureArme.Prix`,
+  `StructureArmure.Prix`, `StructureTrapping.Prix` sont tous des `String`, pas des nombres :
+  `"5/-"`, `"1CO"`, `"ND"`...) - il faudra d'abord un parseur/normaliseur avant de pouvoir
+  sommer quoi que ce soit.
+- **G (à faire)** : Encombrement. Le cadre PDF (`pdfpersonnage.pas`, fonction
+  `PdfBlocEncombrement`, dupliquée l.271/2884) a DÉJÀ une ligne "Trappings" toute prête
+  (`RULES-PDF_ENCUMBRANCE1_4_TRAPPINGS`) dans les DEUX formats de fiche (Feldo2P et 1P),
+  jamais remplie - le Total actuel ignore complètement le Divers/Trapping (`EncArmure +
+  EncArme` seul). Patron à reproduire : même triplet que Armes/Armures (`PdfBlocDiversDonnees`
+  existe déjà mais n'accumule aucun `EncTrapping`, juste le texte brut).
+- **H (à faire)** : `DATA_TRAPPING` dans `BOOK_PERSO.Xml` (V4) + créer l'équivalent V5 +
+  décider édition manuelle vs UI de création (voir plus haut).
+- **I (à faire)** : tout refaire côté V4 (catalogue à créer depuis le PDF V4, puis B→G).
+
+**Bug pré-existant repéré en passant, PAS corrigé (hors périmètre du jour)** : le bloc de
+lecture XML "Divers" de `chargepersonnage.pas` (`SubChapterNode :=
+...FindNode(ConstXmlSousChapitreDivers)`) n'a PAS la garde `if (Node.NodeType =
+ELEMENT_NODE)` que les autres blocs (Arme/Armure/Set d'armure/Sorts) ont - exactement le
+motif qui avait causé le crash `DATA_LABEL` du 21/08/2026 (accès à `Node.Attributes` sur un
+commentaire XML, `nil`). Aucun symptôme connu aujourd'hui (pas de commentaire XML dans cette
+section des fiches personnage actuelles), mais à corriger si un jour une fiche personnage
+plante au chargement sur cette section.
+
+**Prochaine étape** : Phase B (fenêtre `WinEquipement`), puis reprendre l'audit C avec Nono
+pour trancher les catégories B/C/D/E ci-dessus avant de créer quoi que ce soit dans le XML.
+
+---
+
 **14/09/2026 — CHANTIER TRAPPINGS (ÉQUIPEMENT) DU RULEBOOK V5 OUVERT : CATALOGUE
 `DATA_TRAPPING` CRÉÉ ET CÂBLÉ, COMPILÉ, LANCÉ SANS EXCEPTION - RESTE LA PASSE DE
 RATTACHEMENT SUR LES 64 MÉTIERS (§2.77, EN COURS).**

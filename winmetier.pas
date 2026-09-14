@@ -11,7 +11,7 @@ uses
   BCButton, PReport, ChargeRaceMetier, ChargeRace, ChargeMetierNiveau,
   ChargeMetierAttribut, ChargeAttribut, ChargeMetierCompetence,
   ChargeCompetence, ChargeTalent, ChargeMetierTalent, GlobalFonts,
-  ChargeMetierEquipement, ChargeArme, ChargeArmure, ChargeTexte, UnitCalcul,
+  ChargeMetierEquipement, ChargeArme, ChargeArmure, ChargeTrapping, ChargeTexte, UnitCalcul,
   ChargeMetierSousMetier, ChargeMetierRaceChoixMetier, WinFiltre,
   ChargeTalentCreation, Types, BGRABitmap, BGRABitmapTypes,
   fpPDF, LCLIntf,
@@ -707,6 +707,7 @@ procedure TWinMetiers.ChargeMetierEquipement(Niveau: Integer; NodeBase: TTreeNod
 var
   PArme:               StructureArme;
   PArmure:             StructureArmure;
+  PTrapping:           StructureTrapping;
   PMetierEquipement:   StructureMetierEquipement;
   StringsI:            TStringList;
   StringsT:            TStringList;
@@ -761,7 +762,13 @@ Begin
                       end
                    else if stringsT[IndL] = TypeEquipDI then
                       begin
-                        NodeSTFeuille := TreeViewMetier1.Items.AddChild(NodeSTBranche, stringsI[IndL]);
+                        // Un code Divers peut etre un Trapping catalogue (RULES-TRAP_xxx),
+                        // resolu sans changer sa classification TypeEquipDI (CONTEXT.md 2.77bis).
+                        PTrapping := ChercheTrapping(Code);
+                        if PTrapping.CodeTrapping <> '' then
+                          NodeSTFeuille := TreeViewMetier1.Items.AddChild(NodeSTBranche, PTrapping.Libelle)
+                        else
+                          NodeSTFeuille := TreeViewMetier1.Items.AddChild(NodeSTBranche, stringsI[IndL]);
                         NodeSTFeuille.ImageIndex := 0;
                       end
                    end;
@@ -809,7 +816,11 @@ Begin
                 end
               else if PMetierEquipement.TypeEquipement = TypeEquipDI then
                 begin
-                  NodeSFeuille := TreeViewMetier1.Items.AddChild(NodeSBrance, PMetierEquipement.Equipement);
+                  PTrapping := ChercheTrapping(PMetierEquipement.Equipement);
+                  if PTrapping.CodeTrapping <> '' then
+                    NodeSFeuille := TreeViewMetier1.Items.AddChild(NodeSBrance, PTrapping.Libelle)
+                  else
+                    NodeSFeuille := TreeViewMetier1.Items.AddChild(NodeSBrance, PMetierEquipement.Equipement);
                   NodeSFeuille.ImageIndex := 0;
                 end;
 end;

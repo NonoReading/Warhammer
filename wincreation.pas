@@ -11,7 +11,7 @@ uses
   Types, ChargeMetier, ChargeRaceMetier, ChargeAttribut, ChargeRaceAttribut, ChargeMetierNiveau,
   ChargeMetierAttribut, UnitCalcul, ChargeRaceTalent, ChargeTalent,
   ChargeTalentCreation, ChargeRaceCompetence, ChargeCompetence, ChargeRaceCreation,
-  ChargeMetierCompetence, ChargeArme, ChargeArmure, ChargeMetierEquipement,
+  ChargeMetierCompetence, ChargeArme, ChargeArmure, ChargeTrapping, ChargeMetierEquipement,
   WinMetier, WinRaces, ChargeTexte, WinTalent, WinCompetence, ChargeLivre,
   ChargeMetierSousMetier, ChargeMetierRaceChoixMetier, WinSpecialisation,
   ChargeMetierTalent, ChargePersonnage, BGRABitmap, BGRABitmapTypes, BCButton,
@@ -1237,6 +1237,7 @@ procedure TWinCreations.PhaseSave(NouvellePhase: Integer);
                // Comme un achat en jeu (winpersonnage.pas) : l'equipement de depart arrive
                // non porte, a cocher explicitement ensuite.
                PersonnageEquipement.Porte                   := False;
+               PersonnageEquipement.Quantite                := 1;
                Personnage.Equipement                        += [PersonnageEquipement];
              end;
          end;
@@ -2225,6 +2226,7 @@ var
   PMetierEquipement:  StructureMetierEquipement;
   PArme:              StructureArme;
   PArmure:            StructureArmure;
+  PTrapping:          StructureTrapping;
   ListeCode:          String;
   Code:               String;
   Lib:                String;
@@ -2342,7 +2344,14 @@ begin
                    end
                  else if PMetierEquipement.TypeEquipement = TypeEquipDI then
                    begin
-                     Lib     := Code;
+                     // Un code Divers peut en realite etre un Trapping catalogue
+                     // (RULES-TRAP_xxx) - la classification reste TypeEquipDI (CONTEXT.md
+                     // 2.77bis), seul l'affichage est resolu ici, comme winlivre.pas:1200.
+                     PTrapping := ChercheTrapping(Code);
+                     if PTrapping.CodeTrapping <> '' then
+                       Lib := PTrapping.Libelle
+                     else
+                       Lib := Code;
                      Typ     := TypeEquipDi;
                    end;
                TabMetierEquipement.Cells[1, NbMetierEquipementTab] := Code;

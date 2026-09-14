@@ -6,6 +6,13 @@
 CORRECTIONS COURTES  (une ligne ou deux chacune)
 =========================================================================
 
+LE BLOC DE LECTURE XML "DIVERS" DE CHARGEPERSONNAGE.PAS N'A PAS LA GARDE ELEMENT_NODE. Vu
+le 14/09/2026 en travaillant sur le chantier Trapping (CONTEXT.md 2.77). Les autres blocs
+(Arme/Armure/Set d'armure/Sorts) filtrent Node.NodeType = ELEMENT_NODE avant de lire
+Node.Attributes ; celui de Divers ne le fait pas - meme motif que le crash DATA_LABEL du
+21/08/2026 (acces a Node.Attributes sur un commentaire XML, nil). Aucun symptome connu
+aujourd'hui (pas de commentaire XML dans cette section des fiches personnage actuelles).
+
 LE MATERIAU (TYPE) DES BOUCLIERS/ECUS DU RULEBOOK V5 N'EST PAS DEFINI. Releve par Nono le
 14/09/2026 en testant WinArmor. RULES-ARMO_01/02/03 (Buckler/Shield/Large Shield,
 BOOK_RULESBOOK.Xml V5) n'ont pas de balise <Type>, contrairement aux pieces Leather/Mail/

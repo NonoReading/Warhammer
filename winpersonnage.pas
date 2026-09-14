@@ -11,7 +11,7 @@ uses
   UnitCalcul, ChargeMetier, ChargeMetierAttribut, ChargeTalent,
   ChargeMetierTalent, ChargeMetierNiveau, ChargeCompetence, ChargeLivre,
   ChargeAttributAugmentation, ChargeAttribut, ChargeCompetenceAugmentation,
-  GlobalFonts, ChargeArme, ChargeArmure, ChargeMetierEquipement,
+  GlobalFonts, ChargeArme, ChargeArmure, ChargeTrapping, ChargeMetierEquipement,
   WinMetier, UnitEquipement, WinWeapon, WinArmor, ChargeArmureSimplifie,
   ChargeSort, WinSpell, ChargeTexte, winFabrication, ChargeFabrication,
   WinTalent, WinCompetence, WinSpecialisation, ChargePersonnage,
@@ -2542,6 +2542,9 @@ procedure TWinPersonnages.CalculTotaux();
     for IndAugm := 1 to TabEquipement.RowCount - 1 do
       begin
         PersonnageEquipement.CodeEquipement := TabEquipement.Cells[2, IndAugm];
+        // La grille ne porte pas encore de colonne Quantite (CONTEXT.md 2.77bis, Phase E) :
+        // toujours 1 pour l'instant.
+        PersonnageEquipement.Quantite       := 1;
         If TalentSort(TabEquipement.Cells[2, IndAugm]).CodeTalent <> ''
            then
           begin
@@ -3000,6 +3003,7 @@ var
   PArme:                 StructureArme;
   PArmure:               StructureArmure;
   PArmureSimplifiee:     StructureArmureSimplifiee;
+  PTrapping:             StructureTrapping;
   PSort:                 StructureSort;
   PAttribut:             StructureAttribut;
   Ind:                   Integer;
@@ -3317,7 +3321,14 @@ begin
           end
       else if TrimRight(PersonnageEquipement.TypeEquipement) = TrimRight(TypeEquipDi) then
           Begin
-            TabEquipement.Cells[4, NbEquipement]   := PersonnageEquipement.CodeEquipement;
+            // Cf. ChargerMetierEquipement : un code Divers deja possede par le personnage
+            // peut etre un Trapping catalogue (RULES-TRAP_xxx), resolu sans changer sa
+            // classification TypeEquipDI (CONTEXT.md 2.77bis).
+            PTrapping := ChercheTrapping(PersonnageEquipement.CodeEquipement);
+            if PTrapping.CodeTrapping <> '' then
+              TabEquipement.Cells[4, NbEquipement] := PTrapping.Libelle
+            else
+              TabEquipement.Cells[4, NbEquipement] := PersonnageEquipement.CodeEquipement;
             TabEquipement.Cells[7, NbEquipement]   := PersonnageEquipement.QualiteEquipement;
           end
       else if TrimRight(PersonnageEquipement.TypeEquipement) =TrimRight(TypeEquipSp) then
@@ -5096,6 +5107,8 @@ Procedure TWinPersonnages.MajTables();
                 TabEquipement.Cells[4, TabEquipement.RowCount-1] := ChercheArme(CodEquip).Libelle
               else if TypEquip = TypeEquipAr then
                 TabEquipement.Cells[4, TabEquipement.RowCount-1] := ChercheArmure(CodEquip).Libelle
+              else if ChercheTrapping(CodEquip).CodeTrapping <> '' then
+                TabEquipement.Cells[4, TabEquipement.RowCount-1] := ChercheTrapping(CodEquip).Libelle
               else
                 TabEquipement.Cells[4, TabEquipement.RowCount-1] := CodEquip;
             end;
@@ -5227,6 +5240,9 @@ Procedure TWinPersonnages.MajTables();
     for Ind := 1 to TabEquipement.RowCount - 1 do
       begin
         PersonnageEquipement.CodeEquipement := TabEquipement.Cells[2, Ind];
+        // Cf. l'autre point de reconstruction depuis la grille (ci-dessus) : pas de colonne
+        // Quantite pour l'instant.
+        PersonnageEquipement.Quantite       := 1;
         If TalentSort(TabEquipement.Cells[2, Ind]).CodeTalent <> ''
            then
           begin
@@ -5380,6 +5396,7 @@ Procedure TWinPersonnages.ChargerMetierEquipement(CodeMetier: String; NiveauMeti
     Code:                  String;
     PArme:                 StructureArme;
     PArmure:               StructureArmure;
+    PTrapping:             StructureTrapping;
     I, J:                  Integer;
   begin
   // RAZ
@@ -5421,7 +5438,14 @@ Procedure TWinPersonnages.ChargerMetierEquipement(CodeMetier: String; NiveauMeti
                    end
                  else if PMetierEquipement.TypeEquipement = TypeEquipDI then
                    begin
-                     Lib     := Code;
+                     // Cf. wincreation.pas ButtonMetierHasardClick : un code Divers peut
+                     // etre un Trapping catalogue (RULES-TRAP_xxx), resolu ici sans changer
+                     // sa classification TypeEquipDI (CONTEXT.md 2.77bis).
+                     PTrapping := ChercheTrapping(Code);
+                     if PTrapping.CodeTrapping <> '' then
+                       Lib := PTrapping.Libelle
+                     else
+                       Lib := Code;
                      Typ     := TypeEquipDI;
                    end;
                TabMetierEquipement.Cells[1, NbMetierEquipementTab] := Code;
