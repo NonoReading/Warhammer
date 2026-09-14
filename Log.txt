@@ -4056,3 +4056,63 @@ Teste par Nono : "ce que je vois me semble bon" - catalogue des 113 sorts (Petty
 Spells + 8 Lores Couleur) valide dans WinSpell/WinTalent. Session terminee, Nono s'arrete la
 (commit).
 Fichiers modifies : DATABASE\WFRP5\BOOK_RULESBOOK.Xml, CONTEXT.md, Log.txt.
+
+14/09/2026 - HEDGECRAFT/WITCHCRAFT DU RULEBOOK V5 PEUPLES (CONTEXT.md 2.73). Nono dit de
+continuer sur les sorts apres les Lores Couleur. Correction d'une hypothese de planification :
+le livre dit "two lists of six spells" (6 par Lore), pas 8 comme note precedemment sans avoir
+lu le texte. 12 sorts crees (RULES-SPEL_HEDGECRAFT_NN / RULES-SPEL_WITCHCRAFT_NN, 6 chacun),
+Talent pointant les specialisations deja posees (RULES-T0007_HEDGECRAFT/WITCHCRAFT). Extraction
+PDF en deux colonnes fusionnees sur la meme ligne physique (format normal de RULEBOOK.txt, pas
+un accroc ponctuel) : separees par position de caractere (gauche 1-72, droite 74+) avant
+transcription pour fiabiliser la saisie. Ingredients de chaque Lore volontairement pas saisis,
+meme gap que les Lores Couleur. Balance verifiee (Sort 125/125 cumule). Compile (lazbuild, 0
+erreur). WarhammerHelp.exe lance et reste stable puis ferme.
+Pas encore teste visuellement par Nono.
+Fichiers modifies : DATABASE\WFRP5\BOOK_RULESBOOK.Xml, CONTEXT.md, Log.txt.
+
+14/09/2026 - HEDGECRAFT/WITCHCRAFT DU RULEBOOK V5 : TEST VISUEL FAIT PAR NONO, CHANTIER CLOS
+(CONTEXT.md 2.73). Nono a confirme "ok, c'est bon" pour les 12 sorts (WinSpell). Aucun point
+releve.
+Fichiers modifies : CONTEXT.md, Log.txt.
+
+14/09/2026 - TALENTS BLESS/INVOKE + 19 BENEDICTIONS DU RULEBOOK V5 (CONTEXT.md 2.74). Nono dit
+de continuer apres Hedgecraft/Witchcraft. Talents Bless (Divine Lore) et Invoke (Divine Lore)
+crees (RULES-T0168_*/RULES-T0169_*, absents jusqu'ici), 10 specialisations chacun (un par
+culte : Manann, Morr, Myrmidia, Ranald, Rhya, Shallya, Sigmar, Taal, Ulric, Verena). Mecanique
+verifiee dans le code avant d'ecrire (chargeconstantes.pas, winpersonnage.pas) et alignee sur
+l'equivalent deja cable cote WFRP4 (RULES-T0012_*/RULES-T0080_*) : Bless = Magic 0 + SpellMode
+AUTO (toutes les benedictions du culte accordees d'office, pas d'achat sort par sort) ; Invoke
+= Magic 2 + SpellMode CHOICE + tarif 100 XP par miracle deja connu (un miracle offert a
+l'achat du talent). 19 benedictions generiques creees (RULES-SPEL_BLESSING_NN, p.221 du
+livre), <Talent> volontairement vide sur chaque Sort (une benediction est partagee par
+plusieurs cultes a la fois) - meme convention que celle deja actee pour ce cas exact
+(CONTEXT.md 2.39). Nouveau bloc DATA_SPELL_TALENT cree cote V5 (n'existait pas encore dans ce
+livre) : 19 lignes reliant chaque benediction aux cultes qui y ont acces (table "Blessings by
+Cult" p.220). Repartition verifiee par recoupement : 10 cultes x 6 benedictions = 60, somme
+des 19 listes de talents = 60 egalement. Compile (lazbuild, 0 erreur). WarhammerHelp.exe
+lance et reste stable puis ferme, y compris le nouveau bloc DATA_SPELL_TALENT jamais charge
+cote V5 avant ce chantier.
+Pas encore teste visuellement par Nono.
+Fichiers modifies : DATABASE\WFRP5\BOOK_RULESBOOK.Xml, CONTEXT.md, Log.txt.
+
+14/09/2026 - TALENTS BLESS/INVOKE + 19 BENEDICTIONS DU RULEBOOK V5 : TEST VISUEL FAIT PAR
+NONO, CHANTIER CLOS (CONTEXT.md 2.74). Nono a confirme "cela me semble bon". Aucun point
+releve.
+Fichiers modifies : CONTEXT.md, Log.txt.
+
+14/09/2026 - 60 MIRACLES DU RULEBOOK V5 PEUPLES (CONTEXT.md 2.75). Nono dit de continuer apres
+Bless/Invoke + Benedictions - dernier gros morceau avant Dark/Chaos Magic. 60 Miracles crees
+(RULES-SPEL_MIRACLE_<CULTE>_NN, 6 par culte, p.222-228), un par culte parmi les 10 (Manann,
+Morr, Myrmidia, Ranald, Rhya, Shallya, Sigmar, Taal, Ulric, Verena). Contrairement aux
+Benedictions, <Talent> renseigne directement (RULES-T0169_<CULTE>) : un Miracle appartient a
+un seul culte, pas de DATA_SPELL_TALENT necessaire ici. Quelques coquilles evidentes du texte
+source corrigees a la saisie (articles manquants, deux Miracles de Verena). Repartition
+verifiee : 10 x 6 = 60. Compile (lazbuild, 0 erreur). WarhammerHelp.exe lance et reste stable
+puis ferme.
+Pas encore teste visuellement par Nono.
+Fichiers modifies : DATABASE\WFRP5\BOOK_RULESBOOK.Xml, CONTEXT.md, Log.txt.
+
+14/09/2026 - 60 MIRACLES DU RULEBOOK V5 : TEST VISUEL FAIT PAR NONO, CHANTIER CLOS (CONTEXT.md
+2.75). Nono a confirme "c'est bon". Aucun point releve. Session terminee, Nono s'arrete la
+(commit).
+Fichiers modifies : CONTEXT.md, Log.txt.

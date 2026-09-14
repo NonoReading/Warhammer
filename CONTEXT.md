@@ -1,5 +1,142 @@
 # Warhammer — Contexte projet
 
+**14/09/2026 — 60 MIRACLES DU RULEBOOK V5 (10 CULTES) : ÉCRIT, COMPILÉ, TESTÉ VISUELLEMENT PAR
+NONO ("c'est bon"), CHANTIER CLOS (§2.75).**
+Suite du chantier Sorts/Prières V5, à la suite de Bless/Invoke + Bénédictions (§2.74). Nono a
+dit de continuer - dernier gros morceau avant Dark/Chaos Magic.
+- **60 Miracles créés** (`id` `RULES-SPEL_MIRACLE_<CULTE>_NN`, 6 par culte, ordre alphabétique
+  dans chaque culte, p.222-228 du PDF) : Manann (Becalm, Drowned Man's Face, Fair Winds,
+  Manann's Bounty, Sea Legs, Waterwalk), Morr (Death Mask, Destroy Undead, Dooming, Last
+  Rites, Portal's Threshold, Stay Morr's Hand), Myrmidia (Blazing Sun, Eagle's Eye, Fury's
+  Call, Inspiring, Shield of Myrmidia, Spear of Myrmidia), Ranald (An Invitation, Cat's Eyes,
+  Ranald's Grace, Rich Man Poor Man Beggar Man Thief, Stay Lucky, You Ain't Seen Me Right?),
+  Rhya (Children, Harvest, Shelter, Succour, Touch, Union), Shallya (Anchorite's Endurance,
+  Balm to a Wounded Mind, Bitter Catharsis, Martyr, Shallya's Tears, Unblemished Innocence),
+  Sigmar (Beacon of Righteous Virtue, Heed Not the Witch, Sigmar's Fiery Hammer, Soulfire,
+  Twin-tailed Comet, Vanquish the Unrighteous), Taal (Animal Instincts, King of the Wild,
+  Leaping Stag, Lord of the Hunt, Tanglefoot, Tooth and Claw), Ulric (Hoarfrost's Chill, Howl
+  of the Wolf, Pelt of the Winter Wolf, The Snow King's Judgement, Ulric's Fury, Winter's
+  Bite), Verena (As Verena Is My Witness, Blind Justice, Shackles of Truth, Sword of Justice,
+  Truth Will Out, Wisdom of the Owl).
+- **`<Talent>` renseigné directement** (`RULES-T0169_<CULTE>`), **pas** de `DATA_SPELL_TALENT`
+  cette fois : contrairement aux Bénédictions, un Miracle appartient à un seul culte (relation
+  simple), confirmé par la lecture du texte ("a character with the Invoke Talent can empower
+  one of the Miracles for their cult from the following lists").
+- **Extraction PDF en deux colonnes fusionnées** (p.222-228) : plutôt que le découpage par
+  position de caractère utilisé aux §2.73/2.74 (imprécis en bordure de colonne, coupe parfois
+  des mots), lu directement le texte brut ligne à ligne en reconnaissant visuellement quelle
+  moitié de ligne appartient à quelle colonne (repères : titres de sort en début de ligne,
+  "Miracles of X" comme séparateur de culte) - plus fiable pour un texte dense où chaque sort
+  ne fait que 3-6 lignes.
+- **Quelques coquilles évidentes du texte source corrigées à la saisie** (article manquant :
+  "a Average" → "an Average", "able pierce" → "able to pierce", "Miracles of involving" →
+  "Miracles involving", dans Blind Justice/Truth Will Out de Verena) - erreurs de frappe
+  visibles, pas des choix de règles.
+- **Répartition vérifiée** : 10 cultes × 6 Miracles = 60, correspond au nombre de `Sort` créés.
+- Diff vérifié avant écriture : uniquement des ajouts (60 `Sort`), rien retiré. `lazbuild` :
+  0 erreur. `WarhammerHelp.exe` lancé, resté stable plusieurs secondes (chargement sans
+  exception) puis fermé.
+- Fichiers modifiés : `DATABASE\WFRP5\BOOK_RULESBOOK.Xml`, `CONTEXT.md`, `Log.txt`.
+
+**Prochaine étape** : Dark/Chaos Magic (Daemonology/Necromancy, usage PNJ, moins urgent) -
+dernier morceau du chantier Sorts/Prières V5, après quoi le chantier sera intégralement clos.
+
+---
+
+**14/09/2026 — TALENTS BLESS/INVOKE + 19 BÉNÉDICTIONS DU RULEBOOK V5 : ÉCRIT, COMPILÉ, TESTÉ
+VISUELLEMENT PAR NONO ("cela me semble bon"), CHANTIER CLOS (§2.74).**
+Suite du chantier Sorts/Prières V5, à la suite de Hedgecraft/Witchcraft (§2.73). Nono a dit de
+continuer.
+- **Talents `Bless (Divine Lore)` et `Invoke (Divine Lore)` créés** (`RULES-T0168_*`/
+  `RULES-T0169_*`, absents jusqu'ici - cités en toutes lettres p.139 du PDF mais pas dans
+  `DATA_TALENT`), avec 10 spécialisations chacun (un par culte : Manann, Morr, Myrmidia,
+  Ranald, Rhya, Shallya, Sigmar, Taal, Ulric, Verena - liste tirée de la table "Blessings by
+  Cult" p.220, seule source de la liste des cultes du Rulebook de base). **Mécanique différente
+  des sorts** (vérifiée dans `chargeconstantes.pas` l.150-188 et `winpersonnage.pas` l.1600-1617
+  avant d'écrire, et confirmée par comparaison avec `RULES-T0012_*`/`RULES-T0080_*` déjà
+  câblés côté WFRP4) : `Bless` a `Magic="0"` + `SpellMode="AUTO"` (aucune balise Xp*) - la
+  Bénédiction n'est pas achetée sort par sort, le talent donne d'office toutes celles du culte
+  choisi ("a character with the Bless Talent receives all six Blessings for their cult",
+  p.220). `Invoke` a `Magic="2"` + `SpellMode="CHOICE"` + `XpMultiplier="100"`/`XpFloor="0"`/
+  `XpDivisor="1"` (un Miracle choisi gratuitement à l'achat du talent, les suivants à 100 XP
+  par Miracle déjà connu - texte du livre : "100 XP per miracle you currently know").
+- **19 Bénédictions génériques créées** (`id` `RULES-SPEL_BLESSING_NN`, p.221 du PDF - grille
+  à trois colonnes, colonnes séparées par position de caractère avant transcription, même
+  méthode qu'au §2.73) : Battle, Breath, Charisma, Conscience, Courage, Finesse, Fortune,
+  Grace, Hardiness, Healing, Might, Protection, Recuperation, Righteousness, Savagery,
+  Tenacity, The Hunt, Wisdom, Wit. **`<Talent>` volontairement VIDE sur chaque `Sort`** : une
+  Bénédiction est partagée par plusieurs cultes à la fois (table "Blessings by Cult" p.220,
+  chaque culte en a 6 parmi les 19), donc pas de relation simple sort→talent. Suit la
+  convention déjà actée pour ce cas exact (§2.39, "pour les bénédictions, la relation sort du
+  sort et vit uniquement dans la table").
+- **Nouveau bloc `DATA_SPELL_TALENT` créé côté V5** (n'existait pas encore dans ce livre,
+  seulement côté WFRP4) : 19 lignes `<Sort id=...><Talent>"liste de talents"</Talent></Sort>`,
+  une par Bénédiction, listant les spécialisations `RULES-T0168_<CULTE>` qui y donnent accès
+  (1 à 6 cultes par Bénédiction selon la table p.220). Placé juste après `</DATA_SPELL>`, même
+  ordre que le bloc homologue de `BOOK_RULESBOOK.Xml` (WFRP4).
+- Répartition vérifiée par recoupement : 10 cultes × 6 Bénédictions = 60 lignes
+  (culte,bénédiction), somme des 19 listes de talents = 60 également - les deux totaux
+  concordent.
+- Diff vérifié avant écriture : uniquement des ajouts (2 talents génériques + 20
+  spécialisations + 19 `Sort` + 1 nouveau bloc `DATA_SPELL_TALENT` de 19 lignes), rien retiré.
+  `lazbuild` : 0 erreur. `WarhammerHelp.exe` lancé, resté stable plusieurs secondes (chargement
+  sans exception, y compris le nouveau bloc `DATA_SPELL_TALENT` jamais chargé côté V5 avant
+  ce chantier) puis fermé.
+- Fichiers modifiés : `DATABASE\WFRP5\BOOK_RULESBOOK.Xml`, `CONTEXT.md`, `Log.txt`.
+
+**Prochaine étape** : test visuel par Nono (WinTalent pour Bless/Invoke + les 20
+spécialisations, WinSpell pour les 19 Bénédictions et leur accès par culte) avant de
+poursuivre. Puis Miracles des 10 cultes (~6 par culte, p.222 et suivantes - propres à chaque
+culte, relation `<Talent>` simple contrairement aux Bénédictions) - plus gros morceau du
+chantier, probablement à fractionner par culte ou par lot. Dark/Chaos Magic en dernier.
+
+---
+
+**14/09/2026 — HEDGECRAFT/WITCHCRAFT DU RULEBOOK V5 PEUPLÉS : ÉCRIT, COMPILÉ, TESTÉ
+VISUELLEMENT PAR NONO ("ok, c'est bon"), CHANTIER CLOS (§2.73).**
+Suite du chantier Sorts/Prières V5, à la suite des Arcane Spells/Lores Couleur (§2.72). Nono
+a dit de continuer sur les sorts.
+- **Correction d'une hypothèse de planification** : la note "prochaine étape" du §2.72 disait
+  "8 sorts chacun" pour Hedgecraft/Witchcraft (hypothèse posée avant lecture du texte) ; le
+  livre dit en réalité explicitement "two lists of six spells" (p.253, intro "Witch Magic") -
+  **6 sorts par Lore**, pas 8. Vérifié par lecture complète du texte extrait (p.253-255 du
+  PDF) avant saisie.
+- **12 sorts créés** (`id` `RULES-SPEL_HEDGECRAFT_NN` / `RULES-SPEL_WITCHCRAFT_NN`, 6 chacun,
+  ordre alphabétique comme les Lores Couleur) : Hedgecraft (Goodwill, Mirkride, Nepenthe,
+  Nostrum, Part the Branches, Protective Charm) et Witchcraft (Blight, Creeping Menace, Curse
+  of Crippling Pain, Curse of Ill-Fortune, Haunting Horror, The Evil Eye). `Talent` pointe la
+  spécialisation précise (`RULES-T0007_HEDGECRAFT`/`RULES-T0007_WITCHCRAFT`, déjà posées côté
+  talent avant ce chantier - rien à créer de ce côté), `TypSpell` `"Arcane Magic"` (même
+  convention que les Lores Couleur, pas de valeur dédiée).
+- **Extraction PDF en deux colonnes fusionnées sur la même ligne physique** (pas un artefact
+  de coupure en fin de page comme "Forge of Chamon" au §2.72, mais le format normal de ce
+  fichier .txt : colonne gauche et droite d'une même page imprimées côte à côte sur chaque
+  ligne). Repéré en tentant une première lecture linéaire qui mélangeait Lore of Shadows (page
+  précédente, colonne droite) avec Hedgecraft (colonne gauche) - **méthode utilisée pour
+  fiabiliser la saisie** : colonnes séparées par position de caractère (gauche = colonnes 1-72,
+  droite = colonne 74+) avant transcription, plutôt que de reconstituer à l'œil comme pour
+  l'accroc ponctuel du §2.72. À réutiliser si un futur chantier retombe sur ce même fichier
+  RULEBOOK.txt pour une section à cheval sur plusieurs colonnes/pages.
+- **Ingredients de chaque Lore volontairement PAS saisis** (même gap que Lore Attribute/
+  Ingredients des Lores Couleur, §2.72) : le texte des deux Lores décrit un mécanisme
+  d'ingrédients obligatoires (Hedgecraft : sorts injouables sans ingrédient ; Witchcraft :
+  ingrédient réduit le risque de Miscast, coût en deniers = CN du sort) mais c'est une
+  propriété du Lore, pas du sort individuel, et le modèle n'a toujours pas d'entité Lore/
+  Domaine - même prudence que pour les 8 Lores Couleur, pas de nouveau mécanisme inventé à la
+  volée.
+- Diff vérifié avant écriture : uniquement des ajouts (12 nouveaux `Sort`), rien retiré.
+  Balance vérifiée (`Sort` 125/125 cumulé, `DATA_SPELL` 1/1). `lazbuild` : 0 erreur.
+  `WarhammerHelp.exe` lancé, resté stable plusieurs secondes (chargement sans exception) puis
+  fermé.
+- Fichiers modifiés : `DATABASE\WFRP5\BOOK_RULESBOOK.Xml`, `CONTEXT.md`, `Log.txt`.
+
+**Prochaine étape** : suite du chantier Sorts/Prières V5 : créer les talents `Bless`/`Invoke`
+(cités p.219 du livre mais absents de `DATA_TALENT`), puis Blessings (générique, plusieurs
+cultes chacune, via `DATA_SPELL_TALENT`) et Miracles (propres à chaque culte, ~6 par culte,
+relation `<Talent>` simple) des 10 cultes, Dark/Chaos Magic en dernier.
+
+---
+
 **14/09/2026 — SORTS ARCANIQUES DU RULEBOOK V5 (SORTS PARTAGÉS + 8 LORES COULEUR) : ÉCRIT,
 COMPILÉ, TESTÉ VISUELLEMENT PAR NONO ("ce que je vois me semble bon"), CHANTIER CLOS POUR
 CETTE SESSION (§2.72).**

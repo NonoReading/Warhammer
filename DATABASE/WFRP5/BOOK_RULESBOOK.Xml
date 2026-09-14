@@ -3152,6 +3152,45 @@ As sailing one ship is not so different to sailing another, having any Sail Spec
 <PDF>""</PDF>
 <Test language="ENGLISH">""</Test>
 </Talent>
+<Talent id="RULES-T0168_*">
+<Attribut>""</Attribut>
+<Description language="ENGLISH">"Bless (Divine Lore)"</Description>
+<Short language="ENGLISH">""</Short>
+<Explanation language="ENGLISH">"You are watched over by one of the Gods and can empower simple prayers. You can now deploy the Blessings of your deity as listed in Chapter 7: Religion and Belief. Under normal circumstances, you may only ever know one Divine Lore for the Bless Talent."</Explanation>
+<Skill>""</Skill>
+<Max>"1"</Max>
+<PDF>""</PDF>
+<Test language="ENGLISH">""</Test>
+  <!-- Benediction : accordee d'office par le dieu, pas achetee sort par sort (le livre dit
+       "a character with the Bless Talent receives all six Blessings for their cult", p.220).
+       Magic="0" (n'ouvre jamais le catalogue de choix) + SpellMode="AUTO" (les sorts qui citent
+       ce talent sont ajoutes d'office) : meme couple que RULES-T0012_* cote WFRP4
+       (DATABASE\WFRP4\BOOK_RULESBOOK.Xml l.1761-1762), aucune balise Xp* necessaire -
+       chargeconstantes.pas l.150-188, winpersonnage.pas l.1600-1617 (CONTEXT.md 2.18). -->
+<Magic>"0"</Magic>
+<SpellMode>"AUTO"</SpellMode>
+</Talent>
+<Talent id="RULES-T0169_*">
+<Attribut>""</Attribut>
+<Description language="ENGLISH">"Invoke (Divine Lore)"</Description>
+<Short language="ENGLISH">""</Short>
+<Explanation language="ENGLISH">"You are blessed by one of the Gods and can empower one of your Cult's Miracles. Further, you may purchase extra miracles for 100 XP per miracle you currently know. So, if you already know 3 miracles, your next miracle costs 300 XP to purchase. Full rules for learning new miracles are provided in Chapter 7: Religion and Belief. Under normal circumstances, you may not learn more than one Invoke (Divine Lore) Talent. Further, you may not learn the Petty Magic or Arcane Magic Talents when you have the Invoke Talent. You can unlearn this Talent for 100 XP, but will lose all of your miracles if you do so, and will also garner the extreme disfavour of your God, with effects determined by your GM."</Explanation>
+<Skill>""</Skill>
+<Max>"1"</Max>
+<PDF>""</PDF>
+<Test language="ENGLISH">""</Test>
+  <!-- Miracle : un premier choisi a l'achat du talent (SpellMode="CHOICE", meme mecanisme que
+       les autres talents a choix), les suivants achetes en XP. Tarif du livre : "100 XP per
+       miracle you currently know" -> XpMultiplier="100", XpDivisor="1" (une palier par
+       miracle deja connu), XpFloor="0" (le premier restant gratuit, choisi a l'achat du
+       talent). Valeurs identiques a RULES-T0080_* cote WFRP4
+       (DATABASE\WFRP4\BOOK_RULESBOOK.Xml l.2453-2470). -->
+<Magic>"2"</Magic>
+<SpellMode>"CHOICE"</SpellMode>
+<XpMultiplier>"100"</XpMultiplier>
+<XpFloor>"0"</XpFloor>
+<XpDivisor>"1"</XpDivisor>
+</Talent>
 </DATA_TALENT>
 <DATA_TALENT_SPECIALIZATION>
 <Talent id="RULES-T0002_HEARING">
@@ -3425,6 +3464,86 @@ As sailing one ship is not so different to sailing another, having any Sail Spec
 <Talent id="RULES-T0134_WETLAND">
 <Description language="ENGLISH">"Striding Gait (Wetland)"</Description>
 <Generique>"RULES-T0134_*"</Generique>
+</Talent>
+<Talent id="RULES-T0168_MANANN">
+<Description language="ENGLISH">"Bless (Manann)"</Description>
+<Generique>"RULES-T0168_*"</Generique>
+</Talent>
+<Talent id="RULES-T0168_MORR">
+<Description language="ENGLISH">"Bless (Morr)"</Description>
+<Generique>"RULES-T0168_*"</Generique>
+</Talent>
+<Talent id="RULES-T0168_MYRMIDIA">
+<Description language="ENGLISH">"Bless (Myrmidia)"</Description>
+<Generique>"RULES-T0168_*"</Generique>
+</Talent>
+<Talent id="RULES-T0168_RANALD">
+<Description language="ENGLISH">"Bless (Ranald)"</Description>
+<Generique>"RULES-T0168_*"</Generique>
+</Talent>
+<Talent id="RULES-T0168_RHYA">
+<Description language="ENGLISH">"Bless (Rhya)"</Description>
+<Generique>"RULES-T0168_*"</Generique>
+</Talent>
+<Talent id="RULES-T0168_SHALLYA">
+<Description language="ENGLISH">"Bless (Shallya)"</Description>
+<Generique>"RULES-T0168_*"</Generique>
+</Talent>
+<Talent id="RULES-T0168_SIGMAR">
+<Description language="ENGLISH">"Bless (Sigmar)"</Description>
+<Generique>"RULES-T0168_*"</Generique>
+</Talent>
+<Talent id="RULES-T0168_TAAL">
+<Description language="ENGLISH">"Bless (Taal)"</Description>
+<Generique>"RULES-T0168_*"</Generique>
+</Talent>
+<Talent id="RULES-T0168_ULRIC">
+<Description language="ENGLISH">"Bless (Ulric)"</Description>
+<Generique>"RULES-T0168_*"</Generique>
+</Talent>
+<Talent id="RULES-T0168_VERENA">
+<Description language="ENGLISH">"Bless (Verena)"</Description>
+<Generique>"RULES-T0168_*"</Generique>
+</Talent>
+<Talent id="RULES-T0169_MANANN">
+<Description language="ENGLISH">"Invoke (Manann)"</Description>
+<Generique>"RULES-T0169_*"</Generique>
+</Talent>
+<Talent id="RULES-T0169_MORR">
+<Description language="ENGLISH">"Invoke (Morr)"</Description>
+<Generique>"RULES-T0169_*"</Generique>
+</Talent>
+<Talent id="RULES-T0169_MYRMIDIA">
+<Description language="ENGLISH">"Invoke (Myrmidia)"</Description>
+<Generique>"RULES-T0169_*"</Generique>
+</Talent>
+<Talent id="RULES-T0169_RANALD">
+<Description language="ENGLISH">"Invoke (Ranald)"</Description>
+<Generique>"RULES-T0169_*"</Generique>
+</Talent>
+<Talent id="RULES-T0169_RHYA">
+<Description language="ENGLISH">"Invoke (Rhya)"</Description>
+<Generique>"RULES-T0169_*"</Generique>
+</Talent>
+<Talent id="RULES-T0169_SHALLYA">
+<Description language="ENGLISH">"Invoke (Shallya)"</Description>
+<Generique>"RULES-T0169_*"</Generique>
+</Talent>
+<Talent id="RULES-T0169_SIGMAR">
+<Description language="ENGLISH">"Invoke (Sigmar)"</Description>
+<Generique>"RULES-T0169_*"</Generique>
+</Talent>
+<Talent id="RULES-T0169_TAAL">
+<Description language="ENGLISH">"Invoke (Taal)"</Description>
+<Generique>"RULES-T0169_*"</Generique>
+</Talent>
+<Talent id="RULES-T0169_ULRIC">
+<Description language="ENGLISH">"Invoke (Ulric)"</Description>
+<Generique>"RULES-T0169_*"</Generique>
+</Talent>
+<Talent id="RULES-T0169_VERENA">
+<Description language="ENGLISH">"Invoke (Verena)"</Description>
+<Generique>"RULES-T0169_*"</Generique>
 </Talent>
 </DATA_TALENT_SPECIALIZATION>
 <DATA_RANDOM_TALENT>
@@ -14451,5 +14570,984 @@ Playing a Wrecker means you are adept at ambushes, stealth, and intimidation, wi
 <Level>"8"</Level>
 <TypSpell>"Arcane Magic"</TypSpell>
 </Sort>
+<Sort id="RULES-SPEL_HEDGECRAFT_01">
+<Description language="ENGLISH">"Goodwill"</Description>
+<Explanation language="ENGLISH">"You create an atmosphere conducive to friendliness and good spirits. All Fellowship Tests within the Area of Effect receive a bonus of +10, and Animosity and Hatred Psychologies have no effect."</Explanation>
+<Target>"AoE (Fellowship Bonus yards)"</Target>
+<Duration>"Willpower Bonus Rounds"</Duration>
+<Range>"You"</Range>
+<Talent>"RULES-T0007_HEDGECRAFT"</Talent>
+<Level>"0"</Level>
+<TypSpell>"Arcane Magic"</TypSpell>
+</Sort>
+<Sort id="RULES-SPEL_HEDGECRAFT_02">
+<Description language="ENGLISH">"Mirkride"</Description>
+<Explanation language="ENGLISH">"Speaking ancient words of magic, your spirit leaves your body, stepping into the Hedge, the dark space between the material world and the spirit realm. For the duration, you stand apart from the world, able to witness it invisibly, but not affect it in any way. Physical barriers are no impediment to you, and you may walk through non-magical obstacles at will. Your body remains in place, immobile and insensate. At the end of the spell you will be pulled suddenly back to your body. If your body is killed while you are walking the Hedge, your spirit will wander aimlessly for eternity."</Explanation>
+<Target>"You"</Target>
+<Duration>"Willpower Bonus minutes"</Duration>
+<Range>"You"</Range>
+<Talent>"RULES-T0007_HEDGECRAFT"</Talent>
+<Level>"0"</Level>
+<TypSpell>"Arcane Magic"</TypSpell>
+</Sort>
+<Sort id="RULES-SPEL_HEDGECRAFT_03">
+<Description language="ENGLISH">"Nepenthe"</Description>
+<Explanation language="ENGLISH">"You mutter words of power over a premade potion of herbs, magically transforming it into a potent philtre. If drunk while the spell is in effect, the target may choose to completely forget one individual, permanently."</Explanation>
+<Target>"Special"</Target>
+<Duration>"Willpower Bonus Rounds"</Duration>
+<Range>"Touch"</Range>
+<Talent>"RULES-T0007_HEDGECRAFT"</Talent>
+<Level>"0"</Level>
+<TypSpell>"Arcane Magic"</TypSpell>
+</Sort>
+<Sort id="RULES-SPEL_HEDGECRAFT_04">
+<Description language="ENGLISH">"Nostrum"</Description>
+<Explanation language="ENGLISH">"You incant a spell over an already prepared draught, imbuing it with magical power. If drunk while the spell is in effect, the target immediately heals your Willpower Bonus in Wounds and is cured of one disease. For every +2 SL you may cure an extra disease."</Explanation>
+<Target>"Special"</Target>
+<Duration>"Willpower Bonus Rounds"</Duration>
+<Range>"Touch"</Range>
+<Talent>"RULES-T0007_HEDGECRAFT"</Talent>
+<Level>"0"</Level>
+<TypSpell>"Arcane Magic"</TypSpell>
+</Sort>
+<Sort id="RULES-SPEL_HEDGECRAFT_05">
+<Description language="ENGLISH">"Part the Branches"</Description>
+<Explanation language="ENGLISH">"Your pupils dilate as you complete your incantation, and you are able to see into the Spirit world. This allows you to perceive invisible creatures, spirits, and Daemons, even those marked as impossible to see."</Explanation>
+<Target>"You"</Target>
+<Duration>"Willpower minutes"</Duration>
+<Range>"You"</Range>
+<Talent>"RULES-T0007_HEDGECRAFT"</Talent>
+<Level>"0"</Level>
+<TypSpell>"Arcane Magic"</TypSpell>
+</Sort>
+<Sort id="RULES-SPEL_HEDGECRAFT_06">
+<Description language="ENGLISH">"Protective Charm"</Description>
+<Explanation language="ENGLISH">"You imbue a protective charm with a spell of protection. Those bearing the charm gain the Magic Resistance Talent. If they already have that Talent, the charm does nothing more."</Explanation>
+<Target>"Special"</Target>
+<Duration>"Willpower Bonus days"</Duration>
+<Range>"Touch"</Range>
+<Talent>"RULES-T0007_HEDGECRAFT"</Talent>
+<Level>"0"</Level>
+<TypSpell>"Arcane Magic"</TypSpell>
+</Sort>
+<Sort id="RULES-SPEL_WITCHCRAFT_01">
+<Description language="ENGLISH">"Blight"</Description>
+<Explanation language="ENGLISH">"You may target either a well, a field, or a domestic animal. If you successfully cast the spell, the target suffers from a blight: A blighted well becomes instantly brackish and stagnant. Any crops currently planted in a Blighted field rot overnight. A blighted animal sickens - the afflicted beast no longer produces anything (cows produce no milk, hens produce no eggs, coats and hides grow mangy and unusable) and will die in 10-SL days."</Explanation>
+<Target>"Special"</Target>
+<Duration>"Special"</Duration>
+<Range>"Willpower Bonus yards"</Range>
+<Talent>"RULES-T0007_WITCHCRAFT"</Talent>
+<Level>"14"</Level>
+<TypSpell>"Arcane Magic"</TypSpell>
+</Sort>
+<Sort id="RULES-SPEL_WITCHCRAFT_02">
+<Description language="ENGLISH">"Creeping Menace"</Description>
+<Explanation language="ENGLISH">"You summon a swarm of creeping, slithering creatures to harass your foes. Each target affected is immediately engaged by a swarm of Giant Rats, Giant Spiders, or Snakes. Use the standard profiles for the relevant creature type, adding the Swarm Trait. For your Action you may make a Challenging (+0) Charm Animal Test to direct 1 or more swarms to attack a different target. When the spell ends, any remaining swarms disappear into the shadows."</Explanation>
+<Target>"1"</Target>
+<Duration>"Willpower Bonus Rounds"</Duration>
+<Range>"Willpower yards"</Range>
+<Talent>"RULES-T0007_WITCHCRAFT"</Talent>
+<Level>"6"</Level>
+<TypSpell>"Arcane Magic"</TypSpell>
+</Sort>
+<Sort id="RULES-SPEL_WITCHCRAFT_03">
+<Description language="ENGLISH">"Curse of Crippling Pain"</Description>
+<Explanation language="ENGLISH">"Stabbing a crude representation of your target - a doll or puppet - you inflict crippling pain. When successfully cast, choose which hit location to stab: Leg - Leg becomes useless, as if it was Amputated. If running, the target also gains the Prone Condition and takes falling Damage. Arm - Arm becomes useless, as if it was Amputated. If target was holding anything in that hand, it is automatically dropped. Body - Target doubles up in agony, gaining +1 Fatigued Condition, and must pass a Hard (-20) Endurance Test or gain the Prone Condition. Head - Target gains the Stunned Condition, and must pass an Average (+20) Endurance Test or gain the Unconscious Condition for the Duration. While the spell is in effect, for your Action you may make a Channelling Test, stabbing the doll again, to affect a different location."</Explanation>
+<Target>"1"</Target>
+<Duration>"Willpower Bonus Rounds"</Duration>
+<Range>"Willpower yards"</Range>
+<Talent>"RULES-T0007_WITCHCRAFT"</Talent>
+<Level>"10"</Level>
+<TypSpell>"Arcane Magic"</TypSpell>
+</Sort>
+<Sort id="RULES-SPEL_WITCHCRAFT_04">
+<Description language="ENGLISH">"Curse of Ill-Fortune"</Description>
+<Explanation language="ENGLISH">"The ingredient for this spell is something belonging to the target, either a personal possession or a strand of hair. For the duration, your target suffers bad luck. Laces snap, chairs break, and other minor narrative effects inconvenience them. The target suffers a penalty of -10 to all Tests, in addition to any other modifiers, and may not spend Fortune points."</Explanation>
+<Target>"1"</Target>
+<Duration>"Willpower Bonus days"</Duration>
+<Range>"Willpower Bonus miles"</Range>
+<Talent>"RULES-T0007_WITCHCRAFT"</Talent>
+<Level>"8"</Level>
+<TypSpell>"Arcane Magic"</TypSpell>
+</Sort>
+<Sort id="RULES-SPEL_WITCHCRAFT_05">
+<Description language="ENGLISH">"Haunting Horror"</Description>
+<Explanation language="ENGLISH">"You target a single location, such as a house or clearing, and inflict haunting dreams and waking nightmares on any who enter there. Those entering while the spell is in effect are unnerved by eerie sensations, flitting shadows, and whispered voices lurking on the threshold of hearing. Unless they possess the Arcane Magic (Witchcraft) Talent, they gain +1 Fatigued Condition. Then, unless they pass a Challenging (+0) Cool Test, they gain another +1 Fatigued Condition and the Broken Condition, both of which are only removed upon leaving the location."</Explanation>
+<Target>"AoE (a single location)"</Target>
+<Duration>"Willpower days"</Duration>
+<Range>"Touch"</Range>
+<Talent>"RULES-T0007_WITCHCRAFT"</Talent>
+<Level>"8"</Level>
+<TypSpell>"Arcane Magic"</TypSpell>
+</Sort>
+<Sort id="RULES-SPEL_WITCHCRAFT_06">
+<Description language="ENGLISH">"The Evil Eye"</Description>
+<Explanation language="ENGLISH">"You lock eyes with a single target, who must be looking at you. Perform an Opposed Intimidate/Cool Test, adding any SL from your casting roll to your result. Your opponent gains 1 Fatigued Condition per +2 SL by which you win. If you win by 6+ SL, your opponent gains the Broken Condition."</Explanation>
+<Target>"Special"</Target>
+<Duration>"Instant"</Duration>
+<Range>"Willpower yards"</Range>
+<Talent>"RULES-T0007_WITCHCRAFT"</Talent>
+<Level>"6"</Level>
+<TypSpell>"Arcane Magic"</TypSpell>
+</Sort>
+  <!-- Benedictions generiques (p.221), partagees par plusieurs cultes a la fois (table
+       "Blessings by Cult" p.220) : <Talent> reste VIDE, l'acces par culte vit uniquement dans
+       DATA_SPELL_TALENT plus bas - meme convention que RULES-BENED_* cote WFRP4, deja actee
+       pour ce cas exact (CONTEXT.md 2.39, "la relation sort du sort et vit uniquement dans la
+       table" pour les benedictions). -->
+<Sort id="RULES-SPEL_BLESSING_01">
+<Description language="ENGLISH">"Blessing of Battle"</Description>
+<Explanation language="ENGLISH">"Your target gains +10 Weapon Skill."</Explanation>
+<Target>"1"</Target>
+<Duration>"6 Rounds"</Duration>
+<Range>"6 yards"</Range>
+<Talent>""</Talent>
+<Level>""</Level>
+<TypSpell>"Blessing"</TypSpell>
+</Sort>
+<Sort id="RULES-SPEL_BLESSING_02">
+<Description language="ENGLISH">"Blessing of Breath"</Description>
+<Explanation language="ENGLISH">"Your target does not need to breathe and ignores rules for suffocation."</Explanation>
+<Target>"1"</Target>
+<Duration>"6 Rounds"</Duration>
+<Range>"6 yards"</Range>
+<Talent>""</Talent>
+<Level>""</Level>
+<TypSpell>"Blessing"</TypSpell>
+</Sort>
+<Sort id="RULES-SPEL_BLESSING_03">
+<Description language="ENGLISH">"Blessing of Charisma"</Description>
+<Explanation language="ENGLISH">"Your target gains +10 Fellowship."</Explanation>
+<Target>"1"</Target>
+<Duration>"6 Rounds"</Duration>
+<Range>"6 yards"</Range>
+<Talent>""</Talent>
+<Level>""</Level>
+<TypSpell>"Blessing"</TypSpell>
+</Sort>
+<Sort id="RULES-SPEL_BLESSING_04">
+<Description language="ENGLISH">"Blessing of Conscience"</Description>
+<Explanation language="ENGLISH">"Your target must pass an Average (+20) Willpower Test to break any of the Strictures of your deity. If they fail, they are overcome with Shame and do not take the action."</Explanation>
+<Target>"1"</Target>
+<Duration>"6 Rounds"</Duration>
+<Range>"6 yards"</Range>
+<Talent>""</Talent>
+<Level>""</Level>
+<TypSpell>"Blessing"</TypSpell>
+</Sort>
+<Sort id="RULES-SPEL_BLESSING_05">
+<Description language="ENGLISH">"Blessing of Courage"</Description>
+<Explanation language="ENGLISH">"Your target gains +10 Willpower."</Explanation>
+<Target>"1"</Target>
+<Duration>"6 Rounds"</Duration>
+<Range>"6 yards"</Range>
+<Talent>""</Talent>
+<Level>""</Level>
+<TypSpell>"Blessing"</TypSpell>
+</Sort>
+<Sort id="RULES-SPEL_BLESSING_06">
+<Description language="ENGLISH">"Blessing of Finesse"</Description>
+<Explanation language="ENGLISH">"Your target gains +10 Dexterity."</Explanation>
+<Target>"1"</Target>
+<Duration>"6 Rounds"</Duration>
+<Range>"6 yards"</Range>
+<Talent>""</Talent>
+<Level>""</Level>
+<TypSpell>"Blessing"</TypSpell>
+</Sort>
+<Sort id="RULES-SPEL_BLESSING_07">
+<Description language="ENGLISH">"Blessing of Fortune"</Description>
+<Explanation language="ENGLISH">"Your target's next failed Test may be rerolled. The reroll must stand."</Explanation>
+<Target>"1"</Target>
+<Duration>"6 Rounds"</Duration>
+<Range>"6 yards"</Range>
+<Talent>""</Talent>
+<Level>""</Level>
+<TypSpell>"Blessing"</TypSpell>
+</Sort>
+<Sort id="RULES-SPEL_BLESSING_08">
+<Description language="ENGLISH">"Blessing of Grace"</Description>
+<Explanation language="ENGLISH">"Your target gains +10 Agility."</Explanation>
+<Target>"1"</Target>
+<Duration>"6 Rounds"</Duration>
+<Range>"6 yards"</Range>
+<Talent>""</Talent>
+<Level>""</Level>
+<TypSpell>"Blessing"</TypSpell>
+</Sort>
+<Sort id="RULES-SPEL_BLESSING_09">
+<Description language="ENGLISH">"Blessing of Hardiness"</Description>
+<Explanation language="ENGLISH">"Your target gains +10 Toughness."</Explanation>
+<Target>"1"</Target>
+<Duration>"6 Rounds"</Duration>
+<Range>"6 yards"</Range>
+<Talent>""</Talent>
+<Level>""</Level>
+<TypSpell>"Blessing"</TypSpell>
+</Sort>
+<Sort id="RULES-SPEL_BLESSING_10">
+<Description language="ENGLISH">"Blessing of Healing"</Description>
+<Explanation language="ENGLISH">"Your target heals +1 Wound."</Explanation>
+<Target>"1"</Target>
+<Duration>"Instant"</Duration>
+<Range>"Touch"</Range>
+<Talent>""</Talent>
+<Level>""</Level>
+<TypSpell>"Blessing"</TypSpell>
+</Sort>
+<Sort id="RULES-SPEL_BLESSING_11">
+<Description language="ENGLISH">"Blessing of Might"</Description>
+<Explanation language="ENGLISH">"Your target gains +10 Strength."</Explanation>
+<Target>"1"</Target>
+<Duration>"6 Rounds"</Duration>
+<Range>"6 yards"</Range>
+<Talent>""</Talent>
+<Level>""</Level>
+<TypSpell>"Blessing"</TypSpell>
+</Sort>
+<Sort id="RULES-SPEL_BLESSING_12">
+<Description language="ENGLISH">"Blessing of Protection"</Description>
+<Explanation language="ENGLISH">"Enemies must make an Average (+20) Willpower Test to attack your target, as shame wells within for considering violence. If they fail, they must choose a different target, or a different Action."</Explanation>
+<Target>"1"</Target>
+<Duration>"6 Rounds"</Duration>
+<Range>"6 yards"</Range>
+<Talent>""</Talent>
+<Level>""</Level>
+<TypSpell>"Blessing"</TypSpell>
+</Sort>
+<Sort id="RULES-SPEL_BLESSING_13">
+<Description language="ENGLISH">"Blessing of Recuperation"</Description>
+<Explanation language="ENGLISH">"Your target may reduce the duration of 1 disease with which they are afflicted by 1 day. This prayer may only be attempted once per instance of a disease per person."</Explanation>
+<Target>"1"</Target>
+<Duration>"Instant"</Duration>
+<Range>"Touch"</Range>
+<Talent>""</Talent>
+<Level>""</Level>
+<TypSpell>"Blessing"</TypSpell>
+</Sort>
+<Sort id="RULES-SPEL_BLESSING_14">
+<Description language="ENGLISH">"Blessing of Righteousness"</Description>
+<Explanation language="ENGLISH">"Your target's weapon counts as Magical."</Explanation>
+<Target>"1"</Target>
+<Duration>"6 Rounds"</Duration>
+<Range>"6 yards"</Range>
+<Talent>""</Talent>
+<Level>""</Level>
+<TypSpell>"Blessing"</TypSpell>
+</Sort>
+<Sort id="RULES-SPEL_BLESSING_15">
+<Description language="ENGLISH">"Blessing of Savagery"</Description>
+<Explanation language="ENGLISH">"When your target next inflicts a Critical Wound, roll twice and choose the best result."</Explanation>
+<Target>"1"</Target>
+<Duration>"6 Rounds"</Duration>
+<Range>"6 yards"</Range>
+<Talent>""</Talent>
+<Level>""</Level>
+<TypSpell>"Blessing"</TypSpell>
+</Sort>
+<Sort id="RULES-SPEL_BLESSING_16">
+<Description language="ENGLISH">"Blessing of Tenacity"</Description>
+<Explanation language="ENGLISH">"Your target may remove 1 condition."</Explanation>
+<Target>"1"</Target>
+<Duration>"Instant"</Duration>
+<Range>"6 yards"</Range>
+<Talent>""</Talent>
+<Level>""</Level>
+<TypSpell>"Blessing"</TypSpell>
+</Sort>
+<Sort id="RULES-SPEL_BLESSING_17">
+<Description language="ENGLISH">"Blessing of The Hunt"</Description>
+<Explanation language="ENGLISH">"Your target gains +10 Ballistic Skill."</Explanation>
+<Target>"1"</Target>
+<Duration>"6 Rounds"</Duration>
+<Range>"6 yards"</Range>
+<Talent>""</Talent>
+<Level>""</Level>
+<TypSpell>"Blessing"</TypSpell>
+</Sort>
+<Sort id="RULES-SPEL_BLESSING_18">
+<Description language="ENGLISH">"Blessing of Wisdom"</Description>
+<Explanation language="ENGLISH">"Your target gains +10 Intelligence."</Explanation>
+<Target>"1"</Target>
+<Duration>"6 Rounds"</Duration>
+<Range>"6 yards"</Range>
+<Talent>""</Talent>
+<Level>""</Level>
+<TypSpell>"Blessing"</TypSpell>
+</Sort>
+<Sort id="RULES-SPEL_BLESSING_19">
+<Description language="ENGLISH">"Blessing of Wit"</Description>
+<Explanation language="ENGLISH">"Your target gains +10 Initiative."</Explanation>
+<Target>"1"</Target>
+<Duration>"6 Rounds"</Duration>
+<Range>"6 yards"</Range>
+<Talent>""</Talent>
+<Level>""</Level>
+<TypSpell>"Blessing"</TypSpell>
+</Sort>
+  <!-- Miracles (p.222-228), propres a chaque culte (contrairement aux Benedictions) : relation
+       simple via <Talent>, pas de DATA_SPELL_TALENT - RULES-T0169_<CULTE> uniquement. -->
+<Sort id="RULES-SPEL_MIRACLE_MANANN_01">
+<Description language="ENGLISH">"Becalm"</Description>
+<Explanation language="ENGLISH">"You steal the wind from the sails of a ship or boat. It is completely becalmed. Even in stormy weather an area of eerie calm and smooth waters surrounds the vessel while gales, lashing rains and towering crests surge and crash around it. This area of calm extends for Initiative yards from the vessel, and if the ship is propelled by some other method, such as oars, the area of calm travels with it."</Explanation>
+<Target>"1 sailing vessel within Line of Sight"</Target>
+<Duration>"1 Hour"</Duration>
+<Range>"Initiative Bonus Miles"</Range>
+<Talent>"RULES-T0169_MANANN"</Talent>
+<Level>""</Level>
+<TypSpell>"Miracle"</TypSpell>
+</Sort>
+<Sort id="RULES-SPEL_MIRACLE_MANANN_02">
+<Description language="ENGLISH">"Drowned Man's Face"</Description>
+<Explanation language="ENGLISH">"You implore Manann to drown your foes. Your targets' lungs continuously fill with saltwater while the Miracle is active, and their hair floats around their head as if submerged. Your targets gains a Fatigued Condition, and are subject to the rules for Drowning and Suffocation while the Miracle is in effect. When the Miracle ends, your targets must attempt a Challenging (-20) Endurance Test. If a Failure is scored, also inflict a Prone Condition."</Explanation>
+<Target>"1"</Target>
+<Duration>"Fellowship Bonus Rounds"</Duration>
+<Range>"Fellowship yards"</Range>
+<Talent>"RULES-T0169_MANANN"</Talent>
+<Level>""</Level>
+<TypSpell>"Miracle"</TypSpell>
+</Sort>
+<Sort id="RULES-SPEL_MIRACLE_MANANN_03">
+<Description language="ENGLISH">"Fair Winds"</Description>
+<Explanation language="ENGLISH">"The target vessels' sails fill with favourable winds, speeding them safely towards their destination. While this Miracle is active, the sailing vessel moves at top speed, no matter the prevailing wind, tide, or current, and all Tests made to steer the vessel gain a bonus of +10."</Explanation>
+<Target>"1 sailing vessel within Line of Sight"</Target>
+<Duration>"1 Hour"</Duration>
+<Range>"Initiative Bonus Miles"</Range>
+<Talent>"RULES-T0169_MANANN"</Talent>
+<Level>""</Level>
+<TypSpell>"Miracle"</TypSpell>
+</Sort>
+<Sort id="RULES-SPEL_MIRACLE_MANANN_04">
+<Description language="ENGLISH">"Manann's Bounty"</Description>
+<Explanation language="ENGLISH">"You implore Manann to provide you with sustenance. Reaching into a body of water you catch enough fish to feed 1 person; if you reach into the sea, you provide enough fish for 2 people. For every +2 SL, you may feed another person."</Explanation>
+<Target>"1"</Target>
+<Duration>"Instant"</Duration>
+<Range>"Touch"</Range>
+<Talent>"RULES-T0169_MANANN"</Talent>
+<Level>""</Level>
+<TypSpell>"Miracle"</TypSpell>
+</Sort>
+<Sort id="RULES-SPEL_MIRACLE_MANANN_05">
+<Description language="ENGLISH">"Sea Legs"</Description>
+<Explanation language="ENGLISH">"Your targets are immediately drenched in saltwater, and reel as if on the rolling deck of a tempest-tossed vessel. Their hair is whipped by spectral winds, and a torrent of spray lashes their skin. They gain one each of the Blinded, Deafened, and Fatigued Conditions, and must attempt an Average (+20) Agility Test to use their Move. If they fail, they also gain a Prone Condition."</Explanation>
+<Target>"1"</Target>
+<Duration>"Fellowship Bonus Rounds"</Duration>
+<Range>"Fellowship yards"</Range>
+<Talent>"RULES-T0169_MANANN"</Talent>
+<Level>""</Level>
+<TypSpell>"Miracle"</TypSpell>
+</Sort>
+<Sort id="RULES-SPEL_MIRACLE_MANANN_06">
+<Description language="ENGLISH">"Waterwalk"</Description>
+<Explanation language="ENGLISH">"You call on Manann to allow you to cross a stretch of open water as if it were solid ground. This only works on larger bodies of water that are at least 10 yards wide. Anything smaller is too far removed from Manann's domain for it to be noticed."</Explanation>
+<Target>"You"</Target>
+<Duration>"Fellowship Bonus minutes"</Duration>
+<Range>"You"</Range>
+<Talent>"RULES-T0169_MANANN"</Talent>
+<Level>""</Level>
+<TypSpell>"Miracle"</TypSpell>
+</Sort>
+<Sort id="RULES-SPEL_MIRACLE_MORR_01">
+<Description language="ENGLISH">"Death Mask"</Description>
+<Explanation language="ENGLISH">"Morr works through you, piercing the Portal to make his presence known to your foes. Your visage takes on a cadaverous mien, and you gain Fear 1."</Explanation>
+<Target>"You"</Target>
+<Duration>"Fellowship Bonus Rounds"</Duration>
+<Range>"You"</Range>
+<Talent>"RULES-T0169_MORR"</Talent>
+<Level>""</Level>
+<TypSpell>"Miracle"</TypSpell>
+</Sort>
+<Sort id="RULES-SPEL_MIRACLE_MORR_02">
+<Description language="ENGLISH">"Destroy Undead"</Description>
+<Explanation language="ENGLISH">"You call the power of Morr to smite all Undead. A black fire ripples forth from your body in a perfect circle for Fellowship Bonus yards. All potential targets with the Undead Creature Trait lose 1d10 Wounds, ignoring Toughness Bonus and AP. Any Undead destroyed by this Miracle can never be raised with Necromancy again under normal conditions. For every +2 SL, you may increase the area of effect by +Fellowship Bonus yards."</Explanation>
+<Target>"Area of Effect"</Target>
+<Duration>"Instant"</Duration>
+<Range>"You"</Range>
+<Talent>"RULES-T0169_MORR"</Talent>
+<Level>""</Level>
+<TypSpell>"Miracle"</TypSpell>
+</Sort>
+<Sort id="RULES-SPEL_MIRACLE_MORR_03">
+<Description language="ENGLISH">"Dooming"</Description>
+<Explanation language="ENGLISH">"Gazing deeply into your target's eyes while muttering a threnody to Morr, you are granted a vision of the target's Doom, a glimpse of what the future holds. This is almost always related to the target's death. This Miracle may only be performed on a character once, after which the Doomed Talent may be purchased with XP as if it were in the target's Career."</Explanation>
+<Target>"1"</Target>
+<Duration>"Instant"</Duration>
+<Range>"Touch"</Range>
+<Talent>"RULES-T0169_MORR"</Talent>
+<Level>""</Level>
+<TypSpell>"Miracle"</TypSpell>
+</Sort>
+<Sort id="RULES-SPEL_MIRACLE_MORR_04">
+<Description language="ENGLISH">"Last Rites"</Description>
+<Explanation language="ENGLISH">"You chant a solemn requiem over a corpse. This miracle ensures that the soul is sent through the portal to Morr's realm, and guarantees the cadaver may not be targeted by any Necromantic spells. If the Miracle targets a foe with the Undead and Construct Creature Traits, it will be destroyed."</Explanation>
+<Target>"1"</Target>
+<Duration>"Instant"</Duration>
+<Range>"1 yard"</Range>
+<Talent>"RULES-T0169_MORR"</Talent>
+<Level>""</Level>
+<TypSpell>"Miracle"</TypSpell>
+</Sort>
+<Sort id="RULES-SPEL_MIRACLE_MORR_05">
+<Description language="ENGLISH">"Portal's Threshold"</Description>
+<Explanation language="ENGLISH">"You draw a line up to 8 yards long on the ground while incanting a dirge to Morr. Upon enacting the Miracle, an indistinct, shadowy portal seems to manifest to the hoarse croaking of ravens. Creatures with the Undead Creature Trait must pass a Challenging (+0) Willpower Test to cross the line. Creatures with both Undead and Construct simply cannot cross the line. The Miracle remains in effect until dawn."</Explanation>
+<Target>"Area of Effect"</Target>
+<Duration>"Special"</Duration>
+<Range>"Touch"</Range>
+<Talent>"RULES-T0169_MORR"</Talent>
+<Level>""</Level>
+<TypSpell>"Miracle"</TypSpell>
+</Sort>
+<Sort id="RULES-SPEL_MIRACLE_MORR_06">
+<Description language="ENGLISH">"Stay Morr's Hand"</Description>
+<Explanation language="ENGLISH">"You touch the eyes of someone close to death and request Morr guide the soul within, but not take it. The target must have 0 Wounds and be willing. For the duration of the Miracle, the target gains the Unconscious Condition and will not deteriorate until the Miracle ends, staving off disease, ignoring critical wounds and poisons, and similar. This miracle comes to an end should appropriate healing be provided, or should you perform the last rights. If you do this, which takes about a minute, the target's soul will pass through Morr's portal upon death, and the resulting corpse may never be targeted by Necromancy."</Explanation>
+<Target>"1"</Target>
+<Duration>"Fellowship Bonus Hours (Special)"</Duration>
+<Range>"Touch"</Range>
+<Talent>"RULES-T0169_MORR"</Talent>
+<Level>""</Level>
+<TypSpell>"Miracle"</TypSpell>
+</Sort>
+<Sort id="RULES-SPEL_MIRACLE_MYRMIDIA_01">
+<Description language="ENGLISH">"Blazing Sun"</Description>
+<Explanation language="ENGLISH">"You call on Myrmidia to scour the battlefield of dishonourable foes, and a blinding flash of golden light bursts forth. All non-Myrmidians looking in your direction receive 1 Blinded Condition. For every +2 SL, they receive +1 Blinded Condition."</Explanation>
+<Target>"Area of Effect"</Target>
+<Duration>"Instant"</Duration>
+<Range>"You"</Range>
+<Talent>"RULES-T0169_MYRMIDIA"</Talent>
+<Level>""</Level>
+<TypSpell>"Miracle"</TypSpell>
+</Sort>
+<Sort id="RULES-SPEL_MIRACLE_MYRMIDIA_02">
+<Description language="ENGLISH">"Eagle's Eye"</Description>
+<Explanation language="ENGLISH">"You call on Myrmidia to send a Divine Servant to grant you knowledge of your enemies. A spectral Eagle manifests, soaring into the sky above. The eagle looks like and has the capabilities of a normal eagle, but cannot physically affect the world, or be harmed in any way. While the Miracle is in effect, you can see through the eagle's eyes and control its flight, surveying the battlefield and spying upon your enemies. Your vision is acute, but you do not have access to any of your own sense-enhancing Talents such as Night Vision. While looking through the eagle's eyes, you cannot see through your own eyes, leaving you potentially vulnerable."</Explanation>
+<Target>"You"</Target>
+<Duration>"Fellowship Bonus Rounds"</Duration>
+<Range>"Fellowship yards"</Range>
+<Talent>"RULES-T0169_MYRMIDIA"</Talent>
+<Level>""</Level>
+<TypSpell>"Miracle"</TypSpell>
+</Sort>
+<Sort id="RULES-SPEL_MIRACLE_MYRMIDIA_03">
+<Description language="ENGLISH">"Fury's Call"</Description>
+<Explanation language="ENGLISH">"Your passionate prayers instil your allies with a furious disdain for their foes. All allies affected receive the Hatred Psychology towards any engaging them in combat."</Explanation>
+<Target>"Intelligence Bonus allies"</Target>
+<Duration>"Fellowship Bonus Rounds"</Duration>
+<Range>"Fellowship yards"</Range>
+<Talent>"RULES-T0169_MYRMIDIA"</Talent>
+<Level>""</Level>
+<TypSpell>"Miracle"</TypSpell>
+</Sort>
+<Sort id="RULES-SPEL_MIRACLE_MYRMIDIA_04">
+<Description language="ENGLISH">"Inspiring"</Description>
+<Explanation language="ENGLISH">"Your rousing prayers inspire discipline and coordination within the ranks. Affected targets gain the +1 Drilled Talent."</Explanation>
+<Target>"Intelligence Bonus allies"</Target>
+<Duration>"Fellowship Bonus Rounds"</Duration>
+<Range>"Fellowship yards"</Range>
+<Talent>"RULES-T0169_MYRMIDIA"</Talent>
+<Level>""</Level>
+<TypSpell>"Miracle"</TypSpell>
+</Sort>
+<Sort id="RULES-SPEL_MIRACLE_MYRMIDIA_05">
+<Description language="ENGLISH">"Shield of Myrmidia"</Description>
+<Explanation language="ENGLISH">"Your stalwart prayers incite Myrmidia to shield your allies in glittering, gossamer strands of light, warding enemy blows. All those affected gain +1 AP on all locations."</Explanation>
+<Target>"Intelligence Bonus allies"</Target>
+<Duration>"Fellowship Bonus Rounds"</Duration>
+<Range>"Fellowship yards"</Range>
+<Talent>"RULES-T0169_MYRMIDIA"</Talent>
+<Level>""</Level>
+<TypSpell>"Miracle"</TypSpell>
+</Sort>
+<Sort id="RULES-SPEL_MIRACLE_MYRMIDIA_06">
+<Description language="ENGLISH">"Spear of Myrmidia"</Description>
+<Explanation language="ENGLISH">"If wielding a spear, it gains the Impact Quality, and counts as Magical."</Explanation>
+<Target>"You"</Target>
+<Duration>"Fellowship Bonus Rounds"</Duration>
+<Range>"You"</Range>
+<Talent>"RULES-T0169_MYRMIDIA"</Talent>
+<Level>""</Level>
+<TypSpell>"Miracle"</TypSpell>
+</Sort>
+<Sort id="RULES-SPEL_MIRACLE_RANALD_01">
+<Description language="ENGLISH">"An Invitation"</Description>
+<Explanation language="ENGLISH">"You spin one of Ranald's riddles concerning portals, and whether they exist if closed. A door, window, or hatch you target has one method of securing it undone - a lock unlocks, a latch unlatches, a rope unties. For every +2 SL you may target another method of securing the door, window, or hatch."</Explanation>
+<Target>"1"</Target>
+<Duration>"Instant"</Duration>
+<Range>"1 yard"</Range>
+<Talent>"RULES-T0169_RANALD"</Talent>
+<Level>""</Level>
+<TypSpell>"Miracle"</TypSpell>
+</Sort>
+<Sort id="RULES-SPEL_MIRACLE_RANALD_02">
+<Description language="ENGLISH">"Cat's Eyes"</Description>
+<Explanation language="ENGLISH">"Does anything exist that cannot be seen? You riddle with Ranald, who sends a Divine Servant in the form of a cat as an answer. The cat looks like and has the capabilities of a normal cat, but cannot be harmed in any way. While the Miracle is in effect, you perceive everything the cat perceives - sight, sound, touch - and control its movement. Your senses are as sharp as a cat's, but you do not have access to any of your own sense-enhancing Talents such as Night Vision. While the Miracle is in effect, you cannot perceive anything through your own senses, leaving you vulnerable."</Explanation>
+<Target>"You"</Target>
+<Duration>"Fellowship Bonus Rounds"</Duration>
+<Range>"Fellowship yards"</Range>
+<Talent>"RULES-T0169_RANALD"</Talent>
+<Level>""</Level>
+<TypSpell>"Miracle"</TypSpell>
+</Sort>
+<Sort id="RULES-SPEL_MIRACLE_RANALD_03">
+<Description language="ENGLISH">"Ranald's Grace"</Description>
+<Explanation language="ENGLISH">"You call on Ranald to let your target negotiate the riddles of reality. Your target gains +10 Agility, +10 Stealth, and +1 Catfall Talent for the duration of the Miracle."</Explanation>
+<Target>"1"</Target>
+<Duration>"Agility Bonus Rounds"</Duration>
+<Range>"Touch"</Range>
+<Talent>"RULES-T0169_RANALD"</Talent>
+<Level>""</Level>
+<TypSpell>"Miracle"</TypSpell>
+</Sort>
+<Sort id="RULES-SPEL_MIRACLE_RANALD_04">
+<Description language="ENGLISH">"Rich Man, Poor Man, Beggar Man, Thief"</Description>
+<Explanation language="ENGLISH">"You smile at Ranald as you cheekily ask others what, exactly, is wealth? For each target affected, choose one option: the target's purse appears empty; the target's purse appears full; the target's attire appears cheap and unremarkable; the target's attire appears rich and finely crafted; a single valuable item is impossible to perceive. For every +2 SL you may select an additional effect for one of your targets."</Explanation>
+<Target>"1"</Target>
+<Duration>"Fellowship Bonus Minutes"</Duration>
+<Range>"1 yard"</Range>
+<Talent>"RULES-T0169_RANALD"</Talent>
+<Level>""</Level>
+<TypSpell>"Miracle"</TypSpell>
+</Sort>
+<Sort id="RULES-SPEL_MIRACLE_RANALD_05">
+<Description language="ENGLISH">"Stay Lucky"</Description>
+<Explanation language="ENGLISH">"Crossing your fingers, you pose Ranald's enigma and ask what, exactly, is luck? Gain +1 Fortune point. For every +2 SL you may gain an extra +1 Fortune point, which may take you beyond your normal maximum. You may not invoke this Miracle again until you reach 0 Fortune points."</Explanation>
+<Target>"You"</Target>
+<Duration>"Special"</Duration>
+<Range>"You"</Range>
+<Talent>"RULES-T0169_RANALD"</Talent>
+<Level>""</Level>
+<TypSpell>"Miracle"</TypSpell>
+</Sort>
+<Sort id="RULES-SPEL_MIRACLE_RANALD_06">
+<Description language="ENGLISH">"You Ain't Seen Me, Right?"</Description>
+<Explanation language="ENGLISH">"You spin a complex conundrum concerning the reality of that which is unperceived. Targets affected by this Miracle may pass unnoticed and remarked, providing they do nothing to draw attention to themselves, such as touching, attacking, calling out to someone, casting a spell, or making a loud noise. You may only invoke this Miracle if no-one is looking directly at you."</Explanation>
+<Target>"1"</Target>
+<Duration>"Fellowship Bonus Rounds"</Duration>
+<Range>"Fellowship yards"</Range>
+<Talent>"RULES-T0169_RANALD"</Talent>
+<Level>""</Level>
+<TypSpell>"Miracle"</TypSpell>
+</Sort>
+<Sort id="RULES-SPEL_MIRACLE_RHYA_01">
+<Description language="ENGLISH">"Rhya's Children"</Description>
+<Explanation language="ENGLISH">"Laying hands on the earth, you chant a prayer to Rhya appealing for her aid in understanding her Realm. This Miracle may only be invoked outdoors, outside settlements. You sense the presence and passing of all sentient creatures within Fellowship yards. Each +2 SL extents the area of effect by +Fellowship yards."</Explanation>
+<Target>"Area of Effect"</Target>
+<Duration>"Fellowship Bonus Rounds"</Duration>
+<Range>"You"</Range>
+<Talent>"RULES-T0169_RHYA"</Talent>
+<Level>""</Level>
+<TypSpell>"Miracle"</TypSpell>
+</Sort>
+<Sort id="RULES-SPEL_MIRACLE_RHYA_02">
+<Description language="ENGLISH">"Rhya's Harvest"</Description>
+<Explanation language="ENGLISH">"You chant to Rhya, and life springs forth. Edible fruit, vegetables, and fungi grow at the point where you touch. For each round in which the Miracle is in effect, you cause enough food to feed 1 person to grow. The type of food depends on your location: in a cavern you may grow mushrooms, while outdoors you may cause many different fruits and vegetables to spring forth."</Explanation>
+<Target>"You"</Target>
+<Duration>"1 Round"</Duration>
+<Range>"Touch"</Range>
+<Talent>"RULES-T0169_RHYA"</Talent>
+<Level>""</Level>
+<TypSpell>"Miracle"</TypSpell>
+</Sort>
+<Sort id="RULES-SPEL_MIRACLE_RHYA_03">
+<Description language="ENGLISH">"Rhya's Shelter"</Description>
+<Explanation language="ENGLISH">"You sing one of Rhya's hymns concerning shelter and safety. You may only invoke this Miracle outdoors and outside settlements. You discover a perfect natural shelter. Some combination of earth, and trees has formed a perfect location to camp for the night. The spot is protected from all naturally occurring wind and rain, and lasts as long as you remain camped there. The shelter is large enough for 1 person. For every +2 SL it fits another individual. When you break camp, the shelter cannot be rediscovered, as though it only existed through your goddess's will."</Explanation>
+<Target>"You"</Target>
+<Duration>"Special"</Duration>
+<Range>"You"</Range>
+<Talent>"RULES-T0169_RHYA"</Talent>
+<Level>""</Level>
+<TypSpell>"Miracle"</TypSpell>
+</Sort>
+<Sort id="RULES-SPEL_MIRACLE_RHYA_04">
+<Description language="ENGLISH">"Rhya's Succour"</Description>
+<Explanation language="ENGLISH">"You chant Rhya's song of revitalisation. All affected targets have 1 Condition removed. If this removes all suffered Conditions, the targets feel as refreshed as if they had just awoken from a good night's sleep, and gain a bonus of +10 to any tests on their next Turn."</Explanation>
+<Target>"Fellowship Bonus allies"</Target>
+<Duration>"Instant"</Duration>
+<Range>"Fellowship yards"</Range>
+<Talent>"RULES-T0169_RHYA"</Talent>
+<Level>""</Level>
+<TypSpell>"Miracle"</TypSpell>
+</Sort>
+<Sort id="RULES-SPEL_MIRACLE_RHYA_05">
+<Description language="ENGLISH">"Rhya's Touch"</Description>
+<Explanation language="ENGLISH">"You lay hands upon an injured or diseased target as you sing your prayers. Choose one of the following effects: Heal Fellowship Bonus wounds; Cure 1 naturally occurring disease. For every +2 SL, you may choose another effect, and may choose the same effect repeatedly. This Miracle is slow, with the effects taking at least 10 minutes to manifest. If interrupted, the Miracle will need to be attempted again."</Explanation>
+<Target>"1"</Target>
+<Duration>"Special"</Duration>
+<Range>"Touch"</Range>
+<Talent>"RULES-T0169_RHYA"</Talent>
+<Level>""</Level>
+<TypSpell>"Miracle"</TypSpell>
+</Sort>
+<Sort id="RULES-SPEL_MIRACLE_RHYA_06">
+<Description language="ENGLISH">"Rhya's Union"</Description>
+<Explanation language="ENGLISH">"You bless and consecrate the union between two souls. While the Miracle is in effect, if biologically possible, the couple will conceive a child."</Explanation>
+<Target>"Special"</Target>
+<Duration>"Fellowship Bonus Hours"</Duration>
+<Range>"Touch"</Range>
+<Talent>"RULES-T0169_RHYA"</Talent>
+<Level>""</Level>
+<TypSpell>"Miracle"</TypSpell>
+</Sort>
+<Sort id="RULES-SPEL_MIRACLE_SHALLYA_01">
+<Description language="ENGLISH">"Anchorite's Endurance"</Description>
+<Explanation language="ENGLISH">"Your earnest prayers appeal to Shallya to grant the target the strength to endure. The target feels no pain, and suffers no penalties caused by Conditions."</Explanation>
+<Target>"1"</Target>
+<Duration>"Fellowship Bonus Rounds"</Duration>
+<Range>"Fellowship yards"</Range>
+<Talent>"RULES-T0169_SHALLYA"</Talent>
+<Level>""</Level>
+<TypSpell>"Miracle"</TypSpell>
+</Sort>
+<Sort id="RULES-SPEL_MIRACLE_SHALLYA_02">
+<Description language="ENGLISH">"Balm to a Wounded Mind"</Description>
+<Explanation language="ENGLISH">"You call on Shallya to calm the troubled mind of your targets. All Psychology traits are removed for the duration, and afterwards the targets enter deep and restful slumbers that last until next sunrise, assuming they are not disturbed. Unwilling targets may make a Challenging (+0) Cool Test to resist sleeping."</Explanation>
+<Target>"1"</Target>
+<Duration>"Fellowship Bonus Minutes"</Duration>
+<Range>"Touch"</Range>
+<Talent>"RULES-T0169_SHALLYA"</Talent>
+<Level>""</Level>
+<TypSpell>"Miracle"</TypSpell>
+</Sort>
+<Sort id="RULES-SPEL_MIRACLE_SHALLYA_03">
+<Description language="ENGLISH">"Bitter Catharsis"</Description>
+<Explanation language="ENGLISH">"In answer to your heartfelt prayers, Shallya draws a poison or disease into you and purges it, completely removing it from your target's system. For every +2 SL you may purge another disease or poison. For each poison removed or disease cured in this manner, you suffer Wounds equal to 1d10 minus your Fellowship Bonus, not modified for Toughness Bonus or Armour Points."</Explanation>
+<Target>"1"</Target>
+<Duration>"Instant"</Duration>
+<Range>"Touch"</Range>
+<Talent>"RULES-T0169_SHALLYA"</Talent>
+<Level>""</Level>
+<TypSpell>"Miracle"</TypSpell>
+</Sort>
+<Sort id="RULES-SPEL_MIRACLE_SHALLYA_04">
+<Description language="ENGLISH">"Martyr"</Description>
+<Explanation language="ENGLISH">"You intone prayers concerning Shallya's need to take on the world's pain. Any Damage taken by your targets are instead suffered by you. If you suffer any Damage because of this Miracle, your Toughness Bonus is doubled for the purposes of calculating the Wounds suffered from that Damage."</Explanation>
+<Target>"1"</Target>
+<Duration>"Fellowship Bonus Rounds"</Duration>
+<Range>"Fellowship yards"</Range>
+<Talent>"RULES-T0169_SHALLYA"</Talent>
+<Level>""</Level>
+<TypSpell>"Miracle"</TypSpell>
+</Sort>
+<Sort id="RULES-SPEL_MIRACLE_SHALLYA_05">
+<Description language="ENGLISH">"Shallya's Tears"</Description>
+<Explanation language="ENGLISH">"You passionately appeal to Shallya to spare a poor, wounded soul as tears flow freely down your cheeks. You pray for 10 minus your Fellowship Bonus Rounds, at which point you heal the target of 1 Critical Wound. For every +2 SL you may heal another Critical Wound. If your prayer is interrupted, the target receives no benefit. This Miracle cannot reattach amputated body parts."</Explanation>
+<Target>"1"</Target>
+<Duration>"Special"</Duration>
+<Range>"Touch"</Range>
+<Talent>"RULES-T0169_SHALLYA"</Talent>
+<Level>""</Level>
+<TypSpell>"Miracle"</TypSpell>
+</Sort>
+<Sort id="RULES-SPEL_MIRACLE_SHALLYA_06">
+<Description language="ENGLISH">"Unblemished Innocence"</Description>
+<Explanation language="ENGLISH">"Laying hands on the afflicted, you beg Shallya to rid them of recently acquired corruption. The target loses 1 Corruption point, and can lose another per +2 SL scored. However, the Chaos Gods do not like to be so directly opposed. Should an attempt to invoke the Miracle Fumble, you and the target both gain 1d10 Corruption points on top of any other effects. This Miracle must be enacted within an hour of the target gaining a Corruption point."</Explanation>
+<Target>"1"</Target>
+<Duration>"Instant"</Duration>
+<Range>"Touch"</Range>
+<Talent>"RULES-T0169_SHALLYA"</Talent>
+<Level>""</Level>
+<TypSpell>"Miracle"</TypSpell>
+</Sort>
+<Sort id="RULES-SPEL_MIRACLE_SIGMAR_01">
+<Description language="ENGLISH">"Beacon of Righteous Virtue"</Description>
+<Explanation language="ENGLISH">"As you bellow prayers in Sigmar's name, you become infused with holy fire of righteousness. All allies with Line of Sight to you instantaneously remove all Broken Conditions, and gain the Fearless Talent while the Miracle is in effect and they remain in your Line of Sight. Any Greenskins with Line of Sight to you are subject to Fear 1."</Explanation>
+<Target>"Area of Effect"</Target>
+<Duration>"Fellowship Bonus Rounds"</Duration>
+<Range>"You"</Range>
+<Talent>"RULES-T0169_SIGMAR"</Talent>
+<Level>""</Level>
+<TypSpell>"Miracle"</TypSpell>
+</Sort>
+<Sort id="RULES-SPEL_MIRACLE_SIGMAR_02">
+<Description language="ENGLISH">"Heed Not the Witch"</Description>
+<Explanation language="ENGLISH">"You call on Sigmar to protect those close to you from the fell influence of Chaos. Any spells that target anyone or anywhere within Fellowship Bonus yards suffer a penalty of -20 to Language (Magick) Tests, in addition to any other penalties. For every +2 SL, you may increase the area of effect by your Fellowship Bonus in yards."</Explanation>
+<Target>"Area of Effect"</Target>
+<Duration>"Fellowship Bonus Rounds"</Duration>
+<Range>"You"</Range>
+<Talent>"RULES-T0169_SIGMAR"</Talent>
+<Level>""</Level>
+<TypSpell>"Miracle"</TypSpell>
+</Sort>
+<Sort id="RULES-SPEL_MIRACLE_SIGMAR_03">
+<Description language="ENGLISH">"Sigmar's Fiery Hammer"</Description>
+<Explanation language="ENGLISH">"You chant benedictions of Sigmar's might. If wielding a warhammer, it counts as Magical, deals +Fellowship Bonus Damage, and any target struck receives the Ablaze and Prone Conditions."</Explanation>
+<Target>"You"</Target>
+<Duration>"Fellowship Bonus Rounds"</Duration>
+<Range>"You"</Range>
+<Talent>"RULES-T0169_SIGMAR"</Talent>
+<Level>""</Level>
+<TypSpell>"Miracle"</TypSpell>
+</Sort>
+<Sort id="RULES-SPEL_MIRACLE_SIGMAR_04">
+<Description language="ENGLISH">"Soulfire"</Description>
+<Explanation language="ENGLISH">"You call the power of Sigmar to smite the enemies of the Empire. A holy fire explodes from your body blasting outwards for Fellowship Bonus yards. All targets within range take 1d10 Wounds ignoring Toughness Bonus and APs. Targets with the Undead and Daemon Creature Traits also gain the Ablaze Condition. For every +2 SL, you may increase the area of effect by +Fellowship Bonus yards, or cause an extra +2 Damage to any Greenskins, Undead, or servants of the Ruinous Powers affected."</Explanation>
+<Target>"Area of Effect"</Target>
+<Duration>"Instant"</Duration>
+<Range>"You"</Range>
+<Talent>"RULES-T0169_SIGMAR"</Talent>
+<Level>""</Level>
+<TypSpell>"Miracle"</TypSpell>
+</Sort>
+<Sort id="RULES-SPEL_MIRACLE_SIGMAR_05">
+<Description language="ENGLISH">"Twin-tailed Comet"</Description>
+<Explanation language="ENGLISH">"You invoke litanies to Sigmar, calling on him to smite his foes. A twin-tailed comet, blazing a trail of fire in its wake, plummets from the heavens to strike a point within Line of Sight and range. Everything within Fellowship Bonus yards of the point of impact suffers 1d10 + SL Damage, ignoring Toughness Bonus and Armour Points, and gains the Ablaze condition. The target location must be outdoors, and may only target those Sigmar would deem an enemy."</Explanation>
+<Target>"Area of Effect"</Target>
+<Duration>"Instant"</Duration>
+<Range>"Fellowship yards"</Range>
+<Talent>"RULES-T0169_SIGMAR"</Talent>
+<Level>""</Level>
+<TypSpell>"Miracle"</TypSpell>
+</Sort>
+<Sort id="RULES-SPEL_MIRACLE_SIGMAR_06">
+<Description language="ENGLISH">"Vanquish the Unrighteous"</Description>
+<Explanation language="ENGLISH">"Your prayers instil your chosen allies with a furious disdain for the enemies of Sigmar. All allies affected receive the Hatred Psychology towards Greenskins, Undead, and any associated with Chaos."</Explanation>
+<Target>"Fellowship Bonus allies"</Target>
+<Duration>"Fellowship Bonus Rounds"</Duration>
+<Range>"Fellowship yards"</Range>
+<Talent>"RULES-T0169_SIGMAR"</Talent>
+<Level>""</Level>
+<TypSpell>"Miracle"</TypSpell>
+</Sort>
+<Sort id="RULES-SPEL_MIRACLE_TAAL_01">
+<Description language="ENGLISH">"Animal Instincts"</Description>
+<Explanation language="ENGLISH">"You intone chants describing Taal's extraordinary senses, and calling upon him for aid. While the Miracle is in effect, you gain +1 Acute Sense (choose one) Talent and, if you rest, you will automatically awaken should any threats come within Initiative yards."</Explanation>
+<Target>"1"</Target>
+<Duration>"Fellowship Bonus Hours"</Duration>
+<Range>"Touch"</Range>
+<Talent>"RULES-T0169_TAAL"</Talent>
+<Level>""</Level>
+<TypSpell>"Miracle"</TypSpell>
+</Sort>
+<Sort id="RULES-SPEL_MIRACLE_TAAL_02">
+<Description language="ENGLISH">"King of the Wild"</Description>
+<Explanation language="ENGLISH">"You chant a low prayer, and Taal answers with a wild animal appropriate for the surrounding area, which will act according to your wishes for the duration of the Miracle."</Explanation>
+<Target>"1"</Target>
+<Duration>"Fellowship Bonus Rounds"</Duration>
+<Range>"Fellowship yards"</Range>
+<Talent>"RULES-T0169_TAAL"</Talent>
+<Level>""</Level>
+<TypSpell>"Miracle"</TypSpell>
+</Sort>
+<Sort id="RULES-SPEL_MIRACLE_TAAL_03">
+<Description language="ENGLISH">"Leaping Stag"</Description>
+<Explanation language="ENGLISH">"You chant to Father Taal, and he grants you his favour, imbuing you with speed and agility. You gain +1 Movement and +1 Strong Legs Talent. Further, you automatically pass all Athletics Tests to jump with at least +0 SL; should you score lower, increase the SL to 0."</Explanation>
+<Target>"You"</Target>
+<Duration>"Fellowship Bonus Rounds"</Duration>
+<Range>"You"</Range>
+<Talent>"RULES-T0169_TAAL"</Talent>
+<Level>""</Level>
+<TypSpell>"Miracle"</TypSpell>
+</Sort>
+<Sort id="RULES-SPEL_MIRACLE_TAAL_04">
+<Description language="ENGLISH">"Lord of the Hunt"</Description>
+<Explanation language="ENGLISH">"You call on Taal to guide you in the hunt for your quarry, which must be an animal you have seen, or an individual you know (as limited by the GM). While the Miracle is in effect, you cannot lose your quarry's trail save by supernatural means. Should your quarry enter a settlement, the trail ends there. You also receive +10 bonus to all Tests regarding your quarry while under the influence of the Miracle."</Explanation>
+<Target>"You"</Target>
+<Duration>"Fellowship Bonus Hours"</Duration>
+<Range>"You"</Range>
+<Talent>"RULES-T0169_TAAL"</Talent>
+<Level>""</Level>
+<TypSpell>"Miracle"</TypSpell>
+</Sort>
+<Sort id="RULES-SPEL_MIRACLE_TAAL_05">
+<Description language="ENGLISH">"Tanglefoot"</Description>
+<Explanation language="ENGLISH">"You call on Taal, chanting prayers to protect his wild places. Roots, vines, and creepers wrap themselves around your foes. All targets within Fellowship Bonus yards of the target point gain an Entangled Condition. For every +2 SL you may increase the area of effect by your Fellowship Bonus in yards, or inflict an extra Entangled Condition. Tanglefoot has a Strength equal to your Willpower for the purposes of breaking free."</Explanation>
+<Target>"Area of Effect"</Target>
+<Duration>"Instant"</Duration>
+<Range>"Fellowship yards"</Range>
+<Talent>"RULES-T0169_TAAL"</Talent>
+<Level>""</Level>
+<TypSpell>"Miracle"</TypSpell>
+</Sort>
+<Sort id="RULES-SPEL_MIRACLE_TAAL_06">
+<Description language="ENGLISH">"Tooth and Claw"</Description>
+<Explanation language="ENGLISH">"You call on Taal to grant you the ferocious might of his kingdom. Gain the Bite (Strength Bonus+3) and Weapon (Strength Bonus+4) Creature Traits. These attacks are Magical."</Explanation>
+<Target>"You"</Target>
+<Duration>"Fellowship Bonus Rounds"</Duration>
+<Range>"You"</Range>
+<Talent>"RULES-T0169_TAAL"</Talent>
+<Level>""</Level>
+<TypSpell>"Miracle"</TypSpell>
+</Sort>
+<Sort id="RULES-SPEL_MIRACLE_ULRIC_01">
+<Description language="ENGLISH">"Hoarfrost's Chill"</Description>
+<Explanation language="ENGLISH">"You scream angry prayers, and cold Ulric answers. Your eyes gain a steely blue glint and the air around you grows unnaturally cold. You cause Fear (1) in all enemies, and all within your Fellowship yards range lose -1 Advantage at the start of each Round, as they are chilled to the bone."</Explanation>
+<Target>"Area of Effect"</Target>
+<Duration>"Fellowship Bonus Rounds"</Duration>
+<Range>"You"</Range>
+<Talent>"RULES-T0169_ULRIC"</Talent>
+<Level>""</Level>
+<TypSpell>"Miracle"</TypSpell>
+</Sort>
+<Sort id="RULES-SPEL_MIRACLE_ULRIC_02">
+<Description language="ENGLISH">"Howl of the Wolf"</Description>
+<Explanation language="ENGLISH">"You howl for Ulric's aid, and he sends a minor Divine Servant in the form of a White Wolf. The wolf fights your enemies for the duration of the Miracle, before vanishing to Ulric's Hunting Grounds with a spectral, blood-chilling howl. The White Wolves have the statistics of a Wolf with the Frenzy, Magical, and Size (Large) Creature Traits."</Explanation>
+<Target>"Special"</Target>
+<Duration>"Fellowship Bonus Rounds"</Duration>
+<Range>"Fellowship yards"</Range>
+<Talent>"RULES-T0169_ULRIC"</Talent>
+<Level>""</Level>
+<TypSpell>"Miracle"</TypSpell>
+</Sort>
+<Sort id="RULES-SPEL_MIRACLE_ULRIC_03">
+<Description language="ENGLISH">"Pelt of the Winter Wolf"</Description>
+<Explanation language="ENGLISH">"Your bellowed prayers bring Ulric's attention, allowing your targets to survive the bite of his realm. While targets still feel the pain and discomfort caused by cold and wintry weather, they suffer no mechanical penalties."</Explanation>
+<Target>"1"</Target>
+<Duration>"Fellowship Bonus Hours"</Duration>
+<Range>"Touch"</Range>
+<Talent>"RULES-T0169_ULRIC"</Talent>
+<Level>""</Level>
+<TypSpell>"Miracle"</TypSpell>
+</Sort>
+<Sort id="RULES-SPEL_MIRACLE_ULRIC_04">
+<Description language="ENGLISH">"The Snow King's Judgement"</Description>
+<Explanation language="ENGLISH">"You call on Ulric to make manifest his disdain for the weak, the cowardly and the deceitful. The target suffers 1d10 wounds ignoring Toughness Bonus and Armour Points. If the GM rules that the target is neither weak, cowardly, or deceitful, you suffer the effects instead."</Explanation>
+<Target>"1"</Target>
+<Duration>"Instant"</Duration>
+<Range>"Fellowship yards"</Range>
+<Talent>"RULES-T0169_ULRIC"</Talent>
+<Level>""</Level>
+<TypSpell>"Miracle"</TypSpell>
+</Sort>
+<Sort id="RULES-SPEL_MIRACLE_ULRIC_05">
+<Description language="ENGLISH">"Ulric's Fury"</Description>
+<Explanation language="ENGLISH">"You chant furious prayers, and Ulric's ferocity spreads. Targets gain the Frenzy psychology."</Explanation>
+<Target>"1"</Target>
+<Duration>"Fellowship Bonus Rounds"</Duration>
+<Range>"Fellowship yards"</Range>
+<Talent>"RULES-T0169_ULRIC"</Talent>
+<Level>""</Level>
+<TypSpell>"Miracle"</TypSpell>
+</Sort>
+<Sort id="RULES-SPEL_MIRACLE_ULRIC_06">
+<Description language="ENGLISH">"Winter's Bite"</Description>
+<Explanation language="ENGLISH">"You roar prayers concerning Blitzbeil, Ulric's ever-thirsty axe. If wielding an axe, it counts as Magical, causes an additional +SL Damage, and any living targets struck must make a Challenging (+0) Endurance Test or gain a Stunned Condition. Further, struck targets lose any Bleeding Conditions as their blood freezes; similarly, attacks from your axe cannot cause any Bleeding Conditions."</Explanation>
+<Target>"You"</Target>
+<Duration>"Fellowship Bonus Rounds"</Duration>
+<Range>"You"</Range>
+<Talent>"RULES-T0169_ULRIC"</Talent>
+<Level>""</Level>
+<TypSpell>"Miracle"</TypSpell>
+</Sort>
+<Sort id="RULES-SPEL_MIRACLE_VERENA_01">
+<Description language="ENGLISH">"As Verena Is My Witness"</Description>
+<Explanation language="ENGLISH">"By calling Verena as your witness, the truth of your words shines out for all to see. For the duration of the Miracle, providing you speak only the truth, all listeners will believe you speak truly. This does not necessarily mean they will agree with your conclusions, of course."</Explanation>
+<Target>"You"</Target>
+<Duration>"Fellowship Bonus Rounds"</Duration>
+<Range>"You"</Range>
+<Talent>"RULES-T0169_VERENA"</Talent>
+<Level>""</Level>
+<TypSpell>"Miracle"</TypSpell>
+</Sort>
+<Sort id="RULES-SPEL_MIRACLE_VERENA_02">
+<Description language="ENGLISH">"Blind Justice"</Description>
+<Explanation language="ENGLISH">"You articulate prayers concerning Verena's acute perceptions, able to pierce through to the truth of all things. You may make a Challenging (+0) Perception Test to see through spells and Miracles involving illusion or misdirection. You may also make an Average (+20) Intuition Test to tell whether a character speaking to you is lying. Note: this will only tell you if the character believes they speak the truth, it will not alert you if they are mistaken."</Explanation>
+<Target>"You"</Target>
+<Duration>"Fellowship Bonus Rounds"</Duration>
+<Range>"You"</Range>
+<Talent>"RULES-T0169_VERENA"</Talent>
+<Level>""</Level>
+<TypSpell>"Miracle"</TypSpell>
+</Sort>
+<Sort id="RULES-SPEL_MIRACLE_VERENA_03">
+<Description language="ENGLISH">"Shackles of Truth"</Description>
+<Explanation language="ENGLISH">"Your appeal to Verena, requesting her judgement concerning a suspected criminal. If your target committed a crime and claims they did not, while affected by this miracle they gain an Entangled Condition that cannot be removed for the duration. If you have falsely accused the target, Verena is displeased with your lack of wisdom: you gain +1 Sin point and must immediately roll on The Wrath of the Gods table."</Explanation>
+<Target>"1"</Target>
+<Duration>"Fellowship Bonus Rounds"</Duration>
+<Range>"Fellowship yards"</Range>
+<Talent>"RULES-T0169_VERENA"</Talent>
+<Level>""</Level>
+<TypSpell>"Miracle"</TypSpell>
+</Sort>
+<Sort id="RULES-SPEL_MIRACLE_VERENA_04">
+<Description language="ENGLISH">"Sword of Justice"</Description>
+<Explanation language="ENGLISH">"You pray to Verena to guide your blade to strike down the unjust. If wielding a sword, it ignores APs, and counts as Magical. Further, if struck opponents are criminals (as determined by the GM), they must make an Average (+20) Endurance or suffer an Unconscious Condition that lasts for at least Fellowship Bonus Rounds. If any crime is perpetrated on the unconscious opponents, you suffer +1 Sin point per crime."</Explanation>
+<Target>"You"</Target>
+<Duration>"Fellowship Bonus Rounds"</Duration>
+<Range>"You"</Range>
+<Talent>"RULES-T0169_VERENA"</Talent>
+<Level>""</Level>
+<TypSpell>"Miracle"</TypSpell>
+</Sort>
+<Sort id="RULES-SPEL_MIRACLE_VERENA_05">
+<Description language="ENGLISH">"Truth Will Out"</Description>
+<Explanation language="ENGLISH">"You intone prayers of Verena's ability to find any truth. You may ask the targets a single question. It will be immediately answered truthfully and fully. If desired, targets may attempt to resist, by contesting your SL with an Average (+20) Cool Test. If successful, they may stubbornly refuse to answer. If they achieve +2 SL they may withhold minor information. +4 SL allows them to withhold significant information while +6 SL allows them to lie outright. You will know if they resist successfully, though you will lack specific knowledge about their deceit, or proof of their dishonesty."</Explanation>
+<Target>"1"</Target>
+<Duration>"Instant"</Duration>
+<Range>"Fellowship Bonus yards"</Range>
+<Talent>"RULES-T0169_VERENA"</Talent>
+<Level>""</Level>
+<TypSpell>"Miracle"</TypSpell>
+</Sort>
+<Sort id="RULES-SPEL_MIRACLE_VERENA_06">
+<Description language="ENGLISH">"Wisdom of the Owl"</Description>
+<Explanation language="ENGLISH">"You call on Verena to instil you with her wisdom and knowledge. You gain a bonus of +20 on all Intelligence Tests while this Miracle is in effect. Further, your pupils dilate widely, and your gaze becomes piercing and unsettling: gain +1 Menacing and Acute Sense (Sight) Talent."</Explanation>
+<Target>"You"</Target>
+<Duration>"Fellowship Bonus Rounds"</Duration>
+<Range>"You"</Range>
+<Talent>"RULES-T0169_VERENA"</Talent>
+<Level>""</Level>
+<TypSpell>"Miracle"</TypSpell>
+</Sort>
 </DATA_SPELL>
+  <!-- Acces des benedictions par culte (table "Blessings by Cult" p.220). Bloc additif,
+       CONTEXT.md 2.39 : ne remplace rien, ne fait qu'ajouter les talents qui donnent acces a
+       chaque RULES-SPEL_BLESSING_NN (dont le <Talent> ci-dessus reste vide expres). -->
+<DATA_SPELL_TALENT>
+<Sort id="RULES-SPEL_BLESSING_01">
+<Talent>"RULES-T0168_MANANN,RULES-T0168_MYRMIDIA,RULES-T0168_SIGMAR,RULES-T0168_TAAL,RULES-T0168_ULRIC"</Talent>
+</Sort>
+<Sort id="RULES-SPEL_BLESSING_02">
+<Talent>"RULES-T0168_MANANN,RULES-T0168_MORR,RULES-T0168_RHYA,RULES-T0168_SHALLYA,RULES-T0168_TAAL"</Talent>
+</Sort>
+<Sort id="RULES-SPEL_BLESSING_03">
+<Talent>"RULES-T0168_RANALD"</Talent>
+</Sort>
+<Sort id="RULES-SPEL_BLESSING_04">
+<Talent>"RULES-T0168_MYRMIDIA,RULES-T0168_RANALD,RULES-T0168_RHYA,RULES-T0168_SHALLYA,RULES-T0168_TAAL,RULES-T0168_VERENA"</Talent>
+</Sort>
+<Sort id="RULES-SPEL_BLESSING_05">
+<Talent>"RULES-T0168_MANANN,RULES-T0168_MORR,RULES-T0168_MYRMIDIA,RULES-T0168_SIGMAR,RULES-T0168_ULRIC,RULES-T0168_VERENA"</Talent>
+</Sort>
+<Sort id="RULES-SPEL_BLESSING_06">
+<Talent>"RULES-T0168_RANALD"</Talent>
+</Sort>
+<Sort id="RULES-SPEL_BLESSING_07">
+<Talent>"RULES-T0168_MORR,RULES-T0168_MYRMIDIA,RULES-T0168_RANALD,RULES-T0168_VERENA"</Talent>
+</Sort>
+<Sort id="RULES-SPEL_BLESSING_08">
+<Talent>"RULES-T0168_RHYA"</Talent>
+</Sort>
+<Sort id="RULES-SPEL_BLESSING_09">
+<Talent>"RULES-T0168_MANANN,RULES-T0168_SIGMAR,RULES-T0168_TAAL,RULES-T0168_ULRIC"</Talent>
+</Sort>
+<Sort id="RULES-SPEL_BLESSING_10">
+<Talent>"RULES-T0168_RHYA,RULES-T0168_SHALLYA"</Talent>
+</Sort>
+<Sort id="RULES-SPEL_BLESSING_11">
+<Talent>"RULES-T0168_SIGMAR,RULES-T0168_ULRIC"</Talent>
+</Sort>
+<Sort id="RULES-SPEL_BLESSING_12">
+<Talent>"RULES-T0168_MYRMIDIA,RULES-T0168_RANALD,RULES-T0168_RHYA,RULES-T0168_SHALLYA,RULES-T0168_SIGMAR"</Talent>
+</Sort>
+<Sort id="RULES-SPEL_BLESSING_13">
+<Talent>"RULES-T0168_RHYA,RULES-T0168_SHALLYA"</Talent>
+</Sort>
+<Sort id="RULES-SPEL_BLESSING_14">
+<Talent>"RULES-T0168_MORR,RULES-T0168_MYRMIDIA,RULES-T0168_SIGMAR,RULES-T0168_VERENA"</Talent>
+</Sort>
+<Sort id="RULES-SPEL_BLESSING_15">
+<Talent>"RULES-T0168_MANANN,RULES-T0168_TAAL,RULES-T0168_ULRIC"</Talent>
+</Sort>
+<Sort id="RULES-SPEL_BLESSING_16">
+<Talent>"RULES-T0168_MANANN,RULES-T0168_MORR,RULES-T0168_SHALLYA,RULES-T0168_ULRIC"</Talent>
+</Sort>
+<Sort id="RULES-SPEL_BLESSING_17">
+<Talent>"RULES-T0168_TAAL"</Talent>
+</Sort>
+<Sort id="RULES-SPEL_BLESSING_18">
+<Talent>"RULES-T0168_MORR,RULES-T0168_VERENA"</Talent>
+</Sort>
+<Sort id="RULES-SPEL_BLESSING_19">
+<Talent>"RULES-T0168_RANALD,RULES-T0168_VERENA"</Talent>
+</Sort>
+</DATA_SPELL_TALENT>
 </DATA_BOOK>
