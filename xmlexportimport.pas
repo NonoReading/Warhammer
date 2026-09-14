@@ -2427,6 +2427,10 @@ Procedure XmlImport(FileName: String; OnlyPrimary: Boolean; OnlyCode: Boolean; C
                     begin
                       PTrapping.Livre         := Livre;
                       PTrapping.CodeTrapping  := RemoveQuotes(UTF8Encode(NodeNv2.Attributes.GetNamedItem(ConstXmlId).NodeValue));
+                      // remis a zero a chaque entree : le tag <Carries> n'existe que sur les
+                      // conteneurs/montures, PTrapping etant reutilise d'un tour de boucle a
+                      // l'autre sans lui la valeur de l'entree precedente resterait collee
+                      PTrapping.Capacite      := 0;
                       PTraduction             := InitTrad(ConstPTrapping, PTrapping.CodeTrapping, '', PTrapping.Livre);
 
                       Node := XmlElement(NodeNv2.FirstChild);
@@ -2443,6 +2447,8 @@ Procedure XmlImport(FileName: String; OnlyPrimary: Boolean; OnlyCode: Boolean; C
                               PTrapping.Disponibilite := RemoveQuotes(UTF8Encode(Node.TextContent));
                             ConstXmlEncombrement:
                               PTrapping.Encombrement  := StrToIntDef(RemoveQuotes(UTF8Encode(Node.TextContent)),0);
+                            ConstXmlCapacite:
+                              PTrapping.Capacite      := StrToIntDef(RemoveQuotes(UTF8Encode(Node.TextContent)),0);
                             ConstXmlPrix:
                               PTrapping.Prix          := RemoveQuotes(UTF8Encode(Node.TextContent));
                           end;

@@ -13,6 +13,7 @@ Type
     Libelle:		String;
     Prix:               String;
     Encombrement:       Integer;
+    Capacite:           Integer;
     Disponibilite:      String;
     Livre:              String;
 
@@ -51,6 +52,8 @@ function TexteTrapping(PTrapping: StructureTrapping):String;
       Texte  := Texte + SeparateurRetourLigne + SeparateurRetourLigne + GetTexteLibelle('RULES-LAB_054') + ' : ' + PTrapping.Prix;
     if PTrapping.Encombrement <> 0 then
       Texte  := Texte + SeparateurRetourLigne + SeparateurRetourLigne + GetTexteLibelle('RULES-LAB_055') + ' : ' + IntToStr(PTrapping.Encombrement);
+    if PTrapping.Capacite <> 0 then
+      Texte  := Texte + SeparateurRetourLigne + SeparateurRetourLigne + GetTexteLibelle('RULES-LAB_185') + ' : ' + IntToStr(PTrapping.Capacite);
     if PTrapping.Disponibilite <> '' then
       Texte  := Texte + SeparateurRetourLigne + SeparateurRetourLigne + GetTexteLibelle('RULES-LAB_056') + ' : ' + ReplaceTexteLibelle(PTrapping.Disponibilite);
     Result   := Texte;
@@ -65,6 +68,8 @@ function TexteLigneTrapping(PTrapping: StructureTrapping):String;
       Texte  := Texte + '|' + GetTexteLibelle('RULES-LAB_054') + ' : ' + PTrapping.Prix;
     if PTrapping.Encombrement <> 0 then
       Texte  := Texte + '|' + GetTexteLibelle('RULES-LAB_055') + ' : ' + IntToStr(PTrapping.Encombrement);
+    if PTrapping.Capacite <> 0 then
+      Texte  := Texte + '|' + GetTexteLibelle('RULES-LAB_185') + ' : ' + IntToStr(PTrapping.Capacite);
     Result   := Texte;
   end;
 

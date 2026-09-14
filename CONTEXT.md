@@ -1,5 +1,53 @@
 # Warhammer — Contexte projet
 
+**14/09/2026 (suite 2) — CHANTIER TRAPPINGS : CHAMP `Carries` AJOUTÉ (SCHÉMA), SAISIE DES
+TABLES DE LA CONSUMER GUIDE V5 EN COURS (§2.77, POINT DE REPRISE CI-DESSOUS).**
+Nono a précisé le périmètre de la Phase D (audit C) : **tout le bloc de la Consumer Guide du
+Rulebook V5, de "Packs and Containers" (p.308) à "Miscellaneous Trappings" (p.316) inclus**,
+sauf "Quack Remedies" (encart de règles, pas un objet) et "Travel Prices" (tarifs de
+transport, pas un objet). Soit 12 tables, dont la dernière (Miscellaneous Trappings, 32
+entrées) était déjà en base. Table "Animals and Vehicles" incluse dans le même catalogue
+`DATA_TRAPPING` (confirmé par Nono : des métiers ont des montures/véhicules en trappings,
+ex. Riding Horse, Mule and Cart, relevé dans l'audit C plus haut).
+
+- **Schéma (FAIT, compilé, `WarhammerHelp.exe` stable)** : champ `Capacite: Integer` ajouté à
+  `StructureTrapping` (`chargetrapping.pas:15`), constante `ConstXmlCapacite = 'Carries'`
+  (`chargeconstantes.pas`), lu dans `xmlexportimport.pas` (bloc Trapping, ~l.2428-2451) avec
+  **remise à zéro explicite** `PTrapping.Capacite := 0` en tête de boucle (le tag `<Carries>`
+  n'existe que sur 2 des 12 tables ; sans ce reset, `PTrapping` étant réutilisé d'un tour à
+  l'autre, une entrée sans le tag aurait hérité de la valeur de l'entrée précédente qui
+  l'avait). Libellé `RULES-LAB_185` "Carries"/"Capacité" (FR+EN), affiché dans
+  `TexteTrapping`/`TexteLigneTrapping` si non nul.
+- **Convention de saisie retenue** : prix convertis au format déjà utilisé dans le catalogue
+  (`d`=pence, `X/-`=shillings, `XCO`=Gold Crowns au lieu de "X GC" du livre). `Carries` omis
+  (absent = 0) sauf sur les tables où le livre le donne explicitement, y compris à 0 (Packs
+  and Containers) - c'est une donnée du livre, pas un défaut technique. Un Enc "–" (non
+  applicable, ex. location de chambre) est saisi à 0, faute d'un type "n/a" sur le champ
+  (`Encombrement: Integer`). Prix non numérique gardé en texte (`Jewellery` → `"Varies"`,
+  comme `StructureTrapping.Prix` le permet déjà pour d'autres objets).
+- **Fait, testé (`WarhammerHelp.exe` lancé, stable, pas de collision de nom trouvée avant
+  chaque table)** :
+  - Packs and Containers (13 items, `RULES-TRAP_033` à `_045`, seule table avec `Carries` non
+    nul sur les 3 traitées).
+  - Clothing and Accessories (23 items, `RULES-TRAP_046` à `_068`).
+  - Food, Drink, and Lodging (12 items, `RULES-TRAP_069` à `_080`).
+- **Reste à faire, dans l'ordre du livre, prochain code libre `RULES-TRAP_081`** :
+  - Tools and Kits (~35 items, p.310) - la plus grosse table restante.
+  - Books and Documents (~11 items, p.311).
+  - Trade Tools and Workshops (2 items : Trade Tools, Workshop - `Workshop` a un Enc "n/a",
+    même traitement que les chambres ci-dessus, à 0).
+  - Animals and Vehicles (~19 items, p.312) - **a du `Carries` non nul**, comme Packs and
+    Containers.
+  - Poisons (~10 items, p.313).
+  - Herbs and Remedies (~9 items, p.314).
+  - Prosthetics (6 items, p.315).
+  - Magical Items (4 items, p.315).
+- **Après la saisie complète** : reprendre l'audit C (rattachement des 666 `<Item>` de
+  carrière aux codes catalogue) avec les ~140 nouvelles entrées disponibles, puis Phase B
+  (fenêtre `WinEquipement`, calque `WinArmor.pas`) - toujours pas commencée.
+
+---
+
 **14/09/2026 (suite) — CHANTIER TRAPPINGS : PÉRIMÈTRE COMPLET TRANCHÉ AVEC NONO, PHASES A1
 ET A2 FAITES ET TESTÉES (§2.77, EN COURS - VOIR PLAN CI-DESSOUS POUR LE POINT DE REPRISE).**
 Suite directe du morceau précédent (catalogue `DATA_TRAPPING` créé, ci-dessous). Nono a

@@ -220,6 +220,7 @@ Const
       ConstXmlPorteeArme                = 'Reach';
       ConstXmlPrix                      = 'Price';
       ConstXmlEncombrement              = 'Encumbrance';
+      ConstXmlCapacite                  = 'Carries';
       ConstXmlQualite                   = 'Quality';
       ConstXmlMains                     = 'Hand';
       ConstXmlMunition                  = 'Ammunition';
