@@ -1,0 +1,4 @@
+﻿pick -> RULES-TRAP_108 (Trapping) / RULES-COMB_2M_03 (Weapon)
+net -> RULES-COMB_BASE_05 (Weapon) / RULES-PROJ_ENTRAV_03 (Weapon)
+buckler -> RULES-COMB_ESCR_01 (Weapon) / RULES-ARMO_01 (Armor)
+knife -> RULES-TRAP_100 (Trapping) / RULES-COMB_BASE_02 (Weapon)

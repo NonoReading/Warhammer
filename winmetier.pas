@@ -766,7 +766,12 @@ Begin
                         // resolu sans changer sa classification TypeEquipDI (CONTEXT.md 2.77bis).
                         PTrapping := ChercheTrapping(Code);
                         if PTrapping.CodeTrapping <> '' then
-                          NodeSTFeuille := TreeViewMetier1.Items.AddChild(NodeSTBranche, PTrapping.Libelle)
+                          begin
+                            NodeData                 := TMyNodeData.Create;
+                            NodeData.AdditionalData  := PTrapping.CodeTrapping;
+                            NodeSTFeuille            := TreeViewMetier1.Items.AddChild(NodeSTBranche, EquipDivers + PTrapping.Libelle);
+                            NodeSTFeuille.Data       := NodeData;
+                          end
                         else
                           NodeSTFeuille := TreeViewMetier1.Items.AddChild(NodeSTBranche, stringsI[IndL]);
                         NodeSTFeuille.ImageIndex := 0;
@@ -818,7 +823,12 @@ Begin
                 begin
                   PTrapping := ChercheTrapping(PMetierEquipement.Equipement);
                   if PTrapping.CodeTrapping <> '' then
-                    NodeSFeuille := TreeViewMetier1.Items.AddChild(NodeSBrance, PTrapping.Libelle)
+                    begin
+                      NodeData                := TMyNodeData.Create;
+                      NodeData.AdditionalData := PTrapping.CodeTrapping;
+                      NodeSFeuille            := TreeViewMetier1.Items.AddChild(NodeSBrance, EquipDivers + PTrapping.Libelle);
+                      NodeSFeuille.Data       := NodeData;
+                    end
                   else
                     NodeSFeuille := TreeViewMetier1.Items.AddChild(NodeSBrance, PMetierEquipement.Equipement);
                   NodeSFeuille.ImageIndex := 0;
@@ -929,6 +939,7 @@ Var
   PCompetence:  StructureCompetence;
   PArme:        StructureArme;
   PArmure:      StructureArmure;
+  PTrapping:    StructureTrapping;
   CheminImage1: String;
   CheminImage2: String;
   CheminImage3: String;
@@ -1008,6 +1019,14 @@ Begin
                           AffLib.Text        := PArmure.Libelle;
                           AffLivre.Text      := getTexteLibelle(PArmure.Livre,'','',true);
                           AffDescription.Text:= TexteArmure(PArmure);
+                        end
+                      else if (copy(Node.text,1,Length(EquipDivers)) = EquipDivers) then
+                        begin
+                          PTrapping          := ChercheTrapping(NodeData.AdditionalData);
+                          AffCode.Text       := PTrapping.CodeTrapping;
+                          AffLib.Text        := PTrapping.Libelle;
+                          AffLivre.Text      := getTexteLibelle(PTrapping.Livre,'','',true);
+                          AffDescription.Text:= TexteTrapping(PTrapping);
                         end;
                     end;
                 end;

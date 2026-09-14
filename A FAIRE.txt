@@ -6,6 +6,12 @@
 CORRECTIONS COURTES  (une ligne ou deux chacune)
 =========================================================================
 
+CHERCHEARME/CHERCHEARMURE (ET AUTRES CHERCHE*) PEUVENT PARTAGER LE BUG DE RESULT NON
+REINITIALISE CORRIGE DANS CHERCHETRAPPING LE 14/09/2026 (CONTEXT.md 2.77). Meme motif "for X
+in Liste do if match then Result := X" sans reset prealable = un appel sans resultat herite du
+dernier match trouve par l'appelant precedent. A auditer function par function le jour ou un
+symptome similaire (libelle errone juste apres un item resolu) se represente ailleurs.
+
 LE BLOC DE LECTURE XML "DIVERS" DE CHARGEPERSONNAGE.PAS N'A PAS LA GARDE ELEMENT_NODE. Vu
 le 14/09/2026 en travaillant sur le chantier Trapping (CONTEXT.md 2.77). Les autres blocs
 (Arme/Armure/Set d'armure/Sorts) filtrent Node.NodeType = ELEMENT_NODE avant de lire

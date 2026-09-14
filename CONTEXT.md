@@ -71,11 +71,93 @@ ex. Riding Horse, Mule and Cart, relevé dans l'audit C plus haut).
     (`Eyepatch`, un mot) plutôt que du texte descriptif juste en dessous (`Eye Patch`, deux
     mots) - même règle que pour toutes les tables précédentes (nom = colonne Item). Diff
     vérifié : que des ajouts (36 lignes), rien retiré. `WarhammerHelp.exe` stable.
-- **Reste à faire, dans l'ordre du livre, prochain code libre `RULES-TRAP_181`** :
-  - Magical Items (4 items, p.315).
-- **Après la saisie complète** : reprendre l'audit C (rattachement des 666 `<Item>` de
-  carrière aux codes catalogue) avec les ~140 nouvelles entrées disponibles, puis Phase B
-  (fenêtre `WinEquipement`, calque `WinArmor.pas`) - toujours pas commencée.
+  - Magical Items (4 items, `RULES-TRAP_181` à `_184`, pas de `Carries` sur cette table -
+    colonnes du livre : Item/Cost/Enc/Availability). Les 4 associées à la Lore de la
+    College de Magic du possesseur (texte descriptif seulement, pas de champ dédié dans
+    `StructureTrapping`) : Enchanted Staff (15 GC → `15CO`, Enc 0), Practical/Standard/
+    Elaborate Wizard's Robes (3/9/27 GC, Enc 1/2/3). Toutes `RULES-DISPO_EXOTIC`. Apostrophe
+    droite (`'`) sur "Wizard's Robes", convention déjà en place. Aucune collision de nom
+    dans `DATA_TRAPPING` (deux `<Item>` texte libre "Enchanted Staff" existent dans des
+    carrières V5, attendus - relevés par l'audit C, pas un doublon catalogue). Diff vérifié :
+    que des ajouts (24 lignes), rien retiré. Compilé (lazbuild, 0 erreur), `WarhammerHelp.exe`
+    lancé et stable.
+- **Saisie de la Consumer Guide V5 (§2.77) TERMINÉE** : les 12 tables de "Packs and
+  Containers" à "Magical Items" sont en base (152 nouvelles entrées, `RULES-TRAP_033` à
+  `_184`), plus les 32 "Miscellaneous Trappings" déjà présentes avant ce chantier.
+- **Audit C repris et rafraîchi (rattachement mécanique fait)** : script PowerShell (pas de
+  Python/Node sur le poste) régénéré (celui de la première passe n'avait pas été conservé)
+  comparant les 666 `<Item name="...">` des 64 `SUBCHAPTER_ITEM` aux catalogues Trapping
+  (184)/Weapon/Armor. **228 occurrences (71 noms distincts) avaient une correspondance EXACTE
+  et SANS AMBIGUÏTÉ** avec une `Description` de catalogue -> remplacées mécaniquement dans
+  `BOOK_RULESBOOK.Xml` (`name="Riding Horse"` -> `name="RULES-TRAP_150"`, etc.), le contenu
+  `<Item>` (niveau) inchangé. 3 noms ambigus **exclus volontairement** (plusieurs catalogues
+  portent le même libellé) : `Pick` (Trapping vs arme à deux mains), `Net` (deux armes de jet
+  différentes), `Buckler` (arme d'escrime vs armure) - laissés en texte libre, à trancher au
+  cas par cas si besoin. **1 seul item était déjà lié en amont** (`RULES-WORK16` Smuggler
+  niveau 3, test du morceau précédent). Diff vérifié : exactement 228 retraits, tous des
+  lignes `<Item name=...>`, rien d'autre touché. Compilé, `WarhammerHelp.exe` relancé, stable.
+  **⚠️ Incident de méthode pendant cette passe** : un premier script de remplacement textuel a
+  silencieusement corrompu tous les noms remplacés en la valeur littérale `"R"` (bug
+  d'indexation PowerShell - `$ids[0]` sur une chaîne scalaire indexe son premier CARACTÈRE,
+  pas le premier élément d'un tableau à un seul élément ; correction : forcer `@(...)` autour
+  du pipeline avant d'indexer). Détecté immédiatement par relecture du diff avant toute autre
+  action (règle du §0), fichier restauré (`git checkout --` sur ce seul fichier, rien
+  d'autre n'était modifié), script corrigé et revérifié par un aperçu texte avant réécriture.
+  **Leçon retenue : pour tout script de substitution en masse, imprimer un aperçu
+  "ancien -> nouveau" et le relire avant d'écrire sur le disque, ne pas se fier au seul
+  compte d'occurrences.**
+- **Reste dans l'audit C** : 433 occurrences (336 noms distincts) toujours en texte libre,
+  liste complète régénérée dans `trapping_unmatched.txt` (racine, non commité, régénérable).
+  Catégories déjà esquissées (voir plus bas, 14/09 "PÉRIMÈTRE COMPLET TRANCHÉ") à affiner
+  avec Nono avant d'écrire quoi que ce soit de nouveau : normalisations proches (`Rope` (8x) ↔
+  `Rope, 10 yards` déjà catalogué...), gabarits `Trade Tools (X)`/`Workshop (X)` répétés sur
+  une dizaine de métiers chacun (candidat à un mécanisme radical/spécialisation, comme les
+  Talents, plutôt qu'une entrée par métier), un préfixe `Quality X` récurrent (`Quality
+  Clothing/Robes/Hat/Helmet/Cloak/Rapier`...) qui ressemble à une variante de qualité
+  générique plutôt qu'à des objets séparés, montures/véhicules (catégorie C, table "Mounts
+  and Vehicles" du Rulebook jamais dépouillée), items composés avec quantité (`Pistol with 10
+  Shots` etc., decomposables via le champ `Quantite` de la Phase A2 une fois un item "Shot"/
+  "Bolt" créé), et une longue traîne (la majorité, en 1x) d'abstractions de récompense de
+  carrière (`Followers`, `Subordinate Priests`, `Fiefdom`, `Jewellery worth N GC`...) qui n'ont
+  pas vocation à devenir des objets catalogués.
+- **Question de périmètre posée par Nono pendant cette passe, à trancher avant la Phase B** :
+  la résolution d'affichage (Phase A1) couvre déjà les items VENANT d'une carrière (arbre des
+  métiers de WinLivre, grille d'équipement du personnage) - vérifié dans le code
+  (`winpersonnage.pas` l.3327/5110/5444, commentaires `CONTEXT.md 2.77bis`). Elle ne couvre
+  PAS les Divers qu'un joueur tape librement sur sa fiche (comportement normal, rien à
+  résoudre) ni les fiches personnage existantes créées avant ce catalogue. Nono propose que
+  `WinEquipement` (Phase B) soit moins un catalogue en lecture seule (calque strict de
+  `WinArmor`) qu'un **sélecteur intégré à la saisie d'un Divers sur la fiche personnage**, pour
+  que les nouveaux Divers soient choisis dans le catalogue plutôt que tapés en texte libre -
+  chantier de conception à mener avec Nono avant d'écrire du code, pas encore tranché.
+- **228 rattachements validés visuellement par Nono dans WinMetier** (Watchman niveau 4,
+  Riding Horse).
+- **WinMetier affiche maintenant le détail d'un Trapping rattaché** (`winmetier.pas`,
+  `ChargeMetierEquipement`/`TreeViewMetier1Change`), à l'identique d'une Arme/Armure : préfixe
+  `(D)` (constante `EquipDivers`, déjà posée mais jamais câblée avant aujourd'hui), `NodeData`
+  renseigné avec le code catalogue, et au clic Code/Libellé/Livre/Description remplis à droite
+  via `TexteTrapping`. Demandé par Nono pour vérifier visuellement qu'un item est bien lié à
+  une fiche plutôt que de se fier à un diff. Fait pour les deux branches (choix multiple et
+  objet simple). **WinLivre laissé de côté pour l'instant** (Nono : on verra plus tard).
+- **🐛 Bug trouvé et corrigé en le testant : `ChercheTrapping` (`chargetrapping.pas`) ne
+  réinitialisait jamais `Result`.** Symptôme vu par Nono : dans l'arbre de Watchman niveau 2,
+  "Lamp Oil" apparaissait deux fois, le second remplaçant "Lantern and Pole" (texte libre).
+  Cause : quand aucune correspondance catalogue n'est trouvée, la fonction ne touche jamais
+  `Result` - pour un `record` avec champs `String` (type géré), `Result` est passé comme
+  paramètre caché pointant vers la variable de l'APPELANT, pas réinitialisé automatiquement.
+  L'appelant (`ChargeMetierEquipement`) réutilise la même variable `PTrapping` à chaque
+  itération : un item texte libre suivant immédiatement un Trapping résolu héritait donc du
+  dernier match trouvé. Confirmé par une instrumentation temporaire (log des entrées de
+  `ListMetierEquipement`, retirée après coup) : les données XML/liste étaient bien correctes,
+  un seul enregistrement par item - le bug était uniquement dans `ChercheTrapping`. Corrigé par
+  `Result.CodeTrapping := '';` en tête de fonction. Bug préexistant, pas introduit aujourd'hui,
+  mais resté invisible jusqu'ici faute d'items résolus adjacents à des items en texte libre.
+  **`ChercheArme`/`ChercheArmure` et les autres `Cherche*` à motif identique n'ont pas été
+  vérifiés** - même risque potentiel, à auditer plus tard (voir A FAIRE.txt).
+- **Ensuite** : trancher les catégories ci-dessus avec Nono, éventuellement compléter le
+  catalogue (Phase D), refaire cette passe de rattachement, puis Phase B avec le périmètre
+  élargi ci-dessus (WinEquipement comme sélecteur de saisie, pas juste un catalogue en lecture
+  seule) - toujours pas commencée.
 
 ---
 

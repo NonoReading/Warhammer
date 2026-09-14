@@ -4231,9 +4231,9 @@ As sailing one ship is not so different to sailing another, having any Sail Spec
 </SUBCHAPTER_TALENT>
 <SUBCHAPTER_ITEM>
 <Item name="Book (Blank)">"1"</Item>
-<Item name="Leather Jerkin">"1"</Item>
-<Item name="Pestle and Mortar">"1"</Item>
-<Item name="Guild Licence">"2"</Item>
+<Item name="RULES-ARMO_06">"1"</Item>
+<Item name="RULES-TRAP_107">"1"</Item>
+<Item name="RULES-TRAP_130">"2"</Item>
 <Item name="Trade Tools (Apothecary)">"2"</Item>
 <Item name="Apprentice">"3"</Item>
 <Item name="Book (Apothecary)">"3"</Item>
@@ -4359,7 +4359,7 @@ As sailing one ship is not so different to sailing another, having any Sail Spec
 <SUBCHAPTER_ITEM>
 <Item name="Book (Engineer)">"1"</Item>
 <Item name="Hammer and Spikes">"1"</Item>
-<Item name="Guild Licence">"2"</Item>
+<Item name="RULES-TRAP_130">"2"</Item>
 <Item name="Trade Tools (Engineer)">"2"</Item>
 <Item name="Workshop (Engineer)">"3"</Item>
 <Item name="Library (Engineering)">"4"</Item>
@@ -4485,11 +4485,11 @@ As sailing one ship is not so different to sailing another, having any Sail Spec
 <Item name="Book (Law)">"1"</Item>
 <Item name="Magnifying Glass">"1"</Item>
 <Item name="Court Robes">"2"</Item>
-<Item name="Guild Licence">"2"</Item>
-<Item name="Writing Kit">"2"</Item>
+<Item name="RULES-TRAP_130">"2"</Item>
+<Item name="RULES-TRAP_121">"2"</Item>
 <Item name="Assistant (Student or Servant)">"3"</Item>
 <Item name="Office">"3"</Item>
-<Item name="Gavel">"4"</Item>
+<Item name="RULES-TRAP_095">"4"</Item>
 <Item name="Ostentatious Wig">"4"</Item>
 </SUBCHAPTER_ITEM>
 </Career>
@@ -4608,8 +4608,8 @@ As sailing one ship is not so different to sailing another, having any Sail Spec
   <!-- Strong-minded -->
 </SUBCHAPTER_TALENT>
 <SUBCHAPTER_ITEM>
-<Item name="Religious Symbol">"1"</Item>
-<Item name="Robes">"1"</Item>
+<Item name="RULES-TRAP_061">"1"</Item>
+<Item name="RULES-TRAP_062">"1"</Item>
 <Item name="Book (Religion)">"2"</Item>
 <Item name="Religious Relic">"2"</Item>
 <Item name="Abbey">"3"</Item>
@@ -4735,7 +4735,7 @@ As sailing one ship is not so different to sailing another, having any Sail Spec
 <Item name="Bandages">"1"</Item>
 <Item name="Healing Draught">"1"</Item>
 <Item name="Book (Medicine)">"2"</Item>
-<Item name="Guild Licence">"2"</Item>
+<Item name="RULES-TRAP_130">"2"</Item>
 <Item name="Trade Tools (Physician)">"2"</Item>
 <Item name="Apprentice">"3"</Item>
 <Item name="Workshop (Physician)">"3"</Item>
@@ -4858,8 +4858,8 @@ As sailing one ship is not so different to sailing another, having any Sail Spec
   <!-- Savant (Theology) -->
 </SUBCHAPTER_TALENT>
 <SUBCHAPTER_ITEM>
-<Item name="Religious Symbol">"1"</Item>
-<Item name="Robes">"1"</Item>
+<Item name="RULES-TRAP_061">"1"</Item>
+<Item name="RULES-TRAP_062">"1"</Item>
 <Item name="Book (Religion)">"2"</Item>
 <Item name="Ceremonial Robes">"2"</Item>
 <Item name="Quality Robes">"3"</Item>
@@ -4990,7 +4990,7 @@ As sailing one ship is not so different to sailing another, having any Sail Spec
 <Item name="Access to a Library">"2"</Item>
 <Item name="Degree">"2"</Item>
 <Item name="Mortarboard">"3"</Item>
-<Item name="Robes">"3"</Item>
+<Item name="RULES-TRAP_062">"3"</Item>
 <Item name="Study">"4"</Item>
 </SUBCHAPTER_ITEM>
 </Career>
@@ -5110,12 +5110,12 @@ As sailing one ship is not so different to sailing another, having any Sail Spec
 </SUBCHAPTER_TALENT>
 <SUBCHAPTER_ITEM>
 <Item name="Grimoire">"1"</Item>
-<Item name="Quarterstaff">"1"</Item>
-<Item name="Enchanted Staff">"2"</Item>
+<Item name="RULES-COMB_HAST_03">"1"</Item>
+<Item name="RULES-TRAP_181">"2"</Item>
 <Item name="Magic Licence">"2"</Item>
-<Item name="Robes">"2"</Item>
+<Item name="RULES-TRAP_062">"2"</Item>
 <Item name="Apprentice">"3"</Item>
-<Item name="Light Warhorse">"3"</Item>
+<Item name="RULES-TRAP_146">"3"</Item>
 <Item name="Magical Item">"3"</Item>
 <Item name="Library (Magic)">"4"</Item>
 <Item name="Workshop (Magic)">"4"</Item>
@@ -5238,10 +5238,10 @@ As sailing one ship is not so different to sailing another, having any Sail Spec
 <SUBCHAPTER_ITEM>
 <Item name="Hammer and Nails">"1"</Item>
 <Item name="Pile of Leaflets">"1"</Item>
-<Item name="Writing Kit">"1"</Item>
-<Item name="Leather Jack">"2"</Item>
+<Item name="RULES-TRAP_121">"1"</Item>
+<Item name="RULES-ARMO_05">"2"</Item>
 <Item name="Sturdy Crate">"2"</Item>
-<Item name="Hand Weapon">"3"</Item>
+<Item name="RULES-COMB_BASE_03">"3"</Item>
 <Item name="Pamphleteer">"3"</Item>
 <Item name="Impressive Hat">"4"</Item>
 <Item name="3 Pamphleteers">"4"</Item>
@@ -5364,10 +5364,10 @@ As sailing one ship is not so different to sailing another, having any Sail Spec
   <!-- Schemer -->
 </SUBCHAPTER_TALENT>
 <SUBCHAPTER_ITEM>
-<Item name="Chalk">"1"</Item>
-<Item name="Leather Jerkin">"1"</Item>
+<Item name="RULES-TRAP_08">"1"</Item>
+<Item name="RULES-ARMO_06">"1"</Item>
 <Item name="1d10 Rags">"1"</Item>
-<Item name="Guild Licence">"2"</Item>
+<Item name="RULES-TRAP_130">"2"</Item>
 <Item name="Trade Tools (as Trade)">"2"</Item>
 <Item name="Apprentice">"3"</Item>
 <Item name="Workshop (as Trade)">"3"</Item>
@@ -5490,11 +5490,11 @@ As sailing one ship is not so different to sailing another, having any Sail Spec
   <!-- Suave -->
 </SUBCHAPTER_TALENT>
 <SUBCHAPTER_ITEM>
-<Item name="Cup">"1"</Item>
+<Item name="RULES-TRAP_13">"1"</Item>
 <Item name="Poor Quality Blanket">"1"</Item>
-<Item name="Bowl">"2"</Item>
-<Item name="Crutch">"2"</Item>
-<Item name="Disguise Kit">"3"</Item>
+<Item name="RULES-TRAP_27">"2"</Item>
+<Item name="RULES-TRAP_090">"2"</Item>
+<Item name="RULES-TRAP_091">"3"</Item>
 <Item name="Hiding Place">"3"</Item>
 <Item name="Pauper Follower">"3"</Item>
 <Item name="Lair">"4"</Item>
@@ -5616,12 +5616,12 @@ As sailing one ship is not so different to sailing another, having any Sail Spec
   <!-- Tower of Memories -->
 </SUBCHAPTER_TALENT>
 <SUBCHAPTER_ITEM>
-<Item name="Lamp Oil">"1"</Item>
-<Item name="Lantern">"1"</Item>
+<Item name="RULES-TRAP_19">"1"</Item>
+<Item name="RULES-TRAP_20">"1"</Item>
 <Item name="Journal">"1"</Item>
-<Item name="Writing Kit">"1"</Item>
-<Item name="Leather Jack">"2"</Item>
-<Item name="Hand Weapon">"2"</Item>
+<Item name="RULES-TRAP_121">"1"</Item>
+<Item name="RULES-ARMO_05">"2"</Item>
+<Item name="RULES-COMB_BASE_03">"2"</Item>
 <Item name="Magnifying Glass">"2"</Item>
 <Item name="Lockpick">"2"</Item>
 <Item name="Assistant">"3"</Item>
@@ -5745,13 +5745,13 @@ As sailing one ship is not so different to sailing another, having any Sail Spec
   <!-- Wealthy -->
 </SUBCHAPTER_TALENT>
 <SUBCHAPTER_ITEM>
-<Item name="Abacus">"1"</Item>
+<Item name="RULES-TRAP_081">"1"</Item>
 <Item name="Canvas Tarpaulin">"1"</Item>
 <Item name="Mule and Cart">"1"</Item>
 <Item name="3d10 Shillings">"1"</Item>
 <Item name="Barge or 2 Wagons">"2"</Item>
 <Item name="20 GC">"2"</Item>
-<Item name="Guild Licence">"2"</Item>
+<Item name="RULES-TRAP_130">"2"</Item>
 <Item name="100 GC">"3"</Item>
 <Item name="Townhouse with Servants">"3"</Item>
 <Item name="Warehouse">"3"</Item>
@@ -5877,15 +5877,15 @@ As sailing one ship is not so different to sailing another, having any Sail Spec
   <!-- Strong-minded -->
 </SUBCHAPTER_TALENT>
 <SUBCHAPTER_ITEM>
-<Item name="Hand Weapon">"1"</Item>
-<Item name="Sack">"1"</Item>
+<Item name="RULES-COMB_BASE_03">"1"</Item>
+<Item name="RULES-TRAP_040">"1"</Item>
 <Item name="Small Animal Traps">"1"</Item>
 <Item name="Small but Vicious Dog">"1"</Item>
 <Item name="Pole for Dead Rats">"2"</Item>
-<Item name="Rat Poison">"2"</Item>
+<Item name="RULES-TRAP_162">"2"</Item>
 <Item name="Crossbow with 10 Bolts or Spear">"3"</Item>
 <Item name="Feinkopf Lantern">"3"</Item>
-<Item name="Leather Jack">"3"</Item>
+<Item name="RULES-ARMO_05">"3"</Item>
 <Item name="Assistant">"4"</Item>
 <Item name="Sack of Poisoned Bait">"4"</Item>
 </SUBCHAPTER_ITEM>
@@ -6131,19 +6131,19 @@ As sailing one ship is not so different to sailing another, having any Sail Spec
   <!-- Schemer -->
 </SUBCHAPTER_TALENT>
 <SUBCHAPTER_ITEM>
-<Item name="Hand Weapon">"1"</Item>
-<Item name="Leather Jack">"1"</Item>
-<Item name="Uniform">"1"</Item>
+<Item name="RULES-COMB_BASE_03">"1"</Item>
+<Item name="RULES-ARMO_05">"1"</Item>
+<Item name="RULES-TRAP_067">"1"</Item>
 <Item name="Copper Badge">"2"</Item>
-<Item name="Lamp Oil">"2"</Item>
+<Item name="RULES-TRAP_19">"2"</Item>
 <Item name="Lantern and Pole">"2"</Item>
-<Item name="Breastplate">"3"</Item>
-<Item name="Open Helm">"3"</Item>
+<Item name="RULES-ARMO_13">"3"</Item>
+<Item name="RULES-ARMO_15">"3"</Item>
 <Item name="Symbol of Rank">"3"</Item>
 <Item name="Quality Hand Weapon">"4"</Item>
 <Item name="Quality Hat">"4"</Item>
 <Item name="Quality Symbol of Rank">"4"</Item>
-<Item name="Riding Horse">"4"</Item>
+<Item name="RULES-TRAP_150">"4"</Item>
 </SUBCHAPTER_ITEM>
 </Career>
 <Career id="RULES-WORK15">
@@ -6261,12 +6261,12 @@ As sailing one ship is not so different to sailing another, having any Sail Spec
   <!-- Suave -->
 </SUBCHAPTER_TALENT>
 <SUBCHAPTER_ITEM>
-<Item name="Writing Kit">"1"</Item>
+<Item name="RULES-TRAP_121">"1"</Item>
 <Item name="Livery">"2"</Item>
 <Item name="Aide">"3"</Item>
 <Item name="Quality Clothing">"3"</Item>
 <Item name="Quality Courtly Garb">"4"</Item>
-<Item name="Riding Horse">"4"</Item>
+<Item name="RULES-TRAP_150">"4"</Item>
 <Item name="Staff of Advisers and Aides">"4"</Item>
 </SUBCHAPTER_ITEM>
 </Career>
@@ -6510,11 +6510,11 @@ As sailing one ship is not so different to sailing another, having any Sail Spec
   <!-- Strike to Injure -->
 </SUBCHAPTER_TALENT>
 <SUBCHAPTER_ITEM>
-<Item name="Melee Weapon (Any)">"1"</Item>
+<Item name="RULES-COMB_*">"1"</Item>
 <Item name="Sling Bag containing Clothing and 1d10 Bandages">"1"</Item>
 <Item name="Main Gauche or Sword-breaker">"2"</Item>
 <Item name="Pistol with 10 Shots">"2"</Item>
-<Item name="Hand Weapon">"3"</Item>
+<Item name="RULES-COMB_BASE_03">"3"</Item>
 <Item name="Quality Rapier">"3"</Item>
 <Item name="Trusty Second">"3"</Item>
 <Item name="2 Wooden Training Swords">"3"</Item>
@@ -6636,14 +6636,14 @@ As sailing one ship is not so different to sailing another, having any Sail Spec
   <!-- Savant (Politics) -->
 </SUBCHAPTER_TALENT>
 <SUBCHAPTER_ITEM>
-<Item name="Leather Jack">"1"</Item>
+<Item name="RULES-ARMO_05">"1"</Item>
 <Item name="Livery">"1"</Item>
-<Item name="Scroll Case">"1"</Item>
+<Item name="RULES-TRAP_044">"1"</Item>
 <Item name="10 Sheets of Parchment">"2"</Item>
-<Item name="Writing Kit">"2"</Item>
+<Item name="RULES-TRAP_121">"2"</Item>
 <Item name="Aide">"3"</Item>
 <Item name="Quality Clothes">"3"</Item>
-<Item name="Map">"3"</Item>
+<Item name="RULES-TRAP_133">"3"</Item>
 <Item name="Best Quality Courtly Clothes">"4"</Item>
 <Item name="Herald">"4"</Item>
 <Item name="Staff of Diplomats">"4"</Item>
@@ -6764,9 +6764,9 @@ As sailing one ship is not so different to sailing another, having any Sail Spec
   <!-- Wealthy -->
 </SUBCHAPTER_TALENT>
 <SUBCHAPTER_ITEM>
-<Item name="Courtly Garb">"1"</Item>
+<Item name="RULES-TRAP_052">"1"</Item>
 <Item name="Foil or Hand Mirror">"1"</Item>
-<Item name="Velvet Cloak">"1"</Item>
+<Item name="RULES-TRAP_055">"1"</Item>
 <Item name="Jewellery worth 3d10 GC">"1"</Item>
 <Item name="Personal Servant">"1"</Item>
 <Item name="Coach or Riding Horse">"2"</Item>
@@ -6778,7 +6778,7 @@ As sailing one ship is not so different to sailing another, having any Sail Spec
 <Item name="200 GC">"3"</Item>
 <Item name="Jewellery worth 200 GC">"3"</Item>
 <Item name="2 sets of Quality Courtly Garb">"3"</Item>
-<Item name="Signet Ring">"3"</Item>
+<Item name="RULES-TRAP_065">"3"</Item>
 <Item name="500 GC">"4"</Item>
 <Item name="Jewellery worth 500 GC">"4"</Item>
 <Item name="Province">"4"</Item>
@@ -6899,13 +6899,13 @@ As sailing one ship is not so different to sailing another, having any Sail Spec
   <!-- Schemer -->
 </SUBCHAPTER_TALENT>
 <SUBCHAPTER_ITEM>
-<Item name="Floor Brush">"1"</Item>
+<Item name="RULES-TRAP_094">"1"</Item>
 <Item name="Livery">"2"</Item>
-<Item name="Lamp Oil">"3"</Item>
+<Item name="RULES-TRAP_19">"3"</Item>
 <Item name="Quality Livery">"3"</Item>
-<Item name="Storm Lantern">"3"</Item>
-<Item name="Tinderbox">"3"</Item>
-<Item name="Hand Weapon">"4"</Item>
+<Item name="RULES-TRAP_21">"3"</Item>
+<Item name="RULES-TRAP_31">"3"</Item>
+<Item name="RULES-COMB_BASE_03">"4"</Item>
 <Item name="Fine Clothes">"4"</Item>
 <Item name="Servant">"4"</Item>
 </SUBCHAPTER_ITEM>
@@ -7025,15 +7025,15 @@ As sailing one ship is not so different to sailing another, having any Sail Spec
   <!-- Tower of Memories -->
 </SUBCHAPTER_TALENT>
 <SUBCHAPTER_ITEM>
-<Item name="Charcoal Stick">"1"</Item>
+<Item name="RULES-TRAP_09">"1"</Item>
 <Item name="Sling Bag containing 2 different sets of Clothing and Hooded Cloak">"1"</Item>
-<Item name="Disguise Kit">"2"</Item>
+<Item name="RULES-TRAP_091">"2"</Item>
 <Item name="Informer">"2"</Item>
-<Item name="Telescope">"2"</Item>
+<Item name="RULES-TRAP_119">"2"</Item>
 <Item name="Book (Cryptography)">"3"</Item>
 <Item name="Loft of Homing Pigeons">"3"</Item>
 <Item name="Ring of Spies and Informers">"3"</Item>
-<Item name="Writing Kit">"3"</Item>
+<Item name="RULES-TRAP_121">"3"</Item>
 <Item name="Office and Staff">"4"</Item>
 </SUBCHAPTER_ITEM>
 </Career>
@@ -7153,13 +7153,13 @@ As sailing one ship is not so different to sailing another, having any Sail Spec
 </SUBCHAPTER_TALENT>
 <SUBCHAPTER_ITEM>
 <Item name="Keys">"1"</Item>
-<Item name="Lamp Oil">"1"</Item>
-<Item name="Lantern">"1"</Item>
+<Item name="RULES-TRAP_19">"1"</Item>
+<Item name="RULES-TRAP_20">"1"</Item>
 <Item name="Livery">"1"</Item>
 <Item name="Bow with 10 Arrows or Hand Weapon">"2"</Item>
-<Item name="Leather Jack">"2"</Item>
-<Item name="Riding Horse">"2"</Item>
-<Item name="Breastplate">"3"</Item>
+<Item name="RULES-ARMO_05">"2"</Item>
+<Item name="RULES-TRAP_150">"2"</Item>
+<Item name="RULES-ARMO_13">"3"</Item>
 <Item name="Rod of Office">"3"</Item>
 <Item name="Staff of Custodians">"3"</Item>
 <Item name="Aide">"4"</Item>
@@ -7282,13 +7282,13 @@ As sailing one ship is not so different to sailing another, having any Sail Spec
   <!-- Schemer -->
 </SUBCHAPTER_TALENT>
 <SUBCHAPTER_ITEM>
-<Item name="Hand Weapon">"1"</Item>
+<Item name="RULES-COMB_BASE_03">"1"</Item>
 <Item name="Small Lock Box">"1"</Item>
-<Item name="Leather Jack">"2"</Item>
+<Item name="RULES-ARMO_05">"2"</Item>
 <Item name="3 Tax Collectors">"2"</Item>
 <Item name="Bailiff">"3"</Item>
-<Item name="Breastplate">"3"</Item>
-<Item name="Riding Horse">"3"</Item>
+<Item name="RULES-ARMO_13">"3"</Item>
+<Item name="RULES-TRAP_150">"3"</Item>
 <Item name="Library (Law)">"4"</Item>
 <Item name="Quality Robes">"4"</Item>
 <Item name="Seal of Office">"4"</Item>
@@ -7409,10 +7409,10 @@ As sailing one ship is not so different to sailing another, having any Sail Spec
   <!-- Strong-minded -->
 </SUBCHAPTER_TALENT>
 <SUBCHAPTER_ITEM>
-<Item name="Amulet">"1"</Item>
+<Item name="RULES-TRAP_046">"1"</Item>
 <Item name="Hand Weapon (Sickle)">"1"</Item>
-<Item name="Quarterstaff">"1"</Item>
-<Item name="Healing Poultice">"2"</Item>
+<Item name="RULES-COMB_HAST_03">"1"</Item>
+<Item name="RULES-TRAP_168">"2"</Item>
 <Item name="Trade Tools (Herbalist)">"2"</Item>
 <Item name="Apprentice">"3"</Item>
 <Item name="Isolated Hut">"3"</Item>
@@ -7535,8 +7535,8 @@ As sailing one ship is not so different to sailing another, having any Sail Spec
   <!-- Savant (Herbs) -->
 </SUBCHAPTER_TALENT>
 <SUBCHAPTER_ITEM>
-<Item name="Boots">"1"</Item>
-<Item name="Cloak">"1"</Item>
+<Item name="RULES-TRAP_047">"1"</Item>
+<Item name="RULES-TRAP_048">"1"</Item>
 <Item name="Hand Weapon (Sickle)">"1"</Item>
 <Item name="Sling Bag containing Assortment of Herbs">"1"</Item>
 <Item name="Trade Tools (Herbalist)">"2"</Item>
@@ -7665,14 +7665,14 @@ As sailing one ship is not so different to sailing another, having any Sail Spec
 <Item name="Hand Weapon (Axe)">"1"</Item>
 <Item name="Selection of Animal Traps">"1"</Item>
 <Item name="Sturdy Boots and Cloak">"1"</Item>
-<Item name="Hunting Dog">"2"</Item>
+<Item name="RULES-TRAP_145">"2"</Item>
 <Item name="Ranged Weapon (Any One)">"2"</Item>
-<Item name="Spear">"2"</Item>
-<Item name="Backpack">"3"</Item>
-<Item name="Bedroll">"3"</Item>
-<Item name="Tent">"3"</Item>
+<Item name="RULES-COMB_HAST_04">"2"</Item>
+<Item name="RULES-TRAP_033">"3"</Item>
+<Item name="RULES-TRAP_04">"3"</Item>
+<Item name="RULES-TRAP_30">"3"</Item>
 <Item name="Hawk Mews or Kennel of Hunting Dogs">"4"</Item>
-<Item name="Riding Horse">"4"</Item>
+<Item name="RULES-TRAP_150">"4"</Item>
 </SUBCHAPTER_ITEM>
 </Career>
 <Career id="RULES-WORK40">
@@ -7790,19 +7790,19 @@ As sailing one ship is not so different to sailing another, having any Sail Spec
   <!-- Strong-minded -->
 </SUBCHAPTER_TALENT>
 <SUBCHAPTER_ITEM>
-<Item name="Charcoal Stick">"1"</Item>
+<Item name="RULES-TRAP_09">"1"</Item>
 <Item name="Crude Map">"1"</Item>
 <Item name="Great Weapon (Two-handed Pick)">"1"</Item>
 <Item name="Hand Weapon (Pick)">"1"</Item>
-<Item name="Pan">"1"</Item>
-<Item name="Spade">"1"</Item>
+<Item name="RULES-TRAP_23">"1"</Item>
+<Item name="RULES-TRAP_115">"1"</Item>
 <Item name="Davrich Lamp">"2"</Item>
-<Item name="Lamp Oil">"2"</Item>
-<Item name="Leather Jack">"2"</Item>
+<Item name="RULES-TRAP_19">"2"</Item>
+<Item name="RULES-ARMO_05">"2"</Item>
 <Item name="Open Helm (Miner's Helm)">"2"</Item>
 <Item name="Trade Tools (Engineer)">"3"</Item>
 <Item name="Crew of Miners">"4"</Item>
-<Item name="Writing Kit">"4"</Item>
+<Item name="RULES-TRAP_121">"4"</Item>
 </SUBCHAPTER_ITEM>
 </Career>
 <Career id="RULES-WORK41">
@@ -7923,7 +7923,7 @@ As sailing one ship is not so different to sailing another, having any Sail Spec
 <Item name="Cheap Jewellery">"1"</Item>
 <Item name="Deck of Cards or Dice">"1"</Item>
 <Item name="Selection of Amulets">"2"</Item>
-<Item name="Writing Kit">"3"</Item>
+<Item name="RULES-TRAP_121">"3"</Item>
 <Item name="Trade Tools (Astrology)">"4"</Item>
 </SUBCHAPTER_ITEM>
 </Career>
@@ -8044,16 +8044,16 @@ As sailing one ship is not so different to sailing another, having any Sail Spec
   <!-- Well-prepared -->
 </SUBCHAPTER_TALENT>
 <SUBCHAPTER_ITEM>
-<Item name="Hand Weapon">"1"</Item>
-<Item name="Leather Jack">"1"</Item>
+<Item name="RULES-COMB_BASE_03">"1"</Item>
+<Item name="RULES-ARMO_05">"1"</Item>
 <Item name="Sturdy Boots and Cloak">"1"</Item>
 <Item name="Rope">"1"</Item>
 <Item name="Ranged Weapon (Any One)">"2"</Item>
-<Item name="Mail Shirt">"2"</Item>
-<Item name="Map">"3"</Item>
-<Item name="Riding Horse">"3"</Item>
+<Item name="RULES-ARMO_11">"2"</Item>
+<Item name="RULES-TRAP_133">"3"</Item>
+<Item name="RULES-TRAP_150">"3"</Item>
 <Item name="Saddlebags with 2 weeks' Rations">"3"</Item>
-<Item name="Tent">"3"</Item>
+<Item name="RULES-TRAP_30">"3"</Item>
 <Item name="Selection of Maps">"4"</Item>
 <Item name="Trade Tools (Cartographer)">"4"</Item>
 </SUBCHAPTER_ITEM>
@@ -8176,7 +8176,7 @@ As sailing one ship is not so different to sailing another, having any Sail Spec
 <Item name="None">"1"</Item>
 <Item name="Hand Weapon (Axe)">"2"</Item>
 <Item name="Lasso or Sling with 10 Stone Bullets">"2"</Item>
-<Item name="Leather Jerkin">"2"</Item>
+<Item name="RULES-ARMO_06">"2"</Item>
 <Item name="Trade Tools (as Trade)">"2"</Item>
 <Item name="Cottage">"3"</Item>
 <Item name="Mule and Cart">"3"</Item>
@@ -8302,16 +8302,16 @@ The life of a Bounty Hunter is one of constant adventure. Their work carries the
   <!-- Sure Shot -->
 </SUBCHAPTER_TALENT>
 <SUBCHAPTER_ITEM>
-<Item name="Hand Weapon">"1"</Item>
-<Item name="Leather Jerkin">"1"</Item>
+<Item name="RULES-COMB_BASE_03">"1"</Item>
+<Item name="RULES-ARMO_06">"1"</Item>
 <Item name="Rope">"1"</Item>
 <Item name="2 Bolas or Crossbow with 10 Bolts or Lasso">"2"</Item>
 <Item name="Leather Skullcap">"2"</Item>
-<Item name="Manacles">"2"</Item>
+<Item name="RULES-TRAP_102">"2"</Item>
 <Item name="Net">"2"</Item>
 <Item name="Warrant Papers">"2"</Item>
-<Item name="Mail Shirt">"3"</Item>
-<Item name="Riding Horse">"3"</Item>
+<Item name="RULES-ARMO_11">"3"</Item>
+<Item name="RULES-TRAP_150">"3"</Item>
 <Item name="Draught Horse and Cart">"4"</Item>
 <Item name="4 Pairs of Manacles">"4"</Item>
 </SUBCHAPTER_ITEM>
@@ -8436,11 +8436,11 @@ The Empire's roads are perilous, so there is rarely a shortage of work replacing
 </SUBCHAPTER_TALENT>
 <SUBCHAPTER_ITEM>
 <Item name="Coach Horn">"1"</Item>
-<Item name="Hat">"1"</Item>
-<Item name="Leather Jerkin">"1"</Item>
+<Item name="RULES-TRAP_056">"1"</Item>
+<Item name="RULES-ARMO_06">"1"</Item>
 <Item name="Warm Coat">"1"</Item>
 <Item name="Blunderbuss with 10 Shots">"2"</Item>
-<Item name="Whip">"2"</Item>
+<Item name="RULES-COMB_FLEAU_04">"2"</Item>
 <Item name="Pistol with 10 Shots">"3"</Item>
 <Item name="Quality Cloak">"3"</Item>
 <Item name="Fleet of Coaches and Horses">"4"</Item>
@@ -8566,13 +8566,13 @@ The open road, a new village every night, the smell of greasepaint, and the roar
   <!-- Sharp -->
 </SUBCHAPTER_TALENT>
 <SUBCHAPTER_ITEM>
-<Item name="Bowl">"1"</Item>
+<Item name="RULES-TRAP_27">"1"</Item>
 <Item name="Musical Instrument">"1"</Item>
-<Item name="Costume">"2"</Item>
-<Item name="Instrument">"2"</Item>
+<Item name="RULES-TRAP_051">"2"</Item>
+<Item name="RULES-TRAP_18">"2"</Item>
 <Item name="5 Throwing Knives">"2"</Item>
 <Item name="Trained Animal">"3"</Item>
-<Item name="Writing Kit">"3"</Item>
+<Item name="RULES-TRAP_121">"3"</Item>
 <Item name="Draught Horses and Wagon (Stage)">"4"</Item>
 <Item name="Troupe of Entertainers">"4"</Item>
 <Item name="Wardrobe of Costumes and Props">"4"</Item>
@@ -8697,10 +8697,10 @@ Note: This profile reflects Sigmarite Flagellants, by far the most common in the
   <!-- Jump Up -->
 </SUBCHAPTER_TALENT>
 <SUBCHAPTER_ITEM>
-<Item name="Flail">"1"</Item>
+<Item name="RULES-COMB_FLEAU_01">"1"</Item>
 <Item name="Tattered Robes">"1"</Item>
 <Item name="Great Weapon (Military Flail)">"2"</Item>
-<Item name="Religious Symbol">"2"</Item>
+<Item name="RULES-TRAP_061">"2"</Item>
 <Item name="Religious Relic">"3"</Item>
 <Item name="Book (Religion)">"4"</Item>
 <Item name="Followers (including Penitents, Flagellants, and Zealots)">"4"</Item>
@@ -8824,16 +8824,16 @@ The messages they carry can contain secrets worth killing for, and a stolen or i
   <!-- Schemer -->
 </SUBCHAPTER_TALENT>
 <SUBCHAPTER_ITEM>
-<Item name="Scroll Case">"1"</Item>
-<Item name="Hand Weapon">"2"</Item>
-<Item name="Leather Jack">"2"</Item>
-<Item name="Riding Horse">"2"</Item>
-<Item name="Backpack">"3"</Item>
-<Item name="Saddlebags">"3"</Item>
-<Item name="Shield">"3"</Item>
+<Item name="RULES-TRAP_044">"1"</Item>
+<Item name="RULES-COMB_BASE_03">"2"</Item>
+<Item name="RULES-ARMO_05">"2"</Item>
+<Item name="RULES-TRAP_150">"2"</Item>
+<Item name="RULES-TRAP_033">"3"</Item>
+<Item name="RULES-TRAP_042">"3"</Item>
+<Item name="RULES-ARMO_02">"3"</Item>
 <Item name="Couriers">"4"</Item>
-<Item name="Mail Shirt">"4"</Item>
-<Item name="Writing Kit">"4"</Item>
+<Item name="RULES-ARMO_11">"4"</Item>
+<Item name="RULES-TRAP_121">"4"</Item>
 </SUBCHAPTER_ITEM>
 </Career>
 <Career id="RULES-WORK14">
@@ -8955,11 +8955,11 @@ Always on the move, Pedlars take naturally to the adventuring life in search of 
 </SUBCHAPTER_TALENT>
 <SUBCHAPTER_ITEM>
 <Item name="Basket">"1"</Item>
-<Item name="Blanket">"1"</Item>
+<Item name="RULES-TRAP_05">"1"</Item>
 <Item name="Goods worth 2d10 Pennies">"1"</Item>
 <Item name="Small Tent">"1"</Item>
 <Item name="Backpack or Handcart">"2"</Item>
-<Item name="Bedroll">"2"</Item>
+<Item name="RULES-TRAP_04">"2"</Item>
 <Item name="Goods worth 8d20 Pennies">"2"</Item>
 <Item name="Pots and Pans">"2"</Item>
 <Item name="Trade Tools (Tinker)">"2"</Item>
@@ -9089,10 +9089,10 @@ Roadwardens rarely need to seek out adventure — it usually finds them first. A
 </SUBCHAPTER_TALENT>
 <SUBCHAPTER_ITEM>
 <Item name="Crossbow with 10 Bolts">"1"</Item>
-<Item name="Hand Weapon">"1"</Item>
-<Item name="Leather Jack">"1"</Item>
-<Item name="Light Warhorse">"2"</Item>
-<Item name="Mail Shirt">"2"</Item>
+<Item name="RULES-COMB_BASE_03">"1"</Item>
+<Item name="RULES-ARMO_05">"1"</Item>
+<Item name="RULES-TRAP_146">"2"</Item>
+<Item name="RULES-ARMO_11">"2"</Item>
 <Item name="Pistol with 10 Shots">"2"</Item>
 <Item name="Rope">"2"</Item>
 <Item name="Squad of Roadwardens">"3"</Item>
@@ -9219,12 +9219,12 @@ Witch Hunters travel constantly, following rumours of unsanctioned magic, hearin
   <!-- Pure Soul -->
 </SUBCHAPTER_TALENT>
 <SUBCHAPTER_ITEM>
-<Item name="Hand Weapon">"1"</Item>
+<Item name="RULES-COMB_BASE_03">"1"</Item>
 <Item name="Instruments of Torture">"1"</Item>
 <Item name="Pistol with 10 Shots">"2"</Item>
-<Item name="Hat">"2"</Item>
-<Item name="Leather Jack">"2"</Item>
-<Item name="Riding Horse">"2"</Item>
+<Item name="RULES-TRAP_056">"2"</Item>
+<Item name="RULES-ARMO_05">"2"</Item>
+<Item name="RULES-TRAP_150">"2"</Item>
 <Item name="Rapier or Silvered Sword">"2"</Item>
 <Item name="Rope">"2"</Item>
 <Item name="Quality Clothing">"3"</Item>
@@ -9352,12 +9352,12 @@ A Cavalryman may find themselves on the road if a superior orders them to invest
 </SUBCHAPTER_TALENT>
 <SUBCHAPTER_ITEM>
 <Item name="Bow with 10 Arrows or Pistol with 10 Shots">"1"</Item>
-<Item name="Leather Jack">"1"</Item>
-<Item name="Light Warhorse">"1"</Item>
-<Item name="Breastplate">"2"</Item>
-<Item name="Open Helm">"2"</Item>
+<Item name="RULES-ARMO_05">"1"</Item>
+<Item name="RULES-TRAP_146">"1"</Item>
+<Item name="RULES-ARMO_13">"2"</Item>
+<Item name="RULES-ARMO_15">"2"</Item>
 <Item name="Sash">"3"</Item>
-<Item name="Deck of Cards">"4"</Item>
+<Item name="RULES-TRAP_11">"4"</Item>
 <Item name="Quality Clothing">"4"</Item>
 </SUBCHAPTER_ITEM>
 </Career>
@@ -9480,16 +9480,16 @@ Guard duty is not always exciting — most of the time it involves standing arou
 </SUBCHAPTER_TALENT>
 <SUBCHAPTER_ITEM>
 <Item name="Buckler">"1"</Item>
-<Item name="Leather Jerkin">"1"</Item>
+<Item name="RULES-ARMO_06">"1"</Item>
 <Item name="Storm Lantern with Oil">"1"</Item>
 <Item name="Bow with 10 Arrows">"2"</Item>
 <Item name="Sleeved Mail Shirt">"2"</Item>
-<Item name="Shield">"2"</Item>
-<Item name="Spear">"2"</Item>
+<Item name="RULES-ARMO_02">"2"</Item>
+<Item name="RULES-COMB_HAST_04">"2"</Item>
 <Item name="Great Weapon or Halberd">"3"</Item>
 <Item name="Helmet">"3"</Item>
-<Item name="Uniform">"3"</Item>
-<Item name="Breastplate">"4"</Item>
+<Item name="RULES-TRAP_067">"3"</Item>
+<Item name="RULES-ARMO_13">"4"</Item>
 <Item name="Squad of Guards">"4"</Item>
 </SUBCHAPTER_ITEM>
 </Career>
@@ -9612,16 +9612,16 @@ Even the strictest order grants its Knights a degree of independence. Some adven
   <!-- Strike to Injure -->
 </SUBCHAPTER_TALENT>
 <SUBCHAPTER_ITEM>
-<Item name="Leather Jack">"1"</Item>
-<Item name="Mail Shirt">"1"</Item>
-<Item name="Riding Horse">"1"</Item>
-<Item name="Shield">"1"</Item>
+<Item name="RULES-ARMO_05">"1"</Item>
+<Item name="RULES-ARMO_11">"1"</Item>
+<Item name="RULES-TRAP_150">"1"</Item>
+<Item name="RULES-ARMO_02">"1"</Item>
 <Item name="Trade Tools (Farrier)">"1"</Item>
-<Item name="Destrier">"2"</Item>
-<Item name="Melee Weapon (Any)">"2"</Item>
-<Item name="Lance">"2"</Item>
+<Item name="RULES-TRAP_141">"2"</Item>
+<Item name="RULES-COMB_*">"2"</Item>
+<Item name="RULES-COMB_CAVAL_02">"2"</Item>
 <Item name="Plate Armour">"2"</Item>
-<Item name="Sword">"2"</Item>
+<Item name="RULES-COMB_BASE_06">"2"</Item>
 <Item name="Barding">"3"</Item>
 <Item name="Small Unit of Knights">"3"</Item>
 <Item name="Large Unit of Knights or Several Small Units of Knights">"4"</Item>
@@ -9746,12 +9746,12 @@ The pit is a hard master, and many fighters seize any chance to escape the viole
 </SUBCHAPTER_TALENT>
 <SUBCHAPTER_ITEM>
 <Item name="Bandages">"1"</Item>
-<Item name="Knuckledusters">"1"</Item>
-<Item name="Leather Jack">"1"</Item>
+<Item name="RULES-COMB_BAGAR_02">"1"</Item>
+<Item name="RULES-ARMO_05">"1"</Item>
 <Item name="Flail or Great Weapon">"2"</Item>
 <Item name="Net or Whip">"2"</Item>
-<Item name="Shield">"2"</Item>
-<Item name="Breastplate">"3"</Item>
+<Item name="RULES-ARMO_02">"2"</Item>
+<Item name="RULES-ARMO_13">"3"</Item>
 <Item name="Helmet">"3"</Item>
 <Item name="Quality Helmet">"4"</Item>
 </SUBCHAPTER_ITEM>
@@ -9872,17 +9872,17 @@ A Protagonist's career is rarely a long one. Sooner or later, someone stronger, 
   <!-- Secret Identity -->
 </SUBCHAPTER_TALENT>
 <SUBCHAPTER_ITEM>
-<Item name="Hood or Mask">"1"</Item>
-<Item name="Knuckledusters">"1"</Item>
-<Item name="Leather Jack">"1"</Item>
-<Item name="Mail Shirt">"2"</Item>
-<Item name="Riding Horse">"2"</Item>
-<Item name="Shield">"2"</Item>
-<Item name="Cloak">"3"</Item>
+<Item name="RULES-TRAP_057">"1"</Item>
+<Item name="RULES-COMB_BAGAR_02">"1"</Item>
+<Item name="RULES-ARMO_05">"1"</Item>
+<Item name="RULES-ARMO_11">"2"</Item>
+<Item name="RULES-TRAP_150">"2"</Item>
+<Item name="RULES-ARMO_02">"2"</Item>
+<Item name="RULES-TRAP_048">"3"</Item>
 <Item name="Crossbow with 10 Bolts or Pistol with 10 Shots or 5 Throwing Knives">"3"</Item>
 <Item name="Garotte">"3"</Item>
 <Item name="Poison">"3"</Item>
-<Item name="Disguise Kit">"4"</Item>
+<Item name="RULES-TRAP_091">"4"</Item>
 </SUBCHAPTER_ITEM>
 </Career>
 <Career id="RULES-WORK62">
@@ -10132,16 +10132,16 @@ Playing a Soldier makes you a disciplined and dependable warrior. Used to fighti
 </SUBCHAPTER_TALENT>
 <SUBCHAPTER_ITEM>
 <Item name="Leather Breastplate">"1"</Item>
-<Item name="Uniform">"1"</Item>
+<Item name="RULES-TRAP_067">"1"</Item>
 <Item name="Weapon (Any One)">"1"</Item>
-<Item name="Breastplate">"2"</Item>
+<Item name="RULES-ARMO_13">"2"</Item>
 <Item name="Helmet">"2"</Item>
 <Item name="Weapon (Any)">"2"</Item>
 <Item name="Symbol of Rank">"3"</Item>
 <Item name="Regiment of Recruits">"3"</Item>
 <Item name="Letter of Commission">"4"</Item>
-<Item name="Light Warhorse">"4"</Item>
-<Item name="Map">"4"</Item>
+<Item name="RULES-TRAP_146">"4"</Item>
+<Item name="RULES-TRAP_133">"4"</Item>
 <Item name="Orders">"4"</Item>
 <Item name="Quality Uniform">"4"</Item>
 <Item name="Regiment of Soldiers">"4"</Item>
@@ -10266,13 +10266,13 @@ Playing a Warrior Priest lets you stand at the forefront of battle, inspiring yo
 </SUBCHAPTER_TALENT>
 <SUBCHAPTER_ITEM>
 <Item name="Book (Religion)">"1"</Item>
-<Item name="Melee Weapon (Any)">"1"</Item>
-<Item name="Leather Jerkin">"1"</Item>
-<Item name="Religious Symbol">"1"</Item>
-<Item name="Robes">"1"</Item>
-<Item name="Breastplate">"2"</Item>
+<Item name="RULES-COMB_*">"1"</Item>
+<Item name="RULES-ARMO_06">"1"</Item>
+<Item name="RULES-TRAP_061">"1"</Item>
+<Item name="RULES-TRAP_062">"1"</Item>
+<Item name="RULES-ARMO_13">"2"</Item>
 <Item name="Weapon (Any)">"2"</Item>
-<Item name="Light Warhorse">"3"</Item>
+<Item name="RULES-TRAP_146">"3"</Item>
 <Item name="Religious Relic">"4"</Item>
 </SUBCHAPTER_ITEM>
 </Career>
@@ -10395,17 +10395,17 @@ Playing a Charlatan lets you bluff, deceive, and talk your way through almost an
   <!-- Suave -->
 </SUBCHAPTER_TALENT>
 <SUBCHAPTER_ITEM>
-<Item name="Deck of Cards">"1"</Item>
-<Item name="Dice">"1"</Item>
+<Item name="RULES-TRAP_11">"1"</Item>
+<Item name="RULES-TRAP_14">"1"</Item>
 <Item name="2 Sets of Clothing">"1"</Item>
 <Item name="Forged Document">"2"</Item>
 <Item name="Colourful Mixtures">"2"</Item>
 <Item name="Trinkets and Charms">"2"</Item>
 <Item name="2 Sets of Quality Clothing">"2"</Item>
-<Item name="Disguise Kit">"3"</Item>
+<Item name="RULES-TRAP_091">"3"</Item>
 <Item name="Multiple Forged Documents">"3"</Item>
 <Item name="Forged Seal">"4"</Item>
-<Item name="Writing Kit">"4"</Item>
+<Item name="RULES-TRAP_121">"4"</Item>
 </SUBCHAPTER_ITEM>
 </Career>
 <Career id="RULES-WORK53">
@@ -10527,11 +10527,11 @@ Playing a Fence lets you move comfortably between respectable society and the cr
   <!-- Super Numerate -->
 </SUBCHAPTER_TALENT>
 <SUBCHAPTER_ITEM>
-<Item name="Hand Weapon">"1"</Item>
+<Item name="RULES-COMB_BASE_03">"1"</Item>
 <Item name="Stolen Goods worth 1d10 Shillings">"1"</Item>
 <Item name="Eyeglass">"2"</Item>
 <Item name="Trade Tools (Engraver)">"2"</Item>
-<Item name="Writing Kit">"2"</Item>
+<Item name="RULES-TRAP_121">"2"</Item>
 <Item name="Horse and Cart">"3"</Item>
 <Item name="Pawnbroker's Shop">"3"</Item>
 <Item name="Gang of Racketeers">"4"</Item>
@@ -10656,25 +10656,25 @@ Playing a Grave Robber lets you explore the darkest places of the Old World in s
   <!-- Wealthy -->
 </SUBCHAPTER_TALENT>
 <SUBCHAPTER_ITEM>
-<Item name="Crowbar">"1"</Item>
+<Item name="RULES-TRAP_089">"1"</Item>
 <Item name="Hooded Cloak">"1"</Item>
-<Item name="Sack">"1"</Item>
+<Item name="RULES-TRAP_040">"1"</Item>
 <Item name="Shovel">"1"</Item>
-<Item name="Backpack">"2"</Item>
+<Item name="RULES-TRAP_033">"2"</Item>
 <Item name="Handcart">"2"</Item>
-<Item name="Hand Weapon">"2"</Item>
+<Item name="RULES-COMB_BASE_03">"2"</Item>
 <Item name="Storm Lantern and Oil">"2"</Item>
 <Item name="Tarpaulin">"2"</Item>
 <Item name="Trade Tools (Thief)">"2"</Item>
 <Item name="Horse and Cart">"3"</Item>
-<Item name="Leather Jack">"3"</Item>
+<Item name="RULES-ARMO_05">"3"</Item>
 <Item name="Pick">"3"</Item>
 <Item name="Rope">"3"</Item>
-<Item name="Bedroll">"4"</Item>
+<Item name="RULES-TRAP_04">"4"</Item>
 <Item name="Maps">"4"</Item>
-<Item name="Tent">"4"</Item>
+<Item name="RULES-TRAP_30">"4"</Item>
 <Item name="Trade Tools (Engineer)">"4"</Item>
-<Item name="Writing Kit">"4"</Item>
+<Item name="RULES-TRAP_121">"4"</Item>
 </SUBCHAPTER_ITEM>
 </Career>
 <Career id="RULES-WORK22">
@@ -10923,12 +10923,12 @@ Playing an Outlaw lets you thrive beyond the reach of civilisation. You know peo
   <!-- Unshakeable -->
 </SUBCHAPTER_TALENT>
 <SUBCHAPTER_ITEM>
-<Item name="Bedroll">"1"</Item>
-<Item name="Hand Weapon">"1"</Item>
-<Item name="Leather Jerkin">"1"</Item>
-<Item name="Tinderbox">"1"</Item>
+<Item name="RULES-TRAP_04">"1"</Item>
+<Item name="RULES-COMB_BASE_03">"1"</Item>
+<Item name="RULES-ARMO_06">"1"</Item>
+<Item name="RULES-TRAP_31">"1"</Item>
 <Item name="Bow with 10 Arrows or Crossbow with 10 Bolts or Shield">"2"</Item>
-<Item name="Tent">"2"</Item>
+<Item name="RULES-TRAP_30">"2"</Item>
 <Item name="Band of Outlaws">"3"</Item>
 <Item name="Helmet">"3"</Item>
 <Item name="Sleeved Mail Shirt">"3"</Item>
@@ -11055,11 +11055,11 @@ Playing a Racketeer lets you command respect through fear. You understand how th
   <!-- Kingpin -->
 </SUBCHAPTER_TALENT>
 <SUBCHAPTER_ITEM>
-<Item name="Hand Weapon">"1"</Item>
-<Item name="Knuckledusters">"1"</Item>
-<Item name="Leather Jack">"1"</Item>
-<Item name="Hat">"2"</Item>
-<Item name="Mail Shirt">"2"</Item>
+<Item name="RULES-COMB_BASE_03">"1"</Item>
+<Item name="RULES-COMB_BAGAR_02">"1"</Item>
+<Item name="RULES-ARMO_05">"1"</Item>
+<Item name="RULES-TRAP_056">"2"</Item>
+<Item name="RULES-ARMO_11">"2"</Item>
 <Item name="Crossbow Pistol with 10 Bolts">"3"</Item>
 <Item name="Gang of Thugs and Racketeers">"3"</Item>
 <Item name="Lair">"3"</Item>
@@ -11187,14 +11187,14 @@ Playing a Thief makes you a very useful recruit to an adventuring party, since m
   <!-- Strong Legs -->
 </SUBCHAPTER_TALENT>
 <SUBCHAPTER_ITEM>
-<Item name="Crowbar">"1"</Item>
-<Item name="Leather Jerkin">"1"</Item>
-<Item name="Sack">"1"</Item>
+<Item name="RULES-TRAP_089">"1"</Item>
+<Item name="RULES-ARMO_06">"1"</Item>
+<Item name="RULES-TRAP_040">"1"</Item>
 <Item name="Fence Contact">"2"</Item>
 <Item name="Rope">"2"</Item>
 <Item name="Trade Tools (Thief)">"2"</Item>
 <Item name="Crossbow Pistol with 10 Bolts">"3"</Item>
-<Item name="Grappling Hook">"3"</Item>
+<Item name="RULES-TRAP_17">"3"</Item>
 <Item name="Several Fence Contacts">"3"</Item>
 <Item name="Calling Card">"4"</Item>
 <Item name="Dark Clothing">"4"</Item>
@@ -11319,11 +11319,11 @@ Playing a Witch lets you wield magic beyond the strictures of the Colleges. Free
 </SUBCHAPTER_TALENT>
 <SUBCHAPTER_ITEM>
 <Item name="Notes Stuffed in Locked Drawer">"1"</Item>
-<Item name="Writing Kit">"1"</Item>
+<Item name="RULES-TRAP_121">"1"</Item>
 <Item name="Grimoire">"2"</Item>
 <Item name="Hand Weapon or Quarterstaff">"2"</Item>
 <Item name="Assistant">"3"</Item>
-<Item name="Enchanted Staff">"3"</Item>
+<Item name="RULES-TRAP_181">"3"</Item>
 <Item name="Tomes of Forbidden Knowledge">"3"</Item>
 <Item name="Minions">"4"</Item>
 <Item name="Library (Magic)">"4"</Item>
@@ -11450,15 +11450,15 @@ As a Boatman, you are strong, tough, and accustomed to handling yourself in roug
 </SUBCHAPTER_TALENT>
 <SUBCHAPTER_ITEM>
 <Item name="Hand Weapon (Boat Hook)">"1"</Item>
-<Item name="Leather Jack">"1"</Item>
+<Item name="RULES-ARMO_05">"1"</Item>
 <Item name="Pole">"1"</Item>
 <Item name="Rope">"2"</Item>
 <Item name="Rowboat">"2"</Item>
-<Item name="Backpack">"3"</Item>
+<Item name="RULES-TRAP_033">"3"</Item>
 <Item name="Trade Tools (Carpenter)">"3"</Item>
 <Item name="Trade Tools (Physician)">"3"</Item>
 <Item name="Barge and Crew">"4"</Item>
-<Item name="Hat">"4"</Item>
+<Item name="RULES-TRAP_056">"4"</Item>
 </SUBCHAPTER_ITEM>
 </Career>
 <Career id="RULES-WORK43">
@@ -11581,7 +11581,7 @@ As a Pilot, you are canny and perceptive, with a keen eye and deep local knowled
 </SUBCHAPTER_TALENT>
 <SUBCHAPTER_ITEM>
 <Item name="Hand Weapon (Boat Hook)">"1"</Item>
-<Item name="Leather Jerkin">"2"</Item>
+<Item name="RULES-ARMO_06">"2"</Item>
 <Item name="Rope">"2"</Item>
 <Item name="Rowboat">"2"</Item>
 <Item name="Pole">"3"</Item>
@@ -11708,15 +11708,15 @@ Playing a Riverwarden combines the skills of a sailor, investigator, and fighter
   <!-- Orientation -->
 </SUBCHAPTER_TALENT>
 <SUBCHAPTER_ITEM>
-<Item name="Hand Weapon">"1"</Item>
-<Item name="Leather Jack">"1"</Item>
-<Item name="Uniform">"1"</Item>
+<Item name="RULES-COMB_BASE_03">"1"</Item>
+<Item name="RULES-ARMO_05">"1"</Item>
+<Item name="RULES-TRAP_067">"1"</Item>
 <Item name="Lantern and Oil">"2"</Item>
 <Item name="Pistol with 10 Shots">"2"</Item>
-<Item name="Shield">"2"</Item>
-<Item name="Grappling Hook">"3"</Item>
+<Item name="RULES-ARMO_02">"2"</Item>
+<Item name="RULES-TRAP_17">"3"</Item>
 <Item name="Helmet">"3"</Item>
-<Item name="Mail Shirt">"3"</Item>
+<Item name="RULES-ARMO_11">"3"</Item>
 <Item name="Patrol Boats and Crew">"4"</Item>
 <Item name="Symbol of Rank">"4"</Item>
 </SUBCHAPTER_ITEM>
@@ -11840,13 +11840,13 @@ Playing a Riverwoman makes you a practical and dependable companion. Whether row
   <!-- Waterman -->
 </SUBCHAPTER_TALENT>
 <SUBCHAPTER_ITEM>
-<Item name="Bucket">"1"</Item>
+<Item name="RULES-TRAP_086">"1"</Item>
 <Item name="Fishing Rod and Bait">"1"</Item>
-<Item name="Leather Leggings">"1"</Item>
+<Item name="RULES-ARMO_07">"1"</Item>
 <Item name="Eel Trap">"2"</Item>
-<Item name="Leather Jerkin">"2"</Item>
+<Item name="RULES-ARMO_06">"2"</Item>
 <Item name="Net">"2"</Item>
-<Item name="Spear">"2"</Item>
+<Item name="RULES-COMB_HAST_04">"2"</Item>
 <Item name="Rowboat">"3"</Item>
 <Item name="Storm Lantern and Oil">"3"</Item>
 <Item name="Barge or Hut">"4"</Item>
@@ -11972,10 +11972,10 @@ Playing a Sailor makes you a hardy and dependable companion. Used to hard work, 
 </SUBCHAPTER_TALENT>
 <SUBCHAPTER_ITEM>
 <Item name="Brush">"1"</Item>
-<Item name="Bucket">"1"</Item>
-<Item name="Mop">"1"</Item>
+<Item name="RULES-TRAP_086">"1"</Item>
+<Item name="RULES-TRAP_104">"1"</Item>
 <Item name="Hand Weapon (Boat Hook)">"2"</Item>
-<Item name="Leather Jerkin">"2"</Item>
+<Item name="RULES-ARMO_06">"2"</Item>
 <Item name="Trade Tools (Carpenter)">"3"</Item>
 <Item name="Trade Tools (Physician)">"3"</Item>
 <Item name="Sailing Ship and Crew">"4"</Item>
@@ -12108,12 +12108,12 @@ Playing a Smuggler lets you stay one step ahead of the law. You are resourceful,
 <Item name="Storm Lantern and Oil">"1"</Item>
 <Item name="RULES-TRAP_31">"1"</Item>
 <Item name="2 Barrels">"2"</Item>
-<Item name="Hand Weapon">"2"</Item>
+<Item name="RULES-COMB_BASE_03">"2"</Item>
 <Item name="Rowboat">"2"</Item>
 <Item name="Pistol with 10 Shots">"3"</Item>
 <Item name="River Runners">"3"</Item>
 <Item name="Speedy Barge">"3"</Item>
-<Item name="Disguise Kit">"4"</Item>
+<Item name="RULES-TRAP_091">"4"</Item>
 <Item name="Small Fleet of Barges">"4"</Item>
 </SUBCHAPTER_ITEM>
 </Career>
@@ -12238,14 +12238,14 @@ Playing a Stevedore makes you a tough and dependable companion. You can handle y
 <SUBCHAPTER_ITEM>
 <Item name="Hand Weapon (Boat Hook)">"1"</Item>
 <Item name="Leather Gloves">"1"</Item>
-<Item name="Guild Licence">"2"</Item>
-<Item name="Leather Jerkin">"2"</Item>
-<Item name="Pipe and Tobacco">"2"</Item>
+<Item name="RULES-TRAP_130">"2"</Item>
+<Item name="RULES-ARMO_06">"2"</Item>
+<Item name="RULES-TRAP_24">"2"</Item>
 <Item name="Porter Cap">"2"</Item>
 <Item name="Gang of Stevedores">"3"</Item>
 <Item name="Whistle">"3"</Item>
 <Item name="Office and Staff">"4"</Item>
-<Item name="Writing Kit">"4"</Item>
+<Item name="RULES-TRAP_121">"4"</Item>
 </SUBCHAPTER_ITEM>
 </Career>
 <Career id="RULES-WORK42">
@@ -12367,17 +12367,17 @@ Playing a Wrecker means you are adept at ambushes, stealth, and intimidation, wi
   <!-- Warrior Born -->
 </SUBCHAPTER_TALENT>
 <SUBCHAPTER_ITEM>
-<Item name="Crowbar">"1"</Item>
+<Item name="RULES-TRAP_089">"1"</Item>
 <Item name="Large Sack">"1"</Item>
 <Item name="Leather Gloves">"1"</Item>
 <Item name="Hand Weapon (Boat Hook)">"2"</Item>
-<Item name="Leather Jack">"2"</Item>
+<Item name="RULES-ARMO_05">"2"</Item>
 <Item name="Storm Lantern and Oil">"2"</Item>
 <Item name="Crossbow with 10 Bolts or Javelin">"3"</Item>
 <Item name="Grappling Hook and Rope">"3"</Item>
 <Item name="Barge and Wrecker Crew">"4"</Item>
 <Item name="Keg of Ale">"4"</Item>
-<Item name="Manacles">"4"</Item>
+<Item name="RULES-TRAP_102">"4"</Item>
 </SUBCHAPTER_ITEM>
 </Career>
 </DATA_CAREER>
@@ -14529,6 +14529,30 @@ Playing a Wrecker means you are adept at ambushes, stealth, and intimidation, wi
 <Availability>"RULES-DISPO_RARE"</Availability>
 <Price>"10/-"</Price>
 <Encumbrance>"0"</Encumbrance>
+</Trapping>
+<Trapping id="RULES-TRAP_181">
+<Description language="ENGLISH">"Enchanted Staff"</Description>
+<Availability>"RULES-DISPO_EXOTIC"</Availability>
+<Price>"15CO"</Price>
+<Encumbrance>"0"</Encumbrance>
+</Trapping>
+<Trapping id="RULES-TRAP_182">
+<Description language="ENGLISH">"Practical Wizard's Robes"</Description>
+<Availability>"RULES-DISPO_EXOTIC"</Availability>
+<Price>"3CO"</Price>
+<Encumbrance>"1"</Encumbrance>
+</Trapping>
+<Trapping id="RULES-TRAP_183">
+<Description language="ENGLISH">"Standard Wizard's Robes"</Description>
+<Availability>"RULES-DISPO_EXOTIC"</Availability>
+<Price>"9CO"</Price>
+<Encumbrance>"2"</Encumbrance>
+</Trapping>
+<Trapping id="RULES-TRAP_184">
+<Description language="ENGLISH">"Elaborate Wizard's Robes"</Description>
+<Availability>"RULES-DISPO_EXOTIC"</Availability>
+<Price>"27CO"</Price>
+<Encumbrance>"3"</Encumbrance>
 </Trapping>
 </DATA_TRAPPING>
 <DATA_ARMOR_SIMP>

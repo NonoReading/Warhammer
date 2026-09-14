@@ -35,6 +35,12 @@ function ChercheTrapping(CodeTrapping :String): StructureTrapping;
 var
   PTrapping:      StructureTrapping;
 Begin
+  // Si rien ne correspond, Result doit rester vide : sans ce reset, un appel sans
+  // resultat heritait de la valeur laissee par l'appel precedent (Result est passe
+  // comme parametre cache pour un record gere, jamais efface tout seul). Visible sur
+  // l'arbre des metiers : un item texte libre juste apres un Trapping resolu affichait
+  // le libelle du Trapping precedent au lieu de rester en texte brut.
+  Result.CodeTrapping := '';
   for PTrapping in ListTrapping do
     if CompareRechercheValeur(PTrapping.CodeTrapping, CodeTrapping) then
        Begin
