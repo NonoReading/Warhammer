@@ -4585,3 +4585,35 @@ l indiquent dans leur nom). 12 (repris du Rulebook) reste une hypothese assumee,
 mieux trouve.
 Fichiers modifies : DATABASE/WFRP4/BOOK_ARCHIVES_OF_THE_EMPIRE_III.Xml, A FAIRE.txt,
 CONTEXT.md, Log.txt.
+
+15/09/2026 - GENERIQUE "GREAT WEAPON (ANY)" AJOUTE COTE V5
+"Great Weapon or Halberd" et "Flail or Great Weapon" (BOOK_RULESBOOK.Xml V5) restaient non
+rattaches faute de generique "Two-handed weapons (Any)" cote V5, contrairement a V4 qui l a
+deja (RULES-COMB_2M_*, DATABASE/WFRP4/BOOK_RULESBOOK.Xml). Identifie avec Nono : Great Weapon
+designe la famille Two-Handed (RULES-COMPCOMB_2M), les deux choix opposant toujours une arme
+d une AUTRE famille (Halberd=Polearm, Flail=Flail) a "Great Weapon" - coherent avec la
+competence combinee "Melee (Flail or Two Handed)" deja presente dans le livre V5. Ajoute
+RULES-COMB_2M_* "Two-handed weapons (Any)" dans DATABASE/WFRP5/BOOK_RULESBOOK.Xml, sur le
+modele exact de V4 (memes champs, meme convention que RULES-COMB_*/RULES-PROJ_* deja
+presents cote V5). Les deux choix de carriere rattaches : RULES-COMB_2M_*/RULES-COMB_HAST_01
+et RULES-COMB_FLEAU_01/RULES-COMB_2M_*. XML revalide bien forme.
+Fichiers modifies : DATABASE/WFRP5/BOOK_RULESBOOK.Xml, A FAIRE.txt, CONTEXT.md, Log.txt.
+
+15/09/2026 - MATERIAU DES BOUCLIERS V5 : TRANCHE, RESTE SANS MATERIAU
+RULES-ARMO_01/02/03 (Buckler/Shield/Large Shield, BOOK_RULESBOOK.Xml V5) sans balise <Type>
+(releve le 14/09/2026). Nono tranche : on laisse sans materiau plutot que d en inventer un
+(bois ? bois cercle de metal ?). Aucun changement de donnee, item retire d A FAIRE.txt.
+
+15/09/2026 - ENTREE "SILVERED SWORD" CREEE (V5)
+"Rapier or Silvered Sword" (Witchfinder General, RULES-WORK54, niveau 2, BOOK_RULESBOOK.Xml
+V5) : aucune regle "argente" dans le modele, folklore Witch Hunter sans mecanique. Decision
+de Nono : creer une entree quand meme pour tracer le choix plutot que de le laisser en texte
+libre. RULES-COMB_BASE_07 "Silvered Sword" ajoute, copie exacte du Sword (COMB_BASE_06),
+seule l Availability passe a Scarce. Choix rattache : RULES-COMB_ESCR_04/RULES-COMB_BASE_07.
+XML revalide bien forme.
+
+15/09/2026 - MATERIAU BOUCLIERS V5 ET GENERIQUE GREAT WEAPON : LOT COMPLET
+Recapitulatif du lot "decisions rapides" du jour avec Nono, trois points d A FAIRE.txt :
+materiau des boucliers V5 laisse tel quel (voir entree plus haut), generique Great Weapon
+ajoute cote V5, Silvered Sword cree (ci-dessus). Fichiers modifies au total pour ce lot :
+DATABASE/WFRP5/BOOK_RULESBOOK.Xml, A FAIRE.txt, CONTEXT.md, Log.txt.

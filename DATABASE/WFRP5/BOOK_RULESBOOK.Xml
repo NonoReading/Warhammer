@@ -9225,7 +9225,7 @@ Witch Hunters travel constantly, following rumours of unsanctioned magic, hearin
 <Item name="RULES-TRAP_056">"2"</Item>
 <Item name="RULES-ARMO_05">"2"</Item>
 <Item name="RULES-TRAP_150">"2"</Item>
-<Item name="Rapier or Silvered Sword">"2"</Item>
+<Item name="RULES-COMB_ESCR_04/RULES-COMB_BASE_07">"2"</Item>
 <Item name="RULES-TRAP_29">"2"</Item>
 <Item name="Quality Clothing">"3"</Item>
 <Item name="Subordinate Interrogators">"3"</Item>
@@ -9486,7 +9486,7 @@ Guard duty is not always exciting — most of the time it involves standing arou
 <Item name="RULES-ARMO_11">"2"</Item>
 <Item name="RULES-ARMO_02">"2"</Item>
 <Item name="RULES-COMB_HAST_04">"2"</Item>
-<Item name="Great Weapon or Halberd">"3"</Item>
+<Item name="RULES-COMB_2M_*/RULES-COMB_HAST_01">"3"</Item>
 <Item name="RULES-ARMO_14">"3"</Item>
 <Item name="RULES-TRAP_067">"3"</Item>
 <Item name="RULES-ARMO_13">"4"</Item>
@@ -9748,7 +9748,7 @@ The pit is a hard master, and many fighters seize any chance to escape the viole
 <Item name="RULES-TRAP_02">"1"</Item>
 <Item name="RULES-COMB_BAGAR_02">"1"</Item>
 <Item name="RULES-ARMO_05">"1"</Item>
-<Item name="Flail or Great Weapon">"2"</Item>
+<Item name="RULES-COMB_FLEAU_01/RULES-COMB_2M_*">"2"</Item>
 <Item name="RULES-COMB_BASE_05/RULES-COMB_FLEAU_04">"2"</Item>
 <Item name="RULES-ARMO_02">"2"</Item>
 <Item name="RULES-ARMO_13">"3"</Item>
@@ -12466,6 +12466,26 @@ Playing a Wrecker means you are adept at ambushes, stealth, and intimidation, wi
 <Hand>"1"</Hand>
 <Ammunition>"0"</Ammunition>
 </Weapon>
+<Weapon id="RULES-COMB_BASE_07">
+<Description language="ENGLISH">"Silvered Sword"</Description>
+<Skill>"RULES-COMPCOMB_BASE"</Skill>
+<Damage>"+(BATTR_S)+4"</Damage>
+<Availability>"RULES-DISPO_SCARCE"</Availability>
+<Reach>"RULES-WEAPR_AVERAGE"</Reach>
+<Price>"4CO"</Price>
+<Encumbrance>"1"</Encumbrance>
+<Quality>"-"</Quality>
+<Hand>"1"</Hand>
+<Ammunition>"0"</Ammunition>
+  <!-- Ajoute le 15/09/2026 (A FAIRE.txt) : le livre (Witchfinder General, RULES-WORK54,
+       niveau 2) ne vend nulle part de "Silvered Sword" au catalogue - aucune regle
+       "argente"/Silver n'existe dans le modele (folklore Witch Hunter contre morts-vivants/
+       demons, sans mecanique associee). Decision de Nono : creer quand meme une entree pour
+       tracer le choix plutot que le laisser en texte libre - copie exacte du Sword
+       (RULES-COMB_BASE_06), seule l'Availability passe a Scarce (objet moins courant qu'une
+       epee ordinaire). Pas de bonus/malus mecanique lie a l'argent.
+  -->
+</Weapon>
 <Weapon id="RULES-COMB_BAGAR_01">
 <Description language="ENGLISH">"Garrote"</Description>
 <Skill>"RULES-COMPCOMB_BAGAR"</Skill>
@@ -12681,6 +12701,22 @@ Playing a Wrecker means you are adept at ambushes, stealth, and intimidation, wi
 <Quality>"RULES-WEAPB05,RULES-WEAPB07"</Quality>
 <Hand>"2"</Hand>
 <Ammunition>"0"</Ammunition>
+</Weapon>
+<Weapon id="RULES-COMB_2M_*">
+<Description language="ENGLISH">"Two-handed weapons (Any)"</Description>
+<Skill>"-"</Skill>
+<Damage>"-"</Damage>
+<Availability>"-"</Availability>
+<Reach>"-"</Reach>
+<Price>"-"</Price>
+<Encumbrance>"0"</Encumbrance>
+<Quality>"-"</Quality>
+<Hand>"0"</Hand>
+<Ammunition>"0"</Ammunition>
+  <!-- Ajoute le 15/09/2026 (A FAIRE.txt) : generique manquant cote V5, sur le modele exact de
+       RULES-COMB_2M_* du Rulebook V4 (DATABASE/WFRP4/BOOK_RULESBOOK.Xml) - meme convention que
+       RULES-COMB_*/RULES-PROJ_* deja presents dans ce fichier. Rattache "Great Weapon or
+       Halberd" et "Flail or Great Weapon" (choix de carriere non convertis jusque-la). -->
 </Weapon>
 <Weapon id="RULES-COMB_2M_01">
 <Description language="ENGLISH">"Bastard Sword"</Description>

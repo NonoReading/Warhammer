@@ -22,7 +22,34 @@ Lot "vérifications de source" d'`A FAIRE.txt` (corrections courtes) :
    12 (repris du Rulebook) reste une hypothèse assumée faute de mieux - laissé tel quel,
    item d'A FAIRE.txt reformulé pour ne plus le ressortir comme question ouverte sans piste.
 
-Pas encore committé - à faire avec le prochain lot ou sur demande de Nono.
+Committé (`a0bff2b`).
+
+---
+
+**15/09/2026 (suite) — GÉNÉRIQUE "GREAT WEAPON (ANY)" AJOUTÉ CÔTÉ V5.** "Great Weapon or
+Halberd" et "Flail or Great Weapon" (`BOOK_RULESBOOK.Xml` V5) restaient non rattachés faute
+de générique "Two-handed weapons (Any)" côté V5 - V4 l'a déjà (`RULES-COMB_2M_*`,
+`DATABASE/WFRP4/BOOK_RULESBOOK.Xml`). Identifié avec Nono : "Great Weapon" désigne la famille
+Two-Handed (`RULES-COMPCOMB_2M`) - les deux choix opposent toujours une arme d'une **autre**
+famille (Halberd = Polearm, Flail = Flail) à "Great Weapon", cohérent avec la compétence
+combinée "Melee (Flail or Two Handed)" déjà présente dans le livre V5 (ligne 518). Ajouté
+`RULES-COMB_2M_*` "Two-handed weapons (Any)" dans `DATABASE/WFRP5/BOOK_RULESBOOK.Xml`
+(juste avant `RULES-COMB_2M_01`), sur le modèle exact de V4 - même convention que
+`RULES-COMB_*`/`RULES-PROJ_*` déjà présents côté V5. Les deux choix rattachés :
+`RULES-COMB_2M_*/RULES-COMB_HAST_01` et `RULES-COMB_FLEAU_01/RULES-COMB_2M_*`. XML revalidé
+bien formé (changement de donnée seul, pas de recompilation nécessaire).
+
+**Boucliers V5 (matériau)** : tranché avec Nono - on laisse sans `<Type>`, pas d'invention de
+matériau. Aucun changement de donnée.
+
+**Silvered Sword ajoutée** : "Rapier or Silvered Sword" (Witchfinder General, `RULES-WORK54`,
+niveau 2) n'a aucune règle "argenté" dans le modèle (folklore Witch Hunter sans mécanique
+associée). Décision de Nono : créer l'entrée quand même pour tracer le choix plutôt que de le
+laisser en texte libre. `RULES-COMB_BASE_07` "Silvered Sword" ajoutée - copie exacte du Sword
+(`RULES-COMB_BASE_06`), seule l'`Availability` passe à Scarce. Choix rattaché :
+`RULES-COMB_ESCR_04/RULES-COMB_BASE_07`. XML revalidé bien formé.
+
+Les trois décisions rapides d'A FAIRE.txt sont closes. Pas encore committé.
 
 ---
 
