@@ -436,10 +436,13 @@ Each assistant provides the normal +10 bonus (WFRP page 155) whether it knows th
 <Availability>"RULES-DISPO_LIMITED"</Availability>
 <Price>"18/-"</Price>
 <Encumbrance>"1"</Encumbrance>
-<Quality>"RULES-ARMOB_08,ARCH3-ARMOB_09"</Quality>
+<Quality>"RULES-ARMOB_08"</Quality>
 <Location>"RULES-ARMOL_ARM,RULES-ARMOL_BODY,RULES-ARMOL_LEG"</Location>
 <ArmorPoint>"0"</ArmorPoint>
 <Type>"RULES-ARMOT_SOFTKITS"</Type>
+  <!-- Corrige le 15/09/2026 (A FAIRE.txt) : le Soft Kit simple portait a tort la qualite
+       Reinforced (ARCH3-ARMOB_09), qui n'appartient qu'au Reinforced Soft Kit ci-dessous -
+       le tableau du livre p.37 donne "-" (aucune qualite) pour cette ligne. -->
 </Armor>
 <Armor id="ARCH3-ARMO_17">
 <Description language="ENGLISH">"Reinforced Soft Kit"</Description>

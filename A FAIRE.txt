@@ -73,14 +73,6 @@ LES EXPORTS DE TABLES FILLES PEUVENT PERDRE DES LIGNES EN SILENCE. xmlexportimpo
 sans message. Sain avec les donnees actuelles, verifie le 05/09/2026. A recontroler apres
 tout nouvel import de livre.
 
-LE SOFT KIT SIMPLE PORTE LA QUALITE "REINFORCED", COMME LE REINFORCED SOFT KIT. Archives III,
-ARCH3-ARMO_xx lignes 438 et 448 du XML : "Soft Kit" a ARMOB_08,ARCH3-ARMOB_09 et "Reinforced
-Soft Kit" a ARMOB_03,ARCH3-ARMOB_09,ARMOB_08 - la seule difference est Partial. Si ARMOB_09 est
-bien "Reinforced", le premier ne devrait pas l avoir et la distinction entre les deux pieces
-disparait. Releve le 05/09/2026 en prefixant les references (CONTEXT.md 2.49) ; le prefixe pose
-est ARCH3, ce qui conserve la resolution actuelle. Reste a verifier dans le PDF d Archives of
-the Empire III quelle qualite le livre donne au Soft Kit de base.
-
 [REGLE LE 05/09/2026 - conserve comme point tranche, ne plus le ressortir en anomalie]
 LES BORNES "TO 11" SUR TABATTRIBUT NE SONT PAS UN BUG. ColAttCC..ColAttSoc = 2..11, puis
 Destin 12, Resilience 13, Blessure 14 : la borne s arrete pile apres Sociabilite, c est une
@@ -106,10 +98,12 @@ CONTEXT.md 2.53). Fonctionne pour un chiffre unique (Fear 1), casserait sur un i
 chiffres ou plus. Sans effet aujourd hui, aucune donnee de ce type n existe. A corriger la
 ou verifier si un futur indice a deux chiffres apparait.
 
+[VERIFIE LE 15/09/2026 - RIEN DE PLUS TROUVE, RESTE UNE HYPOTHESE ASSUMEE]
 LA QUANTITE DES MUNITIONS DE NATIONS OF MANKIND EST UNE DEDUCTION. Les trois Arrow (Armor
-Piercing / Incendiary / Screamer) portent Ammunition 12, repris du Rulebook : le livre ne dit
-pas par combien elles se vendent. Pellets (12) et Revolver Shot (6) portent la leur dans leur
-nom. A confirmer si le livre le precise ailleurs.
+Piercing / Incendiary / Screamer) portent Ammunition 12, repris du Rulebook : le tableau du
+livre (PDF_TEXTE/Nations of Mankind.txt l.4077-4079) ne donne aucune quantite pour ces trois
+lignes, contrairement a Pellets (12) et Revolver Shot (6) qui l indiquent dans leur nom - pas
+d autre passage trouve qui la precise. 12 (Rulebook) reste la meilleure valeur disponible.
 
 LE MODELE NE PORTE PAS LES PSYCHOLOGIES. Constate le 04/09/2026 sur Prejudice (Bretonnians)
 et Prejudice (Tileans) de Nations of Mankind : le livre les nomme des Psychologies, distinctes
@@ -117,11 +111,13 @@ de Hatred, et rien en base ne sait les representer. Non saisis, decision Nono : 
 culturel, informatif, sans effet de fiche. A rouvrir le jour ou d autres psychologies
 arriveront - il y en aura.
 
-TROIS SORTS DE WINDS OF MAGIC SONT PEUT-ETRE MAL CLASSES EN GENERIQUES. Fly-Infested Rotweed,
-Lifebloom Silt et Belligerence of the Bloodmarsh portent <Talent>"RULES-T0088_*" et
-apparaissent donc chez n importe quel lanceur - vu le 04/09/2026 sur une Ice Witch de Nations
-of Mankind. Leurs noms evoquent le Bloodmarsh, qui est un domaine et pas du generique.
-Verifier la ligne "Type:" de ces trois sorts dans le livre.
+[VERIFIE LE 15/09/2026 - CLASSEMENT CONFIRME BON, NE PLUS LE RESSORTIR EN ANOMALIE]
+Fly-Infested Rotweed, Lifebloom Silt et Belligerence of the Bloodmarsh (Winds of Magic) sont
+bien des sorts generiques malgre leur nom evoquant le Bloodmarsh : le livre les place sous
+l entete "NEW ARCANE SPELLS", explicitement "Spellcasters of any Lore of Magic can learn" et
+"counted as Lore spells... learned from and taught to those sharing the same Arcane Magic
+Talent" (Winds_Of_Magic.txt l.1322-1351). TypSpell="Arcane Magic" et <Talent>RULES-T0088_*
+sont donc corrects.
 
 RELIRE LES ONZE EXPLANATION DES ETHNIES DE NATIONS OF MANKIND. Elles sont REDIGEES et non
 tirees du livre, dont les pages 3-4 ne portent que des listes de competences et de talents.

@@ -1,8 +1,34 @@
 # Warhammer — Contexte projet
 
+**15/09/2026 — DESCENTE DU BACKLOG : TROIS VÉRIFICATIONS DE SOURCE, UN CORRECTIF DE DONNÉE.**
+Lot "vérifications de source" d'`A FAIRE.txt` (corrections courtes) :
+1. **Winds of Magic, trois sorts suspectés mal classés en génériques** (Fly-Infested Rotweed,
+   Lifebloom Silt, Belligerence of the Bloodmarsh - nom évoquant le domaine Bloodmarsh) :
+   **confirmés bons**. Le livre les place sous l'entête "NEW ARCANE SPELLS", explicitement
+   apprenables par tout lanceur partageant le talent Arcane Magic
+   (`LIVRES/Winds_Of_Magic.txt` l.1322-1351) - `TypSpell="Arcane Magic"` et
+   `<Talent>RULES-T0088_*</Talent>` sont donc corrects. Point tranché, retiré d'A FAIRE.txt.
+2. **Archives of the Empire III, Soft Kit simple portait à tort la qualité Reinforced**
+   (`ARCH3-ARMOB_09`), qui n'appartient qu'au Reinforced Soft Kit - seule `Partial`
+   différenciait vraiment les deux pièces. Le tableau du livre p.37 donne "-" (aucune
+   qualité) pour le Soft Kit simple et "Partial, Reinforced" pour le renforcé
+   (`LIVRES/Archives_of_the_Empire_III.txt` l.1868-1874). Corrigé dans
+   `BOOK_ARCHIVES_OF_THE_EMPIRE_III.Xml` (`ARCH3-ARMO_16`, ligne ~439) : `Quality` ne porte
+   plus que `RULES-ARMOB_08`. XML revalidé bien formé (pas de recompilation nécessaire,
+   changement de donnée seul).
+3. **Nations of Mankind, quantité des munitions Arrow (Armor Piercing/Incendiary/Screamer)** :
+   revérifié, le livre ne la précise nulle part (`PDF_TEXTE/Nations of Mankind.txt`
+   l.4077-4079), contrairement à Pellets (12)/Revolver Shot (6) qui l'indiquent dans leur nom.
+   12 (repris du Rulebook) reste une hypothèse assumée faute de mieux - laissé tel quel,
+   item d'A FAIRE.txt reformulé pour ne plus le ressortir comme question ouverte sans piste.
+
+Pas encore committé - à faire avec le prochain lot ou sur demande de Nono.
+
+---
+
 **14/09/2026 (suite 9) — WINMETIER : RACES REGROUPÉES PAR ESPÈCE (ETHNIES REPLIÉES PAR
-DÉFAUT), ET LES 30 CARRIÈRES NATIONS OF MANKIND RATTACHÉES À UNE ETHNIE. Codé et compilé,
-test en jeu par Nono en cours.**
+DÉFAUT), ET LES 30 CARRIÈRES NATIONS OF MANKIND RATTACHÉES À UNE ETHNIE. Codé, compilé et
+testé en jeu par Nono le 15/09/2026 : OK, commité (`5c06c1d`). Chantier terminé.**
 
 **1. WinMetier affichait une ligne par ethnie, pas par race** : pour un métier humain
 accessible à toutes les ethnies, la branche "races possibles" listait une vingtaine de
@@ -67,9 +93,9 @@ hors tirage, jamais dans la table de jet d100 recopiée de Reikland) :
   total) avant chaque remplacement. `BOOK_UP_IN_ARMS.Xml`/`BOOK_SEA_OF_CLAWS.Xml` inchangés.
 - **A FAIRE.txt nettoyé** : l'item "NE SONT LIES A AUCUNE RACE" retiré (traité).
 
-Compilé (`lazbuild`, 0 erreur) après le code et après la donnée. Nono va tester en jeu
-(regroupement des races dans WinMetier + apparition des 30 carrières Nations of Mankind
-sous leur ethnie) - résultat à consigner ici à la prochaine session.
+Compilé (`lazbuild`, 0 erreur) après le code et après la donnée. Testé en jeu par Nono le
+15/09/2026 (regroupement des races dans WinMetier + apparition des 30 carrières Nations of
+Mankind sous leur ethnie) : confirmé bon, commité.
 
 ---
 

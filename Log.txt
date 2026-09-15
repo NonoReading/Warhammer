@@ -4563,3 +4563,25 @@ SONT LIES A AUCUNE RACE" retire d'A FAIRE.txt (traite). Compile (lazbuild, 0 err
 chaque etape. Nono va tester en jeu.
 Fichiers modifies : winmetier.pas, xmlexportimport.pas, DATABASE/WFRP4/
 BOOK_NATIONS_OF_MANKIND.Xml, A FAIRE.txt, CONTEXT.md, Log.txt.
+
+15/09/2026 - WINMETIER RACES/NATIONS OF MANKIND : TEST EN JEU CONFIRME BON
+Regroupement des races par espece dans WinMetier (ethnies repliees par defaut) et
+rattachement des 30 carrieres NATIO-WORK001 a 030 a leur ethnie (CONTEXT.md suite 9,
+14/09/2026) : teste en jeu par Nono, resultat bon. Commite (5c06c1d).
+
+15/09/2026 - DESCENTE DU BACKLOG : TROIS VERIFICATIONS DE SOURCE
+A FAIRE.txt, lot "verifications de source" :
+1. Winds of Magic, trois sorts (Fly-Infested Rotweed, Lifebloom Silt, Belligerence of the
+Bloodmarsh) suspectes mal classes en generiques (nom evoquant un domaine) : confirme bons.
+Le livre les place sous "NEW ARCANE SPELLS", explicitement apprenables par tout lanceur
+partageant le talent Arcane Magic (Winds_Of_Magic.txt l.1322-1351). Point tranche.
+2. Archives of the Empire III, Soft Kit simple : corrige. Portait a tort la qualite
+Reinforced (ARCH3-ARMOB_09), qui n appartient qu au Reinforced Soft Kit - le tableau du
+livre p.37 donne "-" (aucune qualite) pour le Soft Kit simple. XML corrige, revalide bien
+forme.
+3. Nations of Mankind, quantite des munitions Arrow (Armor Piercing/Incendiary/Screamer) :
+reverifie, le livre ne la precise nulle part (contrairement a Pellets/Revolver Shot qui
+l indiquent dans leur nom). 12 (repris du Rulebook) reste une hypothese assumee, rien de
+mieux trouve.
+Fichiers modifies : DATABASE/WFRP4/BOOK_ARCHIVES_OF_THE_EMPIRE_III.Xml, A FAIRE.txt,
+CONTEXT.md, Log.txt.
