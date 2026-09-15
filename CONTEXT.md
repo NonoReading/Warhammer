@@ -1,7 +1,90 @@
 # Warhammer — Contexte projet
 
-**REPRISE (15/09/2026, suite)** : audit "listes fermées" clos (4/4 candidats traités et
-compilés, le dernier testé en jeu par Nono). Rien d'autre en cours. Pas encore committé.
+**REPRISE (15/09/2026, suite)** : ancrage de la fenêtre principale (TMenu) **terminé et
+confirmé par Nono en jeu.** Rien d'autre en cours. Committé.
+
+---
+
+**15/09/2026 (suite) — ANCRAGE DE LA FENÊTRE PRINCIPALE (TMenu) : CHANTIER CLOS.** Suite
+et fin de l'entrée précédente (voir plus bas). `TabLivre` et `TabPersonnage` se
+partagent l'écart moitié-moitié à l'élargissement (`AjustePositionFenetre`, rappelée sur
+`OnResize`), tout ce qui est entre les deux et après suit en chaîne. Quatre occurrences
+du même piège trouvées et corrigées en testant avec Nono (un contrôle à position fixe
+qui dépasse le bord de la table/colonne censée le contenir dès que celle-ci rétrécit) :
+- `TabLivre` vs ses 4 boutons Livre (`ButtonExportLivre`/`OuvrirLivre`/
+  `DisclaimerLivre`/`CreationLivre`, `Left` fixe) - `TabLivre.Constraints.MinWidth`
+  calculé en code (`FormCreate`) depuis leur géométrie réelle, pas une valeur en dur.
+- `TabPersonnage` vs `ButtonPdf` (seul bouton de sa colonne à ne pas démarrer à son bord
+  gauche) - même principe, `TabPersonnage.Constraints.MinWidth` calculé depuis
+  `ButtonPdf`.
+- `Button2` (ligne séparatrice horizontale) vs `Panel2`/`Panel3` (Version/Interface) -
+  prend le plus grand des deux bords droits.
+- `Button1`/colonne Bibliothèque vs `Panel2`/`Panel3` - `Button1.Left` borné à ne jamais
+  descendre sous leur bord droit.
+Les deux derniers points sont désormais surtout une marge de sécurité : Nono a ensuite
+déplacé `Panel2`/`Panel3`/`Label4`/`Label5` (Version/Interface) au bord gauche de la
+fenêtre (`Left=792`→`8`, à la main dans l'IDE) une fois le reste validé - un choix de
+Nono, pas un correctif de cette session. **Testé en jeu par Nono à plusieurs largeurs de
+fenêtre : "parfait".** Compilé (`lazbuild`, 0 erreur à chaque étape). Committé.
+
+---
+
+---
+
+**15/09/2026 (suite) — ANCRAGE DE LA FENÊTRE PRINCIPALE (TMenu) REFAIT.** Demande de Nono
+(A FAIRE.txt, item du 13/09/2026) : `TabLivre` et `TabPersonnage` (`warhammersource.lfm`)
+étaient `Anchors=[akTop,akLeft,akBottom]` sans `akRight` - figés en largeur à
+l'élargissement de la fenêtre.
+
+Même principe que `AjustePositionTables` (`winpersonnage.pas`, déjà éprouvé sur ce projet
+après un essai infructueux d'ancrage LCL pur) : pas d'`Anchors`/`AnchorSide` LCL sur les
+deux tables ni sur les contrôles à droite, mais un recalcul manuel en code, rappelé à
+chaque `OnResize`. Nouvelle procédure `TMenu.AjustePositionFenetre`
+(`warhammersource.pas`), appelée depuis un nouveau `FormResize` :
+- `TabLivre.Width`/`TabPersonnage.Width` grandissent chacune de la moitié de l'écart entre
+  `Self.ClientWidth` courant et une largeur de référence (`LargeurFenetreBase`/
+  `LargeurTabLivreBase`/`LargeurTabPersonnageBase`, 3 nouveaux champs privés). Le reste
+  d'un écart impair va à `TabPersonnage`, pour que la somme des deux largeurs colle
+  exactement à l'écart total.
+- `Button3` (séparateur entre les deux tables), `TabPersonnage.Left`, puis `Button1`
+  (séparateur après `TabPersonnage`) sont réancrés en chaîne depuis la géométrie fraîche
+  des tables (jamais de valeur stockée pour ceux-là, toujours recalculée depuis l'état
+  courant - même principe que `AjustePositionTables`).
+- Toute la colonne "Bibliothèque" à droite de `Button1` (label, 7 `TBCButton`, 7 `TEdit`
+  de comptage, 7 `TImage` de couverture) suit par un même décalage, recalculée depuis
+  `Button1.Left` + l'écart fixe d'origine (16/64/184) mesuré dans le `.lfm`.
+- `Label2`/`ButtonCreation`/`ButtonModification`/`ButtonPdf` (au-dessus de
+  `TabPersonnage`) suivent `TabPersonnage.Left` (+224 pour `ButtonPdf`) - releve par Nono
+  en testant (15/09/2026, suite) : ils restaient figes alors que leur table bougeait.
+  `Button2` (ligne separatrice horizontale au-dessus des deux tables) s'elargit du meme
+  ecart total que les deux tables reunies, pour rester alignee sur le bord droit de
+  `TabPersonnage`.
+- `LargeurFenetreBase`/`LargeurTabLivreBase`/`LargeurTabPersonnageBase` ne sont PLUS
+  capturés en fin de `FormCreate` mais au premier passage réel dans
+  `AjustePositionFenetre` après construction (`FenetreInitialisee`, nouveau champ booléen
+  mis à `true` en fin de `FormCreate` à la place) : bug trouvé par Nono le 15/09/2026 en
+  relançant l'appli sans y toucher (affichage d'origine chevauchant Book/Characters,
+  boutons Livre superposés à la colonne Personnages) - une mise à l'échelle DPI peut
+  survenir entre la fin de `FormCreate` et le tout premier affichage réel, ce qui rendait
+  la référence capturée trop tôt fausse (écart énorme appliqué dès le premier
+  redimensionnement "réel", tables écrasées l'une sur l'autre). Rien à réancrer au tout
+  premier passage : l'état courant sert de référence.
+
+Point de vigilance non résolu, sans effet observé mais pas creusé : les 7 `TImage`
+`BoutonRace`/`Metier`/.../`Sort` portent déjà `Anchors=[akLeft,akRight]` avec
+`AnchorSideTop`/`Bottom`/`Right`.`Side=asrCenter` sans `Control` explicite (vestige du
+`.lfm`, nature exacte non élucidée) - mon assignation de `.Left` dans
+`AjustePositionFenetre` s'exécute après le passage d'ancrage LCL et devrait donc gagner à
+chaque tick, mais je n'ai pas vérifié en direct que ces 7 images ne dérivent pas d'une
+autre façon (largeur qui bougerait toute seule) pendant un drag. À surveiller au premier
+test réel de redimensionnement.
+
+Compilé (`lazbuild`, 0 erreur, seulement des hints préexistants sur des paramètres
+`Sender` non utilisés) après chaque correctif. Item retiré d'A FAIRE.txt (passé en
+travail actif). **Testé en jeu par Nono après élargissement : "presque parfait" avant les
+deux derniers correctifs (colonne Personnages, ligne séparatrice). Le bug de référence
+DPI au tout premier affichage n'est pas encore reconfirmé résolu en jeu** - point de
+reprise : relancer sans toucher à rien (affichage d'origine), puis élargir.
 
 ---
 

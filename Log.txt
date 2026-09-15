@@ -4722,3 +4722,194 @@ etape.
 Fichiers modifies : unitcalcul.pas, chargeconstantes.pas, warhammersource.pas,
 chargemetierequipement.pas, xmlexportimport.pas, winpersonnage.pas, winmetier.pas,
 wincreation.pas, pdfmetier.pas, winlivre.pas, A FAIRE.txt, CONTEXT.md, Log.txt.
+
+15/09/2026 - ANCRAGE DE LA FENETRE PRINCIPALE (TMenu) REFAIT, PAS ENCORE TESTE EN JEU
+Demande de Nono (A FAIRE.txt, item du 13/09/2026) : TabLivre et TabPersonnage
+(warhammersource.lfm) etaient Anchors=[akTop,akLeft,akBottom] sans akRight, figes en
+largeur a l'elargissement de la fenetre. Nono a precise le comportement voulu : les deux
+tables grandissent chacune de la moitie de l'ecart, et ce qui est a droite suit en
+proportion.
+Meme principe que AjustePositionTables (winpersonnage.pas, deja eprouve sur ce projet) :
+recalcul manuel en code plutot qu'Anchors/AnchorSide LCL. Nouvelle procedure
+TMenu.AjustePositionFenetre (warhammersource.pas), appelee depuis un nouveau FormResize.
+TabLivre.Width/TabPersonnage.Width grandissent chacune de la moitie de l'ecart entre
+Self.ClientWidth courant et une largeur de reference capturee une fois en fin de
+FormCreate (LargeurFenetreBase/LargeurTabLivreBase/LargeurTabPersonnageBase, apres
+AdjustGridColumnsWidth donc apres mise a l'echelle DPI). Button3 (separateur entre les
+deux tables), TabPersonnage.Left puis Button1 (separateur apres TabPersonnage) sont
+reancres en chaine depuis la geometrie fraiche des tables - jamais de valeur stockee pour
+ceux-la. Toute la colonne Bibliotheque a droite de Button1 (label, 7 TBCButton, 7 TEdit
+de comptage, 7 TImage de couverture) suit par le meme decalage, recalculee depuis
+Button1.Left + l'ecart fixe d'origine (16/64/184) mesure dans le .lfm.
+Point de vigilance note dans CONTEXT.md, pas creuse : les 7 TImage BoutonRace/Metier/.../
+Sort portent deja Anchors=[akLeft,akRight] avec AnchorSideTop/Bottom/Right.Side=asrCenter
+sans Control explicite (vestige du .lfm) - l'assignation de .Left dans
+AjustePositionFenetre s'execute apres le passage d'ancrage LCL et devrait gagner a chaque
+tick, mais pas verifie en direct.
+Compile (lazbuild, 0 erreur, seulement des hints preexistants). Pas encore teste en jeu
+(aucun acces a l'interface graphique depuis cette session) - a verifier par Nono en
+redimensionnant la fenetre. Pas encore committe.
+Fichiers modifies : warhammersource.pas, warhammersource.lfm, A FAIRE.txt, CONTEXT.md,
+Log.txt.
+
+15/09/2026 (suite) - ANCRAGE FENETRE PRINCIPALE : COLONNE PERSONNAGES + LIGNE
+SEPARATRICE SUIVENT LEUR TABLE, PUIS BUG DE REFERENCE DPI CORRIGE
+Trois allers-retours avec Nono en testant l'ancrage de TMenu (voir entree precedente) :
+1. Label2 ("Personnages"), ButtonCreation, ButtonModification et ButtonPdf, au-dessus de
+   TabPersonnage, restaient figes alors que la table bougeait - suivent maintenant
+   TabPersonnage.Left (+224 pour ButtonPdf).
+2. Button2 (ligne separatrice horizontale au-dessus des deux tables) ne s'elargissait pas
+   avec elles - s'elargit maintenant du meme ecart total que TabLivre+TabPersonnage
+   reunies, pour rester alignee sur le bord droit de TabPersonnage.
+3. Nono a signale l'affichage D'ORIGINE (au tout premier lancement, sans redimensionner)
+   casse : boutons de la colonne Livre (Export Livre/Open book/Disclaimer/New book)
+   superposes a la colonne Personnages. Cause : LargeurFenetreBase/LargeurTabLivreBase/
+   LargeurTabPersonnageBase etaient captures en fin de FormCreate - si une mise a
+   l'echelle DPI survient entre la fin de FormCreate et le tout premier affichage reel
+   (plausible, DesignTimePPI=120 dans le .lfm), la reference capturee est fausse et le
+   premier redimensionnement "reel" applique un ecart enorme, ecrasant TabLivre et
+   TabPersonnage l'un sur l'autre. Corrige : la reference n'est plus capturee en fin de
+   FormCreate mais au premier passage reel dans AjustePositionFenetre (nouveau champ
+   FenetreInitialisee, booleen, mis a true en fin de FormCreate a la place) - rien a
+   reancrer a ce premier passage, l'etat courant sert de reference.
+Compile (lazbuild, 0 erreur) apres chaque correctif. Pas encore reconfirme en jeu apres
+le dernier correctif (reference DPI) - a verifier par Nono : relancer sans toucher a
+rien, puis elargir. Pas encore committe.
+Fichiers modifies : warhammersource.pas, CONTEXT.md, Log.txt.
+
+15/09/2026 (suite) - ANCRAGE FENETRE PRINCIPALE : PLANCHER DE LARGEUR AJOUTE SUR
+TABLIVRE/TABPERSONNAGE
+Nono a re-teste apres le correctif de reference DPI (entree precedente) : l'affichage
+superpose (boutons Livre sur la colonne Personnages) revenait en agrandissant la
+fenetre - cause exacte pas identifiee avec certitude (pas d'acces a l'interface
+graphique depuis cette session pour observer le drag en direct). Nono a propose un
+plancher de largeur sur les tables. Ajoute en attendant un diagnostic plus precis :
+EcartTotal (ecart entre la largeur courante et la reference) est borne a 0 avant de
+repartir sur TabLivre/TabPersonnage - les deux tables ne peuvent plus jamais redescendre
+sous leur taille de depart, quelle qu'en soit la cause. Si la fenetre se retrecit sous
+la reference, c'est desormais la colonne Bibliotheque a droite qui sortirait
+progressivement du cadre visible plutot que les deux tables qui se chevauchent.
+Compile (lazbuild, 0 erreur). Pas encore reconfirme en jeu - a verifier par Nono en
+agrandissant. Si le probleme persiste malgre ce plancher, il faudra un diagnostic plus
+precis (bord tire a la souris ou double-clic/maximiser ? l'affichage superpose
+apparait-il progressivement pendant le drag ou d'un coup ?). Pas encore committe.
+Fichiers modifies : warhammersource.pas, CONTEXT.md, Log.txt.
+
+15/09/2026 (suite) - ANCRAGE FENETRE PRINCIPALE : VRAIE CAUSE DU CHEVAUCHEMENT TROUVEE
+(CHARGERPERSONNAGES)
+Nono a pointe la bonne piste apres l'echec du plancher de largeur (entree precedente) :
+"ma fonction de mise a jour de la presentation modifie sa taille". Verifie - confirme.
+ChargerPersonnages (warhammersource.pas) fait son propre AdjustGridColumnsWidth
+(TabPersonnage, ...) en fin de fonction, avec une marge de 0 au lieu de la marge de 10
+utilisee dans les deux appels de FormCreate. ChargerPersonnages n'est pas appelee que
+dans FormCreate (avant l'ancrage) - FormActivate la rappelle aussi si NeedUpdate est vrai,
+donc APRES que l'ancrage de la fenetre a deja pose sa reference. Ce second appel
+retrecit TabPersonnage.Width EN DEHORS de tout redimensionnement de fenetre, sans
+repasser par AjustePositionFenetre - Button3, TabPersonnage.Left, Button1 et toute la
+colonne Bibliotheque restaient alors calcules sur l'ancienne (plus grande) largeur,
+d'ou le chevauchement des boutons Livre sur la colonne Personnages des que la fenetre
+etait agrandie ensuite (le redimensionnement suivant appliquait l'ecart sur un etat deja
+desynchronise).
+Corrige : AjustePositionFenetre() rappelee explicitement a la fin de ChargerPersonnages
+(apres son propre AdjustGridColumnsWidth) pour reancrer toute la chaine depuis l'etat
+courant. Meme risque identifie et corrige dans RafraichirLibellesMenu par precaution
+(fait ses propres AdjustGridColumnsWidth avec marge 10 puis restaure les largeurs
+memorisees, mais ne touchait jamais Button3/TabPersonnage.Left/Button1/colonne
+Bibliotheque) - AjustePositionFenetre() ajoutee en fin de fonction, apres la remise en
+place des tailles.
+Compile (lazbuild, 0 erreur). Pas encore reconfirme en jeu - a verifier par Nono en
+agrandissant la fenetre. Pas encore committe.
+Fichiers modifies : warhammersource.pas, CONTEXT.md, Log.txt.
+
+15/09/2026 (suite) - ANCRAGE FENETRE PRINCIPALE : PISTE CHARGERPERSONNAGES INVALIDEE,
+RETOUR A UNE REFERENCE SIMPLE + MINWIDTH SUR LES DEUX TABLES
+Nono a reteste : chevauchement toujours present en agrandissant, malgre le correctif
+ChargerPersonnages de l'entree precedente. Verifie : NeedUpdate vaut false par defaut
+(chargeconstantes.pas:617), donc FormActivate n'appelle jamais ChargerPersonnages sur un
+lancement simple - la piste etait fausse, le correctif reste en place (defensif, sans
+effet demontre) mais n'explique pas le symptome observe.
+Revenu en arriere sur la capture de reference : la version "premier OnResize reel apres
+construction" (tentative pour parer une hypothetique mise a l'echelle DPI tardive)
+n'a rien resolu et ajoutait de la complexite - retour a une capture simple et
+deterministe en fin de FormCreate (LargeurFenetreBase/LargeurTabLivreBase/
+LargeurTabPersonnageBase).
+Ajoute a la demande de Nono ("on ne peut pas donner une taille min pour le tableau ?") :
+Constraints.MinWidth pose directement dans le .lfm, TabLivre=300 et TabPersonnage=400 -
+filet de securite au niveau LCL, independant des calculs Pascal d'AjustePositionFenetre
+(qui borne deja EcartTotal a 0, donc les deux protections se recouvrent en partie mais
+pas totalement).
+Compile (lazbuild, 0 erreur). Cause exacte du chevauchement en agrandissant TOUJOURS PAS
+identifiee avec certitude - aucun acces a l'interface graphique depuis cette session pour
+observer le drag en direct. Si ca persiste, il faudra un diagnostic plus precis avec Nono
+avant de retenter un correctif a l'aveugle.
+Fichiers modifies : warhammersource.pas, warhammersource.lfm, CONTEXT.md, Log.txt.
+
+15/09/2026 (suite) - ANCRAGE FENETRE PRINCIPALE : VRAIE CAUSE TROUVEE PAR NONO (BOUTONS
+LIVRE FIXES DEPASSANT TABLIVRE)
+Nono a repere ce qui echappait aux tentatives precedentes : les 4 boutons Livre
+(ButtonExportLivre/OuvrirLivre/DisclaimerLivre/CreationLivre, Left=224 fixe dans le
+.lfm, jamais reancres par AjustePositionFenetre car consideres comme "dans" la colonne
+TabLivre) s'etendent jusqu'a x=408. TabLivre.Left=16, donc il faut TabLivre.Width >= 392
+pour que ces boutons restent dans les bornes de la table. Le Constraints.MinWidth=300
+pose lors d'une tentative precedente (arbitraire, jamais recale sur cette geometrie)
+laissait TabLivre descendre sous ce seuil - les boutons debordaient alors sur Button3/
+TabPersonnage, chevauchement observe par Nono independamment de la cause exacte du
+retrecissement (redimensionnement, AdjustGridColumnsWidth, etc. - la vraie faille etait
+le plancher lui-meme, pas ce qui le declenchait).
+Corrige (FormCreate, warhammersource.pas) : TabLivre.Constraints.MinWidth n'est plus une
+valeur recopiee en dur mais calcule depuis la geometrie reelle des 4 boutons (Left+Width
+du plus large des quatre, moins TabLivre.Left) - reste juste si le .lfm bouge.
+Compile (lazbuild, 0 erreur). Pas encore reconfirme en jeu - a verifier par Nono en
+agrandissant puis retrecissant la fenetre. Pas encore committe.
+Fichiers modifies : warhammersource.pas, CONTEXT.md, Log.txt.
+
+15/09/2026 (suite) - ANCRAGE FENETRE PRINCIPALE : MEME CORRECTIF SUR TABPERSONNAGE/
+BUTTONPDF, BUTTON2 REANCREE SUR PANEL2/PANEL3
+Livre confirme resolu par Nono (entree precedente). Meme famille de piege repetee sur
+la colonne Personnages, signalee par Nono : ButtonPdf (le seul bouton de cette colonne
+qui ne demarre pas au bord gauche de TabPersonnage, +224 dans le .lfm) deborderait a
+droite si TabPersonnage descendait sous ButtonPdf.Left-TabPersonnage.Left+ButtonPdf.Width
+(432). Corrige (FormCreate) : TabPersonnage.Constraints.MinWidth calcule pareil,
+depuis la geometrie reelle de ButtonPdf.
+Nono a aussi demande que Button2 (ligne separatrice horizontale au-dessus des deux
+tables) ne s'arrete jamais avant Panel2/Panel3 (combos Version/Interface, jamais
+reancres, bord droit fixe Left=792+Width=160=952) - jusqu'ici Button2.Width ne suivait
+que le bord droit de TabPersonnage, qui pouvait redescendre pres de son minimum et
+finir avant les deux panels. Corrige (AjustePositionFenetre) : Button2.Width prend le
+plus grand des deux (bord droit de TabPersonnage, bord droit de Panel2).
+Compile (lazbuild, 0 erreur). Pas encore reconfirme en jeu (colonne Characters/PDF et
+Button2 vs Panel2/Panel3) - a verifier par Nono. Pas encore committe.
+Fichiers modifies : warhammersource.pas, CONTEXT.md, Log.txt.
+
+15/09/2026 (suite) - ANCRAGE FENETRE PRINCIPALE : PERSONNAGES/PDF CONFIRME, 4e OCCURRENCE
+DU MEME PIEGE SUR BUTTON1/COLONNE BIBLIOTHEQUE VS PANEL2/PANEL3
+Personnages/PDF confirme resolu par Nono. Capture d'ecran fournie par Nono : a une
+largeur de fenetre reduite, les libelles Specie/Career (ButtonRace et les 6 autres
+TBCButton de la colonne Bibliotheque, +16 apres Button1) passaient sous les panels
+Version/Interface (Panel2/Panel3, Left=792 fixe, jamais reancres). Meme famille de
+piege que Livre/TabLivre et Personnages/ButtonPdf : Button1.Left (calcule depuis
+TabPersonnage.Left+Width+8) pouvait redescendre sous le bord droit de Panel2/Panel3 des
+que les deux tables approchaient leur minimum chacune.
+Corrige (AjustePositionFenetre) : Button1.Left borne a ne jamais descendre sous
+Panel2.Left+Panel2.Width-16 (le -16 pour que le premier element qui suit Button1,
+ButtonRace et cie, reste bien apres Panel2/Panel3 et non Button1 lui-meme).
+Compile (lazbuild, 0 erreur). Pas encore reconfirme en jeu - a verifier par Nono en
+retrecissant la fenetre au minimum. Pas encore committe.
+Fichiers modifies : warhammersource.pas, CONTEXT.md, Log.txt.
+
+15/09/2026 (suite) - ANCRAGE FENETRE PRINCIPALE : CHANTIER CLOS, CONFIRME PARFAIT PAR NONO
+Dernier correctif (Button1 vs Panel2/Panel3) confirme suffisant. Nono a ensuite deplace
+Panel2/Panel3/Label4/Label5 (Version/Interface) au bord gauche de la fenetre (Left=792
+vers 8, a la main dans l'IDE Lazarus) une fois le reste du comportement valide - choix de
+Nono, pas un correctif de cette session. Les clamps Button1/Button2 vs Panel2/Panel3
+restent en place, desormais surtout une marge de securite (le seuil qu'ils protegent
+est loin d'etre atteint avec Panel2/Panel3 pres du bord gauche).
+Recapitulatif du chantier (voir entrees precedentes pour le detail) : TabLivre et
+TabPersonnage se partagent l'ecart moitie-moitie a l'elargissement de la fenetre
+(AjustePositionFenetre, rappelee sur OnResize de TMenu) ; quatre occurrences du meme
+piege (un controle a position fixe depassant le bord de la table/colonne qui le contient
+des que celle-ci retrecit) trouvees et corrigees en testant avec Nono.
+Compile (lazbuild, 0 erreur). Teste en jeu par Nono a plusieurs largeurs de fenetre :
+"parfait".
+Fichiers modifies : warhammersource.pas, warhammersource.lfm, A FAIRE.txt, CONTEXT.md,
+Log.txt.

@@ -184,12 +184,6 @@ profils complets (caracteristiques, Traits, Optional) et la table d10 des elemen
 sont en fin d Explanation des sorts Form of the Frostfiend et Summon Djinn, faute de champ.
 A reprendre avec le morceau "creatures" du lot 3 si on veut de vraies creatures.
 
-REFAIRE L'ANCRAGE DE LA FENETRE PRINCIPALE (TMenu, Nono, 13/09/2026). TabLivre et
-TabPersonnage (warhammersource.lfm) sont aujourd'hui Anchors=[akTop,akLeft,akBottom], sans
-akRight : ils restent figes en largeur quand la fenetre s'elargit. A refaire pour qu'ils se
-partagent l'ecart moitie-moitie a l'elargissement, et deplacer/reancrer les controles
-places entre les deux (et apres) en consequence.
-
 LE CHANGEMENT DE LANGUE D'INTERFACE NE RAFRAICHIT PAS LES FENETRES SECONDAIRES DEJA
 OUVERTES (CONTEXT.md 2.70, 13/09/2026). ComboBoxLangueInterfaceSelect retraduit et
 rafraichit le menu principal (RafraichirLibellesMenu), mais contrairement au changement de
