@@ -60,6 +60,28 @@ dernier talent de la liste avait justement un `Resume` vide), sinon sauté en si
 en testant `Result.Resume`. Compilé (`lazbuild`, 0 erreur). **Pas encore testé en jeu** sur un
 vrai cas de spécialisation non trouvée - à surveiller au prochain personnage concerné.
 
+Committé (`9922b6b`).
+
+---
+
+**15/09/2026 (suite) — AUDIT (SOUS-AGENT) : PIÈGE FRANCO-ANGLAIS RIEN TROUVÉ, 4 LISTES
+FERMÉES REPÉRÉES.** Deux recherches d'A FAIRE.txt confiées à un sous-agent (pas de code
+modifié, audit seul) :
+1. **Piège de nommage franco-anglais** (cause du bug tarif arcanique du 02/09) : audité sur
+   tout le dépôt (`ColAtt*`/`ConstCarac*` et variables courtes type `BI`/`BAg`/`BInt`/...).
+   Rien trouvé - vérifié négativement, retiré d'A FAIRE.txt.
+2. **Listes fermées de type recopiées en dur** (même forme que les six `TypSpell`, 3 bugs
+   déjà produits) : 4 candidats trouvés, listés en détail dans A FAIRE.txt, aucun corrigé -
+   demandent un arbitrage avec Nono avant de toucher au code :
+   - `GetTypeMetierEquipement` (`unitcalcul.pas:230`) - préfixe `TRAP_` manquant, silencieux.
+   - Union `TypeEquipCC+CT+MU` ("est-ce une arme") recopiée à l'identique à 9 endroits dans
+     7 fichiers, aucun centralisé.
+   - `winlivre.pas` : deux `case TypeEquip` sur le même type-caractère traités différemment
+     (ligne 1226 vs 2753).
+   - `chargepersonnage.pas:1551/1569/1587` - `TypeModif` sans `else`, lu en texte libre
+     depuis le XML - **le plus net des quatre** (bonus/malus d'astérisque silencieusement
+     ignoré si une 3e valeur apparaît).
+
 Pas encore committé.
 
 ---

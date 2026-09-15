@@ -4626,3 +4626,20 @@ vers le talent generique pour une specialisation non trouvee au catalogue ne se 
 donc que par hasard (dernier talent de la liste a Resume vide), sinon saute en silence.
 Corrige : test sur Result.Resume. Compile (lazbuild, 0 erreur). Pas encore teste en jeu sur
 un vrai cas de specialisation non trouvee - a surveiller au prochain personnage concerne.
+
+15/09/2026 - AUDIT (AGENT) : PIEGE FRANCO-ANGLAIS RIEN TROUVE, 4 LISTES FERMEES REPEREES
+Deux recherches d A FAIRE.txt confiees a un sous-agent :
+1. Piege de nommage franco-anglais (variable en francais lisant une colonne en anglais,
+cause du bug tarif arcanique du 02/09) : audite sur tout le depot (ColAtt*/ConstCarac* et
+variables courtes BI/BAg/BInt/BSoc/BDex/BF/BE/BFM/BCC/BCT/BBles/BDestin). Rien trouve, tous
+les couples variable/constante sont coherents. Point verifie negativement, retire de la
+liste des anomalies.
+2. Listes fermees de type recopiees en dur (meme forme que les six TypSpell, trois bugs
+deja produits) : 4 candidats trouves, non corriges (demandent un arbitrage) -
+GetTypeMetierEquipement (unitcalcul.pas:230, prefixe TRAP_ manquant, silencieux),
+l union TypeEquipCC+CT+MU recopiee a 9 endroits dans 7 fichiers pour tester "est-ce une
+arme", winlivre.pas (deux case incoherents sur le meme type-caractere, l.1226 vs 2753),
+chargepersonnage.pas:1551/1569/1587 (TypeModif sans else, lu en texte libre depuis le XML -
+le plus net des quatre, bonus/malus d asterisque silencieusement ignore si une 3e valeur
+apparait). Detail dans A FAIRE.txt.
+Fichiers modifies : A FAIRE.txt, CONTEXT.md, Log.txt (pas de code touche, audit seul).

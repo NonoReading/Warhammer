@@ -149,11 +149,15 @@ WINLIVRE NE SAIT PAS EDITER DATA_SPELL_TALENT. Choix assume du 03/09/2026 : la t
 saisit en XML a la main. Le jour ou un livre en portera beaucoup de lignes, un ecran
 deviendra utile - grille sort / liste de talents, sur le modele des autres blocs.
 
-PIEGE DE NOMMAGE FRANCO-ANGLAIS - A CHERCHER AILLEURS. Le tarif arcanique lisait ColAttI
-(Initiative) au lieu de ColAttInt (Intelligence) parce que la variable s'appelait BI, qui
-se lit "Bonus Intelligence". Corrige le 02/09 par le passage en donnee. La FORME du piege
-reste : un calcul qui nomme sa variable d'apres le francais et lit une colonne nommee
-d'apres l'anglais.
+[VERIFIE LE 15/09/2026 - RIEN TROUVE, NE PLUS LE RESSORTIR SANS NOUVEL INDICE]
+PIEGE DE NOMMAGE FRANCO-ANGLAIS (variable nommee en francais lisant une colonne nommee en
+anglais, cause du bug tarif arcanique corrige le 02/09/2026) : audite dans tout le
+depot (ColAtt*/ConstCarac* et variables courtes BI/BAg/BInt/BSoc/BDex/BF/BE/BFM/BCC/BCT/
+BBles/BDestin). Aucune autre occurrence de cette forme - tous les couples variable
+courte/constante trouves sont coherents (meme abreviation des deux cotes). unitcalcul.pas
+(site du bug d'origine) ne reference plus ColAtt*/ConstCarac* du tout, confirmant le passage
+en donnee. A resurveiller si de nouvelles variables courtes apparaissent pres de ColAtt*/
+ConstCarac*.
 
 [TRANCHE LE 12/09/2026 - CONSERVE COMME POINT TRANCHE, NE PLUS LE RESSORTIR EN ANOMALIE]
 "COPPER" DE NATIONS OF MANKIND EST BRASS. Confirme par Nono : Nations ecrit "Copper 3" pour
@@ -162,10 +166,27 @@ un quatrieme palier. Aucun TIERS_COPPER a creer ; le lire comme Brass (deja le c
 03/09) est correct. RULES-TIERS_BRASS/SILVER/GOLD (chargetexte.pas, resolus via SalaireMetier
 prefixe - CONTEXT.md 2.61) restent la seule enumeration, rien a recopier ailleurs.
 
-VERIFIER LES AUTRES LISTES FERMEES DE TYPES ECRITES EN DUR. Celle des six TypSpell a
-produit trois bugs a trois endroits differents ; la meme forme - une enumeration recopiee
-dans le code au lieu d'etre demandee aux donnees - existe probablement ailleurs. Chercher
-les InList() portant sur des constantes de type.
+[AUDIT FAIT LE 15/09/2026 - 4 CANDIDATS TROUVES, A TRANCHER AVEC NONO LESQUELS TRAITER]
+LISTES FERMEES DE TYPES ECRITES EN DUR - CANDIDATS TROUVES (meme forme que les six TypSpell
+qui ont produit trois bugs) :
+1. unitcalcul.pas:230-236 (GetTypeMetierEquipement) : le case ne traite que 4 des 5 prefixes
+   connus (EquipementCC/CT/MU/AR), EquipementTR (TRAP_, chargeconstantes.pas:499-504) manque
+   - tout code RULES-TRAP_* tombe en silence dans "Divers". Risque silencieux, gravite
+   faible si Divers reste un fourre-tout accepte.
+2. Union TypeEquipCC+TypeEquipCT+TypeEquipMU (test "est-ce une arme", sur 5 types possibles
+   CC/CT/MU/AR/DI) recopiee A L'IDENTIQUE a 9 endroits dans 7 fichiers : chargemetierequipement.pas:69,
+   winpersonnage.pas:5407, winmetier.pas:787/849/886, pdfmetier.pas:490/571,
+   wincreation.pas:2376/2423, xmlexportimport.pas:688. Aucun centralise dans une fonction
+   unique - un futur type "arme" (prefixe hors COMB_/PROJ_/MUNI_) demanderait de corriger
+   les 9 a la main.
+3. winlivre.pas:1226 vs 2753 : deux case TypeEquip sur le meme type-caractere ('D'/'W'/'P'/'T',
+   LibelleEquipement l.1164/1183/1193/1203) traites differemment - 1226 ne gere que 'W','P'
+   sans else (D/T gardent leur libelle brut, silencieux), 2753 gere 'W','P' avec else
+   "Divers" (visible mais confond 'T' et 'D').
+4. chargepersonnage.pas:1551/1569/1587 : case ListTalentCompetenceModif[...].TypeModif sans
+   else - TypeModif est lu en texte libre depuis le XML (xmlexportimport.pas:1545) sans
+   protection. Le plus net des quatre : un bonus/malus d'asterisque ne serait simplement pas
+   applique, sans aucune trace. A voir en priorite si un chantier reprend cette zone.
 
 NATIONS OF MANKIND : LORE ATTRIBUTE ET INGREDIENTS DES DEUX VENTS, SANS ENDROIT OU ALLER.
 Le Lore of Ice et le Lore of the Desert impriment chacun un Lore Attribute (regle de jeu, pas
