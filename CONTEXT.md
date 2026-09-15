@@ -1,21 +1,9 @@
 # Warhammer — Contexte projet
 
-**REPRISE (15/09/2026 fin de session)** : rien en cours, tout committé (`eeaf952`, working
-tree propre). À faire en priorité à la prochaine session - **tout ce qui suit est compilé
-mais pas encore testé en jeu par Nono** :
-- WinFiltre : classes de métier (voir suite ci-dessous) - vérifier l'affichage ET un choix
-  PARTIEL de classes filtrant WinMetier.
-- Talent de Bénédiction posé à la création - créer un perso avec Bless (Sigmar ou
-  équivalent) et vérifier que le sort apparaît sur la fiche.
-- `ChercheTalent` (repli générique) - vérifier sur une vraie spécialisation de talent non
-  trouvée au catalogue.
-- Générique Great Weapon (V5) + Silvered Sword - tester le choix d'équipement dans une
-  carrière concernée (Guard niveau 3 pour Great Weapon/Halberd, Witchfinder General niveau 2
-  pour Rapier/Silvered Sword).
-
-En attente d'une décision de Nono (pas commencé) : **WinRace devrait regrouper les ethnies
-par race à l'affichage** - voir le bloc "CONCEPTIONS A MENER" d'A FAIRE.txt, approche
-(TreeView vs grid maison) pas encore choisie.
+**REPRISE (15/09/2026 fin de session)** : rien en cours. WinFiltre (classes de métier), la
+Bénédiction à la création et le générique Great Weapon (V5)/Silvered Sword sont confirmés OK
+par Nono en jeu, `ChercheTalent` validé par relecture de code (voir suites ci-dessous) - tout
+le lot du jour est vérifié, reste à committer.
 
 ---
 
@@ -40,9 +28,9 @@ validé. Même famille de piège que la saga du 06/09/2026 (CONTEXT.md 2.49 éta
 apparentée mais pas identique** (ici c'est un préfixe de livre manquant, pas une énumération
 de type incomplète).
 
-Corrigé : les 8 littéraux préfixés `RULES-CLASS_*`. Compilé (`lazbuild`, 0 erreur). **À
-confirmer par Nono en jeu** (WinFiltre puis filtrage WinMetier par classe partielle). Pas
-encore committé.
+Corrigé : les 8 littéraux préfixés `RULES-CLASS_*`. Compilé (`lazbuild`, 0 erreur). **Testé
+en jeu par Nono le 15/09/2026 : OK** (affichage WinFiltre et filtrage WinMetier par classe
+partielle). Pas encore committé.
 
 ---
 
@@ -95,6 +83,9 @@ laisser en texte libre. `RULES-COMB_BASE_07` "Silvered Sword" ajoutée - copie e
 (`RULES-COMB_BASE_06`), seule l'`Availability` passe à Scarce. Choix rattaché :
 `RULES-COMB_ESCR_04/RULES-COMB_BASE_07`. XML revalidé bien formé.
 
+**Testé en jeu par Nono le 15/09/2026 : OK** (choix d'équipement Guard niveau 3 Great
+Weapon/Halberd et Witchfinder General niveau 2 Rapier/Silvered Sword).
+
 Les trois décisions rapides d'A FAIRE.txt sont closes.
 
 **`ChercheTalent` corrigé** (`chargetalent.pas:85`, bug repéré le 14/09/2026, CONTEXT.md
@@ -103,8 +94,13 @@ Les trois décisions rapides d'A FAIRE.txt sont closes.
 vide/`Default` quand rien n'est trouvé, ligne 78). Le repli vers le talent générique pour une
 spécialisation sans entrée propre au catalogue ne se déclenchait donc que par hasard (si le
 dernier talent de la liste avait justement un `Resume` vide), sinon sauté en silence. Corrigé
-en testant `Result.Resume`. Compilé (`lazbuild`, 0 erreur). **Pas encore testé en jeu** sur un
-vrai cas de spécialisation non trouvée - à surveiller au prochain personnage concerné.
+en testant `Result.Resume`. Compilé (`lazbuild`, 0 erreur). **Validé tel quel par relecture,
+pas par un test en jeu** : le déclencheur réel (un code de talent totalement absent du
+catalogue) n'a aucun cas connu aujourd'hui avec les données actuelles - Bless (Sigmar) par
+exemple ne teste PAS ce chemin, `T0012_SIGMAR` existe bien au catalogue et hérite de
+`T0012_*` via `<Generique>`, mécanisme différent validé depuis le 12/09 (§2.68). Décision de
+Nono : on laisse tel quel, à reprendre seulement si une erreur réelle apparaît un jour (libellé
+vide, talent introuvable sur une fiche).
 
 Committé (`9922b6b`).
 
@@ -147,8 +143,8 @@ création) : si le talent a `ModeSort=AUTO` (Bénédiction), les sorts qui le ci
 (`TalentsDuSort`) sont ajoutés directement à `Personnage.Equipement` avec `TypeEquipSp` et
 `CoutXp=0` - même écriture qu'un octroi normal en jeu (`winpersonnage.pas:5058-5064`).
 `ChargeSort` ajouté aux `uses` de `wincreation.pas`. Compilé (`lazbuild`, 0 erreur).
-**Pas encore testé en jeu** - à vérifier avec un personnage créant un prêtre (Bless Sigmar
-ou équivalent) : le sort doit apparaître sur la fiche sans étape supplémentaire.
+**Testé en jeu par Nono le 15/09/2026 : OK** (carrière Priest, `RULES-WORK49`, Bless posé à
+la création - le sort apparaît sur la fiche sans étape supplémentaire). Pas encore committé.
 
 ---
 

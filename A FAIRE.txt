@@ -247,26 +247,6 @@ plusieurs mutations sur la meme competence teste). A regrouper de la meme facon
 CONCEPTIONS A MENER  (chantiers a part entiere, ne pas les melanger)
 =========================================================================
 
-WINRACE DEVRAIT REGROUPER LES ETHNIES PAR RACE A L'AFFICHAGE (Nono, 13/09/2026, reclasse
-depuis "corrections courtes" le 15/09/2026 - plus gros que prevu). TabRace (winraces.pas)
-affiche actuellement une ligne par ethnie (DATA_SPECIE, ex. Humans (Reikland), Humans
-(Middenlander)...), avec juste le nom de race blanchi sur les lignes repetees (WinCharger,
-winraces.pas:210-237) - pas un vrai pli/deplier. Nono confirme le 15/09/2026 : pas de cas ou
-choisir la RACE seule suffit, ce qui est conserve sur un personnage est toujours l'ETHNIE
-precise (CodeRace) - le sujet est donc purement visuel, pas un changement de ce qui est
-selectionnable au final.
-Complication trouvee en explorant le code : TabRace est un TStringGrid a 5 colonnes de
-donnees (Espece/Code/Libelle/Description/Livre), pas un TreeView comme celui de WinMetier
-(qui a deja resolu le meme probleme le 14/09/2026, voir CONTEXT.md suite 9,
-ChargeRaceMetier winmetier.pas:584) - aucun mecanisme de pli/deplier existant a reutiliser
-tel quel. Deux pistes non tranchees : convertir TabRace en TreeView (coherent avec
-WinMetier, plus gros - refonte du controle) ou garder le StringGrid et inventer un
-pli/deplier maison (moins de refonte, pattern nouveau). AUTRE POINT D'ATTENTION : TabRace
-sert aussi de selecteur pendant la creation de personnage (TabRaceDblClick,
-winraces.pas:294, renvoie ChoixWinRace := TabRace.Cells[2, Row] = CodeRace de l'ethnie) -
-une regression ici casserait la creation de personnage, pas seulement la consultation. A
-concevoir avec Nono (choix du controle) avant de coder.
-
 [PORTE MUTATION FAITE LE 11/09/2026 - voir CONTEXT.md 2.54. Une mutation peut accorder un
 Talent (<Talent> sous <Corruption>) ou une Arme/Armure (<Weapon>/<Armor>), calcule a la volee
 depuis Personnage.Mutations (PersonnageMutationTalent/PersonnageMutationEquipement,
