@@ -1,5 +1,24 @@
 # Warhammer — Contexte projet
 
+**REPRISE (15/09/2026 fin de session)** : rien en cours, tout committé (`eeaf952`, working
+tree propre). À faire en priorité à la prochaine session - **tout ce qui suit est compilé
+mais pas encore testé en jeu par Nono** :
+- WinFiltre : classes de métier (voir suite ci-dessous) - vérifier l'affichage ET un choix
+  PARTIEL de classes filtrant WinMetier.
+- Talent de Bénédiction posé à la création - créer un perso avec Bless (Sigmar ou
+  équivalent) et vérifier que le sort apparaît sur la fiche.
+- `ChercheTalent` (repli générique) - vérifier sur une vraie spécialisation de talent non
+  trouvée au catalogue.
+- Générique Great Weapon (V5) + Silvered Sword - tester le choix d'équipement dans une
+  carrière concernée (Guard niveau 3 pour Great Weapon/Halberd, Witchfinder General niveau 2
+  pour Rapier/Silvered Sword).
+
+En attente d'une décision de Nono (pas commencé) : **WinRace devrait regrouper les ethnies
+par race à l'affichage** - voir le bloc "CONCEPTIONS A MENER" d'A FAIRE.txt, approche
+(TreeView vs grid maison) pas encore choisie.
+
+---
+
 **15/09/2026 (suite) — WINFILTRE : CLASSES DE MÉTIER SANS PRÉFIXE RULES-, CORRIGÉ.** Relevé
 par Nono en testant la création : dans WinFiltre, les 8 classes de métier (Academic/
 Burghers/...) s'affichaient en code brut, et un choix **partiel** de classes faisait
