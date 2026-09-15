@@ -206,16 +206,12 @@ recalcul depuis warhammersource.pas, corrige le 14/09/2026, CONTEXT.md 2.70) - r
 sous-ensemble PDF/attributs, non demande pour l'instant. Meme correctif a appliquer
 (Const -> Var + recalcul depuis ValVersion) le jour ou Nono le demande.
 
-CHERCHETALENT TESTE PTALENT.RESUME AU LIEU DE RESULT.RESUME APRES LA BOUCLE. Vu le
-14/09/2026 en auditant les Cherche* (CONTEXT.md 2.77bis). chargetalent.pas l.85 :
-"if PTalent.Resume = '' then" porte sur la variable de boucle, qui garde le DERNIER element
-de ListTalent si rien ne matche (pas de break) - alors que Result reste bien vide (Default)
-dans ce cas. Meme resultat que Result.Resume quand le talent EST trouve (PTalent = Result a
-ce moment-la), mais dans le cas "non trouve", le repli vers le generique (specialisation
-sans entree propre) ne se declenche que si par hasard le dernier talent de la liste a un
-Resume vide - sinon le repli est silencieusement saute. A corriger (tester Result.Resume,
-pas PTalent.Resume) mais pas fait sans verifier l'effet sur une vraie specialisation
-non-trouvee, chantier §2.68 sensible.
+[CORRIGE LE 15/09/2026 - COMPILE, PAS ENCORE TESTE EN JEU SUR UNE VRAIE SPECIALISATION
+NON-TROUVEE, VOIR CONTEXT.md]
+CHERCHETALENT TESTAIT PTALENT.RESUME AU LIEU DE RESULT.RESUME APRES LA BOUCLE.
+chargetalent.pas l.85 : corrige en Result.Resume (voir chargetalent.pas:78-90 pour le
+raisonnement). A surveiller au prochain personnage portant une specialisation de talent
+sans entree propre au catalogue.
 
 LE MEME EMPILEMENT DE "(N) VALEUR%" QUE L'ARMURE (CORRIGE LE 14/09/2026, VOIR PLUS BAS)
 EXISTE PEUT-ETRE AUSSI COTE MUTATIONS. PdfPersonnageMutationAsterisques

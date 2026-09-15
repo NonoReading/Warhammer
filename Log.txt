@@ -4617,3 +4617,12 @@ Recapitulatif du lot "decisions rapides" du jour avec Nono, trois points d A FAI
 materiau des boucliers V5 laisse tel quel (voir entree plus haut), generique Great Weapon
 ajoute cote V5, Silvered Sword cree (ci-dessus). Fichiers modifies au total pour ce lot :
 DATABASE/WFRP5/BOOK_RULESBOOK.Xml, A FAIRE.txt, CONTEXT.md, Log.txt.
+
+15/09/2026 - CHERCHETALENT : BUG REEL CORRIGE (PTALENT.RESUME -> RESULT.RESUME)
+chargetalent.pas l.85, repere le 14/09/2026 en auditant les Cherche* (CONTEXT.md 2.77bis) :
+testait PTalent (variable de boucle, garde le dernier element de ListTalent si rien ne
+matche) au lieu de Result (qui reste bien vide/Default quand rien n est trouve). Le repli
+vers le talent generique pour une specialisation non trouvee au catalogue ne se declenchait
+donc que par hasard (dernier talent de la liste a Resume vide), sinon saute en silence.
+Corrige : test sur Result.Resume. Compile (lazbuild, 0 erreur). Pas encore teste en jeu sur
+un vrai cas de specialisation non trouvee - a surveiller au prochain personnage concerne.

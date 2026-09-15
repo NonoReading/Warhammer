@@ -49,7 +49,18 @@ laisser en texte libre. `RULES-COMB_BASE_07` "Silvered Sword" ajoutée - copie e
 (`RULES-COMB_BASE_06`), seule l'`Availability` passe à Scarce. Choix rattaché :
 `RULES-COMB_ESCR_04/RULES-COMB_BASE_07`. XML revalidé bien formé.
 
-Les trois décisions rapides d'A FAIRE.txt sont closes. Pas encore committé.
+Les trois décisions rapides d'A FAIRE.txt sont closes.
+
+**`ChercheTalent` corrigé** (`chargetalent.pas:85`, bug repéré le 14/09/2026, CONTEXT.md
+2.77bis) : testait `PTalent.Resume` (variable de boucle, garde le DERNIER élément de
+`ListTalent` si rien ne matche, pas de `break`) au lieu de `Result.Resume` (qui reste bien
+vide/`Default` quand rien n'est trouvé, ligne 78). Le repli vers le talent générique pour une
+spécialisation sans entrée propre au catalogue ne se déclenchait donc que par hasard (si le
+dernier talent de la liste avait justement un `Resume` vide), sinon sauté en silence. Corrigé
+en testant `Result.Resume`. Compilé (`lazbuild`, 0 erreur). **Pas encore testé en jeu** sur un
+vrai cas de spécialisation non trouvée - à surveiller au prochain personnage concerné.
+
+Pas encore committé.
 
 ---
 

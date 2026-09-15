@@ -82,7 +82,12 @@ Begin
        Result := PTalent;
        break;
       end;
-  if PTalent.Resume = '' then
+  // Corrige le 15/09/2026 (A FAIRE.txt) : testait PTalent.Resume, la variable de BOUCLE, qui
+  // garde le DERNIER element de ListTalent si rien ne matche (pas de break) - le repli vers
+  // le generique ne se declenchait alors que par hasard (dernier talent de la liste a Resume
+  // vide). Result reste bien vide (Default ligne 78) dans ce cas, donc Result.Resume est le
+  // test correct, y compris pour une specialisation NON trouvee.
+  if Result.Resume = '' then
     if Pos(ValeurGenerique, CodeTalent) = 0 then
       if Pos(ValeurSousCompetence, CodeTalent) > 0 then
         begin
