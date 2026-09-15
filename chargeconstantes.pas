@@ -698,6 +698,11 @@ Var
   TypeEquipCC:              String;
   TypeEquipCT:              String;
   TypeEquipMU:              String;
+  // Union TypeEquipCC+','+TypeEquipCT+','+TypeEquipMU ("cet equipement de metier est-il une
+  // arme ?", teste par InList sur PMetierEquipement.TypeEquipement), centralisee le
+  // 15/09/2026 (audit "listes fermees") - recalculee avec TypeEquipCC/CT/MU dans
+  // warhammersource.pas, jamais assignee ailleurs.
+  TypeEquipMetierArme:      String;
   TypeEquipWe:              String;
   TypeEquipDI:              String;
   TypeEquipAR:              String;

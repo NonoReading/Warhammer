@@ -685,7 +685,7 @@ Procedure XmlExportBook(Livre: String; Langue: String);
                           end;
                         LigneType := StringType[LigneIndice];
                         Inc(LigneIndice);
-                        if InList(LigneType,TypeEquipCC+','+TypeEquipCT+','+TypeEquipMU) then
+                        if InList(LigneType,TypeEquipMetierArme) then
                             begin
                               PArme   := ChercheArme(Equipement);
                               LigneEquipement := LigneEquipement + XmlCreeCodeLivre(Parme.livre, Equipement) + Qualite;

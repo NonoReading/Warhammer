@@ -66,7 +66,7 @@ function GetListeEquipement(ListeCodes: String; ListeTypes: String):String;
             Qualite:= '';
           end;
 
-        if InList(stringsT[IndL], TypeEquipCC+','+TypeEquipCT+','+TypeEquipMU) then
+        if InList(stringsT[IndL], TypeEquipMetierArme) then
            begin
              if pos(ValeurGenerique, Code) > 0 then
                begin

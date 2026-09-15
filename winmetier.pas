@@ -784,7 +784,7 @@ Begin
                        Code   := stringsI[IndL];
                        Qualite:= '';
                      end;
-                   if InList(stringsT[IndL],TypeEquipCC+','+TypeEquipCT+','+TypeEquipMU) then
+                   if InList(stringsT[IndL],TypeEquipMetierArme) then
                       begin
                         PArme                    := ChercheArme(Code);
                         NodeData                 := TMyNodeData.Create;
@@ -846,7 +846,7 @@ Begin
                        Code   := stringsI[IndL];
                        Qualite:= '';
                      end;
-                   if InList(stringsT[IndL],TypeEquipCC+','+TypeEquipCT+','+TypeEquipMU) then
+                   if InList(stringsT[IndL],TypeEquipMetierArme) then
                       begin
                         PArme                    := ChercheArme(Code);
                         NodeData                 := TMyNodeData.Create;
@@ -883,7 +883,7 @@ Begin
                stringsT.Free;
             end
          else
-            if InList(PMetierEquipement.TypeEquipement,TypeEquipCC+','+TypeEquipCT+','+TypeEquipMU) then
+            if InList(PMetierEquipement.TypeEquipement,TypeEquipMetierArme) then
                 begin
                   if Pos(EquipementQualite, PMetierEquipement.Equipement) > 0 then
                     begin

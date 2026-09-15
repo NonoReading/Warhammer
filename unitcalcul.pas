@@ -232,6 +232,10 @@ Function GetTypeMetierEquipement(Equip: String): String;
           EquipementCT: TypeEquipement := TypeEquipement+TypeEquipCT;
           EquipementMu: TypeEquipement := TypeEquipement+TypeEquipMU;
           EquipementAr: TypeEquipement := TypeEquipement+TypeEquipAr;
+          // EquipementTR (trapping) rendu explicite le 15/09/2026 (audit "listes fermees") :
+          // resultat inchange (Divers, deja ce que rendait l'else), mais un futur prefixe non
+          // liste ici tombera toujours dans le meme else sans laisser de trace - voir CONTEXT.md.
+          EquipementTR: TypeEquipement := TypeEquipement+TypeEquipDi;
           else          TypeEquipement := TypeEquipement+TypeEquipDi;
         end;
     end;

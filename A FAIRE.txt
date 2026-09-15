@@ -171,24 +171,6 @@ un quatrieme palier. Aucun TIERS_COPPER a creer ; le lire comme Brass (deja le c
 03/09) est correct. RULES-TIERS_BRASS/SILVER/GOLD (chargetexte.pas, resolus via SalaireMetier
 prefixe - CONTEXT.md 2.61) restent la seule enumeration, rien a recopier ailleurs.
 
-[AUDIT FAIT LE 15/09/2026 - 4 CANDIDATS TROUVES, POINT 4 TRAITE, RESTE A TRANCHER AVEC NONO]
-LISTES FERMEES DE TYPES ECRITES EN DUR - CANDIDATS TROUVES (meme forme que les six TypSpell
-qui ont produit trois bugs) :
-1. unitcalcul.pas:230-236 (GetTypeMetierEquipement) : le case ne traite que 4 des 5 prefixes
-   connus (EquipementCC/CT/MU/AR), EquipementTR (TRAP_, chargeconstantes.pas:499-504) manque
-   - tout code RULES-TRAP_* tombe en silence dans "Divers". Risque silencieux, gravite
-   faible si Divers reste un fourre-tout accepte.
-2. Union TypeEquipCC+TypeEquipCT+TypeEquipMU (test "est-ce une arme", sur 5 types possibles
-   CC/CT/MU/AR/DI) recopiee A L'IDENTIQUE a 9 endroits dans 7 fichiers : chargemetierequipement.pas:69,
-   winpersonnage.pas:5407, winmetier.pas:787/849/886, pdfmetier.pas:490/571,
-   wincreation.pas:2376/2423, xmlexportimport.pas:688. Aucun centralise dans une fonction
-   unique - un futur type "arme" (prefixe hors COMB_/PROJ_/MUNI_) demanderait de corriger
-   les 9 a la main.
-3. winlivre.pas:1226 vs 2753 : deux case TypeEquip sur le meme type-caractere ('D'/'W'/'P'/'T',
-   LibelleEquipement l.1164/1183/1193/1203) traites differemment - 1226 ne gere que 'W','P'
-   sans else (D/T gardent leur libelle brut, silencieux), 2753 gere 'W','P' avec else
-   "Divers" (visible mais confond 'T' et 'D').
-
 NATIONS OF MANKIND : LORE ATTRIBUTE ET INGREDIENTS DES DEUX VENTS, SANS ENDROIT OU ALLER.
 Le Lore of Ice et le Lore of the Desert impriment chacun un Lore Attribute (regle de jeu, pas
 de la prose) et une liste d Ingredients. Ce sont des proprietes du DOMAINE, or le modele n a

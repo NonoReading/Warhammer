@@ -2396,7 +2396,7 @@ begin
                For IndEns := 0 to StringsCodeEns.Count - 1 do
                  begin
                    CodeUnit := StringsCodeEns[IndEns];
-                   if InList(StringsTypeEns[IndEns],TypeEquipCC+','+TypeEquipCT+','+TypeEquipMU) then
+                   if InList(StringsTypeEns[IndEns],TypeEquipMetierArme) then
                        begin
                          PArme    := ChercheArme(CodeUnit);
                          LibUnit  := PArme.Libelle;
@@ -2443,7 +2443,7 @@ begin
                else
                  begin
                    Code := PMetierEquipement.Equipement;
-                   if InList(PMetierEquipement.TypeEquipement,TypeEquipCC+','+TypeEquipCT+','+TypeEquipMU) then
+                   if InList(PMetierEquipement.TypeEquipement,TypeEquipMetierArme) then
                        begin
                          PArme   := ChercheArme(Code);
                          Lib     := PArme.Libelle;

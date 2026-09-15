@@ -43,6 +43,7 @@ const
   // Préfixes d'affichage de l'équipement dans l'arbre (comme dans WinMetier)
   EquipArme   = '(W) ';
   EquipArmure = '(P) ';
+  EquipDivers = '(D) ';
 
 type
   
@@ -1226,6 +1227,10 @@ begin
   case TypeEquip of
     'W': Libelle := EquipArme + Libelle;
     'P': Libelle := EquipArmure + Libelle;
+    // Trapping ('T') et texte libre ('D', LibelleEquipement l.1164) traites pareil que dans
+    // l'autre case TypeEquip de cette unite (ligne ~2757) et que WinMetier (EquipDivers) -
+    // corrige le 15/09/2026, ce else manquait (audit "listes fermees").
+    else Libelle := EquipDivers + Libelle;
   end;
 
   NodeFeuille := TreeViewLivre.Items.AddChild(NodeBase, Libelle);

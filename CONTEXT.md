@@ -1,18 +1,34 @@
 # Warhammer — Contexte projet
 
-**REPRISE (15/09/2026 fin de session)** : rien en cours, tout committé (`3ef77f0`, working
-tree propre). Les quatre vérifications du point de reprise précédent sont closes (WinFiltre,
-Bénédiction à la création, `ChercheTalent`, Great Weapon/Silvered Sword - voir suites
-ci-dessous), et le candidat #4 de l'audit "listes fermées" (`TypeModif` sans `else`) est
-corrigé et testé par compilation.
+**REPRISE (15/09/2026, suite)** : audit "listes fermées" clos (4/4 candidats traités et
+compilés, le dernier testé en jeu par Nono). Rien d'autre en cours. Pas encore committé.
 
-À la prochaine session : arbitrer avec Nono les **3 candidats restants de l'audit "listes
-fermées"** (voir suite "AUDIT (SOUS-AGENT)" ci-dessous, un seul des quatre est fait) :
-- `GetTypeMetierEquipement` (`unitcalcul.pas:230`) - préfixe `TRAP_` manquant, silencieux.
-- Union `TypeEquipCC+CT+MU` ("est-ce une arme") recopiée à l'identique à 9 endroits dans
-  7 fichiers, aucun centralisé.
-- `winlivre.pas` : deux `case TypeEquip` sur le même type-caractère traités différemment
-  (ligne 1226 vs 2753).
+---
+
+**15/09/2026 (suite) — AUDIT "LISTES FERMÉES" : LES 3 DERNIERS CANDIDATS TRAITÉS, CHANTIER
+CLOS (4/4).**
+1. **`GetTypeMetierEquipement`** (`unitcalcul.pas:230`) : `EquipementTR` (`TRAP_`) rendu
+   explicite dans le `case` - résultat inchangé (déjà "Divers" via l'`else`), mais un futur
+   préfixe non listé ne tombera plus dans le même `else` sans laisser de trace.
+2. **Union `TypeEquipCC+','+TypeEquipCT+','+TypeEquipMU`** ("est-ce une arme") centralisée
+   dans une nouvelle variable `TypeEquipMetierArme` (`chargeconstantes.pas`, calculée à côté
+   de `TypeEquipCC/CT/MU` dans `warhammersource.pas`, aux deux endroits où ce bloc existe
+   déjà), substituée aux 10 recopies identiques dans 7 fichiers
+   (`chargemetierequipement.pas`, `xmlexportimport.pas`, `winpersonnage.pas`,
+   `winmetier.pas` x3, `wincreation.pas` x2, `pdfmetier.pas` x2).
+3. **`winlivre.pas`** : le `case TypeEquip` de `AjouterFeuilleEquipement` (ligne 1226,
+   l'arbre WinLivre) ne traitait que `'W'`/`'P'` sans `else` - un trapping ou un texte libre
+   de carrière s'affichait sans préfixe, alors que WinMetier préfixe ces mêmes items par
+   `(D) ` (`EquipDivers`) et que l'autre `case TypeEquip` de la même unité (ligne 2753, la
+   grille) bascule déjà vers "Divers" via son `else`. Corrigé : `EquipDivers = '(D) '`
+   ajouté dans `winlivre.pas` (même convention que `winmetier.pas`), `else Libelle :=
+   EquipDivers + Libelle;` ajouté au `case`. **Testé en jeu par Nono sur V5 : trappings
+   affichés avec `(D)` - OK.**
+
+Les #1 et #2 sont sans effet observable (comportement déjà correct avant, juste rendu
+explicite) - validés par compilation seule, comme prévu en les proposant. Compilé
+(`lazbuild`, 0 erreur) après chaque étape. Pas encore committé. A FAIRE.txt nettoyé (bloc
+"listes fermées" retiré, les 4 candidats sont traités).
 
 ---
 

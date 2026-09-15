@@ -4699,3 +4699,26 @@ rendre l anomalie visible plutot que de l accepter. Ajoute un else aux 3 endroit
 le bonus "?(N)" au lieu de le laisser silencieusement absent. Aucun effet aujourd hui.
 Compile (lazbuild, 0 erreur). Les 3 autres candidats de l audit restent a trancher.
 Fichiers modifies : chargepersonnage.pas, A FAIRE.txt, CONTEXT.md, Log.txt.
+
+15/09/2026 - AUDIT DES LISTES FERMEES CLOS : LES 3 DERNIERS CANDIDATS TRAITES.
+1. GetTypeMetierEquipement (unitcalcul.pas:230) : EquipementTR (TRAP_) rendu explicite dans
+le case, resultat inchange (deja "Divers" via l else), mais un futur prefixe non liste ne
+tombera plus dans le meme else sans laisser de trace.
+2. Union TypeEquipCC+','+TypeEquipCT+','+TypeEquipMU ("est-ce une arme") centralisee dans
+une nouvelle variable TypeEquipMetierArme (chargeconstantes.pas, calculee a cote de
+TypeEquipCC/CT/MU dans warhammersource.pas), substituee aux 10 recopies identiques dans 7
+fichiers (chargemetierequipement.pas, xmlexportimport.pas, winpersonnage.pas, winmetier.pas
+x3, wincreation.pas x2, pdfmetier.pas x2).
+3. winlivre.pas : le case TypeEquip de AjouterFeuilleEquipement (ligne 1226, l arbre
+WinLivre) ne traitait que 'W'/'P' sans else - un trapping ou un texte libre de carriere
+s affichait sans prefixe, alors que WinMetier prefixe ces memes items par "(D) "
+(EquipDivers) et que l autre case TypeEquip de la meme unite (ligne 2753, la grille)
+bascule deja vers "Divers" via son else. Corrige : EquipDivers = '(D) ' ajoute dans
+winlivre.pas (meme convention que winmetier.pas), else Libelle := EquipDivers + Libelle;
+ajoute au case. Teste en jeu par Nono sur V5 : trappings affiches avec (D) - OK.
+Les #1 et #2 sont sans effet observable (comportement deja correct avant, juste rendu
+explicite) - valides par compilation seule. Compile (lazbuild, 0 erreur) apres chaque
+etape.
+Fichiers modifies : unitcalcul.pas, chargeconstantes.pas, warhammersource.pas,
+chargemetierequipement.pas, xmlexportimport.pas, winpersonnage.pas, winmetier.pas,
+wincreation.pas, pdfmetier.pas, winlivre.pas, A FAIRE.txt, CONTEXT.md, Log.txt.

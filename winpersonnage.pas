@@ -5404,7 +5404,7 @@ Procedure TWinPersonnages.ChargerMetierEquipement(CodeMetier: String; NiveauMeti
            else
              begin
                Code := PMetierEquipement.Equipement;
-               if InList(PMetierEquipement.TypeEquipement,TypeEquipCC+','+TypeEquipCT+','+TypeEquipMU) then
+               if InList(PMetierEquipement.TypeEquipement,TypeEquipMetierArme) then
                    begin
                      PArme   := ChercheArme(Code);
                      Lib     := PArme.Libelle;
