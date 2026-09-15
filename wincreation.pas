@@ -15,7 +15,7 @@ uses
   WinMetier, WinRaces, ChargeTexte, WinTalent, WinCompetence, ChargeLivre,
   ChargeMetierSousMetier, ChargeMetierRaceChoixMetier, WinSpecialisation,
   ChargeMetierTalent, ChargePersonnage, BGRABitmap, BGRABitmapTypes, BCButton,
-  BCLabel, WinLanceDe;
+  BCLabel, WinLanceDe, ChargeSort;
 
 type
   { TWinCreations }
@@ -1031,6 +1031,7 @@ procedure TWinCreations.PhaseSave(NouvellePhase: Integer);
     StringsCodeEns:        TStringList;
     StringsTypeEns:        TStringList;
     IndEns:                Integer;
+    PSort:                 StructureSort;
   Begin
     // supprimer les éléments des phases suivants
     // NouvellePhase est la phase où l'on ARRIVE : chaque branche enregistre donc le résultat de
@@ -1110,6 +1111,28 @@ procedure TWinCreations.PhaseSave(NouvellePhase: Integer);
                 RecapTalent.Cells[1, IndTab] := PTalent.Libelle;
                 RecapTalent.Cells[2, IndTab] := PTalent.CodeTalent;
                 Inc(IndTab);
+                // Ajoute le 15/09/2026 (A FAIRE.txt, decision Nono) : un talent de Benediction
+                // pose DIRECTEMENT a la creation n'accordait aucun sort. En jeu, l'octroi passe
+                // par SortAffiche (winpersonnage.pas:1579), qui ne regarde que les lignes ou
+                // Nouveau > Actuel dans TabAugmentationTalent - or un talent de creation entre
+                // toujours avec Nouveau = Actuel (MajTables, winpersonnage.pas:4849), donc ne se
+                // declenche jamais pour lui, meme aux ouvertures suivantes. Plutot que de
+                // toucher a cette mecanique Nouveau/Actuel (chantier a part, cf. A FAIRE.txt),
+                // on accorde directement ici les sorts d'un talent ModeSort=AUTO (Benediction),
+                // en ecrivant dans Personnage.Equipement comme le ferait un achat normal
+                // (winpersonnage.pas:5058-5064) - TypeEquipSp, CoutXp=0 (octroi gratuit).
+                if PTalent.ModeSort = ConstModeSortAuto then
+                  For PSort in ListSort do
+                    if Pos(PersonnageTalent.CodeTalent, TalentsDuSort(PSort)) > 0 then
+                      begin
+                        PersonnageEquipement.CodeEquipement    := PSort.CodeSort;
+                        PersonnageEquipement.TypeEquipement    := TypeEquipSp;
+                        PersonnageEquipement.QualiteEquipement := '';
+                        PersonnageEquipement.Quantite          := 1;
+                        PersonnageEquipement.CoutXp             := 0;
+                        PersonnageEquipement.Porte              := False;
+                        Personnage.Equipement                   += [PersonnageEquipement];
+                      end;
               end;
             RecapTalent.visible := true;
          end;

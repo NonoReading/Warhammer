@@ -131,13 +131,18 @@ et non sur sa nature : la branche "choix unique" de l arbre de WinRaces, le basc
 ChargeSpecialisation vers le catalogue complet, et le routage par Node.Parent.Text du clic
 de WinRaces. Aucun n avait ete anticipe. A relire avant le prochain ajout du meme genre.
 
-UN TALENT DE BENEDICTION POSE A LA CREATION N ACCORDE AUCUN SORT. Trouve le 03/09/2026 en
-corrigeant CONTEXT 2.40. SortAffiche ne regarde que les lignes ou Nouveau > Actuel, or
-MajTables (winpersonnage.pas l.~4434-4467) ecrit Nouveau := Actuel pour tout talent deja
-possede. Un Bless (Sigmar) present des la creation ne declenche donc rien, alors qu un
-Bless achete en progression fonctionne. Les benedictions devraient decouler du talent
-POSSEDE, pas du talent achete ce tour-ci. Conception a mener : ce n est pas une inversion
-de test, il faut decider ce qui se passe quand la fiche porte deja les sorts.
+[CORRIGE LE 15/09/2026 COTE WINCREATION - COMPILE, PAS ENCORE TESTE EN JEU]
+UN TALENT DE BENEDICTION POSE A LA CREATION N ACCORDAIT AUCUN SORT. Trouve le 03/09/2026 en
+corrigeant CONTEXT 2.40 : SortAffiche (winpersonnage.pas:1579) ne regarde que les lignes ou
+Nouveau > Actuel, or un talent de creation entre toujours avec Nouveau = Actuel (MajTables,
+winpersonnage.pas:4849) - ne se declenche donc JAMAIS pour lui, meme aux ouvertures
+suivantes (pas seulement a la creation). Decision de Nono : plutot que de toucher au
+mecanisme Nouveau/Actuel (reste une conception a part, non menee), accorder directement les
+sorts dans WinCreation au moment ou le talent de Benediction est resolu (PhaseSave,
+wincreation.pas, phase 5 "Talents") - meme ecriture dans Personnage.Equipement
+(TypeEquipSp, CoutXp=0) qu'un octroi normal en jeu. A tester avec un personnage creant un
+pretre/Benediction (ex. Bless Sigmar) : verifier que le sort apparait bien sur la fiche
+sans etape supplementaire.
 
 VERIFIER PoolTalent SUR UN PERSONNAGE PORTANT DEUX DIEUX. Signale par la conception de
 CONTEXT 2.39 et toujours pas eprouve : PoolTalent batit le groupe de comptage XP sur le
@@ -201,12 +206,6 @@ profils complets (caracteristiques, Traits, Optional) et la table d10 des elemen
 sont en fin d Explanation des sorts Form of the Frostfiend et Summon Djinn, faute de champ.
 A reprendre avec le morceau "creatures" du lot 3 si on veut de vraies creatures.
 
-WINRACE DEVRAIT LISTER LES RACES, PAS LES ETHNIES (Nono, 13/09/2026). Affiche
-actuellement les ethnies (DATA_SPECIE, ex. Humans (Reikland), Humans (Middenlander)...)
-une par une - devrait n'afficher que les races (DATA_RACE), sauf un cas particulier ou un
-metier est specifique a une seule ethnie d'une race (regle exacte oubliee par Nono, a
-clarifier avec lui avant de coder).
-
 REFAIRE L'ANCRAGE DE LA FENETRE PRINCIPALE (TMenu, Nono, 13/09/2026). TabLivre et
 TabPersonnage (warhammersource.lfm) sont aujourd'hui Anchors=[akTop,akLeft,akBottom], sans
 akRight : ils restent figes en largeur quand la fenetre s'elargit. A refaire pour qu'ils se
@@ -247,6 +246,26 @@ plusieurs mutations sur la meme competence teste). A regrouper de la meme facon
 =========================================================================
 CONCEPTIONS A MENER  (chantiers a part entiere, ne pas les melanger)
 =========================================================================
+
+WINRACE DEVRAIT REGROUPER LES ETHNIES PAR RACE A L'AFFICHAGE (Nono, 13/09/2026, reclasse
+depuis "corrections courtes" le 15/09/2026 - plus gros que prevu). TabRace (winraces.pas)
+affiche actuellement une ligne par ethnie (DATA_SPECIE, ex. Humans (Reikland), Humans
+(Middenlander)...), avec juste le nom de race blanchi sur les lignes repetees (WinCharger,
+winraces.pas:210-237) - pas un vrai pli/deplier. Nono confirme le 15/09/2026 : pas de cas ou
+choisir la RACE seule suffit, ce qui est conserve sur un personnage est toujours l'ETHNIE
+precise (CodeRace) - le sujet est donc purement visuel, pas un changement de ce qui est
+selectionnable au final.
+Complication trouvee en explorant le code : TabRace est un TStringGrid a 5 colonnes de
+donnees (Espece/Code/Libelle/Description/Livre), pas un TreeView comme celui de WinMetier
+(qui a deja resolu le meme probleme le 14/09/2026, voir CONTEXT.md suite 9,
+ChargeRaceMetier winmetier.pas:584) - aucun mecanisme de pli/deplier existant a reutiliser
+tel quel. Deux pistes non tranchees : convertir TabRace en TreeView (coherent avec
+WinMetier, plus gros - refonte du controle) ou garder le StringGrid et inventer un
+pli/deplier maison (moins de refonte, pattern nouveau). AUTRE POINT D'ATTENTION : TabRace
+sert aussi de selecteur pendant la creation de personnage (TabRaceDblClick,
+winraces.pas:294, renvoie ChoixWinRace := TabRace.Cells[2, Row] = CodeRace de l'ethnie) -
+une regression ici casserait la creation de personnage, pas seulement la consultation. A
+concevoir avec Nono (choix du controle) avant de coder.
 
 [PORTE MUTATION FAITE LE 11/09/2026 - voir CONTEXT.md 2.54. Une mutation peut accorder un
 Talent (<Talent> sous <Corruption>) ou une Arme/Armure (<Weapon>/<Armor>), calcule a la volee

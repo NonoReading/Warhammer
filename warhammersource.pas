@@ -1486,14 +1486,28 @@ procedure TMenu.FormCreate(Sender: TObject);
        ChargerPersonnages();
 
        // liste des groupes de métiers
-       ListGroup += ['CLASS_ACAD'];
-       ListGroup += ['CLASS_BURG'];
-       ListGroup += ['CLASS_COUR'];
-       ListGroup += ['CLASS_PEAS'];
-       ListGroup += ['CLASS_RANG'];
-       ListGroup += ['CLASS_RIVE'];
-       ListGroup += ['CLASS_ROGU'];
-       ListGroup += ['CLASS_WARR'];
+       // Corrige le 15/09/2026 (Nono, WinFiltre) : ces codes etaient nus (sans prefixe
+       // RULES-), contrairement a PMetier.LibelleGroupe (xmlexportimport.pas:2055, lu depuis
+       // <Class>"RULES-CLASS_*"</Class>). Deux consequences silencieuses, meme cause -
+       // VerifieRecherche (chargeconstantes.pas:1247) exige LivreRecherche = LivreValeur : un
+       // code nu ne peut jamais matcher un code prefixe, ni dans un sens ni dans l'autre :
+       // 1. GetTexteLibelle(PGroupe) dans WinFiltre.ChargeGroupe (winfiltre.pas:225) ne
+       //    trouvait jamais l'entree ListTexte (deplacee dans INTERFACE.Xml le 15/09/2026,
+       //    mais deja prefixee RULES- avant ce deplacement) - repli sur le code brut affiche.
+       // 2. VerifieFiltre(PMetier.LibelleGroupe, filtreGroupe) dans WinMetier
+       //    (winmetier.pas:204) compare par sous-chaine (chargeconstantes.pas:1097) : un
+       //    filtre construit sans prefixe ("{CLASS_ACAD}...") ne contient jamais
+       //    "{RULES-CLASS_WARR}" - un choix PARTIEL de classes ne matchait donc plus aucun
+       //    metier (choix complet = filtre vide = pas de filtrage, d'ou le symptome
+       //    invisible tant que toutes les classes restent cochees).
+       ListGroup += ['RULES-CLASS_ACAD'];
+       ListGroup += ['RULES-CLASS_BURG'];
+       ListGroup += ['RULES-CLASS_COUR'];
+       ListGroup += ['RULES-CLASS_PEAS'];
+       ListGroup += ['RULES-CLASS_RANG'];
+       ListGroup += ['RULES-CLASS_RIVE'];
+       ListGroup += ['RULES-CLASS_ROGU'];
+       ListGroup += ['RULES-CLASS_WARR'];
 
        // Appeler la procédure SetGlobalFonts au démarrage du formulaire
        MiseEnFormeDesChamp(self);

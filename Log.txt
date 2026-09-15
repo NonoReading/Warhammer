@@ -4643,3 +4643,39 @@ chargepersonnage.pas:1551/1569/1587 (TypeModif sans else, lu en texte libre depu
 le plus net des quatre, bonus/malus d asterisque silencieusement ignore si une 3e valeur
 apparait). Detail dans A FAIRE.txt.
 Fichiers modifies : A FAIRE.txt, CONTEXT.md, Log.txt (pas de code touche, audit seul).
+
+15/09/2026 - BENEDICTION A LA CREATION : SORT ACCORDE DIRECTEMENT DANS WINCREATION
+Bug trouve le 03/09 (CONTEXT.md 2.40) : un talent de Benediction pose a la creation
+n accordait aucun sort, contrairement a un achat en progression. Cause precisee le
+15/09/2026 : SortAffiche (winpersonnage.pas:1579) ne regarde que Nouveau > Actuel dans
+TabAugmentationTalent, or MajTables ecrit toujours Nouveau := Actuel pour un talent de
+creation (winpersonnage.pas:4849) - le declenchement ne peut donc jamais avoir lieu pour
+lui, y compris aux ouvertures suivantes du personnage.
+Decision de Nono : corriger cote WinCreation plutot que de toucher au mecanisme
+Nouveau/Actuel (laisse en l etat, conception a part). Ajoute dans PhaseSave
+(wincreation.pas, phase 5 "Talents", juste apres la resolution de chaque talent de
+creation) : si le talent a ModeSort=AUTO (Benediction), les sorts qui le citent
+(TalentsDuSort) sont ajoutes directement a Personnage.Equipement avec TypeEquipSp et
+CoutXp=0 - meme ecriture qu un octroi normal en jeu (winpersonnage.pas:5058-5064). Ajoute
+ChargeSort aux uses de wincreation.pas. Compile (lazbuild, 0 erreur). Pas encore teste en
+jeu - a verifier avec un personnage creant un pretre (Bless Sigmar ou equivalent).
+Fichiers modifies : wincreation.pas, A FAIRE.txt, CONTEXT.md, Log.txt.
+
+15/09/2026 - WINFILTRE : CLASSES DE METIER (GROUPE) SANS PREFIXE RULES-, CORRIGE
+Releve par Nono en testant la creation : dans WinFiltre, les 8 classes de metier
+(Academic/Burghers/...) s affichaient en code brut, et un choix PARTIEL de classes faisait
+disparaitre tous les resultats dans WinMetier (choix complet = filtre vide = symptome
+invisible).
+Cause unique : ListGroup (warhammersource.pas:1489-1496, peuplee au demarrage) portait les
+8 codes SANS le prefixe RULES- (CLASS_ACAD au lieu de RULES-CLASS_ACAD), alors que
+PMetier.LibelleGroupe (xmlexportimport.pas:2055, lu depuis <Class>"RULES-CLASS_*"</Class>)
+est bien prefixe. VerifieRecherche (chargeconstantes.pas:1247) exige une egalite stricte du
+prefixe : GetTexteLibelle(PGroupe) dans WinFiltre.ChargeGroupe ne trouvait donc jamais le
+libelle (repli sur le code brut affiche) ; VerifieFiltre (comparaison par sous-chaine,
+chargeconstantes.pas:1097) ne trouvait jamais "{RULES-CLASS_WARR}" dans un filtre construit
+sans prefixe, donc aucun metier ne matchait des qu un choix partiel etait valide.
+Meme famille de piege que la saga du 06/09/2026 (CONTEXT.md 2.49 etape 4, prefixage
+RULES-COMPXXX) : un ListXxx.Add/+= littéral sans prefixe passe a une fonction Cherche*/
+Verifie*. Corrige : les 8 litteraux prefixes RULES-CLASS_*. Compile (lazbuild, 0 erreur).
+A confirmer par Nono en jeu (WinFiltre puis filtrage WinMetier par classe partielle).
+Fichiers modifies : warhammersource.pas, Log.txt.

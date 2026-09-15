@@ -1,5 +1,32 @@
 # Warhammer — Contexte projet
 
+**15/09/2026 (suite) — WINFILTRE : CLASSES DE MÉTIER SANS PRÉFIXE RULES-, CORRIGÉ.** Relevé
+par Nono en testant la création : dans WinFiltre, les 8 classes de métier (Academic/
+Burghers/...) s'affichaient en code brut, et un choix **partiel** de classes faisait
+disparaître tous les résultats dans WinMetier (choix complet = filtre vide = pas de
+filtrage, symptôme invisible dans ce cas précis).
+
+**Cause unique pour les deux symptômes** : `ListGroup` (`warhammersource.pas:1489-1496`,
+peuplée au démarrage) portait les 8 codes **sans** le préfixe `RULES-` (`CLASS_ACAD` au lieu
+de `RULES-CLASS_ACAD`), alors que `PMetier.LibelleGroupe` (`xmlexportimport.pas:2055`, lu
+depuis `<Class>"RULES-CLASS_*"</Class>`) est bien préfixé. `VerifieRecherche`
+(`chargeconstantes.pas:1247`) exige une égalité stricte du préfixe (`LivreRecherche =
+LivreValeur`) : `GetTexteLibelle(PGroupe)` dans `WinFiltre.ChargeGroupe` ne trouvait donc
+jamais le libellé (repli sur le code brut affiché) ; `VerifieFiltre` (comparaison par
+sous-chaîne, `chargeconstantes.pas:1097`) ne trouvait jamais `"{RULES-CLASS_WARR}"` dans un
+filtre construit sans préfixe, donc aucun métier ne matchait dès qu'un choix partiel était
+validé. Même famille de piège que la saga du 06/09/2026 (CONTEXT.md 2.49 étape 4, préfixage
+`RULES-COMPXXX`) : un `ListXxx.Add`/`+=` littéral sans préfixe passé à une fonction
+`Cherche*`/`Verifie*` - **candidat de plus pour l'audit "listes fermées" du jour, forme
+apparentée mais pas identique** (ici c'est un préfixe de livre manquant, pas une énumération
+de type incomplète).
+
+Corrigé : les 8 littéraux préfixés `RULES-CLASS_*`. Compilé (`lazbuild`, 0 erreur). **À
+confirmer par Nono en jeu** (WinFiltre puis filtrage WinMetier par classe partielle). Pas
+encore committé.
+
+---
+
 **15/09/2026 — DESCENTE DU BACKLOG : TROIS VÉRIFICATIONS DE SOURCE, UN CORRECTIF DE DONNÉE.**
 Lot "vérifications de source" d'`A FAIRE.txt` (corrections courtes) :
 1. **Winds of Magic, trois sorts suspectés mal classés en génériques** (Fly-Infested Rotweed,
@@ -83,6 +110,26 @@ modifié, audit seul) :
      ignoré si une 3e valeur apparaît).
 
 Pas encore committé.
+
+---
+
+**15/09/2026 (suite) — BÉNÉDICTION À LA CRÉATION : SORT ACCORDÉ DIRECTEMENT DANS
+WINCREATION.** Bug trouvé le 03/09 (CONTEXT.md 2.40) : un talent de Bénédiction posé à la
+création n'accordait aucun sort. Cause précisée : `SortAffiche` (`winpersonnage.pas:1579`)
+ne regarde que `Nouveau > Actuel` dans `TabAugmentationTalent`, or `MajTables` écrit
+toujours `Nouveau := Actuel` pour un talent de création (`winpersonnage.pas:4849`) - le
+déclenchement ne peut donc jamais avoir lieu pour lui, y compris aux ouvertures suivantes du
+personnage (pas seulement au moment de la création).
+
+Décision de Nono : corriger côté `WinCreation` plutôt que de toucher au mécanisme
+Nouveau/Actuel (reste une conception à part, non menée). Ajouté dans `PhaseSave`
+(`wincreation.pas`, phase 5 "Talents", juste après la résolution de chaque talent de
+création) : si le talent a `ModeSort=AUTO` (Bénédiction), les sorts qui le citent
+(`TalentsDuSort`) sont ajoutés directement à `Personnage.Equipement` avec `TypeEquipSp` et
+`CoutXp=0` - même écriture qu'un octroi normal en jeu (`winpersonnage.pas:5058-5064`).
+`ChargeSort` ajouté aux `uses` de `wincreation.pas`. Compilé (`lazbuild`, 0 erreur).
+**Pas encore testé en jeu** - à vérifier avec un personnage créant un prêtre (Bless Sigmar
+ou équivalent) : le sort doit apparaître sur la fiche sans étape supplémentaire.
 
 ---
 
