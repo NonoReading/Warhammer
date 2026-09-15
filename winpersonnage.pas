@@ -4923,8 +4923,6 @@ Procedure TWinPersonnages.MajTables();
     PMetierCompetence: StructureMetierCompetence;
     PMetierTalent:     StructureMetierTalent;
     OldAugmentationTalent: TArrayPersonnageTalent;
-    CodEquip:          String;
-    TypEquip:          String;
     Ind:               Integer;
     CandidatsAppart:   String;
   begin
@@ -5093,28 +5091,6 @@ Procedure TWinPersonnages.MajTables();
               PersonnageMetier.NiveauMetier := StrToIntDef(TabCarriere.Cells[2, Ind],0);
               PersonnageMetier.CoutXp       := CalculOptionXpDiv25Inverse(StrToIntDef(TabCarriere.Cells[4, Ind],0));
               Personnage.MetierAncien       += [PersonnageMetier];
-            end;
-
-          // Equipement
-          for Ind := 1 to TabMetierEquipement.rowCount - 1 do
-            begin
-              TabEquipement.RowCount := TabEquipement.RowCount + 1;
-              CodEquip               := TabMetierEquipement.Cells[1,Ind];
-              TypEquip               := GetTypeEquipement(CodEquip);
-
-              TabEquipement.Cells[2, TabEquipement.RowCount-1] := CodEquip;
-              TabEquipement.Cells[3, TabEquipement.RowCount-1] := TypEquip;
-              // La colonne du LIBELLE n'etait pas ecrite : la ligne restait vide jusqu'au
-              // rechargement du XML, qui y remettait le code brut. Un equipement divers n'a
-              // pas d'autre libelle que son propre texte ("uniform"), d'ou le else.
-              if TypEquip = TypeEquipWe then
-                TabEquipement.Cells[4, TabEquipement.RowCount-1] := ChercheArme(CodEquip).Libelle
-              else if TypEquip = TypeEquipAr then
-                TabEquipement.Cells[4, TabEquipement.RowCount-1] := ChercheArmure(CodEquip).Libelle
-              else if ChercheTrapping(CodEquip).CodeTrapping <> '' then
-                TabEquipement.Cells[4, TabEquipement.RowCount-1] := ChercheTrapping(CodEquip).Libelle
-              else
-                TabEquipement.Cells[4, TabEquipement.RowCount-1] := CodEquip;
             end;
 
           // Competence
