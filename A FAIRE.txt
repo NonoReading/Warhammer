@@ -171,7 +171,7 @@ un quatrieme palier. Aucun TIERS_COPPER a creer ; le lire comme Brass (deja le c
 03/09) est correct. RULES-TIERS_BRASS/SILVER/GOLD (chargetexte.pas, resolus via SalaireMetier
 prefixe - CONTEXT.md 2.61) restent la seule enumeration, rien a recopier ailleurs.
 
-[AUDIT FAIT LE 15/09/2026 - 4 CANDIDATS TROUVES, A TRANCHER AVEC NONO LESQUELS TRAITER]
+[AUDIT FAIT LE 15/09/2026 - 4 CANDIDATS TROUVES, POINT 4 TRAITE, RESTE A TRANCHER AVEC NONO]
 LISTES FERMEES DE TYPES ECRITES EN DUR - CANDIDATS TROUVES (meme forme que les six TypSpell
 qui ont produit trois bugs) :
 1. unitcalcul.pas:230-236 (GetTypeMetierEquipement) : le case ne traite que 4 des 5 prefixes
@@ -188,10 +188,6 @@ qui ont produit trois bugs) :
    LibelleEquipement l.1164/1183/1193/1203) traites differemment - 1226 ne gere que 'W','P'
    sans else (D/T gardent leur libelle brut, silencieux), 2753 gere 'W','P' avec else
    "Divers" (visible mais confond 'T' et 'D').
-4. chargepersonnage.pas:1551/1569/1587 : case ListTalentCompetenceModif[...].TypeModif sans
-   else - TypeModif est lu en texte libre depuis le XML (xmlexportimport.pas:1545) sans
-   protection. Le plus net des quatre : un bonus/malus d'asterisque ne serait simplement pas
-   applique, sans aucune trace. A voir en priorite si un chantier reprend cette zone.
 
 NATIONS OF MANKIND : LORE ATTRIBUTE ET INGREDIENTS DES DEUX VENTS, SANS ENDROIT OU ALLER.
 Le Lore of Ice et le Lore of the Desert impriment chacun un Lore Attribute (regle de jeu, pas

@@ -113,18 +113,25 @@ modifié, audit seul) :
    tout le dépôt (`ColAtt*`/`ConstCarac*` et variables courtes type `BI`/`BAg`/`BInt`/...).
    Rien trouvé - vérifié négativement, retiré d'A FAIRE.txt.
 2. **Listes fermées de type recopiées en dur** (même forme que les six `TypSpell`, 3 bugs
-   déjà produits) : 4 candidats trouvés, listés en détail dans A FAIRE.txt, aucun corrigé -
-   demandent un arbitrage avec Nono avant de toucher au code :
+   déjà produits) : 4 candidats trouvés, listés en détail dans A FAIRE.txt. Trois restent à
+   arbitrer avec Nono avant de toucher au code :
    - `GetTypeMetierEquipement` (`unitcalcul.pas:230`) - préfixe `TRAP_` manquant, silencieux.
    - Union `TypeEquipCC+CT+MU` ("est-ce une arme") recopiée à l'identique à 9 endroits dans
      7 fichiers, aucun centralisé.
    - `winlivre.pas` : deux `case TypeEquip` sur le même type-caractère traités différemment
      (ligne 1226 vs 2753).
-   - `chargepersonnage.pas:1551/1569/1587` - `TypeModif` sans `else`, lu en texte libre
-     depuis le XML - **le plus net des quatre** (bonus/malus d'astérisque silencieusement
-     ignoré si une 3e valeur apparaît).
+   - `chargepersonnage.pas:1551/1569/1587` - **traité, voir suite ci-dessous.**
 
-Pas encore committé.
+---
+
+**15/09/2026 (suite) — `TYPEMODIF` SANS `ELSE` (LISTE FERMÉE #4) CORRIGÉ.** `chargepersonnage.pas:1551/1569/1587` : le `case ListTalentCompetenceModif[...].TypeModif of` ne connaît que
+`ConstCompetenceInverseDe`/`ConstCompetenceBonus` (`ChooseDice`/`Bonus`, les deux seules
+valeurs présentes aujourd'hui dans le catalogue) et n'avait pas de `else` - une 3e valeur
+future serait silencieusement ignorée (bonus/malus d'astérisque absent, sans trace), même
+famille que les bugs `TypSpell` déjà produits. Décision de Nono : rendre l'anomalie visible
+plutôt que l'accepter. Ajouté aux 3 endroits un `else` qui marque le bonus `?(N)` au lieu de
+le laisser vide. Aucun effet aujourd'hui (aucune donnée du catalogue ne déclenche ce cas).
+Compilé (`lazbuild`, 0 erreur). Retiré d'A FAIRE.txt (candidat #4 de la liste).
 
 ---
 

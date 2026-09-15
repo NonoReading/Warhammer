@@ -1553,6 +1553,11 @@ begin
                         Personnage.CreationCompetence35[indiceCompetence].Bonus += '><(' + IntToStr(Asterisque) + ')';
                       ConstCompetenceBonus:
                         Personnage.CreationCompetence35[indiceCompetence].Bonus += 'B(' + IntToStr(Asterisque) + ')';
+                      else
+                        // TypeModif ni ChooseDice ni Bonus (donnee de livre inattendue) - rendu
+                        // visible plutot que silencieusement ignore, meme famille de piege que
+                        // les six TypSpell. A FAIRE.txt, arbitrage Nono du 15/09/2026.
+                        Personnage.CreationCompetence35[indiceCompetence].Bonus += '?(' + IntToStr(Asterisque) + ')';
                     end;
                   end;
               end;
@@ -1571,6 +1576,9 @@ begin
                         Personnage.CreationCompetence40[indiceCompetence].Bonus += '><(' + IntToStr(Asterisque) + ')';
                       ConstCompetenceBonus:
                         Personnage.CreationCompetence40[indiceCompetence].Bonus += 'B(' + IntToStr(Asterisque) + ')';
+                      else
+                        // Voir la meme garde sur CreationCompetence35 ci-dessus.
+                        Personnage.CreationCompetence40[indiceCompetence].Bonus += '?(' + IntToStr(Asterisque) + ')';
                     end;
                   end;
               end;
@@ -1589,6 +1597,9 @@ begin
                         Personnage.AugmentationCompetence[indiceCompetence].Bonus += '><(' + IntToStr(Asterisque) + ')';
                       ConstCompetenceBonus:
                         Personnage.AugmentationCompetence[indiceCompetence].Bonus += 'B(' + IntToStr(Asterisque) + ')';
+                      else
+                        // Voir la meme garde sur CreationCompetence35 ci-dessus.
+                        Personnage.AugmentationCompetence[indiceCompetence].Bonus += '?(' + IntToStr(Asterisque) + ')';
                     end;
                   end;
               end;
