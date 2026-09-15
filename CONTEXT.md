@@ -1,9 +1,18 @@
 # Warhammer — Contexte projet
 
-**REPRISE (15/09/2026 fin de session)** : rien en cours. WinFiltre (classes de métier), la
-Bénédiction à la création et le générique Great Weapon (V5)/Silvered Sword sont confirmés OK
-par Nono en jeu, `ChercheTalent` validé par relecture de code (voir suites ci-dessous) - tout
-le lot du jour est vérifié, reste à committer.
+**REPRISE (15/09/2026 fin de session)** : rien en cours, tout committé (`3ef77f0`, working
+tree propre). Les quatre vérifications du point de reprise précédent sont closes (WinFiltre,
+Bénédiction à la création, `ChercheTalent`, Great Weapon/Silvered Sword - voir suites
+ci-dessous), et le candidat #4 de l'audit "listes fermées" (`TypeModif` sans `else`) est
+corrigé et testé par compilation.
+
+À la prochaine session : arbitrer avec Nono les **3 candidats restants de l'audit "listes
+fermées"** (voir suite "AUDIT (SOUS-AGENT)" ci-dessous, un seul des quatre est fait) :
+- `GetTypeMetierEquipement` (`unitcalcul.pas:230`) - préfixe `TRAP_` manquant, silencieux.
+- Union `TypeEquipCC+CT+MU` ("est-ce une arme") recopiée à l'identique à 9 endroits dans
+  7 fichiers, aucun centralisé.
+- `winlivre.pas` : deux `case TypeEquip` sur le même type-caractère traités différemment
+  (ligne 1226 vs 2753).
 
 ---
 

@@ -4679,3 +4679,23 @@ RULES-COMPXXX) : un ListXxx.Add/+= littéral sans prefixe passe a une fonction C
 Verifie*. Corrige : les 8 litteraux prefixes RULES-CLASS_*. Compile (lazbuild, 0 erreur).
 A confirmer par Nono en jeu (WinFiltre puis filtrage WinMetier par classe partielle).
 Fichiers modifies : warhammersource.pas, Log.txt.
+
+15/09/2026 - QUATRE VERIFICATIONS DU JOUR CONFIRMEES PAR NONO EN JEU, WINRACE RETIRE
+D'A FAIRE.txt, TYPEMODIF SANS ELSE CORRIGE.
+Testes en jeu par Nono, tous OK : WinFiltre (classes de metier + filtrage partiel
+WinMetier), Benediction a la creation (carriere Priest RULES-WORK49, Bless Sigmar - le
+sort apparait sur la fiche sans etape supplementaire), generique Great Weapon (Any) V5 +
+Silvered Sword (choix d equipement Guard niveau 3 et Witchfinder General niveau 2).
+ChercheTalent valide par relecture de code plutot qu un test en jeu : le declencheur reel
+(un code de talent absent du catalogue) n a aucun cas connu aujourd hui, Bless ne teste pas
+ce chemin (T0012_SIGMAR existe au catalogue, herite de T0012_* via <Generique>).
+WinRace (regroupement des ethnies par race a l affichage, note le 13/09) retire d A
+FAIRE.txt : c etait le meme besoin que WinMetier, deja resolu le 14/09 (ChargeRaceMetier) -
+Nono confirme que c est WinMetier qu il visait, pas WinRace.
+Audit des listes fermees (voir entree "AUDIT" plus haut) : candidat #4 traite.
+chargepersonnage.pas:1551/1569/1587, case ListTalentCompetenceModif[...].TypeModif sans
+else (ChooseDice/Bonus, rien d autre connu au catalogue aujourd hui). Decision de Nono :
+rendre l anomalie visible plutot que de l accepter. Ajoute un else aux 3 endroits, marque
+le bonus "?(N)" au lieu de le laisser silencieusement absent. Aucun effet aujourd hui.
+Compile (lazbuild, 0 erreur). Les 3 autres candidats de l audit restent a trancher.
+Fichiers modifies : chargepersonnage.pas, A FAIRE.txt, CONTEXT.md, Log.txt.
