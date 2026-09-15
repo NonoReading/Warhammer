@@ -59,6 +59,13 @@ Const
       ConstXmlSousChapitreTalMetier     = 'SUBCHAPTER_TALENTCAREER';
       ConstXmlSousChapitreCompSpecie    = 'SUBCHAPTER_SKILLSPECIE';
       ConstXmlSousChapitreCompCreation  = 'SUBCHAPTER_SKILLCREATION';
+      // Pendant de SUBCHAPTER_SKILLSPECIE (ci-dessus) pour les avancees gratuites d'une
+      // APPARTENANCE (<SkillChoice> d'un CareerBonus, ex. Reiksguard palier 4) et non d'un
+      // choix de creation - champ dedie plutot que reutiliser CreationCompetence35, pour ne
+      // pas melanger deux sources differentes (CONTEXT.md, meme raison que
+      // DATA_CAREER_BONUS/DATA_SPELL_TALENT). Ecrit au niveau du personnage, a cote de
+      // MEMBERSHIP, pas sous CHAPTER_CREATION : ce n'est pas une donnee de creation.
+      ConstXmlSousChapitreCompAppartenance = 'SUBCHAPTER_SKILLAPPARTENANCE';
       ConstXmlChapitreOldWork		= 'CHAPTER_OLDCAREER';
       ConstXmlChapitreEquipement	= 'CHAPTER_ITEM';
       ConstXmlChapitreCorruption	= 'CHAPTER_CORRUPTION';
@@ -302,6 +309,20 @@ Const
       // texte la description complete. Affichee sur le PDF comme un "talent virtuel" de
       // plus dans le bloc Talents - decision Nono, CONTEXT.md 2.51, 08/09/2026.
       ConstXmlSpecialRule               = 'SpecialRule';
+      // Cinquieme pendant du meme moule (ModifyCarac/ModifySkill/ModifyWeapon/SpecialRule),
+      // pour un palier de CareerBonus qui offre un CHOIX parmi les competences RACIALES DU
+      // PERSONNAGE (ex. palier 4 "Knight of the Inner Circle" du Reiksguard, Nations of
+      // Mankind p.8 : "choose 3 Empire Province Racial Skills to give a free +5 Advances
+      // to"). Pas de liste de codes a saisir : le pool est implicitement les competences de
+      // l'ETHNIE DU PERSONNAGE (ListRaceCompetence, meme source que TabRaceCompetence en
+      // creation), pas une liste portee par le livre. <SkillChoice Count="3" Value="5"/> -
+      // Count = nombre de competences a choisir, Value = nombre d'avancees gratuites
+      // accordees a CHACUNE (donc Count x Value avancees au total). Champ dedie prevu cote
+      // fiche personnage (pas CreationCompetence35/SUBCHAPTER_SKILLSPECIE, qui vient de la
+      // creation et non d'une appartenance) - a faire dans un point de compilation suivant.
+      ConstXmlSkillChoice               = 'SkillChoice';
+      ConstXmlSkillChoiceCount          = 'Count';
+      ConstXmlSkillChoiceValue          = 'Value';
       ConstXmlAjouteCompetence          = 'AddSkill';
       ConstXmlOpinions                  = 'OPINIONS';
       ConstXmlOpinion                   = 'Opinion';
@@ -649,6 +670,16 @@ Var
   // aucune constante de type n'a eu a etre creee. CONTEXT.md 2.44.
   SelectWinCareerBonus:String = '';
   ChoixWinCareerBonus: String = '';
+  // Choix de N competences RACIALES au titre d'un <SkillChoice> d'appartenance (ex.
+  // Reiksguard palier 4) - WinChoixCompetenceAppartenance. ChoixCompetenceAppartenanceRace
+  // = l'ethnie DONT le pool de competences vient (Personnage.Race, pas celle du
+  // CareerBonus) ; ChoixCompetenceAppartenanceCount = combien en choisir.
+  // SelectCompetenceAppartenance = les codes retenus separes par des virgules, VIDE si le
+  // joueur ferme sans valider (le bouton Valider n'est actif qu'a exactement Count coches
+  // - jamais de reponse partielle).
+  ChoixCompetenceAppartenanceRace:  String  = '';
+  ChoixCompetenceAppartenanceCount: Integer = 0;
+  SelectCompetenceAppartenance:     String  = '';
   SelectWinLivre:      String = '';
   ChoixWinLivre:       String = '';
   ListeLivre:          String = '';

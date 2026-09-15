@@ -19,8 +19,9 @@
         <HasResources Value="True"/>
         <ResourceBaseClass Value="Form"/>
         <UnitName Value="WarhammerSource"/>
+        <IsVisibleTab Value="True"/>
         <EditorIndex Value="4"/>
-        <TopLine Value="1278"/>
+        <TopLine Value="1276"/>
         <CursorPos X="30" Y="1289"/>
         <UsageCount Value="200"/>
         <Loaded Value="True"/>
@@ -134,7 +135,6 @@
         <HasResources Value="True"/>
         <ResourceBaseClass Value="Form"/>
         <UnitName Value="WinMetier"/>
-        <IsVisibleTab Value="True"/>
         <EditorIndex Value="1"/>
         <TopLine Value="998"/>
         <CursorPos X="24" Y="1018"/>

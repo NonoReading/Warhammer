@@ -4913,3 +4913,46 @@ Compile (lazbuild, 0 erreur). Teste en jeu par Nono a plusieurs largeurs de fene
 "parfait".
 Fichiers modifies : warhammersource.pas, warhammersource.lfm, A FAIRE.txt, CONTEXT.md,
 Log.txt.
+
+15/09/2026 (suite 2) - MECANISME <SkillChoice> POUR LE CHOIX DE COMPETENCES DU REIKSGUARD
+Reprise du point de reprise du 2.51 (Reiksguard, palier 4 "Knight of the Inner Circle",
+Nations of Mankind p.8) : "choose 3 Empire Province Racial Skills to give a free +5
+Advances to" - un choix du joueur, pas un bonus chiffre fixe comme les ModifyCarac deja en
+place sur ce palier. Nono a confirme le nombre (3 competences, pas 5 coches) et la source
+du pool (les competences de l'ethnie du personnage, meme liste que les 3 +5/3 +3 de la
+creation, TabRaceCompetence dans wincreation.pas).
+Cinq points de compilation :
+A - tag XML <SkillChoice Count="N" Value="V"/> sur un palier de DATA_CAREER_BONUS
+(ConstXmlSkillChoice, chargeconstantes.pas ; NbChoixCompetence/ValeurChoixCompetence sur
+StructureCareerBonusNiveau, chargemetier.pas ; lecture dans xmlexportimport.pas, meme moule
+que ModifyCarac/ModifyWeapon/SpecialRule).
+B - champ dedie Personnage.CompetenceAppartenance, nouveau sous-chapitre
+SUBCHAPTER_SKILLAPPARTENANCE ecrit/relu a cote de MEMBERSHIP (chargepersonnage.pas) -
+delibérement separe de CreationCompetence35/SUBCHAPTER_SKILLSPECIE (choix de creation, pas
+d'appartenance) sur demande de Nono ("champ dedie, comme les autres chantiers").
+C - nouvelle colonne cachee ColCompAppartenance sur TabCompetence (winpersonnage.pas),
+alimente ColCompBonus (vraies avancees, "count as Talent Advances") ET Gratuit dans
+CalculExperience - sans cette deuxieme ligne les 5 avancees auraient ete facturees comme un
+achat normal malgre le champ separe. Verifie en lisant CalculExperience sur question de
+Nono : la fonction ne sait rien de l'origine de la donnee, elle soustrait juste Gratuit de
+Total rang par rang.
+D - nouvelle fenetre dediee WinChoixCompetenceAppartenance (winchoixcompetenceappartenance.
+pas/.lfm) : grille des competences de l'ethnie du personnage (ListRaceCompetence), case a
+cocher plafonnee a Count. Nouveau libelle interface RULES-LAB_187 (INTERFACE.Xml/
+INTERFACE_FRANCAIS.Xml). Declenchement dans MajTables (winpersonnage.pas), hors du bloc
+NvNiveau=1 : contrairement aux greffes Skill/Talent normales (ecrites d'un coup a l'entree
+en carriere), un SkillChoice exige une decision du joueur au moment ou le palier est
+REELLEMENT atteint - donc a chaque avancement de niveau.
+E - saisie : NATIO-ORDER_REIKS_4 (BOOK_NATIONS_OF_MANKIND.Xml) porte desormais
+<SkillChoice Count="3" Value="5"/>, ancien commentaire "reste descriptif" reecrit.
+Compile a chaque etape (lazbuild, 0 erreur). XML revalide (bien forme). PAS ENCORE TESTE EN
+JEU : reste a faire progresser un personnage Reiksguard jusqu'au palier 4 et verifier
+l'ecran, le plafond a 3 coches, et l'absence de cout Xp sur les 3 competences retenues.
+A retenir : un champ separe (B) ne rend rien "automatiquement" gratuit - c'est le fait de
+compter la donnee dans Gratuit (C) qui fait le travail, la fonction de calcul ne connait
+que Total et Gratuit, jamais la source.
+Fichiers modifies : chargeconstantes.pas, chargemetier.pas, chargepersonnage.pas,
+xmlexportimport.pas, winpersonnage.pas, winchoixcompetenceappartenance.pas (nouveau),
+winchoixcompetenceappartenance.lfm (nouveau), WarhammerHelp.lpi,
+DATABASE/WFRP4/BOOK_NATIONS_OF_MANKIND.Xml, DATABASE/INTERFACE.Xml,
+DATABASE/INTERFACE_FRANCAIS.Xml, A FAIRE.txt, CONTEXT.md, Log.txt.

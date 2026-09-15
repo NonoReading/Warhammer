@@ -63,6 +63,11 @@ Type
         ListeCompetence:  String;
         ListeTalent:      String;
         Livre:            String;
+        // <SkillChoice Count="N" Value="V"/> - voir ConstXmlSkillChoice, ChargeConstantes.
+        // NbChoixCompetence = 0 : aucun choix sur ce palier (cas normal, quasi tous les
+        // paliers existants).
+        NbChoixCompetence:     Integer;
+        ValeurChoixCompetence: Integer;
   End;
 
   // StructureCareerBonusCompetenceModif (<ModifySkill>), StructureCareerBonusArmeModif

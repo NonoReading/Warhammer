@@ -16,7 +16,7 @@ uses
   ChargeSort, WinSpell, ChargeTexte, winFabrication, ChargeFabrication,
   WinTalent, WinCompetence, WinSpecialisation, ChargePersonnage,
   ChargeMetierCompetence, PdfPersonnage, Types, WinMutation, ChargeCorruptionTable,
-  ChargeRaceMetier;
+  ChargeRaceMetier, WinChoixCompetenceAppartenance;
 type
 
   StructureXpEtat = record
@@ -369,6 +369,11 @@ var
   ColCompTravail: Integer =15;
   ColCompAsterisc:Integer =16;
   ColCompTalent:  Integer =17;
+  // Avancees gratuites accordees par un <SkillChoice> d'appartenance (ex. Reiksguard
+  // palier 4) - Personnage.CompetenceAppartenance, ChargeConstantes. Meme role que
+  // ColComp35/ColComp40 (colonne cachee qui alimente ColCompBonus et le calcul du Xp
+  // "gratuit"), champ dedie plutot que reutiliser ColComp35 - CONTEXT.md.
+  ColCompAppartenance: Integer =18;
   // talent
   ColTalCode:     Integer = 1;
   ColTalLib:      Integer = 3;
@@ -451,6 +456,7 @@ var
   FenTalent:          TWintTalent;
   FenCompetence:      TWinCompetence;
   FenSpecialisation:  TWinSpecialisations;
+  FenChoixCompetenceAppartenance: TWinChoixCompetenceAppartenance;
 
   NbEquipement: Integer;
 
@@ -1799,7 +1805,7 @@ begin
 
   // Mise en forme du tableau des Compétences
   TabCompetence.Options                   := TabCompetence.Options + [goEditing, goAlwaysShowEditor];
-  TabCompetence.ColCount                  := 18;
+  TabCompetence.ColCount                  := 19;
   TabCompetence.RowCount                  := 1;
   TabCompetence.ColWidths[0]              := 20;
   TabCompetence.ColWidths[ColCompCode]    := 0;
@@ -1835,6 +1841,8 @@ begin
   TabCompetence.ColWidths[ColCompAsterisc]:= 0;
   TabCompetence.Cells[ColCompTalent, 0]   := 'Talent';
   TabCompetence.ColWidths[ColCompTalent]  := 0;
+  TabCompetence.Cells[ColCompAppartenance, 0]   := 'Appartenance';
+  TabCompetence.ColWidths[ColCompAppartenance]  := 0;
 
   // Mise en forme du tableau des carrières
   TabCarriere.Options                  := TabCarriere.Options + [goEditing, goAlwaysShowEditor];
@@ -2615,7 +2623,8 @@ procedure TWinPersonnages.CalculTotaux();
         // 17/08/2026 (même souci repéré côté PDF, corrigé en même temps dans pdfpersonnage.pas).
         TabCompetence.Cells[ColCompBonus, IndLig] := IntToStr(StrToIntDef(TabCompetence.Cells[ColComp35, IndLig],0) +
                                                               StrToIntDef(TabCompetence.Cells[ColComp40, IndLig],0) +
-                                                              StrToIntDef(TabCompetence.Cells[ColCompWork, IndLig],0));
+                                                              StrToIntDef(TabCompetence.Cells[ColCompWork, IndLig],0) +
+                                                              StrToIntDef(TabCompetence.Cells[ColCompAppartenance, IndLig],0));
         // Total desormais calcule par l'accesseur unique PdfPersonnageCompetence (deja utilise
         // par le PDF), meme demarche que pour les Attributs ci-dessus : il ajoute notamment les
         // bonus d'appartenance (Ordre/Regiment) et d'armure sur une Competence, absents de
@@ -3118,6 +3127,26 @@ begin
         end;
       TabCompetence.Cells[ColCompCode , Lig] := PersonnageCompetence.CodeCompetence;
       TabCompetence.Cells[ColComp40, Lig]    := IntToStr(PersonnageCompetence.Valeur);
+      PCompetence                            := ChercheCompetence(TabCompetence.Cells[1, lig]);
+      TabCompetence.Cells[ColCompLib, Lig]   := PCompetence.Libelle;
+      TabCompetence.Cells[ColCompStat, Lig]  := PCompetence.CodeAttribut;
+      PAttribut                              := ChercheAttribut(PCompetence.CodeAttribut);
+      TabCompetence.Cells[ColCompCarac, Lig] := PAttribut.Resume;
+    end;
+
+  // Avancees gratuites d'un <SkillChoice> d'appartenance (Personnage.CompetenceAppartenance,
+  // ColCompAppartenance) - meme boucle que les deux ci-dessus, colonne dediee.
+  for PersonnageCompetence in Personnage.CompetenceAppartenance do
+    begin
+      Lig  := FindRowByText(TabCompetence, PersonnageCompetence.CodeCompetence, ColCompCode);
+      if Lig = -1 then
+        begin
+          NbCompetence            := NbCompetence + 1;
+          TabCompetence.RowCount  := TabCompetence.RowCount + 1;
+          Lig                     := NbCompetence;
+        end;
+      TabCompetence.Cells[ColCompCode , Lig]         := PersonnageCompetence.CodeCompetence;
+      TabCompetence.Cells[ColCompAppartenance, Lig]  := IntToStr(PersonnageCompetence.Valeur);
       PCompetence                            := ChercheCompetence(TabCompetence.Cells[1, lig]);
       TabCompetence.Cells[ColCompLib, Lig]   := PCompetence.Libelle;
       TabCompetence.Cells[ColCompStat, Lig]  := PCompetence.CodeAttribut;
@@ -4552,7 +4581,8 @@ function TWinPersonnages.CalculXpEtat(): StructureXpEtat;
         if TabCompetence.Cells[ColCompBonus, Ind] <> '' then
           begin
             Gratuit   := StrToIntDef(TabCompetence.Cells[ColComp35, Ind],0) +
-                         StrToIntDef(TabCompetence.Cells[ColComp40, Ind],0);
+                         StrToIntDef(TabCompetence.Cells[ColComp40, Ind],0) +
+                         StrToIntDef(TabCompetence.Cells[ColCompAppartenance, Ind],0);
             Total     := StrToIntDef(TabCompetence.Cells[ColCompBonus, ind],0);
             Xp        := CalculExperience(ConstXmlCompetence, Gratuit, Total, TabCompetence.Cells[ColCompCode, Ind], '');
             if Xp = 0 then
@@ -4925,6 +4955,12 @@ Procedure TWinPersonnages.MajTables();
     OldAugmentationTalent: TArrayPersonnageTalent;
     Ind:               Integer;
     CandidatsAppart:   String;
+    // <SkillChoice> d'une appartenance deja acquise - meme trio que
+    // PersonnageAppliqueGreffes (chargepersonnage.pas).
+    Appartenances:     TStringList;
+    IndApp:            Integer;
+    Paliers:           TListCareerBonusNiveau;
+    Palier:            StructureCareerBonusNiveau;
   begin
     // raz table augmentation spéciales
     For IndAugm := TabAugmentationMjXp.RowCount - 1 downto 1 do
@@ -5151,6 +5187,50 @@ Procedure TWinPersonnages.MajTables();
               // pour capter le choix qui vient d'etre fait. CONTEXT.md 2.44.
               LibAppartenance.Caption := LibelleAppartenances(Personnage.Appartenance);
             end;
+
+          // <SkillChoice> d'une appartenance DEJA acquise (ex. Reiksguard palier 4,
+          // ConstXmlSkillChoice) - hors du bloc "= 1" ci-dessus, exprès : contrairement aux
+          // greffes Skill/Talent normales (ecrites d'un coup a l'entree en carriere puis
+          // filtrees par CalculTableExperience selon le niveau), un SkillChoice exige une
+          // DECISION du joueur, prise au moment ou le palier qui le porte est reellement
+          // atteint - donc a CHAQUE avancement de niveau, pas seulement au premier.
+          Appartenances := TStringList.Create;
+          try
+            ExtractStrings([','], [], PChar(Personnage.Appartenance), Appartenances);
+            for IndApp := 0 to Appartenances.Count - 1 do
+              begin
+                if Trim(Appartenances[IndApp]) = '' then
+                  continue;
+                Paliers := NiveauxDuCareerBonus(Trim(Appartenances[IndApp]));
+                try
+                  for Palier in Paliers do
+                    if (Palier.Niveau = StrToInt(NvNiveau)) and (Palier.NbChoixCompetence > 0) then
+                      begin
+                        ChoixCompetenceAppartenanceRace          := Personnage.Race;
+                        ChoixCompetenceAppartenanceCount         := Palier.NbChoixCompetence;
+                        SelectCompetenceAppartenance             := '';
+                        FenChoixCompetenceAppartenance           := TWinChoixCompetenceAppartenance.Create(Application);
+                        FenChoixCompetenceAppartenance.Position  := poOwnerFormCenter;
+                        FenChoixCompetenceAppartenance.ShowModal;
+                        if SelectCompetenceAppartenance <> '' then
+                          begin
+                            CandidatsAppart := SelectCompetenceAppartenance;
+                            for Ind := 1 to CountOccurrences(CandidatsAppart, ',') + 1 do
+                              begin
+                                PersonnageCompetence                := Default(StructurePersonnageCompetence);
+                                PersonnageCompetence.CodeCompetence := Trim(ExtractChaine(',', CandidatsAppart, Ind));
+                                PersonnageCompetence.Valeur          := Palier.ValeurChoixCompetence;
+                                Personnage.CompetenceAppartenance   += [PersonnageCompetence];
+                              end;
+                          end;
+                      end;
+                finally
+                  Paliers.Free;
+                end;
+              end;
+          finally
+            Appartenances.Free;
+          end;
         end;
 
 

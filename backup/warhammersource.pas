@@ -108,6 +108,7 @@ type
     procedure ComboBoxLangueInterfaceSelect({%H-}Sender: TObject);
     procedure FormActivate({%H-}Sender: TObject);
     procedure FormCreate({%H-}Sender: TObject);
+    procedure FormResize({%H-}Sender: TObject);
     procedure ChargerPersonnages();
     Procedure ChargeIni();
     procedure ChargerLivre(ForceMaJ: Boolean; ForceLivre: String);
@@ -121,7 +122,12 @@ type
     procedure ChargerListeVersions();
     procedure ChargerListeLanguesInterface();
     procedure PeuplerTabLivre();
+    procedure AjustePositionFenetre();
   private
+    FenetreInitialisee:       Boolean;
+    LargeurFenetreBase:       Integer;
+    LargeurTabLivreBase:      Integer;
+    LargeurTabPersonnageBase: Integer;
   public
   end;
 
@@ -430,9 +436,10 @@ procedure TMenu.ComboBoxVersionSelect(Sender: TObject);
   // ouvert, fenêtres catalogue fermées puis rouvertes, ConstCheminLivre/ConstCheminPersonnage
   // (Var depuis le 13/09/2026) recalculés depuis la version choisie, TabLivre rescannée
   // (PeuplerTabLivre) puis ChargerLivre/ChargerPersonnages rejoués.
-  // Portée volontairement limitée aux livres et aux personnages (validé avec Nono le
-  // 13/09/2026) : les chemins d'images (races/métiers/sorts, icônes de niveau, PDF) restent
-  // figés sur WFRP4\ tant que PICTURES\WFRP5\ n'existe pas au disque - chantier séparé.
+  // Chemins d'images races/métiers/sorts/niveaux recalculés depuis la version ici aussi
+  // (Nono, 14/09/2026, CONTEXT.md §2.70) - même correctif qu'au démarrage (FormCreate) : plus
+  // figés sur WFRP4\. Reste hors périmètre (pas demandé) : images du PDF de personnage
+  // (ConstCheminPdf*), toujours sous WFRP4\.
   var
     Version:           String;
     Ind:               Integer;
@@ -513,9 +520,14 @@ procedure TMenu.ComboBoxVersionSelect(Sender: TObject);
                         end;
                     end;
 
-                  ValVersion            := Version;
-                  ConstCheminLivre      := '\DATABASE\' + ValVersion + '\';
-                  ConstCheminPersonnage := '\SAVED_CARACTERS\' + ValVersion + '\';
+                  ValVersion             := Version;
+                  ConstCheminLivre       := '\DATABASE\' + ValVersion + '\';
+                  ConstCheminPersonnage  := '\SAVED_CARACTERS\' + ValVersion + '\';
+                  ConstCheminImageRace   := '\DATABASE\' + ValVersion + '\PICTURES\SPECIE\';
+                  ConstCheminImageMetier := '\DATABASE\' + ValVersion + '\PICTURES\CLASS\';
+                  ConstCheminImageSort   := '\DATABASE\' + ValVersion + '\PICTURES\SPELL\';
+                  ConstCheminImageNiveau       := '\PICTURES\' + ValVersion + '\NIV\';
+                  ConstCheminImageNiveauRacine := '\PICTURES\' + ValVersion + '\';
                   // Sélection de livres cochés de la NOUVELLE édition (CONTEXT.md §2.70) -
                   // sans ce recalcul, PeuplerTabLivre() rescannait bien les livres de la
                   // nouvelle édition mais gardait la sélection de l'ancienne (ListeLivre non
@@ -830,6 +842,7 @@ Procedure TMenu.RafraichirLibellesMenu();
     TypeEquipCC         := GetTexteLibelle('RULES-LAB_061');
     TypeEquipCT         := GetTexteLibelle('RULES-LAB_062');
     TypeEquipMU         := GetTexteLibelle('RULES-LAB_060');
+    TypeEquipMetierArme := TypeEquipCC+','+TypeEquipCT+','+TypeEquipMU;
     TypeEquipWe         := GetTexteLibelle('RULES-LAB_063');
     TypeEquipDI         := GetTexteLibelle('RULES-LAB_064');
     TypeEquipAR         := GetTexteLibelle('RULES-LAB_065');
@@ -859,6 +872,7 @@ Procedure TMenu.RafraichirLibellesMenu();
     ConstArbreCompetence        := GetTexteLibelle('RULES-LAB_009');
     ConstArbreTalent            := GetTexteLibelle('RULES-LAB_007');
     ConstArbreAuChoix           := GetTexteLibelle('RULES-LAB_010');
+    ConstArbreEnsemble          := GetTexteLibelle('RULES-LAB_186');
     ConstArbreMetierPossible    := GetTexteLibelle('RULES-LAB_011');
     ConstArbreRacePossible      := GetTexteLibelle('RULES-LAB_012');
     ConstArbreEquipement        := GetTexteLibelle('RULES-LAB_013');
@@ -917,6 +931,13 @@ Procedure TMenu.RafraichirLibellesMenu();
     TabLivre.Height      := HauteurLivre;
     TabPersonnage.Width  := LargeurPerso;
     TabPersonnage.Height := HauteurPerso;
+
+    // Les deux AdjustGridColumnsWidth ci-dessus peuvent avoir fait deriver TabLivre/
+    // TabPersonnage un instant avant la remise en place ci-dessus - Button3/
+    // TabPersonnage.Left/Button1/colonne Bibliotheque (ancrage du 15/09/2026) ne sont pas
+    // touches par cette fonction et pourraient donc rester calcules sur un etat
+    // intermediaire perime. Reancre tout depuis l'etat final remis en place ci-dessus.
+    AjustePositionFenetre();
   end;
 
 procedure TMenu.FormActivate(Sender: TObject);
@@ -1274,6 +1295,7 @@ procedure TMenu.FormCreate(Sender: TObject);
     ListeFichiersLivres: TStringList;
     Idx:                 Integer;
     RulesBookIndex:      Integer;
+    LargeurMinTabLivre:  Integer;
   begin
        // Images du Menu
        ChargerImage();
@@ -1285,9 +1307,6 @@ procedure TMenu.FormCreate(Sender: TObject);
 
        // Charger Les données
        ChargeIni();
-       ConstCheminImageRace    := '\DATABASE\WFRP4\PICTURES\SPECIE\';
-       ConstCheminImageMetier  := '\DATABASE\WFRP4\PICTURES\CLASS\';
-       ConstCheminImageSort    := '\DATABASE\WFRP4\PICTURES\SPELL\';
 
        // Sélecteur de version WFRP4/WFRP5 (CONTEXT.md §2.70) : appelée ICI, avant tout
        // chargement de livre, pour que ValVersion soit validée contre les répertoires
@@ -1298,8 +1317,21 @@ procedure TMenu.FormCreate(Sender: TObject);
        // WFRP4). ChargerListeVersions ne dépend d'aucune liste créée plus bas : elle scanne
        // DATABASE\ directement via XmlLivreBalise, indépendamment de ConstCheminLivre.
        ChargerListeVersions();
-       ConstCheminLivre      := '\DATABASE\' + ValVersion + '\';
-       ConstCheminPersonnage := '\SAVED_CARACTERS\' + ValVersion + '\';
+       ConstCheminLivre       := '\DATABASE\' + ValVersion + '\';
+       ConstCheminPersonnage  := '\SAVED_CARACTERS\' + ValVersion + '\';
+       // Chemins d'images races/métiers/sorts alignés sur la version comme ConstCheminLivre
+       // ci-dessus (Nono, 14/09/2026, CONTEXT.md §2.70) - ne sont plus figés sur WFRP4\ (l'un
+       // d'eux, ConstCheminImageMetier, était même figé sur WFRP5\ à tort, indépendamment de
+       // ValVersion). Un dossier de version pas encore garni (WFRP5\PICTURES\SPECIE\ n'existe
+       // pas encore au disque) se comporte comme aujourd'hui : FileExists échoue dans
+       // CheminRaceImage/CheminMetierImage/CheminSortImage, aucune image trouvée.
+       ConstCheminImageRace   := '\DATABASE\' + ValVersion + '\PICTURES\SPECIE\';
+       ConstCheminImageMetier := '\DATABASE\' + ValVersion + '\PICTURES\CLASS\';
+       ConstCheminImageSort   := '\DATABASE\' + ValVersion + '\PICTURES\SPELL\';
+       // Icones de niveau, même correctif (Nono, 14/09/2026, CONTEXT.md §2.70) - images
+       // WFRP5 ajoutées par Nono sous PICTURES\WFRP5\NIV\.
+       ConstCheminImageNiveau       := '\PICTURES\' + ValVersion + '\NIV\';
+       ConstCheminImageNiveauRacine := '\PICTURES\' + ValVersion + '\';
        // Sélection de livres cochés de CETTE édition (résolue depuis ListeLivreParVersion,
        // peuplée par ChargeIni - CONTEXT.md §2.70) - lue par PeuplerTabLivre plus bas.
        ListeLivre             := ListeLivreParVersion.Values[ValVersion];
@@ -1417,6 +1449,7 @@ procedure TMenu.FormCreate(Sender: TObject);
        TypeEquipCC         := GetTexteLibelle('RULES-LAB_061');
        TypeEquipCT         := GetTexteLibelle('RULES-LAB_062');
        TypeEquipMU         := GetTexteLibelle('RULES-LAB_060');
+       TypeEquipMetierArme := TypeEquipCC+','+TypeEquipCT+','+TypeEquipMU;
        TypeEquipWe         := GetTexteLibelle('RULES-LAB_063');
        TypeEquipDI         := GetTexteLibelle('RULES-LAB_064');
        TypeEquipAR         := GetTexteLibelle('RULES-LAB_065');
@@ -1469,14 +1502,28 @@ procedure TMenu.FormCreate(Sender: TObject);
        ChargerPersonnages();
 
        // liste des groupes de métiers
-       ListGroup += ['CLASS_ACAD'];
-       ListGroup += ['CLASS_BURG'];
-       ListGroup += ['CLASS_COUR'];
-       ListGroup += ['CLASS_PEAS'];
-       ListGroup += ['CLASS_RANG'];
-       ListGroup += ['CLASS_RIVE'];
-       ListGroup += ['CLASS_ROGU'];
-       ListGroup += ['CLASS_WARR'];
+       // Corrige le 15/09/2026 (Nono, WinFiltre) : ces codes etaient nus (sans prefixe
+       // RULES-), contrairement a PMetier.LibelleGroupe (xmlexportimport.pas:2055, lu depuis
+       // <Class>"RULES-CLASS_*"</Class>). Deux consequences silencieuses, meme cause -
+       // VerifieRecherche (chargeconstantes.pas:1247) exige LivreRecherche = LivreValeur : un
+       // code nu ne peut jamais matcher un code prefixe, ni dans un sens ni dans l'autre :
+       // 1. GetTexteLibelle(PGroupe) dans WinFiltre.ChargeGroupe (winfiltre.pas:225) ne
+       //    trouvait jamais l'entree ListTexte (deplacee dans INTERFACE.Xml le 15/09/2026,
+       //    mais deja prefixee RULES- avant ce deplacement) - repli sur le code brut affiche.
+       // 2. VerifieFiltre(PMetier.LibelleGroupe, filtreGroupe) dans WinMetier
+       //    (winmetier.pas:204) compare par sous-chaine (chargeconstantes.pas:1097) : un
+       //    filtre construit sans prefixe ("{CLASS_ACAD}...") ne contient jamais
+       //    "{RULES-CLASS_WARR}" - un choix PARTIEL de classes ne matchait donc plus aucun
+       //    metier (choix complet = filtre vide = pas de filtrage, d'ou le symptome
+       //    invisible tant que toutes les classes restent cochees).
+       ListGroup += ['RULES-CLASS_ACAD'];
+       ListGroup += ['RULES-CLASS_BURG'];
+       ListGroup += ['RULES-CLASS_COUR'];
+       ListGroup += ['RULES-CLASS_PEAS'];
+       ListGroup += ['RULES-CLASS_RANG'];
+       ListGroup += ['RULES-CLASS_RIVE'];
+       ListGroup += ['RULES-CLASS_ROGU'];
+       ListGroup += ['RULES-CLASS_WARR'];
 
        // Appeler la procédure SetGlobalFonts au démarrage du formulaire
        MiseEnFormeDesChamp(self);
@@ -1485,6 +1532,7 @@ procedure TMenu.FormCreate(Sender: TObject);
        ConstArbreCompetence        := GetTexteLibelle('RULES-LAB_009');
        ConstArbreTalent            := GetTexteLibelle('RULES-LAB_007');
        ConstArbreAuChoix           := GetTexteLibelle('RULES-LAB_010');
+       ConstArbreEnsemble          := GetTexteLibelle('RULES-LAB_186');
        ConstArbreMetierPossible    := GetTexteLibelle('RULES-LAB_011');
        ConstArbreRacePossible      := GetTexteLibelle('RULES-LAB_012');
        ConstArbreEquipement        := GetTexteLibelle('RULES-LAB_013');
@@ -1514,12 +1562,145 @@ procedure TMenu.FormCreate(Sender: TObject);
        AdjustGridColumnsWidth(TabLivre, Self.Height, true, true, True, 0, 10);
        AdjustGridColumnsWidth(TabPersonnage, Self.Height, true, true, True, 0, 10);
 
+       // TabLivre.Width réel (colonnes sommées par AdjustGridColumnsWidth ci-dessus) peut
+       // être plus étroit que les 4 boutons Livre fixes au-dessus (ButtonExportLivre/
+       // OuvrirLivre/DisclaimerLivre/CreationLivre, Left=224 dans le .lfm - jamais reancrés,
+       // restent dans la colonne TabLivre) : leur bord droit dépasserait alors celui de
+       // TabLivre, chevauchant Button3/TabPersonnage dès que TabLivre est à cette largeur -
+       // cause réelle du chevauchement signalé par Nono le 15/09/2026 (pas une histoire de
+       // redimensionnement : le plancher de 300 posé plus tôt dans le .lfm était trop
+       // petit, arbitraire, jamais recalé sur ces boutons). Calculé plutôt que recopié en
+       // dur, pour rester juste si le .lfm bouge.
+       LargeurMinTabLivre := ButtonExportLivre.Left + ButtonExportLivre.Width;
+       if ButtonOuvrirLivre.Left + ButtonOuvrirLivre.Width > LargeurMinTabLivre then
+         LargeurMinTabLivre := ButtonOuvrirLivre.Left + ButtonOuvrirLivre.Width;
+       if ButtonDisclaimerLivre.Left + ButtonDisclaimerLivre.Width > LargeurMinTabLivre then
+         LargeurMinTabLivre := ButtonDisclaimerLivre.Left + ButtonDisclaimerLivre.Width;
+       if ButtonCreationLivre.Left + ButtonCreationLivre.Width > LargeurMinTabLivre then
+         LargeurMinTabLivre := ButtonCreationLivre.Left + ButtonCreationLivre.Width;
+       TabLivre.Constraints.MinWidth := LargeurMinTabLivre - TabLivre.Left;
+
+       // Même piège côté TabPersonnage : ButtonPdf (seul bouton de cette colonne à ne pas
+       // démarrer au bord gauche de la table, +224 dans le .lfm) déborderait à droite si
+       // TabPersonnage devenait plus étroite que ButtonPdf.Left-TabPersonnage.Left+
+       // ButtonPdf.Width (Nono, 15/09/2026 - même correctif que TabLivre ci-dessus).
+       TabPersonnage.Constraints.MinWidth :=
+         (ButtonPdf.Left - TabPersonnage.Left) + ButtonPdf.Width;
+
+       // Ancrage de la fenêtre principale (A FAIRE.txt, demande Nono 13/09/2026) : largeur
+       // de référence capturée ICI, juste après les AdjustGridColumnsWidth ci-dessus - la
+       // tentative précédente (référence prise au premier OnResize réel, pour parer une
+       // hypothétique mise à l'échelle DPI tardive) n'a pas résolu le chevauchement observé
+       // par Nono en agrandissant et ajoutait de la complexité sans bénéfice démontré :
+       // retour à une capture simple et déterministe. AjustePositionFenetre borne aussi
+       // désormais TabLivre/TabPersonnage à ne jamais redescendre sous cette référence
+       // (Constraints.MinWidth posée en filet de sécurité côté LCL en plus, sur les deux
+       // grilles dans le .lfm).
+       FenetreInitialisee       := true;
+       LargeurFenetreBase       := Self.ClientWidth;
+       LargeurTabLivreBase      := TabLivre.Width;
+       LargeurTabPersonnageBase := TabPersonnage.Width;
+
      // Charger Les polices
       gTTFontCache.SearchPath.Add('C:\Windows\Fonts');
       gTTFontCache.SearchPath.Add(GetCurrentDir + ConstCheminImagePolice);
       gTTFontCache.BuildFontCache;
 
       ImageTmp := GetCurrentDir+'TMP.PNG';
+  end;
+
+procedure TMenu.FormResize(Sender: TObject);
+  begin
+    AjustePositionFenetre();
+  end;
+
+procedure TMenu.AjustePositionFenetre();
+  var
+    EcartTotal: Integer;
+  begin
+    // Un OnResize qui arriverait avant la fin de FormCreate (construction de la fenetre,
+    // ex. ChargeIni qui touche Self.Width) n'a encore rien a reancrer - LargeurFenetreBase
+    // n'est capturee (dans FormCreate) qu'une fois FenetreInitialisee passee a true.
+    if not FenetreInitialisee then
+      exit;
+
+    EcartTotal := Self.ClientWidth - LargeurFenetreBase;
+
+    // Nono le 15/09/2026 : les deux tables ne doivent jamais devenir plus petites que leur
+    // taille de depart, quelle qu'en soit la cause (fenetre retrecie sous la reference, ou
+    // ecart transitoire pendant un drag) - en dessous, elles restent a leur taille de
+    // depart plutot que de se chevaucher ; c'est alors la colonne Bibliotheque a droite qui
+    // sortirait progressivement du cadre visible, jamais les deux tables qui s'ecrasent
+    // l'une sur l'autre.
+    if EcartTotal < 0 then
+      EcartTotal := 0;
+
+    // TabLivre et TabPersonnage se partagent l'ecart moitie-moitie a l'elargissement
+    // (A FAIRE.txt, demande Nono 13/09/2026). Le reste d'un ecart impair va a
+    // TabPersonnage pour que la somme des deux largeurs colle exactement a EcartTotal.
+    TabLivre.Width       := LargeurTabLivreBase + (EcartTotal div 2);
+    TabPersonnage.Width  := LargeurTabPersonnageBase + (EcartTotal - (EcartTotal div 2));
+
+    // Tout ce qui est place ENTRE les deux tables (Button3) et APRES (Button1 puis toute
+    // la colonne Bibliotheque) est reancre en chaine a partir de la geometrie fraichement
+    // recalculee ci-dessus - jamais stocke, toujours recalcule depuis l'etat courant, meme
+    // principe que AjustePositionTables (winpersonnage.pas). Les ecarts fixes (6/10/8/16/
+    // 64/184) sont ceux du .lfm d'origine entre chaque controle et son voisin de gauche.
+    Button3.Left         := TabLivre.Left + TabLivre.Width + 6;
+    TabPersonnage.Left   := Button3.Left + Button3.Width + 10;
+    Button1.Left         := TabPersonnage.Left + TabPersonnage.Width + 8;
+
+    // Meme piege que TabLivre/TabPersonnage/Button2 plus haut, cote colonne Bibliotheque :
+    // son premier element (ButtonRace et les 6 autres TBCButton, +16 apres Button1) ne
+    // doit jamais chevaucher Panel2/Panel3 (Version/Interface, jamais reancres, bord droit
+    // fixe Panel2.Left+Panel2.Width) - releve par Nono le 15/09/2026, les deux tables pres
+    // de leur minimum ramenant Button1 trop a gauche.
+    if Button1.Left < (Panel2.Left + Panel2.Width) - 16 then
+      Button1.Left := (Panel2.Left + Panel2.Width) - 16;
+
+    // Libelle et boutons de la colonne Personnages, au-dessus de TabPersonnage - alignes
+    // sur son bord gauche (ButtonPdf a +224 dans le .lfm d'origine), suivent donc le meme
+    // decalage que la table plutot que de rester figes (Nono, 15/09/2026).
+    Label2.Left             := TabPersonnage.Left;
+    ButtonCreation.Left     := TabPersonnage.Left;
+    ButtonModification.Left := TabPersonnage.Left;
+    ButtonPdf.Left          := TabPersonnage.Left + 224;
+
+    // Button2 (ligne separatrice horizontale au-dessus des deux tables) s'arrete pile au
+    // bord droit de TabPersonnage dans le .lfm d'origine (Left=0, Width=968=432+536) -
+    // grandit donc du meme ecart total que les deux tables reunies. Ne doit cependant
+    // jamais finir avant Panel2/Panel3 (combos Version/Interface, jamais reancres, bord
+    // droit fixe a Panel2.Left+Panel2.Width) : si TabPersonnage redescendait pres de son
+    // minimum, Button2 s'arreterait sinon avant elles (Nono, 15/09/2026).
+    if TabPersonnage.Left + TabPersonnage.Width > Panel2.Left + Panel2.Width then
+      Button2.Width := TabPersonnage.Left + TabPersonnage.Width
+    else
+      Button2.Width := Panel2.Left + Panel2.Width;
+
+    Label1.Left            := Button1.Left + 184;
+    ButtonRace.Left        := Button1.Left + 16;
+    ButtonMetier.Left      := Button1.Left + 16;
+    ButtonCompetence.Left  := Button1.Left + 16;
+    ButtonTalent.Left      := Button1.Left + 16;
+    ButtonArme.Left        := Button1.Left + 16;
+    ButtonArmure.Left      := Button1.Left + 16;
+    ButtonSort.Left        := Button1.Left + 16;
+
+    TotLivreRace.Left       := Button1.Left + 64;
+    TotLivreMetier.Left     := Button1.Left + 64;
+    TotLivreCompetence.Left := Button1.Left + 64;
+    TotLivreTalent.Left     := Button1.Left + 64;
+    TotLivreArme.Left       := Button1.Left + 64;
+    TotLivreArmure.Left     := Button1.Left + 64;
+    TotLivreSort.Left       := Button1.Left + 64;
+
+    BoutonRace.Left        := Button1.Left + 184;
+    BoutonMetier.Left      := Button1.Left + 184;
+    BoutonCompetence.Left  := Button1.Left + 184;
+    BoutonTalent.Left      := Button1.Left + 184;
+    BoutonArme.Left        := Button1.Left + 184;
+    BoutonArmure.Left      := Button1.Left + 184;
+    BoutonSort.Left        := Button1.Left + 184;
   end;
 
 procedure TMenu.ButtonCompetenceClick(Sender: TObject);
@@ -1814,6 +1995,17 @@ procedure TMenu.ChargerPersonnages();
       FindClose(searchResult);
     end;
     AdjustGridColumnsWidth(TabPersonnage, Self.Height, true, true, True, 0, 0);
+
+    // Cet AdjustGridColumnsWidth (marge 0, differente des appels marge 10 de FormCreate)
+    // peut retrecir TabPersonnage.Width en dehors de tout redimensionnement de fenetre -
+    // ChargerPersonnages est rappelee hors FormCreate (FormActivate, si NeedUpdate), donc
+    // apres que l'ancrage de la fenetre (AjustePositionFenetre) a deja pose sa reference.
+    // Sans ce rappel, TabPersonnage se retrouvait plus etroite que ce que Button1/la
+    // colonne Bibliotheque attendaient - Button3/TabPersonnage.Left etc. restant calcules
+    // sur l'ancienne largeur, chevauchement releve par Nono le 15/09/2026 en agrandissant
+    // la fenetre (voir Log.txt). Reancre tout depuis l'etat courant, quoi que
+    // AdjustGridColumnsWidth ait pu faire deriver.
+    AjustePositionFenetre();
 
     // Définir le chemin du répertoire
     directoryPath := GetCurrentDir + ConstCheminPersonnage;

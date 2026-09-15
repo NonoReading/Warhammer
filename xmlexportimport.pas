@@ -2823,11 +2823,13 @@ Procedure XmlImport(FileName: String; OnlyPrimary: Boolean; OnlyCode: Boolean; C
                                     // Record local reutilise d'un palier a l'autre : sans
                                     // remise a zero, un palier sans balise heriterait du
                                     // precedent (meme piege que les fonctions Cherche*).
-                                    PCareerBonusNiveau.Livre           := Livre;
-                                    PCareerBonusNiveau.CodeBonus       := PCareerBonus.CodeBonus;
-                                    PCareerBonusNiveau.Niveau          := 0;
-                                    PCareerBonusNiveau.ListeCompetence := '';
-                                    PCareerBonusNiveau.ListeTalent     := '';
+                                    PCareerBonusNiveau.Livre                 := Livre;
+                                    PCareerBonusNiveau.CodeBonus             := PCareerBonus.CodeBonus;
+                                    PCareerBonusNiveau.Niveau                := 0;
+                                    PCareerBonusNiveau.ListeCompetence       := '';
+                                    PCareerBonusNiveau.ListeTalent           := '';
+                                    PCareerBonusNiveau.NbChoixCompetence     := 0;
+                                    PCareerBonusNiveau.ValeurChoixCompetence := 0;
                                     PCareerBonusNiveau.CodeNiveau      := RemoveQuotes(UTF8Encode(NodeNv3.Attributes.GetNamedItem(ConstXmlId).NodeValue));
 
                                     // Modificateurs d'Attribut/Competence du palier (ex. Knight
@@ -2912,6 +2914,18 @@ Procedure XmlImport(FileName: String; OnlyPrimary: Boolean; OnlyCode: Boolean; C
                                               PCareerBonusSpecialRule.Libelle   := RemoveQuotes(UTF8Encode(Node.Attributes.GetNamedItem(ConstXmlData).NodeValue));
                                               PCareerBonusSpecialRule.Texte     := RemoveQuotes(UTF8Encode(Node.TextContent));
                                               TempCareerBonusSpecialRule.Add(PCareerBonusSpecialRule);
+                                            end;
+                                          // <SkillChoice Count="N" Value="V"/> - choix parmi les
+                                          // competences raciales DU PERSONNAGE, pas une liste
+                                          // portee par le livre (ConstXmlSkillChoice,
+                                          // ChargeConstantes). Directement sur PCareerBonusNiveau,
+                                          // pas dans une liste temporaire : un seul choix possible
+                                          // par palier, contrairement aux modificateurs/regles
+                                          // speciales qui peuvent s'accumuler.
+                                          ConstXmlSkillChoice:
+                                            begin
+                                              PCareerBonusNiveau.NbChoixCompetence     := StrToIntDef(RemoveQuotes(UTF8Encode(Node.Attributes.GetNamedItem(ConstXmlSkillChoiceCount).NodeValue)), 0);
+                                              PCareerBonusNiveau.ValeurChoixCompetence := StrToIntDef(RemoveQuotes(UTF8Encode(Node.Attributes.GetNamedItem(ConstXmlSkillChoiceValue).NodeValue)), 0);
                                             end;
                                         end;
 

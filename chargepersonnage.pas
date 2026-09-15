@@ -173,6 +173,12 @@ Type
      // livre precise qu'on garde les competences et talents acquis meme apres avoir
      // quitte le regiment ou change de carriere. CONTEXT.md 2.44.
      Appartenance:               String;
+     // Competences choisies au titre d'un <SkillChoice> d'appartenance (ex. Reiksguard
+     // palier 4, "choisis 3 competences raciales, +5 avancees gratuites chacune") - Valeur
+     // porte le nombre d'avancees offertes, jamais lu par CalculTableExperience (meme
+     // principe que CreationCompetence35, mais champ separe : source differente, jamais
+     // melangee). Vide si le personnage n'a fait aucun choix de ce type.
+     CompetenceAppartenance:     array of StructurePersonnageCompetence;
   end;
 
   StructureChoixCreation = record
@@ -804,6 +810,21 @@ begin
         // Appartenances - voir CONTEXT.md 2.44.
         XMLContent.Add(XmlLigne(ConstXmlAppartenance, Personnage.Appartenance));
 
+        // Competences choisies au titre d'un <SkillChoice> d'appartenance - champ dedie,
+        // voir ChargeConstantes.ConstXmlSousChapitreCompAppartenance et le commentaire sur
+        // StructurePersonnage.CompetenceAppartenance ci-dessus.
+        XMLContent.Add(XmlDebut(ConstXmlSousChapitreCompAppartenance));
+        for PersonnageCompetence in Personnage.CompetenceAppartenance do
+          begin
+            PCompetence := ChercheCompetence(PersonnageCompetence.CodeCompetence);
+            XMLContent.Add(XmlLigneDonnee(ConstXmlCompetence,
+              CodeNormalise(PersonnageCompetence.CodeCompetence, PCompetence.Livre),
+              IntToStr(PersonnageCompetence.Valeur)));
+            ListeLivres:= PersonnageLivre(ListeLivres, PCompetence.livre);
+            XMLContent.Add(XmlCommentaire(PCompetence.Libelle));
+          end;
+        XMLContent.Add(XmlFin(ConstXmlSousChapitreCompAppartenance));
+
       XMLContent.Add(XmlFin(ConstXmlPersonnage));
 
       // Enregistrer le contenu XML dans un fichier
@@ -861,6 +882,7 @@ begin
       Personnage.XpCoutCompetence     := [];
       Personnage.XpCoutTalent         := [];
       Personnage.TalentCompetence     := [];
+      Personnage.CompetenceAppartenance := [];
 
       Personnage.NomPersonnage        := RemoveQuotes(UTF8Encode(PlayerNode.FindNode(ConstXmlName).TextContent));
       Personnage.XpTotal              := StrToIntDef(RemoveQuotes(UTF8Encode(PlayerNode.FindNode(ConstXmlXp).TextContent)),0);
@@ -883,6 +905,26 @@ begin
       Personnage.Appartenance         := '';
       if Assigned(PlayerNode.FindNode(ConstXmlAppartenance)) then
         Personnage.Appartenance       := RemoveQuotes(UTF8Encode(PlayerNode.FindNode(ConstXmlAppartenance).TextContent));
+
+      // Competences choisies au titre d'un <SkillChoice> d'appartenance - champ dedie, voir
+      // ChargeConstantes.ConstXmlSousChapitreCompAppartenance. Balise absente des fiches
+      // enregistrees avant ce chantier : le test Assigned suffit, le tableau reste vide.
+      SubChapterNode := PlayerNode.FindNode(ConstXmlSousChapitreCompAppartenance);
+      if Assigned(SubChapterNode) then
+        begin
+          Node := SubChapterNode.FirstChild;
+          while Assigned(Node) do
+            begin
+              if Node.NodeName = ConstXmlCompetence then
+                begin
+                  PersonnageCompetence.CodeCompetence := RemoveQuotes(UTF8Encode(Node.Attributes.GetNamedItem(ConstXmlData).NodeValue));
+                  PersonnageCompetence.Valeur          := StrToIntDef(RemoveQuotes(UTF8Encode(Node.TextContent)),0);
+                  Personnage.CompetenceAppartenance    += [PersonnageCompetence];
+                end;
+              Node := Node.NextSibling;
+            end;
+        end;
+
       if Assigned(PlayerNode.FindNode(ConstXmlAge)) then
         Personnage.Age                := StrToInt(RemoveQuotes(UTF8Encode(PlayerNode.FindNode(ConstXmlAge).TextContent)));
       if Assigned(PlayerNode.FindNode(ConstXmlHeight)) then

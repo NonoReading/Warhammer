@@ -256,14 +256,14 @@ Reste : les autres regroupements du meme genre (Bretagne HBRPA/HBRNO, Estalie HE
 Tilee, Norsca, Arabie HARAB...) n ont pas encore de Nation propre - a faire au fur et a
 mesure des besoins, pas systematiquement.]
 
-LE CHOIX DE 3 COMPETENCES RACIALES PROVINCIALES (+5 AVANCEES CHACUNE) N EST PAS MODELISE.
-Grand Order of the Reiksguard, palier Knight of the Inner Circle (p.8, NATIO-ORDER_REIKS
-palier 4, saisi le 08/09/2026) : en plus des +10 Sociabilite/+10 Volonte (ModifyCarac,
-en place), le livre donne un CHOIX du joueur parmi les competences raciales provinciales -
-aucun mecanisme actuel ne represente un choix parmi une liste (ModifySkill ne vise qu un
-seul code fixe). Laisse en commentaire XML dans BOOK_NATIONS_OF_MANKIND.Xml, purement
-descriptif pour l instant. Les 17 Ordres de chevalerie sont tous saisis (10/09/2026) ;
-verifie qu'aucun autre n'a le meme genre de choix parmi une liste.
+[MECANISME <SkillChoice> ECRIT ET COMPILE LE 15/09/2026 - PAS ENCORE TESTE EN JEU]
+LE CHOIX DE 3 COMPETENCES RACIALES PROVINCIALES DU RIEKSGUARD EST DESORMAIS MODELISE
+(NATIO-ORDER_REIKS palier 4, <SkillChoice Count="3" Value="5"/>, chargeconstantes.pas/
+chargemetier.pas/chargepersonnage.pas/winpersonnage.pas/winchoixcompetenceappartenance.pas).
+A verifier avec un personnage reel atteignant Knight of the Inner Circle : l'ecran de choix
+s'ouvre bien, les 3 competences retenues apparaissent sur la fiche a +5 sans cout Xp. Les 17
+Ordres de chevalerie sont tous saisis (10/09/2026) ; verifie qu'aucun autre n'a le meme genre
+de choix parmi une liste - seul le Reiksguard en a un.
 
 LES TRAPPINGS DES REGIMENTS OF RENOWN NE SONT PAS MODELISES. Les onze Regiments of Renown
 (p.6-7, saisis et valides le 10/09/2026, CONTEXT.md 2.44) donnent chacun un equipement
@@ -398,20 +398,6 @@ d armure, en verifiant dans TOUS LES LIVRES et pas seulement dans le Rulebook : 
 verification manquante qui a produit les collisions. La table DATA_CRAFTMANSHIP, elle, repart
 bien a 01 sans risque - CodeFabrication porte l identifiant complet avec son prefixe
 (xmlexportimport.pas l.2436).
-
-NATIONS OF MANKIND 3D-2 : LES ONZE REGIMENTS OF RENOWN NE RENTRENT PAS DANS LA TABLE.
-Condition = niveau 3 atteint et non l ethnie seule ; l effet comprend des TRAPPINGS
-(equipement) et une regle redigee (le rang 3 retombe a Soldier, le statut social reste
-celui du 3). A traiter apres les quatorze provinciaux.
-
-NATIONS OF MANKIND 3D-3, LES ORDRES DE CHEVALERIE : PARTIELLEMENT DEBLOQUE (06/09/2026).
-Meme architecture sur la carriere Knight, mais seul le palier Squire est saisissable ; les
-trois autres sont des effets de regle (+10 en CC avec les lances, un miracle automatique sur
-les haches, un trait contre les ennemis hais, +10 Fel et WP permanents). Le +10 Fel/+10 WP du
-Knight of the Inner Circle peut desormais se saisir avec <ModifyCarac> (CONTEXT.md 2.50 etape
-3, mecanisme regiments/ordres) - reste a l ecrire en XML. Les trois autres effets (bonus CC
-lie a une arme precise, miracle automatique, trait conditionnel) restent bloques : ce ne sont
-pas de simples modificateurs d Attribut/Competence, le modele ne les porte toujours pas.
 
 NATIONS OF MANKIND, HORS LOT : LES CREATURES. Taureaux de guerre estaliens, monture du
 Toreador. Reporte avec les montures.

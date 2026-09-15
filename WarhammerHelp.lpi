@@ -393,6 +393,14 @@
         <UnitName Value="WinLanceDe"/>
       </Unit>
       <Unit>
+        <Filename Value="winchoixcompetenceappartenance.pas"/>
+        <IsPartOfProject Value="True"/>
+        <ComponentName Value="WinChoixCompetenceAppartenance"/>
+        <HasResources Value="True"/>
+        <ResourceBaseClass Value="Form"/>
+        <UnitName Value="WinChoixCompetenceAppartenance"/>
+      </Unit>
+      <Unit>
         <Filename Value="winmutation.pas"/>
         <IsPartOfProject Value="True"/>
         <ComponentName Value="WinMutations"/>

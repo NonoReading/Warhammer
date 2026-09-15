@@ -1,7 +1,73 @@
 # Warhammer — Contexte projet
 
-**REPRISE (15/09/2026, suite)** : ancrage de la fenêtre principale (TMenu) **terminé et
-confirmé par Nono en jeu.** Rien d'autre en cours. Committé.
+**REPRISE (15/09/2026, suite 2)** : mécanisme `<SkillChoice>` (choix de 3 compétences
+raciales contre 5 avancées gratuites chacune, Grand Order of the Reiksguard palier 4,
+*Nations of Mankind* p.8) écrit et compilé de bout en bout, cinq points A à E. **Pas encore
+testé en jeu.** Prochaine étape : faire progresser un personnage Reiksguard jusqu'à Knight
+of the Inner Circle (`RULES-WORK12`, `NATIO-ORDER_REIKS`) et vérifier que l'écran de choix
+s'ouvre au bon moment, que le bouton Valider n'accepte qu'exactement 3 coches parmi les
+compétences de l'ethnie du personnage, et que les 3 retenues apparaissent sur la fiche à +5
+sans consommer d'Xp (`TabCompetence`, colonnes `ColCompBonus`/`ColCompXp`). Committé.
+
+---
+
+**15/09/2026 (suite 2) — MÉCANISME `<SkillChoice>` POUR UN CHOIX DE COMPÉTENCES RACIALES
+DANS UNE APPARTENANCE : ÉCRIT, PAS ENCORE TESTÉ EN JEU.** Reprise du point resté ouvert au
+§2.51 (Reiksguard palier 4, « choose 3 Empire Province Racial Skills to give a free +5
+Advances to » — un CHOIX du joueur, pas un bonus chiffré fixe comme `ModifyCarac`/
+`ModifySkill`). Nono a confirmé la lecture de la règle (« c'est bien 3 [compétences], pas 5
+[coches] ») et la source du pool (« les compétences qui se trouvent dans son ethnie... la
+même liste que pour les 3 +5/3 +3 de la création »), vérifiée exacte dans le code
+(`TabRaceCompetence`, `wincreation.pas`). Cinq points de compilation, tous verts :
+
+- **A — le tag XML.** `ConstXmlSkillChoice`/`Count`/`Value` (`chargeconstantes.pas`), deux
+  nouveaux champs `NbChoixCompetence`/`ValeurChoixCompetence` sur
+  `StructureCareerBonusNiveau` (`chargemetier.pas`), lus dans le `case` du palier
+  (`xmlexportimport.pas`) sur le même moule que `ModifyCarac`/`ModifyWeapon`/`SpecialRule`
+  juste au-dessus. Pas de liste de codes dans le livre : le pool est implicitement l'ethnie
+  DU PERSONNAGE, pas une donnée portée par le `CareerBonus`. Export non touché (comme les
+  trois autres, `XmlExportBook` n'est branché nulle part - `A FAIRE.txt`).
+- **B — champ dédié sur la fiche.** `Personnage.CompetenceAppartenance` (array de
+  `StructurePersonnageCompetence`), nouveau sous-chapitre `SUBCHAPTER_SKILLAPPARTENANCE`
+  écrit/relu à côté de `MEMBERSHIP` (`chargepersonnage.pas`) — délibérément SÉPARÉ de
+  `CreationCompetence35`/`SUBCHAPTER_SKILLSPECIE` (Nono : « champ dédié, comme les autres
+  chantiers »), même raison que `DATA_CAREER_BONUS`/`DATA_SPELL_TALENT` : ne jamais mélanger
+  deux sources différentes dans un même champ.
+- **C — affichage et coût Xp.** Nouvelle colonne cachée `ColCompAppartenance` (18) sur
+  `TabCompetence`, même rôle que `ColComp35`/`ColComp40` (`winpersonnage.pas`) : alimente
+  `ColCompBonus` (le total d'avancées RÉELLES, « count as Talent Advances » dixit le livre,
+  contrairement à `ColCompMutation` volontairement exclu) et surtout `Gratuit` dans
+  `CalculExperience` — sans cette dernière ligne, les 5 avancées auraient été facturées
+  comme un achat normal malgré le champ séparé. Vérifié dans le code sur demande de Nono
+  (« le gratuit n'est pas automatique par le type de donnée ? ») : non, `CalculExperience`
+  ne sait rien de l'origine des données, elle ne fait que soustraire `Gratuit` de `Total`
+  rang par rang - il fallait le dire explicitement aux deux endroits (`ColCompBonus` ET
+  `Gratuit`), parce que la donnée devait aussi compter dans le total pour que le coût d'un
+  futur achat normal sur la même compétence reste juste.
+- **D — l'écran de choix.** Nouvelle fenêtre dédiée `WinChoixCompetenceAppartenance`
+  (`winchoixcompetenceappartenance.pas`/`.lfm`, ajoutée au projet) : grille des compétences
+  de `ListRaceCompetence` filtrée sur l'ethnie du personnage (même source que
+  `TabRaceCompetence`, pas réutilisable telle quelle hors création), une colonne à cocher
+  (glyphes `☐`/`☑` déjà existants), Valider actif seulement à exactement `Count` coches.
+  Nouveau libellé interface `RULES-LAB_187` (`INTERFACE.Xml`/`INTERFACE_FRANCAIS.Xml`,
+  prochain numéro libre après `LAB_186`). Déclenchement dans `MajTables`
+  (`winpersonnage.pas`), volontairement HORS du bloc `NvNiveau = 1` : contrairement aux
+  greffes Skill/Talent normales (écrites d'un coup à l'entrée en carrière, filtrées ensuite
+  par `CalculTableExperience` selon le niveau), un `SkillChoice` exige une décision du
+  joueur au moment où le palier est RÉELLEMENT atteint - donc à chaque avancement de
+  niveau, pas seulement le premier.
+- **E — la saisie.** `NATIO-ORDER_REIKS_4` (`BOOK_NATIONS_OF_MANKIND.Xml`) porte désormais
+  `<SkillChoice Count="3" Value="5"/>`, à côté des deux `ModifyCarac` déjà en place ;
+  l'ancien commentaire « reste descriptif » est réécrit pour refléter l'état actuel. XML
+  revalidé (bien formé), `A FAIRE.txt` mis à jour (l'entrée périmée retirée, remplacée par
+  un point « à tester en jeu »).
+
+**Reste à faire avant de clore ce chantier** : le test en jeu décrit dans la REPRISE
+ci-dessus. Aucun autre Ordre/Régiment de Nations of Mankind n'a ce genre de choix (vérifié
+le 08-10/09, voir §2.51) - ce mécanisme n'a donc qu'un seul client aujourd'hui, mais reste
+générique (`Count`/`Value` quelconques) pour un futur livre qui en aurait besoin.
+
+---
 
 ---
 
@@ -8436,7 +8502,10 @@ Nation/ModifyWeapon/ModifyCarac fonctionne intégralement, y compris en gabarit 
    - **✅ Confirmé par Nono sur Carroburg** : un Soldier Middenlander ET un Soldier
      Reiklander voient tous deux le régiment à l'écran de choix ; un Nordlander (hors
      liste) ne le voit pas — sélectivité de la liste validée.
-   - **Chantier suivant : à définir avec Nono.**
+   - **Chantier suivant, repris le 15/09/2026 : le point 1 laissé ouvert plus haut (choix
+     des 3 Empire Province Racial Skills du Reiksguard, palier 4)** — mécanisme
+     `<SkillChoice>` écrit, voir l'entrée en tête de fichier (15/09/2026, suite 2), pas
+     encore testé en jeu.
 
 ### 2.52 Accesseur unique Attribut/Compétence — terminé, compilé et validé par Nono (10-11/09/2026)
 

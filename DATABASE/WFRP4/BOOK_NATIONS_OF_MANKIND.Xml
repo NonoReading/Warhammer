@@ -12346,9 +12346,10 @@ Poison: Used to weaken and kill targets, anyone caught in the radius of this gre
        Knight of the Inner Circle (palier 4) : "+10 Fellowship and +10 Willpower to your
        characteristics (these count as Talent Advances)" - deux ModifyCarac (CONTEXT.md 2.50
        etape 3). Le reste du palier 4, "you may choose 3 Empire Province Racial Skills to
-       give a free +5 Advances to", est un CHOIX du joueur parmi une liste : aucun mecanisme
-       ne le porte (ModifySkill ne vise qu UN code fixe), reste descriptif - voir
-       A FAIRE.txt. -->
+       give a free +5 Advances to", est desormais porte par <SkillChoice Count="3" Value="5"/>
+       (ConstXmlSkillChoice, chargeconstantes.pas) : le joueur choisit 3 competences parmi
+       celles de SA PROPRE ethnie (pas une liste du livre) et chacune recoit 5 avancees
+       gratuites, ecran dedie WinChoixCompetenceAppartenance declenche au palier 4. -->
 <CareerBonus id="NATIO-ORDER_REIKS">
 <Description language="ENGLISH">"Grand Order of the Reiksguard"</Description>
 <Career>"RULES-WORK12"</Career>
@@ -12377,6 +12378,7 @@ Poison: Used to weaken and kill targets, anyone caught in the radius of this gre
 <Talent>""</Talent>
 <ModifyCarac name="RULES-ATTR_Fel">+10</ModifyCarac>
 <ModifyCarac name="RULES-ATTR_WP">+10</ModifyCarac>
+<SkillChoice Count="3" Value="5"/>
 </Level>
 </CareerBonus>
   <!-- Order of the Blazing Sun (p.8), deuxieme des dix-sept Ordres de chevalerie de l Empire
