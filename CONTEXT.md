@@ -9,7 +9,7 @@ n'apparaissait nulle part à l'écran, et la colonne `ColCompAppartenance` (les 
 `SkillChoice` ci-dessus) n'était jamais révélée par la case "afficher le détail". Nouvelle
 colonne `ColCompCareer` + branchement de `ColCompAppartenance` sur `CheckBoxCalcul`,
 **testé et validé par Nono ("c'est bon")**. Voir l'entrée du jour ci-dessous pour le détail.
-Pas encore committé - aucune autre demande en attente à cette heure.
+Committé (`719fc68`) - aucune autre demande en attente à cette heure.
 
 ---
 
@@ -53,7 +53,7 @@ pour les Attributs, une colonne qui explique le Total d'une Compétence.
   pour rester lisible dans le même ordre que l'écran.
 
 Compilé (`lazbuild --build-all`, 0 erreur) après chaque étape. **Testé en jeu par Nono,
-validé ("c'est bon").** Pas encore committé.
+validé ("c'est bon").** Committé (`719fc68`).
 
 ---
 

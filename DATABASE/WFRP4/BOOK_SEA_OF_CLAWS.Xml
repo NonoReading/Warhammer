@@ -442,11 +442,17 @@
   <!-- Seaman -> Sailor (note 6 p.193 de Lustria) -->
 </Choice>
 </DATA_SPECIE_CAREER_CHOICE>
+<DATA_NATION>
+<Nation id="SEAOF-NATION_NORS">
+<Description language="ENGLISH">"Norsca"</Description>
+</Nation>
+</DATA_NATION>
 <DATA_SPECIE>
 <Specie id="SEAOF-RACE_HBJOR">
 <Description language="ENGLISH">"Humans (Bjornling Norse)"</Description>
 <Explanation language="ENGLISH">"Bjornling Norse are the most outward-looking of the Norse, trading along the coasts of the Sea of Claws."</Explanation>
 <Ethnic>"RULES-SPECIE_HUMAN"</Ethnic>
+<Nationality>"SEAOF-NATION_NORS"</Nationality>
 <SUBCHAPTER_ATTR>
 <Attribut name="RULES-ATTR_WS">"2d10+20"</Attribut>
 <Attribut name="RULES-ATTR_BS">"2d10+20"</Attribut>
@@ -570,6 +576,7 @@
 <Description language="ENGLISH">"Humans (Sarl Norse)"</Description>
 <Explanation language="ENGLISH">"Sarl Norse range east towards Kislev, and are as at home on horseback as aboard a longship."</Explanation>
 <Ethnic>"RULES-SPECIE_HUMAN"</Ethnic>
+<Nationality>"SEAOF-NATION_NORS"</Nationality>
 <SUBCHAPTER_ATTR>
 <Attribut name="RULES-ATTR_WS">"2d10+20"</Attribut>
 <Attribut name="RULES-ATTR_BS">"2d10+20"</Attribut>
@@ -695,6 +702,7 @@
        uniformisé au pluriel comme Bjornling et Sarl (coquille de composition). -->
 <Explanation language="ENGLISH">"Skaeling Norse are the most openly devoted to the Ruinous Powers, Khorne foremost among them. A Skaeling Character who generates the Pure Soul Talent as a Random Talent may take the Mark of Khorne instead."</Explanation>
 <Ethnic>"RULES-SPECIE_HUMAN"</Ethnic>
+<Nationality>"SEAOF-NATION_NORS"</Nationality>
 <SUBCHAPTER_ATTR>
 <Attribut name="RULES-ATTR_WS">"2d10+20"</Attribut>
 <Attribut name="RULES-ATTR_BS">"2d10+20"</Attribut>

@@ -251,10 +251,23 @@ seulement si un cas reel de rituel a effet permanent se presente. Note gardee po
 tard : l'idee d'un talent "de type trait" non selectionnable existe deja depuis longtemps
 (CONTEXT.md 2.15, ConstXmlTrait/StructureTalent.Trait) si le besoin revient.]
 
-[FAIT LE 07/09/2026 - mecanisme generique Nation ecrit et compile, voir CONTEXT.md 2.51.
-Reste : les autres regroupements du meme genre (Bretagne HBRPA/HBRNO, Estalie HESTA,
-Tilee, Norsca, Arabie HARAB...) n ont pas encore de Nation propre - a faire au fur et a
-mesure des besoins, pas systematiquement.]
+[FAIT LE 07/09/2026 - mecanisme generique Nation ecrit et compile, voir CONTEXT.md 2.51.]
+
+[FAIT LE 16/09/2026 - Nation NATIO-NATION_BRET (Bretonnia) ajoutee dans
+BOOK_NATIONS_OF_MANKIND.Xml, HBRPA (Peasantry) et HBRNO (Nobility) rattachees via
+<Nationality>. Nation NATIO-NATION_ESTA (Estalia) ajoutee de meme, HESTA rattachee.
+Nation UPINA-NATION_TILE (Tilea) ajoutee dans BOOK_UP_IN_ARMS.Xml, HTIL rattachee.
+Nation SEAOF-NATION_NORS (Norsca) ajoutee dans BOOK_SEA_OF_CLAWS.Xml, les trois ethnies
+humaines HBJOR/HSARL/HSKAE rattachees - SEAOF-RACE_DNORSE (Nains de Norsca) laisse de cote,
+decision de Nono le 16/09/2026 : le regroupement Nation vise avant tout les nations
+humaines, pas a etendre par defaut aux ethnies non-humaines d'un meme territoire. Nation
+NATIO-NATION_ARAB (Araby) ajoutee de meme, HARAB rattachee.]
+
+[TRANCHE LE 16/09/2026 - toutes les nations humaines identifiees (Empire, Bretonnia,
+Estalia, Tilea, Norsca, Araby) ont desormais leur Nation propre (mecanisme CONTEXT.md
+2.51). SEAOF-RACE_DNORSE (Nains de Norsca) volontairement laisse de cote, voir plus haut.
+Prochain regroupement a traiter seulement si un besoin reel se presente (nouveau livre,
+nouvelle condition d'appartenance).]
 
 LES TRAPPINGS DES REGIMENTS OF RENOWN NE SONT PAS MODELISES. Les onze Regiments of Renown
 (p.6-7, saisis et valides le 10/09/2026, CONTEXT.md 2.44) donnent chacun un equipement

@@ -1605,6 +1605,17 @@ Description: You ask Dazh to illuminate the night, and he
   </Option>
 </SpecieTrait>
 </DATA_SPECIE_TRAIT>
+<DATA_NATION>
+<Nation id="NATIO-NATION_BRET">
+<Description language="ENGLISH">"Bretonnia"</Description>
+</Nation>
+<Nation id="NATIO-NATION_ESTA">
+<Description language="ENGLISH">"Estalia"</Description>
+</Nation>
+<Nation id="NATIO-NATION_ARAB">
+<Description language="ENGLISH">"Araby"</Description>
+</Nation>
+</DATA_NATION>
 <DATA_SPECIE>
   <!-- LOT 3a : les ethnies humaines des pages 3-4. Une race, N ethnies : toutes
        rattachees a RULES-SPECIE_HUMAN par leur champ Ethnic, sur le modele de
@@ -2025,6 +2036,7 @@ Description: You ask Dazh to illuminate the night, and he
        ses pages 3-4 ne portent que les listes de competences et de talents. Cette
        explication est redigee depuis le cadre etabli - a valider par Nono. -->
 <Ethnic>"RULES-SPECIE_HUMAN"</Ethnic>
+<Nationality>"NATIO-NATION_ARAB"</Nationality>
   <!-- Caracteristiques recopiees telles quelles de RULES-RACE_HUM (Humans (Reikland)) :
        le livre ne donne pas de caracteristiques par nation, et tous les humains
        partagent les memes. Decision Nono du 03/09/2026. -->
@@ -2233,6 +2245,7 @@ Description: You ask Dazh to illuminate the night, and he
        ses pages 3-4 ne portent que les listes de competences et de talents. Cette
        explication est redigee depuis le cadre etabli - a valider par Nono. -->
 <Ethnic>"RULES-SPECIE_HUMAN"</Ethnic>
+<Nationality>"NATIO-NATION_BRET"</Nationality>
   <!-- Caracteristiques recopiees telles quelles de RULES-RACE_HUM (Humans (Reikland)) :
        le livre ne donne pas de caracteristiques par nation, et tous les humains
        partagent les memes. Decision Nono du 03/09/2026. -->
@@ -2431,6 +2444,7 @@ Description: You ask Dazh to illuminate the night, and he
        ses pages 3-4 ne portent que les listes de competences et de talents. Cette
        explication est redigee depuis le cadre etabli - a valider par Nono. -->
 <Ethnic>"RULES-SPECIE_HUMAN"</Ethnic>
+<Nationality>"NATIO-NATION_BRET"</Nationality>
   <!-- Caracteristiques recopiees telles quelles de RULES-RACE_HUM (Humans (Reikland)) :
        le livre ne donne pas de caracteristiques par nation, et tous les humains
        partagent les memes. Decision Nono du 03/09/2026. -->
@@ -2833,6 +2847,7 @@ Description: You ask Dazh to illuminate the night, and he
        ses pages 3-4 ne portent que les listes de competences et de talents. Cette
        explication est redigee depuis le cadre etabli - a valider par Nono. -->
 <Ethnic>"RULES-SPECIE_HUMAN"</Ethnic>
+<Nationality>"NATIO-NATION_ESTA"</Nationality>
   <!-- Caracteristiques recopiees telles quelles de RULES-RACE_HUM (Humans (Reikland)) :
        le livre ne donne pas de caracteristiques par nation, et tous les humains
        partagent les memes. Decision Nono du 03/09/2026. -->
