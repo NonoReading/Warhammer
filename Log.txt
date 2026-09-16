@@ -5005,3 +5005,27 @@ ces nouvelles Nations. Committe par Nono (5530e0e, "ajout des nations").
 Fichiers modifies : DATABASE/WFRP4/BOOK_NATIONS_OF_MANKIND.Xml,
 DATABASE/WFRP4/BOOK_UP_IN_ARMS.Xml, DATABASE/WFRP4/BOOK_SEA_OF_CLAWS.Xml, A FAIRE.txt,
 CONTEXT.md, Log.txt.
+
+16/09/2026 (suite) - CHANTIER VERTUS BRETONNES OUVERT (CONTEXT.md 2.78), ETAPE 1 (DONNEE)
+ECRITE ET COMPILEE PAR NONO. En cherchant un consommateur reel pour le mecanisme Nation
+(2.51), aucun CareerBonus existant n'en a besoin (tout Nations of Mankind vise l'Empire, Up
+in Arms et Sea of Claws n'en ont aucun) - point tranche confirme, rien a brancher. Repere au
+passage que NATIO-T0001/NATIO-T0002 (Knightly Virtue/Grail Virtue, carriere Bretonnian
+Knight) etaient tronques : seulement 4 et 7 Vertus saisies sur les 14+14 que porte reellement
+le livre, en texte libre. Retrouvees en lisant "PDF_TEXTE/Nations of Mankind.txt" (mais ce
+TXT melangeait deux colonnes a cet endroit precis), puis relues proprement au PDF
+(pdftotext -layout, colonnes separees par la position de caractere) : Vertus de Chevalerie
+p.11, Vertus du Graal p.13 (pas p.12 comme le laissait croire le TXT). NATIO-T0001/0002
+completes a 14/14, nouveau talent NATIO-T0017 "Virtue of the Quest" (absent de la saisie,
+mentionne deux fois dans la table de carriere - octroi/retrait automatique au changement de
+carriere, non mecanise), 28 stubs de libelle (un par Vertu nommee, meme convention deja en
+place dans ce livre pour Kenjutsu (Style)/Martial Artist (Path)/Mark of the Gods : talent de
+base = texte complet, stub = juste un libelle). Portee decidee avec Nono avant d'ecrire :
+choix + texte descriptif seulement, aucun effet automatise (comme les trappings des
+Regiments of Renown, 2.51) - un seul effet, Grail Virtue of the Ideal (+10 CC/+10 F fixe),
+rentre dans le mecanisme ModifyCarac existant si besoin plus tard. Donnee XML pure, aucun
+.pas touche, aucune collision d'id ni de libelle verifiee dans toute la base. Compile par
+Nono, chargement confirme, rien de casse. Reste : le mecanisme de choix (liste fixe de 14
+noms, pas derivee de l'ethnie comme SkillChoice) et Virtue of the Quest (octroi/retrait
+automatique), tous deux non commences.
+Fichiers modifies : DATABASE/WFRP4/BOOK_NATIONS_OF_MANKIND.Xml, CONTEXT.md, Log.txt.

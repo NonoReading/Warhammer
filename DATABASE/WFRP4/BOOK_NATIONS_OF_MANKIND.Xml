@@ -406,7 +406,17 @@ Modifiers your opponents would gain due to outnumbering you.
 This virtue does not negate any other circumstantial bonuses.
 Virtue of Duty - You may pledge loyalty to up to three other characters. When you fight alongside those characters, they each gain a +5 bonus to their Weapon Skill characteristics. Unless all of them are present in a battle, you take a –10 penalty to your
 Weapon Skill Characteristic. This effect does not stack with other
-Virtue of Duty’s."</Explanation>
+Virtue of Duty’s.
+Virtue of Empathy – You are a true hero of the common people. Add the Etiquette (Peasantry) Talent to any career you enter; moreover, your bonuses when influencing others of lower Status are doubled (WHFRP 4E Core Rulebook Page. 51). Other knights do not think less of you for talking with your social inferiors. (They may think less of you for choosing this path in the first place, however.)
+Virtue of Heroism - You excel at hand-to-hand combat and your hits can prove deadly. Whenever you roll +6 SL or more on a Successful Melee Test, you may choose to forgo the additional Damage to automatically inflict a Critical Hit instead. When using the Virtue of Heroism in conjunction with an Impact or Damaging Weapon, the Impact or Damaging Quality do not apply.
+Virtue of the Ideal - You are considered the pinnacle of what it means to be “Bretonnian”. You may choose an additional 3 Bretonnian Noble Species Skills not previously taken to give free +3 Advances to and roll on the Random Talent Table for an additional Talent.
+Virtue of the Impetuous Knight - Charge Attack has double its normal Movement distance for you. In addition to the normal +1 Advantage, you also gain a +1 bonus on the Damage of your attack. All normal conditions on a Charge Attack apply.
+Virtue of the Joust – You gain +20 WS when using a Lance.
+Virtue of Knightly Temper - If you successfully wound an opponent at the end of a Charge Attack, you may immediately make another free attack against the same opponent. This attack costs no actions but is otherwise the same as a Standard Attack. You are not required to make this attack (for example, if the opponent is already dead).
+Virtue of Noble Disdain - You gain a +20 bonus to your Weapon Skill when fighting characters who have used a missile weapon against you or your allies. You take a permanent –20 penalty to your Ballistic Skill characteristic due to your loathing for such cowardly means even by your allies.
+Virtue of the Penitent - You may not use magic items or ride steeds other than a horse. Any weapon you wield counts as magical, and the Critical Value of any Critical Hit roll made against you is reduced by –10. A Critical Hit with a value of 0 has no effect.
+Virtue of Purity - You invoke the Gifts of the Lady with utmost purity. You are amongst her most devout and pious of champions, channeling her will on the battlefield like a true paladin of Bretonnia! If you roll a successful Pray Test, you can choose to either use your rolled SL, or the number rolled on your units die.
+Virtue of Stoicism - You may re-roll any failed Fear or Terror Test, or any failed Test to resist Intimidation. If the re-roll succeeds, ignore the first failure."</Explanation>
 <Skill>""</Skill>
 <Max>"4"</Max>
 <PDF>""</PDF>
@@ -442,7 +452,14 @@ Grail Virtue of Heroism - If you inflict Damage on an opponent, you deal an addi
 Armor Points on that location. In addition, if you deal any Melee
 Damage to non-metal armor, armor has no effect in Damage reduction for the creature.
 Grail Virtue of the Ideal - You gain a permanent +10 Weapon
-Skill and +10 Strength to your Characteristics this does not count"</Explanation>
+Skill and +10 Strength to your Characteristics this does not count towards your Advances; moreover, you may choose any 3 Bretonnian Noble Species Skills to give a free +5 Advances to.
+Grail Virtue of the Impetuous Knight - On a successful Melee Attack, you may now Deathblow (Core Book, pg. 160) any adjacent enemies and continue to Deathblow on additional successful hits an amount of times equal to your WS Bonus. All other rules on Deathblow still apply.
+Grail Virtue of the Joust - In your hands, all lances count as magic weapons and deal +2 additional damage while mounted and Charging. They also lose the Improvised Weapon effect if used on a round you haven’t Charged, while mounted. If you wield a lance that is already magical, its damage is increased by +1.
+Grail Virtue of Knightly Temper - When you make a successful Charge Attack (on foot or mounted), you may now make a free attack against any enemy, not just the one you hit; moreover, if the initial enemy charged survives one or both attacks, you may make additional free attacks each turn against it until it is dead. You may do this an amount of charge attacks equal to your WS Bonus per Encounter.
+Grail Virtue of Noble Disdain - Double the Critical Value of any Critical Hit you score against an opponent who has used missile weapons against you or your allies. Example: rolling 25 becomes 50 on the Critical Wounds table. If the amount exceeds 100, you instantly inflict the 100 result of the table related to that body part.
+Grail Virtue of the Penitent - All Critical Wound effects have their conditions reduced by –1. Example: gaining 2 Bleeding and 1 Blinded from Struck Forehead now only grants 1 Bleeding. This does not apply to failed Tests that cause Conditions. You may reverse the dice of a Critical Hit made against you if it lowers the result on the Critical Wound Table. This effect does not stack with the –10 to a Critical Hit result provided by Virtue of Penitent and must be decided between the two.
+Grail Virtue of Purity – You gain the option to purchase the Lucky Talent as part of your career, and during combat you may spend 1 Fortune point to gain all Blessings (The Lady) for yourself for 6 Rounds.
+Grail Virtue of Stoicism - You are immune to Fear and Terror and cannot be Intimidated. If purchased, Fearless (Everything) now grants a +20 bonus to all Psychology Tests for any allies fighting alongside you within Willpower Bonus Yards."</Explanation>
 <Skill>""</Skill>
 <Max>"1"</Max>
 <PDF>""</PDF>
@@ -1053,6 +1070,22 @@ Description: You ask Dazh to illuminate the night, and he
 <PDF>""</PDF>
 <Test language="ENGLISH">""</Test>
 </Talent>
+  <!-- Virtue of the Quest (livre p.12) : octroi ET retrait automatiques lies au changement de
+       carriere (accorde a l entree en Questing Knight, perdu a la promotion en Grail Knight ;
+       conserve si la quete est simplement abandonnee), pas un choix du joueur ni une greffe
+       definitive comme les autres Talents - aucun mecanisme actuel ne fait ca. Saisi en donnee
+       pure, non branche. -->
+<Talent id="NATIO-T0017">
+<Attribut>""</Attribut>
+<Description language="ENGLISH">"Virtue of the Quest"</Description>
+<Short language="ENGLISH">""</Short>
+<Explanation language="ENGLISH">"This Talent has several effects, but they only apply whilst the character is in the career of the Questing Knight. If they complete the career and move on or abandon it to take up a different basic career, the effects of the Talent lapse. If the character completes the career and becomes a Grail Knight, the Talent is lost altogether. If they simply abandoned the Quest, they retain the Talent receiving endless visions, and if the knight re-enters the Questing Knight career its effects apply once more.
+Description: You take a –50 penalty to your Weapon Skill characteristic if you have a lance. Questing Knights renounce the use of that weapon, and those with the Virtue of the Quest find it hard to break that pledge; moreover, any worldly possessions they hold are abandoned (aside from their adventuring gear, steed, weaponry and armor), be it donating all their money to a nearby Grail Chapel and renouncing any controlled land until their quest is complete. You receive visions that direct your quest. These visions lead you to the places where you should be, which normally means that they lead you into danger. At any time, you may call upon your strength of purpose to give you succor. As an Action, you may spend a Fortune Point to heal 1d10+WPB of your own Wounds."</Explanation>
+<Skill>""</Skill>
+<Max>"1"</Max>
+<PDF>""</PDF>
+<Test language="ENGLISH">""</Test>
+</Talent>
 </DATA_TALENT>
 <DATA_TALENT_SPECIALIZATION>
 <Talent id="RULES-T0132_GARDE">
@@ -1149,6 +1182,95 @@ Description: You ask Dazh to illuminate the night, and he
 </Talent>
 <Talent id="NATIO-T0015_UNDIVIDED">
 <Description language="ENGLISH">"Mark Undivided"</Description>
+</Talent>
+  <!-- Stubs des 14 Vertus de Chevalerie (NATIO-T0001, texte complet sur le talent de base,
+       livre p.11) et des 14 Vertus du Graal correspondantes (NATIO-T0002, texte complet sur
+       le talent de base, livre p.13) - meme convention que Kenjutsu (Style)/Martial Artist
+       (Path)/Mark of the Gods ci-dessus : un stub par nom pour porter un libelle distinct,
+       aucun effet mecanise individuel. -->
+<Talent id="NATIO-T0001_AUDACITY">
+<Description language="ENGLISH">"Knightly Virtue (Virtue of Audacity)"</Description>
+</Talent>
+<Talent id="NATIO-T0001_CONFIDENCE">
+<Description language="ENGLISH">"Knightly Virtue (Virtue of Confidence)"</Description>
+</Talent>
+<Talent id="NATIO-T0001_DISCIPLINE">
+<Description language="ENGLISH">"Knightly Virtue (Virtue of Discipline)"</Description>
+</Talent>
+<Talent id="NATIO-T0001_DUTY">
+<Description language="ENGLISH">"Knightly Virtue (Virtue of Duty)"</Description>
+</Talent>
+<Talent id="NATIO-T0001_EMPATHY">
+<Description language="ENGLISH">"Knightly Virtue (Virtue of Empathy)"</Description>
+</Talent>
+<Talent id="NATIO-T0001_HEROISM">
+<Description language="ENGLISH">"Knightly Virtue (Virtue of Heroism)"</Description>
+</Talent>
+<Talent id="NATIO-T0001_IDEAL">
+<Description language="ENGLISH">"Knightly Virtue (Virtue of the Ideal)"</Description>
+</Talent>
+<Talent id="NATIO-T0001_IMPETUOUS">
+<Description language="ENGLISH">"Knightly Virtue (Virtue of the Impetuous Knight)"</Description>
+</Talent>
+<Talent id="NATIO-T0001_JOUST">
+<Description language="ENGLISH">"Knightly Virtue (Virtue of the Joust)"</Description>
+</Talent>
+<Talent id="NATIO-T0001_TEMPER">
+<Description language="ENGLISH">"Knightly Virtue (Virtue of Knightly Temper)"</Description>
+</Talent>
+<Talent id="NATIO-T0001_DISDAIN">
+<Description language="ENGLISH">"Knightly Virtue (Virtue of Noble Disdain)"</Description>
+</Talent>
+<Talent id="NATIO-T0001_PENITENT">
+<Description language="ENGLISH">"Knightly Virtue (Virtue of the Penitent)"</Description>
+</Talent>
+<Talent id="NATIO-T0001_PURITY">
+<Description language="ENGLISH">"Knightly Virtue (Virtue of Purity)"</Description>
+</Talent>
+<Talent id="NATIO-T0001_STOICISM">
+<Description language="ENGLISH">"Knightly Virtue (Virtue of Stoicism)"</Description>
+</Talent>
+<Talent id="NATIO-T0002_AUDACITY">
+<Description language="ENGLISH">"Grail Virtue (Virtue of Audacity)"</Description>
+</Talent>
+<Talent id="NATIO-T0002_CONFIDENCE">
+<Description language="ENGLISH">"Grail Virtue (Virtue of Confidence)"</Description>
+</Talent>
+<Talent id="NATIO-T0002_DISCIPLINE">
+<Description language="ENGLISH">"Grail Virtue (Virtue of Discipline)"</Description>
+</Talent>
+<Talent id="NATIO-T0002_DUTY">
+<Description language="ENGLISH">"Grail Virtue (Virtue of Duty)"</Description>
+</Talent>
+<Talent id="NATIO-T0002_EMPATHY">
+<Description language="ENGLISH">"Grail Virtue (Virtue of Empathy)"</Description>
+</Talent>
+<Talent id="NATIO-T0002_HEROISM">
+<Description language="ENGLISH">"Grail Virtue (Virtue of Heroism)"</Description>
+</Talent>
+<Talent id="NATIO-T0002_IDEAL">
+<Description language="ENGLISH">"Grail Virtue (Virtue of the Ideal)"</Description>
+</Talent>
+<Talent id="NATIO-T0002_IMPETUOUS">
+<Description language="ENGLISH">"Grail Virtue (Virtue of the Impetuous Knight)"</Description>
+</Talent>
+<Talent id="NATIO-T0002_JOUST">
+<Description language="ENGLISH">"Grail Virtue (Virtue of the Joust)"</Description>
+</Talent>
+<Talent id="NATIO-T0002_TEMPER">
+<Description language="ENGLISH">"Grail Virtue (Virtue of Knightly Temper)"</Description>
+</Talent>
+<Talent id="NATIO-T0002_DISDAIN">
+<Description language="ENGLISH">"Grail Virtue (Virtue of Noble Disdain)"</Description>
+</Talent>
+<Talent id="NATIO-T0002_PENITENT">
+<Description language="ENGLISH">"Grail Virtue (Virtue of the Penitent)"</Description>
+</Talent>
+<Talent id="NATIO-T0002_PURITY">
+<Description language="ENGLISH">"Grail Virtue (Virtue of Purity)"</Description>
+</Talent>
+<Talent id="NATIO-T0002_STOICISM">
+<Description language="ENGLISH">"Grail Virtue (Virtue of Stoicism)"</Description>
 </Talent>
   <!-- LOT 3 : les talents d acces aux domaines de magie du livre. Le prefixe reste RULES
        et non NATIO : la generique d une specialisation est deduite par DECOUPE DU TEXTE du

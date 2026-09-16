@@ -1,16 +1,67 @@
 # Warhammer — Contexte projet
 
-**REPRISE (16/09/2026)** : mécanisme `<DATA_NATION>` (§2.51) étendu à toutes les nations
-humaines identifiées à ce jour — Bretonnia, Estalia et Araby (`BOOK_NATIONS_OF_MANKIND.Xml`),
-Tilea (`BOOK_UP_IN_ARMS.Xml`), Norsca (`BOOK_SEA_OF_CLAWS.Xml`), en plus de l'Empire déjà en
-place. Chaque ethnie humaine correspondante rattachée via `<Nationality>`. Donnée pure,
-aucun `.pas` touché, pas de recompilation nécessaire. `SEAOF-RACE_DNORSE` (Nains de Norsca)
-volontairement laissé de côté (décision de Nono : le regroupement Nation vise les nations
-humaines, pas une extension systématique aux ethnies non-humaines d'un même territoire).
-Aucun consommateur ne filtre encore sur ces nouvelles Nations aujourd'hui (les 17
-`CareerBonus` de Nations of Mankind visent tous l'Empire) — pure préparation de données,
-à exploiter au prochain besoin réel (nouveau livre, nouvelle condition d'appartenance).
-**Committé (`5530e0e`) par Nono.** Voir l'entrée du jour ci-dessous pour le détail.
+**REPRISE (16/09/2026)** : chantier « Vertus bretonnes » (§2.78) ouvert en cherchant un
+consommateur réel du mécanisme Nation (§2.51, tranché le 16/09 — aucune suite nécessaire là,
+voir plus bas). Étape 1 (donnée pure) écrite et **compilée par Nono, ça charge, rien de
+cassé** : `NATIO-T0001`/`NATIO-T0002` (Knightly/Grail Virtue) complétés de 4/7 à 14/14 Vertus
+chacun (texte relu au PDF p.11/13, le TXT du corpus mélangeait les colonnes à cet endroit),
+nouveau talent `NATIO-T0017` "Virtue of the Quest", 28 stubs de libellé (un par Vertu nommée,
+convention Kenjutsu/Path/Mark déjà en place dans ce livre). **Point de reprise : étape 2, le
+mécanisme de choix** — un écran listant les 14 noms (Knightly Virtue, palier Errant) puis les
+14 Grail correspondants filtrés à ceux déjà pris en Knightly (palier Grail Knight), texte
+affiché mais aucun effet automatisé (décision de Nono : comme les trappings des Regiments of
+Renown, §2.51). `Virtue of the Quest` (octroi/retrait automatique lié au changement de
+carrière) laissé à part, non traité. Détail complet en §2.78 ci-dessous.
+
+---
+
+**16/09/2026 (suite) — §2.78 VERTUS BRETONNES, ÉTAPE 1 (DONNÉE) ÉCRITE ET COMPILÉE PAR NONO.**
+Recherche d'un consommateur réel pour le mécanisme Nation (§2.51) : aucun `<CareerBonus>`
+existant (17 Ordres + 11 Regiments of Renown de Nations of Mankind, tout Up in Arms, tout Sea
+of Claws) n'a besoin de filtrer sur une Nation autre que l'Empire — confirmé point tranché,
+rien à brancher tant qu'un nouveau livre ou une nouvelle condition ne se présente. En cherchant,
+repéré que `NATIO-WORK001` (Bretonnian Knight, Errant/Questing/Grail) porte un mécanisme de
+Vertus (`NATIO-T0001` Knightly Virtue, `NATIO-T0002` Grail Virtue) **non saisi du tout** :
+- **La saisie existante était tronquée.** Les deux talents ne portaient que 4 Vertus
+  (Audacity/Confidence/Discipline/Duty) et 7 Grail Virtues, écrasées en texte libre. Le livre
+  en définit réellement **14 de chaque** (+ Empathy, Heroism, the Ideal, the Impetuous Knight,
+  the Joust, Knightly Temper, Noble Disdain, the Penitent, Purity, Stoicism) — trouvé en
+  cherchant "Virtue of" dans `PDF_TEXTE/Nations of Mankind.txt`, texte qui mélangeait deux
+  colonnes à cet endroit précis (piège déjà documenté, §0) : relu proprement au PDF (`pdftotext
+  -layout -f/-l`, colonnes séparées par la position de caractère, gouttière repérée par
+  comptage de caractères non-blancs par colonne) plutôt qu'au TXT. Les Vertus du Graal sont sur
+  la page 13, pas 12 comme le laissait croire la pagination interne du TXT.
+- **`Virtue of the Quest` n'existait nulle part**, alors que la table de carrière la mentionne
+  deux fois ("Gains..."/"Removes..." aux paliers Questing Knight/Grail Knight). Créée en
+  nouveau talent `NATIO-T0017`, texte complet (page 12), avec un commentaire signalant que son
+  octroi ET son retrait automatiques liés au changement de carrière ne sont mécanisés par rien
+  aujourd'hui (aucune greffe de Talent n'est jamais retirée ailleurs dans le projet).
+- **28 stubs de libellé** (`NATIO-T0001_AUDACITY`...`STOICISM`, `NATIO-T0002_AUDACITY`...
+  `STOICISM`) — pas une invention : même convention déjà en place dans ce livre pour Kenjutsu
+  (Style)/Martial Artist (Path)/Mark of the Gods (talent de base = texte complet de toutes les
+  variantes, stubs = juste un `<Description>` pour porter le libellé d'une variante choisie).
+  Fait à l'identique, sans `<Generique>` (les stubs Kenjutsu/Path/Mark n'en ont pas non plus —
+  seuls certains stubs de compétence/talent générique classique, ex. `RULES-T0132_GARDE`, en
+  portent un).
+- **Portée décidée avec Nono avant d'écrire quoi que ce soit** : choix + texte descriptif
+  seulement, aucun effet de jeu automatisé (la plupart des 28 effets ne rentrent dans aucun
+  mécanisme existant — bonus à des alliés, effets conditionnels de combat, octroi de
+  Trait/Talent, immunités — un seul est un bonus chiffré permanent classique, `Grail Virtue of
+  the Ideal`, +10 CC/+10 F, qui pourrait un jour rejoindre `ModifyCarac` comme le palier 4 du
+  Reiksguard si Nono le demande).
+- Donnée XML pure, aucun `.pas` touché. Vérifié avant écriture : aucun id en collision dans
+  toute la base, aucun doublon de libellé, fichier bien formé (pas de `xmllint`/`pdftohtml`
+  sur ce poste — validé via `[xml]` PowerShell et `pdftotext -layout` seul).
+
+**Compilé par Nono, chargement confirmé, rien de cassé.** Reste, dans l'ordre :
+1. Le mécanisme de choix (écran, liste fixe de 14 noms au lieu d'une liste dérivée de
+   l'ethnie comme `<SkillChoice>` du Reiksguard) — à concevoir avant de coder, palier Errant
+   (Knightly Virtue, max 4) puis palier Grail Knight (Grail Virtue, max 1, pool restreint aux
+   noms déjà pris en Knightly).
+2. `Virtue of the Quest` : mécanisme d'octroi/retrait automatique lié au changement de
+   carrière, à part, pas commencé.
+
+Fichiers modifiés : `DATABASE/WFRP4/BOOK_NATIONS_OF_MANKIND.Xml`, `CONTEXT.md`.
 
 ---
 
