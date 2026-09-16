@@ -257,6 +257,8 @@
 <Text name="RULES-LAB_185">"Capacité"</Text>
 <Text name="RULES-LAB_186">"{Ensemble}"</Text>
 <Text name="RULES-LAB_187">"Choisissez %d compétences (%d sélectionnées)"</Text>
+<Text name="RULES-LAB_188">"Ordre"</Text>
+<Text name="RULES-LAB_189">"Bonus de carrière"</Text>
 </Label>
 </DATA_LABEL>
 </DATA_BOOK>

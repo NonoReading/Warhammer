@@ -4956,3 +4956,37 @@ xmlexportimport.pas, winpersonnage.pas, winchoixcompetenceappartenance.pas (nouv
 winchoixcompetenceappartenance.lfm (nouveau), WarhammerHelp.lpi,
 DATABASE/WFRP4/BOOK_NATIONS_OF_MANKIND.Xml, DATABASE/INTERFACE.Xml,
 DATABASE/INTERFACE_FRANCAIS.Xml, A FAIRE.txt, CONTEXT.md, Log.txt.
+
+16/09/2026 - SKILLCHOICE REIKSGUARD TESTE EN JEU (CHANTIER CLOS) ET COLONNE "CAREER BONUS"
+AJOUTEE SUR TabCompetence
+Test en jeu par Nono du mecanisme <SkillChoice> ecrit la veille : ecran de choix, plafond a
+3 coches, +5 sans cout Xp, tout valide. Chantier clos.
+Dans la foulee, meme gap que celui corrige le 12/09 sur les Attributs (§2.61) repere cote
+Competences : PersonnageCareerBonusCompetenceModif (chargepersonnage.pas) est deja compte
+dans ColCompTotal via PdfPersonnageCompetence, mais rien ne l'affichait a l'ecran - un bonus
+de Carriere chiffre (ex. Reiksguard "+10 CC avec les lances") faisait que ColCompAtt +
+ColCompBonus ne retombait pas sur ColCompTotal, incomprehensible pour le joueur.
+Nouvelle colonne cachee ColCompCareer sur TabCompetence, calculee dans CalculTotaux() comme
+ValCareer sur TabAttribut juste au-dessus, jamais comptee dans ColCompBonus (meme
+traitement que ColCompMutation : un bonus de Carriere n'est pas un avancement achete).
+Au passage, ColCompAppartenance (les +5 du SkillChoice, chantier precedent) n'avait jamais
+ete branchee sur CheckBoxCalculChange (la case "afficher le detail") - jamais visible a
+l'ecran meme coche. Corrige en meme temps.
+Premier libelle choisi pour ColCompCareer (RULES-LAB_181, "Career") faisait doublon a
+l'ecran avec ColCompWork qui porte deja "Career" en anglais (RULES-LAB_006, "Metier") -
+signale par Nono ("il y a maintenant deux Career"). Deux nouveaux libelles crees
+(RULES-LAB_188 "Order"/"Ordre" pour ColCompAppartenance, RULES-LAB_189 "Career Bonus"/
+"Bonus de carriere" pour ColCompCareer) plutot que de retoucher RULES-LAB_006/181 (utilises
+ailleurs dans l'appli).
+Nono a aussi demande que les deux colonnes soient placees juste avant ColCompBonus, comme
+les autres colonnes de detail (3p/5p, 40pts, Metier, Mutations). Une TStringGrid s'ordonne
+par index de colonne : ColCompAppartenance/ColCompCareer renumerotees 10/11,
+ColCompBonus/Total/Stat/Xp/Actuel/Travail/Asterisc/Talent decalees de +2 (12 a 19) - sans
+risque puisque toujours references par leur nom symbolique.
+A retenir : le meme angle mort (un bonus deja juste dans le Total mais invisible dans le
+detail affiche) peut exister en double sur des donnees paralleles (Attribut/Competence) -
+verifier le pendant de tout correctif de ce genre.
+Compile a chaque etape (lazbuild --build-all, 0 erreur). Teste en jeu par Nono, valide
+("c'est bon"). Pas encore committe.
+Fichiers modifies : winpersonnage.pas, DATABASE/INTERFACE.Xml,
+DATABASE/INTERFACE_FRANCAIS.Xml, A FAIRE.txt, CONTEXT.md, Log.txt.

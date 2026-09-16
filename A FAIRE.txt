@@ -256,15 +256,6 @@ Reste : les autres regroupements du meme genre (Bretagne HBRPA/HBRNO, Estalie HE
 Tilee, Norsca, Arabie HARAB...) n ont pas encore de Nation propre - a faire au fur et a
 mesure des besoins, pas systematiquement.]
 
-[MECANISME <SkillChoice> ECRIT ET COMPILE LE 15/09/2026 - PAS ENCORE TESTE EN JEU]
-LE CHOIX DE 3 COMPETENCES RACIALES PROVINCIALES DU RIEKSGUARD EST DESORMAIS MODELISE
-(NATIO-ORDER_REIKS palier 4, <SkillChoice Count="3" Value="5"/>, chargeconstantes.pas/
-chargemetier.pas/chargepersonnage.pas/winpersonnage.pas/winchoixcompetenceappartenance.pas).
-A verifier avec un personnage reel atteignant Knight of the Inner Circle : l'ecran de choix
-s'ouvre bien, les 3 competences retenues apparaissent sur la fiche a +5 sans cout Xp. Les 17
-Ordres de chevalerie sont tous saisis (10/09/2026) ; verifie qu'aucun autre n'a le meme genre
-de choix parmi une liste - seul le Reiksguard en a un.
-
 LES TRAPPINGS DES REGIMENTS OF RENOWN NE SONT PAS MODELISES. Les onze Regiments of Renown
 (p.6-7, saisis et valides le 10/09/2026, CONTEXT.md 2.44) donnent chacun un equipement
 unique a l'enrolement (ex. Death Jack Bow, Carroburg Greatsword) - aucun mecanisme du

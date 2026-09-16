@@ -1,18 +1,65 @@
 # Warhammer — Contexte projet
 
-**REPRISE (15/09/2026, suite 2)** : mécanisme `<SkillChoice>` (choix de 3 compétences
-raciales contre 5 avancées gratuites chacune, Grand Order of the Reiksguard palier 4,
-*Nations of Mankind* p.8) écrit et compilé de bout en bout, cinq points A à E. **Pas encore
-testé en jeu.** Prochaine étape : faire progresser un personnage Reiksguard jusqu'à Knight
-of the Inner Circle (`RULES-WORK12`, `NATIO-ORDER_REIKS`) et vérifier que l'écran de choix
-s'ouvre au bon moment, que le bouton Valider n'accepte qu'exactement 3 coches parmi les
-compétences de l'ethnie du personnage, et que les 3 retenues apparaissent sur la fiche à +5
-sans consommer d'Xp (`TabCompetence`, colonnes `ColCompBonus`/`ColCompXp`). Committé.
+**REPRISE (16/09/2026)** : mécanisme `<SkillChoice>` (choix de 3 compétences raciales,
+Reiksguard palier 4) **testé en jeu par Nono, validé**. Dans la foulée, gap similaire à
+celui déjà corrigé sur les Attributs (§2.61, 12/09) repéré et corrigé côté Compétences :
+un bonus de Carrière chiffré (`<ModifyCarac>`/`<ModifySkill>` de palier, ex. Reiksguard
+"+10 CC avec les lances") comptait déjà dans le Total (`PdfPersonnageCompetence`) mais
+n'apparaissait nulle part à l'écran, et la colonne `ColCompAppartenance` (les +5 du
+`SkillChoice` ci-dessus) n'était jamais révélée par la case "afficher le détail". Nouvelle
+colonne `ColCompCareer` + branchement de `ColCompAppartenance` sur `CheckBoxCalcul`,
+**testé et validé par Nono ("c'est bon")**. Voir l'entrée du jour ci-dessous pour le détail.
+Pas encore committé - aucune autre demande en attente à cette heure.
+
+---
+
+**16/09/2026 — COLONNE "CAREER BONUS" SUR `TabCompetence` (PENDANT COMPÉTENCE DU
+CHANTIER ATTRIBUTS §2.61) : ÉCRIT, TESTÉ ET VALIDÉ.** Nono, après avoir validé le test en
+jeu du `<SkillChoice>` Reiksguard ci-dessous, a demandé d'ajouter à `WinPersonnage`, comme
+pour les Attributs, une colonne qui explique le Total d'une Compétence.
+
+- **Le gap.** `PersonnageCareerBonusCompetenceModif` (`chargepersonnage.pas`) existe depuis
+  le 2.44/3d-3 et est déjà additionné dans `ColCompTotal` via l'accesseur unique
+  `PdfPersonnageCompetence` (`pdfpersonnage.pas` l.619) - mais, contrairement à son pendant
+  Attribut (`PersonnageCareerBonusAttributModif`/`LigAttCareer`, corrigé le 12/09 §2.61),
+  rien ne l'affichait à l'écran : `ColCompAtt + ColCompBonus` ne retombait pas sur
+  `ColCompTotal` dès qu'un bonus de Carrière chiffré existait (ex. Reiksguard "+10 CC avec
+  les lances"), exactement le symptôme déjà vu et corrigé côté Attributs.
+- **Nouvelle colonne `ColCompCareer`**, calculée dans `CalculTotaux()` (même endroit et même
+  forme que `ValCareer` sur `TabAttribut` juste au-dessus dans la même procédure), jamais
+  incluse dans `ColCompBonus` (même traitement que `ColCompMutation` : un bonus de Carrière
+  n'est pas un avancement acheté).
+- **`ColCompAppartenance` (les +5 du `SkillChoice`, chantier précédent) n'était jamais
+  révélée.** Sa largeur n'était branchée sur aucun contrôle - `CheckBoxCalculChange`
+  bascule `ColComp35`/`ColComp40`/`ColCompWork`/`ColCompMutation` mais l'avait oubliée.
+  Ajoutée au même toggle.
+- **Doublon d'intitulé.** Premier essai : nouvelle colonne libellée avec `RULES-LAB_181`
+  ("Carrière"/"Career", déjà utilisé par `LigAttCareer` sur les Attributs) - repéré par
+  Nono ("il y a maintenant deux Career"), car `ColCompWork` porte déjà "Career" en anglais
+  via `RULES-LAB_006` ("Métier"). Deux nouveaux libellés ajoutés (`INTERFACE.Xml`/
+  `INTERFACE_FRANCAIS.Xml`, prochain numéro libre après `LAB_187`) : `RULES-LAB_188`
+  "Order"/"Ordre" pour `ColCompAppartenance` (remplace le hardcode français `'Appartenance'`
+  qui fuitait tel quel même en interface anglaise ; "Order" à la demande de Nono, seul cas
+  d'usage aujourd'hui étant un Ordre de chevalerie - si un Régiment/Culte utilise un jour
+  `<SkillChoice>`, ce libellé sera à revoir), `RULES-LAB_189` "Career Bonus"/"Bonus de
+  carrière" pour `ColCompCareer`.
+- **Réordonnancement.** Nono a demandé que les deux colonnes arrivent avant `ColCompBonus`,
+  comme `ColComp35`/`ColComp40`/`ColCompWork`/`ColCompMutation`. Une `TStringGrid` s'ordonne
+  par index de colonne : `ColCompAppartenance`/`ColCompCareer` renumérotées 10/11 (juste
+  après `ColCompMutation`), `ColCompBonus`/`ColCompTotal`/`ColCompStat`/`ColCompXp`/
+  `ColCompActuel`/`ColCompTravail`/`ColCompAsterisc`/`ColCompTalent` décalées de +2 (12 à
+  19) - toutes référencées par leur nom symbolique partout dans le code, renumérotation sans
+  risque. Bloc de mise en forme (`Cells[...,0]`/`ColWidths`) réordonné dans le code source
+  pour rester lisible dans le même ordre que l'écran.
+
+Compilé (`lazbuild --build-all`, 0 erreur) après chaque étape. **Testé en jeu par Nono,
+validé ("c'est bon").** Pas encore committé.
 
 ---
 
 **15/09/2026 (suite 2) — MÉCANISME `<SkillChoice>` POUR UN CHOIX DE COMPÉTENCES RACIALES
-DANS UNE APPARTENANCE : ÉCRIT, PAS ENCORE TESTÉ EN JEU.** Reprise du point resté ouvert au
+DANS UNE APPARTENANCE : ÉCRIT, TESTÉ EN JEU ET VALIDÉ PAR NONO LE 16/09/2026. CHANTIER
+CLOS.** Reprise du point resté ouvert au
 §2.51 (Reiksguard palier 4, « choose 3 Empire Province Racial Skills to give a free +5
 Advances to » — un CHOIX du joueur, pas un bonus chiffré fixe comme `ModifyCarac`/
 `ModifySkill`). Nono a confirmé la lecture de la règle (« c'est bien 3 [compétences], pas 5
@@ -33,8 +80,9 @@ même liste que pour les 3 +5/3 +3 de la création »), vérifiée exacte dans l
   `CreationCompetence35`/`SUBCHAPTER_SKILLSPECIE` (Nono : « champ dédié, comme les autres
   chantiers »), même raison que `DATA_CAREER_BONUS`/`DATA_SPELL_TALENT` : ne jamais mélanger
   deux sources différentes dans un même champ.
-- **C — affichage et coût Xp.** Nouvelle colonne cachée `ColCompAppartenance` (18) sur
-  `TabCompetence`, même rôle que `ColComp35`/`ColComp40` (`winpersonnage.pas`) : alimente
+- **C — affichage et coût Xp.** Nouvelle colonne cachée `ColCompAppartenance` (renumérotée
+  10 le 16/09, voir entrée du jour) sur `TabCompetence`, même rôle que `ColComp35`/
+  `ColComp40` (`winpersonnage.pas`) : alimente
   `ColCompBonus` (le total d'avancées RÉELLES, « count as Talent Advances » dixit le livre,
   contrairement à `ColCompMutation` volontairement exclu) et surtout `Gratuit` dans
   `CalculExperience` — sans cette dernière ligne, les 5 avancées auraient été facturées
@@ -62,10 +110,12 @@ même liste que pour les 3 +5/3 +3 de la création »), vérifiée exacte dans l
   revalidé (bien formé), `A FAIRE.txt` mis à jour (l'entrée périmée retirée, remplacée par
   un point « à tester en jeu »).
 
-**Reste à faire avant de clore ce chantier** : le test en jeu décrit dans la REPRISE
-ci-dessus. Aucun autre Ordre/Régiment de Nations of Mankind n'a ce genre de choix (vérifié
-le 08-10/09, voir §2.51) - ce mécanisme n'a donc qu'un seul client aujourd'hui, mais reste
-générique (`Count`/`Value` quelconques) pour un futur livre qui en aurait besoin.
+**Testé en jeu par Nono le 16/09/2026 sur un Reiksguard atteignant Knight of the Inner
+Circle : l'écran de choix s'ouvre au bon moment, Valider n'accepte qu'exactement 3 coches,
+les 3 compétences retenues apparaissent à +5 sans coût Xp. Chantier clos.** Aucun autre
+Ordre/Régiment de Nations of Mankind n'a ce genre de choix (vérifié le 08-10/09, voir
+§2.51) - ce mécanisme n'a donc qu'un seul client aujourd'hui, mais reste générique
+(`Count`/`Value` quelconques) pour un futur livre qui en aurait besoin.
 
 ---
 

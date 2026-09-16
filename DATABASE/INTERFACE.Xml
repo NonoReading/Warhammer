@@ -331,6 +331,8 @@
 <Text name="RULES-LAB_185">"Carries"</Text>
 <Text name="RULES-LAB_186">"{Together}"</Text>
 <Text name="RULES-LAB_187">"Choose %d skills (%d selected)"</Text>
+<Text name="RULES-LAB_188">"Order"</Text>
+<Text name="RULES-LAB_189">"Career Bonus"</Text>
 </Label>
 </DATA_LABEL>
 </DATA_BOOK>

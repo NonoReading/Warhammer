@@ -361,19 +361,27 @@ var
   ColComp40:      Integer = 7;
   ColCompWork:    Integer = 8;
   ColCompMutation:Integer = 9;
-  ColCompBonus:   Integer =10;
-  ColCompTotal:   Integer =11;
-  ColCompStat:    Integer =12;
-  ColCompXp:      Integer =13;
-  ColCompActuel:  Integer =14;
-  ColCompTravail: Integer =15;
-  ColCompAsterisc:Integer =16;
-  ColCompTalent:  Integer =17;
   // Avancees gratuites accordees par un <SkillChoice> d'appartenance (ex. Reiksguard
   // palier 4) - Personnage.CompetenceAppartenance, ChargeConstantes. Meme role que
   // ColComp35/ColComp40 (colonne cachee qui alimente ColCompBonus et le calcul du Xp
-  // "gratuit"), champ dedie plutot que reutiliser ColComp35 - CONTEXT.md.
-  ColCompAppartenance: Integer =18;
+  // "gratuit"), champ dedie plutot que reutiliser ColComp35 - CONTEXT.md. Placee juste
+  // avant ColCompBonus (comme ColComp35/40/Work/Mutation) - demande de Nono.
+  ColCompAppartenance: Integer =10;
+  // Bonus de Carriere (<ModifyCarac>/<ModifySkill> de palier, PersonnageCareerBonusCompetenceModif)
+  // sur une Competence, ex. Reiksguard "+10 CC avec les lances" - pendant Competence de
+  // LigAttCareer sur TabAttribut (winpersonnage.pas §2.61), meme raison : deja compte dans
+  // ColCompTotal via PdfPersonnageCompetence mais jusqu'ici invisible a l'ecran, rendant le
+  // total Attribut+Bonus incomprehensible. Colonne cachee, jamais dans ColCompBonus (meme
+  // traitement que ColCompMutation : un bonus de Carriere n'est pas un avancement achete).
+  ColCompCareer: Integer =11;
+  ColCompBonus:   Integer =12;
+  ColCompTotal:   Integer =13;
+  ColCompStat:    Integer =14;
+  ColCompXp:      Integer =15;
+  ColCompActuel:  Integer =16;
+  ColCompTravail: Integer =17;
+  ColCompAsterisc:Integer =18;
+  ColCompTalent:  Integer =19;
   // talent
   ColTalCode:     Integer = 1;
   ColTalLib:      Integer = 3;
@@ -696,6 +704,8 @@ begin
   TabCompetence.ColWidths[ColComp40]      := Largeur;
   TabCompetence.ColWidths[ColCompWork]    := Largeur;
   TabCompetence.ColWidths[ColCompMutation]:= Largeur;
+  TabCompetence.ColWidths[ColCompCareer]  := Largeur;
+  TabCompetence.ColWidths[ColCompAppartenance]:= Largeur;
 
   TabAttribut.RowHeights[LigAttRace]     := Hauteur;
   TabAttribut.RowHeights[LigAttLance]    := Hauteur;
@@ -1805,7 +1815,7 @@ begin
 
   // Mise en forme du tableau des Compétences
   TabCompetence.Options                   := TabCompetence.Options + [goEditing, goAlwaysShowEditor];
-  TabCompetence.ColCount                  := 19;
+  TabCompetence.ColCount                  := 20;
   TabCompetence.RowCount                  := 1;
   TabCompetence.ColWidths[0]              := 20;
   TabCompetence.ColWidths[ColCompCode]    := 0;
@@ -1825,6 +1835,13 @@ begin
   TabCompetence.ColWidths[ColCompWork]    := 0;
   TabCompetence.Cells[ColCompMutation, 0] := GetTexteLibelle('RULES-LAB_172');
   TabCompetence.ColWidths[ColCompMutation]:= 0;
+  TabCompetence.Cells[ColCompAppartenance, 0]   := GetTexteLibelle('RULES-LAB_188');
+  TabCompetence.ColWidths[ColCompAppartenance]  := 0;
+  // RULES-LAB_189 ("Career Bonus"/"Bonus de carriere"), pas RULES-LAB_181 ("Career") : ce
+  // dernier est deja pris par ColCompWork (RULES-LAB_006, egalement "Career" en anglais) -
+  // les deux colonnes affichaient le meme intitule, signale par Nono.
+  TabCompetence.Cells[ColCompCareer, 0]   := GetTexteLibelle('RULES-LAB_189');
+  TabCompetence.ColWidths[ColCompCareer]  := 0;
   TabCompetence.Cells[ColCompBonus, 0]    := GetTexteLibelle('RULES-LAB_034');
   TabCompetence.ColWidths[ColCompBonus]   := 50;
   TabCompetence.Cells[ColCompTotal, 0]    := GetTexteLibelle('RULES-LAB_021');
@@ -1841,8 +1858,6 @@ begin
   TabCompetence.ColWidths[ColCompAsterisc]:= 0;
   TabCompetence.Cells[ColCompTalent, 0]   := 'Talent';
   TabCompetence.ColWidths[ColCompTalent]  := 0;
-  TabCompetence.Cells[ColCompAppartenance, 0]   := 'Appartenance';
-  TabCompetence.ColWidths[ColCompAppartenance]  := 0;
 
   // Mise en forme du tableau des carrières
   TabCarriere.Options                  := TabCarriere.Options + [goEditing, goAlwaysShowEditor];
@@ -2616,6 +2631,13 @@ procedure TWinPersonnages.CalculTotaux();
                 break
               end;
           end;
+        // Bonus de Carriere sur cette Competence (pendant Competence de ValCareer sur
+        // TabAttribut plus haut) - meme raison : sans cette colonne, ColCompAtt + ColCompBonus
+        // ne retombait pas sur ColCompTotal des qu'un tel bonus existait, rendant le total
+        // incomprehensible a l'ecran alors qu'il etait deja correct dans le PDF.
+        ValCareer := PersonnageCareerBonusCompetenceModif(Personnage, TabCompetence.Cells[ColCompCode, IndLig]);
+        if ValCareer <> 0 then
+          TabCompetence.Cells[ColCompCareer, IndLig] := IntToStr(ValCareer);
         // ColCompMutation volontairement absent de ColCompBonus : ColCompBonus correspond aux
         // avancements réellement achetés (utilisé ailleurs, ex. ligne ~3814, pour calculer le
         // coût Xp / combien de compétences ont été augmentées) - un effet de mutation n'est

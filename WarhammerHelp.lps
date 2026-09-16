@@ -21,7 +21,7 @@
         <UnitName Value="WarhammerSource"/>
         <IsVisibleTab Value="True"/>
         <EditorIndex Value="4"/>
-        <TopLine Value="1276"/>
+        <TopLine Value="1280"/>
         <CursorPos X="30" Y="1289"/>
         <UsageCount Value="200"/>
         <Loaded Value="True"/>
@@ -580,6 +580,15 @@
         <TopLine Value="44"/>
         <CursorPos X="29" Y="52"/>
         <UsageCount Value="93"/>
+      </Unit>
+      <Unit>
+        <Filename Value="winchoixcompetenceappartenance.pas"/>
+        <IsPartOfProject Value="True"/>
+        <ComponentName Value="WinChoixCompetenceAppartenance"/>
+        <HasResources Value="True"/>
+        <ResourceBaseClass Value="Form"/>
+        <UnitName Value="WinChoixCompetenceAppartenance"/>
+        <UsageCount Value="20"/>
       </Unit>
       <Unit>
         <Filename Value="winmutation.pas"/>
