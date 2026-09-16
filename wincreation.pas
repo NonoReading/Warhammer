@@ -1776,6 +1776,11 @@ Function TWinCreations.PageEtapesChange(): boolean;
          8:  // choix du nom de personnage
           begin
             Ok := True;
+            // Un espace en debut/fin est invisible pour Nono mais casse la creation du
+            // dossier : CreateDir l'accepte en le tronquant silencieusement, puis
+            // l'ecriture du XML avec le nom non tronque echoue (dossier vide) - crash au
+            // demarrage suivant en tentant de charger un personnage sans fichier XML.
+            EditNomPersonnag.text := Trim(EditNomPersonnag.text);
             if EditNomPersonnag.text = '' then
               begin
                 ShowMessage(GetTexteLibelle('RULES-MESS_017'));

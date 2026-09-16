@@ -1960,6 +1960,18 @@ procedure TMenu.ChargerPersonnages();
           TabPersonnage.RowCount    := i + 1;
           TabPersonnage.Cells[ColPersoNom, I] := searchResult.Name;
           Chemin     := PersonnageXmlFichierActuel(directoryPath + searchResult.Name);
+          if Chemin = '' then
+            begin
+              // Dossier de personnage sans fichier XML dedans (creation interrompue,
+              // ex. nom termine par un espace : CreateDir tronque silencieusement le
+              // dossier mais l'ecriture du XML avec le nom non tronque echoue ensuite).
+              // PersonnageXmlChargement('') plante sans ce garde-fou - et comme ce
+              // rescan tourne a chaque demarrage, le programme ne se rouvrait plus du
+              // tout tant que le dossier vide restait sur le disque. On ignore la ligne.
+              i                      := i - 1;
+              TabPersonnage.RowCount := i + 1;
+              Continue;
+            end;
           Personnage := PersonnageXmlChargement(Chemin);
           PMetier    := chercheMetier(Personnage.MetierEnCours.CodeMetier);
           PRace      := chercheRace(Personnage.Race);

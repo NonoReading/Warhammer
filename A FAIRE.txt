@@ -6,6 +6,22 @@
 CORRECTIONS COURTES  (une ligne ou deux chacune)
 =========================================================================
 
+LA VARIABLE AjoutMineur (winpersonnage.pas) N'EST JAMAIS MISE A TRUE. Repere le
+16/09/2026 (CONTEXT.md 2.78) en travaillant sur le blocage de "Valider" pour les Vertus
+en attente : la garde existante ligne ~624 ("AjoutMineur and RechercherDansColonne(TabSort,
+...)") pour bloquer Valider tant qu'un sort/miracle reste "a choisir" est donc TOUJOURS
+inactive - AjoutMineur reste a false partout, jamais mis a true nulle part dans le
+projet. Pas corrige ici (hors perimetre, le nouveau blocage des Vertus a ete ecrit SANS
+cette garde, volontairement inconditionnel). A verifier si c'est un oubli ou une garde
+prevue pour un usage jamais branche.
+
+LA VERIFICATION "NOM DE PERSONNAGE DEJA PRIS" (wincreation.pas ~1786) TESTE LE MAUVAIS
+CHEMIN. Repere le 16/09/2026 (CONTEXT.md 2.79) en corrigeant le crash du nom termine par un
+espace : DirectoryExists(GetCurrentDir+EditNomPersonnag.text) n'inclut pas
+ConstCheminPersonnage, donc ne pointe jamais vers le vrai dossier SAVED_CARACTERS\...\
+NomPerso\ - le message "nom deja pris" (RULES-MESS_018) ne peut quasiment jamais se
+declencher. Pas corrige (hors perimetre du chantier en cours).
+
 [TRANCHE LE 15/09/2026 - CONSERVE COMME POINT TRANCHE, NE PLUS LE RESSORTIR EN ANOMALIE]
 LE MATERIAU (TYPE) DES BOUCLIERS/ECUS DU RULEBOOK V5 RESTE NON DEFINI, DECISION DE NONO.
 RULES-ARMO_01/02/03 (Buckler/Shield/Large Shield, BOOK_RULESBOOK.Xml V5) n'ont pas de balise

@@ -2547,7 +2547,9 @@ procedure TWinPersonnages.CalculTotaux();
     OldAugmentationTalent := Personnage.AugmentationTalent;
     Personnage.AugmentationTalent := [];
     for IndAugm := 1 to TabTalent.Rowcount - 1 do
-      if StrToIntDef(TabTalent.Cells[ColTalNbAugm, IndAugm],0) > 0 then
+      // <> 0, meme raison que l'autre resync (~l.5429) : une Vertu nommee porte un NbAugm
+      // negatif volontaire. CONTEXT.md 2.78, prises multiples.
+      if StrToIntDef(TabTalent.Cells[ColTalNbAugm, IndAugm],0) <> 0 then
         begin
           PersonnageTalent.CodeTalent    := TabTalent.Cells[ColTalCode, IndAugm];
           PersonnageTalent.Valeur        := StrToIntDef(TabTalent.Cells[ColTalNbAugm, IndAugm],0);
@@ -2873,10 +2875,12 @@ procedure TWinPersonnages.TabAugmentationCompetenceDblClick(Sender: TObject);
 
 procedure TWinPersonnages.TabAugmentationTalentDblClick(Sender: TObject);
   var
-    PTalent: StructureTalent;
-    Ind:     Integer;
-    Ind2:    Integer;
-    Trouve:  Boolean = false;
+    PTalent:  StructureTalent;
+    Ind:      Integer;
+    Ind2:     Integer;
+    Trouve:   Boolean = false;
+    NbMaxGen: Integer;
+    DejaPris: Boolean;
   begin
     if (TabAugmentationTalent.Col = ColAugmTalSpe) and (TabAugmentationTalent.Cells[ColAugmTalSpe, TabAugmentationTalent.Row] = GetTexteLibelle(ConstLabSelSpe))  then
       begin
@@ -2916,6 +2920,22 @@ procedure TWinPersonnages.TabAugmentationTalentDblClick(Sender: TObject);
         ChoixWinVertuGrail := '';    // remise a vide obligatoire, meme raison que SelectWinLivre juste au-dessus
         if SelectWinTalent <> '' then
           begin
+            // Anti-doublon : une specialisation deja prise (Audacity...) ne doit pas
+            // pouvoir etre reprise une deuxieme fois - necessaire des qu'un talent
+            // generique a plusieurs prises distinctes (Max>1, ex. Knightly Virtue) peut
+            // etre re-propose plusieurs sessions de suite, chaque fois avec le pool
+            // complet des noms. CONTEXT.md 2.78, prises multiples.
+            DejaPris := false;
+            for Ind := 1 to TabTalent.RowCount - 1 do
+              if TabTalent.Cells[ColTalCode, Ind] = SelectWinTalent then
+                DejaPris := true;
+            if DejaPris then
+              begin
+                ShowMessage(GetTexteLibelle('RULES-MESS_047'));
+                SelectWinTalent := '';
+                Exit;
+              end;
+
             TabAugmentationTalent.Cells[ColAugmTalSpe, TabAugmentationTalent.Row] := GetTexteLibelle('RULES-LAB_130');
             TabAugmentationTalent.Cells[ColAugmTalSpeSel, TabAugmentationTalent.Row] := SelectWinTalent;
             PTalent := ChercheTalent(SelectWinTalent);
@@ -2934,13 +2954,20 @@ procedure TWinPersonnages.TabAugmentationTalentDblClick(Sender: TObject);
             // B - le choix devient le code de référence de la ligne
             TabAugmentationTalent.Cells[ColAugmTalCode, TabAugmentationTalent.Row] := SelectWinTalent;
 
-            // C - propager au tableau métier (persistance)
-            for Ind2 := 0 to High(Personnage.MetierTalent) do
-              if Personnage.MetierTalent[Ind2].CodeTalent = ChoixWinTalent then
-                begin
-                  Personnage.MetierTalent[Ind2].CodeTalent := SelectWinTalent;
-                  break;
-                end;
+            // C - propager au tableau métier (persistance) - SAUF pour un talent
+            // generique a plusieurs prises distinctes (Max>1) : le remplacer figerait la
+            // carriere sur cette seule Vertu et empecherait d'en reprendre une autre a la
+            // prochaine session. Le code generique doit rester en place dans
+            // Personnage.MetierTalent pour que la case carriere reste proposable (elle est
+            // retrouvee et comptee separement via une ligne dediee dans TabTalent, voir
+            // MajTables). CONTEXT.md 2.78, prises multiples.
+            if not (TryStrToInt(ChercheTalent(ChoixWinTalent).MaxiTalent, NbMaxGen) and (NbMaxGen > 1)) then
+              for Ind2 := 0 to High(Personnage.MetierTalent) do
+                if Personnage.MetierTalent[Ind2].CodeTalent = ChoixWinTalent then
+                  begin
+                    Personnage.MetierTalent[Ind2].CodeTalent := SelectWinTalent;
+                    break;
+                  end;
 
             // D - recalculer les sorts accordes par ce talent, AVEC la specialisation.
             // Sans cet appel, SortAffiche n'avait tourne qu'a la saisie de la colonne
@@ -3281,7 +3308,11 @@ begin
             Lig                 := NbTalent;
           end;
           TabTalent.Cells[ColTalCode, Lig]    := PersonnageTalent.CodeTalent;
-          TabTalent.Cells[ColTalNb, Lig]    := IntToStr(StrToIntDef(TabTalent.Cells[ColTalNb, Lig],0) + PersonnageTalent.Valeur);
+          // Abs() : une Vertu nommee (Knightly Virtue...) porte un NbAugm negatif volontaire
+          // (deja comptee en cout ailleurs, cf MajTables) - le nombre AFFICHE doit rester
+          // positif (1 possedee, pas -1). Ne change rien pour les autres talents, dont
+          // Valeur n'est jamais negative. CONTEXT.md 2.78, prises multiples.
+          TabTalent.Cells[ColTalNb, Lig]    := IntToStr(StrToIntDef(TabTalent.Cells[ColTalNb, Lig],0) + Abs(PersonnageTalent.Valeur));
           TabTalent.Cells[ColTalNbAugm, Lig]   := IntToStr(PersonnageTalent.Valeur);
           PTalent                    := ChercheTalent(TabTalent.Cells[ColTalCode, Lig]);
           TabTalent.Cells[ColTalLib, Lig]    := PTalent.Libelle;
@@ -5010,6 +5041,9 @@ Procedure TWinPersonnages.MajTables();
     IndApp:            Integer;
     Paliers:           TListCareerBonusNiveau;
     Palier:            StructureCareerBonusNiveau;
+    NbMaxGen:          Integer;
+    TrouveGenerique:   Boolean;
+    PTalentGenerique:  StructureTalent;
   begin
     // raz table augmentation spéciales
     For IndAugm := TabAugmentationMjXp.RowCount - 1 downto 1 do
@@ -5121,9 +5155,69 @@ Procedure TWinPersonnages.MajTables();
               TabTalent.RowCount := TabTalent.rowCount + 1;
               TabTalent.Cells[ColTalCode, TabTalent.RowCount-1]   := PTalent.CodeTalent;
               TabTalent.Cells[ColTalLib, TabTalent.RowCount-1]   := PTalent.Libelle;
-              TabTalent.Cells[ColTalNb ,TabTalent.RowCount-1]   := IntToStr(StrToIntDef(TabTalent.Cells[ColTalNb ,TabTalent.RowCount-1],0) + StrToIntDef(TabAugmentationTalent.Cells[ColAugmTalNouveau, indAugm],0));
-              TabTalent.Cells[ColTalNbAugm,TabTalent.RowCount-1]   := TabAugmentationTalent.Cells[ColAugmTalNouveau, indAugm];
-              TabTalent.Cells[ColTalMax, TabTalent.RowCount-1]   := TabAugmentationTalent.Cells[ColAugmTalNouveau, indAugm];
+
+              // Talent generique a plusieurs prises distinctes (Max>1, ex. Knightly
+              // Virtue) resolu en une specialisation nommee : "Nouveau" porte le TOTAL
+              // cumule de prises voulues (ex. 2), pas le rang de CE stub precis (une
+              // Vertu nommee ne se reprend jamais deux fois - Nb fixe a 1, garanti par
+              // l'anti-doublon de TabAugmentationTalentDblClick). Le total cumule est
+              // maintenu A PART sur une ligne separee sous le code GENERIQUE (colonne
+              // Work, jamais ecrasee) : c'est elle que le chargement retrouvera par
+              // correspondance EXACTE au prochain palier, avant le repli par radical qui,
+              // lui, accroche un stub sans <Max> et bloquerait tout achat au-dela de 1.
+              // CONTEXT.md 2.78, prises multiples.
+              if (TabAugmentationTalent.Cells[ColAugmTalSpeSel,indAugm] <> '') and
+                 (Pos(ValeurGenerique, TabAugmentationTalent.Cells[ColAugmTalWork,indAugm]) > 0) and
+                 TryStrToInt(ChercheTalent(TabAugmentationTalent.Cells[ColAugmTalWork,indAugm]).MaxiTalent, NbMaxGen) and
+                 (NbMaxGen > 1) then
+                begin
+                  // NbAugm a -1 (pas 0) : le cout de CETTE Vertu est deja compte sur la
+                  // ligne generique juste en dessous, mais la ligne doit quand meme survivre
+                  // a l'enregistrement - or Personnage.AugmentationTalent (chargepersonnage.pas,
+                  // ce qui est ecrit dans le fichier du personnage) ne reprend que les lignes
+                  // dont NbAugm <> 0 (ChargeAugmentation/MajTables plus bas). Un negatif
+                  // survit a la sauvegarde ET reste a cout nul dans CalculExperience
+                  // (Total(-1) > Gratuit(0) est faux) sans toucher cette fonction partagee.
+                  // Mis a '1' au premier essai : facturait 100 Xp en trop par Vertu. Mis a
+                  // '0' au deuxieme essai : la ligne disparaissait carrement a l'enregistrement
+                  // (vu par Nono en jeu). CONTEXT.md 2.78, prises multiples. ATTENTION : si un
+                  // ModifyCarac est un jour branche sur une Vertu nommee (Grail Virtue of the
+                  // Ideal), il devra lire Abs(Valeur), pas Valeur brute (signe invers sinon).
+                  TabTalent.Cells[ColTalNb, TabTalent.RowCount-1]     := '1';
+                  TabTalent.Cells[ColTalNbAugm, TabTalent.RowCount-1] := '-1';
+                  TabTalent.Cells[ColTalMax, TabTalent.RowCount-1]    := '1';
+
+                  TrouveGenerique := false;
+                  for IndActu := 1 to TabTalent.RowCount-1 do
+                    if TabTalent.Cells[ColTalCode, IndActu] = TabAugmentationTalent.Cells[ColAugmTalWork,indAugm] then
+                      begin
+                        TabTalent.Cells[ColTalNb, IndActu]     := TabAugmentationTalent.Cells[ColAugmTalNouveau, indAugm];
+                        TabTalent.Cells[ColTalNbAugm, IndActu] := TabAugmentationTalent.Cells[ColAugmTalNouveau, indAugm];
+                        // Max REEL du talent (pas le total achete) : c'est cette donnee que
+                        // relit TabAugmentationTalentSelectCell pour borner "Nouveau" au
+                        // changement de cellule - la laisser vide y ferait retomber la
+                        // borne a 1 par defaut. CONTEXT.md 2.78, prises multiples.
+                        TabTalent.Cells[ColTalMax, IndActu]    := IntToStr(NbMaxGen);
+                        TrouveGenerique := true;
+                        break;
+                      end;
+                  if not TrouveGenerique then
+                    begin
+                      PTalentGenerique := ChercheTalent(TabAugmentationTalent.Cells[ColAugmTalWork,indAugm]);
+                      TabTalent.RowCount := TabTalent.RowCount + 1;
+                      TabTalent.Cells[ColTalCode, TabTalent.RowCount-1]   := PTalentGenerique.CodeTalent;
+                      TabTalent.Cells[ColTalLib, TabTalent.RowCount-1]    := PTalentGenerique.Libelle;
+                      TabTalent.Cells[ColTalNb, TabTalent.RowCount-1]     := TabAugmentationTalent.Cells[ColAugmTalNouveau, indAugm];
+                      TabTalent.Cells[ColTalNbAugm, TabTalent.RowCount-1] := TabAugmentationTalent.Cells[ColAugmTalNouveau, indAugm];
+                      TabTalent.Cells[ColTalMax, TabTalent.RowCount-1]    := IntToStr(NbMaxGen);
+                    end;
+                end
+              else
+                begin
+                  TabTalent.Cells[ColTalNb ,TabTalent.RowCount-1]   := IntToStr(StrToIntDef(TabTalent.Cells[ColTalNb ,TabTalent.RowCount-1],0) + StrToIntDef(TabAugmentationTalent.Cells[ColAugmTalNouveau, indAugm],0));
+                  TabTalent.Cells[ColTalNbAugm,TabTalent.RowCount-1]   := TabAugmentationTalent.Cells[ColAugmTalNouveau, indAugm];
+                  TabTalent.Cells[ColTalMax, TabTalent.RowCount-1]   := TabAugmentationTalent.Cells[ColAugmTalNouveau, indAugm];
+                end;
             end;
 
           if TabAugmentationTalent.Cells[ColAugmTalCout, IndAugm] <> TabAugmentationTalent.Cells[ColAugmTalReel, IndAugm] then
@@ -5330,7 +5424,11 @@ Procedure TWinPersonnages.MajTables();
     OldAugmentationTalent := Personnage.AugmentationTalent;
     Personnage.AugmentationTalent := [];
     for Ind := 1 to TabTalent.Rowcount - 1 do
-      if StrToIntDef(TabTalent.Cells[ColTalNbAugm, Ind],0) > 0 then
+      // <> 0 et non > 0 : une Vertu nommee (Knightly Virtue...) porte un NbAugm negatif
+      // volontaire (deja comptee en cout sur la ligne generique, mais doit quand meme
+      // survivre a l'enregistrement). Ne change rien pour les autres talents, dont NbAugm
+      // n'est jamais negatif. CONTEXT.md 2.78, prises multiples.
+      if StrToIntDef(TabTalent.Cells[ColTalNbAugm, Ind],0) <> 0 then
         begin
           PersonnageTalent.CodeTalent    := TabTalent.Cells[ColTalCode, Ind];
           PersonnageTalent.Valeur        := StrToIntDef(TabTalent.Cells[ColTalNbAugm, Ind],0);

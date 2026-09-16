@@ -21,7 +21,7 @@
         <UnitName Value="WarhammerSource"/>
         <IsVisibleTab Value="True"/>
         <EditorIndex Value="4"/>
-        <TopLine Value="1283"/>
+        <TopLine Value="1289"/>
         <CursorPos X="30" Y="1289"/>
         <UsageCount Value="200"/>
         <Loaded Value="True"/>
@@ -301,7 +301,7 @@
         <Filename Value="chargemetierequipement.pas"/>
         <IsPartOfProject Value="True"/>
         <UnitName Value="ChargeMetierEquipement"/>
-        <EditorIndex Value="5"/>
+        <EditorIndex Value="6"/>
         <CursorPos X="26" Y="11"/>
         <UsageCount Value="203"/>
         <Loaded Value="True"/>
@@ -417,10 +417,11 @@
         <Filename Value="chargepersonnage.pas"/>
         <IsPartOfProject Value="True"/>
         <UnitName Value="ChargePersonnage"/>
-        <EditorIndex Value="-1"/>
-        <TopLine Value="1425"/>
-        <CursorPos X="22" Y="1438"/>
+        <EditorIndex Value="5"/>
+        <TopLine Value="1383"/>
+        <CursorPos Y="1394"/>
         <UsageCount Value="201"/>
+        <Loaded Value="True"/>
       </Unit>
       <Unit>
         <Filename Value="winfiltre.pas"/>
@@ -522,7 +523,7 @@
         <HasResources Value="True"/>
         <ResourceBaseClass Value="Form"/>
         <UnitName Value="WinLivre"/>
-        <EditorIndex Value="6"/>
+        <EditorIndex Value="7"/>
         <TopLine Value="1192"/>
         <CursorPos X="49" Y="1202"/>
         <UsageCount Value="200"/>
@@ -1246,7 +1247,7 @@
         <DefaultSyntaxHighlighter Value="LFM"/>
       </Unit>
     </Units>
-    <JumpHistory HistoryIndex="21">
+    <JumpHistory HistoryIndex="24">
       <Position>
         <Filename Value="chargeconstantes.pas"/>
         <Caret Line="377" Column="25" TopLine="365"/>
@@ -1334,6 +1335,18 @@
       <Position>
         <Filename Value="chargeconstantes.pas"/>
         <Caret Line="390" Column="11" TopLine="388"/>
+      </Position>
+      <Position>
+        <Filename Value="warhammersource.pas"/>
+        <Caret Line="1289" Column="30" TopLine="1285"/>
+      </Position>
+      <Position>
+        <Filename Value="chargepersonnage.pas"/>
+        <Caret Line="831" TopLine="820"/>
+      </Position>
+      <Position>
+        <Filename Value="chargepersonnage.pas"/>
+        <Caret Line="837" TopLine="820"/>
       </Position>
     </JumpHistory>
     <RunParams>

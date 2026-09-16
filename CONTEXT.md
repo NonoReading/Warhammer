@@ -1,24 +1,137 @@
 # Warhammer — Contexte projet
 
-**REPRISE (16/09/2026, suite 4)** : chantier « Vertus bretonnes » (§2.78). Étape 2 (le
-mécanisme de choix) **écrite et compilée (lazbuild, 0 erreur), pas encore retestée en jeu**
-après un correctif suite au premier retour de Nono. Résumé : `NATIO-T0001`/`NATIO-T0002`
-sont des talents achetés à l'XP dans le pool normal de la carrière (pas un octroi gratuit
-façon `SkillChoice`), mais leur id de base ET leur référence dans la table de carrière
-doivent porter le suffixe `_*` pour que le programme les reconnaisse comme "talent à
-spécialisation" — **absent de la saisie du 16/09 (suite 2), Nono ne voyait donc aucune
-spécialisation possible en testant.** Corrigé : `_*` ajouté aux deux (§2.78 ci-dessous pour
-le détail). Le filtre Grail Virtue (pool restreint aux noms déjà pris en Knightly) reste en
-place, juste réaccordé au nouveau code `NATIO-T0002_*`. **Point de reprise : Nono reteste en
-jeu** — (1) Knightly Virtue au palier Errant propose-t-il enfin la grille des 14 noms via
-"choisir spécialisation", (2) en ajoutant plusieurs fois "Knightly Virtue" par le bouton
-"Ajouter un talent" obtient-on bien des Vertus DIFFÉRENTES (mécanisme cense permettre les 4
-prises du Max:4), (3) Grail Virtue au palier Grail Knight ne propose-t-il QUE les noms déjà
-pris en Knightly, avec message si aucun. Repéré au passage : Kenjutsu/Martial Artist/Mark of
-the Gods (même livre) ont vraisemblablement le même trou (pas de `_*`), jamais remonté faute
-d'avoir été essayés en jeu - noté dans `A FAIRE.txt`, pas corrigé (hors perimetre de ce
-chantier). `Virtue of the Quest` (octroi/retrait automatique lié au changement de carrière)
-laissé à part, non traité. Détail complet en §2.78 ci-dessous.
+**REPRISE (16/09/2026, suite 6)** : chantier « Vertus bretonnes » (§2.78) — le mécanisme de
+**prises multiples de Knightly Virtue (Max:4) est terminé, testé en jeu par Nono, compilé,
+pas encore committé**. Plusieurs fausses pistes avant la bonne conception (détail complet en
+§2.78 suite 6 ci-dessous) : la version retenue ne touche presque rien au mécanisme existant
+(pas de nouvelle grille, pas de nouvel écran) — l'essentiel se joue dans `MajTables`. **Point
+de reprise : reste à tester** Grail Virtue au palier Grail Knight (le filtre qui restreint le
+pool aux noms déjà pris en Knightly Virtue, `ChoixWinVertuGrail`, n'a pas été modifié
+aujourd'hui, mais tout ce qui l'entoure a beaucoup bougé - à revérifier que rien n'a cassé).
+`Virtue of the Quest` (octroi/retrait automatique lié au changement de carrière) toujours
+laissé à part, non traité. Kenjutsu/Martial Artist/Mark of the Gods (probable même trou de
+suffixe `_*` que Knightly Virtue avant son propre correctif, jamais essayés en jeu) restent
+notés dans `A FAIRE.txt`, non corrigés.
+
+**Chantier séparé, indépendant du précédent : bug « nom de personnage terminé par un espace
+= crash au démarrage suivant » signalé par Nono, corrigé et compilé, pas encore retesté en
+jeu.** Détail en §2.79 plus bas.
+
+---
+
+**16/09/2026 (suite 6) — §2.78 PRISES MULTIPLES DE KNIGHTLY VIRTUE (MAX:4) : CONCEPTION
+FINALE, APRÈS PLUSIEURS FAUSSES PISTES.** Nono teste l'étape 2 (§2.78 suite 4) : le premier
+choix marche ("la grille des 14 noms s'affiche"), mais remonter "Nouveau" à 2/3/4 sur la même
+ligne ne permet pas de choisir une deuxième Vertu différente - la spécialisation choisie
+verrouille la ligne. Plusieurs conceptions explorées et abandonnées avant la bonne, gardées
+ici pour ne pas les re-explorer un jour :
+- **Grille `TabVertu` séparée + `VertuAffiche()` (façon `TabSort`/sorts), une ligne "à choisir"
+  par prise manquante posée automatiquement selon "Nouveau".** Construite en entier, compilée,
+  puis abandonnée : nécessitait de patcher `TabAugmentationTalentCalcul` ET
+  `TabAugmentationTalentSelectCell` pour que "Nouveau" puisse dépasser 1 sur une ligne à
+  spécialisation - **Nono a refusé de toucher `TabAugmentationTalentSelectCell`** ("ça va
+  casser le reste", fonction partagée par tous les talents à rang). Tout ce mécanisme a été
+  retiré (grille, procédure, appels, correctifs de Max) avant la version retenue.
+- **Passer par des Sorts (`ModeSort=Choix`, champ `Permanent` a créer) plutôt que des Talents
+  spécialisés**, avec `ModifyCarac` branché sur `Grail Virtue of the Ideal`. Idée de Nono,
+  abandonnée en cours de route au profit d'une piste plus simple : `SortAffiche()` a la MÊME
+  limite (une seule ligne "à choisir" posée par appel, quel que soit l'écart de "Nouveau") -
+  ça aurait demandé la même extension, juste déplacée sur les Sorts.
+- **Règle clé de Nono, qui a débloqué la bonne conception : "un talent SPE ne doit avoir qu'un
+  niveau, point final."** Le Max:4 de Knightly Virtue ne se traduit donc PAS par "une ligne, 4
+  rangs" mais par **4 prises indépendantes**, chacune un talent à spécialisation normal
+  (Max=1) comme n'importe quel autre (Bless...). Workflop qui en découle : **une Vertu par
+  session** (achat, résolution via l'écran de spécialisation EXISTANT et non modifié,
+  Valider - qui verrouille déjà la grille aujourd'hui), on rouvre la fiche pour la suivante.
+  Ça correspond au texte du livre ("one virtue per Talent level... one additional virtue per
+  Career Advancement").
+
+**Conception finale retenue, trois changements ciblés, rien de nouveau à l'écran :**
+1. **Anti-doublon** dans `TabAugmentationTalentDblClick` (absent avant) : une Vertu déjà
+   possédée (recherche exacte dans `TabTalent`) ne peut plus être choisie une deuxième fois -
+   message `RULES-MESS_047` ("Cela existe déjà dans la table").
+2. **`Personnage.MetierTalent` n'est plus figé** sur la Vertu choisie pour un talent
+   générique à Max>1 (detecté via `ChercheTalent(ChoixWinTalent).MaxiTalent > 1`) : le code
+   générique (`NATIO-T0001_*`) reste en place dans cette table, donc la case carrière reste
+   proposable aux sessions suivantes (comportement inchangé pour les talents Max=1 comme
+   Bless, qui eux se figent toujours sur le dieu choisi).
+3. **Dans `MajTables`** (le seul endroit vraiment nouveau) : la Vertu nommée devient sa
+   propre ligne permanente dans `TabTalent` (`ColTalNb='1'`) ; en parallèle, une ligne séparée
+   sous le code générique (colonne `Work`, jamais écrasée) garde le compteur cumulé ET le
+   vrai Max (4, écrit dans `ColTalMax`) - c'est cette ligne générique que le rechargement
+   retrouve en premier (correspondance EXACTE de code dans `ChargeAugmentation`), donc le
+   plafond réel se relit toujours correctement sans jamais toucher
+   `TabAugmentationTalentCalcul` ni `TabAugmentationTalentSelectCell`.
+
+**Point délicat trouvé en testant (deux allers-retours) : le coût XP de la copie nominative.**
+`CalculXpEtat()`/le rebuild de l'onglet Talent recalculent le coût de CHAQUE ligne de
+`TabTalent` indépendamment via `ColTalNbAugm` (`CalculExperience(Talent, 0, NbAugm, ...)`),
+sans aucune notion de "déjà compté ailleurs" :
+- `NbAugm='1'` sur la copie nominative → facturait 100 Xp en trop par Vertu (le coût est déjà
+  porté par la ligne générique, qui elle facture le vrai tarif progressif 100/200/300/400).
+- `NbAugm='0'` → coût correct, MAIS la ligne disparaissait purement et simplement à
+  l'enregistrement : la sauvegarde du personnage n'écrit que ce qui est dans
+  `Personnage.AugmentationTalent` (`chargepersonnage.pas:587`), lui-même alimenté par un
+  resync qui ignore toute ligne à `NbAugm` nul (deux endroits dans `winpersonnage.pas`, un
+  avant PDF ~l.2549 et un avant sauvegarde ~l.5420).
+- **Solution retenue, idée de Nono : `NbAugm='-1'`.** `CalculExperience` renvoie déjà 0 pour
+  un total négatif (`Total > Gratuit` faux), donc coût nul SANS toucher cette fonction
+  partagée ; et les deux resync ont été élargis de `> 0` à `<> 0` pour ne plus exclure les
+  valeurs négatives (sans rien changer pour les talents normaux, qui n'ont jamais de NbAugm
+  négatif). Seul residu : l'affichage du "Number" au rechargement (`XmlChargePersonnage`,
+  ~l.3309) sommait `Valeur` brute - passé en `Abs(Valeur)` pour afficher "1" et non "-1".
+  **Piège à ne pas oublier si un `ModifyCarac` est un jour branché sur une Vertu nommée**
+  (ex. Grail Virtue of the Ideal) : lire `Abs(Valeur)`, pas `Valeur` brute, sinon le bonus
+  s'applique avec le signe inversé.
+
+Testé en jeu par Nono à chaque étape (anti-doublon confirmé, deux Vertus différentes
+ajoutées, coût XP vérifié juste après le correctif du signe, survie à fermeture/réouverture
+confirmée). Compilé (`lazbuild --build-all`, 0 erreur) après chaque étape. **Pas encore
+committé.**
+
+Fichiers modifiés : `winpersonnage.pas`, `A FAIRE.txt`, `CONTEXT.md`, `Log.txt`.
+
+---
+
+**16/09/2026 (suite 5) — §2.79 CRASH A LA CREATION D'UN PERSONNAGE SI LE NOM SE TERMINE PAR UN
+ESPACE, PROGRAMME NE SE RIOUVRANT PLUS ENSUITE.** Signalé par Nono. Cause trouvée et
+reproduite hors du programme (PowerShell, `CreateDirectory`/`Set-Content` sur ce même poste) :
+un dossier Windows créé avec un espace final est accepté par `CreateDir` mais silencieusement
+tronqué (le dossier réel s'appelle sans l'espace) ; toute écriture de fichier ultérieure qui
+réutilise la même chaîne (espace compris) comme chemin échoue alors avec "chemin introuvable",
+puisque ce composant-là, lui, n'est pas tronqué à l'ouverture de fichier. Deux endroits
+touchés :
+- `wincreation.pas` (étape 8 de création, sauvegarde étape 9) : `CreateDir(directoryPath)`
+  réussit (dossier créé sans l'espace), puis `PersonnageXmlCreation(...)` échoue en silence
+  (elle attrape déjà l'exception en interne, `WriteLn` invisible en appli GUI) - **mais son
+  résultat booléen n'était jamais vérifié par l'appelant**, qui fermait quand même la fenêtre
+  de création comme si tout s'était bien passé. Résultat : un dossier de personnage vide, sans
+  aucun fichier XML dedans.
+- `warhammersource.pas` (`ChargerPersonnages`, rescanne tous les dossiers à CHAQUE démarrage) :
+  pour un dossier sans XML, `PersonnageXmlFichierActuel` renvoie `''`, et
+  `PersonnageXmlChargement('')` (`chargepersonnage.pas`) plante sur `ReadXMLFile` avec un
+  `try...finally` mais sans `except` - exception non rattrapée, remontée jusqu'au démarrage de
+  l'appli. Comme le dossier vide reste sur le disque, **ça plante à CHAQUE lancement suivant**,
+  exactement le "je ne peux plus ouvrir le programme" de Nono.
+- **Corrigé aux deux endroits** : `EditNomPersonnag.text := Trim(EditNomPersonnag.text)` avant
+  toute validation/usage en chemin (`wincreation.pas`, étape 8) - empêche la récidive pour un
+  nouveau personnage. Et un garde-fou dans `ChargerPersonnages` : si
+  `PersonnageXmlFichierActuel` renvoie `''` pour un dossier, la ligne est ignorée (ni ajoutée à
+  `TabPersonnage`, ni chargée) au lieu de faire planter tout le rescan - protège aussi contre
+  toute autre cause future de dossier de personnage sans XML, pas seulement celle-ci.
+- Compilé (`lazbuild`, 0 erreur, aucun avertissement nouveau). **Pas testé en jeu, pas
+  committé.** Aucun dossier de personnage vide/orphelin trouvé dans `SAVED_CARACTERS\WFRP4\`
+  au moment du diagnostic - donc soit Nono a déjà nettoyé le dossier fautif lui-même pour
+  pouvoir rouvrir le programme, soit le crash a été bloqué avant la moindre écriture disque. À
+  vérifier avec Nono si le programme est encore bloqué au démarrage.
+- Bug non lié repéré au passage, pas corrigé (hors périmètre) : la vérification "nom déjà pris"
+  à l'étape 8 (`wincreation.pas` ~ligne 1786) teste
+  `DirectoryExists(GetCurrentDir+EditNomPersonnag.text)`, un chemin qui **n'inclut pas
+  `ConstCheminPersonnage`** - elle ne pointe donc jamais vers le vrai dossier
+  `SAVED_CARACTERS\...\NomPerso\` et ne peut quasiment jamais se déclencher. Noté dans
+  `A FAIRE.txt`.
+
+Fichiers modifiés : `wincreation.pas`, `warhammersource.pas`, `CONTEXT.md`.
 
 ---
 

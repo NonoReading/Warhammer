@@ -5052,3 +5052,61 @@ jeu, pas committe - Nono doit partir, reprise prevue ce soir.
 Fichiers modifies : DATABASE/WFRP4/BOOK_NATIONS_OF_MANKIND.Xml, DATABASE/INTERFACE.Xml,
 DATABASE/INTERFACE_FRANCAIS.Xml, chargeconstantes.pas, winpersonnage.pas,
 winspecialisation.pas, CONTEXT.md, A FAIRE.txt, Log.txt.
+
+16/09/2026 (suite 5) - CRASH A LA CREATION D'UN PERSONNAGE SI LE NOM SE TERMINE PAR UN
+ESPACE, PROGRAMME NE SE RIOUVRANT PLUS ENSUITE (CONTEXT.md 2.79). Signale par Nono. Cause :
+un dossier Windows cree avec un espace final est accepte par CreateDir mais tronque en
+silence (le vrai dossier n'a pas l'espace) ; l'ecriture du fichier XML qui suit, elle,
+reutilise le chemin avec l'espace et echoue - PersonnageXmlCreation attrape deja l'erreur en
+interne mais son resultat n'etait jamais verifie par l'appelant (wincreation.pas), qui
+fermait quand meme la fenetre comme si la sauvegarde avait reussi. Resultat : un dossier de
+personnage vide, sans XML dedans. Au demarrage suivant, ChargerPersonnages (rescan de tous
+les dossiers a CHAQUE lancement) tombe sur ce dossier vide, PersonnageXmlChargement('')
+plante sur ReadXMLFile (try/finally sans except) - exception non rattrapee, remontee jusqu'au
+demarrage de l'appli, qui replante donc a chaque lancement tant que le dossier vide reste sur
+le disque. Corrige aux deux endroits : Trim() du nom avant toute utilisation en chemin
+(wincreation.pas, empeche la recidive), et garde-fou dans ChargerPersonnages qui ignore une
+ligne de personnage sans XML au lieu de planter tout le rescan (protege aussi contre toute
+autre cause future du meme symptome). Compile (lazbuild, 0 erreur). Pas teste en jeu, pas
+committe. Aucun dossier vide trouve dans SAVED_CARACTERS\WFRP4\ au moment du diagnostic - a
+verifier avec Nono si le programme est encore bloque au demarrage. Bug non lie repere au
+passage, pas corrige : la verification "nom deja pris" (wincreation.pas ~1786) teste un
+chemin sans ConstCheminPersonnage, donc ne pointe jamais vers le vrai dossier - note dans
+A FAIRE.txt.
+Fichiers modifies : wincreation.pas, warhammersource.pas, CONTEXT.md, Log.txt, A FAIRE.txt.
+
+16/09/2026 (suite 6) - VERTUS BRETONNES (CONTEXT.md 2.78), PRISES MULTIPLES DE KNIGHTLY
+VIRTUE (MAX:4) TERMINEES ET TESTEES EN JEU. Nono teste l'etape 2 : le premier choix marche,
+mais remonter "Nouveau" a 2/3/4 sur la meme ligne ne permet pas de choisir une deuxieme
+Vertu differente - la specialisation choisie verrouille la ligne. Deux conceptions explorees
+et abandonnees avant la bonne : une grille TabVertu separee (comme les sorts) necessitant de
+patcher TabAugmentationTalentSelectCell (refuse par Nono, fonction partagee par tous les
+talents a rang, risque trop large) ; puis une conversion en Sorts avec un champ Permanent et
+ModifyCarac pour Grail Virtue of the Ideal, abandonnee car SortAffiche() a la meme limite
+qu'un Talent (une seule ligne "a choisir" posee par appel). Regle de Nono qui a debloque la
+bonne piste : "un talent SPE ne doit avoir qu'un niveau, point final" - le Max:4 se traduit
+donc en 4 prises INDEPENDANTES (chacune un talent a specialisation normal, Max=1, comme
+Bless), achetees une par session (Valider entre chaque, la grille se verrouille deja apres).
+Conception finale, presque rien de nouveau a l'ecran : (1) anti-doublon ajoute dans
+TabAugmentationTalentDblClick (absent avant), une Vertu deja prise ne peut plus etre
+rechoisie ; (2) Personnage.MetierTalent n'est plus fige sur la Vertu choisie pour un talent
+generique Max>1, le code generique reste proposable aux sessions suivantes (comportement
+inchange pour Bless et les autres Max=1) ; (3) dans MajTables, la Vertu nommee devient sa
+propre ligne permanente dans TabTalent, et une ligne separee sous le code generique (colonne
+Work) garde le compteur cumule ET le vrai Max, retrouvee en premier au rechargement par
+correspondance EXACTE de code - le plafond reel se relit donc toujours correctement sans
+toucher TabAugmentationTalentCalcul ni TabAugmentationTalentSelectCell. Point delicat trouve
+en testant : le cout XP de la copie nominative se recalculait en double (CalculXpEtat ignore
+tout ce qui est deja compte ailleurs) - NbAugm=1 facturait 100 Xp en trop, NbAugm=0 faisait
+disparaitre la ligne a l'enregistrement (Personnage.AugmentationTalent, ce qui est reellement
+sauvegarde, exclut les lignes a NbAugm nul). Solution de Nono : NbAugm=-1, cout nul sans
+toucher CalculExperience (deja vrai pour un total negatif), les deux resync qui alimentent
+Personnage.AugmentationTalent elargis de ">0" a "<>0", et l'affichage du Number au
+rechargement passe par Abs(Valeur) pour ne pas montrer "-1". A retenir pour plus tard : si un
+ModifyCarac est un jour branche sur une Vertu nommee (Grail Virtue of the Ideal), il faudra
+lire Abs(Valeur) et non Valeur brute. Teste en jeu par Nono a chaque etape (anti-doublon,
+deux Vertus differentes ajoutees, cout XP verifie, survie a fermeture/reouverture confirmee).
+Compile (lazbuild --build-all, 0 erreur) apres chaque etape. Reste a tester : Grail Virtue au
+palier Grail Knight (le filtre ChoixWinVertuGrail n'a pas ete modifie aujourd'hui mais tout
+ce qui l'entoure a beaucoup bouge).
+Fichiers modifies : winpersonnage.pas, CONTEXT.md, Log.txt, A FAIRE.txt.
