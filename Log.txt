@@ -4990,3 +4990,18 @@ Compile a chaque etape (lazbuild --build-all, 0 erreur). Teste en jeu par Nono, 
 ("c'est bon"). Pas encore committe.
 Fichiers modifies : winpersonnage.pas, DATABASE/INTERFACE.Xml,
 DATABASE/INTERFACE_FRANCAIS.Xml, A FAIRE.txt, CONTEXT.md, Log.txt.
+
+16/09/2026 - MECANISME DATA_NATION (CONTEXT.md 2.51) ETENDU AUX NATIONS HUMAINES
+RESTANTES. Nono a demande d'ajouter les nations une par une : Bretonnia, Estalia et Araby
+dans BOOK_NATIONS_OF_MANKIND.Xml (HBRPA/HBRNO, HESTA, HARAB rattachees), Tilea dans
+BOOK_UP_IN_ARMS.Xml (HTIL), Norsca dans BOOK_SEA_OF_CLAWS.Xml (HBJOR/HSARL/HSKAE) - verifie
+avant d'ecrire que Tilea et Norsca ne sont PAS dans Nations of Mankind, chaque DATA_NATION
+pose dans le livre qui possede reellement l'ethnie plutot que centralise. SEAOF-RACE_DNORSE
+(Nains de Norsca) volontairement laisse de cote : Nono precise que le regroupement Nation
+vise les nations humaines, pas une extension systematique aux non-humains d'un meme
+territoire. Donnee XML pure, chaque livre revalide bien forme, aucun .pas touche - pas de
+recompilation ni de test en jeu possible, aucun CareerBonus existant ne filtre encore sur
+ces nouvelles Nations. Committe par Nono (5530e0e, "ajout des nations").
+Fichiers modifies : DATABASE/WFRP4/BOOK_NATIONS_OF_MANKIND.Xml,
+DATABASE/WFRP4/BOOK_UP_IN_ARMS.Xml, DATABASE/WFRP4/BOOK_SEA_OF_CLAWS.Xml, A FAIRE.txt,
+CONTEXT.md, Log.txt.

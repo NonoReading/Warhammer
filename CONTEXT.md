@@ -1,15 +1,60 @@
 # Warhammer — Contexte projet
 
-**REPRISE (16/09/2026)** : mécanisme `<SkillChoice>` (choix de 3 compétences raciales,
-Reiksguard palier 4) **testé en jeu par Nono, validé**. Dans la foulée, gap similaire à
-celui déjà corrigé sur les Attributs (§2.61, 12/09) repéré et corrigé côté Compétences :
-un bonus de Carrière chiffré (`<ModifyCarac>`/`<ModifySkill>` de palier, ex. Reiksguard
-"+10 CC avec les lances") comptait déjà dans le Total (`PdfPersonnageCompetence`) mais
-n'apparaissait nulle part à l'écran, et la colonne `ColCompAppartenance` (les +5 du
-`SkillChoice` ci-dessus) n'était jamais révélée par la case "afficher le détail". Nouvelle
-colonne `ColCompCareer` + branchement de `ColCompAppartenance` sur `CheckBoxCalcul`,
-**testé et validé par Nono ("c'est bon")**. Voir l'entrée du jour ci-dessous pour le détail.
-Committé (`719fc68`) - aucune autre demande en attente à cette heure.
+**REPRISE (16/09/2026)** : mécanisme `<DATA_NATION>` (§2.51) étendu à toutes les nations
+humaines identifiées à ce jour — Bretonnia, Estalia et Araby (`BOOK_NATIONS_OF_MANKIND.Xml`),
+Tilea (`BOOK_UP_IN_ARMS.Xml`), Norsca (`BOOK_SEA_OF_CLAWS.Xml`), en plus de l'Empire déjà en
+place. Chaque ethnie humaine correspondante rattachée via `<Nationality>`. Donnée pure,
+aucun `.pas` touché, pas de recompilation nécessaire. `SEAOF-RACE_DNORSE` (Nains de Norsca)
+volontairement laissé de côté (décision de Nono : le regroupement Nation vise les nations
+humaines, pas une extension systématique aux ethnies non-humaines d'un même territoire).
+Aucun consommateur ne filtre encore sur ces nouvelles Nations aujourd'hui (les 17
+`CareerBonus` de Nations of Mankind visent tous l'Empire) — pure préparation de données,
+à exploiter au prochain besoin réel (nouveau livre, nouvelle condition d'appartenance).
+**Committé (`5530e0e`) par Nono.** Voir l'entrée du jour ci-dessous pour le détail.
+
+---
+
+**16/09/2026 — MÉCANISME `<DATA_NATION>` (§2.51) ÉTENDU AUX NATIONS HUMAINES RESTANTES :
+ÉCRIT ET COMMITTÉ.** Après la clôture du `<SkillChoice>` Reiksguard (entrée suivante),
+Nono a demandé d'ajouter les nations humaines une par une à `A FAIRE.txt` (Bretagne,
+Estalie, Tilée, Norsca, puis Araby), sur le même mécanisme que `RULES-NATION_EMPIRE`
+(§2.51) : un bloc `<DATA_NATION>` déclaré une fois par livre, un `<Nationality>` posé sur
+chaque ethnie humaine concernée.
+
+- **Bretonnia, Estalia, Araby** : les trois nations et leurs ethnies (`HBRPA`/`HBRNO`,
+  `HESTA`, `HARAB`) sont toutes dans `BOOK_NATIONS_OF_MANKIND.Xml`, un seul
+  `<DATA_NATION>` y regroupe les trois `<Nation>` (`NATIO-NATION_BRET`/`_ESTA`/`_ARAB`),
+  posé juste avant `DATA_SPECIE` (le livre n'a pas de `DATA_RACE`, contrairement au
+  Rulebook).
+- **Tilea et Norsca : pas dans Nations of Mankind.** Vérifié avant d'écrire quoi que ce
+  soit (règle §0 : ne jamais conclure qu'une donnée est absente sans avoir cherché où
+  elle est réellement) — l'ethnie Tilea (`UPINA-RACE_HTIL`) vit dans
+  `BOOK_UP_IN_ARMS.Xml`, et les trois ethnies Norses (`SEAOF-RACE_HBJOR`/`HSARL`/`HSKAE`)
+  dans `BOOK_SEA_OF_CLAWS.Xml` — les "Norscans" mentionnés dans les carrières de Nations
+  of Mankind (Norscan Mercenary/Whaler) ne sont qu'un `<Class>`/commentaire descriptif,
+  aucune `<Specie>` dédiée dans ce livre. Chaque `<DATA_NATION>` posé dans le livre qui
+  possède réellement l'ethnie plutôt que centralisé dans Nations of Mankind : le
+  chargement de tous les livres au démarrage rend la référence croisée transparente
+  (déjà le cas pour `RULES-NATION_EMPIRE`, déclaré dans le Rulebook et consommé par
+  Nations of Mankind), donc aucune contrainte technique n'imposait un seul endroit —
+  choix de cohérence de la donnée : `UPINA-NATION_TILE` dans `BOOK_UP_IN_ARMS.Xml`,
+  `SEAOF-NATION_NORS` dans `BOOK_SEA_OF_CLAWS.Xml`.
+- **`SEAOF-RACE_DNORSE` (Nains de Norsca) volontairement laissé sans Nation.** Question
+  posée à Nono : la Nation vise-t-elle tout habitant d'un territoire ou seulement les
+  humains ? Réponse de Nono : « le livre est [pensé] par les nations humaines
+  principalement » — décision tranchée, pas à ressortir en anomalie tant qu'aucun besoin
+  réel ne se présente pour une ethnie non-humaine.
+- **Aucun consommateur aujourd'hui.** Les 17 `CareerBonus` de Nations of Mankind
+  (`NATIO-ORDER_*`) filtrent tous sur `RULES-NATION_EMPIRE` — pure préparation de donnée,
+  dans l'esprit du point laissé ouvert le 07/09 (« à faire au fur et à mesure des
+  besoins, pas systématiquement »), ici traité en bloc à la demande explicite de Nono.
+- Chaque livre revalidé bien formé après ses modifications. Donnée XML pure, aucun
+  `.pas` touché — pas de recompilation nécessaire, pas de test en jeu possible tant
+  qu'aucune règle ne consulte ces Nations.
+
+**Committé par Nono (`5530e0e`, "ajout des nations").** `A FAIRE.txt` mis à jour au fil de
+l'eau : le point ouvert du 07/09 est refermé, `SEAOF-RACE_DNORSE` noté comme décision
+tranchée plutôt que comme reste à faire.
 
 ---
 
