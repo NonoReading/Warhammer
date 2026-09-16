@@ -5029,3 +5029,26 @@ Nono, chargement confirme, rien de casse. Reste : le mecanisme de choix (liste f
 noms, pas derivee de l'ethnie comme SkillChoice) et Virtue of the Quest (octroi/retrait
 automatique), tous deux non commences.
 Fichiers modifies : DATABASE/WFRP4/BOOK_NATIONS_OF_MANKIND.Xml, CONTEXT.md, Log.txt.
+
+16/09/2026 (suite 2) - VERTUS BRETONNES (CONTEXT.md 2.78) ETAPE 2, MECANISME DE CHOIX :
+ECRIT ET CORRIGE, PAS ENCORE TESTE EN JEU. En concevant l'ecran de choix, trouve que
+NATIO-T0001/T0002 sont des talents achetes a l'XP dans le pool normal de la carriere (pas un
+octroi gratuit force au palier comme le SkillChoice du Reiksguard) : pas d'ecran dedie
+necessaire, le selecteur de specialisation generique existant suffit une fois la donnee bien
+ecrite. Premier essai en jeu par Nono : aucune specialisation proposee pour Knightly Virtue.
+Cause trouvee : le declencheur qui affiche "choisir specialisation" (winpersonnage.pas:4918,
+wintalent.pas:289) n'agit que si le code contient litteralement le suffixe _* - absent de la
+saisie du 16/09 (id de base ET reference de carriere). Corrige : _* ajoute a
+NATIO-T0001/NATIO-T0002 (id de base et les deux entrees de carriere, palier Errant/Grail
+Knight). Le bon modele retrouve dans la base est RULES-T0012_* (Bless), pas Kenjutsu comme
+suppose au depart - Kenjutsu/Martial Artist/Mark of the Gods (meme livre) ont probablement le
+meme trou, jamais remonte faute d'avoir ete essayes en jeu, note dans A FAIRE.txt sans etre
+corrige (hors perimetre de ce chantier). Ajoute au passage : filtre Grail Virtue (pool
+restreint aux Vertus deja prises en Knightly, nouvelle variable ChoixWinVertuGrail dans
+chargeconstantes.pas/winpersonnage.pas/winspecialisation.pas, meme principe que le filtre
+"deja acquises" des Appartenances 2.44), nouveau libelle RULES-MESS_063 (message si aucune
+Knightly Virtue prise). Compile (lazbuild, 0 erreur) apres chaque correctif. Pas teste en
+jeu, pas committe - Nono doit partir, reprise prevue ce soir.
+Fichiers modifies : DATABASE/WFRP4/BOOK_NATIONS_OF_MANKIND.Xml, DATABASE/INTERFACE.Xml,
+DATABASE/INTERFACE_FRANCAIS.Xml, chargeconstantes.pas, winpersonnage.pas,
+winspecialisation.pas, CONTEXT.md, A FAIRE.txt, Log.txt.

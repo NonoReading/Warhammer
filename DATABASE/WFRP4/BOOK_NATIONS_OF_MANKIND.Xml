@@ -378,7 +378,7 @@
 </Skill>
 </DATA_SKILL_SPECIALIZATION>
 <DATA_TALENT>
-<Talent id="NATIO-T0001">
+<Talent id="NATIO-T0001_*">
 <Attribut>""</Attribut>
 <Description language="ENGLISH">"Knightly Virtue"</Description>
 <Short language="ENGLISH">""</Short>
@@ -422,7 +422,7 @@ Virtue of Stoicism - You may re-roll any failed Fear or Terror Test, or any fail
 <PDF>""</PDF>
 <Test language="ENGLISH">""</Test>
 </Talent>
-<Talent id="NATIO-T0002">
+<Talent id="NATIO-T0002_*">
 <Attribut>""</Attribut>
 <Description language="ENGLISH">"Grail Virtue"</Description>
 <Short language="ENGLISH">""</Short>
@@ -5535,7 +5535,7 @@ Chivalry is all. Rejoice, for we, the Knights of Bretonnia... will be your shiel
   <!-- Roughrider -->
 <Talent name="RULES-T0035">"1"</Talent>
   <!-- Sturdy -->
-<Talent name="NATIO-T0001">"1"</Talent>
+<Talent name="NATIO-T0001_*">"1"</Talent>
   <!-- Knightly Virtue -->
 <Talent name="RULES-T0012_LADY">"2"</Talent>
   <!-- Bless (The Lady) -->
@@ -5553,7 +5553,7 @@ Chivalry is all. Rejoice, for we, the Knights of Bretonnia... will be your shiel
   <!-- Stout-hearted -->
 <Talent name="RULES-T0076">"3"</Talent>
   <!-- Unshakeable (le livre ecrit "Unshakeable") -->
-<Talent name="NATIO-T0002">"4"</Talent>
+<Talent name="NATIO-T0002_*">"4"</Talent>
   <!-- Grail Virtue -->
 <Talent name="RULES-T0053">"4"</Talent>
   <!-- Inspiring -->

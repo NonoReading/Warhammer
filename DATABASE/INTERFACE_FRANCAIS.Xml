@@ -70,6 +70,7 @@
 <Text name="RULES-MESS_060">"Voulez-vous retirer cette mutation ? Ce qu'elle accordait (talent, arme, armure) sera aussi retiré."</Text>
 <Text name="RULES-MESS_061">"Changer la version pour  : "</Text>
 <Text name="RULES-MESS_062">"Merci de fermer toute fiche personnage ou fenêtre de création de personnage ouverte avant de changer la version."</Text>
+<Text name="RULES-MESS_063">"Vous devez d'abord acquérir une Vertu de Chevalerie avant de choisir une Vertu du Graal du même nom."</Text>
 <Text name="RULES-LAB_001">"Code"</Text>
 <Text name="RULES-LAB_002">"Libellé"</Text>
 <Text name="RULES-LAB_003">"Description"</Text>

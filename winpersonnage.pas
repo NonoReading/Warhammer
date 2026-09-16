@@ -2882,11 +2882,38 @@ procedure TWinPersonnages.TabAugmentationTalentDblClick(Sender: TObject);
       begin
         ChoixWinTypeFichier         := ConstXmlSousChapitreTalent;
         ChoixWinTalent              := TabAugmentationTalent.Cells[ColAugmTalCode, TabAugmentationTalent.Row];
+
+        // Grail Virtue (NATIO-T0002_*) : le livre exige d'avoir deja la Knightly Virtue du
+        // meme nom (Nations of Mankind p.13) - le pool propose a WinSpecialisation est
+        // donc restreint aux noms deja RESOLUS en NATIO-T0001_* sur TabTalent (exclut le
+        // code generique lui-meme, au cas ou une ligne serait restee non specialisee). Un
+        // seul consommateur aujourd'hui, code en dur comme le fut le SkillChoice du
+        // Reiksguard avant lui (2.51). CONTEXT.md 2.78.
+        if ChoixWinTalent = 'NATIO-T0002_*' then
+          begin
+            ChoixWinVertuGrail := '';
+            for Ind := 1 to TabTalent.RowCount - 1 do
+              if (Pos('NATIO-T0001_', TabTalent.Cells[ColTalCode, Ind]) = 1) and
+                 (TabTalent.Cells[ColTalCode, Ind] <> 'NATIO-T0001_*') then
+                begin
+                  if ChoixWinVertuGrail <> '' then
+                    ChoixWinVertuGrail := ChoixWinVertuGrail + ',';
+                  ChoixWinVertuGrail := ChoixWinVertuGrail + 'NATIO-T0002_' +
+                                        ExtractStringAfter(TabTalent.Cells[ColTalCode, Ind], 'NATIO-T0001_');
+                end;
+            if ChoixWinVertuGrail = '' then
+              begin
+                ShowMessage(GetTexteLibelle('RULES-MESS_063'));
+                Exit;
+              end;
+          end;
+
         SelectWinLivre              := Personnage.LivresAcceptes;
         FenSpecialisation           := TWinSpecialisations.Create(Application);
         FenSpecialisation.Position  := poOwnerFormCenter;
         FenSpecialisation.ShowModal;
-        SelectWinLivre := '';
+        SelectWinLivre     := '';
+        ChoixWinVertuGrail := '';    // remise a vide obligatoire, meme raison que SelectWinLivre juste au-dessus
         if SelectWinTalent <> '' then
           begin
             TabAugmentationTalent.Cells[ColAugmTalSpe, TabAugmentationTalent.Row] := GetTexteLibelle('RULES-LAB_130');

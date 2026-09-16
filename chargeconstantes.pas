@@ -680,6 +680,15 @@ Var
   ChoixCompetenceAppartenanceRace:  String  = '';
   ChoixCompetenceAppartenanceCount: Integer = 0;
   SelectCompetenceAppartenance:     String  = '';
+  // Choix de Grail Virtue (NATIO-T0002) dans WinSpecialisation, restreint aux noms deja
+  // pris en Knightly Virtue (NATIO-T0001) sur la fiche - le livre l'exige (Nations of
+  // Mankind p.13). ChoixWinVertuGrail = la liste des codes NATIO-T0002_* candidats,
+  // separes par des virgules, calculee par TabAugmentationTalentDblClick
+  // (winpersonnage.pas) a partir de TabTalent ; VIDE = ce n'est pas un choix de Grail
+  // Virtue, ChargeSpecialisation retombe sur son comportement habituel. Un seul
+  // consommateur aujourd'hui, code en dur - meme esprit que le SkillChoice du Reiksguard
+  // (2.51) en son temps. CONTEXT.md 2.78.
+  ChoixWinVertuGrail:               String  = '';
   SelectWinLivre:      String = '';
   ChoixWinLivre:       String = '';
   ListeLivre:          String = '';

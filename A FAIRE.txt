@@ -38,6 +38,15 @@ winpersonnage.pas/wincreation.pas. Le jour ou l'avancement de carriere sera code
 lui apprendre a lire cette syntaxe aussi - utilisee pour les choix "A ou B" du Rulebook V5
 (§2.70) et pour des cas V4 existants (duches bretonniens, carrieres Nations of Mankind).
 
+KENJUTSU (NATIO-T0014)/MARTIAL ARTIST (NATIO-T0016)/MARK OF THE GODS (NATIO-T0015) N'OUVRENT
+PROBABLEMENT PAS LE CHOIX DE SPECIALISATION EN JEU, MEME GAP QUE NATIO-T0001/T0002 AVANT
+CORRECTIF (16/09/2026, §2.78). Leurs id de base et leurs entrees de carriere sont ecrits SANS
+le suffixe `_*` (contrairement a RULES-T0012_* Bless, qui lui l'a) - `TabAugmentationTalentDblClick`
+(winpersonnage.pas:4918) et `TabTalentSelection` (wintalent.pas:289) ne detectent une
+specialisation que si le code contient `_*`. Jamais vu en jeu (aucun Samurai/moine testé a
+priori) donc jamais remonte. Meme correctif que Knightly/Grail Virtue si Nono confirme le
+symptome : ajouter `_*` a l'id de base et a la reference de carriere pour les trois.
+
 CRAFTSMAN/MASTER TRADESMAN "(as Trade)" (RULEBOOK V5) N'A PAS DE RESOLUTION DYNAMIQUE. Ecrit
 le 14/09/2026 (§2.70) avec l'id generique RULES-T0032_*/RULES-T0086_* et un commentaire XML
 "(?)" signifiant "reprend le Trade choisi plus tot dans la carriere" (ex. RULES-WORK03

@@ -1,17 +1,77 @@
 # Warhammer — Contexte projet
 
-**REPRISE (16/09/2026)** : chantier « Vertus bretonnes » (§2.78) ouvert en cherchant un
-consommateur réel du mécanisme Nation (§2.51, tranché le 16/09 — aucune suite nécessaire là,
-voir plus bas). Étape 1 (donnée pure) écrite et **compilée par Nono, ça charge, rien de
-cassé** : `NATIO-T0001`/`NATIO-T0002` (Knightly/Grail Virtue) complétés de 4/7 à 14/14 Vertus
-chacun (texte relu au PDF p.11/13, le TXT du corpus mélangeait les colonnes à cet endroit),
-nouveau talent `NATIO-T0017` "Virtue of the Quest", 28 stubs de libellé (un par Vertu nommée,
-convention Kenjutsu/Path/Mark déjà en place dans ce livre). **Point de reprise : étape 2, le
-mécanisme de choix** — un écran listant les 14 noms (Knightly Virtue, palier Errant) puis les
-14 Grail correspondants filtrés à ceux déjà pris en Knightly (palier Grail Knight), texte
-affiché mais aucun effet automatisé (décision de Nono : comme les trappings des Regiments of
-Renown, §2.51). `Virtue of the Quest` (octroi/retrait automatique lié au changement de
-carrière) laissé à part, non traité. Détail complet en §2.78 ci-dessous.
+**REPRISE (16/09/2026, suite 4)** : chantier « Vertus bretonnes » (§2.78). Étape 2 (le
+mécanisme de choix) **écrite et compilée (lazbuild, 0 erreur), pas encore retestée en jeu**
+après un correctif suite au premier retour de Nono. Résumé : `NATIO-T0001`/`NATIO-T0002`
+sont des talents achetés à l'XP dans le pool normal de la carrière (pas un octroi gratuit
+façon `SkillChoice`), mais leur id de base ET leur référence dans la table de carrière
+doivent porter le suffixe `_*` pour que le programme les reconnaisse comme "talent à
+spécialisation" — **absent de la saisie du 16/09 (suite 2), Nono ne voyait donc aucune
+spécialisation possible en testant.** Corrigé : `_*` ajouté aux deux (§2.78 ci-dessous pour
+le détail). Le filtre Grail Virtue (pool restreint aux noms déjà pris en Knightly) reste en
+place, juste réaccordé au nouveau code `NATIO-T0002_*`. **Point de reprise : Nono reteste en
+jeu** — (1) Knightly Virtue au palier Errant propose-t-il enfin la grille des 14 noms via
+"choisir spécialisation", (2) en ajoutant plusieurs fois "Knightly Virtue" par le bouton
+"Ajouter un talent" obtient-on bien des Vertus DIFFÉRENTES (mécanisme cense permettre les 4
+prises du Max:4), (3) Grail Virtue au palier Grail Knight ne propose-t-il QUE les noms déjà
+pris en Knightly, avec message si aucun. Repéré au passage : Kenjutsu/Martial Artist/Mark of
+the Gods (même livre) ont vraisemblablement le même trou (pas de `_*`), jamais remonté faute
+d'avoir été essayés en jeu - noté dans `A FAIRE.txt`, pas corrigé (hors perimetre de ce
+chantier). `Virtue of the Quest` (octroi/retrait automatique lié au changement de carrière)
+laissé à part, non traité. Détail complet en §2.78 ci-dessous.
+
+---
+
+**16/09/2026 (suite 4) — §2.78 VERTUS BRETONNES, CORRECTIF SUITE AU PREMIER TEST DE NONO :
+IL MANQUAIT LE SUFFIXE `_*`.** Nono teste l'étape 2 (entrée précédente) : aucune
+spécialisation proposée pour Knightly Virtue. En cherchant la cause plutôt que de
+re-proposer un écran dédié, trouvé le vrai déclencheur du sélecteur de spécialisation :
+
+- **Le "choisir spécialisation" ne s'affiche que si le CODE contient littéralement `_*`.**
+  Deux gardiens distincts, tous les deux testent `Pos(ValeurGenerique, Code) > 0` (ou
+  `ListeTalent(Code).Count > 0`, qui ne renvoie rien sans `_*` non plus) :
+  `TabAugmentationTalentDblClick` (`winpersonnage.pas:4918`, pour un talent auto-accordé
+  par la carrière) et `TabTalentSelection` (`wintalent.pas:289`, pour un talent ajouté à la
+  main via le catalogue "Ajouter un talent"). `NATIO-T0001`/`NATIO-T0002` étaient saisis
+  SANS `_*` (ni dans leur `<Talent id=...>` de base, ni dans la référence de carrière) -
+  aucun des deux gardiens ne se déclenchait, d'où l'absence totale de spécialisation
+  constatée par Nono.
+- **Le bon modèle est `RULES-T0012_*` (Bless), pas `NATIO-T0014` (Kenjutsu).** Vérifié :
+  `BOOK_RULESBOOK.Xml` écrit bien `<Talent id="RULES-T0012_*">` et les carrières le
+  référencent `RULES-T0012_*` quand le choix du dieu est libre (`RULES-T0012_MYRMIDIA` en
+  dur quand un seul dieu est possible) - c'est ce moule qui fonctionne. `NATIO-T0014`
+  (Kenjutsu)/`NATIO-T0015` (Mark of the Gods)/`NATIO-T0016` (Martial Artist), cités dans le
+  commit du 16/09 comme "convention déjà en place", ne partagent que la forme des STUBS
+  (`<Description>` seule) - pas le `_*` sur la base, donc probablement le même trou,
+  jamais détecté faute d'avoir été essayés en jeu. Noté dans `A FAIRE.txt`, pas corrigé ici
+  (un seul chantier à la fois).
+- **Corrigé, 4 lignes dans `BOOK_NATIONS_OF_MANKIND.Xml`** : `<Talent id="NATIO-T0001">` →
+  `NATIO-T0001_*`, `<Talent id="NATIO-T0002">` → `NATIO-T0002_*`, et les deux références de
+  carrière (palier Errant/Grail Knight) idem. Les 28 stubs (`NATIO-T0001_AUDACITY` etc.) ne
+  changent pas : le rattachement au parent se fait par radical (`ExtractStringBefore(Code,
+  '_') + '_*'`), qui retrouve maintenant `NATIO-T0001_*` exact au lieu de rien.
+  `ChoixWinTalent = 'NATIO-T0002'` (comparaison en dur ajoutée l'étape précédente pour le
+  filtre Grail) mis à jour en `'NATIO-T0002_*'` (`winpersonnage.pas`), garde ajoutée pour
+  exclure la ligne NON résolue (`'NATIO-T0001_*'` lui-même) du calcul des candidats Grail.
+- **Ça répond aussi à la question de Nono ("faut-il que ça marche comme un sort, pour en
+  acheter plusieurs ?").** Oui, c'est déjà ce mécanisme : `TabTalentSelection`
+  (`wintalent.pas`) résout la spécialisation AVANT d'ajouter la ligne (double-clic sur
+  `TabSpe`, pas sur le catalogue principal si une spécialisation existe -
+  `TabTalentDblClick` refuse et affiche `RULES-MESS_034` sinon) — donc chaque clic sur
+  "Ajouter un talent" → "Knightly Virtue" ajoute une ligne avec un code déjà résolu
+  (`NATIO-T0001_AUDACITY`, puis `NATIO-T0001_HEROISM`...), et le test "déjà présent"
+  (`winpersonnage.pas:2965`) compare des codes différents à chaque fois : les 4 prises du
+  Max:4 passent par LÀ (achat manuel répété), le palier Errant n'en accorde qu'UNE
+  automatiquement en entrant en carrière.
+
+**Le filtre Grail Virtue (`ChoixWinVertuGrail`, décrit dans l'entrée précédente) n'a pas
+changé de logique**, juste son point d'accroche (`NATIO-T0002_*` au lieu de `NATIO-T0002`).
+Compilé (`lazbuild`, 0 erreur). Pas testé en jeu, pas committé.
+
+**Compilé (`lazbuild`, 0 erreur, avertissements préexistants uniquement, aucun dans les
+fichiers touchés). Pas testé en jeu, pas committé.** Point de reprise : Nono teste (1)
+Knightly Virtue à l'entrée en Errant, (2) Grail Virtue à l'entrée en Grail Knight sans
+puis avec des Knightly Virtue déjà prises.
 
 ---
 

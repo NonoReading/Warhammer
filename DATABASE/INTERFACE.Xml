@@ -144,6 +144,7 @@
 <Text name="RULES-MESS_060">"Do you want to remove this mutation? Anything it granted (talent, weapon, armour) will be removed too."</Text>
 <Text name="RULES-MESS_061">"Change the version to"</Text>
 <Text name="RULES-MESS_062">"Please close any open character sheet or character creation window before changing the version."</Text>
+<Text name="RULES-MESS_063">"You must first acquire a Knightly Virtue before choosing a Grail Virtue of the same name."</Text>
 <Text name="RULES-LAB_001">"Code"</Text>
 <Text name="RULES-LAB_002">"Label"</Text>
 <Text name="RULES-LAB_003">"Description"</Text>

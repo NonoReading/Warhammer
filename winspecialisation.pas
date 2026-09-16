@@ -74,11 +74,25 @@ Procedure TWinSpecialisations.ChargeSpecialisation(CodeGenerique: String);
   begin
     case ChoixWinTypeFichier of
       ConstXmlSousChapitreTalent:    // Talents
+        // Grail Virtue (NATIO-T0002) : pool deja filtre par l'appelant (TabAugmentationTalentDblClick,
+        // winpersonnage.pas) aux noms possedes en Knightly Virtue - teste EN PREMIER, meme
+        // raison que le trait d'ethnie juste en dessous : un seul candidat ne contient pas
+        // de '/' et tomberait sinon dans le catalogue complet. CONTEXT.md 2.78.
+        if ChoixWinVertuGrail <> '' then
+          begin
+            MaxL := CountOccurrences(ChoixWinVertuGrail, ',') + 1;
+            for NbL := 1 to MaxL do
+              begin
+                Res := Trim(ExtractChaine(',', ChoixWinVertuGrail, NbL));
+                if Res <> '' then
+                  AjouteLigne(CodeGenerique, Res, ChercheTalent(Res).Libelle, '', true);
+              end;
+          end
         // Trait d'ethnie : ses options sont proposees comme le seraient les branches
         // d'un choix A/B. Teste AVANT le Pos(SeparateurMulti), parce qu'un code de trait
         // ne contient pas de '/' et tomberait sinon dans le catalogue complet des
         // talents. Le libelle vient de la table des options. CONTEXT.md 2.41.
-        if ChercheTrait(CodeGenerique).CodeTrait <> '' then
+        else if ChercheTrait(CodeGenerique).CodeTrait <> '' then
           begin
             ListOpt := OptionsDuTrait(CodeGenerique);
             for NbL := 0 to ListOpt.Count - 1 do
