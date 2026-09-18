@@ -46,19 +46,16 @@ Toujours verifier le contexte de la carriere (equipement voisin) avant de rattac
 automatiquement un nom deja vu ailleurs - ne pas supposer qu'un meme mot anglais designe le
 meme code partout.
 
-LA SYNTAXE DE CHOIX "RULES-Txxxx/RULES-Tyyyy" (deux talents distincts au choix, ex. NATIO
-l.5897) N EST LUE QUE PAR WINLIVRE.PAS ET WINMETIER.PAS (AFFICHAGE). WinMetier corrige le
-14/09/2026 (CONTEXT.md 2.77 suite 5, ChargeMetierTalent ne l'affichait pas du tout). Reste
-verifie le 13/09/2026 : aucune occurrence de ce decoupage par '/' dans
-winpersonnage.pas/wincreation.pas. Le jour ou l'avancement de carriere sera code, il faudra
-lui apprendre a lire cette syntaxe aussi - utilisee pour les choix "A ou B" du Rulebook V5
-(§2.70) et pour des cas V4 existants (duches bretonniens, carrieres Nations of Mankind).
-
-MARK OF THE GODS (NATIO-T0015) : L'OCTROI PAR LA CARRIERE NORSCAN MERCENARY RESTE BLOQUE.
-Correctif `_*` fait et valide le 18/09/2026 (CONTEXT.md 2.80) pour l'ajout manuel au
-catalogue, mais sa reference de carriere `RULES-T0161/NATIO-T0015_*` passe par la syntaxe `/`
-non decoupee par winpersonnage.pas/wincreation.pas (voir l'entree plus bas sur ce gap) - a
-traiter en meme temps que ce gap general.
+[CORRIGE LE 18/09/2026, CONTEXT.md 2.80 SUITE - NOTE CI-DESSOUS OBSOLETE, CONSERVEE POUR MEMOIRE]
+LA SYNTAXE DE CHOIX "RULES-Txxxx/RULES-Tyyyy" (deux talents distincts au choix) N ETAIT PAS LUE
+PAR WINPERSONNAGE.PAS/WINCREATION.PAS. Verifie le 13/09/2026 par grep, mais depeasse depuis par
+le chantier Vertus bretonnes (§2.78) : winpersonnage.pas/wincreation.pas utilisent maintenant
+largement ListeTalent/ChargeSpecialisation, qui decoupent deja '/' et '_*' ensemble (fusion en
+une seule liste dans la fenetre de specialisation). Le vrai bug trouve le 18/09/2026 en testant
+Mark of the Gods (Norscan Mercenary) etait localise et distinct : double-cliquer sur le LIBELLE
+d'une ligne a choix multiple (au lieu de la colonne "choisir spe") plantait (EGridException,
+WinTalent.WinCharger ne trouve aucune entree litterale pour un code "A/B"). Corrige dans
+winpersonnage.pas (TabAugmentationTalentDblClick).
 
 CRAFTSMAN/MASTER TRADESMAN "(as Trade)" (RULEBOOK V5) N'A PAS DE RESOLUTION DYNAMIQUE. Ecrit
 le 14/09/2026 (§2.70) avec l'id generique RULES-T0032_*/RULES-T0086_* et un commentaire XML

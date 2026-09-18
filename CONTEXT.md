@@ -19,10 +19,14 @@ Virtue, corrigé au même endroit). Chantier « Vertus bretonnes » quasi clos :
 le vrai retrait de `Virtue of the Quest` à Grail Knight (`A FAIRE.txt`, section conceptions),
 volontairement différé. **§2.80 CLOS : Kenjutsu/Mark of the Gods/Martial Artist
 (NATIO-T0014/15/16) avaient bien le même trou de suffixe `_*` que Knightly Virtue avant son
-correctif - corrigé le 18/09/2026, testé en jeu et validé par Nono** (détail plus bas). Reste
-seulement, pour Mark of the Gods, l'octroi via la carrière Norscan Mercenary (`RULES-T0161/
-NATIO-T0015_*`, syntaxe `/` non lue par `winpersonnage.pas`), bloqué par un gap séparé déjà
-noté ailleurs - non testé, non traité ici.
+correctif - corrigé le 18/09/2026, testé en jeu et validé par Nono** (détail plus bas).
+**§2.80 SUITE : le crash au double-clic sur la ligne Mark of the Gods (via Norscan Mercenary)
+est corrigé, testé en jeu et validé par Nono le 18/09/2026.** Contrairement à ce qui était noté
+ici avant investigation, la syntaxe de choix `RULES-T0161/NATIO-T0015_*` EST déjà lue et
+fusionnée par `winpersonnage.pas` (mécanisme `ListeTalent`/`ChargeSpecialisation` existant, pas
+nouveau) - la note "non lue par winpersonnage.pas" plus haut dans `A FAIRE.txt` était obsolète.
+Le vrai bug : double-cliquer sur le LIBELLÉ de la ligne (au lieu de la colonne "choisir spé")
+plantait (`EGridException Cell[Col=1 Row=1]`), corrigé. Détail en §2.80 suite ci-dessous.
 
 **Chantier séparé, indépendant du précédent : bug « nom de personnage terminé par un espace =
 crash au démarrage suivant » — §2.79 CLOS.** Corrigé, compilé, **testé en jeu par Nono le
@@ -48,20 +52,53 @@ pour ce genre de faute purement structurelle - identique lettre pour lettre au c
   à `NATIO-T0002`, aucune comparaison en dur sur ces trois codes dans le code Pascal (vérifié par
   grep) - correctif purement dans la donnée, rien à changer côté `.pas`.
 - **Cas particulier Mark of the Gods** : sa référence de carrière est `RULES-T0161/NATIO-T0015`
-  (l.6134, choix "Slayer ou Mark of the Gods"), syntaxe à `/` que `winpersonnage.pas`/
-  `wincreation.pas` ne savent pas découper (point déjà noté dans `A FAIRE.txt` - "la syntaxe de
-  choix RULES-Txxxx/RULES-Tyyyy n'est lue que par WinLivre/WinMétier, affichage seul"). Le `_*`
-  a été ajouté quand même (`RULES-T0161/NATIO-T0015_*`) pour la cohérence de la donnée, mais
-  **l'octroi par cette carrière précise reste non fonctionnel tant que le gap `/` n'est pas
-  traité séparément** - seul l'ajout manuel via le catalogue (`TabTalentSelection`, qui ne lit
-  que l'id direct `NATIO-T0015_*`, pas la référence de carrière) bénéficie pleinement du
-  correctif du jour pour ce talent-là.
+  (l.6134, choix "Slayer ou Mark of the Gods"), syntaxe à `/`. Le `_*` a été ajouté quand même
+  (`RULES-T0161/NATIO-T0015_*`) pour la cohérence de la donnée. **Correction du jour même
+  (rédigé plus haut à tort) : `winpersonnage.pas` sait DÉJÀ découper cette syntaxe** -
+  `ListeTalent`/`ChargeSpecialisation` fusionnent `/` et `_*` en une seule liste dans la fenêtre
+  de spécialisation, mécanisme préexistant (pas écrit pour ce chantier). Le vrai bug bloquant,
+  trouvé en testant en jeu et corrigé le même jour, est décrit juste après.
 - **Compilé** (`lazbuild --build-all`, 0 erreur, mêmes 64 warnings/443 hints/139 notes
   qu'avant - aucun nouveau).
 - **Testé en jeu par Nono, validé** : le sélecteur de spécialisation s'ouvre désormais pour les
   trois talents.
 
 Fichiers modifiés : `BOOK_NATIONS_OF_MANKIND.Xml`, `CONTEXT.md`, `Log.txt`, `A FAIRE.txt`.
+
+---
+
+**18/09/2026 — §2.80 SUITE : CRASH AU DOUBLE-CLIC SUR LA LIGNE MARK OF THE GODS (NORSCAN
+MERCENARY), CORRIGÉ, TESTÉ EN JEU ET VALIDÉ PAR NONO.** Nono teste l'octroi de Mark of the Gods
+via Norscan Mercenary (`RULES-T0161/NATIO-T0015_*`) juste après le correctif ci-dessus : double-
+cliquer sur la colonne "choisir spé" ouvre bien la fenêtre de spécialisation avec Slayer ET les
+variantes de Mark of the Gods fusionnées dans la même liste (mécanisme `ListeTalent`/
+`ChargeSpecialisation` déjà existant, pas nouveau - vérifié par lecture avant de conclure trop
+vite que "le `/` n'est pas lu", erreur corrigée en cours de diagnostic). Le vrai bug, trouvé en
+double-cliquant sur le LIBELLÉ de la ligne au lieu de la colonne "choisir spé" : `EGridException
+"Index out of range Cell[Col=1 Row=1]"` dans `grids.pas`.
+- **Cause** : `TabAugmentationTalentDblClick` (`winpersonnage.pas`, branche `else` finale,
+  "ouvrir les Talents") pose `SelectWinTalent` au code BRUT de la ligne (`RULES-T0161/
+  NATIO-T0015_*`) et ouvre `TWintTalent` pour en afficher la fiche. Or `WinTalent.WinCharger`
+  (`wintalent.pas:132-152`) filtre le catalogue par ÉGALITÉ STRICTE sur ce code - aucune entrée
+  ne porte littéralement ce texte de choix (ce n'est pas un talent, juste une donnée de carrière)
+  - la grille `TabTalent` reste donc à 1 ligne (l'en-tête). L'appel qui suit sans garde,
+  `TabTalentSelection(Self, 1, 1)` (`wintalent.pas:172`), lit alors `Cells[1, 1]` sur une grille
+  qui n'a que la ligne 0 : plantage. Un `_*` seul (sans `/`) ne plante pas, parce que l'entrée
+  générique existe littéralement dans le catalogue (son propre `<Talent id="...">`) et le filtre
+  la retrouve.
+- **Corrigé** (`winpersonnage.pas`, même branche) : garde ajoutée, cette branche ne s'exécute
+  plus si le code de la ligne contient `/` (`SeparateurMulti`) - double-cliquer sur le libellé
+  d'une ligne à choix multiple non résolu ne fait simplement plus rien. La colonne "choisir spé"
+  n'est pas touchée, elle fonctionnait déjà.
+- **Compilé** (`lazbuild --build-all`, 0 erreur, mêmes warnings/hints/notes qu'avant).
+- **Testé en jeu par Nono, validé** : plus de crash sur le libellé, la colonne "choisir spé"
+  fonctionne toujours (liste fusionnée Slayer + variantes de Mark of the Gods).
+- **Note obsolète corrigée dans `A FAIRE.txt`** : la syntaxe de choix `RULES-Txxxx/RULES-Tyyyy`
+  EST lue par `winpersonnage.pas`/`wincreation.pas` (mécanisme `ListeTalent` très utilisé, ex.
+  chantier Vertus bretonnes) - l'ancienne note du 13/09/2026 disant le contraire était fausse ou
+  périmée.
+
+Fichiers modifiés : `winpersonnage.pas`, `CONTEXT.md`, `Log.txt`, `A FAIRE.txt`.
 
 ---
 

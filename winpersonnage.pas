@@ -3008,7 +3008,14 @@ procedure TWinPersonnages.TabAugmentationTalentDblClick(Sender: TObject);
               end;
           end;
       end
-    else
+    // Un choix multiple 'A/B' non resolu (ex. RULES-T0161/NATIO-T0015_*, Norscan Mercenary)
+    // n'existe comme code litteral dans aucune entree du catalogue - WinTalent.WinCharger
+    // ne trouve alors aucune ligne et TabTalentSelection(Self,1,1), appele sans garde juste
+    // apres, plante (EGridException Cell[Col=1 Row=1]). Releve par Nono le 18/09/2026 en
+    // double-cliquant le libelle (colonne Lib, pas la colonne "choisir spe") de Mark of the
+    // Gods via Norscan Mercenary. Un '_*' seul (generique non specialise) ne plante pas : son
+    // entree generique existe litteralement dans le catalogue.
+    else if Pos(SeparateurMulti, TabAugmentationTalent.Cells[ColAugmTalCode, TabAugmentationTalent.Row]) = 0 then
       begin
         // ouvrir les Talents
         SelectWinTalent     := TabAugmentationTalent.Cells[ColAugmTalCode, TabAugmentationTalent.Row];

@@ -5177,3 +5177,22 @@ talent-la. Compile (lazbuild --build-all, 0 erreur, memes warnings/hints qu'avan
 jeu par Nono, valide : le selecteur de specialisation s'ouvre desormais pour les trois
 talents. Chantier clos (2.80).
 Fichiers modifies : BOOK_NATIONS_OF_MANKIND.Xml, CONTEXT.md, Log.txt, A FAIRE.txt.
+
+18/09/2026 - MARK OF THE GODS (NORSCAN MERCENARY), CRASH AU DOUBLE-CLIC SUR LE LIBELLE DE LA
+LIGNE DE CHOIX, CORRIGE (CONTEXT.md 2.80 suite). Teste juste apres le correctif du suffixe
+_* : la colonne "choisir spe" fonctionne bien (fenetre de specialisation fusionnant Slayer et
+les variantes de Mark of the Gods - mecanisme ListeTalent/ChargeSpecialisation deja existant,
+pas nouveau, contrairement a ce qui etait note dans A FAIRE.txt depuis le 13/09/2026). Le vrai
+bug : double-cliquer sur le LIBELLE de la ligne (au lieu de la colonne "choisir spe") declenche
+EGridException "Index out of range Cell[Col=1 Row=1]" (grids.pas). Cause : TabAugmentationTalentDblClick
+(winpersonnage.pas, branche "ouvrir les Talents") passe le code BRUT du choix (RULES-T0161/
+NATIO-T0015_*) a WinTalent pour afficher sa fiche ; WinTalent.WinCharger filtre le catalogue
+par egalite stricte sur ce code, ne trouve aucune entree litterale (ce n'est pas un talent),
+la grille TabTalent reste a 1 ligne (l'en-tete) ; TabTalentSelection(Self,1,1), appele sans
+garde juste apres, lit Cells[1,1] sur une grille qui n'a que la ligne 0 - plantage. Un '_*'
+seul (sans '/') ne plante pas, son entree generique existant litteralement dans le catalogue.
+Corrige : garde ajoutee dans TabAugmentationTalentDblClick, la branche "ouvrir les Talents" ne
+s'execute plus si le code de la ligne contient '/' - double-cliquer sur le libelle d'une ligne
+a choix multiple non resolu ne fait simplement plus rien. Compile (lazbuild --build-all, 0
+erreur). Teste en jeu par Nono, valide.
+Fichiers modifies : winpersonnage.pas, CONTEXT.md, Log.txt, A FAIRE.txt.
