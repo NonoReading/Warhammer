@@ -432,6 +432,7 @@ var
   ColAugmTalWork:   Integer = 9;
   ColAugmTalSort:   Integer =10;
   ColAugmTalReel:   Integer =11;
+  ColAugmTalSortSel:Integer =12;
   // augmentation spéciales
   ColAugmMjXpType:  integer = 1;
   ColAugmMjXpCode:  integer = 2;
@@ -454,7 +455,6 @@ var
   NvMetier:       String = '';
   NvNiveau:       String = '';
   NvMetierChoisi: String = '';
-  AjoutMineur:    Boolean= false;
 
   FenMetier:          TWinMetiers;
   FenArme:            TWinWeapons;
@@ -618,7 +618,12 @@ begin
     ShowMEssage(GetTexteLibelle('RULES-MESS_031')+IntToStr(EditNeedRealXp.Value))
   else if (radiobuttonChanger.Checked or radiobuttonsuivant.Checked) and ChoixNonFait() then
     ShowMEssage(GetTexteLibelle('RULES-MESS_032'))
-  else if AjoutMineur and (RechercherDansColonne(TabSort, ConstArbreAuChoix, 2) <> -1) then
+  // Bloque Valider tant qu'un Miracle/sort a choix (ModeSort=CHOIX, colonne "Spell" posee
+  // par SortAffiche) n'est pas resolu - la resolution elle-meme (TabAugmentationTalentDblClick)
+  // ne depend pas de Valider, contrairement au bouton +Spell qui a cause l'impasse du
+  // 18/09/2026 (A FAIRE.txt, tentative AjoutMineur). AjoutMineur retire : cette detection
+  // directe sur la colonne le rend inutile.
+  else if RechercherDansColonne(TabAugmentationTalent, ConstArbreAuChoix, ColAugmTalSort) <> -1 then
     ShowMEssage(GetTexteLibelle('RULES-MESS_033'))
   else
     MajTables();
@@ -1626,10 +1631,15 @@ Procedure TWinPersonnages.SortAffiche();
             end
           else if PTalent.ModeSort = ConstModeSortChoix then
             begin
-              TabSort.Visible                     := true;
-              TabSort.RowCount                    := TabSort.RowCount + 1;
-              TabSort.Cells[2,TabSort.RowCount-1] := ConstArbreAuChoix;
-              TabSort.Cells[3,TabSort.RowCount-1] := Tal;
+              // Choix du sort precis (un Miracle se choisit, contrairement a une
+              // Benediction qui est automatique) : pose directement dans la ligne du
+              // talent, meme table et meme principe que la colonne Specialisation juste a
+              // cote (resolu par double-clic, voir TabAugmentationTalentDblClick). Ne pas
+              // ecraser un choix deja fait si SortAffiche est rappelee entre-temps (ex.
+              // specialisation d'une AUTRE ligne resolue juste apres).
+              if TabAugmentationTalent.Cells[ColAugmTalSortSel, Ind] = '' then
+                TabAugmentationTalent.Cells[ColAugmTalSort, Ind] := ConstArbreAuChoix;
+              TabAugmentationTalent.ColWidths[ColAugmTalSort] := 200;
             end
         end;
     TabSort.visible := (TabSort.RowCount > 1);
@@ -1967,7 +1977,7 @@ begin
 
   // Mise en forme du tableau des ajout des talents
   TabAugmentationTalent.Options                     := TabAugmentationTalent.Options + [goEditing, goAlwaysShowEditor];
-  TabAugmentationTalent.ColCount                    := 12;
+  TabAugmentationTalent.ColCount                    := 13;
   TabAugmentationTalent.RowCount                    := 11;
   TabAugmentationTalent.ColWidths[0]                := 20;
   TabAugmentationTalent.ColWidths[ColAugmTalCode]   := 0;
@@ -1986,8 +1996,15 @@ begin
   TabAugmentationTalent.ColWidths[ColAugmTalSpeSel] := 0;
   TabAugmentationTalent.Cells[ColAugmTalWork, 0]    := 'Work';
   TabAugmentationTalent.ColWidths[ColAugmTalWork]   := 0;
-  TabAugmentationTalent.Cells[ColAugmTalSort, 0]    := 'Sort';
+  // Colonne "choisir un sort" (Miracle/Petty a choix, ModeSort=CHOIX) : reservee de longue
+  // date (voir ColAugmTalWork juste au-dessus) mais jamais cablee - posee/resolue depuis
+  // SortAffiche/TabAugmentationTalentDblClick, sur le meme principe que la colonne
+  // Specialisation juste a cote. Largeur mise a 0 par defaut, agrandie par SortAffiche
+  // seulement quand une ligne en a besoin (evite une colonne vide en permanence).
+  TabAugmentationTalent.Cells[ColAugmTalSort, 0]    := GetTexteLibelle('RULES-LAB_083');
   TabAugmentationTalent.ColWidths[ColAugmTalSort]   := 0;
+  TabAugmentationTalent.Cells[ColAugmTalSortSel, 0] := 'Sort Choisi';
+  TabAugmentationTalent.ColWidths[ColAugmTalSortSel]:= 0;
   TabAugmentationTalent.Cells[ColAugmTalReel, 0]    := GetTexteLibelle('RULES-LAB_139');
   TabAugmentationTalent.ColWidths[ColAugmTalReel]   := 50;
 
@@ -2869,6 +2886,7 @@ procedure TWinPersonnages.TabAugmentationCompetenceDblClick(Sender: TObject);
 procedure TWinPersonnages.TabAugmentationTalentDblClick(Sender: TObject);
   var
     PTalent:  StructureTalent;
+    PSort:    StructureSort;
     Ind:      Integer;
     Ind2:     Integer;
     Trouve:   Boolean = false;
@@ -2971,6 +2989,33 @@ procedure TWinPersonnages.TabAugmentationTalentDblClick(Sender: TObject);
             // Nono le 03/09/2026 sur "pretre 2". Meme famille que CONTEXT.md 2.18.
             SortAffiche();
           end;
+      end
+    else if (TabAugmentationTalent.Col = ColAugmTalSort) and (TabAugmentationTalent.Cells[ColAugmTalSort, TabAugmentationTalent.Row] <> '') then
+      begin
+        // Choisir le sort precis d'un talent ModeSort=CHOIX (un Miracle se choisit,
+        // contrairement a une Benediction qui est automatique - voir SortAffiche, qui pose
+        // cette colonne). Meme principe que TabSortDblClick, qui ne depend pas de la
+        // validation : SelectWinSort filtre sur le code du talent (specialisation deja
+        // resolue sinon code generique), jamais sur TabTalent qui ne contient pas encore ce
+        // talent tant que Valider n'a pas ete clique - c'est precisement ce qui bloquait le
+        // bouton +Spell (A FAIRE.txt, tentative AjoutMineur du 18/09/2026).
+        if TabAugmentationTalent.Cells[ColAugmTalSpeSel, TabAugmentationTalent.Row] <> '' then
+          SelectWinSort := TabAugmentationTalent.Cells[ColAugmTalSpeSel, TabAugmentationTalent.Row]
+        else
+          SelectWinSort := TabAugmentationTalent.Cells[ColAugmTalCode, TabAugmentationTalent.Row];
+        SelectWinLivre    := Personnage.LivresAcceptes;
+        FenSort           := TWinSpells.Create(Application);
+        FenSort.Position  := poOwnerFormCenter;
+        FenSort.ShowModal;
+        if ChoixWinSort <> '' then
+          begin
+            PSort                                                                    := ChercheSort(ChoixWinSort);
+            TabAugmentationTalent.Cells[ColAugmTalSort, TabAugmentationTalent.Row]    := PSort.Libelle;
+            TabAugmentationTalent.Cells[ColAugmTalSortSel, TabAugmentationTalent.Row] := PSort.CodeSort;
+          end;
+        SelectWinSort  := '';
+        SelectWinLivre := '';
+        ChoixWinSort   := '';
       end
     else if (TabAugmentationTalent.Col = ColCompLib) and (TabAugmentationTalent.Cells[ColAugmCompLib, TabAugmentationTalent.Row] = GetTexteLibelle(ConstLabAdd))  then
       begin
@@ -3554,7 +3599,6 @@ begin
       ButtonArmure.Visible := false;
       ButtonSort.Visible := false;
     end;
-  AjoutMineur := false;
   ToggleBoxGauche.left := ToggleBoxGauche.left + 1;
   AjustePositionTables();
   AfficheFabrication();
@@ -5244,16 +5288,35 @@ Procedure TWinPersonnages.MajTables();
 
         end;
 
+    // Colonne 1 vide = ligne "a choisir" (ConstArbreAuChoix) jamais resolue : ne rien
+    // ajouter plutot que d'accorder un sort fantome (ChercheSort('') renvoyait une
+    // StructureSort vide, d'ou une ligne d'equipement fantome avant ce garde-fou).
     For IndAugm := 1 to TabSort.RowCount-1 do
-      begin
-        PSort := ChercheSort(TabSort.Cells[1, indAugm]);
-        TabEquipement.RowCount                           := TabEquipement.RowCount + 1;
-        TabEquipement.Cells[1, TabEquipement.RowCount-1] := '';
-        TabEquipement.Cells[2, TabEquipement.RowCount-1] := PSort.CodeSort;
-        TabEquipement.Cells[3, TabEquipement.RowCount-1] := PSort.TypeSort;
-        TabEquipement.Cells[4, TabEquipement.RowCount-1] := PSort.Libelle;
-        TabEquipement.Cells[5, TabEquipement.RowCount-1] := '0';
-      end;
+      if TabSort.Cells[1, indAugm] <> '' then
+        begin
+          PSort := ChercheSort(TabSort.Cells[1, indAugm]);
+          TabEquipement.RowCount                           := TabEquipement.RowCount + 1;
+          TabEquipement.Cells[1, TabEquipement.RowCount-1] := '';
+          TabEquipement.Cells[2, TabEquipement.RowCount-1] := PSort.CodeSort;
+          TabEquipement.Cells[3, TabEquipement.RowCount-1] := PSort.TypeSort;
+          TabEquipement.Cells[4, TabEquipement.RowCount-1] := PSort.Libelle;
+          TabEquipement.Cells[5, TabEquipement.RowCount-1] := '0';
+        end;
+
+    // Sort choisi via la colonne "Spell" du tableau de talents (ModeSort=CHOIX, resolu par
+    // TabAugmentationTalentDblClick - voir A FAIRE.txt, tentative AjoutMineur du 18/09/2026,
+    // pour l'impasse que ce mecanisme remplace).
+    For IndAugm := 1 to TabAugmentationTalent.RowCount-1 do
+      if TabAugmentationTalent.Cells[ColAugmTalSortSel, indAugm] <> '' then
+        begin
+          PSort := ChercheSort(TabAugmentationTalent.Cells[ColAugmTalSortSel, indAugm]);
+          TabEquipement.RowCount                           := TabEquipement.RowCount + 1;
+          TabEquipement.Cells[1, TabEquipement.RowCount-1] := '';
+          TabEquipement.Cells[2, TabEquipement.RowCount-1] := PSort.CodeSort;
+          TabEquipement.Cells[3, TabEquipement.RowCount-1] := PSort.TypeSort;
+          TabEquipement.Cells[4, TabEquipement.RowCount-1] := PSort.Libelle;
+          TabEquipement.Cells[5, TabEquipement.RowCount-1] := '0';
+        end;
     TabAugmentationTalent.enabled := false;
 
     // Expérience

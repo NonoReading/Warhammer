@@ -5252,3 +5252,30 @@ Piste non explosee notee dans A FAIRE.txt pour une prochaine tentative : TabSort
 resolution par double-clic (TabSortDblClick) qui ne depend pas de TabTalent - reste a
 verifier si Nono avait seulement manque cette ligne a l'ecran plutot que teste ce chemin.
 Rien commite (retour a l'etat d'avant tentative).
+
+18/09/2026 - CHOIX D'UN SORT DE TALENT "A CHOIX" (MIRACLE) DEPLACE DANS LE TABLEAU DE
+TALENTS, RESOUT L'IMPASSE AjoutMineur, TESTE EN JEU ET VALIDE PAR NONO. Idee de Nono pour
+sortir du blocage tente plus tot dans la journee : choisir le sort precis directement dans
+TabAugmentationTalent, au meme endroit et sur le meme principe que la colonne Specialisation
+juste a cote (double-clic, resolution immediate, independante de Valider) - plutot que de
+dependre de TabSort (grille separee, facile a manquer) ou du bouton +Spell (qui ne voit que
+les talents deja valides).
+Implementation : colonne ColAugmTalSort (deja reservee, jamais cablee, largeur 0) recuperee
+pour cet usage. Nouvelle colonne cachee ColAugmTalSortSel ajoutee (grille elargie de 12 a 13
+colonnes) pour stocker le CODE du sort choisi, separe du libelle affiche - meme principe que
+ColAugmTalSpe/ColAugmTalSpeSel. SortAffiche pose "a choisir" dans ColAugmTalSort pour un
+talent ModeSort=CHOIX deja specialise (sans ecraser un choix deja fait) et revele la colonne
+des qu'une ligne en a besoin. TabAugmentationTalentDblClick : nouveau cas sur cette colonne,
+ouvre TWinSpells filtre sur le code du talent, ecrit le libelle dans ColAugmTalSort et le
+code dans ColAugmTalSortSel. MajTables accorde ce sort a l'equipement en lisant
+ColAugmTalSortSel, en plus de la boucle existante sur TabSort (qui reste le chemin des
+Benedictions automatiques). Corrige au passage une ligne d'equipement fantome (sort vide)
+que MajTables ajoutait si une ligne "a choisir" de TabSort restait non resolue (ChercheSort('')
+sur Cells[1] vide) - garde ajoutee sur les deux boucles. La garde Valider cherche desormais
+directement "a choisir" dans ColAugmTalSort (RechercherDansColonne), AjoutMineur devenue
+inutile et retiree entierement (declaration et remise a false dans XmlChargePersonnage).
+Compile (lazbuild --build-all, 0 erreur, memes 64 warnings/443 hints/139 notes qu'avant,
+aucun nouveau) a chaque etape. Teste en jeu par Nono, valide sur les trois cas : bloque si
+specialisation manquante, bloque si sort manquant, ajoute bien le sort si les deux sont
+donnes.
+Fichiers modifies : winpersonnage.pas, CONTEXT.md, Log.txt, A FAIRE.txt.

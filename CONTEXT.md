@@ -1,6 +1,14 @@
 # Warhammer — Contexte projet
 
-**REPRISE (18/09/2026)** : **message "Aucune modification apportée" (RULES-MESS_024) trop
+**REPRISE (18/09/2026)** : **choix de sort d'un talent "à choix" (Miracle) déplacé dans le
+tableau de talents lui-même, testé en jeu et validé par Nono.** `AjoutMineur` (jamais mise à
+`true`, cf. `A FAIRE.txt`) a été retentée puis abandonnée pour blocage sans issue (le bouton
++Spell ne lit que les talents déjà validés) ; remplacée par une nouvelle colonne "Spell" dans
+`TabAugmentationTalent`, résolue par double-clic indépendamment de Valider, sur le même
+principe que la colonne Spécialisation. Corrige au passage une ligne d'équipement fantôme
+(sort vide) créée si le choix restait non résolu. Détail complet en §2.82 ci-dessous.
+
+**Message "Aucune modification apportée" (RULES-MESS_024) trop
 souvent faux à la validation de l'onglet Expérience — corrigé par une vraie comparaison à la
 sauvegarde, testé en jeu et validé par Nono.** Le contrôle à 4 conditions choisies à la main
 dans `ButtonAugmentationClick` ratait tout changement gratuit (talent, sort, prière,
@@ -73,6 +81,58 @@ qu'il vient bien de faire un changement.
 - **Testé en jeu par Nono, validé dans les deux sens** : un ajout réel (info sur les yeux) se
   sauvegarde normalement sans message ; un Enregistrer sans rien changer affiche le message et
   ne crée aucun nouveau fichier dans le dossier du personnage.
+
+Fichiers modifiés : `winpersonnage.pas`, `CONTEXT.md`, `Log.txt`, `A FAIRE.txt`.
+
+---
+
+**18/09/2026 — §2.82 CLOS : CHOIX D'UN SORT DE TALENT "À CHOIX" (MIRACLE) DÉPLACÉ DANS LE
+TABLEAU DE TALENTS, TESTÉ EN JEU ET VALIDÉ PAR NONO.** En traitant `AjoutMineur`
+(`A FAIRE.txt`, jamais mise à `true`), guard destinée à bloquer Valider tant qu'un
+sort/Miracle reste "à choisir" dans `TabSort`.
+
+- **Première tentative, revertée le jour même** : `AjoutMineur` mise à `true` dans
+  `SortAffiche` au moment où la ligne "à choisir" est posée. Compile, mais bloque Nono en
+  jeu dès le premier test réel (carrière Priest de Morr, talent "Invoke (Myrmidia)" posé à
+  l'augmentation) : le message bloque bien Valider, mais **aucun moyen de résoudre le choix
+  sans passer par Valider** - le bouton "+Spell" du panneau Équipement/Sorts
+  (`winpersonnage.pas` l.1362-1379) ne construit sa liste qu'à partir de `TabTalent` (les
+  talents déjà validés sur la fiche), jamais de `TabAugmentationTalent` (l'avancement en
+  cours) : répond "You have no spell talent" (`RULES-MESS_037`) tant que le talent n'est pas
+  sauvegardé. Impasse complète, revertée dans la foulée (`winpersonnage.pas` identique au
+  dernier commit après coup, vérifié par `git diff`).
+- **Idée de Nono pour sortir de l'impasse** : plutôt que de dépendre d'une grille séparée
+  (`TabSort`, facile à manquer sous le pli de l'écran) ou du bouton +Spell (qui ne voit que
+  les talents déjà validés), choisir le sort précis **directement dans le tableau de
+  talents** (`TabAugmentationTalent`), au même endroit et selon le même principe que la
+  colonne Spécialisation juste à côté (double-clic, résolution immédiate, indépendante de
+  Valider).
+- **Implémentation** : une colonne `Sort` (`ColAugmTalSort`) existait déjà, réservée de
+  longue date mais jamais câblée (largeur 0, comme `ColAugmTalWork`) - récupérée pour cet
+  usage. Nouvelle colonne cachée `ColAugmTalSortSel` ajoutée (grille élargie de 12 à 13
+  colonnes) pour stocker le CODE du sort choisi, distinct du libellé affiché - même
+  séparation que `ColAugmTalSpe`/`ColAugmTalSpeSel`. `SortAffiche` pose "à choisir"
+  (`ConstArbreAuChoix`) dans `ColAugmTalSort` pour un talent `ModeSort=CHOIX` déjà
+  spécialisé (sans écraser un choix déjà fait si rappelée entre-temps) et révèle la colonne
+  (largeur 200) dès qu'une ligne en a besoin. `TabAugmentationTalentDblClick` : nouveau cas
+  sur cette colonne, ouvre `TWinSpells` filtré sur le code du talent (spécialisation résolue
+  sinon code générique - même lecture que `SortAffiche`), écrit le libellé dans
+  `ColAugmTalSort` et le code dans `ColAugmTalSortSel`. `MajTables` accorde ce sort à
+  l'équipement en lisant `ColAugmTalSortSel`, en plus de la boucle existante sur `TabSort`
+  (qui reste le chemin des Bénédictions automatiques, `ModeSort=AUTO`).
+- **Corrigé au passage** : `MajTables` bouclait sur `TabSort` sans vérifier que la ligne
+  était résolue - une ligne "à choisir" jamais traitée (`Cells[1]` vide) faisait ajouter une
+  ligne d'équipement fantôme (`ChercheSort('')`, sort vide) à l'équipement. Garde ajoutée
+  (`Cells[1] <> ''`) sur les deux boucles.
+- **La garde Valider elle-même** (`ButtonAugmentationClick`) cherche maintenant directement
+  "à choisir" dans `ColAugmTalSort` de `TabAugmentationTalent` (`RechercherDansColonne`),
+  sans passer par `AjoutMineur` - devenue inutile, variable retirée entièrement
+  (déclaration et remise à `false` dans `XmlChargePersonnage`).
+- **Compilé** (`lazbuild --build-all`, 0 erreur, mêmes 64 warnings/443 hints/139 notes
+  qu'avant, aucun nouveau) à chaque étape.
+- **Testé en jeu par Nono, validé sur les trois cas** : Valider bloque si la spécialisation
+  n'est pas choisie ; bloque si le sort n'est pas choisi ; ajoute bien le sort à l'équipement
+  quand les deux sont donnés.
 
 Fichiers modifiés : `winpersonnage.pas`, `CONTEXT.md`, `Log.txt`, `A FAIRE.txt`.
 
