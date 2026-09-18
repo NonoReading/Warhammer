@@ -5159,3 +5159,20 @@ Chantier Vertus bretonnes quasi clos - reste seulement le retrait definitif a Gr
 volontairement differe (A FAIRE.txt).
 Fichiers modifies : chargepersonnage.pas, chargeconstantes.pas, winpersonnage.pas,
 pdfpersonnage.pas, CONTEXT.md, Log.txt, A FAIRE.txt.
+
+18/09/2026 - KENJUTSU/MARK OF THE GODS/MARTIAL ARTIST (NATIO-T0014/T0015/T0016, CONTEXT.md
+2.80) : MEME TROU DE SUFFIXE '_*' QUE KNIGHTLY VIRTUE AVANT SON CORRECTIF DU 16/09, CORRIGE.
+Point note dans A FAIRE.txt depuis le 16/09 comme "probable meme gap", jamais teste en jeu.
+Verifie par lecture de BOOK_NATIONS_OF_MANKIND.Xml : les trois id de base et leurs references
+de carriere etaient ecrits sans _*, comme NATIO-T0001/T0002 avant leur correctif - le
+selecteur de specialisation (TabAugmentationTalentDblClick/TabTalentSelection) ne pouvait pas
+se declencher. Corrige : _* ajoute a l'id de base des trois talents et a leurs references de
+carriere. Aucune comparaison en dur sur ces codes dans le code Pascal (verifie par grep),
+correctif purement dans la donnee. Cas particulier Mark of the Gods : sa reference de
+carriere est RULES-T0161/NATIO-T0015 (choix a '/' non decoupe par winpersonnage.pas/
+wincreation.pas, gap deja note dans A FAIRE.txt) - le _* a ete ajoute pour la coherence de la
+donnee mais l'octroi par cette carriere precise reste non fonctionnel tant que ce gap n'est
+pas traite ; seul l'ajout manuel via le catalogue profite pleinement du correctif pour ce
+talent-la. Compile (lazbuild --build-all, 0 erreur, memes warnings/hints qu'avant). Pas teste
+en jeu (aucun personnage Samurai/Norscan Mercenary/moine disponible).
+Fichiers modifies : BOOK_NATIONS_OF_MANKIND.Xml, CONTEXT.md, Log.txt, A FAIRE.txt.

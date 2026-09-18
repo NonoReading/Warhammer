@@ -17,13 +17,50 @@ barré ECRITS, TESTÉS EN JEU ET VALIDÉS PAR NONO le 18/09/2026.** Détail comp
 ci-dessous, y compris le correctif du "-1" affiché au PDF (bug latent partagé avec Knightly
 Virtue, corrigé au même endroit). Chantier « Vertus bretonnes » quasi clos : seul reste ouvert
 le vrai retrait de `Virtue of the Quest` à Grail Knight (`A FAIRE.txt`, section conceptions),
-volontairement différé. Kenjutsu/Martial Artist/Mark of the Gods (probable même trou de suffixe
-`_*` que Knightly Virtue avant son propre correctif, jamais essayés en jeu) restent notés dans
-`A FAIRE.txt`, non corrigés.
+volontairement différé. **§2.80 : Kenjutsu/Mark of the Gods/Martial Artist (NATIO-T0014/15/16)
+avaient bien le même trou de suffixe `_*` que Knightly Virtue avant son correctif - corrigé le
+18/09/2026** (détail plus bas), compilé, **pas encore essayé en jeu** (aucun personnage
+Samurai/Norscan/moine sous la main pour tester la sélection de spécialisation).
 
 **Chantier séparé, indépendant du précédent : bug « nom de personnage terminé par un espace =
 crash au démarrage suivant » — §2.79 CLOS.** Corrigé, compilé, **testé en jeu par Nono le
 18/09/2026, validé**, committé. Détail en §2.79 plus bas.
+
+---
+
+**18/09/2026 — §2.80 : KENJUTSU/MARK OF THE GODS/MARTIAL ARTIST (NATIO-T0014/T0015/T0016),
+MÊME TROU DE SUFFIXE `_*` QUE KNIGHTLY VIRTUE AVANT SON CORRECTIF. CORRIGÉ, COMPILÉ, PAS ENCORE
+TESTÉ EN JEU.** Point noté dans `A FAIRE.txt` depuis le correctif du 16/09/2026 (§2.78 suite 4)
+comme "probable même gap", jamais vérifié faute d'avoir testé ces trois talents en jeu. Vérifié
+par lecture de `BOOK_NATIONS_OF_MANKIND.Xml` avant de corriger (pas de test en jeu préalable
+pour ce genre de faute purement structurelle - identique lettre pour lettre au cas déjà prouvé) :
+
+- **Confirmé** : `<Talent id="NATIO-T0014">` (Kenjutsu, l.636), `NATIO-T0015` (Mark of the Gods,
+  l.718), `NATIO-T0016` (Martial Artist, l.877) étaient tous écrits sans `_*`, comme
+  `NATIO-T0001`/`NATIO-T0002` avant leur correctif - `TabAugmentationTalentDblClick`
+  (`winpersonnage.pas:4918`) et `TabTalentSelection` (`wintalent.pas:289`) ne peuvent donc pas
+  détecter la spécialisation. Les 28 stubs (`NATIO-T0014_TORTOISE` etc.) existaient déjà avec le
+  suffixe correct sur leur propre id - seul le radical parent manquait `_*`.
+- **Corrigé, même geste que le 16/09 : `_*` ajouté à l'id de base des trois talents** ainsi qu'à
+  leurs références de carrière (`NATIO-T0016` l.7448, `NATIO-T0014` l.7892 et l.8043). Contrairement
+  à `NATIO-T0002`, aucune comparaison en dur sur ces trois codes dans le code Pascal (vérifié par
+  grep) - correctif purement dans la donnée, rien à changer côté `.pas`.
+- **Cas particulier Mark of the Gods** : sa référence de carrière est `RULES-T0161/NATIO-T0015`
+  (l.6134, choix "Slayer ou Mark of the Gods"), syntaxe à `/` que `winpersonnage.pas`/
+  `wincreation.pas` ne savent pas découper (point déjà noté dans `A FAIRE.txt` - "la syntaxe de
+  choix RULES-Txxxx/RULES-Tyyyy n'est lue que par WinLivre/WinMétier, affichage seul"). Le `_*`
+  a été ajouté quand même (`RULES-T0161/NATIO-T0015_*`) pour la cohérence de la donnée, mais
+  **l'octroi par cette carrière précise reste non fonctionnel tant que le gap `/` n'est pas
+  traité séparément** - seul l'ajout manuel via le catalogue (`TabTalentSelection`, qui ne lit
+  que l'id direct `NATIO-T0015_*`, pas la référence de carrière) bénéficie pleinement du
+  correctif du jour pour ce talent-là.
+- **Compilé** (`lazbuild --build-all`, 0 erreur, mêmes 64 warnings/443 hints/139 notes
+  qu'avant - aucun nouveau).
+- **Pas testé en jeu** : aucun personnage Samurai (Kenjutsu)/Norscan Mercenary (Mark of the
+  Gods)/moine (Martial Artist) disponible pour vérifier que le sélecteur de spécialisation
+  s'ouvre bien maintenant. A confirmer par Nono à l'occasion.
+
+Fichiers modifiés : `BOOK_NATIONS_OF_MANKIND.Xml`, `CONTEXT.md`, `Log.txt`, `A FAIRE.txt`.
 
 ---
 

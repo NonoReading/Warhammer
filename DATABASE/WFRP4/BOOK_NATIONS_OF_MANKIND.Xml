@@ -633,7 +633,7 @@ You gain a +1 SL on all social and combat Tests targeting the specified individu
 <PDF>""</PDF>
 <Test language="ENGLISH">"Fellowship, Intimidate and combat Tests concerning this"</Test>
 </Talent>
-<Talent id="NATIO-T0014">
+<Talent id="NATIO-T0014_*">
 <Attribut>""</Attribut>
 <Description language="ENGLISH">"Kenjutsu (Style)"</Description>
 <Short language="ENGLISH">""</Short>
@@ -715,7 +715,7 @@ Apprentice: You are Immune to Fear or Intimidation affects caused by your oppone
 <PDF>""</PDF>
 <Test language="ENGLISH">""</Test>
 </Talent>
-<Talent id="NATIO-T0015">
+<Talent id="NATIO-T0015_*">
 <Attribut>""</Attribut>
 <Description language="ENGLISH">"Mark of the Gods"</Description>
 <Short language="ENGLISH">""</Short>
@@ -874,7 +874,7 @@ For its Action, it can spend all its Advantage to unleash its gaze (Minimum 3). 
 <PDF>""</PDF>
 <Test language="ENGLISH">""</Test>
 </Talent>
-<Talent id="NATIO-T0016">
+<Talent id="NATIO-T0016_*">
 <Attribut>""</Attribut>
 <Description language="ENGLISH">"Martial Artist (Path)"</Description>
 <Short language="ENGLISH">""</Short>
@@ -6131,7 +6131,7 @@ Ruinous Powers is simply false. The Norsemen see themselves as honorable, strong
   <!-- Sea Legs -->
 <Talent name="RULES-T0063">"1"</Talent>
   <!-- Frenzy -->
-<Talent name="RULES-T0161/NATIO-T0015">"1"</Talent>
+<Talent name="RULES-T0161/NATIO-T0015_*">"1"</Talent>
   <!-- (Slayer or Mark of the Gods) -->
 <Talent name="RULES-T0004">"2"</Talent>
   <!-- Ambidextrous -->
@@ -7445,7 +7445,7 @@ High Elf Ambassador"</Explanation>
   <!-- Dirty Fighting -->
 <Talent name="RULES-T0039">"1"</Talent>
   <!-- Disarm -->
-<Talent name="NATIO-T0016">"1"</Talent>
+<Talent name="NATIO-T0016_*">"1"</Talent>
   <!-- Martial Artist (Path) -->
 <Talent name="RULES-T0084">"1"</Talent>
   <!-- Read/Write -->
@@ -7889,7 +7889,7 @@ Captain from Westerland"</Explanation>
 <SUBCHAPTER_TALENT>
 <Talent name="RULES-T0047">"1"</Talent>
   <!-- Hardy -->
-<Talent name="NATIO-T0014">"1"</Talent>
+<Talent name="NATIO-T0014_*">"1"</Talent>
   <!-- Kenjutsu (Style) -->
 <Talent name="RULES-T0084">"1"</Talent>
   <!-- Read/Write -->
@@ -8040,7 +8040,7 @@ Ronin"</Explanation>
 <SUBCHAPTER_TALENT>
 <Talent name="RULES-T0047">"1"</Talent>
   <!-- Hardy -->
-<Talent name="NATIO-T0014">"1"</Talent>
+<Talent name="NATIO-T0014_*">"1"</Talent>
   <!-- Kenjutsu (Style) -->
 <Talent name="RULES-T0098">"1"</Talent>
   <!-- Menacing -->
