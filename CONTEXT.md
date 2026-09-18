@@ -1,6 +1,15 @@
 # Warhammer — Contexte projet
 
-**REPRISE (18/09/2026)** : chantier « Vertus bretonnes » (§2.78) — le mécanisme de **prises
+**REPRISE (18/09/2026)** : **message "Aucune modification apportée" (RULES-MESS_024) trop
+souvent faux à la validation de l'onglet Expérience — corrigé par une vraie comparaison à la
+sauvegarde, testé en jeu et validé par Nono.** Le contrôle à 4 conditions choisies à la main
+dans `ButtonAugmentationClick` ratait tout changement gratuit (talent, sort, prière,
+mutation) et affichait le message à tort ; retiré. Un contrôle fiable a été ajouté dans
+`XmlSauvegarde` (vrai bouton "Enregistrer") : comparaison texte à texte entre le nouveau XML
+généré et le précédent fichier du personnage — identique, le nouveau fichier est effacé et le
+message s'affiche ; différent, sauvegarde normale. Détail complet en §2.81 ci-dessous.
+
+Chantier « Vertus bretonnes » (§2.78) — le mécanisme de **prises
 multiples de Knightly Virtue (Max:4) est terminé, testé en jeu par Nono, compilé, committé**.
 Plusieurs fausses pistes avant la bonne conception (détail complet en §2.78 suite 6 ci-dessous) :
 la version retenue ne touche presque rien au mécanisme existant (pas de nouvelle grille, pas de
@@ -31,6 +40,41 @@ plantait (`EGridException Cell[Col=1 Row=1]`), corrigé. Détail en §2.80 suite
 **Chantier séparé, indépendant du précédent : bug « nom de personnage terminé par un espace =
 crash au démarrage suivant » — §2.79 CLOS.** Corrigé, compilé, **testé en jeu par Nono le
 18/09/2026, validé**, committé. Détail en §2.79 plus bas.
+
+---
+
+**18/09/2026 — §2.81 CLOS : MESSAGE "AUCUNE MODIFICATION APPORTÉE" (RULES-MESS_024) TROP
+SOUVENT FAUX, CORRIGÉ PAR UNE VRAIE COMPARAISON À LA SAUVEGARDE. TESTÉ EN JEU ET VALIDÉ PAR
+NONO.** Nono signale que ce message apparaît « des fois » à Valider (onglet Expérience) alors
+qu'il vient bien de faire un changement.
+
+- **Cause** : le contrôle dans `ButtonAugmentationClick` (`winpersonnage.pas`, ligne ~628)
+  décidait "rien n'a changé" sur seulement 4 conditions choisies à la main (coût XP nul, Total
+  XP inchangé, pas de changement de carrière/niveau, nombre de lignes d'équipement inchangé).
+  Tout changement gratuit ne touchant à aucune des quatre — ajout d'un talent, d'un sort,
+  d'une prière, retrait d'une mutation — était vu à tort comme "aucun changement", même si
+  `MajTables()` s'exécutait quand même juste après (ce contrôle n'est plus bloquant depuis le
+  12/09/2026, cf. §2.7).
+- **Décision de Nono** : plutôt que d'allonger encore la liste de cas particuliers ("de plus
+  en plus compliqué à calculer donc de plus en plus de risque d'erreur"), **supprimer ce
+  contrôle** dans `ButtonAugmentationClick` — il ne fait plus que `MajTables()`, sans condition.
+- **Contrôle de remplacement, fiable, ajouté ailleurs** : à la vraie sauvegarde disque
+  (`XmlSauvegarde`, bouton "Enregistrer"), le fichier XML le plus récent du personnage est
+  repéré AVANT d'écrire (`XmlPersonnageFichierActuel`, mécanisme déjà existant pour
+  l'historique). Le nouveau fichier est écrit comme avant, puis comparé **texte à texte** au
+  précédent : identique → le nouveau fichier est effacé (pas de doublon inutile à chaque
+  Enregistrer sans changement réel) et `RULES-MESS_024` s'affiche, cette fois basé sur le XML
+  complet réellement généré et non sur des champs devinés ; différent → rien ne change,
+  sauvegarde normale. Vérifié qu'aucun horodatage n'est écrit dans le contenu XML lui-même
+  (seulement dans le nom de fichier) : la comparaison n'est donc jamais faussée par la
+  date/heure du fichier.
+- **Compilé** (`lazbuild --build-all`, 0 erreur, mêmes 64 warnings/443 hints/139 notes
+  qu'avant, aucun nouveau).
+- **Testé en jeu par Nono, validé dans les deux sens** : un ajout réel (info sur les yeux) se
+  sauvegarde normalement sans message ; un Enregistrer sans rien changer affiche le message et
+  ne crée aucun nouveau fichier dans le dossier du personnage.
+
+Fichiers modifiés : `winpersonnage.pas`, `CONTEXT.md`, `Log.txt`, `A FAIRE.txt`.
 
 ---
 

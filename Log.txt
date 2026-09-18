@@ -5196,3 +5196,27 @@ s'execute plus si le code de la ligne contient '/' - double-cliquer sur le libel
 a choix multiple non resolu ne fait simplement plus rien. Compile (lazbuild --build-all, 0
 erreur). Teste en jeu par Nono, valide.
 Fichiers modifies : winpersonnage.pas, CONTEXT.md, Log.txt, A FAIRE.txt.
+
+18/09/2026 - MESSAGE "AUCUNE MODIFICATION APPORTEE" (RULES-MESS_024) TROP SOUVENT FAUX A LA
+VALIDATION DE L'ONGLET EXPERIENCE, CORRIGE PAR UNE VRAIE COMPARAISON A LA SAUVEGARDE. Nono
+signale que le message apparait "des fois" alors qu'un changement a bien ete fait. Cause :
+ButtonAugmentationClick (winpersonnage.pas) declenchait ce message sur un controle a 4
+conditions choisies a la main (cout Xp, Total Xp, carriere/niveau, nombre de lignes
+d'equipement) - tout changement gratuit ne touchant a aucune des quatre (talent, sort,
+priere, mutation) etait vu a tort comme "rien n'a change", meme si MajTables() s'executait
+quand meme juste apres (non bloquant depuis le 12/09/2026). Nono propose de le supprimer
+plutot que de rallonger encore la liste des cas particuliers ("de plus en plus complique a
+calculer donc de plus en plus de risque d'erreur") : controle retire de
+ButtonAugmentationClick. A la place, un controle fiable ajoute directement dans XmlSauvegarde
+(vraie sauvegarde disque, bouton "Enregistrer") : le fichier XML le plus recent du personnage
+est repere AVANT d'ecrire (XmlPersonnageFichierActuel, mecanisme deja existant pour
+l'historique), le nouveau fichier est ecrit comme avant puis compare texte a texte au
+precedent - identique, le nouveau fichier est efface (pas de doublon inutile) et le message
+RULES-MESS_024 s'affiche, cette fois base sur le XML complet reellement genere et non sur des
+champs devines ; different, rien ne change. Verifie qu'aucun horodatage n'est ecrit dans le
+contenu XML lui-meme (seulement dans le nom de fichier), donc la comparaison n'est jamais
+faussee par la date/heure. Compile (lazbuild --build-all, 0 erreur, memes 64 warnings/443
+hints/139 notes qu'avant, aucun nouveau). Teste en jeu par Nono, valide dans les deux sens :
+un ajout reel (info sur les yeux) sauvegarde normalement sans message ; un Enregistrer sans
+rien changer affiche le message et ne cree aucun nouveau fichier.
+Fichiers modifies : winpersonnage.pas, CONTEXT.md, Log.txt, A FAIRE.txt.

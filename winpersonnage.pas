@@ -621,14 +621,7 @@ begin
   else if AjoutMineur and (RechercherDansColonne(TabSort, ConstArbreAuChoix, 2) <> -1) then
     ShowMEssage(GetTexteLibelle('RULES-MESS_033'))
   else
-    begin
-      // Avertissement, pas un blocage (conception revue avec Nono le 12/09/2026) : un
-      // personnage peut changer sans que ce controle le voie (ex. retrait d'une mutation,
-      // §2.7), Valider doit quand meme s'appliquer plutot que de refuser tout net.
-      if (StrToIntDef(tabExperience.Cells[ColXpDonnee,LigXpCout],0) = 0) and (tabExperience.Cells[ColXpDonnee,LigXpTotal] = EditTotalXp.Text) and not radiobuttonsuivant.Checked and not radiobuttonChanger.Checked and (NbEquipement = TabEquipement.RowCount-1) and (not FabAjoute) then
-        ShowMEssage(GetTexteLibelle('RULES-MESS_024'));
-      MajTables();
-    end;
+    MajTables();
 end;
 
 procedure TWinPersonnages.ButtonPdfClick(Sender: TObject);
@@ -5582,9 +5575,11 @@ procedure TWinPersonnages.XmlSauvegarde();
   var
     fileName:              String;
     directoryPath:         String;
+    FichierPrecedent:      String;
     XpEtat:                StructureXpEtat;
     PersonnageCorruption:  StructurePersonnageCorruption;
     Ind:                   Integer;
+    ContenuPrecedent, ContenuNouveau: TStringList;
   begin
 
     // Maj personnage Corruption
@@ -5599,12 +5594,35 @@ procedure TWinPersonnages.XmlSauvegarde();
 
     // nouveau fichier
     directoryPath         := GetCurrentDir+ConstCheminPersonnage+NomPersonnage;
+    FichierPrecedent      := XmlPersonnageFichierActuel(directoryPath);
     fileName              := directoryPath + '\' + FormatDateTime('yyyymmdd', Date) + '-' + FormatDateTime('hhnnss', Time) + '.xml';
     // Total/Restant lus directement sur CalculXpEtat (entiers) et non sur le texte affiche
     // de tabExperience : celui-ci porte un separateur de milliers (Format('%.0n',...)) que
     // StrToIntDef ne sait pas reparser - CurrentXp finissait a "0" des que Restant >= 1000.
     XpEtat                := CalculXpEtat();
     PersonnageXmlCreation(Personnage, XpEtat.Total, XpEtat.Restante, fileName, Personnage.NomPersonnage);
+
+    // Contenu identique au fichier precedent : le nouveau fichier n'apporte rien, on l'efface
+    // plutot que d'accumuler des doublons a chaque Enregistrer sans changement reel (remplace
+    // l'ancien controle RULES-MESS_024 sur 4 champs choisis, qui ratait tout changement gratuit).
+    if (FichierPrecedent <> '') and FileExists(FichierPrecedent) then
+      begin
+        ContenuPrecedent := TStringList.Create;
+        ContenuNouveau   := TStringList.Create;
+        try
+          ContenuPrecedent.LoadFromFile(FichierPrecedent);
+          ContenuNouveau.LoadFromFile(fileName);
+          if ContenuPrecedent.Text = ContenuNouveau.Text then
+            begin
+              DeleteFile(fileName);
+              ShowMEssage(GetTexteLibelle('RULES-MESS_024'));
+            end;
+        finally
+          ContenuPrecedent.Free;
+          ContenuNouveau.Free;
+        end;
+      end;
+
     NeedUpdate            := true;
     RecherchePersonnage   := NomPersonnage;
   end;
