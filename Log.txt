@@ -5234,3 +5234,21 @@ A la meme occasion, confirme par Nono : ChercheTalent testait PTalent.Resume au 
 Result.Resume (corrige le 15/09/2026, chargetalent.pas:85) - selectionner une specialisation
 sur WinMetier affiche desormais bien son resume. Point cloture dans A FAIRE.txt.
 Fichiers modifies : wincreation.pas, CONTEXT.md, Log.txt, A FAIRE.txt.
+
+18/09/2026 - AjoutMineur (winpersonnage.pas) TENTE PUIS REVERTE LE MEME JOUR : ACTIVER LA
+GARDE BLOQUE NONO SANS ISSUE. La variable n'etait jamais mise a true (A FAIRE.txt), rendant
+inactive la garde qui doit bloquer "Valider" tant qu'un sort/miracle reste "a choisir" dans
+TabSort (message RULES-MESS_033). Mise a true dans SortAffiche au moment ou une ligne "a
+choisir" est posee (ModeSort=CHOIX). Compile, puis teste en jeu par Nono sur une carriere
+Priest de Morr (talent "Invoke (Myrmidia)" pose a l'augmentation) : le message bloque bien
+Valider comme prevu, mais Nono se retrouve sans aucun moyen de resoudre le choix - le bouton
+"+Spell" du panneau Equipement/Sorts ne construit sa liste qu'a partir des talents DEJA
+valides sur la fiche (TabTalent), jamais de l'avancement en cours (TabAugmentationTalent) :
+repond "You have no spell talent" tant que le talent n'est pas sauvegarde. Blocage total,
+Valider desormais impossible pour ce personnage. Reverte dans la foulee (retire de
+SortAffiche), recompile (lazbuild --build-all, 0 erreur), winpersonnage.pas confirme
+identique au dernier commit par git diff. Nono debloque.
+Piste non explosee notee dans A FAIRE.txt pour une prochaine tentative : TabSort a sa propre
+resolution par double-clic (TabSortDblClick) qui ne depend pas de TabTalent - reste a
+verifier si Nono avait seulement manque cette ligne a l'ecran plutot que teste ce chemin.
+Rien commite (retour a l'etat d'avant tentative).

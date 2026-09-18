@@ -6,14 +6,33 @@
 CORRECTIONS COURTES  (une ligne ou deux chacune)
 =========================================================================
 
+[TENTE LE 18/09/2026, REVERTE LE MEME JOUR - VOIR ANALYSE CI-DESSOUS AVANT DE RETENTER]
 LA VARIABLE AjoutMineur (winpersonnage.pas) N'EST JAMAIS MISE A TRUE. Repere le
 16/09/2026 (CONTEXT.md 2.78) en travaillant sur le blocage de "Valider" pour les Vertus
 en attente : la garde existante ligne ~624 ("AjoutMineur and RechercherDansColonne(TabSort,
 ...)") pour bloquer Valider tant qu'un sort/miracle reste "a choisir" est donc TOUJOURS
 inactive - AjoutMineur reste a false partout, jamais mis a true nulle part dans le
-projet. Pas corrige ici (hors perimetre, le nouveau blocage des Vertus a ete ecrit SANS
-cette garde, volontairement inconditionnel). A verifier si c'est un oubli ou une garde
-prevue pour un usage jamais branche.
+projet.
+
+Tente le 18/09/2026 : AjoutMineur mis a true dans SortAffiche au moment ou une ligne "a
+choisir" est posee (ModeSort=CHOIX). Compile, mais Nono se retrouve bloque en jeu des le
+premier test (carriere Priest de Morr, talent "Invoke (Myrmidia)" pose a l'augmentation) :
+le message RULES-MESS_033 bloque bien Valider comme prevu, mais AUCUN moyen de resoudre le
+choix sans passer par Valider - le bouton "+Spell" (Equipement/Sorts, winpersonnage.pas
+l.1362-1379) ne construit sa liste qu'a partir de TabTalent (les talents DEJA valides sur la
+fiche), jamais de TabAugmentationTalent (l'avancement en cours) : repond "You have no spell
+talent" (RULES-MESS_037) tant que "Invoke (Myrmidia)" n'est pas encore sauvegarde. Impasse
+complete. Reverte le jour meme (retire de SortAffiche), plus aucun effet.
+
+Piste non explosee, a verifier avant de retenter : TabSort (grille distincte, positionnee
+sous TabAugmentationTalent, TabSortDblClick existant ligne ~650) semble concue pour resoudre
+CE choix precis sans dependre de la validation - SelectWinSort y est pose directement sur le
+code du talent (Tal), pas sur TabTalent. Reste a verifier (1) si Nono a bien vu/trouve cette
+ligne "a choisir" a l'ecran (peut-etre hors champ, sous le pli, jamais remarquee) et (2) si
+double-cliquer dessus resout reellement le choix sans planter. Si oui, le vrai correctif est
+de rendre cette ligne visible/evidente (scroll automatique ? message qui pointe vers elle ?)
+plutot que de simplement activer la garde. Chantier a part entiere, pas une correction
+courte.
 
 LA VERIFICATION "NOM DE PERSONNAGE DEJA PRIS" (wincreation.pas ~1786) TESTE LE MAUVAIS
 CHEMIN. Repere le 16/09/2026 (CONTEXT.md 2.79) en corrigeant le crash du nom termine par un
