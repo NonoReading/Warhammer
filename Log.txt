@@ -5129,3 +5129,33 @@ Reste ouvert sur ce chantier : Virtue of the Quest (non traite), Kenjutsu/Martia
 Artist/Mark of the Gods (meme trou de suffixe _* probable, non corriges, notes dans
 A FAIRE.txt).
 Fichiers modifies : CONTEXT.md, Log.txt.
+
+18/09/2026 - VERTUS BRETONNES (CONTEXT.md 2.78 suite 7), VIRTUE OF THE QUEST (NATIO-T0017) :
+OCTROI AUTOMATIQUE + AFFICHAGE BARRE ECRITS, TESTES EN JEU ET VALIDES PAR NONO. Dernier point
+ouvert du chantier, desormais quasi clos. Conception avec Nono : nouveau bloc generique dans le personnage qui lie un
+Talent a la carriere+niveau requise pour que ses effets restent actifs (Errant/Realm/Questing/
+Grail Knight sont les niveaux 1 a 4 d'UNE seule carriere NATIO-WORK001, pas 4 carrieres), fige
+au moment de l'octroi - pas besoin d'historique, juste comparer a MetierEnCours a l'affichage.
+Correction en cours de route : dit a tort a Nono que l'avancement de carriere n'etait pas code -
+ButtonAugmentationClick/MajTables le gerent deja. Scope tranche avec Nono : seulement le barre
+(effets en sommeil hors Questing Knight), pas le retrait definitif a Grail Knight (meme souci
+de comptabilite Xp que Knightly Virtue sur une operation jamais faite - supprimer une ligne de
+TabTalent - laisse a une session dediee). Nouveau champ Personnage.TalentCarriereRequise
+(chargepersonnage.pas), bloc XML CHAPTER_TALENT_CAREER_LINK, fonction PersonnageTalentEstBarre.
+Octroi code en dur dans MajTables (entree en NATIO-WORK001 niveau 3), meme trick NbAugm='-1'
+que les Vertus nommees pour rester gratuit et survivre a l'enregistrement. Affichage barre :
+TabDrawCell (grille) et DEUX PDF (PdfBlocTalents pour Feldo2P, boucle talents separee de
+PdfPersonnageCreation standard - le talent est imprime par du code different selon le PDF).
+Compile (lazbuild --build-all, 0 erreur, memes warnings/hints qu'avant). Teste en jeu par Nono :
+octroi automatique et gratuit confirme a l'entree en Questing Knight, barre confirme apres
+changement de carriere, redevenu actif en revenant en Questing Knight.
+Bug trouve en testant le PDF : le Number du talent affichait "-1" (PdfPersonnageTalent
+recalculait son propre total depuis Personnage.AugmentationTalent, valeur BRUTE de NbAugm,
+contrairement a l'ecran qui affiche ColTalNb fixe a '1'). Corrige par Abs() (meme principe que
+le correctif ecran) - Nono a choisi cette option ("qu'il reste un talent normal") plutot qu'un
+marqueur dedie (A/F envisages puis ecartes). Corrige au passage le meme bug latent sur le PDF
+de Knightly Virtue (memes rows NbAugm=-1, jamais remarque avant).
+Chantier Vertus bretonnes quasi clos - reste seulement le retrait definitif a Grail Knight,
+volontairement differe (A FAIRE.txt).
+Fichiers modifies : chargepersonnage.pas, chargeconstantes.pas, winpersonnage.pas,
+pdfpersonnage.pas, CONTEXT.md, Log.txt, A FAIRE.txt.

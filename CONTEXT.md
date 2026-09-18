@@ -12,14 +12,84 @@ code faite avant le test : Grail Virtue a un `Max` réel de 1 (`BOOK_NATIONS_OF_
 le "4" affiché ailleurs dans le fichier à côté de `NATIO-T0002_*` est le palier de carrière, pas
 un Max), donc la garde `MaxiTalent > 1` l'exclut du mécanisme "prises multiples" - elle suit le
 chemin normal, comportement Bless (une seule prise, `Personnage.MetierTalent` se fige dessus),
-ce que confirme le test. **Point de reprise : `Virtue of the Quest`** (octroi/retrait
-automatique lié au changement de carrière) toujours laissé à part, non traité. Kenjutsu/Martial
-Artist/Mark of the Gods (probable même trou de suffixe `_*` que Knightly Virtue avant son propre
-correctif, jamais essayés en jeu) restent notés dans `A FAIRE.txt`, non corrigés.
+ce que confirme le test. **`Virtue of the Quest` (NATIO-T0017) : octroi automatique + affichage
+barré ECRITS, TESTÉS EN JEU ET VALIDÉS PAR NONO le 18/09/2026.** Détail complet en §2.78 suite 7
+ci-dessous, y compris le correctif du "-1" affiché au PDF (bug latent partagé avec Knightly
+Virtue, corrigé au même endroit). Chantier « Vertus bretonnes » quasi clos : seul reste ouvert
+le vrai retrait de `Virtue of the Quest` à Grail Knight (`A FAIRE.txt`, section conceptions),
+volontairement différé. Kenjutsu/Martial Artist/Mark of the Gods (probable même trou de suffixe
+`_*` que Knightly Virtue avant son propre correctif, jamais essayés en jeu) restent notés dans
+`A FAIRE.txt`, non corrigés.
 
 **Chantier séparé, indépendant du précédent : bug « nom de personnage terminé par un espace =
 crash au démarrage suivant » — §2.79 CLOS.** Corrigé, compilé, **testé en jeu par Nono le
 18/09/2026, validé**, committé. Détail en §2.79 plus bas.
+
+---
+
+**18/09/2026 — §2.78 SUITE 7 : `VIRTUE OF THE QUEST` (NATIO-T0017), OCTROI AUTOMATIQUE +
+AFFICHAGE BARRÉ. ÉCRIT, TESTÉ EN JEU ET VALIDÉ PAR NONO.** Dernier point ouvert du chantier
+Vertus bretonnes après la validation de Grail Virtue (suite 6). Le talent a un comportement
+inédit dans ce projet : accordé automatiquement à l'entrée en Questing Knight (pas un choix du
+joueur), ses effets doivent rester en sommeil (pas retirés) si le personnage change de carrière,
+et il n'est perdu pour de bon qu'à la promotion en Grail Knight - "aucune greffe de Talent n'est
+jamais retirée ailleurs dans le projet" (constat fait en écrivant la donnée le 16/09).
+
+- **Fausse piste initiale : "l'avancement de carrière n'est pas codé".** Dit à Nono avant
+  d'avoir vérifié - **faux**. `ButtonAugmentationClick`/`MajTables` (`winpersonnage.pas`) gèrent
+  déjà "carrière suivante"/"changer de carrière" (`radiobuttonsuivant`/`radiobuttonChanger`,
+  `NvMetier`/`NvNiveau` vs `MetierEnCours`/`MetierNvEnCours`). Le hook existe, la conception a pu
+  s'appuyer dessus.
+- **Conception avec Nono** : Errant/Realm/Questing/Grail Knight sont les NIVEAUX 1 à 4 d'UNE
+  seule carrière `NATIO-WORK001` (`BOOK_NATIONS_OF_MANKIND.Xml:5459-5474`), pas 4 carrières -
+  le lien à retenir est donc (code carrière + niveau), pas juste le code. Idée de Nono, generale
+  et pas cablée à ce seul talent : un bloc à part dans le personnage qui lie un Talent à la
+  carrière+niveau requis pour que ses effets restent actifs, figé au moment de l'octroi (pas de
+  suivi d'historique nécessaire - juste comparer ce bloc à `MetierEnCours` à l'affichage). Portée
+  du jour, tranchée avec Nono : **seulement le "barré"** (effets en sommeil) - **pas le retrait**
+  à Grail Knight, qui rouvrirait les mêmes soucis de comptabilité Xp que Knightly Virtue
+  (`NbAugm`) sur une opération jamais faite dans ce projet (supprimer une ligne de `TabTalent`) -
+  laissé à une session dédiée, testée sans presser.
+- **`StructurePersonnageTalentCarriereRequise`** (`chargepersonnage.pas`) : nouveau champ
+  `Personnage.TalentCarriereRequise` (CodeTalent/CodeMetier/NiveauMetier), sérialisé dans un
+  nouveau bloc XML `CHAPTER_TALENT_CAREER_LINK` (même moule que `CHAPTER_OLDCAREER`/
+  `CHAPTER_MUTATION` : un `<Item name="Code">"CodeMetier/Niveau"</Item>` par lien). Nouvelle
+  fonction `PersonnageTalentEstBarre(Personnage, CodeTalent): Boolean` - vrai si un lien existe
+  pour ce talent ET que `MetierEnCours` ne correspond plus à la carrière+niveau enregistrée.
+- **Octroi** (`MajTables`, fin du bloc "évolution de carrière") : cas unique, codé en dur (même
+  convention que le `SkillChoice` Reiksguard/2.51 ou `ChoixWinVertuGrail`/2.78) - si
+  `NvMetier='NATIO-WORK001'` et `NvNiveau='3'` et que le lien n'existe pas déjà, ajoute une ligne
+  `NATIO-T0017` à `TabTalent` (`Nb='1'`, `NbAugm='-1'`, `Max='1'` - même trick que les Vertus
+  nommées pour rester gratuit ET survivre à l'enregistrement) et pose le lien.
+- **Affichage barré** : `TabDrawCell` (`winpersonnage.pas`, handler partagé par `TabTalent` et
+  plusieurs autres grilles) trace un trait `Grid.Canvas.Line` par-dessus le libellé quand
+  `PersonnageTalentEstBarre` répond vrai, pour la colonne `ColTalLib` de `TabTalent`
+  spécifiquement. Côté PDF, **deux endroits** impactés (le talent est imprimé par un bloc de
+  code DIFFÉRENT selon le PDF) : `PdfBlocTalents` (PDF Feldo2P) et la boucle talents du PDF
+  standard `PdfPersonnageCreation` (`pdfpersonnage.pas` ~l.1378, pas passée par `PdfBlocTalents`)
+  - même principe, `PdfPage.DrawLine` par-dessus le nom.
+- **Compilé** (`lazbuild --build-all`, 0 erreur, mêmes 64 warnings/443 hints/139 notes
+  qu'avant ces changements - aucun nouveau).
+
+**Testé en jeu par Nono, validé** : octroi automatique et gratuit confirmé à l'entrée en
+Questing Knight ; barré confirmé après changement de carrière ; redevenu actif en revenant en
+Questing Knight (niveau 3).
+
+**Bug trouvé en testant le PDF : le "Number" du talent affichait "-1".** `PdfPersonnageTalent`
+(`pdfpersonnage.pas`) recalculait son propre Total à partir de `Personnage.AugmentationTalent`,
+qui porte la valeur BRUTE de `NbAugm` (le `-1` volontaire du trick de gratuité) - contrairement
+à l'écran, qui affiche `ColTalNb` (fixé à `'1'` en dur, jamais le `-1`). Même correctif que
+l'écran (`Abs()`) : `Res.Total := Abs(Res.Base + Res.Augmentation)`. Décision de Nono ("qu'il
+reste un talent normal") plutôt qu'un marqueur visuel dédié ("A"/"F" envisagés puis écartés).
+**Corrige au passage le même bug latent sur le PDF de Knightly Virtue** (mêmes rows `NbAugm=-1`,
+jamais remarqué avant faute d'avoir regardé le PDF pour ce talent). Sans risque : les deux seuls
+appelants de `PdfPersonnageTalent` ne testent que `<> 0`, jamais le signe.
+
+**Chantier « Vertus bretonnes » quasi clos.** Seul reste : le vrai retrait de `Virtue of the
+Quest` à Grail Knight, volontairement différé (voir `A FAIRE.txt`, section conceptions).
+
+Fichiers modifiés : `chargepersonnage.pas`, `chargeconstantes.pas`, `winpersonnage.pas`,
+`pdfpersonnage.pas`, `CONTEXT.md`, `Log.txt`, `A FAIRE.txt`.
 
 ---
 

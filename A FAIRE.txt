@@ -276,6 +276,15 @@ seulement si un cas reel de rituel a effet permanent se presente. Note gardee po
 tard : l'idee d'un talent "de type trait" non selectionnable existe deja depuis longtemps
 (CONTEXT.md 2.15, ConstXmlTrait/StructureTalent.Trait) si le besoin revient.]
 
+VIRTUE OF THE QUEST (NATIO-T0017) : RETRAIT DEFINITIF A GRAIL KNIGHT PAS ENCORE FAIT. Octroi
+automatique + affichage barre ecrits et compiles le 18/09/2026 (CONTEXT.md 2.78 suite 7,
+Personnage.TalentCarriereRequise/PersonnageTalentEstBarre) - le talent reste sur la fiche
+(barre) meme apres promotion en Grail Knight, alors que le livre dit qu'il devrait etre perdu
+pour de bon a ce palier precis. Retrait volontairement pas mecanise dans ce chantier :
+supprimer une ligne de TabTalent n'a jamais ete fait dans ce projet, et rouvrirait le meme
+genre de piege de comptabilite Xp (NbAugm) que Knightly Virtue (2.78) - a traiter separement,
+teste sans presser.
+
 [FAIT LE 07/09/2026 - mecanisme generique Nation ecrit et compile, voir CONTEXT.md 2.51.]
 
 [FAIT LE 16/09/2026 - Nation NATIO-NATION_BRET (Bretonnia) ajoutee dans

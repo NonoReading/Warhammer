@@ -538,7 +538,12 @@ Function PdfPersonnageTalent(Personnage: StructurePersonnage; Talent: String; Va
              NivMetier := PMetierTalent.NiveauMetier;
              break;
            end;
-    Res.Total := Res.Base + Res.Augmentation;
+    // Abs() : une Vertu nommee (Knightly Virtue, Virtue of the Quest - CONTEXT.md 2.78)
+    // porte un NbAugm negatif volontaire (deja comptee en cout ailleurs, ou gratuite),
+    // jamais lu comme un vrai total negatif - meme correctif que l'affichage du "Number"
+    // au rechargement (XmlChargePersonnage). Sans effet sur les autres talents, dont
+    // Augmentation n'est jamais negatif.
+    Res.Total := Abs(Res.Base + Res.Augmentation);
     Result := res;
   end;
 
@@ -1384,6 +1389,11 @@ Procedure PdfPersonnageCreation(Personnage: StructurePersonnage; BackGround: Boo
           inc(NbLigne);
           PdfTaillePolice(PdfPage, PdfFontValue, ConstPoliceArial, 7);
           PdfEcrit(PdfPage, 16, 49, 92-(NbLigne*3.5), PTalent.Libelle,MinPolice);              // Gr_Av Libellé
+          // Virtue of the Quest (CONTEXT.md 2.78) : talent possede mais dont les effets
+          // sont en sommeil hors de la carriere+niveau qui l'a accorde - barre plutot
+          // que retire (le vrai retrait n'est pas encore mecanise).
+          if PersonnageTalentEstBarre(Personnage, PTalent.CodeTalent) then
+            PdfPage.DrawLine(16, 92-(NbLigne*3.5)+0.8, 49, 92-(NbLigne*3.5)+0.8, 0.5);
           PdfTaillePolice(PdfPage, PdfFontValue, ConstPoliceArial, 9);
           PdfPage.WriteText(49, 92-(NbLigne*3.5), IntToStr(TalentDonnee.Total));              // Gr_Av Attribut
           //if TabTalent.Cells[ColTalAsterisk, IndC] <> '' then
@@ -2677,6 +2687,12 @@ Function PdfBlocTalents(PdfPage: TPDFPage; Personnage: StructurePersonnage; XGau
           begin
             inc(NbLigne);
             PdfEcrit(PdfPage, XGauche + 2, XGauche + 41, Y - ((NbLigne + 2) * HauteurLigne) + 1, PTalent.Libelle, MinPolice);
+            // Virtue of the Quest (CONTEXT.md 2.78) : talent possede mais dont les effets
+            // sont en sommeil hors de la carriere+niveau qui l'a accorde - barre plutot
+            // que retire (le vrai retrait n'est pas encore mecanise).
+            if PersonnageTalentEstBarre(Personnage, PTalent.CodeTalent) then
+              PdfPage.DrawLine(XGauche + 2, Y - ((NbLigne + 2) * HauteurLigne) + 1.8,
+                                XGauche + 41, Y - ((NbLigne + 2) * HauteurLigne) + 1.8, 0.5);
             Bonus := PdfPersonnageTalentBonus(Personnage, PTalent.CodeTalent);
             // Afficher l'astérisque pour les talents
             if Bonus <> '' then

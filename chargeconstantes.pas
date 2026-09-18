@@ -70,6 +70,10 @@ Const
       ConstXmlChapitreEquipement	= 'CHAPTER_ITEM';
       ConstXmlChapitreCorruption	= 'CHAPTER_CORRUPTION';
       ConstXmlChapitreMutation	        = 'CHAPTER_MUTATION';
+      // Talents dont les effets sont lies a une carriere+niveau precis, fige a l'octroi
+      // (ex. Virtue of the Quest, NATIO-T0017). Voir StructurePersonnageTalentCarriereRequise,
+      // CONTEXT.md 2.78.
+      ConstXmlChapitreTalentCarriere    = 'CHAPTER_TALENT_CAREER_LINK';
       ConstXmlSousChapitreArme          = 'SUBCHAPTER_WEAPON';
       ConstXmlSousChapitreArmure        = 'SUBCHAPTER_ARMOR';
       ConstXmlSousChapitreArmureSimp    = 'SUBCHAPTER_ARMOR_SET';

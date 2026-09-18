@@ -97,6 +97,21 @@ Type
   end;
 
 Type
+  // Lien entre un Talent accorde automatiquement par une carriere et la carriere+niveau
+  // requis pour que ses effets restent actifs (ex. Virtue of the Quest, NATIO-T0017,
+  // Nations of Mankind p.12 : accorde a l'entree en Questing Knight, effets en sommeil -
+  // pas de vrai retrait - tant que le personnage n'est pas dans cette carriere+niveau).
+  // Fige au moment de l'octroi (pas recalcule depuis un historique) : compare a
+  // Personnage.MetierEnCours a l'affichage (WinPersonnage/PDF) pour barrer le talent sans
+  // le retirer. Generique, pas cable a NATIO-T0017 specifiquement - reutilisable si un
+  // autre livre a le meme besoin. CONTEXT.md 2.78.
+  StructurePersonnageTalentCarriereRequise = Record
+     CodeTalent:            String;
+     CodeMetier:            String;
+     NiveauMetier:          Integer;
+  end;
+
+Type
   StructurePersonnageMetier     = Record
      CodeMetier:            String;
      NiveauMetier:          Integer;
@@ -179,6 +194,9 @@ Type
      // principe que CreationCompetence35, mais champ separe : source differente, jamais
      // melangee). Vide si le personnage n'a fait aucun choix de ce type.
      CompetenceAppartenance:     array of StructurePersonnageCompetence;
+     // Talents dont les effets sont lies a une carriere+niveau precis, fige a l'octroi -
+     // voir StructurePersonnageTalentCarriereRequise. Vide si aucun talent de ce genre.
+     TalentCarriereRequise:      array of StructurePersonnageTalentCarriereRequise;
   end;
 
   StructureChoixCreation = record
@@ -224,6 +242,12 @@ Type
   // mutation disparait un jour de Personnage.Mutations, le talent calcule disparait avec elle
   // sans purge explicite a ecrire. CONTEXT.md, chantier "traits de creature".
   Function PersonnageMutationTalent(Personnage: StructurePersonnage): TArrayPersonnageTalent;
+  // Vrai si CodeTalent a un lien enregistre dans Personnage.TalentCarriereRequise ET que
+  // le personnage n'est plus dans la carriere+niveau requis - le talent reste possede
+  // (pas retire) mais doit s'afficher barre (WinPersonnage/Pdf). Faux si CodeTalent n'a
+  // aucun lien enregistre (talent normal) ou si le personnage est toujours dans la
+  // carriere+niveau requis. CONTEXT.md 2.78, Virtue of the Quest.
+  Function PersonnageTalentEstBarre(Personnage: StructurePersonnage; CodeTalent: String): Boolean;
   // Meme principe que PersonnageMutationTalent juste au-dessus, mais pour l'arme/armure
   // accordee par une mutation (<Weapon>/<Armor> sous <Corruption>, chargecorruptionequipement.pas).
   // Calcule a la volee, rien de stocke sur la fiche : meme cascade gratuite au retrait d'une
@@ -441,6 +465,7 @@ var
   PersonnageEquipement:   StructurePersonnageEquipement;
   PersonnageCorruption:   StructurePersonnageCorruption;
   PersonnageMutation:     StructurePersonnageMutation;
+  PersonnageTalentCarriere: StructurePersonnageTalentCarriereRequise;
   PersonnageMetier:       StructurePersonnageMetier;
   PersonnageXpAttribut:   StructurePersonnageXpAttribut;
   PersonnageXpCompetence: StructurePersonnageXpCompetence;
@@ -745,6 +770,22 @@ begin
             end;
         XMLContent.Add(XmlFin(ConstXmlChapitreMutation));
 
+        // Talents dont les effets sont lies a une carriere+niveau precis (CONTEXT.md 2.78,
+        // Virtue of the Quest) - fige au moment de l'octroi, compare a MetierEnCours a
+        // l'affichage pour barrer le talent sans le retirer.
+        XMLContent.Add(XmlDebut(ConstXmlChapitreTalentCarriere));
+          for PersonnageTalentCarriere in Personnage.TalentCarriereRequise do
+            begin
+              PTalent := ChercheTalent(PersonnageTalentCarriere.CodeTalent);
+              PMetier := chercheMetier(PersonnageTalentCarriere.CodeMetier);
+              XMLContent.Add(XmlLigneDonnee(ConstXmlItem,
+                CodeNormalise(PersonnageTalentCarriere.CodeTalent, PTalent.Livre),
+                CodeNormalise(PersonnageTalentCarriere.CodeMetier, PMetier.Livre)+SeparateurMulti+IntToStr(PersonnageTalentCarriere.NiveauMetier)));
+              ListeLivres := PersonnageLivre(ListeLivres, PTalent.Livre);
+              XMLContent.Add(XmlCommentaire(PTalent.Libelle+' / '+PMetier.Libelle));
+            end;
+        XMLContent.Add(XmlFin(ConstXmlChapitreTalentCarriere));
+
         // Livres
         XMLContent.Add(XmlLigne(ConstXmlLibelleLivre, ListeLivres));
         if Personnage.LivresAcceptes  = '' then
@@ -854,6 +895,7 @@ var
   PersonnageEquipement:       StructurePersonnageEquipement;
   PersonnageCorruption:       StructurePersonnageCorruption;
   PersonnageMutation:         StructurePersonnageMutation;
+  PersonnageTalentCarriere:   StructurePersonnageTalentCarriereRequise;
   PersonnageXpAttribut:       StructurePersonnageXpAttribut;
   PersonnageXpCompetence:     StructurePersonnageXpCompetence;
   PersonnageXpTalent:         StructurePersonnageXpTalent;
@@ -878,6 +920,7 @@ begin
       Personnage.Equipement           := [];
       Personnage.Corruption           := [];
       Personnage.Mutations            := [];
+      Personnage.TalentCarriereRequise := [];
       Personnage.XpCoutAttribut       := [];
       Personnage.XpCoutCompetence     := [];
       Personnage.XpCoutTalent         := [];
@@ -1252,6 +1295,26 @@ begin
                 begin
                   PersonnageMutation.Code := RemoveQuotes(UTF8Encode(ItemNode.Attributes.GetNamedItem(ConstXmlData).NodeValue));
                   Personnage.Mutations    += [PersonnageMutation];
+                end;
+              ItemNode := ItemNode.NextSibling;
+            end;
+        end;
+
+      // Talents dont les effets sont lies a une carriere+niveau precis (CONTEXT.md 2.78,
+      // Virtue of the Quest) - voir StructurePersonnageTalentCarriereRequise.
+      ChapterItemNode := PlayerNode.FindNode(ConstXmlChapitreTalentCarriere);
+      if Assigned(ChapterItemNode) then
+        begin
+          ItemNode := ChapterItemNode.FirstChild;
+          while Assigned(ItemNode) do
+            begin
+              if (ItemNode.NodeType = ELEMENT_NODE) then
+                begin
+                  PersonnageTalentCarriere.CodeTalent   := RemoveQuotes(UTF8Encode(ItemNode.Attributes.GetNamedItem(ConstXmlData).NodeValue));
+                  Code                                   := RemoveQuotes(UTF8Encode(ItemNode.TextContent));
+                  PersonnageTalentCarriere.CodeMetier   := ExtractStringBefore(Code, SeparateurMulti);
+                  PersonnageTalentCarriere.NiveauMetier := StrToIntDef(ExtractStringAfter(Code, SeparateurMulti),0);
+                  Personnage.TalentCarriereRequise      += [PersonnageTalentCarriere];
                 end;
               ItemNode := ItemNode.NextSibling;
             end;
@@ -2148,6 +2211,20 @@ Function PersonnageMutationTalent(Personnage: StructurePersonnage): TArrayPerson
             PTalent.Source     := PersonnageMutation.Code;
             Result             += [PTalent];
           end;
+  end;
+
+Function PersonnageTalentEstBarre(Personnage: StructurePersonnage; CodeTalent: String): Boolean;
+  var
+    Ind: Integer;
+  begin
+    Result := false;
+    for Ind := 0 to High(Personnage.TalentCarriereRequise) do
+      if Personnage.TalentCarriereRequise[Ind].CodeTalent = CodeTalent then
+        begin
+          Result := (Personnage.MetierEnCours.CodeMetier <> Personnage.TalentCarriereRequise[Ind].CodeMetier) or
+                     (Personnage.MetierEnCours.NiveauMetier <> Personnage.TalentCarriereRequise[Ind].NiveauMetier);
+          break;
+        end;
   end;
 
 Function PersonnageMutationEquipement(Personnage: StructurePersonnage): TArrayPersonnageEquipement;

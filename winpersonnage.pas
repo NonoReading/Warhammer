@@ -4198,6 +4198,14 @@ begin
           // Dessiner le texte avec l'alignement vertical centré
           Grid.Canvas.FillRect(aRect);
           Grid.Canvas.TextRect(aRect, TextX, aRect.Top + (aRect.Bottom - aRect.Top - Grid.Canvas.TextHeight(CellText)) div 2, CellText);
+
+          // Virtue of the Quest (CONTEXT.md 2.78) : talent possede mais dont les effets
+          // sont en sommeil hors de la carriere+niveau qui l'a accorde - barre plutot que
+          // retire (le vrai retrait n'est pas encore mecanise).
+          if (Grid = TabTalent) and (aCol = ColTalLib) and
+             PersonnageTalentEstBarre(Personnage, TabTalent.Cells[ColTalCode, aRow]) then
+            Grid.Canvas.Line(TextX, aRect.Top + (aRect.Bottom - aRect.Top) div 2,
+                              TextX + TextWidth, aRect.Top + (aRect.Bottom - aRect.Top) div 2);
         end;
       end;
   end;
@@ -5044,6 +5052,8 @@ Procedure TWinPersonnages.MajTables();
     NbMaxGen:          Integer;
     TrouveGenerique:   Boolean;
     PTalentGenerique:  StructureTalent;
+    PersonnageTalentCarriere: StructurePersonnageTalentCarriereRequise;
+    DejaLie:           Boolean;
   begin
     // raz table augmentation spéciales
     For IndAugm := TabAugmentationMjXp.RowCount - 1 downto 1 do
@@ -5374,6 +5384,40 @@ Procedure TWinPersonnages.MajTables();
           finally
             Appartenances.Free;
           end;
+
+          // Virtue of the Quest (NATIO-T0017, Nations of Mankind p.12) : octroi
+          // automatique a l'entree en Questing Knight (NATIO-WORK001, niveau 3) - talent
+          // hors norme, sans specialisation ni choix du joueur, gratuit en Xp (meme trick
+          // NbAugm='-1' que les Vertus bretonnes nommees, 2.78, pour survivre a
+          // l'enregistrement sans facturer). Ses effets restent lies a cette carriere+
+          // niveau : Personnage.TalentCarriereRequise garde la reference pour que
+          // l'affichage (TabTalent/Pdf) le barre si le personnage n'y est plus, sans le
+          // retirer (le vrai retrait a Grail Knight reste a faire, CONTEXT.md 2.78). Cas
+          // unique, code en dur comme le fut le SkillChoice du Reiksguard (2.51)/
+          // ChoixWinVertuGrail (2.78) avant lui.
+          if (NvMetier = 'NATIO-WORK001') and (NvNiveau = '3') then
+            begin
+              DejaLie := false;
+              for Ind := 0 to High(Personnage.TalentCarriereRequise) do
+                if Personnage.TalentCarriereRequise[Ind].CodeTalent = 'NATIO-T0017' then
+                  DejaLie := true;
+              if not DejaLie then
+                begin
+                  PTalent := ChercheTalent('NATIO-T0017');
+                  TabTalent.RowCount := TabTalent.RowCount + 1;
+                  TabTalent.Cells[ColTalCode, TabTalent.RowCount-1]   := 'NATIO-T0017';
+                  TabTalent.Cells[ColTalLib, TabTalent.RowCount-1]    := PTalent.Libelle;
+                  TabTalent.Cells[ColTalNb, TabTalent.RowCount-1]     := '1';
+                  TabTalent.Cells[ColTalNbAugm, TabTalent.RowCount-1] := '-1';
+                  TabTalent.Cells[ColTalMax, TabTalent.RowCount-1]    := '1';
+
+                  PersonnageTalentCarriere              := Default(StructurePersonnageTalentCarriereRequise);
+                  PersonnageTalentCarriere.CodeTalent    := 'NATIO-T0017';
+                  PersonnageTalentCarriere.CodeMetier    := 'NATIO-WORK001';
+                  PersonnageTalentCarriere.NiveauMetier  := 3;
+                  Personnage.TalentCarriereRequise      += [PersonnageTalentCarriere];
+                end;
+            end;
         end;
 
 
