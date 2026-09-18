@@ -5116,3 +5116,16 @@ Fichiers modifies : winpersonnage.pas, CONTEXT.md, Log.txt, A FAIRE.txt.
 avant usage en chemin dans wincreation.pas, garde-fou dans ChargerPersonnages pour ignorer un
 dossier de personnage sans XML) confirme sans reserve. Chantier clos.
 Fichiers modifies : CONTEXT.md, Log.txt.
+
+18/09/2026 - VERTUS BRETONNES (CONTEXT.md 2.78), GRAIL VIRTUE AU PALIER GRAIL KNIGHT TESTEE EN
+JEU PAR NONO, VALIDEE. Sur un personnage ayant pris Audacity et Heroism en Knightly Virtue, le
+choix de Grail Virtue ne propose bien que ces deux noms (filtre ChoixWinVertuGrail confirme),
+la selection se resout correctement et le cout XP est bon apres validation. Revue de code faite
+avant le test : Grail Virtue a un Max reel de 1 (BOOK_NATIONS_OF_MANKIND.Xml ligne 464 - le "4"
+vu ailleurs a cote de NATIO-T0002_* est le palier de carriere, pas un Max), donc elle est
+exclue du mecanisme "prises multiples" (garde MaxiTalent > 1) et suit le chemin normal,
+comportement Bless (une seule prise, MetierTalent se fige dessus) - confirme par le test.
+Reste ouvert sur ce chantier : Virtue of the Quest (non traite), Kenjutsu/Martial
+Artist/Mark of the Gods (meme trou de suffixe _* probable, non corriges, notes dans
+A FAIRE.txt).
+Fichiers modifies : CONTEXT.md, Log.txt.

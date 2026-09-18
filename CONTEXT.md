@@ -4,10 +4,15 @@
 multiples de Knightly Virtue (Max:4) est terminé, testé en jeu par Nono, compilé, committé**.
 Plusieurs fausses pistes avant la bonne conception (détail complet en §2.78 suite 6 ci-dessous) :
 la version retenue ne touche presque rien au mécanisme existant (pas de nouvelle grille, pas de
-nouvel écran) — l'essentiel se joue dans `MajTables`. **Point de reprise : reste à tester**
-Grail Virtue au palier Grail Knight (le filtre qui restreint le pool aux noms déjà pris en
-Knightly Virtue, `ChoixWinVertuGrail`, n'a pas été modifié le 16/09, mais tout ce qui l'entoure
-a beaucoup bougé - à revérifier que rien n'a cassé). `Virtue of the Quest` (octroi/retrait
+nouvel écran) — l'essentiel se joue dans `MajTables`. **Grail Virtue au palier Grail Knight
+testé en jeu par Nono le 18/09/2026, validé** : sur un personnage ayant pris Audacity et Heroism
+en Knightly Virtue, le choix de Grail Virtue ne propose bien QUE ces deux noms (le filtre
+`ChoixWinVertuGrail` tient), la sélection se résout correctement et le coût XP est bon. Revue de
+code faite avant le test : Grail Virtue a un `Max` réel de 1 (`BOOK_NATIONS_OF_MANKIND.Xml:464`,
+le "4" affiché ailleurs dans le fichier à côté de `NATIO-T0002_*` est le palier de carrière, pas
+un Max), donc la garde `MaxiTalent > 1` l'exclut du mécanisme "prises multiples" - elle suit le
+chemin normal, comportement Bless (une seule prise, `Personnage.MetierTalent` se fige dessus),
+ce que confirme le test. **Point de reprise : `Virtue of the Quest`** (octroi/retrait
 automatique lié au changement de carrière) toujours laissé à part, non traité. Kenjutsu/Martial
 Artist/Mark of the Gods (probable même trou de suffixe `_*` que Knightly Virtue avant son propre
 correctif, jamais essayés en jeu) restent notés dans `A FAIRE.txt`, non corrigés.
