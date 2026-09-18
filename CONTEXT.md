@@ -824,7 +824,8 @@ Compilé (`lazbuild`, 0 erreur). Retiré d'A FAIRE.txt (candidat #4 de la liste)
 ---
 
 **15/09/2026 (suite) — BÉNÉDICTION À LA CRÉATION : SORT ACCORDÉ DIRECTEMENT DANS
-WINCREATION.** Bug trouvé le 03/09 (CONTEXT.md 2.40) : un talent de Bénédiction posé à la
+WINCREATION. [INVALIDÉ LE 18/09/2026, VOIR NOTE CI-DESSOUS — SECTION CONSERVÉE POUR
+MÉMOIRE].** Bug trouvé le 03/09 (CONTEXT.md 2.40) : un talent de Bénédiction posé à la
 création n'accordait aucun sort. Cause précisée : `SortAffiche` (`winpersonnage.pas:1579`)
 ne regarde que `Nouveau > Actuel` dans `TabAugmentationTalent`, or `MajTables` écrit
 toujours `Nouveau := Actuel` pour un talent de création (`winpersonnage.pas:4849`) - le
@@ -840,6 +841,15 @@ création) : si le talent a `ModeSort=AUTO` (Bénédiction), les sorts qui le ci
 `ChargeSort` ajouté aux `uses` de `wincreation.pas`. Compilé (`lazbuild`, 0 erreur).
 **Testé en jeu par Nono le 15/09/2026 : OK** (carrière Priest, `RULES-WORK49`, Bless posé à
 la création - le sort apparaît sur la fiche sans étape supplémentaire). Pas encore committé.
+
+**18/09/2026 — INVALIDÉ PAR NONO : le cas traité ci-dessus ne peut pas se produire.** On ne
+peut pas avoir Bless à la création - une Bénédiction ne peut venir que par `WinPersonnage`
+(avancement de carrière), jamais à la création du personnage. Le "testé en jeu : OK" noté le
+15/09 reposait donc sur un scénario qui n'est pas légal en jeu. Code mort retiré de
+`wincreation.pas` (`PhaseSave`, phase 5) : le bloc `if PTalent.ModeSort = ConstModeSortAuto`
+et l'octroi de sort qui l'accompagnait ont été supprimés, avec l'unité `ChargeSort` et la
+variable `PSort` (plus utilisées). Compilé (`lazbuild --build-all`, 0 erreur, mêmes 64
+warnings/443 hints/139 notes qu'avant). Retiré d'`A FAIRE.txt`.
 
 ---
 

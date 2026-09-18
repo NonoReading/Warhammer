@@ -150,18 +150,15 @@ et non sur sa nature : la branche "choix unique" de l arbre de WinRaces, le basc
 ChargeSpecialisation vers le catalogue complet, et le routage par Node.Parent.Text du clic
 de WinRaces. Aucun n avait ete anticipe. A relire avant le prochain ajout du meme genre.
 
-[CORRIGE LE 15/09/2026 COTE WINCREATION - COMPILE, PAS ENCORE TESTE EN JEU]
-UN TALENT DE BENEDICTION POSE A LA CREATION N ACCORDAIT AUCUN SORT. Trouve le 03/09/2026 en
-corrigeant CONTEXT 2.40 : SortAffiche (winpersonnage.pas:1579) ne regarde que les lignes ou
-Nouveau > Actuel, or un talent de creation entre toujours avec Nouveau = Actuel (MajTables,
-winpersonnage.pas:4849) - ne se declenche donc JAMAIS pour lui, meme aux ouvertures
-suivantes (pas seulement a la creation). Decision de Nono : plutot que de toucher au
-mecanisme Nouveau/Actuel (reste une conception a part, non menee), accorder directement les
-sorts dans WinCreation au moment ou le talent de Benediction est resolu (PhaseSave,
-wincreation.pas, phase 5 "Talents") - meme ecriture dans Personnage.Equipement
-(TypeEquipSp, CoutXp=0) qu'un octroi normal en jeu. A tester avec un personnage creant un
-pretre/Benediction (ex. Bless Sigmar) : verifier que le sort apparait bien sur la fiche
-sans etape supplementaire.
+[INVALIDE - CONSTATE LE 18/09/2026 PAR NONO, CORRECTIF RETIRE, NE PLUS LE RESSORTIR]
+"UN TALENT DE BENEDICTION POSE A LA CREATION N ACCORDAIT AUCUN SORT" REPOSAIT SUR UNE
+PREMISSE FAUSSE. Le correctif du 15/09/2026 (octroi direct du sort dans WinCreation, phase 5
+"Talents", pour tout talent ModeSort=AUTO resolu a la creation) partait d'un cas qui ne peut
+pas se produire en jeu : on ne peut pas avoir Bless a la creation, une Benediction ne peut
+venir que par WinPersonnage (avancement de carriere). Code mort retire de wincreation.pas
+(PhaseSave) le 18/09/2026, unite ChargeSort et variable PSort retirees avec lui (plus
+utilisees). Compile (lazbuild --build-all, 0 erreur, memes 64 warnings/443 hints/139 notes
+qu'avant).
 
 VERIFIER PoolTalent SUR UN PERSONNAGE PORTANT DEUX DIEUX. Signale par la conception de
 CONTEXT 2.39 et toujours pas eprouve : PoolTalent batit le groupe de comptage XP sur le
@@ -217,12 +214,12 @@ recalcul depuis warhammersource.pas, corrige le 14/09/2026, CONTEXT.md 2.70) - r
 sous-ensemble PDF/attributs, non demande pour l'instant. Meme correctif a appliquer
 (Const -> Var + recalcul depuis ValVersion) le jour ou Nono le demande.
 
-[CORRIGE LE 15/09/2026 - COMPILE, PAS ENCORE TESTE EN JEU SUR UNE VRAIE SPECIALISATION
-NON-TROUVEE, VOIR CONTEXT.md]
+[CORRIGE LE 15/09/2026, TESTE EN JEU ET VALIDE PAR NONO LE 18/09/2026 - NE PLUS LE
+RESSORTIR]
 CHERCHETALENT TESTAIT PTALENT.RESUME AU LIEU DE RESULT.RESUME APRES LA BOUCLE.
 chargetalent.pas l.85 : corrige en Result.Resume (voir chargetalent.pas:78-90 pour le
-raisonnement). A surveiller au prochain personnage portant une specialisation de talent
-sans entree propre au catalogue.
+raisonnement). Confirme sur WinMetier : selectionner une specialisation affiche desormais
+bien son resume.
 
 LE MEME EMPILEMENT DE "(N) VALEUR%" QUE L'ARMURE (CORRIGE LE 14/09/2026, VOIR PLUS BAS)
 EXISTE PEUT-ETRE AUSSI COTE MUTATIONS. PdfPersonnageMutationAsterisques

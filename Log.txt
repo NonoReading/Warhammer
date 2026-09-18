@@ -5220,3 +5220,17 @@ hints/139 notes qu'avant, aucun nouveau). Teste en jeu par Nono, valide dans les
 un ajout reel (info sur les yeux) sauvegarde normalement sans message ; un Enregistrer sans
 rien changer affiche le message et ne cree aucun nouveau fichier.
 Fichiers modifies : winpersonnage.pas, CONTEXT.md, Log.txt, A FAIRE.txt.
+
+18/09/2026 - "BENEDICTION A LA CREATION ACCORDE UN SORT" (CORRECTIF DU 15/09/2026) INVALIDE
+PAR NONO, CODE MORT RETIRE DE WINCREATION.PAS. En repassant sur A FAIRE.txt, Nono signale que
+le cas traite par ce correctif ne peut pas se produire en jeu : on ne peut pas avoir Bless a
+la creation, une Benediction ne peut venir que par WinPersonnage (avancement de carriere). Le
+"teste en jeu : OK" note le 15/09/2026 reposait donc sur un scenario non legal en jeu. Retire
+de wincreation.pas (PhaseSave, phase 5 "Talents") : le bloc conditionne a
+PTalent.ModeSort=AUTO qui octroyait directement un sort, avec l'unite ChargeSort et la
+variable PSort devenues inutiles. Compile (lazbuild --build-all, 0 erreur, memes 64
+warnings/443 hints/139 notes qu'avant, aucun nouveau).
+A la meme occasion, confirme par Nono : ChercheTalent testait PTalent.Resume au lieu de
+Result.Resume (corrige le 15/09/2026, chargetalent.pas:85) - selectionner une specialisation
+sur WinMetier affiche desormais bien son resume. Point cloture dans A FAIRE.txt.
+Fichiers modifies : wincreation.pas, CONTEXT.md, Log.txt, A FAIRE.txt.
