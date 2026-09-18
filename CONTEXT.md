@@ -1,53 +1,20 @@
 # Warhammer — Contexte projet
 
-**REPRISE (18/09/2026)** : **choix de sort d'un talent "à choix" (Miracle) déplacé dans le
-tableau de talents lui-même, testé en jeu et validé par Nono.** `AjoutMineur` (jamais mise à
-`true`, cf. `A FAIRE.txt`) a été retentée puis abandonnée pour blocage sans issue (le bouton
-+Spell ne lit que les talents déjà validés) ; remplacée par une nouvelle colonne "Spell" dans
-`TabAugmentationTalent`, résolue par double-clic indépendamment de Valider, sur le même
-principe que la colonne Spécialisation. Corrige au passage une ligne d'équipement fantôme
-(sort vide) créée si le choix restait non résolu. Détail complet en §2.82 ci-dessous.
+**REPRISE (18/09/2026, fin de session)** : journée entièrement close et committée, rien en
+cours. Six chantiers traités le 18/09/2026, tous testés en jeu et validés par Nono : §2.78
+suite 6/7 (Vertus bretonnes, quasi clos - seul reste le vrai retrait de `Virtue of the Quest`
+à Grail Knight, volontairement différé, cf. `A FAIRE.txt`), §2.79 (crash nom de personnage
+terminé par un espace, clos), §2.80 + suite (suffixe `_*` manquant sur Kenjutsu/Mark of the
+Gods/Martial Artist + crash double-clic sur libellé de choix multiple, clos), §2.81 (message
+"Aucune modification apportée" remplacé par une vraie comparaison XML à la sauvegarde, clos),
+§2.82 (choix de sort d'un talent à choix déplacé dans le tableau de talents, résolvant
+l'impasse `AjoutMineur`, clos).
 
-**Message "Aucune modification apportée" (RULES-MESS_024) trop
-souvent faux à la validation de l'onglet Expérience — corrigé par une vraie comparaison à la
-sauvegarde, testé en jeu et validé par Nono.** Le contrôle à 4 conditions choisies à la main
-dans `ButtonAugmentationClick` ratait tout changement gratuit (talent, sort, prière,
-mutation) et affichait le message à tort ; retiré. Un contrôle fiable a été ajouté dans
-`XmlSauvegarde` (vrai bouton "Enregistrer") : comparaison texte à texte entre le nouveau XML
-généré et le précédent fichier du personnage — identique, le nouveau fichier est effacé et le
-message s'affiche ; différent, sauvegarde normale. Détail complet en §2.81 ci-dessous.
-
-Chantier « Vertus bretonnes » (§2.78) — le mécanisme de **prises
-multiples de Knightly Virtue (Max:4) est terminé, testé en jeu par Nono, compilé, committé**.
-Plusieurs fausses pistes avant la bonne conception (détail complet en §2.78 suite 6 ci-dessous) :
-la version retenue ne touche presque rien au mécanisme existant (pas de nouvelle grille, pas de
-nouvel écran) — l'essentiel se joue dans `MajTables`. **Grail Virtue au palier Grail Knight
-testé en jeu par Nono le 18/09/2026, validé** : sur un personnage ayant pris Audacity et Heroism
-en Knightly Virtue, le choix de Grail Virtue ne propose bien QUE ces deux noms (le filtre
-`ChoixWinVertuGrail` tient), la sélection se résout correctement et le coût XP est bon. Revue de
-code faite avant le test : Grail Virtue a un `Max` réel de 1 (`BOOK_NATIONS_OF_MANKIND.Xml:464`,
-le "4" affiché ailleurs dans le fichier à côté de `NATIO-T0002_*` est le palier de carrière, pas
-un Max), donc la garde `MaxiTalent > 1` l'exclut du mécanisme "prises multiples" - elle suit le
-chemin normal, comportement Bless (une seule prise, `Personnage.MetierTalent` se fige dessus),
-ce que confirme le test. **`Virtue of the Quest` (NATIO-T0017) : octroi automatique + affichage
-barré ECRITS, TESTÉS EN JEU ET VALIDÉS PAR NONO le 18/09/2026.** Détail complet en §2.78 suite 7
-ci-dessous, y compris le correctif du "-1" affiché au PDF (bug latent partagé avec Knightly
-Virtue, corrigé au même endroit). Chantier « Vertus bretonnes » quasi clos : seul reste ouvert
-le vrai retrait de `Virtue of the Quest` à Grail Knight (`A FAIRE.txt`, section conceptions),
-volontairement différé. **§2.80 CLOS : Kenjutsu/Mark of the Gods/Martial Artist
-(NATIO-T0014/15/16) avaient bien le même trou de suffixe `_*` que Knightly Virtue avant son
-correctif - corrigé le 18/09/2026, testé en jeu et validé par Nono** (détail plus bas).
-**§2.80 SUITE : le crash au double-clic sur la ligne Mark of the Gods (via Norscan Mercenary)
-est corrigé, testé en jeu et validé par Nono le 18/09/2026.** Contrairement à ce qui était noté
-ici avant investigation, la syntaxe de choix `RULES-T0161/NATIO-T0015_*` EST déjà lue et
-fusionnée par `winpersonnage.pas` (mécanisme `ListeTalent`/`ChargeSpecialisation` existant, pas
-nouveau) - la note "non lue par winpersonnage.pas" plus haut dans `A FAIRE.txt` était obsolète.
-Le vrai bug : double-cliquer sur le LIBELLÉ de la ligne (au lieu de la colonne "choisir spé")
-plantait (`EGridException Cell[Col=1 Row=1]`), corrigé. Détail en §2.80 suite ci-dessous.
-
-**Chantier séparé, indépendant du précédent : bug « nom de personnage terminé par un espace =
-crash au démarrage suivant » — §2.79 CLOS.** Corrigé, compilé, **testé en jeu par Nono le
-18/09/2026, validé**, committé. Détail en §2.79 plus bas.
+**Prochaine étape** : deux corrections courtes ouvertes dans `A FAIRE.txt` (section
+CORRECTIONS COURTES) - (1) la vérification "nom de personnage déjà pris" (`wincreation.pas`
+~1786) teste le mauvais chemin et ne se déclenche quasiment jamais ; (2) le choix
+d'équipement à `/` ne porte qu'une seule quantité pour tout l'item, pas une par branche.
+Aucune des deux n'a été commencée.
 
 ---
 
