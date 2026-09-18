@@ -5110,3 +5110,9 @@ Compile (lazbuild --build-all, 0 erreur) apres chaque etape. Reste a tester : Gr
 palier Grail Knight (le filtre ChoixWinVertuGrail n'a pas ete modifie aujourd'hui mais tout
 ce qui l'entoure a beaucoup bouge).
 Fichiers modifies : winpersonnage.pas, CONTEXT.md, Log.txt, A FAIRE.txt.
+
+18/09/2026 - CRASH A LA CREATION D'UN PERSONNAGE SI LE NOM SE TERMINE PAR UN ESPACE
+(CONTEXT.md 2.79) : TESTE EN JEU PAR NONO, VALIDE. Correctif du 16/09/2026 (Trim sur le nom
+avant usage en chemin dans wincreation.pas, garde-fou dans ChargerPersonnages pour ignorer un
+dossier de personnage sans XML) confirme sans reserve. Chantier clos.
+Fichiers modifies : CONTEXT.md, Log.txt.

@@ -1,21 +1,20 @@
 # Warhammer — Contexte projet
 
-**REPRISE (16/09/2026, suite 6)** : chantier « Vertus bretonnes » (§2.78) — le mécanisme de
-**prises multiples de Knightly Virtue (Max:4) est terminé, testé en jeu par Nono, compilé,
-pas encore committé**. Plusieurs fausses pistes avant la bonne conception (détail complet en
-§2.78 suite 6 ci-dessous) : la version retenue ne touche presque rien au mécanisme existant
-(pas de nouvelle grille, pas de nouvel écran) — l'essentiel se joue dans `MajTables`. **Point
-de reprise : reste à tester** Grail Virtue au palier Grail Knight (le filtre qui restreint le
-pool aux noms déjà pris en Knightly Virtue, `ChoixWinVertuGrail`, n'a pas été modifié
-aujourd'hui, mais tout ce qui l'entoure a beaucoup bougé - à revérifier que rien n'a cassé).
-`Virtue of the Quest` (octroi/retrait automatique lié au changement de carrière) toujours
-laissé à part, non traité. Kenjutsu/Martial Artist/Mark of the Gods (probable même trou de
-suffixe `_*` que Knightly Virtue avant son propre correctif, jamais essayés en jeu) restent
-notés dans `A FAIRE.txt`, non corrigés.
+**REPRISE (18/09/2026)** : chantier « Vertus bretonnes » (§2.78) — le mécanisme de **prises
+multiples de Knightly Virtue (Max:4) est terminé, testé en jeu par Nono, compilé, committé**.
+Plusieurs fausses pistes avant la bonne conception (détail complet en §2.78 suite 6 ci-dessous) :
+la version retenue ne touche presque rien au mécanisme existant (pas de nouvelle grille, pas de
+nouvel écran) — l'essentiel se joue dans `MajTables`. **Point de reprise : reste à tester**
+Grail Virtue au palier Grail Knight (le filtre qui restreint le pool aux noms déjà pris en
+Knightly Virtue, `ChoixWinVertuGrail`, n'a pas été modifié le 16/09, mais tout ce qui l'entoure
+a beaucoup bougé - à revérifier que rien n'a cassé). `Virtue of the Quest` (octroi/retrait
+automatique lié au changement de carrière) toujours laissé à part, non traité. Kenjutsu/Martial
+Artist/Mark of the Gods (probable même trou de suffixe `_*` que Knightly Virtue avant son propre
+correctif, jamais essayés en jeu) restent notés dans `A FAIRE.txt`, non corrigés.
 
-**Chantier séparé, indépendant du précédent : bug « nom de personnage terminé par un espace
-= crash au démarrage suivant » signalé par Nono, corrigé et compilé, pas encore retesté en
-jeu.** Détail en §2.79 plus bas.
+**Chantier séparé, indépendant du précédent : bug « nom de personnage terminé par un espace =
+crash au démarrage suivant » — §2.79 CLOS.** Corrigé, compilé, **testé en jeu par Nono le
+18/09/2026, validé**, committé. Détail en §2.79 plus bas.
 
 ---
 
@@ -119,17 +118,19 @@ touchés :
   `PersonnageXmlFichierActuel` renvoie `''` pour un dossier, la ligne est ignorée (ni ajoutée à
   `TabPersonnage`, ni chargée) au lieu de faire planter tout le rescan - protège aussi contre
   toute autre cause future de dossier de personnage sans XML, pas seulement celle-ci.
-- Compilé (`lazbuild`, 0 erreur, aucun avertissement nouveau). **Pas testé en jeu, pas
-  committé.** Aucun dossier de personnage vide/orphelin trouvé dans `SAVED_CARACTERS\WFRP4\`
-  au moment du diagnostic - donc soit Nono a déjà nettoyé le dossier fautif lui-même pour
-  pouvoir rouvrir le programme, soit le crash a été bloqué avant la moindre écriture disque. À
-  vérifier avec Nono si le programme est encore bloqué au démarrage.
+- Compilé (`lazbuild`, 0 erreur, aucun avertissement nouveau). Aucun dossier de personnage
+  vide/orphelin trouvé dans `SAVED_CARACTERS\WFRP4\` au moment du diagnostic - donc soit Nono
+  avait déjà nettoyé le dossier fautif lui-même pour pouvoir rouvrir le programme, soit le
+  crash avait été bloqué avant la moindre écriture disque.
 - Bug non lié repéré au passage, pas corrigé (hors périmètre) : la vérification "nom déjà pris"
   à l'étape 8 (`wincreation.pas` ~ligne 1786) teste
   `DirectoryExists(GetCurrentDir+EditNomPersonnag.text)`, un chemin qui **n'inclut pas
   `ConstCheminPersonnage`** - elle ne pointe donc jamais vers le vrai dossier
   `SAVED_CARACTERS\...\NomPerso\` et ne peut quasiment jamais se déclencher. Noté dans
   `A FAIRE.txt`.
+- **§2.79 CLOS le 18/09/2026** : testé en jeu par Nono, validé (création d'un personnage avec
+  un nom terminé par un espace ne crashe plus, ni à la création ni aux démarrages suivants).
+  Committé.
 
 Fichiers modifiés : `wincreation.pas`, `warhammersource.pas`, `CONTEXT.md`.
 
