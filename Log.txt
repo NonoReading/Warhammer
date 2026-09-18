@@ -5173,6 +5173,7 @@ carriere est RULES-T0161/NATIO-T0015 (choix a '/' non decoupe par winpersonnage.
 wincreation.pas, gap deja note dans A FAIRE.txt) - le _* a ete ajoute pour la coherence de la
 donnee mais l'octroi par cette carriere precise reste non fonctionnel tant que ce gap n'est
 pas traite ; seul l'ajout manuel via le catalogue profite pleinement du correctif pour ce
-talent-la. Compile (lazbuild --build-all, 0 erreur, memes warnings/hints qu'avant). Pas teste
-en jeu (aucun personnage Samurai/Norscan Mercenary/moine disponible).
+talent-la. Compile (lazbuild --build-all, 0 erreur, memes warnings/hints qu'avant). Teste en
+jeu par Nono, valide : le selecteur de specialisation s'ouvre desormais pour les trois
+talents. Chantier clos (2.80).
 Fichiers modifies : BOOK_NATIONS_OF_MANKIND.Xml, CONTEXT.md, Log.txt, A FAIRE.txt.

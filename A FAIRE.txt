@@ -54,13 +54,11 @@ winpersonnage.pas/wincreation.pas. Le jour ou l'avancement de carriere sera code
 lui apprendre a lire cette syntaxe aussi - utilisee pour les choix "A ou B" du Rulebook V5
 (§2.70) et pour des cas V4 existants (duches bretonniens, carrieres Nations of Mankind).
 
-KENJUTSU/MARK OF THE GODS/MARTIAL ARTIST : CORRECTIF `_*` FAIT LE 18/09/2026 (CONTEXT.md
-2.80), PAS ENCORE TESTE EN JEU. A confirmer par Nono (Samurai/Norscan Mercenary/moine) que le
-choix de specialisation s'ouvre desormais. Mark of the Gods reste a part : sa reference de
-carriere passe par le choix `RULES-T0161/NATIO-T0015_*` (syntaxe `/`, voir l'entree plus bas
-sur ce decoupage non lu par winpersonnage.pas/wincreation.pas) - l'octroi automatique par
-cette carriere restera non fonctionnel tant que ce gap-la n'est pas traite, seul l'ajout
-manuel au catalogue est couvert par le correctif du jour.
+MARK OF THE GODS (NATIO-T0015) : L'OCTROI PAR LA CARRIERE NORSCAN MERCENARY RESTE BLOQUE.
+Correctif `_*` fait et valide le 18/09/2026 (CONTEXT.md 2.80) pour l'ajout manuel au
+catalogue, mais sa reference de carriere `RULES-T0161/NATIO-T0015_*` passe par la syntaxe `/`
+non decoupee par winpersonnage.pas/wincreation.pas (voir l'entree plus bas sur ce gap) - a
+traiter en meme temps que ce gap general.
 
 CRAFTSMAN/MASTER TRADESMAN "(as Trade)" (RULEBOOK V5) N'A PAS DE RESOLUTION DYNAMIQUE. Ecrit
 le 14/09/2026 (§2.70) avec l'id generique RULES-T0032_*/RULES-T0086_* et un commentaire XML
