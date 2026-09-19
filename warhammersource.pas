@@ -16,7 +16,7 @@ uses
   WinPersonnage, ChargeAttributAugmentation, ChargeCompetenceAugmentation,
   ChargeArme, WinWeapon, WinEquipement, ChargeArmeBonus, ChargeMetierEquipement, ChargeArmure,
   ChargeArmureBonus, ChargeArmureBonusTalent, WinArmor, ChargeTrapping, ChargeSort, WinSpell, ChargeTexte,
-  ChargeFabrication, Unitcalcul, ChargeMetierSousMetier,
+  ChargeFabrication, WinMutationCatalogue, Unitcalcul, ChargeMetierSousMetier,
   ChargeMetierRaceChoixMetier, ChargePersonnage, ChargeRaceCreation,
   ChargeTraduction, ChargeArmureSimplifie, ChargeLivre,
   ChargeTalentEffet, ChargeTalentCompetenceModif,
@@ -34,19 +34,13 @@ type
   { TMenu }
 
   TMenu = class(TForm)
-    BoutonArme: TImage;
-    BoutonArmure: TImage;
     BoutonCompetence: TImage;
     BoutonMetier: TImage;
     BoutonRace: TImage;
-    BoutonSort: TImage;
     BoutonTalent: TImage;
     Button1: TButton;
     Button2: TButton;
     Button3: TButton;
-    ButtonArme: TBCButton;
-    ButtonArmure: TBCButton;
-    ButtonEquipement: TBCButton;
     ButtonCompetence: TBCButton;
     ButtonCreation: TBCButton;
     ButtonOuvrirLivre: TBCButton;
@@ -57,7 +51,7 @@ type
     ButtonMetier: TBCButton;
     ButtonModification: TBCButton;
     ButtonRace: TBCButton;
-    ButtonSort: TBCButton;
+    TabBibliotheque: TStringGrid;   // creee dans FormCreate (Arme, Armure, Equipement, Sort...)
     ButtonTalent: TBCButton;
     ComboBoxLangue: TComboBox;
     ComboBoxVersion: TComboBox;
@@ -71,21 +65,15 @@ type
     Panel2: TPanel;
     Panel3: TPanel;
     TabLivre: TStringGrid;
-    TotLivreArmure: TEdit;
-    TotLivreSort: TEdit;
     TotLivreCompetence: TEdit;
     TotLivreTalent: TEdit;
     TotLivreRace: TEdit;
     Logo1: TImage;
     Logo2: TImage;
     TotLivreMetier: TEdit;
-    TotLivreArme: TEdit;
     Panel1: TPanel;
     TabPersonnage: TStringGrid;
-    procedure BoutonArmeClick({%H-}Sender: TObject);
-    procedure BoutonArmureClick({%H-}Sender: TObject);
     procedure BoutonCompetenceClick({%H-}Sender: TObject);
-    procedure BoutonSortClick({%H-}Sender: TObject);
     procedure BoutonTalentClick({%H-}Sender: TObject);
     procedure ButtonArmureClick({%H-}Sender: TObject);
     procedure ButtonArmeClick({%H-}Sender: TObject);
@@ -115,6 +103,8 @@ type
     Procedure ChargeIni();
     procedure ChargerLivre(ForceMaJ: Boolean; ForceLivre: String);
     procedure TabLivreDblClick({%H-}Sender: TObject);
+    procedure TabBibliothequeDblClick({%H-}Sender: TObject);
+    procedure RemplirTabBibliotheque();
     procedure TabLivreMouseMove({%H-}Sender: TObject; {%H-}Shift: TShiftState; X, Y: Integer);
     procedure SauveIni();
     procedure TabPersonnagePrepareCanvas(Sender: TObject; {%H-}aCol, aRow: Integer;
@@ -197,12 +187,6 @@ procedure TMenu.ChargerImage();
          BoutonCompetence.Picture.LoadFromFile(GetCurrentDir+ConstCheminBoutonCompetence);
     if FileExists(GetCurrentDir+ConstCheminBoutonTalent) then
          BoutonTalent.Picture.LoadFromFile(GetCurrentDir+ConstCheminBoutonTalent);
-    if FileExists(GetCurrentDir+ConstCheminBoutonArme) then
-         BoutonArme.Picture.LoadFromFile(GetCurrentDir+ConstCheminBoutonArme);
-    if FileExists(GetCurrentDir+ConstCheminBoutonArmure) then
-         BoutonArmure.Picture.LoadFromFile(GetCurrentDir+ConstCheminBoutonArmure);
-    if FileExists(GetCurrentDir+ConstCheminBoutonSort) then
-         BoutonSort.Picture.LoadFromFile(GetCurrentDir+ConstCheminBoutonSort);
     if FileExists(GetCurrentDir+ConstCheminBack) then
        begin
          Bmp := TBGRABitmap.Create(GetCurrentDir+ConstCheminBack);
@@ -893,9 +877,7 @@ Procedure TMenu.RafraichirLibellesMenu();
     ButtonTalent.Caption        := GetTexteLibelle('RULES-LAB_007');
     ButtonMetier.Caption        := GetTexteLibelle('RULES-LAB_006');
     ButtonRace.Caption          := GetTexteLibelle('RULES-LAB_042');
-    ButtonArme.Caption          := GetTexteLibelle('RULES-LAB_063');
-    ButtonArmure.Caption        := GetTexteLibelle('RULES-LAB_065');
-    ButtonSort.Caption          := GetTexteLibelle('RULES-LAB_083');
+    RemplirTabBibliotheque();
 
     Label2.Caption              := GetTexteLibelle('RULES-LAB_081');
     ButtonCreation.Caption      := GetTexteLibelle('RULES-LAB_079');
@@ -1127,6 +1109,14 @@ procedure TMenu.ChargerLivre(ForceMaJ: Boolean; ForceLivre: String);
         NbArmureBonusModificateur   := 0;
         NbCorruptionModificateur    := 0;
         NbRaceOpinion               := 0;
+        NbTrapping                  := 0;
+        NbTrait                     := 0;
+        NbTraitOption               := 0;
+        NbSortTalent                := 0;
+        NbCareerBonus               := 0;
+        NbCareerBonusNiveau         := 0;
+        NbCareerBonusModificateur   := 0;
+        NbCareerBonusSpecialRule    := 0;
 
         // vider les données
         ListRace.Clear;
@@ -1257,12 +1247,7 @@ procedure TMenu.ChargerLivre(ForceMaJ: Boolean; ForceLivre: String);
     TotLivreCompetence.Alignment := TaCenter;
     TotLivreTalent.Text          := IntToStr(NbTalentUnique);
     TotLivreTalent.Alignment     := TaCenter;
-    TotLivreArme.Text            := IntToStr(NbArme);
-    TotLivreArme.Alignment       := TaCenter;
-    TotLivreArmure.Text          := IntToStr(NbArmure);
-    TotLivreArmure.Alignment     := TaCenter;
-    TotLivreSort.Text            := IntToStr(NbSort);
-    TotLivreSort.Alignment       := TaCenter;
+    RemplirTabBibliotheque();
 
     Traduit(ValLangue, '');
   end;
@@ -1295,6 +1280,43 @@ begin
       TabLivre.Hint := Texte;
       Application.CancelHint;
     end;
+end;
+
+procedure TMenu.RemplirTabBibliotheque();
+  // Tableau des categories secondaires de la Bibliotheque (Arme, Armure, Equipement, Sort) :
+  // remplace les lignes bouton + total + image. Pour ajouter une categorie : une ligne ici
+  // et son ouverture dans TabBibliothequeDblClick (l'ordre des lignes est le meme).
+  procedure Ligne(Ind: Integer; Libelle: String; Nb: Integer);
+    begin
+      TabBibliotheque.Cells[0, Ind] := Libelle;
+      TabBibliotheque.Cells[1, Ind] := IntToStr(Nb);
+    end;
+begin
+  if TabBibliotheque = nil then
+    exit;
+  TabBibliotheque.RowCount := 6;
+  TabBibliotheque.Cells[0, 0] := GetTexteLibelle('RULES-LAB_014');
+  TabBibliotheque.Cells[1, 0] := GetTexteLibelle('RULES-LAB_021');
+  Ligne(1, GetTexteLibelle('RULES-LAB_063'), NbArme);
+  Ligne(2, GetTexteLibelle('RULES-LAB_065'), NbArmure);
+  Ligne(3, GetTexteLibelle('RULES-LAB_202'), NbTrapping);
+  Ligne(4, GetTexteLibelle('RULES-LAB_083'), NbSort);
+  Ligne(5, GetTexteLibelle('RULES-LAB_172'), ListCorruptionTable.Count);
+end;
+
+procedure TMenu.TabBibliothequeDblClick(Sender: TObject);
+begin
+  case TabBibliotheque.Row of
+    1: ButtonArmeClick(Sender);
+    2: ButtonArmureClick(Sender);
+    3: ButtonEquipementClick(Sender);
+    4: ButtonSortClick(Sender);
+    5: begin
+         WinMutationCat          := TWinMutationCatalogue.Create(Application);
+         WinMutationCat.Position := poOwnerFormCenter;
+         WinMutationCat.Show;
+       end;
+  end;
 end;
 
 procedure TMenu.TabLivreDblClick(Sender: TObject);
@@ -1525,6 +1547,23 @@ procedure TMenu.FormCreate(Sender: TObject);
        TabLivre.ColCount         := 1;
        TabLivre.RowCount         := 1;
        TabLivre.ColWidths[0]     := 20;
+       // Grille des categories secondaires (creee ici, sous les quatre boutons principaux)
+       if TabBibliotheque = nil then
+         begin
+           TabBibliotheque              := TStringGrid.Create(Self);
+           TabBibliotheque.Parent       := Self;
+           TabBibliotheque.SetBounds(ButtonRace.Left, 564, ButtonRace.Width + 160,
+                                     Button1.Top + Button1.Height - 564 - 16);
+           TabBibliotheque.Anchors      := [akLeft];   // position et hauteur recalculees dans AjustePositionFenetre
+           TabBibliotheque.ColCount     := 2;
+           TabBibliotheque.FixedCols    := 0;
+           TabBibliotheque.FixedRows    := 1;
+           TabBibliotheque.ColWidths[0] := TabBibliotheque.Width - 90;
+           TabBibliotheque.ColWidths[1] := 60;
+           TabBibliotheque.Options      := TabBibliotheque.Options - [goRangeSelect] + [goRowSelect];
+           TabBibliotheque.ScrollBars   := ssAutoVertical;
+           TabBibliotheque.OnDblClick   := @TabBibliothequeDblClick;
+         end;
        ColLivreSel := GridAjouteColonne(TabLivre, 'S', 20, taCenter);
        ColLivreLib := GridAjouteColonne(TabLivre, GetTexteLibelle('RULES-LAB_014'), 230);
        ColLivreCod := GridAjouteColonne(TabLivre, '');
@@ -1615,9 +1654,6 @@ procedure TMenu.FormCreate(Sender: TObject);
        ButtonTalent.Caption        := GetTexteLibelle('RULES-LAB_007');
        ButtonMetier.Caption        := GetTexteLibelle('RULES-LAB_006');
        ButtonRace.Caption          := GetTexteLibelle('RULES-LAB_042');
-       ButtonArme.Caption          := GetTexteLibelle('RULES-LAB_063');
-       ButtonArmure.Caption        := GetTexteLibelle('RULES-LAB_065');
-       ButtonSort.Caption          := GetTexteLibelle('RULES-LAB_083');
 
        Label2.Caption              := GetTexteLibelle('RULES-LAB_081');
        ButtonCreation.Caption      := GetTexteLibelle('RULES-LAB_079');
@@ -1750,29 +1786,28 @@ procedure TMenu.AjustePositionFenetre();
       Button2.Width := Panel2.Left + Panel2.Width;
 
     Label1.Left            := Button1.Left + 184;
+    TabBibliotheque.Left   := Button1.Left + 16;
+    // Meme suivi vertical que les boutons Race..Talent (Anchors [akLeft] seul : ils derivent
+    // avec la hauteur de la fenetre) : le tableau reste a 129 px sous ButtonTalent (564-435
+    // dans le .lfm d'origine) et descend jusqu'a 16 px du bas de la colonne (Button1).
+    TabBibliotheque.Top    := ButtonTalent.Top + 129;
+    TabBibliotheque.Height := (Button1.Top + Button1.Height - 16) - TabBibliotheque.Top;
+    if TabBibliotheque.Height < 120 then
+      TabBibliotheque.Height := 120;
     ButtonRace.Left        := Button1.Left + 16;
     ButtonMetier.Left      := Button1.Left + 16;
     ButtonCompetence.Left  := Button1.Left + 16;
     ButtonTalent.Left      := Button1.Left + 16;
-    ButtonArme.Left        := Button1.Left + 16;
-    ButtonArmure.Left      := Button1.Left + 16;
-    ButtonSort.Left        := Button1.Left + 16;
 
     TotLivreRace.Left       := Button1.Left + 64;
     TotLivreMetier.Left     := Button1.Left + 64;
     TotLivreCompetence.Left := Button1.Left + 64;
     TotLivreTalent.Left     := Button1.Left + 64;
-    TotLivreArme.Left       := Button1.Left + 64;
-    TotLivreArmure.Left     := Button1.Left + 64;
-    TotLivreSort.Left       := Button1.Left + 64;
 
     BoutonRace.Left        := Button1.Left + 184;
     BoutonMetier.Left      := Button1.Left + 184;
     BoutonCompetence.Left  := Button1.Left + 184;
     BoutonTalent.Left      := Button1.Left + 184;
-    BoutonArme.Left        := Button1.Left + 184;
-    BoutonArmure.Left      := Button1.Left + 184;
-    BoutonSort.Left        := Button1.Left + 184;
   end;
 
 procedure TMenu.ButtonCompetenceClick(Sender: TObject);
@@ -1842,27 +1877,6 @@ begin
   FenCompetence          := TWinCompetence.Create(Application);
   FenCompetence.Position := poOwnerFormCenter;
   FenCompetence.Show;
-end;
-
-procedure TMenu.BoutonSortClick(Sender: TObject);
-begin
-  FenSort          := TWinSpells.Create(Application);
-  FenSort.Position := poOwnerFormCenter;
-  FenSort.Show;
-end;
-
-procedure TMenu.BoutonArmeClick(Sender: TObject);
-begin
-  FenArme          := TWinWeapons.Create(Application);
-  FenArme.Position := poOwnerFormCenter;
-  FenArme.Show;
-end;
-
-procedure TMenu.BoutonArmureClick(Sender: TObject);
-begin
-  FenArmure          := TWinArmors.Create(Application);
-  FenArmure.Position := poOwnerFormCenter;
-  FenArmure.Show;
 end;
 
 procedure TMenu.BoutonTalentClick(Sender: TObject);
