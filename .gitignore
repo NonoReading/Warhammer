@@ -24,3 +24,5 @@ LIVRES/
 CAMPAGNE/
 SAVED_CARACTERS/
 PDF_TEXTE/
+# session IDE Lazarus
+*.lps
