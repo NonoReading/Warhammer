@@ -23,14 +23,6 @@ RULES-ARMO_01/02/03 (Buckler/Shield/Large Shield, BOOK_RULESBOOK.Xml V5) n'ont p
 preciser de materiau (releve le 14/09/2026 en testant WinArmor). Nono choisit de laisser sans
 materiau plutot que d'en inventer un.
 
-LE CHOIX D'EQUIPEMENT "/" NE PORTE QU'UNE SEULE QUANTITE POUR TOUT L'ITEM, PAS UNE PAR
-BRANCHE. Vu le 14/09/2026 en reprenant l'audit C (CONTEXT.md suite 8). "2 Bolas or Crossbow
-with 10 Bolts or Lasso" et "Crossbow with 10 Bolts or Pistol with 10 Shots or 5 Throwing
-Knives" (BOOK_RULESBOOK.Xml V5) ont une quantite differente selon la branche choisie ;
-GetListeEquipement (chargemetierequipement.pas:48) ne porte qu'un seul attribut quantite
-pour tout l'<Item>. Resoudre proprement demande d'etendre le mecanisme, pas juste saisir de
-la donnee - laisse en texte libre en attendant.
-
 PLUSIEURS NOMS ANGLAIS DE CARRIERE DESIGNENT DEUX OBJETS CATALOGUE DIFFERENTS SELON LE
 CONTEXTE. Releve le 14/09/2026 en rattachant l'audit C (CONTEXT.md suite 8) : "Net" existe
 en arme de melee (RULES-COMB_BASE_05) ET en filet lance (RULES-PROJ_ENTRAV_03) ; "Buckler"

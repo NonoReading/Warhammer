@@ -917,7 +917,7 @@ procedure TWinCreations.ChargerImage();
   // 7 - EQUIPEMENT DE METIER
     // Mise en forme dy tableau de choix des équipement de métier
     TabMetierEquipement.Options          := TabMetierEquipement.Options + [goEditing, goAlwaysShowEditor];
-    TabMetierEquipement.ColCount         := 7;
+    TabMetierEquipement.ColCount         := 8;
     TabMetierEquipement.RowCount         := 1;
     TabMetierEquipement.ColWidths[0]     := 30;
     TabMetierEquipement.Cells[1, 0]      := GetTexteLibelle('RULES-LAB_001');
@@ -932,6 +932,10 @@ procedure TWinCreations.ChargerImage();
     TabMetierEquipement.ColWidths[5]     := 0;
     TabMetierEquipement.Cells[6, 0]      := '';
     TabMetierEquipement.ColWidths[6]     := 0;
+    // Col 7, cachee : pour une ligne "au choix", une quantite par code de la col 3 (memes
+    // rangs, separees par ','), lue au double-clic pour poser la col 5.
+    TabMetierEquipement.Cells[7, 0]      := '';
+    TabMetierEquipement.ColWidths[7]     := 0;
 
   end;
 
@@ -1537,6 +1541,11 @@ procedure TWinCreations.TabMetierCompetenceDblClick(Sender: TObject);
   end;
 
 procedure TWinCreations.TabMetierEquipementDblClick(Sender: TObject);
+var
+  Codes:           TStringList;
+  Quantites:       TStringList;
+  IndChoix:        Integer;
+  QuantiteChoisie: Integer;
 begin
   if TabMetierEquipement.Cells[2, TabMetierEquipement.Row] = ConstArbreAuChoix then
     begin
@@ -1548,8 +1557,27 @@ begin
       if SelectWinEquipement <> '' then
         begin
           TabMetierEquipement.Cells[1, TabMetierEquipement.Row] := SelectWinEquipement;
-          TabMetierEquipement.Cells[2, TabMetierEquipement.Row] := SelWinLibelle;
+          // Quantite de la branche retenue : meme rang dans la col 7 que le code dans la col 3.
+          // Sans correspondance (ou sans quantite par branche), on garde celle de l'item.
+          QuantiteChoisie := StrToIntDef(TabMetierEquipement.Cells[5, TabMetierEquipement.Row], 1);
+          if TabMetierEquipement.Cells[7, TabMetierEquipement.Row] <> '' then
+            begin
+              Codes      := TStringList.Create;
+              Quantites  := TStringList.Create;
+              try
+                ExtractStrings([','], [], PChar(TabMetierEquipement.Cells[3, TabMetierEquipement.Row]), Codes);
+                ExtractStrings([','], [], PChar(TabMetierEquipement.Cells[7, TabMetierEquipement.Row]), Quantites);
+                IndChoix := Codes.IndexOf(SelectWinEquipement);
+                if (IndChoix >= 0) and (IndChoix < Quantites.Count) then
+                  QuantiteChoisie := StrToIntDef(Quantites[IndChoix], 1);
+              finally
+                Codes.Free;
+                Quantites.Free;
+              end;
+            end;
+          TabMetierEquipement.Cells[2, TabMetierEquipement.Row] := SelWinLibelle + QuantiteSuffixe(QuantiteChoisie);
           TabMetierEquipement.Cells[4, TabMetierEquipement.Row] := '';
+          TabMetierEquipement.Cells[5, TabMetierEquipement.Row] := IntToStr(QuantiteChoisie);
           TabMetierEquipement.Cells[6, TabMetierEquipement.Row] := SelWinType;
         end;
     end;
@@ -2261,6 +2289,7 @@ var
   PArmure:            StructureArmure;
   PTrapping:          StructureTrapping;
   ListeCode:          String;
+  ListeQuantites:     String;
   Code:               String;
   Lib:                String;
   Typ:                String;
@@ -2415,12 +2444,16 @@ begin
              end
            else
              begin
-               ListeCode                    := GetListeEquipement(PMetierEquipement.Equipement, PMetierEquipement.TypeEquipement);
+               ListeCode                    := GetListeEquipement(PMetierEquipement.Equipement, PMetierEquipement.TypeEquipement, PMetierEquipement.QuantiteListe, ListeQuantites);
 
                if Pos(',',ListeCode) > 0 then
                  begin
                    TabMetierEquipement.Cells[2, NbMetierEquipementTab]   := ConstArbreAuchoix;
                    TabMetierEquipement.Cells[3, NbMetierEquipementTab]   := ListeCode;
+                   TabMetierEquipement.Cells[7, NbMetierEquipementTab]   := ListeQuantites;
+                   // Quantite de l'item entier (col 5) tant qu'aucune branche n'est choisie ;
+                   // le double-clic la remplace par celle de la branche retenue.
+                   TabMetierEquipement.Cells[5, NbMetierEquipementTab]   := IntToStr(PMetierEquipement.Quantite);
                  end
                else
                  begin

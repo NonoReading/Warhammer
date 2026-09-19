@@ -9,12 +9,7 @@ Gods/Martial Artist + crash double-clic sur libellé de choix multiple, clos), �
 "Aucune modification apportée" remplacé par une vraie comparaison XML à la sauvegarde, clos),
 §2.82 (choix de sort d'un talent à choix déplacé dans le tableau de talents, résolvant
 l'impasse `AjoutMineur`, clos).
-
-**Prochaine étape** : deux corrections courtes ouvertes dans `A FAIRE.txt` (section
-CORRECTIONS COURTES) - (1) la vérification "nom de personnage déjà pris" (`wincreation.pas`
-~1786) teste le mauvais chemin et ne se déclenche quasiment jamais ; (2) le choix
-d'équipement à `/` ne porte qu'une seule quantité pour tout l'item, pas une par branche.
-Aucune des deux n'a été commencée.
+**Prochaine étape** : plus de correction courte ouverte dans `A FAIRE.txt` pour l'instant. Le 19/09/2026 : (1) vérification "nom de personnage déjà pris" corrigée (chemin `ConstCheminPersonnage`) ; (2) quantité par branche d'un choix d'équipement `/` livrée (attribut `quantite="2/1/1"`, liste alignée sur les branches, `QuantiteListe` dans `StructureMetierEquipement`, `GetListeEquipement` renvoie aussi les quantités par code, double-clic de `wincreation.pas` pose la quantité de la branche choisie, arbre et grille de `winlivre.pas` l'affichent) - testé en jeu sur Bounty Hunter, validé. Limites connues, voulues : le passage de niveau V4 (`winpersonnage.pas`) ne porte aucune quantité (le matériel n'est plus acquis automatiquement en V4) et l'arbre de `winmetier.pas` n'affiche pas la quantité par branche. Les munitions "with 10 Bolts/Shots" restent abandonnées (arme nue, décision du 14/09).
 
 ---
 

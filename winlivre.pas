@@ -1276,8 +1276,10 @@ begin
         Choix.StrictDelimiter := True;
         Choix.DelimitedText   := NomItem;
 
+        // quantite="2/1/1" : une quantite par branche (CONTEXT.md, equipement a choix)
         for J := 0 to Choix.Count - 1 do
-          AjouterFeuilleEquipement(Choix[J], NodeChoix);
+          AjouterFeuilleEquipement(Choix[J], NodeChoix,
+            QuantiteDeBranche(TDOMElement(Elements.Item[I]).GetAttribute('quantite'), J));
       finally
         Choix.Free;
       end;
@@ -2744,7 +2746,8 @@ begin
         begin
           if ColLib <> '' then
             ColLib := ColLib + ' ' + SeparateurMulti + ' ';
-          ColLib := ColLib + LibelleEquipement(Choix[J], TypeEquip);
+          ColLib := ColLib + LibelleEquipement(Choix[J], TypeEquip) +
+            QuantiteSuffixe(QuantiteDeBranche(TDOMElement(Elements.Item[I]).GetAttribute('quantite'), J));
         end;
       finally
         Choix.Free;

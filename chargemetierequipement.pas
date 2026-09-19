@@ -16,6 +16,10 @@ Type
     TypeEquipement:         String;
     Livre:                  String;
     Quantite:               Integer;
+    // Quantites par branche d'un choix "A/B/C", texte brut du livre aligne sur les branches
+    // ("2/1/1"). Vide = pas de quantite par branche : Quantite vaut alors pour tout l'item.
+    // Quand il est renseigne, Quantite reste a 1 et ne doit plus etre lu.
+    QuantiteListe:          String;
   end;
 
   TListMetierEquipement = specialize TList<StructureMetierEquipement>;
@@ -25,11 +29,22 @@ Var
   NbMetierEquipement:   Integer;
 
 function GetListeEquipement(ListeCodes: String; ListeTypes: String):String;
+function GetListeEquipement(ListeCodes: String; ListeTypes: String; QuantiteListe: String; out ListeQuantites: String):String;
 function QuantiteSuffixe(Quantite: Integer): String;
+function QuantiteDeBranche(QuantiteListe: String; Branche: Integer): Integer;
 
 implementation
 
 function GetListeEquipement(ListeCodes: String; ListeTypes: String):String;
+  var
+    Ignore: String;
+  begin
+    Result := GetListeEquipement(ListeCodes, ListeTypes, '', Ignore);
+  end;
+
+// ListeQuantites : une quantite par code de Result, dans le meme ordre, separees par ','.
+// Un code generique developpe en plusieurs armes donne la quantite de SA branche a chacune.
+function GetListeEquipement(ListeCodes: String; ListeTypes: String; QuantiteListe: String; out ListeQuantites: String):String;
   var
     PArme:              StructureArme;
     PArmure:            StructureArmure;
@@ -41,6 +56,7 @@ function GetListeEquipement(ListeCodes: String; ListeTypes: String):String;
     ListeRes:           String;
     Lib:                String;
     Debut:              String;
+    NbCodes:            Integer;
   begin
     stringsI                := TStringList.Create;
     stringsT                := TStringList.Create;
@@ -48,12 +64,15 @@ function GetListeEquipement(ListeCodes: String; ListeTypes: String):String;
     ExtractStrings([SeparateurMulti], [], PChar(ListeCodes), stringsI);
     ExtractStrings([SeparateurMulti], [], PChar(ListeTypes), stringsT);
 
-    ListeRes := '';
+    ListeRes       := '';
+    ListeQuantites := '';
     For IndL := 0 to stringsI.count-1 do
       Begin
         Lib := '';
         if ListeRes <> '' then
           ListeRes := ListeRes + ',';
+        if ListeQuantites <> '' then
+          ListeQuantites := ListeQuantites + ',';
 
         if pos(EquipementQualite, StringsT[IndL]) > 0 then
           begin
@@ -100,11 +119,43 @@ function GetListeEquipement(ListeCodes: String; ListeTypes: String):String;
            end;
 
          ListeRes := ListeRes + Lib;
+
+         // un code par morceau separe par ',' (vide compte pour un) : meme decompte cote quantites
+         For NbCodes := 0 to Length(Lib) - Length(StringReplace(Lib, ',', '', [rfReplaceAll])) do
+           begin
+             if NbCodes > 0 then
+               ListeQuantites := ListeQuantites + ',';
+             ListeQuantites := ListeQuantites + IntToStr(QuantiteDeBranche(QuantiteListe, IndL));
+           end;
       end;
     stringsI.Free;
     stringsT.Free;
 
     Result := ListeRes;
+  end;
+
+// Quantite de la branche numero Branche (base 0) d'un choix. Une liste sans SeparateurMulti est
+// une quantite unique, valable pour toutes les branches ; vide ou hors limites = 1.
+function QuantiteDeBranche(QuantiteListe: String; Branche: Integer): Integer;
+  var
+    Morceaux: TStringList;
+  begin
+    Result := 1;
+    if QuantiteListe = '' then
+      exit;
+    if Pos(SeparateurMulti, QuantiteListe) = 0 then
+      Result := StrToIntDef(Trim(QuantiteListe), 1)
+    else
+      begin
+        Morceaux := TStringList.Create;
+        try
+          ExtractStrings([SeparateurMulti], [], PChar(QuantiteListe), Morceaux);
+          if (Branche >= 0) and (Branche < Morceaux.Count) then
+            Result := StrToIntDef(Trim(Morceaux[Branche]), 1);
+        finally
+          Morceaux.Free;
+        end;
+      end;
   end;
 
 // Suffixe affiche a cote du libelle d'un equipement de metier quand le livre en donne

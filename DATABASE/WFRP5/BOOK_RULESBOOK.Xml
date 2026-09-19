@@ -8305,7 +8305,7 @@ The life of a Bounty Hunter is one of constant adventure. Their work carries the
 <Item name="RULES-COMB_BASE_03">"1"</Item>
 <Item name="RULES-ARMO_06">"1"</Item>
 <Item name="RULES-TRAP_29">"1"</Item>
-<Item name="2 Bolas or Crossbow with 10 Bolts or Lasso">"2"</Item>
+<Item name="RULES-PROJ_ENTRAV_01/RULES-PROJ_ARB_01/RULES-PROJ_ENTRAV_02" quantite="2/1/1">"2"</Item>
 <Item name="Leather Skullcap">"2"</Item>
 <Item name="RULES-TRAP_102">"2"</Item>
 <Item name="RULES-PROJ_ENTRAV_03">"2"</Item>
@@ -9879,7 +9879,7 @@ A Protagonist's career is rarely a long one. Sooner or later, someone stronger, 
 <Item name="RULES-TRAP_150">"2"</Item>
 <Item name="RULES-ARMO_02">"2"</Item>
 <Item name="RULES-TRAP_048">"3"</Item>
-<Item name="Crossbow with 10 Bolts or Pistol with 10 Shots or 5 Throwing Knives">"3"</Item>
+<Item name="RULES-PROJ_ARB_01/RULES-PROJ_POUDRE_03/RULES-PROJ_LANC_04" quantite="1/1/5">"3"</Item>
 <Item name="Garotte">"3"</Item>
 <Item name="Poison">"3"</Item>
 <Item name="RULES-TRAP_091">"4"</Item>
