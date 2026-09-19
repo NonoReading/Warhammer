@@ -5672,7 +5672,7 @@ Artisans work at all levels of society not just producing goods, but also repair
 <Item name="apprentice">"3"</Item>
 <Item name="RULES-TRAP_102">"3"</Item>
 <Item name="guild">"4"</Item>
-<Item name="clothing(Q)">"4"</Item>
+<Item name="RULES-TRAP_017 (Q)">"4"</Item>
 </SUBCHAPTER_ITEM>
 </Career>
 <Career id="RULES-WORK04">
@@ -5922,7 +5922,7 @@ Some magistrates are lay-members of the cult of Verena, seeking guidance and wis
 <Item name="RULES-ARMO_14">"3"</Item>
 <Item name="Bailli">"3"</Item>
 <Item name="library (Law)">"4"</Item>
-<Item name="robes (Q)">"4"</Item>
+<Item name="RULES-TRAP_029 (Q)">"4"</Item>
 <Item name="seal of office">"4"</Item>
 </SUBCHAPTER_ITEM>
 </Career>
@@ -10263,7 +10263,7 @@ Only a few towns and cities have professional Watchmen paid to understand and up
 <Item name="rank symbol">"3"</Item>
 <Item name="RULES-TRAP_116">"4"</Item>
 <Item name="RULES-TRAP_119">"4"</Item>
-<Item name="hat(Q)">"4"</Item>
+<Item name="RULES-TRAP_023 (Q)">"4"</Item>
 <Item name="RULES-COMB_BASE_*(Q)">"4"</Item>
 <Item name="rank symbol(Q)">"4"</Item>
 </SUBCHAPTER_ITEM>
@@ -11291,7 +11291,7 @@ Road Wardens protect travellers from the bandits, Greenskins, Beastmen and other
 <Item name="RULES-TRAP_112">"4"</Item>
 <Item name="RULES-PROJ_POUDRE_04">"4"</Item>
 <Item name="RULES-MUNI_06">"4"</Item>
-<Item name="hat(Q)">"4"</Item>
+<Item name="RULES-TRAP_023 (Q)">"4"</Item>
 <Item name="cape(Q)">"4"</Item>
 <Item name="Road Patrol unit">"4"</Item>
 </SUBCHAPTER_ITEM>
@@ -11548,7 +11548,7 @@ Priests tend to congregations of the faithful throughout the Old World. While ma
 <Item name="RULES-TRAP_029">"1"</Item>
 <Item name="RULES-TRAP_095">"2"</Item>
 <Item name="ceremonial robes">"2"</Item>
-<Item name="robe(Q)">"3"</Item>
+<Item name="RULES-TRAP_029 (Q)">"3"</Item>
 <Item name="religious relic">"3"</Item>
 <Item name="subordinate priests">"3"</Item>
 <Item name="temple">"3"</Item>
@@ -11806,7 +11806,7 @@ Racketeers extort money from law-abiding citizens and merchants, providing ‘pr
 <Item name="Junior Gang Leaders">"4"</Item>
 <Item name="Informant Network">"4"</Item>
 <Item name="Clothes(Q)">"4"</Item>
-<Item name="Hat(Q)">"4"</Item>
+<Item name="RULES-TRAP_023 (Q)">"4"</Item>
 </SUBCHAPTER_ITEM>
 </Career>
 <Career id="RULES-WORK52">
@@ -12182,7 +12182,7 @@ There are few so feared and respected as the Witch Hunter, and they are given ex
 <Item name="RULES-TRAP_119">"2"</Item>
 <Item name="RULES-TRAP_150">"2"</Item>
 <Item name="RULES-COMB_BASE_04">"2"</Item>
-<Item name="clothing(Q)">"3"</Item>
+<Item name="RULES-TRAP_017 (Q)">"3"</Item>
 <Item name="Subordinate Interrogators">"3"</Item>
 <Item name="luxurious costume (Q)">"4"</Item>
 <Item name="subordinate witch hunters.">"4"</Item>
@@ -12567,7 +12567,7 @@ By the command of Emperor Magnus the Pious after the Great War Against Chaos, al
 <Item name="RULES-TRAP_099">"4"</Item>
 <Item name="mission orders">"4"</Item>
 <Item name="unit of soldiers">"4"</Item>
-<Item name="uniform (Q)">"4"</Item>
+<Item name="RULES-TRAP_034 (Q)">"4"</Item>
 <Item name="rank symbol">"4"</Item>
 </SUBCHAPTER_ITEM>
 </Career>

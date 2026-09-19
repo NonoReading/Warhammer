@@ -12,6 +12,7 @@ qualite a preserver), "tools of the profession (...)", objets absents du catalog
 leather doublet, cape, handcuffs, livery...). Les non-objets (argent, biens "worth", batiments, reseaux) restent
 en texte comme Hawk Mews en V5. A tester en jeu : chargement V4, "&amp;" (Wine & Spirits, Pestle & Mortar),
 libelle LIMITED affiche "Scarce".
+[19/09/2026] VARIANTES (Q) DES EQUIPEMENTS V4 : 8 lignes rattachees avec le suffixe (Q) colle au code (RULES-TRAP_017/023/029/034 (Q) = Clothing/Hat/Robes/Uniform), comme pour les armes et armures. DECISION DE NONO : garder (Q) pour l instant, mais A REVOIR pour un systeme different (idee : (Q) = choix de qualite a la creation, remplace par la qualite choisie parmi DATA_CRAFTMANSHIP ; cf. CONTEXT.md 2.77 suite 4, chantier equipement/avancements en pause). Non rattaches : clothes(Q), cape(Q), luxurious costume (Q), elegant clothes (Q)... (a trancher au cas par cas).
 
 =========================================================================
 [AJOUT LE 19/09/2026] ANCRAGE PROPORTIONNEL : LES AUTRES FENETRES NE L ONT PAS. Fait et valide sur les
