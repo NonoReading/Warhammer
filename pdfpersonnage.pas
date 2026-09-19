@@ -2995,12 +2995,39 @@ Procedure PdfBlocSortsDonnees(PdfPage: TPDFPage; Personnage: StructurePersonnage
 Function PdfDiversLibelle(PersonnageEquipement: StructurePersonnageEquipement): String;
   var
     PTrapping: StructureTrapping;
+    Morceaux:  TStringList;
+    Ind:       Integer;
+    Code:      String;
+    Qualites:  String;
   begin
     PTrapping := ChercheTrapping(PersonnageEquipement.CodeEquipement);
     if PTrapping.CodeTrapping <> '' then
       Result := PTrapping.Libelle
     else
       Result := PersonnageEquipement.CodeEquipement;
+    // Qualite (fabrication) entre parentheses ; le marqueur "qualite a ajouter" reste (Q), la colonne est etroite
+    if (PersonnageEquipement.QualiteEquipement <> '') and not InList(PersonnageEquipement.QualiteEquipement, ',0') then
+      begin
+        Qualites := '';
+        Morceaux := TStringList.Create;
+        try
+          ExtractStrings([','], [], PChar(PersonnageEquipement.QualiteEquipement), Morceaux);
+          for Ind := 0 to Morceaux.Count - 1 do
+            begin
+              Code := ExtractStringBefore(Trim(Morceaux[Ind]), ' ');
+              if Qualites <> '' then
+                Qualites := Qualites + ',';
+              if Code = CodeQualiteAAjouter then
+                Qualites := Qualites + EquipementQualite
+              else
+                Qualites := Qualites + ChercheFabrication(Code).Libelle;
+            end;
+        finally
+          Morceaux.Free;
+        end;
+        if Qualites <> '' then
+          Result := Result + ' (' + Qualites + ')';
+      end;
     if PersonnageEquipement.Quantite > 1 then
       Result := Result + ' x' + IntToStr(PersonnageEquipement.Quantite);
   end;
