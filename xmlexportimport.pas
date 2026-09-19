@@ -1121,6 +1121,7 @@ Procedure XmlImport(FileName: String; OnlyPrimary: Boolean; OnlyCode: Boolean; C
     PTrapping:                StructureTrapping;
     PArmureBonus:             StructureArmureBonus;
     PArmureBonusModificateur: StructureModificateur;
+    PFabricationModificateur: StructureModificateur;
     PArmureBonusTalent:       StructureArmureBonusTalent;
     PSort:                    StructureSort;
     PSortTalent:              StructureSortTalent;
@@ -3068,6 +3069,24 @@ Procedure XmlImport(FileName: String; OnlyPrimary: Boolean; OnlyCode: Boolean; C
                               PFabrication.QualitesArme  := RemoveQuotes(UTF8Encode(Node.TextContent));
                             ConstXmlPositifNegatif:
                               PFabrication.TypeQualite   := RemoveQuotes(UTF8Encode(Node.TextContent));
+                            // <ModifArmour name="CodeLocalisation">n</ModifArmour> : Points d'Armure par
+                            // niveau de la fabrication (Rune of Stone). Meme convention que les qualites
+                            // d'armure. Pilote du 19/09/2026.
+                            ConstXmlModifieArmure:
+                              begin
+                                PFabricationModificateur.TypeModif  := ConstXmlModifieArmure;
+                                PFabricationModificateur.Cible      := RemoveQuotes(UTF8Encode(Node.Attributes.GetNamedItem(ConstXmlData).NodeValue));
+                                PFabricationModificateur.Filtre     := '';
+                                PFabricationModificateur.Forme      := ConstFormeEffetAdditif;
+                                PFabricationModificateur.Facteur    := StrToIntDef(RemoveQuotes(UTF8Encode(Node.TextContent)), 0);
+                                PFabricationModificateur.CodeSource := PFabrication.CodeFabrication;
+                                PFabricationModificateur.Niveau     := 0;
+                                if LangueDef = ConstAnglais then
+                                  begin
+                                    ListFabricationModificateur.add(PFabricationModificateur);
+                                    inc(NbFabricationModificateur);
+                                  end;
+                              end;
                           end;
                           Node := XmlElement(Node.NextSibling);
                         end;

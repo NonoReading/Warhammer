@@ -5443,3 +5443,21 @@ Fichiers modifies : BOOK_DWARF_PLAYERS_GUIDE.Xml, Log.txt, A FAIRE.txt.
 19/09/2026 - DWARF PLAYERS GUIDE : SUBSTITUTIONS LUSTRIA ET SEA OF CLAWS DES 11 ETHNIES (NON CHARGEES)
 Mecanisme existant DATA_SPECIE_CAREER_CHOICE (le X direct pour RULES-SPECIE_DWARF existait deja dans les deux livres). Lustria : Lawyer->Interpreter (123), Coachman->Trailblazer (126), Pedlar->Survivalist (125), soit 33 entrees. Sea of Claws : Huffer, Wrecker, Boatman->Officer, Riverwoman et Seaman->Sailor, Smuggler et Stevedore->Ship Gunner, soit 77 entrees. Declarees dans Lustria et Sea of Claws (et non dans le livre nain) pour ne jouer que si ces livres sont charges, comme les Norses.
 Fichiers modifies : BOOK LUSTRIA.xml, BOOK_SEA_OF_CLAWS.Xml, Log.txt.
+
+19/09/2026 - DWARF PLAYERS GUIDE : ETHNIES, TABLE P.50 ET SUBSTITUTIONS TESTEES ET VALIDEES PAR NONO
+Les 11 ethnies naines chargent et une substitution (Lustria / Sea of Claws) a pu etre choisie a la creation. Restent : sorts, runes p.127-132, vehicules ; Longbeards p.50 non modelises.
+Fichiers modifies : Log.txt.
+
+19/09/2026 - DWARF PLAYERS GUIDE : 71 RUNES (P.127-132) SAISIES COMME QUALITES DE FABRICATION (NON CHARGEES)
+Les runes ne se lancent pas : elles sont forgees (Forge Rune, test etendu en SL) sur un objet, effet permanent ou active par le porteur ; seules les 3 Doom Runes s activent par un test Hard (-20). Decision Nono : qualites d objet, comme les accessoires de Nations of Mankind (DATA_CRAFTMANSHIP, +Qualite de WinPersonnage). DWARF-RUNE_01 a 71 : armes (16), armures (9), talismans (14), protection (15), ingenierie (13), Doom (3). Max 3 (regle de trois), Max 1 pour maitresses et Doom. Categorie et SL dans le libelle court. Aucune automatisation ; regles de forge (Pride, Jealousy, Form, Runic Flaws) non modelisees.
+Fichiers modifies : BOOK_DWARF_PLAYERS_GUIDE.Xml, Log.txt.
+
+19/09/2026 - RUNES NAINES : PILOTE DES EFFETS SUR LE MOTEUR GENERIQUE, CIBLE PA (RUNE OF STONE) - NON COMPILE
+Les fabrications portent desormais des modificateurs (StructureModificateur, ChargeModificateur) : ListFabricationModificateur (chargefabrication.pas), lue dans DATA_CRAFTMANSHIP par <ModifArmour name="CodeLocalisation">n</ModifArmour> (xmlexportimport.pas), creee/videe dans warhammersource.pas. PersonnageFabricationArmureModif (chargepersonnage.pas) somme, sur les pieces d armure PORTEES, Facteur x niveau ("CODE n" de QualiteEquipement). Branche dans les deux PDF (pdfpersonnage.pas). DWARF-RUNE_23 (Rune of Stone) : +1 PA sur les 4 localisations. A tester : poser 1 a 3 Runes of Stone sur une armure portee, verifier les PA du PDF. Pas d export du modificateur (comme les qualites d armure). Non fait : WinPersonnage, les autres cibles (degats, initiative, competence).
+Fichiers modifies : chargefabrication.pas, xmlexportimport.pas, warhammersource.pas, chargepersonnage.pas, pdfpersonnage.pas, BOOK_DWARF_PLAYERS_GUIDE.Xml, Log.txt.
+
+19/09/2026 - WINFABRICATION : LA GRILLE RECOUVRAIT LE BOUTON OK AVEC UNE LONGUE LISTE
+AdjustGridColumnsWidth recevait la hauteur de la fenetre : avec les 71 runes naines la grille montait jusqu en bas et cachait ButtonOk. Hauteur maximale = ButtonOk.Top. Fichier : winfabrication.pas. A verifier par Nono a la compilation.
+
+19/09/2026 - RUNES NAINES : PILOTE PA VALIDE PAR NONO (RUNE OF STONE = +1 PA PARTOUT) ET BOUTON OK DE WINFABRICATION RETROUVE
+Le moteur generique fonctionne cote fabrication. Prochaines cibles a brancher : degats (Cleaving, Might, Penetrating), initiative (Speed), competence (Striking, Accuracy), caracteristique (Fortitude), blessures (Iron).

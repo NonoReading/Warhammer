@@ -1970,6 +1970,11 @@ Procedure PdfPersonnageCreation(Personnage: StructurePersonnage; BackGround: Boo
     ArmureBras  := ArmureBras  + PersonnageTalentArmureModif(Personnage, BonusBras);
     ArmureCorps := ArmureCorps + PersonnageTalentArmureModif(Personnage, BonusCorps);
     ArmureJambe := ArmureJambe + PersonnageTalentArmureModif(Personnage, BonusJambes);
+    // Qualites de fabrication donnant des Points d'Armure (Rune of Stone, ModifArmour).
+    ArmureTete  := ArmureTete  + PersonnageFabricationArmureModif(Personnage, BonusTete);
+    ArmureBras  := ArmureBras  + PersonnageFabricationArmureModif(Personnage, BonusBras);
+    ArmureCorps := ArmureCorps + PersonnageFabricationArmureModif(Personnage, BonusCorps);
+    ArmureJambe := ArmureJambe + PersonnageFabricationArmureModif(Personnage, BonusJambes);
 
     // Écrire du texte sur la page PDF
     PdfTaillePolice(PdfPage, PdfFontValue, ConstPoliceArial, 6);
@@ -3493,6 +3498,11 @@ Procedure PdfBlocArmuresDonnees(PdfPage: TPDFPage; Personnage: StructurePersonna
     ArmureBras  := ArmureBras  + PersonnageTalentArmureModif(Personnage, BonusBras);
     ArmureCorps := ArmureCorps + PersonnageTalentArmureModif(Personnage, BonusCorps);
     ArmureJambe := ArmureJambe + PersonnageTalentArmureModif(Personnage, BonusJambes);
+    // Qualites de fabrication donnant des Points d'Armure (Rune of Stone, ModifArmour).
+    ArmureTete  := ArmureTete  + PersonnageFabricationArmureModif(Personnage, BonusTete);
+    ArmureBras  := ArmureBras  + PersonnageFabricationArmureModif(Personnage, BonusBras);
+    ArmureCorps := ArmureCorps + PersonnageFabricationArmureModif(Personnage, BonusCorps);
+    ArmureJambe := ArmureJambe + PersonnageFabricationArmureModif(Personnage, BonusJambes);
   end;
 
 Procedure PdfBlocDessinExplication(PdfPage: TPDFPage; XGauche, XDroite, YHaut, YBas, HauteurLigne: Single; ArmureBonii, ArmeBonii, FabricationBonii: String);

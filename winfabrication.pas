@@ -94,7 +94,9 @@ procedure TWinFabrications.FormCreate(Sender: TObject);
        end;
 
      ChoixWinFabrication := SelectWinFabrication;
-     AdjustGridColumnsWidth(TabFabrication, self.Height, false, true);
+     // Hauteur maximale = haut du bouton, pas de la fenetre : avec une longue liste (runes naines,
+     // 19/09/2026) la grille s etirait jusqu en bas et recouvrait ButtonOk.
+     AdjustGridColumnsWidth(TabFabrication, ButtonOk.Top, false, true);
 
      KeyPreview := true;
 end;

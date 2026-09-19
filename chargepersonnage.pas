@@ -350,6 +350,11 @@ Type
   // Practical/Unreliable de la piece (CONTEXT.md 2.59). Meme extraction catalogue+fabrication
   // et meme resolution des alternatives que PersonnageArmureBonusTalent.
   Function PersonnageArmureQualitesPortees(Personnage: StructurePersonnage): TArrayPersonnageArmureQualitePortee;
+  // Moteur generique cote FABRICATION (ChargeFabrication.ListFabricationModificateur) : somme,
+  // sur les pieces d'armure PORTEES, des modificateurs (TypeModif, Cible) declares par leurs
+  // qualites de fabrication (QualiteEquipement, "CODE niveau"), multiplies par le niveau.
+  // Pilote : Rune of Stone (+1 PA par rune). 19/09/2026.
+  Function PersonnageFabricationArmureModif(Personnage: StructurePersonnage; CodeLocalisation: String): Integer;
   // Malus/bonus ARMOB d'une competence, piece PORTEE par piece PORTEE, module par
   // Practical/Unreliable DE LA piece qui le porte (reduit de 10 plancher 0 / double - Rulebook,
   // CONTEXT.md 2.59). Destine a la colonne "avec equipement" du Pdf Feldo2P.
@@ -2029,6 +2034,48 @@ Function PersonnageArmureQualitesPortees(Personnage: StructurePersonnage): TArra
           end;
     finally
       Alternatives.Free;
+      Liste.Free;
+    end;
+  end;
+
+Function PersonnageFabricationArmureModif(Personnage: StructurePersonnage; CodeLocalisation: String): Integer;
+  var
+    PersonnageEquipement: StructurePersonnageEquipement;
+    Liste:                TStringList;
+    Element:              String;
+    Code:                 String;
+    Niveau:               Integer;
+    Ind, IndModif:        Integer;
+  begin
+    Result := 0;
+    Liste  := TStringList.Create;
+    try
+      for PersonnageEquipement in Personnage.Equipement do
+        if PersonnageEquipement.Porte
+           and ((TrimRight(PersonnageEquipement.TypeEquipement) = TrimRight(TypeEquipAR))
+                or (TrimRight(PersonnageEquipement.TypeEquipement) = TrimRight(TypeEquipARS)))
+           and (PersonnageEquipement.QualiteEquipement <> '') then
+          begin
+            Liste.Clear;
+            ExtractStrings([','], [], PChar(PersonnageEquipement.QualiteEquipement), Liste);
+            for Ind := 0 to Liste.Count - 1 do
+              begin
+                Element := Trim(Liste[Ind]);
+                Code    := Element;
+                Niveau  := 1;
+                if Pos(' ', Element) > 0 then
+                  begin
+                    Code   := Trim(ExtractStringBefore(Element, ' '));
+                    Niveau := StrToIntDef(Trim(Copy(Element, Pos(' ', Element) + 1, Length(Element))), 1);
+                  end;
+                for IndModif := 0 to ListFabricationModificateur.Count - 1 do
+                  if (ListFabricationModificateur[IndModif].TypeModif = ConstXmlModifieArmure)
+                     and CompareRechercheValeur(ListFabricationModificateur[IndModif].CodeSource, Code)
+                     and CompareRechercheValeur(ListFabricationModificateur[IndModif].Cible, CodeLocalisation) then
+                    Result := Result + ListFabricationModificateur[IndModif].Facteur * Niveau;
+              end;
+          end;
+    finally
       Liste.Free;
     end;
   end;

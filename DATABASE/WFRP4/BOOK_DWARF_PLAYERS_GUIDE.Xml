@@ -4867,4 +4867,508 @@ When you gain the Stunned Condition, you can spend a Fortune point to make an im
 <Encumbrance>"20"</Encumbrance>
 </Trapping>
 </DATA_TRAPPING>
+<DATA_CRAFTMANSHIP>
+  <!-- Runes de la forge naine (p.127-132), saisies comme QUALITES de fabrication (decision Nono 19/09/2026) : posees sur l objet du personnage par +Qualite, sans automatisation. Max 3 = regle de trois ; Max 1 = runes maitresses et runes de Doom. La categorie (arme, armure, talisman, protection, ingenierie) et les SL requis sont dans le libelle court. -->
+<Craftsmanship id="DWARF-RUNE_01">
+<Description language="ENGLISH">"Rune of Cleaving"</Description>
+<Explanation language="ENGLISH">"The weapon inflicts +1 Damage for each Rune of Cleaving."</Explanation>
+<Short language="ENGLISH">"Weapon rune, 10 SLs"</Short>
+<Max>"3"</Max>
+<Modifier>""</Modifier>
+</Craftsmanship>
+<Craftsmanship id="DWARF-RUNE_02">
+<Description language="ENGLISH">"Rune of Retribution"</Description>
+<Explanation language="ENGLISH">"Any Critical Wounds inflicted by this weapon may add +20 to rolls on a Critical Wound table for each Rune of Retribution."</Explanation>
+<Short language="ENGLISH">"Weapon rune, 12 SLs"</Short>
+<Max>"3"</Max>
+<Modifier>""</Modifier>
+</Craftsmanship>
+<Craftsmanship id="DWARF-RUNE_03">
+<Description language="ENGLISH">"Rune of Cutting"</Description>
+<Explanation language="ENGLISH">"When attacking with this weapon, you may ignore 2 APs of armour per Rune of Cutting on successful hits."</Explanation>
+<Short language="ENGLISH">"Weapon rune, 10 SLs"</Short>
+<Max>"3"</Max>
+<Modifier>""</Modifier>
+</Craftsmanship>
+<Craftsmanship id="DWARF-RUNE_04">
+<Description language="ENGLISH">"Rune of Daunting"</Description>
+<Explanation language="ENGLISH">"Whilst this weapon is drawn, you gain the Fear Creature Trait. Your Fear Rating is equal to the number of Runes of Daunting. If you already have a Fear Rating, increase it by +1 for each Rune of Daunting."</Explanation>
+<Short language="ENGLISH">"Weapon rune, 14 SLs"</Short>
+<Max>"3"</Max>
+<Modifier>""</Modifier>
+</Craftsmanship>
+<Craftsmanship id="DWARF-RUNE_05">
+<Description language="ENGLISH">"Rune of Fire"</Description>
+<Explanation language="ENGLISH">"Once drawn, the weapon's blade bursts into flames, providing 20 yards of illumination, and inflicting 1 Ablaze Condition on enemies it inflicts damage upon. A weapon with two or three Runes of Fire can be used to make ranged attacks using Ballistic Skill, with a Range equal to the wielder's Willpower Bonus, and the Blast 4 Quality. This attack deals no Damage, but inflicts 1 Ablaze Condition for each Rune of Fire."</Explanation>
+<Short language="ENGLISH">"Weapon rune, 16 SLs"</Short>
+<Max>"3"</Max>
+<Modifier>""</Modifier>
+</Craftsmanship>
+<Craftsmanship id="DWARF-RUNE_06">
+<Description language="ENGLISH">"Rune of Fury"</Description>
+<Explanation language="ENGLISH">"Whilst wielding this weapon, you gain 1 level of Dual Wielder for each Rune of Fury, which may exceed the Talent usual maximum levels. For purposes of activating Dual Wielder, you may count a weapon bearing the Rune of Fury as two separate weapons, one in each hand, allowing you to attack two targets even if you aren't carrying a second weapon."</Explanation>
+<Short language="ENGLISH">"Weapon rune, 15 SLs"</Short>
+<Max>"3"</Max>
+<Modifier>""</Modifier>
+</Craftsmanship>
+<Craftsmanship id="DWARF-RUNE_07">
+<Description language="ENGLISH">"Grudge Rune"</Description>
+<Explanation language="ENGLISH">"Nominate an enemy you bear a Blood Grudge. For each Grudge Rune, the weapon gains both +10 to hit and +1 Damage on attacks against the target. At the end of the adventure, if your nominated enemy is slain, you may nominate a new target against whom you bear a Blood Grudge."</Explanation>
+<Short language="ENGLISH">"Weapon rune, 10 SLs"</Short>
+<Max>"3"</Max>
+<Modifier>""</Modifier>
+</Craftsmanship>
+<Craftsmanship id="DWARF-RUNE_08">
+<Description language="ENGLISH">"Rune of Might"</Description>
+<Explanation language="ENGLISH">"When attacking a target of a larger Size than yourself, the weapon inflicts +3 Damage for each Rune of Might."</Explanation>
+<Short language="ENGLISH">"Weapon rune, 10 SLs"</Short>
+<Max>"3"</Max>
+<Modifier>""</Modifier>
+</Craftsmanship>
+<Craftsmanship id="DWARF-RUNE_09">
+<Description language="ENGLISH">"Rune of Speed"</Description>
+<Explanation language="ENGLISH">"Whilst carrying this weapon in combat, you gain +10 Initiative for each Rune of Speed."</Explanation>
+<Short language="ENGLISH">"Weapon rune, 10 SLs"</Short>
+<Max>"3"</Max>
+<Modifier>""</Modifier>
+</Craftsmanship>
+<Craftsmanship id="DWARF-RUNE_10">
+<Description language="ENGLISH">"Rune of Striking"</Description>
+<Explanation language="ENGLISH">"When attacking with this weapon, you gain +10 to your Melee Skill for each Rune of Striking (the specialisation for the Melee Skill being the same as the Weapon Type of the weapon upon which the rune is inscribed). The bonus only applies to strikes with this weapon."</Explanation>
+<Short language="ENGLISH">"Weapon rune, 14 SLs"</Short>
+<Max>"3"</Max>
+<Modifier>""</Modifier>
+</Craftsmanship>
+<Craftsmanship id="DWARF-RUNE_11">
+<Description language="ENGLISH">"Master Rune of Alaric the Mad"</Description>
+<Explanation language="ENGLISH">"Any attacks made by this weapon ignore the target's AP, the target's armour Qualities, and any other benefits provided by the target's armour."</Explanation>
+<Short language="ENGLISH">"Weapon rune, 30 SLs"</Short>
+<Max>"1"</Max>
+<Modifier>""</Modifier>
+</Craftsmanship>
+<Craftsmanship id="DWARF-RUNE_12">
+<Description language="ENGLISH">"Master Rune of Breaking"</Description>
+<Explanation language="ENGLISH">"When this weapon makes a successful attack against an enemy who Opposed with Melee, or makes a successful Melee Test to Oppose an incoming attack, any magic weapon used by your opponent during their Melee Test is destroyed."</Explanation>
+<Short language="ENGLISH">"Weapon rune, 20 SLs"</Short>
+<Max>"1"</Max>
+<Modifier>""</Modifier>
+</Craftsmanship>
+<Craftsmanship id="DWARF-RUNE_13">
+<Description language="ENGLISH">"Master Rune of Flight"</Description>
+<Explanation language="ENGLISH">"The weapon can be used as a Thrown ranged weapon, with a Range of SB x3. When used on a ranged attack, the weapon gains the Accurate Quality, and returns to your hand after inflicting Damage."</Explanation>
+<Short language="ENGLISH">"Weapon rune, 20 SLs"</Short>
+<Max>"1"</Max>
+<Modifier>""</Modifier>
+</Craftsmanship>
+<Craftsmanship id="DWARF-RUNE_14">
+<Description language="ENGLISH">"Master Rune of Skalf Blackhammer"</Description>
+<Explanation language="ENGLISH">"Any successful attack with this weapon counts as scoring a Critical."</Explanation>
+<Short language="ENGLISH">"Weapon rune, 28 SLs"</Short>
+<Max>"1"</Max>
+<Modifier>""</Modifier>
+</Craftsmanship>
+<Craftsmanship id="DWARF-RUNE_15">
+<Description language="ENGLISH">"Master Rune of the Slayer"</Description>
+<Explanation language="ENGLISH">"Choose a specific type of enemy: Daemons, Undead, Dragons, Goblins, Elves, etc. When attacking that target with this weapon, you may Reverse any attack Tests, and Reverse any rolls they make on a Critical Wound table."</Explanation>
+<Short language="ENGLISH">"Weapon rune, 20 SLs"</Short>
+<Max>"1"</Max>
+<Modifier>""</Modifier>
+</Craftsmanship>
+<Craftsmanship id="DWARF-RUNE_16">
+<Description language="ENGLISH">"Master Rune of Snorri Spangelhelm"</Description>
+<Explanation language="ENGLISH">"Any failed Melee Tests made with this weapon always count as achieving a success with 0 SL. An attack with this weapon can still fail if the target scores more SLs on their Opposed Test."</Explanation>
+<Short language="ENGLISH">"Weapon rune, 22 SLs"</Short>
+<Max>"1"</Max>
+<Modifier>""</Modifier>
+</Craftsmanship>
+<Craftsmanship id="DWARF-RUNE_17">
+<Description language="ENGLISH">"Master Rune of Haste"</Description>
+<Explanation language="ENGLISH">"The weapon gains the Fast Quality, except all Tests to defend against the weapon with Melee suffer a -30 penalty (instead of -10)."</Explanation>
+<Short language="ENGLISH">"Weapon rune, 20 SLs"</Short>
+<Max>"1"</Max>
+<Modifier>""</Modifier>
+</Craftsmanship>
+<Craftsmanship id="DWARF-RUNE_18">
+<Description language="ENGLISH">"Rune of Force"</Description>
+<Explanation language="ENGLISH">"Whilst wearing this armour, if you make a successful Melee attack as part of a Charge, you inflict bonus Damage for each Rune of Impact equal to the APs of your most armoured location."</Explanation>
+<Short language="ENGLISH">"Armour rune, 14 SLs"</Short>
+<Max>"3"</Max>
+<Modifier>""</Modifier>
+</Craftsmanship>
+<Craftsmanship id="DWARF-RUNE_19">
+<Description language="ENGLISH">"Rune of Fortitude"</Description>
+<Explanation language="ENGLISH">"Whilst wearing this armour, you increase your Toughness by +10 for each Rune of Fortitude."</Explanation>
+<Short language="ENGLISH">"Armour rune, 14 SLs"</Short>
+<Max>"3"</Max>
+<Modifier>""</Modifier>
+</Craftsmanship>
+<Craftsmanship id="DWARF-RUNE_20">
+<Description language="ENGLISH">"Rune of Iron"</Description>
+<Explanation language="ENGLISH">"Whilst wearing this armour, you gain +2 Wounds for each Rune of Iron. These Wounds are lost when the armour is removed, which can trigger a Critical Wound for a severely injured Character."</Explanation>
+<Short language="ENGLISH">"Armour rune, 12 SLs"</Short>
+<Max>"3"</Max>
+<Modifier>""</Modifier>
+</Craftsmanship>
+<Craftsmanship id="DWARF-RUNE_21">
+<Description language="ENGLISH">"Rune of Resistance"</Description>
+<Explanation language="ENGLISH">"Whilst wearing this armour, you gain +10 for each Rune of Resistance on Tests to Oppose an incoming Melee attack."</Explanation>
+<Short language="ENGLISH">"Armour rune, 12 SLs"</Short>
+<Max>"3"</Max>
+<Modifier>""</Modifier>
+</Craftsmanship>
+<Craftsmanship id="DWARF-RUNE_22">
+<Description language="ENGLISH">"Rune of Shielding"</Description>
+<Explanation language="ENGLISH">"Whilst wearing this armour, any incoming ranged attacks or spells reduce the Damage they inflict by 2 for each Rune of Shielding. If this reduces Damage inflicted to 0 or less, you do not lose any Wounds."</Explanation>
+<Short language="ENGLISH">"Armour rune, 12 SLs"</Short>
+<Max>"3"</Max>
+<Modifier>""</Modifier>
+</Craftsmanship>
+<Craftsmanship id="DWARF-RUNE_23">
+<Description language="ENGLISH">"Rune of Stone"</Description>
+<Explanation language="ENGLISH">"The armour gains +1 AP for each Rune of Stone. Suits with one or more Runes of Stone, and no other runes, are exempt from the Rule of Pride."</Explanation>
+<Short language="ENGLISH">"Armour rune, 10 SLs"</Short>
+<Max>"3"</Max>
+<ModifArmour name="RULES-ARMOL_HEAD">1</ModifArmour>
+<ModifArmour name="RULES-ARMOL_ARM">1</ModifArmour>
+<ModifArmour name="RULES-ARMOL_BODY">1</ModifArmour>
+<ModifArmour name="RULES-ARMOL_LEG">1</ModifArmour>
+<Modifier>""</Modifier>
+</Craftsmanship>
+<Craftsmanship id="DWARF-RUNE_24">
+<Description language="ENGLISH">"Master Rune of Adamant"</Description>
+<Explanation language="ENGLISH">"When you suffer a Critical Wound whilst wearing this armour, you may Reverse the roll on the Critical Wound table."</Explanation>
+<Short language="ENGLISH">"Armour rune, 22 SLs"</Short>
+<Max>"1"</Max>
+<Modifier>""</Modifier>
+</Craftsmanship>
+<Craftsmanship id="DWARF-RUNE_25">
+<Description language="ENGLISH">"Master Rune of Gromril"</Description>
+<Explanation language="ENGLISH">"The armour loses the Weakpoints Flaw, can never be Damaged except by a Runic Flaw, and never reduces its AP due to Talents or effects such as the Penetrating Quality. Effects that ignore armour and inflict Wounds directly still apply."</Explanation>
+<Short language="ENGLISH">"Armour rune, 20 SLs"</Short>
+<Max>"1"</Max>
+<Modifier>""</Modifier>
+</Craftsmanship>
+<Craftsmanship id="DWARF-RUNE_26">
+<Description language="ENGLISH">"Master Rune of Steel"</Description>
+<Explanation language="ENGLISH">"Whilst wearing this armour, you can only suffer a maximum of 10 Wounds from any instance when Damage is inflicted."</Explanation>
+<Short language="ENGLISH">"Armour rune, 20 SLs"</Short>
+<Max>"1"</Max>
+<Modifier>""</Modifier>
+</Craftsmanship>
+<Craftsmanship id="DWARF-RUNE_27">
+<Description language="ENGLISH">"Rune of Clear Sight"</Description>
+<Explanation language="ENGLISH">"When the talisman is pressed to your eye, you negate any penalties imposed by fog, mist, smoke, or other clouding, non-magical vapours. Two Runes also penetrate magical vapours. Three Runes allow you to see clearly even in total darkness."</Explanation>
+<Short language="ENGLISH">"Talisman rune, 8 SLs"</Short>
+<Max>"3"</Max>
+<Modifier>""</Modifier>
+</Craftsmanship>
+<Craftsmanship id="DWARF-RUNE_28">
+<Description language="ENGLISH">"Rune of Truth"</Description>
+<Explanation language="ENGLISH">"The talisman glows brightly if pressed into contact with an item that has been faked, forged, counterfeited, or deliberately degraded in value. Two Runes also identify magical illusions or duplicates. Three Runes reveal the precise method of deception to the bearer."</Explanation>
+<Short language="ENGLISH">"Talisman rune, 8 SLs"</Short>
+<Max>"3"</Max>
+<Modifier>""</Modifier>
+</Craftsmanship>
+<Craftsmanship id="DWARF-RUNE_29">
+<Description language="ENGLISH">"Rune of Far Sight"</Description>
+<Explanation language="ENGLISH">"When the talisman is pressed to the user's eye, their vision is magnified, allowing them to clearly see events up to a mile away. Two Runes extend vision up to two miles. Three Runes extend vision up to four miles."</Explanation>
+<Short language="ENGLISH">"Talisman rune, 10 SLs"</Short>
+<Max>"3"</Max>
+<Modifier>""</Modifier>
+</Craftsmanship>
+<Craftsmanship id="DWARF-RUNE_30">
+<Description language="ENGLISH">"Rune of the Furnace"</Description>
+<Explanation language="ENGLISH">"Whilst wearing this talisman, you can never acquire the Ablaze Condition, are immune to heat exposure, and reduce all incoming Damage from fire and flaming attacks by 4 for each Rune of the Furnace."</Explanation>
+<Short language="ENGLISH">"Talisman rune, 10 SLs"</Short>
+<Max>"3"</Max>
+<Modifier>""</Modifier>
+</Craftsmanship>
+<Craftsmanship id="DWARF-RUNE_31">
+<Description language="ENGLISH">"Rune of Luck"</Description>
+<Explanation language="ENGLISH">"Whilst wearing this talisman, you gain 1 Fortune point for each Rune of Luck, which can exceed your usual maximum Fortune. You lose these Fortune points when you remove the talisman (to a minimum of 0 Fortune), and cannot regain them until the following session."</Explanation>
+<Short language="ENGLISH">"Talisman rune, 10 SLs"</Short>
+<Max>"3"</Max>
+<Modifier>""</Modifier>
+</Craftsmanship>
+<Craftsmanship id="DWARF-RUNE_32">
+<Description language="ENGLISH">"Rune of Restoration"</Description>
+<Explanation language="ENGLISH">"After a good night's sleep whilst wearing this talisman, the bearer regains their Toughness Bonus in Wounds for each Rune of Restoration."</Explanation>
+<Short language="ENGLISH">"Talisman rune, 10 SLs"</Short>
+<Max>"3"</Max>
+<Modifier>""</Modifier>
+</Craftsmanship>
+<Craftsmanship id="DWARF-RUNE_33">
+<Description language="ENGLISH">"Rune of Spellbreaking"</Description>
+<Explanation language="ENGLISH">"Whilst wearing this talisman, and using the Magic Resistance Talent, you can activate a Rune of Spellbreaking to automatically count as rolling 01 on your Willpower Test. You can activate each Rune of Spellbreaking once per adventure, and must choose to activate it before you roll."</Explanation>
+<Short language="ENGLISH">"Talisman rune, 10 SLs"</Short>
+<Max>"3"</Max>
+<Modifier>""</Modifier>
+</Craftsmanship>
+<Craftsmanship id="DWARF-RUNE_34">
+<Description language="ENGLISH">"Rune of Spelleating"</Description>
+<Explanation language="ENGLISH">"If you successfully dispel a spell using the Magic Resistance Talent whilst wearing this talisman, the spellcaster cannot attempt the spell again for your Willpower Bonus in Rounds. Two Runes extend this effect to your Willpower Bonus in hours. Three Runes extend it to your Willpower Bonus in weeks."</Explanation>
+<Short language="ENGLISH">"Talisman rune, 10 SLs"</Short>
+<Max>"3"</Max>
+<Modifier>""</Modifier>
+</Craftsmanship>
+<Craftsmanship id="DWARF-RUNE_35">
+<Description language="ENGLISH">"Rune of Warding"</Description>
+<Explanation language="ENGLISH">"Whilst wearing this talisman, you may impose a -10 penalty for each Rune of Warding on attack Tests or spellcasting Tests targeting you."</Explanation>
+<Short language="ENGLISH">"Talisman rune, 15 SLs"</Short>
+<Max>"3"</Max>
+<Modifier>""</Modifier>
+</Craftsmanship>
+<Craftsmanship id="DWARF-RUNE_36">
+<Description language="ENGLISH">"Master Rune of Balance"</Description>
+<Explanation language="ENGLISH">"Whilst wearing this talisman, if an enemy within line of sight casts a spell, you may either Reverse their Spellcasting Test, or Reverse your Opposed Willpower Test (if you're in range to attempt Magic Resistance)."</Explanation>
+<Short language="ENGLISH">"Talisman rune, 20 SLs"</Short>
+<Max>"1"</Max>
+<Modifier>""</Modifier>
+</Craftsmanship>
+<Craftsmanship id="DWARF-RUNE_37">
+<Description language="ENGLISH">"Master Rune of Industry"</Description>
+<Explanation language="ENGLISH">"Whilst wearing this talisman, you may take an extra Endeavour between adventures."</Explanation>
+<Short language="ENGLISH">"Talisman rune, 20 SLs"</Short>
+<Max>"1"</Max>
+<Modifier>""</Modifier>
+</Craftsmanship>
+<Craftsmanship id="DWARF-RUNE_38">
+<Description language="ENGLISH">"Master Rune of Kingship"</Description>
+<Explanation language="ENGLISH">"Whilst wearing this talisman, you may Reverse any Charm, Intimidate, and Leadership Tests you make that target a Dwarf, or a group mostly consisting of Dwarfs."</Explanation>
+<Short language="ENGLISH">"Talisman rune, 24 SLs"</Short>
+<Max>"1"</Max>
+<Modifier>""</Modifier>
+</Craftsmanship>
+<Craftsmanship id="DWARF-RUNE_39">
+<Description language="ENGLISH">"Master Rune of Passage"</Description>
+<Explanation language="ENGLISH">"Whilst wearing this talisman, and Moving no faster than walking pace, you can Move through solid, immobile objects like trees, rock, and metal cages. You cannot Move through animals or Undead creatures. You cannot end your Move inside a solid object."</Explanation>
+<Short language="ENGLISH">"Talisman rune, 20 SLs"</Short>
+<Max>"1"</Max>
+<Modifier>""</Modifier>
+</Craftsmanship>
+<Craftsmanship id="DWARF-RUNE_40">
+<Description language="ENGLISH">"Master Rune of Spite"</Description>
+<Explanation language="ENGLISH">"Whenever you take Damage from a Melee attack, the attacker immediately suffers 2d10 Damage to a random location, reduced by Toughness Bonus and Armour Points as normal."</Explanation>
+<Short language="ENGLISH">"Talisman rune, 24 SLs"</Short>
+<Max>"1"</Max>
+<Modifier>""</Modifier>
+</Craftsmanship>
+<Craftsmanship id="DWARF-RUNE_41">
+<Description language="ENGLISH">"Rune of Alarm"</Description>
+<Explanation language="ENGLISH">"The runic item emits a loud, blaring noise if any creature of Size Small or larger enters its range of effect. Two Runes may instead bellow a pre-recorded sentence. Three Runes may instead transmit a pre-recorded telepathic message to the crafter or their closest living descendant, over any distance."</Explanation>
+<Short language="ENGLISH">"Protection rune, 8 SLs"</Short>
+<Max>"3"</Max>
+<Modifier>""</Modifier>
+</Craftsmanship>
+<Craftsmanship id="DWARF-RUNE_42">
+<Description language="ENGLISH">"Rune of Battle"</Description>
+<Explanation language="ENGLISH">"Affected allies begin combat with 1 Advantage for each Rune of Battle."</Explanation>
+<Short language="ENGLISH">"Protection rune, 18 SLs"</Short>
+<Max>"3"</Max>
+<Modifier>""</Modifier>
+</Craftsmanship>
+<Craftsmanship id="DWARF-RUNE_43">
+<Description language="ENGLISH">"Rune of Courage"</Description>
+<Explanation language="ENGLISH">"Affected allies gain +10 on Psychology Tests for each Rune of Courage."</Explanation>
+<Short language="ENGLISH">"Protection rune, 14 SLs"</Short>
+<Max>"3"</Max>
+<Modifier>""</Modifier>
+</Craftsmanship>
+<Craftsmanship id="DWARF-RUNE_44">
+<Description language="ENGLISH">"Rune of Discovery"</Description>
+<Explanation language="ENGLISH">"For each Rune of Discovery the runic item has, the crafter may choose a specific metal or gem (e.g. gold, diamond, gromril, iron ore, obsinite, ithilmar, brightstone). The runic item glows brightly if the specified material appears within its range of effect."</Explanation>
+<Short language="ENGLISH">"Protection rune, 8 SLs"</Short>
+<Max>"3"</Max>
+<Modifier>""</Modifier>
+</Craftsmanship>
+<Craftsmanship id="DWARF-RUNE_45">
+<Description language="ENGLISH">"Rune of Enemy Detection"</Description>
+<Explanation language="ENGLISH">"For each rune, describe a type of creature: a general creature type (Skaven, obvious Chaos worshippers), or a more specific description. When a creature that clearly matches the description enters the range of effect, the rune glows a violent crimson."</Explanation>
+<Short language="ENGLISH">"Protection rune, 8 SLs"</Short>
+<Max>"3"</Max>
+<Modifier>""</Modifier>
+</Craftsmanship>
+<Craftsmanship id="DWARF-RUNE_46">
+<Description language="ENGLISH">"Rune of Locking"</Description>
+<Explanation language="ENGLISH">"Any locks within the runic item's range of effect are immune to being picked or forced except by magic or the corresponding key. Two Runes also protect from magical effects. Three Runes are proof against the lock's corresponding key: only the crafter, or their closest living descendant, can open the lock at will. A lock may still be bypassed by smashing through the chest or door they protect."</Explanation>
+<Short language="ENGLISH">"Protection rune, 6 SLs"</Short>
+<Max>"3"</Max>
+<Modifier>""</Modifier>
+</Craftsmanship>
+<Craftsmanship id="DWARF-RUNE_47">
+<Description language="ENGLISH">"Rune of Purification"</Description>
+<Explanation language="ENGLISH">"Affected allies gain +20 for each Rune of Purification on Tests to resist toxins in air and water."</Explanation>
+<Short language="ENGLISH">"Protection rune, 10 SLs"</Short>
+<Max>"3"</Max>
+<Modifier>""</Modifier>
+</Craftsmanship>
+<Craftsmanship id="DWARF-RUNE_48">
+<Description language="ENGLISH">"Rune of Retribution (Protection)"</Description>
+<Explanation language="ENGLISH">"If a creature violates the sanctity of dead bodies within the runic item's range of effect (e.g. stealing from the dead, casting a necromantic spell), they immediately gain 1 Ablaze Condition for each Rune of Retribution."</Explanation>
+<Short language="ENGLISH">"Protection rune, 8 SLs"</Short>
+<Max>"3"</Max>
+<Modifier>""</Modifier>
+</Craftsmanship>
+<Craftsmanship id="DWARF-RUNE_49">
+<Description language="ENGLISH">"Rune of Sanctuary"</Description>
+<Explanation language="ENGLISH">"Affected allies gain +10 for each Rune of Sanctuary on Willpower Tests to dispel with Magic Resistance."</Explanation>
+<Short language="ENGLISH">"Protection rune, 10 SLs"</Short>
+<Max>"3"</Max>
+<Modifier>""</Modifier>
+</Craftsmanship>
+<Craftsmanship id="DWARF-RUNE_50">
+<Description language="ENGLISH">"Rune of Slowness"</Description>
+<Explanation language="ENGLISH">"Enemies attempting to Engage an affected ally reduce the distance they can Run by 4 yards for each Rune of Slowness, to a minimum of the enemy's Walk distance."</Explanation>
+<Short language="ENGLISH">"Protection rune, 12 SLs"</Short>
+<Max>"3"</Max>
+<Modifier>""</Modifier>
+</Craftsmanship>
+<Craftsmanship id="DWARF-RUNE_51">
+<Description language="ENGLISH">"Rune of Verminkill"</Description>
+<Explanation language="ENGLISH">"Rodents, Skaven, and rat-based abominations like Rat Ogres lose 2 Wounds for each Rune of Verminkill (ignoring Toughness Bonus and Armour Points) when they enter the runic item's range of effect, or start their Turn within it."</Explanation>
+<Short language="ENGLISH">"Protection rune, 10 SLs"</Short>
+<Max>"3"</Max>
+<Modifier>""</Modifier>
+</Craftsmanship>
+<Craftsmanship id="DWARF-RUNE_52">
+<Description language="ENGLISH">"Master Rune of Expel Chaos"</Description>
+<Explanation language="ENGLISH">"Affected allies may Reverse any Test to resist corrupting influences, Tests to avoid mutation from Corruption, and rolls on the Physical and Mental Corruption Tables. In addition, when an affected ally is engaged with a Daemonic enemy that has the Unstable Trait, they count as having +2 Advantage when calculating Wounds lost for being Unstable."</Explanation>
+<Short language="ENGLISH">"Protection rune, 20 SLs"</Short>
+<Max>"1"</Max>
+<Modifier>""</Modifier>
+</Craftsmanship>
+<Craftsmanship id="DWARF-RUNE_53">
+<Description language="ENGLISH">"Master Rune of Grimnir"</Description>
+<Explanation language="ENGLISH">"You may Reverse enemy Ranged attack Tests made against affected allies."</Explanation>
+<Short language="ENGLISH">"Protection rune, 22 SLs"</Short>
+<Max>"1"</Max>
+<Modifier>""</Modifier>
+</Craftsmanship>
+<Craftsmanship id="DWARF-RUNE_54">
+<Description language="ENGLISH">"Master Rune of Grungni"</Description>
+<Explanation language="ENGLISH">"You may Reverse any enemy spellcasting Tests made against affected allies."</Explanation>
+<Short language="ENGLISH">"Protection rune, 22 SLs"</Short>
+<Max>"1"</Max>
+<Modifier>""</Modifier>
+</Craftsmanship>
+<Craftsmanship id="DWARF-RUNE_55">
+<Description language="ENGLISH">"Master Rune of Stromni Redbeard"</Description>
+<Explanation language="ENGLISH">"Affected allies begin combat with 1 Advantage. Double the range of this rune's effects to 12 yards, or 24 yards if forged upon a battle standard."</Explanation>
+<Short language="ENGLISH">"Protection rune, 20 SLs"</Short>
+<Max>"1"</Max>
+<Modifier>""</Modifier>
+</Craftsmanship>
+<Craftsmanship id="DWARF-RUNE_56">
+<Description language="ENGLISH">"Master Rune of Valaya"</Description>
+<Explanation language="ENGLISH">"Affected allies may Reverse any Willpower Test to Oppose spellcasting with Magic Resistance. The range limit for Magic Resistance is removed: affected allies can Oppose any spell cast against a target in their line of sight, and the Talent can be used to dispel persistent spells, not just incoming spells."</Explanation>
+<Short language="ENGLISH">"Protection rune, 22 SLs"</Short>
+<Max>"1"</Max>
+<Modifier>""</Modifier>
+</Craftsmanship>
+<Craftsmanship id="DWARF-RUNE_57">
+<Description language="ENGLISH">"Rune of Accuracy"</Description>
+<Explanation language="ENGLISH">"When attacking with this weapon, you gain +10 to hit for each Rune of Accuracy."</Explanation>
+<Short language="ENGLISH">"Engineering rune, 14 SLs"</Short>
+<Max>"3"</Max>
+<Modifier>""</Modifier>
+</Craftsmanship>
+<Craftsmanship id="DWARF-RUNE_58">
+<Description language="ENGLISH">"Rune of Burning"</Description>
+<Explanation language="ENGLISH">"A target struck by this weapon gains 1 Ablaze Condition per Rune of Burning."</Explanation>
+<Short language="ENGLISH">"Engineering rune, 16 SLs"</Short>
+<Max>"3"</Max>
+<Modifier>""</Modifier>
+</Craftsmanship>
+<Craftsmanship id="DWARF-RUNE_59">
+<Description language="ENGLISH">"Rune of Forging"</Description>
+<Explanation language="ENGLISH">"When you Fumble and/or Misfire whilst using this weapon, the crew may activate this rune to negate the effects. You can activate each Rune of Forging once per adventure."</Explanation>
+<Short language="ENGLISH">"Engineering rune, 10 SLs"</Short>
+<Max>"3"</Max>
+<Modifier>""</Modifier>
+</Craftsmanship>
+<Craftsmanship id="DWARF-RUNE_60">
+<Description language="ENGLISH">"Rune of Penetrating"</Description>
+<Explanation language="ENGLISH">"The weapon inflicts +2 Damage for each Rune of Penetrating."</Explanation>
+<Short language="ENGLISH">"Engineering rune, 14 SLs"</Short>
+<Max>"3"</Max>
+<Modifier>""</Modifier>
+</Craftsmanship>
+<Craftsmanship id="DWARF-RUNE_61">
+<Description language="ENGLISH">"Rune of Reloading"</Description>
+<Explanation language="ENGLISH">"The weapon reduces its Reload Rating by 2 for each Rune of Reloading. If this would reduce the Rating to 0 or below, the weapon loses the Reload Flaw. Weapons with the Salvo Quality cannot be reduced below Reload Rating 1."</Explanation>
+<Short language="ENGLISH">"Engineering rune, 12 SLs"</Short>
+<Max>"3"</Max>
+<Modifier>""</Modifier>
+</Craftsmanship>
+<Craftsmanship id="DWARF-RUNE_62">
+<Description language="ENGLISH">"Rune of Seeking"</Description>
+<Explanation language="ENGLISH">"When this weapon attacks a flying enemy, you gain +20 to hit for each Rune of Seeking."</Explanation>
+<Short language="ENGLISH">"Engineering rune, 10 SLs"</Short>
+<Max>"3"</Max>
+<Modifier>""</Modifier>
+</Craftsmanship>
+<Craftsmanship id="DWARF-RUNE_63">
+<Description language="ENGLISH">"Rune of the Stalwart"</Description>
+<Explanation language="ENGLISH">"Dwarfs crewing this weapon begin combat with 1 Advantage for each Rune of the Stalwart. This extra Advantage is lost by any Characters that leave the weapon's crew, or become Engaged in melee."</Explanation>
+<Short language="ENGLISH">"Engineering rune, 14 SLs"</Short>
+<Max>"3"</Max>
+<Modifier>""</Modifier>
+</Craftsmanship>
+<Craftsmanship id="DWARF-RUNE_64">
+<Description language="ENGLISH">"Rune of the Valiant"</Description>
+<Explanation language="ENGLISH">"Dwarfs gain +10 Willpower for each Rune of the Valiant whilst crewing this weapon."</Explanation>
+<Short language="ENGLISH">"Engineering rune, 10 SLs"</Short>
+<Max>"3"</Max>
+<Modifier>""</Modifier>
+</Craftsmanship>
+<Craftsmanship id="DWARF-RUNE_65">
+<Description language="ENGLISH">"Master Rune of Defence"</Description>
+<Explanation language="ENGLISH">"The weapon's crew always count as being in hard cover, imposing a -30 modifier on Ranged attacks against them."</Explanation>
+<Short language="ENGLISH">"Engineering rune, 20 SLs"</Short>
+<Max>"1"</Max>
+<Modifier>""</Modifier>
+</Craftsmanship>
+<Craftsmanship id="DWARF-RUNE_66">
+<Description language="ENGLISH">"Master Rune of Disguise"</Description>
+<Explanation language="ENGLISH">"The weapon is invisible to all enemies until it fires, at which point it becomes visible for the rest of the combat. The weapon's crew remain visible as normal, and moving the machine still causes noise."</Explanation>
+<Short language="ENGLISH">"Engineering rune, 20 SLs"</Short>
+<Max>"1"</Max>
+<Modifier>""</Modifier>
+</Craftsmanship>
+<Craftsmanship id="DWARF-RUNE_67">
+<Description language="ENGLISH">"Master Rune of Immolation"</Description>
+<Explanation language="ENGLISH">"Any Dwarf crewing this weapon may choose to activate the rune as a Free Action, triggering the machine's self-destruction. All creatures within 6 yards of the machine take 15 Damage to a random location, reduced by Toughness Bonus and Armour Points. Survivors gain the Ablaze Condition. The weapon itself is destroyed."</Explanation>
+<Short language="ENGLISH">"Engineering rune, 20 SLs"</Short>
+<Max>"1"</Max>
+<Modifier>""</Modifier>
+</Craftsmanship>
+<Craftsmanship id="DWARF-RUNE_68">
+<Description language="ENGLISH">"Master Rune of Skewering"</Description>
+<Explanation language="ENGLISH">"When making a Ranged attack with the weapon, you may activate this rune to count as rolling 01. If the attack succeeds, it also counts as a Critical, and may strike any location you choose. You may activate this rune once per adventure, and must decide to activate it before you roll."</Explanation>
+<Short language="ENGLISH">"Engineering rune, 22 SLs"</Short>
+<Max>"1"</Max>
+<Modifier>""</Modifier>
+</Craftsmanship>
+<Craftsmanship id="DWARF-RUNE_69">
+<Description language="ENGLISH">"Rune of Hearth and Home"</Description>
+<Explanation language="ENGLISH">"Doom Rune (Anvil of Doom, activated as an Action, Hard (-20) Runesmithing Test). The blessing of Valaya: all Dwarfs within 25 yards of the Anvil of Doom may count as rolling 01 on any Cool Tests they make until the end of the next Round."</Explanation>
+<Short language="ENGLISH">"Doom Rune"</Short>
+<Max>"1"</Max>
+<Modifier>""</Modifier>
+</Craftsmanship>
+<Craftsmanship id="DWARF-RUNE_70">
+<Description language="ENGLISH">"Rune of Oath and Steel"</Description>
+<Explanation language="ENGLISH">"Doom Rune (Anvil of Doom, activated as an Action, Hard (-20) Runesmithing Test). The blessing of Grungni: all Dwarfs within 25 yards of the Anvil of Doom improve the AP of any armour they're wearing by 2, until the end of the next Round."</Explanation>
+<Short language="ENGLISH">"Doom Rune"</Short>
+<Max>"1"</Max>
+<Modifier>""</Modifier>
+</Craftsmanship>
+<Craftsmanship id="DWARF-RUNE_71">
+<Description language="ENGLISH">"Rune of Wrath and Ruin"</Description>
+<Explanation language="ENGLISH">"Doom Rune (Anvil of Doom, activated as an Action, Hard (-20) Runesmithing Test). The blessing of Grimnir: all enemies within 25 yards of the Anvil of Doom are struck for 12 Damage to a random location, reduced by Toughness Bonus and Armour Points."</Explanation>
+<Short language="ENGLISH">"Doom Rune"</Short>
+<Max>"1"</Max>
+<Modifier>""</Modifier>
+</Craftsmanship>
+</DATA_CRAFTMANSHIP>
 </DATA_BOOK>

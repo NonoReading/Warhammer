@@ -5,7 +5,7 @@ unit ChargeFabrication;
 interface
 
 uses
-  Classes, SysUtils, ChargeConstantes, ChargeTexte, UnitCalcul, Generics.Collections;
+  Classes, SysUtils, ChargeConstantes, ChargeTexte, UnitCalcul, Generics.Collections, ChargeModificateur;
 
 Type
   StructureFabrication     = record
@@ -26,6 +26,11 @@ end;
 Var
   ListFabrication:      TListFabrication;
   NbFabrication:        Integer;
+  // Moteur generique (ChargeModificateur) cote fabrication : une qualite de fabrication (rune
+  // naine, accessoire...) declare <ModifArmour name="...">n</ModifArmour> ; CodeSource = code
+  // complet de la fabrication. Multiplie par son niveau ("CODE 2") au calcul.
+  ListFabricationModificateur: TListModificateur;
+  NbFabricationModificateur:   Integer;
 
 function ChercheFabrication(CodeFabrication :String): StructureFabrication;
 function TexteFabrication(PFabrication: StructureFabrication):String;
