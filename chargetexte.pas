@@ -55,6 +55,8 @@ Function ReplaceTexteLibelle(CodeTexte :String): String;
     Res := CodeTexte;
     for PTexte in ListTexte do
       begin
+        if Pos(PTexte.Code, Res) > 0 then
+          Res := StringReplace(Res, PTexte.Code, PTexte.Libelle, [rfReplaceAll]);
         Code := ExtractStringAfter(PTexte.Code, SeparateurLivre);
         if Pos(Code, Res) > 0 then
           Res := StringReplace(Res, Code, PTexte.Libelle, [rfReplaceAll]);

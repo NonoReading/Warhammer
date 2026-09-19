@@ -5301,3 +5301,7 @@ Audit des 582 lignes <Item> de carriere V4 en texte brut : 113 rattachables dire
 Reste (voir A FAIRE.txt) : lignes douteuses, variantes "(Q)", tools of the profession, objets absents du catalogue ; non-objets laisses en texte. Chargement en jeu V4 NON TESTE.
 Appris : sed -z sans drapeau g ne remplace que la premiere occurrence ; verifier le diff (retraits) apres chaque passe.
 Fichiers modifies : BOOK_RULESBOOK.Xml (WFRP4), Log.txt, A FAIRE.txt.
+
+19/09/2026 - PREFIXE "RULES-" AFFICHE DEVANT LES LIBELLES (ReplaceTexteLibelle)
+chargetexte.pas : ReplaceTexteLibelle cherchait seulement le code sans prefixe de livre (DISPO_COMMON) dans RULES-DISPO_COMMON, laissant "RULES-Common" a l ecran (armures, objets du catalogue, emplacements...). Le code complet est maintenant remplace en premier, l ancien remplacement sans prefixe reste en secours. Defaut present depuis le premier commit, repere en testant le catalogue V4. Teste a l ecran et valide par Nono.
+Fichiers modifies : chargetexte.pas, Log.txt.
