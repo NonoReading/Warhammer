@@ -61,7 +61,7 @@ function TexteArmure(PArmure: StructureArmure):String;
         if PArmure.TypeMateriel <> '' then
           Texte  := Texte + SeparateurRetourLigne + SeparateurRetourLigne + GetTexteLibelle('RULES-LAB_074') + ' : ' + ReplaceTexteLibelle(PArmure.TypeMateriel);
         if PArmure.Prix <> '' then
-          Texte  := Texte + SeparateurRetourLigne + SeparateurRetourLigne + GetTexteLibelle('RULES-LAB_054') + ' : ' + PArmure.Prix;
+          Texte  := Texte + SeparateurRetourLigne + SeparateurRetourLigne + GetTexteLibelle('RULES-LAB_054') + ' : ' + TraduirePrix(PArmure.Prix);
         if PArmure.Encombrement <> 0 then
           Texte  := Texte + SeparateurRetourLigne + SeparateurRetourLigne + GetTexteLibelle('RULES-LAB_055') + ' : ' + IntToStr(PArmure.Encombrement);
         if PArmure.Disponibilite <> '' then

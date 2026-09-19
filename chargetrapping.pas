@@ -57,7 +57,7 @@ function TexteTrapping(PTrapping: StructureTrapping):String;
   begin
     Texte := GetTexteLibelle('RULES-LAB_118') + ' : ';
     if PTrapping.Prix <> '' then
-      Texte  := Texte + SeparateurRetourLigne + SeparateurRetourLigne + GetTexteLibelle('RULES-LAB_054') + ' : ' + PTrapping.Prix;
+      Texte  := Texte + SeparateurRetourLigne + SeparateurRetourLigne + GetTexteLibelle('RULES-LAB_054') + ' : ' + TraduirePrix(PTrapping.Prix);
     if PTrapping.Encombrement <> 0 then
       Texte  := Texte + SeparateurRetourLigne + SeparateurRetourLigne + GetTexteLibelle('RULES-LAB_055') + ' : ' + IntToStr(PTrapping.Encombrement);
     if PTrapping.Capacite <> 0 then
@@ -73,7 +73,7 @@ function TexteLigneTrapping(PTrapping: StructureTrapping):String;
   begin
     Texte := PTrapping.Libelle;
     if PTrapping.Prix <> '' then
-      Texte  := Texte + '|' + GetTexteLibelle('RULES-LAB_054') + ' : ' + PTrapping.Prix;
+      Texte  := Texte + '|' + GetTexteLibelle('RULES-LAB_054') + ' : ' + TraduirePrix(PTrapping.Prix);
     if PTrapping.Encombrement <> 0 then
       Texte  := Texte + '|' + GetTexteLibelle('RULES-LAB_055') + ' : ' + IntToStr(PTrapping.Encombrement);
     if PTrapping.Capacite <> 0 then

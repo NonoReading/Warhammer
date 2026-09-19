@@ -85,7 +85,7 @@ function TexteArme(PArme: StructureArme):String;
             Texte  := Texte + SeparateurRetourLigne + SeparateurRetourLigne + GetTexteLibelle('RULES-LAB_009') + ' : ' + PCompetence.Libelle;
           end;
         if PArme.Prix <> '' then
-          Texte  := Texte + SeparateurRetourLigne + SeparateurRetourLigne + GetTexteLibelle('RULES-LAB_054') + ' : ' + PArme.Prix;
+          Texte  := Texte + SeparateurRetourLigne + SeparateurRetourLigne + GetTexteLibelle('RULES-LAB_054') + ' : ' + TraduirePrix(PArme.Prix);
         if PArme.Disponibilite <> '' then
           Texte  := Texte + SeparateurRetourLigne + SeparateurRetourLigne + GetTexteLibelle('RULES-LAB_056') + ' : ' + GetAllTexteLibelle(PArme.Disponibilite);
         if PArme.Encombrement <> 0 then

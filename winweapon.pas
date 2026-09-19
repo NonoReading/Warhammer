@@ -141,7 +141,7 @@ begin
             TabWeapon.Cells[3, IndTab]   := PArme.CodeCompetence;
             TabWeapon.Cells[4, IndTab]   := PArme.Libelle;
             TabWeapon.Cells[5, IndTab]   := IntToStr(PArme.Mains);
-            TabWeapon.Cells[6, IndTab]   := PArme.Prix;
+            TabWeapon.Cells[6, IndTab]   := TraduirePrix(PArme.Prix);
             TabWeapon.Cells[7, IndTab]   := IntToStr(PArme.Encombrement);
             TabWeapon.Cells[8, IndTab]   := GetAllTexteLibelle(PArme.Disponibilite);
             TabWeapon.Cells[9, IndTab]   := ReplaceTexteLibelle(PArme.Portee);

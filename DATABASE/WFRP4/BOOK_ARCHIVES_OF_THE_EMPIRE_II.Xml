@@ -571,7 +571,7 @@ Examples you could take include: Alcohol, Food, Narcotics, Pleasure."</Explanati
 <Damage>"+(BATTR_S)+4"</Damage>
 <Availability>"RULES-DISPO_COMMON"</Availability>
 <Reach>"RULES-WEAPR_MID"</Reach>
-<Price>"1GC"</Price>
+<Price>"1CO"</Price>
 <Encumbrance>"2"</Encumbrance>
 <Quality>"-"</Quality>
 <Hand>"1"</Hand>
@@ -583,7 +583,7 @@ Examples you could take include: Alcohol, Food, Narcotics, Pleasure."</Explanati
 <Damage>"+(BATTR_S)+3"</Damage>
 <Availability>"RULES-DISPO_LIMITED"</Availability>
 <Reach>"RULES-WEAPR_SHORT"</Reach>
-<Price>"4GC"</Price>
+<Price>"4CO"</Price>
 <Encumbrance>"2"</Encumbrance>
 <Quality>"RULES-WEAPB18 1,RULES-WEAPB08"</Quality>
 <Hand>"1"</Hand>
@@ -595,7 +595,7 @@ Examples you could take include: Alcohol, Food, Narcotics, Pleasure."</Explanati
 <Damage>"+(BATTR_S)+6"</Damage>
 <Availability>"RULES-DISPO_COMMON"</Availability>
 <Reach>"RULES-WEAPR_LONG"</Reach>
-<Price>"5GC"</Price>
+<Price>"5CO"</Price>
 <Encumbrance>"6"</Encumbrance>
 <Quality>"RULES-WEAPB10"</Quality>
 <Hand>"1"</Hand>
@@ -607,7 +607,7 @@ Examples you could take include: Alcohol, Food, Narcotics, Pleasure."</Explanati
 <Damage>"+(BATTR_S)+4"</Damage>
 <Availability>"RULES-DISPO_LIMITED"</Availability>
 <Reach>"(BATTR_S)x3"</Reach>
-<Price>"6/-"</Price>
+<Price>"6PA"</Price>
 <Encumbrance>"2"</Encumbrance>
 <Quality>"RULES-WEAPB12"</Quality>
 <Hand>"1"</Hand>
@@ -619,7 +619,7 @@ Examples you could take include: Alcohol, Food, Narcotics, Pleasure."</Explanati
 <Damage>"+10"</Damage>
 <Availability>"RULES-DISPO_EXOTIC"</Availability>
 <Reach>"50"</Reach>
-<Price>"2"</Price>
+<Price>"14CO"</Price>
 <Encumbrance>"8"</Encumbrance>
 <Quality>"RULES-WEAPB24,RULES-WEAPB23 5"</Quality>
 <Hand>"0"</Hand>
@@ -631,7 +631,7 @@ Examples you could take include: Alcohol, Food, Narcotics, Pleasure."</Explanati
 <Damage>"+8"</Damage>
 <Availability>"RULES-DISPO_EXOTIC"</Availability>
 <Reach>"20"</Reach>
-<Price>"9GC"</Price>
+<Price>"9CO"</Price>
 <Encumbrance>"3"</Encumbrance>
 <Quality>"RULES-WEAPB13,RULES-WEAPB23 1"</Quality>
 <Hand>"1"</Hand>
@@ -643,7 +643,7 @@ Examples you could take include: Alcohol, Food, Narcotics, Pleasure."</Explanati
 <Damage>"+10"</Damage>
 <Availability>"RULES-DISPO_EXOTIC"</Availability>
 <Reach>"20"</Reach>
-<Price>"8GC"</Price>
+<Price>"8CO"</Price>
 <Encumbrance>"3"</Encumbrance>
 <Quality>"RULES-WEAPB17,RULES-WEAPB23 2"</Quality>
 <Hand>"1"</Hand>
@@ -655,7 +655,7 @@ Examples you could take include: Alcohol, Food, Narcotics, Pleasure."</Explanati
 <Damage>"+7"</Damage>
 <Availability>"RULES-DISPO_LIMITED"</Availability>
 <Reach>"(BATTR_S)x2"</Reach>
-<Price>"1GC"</Price>
+<Price>"1CO"</Price>
 <Encumbrance>"2"</Encumbrance>
 <Quality>"RULES-WEAPB17"</Quality>
 <Hand>"1"</Hand>
@@ -690,7 +690,7 @@ Examples you could take include: Alcohol, Food, Narcotics, Pleasure."</Explanati
 <Armor id="ARCH2-ARMO_15">
 <Description language="ENGLISH">"Ogre Gutplate"</Description>
 <Availability>"RULES-DISPO_RARE"</Availability>
-<Price>"20GC"</Price>
+<Price>"20CO"</Price>
 <Encumbrance>"4"</Encumbrance>
 <Quality>"RULES-ARMOB_02"</Quality>
 <Location>"RULES-ARMOL_BODY"</Location>

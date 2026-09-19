@@ -3735,7 +3735,7 @@ You invoke a mystical prime language that existed before the arrival of the Old 
 <Armor id="HELFG-ARMO_01">
 <Description language="ENGLISH">"Ithilmar Breastplate"</Description>
 <Availability>"RULES-DISPO_UNIQUE"</Availability>
-<Price>"1280 GC"</Price>
+<Price>"1280CO"</Price>
 <Encumbrance>"1"</Encumbrance>
 <Quality>"RULES-ARMOB_02,RULES-ARMOB_04,RULES-ARMOB_05"</Quality>
 <Location>"RULES-ARMOL_BODY"</Location>
@@ -3745,7 +3745,7 @@ You invoke a mystical prime language that existed before the arrival of the Old 
 <Armor id="HELFG-ARMO_02">
 <Description language="ENGLISH">"Ithilmar Open Helm"</Description>
 <Availability>"RULES-DISPO_UNIQUE"</Availability>
-<Price>"256 GC"</Price>
+<Price>"256CO"</Price>
 <Encumbrance>"0"</Encumbrance>
 <Quality>"RULES-ARMOB_03,RULES-ARMOB_05,RULES-ARMOB_06"</Quality>
 <Location>"RULES-ARMOL_HEAD"</Location>
@@ -3755,7 +3755,7 @@ You invoke a mystical prime language that existed before the arrival of the Old 
 <Armor id="HELFG-ARMO_03">
 <Description language="ENGLISH">"Ithilmar Bracers"</Description>
 <Availability>"RULES-DISPO_UNIQUE"</Availability>
-<Price>"1024 GC"</Price>
+<Price>"1024CO"</Price>
 <Encumbrance>"1"</Encumbrance>
 <Quality>"RULES-ARMOB_02,RULES-ARMOB_04,RULES-ARMOB_05"</Quality>
 <Location>"RULES-ARMOL_ARM"</Location>
@@ -3765,7 +3765,7 @@ You invoke a mystical prime language that existed before the arrival of the Old 
 <Armor id="HELFG-ARMO_04">
 <Description language="ENGLISH">"Ithilmar Plate Leggings"</Description>
 <Availability>"RULES-DISPO_UNIQUE"</Availability>
-<Price>"1280 GC"</Price>
+<Price>"1280CO"</Price>
 <Encumbrance>"1"</Encumbrance>
 <Quality>"RULES-ARMOB_02,RULES-ARMOB_04,RULES-ARMOB_05"</Quality>
 <Location>"RULES-ARMOL_LEG"</Location>
@@ -3775,7 +3775,7 @@ You invoke a mystical prime language that existed before the arrival of the Old 
 <Armor id="HELFG-ARMO_05">
 <Description language="ENGLISH">"Ithilmar Helm"</Description>
 <Availability>"RULES-DISPO_UNIQUE"</Availability>
-<Price>"384 GC"</Price>
+<Price>"384CO"</Price>
 <Encumbrance>"0"</Encumbrance>
 <Quality>"RULES-ARMOB_02,RULES-ARMOB_04,RULES-ARMOB_05,RULES-ARMOB_07"</Quality>
 <Location>"RULES-ARMOL_HEAD"</Location>
@@ -3789,7 +3789,7 @@ You invoke a mystical prime language that existed before the arrival of the Old 
 <Armor id="HELFG-ARMO_06">
 <Description language="ENGLISH">"Ithiltaen Helm"</Description>
 <Availability>"RULES-DISPO_UNIQUE"</Availability>
-<Price>"1536 GC"</Price>
+<Price>"1536CO"</Price>
 <Encumbrance>"0"</Encumbrance>
 <Quality>"RULES-ARMOB_02,RULES-ARMOB_04,RULES-ARMOB_05,RULES-ARMOB_07"</Quality>
 <Location>"RULES-ARMOL_HEAD"</Location>
@@ -3799,7 +3799,7 @@ You invoke a mystical prime language that existed before the arrival of the Old 
 <Armor id="HELFG-ARMO_07">
 <Description language="ENGLISH">"Dragon Armour Breastplate"</Description>
 <Availability>"RULES-DISPO_UNIQUE"</Availability>
-<Price>"10240 GC"</Price>
+<Price>"10240CO"</Price>
 <Encumbrance>"3"</Encumbrance>
 <Quality>"RULES-ARMOB_02,RULES-ARMOB_04,RULES-ARMOB_05"</Quality>
 <Location>"RULES-ARMOL_BODY"</Location>
@@ -3809,7 +3809,7 @@ You invoke a mystical prime language that existed before the arrival of the Old 
 <Armor id="HELFG-ARMO_08">
 <Description language="ENGLISH">"Dragon Armour Open Helm"</Description>
 <Availability>"RULES-DISPO_UNIQUE"</Availability>
-<Price>"2048 GC"</Price>
+<Price>"2048CO"</Price>
 <Encumbrance>"1"</Encumbrance>
 <Quality>"RULES-ARMOB_03,RULES-ARMOB_05,RULES-ARMOB_06"</Quality>
 <Location>"RULES-ARMOL_HEAD"</Location>
@@ -3819,7 +3819,7 @@ You invoke a mystical prime language that existed before the arrival of the Old 
 <Armor id="HELFG-ARMO_09">
 <Description language="ENGLISH">"Dragon Armour Bracers"</Description>
 <Availability>"RULES-DISPO_UNIQUE"</Availability>
-<Price>"8192 GC"</Price>
+<Price>"8192CO"</Price>
 <Encumbrance>"3"</Encumbrance>
 <Quality>"RULES-ARMOB_02,RULES-ARMOB_04,RULES-ARMOB_05"</Quality>
 <Location>"RULES-ARMOL_ARM"</Location>
@@ -3829,7 +3829,7 @@ You invoke a mystical prime language that existed before the arrival of the Old 
 <Armor id="HELFG-ARMO_10">
 <Description language="ENGLISH">"Dragon Armour Plate Leggings"</Description>
 <Availability>"RULES-DISPO_UNIQUE"</Availability>
-<Price>"10240 GC"</Price>
+<Price>"10240CO"</Price>
 <Encumbrance>"3"</Encumbrance>
 <Quality>"RULES-ARMOB_02,RULES-ARMOB_04,RULES-ARMOB_05"</Quality>
 <Location>"RULES-ARMOL_LEG"</Location>
@@ -3839,7 +3839,7 @@ You invoke a mystical prime language that existed before the arrival of the Old 
 <Armor id="HELFG-ARMO_11">
 <Description language="ENGLISH">"Dragon Armour Helm"</Description>
 <Availability>"RULES-DISPO_UNIQUE"</Availability>
-<Price>"3072 GC"</Price>
+<Price>"3072CO"</Price>
 <Encumbrance>"2"</Encumbrance>
 <Quality>"RULES-ARMOB_02,RULES-ARMOB_04,RULES-ARMOB_05,RULES-ARMOB_07"</Quality>
 <Location>"RULES-ARMOL_HEAD"</Location>
@@ -3851,7 +3851,7 @@ You invoke a mystical prime language that existed before the arrival of the Old 
 <Armor id="HELFG-ARMO_12">
 <Description language="ENGLISH">"White Lion Hide Cloak"</Description>
 <Availability>"RULES-DISPO_EXOTIC"</Availability>
-<Price>"20 GC"</Price>
+<Price>"20CO"</Price>
 <Encumbrance>"2"</Encumbrance>
 <Quality>"RULES-ARMOB_03"</Quality>
 <Location>"RULES-ARMOL_BODY"</Location>
@@ -3873,7 +3873,7 @@ You invoke a mystical prime language that existed before the arrival of the Old 
 <Damage>"+(BATTR_S)+6"</Damage>
 <Availability>"RULES-DISPO_UNIQUE"</Availability>
 <Reach>"RULES-WEAPR_LONG"</Reach>
-<Price>"2000 GC"</Price>
+<Price>"2000CO"</Price>
 <Encumbrance>"2"</Encumbrance>
 <Quality>"RULES-WEAPB10,RULES-WEAPB30"</Quality>
 <Hand>"2"</Hand>
@@ -3902,7 +3902,7 @@ You invoke a mystical prime language that existed before the arrival of the Old 
 <Description language="ENGLISH">"Digestive Tonic"</Description>
 <Theme>"RULES-LAB_198"</Theme>
 <Availability>"RULES-DISPO_COMMON"</Availability>
-<Price>"1/-"</Price>
+<Price>"1PA"</Price>
 <Encumbrance>"0"</Encumbrance>
 </Trapping>
 <Trapping id="HELFG-TRAP_004">
@@ -3916,21 +3916,21 @@ You invoke a mystical prime language that existed before the arrival of the Old 
 <Description language="ENGLISH">"Faxtoryll"</Description>
 <Theme>"RULES-LAB_198"</Theme>
 <Availability>"RULES-DISPO_LIMITED"</Availability>
-<Price>"5/-"</Price>
+<Price>"5PA"</Price>
 <Encumbrance>"0"</Encumbrance>
 </Trapping>
 <Trapping id="HELFG-TRAP_006">
 <Description language="ENGLISH">"Healing Draught"</Description>
 <Theme>"RULES-LAB_198"</Theme>
 <Availability>"RULES-DISPO_COMMON"</Availability>
-<Price>"4/-"</Price>
+<Price>"4PA"</Price>
 <Encumbrance>"0"</Encumbrance>
 </Trapping>
 <Trapping id="HELFG-TRAP_007">
 <Description language="ENGLISH">"Healing Poultice"</Description>
 <Theme>"RULES-LAB_198"</Theme>
 <Availability>"RULES-DISPO_COMMON"</Availability>
-<Price>"5/-"</Price>
+<Price>"5PA"</Price>
 <Encumbrance>"0"</Encumbrance>
 </Trapping>
 <Trapping id="HELFG-TRAP_008">
@@ -3944,14 +3944,14 @@ You invoke a mystical prime language that existed before the arrival of the Old 
 <Description language="ENGLISH">"Salwort"</Description>
 <Theme>"RULES-LAB_198"</Theme>
 <Availability>"RULES-DISPO_COMMON"</Availability>
-<Price>"4/-"</Price>
+<Price>"4PA"</Price>
 <Encumbrance>"0"</Encumbrance>
 </Trapping>
 <Trapping id="HELFG-TRAP_010">
 <Description language="ENGLISH">"Vitality Draught"</Description>
 <Theme>"RULES-LAB_198"</Theme>
 <Availability>"RULES-DISPO_COMMON"</Availability>
-<Price>"6/-"</Price>
+<Price>"6PA"</Price>
 <Encumbrance>"0"</Encumbrance>
 </Trapping>
 <Trapping id="HELFG-TRAP_011">
@@ -3965,7 +3965,7 @@ You invoke a mystical prime language that existed before the arrival of the Old 
 <Description language="ENGLISH">"Narinocha Wine, bottle"</Description>
 <Theme>"RULES-LAB_192"</Theme>
 <Availability>"RULES-DISPO_LIMITED"</Availability>
-<Price>"6/-"</Price>
+<Price>"6PA"</Price>
 <Encumbrance>"0"</Encumbrance>
 </Trapping>
 <Trapping id="HELFG-TRAP_013">

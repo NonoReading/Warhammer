@@ -366,6 +366,9 @@
 <Text name="RULES-LAB_219">"Trappings (equipment) added by this book"</Text>
 <Text name="RULES-LAB_220">"Spells added by this book"</Text>
 <Text name="RULES-LAB_221">"Creature traits added by this book"</Text>
+<Text name="RULES-LAB_222">"GC"</Text>
+<Text name="RULES-LAB_223">"SS"</Text>
+<Text name="RULES-LAB_224">"BP"</Text>
 </Label>
 </DATA_LABEL>
 </DATA_BOOK>

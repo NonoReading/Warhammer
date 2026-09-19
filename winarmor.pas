@@ -170,7 +170,7 @@ var
               TabArmor.Cells[ 2,NbWeap+1]  := GetAllTexteLibelle(PArmure.TypeMateriel);
               TabArmor.Cells[ 3,NbWeap+1]  := PArmure.Libelle;
               TabArmor.Cells[ 4,NbWeap+1]  := GetAllTexteLibelle(PArmure.Emplacement);
-              TabArmor.Cells[ 5,NbWeap+1]  := PArmure.Prix;
+              TabArmor.Cells[ 5,NbWeap+1]  := TraduirePrix(PArmure.Prix);
               TabArmor.Cells[ 6,NbWeap+1]  := IntToStr(PArmure.Encombrement);
               TabArmor.Cells[ 7,NbWeap+1]  := GetAllTexteLibelle(PArmure.Disponibilite);
               TabArmor.Cells[ 8,NbWeap+1]  := IntToStr(PArmure.Protection);
@@ -192,7 +192,7 @@ var
 
               TabArmor.Cells[ 1,NbWeap+1]  := PArmureSimplifiee.CodeArmure;
               TabArmor.Cells[ 3,NbWeap+1]  := PArmureSimplifiee.Libelle;
-              TabArmor.Cells[ 5,NbWeap+1]  := PArmureSimplifiee.Prix;
+              TabArmor.Cells[ 5,NbWeap+1]  := TraduirePrix(PArmureSimplifiee.Prix);
               TabArmor.Cells[ 6,NbWeap+1]  := IntToStr(PArmureSimplifiee.Encombrement);
               TabArmor.Cells[ 7,NbWeap+1]  := GetAllTexteLibelle(PArmureSimplifiee.Disponibilite);
               TabArmor.Cells[ 8,NbWeap+1]  := IntToStr(PArmureSimplifiee.Protection);

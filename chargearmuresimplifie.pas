@@ -59,7 +59,7 @@ function TexteArmureSimplifiee(PArmureSimplifiee: StructureArmureSimplifiee):Str
       begin
         Texte := GetTexteLibelle('RULES-LAB_118') + ' : ';
         if PArmureSimplifiee.Prix <> '' then
-          Texte  := Texte + SeparateurRetourLigne + SeparateurRetourLigne + GetTexteLibelle('RULES-LAB_054') + ' : ' + PArmureSimplifiee.Prix;
+          Texte  := Texte + SeparateurRetourLigne + SeparateurRetourLigne + GetTexteLibelle('RULES-LAB_054') + ' : ' + TraduirePrix(PArmureSimplifiee.Prix);
         if PArmureSimplifiee.Encombrement <> 0 then
           Texte  := Texte + SeparateurRetourLigne + SeparateurRetourLigne + GetTexteLibelle('RULES-LAB_055') + ' : ' + IntToStr(PArmureSimplifiee.Encombrement);
         if PArmureSimplifiee.Disponibilite <> '' then

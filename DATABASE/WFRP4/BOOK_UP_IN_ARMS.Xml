@@ -2487,7 +2487,7 @@ Ifthe Character passes the Test, the crew members may then use the Characters Ra
 <Damage>"+(BATTR_S)+4"</Damage>
 <Availability>"RULES-DISPO_COMMON"</Availability>
 <Reach>"RULES-WEAPR_MID"</Reach>
-<Price>"10/-"</Price>
+<Price>"10PA"</Price>
 <Encumbrance>"1"</Encumbrance>
 <Quality>"RULES-WEAPB30,UPINA-WEAPB31"</Quality>
 <Hand>"1"</Hand>
@@ -2499,7 +2499,7 @@ Ifthe Character passes the Test, the crew members may then use the Characters Ra
 <Damage>"+(BATTR_S)+1"</Damage>
 <Availability>"RULES-DISPO_LIMITED"</Availability>
 <Reach>"RULES-WEAPR_CLOSE"</Reach>
-<Price>"16/-"</Price>
+<Price>"16PA"</Price>
 <Encumbrance>"0"</Encumbrance>
 <Quality>"RULES-WEAPB12,RULES-WEAPB22,RULES-WEAPB16"</Quality>
 <Hand>"1"</Hand>
@@ -2511,7 +2511,7 @@ Ifthe Character passes the Test, the crew members may then use the Characters Ra
 <Damage>"+(BATTR_S)+4"</Damage>
 <Availability>"RULES-DISPO_COMMON"</Availability>
 <Reach>"RULES-WEAPR_MID"</Reach>
-<Price>"4/-"</Price>
+<Price>"4PA"</Price>
 <Encumbrance>"0"</Encumbrance>
 <Quality>"RULES-WEAPB27,UPINA-WEAPB31"</Quality>
 <Hand>"1"</Hand>
@@ -2523,7 +2523,7 @@ Ifthe Character passes the Test, the crew members may then use the Characters Ra
 <Damage>"+(BATTR_S)+2"</Damage>
 <Availability>"RULES-DISPO_COMMON"</Availability>
 <Reach>"RULES-WEAPR_CLOSE"</Reach>
-<Price>"16/-"</Price>
+<Price>"16PA"</Price>
 <Encumbrance>"0"</Encumbrance>
 <Quality>"-"</Quality>
 <Hand>"1"</Hand>
@@ -2535,7 +2535,7 @@ Ifthe Character passes the Test, the crew members may then use the Characters Ra
 <Damage>"+(BATTR_S)+1"</Damage>
 <Availability>"RULES-DISPO_COMMON"</Availability>
 <Reach>"RULES-WEAPR_CLOSE"</Reach>
-<Price>"8/-"</Price>
+<Price>"8PA"</Price>
 <Encumbrance>"0"</Encumbrance>
 <Quality>"RULES-WEAPB27"</Quality>
 <Hand>"1"</Hand>
@@ -2547,7 +2547,7 @@ Ifthe Character passes the Test, the crew members may then use the Characters Ra
 <Damage>"+(BATTR_S)+4"</Damage>
 <Availability>"RULES-DISPO_COMMON"</Availability>
 <Reach>"RULES-WEAPR_MID"</Reach>
-<Price>"15/-"</Price>
+<Price>"15PA"</Price>
 <Encumbrance>"1"</Encumbrance>
 <Quality>"RULES-WEAPB04,UPINA-WEAPB31"</Quality>
 <Hand>"1"</Hand>
@@ -2559,7 +2559,7 @@ Ifthe Character passes the Test, the crew members may then use the Characters Ra
 <Damage>"+(BATTR_S)+4"</Damage>
 <Availability>"RULES-DISPO_LIMITED"</Availability>
 <Reach>"RULES-WEAPR_MID"</Reach>
-<Price>"15/-"</Price>
+<Price>"15PA"</Price>
 <Encumbrance>"1"</Encumbrance>
 <Quality>"RULES-WEAPB22,UPINA-WEAPB31"</Quality>
 <Hand>"1"</Hand>
@@ -2571,7 +2571,7 @@ Ifthe Character passes the Test, the crew members may then use the Characters Ra
 <Damage>"+(BATTR_S)+4"</Damage>
 <Availability>"RULES-DISPO_LIMITED"</Availability>
 <Reach>"RULES-WEAPR_SHORT"</Reach>
-<Price>"1 GC"</Price>
+<Price>"1CO"</Price>
 <Encumbrance>"1"</Encumbrance>
 <Quality>"UPINA-WEAPB32 1"</Quality>
 <Hand>"1"</Hand>
@@ -2583,7 +2583,7 @@ Ifthe Character passes the Test, the crew members may then use the Characters Ra
 <Damage>"+(BATTR_S)+4"</Damage>
 <Availability>"RULES-DISPO_COMMON"</Availability>
 <Reach>"RULES-WEAPR_MID"</Reach>
-<Price>"1 GC"</Price>
+<Price>"1CO"</Price>
 <Encumbrance>"1"</Encumbrance>
 <Quality>"-"</Quality>
 <Hand>"1"</Hand>
@@ -2595,7 +2595,7 @@ Ifthe Character passes the Test, the crew members may then use the Characters Ra
 <Damage>"+(BATTR_S)+4"</Damage>
 <Availability>"RULES-DISPO_LIMITED"</Availability>
 <Reach>"RULES-WEAPR_MID"</Reach>
-<Price>"1 GC"</Price>
+<Price>"1CO"</Price>
 <Encumbrance>"1"</Encumbrance>
 <Quality>"UPINA-WEAPB31,RULES-WEAPB04,RULES-WEAPB22"</Quality>
 <Hand>"1"</Hand>
@@ -2607,7 +2607,7 @@ Ifthe Character passes the Test, the crew members may then use the Characters Ra
 <Damage>"+(BATTR_S)+1"</Damage>
 <Availability>"RULES-DISPO_COMMON"</Availability>
 <Reach>"RULES-WEAPR_PERSO"</Reach>
-<Price>"18/2"</Price>
+<Price>"18PA 2SB"</Price>
 <Encumbrance>"0"</Encumbrance>
 <Quality>"RULES-WEAPB18 1,RULES-WEAPB08,RULES-WEAPB27"</Quality>
 <Hand>"1"</Hand>
@@ -2619,7 +2619,7 @@ Ifthe Character passes the Test, the crew members may then use the Characters Ra
 <Damage>"+(BATTR_S)+2"</Damage>
 <Availability>"RULES-DISPO_COMMON"</Availability>
 <Reach>"RULES-WEAPR_CLOSE"</Reach>
-<Price>"2GC"</Price>
+<Price>"2CO"</Price>
 <Encumbrance>"1"</Encumbrance>
 <Quality>"RULES-WEAPB18 2,RULES-WEAPB08,RULES-WEAPB27"</Quality>
 <Hand>"1"</Hand>
@@ -2631,7 +2631,7 @@ Ifthe Character passes the Test, the crew members may then use the Characters Ra
 <Damage>"+(BATTR_S)+3"</Damage>
 <Availability>"RULES-DISPO_COMMON"</Availability>
 <Reach>"RULES-WEAPR_CLOSE"</Reach>
-<Price>"3GC"</Price>
+<Price>"3CO"</Price>
 <Encumbrance>"3"</Encumbrance>
 <Quality>"RULES-WEAPB18 3,RULES-WEAPB08,RULES-WEAPB27"</Quality>
 <Hand>"1"</Hand>
@@ -2643,7 +2643,7 @@ Ifthe Character passes the Test, the crew members may then use the Characters Ra
 <Damage>"+(BATTR_S)+2"</Damage>
 <Availability>"RULES-DISPO_RARE"</Availability>
 <Reach>"-"</Reach>
-<Price>"3 GC 15/-"</Price>
+<Price>"3CO 15PA"</Price>
 <Encumbrance>"4"</Encumbrance>
 <Quality>"RULES-WEAPB18 5"</Quality>
 <Hand>"1"</Hand>
@@ -2655,7 +2655,7 @@ Ifthe Character passes the Test, the crew members may then use the Characters Ra
 <Damage>"+(BATTR_S)+5"</Damage>
 <Availability>"RULES-DISPO_LIMITED"</Availability>
 <Reach>"RULES-WEAPR_LONG"</Reach>
-<Price>"3GC"</Price>
+<Price>"3CO"</Price>
 <Encumbrance>"3"</Encumbrance>
 <Quality>"RULES-WEAPB04"</Quality>
 <Hand>"2"</Hand>
@@ -2667,7 +2667,7 @@ Ifthe Character passes the Test, the crew members may then use the Characters Ra
 <Damage>"(BATTR_S)+5*"</Damage>
 <Availability>"RULES-DISPO_LIMITED"</Availability>
 <Reach>"RULES-WEAPR_LONG"</Reach>
-<Price>"1GC"</Price>
+<Price>"1CO"</Price>
 <Encumbrance>"2"</Encumbrance>
 <Quality>"RULES-WEAPB21,RULES-WEAPB12"</Quality>
 <Hand>"1"</Hand>
@@ -2679,7 +2679,7 @@ Ifthe Character passes the Test, the crew members may then use the Characters Ra
 <Damage>"+(BATTR_S)+6*"</Damage>
 <Availability>"RULES-DISPO_LIMITED"</Availability>
 <Reach>"RULES-WEAPR_BIG"</Reach>
-<Price>"1GC"</Price>
+<Price>"1CO"</Price>
 <Encumbrance>"3"</Encumbrance>
 <Quality>"RULES-WEAPB21,RULES-WEAPB12"</Quality>
 <Hand>"1"</Hand>
@@ -2691,7 +2691,7 @@ Ifthe Character passes the Test, the crew members may then use the Characters Ra
 <Damage>"(BATTR_S)+4"</Damage>
 <Availability>"RULES-DISPO_LIMITED"</Availability>
 <Reach>"RULES-WEAPR_MID"</Reach>
-<Price>"2GC"</Price>
+<Price>"2CO"</Price>
 <Encumbrance>"1"</Encumbrance>
 <Quality>"UPINA-WEAPB32 1"</Quality>
 <Hand>"1"</Hand>
@@ -2703,7 +2703,7 @@ Ifthe Character passes the Test, the crew members may then use the Characters Ra
 <Damage>"+(BATTR_S)+3"</Damage>
 <Availability>"RULES-DISPO_LIMITED"</Availability>
 <Reach>"RULES-WEAPR_MID"</Reach>
-<Price>"5GC"</Price>
+<Price>"5CO"</Price>
 <Encumbrance>"1"</Encumbrance>
 <Quality>"RULES-WEAPB20,RULES-WEAPB12,RULES-WEAPB16,RULES-WEAPB27"</Quality>
 <Hand>"1"</Hand>
@@ -2715,7 +2715,7 @@ Ifthe Character passes the Test, the crew members may then use the Characters Ra
 <Damage>"+(BATTR_S)+4"</Damage>
 <Availability>"RULES-DISPO_LIMITED"</Availability>
 <Reach>"RULES-WEAPR_LONG"</Reach>
-<Price>"5GC"</Price>
+<Price>"5CO"</Price>
 <Encumbrance>"1"</Encumbrance>
 <Quality>"RULES-WEAPB20,RULES-WEAPB12"</Quality>
 <Hand>"1"</Hand>
@@ -2727,7 +2727,7 @@ Ifthe Character passes the Test, the crew members may then use the Characters Ra
 <Damage>"+(BATTR_S)+2"</Damage>
 <Availability>"RULES-DISPO_LIMITED"</Availability>
 <Reach>"RULES-WEAPR_MID"</Reach>
-<Price>"4GC"</Price>
+<Price>"4CO"</Price>
 <Encumbrance>"1"</Encumbrance>
 <Quality>"RULES-WEAPB20,RULES-WEAPB12,RULES-WEAPB16"</Quality>
 <Hand>"1"</Hand>
@@ -2739,7 +2739,7 @@ Ifthe Character passes the Test, the crew members may then use the Characters Ra
 <Damage>"+(BATTR_S)+3"</Damage>
 <Availability>"RULES-DISPO_LIMITED"</Availability>
 <Reach>"RULES-WEAPR_PERSO"</Reach>
-<Price>"2 GC"</Price>
+<Price>"2CO"</Price>
 <Encumbrance>"1"</Encumbrance>
 <Quality>"RULES-WEAPB12,UPINA-WEAPB31"</Quality>
 <Hand>"1"</Hand>
@@ -2751,7 +2751,7 @@ Ifthe Character passes the Test, the crew members may then use the Characters Ra
 <Damage>"+(BATTR_S)+4"</Damage>
 <Availability>"RULES-DISPO_COMMON"</Availability>
 <Reach>"RULES-WEAPR_SHORT"</Reach>
-<Price>"6/-"</Price>
+<Price>"6PA"</Price>
 <Encumbrance>"0"</Encumbrance>
 <Quality>"UPINA-WEAPB34,RULES-WEAPB27"</Quality>
 <Hand>"1"</Hand>
@@ -2763,7 +2763,7 @@ Ifthe Character passes the Test, the crew members may then use the Characters Ra
 <Damage>"+(BATTR_S)+2"</Damage>
 <Availability>"RULES-DISPO_RARE"</Availability>
 <Reach>"RULES-WEAPR_PERSO"</Reach>
-<Price>"1/-"</Price>
+<Price>"1PA"</Price>
 <Encumbrance>"0"</Encumbrance>
 <Quality>"RULES-WEAPB17,RULES-WEAPB28,UPINA-WEAPB31,RULES-WEAPB27"</Quality>
 <Hand>"2"</Hand>
@@ -2775,7 +2775,7 @@ Ifthe Character passes the Test, the crew members may then use the Characters Ra
 <Damage>"+(BATTR_S)+2"</Damage>
 <Availability>"RULES-DISPO_COMMON"</Availability>
 <Reach>"RULES-WEAPR_PERSO"</Reach>
-<Price>"2/6"</Price>
+<Price>"2PA 6SB"</Price>
 <Encumbrance>"0"</Encumbrance>
 <Quality>"-"</Quality>
 <Hand>"1"</Hand>
@@ -2787,7 +2787,7 @@ Ifthe Character passes the Test, the crew members may then use the Characters Ra
 <Damage>"+(BATTR_S)+2"</Damage>
 <Availability>"RULES-DISPO_LIMITED"</Availability>
 <Reach>"RULES-WEAPR_PERSO"</Reach>
-<Price>"1 GC"</Price>
+<Price>"1CO"</Price>
 <Encumbrance>"1"</Encumbrance>
 <Quality>"RULES-WEAPB27"</Quality>
 <Hand>"1"</Hand>
@@ -2799,7 +2799,7 @@ Ifthe Character passes the Test, the crew members may then use the Characters Ra
 <Damage>"+(BATTR_S)+1"</Damage>
 <Availability>"RULES-DISPO_RARE"</Availability>
 <Reach>"RULES-WEAPR_PERSO"</Reach>
-<Price>"1/-"</Price>
+<Price>"1PA"</Price>
 <Encumbrance>"0"</Encumbrance>
 <Quality>"RULES-WEAPB04,UPINA-WEAPB31,RULES-WEAPB27"</Quality>
 <Hand>"1"</Hand>
@@ -2811,7 +2811,7 @@ Ifthe Character passes the Test, the crew members may then use the Characters Ra
 <Damage>"+(BATTR_S)+3"</Damage>
 <Availability>"RULES-DISPO_COMMON"</Availability>
 <Reach>"RULES-WEAPR_MID"</Reach>
-<Price>"10/-"</Price>
+<Price>"10PA"</Price>
 <Encumbrance>"1"</Encumbrance>
 <Quality>"RULES-WEAPB09,RULES-WEAPB26,RULES-WEAPB01"</Quality>
 <Hand>"1"</Hand>
@@ -2823,7 +2823,7 @@ Ifthe Character passes the Test, the crew members may then use the Characters Ra
 <Damage>"+(BATTR_S)+5"</Damage>
 <Availability>"RULES-DISPO_LIMITED"</Availability>
 <Reach>"RULES-WEAPR_MID"</Reach>
-<Price>"2GC"</Price>
+<Price>"2CO"</Price>
 <Encumbrance>"1"</Encumbrance>
 <Quality>"RULES-WEAPB09,RULES-WEAPB01"</Quality>
 <Hand>"1"</Hand>
@@ -2835,7 +2835,7 @@ Ifthe Character passes the Test, the crew members may then use the Characters Ra
 <Damage>"+(BATTR_S)+6"</Damage>
 <Availability>"RULES-DISPO_RARE"</Availability>
 <Reach>"RULES-WEAPR_LONG"</Reach>
-<Price>"3GC"</Price>
+<Price>"3CO"</Price>
 <Encumbrance>"2"</Encumbrance>
 <Quality>"RULES-WEAPB09,RULES-WEAPB21,RULES-WEAPB25,RULES-WEAPB01"</Quality>
 <Hand>"2"</Hand>
@@ -2847,7 +2847,7 @@ Ifthe Character passes the Test, the crew members may then use the Characters Ra
 <Damage>"+(BATTR_S)+0"</Damage>
 <Availability>"RULES-DISPO_COMMON"</Availability>
 <Reach>"RULES-WEAPR_SHORT"</Reach>
-<Price>"10/-"</Price>
+<Price>"10PA"</Price>
 <Encumbrance>"1"</Encumbrance>
 <Quality>"RULES-WEAPB17,RULES-WEAPB08,RULES-WEAPB27"</Quality>
 <Hand>"1"</Hand>
@@ -2859,7 +2859,7 @@ Ifthe Character passes the Test, the crew members may then use the Characters Ra
 <Damage>"+(BATTR_S)+2"</Damage>
 <Availability>"RULES-DISPO_RARE"</Availability>
 <Reach>"RULES-WEAPR_CLOSE"</Reach>
-<Price>"1GC"</Price>
+<Price>"1CO"</Price>
 <Encumbrance>"0"</Encumbrance>
 <Quality>"RULES-WEAPB08"</Quality>
 <Hand>"1"</Hand>
@@ -2871,7 +2871,7 @@ Ifthe Character passes the Test, the crew members may then use the Characters Ra
 <Damage>"+(BATTR_S)+1"</Damage>
 <Availability>"RULES-DISPO_LIMITED"</Availability>
 <Reach>"RULES-WEAPR_SHORT"</Reach>
-<Price>"1GC 2/6"</Price>
+<Price>"1CO 2PA 6SB"</Price>
 <Encumbrance>"1"</Encumbrance>
 <Quality>"RULES-WEAPB08,RULES-WEAPB11"</Quality>
 <Hand>"1"</Hand>
@@ -2883,7 +2883,7 @@ Ifthe Character passes the Test, the crew members may then use the Characters Ra
 <Damage>"+(BATTR_S)+0"</Damage>
 <Availability>"RULES-DISPO_RARE"</Availability>
 <Reach>"RULES-WEAPR_SHORT"</Reach>
-<Price>"1GC 10/-"</Price>
+<Price>"1CO 10PA"</Price>
 <Encumbrance>"1"</Encumbrance>
 <Quality>"RULES-WEAPB17,RULES-WEAPB08,RULES-WEAPB18 1,RULES-WEAPB28,RULES-WEAPB27,RULES-WEAPB01"</Quality>
 <Hand>"2"</Hand>
@@ -2895,7 +2895,7 @@ Ifthe Character passes the Test, the crew members may then use the Characters Ra
 <Damage>"+(BATTR_S)+3"</Damage>
 <Availability>"RULES-DISPO_LIMITED"</Availability>
 <Reach>"RULES-WEAPR_BIG"</Reach>
-<Price>"2GC"</Price>
+<Price>"2CO"</Price>
 <Encumbrance>"2"</Encumbrance>
 <Quality>"RULES-WEAPB12,RULES-WEAPB22"</Quality>
 <Hand>"2"</Hand>
@@ -2907,7 +2907,7 @@ Ifthe Character passes the Test, the crew members may then use the Characters Ra
 <Damage>"+(BATTR_S)+4"</Damage>
 <Availability>"RULES-DISPO_LIMITED"</Availability>
 <Reach>"RULES-WEAPR_LONG"</Reach>
-<Price>"2GC"</Price>
+<Price>"2CO"</Price>
 <Encumbrance>"3"</Encumbrance>
 <Quality>"RULES-WEAPB08,RULES-WEAPB30/UPINA-WEAPB34"</Quality>
 <Hand>"2"</Hand>
@@ -2919,7 +2919,7 @@ Ifthe Character passes the Test, the crew members may then use the Characters Ra
 <Damage>"+(BATTR_S)+4"</Damage>
 <Availability>"RULES-DISPO_COMMON"</Availability>
 <Reach>"RULES-WEAPR_LONG"</Reach>
-<Price>"2GC"</Price>
+<Price>"2CO"</Price>
 <Encumbrance>"3"</Encumbrance>
 <Quality>"RULES-WEAPB08,RULES-WEAPB30/RULES-WEAPB12"</Quality>
 <Hand>"2"</Hand>
@@ -2931,7 +2931,7 @@ Ifthe Character passes the Test, the crew members may then use the Characters Ra
 <Damage>"+(BATTR_S)+2"</Damage>
 <Availability>"RULES-DISPO_RARE"</Availability>
 <Reach>"RULES-WEAPR_LONG"</Reach>
-<Price>"2GC"</Price>
+<Price>"2CO"</Price>
 <Encumbrance>"3"</Encumbrance>
 <Quality>"RULES-WEAPB08,RULES-WEAPB17"</Quality>
 <Hand>"2"</Hand>
@@ -2943,7 +2943,7 @@ Ifthe Character passes the Test, the crew members may then use the Characters Ra
 <Damage>"+(BATTR_S)+4"</Damage>
 <Availability>"RULES-DISPO_LIMITED"</Availability>
 <Reach>"RULES-WEAPR_LONG"</Reach>
-<Price>"2GC"</Price>
+<Price>"2CO"</Price>
 <Encumbrance>"3"</Encumbrance>
 <Quality>"RULES-WEAPB08,RULES-WEAPB12/UPINA-WEAPB32 2"</Quality>
 <Hand>"2"</Hand>
@@ -2955,7 +2955,7 @@ Ifthe Character passes the Test, the crew members may then use the Characters Ra
 <Damage>"+(BATTR_S)+4"</Damage>
 <Availability>"RULES-DISPO_LIMITED"</Availability>
 <Reach>"RULES-WEAPR_LONG"</Reach>
-<Price>"2GC"</Price>
+<Price>"2CO"</Price>
 <Encumbrance>"2"</Encumbrance>
 <Quality>"RULES-WEAPB08,RULES-WEAPB30/RULES-WEAPB12/RULES-WEAPB04"</Quality>
 <Hand>"2"</Hand>
@@ -2967,7 +2967,7 @@ Ifthe Character passes the Test, the crew members may then use the Characters Ra
 <Damage>"+(BATTR_S)+4"</Damage>
 <Availability>"RULES-DISPO_COMMON"</Availability>
 <Reach>"RULES-WEAPR_BIG"</Reach>
-<Price>"15/-"</Price>
+<Price>"15PA"</Price>
 <Encumbrance>"0"</Encumbrance>
 <Quality>"RULES-WEAPB12"</Quality>
 <Hand>"2"</Hand>
@@ -2979,7 +2979,7 @@ Ifthe Character passes the Test, the crew members may then use the Characters Ra
 <Damage>"+(BATTR_S)+4"</Damage>
 <Availability>"RULES-DISPO_RARE"</Availability>
 <Reach>"RULES-WEAPR_HUGE"</Reach>
-<Price>"18/-"</Price>
+<Price>"18PA"</Price>
 <Encumbrance>"4"</Encumbrance>
 <Quality>"RULES-WEAPB12"</Quality>
 <Hand>"2"</Hand>
@@ -2991,7 +2991,7 @@ Ifthe Character passes the Test, the crew members may then use the Characters Ra
 <Damage>"+(BATTR_S)+4"</Damage>
 <Availability>"RULES-DISPO_COMMON"</Availability>
 <Reach>"RULES-WEAPR_LONG"</Reach>
-<Price>"3/-"</Price>
+<Price>"3PA"</Price>
 <Encumbrance>"2"</Encumbrance>
 <Quality>"RULES-WEAPB08,RULES-WEAPB04"</Quality>
 <Hand>"2"</Hand>
@@ -3003,7 +3003,7 @@ Ifthe Character passes the Test, the crew members may then use the Characters Ra
 <Damage>"+(BATTR_S)+5"</Damage>
 <Availability>"RULES-DISPO_LIMITED"</Availability>
 <Reach>"RULES-WEAPR_LONG"</Reach>
-<Price>"8GC"</Price>
+<Price>"8CO"</Price>
 <Encumbrance>"3"</Encumbrance>
 <Quality>"RULES-WEAPB10,RULES-WEAPB08"</Quality>
 <Hand>"2"</Hand>
@@ -3015,7 +3015,7 @@ Ifthe Character passes the Test, the crew members may then use the Characters Ra
 <Damage>"+(BATTR_S)+6"</Damage>
 <Availability>"RULES-DISPO_COMMON"</Availability>
 <Reach>"RULES-WEAPR_LONG"</Reach>
-<Price>"4GC"</Price>
+<Price>"4CO"</Price>
 <Encumbrance>"3"</Encumbrance>
 <Quality>"RULES-WEAPB30,RULES-WEAPB21,RULES-WEAPB25"</Quality>
 <Hand>"2"</Hand>
@@ -3027,7 +3027,7 @@ Ifthe Character passes the Test, the crew members may then use the Characters Ra
 <Damage>"+(BATTR_S)+5"</Damage>
 <Availability>"RULES-DISPO_EXOTIC"</Availability>
 <Reach>"RULES-WEAPR_LONG"</Reach>
-<Price>"30GC"</Price>
+<Price>"30CO"</Price>
 <Encumbrance>"3"</Encumbrance>
 <Quality>"RULES-WEAPB10,RULES-WEAPB30,UPINA-WEAPB32 2"</Quality>
 <Hand>"2"</Hand>
@@ -3039,7 +3039,7 @@ Ifthe Character passes the Test, the crew members may then use the Characters Ra
 <Damage>"+(BATTR_S)+5"</Damage>
 <Availability>"RULES-DISPO_COMMON"</Availability>
 <Reach>"RULES-WEAPR_MID"</Reach>
-<Price>"9/-"</Price>
+<Price>"9PA"</Price>
 <Encumbrance>"3"</Encumbrance>
 <Quality>"RULES-WEAPB10,RULES-WEAPB12,RULES-WEAPB28"</Quality>
 <Hand>"2"</Hand>
@@ -3051,7 +3051,7 @@ Ifthe Character passes the Test, the crew members may then use the Characters Ra
 <Damage>"+(BATTR_S)+6"</Damage>
 <Availability>"RULES-DISPO_COMMON"</Availability>
 <Reach>"RULES-WEAPR_MID"</Reach>
-<Price>"3GC"</Price>
+<Price>"3CO"</Price>
 <Encumbrance>"3"</Encumbrance>
 <Quality>"RULES-WEAPB10,RULES-WEAPB04,RULES-WEAPB28"</Quality>
 <Hand>"2"</Hand>
@@ -3063,7 +3063,7 @@ Ifthe Character passes the Test, the crew members may then use the Characters Ra
 <Damage>"+(BATTR_S)+5"</Damage>
 <Availability>"RULES-DISPO_LIMITED"</Availability>
 <Reach>"RULES-WEAPR_LONG"</Reach>
-<Price>"10GC"</Price>
+<Price>"10CO"</Price>
 <Encumbrance>"3"</Encumbrance>
 <Quality>"RULES-WEAPB10,RULES-WEAPB30"</Quality>
 <Hand>"2"</Hand>
@@ -3075,7 +3075,7 @@ Ifthe Character passes the Test, the crew members may then use the Characters Ra
 <Damage>"+8"</Damage>
 <Availability>"RULES-DISPO_LIMITED"</Availability>
 <Reach>"20"</Reach>
-<Price>"2GC"</Price>
+<Price>"2CO"</Price>
 <Encumbrance>"1"</Encumbrance>
 <Quality>"RULES-WEAPB24,RULES-WEAPB23 2"</Quality>
 <Hand>"2"</Hand>
@@ -3087,7 +3087,7 @@ Ifthe Character passes the Test, the crew members may then use the Characters Ra
 <Damage>"+9"</Damage>
 <Availability>"RULES-DISPO_EXOTIC"</Availability>
 <Reach>"100"</Reach>
-<Price>"100GC"</Price>
+<Price>"100CO"</Price>
 <Encumbrance>"3"</Encumbrance>
 <Quality>"RULES-WEAPB16,RULES-WEAPB16,RULES-WEAPB23 4"</Quality>
 <Hand>"2"</Hand>
@@ -3099,7 +3099,7 @@ Ifthe Character passes the Test, the crew members may then use the Characters Ra
 <Damage>"+9"</Damage>
 <Availability>"RULES-DISPO_LIMITED"</Availability>
 <Reach>"50"</Reach>
-<Price>"4GC"</Price>
+<Price>"4CO"</Price>
 <Encumbrance>"2"</Encumbrance>
 <Quality>"RULES-WEAPB24,RULES-WEAPB23 3"</Quality>
 <Hand>"2"</Hand>
@@ -3111,7 +3111,7 @@ Ifthe Character passes the Test, the crew members may then use the Characters Ra
 <Damage>"+8"</Damage>
 <Availability>"RULES-DISPO_RARE"</Availability>
 <Reach>"20"</Reach>
-<Price>"8 GC"</Price>
+<Price>"8CO"</Price>
 <Encumbrance>"0"</Encumbrance>
 <Quality>"RULES-WEAPB13,RULES-WEAPB23 1"</Quality>
 <Hand>"1"</Hand>
@@ -3123,7 +3123,7 @@ Ifthe Character passes the Test, the crew members may then use the Characters Ra
 <Damage>"+8"</Damage>
 <Availability>"RULES-DISPO_RARE"</Availability>
 <Reach>"50"</Reach>
-<Price>"2GC"</Price>
+<Price>"2CO"</Price>
 <Encumbrance>"2"</Encumbrance>
 <Quality>"RULES-WEAPB24,RULES-WEAPB23 4"</Quality>
 <Hand>"1"</Hand>
@@ -3135,7 +3135,7 @@ Ifthe Character passes the Test, the crew members may then use the Characters Ra
 <Damage>"+7"</Damage>
 <Availability>"RULES-DISPO_RARE"</Availability>
 <Reach>"20"</Reach>
-<Price>"1GC"</Price>
+<Price>"1CO"</Price>
 <Encumbrance>"1"</Encumbrance>
 <Quality>"UPINA-WEAPB33 3,RULES-WEAPB24,RULES-WEAPB23 3"</Quality>
 <Hand>"1"</Hand>
@@ -3147,7 +3147,7 @@ Ifthe Character passes the Test, the crew members may then use the Characters Ra
 <Damage>"+9"</Damage>
 <Availability>"RULES-DISPO_EXOTIC"</Availability>
 <Reach>"40"</Reach>
-<Price>"5GC"</Price>
+<Price>"5CO"</Price>
 <Encumbrance>"3"</Encumbrance>
 <Quality>"RULES-WEAPB24,RULES-WEAPB26,RULES-WEAPB23 5"</Quality>
 <Hand>"1"</Hand>
@@ -3159,7 +3159,7 @@ Ifthe Character passes the Test, the crew members may then use the Characters Ra
 <Damage>"+9"</Damage>
 <Availability>"RULES-DISPO_EXOTIC"</Availability>
 <Reach>"50"</Reach>
-<Price>"7 GC"</Price>
+<Price>"7CO"</Price>
 <Encumbrance>"3"</Encumbrance>
 <Quality>"RULES-WEAPB24,RULES-WEAPB03 2,RULES-WEAPB23 4"</Quality>
 <Hand>"1"</Hand>
@@ -3171,7 +3171,7 @@ Ifthe Character passes the Test, the crew members may then use the Characters Ra
 <Damage>"+7"</Damage>
 <Availability>"RULES-DISPO_EXOTIC"</Availability>
 <Reach>"10"</Reach>
-<Price>"10 GC"</Price>
+<Price>"10CO"</Price>
 <Encumbrance>"1"</Encumbrance>
 <Quality>"RULES-WEAPB26,UPINA-WEAPB33 5"</Quality>
 <Hand>"1"</Hand>
@@ -3183,7 +3183,7 @@ Ifthe Character passes the Test, the crew members may then use the Characters Ra
 <Damage>"+9"</Damage>
 <Availability>"RULES-DISPO_EXOTIC"</Availability>
 <Reach>"30"</Reach>
-<Price>"8"</Price>
+<Price>"8CO"</Price>
 <Encumbrance>"1"</Encumbrance>
 <Quality>"RULES-WEAPB26,RULES-WEAPB24,RULES-WEAPB23 4"</Quality>
 <Hand>"2"</Hand>
@@ -3195,7 +3195,7 @@ Ifthe Character passes the Test, the crew members may then use the Characters Ra
 <Damage>"+9"</Damage>
 <Availability>"RULES-DISPO_EXOTIC"</Availability>
 <Reach>"30"</Reach>
-<Price>"10"</Price>
+<Price>"10CO"</Price>
 <Encumbrance>"3"</Encumbrance>
 <Quality>"RULES-WEAPB26,RULES-WEAPB24,RULES-WEAPB23 4"</Quality>
 <Hand>"2"</Hand>
@@ -3207,7 +3207,7 @@ Ifthe Character passes the Test, the crew members may then use the Characters Ra
 <Damage>"+9"</Damage>
 <Availability>"RULES-DISPO_RARE"</Availability>
 <Reach>"30"</Reach>
-<Price>"10 GC"</Price>
+<Price>"10CO"</Price>
 <Encumbrance>"3"</Encumbrance>
 <Quality>"RULES-WEAPB24,RULES-WEAPB23 5,RULES-WEAPB03 4"</Quality>
 <Hand>"1"</Hand>
@@ -3219,7 +3219,7 @@ Ifthe Character passes the Test, the crew members may then use the Characters Ra
 <Damage>"+8"</Damage>
 <Availability>"RULES-DISPO_RARE"</Availability>
 <Reach>"10"</Reach>
-<Price>"15 GC"</Price>
+<Price>"15CO"</Price>
 <Encumbrance>"1"</Encumbrance>
 <Quality>"RULES-WEAPB24,RULES-WEAPB13,RULES-WEAPB23 4,RULES-WEAPB03 4"</Quality>
 <Hand>"1"</Hand>
@@ -3231,7 +3231,7 @@ Ifthe Character passes the Test, the crew members may then use the Characters Ra
 <Damage>"+8"</Damage>
 <Availability>"RULES-DISPO_RARE"</Availability>
 <Reach>"10"</Reach>
-<Price>"12 GC"</Price>
+<Price>"12CO"</Price>
 <Encumbrance>"1"</Encumbrance>
 <Quality>"RULES-WEAPB24,RULES-WEAPB13,RULES-WEAPB23 4,RULES-WEAPB03 4"</Quality>
 <Hand>"1"</Hand>
@@ -3243,7 +3243,7 @@ Ifthe Character passes the Test, the crew members may then use the Characters Ra
 <Damage>"+7"</Damage>
 <Availability>"RULES-DISPO_EXOTIC"</Availability>
 <Reach>"30"</Reach>
-<Price>"50 GC"</Price>
+<Price>"50CO"</Price>
 <Encumbrance>"3"</Encumbrance>
 <Quality>"RULES-WEAPB24,RULES-WEAPB26,RULES-WEAPB23 2"</Quality>
 <Hand>"1"</Hand>
@@ -3255,7 +3255,7 @@ Ifthe Character passes the Test, the crew members may then use the Characters Ra
 <Damage>"+8"</Damage>
 <Availability>"RULES-DISPO_EXOTIC"</Availability>
 <Reach>"10"</Reach>
-<Price>"15 GC"</Price>
+<Price>"15CO"</Price>
 <Encumbrance>"1"</Encumbrance>
 <Quality>"RULES-WEAPB24,RULES-WEAPB26,RULES-WEAPB23 6"</Quality>
 <Hand>"1"</Hand>
@@ -3267,7 +3267,7 @@ Ifthe Character passes the Test, the crew members may then use the Characters Ra
 <Damage>"+0"</Damage>
 <Availability>"RULES-DISPO_LIMITED"</Availability>
 <Reach>"+0"</Reach>
-<Price>"8/-"</Price>
+<Price>"8PA"</Price>
 <Encumbrance>"0"</Encumbrance>
 <Quality>"RULES-WEAPB12,UPINA-WEAPB32 1"</Quality>
 <Hand>"0"</Hand>
@@ -3279,7 +3279,7 @@ Ifthe Character passes the Test, the crew members may then use the Characters Ra
 <Damage>"+0"</Damage>
 <Availability>"RULES-DISPO_LIMITED"</Availability>
 <Reach>"+0"</Reach>
-<Price>"8/-"</Price>
+<Price>"8PA"</Price>
 <Encumbrance>"0"</Encumbrance>
 <Quality>"RULES-WEAPB12,RULES-WEAPB22"</Quality>
 <Hand>"0"</Hand>
@@ -3291,7 +3291,6 @@ Ifthe Character passes the Test, the crew members may then use the Characters Ra
 <Damage>"-2"</Damage>
 <Availability>"RULES-DISPO_COMMON"</Availability>
 <Reach>"/2"</Reach>
-<Price>"-"</Price>
 <Encumbrance>"0"</Encumbrance>
 <Quality>"RULES-WEAPB24,RULES-WEAPB26,RULES-WEAPB27"</Quality>
 <Hand>"0"</Hand>
@@ -3303,7 +3302,6 @@ Ifthe Character passes the Test, the crew members may then use the Characters Ra
 <Damage>"-2"</Damage>
 <Availability>"RULES-DISPO_COMMON"</Availability>
 <Reach>"-10"</Reach>
-<Price>"-"</Price>
 <Encumbrance>"0"</Encumbrance>
 <Quality>"RULES-WEAPB26,RULES-WEAPB27"</Quality>
 <Hand>"0"</Hand>
@@ -3315,7 +3313,7 @@ Ifthe Character passes the Test, the crew members may then use the Characters Ra
 <Damage>"+1"</Damage>
 <Availability>"RULES-DISPO_LIMITED"</Availability>
 <Reach>"+0"</Reach>
-<Price>"5/-"</Price>
+<Price>"5PA"</Price>
 <Encumbrance>"0"</Encumbrance>
 <Quality>"RULES-WEAPB12,RULES-WEAPB22"</Quality>
 <Hand>"0"</Hand>
@@ -3339,7 +3337,7 @@ Ifthe Character passes the Test, the crew members may then use the Characters Ra
 <Damage>"+1"</Damage>
 <Availability>"RULES-DISPO_COMMON"</Availability>
 <Reach>"+0"</Reach>
-<Price>"3/-"</Price>
+<Price>"3PA"</Price>
 <Encumbrance>"0"</Encumbrance>
 <Quality>"RULES-WEAPB12,RULES-WEAPB22,RULES-WEAPB16"</Quality>
 <Hand>"0"</Hand>
@@ -3351,7 +3349,7 @@ Ifthe Character passes the Test, the crew members may then use the Characters Ra
 <Damage>"-1"</Damage>
 <Availability>"RULES-DISPO_COMMON"</Availability>
 <Reach>"/2"</Reach>
-<Price>"2/-"</Price>
+<Price>"2PA"</Price>
 <Encumbrance>"0"</Encumbrance>
 <Quality>"UPINA-WEAPB33 3,UPINA-WEAPB37"</Quality>
 <Hand>"0"</Hand>
@@ -3674,56 +3672,56 @@ This Flaw is the Infected Creature Trait (WFRP, page 340) applied to a weapon, a
 <Description language="ENGLISH">"Ostrich Feather"</Description>
 <Theme>"RULES-LAB_191"</Theme>
 <Availability>"RULES-DISPO_RARE"</Availability>
-<Price>"3/-"</Price>
+<Price>"3PA"</Price>
 <Encumbrance>"0"</Encumbrance>
 </Trapping>
 <Trapping id="UPINA-TRAP_003">
 <Description language="ENGLISH">"Compass"</Description>
 <Theme>"RULES-LAB_193"</Theme>
 <Availability>"RULES-DISPO_LIMITED"</Availability>
-<Price>"10/-"</Price>
+<Price>"10PA"</Price>
 <Encumbrance>"0"</Encumbrance>
 </Trapping>
 <Trapping id="UPINA-TRAP_004">
 <Description language="ENGLISH">"Bandoleer"</Description>
 <Theme>"RULES-LAB_191"</Theme>
 <Availability>"RULES-DISPO_COMMON"</Availability>
-<Price>"6/-"</Price>
+<Price>"6PA"</Price>
 <Encumbrance>"1"</Encumbrance>
 </Trapping>
 <Trapping id="UPINA-TRAP_005">
 <Description language="ENGLISH">"Slow Match, yard"</Description>
 <Theme>"RULES-LAB_193"</Theme>
 <Availability>"RULES-DISPO_COMMON"</Availability>
-<Price>"2d"</Price>
+<Price>"2SB"</Price>
 <Encumbrance>"1"</Encumbrance>
 </Trapping>
 <Trapping id="UPINA-TRAP_006">
 <Description language="ENGLISH">"Fuse, yard"</Description>
 <Theme>"RULES-LAB_193"</Theme>
 <Availability>"RULES-DISPO_LIMITED"</Availability>
-<Price>"3d"</Price>
+<Price>"3SB"</Price>
 <Encumbrance>"1"</Encumbrance>
 </Trapping>
 <Trapping id="UPINA-TRAP_007">
 <Description language="ENGLISH">"Bow String"</Description>
 <Theme>"RULES-LAB_193"</Theme>
 <Availability>"RULES-DISPO_COMMON"</Availability>
-<Price>"4/-"</Price>
+<Price>"4PA"</Price>
 <Encumbrance>"0"</Encumbrance>
 </Trapping>
 <Trapping id="UPINA-TRAP_008">
 <Description language="ENGLISH">"Whetstone"</Description>
 <Theme>"RULES-LAB_193"</Theme>
 <Availability>"RULES-DISPO_COMMON"</Availability>
-<Price>"2/6"</Price>
+<Price>"2PA 6SB"</Price>
 <Encumbrance>"0"</Encumbrance>
 </Trapping>
 <Trapping id="UPINA-TRAP_009">
 <Description language="ENGLISH">"Sealskin"</Description>
 <Theme>"RULES-LAB_191"</Theme>
 <Availability>"RULES-DISPO_LIMITED"</Availability>
-<Price>"30/-"</Price>
+<Price>"30PA"</Price>
 <Encumbrance>"1"</Encumbrance>
 </Trapping>
 <Trapping id="UPINA-TRAP_010">
@@ -3737,14 +3735,14 @@ This Flaw is the Infected Creature Trait (WFRP, page 340) applied to a weapon, a
 <Description language="ENGLISH">"Captain Braun's Multi-Stove"</Description>
 <Theme>"RULES-LAB_196"</Theme>
 <Availability>"RULES-DISPO_LIMITED"</Availability>
-<Price>"10/-"</Price>
+<Price>"10PA"</Price>
 <Encumbrance>"3"</Encumbrance>
 </Trapping>
 <Trapping id="UPINA-TRAP_012">
 <Description language="ENGLISH">"Captain Braun's Insta-Boiler"</Description>
 <Theme>"RULES-LAB_196"</Theme>
 <Availability>"RULES-DISPO_LIMITED"</Availability>
-<Price>"6/-"</Price>
+<Price>"6PA"</Price>
 <Encumbrance>"2"</Encumbrance>
 </Trapping>
 </DATA_TRAPPING>

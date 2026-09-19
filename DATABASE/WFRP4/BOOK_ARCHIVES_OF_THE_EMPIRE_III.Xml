@@ -434,7 +434,7 @@ Each assistant provides the normal +10 bonus (WFRP page 155) whether it knows th
 <Armor id="ARCH3-ARMO_16">
 <Description language="ENGLISH">"Soft Kit"</Description>
 <Availability>"RULES-DISPO_LIMITED"</Availability>
-<Price>"18/-"</Price>
+<Price>"18PA"</Price>
 <Encumbrance>"1"</Encumbrance>
 <Quality>"RULES-ARMOB_08"</Quality>
 <Location>"RULES-ARMOL_ARM,RULES-ARMOL_BODY,RULES-ARMOL_LEG"</Location>
@@ -447,7 +447,7 @@ Each assistant provides the normal +10 bonus (WFRP page 155) whether it knows th
 <Armor id="ARCH3-ARMO_17">
 <Description language="ENGLISH">"Reinforced Soft Kit"</Description>
 <Availability>"RULES-DISPO_LIMITED"</Availability>
-<Price>"2GC"</Price>
+<Price>"2CO"</Price>
 <Encumbrance>"1"</Encumbrance>
 <Quality>"RULES-ARMOB_03,ARCH3-ARMOB_09,RULES-ARMOB_08"</Quality>
 <Location>"RULES-ARMOL_ARM,RULES-ARMOL_BODY,RULES-ARMOL_LEG"</Location>
@@ -459,7 +459,7 @@ Each assistant provides the normal +10 bonus (WFRP page 155) whether it knows th
 <Armor id="ARCH3-ARMO_18">
 <Description language="ENGLISH">"Leather Jack (A3)"</Description>
 <Availability>"RULES-DISPO_COMMON"</Availability>
-<Price>"12/-"</Price>
+<Price>"12PA"</Price>
 <Encumbrance>"1"</Encumbrance>
 <Quality>"RULES-ARMOB_08"</Quality>
 <Location>"RULES-ARMOL_ARM,RULES-ARMOL_BODY"</Location>
@@ -469,7 +469,7 @@ Each assistant provides the normal +10 bonus (WFRP page 155) whether it knows th
 <Armor id="ARCH3-ARMO_19">
 <Description language="ENGLISH">"Leather Jerkin (A3)"</Description>
 <Availability>"RULES-DISPO_COMMON"</Availability>
-<Price>"10/-"</Price>
+<Price>"10PA"</Price>
 <Encumbrance>"1"</Encumbrance>
 <Quality>"RULES-ARMOB_08"</Quality>
 <Location>"RULES-ARMOL_BODY"</Location>
@@ -479,7 +479,7 @@ Each assistant provides the normal +10 bonus (WFRP page 155) whether it knows th
 <Armor id="ARCH3-ARMO_20">
 <Description language="ENGLISH">"Leather Leggings (A3)"</Description>
 <Availability>"RULES-DISPO_COMMON"</Availability>
-<Price>"14/-"</Price>
+<Price>"14PA"</Price>
 <Encumbrance>"1"</Encumbrance>
 <Quality>"RULES-ARMOB_08"</Quality>
 <Location>"RULES-ARMOL_LEG"</Location>
@@ -489,7 +489,7 @@ Each assistant provides the normal +10 bonus (WFRP page 155) whether it knows th
 <Armor id="ARCH3-ARMO_21">
 <Description language="ENGLISH">"Leather Skullcap (A3)"</Description>
 <Availability>"RULES-DISPO_COMMON"</Availability>
-<Price>"8/-"</Price>
+<Price>"8PA"</Price>
 <Encumbrance>"0"</Encumbrance>
 <Quality>"RULES-ARMOB_08"</Quality>
 <Location>"RULES-ARMOL_HEAD"</Location>
@@ -499,7 +499,7 @@ Each assistant provides the normal +10 bonus (WFRP page 155) whether it knows th
 <Armor id="ARCH3-ARMO_22">
 <Description language="ENGLISH">"Chainmail Chausses (A3)"</Description>
 <Availability>"RULES-DISPO_LIMITED"</Availability>
-<Price>"2GC"</Price>
+<Price>"2CO"</Price>
 <Encumbrance>"3"</Encumbrance>
 <Quality>"RULES-ARMOB_01"</Quality>
 <Location>"RULES-ARMOL_LEG"</Location>
@@ -509,7 +509,7 @@ Each assistant provides the normal +10 bonus (WFRP page 155) whether it knows th
 <Armor id="ARCH3-ARMO_23">
 <Description language="ENGLISH">"Chainmail Coat (A3)"</Description>
 <Availability>"RULES-DISPO_COMMON"</Availability>
-<Price>"3GC"</Price>
+<Price>"3CO"</Price>
 <Encumbrance>"4"</Encumbrance>
 <Quality>"RULES-ARMOB_01"</Quality>
 <Location>"RULES-ARMOL_ARM,RULES-ARMOL_BODY"</Location>
@@ -519,7 +519,7 @@ Each assistant provides the normal +10 bonus (WFRP page 155) whether it knows th
 <Armor id="ARCH3-ARMO_24">
 <Description language="ENGLISH">"Chainmail Coif (A3)"</Description>
 <Availability>"RULES-DISPO_LIMITED"</Availability>
-<Price>"1GC"</Price>
+<Price>"1CO"</Price>
 <Encumbrance>"2"</Encumbrance>
 <Quality>"RULES-ARMOB_03,RULES-ARMOB_06,RULES-ARMOB_01"</Quality>
 <Location>"RULES-ARMOL_HEAD"</Location>
@@ -529,7 +529,7 @@ Each assistant provides the normal +10 bonus (WFRP page 155) whether it knows th
 <Armor id="ARCH3-ARMO_25">
 <Description language="ENGLISH">"Chainmail Shirt (A3)"</Description>
 <Availability>"RULES-DISPO_LIMITED"</Availability>
-<Price>"2GC"</Price>
+<Price>"2CO"</Price>
 <Encumbrance>"3"</Encumbrance>
 <Quality>"RULES-ARMOB_01"</Quality>
 <Location>"RULES-ARMOL_BODY"</Location>
@@ -539,7 +539,7 @@ Each assistant provides the normal +10 bonus (WFRP page 155) whether it knows th
 <Armor id="ARCH3-ARMO_26">
 <Description language="ENGLISH">"Brigandine Jack"</Description>
 <Availability>"RULES-DISPO_LIMITED"</Availability>
-<Price>"3GC"</Price>
+<Price>"3CO"</Price>
 <Encumbrance>"3"</Encumbrance>
 <Quality>"ARCH3-ARMOB_10"</Quality>
 <Location>"RULES-ARMOL_ARM,RULES-ARMOL_BODY"</Location>
@@ -549,7 +549,7 @@ Each assistant provides the normal +10 bonus (WFRP page 155) whether it knows th
 <Armor id="ARCH3-ARMO_27">
 <Description language="ENGLISH">"Brigandine Jerkin"</Description>
 <Availability>"RULES-DISPO_LIMITED"</Availability>
-<Price>"2GC"</Price>
+<Price>"2CO"</Price>
 <Encumbrance>"2"</Encumbrance>
 <Quality>"ARCH3-ARMOB_10"</Quality>
 <Location>"RULES-ARMOL_BODY"</Location>
@@ -559,7 +559,7 @@ Each assistant provides the normal +10 bonus (WFRP page 155) whether it knows th
 <Armor id="ARCH3-ARMO_28">
 <Description language="ENGLISH">"Bracers (A3)"</Description>
 <Availability>"RULES-DISPO_RARE"</Availability>
-<Price>"8GC"</Price>
+<Price>"8CO"</Price>
 <Encumbrance>"3"</Encumbrance>
 <Quality>"RULES-ARMOB_02,ARCH3-ARMOB_12,RULES-ARMOB_04"</Quality>
 <Location>"RULES-ARMOL_ARM"</Location>
@@ -569,7 +569,7 @@ Each assistant provides the normal +10 bonus (WFRP page 155) whether it knows th
 <Armor id="ARCH3-ARMO_29">
 <Description language="ENGLISH">"Breastplate (A3)"</Description>
 <Availability>"RULES-DISPO_LIMITED"</Availability>
-<Price>"10GC"</Price>
+<Price>"10CO"</Price>
 <Encumbrance>"3"</Encumbrance>
 <Quality>"RULES-ARMOB_02,ARCH3-ARMOB_10,RULES-ARMOB_04"</Quality>
 <Location>"RULES-ARMOL_BODY"</Location>
@@ -579,7 +579,7 @@ Each assistant provides the normal +10 bonus (WFRP page 155) whether it knows th
 <Armor id="ARCH3-ARMO_30">
 <Description language="ENGLISH">"Open Helm (A3)"</Description>
 <Availability>"RULES-DISPO_COMMON"</Availability>
-<Price>"2GC"</Price>
+<Price>"2CO"</Price>
 <Encumbrance>"1"</Encumbrance>
 <Quality>"RULES-ARMOB_03,RULES-ARMOB_06"</Quality>
 <Location>"RULES-ARMOL_HEAD"</Location>
@@ -589,7 +589,7 @@ Each assistant provides the normal +10 bonus (WFRP page 155) whether it knows th
 <Armor id="ARCH3-ARMO_31">
 <Description language="ENGLISH">"Plate Leggings (A3)"</Description>
 <Availability>"RULES-DISPO_RARE"</Availability>
-<Price>"10GC"</Price>
+<Price>"10CO"</Price>
 <Encumbrance>"3"</Encumbrance>
 <Quality>"RULES-ARMOB_02,ARCH3-ARMOB_12,RULES-ARMOB_04"</Quality>
 <Location>"RULES-ARMOL_LEG"</Location>
@@ -599,7 +599,7 @@ Each assistant provides the normal +10 bonus (WFRP page 155) whether it knows th
 <Armor id="ARCH3-ARMO_32">
 <Description language="ENGLISH">"Great Helm"</Description>
 <Availability>"RULES-DISPO_RARE"</Availability>
-<Price>"2GC"</Price>
+<Price>"2CO"</Price>
 <Encumbrance>"2"</Encumbrance>
 <Quality>"RULES-ARMOB_02,RULES-ARMOB_04,RULES-ARMOB_07"</Quality>
 <Location>"RULES-ARMOL_HEAD"</Location>
@@ -609,7 +609,7 @@ Each assistant provides the normal +10 bonus (WFRP page 155) whether it knows th
 <Armor id="ARCH3-ARMO_33">
 <Description language="ENGLISH">"Bascinet"</Description>
 <Availability>"RULES-DISPO_RARE"</Availability>
-<Price>"3GC"</Price>
+<Price>"3CO"</Price>
 <Encumbrance>"2"</Encumbrance>
 <Quality>"RULES-ARMOB_02,ARCH3-ARMOB_11,RULES-ARMOB_04,RULES-ARMOB_07"</Quality>
 <Location>"RULES-ARMOL_HEAD"</Location>
@@ -619,7 +619,7 @@ Each assistant provides the normal +10 bonus (WFRP page 155) whether it knows th
 <Armor id="ARCH3-ARMO_34">
 <Description language="ENGLISH">"Armet"</Description>
 <Availability>"RULES-DISPO_RARE"</Availability>
-<Price>"3GC"</Price>
+<Price>"3CO"</Price>
 <Encumbrance>"2"</Encumbrance>
 <Quality>"RULES-ARMOB_02,ARCH3-ARMOB_11,RULES-ARMOB_04,RULES-ARMOB_07"</Quality>
 <Location>"RULES-ARMOL_HEAD"</Location>
@@ -629,7 +629,7 @@ Each assistant provides the normal +10 bonus (WFRP page 155) whether it knows th
 <Armor id="ARCH3-ARMO_35">
 <Description language="ENGLISH">"Sallet"</Description>
 <Availability>"RULES-DISPO_RARE"</Availability>
-<Price>"4GC"</Price>
+<Price>"4CO"</Price>
 <Encumbrance>"2"</Encumbrance>
 <Quality>"RULES-ARMOB_02,ARCH3-ARMOB_11,RULES-ARMOB_04,RULES-ARMOB_07"</Quality>
 <Location>"RULES-ARMOL_HEAD"</Location>

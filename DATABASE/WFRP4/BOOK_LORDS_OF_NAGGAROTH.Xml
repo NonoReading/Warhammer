@@ -865,7 +865,7 @@ In a great and (un)holy ritual of blood and death you cut out the hearts of sacr
 <Damage>"+(BATTR_S)+4"</Damage>
 <Availability>"RULES-DISPO_RARE"</Availability>
 <Reach>"RULES-WEAPR_MID"</Reach>
-<Price>"2CO/-"</Price>
+<Price>"2CO"</Price>
 <Encumbrance>"1"</Encumbrance>
 <Quality>"RULES-WEAPB10"</Quality>
 <Hand>"1"</Hand>
@@ -877,7 +877,7 @@ In a great and (un)holy ritual of blood and death you cut out the hearts of sacr
 <Damage>"+(BATTR_S)+4"</Damage>
 <Availability>"RULES-DISPO_EXOTIC"</Availability>
 <Reach>"RULES-WEAPR_MID"</Reach>
-<Price>"7CO/-"</Price>
+<Price>"7CO"</Price>
 <Encumbrance>"1"</Encumbrance>
 <Quality>"RULES-WEAPB21,RULES-WEAPB12"</Quality>
 <Hand>"1"</Hand>
@@ -889,7 +889,7 @@ In a great and (un)holy ritual of blood and death you cut out the hearts of sacr
 <Damage>"+(BATTR_S)+4"</Damage>
 <Availability>"RULES-DISPO_EXOTIC"</Availability>
 <Reach>"RULES-WEAPR_MID"</Reach>
-<Price>"5CO/-"</Price>
+<Price>"5CO 3PA"</Price>
 <Encumbrance>"1"</Encumbrance>
 <Quality>"RULES-WEAPB10,RULES-WEAPB16"</Quality>
 <Hand>"1"</Hand>
@@ -973,7 +973,7 @@ In a great and (un)holy ritual of blood and death you cut out the hearts of sacr
 <Damage>"+2"</Damage>
 <Availability>"RULES-DISPO_EXOTIC"</Availability>
 <Reach>"+0"</Reach>
-<Price>"8/-"</Price>
+<Price>"8PA"</Price>
 <Encumbrance>"1"</Encumbrance>
 <Quality>"RULES-WEAPB12,RULES-WEAPB17,NAGGA-WEAPB38"</Quality>
 <Hand>"0"</Hand>

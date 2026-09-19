@@ -3446,7 +3446,7 @@ begin
   // Champs communs
   AjouterLigneDetail(GetTexteLibelle('RULES-LAB_056'),
                      TraduireCodesMultiples(ValeurXML(Element.FindNode('Availability'))));  // Disponibilité
-  AjouterLigneDetail(GetTexteLibelle('RULES-LAB_054'), ValeurXML(Element.FindNode('Price')));     // Prix
+  AjouterLigneDetail(GetTexteLibelle('RULES-LAB_054'), TraduirePrix(ValeurXML(Element.FindNode('Price'))));     // Prix
   AjouterLigneDetail(GetTexteLibelle('RULES-LAB_055'), ValeurXML(Element.FindNode('Encumbrance'))); // Encombrement
   AjouterLignesQualite(ValeurXML(Element.FindNode('Quality')), PrefixeLivre(Code));         // Qualité
   

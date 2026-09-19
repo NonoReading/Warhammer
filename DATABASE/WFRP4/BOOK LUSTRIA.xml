@@ -303,7 +303,7 @@
 <Damage>"+1"</Damage>
 <Availability>"RULES-DISPO_EXOTIC"</Availability>
 <Reach>"+0"</Reach>
-<Price>"10/-"</Price>
+<Price>"10PA"</Price>
 <Encumbrance>"0"</Encumbrance>
 <Quality>"-"</Quality>
 <Hand>"0"</Hand>
@@ -330,7 +330,7 @@
 <Armor id="LUSTR-ARMO_01">
 <Description language="ENGLISH">"Lustrian Skullcap"</Description>
 <Availability>"RULES-DISPO_LIMITED"</Availability>
-<Price>"8/-"</Price>
+<Price>"8PA"</Price>
 <Encumbrance>"1"</Encumbrance>
 <Quality>"RULES-ARMOB_03,RULES-ARMOB_08"</Quality>
 <Location>"RULES-ARMOL_HEAD"</Location>
@@ -340,7 +340,7 @@
 <Armor id="LUSTR-ARMO_02">
 <Description language="ENGLISH">"Lustrian Leggings"</Description>
 <Availability>"RULES-DISPO_LIMITED"</Availability>
-<Price>"14/-"</Price>
+<Price>"14PA"</Price>
 <Encumbrance>"2"</Encumbrance>
 <Quality>"RULES-ARMOB_08"</Quality>
 <Location>"RULES-ARMOL_LEG"</Location>
@@ -350,7 +350,7 @@
 <Armor id="LUSTR-ARMO_03">
 <Description language="ENGLISH">"Lustrian Jerkin"</Description>
 <Availability>"RULES-DISPO_LIMITED"</Availability>
-<Price>"10/-"</Price>
+<Price>"10PA"</Price>
 <Encumbrance>"2"</Encumbrance>
 <Quality>"RULES-ARMOB_08"</Quality>
 <Location>"RULES-ARMOL_BODY"</Location>
@@ -360,7 +360,7 @@
 <Armor id="LUSTR-ARMO_04">
 <Description language="ENGLISH">"Lustrian Jack"</Description>
 <Availability>"RULES-DISPO_LIMITED"</Availability>
-<Price>"12/-"</Price>
+<Price>"12PA"</Price>
 <Encumbrance>"2"</Encumbrance>
 <Quality>"RULES-ARMOB_08"</Quality>
 <Location>"RULES-ARMOL_ARM,RULES-ARMOL_BODY"</Location>

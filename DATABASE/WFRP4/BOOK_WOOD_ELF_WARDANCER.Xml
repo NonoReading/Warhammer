@@ -223,7 +223,7 @@ As wanderers and followers of Loec, individual Wardancers can often find themsel
 <Damage>"+(BATTR_S)+3"</Damage>
 <Availability>"RULES-DISPO_RARE"</Availability>
 <Reach>"RULES-WEAPR_MID"</Reach>
-<Price>"3co"</Price>
+<Price>"3CO"</Price>
 <Encumbrance>"1"</Encumbrance>
 <Quality>"RULES-WEAPB14"</Quality>
 <Hand>"1"</Hand>

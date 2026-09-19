@@ -292,6 +292,9 @@
 <Text name="RULES-LAB_219">"Équipement (trappings) ajouté par ce livre"</Text>
 <Text name="RULES-LAB_220">"Sorts ajoutés par ce livre"</Text>
 <Text name="RULES-LAB_221">"Traits de créature ajoutés par ce livre"</Text>
+<Text name="RULES-LAB_222">"CO"</Text>
+<Text name="RULES-LAB_223">"PA"</Text>
+<Text name="RULES-LAB_224">"SB"</Text>
 </Label>
 </DATA_LABEL>
 </DATA_BOOK>

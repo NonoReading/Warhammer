@@ -25,6 +25,7 @@ function ChercheTexte(CodeTexte :String): StructureTexte;
 Function GetTexteLibelle(CodeTexte :String; Lib: String = ''; Sep: String = ''; Livre: boolean = false): String;
 Function GetAllTexteLibelle(CodeTexte :String): String;
 Function ReplaceTexteLibelle(CodeTexte :String): String;
+Function TraduirePrix(Prix: String): String;
 
 implementation
 
@@ -153,5 +154,46 @@ Function GetTexteLibelle(CodeTexte :String; Lib: String = ''; Sep: String = ''; 
     Result := Res;
   end;
 
-end.
+// Prix stocke en codes de monnaie (ex. '4CO 5PA 3SB') -> texte dans la langue de l'interface.
+// Un morceau qui n'a pas la forme <nombre><CO|PA|SB> (ex. 'Varies') est laisse tel quel.
+Function TraduirePrix(Prix: String): String;
+  var
+    Morceaux: TStringList;
+    Ind, Pos: Integer;
+    Morceau, Unite, CodeLibelle, Libelle: String;
+  Begin
+    Result := '';
+    Morceaux := TStringList.Create;
+    try
+      Morceaux.Delimiter       := ' ';
+      Morceaux.StrictDelimiter := true;
+      Morceaux.DelimitedText   := Prix;
+      For Ind := 0 to Morceaux.Count - 1 do
+        begin
+          Morceau := Morceaux[Ind];
+          Pos := Length(Morceau) - 1;
+          Unite := Copy(Morceau, Pos, 2);
+          if (Pos > 1) and (StrToIntDef(Copy(Morceau, 1, Pos - 1), -1) >= 0) then
+            begin
+              CodeLibelle := '';
+              if Unite = 'CO' then CodeLibelle := 'RULES-LAB_222';
+              if Unite = 'PA' then CodeLibelle := 'RULES-LAB_223';
+              if Unite = 'SB' then CodeLibelle := 'RULES-LAB_224';
+              if CodeLibelle <> '' then
+                begin
+                  Libelle := GetTexteLibelle(CodeLibelle);
+                  if Libelle = CodeLibelle then
+                    Libelle := Unite;
+                  Morceau := Copy(Morceau, 1, Pos - 1) + ' ' + Libelle;
+                end;
+            end;
+          if Result <> '' then
+            Result := Result + ' ';
+          Result := Result + Morceau;
+        end;
+    finally
+      Morceaux.Free;
+    end;
+  end;
 
+end.

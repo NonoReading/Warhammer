@@ -13458,7 +13458,6 @@ Thieves steal all manner of wealth and goods from their fellow man. From the low
 <Damage>"-"</Damage>
 <Availability>"-"</Availability>
 <Reach>"-"</Reach>
-<Price>"-"</Price>
 <Encumbrance>"0"</Encumbrance>
 <Quality>"-"</Quality>
 <Hand>"0"</Hand>
@@ -13470,7 +13469,7 @@ Thieves steal all manner of wealth and goods from their fellow man. From the low
 <Damage>"+(BATTR_S)+4"</Damage>
 <Availability>"RULES-DISPO_COMMON"</Availability>
 <Reach>"RULES-WEAPR_LONG"</Reach>
-<Price>"3/-"</Price>
+<Price>"3PA"</Price>
 <Encumbrance>"2"</Encumbrance>
 <Quality>"RULES-WEAPB04,RULES-WEAPB08"</Quality>
 <Hand>"2"</Hand>
@@ -13495,7 +13494,7 @@ Thieves steal all manner of wealth and goods from their fellow man. From the low
 <Damage>"+(BATTR_S)+4"</Damage>
 <Availability>"RULES-DISPO_COMMON"</Availability>
 <Reach>"RULES-WEAPR_BIG"</Reach>
-<Price>"15/-"</Price>
+<Price>"15PA"</Price>
 <Encumbrance>"2"</Encumbrance>
 <Quality>"RULES-WEAPB12"</Quality>
 <Hand>"2"</Hand>
@@ -13508,7 +13507,7 @@ Thieves steal all manner of wealth and goods from their fellow man. From the low
 <Damage>"+(BATTR_S)+4"</Damage>
 <Availability>"RULES-DISPO_RARE"</Availability>
 <Reach>"RULES-WEAPR_HUGE"</Reach>
-<Price>"18/-"</Price>
+<Price>"18PA"</Price>
 <Encumbrance>"4"</Encumbrance>
 <Quality>"RULES-WEAPB12"</Quality>
 <Hand>"2"</Hand>
@@ -13520,7 +13519,7 @@ Thieves steal all manner of wealth and goods from their fellow man. From the low
 <Damage>"+(BATTR_S)+2"</Damage>
 <Availability>"RULES-DISPO_COMMON"</Availability>
 <Reach>"RULES-WEAPR_PERSO"</Reach>
-<Price>"2/6"</Price>
+<Price>"2PA 6SB"</Price>
 <Encumbrance>"0"</Encumbrance>
 <Quality>"-"</Quality>
 <Hand>"1"</Hand>
@@ -13532,7 +13531,6 @@ Thieves steal all manner of wealth and goods from their fellow man. From the low
 <Damage>"+(BATTR_S)+0"</Damage>
 <Availability>"RULES-DISPO_COMMON"</Availability>
 <Reach>"RULES-WEAPR_PERSO"</Reach>
-<Price>"ND"</Price>
 <Encumbrance>"0"</Encumbrance>
 <Quality>"RULES-WEAPB27"</Quality>
 <Hand>"1"</Hand>
@@ -13544,7 +13542,6 @@ Thieves steal all manner of wealth and goods from their fellow man. From the low
 <Damage>"-"</Damage>
 <Availability>"-"</Availability>
 <Reach>"-"</Reach>
-<Price>"-"</Price>
 <Encumbrance>"0"</Encumbrance>
 <Quality>"-"</Quality>
 <Hand>"0"</Hand>
@@ -13556,7 +13553,7 @@ Thieves steal all manner of wealth and goods from their fellow man. From the low
 <Damage>"+(BATTR_S)+1"</Damage>
 <Availability>"RULES-DISPO_COMMON"</Availability>
 <Reach>"RULES-WEAPR_CLOSE"</Reach>
-<Price>"8/-"</Price>
+<Price>"8PA"</Price>
 <Encumbrance>"0"</Encumbrance>
 <Quality>"RULES-WEAPB27"</Quality>
 <Hand>"1"</Hand>
@@ -13656,7 +13653,7 @@ Thieves steal all manner of wealth and goods from their fellow man. From the low
 <Damage>"+(BATTR_S)+1"</Damage>
 <Availability>"RULES-DISPO_COMMON"</Availability>
 <Reach>"RULES-WEAPR_PERSO"</Reach>
-<Price>"18/2"</Price>
+<Price>"18PA 2SB"</Price>
 <Encumbrance>"0"</Encumbrance>
 <Quality>"RULES-WEAPB18 1,RULES-WEAPB08,RULES-WEAPB27"</Quality>
 <Hand>"1"</Hand>
@@ -13669,7 +13666,7 @@ Thieves steal all manner of wealth and goods from their fellow man. From the low
 <Damage>"+(BATTR_S)+2"</Damage>
 <Availability>"RULES-DISPO_COMMON"</Availability>
 <Reach>"RULES-WEAPR_CLOSE"</Reach>
-<Price>"16/-"</Price>
+<Price>"16PA"</Price>
 <Encumbrance>"0"</Encumbrance>
 <Quality>"-"</Quality>
 <Hand>"1"</Hand>
@@ -13681,7 +13678,6 @@ Thieves steal all manner of wealth and goods from their fellow man. From the low
 <Damage>"-"</Damage>
 <Availability>"-"</Availability>
 <Reach>"-"</Reach>
-<Price>"-"</Price>
 <Encumbrance>"0"</Encumbrance>
 <Quality>"-"</Quality>
 <Hand>"0"</Hand>
@@ -13719,7 +13715,6 @@ Thieves steal all manner of wealth and goods from their fellow man. From the low
 <Damage>"-"</Damage>
 <Availability>"-"</Availability>
 <Reach>"-"</Reach>
-<Price>"-"</Price>
 <Encumbrance>"0"</Encumbrance>
 <Quality>"-"</Quality>
 <Hand>"0"</Hand>
@@ -13770,7 +13765,7 @@ Thieves steal all manner of wealth and goods from their fellow man. From the low
 <Damage>"+(BATTR_S)+5"</Damage>
 <Availability>"RULES-DISPO_COMMON"</Availability>
 <Reach>"RULES-WEAPR_MID"</Reach>
-<Price>"9/-"</Price>
+<Price>"9PA"</Price>
 <Encumbrance>"3"</Encumbrance>
 <Quality>"RULES-WEAPB10,RULES-WEAPB12,RULES-WEAPB28"</Quality>
 <Hand>"2"</Hand>
@@ -13795,7 +13790,6 @@ Thieves steal all manner of wealth and goods from their fellow man. From the low
 <Damage>"-"</Damage>
 <Availability>"-"</Availability>
 <Reach>"-"</Reach>
-<Price>"-"</Price>
 <Encumbrance>"0"</Encumbrance>
 <Quality>"-"</Quality>
 <Hand>"0"</Hand>
@@ -13807,7 +13801,7 @@ Thieves steal all manner of wealth and goods from their fellow man. From the low
 <Damage>"+(BATTR_S)+2"</Damage>
 <Availability>"RULES-DISPO_COMMON"</Availability>
 <Reach>"6"</Reach>
-<Price>"5/-"</Price>
+<Price>"5PA"</Price>
 <Encumbrance>"0"</Encumbrance>
 <Quality>"RULES-WEAPB17"</Quality>
 <Hand>"1"</Hand>
@@ -13819,7 +13813,7 @@ Thieves steal all manner of wealth and goods from their fellow man. From the low
 <Damage>"0"</Damage>
 <Availability>"RULES-DISPO_COMMON"</Availability>
 <Reach>"(BATTR_S)X2"</Reach>
-<Price>"6/-"</Price>
+<Price>"6PA"</Price>
 <Encumbrance>"0"</Encumbrance>
 <Quality>"RULES-WEAPB17"</Quality>
 <Hand>"1"</Hand>
@@ -13880,7 +13874,7 @@ Thieves steal all manner of wealth and goods from their fellow man. From the low
 <Damage>"+(BATTR_S)+3"</Damage>
 <Availability>"RULES-DISPO_COMMON"</Availability>
 <Reach>"RULES-WEAPR_MID"</Reach>
-<Price>"10/-"</Price>
+<Price>"10PA"</Price>
 <Encumbrance>"1"</Encumbrance>
 <Quality>"RULES-WEAPB09,RULES-WEAPB26,RULES-WEAPB01"</Quality>
 <Hand>"1"</Hand>
@@ -13892,7 +13886,7 @@ Thieves steal all manner of wealth and goods from their fellow man. From the low
 <Damage>"+(BATTR_S)+3"</Damage>
 <Availability>"RULES-DISPO_LIMITED"</Availability>
 <Reach>"RULES-WEAPR_SHORT"</Reach>
-<Price>"1CO 2/6"</Price>
+<Price>"1CO 2PA 6SB"</Price>
 <Encumbrance>"1"</Encumbrance>
 <Quality>"RULES-WEAPB08,RULES-WEAPB11"</Quality>
 <Hand>"1"</Hand>
@@ -13905,7 +13899,7 @@ Thieves steal all manner of wealth and goods from their fellow man. From the low
 <Damage>"+(BATTR_S)+2"</Damage>
 <Availability>"RULES-DISPO_RARE"</Availability>
 <Reach>"RULES-WEAPR_CLOSE"</Reach>
-<Price>"ICO"</Price>
+<Price>"1CO"</Price>
 <Encumbrance>"0"</Encumbrance>
 <Quality>"RULES-WEAPB08"</Quality>
 <Hand>"1"</Hand>
@@ -14025,7 +14019,7 @@ Thieves steal all manner of wealth and goods from their fellow man. From the low
 <Damage>"+7"</Damage>
 <Availability>"RULES-DISPO_LIMITED"</Availability>
 <Reach>"100"</Reach>
-<Price>"4/-"</Price>
+<Price>"4PA"</Price>
 <Encumbrance>"2"</Encumbrance>
 <Quality>"-"</Quality>
 <Hand>"2"</Hand>
@@ -14037,7 +14031,7 @@ Thieves steal all manner of wealth and goods from their fellow man. From the low
 <Damage>"+6"</Damage>
 <Availability>"RULES-DISPO_COMMON"</Availability>
 <Reach>"60"</Reach>
-<Price>"l/-"</Price>
+<Price>"1PA"</Price>
 <Encumbrance>"0"</Encumbrance>
 <Quality>"-"</Quality>
 <Hand>"1"</Hand>
@@ -14073,7 +14067,6 @@ Thieves steal all manner of wealth and goods from their fellow man. From the low
 <Damage>"-"</Damage>
 <Availability>"-"</Availability>
 <Reach>"-"</Reach>
-<Price>"-"</Price>
 <Encumbrance>"0"</Encumbrance>
 <Quality>"-"</Quality>
 <Hand>"0"</Hand>
@@ -14085,7 +14078,7 @@ Thieves steal all manner of wealth and goods from their fellow man. From the low
 <Damage>"+(BATTR_S)"</Damage>
 <Availability>"RULES-DISPO_RARE"</Availability>
 <Reach>"(BATTR_S)X3"</Reach>
-<Price>"10/-"</Price>
+<Price>"10PA"</Price>
 <Encumbrance>"0"</Encumbrance>
 <Quality>"RULES-WEAPB17"</Quality>
 <Hand>"1"</Hand>
@@ -14097,7 +14090,7 @@ Thieves steal all manner of wealth and goods from their fellow man. From the low
 <Damage>"+(BATTR_S)+2"</Damage>
 <Availability>"RULES-DISPO_COMMON"</Availability>
 <Reach>"(BATTR_S)X2"</Reach>
-<Price>"18/-"</Price>
+<Price>"18PA"</Price>
 <Encumbrance>"0"</Encumbrance>
 <Quality>"-"</Quality>
 <Hand>"1"</Hand>
@@ -14109,7 +14102,7 @@ Thieves steal all manner of wealth and goods from their fellow man. From the low
 <Damage>"+(BATTR_S)+1"</Damage>
 <Availability>"RULES-DISPO_LIMITED"</Availability>
 <Reach>"(BATTR_S)X2"</Reach>
-<Price>"2/-"</Price>
+<Price>"2PA"</Price>
 <Encumbrance>"0"</Encumbrance>
 <Quality>"RULES-WEAPB12"</Quality>
 <Hand>"1"</Hand>
@@ -14133,7 +14126,7 @@ Thieves steal all manner of wealth and goods from their fellow man. From the low
 <Damage>"+(BATTR_S)+3"</Damage>
 <Availability>"RULES-DISPO_LIMITED"</Availability>
 <Reach>"(BATTR_S)X3"</Reach>
-<Price>"10/6"</Price>
+<Price>"10PA 6SB"</Price>
 <Encumbrance>"1"</Encumbrance>
 <Quality>"RULES-WEAPB12"</Quality>
 <Hand>"1"</Hand>
@@ -14145,7 +14138,6 @@ Thieves steal all manner of wealth and goods from their fellow man. From the low
 <Damage>"+(BATTR_S)"</Damage>
 <Availability>"RULES-DISPO_COMMON"</Availability>
 <Reach>"(BATTR_S)X3"</Reach>
-<Price>"/"</Price>
 <Encumbrance>"0"</Encumbrance>
 <Quality>"-"</Quality>
 <Hand>"1"</Hand>
@@ -14157,7 +14149,6 @@ Thieves steal all manner of wealth and goods from their fellow man. From the low
 <Damage>"-"</Damage>
 <Availability>"-"</Availability>
 <Reach>"-"</Reach>
-<Price>"-"</Price>
 <Encumbrance>"0"</Encumbrance>
 <Quality>"-"</Quality>
 <Hand>"0"</Hand>
@@ -14217,7 +14208,7 @@ Thieves steal all manner of wealth and goods from their fellow man. From the low
 <Damage>"+0"</Damage>
 <Availability>"RULES-DISPO_COMMON"</Availability>
 <Reach>"+0"</Reach>
-<Price>"5/-"</Price>
+<Price>"5PA"</Price>
 <Encumbrance>"0"</Encumbrance>
 <Quality>"RULES-WEAPB12"</Quality>
 <Hand>"0"</Hand>
@@ -14229,7 +14220,7 @@ Thieves steal all manner of wealth and goods from their fellow man. From the low
 <Damage>"+0"</Damage>
 <Availability>"RULES-DISPO_COMMON"</Availability>
 <Reach>"+0"</Reach>
-<Price>"5/-"</Price>
+<Price>"5PA"</Price>
 <Encumbrance>"0"</Encumbrance>
 <Quality>"RULES-WEAPB12"</Quality>
 <Hand>"0"</Hand>
@@ -14241,7 +14232,7 @@ Thieves steal all manner of wealth and goods from their fellow man. From the low
 <Damage>"+1"</Damage>
 <Availability>"RULES-DISPO_EXOTIC"</Availability>
 <Reach>"+50"</Reach>
-<Price>"6/-"</Price>
+<Price>"6PA"</Price>
 <Encumbrance>"0"</Encumbrance>
 <Quality>"RULES-WEAPB16,RULES-WEAPB12,RULES-WEAPB22"</Quality>
 <Hand>"0"</Hand>
@@ -14253,7 +14244,7 @@ Thieves steal all manner of wealth and goods from their fellow man. From the low
 <Damage>"+1"</Damage>
 <Availability>"RULES-DISPO_COMMON"</Availability>
 <Reach>"-10"</Reach>
-<Price>"4SC"</Price>
+<Price>"4SB"</Price>
 <Encumbrance>"0"</Encumbrance>
 <Quality>"RULES-WEAPB04"</Quality>
 <Hand>"0"</Hand>
@@ -14265,7 +14256,7 @@ Thieves steal all manner of wealth and goods from their fellow man. From the low
 <Damage>"+0"</Damage>
 <Availability>"RULES-DISPO_COMMON"</Availability>
 <Reach>"+0"</Reach>
-<Price>"2SC"</Price>
+<Price>"2SB"</Price>
 <Encumbrance>"0"</Encumbrance>
 <Quality>"RULES-WEAPB04"</Quality>
 <Hand>"0"</Hand>
@@ -14277,7 +14268,7 @@ Thieves steal all manner of wealth and goods from their fellow man. From the low
 <Damage>"+1"</Damage>
 <Availability>"RULES-DISPO_COMMON"</Availability>
 <Reach>"+0"</Reach>
-<Price>"3/3"</Price>
+<Price>"3PA 3SB"</Price>
 <Encumbrance>"0"</Encumbrance>
 <Quality>"RULES-WEAPB12,RULES-WEAPB22"</Quality>
 <Hand>"0"</Hand>
@@ -14289,7 +14280,7 @@ Thieves steal all manner of wealth and goods from their fellow man. From the low
 <Damage>"+0"</Damage>
 <Availability>"RULES-DISPO_COMMON"</Availability>
 <Reach>"/2"</Reach>
-<Price>"3SC"</Price>
+<Price>"3SB"</Price>
 <Encumbrance>"0"</Encumbrance>
 <Quality>"-"</Quality>
 <Hand>"0"</Hand>
@@ -14301,7 +14292,7 @@ Thieves steal all manner of wealth and goods from their fellow man. From the low
 <Damage>"+0"</Damage>
 <Availability>"RULES-DISPO_COMMON"</Availability>
 <Reach>"+0"</Reach>
-<Price>"3/3"</Price>
+<Price>"3PA 3SB"</Price>
 <Encumbrance>"0"</Encumbrance>
 <Quality>"RULES-WEAPB15 1"</Quality>
 <Hand>"0"</Hand>
@@ -14517,7 +14508,7 @@ Armour is generally damaged in one of two ways:
 <Armor id="RULES-ARMO_01">
 <Description language="ENGLISH">"Leather Skullcap"</Description>
 <Availability>"RULES-DISPO_COMMON"</Availability>
-<Price>"8/-"</Price>
+<Price>"8PA"</Price>
 <Encumbrance>"0"</Encumbrance>
 <Quality>"RULES-ARMOB_03,RULES-ARMOB_08"</Quality>
 <Location>"RULES-ARMOL_HEAD"</Location>
@@ -14527,7 +14518,7 @@ Armour is generally damaged in one of two ways:
 <Armor id="RULES-ARMO_02">
 <Description language="ENGLISH">"Leather Leggings"</Description>
 <Availability>"RULES-DISPO_COMMON"</Availability>
-<Price>"14/-"</Price>
+<Price>"14PA"</Price>
 <Encumbrance>"1"</Encumbrance>
 <Quality>"RULES-ARMOB_08"</Quality>
 <Location>"RULES-ARMOL_LEG"</Location>
@@ -14537,7 +14528,7 @@ Armour is generally damaged in one of two ways:
 <Armor id="RULES-ARMO_03">
 <Description language="ENGLISH">"Leather Jerkin"</Description>
 <Availability>"RULES-DISPO_COMMON"</Availability>
-<Price>"10/-"</Price>
+<Price>"10PA"</Price>
 <Encumbrance>"1"</Encumbrance>
 <Quality>"RULES-ARMOB_08"</Quality>
 <Location>"RULES-ARMOL_BODY"</Location>
@@ -14547,7 +14538,7 @@ Armour is generally damaged in one of two ways:
 <Armor id="RULES-ARMO_04">
 <Description language="ENGLISH">"Leather Jack"</Description>
 <Availability>"RULES-DISPO_COMMON"</Availability>
-<Price>"12/-"</Price>
+<Price>"12PA"</Price>
 <Encumbrance>"1"</Encumbrance>
 <Quality>"RULES-ARMOB_08"</Quality>
 <Location>"RULES-ARMOL_ARM,RULES-ARMOL_BODY"</Location>
@@ -14557,7 +14548,7 @@ Armour is generally damaged in one of two ways:
 <Armor id="RULES-ARMO_05">
 <Description language="ENGLISH">"Breastplate"</Description>
 <Availability>"RULES-DISPO_LIMITED"</Availability>
-<Price>"18/-"</Price>
+<Price>"18PA"</Price>
 <Encumbrance>"2"</Encumbrance>
 <Quality>"RULES-ARMOB_04"</Quality>
 <Location>"RULES-ARMOL_BODY"</Location>
@@ -14567,7 +14558,7 @@ Armour is generally damaged in one of two ways:
 <Armor id="RULES-ARMO_06">
 <Description language="ENGLISH">"Mail Chausses"</Description>
 <Availability>"RULES-DISPO_LIMITED"</Availability>
-<Price>"2C0"</Price>
+<Price>"2CO"</Price>
 <Encumbrance>"3"</Encumbrance>
 <Quality>"RULES-ARMOB_01,RULES-ARMOB_05"</Quality>
 <Location>"RULES-ARMOL_LEG"</Location>
@@ -14577,7 +14568,7 @@ Armour is generally damaged in one of two ways:
 <Armor id="RULES-ARMO_07">
 <Description language="ENGLISH">"Mail Shirt"</Description>
 <Availability>"RULES-DISPO_LIMITED"</Availability>
-<Price>"2C0"</Price>
+<Price>"2CO"</Price>
 <Encumbrance>"2"</Encumbrance>
 <Quality>"RULES-ARMOB_01,RULES-ARMOB_05"</Quality>
 <Location>"RULES-ARMOL_BODY"</Location>
@@ -14733,7 +14724,7 @@ Armour is generally damaged in one of two ways:
 <Description language="ENGLISH">"Backpack"</Description>
 <Theme>"RULES-LAB_190"</Theme>
 <Availability>"RULES-DISPO_COMMON"</Availability>
-<Price>"4/10"</Price>
+<Price>"4PA 10SB"</Price>
 <Encumbrance>"2"</Encumbrance>
 <Carries>"4"</Carries>
 </Trapping>
@@ -14741,7 +14732,7 @@ Armour is generally damaged in one of two ways:
 <Description language="ENGLISH">"Barrel"</Description>
 <Theme>"RULES-LAB_190"</Theme>
 <Availability>"RULES-DISPO_COMMON"</Availability>
-<Price>"8/-"</Price>
+<Price>"8PA"</Price>
 <Encumbrance>"6"</Encumbrance>
 <Carries>"12"</Carries>
 </Trapping>
@@ -14749,7 +14740,7 @@ Armour is generally damaged in one of two ways:
 <Description language="ENGLISH">"Cask"</Description>
 <Theme>"RULES-LAB_190"</Theme>
 <Availability>"RULES-DISPO_COMMON"</Availability>
-<Price>"3/-"</Price>
+<Price>"3PA"</Price>
 <Encumbrance>"2"</Encumbrance>
 <Carries>"4"</Carries>
 </Trapping>
@@ -14757,7 +14748,7 @@ Armour is generally damaged in one of two ways:
 <Description language="ENGLISH">"Flask"</Description>
 <Theme>"RULES-LAB_190"</Theme>
 <Availability>"RULES-DISPO_COMMON"</Availability>
-<Price>"5/-"</Price>
+<Price>"5PA"</Price>
 <Encumbrance>"0"</Encumbrance>
 <Carries>"0"</Carries>
 </Trapping>
@@ -14765,7 +14756,7 @@ Armour is generally damaged in one of two ways:
 <Description language="ENGLISH">"Jug"</Description>
 <Theme>"RULES-LAB_190"</Theme>
 <Availability>"RULES-DISPO_COMMON"</Availability>
-<Price>"3/2"</Price>
+<Price>"3PA 2SB"</Price>
 <Encumbrance>"1"</Encumbrance>
 <Carries>"1"</Carries>
 </Trapping>
@@ -14773,7 +14764,7 @@ Armour is generally damaged in one of two ways:
 <Description language="ENGLISH">"Pewter Stein"</Description>
 <Theme>"RULES-LAB_190"</Theme>
 <Availability>"RULES-DISPO_COMMON"</Availability>
-<Price>"4/-"</Price>
+<Price>"4PA"</Price>
 <Encumbrance>"0"</Encumbrance>
 <Carries>"0"</Carries>
 </Trapping>
@@ -14781,7 +14772,7 @@ Armour is generally damaged in one of two ways:
 <Description language="ENGLISH">"Pouch"</Description>
 <Theme>"RULES-LAB_190"</Theme>
 <Availability>"RULES-DISPO_COMMON"</Availability>
-<Price>"4d"</Price>
+<Price>"4SB"</Price>
 <Encumbrance>"0"</Encumbrance>
 <Carries>"1"</Carries>
 </Trapping>
@@ -14789,7 +14780,7 @@ Armour is generally damaged in one of two ways:
 <Description language="ENGLISH">"Sack"</Description>
 <Theme>"RULES-LAB_190"</Theme>
 <Availability>"RULES-DISPO_COMMON"</Availability>
-<Price>"1/-"</Price>
+<Price>"1PA"</Price>
 <Encumbrance>"2"</Encumbrance>
 <Carries>"4"</Carries>
 </Trapping>
@@ -14797,7 +14788,7 @@ Armour is generally damaged in one of two ways:
 <Description language="ENGLISH">"Sack, Large"</Description>
 <Theme>"RULES-LAB_190"</Theme>
 <Availability>"RULES-DISPO_COMMON"</Availability>
-<Price>"1/6"</Price>
+<Price>"1PA 6SB"</Price>
 <Encumbrance>"3"</Encumbrance>
 <Carries>"6"</Carries>
 </Trapping>
@@ -14805,7 +14796,7 @@ Armour is generally damaged in one of two ways:
 <Description language="ENGLISH">"Saddlebags"</Description>
 <Theme>"RULES-LAB_190"</Theme>
 <Availability>"RULES-DISPO_COMMON"</Availability>
-<Price>"18/-"</Price>
+<Price>"18PA"</Price>
 <Encumbrance>"4"</Encumbrance>
 <Carries>"8"</Carries>
 </Trapping>
@@ -14813,7 +14804,7 @@ Armour is generally damaged in one of two ways:
 <Description language="ENGLISH">"Sling Bag"</Description>
 <Theme>"RULES-LAB_190"</Theme>
 <Availability>"RULES-DISPO_COMMON"</Availability>
-<Price>"1/-"</Price>
+<Price>"1PA"</Price>
 <Encumbrance>"1"</Encumbrance>
 <Carries>"2"</Carries>
 </Trapping>
@@ -14821,7 +14812,7 @@ Armour is generally damaged in one of two ways:
 <Description language="ENGLISH">"Scroll Case"</Description>
 <Theme>"RULES-LAB_190"</Theme>
 <Availability>"RULES-DISPO_LIMITED"</Availability>
-<Price>"16/-"</Price>
+<Price>"16PA"</Price>
 <Encumbrance>"0"</Encumbrance>
 <Carries>"0"</Carries>
 </Trapping>
@@ -14829,7 +14820,7 @@ Armour is generally damaged in one of two ways:
 <Description language="ENGLISH">"Waterskin"</Description>
 <Theme>"RULES-LAB_190"</Theme>
 <Availability>"RULES-DISPO_COMMON"</Availability>
-<Price>"1/8"</Price>
+<Price>"1PA 8SB"</Price>
 <Encumbrance>"1"</Encumbrance>
 <Carries>"1"</Carries>
 </Trapping>
@@ -14837,35 +14828,35 @@ Armour is generally damaged in one of two ways:
 <Description language="ENGLISH">"Amulet"</Description>
 <Theme>"RULES-LAB_191"</Theme>
 <Availability>"RULES-DISPO_COMMON"</Availability>
-<Price>"2d"</Price>
+<Price>"2SB"</Price>
 <Encumbrance>"0"</Encumbrance>
 </Trapping>
 <Trapping id="RULES-TRAP_015">
 <Description language="ENGLISH">"Boots"</Description>
 <Theme>"RULES-LAB_191"</Theme>
 <Availability>"RULES-DISPO_COMMON"</Availability>
-<Price>"5/-"</Price>
+<Price>"5PA"</Price>
 <Encumbrance>"1"</Encumbrance>
 </Trapping>
 <Trapping id="RULES-TRAP_016">
 <Description language="ENGLISH">"Cloak"</Description>
 <Theme>"RULES-LAB_191"</Theme>
 <Availability>"RULES-DISPO_COMMON"</Availability>
-<Price>"10/-"</Price>
+<Price>"10PA"</Price>
 <Encumbrance>"1"</Encumbrance>
 </Trapping>
 <Trapping id="RULES-TRAP_017">
 <Description language="ENGLISH">"Clothing"</Description>
 <Theme>"RULES-LAB_191"</Theme>
 <Availability>"RULES-DISPO_COMMON"</Availability>
-<Price>"6/-"</Price>
+<Price>"6PA"</Price>
 <Encumbrance>"1"</Encumbrance>
 </Trapping>
 <Trapping id="RULES-TRAP_018">
 <Description language="ENGLISH">"Coat"</Description>
 <Theme>"RULES-LAB_191"</Theme>
 <Availability>"RULES-DISPO_COMMON"</Availability>
-<Price>"18/-"</Price>
+<Price>"18PA"</Price>
 <Encumbrance>"1"</Encumbrance>
 </Trapping>
 <Trapping id="RULES-TRAP_019">
@@ -14886,28 +14877,28 @@ Armour is generally damaged in one of two ways:
 <Description language="ENGLISH">"Face Powder"</Description>
 <Theme>"RULES-LAB_191"</Theme>
 <Availability>"RULES-DISPO_COMMON"</Availability>
-<Price>"10/-"</Price>
+<Price>"10PA"</Price>
 <Encumbrance>"0"</Encumbrance>
 </Trapping>
 <Trapping id="RULES-TRAP_022">
 <Description language="ENGLISH">"Gloves"</Description>
 <Theme>"RULES-LAB_191"</Theme>
 <Availability>"RULES-DISPO_COMMON"</Availability>
-<Price>"4/-"</Price>
+<Price>"4PA"</Price>
 <Encumbrance>"0"</Encumbrance>
 </Trapping>
 <Trapping id="RULES-TRAP_023">
 <Description language="ENGLISH">"Hat"</Description>
 <Theme>"RULES-LAB_191"</Theme>
 <Availability>"RULES-DISPO_COMMON"</Availability>
-<Price>"4/-"</Price>
+<Price>"4PA"</Price>
 <Encumbrance>"0"</Encumbrance>
 </Trapping>
 <Trapping id="RULES-TRAP_024">
 <Description language="ENGLISH">"Hood or Mask"</Description>
 <Theme>"RULES-LAB_191"</Theme>
 <Availability>"RULES-DISPO_COMMON"</Availability>
-<Price>"5/-"</Price>
+<Price>"5PA"</Price>
 <Encumbrance>"0"</Encumbrance>
 </Trapping>
 <Trapping id="RULES-TRAP_025">
@@ -14921,21 +14912,21 @@ Armour is generally damaged in one of two ways:
 <Description language="ENGLISH">"Perfume"</Description>
 <Theme>"RULES-LAB_191"</Theme>
 <Availability>"RULES-DISPO_COMMON"</Availability>
-<Price>"10/-"</Price>
+<Price>"10PA"</Price>
 <Encumbrance>"0"</Encumbrance>
 </Trapping>
 <Trapping id="RULES-TRAP_027">
 <Description language="ENGLISH">"Pins (6)"</Description>
 <Theme>"RULES-LAB_191"</Theme>
 <Availability>"RULES-DISPO_LIMITED"</Availability>
-<Price>"10/-"</Price>
+<Price>"10PA"</Price>
 <Encumbrance>"0"</Encumbrance>
 </Trapping>
 <Trapping id="RULES-TRAP_028">
 <Description language="ENGLISH">"Religious Symbol"</Description>
 <Theme>"RULES-LAB_191"</Theme>
 <Availability>"RULES-DISPO_COMMON"</Availability>
-<Price>"6/8"</Price>
+<Price>"6PA 8SB"</Price>
 <Encumbrance>"0"</Encumbrance>
 </Trapping>
 <Trapping id="RULES-TRAP_029">
@@ -14956,7 +14947,7 @@ Armour is generally damaged in one of two ways:
 <Description language="ENGLISH">"Shoes"</Description>
 <Theme>"RULES-LAB_191"</Theme>
 <Availability>"RULES-DISPO_COMMON"</Availability>
-<Price>"5/-"</Price>
+<Price>"5PA"</Price>
 <Encumbrance>"0"</Encumbrance>
 </Trapping>
 <Trapping id="RULES-TRAP_032">
@@ -14970,14 +14961,14 @@ Armour is generally damaged in one of two ways:
 <Description language="ENGLISH">"Tattoo"</Description>
 <Theme>"RULES-LAB_191"</Theme>
 <Availability>"RULES-DISPO_LIMITED"</Availability>
-<Price>"4/- +"</Price>
+<Price>"4PA"</Price>
 <Encumbrance>"0"</Encumbrance>
 </Trapping>
 <Trapping id="RULES-TRAP_034">
 <Description language="ENGLISH">"Uniform"</Description>
 <Theme>"RULES-LAB_191"</Theme>
 <Availability>"RULES-DISPO_LIMITED"</Availability>
-<Price>"1CO 2/-"</Price>
+<Price>"1CO 2PA"</Price>
 <Encumbrance>"1"</Encumbrance>
 </Trapping>
 <Trapping id="RULES-TRAP_035">
@@ -14991,98 +14982,98 @@ Armour is generally damaged in one of two ways:
 <Description language="ENGLISH">"Ale, pint"</Description>
 <Theme>"RULES-LAB_192"</Theme>
 <Availability>"RULES-DISPO_COMMON"</Availability>
-<Price>"3d"</Price>
+<Price>"3SB"</Price>
 <Encumbrance>"0"</Encumbrance>
 </Trapping>
 <Trapping id="RULES-TRAP_037">
 <Description language="ENGLISH">"Ale, keg"</Description>
 <Theme>"RULES-LAB_192"</Theme>
 <Availability>"RULES-DISPO_COMMON"</Availability>
-<Price>"3/-"</Price>
+<Price>"3PA"</Price>
 <Encumbrance>"2"</Encumbrance>
 </Trapping>
 <Trapping id="RULES-TRAP_038">
 <Description language="ENGLISH">"Bugman's XXXXXX Ale, pint"</Description>
 <Theme>"RULES-LAB_192"</Theme>
 <Availability>"RULES-DISPO_EXOTIC"</Availability>
-<Price>"9d"</Price>
+<Price>"9SB"</Price>
 <Encumbrance>"0"</Encumbrance>
 </Trapping>
 <Trapping id="RULES-TRAP_039">
 <Description language="ENGLISH">"Food, groceries/day"</Description>
 <Theme>"RULES-LAB_192"</Theme>
 <Availability>"RULES-DISPO_COMMON"</Availability>
-<Price>"10d"</Price>
+<Price>"10SB"</Price>
 <Encumbrance>"1"</Encumbrance>
 </Trapping>
 <Trapping id="RULES-TRAP_040">
 <Description language="ENGLISH">"Meal, inn"</Description>
 <Theme>"RULES-LAB_192"</Theme>
 <Availability>"RULES-DISPO_COMMON"</Availability>
-<Price>"1/-"</Price>
+<Price>"1PA"</Price>
 <Encumbrance>"0"</Encumbrance>
 </Trapping>
 <Trapping id="RULES-TRAP_041">
 <Description language="ENGLISH">"Rations, 1 day"</Description>
 <Theme>"RULES-LAB_192"</Theme>
 <Availability>"RULES-DISPO_COMMON"</Availability>
-<Price>"2/-"</Price>
+<Price>"2PA"</Price>
 <Encumbrance>"0"</Encumbrance>
 </Trapping>
 <Trapping id="RULES-TRAP_042">
 <Description language="ENGLISH">"Room, common/night"</Description>
 <Theme>"RULES-LAB_192"</Theme>
 <Availability>"RULES-DISPO_COMMON"</Availability>
-<Price>"10d"</Price>
+<Price>"10SB"</Price>
 <Encumbrance>"0"</Encumbrance>
 </Trapping>
 <Trapping id="RULES-TRAP_043">
 <Description language="ENGLISH">"Room, private/night"</Description>
 <Theme>"RULES-LAB_192"</Theme>
 <Availability>"RULES-DISPO_COMMON"</Availability>
-<Price>"10/-"</Price>
+<Price>"10PA"</Price>
 <Encumbrance>"0"</Encumbrance>
 </Trapping>
 <Trapping id="RULES-TRAP_044">
 <Description language="ENGLISH">"Spirits, pint"</Description>
 <Theme>"RULES-LAB_192"</Theme>
 <Availability>"RULES-DISPO_COMMON"</Availability>
-<Price>"2/-"</Price>
+<Price>"2PA"</Price>
 <Encumbrance>"0"</Encumbrance>
 </Trapping>
 <Trapping id="RULES-TRAP_045">
 <Description language="ENGLISH">"Stables/night"</Description>
 <Theme>"RULES-LAB_192"</Theme>
 <Availability>"RULES-DISPO_COMMON"</Availability>
-<Price>"10d"</Price>
+<Price>"10SB"</Price>
 <Encumbrance>"0"</Encumbrance>
 </Trapping>
 <Trapping id="RULES-TRAP_046">
 <Description language="ENGLISH">"Wine, bottle"</Description>
 <Theme>"RULES-LAB_192"</Theme>
 <Availability>"RULES-DISPO_COMMON"</Availability>
-<Price>"10d"</Price>
+<Price>"10SB"</Price>
 <Encumbrance>"0"</Encumbrance>
 </Trapping>
 <Trapping id="RULES-TRAP_047">
 <Description language="ENGLISH">"Wine &amp; Spirits, drink"</Description>
 <Theme>"RULES-LAB_192"</Theme>
 <Availability>"RULES-DISPO_COMMON"</Availability>
-<Price>"4d"</Price>
+<Price>"4SB"</Price>
 <Encumbrance>"0"</Encumbrance>
 </Trapping>
 <Trapping id="RULES-TRAP_048">
 <Description language="ENGLISH">"Abacus"</Description>
 <Theme>"RULES-LAB_193"</Theme>
 <Availability>"RULES-DISPO_LIMITED"</Availability>
-<Price>"3/4"</Price>
+<Price>"3PA 4SB"</Price>
 <Encumbrance>"0"</Encumbrance>
 </Trapping>
 <Trapping id="RULES-TRAP_049">
 <Description language="ENGLISH">"Animal Trap"</Description>
 <Theme>"RULES-LAB_193"</Theme>
 <Availability>"RULES-DISPO_COMMON"</Availability>
-<Price>"2/6"</Price>
+<Price>"2PA 6SB"</Price>
 <Encumbrance>"1"</Encumbrance>
 </Trapping>
 <Trapping id="RULES-TRAP_050">
@@ -15096,77 +15087,77 @@ Armour is generally damaged in one of two ways:
 <Description language="ENGLISH">"Boat Hook"</Description>
 <Theme>"RULES-LAB_193"</Theme>
 <Availability>"RULES-DISPO_COMMON"</Availability>
-<Price>"5/-"</Price>
+<Price>"5PA"</Price>
 <Encumbrance>"1"</Encumbrance>
 </Trapping>
 <Trapping id="RULES-TRAP_052">
 <Description language="ENGLISH">"Broom"</Description>
 <Theme>"RULES-LAB_193"</Theme>
 <Availability>"RULES-DISPO_COMMON"</Availability>
-<Price>"10d"</Price>
+<Price>"10SB"</Price>
 <Encumbrance>"2"</Encumbrance>
 </Trapping>
 <Trapping id="RULES-TRAP_053">
 <Description language="ENGLISH">"Bucket"</Description>
 <Theme>"RULES-LAB_193"</Theme>
 <Availability>"RULES-DISPO_COMMON"</Availability>
-<Price>"2/6"</Price>
+<Price>"2PA 6SB"</Price>
 <Encumbrance>"1"</Encumbrance>
 </Trapping>
 <Trapping id="RULES-TRAP_054">
 <Description language="ENGLISH">"Chisel"</Description>
 <Theme>"RULES-LAB_193"</Theme>
 <Availability>"RULES-DISPO_COMMON"</Availability>
-<Price>"4/2"</Price>
+<Price>"4PA 2SB"</Price>
 <Encumbrance>"0"</Encumbrance>
 </Trapping>
 <Trapping id="RULES-TRAP_055">
 <Description language="ENGLISH">"Comb"</Description>
 <Theme>"RULES-LAB_193"</Theme>
 <Availability>"RULES-DISPO_COMMON"</Availability>
-<Price>"10d"</Price>
+<Price>"10SB"</Price>
 <Encumbrance>"0"</Encumbrance>
 </Trapping>
 <Trapping id="RULES-TRAP_056">
 <Description language="ENGLISH">"Crowbar"</Description>
 <Theme>"RULES-LAB_193"</Theme>
 <Availability>"RULES-DISPO_COMMON"</Availability>
-<Price>"2/6"</Price>
+<Price>"2PA 6SB"</Price>
 <Encumbrance>"1"</Encumbrance>
 </Trapping>
 <Trapping id="RULES-TRAP_057">
 <Description language="ENGLISH">"Crutch"</Description>
 <Theme>"RULES-LAB_193"</Theme>
 <Availability>"RULES-DISPO_COMMON"</Availability>
-<Price>"3/-"</Price>
+<Price>"3PA"</Price>
 <Encumbrance>"2"</Encumbrance>
 </Trapping>
 <Trapping id="RULES-TRAP_058">
 <Description language="ENGLISH">"Disguise Kit"</Description>
 <Theme>"RULES-LAB_193"</Theme>
 <Availability>"RULES-DISPO_LIMITED"</Availability>
-<Price>"6/6"</Price>
+<Price>"6PA 6SB"</Price>
 <Encumbrance>"0"</Encumbrance>
 </Trapping>
 <Trapping id="RULES-TRAP_059">
 <Description language="ENGLISH">"Ear Pick"</Description>
 <Theme>"RULES-LAB_193"</Theme>
 <Availability>"RULES-DISPO_LIMITED"</Availability>
-<Price>"2/-"</Price>
+<Price>"2PA"</Price>
 <Encumbrance>"0"</Encumbrance>
 </Trapping>
 <Trapping id="RULES-TRAP_060">
 <Description language="ENGLISH">"Fish Hooks (12)"</Description>
 <Theme>"RULES-LAB_193"</Theme>
 <Availability>"RULES-DISPO_COMMON"</Availability>
-<Price>"1/-"</Price>
+<Price>"1PA"</Price>
 <Encumbrance>"0"</Encumbrance>
 </Trapping>
 <Trapping id="RULES-TRAP_061">
 <Description language="ENGLISH">"Floor Brush"</Description>
 <Theme>"RULES-LAB_193"</Theme>
 <Availability>"RULES-DISPO_COMMON"</Availability>
-<Price>"1/6"</Price>
+<Price>"1PA 6SB"</Price>
 <Encumbrance>"0"</Encumbrance>
 </Trapping>
 <Trapping id="RULES-TRAP_062">
@@ -15180,105 +15171,105 @@ Armour is generally damaged in one of two ways:
 <Description language="ENGLISH">"Hammer"</Description>
 <Theme>"RULES-LAB_193"</Theme>
 <Availability>"RULES-DISPO_COMMON"</Availability>
-<Price>"3/-"</Price>
+<Price>"3PA"</Price>
 <Encumbrance>"0"</Encumbrance>
 </Trapping>
 <Trapping id="RULES-TRAP_064">
 <Description language="ENGLISH">"Hand Mirror"</Description>
 <Theme>"RULES-LAB_193"</Theme>
 <Availability>"RULES-DISPO_EXOTIC"</Availability>
-<Price>"1CO 1/6"</Price>
+<Price>"1CO 1PA 6SB"</Price>
 <Encumbrance>"0"</Encumbrance>
 </Trapping>
 <Trapping id="RULES-TRAP_065">
 <Description language="ENGLISH">"Hoe"</Description>
 <Theme>"RULES-LAB_193"</Theme>
 <Availability>"RULES-DISPO_COMMON"</Availability>
-<Price>"4/-"</Price>
+<Price>"4PA"</Price>
 <Encumbrance>"2"</Encumbrance>
 </Trapping>
 <Trapping id="RULES-TRAP_066">
 <Description language="ENGLISH">"Key"</Description>
 <Theme>"RULES-LAB_193"</Theme>
 <Availability>"RULES-DISPO_COMMON"</Availability>
-<Price>"1/-"</Price>
+<Price>"1PA"</Price>
 <Encumbrance>"0"</Encumbrance>
 </Trapping>
 <Trapping id="RULES-TRAP_067">
 <Description language="ENGLISH">"Knife"</Description>
 <Theme>"RULES-LAB_193"</Theme>
 <Availability>"RULES-DISPO_COMMON"</Availability>
-<Price>"8/-"</Price>
+<Price>"8PA"</Price>
 <Encumbrance>"0"</Encumbrance>
 </Trapping>
 <Trapping id="RULES-TRAP_068">
 <Description language="ENGLISH">"Lock Picks"</Description>
 <Theme>"RULES-LAB_193"</Theme>
 <Availability>"RULES-DISPO_LIMITED"</Availability>
-<Price>"15/-"</Price>
+<Price>"15PA"</Price>
 <Encumbrance>"0"</Encumbrance>
 </Trapping>
 <Trapping id="RULES-TRAP_069">
 <Description language="ENGLISH">"Manacles"</Description>
 <Theme>"RULES-LAB_193"</Theme>
 <Availability>"RULES-DISPO_LIMITED"</Availability>
-<Price>"18/-"</Price>
+<Price>"18PA"</Price>
 <Encumbrance>"0"</Encumbrance>
 </Trapping>
 <Trapping id="RULES-TRAP_070">
 <Description language="ENGLISH">"Mop"</Description>
 <Theme>"RULES-LAB_193"</Theme>
 <Availability>"RULES-DISPO_COMMON"</Availability>
-<Price>"1/-"</Price>
+<Price>"1PA"</Price>
 <Encumbrance>"2"</Encumbrance>
 </Trapping>
 <Trapping id="RULES-TRAP_071">
 <Description language="ENGLISH">"Nails (12)"</Description>
 <Theme>"RULES-LAB_193"</Theme>
 <Availability>"RULES-DISPO_COMMON"</Availability>
-<Price>"2d"</Price>
+<Price>"2SB"</Price>
 <Encumbrance>"0"</Encumbrance>
 </Trapping>
 <Trapping id="RULES-TRAP_072">
 <Description language="ENGLISH">"Paint Brush"</Description>
 <Theme>"RULES-LAB_193"</Theme>
 <Availability>"RULES-DISPO_COMMON"</Availability>
-<Price>"4/-"</Price>
+<Price>"4PA"</Price>
 <Encumbrance>"0"</Encumbrance>
 </Trapping>
 <Trapping id="RULES-TRAP_073">
 <Description language="ENGLISH">"Pestle &amp; Mortar"</Description>
 <Theme>"RULES-LAB_193"</Theme>
 <Availability>"RULES-DISPO_COMMON"</Availability>
-<Price>"14/-"</Price>
+<Price>"14PA"</Price>
 <Encumbrance>"0"</Encumbrance>
 </Trapping>
 <Trapping id="RULES-TRAP_074">
 <Description language="ENGLISH">"Pick"</Description>
 <Theme>"RULES-LAB_193"</Theme>
 <Availability>"RULES-DISPO_LIMITED"</Availability>
-<Price>"18/-"</Price>
+<Price>"18PA"</Price>
 <Encumbrance>"1"</Encumbrance>
 </Trapping>
 <Trapping id="RULES-TRAP_075">
 <Description language="ENGLISH">"Pole (3 yards)"</Description>
 <Theme>"RULES-LAB_193"</Theme>
 <Availability>"RULES-DISPO_COMMON"</Availability>
-<Price>"8/-"</Price>
+<Price>"8PA"</Price>
 <Encumbrance>"3"</Encumbrance>
 </Trapping>
 <Trapping id="RULES-TRAP_076">
 <Description language="ENGLISH">"Quill Pen"</Description>
 <Theme>"RULES-LAB_193"</Theme>
 <Availability>"RULES-DISPO_COMMON"</Availability>
-<Price>"3/-"</Price>
+<Price>"3PA"</Price>
 <Encumbrance>"0"</Encumbrance>
 </Trapping>
 <Trapping id="RULES-TRAP_077">
 <Description language="ENGLISH">"Rake"</Description>
 <Theme>"RULES-LAB_193"</Theme>
 <Availability>"RULES-DISPO_COMMON"</Availability>
-<Price>"4/6"</Price>
+<Price>"4PA 6SB"</Price>
 <Encumbrance>"2"</Encumbrance>
 </Trapping>
 <Trapping id="RULES-TRAP_078">
@@ -15292,7 +15283,7 @@ Armour is generally damaged in one of two ways:
 <Description language="ENGLISH">"Saw"</Description>
 <Theme>"RULES-LAB_193"</Theme>
 <Availability>"RULES-DISPO_COMMON"</Availability>
-<Price>"6/-"</Price>
+<Price>"6PA"</Price>
 <Encumbrance>"1"</Encumbrance>
 </Trapping>
 <Trapping id="RULES-TRAP_080">
@@ -15306,14 +15297,14 @@ Armour is generally damaged in one of two ways:
 <Description language="ENGLISH">"Spade"</Description>
 <Theme>"RULES-LAB_193"</Theme>
 <Availability>"RULES-DISPO_COMMON"</Availability>
-<Price>"8/-"</Price>
+<Price>"8PA"</Price>
 <Encumbrance>"2"</Encumbrance>
 </Trapping>
 <Trapping id="RULES-TRAP_082">
 <Description language="ENGLISH">"Spike"</Description>
 <Theme>"RULES-LAB_193"</Theme>
 <Availability>"RULES-DISPO_COMMON"</Availability>
-<Price>"1/-"</Price>
+<Price>"1PA"</Price>
 <Encumbrance>"0"</Encumbrance>
 </Trapping>
 <Trapping id="RULES-TRAP_083">
@@ -15327,7 +15318,7 @@ Armour is generally damaged in one of two ways:
 <Description language="ENGLISH">"Tongs, steel"</Description>
 <Theme>"RULES-LAB_193"</Theme>
 <Availability>"RULES-DISPO_COMMON"</Availability>
-<Price>"16/-"</Price>
+<Price>"16PA"</Price>
 <Encumbrance>"0"</Encumbrance>
 </Trapping>
 <Trapping id="RULES-TRAP_085">
@@ -15341,7 +15332,7 @@ Armour is generally damaged in one of two ways:
 <Description language="ENGLISH">"Tweezers"</Description>
 <Theme>"RULES-LAB_193"</Theme>
 <Availability>"RULES-DISPO_LIMITED"</Availability>
-<Price>"1/-"</Price>
+<Price>"1PA"</Price>
 <Encumbrance>"0"</Encumbrance>
 </Trapping>
 <Trapping id="RULES-TRAP_087">
@@ -15411,21 +15402,20 @@ Armour is generally damaged in one of two ways:
 <Description language="ENGLISH">"Guild License"</Description>
 <Theme>"RULES-LAB_194"</Theme>
 <Availability>"n/a"</Availability>
-<Price>"n/a"</Price>
 <Encumbrance>"0"</Encumbrance>
 </Trapping>
 <Trapping id="RULES-TRAP_097">
 <Description language="ENGLISH">"Leaflet"</Description>
 <Theme>"RULES-LAB_194"</Theme>
 <Availability>"RULES-DISPO_COMMON"</Availability>
-<Price>"1/-"</Price>
+<Price>"1PA"</Price>
 <Encumbrance>"0"</Encumbrance>
 </Trapping>
 <Trapping id="RULES-TRAP_098">
 <Description language="ENGLISH">"Legal Document"</Description>
 <Theme>"RULES-LAB_194"</Theme>
 <Availability>"RULES-DISPO_COMMON"</Availability>
-<Price>"3/-"</Price>
+<Price>"3PA"</Price>
 <Encumbrance>"0"</Encumbrance>
 </Trapping>
 <Trapping id="RULES-TRAP_099">
@@ -15439,7 +15429,7 @@ Armour is generally damaged in one of two ways:
 <Description language="ENGLISH">"Parchment/sheet"</Description>
 <Theme>"RULES-LAB_194"</Theme>
 <Availability>"RULES-DISPO_COMMON"</Availability>
-<Price>"1/-"</Price>
+<Price>"1PA"</Price>
 <Encumbrance>"0"</Encumbrance>
 </Trapping>
 <Trapping id="RULES-TRAP_101">
@@ -15468,7 +15458,7 @@ Armour is generally damaged in one of two ways:
 <Description language="ENGLISH">"Chicken"</Description>
 <Theme>"RULES-LAB_195"</Theme>
 <Availability>"RULES-DISPO_COMMON"</Availability>
-<Price>"5d"</Price>
+<Price>"5SB"</Price>
 <Encumbrance>"1"</Encumbrance>
 <Carries>"0"</Carries>
 </Trapping>
@@ -15500,7 +15490,7 @@ Armour is generally damaged in one of two ways:
 <Description language="ENGLISH">"Dog collar and lead"</Description>
 <Theme>"RULES-LAB_195"</Theme>
 <Availability>"RULES-DISPO_COMMON"</Availability>
-<Price>"1/7"</Price>
+<Price>"1PA 7SB"</Price>
 <Encumbrance>"0"</Encumbrance>
 </Trapping>
 <Trapping id="RULES-TRAP_109">
@@ -15515,7 +15505,7 @@ Armour is generally damaged in one of two ways:
 <Description language="ENGLISH">"Homing Pigeons"</Description>
 <Theme>"RULES-LAB_195"</Theme>
 <Availability>"RULES-DISPO_LIMITED"</Availability>
-<Price>"3/-"</Price>
+<Price>"3PA"</Price>
 <Encumbrance>"1"</Encumbrance>
 <Carries>"0"</Carries>
 </Trapping>
@@ -15602,77 +15592,77 @@ Armour is generally damaged in one of two ways:
 <Description language="ENGLISH">"Worms (6)"</Description>
 <Theme>"RULES-LAB_195"</Theme>
 <Availability>"RULES-DISPO_COMMON"</Availability>
-<Price>"1d"</Price>
+<Price>"1SB"</Price>
 <Encumbrance>"0"</Encumbrance>
 </Trapping>
 <Trapping id="RULES-TRAP_122">
 <Description language="ENGLISH">"Ball"</Description>
 <Theme>"RULES-LAB_196"</Theme>
 <Availability>"RULES-DISPO_COMMON"</Availability>
-<Price>"5d"</Price>
+<Price>"5SB"</Price>
 <Encumbrance>"0"</Encumbrance>
 </Trapping>
 <Trapping id="RULES-TRAP_123">
 <Description language="ENGLISH">"Bandage"</Description>
 <Theme>"RULES-LAB_196"</Theme>
 <Availability>"RULES-DISPO_COMMON"</Availability>
-<Price>"4d"</Price>
+<Price>"4SB"</Price>
 <Encumbrance>"0"</Encumbrance>
 </Trapping>
 <Trapping id="RULES-TRAP_124">
 <Description language="ENGLISH">"Baton"</Description>
 <Theme>"RULES-LAB_196"</Theme>
 <Availability>"RULES-DISPO_COMMON"</Availability>
-<Price>"1/-"</Price>
+<Price>"1PA"</Price>
 <Encumbrance>"0"</Encumbrance>
 </Trapping>
 <Trapping id="RULES-TRAP_125">
 <Description language="ENGLISH">"Bedroll"</Description>
 <Theme>"RULES-LAB_196"</Theme>
 <Availability>"RULES-DISPO_COMMON"</Availability>
-<Price>"6/-"</Price>
+<Price>"6PA"</Price>
 <Encumbrance>"1"</Encumbrance>
 </Trapping>
 <Trapping id="RULES-TRAP_126">
 <Description language="ENGLISH">"Blanket"</Description>
 <Theme>"RULES-LAB_196"</Theme>
 <Availability>"RULES-DISPO_COMMON"</Availability>
-<Price>"8d"</Price>
+<Price>"8SB"</Price>
 <Encumbrance>"0"</Encumbrance>
 </Trapping>
 <Trapping id="RULES-TRAP_127">
 <Description language="ENGLISH">"Candle (dozen)"</Description>
 <Theme>"RULES-LAB_196"</Theme>
 <Availability>"RULES-DISPO_COMMON"</Availability>
-<Price>"1/-"</Price>
+<Price>"1PA"</Price>
 <Encumbrance>"0"</Encumbrance>
 </Trapping>
 <Trapping id="RULES-TRAP_128">
 <Description language="ENGLISH">"Canvas Tarp"</Description>
 <Theme>"RULES-LAB_196"</Theme>
 <Availability>"RULES-DISPO_COMMON"</Availability>
-<Price>"8/-"</Price>
+<Price>"8PA"</Price>
 <Encumbrance>"1"</Encumbrance>
 </Trapping>
 <Trapping id="RULES-TRAP_129">
 <Description language="ENGLISH">"Chalk"</Description>
 <Theme>"RULES-LAB_196"</Theme>
 <Availability>"RULES-DISPO_COMMON"</Availability>
-<Price>"10d"</Price>
+<Price>"10SB"</Price>
 <Encumbrance>"0"</Encumbrance>
 </Trapping>
 <Trapping id="RULES-TRAP_130">
 <Description language="ENGLISH">"Charcoal stick"</Description>
 <Theme>"RULES-LAB_196"</Theme>
 <Availability>"RULES-DISPO_COMMON"</Availability>
-<Price>"10d"</Price>
+<Price>"10SB"</Price>
 <Encumbrance>"0"</Encumbrance>
 </Trapping>
 <Trapping id="RULES-TRAP_131">
 <Description language="ENGLISH">"Cutlery"</Description>
 <Theme>"RULES-LAB_196"</Theme>
 <Availability>"RULES-DISPO_COMMON"</Availability>
-<Price>"3/6"</Price>
+<Price>"3PA 6SB"</Price>
 <Encumbrance>"0"</Encumbrance>
 </Trapping>
 <Trapping id="RULES-TRAP_132">
@@ -15686,42 +15676,42 @@ Armour is generally damaged in one of two ways:
 <Description language="ENGLISH">"Deck of Cards"</Description>
 <Theme>"RULES-LAB_196"</Theme>
 <Availability>"RULES-DISPO_COMMON"</Availability>
-<Price>"1/-"</Price>
+<Price>"1PA"</Price>
 <Encumbrance>"0"</Encumbrance>
 </Trapping>
 <Trapping id="RULES-TRAP_134">
 <Description language="ENGLISH">"Cooking Pot"</Description>
 <Theme>"RULES-LAB_196"</Theme>
 <Availability>"RULES-DISPO_COMMON"</Availability>
-<Price>"8/-"</Price>
+<Price>"8PA"</Price>
 <Encumbrance>"1"</Encumbrance>
 </Trapping>
 <Trapping id="RULES-TRAP_135">
 <Description language="ENGLISH">"Cup"</Description>
 <Theme>"RULES-LAB_196"</Theme>
 <Availability>"RULES-DISPO_COMMON"</Availability>
-<Price>"8d"</Price>
+<Price>"8SB"</Price>
 <Encumbrance>"0"</Encumbrance>
 </Trapping>
 <Trapping id="RULES-TRAP_136">
 <Description language="ENGLISH">"Dice"</Description>
 <Theme>"RULES-LAB_196"</Theme>
 <Availability>"RULES-DISPO_COMMON"</Availability>
-<Price>"10d"</Price>
+<Price>"10SB"</Price>
 <Encumbrance>"0"</Encumbrance>
 </Trapping>
 <Trapping id="RULES-TRAP_137">
 <Description language="ENGLISH">"Doll"</Description>
 <Theme>"RULES-LAB_196"</Theme>
 <Availability>"RULES-DISPO_COMMON"</Availability>
-<Price>"2/-"</Price>
+<Price>"2PA"</Price>
 <Encumbrance>"0"</Encumbrance>
 </Trapping>
 <Trapping id="RULES-TRAP_138">
 <Description language="ENGLISH">"Grappling Hook"</Description>
 <Theme>"RULES-LAB_196"</Theme>
 <Availability>"RULES-DISPO_LIMITED"</Availability>
-<Price>"1CO -/10"</Price>
+<Price>"1CO 10SB"</Price>
 <Encumbrance>"1"</Encumbrance>
 </Trapping>
 <Trapping id="RULES-TRAP_139">
@@ -15735,14 +15725,14 @@ Armour is generally damaged in one of two ways:
 <Description language="ENGLISH">"Lamp Oil"</Description>
 <Theme>"RULES-LAB_196"</Theme>
 <Availability>"RULES-DISPO_COMMON"</Availability>
-<Price>"2/-"</Price>
+<Price>"2PA"</Price>
 <Encumbrance>"0"</Encumbrance>
 </Trapping>
 <Trapping id="RULES-TRAP_141">
 <Description language="ENGLISH">"Lantern"</Description>
 <Theme>"RULES-LAB_196"</Theme>
 <Availability>"RULES-DISPO_COMMON"</Availability>
-<Price>"12/-"</Price>
+<Price>"12PA"</Price>
 <Encumbrance>"1"</Encumbrance>
 </Trapping>
 <Trapping id="RULES-TRAP_142">
@@ -15756,70 +15746,70 @@ Armour is generally damaged in one of two ways:
 <Description language="ENGLISH">"Match"</Description>
 <Theme>"RULES-LAB_196"</Theme>
 <Availability>"RULES-DISPO_COMMON"</Availability>
-<Price>"1d"</Price>
+<Price>"1SB"</Price>
 <Encumbrance>"0"</Encumbrance>
 </Trapping>
 <Trapping id="RULES-TRAP_144">
 <Description language="ENGLISH">"Pan"</Description>
 <Theme>"RULES-LAB_196"</Theme>
 <Availability>"RULES-DISPO_COMMON"</Availability>
-<Price>"7/6"</Price>
+<Price>"7PA 6SB"</Price>
 <Encumbrance>"1"</Encumbrance>
 </Trapping>
 <Trapping id="RULES-TRAP_145">
 <Description language="ENGLISH">"Pipe and Tobacco"</Description>
 <Theme>"RULES-LAB_196"</Theme>
 <Availability>"RULES-DISPO_LIMITED"</Availability>
-<Price>"3/4"</Price>
+<Price>"3PA 4SB"</Price>
 <Encumbrance>"0"</Encumbrance>
 </Trapping>
 <Trapping id="RULES-TRAP_146">
 <Description language="ENGLISH">"Placard"</Description>
 <Theme>"RULES-LAB_196"</Theme>
 <Availability>"RULES-DISPO_COMMON"</Availability>
-<Price>"1/-"</Price>
+<Price>"1PA"</Price>
 <Encumbrance>"2"</Encumbrance>
 </Trapping>
 <Trapping id="RULES-TRAP_147">
 <Description language="ENGLISH">"Plate"</Description>
 <Theme>"RULES-LAB_196"</Theme>
 <Availability>"RULES-DISPO_COMMON"</Availability>
-<Price>"1/-"</Price>
+<Price>"1PA"</Price>
 <Encumbrance>"0"</Encumbrance>
 </Trapping>
 <Trapping id="RULES-TRAP_148">
 <Description language="ENGLISH">"Bowl"</Description>
 <Theme>"RULES-LAB_196"</Theme>
 <Availability>"RULES-DISPO_COMMON"</Availability>
-<Price>"1/-"</Price>
+<Price>"1PA"</Price>
 <Encumbrance>"0"</Encumbrance>
 </Trapping>
 <Trapping id="RULES-TRAP_149">
 <Description language="ENGLISH">"Rags"</Description>
 <Theme>"RULES-LAB_196"</Theme>
 <Availability>"RULES-DISPO_COMMON"</Availability>
-<Price>"1d"</Price>
+<Price>"1SB"</Price>
 <Encumbrance>"0"</Encumbrance>
 </Trapping>
 <Trapping id="RULES-TRAP_150">
 <Description language="ENGLISH">"Rope, 10 yards"</Description>
 <Theme>"RULES-LAB_196"</Theme>
 <Availability>"RULES-DISPO_COMMON"</Availability>
-<Price>"8/4"</Price>
+<Price>"8PA 4SB"</Price>
 <Encumbrance>"1"</Encumbrance>
 </Trapping>
 <Trapping id="RULES-TRAP_151">
 <Description language="ENGLISH">"Tent"</Description>
 <Theme>"RULES-LAB_196"</Theme>
 <Availability>"RULES-DISPO_LIMITED"</Availability>
-<Price>"12/-"</Price>
+<Price>"12PA"</Price>
 <Encumbrance>"2"</Encumbrance>
 </Trapping>
 <Trapping id="RULES-TRAP_152">
 <Description language="ENGLISH">"Tinderbox"</Description>
 <Theme>"RULES-LAB_196"</Theme>
 <Availability>"RULES-DISPO_COMMON"</Availability>
-<Price>"4/2"</Price>
+<Price>"4PA 2SB"</Price>
 <Encumbrance>"0"</Encumbrance>
 </Trapping>
 <Trapping id="RULES-TRAP_153">
@@ -15861,28 +15851,28 @@ Armour is generally damaged in one of two ways:
 <Description language="ENGLISH">"Ranald's Delight"</Description>
 <Theme>"RULES-LAB_197"</Theme>
 <Availability>"RULES-DISPO_LIMITED"</Availability>
-<Price>"18/-"</Price>
+<Price>"18PA"</Price>
 <Encumbrance>"0"</Encumbrance>
 </Trapping>
 <Trapping id="RULES-TRAP_159">
 <Description language="ENGLISH">"Spit"</Description>
 <Theme>"RULES-LAB_197"</Theme>
 <Availability>"RULES-DISPO_RARE"</Availability>
-<Price>"1CO 5/-"</Price>
+<Price>"1CO 5PA"</Price>
 <Encumbrance>"0"</Encumbrance>
 </Trapping>
 <Trapping id="RULES-TRAP_160">
 <Description language="ENGLISH">"Weirdroot"</Description>
 <Theme>"RULES-LAB_197"</Theme>
 <Availability>"RULES-DISPO_RARE"</Availability>
-<Price>"4/-"</Price>
+<Price>"4PA"</Price>
 <Encumbrance>"0"</Encumbrance>
 </Trapping>
 <Trapping id="RULES-TRAP_161">
 <Description language="ENGLISH">"Digestive Tonic"</Description>
 <Theme>"RULES-LAB_198"</Theme>
 <Availability>"RULES-DISPO_COMMON"</Availability>
-<Price>"3/-"</Price>
+<Price>"3PA"</Price>
 <Encumbrance>"0"</Encumbrance>
 </Trapping>
 <Trapping id="RULES-TRAP_162">
@@ -15896,21 +15886,21 @@ Armour is generally damaged in one of two ways:
 <Description language="ENGLISH">"Faxtoryll"</Description>
 <Theme>"RULES-LAB_198"</Theme>
 <Availability>"RULES-DISPO_EXOTIC"</Availability>
-<Price>"15/-"</Price>
+<Price>"15PA"</Price>
 <Encumbrance>"0"</Encumbrance>
 </Trapping>
 <Trapping id="RULES-TRAP_164">
 <Description language="ENGLISH">"Healing Draught"</Description>
 <Theme>"RULES-LAB_198"</Theme>
 <Availability>"RULES-DISPO_LIMITED"</Availability>
-<Price>"10/-"</Price>
+<Price>"10PA"</Price>
 <Encumbrance>"0"</Encumbrance>
 </Trapping>
 <Trapping id="RULES-TRAP_165">
 <Description language="ENGLISH">"Healing Poultice"</Description>
 <Theme>"RULES-LAB_198"</Theme>
 <Availability>"RULES-DISPO_COMMON"</Availability>
-<Price>"12/-"</Price>
+<Price>"12PA"</Price>
 <Encumbrance>"0"</Encumbrance>
 </Trapping>
 <Trapping id="RULES-TRAP_166">
@@ -15924,21 +15914,21 @@ Armour is generally damaged in one of two ways:
 <Description language="ENGLISH">"Salwort"</Description>
 <Theme>"RULES-LAB_198"</Theme>
 <Availability>"RULES-DISPO_COMMON"</Availability>
-<Price>"12/-"</Price>
+<Price>"12PA"</Price>
 <Encumbrance>"0"</Encumbrance>
 </Trapping>
 <Trapping id="RULES-TRAP_168">
 <Description language="ENGLISH">"Vitality Draught"</Description>
 <Theme>"RULES-LAB_198"</Theme>
 <Availability>"RULES-DISPO_LIMITED"</Availability>
-<Price>"18/-"</Price>
+<Price>"18PA"</Price>
 <Encumbrance>"0"</Encumbrance>
 </Trapping>
 <Trapping id="RULES-TRAP_169">
 <Description language="ENGLISH">"Eye Patch"</Description>
 <Theme>"RULES-LAB_199"</Theme>
 <Availability>"RULES-DISPO_COMMON"</Availability>
-<Price>"6d"</Price>
+<Price>"6SB"</Price>
 <Encumbrance>"0"</Encumbrance>
 </Trapping>
 <Trapping id="RULES-TRAP_170">
@@ -15952,21 +15942,21 @@ Armour is generally damaged in one of two ways:
 <Description language="ENGLISH">"False Leg"</Description>
 <Theme>"RULES-LAB_199"</Theme>
 <Availability>"RULES-DISPO_LIMITED"</Availability>
-<Price>"16/-"</Price>
+<Price>"16PA"</Price>
 <Encumbrance>"2"</Encumbrance>
 </Trapping>
 <Trapping id="RULES-TRAP_172">
 <Description language="ENGLISH">"Gilded Nose"</Description>
 <Theme>"RULES-LAB_199"</Theme>
 <Availability>"RULES-DISPO_LIMITED"</Availability>
-<Price>"18/-"</Price>
+<Price>"18PA"</Price>
 <Encumbrance>"0"</Encumbrance>
 </Trapping>
 <Trapping id="RULES-TRAP_173">
 <Description language="ENGLISH">"Hook"</Description>
 <Theme>"RULES-LAB_199"</Theme>
 <Availability>"RULES-DISPO_COMMON"</Availability>
-<Price>"3/4"</Price>
+<Price>"3PA 4SB"</Price>
 <Encumbrance>"1"</Encumbrance>
 </Trapping>
 <Trapping id="RULES-TRAP_174">
@@ -15980,7 +15970,7 @@ Armour is generally damaged in one of two ways:
 <Description language="ENGLISH">"Wooden teeth"</Description>
 <Theme>"RULES-LAB_199"</Theme>
 <Availability>"RULES-DISPO_RARE"</Availability>
-<Price>"10/-"</Price>
+<Price>"10PA"</Price>
 <Encumbrance>"0"</Encumbrance>
 </Trapping>
 </DATA_TRAPPING>

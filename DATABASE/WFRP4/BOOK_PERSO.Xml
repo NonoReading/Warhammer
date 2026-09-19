@@ -35,7 +35,6 @@
 <Damage>"+(BATTR_S)+0"</Damage>
 <Availability>"RULES-DISPO_COMMON"</Availability>
 <Reach>"RULES-WEAPR_PERSO"</Reach>
-<Price>"ND"</Price>
 <Encumbrance>"0"</Encumbrance>
 <Quality>"RULES-WEAPB17"</Quality>
 <Hand>"1"</Hand>

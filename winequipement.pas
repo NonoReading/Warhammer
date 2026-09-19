@@ -165,7 +165,7 @@ begin
           if PTrapping.Theme <> '' then
             TabEquip.Cells[2, Ind] := GetTexteLibelle(PTrapping.Theme);
           TabEquip.Cells[3, Ind] := PTrapping.Libelle;
-          TabEquip.Cells[4, Ind] := PTrapping.Prix;
+          TabEquip.Cells[4, Ind] := TraduirePrix(PTrapping.Prix);
           TabEquip.Cells[5, Ind] := IntToStr(PTrapping.Encombrement);
           TabEquip.Cells[6, Ind] := IntToStr(PTrapping.Capacite);
           TabEquip.Cells[7, Ind] := ReplaceTexteLibelle(PTrapping.Disponibilite);

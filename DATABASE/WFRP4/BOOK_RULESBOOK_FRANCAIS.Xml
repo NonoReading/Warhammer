@@ -13454,7 +13454,6 @@ See page 190 for Fear rules"</Explanation>
 <Damage>"-"</Damage>
 <Availability>"-"</Availability>
 <Reach>"-"</Reach>
-<Price>"-"</Price>
 <Encumbrance>"0"</Encumbrance>
 <Quality>"-"</Quality>
 <Hand>"0"</Hand>
@@ -13466,7 +13465,7 @@ See page 190 for Fear rules"</Explanation>
 <Damage>"+(BATTR_S)+4"</Damage>
 <Availability>"RULES-DISPO_COMMON"</Availability>
 <Reach>"RULES-WEAPR_LONG"</Reach>
-<Price>"3/-"</Price>
+<Price>"3PA"</Price>
 <Encumbrance>"2"</Encumbrance>
 <Quality>"RULES-WEAPB04,RULES-WEAPB08"</Quality>
 <Hand>"2"</Hand>
@@ -13490,7 +13489,7 @@ See page 190 for Fear rules"</Explanation>
 <Damage>"+(BATTR_S)+4"</Damage>
 <Availability>"RULES-DISPO_COMMON"</Availability>
 <Reach>"RULES-WEAPR_BIG"</Reach>
-<Price>"15/-"</Price>
+<Price>"15PA"</Price>
 <Encumbrance>"2"</Encumbrance>
 <Quality>"RULES-WEAPB12"</Quality>
 <Hand>"2"</Hand>
@@ -13502,7 +13501,7 @@ See page 190 for Fear rules"</Explanation>
 <Damage>"+(BATTR_S)+4"</Damage>
 <Availability>"RULES-DISPO_RARE"</Availability>
 <Reach>"RULES-WEAPR_HUGE"</Reach>
-<Price>"18/-"</Price>
+<Price>"18PA"</Price>
 <Encumbrance>"4"</Encumbrance>
 <Quality>"RULES-WEAPB12"</Quality>
 <Hand>"2"</Hand>
@@ -13514,7 +13513,7 @@ See page 190 for Fear rules"</Explanation>
 <Damage>"+(BATTR_S)+2"</Damage>
 <Availability>"RULES-DISPO_COMMON"</Availability>
 <Reach>"RULES-WEAPR_PERSO"</Reach>
-<Price>"2/6"</Price>
+<Price>"2PA 6SB"</Price>
 <Encumbrance>"0"</Encumbrance>
 <Quality>"-"</Quality>
 <Hand>"1"</Hand>
@@ -13526,7 +13525,6 @@ See page 190 for Fear rules"</Explanation>
 <Damage>"+(BATTR_S)+0"</Damage>
 <Availability>"RULES-DISPO_COMMON"</Availability>
 <Reach>"RULES-WEAPR_PERSO"</Reach>
-<Price>"ND"</Price>
 <Encumbrance>"0"</Encumbrance>
 <Quality>"RULES-WEAPB27"</Quality>
 <Hand>"1"</Hand>
@@ -13538,7 +13536,6 @@ See page 190 for Fear rules"</Explanation>
 <Damage>"-"</Damage>
 <Availability>"-"</Availability>
 <Reach>"-"</Reach>
-<Price>"-"</Price>
 <Encumbrance>"0"</Encumbrance>
 <Quality>"-"</Quality>
 <Hand>"0"</Hand>
@@ -13550,7 +13547,7 @@ See page 190 for Fear rules"</Explanation>
 <Damage>"+(BATTR_S)+1"</Damage>
 <Availability>"RULES-DISPO_COMMON"</Availability>
 <Reach>"RULES-WEAPR_CLOSE"</Reach>
-<Price>"8/-"</Price>
+<Price>"8PA"</Price>
 <Encumbrance>"0"</Encumbrance>
 <Quality>"RULES-WEAPB27"</Quality>
 <Hand>"1"</Hand>
@@ -13646,7 +13643,7 @@ See page 190 for Fear rules"</Explanation>
 <Damage>"+(BATTR_S)+1"</Damage>
 <Availability>"RULES-DISPO_COMMON"</Availability>
 <Reach>"RULES-WEAPR_PERSO"</Reach>
-<Price>"18/2"</Price>
+<Price>"18PA 2SB"</Price>
 <Encumbrance>"0"</Encumbrance>
 <Quality>"RULES-WEAPB18 1,RULES-WEAPB08,RULES-WEAPB27"</Quality>
 <Hand>"1"</Hand>
@@ -13658,7 +13655,7 @@ See page 190 for Fear rules"</Explanation>
 <Damage>"+(BATTR_S)+2"</Damage>
 <Availability>"RULES-DISPO_COMMON"</Availability>
 <Reach>"RULES-WEAPR_CLOSE"</Reach>
-<Price>"16/-"</Price>
+<Price>"16PA"</Price>
 <Encumbrance>"0"</Encumbrance>
 <Quality>"-"</Quality>
 <Hand>"1"</Hand>
@@ -13670,7 +13667,6 @@ See page 190 for Fear rules"</Explanation>
 <Damage>"-"</Damage>
 <Availability>"-"</Availability>
 <Reach>"-"</Reach>
-<Price>"-"</Price>
 <Encumbrance>"0"</Encumbrance>
 <Quality>"-"</Quality>
 <Hand>"0"</Hand>
@@ -13706,7 +13702,6 @@ See page 190 for Fear rules"</Explanation>
 <Damage>"-"</Damage>
 <Availability>"-"</Availability>
 <Reach>"-"</Reach>
-<Price>"-"</Price>
 <Encumbrance>"0"</Encumbrance>
 <Quality>"-"</Quality>
 <Hand>"0"</Hand>
@@ -13754,7 +13749,7 @@ See page 190 for Fear rules"</Explanation>
 <Damage>"+(BATTR_S)+5"</Damage>
 <Availability>"RULES-DISPO_COMMON"</Availability>
 <Reach>"RULES-WEAPR_MID"</Reach>
-<Price>"9/-"</Price>
+<Price>"9PA"</Price>
 <Encumbrance>"3"</Encumbrance>
 <Quality>"RULES-WEAPB10,RULES-WEAPB12,RULES-WEAPB28"</Quality>
 <Hand>"2"</Hand>
@@ -13778,7 +13773,6 @@ See page 190 for Fear rules"</Explanation>
 <Damage>"-"</Damage>
 <Availability>"-"</Availability>
 <Reach>"-"</Reach>
-<Price>"-"</Price>
 <Encumbrance>"0"</Encumbrance>
 <Quality>"-"</Quality>
 <Hand>"0"</Hand>
@@ -13790,7 +13784,7 @@ See page 190 for Fear rules"</Explanation>
 <Damage>"+(BATTR_S)+2"</Damage>
 <Availability>"RULES-DISPO_COMMON"</Availability>
 <Reach>"6"</Reach>
-<Price>"5/-"</Price>
+<Price>"5PA"</Price>
 <Encumbrance>"0"</Encumbrance>
 <Quality>"RULES-WEAPB17"</Quality>
 <Hand>"1"</Hand>
@@ -13802,7 +13796,7 @@ See page 190 for Fear rules"</Explanation>
 <Damage>"0"</Damage>
 <Availability>"RULES-DISPO_COMMON"</Availability>
 <Reach>"(BATTR_S)X2"</Reach>
-<Price>"6/-"</Price>
+<Price>"6PA"</Price>
 <Encumbrance>"0"</Encumbrance>
 <Quality>"RULES-WEAPB17"</Quality>
 <Hand>"1"</Hand>
@@ -13862,7 +13856,7 @@ See page 190 for Fear rules"</Explanation>
 <Damage>"+(BATTR_S)+3"</Damage>
 <Availability>"RULES-DISPO_COMMON"</Availability>
 <Reach>"RULES-WEAPR_MID"</Reach>
-<Price>"10/-"</Price>
+<Price>"10PA"</Price>
 <Encumbrance>"1"</Encumbrance>
 <Quality>"RULES-WEAPB09,RULES-WEAPB26,RULES-WEAPB01"</Quality>
 <Hand>"1"</Hand>
@@ -13874,7 +13868,7 @@ See page 190 for Fear rules"</Explanation>
 <Damage>"+(BATTR_S)+3"</Damage>
 <Availability>"RULES-DISPO_LIMITED"</Availability>
 <Reach>"RULES-WEAPR_SHORT"</Reach>
-<Price>"1CO 2/6"</Price>
+<Price>"1CO 2PA 6SB"</Price>
 <Encumbrance>"1"</Encumbrance>
 <Quality>"RULES-WEAPB08,RULES-WEAPB11"</Quality>
 <Hand>"1"</Hand>
@@ -13886,7 +13880,7 @@ See page 190 for Fear rules"</Explanation>
 <Damage>"+(BATTR_S)+2"</Damage>
 <Availability>"RULES-DISPO_RARE"</Availability>
 <Reach>"RULES-WEAPR_CLOSE"</Reach>
-<Price>"ICO"</Price>
+<Price>"1CO"</Price>
 <Encumbrance>"0"</Encumbrance>
 <Quality>"RULES-WEAPB08"</Quality>
 <Hand>"1"</Hand>
@@ -14006,7 +14000,7 @@ See page 190 for Fear rules"</Explanation>
 <Damage>"+7"</Damage>
 <Availability>"RULES-DISPO_LIMITED"</Availability>
 <Reach>"100"</Reach>
-<Price>"4/-"</Price>
+<Price>"4PA"</Price>
 <Encumbrance>"2"</Encumbrance>
 <Quality>"-"</Quality>
 <Hand>"2"</Hand>
@@ -14018,7 +14012,7 @@ See page 190 for Fear rules"</Explanation>
 <Damage>"+6"</Damage>
 <Availability>"RULES-DISPO_COMMON"</Availability>
 <Reach>"60"</Reach>
-<Price>"l/-"</Price>
+<Price>"1PA"</Price>
 <Encumbrance>"0"</Encumbrance>
 <Quality>"-"</Quality>
 <Hand>"1"</Hand>
@@ -14054,7 +14048,6 @@ See page 190 for Fear rules"</Explanation>
 <Damage>"-"</Damage>
 <Availability>"-"</Availability>
 <Reach>"-"</Reach>
-<Price>"-"</Price>
 <Encumbrance>"0"</Encumbrance>
 <Quality>"-"</Quality>
 <Hand>"0"</Hand>
@@ -14066,7 +14059,7 @@ See page 190 for Fear rules"</Explanation>
 <Damage>"+(BATTR_S)"</Damage>
 <Availability>"RULES-DISPO_RARE"</Availability>
 <Reach>"(BATTR_S)X3"</Reach>
-<Price>"10/-"</Price>
+<Price>"10PA"</Price>
 <Encumbrance>"0"</Encumbrance>
 <Quality>"RULES-WEAPB17"</Quality>
 <Hand>"1"</Hand>
@@ -14078,7 +14071,7 @@ See page 190 for Fear rules"</Explanation>
 <Damage>"+(BATTR_S)+2"</Damage>
 <Availability>"RULES-DISPO_COMMON"</Availability>
 <Reach>"(BATTR_S)X2"</Reach>
-<Price>"18/-"</Price>
+<Price>"18PA"</Price>
 <Encumbrance>"0"</Encumbrance>
 <Quality>"-"</Quality>
 <Hand>"1"</Hand>
@@ -14090,7 +14083,7 @@ See page 190 for Fear rules"</Explanation>
 <Damage>"+(BATTR_S)+1"</Damage>
 <Availability>"RULES-DISPO_LIMITED"</Availability>
 <Reach>"(BATTR_S)X2"</Reach>
-<Price>"2/-"</Price>
+<Price>"2PA"</Price>
 <Encumbrance>"0"</Encumbrance>
 <Quality>"RULES-WEAPB12"</Quality>
 <Hand>"1"</Hand>
@@ -14114,7 +14107,7 @@ See page 190 for Fear rules"</Explanation>
 <Damage>"+(BATTR_S)+3"</Damage>
 <Availability>"RULES-DISPO_LIMITED"</Availability>
 <Reach>"(BATTR_S)X3"</Reach>
-<Price>"10/6"</Price>
+<Price>"10PA 6SB"</Price>
 <Encumbrance>"1"</Encumbrance>
 <Quality>"RULES-WEAPB12"</Quality>
 <Hand>"1"</Hand>
@@ -14126,7 +14119,6 @@ See page 190 for Fear rules"</Explanation>
 <Damage>"+(BATTR_S)"</Damage>
 <Availability>"RULES-DISPO_COMMON"</Availability>
 <Reach>"(BATTR_S)X3"</Reach>
-<Price>"/"</Price>
 <Encumbrance>"0"</Encumbrance>
 <Quality>"-"</Quality>
 <Hand>"1"</Hand>
@@ -14138,7 +14130,6 @@ See page 190 for Fear rules"</Explanation>
 <Damage>"-"</Damage>
 <Availability>"-"</Availability>
 <Reach>"-"</Reach>
-<Price>"-"</Price>
 <Encumbrance>"0"</Encumbrance>
 <Quality>"-"</Quality>
 <Hand>"0"</Hand>
@@ -14198,7 +14189,7 @@ See page 190 for Fear rules"</Explanation>
 <Damage>"+0"</Damage>
 <Availability>"RULES-DISPO_COMMON"</Availability>
 <Reach>"+0"</Reach>
-<Price>"5/-"</Price>
+<Price>"5PA"</Price>
 <Encumbrance>"0"</Encumbrance>
 <Quality>"RULES-WEAPB12"</Quality>
 <Hand>"0"</Hand>
@@ -14210,7 +14201,7 @@ See page 190 for Fear rules"</Explanation>
 <Damage>"+0"</Damage>
 <Availability>"RULES-DISPO_COMMON"</Availability>
 <Reach>"+0"</Reach>
-<Price>"5/-"</Price>
+<Price>"5PA"</Price>
 <Encumbrance>"0"</Encumbrance>
 <Quality>"RULES-WEAPB12"</Quality>
 <Hand>"0"</Hand>
@@ -14222,7 +14213,7 @@ See page 190 for Fear rules"</Explanation>
 <Damage>"+1"</Damage>
 <Availability>"RULES-DISPO_EXOTIC"</Availability>
 <Reach>"+50"</Reach>
-<Price>"6/-"</Price>
+<Price>"6PA"</Price>
 <Encumbrance>"0"</Encumbrance>
 <Quality>"RULES-WEAPB16,RULES-WEAPB12,RULES-WEAPB22"</Quality>
 <Hand>"0"</Hand>
@@ -14234,7 +14225,7 @@ See page 190 for Fear rules"</Explanation>
 <Damage>"+1"</Damage>
 <Availability>"RULES-DISPO_COMMON"</Availability>
 <Reach>"-10"</Reach>
-<Price>"4SC"</Price>
+<Price>"4SB"</Price>
 <Encumbrance>"0"</Encumbrance>
 <Quality>"RULES-WEAPB04"</Quality>
 <Hand>"0"</Hand>
@@ -14246,7 +14237,7 @@ See page 190 for Fear rules"</Explanation>
 <Damage>"+0"</Damage>
 <Availability>"RULES-DISPO_COMMON"</Availability>
 <Reach>"+0"</Reach>
-<Price>"2SC"</Price>
+<Price>"2SB"</Price>
 <Encumbrance>"0"</Encumbrance>
 <Quality>"RULES-WEAPB04"</Quality>
 <Hand>"0"</Hand>
@@ -14258,7 +14249,7 @@ See page 190 for Fear rules"</Explanation>
 <Damage>"+1"</Damage>
 <Availability>"RULES-DISPO_COMMON"</Availability>
 <Reach>"+0"</Reach>
-<Price>"3/3"</Price>
+<Price>"3PA 3SB"</Price>
 <Encumbrance>"0"</Encumbrance>
 <Quality>"RULES-WEAPB12,RULES-WEAPB22"</Quality>
 <Hand>"0"</Hand>
@@ -14270,7 +14261,7 @@ See page 190 for Fear rules"</Explanation>
 <Damage>"+0"</Damage>
 <Availability>"RULES-DISPO_COMMON"</Availability>
 <Reach>"/2"</Reach>
-<Price>"3SC"</Price>
+<Price>"3SB"</Price>
 <Encumbrance>"0"</Encumbrance>
 <Quality>"-"</Quality>
 <Hand>"0"</Hand>
@@ -14282,7 +14273,7 @@ See page 190 for Fear rules"</Explanation>
 <Damage>"+0"</Damage>
 <Availability>"RULES-DISPO_COMMON"</Availability>
 <Reach>"+0"</Reach>
-<Price>"3/3"</Price>
+<Price>"3PA 3SB"</Price>
 <Encumbrance>"0"</Encumbrance>
 <Quality>"RULES-WEAPB15 1"</Quality>
 <Hand>"0"</Hand>
@@ -14528,7 +14519,7 @@ Vous subissez toujours les Blessures normales (et étant donné que vos PA sont 
 <Armor id="RULES-ARMO_01">
 <Description language="FRANCAIS">"Calotte de cuir"</Description>
 <Availability>"RULES-DISPO_COMMON"</Availability>
-<Price>"8/-"</Price>
+<Price>"8PA"</Price>
 <Encumbrance>"0"</Encumbrance>
 <Quality>"RULES-ARMOB_03,RULES-ARMOB_08"</Quality>
 <Location>"RULES-ARMOL_HEAD"</Location>
@@ -14538,7 +14529,7 @@ Vous subissez toujours les Blessures normales (et étant donné que vos PA sont 
 <Armor id="RULES-ARMO_02">
 <Description language="FRANCAIS">"Jambières de cuir"</Description>
 <Availability>"RULES-DISPO_COMMON"</Availability>
-<Price>"14/-"</Price>
+<Price>"14PA"</Price>
 <Encumbrance>"1"</Encumbrance>
 <Quality>"RULES-ARMOB_08"</Quality>
 <Location>"RULES-ARMOL_LEG"</Location>
@@ -14548,7 +14539,7 @@ Vous subissez toujours les Blessures normales (et étant donné que vos PA sont 
 <Armor id="RULES-ARMO_03">
 <Description language="FRANCAIS">"Justaucorps de cuir"</Description>
 <Availability>"RULES-DISPO_COMMON"</Availability>
-<Price>"10/-"</Price>
+<Price>"10PA"</Price>
 <Encumbrance>"1"</Encumbrance>
 <Quality>"RULES-ARMOB_08"</Quality>
 <Location>"RULES-ARMOL_BODY"</Location>
@@ -14558,7 +14549,7 @@ Vous subissez toujours les Blessures normales (et étant donné que vos PA sont 
 <Armor id="RULES-ARMO_04">
 <Description language="FRANCAIS">"Veste de cuir"</Description>
 <Availability>"RULES-DISPO_COMMON"</Availability>
-<Price>"12/-"</Price>
+<Price>"12PA"</Price>
 <Encumbrance>"1"</Encumbrance>
 <Quality>"RULES-ARMOB_08"</Quality>
 <Location>"RULES-ARMOL_ARM,RULES-ARMOL_BODY"</Location>
@@ -14568,7 +14559,7 @@ Vous subissez toujours les Blessures normales (et étant donné que vos PA sont 
 <Armor id="RULES-ARMO_05">
 <Description language="FRANCAIS">"Plastron de cuir"</Description>
 <Availability>"RULES-DISPO_LIMITED"</Availability>
-<Price>"18/-"</Price>
+<Price>"18PA"</Price>
 <Encumbrance>"2"</Encumbrance>
 <Quality>"RULES-ARMOB_04"</Quality>
 <Location>"RULES-ARMOL_BODY"</Location>
@@ -14578,7 +14569,7 @@ Vous subissez toujours les Blessures normales (et étant donné que vos PA sont 
 <Armor id="RULES-ARMO_06">
 <Description language="FRANCAIS">"Chausses de mailles"</Description>
 <Availability>"RULES-DISPO_LIMITED"</Availability>
-<Price>"2C0"</Price>
+<Price>"2CO"</Price>
 <Encumbrance>"3"</Encumbrance>
 <Quality>"RULES-ARMOB_01,RULES-ARMOB_05"</Quality>
 <Location>"RULES-ARMOL_LEG"</Location>
@@ -14588,7 +14579,7 @@ Vous subissez toujours les Blessures normales (et étant donné que vos PA sont 
 <Armor id="RULES-ARMO_07">
 <Description language="FRANCAIS">"Chemise de mailles"</Description>
 <Availability>"RULES-DISPO_LIMITED"</Availability>
-<Price>"2C0"</Price>
+<Price>"2CO"</Price>
 <Encumbrance>"2"</Encumbrance>
 <Quality>"RULES-ARMOB_01,RULES-ARMOB_05"</Quality>
 <Location>"RULES-ARMOL_BODY"</Location>

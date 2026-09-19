@@ -538,7 +538,7 @@
 <Damage>"+(BATTR_S)+3"</Damage>
 <Availability>"RULES-DISPO_LIMITED"</Availability>
 <Reach>"RULES-WEAPR_MID"</Reach>
-<Price>"3co"</Price>
+<Price>"3CO"</Price>
 <Encumbrance>"0"</Encumbrance>
 <Quality>"RULES-WEAPB14"</Quality>
 <Hand>"1"</Hand>
@@ -550,7 +550,7 @@
 <Damage>"+(BATTR_S)+4"</Damage>
 <Availability>"RULES-DISPO_COMMON"</Availability>
 <Reach>"RULES-WEAPR_LONG"</Reach>
-<Price>"26c"</Price>
+<Price>"2CO"</Price>
 <Encumbrance>"1"</Encumbrance>
 <Quality>"RULES-WEAPB22"</Quality>
 <Hand>"2"</Hand>
@@ -562,7 +562,7 @@
 <Damage>"+(BATTR_S)+4"</Damage>
 <Availability>"RULES-DISPO_LIMITED"</Availability>
 <Reach>"RULES-WEAPR_LONG"</Reach>
-<Price>"10GC"</Price>
+<Price>"10CO"</Price>
 <Encumbrance>"2"</Encumbrance>
 <Quality>"RULES-WEAPB10,RULES-WEAPB20"</Quality>
 <Hand>"2"</Hand>
@@ -574,7 +574,7 @@
 <Damage>"+(BATTR_S)+4"</Damage>
 <Availability>"RULES-DISPO_COMMON"</Availability>
 <Reach>"RULES-WEAPR_MID"</Reach>
-<Price>"1GC"</Price>
+<Price>"1CO"</Price>
 <Encumbrance>"2"</Encumbrance>
 <Quality>"RULES-WEAPB11"</Quality>
 <Hand>"1"</Hand>
@@ -586,7 +586,7 @@
 <Damage>"+(BATTR_S)+4"</Damage>
 <Availability>"RULES-DISPO_LIMITED"</Availability>
 <Reach>"RULES-WEAPR_MID"</Reach>
-<Price>"3GC"</Price>
+<Price>"3CO"</Price>
 <Encumbrance>"2"</Encumbrance>
 <Quality>"RULES-WEAPB04"</Quality>
 <Hand>"1"</Hand>
@@ -598,7 +598,7 @@
 <Damage>"+(BATTR_S)e6"</Damage>
 <Availability>"RULES-DISPO_LIMITED"</Availability>
 <Reach>"RULES-WEAPR_LONG"</Reach>
-<Price>"12Gc"</Price>
+<Price>"12CO"</Price>
 <Encumbrance>"4"</Encumbrance>
 <Quality>"RULES-WEAPB21,RULES-WEAPB22"</Quality>
 <Hand>"2"</Hand>
@@ -610,7 +610,7 @@
 <Damage>"+(BATTR_S)+3"</Damage>
 <Availability>"RULES-DISPO_COMMON"</Availability>
 <Reach>"RULES-WEAPR_MID"</Reach>
-<Price>"1GC"</Price>
+<Price>"1CO"</Price>
 <Encumbrance>"1"</Encumbrance>
 <Quality>"RULES-WEAPB30"</Quality>
 <Hand>"1"</Hand>
@@ -622,7 +622,7 @@
 <Damage>"+(BATTR_S)+3"</Damage>
 <Availability>"RULES-DISPO_COMMON"</Availability>
 <Reach>"RULES-WEAPR_MID"</Reach>
-<Price>"1GC"</Price>
+<Price>"1CO"</Price>
 <Encumbrance>"1"</Encumbrance>
 <Quality>"RULES-WEAPB08"</Quality>
 <Hand>"1"</Hand>
@@ -634,7 +634,7 @@
 <Damage>"+8"</Damage>
 <Availability>"RULES-DISPO_RARE"</Availability>
 <Reach>"30"</Reach>
-<Price>"9GC"</Price>
+<Price>"9CO"</Price>
 <Encumbrance>"2"</Encumbrance>
 <Quality>"RULES-WEAPB22,RULES-WEAPB23 3"</Quality>
 <Hand>"2"</Hand>
@@ -646,7 +646,7 @@
 <Damage>"+8"</Damage>
 <Availability>"RULES-DISPO_RARE"</Availability>
 <Reach>"30"</Reach>
-<Price>"18GC"</Price>
+<Price>"18CO"</Price>
 <Encumbrance>"1"</Encumbrance>
 <Quality>"RULES-WEAPB22,RULES-WEAPB13,RULES-WEAPB23 1"</Quality>
 <Hand>"1"</Hand>
@@ -658,7 +658,7 @@
 <Damage>"+9"</Damage>
 <Availability>"RULES-DISPO_RARE"</Availability>
 <Reach>"80"</Reach>
-<Price>"9GC"</Price>
+<Price>"9CO"</Price>
 <Encumbrance>"3"</Encumbrance>
 <Quality>"RULES-WEAPB14,RULES-WEAPB10,RULES-WEAPB23 2"</Quality>
 <Hand>"2"</Hand>
@@ -670,7 +670,7 @@
 <Damage>"+8"</Damage>
 <Availability>"RULES-DISPO_EXOTIC"</Availability>
 <Reach>"20"</Reach>
-<Price>"25GC"</Price>
+<Price>"25CO"</Price>
 <Encumbrance>"1"</Encumbrance>
 <Quality>"RULES-WEAPB24,RULES-WEAPB13,ARCH1-WEAPB35"</Quality>
 <Hand>"1"</Hand>
@@ -682,7 +682,7 @@
 <Damage>"+14"</Damage>
 <Availability>"RULES-DISPO_EXOTIC"</Availability>
 <Reach>"(BATTR_S)"</Reach>
-<Price>"3GC"</Price>
+<Price>"3CO"</Price>
 <Encumbrance>"0"</Encumbrance>
 <Quality>"RULES-WEAPB15 3,RULES-WEAPB24,RULES-WEAPB21,RULES-WEAPB22"</Quality>
 <Hand>"1"</Hand>
@@ -694,7 +694,7 @@
 <Damage>"+(BATTR_S)+3"</Damage>
 <Availability>"RULES-DISPO_EXOTIC"</Availability>
 <Reach>"(BATTR_S)x3"</Reach>
-<Price>"2GC"</Price>
+<Price>"2CO"</Price>
 <Encumbrance>"1"</Encumbrance>
 <Quality>"RULES-WEAPB12,ARCH1-WEAPB36"</Quality>
 <Hand>"1"</Hand>
@@ -714,7 +714,7 @@
 <Damage>"+2"</Damage>
 <Availability>"RULES-DISPO_RARE"</Availability>
 <Reach>"+0"</Reach>
-<Price>"4/-"</Price>
+<Price>"4PA"</Price>
 <Encumbrance>"0"</Encumbrance>
 <Quality>"RULES-WEAPB10"</Quality>
 <Hand>"0"</Hand>
@@ -726,7 +726,7 @@
 <Damage>"+1"</Damage>
 <Availability>"RULES-DISPO_COMMON"</Availability>
 <Reach>"+0"</Reach>
-<Price>"3SC"</Price>
+<Price>"3SB"</Price>
 <Encumbrance>"0"</Encumbrance>
 <Quality>"RULES-WEAPB12,RULES-WEAPB22,RULES-WEAPB14"</Quality>
 <Hand>"0"</Hand>
@@ -738,7 +738,7 @@
 <Damage>"-"</Damage>
 <Availability>"RULES-DISPO_EXOTIC"</Availability>
 <Reach>"+50"</Reach>
-<Price>"8/-"</Price>
+<Price>"8PA"</Price>
 <Encumbrance>"0"</Encumbrance>
 <Quality>"RULES-WEAPB16,RULES-WEAPB12,ARCH1-WEAPB35"</Quality>
 <Hand>"0"</Hand>
@@ -750,7 +750,7 @@
 <Damage>"+1"</Damage>
 <Availability>"RULES-DISPO_COMMON"</Availability>
 <Reach>"+0"</Reach>
-<Price>"6/-"</Price>
+<Price>"6PA"</Price>
 <Encumbrance>"0"</Encumbrance>
 <Quality>"RULES-WEAPB15 1,RULES-WEAPB22"</Quality>
 <Hand>"0"</Hand>
