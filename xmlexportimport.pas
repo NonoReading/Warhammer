@@ -822,6 +822,10 @@ Procedure XmlExportBook(Livre: String; Langue: String);
                 XmlContent.Add(XmlLigne(ConstXmlTheme, PTrapping.Theme));
               if PTrapping.Acheteur <> '' then
                 XmlContent.Add(XmlLigne(ConstXmlAcheteur, PTrapping.Acheteur));
+              if PTrapping.Localite <> '' then
+                XmlContent.Add(XmlLigne(ConstXmlLocalite, PTrapping.Localite));
+              if PTrapping.Saison <> '' then
+                XmlContent.Add(XmlLigne(ConstXmlSaison, PTrapping.Saison));
 
               XmlContent.Add(XmlFinCode(ConstXmlTrapping));
             end;
@@ -2511,6 +2515,8 @@ Procedure XmlImport(FileName: String; OnlyPrimary: Boolean; OnlyCode: Boolean; C
                       PTrapping.Capacite      := 0;
                       PTrapping.Theme         := '';
                       PTrapping.Acheteur      := '';
+                      PTrapping.Localite      := '';
+                      PTrapping.Saison        := '';
                       PTraduction             := InitTrad(ConstPTrapping, PTrapping.CodeTrapping, '', PTrapping.Livre);
 
                       Node := XmlElement(NodeNv2.FirstChild);
@@ -2535,6 +2541,10 @@ Procedure XmlImport(FileName: String; OnlyPrimary: Boolean; OnlyCode: Boolean; C
                                 PTrapping.Theme         := RemoveQuotes(UTF8Encode(Node.TextContent));
                             ConstXmlAcheteur:
                               PTrapping.Acheteur      := RemoveQuotes(UTF8Encode(Node.TextContent));
+                            ConstXmlLocalite:
+                              PTrapping.Localite      := RemoveQuotes(UTF8Encode(Node.TextContent));
+                            ConstXmlSaison:
+                              PTrapping.Saison        := RemoveQuotes(UTF8Encode(Node.TextContent));
                           end;
 
                           Node := XmlElement(Node.NextSibling);

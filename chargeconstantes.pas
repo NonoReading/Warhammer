@@ -240,6 +240,8 @@ Const
       ConstXmlCapacite                  = 'Carries';
       ConstXmlTheme                     = 'Theme';
       ConstXmlAcheteur                  = 'Buyer';
+      ConstXmlLocalite                  = 'Locality';
+      ConstXmlSaison                    = 'Season';
       ConstXmlQualite                   = 'Quality';
       ConstXmlMains                     = 'Hand';
       ConstXmlMunition                  = 'Ammunition';

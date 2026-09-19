@@ -164,6 +164,198 @@ When you gain a mutation, you roll any dice twice and pick the preferred result.
 </SUBCHAPTER_ITEM>
 </Career>
 </DATA_CAREER>
+<!-- Herbs of the Empire, p.10 : 21 herbes, dont 4 (Earth Root, Faxtoryll, Nightshade, Salwort) aussi au Rulebook : saisies quand meme, chaque livre porte ses propres donnees (Earth Root : 3CO ici, 5CO au Rulebook). Localite et saison = codes de libelles (RULES-LAB_225 a _237), separes par des virgules. Prix : GC -> CO, x/- -> PA. -->
+<DATA_TRAPPING>
+<Trapping id="DEATH-TRAP_01">
+<Description language="ENGLISH">"Agurk"</Description>
+<Theme>"RULES-LAB_198"</Theme>
+<Availability>"RULES-DISPO_RARE"</Availability>
+<Price>"1CO"</Price>
+<Encumbrance>"0"</Encumbrance>
+<Locality>"RULES-LAB_229"</Locality>
+<Season>"RULES-LAB_227"</Season>
+</Trapping>
+<Trapping id="DEATH-TRAP_02">
+<Description language="ENGLISH">"Alfunas"</Description>
+<Theme>"RULES-LAB_198"</Theme>
+<Availability>"RULES-DISPO_LIMITED"</Availability>
+<Price>"1CO"</Price>
+<Encumbrance>"0"</Encumbrance>
+<Locality>"RULES-LAB_230"</Locality>
+<Season>"RULES-LAB_226,RULES-LAB_227"</Season>
+</Trapping>
+<Trapping id="DEATH-TRAP_03">
+<Description language="ENGLISH">"Gesundheit"</Description>
+<Theme>"RULES-LAB_198"</Theme>
+<Availability>"RULES-DISPO_LIMITED"</Availability>
+<Price>"15PA"</Price>
+<Encumbrance>"0"</Encumbrance>
+<Locality>"RULES-LAB_232"</Locality>
+<Season>"RULES-LAB_228,RULES-LAB_225"</Season>
+</Trapping>
+<Trapping id="DEATH-TRAP_04">
+<Description language="ENGLISH">"Graveroot"</Description>
+<Theme>"RULES-LAB_198"</Theme>
+<Availability>"RULES-DISPO_RARE"</Availability>
+<Price>"5CO"</Price>
+<Encumbrance>"0"</Encumbrance>
+<Locality>"RULES-LAB_233,RULES-LAB_234"</Locality>
+<Season>"RULES-LAB_227,RULES-LAB_228"</Season>
+</Trapping>
+<Trapping id="DEATH-TRAP_05">
+<Description language="ENGLISH">"Juck"</Description>
+<Theme>"RULES-LAB_198"</Theme>
+<Availability>"RULES-DISPO_LIMITED"</Availability>
+<Price>"1CO"</Price>
+<Encumbrance>"0"</Encumbrance>
+<Locality>"RULES-LAB_235"</Locality>
+<Season>"RULES-LAB_225"</Season>
+</Trapping>
+<Trapping id="DEATH-TRAP_06">
+<Description language="ENGLISH">"Mage-Leaf"</Description>
+<Theme>"RULES-LAB_198"</Theme>
+<Availability>"RULES-DISPO_EXOTIC"</Availability>
+<Price>"1CO"</Price>
+<Encumbrance>"0"</Encumbrance>
+<Locality>"RULES-LAB_236"</Locality>
+<Season>"RULES-LAB_225"</Season>
+</Trapping>
+<Trapping id="DEATH-TRAP_07">
+<Description language="ENGLISH">"Schlafenkraut"</Description>
+<Theme>"RULES-LAB_198"</Theme>
+<Availability>"RULES-DISPO_RARE"</Availability>
+<Price>"10PA"</Price>
+<Encumbrance>"0"</Encumbrance>
+<Locality>"RULES-LAB_229"</Locality>
+<Season>"RULES-LAB_225"</Season>
+</Trapping>
+<Trapping id="DEATH-TRAP_08">
+<Description language="ENGLISH">"Sigmafoil"</Description>
+<Theme>"RULES-LAB_198"</Theme>
+<Availability>"RULES-DISPO_COMMON"</Availability>
+<Price>"5PA"</Price>
+<Encumbrance>"0"</Encumbrance>
+<Locality>"RULES-LAB_237"</Locality>
+<Season>"RULES-LAB_226"</Season>
+</Trapping>
+<Trapping id="DEATH-TRAP_09">
+<Description language="ENGLISH">"Slowmind"</Description>
+<Theme>"RULES-LAB_198"</Theme>
+<Availability>"RULES-DISPO_RARE"</Availability>
+<Price>"2CO"</Price>
+<Encumbrance>"0"</Encumbrance>
+<Locality>"RULES-LAB_237"</Locality>
+<Season>"RULES-LAB_227"</Season>
+</Trapping>
+<Trapping id="DEATH-TRAP_10">
+<Description language="ENGLISH">"Speckled Rustwort"</Description>
+<Theme>"RULES-LAB_198"</Theme>
+<Availability>"RULES-DISPO_RARE"</Availability>
+<Price>"2CO"</Price>
+<Encumbrance>"0"</Encumbrance>
+<Locality>"RULES-LAB_236"</Locality>
+<Season>"RULES-LAB_225"</Season>
+</Trapping>
+<Trapping id="DEATH-TRAP_11">
+<Description language="ENGLISH">"Spellwort"</Description>
+<Theme>"RULES-LAB_198"</Theme>
+<Availability>"RULES-DISPO_EXOTIC"</Availability>
+<Price>"3CO"</Price>
+<Encumbrance>"0"</Encumbrance>
+<Locality>"RULES-LAB_235"</Locality>
+<Season>"RULES-LAB_226"</Season>
+</Trapping>
+<Trapping id="DEATH-TRAP_12">
+<Description language="ENGLISH">"Spiderleaf"</Description>
+<Theme>"RULES-LAB_198"</Theme>
+<Availability>"RULES-DISPO_COMMON"</Availability>
+<Price>"15PA"</Price>
+<Encumbrance>"0"</Encumbrance>
+<Locality>"RULES-LAB_230"</Locality>
+<Season>"RULES-LAB_227"</Season>
+</Trapping>
+<Trapping id="DEATH-TRAP_13">
+<Description language="ENGLISH">"Tarrabeth"</Description>
+<Theme>"RULES-LAB_198"</Theme>
+<Availability>"RULES-DISPO_COMMON"</Availability>
+<Price>"10PA"</Price>
+<Encumbrance>"0"</Encumbrance>
+<Locality>"RULES-LAB_232"</Locality>
+<Season>"RULES-LAB_226"</Season>
+</Trapping>
+<Trapping id="DEATH-TRAP_14">
+<Description language="ENGLISH">"Trinkwort"</Description>
+<Theme>"RULES-LAB_198"</Theme>
+<Availability>"RULES-DISPO_EXOTIC"</Availability>
+<Price>"1CO"</Price>
+<Encumbrance>"0"</Encumbrance>
+<Locality>"RULES-LAB_235"</Locality>
+<Season>"RULES-LAB_227"</Season>
+</Trapping>
+<Trapping id="DEATH-TRAP_15">
+<Description language="ENGLISH">"Valerian"</Description>
+<Theme>"RULES-LAB_198"</Theme>
+<Availability>"RULES-DISPO_COMMON"</Availability>
+<Price>"5PA"</Price>
+<Encumbrance>"0"</Encumbrance>
+<Locality>"RULES-LAB_232"</Locality>
+<Season>"RULES-LAB_225"</Season>
+</Trapping>
+<Trapping id="DEATH-TRAP_16">
+<Description language="ENGLISH">"Vanera"</Description>
+<Theme>"RULES-LAB_198"</Theme>
+<Availability>"RULES-DISPO_LIMITED"</Availability>
+<Price>"2CO"</Price>
+<Encumbrance>"0"</Encumbrance>
+<Locality>"RULES-LAB_236"</Locality>
+<Season>"RULES-LAB_225"</Season>
+</Trapping>
+<Trapping id="DEATH-TRAP_17">
+<Description language="ENGLISH">"Vigwort"</Description>
+<Theme>"RULES-LAB_198"</Theme>
+<Availability>"RULES-DISPO_LIMITED"</Availability>
+<Price>"1CO"</Price>
+<Encumbrance>"0"</Encumbrance>
+<Locality>"RULES-LAB_229"</Locality>
+<Season>"RULES-LAB_226"</Season>
+</Trapping>
+<Trapping id="DEATH-TRAP_18">
+<Description language="ENGLISH">"Earth Root"</Description>
+<Theme>"RULES-LAB_198"</Theme>
+<Availability>"RULES-DISPO_LIMITED"</Availability>
+<Price>"3CO"</Price>
+<Encumbrance>"0"</Encumbrance>
+<Locality>"RULES-LAB_229"</Locality>
+<Season>"RULES-LAB_226"</Season>
+</Trapping>
+<Trapping id="DEATH-TRAP_19">
+<Description language="ENGLISH">"Faxtoryll"</Description>
+<Theme>"RULES-LAB_198"</Theme>
+<Availability>"RULES-DISPO_EXOTIC"</Availability>
+<Price>"15PA"</Price>
+<Encumbrance>"0"</Encumbrance>
+<Locality>"RULES-LAB_231"</Locality>
+<Season>"RULES-LAB_225"</Season>
+</Trapping>
+<Trapping id="DEATH-TRAP_20">
+<Description language="ENGLISH">"Nightshade"</Description>
+<Theme>"RULES-LAB_198"</Theme>
+<Availability>"RULES-DISPO_RARE"</Availability>
+<Price>"3CO"</Price>
+<Encumbrance>"0"</Encumbrance>
+<Locality>"RULES-LAB_230"</Locality>
+<Season>"RULES-LAB_227"</Season>
+</Trapping>
+<Trapping id="DEATH-TRAP_21">
+<Description language="ENGLISH">"Salwort"</Description>
+<Theme>"RULES-LAB_198"</Theme>
+<Availability>"RULES-DISPO_COMMON"</Availability>
+<Price>"12PA"</Price>
+<Encumbrance>"0"</Encumbrance>
+<Locality>"RULES-LAB_232"</Locality>
+<Season>"RULES-LAB_227,RULES-LAB_228"</Season>
+</Trapping>
+</DATA_TRAPPING>
 <DATA_SPECIE_CAREER_DIRECT>
   <!-- Ces métiers étaient déclarés en 'X' dans les <Specie> de BOOK_RULESBOOK.Xml,
        alors qu'ils appartiennent à ce livre : un joueur ne l'ayant pas activé les voyait

@@ -17,6 +17,8 @@ type
   // (balise <Theme>) et par livre.
   TWinEquipements = class(TForm)
     AffAcheteur: TEdit;
+    AffLocalite: TEdit;
+    AffSaison: TEdit;
     AffCap: TEdit;
     AffDispo: TEdit;
     AffEnc: TEdit;
@@ -26,6 +28,8 @@ type
     ButtonFiltre: TBCButton;
     CombTheme: TComboBox;
     LabAcheteur: TLabel;
+    LabLocalite: TLabel;
+    LabSaison: TLabel;
     LabCap: TLabel;
     LabDispo: TLabel;
     LabEnc: TLabel;
@@ -75,6 +79,8 @@ begin
   LabDispo.Caption     := GetTexteLibelle('RULES-LAB_056');
   LabLivre.Caption     := GetTexteLibelle('RULES-LAB_128');
   LabAcheteur.Caption  := GetTexteLibelle('RULES-LAB_204');
+  LabLocalite.Caption  := GetTexteLibelle('RULES-LAB_238');
+  LabSaison.Caption    := GetTexteLibelle('RULES-LAB_239');
 
   // colonnes fixees par le .lfm (ColCount = 9) : seuls les titres sont poses ici
   TabEquip.Cells[1, 0] := GetTexteLibelle('RULES-LAB_001');
@@ -106,6 +112,10 @@ begin
   Ancrage.Ajouter(AffLivre, 0.5, 0.5);
   Ancrage.Ajouter(LabAcheteur, 0.5, 0);
   Ancrage.Ajouter(AffAcheteur, 0.5, 0.5);
+  Ancrage.Ajouter(LabLocalite, 0.5, 0);
+  Ancrage.Ajouter(AffLocalite, 0.5, 0.5);
+  Ancrage.Ajouter(LabSaison, 0.5, 0);
+  Ancrage.Ajouter(AffSaison, 0.5, 0.5);
   Ancrage.Fixer;
   OnResize := @FormResize;
 end;
@@ -202,6 +212,13 @@ begin
   AffAcheteur.Text    := GetTexteLibelle(ChercheTrapping(TabEquip.Cells[1, aRow]).Acheteur);
   LabAcheteur.Visible := AffAcheteur.Text <> '';
   AffAcheteur.Visible := AffAcheteur.Text <> '';
+  // localite et saison (herbes) : meme regle, affichees seulement si le catalogue les porte
+  AffLocalite.Text    := TraduireListeLibelles(ChercheTrapping(TabEquip.Cells[1, aRow]).Localite);
+  LabLocalite.Visible := AffLocalite.Text <> '';
+  AffLocalite.Visible := AffLocalite.Text <> '';
+  AffSaison.Text      := TraduireListeLibelles(ChercheTrapping(TabEquip.Cells[1, aRow]).Saison);
+  LabSaison.Visible   := AffSaison.Text <> '';
+  AffSaison.Visible   := AffSaison.Text <> '';
 end;
 
 // Mode selection (appel depuis WinPersonnage) : le double-clic renvoie le code de l'objet.

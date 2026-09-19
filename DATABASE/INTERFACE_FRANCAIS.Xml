@@ -295,6 +295,21 @@
 <Text name="RULES-LAB_222">"CO"</Text>
 <Text name="RULES-LAB_223">"PA"</Text>
 <Text name="RULES-LAB_224">"SB"</Text>
+<Text name="RULES-LAB_225">"Printemps"</Text>
+<Text name="RULES-LAB_226">"Été"</Text>
+<Text name="RULES-LAB_227">"Automne"</Text>
+<Text name="RULES-LAB_228">"Hiver"</Text>
+<Text name="RULES-LAB_229">"Prairies"</Text>
+<Text name="RULES-LAB_230">"Forêt de conifères"</Text>
+<Text name="RULES-LAB_231">"Montagnes"</Text>
+<Text name="RULES-LAB_232">"Forêt mixte"</Text>
+<Text name="RULES-LAB_233">"Clairières"</Text>
+<Text name="RULES-LAB_234">"Cimetières"</Text>
+<Text name="RULES-LAB_235">"Forêt"</Text>
+<Text name="RULES-LAB_236">"Collines"</Text>
+<Text name="RULES-LAB_237">"Marais"</Text>
+<Text name="RULES-LAB_238">"Localité"</Text>
+<Text name="RULES-LAB_239">"Saison"</Text>
 </Label>
 </DATA_LABEL>
 </DATA_BOOK>

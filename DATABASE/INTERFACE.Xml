@@ -369,6 +369,21 @@
 <Text name="RULES-LAB_222">"GC"</Text>
 <Text name="RULES-LAB_223">"SS"</Text>
 <Text name="RULES-LAB_224">"BP"</Text>
+<Text name="RULES-LAB_225">"Spring"</Text>
+<Text name="RULES-LAB_226">"Summer"</Text>
+<Text name="RULES-LAB_227">"Autumn"</Text>
+<Text name="RULES-LAB_228">"Winter"</Text>
+<Text name="RULES-LAB_229">"Grasslands"</Text>
+<Text name="RULES-LAB_230">"Coniferous forest"</Text>
+<Text name="RULES-LAB_231">"Mountains"</Text>
+<Text name="RULES-LAB_232">"Mixed forest"</Text>
+<Text name="RULES-LAB_233">"Forest clearings"</Text>
+<Text name="RULES-LAB_234">"Graveyards"</Text>
+<Text name="RULES-LAB_235">"Forest"</Text>
+<Text name="RULES-LAB_236">"Hills"</Text>
+<Text name="RULES-LAB_237">"Marsh"</Text>
+<Text name="RULES-LAB_238">"Locality"</Text>
+<Text name="RULES-LAB_239">"Season"</Text>
 </Label>
 </DATA_LABEL>
 </DATA_BOOK>

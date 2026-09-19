@@ -128,6 +128,44 @@ object WinEquipements: TWinEquipements
     ReadOnly = True
     TabOrder = 8
   end
+  object LabLocalite: TLabel
+    Left = 650
+    Height = 20
+    Top = 400
+    Width = 110
+    Caption = 'Localite'
+    Font.Color = clWhite
+    ParentColor = False
+    ParentFont = False
+  end
+  object AffLocalite: TEdit
+    Left = 650
+    Height = 28
+    Top = 422
+    Width = 420
+    Color = cl3DLight
+    ReadOnly = True
+    TabOrder = 9
+  end
+  object LabSaison: TLabel
+    Left = 650
+    Height = 20
+    Top = 470
+    Width = 110
+    Caption = 'Saison'
+    Font.Color = clWhite
+    ParentColor = False
+    ParentFont = False
+  end
+  object AffSaison: TEdit
+    Left = 650
+    Height = 28
+    Top = 492
+    Width = 420
+    Color = cl3DLight
+    ReadOnly = True
+    TabOrder = 10
+  end
   object AffLib: TEdit
     Left = 650
     Height = 28

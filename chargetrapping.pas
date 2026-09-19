@@ -17,6 +17,8 @@ Type
     Disponibilite:      String;
     Theme:              String;
     Acheteur:           String;
+    Localite:           String;   // codes de libelles separes par des virgules (herbes)
+    Saison:             String;   // idem
     Livre:              String;
 
 end;
@@ -30,6 +32,7 @@ Var
 function ChercheTrapping(CodeTrapping :String): StructureTrapping;
 function TexteTrapping(PTrapping: StructureTrapping):String;
 function TexteLigneTrapping(PTrapping: StructureTrapping):String;
+function TraduireListeLibelles(Liste: String):String;
 
 implementation
 
@@ -50,6 +53,21 @@ Begin
          break;
        end;
 end;
+
+function TraduireListeLibelles(Liste: String):String;
+  Var
+    Code:        String;
+  begin
+    // liste de codes de libelles separes par des virgules -> textes traduits, meme separateur
+    Result := '';
+    for Code in Liste.Split([',']) do
+      if Trim(Code) <> '' then
+        begin
+          if Result <> '' then
+            Result := Result + ', ';
+          Result := Result + GetTexteLibelle(Trim(Code));
+        end;
+  end;
 
 function TexteTrapping(PTrapping: StructureTrapping):String;
   Var
