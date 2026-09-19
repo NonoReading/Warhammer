@@ -168,7 +168,7 @@ Function PdfPersonnageTalentBonus(Personnage: StructurePersonnage; CodeTalent: S
 // enchaîner sans collision après une autre source d'astérisques déjà numérotée dans le
 // même PDF (ex. les mutations, voir PdfPersonnageMutationAsterisques) - auparavant fixé
 // en dur à Personnage.Asterisque (le seul baseline connu, celui des talents).
-Function PdfPersonnageArmureAsterisques(Personnage: StructurePersonnage; AsterisqueDepart: Integer; out AsterisqueParEquipement: TStringList): TStringList;
+Function PdfPersonnageArmureAsterisques(Personnage: StructurePersonnage; AsterisqueDepart: Integer; out AsterisqueParEquipement: TStringList; out AsterisqueFinal: Integer): TStringList;
 
 // Effets à delta pur des mutations obtenues, visibles sur une caractéristique ou une
 // compétence (CONTEXT.md §2.7, étape 9) - même principe que PdfPersonnageArmureAsterisques :
@@ -287,7 +287,11 @@ Procedure PdfBlocSortsDonnees(PdfPage: TPDFPage; Personnage: StructurePersonnage
 // au-delà de NbLignes lignes (voir le commentaire de PdfBlocEquipement sur la grille
 // doublée — comportement préservé tel quel). Purement local : IndDivers ne sert qu'à
 // positionner les lignes dans cette boucle, personne d'autre ne le lit après.
-Procedure PdfBlocDiversDonnees(PdfPage: TPDFPage; Personnage: StructurePersonnage; XGauche, XDroite, Y, HauteurLigne: Single; NbLignes: Integer; out EncDivers: Integer; MinPolice: Integer);
+Procedure PdfBlocDiversDonnees(PdfPage: TPDFPage; Personnage: StructurePersonnage; XGauche, XDroite, Y, HauteurLigne: Single; NbLignes: Integer; out EncDivers: Integer; MinPolice: Integer; AsterisqueMonture: String);
+// Capacite de charge (<Carries>) d'une monture (theme Animals and Vehicles) : 0 pour tout
+// autre objet. La somme s'ajoute a l'Encombrement max, avec une asterisque numerotee.
+Function PdfMontureCapacite(PersonnageEquipement: StructurePersonnageEquipement): Integer;
+Function PdfMontureCapaciteTotale(Personnage: StructurePersonnage): Integer;
 // Libelle (catalogue si le code est un Trapping, sinon le code brut) et encombrement total
 // (unitaire x quantite) d'une ligne Divers.
 Function PdfDiversLibelle(PersonnageEquipement: StructurePersonnageEquipement): String;
@@ -2108,7 +2112,7 @@ begin
   Result := Bonus;
 end;
 
-Function PdfPersonnageArmureAsterisques(Personnage: StructurePersonnage; AsterisqueDepart: Integer; out AsterisqueParEquipement: TStringList): TStringList;
+Function PdfPersonnageArmureAsterisques(Personnage: StructurePersonnage; AsterisqueDepart: Integer; out AsterisqueParEquipement: TStringList; out AsterisqueFinal: Integer): TStringList;
   var
     PersonnageEquipement: StructurePersonnageEquipement;
     PArmure:              StructureArmure;
@@ -2189,6 +2193,8 @@ Function PdfPersonnageArmureAsterisques(Personnage: StructurePersonnage; Asteris
 
     NumerosParCompetence.Free;
     TotalParCompetence.Free;
+    // dernier numero pris : la chaine continue apres (ex. l'astérisque de la monture)
+    AsterisqueFinal := AsterisqueCourant;
   end;
 
 Function PdfPersonnageMutationAsterisques(Personnage: StructurePersonnage; AsterisqueDepart: Integer; out AsterisqueParMutation: TStringList; out AsterisqueArmure: String; out AsterisqueFinal: Integer): TStringList;
@@ -3040,11 +3046,41 @@ Function PdfDiversTexteEnc(PersonnageEquipement: StructurePersonnageEquipement):
       Result := IntToStr(Enc);
   end;
 
-Procedure PdfBlocDiversDonnees(PdfPage: TPDFPage; Personnage: StructurePersonnage; XGauche, XDroite, Y, HauteurLigne: Single; NbLignes: Integer; out EncDivers: Integer; MinPolice: Integer);
+Function PdfMontureCapacite(PersonnageEquipement: StructurePersonnageEquipement): Integer;
+  var
+    PTrapping: StructureTrapping;
+  begin
+    Result := 0;
+    if PersonnageEquipement.TypeEquipement <> TypeEquipDI then
+      exit;
+    PTrapping := ChercheTrapping(PersonnageEquipement.CodeEquipement);
+    if (PTrapping.CodeTrapping <> '') and (PTrapping.Theme = 'RULES-LAB_195') then
+      Result := PTrapping.Capacite * Max(PersonnageEquipement.Quantite, 1);
+  end;
+
+Function PdfMontureCapaciteTotale(Personnage: StructurePersonnage): Integer;
+  var
+    PersonnageEquipement: StructurePersonnageEquipement;
+  begin
+    Result := 0;
+    for PersonnageEquipement in Personnage.Equipement do
+      Result := Result + PdfMontureCapacite(PersonnageEquipement);
+  end;
+
+// Asterisque en petite police (4), relevee, comme celles des armures (PdfBlocArmuresDonnees).
+Procedure PdfDiversAsterisque(PdfPage: TPDFPage; X1, X2, Y: Single; Texte: String);
+  begin
+    PdfTaillePolice(PdfPage, PdfFontValue, ConstPoliceArial, 4);
+    PdfEcrit(PdfPage, X1, X2, Y, Texte, 4);
+    PdfTaillePolice(PdfPage, PdfFontValue, ConstPoliceArial, 9);
+  end;
+
+Procedure PdfBlocDiversDonnees(PdfPage: TPDFPage; Personnage: StructurePersonnage; XGauche, XDroite, Y, HauteurLigne: Single; NbLignes: Integer; out EncDivers: Integer; MinPolice: Integer; AsterisqueMonture: String);
   var
     PersonnageEquipement: StructurePersonnageEquipement;
     IndDivers:            Integer;
     Enc:                  Integer;
+    Libelle:              String;
   begin
     IndDivers := 0;
     EncDivers := 0;
@@ -3054,17 +3090,22 @@ Procedure PdfBlocDiversDonnees(PdfPage: TPDFPage; Personnage: StructurePersonnag
           Inc(IndDivers);
           Enc       := PdfDiversEncombrement(PersonnageEquipement);
           EncDivers := EncDivers + Enc;
+          Libelle   := PdfDiversLibelle(PersonnageEquipement);
           if (IndDivers <= (NbLignes * 2)) then
             begin
               if IndDivers > (NbLignes - 1) then
                 begin
-                  PdfEcrit(PdfPage, XGauche +  56, XGauche + 100, Y - ((IndDivers - NbLignes + 3) * HauteurLigne) + 0.6, PdfDiversLibelle(PersonnageEquipement), MinPolice);
+                  PdfEcrit(PdfPage, XGauche +  56, XGauche + 100, Y - ((IndDivers - NbLignes + 3) * HauteurLigne) + 0.6, Libelle, MinPolice);
+                  if (AsterisqueMonture <> '') and (PdfMontureCapacite(PersonnageEquipement) > 0) then
+                    PdfDiversAsterisque(PdfPage, XGauche + 97, XGauche + 100, Y - ((IndDivers - NbLignes + 3) * HauteurLigne) + 2.3, AsterisqueMonture);
                   if PdfDiversTexteEnc(PersonnageEquipement) <> '' then
                     PdfCentre(PdfPage, XGauche + 100, XDroite, Y - ((IndDivers - NbLignes + 3) * HauteurLigne) + 0.6, PdfDiversTexteEnc(PersonnageEquipement));
                 end
               else
                 begin
-                  PdfEcrit(PdfPage, XGauche +   1, XGauche +  48, Y - ((IndDivers + 2) * HauteurLigne) + 0.6, PdfDiversLibelle(PersonnageEquipement), MinPolice);
+                  PdfEcrit(PdfPage, XGauche +   1, XGauche +  48, Y - ((IndDivers + 2) * HauteurLigne) + 0.6, Libelle, MinPolice);
+                  if (AsterisqueMonture <> '') and (PdfMontureCapacite(PersonnageEquipement) > 0) then
+                    PdfDiversAsterisque(PdfPage, XGauche + 45, XGauche + 48, Y - ((IndDivers + 2) * HauteurLigne) + 2.3, AsterisqueMonture);
                   if PdfDiversTexteEnc(PersonnageEquipement) <> '' then
                     PdfCentre(PdfPage, XGauche + 48, XGauche + 55, Y - ((IndDivers + 2) * HauteurLigne) + 0.6, PdfDiversTexteEnc(PersonnageEquipement));
                 end;
@@ -4117,6 +4158,9 @@ Procedure PdfPersonnageCreationFeldo2P(Personnage: StructurePersonnage);
     ListAsterisqueMutation: TStringList;
     AsterisqueParMutation:  TStringList;
     AsterisqueFinalMutation: Integer;
+    AsterisqueFinalArmure:   Integer;
+    EncMonture:              Integer = 0;
+    AsterisqueMonture:       String = '';
     Comp:            String;
     PCompetence:     StructureCompetence;
     ValStat:         String;
@@ -4542,7 +4586,13 @@ Procedure PdfPersonnageCreationFeldo2P(Personnage: StructurePersonnage);
     // compétences groupées, seul autre endroit où elle sert.
     // Enchaîne après AsterisqueFinalMutation (calculé plus haut) pour ne jamais réutiliser un
     // numéro déjà pris par une mutation à effet sur une caractéristique.
-    ListAsterisqueArmure := PdfPersonnageArmureAsterisques(Personnage, AsterisqueFinalMutation, AsterisqueParEquipement);
+    ListAsterisqueArmure := PdfPersonnageArmureAsterisques(Personnage, AsterisqueFinalMutation, AsterisqueParEquipement, AsterisqueFinalArmure);
+    // Montures : leur capacite de charge s'ajoute a l'Encombrement max (page 2), reperee par
+    // la suite de la chaine de numeros (apres talents, mutations et armures). Le meme "(N)"
+    // est ecrit a cote du max et a cote de chaque monture de la liste Divers.
+    EncMonture := PdfMontureCapaciteTotale(Personnage);
+    if EncMonture > 0 then
+      AsterisqueMonture := '(' + IntToStr(AsterisqueFinalArmure + 1) + ')';
 
     // Fusionne les annotations de compétence des mutations (CONTEXT.md §2.7, étape 9) dans
     // ListAsterisqueArmure, seule TStringList lue par PdfPreparerRecordSetCompetencesBase/
@@ -4703,7 +4753,7 @@ Procedure PdfPersonnageCreationFeldo2P(Personnage: StructurePersonnage);
      // Dessin Sorts (extrait dans PdfBlocSortsDonnees, CONTEXT.md §2.4 - remplissage)
      PdfBlocSortsDonnees(PdfPage, Personnage, DessinDebColCompG, DessinDebutHautSor, DessinHauteurSor, MinPolice);
      // Dessin Divers (extrait dans PdfBlocDiversDonnees, CONTEXT.md §2.4 - remplissage)
-     PdfBlocDiversDonnees(PdfPage, Personnage, DessinDebColCompG, DessinLargeurEqu, DessinDebutHautEqu, DessinHauteurEqu, DessinNbLigEqu, EncDivers, MinPolice);
+     PdfBlocDiversDonnees(PdfPage, Personnage, DessinDebColCompG, DessinLargeurEqu, DessinDebutHautEqu, DessinHauteurEqu, DessinNbLigEqu, EncDivers, MinPolice, AsterisqueMonture);
      // Dessin Armes (extrait dans PdfBlocArmesDonnees, CONTEXT.md §2.4 - remplissage)
      PdfBlocArmesDonnees(PdfPage, Personnage, DessinDebColCompG, DessinLargeurWea, DessinDebutHautWea, DessinHauteurWea, BF, TBonusCC, TBonusCT, FabricationBonii, EncArme, ArmeBonii, ArmureBouclier, MinPolice);
      // Dessin Armures (extrait dans PdfBlocArmuresDonnees, CONTEXT.md §2.4 - remplissage) -
@@ -4719,7 +4769,15 @@ Procedure PdfPersonnageCreationFeldo2P(Personnage: StructurePersonnage);
     PdfCentre(PdfPage, DessinDebColCompG + 15, DessinLargeurEnc, DessinDebutHautEnc - ((DessinNbLigEnc - 3) * DessinHauteurEnc) + 0.9, IntToStr(EncArmure));
     PdfCentre(PdfPage, DessinDebColCompG + 15, DessinLargeurEnc, DessinDebutHautEnc - ((DessinNbLigEnc - 2) * DessinHauteurEnc) + 0.9, IntToStr(EncArme));
     PdfCentre(PdfPage, DessinDebColCompG + 15, DessinLargeurEnc, DessinDebutHautEnc - ((DessinNbLigEnc - 1) * DessinHauteurEnc) + 0.9, IntToStr(EncDivers));
-    PdfCentre(PdfPage, DessinDebColCompG + 15, DessinLargeurEnc, DessinDebutHautEnc - ((DessinNbLigEnc - 0) * DessinHauteurEnc) + 0.9, IntToStr(Floor(BF/10) + Floor(BE/10) + BonusEncomb));
+    PdfCentre(PdfPage, DessinDebColCompG + 15, DessinLargeurEnc, DessinDebutHautEnc - ((DessinNbLigEnc - 0) * DessinHauteurEnc) + 0.9, IntToStr(Floor(BF/10) + Floor(BE/10) + BonusEncomb + EncMonture));
+    // "(N)" de la monture, en petite police relevee, juste apres la valeur centree
+    if AsterisqueMonture <> '' then
+      begin
+        PdfTaillePolice(PdfPage, PdfFontValue, ConstPoliceArial, 4);
+        PdfPage.WriteText((DessinDebColCompG + 15 + DessinLargeurEnc) / 2 + 1.2 * Length(IntToStr(Floor(BF/10) + Floor(BE/10) + BonusEncomb + EncMonture)) + 0.5,
+                          DessinDebutHautEnc - ((DessinNbLigEnc - 0) * DessinHauteurEnc) + 0.9 + 1.7, AsterisqueMonture);
+        PdfTaillePolice(PdfPage, PdfFontValue, ConstPoliceArial, 7);
+      end;
     PdfCentre(PdfPage, DessinDebColCompG + 15, DessinLargeurEnc, DessinDebutHautEnc - ((DessinNbLigEnc + 1) * DessinHauteurEnc) + 0.9, IntToStr(EncArmure + EncArme + EncDivers));
 
     // Dessin Armour Points (nouveau bloc PdfBlocArmourPoints, CONTEXT.md §2.4 - cadre +

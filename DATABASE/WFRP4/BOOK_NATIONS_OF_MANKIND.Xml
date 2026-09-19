@@ -13061,6 +13061,22 @@ Poison: Used to weaken and kill targets, anyone caught in the radius of this gre
 <Carries>"44"</Carries>
 <Availability>"RULES-DISPO_EXOTIC"</Availability>
 </Trapping>
+<!-- Riding Bull : M WS BS S T I Ag Dex Int WP Fel W = 6 40 0 55 55 20 25 0 10 30 10 36. Traits : Horns +10, Size (Large), Skittish, Strider, Trained (Broken, Mount), Weapon +10. Le livre (p.61) ne donne NI prix, NI capacite, NI disponibilite (oubli de l'editeur). VALEURS MAISON du 19/09/2026 (decision de Nono : prix eleve, comme toute monture) : 120CO, capacite 30 (celle du Ox, meme Endurance), Exotic comme les autres New Mounts. -->
+<Trapping id="NATIO-TRAP_09">
+<Description language="ENGLISH">"Riding Bull"</Description>
+<Theme>"RULES-LAB_195"</Theme>
+<Price>"120CO"</Price>
+<Carries>"30"</Carries>
+<Availability>"RULES-DISPO_EXOTIC"</Availability>
+</Trapping>
+<!-- Estalian War Bull : M WS BS S T I Ag Dex Int WP Fel W = 6 50 0 55 65 20 25 0 10 40 10 42. Traits : Horns +10, Size (Large), Strider, Tough, Trained (Broken, Mount, War), Weapon +10. Meme oubli que le Riding Bull : valeurs maison 400CO (monture de guerre, entre le Kislev Light Warhorse et le Bretonnian Destrier), capacite 30, Exotic. -->
+<Trapping id="NATIO-TRAP_10">
+<Description language="ENGLISH">"Estalian War Bull"</Description>
+<Theme>"RULES-LAB_195"</Theme>
+<Price>"400CO"</Price>
+<Carries>"30"</Carries>
+<Availability>"RULES-DISPO_EXOTIC"</Availability>
+</Trapping>
 </DATA_TRAPPING>
 <DATA_CRAFTMANSHIP>
   <!-- Les trois accessoires d arme de la page 60, poses ici et non dans DATA_WEAPON : un

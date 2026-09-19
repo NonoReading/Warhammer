@@ -186,6 +186,92 @@ However, their differing visions of the Empire’s fate ensure that for all thei
 </SUBCHAPTER_ITEM>
 </Career>
 </DATA_CAREER>
+<!-- Animaux, p.24 ("Animal Cost and Availability"). Theme RULES-LAB_195 (Animals and Vehicles), <Carries> = capacite de charge. Les profils et traits sont p.22-24 du livre (Dog, Pony/Donkey/Mule, Draught Horse, Ox, Heavy Draught Horse, Riding Horse, Light et Heavy Warhorse), pas encore saisis : aucun champ ne les porte. Prix des deux chevaux de guerre : le livre precise que le prix peut doubler ou tripler en temps de tension. Scarce = RULES-DISPO_LIMITED. -->
+<DATA_TRAPPING>
+<Trapping id="ENEMY-TRAP_01">
+<Description language="ENGLISH">"Chicken"</Description>
+<Theme>"RULES-LAB_195"</Theme>
+<Price>"5PA"</Price>
+<Availability>"RULES-DISPO_COMMON"</Availability>
+</Trapping>
+<Trapping id="ENEMY-TRAP_02">
+<Description language="ENGLISH">"Sheep"</Description>
+<Theme>"RULES-LAB_195"</Theme>
+<Price>"3SB"</Price>
+<Carries>"2"</Carries>
+<Availability>"RULES-DISPO_COMMON"</Availability>
+</Trapping>
+<Trapping id="ENEMY-TRAP_03">
+<Description language="ENGLISH">"Pig"</Description>
+<Theme>"RULES-LAB_195"</Theme>
+<Price>"4SB"</Price>
+<Carries>"3"</Carries>
+<Availability>"RULES-DISPO_COMMON"</Availability>
+</Trapping>
+<Trapping id="ENEMY-TRAP_04">
+<Description language="ENGLISH">"Dog"</Description>
+<Theme>"RULES-LAB_195"</Theme>
+<Price>"2CO"</Price>
+<Carries>"8"</Carries>
+<Availability>"RULES-DISPO_RARE"</Availability>
+</Trapping>
+<Trapping id="ENEMY-TRAP_05">
+<Description language="ENGLISH">"Pony"</Description>
+<Theme>"RULES-LAB_195"</Theme>
+<Price>"10CO"</Price>
+<Carries>"14"</Carries>
+<Availability>"RULES-DISPO_COMMON"</Availability>
+</Trapping>
+<Trapping id="ENEMY-TRAP_06">
+<Description language="ENGLISH">"Donkey or Mule"</Description>
+<Theme>"RULES-LAB_195"</Theme>
+<Price>"5CO"</Price>
+<Carries>"14"</Carries>
+<Availability>"RULES-DISPO_COMMON"</Availability>
+</Trapping>
+<Trapping id="ENEMY-TRAP_07">
+<Description language="ENGLISH">"Draught Horse"</Description>
+<Theme>"RULES-LAB_195"</Theme>
+<Price>"4CO"</Price>
+<Carries>"20"</Carries>
+<Availability>"RULES-DISPO_COMMON"</Availability>
+</Trapping>
+<Trapping id="ENEMY-TRAP_08">
+<Description language="ENGLISH">"Heavy Draught Horse"</Description>
+<Theme>"RULES-LAB_195"</Theme>
+<Price>"8CO"</Price>
+<Carries>"30"</Carries>
+<Availability>"RULES-DISPO_LIMITED"</Availability>
+</Trapping>
+<Trapping id="ENEMY-TRAP_09">
+<Description language="ENGLISH">"Ox"</Description>
+<Theme>"RULES-LAB_195"</Theme>
+<Price>"15CO"</Price>
+<Carries>"30"</Carries>
+<Availability>"RULES-DISPO_COMMON"</Availability>
+</Trapping>
+<Trapping id="ENEMY-TRAP_10">
+<Description language="ENGLISH">"Riding Horse (Palfrey)"</Description>
+<Theme>"RULES-LAB_195"</Theme>
+<Price>"15CO"</Price>
+<Carries>"16"</Carries>
+<Availability>"RULES-DISPO_COMMON"</Availability>
+</Trapping>
+<Trapping id="ENEMY-TRAP_11">
+<Description language="ENGLISH">"Light Warhorse (Hobby)"</Description>
+<Theme>"RULES-LAB_195"</Theme>
+<Price>"70CO"</Price>
+<Carries>"18"</Carries>
+<Availability>"RULES-DISPO_COMMON"</Availability>
+</Trapping>
+<Trapping id="ENEMY-TRAP_12">
+<Description language="ENGLISH">"Heavy Warhorse (Destrier)"</Description>
+<Theme>"RULES-LAB_195"</Theme>
+<Price>"230CO"</Price>
+<Carries>"20"</Carries>
+<Availability>"RULES-DISPO_LIMITED"</Availability>
+</Trapping>
+</DATA_TRAPPING>
 <DATA_SPECIE_CAREER_DIRECT>
   <!-- Ces métiers étaient déclarés en 'X' dans les <Specie> de BOOK_RULESBOOK.Xml,
        alors qu'ils appartiennent à ce livre : un joueur ne l'ayant pas activé les voyait

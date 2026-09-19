@@ -8,6 +8,8 @@
 
 **EQUIPEMENTS V4 (19/09/2026, non teste en jeu)** : catalogue `DATA_TRAPPING` V4 saisi (175 objets, `RULES-TRAP_001`-`_175`, `WFRP4/BOOK_RULESBOOK.Xml`), 194 lignes de carriere sur 582 rattachees. Point de reprise : `A FAIRE.txt` (douteux, variantes (Q), objets absents), et tester le chargement V4 (`&amp;`, libelle `LIMITED`).
 
+**MONTURES (19/09/2026, compile et valide par Nono sauf le chargement des deux taureaux)** : 12 animaux d Enemy in Shadows Companion (`ENEMY-TRAP_01`-`_12`) et 10 montures de Nations of Mankind (`NATIO-TRAP_01`-`_10`, les deux taureaux en valeurs maison). PDF : la somme des `<Carries>` des objets Divers de theme `RULES-LAB_195` s ajoute a l Encombrement max, avec un "(N)" en petite police (suite de la chaine des asterisques, `PdfPersonnageArmureAsterisques` renvoie `AsterisqueFinal`), dans `PdfPersonnageCreationFeldo2P` seulement. Raccourci provisoire. Point de reprise : `A FAIRE.txt` (champs profil/traits dans `StructureTrapping`, "porte par" une monture, notion de groupe).
+
 **REPRISE (18/09/2026, fin de session)** : journée entièrement close et committée, rien en
 cours. Six chantiers traités le 18/09/2026, tous testés en jeu et validés par Nono : §2.78
 suite 6/7 (Vertus bretonnes, quasi clos - seul reste le vrai retrait de `Virtue of the Quest`

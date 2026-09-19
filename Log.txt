@@ -5360,3 +5360,14 @@ Fichiers modifies : warhammersource.pas/.lfm, winmutationcatalogue.pas (nouveau)
 Toutes les balises <Price> de DATABASE (WFRP4 et WFRP5, 934 valeurs) passent en codes CO/PA/SB ("460CO", "2PA 6SB") ; migration par script avec essai a blanc, 16 corrections d OCR par identifiant, prix "-", "/", "n/a", "ND" sans balise, "Varies" conserve. chargetexte.pas : TraduirePrix ; RULES-LAB_222 a _224 dans INTERFACE (GC/SS/BP) et INTERFACE_FRANCAIS (CO/PA/SB) ; appelee dans les 8 unites qui affichent un prix. BOOK_NATIONS_OF_MANKIND.Xml : NATIO-TRAP_01 a _08 (montures p.61), profil et traits en commentaire. Teste et valide par Nono (prix et montures affiches).
 Appris : "SC" des munitions du Rulebook = sous (d), pas pistoles ; toujours verifier une valeur douteuse dans LIVRES/*.txt avant de migrer. Un "--" est interdit dans un commentaire XML (le fichier ne se charge plus).
 Fichiers modifies : DATABASE/WFRP4/*.Xml et WFRP5/BOOK_RULESBOOK.Xml (Price), BOOK_NATIONS_OF_MANKIND.Xml, INTERFACE.Xml, INTERFACE_FRANCAIS.Xml, chargetexte.pas, chargetrapping.pas, chargearme.pas, chargearmure.pas, chargearmuresimplifie.pas, winequipement.pas, winarmor.pas, winweapon.pas, winlivre.pas, Log.txt, CONTEXT.md, A FAIRE.txt.
+
+19/09/2026 - ANIMAUX DE ENEMY IN SHADOWS COMPANION
+BOOK ENEMY IN SHADOWS COMPANION.Xml : ENEMY-TRAP_01 a _12 (Chicken a Heavy Warhorse, p.24), theme Animals and Vehicles, Carries, disponibilite. Valide par Nono.
+
+19/09/2026 - PDF : CAPACITE DES MONTURES DANS L ENCOMBREMENT MAX (NON COMPILE, NON TESTE)
+pdfpersonnage.pas : la somme des <Carries> des objets Divers de theme RULES-LAB_195 s ajoute a l Encombrement max, avec un "(N)" repris a cote de chaque monture dans la liste Divers (suite de la chaine des asterisques : talents, mutations, armures, montures). PdfPersonnageArmureAsterisques renvoie maintenant son dernier numero (out AsterisqueFinal). Seule PdfPersonnageCreationFeldo2P est modifiee, pas PdfPersonnageCreation.
+Asterisques des montures en petite police (taille 4, relevee) comme celles des armures ; rendu valide par Nono.
+
+19/09/2026 - RIDING BULL ET ESTALIAN WAR BULL
+NATIO-TRAP_09 et _10 (Nations of Mankind p.61) : ni prix, ni capacite, ni disponibilite dans le livre (oubli de l editeur, confirme par Nono). Profils en commentaire. Non teste.
+Correction : valeurs maison posees (decision de Nono, prix eleve) : Riding Bull 120CO, Estalian War Bull 400CO, capacite 30, Exotic.
