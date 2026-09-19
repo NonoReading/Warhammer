@@ -3520,6 +3520,8 @@ begin
             else
               TabEquipement.Cells[4, NbEquipement] := PersonnageEquipement.CodeEquipement;
             TabEquipement.Cells[7, NbEquipement]   := PersonnageEquipement.QualiteEquipement;
+            if PersonnageEquipement.Porte then
+              TabEquipement.Cells[8, NbEquipement] := 'X';
           end
       else if TrimRight(PersonnageEquipement.TypeEquipement) =TrimRight(TypeEquipSp) then
           begin

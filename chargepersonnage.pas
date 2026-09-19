@@ -730,7 +730,8 @@ begin
           for PersonnageEquipement in Personnage.Equipement do
             if TrimRight(PersonnageEquipement.TypeEquipement) = TrimRight(TypeEquipDi) then
                XMLContent.Add(XmlLigneDonnee(ConstXmlItem, PersonnageEquipement.CodeEquipement, PersonnageEquipement.QualiteEquipement,
-                 XmlAttributEquipementQuantite(PersonnageEquipement.Quantite)));
+                 XmlAttributEquipementPorte(PersonnageEquipement.Porte)
+                 +XmlAttributEquipementQuantite(PersonnageEquipement.Quantite)));
           XMLContent.Add(XmlFin(ConstXmlSousChapitreDivers));
 
           // Sorts
@@ -1235,7 +1236,7 @@ begin
                           PersonnageEquipement.CodeEquipement     := RemoveQuotes(UTF8Encode(Node.Attributes.GetNamedItem(ConstXmlData).NodeValue));
                           PersonnageEquipement.TypeEquipement     := TrimRight(TypeEquipDi);
                           PersonnageEquipement.QualiteEquipement  := RemoveQuotes(UTF8Encode(Node.TextContent));
-                          PersonnageEquipement.Porte              := False;
+                          PersonnageEquipement.Porte              := Assigned(Node.Attributes.GetNamedItem(ConstXmlEquipementPorte));
                           if Assigned(Node.Attributes.GetNamedItem(ConstXmlEquipementQuantite)) then
                             PersonnageEquipement.Quantite         := StrToIntDef(UTF8Encode(Node.Attributes.GetNamedItem(ConstXmlEquipementQuantite).NodeValue), 1)
                           else

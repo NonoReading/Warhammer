@@ -9,7 +9,7 @@ uses
   Classes, SysUtils, fpPDF, PdfUtils, ChargeRace, ChargeMetier, ChargeMetierNiveau,
   ChargeRaceAttribut, ChargeTalent, ChargeCompetence, ChargeArme, ChargeArmure,
   ChargeArmeBonus, ChargeArmureBonus, ChargeArmureBonusModif, ChargeSort, ChargeAttribut, ChargeFabrication,
-  ChargeConstantes, ChargeMetierAttribut, ChargeTexte, ChargeMetierTalent,
+  ChargeConstantes, ChargeMetierAttribut, ChargeTexte, ChargeMetierTalent, ChargeTrapping,
   ChargePersonnage, ChargeArmureSimplifie, ChargeAttributAugmentation,
   ChargeCompetenceAugmentation, ChargeCorruptionTable,
   ChargeModificateur, ChargeCorruptionModificateur, ChargeCorruptionCompetenceModif,
@@ -287,7 +287,12 @@ Procedure PdfBlocSortsDonnees(PdfPage: TPDFPage; Personnage: StructurePersonnage
 // au-delà de NbLignes lignes (voir le commentaire de PdfBlocEquipement sur la grille
 // doublée — comportement préservé tel quel). Purement local : IndDivers ne sert qu'à
 // positionner les lignes dans cette boucle, personne d'autre ne le lit après.
-Procedure PdfBlocDiversDonnees(PdfPage: TPDFPage; Personnage: StructurePersonnage; XGauche, Y, HauteurLigne: Single; NbLignes: Integer; MinPolice: Integer);
+Procedure PdfBlocDiversDonnees(PdfPage: TPDFPage; Personnage: StructurePersonnage; XGauche, XDroite, Y, HauteurLigne: Single; NbLignes: Integer; out EncDivers: Integer; MinPolice: Integer);
+// Libelle (catalogue si le code est un Trapping, sinon le code brut) et encombrement total
+// (unitaire x quantite) d'une ligne Divers.
+Function PdfDiversLibelle(PersonnageEquipement: StructurePersonnageEquipement): String;
+Function PdfDiversEncombrement(PersonnageEquipement: StructurePersonnageEquipement): Integer;
+Function PdfDiversTexteEnc(PersonnageEquipement: StructurePersonnageEquipement): String;
 
 // Bloc Armes (page 2, remplissage des données) — troisième des 4 boucles de
 // remplissage à être séparée (CONTEXT.md §2.4). Filtre sur TypeEquipWe et remplit le
@@ -869,6 +874,7 @@ Procedure PdfPersonnageCreation(Personnage: StructurePersonnage; BackGround: Boo
     Pourcent:        String;
     EncArme:         Integer;
     EncArmure:       Integer;
+    EncDivers:       Integer = 0;
     ArmureTete:      Integer;
     ArmureBras:      Integer;
     ArmureCorps:     Integer;
@@ -1915,7 +1921,10 @@ Procedure PdfPersonnageCreation(Personnage: StructurePersonnage; BackGround: Boo
             // gérer les divers
             begin
               Inc(IndDivers);
-              PdfEcrit(PdfPage,18,65,212-(IndDivers*3.5), PersonnageEquipement.CodeEquipement,MinPolice);
+              PdfEcrit(PdfPage,18,65,212-(IndDivers*3.5), PdfDiversLibelle(PersonnageEquipement),MinPolice);
+              EncDivers := EncDivers + PdfDiversEncombrement(PersonnageEquipement);
+              if PdfDiversTexteEnc(PersonnageEquipement) <> '' then
+                PdfCentre(PdfPage,65,73,212-(IndDivers*3.5), PdfDiversTexteEnc(PersonnageEquipement));
             end
 
           else if PersonnageEquipement.TypeEquipement = TypeEquipSp then
@@ -2010,7 +2019,8 @@ Procedure PdfPersonnageCreation(Personnage: StructurePersonnage; BackGround: Boo
 
     PdfPage.WriteText(126,163, IntToStr(EncArmure));
     PdfPage.WriteText(126,157, IntToStr(EncArme));
-    PdfPage.WriteText(126,137.5, IntToStr(EncArme + EncArmure));
+    PdfPage.WriteText(126,151, IntToStr(EncDivers));
+    PdfPage.WriteText(126,137.5, IntToStr(EncArme + EncArmure + EncDivers));
 
     if ArmureBouclier > 0 then
       PdfPage.WriteText(145, 190, IntToStr(ArmureBouclier));
@@ -2963,22 +2973,101 @@ Procedure PdfBlocSortsDonnees(PdfPage: TPDFPage; Personnage: StructurePersonnage
         end;
   end;
 
-Procedure PdfBlocDiversDonnees(PdfPage: TPDFPage; Personnage: StructurePersonnage; XGauche, Y, HauteurLigne: Single; NbLignes: Integer; MinPolice: Integer);
+Function PdfDiversLibelle(PersonnageEquipement: StructurePersonnageEquipement): String;
+  var
+    PTrapping: StructureTrapping;
+  begin
+    PTrapping := ChercheTrapping(PersonnageEquipement.CodeEquipement);
+    if PTrapping.CodeTrapping <> '' then
+      Result := PTrapping.Libelle
+    else
+      Result := PersonnageEquipement.CodeEquipement;
+    if PersonnageEquipement.Quantite > 1 then
+      Result := Result + ' x' + IntToStr(PersonnageEquipement.Quantite);
+  end;
+
+Function PdfDiversEncombrement(PersonnageEquipement: StructurePersonnageEquipement): Integer;
+  var
+    PTrapping: StructureTrapping;
+    Qte:       Integer;
+  begin
+    // Regle "Worn Items" (Rulebook p.292), comme armes/armures : un objet PORTE voit son
+    // Encombrement reduit de 1 (plancher 0, ou 1 s'il est Bulky), par exemplaire. Tout
+    // objet du catalogue peut etre marque porte (Nono, 19/09/2026).
+    Qte := PersonnageEquipement.Quantite;
+    if Qte < 1 then
+      Qte := 1;
+    PTrapping := ChercheTrapping(PersonnageEquipement.CodeEquipement);
+    if PTrapping.CodeTrapping = '' then
+      Result := 0
+    else
+      begin
+        Result := PTrapping.Encombrement;
+        if PersonnageEquipement.Porte and (Result > 0) then
+          begin
+            Result := Result - 1;
+            if (Result < 1) and FabricationEstBulky(PersonnageEquipement.QualiteEquipement) then
+              Result := 1;
+          end;
+        Result := Result * Qte;
+      end;
+  end;
+
+Function PdfDiversEncombrementBrut(PersonnageEquipement: StructurePersonnageEquipement): Integer;
+  var
+    PTrapping: StructureTrapping;
+  begin
+    PTrapping := ChercheTrapping(PersonnageEquipement.CodeEquipement);
+    if PTrapping.CodeTrapping = '' then
+      Result := 0
+    else
+      Result := PTrapping.Encombrement * Max(PersonnageEquipement.Quantite, 1);
+  end;
+
+// Texte de la colonne Enc : "reduit(brut)" pour un objet porte dont l'encombrement change,
+// comme les armures.
+Function PdfDiversTexteEnc(PersonnageEquipement: StructurePersonnageEquipement): String;
+  var
+    Enc, Brut: Integer;
+  begin
+    Enc   := PdfDiversEncombrement(PersonnageEquipement);
+    Brut  := PdfDiversEncombrementBrut(PersonnageEquipement);
+    if Brut = 0 then
+      Result := ''
+    else if Enc <> Brut then
+      Result := IntToStr(Enc) + '(' + IntToStr(Brut) + ')'
+    else
+      Result := IntToStr(Enc);
+  end;
+
+Procedure PdfBlocDiversDonnees(PdfPage: TPDFPage; Personnage: StructurePersonnage; XGauche, XDroite, Y, HauteurLigne: Single; NbLignes: Integer; out EncDivers: Integer; MinPolice: Integer);
   var
     PersonnageEquipement: StructurePersonnageEquipement;
     IndDivers:            Integer;
+    Enc:                  Integer;
   begin
     IndDivers := 0;
+    EncDivers := 0;
     for PersonnageEquipement in Personnage.Equipement do
       if PersonnageEquipement.TypeEquipement = TypeEquipDI then
         begin
           Inc(IndDivers);
+          Enc       := PdfDiversEncombrement(PersonnageEquipement);
+          EncDivers := EncDivers + Enc;
           if (IndDivers <= (NbLignes * 2)) then
             begin
               if IndDivers > (NbLignes - 1) then
-                PdfEcrit(PdfPage, XGauche +  56, XGauche + 100, Y - ((IndDivers - NbLignes + 3) * HauteurLigne) + 0.6, PersonnageEquipement.CodeEquipement, MinPolice)
+                begin
+                  PdfEcrit(PdfPage, XGauche +  56, XGauche + 100, Y - ((IndDivers - NbLignes + 3) * HauteurLigne) + 0.6, PdfDiversLibelle(PersonnageEquipement), MinPolice);
+                  if PdfDiversTexteEnc(PersonnageEquipement) <> '' then
+                    PdfCentre(PdfPage, XGauche + 100, XDroite, Y - ((IndDivers - NbLignes + 3) * HauteurLigne) + 0.6, PdfDiversTexteEnc(PersonnageEquipement));
+                end
               else
-                PdfEcrit(PdfPage, XGauche +   1, XGauche +  48, Y - ((IndDivers + 2) * HauteurLigne) + 0.6, PersonnageEquipement.CodeEquipement, MinPolice);
+                begin
+                  PdfEcrit(PdfPage, XGauche +   1, XGauche +  48, Y - ((IndDivers + 2) * HauteurLigne) + 0.6, PdfDiversLibelle(PersonnageEquipement), MinPolice);
+                  if PdfDiversTexteEnc(PersonnageEquipement) <> '' then
+                    PdfCentre(PdfPage, XGauche + 48, XGauche + 55, Y - ((IndDivers + 2) * HauteurLigne) + 0.6, PdfDiversTexteEnc(PersonnageEquipement));
+                end;
             end;
         end;
   end;
@@ -4042,6 +4131,7 @@ Procedure PdfPersonnageCreationFeldo2P(Personnage: StructurePersonnage);
     BonusEncomb:     Integer = 0;
     EncArme:         Integer;
     EncArmure:       Integer;
+    EncDivers:       Integer = 0;
     ArmureTete:      Integer;
     ArmureBras:      Integer;
     ArmureCorps:     Integer;
@@ -4613,7 +4703,7 @@ Procedure PdfPersonnageCreationFeldo2P(Personnage: StructurePersonnage);
      // Dessin Sorts (extrait dans PdfBlocSortsDonnees, CONTEXT.md §2.4 - remplissage)
      PdfBlocSortsDonnees(PdfPage, Personnage, DessinDebColCompG, DessinDebutHautSor, DessinHauteurSor, MinPolice);
      // Dessin Divers (extrait dans PdfBlocDiversDonnees, CONTEXT.md §2.4 - remplissage)
-     PdfBlocDiversDonnees(PdfPage, Personnage, DessinDebColCompG, DessinDebutHautEqu, DessinHauteurEqu, DessinNbLigEqu, MinPolice);
+     PdfBlocDiversDonnees(PdfPage, Personnage, DessinDebColCompG, DessinLargeurEqu, DessinDebutHautEqu, DessinHauteurEqu, DessinNbLigEqu, EncDivers, MinPolice);
      // Dessin Armes (extrait dans PdfBlocArmesDonnees, CONTEXT.md §2.4 - remplissage)
      PdfBlocArmesDonnees(PdfPage, Personnage, DessinDebColCompG, DessinLargeurWea, DessinDebutHautWea, DessinHauteurWea, BF, TBonusCC, TBonusCT, FabricationBonii, EncArme, ArmeBonii, ArmureBouclier, MinPolice);
      // Dessin Armures (extrait dans PdfBlocArmuresDonnees, CONTEXT.md §2.4 - remplissage) -
@@ -4628,8 +4718,9 @@ Procedure PdfPersonnageCreationFeldo2P(Personnage: StructurePersonnage);
     //  gérer les encombrement
     PdfCentre(PdfPage, DessinDebColCompG + 15, DessinLargeurEnc, DessinDebutHautEnc - ((DessinNbLigEnc - 3) * DessinHauteurEnc) + 0.9, IntToStr(EncArmure));
     PdfCentre(PdfPage, DessinDebColCompG + 15, DessinLargeurEnc, DessinDebutHautEnc - ((DessinNbLigEnc - 2) * DessinHauteurEnc) + 0.9, IntToStr(EncArme));
+    PdfCentre(PdfPage, DessinDebColCompG + 15, DessinLargeurEnc, DessinDebutHautEnc - ((DessinNbLigEnc - 1) * DessinHauteurEnc) + 0.9, IntToStr(EncDivers));
     PdfCentre(PdfPage, DessinDebColCompG + 15, DessinLargeurEnc, DessinDebutHautEnc - ((DessinNbLigEnc - 0) * DessinHauteurEnc) + 0.9, IntToStr(Floor(BF/10) + Floor(BE/10) + BonusEncomb));
-    PdfCentre(PdfPage, DessinDebColCompG + 15, DessinLargeurEnc, DessinDebutHautEnc - ((DessinNbLigEnc + 1) * DessinHauteurEnc) + 0.9, IntToStr(EncArmure + EncArme));
+    PdfCentre(PdfPage, DessinDebColCompG + 15, DessinLargeurEnc, DessinDebutHautEnc - ((DessinNbLigEnc + 1) * DessinHauteurEnc) + 0.9, IntToStr(EncArmure + EncArme + EncDivers));
 
     // Dessin Armour Points (nouveau bloc PdfBlocArmourPoints, CONTEXT.md §2.4 - cadre +
     // contenu) - positionné sous l'Encombrement, demandé par Nono le 15/08/2026.
