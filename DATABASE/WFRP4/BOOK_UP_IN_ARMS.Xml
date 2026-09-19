@@ -3662,4 +3662,90 @@ This Flaw is the Infected Creature Trait (WFRP, page 340) applied to a weapon, a
 <Alternative name="UPINA-WORK79">"86-100"</Alternative>
 </Choice>
 </DATA_CAREER_SUBCHOICE>
+<DATA_TRAPPING>
+<Trapping id="UPINA-TRAP_001">
+<Description language="ENGLISH">"Theodolite"</Description>
+<Theme>"RULES-LAB_193"</Theme>
+<Availability>"RULES-DISPO_EXOTIC"</Availability>
+<Price>"6CO"</Price>
+<Encumbrance>"3"</Encumbrance>
+</Trapping>
+<Trapping id="UPINA-TRAP_002">
+<Description language="ENGLISH">"Ostrich Feather"</Description>
+<Theme>"RULES-LAB_191"</Theme>
+<Availability>"RULES-DISPO_RARE"</Availability>
+<Price>"3/-"</Price>
+<Encumbrance>"0"</Encumbrance>
+</Trapping>
+<Trapping id="UPINA-TRAP_003">
+<Description language="ENGLISH">"Compass"</Description>
+<Theme>"RULES-LAB_193"</Theme>
+<Availability>"RULES-DISPO_LIMITED"</Availability>
+<Price>"10/-"</Price>
+<Encumbrance>"0"</Encumbrance>
+</Trapping>
+<Trapping id="UPINA-TRAP_004">
+<Description language="ENGLISH">"Bandoleer"</Description>
+<Theme>"RULES-LAB_191"</Theme>
+<Availability>"RULES-DISPO_COMMON"</Availability>
+<Price>"6/-"</Price>
+<Encumbrance>"1"</Encumbrance>
+</Trapping>
+<Trapping id="UPINA-TRAP_005">
+<Description language="ENGLISH">"Slow Match, yard"</Description>
+<Theme>"RULES-LAB_193"</Theme>
+<Availability>"RULES-DISPO_COMMON"</Availability>
+<Price>"2d"</Price>
+<Encumbrance>"1"</Encumbrance>
+</Trapping>
+<Trapping id="UPINA-TRAP_006">
+<Description language="ENGLISH">"Fuse, yard"</Description>
+<Theme>"RULES-LAB_193"</Theme>
+<Availability>"RULES-DISPO_LIMITED"</Availability>
+<Price>"3d"</Price>
+<Encumbrance>"1"</Encumbrance>
+</Trapping>
+<Trapping id="UPINA-TRAP_007">
+<Description language="ENGLISH">"Bow String"</Description>
+<Theme>"RULES-LAB_193"</Theme>
+<Availability>"RULES-DISPO_COMMON"</Availability>
+<Price>"4/-"</Price>
+<Encumbrance>"0"</Encumbrance>
+</Trapping>
+<Trapping id="UPINA-TRAP_008">
+<Description language="ENGLISH">"Whetstone"</Description>
+<Theme>"RULES-LAB_193"</Theme>
+<Availability>"RULES-DISPO_COMMON"</Availability>
+<Price>"2/6"</Price>
+<Encumbrance>"0"</Encumbrance>
+</Trapping>
+<Trapping id="UPINA-TRAP_009">
+<Description language="ENGLISH">"Sealskin"</Description>
+<Theme>"RULES-LAB_191"</Theme>
+<Availability>"RULES-DISPO_LIMITED"</Availability>
+<Price>"30/-"</Price>
+<Encumbrance>"1"</Encumbrance>
+</Trapping>
+<Trapping id="UPINA-TRAP_010">
+<Description language="ENGLISH">"Silk Underwear"</Description>
+<Theme>"RULES-LAB_191"</Theme>
+<Availability>"RULES-DISPO_LIMITED"</Availability>
+<Price>"1CO"</Price>
+<Encumbrance>"0"</Encumbrance>
+</Trapping>
+<Trapping id="UPINA-TRAP_011">
+<Description language="ENGLISH">"Captain Braun's Multi-Stove"</Description>
+<Theme>"RULES-LAB_196"</Theme>
+<Availability>"RULES-DISPO_LIMITED"</Availability>
+<Price>"10/-"</Price>
+<Encumbrance>"3"</Encumbrance>
+</Trapping>
+<Trapping id="UPINA-TRAP_012">
+<Description language="ENGLISH">"Captain Braun's Insta-Boiler"</Description>
+<Theme>"RULES-LAB_196"</Theme>
+<Availability>"RULES-DISPO_LIMITED"</Availability>
+<Price>"6/-"</Price>
+<Encumbrance>"2"</Encumbrance>
+</Trapping>
+</DATA_TRAPPING>
 </DATA_BOOK>

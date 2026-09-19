@@ -3883,4 +3883,146 @@ You invoke a mystical prime language that existed before the arrival of the Old 
        arme, qui n'existait pas jusqu'ici. Le livre le dit p.33 : "they are, however,
        required in order to use sword-dancing techniques". -->
 </DATA_WEAPON>
+<DATA_TRAPPING>
+<Trapping id="HELFG-TRAP_001">
+<Description language="ENGLISH">"Black Lotus"</Description>
+<Theme>"RULES-LAB_197"</Theme>
+<Availability>"RULES-DISPO_LIMITED"</Availability>
+<Price>"10CO"</Price>
+<Encumbrance>"0"</Encumbrance>
+</Trapping>
+<Trapping id="HELFG-TRAP_002">
+<Description language="ENGLISH">"Moonflower"</Description>
+<Theme>"RULES-LAB_197"</Theme>
+<Availability>"RULES-DISPO_EXOTIC"</Availability>
+<Price>"7CO"</Price>
+<Encumbrance>"0"</Encumbrance>
+</Trapping>
+<Trapping id="HELFG-TRAP_003">
+<Description language="ENGLISH">"Digestive Tonic"</Description>
+<Theme>"RULES-LAB_198"</Theme>
+<Availability>"RULES-DISPO_COMMON"</Availability>
+<Price>"1/-"</Price>
+<Encumbrance>"0"</Encumbrance>
+</Trapping>
+<Trapping id="HELFG-TRAP_004">
+<Description language="ENGLISH">"Earth Root"</Description>
+<Theme>"RULES-LAB_198"</Theme>
+<Availability>"RULES-DISPO_COMMON"</Availability>
+<Price>"1CO"</Price>
+<Encumbrance>"0"</Encumbrance>
+</Trapping>
+<Trapping id="HELFG-TRAP_005">
+<Description language="ENGLISH">"Faxtoryll"</Description>
+<Theme>"RULES-LAB_198"</Theme>
+<Availability>"RULES-DISPO_LIMITED"</Availability>
+<Price>"5/-"</Price>
+<Encumbrance>"0"</Encumbrance>
+</Trapping>
+<Trapping id="HELFG-TRAP_006">
+<Description language="ENGLISH">"Healing Draught"</Description>
+<Theme>"RULES-LAB_198"</Theme>
+<Availability>"RULES-DISPO_COMMON"</Availability>
+<Price>"4/-"</Price>
+<Encumbrance>"0"</Encumbrance>
+</Trapping>
+<Trapping id="HELFG-TRAP_007">
+<Description language="ENGLISH">"Healing Poultice"</Description>
+<Theme>"RULES-LAB_198"</Theme>
+<Availability>"RULES-DISPO_COMMON"</Availability>
+<Price>"5/-"</Price>
+<Encumbrance>"0"</Encumbrance>
+</Trapping>
+<Trapping id="HELFG-TRAP_008">
+<Description language="ENGLISH">"Nightshade"</Description>
+<Theme>"RULES-LAB_198"</Theme>
+<Availability>"RULES-DISPO_LIMITED"</Availability>
+<Price>"1CO"</Price>
+<Encumbrance>"0"</Encumbrance>
+</Trapping>
+<Trapping id="HELFG-TRAP_009">
+<Description language="ENGLISH">"Salwort"</Description>
+<Theme>"RULES-LAB_198"</Theme>
+<Availability>"RULES-DISPO_COMMON"</Availability>
+<Price>"4/-"</Price>
+<Encumbrance>"0"</Encumbrance>
+</Trapping>
+<Trapping id="HELFG-TRAP_010">
+<Description language="ENGLISH">"Vitality Draught"</Description>
+<Theme>"RULES-LAB_198"</Theme>
+<Availability>"RULES-DISPO_COMMON"</Availability>
+<Price>"6/-"</Price>
+<Encumbrance>"0"</Encumbrance>
+</Trapping>
+<Trapping id="HELFG-TRAP_011">
+<Description language="ENGLISH">"Heartleaf (1 halm)"</Description>
+<Theme>"RULES-LAB_198"</Theme>
+<Availability>"RULES-DISPO_EXOTIC"</Availability>
+<Price>"1CO"</Price>
+<Encumbrance>"0"</Encumbrance>
+</Trapping>
+<Trapping id="HELFG-TRAP_012">
+<Description language="ENGLISH">"Narinocha Wine, bottle"</Description>
+<Theme>"RULES-LAB_192"</Theme>
+<Availability>"RULES-DISPO_LIMITED"</Availability>
+<Price>"6/-"</Price>
+<Encumbrance>"0"</Encumbrance>
+</Trapping>
+<Trapping id="HELFG-TRAP_013">
+<Description language="ENGLISH">"Sunroot Extract, vial"</Description>
+<Theme>"RULES-LAB_198"</Theme>
+<Availability>"RULES-DISPO_LIMITED"</Availability>
+<Price>"2CO"</Price>
+<Encumbrance>"0"</Encumbrance>
+</Trapping>
+<Trapping id="HELFG-TRAP_014">
+<Description language="ENGLISH">"Viridescent Palliative, vial"</Description>
+<Theme>"RULES-LAB_198"</Theme>
+<Availability>"RULES-DISPO_RARE"</Availability>
+<Price>"1CO"</Price>
+<Encumbrance>"0"</Encumbrance>
+</Trapping>
+<Trapping id="HELFG-TRAP_015">
+<Description language="ENGLISH">"Aethyrolabe"</Description>
+<Theme>"RULES-LAB_196"</Theme>
+<Availability>"RULES-DISPO_EXOTIC"</Availability>
+<Price>"350CO"</Price>
+<Encumbrance>"1"</Encumbrance>
+</Trapping>
+<Trapping id="HELFG-TRAP_016">
+<Description language="ENGLISH">"Flamespyre Phoenix Feather"</Description>
+<Theme>"RULES-LAB_196"</Theme>
+<Availability>"RULES-DISPO_EXOTIC"</Availability>
+<Price>"300CO"</Price>
+<Encumbrance>"0"</Encumbrance>
+</Trapping>
+<Trapping id="HELFG-TRAP_017">
+<Description language="ENGLISH">"Frostheart Phoenix Feather"</Description>
+<Theme>"RULES-LAB_196"</Theme>
+<Availability>"RULES-DISPO_EXOTIC"</Availability>
+<Price>"400CO"</Price>
+<Encumbrance>"0"</Encumbrance>
+</Trapping>
+<Trapping id="HELFG-TRAP_018">
+<Description language="ENGLISH">"Staff of Nightelm"</Description>
+<Theme>"RULES-LAB_196"</Theme>
+<Availability>"RULES-DISPO_EXOTIC"</Availability>
+<Price>"500CO"</Price>
+<Encumbrance>"1"</Encumbrance>
+</Trapping>
+<Trapping id="HELFG-TRAP_019">
+<Description language="ENGLISH">"Staff of the Eternal Grove"</Description>
+<Theme>"RULES-LAB_196"</Theme>
+<Availability>"RULES-DISPO_RARE"</Availability>
+<Price>"350CO"</Price>
+<Encumbrance>"1"</Encumbrance>
+</Trapping>
+<Trapping id="HELFG-TRAP_020">
+<Description language="ENGLISH">"Wayshard"</Description>
+<Theme>"RULES-LAB_196"</Theme>
+<Availability>"RULES-DISPO_RARE"</Availability>
+<Price>"700CO"</Price>
+<Encumbrance>"0"</Encumbrance>
+</Trapping>
+</DATA_TRAPPING>
 </DATA_BOOK>

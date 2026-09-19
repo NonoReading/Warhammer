@@ -3988,4 +3988,27 @@ Learning XP: 400"</Explanation>
 <Alternative name="WINDS-WORK80">"76-100"</Alternative>
 </Choice>
 </DATA_CAREER_SUBCHOICE>
+<DATA_TRAPPING>
+<Trapping id="WINDS-TRAP_001">
+<Description language="ENGLISH">"Practical Robes"</Description>
+<Theme>"RULES-LAB_191"</Theme>
+<Availability>"RULES-DISPO_RARE"</Availability>
+<Price>"1CO"</Price>
+<Encumbrance>"1"</Encumbrance>
+</Trapping>
+<Trapping id="WINDS-TRAP_002">
+<Description language="ENGLISH">"Standard Robes"</Description>
+<Theme>"RULES-LAB_191"</Theme>
+<Availability>"RULES-DISPO_EXOTIC"</Availability>
+<Price>"8CO"</Price>
+<Encumbrance>"2"</Encumbrance>
+</Trapping>
+<Trapping id="WINDS-TRAP_003">
+<Description language="ENGLISH">"Elaborate Robes"</Description>
+<Theme>"RULES-LAB_191"</Theme>
+<Availability>"RULES-DISPO_EXOTIC"</Availability>
+<Price>"30CO"</Price>
+<Encumbrance>"4"</Encumbrance>
+</Trapping>
+</DATA_TRAPPING>
 </DATA_BOOK>
