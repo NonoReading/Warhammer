@@ -260,6 +260,19 @@
 <Text name="RULES-LAB_187">"Choisissez %d compétences (%d sélectionnées)"</Text>
 <Text name="RULES-LAB_188">"Ordre"</Text>
 <Text name="RULES-LAB_189">"Bonus de carrière"</Text>
+<Text name="RULES-LAB_190">"Conteneurs"</Text>
+<Text name="RULES-LAB_191">"Vêtements et accessoires"</Text>
+<Text name="RULES-LAB_192">"Nourriture, boissons et logement"</Text>
+<Text name="RULES-LAB_193">"Outils et kits"</Text>
+<Text name="RULES-LAB_194">"Livres et documents"</Text>
+<Text name="RULES-LAB_195">"Animaux et véhicules"</Text>
+<Text name="RULES-LAB_196">"Équipement divers"</Text>
+<Text name="RULES-LAB_197">"Drogues et poisons"</Text>
+<Text name="RULES-LAB_198">"Herbes et remèdes"</Text>
+<Text name="RULES-LAB_199">"Prothèses et curiosités"</Text>
+<Text name="RULES-LAB_200">"Tous"</Text>
+<Text name="RULES-LAB_201">"Thème"</Text>
+<Text name="RULES-LAB_202">"Équipement"</Text>
 </Label>
 </DATA_LABEL>
 </DATA_BOOK>

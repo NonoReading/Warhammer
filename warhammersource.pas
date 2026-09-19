@@ -14,7 +14,7 @@ uses
   ChargeRace, ChargeEspece, ChargeNation, ChargeRegle, WinRaces, ChargeRaceAttribut, ChargeRaceCompetence,
   ChargeRaceTalent, GlobalFonts, WinCreation, ChargeTalentCreation,
   WinPersonnage, ChargeAttributAugmentation, ChargeCompetenceAugmentation,
-  ChargeArme, WinWeapon, ChargeArmeBonus, ChargeMetierEquipement, ChargeArmure,
+  ChargeArme, WinWeapon, WinEquipement, ChargeArmeBonus, ChargeMetierEquipement, ChargeArmure,
   ChargeArmureBonus, ChargeArmureBonusTalent, WinArmor, ChargeTrapping, ChargeSort, WinSpell, ChargeTexte,
   ChargeFabrication, Unitcalcul, ChargeMetierSousMetier,
   ChargeMetierRaceChoixMetier, ChargePersonnage, ChargeRaceCreation,
@@ -46,6 +46,7 @@ type
     Button3: TButton;
     ButtonArme: TBCButton;
     ButtonArmure: TBCButton;
+    ButtonEquipement: TBCButton;
     ButtonCompetence: TBCButton;
     ButtonCreation: TBCButton;
     ButtonOuvrirLivre: TBCButton;
@@ -88,6 +89,7 @@ type
     procedure BoutonTalentClick({%H-}Sender: TObject);
     procedure ButtonArmureClick({%H-}Sender: TObject);
     procedure ButtonArmeClick({%H-}Sender: TObject);
+    procedure ButtonEquipementClick({%H-}Sender: TObject);
     procedure ButtonCreationClick({%H-}Sender: TObject);
     procedure ButtonCreationLivreClick(Sender: TObject);
     procedure ButtonModificationClick({%H-}Sender: TObject);
@@ -1756,6 +1758,13 @@ begin
   FenArme          := TWinWeapons.Create(Application);
   FenArme.Position := poOwnerFormCenter;
   FenArme.Show;
+end;
+
+procedure TMenu.ButtonEquipementClick(Sender: TObject);
+begin
+  WinEquipements          := TWinEquipements.Create(Application);
+  WinEquipements.Position := poOwnerFormCenter;
+  WinEquipements.Show;
 end;
 
 procedure TMenu.BoutonCompetenceClick(Sender: TObject);

@@ -4,11 +4,11 @@ object Menu: TMenu
   Left = 765
   Height = 1000
   Top = 172
-  Width = 1636
+  Width = 1689
   Anchors = []
   Caption = 'Warhammer'
   ClientHeight = 1000
-  ClientWidth = 1636
+  ClientWidth = 1689
   Color = clBlack
   Constraints.MinHeight = 1000
   Constraints.MinWidth = 1636
@@ -26,7 +26,7 @@ object Menu: TMenu
     Left = -40
     Height = 1008
     Top = 0
-    Width = 1637
+    Width = 1738
     Anchors = [akTop, akLeft, akRight, akBottom]
     Stretch = True
   end
@@ -123,7 +123,7 @@ object Menu: TMenu
     Left = 1160
     Height = 125
     Top = 45
-    Width = 472
+    Width = 525
     Anchors = [akLeft, akRight]
     Proportional = True
     OnClick = BoutonRaceClick
@@ -135,7 +135,7 @@ object Menu: TMenu
     Left = 1160
     Height = 125
     Top = 179
-    Width = 472
+    Width = 525
     Anchors = [akLeft, akRight]
     Proportional = True
     OnClick = BoutonMetierClick
@@ -147,7 +147,7 @@ object Menu: TMenu
     Left = 1160
     Height = 125
     Top = 316
-    Width = 472
+    Width = 525
     Anchors = [akLeft, akRight]
     Proportional = True
     OnClick = BoutonCompetenceClick
@@ -159,7 +159,7 @@ object Menu: TMenu
     Left = 1160
     Height = 125
     Top = 451
-    Width = 472
+    Width = 525
     Anchors = [akLeft, akRight]
     Proportional = True
     OnClick = BoutonTalentClick
@@ -171,7 +171,7 @@ object Menu: TMenu
     Left = 1160
     Height = 125
     Top = 587
-    Width = 472
+    Width = 525
     Anchors = [akLeft, akRight]
     Proportional = True
     OnClick = BoutonArmeClick
@@ -183,7 +183,7 @@ object Menu: TMenu
     Left = 1160
     Height = 125
     Top = 723
-    Width = 472
+    Width = 525
     Anchors = [akLeft, akRight]
     Proportional = True
     OnClick = BoutonArmureClick
@@ -195,7 +195,7 @@ object Menu: TMenu
     Left = 1160
     Height = 125
     Top = 859
-    Width = 472
+    Width = 525
     Anchors = [akLeft, akRight]
     Proportional = True
     OnClick = BoutonSortClick
@@ -1740,7 +1740,7 @@ object Menu: TMenu
     MemoryUsage = bmuHigh
   end
   object Label4: TBCLabel
-    Left = 752
+    Left = 8
     Height = 20
     Top = 0
     Width = 48
@@ -1773,9 +1773,9 @@ object Menu: TMenu
     Rounding.RoundY = 1
   end
   object Panel2: TPanel
-    Left = 752
+    Left = 8
     Height = 72
-    Top = 45
+    Top = 48
     Width = 160
     BevelInner = bvLowered
     BevelWidth = 2
@@ -1800,7 +1800,7 @@ object Menu: TMenu
     end
   end
   object Panel3: TPanel
-    Left = 752
+    Left = 8
     Height = 72
     Top = 168
     Width = 160
@@ -1827,7 +1827,7 @@ object Menu: TMenu
     end
   end
   object Label5: TBCLabel
-    Left = 752
+    Left = 8
     Height = 20
     Top = 120
     Width = 58

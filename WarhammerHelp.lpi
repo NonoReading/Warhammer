@@ -222,6 +222,14 @@
         <UnitName Value="WinWeapon"/>
       </Unit>
       <Unit>
+        <Filename Value="winequipement.pas"/>
+        <IsPartOfProject Value="True"/>
+        <ComponentName Value="WinEquipements"/>
+        <HasResources Value="True"/>
+        <ResourceBaseClass Value="Form"/>
+        <UnitName Value="WinEquipement"/>
+      </Unit>
+      <Unit>
         <Filename Value="chargearmebonus.pas"/>
         <IsPartOfProject Value="True"/>
         <UnitName Value="ChargeArmeBonus"/>

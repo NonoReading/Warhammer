@@ -15,6 +15,7 @@ Type
     Encombrement:       Integer;
     Capacite:           Integer;
     Disponibilite:      String;
+    Theme:              String;
     Livre:              String;
 
 end;

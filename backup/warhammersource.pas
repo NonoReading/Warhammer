@@ -14,7 +14,7 @@ uses
   ChargeRace, ChargeEspece, ChargeNation, ChargeRegle, WinRaces, ChargeRaceAttribut, ChargeRaceCompetence,
   ChargeRaceTalent, GlobalFonts, WinCreation, ChargeTalentCreation,
   WinPersonnage, ChargeAttributAugmentation, ChargeCompetenceAugmentation,
-  ChargeArme, WinWeapon, ChargeArmeBonus, ChargeMetierEquipement, ChargeArmure,
+  ChargeArme, WinWeapon, WinEquipement, ChargeArmeBonus, ChargeMetierEquipement, ChargeArmure,
   ChargeArmureBonus, ChargeArmureBonusTalent, WinArmor, ChargeTrapping, ChargeSort, WinSpell, ChargeTexte,
   ChargeFabrication, Unitcalcul, ChargeMetierSousMetier,
   ChargeMetierRaceChoixMetier, ChargePersonnage, ChargeRaceCreation,
@@ -88,6 +88,7 @@ type
     procedure BoutonTalentClick({%H-}Sender: TObject);
     procedure ButtonArmureClick({%H-}Sender: TObject);
     procedure ButtonArmeClick({%H-}Sender: TObject);
+    procedure ButtonEquipementClick({%H-}Sender: TObject);
     procedure ButtonCreationClick({%H-}Sender: TObject);
     procedure ButtonCreationLivreClick(Sender: TObject);
     procedure ButtonModificationClick({%H-}Sender: TObject);
@@ -1758,6 +1759,13 @@ begin
   FenArme.Show;
 end;
 
+procedure TMenu.ButtonEquipementClick(Sender: TObject);
+begin
+  WinEquipements          := TWinEquipements.Create(Application);
+  WinEquipements.Position := poOwnerFormCenter;
+  WinEquipements.Show;
+end;
+
 procedure TMenu.BoutonCompetenceClick(Sender: TObject);
 begin
   FenCompetence          := TWinCompetence.Create(Application);
@@ -1960,6 +1968,18 @@ procedure TMenu.ChargerPersonnages();
           TabPersonnage.RowCount    := i + 1;
           TabPersonnage.Cells[ColPersoNom, I] := searchResult.Name;
           Chemin     := PersonnageXmlFichierActuel(directoryPath + searchResult.Name);
+          if Chemin = '' then
+            begin
+              // Dossier de personnage sans fichier XML dedans (creation interrompue,
+              // ex. nom termine par un espace : CreateDir tronque silencieusement le
+              // dossier mais l'ecriture du XML avec le nom non tronque echoue ensuite).
+              // PersonnageXmlChargement('') plante sans ce garde-fou - et comme ce
+              // rescan tourne a chaque demarrage, le programme ne se rouvrait plus du
+              // tout tant que le dossier vide restait sur le disque. On ignore la ligne.
+              i                      := i - 1;
+              TabPersonnage.RowCount := i + 1;
+              Continue;
+            end;
           Personnage := PersonnageXmlChargement(Chemin);
           PMetier    := chercheMetier(Personnage.MetierEnCours.CodeMetier);
           PRace      := chercheRace(Personnage.Race);

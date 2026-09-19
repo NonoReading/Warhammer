@@ -1,0 +1,165 @@
+object WinEquipements: TWinEquipements
+  Left = 549
+  Height = 700
+  Top = 325
+  Width = 1100
+  Caption = 'WinEquipements'
+  ClientHeight = 700
+  ClientWidth = 1100
+  Color = clBlack
+  DesignTimePPI = 120
+  KeyPreview = True
+  OnCreate = FormCreate
+  OnDestroy = FormDestroy
+  OnKeyPress = FormKeyPress
+  object LabTheme: TLabel
+    Left = 10
+    Height = 20
+    Top = 10
+    Width = 50
+    Caption = 'Theme'
+    Font.Color = clWhite
+    ParentColor = False
+    ParentFont = False
+  end
+  object CombTheme: TComboBox
+    Left = 10
+    Height = 28
+    Top = 32
+    Width = 300
+    ItemHeight = 20
+    OnChange = ThemeChange
+    Style = csDropDownList
+    TabOrder = 0
+  end
+  object ButtonFiltre: TBCButton
+    Left = 330
+    Height = 32
+    Top = 30
+    Width = 166
+    OnClick = ButtonFiltreClick
+    Caption = 'Filtre'
+    Color = clNone
+    ParentColor = False
+  end
+  object TabEquip: TStringGrid
+    Left = 10
+    Height = 605
+    Top = 75
+    Width = 620
+    Anchors = [akTop, akLeft, akBottom]
+    Color = cl3DLight
+    ColCount = 9
+    ColumnClickSorts = True
+    FixedCols = 1
+    FixedRows = 1
+    Options = [goFixedVertLine, goFixedHorzLine, goVertLine, goHorzLine, goRangeSelect, goRowSelect, goSmoothScroll]
+    RowCount = 1
+    TabOrder = 1
+    OnSelection = TabEquipSelection
+  end
+  object LabPrix: TLabel
+    Left = 650
+    Height = 20
+    Top = 120
+    Width = 24
+    Caption = 'Prix'
+    Font.Color = clWhite
+    ParentColor = False
+    ParentFont = False
+  end
+  object LabEnc: TLabel
+    Left = 790
+    Height = 20
+    Top = 120
+    Width = 90
+    Caption = 'Encombrement'
+    Font.Color = clWhite
+    ParentColor = False
+    ParentFont = False
+  end
+  object LabCap: TLabel
+    Left = 900
+    Height = 20
+    Top = 120
+    Width = 60
+    Caption = 'Capacite'
+    Font.Color = clWhite
+    ParentColor = False
+    ParentFont = False
+  end
+  object LabDispo: TLabel
+    Left = 650
+    Height = 20
+    Top = 190
+    Width = 90
+    Caption = 'Disponibilite'
+    Font.Color = clWhite
+    ParentColor = False
+    ParentFont = False
+  end
+  object LabLivre: TLabel
+    Left = 650
+    Height = 20
+    Top = 260
+    Width = 40
+    Caption = 'Livre'
+    Font.Color = clWhite
+    ParentColor = False
+    ParentFont = False
+  end
+  object AffLib: TEdit
+    Left = 650
+    Height = 28
+    Top = 75
+    Width = 420
+    Color = cl3DLight
+    ReadOnly = True
+    TabOrder = 2
+  end
+  object AffPrix: TEdit
+    Left = 650
+    Height = 28
+    Top = 142
+    Width = 120
+    Color = cl3DLight
+    ReadOnly = True
+    TabOrder = 3
+  end
+  object AffEnc: TEdit
+    Left = 790
+    Height = 28
+    Top = 142
+    Width = 90
+    Color = cl3DLight
+    ReadOnly = True
+    TabOrder = 4
+  end
+  object AffCap: TEdit
+    Left = 900
+    Height = 28
+    Top = 142
+    Width = 90
+    Color = cl3DLight
+    ReadOnly = True
+    TabOrder = 5
+  end
+  object AffDispo: TEdit
+    Left = 650
+    Height = 28
+    Top = 212
+    Width = 420
+    Color = cl3DLight
+    ReadOnly = True
+    TabOrder = 6
+  end
+  object AffLivre: TEdit
+    Left = 650
+    Height = 28
+    Top = 282
+    Width = 420
+    Color = cl3DLight
+    ReadOnly = True
+    TabOrder = 7
+  end
+end

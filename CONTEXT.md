@@ -1,4 +1,5 @@
 # Warhammer — Contexte projet
+**WINEQUIPEMENT (19/09/2026, valide par Nono a l ecran)** : `<Theme>` (RULES-LAB_190-199) sur les 175 objets V4, fenetre `winequipement.pas/.lfm` (liste, filtre theme et livre). Point de reprise : ajouter des objets a un personnage dans WinPersonnage (rien n existe encore), theme a poser aussi sur le catalogue V5 (32 objets).
 
 **EQUIPEMENTS V4 (19/09/2026, non teste en jeu)** : catalogue `DATA_TRAPPING` V4 saisi (175 objets, `RULES-TRAP_001`-`_175`, `WFRP4/BOOK_RULESBOOK.Xml`), 194 lignes de carriere sur 582 rattachees. Point de reprise : `A FAIRE.txt` (douteux, variantes (Q), objets absents), et tester le chargement V4 (`&amp;`, libelle `LIMITED`).
 

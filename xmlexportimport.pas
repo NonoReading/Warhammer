@@ -816,6 +816,10 @@ Procedure XmlExportBook(Livre: String; Langue: String);
               XmlContent.Add(XmlLigne(ConstXmlDisponibilite, PTrapping.Disponibilite));
               XmlContent.Add(XmlLigne(ConstXmlPrix, PTrapping.Prix));
               XmlContent.Add(XmlLigne(ConstXmlEncombrement, IntToStr(PTrapping.Encombrement)));
+              if PTrapping.Capacite <> 0 then
+                XmlContent.Add(XmlLigne(ConstXmlCapacite, IntToStr(PTrapping.Capacite)));
+              if PTrapping.Theme <> '' then
+                XmlContent.Add(XmlLigne(ConstXmlTheme, PTrapping.Theme));
 
               XmlContent.Add(XmlFinCode(ConstXmlTrapping));
             end;
@@ -2486,6 +2490,7 @@ Procedure XmlImport(FileName: String; OnlyPrimary: Boolean; OnlyCode: Boolean; C
                       // conteneurs/montures, PTrapping etant reutilise d'un tour de boucle a
                       // l'autre sans lui la valeur de l'entree precedente resterait collee
                       PTrapping.Capacite      := 0;
+                      PTrapping.Theme         := '';
                       PTraduction             := InitTrad(ConstPTrapping, PTrapping.CodeTrapping, '', PTrapping.Livre);
 
                       Node := XmlElement(NodeNv2.FirstChild);
@@ -2506,6 +2511,8 @@ Procedure XmlImport(FileName: String; OnlyPrimary: Boolean; OnlyCode: Boolean; C
                               PTrapping.Capacite      := StrToIntDef(RemoveQuotes(UTF8Encode(Node.TextContent)),0);
                             ConstXmlPrix:
                               PTrapping.Prix          := RemoveQuotes(UTF8Encode(Node.TextContent));
+                              ConstXmlTheme:
+                                PTrapping.Theme         := RemoveQuotes(UTF8Encode(Node.TextContent));
                           end;
 
                           Node := XmlElement(Node.NextSibling);

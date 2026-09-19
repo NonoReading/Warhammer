@@ -235,6 +235,7 @@ Const
       ConstXmlPrix                      = 'Price';
       ConstXmlEncombrement              = 'Encumbrance';
       ConstXmlCapacite                  = 'Carries';
+      ConstXmlTheme                     = 'Theme';
       ConstXmlQualite                   = 'Quality';
       ConstXmlMains                     = 'Hand';
       ConstXmlMunition                  = 'Ammunition';

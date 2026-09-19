@@ -4,6 +4,7 @@
 
 =========================================================================
 CORRECTIONS COURTES  (une ligne ou deux chacune)
+[AJOUT LE 19/09/2026] WINEQUIPEMENT : AJOUT D OBJETS A UN PERSONNAGE (WinPersonnage) A CONCEVOIR. Poser aussi <Theme> sur le catalogue V5 (32 objets, RULES-TRAP_01-32). Ancrage proportionnel de WinEquipement a ajouter (taille fixe aujourd hui).
 [AJOUT LE 19/09/2026] EQUIPEMENTS V4 (BOOK_RULESBOOK.Xml WFRP4) : CATALOGUE DATA_TRAPPING FAIT (175 objets,
 RULES-TRAP_001 a _175), 194 lignes de carriere rattachees sur 582. Reste, a traiter au cas par cas par Nono :
 lignes douteuses (magnifying glass, pen and ink, horse seul, oil lamp, hurricane lamp with oil,

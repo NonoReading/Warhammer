@@ -19,10 +19,9 @@
         <HasResources Value="True"/>
         <ResourceBaseClass Value="Form"/>
         <UnitName Value="WarhammerSource"/>
-        <IsVisibleTab Value="True"/>
         <EditorIndex Value="4"/>
-        <TopLine Value="1288"/>
-        <CursorPos X="40" Y="1299"/>
+        <TopLine Value="1289"/>
+        <CursorPos X="40" Y="1296"/>
         <UsageCount Value="200"/>
         <Loaded Value="True"/>
         <LoadedDesigner Value="True"/>
@@ -161,6 +160,12 @@
         <UsageCount Value="200"/>
       </Unit>
       <Unit>
+        <Filename Value="ancrageproportionnel.pas"/>
+        <IsPartOfProject Value="True"/>
+        <UnitName Value="AncrageProportionnel"/>
+        <UsageCount Value="20"/>
+      </Unit>
+      <Unit>
         <Filename Value="winraces.pas"/>
         <IsPartOfProject Value="True"/>
         <ComponentName Value="WinRace"/>
@@ -289,6 +294,21 @@
         <UsageCount Value="200"/>
       </Unit>
       <Unit>
+        <Filename Value="winequipement.pas"/>
+        <IsPartOfProject Value="True"/>
+        <ComponentName Value="WinEquipements"/>
+        <HasResources Value="True"/>
+        <ResourceBaseClass Value="Form"/>
+        <UnitName Value="WinEquipement"/>
+        <IsVisibleTab Value="True"/>
+        <EditorIndex Value="6"/>
+        <TopLine Value="170"/>
+        <CursorPos X="33" Y="195"/>
+        <UsageCount Value="20"/>
+        <Loaded Value="True"/>
+        <LoadedDesigner Value="True"/>
+      </Unit>
+      <Unit>
         <Filename Value="chargearmebonus.pas"/>
         <IsPartOfProject Value="True"/>
         <UnitName Value="ChargeArmeBonus"/>
@@ -301,7 +321,7 @@
         <Filename Value="chargemetierequipement.pas"/>
         <IsPartOfProject Value="True"/>
         <UnitName Value="ChargeMetierEquipement"/>
-        <EditorIndex Value="6"/>
+        <EditorIndex Value="8"/>
         <CursorPos X="26" Y="11"/>
         <UsageCount Value="203"/>
         <Loaded Value="True"/>
@@ -417,7 +437,7 @@
         <Filename Value="chargepersonnage.pas"/>
         <IsPartOfProject Value="True"/>
         <UnitName Value="ChargePersonnage"/>
-        <EditorIndex Value="5"/>
+        <EditorIndex Value="7"/>
         <TopLine Value="1383"/>
         <CursorPos Y="1394"/>
         <UsageCount Value="201"/>
@@ -523,7 +543,7 @@
         <HasResources Value="True"/>
         <ResourceBaseClass Value="Form"/>
         <UnitName Value="WinLivre"/>
-        <EditorIndex Value="7"/>
+        <EditorIndex Value="9"/>
         <TopLine Value="1192"/>
         <CursorPos X="49" Y="1202"/>
         <UsageCount Value="200"/>
@@ -697,10 +717,11 @@
       <Unit>
         <Filename Value="C:\lazarus\lcl\grids.pas"/>
         <UnitName Value="Grids"/>
-        <EditorIndex Value="-1"/>
-        <TopLine Value="10338"/>
-        <CursorPos X="11" Y="10346"/>
+        <EditorIndex Value="5"/>
+        <TopLine Value="3181"/>
+        <CursorPos X="31" Y="3190"/>
         <UsageCount Value="83"/>
+        <Loaded Value="True"/>
       </Unit>
       <Unit>
         <Filename Value="C:\lazarus\lcl\lclmessageglue.pas"/>
@@ -1247,7 +1268,7 @@
         <DefaultSyntaxHighlighter Value="LFM"/>
       </Unit>
     </Units>
-    <JumpHistory HistoryIndex="24">
+    <JumpHistory HistoryIndex="26">
       <Position>
         <Filename Value="chargeconstantes.pas"/>
         <Caret Line="377" Column="25" TopLine="365"/>
@@ -1347,6 +1368,14 @@
       <Position>
         <Filename Value="chargepersonnage.pas"/>
         <Caret Line="837" TopLine="820"/>
+      </Position>
+      <Position>
+        <Filename Value="warhammersource.pas"/>
+        <Caret Line="1295" Column="40" TopLine="1288"/>
+      </Position>
+      <Position>
+        <Filename Value="warhammersource.pas"/>
+        <Caret Line="1296" Column="40" TopLine="1289"/>
       </Position>
     </JumpHistory>
     <RunParams>
