@@ -1,5 +1,7 @@
 # Warhammer — Contexte projet
 
+**ACCESSOIRES D ARME (19/09/2026, valide par Nono, commit ef9596b)** : voir §2 « Un accessoire est une fabrication » (`RangeBonus`, `WeaponQuality`, Accurate +10%). Reste : Bayonet, affichage WinPersonnage. Decisions du jour : « porte par » et groupes en pause (bonus d encombrement des montures conserve) ; creatures adverses (Frostfiend, Djinn) non gerees ; Nations of Mankind = livre de fan (OFFICIAL=2, confirme).
+
 **PRIX NORMALISES EN CO/PA/SB ET MONTURES DE NATIONS OF MANKIND (19/09/2026, valide par Nono)** : (1) Toutes les balises `<Price>` de `DATABASE/` (WFRP4 et WFRP5, ~934 valeurs) sont ecrites en codes de monnaie `CO` (couronne d or), `PA` (pistole d argent), `SB` (sou de laiton), separes par une espace : `460CO`, `10PA`, `2PA 6SB`, `4CO 5PA`. Change 1 CO = 20 PA = 240 SB. Le champ `Prix` reste une simple chaine, aucun parseur : rien ne calcule sur les prix. Prix `-`, `/`, `n/a`, `ND` : balise omise ; `Varies` garde son texte (RULES-TRAP_025/058, _096/130). Piege : `SC` dans les munitions du Rulebook (`4SC`, `2SC`, `3SC`) valait des SOUS (`4d`, `2d`, `3d`) et non des pistoles ; verifie dans `LIVRES/*.txt`. Corrections d OCR faites par identifiant (Leadbelcher Gun 14CO, Gun Axe 8CO et Gun Halberd 10CO decision de Nono, Ghlaith 5CO 3PA decision de Nono...). (2) Affichage traduit : `TraduirePrix` (`chargetexte.pas`) lit les codes et pose le libelle `RULES-LAB_222/223/224` (EN `GC/SS/BP`, FR `CO/PA/SB`, dans les deux INTERFACE) ; appelee par chargetrapping, chargearme, chargearmure, chargearmuresimplifie, winequipement, winarmor, winweapon, winlivre. Un morceau non reconnu s affiche tel quel. (3) Montures : `DATA_TRAPPING` `NATIO-TRAP_01` a `_08` dans `BOOK_NATIONS_OF_MANKIND.Xml` (Bretonnian Destrier, Kislev Light Warhorse, Kislev Trained Bear, Kislev Warbear, Riding Camel, War Camel, War Elephant, Norscan Mammoth ; theme `RULES-LAB_195`, `<Carries>` = capacite de charge, disponibilite Exotic). Profil (M a W) et traits en COMMENTAIRE XML, aucun champ ne les porte. Un trait de creature est un talent marque `<Trait>1</Trait>` (§2.15) : les traits des montures s y brancheront. Point de reprise : `A FAIRE.txt` (animaux d Enemy in Shadows p.24, champs profil et traits de `StructureTrapping`, Riding Bull et Estalian War Bull sans prix).
 
 **MENU PRINCIPAL (19/09/2026, valide par Nono, commits 2ca3e67 et cacf0a9)** : `TabLivre` gagne 7 colonnes de comptage par livre (C, T, Wp, Ar, E, Sp, Tr ; compteurs `LivreNbXxx` de `chargeconstantes.pas`, poses par `ImporterUnLivre`) avec bulle d en-tete (`TabLivreMouseMove`, `RULES-LAB_211` a `_221`). La colonne Bibliotheque garde 4 boutons (Race, Metier, Competence, Talent) ; Arme, Armure, Equipement, Sort et Mutations sont dans le tableau `TabBibliotheque` (cree en code dans FormCreate, `RemplirTabBibliotheque`, double-clic = `TabBibliothequeDblClick` ; ancrage recalcule dans `AjustePositionFenetre`, `Top = ButtonTalent.Top + 129`). Nouvelle fenetre `winmutationcatalogue.pas` (sans .lfm, catalogue `ListCorruptionTable`). Bug corrige : `NbTrapping` (et `NbTrait`, `NbTraitOption`, `NbSortTalent`, `NbCareerBonus*`) n etaient pas remis a zero dans `ChargerLivre(true)`. Colonne `Tr` = choix d ethnie de Nations of Mankind seulement (les traits de creature sont des talents, 2.15). DECIDES PAR NONO : pas de fenetre pour Traits, Regles ni Nations (Nation = notion du fan book, pas officielle). Rien en cours ; idees restantes : filtre par livre et ancrage proportionnel pour `winmutationcatalogue`.
@@ -7134,9 +7136,14 @@ identifiants uniques, libellés sans collision, toutes les qualités et compéte
   avant de conclure, ou ne pas conclure.
 - **Un accessoire est une fabrication.** Barrel Extension, Bayonet et Telescopic Sight sont
   entrés en `DATA_CRAFTMANSHIP` plutôt qu'en table nouvelle : un accessoire se monte sur
-  l'arme d'un personnage. Ils sont **descriptifs** — le `Modifier` d'une fabrication n'est
-  branché sur aucun calcul (aucun code `QUALITY_` référencé dans le corpus, `FabricationDetail`
-  sans appelant). Item ouvert dans `A FAIRE.txt`.
+  l'arme d'un personnage. **Effectifs depuis le 19/09/2026 (validé par Nono)** : deux balises
+  facultatives sur une fabrication, `<RangeBonus>` (ajouté à la portée, Barrel Extension = 20) et
+  `<WeaponQuality>` (codes de qualités d'arme ajoutées, Telescopic Sight = `RULES-WEAPB16,
+  RULES-WEAPB14`), lues par `chargefabrication.pas` (`FabricationPortee`, `FabricationQualitesArme`)
+  et appliquées dans les DEUX blocs armes de `pdfpersonnage.pas`. Accurate (`BonusAccurate`) ajoute
+  +10 au pourcentage de toute arme qui l'a (catalogue ou accessoire). Bayonet reste descriptif
+  (change la compétence de l'arme). WinPersonnage n'affiche pas ces bonus. Le `Modifier` texte
+  d'une fabrication reste branché sur aucun calcul.
 - **La règle « l'officiel gagne » ne s'applique PAS aux objets.** Quatre armes portent le nom
   d'une arme qu'*Up in Arms* décrit déjà autrement (Warhammer, Scimitar, Saber/Sabre, Bill).
   Décision Nono, 04/09 : **les deux coexistent**, sous des noms distincts (règle de nommage
