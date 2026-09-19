@@ -5392,3 +5392,6 @@ Fichiers modifies : chargeconstantes.pas, chargefabrication.pas, chargepersonnag
 19/09/2026 - PDF : QUALITE DES OBJETS DIVERS (VALIDE PAR NONO)
 PdfDiversLibelle (pdfpersonnage.pas) ajoute les fabrications entre parentheses apres le nom (Page 1 et Feldo2P) ; le marqueur RULES-QUALITY_AJOUT s affiche (Q), la colonne etant etroite. Armes/armures inchangees.
 Fichiers modifies : pdfpersonnage.pas, Log.txt, A FAIRE.txt.
+
+19/09/2026 - ANCRAGE : WINPERSONNAGE ET AUTRES FENETRES VALIDES
+Nono valide l ancrage de WinPersonnage (moteur AjustePositionTables, CONTEXT.md 2.64) et des fenetres sans ancrage proportionnel. Chantier clos, en-tete de 2.64 et A FAIRE.txt mis a jour.

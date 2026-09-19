@@ -9865,7 +9865,7 @@ de la déclaration mis à jour pour refléter les deux usages.
 (variables locales inutilisées, `DessinFinColD` non utilisé depuis le §2.60). ✅ **Validé par
 Nono le 12/09/2026.**
 
-### 2.64 Ancrage des contrôles, WinPersonnage - en pause (12/09/2026)
+### 2.64 Ancrage des contrôles, WinPersonnage - validé par Nono le 19/09/2026, chantier clos (était en pause depuis le 12/09/2026)
 
 **Origine.** Demande de Nono du 05/09/2026 (`A FAIRE.txt`) : les fenêtres sont en coordonnées
 fixes, redimensionner ne redistribue rien. Nono a choisi WinPersonnage en premier - la fenêtre

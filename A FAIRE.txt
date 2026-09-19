@@ -23,10 +23,10 @@ libelle LIMITED affiche "Scarce".
 [19/09/2026] VARIANTES (Q) DES EQUIPEMENTS V4 : 8 lignes rattachees avec le suffixe (Q) colle au code (RULES-TRAP_017/023/029/034 (Q) = Clothing/Hat/Robes/Uniform), comme pour les armes et armures. FAIT le 19/09/2026 (valide) : (Q) = fabrication marqueur RULES-QUALITY_AJOUT, voir Log.txt. FAIT le 19/09/2026 (valide) : PDF, qualite des Divers entre parentheses, (Q) pour le marqueur. RESTE : marqueur encore ecrit "Quality to add" dans le bloc Fabrication des armes/armures, doublon avec le suffixe "de qualite" du catalogue. Ancienne decision : garder (Q) pour l instant, mais A REVOIR pour un systeme different (idee : (Q) = choix de qualite a la creation, remplace par la qualite choisie parmi DATA_CRAFTMANSHIP ; cf. CONTEXT.md 2.77 suite 4, chantier equipement/avancements en pause). Non rattaches : clothes(Q), cape(Q), luxurious costume (Q), elegant clothes (Q)... (a trancher au cas par cas).
 
 =========================================================================
-[AJOUT LE 19/09/2026] ANCRAGE PROPORTIONNEL : LES AUTRES FENETRES NE L ONT PAS. Fait et valide sur les
-sept fenetres de base de donnees (CONTEXT.md 2.83, unite ancrageproportionnel.pas). A etendre si Nono le
-veut : WinSpecialisation, WinFabrication, WinMutation, WinLivre, WinCreation. WinPersonnage garde son
-propre moteur (CONTEXT.md 2.64, en pause).
+[AJOUT LE 19/09/2026] ANCRAGE PROPORTIONNEL : valide sur les sept fenetres de base de donnees (CONTEXT.md 2.83, unite
+ancrageproportionnel.pas) ; les autres fenetres (WinSpecialisation, WinFabrication, WinMutation, WinLivre,
+WinCreation) jugees valides en l etat par Nono le 19/09/2026, rien a faire pour l instant. WinPersonnage garde son
+propre moteur (CONTEXT.md 2.64), valide par Nono le 19/09/2026 : chantier clos.
 
 
 [CORRIGE LE 18/09/2026, TESTE EN JEU ET VALIDE PAR NONO - VOIR CONTEXT.md 2.82]
@@ -351,7 +351,7 @@ TalentObstine) - reste TalentHaineSacree (RULES-T0070) : verifie a cette occasio
 utilisee, pas touchee. Si un jour ce talent est lui aussi generalise en <Effet>, verifier au
 meme moment que TalentHaineSacree ne reste pas un cinquieme "presque mort" oublie.
 
-ANCRAGE DES CONTROLES DANS LES FENETRES - MIS EN PAUSE PAR NONO LE 12/09/2026, PLUS PROFOND
+ANCRAGE DES CONTROLES DANS LES FENETRES - WINPERSONNAGE VALIDE PAR NONO LE 19/09/2026 (CHANTIER CLOS, bloc a distiller au prochain menage) ; ETAIT EN PAUSE DEPUIS LE 12/09/2026, PLUS PROFOND
 QUE PREVU. Demande d origine le 05/09/2026. Commence sur WinPersonnage (voir CONTEXT.md 2.64) :
 OnResize branche sur AjustePositionTables (moteur de positionnement maison deja existant,
 utilise par les cases Xp/Calcul), plus trois bugs trouves et corriges au passage (conflit
