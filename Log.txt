@@ -5395,3 +5395,8 @@ Fichiers modifies : pdfpersonnage.pas, Log.txt, A FAIRE.txt.
 
 19/09/2026 - ANCRAGE : WINPERSONNAGE ET AUTRES FENETRES VALIDES
 Nono valide l ancrage de WinPersonnage (moteur AjustePositionTables, CONTEXT.md 2.64) et des fenetres sans ancrage proportionnel. Chantier clos, en-tete de 2.64 et A FAIRE.txt mis a jour.
+
+19/09/2026 - DWARF PLAYERS GUIDE : LIVRE CREE, LOT 1 OBJETS (VALIDE PAR NONO)
+Nouveau livre DATABASE/WFRP4/BOOK_DWARF_PLAYERS_GUIDE.Xml (code DWARF, officiel, COMPLETE=0), declare dans INI.TXT (BOOKWFRP4). Chapitre Steel and Fire p.93-97 : 9 armes de melee, 11 a distance et explosifs, 7 armures, 9 objets, qualite Salvo (DWARF-WEAPB01). Armes deja presentes dans ARCH1 avec un autre profil suffixees (DPG). Gromril : Durable/Fine laisses a la fabrication. Verifie : XML valide, 37 identifiants uniques, references resolues.
+Appris : Scarce = DISPO_LIMITED, n/a = DISPO_UNIQUE, 1/- = 1PA.
+Fichiers modifies : BOOK_DWARF_PLAYERS_GUIDE.Xml, INI.TXT, Log.txt, CONTEXT.md, A FAIRE.txt.

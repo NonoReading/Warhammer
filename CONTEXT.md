@@ -6980,6 +6980,8 @@ Ce qui a de la matière, par ordre de rendement :
 | **Nations of Mankind** | 30 carrières, 16 talents, 7 domaines de magie — **lots 1 et 2 faits, voir §2.37** |
 | **Unofficial Grimoire 1.2** | ~215 sorts sur 16 domaines (Élémentalisme, Nécromancie, Nurgle/Slaanesh/Tzeentch, Warp) + 3 carrières de lanceur |
 | **Dwarf Player's Guide** | 9 carrières nommées + ~23 autres blocs à extraire, 9 blocs d'armure, ethnies naines |
+
+> **Mise à jour 19/09/2026 — Dwarf Player's Guide, lot 1 fait** : `DATABASE/WFRP4/BOOK_DWARF_PLAYERS_GUIDE.Xml` (code `DWARF`, `COMPLETE=0`, déclaré dans `INI.TXT`) porte les objets p.93-97 : 9 armes de mêlée, 11 à distance/explosifs, 7 armures, 9 objets, qualité `DWARF-WEAPB01` Salvo. Conventions dans le commentaire du fichier (Scarce=LIMITED, n/a=UNIQUE, suffixe « (DPG) » quand ARCH1 a le même nom avec un autre profil, Durable/Fine du gromril = fabrication). **Reste** : armes de siège (qualité Crewed à créer), carrières (~30 blocs), talents, sorts, runes, ethnies. Suivi de ce lot : `A FAIRE.txt`.
 | **Deft Steps, Light Fingers** | 9 carrières (prêtres de Ranald et Taal, Forger, Poacher, Gamekeeper) |
 | **Princes of Ulthuan** | 4 carrières hauts elfes (White Lion, Swordmaster, Shadow Warrior, Seaguard) |
 | Lots de sorts purs | Reikland Miscellanea (50, dont Hedgecraft/Witchcraft), Sullasara's (50), Blood and Bramble (48), Tribes and Tribulations (30), Temple of Spite (26, elfes noirs) |

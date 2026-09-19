@@ -1,0 +1,419 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<DATA_BOOK>
+<CODE_BOOK>"DWARF"</CODE_BOOK>
+<BOOK>"BOOK DWARF PLAYERS GUIDE"</BOOK>
+<language>"ENGLISH"</language>
+<VERSION>"WFRP4"</VERSION>
+<OFFICIAL>"1"</OFFICIAL>
+<COMPLETE>"0"</COMPLETE>
+<DISCLAIMER>"This is the Warhammer Fantasy Roleplay 4th Edition Dwarf Player&apos;s Guide, published by Cubicle 7. Warhammer Fantasy Roleplay 4th Edition (c) Copyright Games Workshop Limited 2023. Warhammer Fantasy Roleplay 4th Edition, the Warhammer Fantasy Roleplay 4th Edition logo, GW, Games Workshop, Warhammer, The Game of Fantasy Battles, the twin-tailed comet logo, and all associated logos, illustrations, images, names, creatures, races, vehicles, locations, weapons, characters, and the distinctive likeness thereof, are either (R) or TM, and/or (c) Games Workshop Limited, variably registered around the world, and used under licence. Cubicle 7 Entertainment and the Cubicle 7 Entertainment logo are trademarks of Cubicle 7 Entertainment Limited. All rights reserved."</DISCLAIMER>
+  <!-- LOT 1 (19/09/2026) : le chapitre "Steel and Fire" (p.93-97) - armes, armures, lumieres,
+       outils et reliques. COMPLETE=0 : carrieres, talents, sorts, runes, ethnies et armes de
+       siege (Crewed) restent a faire, voir CONTEXT.md. Numerotation a partir de 001 par livre
+       (decision Nono du 03/09/2026).
+       CONVENTIONS DE SAISIE : "Scarce" = RULES-DISPO_LIMITED (libelle affiche Scarce) ; "n/a" =
+       RULES-DISPO_UNIQUE, comme HELFG ; 1/- = 1PA, 1/6 = 1PA 6SB, GC = CO ; Average = WEAPR_MID ;
+       "Dwarf X (DPG)" = arme deja presente dans ARCH1 avec un AUTRE profil, suffixe pour que
+       WinWeapon ne montre pas deux lignes identiques quand les deux livres sont choisis ;
+       Durable 4 et Fine 1 du gromril sont des qualites de FABRICATION, pas de catalogue (meme
+       parti que HELFG) ; penalites : -10% Perception = ARMOB_06, -20% = ARMOB_07, -10 Stealth =
+       ARMOB_05 ; les degats "+SB+n" prennent BATTR_S ; ** Ablaze = WEAPB29.
+       DEJA AU CATALOGUE, NON REDECLARES : Candle (dozen) RULES-TRAP_127, Lantern RULES-TRAP_141,
+       Storm Lantern RULES-TRAP_142 (la portee d eclairage du livre n a pas de champ), Trade Tools
+       RULES-TRAP_101, Workshop RULES-TRAP_102. Les Trade Tools (Brewer/Mason) sont des textes. -->
+<DATA_LABEL>
+<Label language="ENGLISH">
+<Text name="DWARF-BOOK DWARF PLAYERS GUIDE">"Dwarf Player&apos;s Guide"</Text>
+</Label>
+<Label language="FRANCAIS">
+<Text name="DWARF-BOOK DWARF PLAYERS GUIDE">"Dwarf Player&apos;s Guide"</Text>
+</Label>
+</DATA_LABEL>
+<DATA_WEAPON_BONUS>
+<BonusMalus id="DWARF-WEAPB01">
+<Description language="ENGLISH">"Salvo"</Description>
+<Explanation language="ENGLISH">"A Salvo weapon can be fired a number of times equal to its Rating before it needs to be reloaded. When shooting a Salvo weapon, you can choose to fire a single shot (reducing Salvo by 1), or a batch of missiles (reducing Salvo by the number of shots fired). Each missile fired after the first suffers a cumulative -10 on its Ranged Test. The Reload Rating of a Salvo weapon indicates the SLs required to increase its Salvo by 1. If a Dwarf Salvo weapon Misfires on a roll of 00, the crew suffers a number of hits equal to the weapon&apos;s remaining Salvo Rating (minimum 1)."</Explanation>
+<Short language="ENGLISH">"fire several missiles per Reload"</Short>
+<Modifier>"+"</Modifier>
+</BonusMalus>
+</DATA_WEAPON_BONUS>
+<DATA_WEAPON>
+<Weapon id="DWARF-COMB_BASE_01">
+<Description language="ENGLISH">"Dwarf Axe"</Description>
+<Skill>"RULES-COMPCOMB_BASE"</Skill>
+<Damage>"+(BATTR_S)+4"</Damage>
+<Availability>"RULES-DISPO_COMMON"</Availability>
+<Reach>"RULES-WEAPR_MID"</Reach>
+<Price>"1CO"</Price>
+<Encumbrance>"1"</Encumbrance>
+<Quality>"RULES-WEAPB30"</Quality>
+<Hand>"1"</Hand>
+<Ammunition>"0"</Ammunition>
+</Weapon>
+<Weapon id="DWARF-COMB_BASE_02">
+<Description language="ENGLISH">"Dwarf Warhammer"</Description>
+<Skill>"RULES-COMPCOMB_BASE"</Skill>
+<Damage>"+(BATTR_S)+4"</Damage>
+<Availability>"RULES-DISPO_COMMON"</Availability>
+<Reach>"RULES-WEAPR_MID"</Reach>
+<Price>"1CO"</Price>
+<Encumbrance>"1"</Encumbrance>
+<Quality>"RULES-WEAPB04"</Quality>
+<Hand>"1"</Hand>
+<Ammunition>"0"</Ammunition>
+</Weapon>
+<Weapon id="DWARF-COMB_FLEAU_01">
+<Description language="ENGLISH">"Whirling blades of death"</Description>
+<Skill>"RULES-COMPCOMB_FLEAU"</Skill>
+<Damage>"+(BATTR_S)+5"</Damage>
+<Availability>"RULES-DISPO_RARE"</Availability>
+<Reach>"RULES-WEAPR_LONG"</Reach>
+<Price>"5CO"</Price>
+<Encumbrance>"2"</Encumbrance>
+<Quality>"RULES-WEAPB09,RULES-WEAPB30,RULES-WEAPB21,RULES-WEAPB25,RULES-WEAPB01"</Quality>
+<Hand>"1"</Hand>
+<Ammunition>"0"</Ammunition>
+</Weapon>
+<Weapon id="DWARF-COMB_2M_01">
+<Description language="ENGLISH">"Dwarf Greataxe"</Description>
+<Skill>"RULES-COMPCOMB_2M"</Skill>
+<Damage>"+(BATTR_S)+6"</Damage>
+<Availability>"RULES-DISPO_COMMON"</Availability>
+<Reach>"RULES-WEAPR_LONG"</Reach>
+<Price>"4CO"</Price>
+<Encumbrance>"3"</Encumbrance>
+<Quality>"RULES-WEAPB30,RULES-WEAPB21,RULES-WEAPB25"</Quality>
+<Hand>"2"</Hand>
+<Ammunition>"0"</Ammunition>
+</Weapon>
+<Weapon id="DWARF-COMB_2M_02">
+<Description language="ENGLISH">"Dwarf Greathammer"</Description>
+<Skill>"RULES-COMPCOMB_2M"</Skill>
+<Damage>"+(BATTR_S)+7"</Damage>
+<Availability>"RULES-DISPO_COMMON"</Availability>
+<Reach>"RULES-WEAPR_MID"</Reach>
+<Price>"4CO"</Price>
+<Encumbrance>"3"</Encumbrance>
+<Quality>"RULES-WEAPB10,RULES-WEAPB04"</Quality>
+<Hand>"2"</Hand>
+<Ammunition>"0"</Ammunition>
+</Weapon>
+<Weapon id="DWARF-COMB_2M_03">
+<Description language="ENGLISH">"Dwarf Pick"</Description>
+<Skill>"RULES-COMPCOMB_2M"</Skill>
+<Damage>"+(BATTR_S)+6"</Damage>
+<Availability>"RULES-DISPO_COMMON"</Availability>
+<Reach>"RULES-WEAPR_MID"</Reach>
+<Price>"1CO"</Price>
+<Encumbrance>"3"</Encumbrance>
+<Quality>"RULES-WEAPB10,RULES-WEAPB12"</Quality>
+<Hand>"2"</Hand>
+<Ammunition>"0"</Ammunition>
+</Weapon>
+<Weapon id="DWARF-COMB_2M_04">
+<Description language="ENGLISH">"Steam Drill"</Description>
+<Skill>"RULES-COMPCOMB_2M"</Skill>
+<Damage>"+(BATTR_S)+6"</Damage>
+<Availability>"RULES-DISPO_RARE"</Availability>
+<Reach>"RULES-WEAPR_MID"</Reach>
+<Price>"12CO"</Price>
+<Encumbrance>"3"</Encumbrance>
+<Quality>"RULES-WEAPB21,RULES-WEAPB12"</Quality>
+<Hand>"2"</Hand>
+<Ammunition>"0"</Ammunition>
+</Weapon>
+<Weapon id="DWARF-COMB_BASE_03">
+<Description language="ENGLISH">"Cog Axe"</Description>
+<Skill>"RULES-COMPCOMB_BASE"</Skill>
+<Damage>"+(BATTR_S)+4"</Damage>
+<Availability>"RULES-DISPO_EXOTIC"</Availability>
+<Reach>"RULES-WEAPR_MID"</Reach>
+<Price>"15CO"</Price>
+<Encumbrance>"1"</Encumbrance>
+<Quality>"RULES-WEAPB30,RULES-WEAPB22,RULES-WEAPB11"</Quality>
+<Hand>"1"</Hand>
+<Ammunition>"0"</Ammunition>
+</Weapon>
+<Weapon id="DWARF-COMB_BASE_04">
+<Description language="ENGLISH">"Steam Gauntlet"</Description>
+<Skill>"RULES-COMPCOMB_BASE"</Skill>
+<Damage>"+(BATTR_S)+7"</Damage>
+<Availability>"RULES-DISPO_EXOTIC"</Availability>
+<Reach>"RULES-WEAPR_PERSO"</Reach>
+<Price>"40CO"</Price>
+<Encumbrance>"1"</Encumbrance>
+<Quality>"RULES-WEAPB04,RULES-WEAPB18 1"</Quality>
+<Hand>"1"</Hand>
+<Ammunition>"0"</Ammunition>
+</Weapon>
+<Weapon id="DWARF-PROJ_POUDRE_01">
+<Description language="ENGLISH">"Dwarf Handgun (DPG)"</Description>
+<Skill>"RULES-COMPPROJ_POUDRE"</Skill>
+<Damage>"+10"</Damage>
+<Availability>"RULES-DISPO_LIMITED"</Availability>
+<Reach>"50"</Reach>
+<Price>"6CO"</Price>
+<Encumbrance>"2"</Encumbrance>
+<Quality>"RULES-WEAPB02,RULES-WEAPB10,RULES-WEAPB12,RULES-WEAPB22,RULES-WEAPB23 3"</Quality>
+<Hand>"2"</Hand>
+<Ammunition>"0"</Ammunition>
+</Weapon>
+<Weapon id="DWARF-PROJ_POUDRE_02">
+<Description language="ENGLISH">"Dwarf Pistol (DPG)"</Description>
+<Skill>"RULES-COMPPROJ_POUDRE"</Skill>
+<Damage>"+10"</Damage>
+<Availability>"RULES-DISPO_RARE"</Availability>
+<Reach>"20"</Reach>
+<Price>"12CO"</Price>
+<Encumbrance>"0"</Encumbrance>
+<Quality>"RULES-WEAPB02,RULES-WEAPB10,RULES-WEAPB12,RULES-WEAPB22,RULES-WEAPB13,RULES-WEAPB23 1"</Quality>
+<Hand>"1"</Hand>
+<Ammunition>"0"</Ammunition>
+</Weapon>
+<Weapon id="DWARF-PROJ_ARB_01">
+<Description language="ENGLISH">"Dwarf Crossbow (DPG)"</Description>
+<Skill>"RULES-COMPPROJ_ARB"</Skill>
+<Damage>"+10"</Damage>
+<Availability>"RULES-DISPO_COMMON"</Availability>
+<Reach>"60"</Reach>
+<Price>"5CO"</Price>
+<Encumbrance>"2"</Encumbrance>
+<Quality>"RULES-WEAPB12,RULES-WEAPB23 1"</Quality>
+<Hand>"2"</Hand>
+<Ammunition>"0"</Ammunition>
+</Weapon>
+<Weapon id="DWARF-PROJ_ING_01">
+<Description language="ENGLISH">"Drakegun"</Description>
+<Skill>"RULES-COMPPROJ_ING"</Skill>
+<Damage>"+12"</Damage>
+<Availability>"RULES-DISPO_RARE"</Availability>
+<Reach>"30"</Reach>
+<Price>"20CO"</Price>
+<Encumbrance>"3"</Encumbrance>
+<Quality>"RULES-WEAPB02,RULES-WEAPB10,RULES-WEAPB24,RULES-WEAPB22,RULES-WEAPB23 4,RULES-WEAPB29"</Quality>
+<Hand>"2"</Hand>
+<Ammunition>"0"</Ammunition>
+</Weapon>
+<Weapon id="DWARF-PROJ_ING_02">
+<Description language="ENGLISH">"Trollhammer Torpedo"</Description>
+<Skill>"RULES-COMPPROJ_ING"</Skill>
+<Damage>"+14"</Damage>
+<Availability>"RULES-DISPO_EXOTIC"</Availability>
+<Reach>"40"</Reach>
+<Price>"5CO"</Price>
+<Encumbrance>"1"</Encumbrance>
+<Quality>"RULES-WEAPB02,RULES-WEAPB24,RULES-WEAPB21,RULES-WEAPB23 6,RULES-WEAPB29"</Quality>
+<Hand>"1"</Hand>
+<Ammunition>"0"</Ammunition>
+</Weapon>
+<Weapon id="DWARF-PROJ_ING_03">
+<Description language="ENGLISH">"Drakefire Pistol (DPG)"</Description>
+<Skill>"RULES-COMPPROJ_ING"</Skill>
+<Damage>"+11"</Damage>
+<Availability>"RULES-DISPO_EXOTIC"</Availability>
+<Reach>"20"</Reach>
+<Price>"25CO"</Price>
+<Encumbrance>"1"</Encumbrance>
+<Quality>"RULES-WEAPB02,RULES-WEAPB10,RULES-WEAPB24,RULES-WEAPB22,RULES-WEAPB13,RULES-WEAPB23 4,RULES-WEAPB29"</Quality>
+<Hand>"1"</Hand>
+<Ammunition>"0"</Ammunition>
+</Weapon>
+<Weapon id="DWARF-PROJ_ING_04">
+<Description language="ENGLISH">"Repeating Dwarf Handgun"</Description>
+<Skill>"RULES-COMPPROJ_ING"</Skill>
+<Damage>"+10"</Damage>
+<Availability>"RULES-DISPO_EXOTIC"</Availability>
+<Reach>"50"</Reach>
+<Price>"10CO"</Price>
+<Encumbrance>"3"</Encumbrance>
+<Quality>"RULES-WEAPB02,RULES-WEAPB10,RULES-WEAPB24,RULES-WEAPB12,RULES-WEAPB22,RULES-WEAPB23 4,RULES-WEAPB03 3"</Quality>
+<Hand>"2"</Hand>
+<Ammunition>"0"</Ammunition>
+</Weapon>
+<Weapon id="DWARF-PROJ_ING_05">
+<Description language="ENGLISH">"Grudge-raker"</Description>
+<Skill>"RULES-COMPPROJ_ING"</Skill>
+<Damage>"+10"</Damage>
+<Availability>"RULES-DISPO_EXOTIC"</Availability>
+<Reach>"30"</Reach>
+<Price>"15CO"</Price>
+<Encumbrance>"2"</Encumbrance>
+<Quality>"RULES-WEAPB02,RULES-WEAPB15 1,RULES-WEAPB10,RULES-WEAPB24,RULES-WEAPB12,RULES-WEAPB22,RULES-WEAPB23 3,DWARF-WEAPB01 2"</Quality>
+<Hand>"2"</Hand>
+<Ammunition>"0"</Ammunition>
+</Weapon>
+<Weapon id="DWARF-PROJ_EXPLO_01">
+<Description language="ENGLISH">"Blasting Charge"</Description>
+<Skill>"RULES-COMPPROJ_EXPLO"</Skill>
+<Damage>"+12"</Damage>
+<Availability>"RULES-DISPO_LIMITED"</Availability>
+<Reach>"(BATTR_S)"</Reach>
+<Price>"2CO"</Price>
+<Encumbrance>"0"</Encumbrance>
+<Quality>"RULES-WEAPB15 2,RULES-WEAPB24,RULES-WEAPB21,RULES-WEAPB22,RULES-WEAPB29"</Quality>
+<Hand>"1"</Hand>
+<Ammunition>"0"</Ammunition>
+</Weapon>
+<Weapon id="DWARF-PROJ_EXPLO_02">
+<Description language="ENGLISH">"Cinderblast Bomb (DPG)"</Description>
+<Skill>"RULES-COMPPROJ_EXPLO"</Skill>
+<Damage>"+10"</Damage>
+<Availability>"RULES-DISPO_EXOTIC"</Availability>
+<Reach>"(BATTR_S)x2"</Reach>
+<Price>"3CO"</Price>
+<Encumbrance>"0"</Encumbrance>
+<Quality>"RULES-WEAPB15 5,RULES-WEAPB24,RULES-WEAPB21,RULES-WEAPB22"</Quality>
+<Hand>"1"</Hand>
+<Ammunition>"0"</Ammunition>
+</Weapon>
+<Weapon id="DWARF-PROJ_LANC_01">
+<Description language="ENGLISH">"Dwarf Throwing Axe"</Description>
+<Skill>"RULES-COMPPROJ_LANC"</Skill>
+<Damage>"+(BATTR_S)+4"</Damage>
+<Availability>"RULES-DISPO_COMMON"</Availability>
+<Reach>"(BATTR_S)x2"</Reach>
+<Price>"1CO"</Price>
+<Encumbrance>"1"</Encumbrance>
+<Quality>"RULES-WEAPB30"</Quality>
+<Hand>"1"</Hand>
+<Ammunition>"0"</Ammunition>
+</Weapon>
+</DATA_WEAPON>
+<DATA_ARMOR>
+<Armor id="DWARF-ARMO_01">
+<Description language="ENGLISH">"Gromril Breastplate"</Description>
+<Availability>"RULES-DISPO_UNIQUE"</Availability>
+<Price>"1280CO"</Price>
+<Encumbrance>"3"</Encumbrance>
+<Quality>"RULES-ARMOB_02,RULES-ARMOB_04"</Quality>
+<Location>"RULES-ARMOL_BODY"</Location>
+<ArmorPoint>"3"</ArmorPoint>
+<Type>"RULES-ARMOT_PLATE"</Type>
+</Armor>
+<Armor id="DWARF-ARMO_02">
+<Description language="ENGLISH">"Gromril Open Helm"</Description>
+<Availability>"RULES-DISPO_UNIQUE"</Availability>
+<Price>"256CO"</Price>
+<Encumbrance>"1"</Encumbrance>
+<Quality>"RULES-ARMOB_03,RULES-ARMOB_06"</Quality>
+<Location>"RULES-ARMOL_HEAD"</Location>
+<ArmorPoint>"3"</ArmorPoint>
+<Type>"RULES-ARMOT_PLATE"</Type>
+</Armor>
+<Armor id="DWARF-ARMO_03">
+<Description language="ENGLISH">"Gromril Bracers"</Description>
+<Availability>"RULES-DISPO_UNIQUE"</Availability>
+<Price>"1024CO"</Price>
+<Encumbrance>"3"</Encumbrance>
+<Quality>"RULES-ARMOB_02,RULES-ARMOB_04"</Quality>
+<Location>"RULES-ARMOL_ARM"</Location>
+<ArmorPoint>"3"</ArmorPoint>
+<Type>"RULES-ARMOT_PLATE"</Type>
+</Armor>
+<Armor id="DWARF-ARMO_04">
+<Description language="ENGLISH">"Gromril Plate Leggings"</Description>
+<Availability>"RULES-DISPO_UNIQUE"</Availability>
+<Price>"1280CO"</Price>
+<Encumbrance>"3"</Encumbrance>
+<Quality>"RULES-ARMOB_02,RULES-ARMOB_04,RULES-ARMOB_05"</Quality>
+<Location>"RULES-ARMOL_LEG"</Location>
+<ArmorPoint>"3"</ArmorPoint>
+<Type>"RULES-ARMOT_PLATE"</Type>
+</Armor>
+<Armor id="DWARF-ARMO_05">
+<Description language="ENGLISH">"Gromril Helm"</Description>
+<Availability>"RULES-DISPO_UNIQUE"</Availability>
+<Price>"384CO"</Price>
+<Encumbrance>"2"</Encumbrance>
+<Quality>"RULES-ARMOB_02,RULES-ARMOB_04,RULES-ARMOB_07"</Quality>
+<Location>"RULES-ARMOL_HEAD"</Location>
+<ArmorPoint>"3"</ArmorPoint>
+<Type>"RULES-ARMOT_PLATE"</Type>
+</Armor>
+<Armor id="DWARF-ARMO_06">
+<Description language="ENGLISH">"Mail Skirt"</Description>
+<Availability>"RULES-DISPO_LIMITED"</Availability>
+<Price>"1CO"</Price>
+<Encumbrance>"2"</Encumbrance>
+<Quality>"RULES-ARMOB_01,RULES-ARMOB_03"</Quality>
+<Location>"RULES-ARMOL_LEG"</Location>
+<ArmorPoint>"2"</ArmorPoint>
+<Type>"RULES-ARMOT_MAIL"</Type>
+</Armor>
+<Armor id="DWARF-ARMO_07">
+<Description language="ENGLISH">"Miner&apos;s Helm (Open)"</Description>
+<Availability>"RULES-DISPO_COMMON"</Availability>
+<Price>"2CO"</Price>
+<Encumbrance>"1"</Encumbrance>
+<Quality>"RULES-ARMOB_03,RULES-ARMOB_06"</Quality>
+<Location>"RULES-ARMOL_HEAD"</Location>
+<ArmorPoint>"2"</ArmorPoint>
+<Type>"RULES-ARMOT_PLATE"</Type>
+</Armor>
+</DATA_ARMOR>
+<DATA_TRAPPING>
+<Trapping id="DWARF-TRAP_01">
+<Description language="ENGLISH">"Candelabra (with a dozen candles)"</Description>
+<Theme>"RULES-LAB_196"</Theme>
+<Availability>"RULES-DISPO_COMMON"</Availability>
+<Price>"4PA"</Price>
+<Encumbrance>"0"</Encumbrance>
+</Trapping>
+<Trapping id="DWARF-TRAP_02">
+<Description language="ENGLISH">"Brazier"</Description>
+<Theme>"RULES-LAB_196"</Theme>
+<Availability>"RULES-DISPO_COMMON"</Availability>
+<Price>"2CO"</Price>
+<Encumbrance>"2"</Encumbrance>
+</Trapping>
+<Trapping id="DWARF-TRAP_03">
+<Description language="ENGLISH">"Battle Standard"</Description>
+<Theme>"RULES-LAB_196"</Theme>
+<Availability>"RULES-DISPO_LIMITED"</Availability>
+<Price>"8CO"</Price>
+<Encumbrance>"3"</Encumbrance>
+</Trapping>
+<Trapping id="DWARF-TRAP_04">
+<Description language="ENGLISH">"Metal Foil Sheets"</Description>
+<Theme>"RULES-LAB_194"</Theme>
+<Availability>"RULES-DISPO_COMMON"</Availability>
+<Price>"1PA 6SB"</Price>
+<Encumbrance>"0"</Encumbrance>
+</Trapping>
+<Trapping id="DWARF-TRAP_05">
+<Description language="ENGLISH">"Reckoner&apos;s Log"</Description>
+<Theme>"RULES-LAB_194"</Theme>
+<Availability>"RULES-DISPO_RARE"</Availability>
+<Price>"10CO"</Price>
+<Encumbrance>"3"</Encumbrance>
+</Trapping>
+<Trapping id="DWARF-TRAP_06">
+<Description language="ENGLISH">"Stone Tablet"</Description>
+<Theme>"RULES-LAB_194"</Theme>
+<Availability>"RULES-DISPO_COMMON"</Availability>
+<Price>"2PA"</Price>
+<Encumbrance>"1"</Encumbrance>
+</Trapping>
+<Trapping id="DWARF-TRAP_07">
+<Description language="ENGLISH">"Shield Platform"</Description>
+<Theme>"RULES-LAB_196"</Theme>
+<Availability>"RULES-DISPO_UNIQUE"</Availability>
+<Price>"15CO"</Price>
+<Encumbrance>"4"</Encumbrance>
+</Trapping>
+<Trapping id="DWARF-TRAP_08">
+<Description language="ENGLISH">"Oathstone"</Description>
+<Theme>"RULES-LAB_196"</Theme>
+<Availability>"RULES-DISPO_UNIQUE"</Availability>
+<Price>"25CO"</Price>
+<Encumbrance>"3"</Encumbrance>
+</Trapping>
+<Trapping id="DWARF-TRAP_09">
+<Description language="ENGLISH">"Anvil of Doom"</Description>
+<Theme>"RULES-LAB_196"</Theme>
+<Availability>"RULES-DISPO_UNIQUE"</Availability>
+<Price>"1000CO"</Price>
+<Encumbrance>"20"</Encumbrance>
+</Trapping>
+</DATA_TRAPPING>
+</DATA_BOOK>
