@@ -5327,3 +5327,16 @@ Fichiers modifies : chargeconstantes.pas, winequipement.pas/.lfm, winpersonnage.
 19/09/2026 - PDF : OBJETS DIVERS AVEC LIBELLE, ENCOMBREMENT ET NOTION DE PORTE
 pdfpersonnage.pas (Feldo2P et ancien PDF) : les lignes Divers affichaient le code brut et aucun encombrement. Libelle du catalogue DATA_TRAPPING (+ " xN" si quantite > 1), encombrement par ligne dans les deux demi-colonnes, ligne Trappings du bloc Encombrement remplie, total = armures + armes + divers. Regle Worn Items comme les armures : objet PORTE = Enc - 1 par exemplaire (plancher 0, 1 si Bulky), affiche "reduit(brut)". Tout objet Divers peut etre marque porte (decision de Nono, pas de liste de ce qui se porte). chargepersonnage.pas : la ligne Divers sauvegarde et relit l attribut Porte (anciens fichiers = non porte). winpersonnage.pas : le X de la colonne Porte est restitue au rechargement. Teste et valide par Nono. Position de la ligne Trappings dans l ancien PDF (126,151) estimee.
 Fichiers modifies : pdfpersonnage.pas, chargepersonnage.pas, winpersonnage.pas, Log.txt.
+
+19/09/2026 - EQUIPEMENTS V5 : THEME POSE SUR LES 32 OBJETS DU CATALOGUE
+BOOK_RULESBOOK.Xml (WFRP5) : balise <Theme>"RULES-LAB_196"</Theme> (Divers) sur RULES-TRAP_01 a _32. Le Rulebook V5 (p.316) les presente dans un seul tableau, "Miscellaneous Trappings" : pas de decoupage par theme en V5. Les RULES-TRAP_033 et suivants du meme bloc viennent des donnees de metiers, laisses de cote pour l instant (decision de Nono). Chargement en jeu non teste.
+Fichiers modifies : DATABASE/WFRP5/BOOK_RULESBOOK.Xml, Log.txt, A FAIRE.txt.
+
+19/09/2026 - WINEQUIPEMENT : ANCRAGE PROPORTIONNEL
+winequipement.pas : TAncrageProportionnel (meme regle que WinArmure) ; liste (0, 0.5), panneau de detail decale de moitie, libelle/disponibilite/livre etires. Remplir rappelle Ancrage.Appliquer (sinon la largeur de la liste retombait a 620 a chaque filtre). Compile, valide par Nono.
+Fichiers modifies : winequipement.pas, Log.txt, A FAIRE.txt.
+
+19/09/2026 - WINPERSONNAGE : COLONNE QUANTITE DANS LA GRILLE D EQUIPEMENT
+winpersonnage.pas : TabEquipement passe a 10 colonnes, colonne 9 = Quantite (RULES-LAB_203 Qty/Qte, deux INTERFACE). Sauvegarde et rechargement la lisent (vide ou invalide = 1) ; avant, la grille remettait toujours Quantite=1 a la sauvegarde, ce qui perdait les quantites de carriere (ex. Shot x10). +Equipment pose 1. Saisie limitee par TabEquipementSelectEditor : objets Divers, munitions (code MUNI_) et armes de lancer d encombrement 0 (competence COMPPROJ_LANC : couteau, dart, rock) ; javelot et armes encombrantes ajoutes ligne par ligne (decision de Nono). Valide par Nono.
+Appris : la grille TabEquipement etait branchee dans le .lfm sur TabAttributSelectEditor (Editor := nil), qui rend toute cellule en lecture seule malgre goEditing ; un gestionnaire propre est pose en code (OnSelectEditor).
+Fichiers modifies : winpersonnage.pas, DATABASE/INTERFACE.Xml, DATABASE/INTERFACE_FRANCAIS.Xml, Log.txt, A FAIRE.txt.

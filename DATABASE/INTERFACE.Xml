@@ -347,6 +347,7 @@
 <Text name="RULES-LAB_200">"All"</Text>
 <Text name="RULES-LAB_201">"Theme"</Text>
 <Text name="RULES-LAB_202">"Equipment"</Text>
+<Text name="RULES-LAB_203">"Qty"</Text>
 </Label>
 </DATA_LABEL>
 </DATA_BOOK>

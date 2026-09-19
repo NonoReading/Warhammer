@@ -286,6 +286,8 @@ type
   //Equipement
   Procedure ChargerMetierEquipement(CodeMetier: String; NiveauMetier: Integer);
   Procedure TabEquipementAffiche();
+  procedure TabEquipementSelectEditor({%H-}Sender: TObject; aCol, aRow: Integer;
+    var Editor: TWinControl);
   procedure TabEquipementSelectCell({%H-}Sender: TObject; {%H-}aCol, aRow: Integer;
     var {%H-}CanSelect: Boolean);
   function XpSortCout(CodeSort: String): String;
@@ -831,6 +833,7 @@ procedure TWinPersonnages.ButtonEquipementClick(Sender: TObject);
         TabEquipement.Cells[2, TabEquipement.RowCount-1]:= PTrapping.CodeTrapping;
         TabEquipement.Cells[3, TabEquipement.RowCount-1]:= TypeEquipDI;
         TabEquipement.Cells[4, TabEquipement.RowCount-1]:= PTrapping.Libelle;
+        TabEquipement.Cells[9, TabEquipement.RowCount-1]:= '1';
         AdjustGridColumnsWidth(TabEquipement, 0, false, false);
       end;
     SelectWinTrapping := '';
@@ -2075,7 +2078,8 @@ begin
 
   // Mise en forme de la table des Equipements
   TabEquipement.Options        := TabEquipement.Options + [goEditing, goAlwaysShowEditor];
-  TabEquipement.ColCount       := 9;
+  TabEquipement.OnSelectEditor := @TabEquipementSelectEditor;
+  TabEquipement.ColCount       := 10;
   TabEquipement.RowCount       := 2;
   TabEquipement.ColWidths[0]   := 20;
   TabEquipement.Cells[1, 0]    := GetTexteLibelle('RULES-LAB_052');
@@ -2094,6 +2098,8 @@ begin
   TabEquipement.ColWidths[7]   := 0;
   TabEquipement.Cells[8, 0]    := GetTexteLibelle('RULES-LAB_180');
   TabEquipement.ColWidths[8]   := 60;
+  TabEquipement.Cells[9, 0]    := GetTexteLibelle('RULES-LAB_203');
+  TabEquipement.ColWidths[9]   := 60;
 
   // Mise en forme dy tableau de choix des équipement de métier
   TabMetierEquipement.Options          := TabMetierEquipement.Options + [goEditing, goAlwaysShowEditor];
@@ -2609,9 +2615,9 @@ procedure TWinPersonnages.CalculTotaux();
     for IndAugm := 1 to TabEquipement.RowCount - 1 do
       begin
         PersonnageEquipement.CodeEquipement := TabEquipement.Cells[2, IndAugm];
-        // La grille ne porte pas encore de colonne Quantite (CONTEXT.md 2.77bis, Phase E) :
-        // toujours 1 pour l'instant.
-        PersonnageEquipement.Quantite       := 1;
+        // Colonne 9 = Quantite (vide ou invalide = 1).
+        PersonnageEquipement.Quantite       := StrToIntDef(TabEquipement.Cells[9, IndAugm], 1);
+        if PersonnageEquipement.Quantite < 1 then PersonnageEquipement.Quantite := 1;
         If TalentSort(TabEquipement.Cells[2, IndAugm]).CodeTalent <> ''
            then
           begin
@@ -3485,6 +3491,7 @@ begin
       TabEquipement.RowCount                 := TabEquipement.RowCount + 1;
       TabEquipement.Cells[2, NbEquipement]   := PersonnageEquipement.CodeEquipement;
       TabEquipement.Cells[3, NbEquipement]   := TrimRight(PersonnageEquipement.TypeEquipement);
+      TabEquipement.Cells[9, NbEquipement]   := IntToStr(PersonnageEquipement.Quantite);
       if TrimRight(PersonnageEquipement.TypeEquipement) = TrimRight(TypeEquipWe) then
           begin
             PArme := chercheArme(PersonnageEquipement.CodeEquipement);
@@ -3527,6 +3534,7 @@ begin
           begin
             PSort := ChercheSort(PersonnageEquipement.CodeEquipement);
             TabEquipement.Cells[3, NbEquipement]   := PSort.TypeSort;
+            TabEquipement.Cells[9, NbEquipement]   := '';
             TabEquipement.Cells[4, NbEquipement]   := PSort.Libelle;
             TabEquipement.Cells[5, NbEquipement]   := IntToStr(CalculOptionXpDiv25(PersonnageEquipement.CoutXp));
           end;
@@ -4517,6 +4525,33 @@ end;
 procedure TWinPersonnages.TabEquipementAffiche();
   begin
       TabMetierEquipement.visible := ( (RadioButtonSuivant.checked) or (RadioButtonChanger.Checked) );
+  end;
+
+// Seule la colonne Quantite (9) est saisissable, et seulement sur un objet Divers ou une
+// munition (arme dont le code porte MUNI_) ou petite arme de lancer (competence Projectile
+// Lancer, COMPPROJ_LANC, encombrement 0 : couteau, fleche, pierre...). Une arme de lancer
+// encombrante (javelot) se saisit ligne par ligne.
+procedure TWinPersonnages.TabEquipementSelectEditor(Sender: TObject; aCol, aRow: Integer;
+    var Editor: TWinControl);
+  var
+    Code:     String;
+    PArme:    StructureArme;
+    Editable: Boolean;
+  begin
+    Editable := false;
+    if (aCol = 9) and (aRow > 0) then
+      begin
+        Code := TabEquipement.Cells[2, aRow];
+        Editable := (TrimRight(TabEquipement.Cells[3, aRow]) = TrimRight(TypeEquipDI))
+                    or (Pos(EquipementMU, Code) > 0);
+        if (not Editable) and (TrimRight(TabEquipement.Cells[3, aRow]) = TrimRight(TypeEquipWe)) then
+          begin
+            PArme    := ChercheArme(Code);
+            Editable := (Pos('COMPPROJ_LANC', PArme.CodeCompetence) > 0) and (PArme.Encombrement = 0);
+          end;
+      end;
+    if not Editable then
+      Editor := nil;
   end;
 
 procedure TWinPersonnages.TabEquipementSelectCell(Sender: TObject; aCol,
@@ -5592,9 +5627,9 @@ Procedure TWinPersonnages.MajTables();
     for Ind := 1 to TabEquipement.RowCount - 1 do
       begin
         PersonnageEquipement.CodeEquipement := TabEquipement.Cells[2, Ind];
-        // Cf. l'autre point de reconstruction depuis la grille (ci-dessus) : pas de colonne
-        // Quantite pour l'instant.
-        PersonnageEquipement.Quantite       := 1;
+        // Cf. l'autre point de reconstruction depuis la grille (ci-dessus) : colonne 9.
+        PersonnageEquipement.Quantite       := StrToIntDef(TabEquipement.Cells[9, Ind], 1);
+        if PersonnageEquipement.Quantite < 1 then PersonnageEquipement.Quantite := 1;
         If TalentSort(TabEquipement.Cells[2, Ind]).CodeTalent <> ''
            then
           begin

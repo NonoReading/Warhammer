@@ -7,7 +7,7 @@ interface
 uses
   Classes, SysUtils, Forms, Controls, Graphics, Dialogs, Grids, StdCtrls,
   ExtCtrls, BCButton, ChargeTrapping, GlobalFonts, ChargeConstantes,
-  UnitCalcul, ChargeTexte, WinFiltre;
+  UnitCalcul, ChargeTexte, WinFiltre, AncrageProportionnel;
 
 type
 
@@ -35,6 +35,7 @@ type
     procedure FormCreate({%H-}Sender: TObject);
     procedure FormDestroy({%H-}Sender: TObject);
     procedure FormKeyPress({%H-}Sender: TObject; var Key: char);
+    procedure FormResize({%H-}Sender: TObject);
     procedure TabEquipDblClick({%H-}Sender: TObject);
     procedure TabEquipSelection({%H-}Sender: TObject; {%H-}aCol, aRow: Integer);
     procedure ThemeChange({%H-}Sender: TObject);
@@ -42,6 +43,7 @@ type
     ListeThemes:   TStringList;
     FiltreLivre:   String;
     EnRemplissage: Boolean;
+    Ancrage:       TAncrageProportionnel;
     procedure ChargeThemes;
     procedure Remplir;
   end;
@@ -84,10 +86,34 @@ begin
 
   ChargeThemes;
   Remplir;
+
+  // Ancrage proportionnel, meme regle que WinArmure (voir AncrageProportionnel).
+  Ancrage := TAncrageProportionnel.Create(Self);
+  Ancrage.Ajouter(TabEquip, 0, 0.5);
+  Ancrage.Ajouter(AffLib, 0.5, 0.5);
+  Ancrage.Ajouter(LabPrix, 0.5, 0);
+  Ancrage.Ajouter(AffPrix, 0.5, 0);
+  Ancrage.Ajouter(LabEnc, 0.5, 0);
+  Ancrage.Ajouter(AffEnc, 0.5, 0);
+  Ancrage.Ajouter(LabCap, 0.5, 0);
+  Ancrage.Ajouter(AffCap, 0.5, 0);
+  Ancrage.Ajouter(LabDispo, 0.5, 0);
+  Ancrage.Ajouter(AffDispo, 0.5, 0.5);
+  Ancrage.Ajouter(LabLivre, 0.5, 0);
+  Ancrage.Ajouter(AffLivre, 0.5, 0.5);
+  Ancrage.Fixer;
+  OnResize := @FormResize;
+end;
+
+procedure TWinEquipements.FormResize(Sender: TObject);
+begin
+  if Ancrage <> nil then
+    Ancrage.Appliquer;
 end;
 
 procedure TWinEquipements.FormDestroy(Sender: TObject);
 begin
+  Ancrage.Free;
   ListeThemes.Free;
 end;
 
@@ -144,6 +170,8 @@ begin
     // la procedure agrandit la grille a la largeur de ses colonnes : on la remet a sa place
     TabEquip.SetBounds(10, 75, 620, Self.ClientHeight - 85);
     TabEquip.ScrollBars := ssAutoBoth;
+    if Ancrage <> nil then
+      Ancrage.Appliquer;
   finally
     EnRemplissage := false;
   end;

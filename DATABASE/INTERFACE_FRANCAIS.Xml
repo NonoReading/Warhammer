@@ -273,6 +273,7 @@
 <Text name="RULES-LAB_200">"Tous"</Text>
 <Text name="RULES-LAB_201">"Thème"</Text>
 <Text name="RULES-LAB_202">"Équipement"</Text>
+<Text name="RULES-LAB_203">"Qté"</Text>
 </Label>
 </DATA_LABEL>
 </DATA_BOOK>
