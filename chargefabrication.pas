@@ -36,6 +36,8 @@ Function FabricationEstUnreliable(ListeCode :String): Boolean;
 Function FabricationPortee(ListeCode :String): Integer;
 Function FabricationQualitesArme(ListeCode :String): String;
 procedure FabricationDetail(ListeCode :String; var BonusItem :String; var ListeBonus :String);
+function QualiteDepuisCode(var CodeEquipement: String): String;
+function QualiteSansMarqueur(ListeCode: String): String;
 
 implementation
 
@@ -223,6 +225,47 @@ Function FabricationQualitesArme(ListeCode :String): String;
           end;
         strings.Free;
       end;
+  end;
+
+// Un code d equipement de metier peut porter le suffixe (Q) : on le retire du code et on renvoie la
+// valeur de QualiteEquipement a poser sur l objet (le marqueur "qualite a ajouter"), '' sinon.
+// Le marqueur disparait a l enregistrement du XML des qu une vraie fabrication est ajoutee.
+function QualiteDepuisCode(var CodeEquipement: String): String;
+  begin
+    Result := '';
+    if Pos(EquipementQualite, CodeEquipement) > 0 then
+      begin
+        CodeEquipement := Trim(StringReplace(CodeEquipement, EquipementQualite, '', [rfReplaceAll]));
+        Result         := CodeQualiteAAjouter + ' 1';
+      end;
+  end;
+
+// Retire le marqueur "qualite a ajouter" d'une liste de fabrications des qu'elle en contient une autre
+// ("CODE VAL,CODE VAL"). Seule, elle reste : l'objet est encore a qualifier.
+function QualiteSansMarqueur(ListeCode: String): String;
+  var
+    Morceaux: TStringList;
+    Ind:      Integer;
+  begin
+    Result := ListeCode;
+    if Pos(CodeQualiteAAjouter, ListeCode) = 0 then
+      exit;
+    Morceaux := TStringList.Create;
+    try
+      ExtractStrings([','], [], PChar(ListeCode), Morceaux);
+      if Morceaux.Count < 2 then
+        exit;
+      Result := '';
+      for Ind := 0 to Morceaux.Count - 1 do
+        if Pos(CodeQualiteAAjouter, Morceaux[Ind]) = 0 then
+          begin
+            if Result <> '' then
+              Result := Result + ',';
+            Result := Result + Trim(Morceaux[Ind]);
+          end;
+    finally
+      Morceaux.Free;
+    end;
   end;
 
 procedure FabricationDetail(ListeCode :String; var BonusItem :String; var ListeBonus :String);

@@ -18331,6 +18331,14 @@ Strength Bonus is abbreviated to SB in the weapon tables."</Explanation>
 <Encumbrance>"1"</Encumbrance>
 <Modifier>"BULKY"</Modifier>
 </Craftsmanship>
+<Craftsmanship id="RULES-QUALITY_AJOUT">
+<Description language="ENGLISH">"Quality to add"</Description>
+<Explanation language="ENGLISH">"Marker put on an item bought or received as 'of quality' (career trappings marked (Q)): the player still has to choose the actual Quality. It disappears as soon as a real Craftsmanship is added."</Explanation>
+<Short language="ENGLISH">"choose a Quality"</Short>
+<Max>"1"</Max>
+<Encumbrance>"0"</Encumbrance>
+<Modifier>""</Modifier>
+</Craftsmanship>
 </DATA_CRAFTMANSHIP>
 <DATA_CORRUPTION_PHYSICAL>
 <Specie name="RULES-RACE_HUM">"01-50"</Specie>

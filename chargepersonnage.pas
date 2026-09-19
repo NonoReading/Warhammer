@@ -679,7 +679,7 @@ begin
                PArme := ChercheArme(PersonnageEquipement.CodeEquipement);
                XMLContent.Add(XmlLigneDonnee(ConstXmlItem,
                  CodeNormalise(PersonnageEquipement.CodeEquipement, PArme.Livre),
-                 PersonnageEquipement.QualiteEquipement,
+                 QualiteSansMarqueur(PersonnageEquipement.QualiteEquipement),
                  XmlAttributEquipementPorte(PersonnageEquipement.Porte)
                  +XmlAttributEquipementQuantite(PersonnageEquipement.Quantite)));
                ListeLivres:= PersonnageLivre(ListeLivres, PArme.livre);
@@ -697,7 +697,7 @@ begin
                PArmure := ChercheArmure(PersonnageEquipement.CodeEquipement);
                XMLContent.Add(XmlLigneDonnee(ConstXmlItem,
                  CodeNormalise(PersonnageEquipement.CodeEquipement, PArmure.Livre),
-                 PersonnageEquipement.QualiteEquipement,
+                 QualiteSansMarqueur(PersonnageEquipement.QualiteEquipement),
                  XmlAttributEquipementPorte(PersonnageEquipement.Porte)
                  +XmlAttributEquipementQuantite(PersonnageEquipement.Quantite)));
                ListeLivres:= PersonnageLivre(ListeLivres, PArmure.livre);
@@ -715,7 +715,7 @@ begin
                 PArmureSimplifiee := ChercheArmureSimplifiee(PersonnageEquipement.CodeEquipement);
                 XMLContent.Add(XmlLigneDonnee(ConstXmlItem,
                   CodeNormalise(PersonnageEquipement.CodeEquipement, PArmureSimplifiee.Livre),
-                  PersonnageEquipement.QualiteEquipement,
+                  QualiteSansMarqueur(PersonnageEquipement.QualiteEquipement),
                   XmlAttributEquipementPorte(PersonnageEquipement.Porte)
                   +XmlAttributEquipementQuantite(PersonnageEquipement.Quantite)));
                 // etait PArmure.livre : le livre de l'armure du bloc PRECEDENT. CONTEXT.md 2.19.
@@ -729,7 +729,7 @@ begin
           XMLContent.Add(XmlDebut(ConstXmlSousChapitreDivers));
           for PersonnageEquipement in Personnage.Equipement do
             if TrimRight(PersonnageEquipement.TypeEquipement) = TrimRight(TypeEquipDi) then
-               XMLContent.Add(XmlLigneDonnee(ConstXmlItem, PersonnageEquipement.CodeEquipement, PersonnageEquipement.QualiteEquipement,
+               XMLContent.Add(XmlLigneDonnee(ConstXmlItem, PersonnageEquipement.CodeEquipement, QualiteSansMarqueur(PersonnageEquipement.QualiteEquipement),
                  XmlAttributEquipementPorte(PersonnageEquipement.Porte)
                  +XmlAttributEquipementQuantite(PersonnageEquipement.Quantite)));
           XMLContent.Add(XmlFin(ConstXmlSousChapitreDivers));

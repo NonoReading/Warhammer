@@ -11,7 +11,7 @@ uses
   Types, ChargeMetier, ChargeRaceMetier, ChargeAttribut, ChargeRaceAttribut, ChargeMetierNiveau,
   ChargeMetierAttribut, UnitCalcul, ChargeRaceTalent, ChargeTalent,
   ChargeTalentCreation, ChargeRaceCompetence, ChargeCompetence, ChargeRaceCreation,
-  ChargeMetierCompetence, ChargeArme, ChargeArmure, ChargeTrapping, ChargeMetierEquipement,
+  ChargeMetierCompetence, ChargeArme, ChargeArmure, ChargeTrapping, ChargeMetierEquipement, ChargeFabrication,
   WinMetier, WinRaces, ChargeTexte, WinTalent, WinCompetence, ChargeLivre,
   ChargeMetierSousMetier, ChargeMetierRaceChoixMetier, WinSpecialisation,
   ChargeMetierTalent, ChargePersonnage, BGRABitmap, BGRABitmapTypes, BCButton,
@@ -1251,6 +1251,7 @@ procedure TWinCreations.PhaseSave(NouvellePhase: Integer);
                    for IndEns := 0 to StringsCodeEns.Count - 1 do
                      begin
                        PersonnageEquipement.CodeEquipement    := StringsCodeEns[IndEns];
+                       PersonnageEquipement.QualiteEquipement := QualiteDepuisCode(PersonnageEquipement.CodeEquipement);
                        PersonnageEquipement.TypeEquipement    := StringsTypeEns[IndEns];
                        PersonnageEquipement.Porte             := False;
                        PersonnageEquipement.Quantite          := StrToIntDef(TabMetierEquipement.Cells[5, IndTab], 1);
@@ -1262,6 +1263,7 @@ procedure TWinCreations.PhaseSave(NouvellePhase: Integer);
                else
                  begin
                    PersonnageEquipement.CodeEquipement          := TabMetierEquipement.Cells[1, IndTab];
+                   PersonnageEquipement.QualiteEquipement       := QualiteDepuisCode(PersonnageEquipement.CodeEquipement);
                    PersonnageEquipement.TypeEquipement          := TabMetierEquipement.Cells[6, IndTab];
                    // Comme un achat en jeu (winpersonnage.pas) : l'equipement de depart arrive
                    // non porte, a cocher explicitement ensuite.

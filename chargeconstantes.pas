@@ -535,6 +535,11 @@ Const
       EquipementAR                      = 'ARMO_';
       EquipementTR                      = 'TRAP_';
       EquipementQualite                 = '(Q)';
+      // Fabrication marqueur posee sur un objet (Q) tant que le joueur n a pas choisi de vraie qualite
+      // Case a cocher de l equipement de niveau (WinPersonnage), decochee par defaut
+      CaseVide                          = '[   ]';
+      CaseCochee                        = '[ X ]';
+      CodeQualiteAAjouter               = 'RULES-QUALITY_AJOUT';
       BonusProtection                   = 'WEAPB18 ';
       BonusAccurate                     = 'RULES-WEAPB16';  // qualite Accurate : +10 au test de tir
       BonusBras                         = 'RULES-ARMOL_ARM';

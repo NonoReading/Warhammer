@@ -217,6 +217,7 @@ type
     aRow: Integer; var Editor: TWinControl);
   procedure TabLivreDblClick({%H-}Sender: TObject);
   procedure TabMetierEquipementDblClick({%H-}Sender: TObject);
+  procedure TabMetierEquipementClick({%H-}Sender: TObject);
   procedure TabMetierEquipementSelectEditor({%H-}Sender: TObject; {%H-}aCol,
     {%H-}aRow: Integer; var Editor: TWinControl);
   procedure TabMutationClick(Sender: TObject);
@@ -296,6 +297,7 @@ type
   function PoolTalent(PTalent: StructureTalent): String;
   Procedure AfficheFabrication();
   Function ChoixNonFait(): Boolean;
+  procedure AjouteEquipementNiveau();
 
   // Corruption
   Function  CalculCorruptionLost(): Integer;
@@ -631,7 +633,10 @@ begin
   else if RechercherDansColonne(TabAugmentationTalent, ConstArbreAuChoix, ColAugmTalSort) <> -1 then
     ShowMEssage(GetTexteLibelle('RULES-MESS_033'))
   else
-    MajTables();
+    begin
+      AjouteEquipementNiveau();
+      MajTables();
+    end;
 end;
 
 procedure TWinPersonnages.ButtonPdfClick(Sender: TObject);
@@ -855,7 +860,7 @@ procedure TWinPersonnages.ButtonFabricationClick(Sender: TObject);
 
           if ChoixWinFabrication <> '' then
             begin
-              TabEquipement.Cells[7,TabEquipement.row] := ChoixWinFabrication;
+              TabEquipement.Cells[7,TabEquipement.row] := QualiteSansMarqueur(ChoixWinFabrication);
               FabAjoute := true;
             end;
 
@@ -1374,7 +1379,8 @@ function TWinPersonnages.ChoixNonFait(): Boolean;
     Res: Boolean = false;
   begin
     for Ind := 1 to TabMetierEquipement.Rowcount - 1 do
-      if TabMetierEquipement.Cells[2, Ind] = ConstArbreAuChoix then
+      // un choix non resolu ne bloque que si la ligne est cochee (equipement de niveau facultatif)
+      if (TabMetierEquipement.Cells[2, Ind] = ConstArbreAuChoix) and (TabMetierEquipement.Cells[0, Ind] = CaseCochee) then
         Res := true;
     Result := Res;
   end;
@@ -2103,9 +2109,12 @@ begin
 
   // Mise en forme dy tableau de choix des équipement de métier
   TabMetierEquipement.Options          := TabMetierEquipement.Options + [goEditing, goAlwaysShowEditor];
-  TabMetierEquipement.ColCount         := 6;
+  TabMetierEquipement.ColCount         := 7;
   TabMetierEquipement.RowCount         := 1;
-  TabMetierEquipement.ColWidths[0]     := 30;
+  // colonne 0 = case a cocher : colonne normale (une colonne fixe est noire, texte noir, et un clic
+  // dessus ne change pas Col)
+  TabMetierEquipement.FixedCols        := 0;
+  TabMetierEquipement.ColWidths[0]     := 50;
   TabMetierEquipement.Cells[1, 0]      := GetTexteLibelle('RULES-LAB_001');
   TabMetierEquipement.ColWidths[1]     := 0;
   TabMetierEquipement.Cells[2, 0]      := GetTexteLibelle('RULES-LAB_013');
@@ -2116,6 +2125,8 @@ begin
   TabMetierEquipement.ColWidths[4]     := 0;
   TabMetierEquipement.Cells[5, 0]      := GetTexteLibelle('RULES-LAB_120');
   TabMetierEquipement.ColWidths[5]     := 100;
+  TabMetierEquipement.ColWidths[6]     := 0;   // quantite du livre (cachee)
+  TabMetierEquipement.OnClick          := @TabMetierEquipementClick;
 
   // mise en forme du tableau des choix des sorts
   TabSort.Options          := TabSort.Options + [goEditing, goAlwaysShowEditor];
@@ -4010,6 +4021,51 @@ begin
         TabLivre.Cells[1, TabLivre.Row] := '';
 end;
 
+// Colonne 0 : case a cocher de l'equipement de niveau (decochee par defaut).
+procedure TWinPersonnages.TabMetierEquipementClick(Sender: TObject);
+  begin
+    if (TabMetierEquipement.Col = 0) and (TabMetierEquipement.Row > 0) then
+      if TabMetierEquipement.Cells[0, TabMetierEquipement.Row] = CaseCochee then
+        TabMetierEquipement.Cells[0, TabMetierEquipement.Row] := CaseVide
+      else
+        TabMetierEquipement.Cells[0, TabMetierEquipement.Row] := CaseCochee;
+  end;
+
+// Ajoute a TabEquipement les lignes cochees de l'equipement de niveau ; TabEquipement est ensuite
+// recopiee dans Personnage.Equipement (MajTables). Le suffixe (Q) donne la fabrication marqueur
+// "qualite a ajouter" (QualiteDepuisCode). Le type d'une ligne issue d'un choix est deduit du code.
+procedure TWinPersonnages.AjouteEquipementNiveau();
+  var
+    Ind:     Integer;
+    Code:    String;
+    Qualite: String;
+    Typ:     String;
+  begin
+    for Ind := 1 to TabMetierEquipement.RowCount - 1 do
+      if (TabMetierEquipement.Cells[0, Ind] = CaseCochee) and (TabMetierEquipement.Cells[1, Ind] <> '') then
+        begin
+          Code    := TabMetierEquipement.Cells[1, Ind];
+          Qualite := QualiteDepuisCode(Code);
+          Typ     := TabMetierEquipement.Cells[4, Ind];
+          if Typ = '' then
+            if ChercheArme(Code).CodeArme <> '' then
+              Typ := TypeEquipWe
+            else if ChercheArmure(Code).CodeArmure <> '' then
+              Typ := TypeEquipAr
+            else
+              Typ := TypeEquipDI;
+          TabEquipement.RowCount                          := TabEquipement.RowCount + 1;
+          TabEquipement.Cells[0, TabEquipement.RowCount-1]:= '+';
+          TabEquipement.Cells[1, TabEquipement.RowCount-1]:= IntToStr(TabEquipement.RowCount);
+          TabEquipement.Cells[2, TabEquipement.RowCount-1]:= Code;
+          TabEquipement.Cells[3, TabEquipement.RowCount-1]:= Typ;
+          TabEquipement.Cells[4, TabEquipement.RowCount-1]:= TabMetierEquipement.Cells[2, Ind];
+          TabEquipement.Cells[7, TabEquipement.RowCount-1]:= Qualite;
+          TabEquipement.Cells[9, TabEquipement.RowCount-1]:= IntToStr(StrToIntDef(TabMetierEquipement.Cells[6, Ind], 1));
+          TabMetierEquipement.Cells[0, Ind]               := CaseVide;
+        end;
+  end;
+
 procedure TWinPersonnages.TabMetierEquipementDblClick(Sender: TObject);
   begin
     if (TabMetierEquipement.col = 2) and (TabMetierEquipement.Cells[2, TabMetierEquipement.Row] = ConstArbreAuchoix) then
@@ -5827,11 +5883,13 @@ Procedure TWinPersonnages.ChargerMetierEquipement(CodeMetier: String; NiveauMeti
            NbMetierEquipementTab        := NbMetierEquipementTab + 1;
            TabMetierEquipement.RowCount := NbMetierEquipementTab + 1;
            ListeCode                    := GetListeEquipement(PMetierEquipement.Equipement, PMetierEquipement.TypeEquipement);
+           TabMetierEquipement.Cells[0, NbMetierEquipementTab] := CaseVide;
 
            if Pos(',',ListeCode) > 0 then
              begin
                TabMetierEquipement.Cells[2, NbMetierEquipementTab]   := ConstArbreAuchoix;
                TabMetierEquipement.Cells[3, NbMetierEquipementTab]   := ListeCode;
+               TabMetierEquipement.Cells[6, NbMetierEquipementTab]   := IntToStr(PMetierEquipement.Quantite);
              end
            else
              begin
@@ -5863,6 +5921,7 @@ Procedure TWinPersonnages.ChargerMetierEquipement(CodeMetier: String; NiveauMeti
                TabMetierEquipement.Cells[1, NbMetierEquipementTab] := Code;
                TabMetierEquipement.Cells[2, NbMetierEquipementTab] := Lib;
                TabMetierEquipement.Cells[4, NbMetierEquipementTab] := Typ;
+               TabMetierEquipement.Cells[6, NbMetierEquipementTab] := IntToStr(PMetierEquipement.Quantite);
              end;
 
         end;
