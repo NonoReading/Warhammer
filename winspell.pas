@@ -7,7 +7,7 @@ interface
 uses
   Classes, SysUtils, Forms, Controls, Graphics, Dialogs, ExtCtrls, Grids,
   StdCtrls, BCButton, ChargeSort, GlobalFonts, ChargeConstantes, ChargeTalent,
-  ChargeTexte, WinFiltre, UnitCalcul;
+  ChargeTexte, WinFiltre, UnitCalcul, AncrageProportionnel;
 
 type
 
@@ -40,12 +40,14 @@ type
     procedure FormClose({%H-}Sender: TObject; var CloseAction: TCloseAction);
     procedure FormCreate({%H-}Sender: TObject);
     procedure FormKeyPress({%H-}Sender: TObject; var Key: char);
+    procedure FormResize({%H-}Sender: TObject);
     procedure TabSpellDblClick({%H-}Sender: TObject);
     procedure TabSpellSelection({%H-}Sender: TObject; {%H-}aCol, aRow: Integer);
     procedure WinCharger();
     procedure WinVider();
     Function SpellFiltre(PSort: StructureSort):Boolean;
   private
+    Ancrage: TAncrageProportionnel;
 
   public
 
@@ -230,10 +232,41 @@ procedure TWinSpells.WinCharger();
       KeyPreview := true;
   end;
 
+procedure TWinSpells.FormResize(Sender: TObject);
+begin
+    if Ancrage <> nil then
+      Ancrage.Appliquer;
+end;
+
 procedure TWinSpells.FormCreate(Sender: TObject);
   Begin
       FiltreLivre := SelectWinLivre;
       WinCharger();
+    // Ancrage proportionnel, meme regle que WinRace (voir AncrageProportionnel).
+    Ancrage := TAncrageProportionnel.Create(Self);
+    Ancrage.Ajouter(ImageWar, 0.25, 0);
+    Ancrage.Ajouter(TabSpell, 0, 0.5);
+    Ancrage.Ajouter(LabCode, 0.5, 0);
+    Ancrage.Ajouter(AffCode, 0.5, 0);
+    Ancrage.Ajouter(LabLib, 0.5, 0);
+    Ancrage.Ajouter(AffLib, 0.5, 0.5);
+    Ancrage.Ajouter(LabType, 0.5, 0);
+    Ancrage.Ajouter(AffType, 0.5, 0);
+    Ancrage.Ajouter(LabPortee, 0.5, 0);
+    Ancrage.Ajouter(AffPortee, 0.5, 0);
+    Ancrage.Ajouter(LabCible, 0.5, 0);
+    Ancrage.Ajouter(AffCible, 0.5, 0);
+    Ancrage.Ajouter(LabDuree, 0.5, 0);
+    Ancrage.Ajouter(AffDuree, 0.5, 0);
+    Ancrage.Ajouter(LabNiveau, 0.5, 0);
+    Ancrage.Ajouter(AffNiveau, 0.5, 0);
+    Ancrage.Ajouter(AffEffet, 0.5, 0.5);
+    Ancrage.Ajouter(TabTalent, 1, 0);
+    Ancrage.Ajouter(LabLivre, 0.5, 0);
+    Ancrage.Ajouter(AffLivre, 0.5, 0);
+    Ancrage.Ajouter(Image1, 1, 0);
+    Ancrage.Ajouter(ButtonFiltre, 0, 0.5);
+    Ancrage.Fixer;
   end;
 
 procedure TWinSpells.ButtonFiltreClick(Sender: TObject);

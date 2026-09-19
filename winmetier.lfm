@@ -14,6 +14,7 @@ object WinMetiers: TWinMetiers
   OnCloseQuery = FormCloseQuery
   OnCreate = FormCreate
   OnKeyPress = FormKeyPress
+  OnResize = FormResize
   object PanelHautGauche: TPanel
     Left = 932
     Height = 206
@@ -162,7 +163,7 @@ object WinMetiers: TWinMetiers
     Height = 824
     Top = 80
     Width = 473
-    Anchors = [akTop, akLeft, akRight, akBottom]
+    Anchors = [akTop, akLeft, akBottom]
     Caption = 'PanelDescription'
     ClientHeight = 824
     ClientWidth = 473
@@ -198,7 +199,7 @@ object WinMetiers: TWinMetiers
     Top = 8
     Width = 639
     Alignment = taCenter
-    Anchors = [akTop, akLeft, akRight]
+    Anchors = [akTop, akLeft]
     AutoSize = False
     Font.CharSet = ANSI_CHARSET
     Font.Color = clSilver

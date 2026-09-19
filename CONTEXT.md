@@ -9,7 +9,46 @@ Gods/Martial Artist + crash double-clic sur libellé de choix multiple, clos), �
 "Aucune modification apportée" remplacé par une vraie comparaison XML à la sauvegarde, clos),
 §2.82 (choix de sort d'un talent à choix déplacé dans le tableau de talents, résolvant
 l'impasse `AjoutMineur`, clos).
-**Prochaine étape** : plus de correction courte ouverte dans `A FAIRE.txt` pour l'instant. Le 19/09/2026 : (1) vérification "nom de personnage déjà pris" corrigée (chemin `ConstCheminPersonnage`) ; (2) quantité par branche d'un choix d'équipement `/` livrée (attribut `quantite="2/1/1"`, liste alignée sur les branches, `QuantiteListe` dans `StructureMetierEquipement`, `GetListeEquipement` renvoie aussi les quantités par code, double-clic de `wincreation.pas` pose la quantité de la branche choisie, arbre et grille de `winlivre.pas` l'affichent) - testé en jeu sur Bounty Hunter, validé. Limites connues, voulues : le passage de niveau V4 (`winpersonnage.pas`) ne porte aucune quantité (le matériel n'est plus acquis automatiquement en V4) et l'arbre de `winmetier.pas` n'affiche pas la quantité par branche. Les munitions "with 10 Bolts/Shots" restent abandonnées (arme nue, décision du 14/09).
+**Prochaine étape** : plus de correction courte ouverte dans `A FAIRE.txt` pour l'instant. Le 19/09/2026 : (0) §2.83 ancrage proportionnel des sept fenêtres de base de données, clos et validé (unité `ancrageproportionnel.pas`) ; (1) vérification "nom de personnage déjà pris" corrigée (chemin `ConstCheminPersonnage`) ; (2) quantité par branche d'un choix d'équipement `/` livrée (attribut `quantite="2/1/1"`, liste alignée sur les branches, `QuantiteListe` dans `StructureMetierEquipement`, `GetListeEquipement` renvoie aussi les quantités par code, double-clic de `wincreation.pas` pose la quantité de la branche choisie, arbre et grille de `winlivre.pas` l'affichent) - testé en jeu sur Bounty Hunter, validé. Limites connues, voulues : le passage de niveau V4 (`winpersonnage.pas`) ne porte aucune quantité (le matériel n'est plus acquis automatiquement en V4) et l'arbre de `winmetier.pas` n'affiche pas la quantité par branche. Les munitions "with 10 Bolts/Shots" restent abandonnées (arme nue, décision du 14/09).
+
+---
+
+**19/09/2026 — §2.83 CLOS : ANCRAGE PROPORTIONNEL DES SEPT FENÊTRES DE BASE DE DONNÉES. TESTÉ À
+L'ÉCRAN ET VALIDÉ PAR NONO.** Demande : quand la fenêtre s'élargit de Δ, le tableau de gauche
+prend Δ/2, les éléments du milieu se décalent de Δ/2, la zone de texte de droite se décale de
+Δ/2 ET s'élargit de Δ/2 ; sans zone de texte à droite, le tableau prend 100 %. Fenêtres :
+WinRace, WinMetier, WinTalent, WinCompetence, WinSort (`winspell`), WinArme (`winweapon`),
+WinArmure.
+
+- **Pourquoi pas les ancres natives** : Lazarus ne sait que tout donner ou rien donner à un
+  contrôle (`akRight` = 100 % du Δ). Nouvelle unité `ancrageproportionnel.pas` (au `.lpi`) :
+  `TAncrageProportionnel`, `Ajouter(Ctrl, Deplace, Elargit)`, `Fixer` (prend la référence et
+  fixe la taille minimale = taille de référence), `Appliquer` (appelée par `OnResize`).
+  Chaque fenêtre : `Ancrage` (champ privé), `FormResize`, et le bloc `Ajouter…/Fixer` juste
+  après `WinCharger()` dans `FormCreate` (référence prise APRÈS `WinCharger`, qui ajuste les
+  grilles sur leur contenu).
+- **Règles par fenêtre** : tableau (0, 0.5) ; `ButtonFiltre` (0, 0.5) ; `ImageWar` (0.25, 0),
+  centrée au-dessus du tableau ; milieu (0.5, 0) ; zones de texte (0.5, 0.5) ; contrôles au
+  bord droit (petits tableaux Métier/Spécialisations de Talent/Compétence, tableau de talents
+  de WinSort, `Image1-3` d'Armure, `LabLivre`/`AffLivre`/images d'Arme) (1, 0). Armure et Arme
+  traitées comme Talent (zone de texte au milieu), pas à 100 %.
+- **`akRight` retiré dans les `.lfm`** des contrôles enregistrés (sinon les deux mécanismes se
+  battent) ; `OnResize = FormResize` ajouté.
+- **Piège DPI (WinArmure)** : à l'ouverture, les images recouvraient les champs (Δ négatif : les
+  contrôles à 100 % reculent deux fois plus vite que ceux à 50 %). Cause probable : référence
+  prise en pixels dans `FormCreate`, avant une remise à l'échelle DPI de la LCL (WinArmure est
+  dessinée en 144 PPI, les autres en 120). Correctif : la référence est stockée en unités à
+  96 PPI et reconvertie avec `Form.PixelsPerInch` à chaque `Appliquer`. Cause non prouvée
+  directement, mais le correctif règle le cas et ne change rien aux six autres.
+- **Limite connue** : après un changement de langue en direct, `WinCharger` re-ajuste les
+  grilles sur leur contenu ; elles reprennent leur largeur proportionnelle au prochain
+  redimensionnement.
+- **Compilé** (`lazbuild --build-all`, 0 erreur) à chaque étape ; validé à l'écran sur les sept
+  fenêtres.
+
+Fichiers modifiés : `ancrageproportionnel.pas` (nouveau), `WarhammerHelp.lpi`, `winraces`,
+`winmetier`, `wintalent`, `wincompetence`, `winspell`, `winarmor`, `winweapon` (`.pas` et
+`.lfm`), `CONTEXT.md`, `Log.txt`, `A FAIRE.txt`.
 
 ---
 

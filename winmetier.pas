@@ -16,7 +16,7 @@ uses
   ChargeTalentCreation, Types, BGRABitmap, BGRABitmapTypes,
   fpPDF, LCLIntf,
   //PicsLib, PdfUtils,
-  PdfMetier;
+  PdfMetier, AncrageProportionnel;
 type
   TMyNodeData = class
     AdditionalData: string;
@@ -58,6 +58,7 @@ type
     procedure FormCloseQuery({%H-}Sender: TObject; var {%H-}CanClose: Boolean);
     procedure FormCreate({%H-}Sender: TObject);
     procedure FormKeyPress({%H-}Sender: TObject; var Key: char);
+    procedure FormResize({%H-}Sender: TObject);
     procedure TabAttributDrawCell(Sender: TObject; aCol, aRow: Integer;
       aRect: TRect; aState: TGridDrawState);
     procedure TabAttributSelectEditor({%H-}Sender: TObject; {%H-}aCol, {%H-}aRow: Integer;
@@ -78,6 +79,7 @@ type
     procedure ChargeMetierTalent(Niveau: Integer; NodeBase: TTreeNode);
     procedure ChargeMetierEquipement(Niveau: Integer; NodeBase: TTreeNode);
   private
+    Ancrage: TAncrageProportionnel;
 
   public
 
@@ -409,6 +411,28 @@ procedure TWinMetiers.FormCreate(Sender: TObject);
 begin
     FiltreLivre := SelectWinLivre;
     WinCharger();
+    // Ancrage proportionnel, meme regle que WinRace (voir AncrageProportionnel).
+    Ancrage := TAncrageProportionnel.Create(Self);
+    Ancrage.Ajouter(TabMetier,        0,    0.5);
+    Ancrage.Ajouter(ButtonFiltre,     0,    0.5);
+    Ancrage.Ajouter(ButtonPdfAll,     0.5,  0);    // colle au bord droit du tableau
+    Ancrage.Ajouter(ImageWar,         0.25, 0);    // centree au-dessus du tableau
+    Ancrage.Ajouter(TreeViewMetier1,  0.5,  0);
+    Ancrage.Ajouter(TabAttribut,      0.5,  0);
+    Ancrage.Ajouter(Image1,           0.5,  0);
+    Ancrage.Ajouter(Image2,           0.5,  0);
+    Ancrage.Ajouter(Image3,           0.5,  0);
+    Ancrage.Ajouter(ImageClass2,      0.5,  0);
+    Ancrage.Ajouter(PanelHautGauche,  0.5,  0);
+    Ancrage.Ajouter(AffMetier,        0.5,  0.5);
+    Ancrage.Ajouter(PanelDescription, 0.5,  0.5);
+    Ancrage.Fixer;
+end;
+
+procedure TWinMetiers.FormResize(Sender: TObject);
+begin
+    if Ancrage <> nil then
+      Ancrage.Appliquer;
 end;
 
 procedure TWinMetiers.FormKeyPress(Sender: TObject; var Key: char);

@@ -8,7 +8,7 @@ uses
   Classes, SysUtils, Forms, Controls, Graphics, Dialogs, ComCtrls,
   Grids, StdCtrls, ExtCtrls, BCButton, ChargeCompetence, ChargeConstantes,
   GlobalFonts, ChargeTexte, UnitCalcul, LCLType, ChargeMetierCompetence,
-  ChargeMetier, WinMetier, WinFiltre;
+  ChargeMetier, WinMetier, WinFiltre, AncrageProportionnel;
 
 type
 
@@ -38,6 +38,7 @@ type
     procedure FormClose({%H-}Sender: TObject; var CloseAction: TCloseAction);
     procedure FormCreate({%H-}Sender: TObject);
     procedure FormKeyPress({%H-}Sender: TObject; var Key: char);
+    procedure FormResize({%H-}Sender: TObject);
     procedure TabCompetenceAfterSelection({%H-}Sender: TObject; {%H-}aCol, aRow: Integer);
     procedure TabCompetenceDblClick({%H-}Sender: TObject);
     procedure TabMetierCompetenceDblClick({%H-}Sender: TObject);
@@ -46,6 +47,7 @@ type
     Procedure WinVider();
 
   private
+    Ancrage: TAncrageProportionnel;
 
   public
 
@@ -63,10 +65,38 @@ implementation
 
 { TWinCompetence }
 
+procedure TWinCompetence.FormResize(Sender: TObject);
+begin
+    if Ancrage <> nil then
+      Ancrage.Appliquer;
+end;
+
 procedure TWinCompetence.FormCreate(Sender: TObject);
 begin
     FiltreLivre := SelectWinLivre;
     WinCharger();
+    // Ancrage proportionnel, meme regle que WinRace (voir AncrageProportionnel).
+    Ancrage := TAncrageProportionnel.Create(Self);
+    Ancrage.Ajouter(ButtonFiltre, 0, 0.5);
+    Ancrage.Ajouter(TabCompetence, 0, 0.5);
+    Ancrage.Ajouter(AffCode, 0.5, 0);
+    Ancrage.Ajouter(LabCode, 0.5, 0);
+    Ancrage.Ajouter(LabLib, 0.5, 0);
+    Ancrage.Ajouter(AffLib, 0.5, 0.5);
+    Ancrage.Ajouter(LabAttribut, 0.5, 0);
+    Ancrage.Ajouter(AffAttribut, 0.5, 0);
+    Ancrage.Ajouter(LabDescription, 0.5, 0);
+    Ancrage.Ajouter(AffDescription, 0.5, 0.5);
+    Ancrage.Ajouter(LabSpecialisation, 0.5, 0);
+    Ancrage.Ajouter(AffSpecialisation, 0.5, 0.5);
+    Ancrage.Ajouter(ImageWar, 0.25, 0);
+    Ancrage.Ajouter(TabMetierCompetence, 1, 0);
+    Ancrage.Ajouter(LabMetierCompetence, 1, 0);
+    Ancrage.Ajouter(LabLivre, 1, 0);
+    Ancrage.Ajouter(AffLivre, 1, 0);
+    Ancrage.Ajouter(LabSpe, 1, 0);
+    Ancrage.Ajouter(TabSpe, 1, 0);
+    Ancrage.Fixer;
 end;
 
 procedure TWinCompetence.WinCharger();

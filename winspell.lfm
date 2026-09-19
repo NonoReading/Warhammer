@@ -10,6 +10,7 @@ object WinSpells: TWinSpells
   DesignTimePPI = 120
   OnClose = FormClose
   OnCreate = FormCreate
+  OnResize = FormResize
   OnKeyPress = FormKeyPress
   LCLVersion = '3.0.0.1'
   object ImageWar: TImage
@@ -80,7 +81,7 @@ object WinSpells: TWinSpells
     Height = 28
     Top = 114
     Width = 616
-    Anchors = [akTop, akLeft, akRight]
+    Anchors = [akTop, akLeft]
     Color = cl3DLight
     ReadOnly = True
     TabOrder = 2
@@ -206,7 +207,7 @@ object WinSpells: TWinSpells
     Height = 524
     Top = 306
     Width = 618
-    Anchors = [akTop, akLeft, akRight, akBottom]
+    Anchors = [akTop, akLeft, akBottom]
     Color = cl3DLight
     Lines.Strings = (
       'AffDescription'
@@ -220,7 +221,7 @@ object WinSpells: TWinSpells
     Height = 412
     Top = 418
     Width = 322
-    Anchors = [akTop, akRight, akBottom]
+    Anchors = [akTop, akBottom, akLeft]
     ColCount = 1
     TabOrder = 9
   end
@@ -252,7 +253,7 @@ object WinSpells: TWinSpells
     Height = 376
     Top = 18
     Width = 318
-    Anchors = [akTop, akRight]
+    Anchors = [akTop, akLeft]
     Proportional = True
     Stretch = True
   end

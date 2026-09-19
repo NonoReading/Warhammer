@@ -5,6 +5,11 @@
 =========================================================================
 CORRECTIONS COURTES  (une ligne ou deux chacune)
 =========================================================================
+[AJOUT LE 19/09/2026] ANCRAGE PROPORTIONNEL : LES AUTRES FENETRES NE L ONT PAS. Fait et valide sur les
+sept fenetres de base de donnees (CONTEXT.md 2.83, unite ancrageproportionnel.pas). A etendre si Nono le
+veut : WinSpecialisation, WinFabrication, WinMutation, WinLivre, WinCreation. WinPersonnage garde son
+propre moteur (CONTEXT.md 2.64, en pause).
+
 
 [CORRIGE LE 18/09/2026, TESTE EN JEU ET VALIDE PAR NONO - VOIR CONTEXT.md 2.82]
 LA VARIABLE AjoutMineur (winpersonnage.pas) N'ETAIT JAMAIS MISE A TRUE, RENDANT INACTIVE LA

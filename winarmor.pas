@@ -8,7 +8,7 @@ uses
   Classes, SysUtils, Forms, Controls, Graphics, Dialogs, Grids, StdCtrls,
   ExtCtrls, BCButton, ChargeArmure, GlobalFonts, ChargeConstantes,
   UnitCalcul, ChargeArmureBonus, ChargeArmureBonusModif, ChargeCompetence,
-  ChargeTexte, WinFiltre, ChargeArmureSimplifie;
+  ChargeTexte, WinFiltre, ChargeArmureSimplifie, AncrageProportionnel;
 
 type
 
@@ -48,12 +48,14 @@ type
     procedure CheckBoxSimplifiedClick(Sender: TObject);
     procedure FormCreate({%H-}Sender: TObject);
     procedure FormKeyPress({%H-}Sender: TObject; var Key: char);
+    procedure FormResize({%H-}Sender: TObject);
     procedure TabArmorDblClick({%H-}Sender: TObject);
     procedure TabArmorSelection({%H-}Sender: TObject; {%H-}aCol, aRow: Integer);
     procedure TabBonusSelection({%H-}Sender: TObject; {%H-}aCol, {%H-}aRow: Integer);
     procedure WinCharger();
     procedure WinVider();
   private
+    Ancrage: TAncrageProportionnel;
 
   public
 
@@ -70,11 +72,47 @@ implementation
 
 { TWinArmors }
 
+procedure TWinArmors.FormResize(Sender: TObject);
+begin
+    if Ancrage <> nil then
+      Ancrage.Appliquer;
+end;
+
 procedure TWinArmors.FormCreate(Sender: TObject);
   begin
     FiltreLivre := SelectWinLivre;
     CheckBoxSimplified.Checked := SelectWinQuickArmor;
     WinCharger();
+    // Ancrage proportionnel, meme regle que WinRace (voir AncrageProportionnel).
+    Ancrage := TAncrageProportionnel.Create(Self);
+    Ancrage.Ajouter(TabArmor, 0, 0.5);
+    Ancrage.Ajouter(AffCode, 0.5, 0);
+    Ancrage.Ajouter(LabCode, 0.5, 0);
+    Ancrage.Ajouter(LabLib, 0.5, 0);
+    Ancrage.Ajouter(AffLib, 0.5, 0);
+    Ancrage.Ajouter(ImageWar, 0.25, 0);
+    Ancrage.Ajouter(LabType, 0.5, 0);
+    Ancrage.Ajouter(AffType, 0.5, 0);
+    Ancrage.Ajouter(LabPrix, 0.5, 0);
+    Ancrage.Ajouter(AffPrix, 0.5, 0);
+    Ancrage.Ajouter(LabEncombrement, 0.5, 0);
+    Ancrage.Ajouter(AffEncombrement, 0.5, 0);
+    Ancrage.Ajouter(LabProtection, 0.5, 0);
+    Ancrage.Ajouter(AffProtection, 0.5, 0);
+    Ancrage.Ajouter(LabDisponibilite, 0.5, 0);
+    Ancrage.Ajouter(AffDisponbilite, 0.5, 0);
+    Ancrage.Ajouter(LabEmplacement, 0.5, 0);
+    Ancrage.Ajouter(AffEmplacement, 0.5, 0);
+    Ancrage.Ajouter(TabBonus, 0.5, 0);
+    Ancrage.Ajouter(LabBonus, 0.5, 0);
+    Ancrage.Ajouter(AffDescription, 0.5, 0.5);
+    Ancrage.Ajouter(LabLivre, 0.5, 0);
+    Ancrage.Ajouter(AffLivre, 0.5, 0);
+    Ancrage.Ajouter(Image1, 1, 0);
+    Ancrage.Ajouter(Image2, 1, 0);
+    Ancrage.Ajouter(Image3, 1, 0);
+    Ancrage.Ajouter(ButtonFiltre, 0, 0.5);
+    Ancrage.Fixer;
   end;
 
 procedure TWinArmors.WinCharger();

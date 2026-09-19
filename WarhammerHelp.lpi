@@ -140,6 +140,11 @@
         <UnitName Value="ChargeRace"/>
       </Unit>
       <Unit>
+        <Filename Value="ancrageproportionnel.pas"/>
+        <IsPartOfProject Value="True"/>
+        <UnitName Value="AncrageProportionnel"/>
+      </Unit>
+      <Unit>
         <Filename Value="winraces.pas"/>
         <IsPartOfProject Value="True"/>
         <ComponentName Value="WinRace"/>

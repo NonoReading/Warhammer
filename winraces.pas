@@ -13,7 +13,7 @@ uses
   ChargeRaceTalent, ChargeTalent, ChargeMetier, ChargeRaceMetier, ChargeMetierNiveau,
   GlobalFonts, ChargeTexte, ChargeMetierSousMetier, ChargeMetierRaceChoixMetier,
   ChargeRaceCorruptionCreation, WinFiltre, ChargeTalentCreation, PdfRace,
-  ChargeRaceOpinion;  // ✨ AJOUTER OPINIONS
+  ChargeRaceOpinion, AncrageProportionnel;
 
 type
   TMyNodeData = class
@@ -52,6 +52,7 @@ type
     procedure FormCloseQuery({%H-}Sender: TObject; var {%H-}CanClose: Boolean);
     procedure FormCreate({%H-}Sender: TObject);
     procedure FormKeyPress({%H-}Sender: TObject; var Key: char);
+    procedure FormResize({%H-}Sender: TObject);
     procedure TabRaceDblClick({%H-}Sender: TObject);
     procedure TabRaceSelection({%H-}Sender: TObject; {%H-}aCol, aRow: Integer);
     procedure TreeViewRaceAdvancedCustomDrawItem(Sender: TCustomTreeView;
@@ -62,6 +63,7 @@ type
     Procedure WinCharger();
     Procedure ChargeRaceAttribut();
   private
+    Ancrage: TAncrageProportionnel;
 
   public
 
@@ -174,6 +176,29 @@ procedure TWinRace.FormCreate(Sender: TObject);
   begin
     FiltreLivre := SelectWinLivre;
     WinCharger();
+    // Ancrage proportionnel (voir AncrageProportionnel) : le tableau prend la moitie de
+    // l'elargissement, les elements du milieu se decalent de la moitie, la zone de texte
+    // de droite se decale de la moitie et s'elargit de la moitie. Reference prise apres
+    // WinCharger, qui ajuste la taille de la grille sur son contenu.
+    Ancrage := TAncrageProportionnel.Create(Self);
+    Ancrage.Ajouter(TabRace,         0,   0.5);
+    Ancrage.Ajouter(ButtonFiltre,    0,   0.5);
+    Ancrage.Ajouter(ImageWar,        0.25, 0);   // reste centree au-dessus du tableau
+    Ancrage.Ajouter(TreeViewRace,    0.5, 0);
+    Ancrage.Ajouter(TabAttribut,     0.5, 0);
+    Ancrage.Ajouter(Image1,          0.5, 0);
+    Ancrage.Ajouter(Image2,          0.5, 0);
+    Ancrage.Ajouter(Image3,          0.5, 0);
+    Ancrage.Ajouter(PanelHautGauche, 0.5, 0);
+    Ancrage.Ajouter(AffRace,         0.5, 0.5);
+    Ancrage.Ajouter(PanelDescription, 0.5, 0.5);
+    Ancrage.Fixer;
+  end;
+
+procedure TWinRace.FormResize(Sender: TObject);
+  begin
+    if Ancrage <> nil then
+      Ancrage.Appliquer;
   end;
 
 

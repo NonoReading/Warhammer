@@ -12,6 +12,7 @@ object WintTalent: TWintTalent
   LCLVersion = '4.8.0.0'
   OnClose = FormClose
   OnCreate = FormCreate
+  OnResize = FormResize
   OnKeyPress = FormKeyPress
   object ButtonFiltre: TBCButton
     Left = 12
@@ -157,7 +158,7 @@ object WintTalent: TWintTalent
     Height = 28
     Top = 96
     Width = 1023
-    Anchors = [akTop, akLeft, akRight]
+    Anchors = [akTop, akLeft]
     ReadOnly = True
     TabOrder = 2
     Text = 'AffLib'
@@ -202,7 +203,7 @@ object WintTalent: TWintTalent
     Height = 548
     Top = 288
     Width = 493
-    Anchors = [akTop, akLeft, akRight, akBottom]
+    Anchors = [akTop, akLeft, akBottom]
     Lines.Strings = (
       'AffDescription'
     )
@@ -228,7 +229,7 @@ object WintTalent: TWintTalent
     Height = 28
     Top = 160
     Width = 1021
-    Anchors = [akTop, akLeft, akRight]
+    Anchors = [akTop, akLeft]
     ReadOnly = True
     TabOrder = 5
     Text = 'AffTest'
@@ -273,7 +274,7 @@ object WintTalent: TWintTalent
     Height = 543
     Top = 288
     Width = 216
-    Anchors = [akTop, akRight]
+    Anchors = [akTop, akLeft]
     ColCount = 1
     ColumnClickSorts = True
     TabOrder = 7
@@ -284,7 +285,7 @@ object WintTalent: TWintTalent
     Height = 20
     Top = 256
     Width = 43
-    Anchors = [akTop, akRight]
+    Anchors = [akTop, akLeft]
     Caption = 'Métier'
     Font.CharSet = ANSI_CHARSET
     Font.Color = clWhite
@@ -321,7 +322,7 @@ object WintTalent: TWintTalent
     Height = 20
     Top = 256
     Width = 98
-    Anchors = [akTop, akRight]
+    Anchors = [akTop, akLeft]
     Caption = 'Spécialisations'
     Font.CharSet = ANSI_CHARSET
     Font.Color = clWhite
@@ -335,7 +336,7 @@ object WintTalent: TWintTalent
     Height = 543
     Top = 288
     Width = 216
-    Anchors = [akTop, akRight]
+    Anchors = [akTop, akLeft]
     ColCount = 1
     ColumnClickSorts = True
     TabOrder = 9
@@ -359,7 +360,7 @@ object WintTalent: TWintTalent
     Height = 28
     Top = 224
     Width = 1021
-    Anchors = [akTop, akLeft, akRight]
+    Anchors = [akTop, akLeft]
     ReadOnly = True
     TabOrder = 10
     Text = 'AffDescShort'

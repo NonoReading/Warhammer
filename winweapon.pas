@@ -7,7 +7,7 @@ interface
 uses
   Classes, SysUtils, Forms, Controls, Graphics, Dialogs, Grids, StdCtrls,
   ExtCtrls, BCButton, ChargeArme, GlobalFonts, ChargeConstantes,
-  ChargeCompetence, UnitCalcul, ChargeArmeBonus, ChargeTexte, WinFiltre;
+  ChargeCompetence, UnitCalcul, ChargeArmeBonus, ChargeTexte, WinFiltre, AncrageProportionnel;
 
 type
 
@@ -47,12 +47,14 @@ type
     procedure ButtonFiltreClick({%H-}Sender: TObject);
     procedure FormCreate({%H-}Sender: TObject);
     procedure FormKeyPress({%H-}Sender: TObject; var Key: char);
+    procedure FormResize({%H-}Sender: TObject);
     procedure TabBonusSelection({%H-}Sender: TObject; {%H-}aCol, aRow: Integer);
     procedure TabWeaponAfterSelection({%H-}Sender: TObject; {%H-}aCol, aRow: Integer);
     procedure TabWeaponDblClick({%H-}Sender: TObject);
     procedure WinCharger();
     Procedure WinVider();
   private
+    Ancrage: TAncrageProportionnel;
 
   public
 
@@ -193,10 +195,49 @@ begin
     KeyPreview := true;
 end;
 
+procedure TWinWeapons.FormResize(Sender: TObject);
+begin
+    if Ancrage <> nil then
+      Ancrage.Appliquer;
+end;
+
 procedure TWinWeapons.FormCreate(Sender: TObject);
 begin
     FiltreLivre := SelectWinLivre;
-    WinCharger()
+    WinCharger();
+    // Ancrage proportionnel, meme regle que WinRace (voir AncrageProportionnel).
+    Ancrage := TAncrageProportionnel.Create(Self);
+    Ancrage.Ajouter(TabWeapon, 0, 0.5);
+    Ancrage.Ajouter(AffCode, 0.5, 0);
+    Ancrage.Ajouter(LabCode, 0.5, 0);
+    Ancrage.Ajouter(LabLib, 0.5, 0);
+    Ancrage.Ajouter(AffLib, 0.5, 0.5);
+    Ancrage.Ajouter(ImageWar, 0.25, 0);
+    Ancrage.Ajouter(LabCompetence, 0.5, 0);
+    Ancrage.Ajouter(AffCompetence, 0.5, 0.5);
+    Ancrage.Ajouter(LabMain, 0.5, 0);
+    Ancrage.Ajouter(AffMain, 0.5, 0);
+    Ancrage.Ajouter(LabPrix, 0.5, 0);
+    Ancrage.Ajouter(AffPrix, 0.5, 0);
+    Ancrage.Ajouter(LabEncombrement, 0.5, 0);
+    Ancrage.Ajouter(AffEncombrement, 0.5, 0);
+    Ancrage.Ajouter(LabPortee, 0.5, 0);
+    Ancrage.Ajouter(AffPortee, 0.5, 0);
+    Ancrage.Ajouter(LabDisponibilite, 0.5, 0);
+    Ancrage.Ajouter(AffDisponbilite, 0.5, 0);
+    Ancrage.Ajouter(LabDegat, 0.5, 0);
+    Ancrage.Ajouter(AffDegat, 0.5, 0);
+    Ancrage.Ajouter(LabMunition, 0.5, 0);
+    Ancrage.Ajouter(AffMunition, 0.5, 0);
+    Ancrage.Ajouter(TabBonus, 0.5, 0);
+    Ancrage.Ajouter(AffDescription, 0.5, 0.5);
+    Ancrage.Ajouter(LabBonus, 0.5, 0);
+    Ancrage.Ajouter(LabLivre, 1, 0);
+    Ancrage.Ajouter(AffLivre, 1, 0);
+    Ancrage.Ajouter(Image2, 1, 0);
+    Ancrage.Ajouter(Image1, 1, 0);
+    Ancrage.Ajouter(ButtonFiltre, 0, 0.5);
+    Ancrage.Fixer;
 end;
 
 procedure TWinWeapons.ButtonFiltreClick(Sender: TObject);

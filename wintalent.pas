@@ -8,7 +8,7 @@ uses
   Classes, SysUtils, Forms, Controls, Graphics, Dialogs, ComCtrls,
   Grids, StdCtrls, ExtCtrls, BCButton, ChargeTalent, ChargeConstantes,
   GlobalFonts, ChargeTexte, UnitCalcul, ChargeMetierTalent, ChargeMetier,
-  WinMetier, ChargeTalentCreation, WinFiltre;
+  WinMetier, ChargeTalentCreation, WinFiltre, AncrageProportionnel;
 
 type
 
@@ -42,6 +42,7 @@ type
   procedure FormClose({%H-}Sender: TObject; var CloseAction: TCloseAction);
   procedure FormCreate({%H-}Sender: TObject);
   procedure FormKeyPress({%H-}Sender: TObject; var Key: char);
+    procedure FormResize({%H-}Sender: TObject);
   procedure TabMetierTalentDblClick({%H-}Sender: TObject);
   procedure TabTalentDblClick({%H-}Sender: TObject);
   procedure TabTalentSelection({%H-}Sender: TObject; aCol, aRow: Integer);
@@ -49,6 +50,7 @@ type
   Procedure WinVider();
 
   private
+    Ancrage: TAncrageProportionnel;
   public
 
   end;
@@ -64,10 +66,42 @@ implementation
 
 { TWintTalent }
 
+procedure TWintTalent.FormResize(Sender: TObject);
+begin
+    if Ancrage <> nil then
+      Ancrage.Appliquer;
+end;
+
 procedure TWintTalent.FormCreate(Sender: TObject);
 begin
     FiltreLivre := SelectWinLivre;
     WinCharger();
+    // Ancrage proportionnel, meme regle que WinRace (voir AncrageProportionnel).
+    Ancrage := TAncrageProportionnel.Create(Self);
+    Ancrage.Ajouter(ButtonFiltre, 0, 0.5);
+    Ancrage.Ajouter(TabTalent, 0, 0.5);
+    Ancrage.Ajouter(AffCode, 0.5, 0);
+    Ancrage.Ajouter(LabCode, 0.5, 0);
+    Ancrage.Ajouter(LabLib, 0.5, 0);
+    Ancrage.Ajouter(AffLib, 0.5, 0.5);
+    Ancrage.Ajouter(LabAttribut, 0.5, 0);
+    Ancrage.Ajouter(AffAttribut, 0.5, 0);
+    Ancrage.Ajouter(LabDescription, 0.5, 0);
+    Ancrage.Ajouter(AffDescription, 0.5, 0.5);
+    Ancrage.Ajouter(LabTest, 0.5, 0);
+    Ancrage.Ajouter(AffTest, 0.5, 0.5);
+    Ancrage.Ajouter(LabMaxi, 0.5, 0);
+    Ancrage.Ajouter(AffMaxi, 0.5, 0);
+    Ancrage.Ajouter(ImageWar, 0.25, 0);
+    Ancrage.Ajouter(TabMetierTalent, 1, 0);
+    Ancrage.Ajouter(LabMetierTalent, 1, 0);
+    Ancrage.Ajouter(LabLivre, 1, 0);
+    Ancrage.Ajouter(AffLivre, 1, 0);
+    Ancrage.Ajouter(LabSpe, 1, 0);
+    Ancrage.Ajouter(TabSpe, 1, 0);
+    Ancrage.Ajouter(LabDescription1, 0.5, 0);
+    Ancrage.Ajouter(AffDecrShort, 0.5, 0.5);
+    Ancrage.Fixer;
 end;
 
 procedure TWintTalent.WinCharger();

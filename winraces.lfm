@@ -12,6 +12,7 @@ object WinRace: TWinRace
   OnClose = FormClose
   OnCloseQuery = FormCloseQuery
   OnCreate = FormCreate
+  OnResize = FormResize
   OnKeyPress = FormKeyPress
   object TabRace: TStringGrid
     Left = 9
@@ -44,7 +45,7 @@ object WinRace: TWinRace
     Top = 8
     Width = 712
     Alignment = taCenter
-    Anchors = [akTop, akLeft, akRight]
+    Anchors = [akTop, akLeft]
     Font.CharSet = ANSI_CHARSET
     Font.Color = clSilver
     Font.Height = -40
@@ -186,7 +187,7 @@ object WinRace: TWinRace
     Height = 825
     Top = 84
     Width = 473
-    Anchors = [akTop, akLeft, akRight, akBottom]
+    Anchors = [akTop, akLeft, akBottom]
     Caption = 'PanelDescription'
     ClientHeight = 825
     ClientWidth = 473

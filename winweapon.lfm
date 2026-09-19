@@ -9,6 +9,7 @@ object WinWeapons: TWinWeapons
   Color = clBlack
   DesignTimePPI = 120
   OnCreate = FormCreate
+  OnResize = FormResize
   OnKeyPress = FormKeyPress
   object TabWeapon: TStringGrid
     Left = 9
@@ -65,7 +66,7 @@ object WinWeapons: TWinWeapons
     Height = 28
     Top = 128
     Width = 817
-    Anchors = [akTop, akLeft, akRight]
+    Anchors = [akTop, akLeft]
     Color = cl3DLight
     ReadOnly = True
     TabOrder = 2
@@ -102,7 +103,7 @@ object WinWeapons: TWinWeapons
     Height = 28
     Top = 208
     Width = 817
-    Anchors = [akTop, akLeft, akRight]
+    Anchors = [akTop, akLeft]
     Color = cl3DLight
     ReadOnly = True
     TabOrder = 3
@@ -284,7 +285,7 @@ object WinWeapons: TWinWeapons
     Height = 310
     Top = 544
     Width = 351
-    Anchors = [akTop, akLeft, akRight, akBottom]
+    Anchors = [akTop, akLeft, akBottom]
     Color = cl3DLight
     Lines.Strings = (
       'AffDescription'
@@ -311,7 +312,7 @@ object WinWeapons: TWinWeapons
     Height = 20
     Top = 24
     Width = 31
-    Anchors = [akTop, akRight]
+    Anchors = [akTop, akLeft]
     Caption = 'Livre'
     Font.CharSet = ANSI_CHARSET
     Font.Color = clWhite
@@ -325,7 +326,7 @@ object WinWeapons: TWinWeapons
     Height = 28
     Top = 48
     Width = 219
-    Anchors = [akTop, akRight]
+    Anchors = [akTop, akLeft]
     Color = cl3DLight
     ReadOnly = True
     TabOrder = 13
@@ -337,7 +338,7 @@ object WinWeapons: TWinWeapons
     Height = 288
     Top = 248
     Width = 288
-    Anchors = [akTop, akRight]
+    Anchors = [akTop, akLeft]
     Proportional = True
     Stretch = True
   end
@@ -347,7 +348,7 @@ object WinWeapons: TWinWeapons
     Height = 288
     Top = 248
     Width = 288
-    Anchors = [akTop, akRight]
+    Anchors = [akTop, akLeft]
     Proportional = True
     Stretch = True
   end
