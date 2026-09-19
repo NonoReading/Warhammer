@@ -5279,3 +5279,7 @@ aucun nouveau) a chaque etape. Teste en jeu par Nono, valide sur les trois cas :
 specialisation manquante, bloque si sort manquant, ajoute bien le sort si les deux sont
 donnes.
 Fichiers modifies : winpersonnage.pas, CONTEXT.md, Log.txt, A FAIRE.txt.
+
+19/09/2026 - VERIFICATION "NOM DE PERSONNAGE DEJA PRIS" CORRIGEE
+wincreation.pas (phase 8, ChangementPhase) : DirectoryExists testait GetCurrentDir+Nom sans ConstCheminPersonnage, donc ne detectait jamais un doublon ; la creation echouait ensuite sur CreateDir (RULES-MESS_001). Chemin aligne sur celui de la sauvegarde ; RULES-MESS_018 s'affiche desormais a l'etape du nom. Repere le 16/09 (CONTEXT.md 2.79). Teste en jeu et valide par Nono.
+Fichiers modifies : wincreation.pas, Log.txt, A FAIRE.txt.

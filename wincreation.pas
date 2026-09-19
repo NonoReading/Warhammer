@@ -1765,7 +1765,7 @@ Function TWinCreations.PageEtapesChange(): boolean;
               end
             else
               begin
-                if DirectoryExists(GetCurrentDir+EditNomPersonnag.text) then
+                if DirectoryExists(GetCurrentDir+ConstCheminPersonnage+EditNomPersonnag.text) then
                   begin
                     ShowMessage(GetTexteLibelle('RULES-MESS_018'));
                     Ok := False;
