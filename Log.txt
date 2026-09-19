@@ -5400,3 +5400,28 @@ Nono valide l ancrage de WinPersonnage (moteur AjustePositionTables, CONTEXT.md 
 Nouveau livre DATABASE/WFRP4/BOOK_DWARF_PLAYERS_GUIDE.Xml (code DWARF, officiel, COMPLETE=0), declare dans INI.TXT (BOOKWFRP4). Chapitre Steel and Fire p.93-97 : 9 armes de melee, 11 a distance et explosifs, 7 armures, 9 objets, qualite Salvo (DWARF-WEAPB01). Armes deja presentes dans ARCH1 avec un autre profil suffixees (DPG). Gromril : Durable/Fine laisses a la fabrication. Verifie : XML valide, 37 identifiants uniques, references resolues.
 Appris : Scarce = DISPO_LIMITED, n/a = DISPO_UNIQUE, 1/- = 1PA.
 Fichiers modifies : BOOK_DWARF_PLAYERS_GUIDE.Xml, INI.TXT, Log.txt, CONTEXT.md, A FAIRE.txt.
+
+19/09/2026 - HERBES DE DEATH ON THE REIK COMPANION : VALIDEES PAR NONO
+Les 21 herbes (Locality/Season) s affichent correctement dans WinEquipement. Compile et teste.
+
+19/09/2026 - DWARF PLAYERS GUIDE : LOT A CARRIERES, 19 TALENTS (XML VALIDE, NON CHARGE)
+BOOK_DWARF_PLAYERS_GUIDE.Xml : bloc DATA_TALENT DWARF-T0001 a T0019 (p.81-83, ordre alphabetique). Crew Commander deja UPINA-T0173, non redeclare. Rune Magic a Max texte "Intelligence Bonus + Willpower Bonus" (a verifier au chargement). RESTE du lot A : competence Runesmithing, Lore (Runes), Sail (Skycraft).
+Fichiers modifies : BOOK_DWARF_PLAYERS_GUIDE.Xml, Log.txt.
+
+19/09/2026 - DWARF PLAYERS GUIDE : LOT A TERMINE (TALENTS VALIDES, COMPETENCES AJOUTEES)
+Talents DWARF-T0001 a T0019 charges et valides par Nono. Ajout : competence Runesmithing (DWARF-COMPRUNESMITH, Dex) et specialisation Lore (Runes) (DWARF-COMPSAVOIR_RUNES). Sail (Skycraft) : pas de specialisation de Sail dans le projet, on utilise RULES-COMPVOILE comme HELFG. Non charge. Prochain : lot B (Brewer, Hammerer, Ironbreaker, Thane...).
+
+19/09/2026 - DWARF PLAYERS GUIDE : LOT B CARRIERES, BREWER VALIDE + 4 CARRIERES (NON CHARGE)
+Brewer (DWARF-WORK01) valide par Nono. Ajout de Hammerer (WORK02), Ironbreaker (WORK03), Karak Ranger (WORK04), Thane (WORK05), lues sur les pages 68/70/72/78 rendues en image (pdftoppm dans C:\poppler-26.02.0\Libraryin) : le tableau d avance se lit aux icones (croix=1, marteaux=2, crane=3, bouclier=4). Classes lues dans la table aleatoire p.50. Toutes les references resolues. Textes libres : Gromril Suit, Runic Armour/Hammer/Wargear, Unit/Army of..., Leather Breastplate, Sturdy Boots. "Two Drakefire Pistols" = 2 lignes. RESTE : Doom Priest, Forge Priest, Hearth Priest, Runescribe, Runesmith (lot C), variantes p.54-61, colonnes de forteresse de la table p.50.
+Fichiers modifies : BOOK_DWARF_PLAYERS_GUIDE.Xml, Log.txt.
+
+19/09/2026 - DWARF PLAYERS GUIDE : LOT C CARRIERES, 5 CARRIERES DE PRETRES ET RUNES (NON CHARGE)
+Lot B (Hammerer, Ironbreaker, Karak Ranger, Thane) valide par Nono. Ajout de Doom Priest (WORK06, Warriors), Forge Priest (WORK07), Hearth Priest (WORK08), Runescribe (WORK09), Runesmith (WORK10), toutes Academics sauf Doom Priest, lues sur les pages 64/66/67/74/76 en image. Les 10 carrieres exclusives du livre sont saisies, references toutes resolues.
+Rune Magic et Master Rune Magic deviennent des generiques DWARF-T0015_* et DWARF-T0013_* (comme Fearless), avec 10 specialisations (Protection, Weapon, Armour and Engineering, Protection and Talismanic, Rune of Stone, All Forms ; Master : Protection and Weapon, Protection, Talismanic, All Forms). "Protective Runes" du Hearthmaster lu comme Protection Runes. Ajout de Secret Signs (Brotherhood of Grimnir) (DWARF-COMPSIGNES_GRIMNIR). Les runes elles-memes (p.127-132) et la Forge Rune Endeavour ne sont pas modelisees : les talents ne portent que leur texte. Textes libres : Chainaxes, Temple, Beardling Initiate/Apprentice, Runic Item/Wargear/Hammer/Shield/Axe, Books, Personal Study.
+Fichiers modifies : BOOK_DWARF_PLAYERS_GUIDE.Xml, Log.txt.
+
+19/09/2026 - DWARF PLAYERS GUIDE : LES 10 CARRIERES EXCLUSIVES VALIDEES PAR NONO
+Lots B et C charges et valides. CONTEXT.md (2.36) et A FAIRE.txt mis a jour. Prochain : variantes p.54-61 (conception a trancher).
+
+19/09/2026 - DWARF PLAYERS GUIDE : LES 10 CARRIERES EXCLUSIVES VALIDEES PAR NONO
+Lots B et C charges et valides. CONTEXT.md (2.36) et A FAIRE.txt mis a jour. Prochain : variantes p.54-61 (conception a trancher).

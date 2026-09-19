@@ -29,6 +29,1642 @@
 <Text name="DWARF-BOOK DWARF PLAYERS GUIDE">"Dwarf Player&apos;s Guide"</Text>
 </Label>
 </DATA_LABEL>
+<DATA_SKILL>
+  <!-- Competence avancee propre aux nains, p.80. Sail (Skycraft) : le projet n a pas de specialisation de Sail (cf. HELFG), on utilise RULES-COMPVOILE. -->
+<Skill id="DWARF-COMPRUNESMITH">
+<Attribut>"RULES-ATTR_Dex"</Attribut>
+<Description language="ENGLISH">"Runesmithing"</Description>
+<Explanation language="ENGLISH">"Runesmithing is used for crafting magical runes, and to harness magic to reawaken or deactivate runes forged by others. It is a difficult, exacting Skill, that requires formidable concentration, with none of the immediate flashy effects of conventional spellcraft. Much of the process is conducted by gut instinct, and subconscious attunement with magical forces. This distinguishes the Skill from Lore (Runes): any Dwarf can learn runelore if given the chance, but only a few have the gift to transmute the Winds of Magic into physical form."</Explanation>
+</Skill>
+</DATA_SKILL>
+<DATA_SKILL_SPECIALIZATION>
+<Skill id="DWARF-COMPSAVOIR_RUNES">
+<Description language="ENGLISH">"Lore (Runes)"</Description>
+<Generique>"RULES-COMPSAVOIR_*"</Generique>
+</Skill>
+<Skill id="DWARF-COMPSIGNES_GRIMNIR">
+<Description language="ENGLISH">"Secret Signs (Brotherhood of Grimnir)"</Description>
+<Generique>"RULES-COMPSIGNES_*"</Generique>
+</Skill>
+</DATA_SKILL_SPECIALIZATION>
+<DATA_TALENT_SPECIALIZATION>
+<Talent id="DWARF-T0015_PROT">
+<Description language="ENGLISH">"Rune Magic (Protection Runes)"</Description>
+<Generique>"DWARF-T0015_*"</Generique>
+</Talent>
+<Talent id="DWARF-T0015_WEAP">
+<Description language="ENGLISH">"Rune Magic (Weapon Runes)"</Description>
+<Generique>"DWARF-T0015_*"</Generique>
+</Talent>
+<Talent id="DWARF-T0015_ARMENG">
+<Description language="ENGLISH">"Rune Magic (Armour Runes and Engineering Runes)"</Description>
+<Generique>"DWARF-T0015_*"</Generique>
+</Talent>
+<Talent id="DWARF-T0015_PROTTALI">
+<Description language="ENGLISH">"Rune Magic (Protection Runes and Talismanic Runes)"</Description>
+<Generique>"DWARF-T0015_*"</Generique>
+</Talent>
+<Talent id="DWARF-T0015_STONE">
+<Description language="ENGLISH">"Rune Magic (Rune of Stone)"</Description>
+<Generique>"DWARF-T0015_*"</Generique>
+</Talent>
+<Talent id="DWARF-T0015_ALL">
+<Description language="ENGLISH">"Rune Magic (All Forms)"</Description>
+<Generique>"DWARF-T0015_*"</Generique>
+</Talent>
+<Talent id="DWARF-T0013_PROTWEAP">
+<Description language="ENGLISH">"Master Rune Magic (Protection Runes and Weapon Runes)"</Description>
+<Generique>"DWARF-T0013_*"</Generique>
+</Talent>
+<Talent id="DWARF-T0013_PROT">
+<Description language="ENGLISH">"Master Rune Magic (Protection Runes)"</Description>
+<Generique>"DWARF-T0013_*"</Generique>
+</Talent>
+<Talent id="DWARF-T0013_TALI">
+<Description language="ENGLISH">"Master Rune Magic (Talismanic Runes)"</Description>
+<Generique>"DWARF-T0013_*"</Generique>
+</Talent>
+<Talent id="DWARF-T0013_ALL">
+<Description language="ENGLISH">"Master Rune Magic (All Forms)"</Description>
+<Generique>"DWARF-T0013_*"</Generique>
+</Talent>
+</DATA_TALENT_SPECIALIZATION>
+<DATA_TALENT>
+  <!-- LOT A carrieres (19/09/2026) : les 19 talents nains du chapitre Careers p.81-83. Crew Commander est deja UPINA-T0173 (Up in Arms), non redeclare. Numerotation DWARF-T0001 a T0019 par ordre alphabetique. -->
+<Talent id="DWARF-T0001">
+<Attribut>""</Attribut>
+<Description language="ENGLISH">"Ancestral Grudge"</Description>
+<Short language="ENGLISH">""</Short>
+<Explanation language="ENGLISH">"Choose a culture or faction that is the target of your Ancestral Grudge (e.g. Orcs, Goblins, Skaven, Trolls, Daemons of Khorne). Enter them into your Book of Grudges as the target of your vengeance. You bear this group a Blood Grudge that can never be satisfied. However, every time you win a significant victory against this group (destroying their works, taking back something stolen, killing many of their kind) you gain 50 XP.
+Each time you purchase this Talent, you gain an Ancestral Grudge against a different faction. At the GM's discretion, declaring vengeance against a smaller sub-faction can award more XP: 75 XP per victory against a specific Goblin tribe, 100 XP per victory against a specific Human family line."</Explanation>
+<Skill>""</Skill>
+<Max>"(BATTR_WP)"</Max>
+<PDF>""</PDF>
+<Test language="ENGLISH">""</Test>
+</Talent>
+<Talent id="DWARF-T0002">
+<Attribut>""</Attribut>
+<Description language="ENGLISH">"Bludgeoner"</Description>
+<Short language="ENGLISH">""</Short>
+<Explanation language="ENGLISH">"When you win an opposed Test to activate the Pummel Quality, you inflict an additional Stunned Condition for each level of Bludgeoner."</Explanation>
+<Skill>""</Skill>
+<Max>"(BATTR_S)"</Max>
+<PDF>""</PDF>
+<Test language="ENGLISH">"Strength Tests when activating Pummel Quality"</Test>
+</Talent>
+<Talent id="DWARF-T0003">
+<Attribut>""</Attribut>
+<Description language="ENGLISH">"Demolisher"</Description>
+<Short language="ENGLISH">""</Short>
+<Explanation language="ENGLISH">"When you activate the Hack Quality as part of an attack, you inflict +1 additional Damage on struck armour or shields for each level of Demolisher. In addition, when attacking an enemy in cover with a weapon that has the Hack Quality, hard cover counts as medium cover, medium cover counts as soft cover, and soft cover provides no protection at all."</Explanation>
+<Skill>""</Skill>
+<Max>"(BATTR_S)"</Max>
+<PDF>""</PDF>
+<Test language="ENGLISH">"Melee when breaking inanimate objects using a Hack weapon"</Test>
+</Talent>
+<Talent id="DWARF-T0004">
+<Attribut>""</Attribut>
+<Description language="ENGLISH">"Dragon Belcher"</Description>
+<Short language="ENGLISH">""</Short>
+<Explanation language="ENGLISH">"When you fire a weapon with the Blackpowder Quality, targeted enemies who fail their Cool Test gain an additional Broken Condition for each level of Dragon Belcher."</Explanation>
+<Skill>""</Skill>
+<Max>"(BATTR_BS)"</Max>
+<PDF>""</PDF>
+<Test language="ENGLISH">""</Test>
+</Talent>
+<Talent id="DWARF-T0005">
+<Attribut>""</Attribut>
+<Description language="ENGLISH">"Entrenchment"</Description>
+<Short language="ENGLISH">""</Short>
+<Explanation language="ENGLISH">"When you are in soft cover, attacks against you are Hard (-20) instead of Difficult (-10). When you are in medium cover, attacks against you are Very Hard (-30) instead of Hard (-20)."</Explanation>
+<Skill>""</Skill>
+<Max>"(BATTR_Int)"</Max>
+<PDF>""</PDF>
+<Test language="ENGLISH">"Trade when constructing protective cover"</Test>
+</Talent>
+<Talent id="DWARF-T0006">
+<Attribut>""</Attribut>
+<Description language="ENGLISH">"Forgefire"</Description>
+<Short language="ENGLISH">""</Short>
+<Explanation language="ENGLISH">"When you are Engaged, any melee weapons wielded by yourself or an ally within Willpower Bonus yards gain the Penetrating Quality. If an affected weapon is already Penetrating, its attacks now ignore 1 additional point of non-metal armour."</Explanation>
+<Skill>""</Skill>
+<Max>"1"</Max>
+<PDF>""</PDF>
+<Test language="ENGLISH">""</Test>
+</Talent>
+<Talent id="DWARF-T0007">
+<Attribut>""</Attribut>
+<Description language="ENGLISH">"Glorious Demise"</Description>
+<Short language="ENGLISH">""</Short>
+<Explanation language="ENGLISH">"When you gain the Unconscious Condition, you can interrupt the Turn order to make an immediate Melee attack as a Free Action, before you are taken out of action.
+When you gain the Stunned Condition, you can spend a Fortune point to make an immediate Melee attack as a Free Action. You take your next Turn as usual, which means you cannot take an Action if you are still Stunned."</Explanation>
+<Skill>""</Skill>
+<Max>"1"</Max>
+<PDF>""</PDF>
+<Test language="ENGLISH">""</Test>
+</Talent>
+<Talent id="DWARF-T0008">
+<Attribut>""</Attribut>
+<Description language="ENGLISH">"Harpooner"</Description>
+<Short language="ENGLISH">""</Short>
+<Explanation language="ENGLISH">"When you inflict a Critical Hit with a Crossbow weapon, you may increase your roll on the Critical Hit table by +10 for each level of Harpooner, to a maximum of 00. In addition, Crossbow bolts lodged into the target's body due to the Impale Quality reduce the target's Movement by 1 per bolt, to a minimum of 1."</Explanation>
+<Skill>""</Skill>
+<Max>"(BATTR_BS)"</Max>
+<PDF>""</PDF>
+<Test language="ENGLISH">""</Test>
+</Talent>
+<Talent id="DWARF-T0009">
+<Attribut>""</Attribut>
+<Description language="ENGLISH">"Kingsguard"</Description>
+<Short language="ENGLISH">""</Short>
+<Explanation language="ENGLISH">"Any enemy attacks against an ally within 2 yards of you suffer a -10 modifier for each level of Kingsguard. This Talent does not apply to attacks against yourself, nor does it apply if you are currently suffering from a Condition."</Explanation>
+<Skill>""</Skill>
+<Max>"3"</Max>
+<PDF>""</PDF>
+<Test language="ENGLISH">""</Test>
+</Talent>
+<Talent id="DWARF-T0010">
+<Attribut>""</Attribut>
+<Description language="ENGLISH">"Liquid Fortification"</Description>
+<Short language="ENGLISH">""</Short>
+<Explanation language="ENGLISH">"You gain +10 Strength and Toughness after consuming an alcoholic drink. This provides an immediate bonus to your Consume Alcohol Test for consuming the drink, and the benefit continues to apply whether you succeed or fail on that Test. You retain this bonus until an hour has passed since your last alcoholic drink; drinking again can prolong the effect, but does not increase your Characteristic bonuses beyond +10."</Explanation>
+<Skill>""</Skill>
+<Max>"(BATTR_T)"</Max>
+<PDF>""</PDF>
+<Test language="ENGLISH">"Consume Alcohol"</Test>
+</Talent>
+<Talent id="DWARF-T0011">
+<Attribut>""</Attribut>
+<Description language="ENGLISH">"Long Memory"</Description>
+<Short language="ENGLISH">""</Short>
+<Explanation language="ENGLISH">"When recalling significant events you were involved in previously in the campaign, you can perfectly remember the time, date, location, and visible faces of all individuals present, and exactly what those present pledged to say or do. If recalling a significant event you witnessed before the campaign began, you may need to take an Intelligence Test to remember details, with a difficulty set by the intervening time: Easy (+40) for events mere months ago, Hard (-20) for events a century ago."</Explanation>
+<Skill>""</Skill>
+<Max>"(BATTR_Int)"</Max>
+<PDF>""</PDF>
+<Test language="ENGLISH">"Intelligence Tests to remember"</Test>
+</Talent>
+<Talent id="DWARF-T0012">
+<Attribut>""</Attribut>
+<Description language="ENGLISH">"Magic Defiance"</Description>
+<Short language="ENGLISH">""</Short>
+<Explanation language="ENGLISH">"You can Reverse any Test you are obliged to make as part of a magic spell's effects, as well as Tests to dispel magic with Magic Resistance."</Explanation>
+<Skill>""</Skill>
+<Max>"(BATTR_WP)"</Max>
+<PDF>""</PDF>
+<Test language="ENGLISH">"Willpower Tests to use Magic Resistance"</Test>
+</Talent>
+<Talent id="DWARF-T0013_*">
+<Attribut>""</Attribut>
+<Description language="ENGLISH">"Master Rune Magic"</Description>
+<Short language="ENGLISH">""</Short>
+<Explanation language="ENGLISH">"Choose a master rune from pages 127-131. If your Talent specifies a runic form or forms (e.g. Protection Runes), you must choose a master rune from the specified lists. You can use the Forge Rune Endeavour to inscribe your chosen master rune on an item. Each time you purchase this Talent, you learn a new master rune you can craft. The first time you acquire this Talent, you also learn all three Doom Runes (page 132)."</Explanation>
+<Skill>""</Skill>
+<Max>"(BATTR_WP)"</Max>
+<PDF>""</PDF>
+<Test language="ENGLISH">"Runesmithing"</Test>
+</Talent>
+<Talent id="DWARF-T0014">
+<Attribut>""</Attribut>
+<Description language="ENGLISH">"Maverick"</Description>
+<Short language="ENGLISH">""</Short>
+<Explanation language="ENGLISH">"You do not suffer the -20 penalty on Ranged attacks when using the Flight Creature Trait."</Explanation>
+<Skill>""</Skill>
+<Max>"(BATTR_Ag)"</Max>
+<PDF>""</PDF>
+<Test language="ENGLISH">"Sail (Skycraft) Tests to fly fast and dangerous"</Test>
+</Talent>
+<Talent id="DWARF-T0015_*">
+<Attribut>""</Attribut>
+<Description language="ENGLISH">"Rune Magic"</Description>
+<Short language="ENGLISH">""</Short>
+<Explanation language="ENGLISH">"Choose a rune from pages 127-131. You cannot select a master rune. If your Talent specifies a runic form or forms (e.g. Protection Runes), you must choose a rune from the specified lists. If it specifies a specific rune (e.g. the Rune of Stone), you must choose that specific rune. You can use the Forge Rune Endeavour to inscribe your chosen rune on an item. Each time you purchase this Talent, you learn a new rune you can craft."</Explanation>
+<Skill>""</Skill>
+<Max>"Intelligence Bonus + Willpower Bonus"</Max>
+<PDF>""</PDF>
+<Test language="ENGLISH">"Runesmithing"</Test>
+</Talent>
+<Talent id="DWARF-T0016">
+<Attribut>""</Attribut>
+<Description language="ENGLISH">"Short Fuse"</Description>
+<Short language="ENGLISH">""</Short>
+<Explanation language="ENGLISH">"When using an Explosive weapon with the Blast Quality, increase its Rating by +1 for each level of Short Fuse."</Explanation>
+<Skill>""</Skill>
+<Max>"(BATTR_Int)"</Max>
+<PDF>""</PDF>
+<Test language="ENGLISH">""</Test>
+</Talent>
+<Talent id="DWARF-T0017">
+<Attribut>""</Attribut>
+<Description language="ENGLISH">"Tireless"</Description>
+<Short language="ENGLISH">""</Short>
+<Explanation language="ENGLISH">"When you apply penalties due to suffering from the Fatigued Condition, you may ignore 1 instance of the Fatigued Condition, +1 additional Fatigued Condition for each level of Tireless."</Explanation>
+<Skill>""</Skill>
+<Max>"(BATTR_T)"</Max>
+<PDF>""</PDF>
+<Test language="ENGLISH">""</Test>
+</Talent>
+<Talent id="DWARF-T0018">
+<Attribut>""</Attribut>
+<Description language="ENGLISH">"Underminer"</Description>
+<Short language="ENGLISH">""</Short>
+<Explanation language="ENGLISH">"You do not suffer penalties for attacking whilst you have the Prone Condition, or are otherwise beneath your target. Enemies do not get a bonus to attack you whilst you have the Prone Condition. You gain an additional +20 to hit Surprised enemies, when you are emerging from a tunnel, pit, or other hidden position below them."</Explanation>
+<Skill>""</Skill>
+<Max>"(BATTR_Ag)"</Max>
+<PDF>""</PDF>
+<Test language="ENGLISH">""</Test>
+</Talent>
+<Talent id="DWARF-T0019">
+<Attribut>""</Attribut>
+<Description language="ENGLISH">"Whirlwind of Death"</Description>
+<Short language="ENGLISH">""</Short>
+<Explanation language="ENGLISH">"As an Action, you can spend 1 Fortune to make a Melee attack against all creatures Engaged with you. The GM chooses one enemy to Oppose this Test. If your attack succeeds, you inflict the same Damage to the same Hit Location against all Engaged creatures, calculated as normal. Do not apply Criticals on Whirlwind of Death attacks, though Critical Wounds are inflicted on enemies reduced to 0 Wounds as normal. You cannot activate any other special attack options as part of a Whirlwind of Death. However, a Character with Dual Wielder wielding two weapons as part of a Whirlwind of Death may Reverse their Melee attack Test."</Explanation>
+<Skill>""</Skill>
+<Max>"1"</Max>
+<PDF>""</PDF>
+<Test language="ENGLISH">""</Test>
+</Talent>
+</DATA_TALENT>
+<DATA_SPECIE_CAREER_DIRECT>
+  <!-- Carrieres exclusives aux nains (p.62-79), offertes sans jet. Les 11 colonnes de la table aleatoire p.50 (une par forteresse) ne sont pas saisies. -->
+<Entry>
+<Specie>"RULES-SPECIE_DWARF"</Specie>
+<Career name="DWARF-WORK01">"X"</Career>
+  <!-- Brewer -->
+</Entry>
+<Entry>
+<Specie>"RULES-SPECIE_DWARF"</Specie>
+<Career name="DWARF-WORK02">"X"</Career>
+  <!-- Hammerer -->
+</Entry>
+<Entry>
+<Specie>"RULES-SPECIE_DWARF"</Specie>
+<Career name="DWARF-WORK03">"X"</Career>
+  <!-- Ironbreaker -->
+</Entry>
+<Entry>
+<Specie>"RULES-SPECIE_DWARF"</Specie>
+<Career name="DWARF-WORK04">"X"</Career>
+  <!-- Karak Ranger -->
+</Entry>
+<Entry>
+<Specie>"RULES-SPECIE_DWARF"</Specie>
+<Career name="DWARF-WORK05">"X"</Career>
+  <!-- Thane -->
+</Entry>
+<Entry>
+<Specie>"RULES-SPECIE_DWARF"</Specie>
+<Career name="DWARF-WORK06">"X"</Career>
+  <!-- Doom Priest -->
+</Entry>
+<Entry>
+<Specie>"RULES-SPECIE_DWARF"</Specie>
+<Career name="DWARF-WORK07">"X"</Career>
+  <!-- Forge Priest -->
+</Entry>
+<Entry>
+<Specie>"RULES-SPECIE_DWARF"</Specie>
+<Career name="DWARF-WORK08">"X"</Career>
+  <!-- Hearth Priest -->
+</Entry>
+<Entry>
+<Specie>"RULES-SPECIE_DWARF"</Specie>
+<Career name="DWARF-WORK09">"X"</Career>
+  <!-- Runescribe -->
+</Entry>
+<Entry>
+<Specie>"RULES-SPECIE_DWARF"</Specie>
+<Career name="DWARF-WORK10">"X"</Career>
+  <!-- Runesmith -->
+</Entry>
+</DATA_SPECIE_CAREER_DIRECT>
+<DATA_CAREER>
+  <!-- LOT B (19/09/2026) : carrieres nouvelles exclusives aux nains. Tableau d avance : niveau ou apparait le repere (croix=1, marteaux=2, crane=3, bouclier=4). -->
+<Career id="DWARF-WORK01">
+<Description language="ENGLISH">"Brewer"</Description>
+<Explanation language="ENGLISH">"You prepare alcoholic drinks of such strength and quality that no Dwarf can fail to appreciate them."</Explanation>
+<Skill>"RULES-COMPMETIER_BRAS"</Skill>
+<Class>"RULES-CLASS_BURG"</Class>
+<SUBCHAPTER_LEVEL>
+<Level id="1">
+<Description language="ENGLISH">"Apprentice Brewer"</Description>
+<Salary>"TIERS_BRASS 3"</Salary>
+</Level>
+<Level id="2">
+<Description language="ENGLISH">"Brewer"</Description>
+<Salary>"TIERS_SILVER 2"</Salary>
+</Level>
+<Level id="3">
+<Description language="ENGLISH">"Brewmaster"</Description>
+<Salary>"TIERS_SILVER 4"</Salary>
+</Level>
+<Level id="4">
+<Description language="ENGLISH">"Chief Victualler"</Description>
+<Salary>"TIERS_GOLD 3"</Salary>
+</Level>
+</SUBCHAPTER_LEVEL>
+<SUBCHAPTER_ATTR>
+<Attribut name="RULES-ATTR_WS">"0"</Attribut>
+<Attribut name="RULES-ATTR_BS">"0"</Attribut>
+<Attribut name="RULES-ATTR_S">"0"</Attribut>
+<Attribut name="RULES-ATTR_T">"1"</Attribut>
+<Attribut name="RULES-ATTR_I">"1"</Attribut>
+<Attribut name="RULES-ATTR_Ag">"0"</Attribut>
+<Attribut name="RULES-ATTR_Dex">"1"</Attribut>
+<Attribut name="RULES-ATTR_Int">"3"</Attribut>
+<Attribut name="RULES-ATTR_WP">"4"</Attribut>
+<Attribut name="RULES-ATTR_Fel">"2"</Attribut>
+</SUBCHAPTER_ATTR>
+<SUBCHAPTER_SKILL>
+<Skill name="RULES-COMPATHL">"1"</Skill>
+  <!-- Athletics -->
+<Skill name="RULES-COMPRESALC">"1"</Skill>
+  <!-- Consume Alcohol -->
+<Skill name="RULES-COMPCALM">"1"</Skill>
+  <!-- Cool -->
+<Skill name="RULES-COMPCOND">"1"</Skill>
+  <!-- Drive -->
+<Skill name="RULES-COMPRESIST">"1"</Skill>
+  <!-- Endurance -->
+<Skill name="RULES-COMPDIVERT_CHANT/RULES-COMPDIVERT_NARRA">"1"</Skill>
+  <!-- Entertain (Singing or Storytelling) -->
+<Skill name="RULES-COMPEVAL">"1"</Skill>
+  <!-- Evaluate -->
+<Skill name="RULES-COMPCOMB_BASE/RULES-COMPCOMB_2M">"1"</Skill>
+  <!-- Melee (Basic or Two-handed) -->
+<Skill name="RULES-COMPPRECEP">"1"</Skill>
+  <!-- Perception -->
+<Skill name="RULES-COMPMETIER_BRAS">"1"</Skill>
+  <!-- Trade (Brewer) -->
+<Skill name="RULES-COMPCHARM">"2"</Skill>
+  <!-- Charm -->
+<Skill name="RULES-COMPESQU">"2"</Skill>
+  <!-- Dodge -->
+<Skill name="RULES-COMPGUERI">"2"</Skill>
+  <!-- Heal -->
+<Skill name="RULES-COMPRAGOT">"2"</Skill>
+  <!-- Gossip -->
+<Skill name="RULES-COMPLANG_GUILD">"2"</Skill>
+  <!-- Language (Guilder) -->
+<Skill name="RULES-COMPPROJ_ARB/RULES-COMPPROJ_LANC">"2"</Skill>
+  <!-- Ranged (Crossbow or Throwing) -->
+<Skill name="RULES-COMPMARCH">"3"</Skill>
+  <!-- Haggle -->
+<Skill name="RULES-COMPCOMM">"3"</Skill>
+  <!-- Leadership -->
+<Skill name="RULES-COMPSIGNES_GUILD">"3"</Skill>
+  <!-- Secret Signs (Guilder) -->
+<Skill name="RULES-COMPMETIER_APOTH">"3"</Skill>
+  <!-- Trade (Apothecary) -->
+<Skill name="RULES-COMPINTUI">"4"</Skill>
+  <!-- Intuition -->
+<Skill name="RULES-COMPMETIER_CUIS">"4"</Skill>
+  <!-- Trade (Cook) -->
+</SUBCHAPTER_SKILL>
+<SUBCHAPTER_TALENT>
+<Talent name="RULES-T0104">"1"</Talent>
+  <!-- Carouser -->
+<Talent name="RULES-T0092_BRAS">"1"</Talent>
+  <!-- Craftsman (Brewer) -->
+<Talent name="RULES-T0077">"1"</Talent>
+  <!-- Strong Back -->
+<Talent name="RULES-T0158">"1"</Talent>
+  <!-- Very Strong -->
+<Talent name="RULES-T0102">"2"</Talent>
+  <!-- Dealmaker -->
+<Talent name="RULES-T0142">"2"</Talent>
+  <!-- Gregarious -->
+<Talent name="DWARF-T0010">"2"</Talent>
+  <!-- Liquid Fortification -->
+<Talent name="RULES-T0035">"2"</Talent>
+  <!-- Sturdy -->
+<Talent name="RULES-T0139_GOUT">"3"</Talent>
+  <!-- Acute Sense (Taste) -->
+<Talent name="RULES-T0031">"3"</Talent>
+  <!-- Concoct -->
+<Talent name="RULES-T0025">"3"</Talent>
+  <!-- Stout-hearted -->
+<Talent name="RULES-T0157_BRAS">"3"</Talent>
+  <!-- Master Tradesman (Brewer) -->
+<Talent name="RULES-T0139_ODORA">"4"</Talent>
+  <!-- Acute Sense (Smell) -->
+<Talent name="RULES-T0157_CUIS">"4"</Talent>
+  <!-- Master Tradesman (Cook) -->
+<Talent name="RULES-T0090">"4"</Talent>
+  <!-- Magnum Opus -->
+<Talent name="RULES-T0129_POIS">"4"</Talent>
+  <!-- Resistance (Poison) -->
+</SUBCHAPTER_TALENT>
+<SUBCHAPTER_ITEM>
+<Item name="Trade Tools (Brewer)">"1"</Item>
+<Item name="RULES-TRAP_070">"1"</Item>
+<Item name="RULES-TRAP_053">"1"</Item>
+<Item name="Tankard">"2"</Item>
+<Item name="RULES-TRAP_037">"2"</Item>
+<Item name="Book (Recipe)">"2"</Item>
+<Item name="DWARF-COMB_BASE_01">"2"</Item>
+<Item name="RULES-ARMO_14">"2"</Item>
+<Item name="DWARF-ARMO_06">"2"</Item>
+<Item name="RULES-ARMO_12">"2"</Item>
+<Item name="Brewery">"3"</Item>
+<Item name="Ingredients">"3"</Item>
+<Item name="Thermometer">"3"</Item>
+<Item name="Beardling Apprentice">"3"</Item>
+<Item name="Trade Tools (Cook)">"4"</Item>
+<Item name="Tasting Spoon">"4"</Item>
+<Item name="Kitchen with Staff">"4"</Item>
+</SUBCHAPTER_ITEM>
+</Career>
+<Career id="DWARF-WORK02">
+<Description language="ENGLISH">"Hammerer"</Description>
+<Explanation language="ENGLISH">"You are a professional bodyguard and elite warrior, enjoying pride of place in any Dwarfen army."</Explanation>
+<Skill>"RULES-COMPCOMB_2M"</Skill>
+<Class>"RULES-CLASS_WARR"</Class>
+<SUBCHAPTER_LEVEL>
+<Level id="1">
+<Description language="ENGLISH">"Oathsworn"</Description>
+<Salary>"TIERS_SILVER 1"</Salary>
+</Level>
+<Level id="2">
+<Description language="ENGLISH">"Hammerer"</Description>
+<Salary>"TIERS_SILVER 3"</Salary>
+</Level>
+<Level id="3">
+<Description language="ENGLISH">"Gate Keeper"</Description>
+<Salary>"TIERS_SILVER 5"</Salary>
+</Level>
+<Level id="4">
+<Description language="ENGLISH">"Shieldbearer"</Description>
+<Salary>"TIERS_GOLD 2"</Salary>
+</Level>
+</SUBCHAPTER_LEVEL>
+<SUBCHAPTER_ATTR>
+<Attribut name="RULES-ATTR_WS">"1"</Attribut>
+<Attribut name="RULES-ATTR_BS">"0"</Attribut>
+<Attribut name="RULES-ATTR_S">"1"</Attribut>
+<Attribut name="RULES-ATTR_T">"3"</Attribut>
+<Attribut name="RULES-ATTR_I">"2"</Attribut>
+<Attribut name="RULES-ATTR_Ag">"4"</Attribut>
+<Attribut name="RULES-ATTR_Dex">"0"</Attribut>
+<Attribut name="RULES-ATTR_Int">"0"</Attribut>
+<Attribut name="RULES-ATTR_WP">"1"</Attribut>
+<Attribut name="RULES-ATTR_Fel">"0"</Attribut>
+</SUBCHAPTER_ATTR>
+<SUBCHAPTER_SKILL>
+<Skill name="RULES-COMPESCAL">"1"</Skill>
+  <!-- Climb -->
+<Skill name="RULES-COMPRESALC">"1"</Skill>
+  <!-- Consume Alcohol -->
+<Skill name="RULES-COMPCALM">"1"</Skill>
+  <!-- Cool -->
+<Skill name="RULES-COMPESQU">"1"</Skill>
+  <!-- Dodge -->
+<Skill name="RULES-COMPRESIST">"1"</Skill>
+  <!-- Endurance -->
+<Skill name="RULES-COMPLANG_BATAIL">"1"</Skill>
+  <!-- Language (Battle) -->
+<Skill name="RULES-COMPCOMB_BASE">"1"</Skill>
+  <!-- Melee (Basic) -->
+<Skill name="RULES-COMPCOMB_2M">"1"</Skill>
+  <!-- Melee (Two-handed) -->
+<Skill name="RULES-COMPPRECEP">"1"</Skill>
+  <!-- Perception -->
+<Skill name="RULES-COMPMUSIC_TAMB/RULES-COMPMUSIC_COR">"1"</Skill>
+  <!-- Play (Drum or Horn) -->
+<Skill name="RULES-COMPATHL">"2"</Skill>
+  <!-- Athletics -->
+<Skill name="RULES-COMPPARI">"2"</Skill>
+  <!-- Gamble -->
+<Skill name="RULES-COMPGUERI">"2"</Skill>
+  <!-- Heal -->
+<Skill name="RULES-COMPINTIM">"2"</Skill>
+  <!-- Intimidate -->
+<Skill name="RULES-COMPINTUI">"2"</Skill>
+  <!-- Intuition -->
+<Skill name="RULES-COMPSAVOIR_HERAL">"2"</Skill>
+  <!-- Lore (Heraldry) -->
+<Skill name="RULES-COMPRAGOT">"3"</Skill>
+  <!-- Gossip -->
+<Skill name="RULES-COMPCOMM">"3"</Skill>
+  <!-- Leadership -->
+<Skill name="RULES-COMPSAVOIR_GEOL">"3"</Skill>
+  <!-- Lore (Geology) -->
+<Skill name="RULES-COMPORIENT">"3"</Skill>
+  <!-- Navigation -->
+<Skill name="RULES-COMPSAVOIR_GUERRE">"4"</Skill>
+  <!-- Lore (Warfare) -->
+<Skill name="RULES-COMPSURVEXT">"4"</Skill>
+  <!-- Outdoor Survival -->
+</SUBCHAPTER_SKILL>
+<SUBCHAPTER_TALENT>
+<Talent name="DWARF-T0002">"1"</Talent>
+  <!-- Bludgeoner -->
+<Talent name="RULES-T0163">"1"</Talent>
+  <!-- Combat Aware -->
+<Talent name="RULES-T0077">"1"</Talent>
+  <!-- Strong Back -->
+<Talent name="RULES-T0067">"1"</Talent>
+  <!-- Warrior Born -->
+<Talent name="RULES-T0036">"2"</Talent>
+  <!-- Drilled -->
+<Talent name="DWARF-T0009">"2"</Talent>
+  <!-- Kingsguard -->
+<Talent name="RULES-T0059">"2"</Talent>
+  <!-- Strike to Stun -->
+<Talent name="DWARF-T0017">"2"</Talent>
+  <!-- Tireless -->
+<Talent name="RULES-T0027">"3"</Talent>
+  <!-- Enclosed Fighter -->
+<Talent name="RULES-T0076">"3"</Talent>
+  <!-- Unshakable -->
+<Talent name="RULES-T0158">"3"</Talent>
+  <!-- Very Strong -->
+<Talent name="RULES-T0138">"3"</Talent>
+  <!-- War Leader -->
+<Talent name="RULES-T0167">"4"</Talent>
+  <!-- Iron Will -->
+<Talent name="RULES-T0005">"4"</Talent>
+  <!-- Pure Soul -->
+<Talent name="RULES-T0107">"4"</Talent>
+  <!-- Strong-minded -->
+<Talent name="RULES-T0116">"4"</Talent>
+  <!-- Tenacious -->
+</SUBCHAPTER_TALENT>
+<SUBCHAPTER_ITEM>
+<Item name="DWARF-COMB_BASE_02">"1"</Item>
+<Item name="Leather Breastplate">"1"</Item>
+<Item name="DWARF-COMB_2M_02">"2"</Item>
+<Item name="RULES-ARMO_14">"2"</Item>
+<Item name="DWARF-ARMO_06">"2"</Item>
+<Item name="RULES-ARMO_12">"2"</Item>
+<Item name="Gate Key">"3"</Item>
+<Item name="Runic Hammer or Runic Battle Standard">"3"</Item>
+<Item name="RULES-COMB_BASE_07">"3"</Item>
+<Item name="Unit of Hammerers">"3"</Item>
+<Item name="DWARF-TRAP_07">"4"</Item>
+</SUBCHAPTER_ITEM>
+</Career>
+<Career id="DWARF-WORK03">
+<Description language="ENGLISH">"Ironbreaker"</Description>
+<Explanation language="ENGLISH">"You are a specialist tunnel fighter, armoured in nigh-indestructible gromril to endure the horrors of the sunless underworld."</Explanation>
+<Skill>"RULES-COMPCOMB_BASE"</Skill>
+<Class>"RULES-CLASS_WARR"</Class>
+<SUBCHAPTER_LEVEL>
+<Level id="1">
+<Description language="ENGLISH">"Shieldbreaker"</Description>
+<Salary>"TIERS_SILVER 1"</Salary>
+</Level>
+<Level id="2">
+<Description language="ENGLISH">"Ironbreaker"</Description>
+<Salary>"TIERS_SILVER 3"</Salary>
+</Level>
+<Level id="3">
+<Description language="ENGLISH">"Irondrake"</Description>
+<Salary>"TIERS_SILVER 5"</Salary>
+</Level>
+<Level id="4">
+<Description language="ENGLISH">"Ironbeard"</Description>
+<Salary>"TIERS_GOLD 2"</Salary>
+</Level>
+</SUBCHAPTER_LEVEL>
+<SUBCHAPTER_ATTR>
+<Attribut name="RULES-ATTR_WS">"1"</Attribut>
+<Attribut name="RULES-ATTR_BS">"3"</Attribut>
+<Attribut name="RULES-ATTR_S">"2"</Attribut>
+<Attribut name="RULES-ATTR_T">"1"</Attribut>
+<Attribut name="RULES-ATTR_I">"4"</Attribut>
+<Attribut name="RULES-ATTR_Ag">"0"</Attribut>
+<Attribut name="RULES-ATTR_Dex">"0"</Attribut>
+<Attribut name="RULES-ATTR_Int">"0"</Attribut>
+<Attribut name="RULES-ATTR_WP">"1"</Attribut>
+<Attribut name="RULES-ATTR_Fel">"0"</Attribut>
+</SUBCHAPTER_ATTR>
+<SUBCHAPTER_SKILL>
+<Skill name="RULES-COMPATHL">"1"</Skill>
+  <!-- Athletics -->
+<Skill name="RULES-COMPESCAL">"1"</Skill>
+  <!-- Climb -->
+<Skill name="RULES-COMPCALM">"1"</Skill>
+  <!-- Cool -->
+<Skill name="RULES-COMPESQU">"1"</Skill>
+  <!-- Dodge -->
+<Skill name="RULES-COMPRESIST">"1"</Skill>
+  <!-- Endurance -->
+<Skill name="RULES-COMPINTIM">"1"</Skill>
+  <!-- Intimidate -->
+<Skill name="RULES-COMPLANG_BATAIL">"1"</Skill>
+  <!-- Language (Battle) -->
+<Skill name="RULES-COMPCOMB_BASE">"1"</Skill>
+  <!-- Melee (Basic) -->
+<Skill name="RULES-COMPMUSIC_TAMB/RULES-COMPMUSIC_COR">"1"</Skill>
+  <!-- Play (Drum or Horn) -->
+<Skill name="RULES-COMPDISC_SOUTER">"1"</Skill>
+  <!-- Stealth (Underground) -->
+<Skill name="RULES-COMPRESALC">"2"</Skill>
+  <!-- Consume Alcohol -->
+<Skill name="RULES-COMPDIVERT_CHANT">"2"</Skill>
+  <!-- Entertain (Singing) -->
+<Skill name="RULES-COMPSAVOIR_GEOL">"2"</Skill>
+  <!-- Lore (Geology) -->
+<Skill name="RULES-COMPCOMB_*">"2"</Skill>
+  <!-- Melee (Any One) -->
+<Skill name="RULES-COMPSIGNES_MINE">"2"</Skill>
+  <!-- Secret Signs (Miner) -->
+<Skill name="RULES-COMPORIENT">"3"</Skill>
+  <!-- Navigation -->
+<Skill name="RULES-COMPPRECEP">"3"</Skill>
+  <!-- Perception -->
+<Skill name="RULES-COMPPROJ_ING">"3"</Skill>
+  <!-- Ranged (Engineering) -->
+<Skill name="RULES-COMPPIEG">"3"</Skill>
+  <!-- Set Trap -->
+<Skill name="RULES-COMPCOMM">"4"</Skill>
+  <!-- Leadership -->
+<Skill name="RULES-COMPSAVOIR_GUERRE">"4"</Skill>
+  <!-- Lore (Warfare) -->
+</SUBCHAPTER_SKILL>
+<SUBCHAPTER_TALENT>
+<Talent name="RULES-T0140">"1"</Talent>
+  <!-- Orientation -->
+<Talent name="RULES-T0013_ROC">"1"</Talent>
+  <!-- Strider (Rocky) -->
+<Talent name="RULES-T0077">"1"</Talent>
+  <!-- Strong Back -->
+<Talent name="RULES-T0067">"1"</Talent>
+  <!-- Warrior Born -->
+<Talent name="RULES-T0036">"2"</Talent>
+  <!-- Drilled -->
+<Talent name="RULES-T0027">"2"</Talent>
+  <!-- Enclosed Fighter -->
+<Talent name="RULES-T0121">"2"</Talent>
+  <!-- Shieldsman -->
+<Talent name="DWARF-T0017">"2"</Talent>
+  <!-- Tireless -->
+<Talent name="DWARF-T0004">"3"</Talent>
+  <!-- Dragon Belcher -->
+<Talent name="RULES-T0164">"3"</Talent>
+  <!-- Night Vision -->
+<Talent name="DWARF-T0018">"3"</Talent>
+  <!-- Underminer -->
+<Talent name="RULES-T0076">"3"</Talent>
+  <!-- Unshakable -->
+<Talent name="RULES-T0163">"4"</Talent>
+  <!-- Combat Aware -->
+<Talent name="RULES-T0050">"4"</Talent>
+  <!-- Implacable -->
+<Talent name="DWARF-T0016">"4"</Talent>
+  <!-- Short Fuse -->
+<Talent name="RULES-T0138">"4"</Talent>
+  <!-- War Leader -->
+</SUBCHAPTER_TALENT>
+<SUBCHAPTER_ITEM>
+<Item name="DWARF-COMB_BASE_01/DWARF-COMB_BASE_02">"1"</Item>
+<Item name="RULES-COMB_BASE_07">"1"</Item>
+<Item name="RULES-ARMO_09">"1"</Item>
+<Item name="RULES-ARMO_02">"1"</Item>
+<Item name="RULES-TRAP_150">"1"</Item>
+<Item name="Gromril Suit">"2"</Item>
+<Item name="DWARF-ARMO_05">"2"</Item>
+<Item name="DWARF-PROJ_ING_01">"3"</Item>
+<Item name="Runic Armour">"3"</Item>
+<Item name="DWARF-PROJ_ING_03">"4"</Item>
+<Item name="DWARF-PROJ_ING_03">"4"</Item>
+<Item name="DWARF-PROJ_ING_02">"4"</Item>
+<Item name="DWARF-PROJ_EXPLO_02">"4"</Item>
+<Item name="Unit of Ironbreakers">"4"</Item>
+</SUBCHAPTER_ITEM>
+</Career>
+<Career id="DWARF-WORK04">
+<Description language="ENGLISH">"Karak Ranger"</Description>
+<Explanation language="ENGLISH">"You are a nomadic, overland traveller, living off the land, and keeping a wary eye on the enemies of your people."</Explanation>
+<Skill>"RULES-COMPSURVEXT"</Skill>
+<Class>"RULES-CLASS_RANG"</Class>
+<SUBCHAPTER_LEVEL>
+<Level id="1">
+<Description language="ENGLISH">"Mountaineer"</Description>
+<Salary>"TIERS_BRASS 3"</Salary>
+</Level>
+<Level id="2">
+<Description language="ENGLISH">"Karak Ranger"</Description>
+<Salary>"TIERS_SILVER 1"</Salary>
+</Level>
+<Level id="3">
+<Description language="ENGLISH">"Deadeye"</Description>
+<Salary>"TIERS_SILVER 2"</Salary>
+</Level>
+<Level id="4">
+<Description language="ENGLISH">"Ranger Captain"</Description>
+<Salary>"TIERS_SILVER 4"</Salary>
+</Level>
+</SUBCHAPTER_LEVEL>
+<SUBCHAPTER_ATTR>
+<Attribut name="RULES-ATTR_WS">"3"</Attribut>
+<Attribut name="RULES-ATTR_BS">"2"</Attribut>
+<Attribut name="RULES-ATTR_S">"0"</Attribut>
+<Attribut name="RULES-ATTR_T">"1"</Attribut>
+<Attribut name="RULES-ATTR_I">"1"</Attribut>
+<Attribut name="RULES-ATTR_Ag">"1"</Attribut>
+<Attribut name="RULES-ATTR_Dex">"0"</Attribut>
+<Attribut name="RULES-ATTR_Int">"4"</Attribut>
+<Attribut name="RULES-ATTR_WP">"0"</Attribut>
+<Attribut name="RULES-ATTR_Fel">"0"</Attribut>
+</SUBCHAPTER_ATTR>
+<SUBCHAPTER_SKILL>
+<Skill name="RULES-COMPATHL">"1"</Skill>
+  <!-- Athletics -->
+<Skill name="RULES-COMPESCAL">"1"</Skill>
+  <!-- Climb -->
+<Skill name="RULES-COMPCALM">"1"</Skill>
+  <!-- Cool -->
+<Skill name="RULES-COMPESQU">"1"</Skill>
+  <!-- Dodge -->
+<Skill name="RULES-COMPRESIST">"1"</Skill>
+  <!-- Endurance -->
+<Skill name="RULES-COMPCOMB_BASE">"1"</Skill>
+  <!-- Melee (Basic) -->
+<Skill name="RULES-COMPSURVEXT">"1"</Skill>
+  <!-- Outdoor Survival -->
+<Skill name="RULES-COMPPRECEP">"1"</Skill>
+  <!-- Perception -->
+<Skill name="RULES-COMPPROJ_LANC">"1"</Skill>
+  <!-- Ranged (Throwing) -->
+<Skill name="RULES-COMPMETIER_CARTO">"1"</Skill>
+  <!-- Trade (Cartographer) -->
+<Skill name="RULES-COMPRESALC">"2"</Skill>
+  <!-- Consume Alcohol -->
+<Skill name="RULES-COMPCOMB_2M">"2"</Skill>
+  <!-- Melee (Two-handed) -->
+<Skill name="RULES-COMPMUSIC_TAMB/RULES-COMPMUSIC_COR">"2"</Skill>
+  <!-- Play (Drum or Horn) -->
+<Skill name="RULES-COMPPROJ_ARB">"2"</Skill>
+  <!-- Ranged (Crossbow) -->
+<Skill name="RULES-COMPSIGNES_RANGER">"2"</Skill>
+  <!-- Secret Signs (Ranger) -->
+<Skill name="RULES-COMPDISC_*">"2"</Skill>
+  <!-- Stealth (Any One) -->
+<Skill name="RULES-COMPINTUI">"3"</Skill>
+  <!-- Intuition -->
+<Skill name="RULES-COMPSAVOIR_ING/RULES-COMPSAVOIR_GEOL">"3"</Skill>
+  <!-- Lore (Engineering or Geology) -->
+<Skill name="RULES-COMPORIENT">"3"</Skill>
+  <!-- Navigation -->
+<Skill name="RULES-COMPPIST">"3"</Skill>
+  <!-- Track -->
+<Skill name="RULES-COMPCOMM">"4"</Skill>
+  <!-- Leadership -->
+<Skill name="RULES-COMPPIEG">"4"</Skill>
+  <!-- Set Trap -->
+</SUBCHAPTER_SKILL>
+<SUBCHAPTER_TALENT>
+<Talent name="RULES-T0140">"1"</Talent>
+  <!-- Orientation -->
+<Talent name="RULES-T0016">"1"</Talent>
+  <!-- Stone Soup -->
+<Talent name="RULES-T0013_*">"1"</Talent>
+  <!-- Strider (Any One) -->
+<Talent name="RULES-T0077">"1"</Talent>
+  <!-- Strong Back -->
+<Talent name="RULES-T0163">"2"</Talent>
+  <!-- Combat Aware -->
+<Talent name="DWARF-T0003">"2"</Talent>
+  <!-- Demolisher -->
+<Talent name="RULES-T0105">"2"</Talent>
+  <!-- Rover -->
+<Talent name="DWARF-T0017">"2"</Talent>
+  <!-- Tireless -->
+<Talent name="DWARF-T0008">"3"</Talent>
+  <!-- Harpooner -->
+<Talent name="RULES-T0164">"3"</Talent>
+  <!-- Night Vision -->
+<Talent name="RULES-T0058">"3"</Talent>
+  <!-- Nose for Trouble -->
+<Talent name="RULES-T0168">"3"</Talent>
+  <!-- Seasoned Traveller -->
+<Talent name="RULES-T0066">"4"</Talent>
+  <!-- Scale Sheer Surface -->
+<Talent name="RULES-T0116">"4"</Talent>
+  <!-- Tenacious -->
+<Talent name="RULES-T0156">"4"</Talent>
+  <!-- Trapper -->
+<Talent name="RULES-T0123">"4"</Talent>
+  <!-- Well-prepared -->
+</SUBCHAPTER_TALENT>
+<SUBCHAPTER_ITEM>
+<Item name="DWARF-COMB_BASE_01">"1"</Item>
+<Item name="DWARF-PROJ_LANC_01">"1"</Item>
+<Item name="RULES-ARMO_09">"1"</Item>
+<Item name="Sturdy Boots">"1"</Item>
+<Item name="RULES-TRAP_150">"1"</Item>
+<Item name="DWARF-COMB_2M_01">"2"</Item>
+<Item name="DWARF-PROJ_ARB_01">"2"</Item>
+<Item name="RULES-MUNI_01">"2"</Item>
+<Item name="RULES-ARMO_14">"2"</Item>
+<Item name="DWARF-ARMO_06">"2"</Item>
+<Item name="RULES-ARMO_12">"2"</Item>
+<Item name="RULES-COMB_BASE_07">"3"</Item>
+<Item name="RULES-TRAP_099">"3"</Item>
+<Item name="Trade Tools (Cartographer)">"4"</Item>
+<Item name="Unit of Rangers">"4"</Item>
+</SUBCHAPTER_ITEM>
+</Career>
+<Career id="DWARF-WORK05">
+<Description language="ENGLISH">"Thane"</Description>
+<Explanation language="ENGLISH">"You are the leader of a Dwarf Clan, or soon to inherit the position."</Explanation>
+<Skill>"RULES-COMPCOMM"</Skill>
+<Class>"RULES-CLASS_COUR"</Class>
+<SUBCHAPTER_LEVEL>
+<Level id="1">
+<Description language="ENGLISH">"Heritor"</Description>
+<Salary>"TIERS_GOLD 1"</Salary>
+</Level>
+<Level id="2">
+<Description language="ENGLISH">"Thane"</Description>
+<Salary>"TIERS_GOLD 3"</Salary>
+</Level>
+<Level id="3">
+<Description language="ENGLISH">"Throng Leader"</Description>
+<Salary>"TIERS_GOLD 5"</Salary>
+</Level>
+<Level id="4">
+<Description language="ENGLISH">"Karak Lord"</Description>
+<Salary>"TIERS_GOLD 8"</Salary>
+</Level>
+</SUBCHAPTER_LEVEL>
+<SUBCHAPTER_ATTR>
+<Attribut name="RULES-ATTR_WS">"1"</Attribut>
+<Attribut name="RULES-ATTR_BS">"0"</Attribut>
+<Attribut name="RULES-ATTR_S">"3"</Attribut>
+<Attribut name="RULES-ATTR_T">"2"</Attribut>
+<Attribut name="RULES-ATTR_I">"0"</Attribut>
+<Attribut name="RULES-ATTR_Ag">"0"</Attribut>
+<Attribut name="RULES-ATTR_Dex">"0"</Attribut>
+<Attribut name="RULES-ATTR_Int">"4"</Attribut>
+<Attribut name="RULES-ATTR_WP">"1"</Attribut>
+<Attribut name="RULES-ATTR_Fel">"1"</Attribut>
+</SUBCHAPTER_ATTR>
+<SUBCHAPTER_SKILL>
+<Skill name="RULES-COMPATHL">"1"</Skill>
+  <!-- Athletics -->
+<Skill name="RULES-COMPRESALC">"1"</Skill>
+  <!-- Consume Alcohol -->
+<Skill name="RULES-COMPESQU">"1"</Skill>
+  <!-- Dodge -->
+<Skill name="RULES-COMPPARI">"1"</Skill>
+  <!-- Gamble -->
+<Skill name="RULES-COMPCOMM">"1"</Skill>
+  <!-- Leadership -->
+<Skill name="RULES-COMPSAVOIR_HERAL/RULES-COMPSAVOIR_HIST">"1"</Skill>
+  <!-- Lore (Heraldry or History) -->
+<Skill name="RULES-COMPCOMB_BASE/RULES-COMPCOMB_2M">"1"</Skill>
+  <!-- Melee (Basic or Two-handed) -->
+<Skill name="RULES-COMPPROJ_ARB/RULES-COMPPROJ_POUDRE">"1"</Skill>
+  <!-- Ranged (Crossbow or Blackpowder) -->
+<Skill name="RULES-COMPSIGNES_GUILD">"1"</Skill>
+  <!-- Secret Signs (Guilder) -->
+<Skill name="RULES-COMPMETIER_*">"1"</Skill>
+  <!-- Trade (Any One) -->
+<Skill name="RULES-COMPART_ECR">"2"</Skill>
+  <!-- Art (Writing) -->
+<Skill name="RULES-COMPCHARM">"2"</Skill>
+  <!-- Charm -->
+<Skill name="RULES-COMPCALM">"2"</Skill>
+  <!-- Cool -->
+<Skill name="RULES-COMPEVAL">"2"</Skill>
+  <!-- Evaluate -->
+<Skill name="RULES-COMPSAVOIR_LOCAL/RULES-COMPSAVOIR_POLIT">"2"</Skill>
+  <!-- Lore (Local or Politics) -->
+<Skill name="RULES-COMPLANG_*">"2"</Skill>
+  <!-- Language (Any One) -->
+<Skill name="RULES-COMPRESIST">"3"</Skill>
+  <!-- Endurance -->
+<Skill name="RULES-COMPMARCH">"3"</Skill>
+  <!-- Haggle -->
+<Skill name="RULES-COMPINTIM">"3"</Skill>
+  <!-- Intimidate -->
+<Skill name="RULES-COMPINTUI">"3"</Skill>
+  <!-- Intuition -->
+<Skill name="RULES-COMPSAVOIR_*">"4"</Skill>
+  <!-- Lore (Any One) -->
+<Skill name="RULES-COMPPRECEP">"4"</Skill>
+  <!-- Perception -->
+</SUBCHAPTER_SKILL>
+<SUBCHAPTER_TALENT>
+<Talent name="DWARF-T0001">"1"</Talent>
+  <!-- Ancestral Grudge -->
+<Talent name="RULES-T0103">"1"</Talent>
+  <!-- Noble Blood -->
+<Talent name="RULES-T0084">"1"</Talent>
+  <!-- Read/Write -->
+<Talent name="RULES-T0077">"1"</Talent>
+  <!-- Strong Back -->
+<Talent name="RULES-T0051">"2"</Talent>
+  <!-- Argumentative -->
+<Talent name="RULES-T0104">"2"</Talent>
+  <!-- Carouser -->
+<Talent name="RULES-T0102">"2"</Talent>
+  <!-- Dealmaker -->
+<Talent name="RULES-T0109">"2"</Talent>
+  <!-- Public Speaker -->
+<Talent name="RULES-T0053">"3"</Talent>
+  <!-- Inspiring -->
+<Talent name="DWARF-T0017">"3"</Talent>
+  <!-- Tireless -->
+<Talent name="RULES-T0076">"3"</Talent>
+  <!-- Unshakable -->
+<Talent name="RULES-T0138">"3"</Talent>
+  <!-- War Leader -->
+<Talent name="RULES-T0167">"4"</Talent>
+  <!-- Iron Will -->
+<Talent name="DWARF-T0011">"4"</Talent>
+  <!-- Long Memory -->
+<Talent name="RULES-T0109">"4"</Talent>
+  <!-- Public Speaker -->
+<Talent name="RULES-T0101">"4"</Talent>
+  <!-- Wealthy -->
+</SUBCHAPTER_TALENT>
+<SUBCHAPTER_ITEM>
+<Item name="RULES-COMB_BASE_*/RULES-COMB_2M_*">"1"</Item>
+<Item name="DWARF-PROJ_ARB_01/DWARF-PROJ_POUDRE_01">"1"</Item>
+<Item name="RULES-ARMO_14">"1"</Item>
+<Item name="DWARF-ARMO_06">"1"</Item>
+<Item name="RULES-ARMO_12">"1"</Item>
+<Item name="Jewellery worth 3d10 GC">"1"</Item>
+<Item name="Loyal Clan">"2"</Item>
+<Item name="RULES-COMB_BASE_*/RULES-COMB_BASE_07">"2"</Item>
+<Item name="DWARF-PROJ_POUDRE_02">"2"</Item>
+<Item name="Gromril Suit">"2"</Item>
+<Item name="Jewellery worth 50 GC">"2"</Item>
+<Item name="Unit of Dwarf Warriors">"3"</Item>
+<Item name="Quality Weaponry">"3"</Item>
+<Item name="DWARF-ARMO_02/DWARF-ARMO_05">"3"</Item>
+<Item name="250 GC">"3"</Item>
+<Item name="Jewellery worth 200 GC">"3"</Item>
+<Item name="Army of Dwarf Warriors">"4"</Item>
+<Item name="Runic Wargear">"4"</Item>
+<Item name="DWARF-TRAP_08">"4"</Item>
+<Item name="1000 GC">"4"</Item>
+<Item name="Jewellery worth 500 GC">"4"</Item>
+</SUBCHAPTER_ITEM>
+</Career>
+<Career id="DWARF-WORK06">
+<Description language="ENGLISH">"Doom Priest"</Description>
+<Explanation language="ENGLISH">"You lionise the great warrior ancestors of your people, encouraging younger Dwarfs to follow their example."</Explanation>
+<Skill>"RULES-COMPSAVOIR_THEO"</Skill>
+<Class>"RULES-CLASS_WARR"</Class>
+<SUBCHAPTER_LEVEL>
+<Level id="1">
+<Description language="ENGLISH">"Glorifier"</Description>
+<Salary>"TIERS_BRASS 2"</Salary>
+</Level>
+<Level id="2">
+<Description language="ENGLISH">"Doom Priest"</Description>
+<Salary>"TIERS_SILVER 2"</Salary>
+</Level>
+<Level id="3">
+<Description language="ENGLISH">"Berserker Priest"</Description>
+<Salary>"TIERS_SILVER 3"</Salary>
+</Level>
+<Level id="4">
+<Description language="ENGLISH">"Gate Sealer"</Description>
+<Salary>"TIERS_SILVER 4"</Salary>
+</Level>
+</SUBCHAPTER_LEVEL>
+<SUBCHAPTER_ATTR>
+<Attribut name="RULES-ATTR_WS">"1"</Attribut>
+<Attribut name="RULES-ATTR_BS">"0"</Attribut>
+<Attribut name="RULES-ATTR_S">"3"</Attribut>
+<Attribut name="RULES-ATTR_T">"1"</Attribut>
+<Attribut name="RULES-ATTR_I">"0"</Attribut>
+<Attribut name="RULES-ATTR_Ag">"0"</Attribut>
+<Attribut name="RULES-ATTR_Dex">"2"</Attribut>
+<Attribut name="RULES-ATTR_Int">"0"</Attribut>
+<Attribut name="RULES-ATTR_WP">"1"</Attribut>
+<Attribut name="RULES-ATTR_Fel">"4"</Attribut>
+</SUBCHAPTER_ATTR>
+<SUBCHAPTER_SKILL>
+<Skill name="RULES-COMPART_TATOU">"1"</Skill>
+  <!-- Art (Tattoo) -->
+<Skill name="RULES-COMPRESALC">"1"</Skill>
+  <!-- Consume Alcohol -->
+<Skill name="RULES-COMPCALM">"1"</Skill>
+  <!-- Cool -->
+<Skill name="RULES-COMPESQU">"1"</Skill>
+  <!-- Dodge -->
+<Skill name="RULES-COMPRESIST">"1"</Skill>
+  <!-- Endurance -->
+<Skill name="RULES-COMPDIVERT_NARRA">"1"</Skill>
+  <!-- Entertain (Storytelling) -->
+<Skill name="RULES-COMPINTIM">"1"</Skill>
+  <!-- Intimidate -->
+<Skill name="RULES-COMPLANG_BATAIL">"1"</Skill>
+  <!-- Language (Battle) -->
+<Skill name="RULES-COMPCOMB_BASE">"1"</Skill>
+  <!-- Melee (Basic) -->
+<Skill name="RULES-COMPMUSIC_COR">"1"</Skill>
+  <!-- Play (Horn) -->
+<Skill name="RULES-COMPCOMM">"2"</Skill>
+  <!-- Leadership -->
+<Skill name="RULES-COMPSAVOIR_THEO/RULES-COMPSAVOIR_GUERRE">"2"</Skill>
+  <!-- Lore (Theology or Warfare) -->
+<Skill name="RULES-COMPCOMB_2M">"2"</Skill>
+  <!-- Melee (Two-handed) -->
+<Skill name="RULES-COMPPRECEP">"2"</Skill>
+  <!-- Perception -->
+<Skill name="RULES-COMPPROJ_LANC">"2"</Skill>
+  <!-- Ranged (Throwing) -->
+<Skill name="DWARF-COMPRUNESMITH">"2"</Skill>
+  <!-- Runesmithing -->
+<Skill name="RULES-COMPATHL">"3"</Skill>
+  <!-- Athletics -->
+<Skill name="DWARF-COMPSAVOIR_RUNES">"3"</Skill>
+  <!-- Lore (Runes) -->
+<Skill name="RULES-COMPCOMB_FLEAU">"3"</Skill>
+  <!-- Melee (Flail) -->
+<Skill name="DWARF-COMPSIGNES_GRIMNIR">"3"</Skill>
+  <!-- Secret Signs (Brotherhood of Grimnir) -->
+<Skill name="RULES-COMPSURVEXT">"4"</Skill>
+  <!-- Outdoor Survival -->
+<Skill name="RULES-COMPSAVOIR_CHAOS">"4"</Skill>
+  <!-- Lore (Chaos) -->
+</SUBCHAPTER_SKILL>
+<SUBCHAPTER_TALENT>
+<Talent name="DWARF-T0001">"1"</Talent>
+  <!-- Ancestral Grudge -->
+<Talent name="DWARF-T0003">"1"</Talent>
+  <!-- Demolisher -->
+<Talent name="RULES-T0063">"1"</Talent>
+  <!-- Frenzy -->
+<Talent name="RULES-T0107">"1"</Talent>
+  <!-- Strong-minded -->
+<Talent name="RULES-T0004">"2"</Talent>
+  <!-- Ambidextrous -->
+<Talent name="RULES-T0096">"2"</Talent>
+  <!-- Dual Wielder -->
+<Talent name="RULES-T0053">"2"</Talent>
+  <!-- Inspiring -->
+<Talent name="DWARF-T0015_PROT">"2"</Talent>
+  <!-- Rune Magic (Protection Runes) -->
+<Talent name="RULES-T0132_TOUT">"3"</Talent>
+  <!-- Fearless (All) -->
+<Talent name="DWARF-T0012">"3"</Talent>
+  <!-- Magic Defiance -->
+<Talent name="DWARF-T0015_WEAP">"3"</Talent>
+  <!-- Rune Magic (Weapon Runes) -->
+<Talent name="RULES-T0138">"3"</Talent>
+  <!-- War Leader -->
+<Talent name="DWARF-T0007">"4"</Talent>
+  <!-- Glorious Demise -->
+<Talent name="DWARF-T0013_PROTWEAP">"4"</Talent>
+  <!-- Master Rune Magic (Protection Runes and Weapon Runes) -->
+<Talent name="RULES-T0005">"4"</Talent>
+  <!-- Pure Soul -->
+<Talent name="DWARF-T0019">"4"</Talent>
+  <!-- Whirlwind of Death -->
+</SUBCHAPTER_TALENT>
+<SUBCHAPTER_ITEM>
+<Item name="DWARF-COMB_BASE_01">"1"</Item>
+<Item name="Tattoos">"1"</Item>
+<Item name="Flask of Spirits">"1"</Item>
+<Item name="RULES-ARMO_09">"1"</Item>
+<Item name="DWARF-COMB_BASE_01/DWARF-COMB_2M_01">"2"</Item>
+<Item name="Trade Tools (Smith)">"2"</Item>
+<Item name="RULES-ARMO_14">"2"</Item>
+<Item name="DWARF-ARMO_06">"2"</Item>
+<Item name="RULES-ARMO_12">"2"</Item>
+<Item name="Wards of Grimnir (protective tattoos)">"3"</Item>
+<Item name="Two Chainaxes/DWARF-PROJ_LANC_01">"3"</Item>
+<Item name="Gold Jewellery">"3"</Item>
+<Item name="Apprentice Glorifier">"3"</Item>
+<Item name="Runic Axe">"4"</Item>
+</SUBCHAPTER_ITEM>
+</Career>
+<Career id="DWARF-WORK07">
+<Description language="ENGLISH">"Forge Priest"</Description>
+<Explanation language="ENGLISH">"You preserve and restore the oldest examples of Dwarfen craftsmanship to honour the master-builders who preceded you."</Explanation>
+<Skill>"DWARF-COMPSAVOIR_RUNES"</Skill>
+<Class>"RULES-CLASS_ACAD"</Class>
+<SUBCHAPTER_LEVEL>
+<Level id="1">
+<Description language="ENGLISH">"Forge Initiate"</Description>
+<Salary>"TIERS_BRASS 3"</Salary>
+</Level>
+<Level id="2">
+<Description language="ENGLISH">"Forge Priest"</Description>
+<Salary>"TIERS_SILVER 2"</Salary>
+</Level>
+<Level id="3">
+<Description language="ENGLISH">"Forgemaster"</Description>
+<Salary>"TIERS_SILVER 4"</Salary>
+</Level>
+<Level id="4">
+<Description language="ENGLISH">"Forgelord"</Description>
+<Salary>"TIERS_GOLD 3"</Salary>
+</Level>
+</SUBCHAPTER_LEVEL>
+<SUBCHAPTER_ATTR>
+<Attribut name="RULES-ATTR_WS">"4"</Attribut>
+<Attribut name="RULES-ATTR_BS">"0"</Attribut>
+<Attribut name="RULES-ATTR_S">"2"</Attribut>
+<Attribut name="RULES-ATTR_T">"1"</Attribut>
+<Attribut name="RULES-ATTR_I">"0"</Attribut>
+<Attribut name="RULES-ATTR_Ag">"0"</Attribut>
+<Attribut name="RULES-ATTR_Dex">"1"</Attribut>
+<Attribut name="RULES-ATTR_Int">"3"</Attribut>
+<Attribut name="RULES-ATTR_WP">"1"</Attribut>
+<Attribut name="RULES-ATTR_Fel">"0"</Attribut>
+</SUBCHAPTER_ATTR>
+<SUBCHAPTER_SKILL>
+<Skill name="RULES-COMPART_SCUL/RULES-COMPART_GRAV">"1"</Skill>
+  <!-- Art (Sculpture or Engraving) -->
+<Skill name="RULES-COMPCALM">"1"</Skill>
+  <!-- Cool -->
+<Skill name="RULES-COMPRESALC">"1"</Skill>
+  <!-- Consume Alcohol -->
+<Skill name="RULES-COMPRESIST">"1"</Skill>
+  <!-- Endurance -->
+<Skill name="RULES-COMPDIVERT_CHANT">"1"</Skill>
+  <!-- Entertain (Singing) -->
+<Skill name="RULES-COMPEVAL">"1"</Skill>
+  <!-- Evaluate -->
+<Skill name="RULES-COMPMARCH">"1"</Skill>
+  <!-- Haggle -->
+<Skill name="RULES-COMPSAVOIR_GEOL/RULES-COMPSAVOIR_METAL">"1"</Skill>
+  <!-- Lore (Geology or Metallurgy) -->
+<Skill name="RULES-COMPCOMB_BASE/RULES-COMPCOMB_2M">"1"</Skill>
+  <!-- Melee (Basic or Two-handed) -->
+<Skill name="RULES-COMPMETIER_*">"1"</Skill>
+  <!-- Trade (Any One) -->
+<Skill name="RULES-COMPLANG_BATAIL/RULES-COMPLANG_GUILD">"2"</Skill>
+  <!-- Language (Battle or Guilder) -->
+<Skill name="RULES-COMPCOMM">"2"</Skill>
+  <!-- Leadership -->
+<Skill name="DWARF-COMPSAVOIR_RUNES/RULES-COMPSAVOIR_THEO">"2"</Skill>
+  <!-- Lore (Runes or Theology) -->
+<Skill name="RULES-COMPRECH">"2"</Skill>
+  <!-- Research -->
+<Skill name="DWARF-COMPRUNESMITH">"2"</Skill>
+  <!-- Runesmithing -->
+<Skill name="RULES-COMPSIGNES_MINE/RULES-COMPSIGNES_GUILD">"2"</Skill>
+  <!-- Secret Signs (Miner or Guilder) -->
+<Skill name="RULES-COMPESCAL">"3"</Skill>
+  <!-- Climb -->
+<Skill name="RULES-COMPSAVOIR_*">"3"</Skill>
+  <!-- Lore (Any One) -->
+<Skill name="RULES-COMPORIENT">"3"</Skill>
+  <!-- Navigation -->
+<Skill name="RULES-COMPPRECEP">"3"</Skill>
+  <!-- Perception -->
+<Skill name="RULES-COMPINTIM">"4"</Skill>
+  <!-- Intimidate -->
+<Skill name="RULES-COMPINTUI">"4"</Skill>
+  <!-- Intuition -->
+</SUBCHAPTER_SKILL>
+<SUBCHAPTER_TALENT>
+<Talent name="RULES-T0092_*">"1"</Talent>
+  <!-- Craftsman (Any One) -->
+<Talent name="RULES-T0027">"1"</Talent>
+  <!-- Enclosed Fighter -->
+<Talent name="RULES-T0016">"1"</Talent>
+  <!-- Stone Soup -->
+<Talent name="RULES-T0077">"1"</Talent>
+  <!-- Strong Back -->
+<Talent name="DWARF-T0002">"2"</Talent>
+  <!-- Bludgeoner -->
+<Talent name="RULES-T0040">"2"</Talent>
+  <!-- Detect Artefact -->
+<Talent name="DWARF-T0015_PROT">"2"</Talent>
+  <!-- Rune Magic (Protection Runes) -->
+<Talent name="RULES-T0035">"2"</Talent>
+  <!-- Sturdy -->
+<Talent name="DWARF-T0006">"3"</Talent>
+  <!-- Forgefire -->
+<Talent name="DWARF-T0012">"3"</Talent>
+  <!-- Magic Defiance -->
+<Talent name="RULES-T0157_*">"3"</Talent>
+  <!-- Master Tradesman (Any One) -->
+<Talent name="DWARF-T0015_ARMENG">"3"</Talent>
+  <!-- Rune Magic (Armour Runes and Engineering Runes) -->
+<Talent name="RULES-T0167">"4"</Talent>
+  <!-- Iron Will -->
+<Talent name="DWARF-T0013_ALL">"4"</Talent>
+  <!-- Master Rune Magic (All Forms) -->
+<Talent name="RULES-T0005">"4"</Talent>
+  <!-- Pure Soul -->
+<Talent name="DWARF-T0015_ALL">"4"</Talent>
+  <!-- Rune Magic (All Forms) -->
+</SUBCHAPTER_TALENT>
+<SUBCHAPTER_ITEM>
+<Item name="DWARF-COMB_2M_03">"1"</Item>
+<Item name="RULES-ARMO_09">"1"</Item>
+<Item name="DWARF-COMB_BASE_02">"2"</Item>
+<Item name="Trade Tools (Any One)">"2"</Item>
+<Item name="RULES-ARMO_14">"2"</Item>
+<Item name="DWARF-ARMO_06">"2"</Item>
+<Item name="RULES-ARMO_12/DWARF-ARMO_07">"2"</Item>
+<Item name="Temple">"3"</Item>
+<Item name="DWARF-COMB_2M_02">"3"</Item>
+<Item name="Gromril Suit">"3"</Item>
+<Item name="Beardling Initiate">"3"</Item>
+<Item name="Runic Hammer">"4"</Item>
+</SUBCHAPTER_ITEM>
+</Career>
+<Career id="DWARF-WORK08">
+<Description language="ENGLISH">"Hearth Priest"</Description>
+<Explanation language="ENGLISH">"You lead and protect your kin as the Ancestor Gods expect - with healing balms, stirring words, and good ale."</Explanation>
+<Skill>"RULES-COMPGUERI"</Skill>
+<Class>"RULES-CLASS_ACAD"</Class>
+<SUBCHAPTER_LEVEL>
+<Level id="1">
+<Description language="ENGLISH">"Hearth Initiate"</Description>
+<Salary>"TIERS_BRASS 3"</Salary>
+</Level>
+<Level id="2">
+<Description language="ENGLISH">"Hearth Priest"</Description>
+<Salary>"TIERS_SILVER 2"</Salary>
+</Level>
+<Level id="3">
+<Description language="ENGLISH">"Hearthmaster"</Description>
+<Salary>"TIERS_SILVER 4"</Salary>
+</Level>
+<Level id="4">
+<Description language="ENGLISH">"Hearthseer"</Description>
+<Salary>"TIERS_GOLD 3"</Salary>
+</Level>
+</SUBCHAPTER_LEVEL>
+<SUBCHAPTER_ATTR>
+<Attribut name="RULES-ATTR_WS">"0"</Attribut>
+<Attribut name="RULES-ATTR_BS">"0"</Attribut>
+<Attribut name="RULES-ATTR_S">"0"</Attribut>
+<Attribut name="RULES-ATTR_T">"2"</Attribut>
+<Attribut name="RULES-ATTR_I">"4"</Attribut>
+<Attribut name="RULES-ATTR_Ag">"0"</Attribut>
+<Attribut name="RULES-ATTR_Dex">"1"</Attribut>
+<Attribut name="RULES-ATTR_Int">"1"</Attribut>
+<Attribut name="RULES-ATTR_WP">"1"</Attribut>
+<Attribut name="RULES-ATTR_Fel">"3"</Attribut>
+</SUBCHAPTER_ATTR>
+<SUBCHAPTER_SKILL>
+<Skill name="RULES-COMPART_*">"1"</Skill>
+  <!-- Art (Any One) -->
+<Skill name="RULES-COMPCHARM">"1"</Skill>
+  <!-- Charm -->
+<Skill name="RULES-COMPCALM">"1"</Skill>
+  <!-- Cool -->
+<Skill name="RULES-COMPRESALC">"1"</Skill>
+  <!-- Consume Alcohol -->
+<Skill name="RULES-COMPRESIST">"1"</Skill>
+  <!-- Endurance -->
+<Skill name="RULES-COMPDIVERT_*">"1"</Skill>
+  <!-- Entertain (Any One) -->
+<Skill name="RULES-COMPRAGOT">"1"</Skill>
+  <!-- Gossip -->
+<Skill name="RULES-COMPGUERI">"1"</Skill>
+  <!-- Heal -->
+<Skill name="RULES-COMPCOMB_BASE/RULES-COMPCOMB_2M">"1"</Skill>
+  <!-- Melee (Basic or Two-handed) -->
+<Skill name="RULES-COMPMETIER_BRAS/RULES-COMPMETIER_CUIS">"1"</Skill>
+  <!-- Trade (Brewer or Cook) -->
+<Skill name="RULES-COMPINTIM">"2"</Skill>
+  <!-- Intimidate -->
+<Skill name="RULES-COMPINTUI">"2"</Skill>
+  <!-- Intuition -->
+<Skill name="RULES-COMPCOMM">"2"</Skill>
+  <!-- Leadership -->
+<Skill name="DWARF-COMPSAVOIR_RUNES/RULES-COMPSAVOIR_THEO">"2"</Skill>
+  <!-- Lore (Runes or Theology) -->
+<Skill name="RULES-COMPPRECEP">"2"</Skill>
+  <!-- Perception -->
+<Skill name="DWARF-COMPRUNESMITH">"2"</Skill>
+  <!-- Runesmithing -->
+<Skill name="RULES-COMPLANG_*">"3"</Skill>
+  <!-- Language (Any One) -->
+<Skill name="RULES-COMPSAVOIR_MEDICINE/RULES-COMPSAVOIR_ANAT">"3"</Skill>
+  <!-- Lore (Medicine or Anatomy) -->
+<Skill name="RULES-COMPRECH">"3"</Skill>
+  <!-- Research -->
+<Skill name="RULES-COMPMETIER_*">"3"</Skill>
+  <!-- Trade (Any One) -->
+<Skill name="RULES-COMPEVAL">"4"</Skill>
+  <!-- Evaluate -->
+<Skill name="RULES-COMPSAVOIR_*">"4"</Skill>
+  <!-- Lore (Any One) -->
+</SUBCHAPTER_SKILL>
+<SUBCHAPTER_TALENT>
+<Talent name="RULES-T0104">"1"</Talent>
+  <!-- Carouser -->
+<Talent name="RULES-T0111">"1"</Talent>
+  <!-- Field Dressing -->
+<Talent name="RULES-T0110">"1"</Talent>
+  <!-- Perfect Pitch -->
+<Talent name="RULES-T0123">"1"</Talent>
+  <!-- Well-prepared -->
+<Talent name="DWARF-T0010">"2"</Talent>
+  <!-- Liquid Fortification -->
+<Talent name="DWARF-T0015_PROTTALI">"2"</Talent>
+  <!-- Rune Magic (Protection Runes and Talismanic Runes) -->
+<Talent name="RULES-T0034">"2"</Talent>
+  <!-- Supportive -->
+<Talent name="RULES-T0023">"2"</Talent>
+  <!-- Surgery -->
+<Talent name="DWARF-T0012">"3"</Talent>
+  <!-- Magic Defiance -->
+<Talent name="RULES-T0118">"3"</Talent>
+  <!-- Pharmacist -->
+<Talent name="RULES-T0129_*">"3"</Talent>
+  <!-- Resistance (Any One) -->
+<Talent name="DWARF-T0013_PROT">"3"</Talent>
+  <!-- Master Rune Magic (Protection Runes) -->
+<Talent name="RULES-T0115">"4"</Talent>
+  <!-- Magical Sense -->
+<Talent name="DWARF-T0013_TALI">"4"</Talent>
+  <!-- Master Rune Magic (Talismanic Runes) -->
+<Talent name="RULES-T0098">"4"</Talent>
+  <!-- Menacing -->
+<Talent name="RULES-T0005">"4"</Talent>
+  <!-- Pure Soul -->
+</SUBCHAPTER_TALENT>
+<SUBCHAPTER_ITEM>
+<Item name="Toasting Tankard">"1"</Item>
+<Item name="RULES-ARMO_09">"1"</Item>
+<Item name="RULES-TRAP_141">"1"</Item>
+<Item name="Cult Medallion">"2"</Item>
+<Item name="DWARF-COMB_BASE_01">"2"</Item>
+<Item name="RULES-COMB_BASE_07">"2"</Item>
+<Item name="Trade Tools (Smith)">"2"</Item>
+<Item name="RULES-ARMO_14">"2"</Item>
+<Item name="DWARF-ARMO_06">"2"</Item>
+<Item name="RULES-ARMO_12">"2"</Item>
+<Item name="Temple">"3"</Item>
+<Item name="Gromril Suit">"3"</Item>
+<Item name="DWARF-TRAP_02">"3"</Item>
+<Item name="Beardling Initiate">"3"</Item>
+<Item name="Runic Shield">"4"</Item>
+</SUBCHAPTER_ITEM>
+</Career>
+<Career id="DWARF-WORK09">
+<Description language="ENGLISH">"Runescribe"</Description>
+<Explanation language="ENGLISH">"You are a diligent record keeper, inscribing essential information in stone so it is preserved until long after your death."</Explanation>
+<Skill>"RULES-COMPART_ECR"</Skill>
+<Class>"RULES-CLASS_ACAD"</Class>
+<SUBCHAPTER_LEVEL>
+<Level id="1">
+<Description language="ENGLISH">"Apprentice Runescribe"</Description>
+<Salary>"TIERS_BRASS 3"</Salary>
+</Level>
+<Level id="2">
+<Description language="ENGLISH">"Runescribe"</Description>
+<Salary>"TIERS_SILVER 2"</Salary>
+</Level>
+<Level id="3">
+<Description language="ENGLISH">"Lorekeeper"</Description>
+<Salary>"TIERS_SILVER 5"</Salary>
+</Level>
+<Level id="4">
+<Description language="ENGLISH">"Loremaster"</Description>
+<Salary>"TIERS_GOLD 2"</Salary>
+</Level>
+</SUBCHAPTER_LEVEL>
+<SUBCHAPTER_ATTR>
+<Attribut name="RULES-ATTR_WS">"0"</Attribut>
+<Attribut name="RULES-ATTR_BS">"0"</Attribut>
+<Attribut name="RULES-ATTR_S">"0"</Attribut>
+<Attribut name="RULES-ATTR_T">"1"</Attribut>
+<Attribut name="RULES-ATTR_I">"3"</Attribut>
+<Attribut name="RULES-ATTR_Ag">"0"</Attribut>
+<Attribut name="RULES-ATTR_Dex">"1"</Attribut>
+<Attribut name="RULES-ATTR_Int">"1"</Attribut>
+<Attribut name="RULES-ATTR_WP">"2"</Attribut>
+<Attribut name="RULES-ATTR_Fel">"4"</Attribut>
+</SUBCHAPTER_ATTR>
+<SUBCHAPTER_SKILL>
+<Skill name="RULES-COMPART_ECR">"1"</Skill>
+  <!-- Art (Writing) -->
+<Skill name="RULES-COMPRESALC">"1"</Skill>
+  <!-- Consume Alcohol -->
+<Skill name="RULES-COMPDIVERT_CHANT/RULES-COMPDIVERT_NARRA">"1"</Skill>
+  <!-- Entertain (Singing or Storytelling) -->
+<Skill name="RULES-COMPEVAL">"1"</Skill>
+  <!-- Evaluate -->
+<Skill name="RULES-COMPPARI">"1"</Skill>
+  <!-- Gamble -->
+<Skill name="RULES-COMPMARCH">"1"</Skill>
+  <!-- Haggle -->
+<Skill name="RULES-COMPLANG_*">"1"</Skill>
+  <!-- Language (Any One) -->
+<Skill name="RULES-COMPSAVOIR_*">"1"</Skill>
+  <!-- Lore (Any One) -->
+<Skill name="RULES-COMPRECH">"1"</Skill>
+  <!-- Research -->
+<Skill name="RULES-COMPDISC_*">"1"</Skill>
+  <!-- Stealth (Any One) -->
+<Skill name="RULES-COMPRAGOT">"2"</Skill>
+  <!-- Gossip -->
+<Skill name="RULES-COMPINTUI">"2"</Skill>
+  <!-- Intuition -->
+<Skill name="RULES-COMPSAVOIR_*">"2"</Skill>
+  <!-- Lore (Any One) -->
+<Skill name="RULES-COMPORIENT">"2"</Skill>
+  <!-- Navigation -->
+<Skill name="RULES-COMPPRECEP">"2"</Skill>
+  <!-- Perception -->
+<Skill name="RULES-COMPMETIER_*">"2"</Skill>
+  <!-- Trade (Any One) -->
+<Skill name="RULES-COMPGUERI">"3"</Skill>
+  <!-- Heal -->
+<Skill name="RULES-COMPSAVOIR_*">"3"</Skill>
+  <!-- Lore (Any One) -->
+<Skill name="RULES-COMPSURVEXT">"3"</Skill>
+  <!-- Outdoor Survival -->
+<Skill name="RULES-COMPPIST">"3"</Skill>
+  <!-- Track -->
+<Skill name="RULES-COMPCALM">"4"</Skill>
+  <!-- Cool -->
+<Skill name="RULES-COMPSAVOIR_*">"4"</Skill>
+  <!-- Lore (Any One) -->
+</SUBCHAPTER_SKILL>
+<SUBCHAPTER_TALENT>
+<Talent name="RULES-T0084">"1"</Talent>
+  <!-- Read/Write -->
+<Talent name="RULES-T0081">"1"</Talent>
+  <!-- Speedreader -->
+<Talent name="RULES-T0046">"1"</Talent>
+  <!-- Super Numerate -->
+<Talent name="RULES-T0034">"1"</Talent>
+  <!-- Supportive -->
+<Talent name="RULES-T0139_TOUCH">"2"</Talent>
+  <!-- Acute Sense (Touch) -->
+<Talent name="RULES-T0146">"2"</Talent>
+  <!-- Bookish -->
+<Talent name="RULES-T0083">"2"</Talent>
+  <!-- Lip Reading -->
+<Talent name="DWARF-T0011">"2"</Talent>
+  <!-- Long Memory -->
+<Talent name="DWARF-T0001">"3"</Talent>
+  <!-- Ancestral Grudge -->
+<Talent name="RULES-T0142">"3"</Talent>
+  <!-- Gregarious -->
+<Talent name="RULES-T0082">"3"</Talent>
+  <!-- Linguistics -->
+<Talent name="RULES-T0134_*">"3"</Talent>
+  <!-- Savant (Any One) -->
+<Talent name="RULES-T0010">"4"</Talent>
+  <!-- Blather -->
+<Talent name="RULES-T0040">"4"</Talent>
+  <!-- Detect Artefact -->
+<Talent name="RULES-T0109">"4"</Talent>
+  <!-- Public Speaker -->
+<Talent name="DWARF-T0017">"4"</Talent>
+  <!-- Tireless -->
+</SUBCHAPTER_TALENT>
+<SUBCHAPTER_ITEM>
+<Item name="Trade Tools (Engraver)">"1"</Item>
+<Item name="DWARF-TRAP_06">"1"</Item>
+<Item name="DWARF-TRAP_04">"1"</Item>
+<Item name="RULES-TRAP_087">"1"</Item>
+<Item name="Books">"1"</Item>
+<Item name="Research Archive">"2"</Item>
+<Item name="RULES-ARMO_09">"2"</Item>
+<Item name="Beardling Apprentice">"2"</Item>
+<Item name="DWARF-COMB_BASE_01/DWARF-COMB_BASE_02">"3"</Item>
+<Item name="RULES-ARMO_14">"3"</Item>
+<Item name="DWARF-ARMO_06">"3"</Item>
+<Item name="RULES-ARMO_12">"3"</Item>
+<Item name="Key to the Royal Library">"3"</Item>
+<Item name="Personal Study">"4"</Item>
+<Item name="Lorekeeper Apprentice">"4"</Item>
+</SUBCHAPTER_ITEM>
+</Career>
+<Career id="DWARF-WORK10">
+<Description language="ENGLISH">"Runesmith"</Description>
+<Explanation language="ENGLISH">"You are a practitioner of runic magic, binding the Winds of Magic into physical objects through ritual craftsmanship."</Explanation>
+<Skill>"DWARF-COMPRUNESMITH"</Skill>
+<Class>"RULES-CLASS_ACAD"</Class>
+<SUBCHAPTER_LEVEL>
+<Level id="1">
+<Description language="ENGLISH">"Apprentice Runesmith"</Description>
+<Salary>"TIERS_SILVER 2"</Salary>
+</Level>
+<Level id="2">
+<Description language="ENGLISH">"Runesmith"</Description>
+<Salary>"TIERS_SILVER 5"</Salary>
+</Level>
+<Level id="3">
+<Description language="ENGLISH">"Runemaster"</Description>
+<Salary>"TIERS_GOLD 2"</Salary>
+</Level>
+<Level id="4">
+<Description language="ENGLISH">"Runelord"</Description>
+<Salary>"TIERS_GOLD 4"</Salary>
+</Level>
+</SUBCHAPTER_LEVEL>
+<SUBCHAPTER_ATTR>
+<Attribut name="RULES-ATTR_WS">"2"</Attribut>
+<Attribut name="RULES-ATTR_BS">"0"</Attribut>
+<Attribut name="RULES-ATTR_S">"4"</Attribut>
+<Attribut name="RULES-ATTR_T">"3"</Attribut>
+<Attribut name="RULES-ATTR_I">"0"</Attribut>
+<Attribut name="RULES-ATTR_Ag">"0"</Attribut>
+<Attribut name="RULES-ATTR_Dex">"1"</Attribut>
+<Attribut name="RULES-ATTR_Int">"1"</Attribut>
+<Attribut name="RULES-ATTR_WP">"1"</Attribut>
+<Attribut name="RULES-ATTR_Fel">"0"</Attribut>
+</SUBCHAPTER_ATTR>
+<SUBCHAPTER_SKILL>
+<Skill name="RULES-COMPART_SCUL/RULES-COMPART_GRAV">"1"</Skill>
+  <!-- Art (Sculpture or Engraving) -->
+<Skill name="RULES-COMPCALM">"1"</Skill>
+  <!-- Cool -->
+<Skill name="RULES-COMPRESALC">"1"</Skill>
+  <!-- Consume Alcohol -->
+<Skill name="RULES-COMPRESIST">"1"</Skill>
+  <!-- Endurance -->
+<Skill name="RULES-COMPEVAL">"1"</Skill>
+  <!-- Evaluate -->
+<Skill name="RULES-COMPINTUI">"1"</Skill>
+  <!-- Intuition -->
+<Skill name="DWARF-COMPSAVOIR_RUNES">"1"</Skill>
+  <!-- Lore (Runes) -->
+<Skill name="DWARF-COMPRUNESMITH">"1"</Skill>
+  <!-- Runesmithing -->
+<Skill name="RULES-COMPCOMB_BASE/RULES-COMPCOMB_2M">"1"</Skill>
+  <!-- Melee (Basic or Two-handed) -->
+<Skill name="RULES-COMPMETIER_FORGE">"1"</Skill>
+  <!-- Trade (Smith) -->
+<Skill name="RULES-COMPATHL">"2"</Skill>
+  <!-- Athletics -->
+<Skill name="RULES-COMPESQU">"2"</Skill>
+  <!-- Dodge -->
+<Skill name="RULES-COMPINTIM">"2"</Skill>
+  <!-- Intimidate -->
+<Skill name="RULES-COMPSAVOIR_GEOL/RULES-COMPSAVOIR_METAL">"2"</Skill>
+  <!-- Lore (Geology or Metallurgy) -->
+<Skill name="RULES-COMPPRECEP">"2"</Skill>
+  <!-- Perception -->
+<Skill name="RULES-COMPDISC_*">"2"</Skill>
+  <!-- Stealth (Any One) -->
+<Skill name="RULES-COMPESCAL">"3"</Skill>
+  <!-- Climb -->
+<Skill name="RULES-COMPORIENT">"3"</Skill>
+  <!-- Navigation -->
+<Skill name="RULES-COMPCROCH">"3"</Skill>
+  <!-- Pick Lock -->
+<Skill name="RULES-COMPPIEG">"3"</Skill>
+  <!-- Set Trap -->
+<Skill name="RULES-COMPCOMM">"4"</Skill>
+  <!-- Leadership -->
+<Skill name="RULES-COMPSAVOIR_*">"4"</Skill>
+  <!-- Lore (Any One) -->
+</SUBCHAPTER_SKILL>
+<SUBCHAPTER_TALENT>
+<Talent name="RULES-T0040">"1"</Talent>
+  <!-- Detect Artefact -->
+<Talent name="RULES-T0129_MAGI">"1"</Talent>
+  <!-- Resistance (Magic) -->
+<Talent name="DWARF-T0015_STONE">"1"</Talent>
+  <!-- Rune Magic (Rune of Stone) -->
+<Talent name="RULES-T0077">"1"</Talent>
+  <!-- Strong Back -->
+<Talent name="DWARF-T0006">"2"</Talent>
+  <!-- Forgefire -->
+<Talent name="DWARF-T0012">"2"</Talent>
+  <!-- Magic Defiance -->
+<Talent name="RULES-T0115">"2"</Talent>
+  <!-- Magical Sense -->
+<Talent name="DWARF-T0015_ALL">"2"</Talent>
+  <!-- Rune Magic (All Forms) -->
+<Talent name="RULES-T0139_TOUCH">"3"</Talent>
+  <!-- Acute Sense (Touch) -->
+<Talent name="DWARF-T0011">"3"</Talent>
+  <!-- Long Memory -->
+<Talent name="DWARF-T0013_ALL">"3"</Talent>
+  <!-- Master Rune Magic (All Forms) -->
+<Talent name="DWARF-T0017">"3"</Talent>
+  <!-- Tireless -->
+<Talent name="DWARF-T0001">"4"</Talent>
+  <!-- Ancestral Grudge -->
+<Talent name="RULES-T0167">"4"</Talent>
+  <!-- Iron Will -->
+<Talent name="RULES-T0098">"4"</Talent>
+  <!-- Menacing -->
+<Talent name="RULES-T0005">"4"</Talent>
+  <!-- Pure Soul -->
+</SUBCHAPTER_TALENT>
+<SUBCHAPTER_ITEM>
+<Item name="Trade Tools (Smith)">"1"</Item>
+<Item name="DWARF-COMB_BASE_02/DWARF-COMB_2M_02">"1"</Item>
+<Item name="RULES-ARMO_14">"1"</Item>
+<Item name="DWARF-ARMO_06">"1"</Item>
+<Item name="RULES-ARMO_12">"1"</Item>
+<Item name="Runic Item">"2"</Item>
+<Item name="Gromril Suit">"2"</Item>
+<Item name="DWARF-ARMO_02">"2"</Item>
+<Item name="Runic Wargear">"3"</Item>
+<Item name="RULES-COMB_BASE_07">"3"</Item>
+<Item name="RULES-TRAP_102">"3"</Item>
+<Item name="Beardling Apprentice">"3"</Item>
+<Item name="Master Runic Wargear">"4"</Item>
+</SUBCHAPTER_ITEM>
+</Career>
+</DATA_CAREER>
 <DATA_WEAPON_BONUS>
 <BonusMalus id="DWARF-WEAPB01">
 <Description language="ENGLISH">"Salvo"</Description>
