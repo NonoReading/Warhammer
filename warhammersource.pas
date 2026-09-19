@@ -115,6 +115,7 @@ type
     Procedure ChargeIni();
     procedure ChargerLivre(ForceMaJ: Boolean; ForceLivre: String);
     procedure TabLivreDblClick({%H-}Sender: TObject);
+    procedure TabLivreMouseMove({%H-}Sender: TObject; {%H-}Shift: TShiftState; X, Y: Integer);
     procedure SauveIni();
     procedure TabPersonnagePrepareCanvas(Sender: TObject; {%H-}aCol, aRow: Integer;
       {%H-}aState: TGridDrawState);
@@ -154,7 +155,14 @@ var
   ColLivreWor:        Integer = 6;
   ColLivreO_F:        Integer = 7;
   ColLivreAbr:        Integer = 8;
-  ColLivreChe:        Integer = 9;
+  ColLivreCom:        Integer = 9;
+  ColLivreTal:        Integer = 10;
+  ColLivreArm:        Integer = 11;
+  ColLivreArU:        Integer = 12;
+  ColLivreEqu:        Integer = 13;
+  ColLivreSor:        Integer = 14;
+  ColLivreTra:        Integer = 15;
+  ColLivreChe:        Integer = 16;
   ColPersoNom:        Integer = 1;
   ColPersoWor:        Integer = 2;
   ColPersoRac:        Integer = 3;
@@ -912,6 +920,13 @@ Procedure TMenu.RafraichirLibellesMenu();
     TabLivre.ColWidths[ColLivreWor] := 30;
     TabLivre.ColWidths[ColLivreO_F] := 30;
     TabLivre.ColWidths[ColLivreAbr] := 30;
+    TabLivre.ColWidths[ColLivreCom] := 30;
+    TabLivre.ColWidths[ColLivreTal] := 30;
+    TabLivre.ColWidths[ColLivreArm] := 30;
+    TabLivre.ColWidths[ColLivreArU] := 30;
+    TabLivre.ColWidths[ColLivreEqu] := 30;
+    TabLivre.ColWidths[ColLivreSor] := 30;
+    TabLivre.ColWidths[ColLivreTra] := 30;
 
     TabPersonnage.ColWidths[ColPersoNom] := 100;
     TabPersonnage.ColWidths[ColPersoWor] := 150;
@@ -1039,18 +1054,29 @@ procedure TMenu.ChargerLivre(ForceMaJ: Boolean; ForceLivre: String);
     procedure ImporterUnLivre(FileName, NomLivre: String);
       var
         J: Integer;
+
+        procedure Pose(Col, Nb: Integer);
+          begin
+            if Nb > 0 then
+              TabLivre.Cells[Col, J] := IntToStr(Nb);
+          end;
+
       begin
         XmlImport(FileName, false, false);
-        if (LivreNbRace > 0) or (LivreNbMetier > 0) then
-          for J := 1 to TabLivre.RowCount - 1 do
-            if TabLivre.Cells[ColLivreCod, J] = NomLivre then
-              begin
-                if LivreNbRace > 0 then
-                  TabLivre.Cells[ColLivreRac, J] := IntToStr(LivreNbRace);
-                if LivreNbMetier > 0 then
-                  TabLivre.Cells[ColLivreWor, J] := IntToStr(LivreNbMetier);
-                break;
-              end;
+        for J := 1 to TabLivre.RowCount - 1 do
+          if TabLivre.Cells[ColLivreCod, J] = NomLivre then
+            begin
+              Pose(ColLivreRac, LivreNbRace);
+              Pose(ColLivreWor, LivreNbMetier);
+              Pose(ColLivreCom, LivreNbCompetence);
+              Pose(ColLivreTal, LivreNbTalent);
+              Pose(ColLivreArm, LivreNbArme);
+              Pose(ColLivreArU, LivreNbArmure);
+              Pose(ColLivreEqu, LivreNbTrapping);
+              Pose(ColLivreSor, LivreNbSort);
+              Pose(ColLivreTra, LivreNbTrait);
+              break;
+            end;
       end;
 
   begin
@@ -1241,6 +1267,36 @@ procedure TMenu.ChargerLivre(ForceMaJ: Boolean; ForceLivre: String);
     Traduit(ValLangue, '');
   end;
 
+procedure TMenu.TabLivreMouseMove(Sender: TObject; Shift: TShiftState; X, Y: Integer);
+  // Survol de l'en-tête d'une colonne de TabLivre : le hint donne la signification de la
+  // lettre. Calculé à chaque survol (GetTexteLibelle), donc suit le changement de langue.
+var
+  ACol, ARow: Integer;
+  Texte:      String;
+begin
+  Texte := '';
+  TabLivre.MouseToCell(X, Y, ACol, ARow);
+  if ARow = 0 then
+    begin
+      if ACol = ColLivreSel then Texte := GetTexteLibelle('RULES-LAB_211')
+      else if ACol = ColLivreRac then Texte := GetTexteLibelle('RULES-LAB_212')
+      else if ACol = ColLivreWor then Texte := GetTexteLibelle('RULES-LAB_213')
+      else if ACol = ColLivreO_F then Texte := GetTexteLibelle('RULES-LAB_214')
+      else if ACol = ColLivreCom then Texte := GetTexteLibelle('RULES-LAB_215')
+      else if ACol = ColLivreTal then Texte := GetTexteLibelle('RULES-LAB_216')
+      else if ACol = ColLivreArm then Texte := GetTexteLibelle('RULES-LAB_217')
+      else if ACol = ColLivreArU then Texte := GetTexteLibelle('RULES-LAB_218')
+      else if ACol = ColLivreEqu then Texte := GetTexteLibelle('RULES-LAB_219')
+      else if ACol = ColLivreSor then Texte := GetTexteLibelle('RULES-LAB_220')
+      else if ACol = ColLivreTra then Texte := GetTexteLibelle('RULES-LAB_221');
+    end;
+  if TabLivre.Hint <> Texte then
+    begin
+      TabLivre.Hint := Texte;
+      Application.CancelHint;
+    end;
+end;
+
 procedure TMenu.TabLivreDblClick(Sender: TObject);
 var
   BookPath: String;
@@ -1264,6 +1320,13 @@ begin
             TabLivre.Cells[ColLivreSel, TabLivre.Row] := '';
             TabLivre.Cells[ColLivreRac, TabLivre.Row] := '';
             TabLivre.Cells[ColLivreWor, TabLivre.Row] := '';
+            TabLivre.Cells[ColLivreCom, TabLivre.Row] := '';
+            TabLivre.Cells[ColLivreTal, TabLivre.Row] := '';
+            TabLivre.Cells[ColLivreArm, TabLivre.Row] := '';
+            TabLivre.Cells[ColLivreArU, TabLivre.Row] := '';
+            TabLivre.Cells[ColLivreEqu, TabLivre.Row] := '';
+            TabLivre.Cells[ColLivreSor, TabLivre.Row] := '';
+            TabLivre.Cells[ColLivreTra, TabLivre.Row] := '';
           end;
           ChargerLivre(true, '');
           ChargerPersonnages();
@@ -1470,6 +1533,13 @@ procedure TMenu.FormCreate(Sender: TObject);
        ColLivreWor := GridAjouteColonne(TabLivre, 'W', 30);
        ColLivreO_F := GridAjouteColonne(TabLivre, 'B', 30);
        ColLivreAbr := GridAjouteColonne(TabLivre, 'A', 30);
+       ColLivreCom := GridAjouteColonne(TabLivre, 'C', 30);
+       ColLivreTal := GridAjouteColonne(TabLivre, 'T', 30);
+       ColLivreArm := GridAjouteColonne(TabLivre, 'Wp', 30);
+       ColLivreArU := GridAjouteColonne(TabLivre, 'Ar', 30);
+       ColLivreEqu := GridAjouteColonne(TabLivre, 'E', 30);
+       ColLivreSor := GridAjouteColonne(TabLivre, 'Sp', 30);
+       ColLivreTra := GridAjouteColonne(TabLivre, 'Tr', 30);
        ColLivreChe := GridAjouteColonne(TabLivre, '');
 
        // mise en forme du tableau des personnages

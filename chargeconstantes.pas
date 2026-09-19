@@ -823,6 +823,14 @@ Var
 
   LivreNbRace:             Integer;
   LivreNbMetier:           Integer;
+  // Compteurs de l'import du livre en cours (affiches dans TabLivre, menu principal)
+  LivreNbCompetence:       Integer;
+  LivreNbTalent:           Integer;
+  LivreNbArme:             Integer;
+  LivreNbArmure:           Integer;
+  LivreNbTrapping:         Integer;
+  LivreNbSort:             Integer;
+  LivreNbTrait:            Integer;
 
   // chemins génériques
   ConstCheminImageRace:    String    = '\DATABASE\WFRP4\BOOKS\%BOOK%\PICTURE\SPECIE\';

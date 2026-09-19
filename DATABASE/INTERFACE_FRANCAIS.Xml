@@ -281,6 +281,17 @@
 <Text name="RULES-LAB_208">"Le Zoo impérial, les maîtres-bêtes de Clar Karond, etc. (×2)"</Text>
 <Text name="RULES-LAB_209">"Lanceurs de sorts (×10)"</Text>
 <Text name="RULES-LAB_210">"Sorciers impériaux (×8) ; mages elfes (×15)"</Text>
+<Text name="RULES-LAB_211">"Sélectionné"</Text>
+<Text name="RULES-LAB_212">"Espèces (races) ajoutées par ce livre"</Text>
+<Text name="RULES-LAB_213">"Carrières ajoutées par ce livre"</Text>
+<Text name="RULES-LAB_214">"Type de livre (officiel / facultatif)"</Text>
+<Text name="RULES-LAB_215">"Compétences ajoutées par ce livre"</Text>
+<Text name="RULES-LAB_216">"Talents ajoutés par ce livre"</Text>
+<Text name="RULES-LAB_217">"Armes ajoutées par ce livre"</Text>
+<Text name="RULES-LAB_218">"Armures ajoutées par ce livre"</Text>
+<Text name="RULES-LAB_219">"Équipement (trappings) ajouté par ce livre"</Text>
+<Text name="RULES-LAB_220">"Sorts ajoutés par ce livre"</Text>
+<Text name="RULES-LAB_221">"Traits de créature ajoutés par ce livre"</Text>
 </Label>
 </DATA_LABEL>
 </DATA_BOOK>

@@ -1161,6 +1161,13 @@ Procedure XmlImport(FileName: String; OnlyPrimary: Boolean; OnlyCode: Boolean; C
   begin
     LivreNbMetier := 0;
     LivreNbRace   := 0;
+    LivreNbCompetence := 0;
+    LivreNbTalent     := 0;
+    LivreNbArme       := 0;
+    LivreNbArmure     := 0;
+    LivreNbTrapping   := 0;
+    LivreNbSort       := 0;
+    LivreNbTrait      := 0;
     XMLDoc   := TXMLDocument.Create;
     try
       // CheminComplet permet de lire un fichier hors de ConstCheminLivre (dossier de
@@ -1373,6 +1380,7 @@ Procedure XmlImport(FileName: String; OnlyPrimary: Boolean; OnlyCode: Boolean; C
                        begin
                           ListCompetence.add(PCompetence);
                           inc(NbCompetence);
+                          Inc(LivreNbCompetence);
                           inc(NbCompetenceUnique);
                        end;
 
@@ -1425,6 +1433,7 @@ Procedure XmlImport(FileName: String; OnlyPrimary: Boolean; OnlyCode: Boolean; C
                          begin
                           ListCompetence.add(PCompetence);
                           inc(NbCompetence);
+                          Inc(LivreNbCompetence);
                          end;
 
                       AddTrad(PTraduction, Langue);
@@ -1602,6 +1611,7 @@ Procedure XmlImport(FileName: String; OnlyPrimary: Boolean; OnlyCode: Boolean; C
                          begin
                           ListTalent.add(PTalent);
                           inc(NbTalent);
+                          Inc(LivreNbTalent);
                           inc(NbTalentUnique);
                          end;
 
@@ -1667,6 +1677,7 @@ Procedure XmlImport(FileName: String; OnlyPrimary: Boolean; OnlyCode: Boolean; C
                          begin
                           ListTalent.add(PTalent);
                           inc(NbTalent);
+                          Inc(LivreNbTalent);
                          end;
 
                       AddTrad(PTraduction, Langue);
@@ -2321,6 +2332,7 @@ Procedure XmlImport(FileName: String; OnlyPrimary: Boolean; OnlyCode: Boolean; C
                         begin
                           ListArme.add(PArme);
                           inc(NbArme);
+                          Inc(LivreNbArme);
                           inc(NbArmeUnique);
                         end;
 
@@ -2471,6 +2483,7 @@ Procedure XmlImport(FileName: String; OnlyPrimary: Boolean; OnlyCode: Boolean; C
                         begin
                           ListArmure.add(PArmure);
                           inc(NbArmure);
+                          Inc(LivreNbArmure);
                         end;
 
                       AddTrad(PTraduction, Langue);
@@ -2526,6 +2539,7 @@ Procedure XmlImport(FileName: String; OnlyPrimary: Boolean; OnlyCode: Boolean; C
                         begin
                           ListTrapping.add(PTrapping);
                           inc(NbTrapping);
+                          Inc(LivreNbTrapping);
                         end;
 
                       AddTrad(PTraduction, Langue);
@@ -2685,6 +2699,7 @@ Procedure XmlImport(FileName: String; OnlyPrimary: Boolean; OnlyCode: Boolean; C
                         begin
                           ListSort.add(PSort);
                           inc(NbSort);
+                          Inc(LivreNbSort);
                         end;
 
                       AddTrad(PTraduction, Langue);
@@ -2799,6 +2814,7 @@ Procedure XmlImport(FileName: String; OnlyPrimary: Boolean; OnlyCode: Boolean; C
                             begin
                               ListTrait.add(PTrait);
                               inc(NbTrait);
+                              Inc(LivreNbTrait);
                             end;
 
                           AddTrad(PTraduction, Langue);

@@ -355,6 +355,17 @@
 <Text name="RULES-LAB_208">"The Imperial Zoo, Clar Karond Beastmasters, etc. (x2)"</Text>
 <Text name="RULES-LAB_209">"Spellcasters (x10)"</Text>
 <Text name="RULES-LAB_210">"Imperial wizards (x8); Elf mages (x15)"</Text>
+<Text name="RULES-LAB_211">"Selected"</Text>
+<Text name="RULES-LAB_212">"Species (races) added by this book"</Text>
+<Text name="RULES-LAB_213">"Careers added by this book"</Text>
+<Text name="RULES-LAB_214">"Book type (official / optional)"</Text>
+<Text name="RULES-LAB_215">"Skills added by this book"</Text>
+<Text name="RULES-LAB_216">"Talents added by this book"</Text>
+<Text name="RULES-LAB_217">"Weapons added by this book"</Text>
+<Text name="RULES-LAB_218">"Armour added by this book"</Text>
+<Text name="RULES-LAB_219">"Trappings (equipment) added by this book"</Text>
+<Text name="RULES-LAB_220">"Spells added by this book"</Text>
+<Text name="RULES-LAB_221">"Creature traits added by this book"</Text>
 </Label>
 </DATA_LABEL>
 </DATA_BOOK>

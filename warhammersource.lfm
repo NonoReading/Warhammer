@@ -1273,6 +1273,8 @@ object Menu: TMenu
     ParentFont = False
     TabOrder = 12
     OnDblClick = TabLivreDblClick
+    OnMouseMove = TabLivreMouseMove
+    ShowHint = True
     ColWidths = (
       0
     )
