@@ -93,6 +93,1901 @@
 <Generique>"DWARF-T0013_*"</Generique>
 </Talent>
 </DATA_TALENT_SPECIALIZATION>
+<DATA_SPECIE>
+  <!-- Ethnies naines p.48-50 (Dwarf Origins). Profil de caracteristiques repris du nain du Rulebook : le livre ne redonne que competences et talents. Tables de carrieres au d100 : table aleatoire p.50, une colonne par ethnie (les variantes Lustria / Sea of Claws des notes de bas de page ne sont pas appliquees). Imperial Dwarf est le choix par defaut du livre pour une forteresse non listee. Dwarfs (Norse) double SEAOF-RACE_DNORSE de Sea of Claws (competences differentes). -->
+<Specie id="DWARF-RACE_DKARAZ">
+<Description language="ENGLISH">"Dwarfs (Karaz-a-Karak)"</Description>
+<Explanation language="ENGLISH">"All that is most glorious about the Everlasting Realm can be found in the Dwarf capital of Karaz-a-Karak. Adventurers from the Everpeak act as self-appointed representatives of the High King himself, binding themselves to his vow to right every wrong in the Great Book of Grudges."</Explanation>
+<Ethnic>"RULES-SPECIE_DWARF"</Ethnic>
+<SUBCHAPTER_ATTR>
+<Attribut name="RULES-ATTR_WS">"2d10+30"</Attribut>
+<Attribut name="RULES-ATTR_BS">"2d10+20"</Attribut>
+<Attribut name="RULES-ATTR_S">"2d10+20"</Attribut>
+<Attribut name="RULES-ATTR_T">"2d10+30"</Attribut>
+<Attribut name="RULES-ATTR_I">"2d10+20"</Attribut>
+<Attribut name="RULES-ATTR_Ag">"2d10+10"</Attribut>
+<Attribut name="RULES-ATTR_Dex">"2d10+30"</Attribut>
+<Attribut name="RULES-ATTR_Int">"2d10+20"</Attribut>
+<Attribut name="RULES-ATTR_WP">"2d10+40"</Attribut>
+<Attribut name="RULES-ATTR_Fel">"2d10+10"</Attribut>
+<Attribut name="RULES-ATTR_Fate">"0"</Attribut>
+<Attribut name="RULES-ATTR_Resil">"2"</Attribut>
+<Attribut name="RULES-ATTR_Wound">"1xBATTR_S+2xBATTR_T+1xBATTR_WP"</Attribut>
+<Attribut name="RULES-ATTR_Supp">"2"</Attribut>
+<Attribut name="RULES-ATTR_Move">"3"</Attribut>
+</SUBCHAPTER_ATTR>
+<SUBCHAPTER_SKILL>
+<Skill>"RULES-COMPRESALC"</Skill>
+  <!-- Consume Alcohol -->
+<Skill>"RULES-COMPCALM"</Skill>
+  <!-- Cool -->
+<Skill>"RULES-COMPRESIST"</Skill>
+  <!-- Endurance -->
+<Skill>"RULES-COMPDIVERT_NARRA"</Skill>
+  <!-- Entertain (Storytelling) -->
+<Skill>"RULES-COMPEVAL"</Skill>
+  <!-- Evaluate -->
+<Skill>"RULES-COMPLANG_KHAZ"</Skill>
+  <!-- Language (Khazalid) -->
+<Skill>"RULES-COMPCOMM"</Skill>
+  <!-- Leadership -->
+<Skill>"RULES-COMPSAVOIR_NAIN"</Skill>
+  <!-- Lore (Dwarfs) -->
+<Skill>"RULES-COMPSAVOIR_GEOL"</Skill>
+  <!-- Lore (Geology) -->
+<Skill>"RULES-COMPSAVOIR_METAL"</Skill>
+  <!-- Lore (Metallurgy) -->
+<Skill>"RULES-COMPCOMB_BASE"</Skill>
+  <!-- Melee (Basic) -->
+<Skill>"RULES-COMPMETIER_*"</Skill>
+  <!-- Trade (Any One) -->
+</SUBCHAPTER_SKILL>
+<SUBCHAPTER_TALENT>
+<Talent>"DWARF-T0001/RULES-T0041"</Talent>
+  <!-- Ancestral Grudge or Resolute -->
+<Talent>"RULES-T0169"</Talent>
+  <!-- Magic Resistance -->
+<Talent>"RULES-T0164"</Talent>
+  <!-- Night Vision -->
+<Talent>"RULES-T0084/RULES-T0075"</Talent>
+  <!-- Read/Write or Relentless -->
+<Talent>"RULES-T0035"</Talent>
+  <!-- Sturdy -->
+</SUBCHAPTER_TALENT>
+<SUBCHAPTER_CAREER>
+<Career name="RULES-WORK02">"01"</Career>
+  <!-- Apothecary -->
+<Career name="RULES-WORK31">"02-05"</Career>
+  <!-- Engineer -->
+<Career name="DWARF-WORK07">"06-07"</Career>
+  <!-- Forge Priest -->
+<Career name="DWARF-WORK08">"08-09"</Career>
+  <!-- Hearth Priest -->
+<Career name="RULES-WORK33">"10-12"</Career>
+  <!-- Lawyer -->
+<Career name="RULES-WORK36">"13"</Career>
+  <!-- Physician -->
+<Career name="DWARF-WORK09">"14-16"</Career>
+  <!-- Runescribe -->
+<Career name="DWARF-WORK10">"17-18"</Career>
+  <!-- Runesmith -->
+<Career name="RULES-WORK01">"19"</Career>
+  <!-- Agitator -->
+<Career name="RULES-WORK03">"20-24"</Career>
+  <!-- Artisan -->
+<Career name="RULES-WORK37">"25"</Career>
+  <!-- Beggar -->
+<Career name="DWARF-WORK01">"26-27"</Career>
+  <!-- Brewer -->
+<Career name="RULES-WORK21">"28"</Career>
+  <!-- Investigator -->
+<Career name="RULES-WORK34">"29-31"</Career>
+  <!-- Merchant -->
+<Career name="RULES-WORK52">"32"</Career>
+  <!-- Rat Catcher -->
+<Career name="RULES-WORK07">"33-37"</Career>
+  <!-- Townsman -->
+<Career name="RULES-WORK39">"38"</Career>
+  <!-- Watchman -->
+<Career name="RULES-WORK15">"39-40"</Career>
+  <!-- Advisor -->
+<Career name="RULES-WORK04">"41"</Career>
+  <!-- Artist -->
+<Career name="RULES-WORK18">"42"</Career>
+  <!-- Duellist -->
+<Career name="RULES-WORK20">"43-45"</Career>
+  <!-- Envoy -->
+<Career name="RULES-WORK56">"46"</Career>
+  <!-- Servant -->
+<Career name="RULES-WORK24">"47"</Career>
+  <!-- Spy -->
+<Career name="DWARF-WORK05">"48-49"</Career>
+  <!-- Thane -->
+<Career name="RULES-WORK32">"50-51"</Career>
+  <!-- Warden -->
+<Career name="RULES-WORK05">"52"</Career>
+  <!-- Bailiff -->
+<Career name="RULES-WORK10">"53"</Career>
+  <!-- Hunter -->
+<Career name="RULES-WORK40">"54-57"</Career>
+  <!-- Miner -->
+<Career name="RULES-WORK19">"58"</Career>
+  <!-- Scout -->
+<Career name="RULES-WORK63">"59"</Career>
+  <!-- Villager -->
+<Career name="RULES-WORK11">"60"</Career>
+  <!-- Bounty Hunter -->
+<Career name="RULES-WORK13">"61"</Career>
+  <!-- Coachman -->
+<Career name="RULES-WORK55">"62-63"</Career>
+  <!-- Entertainer -->
+<Career name="RULES-WORK38">"64-65"</Career>
+  <!-- Messenger -->
+<Career name="RULES-WORK14">"66-67"</Career>
+  <!-- Pedlar -->
+<Career name="DWARF-WORK04">"68-69"</Career>
+  <!-- Karak Ranger -->
+<Career name="RULES-WORK06">"70-71"</Career>
+  <!-- Boatman -->
+<Career name="RULES-WORK43">"72"</Career>
+  <!-- Huffer -->
+<Career name="RULES-WORK25">"73"</Career>
+  <!-- Riverwoman -->
+<Career name="RULES-WORK35">"74"</Career>
+  <!-- Seaman -->
+<Career name="RULES-WORK16">"75"</Career>
+  <!-- Smuggler -->
+<Career name="RULES-WORK17">"76"</Career>
+  <!-- Stevedore -->
+<Career name="RULES-WORK42">"77"</Career>
+  <!-- Wrecker -->
+<Career name="RULES-WORK53">"78"</Career>
+  <!-- Fence -->
+<Career name="RULES-WORK30">"79"</Career>
+  <!-- Outlaw -->
+<Career name="RULES-WORK51">"80"</Career>
+  <!-- Racketeer -->
+<Career name="RULES-WORK64">"81"</Career>
+  <!-- Thief -->
+<Career name="DWARF-WORK06">"82-83"</Career>
+  <!-- Doom Priest -->
+<Career name="RULES-WORK27">"84-85"</Career>
+  <!-- Guard -->
+<Career name="DWARF-WORK02">"86-88"</Career>
+  <!-- Hammerer -->
+<Career name="DWARF-WORK03">"89-90"</Career>
+  <!-- Ironbreaker -->
+<Career name="RULES-WORK28">"91"</Career>
+  <!-- Pit Fighter -->
+<Career name="RULES-WORK61">"92"</Career>
+  <!-- Protagonist -->
+<Career name="RULES-WORK62">"93-96"</Career>
+  <!-- Slayer -->
+<Career name="RULES-WORK57">"97-100"</Career>
+  <!-- Soldier -->
+</SUBCHAPTER_CAREER>
+</Specie>
+<Specie id="DWARF-RACE_DBARAK">
+<Description language="ENGLISH">"Dwarfs (Barak Varr)"</Description>
+<Explanation language="ENGLISH">"The home of the Dwarf navy is based in the Border Princes, a rare beacon of stability amongst lawless Human kingdoms. Its people trade extensively with the neighbouring principalities, and are generally more welcoming and curious about the outside world."</Explanation>
+<Ethnic>"RULES-SPECIE_DWARF"</Ethnic>
+<SUBCHAPTER_ATTR>
+<Attribut name="RULES-ATTR_WS">"2d10+30"</Attribut>
+<Attribut name="RULES-ATTR_BS">"2d10+20"</Attribut>
+<Attribut name="RULES-ATTR_S">"2d10+20"</Attribut>
+<Attribut name="RULES-ATTR_T">"2d10+30"</Attribut>
+<Attribut name="RULES-ATTR_I">"2d10+20"</Attribut>
+<Attribut name="RULES-ATTR_Ag">"2d10+10"</Attribut>
+<Attribut name="RULES-ATTR_Dex">"2d10+30"</Attribut>
+<Attribut name="RULES-ATTR_Int">"2d10+20"</Attribut>
+<Attribut name="RULES-ATTR_WP">"2d10+40"</Attribut>
+<Attribut name="RULES-ATTR_Fel">"2d10+10"</Attribut>
+<Attribut name="RULES-ATTR_Fate">"0"</Attribut>
+<Attribut name="RULES-ATTR_Resil">"2"</Attribut>
+<Attribut name="RULES-ATTR_Wound">"1xBATTR_S+2xBATTR_T+1xBATTR_WP"</Attribut>
+<Attribut name="RULES-ATTR_Supp">"2"</Attribut>
+<Attribut name="RULES-ATTR_Move">"3"</Attribut>
+</SUBCHAPTER_ATTR>
+<SUBCHAPTER_SKILL>
+<Skill>"RULES-COMPRESALC"</Skill>
+  <!-- Consume Alcohol -->
+<Skill>"RULES-COMPCALM"</Skill>
+  <!-- Cool -->
+<Skill>"RULES-COMPRESIST"</Skill>
+  <!-- Endurance -->
+<Skill>"RULES-COMPDIVERT_NARRA"</Skill>
+  <!-- Entertain (Storytelling) -->
+<Skill>"RULES-COMPEVAL"</Skill>
+  <!-- Evaluate -->
+<Skill>"RULES-COMPMARCH"</Skill>
+  <!-- Haggle -->
+<Skill>"RULES-COMPLANG_KHAZ"</Skill>
+  <!-- Language (Khazalid) -->
+<Skill>"RULES-COMPSAVOIR_NAIN"</Skill>
+  <!-- Lore (Dwarfs) -->
+<Skill>"RULES-COMPCOMB_BASE"</Skill>
+  <!-- Melee (Basic) -->
+<Skill>"RULES-COMPORIENT"</Skill>
+  <!-- Navigation -->
+<Skill>"RULES-COMPVOILE"</Skill>
+  <!-- Sail -->
+<Skill>"RULES-COMPMETIER_*"</Skill>
+  <!-- Trade (Any One) -->
+</SUBCHAPTER_SKILL>
+<SUBCHAPTER_TALENT>
+<Talent>"RULES-T0102/RULES-T0107"</Talent>
+  <!-- Dealmaker or Strong-minded -->
+<Talent>"RULES-T0169"</Talent>
+  <!-- Magic Resistance -->
+<Talent>"RULES-T0164"</Talent>
+  <!-- Night Vision -->
+<Talent>"RULES-T0084/RULES-T0041"</Talent>
+  <!-- Read/Write or Resolute -->
+<Talent>"RULES-T0035"</Talent>
+  <!-- Sturdy -->
+</SUBCHAPTER_TALENT>
+<SUBCHAPTER_CAREER>
+<Career name="RULES-WORK02">"01"</Career>
+  <!-- Apothecary -->
+<Career name="RULES-WORK31">"02-05"</Career>
+  <!-- Engineer -->
+<Career name="DWARF-WORK07">"06-07"</Career>
+  <!-- Forge Priest -->
+<Career name="DWARF-WORK08">"08-09"</Career>
+  <!-- Hearth Priest -->
+<Career name="RULES-WORK33">"10-11"</Career>
+  <!-- Lawyer -->
+<Career name="RULES-WORK36">"12"</Career>
+  <!-- Physician -->
+<Career name="DWARF-WORK09">"13-14"</Career>
+  <!-- Runescribe -->
+<Career name="DWARF-WORK10">"15"</Career>
+  <!-- Runesmith -->
+<Career name="RULES-WORK01">"16-17"</Career>
+  <!-- Agitator -->
+<Career name="RULES-WORK03">"18-22"</Career>
+  <!-- Artisan -->
+<Career name="RULES-WORK37">"23"</Career>
+  <!-- Beggar -->
+<Career name="DWARF-WORK01">"24-25"</Career>
+  <!-- Brewer -->
+<Career name="RULES-WORK21">"26"</Career>
+  <!-- Investigator -->
+<Career name="RULES-WORK34">"27-30"</Career>
+  <!-- Merchant -->
+<Career name="RULES-WORK52">"31"</Career>
+  <!-- Rat Catcher -->
+<Career name="RULES-WORK07">"32-36"</Career>
+  <!-- Townsman -->
+<Career name="RULES-WORK39">"37"</Career>
+  <!-- Watchman -->
+<Career name="RULES-WORK15">"38-39"</Career>
+  <!-- Advisor -->
+<Career name="RULES-WORK04">"40"</Career>
+  <!-- Artist -->
+<Career name="RULES-WORK18">"41"</Career>
+  <!-- Duellist -->
+<Career name="RULES-WORK20">"42-43"</Career>
+  <!-- Envoy -->
+<Career name="RULES-WORK56">"44"</Career>
+  <!-- Servant -->
+<Career name="RULES-WORK24">"45"</Career>
+  <!-- Spy -->
+<Career name="DWARF-WORK05">"46"</Career>
+  <!-- Thane -->
+<Career name="RULES-WORK32">"47-48"</Career>
+  <!-- Warden -->
+<Career name="RULES-WORK05">"49"</Career>
+  <!-- Bailiff -->
+<Career name="RULES-WORK10">"50"</Career>
+  <!-- Hunter -->
+<Career name="RULES-WORK40">"51-53"</Career>
+  <!-- Miner -->
+<Career name="RULES-WORK19">"54"</Career>
+  <!-- Scout -->
+<Career name="RULES-WORK63">"55"</Career>
+  <!-- Villager -->
+<Career name="RULES-WORK11">"56"</Career>
+  <!-- Bounty Hunter -->
+<Career name="RULES-WORK13">"57"</Career>
+  <!-- Coachman -->
+<Career name="RULES-WORK55">"58-59"</Career>
+  <!-- Entertainer -->
+<Career name="RULES-WORK38">"60-61"</Career>
+  <!-- Messenger -->
+<Career name="RULES-WORK14">"62-63"</Career>
+  <!-- Pedlar -->
+<Career name="DWARF-WORK04">"64-65"</Career>
+  <!-- Karak Ranger -->
+<Career name="RULES-WORK06">"66-68"</Career>
+  <!-- Boatman -->
+<Career name="RULES-WORK43">"69-70"</Career>
+  <!-- Huffer -->
+<Career name="RULES-WORK25">"71-72"</Career>
+  <!-- Riverwoman -->
+<Career name="RULES-WORK35">"73-74"</Career>
+  <!-- Seaman -->
+<Career name="RULES-WORK16">"75-76"</Career>
+  <!-- Smuggler -->
+<Career name="RULES-WORK17">"77-78"</Career>
+  <!-- Stevedore -->
+<Career name="RULES-WORK42">"79"</Career>
+  <!-- Wrecker -->
+<Career name="RULES-WORK53">"80"</Career>
+  <!-- Fence -->
+<Career name="RULES-WORK30">"81"</Career>
+  <!-- Outlaw -->
+<Career name="RULES-WORK51">"82"</Career>
+  <!-- Racketeer -->
+<Career name="RULES-WORK64">"83"</Career>
+  <!-- Thief -->
+<Career name="DWARF-WORK06">"84-85"</Career>
+  <!-- Doom Priest -->
+<Career name="RULES-WORK27">"86-87"</Career>
+  <!-- Guard -->
+<Career name="DWARF-WORK02">"88-89"</Career>
+  <!-- Hammerer -->
+<Career name="DWARF-WORK03">"90-91"</Career>
+  <!-- Ironbreaker -->
+<Career name="RULES-WORK28">"92"</Career>
+  <!-- Pit Fighter -->
+<Career name="RULES-WORK61">"93"</Career>
+  <!-- Protagonist -->
+<Career name="RULES-WORK62">"94-97"</Career>
+  <!-- Slayer -->
+<Career name="RULES-WORK57">"98-100"</Career>
+  <!-- Soldier -->
+</SUBCHAPTER_CAREER>
+</Specie>
+<Specie id="DWARF-RACE_DAZUL">
+<Description language="ENGLISH">"Dwarfs (Karak Azul)"</Description>
+<Explanation language="ENGLISH">"The weapon-smithies of Karak Azul have become a dark and joyless place since the kidnapping of King Kazador's kin by the Orc warlord Gorfang Rotgut. A king's ransom has been promised to the adventurers that return the captured kin from Black Crag, and slay the monster Gorfang."</Explanation>
+<Ethnic>"RULES-SPECIE_DWARF"</Ethnic>
+<SUBCHAPTER_ATTR>
+<Attribut name="RULES-ATTR_WS">"2d10+30"</Attribut>
+<Attribut name="RULES-ATTR_BS">"2d10+20"</Attribut>
+<Attribut name="RULES-ATTR_S">"2d10+20"</Attribut>
+<Attribut name="RULES-ATTR_T">"2d10+30"</Attribut>
+<Attribut name="RULES-ATTR_I">"2d10+20"</Attribut>
+<Attribut name="RULES-ATTR_Ag">"2d10+10"</Attribut>
+<Attribut name="RULES-ATTR_Dex">"2d10+30"</Attribut>
+<Attribut name="RULES-ATTR_Int">"2d10+20"</Attribut>
+<Attribut name="RULES-ATTR_WP">"2d10+40"</Attribut>
+<Attribut name="RULES-ATTR_Fel">"2d10+10"</Attribut>
+<Attribut name="RULES-ATTR_Fate">"0"</Attribut>
+<Attribut name="RULES-ATTR_Resil">"2"</Attribut>
+<Attribut name="RULES-ATTR_Wound">"1xBATTR_S+2xBATTR_T+1xBATTR_WP"</Attribut>
+<Attribut name="RULES-ATTR_Supp">"2"</Attribut>
+<Attribut name="RULES-ATTR_Move">"3"</Attribut>
+</SUBCHAPTER_ATTR>
+<SUBCHAPTER_SKILL>
+<Skill>"RULES-COMPESCAL"</Skill>
+  <!-- Climb -->
+<Skill>"RULES-COMPRESALC"</Skill>
+  <!-- Consume Alcohol -->
+<Skill>"RULES-COMPCALM"</Skill>
+  <!-- Cool -->
+<Skill>"RULES-COMPRESIST"</Skill>
+  <!-- Endurance -->
+<Skill>"RULES-COMPEVAL"</Skill>
+  <!-- Evaluate -->
+<Skill>"RULES-COMPMARCH"</Skill>
+  <!-- Haggle -->
+<Skill>"RULES-COMPINTIM"</Skill>
+  <!-- Intimidate -->
+<Skill>"RULES-COMPLANG_KHAZ"</Skill>
+  <!-- Language (Khazalid) -->
+<Skill>"RULES-COMPSAVOIR_NAIN"</Skill>
+  <!-- Lore (Dwarfs) -->
+<Skill>"RULES-COMPSAVOIR_METAL"</Skill>
+  <!-- Lore (Metallurgy) -->
+<Skill>"RULES-COMPCOMB_BASE"</Skill>
+  <!-- Melee (Basic) -->
+<Skill>"RULES-COMPMETIER_*"</Skill>
+  <!-- Trade (Any One) -->
+</SUBCHAPTER_SKILL>
+<SUBCHAPTER_TALENT>
+<Talent>"RULES-T0069_PVERTE/RULES-T0041"</Talent>
+  <!-- Hatred (Orcs and Goblins) or Resolute -->
+<Talent>"RULES-T0169"</Talent>
+  <!-- Magic Resistance -->
+<Talent>"RULES-T0164"</Talent>
+  <!-- Night Vision -->
+<Talent>"RULES-T0084/RULES-T0075"</Talent>
+  <!-- Read/Write or Relentless -->
+<Talent>"RULES-T0035"</Talent>
+  <!-- Sturdy -->
+</SUBCHAPTER_TALENT>
+<SUBCHAPTER_CAREER>
+<Career name="RULES-WORK02">"01"</Career>
+  <!-- Apothecary -->
+<Career name="RULES-WORK31">"02-05"</Career>
+  <!-- Engineer -->
+<Career name="DWARF-WORK07">"06-08"</Career>
+  <!-- Forge Priest -->
+<Career name="DWARF-WORK08">"09-10"</Career>
+  <!-- Hearth Priest -->
+<Career name="RULES-WORK33">"11-12"</Career>
+  <!-- Lawyer -->
+<Career name="RULES-WORK36">"13"</Career>
+  <!-- Physician -->
+<Career name="DWARF-WORK09">"14-15"</Career>
+  <!-- Runescribe -->
+<Career name="DWARF-WORK10">"16-17"</Career>
+  <!-- Runesmith -->
+<Career name="RULES-WORK01">"18"</Career>
+  <!-- Agitator -->
+<Career name="RULES-WORK03">"19-24"</Career>
+  <!-- Artisan -->
+<Career name="RULES-WORK37">"25"</Career>
+  <!-- Beggar -->
+<Career name="DWARF-WORK01">"26-27"</Career>
+  <!-- Brewer -->
+<Career name="RULES-WORK21">"28"</Career>
+  <!-- Investigator -->
+<Career name="RULES-WORK34">"29-31"</Career>
+  <!-- Merchant -->
+<Career name="RULES-WORK52">"32"</Career>
+  <!-- Rat Catcher -->
+<Career name="RULES-WORK07">"33-37"</Career>
+  <!-- Townsman -->
+<Career name="RULES-WORK39">"38-39"</Career>
+  <!-- Watchman -->
+<Career name="RULES-WORK15">"40-41"</Career>
+  <!-- Advisor -->
+<Career name="RULES-WORK04">"42"</Career>
+  <!-- Artist -->
+<Career name="RULES-WORK18">"43"</Career>
+  <!-- Duellist -->
+<Career name="RULES-WORK20">"44-45"</Career>
+  <!-- Envoy -->
+<Career name="RULES-WORK56">"46"</Career>
+  <!-- Servant -->
+<Career name="RULES-WORK24">"47"</Career>
+  <!-- Spy -->
+<Career name="DWARF-WORK05">"48"</Career>
+  <!-- Thane -->
+<Career name="RULES-WORK32">"49-50"</Career>
+  <!-- Warden -->
+<Career name="RULES-WORK05">"51-52"</Career>
+  <!-- Bailiff -->
+<Career name="RULES-WORK10">"53"</Career>
+  <!-- Hunter -->
+<Career name="RULES-WORK40">"54-58"</Career>
+  <!-- Miner -->
+<Career name="RULES-WORK19">"59"</Career>
+  <!-- Scout -->
+<Career name="RULES-WORK63">"60"</Career>
+  <!-- Villager -->
+<Career name="RULES-WORK11">"61"</Career>
+  <!-- Bounty Hunter -->
+<Career name="RULES-WORK13">"62"</Career>
+  <!-- Coachman -->
+<Career name="RULES-WORK55">"63"</Career>
+  <!-- Entertainer -->
+<Career name="RULES-WORK38">"64-65"</Career>
+  <!-- Messenger -->
+<Career name="RULES-WORK14">"66-67"</Career>
+  <!-- Pedlar -->
+<Career name="DWARF-WORK04">"68-69"</Career>
+  <!-- Karak Ranger -->
+<Career name="RULES-WORK06">"70-71"</Career>
+  <!-- Boatman -->
+<Career name="RULES-WORK43">"72"</Career>
+  <!-- Huffer -->
+<Career name="RULES-WORK25">"73"</Career>
+  <!-- Riverwoman -->
+<Career name="RULES-WORK35">"74"</Career>
+  <!-- Seaman -->
+<Career name="RULES-WORK16">"75"</Career>
+  <!-- Smuggler -->
+<Career name="RULES-WORK17">"76"</Career>
+  <!-- Stevedore -->
+<Career name="RULES-WORK42">"77"</Career>
+  <!-- Wrecker -->
+<Career name="RULES-WORK53">"78"</Career>
+  <!-- Fence -->
+<Career name="RULES-WORK30">"79-80"</Career>
+  <!-- Outlaw -->
+<Career name="RULES-WORK51">"81"</Career>
+  <!-- Racketeer -->
+<Career name="RULES-WORK64">"82"</Career>
+  <!-- Thief -->
+<Career name="DWARF-WORK06">"83-84"</Career>
+  <!-- Doom Priest -->
+<Career name="RULES-WORK27">"85-87"</Career>
+  <!-- Guard -->
+<Career name="DWARF-WORK02">"88-89"</Career>
+  <!-- Hammerer -->
+<Career name="DWARF-WORK03">"90-91"</Career>
+  <!-- Ironbreaker -->
+<Career name="RULES-WORK28">"92"</Career>
+  <!-- Pit Fighter -->
+<Career name="RULES-WORK61">"93"</Career>
+  <!-- Protagonist -->
+<Career name="RULES-WORK62">"94-97"</Career>
+  <!-- Slayer -->
+<Career name="RULES-WORK57">"98-100"</Career>
+  <!-- Soldier -->
+</SUBCHAPTER_CAREER>
+</Specie>
+<Specie id="DWARF-RACE_DEIGHT">
+<Description language="ENGLISH">"Dwarfs (Karak Eight Peaks)"</Description>
+<Explanation language="ENGLISH">"Karak Eight Peaks is an active warzone, as King Belegar's kin fight an endless siege to liberate the occupied hold. Clansfolk are rarely permitted to leave the front, but adventurous Dwarfs may be dispatched abroad to find weapons, allies, or information that can help wage the war at home."</Explanation>
+<Ethnic>"RULES-SPECIE_DWARF"</Ethnic>
+<SUBCHAPTER_ATTR>
+<Attribut name="RULES-ATTR_WS">"2d10+30"</Attribut>
+<Attribut name="RULES-ATTR_BS">"2d10+20"</Attribut>
+<Attribut name="RULES-ATTR_S">"2d10+20"</Attribut>
+<Attribut name="RULES-ATTR_T">"2d10+30"</Attribut>
+<Attribut name="RULES-ATTR_I">"2d10+20"</Attribut>
+<Attribut name="RULES-ATTR_Ag">"2d10+10"</Attribut>
+<Attribut name="RULES-ATTR_Dex">"2d10+30"</Attribut>
+<Attribut name="RULES-ATTR_Int">"2d10+20"</Attribut>
+<Attribut name="RULES-ATTR_WP">"2d10+40"</Attribut>
+<Attribut name="RULES-ATTR_Fel">"2d10+10"</Attribut>
+<Attribut name="RULES-ATTR_Fate">"0"</Attribut>
+<Attribut name="RULES-ATTR_Resil">"2"</Attribut>
+<Attribut name="RULES-ATTR_Wound">"1xBATTR_S+2xBATTR_T+1xBATTR_WP"</Attribut>
+<Attribut name="RULES-ATTR_Supp">"2"</Attribut>
+<Attribut name="RULES-ATTR_Move">"3"</Attribut>
+</SUBCHAPTER_ATTR>
+<SUBCHAPTER_SKILL>
+<Skill>"RULES-COMPRESALC"</Skill>
+  <!-- Consume Alcohol -->
+<Skill>"RULES-COMPCALM"</Skill>
+  <!-- Cool -->
+<Skill>"RULES-COMPRESIST"</Skill>
+  <!-- Endurance -->
+<Skill>"RULES-COMPEVAL"</Skill>
+  <!-- Evaluate -->
+<Skill>"RULES-COMPINTUI"</Skill>
+  <!-- Intuition -->
+<Skill>"RULES-COMPLANG_KHAZ"</Skill>
+  <!-- Language (Khazalid) -->
+<Skill>"RULES-COMPSAVOIR_NAIN"</Skill>
+  <!-- Lore (Dwarfs) -->
+<Skill>"RULES-COMPSAVOIR_GEOL"</Skill>
+  <!-- Lore (Geology) -->
+<Skill>"RULES-COMPSAVOIR_GUERRE"</Skill>
+  <!-- Lore (Warfare) -->
+<Skill>"RULES-COMPCOMB_BASE"</Skill>
+  <!-- Melee (Basic) -->
+<Skill>"RULES-COMPPIEG"</Skill>
+  <!-- Set Traps -->
+<Skill>"RULES-COMPMETIER_*"</Skill>
+  <!-- Trade (Any One) -->
+</SUBCHAPTER_SKILL>
+<SUBCHAPTER_TALENT>
+<Talent>"RULES-T0169"</Talent>
+  <!-- Magic Resistance -->
+<Talent>"RULES-T0164"</Talent>
+  <!-- Night Vision -->
+<Talent>"RULES-T0084/RULES-T0041"</Talent>
+  <!-- Read/Write or Resolute -->
+<Talent>"RULES-T0107/RULES-T0116"</Talent>
+  <!-- Strong-minded or Tenacious -->
+<Talent>"RULES-T0035"</Talent>
+  <!-- Sturdy -->
+</SUBCHAPTER_TALENT>
+<SUBCHAPTER_CAREER>
+<Career name="RULES-WORK02">"01"</Career>
+  <!-- Apothecary -->
+<Career name="RULES-WORK31">"02-05"</Career>
+  <!-- Engineer -->
+<Career name="DWARF-WORK07">"06-07"</Career>
+  <!-- Forge Priest -->
+<Career name="DWARF-WORK08">"08-09"</Career>
+  <!-- Hearth Priest -->
+<Career name="RULES-WORK33">"10"</Career>
+  <!-- Lawyer -->
+<Career name="RULES-WORK36">"11"</Career>
+  <!-- Physician -->
+<Career name="DWARF-WORK09">"12-13"</Career>
+  <!-- Runescribe -->
+<Career name="DWARF-WORK10">"14"</Career>
+  <!-- Runesmith -->
+<Career name="RULES-WORK01">"15"</Career>
+  <!-- Agitator -->
+<Career name="RULES-WORK03">"16-20"</Career>
+  <!-- Artisan -->
+<Career name="RULES-WORK37">"21"</Career>
+  <!-- Beggar -->
+<Career name="DWARF-WORK01">"22-23"</Career>
+  <!-- Brewer -->
+<Career name="RULES-WORK21">"24"</Career>
+  <!-- Investigator -->
+<Career name="RULES-WORK34">"25-27"</Career>
+  <!-- Merchant -->
+<Career name="RULES-WORK52">"28"</Career>
+  <!-- Rat Catcher -->
+<Career name="RULES-WORK07">"29-32"</Career>
+  <!-- Townsman -->
+<Career name="RULES-WORK39">"33-34"</Career>
+  <!-- Watchman -->
+<Career name="RULES-WORK15">"35-36"</Career>
+  <!-- Advisor -->
+<Career name="RULES-WORK04">"37"</Career>
+  <!-- Artist -->
+<Career name="RULES-WORK18">"38"</Career>
+  <!-- Duellist -->
+<Career name="RULES-WORK20">"39"</Career>
+  <!-- Envoy -->
+<Career name="RULES-WORK56">"40"</Career>
+  <!-- Servant -->
+<Career name="RULES-WORK24">"41"</Career>
+  <!-- Spy -->
+<Career name="DWARF-WORK05">"42"</Career>
+  <!-- Thane -->
+<Career name="RULES-WORK32">"43"</Career>
+  <!-- Warden -->
+<Career name="RULES-WORK05">"44"</Career>
+  <!-- Bailiff -->
+<Career name="RULES-WORK10">"45-46"</Career>
+  <!-- Hunter -->
+<Career name="RULES-WORK40">"47-50"</Career>
+  <!-- Miner -->
+<Career name="RULES-WORK19">"51-52"</Career>
+  <!-- Scout -->
+<Career name="RULES-WORK63">"53"</Career>
+  <!-- Villager -->
+<Career name="RULES-WORK11">"54"</Career>
+  <!-- Bounty Hunter -->
+<Career name="RULES-WORK13">"55"</Career>
+  <!-- Coachman -->
+<Career name="RULES-WORK55">"56"</Career>
+  <!-- Entertainer -->
+<Career name="RULES-WORK38">"57-59"</Career>
+  <!-- Messenger -->
+<Career name="RULES-WORK14">"60-62"</Career>
+  <!-- Pedlar -->
+<Career name="DWARF-WORK04">"63-65"</Career>
+  <!-- Karak Ranger -->
+<Career name="RULES-WORK06">"66"</Career>
+  <!-- Boatman -->
+<Career name="RULES-WORK43">"67"</Career>
+  <!-- Huffer -->
+<Career name="RULES-WORK25">"68"</Career>
+  <!-- Riverwoman -->
+<Career name="RULES-WORK35">"69"</Career>
+  <!-- Seaman -->
+<Career name="RULES-WORK16">"70"</Career>
+  <!-- Smuggler -->
+<Career name="RULES-WORK17">"71"</Career>
+  <!-- Stevedore -->
+<Career name="RULES-WORK42">"72"</Career>
+  <!-- Wrecker -->
+<Career name="RULES-WORK53">"73"</Career>
+  <!-- Fence -->
+<Career name="RULES-WORK30">"74-75"</Career>
+  <!-- Outlaw -->
+<Career name="RULES-WORK51">"76"</Career>
+  <!-- Racketeer -->
+<Career name="RULES-WORK64">"77"</Career>
+  <!-- Thief -->
+<Career name="DWARF-WORK06">"78-79"</Career>
+  <!-- Doom Priest -->
+<Career name="RULES-WORK27">"80-83"</Career>
+  <!-- Guard -->
+<Career name="DWARF-WORK02">"84-85"</Career>
+  <!-- Hammerer -->
+<Career name="DWARF-WORK03">"86-87"</Career>
+  <!-- Ironbreaker -->
+<Career name="RULES-WORK28">"88"</Career>
+  <!-- Pit Fighter -->
+<Career name="RULES-WORK61">"89"</Career>
+  <!-- Protagonist -->
+<Career name="RULES-WORK62">"90-94"</Career>
+  <!-- Slayer -->
+<Career name="RULES-WORK57">"95-100"</Career>
+  <!-- Soldier -->
+</SUBCHAPTER_CAREER>
+</Specie>
+<Specie id="DWARF-RACE_DKADR">
+<Description language="ENGLISH">"Dwarfs (Karak Kadrin)"</Description>
+<Explanation language="ENGLISH">"The Slayer's Keep is the centre of worship for Grimnir, the Dwarf god of war. Many warriors live and die here, battling to control the critical Peak Pass connecting the Old World to the far east. For others, it is just as the first step of their journey, to seek glorious combat wherever it is found."</Explanation>
+<Ethnic>"RULES-SPECIE_DWARF"</Ethnic>
+<SUBCHAPTER_ATTR>
+<Attribut name="RULES-ATTR_WS">"2d10+30"</Attribut>
+<Attribut name="RULES-ATTR_BS">"2d10+20"</Attribut>
+<Attribut name="RULES-ATTR_S">"2d10+20"</Attribut>
+<Attribut name="RULES-ATTR_T">"2d10+30"</Attribut>
+<Attribut name="RULES-ATTR_I">"2d10+20"</Attribut>
+<Attribut name="RULES-ATTR_Ag">"2d10+10"</Attribut>
+<Attribut name="RULES-ATTR_Dex">"2d10+30"</Attribut>
+<Attribut name="RULES-ATTR_Int">"2d10+20"</Attribut>
+<Attribut name="RULES-ATTR_WP">"2d10+40"</Attribut>
+<Attribut name="RULES-ATTR_Fel">"2d10+10"</Attribut>
+<Attribut name="RULES-ATTR_Fate">"0"</Attribut>
+<Attribut name="RULES-ATTR_Resil">"2"</Attribut>
+<Attribut name="RULES-ATTR_Wound">"1xBATTR_S+2xBATTR_T+1xBATTR_WP"</Attribut>
+<Attribut name="RULES-ATTR_Supp">"2"</Attribut>
+<Attribut name="RULES-ATTR_Move">"3"</Attribut>
+</SUBCHAPTER_ATTR>
+<SUBCHAPTER_SKILL>
+<Skill>"RULES-COMPRESALC"</Skill>
+  <!-- Consume Alcohol -->
+<Skill>"RULES-COMPCALM"</Skill>
+  <!-- Cool -->
+<Skill>"RULES-COMPRESIST"</Skill>
+  <!-- Endurance -->
+<Skill>"RULES-COMPDIVERT_NARRA"</Skill>
+  <!-- Entertain (Storytelling) -->
+<Skill>"RULES-COMPEVAL"</Skill>
+  <!-- Evaluate -->
+<Skill>"RULES-COMPPARI"</Skill>
+  <!-- Gamble -->
+<Skill>"RULES-COMPINTIM"</Skill>
+  <!-- Intimidate -->
+<Skill>"RULES-COMPLANG_KHAZ"</Skill>
+  <!-- Language (Khazalid) -->
+<Skill>"RULES-COMPSAVOIR_NAIN"</Skill>
+  <!-- Lore (Dwarfs) -->
+<Skill>"RULES-COMPSAVOIR_METAL"</Skill>
+  <!-- Lore (Metallurgy) -->
+<Skill>"RULES-COMPCOMB_BASE"</Skill>
+  <!-- Melee (Basic) -->
+<Skill>"RULES-COMPMETIER_*"</Skill>
+  <!-- Trade (Any One) -->
+</SUBCHAPTER_SKILL>
+<SUBCHAPTER_TALENT>
+<Talent>"RULES-T0086/RULES-T0084"</Talent>
+  <!-- Iron Jaw or Read/Write -->
+<Talent>"RULES-T0169"</Talent>
+  <!-- Magic Resistance -->
+<Talent>"RULES-T0164"</Talent>
+  <!-- Night Vision -->
+<Talent>"RULES-T0041/RULES-T0107"</Talent>
+  <!-- Resolute or Strong-minded -->
+<Talent>"RULES-T0035"</Talent>
+  <!-- Sturdy -->
+</SUBCHAPTER_TALENT>
+<SUBCHAPTER_CAREER>
+<Career name="RULES-WORK02">"01"</Career>
+  <!-- Apothecary -->
+<Career name="RULES-WORK31">"02-05"</Career>
+  <!-- Engineer -->
+<Career name="DWARF-WORK07">"06-07"</Career>
+  <!-- Forge Priest -->
+<Career name="DWARF-WORK08">"08-09"</Career>
+  <!-- Hearth Priest -->
+<Career name="RULES-WORK33">"10-11"</Career>
+  <!-- Lawyer -->
+<Career name="RULES-WORK36">"12"</Career>
+  <!-- Physician -->
+<Career name="DWARF-WORK09">"13-14"</Career>
+  <!-- Runescribe -->
+<Career name="DWARF-WORK10">"15"</Career>
+  <!-- Runesmith -->
+<Career name="RULES-WORK01">"16"</Career>
+  <!-- Agitator -->
+<Career name="RULES-WORK03">"17-21"</Career>
+  <!-- Artisan -->
+<Career name="RULES-WORK37">"22"</Career>
+  <!-- Beggar -->
+<Career name="DWARF-WORK01">"23-25"</Career>
+  <!-- Brewer -->
+<Career name="RULES-WORK21">"26"</Career>
+  <!-- Investigator -->
+<Career name="RULES-WORK34">"27-29"</Career>
+  <!-- Merchant -->
+<Career name="RULES-WORK52">"30"</Career>
+  <!-- Rat Catcher -->
+<Career name="RULES-WORK07">"31-35"</Career>
+  <!-- Townsman -->
+<Career name="RULES-WORK39">"36"</Career>
+  <!-- Watchman -->
+<Career name="RULES-WORK15">"37"</Career>
+  <!-- Advisor -->
+<Career name="RULES-WORK04">"38"</Career>
+  <!-- Artist -->
+<Career name="RULES-WORK18">"39"</Career>
+  <!-- Duellist -->
+<Career name="RULES-WORK20">"40-41"</Career>
+  <!-- Envoy -->
+<Career name="RULES-WORK56">"42"</Career>
+  <!-- Servant -->
+<Career name="RULES-WORK24">"43"</Career>
+  <!-- Spy -->
+<Career name="DWARF-WORK05">"44"</Career>
+  <!-- Thane -->
+<Career name="RULES-WORK32">"45-46"</Career>
+  <!-- Warden -->
+<Career name="RULES-WORK05">"47-48"</Career>
+  <!-- Bailiff -->
+<Career name="RULES-WORK10">"49-50"</Career>
+  <!-- Hunter -->
+<Career name="RULES-WORK40">"51-54"</Career>
+  <!-- Miner -->
+<Career name="RULES-WORK19">"55"</Career>
+  <!-- Scout -->
+<Career name="RULES-WORK63">"56"</Career>
+  <!-- Villager -->
+<Career name="RULES-WORK11">"57"</Career>
+  <!-- Bounty Hunter -->
+<Career name="RULES-WORK13">"58"</Career>
+  <!-- Coachman -->
+<Career name="RULES-WORK55">"59-60"</Career>
+  <!-- Entertainer -->
+<Career name="RULES-WORK38">"61-62"</Career>
+  <!-- Messenger -->
+<Career name="RULES-WORK14">"63-64"</Career>
+  <!-- Pedlar -->
+<Career name="DWARF-WORK04">"65-66"</Career>
+  <!-- Karak Ranger -->
+<Career name="RULES-WORK06">"67"</Career>
+  <!-- Boatman -->
+<Career name="RULES-WORK43">"68"</Career>
+  <!-- Huffer -->
+<Career name="RULES-WORK25">"69"</Career>
+  <!-- Riverwoman -->
+<Career name="RULES-WORK35">"70"</Career>
+  <!-- Seaman -->
+<Career name="RULES-WORK16">"71"</Career>
+  <!-- Smuggler -->
+<Career name="RULES-WORK17">"72"</Career>
+  <!-- Stevedore -->
+<Career name="RULES-WORK42">"73"</Career>
+  <!-- Wrecker -->
+<Career name="RULES-WORK53">"74"</Career>
+  <!-- Fence -->
+<Career name="RULES-WORK30">"75-76"</Career>
+  <!-- Outlaw -->
+<Career name="RULES-WORK51">"77"</Career>
+  <!-- Racketeer -->
+<Career name="RULES-WORK64">"78"</Career>
+  <!-- Thief -->
+<Career name="DWARF-WORK06">"79-82"</Career>
+  <!-- Doom Priest -->
+<Career name="RULES-WORK27">"83-84"</Career>
+  <!-- Guard -->
+<Career name="DWARF-WORK02">"85-86"</Career>
+  <!-- Hammerer -->
+<Career name="DWARF-WORK03">"87-88"</Career>
+  <!-- Ironbreaker -->
+<Career name="RULES-WORK28">"89-90"</Career>
+  <!-- Pit Fighter -->
+<Career name="RULES-WORK61">"91"</Career>
+  <!-- Protagonist -->
+<Career name="RULES-WORK62">"92-97"</Career>
+  <!-- Slayer -->
+<Career name="RULES-WORK57">"98-100"</Career>
+  <!-- Soldier -->
+</SUBCHAPTER_CAREER>
+</Specie>
+<Specie id="DWARF-RACE_DZHUF">
+<Description language="ENGLISH">"Dwarfs (Zhufbar)"</Description>
+<Explanation language="ENGLISH">"Zhufbar is the main hub of Dwarf industry, and the centre of the Engineering Guild. The Karak is always at the forefront of technical innovation, with greater acceptance of new ideas than is found in other holds. Field tests of new inventions often carry its inhabitants far from home."</Explanation>
+<Ethnic>"RULES-SPECIE_DWARF"</Ethnic>
+<SUBCHAPTER_ATTR>
+<Attribut name="RULES-ATTR_WS">"2d10+30"</Attribut>
+<Attribut name="RULES-ATTR_BS">"2d10+20"</Attribut>
+<Attribut name="RULES-ATTR_S">"2d10+20"</Attribut>
+<Attribut name="RULES-ATTR_T">"2d10+30"</Attribut>
+<Attribut name="RULES-ATTR_I">"2d10+20"</Attribut>
+<Attribut name="RULES-ATTR_Ag">"2d10+10"</Attribut>
+<Attribut name="RULES-ATTR_Dex">"2d10+30"</Attribut>
+<Attribut name="RULES-ATTR_Int">"2d10+20"</Attribut>
+<Attribut name="RULES-ATTR_WP">"2d10+40"</Attribut>
+<Attribut name="RULES-ATTR_Fel">"2d10+10"</Attribut>
+<Attribut name="RULES-ATTR_Fate">"0"</Attribut>
+<Attribut name="RULES-ATTR_Resil">"2"</Attribut>
+<Attribut name="RULES-ATTR_Wound">"1xBATTR_S+2xBATTR_T+1xBATTR_WP"</Attribut>
+<Attribut name="RULES-ATTR_Supp">"2"</Attribut>
+<Attribut name="RULES-ATTR_Move">"3"</Attribut>
+</SUBCHAPTER_ATTR>
+<SUBCHAPTER_SKILL>
+<Skill>"RULES-COMPRESALC"</Skill>
+  <!-- Consume Alcohol -->
+<Skill>"RULES-COMPCALM"</Skill>
+  <!-- Cool -->
+<Skill>"RULES-COMPRESIST"</Skill>
+  <!-- Endurance -->
+<Skill>"RULES-COMPDIVERT_NARRA"</Skill>
+  <!-- Entertain (Storytelling) -->
+<Skill>"RULES-COMPEVAL"</Skill>
+  <!-- Evaluate -->
+<Skill>"RULES-COMPLANG_KHAZ"</Skill>
+  <!-- Language (Khazalid) -->
+<Skill>"RULES-COMPSAVOIR_NAIN"</Skill>
+  <!-- Lore (Dwarfs) -->
+<Skill>"RULES-COMPSAVOIR_ING"</Skill>
+  <!-- Lore (Engineering) -->
+<Skill>"RULES-COMPSAVOIR_GEOL"</Skill>
+  <!-- Lore (Geology) -->
+<Skill>"RULES-COMPSAVOIR_METAL"</Skill>
+  <!-- Lore (Metallurgy) -->
+<Skill>"RULES-COMPCOMB_BASE"</Skill>
+  <!-- Melee (Basic) -->
+<Skill>"RULES-COMPMETIER_*"</Skill>
+  <!-- Trade (Any One) -->
+</SUBCHAPTER_SKILL>
+<SUBCHAPTER_TALENT>
+<Talent>"RULES-T0169"</Talent>
+  <!-- Magic Resistance -->
+<Talent>"RULES-T0164"</Talent>
+  <!-- Night Vision -->
+<Talent>"RULES-T0084/RULES-T0075"</Talent>
+  <!-- Read/Write or Relentless -->
+<Talent>"RULES-T0107/RULES-T0015"</Talent>
+  <!-- Strong-minded or Tinker -->
+<Talent>"RULES-T0035"</Talent>
+  <!-- Sturdy -->
+</SUBCHAPTER_TALENT>
+<SUBCHAPTER_CAREER>
+<Career name="RULES-WORK02">"01"</Career>
+  <!-- Apothecary -->
+<Career name="RULES-WORK31">"02-07"</Career>
+  <!-- Engineer -->
+<Career name="DWARF-WORK07">"08-10"</Career>
+  <!-- Forge Priest -->
+<Career name="DWARF-WORK08">"11-12"</Career>
+  <!-- Hearth Priest -->
+<Career name="RULES-WORK33">"13-14"</Career>
+  <!-- Lawyer -->
+<Career name="RULES-WORK36">"15"</Career>
+  <!-- Physician -->
+<Career name="DWARF-WORK09">"16-17"</Career>
+  <!-- Runescribe -->
+<Career name="DWARF-WORK10">"18-19"</Career>
+  <!-- Runesmith -->
+<Career name="RULES-WORK01">"20-21"</Career>
+  <!-- Agitator -->
+<Career name="RULES-WORK03">"22-27"</Career>
+  <!-- Artisan -->
+<Career name="RULES-WORK37">"28"</Career>
+  <!-- Beggar -->
+<Career name="DWARF-WORK01">"29-30"</Career>
+  <!-- Brewer -->
+<Career name="RULES-WORK21">"31"</Career>
+  <!-- Investigator -->
+<Career name="RULES-WORK34">"32-34"</Career>
+  <!-- Merchant -->
+<Career name="RULES-WORK52">"35"</Career>
+  <!-- Rat Catcher -->
+<Career name="RULES-WORK07">"36-39"</Career>
+  <!-- Townsman -->
+<Career name="RULES-WORK39">"40"</Career>
+  <!-- Watchman -->
+<Career name="RULES-WORK15">"41"</Career>
+  <!-- Advisor -->
+<Career name="RULES-WORK04">"42"</Career>
+  <!-- Artist -->
+<Career name="RULES-WORK18">"43"</Career>
+  <!-- Duellist -->
+<Career name="RULES-WORK20">"44-45"</Career>
+  <!-- Envoy -->
+<Career name="RULES-WORK56">"46"</Career>
+  <!-- Servant -->
+<Career name="RULES-WORK24">"47"</Career>
+  <!-- Spy -->
+<Career name="DWARF-WORK05">"48"</Career>
+  <!-- Thane -->
+<Career name="RULES-WORK32">"49-50"</Career>
+  <!-- Warden -->
+<Career name="RULES-WORK05">"51"</Career>
+  <!-- Bailiff -->
+<Career name="RULES-WORK10">"52"</Career>
+  <!-- Hunter -->
+<Career name="RULES-WORK40">"53-57"</Career>
+  <!-- Miner -->
+<Career name="RULES-WORK19">"58"</Career>
+  <!-- Scout -->
+<Career name="RULES-WORK63">"59"</Career>
+  <!-- Villager -->
+<Career name="RULES-WORK11">"60"</Career>
+  <!-- Bounty Hunter -->
+<Career name="RULES-WORK13">"61"</Career>
+  <!-- Coachman -->
+<Career name="RULES-WORK55">"62-63"</Career>
+  <!-- Entertainer -->
+<Career name="RULES-WORK38">"64-65"</Career>
+  <!-- Messenger -->
+<Career name="RULES-WORK14">"66-67"</Career>
+  <!-- Pedlar -->
+<Career name="DWARF-WORK04">"68-69"</Career>
+  <!-- Karak Ranger -->
+<Career name="RULES-WORK06">"70-71"</Career>
+  <!-- Boatman -->
+<Career name="RULES-WORK43">"72"</Career>
+  <!-- Huffer -->
+<Career name="RULES-WORK25">"73-74"</Career>
+  <!-- Riverwoman -->
+<Career name="RULES-WORK35">"75"</Career>
+  <!-- Seaman -->
+<Career name="RULES-WORK16">"76"</Career>
+  <!-- Smuggler -->
+<Career name="RULES-WORK17">"77"</Career>
+  <!-- Stevedore -->
+<Career name="RULES-WORK42">"78"</Career>
+  <!-- Wrecker -->
+<Career name="RULES-WORK53">"79"</Career>
+  <!-- Fence -->
+<Career name="RULES-WORK30">"80-81"</Career>
+  <!-- Outlaw -->
+<Career name="RULES-WORK51">"82"</Career>
+  <!-- Racketeer -->
+<Career name="RULES-WORK64">"83"</Career>
+  <!-- Thief -->
+<Career name="DWARF-WORK06">"84-85"</Career>
+  <!-- Doom Priest -->
+<Career name="RULES-WORK27">"86-87"</Career>
+  <!-- Guard -->
+<Career name="DWARF-WORK02">"88-89"</Career>
+  <!-- Hammerer -->
+<Career name="DWARF-WORK03">"90-91"</Career>
+  <!-- Ironbreaker -->
+<Career name="RULES-WORK28">"92"</Career>
+  <!-- Pit Fighter -->
+<Career name="RULES-WORK61">"93"</Career>
+  <!-- Protagonist -->
+<Career name="RULES-WORK62">"94-97"</Career>
+  <!-- Slayer -->
+<Career name="RULES-WORK57">"98-100"</Career>
+  <!-- Soldier -->
+</SUBCHAPTER_CAREER>
+</Specie>
+<Specie id="DWARF-RACE_DHIRN">
+<Description language="ENGLISH">"Dwarfs (Karak Hirn/Black Mountains)"</Description>
+<Explanation language="ENGLISH">"Much travel through the Black Mountains is conducted overland, and adventurous Dwarfs in the region are as comfortable scrabbling up mountainsides as delving into Goblin tunnels. Foremost amongst this range is Karak Hirn, the Hornhold, which exploits the natural acoustics of their surrounding canyons to signal the outside world."</Explanation>
+<Ethnic>"RULES-SPECIE_DWARF"</Ethnic>
+<SUBCHAPTER_ATTR>
+<Attribut name="RULES-ATTR_WS">"2d10+30"</Attribut>
+<Attribut name="RULES-ATTR_BS">"2d10+20"</Attribut>
+<Attribut name="RULES-ATTR_S">"2d10+20"</Attribut>
+<Attribut name="RULES-ATTR_T">"2d10+30"</Attribut>
+<Attribut name="RULES-ATTR_I">"2d10+20"</Attribut>
+<Attribut name="RULES-ATTR_Ag">"2d10+10"</Attribut>
+<Attribut name="RULES-ATTR_Dex">"2d10+30"</Attribut>
+<Attribut name="RULES-ATTR_Int">"2d10+20"</Attribut>
+<Attribut name="RULES-ATTR_WP">"2d10+40"</Attribut>
+<Attribut name="RULES-ATTR_Fel">"2d10+10"</Attribut>
+<Attribut name="RULES-ATTR_Fate">"0"</Attribut>
+<Attribut name="RULES-ATTR_Resil">"2"</Attribut>
+<Attribut name="RULES-ATTR_Wound">"1xBATTR_S+2xBATTR_T+1xBATTR_WP"</Attribut>
+<Attribut name="RULES-ATTR_Supp">"2"</Attribut>
+<Attribut name="RULES-ATTR_Move">"3"</Attribut>
+</SUBCHAPTER_ATTR>
+<SUBCHAPTER_SKILL>
+<Skill>"RULES-COMPRESALC"</Skill>
+  <!-- Consume Alcohol -->
+<Skill>"RULES-COMPESCAL"</Skill>
+  <!-- Climb -->
+<Skill>"RULES-COMPCALM"</Skill>
+  <!-- Cool -->
+<Skill>"RULES-COMPRESIST"</Skill>
+  <!-- Endurance -->
+<Skill>"RULES-COMPDIVERT_NARRA"</Skill>
+  <!-- Entertain (Storytelling) -->
+<Skill>"RULES-COMPEVAL"</Skill>
+  <!-- Evaluate -->
+<Skill>"RULES-COMPMARCH"</Skill>
+  <!-- Haggle -->
+<Skill>"RULES-COMPLANG_KHAZ"</Skill>
+  <!-- Language (Khazalid) -->
+<Skill>"RULES-COMPSAVOIR_NAIN"</Skill>
+  <!-- Lore (Dwarfs) -->
+<Skill>"RULES-COMPCOMB_BASE"</Skill>
+  <!-- Melee (Basic) -->
+<Skill>"RULES-COMPMUSIC_COR"</Skill>
+  <!-- Play (Horn) -->
+<Skill>"RULES-COMPMETIER_*"</Skill>
+  <!-- Trade (Any One) -->
+</SUBCHAPTER_SKILL>
+<SUBCHAPTER_TALENT>
+<Talent>"RULES-T0169"</Talent>
+  <!-- Magic Resistance -->
+<Talent>"RULES-T0164"</Talent>
+  <!-- Night Vision -->
+<Talent>"RULES-T0084/RULES-T0075"</Talent>
+  <!-- Read/Write or Relentless -->
+<Talent>"RULES-T0066/RULES-T0107"</Talent>
+  <!-- Scale Sheer Surface or Strong-minded -->
+<Talent>"RULES-T0035"</Talent>
+  <!-- Sturdy -->
+</SUBCHAPTER_TALENT>
+<SUBCHAPTER_CAREER>
+<Career name="RULES-WORK02">"01"</Career>
+  <!-- Apothecary -->
+<Career name="RULES-WORK31">"02-05"</Career>
+  <!-- Engineer -->
+<Career name="DWARF-WORK07">"06-07"</Career>
+  <!-- Forge Priest -->
+<Career name="DWARF-WORK08">"08-09"</Career>
+  <!-- Hearth Priest -->
+<Career name="RULES-WORK33">"10-11"</Career>
+  <!-- Lawyer -->
+<Career name="RULES-WORK36">"12"</Career>
+  <!-- Physician -->
+<Career name="DWARF-WORK09">"13-14"</Career>
+  <!-- Runescribe -->
+<Career name="DWARF-WORK10">"15"</Career>
+  <!-- Runesmith -->
+<Career name="RULES-WORK01">"16-17"</Career>
+  <!-- Agitator -->
+<Career name="RULES-WORK03">"18-22"</Career>
+  <!-- Artisan -->
+<Career name="RULES-WORK37">"23"</Career>
+  <!-- Beggar -->
+<Career name="DWARF-WORK01">"24-25"</Career>
+  <!-- Brewer -->
+<Career name="RULES-WORK21">"26"</Career>
+  <!-- Investigator -->
+<Career name="RULES-WORK34">"27-29"</Career>
+  <!-- Merchant -->
+<Career name="RULES-WORK52">"30"</Career>
+  <!-- Rat Catcher -->
+<Career name="RULES-WORK07">"31-35"</Career>
+  <!-- Townsman -->
+<Career name="RULES-WORK39">"36"</Career>
+  <!-- Watchman -->
+<Career name="RULES-WORK15">"37-38"</Career>
+  <!-- Advisor -->
+<Career name="RULES-WORK04">"39"</Career>
+  <!-- Artist -->
+<Career name="RULES-WORK18">"40"</Career>
+  <!-- Duellist -->
+<Career name="RULES-WORK20">"41-42"</Career>
+  <!-- Envoy -->
+<Career name="RULES-WORK56">"43"</Career>
+  <!-- Servant -->
+<Career name="RULES-WORK24">"44"</Career>
+  <!-- Spy -->
+<Career name="DWARF-WORK05">"45"</Career>
+  <!-- Thane -->
+<Career name="RULES-WORK32">"46-47"</Career>
+  <!-- Warden -->
+<Career name="RULES-WORK05">"48-49"</Career>
+  <!-- Bailiff -->
+<Career name="RULES-WORK10">"50-51"</Career>
+  <!-- Hunter -->
+<Career name="RULES-WORK40">"52-55"</Career>
+  <!-- Miner -->
+<Career name="RULES-WORK19">"56-57"</Career>
+  <!-- Scout -->
+<Career name="RULES-WORK63">"58"</Career>
+  <!-- Villager -->
+<Career name="RULES-WORK11">"59"</Career>
+  <!-- Bounty Hunter -->
+<Career name="RULES-WORK13">"60"</Career>
+  <!-- Coachman -->
+<Career name="RULES-WORK55">"61-62"</Career>
+  <!-- Entertainer -->
+<Career name="RULES-WORK38">"63-64"</Career>
+  <!-- Messenger -->
+<Career name="RULES-WORK14">"65-66"</Career>
+  <!-- Pedlar -->
+<Career name="DWARF-WORK04">"67-69"</Career>
+  <!-- Karak Ranger -->
+<Career name="RULES-WORK06">"70-71"</Career>
+  <!-- Boatman -->
+<Career name="RULES-WORK43">"72"</Career>
+  <!-- Huffer -->
+<Career name="RULES-WORK25">"73-74"</Career>
+  <!-- Riverwoman -->
+<Career name="RULES-WORK35">"75"</Career>
+  <!-- Seaman -->
+<Career name="RULES-WORK16">"76"</Career>
+  <!-- Smuggler -->
+<Career name="RULES-WORK17">"77"</Career>
+  <!-- Stevedore -->
+<Career name="RULES-WORK42">"78"</Career>
+  <!-- Wrecker -->
+<Career name="RULES-WORK53">"79"</Career>
+  <!-- Fence -->
+<Career name="RULES-WORK30">"80-81"</Career>
+  <!-- Outlaw -->
+<Career name="RULES-WORK51">"82"</Career>
+  <!-- Racketeer -->
+<Career name="RULES-WORK64">"83"</Career>
+  <!-- Thief -->
+<Career name="DWARF-WORK06">"84-85"</Career>
+  <!-- Doom Priest -->
+<Career name="RULES-WORK27">"86-87"</Career>
+  <!-- Guard -->
+<Career name="DWARF-WORK02">"88-89"</Career>
+  <!-- Hammerer -->
+<Career name="DWARF-WORK03">"90-91"</Career>
+  <!-- Ironbreaker -->
+<Career name="RULES-WORK28">"92"</Career>
+  <!-- Pit Fighter -->
+<Career name="RULES-WORK61">"93"</Career>
+  <!-- Protagonist -->
+<Career name="RULES-WORK62">"94-97"</Career>
+  <!-- Slayer -->
+<Career name="RULES-WORK57">"98-100"</Career>
+  <!-- Soldier -->
+</SUBCHAPTER_CAREER>
+</Specie>
+<Specie id="DWARF-RACE_DIZOR">
+<Description language="ENGLISH">"Dwarfs (Karak Izor/The Vaults)"</Description>
+<Explanation language="ENGLISH">"The Vaults were the first ranges settled by Dwarfs outside the World's Edge Mountains, with Karak Izor its centre of defence. Whilst most Dwarfs have abandoned the subterranean tunnels of the Karaz Ankor as unsafe, the Dwarfs of Karak Izor labour underground extensively, constructing their own Underway."</Explanation>
+<Ethnic>"RULES-SPECIE_DWARF"</Ethnic>
+<SUBCHAPTER_ATTR>
+<Attribut name="RULES-ATTR_WS">"2d10+30"</Attribut>
+<Attribut name="RULES-ATTR_BS">"2d10+20"</Attribut>
+<Attribut name="RULES-ATTR_S">"2d10+20"</Attribut>
+<Attribut name="RULES-ATTR_T">"2d10+30"</Attribut>
+<Attribut name="RULES-ATTR_I">"2d10+20"</Attribut>
+<Attribut name="RULES-ATTR_Ag">"2d10+10"</Attribut>
+<Attribut name="RULES-ATTR_Dex">"2d10+30"</Attribut>
+<Attribut name="RULES-ATTR_Int">"2d10+20"</Attribut>
+<Attribut name="RULES-ATTR_WP">"2d10+40"</Attribut>
+<Attribut name="RULES-ATTR_Fel">"2d10+10"</Attribut>
+<Attribut name="RULES-ATTR_Fate">"0"</Attribut>
+<Attribut name="RULES-ATTR_Resil">"2"</Attribut>
+<Attribut name="RULES-ATTR_Wound">"1xBATTR_S+2xBATTR_T+1xBATTR_WP"</Attribut>
+<Attribut name="RULES-ATTR_Supp">"2"</Attribut>
+<Attribut name="RULES-ATTR_Move">"3"</Attribut>
+</SUBCHAPTER_ATTR>
+<SUBCHAPTER_SKILL>
+<Skill>"RULES-COMPRESALC"</Skill>
+  <!-- Consume Alcohol -->
+<Skill>"RULES-COMPESCAL"</Skill>
+  <!-- Climb -->
+<Skill>"RULES-COMPCALM"</Skill>
+  <!-- Cool -->
+<Skill>"RULES-COMPRESIST"</Skill>
+  <!-- Endurance -->
+<Skill>"RULES-COMPDIVERT_NARRA"</Skill>
+  <!-- Entertain (Storytelling) -->
+<Skill>"RULES-COMPEVAL"</Skill>
+  <!-- Evaluate -->
+<Skill>"RULES-COMPLANG_KHAZ"</Skill>
+  <!-- Language (Khazalid) -->
+<Skill>"RULES-COMPSAVOIR_NAIN"</Skill>
+  <!-- Lore (Dwarfs) -->
+<Skill>"RULES-COMPSAVOIR_GEOL"</Skill>
+  <!-- Lore (Geology) -->
+<Skill>"RULES-COMPCOMB_BASE"</Skill>
+  <!-- Melee (Basic) -->
+<Skill>"RULES-COMPSURVEXT"</Skill>
+  <!-- Outdoor Survival -->
+<Skill>"RULES-COMPMETIER_*"</Skill>
+  <!-- Trade (Any One) -->
+</SUBCHAPTER_SKILL>
+<SUBCHAPTER_TALENT>
+<Talent>"RULES-T0027/RULES-T0041"</Talent>
+  <!-- Enclosed Fighter or Resolute -->
+<Talent>"RULES-T0169"</Talent>
+  <!-- Magic Resistance -->
+<Talent>"RULES-T0164"</Talent>
+  <!-- Night Vision -->
+<Talent>"RULES-T0084/RULES-T0075"</Talent>
+  <!-- Read/Write or Relentless -->
+<Talent>"RULES-T0035"</Talent>
+  <!-- Sturdy -->
+</SUBCHAPTER_TALENT>
+<SUBCHAPTER_CAREER>
+<Career name="RULES-WORK02">"01"</Career>
+  <!-- Apothecary -->
+<Career name="RULES-WORK31">"02-05"</Career>
+  <!-- Engineer -->
+<Career name="DWARF-WORK07">"06-07"</Career>
+  <!-- Forge Priest -->
+<Career name="DWARF-WORK08">"08-09"</Career>
+  <!-- Hearth Priest -->
+<Career name="RULES-WORK33">"10-11"</Career>
+  <!-- Lawyer -->
+<Career name="RULES-WORK36">"12"</Career>
+  <!-- Physician -->
+<Career name="DWARF-WORK09">"13-14"</Career>
+  <!-- Runescribe -->
+<Career name="DWARF-WORK10">"15"</Career>
+  <!-- Runesmith -->
+<Career name="RULES-WORK01">"16-17"</Career>
+  <!-- Agitator -->
+<Career name="RULES-WORK03">"18-22"</Career>
+  <!-- Artisan -->
+<Career name="RULES-WORK37">"23"</Career>
+  <!-- Beggar -->
+<Career name="DWARF-WORK01">"24-25"</Career>
+  <!-- Brewer -->
+<Career name="RULES-WORK21">"26"</Career>
+  <!-- Investigator -->
+<Career name="RULES-WORK34">"27-29"</Career>
+  <!-- Merchant -->
+<Career name="RULES-WORK52">"30"</Career>
+  <!-- Rat Catcher -->
+<Career name="RULES-WORK07">"31-35"</Career>
+  <!-- Townsman -->
+<Career name="RULES-WORK39">"36-37"</Career>
+  <!-- Watchman -->
+<Career name="RULES-WORK15">"38-39"</Career>
+  <!-- Advisor -->
+<Career name="RULES-WORK04">"40"</Career>
+  <!-- Artist -->
+<Career name="RULES-WORK18">"41"</Career>
+  <!-- Duellist -->
+<Career name="RULES-WORK20">"42-43"</Career>
+  <!-- Envoy -->
+<Career name="RULES-WORK56">"44"</Career>
+  <!-- Servant -->
+<Career name="RULES-WORK24">"45"</Career>
+  <!-- Spy -->
+<Career name="DWARF-WORK05">"46"</Career>
+  <!-- Thane -->
+<Career name="RULES-WORK32">"47-48"</Career>
+  <!-- Warden -->
+<Career name="RULES-WORK05">"49-50"</Career>
+  <!-- Bailiff -->
+<Career name="RULES-WORK10">"51"</Career>
+  <!-- Hunter -->
+<Career name="RULES-WORK40">"52-56"</Career>
+  <!-- Miner -->
+<Career name="RULES-WORK19">"57"</Career>
+  <!-- Scout -->
+<Career name="RULES-WORK63">"58"</Career>
+  <!-- Villager -->
+<Career name="RULES-WORK11">"59"</Career>
+  <!-- Bounty Hunter -->
+<Career name="RULES-WORK13">"60"</Career>
+  <!-- Coachman -->
+<Career name="RULES-WORK55">"61-62"</Career>
+  <!-- Entertainer -->
+<Career name="RULES-WORK38">"63-64"</Career>
+  <!-- Messenger -->
+<Career name="RULES-WORK14">"65-66"</Career>
+  <!-- Pedlar -->
+<Career name="DWARF-WORK04">"67-69"</Career>
+  <!-- Karak Ranger -->
+<Career name="RULES-WORK06">"70-71"</Career>
+  <!-- Boatman -->
+<Career name="RULES-WORK43">"72"</Career>
+  <!-- Huffer -->
+<Career name="RULES-WORK25">"73-74"</Career>
+  <!-- Riverwoman -->
+<Career name="RULES-WORK35">"75"</Career>
+  <!-- Seaman -->
+<Career name="RULES-WORK16">"76"</Career>
+  <!-- Smuggler -->
+<Career name="RULES-WORK17">"77"</Career>
+  <!-- Stevedore -->
+<Career name="RULES-WORK42">"78"</Career>
+  <!-- Wrecker -->
+<Career name="RULES-WORK53">"79"</Career>
+  <!-- Fence -->
+<Career name="RULES-WORK30">"80-81"</Career>
+  <!-- Outlaw -->
+<Career name="RULES-WORK51">"82"</Career>
+  <!-- Racketeer -->
+<Career name="RULES-WORK64">"83"</Career>
+  <!-- Thief -->
+<Career name="DWARF-WORK06">"84-85"</Career>
+  <!-- Doom Priest -->
+<Career name="RULES-WORK27">"86-87"</Career>
+  <!-- Guard -->
+<Career name="DWARF-WORK02">"88-89"</Career>
+  <!-- Hammerer -->
+<Career name="DWARF-WORK03">"90-91"</Career>
+  <!-- Ironbreaker -->
+<Career name="RULES-WORK28">"92"</Career>
+  <!-- Pit Fighter -->
+<Career name="RULES-WORK61">"93"</Career>
+  <!-- Protagonist -->
+<Career name="RULES-WORK62">"94-97"</Career>
+  <!-- Slayer -->
+<Career name="RULES-WORK57">"98-100"</Career>
+  <!-- Soldier -->
+</SUBCHAPTER_CAREER>
+</Specie>
+<Specie id="DWARF-RACE_DNORN">
+<Description language="ENGLISH">"Dwarfs (Karak Norn/Grey Mountains)"</Description>
+<Explanation language="ENGLISH">"The holds of the Grey Mountains were never prosperous, and their inhabitants learned long ago how to persist in lean times. Many have abandoned their holds to seek opportunity elsewhere. In Karak Norn, distrust of the Wood Elves in Athel Loren rarely abates, and missions to surveil the devious Elves are often led astray."</Explanation>
+<Ethnic>"RULES-SPECIE_DWARF"</Ethnic>
+<SUBCHAPTER_ATTR>
+<Attribut name="RULES-ATTR_WS">"2d10+30"</Attribut>
+<Attribut name="RULES-ATTR_BS">"2d10+20"</Attribut>
+<Attribut name="RULES-ATTR_S">"2d10+20"</Attribut>
+<Attribut name="RULES-ATTR_T">"2d10+30"</Attribut>
+<Attribut name="RULES-ATTR_I">"2d10+20"</Attribut>
+<Attribut name="RULES-ATTR_Ag">"2d10+10"</Attribut>
+<Attribut name="RULES-ATTR_Dex">"2d10+30"</Attribut>
+<Attribut name="RULES-ATTR_Int">"2d10+20"</Attribut>
+<Attribut name="RULES-ATTR_WP">"2d10+40"</Attribut>
+<Attribut name="RULES-ATTR_Fel">"2d10+10"</Attribut>
+<Attribut name="RULES-ATTR_Fate">"0"</Attribut>
+<Attribut name="RULES-ATTR_Resil">"2"</Attribut>
+<Attribut name="RULES-ATTR_Wound">"1xBATTR_S+2xBATTR_T+1xBATTR_WP"</Attribut>
+<Attribut name="RULES-ATTR_Supp">"2"</Attribut>
+<Attribut name="RULES-ATTR_Move">"3"</Attribut>
+</SUBCHAPTER_ATTR>
+<SUBCHAPTER_SKILL>
+<Skill>"RULES-COMPRESALC"</Skill>
+  <!-- Consume Alcohol -->
+<Skill>"RULES-COMPESCAL"</Skill>
+  <!-- Climb -->
+<Skill>"RULES-COMPCALM"</Skill>
+  <!-- Cool -->
+<Skill>"RULES-COMPRESIST"</Skill>
+  <!-- Endurance -->
+<Skill>"RULES-COMPDIVERT_NARRA"</Skill>
+  <!-- Entertain (Storytelling) -->
+<Skill>"RULES-COMPEVAL"</Skill>
+  <!-- Evaluate -->
+<Skill>"RULES-COMPLANG_KHAZ"</Skill>
+  <!-- Language (Khazalid) -->
+<Skill>"RULES-COMPSAVOIR_NAIN"</Skill>
+  <!-- Lore (Dwarfs) -->
+<Skill>"RULES-COMPCOMB_BASE"</Skill>
+  <!-- Melee (Basic) -->
+<Skill>"RULES-COMPPRECEP"</Skill>
+  <!-- Perception -->
+<Skill>"RULES-COMPPROJ_ARB"</Skill>
+  <!-- Ranged (Crossbow) -->
+<Skill>"RULES-COMPMETIER_*"</Skill>
+  <!-- Trade (Any One) -->
+</SUBCHAPTER_SKILL>
+<SUBCHAPTER_TALENT>
+<Talent>"RULES-T0169"</Talent>
+  <!-- Magic Resistance -->
+<Talent>"RULES-T0164"</Talent>
+  <!-- Night Vision -->
+<Talent>"RULES-T0084/RULES-T0075"</Talent>
+  <!-- Read/Write or Relentless -->
+<Talent>"RULES-T0041/RULES-T0016"</Talent>
+  <!-- Resolute or Stone Soup -->
+<Talent>"RULES-T0035"</Talent>
+  <!-- Sturdy -->
+</SUBCHAPTER_TALENT>
+<SUBCHAPTER_CAREER>
+<Career name="RULES-WORK02">"01"</Career>
+  <!-- Apothecary -->
+<Career name="RULES-WORK31">"02-05"</Career>
+  <!-- Engineer -->
+<Career name="DWARF-WORK07">"06-07"</Career>
+  <!-- Forge Priest -->
+<Career name="DWARF-WORK08">"08-09"</Career>
+  <!-- Hearth Priest -->
+<Career name="RULES-WORK33">"10-11"</Career>
+  <!-- Lawyer -->
+<Career name="RULES-WORK36">"12"</Career>
+  <!-- Physician -->
+<Career name="DWARF-WORK09">"13-14"</Career>
+  <!-- Runescribe -->
+<Career name="DWARF-WORK10">"15"</Career>
+  <!-- Runesmith -->
+<Career name="RULES-WORK01">"16-17"</Career>
+  <!-- Agitator -->
+<Career name="RULES-WORK03">"18-22"</Career>
+  <!-- Artisan -->
+<Career name="RULES-WORK37">"23"</Career>
+  <!-- Beggar -->
+<Career name="DWARF-WORK01">"24-25"</Career>
+  <!-- Brewer -->
+<Career name="RULES-WORK21">"26"</Career>
+  <!-- Investigator -->
+<Career name="RULES-WORK34">"27-29"</Career>
+  <!-- Merchant -->
+<Career name="RULES-WORK52">"30"</Career>
+  <!-- Rat Catcher -->
+<Career name="RULES-WORK07">"31-34"</Career>
+  <!-- Townsman -->
+<Career name="RULES-WORK39">"35-36"</Career>
+  <!-- Watchman -->
+<Career name="RULES-WORK15">"37-38"</Career>
+  <!-- Advisor -->
+<Career name="RULES-WORK04">"39"</Career>
+  <!-- Artist -->
+<Career name="RULES-WORK18">"40"</Career>
+  <!-- Duellist -->
+<Career name="RULES-WORK20">"41-42"</Career>
+  <!-- Envoy -->
+<Career name="RULES-WORK56">"43"</Career>
+  <!-- Servant -->
+<Career name="RULES-WORK24">"44"</Career>
+  <!-- Spy -->
+<Career name="DWARF-WORK05">"45"</Career>
+  <!-- Thane -->
+<Career name="RULES-WORK32">"46-47"</Career>
+  <!-- Warden -->
+<Career name="RULES-WORK05">"48-49"</Career>
+  <!-- Bailiff -->
+<Career name="RULES-WORK10">"50-51"</Career>
+  <!-- Hunter -->
+<Career name="RULES-WORK40">"52-54"</Career>
+  <!-- Miner -->
+<Career name="RULES-WORK19">"55-56"</Career>
+  <!-- Scout -->
+<Career name="RULES-WORK63">"57"</Career>
+  <!-- Villager -->
+<Career name="RULES-WORK11">"58"</Career>
+  <!-- Bounty Hunter -->
+<Career name="RULES-WORK13">"59"</Career>
+  <!-- Coachman -->
+<Career name="RULES-WORK55">"60-61"</Career>
+  <!-- Entertainer -->
+<Career name="RULES-WORK38">"62-63"</Career>
+  <!-- Messenger -->
+<Career name="RULES-WORK14">"64-65"</Career>
+  <!-- Pedlar -->
+<Career name="DWARF-WORK04">"66-67"</Career>
+  <!-- Karak Ranger -->
+<Career name="RULES-WORK06">"68-69"</Career>
+  <!-- Boatman -->
+<Career name="RULES-WORK43">"70"</Career>
+  <!-- Huffer -->
+<Career name="RULES-WORK25">"71-72"</Career>
+  <!-- Riverwoman -->
+<Career name="RULES-WORK35">"73"</Career>
+  <!-- Seaman -->
+<Career name="RULES-WORK16">"74"</Career>
+  <!-- Smuggler -->
+<Career name="RULES-WORK17">"75"</Career>
+  <!-- Stevedore -->
+<Career name="RULES-WORK42">"76"</Career>
+  <!-- Wrecker -->
+<Career name="RULES-WORK53">"77"</Career>
+  <!-- Fence -->
+<Career name="RULES-WORK30">"78-80"</Career>
+  <!-- Outlaw -->
+<Career name="RULES-WORK51">"81"</Career>
+  <!-- Racketeer -->
+<Career name="RULES-WORK64">"82"</Career>
+  <!-- Thief -->
+<Career name="DWARF-WORK06">"83-84"</Career>
+  <!-- Doom Priest -->
+<Career name="RULES-WORK27">"85-87"</Career>
+  <!-- Guard -->
+<Career name="DWARF-WORK02">"88-89"</Career>
+  <!-- Hammerer -->
+<Career name="DWARF-WORK03">"90-91"</Career>
+  <!-- Ironbreaker -->
+<Career name="RULES-WORK28">"92"</Career>
+  <!-- Pit Fighter -->
+<Career name="RULES-WORK61">"93"</Career>
+  <!-- Protagonist -->
+<Career name="RULES-WORK62">"94-97"</Career>
+  <!-- Slayer -->
+<Career name="RULES-WORK57">"98-100"</Career>
+  <!-- Soldier -->
+</SUBCHAPTER_CAREER>
+</Specie>
+<Specie id="DWARF-RACE_DNORSE">
+<Description language="ENGLISH">"Dwarfs (Norse)"</Description>
+<Explanation language="ENGLISH">"The Dwarfs of the frozen north are hearty and independent. After centuries of isolation, they are keen to explore the wider world, by exercising the naval expertise they gleaned from cultural exchange with Human tribes. Even by Dwarf standards, their drinking binges are legendary."</Explanation>
+<Ethnic>"RULES-SPECIE_DWARF"</Ethnic>
+<SUBCHAPTER_ATTR>
+<Attribut name="RULES-ATTR_WS">"2d10+30"</Attribut>
+<Attribut name="RULES-ATTR_BS">"2d10+20"</Attribut>
+<Attribut name="RULES-ATTR_S">"2d10+20"</Attribut>
+<Attribut name="RULES-ATTR_T">"2d10+30"</Attribut>
+<Attribut name="RULES-ATTR_I">"2d10+20"</Attribut>
+<Attribut name="RULES-ATTR_Ag">"2d10+10"</Attribut>
+<Attribut name="RULES-ATTR_Dex">"2d10+30"</Attribut>
+<Attribut name="RULES-ATTR_Int">"2d10+20"</Attribut>
+<Attribut name="RULES-ATTR_WP">"2d10+40"</Attribut>
+<Attribut name="RULES-ATTR_Fel">"2d10+10"</Attribut>
+<Attribut name="RULES-ATTR_Fate">"0"</Attribut>
+<Attribut name="RULES-ATTR_Resil">"2"</Attribut>
+<Attribut name="RULES-ATTR_Wound">"1xBATTR_S+2xBATTR_T+1xBATTR_WP"</Attribut>
+<Attribut name="RULES-ATTR_Supp">"2"</Attribut>
+<Attribut name="RULES-ATTR_Move">"3"</Attribut>
+</SUBCHAPTER_ATTR>
+<SUBCHAPTER_SKILL>
+<Skill>"RULES-COMPESCAL"</Skill>
+  <!-- Climb -->
+<Skill>"RULES-COMPRESALC"</Skill>
+  <!-- Consume Alcohol -->
+<Skill>"RULES-COMPCALM"</Skill>
+  <!-- Cool -->
+<Skill>"RULES-COMPRESIST"</Skill>
+  <!-- Endurance -->
+<Skill>"RULES-COMPDIVERT_NARRA"</Skill>
+  <!-- Entertain (Storytelling) -->
+<Skill>"RULES-COMPEVAL"</Skill>
+  <!-- Evaluate -->
+<Skill>"RULES-COMPLANG_KHAZ"</Skill>
+  <!-- Language (Khazalid) -->
+<Skill>"RULES-COMPLANG_NORSE"</Skill>
+  <!-- Language (Norse) -->
+<Skill>"RULES-COMPSAVOIR_NAIN"</Skill>
+  <!-- Lore (Dwarfs) -->
+<Skill>"RULES-COMPCOMB_BASE"</Skill>
+  <!-- Melee (Basic) -->
+<Skill>"RULES-COMPVOILE"</Skill>
+  <!-- Sail -->
+<Skill>"RULES-COMPMETIER_*"</Skill>
+  <!-- Trade (Any One) -->
+</SUBCHAPTER_SKILL>
+<SUBCHAPTER_TALENT>
+<Talent>"RULES-T0104/RULES-T0107"</Talent>
+  <!-- Carouser or Strong-minded -->
+<Talent>"RULES-T0169"</Talent>
+  <!-- Magic Resistance -->
+<Talent>"RULES-T0164"</Talent>
+  <!-- Night Vision -->
+<Talent>"RULES-T0084/RULES-T0075"</Talent>
+  <!-- Read/Write or Relentless -->
+<Talent>"RULES-T0035"</Talent>
+  <!-- Sturdy -->
+</SUBCHAPTER_TALENT>
+<SUBCHAPTER_CAREER>
+<Career name="RULES-WORK02">"01"</Career>
+  <!-- Apothecary -->
+<Career name="RULES-WORK31">"02-03"</Career>
+  <!-- Engineer -->
+<Career name="DWARF-WORK07">"04-05"</Career>
+  <!-- Forge Priest -->
+<Career name="DWARF-WORK08">"06-07"</Career>
+  <!-- Hearth Priest -->
+<Career name="RULES-WORK33">"08"</Career>
+  <!-- Lawyer -->
+<Career name="RULES-WORK36">"09"</Career>
+  <!-- Physician -->
+<Career name="DWARF-WORK09">"10"</Career>
+  <!-- Runescribe -->
+<Career name="DWARF-WORK10">"11"</Career>
+  <!-- Runesmith -->
+<Career name="RULES-WORK01">"12-14"</Career>
+  <!-- Agitator -->
+<Career name="RULES-WORK03">"15-19"</Career>
+  <!-- Artisan -->
+<Career name="RULES-WORK37">"20"</Career>
+  <!-- Beggar -->
+<Career name="DWARF-WORK01">"21-23"</Career>
+  <!-- Brewer -->
+<Career name="RULES-WORK21">"24"</Career>
+  <!-- Investigator -->
+<Career name="RULES-WORK34">"25-26"</Career>
+  <!-- Merchant -->
+<Career name="RULES-WORK52">"27"</Career>
+  <!-- Rat Catcher -->
+<Career name="RULES-WORK07">"28-31"</Career>
+  <!-- Townsman -->
+<Career name="RULES-WORK39">"32-33"</Career>
+  <!-- Watchman -->
+<Career name="RULES-WORK15">"34"</Career>
+  <!-- Advisor -->
+<Career name="RULES-WORK04">"35"</Career>
+  <!-- Artist -->
+<Career name="RULES-WORK18">"36"</Career>
+  <!-- Duellist -->
+<Career name="RULES-WORK20">"37-38"</Career>
+  <!-- Envoy -->
+<Career name="RULES-WORK56">"39"</Career>
+  <!-- Servant -->
+<Career name="RULES-WORK24">"40"</Career>
+  <!-- Spy -->
+<Career name="DWARF-WORK05">"41"</Career>
+  <!-- Thane -->
+<Career name="RULES-WORK32">"42"</Career>
+  <!-- Warden -->
+<Career name="RULES-WORK05">"43-44"</Career>
+  <!-- Bailiff -->
+<Career name="RULES-WORK10">"45-46"</Career>
+  <!-- Hunter -->
+<Career name="RULES-WORK40">"47-50"</Career>
+  <!-- Miner -->
+<Career name="RULES-WORK19">"51-52"</Career>
+  <!-- Scout -->
+<Career name="RULES-WORK63">"53"</Career>
+  <!-- Villager -->
+<Career name="RULES-WORK11">"54"</Career>
+  <!-- Bounty Hunter -->
+<Career name="RULES-WORK13">"55"</Career>
+  <!-- Coachman -->
+<Career name="RULES-WORK55">"56-57"</Career>
+  <!-- Entertainer -->
+<Career name="RULES-WORK38">"58-59"</Career>
+  <!-- Messenger -->
+<Career name="RULES-WORK14">"60-61"</Career>
+  <!-- Pedlar -->
+<Career name="DWARF-WORK04">"62-63"</Career>
+  <!-- Karak Ranger -->
+<Career name="RULES-WORK06">"64-65"</Career>
+  <!-- Boatman -->
+<Career name="RULES-WORK43">"66"</Career>
+  <!-- Huffer -->
+<Career name="RULES-WORK25">"67-68"</Career>
+  <!-- Riverwoman -->
+<Career name="RULES-WORK35">"69-70"</Career>
+  <!-- Seaman -->
+<Career name="RULES-WORK16">"71-72"</Career>
+  <!-- Smuggler -->
+<Career name="RULES-WORK17">"73"</Career>
+  <!-- Stevedore -->
+<Career name="RULES-WORK42">"74-75"</Career>
+  <!-- Wrecker -->
+<Career name="RULES-WORK53">"76"</Career>
+  <!-- Fence -->
+<Career name="RULES-WORK30">"77-78"</Career>
+  <!-- Outlaw -->
+<Career name="RULES-WORK51">"79"</Career>
+  <!-- Racketeer -->
+<Career name="RULES-WORK64">"80"</Career>
+  <!-- Thief -->
+<Career name="DWARF-WORK06">"81-82"</Career>
+  <!-- Doom Priest -->
+<Career name="RULES-WORK27">"83-84"</Career>
+  <!-- Guard -->
+<Career name="DWARF-WORK02">"85-86"</Career>
+  <!-- Hammerer -->
+<Career name="DWARF-WORK03">"87-88"</Career>
+  <!-- Ironbreaker -->
+<Career name="RULES-WORK28">"89-91"</Career>
+  <!-- Pit Fighter -->
+<Career name="RULES-WORK61">"92"</Career>
+  <!-- Protagonist -->
+<Career name="RULES-WORK62">"93-96"</Career>
+  <!-- Slayer -->
+<Career name="RULES-WORK57">"97-100"</Career>
+  <!-- Soldier -->
+</SUBCHAPTER_CAREER>
+</Specie>
+<Specie id="DWARF-RACE_DIMP">
+<Description language="ENGLISH">"Dwarfs (Imperial)"</Description>
+<Explanation language="ENGLISH">"The reign of Sigmar, Wars of the Vampire Counts, and Great War Against Chaos were all succeeded by waves of Dwarfen expatriation in the Empire. Their numbers are periodically swelled by Karak exiles, and refugees from fallen holds. Though often disparaged by their mountaintop cousins, Imperial Dwarfs emulate both the traditional customs of Karaz Ankor, and the manling tendency to seek glory through adventure."</Explanation>
+<Ethnic>"RULES-SPECIE_DWARF"</Ethnic>
+<SUBCHAPTER_ATTR>
+<Attribut name="RULES-ATTR_WS">"2d10+30"</Attribut>
+<Attribut name="RULES-ATTR_BS">"2d10+20"</Attribut>
+<Attribut name="RULES-ATTR_S">"2d10+20"</Attribut>
+<Attribut name="RULES-ATTR_T">"2d10+30"</Attribut>
+<Attribut name="RULES-ATTR_I">"2d10+20"</Attribut>
+<Attribut name="RULES-ATTR_Ag">"2d10+10"</Attribut>
+<Attribut name="RULES-ATTR_Dex">"2d10+30"</Attribut>
+<Attribut name="RULES-ATTR_Int">"2d10+20"</Attribut>
+<Attribut name="RULES-ATTR_WP">"2d10+40"</Attribut>
+<Attribut name="RULES-ATTR_Fel">"2d10+10"</Attribut>
+<Attribut name="RULES-ATTR_Fate">"0"</Attribut>
+<Attribut name="RULES-ATTR_Resil">"2"</Attribut>
+<Attribut name="RULES-ATTR_Wound">"1xBATTR_S+2xBATTR_T+1xBATTR_WP"</Attribut>
+<Attribut name="RULES-ATTR_Supp">"2"</Attribut>
+<Attribut name="RULES-ATTR_Move">"3"</Attribut>
+</SUBCHAPTER_ATTR>
+<SUBCHAPTER_SKILL>
+<Skill>"RULES-COMPRESALC"</Skill>
+  <!-- Consume Alcohol -->
+<Skill>"RULES-COMPCALM"</Skill>
+  <!-- Cool -->
+<Skill>"RULES-COMPRESIST"</Skill>
+  <!-- Endurance -->
+<Skill>"RULES-COMPDIVERT_NARRA"</Skill>
+  <!-- Entertain (Storytelling) -->
+<Skill>"RULES-COMPEVAL"</Skill>
+  <!-- Evaluate -->
+<Skill>"RULES-COMPINTIM"</Skill>
+  <!-- Intimidate -->
+<Skill>"RULES-COMPLANG_KHAZ"</Skill>
+  <!-- Language (Khazalid) -->
+<Skill>"RULES-COMPSAVOIR_NAIN"</Skill>
+  <!-- Lore (Dwarfs) -->
+<Skill>"RULES-COMPSAVOIR_GEOL"</Skill>
+  <!-- Lore (Geology) -->
+<Skill>"RULES-COMPSAVOIR_METAL"</Skill>
+  <!-- Lore (Metallurgy) -->
+<Skill>"RULES-COMPCOMB_BASE"</Skill>
+  <!-- Melee (Basic) -->
+<Skill>"RULES-COMPMETIER_*"</Skill>
+  <!-- Trade (Any One) -->
+</SUBCHAPTER_SKILL>
+<SUBCHAPTER_TALENT>
+<Talent>"RULES-T0169"</Talent>
+  <!-- Magic Resistance -->
+<Talent>"RULES-T0164"</Talent>
+  <!-- Night Vision -->
+<Talent>"RULES-T0084/RULES-T0075"</Talent>
+  <!-- Read/Write or Relentless -->
+<Talent>"RULES-T0041/RULES-T0107"</Talent>
+  <!-- Resolute or Strong-minded -->
+<Talent>"RULES-T0035"</Talent>
+  <!-- Sturdy -->
+</SUBCHAPTER_TALENT>
+<SUBCHAPTER_CAREER>
+<Career name="RULES-WORK02">"01"</Career>
+  <!-- Apothecary -->
+<Career name="RULES-WORK31">"02-04"</Career>
+  <!-- Engineer -->
+<Career name="DWARF-WORK07">"05"</Career>
+  <!-- Forge Priest -->
+<Career name="DWARF-WORK08">"06"</Career>
+  <!-- Hearth Priest -->
+<Career name="RULES-WORK33">"07-08"</Career>
+  <!-- Lawyer -->
+<Career name="RULES-WORK36">"09"</Career>
+  <!-- Physician -->
+<Career name="DWARF-WORK09">"10-11"</Career>
+  <!-- Runescribe -->
+<Career name="DWARF-WORK10">"12"</Career>
+  <!-- Runesmith -->
+<Career name="RULES-WORK01">"13-14"</Career>
+  <!-- Agitator -->
+<Career name="RULES-WORK03">"15-19"</Career>
+  <!-- Artisan -->
+<Career name="RULES-WORK37">"20"</Career>
+  <!-- Beggar -->
+<Career name="DWARF-WORK01">"21-22"</Career>
+  <!-- Brewer -->
+<Career name="RULES-WORK21">"23-24"</Career>
+  <!-- Investigator -->
+<Career name="RULES-WORK34">"25-27"</Career>
+  <!-- Merchant -->
+<Career name="RULES-WORK52">"28"</Career>
+  <!-- Rat Catcher -->
+<Career name="RULES-WORK07">"29-33"</Career>
+  <!-- Townsman -->
+<Career name="RULES-WORK39">"34-35"</Career>
+  <!-- Watchman -->
+<Career name="RULES-WORK15">"36-37"</Career>
+  <!-- Advisor -->
+<Career name="RULES-WORK04">"38"</Career>
+  <!-- Artist -->
+<Career name="RULES-WORK18">"39"</Career>
+  <!-- Duellist -->
+<Career name="RULES-WORK20">"40-41"</Career>
+  <!-- Envoy -->
+<Career name="RULES-WORK56">"42"</Career>
+  <!-- Servant -->
+<Career name="RULES-WORK24">"43"</Career>
+  <!-- Spy -->
+<Career name="DWARF-WORK05">"44"</Career>
+  <!-- Thane -->
+<Career name="RULES-WORK32">"45-46"</Career>
+  <!-- Warden -->
+<Career name="RULES-WORK05">"47-48"</Career>
+  <!-- Bailiff -->
+<Career name="RULES-WORK10">"49-50"</Career>
+  <!-- Hunter -->
+<Career name="RULES-WORK40">"51-54"</Career>
+  <!-- Miner -->
+<Career name="RULES-WORK19">"55"</Career>
+  <!-- Scout -->
+<Career name="RULES-WORK63">"56"</Career>
+  <!-- Villager -->
+<Career name="RULES-WORK11">"57-58"</Career>
+  <!-- Bounty Hunter -->
+<Career name="RULES-WORK13">"59"</Career>
+  <!-- Coachman -->
+<Career name="RULES-WORK55">"60-61"</Career>
+  <!-- Entertainer -->
+<Career name="RULES-WORK38">"62-63"</Career>
+  <!-- Messenger -->
+<Career name="RULES-WORK14">"64-65"</Career>
+  <!-- Pedlar -->
+<Career name="DWARF-WORK04">"66-67"</Career>
+  <!-- Karak Ranger -->
+<Career name="RULES-WORK06">"68-69"</Career>
+  <!-- Boatman -->
+<Career name="RULES-WORK43">"70"</Career>
+  <!-- Huffer -->
+<Career name="RULES-WORK25">"71-72"</Career>
+  <!-- Riverwoman -->
+<Career name="RULES-WORK35">"73"</Career>
+  <!-- Seaman -->
+<Career name="RULES-WORK16">"74-75"</Career>
+  <!-- Smuggler -->
+<Career name="RULES-WORK17">"76-77"</Career>
+  <!-- Stevedore -->
+<Career name="RULES-WORK42">"78"</Career>
+  <!-- Wrecker -->
+<Career name="RULES-WORK53">"79"</Career>
+  <!-- Fence -->
+<Career name="RULES-WORK30">"80-82"</Career>
+  <!-- Outlaw -->
+<Career name="RULES-WORK51">"83"</Career>
+  <!-- Racketeer -->
+<Career name="RULES-WORK64">"84"</Career>
+  <!-- Thief -->
+<Career name="DWARF-WORK06">"85"</Career>
+  <!-- Doom Priest -->
+<Career name="RULES-WORK27">"86-87"</Career>
+  <!-- Guard -->
+<Career name="DWARF-WORK02">"88"</Career>
+  <!-- Hammerer -->
+<Career name="DWARF-WORK03">"89"</Career>
+  <!-- Ironbreaker -->
+<Career name="RULES-WORK28">"90-91"</Career>
+  <!-- Pit Fighter -->
+<Career name="RULES-WORK61">"92-93"</Career>
+  <!-- Protagonist -->
+<Career name="RULES-WORK62">"94-96"</Career>
+  <!-- Slayer -->
+<Career name="RULES-WORK57">"97-100"</Career>
+  <!-- Soldier -->
+</SUBCHAPTER_CAREER>
+</Specie>
+</DATA_SPECIE>
 <DATA_TALENT>
   <!-- LOT A carrieres (19/09/2026) : les 19 talents nains du chapitre Careers p.81-83. Crew Commander est deja UPINA-T0173 (Up in Arms), non redeclare. Numerotation DWARF-T0001 a T0019 par ordre alphabetique. -->
 <Talent id="DWARF-T0001">
@@ -289,7 +2184,7 @@ When you gain the Stunned Condition, you can spend a Fortune point to make an im
 </Talent>
 </DATA_TALENT>
 <DATA_SPECIE_CAREER_DIRECT>
-  <!-- Carrieres exclusives aux nains (p.62-79), offertes sans jet. Les 11 colonnes de la table aleatoire p.50 (une par forteresse) ne sont pas saisies. -->
+  <!-- Carrieres exclusives aux nains (p.62-79), offertes sans jet. Les colonnes de la table aleatoire p.50 sont saisies dans DATA_SPECIE (une par ethnie). -->
 <Entry>
 <Specie>"RULES-SPECIE_DWARF"</Specie>
 <Career name="DWARF-WORK01">"X"</Career>

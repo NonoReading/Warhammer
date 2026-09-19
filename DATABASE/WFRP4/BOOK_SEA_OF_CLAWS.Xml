@@ -441,6 +441,469 @@
 <Alternative>"SEAOF-WORK113"</Alternative>
   <!-- Seaman -> Sailor (note 6 p.193 de Lustria) -->
 </Choice>
+  <!-- Ethnies du Dwarf Player's Guide (p.53) : equivalents Seafarer des metiers Riverfolk. Declarees ici pour ne s'appliquer que si Sea of Claws est charge. -->
+<Choice>
+<Specie>"DWARF-RACE_DKARAZ"</Specie>
+<Career>"RULES-WORK43"</Career>
+<Alternative>"SEAOF-WORK111"</Alternative>
+  <!-- Huffer -> Huffer (Seafarer) -->
+</Choice>
+<Choice>
+<Specie>"DWARF-RACE_DKARAZ"</Specie>
+<Career>"RULES-WORK42"</Career>
+<Alternative>"SEAOF-WORK116"</Alternative>
+  <!-- Wrecker -> Wrecker (Seafarer) -->
+</Choice>
+<Choice>
+<Specie>"DWARF-RACE_DKARAZ"</Specie>
+<Career>"RULES-WORK06"</Career>
+<Alternative>"SEAOF-WORK112"</Alternative>
+  <!-- Boatman -> Officer -->
+</Choice>
+<Choice>
+<Specie>"DWARF-RACE_DKARAZ"</Specie>
+<Career>"RULES-WORK25"</Career>
+<Alternative>"SEAOF-WORK113"</Alternative>
+  <!-- Riverwoman -> Sailor -->
+</Choice>
+<Choice>
+<Specie>"DWARF-RACE_DKARAZ"</Specie>
+<Career>"RULES-WORK35"</Career>
+<Alternative>"SEAOF-WORK113"</Alternative>
+  <!-- Seaman -> Sailor -->
+</Choice>
+<Choice>
+<Specie>"DWARF-RACE_DKARAZ"</Specie>
+<Career>"RULES-WORK16"</Career>
+<Alternative>"SEAOF-WORK115"</Alternative>
+  <!-- Smuggler -> Ship Gunner -->
+</Choice>
+<Choice>
+<Specie>"DWARF-RACE_DKARAZ"</Specie>
+<Career>"RULES-WORK17"</Career>
+<Alternative>"SEAOF-WORK115"</Alternative>
+  <!-- Stevedore -> Ship Gunner -->
+</Choice>
+<Choice>
+<Specie>"DWARF-RACE_DBARAK"</Specie>
+<Career>"RULES-WORK43"</Career>
+<Alternative>"SEAOF-WORK111"</Alternative>
+  <!-- Huffer -> Huffer (Seafarer) -->
+</Choice>
+<Choice>
+<Specie>"DWARF-RACE_DBARAK"</Specie>
+<Career>"RULES-WORK42"</Career>
+<Alternative>"SEAOF-WORK116"</Alternative>
+  <!-- Wrecker -> Wrecker (Seafarer) -->
+</Choice>
+<Choice>
+<Specie>"DWARF-RACE_DBARAK"</Specie>
+<Career>"RULES-WORK06"</Career>
+<Alternative>"SEAOF-WORK112"</Alternative>
+  <!-- Boatman -> Officer -->
+</Choice>
+<Choice>
+<Specie>"DWARF-RACE_DBARAK"</Specie>
+<Career>"RULES-WORK25"</Career>
+<Alternative>"SEAOF-WORK113"</Alternative>
+  <!-- Riverwoman -> Sailor -->
+</Choice>
+<Choice>
+<Specie>"DWARF-RACE_DBARAK"</Specie>
+<Career>"RULES-WORK35"</Career>
+<Alternative>"SEAOF-WORK113"</Alternative>
+  <!-- Seaman -> Sailor -->
+</Choice>
+<Choice>
+<Specie>"DWARF-RACE_DBARAK"</Specie>
+<Career>"RULES-WORK16"</Career>
+<Alternative>"SEAOF-WORK115"</Alternative>
+  <!-- Smuggler -> Ship Gunner -->
+</Choice>
+<Choice>
+<Specie>"DWARF-RACE_DBARAK"</Specie>
+<Career>"RULES-WORK17"</Career>
+<Alternative>"SEAOF-WORK115"</Alternative>
+  <!-- Stevedore -> Ship Gunner -->
+</Choice>
+<Choice>
+<Specie>"DWARF-RACE_DAZUL"</Specie>
+<Career>"RULES-WORK43"</Career>
+<Alternative>"SEAOF-WORK111"</Alternative>
+  <!-- Huffer -> Huffer (Seafarer) -->
+</Choice>
+<Choice>
+<Specie>"DWARF-RACE_DAZUL"</Specie>
+<Career>"RULES-WORK42"</Career>
+<Alternative>"SEAOF-WORK116"</Alternative>
+  <!-- Wrecker -> Wrecker (Seafarer) -->
+</Choice>
+<Choice>
+<Specie>"DWARF-RACE_DAZUL"</Specie>
+<Career>"RULES-WORK06"</Career>
+<Alternative>"SEAOF-WORK112"</Alternative>
+  <!-- Boatman -> Officer -->
+</Choice>
+<Choice>
+<Specie>"DWARF-RACE_DAZUL"</Specie>
+<Career>"RULES-WORK25"</Career>
+<Alternative>"SEAOF-WORK113"</Alternative>
+  <!-- Riverwoman -> Sailor -->
+</Choice>
+<Choice>
+<Specie>"DWARF-RACE_DAZUL"</Specie>
+<Career>"RULES-WORK35"</Career>
+<Alternative>"SEAOF-WORK113"</Alternative>
+  <!-- Seaman -> Sailor -->
+</Choice>
+<Choice>
+<Specie>"DWARF-RACE_DAZUL"</Specie>
+<Career>"RULES-WORK16"</Career>
+<Alternative>"SEAOF-WORK115"</Alternative>
+  <!-- Smuggler -> Ship Gunner -->
+</Choice>
+<Choice>
+<Specie>"DWARF-RACE_DAZUL"</Specie>
+<Career>"RULES-WORK17"</Career>
+<Alternative>"SEAOF-WORK115"</Alternative>
+  <!-- Stevedore -> Ship Gunner -->
+</Choice>
+<Choice>
+<Specie>"DWARF-RACE_DEIGHT"</Specie>
+<Career>"RULES-WORK43"</Career>
+<Alternative>"SEAOF-WORK111"</Alternative>
+  <!-- Huffer -> Huffer (Seafarer) -->
+</Choice>
+<Choice>
+<Specie>"DWARF-RACE_DEIGHT"</Specie>
+<Career>"RULES-WORK42"</Career>
+<Alternative>"SEAOF-WORK116"</Alternative>
+  <!-- Wrecker -> Wrecker (Seafarer) -->
+</Choice>
+<Choice>
+<Specie>"DWARF-RACE_DEIGHT"</Specie>
+<Career>"RULES-WORK06"</Career>
+<Alternative>"SEAOF-WORK112"</Alternative>
+  <!-- Boatman -> Officer -->
+</Choice>
+<Choice>
+<Specie>"DWARF-RACE_DEIGHT"</Specie>
+<Career>"RULES-WORK25"</Career>
+<Alternative>"SEAOF-WORK113"</Alternative>
+  <!-- Riverwoman -> Sailor -->
+</Choice>
+<Choice>
+<Specie>"DWARF-RACE_DEIGHT"</Specie>
+<Career>"RULES-WORK35"</Career>
+<Alternative>"SEAOF-WORK113"</Alternative>
+  <!-- Seaman -> Sailor -->
+</Choice>
+<Choice>
+<Specie>"DWARF-RACE_DEIGHT"</Specie>
+<Career>"RULES-WORK16"</Career>
+<Alternative>"SEAOF-WORK115"</Alternative>
+  <!-- Smuggler -> Ship Gunner -->
+</Choice>
+<Choice>
+<Specie>"DWARF-RACE_DEIGHT"</Specie>
+<Career>"RULES-WORK17"</Career>
+<Alternative>"SEAOF-WORK115"</Alternative>
+  <!-- Stevedore -> Ship Gunner -->
+</Choice>
+<Choice>
+<Specie>"DWARF-RACE_DKADR"</Specie>
+<Career>"RULES-WORK43"</Career>
+<Alternative>"SEAOF-WORK111"</Alternative>
+  <!-- Huffer -> Huffer (Seafarer) -->
+</Choice>
+<Choice>
+<Specie>"DWARF-RACE_DKADR"</Specie>
+<Career>"RULES-WORK42"</Career>
+<Alternative>"SEAOF-WORK116"</Alternative>
+  <!-- Wrecker -> Wrecker (Seafarer) -->
+</Choice>
+<Choice>
+<Specie>"DWARF-RACE_DKADR"</Specie>
+<Career>"RULES-WORK06"</Career>
+<Alternative>"SEAOF-WORK112"</Alternative>
+  <!-- Boatman -> Officer -->
+</Choice>
+<Choice>
+<Specie>"DWARF-RACE_DKADR"</Specie>
+<Career>"RULES-WORK25"</Career>
+<Alternative>"SEAOF-WORK113"</Alternative>
+  <!-- Riverwoman -> Sailor -->
+</Choice>
+<Choice>
+<Specie>"DWARF-RACE_DKADR"</Specie>
+<Career>"RULES-WORK35"</Career>
+<Alternative>"SEAOF-WORK113"</Alternative>
+  <!-- Seaman -> Sailor -->
+</Choice>
+<Choice>
+<Specie>"DWARF-RACE_DKADR"</Specie>
+<Career>"RULES-WORK16"</Career>
+<Alternative>"SEAOF-WORK115"</Alternative>
+  <!-- Smuggler -> Ship Gunner -->
+</Choice>
+<Choice>
+<Specie>"DWARF-RACE_DKADR"</Specie>
+<Career>"RULES-WORK17"</Career>
+<Alternative>"SEAOF-WORK115"</Alternative>
+  <!-- Stevedore -> Ship Gunner -->
+</Choice>
+<Choice>
+<Specie>"DWARF-RACE_DZHUF"</Specie>
+<Career>"RULES-WORK43"</Career>
+<Alternative>"SEAOF-WORK111"</Alternative>
+  <!-- Huffer -> Huffer (Seafarer) -->
+</Choice>
+<Choice>
+<Specie>"DWARF-RACE_DZHUF"</Specie>
+<Career>"RULES-WORK42"</Career>
+<Alternative>"SEAOF-WORK116"</Alternative>
+  <!-- Wrecker -> Wrecker (Seafarer) -->
+</Choice>
+<Choice>
+<Specie>"DWARF-RACE_DZHUF"</Specie>
+<Career>"RULES-WORK06"</Career>
+<Alternative>"SEAOF-WORK112"</Alternative>
+  <!-- Boatman -> Officer -->
+</Choice>
+<Choice>
+<Specie>"DWARF-RACE_DZHUF"</Specie>
+<Career>"RULES-WORK25"</Career>
+<Alternative>"SEAOF-WORK113"</Alternative>
+  <!-- Riverwoman -> Sailor -->
+</Choice>
+<Choice>
+<Specie>"DWARF-RACE_DZHUF"</Specie>
+<Career>"RULES-WORK35"</Career>
+<Alternative>"SEAOF-WORK113"</Alternative>
+  <!-- Seaman -> Sailor -->
+</Choice>
+<Choice>
+<Specie>"DWARF-RACE_DZHUF"</Specie>
+<Career>"RULES-WORK16"</Career>
+<Alternative>"SEAOF-WORK115"</Alternative>
+  <!-- Smuggler -> Ship Gunner -->
+</Choice>
+<Choice>
+<Specie>"DWARF-RACE_DZHUF"</Specie>
+<Career>"RULES-WORK17"</Career>
+<Alternative>"SEAOF-WORK115"</Alternative>
+  <!-- Stevedore -> Ship Gunner -->
+</Choice>
+<Choice>
+<Specie>"DWARF-RACE_DHIRN"</Specie>
+<Career>"RULES-WORK43"</Career>
+<Alternative>"SEAOF-WORK111"</Alternative>
+  <!-- Huffer -> Huffer (Seafarer) -->
+</Choice>
+<Choice>
+<Specie>"DWARF-RACE_DHIRN"</Specie>
+<Career>"RULES-WORK42"</Career>
+<Alternative>"SEAOF-WORK116"</Alternative>
+  <!-- Wrecker -> Wrecker (Seafarer) -->
+</Choice>
+<Choice>
+<Specie>"DWARF-RACE_DHIRN"</Specie>
+<Career>"RULES-WORK06"</Career>
+<Alternative>"SEAOF-WORK112"</Alternative>
+  <!-- Boatman -> Officer -->
+</Choice>
+<Choice>
+<Specie>"DWARF-RACE_DHIRN"</Specie>
+<Career>"RULES-WORK25"</Career>
+<Alternative>"SEAOF-WORK113"</Alternative>
+  <!-- Riverwoman -> Sailor -->
+</Choice>
+<Choice>
+<Specie>"DWARF-RACE_DHIRN"</Specie>
+<Career>"RULES-WORK35"</Career>
+<Alternative>"SEAOF-WORK113"</Alternative>
+  <!-- Seaman -> Sailor -->
+</Choice>
+<Choice>
+<Specie>"DWARF-RACE_DHIRN"</Specie>
+<Career>"RULES-WORK16"</Career>
+<Alternative>"SEAOF-WORK115"</Alternative>
+  <!-- Smuggler -> Ship Gunner -->
+</Choice>
+<Choice>
+<Specie>"DWARF-RACE_DHIRN"</Specie>
+<Career>"RULES-WORK17"</Career>
+<Alternative>"SEAOF-WORK115"</Alternative>
+  <!-- Stevedore -> Ship Gunner -->
+</Choice>
+<Choice>
+<Specie>"DWARF-RACE_DIZOR"</Specie>
+<Career>"RULES-WORK43"</Career>
+<Alternative>"SEAOF-WORK111"</Alternative>
+  <!-- Huffer -> Huffer (Seafarer) -->
+</Choice>
+<Choice>
+<Specie>"DWARF-RACE_DIZOR"</Specie>
+<Career>"RULES-WORK42"</Career>
+<Alternative>"SEAOF-WORK116"</Alternative>
+  <!-- Wrecker -> Wrecker (Seafarer) -->
+</Choice>
+<Choice>
+<Specie>"DWARF-RACE_DIZOR"</Specie>
+<Career>"RULES-WORK06"</Career>
+<Alternative>"SEAOF-WORK112"</Alternative>
+  <!-- Boatman -> Officer -->
+</Choice>
+<Choice>
+<Specie>"DWARF-RACE_DIZOR"</Specie>
+<Career>"RULES-WORK25"</Career>
+<Alternative>"SEAOF-WORK113"</Alternative>
+  <!-- Riverwoman -> Sailor -->
+</Choice>
+<Choice>
+<Specie>"DWARF-RACE_DIZOR"</Specie>
+<Career>"RULES-WORK35"</Career>
+<Alternative>"SEAOF-WORK113"</Alternative>
+  <!-- Seaman -> Sailor -->
+</Choice>
+<Choice>
+<Specie>"DWARF-RACE_DIZOR"</Specie>
+<Career>"RULES-WORK16"</Career>
+<Alternative>"SEAOF-WORK115"</Alternative>
+  <!-- Smuggler -> Ship Gunner -->
+</Choice>
+<Choice>
+<Specie>"DWARF-RACE_DIZOR"</Specie>
+<Career>"RULES-WORK17"</Career>
+<Alternative>"SEAOF-WORK115"</Alternative>
+  <!-- Stevedore -> Ship Gunner -->
+</Choice>
+<Choice>
+<Specie>"DWARF-RACE_DNORN"</Specie>
+<Career>"RULES-WORK43"</Career>
+<Alternative>"SEAOF-WORK111"</Alternative>
+  <!-- Huffer -> Huffer (Seafarer) -->
+</Choice>
+<Choice>
+<Specie>"DWARF-RACE_DNORN"</Specie>
+<Career>"RULES-WORK42"</Career>
+<Alternative>"SEAOF-WORK116"</Alternative>
+  <!-- Wrecker -> Wrecker (Seafarer) -->
+</Choice>
+<Choice>
+<Specie>"DWARF-RACE_DNORN"</Specie>
+<Career>"RULES-WORK06"</Career>
+<Alternative>"SEAOF-WORK112"</Alternative>
+  <!-- Boatman -> Officer -->
+</Choice>
+<Choice>
+<Specie>"DWARF-RACE_DNORN"</Specie>
+<Career>"RULES-WORK25"</Career>
+<Alternative>"SEAOF-WORK113"</Alternative>
+  <!-- Riverwoman -> Sailor -->
+</Choice>
+<Choice>
+<Specie>"DWARF-RACE_DNORN"</Specie>
+<Career>"RULES-WORK35"</Career>
+<Alternative>"SEAOF-WORK113"</Alternative>
+  <!-- Seaman -> Sailor -->
+</Choice>
+<Choice>
+<Specie>"DWARF-RACE_DNORN"</Specie>
+<Career>"RULES-WORK16"</Career>
+<Alternative>"SEAOF-WORK115"</Alternative>
+  <!-- Smuggler -> Ship Gunner -->
+</Choice>
+<Choice>
+<Specie>"DWARF-RACE_DNORN"</Specie>
+<Career>"RULES-WORK17"</Career>
+<Alternative>"SEAOF-WORK115"</Alternative>
+  <!-- Stevedore -> Ship Gunner -->
+</Choice>
+<Choice>
+<Specie>"DWARF-RACE_DNORSE"</Specie>
+<Career>"RULES-WORK43"</Career>
+<Alternative>"SEAOF-WORK111"</Alternative>
+  <!-- Huffer -> Huffer (Seafarer) -->
+</Choice>
+<Choice>
+<Specie>"DWARF-RACE_DNORSE"</Specie>
+<Career>"RULES-WORK42"</Career>
+<Alternative>"SEAOF-WORK116"</Alternative>
+  <!-- Wrecker -> Wrecker (Seafarer) -->
+</Choice>
+<Choice>
+<Specie>"DWARF-RACE_DNORSE"</Specie>
+<Career>"RULES-WORK06"</Career>
+<Alternative>"SEAOF-WORK112"</Alternative>
+  <!-- Boatman -> Officer -->
+</Choice>
+<Choice>
+<Specie>"DWARF-RACE_DNORSE"</Specie>
+<Career>"RULES-WORK25"</Career>
+<Alternative>"SEAOF-WORK113"</Alternative>
+  <!-- Riverwoman -> Sailor -->
+</Choice>
+<Choice>
+<Specie>"DWARF-RACE_DNORSE"</Specie>
+<Career>"RULES-WORK35"</Career>
+<Alternative>"SEAOF-WORK113"</Alternative>
+  <!-- Seaman -> Sailor -->
+</Choice>
+<Choice>
+<Specie>"DWARF-RACE_DNORSE"</Specie>
+<Career>"RULES-WORK16"</Career>
+<Alternative>"SEAOF-WORK115"</Alternative>
+  <!-- Smuggler -> Ship Gunner -->
+</Choice>
+<Choice>
+<Specie>"DWARF-RACE_DNORSE"</Specie>
+<Career>"RULES-WORK17"</Career>
+<Alternative>"SEAOF-WORK115"</Alternative>
+  <!-- Stevedore -> Ship Gunner -->
+</Choice>
+<Choice>
+<Specie>"DWARF-RACE_DIMP"</Specie>
+<Career>"RULES-WORK43"</Career>
+<Alternative>"SEAOF-WORK111"</Alternative>
+  <!-- Huffer -> Huffer (Seafarer) -->
+</Choice>
+<Choice>
+<Specie>"DWARF-RACE_DIMP"</Specie>
+<Career>"RULES-WORK42"</Career>
+<Alternative>"SEAOF-WORK116"</Alternative>
+  <!-- Wrecker -> Wrecker (Seafarer) -->
+</Choice>
+<Choice>
+<Specie>"DWARF-RACE_DIMP"</Specie>
+<Career>"RULES-WORK06"</Career>
+<Alternative>"SEAOF-WORK112"</Alternative>
+  <!-- Boatman -> Officer -->
+</Choice>
+<Choice>
+<Specie>"DWARF-RACE_DIMP"</Specie>
+<Career>"RULES-WORK25"</Career>
+<Alternative>"SEAOF-WORK113"</Alternative>
+  <!-- Riverwoman -> Sailor -->
+</Choice>
+<Choice>
+<Specie>"DWARF-RACE_DIMP"</Specie>
+<Career>"RULES-WORK35"</Career>
+<Alternative>"SEAOF-WORK113"</Alternative>
+  <!-- Seaman -> Sailor -->
+</Choice>
+<Choice>
+<Specie>"DWARF-RACE_DIMP"</Specie>
+<Career>"RULES-WORK16"</Career>
+<Alternative>"SEAOF-WORK115"</Alternative>
+  <!-- Smuggler -> Ship Gunner -->
+</Choice>
+<Choice>
+<Specie>"DWARF-RACE_DIMP"</Specie>
+<Career>"RULES-WORK17"</Career>
+<Alternative>"SEAOF-WORK115"</Alternative>
+  <!-- Stevedore -> Ship Gunner -->
+</Choice>
 </DATA_SPECIE_CAREER_CHOICE>
 <DATA_NATION>
 <Nation id="SEAOF-NATION_NORS">

@@ -5431,3 +5431,15 @@ DWARF-WORK11 a 25 : Guild Engineer, Sky Pilot, Outcast Engineer, Reckoner, Grudg
 Code : CarriereDeSuite() dans winpersonnage.pas - une variante qui s arrete avant le niveau vise rend la main a son premier parent (ListeNvMetier, ButtonAugmentationClick, MaxNiveau). MarqueNiveauEnCours() remplace tabNiveau.Cells[0, niveau] (plantait sur une grille a une ligne ; cochait la mauvaise ligne du Smith-priest des le niveau 4).
 BUG RACINE trouve au passage (chargeracemetier.pas, CompleteRaceMetierParEspece) : cles de dedoublonnage en CodeSansLivre ; SeparateurLivre = '-' donc DWARF-WORK25 devenait WORK25 et collisionnait avec RULES-WORK25 du Rulebook : les carrieres naines n existaient pas pour RULES-RACE_DWAR (sauf 08, 09, 12, 22). Cles desormais sur les codes complets. Methode : trace temporaire dans un fichier, retiree.
 Fichiers modifies : BOOK_DWARF_PLAYERS_GUIDE.Xml, winpersonnage.pas, chargeracemetier.pas. Limite : plusieurs parents (Artillerist, Handgunner) : CarriereDeSuite prend le premier.
+
+19/09/2026 - DWARF PLAYERS GUIDE : 11 ETHNIES NAINES SAISIES (NON CHARGEES, A TESTER)
+DWARF-RACE_DKARAZ, DBARAK, DAZUL, DEIGHT, DKADR, DZHUF, DHIRN, DIZOR, DNORN, DNORSE, DIMP (p.48-50), Ethnic = RULES-SPECIE_DWARF, profil du nain du Rulebook, competences et talents du livre. Pas de table de carrieres (colonnes de forteresse abandonnees) : la creation retombe sur celle du nain standard. Ancestral Grudge = DWARF-T0001, Hatred (Orcs and Goblins) = RULES-T0069_PVERTE, Set Traps = RULES-COMPPIEG. Dwarfs (Norse) double SEAOF-RACE_DNORSE de Sea of Claws. Longbeards (p.50) non modelises.
+Fichiers modifies : BOOK_DWARF_PLAYERS_GUIDE.Xml, Log.txt.
+
+19/09/2026 - DWARF PLAYERS GUIDE : TABLE ALEATOIRE p.50 SAISIE (11 COLONNES D100, NON CHARGEE)
+Chaque ethnie DWARF-RACE_D* porte sa SUBCHAPTER_CAREER : 55 carrieres, fourchettes lues sur la table p.50. Verifie par script : chaque colonne couvre 1-100 sans trou ni chevauchement. Les 10 carrieres exclusives sont dedans (DWARF-WORK01 a 10). Non appliquees : variantes Lustria (Interpreter, Trailblazer, Survivalist) et Sea of Claws (Seafarer) des notes de bas de page. Erreur d interpretation corrigee : "forteresse" designait l habitat, les colonnes n etaient pas abandonnees.
+Fichiers modifies : BOOK_DWARF_PLAYERS_GUIDE.Xml, Log.txt, A FAIRE.txt.
+
+19/09/2026 - DWARF PLAYERS GUIDE : SUBSTITUTIONS LUSTRIA ET SEA OF CLAWS DES 11 ETHNIES (NON CHARGEES)
+Mecanisme existant DATA_SPECIE_CAREER_CHOICE (le X direct pour RULES-SPECIE_DWARF existait deja dans les deux livres). Lustria : Lawyer->Interpreter (123), Coachman->Trailblazer (126), Pedlar->Survivalist (125), soit 33 entrees. Sea of Claws : Huffer, Wrecker, Boatman->Officer, Riverwoman et Seaman->Sailor, Smuggler et Stevedore->Ship Gunner, soit 77 entrees. Declarees dans Lustria et Sea of Claws (et non dans le livre nain) pour ne jouer que si ces livres sont charges, comme les Norses.
+Fichiers modifies : BOOK LUSTRIA.xml, BOOK_SEA_OF_CLAWS.Xml, Log.txt.

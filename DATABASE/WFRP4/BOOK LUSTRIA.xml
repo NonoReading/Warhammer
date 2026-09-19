@@ -1085,6 +1085,205 @@
 <Career>"RULES-WORK13"</Career>
 <Alternative>"LUSTR-WORK126"</Alternative>
 </Choice>
+  <!-- Ethnies du Dwarf Player's Guide (p.53) : Interpreter pour Lawyer, Trailblazer pour Coachman, Survivalist pour Pedlar. Declarees ici pour ne s'appliquer que si Lustria est charge. -->
+<Choice>
+<Specie>"DWARF-RACE_DKARAZ"</Specie>
+<Career>"RULES-WORK33"</Career>
+<Alternative>"LUSTR-WORK123"</Alternative>
+  <!-- Lawyer -> Interpreter -->
+</Choice>
+<Choice>
+<Specie>"DWARF-RACE_DKARAZ"</Specie>
+<Career>"RULES-WORK13"</Career>
+<Alternative>"LUSTR-WORK126"</Alternative>
+  <!-- Coachman -> Trailblazer -->
+</Choice>
+<Choice>
+<Specie>"DWARF-RACE_DKARAZ"</Specie>
+<Career>"RULES-WORK14"</Career>
+<Alternative>"LUSTR-WORK125"</Alternative>
+  <!-- Pedlar -> Survivalist -->
+</Choice>
+<Choice>
+<Specie>"DWARF-RACE_DBARAK"</Specie>
+<Career>"RULES-WORK33"</Career>
+<Alternative>"LUSTR-WORK123"</Alternative>
+  <!-- Lawyer -> Interpreter -->
+</Choice>
+<Choice>
+<Specie>"DWARF-RACE_DBARAK"</Specie>
+<Career>"RULES-WORK13"</Career>
+<Alternative>"LUSTR-WORK126"</Alternative>
+  <!-- Coachman -> Trailblazer -->
+</Choice>
+<Choice>
+<Specie>"DWARF-RACE_DBARAK"</Specie>
+<Career>"RULES-WORK14"</Career>
+<Alternative>"LUSTR-WORK125"</Alternative>
+  <!-- Pedlar -> Survivalist -->
+</Choice>
+<Choice>
+<Specie>"DWARF-RACE_DAZUL"</Specie>
+<Career>"RULES-WORK33"</Career>
+<Alternative>"LUSTR-WORK123"</Alternative>
+  <!-- Lawyer -> Interpreter -->
+</Choice>
+<Choice>
+<Specie>"DWARF-RACE_DAZUL"</Specie>
+<Career>"RULES-WORK13"</Career>
+<Alternative>"LUSTR-WORK126"</Alternative>
+  <!-- Coachman -> Trailblazer -->
+</Choice>
+<Choice>
+<Specie>"DWARF-RACE_DAZUL"</Specie>
+<Career>"RULES-WORK14"</Career>
+<Alternative>"LUSTR-WORK125"</Alternative>
+  <!-- Pedlar -> Survivalist -->
+</Choice>
+<Choice>
+<Specie>"DWARF-RACE_DEIGHT"</Specie>
+<Career>"RULES-WORK33"</Career>
+<Alternative>"LUSTR-WORK123"</Alternative>
+  <!-- Lawyer -> Interpreter -->
+</Choice>
+<Choice>
+<Specie>"DWARF-RACE_DEIGHT"</Specie>
+<Career>"RULES-WORK13"</Career>
+<Alternative>"LUSTR-WORK126"</Alternative>
+  <!-- Coachman -> Trailblazer -->
+</Choice>
+<Choice>
+<Specie>"DWARF-RACE_DEIGHT"</Specie>
+<Career>"RULES-WORK14"</Career>
+<Alternative>"LUSTR-WORK125"</Alternative>
+  <!-- Pedlar -> Survivalist -->
+</Choice>
+<Choice>
+<Specie>"DWARF-RACE_DKADR"</Specie>
+<Career>"RULES-WORK33"</Career>
+<Alternative>"LUSTR-WORK123"</Alternative>
+  <!-- Lawyer -> Interpreter -->
+</Choice>
+<Choice>
+<Specie>"DWARF-RACE_DKADR"</Specie>
+<Career>"RULES-WORK13"</Career>
+<Alternative>"LUSTR-WORK126"</Alternative>
+  <!-- Coachman -> Trailblazer -->
+</Choice>
+<Choice>
+<Specie>"DWARF-RACE_DKADR"</Specie>
+<Career>"RULES-WORK14"</Career>
+<Alternative>"LUSTR-WORK125"</Alternative>
+  <!-- Pedlar -> Survivalist -->
+</Choice>
+<Choice>
+<Specie>"DWARF-RACE_DZHUF"</Specie>
+<Career>"RULES-WORK33"</Career>
+<Alternative>"LUSTR-WORK123"</Alternative>
+  <!-- Lawyer -> Interpreter -->
+</Choice>
+<Choice>
+<Specie>"DWARF-RACE_DZHUF"</Specie>
+<Career>"RULES-WORK13"</Career>
+<Alternative>"LUSTR-WORK126"</Alternative>
+  <!-- Coachman -> Trailblazer -->
+</Choice>
+<Choice>
+<Specie>"DWARF-RACE_DZHUF"</Specie>
+<Career>"RULES-WORK14"</Career>
+<Alternative>"LUSTR-WORK125"</Alternative>
+  <!-- Pedlar -> Survivalist -->
+</Choice>
+<Choice>
+<Specie>"DWARF-RACE_DHIRN"</Specie>
+<Career>"RULES-WORK33"</Career>
+<Alternative>"LUSTR-WORK123"</Alternative>
+  <!-- Lawyer -> Interpreter -->
+</Choice>
+<Choice>
+<Specie>"DWARF-RACE_DHIRN"</Specie>
+<Career>"RULES-WORK13"</Career>
+<Alternative>"LUSTR-WORK126"</Alternative>
+  <!-- Coachman -> Trailblazer -->
+</Choice>
+<Choice>
+<Specie>"DWARF-RACE_DHIRN"</Specie>
+<Career>"RULES-WORK14"</Career>
+<Alternative>"LUSTR-WORK125"</Alternative>
+  <!-- Pedlar -> Survivalist -->
+</Choice>
+<Choice>
+<Specie>"DWARF-RACE_DIZOR"</Specie>
+<Career>"RULES-WORK33"</Career>
+<Alternative>"LUSTR-WORK123"</Alternative>
+  <!-- Lawyer -> Interpreter -->
+</Choice>
+<Choice>
+<Specie>"DWARF-RACE_DIZOR"</Specie>
+<Career>"RULES-WORK13"</Career>
+<Alternative>"LUSTR-WORK126"</Alternative>
+  <!-- Coachman -> Trailblazer -->
+</Choice>
+<Choice>
+<Specie>"DWARF-RACE_DIZOR"</Specie>
+<Career>"RULES-WORK14"</Career>
+<Alternative>"LUSTR-WORK125"</Alternative>
+  <!-- Pedlar -> Survivalist -->
+</Choice>
+<Choice>
+<Specie>"DWARF-RACE_DNORN"</Specie>
+<Career>"RULES-WORK33"</Career>
+<Alternative>"LUSTR-WORK123"</Alternative>
+  <!-- Lawyer -> Interpreter -->
+</Choice>
+<Choice>
+<Specie>"DWARF-RACE_DNORN"</Specie>
+<Career>"RULES-WORK13"</Career>
+<Alternative>"LUSTR-WORK126"</Alternative>
+  <!-- Coachman -> Trailblazer -->
+</Choice>
+<Choice>
+<Specie>"DWARF-RACE_DNORN"</Specie>
+<Career>"RULES-WORK14"</Career>
+<Alternative>"LUSTR-WORK125"</Alternative>
+  <!-- Pedlar -> Survivalist -->
+</Choice>
+<Choice>
+<Specie>"DWARF-RACE_DNORSE"</Specie>
+<Career>"RULES-WORK33"</Career>
+<Alternative>"LUSTR-WORK123"</Alternative>
+  <!-- Lawyer -> Interpreter -->
+</Choice>
+<Choice>
+<Specie>"DWARF-RACE_DNORSE"</Specie>
+<Career>"RULES-WORK13"</Career>
+<Alternative>"LUSTR-WORK126"</Alternative>
+  <!-- Coachman -> Trailblazer -->
+</Choice>
+<Choice>
+<Specie>"DWARF-RACE_DNORSE"</Specie>
+<Career>"RULES-WORK14"</Career>
+<Alternative>"LUSTR-WORK125"</Alternative>
+  <!-- Pedlar -> Survivalist -->
+</Choice>
+<Choice>
+<Specie>"DWARF-RACE_DIMP"</Specie>
+<Career>"RULES-WORK33"</Career>
+<Alternative>"LUSTR-WORK123"</Alternative>
+  <!-- Lawyer -> Interpreter -->
+</Choice>
+<Choice>
+<Specie>"DWARF-RACE_DIMP"</Specie>
+<Career>"RULES-WORK13"</Career>
+<Alternative>"LUSTR-WORK126"</Alternative>
+  <!-- Coachman -> Trailblazer -->
+</Choice>
+<Choice>
+<Specie>"DWARF-RACE_DIMP"</Specie>
+<Career>"RULES-WORK14"</Career>
+<Alternative>"LUSTR-WORK125"</Alternative>
+  <!-- Pedlar -> Survivalist -->
+</Choice>
 </DATA_SPECIE_CAREER_CHOICE>
 <DATA_SPECIE_CAREER_DIRECT>
   <!-- Cibles exprimées en RACE (RULES-SPECIE_*) et non en ethnie : une race couvre
