@@ -368,6 +368,56 @@
 <Type>"RULES-ARMOT_SOFTLEATHER"</Type>
 </Armor>
 </DATA_ARMOR>
+<!-- Butin de Lustria ("Plunder Details"). Theme RULES-LAB_205 (INTERFACE). Pas de disponibilite (non vendu en boutique) ; la colonne "acheteur prefere" est la balise <Buyer> (code de libelle INTERFACE RULES-LAB_206 a _210, affichee par WinEquipement). -->
+<DATA_TRAPPING>
+<Trapping id="LUSTR-TRAP_01">
+<Description language="ENGLISH">"Gold Plate (decorative)"</Description>
+<Theme>"RULES-LAB_205"</Theme>
+<Price>"25CO"</Price>
+<Encumbrance>"1"</Encumbrance>
+</Trapping>
+<Trapping id="LUSTR-TRAP_02">
+<Description language="ENGLISH">"Gemstones (12 jewels)"</Description>
+<Theme>"RULES-LAB_205"</Theme>
+<Price>"36CO"</Price>
+<Encumbrance>"1"</Encumbrance>
+</Trapping>
+<Trapping id="LUSTR-TRAP_03">
+<Description language="ENGLISH">"Obsinite Block"</Description>
+<Theme>"RULES-LAB_205"</Theme>
+<Price>"40CO"</Price>
+<Encumbrance>"4"</Encumbrance>
+<Buyer>"RULES-LAB_206"</Buyer>
+</Trapping>
+<Trapping id="LUSTR-TRAP_04">
+<Description language="ENGLISH">"Stegadon Skull"</Description>
+<Theme>"RULES-LAB_205"</Theme>
+<Price>"5CO"</Price>
+<Encumbrance>"1"</Encumbrance>
+<Buyer>"RULES-LAB_207"</Buyer>
+</Trapping>
+<Trapping id="LUSTR-TRAP_05">
+<Description language="ENGLISH">"Cold One Egg"</Description>
+<Theme>"RULES-LAB_205"</Theme>
+<Price>"15CO"</Price>
+<Encumbrance>"1"</Encumbrance>
+<Buyer>"RULES-LAB_208"</Buyer>
+</Trapping>
+<Trapping id="LUSTR-TRAP_06">
+<Description language="ENGLISH">"Stela Stone"</Description>
+<Theme>"RULES-LAB_205"</Theme>
+<Price>"5CO"</Price>
+<Encumbrance>"2"</Encumbrance>
+<Buyer>"RULES-LAB_209"</Buyer>
+</Trapping>
+<Trapping id="LUSTR-TRAP_07">
+<Description language="ENGLISH">"Sacred Plaque"</Description>
+<Theme>"RULES-LAB_205"</Theme>
+<Price>"20CO"</Price>
+<Encumbrance>"1"</Encumbrance>
+<Buyer>"RULES-LAB_210"</Buyer>
+</Trapping>
+</DATA_TRAPPING>
 <DATA_CAREER>
 <Career id="LUSTR-WORK123">
 <Description language="ENGLISH">"Interpreter"</Description>

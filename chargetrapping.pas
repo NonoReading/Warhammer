@@ -16,6 +16,7 @@ Type
     Capacite:           Integer;
     Disponibilite:      String;
     Theme:              String;
+    Acheteur:           String;
     Livre:              String;
 
 end;

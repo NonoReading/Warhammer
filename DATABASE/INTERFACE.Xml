@@ -348,6 +348,13 @@
 <Text name="RULES-LAB_201">"Theme"</Text>
 <Text name="RULES-LAB_202">"Equipment"</Text>
 <Text name="RULES-LAB_203">"Qty"</Text>
+<Text name="RULES-LAB_204">"Preferred buyer"</Text>
+<Text name="RULES-LAB_205">"Plunder"</Text>
+<Text name="RULES-LAB_206">"Smiths (x2); alchemists and engineering guilds (x3)"</Text>
+<Text name="RULES-LAB_207">"Natural historians and collectors (x2)"</Text>
+<Text name="RULES-LAB_208">"The Imperial Zoo, Clar Karond Beastmasters, etc. (x2)"</Text>
+<Text name="RULES-LAB_209">"Spellcasters (x10)"</Text>
+<Text name="RULES-LAB_210">"Imperial wizards (x8); Elf mages (x15)"</Text>
 </Label>
 </DATA_LABEL>
 </DATA_BOOK>

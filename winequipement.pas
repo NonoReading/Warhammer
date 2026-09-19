@@ -16,6 +16,7 @@ type
   // Liste des objets du catalogue DATA_TRAPPING, filtrable par theme
   // (balise <Theme>) et par livre.
   TWinEquipements = class(TForm)
+    AffAcheteur: TEdit;
     AffCap: TEdit;
     AffDispo: TEdit;
     AffEnc: TEdit;
@@ -24,6 +25,7 @@ type
     AffPrix: TEdit;
     ButtonFiltre: TBCButton;
     CombTheme: TComboBox;
+    LabAcheteur: TLabel;
     LabCap: TLabel;
     LabDispo: TLabel;
     LabEnc: TLabel;
@@ -72,6 +74,7 @@ begin
   LabCap.Caption       := GetTexteLibelle('RULES-LAB_185');
   LabDispo.Caption     := GetTexteLibelle('RULES-LAB_056');
   LabLivre.Caption     := GetTexteLibelle('RULES-LAB_128');
+  LabAcheteur.Caption  := GetTexteLibelle('RULES-LAB_204');
 
   // colonnes fixees par le .lfm (ColCount = 9) : seuls les titres sont poses ici
   TabEquip.Cells[1, 0] := GetTexteLibelle('RULES-LAB_001');
@@ -101,6 +104,8 @@ begin
   Ancrage.Ajouter(AffDispo, 0.5, 0.5);
   Ancrage.Ajouter(LabLivre, 0.5, 0);
   Ancrage.Ajouter(AffLivre, 0.5, 0.5);
+  Ancrage.Ajouter(LabAcheteur, 0.5, 0);
+  Ancrage.Ajouter(AffAcheteur, 0.5, 0.5);
   Ancrage.Fixer;
   OnResize := @FormResize;
 end;
@@ -193,6 +198,10 @@ begin
   AffLivre.Text  := TabEquip.Cells[8, aRow];
   LabCap.Visible := AffCap.Text <> '0';
   AffCap.Visible := AffCap.Text <> '0';
+  // l'acheteur prefere n'est pas dans la grille : lu dans le catalogue, affiche seulement s'il existe
+  AffAcheteur.Text    := GetTexteLibelle(ChercheTrapping(TabEquip.Cells[1, aRow]).Acheteur);
+  LabAcheteur.Visible := AffAcheteur.Text <> '';
+  AffAcheteur.Visible := AffAcheteur.Text <> '';
 end;
 
 // Mode selection (appel depuis WinPersonnage) : le double-clic renvoie le code de l'objet.

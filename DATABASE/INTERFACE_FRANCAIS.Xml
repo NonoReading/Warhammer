@@ -274,6 +274,13 @@
 <Text name="RULES-LAB_201">"Thème"</Text>
 <Text name="RULES-LAB_202">"Équipement"</Text>
 <Text name="RULES-LAB_203">"Qté"</Text>
+<Text name="RULES-LAB_204">"Acheteur préféré"</Text>
+<Text name="RULES-LAB_205">"Butin"</Text>
+<Text name="RULES-LAB_206">"Forgerons (×2) ; alchimistes et guildes d'ingénieurs (×3)"</Text>
+<Text name="RULES-LAB_207">"Historiens naturalistes et collectionneurs (×2)"</Text>
+<Text name="RULES-LAB_208">"Le Zoo impérial, les maîtres-bêtes de Clar Karond, etc. (×2)"</Text>
+<Text name="RULES-LAB_209">"Lanceurs de sorts (×10)"</Text>
+<Text name="RULES-LAB_210">"Sorciers impériaux (×8) ; mages elfes (×15)"</Text>
 </Label>
 </DATA_LABEL>
 </DATA_BOOK>

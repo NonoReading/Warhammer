@@ -820,6 +820,8 @@ Procedure XmlExportBook(Livre: String; Langue: String);
                 XmlContent.Add(XmlLigne(ConstXmlCapacite, IntToStr(PTrapping.Capacite)));
               if PTrapping.Theme <> '' then
                 XmlContent.Add(XmlLigne(ConstXmlTheme, PTrapping.Theme));
+              if PTrapping.Acheteur <> '' then
+                XmlContent.Add(XmlLigne(ConstXmlAcheteur, PTrapping.Acheteur));
 
               XmlContent.Add(XmlFinCode(ConstXmlTrapping));
             end;
@@ -2491,6 +2493,7 @@ Procedure XmlImport(FileName: String; OnlyPrimary: Boolean; OnlyCode: Boolean; C
                       // l'autre sans lui la valeur de l'entree precedente resterait collee
                       PTrapping.Capacite      := 0;
                       PTrapping.Theme         := '';
+                      PTrapping.Acheteur      := '';
                       PTraduction             := InitTrad(ConstPTrapping, PTrapping.CodeTrapping, '', PTrapping.Livre);
 
                       Node := XmlElement(NodeNv2.FirstChild);
@@ -2513,6 +2516,8 @@ Procedure XmlImport(FileName: String; OnlyPrimary: Boolean; OnlyCode: Boolean; C
                               PTrapping.Prix          := RemoveQuotes(UTF8Encode(Node.TextContent));
                               ConstXmlTheme:
                                 PTrapping.Theme         := RemoveQuotes(UTF8Encode(Node.TextContent));
+                            ConstXmlAcheteur:
+                              PTrapping.Acheteur      := RemoveQuotes(UTF8Encode(Node.TextContent));
                           end;
 
                           Node := XmlElement(Node.NextSibling);

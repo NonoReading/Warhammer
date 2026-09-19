@@ -571,6 +571,39 @@
 <Text name="MIDDE-BOOK MIDDENHEIM CITY OF THE WHITE WOLF">"Middenheim City Of the White Wolf"</Text>
 </Label>
 </DATA_LABEL>
+<!-- Objets magiques vendus par Lukas chez Vermillion Pawn. Pas de disponibilite ni d encombrement donnes par le livre. Les effets ne sont pas modelises (commentaires). -->
+<DATA_TRAPPING>
+<!-- Actif 1 heure (phrase 'Speak and be known to me') : comprend Classical, Bretonnian, Tilean, Elthárin, Gospodarinyi et Khazalid comme un natif. Une fois par jour. -->
+<Trapping id="MIDDE-TRAP_01">
+<Description language="ENGLISH">"Ring of Tongues"</Description>
+<Theme>"RULES-LAB_196"</Theme>
+<Price>"80CO"</Price>
+</Trapping>
+<!-- Actif 2d10 rounds (phrase 'Yield or die!') : Fear (2). Blesse les creatures immunisees aux attaques non magiques ; qualites Fine et Durable. Une fois par jour. -->
+<Trapping id="MIDDE-TRAP_02">
+<Description language="ENGLISH">"Sword of Fear"</Description>
+<Theme>"RULES-LAB_196"</Theme>
+<Price>"150CO"</Price>
+</Trapping>
+<!-- Blesse les creatures immunisees aux attaques non magiques ; qualites Fine et Durable. -->
+<Trapping id="MIDDE-TRAP_03">
+<Description language="ENGLISH">"Magical Dagger"</Description>
+<Theme>"RULES-LAB_196"</Theme>
+<Price>"50CO"</Price>
+</Trapping>
+<!-- Actives par la phrase 'Grace is beyond style' : talent Etiquette (Nobles, Guilders ou Servants) tant que portees ; la phrase change la version. Une fois par jour. -->
+<Trapping id="MIDDE-TRAP_04">
+<Description language="ENGLISH">"Boots of Gucci"</Description>
+<Theme>"RULES-LAB_196"</Theme>
+<Price>"50CO"</Price>
+</Trapping>
+<!-- Plate Helm normal, 3 PA, qualites Fine et Unbreakable ; taille Nain. Lukas ne le vend qu a un Nain. -->
+<Trapping id="MIDDE-TRAP_05">
+<Description language="ENGLISH">"Gromril Helm"</Description>
+<Theme>"RULES-LAB_196"</Theme>
+<Price>"100CO"</Price>
+</Trapping>
+</DATA_TRAPPING>
 <DATA_CAREER>
 <Career id="MIDDE-WORK107">
 <Description language="ENGLISH">"Wolf Kin"</Description>

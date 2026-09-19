@@ -1,5 +1,5 @@
 # Warhammer — Contexte projet
-**WINEQUIPEMENT / PDF (19/09/2026, valide par Nono)** : `<Theme>` sur les 175 objets V4, fenetre `winequipement.pas/.lfm`, bouton +Equipment de WinPersonnage (ajout d un objet du catalogue, ligne Divers). PDF (`pdfpersonnage.pas`, Feldo2P et ancien) : les Divers affichent le libelle du catalogue (+ ` xN`), l encombrement par ligne (`PdfDiversLibelle/Encombrement/TexteEnc`), la ligne Trappings du bloc Encombrement, total = armures + armes + divers. **Porte** : tout objet Divers peut etre porte (pas de liste de ce qui se porte, decision de Nono) ; regle Worn Items comme les armures (Enc-1 par exemplaire, plancher 0, 1 si Bulky, affiche `reduit(brut)`) ; l attribut Porte est sauvegarde et relu pour Divers (`chargepersonnage.pas`), le X est restitue au rechargement (`winpersonnage.pas`). Point de reprise : choix de la quantite dans la grille de WinPersonnage (le PDF la gere deja), `<Theme>` sur le catalogue V5 (32 objets), ancrage de WinEquipement, position de la ligne Trappings de l ancien PDF (126,151) estimee.
+**WINEQUIPEMENT / PDF (19/09/2026, valide par Nono)** : `<Theme>` sur les 175 objets V4, fenetre `winequipement.pas/.lfm`, bouton +Equipment de WinPersonnage (ajout d un objet du catalogue, ligne Divers). PDF (`pdfpersonnage.pas`, Feldo2P et ancien) : les Divers affichent le libelle du catalogue (+ ` xN`), l encombrement par ligne (`PdfDiversLibelle/Encombrement/TexteEnc`), la ligne Trappings du bloc Encombrement, total = armures + armes + divers. **Porte** : tout objet Divers peut etre porte (pas de liste de ce qui se porte, decision de Nono) ; regle Worn Items comme les armures (Enc-1 par exemplaire, plancher 0, 1 si Bulky, affiche `reduit(brut)`) ; l attribut Porte est sauvegarde et relu pour Divers (`chargepersonnage.pas`), le X est restitue au rechargement (`winpersonnage.pas`). Point de reprise : choix de la quantite dans la grille de WinPersonnage (le PDF la gere deja), `<Theme>` sur le catalogue V5 (32 objets), ancrage de WinEquipement, position de la ligne Trappings de l ancien PDF (126,151) estimee. **LUSTRIA BUTIN (19/09/2026, non teste en jeu)** : theme `RULES-LAB_205` (INTERFACE) et 7 objets `LUSTR-TRAP_01` a `_07` dans `BOOK LUSTRIA.xml`, sans disponibilite ; acheteur prefere = balise `<Buyer>` (code de libelle `RULES-LAB_206` a `_210`, traduit dans INTERFACE) affichee dans WinEquipement (non compile). Chantiers a part : bateaux, machines de siege, montures.
 
 **EQUIPEMENTS V4 (19/09/2026, non teste en jeu)** : catalogue `DATA_TRAPPING` V4 saisi (175 objets, `RULES-TRAP_001`-`_175`, `WFRP4/BOOK_RULESBOOK.Xml`), 194 lignes de carriere sur 582 rattachees. Point de reprise : `A FAIRE.txt` (douteux, variantes (Q), objets absents), et tester le chargement V4 (`&amp;`, libelle `LIMITED`).
 
@@ -1585,7 +1585,7 @@ ex. Riding Horse, Mule and Cart, relevé dans l'audit C plus haut).
   objet simple). **WinLivre laissé de côté pour l'instant** (Nono : on verra plus tard).
 - **🐛 Bug trouvé et corrigé en le testant : `ChercheTrapping` (`chargetrapping.pas`) ne
   réinitialisait jamais `Result`.** Symptôme vu par Nono : dans l'arbre de Watchman niveau 2,
-  "Lamp Oil" apparaissait deux fois, le second remplaçant "Lantern and Pole" (texte libre).
+  "Lamp Oil" apparaissait deux fois, le second remplaçant "Lantern and Pole" (code de libelle `RULES-LAB_206` a `_210`, traduit dans INTERFACE).
   Cause : quand aucune correspondance catalogue n'est trouvée, la fonction ne touche jamais
   `Result` - pour un `record` avec champs `String` (type géré), `Result` est passé comme
   paramètre caché pointant vers la variable de l'APPELANT, pas réinitialisé automatiquement.
@@ -1611,7 +1611,7 @@ Suite directe du morceau précédent (catalogue `DATA_TRAPPING` créé, ci-desso
 tranché la question ouverte : branchement complet jusqu'à la fiche personnage (Prix ET
 Encombrement doivent compter réellement, pas juste l'un des deux), pas un catalogue en
 lecture seule. Précisions apportées pendant la session :
-- Les "Divers" (texte libre) ont vocation à **disparaître entièrement** des métiers puis des
+- Les "Divers" (code de libelle `RULES-LAB_206` a `_210`, traduit dans INTERFACE) ont vocation à **disparaître entièrement** des métiers puis des
   personnages, remplacés par un lien vers le catalogue Trapping.
 - **Nouvelle fenêtre `WinEquipement` à créer** (calque de `WinArmor`) pour consulter le
   catalogue Trapping.

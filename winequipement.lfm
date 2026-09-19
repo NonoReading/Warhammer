@@ -109,6 +109,25 @@ object WinEquipements: TWinEquipements
     ParentColor = False
     ParentFont = False
   end
+  object LabAcheteur: TLabel
+    Left = 650
+    Height = 20
+    Top = 330
+    Width = 110
+    Caption = 'Acheteur'
+    Font.Color = clWhite
+    ParentColor = False
+    ParentFont = False
+  end
+  object AffAcheteur: TEdit
+    Left = 650
+    Height = 28
+    Top = 352
+    Width = 420
+    Color = cl3DLight
+    ReadOnly = True
+    TabOrder = 8
+  end
   object AffLib: TEdit
     Left = 650
     Height = 28
