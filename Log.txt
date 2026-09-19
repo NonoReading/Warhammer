@@ -5294,3 +5294,10 @@ Nouvelle unite ancrageproportionnel.pas (TAncrageProportionnel : Ajouter/Fixer/A
 Appris : sur WinArmure (seule fenetre dessinee en 144 PPI), la reference prise en pixels dans FormCreate devenait fausse apres une remise a l echelle DPI (images sur les champs). Reference stockee en unites 96 PPI, reconvertie avec Form.PixelsPerInch. Les ancres natives ne savent que tout donner ou rien donner (akRight = 100 pour cent du delta).
 Teste a l ecran et valide par Nono sur les sept fenetres.
 Fichiers modifies : ancrageproportionnel.pas, WarhammerHelp.lpi, winraces/winmetier/wintalent/wincompetence/winspell/winarmor/winweapon (.pas, .lfm), CONTEXT.md, Log.txt, A FAIRE.txt.
+
+19/09/2026 - EQUIPEMENTS V4 : CATALOGUE DATA_TRAPPING ET PREMIER RATTACHEMENT DES CARRIERES
+DATABASE/WFRP4/BOOK_RULESBOOK.Xml : nouveau bloc DATA_TRAPPING (175 objets, RULES-TRAP_001 a _175) saisi depuis LIVRES/RULEBOOK.txt (Consumers Guide V4) : Packs, Clothing, Food/Drink/Lodging, Tools and Kits, Books and Documents, Trade Tools/Workshop, Animals and Vehicles, Miscellaneous, plus Drugs and Poisons, Herbs and Draughts, Prosthetics (absents du perimetre V5, ajoutes sur decision de Nono). Meme schema que la V5 (Carries, prix 4/10, 1CO, Guild License en n/a). "Scarce" saisi en RULES-DISPO_LIMITED (la V4 n a pas SCARCE). & ecrit &amp; (Wine & Spirits, Pestle & Mortar).
+Audit des 582 lignes <Item> de carriere V4 en texte brut : 113 rattachables directement. Rattache : 105 lignes (noms identiques + pluriels), puis synonymes et fusions (saddle+harness -> Saddle and Harness, storm lamp and oil -> Storm Lantern + Lamp Oil, mule/pony and cart, saddle horse -> Riding Horse, book (X) -> Book, X...). 194 lignes rattachees sur 582 au total.
+Reste (voir A FAIRE.txt) : lignes douteuses, variantes "(Q)", tools of the profession, objets absents du catalogue ; non-objets laisses en texte. Chargement en jeu V4 NON TESTE.
+Appris : sed -z sans drapeau g ne remplace que la premiere occurrence ; verifier le diff (retraits) apres chaque passe.
+Fichiers modifies : BOOK_RULESBOOK.Xml (WFRP4), Log.txt, A FAIRE.txt.

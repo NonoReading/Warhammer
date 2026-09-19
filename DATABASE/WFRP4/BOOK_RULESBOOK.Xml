@@ -5540,12 +5540,12 @@ Apothecaries specialise in preparing pharmaceutical medication — commonly pill
 <Item name="book (blank)">"1"</Item>
 <Item name="healing decoction">"1"</Item>
 <Item name="leather jerkin">"1"</Item>
-<Item name="pestle and mortar.">"1"</Item>
-<Item name="guild license">"2"</Item>
+<Item name="RULES-TRAP_073">"1"</Item>
+<Item name="RULES-TRAP_096">"2"</Item>
 <Item name="tools of the profession">"2"</Item>
 <Item name="apprentice">"3"</Item>
-<Item name="workshop">"3"</Item>
-<Item name="book (Apothecary)">"3"</Item>
+<Item name="RULES-TRAP_102">"3"</Item>
+<Item name="RULES-TRAP_088">"3"</Item>
 <Item name="purchase order">"4"</Item>
 <Item name="large workshop">"4"</Item>
 </SUBCHAPTER_ITEM>
@@ -5664,13 +5664,13 @@ Artisans work at all levels of society not just producing goods, but also repair
   <!-- Briber -->
 </SUBCHAPTER_TALENT>
 <SUBCHAPTER_ITEM>
-<Item name="chalk">"1"</Item>
+<Item name="RULES-TRAP_129">"1"</Item>
 <Item name="leather doublet">"1"</Item>
 <Item name="1d10 rags">"1"</Item>
-<Item name="guild license">"2"</Item>
+<Item name="RULES-TRAP_096">"2"</Item>
 <Item name="profession tools">"2"</Item>
 <Item name="apprentice">"3"</Item>
-<Item name="workshop">"3"</Item>
+<Item name="RULES-TRAP_102">"3"</Item>
 <Item name="guild">"4"</Item>
 <Item name="clothing(Q)">"4"</Item>
 </SUBCHAPTER_ITEM>
@@ -5918,8 +5918,7 @@ Some magistrates are lay-members of the cult of Verena, seeking guidance and wis
 <Item name="RULES-ARMO_04">"2"</Item>
 <Item name="three Perceptors">"2"</Item>
 <Item name="horse">"3"</Item>
-<Item name="saddle">"3"</Item>
-<Item name="harness">"3"</Item>
+<Item name="RULES-TRAP_119">"3"</Item>
 <Item name="RULES-ARMO_14">"3"</Item>
 <Item name="Bailli">"3"</Item>
 <Item name="library (Law)">"4"</Item>
@@ -6041,13 +6040,13 @@ Boats and barges travel the Empire’s waterways, bringing goods from the remote
 </SUBCHAPTER_TALENT>
 <SUBCHAPTER_ITEM>
 <Item name="RULES-COMB_BASE_02">"1"</Item>
-<Item name="pole">"1"</Item>
+<Item name="RULES-TRAP_075">"1"</Item>
 <Item name="RULES-ARMO_04">"1"</Item>
-<Item name="rope">"2"</Item>
+<Item name="RULES-TRAP_150">"2"</Item>
 <Item name="boat">"2"</Item>
-<Item name="backpack">"3"</Item>
+<Item name="RULES-TRAP_001">"3"</Item>
 <Item name="tools of the profession (Carpenter)">"3"</Item>
-<Item name="hat">"4"</Item>
+<Item name="RULES-TRAP_023">"4"</Item>
 <Item name="river transport boat">"4"</Item>
 <Item name="crew">"4"</Item>
 </SUBCHAPTER_ITEM>
@@ -6172,11 +6171,11 @@ The most successful Townsmen often join local councils overseeing civic matters,
 <Item name="servant">"2"</Item>
 <Item name="pen">"2"</Item>
 <Item name="ink">"2"</Item>
-<Item name="stagecoach">"3"</Item>
+<Item name="RULES-TRAP_105">"3"</Item>
 <Item name="coachman">"3"</Item>
 <Item name="townhouse">"3"</Item>
 <Item name="official chain">"4"</Item>
-<Item name="stagecoach">"4"</Item>
+<Item name="RULES-TRAP_105">"4"</Item>
 <Item name="footman">"4"</Item>
 <Item name="clothes (Q)">"4"</Item>
 <Item name="large mansion with gardens">"4"</Item>
@@ -6297,14 +6296,12 @@ Whether it’s units of Pistoliers, Outriders, Demilancers, Horse Archers, or si
 </SUBCHAPTER_TALENT>
 <SUBCHAPTER_ITEM>
 <Item name="RULES-ARMO_04">"1"</Item>
-<Item name="saddle horse">"1"</Item>
-<Item name="saddle">"1"</Item>
-<Item name="harness">"1"</Item>
+<Item name="RULES-TRAP_116">"1"</Item>
+<Item name="RULES-TRAP_119">"1"</Item>
 <Item name="RULES-ARMO_14">"2"</Item>
 <Item name="RULES-ARMO_11">"2"</Item>
-<Item name="light war horse">"2"</Item>
-<Item name="saddle">"2"</Item>
-<Item name="harness">"2"</Item>
+<Item name="RULES-TRAP_112">"2"</Item>
+<Item name="RULES-TRAP_119">"2"</Item>
 <Item name="RULES-PROJ_POUDRE_04">"2"</Item>
 <Item name="RULES-MUNI_06">"2"</Item>
 <Item name="RULES-COMB_BASE_07">"2"</Item>
@@ -6427,18 +6424,18 @@ Charlatans include Swindlers, Con Artists, Gamblers, and other Scoundrels seekin
   <!-- Gregarious -->
 </SUBCHAPTER_TALENT>
 <SUBCHAPTER_ITEM>
-<Item name="backpack">"1"</Item>
+<Item name="RULES-TRAP_001">"1"</Item>
 <Item name="two sets of clothes">"1"</Item>
-<Item name="deck of cards">"1"</Item>
-<Item name="dice">"1"</Item>
+<Item name="RULES-TRAP_133">"1"</Item>
+<Item name="RULES-TRAP_136">"1"</Item>
 <Item name="a falsified document">"2"</Item>
 <Item name="two sets of clothes (Q)">"2"</Item>
 <Item name="an assortment of colored powders and water">"2"</Item>
 <Item name="an assortment of charms and trinkets">"2"</Item>
-<Item name="disguise kit">"3"</Item>
+<Item name="RULES-TRAP_058">"3"</Item>
 <Item name="picking tools">"3"</Item>
 <Item name="several falsified documents">"3"</Item>
-<Item name="writing kit">"4"</Item>
+<Item name="RULES-TRAP_087">"4"</Item>
 <Item name="falsified seal">"4"</Item>
 </SUBCHAPTER_ITEM>
 </Career>
@@ -6558,18 +6555,17 @@ Particularly skilled Hunters might be engaged as a noble’s Huntsmaster, granti
 <SUBCHAPTER_ITEM>
 <Item name="assortment of different animal traps">"1"</Item>
 <Item name="RULES-COMB_BASE_*">"1"</Item>
-<Item name="boots">"1"</Item>
+<Item name="RULES-TRAP_015">"1"</Item>
 <Item name="thick cape">"1"</Item>
 <Item name="RULES-PROJ_FROND_02">"1"</Item>
 <Item name="RULES-MUNI_05">"1"</Item>
 <Item name="RULES-PROJ_ARC_01">"2"</Item>
 <Item name="RULES-MUNI_02">"2"</Item>
-<Item name="backpack">"3"</Item>
+<Item name="RULES-TRAP_001">"3"</Item>
 <Item name="sleeping bag">"3"</Item>
-<Item name="tent">"3"</Item>
-<Item name="saddle horse">"4"</Item>
-<Item name="saddle">"4"</Item>
-<Item name="harness">"4"</Item>
+<Item name="RULES-TRAP_151">"3"</Item>
+<Item name="RULES-TRAP_116">"4"</Item>
+<Item name="RULES-TRAP_119">"4"</Item>
 <Item name="kennel with hunting dogs">"4"</Item>
 </SUBCHAPTER_ITEM>
 </Career>
@@ -6688,7 +6684,7 @@ Bounty Hunters track down fugitives and outlaws for coin. Most are legally appoi
 <SUBCHAPTER_ITEM>
 <Item name="RULES-COMB_BASE_*">"1"</Item>
 <Item name="RULES-ARMO_04">"1"</Item>
-<Item name="rope">"1"</Item>
+<Item name="RULES-TRAP_150">"1"</Item>
 <Item name="RULES-PROJ_ARB_01">"2"</Item>
 <Item name="RULES-MUNI_01">"2"</Item>
 <Item name="RULES-ARMO_01">"2"</Item>
@@ -6696,10 +6692,10 @@ Bounty Hunters track down fugitives and outlaws for coin. Most are legally appoi
 <Item name="arrest warrant">"2"</Item>
 <Item name="handcuffs">"2"</Item>
 <Item name="RULES-ARMO_07">"3"</Item>
-<Item name="saddle horse">"3"</Item>
-<Item name="saddle">"3"</Item>
-<Item name="draft horse">"4"</Item>
-<Item name="cart">"4"</Item>
+<Item name="RULES-TRAP_116">"3"</Item>
+<Item name="RULES-TRAP_119">"3"</Item>
+<Item name="RULES-TRAP_109">"4"</Item>
+<Item name="RULES-TRAP_103">"4"</Item>
 <Item name="RULES-ARMO_07">"4"</Item>
 <Item name="four pairs of handcuffs">"4"</Item>
 </SUBCHAPTER_ITEM>
@@ -6819,14 +6815,12 @@ Many believe heavy cavalry are the pre-eminent warriors of the Old World. A mass
 <SUBCHAPTER_ITEM>
 <Item name="RULES-ARMO_04">"1"</Item>
 <Item name="RULES-ARMO_07">"1"</Item>
-<Item name="saddle horse">"1"</Item>
-<Item name="saddle">"1"</Item>
-<Item name="harness">"1"</Item>
+<Item name="RULES-TRAP_116">"1"</Item>
+<Item name="RULES-TRAP_119">"1"</Item>
 <Item name="RULES-COMB_BASE_07">"1"</Item>
 <Item name="tools of the trade (farrier)">"1"</Item>
 <Item name="steed">"2"</Item>
-<Item name="saddle">"2"</Item>
-<Item name="harness">"2"</Item>
+<Item name="RULES-TRAP_119">"2"</Item>
 <Item name="RULES-COMB_*">"2"</Item>
 <Item name="RULES-COMB_HAST_03">"2"</Item>
 <Item name="RULES-ARMO_10">"2"</Item>
@@ -6953,7 +6947,7 @@ For many, the coach is the only way to get from one town to the next. The wild p
   <!-- Marksman -->
 </SUBCHAPTER_TALENT>
 <SUBCHAPTER_ITEM>
-<Item name="coat">"1"</Item>
+<Item name="RULES-TRAP_018">"1"</Item>
 <Item name="warm gloves">"1"</Item>
 <Item name="RULES-COMB_ENTRA_01">"1"</Item>
 <Item name="RULES-PROJ_POUDRE_03">"2"</Item>
@@ -6963,12 +6957,12 @@ For many, the coach is the only way to get from one town to the next. The wild p
        carriere, pas une quantite ; la taille du lot vient du <Ammunition> de la munition. -->
 <Item name="coachman’s horn">"2"</Item>
 <Item name="RULES-ARMO_04">"2"</Item>
-<Item name="hat">"2"</Item>
+<Item name="RULES-TRAP_023">"2"</Item>
 <Item name="cape(Q)">"3"</Item>
 <Item name="RULES-ARMO_07">"3"</Item>
 <Item name="RULES-PROJ_POUDRE_04">"3"</Item>
 <Item name="park of stagecoaches and horses">"4"</Item>
-<Item name="maps">"4"</Item>
+<Item name="RULES-TRAP_099">"4"</Item>
 </SUBCHAPTER_ITEM>
 </Career>
 <Career id="RULES-WORK14">
@@ -7085,15 +7079,15 @@ Some Pedlars also take on messenger work; others act as de facto town criers, br
   <!-- Tenacious -->
 </SUBCHAPTER_TALENT>
 <SUBCHAPTER_ITEM>
-<Item name="backpack">"1"</Item>
+<Item name="RULES-TRAP_001">"1"</Item>
 <Item name="sleeping bag">"1"</Item>
 <Item name="goods worth 2d10 copper coins">"1"</Item>
-<Item name="tent">"1"</Item>
+<Item name="RULES-TRAP_151">"1"</Item>
 <Item name="mule and saddle casts">"2"</Item>
 <Item name="goods worth 2d10 silver pistols">"2"</Item>
 <Item name="set of cooking utensils">"2"</Item>
 <Item name="tools of the profession (Handyman)">"2"</Item>
-<Item name="cart">"3"</Item>
+<Item name="RULES-TRAP_103">"3"</Item>
 <Item name="goods worth at least 2d10 GC">"3"</Item>
 <Item name="draft horse with cart">"4"</Item>
 <Item name="goods worth at least 5d10 GC">"4"</Item>
@@ -7214,13 +7208,12 @@ Long years at court or in service to a lesser noble pave the way to the loftier 
   <!-- Commanding Presence -->
 </SUBCHAPTER_TALENT>
 <SUBCHAPTER_ITEM>
-<Item name="writing kit">"1"</Item>
+<Item name="RULES-TRAP_087">"1"</Item>
 <Item name="livery">"2"</Item>
 <Item name="clothes(Q)">"3"</Item>
 <Item name="assistant">"3"</Item>
-<Item name="saddle horse">"4"</Item>
-<Item name="saddle">"4"</Item>
-<Item name="harness">"4"</Item>
+<Item name="RULES-TRAP_116">"4"</Item>
+<Item name="RULES-TRAP_119">"4"</Item>
 <Item name="luxurious costume (Q)">"4"</Item>
 <Item name="suite of Advisors and Assistants">"4"</Item>
 </SUBCHAPTER_ITEM>
@@ -7341,15 +7334,16 @@ Smugglers come in many forms, perhaps transporting tiny, high- value goods for n
 <SUBCHAPTER_ITEM>
 <Item name="large bag">"1"</Item>
 <Item name="mask/scarf">"1"</Item>
-<Item name="tinder box">"1"</Item>
-<Item name="storm lamp and oil">"1"</Item>
+<Item name="RULES-TRAP_152">"1"</Item>
+<Item name="RULES-TRAP_142">"1"</Item>
+<Item name="RULES-TRAP_140">"1"</Item>
 <Item name="two barrels">"2"</Item>
 <Item name="RULES-COMB_BASE_*">"2"</Item>
 <Item name="RULES-ARMO_04">"2"</Item>
 <Item name="boat">"2"</Item>
 <Item name="river runner">"3"</Item>
 <Item name="fast river transport boat">"3"</Item>
-<Item name="disguise kit">"4"</Item>
+<Item name="RULES-TRAP_058">"4"</Item>
 <Item name="flotilla of river transport boats">"4"</Item>
 </SUBCHAPTER_ITEM>
 </Career>
@@ -7469,14 +7463,14 @@ A Stevedore might work alone in a riverside village, or in a large gang on a bus
 <SUBCHAPTER_ITEM>
 <Item name="RULES-COMB_BASE_02">"1"</Item>
 <Item name="leather gloves">"1"</Item>
-<Item name="guild license">"2"</Item>
+<Item name="RULES-TRAP_096">"2"</Item>
 <Item name="leather jerkin">"2"</Item>
-<Item name="pipe and tobacco">"2"</Item>
+<Item name="RULES-TRAP_145">"2"</Item>
 <Item name="porter’s cap">"2"</Item>
 <Item name="gang of tank tops">"3"</Item>
 <Item name="whistle">"3"</Item>
 <Item name="office and personal">"4"</Item>
-<Item name="writing kit">"4"</Item>
+<Item name="RULES-TRAP_087">"4"</Item>
 </SUBCHAPTER_ITEM>
 </Career>
 <Career id="RULES-WORK18">
@@ -7726,16 +7720,15 @@ Among an illiterate populace where maps are rare, local knowledge can mean the d
 <Item name="RULES-ARMO_04">"1"</Item>
 <Item name="sturdy boots">"1"</Item>
 <Item name="cape">"1"</Item>
-<Item name="rope">"1"</Item>
+<Item name="RULES-TRAP_150">"1"</Item>
 <Item name="RULES-PROJ_ARC_01">"2"</Item>
 <Item name="RULES-MUNI_02">"2"</Item>
 <Item name="RULES-ARMO_07">"2"</Item>
-<Item name="map">"3"</Item>
-<Item name="saddle horse">"3"</Item>
-<Item name="saddle">"3"</Item>
-<Item name="harness">"3"</Item>
+<Item name="RULES-TRAP_099">"3"</Item>
+<Item name="RULES-TRAP_116">"3"</Item>
+<Item name="RULES-TRAP_119">"3"</Item>
 <Item name="saddle cast with food for two weeks">"3"</Item>
-<Item name="tent">"3"</Item>
+<Item name="RULES-TRAP_151">"3"</Item>
 <Item name="selection of maps">"4"</Item>
 <Item name="tools of the profession (Cartographer)">"4"</Item>
 </SUBCHAPTER_ITEM>
@@ -7860,7 +7853,7 @@ Envoys must first prove their abilities in a lesser capacity as a Herald, assist
 <Item name="pen and ink">"2"</Item>
 <Item name="10 sheets of parchment">"2"</Item>
 <Item name="helper">"3"</Item>
-<Item name="map">"3"</Item>
+<Item name="RULES-TRAP_099">"3"</Item>
 <Item name="clothes(Q)">"3"</Item>
 <Item name="assistant">"4"</Item>
 <Item name="elegant clothes (Q)">"4"</Item>
@@ -7982,8 +7975,8 @@ Some experienced Investigators cultivate matter-of-fact airs of sophistication t
   <!-- Tower of Memories -->
 </SUBCHAPTER_TALENT>
 <SUBCHAPTER_ITEM>
-<Item name="lantern">"1"</Item>
-<Item name="lamp oil">"1"</Item>
+<Item name="RULES-TRAP_141">"1"</Item>
+<Item name="RULES-TRAP_140">"1"</Item>
 <Item name="newspaper">"1"</Item>
 <Item name="pen and ink">"1"</Item>
 <Item name="RULES-COMB_BASE_*">"2"</Item>
@@ -7991,7 +7984,7 @@ Some experienced Investigators cultivate matter-of-fact airs of sophistication t
 <Item name="tools">"2"</Item>
 <Item name="assistant">"3"</Item>
 <Item name="office">"3"</Item>
-<Item name="spyglass">"4"</Item>
+<Item name="RULES-TRAP_085">"4"</Item>
 <Item name="network of informants">"4"</Item>
 </SUBCHAPTER_ITEM>
 </Career>
@@ -8234,7 +8227,7 @@ The most gifted Masters are invited to join a university, with renowned Professo
 <Item name="alcohol">"1"</Item>
 <Item name="book">"1"</Item>
 <Item name="letter of recommendation">"1"</Item>
-<Item name="writing kit">"1"</Item>
+<Item name="RULES-TRAP_087">"1"</Item>
 <Item name="access to a library">"2"</Item>
 <Item name="diploma">"2"</Item>
 <Item name="mortarboard">"3"</Item>
@@ -8355,13 +8348,13 @@ Spies are brave (or foolhardy) individuals who secretly gather information for t
   <!-- Tower of Memories -->
 </SUBCHAPTER_TALENT>
 <SUBCHAPTER_ITEM>
-<Item name="charcoal stick">"1"</Item>
+<Item name="RULES-TRAP_130">"1"</Item>
 <Item name="bag containing 2 different outfits">"1"</Item>
 <Item name="hooded cape">"1"</Item>
 <Item name="RULES-COMB_BASE_*">"2"</Item>
 <Item name="informant">"2"</Item>
 <Item name="necessary to">"2"</Item>
-<Item name="book (Cryptography)">"3"</Item>
+<Item name="RULES-TRAP_090">"3"</Item>
 <Item name="network of spies and informants">"3"</Item>
 <Item name="carrier pigeons">"3"</Item>
 <Item name="pen and ink">"3"</Item>
@@ -8483,7 +8476,7 @@ The fertile banks of the great rivers of the Empire are densely populated, and t
   <!-- Sharp -->
 </SUBCHAPTER_TALENT>
 <SUBCHAPTER_ITEM>
-<Item name="bucket">"1"</Item>
+<Item name="RULES-TRAP_053">"1"</Item>
 <Item name="fishing rod and bait">"1"</Item>
 <Item name="RULES-ARMO_02">"1"</Item>
 <Item name="eel trap">"2"</Item>
@@ -8491,7 +8484,8 @@ The fertile banks of the great rivers of the Empire are densely populated, and t
 <Item name="net">"2"</Item>
 <Item name="RULES-COMB_HAST_03">"2"</Item>
 <Item name="boat">"3"</Item>
-<Item name="storm lamp and oil">"3"</Item>
+<Item name="RULES-TRAP_142">"3"</Item>
+<Item name="RULES-TRAP_140">"3"</Item>
 <Item name="cabin/river transport boat">"4"</Item>
 </SUBCHAPTER_ITEM>
 </Career>
@@ -8613,9 +8607,9 @@ Most Flagellants wander in large groups, guided by a Prophet of Doom who interpr
 <Item name="tattered dresses">"1"</Item>
 <Item name="RULES-PROJ_FROND_02">"2"</Item>
 <Item name="sign">"2"</Item>
-<Item name="religious symbol">"2"</Item>
+<Item name="RULES-TRAP_028">"2"</Item>
 <Item name="relic">"3"</Item>
-<Item name="book (Religion)">"4"</Item>
+<Item name="RULES-TRAP_095">"4"</Item>
 <Item name="followers (including Penitents">"4"</Item>
 <Item name="Flagellants and Zealots)">"4"</Item>
 </SUBCHAPTER_ITEM>
@@ -8743,7 +8737,7 @@ The best way to keep something safe is to post a guard. Guarding looks easy enou
 <Item name="RULES-COMB_HAST_03">"2"</Item>
 <Item name="RULES-COMB_2M_*/RULES-COMB_HAST_02">"3"</Item>
 <Item name="RULES-ARMO_11">"3"</Item>
-<Item name="uniform">"3"</Item>
+<Item name="RULES-TRAP_034">"3"</Item>
 <Item name="RULES-ARMO_14">"4"</Item>
 </SUBCHAPTER_ITEM>
 </Career>
@@ -8860,7 +8854,7 @@ Watching fights is a popular pastime. In the cities, organised fights take place
   <!-- Reaction Strike -->
 </SUBCHAPTER_TALENT>
 <SUBCHAPTER_ITEM>
-<Item name="bandages">"1"</Item>
+<Item name="RULES-TRAP_123">"1"</Item>
 <Item name="RULES-COMB_BAGAR_01">"1"</Item>
 <Item name="RULES-ARMO_04">"1"</Item>
 <Item name="RULES-COMB_FLEAU_02/RULES-COMB_2M_*">"2"</Item>
@@ -8985,17 +8979,18 @@ Medicines from apothecaries are expensive and rarely available in the Reikland�
   <!-- Master Tradesman (Herbalist) -->
 </SUBCHAPTER_TALENT>
 <SUBCHAPTER_ITEM>
-<Item name="boots">"1"</Item>
+<Item name="RULES-TRAP_015">"1"</Item>
 <Item name="cape">"1"</Item>
 <Item name="satchel containing an assortment of herbs">"1"</Item>
 <Item name="RULES-COMB_BASE_06">"2"</Item>
-<Item name="healing poultice">"2"</Item>
+<Item name="RULES-TRAP_165">"2"</Item>
 <Item name="tools of the profession (Herbalist)">"2"</Item>
 <Item name="workshop (Herbalist)">"3"</Item>
 <Item name="picker">"3"</Item>
 <Item name="three healing poultices">"3"</Item>
 <Item name="healing decoction">"3"</Item>
-<Item name="pony and cart">"4"</Item>
+<Item name="RULES-TRAP_115">"4"</Item>
+<Item name="RULES-TRAP_103">"4"</Item>
 </SUBCHAPTER_ITEM>
 </Career>
 <Career id="RULES-WORK30">
@@ -9114,15 +9109,14 @@ Outlaws ply the roads of the Old World in search of vulnerable travellers and me
 <Item name="sleeping bag">"1"</Item>
 <Item name="RULES-COMB_BASE_*">"1"</Item>
 <Item name="RULES-ARMO_04">"1"</Item>
-<Item name="tinder box">"1"</Item>
+<Item name="RULES-TRAP_152">"1"</Item>
 <Item name="RULES-PROJ_ARC_01">"2"</Item>
 <Item name="RULES-MUNI_02">"2"</Item>
 <Item name="RULES-COMB_BASE_07">"2"</Item>
-<Item name="tent">"2"</Item>
+<Item name="RULES-TRAP_151">"2"</Item>
 <Item name="RULES-ARMO_11">"3"</Item>
-<Item name="saddle horse">"3"</Item>
-<Item name="saddle">"3"</Item>
-<Item name="harness">"3"</Item>
+<Item name="RULES-TRAP_116">"3"</Item>
+<Item name="RULES-TRAP_119">"3"</Item>
 <Item name="RULES-ARMO_09">"3"</Item>
 <Item name="band of Outlaws">"3"</Item>
 <Item name="fiefdom of gang leaders">"4"</Item>
@@ -9242,12 +9236,12 @@ Engineers design and build mechanical devices or structures such as bridges, can
   <!-- Savant (Engineering) -->
 </SUBCHAPTER_TALENT>
 <SUBCHAPTER_ITEM>
-<Item name="book (Engineer)">"1"</Item>
+<Item name="RULES-TRAP_091">"1"</Item>
 <Item name="hammer and nails">"1"</Item>
-<Item name="Guild License">"2"</Item>
+<Item name="RULES-TRAP_096">"2"</Item>
 <Item name="Tools of the Profession (Engineer)">"2"</Item>
-<Item name="workshop">"3"</Item>
-<Item name="Guild License">"4"</Item>
+<Item name="RULES-TRAP_102">"3"</Item>
+<Item name="RULES-TRAP_096">"4"</Item>
 <Item name="Library (Engineer)">"4"</Item>
 <Item name="Tools of the Profession (Q)">"4"</Item>
 <Item name="Large Workshop (Engineer)">"4"</Item>
@@ -9367,17 +9361,16 @@ A Warden’s oversight can cover a variety of duties: ensuring the upkeep of a g
   <!-- Etiquette (Any) -->
 </SUBCHAPTER_TALENT>
 <SUBCHAPTER_ITEM>
-<Item name="keys">"1"</Item>
-<Item name="lantern">"1"</Item>
-<Item name="lamp oil">"1"</Item>
+<Item name="RULES-TRAP_066">"1"</Item>
+<Item name="RULES-TRAP_141">"1"</Item>
+<Item name="RULES-TRAP_140">"1"</Item>
 <Item name="delivered">"1"</Item>
 <Item name="RULES-COMB_BASE_*/RULES-PROJ_ARC_01">"2"</Item>
 <Item name="RULES-MUNI_02">"2"</Item>
   <!-- Arrow : les "10 arrows" du livre. Elles n'ont de sens que si le Bow est choisi dans
        l'alternative ci-dessus - le modele ne sait pas conditionner un objet a un choix. -->
-<Item name="saddle horse">"2"</Item>
-<Item name="saddle">"2"</Item>
-<Item name="harness">"2"</Item>
+<Item name="RULES-TRAP_116">"2"</Item>
+<Item name="RULES-TRAP_119">"2"</Item>
 <Item name="RULES-ARMO_04">"2"</Item>
 <Item name="RULES-ARMO_14">"3"</Item>
 <Item name="ceremonial staff of function">"3"</Item>
@@ -9500,11 +9493,11 @@ Lawyers give legal counsel, interpret the law, and argue on behalf of their clie
   <!-- Savant (Law) -->
 </SUBCHAPTER_TALENT>
 <SUBCHAPTER_ITEM>
-<Item name="book (Law)">"1"</Item>
+<Item name="RULES-TRAP_092">"1"</Item>
 <Item name="magnifying glass">"1"</Item>
 <Item name="lawyer’s robe">"2"</Item>
-<Item name="guild license">"2"</Item>
-<Item name="writing kit">"2"</Item>
+<Item name="RULES-TRAP_096">"2"</Item>
+<Item name="RULES-TRAP_087">"2"</Item>
 <Item name="assistant (Student/Servant)">"3"</Item>
 <Item name="Office">"3"</Item>
 <Item name="mallet">"4"</Item>
@@ -9626,11 +9619,12 @@ Traders can join guilds by apprenticing under Master Merchants as junior busines
 </SUBCHAPTER_TALENT>
 <SUBCHAPTER_ITEM>
 <Item name="RULES-COMB_BASE_07">"1"</Item>
-<Item name="mule and cart">"1"</Item>
-<Item name="canvas tarp">"1"</Item>
+<Item name="RULES-TRAP_114">"1"</Item>
+<Item name="RULES-TRAP_103">"1"</Item>
+<Item name="RULES-TRAP_128">"1"</Item>
 <Item name="3d10 silver pistols">"1"</Item>
 <Item name="river transport boat/2 carts">"2"</Item>
-<Item name="guild license">"2"</Item>
+<Item name="RULES-TRAP_096">"2"</Item>
 <Item name="20 GC">"2"</Item>
 <Item name="mansion with servants">"3"</Item>
 <Item name="warehouse">"3"</Item>
@@ -9756,16 +9750,16 @@ Seamen can always find work, whether as cabin staff on an Imperial battleship or
   <!-- Orientation -->
 </SUBCHAPTER_TALENT>
 <SUBCHAPTER_ITEM>
-<Item name="bucket">"1"</Item>
+<Item name="RULES-TRAP_053">"1"</Item>
 <Item name="brush">"1"</Item>
-<Item name="mop">"1"</Item>
+<Item name="RULES-TRAP_070">"1"</Item>
 <Item name="RULES-COMB_BASE_02">"2"</Item>
 <Item name="RULES-ARMO_04">"2"</Item>
 <Item name="Tools of the Profession (Carpenter)">"3"</Item>
 <Item name="nautical charts">"4"</Item>
 <Item name="sailboat and crew">"4"</Item>
 <Item name="sextant">"4"</Item>
-<Item name="telescope">"4"</Item>
+<Item name="RULES-TRAP_085">"4"</Item>
 </SUBCHAPTER_ITEM>
 </Career>
 <Career id="RULES-WORK36">
@@ -9881,10 +9875,10 @@ Physicians study patients’ symptoms and prescribe remedies and surgeries. Whil
   <!-- Etiquette (Nobles) -->
 </SUBCHAPTER_TALENT>
 <SUBCHAPTER_ITEM>
-<Item name="bandages">"1"</Item>
+<Item name="RULES-TRAP_123">"1"</Item>
 <Item name="healing decoction">"1"</Item>
-<Item name="Book (Medicine)">"2"</Item>
-<Item name="Guild License">"2"</Item>
+<Item name="RULES-TRAP_094">"2"</Item>
+<Item name="RULES-TRAP_096">"2"</Item>
 <Item name="Tools of the Profession (Medicine)">"2"</Item>
 <Item name="apprentice">"3"</Item>
 <Item name="workshop (remedies)">"3"</Item>
@@ -10007,10 +10001,10 @@ Paupers often land on the streets as orphans and have been in and out of Mercy H
 </SUBCHAPTER_TALENT>
 <SUBCHAPTER_ITEM>
 <Item name="poor quality cover">"1"</Item>
-<Item name="cup">"1"</Item>
-<Item name="crutch">"2"</Item>
-<Item name="bowl">"2"</Item>
-<Item name="disguise kit">"3"</Item>
+<Item name="RULES-TRAP_135">"1"</Item>
+<Item name="RULES-TRAP_057">"2"</Item>
+<Item name="RULES-TRAP_148">"2"</Item>
+<Item name="RULES-TRAP_058">"3"</Item>
 <Item name="hideout">"3"</Item>
 <Item name="destitute disciple">"3"</Item>
 <Item name="lair">"4"</Item>
@@ -10131,18 +10125,17 @@ Runners are employed to carry urgent messages in cities. Many larger settlements
   <!-- Very Resilient -->
 </SUBCHAPTER_TALENT>
 <SUBCHAPTER_ITEM>
-<Item name="scroll case">"1"</Item>
+<Item name="RULES-TRAP_012">"1"</Item>
 <Item name="RULES-COMB_BASE_*">"2"</Item>
 <Item name="RULES-ARMO_04">"2"</Item>
-<Item name="saddle horse">"2"</Item>
-<Item name="saddle">"2"</Item>
-<Item name="harness">"2"</Item>
-<Item name="backpack">"3"</Item>
+<Item name="RULES-TRAP_116">"2"</Item>
+<Item name="RULES-TRAP_119">"2"</Item>
+<Item name="RULES-TRAP_001">"3"</Item>
 <Item name="saddle bases">"3"</Item>
 <Item name="RULES-COMB_BASE_07">"3"</Item>
 <Item name="dispatch riders">"4"</Item>
 <Item name="RULES-ARMO_07">"4"</Item>
-<Item name="writing kit">"4"</Item>
+<Item name="RULES-TRAP_087">"4"</Item>
 </SUBCHAPTER_ITEM>
 </Career>
 <Career id="RULES-WORK39">
@@ -10261,16 +10254,15 @@ Only a few towns and cities have professional Watchmen paid to understand and up
 <SUBCHAPTER_ITEM>
 <Item name="RULES-COMB_BASE_*">"1"</Item>
 <Item name="RULES-ARMO_04">"1"</Item>
-<Item name="uniform">"1"</Item>
+<Item name="RULES-TRAP_034">"1"</Item>
 <Item name="lantern and pole">"2"</Item>
-<Item name="lamp oil">"2"</Item>
+<Item name="RULES-TRAP_140">"2"</Item>
 <Item name="copper badge">"2"</Item>
 <Item name="RULES-ARMO_14">"3"</Item>
 <Item name="RULES-ARMO_11">"3"</Item>
 <Item name="rank symbol">"3"</Item>
-<Item name="saddle horse">"4"</Item>
-<Item name="saddle">"4"</Item>
-<Item name="harness">"4"</Item>
+<Item name="RULES-TRAP_116">"4"</Item>
+<Item name="RULES-TRAP_119">"4"</Item>
 <Item name="hat(Q)">"4"</Item>
 <Item name="RULES-COMB_BASE_*(Q)">"4"</Item>
 <Item name="rank symbol(Q)">"4"</Item>
@@ -10389,19 +10381,19 @@ Many prospectors are tempted by stories of gold in the Skaag Hills, but real min
   <!-- Strong-minded -->
 </SUBCHAPTER_TALENT>
 <SUBCHAPTER_ITEM>
-<Item name="charcoal stick">"1"</Item>
+<Item name="RULES-TRAP_130">"1"</Item>
 <Item name="rough map">"1"</Item>
-<Item name="pan">"1"</Item>
-<Item name="shovel">"1"</Item>
+<Item name="RULES-TRAP_144">"1"</Item>
+<Item name="RULES-TRAP_081">"1"</Item>
 <Item name="RULES-COMB_BASE_05">"2"</Item>
 <Item name="oil lamp">"2"</Item>
-<Item name="Dravish lamp">"2"</Item>
+<Item name="RULES-TRAP_132">"2"</Item>
 <Item name="RULES-ARMO_04">"2"</Item>
 <Item name="RULES-COMB_2M_04">"3"</Item>
 <Item name="RULES-ARMO_11">"3"</Item>
 <Item name="tools of the profession (Engineer)">"3"</Item>
 <Item name="team of miners">"4"</Item>
-<Item name="writing kit">"4"</Item>
+<Item name="RULES-TRAP_087">"4"</Item>
 </SUBCHAPTER_ITEM>
 </Career>
 <Career id="RULES-WORK41">
@@ -10638,12 +10630,13 @@ Some Wreckers pride themselves on their clever traps, making any wreck seem like
   <!-- Pilot -->
 </SUBCHAPTER_TALENT>
 <SUBCHAPTER_ITEM>
-<Item name="crowbar">"1"</Item>
+<Item name="RULES-TRAP_056">"1"</Item>
 <Item name="big bag">"1"</Item>
 <Item name="leather gloves">"1"</Item>
 <Item name="RULES-COMB_BASE_02">"2"</Item>
 <Item name="RULES-ARMO_04">"2"</Item>
-<Item name="storm lamp and oil">"2"</Item>
+<Item name="RULES-TRAP_142">"2"</Item>
+<Item name="RULES-TRAP_140">"2"</Item>
 <Item name="RULES-PROJ_ARB_01">"3"</Item>
 <Item name="RULES-MUNI_01">"3"</Item>
 <Item name="rope with grab">"3"</Item>
@@ -10768,12 +10761,14 @@ Many Huffers specialise in a single, notorious stretch of water, while others ma
 </SUBCHAPTER_TALENT>
 <SUBCHAPTER_ITEM>
 <Item name="RULES-COMB_BASE_02">"1"</Item>
-<Item name="storm lamp and oil">"1"</Item>
+<Item name="RULES-TRAP_142">"1"</Item>
+<Item name="RULES-TRAP_140">"1"</Item>
 <Item name="leather doublet">"2"</Item>
-<Item name="rope">"2"</Item>
+<Item name="RULES-TRAP_150">"2"</Item>
 <Item name="boat">"2"</Item>
-<Item name="pole">"3"</Item>
-<Item name="storm lamp and oil">"3"</Item>
+<Item name="RULES-TRAP_075">"3"</Item>
+<Item name="RULES-TRAP_142">"3"</Item>
+<Item name="RULES-TRAP_140">"3"</Item>
 <Item name="canoeist">"4"</Item>
 <Item name="small river transport boat">"4"</Item>
 </SUBCHAPTER_ITEM>
@@ -10898,8 +10893,8 @@ The blood of highborn ancestors courses through the veins of the nobility, grant
 <Item name="4 servants">"2"</Item>
 <Item name="court costume">"2"</Item>
 <Item name="luxurious court costume">"2"</Item>
-<Item name="saddle horse">"2"</Item>
-<Item name="saddle">"2"</Item>
+<Item name="RULES-TRAP_116">"2"</Item>
+<Item name="RULES-TRAP_119">"2"</Item>
 <Item name="harness/stagecoach">"2"</Item>
 <Item name="RULES-COMB_PARAD_02/cape(Q)">"2"</Item>
 <Item name="jewelry worth 50 GC">"2"</Item>
@@ -10907,7 +10902,7 @@ The blood of highborn ancestors courses through the veins of the nobility, grant
 <Item name="200 GC">"3"</Item>
 <Item name="fiefdom">"3"</Item>
 <Item name="jewelry worth 200 GC">"3"</Item>
-<Item name="signet ring">"3"</Item>
+<Item name="RULES-TRAP_032">"3"</Item>
 <Item name="4 sets of lavish court costumes">"4"</Item>
 <Item name="foil(Q)/hand mirror">"4"</Item>
 <Item name="500 GC">"4"</Item>
@@ -11028,9 +11023,9 @@ Nuns are members of religious orders, normally cloistered within an abbey, conve
   <!-- Iron Will -->
 </SUBCHAPTER_TALENT>
 <SUBCHAPTER_ITEM>
-<Item name="robes">"1"</Item>
-<Item name="religious symbols">"1"</Item>
-<Item name="book (Religion)">"2"</Item>
+<Item name="RULES-TRAP_029">"1"</Item>
+<Item name="RULES-TRAP_028">"1"</Item>
+<Item name="RULES-TRAP_095">"2"</Item>
 <Item name="relic">"2"</Item>
 <Item name="tools of the profession (your choice)">"2"</Item>
 <Item name="abbey">"3"</Item>
@@ -11154,8 +11149,9 @@ Some Riverwardens rarely see the water, instead manning remote outposts overlook
 <SUBCHAPTER_ITEM>
 <Item name="RULES-COMB_BASE_04">"1"</Item>
 <Item name="RULES-ARMO_04">"1"</Item>
-<Item name="uniform">"1"</Item>
-<Item name="lantern and oil">"2"</Item>
+<Item name="RULES-TRAP_034">"1"</Item>
+<Item name="RULES-TRAP_141">"2"</Item>
+<Item name="RULES-TRAP_140">"2"</Item>
 <Item name="RULES-PROJ_POUDRE_04">"2"</Item>
 <Item name="RULES-MUNI_06">"2"</Item>
 <Item name="RULES-COMB_BASE_07">"2"</Item>
@@ -11284,16 +11280,15 @@ Road Wardens protect travellers from the bandits, Greenskins, Beastmen and other
 <Item name="RULES-ARMO_04">"1"</Item>
 <Item name="RULES-COMB_BASE_*">"2"</Item>
 <Item name="RULES-ARMO_07">"2"</Item>
-<Item name="saddle horse">"2"</Item>
-<Item name="saddle">"2"</Item>
-<Item name="harness">"2"</Item>
-<Item name="rope">"2"</Item>
+<Item name="RULES-TRAP_116">"2"</Item>
+<Item name="RULES-TRAP_119">"2"</Item>
+<Item name="RULES-TRAP_150">"2"</Item>
 <Item name="road patrol squadron">"3"</Item>
 <Item name="RULES-PROJ_POUDRE_04">"3"</Item>
 <Item name="RULES-MUNI_06">"3"</Item>
 <Item name="RULES-COMB_BASE_07">"3"</Item>
 <Item name="rank symbol">"3"</Item>
-<Item name="light warhorse">"4"</Item>
+<Item name="RULES-TRAP_112">"4"</Item>
 <Item name="RULES-PROJ_POUDRE_04">"4"</Item>
 <Item name="RULES-MUNI_06">"4"</Item>
 <Item name="hat(Q)">"4"</Item>
@@ -11414,25 +11409,26 @@ Trafficking in bodies and body parts is lucrative, with high demand from univers
   <!-- Trapper -->
 </SUBCHAPTER_TALENT>
 <SUBCHAPTER_ITEM>
-<Item name="crowbar">"1"</Item>
+<Item name="RULES-TRAP_056">"1"</Item>
 <Item name="handcart">"1"</Item>
 <Item name="hooded cape">"1"</Item>
-<Item name="canvas tarp">"1"</Item>
-<Item name="backpack">"2"</Item>
+<Item name="RULES-TRAP_128">"1"</Item>
+<Item name="RULES-TRAP_001">"2"</Item>
 <Item name="RULES-COMB_BASE_*">"2"</Item>
-<Item name="shovel">"2"</Item>
-<Item name="storm lamp and oil">"2"</Item>
+<Item name="RULES-TRAP_081">"2"</Item>
+<Item name="RULES-TRAP_142">"2"</Item>
+<Item name="RULES-TRAP_140">"2"</Item>
 <Item name="RULES-COMB_BASE_05">"3"</Item>
 <Item name="horse">"3"</Item>
-<Item name="cart">"3"</Item>
+<Item name="RULES-TRAP_103">"3"</Item>
 <Item name="RULES-ARMO_04">"3"</Item>
-<Item name="rope">"3"</Item>
+<Item name="RULES-TRAP_150">"3"</Item>
 <Item name="tools of the profession (Thief)">"3"</Item>
 <Item name="sleeping bag">"4"</Item>
-<Item name="maps">"4"</Item>
-<Item name="tent">"4"</Item>
+<Item name="RULES-TRAP_099">"4"</Item>
+<Item name="RULES-TRAP_151">"4"</Item>
 <Item name="tools of the profession (Engineer)">"4"</Item>
-<Item name="writing kit">"4"</Item>
+<Item name="RULES-TRAP_087">"4"</Item>
 </SUBCHAPTER_ITEM>
 </Career>
 <Career id="RULES-WORK49">
@@ -11548,9 +11544,9 @@ Priests tend to congregations of the faithful throughout the Old World. While ma
   <!-- Savant (Theology) -->
 </SUBCHAPTER_TALENT>
 <SUBCHAPTER_ITEM>
-<Item name="religious symbol">"1"</Item>
-<Item name="robes">"1"</Item>
-<Item name="book (Religion)">"2"</Item>
+<Item name="RULES-TRAP_028">"1"</Item>
+<Item name="RULES-TRAP_029">"1"</Item>
+<Item name="RULES-TRAP_095">"2"</Item>
 <Item name="ceremonial robes">"2"</Item>
 <Item name="robe(Q)">"3"</Item>
 <Item name="religious relic">"3"</Item>
@@ -11674,15 +11670,14 @@ Some cults of the Empire have clerics trained for war. In the Reikland, the Warr
 </SUBCHAPTER_TALENT>
 <SUBCHAPTER_ITEM>
 <Item name="RULES-COMB_*">"1"</Item>
-<Item name="book (Religion)">"1"</Item>
+<Item name="RULES-TRAP_095">"1"</Item>
 <Item name="leather doublet">"1"</Item>
-<Item name="religious symbol">"1"</Item>
+<Item name="RULES-TRAP_028">"1"</Item>
 <Item name="gowns">"1"</Item>
 <Item name="RULES-COMB_*">"2"</Item>
 <Item name="RULES-ARMO_14">"2"</Item>
-<Item name="light war horse">"3"</Item>
-<Item name="saddle">"3"</Item>
-<Item name="harness">"3"</Item>
+<Item name="RULES-TRAP_112">"3"</Item>
+<Item name="RULES-TRAP_119">"3"</Item>
 <Item name="religious relic">"4"</Item>
 </SUBCHAPTER_ITEM>
 </Career>
@@ -11802,7 +11797,7 @@ Racketeers extort money from law-abiding citizens and merchants, providing ‘pr
 <Item name="RULES-COMB_BAGAR_01">"1"</Item>
 <Item name="RULES-ARMO_04">"1"</Item>
 <Item name="RULES-COMB_BASE_*">"2"</Item>
-<Item name="hat">"2"</Item>
+<Item name="RULES-TRAP_023">"2"</Item>
 <Item name="RULES-ARMO_07">"2"</Item>
 <Item name="RULES-PROJ_ARBPG_01">"3"</Item>
 <Item name="RULES-MUNI_01">"3"</Item>
@@ -11931,9 +11926,9 @@ Rat Catchers patrol every town and city, and for good reason. The Empire’s str
 <Item name="RULES-MUNI_05">"1"</Item>
 <Item name="bag">"1"</Item>
 <Item name="fierce little dog">"1"</Item>
-<Item name="animal trap">"2"</Item>
+<Item name="RULES-TRAP_049">"2"</Item>
 <Item name="pole to catch dead rats">"2"</Item>
-<Item name="darvish lantern">"3"</Item>
+<Item name="RULES-TRAP_132">"3"</Item>
 <Item name="RULES-COMB_BASE_*">"3"</Item>
 <Item name="RULES-ARMO_04">"3"</Item>
 <Item name="helper">"4"</Item>
@@ -12058,7 +12053,7 @@ A Fence buys thieves’ spoils and sells it on for profit, often to those unawar
 <Item name="stolen goods worth 3d10 silver pistols">"1"</Item>
 <Item name="monocle">"2"</Item>
 <Item name="tools of the profession (Engraver)">"2"</Item>
-<Item name="writing kit">"2"</Item>
+<Item name="RULES-TRAP_087">"2"</Item>
 <Item name="pawn shop">"3"</Item>
 <Item name="strong arm">"4"</Item>
 <Item name="network of informants">"4"</Item>
@@ -12183,10 +12178,9 @@ There are few so feared and respected as the Witch Hunter, and they are given ex
 <Item name="RULES-PROJ_ARBPG_01/RULES-PROJ_POUDRE_04">"2"</Item>
 <Item name="leather hat">"2"</Item>
 <Item name="RULES-ARMO_04">"2"</Item>
-<Item name="saddle horse">"2"</Item>
-<Item name="saddle">"2"</Item>
-<Item name="harness">"2"</Item>
-<Item name="rope">"2"</Item>
+<Item name="RULES-TRAP_116">"2"</Item>
+<Item name="RULES-TRAP_119">"2"</Item>
+<Item name="RULES-TRAP_150">"2"</Item>
 <Item name="RULES-COMB_BASE_04">"2"</Item>
 <Item name="clothing(Q)">"3"</Item>
 <Item name="Subordinate Interrogators">"3"</Item>
@@ -12308,14 +12302,14 @@ The most common Entertainers are the perennial crowd-pleasers like jesters, sing
   <!-- Seasoned Traveller -->
 </SUBCHAPTER_TALENT>
 <SUBCHAPTER_ITEM>
-<Item name="bowl">"1"</Item>
-<Item name="instrument">"1"</Item>
+<Item name="RULES-TRAP_148">"1"</Item>
+<Item name="RULES-TRAP_139">"1"</Item>
 <Item name="RULES-PROJ_LANC">"2"</Item>
-<Item name="costume">"2"</Item>
-<Item name="instrument">"2"</Item>
+<Item name="RULES-TRAP_019">"2"</Item>
+<Item name="RULES-TRAP_139">"2"</Item>
 <Item name="choice of texts (that you don’t know how to read yet)">"2"</Item>
 <Item name="trained animal">"3"</Item>
-<Item name="writing kit">"3"</Item>
+<Item name="RULES-TRAP_087">"3"</Item>
 <Item name="draft horse and cart (stage)">"4"</Item>
 <Item name="wardrobe with costumes and accessories">"4"</Item>
 <Item name="troupe of acrobats">"4"</Item>
@@ -12435,11 +12429,11 @@ Experienced Servants can aspire to the role of personal Attendant, or even Stewa
   <!-- Etiquette (Any) -->
 </SUBCHAPTER_TALENT>
 <SUBCHAPTER_ITEM>
-<Item name="floor brush">"1"</Item>
+<Item name="RULES-TRAP_061">"1"</Item>
 <Item name="livery">"2"</Item>
-<Item name="tinder box">"3"</Item>
-<Item name="lamp oil">"3"</Item>
-<Item name="storm lamp">"3"</Item>
+<Item name="RULES-TRAP_152">"3"</Item>
+<Item name="RULES-TRAP_140">"3"</Item>
+<Item name="RULES-TRAP_142">"3"</Item>
 <Item name="delivered (Q)">"3"</Item>
 <Item name="RULES-COMB_BASE_*">"4"</Item>
 <Item name="elegant clothes">"4"</Item>
@@ -12561,17 +12555,16 @@ By the command of Emperor Magnus the Pious after the Great War Against Chaos, al
 <SUBCHAPTER_ITEM>
 <Item name="RULES-COMB_BASE_10">"1"</Item>
 <Item name="RULES-ARMO_05">"1"</Item>
-<Item name="uniform">"1"</Item>
+<Item name="RULES-TRAP_034">"1"</Item>
 <Item name="RULES-COMB_*">"2"</Item>
 <Item name="RULES-ARMO_11">"2"</Item>
 <Item name="RULES-ARMO_14">"2"</Item>
 <Item name="recruit unit (Company)">"3"</Item>
 <Item name="rank symbol">"3"</Item>
 <Item name="letter of appointment">"4"</Item>
-<Item name="light war horse">"4"</Item>
-<Item name="saddle">"4"</Item>
-<Item name="harness">"4"</Item>
-<Item name="map">"4"</Item>
+<Item name="RULES-TRAP_112">"4"</Item>
+<Item name="RULES-TRAP_119">"4"</Item>
+<Item name="RULES-TRAP_099">"4"</Item>
 <Item name="mission orders">"4"</Item>
 <Item name="unit of soldiers">"4"</Item>
 <Item name="uniform (Q)">"4"</Item>
@@ -12695,7 +12688,7 @@ Wizards channel one of the eight ‘Winds of Magic’ only spellcasters perceive
 <Item name="RULES-COMB_HAST_01">"1"</Item>
 <Item name="magic license">"2"</Item>
 <Item name="apprentice">"3"</Item>
-<Item name="light warhorse">"3"</Item>
+<Item name="RULES-TRAP_112">"3"</Item>
 <Item name="magic item">"3"</Item>
 <Item name="apprentice">"4"</Item>
 <Item name="workshop (magic)">"4"</Item>
@@ -12817,7 +12810,7 @@ Witch Hunters use the term ‘Hedge Witch’ for any illegal spellcaster, but th
 <SUBCHAPTER_ITEM>
 <Item name="1d10 lucky charms">"1"</Item>
 <Item name="RULES-COMB_HAST_01">"1"</Item>
-<Item name="backpack">"1"</Item>
+<Item name="RULES-TRAP_001">"1"</Item>
 <Item name="care poultice">"2"</Item>
 <Item name="poison control kit">"2"</Item>
 <Item name="tools of the profession (Herbalist)">"2"</Item>
@@ -12941,14 +12934,14 @@ Any with the rare talent to wield magic must, by law, be trained by wizards of t
 </SUBCHAPTER_TALENT>
 <SUBCHAPTER_ITEM>
 <Item name="candles">"1"</Item>
-<Item name="chalk">"1"</Item>
-<Item name="doll">"1"</Item>
+<Item name="RULES-TRAP_129">"1"</Item>
+<Item name="RULES-TRAP_137">"1"</Item>
 <Item name="pins">"1"</Item>
 <Item name="RULES-COMB_HAST_01">"2"</Item>
 <Item name="bag">"2"</Item>
 <Item name="assortment of herbs">"2"</Item>
 <Item name="tools of the profession (Herbalist)">"2"</Item>
-<Item name="backpack">"3"</Item>
+<Item name="RULES-TRAP_001">"3"</Item>
 <Item name="cape with many pockets">"3"</Item>
 <Item name="lucky charm">"3"</Item>
 <Item name="dresses">"4"</Item>
@@ -13069,13 +13062,12 @@ Protagonists live by their wits and their muscles and are not generally fussy ab
 </SUBCHAPTER_TALENT>
 <SUBCHAPTER_ITEM>
 <Item name="RULES-COMB_BAGAR_01">"1"</Item>
-<Item name="hood/mask">"1"</Item>
+<Item name="RULES-TRAP_024">"1"</Item>
 <Item name="RULES-ARMO_04">"1"</Item>
 <Item name="RULES-COMB_BASE_*">"2"</Item>
 <Item name="RULES-ARMO_07">"2"</Item>
-<Item name="saddle horse">"2"</Item>
-<Item name="saddle">"2"</Item>
-<Item name="harness">"2"</Item>
+<Item name="RULES-TRAP_116">"2"</Item>
+<Item name="RULES-TRAP_119">"2"</Item>
 <Item name="RULES-COMB_BASE_07">"2"</Item>
 <Item name="cape">"3"</Item>
 <Item name="RULES-PROJ_LANC_02">"3"</Item>
@@ -13083,7 +13075,7 @@ Protagonists live by their wits and their muscles and are not generally fussy ab
 <Item name="Poison">"3"</Item>
 <Item name="RULES-PROJ_ARB_01">"4"</Item>
 <Item name="RULES-MUNI_01">"4"</Item>
-<Item name="disguise kit">"4"</Item>
+<Item name="RULES-TRAP_058">"4"</Item>
 </SUBCHAPTER_ITEM>
 </Career>
 <Career id="RULES-WORK62">
@@ -13203,7 +13195,7 @@ Slayers wander the Old World hunting deadly beasts, such as Trolls, Giants, or D
 <Item name="flask of alcohol">"1"</Item>
 <Item name="RULES-COMB_BASE_03">"1"</Item>
 <Item name="shame">"1"</Item>
-<Item name="tattoos">"1"</Item>
+<Item name="RULES-TRAP_033">"1"</Item>
 <Item name="jewel">"2"</Item>
 <Item name="RULES-COMB_2M_02">"2"</Item>
 <Item name="troll head">"2"</Item>
@@ -13327,7 +13319,8 @@ Sigmar’s bountiful Empire provides an abundant harvest of crops, livestock, an
 <SUBCHAPTER_ITEM>
 <Item name="RULES-COMB_BASE_03">"2"</Item>
 <Item name="tools of the profession (identical to the Profession)">"2"</Item>
-<Item name="mule and cart">"3"</Item>
+<Item name="RULES-TRAP_114">"3"</Item>
+<Item name="RULES-TRAP_103">"3"</Item>
 <Item name="village house and workshop">"3"</Item>
 <Item name="respect for the village">"4"</Item>
 </SUBCHAPTER_ITEM>
@@ -13445,15 +13438,15 @@ Thieves steal all manner of wealth and goods from their fellow man. From the low
   <!-- Catfall -->
 </SUBCHAPTER_TALENT>
 <SUBCHAPTER_ITEM>
-<Item name="crowbar">"1"</Item>
+<Item name="RULES-TRAP_056">"1"</Item>
 <Item name="RULES-ARMO_04">"1"</Item>
 <Item name="bag">"1"</Item>
 <Item name="tools of the trade (Thief)">"2"</Item>
-<Item name="rope">"2"</Item>
+<Item name="RULES-TRAP_150">"2"</Item>
 <Item name="RULES-PROJ_ARBPG_01">"3"</Item>
 <Item name="RULES-MUNI_01">"3"</Item>
 <Item name="dark clothing">"4"</Item>
-<Item name="grappling hook">"4"</Item>
+<Item name="RULES-TRAP_138">"4"</Item>
 <Item name="mask/scarves">"4"</Item>
 </SUBCHAPTER_ITEM>
 </Career>
@@ -14735,6 +14728,1087 @@ Armour is generally damaged in one of two ways:
 <Modifier name="RULES-COMPDISC_*">-20</Modifier>
 </BonusMalus>
 </DATA_ARMOR_BONUS>
+<DATA_TRAPPING>
+<Trapping id="RULES-TRAP_001">
+<Description language="ENGLISH">"Backpack"</Description>
+<Availability>"RULES-DISPO_COMMON"</Availability>
+<Price>"4/10"</Price>
+<Encumbrance>"2"</Encumbrance>
+<Carries>"4"</Carries>
+</Trapping>
+<Trapping id="RULES-TRAP_002">
+<Description language="ENGLISH">"Barrel"</Description>
+<Availability>"RULES-DISPO_COMMON"</Availability>
+<Price>"8/-"</Price>
+<Encumbrance>"6"</Encumbrance>
+<Carries>"12"</Carries>
+</Trapping>
+<Trapping id="RULES-TRAP_003">
+<Description language="ENGLISH">"Cask"</Description>
+<Availability>"RULES-DISPO_COMMON"</Availability>
+<Price>"3/-"</Price>
+<Encumbrance>"2"</Encumbrance>
+<Carries>"4"</Carries>
+</Trapping>
+<Trapping id="RULES-TRAP_004">
+<Description language="ENGLISH">"Flask"</Description>
+<Availability>"RULES-DISPO_COMMON"</Availability>
+<Price>"5/-"</Price>
+<Encumbrance>"0"</Encumbrance>
+<Carries>"0"</Carries>
+</Trapping>
+<Trapping id="RULES-TRAP_005">
+<Description language="ENGLISH">"Jug"</Description>
+<Availability>"RULES-DISPO_COMMON"</Availability>
+<Price>"3/2"</Price>
+<Encumbrance>"1"</Encumbrance>
+<Carries>"1"</Carries>
+</Trapping>
+<Trapping id="RULES-TRAP_006">
+<Description language="ENGLISH">"Pewter Stein"</Description>
+<Availability>"RULES-DISPO_COMMON"</Availability>
+<Price>"4/-"</Price>
+<Encumbrance>"0"</Encumbrance>
+<Carries>"0"</Carries>
+</Trapping>
+<Trapping id="RULES-TRAP_007">
+<Description language="ENGLISH">"Pouch"</Description>
+<Availability>"RULES-DISPO_COMMON"</Availability>
+<Price>"4d"</Price>
+<Encumbrance>"0"</Encumbrance>
+<Carries>"1"</Carries>
+</Trapping>
+<Trapping id="RULES-TRAP_008">
+<Description language="ENGLISH">"Sack"</Description>
+<Availability>"RULES-DISPO_COMMON"</Availability>
+<Price>"1/-"</Price>
+<Encumbrance>"2"</Encumbrance>
+<Carries>"4"</Carries>
+</Trapping>
+<Trapping id="RULES-TRAP_009">
+<Description language="ENGLISH">"Sack, Large"</Description>
+<Availability>"RULES-DISPO_COMMON"</Availability>
+<Price>"1/6"</Price>
+<Encumbrance>"3"</Encumbrance>
+<Carries>"6"</Carries>
+</Trapping>
+<Trapping id="RULES-TRAP_010">
+<Description language="ENGLISH">"Saddlebags"</Description>
+<Availability>"RULES-DISPO_COMMON"</Availability>
+<Price>"18/-"</Price>
+<Encumbrance>"4"</Encumbrance>
+<Carries>"8"</Carries>
+</Trapping>
+<Trapping id="RULES-TRAP_011">
+<Description language="ENGLISH">"Sling Bag"</Description>
+<Availability>"RULES-DISPO_COMMON"</Availability>
+<Price>"1/-"</Price>
+<Encumbrance>"1"</Encumbrance>
+<Carries>"2"</Carries>
+</Trapping>
+<Trapping id="RULES-TRAP_012">
+<Description language="ENGLISH">"Scroll Case"</Description>
+<Availability>"RULES-DISPO_LIMITED"</Availability>
+<Price>"16/-"</Price>
+<Encumbrance>"0"</Encumbrance>
+<Carries>"0"</Carries>
+</Trapping>
+<Trapping id="RULES-TRAP_013">
+<Description language="ENGLISH">"Waterskin"</Description>
+<Availability>"RULES-DISPO_COMMON"</Availability>
+<Price>"1/8"</Price>
+<Encumbrance>"1"</Encumbrance>
+<Carries>"1"</Carries>
+</Trapping>
+<Trapping id="RULES-TRAP_014">
+<Description language="ENGLISH">"Amulet"</Description>
+<Availability>"RULES-DISPO_COMMON"</Availability>
+<Price>"2d"</Price>
+<Encumbrance>"0"</Encumbrance>
+</Trapping>
+<Trapping id="RULES-TRAP_015">
+<Description language="ENGLISH">"Boots"</Description>
+<Availability>"RULES-DISPO_COMMON"</Availability>
+<Price>"5/-"</Price>
+<Encumbrance>"1"</Encumbrance>
+</Trapping>
+<Trapping id="RULES-TRAP_016">
+<Description language="ENGLISH">"Cloak"</Description>
+<Availability>"RULES-DISPO_COMMON"</Availability>
+<Price>"10/-"</Price>
+<Encumbrance>"1"</Encumbrance>
+</Trapping>
+<Trapping id="RULES-TRAP_017">
+<Description language="ENGLISH">"Clothing"</Description>
+<Availability>"RULES-DISPO_COMMON"</Availability>
+<Price>"6/-"</Price>
+<Encumbrance>"1"</Encumbrance>
+</Trapping>
+<Trapping id="RULES-TRAP_018">
+<Description language="ENGLISH">"Coat"</Description>
+<Availability>"RULES-DISPO_COMMON"</Availability>
+<Price>"18/-"</Price>
+<Encumbrance>"1"</Encumbrance>
+</Trapping>
+<Trapping id="RULES-TRAP_019">
+<Description language="ENGLISH">"Costume"</Description>
+<Availability>"RULES-DISPO_LIMITED"</Availability>
+<Price>"1CO"</Price>
+<Encumbrance>"1"</Encumbrance>
+</Trapping>
+<Trapping id="RULES-TRAP_020">
+<Description language="ENGLISH">"Courtly Garb"</Description>
+<Availability>"RULES-DISPO_LIMITED"</Availability>
+<Price>"12CO"</Price>
+<Encumbrance>"1"</Encumbrance>
+</Trapping>
+<Trapping id="RULES-TRAP_021">
+<Description language="ENGLISH">"Face Powder"</Description>
+<Availability>"RULES-DISPO_COMMON"</Availability>
+<Price>"10/-"</Price>
+<Encumbrance>"0"</Encumbrance>
+</Trapping>
+<Trapping id="RULES-TRAP_022">
+<Description language="ENGLISH">"Gloves"</Description>
+<Availability>"RULES-DISPO_COMMON"</Availability>
+<Price>"4/-"</Price>
+<Encumbrance>"0"</Encumbrance>
+</Trapping>
+<Trapping id="RULES-TRAP_023">
+<Description language="ENGLISH">"Hat"</Description>
+<Availability>"RULES-DISPO_COMMON"</Availability>
+<Price>"4/-"</Price>
+<Encumbrance>"0"</Encumbrance>
+</Trapping>
+<Trapping id="RULES-TRAP_024">
+<Description language="ENGLISH">"Hood or Mask"</Description>
+<Availability>"RULES-DISPO_COMMON"</Availability>
+<Price>"5/-"</Price>
+<Encumbrance>"0"</Encumbrance>
+</Trapping>
+<Trapping id="RULES-TRAP_025">
+<Description language="ENGLISH">"Jewellery"</Description>
+<Availability>"RULES-DISPO_COMMON"</Availability>
+<Price>"Varies"</Price>
+<Encumbrance>"0"</Encumbrance>
+</Trapping>
+<Trapping id="RULES-TRAP_026">
+<Description language="ENGLISH">"Perfume"</Description>
+<Availability>"RULES-DISPO_COMMON"</Availability>
+<Price>"10/-"</Price>
+<Encumbrance>"0"</Encumbrance>
+</Trapping>
+<Trapping id="RULES-TRAP_027">
+<Description language="ENGLISH">"Pins (6)"</Description>
+<Availability>"RULES-DISPO_LIMITED"</Availability>
+<Price>"10/-"</Price>
+<Encumbrance>"0"</Encumbrance>
+</Trapping>
+<Trapping id="RULES-TRAP_028">
+<Description language="ENGLISH">"Religious Symbol"</Description>
+<Availability>"RULES-DISPO_COMMON"</Availability>
+<Price>"6/8"</Price>
+<Encumbrance>"0"</Encumbrance>
+</Trapping>
+<Trapping id="RULES-TRAP_029">
+<Description language="ENGLISH">"Robes"</Description>
+<Availability>"RULES-DISPO_COMMON"</Availability>
+<Price>"2CO"</Price>
+<Encumbrance>"1"</Encumbrance>
+</Trapping>
+<Trapping id="RULES-TRAP_030">
+<Description language="ENGLISH">"Sceptre"</Description>
+<Availability>"RULES-DISPO_RARE"</Availability>
+<Price>"8CO"</Price>
+<Encumbrance>"1"</Encumbrance>
+</Trapping>
+<Trapping id="RULES-TRAP_031">
+<Description language="ENGLISH">"Shoes"</Description>
+<Availability>"RULES-DISPO_COMMON"</Availability>
+<Price>"5/-"</Price>
+<Encumbrance>"0"</Encumbrance>
+</Trapping>
+<Trapping id="RULES-TRAP_032">
+<Description language="ENGLISH">"Signet Ring"</Description>
+<Availability>"RULES-DISPO_RARE"</Availability>
+<Price>"5CO"</Price>
+<Encumbrance>"0"</Encumbrance>
+</Trapping>
+<Trapping id="RULES-TRAP_033">
+<Description language="ENGLISH">"Tattoo"</Description>
+<Availability>"RULES-DISPO_LIMITED"</Availability>
+<Price>"4/- +"</Price>
+<Encumbrance>"0"</Encumbrance>
+</Trapping>
+<Trapping id="RULES-TRAP_034">
+<Description language="ENGLISH">"Uniform"</Description>
+<Availability>"RULES-DISPO_LIMITED"</Availability>
+<Price>"1CO 2/-"</Price>
+<Encumbrance>"1"</Encumbrance>
+</Trapping>
+<Trapping id="RULES-TRAP_035">
+<Description language="ENGLISH">"Walking Cane"</Description>
+<Availability>"RULES-DISPO_COMMON"</Availability>
+<Price>"3CO"</Price>
+<Encumbrance>"1"</Encumbrance>
+</Trapping>
+<Trapping id="RULES-TRAP_036">
+<Description language="ENGLISH">"Ale, pint"</Description>
+<Availability>"RULES-DISPO_COMMON"</Availability>
+<Price>"3d"</Price>
+<Encumbrance>"0"</Encumbrance>
+</Trapping>
+<Trapping id="RULES-TRAP_037">
+<Description language="ENGLISH">"Ale, keg"</Description>
+<Availability>"RULES-DISPO_COMMON"</Availability>
+<Price>"3/-"</Price>
+<Encumbrance>"2"</Encumbrance>
+</Trapping>
+<Trapping id="RULES-TRAP_038">
+<Description language="ENGLISH">"Bugman's XXXXXX Ale, pint"</Description>
+<Availability>"RULES-DISPO_EXOTIC"</Availability>
+<Price>"9d"</Price>
+<Encumbrance>"0"</Encumbrance>
+</Trapping>
+<Trapping id="RULES-TRAP_039">
+<Description language="ENGLISH">"Food, groceries/day"</Description>
+<Availability>"RULES-DISPO_COMMON"</Availability>
+<Price>"10d"</Price>
+<Encumbrance>"1"</Encumbrance>
+</Trapping>
+<Trapping id="RULES-TRAP_040">
+<Description language="ENGLISH">"Meal, inn"</Description>
+<Availability>"RULES-DISPO_COMMON"</Availability>
+<Price>"1/-"</Price>
+<Encumbrance>"0"</Encumbrance>
+</Trapping>
+<Trapping id="RULES-TRAP_041">
+<Description language="ENGLISH">"Rations, 1 day"</Description>
+<Availability>"RULES-DISPO_COMMON"</Availability>
+<Price>"2/-"</Price>
+<Encumbrance>"0"</Encumbrance>
+</Trapping>
+<Trapping id="RULES-TRAP_042">
+<Description language="ENGLISH">"Room, common/night"</Description>
+<Availability>"RULES-DISPO_COMMON"</Availability>
+<Price>"10d"</Price>
+<Encumbrance>"0"</Encumbrance>
+</Trapping>
+<Trapping id="RULES-TRAP_043">
+<Description language="ENGLISH">"Room, private/night"</Description>
+<Availability>"RULES-DISPO_COMMON"</Availability>
+<Price>"10/-"</Price>
+<Encumbrance>"0"</Encumbrance>
+</Trapping>
+<Trapping id="RULES-TRAP_044">
+<Description language="ENGLISH">"Spirits, pint"</Description>
+<Availability>"RULES-DISPO_COMMON"</Availability>
+<Price>"2/-"</Price>
+<Encumbrance>"0"</Encumbrance>
+</Trapping>
+<Trapping id="RULES-TRAP_045">
+<Description language="ENGLISH">"Stables/night"</Description>
+<Availability>"RULES-DISPO_COMMON"</Availability>
+<Price>"10d"</Price>
+<Encumbrance>"0"</Encumbrance>
+</Trapping>
+<Trapping id="RULES-TRAP_046">
+<Description language="ENGLISH">"Wine, bottle"</Description>
+<Availability>"RULES-DISPO_COMMON"</Availability>
+<Price>"10d"</Price>
+<Encumbrance>"0"</Encumbrance>
+</Trapping>
+<Trapping id="RULES-TRAP_047">
+<Description language="ENGLISH">"Wine &amp; Spirits, drink"</Description>
+<Availability>"RULES-DISPO_COMMON"</Availability>
+<Price>"4d"</Price>
+<Encumbrance>"0"</Encumbrance>
+</Trapping>
+<Trapping id="RULES-TRAP_048">
+<Description language="ENGLISH">"Abacus"</Description>
+<Availability>"RULES-DISPO_LIMITED"</Availability>
+<Price>"3/4"</Price>
+<Encumbrance>"0"</Encumbrance>
+</Trapping>
+<Trapping id="RULES-TRAP_049">
+<Description language="ENGLISH">"Animal Trap"</Description>
+<Availability>"RULES-DISPO_COMMON"</Availability>
+<Price>"2/6"</Price>
+<Encumbrance>"1"</Encumbrance>
+</Trapping>
+<Trapping id="RULES-TRAP_050">
+<Description language="ENGLISH">"Antitoxin Kit"</Description>
+<Availability>"RULES-DISPO_LIMITED"</Availability>
+<Price>"3CO"</Price>
+<Encumbrance>"0"</Encumbrance>
+</Trapping>
+<Trapping id="RULES-TRAP_051">
+<Description language="ENGLISH">"Boat Hook"</Description>
+<Availability>"RULES-DISPO_COMMON"</Availability>
+<Price>"5/-"</Price>
+<Encumbrance>"1"</Encumbrance>
+</Trapping>
+<Trapping id="RULES-TRAP_052">
+<Description language="ENGLISH">"Broom"</Description>
+<Availability>"RULES-DISPO_COMMON"</Availability>
+<Price>"10d"</Price>
+<Encumbrance>"2"</Encumbrance>
+</Trapping>
+<Trapping id="RULES-TRAP_053">
+<Description language="ENGLISH">"Bucket"</Description>
+<Availability>"RULES-DISPO_COMMON"</Availability>
+<Price>"2/6"</Price>
+<Encumbrance>"1"</Encumbrance>
+</Trapping>
+<Trapping id="RULES-TRAP_054">
+<Description language="ENGLISH">"Chisel"</Description>
+<Availability>"RULES-DISPO_COMMON"</Availability>
+<Price>"4/2"</Price>
+<Encumbrance>"0"</Encumbrance>
+</Trapping>
+<Trapping id="RULES-TRAP_055">
+<Description language="ENGLISH">"Comb"</Description>
+<Availability>"RULES-DISPO_COMMON"</Availability>
+<Price>"10d"</Price>
+<Encumbrance>"0"</Encumbrance>
+</Trapping>
+<Trapping id="RULES-TRAP_056">
+<Description language="ENGLISH">"Crowbar"</Description>
+<Availability>"RULES-DISPO_COMMON"</Availability>
+<Price>"2/6"</Price>
+<Encumbrance>"1"</Encumbrance>
+</Trapping>
+<Trapping id="RULES-TRAP_057">
+<Description language="ENGLISH">"Crutch"</Description>
+<Availability>"RULES-DISPO_COMMON"</Availability>
+<Price>"3/-"</Price>
+<Encumbrance>"2"</Encumbrance>
+</Trapping>
+<Trapping id="RULES-TRAP_058">
+<Description language="ENGLISH">"Disguise Kit"</Description>
+<Availability>"RULES-DISPO_LIMITED"</Availability>
+<Price>"6/6"</Price>
+<Encumbrance>"0"</Encumbrance>
+</Trapping>
+<Trapping id="RULES-TRAP_059">
+<Description language="ENGLISH">"Ear Pick"</Description>
+<Availability>"RULES-DISPO_LIMITED"</Availability>
+<Price>"2/-"</Price>
+<Encumbrance>"0"</Encumbrance>
+</Trapping>
+<Trapping id="RULES-TRAP_060">
+<Description language="ENGLISH">"Fish Hooks (12)"</Description>
+<Availability>"RULES-DISPO_COMMON"</Availability>
+<Price>"1/-"</Price>
+<Encumbrance>"0"</Encumbrance>
+</Trapping>
+<Trapping id="RULES-TRAP_061">
+<Description language="ENGLISH">"Floor Brush"</Description>
+<Availability>"RULES-DISPO_COMMON"</Availability>
+<Price>"1/6"</Price>
+<Encumbrance>"0"</Encumbrance>
+</Trapping>
+<Trapping id="RULES-TRAP_062">
+<Description language="ENGLISH">"Gavel"</Description>
+<Availability>"RULES-DISPO_LIMITED"</Availability>
+<Price>"1CO"</Price>
+<Encumbrance>"0"</Encumbrance>
+</Trapping>
+<Trapping id="RULES-TRAP_063">
+<Description language="ENGLISH">"Hammer"</Description>
+<Availability>"RULES-DISPO_COMMON"</Availability>
+<Price>"3/-"</Price>
+<Encumbrance>"0"</Encumbrance>
+</Trapping>
+<Trapping id="RULES-TRAP_064">
+<Description language="ENGLISH">"Hand Mirror"</Description>
+<Availability>"RULES-DISPO_EXOTIC"</Availability>
+<Price>"1CO 1/6"</Price>
+<Encumbrance>"0"</Encumbrance>
+</Trapping>
+<Trapping id="RULES-TRAP_065">
+<Description language="ENGLISH">"Hoe"</Description>
+<Availability>"RULES-DISPO_COMMON"</Availability>
+<Price>"4/-"</Price>
+<Encumbrance>"2"</Encumbrance>
+</Trapping>
+<Trapping id="RULES-TRAP_066">
+<Description language="ENGLISH">"Key"</Description>
+<Availability>"RULES-DISPO_COMMON"</Availability>
+<Price>"1/-"</Price>
+<Encumbrance>"0"</Encumbrance>
+</Trapping>
+<Trapping id="RULES-TRAP_067">
+<Description language="ENGLISH">"Knife"</Description>
+<Availability>"RULES-DISPO_COMMON"</Availability>
+<Price>"8/-"</Price>
+<Encumbrance>"0"</Encumbrance>
+</Trapping>
+<Trapping id="RULES-TRAP_068">
+<Description language="ENGLISH">"Lock Picks"</Description>
+<Availability>"RULES-DISPO_LIMITED"</Availability>
+<Price>"15/-"</Price>
+<Encumbrance>"0"</Encumbrance>
+</Trapping>
+<Trapping id="RULES-TRAP_069">
+<Description language="ENGLISH">"Manacles"</Description>
+<Availability>"RULES-DISPO_LIMITED"</Availability>
+<Price>"18/-"</Price>
+<Encumbrance>"0"</Encumbrance>
+</Trapping>
+<Trapping id="RULES-TRAP_070">
+<Description language="ENGLISH">"Mop"</Description>
+<Availability>"RULES-DISPO_COMMON"</Availability>
+<Price>"1/-"</Price>
+<Encumbrance>"2"</Encumbrance>
+</Trapping>
+<Trapping id="RULES-TRAP_071">
+<Description language="ENGLISH">"Nails (12)"</Description>
+<Availability>"RULES-DISPO_COMMON"</Availability>
+<Price>"2d"</Price>
+<Encumbrance>"0"</Encumbrance>
+</Trapping>
+<Trapping id="RULES-TRAP_072">
+<Description language="ENGLISH">"Paint Brush"</Description>
+<Availability>"RULES-DISPO_COMMON"</Availability>
+<Price>"4/-"</Price>
+<Encumbrance>"0"</Encumbrance>
+</Trapping>
+<Trapping id="RULES-TRAP_073">
+<Description language="ENGLISH">"Pestle &amp; Mortar"</Description>
+<Availability>"RULES-DISPO_COMMON"</Availability>
+<Price>"14/-"</Price>
+<Encumbrance>"0"</Encumbrance>
+</Trapping>
+<Trapping id="RULES-TRAP_074">
+<Description language="ENGLISH">"Pick"</Description>
+<Availability>"RULES-DISPO_LIMITED"</Availability>
+<Price>"18/-"</Price>
+<Encumbrance>"1"</Encumbrance>
+</Trapping>
+<Trapping id="RULES-TRAP_075">
+<Description language="ENGLISH">"Pole (3 yards)"</Description>
+<Availability>"RULES-DISPO_COMMON"</Availability>
+<Price>"8/-"</Price>
+<Encumbrance>"3"</Encumbrance>
+</Trapping>
+<Trapping id="RULES-TRAP_076">
+<Description language="ENGLISH">"Quill Pen"</Description>
+<Availability>"RULES-DISPO_COMMON"</Availability>
+<Price>"3/-"</Price>
+<Encumbrance>"0"</Encumbrance>
+</Trapping>
+<Trapping id="RULES-TRAP_077">
+<Description language="ENGLISH">"Rake"</Description>
+<Availability>"RULES-DISPO_COMMON"</Availability>
+<Price>"4/6"</Price>
+<Encumbrance>"2"</Encumbrance>
+</Trapping>
+<Trapping id="RULES-TRAP_078">
+<Description language="ENGLISH">"Reading Lens"</Description>
+<Availability>"RULES-DISPO_RARE"</Availability>
+<Price>"3CO"</Price>
+<Encumbrance>"0"</Encumbrance>
+</Trapping>
+<Trapping id="RULES-TRAP_079">
+<Description language="ENGLISH">"Saw"</Description>
+<Availability>"RULES-DISPO_COMMON"</Availability>
+<Price>"6/-"</Price>
+<Encumbrance>"1"</Encumbrance>
+</Trapping>
+<Trapping id="RULES-TRAP_080">
+<Description language="ENGLISH">"Sickle"</Description>
+<Availability>"RULES-DISPO_COMMON"</Availability>
+<Price>"1CO"</Price>
+<Encumbrance>"1"</Encumbrance>
+</Trapping>
+<Trapping id="RULES-TRAP_081">
+<Description language="ENGLISH">"Spade"</Description>
+<Availability>"RULES-DISPO_COMMON"</Availability>
+<Price>"8/-"</Price>
+<Encumbrance>"2"</Encumbrance>
+</Trapping>
+<Trapping id="RULES-TRAP_082">
+<Description language="ENGLISH">"Spike"</Description>
+<Availability>"RULES-DISPO_COMMON"</Availability>
+<Price>"1/-"</Price>
+<Encumbrance>"0"</Encumbrance>
+</Trapping>
+<Trapping id="RULES-TRAP_083">
+<Description language="ENGLISH">"Stamp, engraved"</Description>
+<Availability>"RULES-DISPO_LIMITED"</Availability>
+<Price>"5CO"</Price>
+<Encumbrance>"0"</Encumbrance>
+</Trapping>
+<Trapping id="RULES-TRAP_084">
+<Description language="ENGLISH">"Tongs, steel"</Description>
+<Availability>"RULES-DISPO_COMMON"</Availability>
+<Price>"16/-"</Price>
+<Encumbrance>"0"</Encumbrance>
+</Trapping>
+<Trapping id="RULES-TRAP_085">
+<Description language="ENGLISH">"Telescope"</Description>
+<Availability>"RULES-DISPO_RARE"</Availability>
+<Price>"5CO"</Price>
+<Encumbrance>"0"</Encumbrance>
+</Trapping>
+<Trapping id="RULES-TRAP_086">
+<Description language="ENGLISH">"Tweezers"</Description>
+<Availability>"RULES-DISPO_LIMITED"</Availability>
+<Price>"1/-"</Price>
+<Encumbrance>"0"</Encumbrance>
+</Trapping>
+<Trapping id="RULES-TRAP_087">
+<Description language="ENGLISH">"Writing Kit"</Description>
+<Availability>"RULES-DISPO_LIMITED"</Availability>
+<Price>"2CO"</Price>
+<Encumbrance>"0"</Encumbrance>
+</Trapping>
+<Trapping id="RULES-TRAP_088">
+<Description language="ENGLISH">"Book, Apothecary"</Description>
+<Availability>"RULES-DISPO_LIMITED"</Availability>
+<Price>"8CO"</Price>
+<Encumbrance>"1"</Encumbrance>
+</Trapping>
+<Trapping id="RULES-TRAP_089">
+<Description language="ENGLISH">"Book, Art"</Description>
+<Availability>"RULES-DISPO_LIMITED"</Availability>
+<Price>"5CO"</Price>
+<Encumbrance>"1"</Encumbrance>
+</Trapping>
+<Trapping id="RULES-TRAP_090">
+<Description language="ENGLISH">"Book, Cryptography"</Description>
+<Availability>"RULES-DISPO_EXOTIC"</Availability>
+<Price>"8CO"</Price>
+<Encumbrance>"1"</Encumbrance>
+</Trapping>
+<Trapping id="RULES-TRAP_091">
+<Description language="ENGLISH">"Book, Engineer"</Description>
+<Availability>"RULES-DISPO_LIMITED"</Availability>
+<Price>"3CO"</Price>
+<Encumbrance>"1"</Encumbrance>
+</Trapping>
+<Trapping id="RULES-TRAP_092">
+<Description language="ENGLISH">"Book, Law"</Description>
+<Availability>"RULES-DISPO_RARE"</Availability>
+<Price>"15CO"</Price>
+<Encumbrance>"1"</Encumbrance>
+</Trapping>
+<Trapping id="RULES-TRAP_093">
+<Description language="ENGLISH">"Book, Magic"</Description>
+<Availability>"RULES-DISPO_EXOTIC"</Availability>
+<Price>"20CO"</Price>
+<Encumbrance>"1"</Encumbrance>
+</Trapping>
+<Trapping id="RULES-TRAP_094">
+<Description language="ENGLISH">"Book, Medicine"</Description>
+<Availability>"RULES-DISPO_RARE"</Availability>
+<Price>"15CO"</Price>
+<Encumbrance>"1"</Encumbrance>
+</Trapping>
+<Trapping id="RULES-TRAP_095">
+<Description language="ENGLISH">"Book, Religion"</Description>
+<Availability>"RULES-DISPO_COMMON"</Availability>
+<Price>"1CO"</Price>
+<Encumbrance>"1"</Encumbrance>
+</Trapping>
+<Trapping id="RULES-TRAP_096">
+<Description language="ENGLISH">"Guild License"</Description>
+<Availability>"n/a"</Availability>
+<Price>"n/a"</Price>
+<Encumbrance>"0"</Encumbrance>
+</Trapping>
+<Trapping id="RULES-TRAP_097">
+<Description language="ENGLISH">"Leaflet"</Description>
+<Availability>"RULES-DISPO_COMMON"</Availability>
+<Price>"1/-"</Price>
+<Encumbrance>"0"</Encumbrance>
+</Trapping>
+<Trapping id="RULES-TRAP_098">
+<Description language="ENGLISH">"Legal Document"</Description>
+<Availability>"RULES-DISPO_COMMON"</Availability>
+<Price>"3/-"</Price>
+<Encumbrance>"0"</Encumbrance>
+</Trapping>
+<Trapping id="RULES-TRAP_099">
+<Description language="ENGLISH">"Map"</Description>
+<Availability>"RULES-DISPO_LIMITED"</Availability>
+<Price>"3CO"</Price>
+<Encumbrance>"0"</Encumbrance>
+</Trapping>
+<Trapping id="RULES-TRAP_100">
+<Description language="ENGLISH">"Parchment/sheet"</Description>
+<Availability>"RULES-DISPO_COMMON"</Availability>
+<Price>"1/-"</Price>
+<Encumbrance>"0"</Encumbrance>
+</Trapping>
+<Trapping id="RULES-TRAP_101">
+<Description language="ENGLISH">"Trade Tools"</Description>
+<Availability>"RULES-DISPO_RARE"</Availability>
+<Price>"3CO"</Price>
+<Encumbrance>"1"</Encumbrance>
+</Trapping>
+<Trapping id="RULES-TRAP_102">
+<Description language="ENGLISH">"Workshop"</Description>
+<Availability>"RULES-DISPO_EXOTIC"</Availability>
+<Price>"80CO"</Price>
+<Encumbrance>"0"</Encumbrance>
+</Trapping>
+<Trapping id="RULES-TRAP_103">
+<Description language="ENGLISH">"Cart"</Description>
+<Availability>"RULES-DISPO_COMMON"</Availability>
+<Price>"20CO"</Price>
+<Encumbrance>"0"</Encumbrance>
+<Carries>"25"</Carries>
+</Trapping>
+<Trapping id="RULES-TRAP_104">
+<Description language="ENGLISH">"Chicken"</Description>
+<Availability>"RULES-DISPO_COMMON"</Availability>
+<Price>"5d"</Price>
+<Encumbrance>"1"</Encumbrance>
+<Carries>"0"</Carries>
+</Trapping>
+<Trapping id="RULES-TRAP_105">
+<Description language="ENGLISH">"Coach"</Description>
+<Availability>"RULES-DISPO_RARE"</Availability>
+<Price>"150CO"</Price>
+<Encumbrance>"0"</Encumbrance>
+<Carries>"80"</Carries>
+</Trapping>
+<Trapping id="RULES-TRAP_106">
+<Description language="ENGLISH">"Coracle"</Description>
+<Availability>"RULES-DISPO_LIMITED"</Availability>
+<Price>"2CO"</Price>
+<Encumbrance>"6"</Encumbrance>
+<Carries>"10"</Carries>
+</Trapping>
+<Trapping id="RULES-TRAP_107">
+<Description language="ENGLISH">"Destrier"</Description>
+<Availability>"RULES-DISPO_LIMITED"</Availability>
+<Price>"230CO"</Price>
+<Encumbrance>"0"</Encumbrance>
+<Carries>"20"</Carries>
+</Trapping>
+<Trapping id="RULES-TRAP_108">
+<Description language="ENGLISH">"Dog collar and lead"</Description>
+<Availability>"RULES-DISPO_COMMON"</Availability>
+<Price>"1/7"</Price>
+<Encumbrance>"0"</Encumbrance>
+</Trapping>
+<Trapping id="RULES-TRAP_109">
+<Description language="ENGLISH">"Draught Horse"</Description>
+<Availability>"RULES-DISPO_COMMON"</Availability>
+<Price>"4CO"</Price>
+<Encumbrance>"0"</Encumbrance>
+<Carries>"20"</Carries>
+</Trapping>
+<Trapping id="RULES-TRAP_110">
+<Description language="ENGLISH">"Homing Pigeons"</Description>
+<Availability>"RULES-DISPO_LIMITED"</Availability>
+<Price>"3/-"</Price>
+<Encumbrance>"1"</Encumbrance>
+<Carries>"0"</Carries>
+</Trapping>
+<Trapping id="RULES-TRAP_111">
+<Description language="ENGLISH">"Hunting Dog"</Description>
+<Availability>"RULES-DISPO_RARE"</Availability>
+<Price>"2CO"</Price>
+<Encumbrance>"0"</Encumbrance>
+<Carries>"0"</Carries>
+</Trapping>
+<Trapping id="RULES-TRAP_112">
+<Description language="ENGLISH">"Light Warhorse"</Description>
+<Availability>"RULES-DISPO_COMMON"</Availability>
+<Price>"70CO"</Price>
+<Encumbrance>"0"</Encumbrance>
+<Carries>"18"</Carries>
+</Trapping>
+<Trapping id="RULES-TRAP_113">
+<Description language="ENGLISH">"Monkey"</Description>
+<Availability>"RULES-DISPO_RARE"</Availability>
+<Price>"10CO"</Price>
+<Encumbrance>"2"</Encumbrance>
+<Carries>"1"</Carries>
+</Trapping>
+<Trapping id="RULES-TRAP_114">
+<Description language="ENGLISH">"Mule"</Description>
+<Availability>"RULES-DISPO_COMMON"</Availability>
+<Price>"5CO"</Price>
+<Encumbrance>"0"</Encumbrance>
+<Carries>"14"</Carries>
+</Trapping>
+<Trapping id="RULES-TRAP_115">
+<Description language="ENGLISH">"Pony"</Description>
+<Availability>"RULES-DISPO_COMMON"</Availability>
+<Price>"10CO"</Price>
+<Encumbrance>"0"</Encumbrance>
+<Carries>"14"</Carries>
+</Trapping>
+<Trapping id="RULES-TRAP_116">
+<Description language="ENGLISH">"Riding Horse"</Description>
+<Availability>"RULES-DISPO_COMMON"</Availability>
+<Price>"15CO"</Price>
+<Encumbrance>"0"</Encumbrance>
+<Carries>"16"</Carries>
+</Trapping>
+<Trapping id="RULES-TRAP_117">
+<Description language="ENGLISH">"River Barge"</Description>
+<Availability>"RULES-DISPO_RARE"</Availability>
+<Price>"225CO"</Price>
+<Encumbrance>"0"</Encumbrance>
+<Carries>"300"</Carries>
+</Trapping>
+<Trapping id="RULES-TRAP_118">
+<Description language="ENGLISH">"Row Boat"</Description>
+<Availability>"RULES-DISPO_LIMITED"</Availability>
+<Price>"6CO"</Price>
+<Encumbrance>"0"</Encumbrance>
+<Carries>"60"</Carries>
+</Trapping>
+<Trapping id="RULES-TRAP_119">
+<Description language="ENGLISH">"Saddle and Harness"</Description>
+<Availability>"RULES-DISPO_COMMON"</Availability>
+<Price>"6CO"</Price>
+<Encumbrance>"4"</Encumbrance>
+</Trapping>
+<Trapping id="RULES-TRAP_120">
+<Description language="ENGLISH">"Wagon"</Description>
+<Availability>"RULES-DISPO_COMMON"</Availability>
+<Price>"75CO"</Price>
+<Encumbrance>"0"</Encumbrance>
+<Carries>"30"</Carries>
+</Trapping>
+<Trapping id="RULES-TRAP_121">
+<Description language="ENGLISH">"Worms (6)"</Description>
+<Availability>"RULES-DISPO_COMMON"</Availability>
+<Price>"1d"</Price>
+<Encumbrance>"0"</Encumbrance>
+</Trapping>
+<Trapping id="RULES-TRAP_122">
+<Description language="ENGLISH">"Ball"</Description>
+<Availability>"RULES-DISPO_COMMON"</Availability>
+<Price>"5d"</Price>
+<Encumbrance>"0"</Encumbrance>
+</Trapping>
+<Trapping id="RULES-TRAP_123">
+<Description language="ENGLISH">"Bandage"</Description>
+<Availability>"RULES-DISPO_COMMON"</Availability>
+<Price>"4d"</Price>
+<Encumbrance>"0"</Encumbrance>
+</Trapping>
+<Trapping id="RULES-TRAP_124">
+<Description language="ENGLISH">"Baton"</Description>
+<Availability>"RULES-DISPO_COMMON"</Availability>
+<Price>"1/-"</Price>
+<Encumbrance>"0"</Encumbrance>
+</Trapping>
+<Trapping id="RULES-TRAP_125">
+<Description language="ENGLISH">"Bedroll"</Description>
+<Availability>"RULES-DISPO_COMMON"</Availability>
+<Price>"6/-"</Price>
+<Encumbrance>"1"</Encumbrance>
+</Trapping>
+<Trapping id="RULES-TRAP_126">
+<Description language="ENGLISH">"Blanket"</Description>
+<Availability>"RULES-DISPO_COMMON"</Availability>
+<Price>"8d"</Price>
+<Encumbrance>"0"</Encumbrance>
+</Trapping>
+<Trapping id="RULES-TRAP_127">
+<Description language="ENGLISH">"Candle (dozen)"</Description>
+<Availability>"RULES-DISPO_COMMON"</Availability>
+<Price>"1/-"</Price>
+<Encumbrance>"0"</Encumbrance>
+</Trapping>
+<Trapping id="RULES-TRAP_128">
+<Description language="ENGLISH">"Canvas Tarp"</Description>
+<Availability>"RULES-DISPO_COMMON"</Availability>
+<Price>"8/-"</Price>
+<Encumbrance>"1"</Encumbrance>
+</Trapping>
+<Trapping id="RULES-TRAP_129">
+<Description language="ENGLISH">"Chalk"</Description>
+<Availability>"RULES-DISPO_COMMON"</Availability>
+<Price>"10d"</Price>
+<Encumbrance>"0"</Encumbrance>
+</Trapping>
+<Trapping id="RULES-TRAP_130">
+<Description language="ENGLISH">"Charcoal stick"</Description>
+<Availability>"RULES-DISPO_COMMON"</Availability>
+<Price>"10d"</Price>
+<Encumbrance>"0"</Encumbrance>
+</Trapping>
+<Trapping id="RULES-TRAP_131">
+<Description language="ENGLISH">"Cutlery"</Description>
+<Availability>"RULES-DISPO_COMMON"</Availability>
+<Price>"3/6"</Price>
+<Encumbrance>"0"</Encumbrance>
+</Trapping>
+<Trapping id="RULES-TRAP_132">
+<Description language="ENGLISH">"Davrich Lamp"</Description>
+<Availability>"RULES-DISPO_RARE"</Availability>
+<Price>"2CO"</Price>
+<Encumbrance>"1"</Encumbrance>
+</Trapping>
+<Trapping id="RULES-TRAP_133">
+<Description language="ENGLISH">"Deck of Cards"</Description>
+<Availability>"RULES-DISPO_COMMON"</Availability>
+<Price>"1/-"</Price>
+<Encumbrance>"0"</Encumbrance>
+</Trapping>
+<Trapping id="RULES-TRAP_134">
+<Description language="ENGLISH">"Cooking Pot"</Description>
+<Availability>"RULES-DISPO_COMMON"</Availability>
+<Price>"8/-"</Price>
+<Encumbrance>"1"</Encumbrance>
+</Trapping>
+<Trapping id="RULES-TRAP_135">
+<Description language="ENGLISH">"Cup"</Description>
+<Availability>"RULES-DISPO_COMMON"</Availability>
+<Price>"8d"</Price>
+<Encumbrance>"0"</Encumbrance>
+</Trapping>
+<Trapping id="RULES-TRAP_136">
+<Description language="ENGLISH">"Dice"</Description>
+<Availability>"RULES-DISPO_COMMON"</Availability>
+<Price>"10d"</Price>
+<Encumbrance>"0"</Encumbrance>
+</Trapping>
+<Trapping id="RULES-TRAP_137">
+<Description language="ENGLISH">"Doll"</Description>
+<Availability>"RULES-DISPO_COMMON"</Availability>
+<Price>"2/-"</Price>
+<Encumbrance>"0"</Encumbrance>
+</Trapping>
+<Trapping id="RULES-TRAP_138">
+<Description language="ENGLISH">"Grappling Hook"</Description>
+<Availability>"RULES-DISPO_LIMITED"</Availability>
+<Price>"1CO -/10"</Price>
+<Encumbrance>"1"</Encumbrance>
+</Trapping>
+<Trapping id="RULES-TRAP_139">
+<Description language="ENGLISH">"Instrument"</Description>
+<Availability>"RULES-DISPO_RARE"</Availability>
+<Price>"2CO"</Price>
+<Encumbrance>"1"</Encumbrance>
+</Trapping>
+<Trapping id="RULES-TRAP_140">
+<Description language="ENGLISH">"Lamp Oil"</Description>
+<Availability>"RULES-DISPO_COMMON"</Availability>
+<Price>"2/-"</Price>
+<Encumbrance>"0"</Encumbrance>
+</Trapping>
+<Trapping id="RULES-TRAP_141">
+<Description language="ENGLISH">"Lantern"</Description>
+<Availability>"RULES-DISPO_COMMON"</Availability>
+<Price>"12/-"</Price>
+<Encumbrance>"1"</Encumbrance>
+</Trapping>
+<Trapping id="RULES-TRAP_142">
+<Description language="ENGLISH">"Storm Lantern"</Description>
+<Availability>"RULES-DISPO_LIMITED"</Availability>
+<Price>"1CO"</Price>
+<Encumbrance>"1"</Encumbrance>
+</Trapping>
+<Trapping id="RULES-TRAP_143">
+<Description language="ENGLISH">"Match"</Description>
+<Availability>"RULES-DISPO_COMMON"</Availability>
+<Price>"1d"</Price>
+<Encumbrance>"0"</Encumbrance>
+</Trapping>
+<Trapping id="RULES-TRAP_144">
+<Description language="ENGLISH">"Pan"</Description>
+<Availability>"RULES-DISPO_COMMON"</Availability>
+<Price>"7/6"</Price>
+<Encumbrance>"1"</Encumbrance>
+</Trapping>
+<Trapping id="RULES-TRAP_145">
+<Description language="ENGLISH">"Pipe and Tobacco"</Description>
+<Availability>"RULES-DISPO_LIMITED"</Availability>
+<Price>"3/4"</Price>
+<Encumbrance>"0"</Encumbrance>
+</Trapping>
+<Trapping id="RULES-TRAP_146">
+<Description language="ENGLISH">"Placard"</Description>
+<Availability>"RULES-DISPO_COMMON"</Availability>
+<Price>"1/-"</Price>
+<Encumbrance>"2"</Encumbrance>
+</Trapping>
+<Trapping id="RULES-TRAP_147">
+<Description language="ENGLISH">"Plate"</Description>
+<Availability>"RULES-DISPO_COMMON"</Availability>
+<Price>"1/-"</Price>
+<Encumbrance>"0"</Encumbrance>
+</Trapping>
+<Trapping id="RULES-TRAP_148">
+<Description language="ENGLISH">"Bowl"</Description>
+<Availability>"RULES-DISPO_COMMON"</Availability>
+<Price>"1/-"</Price>
+<Encumbrance>"0"</Encumbrance>
+</Trapping>
+<Trapping id="RULES-TRAP_149">
+<Description language="ENGLISH">"Rags"</Description>
+<Availability>"RULES-DISPO_COMMON"</Availability>
+<Price>"1d"</Price>
+<Encumbrance>"0"</Encumbrance>
+</Trapping>
+<Trapping id="RULES-TRAP_150">
+<Description language="ENGLISH">"Rope, 10 yards"</Description>
+<Availability>"RULES-DISPO_COMMON"</Availability>
+<Price>"8/4"</Price>
+<Encumbrance>"1"</Encumbrance>
+</Trapping>
+<Trapping id="RULES-TRAP_151">
+<Description language="ENGLISH">"Tent"</Description>
+<Availability>"RULES-DISPO_LIMITED"</Availability>
+<Price>"12/-"</Price>
+<Encumbrance>"2"</Encumbrance>
+</Trapping>
+<Trapping id="RULES-TRAP_152">
+<Description language="ENGLISH">"Tinderbox"</Description>
+<Availability>"RULES-DISPO_COMMON"</Availability>
+<Price>"4/2"</Price>
+<Encumbrance>"0"</Encumbrance>
+</Trapping>
+<Trapping id="RULES-TRAP_153">
+<Description language="ENGLISH">"Black Lotus"</Description>
+<Availability>"RULES-DISPO_EXOTIC"</Availability>
+<Price>"20CO"</Price>
+<Encumbrance>"0"</Encumbrance>
+</Trapping>
+<Trapping id="RULES-TRAP_154">
+<Description language="ENGLISH">"Heartkill"</Description>
+<Availability>"RULES-DISPO_EXOTIC"</Availability>
+<Price>"40CO"</Price>
+<Encumbrance>"0"</Encumbrance>
+</Trapping>
+<Trapping id="RULES-TRAP_155">
+<Description language="ENGLISH">"Mad Cap Mushrooms"</Description>
+<Availability>"RULES-DISPO_EXOTIC"</Availability>
+<Price>"5CO"</Price>
+<Encumbrance>"0"</Encumbrance>
+</Trapping>
+<Trapping id="RULES-TRAP_156">
+<Description language="ENGLISH">"Mandrake Root"</Description>
+<Availability>"RULES-DISPO_RARE"</Availability>
+<Price>"1CO"</Price>
+<Encumbrance>"0"</Encumbrance>
+</Trapping>
+<Trapping id="RULES-TRAP_157">
+<Description language="ENGLISH">"Moonflower"</Description>
+<Availability>"RULES-DISPO_LIMITED"</Availability>
+<Price>"5CO"</Price>
+<Encumbrance>"0"</Encumbrance>
+</Trapping>
+<Trapping id="RULES-TRAP_158">
+<Description language="ENGLISH">"Ranald's Delight"</Description>
+<Availability>"RULES-DISPO_LIMITED"</Availability>
+<Price>"18/-"</Price>
+<Encumbrance>"0"</Encumbrance>
+</Trapping>
+<Trapping id="RULES-TRAP_159">
+<Description language="ENGLISH">"Spit"</Description>
+<Availability>"RULES-DISPO_RARE"</Availability>
+<Price>"1CO 5/-"</Price>
+<Encumbrance>"0"</Encumbrance>
+</Trapping>
+<Trapping id="RULES-TRAP_160">
+<Description language="ENGLISH">"Weirdroot"</Description>
+<Availability>"RULES-DISPO_RARE"</Availability>
+<Price>"4/-"</Price>
+<Encumbrance>"0"</Encumbrance>
+</Trapping>
+<Trapping id="RULES-TRAP_161">
+<Description language="ENGLISH">"Digestive Tonic"</Description>
+<Availability>"RULES-DISPO_COMMON"</Availability>
+<Price>"3/-"</Price>
+<Encumbrance>"0"</Encumbrance>
+</Trapping>
+<Trapping id="RULES-TRAP_162">
+<Description language="ENGLISH">"Earth Root"</Description>
+<Availability>"RULES-DISPO_LIMITED"</Availability>
+<Price>"5CO"</Price>
+<Encumbrance>"0"</Encumbrance>
+</Trapping>
+<Trapping id="RULES-TRAP_163">
+<Description language="ENGLISH">"Faxtoryll"</Description>
+<Availability>"RULES-DISPO_EXOTIC"</Availability>
+<Price>"15/-"</Price>
+<Encumbrance>"0"</Encumbrance>
+</Trapping>
+<Trapping id="RULES-TRAP_164">
+<Description language="ENGLISH">"Healing Draught"</Description>
+<Availability>"RULES-DISPO_LIMITED"</Availability>
+<Price>"10/-"</Price>
+<Encumbrance>"0"</Encumbrance>
+</Trapping>
+<Trapping id="RULES-TRAP_165">
+<Description language="ENGLISH">"Healing Poultice"</Description>
+<Availability>"RULES-DISPO_COMMON"</Availability>
+<Price>"12/-"</Price>
+<Encumbrance>"0"</Encumbrance>
+</Trapping>
+<Trapping id="RULES-TRAP_166">
+<Description language="ENGLISH">"Nightshade"</Description>
+<Availability>"RULES-DISPO_RARE"</Availability>
+<Price>"3CO"</Price>
+<Encumbrance>"0"</Encumbrance>
+</Trapping>
+<Trapping id="RULES-TRAP_167">
+<Description language="ENGLISH">"Salwort"</Description>
+<Availability>"RULES-DISPO_COMMON"</Availability>
+<Price>"12/-"</Price>
+<Encumbrance>"0"</Encumbrance>
+</Trapping>
+<Trapping id="RULES-TRAP_168">
+<Description language="ENGLISH">"Vitality Draught"</Description>
+<Availability>"RULES-DISPO_LIMITED"</Availability>
+<Price>"18/-"</Price>
+<Encumbrance>"0"</Encumbrance>
+</Trapping>
+<Trapping id="RULES-TRAP_169">
+<Description language="ENGLISH">"Eye Patch"</Description>
+<Availability>"RULES-DISPO_COMMON"</Availability>
+<Price>"6d"</Price>
+<Encumbrance>"0"</Encumbrance>
+</Trapping>
+<Trapping id="RULES-TRAP_170">
+<Description language="ENGLISH">"False Eye"</Description>
+<Availability>"RULES-DISPO_RARE"</Availability>
+<Price>"1CO"</Price>
+<Encumbrance>"0"</Encumbrance>
+</Trapping>
+<Trapping id="RULES-TRAP_171">
+<Description language="ENGLISH">"False Leg"</Description>
+<Availability>"RULES-DISPO_LIMITED"</Availability>
+<Price>"16/-"</Price>
+<Encumbrance>"2"</Encumbrance>
+</Trapping>
+<Trapping id="RULES-TRAP_172">
+<Description language="ENGLISH">"Gilded Nose"</Description>
+<Availability>"RULES-DISPO_LIMITED"</Availability>
+<Price>"18/-"</Price>
+<Encumbrance>"0"</Encumbrance>
+</Trapping>
+<Trapping id="RULES-TRAP_173">
+<Description language="ENGLISH">"Hook"</Description>
+<Availability>"RULES-DISPO_COMMON"</Availability>
+<Price>"3/4"</Price>
+<Encumbrance>"1"</Encumbrance>
+</Trapping>
+<Trapping id="RULES-TRAP_174">
+<Description language="ENGLISH">"Engineering Marvel"</Description>
+<Availability>"RULES-DISPO_EXOTIC"</Availability>
+<Price>"20CO"</Price>
+<Encumbrance>"1"</Encumbrance>
+</Trapping>
+<Trapping id="RULES-TRAP_175">
+<Description language="ENGLISH">"Wooden teeth"</Description>
+<Availability>"RULES-DISPO_RARE"</Availability>
+<Price>"10/-"</Price>
+<Encumbrance>"0"</Encumbrance>
+</Trapping>
+</DATA_TRAPPING>
 <DATA_SPELL>
 <Sort id="RULES-BENED_005">
 <Description language="ENGLISH">"Blessing of Recuperation"</Description>

@@ -4,6 +4,15 @@
 
 =========================================================================
 CORRECTIONS COURTES  (une ligne ou deux chacune)
+[AJOUT LE 19/09/2026] EQUIPEMENTS V4 (BOOK_RULESBOOK.Xml WFRP4) : CATALOGUE DATA_TRAPPING FAIT (175 objets,
+RULES-TRAP_001 a _175), 194 lignes de carriere rattachees sur 582. Reste, a traiter au cas par cas par Nono :
+lignes douteuses (magnifying glass, pen and ink, horse seul, oil lamp, hurricane lamp with oil,
+harness/stagecoach dont le saddle voisin est deja fusionne), variantes "(Q)" (clothes(Q), hat(Q), uniform (Q)...,
+qualite a preserver), "tools of the profession (...)", objets absents du catalogue (rank symbol, sleeping bag,
+leather doublet, cape, handcuffs, livery...). Les non-objets (argent, biens "worth", batiments, reseaux) restent
+en texte comme Hawk Mews en V5. A tester en jeu : chargement V4, "&amp;" (Wine & Spirits, Pestle & Mortar),
+libelle LIMITED affiche "Scarce".
+
 =========================================================================
 [AJOUT LE 19/09/2026] ANCRAGE PROPORTIONNEL : LES AUTRES FENETRES NE L ONT PAS. Fait et valide sur les
 sept fenetres de base de donnees (CONTEXT.md 2.83, unite ancrageproportionnel.pas). A etendre si Nono le
