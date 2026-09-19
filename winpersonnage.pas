@@ -275,6 +275,8 @@ type
   Procedure XmlSauvegarde();
   procedure ButtonAugmentationClick({%H-}Sender: TObject);
   procedure RadioButtonChangerChange({%H-}Sender: TObject);
+  Function CarriereDeSuite(): String;
+  Procedure MarqueNiveauEnCours();
   Procedure ListeNvMetier(Codes: TStringList);
   Procedure ChargeComboNvMetier();
   procedure CheckBoxCalculChange({%H-}Sender: TObject);
@@ -576,7 +578,7 @@ begin
       if ComboBoxNvMetier.Visible and (NvMetierChoisi <> '') then
         NvMetier := NvMetierChoisi
       else
-        NvMetier := MetierEnCours;
+        NvMetier := CarriereDeSuite();
       NvNiveau := IntToStr(StrToInt(MetierNvEnCours)+1);
     end
   else if radiobuttonChanger.Checked and CarriereComplete then
@@ -599,7 +601,7 @@ begin
   // passage au niveau 5 des carrieres qui en ont cinq (le Mage de High Elf Player's Guide).
   // MaxNiveau = 0 signifie carriere inconnue de ListMetierNiveau : on ne bloque pas, le
   // reste de la chaine de controles ci-dessous s'applique quand meme.
-  MaxNiveau        := ChercheMaxMetierNiveau(MetierEnCours);
+  MaxNiveau        := ChercheMaxMetierNiveau(CarriereDeSuite());
 
   // tests
   if radiobuttonsuivant.Checked and (MaxNiveau > 0) and (StrToIntDef(MetierNvEnCours, 0) >= MaxNiveau) then
@@ -1504,6 +1506,51 @@ procedure TWinPersonnages.CalculXpNecessaire(ChangementClasse: Boolean);
 //     prendre. Le filtre par ethnie regle tout seul le cas du Smith-priest of Vaul, que le
 //     livre ouvre aussi aux Elfes Sylvains.
 //
+// Carriere dans laquelle se poursuit la progression au niveau suivant. Ordinairement la
+// carriere en cours. Une variante qui s'arrete avant ce niveau (Max < niveau vise, ex.
+// Guild Engineer, seul niveau 2) rend la main a son PREMIER parent declare : le livre laisse
+// alors revenir a la carriere d'origine ou prendre une autre variante. Max = 0 (carriere
+// inconnue) ou pas de parent : la carriere en cours, comme avant.
+Function TWinPersonnages.CarriereDeSuite(): String;
+  var
+    Liste:      TStringList;
+    NiveauVise: Integer;
+    Max:        Integer;
+  begin
+    Result     := MetierEnCours;
+    NiveauVise := StrToIntDef(MetierNvEnCours, 0) + 1;
+    Max        := ChercheMaxMetierNiveau(MetierEnCours);
+    if (Max = 0) or (Max >= NiveauVise) then
+      Exit;
+    if Trim(ChercheMetier(MetierEnCours).MetierParent) = '' then
+      Exit;
+    Liste := TStringList.Create;
+    try
+      ExtractStrings([SeparateurMulti], [], PChar(ChercheMetier(MetierEnCours).MetierParent), Liste);
+      if Liste.Count > 0 then
+        Result := Trim(Liste[0]);
+    finally
+      Liste.Free;
+    end;
+  end;
+
+// Coche dans TabNiveau la ligne du niveau en cours. Les lignes sont SEQUENTIELLES (voir
+// AfficheImageMetier : niveau - niveau minimum du metier + 1), pas indexees par le numero
+// de niveau : indexer par le numero plantait sur une variante a un seul niveau (Guild
+// Engineer, niveau 2, grille a une ligne) et cochait la mauvaise ligne d'une carriere
+// avancee des le niveau 4 (Smith-priest : lignes 1 a 3 pour les niveaux 3 a 5).
+Procedure TWinPersonnages.MarqueNiveauEnCours();
+  var
+    Ligne: Integer;
+    Ind:   Integer;
+  begin
+    for Ind := 1 to TabNiveau.RowCount - 1 do
+      TabNiveau.Cells[0, Ind] := '';
+    Ligne := StrToIntDef(MetierNvEnCours, 0) - Max(ChercheMinMetierNiveau(MetierEnCours), 1) + 1;
+    if (Ligne >= 1) and (Ligne < TabNiveau.RowCount) then
+      TabNiveau.Cells[0, Ligne] := ConstSelectionne;
+  end;
+
 // Une seule entree = pas de bifurcation. La combo reste alors cachee et le comportement
 // d'origine s'applique mot pour mot.
 //
@@ -1515,6 +1562,7 @@ Procedure TWinPersonnages.ListeNvMetier(Codes: TStringList);
   var
     PMetier:    StructureMetier;
     NiveauVise: Integer;
+    Base:       String;
 
   // Le metier est-il ouvert a l'ethnie du personnage ? Un 'X' compte : il veut dire
   // "eligible hors tirage", ce qui est exactement le cas d'une carriere avancee. Seul
@@ -1541,9 +1589,12 @@ Procedure TWinPersonnages.ListeNvMetier(Codes: TStringList);
     NiveauVise := StrToIntDef(MetierNvEnCours, 0) + 1;
     if NiveauVise < 2 then
       Exit;
-    Codes.Add(MetierEnCours);
+    // Base = la carriere en cours, ou son parent si elle s'arrete avant le niveau vise
+    // (variante a niveau unique : Guild Engineer, Sky Pilot...).
+    Base := CarriereDeSuite();
+    Codes.Add(Base);
     for PMetier in ListMetier do
-      if EstMetierEnfantDe(PMetier.CodeMetier, MetierEnCours) and
+      if EstMetierEnfantDe(PMetier.CodeMetier, Base) and
          (ChercheMinMetierNiveau(PMetier.CodeMetier) = NiveauVise) and
          EthnieAutorise(PMetier.CodeMetier) then
         Codes.Add(PMetier.CodeMetier);
@@ -3628,7 +3679,7 @@ begin
   tabCompetence.SortColRow(true, ColCompLib);
   CalculTotaux();
   NiveauMetierTalentMax();
-  tabNiveau.Cells[0, StrToInt(MetierNvEnCours)] := ConstSelectionne;
+  MarqueNiveauEnCours();
   CalculTableExperience();
   ChargeAugmentation();
   CalculAvancement();
@@ -5617,7 +5668,7 @@ Procedure TWinPersonnages.MajTables();
     tabCompetence.SortColRow(true, ColCompLib);
     CalculTotaux();
     NiveauMetierTalentMax();
-    tabNiveau.Cells[0, StrToInt(MetierNvEnCours)] := ConstSelectionne;
+    MarqueNiveauEnCours();
     CalculAvancement();
     CalculTableExperience();
 

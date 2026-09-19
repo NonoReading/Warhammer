@@ -74,7 +74,7 @@ Procedure CompleteRaceMetierParEspece;
       Existant.Sorted     := True;
       Existant.Duplicates := dupIgnore;
       For PSource in ListRaceMetier do
-        Existant.Add(CodeSansLivre(PSource.CodeRace) + '|' + CodeSansLivre(PSource.CodeMetier));
+        Existant.Add(PSource.CodeRace + '|' + PSource.CodeMetier);
 
       // ---- Phase 1 : développer les entrées qui ciblent une RACE ----
       // DATA_SPECIE_CAREER_DIRECT accepte, comme DATA_CAREER_ROLL, un code de RACE
@@ -93,7 +93,7 @@ Procedure CompleteRaceMetierParEspece;
           For PRaceCible in ListRace do
             if CodeSansLivre(PRaceCible.Espece) = CodeSansLivre(PSource.CodeRace) then
               begin
-                Cle := CodeSansLivre(PRaceCible.CodeRace) + '|' + CodeSansLivre(PSource.CodeMetier);
+                Cle := PRaceCible.CodeRace + '|' + PSource.CodeMetier;
                 if Existant.IndexOf(Cle) < 0 then
                   begin
                     PNouveau          := PSource;
@@ -167,7 +167,7 @@ Procedure CompleteRaceMetierParEspece;
               if CodeSansLivre(PRaceCible.Espece) <> EspeceSource then
                 continue;
 
-              Cle := CodeSansLivre(PRaceCible.CodeRace) + '|' + CodeSansLivre(PSource.CodeMetier);
+              Cle := PRaceCible.CodeRace + '|' + PSource.CodeMetier;
               // garde-fou anti-doublon : ChargerLivre peut être rappelée sans vider les listes
               if Existant.IndexOf(Cle) >= 0 then
                 continue;

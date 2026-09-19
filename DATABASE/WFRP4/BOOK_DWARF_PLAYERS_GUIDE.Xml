@@ -46,6 +46,10 @@
 <Description language="ENGLISH">"Secret Signs (Brotherhood of Grimnir)"</Description>
 <Generique>"RULES-COMPSIGNES_*"</Generique>
 </Skill>
+<Skill id="DWARF-COMPCOMB_ING">
+<Description language="ENGLISH">"Melee (Engineering)"</Description>
+<Generique>"RULES-COMPCOMB_*"</Generique>
+</Skill>
 </DATA_SKILL_SPECIALIZATION>
 <DATA_TALENT_SPECIALIZATION>
 <Talent id="DWARF-T0015_PROT">
@@ -335,6 +339,81 @@ When you gain the Stunned Condition, you can spend a Fortune point to make an im
 <Specie>"RULES-SPECIE_DWARF"</Specie>
 <Career name="DWARF-WORK10">"X"</Career>
   <!-- Runesmith -->
+</Entry>
+<Entry>
+<Specie>"RULES-SPECIE_DWARF"</Specie>
+<Career name="DWARF-WORK11">"X"</Career>
+  <!-- Guild Engineer -->
+</Entry>
+<Entry>
+<Specie>"RULES-SPECIE_DWARF"</Specie>
+<Career name="DWARF-WORK12">"X"</Career>
+  <!-- Sky Pilot -->
+</Entry>
+<Entry>
+<Specie>"RULES-SPECIE_DWARF"</Specie>
+<Career name="DWARF-WORK13">"X"</Career>
+  <!-- Outcast Engineer -->
+</Entry>
+<Entry>
+<Specie>"RULES-SPECIE_DWARF"</Specie>
+<Career name="DWARF-WORK14">"X"</Career>
+  <!-- Reckoner -->
+</Entry>
+<Entry>
+<Specie>"RULES-SPECIE_DWARF"</Specie>
+<Career name="DWARF-WORK15">"X"</Career>
+  <!-- Grudgemaster -->
+</Entry>
+<Entry>
+<Specie>"RULES-SPECIE_DWARF"</Specie>
+<Career name="DWARF-WORK16">"X"</Career>
+  <!-- Stoneshaper -->
+</Entry>
+<Entry>
+<Specie>"RULES-SPECIE_DWARF"</Specie>
+<Career name="DWARF-WORK17">"X"</Career>
+  <!-- Karak Miner -->
+</Entry>
+<Entry>
+<Specie>"RULES-SPECIE_DWARF"</Specie>
+<Career name="DWARF-WORK18">"X"</Career>
+  <!-- Lodefinder -->
+</Entry>
+<Entry>
+<Specie>"RULES-SPECIE_DWARF"</Specie>
+<Career name="DWARF-WORK19">"X"</Career>
+  <!-- Runebearer -->
+</Entry>
+<Entry>
+<Specie>"RULES-SPECIE_DWARF"</Specie>
+<Career name="DWARF-WORK20">"X"</Career>
+  <!-- Brother of Grimnir -->
+</Entry>
+<Entry>
+<Specie>"RULES-SPECIE_DWARF"</Specie>
+<Career name="DWARF-WORK21">"X"</Career>
+  <!-- Doomseeker -->
+</Entry>
+<Entry>
+<Specie>"RULES-SPECIE_DWARF"</Specie>
+<Career name="DWARF-WORK22">"X"</Career>
+  <!-- War-mourner -->
+</Entry>
+<Entry>
+<Specie>"RULES-SPECIE_DWARF"</Specie>
+<Career name="DWARF-WORK23">"X"</Career>
+  <!-- Axefighter -->
+</Entry>
+<Entry>
+<Specie>"RULES-SPECIE_DWARF"</Specie>
+<Career name="DWARF-WORK24">"X"</Career>
+  <!-- Quarreller -->
+</Entry>
+<Entry>
+<Specie>"RULES-SPECIE_DWARF"</Specie>
+<Career name="DWARF-WORK25">"X"</Career>
+  <!-- Thunderer -->
 </Entry>
 </DATA_SPECIE_CAREER_DIRECT>
 <DATA_CAREER>
@@ -1662,6 +1741,847 @@ When you gain the Stunned Condition, you can spend a Fortune point to make an im
 <Item name="RULES-TRAP_102">"3"</Item>
 <Item name="Beardling Apprentice">"3"</Item>
 <Item name="Master Runic Wargear">"4"</Item>
+</SUBCHAPTER_ITEM>
+</Career>
+<Career id="DWARF-WORK11">
+<Description language="ENGLISH">"Guild Engineer"</Description>
+<Explanation language="ENGLISH">"Guild Engineers train not just to assemble war machines but to accompany them into battle, and supervise the industry of the Karaks between campaigns. Alternate 2nd level of Engineer or Artillerist."</Explanation>
+<Skill>"RULES-COMPSAVOIR_ING"</Skill>
+<Class>"RULES-CLASS_ACAD"</Class>
+<Parent>"RULES-WORK31/UPINA-WORK69"</Parent>
+  <!-- VARIANTE p.54-61 : remplace le niveau 2 de la carriere parente, on y arrive au passage de niveau (CONTEXT.md 2.24). Un seul <Level> : la suite de la progression revient au parent (CarriereDeSuite). -->
+<SUBCHAPTER_LEVEL>
+<Level id="2">
+<Description language="ENGLISH">"Guild Engineer"</Description>
+<Salary>"TIERS_SILVER 3"</Salary>
+</Level>
+</SUBCHAPTER_LEVEL>
+<SUBCHAPTER_ATTR>
+<Attribut name="RULES-ATTR_WS">"0"</Attribut>
+<Attribut name="RULES-ATTR_BS">"1"</Attribut>
+<Attribut name="RULES-ATTR_S">"0"</Attribut>
+<Attribut name="RULES-ATTR_T">"3"</Attribut>
+<Attribut name="RULES-ATTR_I">"2"</Attribut>
+<Attribut name="RULES-ATTR_Ag">"0"</Attribut>
+<Attribut name="RULES-ATTR_Dex">"1"</Attribut>
+<Attribut name="RULES-ATTR_Int">"1"</Attribut>
+<Attribut name="RULES-ATTR_WP">"4"</Attribut>
+<Attribut name="RULES-ATTR_Fel">"0"</Attribut>
+</SUBCHAPTER_ATTR>
+<SUBCHAPTER_SKILL>
+<Skill name="RULES-COMPESQU">"2"</Skill>
+  <!-- Dodge -->
+<Skill name="RULES-COMPCOND">"2"</Skill>
+  <!-- Drive -->
+<Skill name="RULES-COMPCOMB_*">"2"</Skill>
+  <!-- Melee (Any One) -->
+<Skill name="RULES-COMPPROJ_*">"2"</Skill>
+  <!-- Ranged (Any One) -->
+<Skill name="RULES-COMPRECH">"2"</Skill>
+  <!-- Research -->
+<Skill name="RULES-COMPMETIER_*">"2"</Skill>
+  <!-- Trade (Any One) -->
+</SUBCHAPTER_SKILL>
+<SUBCHAPTER_TALENT>
+<Talent name="RULES-T0092_INGE">"2"</Talent>
+  <!-- Craftsman (Engineer) -->
+<Talent name="UPINA-T0173">"2"</Talent>
+  <!-- Crew Commander -->
+<Talent name="DWARF-T0005">"2"</Talent>
+  <!-- Entrenchment -->
+<Talent name="RULES-T0140">"2"</Talent>
+  <!-- Orientation -->
+</SUBCHAPTER_TALENT>
+<SUBCHAPTER_ITEM>
+<Item name="Trade Tools (Engineer)">"2"</Item>
+<Item name="DWARF-COMB_BASE_02/DWARF-COMB_2M_02">"2"</Item>
+  <!-- Dwarf Hammer or Dwarf Greathammer -->
+<Item name="DWARF-PROJ_POUDRE_01/DWARF-PROJ_POUDRE_02">"2"</Item>
+  <!-- Dwarf Handgun or Dwarf Pistol -->
+<Item name="Gromril Suit">"2"</Item>
+<Item name="RULES-TRAP_085">"2"</Item>
+  <!-- Telescope -->
+</SUBCHAPTER_ITEM>
+</Career>
+<Career id="DWARF-WORK12">
+<Description language="ENGLISH">"Sky Pilot"</Description>
+<Explanation language="ENGLISH">"Gyrocopters and other skycraft are still distrusted by the Guild&apos;s elders, but many of the most daring Engineers are experts at maintaining and piloting them. Alternate 3rd level of Engineer, advancing Agility in place of Toughness."</Explanation>
+<Skill>"RULES-COMPSAVOIR_ING"</Skill>
+<Class>"RULES-CLASS_ACAD"</Class>
+<Parent>"RULES-WORK31"</Parent>
+  <!-- VARIANTE p.54-61 : remplace le niveau 3 de la carriere parente, on y arrive au passage de niveau (CONTEXT.md 2.24). Un seul <Level> : la suite de la progression revient au parent (CarriereDeSuite). -->
+<SUBCHAPTER_LEVEL>
+<Level id="3">
+<Description language="ENGLISH">"Sky Pilot"</Description>
+<Salary>"TIERS_SILVER 3"</Salary>
+</Level>
+</SUBCHAPTER_LEVEL>
+<SUBCHAPTER_ATTR>
+<Attribut name="RULES-ATTR_WS">"0"</Attribut>
+<Attribut name="RULES-ATTR_BS">"1"</Attribut>
+<Attribut name="RULES-ATTR_S">"0"</Attribut>
+<Attribut name="RULES-ATTR_T">"0"</Attribut>
+<Attribut name="RULES-ATTR_I">"2"</Attribut>
+<Attribut name="RULES-ATTR_Ag">"3"</Attribut>
+<Attribut name="RULES-ATTR_Dex">"1"</Attribut>
+<Attribut name="RULES-ATTR_Int">"1"</Attribut>
+<Attribut name="RULES-ATTR_WP">"4"</Attribut>
+<Attribut name="RULES-ATTR_Fel">"0"</Attribut>
+</SUBCHAPTER_ATTR>
+<SUBCHAPTER_SKILL>
+<Skill name="RULES-COMPCHARM">"3"</Skill>
+  <!-- Charm -->
+<Skill name="RULES-COMPORIENT">"3"</Skill>
+  <!-- Navigation -->
+<Skill name="RULES-COMPSURVEXT">"3"</Skill>
+  <!-- Outdoor Survival -->
+<Skill name="RULES-COMPVOILE">"3"</Skill>
+  <!-- Sail (Skycraft) -->
+</SUBCHAPTER_SKILL>
+<SUBCHAPTER_TALENT>
+<Talent name="RULES-T0139_VUE">"3"</Talent>
+  <!-- Acute Sense (Sight) -->
+<Talent name="DWARF-T0014">"3"</Talent>
+  <!-- Maverick -->
+<Talent name="RULES-T0168">"3"</Talent>
+  <!-- Seasoned Traveller -->
+<Talent name="DWARF-T0016">"3"</Talent>
+  <!-- Short Fuse -->
+</SUBCHAPTER_TALENT>
+<SUBCHAPTER_ITEM>
+<Item name="Pilot&apos;s Licence">"3"</Item>
+<Item name="DWARF-PROJ_POUDRE_02">"3"</Item>
+  <!-- Dwarf Pistol -->
+<Item name="RULES-TRAP_085">"3"</Item>
+  <!-- Telescope -->
+</SUBCHAPTER_ITEM>
+</Career>
+<Career id="DWARF-WORK13">
+<Description language="ENGLISH">"Outcast Engineer"</Description>
+<Explanation language="ENGLISH">"Those who challenge the Engineers Guild&apos;s hidebound conservatism are fated to undergo an elaborate exiling ritual, yet many still practise their calling independently. Alternate 3rd level of Engineer or Artillerist, advancing Fellowship in place of Toughness."</Explanation>
+<Skill>"RULES-COMPSAVOIR_ING"</Skill>
+<Class>"RULES-CLASS_ACAD"</Class>
+<Parent>"RULES-WORK31/UPINA-WORK69"</Parent>
+  <!-- VARIANTE p.54-61 : remplace le niveau 3 de la carriere parente, on y arrive au passage de niveau (CONTEXT.md 2.24). Un seul <Level> : la suite de la progression revient au parent (CarriereDeSuite). -->
+<SUBCHAPTER_LEVEL>
+<Level id="3">
+<Description language="ENGLISH">"Outcast Engineer"</Description>
+<Salary>"TIERS_SILVER 3"</Salary>
+</Level>
+</SUBCHAPTER_LEVEL>
+<SUBCHAPTER_ATTR>
+<Attribut name="RULES-ATTR_WS">"0"</Attribut>
+<Attribut name="RULES-ATTR_BS">"1"</Attribut>
+<Attribut name="RULES-ATTR_S">"0"</Attribut>
+<Attribut name="RULES-ATTR_T">"0"</Attribut>
+<Attribut name="RULES-ATTR_I">"2"</Attribut>
+<Attribut name="RULES-ATTR_Ag">"0"</Attribut>
+<Attribut name="RULES-ATTR_Dex">"1"</Attribut>
+<Attribut name="RULES-ATTR_Int">"1"</Attribut>
+<Attribut name="RULES-ATTR_WP">"4"</Attribut>
+<Attribut name="RULES-ATTR_Fel">"3"</Attribut>
+</SUBCHAPTER_ATTR>
+<SUBCHAPTER_SKILL>
+<Skill name="RULES-COMPSUBOR">"3"</Skill>
+  <!-- Bribery -->
+<Skill name="RULES-COMPDIVERT_*">"3"</Skill>
+  <!-- Entertain (Any One) -->
+<Skill name="RULES-COMPPARI">"3"</Skill>
+  <!-- Gamble -->
+<Skill name="RULES-COMPMETIER_*">"3"</Skill>
+  <!-- Trade (Any One) -->
+</SUBCHAPTER_SKILL>
+<SUBCHAPTER_TALENT>
+<Talent name="RULES-T0051">"3"</Talent>
+  <!-- Argumentative -->
+<Talent name="DWARF-T0004">"3"</Talent>
+  <!-- Dragon Belcher -->
+<Talent name="RULES-T0157_INGE">"3"</Talent>
+  <!-- Master Tradesman (Engineer) -->
+<Talent name="RULES-T0154">"3"</Talent>
+  <!-- Sniper -->
+</SUBCHAPTER_TALENT>
+<SUBCHAPTER_ITEM>
+<Item name="DWARF-COMB_BASE_01/DWARF-COMB_2M_01">"3"</Item>
+  <!-- Dwarf Axe or Dwarf Greataxe -->
+<Item name="DWARF-PROJ_ING_04">"3"</Item>
+  <!-- Repeating Dwarf Handgun -->
+<Item name="Mark of Shame">"3"</Item>
+</SUBCHAPTER_ITEM>
+</Career>
+<Career id="DWARF-WORK14">
+<Description language="ENGLISH">"Reckoner"</Description>
+<Explanation language="ENGLISH">"Reckoners are intermediaries who carry records of outstanding grudges between clans and holds, negotiating settlements on their clients&apos; behalf. Alternate 2nd level of Lawyer."</Explanation>
+<Skill>"RULES-COMPSAVOIR_LOI"</Skill>
+<Class>"RULES-CLASS_ACAD"</Class>
+<Parent>"RULES-WORK33"</Parent>
+  <!-- VARIANTE p.54-61 : remplace le niveau 2 de la carriere parente, on y arrive au passage de niveau (CONTEXT.md 2.24). Un seul <Level> : la suite de la progression revient au parent (CarriereDeSuite). -->
+<SUBCHAPTER_LEVEL>
+<Level id="2">
+<Description language="ENGLISH">"Reckoner"</Description>
+<Salary>"TIERS_SILVER 4"</Salary>
+</Level>
+</SUBCHAPTER_LEVEL>
+<SUBCHAPTER_ATTR>
+<Attribut name="RULES-ATTR_WS">"0"</Attribut>
+<Attribut name="RULES-ATTR_BS">"0"</Attribut>
+<Attribut name="RULES-ATTR_S">"0"</Attribut>
+<Attribut name="RULES-ATTR_T">"4"</Attribut>
+<Attribut name="RULES-ATTR_I">"1"</Attribut>
+<Attribut name="RULES-ATTR_Ag">"0"</Attribut>
+<Attribut name="RULES-ATTR_Dex">"1"</Attribut>
+<Attribut name="RULES-ATTR_Int">"1"</Attribut>
+<Attribut name="RULES-ATTR_WP">"3"</Attribut>
+<Attribut name="RULES-ATTR_Fel">"2"</Attribut>
+</SUBCHAPTER_ATTR>
+<SUBCHAPTER_SKILL>
+<Skill name="RULES-COMPATHL">"2"</Skill>
+  <!-- Athletics -->
+<Skill name="RULES-COMPEVAL">"2"</Skill>
+  <!-- Evaluate -->
+<Skill name="RULES-COMPINTIM">"2"</Skill>
+  <!-- Intimidate -->
+<Skill name="RULES-COMPSAVOIR_HERAL/RULES-COMPSAVOIR_HIST">"2"</Skill>
+  <!-- Lore (Heraldry or History) -->
+<Skill name="RULES-COMPORIENT">"2"</Skill>
+  <!-- Navigation -->
+<Skill name="RULES-COMPDISC_SOUTER">"2"</Skill>
+  <!-- Stealth (Underground) -->
+</SUBCHAPTER_SKILL>
+<SUBCHAPTER_TALENT>
+<Talent name="RULES-T0102">"2"</Talent>
+  <!-- Dealmaker -->
+<Talent name="RULES-T0098">"2"</Talent>
+  <!-- Menacing -->
+<Talent name="RULES-T0035">"2"</Talent>
+  <!-- Sturdy -->
+<Talent name="DWARF-T0017">"2"</Talent>
+  <!-- Tireless -->
+</SUBCHAPTER_TALENT>
+<SUBCHAPTER_ITEM>
+<Item name="DWARF-TRAP_05">"2"</Item>
+  <!-- Reckoner&apos;s Log -->
+<Item name="1d10 Shattered Tablets">"2"</Item>
+<Item name="Runescribing Kit">"2"</Item>
+<Item name="DWARF-COMB_BASE_01/DWARF-COMB_BASE_02">"2"</Item>
+  <!-- Dwarf Axe or Dwarf Hammer -->
+<Item name="RULES-ARMO_14">"2"</Item>
+<Item name="DWARF-ARMO_06">"2"</Item>
+<Item name="RULES-ARMO_12">"2"</Item>
+</SUBCHAPTER_ITEM>
+</Career>
+<Career id="DWARF-WORK15">
+<Description language="ENGLISH">"Grudgemaster"</Description>
+<Explanation language="ENGLISH">"Grudgemasters are the ultimate authorities on grudges and proportionate restitution, dictating the wording of grudges for their Kings to inscribe. Alternate 3rd level of Lawyer."</Explanation>
+<Skill>"RULES-COMPSAVOIR_LOI"</Skill>
+<Class>"RULES-CLASS_ACAD"</Class>
+<Parent>"RULES-WORK33"</Parent>
+  <!-- VARIANTE p.54-61 : remplace le niveau 3 de la carriere parente, on y arrive au passage de niveau (CONTEXT.md 2.24). Un seul <Level> : la suite de la progression revient au parent (CarriereDeSuite). -->
+<SUBCHAPTER_LEVEL>
+<Level id="3">
+<Description language="ENGLISH">"Grudgemaster"</Description>
+<Salary>"TIERS_GOLD 1"</Salary>
+</Level>
+</SUBCHAPTER_LEVEL>
+<SUBCHAPTER_ATTR>
+<Attribut name="RULES-ATTR_WS">"0"</Attribut>
+<Attribut name="RULES-ATTR_BS">"0"</Attribut>
+<Attribut name="RULES-ATTR_S">"0"</Attribut>
+<Attribut name="RULES-ATTR_T">"4"</Attribut>
+<Attribut name="RULES-ATTR_I">"1"</Attribut>
+<Attribut name="RULES-ATTR_Ag">"0"</Attribut>
+<Attribut name="RULES-ATTR_Dex">"1"</Attribut>
+<Attribut name="RULES-ATTR_Int">"1"</Attribut>
+<Attribut name="RULES-ATTR_WP">"3"</Attribut>
+<Attribut name="RULES-ATTR_Fel">"2"</Attribut>
+</SUBCHAPTER_ATTR>
+<SUBCHAPTER_SKILL>
+<Skill name="RULES-COMPINTUI">"3"</Skill>
+  <!-- Intuition -->
+<Skill name="RULES-COMPLANG_*">"3"</Skill>
+  <!-- Language (Any One) -->
+<Skill name="RULES-COMPSAVOIR_*">"3"</Skill>
+  <!-- Lore (Any One) -->
+<Skill name="RULES-COMPSIGNES_GUILD">"3"</Skill>
+  <!-- Secret Signs (Guilder) -->
+</SUBCHAPTER_SKILL>
+<SUBCHAPTER_TALENT>
+<Talent name="DWARF-T0001">"3"</Talent>
+  <!-- Ancestral Grudge -->
+<Talent name="RULES-T0146">"3"</Talent>
+  <!-- Bookish -->
+<Talent name="DWARF-T0011">"3"</Talent>
+  <!-- Long Memory -->
+<Talent name="RULES-T0034">"3"</Talent>
+  <!-- Supportive -->
+</SUBCHAPTER_TALENT>
+<SUBCHAPTER_ITEM>
+<Item name="Research Archive">"3"</Item>
+<Item name="Beardling Apprentice">"3"</Item>
+<Item name="Key to the Hall of Remembering">"3"</Item>
+</SUBCHAPTER_ITEM>
+</Career>
+<Career id="DWARF-WORK16">
+<Description language="ENGLISH">"Stoneshaper"</Description>
+<Explanation language="ENGLISH">"Stoneshapers are a combination of mason, architect and combat engineer, specialising in stone fortifications and famed for anticipating rockfalls. Alternate 2nd level of Artisan, advancing Initiative in place of Fellowship."</Explanation>
+<Skill>"RULES-COMPMETIER_*"</Skill>
+<Class>"RULES-CLASS_BURG"</Class>
+<Parent>"RULES-WORK03"</Parent>
+  <!-- VARIANTE p.54-61 : remplace le niveau 2 de la carriere parente, on y arrive au passage de niveau (CONTEXT.md 2.24). Un seul <Level> : la suite de la progression revient au parent (CarriereDeSuite). -->
+<SUBCHAPTER_LEVEL>
+<Level id="2">
+<Description language="ENGLISH">"Stoneshaper"</Description>
+<Salary>"TIERS_SILVER 1"</Salary>
+</Level>
+</SUBCHAPTER_LEVEL>
+<SUBCHAPTER_ATTR>
+<Attribut name="RULES-ATTR_WS">"0"</Attribut>
+<Attribut name="RULES-ATTR_BS">"0"</Attribut>
+<Attribut name="RULES-ATTR_S">"1"</Attribut>
+<Attribut name="RULES-ATTR_T">"1"</Attribut>
+<Attribut name="RULES-ATTR_I">"2"</Attribut>
+<Attribut name="RULES-ATTR_Ag">"0"</Attribut>
+<Attribut name="RULES-ATTR_Dex">"1"</Attribut>
+<Attribut name="RULES-ATTR_Int">"4"</Attribut>
+<Attribut name="RULES-ATTR_WP">"3"</Attribut>
+<Attribut name="RULES-ATTR_Fel">"0"</Attribut>
+</SUBCHAPTER_ATTR>
+<SUBCHAPTER_SKILL>
+<Skill name="RULES-COMPESCAL">"2"</Skill>
+  <!-- Climb -->
+<Skill name="RULES-COMPLANG_GUILD">"2"</Skill>
+  <!-- Language (Guilder) -->
+<Skill name="RULES-COMPSAVOIR_GEOL">"2"</Skill>
+  <!-- Lore (Geology) -->
+<Skill name="RULES-COMPORIENT">"2"</Skill>
+  <!-- Navigation -->
+<Skill name="RULES-COMPPIEG">"2"</Skill>
+  <!-- Set Trap -->
+<Skill name="RULES-COMPDISC_SOUTER">"2"</Skill>
+  <!-- Stealth (Underground) -->
+</SUBCHAPTER_SKILL>
+<SUBCHAPTER_TALENT>
+<Talent name="RULES-T0027">"2"</Talent>
+  <!-- Enclosed Fighter -->
+<Talent name="DWARF-T0005">"2"</Talent>
+  <!-- Entrenchment -->
+<Talent name="RULES-T0141">"2"</Talent>
+  <!-- Sixth Sense -->
+<Talent name="DWARF-T0017">"2"</Talent>
+  <!-- Tireless -->
+</SUBCHAPTER_TALENT>
+<SUBCHAPTER_ITEM>
+<Item name="Trade Tools (Mason)">"2"</Item>
+<Item name="DWARF-COMB_BASE_02">"2"</Item>
+  <!-- Dwarf Warhammer -->
+</SUBCHAPTER_ITEM>
+</Career>
+<Career id="DWARF-WORK17">
+<Description language="ENGLISH">"Karak Miner"</Description>
+<Explanation language="ENGLISH">"When called to war, the warriors of the Miner&apos;s Guild fight as they work, wielding picks and travelling underground to undermine and outmanoeuvre their enemies. Alternate 2nd level of Miner."</Explanation>
+<Skill>"RULES-COMPCOMB_2M"</Skill>
+<Class>"RULES-CLASS_PEAS"</Class>
+<Parent>"RULES-WORK40"</Parent>
+  <!-- VARIANTE p.54-61 : remplace le niveau 2 de la carriere parente, on y arrive au passage de niveau (CONTEXT.md 2.24). Un seul <Level> : la suite de la progression revient au parent (CarriereDeSuite). -->
+<SUBCHAPTER_LEVEL>
+<Level id="2">
+<Description language="ENGLISH">"Karak Miner"</Description>
+<Salary>"TIERS_SILVER 1"</Salary>
+</Level>
+</SUBCHAPTER_LEVEL>
+<SUBCHAPTER_ATTR>
+<Attribut name="RULES-ATTR_WS">"2"</Attribut>
+<Attribut name="RULES-ATTR_BS">"0"</Attribut>
+<Attribut name="RULES-ATTR_S">"1"</Attribut>
+<Attribut name="RULES-ATTR_T">"1"</Attribut>
+<Attribut name="RULES-ATTR_I">"3"</Attribut>
+<Attribut name="RULES-ATTR_Ag">"0"</Attribut>
+<Attribut name="RULES-ATTR_Dex">"0"</Attribut>
+<Attribut name="RULES-ATTR_Int">"0"</Attribut>
+<Attribut name="RULES-ATTR_WP">"1"</Attribut>
+<Attribut name="RULES-ATTR_Fel">"4"</Attribut>
+</SUBCHAPTER_ATTR>
+<SUBCHAPTER_SKILL>
+<Skill name="RULES-COMPESCAL">"2"</Skill>
+  <!-- Climb -->
+<Skill name="RULES-COMPDIVERT_CHANT">"2"</Skill>
+  <!-- Entertain (Singing) -->
+<Skill name="RULES-COMPEVAL">"2"</Skill>
+  <!-- Evaluate -->
+<Skill name="RULES-COMPPROJ_EXPLO">"2"</Skill>
+  <!-- Ranged (Explosives) -->
+<Skill name="RULES-COMPSIGNES_MINE">"2"</Skill>
+  <!-- Secret Signs (Miner) -->
+<Skill name="RULES-COMPDISC_SOUTER">"2"</Skill>
+  <!-- Stealth (Underground) -->
+</SUBCHAPTER_SKILL>
+<SUBCHAPTER_TALENT>
+<Talent name="RULES-T0027">"2"</Talent>
+  <!-- Enclosed Fighter -->
+<Talent name="RULES-T0164">"2"</Talent>
+  <!-- Night Vision -->
+<Talent name="RULES-T0013_ROC">"2"</Talent>
+  <!-- Strider (Rocky) -->
+<Talent name="DWARF-T0018">"2"</Talent>
+  <!-- Underminer -->
+</SUBCHAPTER_TALENT>
+<SUBCHAPTER_ITEM>
+<Item name="DWARF-COMB_2M_03">"2"</Item>
+  <!-- Dwarf Pick -->
+<Item name="DWARF-ARMO_07">"2"</Item>
+  <!-- Miner&apos;s Helm -->
+<Item name="RULES-TRAP_132">"2"</Item>
+  <!-- Davrich Lamp -->
+<Item name="RULES-TRAP_127">"2"</Item>
+  <!-- Candle -->
+<Item name="RULES-TRAP_140">"2"</Item>
+  <!-- Lamp Oil -->
+<Item name="RULES-ARMO_14">"2"</Item>
+  <!-- Breastplate -->
+<Item name="DWARF-ARMO_06">"2"</Item>
+  <!-- Mail Skirt -->
+</SUBCHAPTER_ITEM>
+</Career>
+<Career id="DWARF-WORK18">
+<Description language="ENGLISH">"Lodefinder"</Description>
+<Explanation language="ENGLISH">"The elite of the mining clans, Lodefinders sniff out valuable deposits and are trusted to drive or operate advanced mining engineering equipment. Alternate 3rd level of Miner."</Explanation>
+<Skill>"RULES-COMPCOMB_2M"</Skill>
+<Class>"RULES-CLASS_PEAS"</Class>
+<Parent>"RULES-WORK40"</Parent>
+  <!-- VARIANTE p.54-61 : remplace le niveau 3 de la carriere parente, on y arrive au passage de niveau (CONTEXT.md 2.24). Un seul <Level> : la suite de la progression revient au parent (CarriereDeSuite). -->
+<SUBCHAPTER_LEVEL>
+<Level id="3">
+<Description language="ENGLISH">"Lodefinder"</Description>
+<Salary>"TIERS_SILVER 2"</Salary>
+</Level>
+</SUBCHAPTER_LEVEL>
+<SUBCHAPTER_ATTR>
+<Attribut name="RULES-ATTR_WS">"2"</Attribut>
+<Attribut name="RULES-ATTR_BS">"0"</Attribut>
+<Attribut name="RULES-ATTR_S">"1"</Attribut>
+<Attribut name="RULES-ATTR_T">"1"</Attribut>
+<Attribut name="RULES-ATTR_I">"3"</Attribut>
+<Attribut name="RULES-ATTR_Ag">"0"</Attribut>
+<Attribut name="RULES-ATTR_Dex">"0"</Attribut>
+<Attribut name="RULES-ATTR_Int">"0"</Attribut>
+<Attribut name="RULES-ATTR_WP">"1"</Attribut>
+<Attribut name="RULES-ATTR_Fel">"4"</Attribut>
+</SUBCHAPTER_ATTR>
+<SUBCHAPTER_SKILL>
+<Skill name="RULES-COMPCOND">"3"</Skill>
+  <!-- Drive -->
+<Skill name="RULES-COMPSAVOIR_GEOL">"3"</Skill>
+  <!-- Lore (Geology) -->
+<Skill name="DWARF-COMPCOMB_ING">"3"</Skill>
+  <!-- Melee (Engineering) -->
+<Skill name="RULES-COMPORIENT">"3"</Skill>
+  <!-- Navigation -->
+</SUBCHAPTER_SKILL>
+<SUBCHAPTER_TALENT>
+<Talent name="RULES-T0040">"3"</Talent>
+  <!-- Detect Artefact -->
+<Talent name="RULES-T0140">"3"</Talent>
+  <!-- Orientation -->
+<Talent name="DWARF-T0016">"3"</Talent>
+  <!-- Short Fuse -->
+<Talent name="RULES-T0124">"3"</Talent>
+  <!-- Tunnel Rat -->
+</SUBCHAPTER_TALENT>
+<SUBCHAPTER_ITEM>
+<Item name="DWARF-COMB_2M_04">"3"</Item>
+  <!-- Steam Drill -->
+<Item name="DWARF-PROJ_EXPLO_01">"3"</Item>
+  <!-- Blasting Charge -->
+<Item name="Beardling Apprentice">"3"</Item>
+</SUBCHAPTER_ITEM>
+</Career>
+<Career id="DWARF-WORK19">
+<Description language="ENGLISH">"Runebearer"</Description>
+<Explanation language="ENGLISH">"Runebearers are long-distance runners who deliver vital messages between holds, specialising in the tunnels of the Underway. Alternate 2nd level of Messenger."</Explanation>
+<Skill>"RULES-COMPRESIST"</Skill>
+<Class>"RULES-CLASS_RANG"</Class>
+<Parent>"RULES-WORK38"</Parent>
+  <!-- VARIANTE p.54-61 : remplace le niveau 2 de la carriere parente, on y arrive au passage de niveau (CONTEXT.md 2.24). Un seul <Level> : la suite de la progression revient au parent (CarriereDeSuite). -->
+<SUBCHAPTER_LEVEL>
+<Level id="2">
+<Description language="ENGLISH">"Runebearer"</Description>
+<Salary>"TIERS_SILVER 1"</Salary>
+</Level>
+</SUBCHAPTER_LEVEL>
+<SUBCHAPTER_ATTR>
+<Attribut name="RULES-ATTR_WS">"2"</Attribut>
+<Attribut name="RULES-ATTR_BS">"0"</Attribut>
+<Attribut name="RULES-ATTR_S">"0"</Attribut>
+<Attribut name="RULES-ATTR_T">"1"</Attribut>
+<Attribut name="RULES-ATTR_I">"1"</Attribut>
+<Attribut name="RULES-ATTR_Ag">"1"</Attribut>
+<Attribut name="RULES-ATTR_Dex">"0"</Attribut>
+<Attribut name="RULES-ATTR_Int">"0"</Attribut>
+<Attribut name="RULES-ATTR_WP">"3"</Attribut>
+<Attribut name="RULES-ATTR_Fel">"4"</Attribut>
+</SUBCHAPTER_ATTR>
+<SUBCHAPTER_SKILL>
+<Skill name="RULES-COMPCALM">"2"</Skill>
+  <!-- Cool -->
+<Skill name="RULES-COMPCOMB_BASE">"2"</Skill>
+  <!-- Melee (Basic) -->
+<Skill name="RULES-COMPPROJ_ARB">"2"</Skill>
+  <!-- Ranged (Crossbow) -->
+<Skill name="RULES-COMPSIGNES_RANGER">"2"</Skill>
+  <!-- Secret Signs (Ranger) -->
+<Skill name="RULES-COMPDISC_*">"2"</Skill>
+  <!-- Stealth (Any One) -->
+<Skill name="RULES-COMPNATA">"2"</Skill>
+  <!-- Swim -->
+</SUBCHAPTER_SKILL>
+<SUBCHAPTER_TALENT>
+<Talent name="RULES-T0140">"2"</Talent>
+  <!-- Orientation -->
+<Talent name="RULES-T0168">"2"</Talent>
+  <!-- Seasoned Traveller -->
+<Talent name="RULES-T0013_ROC">"2"</Talent>
+  <!-- Strider (Rocky) -->
+<Talent name="DWARF-T0017">"2"</Talent>
+  <!-- Tireless -->
+</SUBCHAPTER_TALENT>
+<SUBCHAPTER_ITEM>
+<Item name="DWARF-COMB_BASE_01">"2"</Item>
+  <!-- Dwarf Axe -->
+<Item name="DWARF-PROJ_ARB_01">"2"</Item>
+  <!-- Dwarf Crossbow -->
+<Item name="RULES-MUNI_01">"2"</Item>
+  <!-- Bolt -->
+<Item name="RULES-ARMO_04">"2"</Item>
+  <!-- Leather Jack -->
+</SUBCHAPTER_ITEM>
+</Career>
+<Career id="DWARF-WORK20">
+<Description language="ENGLISH">"Brother of Grimnir"</Description>
+<Explanation language="ENGLISH">"Experienced Slayers inducted into the Brotherhood of Grimnir by the Doom Priests mark their dedication with runic tattoos of warding. Alternate 2nd level of Slayer."</Explanation>
+<Skill>"RULES-COMPCOMB_BASE"</Skill>
+<Class>"RULES-CLASS_WARR"</Class>
+<Parent>"RULES-WORK62"</Parent>
+  <!-- VARIANTE p.54-61 : remplace le niveau 2 de la carriere parente, on y arrive au passage de niveau (CONTEXT.md 2.24). Un seul <Level> : la suite de la progression revient au parent (CarriereDeSuite). -->
+<SUBCHAPTER_LEVEL>
+<Level id="2">
+<Description language="ENGLISH">"Brother of Grimnir"</Description>
+<Salary>"TIERS_BRASS 2"</Salary>
+</Level>
+</SUBCHAPTER_LEVEL>
+<SUBCHAPTER_ATTR>
+<Attribut name="RULES-ATTR_WS">"1"</Attribut>
+<Attribut name="RULES-ATTR_BS">"0"</Attribut>
+<Attribut name="RULES-ATTR_S">"1"</Attribut>
+<Attribut name="RULES-ATTR_T">"2"</Attribut>
+<Attribut name="RULES-ATTR_I">"4"</Attribut>
+<Attribut name="RULES-ATTR_Ag">"3"</Attribut>
+<Attribut name="RULES-ATTR_Dex">"0"</Attribut>
+<Attribut name="RULES-ATTR_Int">"0"</Attribut>
+<Attribut name="RULES-ATTR_WP">"1"</Attribut>
+<Attribut name="RULES-ATTR_Fel">"0"</Attribut>
+</SUBCHAPTER_ATTR>
+<SUBCHAPTER_SKILL>
+<Skill name="RULES-COMPART_TATOU">"2"</Skill>
+  <!-- Art (Tattoo) -->
+<Skill name="RULES-COMPINTIM">"2"</Skill>
+  <!-- Intimidate -->
+<Skill name="RULES-COMPLANG_BATAIL">"2"</Skill>
+  <!-- Language (Battle) -->
+<Skill name="RULES-COMPCOMB_2M">"2"</Skill>
+  <!-- Melee (Two-handed) -->
+<Skill name="RULES-COMPSURVEXT">"2"</Skill>
+  <!-- Outdoor Survival -->
+<Skill name="DWARF-COMPSIGNES_GRIMNIR">"2"</Skill>
+  <!-- Secret Signs (Brotherhood of Grimnir) -->
+</SUBCHAPTER_SKILL>
+<SUBCHAPTER_TALENT>
+<Talent name="DWARF-T0003">"2"</Talent>
+  <!-- Demolisher -->
+<Talent name="DWARF-T0012">"2"</Talent>
+  <!-- Magic Defiance -->
+<Talent name="RULES-T0166">"2"</Talent>
+  <!-- Sharp -->
+<Talent name="RULES-T0158">"2"</Talent>
+  <!-- Very Strong -->
+</SUBCHAPTER_TALENT>
+<SUBCHAPTER_ITEM>
+<Item name="Wards of Grimnir (protective tattoos)">"2"</Item>
+<Item name="DWARF-COMB_BASE_01/DWARF-COMB_2M_01">"2"</Item>
+  <!-- Dwarf Axe or Dwarf Greataxe -->
+</SUBCHAPTER_ITEM>
+</Career>
+<Career id="DWARF-WORK21">
+<Description language="ENGLISH">"Doomseeker"</Description>
+<Explanation language="ENGLISH">"Loners even by Slayer standards, Doomseekers fasten axes to themselves with locked chains, hoping to take hundreds of enemies down with them. Alternate 3rd level of Slayer."</Explanation>
+<Skill>"RULES-COMPCOMB_BASE"</Skill>
+<Class>"RULES-CLASS_WARR"</Class>
+<Parent>"RULES-WORK62"</Parent>
+  <!-- VARIANTE p.54-61 : remplace le niveau 3 de la carriere parente, on y arrive au passage de niveau (CONTEXT.md 2.24). Un seul <Level> : la suite de la progression revient au parent (CarriereDeSuite). -->
+<SUBCHAPTER_LEVEL>
+<Level id="3">
+<Description language="ENGLISH">"Doomseeker"</Description>
+<Salary>"TIERS_BRASS 2"</Salary>
+</Level>
+</SUBCHAPTER_LEVEL>
+<SUBCHAPTER_ATTR>
+<Attribut name="RULES-ATTR_WS">"1"</Attribut>
+<Attribut name="RULES-ATTR_BS">"0"</Attribut>
+<Attribut name="RULES-ATTR_S">"1"</Attribut>
+<Attribut name="RULES-ATTR_T">"2"</Attribut>
+<Attribut name="RULES-ATTR_I">"4"</Attribut>
+<Attribut name="RULES-ATTR_Ag">"3"</Attribut>
+<Attribut name="RULES-ATTR_Dex">"0"</Attribut>
+<Attribut name="RULES-ATTR_Int">"0"</Attribut>
+<Attribut name="RULES-ATTR_WP">"1"</Attribut>
+<Attribut name="RULES-ATTR_Fel">"0"</Attribut>
+</SUBCHAPTER_ATTR>
+<SUBCHAPTER_SKILL>
+<Skill name="RULES-COMPATHL">"3"</Skill>
+  <!-- Athletics -->
+<Skill name="RULES-COMPESCAL">"3"</Skill>
+  <!-- Climb -->
+<Skill name="RULES-COMPCOMB_FLEAU">"3"</Skill>
+  <!-- Melee (Flail) -->
+<Skill name="RULES-COMPPRECEP">"3"</Skill>
+  <!-- Perception -->
+</SUBCHAPTER_SKILL>
+<SUBCHAPTER_TALENT>
+<Talent name="RULES-T0004">"3"</Talent>
+  <!-- Ambidextrous -->
+<Talent name="RULES-T0095">"3"</Talent>
+  <!-- Combat Master -->
+<Talent name="DWARF-T0007">"3"</Talent>
+  <!-- Glorious Demise -->
+<Talent name="DWARF-T0019">"3"</Talent>
+  <!-- Whirlwind of Death -->
+</SUBCHAPTER_TALENT>
+<SUBCHAPTER_ITEM>
+<Item name="DWARF-COMB_FLEAU_01">"3"</Item>
+  <!-- Whirling blades of death -->
+<Item name="DWARF-COMB_FLEAU_01">"3"</Item>
+  <!-- Whirling blades of death -->
+</SUBCHAPTER_ITEM>
+</Career>
+<Career id="DWARF-WORK22">
+<Description language="ENGLISH">"War-mourner"</Description>
+<Explanation language="ENGLISH">"War-mourner was once the title of ancient Dwarf champions, oathsworn to uphold their king&apos;s honour on his behalf in battle. Alternate 4th level of Slayer, advancing Fellowship in place of Initiative."</Explanation>
+<Skill>"RULES-COMPCOMB_BASE"</Skill>
+<Class>"RULES-CLASS_WARR"</Class>
+<Parent>"RULES-WORK62"</Parent>
+  <!-- VARIANTE p.54-61 : remplace le niveau 4 de la carriere parente, on y arrive au passage de niveau (CONTEXT.md 2.24). Un seul <Level> : la suite de la progression revient au parent (CarriereDeSuite). -->
+<SUBCHAPTER_LEVEL>
+<Level id="4">
+<Description language="ENGLISH">"War-mourner"</Description>
+<Salary>"TIERS_BRASS 2"</Salary>
+</Level>
+</SUBCHAPTER_LEVEL>
+<SUBCHAPTER_ATTR>
+<Attribut name="RULES-ATTR_WS">"1"</Attribut>
+<Attribut name="RULES-ATTR_BS">"0"</Attribut>
+<Attribut name="RULES-ATTR_S">"1"</Attribut>
+<Attribut name="RULES-ATTR_T">"2"</Attribut>
+<Attribut name="RULES-ATTR_I">"0"</Attribut>
+<Attribut name="RULES-ATTR_Ag">"3"</Attribut>
+<Attribut name="RULES-ATTR_Dex">"0"</Attribut>
+<Attribut name="RULES-ATTR_Int">"0"</Attribut>
+<Attribut name="RULES-ATTR_WP">"1"</Attribut>
+<Attribut name="RULES-ATTR_Fel">"4"</Attribut>
+</SUBCHAPTER_ATTR>
+<SUBCHAPTER_SKILL>
+<Skill name="RULES-COMPINTUI">"4"</Skill>
+  <!-- Intuition -->
+<Skill name="RULES-COMPCOMM">"4"</Skill>
+  <!-- Leadership -->
+</SUBCHAPTER_SKILL>
+<SUBCHAPTER_TALENT>
+<Talent name="DWARF-T0001">"4"</Talent>
+  <!-- Ancestral Grudge -->
+<Talent name="RULES-T0021">"4"</Talent>
+  <!-- Berserk Charge -->
+<Talent name="RULES-T0095">"4"</Talent>
+  <!-- Combat Master -->
+<Talent name="RULES-T0138">"4"</Talent>
+  <!-- War Leader -->
+</SUBCHAPTER_TALENT>
+<SUBCHAPTER_ITEM>
+<Item name="Two Runic Chainaxes">"4"</Item>
+</SUBCHAPTER_ITEM>
+</Career>
+<Career id="DWARF-WORK23">
+<Description language="ENGLISH">"Axefighter"</Description>
+<Explanation language="ENGLISH">"By long tradition regiments of Dwarfs go to battle carrying axes as their primary weapon, preferring the heft of a solid war axe over the finesse of a sword. Alternate 2nd level of Soldier, advancing Strength in place of Ballistic Skill."</Explanation>
+<Skill>"RULES-COMPCOMB_BASE"</Skill>
+<Class>"RULES-CLASS_WARR"</Class>
+<Parent>"RULES-WORK57"</Parent>
+  <!-- VARIANTE p.54-61 : remplace le niveau 2 de la carriere parente, on y arrive au passage de niveau (CONTEXT.md 2.24). Un seul <Level> : la suite de la progression revient au parent (CarriereDeSuite). -->
+<SUBCHAPTER_LEVEL>
+<Level id="2">
+<Description language="ENGLISH">"Axefighter"</Description>
+<Salary>"TIERS_SILVER 3"</Salary>
+</Level>
+</SUBCHAPTER_LEVEL>
+<SUBCHAPTER_ATTR>
+<Attribut name="RULES-ATTR_WS">"1"</Attribut>
+<Attribut name="RULES-ATTR_BS">"0"</Attribut>
+<Attribut name="RULES-ATTR_S">"2"</Attribut>
+<Attribut name="RULES-ATTR_T">"1"</Attribut>
+<Attribut name="RULES-ATTR_I">"3"</Attribut>
+<Attribut name="RULES-ATTR_Ag">"0"</Attribut>
+<Attribut name="RULES-ATTR_Dex">"0"</Attribut>
+<Attribut name="RULES-ATTR_Int">"0"</Attribut>
+<Attribut name="RULES-ATTR_WP">"1"</Attribut>
+<Attribut name="RULES-ATTR_Fel">"4"</Attribut>
+</SUBCHAPTER_ATTR>
+<SUBCHAPTER_SKILL>
+<Skill name="RULES-COMPRESALC">"2"</Skill>
+  <!-- Consume Alcohol -->
+<Skill name="RULES-COMPPARI">"2"</Skill>
+  <!-- Gamble -->
+<Skill name="RULES-COMPINTIM">"2"</Skill>
+  <!-- Intimidate -->
+<Skill name="RULES-COMPCOMB_2M">"2"</Skill>
+  <!-- Melee (Two-handed) -->
+<Skill name="RULES-COMPSURVEXT">"2"</Skill>
+  <!-- Outdoor Survival -->
+<Skill name="RULES-COMPPROJ_LANC">"2"</Skill>
+  <!-- Ranged (Throwing) -->
+</SUBCHAPTER_SKILL>
+<SUBCHAPTER_TALENT>
+<Talent name="DWARF-T0003">"2"</Talent>
+  <!-- Demolisher -->
+<Talent name="RULES-T0036">"2"</Talent>
+  <!-- Drilled -->
+<Talent name="RULES-T0121">"2"</Talent>
+  <!-- Shieldsman -->
+<Talent name="DWARF-T0017">"2"</Talent>
+  <!-- Tireless -->
+</SUBCHAPTER_TALENT>
+<SUBCHAPTER_ITEM>
+<Item name="DWARF-COMB_BASE_01/DWARF-COMB_2M_01">"2"</Item>
+  <!-- Dwarf Axe or Dwarf Greataxe -->
+<Item name="RULES-COMB_BASE_07">"2"</Item>
+  <!-- Shield -->
+<Item name="RULES-ARMO_14">"2"</Item>
+<Item name="DWARF-ARMO_06">"2"</Item>
+<Item name="RULES-ARMO_12">"2"</Item>
+</SUBCHAPTER_ITEM>
+</Career>
+<Career id="DWARF-WORK24">
+<Description language="ENGLISH">"Quarreller"</Description>
+<Explanation language="ENGLISH">"Crossbows are the traditional Dwarf hunting weapon, and disciplined ranks of Quarrellers have formed the basis of throng firing lines for millennia. Alternate 2nd level of Soldier."</Explanation>
+<Skill>"RULES-COMPCOMB_BASE"</Skill>
+<Class>"RULES-CLASS_WARR"</Class>
+<Parent>"RULES-WORK57"</Parent>
+  <!-- VARIANTE p.54-61 : remplace le niveau 2 de la carriere parente, on y arrive au passage de niveau (CONTEXT.md 2.24). Un seul <Level> : la suite de la progression revient au parent (CarriereDeSuite). -->
+<SUBCHAPTER_LEVEL>
+<Level id="2">
+<Description language="ENGLISH">"Quarreller"</Description>
+<Salary>"TIERS_SILVER 3"</Salary>
+</Level>
+</SUBCHAPTER_LEVEL>
+<SUBCHAPTER_ATTR>
+<Attribut name="RULES-ATTR_WS">"1"</Attribut>
+<Attribut name="RULES-ATTR_BS">"2"</Attribut>
+<Attribut name="RULES-ATTR_S">"0"</Attribut>
+<Attribut name="RULES-ATTR_T">"1"</Attribut>
+<Attribut name="RULES-ATTR_I">"3"</Attribut>
+<Attribut name="RULES-ATTR_Ag">"0"</Attribut>
+<Attribut name="RULES-ATTR_Dex">"0"</Attribut>
+<Attribut name="RULES-ATTR_Int">"0"</Attribut>
+<Attribut name="RULES-ATTR_WP">"1"</Attribut>
+<Attribut name="RULES-ATTR_Fel">"4"</Attribut>
+</SUBCHAPTER_ATTR>
+<SUBCHAPTER_SKILL>
+<Skill name="RULES-COMPRESALC">"2"</Skill>
+  <!-- Consume Alcohol -->
+<Skill name="RULES-COMPPARI">"2"</Skill>
+  <!-- Gamble -->
+<Skill name="RULES-COMPINTIM">"2"</Skill>
+  <!-- Intimidate -->
+<Skill name="RULES-COMPCOMB_2M">"2"</Skill>
+  <!-- Melee (Two-handed) -->
+<Skill name="RULES-COMPSURVEXT">"2"</Skill>
+  <!-- Outdoor Survival -->
+<Skill name="RULES-COMPPROJ_ARB">"2"</Skill>
+  <!-- Ranged (Crossbow) -->
+</SUBCHAPTER_SKILL>
+<SUBCHAPTER_TALENT>
+<Talent name="RULES-T0036">"2"</Talent>
+  <!-- Drilled -->
+<Talent name="DWARF-T0008">"2"</Talent>
+  <!-- Harpooner -->
+<Talent name="RULES-T0125">"2"</Talent>
+  <!-- Rapid Reload -->
+<Talent name="DWARF-T0017">"2"</Talent>
+  <!-- Tireless -->
+</SUBCHAPTER_TALENT>
+<SUBCHAPTER_ITEM>
+<Item name="DWARF-PROJ_ARB_01">"2"</Item>
+  <!-- Dwarf Crossbow -->
+<Item name="RULES-MUNI_01">"2"</Item>
+  <!-- Bolt -->
+<Item name="RULES-ARMO_14">"2"</Item>
+<Item name="DWARF-ARMO_06">"2"</Item>
+<Item name="RULES-ARMO_12">"2"</Item>
+</SUBCHAPTER_ITEM>
+</Career>
+<Career id="DWARF-WORK25">
+<Description language="ENGLISH">"Thunderer"</Description>
+<Explanation language="ENGLISH">"Dwarf handguns are far more precise and reliable than Imperial counterparts, and the cacophonous roar of a Thunderer&apos;s volley is terrifying enough to put survivors to flight. Alternate 2nd level of Soldier or Handgunner."</Explanation>
+<Skill>"RULES-COMPCOMB_BASE"</Skill>
+<Class>"RULES-CLASS_WARR"</Class>
+<Parent>"RULES-WORK57/UPINA-WORK68"</Parent>
+  <!-- VARIANTE p.54-61 : remplace le niveau 2 de la carriere parente, on y arrive au passage de niveau (CONTEXT.md 2.24). Un seul <Level> : la suite de la progression revient au parent (CarriereDeSuite). -->
+<SUBCHAPTER_LEVEL>
+<Level id="2">
+<Description language="ENGLISH">"Thunderer"</Description>
+<Salary>"TIERS_SILVER 3"</Salary>
+</Level>
+</SUBCHAPTER_LEVEL>
+<SUBCHAPTER_ATTR>
+<Attribut name="RULES-ATTR_WS">"1"</Attribut>
+<Attribut name="RULES-ATTR_BS">"2"</Attribut>
+<Attribut name="RULES-ATTR_S">"0"</Attribut>
+<Attribut name="RULES-ATTR_T">"1"</Attribut>
+<Attribut name="RULES-ATTR_I">"3"</Attribut>
+<Attribut name="RULES-ATTR_Ag">"0"</Attribut>
+<Attribut name="RULES-ATTR_Dex">"0"</Attribut>
+<Attribut name="RULES-ATTR_Int">"0"</Attribut>
+<Attribut name="RULES-ATTR_WP">"1"</Attribut>
+<Attribut name="RULES-ATTR_Fel">"4"</Attribut>
+</SUBCHAPTER_ATTR>
+<SUBCHAPTER_SKILL>
+<Skill name="RULES-COMPEVAL">"2"</Skill>
+  <!-- Evaluate -->
+<Skill name="RULES-COMPPARI">"2"</Skill>
+  <!-- Gamble -->
+<Skill name="RULES-COMPINTIM">"2"</Skill>
+  <!-- Intimidate -->
+<Skill name="RULES-COMPSURVEXT">"2"</Skill>
+  <!-- Outdoor Survival -->
+<Skill name="RULES-COMPPROJ_ING">"2"</Skill>
+  <!-- Ranged (Engineering) -->
+<Skill name="RULES-COMPMETIER_ARMU">"2"</Skill>
+  <!-- Trade (Gunsmith) -->
+</SUBCHAPTER_SKILL>
+<SUBCHAPTER_TALENT>
+<Talent name="DWARF-T0004">"2"</Talent>
+  <!-- Dragon Belcher -->
+<Talent name="RULES-T0036">"2"</Talent>
+  <!-- Drilled -->
+<Talent name="DWARF-T0017">"2"</Talent>
+  <!-- Tireless -->
+<Talent name="RULES-T0076">"2"</Talent>
+  <!-- Unshakable -->
+</SUBCHAPTER_TALENT>
+<SUBCHAPTER_ITEM>
+<Item name="DWARF-PROJ_POUDRE_01">"2"</Item>
+  <!-- Dwarf Handgun -->
+<Item name="RULES-MUNI_06">"2"</Item>
+  <!-- Bullet and Powder -->
+<Item name="RULES-ARMO_14">"2"</Item>
+<Item name="DWARF-ARMO_06">"2"</Item>
+<Item name="RULES-ARMO_12">"2"</Item>
 </SUBCHAPTER_ITEM>
 </Career>
 </DATA_CAREER>
