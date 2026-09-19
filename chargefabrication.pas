@@ -17,6 +17,8 @@ Type
     Maximum:            String;
     Resume:             String;
     Livre:              String;
+    PorteeBonus:        Integer;  // accessoire d arme : ajoute a la portee
+    QualitesArme:       String;   // accessoire d arme : codes de qualites d arme ajoutees (virgules)
 end;
 
   TListFabrication = specialize TList<StructureFabrication>;
@@ -31,6 +33,8 @@ Function FabricationEncombrement(ListeCode :String; Var Quality: String): Intege
 Function FabricationEstBulky(ListeCode :String): Boolean;
 Function FabricationEstPractical(ListeCode :String): Boolean;
 Function FabricationEstUnreliable(ListeCode :String): Boolean;
+Function FabricationPortee(ListeCode :String): Integer;
+Function FabricationQualitesArme(ListeCode :String): String;
 procedure FabricationDetail(ListeCode :String; var BonusItem :String; var ListeBonus :String);
 
 implementation
@@ -176,6 +180,46 @@ Function FabricationEstUnreliable(ListeCode :String): Boolean;
             PFabrication := ChercheFabrication(Code);
             if PFabrication.TypeQualite = FabricationUnreliable then
               Result := True;
+          end;
+        strings.Free;
+      end;
+  end;
+
+Function FabricationPortee(ListeCode :String): Integer;
+  var
+    strings: TStringList;
+    IndTab:  Integer;
+  begin
+    Result := 0;
+    if not InList(ListeCode,',0') then
+      begin
+        strings := TStringList.Create;
+        ExtractStrings([','], [], PChar(ListeCode), Strings);
+        for IndTab := 0 to Strings.Count -1 do
+          Result := Result + ChercheFabrication(ExtractStringBefore(Strings[IndTab],' ')).PorteeBonus;
+        strings.Free;
+      end;
+  end;
+
+Function FabricationQualitesArme(ListeCode :String): String;
+  var
+    strings: TStringList;
+    IndTab:  Integer;
+    Ajout:   String;
+  begin
+    Result := '';
+    if not InList(ListeCode,',0') then
+      begin
+        strings := TStringList.Create;
+        ExtractStrings([','], [], PChar(ListeCode), Strings);
+        for IndTab := 0 to Strings.Count -1 do
+          begin
+            Ajout := ChercheFabrication(ExtractStringBefore(Strings[IndTab],' ')).QualitesArme;
+            if Ajout <> '' then
+              begin
+                if Result <> '' then Result := Result + ',';
+                Result := Result + Ajout;
+              end;
           end;
         strings.Free;
       end;

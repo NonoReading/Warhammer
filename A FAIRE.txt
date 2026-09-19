@@ -189,12 +189,6 @@ courte/constante trouves sont coherents (meme abreviation des deux cotes). unitc
 en donnee. A resurveiller si de nouvelles variables courtes apparaissent pres de ColAtt*/
 ConstCarac*.
 
-[TRANCHE LE 12/09/2026 - CONSERVE COMME POINT TRANCHE, NE PLUS LE RESSORTIR EN ANOMALIE]
-"COPPER" DE NATIONS OF MANKIND EST BRASS. Confirme par Nono : Nations ecrit "Copper 3" pour
-l Almogavar, mais c est le meme palier que Brass/Silver/Gold sous un autre nom narratif, pas
-un quatrieme palier. Aucun TIERS_COPPER a creer ; le lire comme Brass (deja le cas depuis le
-03/09) est correct. RULES-TIERS_BRASS/SILVER/GOLD (chargetexte.pas, resolus via SalaireMetier
-prefixe - CONTEXT.md 2.61) restent la seule enumeration, rien a recopier ailleurs.
 
 NATIONS OF MANKIND : LORE ATTRIBUTE ET INGREDIENTS DES DEUX VENTS, SANS ENDROIT OU ALLER.
 Le Lore of Ice et le Lore of the Desert impriment chacun un Lore Attribute (regle de jeu, pas
@@ -204,10 +198,7 @@ sens. Meme famille de manque que CONTEXT 2.39 - mais 2.39 est FAIT depuis le 03/
 PAS traite ce point : il a rendu extensible la relation sort/talent, pas cree d entite
 domaine. Le manque reste entier, et c est desormais un sujet a lui seul.
 
-NATIONS OF MANKIND : FROSTFIEND ET DJINN SONT DANS LE TEXTE, PAS EN CREATURES. Les deux
-profils complets (caracteristiques, Traits, Optional) et la table d10 des elements du Djinn
-sont en fin d Explanation des sorts Form of the Frostfiend et Summon Djinn, faute de champ.
-A reprendre avec le morceau "creatures" du lot 3 si on veut de vraies creatures.
+NATIONS OF MANKIND : FROSTFIEND ET DJINN = ADVERSAIRES POTENTIELS, PARTIE NON GEREE (decision Nono 19/09/2026). Profils et table d10 du Djinn restent dans le texte des sorts Form of the Frostfiend et Summon Djinn ; pas de catalogue de creatures.
 
 LE CHANGEMENT DE LANGUE D'INTERFACE NE RAFRAICHIT PAS LES FENETRES SECONDAIRES DEJA
 OUVERTES (CONTEXT.md 2.70, 13/09/2026). ComboBoxLangueInterfaceSelect retraduit et
@@ -408,9 +399,7 @@ uniquement (le gabarit normal est le Pdf officiel, non modifiable) ; Practical/U
 reintegres dans le meme mouvement. Fine/Durable/Shoddy/Ugly restent narratifs (statut social,
 jet de sauvegarde contre la casse, casse sur double rate, malus Sociabilite conditionnel) :
 rien a calculer, meme dans cette colonne - point tranche, ne plus le ressortir en anomalie.]
-LES 3 ACCESSOIRES NATIONS OF MANKIND (Barrel Extension +20 portee, Bayonet devient une Lance,
-Telescopic Sight ajoute Accurate/Precise) restent un chantier separe, sans rapport avec les
-competences : aucun mecanisme aujourd hui ne permet a un equipement d en modifier un autre.
+LES 3 ACCESSOIRES NATIONS OF MANKIND : Barrel Extension (+20 portee) et Telescopic Sight (Accurate/Precise) FAITS et VALIDES le 19/09/2026 dans le PDF (RangeBonus/WeaponQuality ; Accurate = +10%). RESTE : Bayonet (devient une Lance, change la competence) et l affichage de la portee dans WinPersonnage.
 
 WINFABRICATION NE FILTRE PAS PAR NATURE D OBJET. Rien n empeche de monter une baionnette sur
 une hache ni de poser Durable sur une fleche : la fenetre affiche toute la liste sur n importe
@@ -436,9 +425,6 @@ d armure, en verifiant dans TOUS LES LIVRES et pas seulement dans le Rulebook : 
 verification manquante qui a produit les collisions. La table DATA_CRAFTMANSHIP, elle, repart
 bien a 01 sans risque - CodeFabrication porte l identifiant complet avec son prefixe
 (xmlexportimport.pas l.2436).
-
-NATIONS OF MANKIND, HORS LOT : LES CREATURES. Taureaux de guerre estaliens, monture du
-Toreador. Reporte avec les montures.
 
 TRAPPINGS DE CLASSE EN V5 (releve le 13/09/2026, comparatif LIVRES\WFRP-4e-vs-5e.txt). Le
 Rulebook V5 donne un petit equipement de depart par Classe (Burgher, Warrior...), en plus de
@@ -999,8 +985,7 @@ REGLES DE METHODE QUI RESTENT VRAIES, tirees de l inventaire du 29/08 et de sa c
   * Statut officiel ou fan : les fanbooks V4 passent par le programme Community Content,
     qui impose une mention ; les livres Cubicle 7 portent leur copyright complet. L absence
     de mention ne prouve rien - la page de copyright peut etre une image que l export TXT
-    a perdue. Nations of Mankind est dans ce cas : saisi OFFICIAL=2 sur faisceau d indices,
-    A CONFIRMER PAR NONO.
+    a perdue. Nations of Mankind est dans ce cas : OFFICIAL=2, CONFIRME PAR NONO le 19/09/2026 (livre de fan).
   * VRAIMENT ZERO RENDEMENT, verifie le 03/09 : toutes les aventures (Ubersreik 1/2/3,
     A Guide to Ubersreik, les cinq volumes de l Enemy Within, les one-shots), Fan Made, et
     Other help hors Unofficial Grimoire. Ne pas y revenir.

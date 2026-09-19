@@ -5371,3 +5371,8 @@ Asterisques des montures en petite police (taille 4, relevee) comme celles des a
 19/09/2026 - RIDING BULL ET ESTALIAN WAR BULL
 NATIO-TRAP_09 et _10 (Nations of Mankind p.61) : ni prix, ni capacite, ni disponibilite dans le livre (oubli de l editeur, confirme par Nono). Profils en commentaire. Non teste.
 Correction : valeurs maison posees (decision de Nono, prix eleve) : Riding Bull 120CO, Estalian War Bull 400CO, capacite 30, Exotic.
+
+19/09/2026 - ACCESSOIRES D ARME NATIONS OF MANKIND EFFECTIFS (VALIDE PAR NONO)
+DATA_CRAFTMANSHIP gagne deux balises facultatives : RangeBonus (ajoute a la portee) et WeaponQuality (codes de qualites d arme ajoutees). StructureFabrication : PorteeBonus, QualitesArme ; fonctions FabricationPortee et FabricationQualitesArme (chargefabrication.pas) ; lecture/ecriture dans xmlexportimport.pas ; constantes ConstXmlFabPortee/ConstXmlFabQualiteArme. Appliquees dans les DEUX blocs armes du PDF (pdfpersonnage.pas, avant la ligne Enc). Barrel Extension = RangeBonus 20 ; Telescopic Sight = RULES-WEAPB16 (Accurate) + RULES-WEAPB14 (Precise). Bayonet reste descriptif (change la competence de l arme). Affichage WinPersonnage non touche.
+Accurate ajoute +10 au pourcentage de l arme (constante BonusAccurate, deux blocs PDF), qu il vienne du catalogue ou d un accessoire ; portees courte/longue suivent. Teste et valide : +10% et portee augmentee.
+Fichiers modifies : chargeconstantes.pas, chargefabrication.pas, xmlexportimport.pas, pdfpersonnage.pas, BOOK_NATIONS_OF_MANKIND.Xml, Log.txt.

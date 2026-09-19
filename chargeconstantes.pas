@@ -157,6 +157,9 @@ Const
       // generique. Voir CONTEXT.md 2.67.
       ConstXmlGenerique                 = 'Generique';
       ConstXmlMax                       = 'Max';
+      // Accessoires d arme (fabrication) : bonus de portee et qualites d arme ajoutees.
+      ConstXmlFabPortee                 = 'RangeBonus';
+      ConstXmlFabQualiteArme            = 'WeaponQuality';
       ConstXmlForPdf                    = 'PDF';
       ConstXmlTest                      = 'Test';
       // Marque un talent comme TRAIT DE CREATURE (Rulebook p.338-341) : acquis a la naissance
@@ -531,6 +534,7 @@ Const
       EquipementTR                      = 'TRAP_';
       EquipementQualite                 = '(Q)';
       BonusProtection                   = 'WEAPB18 ';
+      BonusAccurate                     = 'RULES-WEAPB16';  // qualite Accurate : +10 au test de tir
       BonusBras                         = 'RULES-ARMOL_ARM';
       BonusCorps                        = 'RULES-ARMOL_BODY';
       BonusJambes                       = 'RULES-ARMOL_LEG';

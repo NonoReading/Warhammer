@@ -1699,6 +1699,19 @@ Procedure PdfPersonnageCreation(Personnage: StructurePersonnage; BackGround: Boo
               else
                 PorteMoyenne   := StrToIntDef(Portee,0);
 
+              // Accessoires d arme (fabrication) : bonus de portee et qualites ajoutees.
+              if (PorteMoyenne > 0) and (FabricationPortee(PersonnageEquipement.QualiteEquipement) <> 0) then
+                begin
+                  PorteMoyenne := PorteMoyenne + FabricationPortee(PersonnageEquipement.QualiteEquipement);
+                  Portee       := IntToStr(PorteMoyenne);
+                end;
+              if FabricationQualitesArme(PersonnageEquipement.QualiteEquipement) <> '' then
+                begin
+                  if (PArme.ListeBonus <> '') and (PArme.ListeBonus <> '-') then
+                    PArme.ListeBonus := PArme.ListeBonus + ',';
+                  if PArme.ListeBonus = '-' then PArme.ListeBonus := '';
+                  PArme.ListeBonus := PArme.ListeBonus + FabricationQualitesArme(PersonnageEquipement.QualiteEquipement);
+                end;
               Enc        := PArme.Encombrement + FabricationEncombrement(PersonnageEquipement.QualiteEquipement, Quality);
               EncArme    := EncArme + Enc;
 
@@ -1717,7 +1730,7 @@ Procedure PdfPersonnageCreation(Personnage: StructurePersonnage; BackGround: Boo
               // PersonnageTalentArmeModif ajoute ici depuis le 11/09/2026 (ModifyWeapon sur
               // Talent, moteur generique) - meme reflexe "les DEUX blocs" que le bug
               // ModifyWeapon/Feldo2P du 08/09/2026 (CONTEXT.md).
-              Pourcent := IntToStr(CompetenceDonnee.Total + PersonnageCareerBonusArmeModif(Personnage, PArme) + PersonnageTalentArmeModif(Personnage, PArme));
+              Pourcent := IntToStr(CompetenceDonnee.Total + PersonnageCareerBonusArmeModif(Personnage, PArme) + PersonnageTalentArmeModif(Personnage, PArme) + Ord(Pos(BonusAccurate, PArme.ListeBonus) > 0) * 10);
               // Une arme accordee par une mutation est une partie du corps, pas un choix
               // d'entrainement : le malus "pas de competence" ne s'applique pas, ses qualites
               // s'affichent toujours. CONTEXT.md, chantier "traits de creature".
@@ -3162,6 +3175,19 @@ Procedure PdfBlocArmesDonnees(PdfPage: TPDFPage; Personnage: StructurePersonnage
           else
             PorteMoyenne   := StrToIntDef(Portee,0);
 
+          // Accessoires d arme (fabrication) : bonus de portee et qualites ajoutees.
+          if (PorteMoyenne > 0) and (FabricationPortee(PersonnageEquipement.QualiteEquipement) <> 0) then
+            begin
+              PorteMoyenne := PorteMoyenne + FabricationPortee(PersonnageEquipement.QualiteEquipement);
+              Portee       := IntToStr(PorteMoyenne);
+            end;
+          if FabricationQualitesArme(PersonnageEquipement.QualiteEquipement) <> '' then
+            begin
+              if (PArme.ListeBonus <> '') and (PArme.ListeBonus <> '-') then
+                PArme.ListeBonus := PArme.ListeBonus + ',';
+              if PArme.ListeBonus = '-' then PArme.ListeBonus := '';
+              PArme.ListeBonus := PArme.ListeBonus + FabricationQualitesArme(PersonnageEquipement.QualiteEquipement);
+            end;
           Enc        := PArme.Encombrement + FabricationEncombrement(PersonnageEquipement.QualiteEquipement, Quality);
           EncArme    := EncArme + Enc;
 
@@ -3178,7 +3204,7 @@ Procedure PdfBlocArmesDonnees(PdfPage: TPDFPage; Personnage: StructurePersonnage
           // "normal" depuis l'ajout de ModifyWeapon le 07/09/2026 (CONTEXT.md 2.50 point 4bis).
           // PersonnageTalentArmeModif ajoute ici aussi depuis le 11/09/2026, meme cablage
           // dans les DEUX blocs des le depart.
-          Pourcent := IntToStr(CompetenceDonnee.Total + PersonnageCareerBonusArmeModif(Personnage, PArme) + PersonnageTalentArmeModif(Personnage, PArme));
+          Pourcent := IntToStr(CompetenceDonnee.Total + PersonnageCareerBonusArmeModif(Personnage, PArme) + PersonnageTalentArmeModif(Personnage, PArme) + Ord(Pos(BonusAccurate, PArme.ListeBonus) > 0) * 10);
           // Meme exception que PdfPersonnageCreation : arme de mutation = partie du corps.
           PasBonus := (CompetenceDonnee.Augmentation = 0) and (PersonnageEquipement.Source = '');
 

@@ -13087,10 +13087,10 @@ Poison: Used to weaken and kill targets, anyone caught in the radius of this gre
        Ici la numerotation REPART a 01 comme le veut la regle des livres, et c est sans risque :
        CodeFabrication porte l identifiant COMPLET avec son prefixe (xmlexportimport.pas l.2436),
        contrairement aux qualites d arme et d armure, dont les references sont nues.
-       ATTENTION : le champ Modifier d une fabrication n est branche sur AUCUN calcul - aucun
-       code QUALITY_ n est reference dans le corpus et FabricationDetail n a pas d appelant. Ces
-       trois accessoires sont donc DESCRIPTIFS : ils s affichent sur la fiche, ils ne modifient
-       ni la portee ni les qualites de l arme. Item ouvert dans A FAIRE.txt.
+       19/09/2026 : deux balises facultatives, RangeBonus (ajoute a la portee) et WeaponQuality
+       (codes de qualites d arme ajoutees), lues par chargefabrication.pas et appliquees aux
+       deux blocs armes du PDF. Barrel Extension et Telescopic Sight sont effectifs ; Bayonet
+       reste DESCRIPTIF (il change la competence de l arme, pas un simple bonus).
        Le livre leur donne un prix (3 GC, 12/-, 7 GC) que la table ne sait pas porter : il est
        recopie dans l explication. -->
 <Craftsmanship id="NATIO-QUALITY_01">
@@ -13098,6 +13098,7 @@ Poison: Used to weaken and kill targets, anyone caught in the radius of this gre
 <Explanation language="ENGLISH">"A weapon attachment, fitted to any gun. Adds +20 to the weapon's Range.
 Price 3 GC, Encumbrance 0, Availability Rare."</Explanation>
 <Short language="ENGLISH">"any gun : +20 Range"</Short>
+<RangeBonus>"20"</RangeBonus>
 <Encumbrance>"0"</Encumbrance>
 <Max>"1"</Max>
 <Modifier>""</Modifier>
@@ -13116,6 +13117,7 @@ Price 12/-, Encumbrance 0, Availability Common."</Explanation>
 <Explanation language="ENGLISH">"A weapon attachment, fitted to guns and crossbows. The weapon gains the Accurate and Precise Qualities.
 Price 7 GC, Encumbrance 0, Availability Rare."</Explanation>
 <Short language="ENGLISH">"guns and crossbows : adds Accurate and Precise"</Short>
+<WeaponQuality>"RULES-WEAPB16,RULES-WEAPB14"</WeaponQuality>
 <Encumbrance>"0"</Encumbrance>
 <Max>"1"</Max>
 <Modifier>""</Modifier>

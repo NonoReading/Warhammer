@@ -1008,6 +1008,10 @@ Procedure XmlExportBook(Livre: String; Langue: String);
               XmlContent.Add(XmlLigneLangue(ConstXmlExplanation, Langue, PFabrication.Description));
               XmlContent.Add(XmlLigneLangue(ConstXmlShort, Langue, PFabrication.Resume));
               XmlContent.Add(XmlLigne(ConstXmlMax, PFabrication.Maximum));
+              if PFabrication.PorteeBonus <> 0 then
+                XmlContent.Add(XmlLigne(ConstXmlFabPortee, IntToStr(PFabrication.PorteeBonus)));
+              if PFabrication.QualitesArme <> '' then
+                XmlContent.Add(XmlLigne(ConstXmlFabQualiteArme, PFabrication.QualitesArme));
               XmlContent.Add(XmlLigne(ConstXmlPositifNegatif, PFabrication.TypeQualite));
 
               XmlContent.Add(XmlFinCode(ConstXmlFabrication));
@@ -3048,6 +3052,10 @@ Procedure XmlImport(FileName: String; OnlyPrimary: Boolean; OnlyCode: Boolean; C
                               PFabrication.Encombrement  := StrToIntDef(RemoveQuotes(UTF8Encode(Node.TextContent)),0);
                             ConstXmlMax:
                               PFabrication.Maximum       := RemoveQuotes(UTF8Encode(Node.TextContent));
+                            ConstXmlFabPortee:
+                              PFabrication.PorteeBonus   := StrToIntDef(RemoveQuotes(UTF8Encode(Node.TextContent)),0);
+                            ConstXmlFabQualiteArme:
+                              PFabrication.QualitesArme  := RemoveQuotes(UTF8Encode(Node.TextContent));
                             ConstXmlPositifNegatif:
                               PFabrication.TypeQualite   := RemoveQuotes(UTF8Encode(Node.TextContent));
                           end;
