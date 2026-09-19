@@ -12,7 +12,7 @@ uses
   ChargeMetierTalent, ChargeMetierNiveau, ChargeCompetence, ChargeLivre,
   ChargeAttributAugmentation, ChargeAttribut, ChargeCompetenceAugmentation,
   GlobalFonts, ChargeArme, ChargeArmure, ChargeTrapping, ChargeMetierEquipement,
-  WinMetier, UnitEquipement, WinWeapon, WinArmor, ChargeArmureSimplifie,
+  WinMetier, UnitEquipement, WinEquipement, WinWeapon, WinArmor, ChargeArmureSimplifie,
   ChargeSort, WinSpell, ChargeTexte, winFabrication, ChargeFabrication,
   WinTalent, WinCompetence, WinSpecialisation, ChargePersonnage,
   ChargeMetierCompetence, PdfPersonnage, Types, WinMutation, ChargeCorruptionTable,
@@ -32,6 +32,7 @@ type
     ButtonCorruptionAjoute: TBCButton;
     ButtonCorruptionSupprime: TBCButton;
     ButtonCorruptionMutation: TBCButton;
+    ButtonEquipement: TBCButton;
     ComboBoxNvMetier: TComboBox;
     EditHairColors: TEdit;
     EditEyeColors: TEdit;
@@ -139,6 +140,7 @@ type
   procedure EditAgeKeyPress(Sender: TObject; var Key: char);
   procedure ButtonArmureClick({%H-}Sender: TObject);
   procedure ButtonArmeClick({%H-}Sender: TObject);
+  procedure ButtonEquipementClick({%H-}Sender: TObject);
   procedure ButtonFabricationClick({%H-}Sender: TObject);
   procedure ButtonPorteClick({%H-}Sender: TObject);
   procedure ButtonDeleteClick({%H-}Sender: TObject);
@@ -458,6 +460,7 @@ var
 
   FenMetier:          TWinMetiers;
   FenArme:            TWinWeapons;
+  FenEquipement:      TWinEquipements;
   FenArmure:          TWinArmors;
   FenSort:            TWinSpells;
   FenFabrication:     TWinFabrications;
@@ -805,6 +808,34 @@ procedure TWinPersonnages.ButtonArmeClick(Sender: TObject);
     SelectWinArme  := '';
     SelectWinLivre := '';
     ChoixWinArme   := '';
+end;
+
+// Ajoute un objet du catalogue DATA_TRAPPING (ligne Divers, quantite 1). La ligne est ecrite
+// a la sauvegarde comme les Divers de carriere, ChercheTrapping resout son libelle.
+procedure TWinPersonnages.ButtonEquipementClick(Sender: TObject);
+  Var
+    PTrapping: StructureTrapping;
+  begin
+    SelectWinTrapping := ConstSelectionne;
+    SelectWinLivre    := Personnage.LivresAcceptes;
+    FenEquipement     := TWinEquipements.Create(Application);
+    FenEquipement.Position := poOwnerFormCenter;
+    FenEquipement.ShowModal;
+
+    if ChoixWinTrapping <> '' then
+      begin
+        PTrapping := ChercheTrapping(ChoixWinTrapping);
+        TabEquipement.RowCount                          := TabEquipement.RowCount + 1;
+        TabEquipement.Cells[0, TabEquipement.RowCount-1]:= '+';
+        TabEquipement.Cells[1, TabEquipement.RowCount-1]:= IntToStr(TabEquipement.RowCount);
+        TabEquipement.Cells[2, TabEquipement.RowCount-1]:= PTrapping.CodeTrapping;
+        TabEquipement.Cells[3, TabEquipement.RowCount-1]:= TypeEquipDI;
+        TabEquipement.Cells[4, TabEquipement.RowCount-1]:= PTrapping.Libelle;
+        AdjustGridColumnsWidth(TabEquipement, 0, false, false);
+      end;
+    SelectWinTrapping := '';
+    SelectWinLivre    := '';
+    ChoixWinTrapping  := '';
 end;
 
 procedure TWinPersonnages.ButtonFabricationClick(Sender: TObject);
@@ -2242,6 +2273,7 @@ Procedure TWinPersonnages.AfficheImageRace();
     ButtonArme.Caption                         := '+'+GetTexteLibelle('RULES-LAB_063');
     ButtonArmure.Caption                       := '+'+GetTexteLibelle('RULES-LAB_065');
     ButtonSort.Caption                         := '+'+GetTexteLibelle('RULES-LAB_083');
+    ButtonEquipement.Caption                   := '+'+GetTexteLibelle('RULES-LAB_202');
     LabTabNiveau.Caption                       := GetTexteLibelle('RULES-LAB_019');
     RadioButtonRAS.Caption                     := GetTexteLibelle('RULES-LAB_113');
     RadioButtonSuivant.Caption                 := GetTexteLibelle('RULES-LAB_114');
@@ -3591,6 +3623,7 @@ begin
       ButtonArme.Visible := true;
       ButtonArmure.Visible := true;
       ButtonSort.Visible := true;
+      ButtonEquipement.Visible := true;
     end
   else
     begin
@@ -3598,6 +3631,7 @@ begin
       ButtonArme.Visible := false;
       ButtonArmure.Visible := false;
       ButtonSort.Visible := false;
+      ButtonEquipement.Visible := false;
     end;
   ToggleBoxGauche.left := ToggleBoxGauche.left + 1;
   AjustePositionTables();
@@ -4418,6 +4452,7 @@ procedure TWinPersonnages.AjustePositionTables();
     ButtonFabrication.left    := ButtonArme.left;
     ButtonDelete.left         := ButtonArme.left;
     ButtonSort.left           := ButtonArme.left;
+    ButtonEquipement.left     := ButtonArme.left;
     CheckBoxQuickArmor.left   := ButtonArme.left;
     LabQuickArmor.left        := CheckBoxQuickArmor.left + CheckBoxQuickArmor.Width + 10;
 
@@ -4428,11 +4463,12 @@ procedure TWinPersonnages.AjustePositionTables();
     ButtonDelete.Top          := ButtonArmure.Top + ButtonArmure.Height + 10;
     ButtonFabrication.Top     := ButtonDelete.Top + ButtonDelete.Height + 10;
     ButtonSort.Top            := ButtonFabrication.Top + ButtonFabrication.Height + 10;
+    ButtonEquipement.Top      := ButtonSort.Top + ButtonSort.Height + 10;
     // ButtonPorte n'etait pas dans la cascade (oubli anterieur) - restait donc positionne
     // par son seul Anchors=[akTop,akRight] natif, independant de TabEquipement, d'ou le
     // decrochage signale par Nono le 12/09/2026. Meme colonne, a la suite de ButtonSort.
     ButtonPorte.left          := ButtonArme.left;
-    ButtonPorte.Top           := ButtonSort.Top + ButtonSort.Height + 10;
+    ButtonPorte.Top           := ButtonEquipement.Top + ButtonEquipement.Height + 10;
 
     ImageSheetTitle.Width     := ToggleBoxDroite.Left;
     ImageSheetPage.Width      := ToggleBoxDroite.Left;

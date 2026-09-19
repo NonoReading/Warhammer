@@ -35,6 +35,7 @@ type
     procedure FormCreate({%H-}Sender: TObject);
     procedure FormDestroy({%H-}Sender: TObject);
     procedure FormKeyPress({%H-}Sender: TObject; var Key: char);
+    procedure TabEquipDblClick({%H-}Sender: TObject);
     procedure TabEquipSelection({%H-}Sender: TObject; {%H-}aCol, aRow: Integer);
     procedure ThemeChange({%H-}Sender: TObject);
   private
@@ -164,6 +165,16 @@ begin
   AffLivre.Text  := TabEquip.Cells[8, aRow];
   LabCap.Visible := AffCap.Text <> '0';
   AffCap.Visible := AffCap.Text <> '0';
+end;
+
+// Mode selection (appel depuis WinPersonnage) : le double-clic renvoie le code de l'objet.
+procedure TWinEquipements.TabEquipDblClick(Sender: TObject);
+begin
+  if (SelectWinTrapping <> '') and (TabEquip.Row > 0) then
+    begin
+      ChoixWinTrapping := TabEquip.Cells[1, TabEquip.Row];
+      Close;
+    end;
 end;
 
 procedure TWinEquipements.ThemeChange(Sender: TObject);

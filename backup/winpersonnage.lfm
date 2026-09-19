@@ -287,9 +287,9 @@ object WinPersonnages: TWinPersonnages
     Height = 368
     Top = 128
     Width = 665
-    ActivePage = TabSheetEvolution
+    ActivePage = TabSheetHistorique
     Anchors = [akTop, akLeft, akRight]
-    TabIndex = 4
+    TabIndex = 5
     TabOrder = 10
     OnChange = PageExperienceChange
     object TabSheetAttribut: TTabSheet
@@ -1210,8 +1210,8 @@ object WinPersonnages: TWinPersonnages
     RowCount = 1
     TabOrder = 15
     OnDrawCell = TabDrawCell
-    OnSelectCell = TabEquipementSelectCell
     OnSelectEditor = TabAttributSelectEditor
+    OnSelectCell = TabEquipementSelectCell
   end
   object ButtonPdf: TBCButton
     Left = 904
@@ -1492,6 +1492,7 @@ object WinPersonnages: TWinPersonnages
     Height = 45
     Top = 688
     Width = 174
+    Anchors = []
     StateClicked.Background.Gradient1.StartColor = 8404992
     StateClicked.Background.Gradient1.EndColor = 4194304
     StateClicked.Background.Gradient1.GradientType = gtRadial
@@ -1581,8 +1582,9 @@ object WinPersonnages: TWinPersonnages
   object ButtonArmure: TBCButton
     Left = 1596
     Height = 45
-    Top = 744
+    Top = 736
     Width = 176
+    Anchors = []
     StateClicked.Background.Gradient1.StartColor = 8404992
     StateClicked.Background.Gradient1.EndColor = 4194304
     StateClicked.Background.Gradient1.GradientType = gtRadial
@@ -1670,10 +1672,11 @@ object WinPersonnages: TWinPersonnages
     MemoryUsage = bmuHigh
   end
   object ButtonDelete: TBCButton
-    Left = 1594
+    Left = 1596
     Height = 45
-    Top = 800
+    Top = 783
     Width = 176
+    Anchors = []
     StateClicked.Background.Gradient1.StartColor = 8404992
     StateClicked.Background.Gradient1.EndColor = 4194304
     StateClicked.Background.Gradient1.GradientType = gtRadial
@@ -1763,8 +1766,9 @@ object WinPersonnages: TWinPersonnages
   object ButtonFabrication: TBCButton
     Left = 1596
     Height = 45
-    Top = 872
+    Top = 832
     Width = 176
+    Anchors = []
     StateClicked.Background.Gradient1.StartColor = 8404992
     StateClicked.Background.Gradient1.EndColor = 4194304
     StateClicked.Background.Gradient1.GradientType = gtRadial
@@ -1854,8 +1858,9 @@ object WinPersonnages: TWinPersonnages
   object ButtonSort: TBCButton
     Left = 1596
     Height = 45
-    Top = 939
+    Top = 880
     Width = 176
+    Anchors = []
     StateClicked.Background.Gradient1.StartColor = 8404992
     StateClicked.Background.Gradient1.EndColor = 4194304
     StateClicked.Background.Gradient1.GradientType = gtRadial
@@ -1947,6 +1952,7 @@ object WinPersonnages: TWinPersonnages
     Height = 45
     Top = 1006
     Width = 176
+    Anchors = []
     StateClicked.Background.Gradient1.StartColor = 8404992
     StateClicked.Background.Gradient1.EndColor = 4194304
     StateClicked.Background.Gradient1.GradientType = gtRadial
@@ -2469,6 +2475,7 @@ object WinPersonnages: TWinPersonnages
     Height = 20
     Top = 649
     Width = 21
+    Anchors = []
     Font.CharSet = ANSI_CHARSET
     Font.Color = clWhite
     Font.Pitch = fpVariable
@@ -2654,5 +2661,97 @@ object WinPersonnages: TWinPersonnages
     Width = 170
     AutoSize = False
     TabOrder = 21
+  end
+  object ButtonEquipement: TBCButton
+    Left = 1596
+    Height = 45
+    Top = 928
+    Width = 176
+    Anchors = []
+    StateClicked.Background.Gradient1.StartColor = 8404992
+    StateClicked.Background.Gradient1.EndColor = 4194304
+    StateClicked.Background.Gradient1.GradientType = gtRadial
+    StateClicked.Background.Gradient1.Point1XPercent = 50
+    StateClicked.Background.Gradient1.Point1YPercent = 100
+    StateClicked.Background.Gradient1.Point2XPercent = 0
+    StateClicked.Background.Gradient1.Point2YPercent = 0
+    StateClicked.Background.Gradient2.StartColor = clWhite
+    StateClicked.Background.Gradient2.EndColor = clBlack
+    StateClicked.Background.Gradient2.GradientType = gtLinear
+    StateClicked.Background.Gradient2.Point1XPercent = 0
+    StateClicked.Background.Gradient2.Point1YPercent = 0
+    StateClicked.Background.Gradient2.Point2XPercent = 0
+    StateClicked.Background.Gradient2.Point2YPercent = 100
+    StateClicked.Background.Gradient1EndPercent = 100
+    StateClicked.Background.Style = bbsGradient
+    StateClicked.Border.Style = bboNone
+    StateClicked.FontEx.Color = 16770790
+    StateClicked.FontEx.FontQuality = fqSystemClearType
+    StateClicked.FontEx.Shadow = True
+    StateClicked.FontEx.ShadowRadius = 2
+    StateClicked.FontEx.ShadowOffsetX = 1
+    StateClicked.FontEx.ShadowOffsetY = 1
+    StateClicked.FontEx.Style = [fsBold]
+    StateHover.Background.Gradient1.StartColor = 16744448
+    StateHover.Background.Gradient1.EndColor = 8404992
+    StateHover.Background.Gradient1.GradientType = gtRadial
+    StateHover.Background.Gradient1.Point1XPercent = 50
+    StateHover.Background.Gradient1.Point1YPercent = 100
+    StateHover.Background.Gradient1.Point2XPercent = 0
+    StateHover.Background.Gradient1.Point2YPercent = 0
+    StateHover.Background.Gradient2.StartColor = clWhite
+    StateHover.Background.Gradient2.EndColor = clBlack
+    StateHover.Background.Gradient2.GradientType = gtLinear
+    StateHover.Background.Gradient2.Point1XPercent = 0
+    StateHover.Background.Gradient2.Point1YPercent = 0
+    StateHover.Background.Gradient2.Point2XPercent = 0
+    StateHover.Background.Gradient2.Point2YPercent = 100
+    StateHover.Background.Gradient1EndPercent = 100
+    StateHover.Background.Style = bbsGradient
+    StateHover.Border.Style = bboNone
+    StateHover.FontEx.Color = clWhite
+    StateHover.FontEx.FontQuality = fqSystemClearType
+    StateHover.FontEx.Shadow = True
+    StateHover.FontEx.ShadowRadius = 2
+    StateHover.FontEx.ShadowOffsetX = 1
+    StateHover.FontEx.ShadowOffsetY = 1
+    StateHover.FontEx.Style = [fsBold]
+    StateNormal.Background.Gradient1.StartColor = 4194304
+    StateNormal.Background.Gradient1.EndColor = 8405056
+    StateNormal.Background.Gradient1.GradientType = gtLinear
+    StateNormal.Background.Gradient1.Point1XPercent = 0
+    StateNormal.Background.Gradient1.Point1YPercent = 0
+    StateNormal.Background.Gradient1.Point2XPercent = 0
+    StateNormal.Background.Gradient1.Point2YPercent = 100
+    StateNormal.Background.Gradient2.StartColor = 8405056
+    StateNormal.Background.Gradient2.EndColor = 4194304
+    StateNormal.Background.Gradient2.GradientType = gtRadial
+    StateNormal.Background.Gradient2.Point1XPercent = 50
+    StateNormal.Background.Gradient2.Point1YPercent = 100
+    StateNormal.Background.Gradient2.Point2XPercent = 0
+    StateNormal.Background.Gradient2.Point2YPercent = 0
+    StateNormal.Background.Gradient1EndPercent = 60
+    StateNormal.Background.Style = bbsGradient
+    StateNormal.Border.Style = bboNone
+    StateNormal.FontEx.Color = 16770790
+    StateNormal.FontEx.FontQuality = fqSystemClearType
+    StateNormal.FontEx.Shadow = True
+    StateNormal.FontEx.ShadowRadius = 2
+    StateNormal.FontEx.ShadowOffsetX = 1
+    StateNormal.FontEx.ShadowOffsetY = 1
+    StateNormal.FontEx.Style = [fsBold]
+    Caption = '+Equipement'
+    Color = clNone
+    DropDownWidth = 16
+    DropDownArrowSize = 8
+    GlobalOpacity = 255
+    OnClick = ButtonEquipementClick
+    ParentColor = False
+    Rounding.RoundX = 12
+    Rounding.RoundY = 12
+    RoundingDropDown.RoundX = 1
+    RoundingDropDown.RoundY = 1
+    TextApplyGlobalOpacity = False
+    MemoryUsage = bmuHigh
   end
 end

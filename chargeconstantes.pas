@@ -648,6 +648,9 @@ Var
   SelectWinMetier:     String = '';
   SelectWinArme:       String = '';
   ChoixWinArme:        String = '';
+  // Selection d'un objet du catalogue DATA_TRAPPING depuis WinPersonnage (WinEquipement).
+  SelectWinTrapping:   String = '';
+  ChoixWinTrapping:    String = '';
   SelectWinArmure:     String = '';
   ChoixWinArmure:      String = '';
   SelectWinArmureSimp: String = '';
