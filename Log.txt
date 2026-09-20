@@ -5672,3 +5672,6 @@ Fichiers modifies : pdfpersonnage.pas, CONTEXT.md, Log.txt, A FAIRE.txt.
 20/09/2026 - PDF FELDO PAGE 1 : TALENTS PLAFONNES PAR NBLIGNES (LIGNE ...) - COMPILE ET VALIDE PAR NONO
 pdfpersonnage.pas : LimiteLigne dans PdfBlocTalents (talents, regles d appartenance, talents de mutation et d armure), ligne ... si coupure, PdfNbTalentsAcquis en forward.
 Fichiers modifies : pdfpersonnage.pas, CONTEXT.md, Log.txt, A FAIRE.txt.
+
+20/09/2026 - DECISION NONO : LE GABARIT PDF NORMAL (HORS FELDO) NE RECOIT AUCUNE DONNEE AJOUTEE (FICHIER DES AUTEURS DU JEU). Rien de code.
+Fichiers modifies : A FAIRE.txt, CONTEXT.md, Log.txt.
