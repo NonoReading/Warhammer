@@ -6661,6 +6661,16 @@ L'item du `A FAIRE` était périmé. `HELFG-RACE_SEAEL`, écrit au lot 3, corres
 la page 57 — les douze compétences, les six talents dont les deux choix combinés et
 `HELFG-T0188`. Le reste de la section est du contexte et deux choix laissés au joueur.
 
+#### Règle : les qualités de fabrication ne se saisissent pas au catalogue (rappel du 20/09/2026)
+
+Durable, Fine, Practical, Ugly, Bulky... imprimés dans la colonne des qualités d'un livre sont des 
+qualités de FABRICATION : le joueur les pose via la fenêtre Fabrication, jamais sur l'entrée de 
+catalogue. Appliqué aux armures de Nations of Mankind, à la Jade Longsword, au gromril du Dwarf 
+Player's Guide, et à l'Incandescent Spear de Sea Wardens of Cothique (Durable 3, Fine 3 non saisis, 
+décision Nono du 20/09/2026 : la lance reste sans). Seule exception : Ugly de Skull Trophies 
+(`NATIO-ARMOB_15`), imprimé parmi les vraies qualités d'armure. Un objet du livre qui porte une 
+fabrication d'origine se signale en commentaire XML, pas dans la donnée. **Chantier à part à mener** (avis de Nono, 20/09/2026) : prendre en compte ces articles à qualités intégrées ; item capturé dans `A FAIRE.txt`.
+
 ### 2.30 Les cinq bugs signalés — corrigés (01/09/2026)
 
 Cinq défauts accumulés et volontairement laissés en l'état à mesure qu'ils étaient trouvés,

@@ -5835,3 +5835,7 @@ Fichiers modifies : BOOK_SEA_WARDENS_OF_COTHIQUE.Xml, CONTEXT.md, A FAIRE.txt, L
 20/09/2026 - SEA WARDENS OF COTHIQUE : INCANDESCENT SPEAR - VALIDE PAR NONO
 COTHI-COMB_HAST_01 (p.29) : Melee (Polearm), +SB+5, portee Very long, Enc 2, Impale, 2 mains (comme la Spear du Rulebook), Unique, sans prix (le livre n en donne pas). Durable 3 et Fine 3 sont des qualites de fabrication, non saisies ; l eclairage de lanterne n a pas de champ.
 Fichiers modifies : BOOK_SEA_WARDENS_OF_COTHIQUE.Xml, CONTEXT.md, A FAIRE.txt, Log.txt.
+
+20/09/2026 - SUIVI : REGLE SUR LES FABRICATIONS, AUDIT DES TXT ET CHANTIER OBJETS A FABRICATION INTEGREE
+CONTEXT.md 2.29 : rappel que les qualites de fabrication (Durable, Fine, Practical, Ugly, Bulky) ne se saisissent pas au catalogue (armures de Nations of Mankind, Jade Longsword, gromril, Incandescent Spear ; seule exception Ugly de Skull Trophies). Decision Nono : la lance reste sans Durable 3/Fine 3. A FAIRE.txt : deux items ajoutes, un audit des TXT (PDF_TEXTE) livre par livre pour les donnees non saisies, et un chantier a part pour les objets a fabrication integree (a concevoir).
+Fichiers modifies : CONTEXT.md, A FAIRE.txt, Log.txt.
