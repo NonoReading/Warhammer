@@ -5552,3 +5552,12 @@ Fichier modifie : pdfpersonnage.pas, Log.txt.
 20/09/2026 - RUNES CUTTING ET SHIELDING (TEXTE SEUL DANS CRAFTING BONUS) - VALIDE PAR NONO
 DWARF-RUNE_03 Cutting : ModifyDamage CC 0 if=RULES-LAB_248 (ignore 2 PA par rune, melee seulement). DWARF-RUNE_22 Shielding : ModifyDamage CC 0 if=RULES-LAB_249 (-2 degats des tirs et sorts subis par rune). Meme mecanisme que Force, aucun code Pascal. Toutes les runes du Dwarf Player's Guide sont donc traitees.
 Fichiers modifies : BOOK_DWARF_PLAYERS_GUIDE.Xml, INTERFACE.Xml, INTERFACE_FRANCAIS.Xml, Log.txt.
+
+20/09/2026 - PDF DE CREATION (HORS FELDO) : LES EXPLICATIONS DE BONUS TIENNENT SUR UNE LIGNE - NON COMPILE, NON TESTE
+PdfPersonnageCreation : les trois listes du bloc d explication (armure, arme, fabrication) passent de WriteText(15,...) a PdfEcritTient(PdfPage, 15, 120, ...) ; declaration anticipee (forward) de PdfEcritTient avant PdfPersonnageCreation. Limite droite ramenee a 74 mm apres lecture du PDF (bord du cadre Trappings ; 120 debordait sur la bordure) - NON COMPILE.
+Fichier modifie : pdfpersonnage.pas, Log.txt.
+
+20/09/2026 - LIBELLES CUTTING/SHIELDING : "PAR RUNE" RETIRE (DOUBLON AVEC LE "(per rune)" AJOUTE PAR LE CODE) - NON TESTE
+RULES-LAB_248 et _249 (INTERFACE.Xml, INTERFACE_FRANCAIS.Xml) ne contiennent plus "per rune" : le PDF ecrivait "... per rune (per rune)". Fichiers modifies : INTERFACE.Xml, INTERFACE_FRANCAIS.Xml, A FAIRE.txt, Log.txt.
+
+20/09/2026 - PDF DE CREATION : EXPLICATIONS DE BONUS DANS LA COLONNE TRAPPINGS ET LIBELLES CUTTING/SHIELDING SANS DOUBLON - COMPILE, VERIFIE SUR PDF PAR CLAUDE (NORMAL, REIKSGUARD, BLACK ROSE), A VALIDER PAR NONO

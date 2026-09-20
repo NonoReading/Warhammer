@@ -842,6 +842,8 @@ Function PersonnageCorruptionTotal(Personnage: StructurePersonnage): Integer;
     Result := Floor(BE/10) + Floor(BFM/10) + AmePure;
   end;
 
+Procedure PdfEcritTient(PdfPage: TPDFPage; X, XMax, Y: Single; Texte: String); forward;
+
 Procedure PdfPersonnageCreation(Personnage: StructurePersonnage; BackGround: Boolean; DessineTexteLigne: Boolean = True);
   var
     PDFDoc:               TPDFDocument;
@@ -2006,7 +2008,7 @@ Procedure PdfPersonnageCreation(Personnage: StructurePersonnage; BackGround: Boo
                     TxtBonus := TxtBonus + ChercheCompetence(PArmureBonusModif.CodeCompetence).Libelle
                                           + ' ' + IntToStr(PArmureBonusModif.Valeur) + '%';
                   end;
-            PdfPage.WriteText(15,133+(NbBonus*2), TxtBonus);
+            PdfEcritTient(PdfPage, 15, 74, 133+(NbBonus*2), TxtBonus);
           end;
         Inc(NbBonus);
         PdfPage.WriteText(15,133+(NbBonus*2), ' --------- ' + GetTexteLibelle('RULES-LAB_122') + ' --------- ');
@@ -2021,7 +2023,7 @@ Procedure PdfPersonnageCreation(Personnage: StructurePersonnage; BackGround: Boo
             LocData     := ExtractChaine(',',ArmeBonii,IndLoca);
             PArmeBonus  := ChercheArmeBonus(LocData);
             TxtBonus    := PArmeBonus.Libelle+':'+PArmeBonus.Resume;
-            PdfPage.WriteText(15,133+(NbBonus*2), TxtBonus);
+            PdfEcritTient(PdfPage, 15, 74, 133+(NbBonus*2), TxtBonus);
           end;
         Inc(NbBonus);
         PdfPage.WriteText(15,133+(NbBonus*2), ' ---------- ' + GetTexteLibelle('RULES-LAB_123') + ' ---------- ');
@@ -2039,7 +2041,7 @@ Procedure PdfPersonnageCreation(Personnage: StructurePersonnage; BackGround: Boo
             // Rune a effet conditionnel (Might, Grudge) : l'effet chiffre par rune remplace le resume.
             if FabricationEffetsConditionnels(PFabrication.CodeFabrication, '') <> '' then
               TxtBonus  := FabricationEffetsConditionnels(PFabrication.CodeFabrication, '') + ' (' + GetTexteLibelle('RULES-LAB_244') + ')';
-            PdfPage.WriteText(15,133+(NbBonus*2), TxtBonus);
+            PdfEcritTient(PdfPage, 15, 74, 133+(NbBonus*2), TxtBonus);
           end;
         Inc(NbBonus);
         PdfPage.WriteText(15,133+(NbBonus*2), ' ---------- ' + GetTexteLibelle('RULES-LAB_124') + ' ---------- ');

@@ -4,6 +4,7 @@
 
 =========================================================================
 CORRECTIONS COURTES  (une ligne ou deux chacune)
+[AJOUT LE 20/09/2026] PDF ARMES (gabarit de creation, vu sur Black Powder) : pour une arme a feu aux qualites nombreuses (Leadbelcher Gun : Dangerous, Reload 5, Accurate, Precise, Barrel Extension...), la liste des qualites se superpose a la ligne des portees ("9m 85% / 45m 65%...") dans la colonne Qualities du bloc Weapons. A corriger : reduire la police, passer a la ligne ou separer les deux zones.
 [AJOUT LE 20/09/2026] RUNES NAINES : FAIT et valide (Stone, Fortitude, Iron, Speed, Cleaving, Striking, voir CONTEXT.md 2.36). FAIT et valide le 20/09/2026 : Might et Grudge (attribut if= sur ModifyDamage/ModifySkill, texte dans le bloc Crafting Bonus du PDF Feldo). FAIT et valide le 20/09/2026 : Resistance, Warding, Force (Force sans chiffre, texte seul). FAIT et valide le 20/09/2026 : Cutting et Shielding (texte seul, comme Force). RESTE : gabarit PDF hors Feldo (PdfPersonnageCreation, y compris PdfEcritTient), ecran WinPersonnage.
 [AJOUT LE 20/09/2026] RUNES DE MACHINES (Accuracy, Penetrating, Reloading, Seeking...) : classees Misc, sans effet ; a reprendre avec les vehicules (qualite Crewed).
 [AJOUT LE 20/09/2026] FABRICATIONS : pas d asterisque pour les degats (Cleaving) ni la competence (Striking) d une arme, seule l initiative en a une ; a voir si utile.
