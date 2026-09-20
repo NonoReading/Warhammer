@@ -1,0 +1,611 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<DATA_BOOK>
+<CODE_BOOK>"PARRA"</CODE_BOOK>
+<BOOK>"BOOK PARRAVONESE STRIGANY SIGNALLER"</BOOK>
+<language>"ENGLISH"</language>
+<VERSION>"WFRP4"</VERSION>
+<OFFICIAL>"2"</OFFICIAL>
+<COMPLETE>"1"</COMPLETE>
+<DISCLAIMER>"Fan-made supplement Variant Humans for WFRP 4e (Parravonese, Strigany, and Signaller Career). The PDF names no author and no publisher."</DISCLAIMER>
+  <!-- ETAPE 3 sur 3 : les deux ethnies (Strigany et Parravonese, validees par Nono le 20/09/2026)
+       puis la carriere Signaller (Ranger, Dwarf/Halfling/Human). Le livre est complet.
+       OFFICIAL=2 : livre de fan, comme Nations of Mankind (CONTEXT.md 2.37).
+       Le PDF (LIVRES) ne porte ni auteur ni editeur. -->
+<DATA_LABEL>
+<Label language="ENGLISH">
+<Text name="PARRA-BOOK PARRAVONESE STRIGANY SIGNALLER">"Parravonese, Strigany and Signaller"</Text>
+</Label>
+<Label language="FRANCAIS">
+<Text name="PARRA-BOOK PARRAVONESE STRIGANY SIGNALLER">"Parravonese, Strigany et Signaleur"</Text>
+</Label>
+</DATA_LABEL>
+<DATA_SKILL_SPECIALIZATION>
+<Skill id="RULES-COMPLANG_STRIG">
+<Description language="ENGLISH">"Language (Strigany)"</Description>
+<Generique>"RULES-COMPLANG_*"</Generique>
+</Skill>
+  <!-- specialisation nouvelle, Humans (Strigany). Prefixe RULES : specialisation d une competence du Rulebook, declaree dans le fichier du livre qui l introduit (principe du 21/08/2026). -->
+<Skill id="RULES-COMPSAVOIR_PARRAV">
+<Description language="ENGLISH">"Lore (Parravon)"</Description>
+<Generique>"RULES-COMPSAVOIR_*"</Generique>
+</Skill>
+  <!-- specialisation nouvelle, Humans (Parravonese). Meme forme que RULES-COMPSAVOIR_ALBION de Nations of Mankind. -->
+<Skill id="RULES-COMPMETIER_SIGNAL">
+<Description language="ENGLISH">"Trade (Signaller)"</Description>
+<Generique>"RULES-COMPMETIER_*"</Generique>
+</Skill>
+<Skill id="RULES-COMPSIGNES_SEMAPH">
+<Description language="ENGLISH">"Secret Signs (Semaphore Cipher)"</Description>
+<Generique>"RULES-COMPSIGNES_*"</Generique>
+</Skill>
+  <!-- specialisations nouvelles, carriere Signaller (meme forme que RULES-COMPSIGNES_WOODELF du Wardancer). -->
+</DATA_SKILL_SPECIALIZATION>
+<DATA_TALENT>
+<Talent id="PARRA-T0001">
+<Attribut>""</Attribut>
+<Description language="ENGLISH">"Blood of Strygos"</Description>
+<Short language="ENGLISH">""</Short>
+<Explanation language="ENGLISH">"Because of the dark reputation of the Strigany, others consider you lower Status than them unless they also have the Blood of Strygos Talent, where Status is compared as normal. Because of this, local law enforcers are always suspicious of you and question your motivations, with the exact implications determined by the GM."</Explanation>
+<Skill>""</Skill>
+<Max>"1"</Max>
+<PDF>""</PDF>
+<Test language="ENGLISH">""</Test>
+</Talent>
+  <!-- Purement descriptif : la comparaison de Status et la mefiance des forces de l ordre ne sont calculees nulle part (decision de saisie, meme parti que les talents du Wardancer). Talent OBLIGATOIRE du Strigany : "you must take the following talent". -->
+</DATA_TALENT>
+<DATA_SPECIE>
+  <!-- Ethnie humaine, une race (RULES-SPECIE_HUMAN), N ethnies : meme forme que les ethnies de
+       Nations of Mankind. Caracteristiques recopiees de RULES-RACE_HUM (Humans (Reikland)) : le
+       livre n en donne aucune (decision Nono du 03/09/2026). Pas de Nationality (decision Nono
+       du 20/09/2026). -->
+<Specie id="PARRA-RACE_HPARR">
+<Description language="ENGLISH">"Humans (Parravonese)"</Description>
+<Explanation language="ENGLISH">"The Parravonese are the humans of Parravon, a duchy of Bretonnia. Raised on the language, the heraldry and the lore of their duchy, they are at home in the saddle and with a bow."</Explanation>
+  <!-- CHOIX DE SAISIE : le livre ne donne aucun texte de presentation, seulement les listes de competences et de talents. Cette explication est redigee depuis ces listes (Bretonnian, Heraldry, Parravon, Ride, Bow) - a valider par Nono. -->
+<Ethnic>"RULES-SPECIE_HUMAN"</Ethnic>
+<SUBCHAPTER_ATTR>
+<Attribut name="RULES-ATTR_WS">"2d10+20"</Attribut>
+<Attribut name="RULES-ATTR_BS">"2d10+20"</Attribut>
+<Attribut name="RULES-ATTR_S">"2d10+20"</Attribut>
+<Attribut name="RULES-ATTR_T">"2d10+20"</Attribut>
+<Attribut name="RULES-ATTR_I">"2d10+20"</Attribut>
+<Attribut name="RULES-ATTR_Ag">"2d10+20"</Attribut>
+<Attribut name="RULES-ATTR_Dex">"2d10+20"</Attribut>
+<Attribut name="RULES-ATTR_Int">"2d10+20"</Attribut>
+<Attribut name="RULES-ATTR_WP">"2d10+20"</Attribut>
+<Attribut name="RULES-ATTR_Fel">"2d10+20"</Attribut>
+<Attribut name="RULES-ATTR_Fate">"2"</Attribut>
+<Attribut name="RULES-ATTR_Resil">"1"</Attribut>
+<Attribut name="RULES-ATTR_Wound">"1xBATTR_S+2xBATTR_T+1xBATTR_WP"</Attribut>
+<Attribut name="RULES-ATTR_Supp">"3"</Attribut>
+<Attribut name="RULES-ATTR_Move">"4"</Attribut>
+</SUBCHAPTER_ATTR>
+<SUBCHAPTER_SKILL>
+<Skill>"RULES-COMPSOINANI"</Skill>
+  <!-- Animal Care -->
+<Skill>"RULES-COMPESCAL"</Skill>
+  <!-- Climb -->
+<Skill>"RULES-COMPCALM"</Skill>
+  <!-- Cool -->
+<Skill>"RULES-COMPRAGOT"</Skill>
+  <!-- Gossip -->
+<Skill>"RULES-COMPCOMM"</Skill>
+  <!-- Leadership -->
+<Skill>"RULES-COMPINTUI"</Skill>
+  <!-- Intuition -->
+<Skill>"RULES-COMPLANG_BRET"</Skill>
+  <!-- Language (Bretonnian) -->
+<Skill>"RULES-COMPSAVOIR_HERAL"</Skill>
+  <!-- Lore (Heraldry) -->
+<Skill>"RULES-COMPSAVOIR_PARRAV"</Skill>
+  <!-- Lore (Parravon) -->
+<Skill>"RULES-COMPCOMB_BASE"</Skill>
+  <!-- Melee (Basic) -->
+<Skill>"RULES-COMPCHEV_*"</Skill>
+  <!-- Ride (Any) - le livre ecrit "Ride" sans specialisation, a choisir a la creation (meme forme que Stealth (Any) du Reiklander) -->
+<Skill>"RULES-COMPPROJ_ARC"</Skill>
+  <!-- Ranged (Bow) -->
+</SUBCHAPTER_SKILL>
+<SUBCHAPTER_TALENT>
+<Talent>"RULES-T0171"</Talent>
+  <!-- Doomed -->
+<Talent>"RULES-T0103/RULES-T0078"</Talent>
+  <!-- Noble Blood or Beneath Notice -->
+<Talent>"RULES-T0168"</Talent>
+  <!-- Seasoned Traveller -->
+<Talent>"RULES-T*"</Talent>
+  <!-- Random Talent -->
+<Talent>"RULES-T*"</Talent>
+  <!-- Random Talent -->
+</SUBCHAPTER_TALENT>
+  <!-- Table de tirage : colonne Parravonese du livre (PDF p.1), 01-100 couvert une fois et une seule sans correction. Les carrieres marquees "-" ne sont pas tirables (Engineer, Flagellant, Witch Hunter, Seaman, Slayer, Warrior Priest). -->
+<SUBCHAPTER_CAREER>
+<Career name="RULES-WORK02">"01"</Career>
+  <!-- Apothecary -->
+<Career name="RULES-WORK33">"02"</Career>
+  <!-- Lawyer -->
+<Career name="RULES-WORK45">"03"</Career>
+  <!-- Nun -->
+<Career name="RULES-WORK36">"04"</Career>
+  <!-- Physician -->
+<Career name="RULES-WORK49">"05"</Career>
+  <!-- Priest -->
+<Career name="RULES-WORK23">"06"</Career>
+  <!-- Scholar -->
+<Career name="RULES-WORK58">"07"</Career>
+  <!-- Wizard -->
+<Career name="RULES-WORK01">"08-10"</Career>
+  <!-- Agitator -->
+<Career name="RULES-WORK03">"11-13"</Career>
+  <!-- Artisan -->
+<Career name="RULES-WORK37">"14-15"</Career>
+  <!-- Beggar -->
+<Career name="RULES-WORK21">"16"</Career>
+  <!-- Investigator -->
+<Career name="RULES-WORK34">"17-18"</Career>
+  <!-- Merchant -->
+<Career name="RULES-WORK52">"19"</Career>
+  <!-- Rat Catcher -->
+<Career name="RULES-WORK07">"20"</Career>
+  <!-- Townsman -->
+<Career name="RULES-WORK39">"21"</Career>
+  <!-- Watchman -->
+<Career name="RULES-WORK15">"22"</Career>
+  <!-- Advisor -->
+<Career name="RULES-WORK04">"23"</Career>
+  <!-- Artist -->
+<Career name="RULES-WORK18">"24"</Career>
+  <!-- Duellist -->
+<Career name="RULES-WORK20">"25-28"</Career>
+  <!-- Envoy -->
+<Career name="RULES-WORK44">"29-31"</Career>
+  <!-- Noble -->
+<Career name="RULES-WORK56">"32-34"</Career>
+  <!-- Servant -->
+<Career name="RULES-WORK24">"35-37"</Career>
+  <!-- Spy -->
+<Career name="RULES-WORK32">"38-39"</Career>
+  <!-- Warden -->
+<Career name="RULES-WORK05">"40-42"</Career>
+  <!-- Bailiff -->
+<Career name="RULES-WORK59">"43"</Career>
+  <!-- Hedge Witch -->
+<Career name="RULES-WORK29">"44"</Career>
+  <!-- Herbalist -->
+<Career name="RULES-WORK10">"45-46"</Career>
+  <!-- Hunter -->
+<Career name="RULES-WORK40">"47-48"</Career>
+  <!-- Miner -->
+<Career name="RULES-WORK41">"49"</Career>
+  <!-- Mystic -->
+<Career name="RULES-WORK19">"50"</Career>
+  <!-- Scout -->
+<Career name="RULES-WORK63">"51-56"</Career>
+  <!-- Villager -->
+<Career name="RULES-WORK11">"57"</Career>
+  <!-- Bounty Hunter -->
+<Career name="RULES-WORK13">"58"</Career>
+  <!-- Coachman -->
+<Career name="RULES-WORK55">"59-60"</Career>
+  <!-- Entertainer -->
+<Career name="RULES-WORK38">"61"</Career>
+  <!-- Messenger -->
+<Career name="RULES-WORK14">"62-63"</Career>
+  <!-- Pedlar -->
+<Career name="RULES-WORK47">"64"</Career>
+  <!-- Road Warden -->
+<Career name="RULES-WORK06">"65-66"</Career>
+  <!-- Boatman -->
+<Career name="RULES-WORK43">"67-68"</Career>
+  <!-- Huffer -->
+<Career name="RULES-WORK46">"69"</Career>
+  <!-- Riverwarden -->
+<Career name="RULES-WORK25">"70-71"</Career>
+  <!-- Riverwoman -->
+<Career name="RULES-WORK16">"72"</Career>
+  <!-- Smuggler -->
+<Career name="RULES-WORK17">"73"</Career>
+  <!-- Stevedore -->
+<Career name="RULES-WORK42">"74"</Career>
+  <!-- Wrecker -->
+<Career name="RULES-WORK22">"75-76"</Career>
+  <!-- Bawd -->
+<Career name="RULES-WORK09">"77"</Career>
+  <!-- Charlatan -->
+<Career name="RULES-WORK53">"78"</Career>
+  <!-- Fence -->
+<Career name="RULES-WORK48">"79"</Career>
+  <!-- Grave Robber -->
+<Career name="RULES-WORK30">"80-84"</Career>
+  <!-- Outlaw -->
+<Career name="RULES-WORK51">"85"</Career>
+  <!-- Racketeer -->
+<Career name="RULES-WORK64">"86-87"</Career>
+  <!-- Thief -->
+<Career name="RULES-WORK60">"88"</Career>
+  <!-- Witch -->
+<Career name="RULES-WORK08">"89"</Career>
+  <!-- Cavalryman -->
+<Career name="RULES-WORK27">"90"</Career>
+  <!-- Guard -->
+<Career name="RULES-WORK12">"91-97"</Career>
+  <!-- Knight -->
+<Career name="RULES-WORK28">"98"</Career>
+  <!-- Pit Fighter -->
+<Career name="RULES-WORK61">"99"</Career>
+  <!-- Protagonist -->
+<Career name="RULES-WORK57">"100"</Career>
+  <!-- Soldier -->
+</SUBCHAPTER_CAREER>
+</Specie>
+<Specie id="PARRA-RACE_HSTRI">
+<Description language="ENGLISH">"Humans (Strigany)"</Description>
+<Explanation language="ENGLISH">"The Strigany are travelling folk of the Old World. Their dark reputation makes them the object of suspicion: local law enforcers are always wary of them, and those who do not share the Blood of Strygos look down on them."</Explanation>
+  <!-- CHOIX DE SAISIE : le livre ne donne aucun texte de presentation, seulement les listes de competences et de talents et le talent Blood of Strygos. Cette explication est redigee depuis ce seul texte - a valider par Nono. -->
+<Ethnic>"RULES-SPECIE_HUMAN"</Ethnic>
+<SUBCHAPTER_ATTR>
+<Attribut name="RULES-ATTR_WS">"2d10+20"</Attribut>
+<Attribut name="RULES-ATTR_BS">"2d10+20"</Attribut>
+<Attribut name="RULES-ATTR_S">"2d10+20"</Attribut>
+<Attribut name="RULES-ATTR_T">"2d10+20"</Attribut>
+<Attribut name="RULES-ATTR_I">"2d10+20"</Attribut>
+<Attribut name="RULES-ATTR_Ag">"2d10+20"</Attribut>
+<Attribut name="RULES-ATTR_Dex">"2d10+20"</Attribut>
+<Attribut name="RULES-ATTR_Int">"2d10+20"</Attribut>
+<Attribut name="RULES-ATTR_WP">"2d10+20"</Attribut>
+<Attribut name="RULES-ATTR_Fel">"2d10+20"</Attribut>
+<Attribut name="RULES-ATTR_Fate">"2"</Attribut>
+<Attribut name="RULES-ATTR_Resil">"1"</Attribut>
+<Attribut name="RULES-ATTR_Wound">"1xBATTR_S+2xBATTR_T+1xBATTR_WP"</Attribut>
+<Attribut name="RULES-ATTR_Supp">"3"</Attribut>
+<Attribut name="RULES-ATTR_Move">"4"</Attribut>
+</SUBCHAPTER_ATTR>
+<SUBCHAPTER_SKILL>
+<Skill>"RULES-COMPSOINANI"</Skill>
+  <!-- Animal Care -->
+<Skill>"RULES-COMPCHARM"</Skill>
+  <!-- Charm -->
+<Skill>"RULES-COMPRESALC"</Skill>
+  <!-- Consume Alcohol -->
+<Skill>"RULES-COMPCOND"</Skill>
+  <!-- Drive -->
+<Skill>"RULES-COMPEVAL"</Skill>
+  <!-- Evaluate -->
+<Skill>"RULES-COMPRAGOT"</Skill>
+  <!-- Gossip -->
+<Skill>"RULES-COMPMARCH"</Skill>
+  <!-- Haggle -->
+<Skill>"RULES-COMPLANG_STRIG"</Skill>
+  <!-- Language (Strigany) -->
+<Skill>"RULES-COMPSAVOIR_REIKLAND"</Skill>
+  <!-- Lore (Reikland) -->
+<Skill>"RULES-COMPCOMB_BASE"</Skill>
+  <!-- Melee (Basic) -->
+<Skill>"RULES-COMPRAMER"</Skill>
+  <!-- Row -->
+<Skill>"RULES-COMPNATA"</Skill>
+  <!-- Swim -->
+</SUBCHAPTER_SKILL>
+<SUBCHAPTER_TALENT>
+<Talent>"RULES-T0171"</Talent>
+  <!-- Doomed -->
+<Talent>"RULES-T0168"</Talent>
+  <!-- Seasoned Traveller -->
+<Talent>"RULES-T0105"</Talent>
+  <!-- Rover -->
+<Talent>"RULES-T*"</Talent>
+  <!-- Random Talent -->
+<Talent>"RULES-T*"</Talent>
+  <!-- Random Talent -->
+<Talent>"PARRA-T0001"</Talent>
+  <!-- Blood of Strygos - obligatoire ("you must take the following talent") -->
+</SUBCHAPTER_TALENT>
+  <!-- Table de tirage : colonne Strigany du livre (PDF p.1). Le livre laisse le 03 sans carriere (Apothecary 1-2, puis Lawyer 4) : Apothecary etendu a 01-03, choix de Nono du 20/09/2026, pour qu il y ait un resultat et un seul. Les carrieres marquees "-" ne sont pas tirables (Engineer, Witch Hunter, Seaman, Knight, Noble, Slayer, Warrior Priest). -->
+<SUBCHAPTER_CAREER>
+<Career name="RULES-WORK02">"01-03"</Career>
+  <!-- Apothecary -->
+<Career name="RULES-WORK33">"04"</Career>
+  <!-- Lawyer -->
+<Career name="RULES-WORK45">"05"</Career>
+  <!-- Nun -->
+<Career name="RULES-WORK36">"06"</Career>
+  <!-- Physician -->
+<Career name="RULES-WORK49">"07"</Career>
+  <!-- Priest -->
+<Career name="RULES-WORK23">"08"</Career>
+  <!-- Scholar -->
+<Career name="RULES-WORK58">"09"</Career>
+  <!-- Wizard -->
+<Career name="RULES-WORK01">"10-11"</Career>
+  <!-- Agitator -->
+<Career name="RULES-WORK03">"12-13"</Career>
+  <!-- Artisan -->
+<Career name="RULES-WORK37">"14-15"</Career>
+  <!-- Beggar -->
+<Career name="RULES-WORK21">"16"</Career>
+  <!-- Investigator -->
+<Career name="RULES-WORK34">"17-18"</Career>
+  <!-- Merchant -->
+<Career name="RULES-WORK52">"19"</Career>
+  <!-- Rat Catcher -->
+<Career name="RULES-WORK07">"20"</Career>
+  <!-- Townsman -->
+<Career name="RULES-WORK39">"21"</Career>
+  <!-- Watchman -->
+<Career name="RULES-WORK15">"22"</Career>
+  <!-- Advisor -->
+<Career name="RULES-WORK04">"23-24"</Career>
+  <!-- Artist -->
+<Career name="RULES-WORK18">"25"</Career>
+  <!-- Duellist -->
+<Career name="RULES-WORK20">"26"</Career>
+  <!-- Envoy -->
+<Career name="RULES-WORK56">"27"</Career>
+  <!-- Servant -->
+<Career name="RULES-WORK24">"28"</Career>
+  <!-- Spy -->
+<Career name="RULES-WORK32">"29"</Career>
+  <!-- Warden -->
+<Career name="RULES-WORK05">"30"</Career>
+  <!-- Bailiff -->
+<Career name="RULES-WORK59">"31-32"</Career>
+  <!-- Hedge Witch -->
+<Career name="RULES-WORK29">"33-36"</Career>
+  <!-- Herbalist -->
+<Career name="RULES-WORK10">"37-38"</Career>
+  <!-- Hunter -->
+<Career name="RULES-WORK40">"39"</Career>
+  <!-- Miner -->
+<Career name="RULES-WORK41">"40-44"</Career>
+  <!-- Mystic -->
+<Career name="RULES-WORK19">"45-47"</Career>
+  <!-- Scout -->
+<Career name="RULES-WORK63">"48-49"</Career>
+  <!-- Villager -->
+<Career name="RULES-WORK11">"50"</Career>
+  <!-- Bounty Hunter -->
+<Career name="RULES-WORK13">"51"</Career>
+  <!-- Coachman -->
+<Career name="RULES-WORK55">"52-55"</Career>
+  <!-- Entertainer -->
+<Career name="RULES-WORK26">"56"</Career>
+  <!-- Flagellant -->
+<Career name="RULES-WORK38">"57"</Career>
+  <!-- Messenger -->
+<Career name="RULES-WORK14">"58-60"</Career>
+  <!-- Pedlar -->
+<Career name="RULES-WORK47">"61"</Career>
+  <!-- Road Warden -->
+<Career name="RULES-WORK06">"62-63"</Career>
+  <!-- Boatman -->
+<Career name="RULES-WORK43">"64-65"</Career>
+  <!-- Huffer -->
+<Career name="RULES-WORK46">"66"</Career>
+  <!-- Riverwarden -->
+<Career name="RULES-WORK25">"67-69"</Career>
+  <!-- Riverwoman -->
+<Career name="RULES-WORK16">"70-72"</Career>
+  <!-- Smuggler -->
+<Career name="RULES-WORK17">"73-75"</Career>
+  <!-- Stevedore -->
+<Career name="RULES-WORK42">"76-77"</Career>
+  <!-- Wrecker -->
+<Career name="RULES-WORK22">"78-79"</Career>
+  <!-- Bawd -->
+<Career name="RULES-WORK09">"80-82"</Career>
+  <!-- Charlatan -->
+<Career name="RULES-WORK53">"83-84"</Career>
+  <!-- Fence -->
+<Career name="RULES-WORK48">"85"</Career>
+  <!-- Grave Robber -->
+<Career name="RULES-WORK30">"86-87"</Career>
+  <!-- Outlaw -->
+<Career name="RULES-WORK51">"88-89"</Career>
+  <!-- Racketeer -->
+<Career name="RULES-WORK64">"90-91"</Career>
+  <!-- Thief -->
+<Career name="RULES-WORK60">"92"</Career>
+  <!-- Witch -->
+<Career name="RULES-WORK08">"93-94"</Career>
+  <!-- Cavalryman -->
+<Career name="RULES-WORK27">"95"</Career>
+  <!-- Guard -->
+<Career name="RULES-WORK28">"96-97"</Career>
+  <!-- Pit Fighter -->
+<Career name="RULES-WORK61">"98-99"</Career>
+  <!-- Protagonist -->
+<Career name="RULES-WORK57">"100"</Career>
+  <!-- Soldier -->
+</SUBCHAPTER_CAREER>
+</Specie>
+</DATA_SPECIE>
+<DATA_CAREER>
+<Career id="PARRA-WORK001">
+<Description language="ENGLISH">"Signaller"</Description>
+<Explanation language="ENGLISH">"The Imperial Signal Corps are responsible for the construction, maintenance and use of the signal towers that are beginning to appear across the Reikland landscape and beyond. This is part of a far-reaching and ambitious plan to create an extensive network of towers that will criss-cross the Empire, allowing speedy communication between all corners of the land. Initially a military endeavour, there are hopes that, in time, civilians will be able to make use of the network.
+
+For a price, naturally. The towers are built and maintained by Dwarf engineers in the employ of the Imperial Signal Corps - much to the irritation of the Imperial Engineers School in Altdorf - whose bid was rejected.
+
+The towers - identified according to some arcane and incomprehensible system of letters and numbers - vary significantly. Where possible, the builders seek to make use of existing structures - watch towers, keeps, stable ruins, but when no such structure is available, they construct a sturdy stone tower from scratch. The service men and women staffing the towers vary just as much as the towers. The more vital the route, and the more imminent the hostilities, the more martial the operators."</Explanation>
+<Skill>"RULES-COMPMETIER_SIGNAL"</Skill>
+  <!-- competence de tete de carriere : Trade (Signaller) - en italique dans la liste du niveau 1 (PDF p.2). -->
+<Class>"RULES-CLASS_RANG"</Class>
+  <!-- Career Path (Ranger). Especes : Dwarf, Halfling, Human, voir DATA_SPECIE_CAREER_DIRECT. -->
+<SUBCHAPTER_LEVEL>
+<Level id="1">
+<Description language="ENGLISH">"Spotter"</Description>
+<Salary>"TIERS_BRASS 4"</Salary>
+</Level>
+<Level id="2">
+<Description language="ENGLISH">"Operator"</Description>
+<Salary>"TIERS_SILVER 1"</Salary>
+</Level>
+<Level id="3">
+<Description language="ENGLISH">"Chief Signalling Officer"</Description>
+<Salary>"TIERS_SILVER 4"</Salary>
+</Level>
+<Level id="4">
+<Description language="ENGLISH">"Branch Captain"</Description>
+<Salary>"TIERS_GOLD 1"</Salary>
+</Level>
+</SUBCHAPTER_LEVEL>
+  <!-- Schema d avancement (PDF p.2) : croix = niveau 1 (I, Dex, WP), haches = niveau 2 (Int), crane = niveau 3 (BS), bouclier = niveau 4 (Fel). Le TXT du livre est vide, valeurs lues sur les pictogrammes. -->
+<SUBCHAPTER_ATTR>
+<Attribut name="RULES-ATTR_WS">"0"</Attribut>
+<Attribut name="RULES-ATTR_BS">"3"</Attribut>
+<Attribut name="RULES-ATTR_S">"0"</Attribut>
+<Attribut name="RULES-ATTR_T">"0"</Attribut>
+<Attribut name="RULES-ATTR_I">"1"</Attribut>
+<Attribut name="RULES-ATTR_Ag">"0"</Attribut>
+<Attribut name="RULES-ATTR_Dex">"1"</Attribut>
+<Attribut name="RULES-ATTR_Int">"2"</Attribut>
+<Attribut name="RULES-ATTR_WP">"1"</Attribut>
+<Attribut name="RULES-ATTR_Fel">"4"</Attribut>
+</SUBCHAPTER_ATTR>
+<SUBCHAPTER_SKILL>
+<Skill name="RULES-COMPESCAL">"1"</Skill>
+  <!-- Climb -->
+<Skill name="RULES-COMPRESALC">"1"</Skill>
+  <!-- Consume Alcohol -->
+<Skill name="RULES-COMPCALM">"1"</Skill>
+  <!-- Cool -->
+<Skill name="RULES-COMPRESIST">"1"</Skill>
+  <!-- Endurance -->
+<Skill name="RULES-COMPPARI">"1"</Skill>
+  <!-- Gamble -->
+<Skill name="RULES-COMPPRECEP">"1"</Skill>
+  <!-- Perception -->
+<Skill name="RULES-COMPSIGNES_SEMAPH">"1"</Skill>
+  <!-- Secret Signs (Semaphore Cipher) -->
+<Skill name="RULES-COMPMETIER_SIGNAL">"1"</Skill>
+  <!-- Trade (Signaller) -->
+<Skill name="RULES-COMPSOINANI">"2"</Skill>
+  <!-- Animal Care -->
+<Skill name="RULES-COMPDRESS_PIGEON">"2"</Skill>
+  <!-- Animal Training (Pigeon) -->
+<Skill name="RULES-COMPDIVERT_NARRA">"2"</Skill>
+  <!-- Entertain (Storytelling) -->
+<Skill name="RULES-COMPSAVOIR_LOCAL">"2"</Skill>
+  <!-- Lore (Local) -->
+<Skill name="RULES-COMPPROJ_ARB">"2"</Skill>
+  <!-- Ranged (Crossbow) -->
+<Skill name="RULES-COMPLANG_BATAIL">"2"</Skill>
+  <!-- Language (Battle) -->
+<Skill name="RULES-COMPLANG_*">"3"</Skill>
+  <!-- Language (Any) -->
+<Skill name="RULES-COMPSAVOIR_ING">"3"</Skill>
+  <!-- Lore (Engineering) : le livre ecrit Lore (Engineer) -->
+<Skill name="RULES-COMPPROJ_POUDRE">"3"</Skill>
+  <!-- Ranged (Blackpowder) : le livre ecrit Ranged (Gunpowder) -->
+<Skill name="RULES-COMPMETIER_ING">"3"</Skill>
+  <!-- Trade (Engineer) -->
+<Skill name="RULES-COMPCOMM">"4"</Skill>
+  <!-- Leadership -->
+<Skill name="RULES-COMPRECH">"4"</Skill>
+  <!-- Research -->
+</SUBCHAPTER_SKILL>
+<SUBCHAPTER_TALENT>
+<Talent name="RULES-T0139_VUE">"1"</Talent>
+  <!-- Acute Sense (Sight) -->
+<Talent name="RULES-T0144">"1"</Talent>
+  <!-- Catfall -->
+<Talent name="RULES-T0081">"1"</Talent>
+  <!-- Speedreader -->
+<Talent name="RULES-T0084">"1"</Talent>
+  <!-- Read/Write -->
+<Talent name="RULES-T0004">"2"</Talent>
+  <!-- Ambidextrous -->
+<Talent name="RULES-T0164">"2"</Talent>
+  <!-- Night Vision -->
+<Talent name="RULES-T0045">"2"</Talent>
+  <!-- Nimble Fingered -->
+<Talent name="RULES-T0155">"2"</Talent>
+  <!-- Tower of Memories -->
+<Talent name="RULES-T0094">"3"</Talent>
+  <!-- Diceman -->
+<Talent name="RULES-T0136_SOLD">"3"</Talent>
+  <!-- Etiquette (Soldiers) -->
+<Talent name="RULES-T0046">"3"</Talent>
+  <!-- Super Numerate -->
+<Talent name="RULES-T0015">"3"</Talent>
+  <!-- Tinker -->
+<Talent name="RULES-T0082">"4"</Talent>
+  <!-- Linguistics -->
+<Talent name="RULES-T0109">"4"</Talent>
+  <!-- Public Speaking : Public Speaker au catalogue -->
+<Talent name="RULES-T0079">"4"</Talent>
+  <!-- Schemer -->
+<Talent name="RULES-T0157_INGE">"4"</Talent>
+  <!-- Master Tradesman (Engineering) -->
+</SUBCHAPTER_TALENT>
+<SUBCHAPTER_ITEM>
+<Item name="RULES-TRAP_085">"1"</Item>
+  <!-- Telescope -->
+<Item name="RULES-TRAP_150">"1"</Item>
+  <!-- Rope (10 yards) -->
+<Item name="RULES-TRAP_034">"1"</Item>
+  <!-- Uniform -->
+<Item name="RULES-PROJ_ARB_01">"2"</Item>
+  <!-- Crossbow -->
+<Item name="RULES-MUNI_01">"2"</Item>
+  <!-- Bolt : le 10 bolts du livre -->
+<Item name="RULES-TRAP_133/RULES-TRAP_136">"2"</Item>
+  <!-- Deck of Cards or Dice -->
+<Item name="RULES-TRAP_087">"2"</Item>
+  <!-- Writing Kit -->
+<Item name="RULES-TRAP_090">"3"</Item>
+  <!-- Book (Cryptography) -->
+<Item name="PARRA-TRAP_001">"3"</Item>
+  <!-- Signal Tower -->
+<Item name="PARRA-TRAP_003">"3"</Item>
+  <!-- Symbol of Rank -->
+<Item name="RULES-TRAP_101">"3"</Item>
+  <!-- Trade Tools (Engineer) -->
+<Item name="RULES-TRAP_034 (Q)">"4"</Item>
+  <!-- Quality Uniform -->
+<Item name="PARRA-TRAP_002">"4"</Item>
+  <!-- Signal Tower Line -->
+<Item name="PARRA-TRAP_003">"4"</Item>
+  <!-- Symbol of Rank -->
+<Item name="RULES-TRAP_099">"4"</Item>
+  <!-- Map -->
+</SUBCHAPTER_ITEM>
+</Career>
+</DATA_CAREER>
+<DATA_SPECIE_CAREER_DIRECT>
+  <!-- Cibles en RACE : une race couvre toutes ses ethnies (Lustria, CONTEXT.md 2.10). Le livre : Dwarf, Halfling, Human. -->
+<Entry>
+<Specie>"RULES-SPECIE_HUMAN"</Specie>
+<Career name="PARRA-WORK001">"X"</Career>
+  <!-- Signaller -->
+</Entry>
+<Entry>
+<Specie>"RULES-SPECIE_DWARF"</Specie>
+<Career name="PARRA-WORK001">"X"</Career>
+  <!-- Signaller -->
+</Entry>
+<Entry>
+<Specie>"RULES-SPECIE_HALFLING"</Specie>
+<Career name="PARRA-WORK001">"X"</Career>
+  <!-- Signaller -->
+</Entry>
+</DATA_SPECIE_CAREER_DIRECT>
+<DATA_TRAPPING>
+  <!-- Objets de la carriere Signaller que le livre ne decrit pas : ni prix, ni disponibilite, ni encombrement. -->
+<Trapping id="PARRA-TRAP_001">
+<Description language="ENGLISH">"Signal Tower"</Description>
+<Theme>"RULES-LAB_193"</Theme>
+<Encumbrance>"0"</Encumbrance>
+</Trapping>
+<Trapping id="PARRA-TRAP_002">
+<Description language="ENGLISH">"Signal Tower Line"</Description>
+<Theme>"RULES-LAB_193"</Theme>
+<Encumbrance>"0"</Encumbrance>
+</Trapping>
+<Trapping id="PARRA-TRAP_003">
+<Description language="ENGLISH">"Symbol of Rank"</Description>
+<Theme>"RULES-LAB_193"</Theme>
+<Encumbrance>"0"</Encumbrance>
+</Trapping>
+</DATA_TRAPPING>
+</DATA_BOOK>

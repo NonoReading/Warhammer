@@ -5805,3 +5805,13 @@ Fichiers modifies : A FAIRE.txt, Log.txt.
 20/09/2026 - RULEBOOK : EXPLANATION DE PRACTICAL ET DE BULKY NETTOYEES
 BOOK_RULESBOOK.Xml : RULES-QUALITY_02 (Practical) et RULES-DEFECT_04 (Bulky) ne gardent que le texte du livre (p.292-293) ; les paragraphes etrangers (objets defectueux, table d encombrement, format des armes) sont retires. BOOK_RULESBOOK_FRANCAIS.Xml etait deja propre. Ces textes s affichent dans "Crafting Bonus Explanations" du PDF.
 Fichiers modifies : BOOK_RULESBOOK.Xml, A FAIRE.txt, Log.txt.
+
+20/09/2026 - PARRAVONESE, STRIGANY ET SIGNALLER : NOUVEAU LIVRE DE FAN (PARRA) - COMPILE ET VALIDE PAR NONO
+BOOK_PARRAVONESE_STRIGANY_SIGNALLER.Xml (OFFICIAL=2, COMPLETE=1), ajoute a INI.TXT. Deux ethnies humaines (PARRA-RACE_HPARR, PARRA-RACE_HSTRI) sans Nation, caracteristiques du Reiklander, tables de tirage propres. Carriere Signaller (PARRA-WORK001, Ranger, Nain/Halfling/Human par race) avec avancement lu sur les pictogrammes du PDF. Talent Blood of Strygos, 4 specialisations (RULES-COMPLANG_STRIG, COMPSAVOIR_PARRAV, COMPMETIER_SIGNAL, COMPSIGNES_SEMAPH), 3 objets sans prix (PARRA-TRAP_001 a _003).
+Coquille du livre : la colonne Strigany laissait le 03 sans carriere ; Apothecary etendu a 01-03 (choix de Nono). Les deux colonnes couvrent 01-100 une fois et une seule.
+Methode : le livre a ete saisi en trois etapes validees une par une (Strigany seul, puis Parravonese, puis Signaller), et chaque table de tirage verifiee par script avant ecriture. CONTEXT.md 2.85.
+Fichiers modifies : BOOK_PARRAVONESE_STRIGANY_SIGNALLER.Xml, INI.TXT, A FAIRE.txt, CONTEXT.md, Log.txt.
+
+20/09/2026 - WINMETIER : UN OBJET DIVERS AVEC (Q) S AFFICHAIT EN CODE BRUT - COMPILE ET VALIDE PAR NONO
+winmetier.pas, branche TypeEquipDI d un objet seul : le suffixe (Q) n etait pas retire avant ChercheTrapping (les branches arme et armure le faisaient), donc "RULES-TRAP_017 (Q)" ne se retrouvait pas au catalogue et s affichait brut (vu sur Artisan niveau 4 et Signaller niveau 4). Corrige : (Q) retire, suffixe "de qualite" ajoute au libelle. Les branches choix et ensemble du meme code retirent deja le (Q) mais n ajoutent pas le suffixe pour un objet divers, laisse tel quel.
+Fichiers modifies : winmetier.pas, Log.txt.

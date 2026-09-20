@@ -947,12 +947,25 @@ Begin
                 end
               else if PMetierEquipement.TypeEquipement = TypeEquipDI then
                 begin
-                  PTrapping := ChercheTrapping(PMetierEquipement.Equipement);
+                  // Suffixe (Q), comme pour les armes et les armures ci-dessus : sans ce retrait, un
+                  // code catalogue "RULES-TRAP_017 (Q)" ne se retrouvait pas et s'affichait brut
+                  // (20/09/2026, Artisan niveau 4 et Signaller niveau 4).
+                  if Pos(EquipementQualite, PMetierEquipement.Equipement) > 0 then
+                    begin
+                      Code   := Trim(copy(PMetierEquipement.Equipement,1,length(PMetierEquipement.Equipement) - length(Equipementqualite)));
+                      Qualite:= GetTexteLibelle('RULES-LAB_038');
+                    end
+                  else
+                    begin
+                      Code   := PMetierEquipement.Equipement;
+                      Qualite:= '';
+                    end;
+                  PTrapping := ChercheTrapping(Code);
                   if PTrapping.CodeTrapping <> '' then
                     begin
                       NodeData                := TMyNodeData.Create;
                       NodeData.AdditionalData := PTrapping.CodeTrapping;
-                      NodeSFeuille            := TreeViewMetier1.Items.AddChild(NodeSBrance, EquipDivers + PTrapping.Libelle + QuantiteSuffixe(PMetierEquipement.Quantite));
+                      NodeSFeuille            := TreeViewMetier1.Items.AddChild(NodeSBrance, EquipDivers + PTrapping.Libelle + Qualite + QuantiteSuffixe(PMetierEquipement.Quantite));
                       NodeSFeuille.Data       := NodeData;
                     end
                   else

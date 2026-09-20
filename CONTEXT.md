@@ -6962,7 +6962,7 @@ Le niveau 4 est en **Silver 5 et non en Gold** : c'est bien ce qu'écrit le livr
 pas de quantité, contrairement au niveau 1.
 
 **Suite** : la méthode a été passée à l'échelle sur *Nations of Mankind*, voir §2.37.
-*Parravonese, Strigany, and Signaller Career* (8 Ko) reste le prochain livre à exercer
+*Parravonese, Strigany, and Signaller Career* (8 Ko) : fait le 20/09/2026, voir §2.85. Il devait exercer
 `DATA_SPECIE` et `DATA_CAREER_ROLL`, que ni le Wardancer ni Nations n'ont touchés : il
 apporte une carrière **et deux ethnies avec leurs tables de tirage de 100 lignes**.
 Attention, son tableau d'avance est **vide dans l'export TXT** ; le lire sur le PDF.
@@ -10908,6 +10908,35 @@ pointer `carriedby` vers un identifiant de groupe.
 - **Thèmes (20/09/2026, validé)** : `RULES-LAB_195` scindé en `RULES-LAB_260` montures et animaux, `_261` bateaux, `_262` véhicules (91 fiches) ; `EstThemeAnimauxVehicules` (`winequipement.pas`). `_195` reste le titre de la fenêtre.
 - **Armes de guerre (20/09/2026, à tester par Nono)** : défauts `UPINA-WEAPB35` Crewed et `_36` Salvo, 12 armes d'Up in Arms p.122 ; 7 armes de Lustria p.178 (`LUSTR-WEAPB01` à `_03`, Crewed/Salvo pointent vers Up in Arms, `+1d10` en texte) ; 11 armes de siège naines p.99 (`DWARF-WEAPB02` Crewed, `_03` Spread). Sans mécanique d'équipage.
 - **Point de reprise** : chantier clos. Armes de Sea of Claws faites (20/09/2026). **Décision de Nono (20/09/2026)** : les règles de conduite, de vol et d équipage des véhicules et navires (tests de Handling, Crew Tests, coups et critiques du navire) sont des règles de MJ, hors périmètre de WinPersonnage : ne pas les rouvrir. Seul l effectif Crewed d une arme pourrait s afficher sur la fiche, si Nono le demande. Suites dans `A FAIRE.txt`.
+
+---
+
+### 2.85 Parravonese, Strigany et Signaller — livre de fan, terminé et validé par Nono (20/09/2026)
+
+Nouveau livre `BOOK_PARRAVONESE_STRIGANY_SIGNALLER.Xml`, code `PARRA`, `OFFICIAL=2` (livre de fan,
+sans auteur ni éditeur dans le PDF), déclaré dans `INI.TXT`. Sources : `LIVRES/Parravonese, Strigany,
+and Signaller Career.pdf` (2 pages) ; le tableau d'avancement du Signaller est vide dans l'export TXT,
+il a été lu sur les pictogrammes du PDF (croix = niveau 1, haches = 2, crâne = 3, bouclier = 4).
+
+- **Deux ethnies humaines**, `PARRA-RACE_HPARR` et `PARRA-RACE_HSTRI`, race `RULES-SPECIE_HUMAN`, **sans
+  Nation** (décision Nono). Caractéristiques recopiées du Reiklander (règle du 03/09/2026). Chacune a sa
+  table de tirage propre ; les autres carrières leur viennent en `X` par la propagation de race (§2.10).
+- **Coquille du livre, arbitrée par Nono** : la colonne Strigany laissait le 03 sans carrière (Apothecary
+  1-2, Lawyer 4). Apothecary étendu à 01-03. La colonne Parravonese est exacte. Les deux couvrent 01-100
+  une fois et une seule (vérifié sur le XML écrit).
+- **Talent `PARRA-T0001` Blood of Strygos**, obligatoire pour le Strigany, descriptif (comparaison de
+  Status non calculée). Textes de présentation des deux ethnies **rédigés**, le livre n'en donne pas.
+- **Carrière `PARRA-WORK001` Signaller** (classe Ranger, Nain/Halfling/Human par `DATA_SPECIE_CAREER_DIRECT`
+  en codes de race). Tête de carrière : Trade (Signaller) (italique du PDF). Avancement : I, Dex, WP au
+  niveau 1, Int au 2, BS au 3, Fel au 4.
+- **4 spécialisations créées** en `RULES-*` : `COMPLANG_STRIG`, `COMPSAVOIR_PARRAV`, `COMPMETIER_SIGNAL`,
+  `COMPSIGNES_SEMAPH`. **3 objets sans prix ni encombrement** (le livre ne les décrit pas) : Signal Tower,
+  Signal Tower Line, Symbol of Rank (`PARRA-TRAP_001` à `_003`).
+- **Lectures du livre** : Ride (sans spécialisation) = `RULES-COMPCHEV_*` (Ride (Any)) ; Lore (Engineer) lu
+  Lore (Engineering) ; Ranged (Gunpowder) lu Blackpowder ; Public Speaking = Public Speaker ; Quality
+  Uniform = uniforme du catalogue `(Q)`.
+
+Rien à reprendre sur ce livre.
 
 ---
 

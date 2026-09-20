@@ -734,7 +734,7 @@ Ne rien relancer ici sans l avoir lu.
 
 FAITS : High Elf Player s Guide (CONTEXT.md 2.25 a 2.29), Wood Elf Wardancer (2.35), Nations of Mankind tous les lots, ordres de chevalerie et regiments compris (2.37, 2.44, 2.51), Dwarf Player s Guide, Sylvania (objets et bateaux seulement).
 
-SUITE POSSIBLE (ordre a confirmer avec CONTEXT.md 2.36) : les Companions de l Enemy Within qui manquent (sorts et carrieres) ; Parravonese/Strigany/Signaller (1 carriere, 2 ethnies, 2 tables de tirage ; tableau d avance VIDE dans l export TXT, lire le PDF) ; Deft Steps Light Fingers ; Unofficial Grimoire (~215 sorts).
+SUITE POSSIBLE (ordre a confirmer avec CONTEXT.md 2.36) : les Companions de l Enemy Within qui manquent (sorts et carrieres) ; Deft Steps Light Fingers ; Unofficial Grimoire (~215 sorts).
 
 REGLES DE METHODE QUI RESTENT VRAIES, tirees de l inventaire du 29/08 et de sa correction :
   * La taille d un fichier ne coute rien tant qu on ne le lit pas. Inventaire, recherche
