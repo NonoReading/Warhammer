@@ -206,5 +206,22 @@
 <Price>"600CO"</Price>
 <Encumbrance>"350"</Encumbrance>
 </Trapping>
+<!-- Objets du Shadowblade (p.75). Le livre ne donne NI prix NI encombrement NI (sauf Heart of Woe, unique) disponibilite : Enc 0, sans Price. Effets non modelises : Potion of Diabolic Strength = +60 Force pendant 1d10+3 rounds, sans effet et perissable pour un non-Elfe ; Dark Venom = sur une Blessure, Endurance Difficile (-10) sinon Festering Wound a incubation instantanee ; Heart of Woe = rubis magique qui, a la mort du porteur, explose au round suivant comme une Bomb. Les fioles de Black Lotus Blade Venom du Shadowblade ne sont pas reprises (Black Lotus deja au Rulebook). -->
+<Trapping id="COTHI-TRAP_19">
+<Description language="ENGLISH">"Potion of Diabolic Strength"</Description>
+<Theme>"RULES-LAB_198"</Theme>
+<Encumbrance>"0"</Encumbrance>
+</Trapping>
+<Trapping id="COTHI-TRAP_20">
+<Description language="ENGLISH">"Dark Venom"</Description>
+<Theme>"RULES-LAB_197"</Theme>
+<Encumbrance>"0"</Encumbrance>
+</Trapping>
+<Trapping id="COTHI-TRAP_21">
+<Description language="ENGLISH">"Heart of Woe"</Description>
+<Theme>"RULES-LAB_199"</Theme>
+<Availability>"RULES-DISPO_UNIQUE"</Availability>
+<Encumbrance>"0"</Encumbrance>
+</Trapping>
 </DATA_TRAPPING>
 </DATA_BOOK>

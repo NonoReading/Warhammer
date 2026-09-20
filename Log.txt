@@ -5847,3 +5847,7 @@ Fichiers modifies : BOOK_SEA_WARDENS_OF_COTHIQUE.Xml, CONTEXT.md, A FAIRE.txt, L
 20/09/2026 - SEA WARDENS OF COTHIQUE : ELVEN SAILS ET OUTRIGGER - VALIDE PAR NONO
 COTHI-TRAP_14 a _18 (p.63) : une entree par tranche de taille de bateau (decision Nono), Elven Sails 20CO/10 Enc et 120CO/60 Enc, Outrigger 2CO/15, 200CO/150 et 600CO/350, theme Miscellaneous Trappings, sans disponibilite. Effets (+1 M ; +25% Carries) non modelises, en commentaire XML. Constate : les ameliorations de bateau de Sea of Claws (Anchor, Figurehead, Ram...) n existent pas non plus au catalogue.
 Fichiers modifies : BOOK_SEA_WARDENS_OF_COTHIQUE.Xml, CONTEXT.md, A FAIRE.txt, Log.txt.
+
+20/09/2026 - SEA WARDENS OF COTHIQUE : OBJETS DU SHADOWBLADE - VALIDE PAR NONO
+COTHI-TRAP_19 Potion of Diabolic Strength (Herbs and Draughts), _20 Dark Venom (Drugs and Poisons), _21 Heart of Woe (Curiosities, Unique) : p.75, sans prix ni encombrement (absents du livre, Enc 0), effets non modeles, en commentaire XML. Fioles de Black Lotus Blade Venom non reprises (Black Lotus au Rulebook). Le livre COTHI ne contient plus rien a saisir hors regles de MJ (Gifts of Khaine, conduite des vehicules) et PNJ.
+Fichiers modifies : BOOK_SEA_WARDENS_OF_COTHIQUE.Xml, CONTEXT.md, A FAIRE.txt, Log.txt.
