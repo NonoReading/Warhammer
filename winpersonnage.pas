@@ -4826,7 +4826,9 @@ procedure TWinPersonnages.TabEquipementDblClick(Sender: TObject);
       begin
         AttribueIdAnimaux;
         AfficheFicheAnimal(PTrapping, ChargeAnimalGrille(TabEquipement.Cells[10, TabEquipement.Row]));
-      end;
+      end
+    else if PTrapping.ProfilBateau <> '' then
+      AfficheFicheAnimal(PTrapping);
   end;
 
 function TWinPersonnages.LigneEstAnimal(Ligne: Integer): Boolean;

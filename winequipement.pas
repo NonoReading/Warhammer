@@ -204,7 +204,8 @@ procedure TWinEquipements.TabEquipSelection(Sender: TObject; aCol, aRow: Integer
 begin
   if EnRemplissage or (aRow < 1) or (aRow >= TabEquip.RowCount) then exit;
   AffLib.Text    := TabEquip.Cells[3, aRow];
-  ButtonFiche.Visible := ChercheTrapping(TabEquip.Cells[1, aRow]).ProfilAnimal <> '';
+  ButtonFiche.Visible := (ChercheTrapping(TabEquip.Cells[1, aRow]).ProfilAnimal <> '')
+    or (ChercheTrapping(TabEquip.Cells[1, aRow]).ProfilBateau <> '');
   AffPrix.Text   := TabEquip.Cells[4, aRow];
   AffEnc.Text    := TabEquip.Cells[5, aRow];
   AffCap.Text    := TabEquip.Cells[6, aRow];

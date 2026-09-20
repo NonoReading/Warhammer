@@ -209,6 +209,7 @@
 <Price>"4CO"</Price>
 <Encumbrance>"0"</Encumbrance>
 <Carries>"40"</Carries>
+<BoatProfile>"2;-;3 (1);-;12;30;10"</BoatProfile>
 </Trapping>
 <!-- Crew 4 ; M voile 3 (3) ; M rames 3 (4) ; Manoeuvrabilite - ; Taille 25 ; Robustesse 45 ; Blessures 75 ; traits -. -->
 <Trapping id="SYLVA-TRAP_023">
@@ -217,6 +218,7 @@
 <Price>"335CO"</Price>
 <Encumbrance>"0"</Encumbrance>
 <Carries>"400"</Carries>
+<BoatProfile>"4;3 (3);3 (4);-;25;45;75"</BoatProfile>
 </Trapping>
 <!-- Crew 4 ; M voile 4 (3) ; M rames 4 (4) ; Manoeuvrabilite +2 SL ; Taille 30 ; Robustesse 45 ; Blessures 90 ; trait Smoothing. -->
 <Trapping id="SYLVA-TRAP_024">
@@ -225,6 +227,8 @@
 <Price>"825CO"</Price>
 <Encumbrance>"0"</Encumbrance>
 <Carries>"500"</Carries>
+<BoatProfile>"4;4 (3);4 (4);+2 SL;30;45;90"</BoatProfile>
+<AnimalTraits>"Smoothing"</AnimalTraits>
 </Trapping>
 </DATA_TRAPPING>
 </DATA_BOOK>

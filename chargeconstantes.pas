@@ -245,6 +245,7 @@ Const
       ConstXmlCapacite                  = 'Carries';
       ConstXmlProfilAnimal              = 'AnimalProfile';
       ConstXmlTraitsAnimal              = 'AnimalTraits';
+      ConstXmlProfilBateau              = 'BoatProfile';
       ConstXmlTheme                     = 'Theme';
       ConstXmlAcheteur                  = 'Buyer';
       ConstXmlLocalite                  = 'Locality';
