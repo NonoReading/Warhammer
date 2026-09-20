@@ -9,7 +9,7 @@
 <DISCLAIMER>"This is the Warhammer Fantasy Roleplay 4th Edition Dwarf Player&apos;s Guide, published by Cubicle 7. Warhammer Fantasy Roleplay 4th Edition (c) Copyright Games Workshop Limited 2023. Warhammer Fantasy Roleplay 4th Edition, the Warhammer Fantasy Roleplay 4th Edition logo, GW, Games Workshop, Warhammer, The Game of Fantasy Battles, the twin-tailed comet logo, and all associated logos, illustrations, images, names, creatures, races, vehicles, locations, weapons, characters, and the distinctive likeness thereof, are either (R) or TM, and/or (c) Games Workshop Limited, variably registered around the world, and used under licence. Cubicle 7 Entertainment and the Cubicle 7 Entertainment logo are trademarks of Cubicle 7 Entertainment Limited. All rights reserved."</DISCLAIMER>
   <!-- LOT 1 (19/09/2026) : le chapitre "Steel and Fire" (p.93-97) - armes, armures, lumieres,
        outils et reliques. COMPLETE=0 : carrieres, talents, sorts, runes, ethnies et armes de
-       siege (Crewed) restent a faire, voir CONTEXT.md. Numerotation a partir de 001 par livre
+       siege (p.99, saisies le 20/09/2026) sont faites, voir CONTEXT.md. Numerotation a partir de 001 par livre
        (decision Nono du 03/09/2026).
        CONVENTIONS DE SAISIE : "Scarce" = RULES-DISPO_LIMITED (libelle affiche Scarce) ; "n/a" =
        RULES-DISPO_UNIQUE, comme HELFG ; 1/- = 1PA, 1/6 = 1PA 6SB, GC = CO ; Average = WEAPR_MID ;
@@ -4487,6 +4487,22 @@ When you gain the Stunned Condition, you can spend a Fortune point to make an im
 <Short language="ENGLISH">"fire several missiles per Reload"</Short>
 <Modifier>"+"</Modifier>
 </BonusMalus>
+<BonusMalus id="DWARF-WEAPB02">
+<Description language="ENGLISH">"Crewed"</Description>
+<Explanation language="ENGLISH">"For this weapon to operate optimally, it must be crewed by the number of characters equal to its Rating, all with the relevant Ranged skill (e.g. a Crewed (3) weapon requires 3 trained crew to operate efficiently). Only one crewmember can fire the weapon each Round, but additional crew can move or reload the weapon in their Turn. Misfires damage all characters crewing the weapon, to a random hit location instead of the Primary Arm.
+A Crewed weapon with insufficient crew doubles its Reload Rating. In addition, the weapon gains the Imprecise Flaw if it is short 2 or more crew, and the Dangerous Flaw if it is short 3 or more crew. If this effect would duplicate Flaws the weapon already has, it inflicts -10 on Ranged Tests per duplicated Flaw."</Explanation>
+<Short language="ENGLISH">"needs a crew of (Rating), impaired if short-handed"</Short>
+<Modifier>"-"</Modifier>
+</BonusMalus>
+<BonusMalus id="DWARF-WEAPB03">
+<Description language="ENGLISH">"Spread"</Description>
+<Explanation language="ENGLISH">"Weapons with the Spread Quality fire an expanding cloud of projectiles which may strike several targets. Depending on the range to the target, weapons with this Quality behave somewhat differently.
+Point Blank: The shot targets a single individual. Add (Rating) to the weapon's Damage.
+Short Range to Long Range: The shot targets a single individual, and also the next (Rating) closest visible creatures. No two targets may be more than (Rating) yards apart.
+Extreme Range: As for Short to Long Range but reduce the weapon's Damage by (Rating)."</Explanation>
+<Short language="ENGLISH">"Can strike several targets"</Short>
+<Modifier>"+"</Modifier>
+</BonusMalus>
 </DATA_WEAPON_BONUS>
 <DATA_WEAPON>
 <Weapon id="DWARF-COMB_BASE_01">
@@ -4729,6 +4745,139 @@ When you gain the Stunned Condition, you can spend a Fortune point to make an im
 <Hand>"1"</Hand>
 <Ammunition>"0"</Ammunition>
 </Weapon>
+<!-- Siege Weapons (p.99). Grudge Thrower et Dwarf Mortar : tir indirect possible sur une cible non vue, -30 pour toucher (aide d un guetteur possible). Firethrower et Flame Cannon : 1+SL Ablaze en plus des degats (RULES-WEAPB29). Flame Cannon : portee Long ou Extreme seulement en tir surcharge, un Fumble d un tir surcharge donne un Misfire. -->
+<Weapon id="DWARF-PROJ_POUDRE_03">
+<Description language="ENGLISH">"Swivel Gun (with bullets)"</Description>
+<Skill>"RULES-COMPPROJ_POUDRE"</Skill>
+<Damage>"+15"</Damage>
+<Availability>"RULES-DISPO_LIMITED"</Availability>
+<Reach>"30"</Reach>
+<Price>"20CO"</Price>
+<Encumbrance>"5"</Encumbrance>
+<Quality>"RULES-WEAPB02,RULES-WEAPB10,RULES-WEAPB24,RULES-WEAPB12,RULES-WEAPB22,RULES-WEAPB23 4,DWARF-WEAPB03 3"</Quality>
+<Hand>"2"</Hand>
+<Ammunition>"0"</Ammunition>
+</Weapon>
+<Weapon id="DWARF-PROJ_POUDRE_04">
+<Description language="ENGLISH">"Bombard (small cannon)"</Description>
+<Skill>"RULES-COMPPROJ_POUDRE"</Skill>
+<Damage>"+10"</Damage>
+<Availability>"RULES-DISPO_LIMITED"</Availability>
+<Reach>"50"</Reach>
+<Price>"40CO"</Price>
+<Encumbrance>"30"</Encumbrance>
+<Quality>"RULES-WEAPB02,RULES-WEAPB15 2,DWARF-WEAPB02 2,RULES-WEAPB10,RULES-WEAPB24,RULES-WEAPB23 4"</Quality>
+<Hand>"2"</Hand>
+<Ammunition>"0"</Ammunition>
+</Weapon>
+<Weapon id="DWARF-PROJ_POUDRE_05">
+<Description language="ENGLISH">"Dwarf Mortar"</Description>
+<Skill>"RULES-COMPPROJ_POUDRE"</Skill>
+<Damage>"+10"</Damage>
+<Availability>"RULES-DISPO_RARE"</Availability>
+<Reach>"75"</Reach>
+<Price>"45CO"</Price>
+<Encumbrance>"30"</Encumbrance>
+<Quality>"RULES-WEAPB02,RULES-WEAPB15 2,DWARF-WEAPB02 2,RULES-WEAPB10,RULES-WEAPB24,RULES-WEAPB23 3"</Quality>
+<Hand>"2"</Hand>
+<Ammunition>"0"</Ammunition>
+</Weapon>
+<Weapon id="DWARF-PROJ_POUDRE_06">
+<Description language="ENGLISH">"Field Cannon"</Description>
+<Skill>"RULES-COMPPROJ_POUDRE"</Skill>
+<Damage>"+14"</Damage>
+<Availability>"RULES-DISPO_RARE"</Availability>
+<Reach>"75"</Reach>
+<Price>"100CO"</Price>
+<Encumbrance>"50"</Encumbrance>
+<Quality>"RULES-WEAPB02,RULES-WEAPB15 2,DWARF-WEAPB02 3,RULES-WEAPB10,RULES-WEAPB24,RULES-WEAPB23 6"</Quality>
+<Hand>"2"</Hand>
+<Ammunition>"0"</Ammunition>
+</Weapon>
+<Weapon id="DWARF-PROJ_CATAPULT_01">
+<Description language="ENGLISH">"Grudge Thrower"</Description>
+<Skill>"RULES-COMPPROJ_CATAPULT"</Skill>
+<Damage>"+15"</Damage>
+<Availability>"RULES-DISPO_RARE"</Availability>
+<Reach>"50"</Reach>
+<Price>"40CO"</Price>
+<Encumbrance>"60"</Encumbrance>
+<Quality>"DWARF-WEAPB02 3,RULES-WEAPB10,RULES-WEAPB26,RULES-WEAPB23 3"</Quality>
+<Hand>"2"</Hand>
+<Ammunition>"0"</Ammunition>
+</Weapon>
+<Weapon id="DWARF-PROJ_ARB_02">
+<Description language="ENGLISH">"Bolt Thrower"</Description>
+<Skill>"RULES-COMPPROJ_ARB"</Skill>
+<Damage>"+13"</Damage>
+<Availability>"RULES-DISPO_LIMITED"</Availability>
+<Reach>"100"</Reach>
+<Price>"40CO"</Price>
+<Encumbrance>"30"</Encumbrance>
+<Quality>"RULES-WEAPB16,DWARF-WEAPB02 3,RULES-WEAPB12,RULES-WEAPB22,RULES-WEAPB23 3"</Quality>
+<Hand>"2"</Hand>
+<Ammunition>"0"</Ammunition>
+</Weapon>
+<Weapon id="DWARF-PROJ_ING_06">
+<Description language="ENGLISH">"Firethrower"</Description>
+<Skill>"RULES-COMPPROJ_ING"</Skill>
+<Damage>"+9"</Damage>
+<Availability>"RULES-DISPO_RARE"</Availability>
+<Reach>"15"</Reach>
+<Price>"25CO"</Price>
+<Encumbrance>"5"</Encumbrance>
+<Quality>"DWARF-WEAPB02 2,RULES-WEAPB24,RULES-WEAPB23 4,DWARF-WEAPB03 4,RULES-WEAPB29"</Quality>
+<Hand>"2"</Hand>
+<Ammunition>"0"</Ammunition>
+</Weapon>
+<Weapon id="DWARF-PROJ_ING_07">
+<Description language="ENGLISH">"Flame Cannon"</Description>
+<Skill>"RULES-COMPPROJ_ING"</Skill>
+<Damage>"+11"</Damage>
+<Availability>"RULES-DISPO_EXOTIC"</Availability>
+<Reach>"30"</Reach>
+<Price>"300CO"</Price>
+<Encumbrance>"75"</Encumbrance>
+<Quality>"DWARF-WEAPB02 3,RULES-WEAPB24,RULES-WEAPB23 6,DWARF-WEAPB03 6,RULES-WEAPB29"</Quality>
+<Hand>"2"</Hand>
+<Ammunition>"0"</Ammunition>
+</Weapon>
+<Weapon id="DWARF-PROJ_ING_08">
+<Description language="ENGLISH">"Dwarf Volley Gun"</Description>
+<Skill>"RULES-COMPPROJ_ING"</Skill>
+<Damage>"+10"</Damage>
+<Availability>"RULES-DISPO_EXOTIC"</Availability>
+<Reach>"30"</Reach>
+<Price>"15CO"</Price>
+<Encumbrance>"5"</Encumbrance>
+<Quality>"RULES-WEAPB02,DWARF-WEAPB02 2,RULES-WEAPB10,RULES-WEAPB24,RULES-WEAPB12,RULES-WEAPB22,RULES-WEAPB23 4,DWARF-WEAPB01 10"</Quality>
+<Hand>"2"</Hand>
+<Ammunition>"0"</Ammunition>
+</Weapon>
+<Weapon id="DWARF-PROJ_ING_09">
+<Description language="ENGLISH">"Organ Gun"</Description>
+<Skill>"RULES-COMPPROJ_ING"</Skill>
+<Damage>"+13"</Damage>
+<Availability>"RULES-DISPO_EXOTIC"</Availability>
+<Reach>"50"</Reach>
+<Price>"250CO"</Price>
+<Encumbrance>"60"</Encumbrance>
+<Quality>"RULES-WEAPB02,RULES-WEAPB15 1,DWARF-WEAPB02 3,RULES-WEAPB10,RULES-WEAPB24,RULES-WEAPB23 4,DWARF-WEAPB01 4"</Quality>
+<Hand>"2"</Hand>
+<Ammunition>"0"</Ammunition>
+</Weapon>
+<Weapon id="DWARF-PROJ_ING_10">
+<Description language="ENGLISH">"Goblin-hewer"</Description>
+<Skill>"RULES-COMPPROJ_ING"</Skill>
+<Damage>"+10"</Damage>
+<Availability>"RULES-DISPO_EXOTIC"</Availability>
+<Reach>"50"</Reach>
+<Price>"150CO"</Price>
+<Encumbrance>"50"</Encumbrance>
+<Quality>"DWARF-WEAPB02 3,RULES-WEAPB30,RULES-WEAPB23 2,DWARF-WEAPB01 8"</Quality>
+<Hand>"2"</Hand>
+<Ammunition>"0"</Ammunition>
+</Weapon>
 </DATA_WEAPON>
 <DATA_ARMOR>
 <Armor id="DWARF-ARMO_01">
@@ -4870,7 +5019,7 @@ When you gain the Stunned Condition, you can spend a Fortune point to make an im
 <!-- Sail et rames, Move 4 ; Move 6 avec au moins 8 rameurs (grubark). -->
 <Trapping id="DWARF-TRAP_10">
 <Description language="ENGLISH">"Longship"</Description>
-<Theme>"RULES-LAB_195"</Theme>
+<Theme>"RULES-LAB_261"</Theme>
 <Availability>"RULES-DISPO_RARE"</Availability>
 <Price>"250CO"</Price>
 <Encumbrance>"150"</Encumbrance>
@@ -4880,7 +5029,7 @@ When you gain the Stunned Condition, you can spend a Fortune point to make an im
 <!-- Machine a vapeur, Move 3. Non arme, non blinde. -->
 <Trapping id="DWARF-TRAP_11">
 <Description language="ENGLISH">"Steam Barge"</Description>
-<Theme>"RULES-LAB_195"</Theme>
+<Theme>"RULES-LAB_261"</Theme>
 <Availability>"RULES-DISPO_RARE"</Availability>
 <Price>"500CO"</Price>
 <Encumbrance>"200"</Encumbrance>
@@ -4890,7 +5039,7 @@ When you gain the Stunned Condition, you can spend a Fortune point to make an im
 <!-- Machine a vapeur, Move 4. Belier 5 PA, reste 2 PA. -->
 <Trapping id="DWARF-TRAP_12">
 <Description language="ENGLISH">"Gunboat"</Description>
-<Theme>"RULES-LAB_195"</Theme>
+<Theme>"RULES-LAB_261"</Theme>
 <Availability>"RULES-DISPO_RARE"</Availability>
 <Price>"750CO"</Price>
 <Encumbrance>"200"</Encumbrance>
@@ -4901,7 +5050,7 @@ When you gain the Stunned Condition, you can spend a Fortune point to make an im
 <!-- Machine a vapeur, Move 6. 2 PA (comme Gunboat), belier, tourelle. -->
 <Trapping id="DWARF-TRAP_13">
 <Description language="ENGLISH">"Monitor"</Description>
-<Theme>"RULES-LAB_195"</Theme>
+<Theme>"RULES-LAB_261"</Theme>
 <Availability>"RULES-DISPO_EXOTIC"</Availability>
 <Price>"1000CO"</Price>
 <Encumbrance>"350"</Encumbrance>
@@ -4912,7 +5061,7 @@ When you gain the Stunned Condition, you can spend a Fortune point to make an im
 <!-- Machine a vapeur, Move 6. 2 PA partout. -->
 <Trapping id="DWARF-TRAP_14">
 <Description language="ENGLISH">"Ironclad"</Description>
-<Theme>"RULES-LAB_195"</Theme>
+<Theme>"RULES-LAB_261"</Theme>
 <Availability>"RULES-DISPO_EXOTIC"</Availability>
 <Price>"2000CO"</Price>
 <Encumbrance>"600"</Encumbrance>
@@ -4923,7 +5072,7 @@ When you gain the Stunned Condition, you can spend a Fortune point to make an im
 <!-- Machine a vapeur, Move 6. 2 PA partout. -->
 <Trapping id="DWARF-TRAP_15">
 <Description language="ENGLISH">"Dreadnought"</Description>
-<Theme>"RULES-LAB_195"</Theme>
+<Theme>"RULES-LAB_261"</Theme>
 <Availability>"RULES-DISPO_EXOTIC"</Availability>
 <Price>"5000CO"</Price>
 <Encumbrance>"1000"</Encumbrance>
@@ -4934,7 +5083,7 @@ When you gain the Stunned Condition, you can spend a Fortune point to make an im
 <!-- Machine a vapeur, Move 4. Submersible : plonge a 30 yards pendant 1 heure, Test d Endurance/Toughness toutes les 10 min au-dela. -->
 <Trapping id="DWARF-TRAP_16">
 <Description language="ENGLISH">"Nautilus Submersible"</Description>
-<Theme>"RULES-LAB_195"</Theme>
+<Theme>"RULES-LAB_261"</Theme>
 <Availability>"RULES-DISPO_EXOTIC"</Availability>
 <Price>"2500CO"</Price>
 <Encumbrance>"450"</Encumbrance>
@@ -4945,7 +5094,7 @@ When you gain the Stunned Condition, you can spend a Fortune point to make an im
 <!-- Machine a vapeur, Move 20. -->
 <Trapping id="DWARF-TRAP_17">
 <Description language="ENGLISH">"Gyrocopter"</Description>
-<Theme>"RULES-LAB_195"</Theme>
+<Theme>"RULES-LAB_261"</Theme>
 <Availability>"RULES-DISPO_EXOTIC"</Availability>
 <Price>"250CO"</Price>
 <Encumbrance>"40"</Encumbrance>
@@ -4955,7 +5104,7 @@ When you gain the Stunned Condition, you can spend a Fortune point to make an im
 <!-- Machine a vapeur, Move 15. -->
 <Trapping id="DWARF-TRAP_18">
 <Description language="ENGLISH">"Gyrobomber"</Description>
-<Theme>"RULES-LAB_195"</Theme>
+<Theme>"RULES-LAB_261"</Theme>
 <Availability>"RULES-DISPO_EXOTIC"</Availability>
 <Price>"350CO"</Price>
 <Encumbrance>"60"</Encumbrance>
@@ -4965,7 +5114,7 @@ When you gain the Stunned Condition, you can spend a Fortune point to make an im
 <!-- Machine a vapeur et vent, Move 4. -->
 <Trapping id="DWARF-TRAP_19">
 <Description language="ENGLISH">"War Balloon"</Description>
-<Theme>"RULES-LAB_195"</Theme>
+<Theme>"RULES-LAB_261"</Theme>
 <Availability>"RULES-DISPO_EXOTIC"</Availability>
 <Price>"800CO"</Price>
 <Encumbrance>"100"</Encumbrance>
@@ -4975,7 +5124,7 @@ When you gain the Stunned Condition, you can spend a Fortune point to make an im
 <!-- Machine a vapeur et vent, Move 6. -->
 <Trapping id="DWARF-TRAP_20">
 <Description language="ENGLISH">"Airship (Small)"</Description>
-<Theme>"RULES-LAB_195"</Theme>
+<Theme>"RULES-LAB_261"</Theme>
 <Availability>"RULES-DISPO_EXOTIC"</Availability>
 <Price>"1000CO"</Price>
 <Encumbrance>"120"</Encumbrance>
@@ -4985,7 +5134,7 @@ When you gain the Stunned Condition, you can spend a Fortune point to make an im
 <!-- Machine a vapeur et vent, Move 6. -->
 <Trapping id="DWARF-TRAP_21">
 <Description language="ENGLISH">"Airship (Medium)"</Description>
-<Theme>"RULES-LAB_195"</Theme>
+<Theme>"RULES-LAB_261"</Theme>
 <Availability>"RULES-DISPO_EXOTIC"</Availability>
 <Price>"2000CO"</Price>
 <Encumbrance>"180"</Encumbrance>
@@ -4995,7 +5144,7 @@ When you gain the Stunned Condition, you can spend a Fortune point to make an im
 <!-- Machine a vapeur et vent, Move 6. -->
 <Trapping id="DWARF-TRAP_22">
 <Description language="ENGLISH">"Airship (Large)"</Description>
-<Theme>"RULES-LAB_195"</Theme>
+<Theme>"RULES-LAB_261"</Theme>
 <Availability>"RULES-DISPO_EXOTIC"</Availability>
 <Price>"5000CO"</Price>
 <Encumbrance>"250"</Encumbrance>
