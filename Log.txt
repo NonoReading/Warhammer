@@ -5561,3 +5561,9 @@ Fichier modifie : pdfpersonnage.pas, Log.txt.
 RULES-LAB_248 et _249 (INTERFACE.Xml, INTERFACE_FRANCAIS.Xml) ne contiennent plus "per rune" : le PDF ecrivait "... per rune (per rune)". Fichiers modifies : INTERFACE.Xml, INTERFACE_FRANCAIS.Xml, A FAIRE.txt, Log.txt.
 
 20/09/2026 - PDF DE CREATION : EXPLICATIONS DE BONUS DANS LA COLONNE TRAPPINGS ET LIBELLES CUTTING/SHIELDING SANS DOUBLON - COMPILE, VERIFIE SUR PDF PAR CLAUDE (NORMAL, REIKSGUARD, BLACK ROSE), A VALIDER PAR NONO
+
+20/09/2026 - PDF DE CREATION : QUALITES DES ARMES A DISTANCE LIMITEES A LA ZONE LIBRE A GAUCHE DES PORTEES (IDEE NONO) - NON COMPILE, NON TESTE
+PdfPersonnageCreation : pour une arme a distance (TexteRange1 <> ''), les qualites (et le "pas Competence") passent par PdfEcrit(132, 168, ..., police mini 5) : reduction puis 2-3 lignes, au lieu de WriteText sans limite qui recouvrait "< : 9m 85%...". Melee inchange. Gabarit Feldo : deja borne (XGauche+114 a XGauche+153, debut des portees), non modifie. A tester : Black Powder (Leadbelcher Gun) en gabarit de creation. Retirer la ligne correspondante de A FAIRE.txt apres validation.
+Fichiers modifies : pdfpersonnage.pas, Log.txt.
+
+20/09/2026 - QUALITES DES ARMES A DISTANCE (PDF DE CREATION) VALIDEES PAR NONO (BLACK POWDER, LEADBELCHER GUN SUR DEUX LIGNES). Reste anecdotique : la 2e ligne commence par une virgule (logique de PdfEcrit).

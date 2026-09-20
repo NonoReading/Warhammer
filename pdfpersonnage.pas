@@ -1802,7 +1802,11 @@ Procedure PdfPersonnageCreation(Personnage: StructurePersonnage; BackGround: Boo
                         end;
                     end;
                   FabricationDetail(PersonnageEquipement.QualiteEquipement, LigneBonus, FabricationBonii);
-                  PdfPage.WriteText(132,121-(NbArme*5), LigneBonus);
+                  // Arme a distance : la zone Qualities s arrete ou commence le texte des portees (x=170)
+                  if TexteRange1 <> '' then
+                    PdfEcrit(PdfPage, 132, 168, 121.5-(NbArme*5), LigneBonus, 5)
+                  else
+                    PdfPage.WriteText(132,121-(NbArme*5), LigneBonus);
                 end
               else
                 begin
@@ -1830,7 +1834,11 @@ Procedure PdfPersonnageCreation(Personnage: StructurePersonnage; BackGround: Boo
                         end;
                     end;
                   FabricationDetail(PersonnageEquipement.QualiteEquipement, ListMalii, FabricationBonii);
-                  PdfPage.WriteText(132,121-(NbArme*5), ListMalii);
+                  // Arme a distance : la zone Qualities s arrete ou commence le texte des portees (x=170)
+                  if TexteRange1 <> '' then
+                    PdfEcrit(PdfPage, 132, 168, 121.5-(NbArme*5), ListMalii, 5)
+                  else
+                    PdfPage.WriteText(132,121-(NbArme*5), ListMalii);
                 end;
               PdfTaillePolice(PdfPage, PdfFontValue, ConstPoliceArial, 9);
             end
