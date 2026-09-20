@@ -392,6 +392,8 @@
 <Text name="RULES-LAB_245">"when opposing a melee attack"</Text>
 <Text name="RULES-LAB_246">"on attacks and spells against you"</Text>
 <Text name="RULES-LAB_247">"bonus DR = highest AP, on a Charge"</Text>
+<Text name="RULES-LAB_248">"ignores 2 AP per rune"</Text>
+<Text name="RULES-LAB_249">"reduces ranged and spell Damage by 2 per rune"</Text>
 </Label>
 </DATA_LABEL>
 </DATA_BOOK>

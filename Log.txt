@@ -5546,3 +5546,9 @@ Fichiers modifies : chargefabrication.pas, pdfpersonnage.pas, BOOK_DWARF_PLAYERS
 20/09/2026 - PDF : QUALITES LONGUES DU BLOC ARMOUR SUR DEUX LIGNES SANS DEBORDER - NON COMPILE
 PdfBlocArmuresDonnees : quand le texte de la colonne Qualities depasse la largeur (test TailleTexte, meme formule que PdfEcrit), il est ecrit a y+2.3 (comme les armes) au lieu de y+0.6, pour que la seconde ligne reste dans la case. Texte court : inchange.
 Fichier modifie : pdfpersonnage.pas, Log.txt.
+
+20/09/2026 - QUALITES LONGUES DU BLOC ARMOUR SUR DEUX LIGNES VALIDEES PAR NONO
+
+20/09/2026 - RUNES CUTTING ET SHIELDING (TEXTE SEUL DANS CRAFTING BONUS) - VALIDE PAR NONO
+DWARF-RUNE_03 Cutting : ModifyDamage CC 0 if=RULES-LAB_248 (ignore 2 PA par rune, melee seulement). DWARF-RUNE_22 Shielding : ModifyDamage CC 0 if=RULES-LAB_249 (-2 degats des tirs et sorts subis par rune). Meme mecanisme que Force, aucun code Pascal. Toutes les runes du Dwarf Player's Guide sont donc traitees.
+Fichiers modifies : BOOK_DWARF_PLAYERS_GUIDE.Xml, INTERFACE.Xml, INTERFACE_FRANCAIS.Xml, Log.txt.

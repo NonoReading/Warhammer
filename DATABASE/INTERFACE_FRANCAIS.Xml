@@ -318,6 +318,8 @@
 <Text name="RULES-LAB_245">"en opposition a une attaque de melee"</Text>
 <Text name="RULES-LAB_246">"sur les attaques et sorts contre vous"</Text>
 <Text name="RULES-LAB_247">"DR bonus = PA la plus haute, en charge"</Text>
+<Text name="RULES-LAB_248">"ignore 2 PA par rune"</Text>
+<Text name="RULES-LAB_249">"reduit de 2 les degats des tirs et sorts subis par rune"</Text>
 </Label>
 </DATA_LABEL>
 </DATA_BOOK>
