@@ -1286,6 +1286,9 @@ begin
 end;
 
 procedure TMenu.RemplirTabBibliotheque();
+  var
+    PTrapping:  StructureTrapping;
+    NbVehicule: Integer;
   // Tableau des categories secondaires de la Bibliotheque (Arme, Armure, Equipement, Sort) :
   // remplace les lignes bouton + total + image. Pour ajouter une categorie : une ligne ici
   // et son ouverture dans TabBibliothequeDblClick (l'ordre des lignes est le meme).
@@ -1297,14 +1300,20 @@ procedure TMenu.RemplirTabBibliotheque();
 begin
   if TabBibliotheque = nil then
     exit;
-  TabBibliotheque.RowCount := 6;
+  TabBibliotheque.RowCount := 7;
   TabBibliotheque.Cells[0, 0] := GetTexteLibelle('RULES-LAB_014');
   TabBibliotheque.Cells[1, 0] := GetTexteLibelle('RULES-LAB_021');
   Ligne(1, GetTexteLibelle('RULES-LAB_063'), NbArme);
   Ligne(2, GetTexteLibelle('RULES-LAB_065'), NbArmure);
-  Ligne(3, GetTexteLibelle('RULES-LAB_202'), NbTrapping);
-  Ligne(4, GetTexteLibelle('RULES-LAB_083'), NbSort);
-  Ligne(5, GetTexteLibelle('RULES-LAB_172'), ListCorruptionTable.Count);
+  // Animaux, montures, vehicules et bateaux (theme RULES-LAB_195) : ligne a part
+  NbVehicule := 0;
+  for PTrapping in ListTrapping do
+    if PTrapping.Theme = ThemeAnimauxVehicules then
+      Inc(NbVehicule);
+  Ligne(3, GetTexteLibelle('RULES-LAB_202'), NbTrapping - NbVehicule);
+  Ligne(4, GetTexteLibelle(ThemeAnimauxVehicules), NbVehicule);
+  Ligne(5, GetTexteLibelle('RULES-LAB_083'), NbSort);
+  Ligne(6, GetTexteLibelle('RULES-LAB_172'), ListCorruptionTable.Count);
 end;
 
 procedure TMenu.TabBibliothequeDblClick(Sender: TObject);
@@ -1313,8 +1322,15 @@ begin
     1: ButtonArmeClick(Sender);
     2: ButtonArmureClick(Sender);
     3: ButtonEquipementClick(Sender);
-    4: ButtonSortClick(Sender);
-    5: begin
+    4: begin
+         ModeEquipements := meVehicules;
+         WinEquipements  := TWinEquipements.Create(Application);
+         ModeEquipements := meTout;
+         WinEquipements.Position := poOwnerFormCenter;
+         WinEquipements.Show;
+       end;
+    5: ButtonSortClick(Sender);
+    6: begin
          WinMutationCat          := TWinMutationCatalogue.Create(Application);
          WinMutationCat.Position := poOwnerFormCenter;
          WinMutationCat.Show;
@@ -1872,7 +1888,9 @@ end;
 
 procedure TMenu.ButtonEquipementClick(Sender: TObject);
 begin
+  ModeEquipements         := meHorsVehicules;
   WinEquipements          := TWinEquipements.Create(Application);
+  ModeEquipements         := meTout;
   WinEquipements.Position := poOwnerFormCenter;
   WinEquipements.Show;
 end;

@@ -5698,3 +5698,7 @@ Fichiers modifies : chargeconstantes.pas, Log.txt.
 chargetrapping.pas : champ ProfilBateau (Crew;M voile;M rames;Man;Size;T;W). chargeconstantes.pas : ConstXmlProfilBateau. xmlexportimport.pas : lecture, remise a zero, ecriture de <BoatProfile>. winanimal.pas : profil a 7 colonnes pour un bateau. winequipement.pas : bouton Fiche. winpersonnage.pas : double-clic. Les 3 bateaux Sylvania portent <BoatProfile> (et Smoothing en <AnimalTraits>).
 Appris : un bateau reste Divers, sans type Animal ni identifiant : le rattachement attend la conception "porte par" et groupe.
 Fichiers modifies : chargetrapping.pas, chargeconstantes.pas, xmlexportimport.pas, winanimal.pas, winequipement.pas, winpersonnage.pas, BOOK_SYLVANIA_THE_CURSED_COUNTY.Xml, Log.txt, CONTEXT.md, A FAIRE.txt.
+
+20/09/2026 - MENU : LIGNE "ANIMALS AND VEHICLES" SEPAREE DE L EQUIPEMENT - COMPILE ET VALIDE PAR NONO
+warhammersource.pas : TabBibliotheque passe a 6 categories (Weapon, Armor, Equipment, Animals and Vehicles, Spell, Mutations), decompte par theme RULES-LAB_195, ouverture au double-clic. winequipement.pas : ModeEquipements (meTout, meHorsVehicules, meVehicules), lu a la creation, filtre lignes et themes. Le bouton +Equipment de WinPersonnage garde meTout.
+Fichiers modifies : warhammersource.pas, winequipement.pas, Log.txt, CONTEXT.md.

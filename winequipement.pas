@@ -11,6 +11,8 @@ uses
 
 type
 
+  TModeEquipements = (meTout, meHorsVehicules, meVehicules);  // voir ModeEquipements
+
   { TWinEquipements }
 
   // Liste des objets du catalogue DATA_TRAPPING, filtrable par theme
@@ -51,13 +53,20 @@ type
     ListeThemes:   TStringList;
     FiltreLivre:   String;
     EnRemplissage: Boolean;
+    Mode:          TModeEquipements;
     Ancrage:       TAncrageProportionnel;
+    function  Retenu(PTrapping: StructureTrapping): Boolean;
     procedure ChargeThemes;
     procedure Remplir;
   end;
 
+const
+  // theme des animaux, montures, vehicules et bateaux (RULES-LAB_195, "Animals and Vehicles")
+  ThemeAnimauxVehicules = 'RULES-LAB_195';
+
 var
-  WinEquipements: TWinEquipements;
+  WinEquipements:  TWinEquipements;
+  ModeEquipements: TModeEquipements = meTout;
 
 implementation
 
@@ -72,7 +81,11 @@ begin
   ListeThemes   := TStringList.Create;
 
   MiseEnFormeDesChamp(Self);
-  Caption              := GetTexteLibelle('RULES-LAB_202');
+  Mode                 := ModeEquipements;
+  if Mode = meVehicules then
+    Caption            := GetTexteLibelle(ThemeAnimauxVehicules)
+  else
+    Caption            := GetTexteLibelle('RULES-LAB_202');
   LabTheme.Caption     := GetTexteLibelle('RULES-LAB_201');
   ButtonFiltre.Caption := GetTexteLibelle('RULES-LAB_133');
   ButtonFiche.Caption  := GetTexteLibelle('RULES-LAB_253');
@@ -135,6 +148,16 @@ begin
   ListeThemes.Free;
 end;
 
+function TWinEquipements.Retenu(PTrapping: StructureTrapping): Boolean;
+begin
+  case Mode of
+    meHorsVehicules: Result := PTrapping.Theme <> ThemeAnimauxVehicules;
+    meVehicules:     Result := PTrapping.Theme = ThemeAnimauxVehicules;
+  else
+    Result := True;
+  end;
+end;
+
 // themes presents dans le catalogue (dans l'ordre du premier objet rencontre),
 // precedes de l'entree "Tous"
 procedure TWinEquipements.ChargeThemes;
@@ -146,7 +169,7 @@ begin
   ListeThemes.Add('');
   CombTheme.Items.Add(GetTexteLibelle('RULES-LAB_200'));
   for PTrapping in ListTrapping do
-    if (PTrapping.Theme <> '') and (ListeThemes.IndexOf(PTrapping.Theme) < 0) then
+    if (PTrapping.Theme <> '') and (ListeThemes.IndexOf(PTrapping.Theme) < 0) and Retenu(PTrapping) then
       begin
         ListeThemes.Add(PTrapping.Theme);
         CombTheme.Items.Add(GetTexteLibelle(PTrapping.Theme));
@@ -169,7 +192,7 @@ begin
     TabEquip.RowCount := 1;
     Ind := 0;
     for PTrapping in ListTrapping do
-      if ((Theme = '') or (PTrapping.Theme = Theme)) and VerifieFiltre(PTrapping.Livre, FiltreLivre) then
+      if Retenu(PTrapping) and ((Theme = '') or (PTrapping.Theme = Theme)) and VerifieFiltre(PTrapping.Livre, FiltreLivre) then
         begin
           Inc(Ind);
           if TabEquip.RowCount <= Ind then
