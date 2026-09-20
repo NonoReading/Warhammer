@@ -384,6 +384,8 @@
 <Text name="RULES-LAB_237">"Marsh"</Text>
 <Text name="RULES-LAB_238">"Locality"</Text>
 <Text name="RULES-LAB_239">"Season"</Text>
+<Text name="RULES-LAB_240">"Only my combat skills"</Text>
+<Text name="RULES-LAB_241">"Only weapons usable with the skills of the character"</Text>
 </Label>
 </DATA_LABEL>
 </DATA_BOOK>

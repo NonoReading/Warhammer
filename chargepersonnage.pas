@@ -355,6 +355,10 @@ Type
   // qualites de fabrication (QualiteEquipement, "CODE niveau"), multiplies par le niveau.
   // Pilote : Rune of Stone (+1 PA par rune). 19/09/2026.
   Function PersonnageFabricationArmureModif(Personnage: StructurePersonnage; CodeLocalisation: String): Integer;
+  // Meme somme pour n'importe quel TypeModif (ModifArmour, ModifyCarac...) : PersonnageFabricationArmureModif
+  // en est le cas ModifArmour. Rune of Fortitude (+10 Endurance par rune). 20/09/2026.
+  Function PersonnageFabricationModificateur(Personnage: StructurePersonnage; TypeModif, Cible: String): Integer;
+  Function PersonnageFabricationAttributModif(Personnage: StructurePersonnage; CodeAttribut: String): Integer;
   // Malus/bonus ARMOB d'une competence, piece PORTEE par piece PORTEE, module par
   // Practical/Unreliable DE LA piece qui le porte (reduit de 10 plancher 0 / double - Rulebook,
   // CONTEXT.md 2.59). Destine a la colonne "avec equipement" du Pdf Feldo2P.
@@ -2039,6 +2043,16 @@ Function PersonnageArmureQualitesPortees(Personnage: StructurePersonnage): TArra
   end;
 
 Function PersonnageFabricationArmureModif(Personnage: StructurePersonnage; CodeLocalisation: String): Integer;
+  begin
+    Result := PersonnageFabricationModificateur(Personnage, ConstXmlModifieArmure, CodeLocalisation);
+  end;
+
+Function PersonnageFabricationAttributModif(Personnage: StructurePersonnage; CodeAttribut: String): Integer;
+  begin
+    Result := PersonnageFabricationModificateur(Personnage, ConstXmlModifieAttribut, CodeAttribut);
+  end;
+
+Function PersonnageFabricationModificateur(Personnage: StructurePersonnage; TypeModif, Cible: String): Integer;
   var
     PersonnageEquipement: StructurePersonnageEquipement;
     Liste:                TStringList;
@@ -2053,7 +2067,8 @@ Function PersonnageFabricationArmureModif(Personnage: StructurePersonnage; CodeL
       for PersonnageEquipement in Personnage.Equipement do
         if PersonnageEquipement.Porte
            and ((TrimRight(PersonnageEquipement.TypeEquipement) = TrimRight(TypeEquipAR))
-                or (TrimRight(PersonnageEquipement.TypeEquipement) = TrimRight(TypeEquipARS)))
+                or (TrimRight(PersonnageEquipement.TypeEquipement) = TrimRight(TypeEquipARS))
+                or (TrimRight(PersonnageEquipement.TypeEquipement) = TrimRight(TypeEquipWe)))
            and (PersonnageEquipement.QualiteEquipement <> '') then
           begin
             Liste.Clear;
@@ -2069,9 +2084,9 @@ Function PersonnageFabricationArmureModif(Personnage: StructurePersonnage; CodeL
                     Niveau := StrToIntDef(Trim(Copy(Element, Pos(' ', Element) + 1, Length(Element))), 1);
                   end;
                 for IndModif := 0 to ListFabricationModificateur.Count - 1 do
-                  if (ListFabricationModificateur[IndModif].TypeModif = ConstXmlModifieArmure)
+                  if (ListFabricationModificateur[IndModif].TypeModif = TypeModif)
                      and CompareRechercheValeur(ListFabricationModificateur[IndModif].CodeSource, Code)
-                     and CompareRechercheValeur(ListFabricationModificateur[IndModif].Cible, CodeLocalisation) then
+                     and CompareRechercheValeur(ListFabricationModificateur[IndModif].Cible, Cible) then
                     Result := Result + ListFabricationModificateur[IndModif].Facteur * Niveau;
               end;
           end;

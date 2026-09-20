@@ -795,10 +795,19 @@ end;
 procedure TWinPersonnages.ButtonArmeClick(Sender: TObject);
   Var
     PArme: StructureArme;
+    IndCompArme: Integer;
   begin
     // ouvrir les métiers
     SelectWinArme     := ConstSelectionne;
     SelectWinLivre    := Personnage.LivresAcceptes;
+    // Competences du personnage, pour la case qui limite la liste des armes.
+    SelectWinArmeCompetences := '';
+    for IndCompArme := 1 to TabCompetence.RowCount - 1 do
+      if TabCompetence.Cells[ColCompCode, IndCompArme] <> '' then
+        begin
+          if SelectWinArmeCompetences <> '' then SelectWinArmeCompetences := SelectWinArmeCompetences + ',';
+          SelectWinArmeCompetences := SelectWinArmeCompetences + TabCompetence.Cells[ColCompCode, IndCompArme];
+        end;
     FenArme           := TWinWeapons.Create(Application);
     FenArme.Position  := poOwnerFormCenter;
     FenArme.ShowModal;
@@ -815,6 +824,7 @@ procedure TWinPersonnages.ButtonArmeClick(Sender: TObject);
         AdjustGridColumnsWidth(TabEquipement, 0, false, false);
       end;
     SelectWinArme  := '';
+    SelectWinArmeCompetences := '';
     SelectWinLivre := '';
     ChoixWinArme   := '';
 end;
@@ -856,7 +866,15 @@ procedure TWinPersonnages.ButtonFabricationClick(Sender: TObject);
       and (TalentSort(TabEquipement.Cells[2, TabEquipement.Row]).CodeTalent = '') then
         begin
           SelectWinFabrication     := TabEquipement.Cells[7,TabEquipement.row];
-          FenFabrication           := TWinFabrications.Create(Application);
+          // Type de l objet : la fenetre ne propose que les fabrications qui s y appliquent.
+          if TrimRight(TabEquipement.Cells[3,TabEquipement.row]) = TrimRight(TypeEquipWe) then
+            SelectWinFabricationType := 'Weapon'
+          else if (TrimRight(TabEquipement.Cells[3,TabEquipement.row]) = TrimRight(TypeEquipAR))
+               or (TrimRight(TabEquipement.Cells[3,TabEquipement.row]) = TrimRight(TypeEquipARS)) then
+            SelectWinFabricationType := 'Armour'
+          else
+            SelectWinFabricationType := 'Misc';
+          FenFabrication          := TWinFabrications.Create(Application);
           FenFabrication.Position  := poOwnerFormCenter;
           FenFabrication.ShowModal;
 
@@ -867,6 +885,7 @@ procedure TWinPersonnages.ButtonFabricationClick(Sender: TObject);
             end;
 
           SelectWinFabrication:= '';
+          SelectWinFabricationType := '';
           ChoixWinFabrication := '';
           AfficheFabrication();
         end;
@@ -2709,7 +2728,8 @@ procedure TWinPersonnages.CalculTotaux();
         // Knight of the Inner Circle) - CONTEXT.md §2.61 (suite).
         ValCareer := PersonnageCareerBonusAttributModif(Personnage, TabAttribut.Cells[IndCol, LigAttCode]);
         ValObjet  := PersonnageArmeAttributModif(Personnage, TabAttribut.Cells[IndCol, LigAttCode])
-                     + PersonnageArmureBonusAttributModif(Personnage, TabAttribut.Cells[IndCol, LigAttCode]);
+                     + PersonnageArmureBonusAttributModif(Personnage, TabAttribut.Cells[IndCol, LigAttCode])
+                     + PersonnageFabricationAttributModif(Personnage, TabAttribut.Cells[IndCol, LigAttCode]);
         if ValCareer <> 0 then
           TabAttribut.Cells[IndCol, LigAttCareer] := IntToStr(ValCareer);
         if ValObjet <> 0 then
@@ -4271,6 +4291,10 @@ Var
   TextX: Integer;
   TextY: integer;
   Grid:  TStringGrid;
+  LignesTexte: TStringList;
+  IndLigneTxt: Integer;
+  HautLigneTxt: Integer;
+  BandeTxt: TRect;
 begin
     Grid := TStringGrid(Sender);
     if (aCol > 0) then
@@ -4392,7 +4416,33 @@ begin
 
           // Dessiner le texte avec l'alignement vertical centré
           Grid.Canvas.FillRect(aRect);
-          Grid.Canvas.TextRect(aRect, TextX, aRect.Top + (aRect.Bottom - aRect.Top - Grid.Canvas.TextHeight(CellText)) div 2, CellText);
+          if Pos(LineEnding, CellText) > 0 then
+            begin
+              // Cellule multiligne (fabrications de TabEquipement) : une ligne par element, le
+              // bloc centre verticalement. 20/09/2026.
+              LignesTexte := TStringList.Create;
+              try
+                LignesTexte.Text := CellText;
+                // Hauteur d'une ligne = celle de l'AfficheFabrication (TextHeight + 2), lue une
+                // seule fois ; chaque ligne a sa propre bande, decoupee dans la cellule.
+                HautLigneTxt := Grid.Canvas.TextHeight('Ag') + 2;
+                if HautLigneTxt < 14 then HautLigneTxt := 14;
+                TextY := aRect.Top + (aRect.Bottom - aRect.Top - LignesTexte.Count * HautLigneTxt) div 2;
+                if TextY < aRect.Top then TextY := aRect.Top;
+                for IndLigneTxt := 0 to LignesTexte.Count - 1 do
+                  begin
+                    BandeTxt := Rect(aRect.Left, TextY + IndLigneTxt * HautLigneTxt, aRect.Right, TextY + (IndLigneTxt + 1) * HautLigneTxt);
+                    if BandeTxt.Bottom > aRect.Bottom then BandeTxt.Bottom := aRect.Bottom;
+                    if BandeTxt.Top >= BandeTxt.Bottom then Continue;
+                    TextX := aRect.Left + (aRect.Right - aRect.Left - Grid.Canvas.TextWidth(LignesTexte[IndLigneTxt])) div 2;
+                    Grid.Canvas.TextRect(BandeTxt, TextX, BandeTxt.Top + 1, LignesTexte[IndLigneTxt]);
+                  end;
+              finally
+                LignesTexte.Free;
+              end;
+            end
+          else
+            Grid.Canvas.TextRect(aRect, TextX, aRect.Top + (aRect.Bottom - aRect.Top - Grid.Canvas.TextHeight(CellText)) div 2, CellText);
 
           // Virtue of the Quest (CONTEXT.md 2.78) : talent possede mais dont les effets
           // sont en sommeil hors de la carriere+niveau qui l'a accorde - barre plutot que
@@ -5989,6 +6039,7 @@ Procedure TWinPersonnages.AfficheFabrication();
     I:            Integer;
     PFabrication: StructureFabrication;
     TextFab:      String;
+    NbLignesFab:  Integer;
   begin
 
     For IndTab := 1 to TabEquipement.RowCount - 1 do
@@ -6006,15 +6057,26 @@ Procedure TWinPersonnages.AfficheFabrication();
                 Code := ExtractStringBefore(Strings[I],' ');
                 Val  := ExtractStringAfter(Strings[I],' ');
                 PFabrication := ChercheFabrication(Code);
-                if TextFab <> '' then TextFab := TextFab + ', ';
+                // Une fabrication par ligne (LineEnding) : la cellule 6 n'est qu'un affichage, la
+                // donnee reste dans la colonne 7. 20/09/2026.
+                if TextFab <> '' then TextFab := TextFab + ',' + LineEnding;
                 TextFab := TextFab + PFabrication.Libelle;
                 if PFabrication.Maximum <> '1' then
                   TextFab := TextFab + '('+Val+')';
               end;
+            NbLignesFab := Strings.Count;
             strings.free;
             TabEquipement.Cells[6, IndTab] := TextFab;
+            if NbLignesFab < 1 then NbLignesFab := 1;
+            TabEquipement.RowHeights[IndTab] := NbLignesFab * 18;
+            if TabEquipement.RowHeights[IndTab] < TabEquipement.DefaultRowHeight then
+              TabEquipement.RowHeights[IndTab] := TabEquipement.DefaultRowHeight;
           end;
+        if TabEquipement.Cells[6, IndTab] = '' then
+          TabEquipement.RowHeights[IndTab] := TabEquipement.DefaultRowHeight;
       end;
+    // Recalcule la hauteur de la grille et la largeur de la colonne (lignes plus hautes).
+    AdjustGridColumnsWidth(TabEquipement, 9999, false, false, true, 0, 0, ssautoboth, false);
   end;
 
 Procedure TWinPersonnages.AugmentationAjouteXpMj(TypeDonnee: String);

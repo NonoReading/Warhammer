@@ -134,7 +134,7 @@ object Menu: TMenu
     AnchorSideBottom.Side = asrCenter
     Left = 1160
     Height = 125
-    Top = 179
+    Top = 169
     Width = 525
     Anchors = [akLeft, akRight]
     Proportional = True
@@ -146,7 +146,7 @@ object Menu: TMenu
     AnchorSideBottom.Side = asrCenter
     Left = 1160
     Height = 125
-    Top = 316
+    Top = 293
     Width = 525
     Anchors = [akLeft, akRight]
     Proportional = True
@@ -158,7 +158,7 @@ object Menu: TMenu
     AnchorSideBottom.Side = asrCenter
     Left = 1160
     Height = 125
-    Top = 451
+    Top = 417
     Width = 525
     Anchors = [akLeft, akRight]
     Proportional = True
@@ -170,7 +170,7 @@ object Menu: TMenu
     AnchorSideBottom.Side = asrCenter
     Left = 1160
     Height = 125
-    Top = 587
+    Top = 541
     Width = 525
     Anchors = [akLeft, akRight]
     Proportional = True
@@ -182,7 +182,7 @@ object Menu: TMenu
     AnchorSideBottom.Side = asrCenter
     Left = 1160
     Height = 125
-    Top = 723
+    Top = 665
     Width = 525
     Anchors = [akLeft, akRight]
     Proportional = True
@@ -194,7 +194,7 @@ object Menu: TMenu
     AnchorSideBottom.Side = asrCenter
     Left = 1160
     Height = 125
-    Top = 859
+    Top = 789
     Width = 525
     Anchors = [akLeft, akRight]
     Proportional = True
@@ -223,7 +223,7 @@ object Menu: TMenu
     AnchorSideBottom.Side = asrCenter
     Left = 1040
     Height = 28
-    Top = 225
+    Top = 217
     Width = 64
     Anchors = [akLeft]
     AutoSize = False
@@ -241,7 +241,7 @@ object Menu: TMenu
     AnchorSideBottom.Side = asrCenter
     Left = 1040
     Height = 28
-    Top = 361
+    Top = 340
     Width = 64
     Anchors = [akLeft]
     AutoSize = False
@@ -259,7 +259,7 @@ object Menu: TMenu
     AnchorSideBottom.Side = asrCenter
     Left = 1040
     Height = 28
-    Top = 497
+    Top = 465
     Width = 64
     Anchors = [akLeft]
     AutoSize = False
@@ -277,7 +277,7 @@ object Menu: TMenu
     AnchorSideBottom.Side = asrCenter
     Left = 1040
     Height = 28
-    Top = 632
+    Top = 588
     Width = 64
     Anchors = [akLeft]
     AutoSize = False
@@ -295,7 +295,7 @@ object Menu: TMenu
     AnchorSideBottom.Side = asrCenter
     Left = 1040
     Height = 28
-    Top = 769
+    Top = 713
     Width = 64
     Anchors = [akLeft]
     AutoSize = False
@@ -313,7 +313,7 @@ object Menu: TMenu
     AnchorSideBottom.Side = asrCenter
     Left = 1040
     Height = 28
-    Top = 905
+    Top = 837
     Width = 64
     Anchors = [akLeft]
     AutoSize = False
@@ -423,7 +423,7 @@ object Menu: TMenu
   object ButtonMetier: TBCButton
     Left = 992
     Height = 38
-    Top = 177
+    Top = 169
     Width = 166
     Anchors = [akLeft]
     StateClicked.Background.Gradient1.StartColor = 8404992
@@ -697,7 +697,7 @@ object Menu: TMenu
   object ButtonCompetence: TBCButton
     Left = 992
     Height = 38
-    Top = 314
+    Top = 293
     Width = 166
     Anchors = [akLeft]
     StateClicked.Background.Gradient1.StartColor = 8404992
@@ -789,7 +789,7 @@ object Menu: TMenu
   object ButtonTalent: TBCButton
     Left = 992
     Height = 38
-    Top = 449
+    Top = 417
     Width = 166
     Anchors = [akLeft]
     StateClicked.Background.Gradient1.StartColor = 8404992
@@ -881,7 +881,7 @@ object Menu: TMenu
   object ButtonArme: TBCButton
     Left = 992
     Height = 38
-    Top = 585
+    Top = 541
     Width = 166
     Anchors = [akLeft]
     StateClicked.Background.Gradient1.StartColor = 8404992
@@ -973,7 +973,7 @@ object Menu: TMenu
   object ButtonArmure: TBCButton
     Left = 992
     Height = 38
-    Top = 721
+    Top = 665
     Width = 166
     Anchors = [akLeft]
     StateClicked.Background.Gradient1.StartColor = 8404992
@@ -1065,7 +1065,7 @@ object Menu: TMenu
   object ButtonSort: TBCButton
     Left = 992
     Height = 38
-    Top = 857
+    Top = 789
     Width = 166
     Anchors = [akLeft]
     StateClicked.Background.Gradient1.StartColor = 8404992
@@ -1273,6 +1273,8 @@ object Menu: TMenu
     ParentFont = False
     TabOrder = 12
     OnDblClick = TabLivreDblClick
+    OnMouseMove = TabLivreMouseMove
+    ShowHint = True
     ColWidths = (
       0
     )
@@ -1858,5 +1860,97 @@ object Menu: TMenu
     FontEx.Style = []
     Rounding.RoundX = 1
     Rounding.RoundY = 1
+  end
+  object ButtonEquipement: TBCButton
+    Left = 992
+    Height = 38
+    Top = 912
+    Width = 166
+    Anchors = [akLeft]
+    StateClicked.Background.Gradient1.StartColor = 8404992
+    StateClicked.Background.Gradient1.EndColor = 4194304
+    StateClicked.Background.Gradient1.GradientType = gtRadial
+    StateClicked.Background.Gradient1.Point1XPercent = 50
+    StateClicked.Background.Gradient1.Point1YPercent = 100
+    StateClicked.Background.Gradient1.Point2XPercent = 0
+    StateClicked.Background.Gradient1.Point2YPercent = 0
+    StateClicked.Background.Gradient2.StartColor = clWhite
+    StateClicked.Background.Gradient2.EndColor = clBlack
+    StateClicked.Background.Gradient2.GradientType = gtLinear
+    StateClicked.Background.Gradient2.Point1XPercent = 0
+    StateClicked.Background.Gradient2.Point1YPercent = 0
+    StateClicked.Background.Gradient2.Point2XPercent = 0
+    StateClicked.Background.Gradient2.Point2YPercent = 100
+    StateClicked.Background.Gradient1EndPercent = 100
+    StateClicked.Background.Style = bbsGradient
+    StateClicked.Border.Style = bboNone
+    StateClicked.FontEx.Color = 16770790
+    StateClicked.FontEx.FontQuality = fqSystemClearType
+    StateClicked.FontEx.Shadow = True
+    StateClicked.FontEx.ShadowRadius = 2
+    StateClicked.FontEx.ShadowOffsetX = 1
+    StateClicked.FontEx.ShadowOffsetY = 1
+    StateClicked.FontEx.Style = [fsBold]
+    StateHover.Background.Gradient1.StartColor = 16744448
+    StateHover.Background.Gradient1.EndColor = 8404992
+    StateHover.Background.Gradient1.GradientType = gtRadial
+    StateHover.Background.Gradient1.Point1XPercent = 50
+    StateHover.Background.Gradient1.Point1YPercent = 100
+    StateHover.Background.Gradient1.Point2XPercent = 0
+    StateHover.Background.Gradient1.Point2YPercent = 0
+    StateHover.Background.Gradient2.StartColor = clWhite
+    StateHover.Background.Gradient2.EndColor = clBlack
+    StateHover.Background.Gradient2.GradientType = gtLinear
+    StateHover.Background.Gradient2.Point1XPercent = 0
+    StateHover.Background.Gradient2.Point1YPercent = 0
+    StateHover.Background.Gradient2.Point2XPercent = 0
+    StateHover.Background.Gradient2.Point2YPercent = 100
+    StateHover.Background.Gradient1EndPercent = 100
+    StateHover.Background.Style = bbsGradient
+    StateHover.Border.Style = bboNone
+    StateHover.FontEx.Color = clWhite
+    StateHover.FontEx.FontQuality = fqSystemClearType
+    StateHover.FontEx.Shadow = True
+    StateHover.FontEx.ShadowRadius = 2
+    StateHover.FontEx.ShadowOffsetX = 1
+    StateHover.FontEx.ShadowOffsetY = 1
+    StateHover.FontEx.Style = [fsBold]
+    StateNormal.Background.Gradient1.StartColor = 4194304
+    StateNormal.Background.Gradient1.EndColor = 8405056
+    StateNormal.Background.Gradient1.GradientType = gtLinear
+    StateNormal.Background.Gradient1.Point1XPercent = 0
+    StateNormal.Background.Gradient1.Point1YPercent = 0
+    StateNormal.Background.Gradient1.Point2XPercent = 0
+    StateNormal.Background.Gradient1.Point2YPercent = 100
+    StateNormal.Background.Gradient2.StartColor = 8405056
+    StateNormal.Background.Gradient2.EndColor = 4194304
+    StateNormal.Background.Gradient2.GradientType = gtRadial
+    StateNormal.Background.Gradient2.Point1XPercent = 50
+    StateNormal.Background.Gradient2.Point1YPercent = 100
+    StateNormal.Background.Gradient2.Point2XPercent = 0
+    StateNormal.Background.Gradient2.Point2YPercent = 0
+    StateNormal.Background.Gradient1EndPercent = 60
+    StateNormal.Background.Style = bbsGradient
+    StateNormal.Border.Style = bboNone
+    StateNormal.FontEx.Color = 16770790
+    StateNormal.FontEx.FontQuality = fqSystemClearType
+    StateNormal.FontEx.Shadow = True
+    StateNormal.FontEx.ShadowRadius = 2
+    StateNormal.FontEx.ShadowOffsetX = 1
+    StateNormal.FontEx.ShadowOffsetY = 1
+    StateNormal.FontEx.Style = [fsBold]
+    Caption = 'Equipement'
+    Color = clNone
+    DropDownWidth = 16
+    DropDownArrowSize = 8
+    GlobalOpacity = 255
+    OnClick = ButtonEquipementClick
+    ParentColor = False
+    Rounding.RoundX = 12
+    Rounding.RoundY = 12
+    RoundingDropDown.RoundX = 1
+    RoundingDropDown.RoundY = 1
+    TextApplyGlobalOpacity = False
+    MemoryUsage = bmuHigh
   end
 end

@@ -19,6 +19,7 @@ Type
     Livre:              String;
     PorteeBonus:        Integer;  // accessoire d arme : ajoute a la portee
     QualitesArme:       String;   // accessoire d arme : codes de qualites d arme ajoutees (virgules)
+    Applique:           String;   // Weapon, Armour, Misc (virgules) ; vide = tous les objets
 end;
 
   TListFabrication = specialize TList<StructureFabrication>;
@@ -35,6 +36,9 @@ Var
 function ChercheFabrication(CodeFabrication :String): StructureFabrication;
 function TexteFabrication(PFabrication: StructureFabrication):String;
 Function FabricationEncombrement(ListeCode :String; Var Quality: String): Integer;
+// Somme, sur les qualites d'UN objet ("CODE niveau,..."), des modificateurs (TypeModif, Cible) de
+// fabrication multiplies par le niveau. Rune of Cleaving (ModifyDamage CC). 20/09/2026.
+Function FabricationModificateurQualite(ListeCode, TypeModif, Cible: String): Integer;
 Function FabricationEstBulky(ListeCode :String): Boolean;
 Function FabricationEstPractical(ListeCode :String): Boolean;
 Function FabricationEstUnreliable(ListeCode :String): Boolean;
@@ -304,6 +308,37 @@ procedure FabricationDetail(ListeCode :String; var BonusItem :String; var ListeB
       end;
   end;
 
+Function FabricationModificateurQualite(ListeCode, TypeModif, Cible: String): Integer;
+  var
+    Liste:          TStringList;
+    Element, Code:  String;
+    Niveau:         Integer;
+    Ind, IndModif:  Integer;
+  begin
+    Result := 0;
+    if ListeCode = '' then Exit;
+    Liste := TStringList.Create;
+    try
+      ExtractStrings([','], [], PChar(ListeCode), Liste);
+      for Ind := 0 to Liste.Count - 1 do
+        begin
+          Element := Trim(Liste[Ind]);
+          Code    := Element;
+          Niveau  := 1;
+          if Pos(' ', Element) > 0 then
+            begin
+              Code   := Trim(ExtractStringBefore(Element, ' '));
+              Niveau := StrToIntDef(Trim(Copy(Element, Pos(' ', Element) + 1, Length(Element))), 1);
+            end;
+          for IndModif := 0 to ListFabricationModificateur.Count - 1 do
+            if (ListFabricationModificateur[IndModif].TypeModif = TypeModif)
+               and CompareRechercheValeur(ListFabricationModificateur[IndModif].CodeSource, Code)
+               and CompareRechercheValeur(ListFabricationModificateur[IndModif].Cible, Cible) then
+              Result := Result + ListFabricationModificateur[IndModif].Facteur * Niveau;
+        end;
+    finally
+      Liste.Free;
+    end;
+  end;
+
 end.
-
-

@@ -67,6 +67,11 @@ procedure TWinFabrications.FormCreate(Sender: TObject);
      TabFabrication.ColWidths[6]     := 500;
 
      For PFabrication in ListFabrication do
+       // Seules les fabrications applicables au type de l objet (Applique), plus celles deja
+       // posees sur lui pour ne pas les perdre a la validation. 20/09/2026.
+       if (PFabrication.Applique = '') or (SelectWinFabricationType = '')
+          or (Pos(SelectWinFabricationType, PFabrication.Applique) > 0)
+          or (Pos(PFabrication.CodeFabrication + ' ', SelectWinFabrication + ',') > 0) then
        begin
          inc(IndTab);
          TabFabrication.Cells[1, IndTab] := PFabrication.CodeFabrication;
@@ -75,6 +80,8 @@ procedure TWinFabrications.FormCreate(Sender: TObject);
          TabFabrication.Cells[5, IndTab] := PFabrication.TypeQualite;
          TabFabrication.Cells[6, IndTab] := PFabrication.Resume;
        end;
+
+     TabFabrication.RowCount := IndTab + 1;
 
      ButtonOk.Caption := getTexteLibelle('RULES-LAB_106');
 

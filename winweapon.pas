@@ -48,6 +48,7 @@ type
     procedure FormCreate({%H-}Sender: TObject);
     procedure FormKeyPress({%H-}Sender: TObject; var Key: char);
     procedure FormResize({%H-}Sender: TObject);
+    procedure CheckCompetenceChange({%H-}Sender: TObject);
     procedure TabBonusSelection({%H-}Sender: TObject; {%H-}aCol, aRow: Integer);
     procedure TabWeaponAfterSelection({%H-}Sender: TObject; {%H-}aCol, aRow: Integer);
     procedure TabWeaponDblClick({%H-}Sender: TObject);
@@ -55,6 +56,10 @@ type
     Procedure WinVider();
   private
     Ancrage: TAncrageProportionnel;
+    // Cree en code (pas dans le .lfm) : visible seulement depuis WinPersonnage.
+    CheckCompetence: TCheckBox;
+    LabCompetenceFiltre: TLabel;
+    function ArmeSelonCompetences(PArme: StructureArme): Boolean;
 
   public
 
@@ -120,7 +125,7 @@ begin
     IndTab := 0;
     For Parme In ListArme do
       begin
-        if (Pos(ValeurGenerique,PArme.CodeArme) = 0) and VerifieFiltre(PArme.Livre, FiltreLivre) then
+        if (Pos(ValeurGenerique,PArme.CodeArme) = 0) and VerifieFiltre(PArme.Livre, FiltreLivre) and ArmeSelonCompetences(PArme) then
           begin
             Inc(IndTab);
             if TabWeapon.RowCount <= IndTab then
@@ -201,9 +206,66 @@ begin
       Ancrage.Appliquer;
 end;
 
+// Case cochee : ne garde que les armes dont une competence (CodeCompetence, plusieurs separees par
+// SeparateurMulti) figure parmi celles du personnage. Sans case ou non cochee : toutes.
+function TWinWeapons.ArmeSelonCompetences(PArme: StructureArme): Boolean;
+  var
+    Codes:   TStringList;
+    IndArme: Integer;
+    IndPers: Integer;
+    CodeArme: String;
+  begin
+    Result := True;
+    if (CheckCompetence = nil) or (not CheckCompetence.Checked) then Exit;
+    Result := False;
+    Codes := TStringList.Create;
+    try
+      ExtractStrings([','], [], PChar(SelectWinArmeCompetences), Codes);
+      for IndArme := 1 to CountOccurrences(PArme.CodeCompetence, SeparateurMulti) + 1 do
+        begin
+          CodeArme := ExtractChaine(SeparateurMulti, PArme.CodeCompetence, IndArme);
+          for IndPers := 0 to Codes.Count - 1 do
+            if CompareRechercheValeur(CodeArme, Codes[IndPers]) or CompareRechercheValeur(Codes[IndPers], CodeArme) then
+              begin
+                Result := True;
+                Exit;
+              end;
+        end;
+    finally
+      Codes.Free;
+    end;
+  end;
+
+procedure TWinWeapons.CheckCompetenceChange(Sender: TObject);
+  begin
+    WinVider();
+    WinCharger();
+  end;
+
 procedure TWinWeapons.FormCreate(Sender: TObject);
 begin
     FiltreLivre := SelectWinLivre;
+    // Case "selon mes competences" : seulement quand on vient de WinPersonnage. Elle prend la
+    // droite du bouton de filtre, qui est retreci d autant.
+    if SelectWinArmeCompetences <> '' then
+      begin
+        ButtonFiltre.Width := ButtonFiltre.Width - 180;
+        CheckCompetence := TCheckBox.Create(Self);
+        CheckCompetence.Parent   := Self;
+        CheckCompetence.SetBounds(ButtonFiltre.Left + ButtonFiltre.Width + 8, ButtonFiltre.Top - 12, 170, 24);
+        CheckCompetence.Caption  := GetTexteLibelle('RULES-LAB_240');
+        // Cochee par defaut, avant d'affecter OnChange (la liste n'est pas encore chargee).
+        CheckCompetence.Checked  := True;
+        CheckCompetence.OnChange := @CheckCompetenceChange;
+        // Explication sous la case.
+        LabCompetenceFiltre := TLabel.Create(Self);
+        LabCompetenceFiltre.Parent   := Self;
+        LabCompetenceFiltre.SetBounds(CheckCompetence.Left, CheckCompetence.Top + 24, 170, 56);
+        LabCompetenceFiltre.AutoSize := False;
+        LabCompetenceFiltre.WordWrap := True;
+        LabCompetenceFiltre.Font.Size := 8;
+        LabCompetenceFiltre.Caption  := GetTexteLibelle('RULES-LAB_241');
+      end;
     WinCharger();
     // Ancrage proportionnel, meme regle que WinRace (voir AncrageProportionnel).
     Ancrage := TAncrageProportionnel.Create(Self);
@@ -237,6 +299,11 @@ begin
     Ancrage.Ajouter(Image2, 1, 0);
     Ancrage.Ajouter(Image1, 1, 0);
     Ancrage.Ajouter(ButtonFiltre, 0, 0.5);
+    if CheckCompetence <> nil then
+      begin
+        Ancrage.Ajouter(CheckCompetence, 0, 0);
+        Ancrage.Ajouter(LabCompetenceFiltre, 0, 0);
+      end;
     Ancrage.Fixer;
 end;
 

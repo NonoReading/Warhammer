@@ -313,7 +313,7 @@ Function PdfDiversTexteEnc(PersonnageEquipement: StructurePersonnageEquipement):
 // (15/08/2026, ajout du bloc "Armour Points") : il était déjà écrit mais jamais relu
 // avant cet ajout - voir CONTEXT.md §2.4 - il sert maintenant à afficher la valeur du
 // Bouclier dans le nouveau bloc PdfBlocArmourPoints.
-Procedure PdfBlocArmesDonnees(PdfPage: TPDFPage; Personnage: StructurePersonnage; XGauche, XDroite, Y, HauteurLigne: Single; BF, TBonusCC, TBonusCT: Integer; var FabricationBonii: String; out EncArme: Integer; out ArmeBonii: String; out ArmureBouclier: Integer; MinPolice: Integer);
+Procedure PdfBlocArmesDonnees(PdfPage: TPDFPage; Personnage: StructurePersonnage; XGauche, XDroite, Y, HauteurLigne: Single; BF, TBonusCC, TBonusCT: Integer; var FabricationBonii: String; out EncArme: Integer; out ArmeBonii: String; out ArmureBouclier: Integer; MinPolice: Integer; AsterisqueParPiece: TStringList);
 
 // Bloc Armures (page 2, remplissage des données) — dernière des 4 boucles de
 // remplissage à être séparée (CONTEXT.md §2.4). Filtre sur TypeEquipAR (armure
@@ -747,6 +747,9 @@ Function PdfPersonnageAttribut(Personnage: StructurePersonnage; Attribut: String
     // ci-dessus (les dix attributs classiques passés par ici).
     Res.Base := Res.Base + PersonnageArmureBonusAttributModif(Personnage, Attribut);
 
+    // Qualites de fabrication (Rune of Fortitude) sur armure portee.
+    Res.Base := Res.Base + PersonnageFabricationAttributModif(Personnage, Attribut);
+
     Res.Total := Res.Base + Res.Augmentation;
     Result := res;
   end;
@@ -869,6 +872,7 @@ Procedure PdfPersonnageCreation(Personnage: StructurePersonnage; BackGround: Boo
     BF, BE, BFM:     Integer;
     Ch:              String;
     DurACuire:       Integer = 0;
+    BonusBlessureFab: Integer = 0;   // Rune of Iron et autres fabrications portees
     BonusEncomb:     Integer = 0;
     Enc:             Integer;
     EncP:            Integer;
@@ -1234,6 +1238,7 @@ Procedure PdfPersonnageCreation(Personnage: StructurePersonnage; BackGround: Boo
     // de talent en dur, PersonnageTalentEffet lit <Effet Cible="..."/> sur n'importe quel
     // talent (ChargeTalentEffet), creation et augmentation confondues.
     DurACuire   := PersonnageTalentEffet(Personnage, ConstCibleEffetDurACuire);
+    BonusBlessureFab := PersonnageFabricationAttributModif(Personnage, ConstCaracBlessure);
     BonusEncomb := PersonnageTalentEffet(Personnage, ConstCibleEffetBonusEncomb);
     // Mighty Blow/Accurate Shot migres du mecanisme Effet vers le moteur generique "par
     // source" (ConstXmlModifieDegat = ModifyDamage) le 11/09/2026 - meme pathway que
@@ -1656,7 +1661,7 @@ Procedure PdfPersonnageCreation(Personnage: StructurePersonnage; BackGround: Boo
         PdfPage.WriteText(154,144, Ch);
       end;
     PRaceAttribut := ChercheRaceAttribut(Personnage.Race, ConstCaracBlessure);
-    Ch := IntToStr(CalculBlessure(PRaceAttribut.CalculRace, BF, BE, BFM) + DurACuire);
+    Ch := IntToStr(CalculBlessure(PRaceAttribut.CalculRace, BF, BE, BFM) + DurACuire + BonusBlessureFab);
     if Length(Ch) = 1 then Ch := ' '+Ch;
     PdfPage.WriteText(154,137.5, Ch);
 
@@ -1730,7 +1735,7 @@ Procedure PdfPersonnageCreation(Personnage: StructurePersonnage; BackGround: Boo
               // PersonnageTalentArmeModif ajoute ici depuis le 11/09/2026 (ModifyWeapon sur
               // Talent, moteur generique) - meme reflexe "les DEUX blocs" que le bug
               // ModifyWeapon/Feldo2P du 08/09/2026 (CONTEXT.md).
-              Pourcent := IntToStr(CompetenceDonnee.Total + PersonnageCareerBonusArmeModif(Personnage, PArme) + PersonnageTalentArmeModif(Personnage, PArme) + Ord(Pos(BonusAccurate, PArme.ListeBonus) > 0) * 10);
+              Pourcent := IntToStr(CompetenceDonnee.Total + PersonnageCareerBonusArmeModif(Personnage, PArme) + PersonnageTalentArmeModif(Personnage, PArme) + FabricationModificateurQualite(PersonnageEquipement.QualiteEquipement, ConstXmlModifieCompetence, ConstCibleModifieDegatCC) + Ord(Pos(BonusAccurate, PArme.ListeBonus) > 0) * 10);
               // Une arme accordee par une mutation est une partie du corps, pas un choix
               // d'entrainement : le malus "pas de competence" ne s'applique pas, ses qualites
               // s'affichent toujours. CONTEXT.md, chantier "traits de creature".
@@ -1753,9 +1758,9 @@ Procedure PdfPersonnageCreation(Personnage: StructurePersonnage; BackGround: Boo
 
               Deg   := CalculDegat(PArme.CalculDegat, BF);
               if pos(EquipementCC, PArme.CodeArme) > 0 then
-                Deg := Deg + TBonusCC
+                Deg := Deg + TBonusCC + FabricationModificateurQualite(PersonnageEquipement.QualiteEquipement, ConstXmlModifieDegat, ConstCibleModifieDegatCC)
               else if pos(EquipementCT, PArme.CodeArme) > 0 then
-                Deg := Deg + TBonusCT;
+                Deg := Deg + TBonusCT + FabricationModificateurQualite(PersonnageEquipement.QualiteEquipement, ConstXmlModifieDegat, ConstCibleModifieDegatCT);
 
               if Deg = 0 then
                 PdfPage.WriteText(114,121-(NbArme*5), '-')
@@ -2215,6 +2220,73 @@ Function PdfPersonnageArmureAsterisques(Personnage: StructurePersonnage; Asteris
     AsterisqueFinal := AsterisqueCourant;
   end;
 
+// Astérisques des qualités de fabrication portées (runes) : une astérisque par pièce d'armure
+// PORTÉE dont une fabrication modifie une caractéristique (ModifyCarac) ou les PA (ModifArmour).
+// "+10 (N)" à côté de la caractéristique (Result), "(N)" à côté des Armour Points
+// (AsterisqueArmure) et, sous la clé "FAB:CodeEquipement" de AsterisqueParMutation, le numéro à
+// écrire à côté de la pièce elle-même. 20/09/2026.
+Procedure PdfFabricationAsterisques(Personnage: StructurePersonnage; var AsterisqueCourant: Integer; Annotation, ParPiece: TStringList; var AsterisqueArmure: String);
+  var
+    PersonnageEquipement: StructurePersonnageEquipement;
+    Liste:                TStringList;
+    Element, Code:        String;
+    Niveau, Valeur:       Integer;
+    Ind, IndModif:        Integer;
+    NumPiece:             Integer;
+  begin
+    Liste := TStringList.Create;
+    try
+      for PersonnageEquipement in Personnage.Equipement do
+        if PersonnageEquipement.Porte
+           and ((TrimRight(PersonnageEquipement.TypeEquipement) = TrimRight(TypeEquipAR))
+                or (TrimRight(PersonnageEquipement.TypeEquipement) = TrimRight(TypeEquipARS))
+                or (TrimRight(PersonnageEquipement.TypeEquipement) = TrimRight(TypeEquipWe)))
+           and (PersonnageEquipement.QualiteEquipement <> '') then
+          begin
+            NumPiece := 0;
+            Liste.Clear;
+            ExtractStrings([','], [], PChar(PersonnageEquipement.QualiteEquipement), Liste);
+            for Ind := 0 to Liste.Count - 1 do
+              begin
+                Element := Trim(Liste[Ind]);
+                Code    := Element;
+                Niveau  := 1;
+                if Pos(' ', Element) > 0 then
+                  begin
+                    Code   := Trim(ExtractStringBefore(Element, ' '));
+                    Niveau := StrToIntDef(Trim(Copy(Element, Pos(' ', Element) + 1, Length(Element))), 1);
+                  end;
+                for IndModif := 0 to ListFabricationModificateur.Count - 1 do
+                  if ((ListFabricationModificateur[IndModif].TypeModif = ConstXmlModifieAttribut)
+                      or (ListFabricationModificateur[IndModif].TypeModif = ConstXmlModifieArmure))
+                     and CompareRechercheValeur(ListFabricationModificateur[IndModif].CodeSource, Code) then
+                    begin
+                      if NumPiece = 0 then
+                        begin
+                          Inc(AsterisqueCourant);
+                          NumPiece := AsterisqueCourant;
+                          ParPiece.Values['FAB:' + PersonnageEquipement.CodeEquipement] := '(' + IntToStr(NumPiece) + ')';
+                        end;
+                      Valeur := ListFabricationModificateur[IndModif].Facteur * Niveau;
+                      if ListFabricationModificateur[IndModif].TypeModif = ConstXmlModifieAttribut then
+                        begin
+                          if Valeur >= 0 then
+                            Annotation.Values[ListFabricationModificateur[IndModif].Cible] := Annotation.Values[ListFabricationModificateur[IndModif].Cible]
+                              + ' +' + IntToStr(Valeur) + ' (' + IntToStr(NumPiece) + ')'
+                          else
+                            Annotation.Values[ListFabricationModificateur[IndModif].Cible] := Annotation.Values[ListFabricationModificateur[IndModif].Cible]
+                              + ' ' + IntToStr(Valeur) + ' (' + IntToStr(NumPiece) + ')';
+                        end
+                      else if Pos('(' + IntToStr(NumPiece) + ')', AsterisqueArmure) = 0 then
+                        AsterisqueArmure := AsterisqueArmure + '(' + IntToStr(NumPiece) + ')';
+                    end;
+              end;
+          end;
+    finally
+      Liste.Free;
+    end;
+  end;
+
 Function PdfPersonnageMutationAsterisques(Personnage: StructurePersonnage; AsterisqueDepart: Integer; out AsterisqueParMutation: TStringList; out AsterisqueArmure: String; out AsterisqueFinal: Integer): TStringList;
   var
     PersonnageMutation:                 StructurePersonnageMutation;
@@ -2339,6 +2411,9 @@ Function PdfPersonnageMutationAsterisques(Personnage: StructurePersonnage; Aster
               Break;
             end;
       end;
+
+    // Runes et autres fabrications portees (Rune of Fortitude, Rune of Stone).
+    PdfFabricationAsterisques(Personnage, AsterisqueCourant, Result, AsterisqueParMutation, AsterisqueArmure);
 
     AsterisqueFinal := AsterisqueCourant;
   end;
@@ -3158,7 +3233,7 @@ Procedure PdfBlocDiversDonnees(PdfPage: TPDFPage; Personnage: StructurePersonnag
         end;
   end;
 
-Procedure PdfBlocArmesDonnees(PdfPage: TPDFPage; Personnage: StructurePersonnage; XGauche, XDroite, Y, HauteurLigne: Single; BF, TBonusCC, TBonusCT: Integer; var FabricationBonii: String; out EncArme: Integer; out ArmeBonii: String; out ArmureBouclier: Integer; MinPolice: Integer);
+Procedure PdfBlocArmesDonnees(PdfPage: TPDFPage; Personnage: StructurePersonnage; XGauche, XDroite, Y, HauteurLigne: Single; BF, TBonusCC, TBonusCT: Integer; var FabricationBonii: String; out EncArme: Integer; out ArmeBonii: String; out ArmureBouclier: Integer; MinPolice: Integer; AsterisqueParPiece: TStringList);
   var
     PersonnageEquipement: StructurePersonnageEquipement;
     PArme:                StructureArme;
@@ -3236,7 +3311,7 @@ Procedure PdfBlocArmesDonnees(PdfPage: TPDFPage; Personnage: StructurePersonnage
           // "normal" depuis l'ajout de ModifyWeapon le 07/09/2026 (CONTEXT.md 2.50 point 4bis).
           // PersonnageTalentArmeModif ajoute ici aussi depuis le 11/09/2026, meme cablage
           // dans les DEUX blocs des le depart.
-          Pourcent := IntToStr(CompetenceDonnee.Total + PersonnageCareerBonusArmeModif(Personnage, PArme) + PersonnageTalentArmeModif(Personnage, PArme) + Ord(Pos(BonusAccurate, PArme.ListeBonus) > 0) * 10);
+          Pourcent := IntToStr(CompetenceDonnee.Total + PersonnageCareerBonusArmeModif(Personnage, PArme) + PersonnageTalentArmeModif(Personnage, PArme) + FabricationModificateurQualite(PersonnageEquipement.QualiteEquipement, ConstXmlModifieCompetence, ConstCibleModifieDegatCC) + Ord(Pos(BonusAccurate, PArme.ListeBonus) > 0) * 10);
           // Meme exception que PdfPersonnageCreation : arme de mutation = partie du corps.
           PasBonus := (CompetenceDonnee.Augmentation = 0) and (PersonnageEquipement.Source = '');
 
@@ -3246,7 +3321,17 @@ Procedure PdfBlocArmesDonnees(PdfPage: TPDFPage; Personnage: StructurePersonnage
               TexteRange2 := '> : '+ChaineSur(3,IntToStr(Trunc(PorteMoyenne*2 )))+'m '+IntToStr(StrToInt(Pourcent)-10)+'% / '+ChaineSur(3,IntToStr(Trunc(PorteMoyenne*3 )))+'m '+IntToStr(StrToInt(Pourcent)-30)+'%';
             end;
 
-          PdfEcrit(PdfPage, XGauche +  1, XGauche + 45, Y - ((NbArme + 2) * HauteurLigne) + 0.6, PArme.Libelle + Quality, MinPolice);
+          // Asterisque des fabrications (Speed...) en petite police relevee, comme celles des armures ;
+          // le nom est raccourci d'autant pour ne pas la recouvrir.
+          if AsterisqueParPiece.Values['FAB:' + PersonnageEquipement.CodeEquipement] <> '' then
+            begin
+              PdfEcrit(PdfPage, XGauche +  1, XGauche + 41, Y - ((NbArme + 2) * HauteurLigne) + 0.6, PArme.Libelle + Quality, MinPolice);
+              PdfTaillePolice(PdfPage, PdfFontValue, ConstPoliceArial, 4);
+              PdfEcrit(PdfPage, XGauche + 41, XGauche + 45, Y - ((NbArme + 2) * HauteurLigne) + 2.3, AsterisqueParPiece.Values['FAB:' + PersonnageEquipement.CodeEquipement], 4);
+              PdfTaillePolice(PdfPage, PdfFontValue, ConstPoliceArial, 9);
+            end
+          else
+            PdfEcrit(PdfPage, XGauche +  1, XGauche + 45, Y - ((NbArme + 2) * HauteurLigne) + 0.6, PArme.Libelle + Quality, MinPolice);
 
           LigneBonus := '';
 
@@ -3257,9 +3342,9 @@ Procedure PdfBlocArmesDonnees(PdfPage: TPDFPage; Personnage: StructurePersonnage
 
           Deg   := CalculDegat(PArme.CalculDegat, BF);
           if pos(EquipementCC, PArme.CodeArme) > 0 then
-            Deg := Deg + TBonusCC
+            Deg := Deg + TBonusCC + FabricationModificateurQualite(PersonnageEquipement.QualiteEquipement, ConstXmlModifieDegat, ConstCibleModifieDegatCC)
           else if pos(EquipementCT, PArme.CodeArme) > 0 then
-            Deg := Deg + TBonusCT;
+            Deg := Deg + TBonusCT + FabricationModificateurQualite(PersonnageEquipement.QualiteEquipement, ConstXmlModifieDegat, ConstCibleModifieDegatCT);
 
           if Deg = 0 then
             PdfCentre(PdfPage, XGauche +  96, XGauche + 113, Y - ((NbArme + 2) * HauteurLigne) + 0.6, '-')
@@ -4235,6 +4320,8 @@ Procedure PdfPersonnageCreationFeldo2P(Personnage: StructurePersonnage);
     Ch:              String;
     DurACuire:       Integer = 0;
     ValDurACuire:    Integer = 0;
+    BonusBlessureFab: Integer = 0;   // Rune of Iron et autres fabrications portees
+    AnnotBlessure:   String = '';
     BonusEncomb:     Integer = 0;
     EncArme:         Integer;
     EncArmure:       Integer;
@@ -4533,6 +4620,7 @@ Procedure PdfPersonnageCreationFeldo2P(Personnage: StructurePersonnage);
     // PersonnageTalentEffetRang.
     DurACuire    := PersonnageTalentEffet(Personnage, ConstCibleEffetDurACuire);
     ValDurACuire := PersonnageTalentEffetRang(Personnage, ConstCibleEffetDurACuire);
+    BonusBlessureFab := PersonnageFabricationAttributModif(Personnage, ConstCaracBlessure);
     BonusEncomb  := PersonnageTalentEffet(Personnage, ConstCibleEffetBonusEncomb);
     // Mighty Blow/Accurate Shot migres vers ModifyDamage le 11/09/2026, meme raison qu'au
     // dessus (PdfPersonnageCreation).
@@ -4556,6 +4644,13 @@ Procedure PdfPersonnageCreationFeldo2P(Personnage: StructurePersonnage);
     // Départ à Personnage.Asterisque (même baseline que les talents) ; les armures enchaînent
     // ensuite après AsterisqueFinalMutation, pour ne jamais réutiliser un numéro déjà pris.
     ListAsterisqueMutation := PdfPersonnageMutationAsterisques(Personnage, Personnage.Asterisque, AsterisqueParMutation, AsterisqueArmure, AsterisqueFinalMutation);
+    // "(N)" de l'asterisque des fabrications sur les Blessures, capture apres sa creation, avant la liberation de
+    // ListAsterisqueMutation.
+    AnnotBlessure := Trim(ListAsterisqueMutation.Values[ConstCaracBlessure]);
+    if Pos('(', AnnotBlessure) > 0 then
+      AnnotBlessure := Copy(AnnotBlessure, Pos('(', AnnotBlessure), Length(AnnotBlessure))
+    else
+      AnnotBlessure := '';
 
     // Bloc Entête (extrait dans PdfBlocEntete, CONTEXT.md §2.4)
     DessinDebutHautCarac := PdfBlocEntete(PdfPage, Personnage, PRace, PMetier, PMetierNiveau, LocData,
@@ -4650,6 +4745,11 @@ Procedure PdfPersonnageCreationFeldo2P(Personnage: StructurePersonnage);
     // Enchaîne après AsterisqueFinalMutation (calculé plus haut) pour ne jamais réutiliser un
     // numéro déjà pris par une mutation à effet sur une caractéristique.
     ListAsterisqueArmure := PdfPersonnageArmureAsterisques(Personnage, AsterisqueFinalMutation, AsterisqueParEquipement, AsterisqueFinalArmure);
+    // Numero des fabrications (runes) a cote de la piece, a la suite de celui d'un eventuel bonus d'armure.
+    for Ind := 0 to AsterisqueParMutation.Count - 1 do
+      if Copy(AsterisqueParMutation.Names[Ind], 1, 4) = 'FAB:' then
+        AsterisqueParEquipement.Values[Copy(AsterisqueParMutation.Names[Ind], 5, MaxInt)] :=
+          AsterisqueParEquipement.Values[Copy(AsterisqueParMutation.Names[Ind], 5, MaxInt)] + AsterisqueParMutation.ValueFromIndex[Ind];
     // Montures : leur capacite de charge s'ajoute a l'Encombrement max (page 2), reperee par
     // la suite de la chaine de numeros (apres talents, mutations et armures). Le meme "(N)"
     // est ecrit a cote du max et a cote de chaque monture de la liste Divers.
@@ -4818,7 +4918,7 @@ Procedure PdfPersonnageCreationFeldo2P(Personnage: StructurePersonnage);
      // Dessin Divers (extrait dans PdfBlocDiversDonnees, CONTEXT.md §2.4 - remplissage)
      PdfBlocDiversDonnees(PdfPage, Personnage, DessinDebColCompG, DessinLargeurEqu, DessinDebutHautEqu, DessinHauteurEqu, DessinNbLigEqu, EncDivers, MinPolice, AsterisqueMonture);
      // Dessin Armes (extrait dans PdfBlocArmesDonnees, CONTEXT.md §2.4 - remplissage)
-     PdfBlocArmesDonnees(PdfPage, Personnage, DessinDebColCompG, DessinLargeurWea, DessinDebutHautWea, DessinHauteurWea, BF, TBonusCC, TBonusCT, FabricationBonii, EncArme, ArmeBonii, ArmureBouclier, MinPolice);
+     PdfBlocArmesDonnees(PdfPage, Personnage, DessinDebColCompG, DessinLargeurWea, DessinDebutHautWea, DessinHauteurWea, BF, TBonusCC, TBonusCT, FabricationBonii, EncArme, ArmeBonii, ArmureBouclier, MinPolice, AsterisqueParMutation);
      // Dessin Armures (extrait dans PdfBlocArmuresDonnees, CONTEXT.md §2.4 - remplissage) -
      // dernière des 4 boucles, les 4 sont maintenant toutes extraites de la boucle partagée
      PdfBlocArmuresDonnees(PdfPage, Personnage, DessinDebColCompG, DessinLargeurArm, DessinDebutHautArm, DessinHauteurArm, ArmureSet, FabricationBonii, EncArmure, ArmureBras, ArmureCorps, ArmureJambe, ArmureTete, ArmureBonii, MinPolice, AsterisqueParEquipement);
@@ -4873,7 +4973,10 @@ Procedure PdfPersonnageCreationFeldo2P(Personnage: StructurePersonnage);
     DessinDebutGaucheBle := DessinLargeurEnc + 3;
     DessinLargeurBle     := DessinLargeurEqu;
     PdfPage.DrawLine( DessinDebutGaucheBle , DessinDebutHautBle, DessinDebutGaucheBle, DessinDebutHautBle - (DessinNbLigBle * DessinHauteurBle), 1);
-    PdfPage.DrawLine( DessinDebutGaucheBle + 29 , DessinDebutHautBle - (4 * DessinHauteurBle), DessinDebutGaucheBle + 29, DessinDebutHautBle - (5 * DessinHauteurBle), 1);
+    // Ligne Hardy (20/09/2026) : |Hardy| rang | Objets | valeur objets | total de la ligne |
+    PdfPage.DrawLine( DessinDebutGaucheBle + 24 , DessinDebutHautBle - (4 * DessinHauteurBle), DessinDebutGaucheBle + 24, DessinDebutHautBle - (5 * DessinHauteurBle), 1);
+    PdfPage.DrawLine( DessinDebutGaucheBle + 30 , DessinDebutHautBle - (4 * DessinHauteurBle), DessinDebutGaucheBle + 30, DessinDebutHautBle - (5 * DessinHauteurBle), 1);
+    PdfPage.DrawLine( DessinDebutGaucheBle + 42 , DessinDebutHautBle - (4 * DessinHauteurBle), DessinDebutGaucheBle + 42, DessinDebutHautBle - (5 * DessinHauteurBle), 1);
     PdfPage.DrawLine( DessinDebutGaucheBle + 48 , DessinDebutHautBle - (1 * DessinHauteurBle), DessinDebutGaucheBle + 48, DessinDebutHautBle - (DessinNbLigBle * DessinHauteurBle), 1);
     PdfPage.DrawLine( DessinDebutGaucheBle + 61 , DessinDebutHautBle - (1 * DessinHauteurBle), DessinDebutGaucheBle + 61, DessinDebutHautBle - (DessinNbLigBle * DessinHauteurBle), 1);
     PdfPage.DrawLine( DessinLargeurEqu, DessinDebutHautBle, DessinLargeurEqu, DessinDebutHautBle - (DessinNbLigBle * DessinHauteurBle), 1);
@@ -4888,7 +4991,8 @@ Procedure PdfPersonnageCreationFeldo2P(Personnage: StructurePersonnage);
     PdfEcrit(PdfPage,DessinDebutGaucheBle + 2,DessinLargeurBle,DessinDebutHautBle - (2 * DessinHauteurBle) + 1, GetTexteLibelle('RULES-PDF_WOUNDS7_BS'),MinPolice);
     PdfEcrit(PdfPage,DessinDebutGaucheBle + 2,DessinLargeurBle,DessinDebutHautBle - (3 * DessinHauteurBle) + 1, GetTexteLibelle('RULES-PDF_WOUNDS7_BT'),MinPolice);
     PdfEcrit(PdfPage,DessinDebutGaucheBle + 2,DessinLargeurBle,DessinDebutHautBle - (4 * DessinHauteurBle) + 1, GetTexteLibelle('RULES-PDF_WOUNDS7_BWP'),MinPolice);
-    PdfEcrit(PdfPage,DessinDebutGaucheBle + 2,DessinLargeurBle - 20,DessinDebutHautBle - (5 * DessinHauteurBle) + 1, GetTexteLibelle('RULES-PDF_WOUNDS5_HARDY'),MinPolice);
+    PdfEcrit(PdfPage,DessinDebutGaucheBle + 2,DessinDebutGaucheBle + 24,DessinDebutHautBle - (5 * DessinHauteurBle) + 1, GetTexteLibelle('RULES-PDF_WOUNDS5_HARDY'),MinPolice);
+    PdfEcrit(PdfPage,DessinDebutGaucheBle + 31,DessinDebutGaucheBle + 42,DessinDebutHautBle - (5 * DessinHauteurBle) + 1, GetTexteLibelle('RULES-LAB_182'),MinPolice);
     PdfEcrit(PdfPage,DessinDebutGaucheBle + 2,DessinLargeurBle,DessinDebutHautBle - (6 * DessinHauteurBle) + 1, GetTexteLibelle('RULES-PDF_WOUNDS7_Tot'),MinPolice);
     // Valeur Blessure
     Ch := IntToStr(Floor(BF/10));
@@ -4901,16 +5005,25 @@ Procedure PdfPersonnageCreationFeldo2P(Personnage: StructurePersonnage);
     if Length(Ch) = 1 then Ch := ' '+Ch;
     PdfCentre(PdfPage,DessinDebutGaucheBle + 48,DessinDebutGaucheBle + 61,DessinDebutHautBle - (4 * DessinHauteurBle) + 1, Ch);
     if DurACuire > 0 then
+      PdfCentre(PdfPage,DessinDebutGaucheBle + 24,DessinDebutGaucheBle + 30,DessinDebutHautBle - (5 * DessinHauteurBle) + 1, IntToStr(ValDurACuire));
+    if BonusBlessureFab <> 0 then
+      PdfCentre(PdfPage,DessinDebutGaucheBle + 42,DessinDebutGaucheBle + 48,DessinDebutHautBle - (5 * DessinHauteurBle) + 1, IntToStr(BonusBlessureFab));
+    if (DurACuire + BonusBlessureFab) <> 0 then
       begin
-        Ch := IntToStr(DurACuire);
+        Ch := IntToStr(DurACuire + BonusBlessureFab);
         if Length(Ch) = 1 then Ch := ' '+Ch;
-        PdfCentre(PdfPage,DessinDebutGaucheBle + 29,DessinDebutGaucheBle + 48,DessinDebutHautBle - (5 * DessinHauteurBle) + 1, IntToStr(ValDurACuire));
         PdfCentre(PdfPage,DessinDebutGaucheBle + 48,DessinDebutGaucheBle + 61,DessinDebutHautBle - (5 * DessinHauteurBle) + 1, Ch);
       end;
     PRaceAttribut := ChercheRaceAttribut(Personnage.Race, ConstCaracBlessure);
-    Ch := IntToStr(CalculBlessure(PRaceAttribut.CalculRace, BF, BE, BFM) + DurACuire);
+    Ch := IntToStr(CalculBlessure(PRaceAttribut.CalculRace, BF, BE, BFM) + DurACuire + BonusBlessureFab);
     if Length(Ch) = 1 then Ch := ' '+Ch;
     PdfCentre(PdfPage,DessinDebutGaucheBle + 48,DessinDebutGaucheBle + 61,DessinDebutHautBle - (6 * DessinHauteurBle) + 1, Ch);
+    if AnnotBlessure <> '' then
+      begin
+        PdfTaillePolice(PdfPage, PdfFontValue, ConstPoliceArial, 4);
+        PdfPage.WriteText(DessinDebutGaucheBle + 59, DessinDebutHautBle - (6 * DessinHauteurBle) + 2.7, AnnotBlessure);
+        PdfTaillePolice(PdfPage, PdfFontBack, ConstPoliceCarlson+ConstPoliceGras, 10);
+      end;
 
     // Dessin Compétence de combat
     DessinDebutHautComC   := DessinDebutHautEnc;

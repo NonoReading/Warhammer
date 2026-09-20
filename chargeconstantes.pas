@@ -160,6 +160,7 @@ Const
       // Accessoires d arme (fabrication) : bonus de portee et qualites d arme ajoutees.
       ConstXmlFabPortee                 = 'RangeBonus';
       ConstXmlFabQualiteArme            = 'WeaponQuality';
+      ConstXmlFabApplique               = 'Applies';
       ConstXmlForPdf                    = 'PDF';
       ConstXmlTest                      = 'Test';
       // Marque un talent comme TRAIT DE CREATURE (Rulebook p.338-341) : acquis a la naissance
@@ -659,6 +660,9 @@ Var
   ChoixWinRace:        String = '';
   SelectWinMetier:     String = '';
   SelectWinArme:       String = '';
+  // Codes des competences du personnage (virgules), poses par WinPersonnage avant d ouvrir WinWeapon :
+  // non vide = la case "selon mes competences" est proposee. 20/09/2026.
+  SelectWinArmeCompetences: String = '';
   ChoixWinArme:        String = '';
   // Selection d'un objet du catalogue DATA_TRAPPING depuis WinPersonnage (WinEquipement).
   SelectWinTrapping:   String = '';
@@ -670,6 +674,7 @@ Var
   SelectWinSort:       String = '';
   ChoixWinSort:        String = '';
   SelectWinFabrication:String = '';
+  SelectWinFabricationType:String = '';
   ChoixWinFabrication: String = '';
   SelectWinTalent:     String = '';
   ChoixWinTalent:      String = '';
@@ -933,6 +938,9 @@ procedure AdjustGridColumnsWidth(Grid: TStringGrid; MaxHeight: Integer; ForceMax
     TotalL:Integer = 0;
     Asc:   Integer = 0;
     Form:  TForm;
+    MultiLarg:  Integer;
+    LignesCell: String;
+    LigneCell:  String;
   begin
     // Hauteur
     For Lig := 0 to Grid.RowCount -1 do
@@ -966,7 +974,35 @@ procedure AdjustGridColumnsWidth(Grid: TStringGrid; MaxHeight: Integer; ForceMax
     if AutoSizeCol then
       for Col := 1 to Grid.ColCount - 1 do
         if Grid.ColWidths[Col] <> 0 then
-          Grid.AutoSizeColumn(Col);
+          begin
+            // Colonne a cellules multilignes (LineEnding) : AutoSizeColumn mesurerait le texte
+            // entier sur une ligne ; on prend la plus longue LIGNE. 20/09/2026.
+            MultiLarg := 0;
+            for Lig := 1 to Grid.RowCount - 1 do
+              if Pos(LineEnding, Grid.Cells[Col, Lig]) > 0 then
+                begin
+                  LignesCell := Grid.Cells[Col, Lig];
+                  while LignesCell <> '' do
+                    begin
+                      if Pos(LineEnding, LignesCell) > 0 then
+                        begin
+                          LigneCell  := Copy(LignesCell, 1, Pos(LineEnding, LignesCell) - 1);
+                          LignesCell := Copy(LignesCell, Pos(LineEnding, LignesCell) + Length(LineEnding), Length(LignesCell));
+                        end
+                      else
+                        begin
+                          LigneCell  := LignesCell;
+                          LignesCell := '';
+                        end;
+                      if Grid.Canvas.TextWidth(LigneCell) + 16 > MultiLarg then
+                        MultiLarg := Grid.Canvas.TextWidth(LigneCell) + 16;
+                    end;
+                end;
+            if MultiLarg > 0 then
+              Grid.ColWidths[Col] := MultiLarg
+            else
+              Grid.AutoSizeColumn(Col);
+          end;
     for Col := 0 to Grid.ColCount - 1 do
       TotalC:= TotalC + Grid.ColWidths[Col];
     if not MaxWidth then

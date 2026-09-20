@@ -1016,6 +1016,8 @@ Procedure XmlExportBook(Livre: String; Langue: String);
                 XmlContent.Add(XmlLigne(ConstXmlFabPortee, IntToStr(PFabrication.PorteeBonus)));
               if PFabrication.QualitesArme <> '' then
                 XmlContent.Add(XmlLigne(ConstXmlFabQualiteArme, PFabrication.QualitesArme));
+              if PFabrication.Applique <> '' then
+                XmlContent.Add(XmlLigne(ConstXmlFabApplique, PFabrication.Applique));
               XmlContent.Add(XmlLigne(ConstXmlPositifNegatif, PFabrication.TypeQualite));
 
               XmlContent.Add(XmlFinCode(ConstXmlFabrication));
@@ -3037,6 +3039,7 @@ Procedure XmlImport(FileName: String; OnlyPrimary: Boolean; OnlyCode: Boolean; C
                       PFabrication.CodeFabrication := RemoveQuotes(UTF8Encode(NodeNv2.Attributes.GetNamedItem(ConstXmlId).NodeValue));
                       PTraduction                  := InitTrad(ConstPFabrication, PFabrication.CodeFabrication, '', PFabrication.Livre);
                       PFabrication.Encombrement    := 0;
+                      PFabrication.Applique        := '';
                       Node := XmlElement(NodeNv2.FirstChild);
                       while Assigned(Node) do
                         begin
@@ -3065,6 +3068,8 @@ Procedure XmlImport(FileName: String; OnlyPrimary: Boolean; OnlyCode: Boolean; C
                               PFabrication.Maximum       := RemoveQuotes(UTF8Encode(Node.TextContent));
                             ConstXmlFabPortee:
                               PFabrication.PorteeBonus   := StrToIntDef(RemoveQuotes(UTF8Encode(Node.TextContent)),0);
+                            ConstXmlFabApplique:
+                              PFabrication.Applique      := RemoveQuotes(UTF8Encode(Node.TextContent));
                             ConstXmlFabQualiteArme:
                               PFabrication.QualitesArme  := RemoveQuotes(UTF8Encode(Node.TextContent));
                             ConstXmlPositifNegatif:
@@ -3072,9 +3077,11 @@ Procedure XmlImport(FileName: String; OnlyPrimary: Boolean; OnlyCode: Boolean; C
                             // <ModifArmour name="CodeLocalisation">n</ModifArmour> : Points d'Armure par
                             // niveau de la fabrication (Rune of Stone). Meme convention que les qualites
                             // d'armure. Pilote du 19/09/2026.
-                            ConstXmlModifieArmure:
+                            // <ModifyCarac name="RULES-ATTR_T">10</ModifyCarac> : bonus de
+                            // caracteristique par niveau (Rune of Fortitude). 20/09/2026.
+                            ConstXmlModifieArmure, ConstXmlModifieAttribut, ConstXmlModifieDegat, ConstXmlModifieCompetence:
                               begin
-                                PFabricationModificateur.TypeModif  := ConstXmlModifieArmure;
+                                PFabricationModificateur.TypeModif  := Node.NodeName;
                                 PFabricationModificateur.Cible      := RemoveQuotes(UTF8Encode(Node.Attributes.GetNamedItem(ConstXmlData).NodeValue));
                                 PFabricationModificateur.Filtre     := '';
                                 PFabricationModificateur.Forme      := ConstFormeEffetAdditif;

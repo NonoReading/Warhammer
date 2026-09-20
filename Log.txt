@@ -5461,3 +5461,60 @@ AdjustGridColumnsWidth recevait la hauteur de la fenetre : avec les 71 runes nai
 
 19/09/2026 - RUNES NAINES : PILOTE PA VALIDE PAR NONO (RUNE OF STONE = +1 PA PARTOUT) ET BOUTON OK DE WINFABRICATION RETROUVE
 Le moteur generique fonctionne cote fabrication. Prochaines cibles a brancher : degats (Cleaving, Might, Penetrating), initiative (Speed), competence (Striking, Accuracy), caracteristique (Fortitude), blessures (Iron).
+
+20/09/2026 - RUNES NAINES : CIBLE CARACTERISTIQUE BRANCHEE (RUNE OF FORTITUDE, +10 ENDURANCE PAR RUNE) - NON COMPILE
+PersonnageFabricationArmureModif generalisee en PersonnageFabricationModificateur(TypeModif, Cible) ; nouveau PersonnageFabricationAttributModif. xmlexportimport lit <ModifyCarac name="RULES-ATTR_T">10</ModifyCarac> dans DATA_CRAFTMANSHIP. Appele dans pdfpersonnage.pas (PdfPersonnageAttribut) et winpersonnage.pas (colonne Objet). DWARF-RUNE_19 porte le modificateur. A tester : 1 a 3 Runes of Fortitude sur une armure portee, verifier Endurance a l ecran et au PDF. Reste : Iron (Blessures), degats, initiative, competences.
+Fichiers modifies : chargepersonnage.pas, xmlexportimport.pas, pdfpersonnage.pas, winpersonnage.pas, BOOK_DWARF_PLAYERS_GUIDE.Xml, Log.txt.
+
+20/09/2026 - FABRICATIONS : TYPE D OBJET APPLICABLE (<Applies>), WINFABRICATION FILTRE LA LISTE - NON COMPILE
+Nouvelle balise <Applies> (Weapon, Armour, Misc) dans DATA_CRAFTMANSHIP, champ StructureFabrication.Applique (lu, reinitialise a chaque fabrication, exporte). Vide = propose partout (fabrications existantes inchangees). 71 runes naines etiquetees : 17 Weapon, 9 Armour, 45 Misc (talismans, protection, ingenierie, Doom). WinPersonnage passe le type de l objet via SelectWinFabricationType ; WinFabrication ne liste que les fabrications applicables, plus celles deja posees sur l objet. A tester : arme, armure et divers, verifier les listes ; ouvrir un objet qui porte deja une fabrication.
+Fichiers modifies : chargeconstantes.pas, chargefabrication.pas, xmlexportimport.pas, winfabrication.pas, winpersonnage.pas, BOOK_DWARF_PLAYERS_GUIDE.Xml, Log.txt.
+
+20/09/2026 - RUNES : ASTERISQUES DU PDF POUR LES FABRICATIONS PORTEES (FORTITUDE, STONE) - NON COMPILE
+Nouveau PdfFabricationAsterisques (pdfpersonnage.pas), appele en fin de PdfPersonnageMutationAsterisques : une asterisque numerotee par piece d armure portee dont une fabrication modifie une caracteristique ou les PA. "+10 (N)" a cote de la caracteristique, "(N)" a cote des Armour Points, "(N)" a cote de la piece (cles FAB: recopiees dans AsterisqueParEquipement). Numeros chaines avec talents, mutations, armures, monture. Test valide par Nono avant : filtre Applies (arme refusee sur armure) et Rune of Fortitude +10 Endurance.
+Fichiers modifies : pdfpersonnage.pas, Log.txt.
+
+20/09/2026 - RUNES NAINES : FORTITUDE, FILTRE <Applies>, ASTERISQUES PDF ET LIGNE OBJET VALIDES PAR NONO
+Prochaines cibles du moteur de fabrication : Iron (Blessures), degats (Cleaving, Might, Penetrating), initiative (Speed), competences (Striking, Accuracy).
+
+20/09/2026 - RUNES NAINES : RUNE OF IRON (+2 BLESSURES PAR RUNE) BRANCHEE - NON COMPILE
+DWARF-RUNE_20 porte <ModifyCarac name="RULES-ATTR_Wound">2</ModifyCarac>. Les Blessures ne sont calculees que dans le PDF (pas de colonne a l ecran) : BonusBlessureFab (PersonnageFabricationAttributModif) ajoute au total dans les deux gabarits, "(N)" de l asterisque ecrit a droite du total (gabarit principal seulement). Les Blessures de l armure suivent aussi le +10 Endurance de Fortitude (BE). A tester : 1 a 3 Runes of Iron sur une armure portee, total Blessures +2/+4/+6 et asterisque.
+Fichiers modifies : pdfpersonnage.pas, BOOK_DWARF_PLAYERS_GUIDE.Xml, Log.txt.
+
+20/09/2026 - PDF FELDO : LIGNE HARDY DES BLESSURES REDECOUPEE (HARDY, RANG, OBJETS, VALEUR, TOTAL) - NON COMPILE
+Gabarit Feldo seulement : |Hardy|rang|Objets (RULES-LAB_182)|BonusBlessureFab|Hardy+Objets|. Traits verticaux de la ligne 5 en +24/+30/+42 (le +29 disparait). Le total des Blessures inclut deja les deux. Asterisque "(N)" laissee a droite du total. A verifier visuellement (largeur du libelle "Dur a cuire" et de "Objets").
+Fichiers modifies : pdfpersonnage.pas, Log.txt.
+
+20/09/2026 - RUNE OF IRON ET LIGNE HARDY/OBJETS DU PDF FELDO VALIDES PAR NONO
+
+20/09/2026 - RUNES NAINES : CIBLE DEGATS BRANCHEE (RUNE OF CLEAVING, +1 DEGAT PAR RUNE) - NON COMPILE
+Francais teste et valide par Nono pour Iron/Hardy. Nouveau FabricationModificateurQualite(ListeCode, TypeModif, Cible) dans chargefabrication.pas (somme sur les qualites d un seul objet x niveau). xmlexportimport lit aussi <ModifyDamage name="CC|CT">. DWARF-RUNE_01 : +1 CC et +1 CT. Ajoute au "DR + n" des armes dans les deux gabarits PDF. Non fait (conditionnels) : Might (+3 contre plus grand), Grudge (+1 degat/+10 toucher contre une cible), Cutting (ignore PA). Pas d asterisque/annotation pour les degats d arme.
+Fichiers modifies : chargefabrication.pas, xmlexportimport.pas, pdfpersonnage.pas, BOOK_DWARF_PLAYERS_GUIDE.Xml, Log.txt.
+
+20/09/2026 - RUNES NAINES : SPEED (INITIATIVE) ET STRIKING (COMPETENCE) PREPAREES - NON COMPILE, NON TESTE
+Le moteur de fabrication porte desormais aussi sur les ARMES portees (PersonnageFabricationModificateur et PdfFabricationAsterisques). DWARF-RUNE_09 Speed : <ModifyCarac name="RULES-ATTR_I">10</ModifyCarac> (initiative, asterisque "+10 (N)" et "(N)" ajoute au libelle de l arme dans PdfBlocArmesDonnees, nouveau parametre AsterisqueParPiece = AsterisqueParMutation). DWARF-RUNE_10 Striking : <ModifySkill name="CC">10</ModifySkill>, ajoute au pourcentage de l arme portant la rune (FabricationModificateurQualite, deux gabarits) ; xmlexportimport lit ModifySkill dans les fabrications. A tester : Speed sur une arme portee (Initiative ecran + PDF), Striking sur une arme (pourcentage +10 par rune, autre arme inchangee). Restent non modelisees (conditionnelles ou hors moteur) : Might, Grudge, Cutting, Resistance, Shielding, Force, Warding, Luck, runes de machines (Accuracy, Penetrating...), effets narratifs.
+Fichiers modifies : chargepersonnage.pas, pdfpersonnage.pas, xmlexportimport.pas, BOOK_DWARF_PLAYERS_GUIDE.Xml, Log.txt.
+
+20/09/2026 - WINWEAPON : CASE "SELON MES COMPETENCES" DEPUIS WINPERSONNAGE (IDEE NONO) - NON COMPILE, NON TESTE
+WinPersonnage remplit SelectWinArmeCompetences (codes de TabCompetence, colonne ColCompCode) avant d ouvrir WinWeapon. Non vide : WinWeapon cree en code une TCheckBox (libelle RULES-LAB_240, INTERFACE.Xml et INTERFACE_FRANCAIS.Xml) a droite du bouton de filtre (retreci de 180) ; cochee, ne liste que les armes dont une competence (CodeCompetence, plusieurs separees par SeparateurMulti) est possedee (CompareRechercheValeur dans les deux sens, gere les codes generiques). Elle se cumule avec le filtre de livres. Depuis WinSpecialisation ou sans competences, aucune case. Hypothese a verifier : TabCompetence ne contient que les competences du personnage ; armes sans competence ("-") masquees quand la case est cochee.
+Fichiers modifies : chargeconstantes.pas, winpersonnage.pas, winweapon.pas, INTERFACE.Xml, INTERFACE_FRANCAIS.Xml, Log.txt.
+
+20/09/2026 - WINWEAPON : CASE "SELON MES COMPETENCES" COCHEE PAR DEFAUT ET LIBELLE EXPLICATIF (RULES-LAB_241) - NON COMPILE
+Case validee par Nono ; armes sans competence restent masquees (decision Nono). Ajout : Checked := True avant OnChange, TLabel explicatif sous la case (police 8, retour a la ligne).
+Fichiers modifies : winweapon.pas, INTERFACE.Xml, INTERFACE_FRANCAIS.Xml, Log.txt.
+
+20/09/2026 - WINWEAPON : CASE REMONTEE DE 12 PX ET LIBELLE SUR TROIS LIGNES (56 PX DE HAUT) - NON COMPILE
+Fichier modifie : winweapon.pas.
+
+20/09/2026 - WINPERSONNAGE : FABRICATIONS SUR PLUSIEURS LIGNES DANS TABEQUIPEMENT - NON COMPILE, NON TESTE
+La colonne 6 (affichage seul, jamais relue ; la donnee reste en colonne 7) met un LineEnding apres chaque virgule (AfficheFabrication). TabDrawCell dessine ligne par ligne les cellules contenant un LineEnding ; AfficheFabrication ajuste RowHeights (nb de fabrications x hauteur de ligne) et rappelle AdjustGridColumnsWidth ; AdjustGridColumnsWidth (chargeconstantes.pas) mesure la plus longue LIGNE des colonnes multilignes au lieu d AutoSizeColumn (qui compterait le texte entier). Effet de bord voulu : toute grille dont une cellule contient un LineEnding beneficie de la largeur par ligne. A verifier : plusieurs runes sur une arme, hauteur de ligne, autres appels de AdjustGridColumnsWidth (ajout d une arme) qui ne remettent pas la hauteur.
+Fichiers modifies : winpersonnage.pas, chargeconstantes.pas, Log.txt.
+
+20/09/2026 - WINPERSONNAGE : CELLULES MULTILIGNES, TEXTE SUPERPOSE SUR UNE SEULE LIGNE (RETOUR DE NONO) - CORRECTIF NON TESTE
+Symptome : toutes les lignes de la cellule se dessinaient au meme Y. Le dessin utilise maintenant une bande par ligne (TextRect(Bande, x, Bande.Top+1)) avec une hauteur de ligne >= 14, et AfficheFabrication fixe RowHeights = nb de fabrications x 18. Cause exacte non identifiee (hypothese : hauteur de ligne mesuree nulle/incoherente) : a confirmer au test.
+Fichier modifie : winpersonnage.pas.
+
+20/09/2026 - FABRICATIONS MULTILIGNES DE TABEQUIPEMENT VALIDEES PAR NONO
+
+20/09/2026 - RUNES SPEED ET STRIKING VALIDEES PAR NONO ; ASTERISQUE DE L ARME EN PETITE POLICE (NON TESTE)
+PdfBlocArmesDonnees : le "(N)" des fabrications est ecrit en police 4 relevee (XGauche+41..+45), le nom de l arme s arrete a XGauche+41 quand il existe. Fichier modifie : pdfpersonnage.pas.
