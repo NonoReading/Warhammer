@@ -5752,7 +5752,7 @@ Fichiers modifies : BOOK_UP_IN_ARMS.Xml, Log.txt.
 BOOK_UP_IN_ARMS.Xml : Ballista (PROJ_ARB_01), Cannon small/medium/large, Mortar, Swivel Gun (PROJ_POUDRE_16 a _20), Catapult small/medium/large (PROJ_CATAPULT_01 a _03), Volley Gun, Helblaster, Helstorm Rocket Battery (PROJ_ING_08 a _10). Defaut Salvo declare (UPINA-WEAPB36). Disponibilite Scarce du livre = RULES-DISPO_LIMITED, Hand 2, Mortar sans degats propres ("-", ils viennent de la munition). Revient sur la decision du 21/08 de ne pas saisir l artillerie (CONTEXT.md 2.x Up in Arms mis a jour). RESTE : armes de machine de Lustria (Eagle Claw, Eagle Eye, Giant Bow...) et des nains.
 Fichiers modifies : BOOK_UP_IN_ARMS.Xml, CONTEXT.md, Log.txt.
 
-20/09/2026 - MONTURES, BATEAUX ET VEHICULES SCINDES EN TROIS THEMES - A COMPILER PAR NONO
+20/09/2026 - MONTURES, BATEAUX ET VEHICULES SCINDES EN TROIS THEMES - COMPILE ET VALIDE PAR NONO
 Le champ Theme (deja lu, deja filtre par la fenetre Animaux et vehicules) porte la scission : RULES-LAB_260 Mounts and animals (35), RULES-LAB_261 Boats (39), RULES-LAB_262 Vehicles (17), en remplacement de RULES-LAB_195 (91 fiches, 8 livres, classees par profil ; Rulebook sans profil : Coracle/River Barge/Row Boat = bateaux, Cart/Coach/Wagon = vehicules, le reste = montures et animaux). RULES-LAB_195 reste le titre de la fenetre et de la ligne du menu. winequipement.pas : EstThemeAnimauxVehicules remplace le test d egalite (Retenu) ; warhammersource.pas : meme test pour le decompte du menu. Le combo Theme de la fenetre propose les trois categories.
 Fichiers modifies : winequipement.pas, warhammersource.pas, INTERFACE.Xml, INTERFACE_FRANCAIS.Xml, 8 BOOK_*.Xml, Log.txt.
 
