@@ -1277,7 +1277,7 @@ Procedure PdfPersonnageCreation(Personnage: StructurePersonnage; BackGround: Boo
     // exige que LivreRecherche = LivreValeur (chargeconstantes.pas), pas seulement le code, donc
     // sans prefixe le code brut "TIERS_BRASS 2" s'affichait tel quel (meme famille de bug que
     // CONTEXT.md 2.49). Signale par Nono sur les deux PDF.
-    PdfPage.WriteText(165, 236, GetTexteLibelle('RULES-' + PMetierNiveau.SalaireMetier, '', ' '));  // Salaire
+    PdfPage.WriteText(165, 236, GetTexteLibelle('RULES-' + StatutAdapte(PMetierNiveau.SalaireMetier, PMetier.CodeMetier, Personnage.Race, ''), '', ' '));  // Salaire
 
     // Caractéristiques
     for Ind := 1 to 10 do
@@ -2623,7 +2623,7 @@ Function PdfBlocEntete(PdfPage: TPDFPage; Personnage: StructurePersonnage; PRace
     PdfEcrit(PdfPage, XValChemin,  XSep3 - 1, Y - (HauteurLigne * 3) + 1, LocData, MinPolice);
     // Prefixe RULES- ajoute le 12/09/2026 - meme correctif que le gabarit normal, voir son
     // commentaire (CONTEXT.md 2.49/2.61).
-    PdfEcrit(PdfPage, XValStatut,  XDroite,   Y - (HauteurLigne * 3) + 1, GetTexteLibelle('RULES-' + PMetierNiveau.SalaireMetier, '', ' '), MinPolice);
+    PdfEcrit(PdfPage, XValStatut,  XDroite,   Y - (HauteurLigne * 3) + 1, GetTexteLibelle('RULES-' + StatutAdapte(PMetierNiveau.SalaireMetier, PMetier.CodeMetier, Personnage.Race, ''), '', ' '), MinPolice);
     PdfEcrit(PdfPage, XVal1,       XSep1,     Y - (HauteurLigne * 4) + 1, IntToStr(Personnage.Age), MinPolice);
     PdfEcrit(PdfPage, XValTaille,  XSep2,     Y - (HauteurLigne * 4) + 1, IntToStr(Personnage.Height), MinPolice);
     PdfEcrit(PdfPage, XValCheveux, XSep3 - 1, Y - (HauteurLigne * 4) + 1, Personnage.HairColors, MinPolice);

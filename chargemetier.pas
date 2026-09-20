@@ -166,6 +166,9 @@ Function AdaptationApplicable(PAdapt: StructureCareerAdaptation; CodeMetier: Str
 Function AdapterElement(CodeMetier: String; CodeRace: String; Choix: String;
                         Niveau: Integer; Nature: String; Code: String): String;
 Function StandingAdaptation(CodeMetier: String; CodeRace: String; Choix: String): Integer;
+// StatutAdapte : code de statut (ex. 'TIERS_BRASS 2') decale du Standing de l'adaptation ;
+// au-dela de 5 on passe au palier superieur (Brass 6 = Silver 1).
+Function StatutAdapte(Statut: String; CodeMetier: String; CodeRace: String; Choix: String): String;
 
 implementation
 
@@ -379,6 +382,33 @@ Begin
   for PAdapt in ListCareerAdaptation do
     if AdaptationApplicable(PAdapt, CodeMetier, CodeRace, Choix) then
       Result += PAdapt.Standing;
+End;
+
+Function StatutAdapte(Statut: String; CodeMetier: String; CodeRace: String; Choix: String): String;
+Const
+  Paliers: array[0..2] of String = ('TIERS_BRASS', 'TIERS_SILVER', 'TIERS_GOLD');
+Var
+  Bonus, Niveau, Palier, Ind, Sep: Integer;
+Begin
+  Result := Statut;
+  Bonus := StandingAdaptation(CodeMetier, CodeRace, Choix);
+  Sep := Pos(' ', Statut);
+  if (Bonus = 0) or (Sep = 0) then
+    Exit;
+  Palier := -1;
+  for Ind := 0 to 2 do
+    if Copy(Statut, 1, Sep - 1) = Paliers[Ind] then
+      Palier := Ind;
+  Niveau := StrToIntDef(Copy(Statut, Sep + 1, 10), 0);
+  if (Palier < 0) or (Niveau = 0) then
+    Exit;
+  Niveau += Bonus;
+  while (Niveau > 5) and (Palier < 2) do
+  begin
+    Niveau -= 5;
+    Inc(Palier);
+  end;
+  Result := Paliers[Palier] + ' ' + IntToStr(Niveau);
 End;
 
 Function LibelleAppartenances(Codes: String): String;
