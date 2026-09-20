@@ -5638,3 +5638,10 @@ Fichiers modifies : winpersonnage.pas, winpersonnage.lfm, INTERFACE.Xml, INTERFA
 20/09/2026 - PDF FELDO : BLOC MUTATIONS DEPLACE EN PAGE 1 SOUS LES TALENTS - COMPILE ET VALIDE PAR NONO
 pdfpersonnage.pas : DessinNbLigTal 24->21, DessinNbLigComg 26->24, PdfBlocMutations appele apres PdfBlocTalents (meme largeur, 3 lignes, 3mm d ecart), retire de la page 2 ; seuil de retour a la ligne du libelle proportionnel a la largeur du bloc. Bas de page inchange (1,4mm de marge).
 Fichiers modifies : pdfpersonnage.pas, CONTEXT.md, Log.txt, A FAIRE.txt.
+
+20/09/2026 - A FAIRE.TXT : CONCEPTION DU PDF FELDO INTELLIGENT NOTEE (REPARTITION DES LIGNES SELON LE BESOIN, PAGE 1 D ABORD). Rien de code.
+Fichiers modifies : A FAIRE.txt, Log.txt.
+
+20/09/2026 - PDF FELDO INTELLIGENT, PAGE 1 : REPARTITION DES LIGNES SELON LE BESOIN - COMPILE ET VALIDE PAR NONO
+pdfpersonnage.pas : PdfNbCompetencesGroupeesPrises, PdfNbTalentsAcquis ; DessinNbLigComg/DessinNbLigTal calcules avant le dessin (budget 41 lignes de donnees inchange, DessinMinLignesVides = 3, reste partage a parts egales).
+Fichiers modifies : pdfpersonnage.pas, CONTEXT.md, Log.txt, A FAIRE.txt.

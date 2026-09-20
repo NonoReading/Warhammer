@@ -4373,6 +4373,48 @@ Function PdfPreparerRecordSetCompetencesGroupees(Personnage: StructurePersonnage
       end;
   end;
 
+// PDF "intelligent" page 1 (A FAIRE 20/09/2026) : nombre de lignes de DONNEES dont ont besoin les
+// compétences groupées (passe 1 de PdfPreparerRecordSetCompetencesGroupees : celles déjà
+// augmentées, hors tableau de base) - les compétences grisées "non prises" ne comptent pas,
+// elles comblent seulement l'espace restant.
+Function PdfNbCompetencesGroupeesPrises(Personnage: StructurePersonnage; ListPris: String): Integer;
+  var
+    Ind:           Integer;
+    NivCompMetier: Integer;
+    PCompetence:   StructureCompetence;
+  begin
+    Result := 0;
+    for Ind := 0 to ListCompetence.Count - 1 do
+      begin
+        PCompetence := ListCompetence[Ind];
+        if pos(PCompetence.CodeCompetence, ListPris) = 0 then
+          if PdfPersonnageCompetence(Personnage, PCompetence.CodeCompetence, NivCompMetier).Augmentation <> 0 then
+            inc(Result);
+      end;
+  end;
+
+// Idem pour les talents : lignes ACQUISES de PdfBlocTalents (talents possédés, règles spéciales
+// d'appartenance, talents de mutation, talents de qualité d'objet) - hors talents de carrière
+// grisés, qui comblent l'espace restant.
+Function PdfNbTalentsAcquis(Personnage: StructurePersonnage): Integer;
+  var
+    IndC:         Integer;
+    NivTalMetier: Integer;
+    ListeRegle:   TListCareerBonusSpecialRule;
+  begin
+    Result := 0;
+    for IndC := 0 to ListTalent.count - 1 do
+      if PdfPersonnageTalent(Personnage, ListTalent[IndC].CodeTalent, NivTalMetier).Total <> 0 then
+        inc(Result);
+    ListeRegle := PersonnageCareerBonusSpecialRule(Personnage);
+    try
+      Result := Result + ListeRegle.Count;
+    finally
+      ListeRegle.Free;
+    end;
+    Result := Result + Length(PersonnageMutationTalent(Personnage)) + Length(PersonnageArmureBonusTalent(Personnage));
+  end;
+
 Procedure PdfPersonnageCreationFeldo2P(Personnage: StructurePersonnage);
   var
     PDFDoc:          TPDFDocument;
@@ -4562,6 +4604,9 @@ Procedure PdfPersonnageCreationFeldo2P(Personnage: StructurePersonnage);
         // Talents (déplacé depuis la page 2, où la place revient au bloc monture) ; +2 lignes
         // gagnées sur les Compétences groupées (26 -> 24), qui remontent le tableau.
         DessinNbLigTal:       Integer = 21;
+        // Répartition intelligente Compétences groupées / Talents (A FAIRE 20/09/2026)
+        DessinMinLignesVides: Integer = 3;
+        BudgetDonnees, BesoinComg, BesoinTal, LibreDonnees: Integer;
 
     // Page 2
       // Armure
@@ -4917,6 +4962,33 @@ Procedure PdfPersonnageCreationFeldo2P(Personnage: StructurePersonnage);
     TableauCompG.PoliceMin         := MinPolice;
     TableauCompG.Titre             := Trim(GetTexteLibelle('RULES-PDF_SKILLS1_ADVANCED'));
     TableauCompG.TitreDecalageGauche := 15;
+    // Répartition "intelligente" du budget de lignes de la colonne droite (Compétences groupées
+    // + Talents, valeurs par défaut 24 + 21) selon le besoin réel du personnage, avec un
+    // minimum de lignes vides par tableau pour noter à la main (A FAIRE 20/09/2026). Chaque
+    // tableau garde 2 lignes d'en-tête. Le total ne change pas, donc le bas de page non plus.
+    BudgetDonnees := (DessinNbLigComg - 2) + (DessinNbLigTal - 2);
+    BesoinComg    := PdfNbCompetencesGroupeesPrises(Personnage, ListPris);
+    BesoinTal     := PdfNbTalentsAcquis(Personnage);
+    LibreDonnees  := BudgetDonnees - BesoinComg - BesoinTal;
+    if LibreDonnees >= 2 * DessinMinLignesVides then
+      begin
+        // tout tient avec le minimum de lignes vides : le reste se partage à parts égales
+        DessinNbLigComg := 2 + BesoinComg + DessinMinLignesVides + ((LibreDonnees - 2 * DessinMinLignesVides) div 2);
+        DessinNbLigTal  := 2 + BudgetDonnees - (DessinNbLigComg - 2);
+      end
+    else
+      begin
+        // serré : chacun garde son besoin, le peu de place qui reste est réparti
+        // (au-delà du budget, la coupure existante s'applique)
+        if LibreDonnees < 0 then LibreDonnees := 0;
+        DessinNbLigComg := 2 + BesoinComg + (LibreDonnees div 2);
+        DessinNbLigTal  := 2 + BudgetDonnees - (DessinNbLigComg - 2);
+        if DessinNbLigTal < 2 + BesoinTal then
+          begin
+            DessinNbLigTal  := 2 + BesoinTal;
+            DessinNbLigComg := 2 + BudgetDonnees - BesoinTal;
+          end;
+      end;
     TableauCompG.NbLignesMax        := DessinNbLigComg - 2; // 2 lignes d'en-tête (titre + libellés)
 
     SetLength(TableauCompG.Champs, 7);
