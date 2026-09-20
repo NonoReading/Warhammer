@@ -5585,3 +5585,5 @@ winpersonnage.pas (ChargeAugmentation) : LineEnding apres chaque " / " ; les Row
 Fichiers modifies : winpersonnage.pas, Log.txt.
 
 20/09/2026 - COMPETENCES A CHOIX SUR PLUSIEURS LIGNES (TABLE AUGMENTATION) VALIDEES PAR NONO. Ligne correspondante retiree de A FAIRE.txt.
+
+20/09/2026 - CONTEXT.MD MIS A JOUR EN FIN DE SESSION (RUNES TERMINEES, TalentCarriereCorrespond, CHOIX A/B SUR PLUSIEURS LIGNES, DECISION SUR LE ROLE DE WINPERSONNAGE). Fichiers modifies : CONTEXT.md, Log.txt.
