@@ -5819,3 +5819,7 @@ Fichiers modifies : winmetier.pas, Log.txt.
 20/09/2026 - IMAGE DU SIGNALLER : TRANSPARENCE REFAITE A LA MAIN (PARRA-WORK001_TRANS.PNG)
 La fonction RemplacerPixelParTransparent efface tout ce qui ressemble au pixel du coin haut gauche : sur un croquis au crayon sur papier clair, elle mangeait aussi les blancs de l interieur du personnage. Le fichier _TRANS n etant refabrique que s il n existe pas, il a ete remplace a la main : remplissage depuis les bords de l image, les traits du crayon (epaissis) servant de barriere, donc seul le papier relie a l exterieur devient transparent, l interieur garde les pixels de l original (verifie). Reglages propres a cette image : la planche du bas (lignes y=405 et y=425, bande claire entre les deux) est verrouillee, les lignes y>=431 sont transparentes. Fonction et code Pascal inchanges.
 Fichiers modifies : PICTURES/CLASS/PARRA-WORK001_TRANS.PNG, Log.txt.
+
+20/09/2026 - A FAIRE : PNJ ET TABLES D EVENEMENTS RETIRES (DECISION NONO)
+La mention "RESTE : PNJ et tables d evenements non modelises" est retiree de la ligne Sylvania. Les PNJ et tables d evenements hors creation de personnage ne sont plus a faire. Aucune autre ligne concernee (les mentions de PNJ restantes sont des regles de methode de comptage).
+Fichiers modifies : A FAIRE.txt, Log.txt.
