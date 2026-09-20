@@ -34,11 +34,18 @@ Var
   NbTrapping:        Integer;
 
 function ChercheTrapping(CodeTrapping :String): StructureTrapping;
+function TrappingEstPorteur(PTrapping: StructureTrapping): Boolean;
 function TexteTrapping(PTrapping: StructureTrapping):String;
 function TexteLigneTrapping(PTrapping: StructureTrapping):String;
 function TraduireListeLibelles(Liste: String):String;
 
 implementation
+
+// Un porteur recoit des objets confies (carriedby) : animal, bateau ou vehicule.
+function TrappingEstPorteur(PTrapping: StructureTrapping): Boolean;
+begin
+  Result := (PTrapping.ProfilAnimal <> '') or (PTrapping.ProfilBateau <> '') or (PTrapping.ProfilVehicule <> '');
+end;
 
 function ChercheTrapping(CodeTrapping :String): StructureTrapping;
 var

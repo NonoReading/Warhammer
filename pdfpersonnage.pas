@@ -3241,7 +3241,7 @@ Function PdfLienAnimal(PersonnageEquipement: StructurePersonnageEquipement): Str
     Result := '';
     if PersonnageEquipement.PortePar <> '' then
       Result := ' [' + PersonnageEquipement.PortePar + ']'
-    else if (PersonnageEquipement.TypeEquipement = TypeEquipAN) and (PersonnageEquipement.IdInstance <> '') then
+    else if PersonnageEquipement.IdInstance <> '' then
       Result := ' [' + PersonnageEquipement.IdInstance + ']';
   end;
 

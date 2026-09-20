@@ -5735,3 +5735,7 @@ Fichiers modifies : BOOK_SEA_OF_CLAWS.Xml, winanimal.pas, chargeconstantes.pas, 
 winanimal.pas : hauteur des libelles mesuree par AjusteHauteur (DrawText) apres le changement de police (les descriptions de traits chevauchaient la ligne Prix). xmlexportimport.pas : Prix et Disponibilite remis a zero a chaque objet (le Grund A Dum, sans prix, affichait 10000 CO et Common de l entree precedente).
 Appris : un tag optionnel absent doit etre remis a zero dans la boucle de lecture, comme Capacite.
 Fichiers modifies : winanimal.pas, xmlexportimport.pas, Log.txt.
+
+20/09/2026 - PORTE PAR ETENDU AUX BATEAUX ET VEHICULES - A COMPILER PAR NONO
+chargetrapping.pas : TrappingEstPorteur (ProfilAnimal, ProfilBateau ou ProfilVehicule). winpersonnage.pas : LigneEstAnimal l utilise, donc menu "Confier a", identifiant A<N> et avertissement de surcharge valent aussi pour un bateau ou un vehicule. chargepersonnage.pas : id attribue a tout porteur au chargement. pdfpersonnage.pas : PdfLienAnimal ajoute [id] a tout objet ayant un id. Le type reste Divers pour un bateau (pas de fiche monture 12 colonnes sur le PDF), seul l animal reste TypeEquipAN.
+Fichiers modifies : chargetrapping.pas, winpersonnage.pas, chargepersonnage.pas, pdfpersonnage.pas, Log.txt.

@@ -1304,7 +1304,7 @@ begin
                           PersonnageEquipement.Porte              := Assigned(Node.Attributes.GetNamedItem(ConstXmlEquipementPorte));
                           LitEquipementInstance(Node, PersonnageEquipement);
                           // Fiche anterieure au rattachement : l'animal recoit son identifiant ici.
-                          if (PersonnageEquipement.TypeEquipement = TrimRight(TypeEquipAN)) and (PersonnageEquipement.IdInstance = '') then
+                          if ((PersonnageEquipement.TypeEquipement = TrimRight(TypeEquipAN)) or TrappingEstPorteur(ChercheTrapping(PersonnageEquipement.CodeEquipement))) and (PersonnageEquipement.IdInstance = '') then
                             PersonnageEquipement.IdInstance := IdAnimalLibre(Personnage.Equipement);
                           if Assigned(Node.Attributes.GetNamedItem(ConstXmlEquipementQuantite)) then
                             PersonnageEquipement.Quantite         := StrToIntDef(UTF8Encode(Node.Attributes.GetNamedItem(ConstXmlEquipementQuantite).NodeValue), 1)

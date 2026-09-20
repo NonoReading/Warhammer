@@ -4834,7 +4834,7 @@ procedure TWinPersonnages.TabEquipementDblClick(Sender: TObject);
 function TWinPersonnages.LigneEstAnimal(Ligne: Integer): Boolean;
   begin
     Result := (Ligne > 0) and (Ligne < TabEquipement.RowCount)
-      and (ChercheTrapping(TabEquipement.Cells[2, Ligne]).ProfilAnimal <> '');
+      and TrappingEstPorteur(ChercheTrapping(TabEquipement.Cells[2, Ligne]));
   end;
 
 // Identifiant A<N> pour chaque animal de la grille qui n'en a pas encore (meme regle que
