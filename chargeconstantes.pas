@@ -1051,6 +1051,12 @@ procedure AdjustGridColumnsWidth(Grid: TStringGrid; MaxHeight: Integer; ForceMax
         else
           Grid.ScrollBars := ssnone;
 
+    // L'ascenseur horizontal mange le bas de la grille : sans ce complement, la derniere
+    // ligne passe dessous (deux lignes dont une seule visible). Hauteur plafonnee (Asc,
+    // ForceMax) : on ne depasse pas le plafond. 20/09/2026.
+    if (Asc = 0) and (not ForceMax) and (Grid.ScrollBars in [ssHorizontal, ssBoth, ssAutoHorizontal, ssAutoBoth]) and (TotalC > Grid.Width) then
+      Grid.Height := Grid.Height + GetSystemMetrics(SM_CYHSCROLL);
+
     Grid.Invalidate;
 
   end;

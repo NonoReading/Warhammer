@@ -5688,3 +5688,8 @@ Ajout : 3 bateaux fluviaux (SYLVA-TRAP_022 a _024, Theme Animals and Vehicles, P
 20/09/2026 - A FAIRE.TXT : PASSE DE NETTOYAGE (1445 -> 1198 LIGNES)
 Retires : blocs clos deja dates dans ce Log (PDF Feldo, runes, montures, equipements, ancrage, AjoutMineur, portes mutation/qualite, Nation, accesseur, Effet, Lightweight/Bulky). HEPG et "livres non integres" remis a jour. Restes vivants gardes en items courts.
 Fichiers modifies : A FAIRE.txt, Log.txt.
+
+20/09/2026 - GRILLES : L ASCENSEUR HORIZONTAL NE MASQUE PLUS LA DERNIERE LIGNE - COMPILE ET VALIDE PAR NONO
+chargeconstantes.pas : AdjustGridColumnsWidth ajoute SM_CYHSCROLL a la hauteur quand un ascenseur horizontal est affiche et que la hauteur n est pas plafonnee. Vaut pour toutes les fenetres. Sylvania (armes, auberge, sundries, bateaux) valide par Nono.
+Appris : la hauteur etait calculee avant le choix des ascenseurs. AdjustTKGridColumnsWidth (TKGrid) non corrige.
+Fichiers modifies : chargeconstantes.pas, Log.txt.
