@@ -321,7 +321,111 @@
 <Hand>"1"</Hand>
 <Ammunition>"0"</Ammunition>
 </Weapon>
+<Weapon id="LUSTR-PROJ_ARB_01">
+<Description language="ENGLISH">"Eagle Claw Bolt Thrower"</Description>
+<Skill>"RULES-COMPPROJ_ARB"</Skill>
+<Damage>"+13"</Damage>
+<Availability>"RULES-DISPO_EXOTIC"</Availability>
+<Reach>"150"</Reach>
+<Price>"200CO"</Price>
+<Encumbrance>"25"</Encumbrance>
+<Quality>"LUSTR-WEAPB03,UPINA-WEAPB35 2,RULES-WEAPB23 3"</Quality>
+<Hand>"2"</Hand>
+<Ammunition>"0"</Ammunition>
+</Weapon>
+<Weapon id="LUSTR-PROJ_ARB_02">
+<Description language="ENGLISH">"Eagle Eye Bolt Thrower"</Description>
+<Skill>"RULES-COMPPROJ_ARB"</Skill>
+<Damage>"+11"</Damage>
+<Availability>"RULES-DISPO_EXOTIC"</Availability>
+<Reach>"90"</Reach>
+<Price>"45CO"</Price>
+<Encumbrance>"4"</Encumbrance>
+<Quality>"RULES-WEAPB10,UPINA-WEAPB35 1,RULES-WEAPB23 1"</Quality>
+<Hand>"2"</Hand>
+<Ammunition>"0"</Ammunition>
+</Weapon>
+<Weapon id="LUSTR-PROJ_SARBAC_02">
+<Description language="ENGLISH">"Giant Blowpipe"</Description>
+<Skill>"LUSTR-COMPPROJ_SARBAC"</Skill>
+<Damage>"+0"</Damage>
+<Availability>"RULES-DISPO_UNIQUE"</Availability>
+<Reach>"40"</Reach>
+<Price>"-"</Price>
+<Encumbrance>"6"</Encumbrance>
+<Quality>"RULES-WEAPB23 1"</Quality>
+<Hand>"2"</Hand>
+<Ammunition>"0"</Ammunition>
+</Weapon>
+<Weapon id="LUSTR-PROJ_ARC_01">
+<Description language="ENGLISH">"Giant Bow"</Description>
+<Skill>"RULES-COMPPROJ_ARC"</Skill>
+<Damage>"+10"</Damage>
+<Availability>"RULES-DISPO_UNIQUE"</Availability>
+<Reach>"100"</Reach>
+<Price>"-"</Price>
+<Encumbrance>"15"</Encumbrance>
+<Quality>"RULES-WEAPB16,UPINA-WEAPB35 2,RULES-WEAPB23 2"</Quality>
+<Hand>"2"</Hand>
+<Ammunition>"0"</Ammunition>
+</Weapon>
+<Weapon id="LUSTR-PROJ_ING_01">
+<Description language="ENGLISH">"Engine of the Gods' Burning Alignment"</Description>
+<Skill>"RULES-COMPPROJ_ING"</Skill>
+<Damage>"+8"</Damage>
+<Availability>"RULES-DISPO_UNIQUE"</Availability>
+<Reach>"60"</Reach>
+<Price>"-"</Price>
+<Encumbrance>"75"</Encumbrance>
+<Quality>"RULES-WEAPB15 5,UPINA-WEAPB35 3,LUSTR-WEAPB02,UPINA-WEAPB36 1d10,RULES-WEAPB29"</Quality>
+<Hand>"2"</Hand>
+<Ammunition>"0"</Ammunition>
+</Weapon>
+<Weapon id="LUSTR-PROJ_ING_02">
+<Description language="ENGLISH">"Engine of the Gods' Power of the Ancients"</Description>
+<Skill>"RULES-COMPPROJ_ING"</Skill>
+<Damage>"+15"</Damage>
+<Availability>"RULES-DISPO_UNIQUE"</Availability>
+<Reach>"150"</Reach>
+<Price>"-"</Price>
+<Encumbrance>"40"</Encumbrance>
+<Quality>"UPINA-WEAPB35 3,RULES-WEAPB26,LUSTR-WEAPB02,RULES-WEAPB23 3,RULES-WEAPB29"</Quality>
+<Hand>"2"</Hand>
+<Ammunition>"0"</Ammunition>
+</Weapon>
+<Weapon id="LUSTR-PROJ_ING_03">
+<Description language="ENGLISH">"Solar Engine's Beam of Chotec"</Description>
+<Skill>"RULES-COMPPROJ_ING"</Skill>
+<Damage>"+1d10"</Damage>
+<Availability>"RULES-DISPO_UNIQUE"</Availability>
+<Reach>"60"</Reach>
+<Price>"-"</Price>
+<Encumbrance>"75"</Encumbrance>
+<Quality>"UPINA-WEAPB35 3,LUSTR-WEAPB02,RULES-WEAPB03 5,RULES-WEAPB29"</Quality>
+<Hand>"2"</Hand>
+<Ammunition>"0"</Ammunition>
+</Weapon>
 </DATA_WEAPON>
+<DATA_WEAPON_BONUS>
+<BonusMalus id="LUSTR-WEAPB01">
+<Description language="ENGLISH">"Volley"</Description>
+<Explanation language="ENGLISH">"The weapon can discharge multiple shots at once, the number of which is indicated by this quality's level. Each shot rolls to hit separately. Damage rating is reduced by 4 when fired in Volley mode."</Explanation>
+<Short language="ENGLISH">"fires (Rating) shots at once, Damage -4"</Short>
+<Modifier>"+"</Modifier>
+</BonusMalus>
+<BonusMalus id="LUSTR-WEAPB02">
+<Description language="ENGLISH">"Magical"</Description>
+<Explanation language="ENGLISH">"This weapon is magical. Artillery of this kind may not fire if deprived of the Winds of Magic."</Explanation>
+<Short language="ENGLISH">"magical weapon"</Short>
+<Modifier>"+"</Modifier>
+</BonusMalus>
+<BonusMalus id="LUSTR-WEAPB03">
+<Description language="ENGLISH">"Accurate or Volley 6"</Description>
+<Explanation language="ENGLISH">"Alternative qualities : the user chooses which applies. The Eagle Claw can loose a single bolt (Accurate) or empty a magazine of smaller bolts (Volley 6, see Volley : Damage is reduced by 4 in Volley mode)."</Explanation>
+<Short language="ENGLISH">"Accurate or Volley 6"</Short>
+<Modifier>"+"</Modifier>
+</BonusMalus>
+</DATA_WEAPON_BONUS>
 <!-- Armure lustrienne (Lustria p.163) : os, corde et plaques de cuivre battu. Meme
      protection que le cuir, mais +1 point d'Encombrement par piece a cause des composants
      plus lourds. Comptee comme du cuir pour les effets de sorts, et portable par-dessus les
@@ -420,7 +524,7 @@
 <!-- Hawkship (p.89). Enc 0, disponibilite absente. -->
 <Trapping id="LUSTR-TRAP_08">
 <Description language="ENGLISH">"Hawkship"</Description>
-<Theme>"RULES-LAB_195"</Theme>
+<Theme>"RULES-LAB_261"</Theme>
 <Price>"300CO"</Price>
 <Encumbrance>"0"</Encumbrance>
 <Carries>"150"</Carries>
