@@ -13102,7 +13102,7 @@ Poison: Used to weaken and kill targets, anyone caught in the radius of this gre
        19/09/2026 : deux balises facultatives, RangeBonus (ajoute a la portee) et WeaponQuality
        (codes de qualites d arme ajoutees), lues par chargefabrication.pas et appliquees aux
        deux blocs armes du PDF. Barrel Extension et Telescopic Sight sont effectifs ; Bayonet
-       reste DESCRIPTIF (il change la competence de l arme, pas un simple bonus).
+       porte AlternateWeapon (RULES-COMB_HAST_03, la Spear du Rulebook) : l arme equipee reste une arme a distance et gagne une seconde ligne de melee (20/09/2026).
        Le livre leur donne un prix (3 GC, 12/-, 7 GC) que la table ne sait pas porter : il est
        recopie dans l explication. -->
 <Craftsmanship id="NATIO-QUALITY_01">
@@ -13120,6 +13120,7 @@ Price 3 GC, Encumbrance 0, Availability Rare."</Explanation>
 <Explanation language="ENGLISH">"A weapon attachment, fitted to rifles. May function the same as a Spear with a Long Reach and the Impale Quality, requiring the Melee (Polearm) Skill.
 Price 12/-, Encumbrance 0, Availability Common."</Explanation>
 <Short language="ENGLISH">"rifles : also a Spear, Long reach, Impale, Melee (Polearm)"</Short>
+<AlternateWeapon>"RULES-COMB_HAST_03"</AlternateWeapon>
 <Encumbrance>"0"</Encumbrance>
 <Max>"1"</Max>
 <Modifier>""</Modifier>

@@ -164,6 +164,7 @@ Const
       // Accessoires d arme (fabrication) : bonus de portee et qualites d arme ajoutees.
       ConstXmlFabPortee                 = 'RangeBonus';
       ConstXmlFabQualiteArme            = 'WeaponQuality';
+      ConstXmlFabArmeAlternative        = 'AlternateWeapon';
       ConstXmlFabApplique               = 'Applies';
       ConstXmlForPdf                    = 'PDF';
       ConstXmlTest                      = 'Test';

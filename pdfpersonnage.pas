@@ -1701,7 +1701,7 @@ Procedure PdfPersonnageCreation(Personnage: StructurePersonnage; BackGround: Boo
     PdfPageBlanc.PaperType := ptA4;
     PdfPageBlanc.UnitOfMeasure := uomMillimeters;
     PdfTaillePolice(PdfPageBlanc, PdfFontBack, ConstPoliceCarlson+ConstPoliceGras, 10);
-    for PersonnageEquipement in (Personnage.Equipement + PersonnageMutationEquipement(Personnage)) do
+    for PersonnageEquipement in (Personnage.Equipement + PersonnageMutationEquipement(Personnage) + PersonnageAccessoireEquipement(Personnage)) do
       begin
         Enc := 0;
         EncP:= 0;
@@ -1743,6 +1743,12 @@ Procedure PdfPersonnageCreation(Personnage: StructurePersonnage; BackGround: Boo
                   PArme.ListeBonus := PArme.ListeBonus + FabricationQualitesArme(PersonnageEquipement.QualiteEquipement);
                 end;
               Enc        := PArme.Encombrement + FabricationEncombrement(PersonnageEquipement.QualiteEquipement, Quality);
+              // Ligne alternative d'un accessoire (Bayonet = Spear) : pas d'encombrement propre, l'accessoire pese 0.
+              if EquipementAlternatifFabrication(PersonnageEquipement) <> '' then
+                begin
+                  Enc     := 0;
+                  Quality := ' (' + ChercheFabrication(EquipementAlternatifFabrication(PersonnageEquipement)).Libelle + ')';
+                end;
               if PersonnageEquipement.PortePar = '' then // confie a un animal : compte pour lui
                 EncArme    := EncArme + Enc;
 
@@ -3380,7 +3386,7 @@ Procedure PdfBlocArmesDonnees(PdfPage: TPDFPage; Personnage: StructurePersonnage
     Bidon          := 0;
     // Inclut les armes accordees par une mutation, meme principe que dans
     // PdfPersonnageCreation - CONTEXT.md, chantier "traits de creature".
-    for PersonnageEquipement in (Personnage.Equipement + PersonnageMutationEquipement(Personnage)) do
+    for PersonnageEquipement in (Personnage.Equipement + PersonnageMutationEquipement(Personnage) + PersonnageAccessoireEquipement(Personnage)) do
       if PersonnageEquipement.TypeEquipement = TypeEquipWe then
         begin
           TexteRange1:= '';
@@ -3411,6 +3417,12 @@ Procedure PdfBlocArmesDonnees(PdfPage: TPDFPage; Personnage: StructurePersonnage
               PArme.ListeBonus := PArme.ListeBonus + FabricationQualitesArme(PersonnageEquipement.QualiteEquipement);
             end;
           Enc        := PArme.Encombrement + FabricationEncombrement(PersonnageEquipement.QualiteEquipement, Quality);
+          // Ligne alternative d'un accessoire (Bayonet = Spear) : pas d'encombrement propre, l'accessoire pese 0.
+          if EquipementAlternatifFabrication(PersonnageEquipement) <> '' then
+            begin
+              Enc     := 0;
+              Quality := ' (' + ChercheFabrication(EquipementAlternatifFabrication(PersonnageEquipement)).Libelle + ')';
+            end;
           if PersonnageEquipement.PortePar = '' then // confie a un animal : compte pour lui
             EncArme    := EncArme + Enc;
 

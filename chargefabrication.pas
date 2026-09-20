@@ -19,6 +19,7 @@ Type
     Livre:              String;
     PorteeBonus:        Integer;  // accessoire d arme : ajoute a la portee
     QualitesArme:       String;   // accessoire d arme : codes de qualites d arme ajoutees (virgules)
+    ArmeAlternative:    String;   // accessoire d arme : code d une arme du catalogue que l arme equipee devient aussi (Bayonet = Spear)
     Applique:           String;   // Weapon, Armour, Misc (virgules) ; vide = tous les objets
 end;
 
@@ -48,6 +49,8 @@ Function FabricationEstPractical(ListeCode :String): Boolean;
 Function FabricationEstUnreliable(ListeCode :String): Boolean;
 Function FabricationPortee(ListeCode :String): Integer;
 Function FabricationQualitesArme(ListeCode :String): String;
+// Codes des armes alternatives (virgules) que les accessoires d UN objet lui donnent en plus. 20/09/2026.
+Function FabricationArmesAlternatives(ListeCode :String): String;
 procedure FabricationDetail(ListeCode :String; var BonusItem :String; var ListeBonus :String);
 function QualiteDepuisCode(var CodeEquipement: String): String;
 function QualiteSansMarqueur(ListeCode: String): String;
@@ -230,6 +233,30 @@ Function FabricationQualitesArme(ListeCode :String): String;
         for IndTab := 0 to Strings.Count -1 do
           begin
             Ajout := ChercheFabrication(ExtractStringBefore(Strings[IndTab],' ')).QualitesArme;
+            if Ajout <> '' then
+              begin
+                if Result <> '' then Result := Result + ',';
+                Result := Result + Ajout;
+              end;
+          end;
+        strings.Free;
+      end;
+  end;
+
+Function FabricationArmesAlternatives(ListeCode :String): String;
+  var
+    strings: TStringList;
+    IndTab:  Integer;
+    Ajout:   String;
+  begin
+    Result := '';
+    if not InList(ListeCode,',0') then
+      begin
+        strings := TStringList.Create;
+        ExtractStrings([','], [], PChar(ListeCode), Strings);
+        for IndTab := 0 to Strings.Count -1 do
+          begin
+            Ajout := ChercheFabrication(ExtractStringBefore(Strings[IndTab],' ')).ArmeAlternative;
             if Ajout <> '' then
               begin
                 if Result <> '' then Result := Result + ',';

@@ -1024,6 +1024,8 @@ Procedure XmlExportBook(Livre: String; Langue: String);
                 XmlContent.Add(XmlLigne(ConstXmlFabPortee, IntToStr(PFabrication.PorteeBonus)));
               if PFabrication.QualitesArme <> '' then
                 XmlContent.Add(XmlLigne(ConstXmlFabQualiteArme, PFabrication.QualitesArme));
+              if PFabrication.ArmeAlternative <> '' then
+                XmlContent.Add(XmlLigne(ConstXmlFabArmeAlternative, PFabrication.ArmeAlternative));
               if PFabrication.Applique <> '' then
                 XmlContent.Add(XmlLigne(ConstXmlFabApplique, PFabrication.Applique));
               XmlContent.Add(XmlLigne(ConstXmlPositifNegatif, PFabrication.TypeQualite));
@@ -3062,6 +3064,9 @@ Procedure XmlImport(FileName: String; OnlyPrimary: Boolean; OnlyCode: Boolean; C
                       PTraduction                  := InitTrad(ConstPFabrication, PFabrication.CodeFabrication, '', PFabrication.Livre);
                       PFabrication.Encombrement    := 0;
                       PFabrication.Applique        := '';
+                      PFabrication.PorteeBonus     := 0;
+                      PFabrication.QualitesArme    := '';
+                      PFabrication.ArmeAlternative := '';
                       Node := XmlElement(NodeNv2.FirstChild);
                       while Assigned(Node) do
                         begin
@@ -3094,6 +3099,8 @@ Procedure XmlImport(FileName: String; OnlyPrimary: Boolean; OnlyCode: Boolean; C
                               PFabrication.Applique      := RemoveQuotes(UTF8Encode(Node.TextContent));
                             ConstXmlFabQualiteArme:
                               PFabrication.QualitesArme  := RemoveQuotes(UTF8Encode(Node.TextContent));
+                            ConstXmlFabArmeAlternative:
+                              PFabrication.ArmeAlternative := RemoveQuotes(UTF8Encode(Node.TextContent));
                             ConstXmlPositifNegatif:
                               PFabrication.TypeQualite   := RemoveQuotes(UTF8Encode(Node.TextContent));
                             // <ModifArmour name="CodeLocalisation">n</ModifArmour> : Points d'Armure par

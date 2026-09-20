@@ -5775,3 +5775,8 @@ Fichiers modifies : A FAIRE.txt, CONTEXT.md, Log.txt.
 20/09/2026 - SUIVI : LE LOT 3d-3 DE NATIONS OF MANKIND ETAIT DEJA TERMINE
 Les 17 ordres de chevalerie et les 11 Regiments of Renown sont saisis et valides depuis le 10/09/2026 (CONTEXT.md 2.44 et 2.51). Mentions "reste le 3d-3" retirees d A FAIRE.txt (lignes des livres faits et des suites possibles) et du titre du 2.37 de CONTEXT.md.
 Fichiers modifies : A FAIRE.txt, CONTEXT.md, Log.txt.
+
+20/09/2026 - BAYONET DE NATIONS OF MANKIND : SECONDE LIGNE D ARME (SPEAR) SUR LE PDF - COMPILE ET VALIDE PAR NONO
+Le Bayonet ne change pas l arme, il lui ajoute un mode de melee. Nouvelle balise facultative <AlternateWeapon> sur une fabrication (code d une arme du catalogue) : NATIO-QUALITY_02 pointe vers RULES-COMB_HAST_03 (Spear). chargefabrication.pas : champ ArmeAlternative et FabricationArmesAlternatives. chargepersonnage.pas : PersonnageAccessoireEquipement fabrique a la volee une ligne d arme en plus (Source = @ + code de la fabrication), EquipementAlternatifFabrication la reconnait. pdfpersonnage.pas : les deux boucles du bloc armes l ajoutent, encombrement 0, libelle "Spear (Bayonet)". Rien n est stocke sur la fiche.
+Corrige en passant : xmlexportimport.pas remet a zero PorteeBonus et QualitesArme a chaque fabrication lue (ils fuyaient d une fabrication a la suivante). Appris : un champ ajoute a un record lu en boucle doit etre remis a zero avec les autres.
+Fichiers modifies : BOOK_NATIONS_OF_MANKIND.Xml, chargeconstantes.pas, chargefabrication.pas, chargepersonnage.pas, xmlexportimport.pas, pdfpersonnage.pas, A FAIRE.txt, CONTEXT.md, Log.txt.

@@ -262,6 +262,12 @@ Type
   // Calcule a la volee, rien de stocke sur la fiche : meme cascade gratuite au retrait d'une
   // mutation. CONTEXT.md, chantier "traits de creature".
   Function PersonnageMutationEquipement(Personnage: StructurePersonnage): TArrayPersonnageEquipement;
+  // Lignes d'arme SUPPLEMENTAIRES que les accessoires d'une arme lui donnent (Bayonet = Spear,
+  // <AlternateWeapon> de la fabrication). Calcule a la volee pour le PDF, rien de stocke sur la
+  // fiche. Source = '@' + code de la fabrication ; l'arme equipee reste une ligne a part entiere.
+  Function PersonnageAccessoireEquipement(Personnage: StructurePersonnage): TArrayPersonnageEquipement;
+  // Code de la fabrication qui a fabrique cette ligne alternative, '' si c'est une vraie ligne.
+  Function EquipementAlternatifFabrication(PEquipement: StructurePersonnageEquipement): String;
   // Meme principe que PersonnageMutationTalent, mais la source est une qualite d'objet porte
   // (ex. NATIO-ARMOB_16 "Fear" -> RULES-T0049 "Frightening", Skull Trophies) plutot qu'une
   // mutation - <Talent> sous <ArmureBonus>, chargearmurebonustalent.pas. Calcule a la volee
@@ -2378,6 +2384,48 @@ Function PersonnageMutationEquipement(Personnage: StructurePersonnage): TArrayPe
             PEquipement.Quantite          := 1;
             Result                        += [PEquipement];
           end;
+  end;
+
+Function PersonnageAccessoireEquipement(Personnage: StructurePersonnage): TArrayPersonnageEquipement;
+  var
+    PersonnageEquipement: StructurePersonnageEquipement;
+    PEquipement:          StructurePersonnageEquipement;
+    Liste:                TStringList;
+    Ind:                  Integer;
+  begin
+    Result := [];
+    for PersonnageEquipement in Personnage.Equipement do
+      if (TrimRight(PersonnageEquipement.TypeEquipement) = TrimRight(TypeEquipWe)) and
+         (PersonnageEquipement.QualiteEquipement <> '') then
+        begin
+          Liste := TStringList.Create;
+          try
+            // une entree par accessoire : "CODE niveau,CODE niveau" -> on garde le code de fabrication
+            ExtractStrings([','], [], PChar(PersonnageEquipement.QualiteEquipement), Liste);
+            for Ind := 0 to Liste.Count - 1 do
+              if ChercheFabrication(ExtractStringBefore(Liste[Ind], ' ')).ArmeAlternative <> '' then
+                begin
+                  PEquipement                   := PersonnageEquipement;
+                  PEquipement.CodeEquipement    := ChercheFabrication(ExtractStringBefore(Liste[Ind], ' ')).ArmeAlternative;
+                  PEquipement.QualiteEquipement := '';
+                  PEquipement.CoutXp            := 0;
+                  PEquipement.Source            := '@' + ExtractStringBefore(Liste[Ind], ' ');
+                  PEquipement.Quantite          := 1;
+                  PEquipement.IdInstance        := '';
+                  Result                        += [PEquipement];
+                end;
+          finally
+            Liste.Free;
+          end;
+        end;
+  end;
+
+Function EquipementAlternatifFabrication(PEquipement: StructurePersonnageEquipement): String;
+  begin
+    if (Length(PEquipement.Source) > 1) and (PEquipement.Source[1] = '@') then
+      Result := Copy(PEquipement.Source, 2, Length(PEquipement.Source))
+    else
+      Result := '';
   end;
 
 Function PersonnageArmureBonusTalent(Personnage: StructurePersonnage): TArrayPersonnageTalent;
