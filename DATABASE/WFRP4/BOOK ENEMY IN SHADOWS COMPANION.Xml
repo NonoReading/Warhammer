@@ -186,7 +186,7 @@ However, their differing visions of the Empire’s fate ensure that for all thei
 </SUBCHAPTER_ITEM>
 </Career>
 </DATA_CAREER>
-<!-- Animaux, p.24 ("Animal Cost and Availability"). Theme RULES-LAB_195 (Animals and Vehicles), <Carries> = capacite de charge. Les profils et traits sont p.22-24 du livre (Dog, Pony/Donkey/Mule, Draught Horse, Ox, Heavy Draught Horse, Riding Horse, Light et Heavy Warhorse), pas encore saisis : aucun champ ne les porte. Prix des deux chevaux de guerre : le livre precise que le prix peut doubler ou tripler en temps de tension. Scarce = RULES-DISPO_LIMITED. -->
+<!-- Animaux, p.24 ("Animal Cost and Availability"). Theme RULES-LAB_195 (Animals and Vehicles), <Carries> = capacite de charge. <AnimalProfile>/<AnimalTraits> : profils et traits p.22-24 (traits Optional non saisis) ; Chicken, Sheep et Pig n'ont pas de profil dans ce livre. Prix des deux chevaux de guerre : le livre precise que le prix peut doubler ou tripler en temps de tension. Scarce = RULES-DISPO_LIMITED. -->
 <DATA_TRAPPING>
 <Trapping id="ENEMY-TRAP_01">
 <Description language="ENGLISH">"Chicken"</Description>
@@ -213,6 +213,8 @@ However, their differing visions of the Empire’s fate ensure that for all thei
 <Theme>"RULES-LAB_195"</Theme>
 <Price>"2CO"</Price>
 <Carries>"8"</Carries>
+<AnimalProfile>"4 25 0 20 20 35 30 0 15 10 25 7"</AnimalProfile>
+<AnimalTraits>"Skittish, Trained (Broken, Drive), Stride, Weapon +5"</AnimalTraits>
 <Availability>"RULES-DISPO_RARE"</Availability>
 </Trapping>
 <Trapping id="ENEMY-TRAP_05">
@@ -220,6 +222,8 @@ However, their differing visions of the Empire’s fate ensure that for all thei
 <Theme>"RULES-LAB_195"</Theme>
 <Price>"10CO"</Price>
 <Carries>"14"</Carries>
+<AnimalProfile>"4 25 0 30 45 20 30 0 10 10 10 12"</AnimalProfile>
+<AnimalTraits>"Skittish, Stride (Quadruped), Trained (Drive or Mount), Weapon +6"</AnimalTraits>
 <Availability>"RULES-DISPO_COMMON"</Availability>
 </Trapping>
 <Trapping id="ENEMY-TRAP_06">
@@ -227,6 +231,8 @@ However, their differing visions of the Empire’s fate ensure that for all thei
 <Theme>"RULES-LAB_195"</Theme>
 <Price>"5CO"</Price>
 <Carries>"14"</Carries>
+<AnimalProfile>"4 25 0 30 45 20 30 0 10 10 10 12"</AnimalProfile>
+<AnimalTraits>"Skittish, Stride (Quadruped), Trained (Drive or Mount), Weapon +6"</AnimalTraits>
 <Availability>"RULES-DISPO_COMMON"</Availability>
 </Trapping>
 <Trapping id="ENEMY-TRAP_07">
@@ -234,6 +240,8 @@ However, their differing visions of the Empire’s fate ensure that for all thei
 <Theme>"RULES-LAB_195"</Theme>
 <Price>"4CO"</Price>
 <Carries>"20"</Carries>
+<AnimalProfile>"5 25 0 45 45 17 25 0 10 10 20 26"</AnimalProfile>
+<AnimalTraits>"Size (Large), Skittish, Stride (Quadruped), Trained (Broken, Mount, Drive), Weapon +7"</AnimalTraits>
 <Availability>"RULES-DISPO_COMMON"</Availability>
 </Trapping>
 <Trapping id="ENEMY-TRAP_08">
@@ -241,6 +249,8 @@ However, their differing visions of the Empire’s fate ensure that for all thei
 <Theme>"RULES-LAB_195"</Theme>
 <Price>"8CO"</Price>
 <Carries>"30"</Carries>
+<AnimalProfile>"4 25 0 50 50 15 20 0 10 10 10 32"</AnimalProfile>
+<AnimalTraits>"Brute, Size (Large), Skittish, Stride (Quadruped), Trained (Broken, Drive), Weapon +7"</AnimalTraits>
 <Availability>"RULES-DISPO_LIMITED"</Availability>
 </Trapping>
 <Trapping id="ENEMY-TRAP_09">
@@ -248,6 +258,8 @@ However, their differing visions of the Empire’s fate ensure that for all thei
 <Theme>"RULES-LAB_195"</Theme>
 <Price>"15CO"</Price>
 <Carries>"30"</Carries>
+<AnimalProfile>"3 25 0 55 55 15 20 0 10 10 10 32"</AnimalProfile>
+<AnimalTraits>"Bestial, Size (Large), Skittish, Stride (Quadruped), Trained (Drive), Weapon +8"</AnimalTraits>
 <Availability>"RULES-DISPO_COMMON"</Availability>
 </Trapping>
 <Trapping id="ENEMY-TRAP_10">
@@ -255,6 +267,8 @@ However, their differing visions of the Empire’s fate ensure that for all thei
 <Theme>"RULES-LAB_195"</Theme>
 <Price>"15CO"</Price>
 <Carries>"16"</Carries>
+<AnimalProfile>"7 25 0 30 45 20 30 0 10 10 20 24"</AnimalProfile>
+<AnimalTraits>"Size (Large), Skittish, Stride, Trained (Broken, Mount), Weapon +6"</AnimalTraits>
 <Availability>"RULES-DISPO_COMMON"</Availability>
 </Trapping>
 <Trapping id="ENEMY-TRAP_11">
@@ -262,6 +276,8 @@ However, their differing visions of the Empire’s fate ensure that for all thei
 <Theme>"RULES-LAB_195"</Theme>
 <Price>"70CO"</Price>
 <Carries>"18"</Carries>
+<AnimalProfile>"7 35 0 45 35 20 30 0 10 10 30 22"</AnimalProfile>
+<AnimalTraits>"Size (Large), Skittish, Stride, Trained (Broken, Mount, War), Weapon +7"</AnimalTraits>
 <Availability>"RULES-DISPO_COMMON"</Availability>
 </Trapping>
 <Trapping id="ENEMY-TRAP_12">
@@ -269,6 +285,8 @@ However, their differing visions of the Empire’s fate ensure that for all thei
 <Theme>"RULES-LAB_195"</Theme>
 <Price>"230CO"</Price>
 <Carries>"20"</Carries>
+<AnimalProfile>"4 35 0 50 50 20 20 0 10 10 30 32"</AnimalProfile>
+<AnimalTraits>"Size (Large), Skittish, Stride, Trained (Broken, Mount, War), Weapon +8"</AnimalTraits>
 <Availability>"RULES-DISPO_LIMITED"</Availability>
 </Trapping>
 </DATA_TRAPPING>

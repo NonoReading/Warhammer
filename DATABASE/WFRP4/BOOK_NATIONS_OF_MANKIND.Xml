@@ -12996,85 +12996,97 @@ Poison: Used to weaken and kill targets, anyone caught in the radius of this gre
 </Level>
 </CareerBonus>
 </DATA_CAREER_BONUS>
-<!-- Nouvelles montures, p.61 ("New Mounts"). Theme RULES-LAB_195 (Animals and Vehicles), disponibilite Exotic, <Carries> = capacite de charge. Le PROFIL (M WS BS S T I Ag Dex Int WP Fel W) et les TRAITS sont en commentaire : aucun champ ne les porte encore (cf. CONTEXT.md, chantier montures). Le Norscan Mammoth n a pas de prix (tiret dans le livre). Riding Bull et Estalian War Bull ont un profil p.61 mais pas de ligne de prix : non saisis. -->
+<!-- Nouvelles montures, p.61 ("New Mounts"). Theme RULES-LAB_195 (Animals and Vehicles), disponibilite Exotic, <Carries> = capacite de charge. <AnimalProfile> = M WS BS S T I Ag Dex Int WP Fel W, <AnimalTraits> = traits du livre. Le Norscan Mammoth n a pas de prix (tiret dans le livre). Riding Bull et Estalian War Bull ont un profil p.61 mais pas de ligne de prix : non saisis. -->
 <DATA_TRAPPING>
-<!-- Bretonnian Destrier : M WS BS S T I Ag Dex Int WP Fel W = 7 45 0 50 50 20 20 0 10 10 30 28. Traits : Big, Size (Large), Skittish, Stride, Trained (Broken, Magic, Mount, War), Weapon +8 -->
 <Trapping id="NATIO-TRAP_01">
 <Description language="ENGLISH">"Bretonnian Destrier"</Description>
 <Theme>"RULES-LAB_195"</Theme>
 <Price>"460CO"</Price>
 <Carries>"20"</Carries>
+<AnimalProfile>"7 45 0 50 50 20 20 0 10 10 30 28"</AnimalProfile>
+<AnimalTraits>"Big, Size (Large), Skittish, Stride, Trained (Broken, Magic, Mount, War), Weapon +8"</AnimalTraits>
 <Availability>"RULES-DISPO_EXOTIC"</Availability>
 </Trapping>
-<!-- Kislev Light Warhorse : M WS BS S T I Ag Dex Int WP Fel W = 8 35 0 45 45 20 40 0 10 20 30 28. Traits : Fast, Size (Large), Skittish, Stride, Strider (Snow), Tough, Trained (Broken, Drive, Mount, War), Weapon +7 -->
 <Trapping id="NATIO-TRAP_02">
 <Description language="ENGLISH">"Kislev Light Warhorse"</Description>
 <Theme>"RULES-LAB_195"</Theme>
 <Price>"210CO"</Price>
 <Carries>"18"</Carries>
+<AnimalProfile>"8 35 0 45 45 20 40 0 10 20 30 28"</AnimalProfile>
+<AnimalTraits>"Fast, Size (Large), Skittish, Stride, Strider (Snow), Tough, Trained (Broken, Drive, Mount, War), Weapon +7"</AnimalTraits>
 <Availability>"RULES-DISPO_EXOTIC"</Availability>
 </Trapping>
-<!-- Kislev Trained Bear : M WS BS S T I Ag Dex Int WP Fel W = 4 35 0 55 45 20 20 15 10 15 10 28. Traits : Armor 1, Bite +9, Night Vision, Size (Large), Skittish, Stride, Strider (Snow), Trained (Broken, Entertain), Weapon +8 -->
 <Trapping id="NATIO-TRAP_03">
 <Description language="ENGLISH">"Kislev Trained Bear"</Description>
 <Theme>"RULES-LAB_195"</Theme>
 <Price>"40CO"</Price>
 <Carries>"16"</Carries>
+<AnimalProfile>"4 35 0 55 45 20 20 15 10 15 10 28"</AnimalProfile>
+<AnimalTraits>"Armor 1, Bite +9, Night Vision, Size (Large), Skittish, Stride, Strider (Snow), Trained (Broken, Entertain), Weapon +8"</AnimalTraits>
 <Availability>"RULES-DISPO_EXOTIC"</Availability>
 </Trapping>
-<!-- Kislev Warbear : M WS BS S T I Ag Dex Int WP Fel W = 4 45 0 65 55 20 20 15 10 15 20 34. Traits : Armor 1, Big, Bite +10, Night Vision, Size (Large), Skittish, Stride, Strider (Snow), Trained (Broken, Entertain, Mount, War), Weapon +9 -->
 <Trapping id="NATIO-TRAP_04">
 <Description language="ENGLISH">"Kislev Warbear"</Description>
 <Theme>"RULES-LAB_195"</Theme>
 <Price>"360CO"</Price>
 <Carries>"22"</Carries>
+<AnimalProfile>"4 45 0 65 55 20 20 15 10 15 20 34"</AnimalProfile>
+<AnimalTraits>"Armor 1, Big, Bite +10, Night Vision, Size (Large), Skittish, Stride, Strider (Snow), Trained (Broken, Entertain, Mount, War), Weapon +9"</AnimalTraits>
 <Availability>"RULES-DISPO_EXOTIC"</Availability>
 </Trapping>
-<!-- Riding Camel : M WS BS S T I Ag Dex Int WP Fel W = 5 25 0 35 35 30 25 0 20 20 25 28. Traits : Size (Large), Skittish, Stride, Strider (Deserts), Sturdy, Trained (Broken, Drive, Mount), Weapon +6 -->
 <Trapping id="NATIO-TRAP_05">
 <Description language="ENGLISH">"Riding Camel"</Description>
 <Theme>"RULES-LAB_195"</Theme>
 <Price>"15CO"</Price>
 <Carries>"20"</Carries>
+<AnimalProfile>"5 25 0 35 35 30 25 0 20 20 25 28"</AnimalProfile>
+<AnimalTraits>"Size (Large), Skittish, Stride, Strider (Deserts), Sturdy, Trained (Broken, Drive, Mount), Weapon +6"</AnimalTraits>
 <Availability>"RULES-DISPO_EXOTIC"</Availability>
 </Trapping>
-<!-- War Camel : M WS BS S T I Ag Dex Int WP Fel W = 4 35 0 45 45 30 15 0 20 25 30 28. Traits : Size (Large), Skittish, Stride, Strider (Deserts), Sturdy, Trained (Broken, Drive, Mount, War), Weapon +7 -->
 <Trapping id="NATIO-TRAP_06">
 <Description language="ENGLISH">"War Camel"</Description>
 <Theme>"RULES-LAB_195"</Theme>
 <Price>"80CO"</Price>
 <Carries>"24"</Carries>
+<AnimalProfile>"4 35 0 45 45 30 15 0 20 25 30 28"</AnimalProfile>
+<AnimalTraits>"Size (Large), Skittish, Stride, Strider (Deserts), Sturdy, Trained (Broken, Drive, Mount, War), Weapon +7"</AnimalTraits>
 <Availability>"RULES-DISPO_EXOTIC"</Availability>
 </Trapping>
-<!-- War Elephant : M WS BS S T I Ag Dex Int WP Fel W = 7 45 0 50 65 30 25 0 20 30 30 80. Traits : Armor 2, Horns (Tusks), Night Vision, Size (Enormous), Skittish, Stride, Trained (Broken, Mount, War), Weapon +9 -->
 <Trapping id="NATIO-TRAP_07">
 <Description language="ENGLISH">"War Elephant"</Description>
 <Theme>"RULES-LAB_195"</Theme>
 <Price>"880CO"</Price>
 <Carries>"40"</Carries>
+<AnimalProfile>"7 45 0 50 65 30 25 0 20 30 30 80"</AnimalProfile>
+<AnimalTraits>"Armor 2, Horns (Tusks), Night Vision, Size (Enormous), Skittish, Stride, Trained (Broken, Mount, War), Weapon +9"</AnimalTraits>
 <Availability>"RULES-DISPO_EXOTIC"</Availability>
 </Trapping>
-<!-- Norscan Mammoth : M WS BS S T I Ag Dex Int WP Fel W = 5 45 0 50 75 30 25 0 15 40 0 92. Traits : Armor 3, Horns (Tusks) +8, Night Vision, Size (Enormous), Skittish, Stride, Tough, Weapon +9 -->
 <Trapping id="NATIO-TRAP_08">
 <Description language="ENGLISH">"Norscan Mammoth"</Description>
 <Theme>"RULES-LAB_195"</Theme>
 <Carries>"44"</Carries>
+<AnimalProfile>"5 45 0 50 75 30 25 0 15 40 0 92"</AnimalProfile>
+<AnimalTraits>"Armor 3, Horns (Tusks) +8, Night Vision, Size (Enormous), Skittish, Stride, Tough, Weapon +9"</AnimalTraits>
 <Availability>"RULES-DISPO_EXOTIC"</Availability>
 </Trapping>
-<!-- Riding Bull : M WS BS S T I Ag Dex Int WP Fel W = 6 40 0 55 55 20 25 0 10 30 10 36. Traits : Horns +10, Size (Large), Skittish, Strider, Trained (Broken, Mount), Weapon +10. Le livre (p.61) ne donne NI prix, NI capacite, NI disponibilite (oubli de l'editeur). VALEURS MAISON du 19/09/2026 (decision de Nono : prix eleve, comme toute monture) : 120CO, capacite 30 (celle du Ox, meme Endurance), Exotic comme les autres New Mounts. -->
+<!-- Le livre (p.61) ne donne NI prix, NI capacite, NI disponibilite (oubli de l'editeur). VALEURS MAISON du 19/09/2026 (decision de Nono : prix eleve, comme toute monture) : 120CO, capacite 30 (celle du Ox, meme Endurance), Exotic comme les autres New Mounts. -->
 <Trapping id="NATIO-TRAP_09">
 <Description language="ENGLISH">"Riding Bull"</Description>
 <Theme>"RULES-LAB_195"</Theme>
 <Price>"120CO"</Price>
 <Carries>"30"</Carries>
+<AnimalProfile>"6 40 0 55 55 20 25 0 10 30 10 36"</AnimalProfile>
+<AnimalTraits>"Horns +10, Size (Large), Skittish, Strider, Trained (Broken, Mount), Weapon +10"</AnimalTraits>
 <Availability>"RULES-DISPO_EXOTIC"</Availability>
 </Trapping>
-<!-- Estalian War Bull : M WS BS S T I Ag Dex Int WP Fel W = 6 50 0 55 65 20 25 0 10 40 10 42. Traits : Horns +10, Size (Large), Strider, Tough, Trained (Broken, Mount, War), Weapon +10. Meme oubli que le Riding Bull : valeurs maison 400CO (monture de guerre, entre le Kislev Light Warhorse et le Bretonnian Destrier), capacite 30, Exotic. -->
+<!-- Meme oubli que le Riding Bull : valeurs maison 400CO (monture de guerre, entre le Kislev Light Warhorse et le Bretonnian Destrier), capacite 30, Exotic. -->
 <Trapping id="NATIO-TRAP_10">
 <Description language="ENGLISH">"Estalian War Bull"</Description>
 <Theme>"RULES-LAB_195"</Theme>
 <Price>"400CO"</Price>
 <Carries>"30"</Carries>
+<AnimalProfile>"6 50 0 55 65 20 25 0 10 40 10 42"</AnimalProfile>
+<AnimalTraits>"Horns +10, Size (Large), Strider, Tough, Trained (Broken, Mount, War), Weapon +10"</AnimalTraits>
 <Availability>"RULES-DISPO_EXOTIC"</Availability>
 </Trapping>
 </DATA_TRAPPING>

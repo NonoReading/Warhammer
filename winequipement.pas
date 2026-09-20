@@ -7,7 +7,7 @@ interface
 uses
   Classes, SysUtils, Forms, Controls, Graphics, Dialogs, Grids, StdCtrls,
   ExtCtrls, BCButton, ChargeTrapping, GlobalFonts, ChargeConstantes,
-  UnitCalcul, ChargeTexte, WinFiltre, AncrageProportionnel;
+  UnitCalcul, ChargeTexte, WinFiltre, WinAnimal, AncrageProportionnel;
 
 type
 
@@ -25,6 +25,7 @@ type
     AffLib: TEdit;
     AffLivre: TEdit;
     AffPrix: TEdit;
+    ButtonFiche: TBCButton;
     ButtonFiltre: TBCButton;
     CombTheme: TComboBox;
     LabAcheteur: TLabel;
@@ -37,6 +38,7 @@ type
     LabPrix: TLabel;
     LabTheme: TLabel;
     TabEquip: TStringGrid;
+    procedure ButtonFicheClick({%H-}Sender: TObject);
     procedure ButtonFiltreClick({%H-}Sender: TObject);
     procedure FormCreate({%H-}Sender: TObject);
     procedure FormDestroy({%H-}Sender: TObject);
@@ -201,6 +203,7 @@ procedure TWinEquipements.TabEquipSelection(Sender: TObject; aCol, aRow: Integer
 begin
   if EnRemplissage or (aRow < 1) or (aRow >= TabEquip.RowCount) then exit;
   AffLib.Text    := TabEquip.Cells[3, aRow];
+  ButtonFiche.Visible := ChercheTrapping(TabEquip.Cells[1, aRow]).ProfilAnimal <> '';
   AffPrix.Text   := TabEquip.Cells[4, aRow];
   AffEnc.Text    := TabEquip.Cells[5, aRow];
   AffCap.Text    := TabEquip.Cells[6, aRow];
@@ -234,6 +237,12 @@ end;
 procedure TWinEquipements.ThemeChange(Sender: TObject);
 begin
   Remplir;
+end;
+
+procedure TWinEquipements.ButtonFicheClick(Sender: TObject);
+begin
+  if (TabEquip.Row > 0) and (TabEquip.Row < TabEquip.RowCount) then
+    AfficheFicheAnimal(ChercheTrapping(TabEquip.Cells[1, TabEquip.Row]));
 end;
 
 procedure TWinEquipements.ButtonFiltreClick(Sender: TObject);

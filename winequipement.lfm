@@ -32,6 +32,17 @@ object WinEquipements: TWinEquipements
     Style = csDropDownList
     TabOrder = 0
   end
+  object ButtonFiche: TBCButton
+    Left = 510
+    Height = 32
+    Top = 30
+    Width = 166
+    OnClick = ButtonFicheClick
+    Caption = 'Fiche'
+    Color = clNone
+    ParentColor = False
+    Visible = False
+  end
   object ButtonFiltre: TBCButton
     Left = 330
     Height = 32

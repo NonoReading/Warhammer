@@ -320,6 +320,8 @@
 <Text name="RULES-LAB_247">"DR bonus = PA la plus haute, en charge"</Text>
 <Text name="RULES-LAB_248">"ignore 2 PA"</Text>
 <Text name="RULES-LAB_249">"reduit de 2 les degats des tirs et sorts subis"</Text>
+<Text name="RULES-LAB_250">"Profil"</Text>
+<Text name="RULES-LAB_251">"Traits"</Text>
 </Label>
 </DATA_LABEL>
 </DATA_BOOK>

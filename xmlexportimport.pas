@@ -818,6 +818,10 @@ Procedure XmlExportBook(Livre: String; Langue: String);
               XmlContent.Add(XmlLigne(ConstXmlEncombrement, IntToStr(PTrapping.Encombrement)));
               if PTrapping.Capacite <> 0 then
                 XmlContent.Add(XmlLigne(ConstXmlCapacite, IntToStr(PTrapping.Capacite)));
+              if PTrapping.ProfilAnimal <> '' then
+                XmlContent.Add(XmlLigne(ConstXmlProfilAnimal, PTrapping.ProfilAnimal));
+              if PTrapping.TraitsAnimal <> '' then
+                XmlContent.Add(XmlLigne(ConstXmlTraitsAnimal, PTrapping.TraitsAnimal));
               if PTrapping.Theme <> '' then
                 XmlContent.Add(XmlLigne(ConstXmlTheme, PTrapping.Theme));
               if PTrapping.Acheteur <> '' then
@@ -2516,6 +2520,8 @@ Procedure XmlImport(FileName: String; OnlyPrimary: Boolean; OnlyCode: Boolean; C
                       // conteneurs/montures, PTrapping etant reutilise d'un tour de boucle a
                       // l'autre sans lui la valeur de l'entree precedente resterait collee
                       PTrapping.Capacite      := 0;
+                      PTrapping.ProfilAnimal  := '';
+                      PTrapping.TraitsAnimal  := '';
                       PTrapping.Theme         := '';
                       PTrapping.Acheteur      := '';
                       PTrapping.Localite      := '';
@@ -2538,6 +2544,10 @@ Procedure XmlImport(FileName: String; OnlyPrimary: Boolean; OnlyCode: Boolean; C
                               PTrapping.Encombrement  := StrToIntDef(RemoveQuotes(UTF8Encode(Node.TextContent)),0);
                             ConstXmlCapacite:
                               PTrapping.Capacite      := StrToIntDef(RemoveQuotes(UTF8Encode(Node.TextContent)),0);
+                            ConstXmlProfilAnimal:
+                              PTrapping.ProfilAnimal  := RemoveQuotes(UTF8Encode(Node.TextContent));
+                            ConstXmlTraitsAnimal:
+                              PTrapping.TraitsAnimal  := RemoveQuotes(UTF8Encode(Node.TextContent));
                             ConstXmlPrix:
                               PTrapping.Prix          := RemoveQuotes(UTF8Encode(Node.TextContent));
                               ConstXmlTheme:

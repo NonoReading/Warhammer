@@ -394,6 +394,8 @@
 <Text name="RULES-LAB_247">"bonus DR = highest AP, on a Charge"</Text>
 <Text name="RULES-LAB_248">"ignores 2 AP"</Text>
 <Text name="RULES-LAB_249">"reduces ranged and spell Damage by 2"</Text>
+<Text name="RULES-LAB_250">"Profile"</Text>
+<Text name="RULES-LAB_251">"Traits"</Text>
 </Label>
 </DATA_LABEL>
 </DATA_BOOK>

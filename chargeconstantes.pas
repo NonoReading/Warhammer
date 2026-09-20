@@ -239,6 +239,8 @@ Const
       ConstXmlPrix                      = 'Price';
       ConstXmlEncombrement              = 'Encumbrance';
       ConstXmlCapacite                  = 'Carries';
+      ConstXmlProfilAnimal              = 'AnimalProfile';
+      ConstXmlTraitsAnimal              = 'AnimalTraits';
       ConstXmlTheme                     = 'Theme';
       ConstXmlAcheteur                  = 'Buyer';
       ConstXmlLocalite                  = 'Locality';

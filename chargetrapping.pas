@@ -14,6 +14,8 @@ Type
     Prix:               String;
     Encombrement:       Integer;
     Capacite:           Integer;
+    ProfilAnimal:       String;   // 12 valeurs M WS BS S T I Ag Dex Int WP Fel W separees par des espaces (montures, animaux)
+    TraitsAnimal:       String;   // traits separes par des virgules, tels qu'imprimes dans le livre
     Disponibilite:      String;
     Theme:              String;
     Acheteur:           String;
