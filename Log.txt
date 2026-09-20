@@ -5522,3 +5522,17 @@ PdfBlocArmesDonnees : le "(N)" des fabrications est ecrit en police 4 relevee (X
 20/09/2026 - PDF FELDO : ENTETE (PdfBlocEntete), CARREER PATH LIMITE A SA ZONE, COLONNES DECLAREES EN VARIABLES - VALIDE PAR NONO
 Le parcours de carriere etait ecrit jusqu a XDroite et debordait sur Status ; il s arrete maintenant a la separation Status (PdfEcrit reduit la police). Positions declarees une fois (XLib1, XVal1, XValChemin, XSep1..3, decalages de valeurs) : separations Species/Class deplacees vers la gauche (77->72, 114->108), colonne Name/Career/Career Path/Age rapprochee du bord (XGauche+2). Pour bouger une colonne, changer XSep2/XSep3/XLib1.
 Fichier modifie : pdfpersonnage.pas, Log.txt.
+
+20/09/2026 - RUNES NAINES : EFFETS CONDITIONNELS (MIGHT, GRUDGE) - NON COMPILE, NON TESTE
+Attribut if="CodeLibelle" sur ModifyDamage/ModifySkill d une fabrication : stocke dans Filtre (xmlexportimport), IGNORE par FabricationModificateurQualite (donc jamais dans les totaux). Nouveau FabricationEffetsConditionnels(ListeCode, Cible) (chargefabrication.pas) : texte "Rune : +10% +1 DR <condition>" ; ecrit par PdfBlocArmesDonnees dans la zone libre a droite des armes de MELEE seulement (pour un tir la zone porte les portees, non traite). Might : +3 DR CC/CT contre cible plus grande (RULES-LAB_242) ; Grudge : +10% et +1 DR CC/CT contre la cible de la rancune (RULES-LAB_243). Non fait : gabarit PDF hors Feldo (PdfPersonnageCreation), ecran WinPersonnage, Cutting/Force/Resistance/Shielding/Warding. A tester : arme de melee avec Might 2 et Grudge 1, DR inchange, ligne lisible.
+Fichiers modifies : xmlexportimport.pas, chargefabrication.pas, pdfpersonnage.pas, BOOK_DWARF_PLAYERS_GUIDE.Xml, INTERFACE.Xml, INTERFACE_FRANCAIS.Xml, Log.txt.
+
+20/09/2026 - RUNES CONDITIONNELLES : EXPLICATION DEPLACEE DANS LE BLOC "CRAFTING BONUS" (IDEE NONO) - NON COMPILE
+La ligne ecrite a droite de l arme se superposait aux qualites : retiree de PdfBlocArmesDonnees. Les deux blocs d explication (PdfBlocDessinExplication et celui de PdfPersonnageCreation) affichent maintenant, pour une rune a effet conditionnel, "Rune of Might +3 DR vs larger target (per rune)" a la place du resume (FabricationEffetsConditionnels sur le code seul). Aussi corrige : Format('%+d') non gere par FPC (signe ajoute a la main, StrUtils/IfThen). Libelles 242/243 raccourcis, 244 "par rune" ajoute.
+Fichiers modifies : pdfpersonnage.pas, chargefabrication.pas, INTERFACE.Xml, INTERFACE_FRANCAIS.Xml, Log.txt.
+
+20/09/2026 - PDF : LES EXPLICATIONS DE BONUS NE DEBORDENT PLUS DU CADRE - NON COMPILE
+PdfBlocDessinExplication : nouvelle PdfEcritTient (pdfpersonnage.pas) reduit la police (min 4) pour tenir sur une ligne entre XGauche+4 et XDroite-1 ; utilisee pour les trois listes (armure, arme, fabrication). Cause : WriteText ne reduit jamais (Pummel, Undamaging, Shield depassaient). Le bloc equivalent de PdfPersonnageCreation (gabarit non Feldo) n est pas touche.
+Fichier modifie : pdfpersonnage.pas, Log.txt.
+
+20/09/2026 - RUNES CONDITIONNELLES (MIGHT, GRUDGE) ET DEBORDEMENT DU BLOC EXPLICATION VALIDES PAR NONO

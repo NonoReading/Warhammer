@@ -3083,7 +3083,12 @@ Procedure XmlImport(FileName: String; OnlyPrimary: Boolean; OnlyCode: Boolean; C
                               begin
                                 PFabricationModificateur.TypeModif  := Node.NodeName;
                                 PFabricationModificateur.Cible      := RemoveQuotes(UTF8Encode(Node.Attributes.GetNamedItem(ConstXmlData).NodeValue));
+                                // if="CodeLibelle" : effet CONDITIONNEL (Rune of Might, Grudge Rune). Le code du
+                                // libelle de la condition est range dans Filtre ; l'effet n'entre plus dans les
+                                // totaux (FabricationModificateurQualite l'ignore) et sort en note. 20/09/2026.
                                 PFabricationModificateur.Filtre     := '';
+                                if Node.Attributes.GetNamedItem('if') <> nil then
+                                  PFabricationModificateur.Filtre   := RemoveQuotes(UTF8Encode(Node.Attributes.GetNamedItem('if').NodeValue));
                                 PFabricationModificateur.Forme      := ConstFormeEffetAdditif;
                                 PFabricationModificateur.Facteur    := StrToIntDef(RemoveQuotes(UTF8Encode(Node.TextContent)), 0);
                                 PFabricationModificateur.CodeSource := PFabrication.CodeFabrication;

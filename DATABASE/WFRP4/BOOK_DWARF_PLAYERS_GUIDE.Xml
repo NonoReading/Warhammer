@@ -4925,6 +4925,10 @@ When you gain the Stunned Condition, you can spend a Fortune point to make an im
 <Short language="ENGLISH">"Weapon rune, 10 SLs"</Short>
 <Max>"3"</Max>
 <Applies>Weapon</Applies>
+<ModifySkill name="CC" if="RULES-LAB_243">10</ModifySkill>
+<ModifySkill name="CT" if="RULES-LAB_243">10</ModifySkill>
+<ModifyDamage name="CC" if="RULES-LAB_243">1</ModifyDamage>
+<ModifyDamage name="CT" if="RULES-LAB_243">1</ModifyDamage>
 <Modifier>""</Modifier>
 </Craftsmanship>
 <Craftsmanship id="DWARF-RUNE_08">
@@ -4933,6 +4937,8 @@ When you gain the Stunned Condition, you can spend a Fortune point to make an im
 <Short language="ENGLISH">"Weapon rune, 10 SLs"</Short>
 <Max>"3"</Max>
 <Applies>Weapon</Applies>
+<ModifyDamage name="CC" if="RULES-LAB_242">3</ModifyDamage>
+<ModifyDamage name="CT" if="RULES-LAB_242">3</ModifyDamage>
 <Modifier>""</Modifier>
 </Craftsmanship>
 <Craftsmanship id="DWARF-RUNE_09">

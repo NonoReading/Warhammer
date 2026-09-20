@@ -2036,6 +2036,9 @@ Procedure PdfPersonnageCreation(Personnage: StructurePersonnage; BackGround: Boo
             LocData     := ExtractChaine(',',FabricationBonii,IndLoca);
             PFabrication:= ChercheFabrication(LocData);
             TxtBonus    := PFabrication.Libelle+':'+PFabrication.Resume;
+            // Rune a effet conditionnel (Might, Grudge) : l'effet chiffre par rune remplace le resume.
+            if FabricationEffetsConditionnels(PFabrication.CodeFabrication, ConstCibleModifieDegatCC) <> '' then
+              TxtBonus  := FabricationEffetsConditionnels(PFabrication.CodeFabrication, ConstCibleModifieDegatCC) + ' (' + GetTexteLibelle('RULES-LAB_244') + ')';
             PdfPage.WriteText(15,133+(NbBonus*2), TxtBonus);
           end;
         Inc(NbBonus);
@@ -3614,6 +3617,22 @@ Procedure PdfBlocArmuresDonnees(PdfPage: TPDFPage; Personnage: StructurePersonna
     ArmureJambe := ArmureJambe + PersonnageFabricationArmureModif(Personnage, BonusJambes);
   end;
 
+// Ecrit sur UNE ligne en reduisant la police pour rester dans [X, XMax] (WriteText ne reduit
+// jamais : les explications d'armes longues, ex. Pummel, debordaient du cadre). 20/09/2026.
+Procedure PdfEcritTient(PdfPage: TPDFPage; X, XMax, Y: Single; Texte: String);
+  var
+    Taille: Integer;
+  begin
+    Taille := PdfFontTaille;
+    while (Taille > 4) and (TailleTexte(Texte, Taille) > (XMax - X) * 1.15) do
+      Dec(Taille);
+    if Taille <> PdfFontTaille then
+      PdfPage.SetFont(PdfFontEnCours, Taille);
+    PdfPage.WriteText(X, Y, Texte);
+    if Taille <> PdfFontTaille then
+      PdfPage.SetFont(PdfFontEnCours, PdfFontTaille);
+  end;
+
 Procedure PdfBlocDessinExplication(PdfPage: TPDFPage; XGauche, XDroite, YHaut, YBas, HauteurLigne: Single; ArmureBonii, ArmeBonii, FabricationBonii: String);
   var
     NbBonus:      Integer;
@@ -3658,7 +3677,7 @@ Procedure PdfBlocDessinExplication(PdfPage: TPDFPage; XGauche, XDroite, YHaut, Y
                     TxtBonus := TxtBonus + ChercheCompetence(PArmureBonusModif.CodeCompetence).Libelle
                                           + ' ' + IntToStr(PArmureBonusModif.Valeur) + '%';
                   end;
-            PdfPage.WriteText(XGauche + 4,YHaut-(NbBonus*HauteurLigne), TxtBonus);
+            PdfEcritTient(PdfPage, XGauche + 4, XDroite - 1, YHaut-(NbBonus*HauteurLigne), TxtBonus);
           end;
       end;
 
@@ -3675,7 +3694,7 @@ Procedure PdfBlocDessinExplication(PdfPage: TPDFPage; XGauche, XDroite, YHaut, Y
             LocData     := ExtractChaine(',',ArmeBonii,IndLoca);
             PArmeBonus  := ChercheArmeBonus(LocData);
             TxtBonus    := PArmeBonus.Libelle+':'+PArmeBonus.Resume;
-            PdfPage.WriteText(XGauche + 4,YHaut-(NbBonus*HauteurLigne), TxtBonus);
+            PdfEcritTient(PdfPage, XGauche + 4, XDroite - 1, YHaut-(NbBonus*HauteurLigne), TxtBonus);
           end;
       end;
 
@@ -3692,7 +3711,10 @@ Procedure PdfBlocDessinExplication(PdfPage: TPDFPage; XGauche, XDroite, YHaut, Y
             LocData     := ExtractChaine(',',FabricationBonii,IndLoca);
             PFabrication:= ChercheFabrication(LocData);
             TxtBonus    := PFabrication.Libelle+':'+PFabrication.Resume;
-            PdfPage.WriteText(XGauche + 4,YHaut-(NbBonus*HauteurLigne), TxtBonus);
+            // Rune a effet conditionnel (Might, Grudge) : l'effet chiffre par rune remplace le resume.
+            if FabricationEffetsConditionnels(PFabrication.CodeFabrication, ConstCibleModifieDegatCC) <> '' then
+              TxtBonus  := FabricationEffetsConditionnels(PFabrication.CodeFabrication, ConstCibleModifieDegatCC) + ' (' + GetTexteLibelle('RULES-LAB_244') + ')';
+            PdfEcritTient(PdfPage, XGauche + 4, XDroite - 1, YHaut-(NbBonus*HauteurLigne), TxtBonus);
           end;
       end;
   end;

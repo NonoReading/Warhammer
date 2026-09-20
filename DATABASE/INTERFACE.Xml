@@ -386,6 +386,9 @@
 <Text name="RULES-LAB_239">"Season"</Text>
 <Text name="RULES-LAB_240">"Only my combat skills"</Text>
 <Text name="RULES-LAB_241">"Only weapons usable with the skills of the character"</Text>
+<Text name="RULES-LAB_242">"vs larger target"</Text>
+<Text name="RULES-LAB_243">"vs Grudge target"</Text>
+<Text name="RULES-LAB_244">"per rune"</Text>
 </Label>
 </DATA_LABEL>
 </DATA_BOOK>

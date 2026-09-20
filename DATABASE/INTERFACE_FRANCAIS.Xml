@@ -312,6 +312,9 @@
 <Text name="RULES-LAB_239">"Saison"</Text>
 <Text name="RULES-LAB_240">"Selon mes compétences"</Text>
 <Text name="RULES-LAB_241">"Seules les armes utilisables avec les compétences du personnage"</Text>
+<Text name="RULES-LAB_242">"vs cible plus grande"</Text>
+<Text name="RULES-LAB_243">"vs cible de rancune"</Text>
+<Text name="RULES-LAB_244">"par rune"</Text>
 </Label>
 </DATA_LABEL>
 </DATA_BOOK>

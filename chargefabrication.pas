@@ -5,7 +5,7 @@ unit ChargeFabrication;
 interface
 
 uses
-  Classes, SysUtils, ChargeConstantes, ChargeTexte, UnitCalcul, Generics.Collections, ChargeModificateur;
+  Classes, SysUtils, StrUtils, ChargeConstantes, ChargeTexte, UnitCalcul, Generics.Collections, ChargeModificateur;
 
 Type
   StructureFabrication     = record
@@ -39,6 +39,10 @@ Function FabricationEncombrement(ListeCode :String; Var Quality: String): Intege
 // Somme, sur les qualites d'UN objet ("CODE niveau,..."), des modificateurs (TypeModif, Cible) de
 // fabrication multiplies par le niveau. Rune of Cleaving (ModifyDamage CC). 20/09/2026.
 Function FabricationModificateurQualite(ListeCode, TypeModif, Cible: String): Integer;
+// Effets CONDITIONNELS (attribut if= du XML, stocke dans Filtre) des qualites d'UN objet, pour la
+// cible CC ou CT : "Rune of Might : +3 DR contre une cible de taille superieure / Grudge Rune :
+// +10% +1 DR contre ...". Chaine vide si aucun. Jamais ajoutes aux totaux. 20/09/2026.
+Function FabricationEffetsConditionnels(ListeCode, Cible: String): String;
 Function FabricationEstBulky(ListeCode :String): Boolean;
 Function FabricationEstPractical(ListeCode :String): Boolean;
 Function FabricationEstUnreliable(ListeCode :String): Boolean;
@@ -332,9 +336,68 @@ Function FabricationModificateurQualite(ListeCode, TypeModif, Cible: String): In
             end;
           for IndModif := 0 to ListFabricationModificateur.Count - 1 do
             if (ListFabricationModificateur[IndModif].TypeModif = TypeModif)
+               and (ListFabricationModificateur[IndModif].Filtre = '')
                and CompareRechercheValeur(ListFabricationModificateur[IndModif].CodeSource, Code)
                and CompareRechercheValeur(ListFabricationModificateur[IndModif].Cible, Cible) then
               Result := Result + ListFabricationModificateur[IndModif].Facteur * Niveau;
+        end;
+    finally
+      Liste.Free;
+    end;
+  end;
+
+Function FabricationEffetsConditionnels(ListeCode, Cible: String): String;
+  var
+    Liste:            TStringList;
+    Element, Code:    String;
+    Niveau, Degat:    Integer;
+    Pourcent:         Integer;
+    Condition:        String;
+    Ind, IndModif:    Integer;
+    Ligne:            String;
+  begin
+    Result := '';
+    if ListeCode = '' then Exit;
+    Liste := TStringList.Create;
+    try
+      ExtractStrings([','], [], PChar(ListeCode), Liste);
+      for Ind := 0 to Liste.Count - 1 do
+        begin
+          Element := Trim(Liste[Ind]);
+          Code    := Element;
+          Niveau  := 1;
+          if Pos(' ', Element) > 0 then
+            begin
+              Code   := Trim(ExtractStringBefore(Element, ' '));
+              Niveau := StrToIntDef(Trim(Copy(Element, Pos(' ', Element) + 1, Length(Element))), 1);
+            end;
+          Degat     := 0;
+          Pourcent  := 0;
+          Condition := '';
+          for IndModif := 0 to ListFabricationModificateur.Count - 1 do
+            if (ListFabricationModificateur[IndModif].Filtre <> '')
+               and CompareRechercheValeur(ListFabricationModificateur[IndModif].CodeSource, Code)
+               and CompareRechercheValeur(ListFabricationModificateur[IndModif].Cible, Cible) then
+              begin
+                Condition := ListFabricationModificateur[IndModif].Filtre;
+                if ListFabricationModificateur[IndModif].TypeModif = ConstXmlModifieDegat then
+                  Degat := Degat + ListFabricationModificateur[IndModif].Facteur * Niveau
+                else if ListFabricationModificateur[IndModif].TypeModif = ConstXmlModifieCompetence then
+                  Pourcent := Pourcent + ListFabricationModificateur[IndModif].Facteur * Niveau;
+              end;
+          if Condition <> '' then
+            begin
+              Ligne := ChercheFabrication(Code).Libelle;
+              // Format('%+d') n'est pas gere par FPC : signe ajoute a la main.
+              if Pourcent <> 0 then
+                Ligne := Ligne + ' ' + IfThen(Pourcent > 0, '+', '') + IntToStr(Pourcent) + '%';
+              if Degat <> 0 then
+                Ligne := Ligne + ' ' + IfThen(Degat > 0, '+', '') + IntToStr(Degat) + ' DR';
+              Ligne := Ligne + ' ' + GetAllTexteLibelle(Condition);
+              if Result <> '' then
+                Result := Result + ' ; ';
+              Result := Result + Ligne;
+            end;
         end;
     finally
       Liste.Free;
