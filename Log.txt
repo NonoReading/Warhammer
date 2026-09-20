@@ -5722,3 +5722,7 @@ Fichiers modifies : BOOK_DWARF_PLAYERS_GUIDE.Xml, Log.txt.
 20/09/2026 - LIVRE SEA WARDENS OF COTHIQUE : 5 CHARIOTS - PAS ENCORE TESTE PAR NONO
 DATABASE/WFRP4/BOOK_SEA_WARDENS_OF_COTHIQUE.Xml (code COTHI, COMPLETE=0), ajoute a BOOKWFRP4 de INI.TXT. COTHI-TRAP_01 a _05 : Light, Medium, Tiranoc, White Lion et Heavy Chariot (p.76), VehicleProfile avec Strike. Cart et wagons non repris (doublons de ENEMY-TRAP_13 a _21). Reste du livre non saisi.
 Fichiers modifies : BOOK_SEA_WARDENS_OF_COTHIQUE.Xml, INI.TXT, Log.txt.
+
+20/09/2026 - GRUND A DUM (SEA OF CLAWS P.46) : FICHE SAISIE - PAS ENCORE TESTE PAR NONO
+SEAOF-TRAP_027 : BoatProfile 50;10 (25);6 (10);-;50;65;200, Carries 500, traits Ram et Sturdy, sans prix ni disponibilite (navire nomme). Ballista et huit Medium Cannon en commentaire.
+Fichiers modifies : BOOK_SEA_OF_CLAWS.Xml, A FAIRE.txt, CONTEXT.md, Log.txt.
