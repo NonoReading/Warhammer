@@ -2503,7 +2503,30 @@ Procedure PdfBlocDestin(PdfPage: TPDFPage; Personnage: StructurePersonnage; XGau
 Function PdfBlocEntete(PdfPage: TPDFPage; Personnage: StructurePersonnage; PRace: StructureRace; PMetier: StructureMetier; PMetierNiveau: StructureMetierNiveau; LocData: String; XGauche, XDroite, Y, HauteurLigne: Single; NbLignes: Integer; MinPolice: Integer): Single;
   var
     IndC: Integer;
+    // Positions des colonnes, declarees une fois : deplacer une separation (XSep2, XSep3)
+    // decale ses libelles et ses valeurs. Les valeurs sont donnees en decalage depuis la
+    // separation de leur colonne (libelles differents d'une ligne a l'autre).
+    XLib1, XVal1, XValChemin, XSep1, XLibTaille, XValTaille: Single;
+    XSep2, XSep3, XLib2, XLib3: Single;
+    XValEspece, XValNiveau, XValCheveux, XValClasse, XValStatut, XValYeux: Single;
   begin
+    XLib1      := XGauche + 2;    // libelles de la 1re colonne (Name, Career, Career Path, Age)
+    XVal1      := XLib1 + 11;     // valeurs de la 1re colonne (Name, Career, Age)
+    XValChemin := XLib1 + 25;     // valeur de Career Path
+    XSep1      := 52;   // separation Age | Height (ligne 4)
+    XLibTaille := 53;   // libelle Height
+    XValTaille := 63;   // valeur Height
+    XSep2      := 72;   // separation avant Species / Career Level / Hair (etait 77)
+    XSep3      := 108;  // separation avant Class / Status / Eyes (etait 114)
+    XLib2      := XSep2 + 1;
+    XLib3      := XSep3 + 1;
+    XValEspece  := XSep2 + 12;
+    XValNiveau  := XSep2 + 18;
+    XValCheveux := XSep2 + 21;
+    XValClasse  := XSep3 + 12;
+    XValStatut  := XSep3 + 11;
+    XValYeux    := XSep3 + 11;
+
     // Dessin cadre
     PdfPage.DrawLine(XGauche, Y, XGauche, Y - (NbLignes * HauteurLigne), 1);
     PdfPage.DrawLine(XDroite, Y, XDroite, Y - (NbLignes * HauteurLigne), 1);
@@ -2512,44 +2535,45 @@ Function PdfBlocEntete(PdfPage: TPDFPage; Personnage: StructurePersonnage; PRace
         PdfPage.DrawLine(XGauche, Y - (IndC * HauteurLigne), XDroite, Y - (IndC * HauteurLigne), 1);
         if IndC > 0 then
           begin
-            if IndC = 4  then PdfPage.DrawLine( 52, Y - ((IndC-1) * HauteurLigne),  52, Y - (IndC * HauteurLigne), 1);
-            if IndC <> 3 then PdfPage.DrawLine( 77, Y - ((IndC-1) * HauteurLigne),  77, Y - (IndC * HauteurLigne), 1);
-            if IndC <> 2 then PdfPage.DrawLine(114, Y - ((IndC-1) * HauteurLigne), 114, Y - (IndC * HauteurLigne), 1);
+            if IndC = 4  then PdfPage.DrawLine(XSep1, Y - ((IndC-1) * HauteurLigne), XSep1, Y - (IndC * HauteurLigne), 1);
+            if IndC <> 3 then PdfPage.DrawLine(XSep2, Y - ((IndC-1) * HauteurLigne), XSep2, Y - (IndC * HauteurLigne), 1);
+            if IndC <> 2 then PdfPage.DrawLine(XSep3, Y - ((IndC-1) * HauteurLigne), XSep3, Y - (IndC * HauteurLigne), 1);
           end;
       end;
 
     // Texte Entête
     PdfTaillePolice(PdfPage, PdfFontBack, ConstPoliceCarlson+ConstPoliceGras, 10);
-    PdfPage.WriteText( 21, Y - (HauteurLigne * 1) + 1, GetTexteLibelle('RULES-PDF_MAIN1_NAME'));
-    PdfPage.WriteText( 78, Y - (HauteurLigne * 1) + 1, GetTexteLibelle('RULES-PDF_MAIN1_SPECIES'));
-    PdfPage.WriteText(115, Y - (HauteurLigne * 1) + 1, GetTexteLibelle('RULES-PDF_MAIN1_CLASS'));
-    PdfPage.WriteText( 21, Y - (HauteurLigne * 2) + 1, GetTexteLibelle('RULES-PDF_MAIN2_CAREER'));
-    PdfPage.WriteText( 78, Y - (HauteurLigne * 2) + 1, GetTexteLibelle('RULES-PDF_MAIN2_CAREERLEVEL'));
-    PdfPage.WriteText( 21, Y - (HauteurLigne * 3) + 1, GetTexteLibelle('RULES-PDF_MAIN3_CAREERPATH'));
-    PdfPage.WriteText(115, Y - (HauteurLigne * 3) + 1, GetTexteLibelle('RULES-PDF_MAIN3_STATUS'));
-    PdfPage.WriteText( 21, Y - (HauteurLigne * 4) + 1, GetTexteLibelle('RULES-PDF_MAIN4_AGE'));
-    PdfPage.WriteText( 53, Y - (HauteurLigne * 4) + 1, GetTexteLibelle('RULES-PDF_MAIN4_HEIGHT'));
-    PdfPage.WriteText( 78, Y - (HauteurLigne * 4) + 1, GetTexteLibelle('RULES-PDF_MAIN4_HAIR'));
-    PdfPage.WriteText(115, Y - (HauteurLigne * 4) + 1, GetTexteLibelle('RULES-PDF_MAIN4_EYES'));
+    PdfPage.WriteText(XLib1,      Y - (HauteurLigne * 1) + 1, GetTexteLibelle('RULES-PDF_MAIN1_NAME'));
+    PdfPage.WriteText(XLib2,      Y - (HauteurLigne * 1) + 1, GetTexteLibelle('RULES-PDF_MAIN1_SPECIES'));
+    PdfPage.WriteText(XLib3,      Y - (HauteurLigne * 1) + 1, GetTexteLibelle('RULES-PDF_MAIN1_CLASS'));
+    PdfPage.WriteText(XLib1,      Y - (HauteurLigne * 2) + 1, GetTexteLibelle('RULES-PDF_MAIN2_CAREER'));
+    PdfPage.WriteText(XLib2,      Y - (HauteurLigne * 2) + 1, GetTexteLibelle('RULES-PDF_MAIN2_CAREERLEVEL'));
+    PdfPage.WriteText(XLib1,      Y - (HauteurLigne * 3) + 1, GetTexteLibelle('RULES-PDF_MAIN3_CAREERPATH'));
+    PdfPage.WriteText(XLib3,      Y - (HauteurLigne * 3) + 1, GetTexteLibelle('RULES-PDF_MAIN3_STATUS'));
+    PdfPage.WriteText(XLib1,      Y - (HauteurLigne * 4) + 1, GetTexteLibelle('RULES-PDF_MAIN4_AGE'));
+    PdfPage.WriteText(XLibTaille, Y - (HauteurLigne * 4) + 1, GetTexteLibelle('RULES-PDF_MAIN4_HEIGHT'));
+    PdfPage.WriteText(XLib2,      Y - (HauteurLigne * 4) + 1, GetTexteLibelle('RULES-PDF_MAIN4_HAIR'));
+    PdfPage.WriteText(XLib3,      Y - (HauteurLigne * 4) + 1, GetTexteLibelle('RULES-PDF_MAIN4_EYES'));
 
-    // Valeur Entête
+    // Valeur Entête (chaque valeur s'arrete a la separation suivante, moins 1)
     PdfTaillePolice(PdfPage, PdfFontValue, ConstPoliceArial, 9);
-    PdfEcrit(PdfPage,  32,  86, Y - (HauteurLigne * 1) + 1, Personnage.NomPersonnage, MinPolice);
-    PdfEcrit(PdfPage,  89, 115, Y - (HauteurLigne * 1) + 1, PRace.Libelle, MinPolice);
-    PdfEcrit(PdfPage, 126, XDroite, Y - (HauteurLigne * 1) + 1, GetTexteLibelle(PMetier.LibelleGroupe), MinPolice);
+    PdfEcrit(PdfPage, XVal1,       XSep2 - 1, Y - (HauteurLigne * 1) + 1, Personnage.NomPersonnage, MinPolice);
+    PdfEcrit(PdfPage, XValEspece,  XSep3 - 1, Y - (HauteurLigne * 1) + 1, PRace.Libelle, MinPolice);
+    PdfEcrit(PdfPage, XValClasse,  XDroite,   Y - (HauteurLigne * 1) + 1, GetTexteLibelle(PMetier.LibelleGroupe), MinPolice);
     if Trim(Personnage.Appartenance) <> '' then
-      PdfEcrit(PdfPage,  32,  85, Y - (HauteurLigne * 2) + 1, PMetier.Libelle + ' (' + LibelleAppartenances(Personnage.Appartenance) + ')', MinPolice)
+      PdfEcrit(PdfPage, XVal1, XSep2 - 1, Y - (HauteurLigne * 2) + 1, PMetier.Libelle + ' (' + LibelleAppartenances(Personnage.Appartenance) + ')', MinPolice)
     else
-      PdfEcrit(PdfPage,  32,  85, Y - (HauteurLigne * 2) + 1, PMetier.Libelle, MinPolice);
-    PdfEcrit(PdfPage,  95, XDroite, Y - (HauteurLigne * 2) + 1, IntToStr(Personnage.MetierEnCours.NiveauMetier)+' - '+ PMetierNiveau.Libelle, MinPolice);
-    PdfEcrit(PdfPage,  50, XDroite, Y - (HauteurLigne * 3) + 1, LocData, MinPolice);
+      PdfEcrit(PdfPage, XVal1, XSep2 - 1, Y - (HauteurLigne * 2) + 1, PMetier.Libelle, MinPolice);
+    PdfEcrit(PdfPage, XValNiveau,  XDroite,   Y - (HauteurLigne * 2) + 1, IntToStr(Personnage.MetierEnCours.NiveauMetier)+' - '+ PMetierNiveau.Libelle, MinPolice);
+    // Zone Career Path : jusqu'a la separation Status, pas jusqu'a XDroite.
+    PdfEcrit(PdfPage, XValChemin,  XSep3 - 1, Y - (HauteurLigne * 3) + 1, LocData, MinPolice);
     // Prefixe RULES- ajoute le 12/09/2026 - meme correctif que le gabarit normal, voir son
     // commentaire (CONTEXT.md 2.49/2.61).
-    PdfEcrit(PdfPage, 125, XDroite, Y - (HauteurLigne * 3) + 1, GetTexteLibelle('RULES-' + PMetierNiveau.SalaireMetier, '', ' '), MinPolice);
-    PdfEcrit(PdfPage,  32,  53, Y - (HauteurLigne * 4) + 1, IntToStr(Personnage.Age), MinPolice);
-    PdfEcrit(PdfPage,  63,  78, Y - (HauteurLigne * 4) + 1, IntToStr(Personnage.Height), MinPolice);
-    PdfEcrit(PdfPage,  98, 115, Y - (HauteurLigne * 4) + 1, Personnage.HairColors, MinPolice);
-    PdfEcrit(PdfPage, 125, XDroite, Y - (HauteurLigne * 4) + 1, Personnage.EyeColors, MinPolice);
+    PdfEcrit(PdfPage, XValStatut,  XDroite,   Y - (HauteurLigne * 3) + 1, GetTexteLibelle('RULES-' + PMetierNiveau.SalaireMetier, '', ' '), MinPolice);
+    PdfEcrit(PdfPage, XVal1,       XSep1,     Y - (HauteurLigne * 4) + 1, IntToStr(Personnage.Age), MinPolice);
+    PdfEcrit(PdfPage, XValTaille,  XSep2,     Y - (HauteurLigne * 4) + 1, IntToStr(Personnage.Height), MinPolice);
+    PdfEcrit(PdfPage, XValCheveux, XSep3 - 1, Y - (HauteurLigne * 4) + 1, Personnage.HairColors, MinPolice);
+    PdfEcrit(PdfPage, XValYeux,    XDroite,   Y - (HauteurLigne * 4) + 1, Personnage.EyeColors, MinPolice);
 
     Result := Y - (NbLignes * HauteurLigne);
   end;

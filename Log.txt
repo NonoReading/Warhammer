@@ -5518,3 +5518,7 @@ Fichier modifie : winpersonnage.pas.
 
 20/09/2026 - RUNES SPEED ET STRIKING VALIDEES PAR NONO ; ASTERISQUE DE L ARME EN PETITE POLICE (NON TESTE)
 PdfBlocArmesDonnees : le "(N)" des fabrications est ecrit en police 4 relevee (XGauche+41..+45), le nom de l arme s arrete a XGauche+41 quand il existe. Fichier modifie : pdfpersonnage.pas.
+
+20/09/2026 - PDF FELDO : ENTETE (PdfBlocEntete), CARREER PATH LIMITE A SA ZONE, COLONNES DECLAREES EN VARIABLES - VALIDE PAR NONO
+Le parcours de carriere etait ecrit jusqu a XDroite et debordait sur Status ; il s arrete maintenant a la separation Status (PdfEcrit reduit la police). Positions declarees une fois (XLib1, XVal1, XValChemin, XSep1..3, decalages de valeurs) : separations Species/Class deplacees vers la gauche (77->72, 114->108), colonne Name/Career/Career Path/Age rapprochee du bord (XGauche+2). Pour bouger une colonne, changer XSep2/XSep3/XLib1.
+Fichier modifie : pdfpersonnage.pas, Log.txt.
