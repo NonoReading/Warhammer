@@ -42,7 +42,7 @@ type
     ButtonAugmentation: TBCButton;
     ButtonDelete: TBCButton;
     ButtonFabrication: TBCButton;
-    ButtonPorte: TBCButton;
+    LabPorteAide: TLabel;
     ButtonHistorique: TBCButton;
     ButtonPdf: TBCButton;
     ButtonRaceSelectionner: TBCButton;
@@ -142,7 +142,6 @@ type
   procedure ButtonArmeClick({%H-}Sender: TObject);
   procedure ButtonEquipementClick({%H-}Sender: TObject);
   procedure ButtonFabricationClick({%H-}Sender: TObject);
-  procedure ButtonPorteClick({%H-}Sender: TObject);
   procedure ButtonDeleteClick({%H-}Sender: TObject);
   procedure ButtonCorruptionAjouteClick({%H-}Sender: TObject);
   procedure ButtonCorruptionSupprimeClick({%H-}Sender: TObject);
@@ -296,9 +295,11 @@ type
   procedure TabEquipementDblClick({%H-}Sender: TObject);
   // Rattachement d'un objet a un animal (CONTEXT.md 2.84, etape 3) : colonnes cachees 10 (id de
   // l'animal) et 11 (animal porteur), colonne 12 = nom du porteur.
+  procedure TabEquipementMouseMove({%H-}Sender: TObject; {%H-}Shift: TShiftState; X, Y: Integer);
   procedure TabEquipementMouseDown({%H-}Sender: TObject; Button: TMouseButton; {%H-}Shift: TShiftState; X, Y: Integer);
   procedure TabEquipementPopup({%H-}Sender: TObject);
   procedure MenuConfierClick(Sender: TObject);
+  procedure MenuPorteClick({%H-}Sender: TObject);
   procedure MenuReprendreClick({%H-}Sender: TObject);
   procedure AttribueIdAnimaux;
   procedure RafraichitPorteurs;
@@ -902,24 +903,6 @@ procedure TWinPersonnages.ButtonFabricationClick(Sender: TObject);
           SelectWinFabricationType := '';
           ChoixWinFabrication := '';
           AfficheFabrication();
-        end;
-  end;
-
-procedure TWinPersonnages.ButtonPorteClick(Sender: TObject);
-  begin
-    if (TabEquipement.Row > 0)
-      // Meme garde que ButtonFabrication/ButtonDelete : une ligne de sort ne se porte pas.
-      and (TalentSort(TabEquipement.Cells[2, TabEquipement.Row]).CodeTalent = '') then
-        begin
-          if TabEquipement.Cells[8, TabEquipement.Row] = '' then
-            begin
-              TabEquipement.Cells[8, TabEquipement.Row]  := 'X';
-              // porte sur soi : ne peut plus etre confie a un animal (carriedby l'emporte sur worn)
-              TabEquipement.Cells[11, TabEquipement.Row] := '';
-              RafraichitPorteurs;
-            end
-          else
-            TabEquipement.Cells[8, TabEquipement.Row] := '';
         end;
   end;
 
@@ -2210,6 +2193,8 @@ begin
   TabEquipement.Cells[12, 0]   := GetTexteLibelle('RULES-LAB_254');
   TabEquipement.ColWidths[12]  := 150;
   TabEquipement.OnMouseDown    := @TabEquipementMouseDown;
+  TabEquipement.OnMouseMove    := @TabEquipementMouseMove;
+  TabEquipement.ShowHint       := True;
   TabEquipement.PopupMenu      := TPopupMenu.Create(Self);
   TabEquipement.PopupMenu.OnPopup := @TabEquipementPopup;
 
@@ -2403,7 +2388,7 @@ Procedure TWinPersonnages.AfficheImageRace();
     RadioButtonChanger.Caption                 := GetTexteLibelle('RULES-LAB_115');
     ButtonFabrication.Caption                  := '+'+GetTexteLibelle('RULES-LAB_125');
     ButtonDelete.Caption                       := '-'+GetTexteLibelle('RULES-LAB_126');
-    ButtonPorte.Caption                        := GetTexteLibelle('RULES-LAB_180');
+    LabPorteAide.Caption                       := GetTexteLibelle('RULES-LAB_259');
     LabelNeedTheoXp.caption                    := GetTexteLibelle('RULES-LAB_131');
     LabelNeedRealXp.Caption                    := GetTexteLibelle('RULES-LAB_132');
     TabSheetLivre.Caption                      := GetTexteLibelle('RULES-LAB_128');
@@ -4687,7 +4672,7 @@ procedure TWinPersonnages.AjustePositionTables();
     ButtonSauvegarde.left     := PageExperience.left;
 
     TabEquipement.Left        := PageExperience.left;
-    TabEquipement.Top         := LabEquipement.top + LabEquipement.Height + 10;
+    TabEquipement.Top         := LabEquipement.top + LabEquipement.Height + 5 + LabPorteAide.Height + 5;
 
     ButtonArme.left           := TabEquipement.left + TabEquipement.Width + 10;
     ButtonArmure.left         := ButtonArme.left;
@@ -4706,11 +4691,9 @@ procedure TWinPersonnages.AjustePositionTables();
     ButtonFabrication.Top     := ButtonDelete.Top + ButtonDelete.Height + 10;
     ButtonSort.Top            := ButtonFabrication.Top + ButtonFabrication.Height + 10;
     ButtonEquipement.Top      := ButtonSort.Top + ButtonSort.Height + 10;
-    // ButtonPorte n'etait pas dans la cascade (oubli anterieur) - restait donc positionne
-    // par son seul Anchors=[akTop,akRight] natif, independant de TabEquipement, d'ou le
-    // decrochage signale par Nono le 12/09/2026. Meme colonne, a la suite de ButtonSort.
-    ButtonPorte.left          := ButtonArme.left;
-    ButtonPorte.Top           := ButtonEquipement.Top + ButtonEquipement.Height + 10;
+    // Texte d'aide : sous le titre LabEquipement, au-dessus du tableau (decale vers le bas).
+    LabPorteAide.Left         := LabEquipement.Left;
+    LabPorteAide.Top          := LabEquipement.Top + LabEquipement.Height + 5;
 
     ImageSheetTitle.Width     := ToggleBoxDroite.Left;
     ImageSheetPage.Width      := ToggleBoxDroite.Left;
@@ -4908,6 +4891,21 @@ procedure TWinPersonnages.AvertitSurcharge(IdAnimal: String);
   end;
 
 // Le clic droit ne deplace pas la ligne courante d'une grille : on la selectionne avant le menu.
+// Survol de la colonne Worn (8) : rappelle comment declarer un objet porte.
+procedure TWinPersonnages.TabEquipementMouseMove(Sender: TObject; Shift: TShiftState; X, Y: Integer);
+  var
+    Colonne, Ligne: Integer;
+    Aide:           String;
+  begin
+    TabEquipement.MouseToCell(X, Y, Colonne, Ligne);
+    if Colonne = 8 then Aide := GetTexteLibelle('RULES-LAB_259') else Aide := '';
+    if TabEquipement.Hint <> Aide then
+      begin
+        TabEquipement.Hint := Aide;
+        Application.CancelHint;
+      end;
+  end;
+
 procedure TWinPersonnages.TabEquipementMouseDown(Sender: TObject; Button: TMouseButton; Shift: TShiftState; X, Y: Integer);
   var
     Colonne, Ligne: Integer;
@@ -4930,6 +4928,12 @@ procedure TWinPersonnages.TabEquipementPopup(Sender: TObject);
     // ni un sort ni un animal (un animal ne se confie pas a un autre)
     if (Ligne < 1) or (TalentSort(TabEquipement.Cells[2, Ligne]).CodeTalent <> '') or LigneEstAnimal(Ligne) then exit;
     AttribueIdAnimaux;
+    // Un animal ne se porte pas sur soi : "Porte" est reserve aux autres objets (deja garanti plus haut)
+    Item         := TMenuItem.Create(MenuPop);
+    Item.Caption := GetTexteLibelle('RULES-LAB_180');
+    Item.Checked := TabEquipement.Cells[8, Ligne] <> '';
+    Item.OnClick := @MenuPorteClick;
+    MenuPop.Items.Add(Item);
     for Ind := 1 to TabEquipement.RowCount - 1 do
       if LigneEstAnimal(Ind) then
         begin
@@ -4962,6 +4966,20 @@ procedure TWinPersonnages.MenuConfierClick(Sender: TObject);
     AvertitSurcharge(Id);
   end;
 
+procedure TWinPersonnages.MenuPorteClick(Sender: TObject);
+  begin
+    if TabEquipement.Row < 1 then exit;
+    if TabEquipement.Cells[8, TabEquipement.Row] = '' then
+      begin
+        TabEquipement.Cells[8, TabEquipement.Row]  := 'X';
+        // porte sur soi : ne peut plus etre confie a un animal (carriedby l'emporte sur worn)
+        TabEquipement.Cells[11, TabEquipement.Row] := '';
+        RafraichitPorteurs;
+      end
+    else
+      TabEquipement.Cells[8, TabEquipement.Row] := '';
+  end;
+
 procedure TWinPersonnages.MenuReprendreClick(Sender: TObject);
   begin
     if TabEquipement.Row < 1 then exit;
@@ -4978,7 +4996,6 @@ procedure TWinPersonnages.TabEquipementSelectCell(Sender: TObject; aCol,
     // talent est un sort, ni fabrication ni suppression ne s'y appliquent.
     EstSort := (aRow > 0) and (TalentSort(TabEquipement.Cells[2, aRow]).CodeTalent <> '');
     ButtonFabrication.Enabled := not EstSort;
-    ButtonPorte.Enabled       := not EstSort;
     ButtonDelete.Enabled      := not EstSort;
   end;
 

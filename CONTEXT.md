@@ -10894,7 +10894,8 @@ pointer `carriedby` vers un identifiant de groupe.
 - **Étape 3 codée et compilée (20/09/2026), NON TESTÉE** : clic droit sur un objet = « Confier à <animal> (A1) » / « Reprendre » (menu créé en code, `TabEquipementPopup`), colonne visible 12 « Porte par », `AttribueIdAnimaux` sur la grille avant chaque copie vers `Personnage.Equipement`, avertissement de surcharge non bloquant (`AvertitSurcharge`), « Charge : X » dans la fiche animal (`AfficheFicheAnimal(PTrapping, Charge)`). Bug `TypeEquipAN` de la grille corrigé au passage. Libellés RULES-LAB_254 à _258.
 - **Étape 3 validée par Nono (20/09/2026).** **Étape 4 codée, compilée et VALIDÉE par Nono** (PDF Feldo) : la capacité des montures n'ajoute plus rien à l'Encombrement max ; un objet confié à un animal affiche son encombrement entre parenthèses, même à 0 (idée de Nono), et ne compte pas dans les totaux ; l'animal qui porte quelque chose indique « (Charge N/capacité) ».
 - Code mort des montures retiré (20/09/2026). Restes : le gabarit hors Feldo n'affiche pas les parenthèses pour armes/armures (seuls les totaux sont corrects) ; groupe partagé = chantier à part.
-- **Point de reprise** : test de l'étape 4 (PDF avec une armure dans la sacoche d'une monture : « (N) » dans la colonne Enc, total sans la monture).
+- **Bouton « Porté » remplacé (20/09/2026, compilé et VALIDÉ par Nono)** : `ButtonPorte` supprimé ; l'entrée « Porté » (cochée, `MenuPorteClick`, `RULES-LAB_180`) ouvre le clic droit de `TabEquipement`. Texte d'aide `LabPorteAide` (`RULES-LAB_259`) sous le titre `LabEquipement`, tableau décalé vers le bas ; même texte en bulle sur la colonne 8 (`TabEquipementMouseMove`). Les mentions de `ButtonPorte` plus haut (2.57, 2.64) sont historiques.
+- **Point de reprise** : chantier clos. Suites dans `A FAIRE.txt` : bloc monture et bloc Mutations sur le PDF Feldo (à concevoir).
 
 ---
 
