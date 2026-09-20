@@ -1308,7 +1308,7 @@ begin
   // Animaux, montures, vehicules et bateaux (theme RULES-LAB_195) : ligne a part
   NbVehicule := 0;
   for PTrapping in ListTrapping do
-    if PTrapping.Theme = ThemeAnimauxVehicules then
+    if EstThemeAnimauxVehicules(PTrapping.Theme) then
       Inc(NbVehicule);
   Ligne(3, GetTexteLibelle('RULES-LAB_202'), NbTrapping - NbVehicule);
   Ligne(4, GetTexteLibelle(ThemeAnimauxVehicules), NbVehicule);

@@ -15448,7 +15448,7 @@ Armour is generally damaged in one of two ways:
 </Trapping>
 <Trapping id="RULES-TRAP_103">
 <Description language="ENGLISH">"Cart"</Description>
-<Theme>"RULES-LAB_195"</Theme>
+<Theme>"RULES-LAB_262"</Theme>
 <Availability>"RULES-DISPO_COMMON"</Availability>
 <Price>"20CO"</Price>
 <Encumbrance>"0"</Encumbrance>
@@ -15456,7 +15456,7 @@ Armour is generally damaged in one of two ways:
 </Trapping>
 <Trapping id="RULES-TRAP_104">
 <Description language="ENGLISH">"Chicken"</Description>
-<Theme>"RULES-LAB_195"</Theme>
+<Theme>"RULES-LAB_260"</Theme>
 <Availability>"RULES-DISPO_COMMON"</Availability>
 <Price>"5SB"</Price>
 <Encumbrance>"1"</Encumbrance>
@@ -15464,7 +15464,7 @@ Armour is generally damaged in one of two ways:
 </Trapping>
 <Trapping id="RULES-TRAP_105">
 <Description language="ENGLISH">"Coach"</Description>
-<Theme>"RULES-LAB_195"</Theme>
+<Theme>"RULES-LAB_262"</Theme>
 <Availability>"RULES-DISPO_RARE"</Availability>
 <Price>"150CO"</Price>
 <Encumbrance>"0"</Encumbrance>
@@ -15472,7 +15472,7 @@ Armour is generally damaged in one of two ways:
 </Trapping>
 <Trapping id="RULES-TRAP_106">
 <Description language="ENGLISH">"Coracle"</Description>
-<Theme>"RULES-LAB_195"</Theme>
+<Theme>"RULES-LAB_261"</Theme>
 <Availability>"RULES-DISPO_LIMITED"</Availability>
 <Price>"2CO"</Price>
 <Encumbrance>"6"</Encumbrance>
@@ -15480,7 +15480,7 @@ Armour is generally damaged in one of two ways:
 </Trapping>
 <Trapping id="RULES-TRAP_107">
 <Description language="ENGLISH">"Destrier"</Description>
-<Theme>"RULES-LAB_195"</Theme>
+<Theme>"RULES-LAB_260"</Theme>
 <Availability>"RULES-DISPO_LIMITED"</Availability>
 <Price>"230CO"</Price>
 <Encumbrance>"0"</Encumbrance>
@@ -15488,14 +15488,14 @@ Armour is generally damaged in one of two ways:
 </Trapping>
 <Trapping id="RULES-TRAP_108">
 <Description language="ENGLISH">"Dog collar and lead"</Description>
-<Theme>"RULES-LAB_195"</Theme>
+<Theme>"RULES-LAB_260"</Theme>
 <Availability>"RULES-DISPO_COMMON"</Availability>
 <Price>"1PA 7SB"</Price>
 <Encumbrance>"0"</Encumbrance>
 </Trapping>
 <Trapping id="RULES-TRAP_109">
 <Description language="ENGLISH">"Draught Horse"</Description>
-<Theme>"RULES-LAB_195"</Theme>
+<Theme>"RULES-LAB_260"</Theme>
 <Availability>"RULES-DISPO_COMMON"</Availability>
 <Price>"4CO"</Price>
 <Encumbrance>"0"</Encumbrance>
@@ -15503,7 +15503,7 @@ Armour is generally damaged in one of two ways:
 </Trapping>
 <Trapping id="RULES-TRAP_110">
 <Description language="ENGLISH">"Homing Pigeons"</Description>
-<Theme>"RULES-LAB_195"</Theme>
+<Theme>"RULES-LAB_260"</Theme>
 <Availability>"RULES-DISPO_LIMITED"</Availability>
 <Price>"3PA"</Price>
 <Encumbrance>"1"</Encumbrance>
@@ -15511,7 +15511,7 @@ Armour is generally damaged in one of two ways:
 </Trapping>
 <Trapping id="RULES-TRAP_111">
 <Description language="ENGLISH">"Hunting Dog"</Description>
-<Theme>"RULES-LAB_195"</Theme>
+<Theme>"RULES-LAB_260"</Theme>
 <Availability>"RULES-DISPO_RARE"</Availability>
 <Price>"2CO"</Price>
 <Encumbrance>"0"</Encumbrance>
@@ -15519,7 +15519,7 @@ Armour is generally damaged in one of two ways:
 </Trapping>
 <Trapping id="RULES-TRAP_112">
 <Description language="ENGLISH">"Light Warhorse"</Description>
-<Theme>"RULES-LAB_195"</Theme>
+<Theme>"RULES-LAB_260"</Theme>
 <Availability>"RULES-DISPO_COMMON"</Availability>
 <Price>"70CO"</Price>
 <Encumbrance>"0"</Encumbrance>
@@ -15527,7 +15527,7 @@ Armour is generally damaged in one of two ways:
 </Trapping>
 <Trapping id="RULES-TRAP_113">
 <Description language="ENGLISH">"Monkey"</Description>
-<Theme>"RULES-LAB_195"</Theme>
+<Theme>"RULES-LAB_260"</Theme>
 <Availability>"RULES-DISPO_RARE"</Availability>
 <Price>"10CO"</Price>
 <Encumbrance>"2"</Encumbrance>
@@ -15535,7 +15535,7 @@ Armour is generally damaged in one of two ways:
 </Trapping>
 <Trapping id="RULES-TRAP_114">
 <Description language="ENGLISH">"Mule"</Description>
-<Theme>"RULES-LAB_195"</Theme>
+<Theme>"RULES-LAB_260"</Theme>
 <Availability>"RULES-DISPO_COMMON"</Availability>
 <Price>"5CO"</Price>
 <Encumbrance>"0"</Encumbrance>
@@ -15543,7 +15543,7 @@ Armour is generally damaged in one of two ways:
 </Trapping>
 <Trapping id="RULES-TRAP_115">
 <Description language="ENGLISH">"Pony"</Description>
-<Theme>"RULES-LAB_195"</Theme>
+<Theme>"RULES-LAB_260"</Theme>
 <Availability>"RULES-DISPO_COMMON"</Availability>
 <Price>"10CO"</Price>
 <Encumbrance>"0"</Encumbrance>
@@ -15551,7 +15551,7 @@ Armour is generally damaged in one of two ways:
 </Trapping>
 <Trapping id="RULES-TRAP_116">
 <Description language="ENGLISH">"Riding Horse"</Description>
-<Theme>"RULES-LAB_195"</Theme>
+<Theme>"RULES-LAB_260"</Theme>
 <Availability>"RULES-DISPO_COMMON"</Availability>
 <Price>"15CO"</Price>
 <Encumbrance>"0"</Encumbrance>
@@ -15559,7 +15559,7 @@ Armour is generally damaged in one of two ways:
 </Trapping>
 <Trapping id="RULES-TRAP_117">
 <Description language="ENGLISH">"River Barge"</Description>
-<Theme>"RULES-LAB_195"</Theme>
+<Theme>"RULES-LAB_261"</Theme>
 <Availability>"RULES-DISPO_RARE"</Availability>
 <Price>"225CO"</Price>
 <Encumbrance>"0"</Encumbrance>
@@ -15567,7 +15567,7 @@ Armour is generally damaged in one of two ways:
 </Trapping>
 <Trapping id="RULES-TRAP_118">
 <Description language="ENGLISH">"Row Boat"</Description>
-<Theme>"RULES-LAB_195"</Theme>
+<Theme>"RULES-LAB_261"</Theme>
 <Availability>"RULES-DISPO_LIMITED"</Availability>
 <Price>"6CO"</Price>
 <Encumbrance>"0"</Encumbrance>
@@ -15575,14 +15575,14 @@ Armour is generally damaged in one of two ways:
 </Trapping>
 <Trapping id="RULES-TRAP_119">
 <Description language="ENGLISH">"Saddle and Harness"</Description>
-<Theme>"RULES-LAB_195"</Theme>
+<Theme>"RULES-LAB_260"</Theme>
 <Availability>"RULES-DISPO_COMMON"</Availability>
 <Price>"6CO"</Price>
 <Encumbrance>"4"</Encumbrance>
 </Trapping>
 <Trapping id="RULES-TRAP_120">
 <Description language="ENGLISH">"Wagon"</Description>
-<Theme>"RULES-LAB_195"</Theme>
+<Theme>"RULES-LAB_262"</Theme>
 <Availability>"RULES-DISPO_COMMON"</Availability>
 <Price>"75CO"</Price>
 <Encumbrance>"0"</Encumbrance>
@@ -15590,7 +15590,7 @@ Armour is generally damaged in one of two ways:
 </Trapping>
 <Trapping id="RULES-TRAP_121">
 <Description language="ENGLISH">"Worms (6)"</Description>
-<Theme>"RULES-LAB_195"</Theme>
+<Theme>"RULES-LAB_260"</Theme>
 <Availability>"RULES-DISPO_COMMON"</Availability>
 <Price>"1SB"</Price>
 <Encumbrance>"0"</Encumbrance>

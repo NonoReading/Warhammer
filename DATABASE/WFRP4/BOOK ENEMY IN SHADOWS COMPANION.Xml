@@ -190,27 +190,27 @@ However, their differing visions of the Empire’s fate ensure that for all thei
 <DATA_TRAPPING>
 <Trapping id="ENEMY-TRAP_01">
 <Description language="ENGLISH">"Chicken"</Description>
-<Theme>"RULES-LAB_195"</Theme>
+<Theme>"RULES-LAB_260"</Theme>
 <Price>"5PA"</Price>
 <Availability>"RULES-DISPO_COMMON"</Availability>
 </Trapping>
 <Trapping id="ENEMY-TRAP_02">
 <Description language="ENGLISH">"Sheep"</Description>
-<Theme>"RULES-LAB_195"</Theme>
+<Theme>"RULES-LAB_260"</Theme>
 <Price>"3SB"</Price>
 <Carries>"2"</Carries>
 <Availability>"RULES-DISPO_COMMON"</Availability>
 </Trapping>
 <Trapping id="ENEMY-TRAP_03">
 <Description language="ENGLISH">"Pig"</Description>
-<Theme>"RULES-LAB_195"</Theme>
+<Theme>"RULES-LAB_260"</Theme>
 <Price>"4SB"</Price>
 <Carries>"3"</Carries>
 <Availability>"RULES-DISPO_COMMON"</Availability>
 </Trapping>
 <Trapping id="ENEMY-TRAP_04">
 <Description language="ENGLISH">"Dog"</Description>
-<Theme>"RULES-LAB_195"</Theme>
+<Theme>"RULES-LAB_260"</Theme>
 <Price>"2CO"</Price>
 <Carries>"8"</Carries>
 <AnimalProfile>"4 25 0 20 20 35 30 0 15 10 25 7"</AnimalProfile>
@@ -219,7 +219,7 @@ However, their differing visions of the Empire’s fate ensure that for all thei
 </Trapping>
 <Trapping id="ENEMY-TRAP_05">
 <Description language="ENGLISH">"Pony"</Description>
-<Theme>"RULES-LAB_195"</Theme>
+<Theme>"RULES-LAB_260"</Theme>
 <Price>"10CO"</Price>
 <Carries>"14"</Carries>
 <AnimalProfile>"4 25 0 30 45 20 30 0 10 10 10 12"</AnimalProfile>
@@ -228,7 +228,7 @@ However, their differing visions of the Empire’s fate ensure that for all thei
 </Trapping>
 <Trapping id="ENEMY-TRAP_06">
 <Description language="ENGLISH">"Donkey or Mule"</Description>
-<Theme>"RULES-LAB_195"</Theme>
+<Theme>"RULES-LAB_260"</Theme>
 <Price>"5CO"</Price>
 <Carries>"14"</Carries>
 <AnimalProfile>"4 25 0 30 45 20 30 0 10 10 10 12"</AnimalProfile>
@@ -237,7 +237,7 @@ However, their differing visions of the Empire’s fate ensure that for all thei
 </Trapping>
 <Trapping id="ENEMY-TRAP_07">
 <Description language="ENGLISH">"Draught Horse"</Description>
-<Theme>"RULES-LAB_195"</Theme>
+<Theme>"RULES-LAB_260"</Theme>
 <Price>"4CO"</Price>
 <Carries>"20"</Carries>
 <AnimalProfile>"5 25 0 45 45 17 25 0 10 10 20 26"</AnimalProfile>
@@ -246,7 +246,7 @@ However, their differing visions of the Empire’s fate ensure that for all thei
 </Trapping>
 <Trapping id="ENEMY-TRAP_08">
 <Description language="ENGLISH">"Heavy Draught Horse"</Description>
-<Theme>"RULES-LAB_195"</Theme>
+<Theme>"RULES-LAB_260"</Theme>
 <Price>"8CO"</Price>
 <Carries>"30"</Carries>
 <AnimalProfile>"4 25 0 50 50 15 20 0 10 10 10 32"</AnimalProfile>
@@ -255,7 +255,7 @@ However, their differing visions of the Empire’s fate ensure that for all thei
 </Trapping>
 <Trapping id="ENEMY-TRAP_09">
 <Description language="ENGLISH">"Ox"</Description>
-<Theme>"RULES-LAB_195"</Theme>
+<Theme>"RULES-LAB_260"</Theme>
 <Price>"15CO"</Price>
 <Carries>"30"</Carries>
 <AnimalProfile>"3 25 0 55 55 15 20 0 10 10 10 32"</AnimalProfile>
@@ -264,7 +264,7 @@ However, their differing visions of the Empire’s fate ensure that for all thei
 </Trapping>
 <Trapping id="ENEMY-TRAP_10">
 <Description language="ENGLISH">"Riding Horse (Palfrey)"</Description>
-<Theme>"RULES-LAB_195"</Theme>
+<Theme>"RULES-LAB_260"</Theme>
 <Price>"15CO"</Price>
 <Carries>"16"</Carries>
 <AnimalProfile>"7 25 0 30 45 20 30 0 10 10 20 24"</AnimalProfile>
@@ -273,7 +273,7 @@ However, their differing visions of the Empire’s fate ensure that for all thei
 </Trapping>
 <Trapping id="ENEMY-TRAP_11">
 <Description language="ENGLISH">"Light Warhorse (Hobby)"</Description>
-<Theme>"RULES-LAB_195"</Theme>
+<Theme>"RULES-LAB_260"</Theme>
 <Price>"70CO"</Price>
 <Carries>"18"</Carries>
 <AnimalProfile>"7 35 0 45 35 20 30 0 10 10 30 22"</AnimalProfile>
@@ -282,7 +282,7 @@ However, their differing visions of the Empire’s fate ensure that for all thei
 </Trapping>
 <Trapping id="ENEMY-TRAP_12">
 <Description language="ENGLISH">"Heavy Warhorse (Destrier)"</Description>
-<Theme>"RULES-LAB_195"</Theme>
+<Theme>"RULES-LAB_260"</Theme>
 <Price>"230CO"</Price>
 <Carries>"20"</Carries>
 <AnimalProfile>"4 35 0 50 50 20 20 0 10 10 30 32"</AnimalProfile>
@@ -292,7 +292,7 @@ However, their differing visions of the Empire’s fate ensure that for all thei
 <!-- Vehicles of the Empire (p.27). Motive Power : A = animaux, O = operateurs (chaise et litieres portees). Le livre ne donne pas de Strike. Le prix d un coach n a pas de plafond (note 4). -->
 <Trapping id="ENEMY-TRAP_13">
 <Description language="ENGLISH">"Cart"</Description>
-<Theme>"RULES-LAB_195"</Theme>
+<Theme>"RULES-LAB_262"</Theme>
 <Availability>"RULES-DISPO_COMMON"</Availability>
 <Price>"20CO"</Price>
 <Encumbrance>"10"</Encumbrance>
@@ -301,7 +301,7 @@ However, their differing visions of the Empire’s fate ensure that for all thei
 </Trapping>
 <Trapping id="ENEMY-TRAP_14">
 <Description language="ENGLISH">"Chair"</Description>
-<Theme>"RULES-LAB_195"</Theme>
+<Theme>"RULES-LAB_262"</Theme>
 <Availability>"RULES-DISPO_RARE"</Availability>
 <Price>"25CO"</Price>
 <Encumbrance>"5"</Encumbrance>
@@ -310,7 +310,7 @@ However, their differing visions of the Empire’s fate ensure that for all thei
 </Trapping>
 <Trapping id="ENEMY-TRAP_15">
 <Description language="ENGLISH">"Coach"</Description>
-<Theme>"RULES-LAB_195"</Theme>
+<Theme>"RULES-LAB_262"</Theme>
 <Availability>"RULES-DISPO_RARE"</Availability>
 <Price>"150CO"</Price>
 <Encumbrance>"100"</Encumbrance>
@@ -319,7 +319,7 @@ However, their differing visions of the Empire’s fate ensure that for all thei
 </Trapping>
 <Trapping id="ENEMY-TRAP_16">
 <Description language="ENGLISH">"Handcart"</Description>
-<Theme>"RULES-LAB_195"</Theme>
+<Theme>"RULES-LAB_262"</Theme>
 <Availability>"RULES-DISPO_COMMON"</Availability>
 <Price>"10CO"</Price>
 <Encumbrance>"5"</Encumbrance>
@@ -328,7 +328,7 @@ However, their differing visions of the Empire’s fate ensure that for all thei
 </Trapping>
 <Trapping id="ENEMY-TRAP_17">
 <Description language="ENGLISH">"Small Litter"</Description>
-<Theme>"RULES-LAB_195"</Theme>
+<Theme>"RULES-LAB_262"</Theme>
 <Availability>"RULES-DISPO_COMMON"</Availability>
 <Price>"30CO"</Price>
 <Encumbrance>"10"</Encumbrance>
@@ -337,7 +337,7 @@ However, their differing visions of the Empire’s fate ensure that for all thei
 </Trapping>
 <Trapping id="ENEMY-TRAP_18">
 <Description language="ENGLISH">"Large Litter"</Description>
-<Theme>"RULES-LAB_195"</Theme>
+<Theme>"RULES-LAB_262"</Theme>
 <Availability>"RULES-DISPO_EXOTIC"</Availability>
 <Price>"45CO"</Price>
 <Encumbrance>"20"</Encumbrance>
@@ -346,7 +346,7 @@ However, their differing visions of the Empire’s fate ensure that for all thei
 </Trapping>
 <Trapping id="ENEMY-TRAP_19">
 <Description language="ENGLISH">"Light Wagon"</Description>
-<Theme>"RULES-LAB_195"</Theme>
+<Theme>"RULES-LAB_262"</Theme>
 <Availability>"RULES-DISPO_COMMON"</Availability>
 <Price>"75CO"</Price>
 <Encumbrance>"30"</Encumbrance>
@@ -355,7 +355,7 @@ However, their differing visions of the Empire’s fate ensure that for all thei
 </Trapping>
 <Trapping id="ENEMY-TRAP_20">
 <Description language="ENGLISH">"Medium Wagon"</Description>
-<Theme>"RULES-LAB_195"</Theme>
+<Theme>"RULES-LAB_262"</Theme>
 <Availability>"RULES-DISPO_COMMON"</Availability>
 <Price>"100CO"</Price>
 <Encumbrance>"50"</Encumbrance>
@@ -364,7 +364,7 @@ However, their differing visions of the Empire’s fate ensure that for all thei
 </Trapping>
 <Trapping id="ENEMY-TRAP_21">
 <Description language="ENGLISH">"Heavy Wagon"</Description>
-<Theme>"RULES-LAB_195"</Theme>
+<Theme>"RULES-LAB_262"</Theme>
 <Availability>"RULES-DISPO_COMMON"</Availability>
 <Price>"125CO"</Price>
 <Encumbrance>"75"</Encumbrance>

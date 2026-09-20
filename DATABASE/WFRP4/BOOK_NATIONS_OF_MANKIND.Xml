@@ -13000,7 +13000,7 @@ Poison: Used to weaken and kill targets, anyone caught in the radius of this gre
 <DATA_TRAPPING>
 <Trapping id="NATIO-TRAP_01">
 <Description language="ENGLISH">"Bretonnian Destrier"</Description>
-<Theme>"RULES-LAB_195"</Theme>
+<Theme>"RULES-LAB_260"</Theme>
 <Price>"460CO"</Price>
 <Carries>"20"</Carries>
 <AnimalProfile>"7 45 0 50 50 20 20 0 10 10 30 28"</AnimalProfile>
@@ -13009,7 +13009,7 @@ Poison: Used to weaken and kill targets, anyone caught in the radius of this gre
 </Trapping>
 <Trapping id="NATIO-TRAP_02">
 <Description language="ENGLISH">"Kislev Light Warhorse"</Description>
-<Theme>"RULES-LAB_195"</Theme>
+<Theme>"RULES-LAB_260"</Theme>
 <Price>"210CO"</Price>
 <Carries>"18"</Carries>
 <AnimalProfile>"8 35 0 45 45 20 40 0 10 20 30 28"</AnimalProfile>
@@ -13018,7 +13018,7 @@ Poison: Used to weaken and kill targets, anyone caught in the radius of this gre
 </Trapping>
 <Trapping id="NATIO-TRAP_03">
 <Description language="ENGLISH">"Kislev Trained Bear"</Description>
-<Theme>"RULES-LAB_195"</Theme>
+<Theme>"RULES-LAB_260"</Theme>
 <Price>"40CO"</Price>
 <Carries>"16"</Carries>
 <AnimalProfile>"4 35 0 55 45 20 20 15 10 15 10 28"</AnimalProfile>
@@ -13027,7 +13027,7 @@ Poison: Used to weaken and kill targets, anyone caught in the radius of this gre
 </Trapping>
 <Trapping id="NATIO-TRAP_04">
 <Description language="ENGLISH">"Kislev Warbear"</Description>
-<Theme>"RULES-LAB_195"</Theme>
+<Theme>"RULES-LAB_260"</Theme>
 <Price>"360CO"</Price>
 <Carries>"22"</Carries>
 <AnimalProfile>"4 45 0 65 55 20 20 15 10 15 20 34"</AnimalProfile>
@@ -13036,7 +13036,7 @@ Poison: Used to weaken and kill targets, anyone caught in the radius of this gre
 </Trapping>
 <Trapping id="NATIO-TRAP_05">
 <Description language="ENGLISH">"Riding Camel"</Description>
-<Theme>"RULES-LAB_195"</Theme>
+<Theme>"RULES-LAB_260"</Theme>
 <Price>"15CO"</Price>
 <Carries>"20"</Carries>
 <AnimalProfile>"5 25 0 35 35 30 25 0 20 20 25 28"</AnimalProfile>
@@ -13045,7 +13045,7 @@ Poison: Used to weaken and kill targets, anyone caught in the radius of this gre
 </Trapping>
 <Trapping id="NATIO-TRAP_06">
 <Description language="ENGLISH">"War Camel"</Description>
-<Theme>"RULES-LAB_195"</Theme>
+<Theme>"RULES-LAB_260"</Theme>
 <Price>"80CO"</Price>
 <Carries>"24"</Carries>
 <AnimalProfile>"4 35 0 45 45 30 15 0 20 25 30 28"</AnimalProfile>
@@ -13054,7 +13054,7 @@ Poison: Used to weaken and kill targets, anyone caught in the radius of this gre
 </Trapping>
 <Trapping id="NATIO-TRAP_07">
 <Description language="ENGLISH">"War Elephant"</Description>
-<Theme>"RULES-LAB_195"</Theme>
+<Theme>"RULES-LAB_260"</Theme>
 <Price>"880CO"</Price>
 <Carries>"40"</Carries>
 <AnimalProfile>"7 45 0 50 65 30 25 0 20 30 30 80"</AnimalProfile>
@@ -13063,7 +13063,7 @@ Poison: Used to weaken and kill targets, anyone caught in the radius of this gre
 </Trapping>
 <Trapping id="NATIO-TRAP_08">
 <Description language="ENGLISH">"Norscan Mammoth"</Description>
-<Theme>"RULES-LAB_195"</Theme>
+<Theme>"RULES-LAB_260"</Theme>
 <Carries>"44"</Carries>
 <AnimalProfile>"5 45 0 50 75 30 25 0 15 40 0 92"</AnimalProfile>
 <AnimalTraits>"Armor 3, Horns (Tusks) +8, Night Vision, Size (Enormous), Skittish, Stride, Tough, Weapon +9"</AnimalTraits>
@@ -13072,7 +13072,7 @@ Poison: Used to weaken and kill targets, anyone caught in the radius of this gre
 <!-- Le livre (p.61) ne donne NI prix, NI capacite, NI disponibilite (oubli de l'editeur). VALEURS MAISON du 19/09/2026 (decision de Nono : prix eleve, comme toute monture) : 120CO, capacite 30 (celle du Ox, meme Endurance), Exotic comme les autres New Mounts. -->
 <Trapping id="NATIO-TRAP_09">
 <Description language="ENGLISH">"Riding Bull"</Description>
-<Theme>"RULES-LAB_195"</Theme>
+<Theme>"RULES-LAB_260"</Theme>
 <Price>"120CO"</Price>
 <Carries>"30"</Carries>
 <AnimalProfile>"6 40 0 55 55 20 25 0 10 30 10 36"</AnimalProfile>
@@ -13082,7 +13082,7 @@ Poison: Used to weaken and kill targets, anyone caught in the radius of this gre
 <!-- Meme oubli que le Riding Bull : valeurs maison 400CO (monture de guerre, entre le Kislev Light Warhorse et le Bretonnian Destrier), capacite 30, Exotic. -->
 <Trapping id="NATIO-TRAP_10">
 <Description language="ENGLISH">"Estalian War Bull"</Description>
-<Theme>"RULES-LAB_195"</Theme>
+<Theme>"RULES-LAB_260"</Theme>
 <Price>"400CO"</Price>
 <Carries>"30"</Carries>
 <AnimalProfile>"6 50 0 55 65 20 25 0 10 40 10 42"</AnimalProfile>

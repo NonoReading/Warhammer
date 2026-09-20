@@ -205,7 +205,7 @@
 <!-- Crew 2 ; M voile - ; M rames 3 (1) ; Manoeuvrabilite - ; Taille 12 ; Robustesse 30 ; Blessures 10 ; traits -. -->
 <Trapping id="SYLVA-TRAP_022">
 <Description language="ENGLISH">"Punt"</Description>
-<Theme>"RULES-LAB_195"</Theme>
+<Theme>"RULES-LAB_261"</Theme>
 <Price>"4CO"</Price>
 <Encumbrance>"0"</Encumbrance>
 <Carries>"40"</Carries>
@@ -214,7 +214,7 @@
 <!-- Crew 4 ; M voile 3 (3) ; M rames 3 (4) ; Manoeuvrabilite - ; Taille 25 ; Robustesse 45 ; Blessures 75 ; traits -. -->
 <Trapping id="SYLVA-TRAP_023">
 <Description language="ENGLISH">"Flat Bottomed Barge"</Description>
-<Theme>"RULES-LAB_195"</Theme>
+<Theme>"RULES-LAB_261"</Theme>
 <Price>"335CO"</Price>
 <Encumbrance>"0"</Encumbrance>
 <Carries>"400"</Carries>
@@ -223,7 +223,7 @@
 <!-- Crew 4 ; M voile 4 (3) ; M rames 4 (4) ; Manoeuvrabilite +2 SL ; Taille 30 ; Robustesse 45 ; Blessures 90 ; trait Smoothing. -->
 <Trapping id="SYLVA-TRAP_024">
 <Description language="ENGLISH">"Strigani Narrowboat"</Description>
-<Theme>"RULES-LAB_195"</Theme>
+<Theme>"RULES-LAB_261"</Theme>
 <Price>"825CO"</Price>
 <Encumbrance>"0"</Encumbrance>
 <Carries>"500"</Carries>

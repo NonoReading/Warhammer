@@ -404,6 +404,9 @@
 <Text name="RULES-LAB_257">"Load"</Text>
 <Text name="RULES-LAB_258">"Overloaded"</Text>
 <Text name="RULES-LAB_259">"Right-click: Worn, Entrust to, Take back"</Text>
+<Text name="RULES-LAB_260">"Mounts and animals"</Text>
+<Text name="RULES-LAB_261">"Boats"</Text>
+<Text name="RULES-LAB_262">"Vehicles"</Text>
 </Label>
 </DATA_LABEL>
 </DATA_BOOK>

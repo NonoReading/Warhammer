@@ -2848,7 +2848,7 @@ The spell creates an area of Gentle Rotation, but SL can be spent on making the 
 <!-- Example Boats (p.93). Le livre ne donne ni encombrement ni disponibilite : Enc 0, disponibilite absente. Prix en GC = CO. Traits et ameliorations dans AnimalTraits. -->
 <Trapping id="SEAOF-TRAP_009">
 <Description language="ENGLISH">"Coracle"</Description>
-<Theme>"RULES-LAB_195"</Theme>
+<Theme>"RULES-LAB_261"</Theme>
 <Price>"2CO"</Price>
 <Encumbrance>"0"</Encumbrance>
 <Carries>"5"</Carries>
@@ -2856,7 +2856,7 @@ The spell creates an area of Gentle Rotation, but SL can be spent on making the 
 </Trapping>
 <Trapping id="SEAOF-TRAP_010">
 <Description language="ENGLISH">"Rowboat"</Description>
-<Theme>"RULES-LAB_195"</Theme>
+<Theme>"RULES-LAB_261"</Theme>
 <Price>"6CO"</Price>
 <Encumbrance>"0"</Encumbrance>
 <Carries>"60"</Carries>
@@ -2864,7 +2864,7 @@ The spell creates an area of Gentle Rotation, but SL can be spent on making the 
 </Trapping>
 <Trapping id="SEAOF-TRAP_011">
 <Description language="ENGLISH">"Skiff"</Description>
-<Theme>"RULES-LAB_195"</Theme>
+<Theme>"RULES-LAB_261"</Theme>
 <Price>"45CO"</Price>
 <Encumbrance>"0"</Encumbrance>
 <Carries>"120"</Carries>
@@ -2872,7 +2872,7 @@ The spell creates an area of Gentle Rotation, but SL can be spent on making the 
 </Trapping>
 <Trapping id="SEAOF-TRAP_012">
 <Description language="ENGLISH">"Barge"</Description>
-<Theme>"RULES-LAB_195"</Theme>
+<Theme>"RULES-LAB_261"</Theme>
 <Price>"225CO"</Price>
 <Encumbrance>"0"</Encumbrance>
 <Carries>"300"</Carries>
@@ -2880,7 +2880,7 @@ The spell creates an area of Gentle Rotation, but SL can be spent on making the 
 </Trapping>
 <Trapping id="SEAOF-TRAP_013">
 <Description language="ENGLISH">"Large Barge"</Description>
-<Theme>"RULES-LAB_195"</Theme>
+<Theme>"RULES-LAB_261"</Theme>
 <Price>"445CO"</Price>
 <Encumbrance>"0"</Encumbrance>
 <Carries>"500"</Carries>
@@ -2888,7 +2888,7 @@ The spell creates an area of Gentle Rotation, but SL can be spent on making the 
 </Trapping>
 <Trapping id="SEAOF-TRAP_014">
 <Description language="ENGLISH">"Patrol Boat"</Description>
-<Theme>"RULES-LAB_195"</Theme>
+<Theme>"RULES-LAB_261"</Theme>
 <Price>"655CO"</Price>
 <Encumbrance>"0"</Encumbrance>
 <Carries>"80"</Carries>
@@ -2897,7 +2897,7 @@ The spell creates an area of Gentle Rotation, but SL can be spent on making the 
 </Trapping>
 <Trapping id="SEAOF-TRAP_015">
 <Description language="ENGLISH">"Knarr"</Description>
-<Theme>"RULES-LAB_195"</Theme>
+<Theme>"RULES-LAB_261"</Theme>
 <Price>"60CO"</Price>
 <Encumbrance>"0"</Encumbrance>
 <Carries>"150"</Carries>
@@ -2906,7 +2906,7 @@ The spell creates an area of Gentle Rotation, but SL can be spent on making the 
 </Trapping>
 <Trapping id="SEAOF-TRAP_016">
 <Description language="ENGLISH">"Longship"</Description>
-<Theme>"RULES-LAB_195"</Theme>
+<Theme>"RULES-LAB_261"</Theme>
 <Price>"250CO"</Price>
 <Encumbrance>"0"</Encumbrance>
 <Carries>"100"</Carries>
@@ -2915,7 +2915,7 @@ The spell creates an area of Gentle Rotation, but SL can be spent on making the 
 </Trapping>
 <Trapping id="SEAOF-TRAP_017">
 <Description language="ENGLISH">"Cog"</Description>
-<Theme>"RULES-LAB_195"</Theme>
+<Theme>"RULES-LAB_261"</Theme>
 <Price>"300CO"</Price>
 <Encumbrance>"0"</Encumbrance>
 <Carries>"300"</Carries>
@@ -2924,7 +2924,7 @@ The spell creates an area of Gentle Rotation, but SL can be spent on making the 
 </Trapping>
 <Trapping id="SEAOF-TRAP_018">
 <Description language="ENGLISH">"Carrack"</Description>
-<Theme>"RULES-LAB_195"</Theme>
+<Theme>"RULES-LAB_261"</Theme>
 <Price>"550CO"</Price>
 <Encumbrance>"0"</Encumbrance>
 <Carries>"600"</Carries>
@@ -2933,7 +2933,7 @@ The spell creates an area of Gentle Rotation, but SL can be spent on making the 
 </Trapping>
 <Trapping id="SEAOF-TRAP_019">
 <Description language="ENGLISH">"Wargalley"</Description>
-<Theme>"RULES-LAB_195"</Theme>
+<Theme>"RULES-LAB_261"</Theme>
 <Price>"600CO"</Price>
 <Encumbrance>"0"</Encumbrance>
 <Carries>"150"</Carries>
@@ -2942,7 +2942,7 @@ The spell creates an area of Gentle Rotation, but SL can be spent on making the 
 </Trapping>
 <Trapping id="SEAOF-TRAP_020">
 <Description language="ENGLISH">"Wolfship"</Description>
-<Theme>"RULES-LAB_195"</Theme>
+<Theme>"RULES-LAB_261"</Theme>
 <Price>"1200CO"</Price>
 <Encumbrance>"0"</Encumbrance>
 <Carries>"500"</Carries>
@@ -2951,7 +2951,7 @@ The spell creates an area of Gentle Rotation, but SL can be spent on making the 
 </Trapping>
 <Trapping id="SEAOF-TRAP_021">
 <Description language="ENGLISH">"Greatship"</Description>
-<Theme>"RULES-LAB_195"</Theme>
+<Theme>"RULES-LAB_261"</Theme>
 <Price>"3500CO"</Price>
 <Encumbrance>"0"</Encumbrance>
 <Carries>"1400"</Carries>
@@ -2960,7 +2960,7 @@ The spell creates an area of Gentle Rotation, but SL can be spent on making the 
 </Trapping>
 <Trapping id="SEAOF-TRAP_022">
 <Description language="ENGLISH">"Bretonnian Galleon"</Description>
-<Theme>"RULES-LAB_195"</Theme>
+<Theme>"RULES-LAB_261"</Theme>
 <Price>"2500CO"</Price>
 <Encumbrance>"0"</Encumbrance>
 <Carries>"600"</Carries>
@@ -2969,7 +2969,7 @@ The spell creates an area of Gentle Rotation, but SL can be spent on making the 
 </Trapping>
 <Trapping id="SEAOF-TRAP_023">
 <Description language="ENGLISH">"Tilean Caravel"</Description>
-<Theme>"RULES-LAB_195"</Theme>
+<Theme>"RULES-LAB_261"</Theme>
 <Price>"550CO"</Price>
 <Encumbrance>"0"</Encumbrance>
 <Carries>"650"</Carries>
@@ -2978,7 +2978,7 @@ The spell creates an area of Gentle Rotation, but SL can be spent on making the 
 </Trapping>
 <Trapping id="SEAOF-TRAP_024">
 <Description language="ENGLISH">"Arabyan Xebec"</Description>
-<Theme>"RULES-LAB_195"</Theme>
+<Theme>"RULES-LAB_261"</Theme>
 <Price>"500CO"</Price>
 <Encumbrance>"0"</Encumbrance>
 <Carries>"400"</Carries>
@@ -2987,7 +2987,7 @@ The spell creates an area of Gentle Rotation, but SL can be spent on making the 
 </Trapping>
 <Trapping id="SEAOF-TRAP_025">
 <Description language="ENGLISH">"Indic Dhow"</Description>
-<Theme>"RULES-LAB_195"</Theme>
+<Theme>"RULES-LAB_261"</Theme>
 <Price>"400CO"</Price>
 <Encumbrance>"0"</Encumbrance>
 <Carries>"300"</Carries>
@@ -2995,7 +2995,7 @@ The spell creates an area of Gentle Rotation, but SL can be spent on making the 
 </Trapping>
 <Trapping id="SEAOF-TRAP_026">
 <Description language="ENGLISH">"Cathayan Gem Ship"</Description>
-<Theme>"RULES-LAB_195"</Theme>
+<Theme>"RULES-LAB_261"</Theme>
 <Price>"10000CO"</Price>
 <Encumbrance>"0"</Encumbrance>
 <Carries>"4000"</Carries>
@@ -3004,7 +3004,7 @@ The spell creates an area of Gentle Rotation, but SL can be spent on making the 
 <!-- Grund A Dum (p.46), navire de guerre de Skaldor Lotharksson, pas a vendre : ni prix ni disponibilite. Armement : Ballista a la proue (Norse Dwarf Bolts, vers l avant) et huit Medium Cannon sur le pont (quatre a babord, quatre a tribord). -->
 <Trapping id="SEAOF-TRAP_027">
 <Description language="ENGLISH">"Grund A Dum"</Description>
-<Theme>"RULES-LAB_195"</Theme>
+<Theme>"RULES-LAB_261"</Theme>
 <Encumbrance>"0"</Encumbrance>
 <Carries>"500"</Carries>
 <BoatProfile>"50;10 (25);6 (10);-;50;65;200"</BoatProfile>

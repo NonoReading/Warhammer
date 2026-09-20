@@ -63,6 +63,12 @@ type
 const
   // theme des animaux, montures, vehicules et bateaux (RULES-LAB_195, "Animals and Vehicles")
   ThemeAnimauxVehicules = 'RULES-LAB_195';
+  // ...scindes en trois themes pour la lisibilite : montures et animaux, bateaux, vehicules
+  ThemeMontures  = 'RULES-LAB_260';
+  ThemeBateaux   = 'RULES-LAB_261';
+  ThemeVehicules = 'RULES-LAB_262';
+
+function EstThemeAnimauxVehicules(const Theme: String): Boolean;
 
 var
   WinEquipements:  TWinEquipements;
@@ -71,6 +77,12 @@ var
 implementation
 
 {$R *.lfm}
+
+function EstThemeAnimauxVehicules(const Theme: String): Boolean;
+begin
+  Result := (Theme = ThemeAnimauxVehicules) or (Theme = ThemeMontures)
+            or (Theme = ThemeBateaux) or (Theme = ThemeVehicules);
+end;
 
 { TWinEquipements }
 
@@ -151,8 +163,8 @@ end;
 function TWinEquipements.Retenu(PTrapping: StructureTrapping): Boolean;
 begin
   case Mode of
-    meHorsVehicules: Result := PTrapping.Theme <> ThemeAnimauxVehicules;
-    meVehicules:     Result := PTrapping.Theme = ThemeAnimauxVehicules;
+    meHorsVehicules: Result := not EstThemeAnimauxVehicules(PTrapping.Theme);
+    meVehicules:     Result := EstThemeAnimauxVehicules(PTrapping.Theme);
   else
     Result := True;
   end;
