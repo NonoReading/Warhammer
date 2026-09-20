@@ -10,7 +10,7 @@ uses
   ChargeRaceMetier, ChargeMetierNiveau, ChargeMetier, ChargeConstantes,
   ChargeMetierAttribut, ChargeAttribut, ChargeMetierCompetence,
   ChargeCompetence, ChargeTalent, ChargeMetierTalent, ChargeMetierEquipement,
-  ChargeArme, ChargeArmure, PdfPersonnage,
+  ChargeArme, ChargeArmure, ChargeTrapping, PdfPersonnage,
   ChargeTexte, UnitCalcul, PdfUtils;
 
 function PdfPositionFeuille(Base:Integer; NbLigne:Integer; NbDetail:Integer): Real;
@@ -103,6 +103,49 @@ begin
 
 end;
 
+// Adapting Careers : lignes du bas du pave de droite, de haut en bas (titre, Standing, une ligne
+// par substitution). Meme resolution de libelles que WinMetier.
+Procedure PdfLignesAdaptation(MetierEnCours: String; Lignes: TStringList);
+  function LibelleElement(Nature, Code: String): String;
+    begin
+      if Code = '' then
+        Exit('-');
+      if Nature = ConstXmlTalent then
+        Result := ChercheTalent(Code).Libelle
+      else if Nature = ConstXmlTrapping then
+        begin
+          Result := ChercheArme(Code).Libelle;
+          if Result = '' then
+            Result := ChercheArmure(Code).Libelle;
+          if Result = '' then
+            Result := ChercheTrapping(Code).Libelle;
+        end
+      else
+        Result := ChercheCompetence(Code).Libelle;
+      if Result = '' then
+        Result := Code;
+    end;
+Var
+  PAdapt: StructureCareerAdaptation;
+  PLigne: StructureCareerAdaptationLigne;
+  Titre:  String;
+Begin
+  for PAdapt in ListCareerAdaptation do
+    if CompareRechercheValeur(PAdapt.CodeMetier, MetierEnCours) then
+      begin
+        Titre := PAdapt.Libelle;
+        if PAdapt.Facultative then
+          Titre := Titre + ' *';
+        Lignes.Add(Titre);
+        if PAdapt.Standing <> 0 then
+          Lignes.Add('¤Standing +' + IntToStr(PAdapt.Standing));
+        for PLigne in ListCareerAdaptationLigne do
+          if PLigne.CodeAdaptation = PAdapt.CodeAdaptation then
+            Lignes.Add('¤' + IntToStr(PLigne.Niveau) + '. ' + LibelleElement(PLigne.Nature, PLigne.Retire)
+              + ' -> ' + LibelleElement(PLigne.Nature, PLigne.Ajoute));
+      end;
+End;
+
 Procedure PdfMetierPage(PDFDoc: TPDFDocument; PDFPage: TPDFPage; MetierEnCours: String);
 var
   PdfImgMetier:       Integer;
@@ -121,6 +164,7 @@ var
   PMetierEquipement:  StructureMetierEquipement;
   PArme:              StructureArme;
   PArmure:            StructureArmure;
+  PTrapping:          StructureTrapping;
   PAttribut:          StructureAttribut;
   PMetierAttribut:    StructureMetierAttribut;
   ListEspece:         String;
@@ -165,6 +209,8 @@ var
   AddImg:             Boolean = true;
   Qualite:            string;
   Equipement:         String;
+  LibDivers:          String;
+  LignesAdapt:        TStringList;
 begin
   PMetier := chercheMetier(MetierEnCours);
   // Premier et dernier niveau de CE metier. Une carriere avancee - Smith-priest of Vaul,
@@ -225,7 +271,7 @@ begin
         break;
       end;
 
-  if (AddImg) then
+  if (AddImg) and FileExists(CheminClass) then
       begin
         PdfImgClasse  := PdfDoc.Images.AddFromFile(CheminClass,false);
 
@@ -259,9 +305,12 @@ begin
 
   // Image Classe
   Path              := CheminClass;
-  GetImageSize(Path, IWidth, IHeight);
-  RedimensionneImage(IWidth, IHeight, 10, 10, CWidth, cHeight);
-  PdfPage.DrawImage(15, 275, CWidth, CHeight, PdfImgClasse);
+  if FileExists(Path) then
+    begin
+      GetImageSize(Path, IWidth, IHeight);
+      RedimensionneImage(IWidth, IHeight, 10, 10, CWidth, cHeight);
+      PdfPage.DrawImage(15, 275, CWidth, CHeight, PdfImgClasse);
+    end;
 
   // texte
   PdfTaillePolice(PdfPage, PdfFontBold, ConstPoliceCarlson+ConstPoliceGras, 24);
@@ -505,7 +554,13 @@ begin
                         else if LigneType = TypeEquipDI then
                           begin
                             Inc(IndDetail);
-                            PdfEcrit(PdfPage,DebutFeuille + DecDetail + DebutDetail, DebutFeuille + DecDetail + 110, PdfPositionFeuille(DebutTexte,NbLigne,IndDetail+NbDetail), Decalage+' '+Equipement+Qualite,MinPolice);
+                            // Un code Divers peut etre un Trapping catalogue (RULES-TRAP_xxx) : on affiche son libelle.
+                            PTrapping := ChercheTrapping(Equipement);
+                            if PTrapping.CodeTrapping <> '' then
+                              LibDivers := PTrapping.Libelle
+                            else
+                              LibDivers := Equipement;
+                            PdfEcrit(PdfPage,DebutFeuille + DecDetail + DebutDetail, DebutFeuille + DecDetail + 110, PdfPositionFeuille(DebutTexte,NbLigne,IndDetail+NbDetail), Decalage+' '+LibDivers+Qualite,MinPolice);
                           end;
                       end;
                     StringEquip.free;
@@ -524,11 +579,19 @@ begin
   If TotalEquip > 0 then
     TotalEquip := TotalEquip + 1;
   Path              := GetCurrentDir+ConstCheminPdfMetierAdvance;
-  PdfPage.DrawImage(DebutImgMetier-2, 15, 90, (TotalEquip + TotalTalent + 2) * 4, PdfImgFeuille);
+  // Adapting Careers : en bas du pave de droite (les lignes montent depuis y=20)
+  LignesAdapt := TStringList.Create;
+  PdfLignesAdaptation(MetierEnCours, LignesAdapt);
+  PdfPage.DrawImage(DebutImgMetier-2, 15, 90, (TotalEquip + TotalTalent + 2 + LignesAdapt.Count) * 4, PdfImgFeuille);
 
   // information complémentaires
+    // Adaptations, tout en bas
+    PdfPage.SetColor(clBlack,false);
+    for Ind := 0 to LignesAdapt.Count - 1 do
+      PdfEcrit(PdfPage,DebutImgMetier+2, MaxTailleDetail, 20+(LignesAdapt.Count-1-Ind)*4, LignesAdapt[Ind],MinPolice);
     // Talent
-    NbDetail := 0;
+    NbDetail := LignesAdapt.Count;
+    LignesAdapt.Free;
     For Ind := ListMetierTalent.count -1 downto 0 do
       begin
         PMetierTalent := ListMetierTalent[Ind];
@@ -600,10 +663,14 @@ begin
 
   // image métier
   Path              := CheminMetierImage(MetierEnCours);
-  PdfImgMetier      := PdfDoc.Images.AddFromFile(Path,false);
-  GetImageSize(Path, IWidth, IHeight);
-  RedimensionneImage(IWidth, IHeight, 95, Trunc(finAttribut) - 30 -(NbDetail*4), CWidth, cHeight);
-  PdfPage.DrawImage(DebutImgMetier-2, FinAttribut - cHeight - 5, cWidth, cHeight, PdfImgMetier);
+  // Un metier sans image (fichier absent) ne doit pas faire planter le PDF.
+  if FileExists(Path) then
+    begin
+      PdfImgMetier      := PdfDoc.Images.AddFromFile(Path,false);
+      GetImageSize(Path, IWidth, IHeight);
+      RedimensionneImage(IWidth, IHeight, 95, Trunc(finAttribut) - 30 -(NbDetail*4), CWidth, cHeight);
+      PdfPage.DrawImage(DebutImgMetier-2, FinAttribut - cHeight - 5, cWidth, cHeight, PdfImgMetier);
+    end;
 
 end;
 

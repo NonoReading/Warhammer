@@ -5884,3 +5884,7 @@ Fichiers modifies : chargemetier.pas, pdfpersonnage.pas, CONTEXT.md, A FAIRE.txt
 20/09/2026 - HIGH ELF PLAYER S GUIDE : ADAPTING CAREERS, AFFICHAGE (COLONNE DE NIVEAU, CREATION, WINMETIER) - VALIDE PAR NONO
 Colonne de niveau des talents : le code de carriere passe par AdapterElement avant comparaison (Artisan Caledor : Etiquette Noble niveau 2). Tableau des competences de niveau 1 de la creation adapte (wincreation.pas ; aucun cas de donnees a ce jour, verifie sur Caledor Cavalryman). WinMetier : une branche par adaptation applicable avec le detail des substitutions, libelles d armes/armures/objets resolus (ChargeAdaptationMetier). Decision Nono : carriere de base + note, pas de selecteur d ethnie. Reste : PDF de carriere.
 Fichiers modifies : winpersonnage.pas, wincreation.pas, winmetier.pas, CONTEXT.md, A FAIRE.txt, Log.txt.
+
+20/09/2026 - HIGH ELF PLAYER S GUIDE : ADAPTING CAREERS, PDF DE CARRIERE - VALIDE PAR NONO
+pdfmetier.pas : PdfLignesAdaptation ajoute en bas du pave de droite un bloc par adaptation (titre, Standing, substitutions retire -> ajoute), talents et equipement decales vers le haut. Les codes Divers (RULES-TRAP_116, _119) sont resolus en libelle par ChercheTrapping. Gardes FileExists sur l image de metier et l image de classe. Le crash sur chemin d image a disparu de lui-meme (cause non identifiee).
+Fichiers modifies : pdfmetier.pas, CONTEXT.md, A FAIRE.txt, Log.txt.
