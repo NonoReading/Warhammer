@@ -5843,3 +5843,7 @@ Fichiers modifies : CONTEXT.md, A FAIRE.txt, Log.txt.
 20/09/2026 - SEA WARDENS OF COTHIQUE : BLADE OF DARTING STEEL ET BOW OF ANIRAIN - VALIDE PAR NONO
 COTHI-COMB_ESCR_01 (p.45) : Melee (Fencing) retenu faute d indication du livre, +SB+4, Average, Enc 1, Fast et Precise, 1 main. COTHI-PROJ_ARC_01 : Ranged (Bow), +SB+5, portee 150, Enc 1, Damaging et Precise, 2 mains comme l Elf Bow. Unique, sans prix ; Durable 3 et Fine 3 = fabrication, non saisis.
 Fichiers modifies : BOOK_SEA_WARDENS_OF_COTHIQUE.Xml, CONTEXT.md, A FAIRE.txt, Log.txt.
+
+20/09/2026 - SEA WARDENS OF COTHIQUE : ELVEN SAILS ET OUTRIGGER - VALIDE PAR NONO
+COTHI-TRAP_14 a _18 (p.63) : une entree par tranche de taille de bateau (decision Nono), Elven Sails 20CO/10 Enc et 120CO/60 Enc, Outrigger 2CO/15, 200CO/150 et 600CO/350, theme Miscellaneous Trappings, sans disponibilite. Effets (+1 M ; +25% Carries) non modelises, en commentaire XML. Constate : les ameliorations de bateau de Sea of Claws (Anchor, Figurehead, Ram...) n existent pas non plus au catalogue.
+Fichiers modifies : BOOK_SEA_WARDENS_OF_COTHIQUE.Xml, CONTEXT.md, A FAIRE.txt, Log.txt.

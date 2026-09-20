@@ -175,5 +175,36 @@
 <Carries>"16"</Carries>
 <VehicleProfile>"2 A;35;10;M/2"</VehicleProfile>
 </Trapping>
+<!-- Ameliorations de bateau du chantier naval Silverwave (p.63). Prix et poids dependent de la taille du bateau : une entree par tranche (decision Nono 20/09/2026), theme Miscellaneous Trappings (RULES-LAB_196), pas de disponibilite (le livre n en donne pas). Effets non modelises : Elven Sails = +1 M au bateau equipe (les navires du High Elf Players Guide en ont d office) ; Outrigger = +25% a la limite Carries du bateau. -->
+<Trapping id="COTHI-TRAP_14">
+<Description language="ENGLISH">"Elven Sails (Tiny to Average boats)"</Description>
+<Theme>"RULES-LAB_196"</Theme>
+<Price>"20CO"</Price>
+<Encumbrance>"10"</Encumbrance>
+</Trapping>
+<Trapping id="COTHI-TRAP_15">
+<Description language="ENGLISH">"Elven Sails (bigger boats)"</Description>
+<Theme>"RULES-LAB_196"</Theme>
+<Price>"120CO"</Price>
+<Encumbrance>"60"</Encumbrance>
+</Trapping>
+<Trapping id="COTHI-TRAP_16">
+<Description language="ENGLISH">"Outrigger (Tiny to Little boats)"</Description>
+<Theme>"RULES-LAB_196"</Theme>
+<Price>"2CO"</Price>
+<Encumbrance>"15"</Encumbrance>
+</Trapping>
+<Trapping id="COTHI-TRAP_17">
+<Description language="ENGLISH">"Outrigger (Average to Large boats)"</Description>
+<Theme>"RULES-LAB_196"</Theme>
+<Price>"200CO"</Price>
+<Encumbrance>"150"</Encumbrance>
+</Trapping>
+<Trapping id="COTHI-TRAP_18">
+<Description language="ENGLISH">"Outrigger (Enormous to Monstrous boats)"</Description>
+<Theme>"RULES-LAB_196"</Theme>
+<Price>"600CO"</Price>
+<Encumbrance>"350"</Encumbrance>
+</Trapping>
 </DATA_TRAPPING>
 </DATA_BOOK>
