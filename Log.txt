@@ -5827,3 +5827,7 @@ Fichiers modifies : A FAIRE.txt, Log.txt.
 20/09/2026 - SEA WARDENS OF COTHIQUE : 6 BETES ET RENDING STARS - VALIDE PAR NONO
 BOOK_SEA_WARDENS_OF_COTHIQUE.Xml (COMPLETE reste 0) : White Lion, Great Eagle, Kraken, Flamespyre Phoenix, Frostheart Phoenix (pp.81-84) et Swiftfeather Roc (p.47) en montures/animaux (COTHI-TRAP_06 a _11, sans Price ni Carries : le livre n en donne pas), Rending Stars (p.75, COTHI-PROJ_LANC_01, 15PA, SB+1, portee SB x 4, Undamaging). Decision Nono : toutes gardees, meme le Kraken. Non saisis : traits optionnels, effets des phoenix, Skycutter/Tidecutter, objets du Shadowblade, Gifts of Khaine (regles de MJ).
 Fichiers modifies : BOOK_SEA_WARDENS_OF_COTHIQUE.Xml, CONTEXT.md, A FAIRE.txt, Log.txt.
+
+20/09/2026 - SEA WARDENS OF COTHIQUE : SKYCUTTER ET TIDECUTTER - VALIDE PAR NONO
+COTHI-TRAP_12 (Skycutter, 500CO, minimum du livre) et COTHI-TRAP_13 (Tidecutter, 40CO) : comptent comme des Light Chariots (p.79), donc profil 2 A;35;10;M/2, Enc 10, Carries 16. Exotic retenu (choix, le livre ne donne pas de disponibilite). Vol et navigation non modelises (regles de conduite).
+Fichiers modifies : BOOK_SEA_WARDENS_OF_COTHIQUE.Xml, CONTEXT.md, A FAIRE.txt, Log.txt.

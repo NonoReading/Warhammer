@@ -120,5 +120,24 @@
 <AnimalTraits>"Bestial, Bite +6, Flight 100, Night Vision, Size (Large), Weapon (Talons) +8, Acute Sense (Vision)"</AnimalTraits>
 <Availability>"RULES-DISPO_EXOTIC"</Availability>
 </Trapping>
+<!-- Skycutter et Tidecutter (p.79) : comptent comme des Light Chariots, donc profil, Enc et Carries du Light Chariot. Tidecutter 40 CG ; Skycutter 500 CG minimum (bien militaire enchante, rare : Exotic retenu comme les chariots). Le vol (Skycutter, tire par un Swiftfeather Roc) et la navigation (Tidecutter, tire par un poisson geant) ne sont pas modelises. -->
+<Trapping id="COTHI-TRAP_12">
+<Description language="ENGLISH">"Skycutter"</Description>
+<Theme>"RULES-LAB_262"</Theme>
+<Availability>"RULES-DISPO_EXOTIC"</Availability>
+<Price>"500CO"</Price>
+<Encumbrance>"10"</Encumbrance>
+<Carries>"16"</Carries>
+<VehicleProfile>"2 A;35;10;M/2"</VehicleProfile>
+</Trapping>
+<Trapping id="COTHI-TRAP_13">
+<Description language="ENGLISH">"Tidecutter"</Description>
+<Theme>"RULES-LAB_262"</Theme>
+<Availability>"RULES-DISPO_EXOTIC"</Availability>
+<Price>"40CO"</Price>
+<Encumbrance>"10"</Encumbrance>
+<Carries>"16"</Carries>
+<VehicleProfile>"2 A;35;10;M/2"</VehicleProfile>
+</Trapping>
 </DATA_TRAPPING>
 </DATA_BOOK>
