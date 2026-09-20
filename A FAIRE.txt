@@ -244,7 +244,6 @@ utilisee, pas touchee. Si un jour ce talent est lui aussi generalise en <Effet>,
 meme moment que TalentHaineSacree ne reste pas un cinquieme "presque mort" oublie.
 
 [TRANCHE 12/09/2026] Fine/Durable/Shoddy/Ugly restent narratifs (rien a calculer, meme dans la colonne "Avec equipement" du Feldo). Ne plus le ressortir en anomalie.
-ACCESSOIRES NATIONS OF MANKIND : Barrel Extension et Telescopic Sight faits et valides (19/09). Bayonet FAIT et valide (20/09/2026, ligne Spear en plus sur le PDF). RESTE : l affichage de la portee dans WinPersonnage.
 
 WINFABRICATION NE FILTRE PAS PAR NATURE D OBJET. Rien n empeche de monter une baionnette sur
 une hache ni de poser Durable sur une fleche : la fenetre affiche toute la liste sur n importe

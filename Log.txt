@@ -5789,3 +5789,7 @@ Fichiers modifies : pdfpersonnage.pas, Log.txt.
 20/09/2026 - MENU PRINCIPAL : LE BOUTON PDF SUIT LE PARAMETRAGE FELDO DU PERSONNAGE - COMPILE ET VALIDE PAR NONO
 warhammersource.pas, TMenu.ButtonPdfClick : si la fiche porte l option PdfFeldo2P, appelle PdfPersonnageCreationFeldo2P, sinon PdfPersonnageCreation. Meme test que ButtonPdfClick de WinPersonnage.
 Fichiers modifies : warhammersource.pas, Log.txt.
+
+20/09/2026 - ACCESSOIRES D ARME : AFFICHAGE DE LA PORTEE DANS WINPERSONNAGE ABANDONNE (DECISION DE NONO)
+Ligne retiree d A FAIRE.txt : les calculs derives (portee, qualites ajoutees) restent seulement sur le PDF. Les accessoires de Nations of Mankind sont consideres comme termines. CONTEXT.md mis a jour.
+Fichiers modifies : A FAIRE.txt, CONTEXT.md, Log.txt.
