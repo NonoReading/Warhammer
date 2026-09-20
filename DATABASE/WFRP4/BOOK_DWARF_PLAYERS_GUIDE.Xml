@@ -5,10 +5,10 @@
 <language>"ENGLISH"</language>
 <VERSION>"WFRP4"</VERSION>
 <OFFICIAL>"1"</OFFICIAL>
-<COMPLETE>"0"</COMPLETE>
+<COMPLETE>"1"</COMPLETE>
 <DISCLAIMER>"This is the Warhammer Fantasy Roleplay 4th Edition Dwarf Player&apos;s Guide, published by Cubicle 7. Warhammer Fantasy Roleplay 4th Edition (c) Copyright Games Workshop Limited 2023. Warhammer Fantasy Roleplay 4th Edition, the Warhammer Fantasy Roleplay 4th Edition logo, GW, Games Workshop, Warhammer, The Game of Fantasy Battles, the twin-tailed comet logo, and all associated logos, illustrations, images, names, creatures, races, vehicles, locations, weapons, characters, and the distinctive likeness thereof, are either (R) or TM, and/or (c) Games Workshop Limited, variably registered around the world, and used under licence. Cubicle 7 Entertainment and the Cubicle 7 Entertainment logo are trademarks of Cubicle 7 Entertainment Limited. All rights reserved."</DISCLAIMER>
-  <!-- LOT 1 (19/09/2026) : le chapitre "Steel and Fire" (p.93-97) - armes, armures, lumieres,
-       outils et reliques. COMPLETE=0 : carrieres, talents, sorts, runes, ethnies et armes de
+  <!-- COMPLETE=1 (20/09/2026, decision Nono, audit du TXT : tout ce qui se saisit est saisi ; non saisis : Runic Weapons of Renown p.117 (recit), cultes p.133-142 (pas de structure pour les dieux), regles de Grudges). Historique, LOT 1 (19/09/2026) : le chapitre "Steel and Fire" (p.93-97) - armes, armures, lumieres,
+       outils et reliques. carrieres, talents, runes, ethnies et armes de
        siege (p.99, saisies le 20/09/2026) sont faites, voir CONTEXT.md. Numerotation a partir de 001 par livre
        (decision Nono du 03/09/2026).
        CONVENTIONS DE SAISIE : "Scarce" = RULES-DISPO_LIMITED (libelle affiche Scarce) ; "n/a" =

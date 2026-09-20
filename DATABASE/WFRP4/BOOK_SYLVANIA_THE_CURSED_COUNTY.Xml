@@ -5,8 +5,8 @@
 <language>"ENGLISH"</language>
 <VERSION>"WFRP4"</VERSION>
 <OFFICIAL>"1"</OFFICIAL>
-<COMPLETE>"0"</COMPLETE>
-<!-- Sylvania - The Cursed County (guide de cadre de campagne). COMPLETE=0 : seuls les objets sont saisis (2 armes, auberge sylvanienne, Drakenhof Sundries). Non saisis : bateaux fluviaux p.21, PNJ, tables d evenements. Prix : d = SB, / = PA, GC = CO. "Scare" du livre lu Scarce = LIMITED. -->
+<COMPLETE>"1"</COMPLETE>
+<!-- Sylvania - The Cursed County (guide de cadre de campagne). COMPLETE=1 (20/09/2026, decision Nono, audit du TXT) : tout ce qui se saisit est saisi (2 armes, auberge sylvanienne, Drakenhof Sundries, 3 bateaux fluviaux). Non saisis : PNJ, intrigues, tables d evenements (regles de MJ). Prix : d = SB, / = PA, GC = CO. "Scare" du livre lu Scarce = LIMITED. -->
 <DATA_LABEL>
 <Label language="ENGLISH">
 <Text name="SYLVA-BOOK SYLVANIA THE CURSED COUNTY">"Sylvania - The Cursed County"</Text>

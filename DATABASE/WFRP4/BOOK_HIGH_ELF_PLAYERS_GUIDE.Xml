@@ -7,11 +7,10 @@
 <OFFICIAL>"1"</OFFICIAL>
 <COMPLETE>"0"</COMPLETE>
 <DISCLAIMER>"No part of this publication may be reproduced, stored in a retrieval system, or transmitted in any form by any means, electronic, mechanical, photocopying, recording, or otherwise, without the prior permission of the publishers. Warhammer Fantasy Roleplay 4th Edition (c) Copyright Games Workshop Limited 2025. Warhammer Fantasy Roleplay 4th Edition, the Warhammer Fantasy Roleplay 4th Edition logo, GW, Games Workshop, Warhammer, The Game of Fantasy Battles, the twin-tailed comet logo, and all associated logos, illustrations, images, names, creatures, races, vehicles, locations, weapons, characters, and the distinctive likeness thereof, are either (R) or TM, and/or (c) Games Workshop Limited, variably registered around the world, and used under licence. Cubicle 7 Entertainment and the Cubicle 7 Entertainment logo are trademarks of Cubicle 7 Entertainment Limited. All rights reserved."</DISCLAIMER>
-  <!-- COMPLETE=0 : ce fichier ne couvre que le LOT 1, les 5 carrieres a 4 niveaux.
-       Restent hors perimetre, volontairement : le Mage (5 niveaux) et les trois
-       carrieres de pretre (niveaux 3 a 5), l armurerie elfique, les ~54 sorts, les
-       tables d objets et d herbes, la section Sea Elf et la table de tirage aleatoire
-       de classe et carriere p.59. Voir A FAIRE.txt. -->
+  <!-- COMPLETE=0 (audit du 20/09/2026) : carrieres, lanceurs de sorts, 59 sorts, ethnies, armurerie,
+       herbes, objets enchantes, 8 navires et Eagle Claw Bolt Thrower sont saisis. Reste : les
+       Adapting Careers p.60-62 (talents substitues dans les carrieres du Rulebook), la ligne Mage
+       des tables de tirage et la table de tirage de classe/carriere p.59. Voir A FAIRE.txt. -->
 <DATA_LABEL>
 <Label language="ENGLISH">
 <Text name="HELFG-BOOK HIGH ELF PLAYERS GUIDE">"High Elf Player&apos;s Guide"</Text>
@@ -3882,6 +3881,17 @@ You invoke a mystical prime language that existed before the arrival of the Old 
   <!-- Requise par le sword-dancing : le talent HELFG-T0187, ecrit au lot 1, exige cette
        arme, qui n'existait pas jusqu'ici. Le livre le dit p.33 : "they are, however,
        required in order to use sword-dancing techniques". -->
+<!-- Eagle Claw Bolt Thrower (p.39) : arme de machine des navires elfiques, plus puissante que la Ballista de Sea of Claws p.100. Portee 150, +13, Accurate, Crewed 2, Reload 3. Le livre ecrit "Accurate or Volley 6" : la qualite Volley n existe pas au catalogue, seule Accurate est saisie. Ni prix, ni disponibilite, ni encombrement dans le livre (Enc 0). -->
+<Weapon id="HELFG-PROJ_ARB_01">
+<Description language="ENGLISH">"Eagle Claw Bolt Thrower"</Description>
+<Skill>"RULES-COMPPROJ_ARB"</Skill>
+<Damage>"+13"</Damage>
+<Reach>"150"</Reach>
+<Encumbrance>"0"</Encumbrance>
+<Quality>"RULES-WEAPB16,UPINA-WEAPB35 2,RULES-WEAPB23 3"</Quality>
+<Hand>"2"</Hand>
+<Ammunition>"0"</Ammunition>
+</Weapon>
 </DATA_WEAPON>
 <DATA_TRAPPING>
 <Trapping id="HELFG-TRAP_001">
@@ -4023,6 +4033,68 @@ You invoke a mystical prime language that existed before the arrival of the Old 
 <Availability>"RULES-DISPO_RARE"</Availability>
 <Price>"700CO"</Price>
 <Encumbrance>"0"</Encumbrance>
+</Trapping>
+<!-- Navires elfiques : warships p.39, merchant ships p.42. Le livre ne donne NI prix NI disponibilite : ni Price ni Availability, Enc 0. BoatProfile = Crew;M voile;M rames;Man;Size;T;W ; la colonne Sail M (C) du livre est reprise telle quelle dans M voile, pas de rames (- ). Carries = colonne Carries. Traits en AnimalTraits ; Dragonblade Ram (p.39, asterisque) : 15 PA contre une collision frontale et +20 au BT pour la Collision Rating, non modelise ; Flying Jib et Dragonblade Ram n ont pas de libelle SEAOF-BOATTRAIT_ (non decrits ici). Le Hawkship elfique differe de LUSTR-TRAP_08, d ou le suffixe (High Elf). -->
+<Trapping id="HELFG-TRAP_021">
+<Description language="ENGLISH">"Dragonship"</Description>
+<Theme>"RULES-LAB_261"</Theme>
+<Encumbrance>"0"</Encumbrance>
+<Carries>"600"</Carries>
+<BoatProfile>"80;12 (30);-;+2 SL;55;75;260"</BoatProfile>
+<AnimalTraits>"Armoured, Flying Jib, Dragonblade Ram"</AnimalTraits>
+</Trapping>
+<Trapping id="HELFG-TRAP_022">
+<Description language="ENGLISH">"Eagleship"</Description>
+<Theme>"RULES-LAB_261"</Theme>
+<Encumbrance>"0"</Encumbrance>
+<Carries>"350"</Carries>
+<BoatProfile>"45;12 (15);-;+2 SL;45;75;175"</BoatProfile>
+<AnimalTraits>"Armoured, Flying Jib"</AnimalTraits>
+</Trapping>
+<Trapping id="HELFG-TRAP_023">
+<Description language="ENGLISH">"Hawkship (High Elf)"</Description>
+<Theme>"RULES-LAB_261"</Theme>
+<Encumbrance>"0"</Encumbrance>
+<Carries>"100"</Carries>
+<BoatProfile>"20;10 (10);-;+3 SL;35;65;110"</BoatProfile>
+<AnimalTraits>"Armoured, Flying Jib"</AnimalTraits>
+</Trapping>
+<Trapping id="HELFG-TRAP_024">
+<Description language="ENGLISH">"Bloodhawk"</Description>
+<Theme>"RULES-LAB_261"</Theme>
+<Encumbrance>"0"</Encumbrance>
+<Carries>"75"</Carries>
+<BoatProfile>"18;11 (8);-;+3 SL;30;60;90"</BoatProfile>
+<AnimalTraits>"Flying Jib"</AnimalTraits>
+</Trapping>
+<Trapping id="HELFG-TRAP_025">
+<Description language="ENGLISH">"Falcon"</Description>
+<Theme>"RULES-LAB_261"</Theme>
+<Encumbrance>"0"</Encumbrance>
+<Carries>"50"</Carries>
+<BoatProfile>"15;9 (8);-;+2 SL;25;55;80"</BoatProfile>
+<AnimalTraits>"Flying Jib"</AnimalTraits>
+</Trapping>
+<Trapping id="HELFG-TRAP_026">
+<Description language="ENGLISH">"Albatross"</Description>
+<Theme>"RULES-LAB_261"</Theme>
+<Encumbrance>"0"</Encumbrance>
+<Carries>"700"</Carries>
+<BoatProfile>"75;10 (30);-;+1 SL;50;65;200"</BoatProfile>
+</Trapping>
+<Trapping id="HELFG-TRAP_027">
+<Description language="ENGLISH">"Golden Eagle"</Description>
+<Theme>"RULES-LAB_261"</Theme>
+<Encumbrance>"0"</Encumbrance>
+<Carries>"450"</Carries>
+<BoatProfile>"20;8 (10);-;+1 SL;40;65;150"</BoatProfile>
+</Trapping>
+<Trapping id="HELFG-TRAP_028">
+<Description language="ENGLISH">"Razorbill"</Description>
+<Theme>"RULES-LAB_261"</Theme>
+<Encumbrance>"0"</Encumbrance>
+<Carries>"50"</Carries>
+<BoatProfile>"4;6 (2);-;+1 SL;20;40;65"</BoatProfile>
 </Trapping>
 </DATA_TRAPPING>
 </DATA_BOOK>

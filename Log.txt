@@ -5855,3 +5855,19 @@ Fichiers modifies : BOOK_SEA_WARDENS_OF_COTHIQUE.Xml, CONTEXT.md, A FAIRE.txt, L
 20/09/2026 - SEA WARDENS OF COTHIQUE : COMPLETE PASSE A 1
 Decision Nono : plus rien a saisir hors PNJ, intrigues, Gifts of Khaine et regles de conduite (regles de MJ). Commentaire d en-tete du XML mis a jour.
 Fichiers modifies : BOOK_SEA_WARDENS_OF_COTHIQUE.Xml, CONTEXT.md, Log.txt.
+
+20/09/2026 - AUDIT DES TXT : SYLVANIA PASSE A COMPLETE=1
+Audit de Sylvania - The Cursed County : les 4 tableaux du livre (auberge, bateaux, Drakenhof Sundries, armes) sont entierement au catalogue (27 entrees) ; pas de sort, talent, carriere ni creature. Non modelises : Fine/Practical de la High Quality Sword (fabrication), effets de la Stand Draught et du Waldenloaf. Decision Nono : COMPLETE=1. Reste a auditer : Nations of Mankind, High Elf Player s Guide, Dwarf Player s Guide.
+Fichiers modifies : BOOK_SYLVANIA_THE_CURSED_COUNTY.Xml, CONTEXT.md, A FAIRE.txt, Log.txt.
+
+20/09/2026 - AUDIT DES TXT : NATIONS OF MANKIND PASSE A COMPLETE=1
+Audit de Nations of Mankind : armes, munitions, accessoires (p.58-59), armures (p.60) et les 10 montures de New Mounts (p.61, NATIO-TRAP_01 a _10, profils et prix concordants) sont au catalogue ; carrieres, sorts, regiments, ordres et provinces deja clos. Erreur de lecture corrigee en cours d audit : les montures etaient deja saisies (balise Trapping avec AnimalProfile). Non modelises : effets de qualites, regles de MJ. Decision Nono : COMPLETE=1, commentaire d en-tete du XML remis a jour. Reste a auditer : High Elf Player s Guide, Dwarf Player s Guide.
+Fichiers modifies : BOOK_NATIONS_OF_MANKIND.Xml, CONTEXT.md, A FAIRE.txt, Log.txt.
+
+20/09/2026 - AUDIT DES TXT : HIGH ELF PLAYER S GUIDE, 8 NAVIRES ET EAGLE CLAW BOLT THROWER
+HELFG-TRAP_021 a _028 : Dragonship, Eagleship, Hawkship (High Elf), Bloodhawk, Falcon (p.39), Albatross, Golden Eagle, Razorbill (p.42), BoatProfile, sans prix ni disponibilite (absents du livre). HELFG-PROJ_ARB_01 : Eagle Claw Bolt Thrower, portee 150, +13, Accurate, Crewed 2, Reload 3 (Volley absent du catalogue). Erreur de lecture corrigee : herbes et objets enchantes etaient deja saisis (HELFG-TRAP_001 a _020). Non modelises : Dragonblade Ram, Flying Jib (sans libelle). Livre reste a COMPLETE=0 : Adapting Careers p.60-62, ligne Mage des tables de tirage, table p.59. En-tete du XML remis a jour.
+Fichiers modifies : BOOK_HIGH_ELF_PLAYERS_GUIDE.Xml, A FAIRE.txt, Log.txt.
+
+20/09/2026 - AUDIT DES TXT : DWARF PLAYER S GUIDE PASSE A COMPLETE=1
+Audit du Dwarf Player s Guide section par section : carrieres, 19 talents, 4 competences, 11 ethnies, 31 armes, 7 armures, 22 objets et vehicules, runes, tout est saisi. Non saisis faute de mecanisme : Runic Weapons of Renown (recit), cultes p.133-142 (pas de donnee pour les dieux), regles de Grudges. Decision Nono : COMPLETE=1, en-tete du XML remis a jour. Bilan de l audit des livres a COMPLETE=0 : Sylvania, Nations, Dwarf passes a 1 ; High Elf reste a 0.
+Fichiers modifies : BOOK_DWARF_PLAYERS_GUIDE.Xml, CONTEXT.md, A FAIRE.txt, Log.txt.
