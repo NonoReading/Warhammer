@@ -5663,3 +5663,8 @@ Fichiers modifies : winpersonnage.pas, pdfpersonnage.pas, CONTEXT.md, Log.txt, A
 20/09/2026 - PDF FELDO PAGE 1 : MUTATIONS A LIGNES VARIABLES - COMPILE ET VALIDE PAR NONO
 pdfpersonnage.pas : DessinNbLigMut (mutations + 1, min 1) pris dans le budget commun Competences groupees / Talents / Mutations (44 lignes de donnees, total inchange).
 Fichiers modifies : pdfpersonnage.pas, CONTEXT.md, Log.txt, A FAIRE.txt.
+
+20/09/2026 - PDF FELDO : TRAPPINGS TRONQUES PAR ..., NIVEAUX D AVANCE RETIRES (PAGE 1), REPARTITION PAGE 2 PAR BESOIN - COMPILE ET VALIDE PAR NONO
+pdfpersonnage.pas : NbTotal dans PdfBlocDiversDonnees (ligne ...), filtre niveau en cours sur talents/competences grises, ArmN/EquN/WeaN/SorN a la place de ExtraArm (l Armure ne grossit plus pour les explications).
+Appris : le bloc d explications est a droite d Armure + Equipement, c est l Equipement qui doit prendre sa hauteur. Armure sans ligne vide (pieces + 1).
+Fichiers modifies : pdfpersonnage.pas, CONTEXT.md, Log.txt, A FAIRE.txt.

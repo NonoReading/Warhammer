@@ -2940,7 +2940,8 @@ Function PdfBlocTalents(PdfPage: TPDFPage; Personnage: StructurePersonnage; XGau
     PdfTaillePolice(PdfPage, PdfFontValue, ConstPoliceArial, 9);
     For PMetierTalent In ListMetierTalent do
       if (PMetierTalent.CodeMetier = Personnage.MetierEnCours.CodeMetier) then
-        if (PMetierTalent.NiveauMetier >= Personnage.MetierEnCours.NiveauMetier) then
+        // niveau en cours seulement : les talents des niveaux suivants ne sont plus proposés d'avance
+        if (PMetierTalent.NiveauMetier = Personnage.MetierEnCours.NiveauMetier) then
           if (Pos(AjouteAccolade(PMetierTalent.CodeTalent),ListeTalent) = 0) and (NbLigne < (NbLignes - 2)) then
             begin
               PTalent := chercheTalent(PMetierTalent.CodeTalent);
@@ -3254,13 +3255,17 @@ Function PdfAnimalCharge(Personnage: StructurePersonnage; IdAnimal: String): Int
 Procedure PdfBlocDiversDonnees(PdfPage: TPDFPage; Personnage: StructurePersonnage; XGauche, XDroite, Y, HauteurLigne: Single; NbLignes: Integer; out EncDivers: Integer; MinPolice: Integer; var FabricationBonii: String);
   var
     PersonnageEquipement: StructurePersonnageEquipement;
-    IndDivers:            Integer;
+    IndDivers, NbTotal:   Integer;
     Enc:                  Integer;
     Libelle:              String;
     Bidon:                String;
   begin
     IndDivers := 0;
     EncDivers := 0;
+    NbTotal   := 0;
+    for PersonnageEquipement in Personnage.Equipement do
+      if (PersonnageEquipement.TypeEquipement = TypeEquipDI) or (PersonnageEquipement.TypeEquipement = TypeEquipAN) then
+        Inc(NbTotal);
     for PersonnageEquipement in Personnage.Equipement do
       if (PersonnageEquipement.TypeEquipement = TypeEquipDI) or (PersonnageEquipement.TypeEquipement = TypeEquipAN) then
         begin
@@ -3282,16 +3287,21 @@ Procedure PdfBlocDiversDonnees(PdfPage: TPDFPage; Personnage: StructurePersonnag
             end;
           if (IndDivers <= (NbLignes - 1) * 2) then
             begin
+              // Trop d'objets pour le cadre : la dernière ligne annonce la coupure (les Trappings
+              // sont la variable d'ajustement quand tout déborde, décision Nono 20/09/2026).
+              // Enc et Enc total restent comptés sur tous les objets, seul l'affichage est coupé.
+              if (IndDivers = (NbLignes - 1) * 2) and (NbTotal > IndDivers) then
+                Libelle := '...';
               if IndDivers > (NbLignes - 1) then
                 begin
                   PdfEcrit(PdfPage, XGauche +  56, XGauche + 100, Y - ((IndDivers - NbLignes + 3) * HauteurLigne) + 0.6, Libelle, MinPolice);
-                  if PdfDiversTexteEnc(PersonnageEquipement) <> '' then
+                  if (PdfDiversTexteEnc(PersonnageEquipement) <> '') and (Libelle <> '...') then
                     PdfCentre(PdfPage, XGauche + 100, XDroite, Y - ((IndDivers - NbLignes + 3) * HauteurLigne) + 0.6, PdfDiversTexteEnc(PersonnageEquipement));
                 end
               else
                 begin
                   PdfEcrit(PdfPage, XGauche +   1, XGauche +  48, Y - ((IndDivers + 2) * HauteurLigne) + 0.6, Libelle, MinPolice);
-                  if PdfDiversTexteEnc(PersonnageEquipement) <> '' then
+                  if (PdfDiversTexteEnc(PersonnageEquipement) <> '') and (Libelle <> '...') then
                     PdfCentre(PdfPage, XGauche + 48, XGauche + 55, Y - ((IndDivers + 2) * HauteurLigne) + 0.6, PdfDiversTexteEnc(PersonnageEquipement));
                 end;
             end;
@@ -4521,7 +4531,8 @@ Function PdfPreparerRecordSetCompetencesGroupees(Personnage: StructurePersonnage
     for PersonnageCompetence in Personnage.MetierCompetence do
       begin
         CompetenceDonnee := PdfPersonnageCompetence(Personnage, PersonnageCompetence.CodeCompetence, NivCompMetier);
-        if (CompetenceDonnee.Augmentation = 0) and (NivCompMetier > 0) then
+        // niveau en cours au plus : les compétences des niveaux suivants ne sont plus proposées d'avance
+        if (CompetenceDonnee.Augmentation = 0) and (NivCompMetier > 0) and (NivCompMetier <= Personnage.MetierEnCours.NiveauMetier) then
           if (pos(PersonnageCompetence.CodeCompetence, ListPris) = 0) and (NbLigne < CapaciteMax) then
             begin
               PCompetence := ChercheCompetence(PersonnageCompetence.CodeCompetence);
@@ -4808,7 +4819,7 @@ Procedure PdfPersonnageCreationFeldo2P(Personnage: StructurePersonnage);
         PdfPageBlanc: TPDFPage;
         PEquipDry: StructurePersonnageEquipement;
         NbLigExpl, BudgetSorts, BesoinSor, NbSorNouveau, ExtraArm, LibreSor: Integer;
-        NbDivers, NbEquNeeded, BesoinEqu, PrisSor, NbArmPieces, ExtraArmPieces: Integer;
+        NbDivers, NbEquNeeded, PrisSor, NbArmPieces, NbWeaPieces, ArmN, EquN, WeaN, SorN: Integer;
 
     // Page 2
       // Armure
@@ -5310,41 +5321,41 @@ Procedure PdfPersonnageCreationFeldo2P(Personnage: StructurePersonnage);
        if ((not ArmureSet) and (PEquipDry.TypeEquipement = TypeEquipAR)) or
           (ArmureSet and (PEquipDry.TypeEquipement = TypeEquipARS)) then
          inc(NbArmPieces);
-     ExtraArmPieces := NbArmPieces + 2 - DessinNbLigArm;
-     if ExtraArmPieces < 0 then ExtraArmPieces := 0;
      NbEquNeeded := (NbDivers + DessinMinLignesVides + 1) div 2 + 1;
-     NbSorNouveau := BesoinSor + DessinMinLignesVides;
-     if NbSorNouveau < 4 then NbSorNouveau := 4;
-     if NbSorNouveau > BudgetSorts then NbSorNouveau := BudgetSorts;
-     ExtraArm := NbLigExpl - (DessinNbLigArm + DessinNbLigEqu + 2);
-     if ExtraArm < ExtraArmPieces then ExtraArm := ExtraArmPieces;
-     if ExtraArm > BudgetSorts - NbSorNouveau then
+     // Répartition par besoin (Nono 20/09/2026) : chaque cadre reçoit son besoin + lignes vides,
+     // l'Armure ne grossit plus pour le texte des explications (elles se placent à droite
+     // d'Armure + Équipement : c'est l'Équipement qui prend la hauteur manquante).
+     NbWeaPieces := 0;
+     for PEquipDry in Personnage.Equipement do
+       if PEquipDry.TypeEquipement = TypeEquipWe then
+         inc(NbWeaPieces);
+     ArmN := NbArmPieces + 1;
+     if ArmN < 3 then ArmN := 3;
+     EquN := Max(NbEquNeeded, DessinNbLigEqu);
+     if EquN < NbLigExpl - ArmN - 2 then EquN := NbLigExpl - ArmN - 2;
+     WeaN := Max(NbWeaPieces + DessinMinLignesVides + 1, 5);
+     SorN := Max(BesoinSor + DessinMinLignesVides, 4);
+     if SorN > BudgetSorts then SorN := BudgetSorts;
+     LibreSor := (DessinNbLigArm + DessinNbLigEqu + DessinNbLigWea + BudgetSorts) - (ArmN + EquN + WeaN + SorN);
+     if LibreSor < 0 then
        begin
-         NbSorNouveau := BudgetSorts - ExtraArm;
-         if NbSorNouveau < 2 then
-           begin
-             NbSorNouveau := 2;
-             ExtraArm     := BudgetSorts - 2;
-           end;
-       end;
-     LibreSor := BudgetSorts - NbSorNouveau - ExtraArm;
-     DessinNbLigArm := DessinNbLigArm + ExtraArm;
-     // l'Équipement passe avant le partage égal ; s'il manque de la place, les Sorts cèdent
-     // leurs lignes vides (jamais leur besoin + 1)
-     BesoinEqu := NbEquNeeded - DessinNbLigEqu;
-     if BesoinEqu < 0 then BesoinEqu := 0;
-     if BesoinEqu > LibreSor then
-       begin
-         PrisSor := Min(BesoinEqu - LibreSor, NbSorNouveau - Max(BesoinSor + 1, 2));
+         // trop de tout : les Sorts cèdent leurs lignes vides, puis les Armes, puis l'Équipement
+         // (dont la liste est alors tronquée par "...")
+         PrisSor := Min(-LibreSor, SorN - Max(BesoinSor + 1, 2));
          if PrisSor < 0 then PrisSor := 0;
-         NbSorNouveau := NbSorNouveau - PrisSor;
-         LibreSor     := LibreSor + PrisSor;
+         SorN := SorN - PrisSor; LibreSor := LibreSor + PrisSor;
+         PrisSor := Min(-LibreSor, WeaN - Max(NbWeaPieces + 1, 3));
+         if PrisSor < 0 then PrisSor := 0;
+         WeaN := WeaN - PrisSor; LibreSor := LibreSor + PrisSor;
+         PrisSor := Min(-LibreSor, EquN - 3);
+         if PrisSor < 0 then PrisSor := 0;
+         EquN := EquN - PrisSor; LibreSor := LibreSor + PrisSor;
        end;
-     PrisSor        := Min(BesoinEqu, LibreSor);
-     LibreSor       := LibreSor - PrisSor;
-     DessinNbLigEqu := DessinNbLigEqu + PrisSor + (LibreSor + 1) div 2;
-     DessinNbLigWea := DessinNbLigWea + LibreSor div 2;
-     DessinNbLigSor := NbSorNouveau;
+     if LibreSor < 0 then LibreSor := 0;
+     DessinNbLigArm := ArmN;
+     DessinNbLigEqu := EquN + (LibreSor + 1) div 2;
+     DessinNbLigWea := WeaN + LibreSor div 2;
+     DessinNbLigSor := SorN;
      // la passe à blanc a déplacé la police globale : on la rétablit avant le vrai dessin
      PdfTaillePolice(PdfPage, PdfFontBack, ConstPoliceCarlson+ConstPoliceGras, 10);
      // Dessin Armures (extrait dans PdfBlocArmures, CONTEXT.md §2.4 - cadre uniquement,
