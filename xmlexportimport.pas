@@ -2524,6 +2524,8 @@ Procedure XmlImport(FileName: String; OnlyPrimary: Boolean; OnlyCode: Boolean; C
                       // conteneurs/montures, PTrapping etant reutilise d'un tour de boucle a
                       // l'autre sans lui la valeur de l'entree precedente resterait collee
                       PTrapping.Capacite      := 0;
+                      PTrapping.Prix          := '';
+                      PTrapping.Disponibilite := '';
                       PTrapping.ProfilAnimal  := '';
                       PTrapping.TraitsAnimal  := '';
                       PTrapping.ProfilBateau  := '';

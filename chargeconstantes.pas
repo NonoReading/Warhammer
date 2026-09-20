@@ -247,6 +247,7 @@ Const
       ConstXmlTraitsAnimal              = 'AnimalTraits';
       ConstXmlProfilBateau              = 'BoatProfile';
       ConstXmlProfilVehicule            = 'VehicleProfile';
+      ConstPrefixeTraitBateau           = 'SEAOF-BOATTRAIT_';  // libelles decrivant les traits d un bateau (Sea of Claws p.97-99)
       ConstXmlTheme                     = 'Theme';
       ConstXmlAcheteur                  = 'Buyer';
       ConstXmlLocalite                  = 'Locality';

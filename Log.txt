@@ -5726,3 +5726,12 @@ Fichiers modifies : BOOK_SEA_WARDENS_OF_COTHIQUE.Xml, INI.TXT, Log.txt.
 20/09/2026 - GRUND A DUM (SEA OF CLAWS P.46) : FICHE SAISIE - PAS ENCORE TESTE PAR NONO
 SEAOF-TRAP_027 : BoatProfile 50;10 (25);6 (10);-;50;65;200, Carries 500, traits Ram et Sturdy, sans prix ni disponibilite (navire nomme). Ballista et huit Medium Cannon en commentaire.
 Fichiers modifies : BOOK_SEA_OF_CLAWS.Xml, A FAIRE.txt, CONTEXT.md, Log.txt.
+
+20/09/2026 - TRAITS DE BATEAU : DESCRIPTIONS SUR LA FICHE - COMPILE, PAS ENCORE TESTE PAR NONO
+BOOK_SEA_OF_CLAWS.Xml : 9 libelles SEAOF-BOATTRAIT_ (Armoured, Rugged, Sturdy, Unwieldy, Ram, Smoothing, Shallow Draught, Detachable Rudder, Slow), EN et FR. winanimal.pas : DescriptionTraitsBateau (niveau final ignore), sous le profil d un bateau. chargeconstantes.pas : ConstPrefixeTraitBateau. Effets non mecanises (option 1 retenue).
+Fichiers modifies : BOOK_SEA_OF_CLAWS.Xml, winanimal.pas, chargeconstantes.pas, A FAIRE.txt, CONTEXT.md, Log.txt.
+
+20/09/2026 - FICHE BATEAU : HAUTEURS DES LIBELLES ET PRIX/DISPONIBILITE QUI FUYAIENT - COMPILE, A VALIDER PAR NONO
+winanimal.pas : hauteur des libelles mesuree par AjusteHauteur (DrawText) apres le changement de police (les descriptions de traits chevauchaient la ligne Prix). xmlexportimport.pas : Prix et Disponibilite remis a zero a chaque objet (le Grund A Dum, sans prix, affichait 10000 CO et Common de l entree precedente).
+Appris : un tag optionnel absent doit etre remis a zero dans la boucle de lecture, comme Capacite.
+Fichiers modifies : winanimal.pas, xmlexportimport.pas, Log.txt.

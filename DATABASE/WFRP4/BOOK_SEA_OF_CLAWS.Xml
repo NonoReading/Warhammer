@@ -11,10 +11,28 @@
 <Label language="ENGLISH">
 <Text name="SEAOF-BOOK SEA OF CLAWS">"Sea of Claws"</Text>
 <Text name="SEAOF-CLASS_SEAF">"Seafarers"</Text>
+<Text name="SEAOF-BOATTRAIT_ARMOURED">"Reinforced hull built for fighting. Each level adds 10 to Toughness (up to 3 levels). Costs 10% more and loses 10% of Carries per level."</Text>
+<Text name="SEAOF-BOATTRAIT_RUGGED">"Well-made, tried and tested design. +2 SL to Batten Down the Hatches Crew Tests. Costs 10% more."</Text>
+<Text name="SEAOF-BOATTRAIT_STURDY">"Built to withstand war. Each level adds 30% to Wounds (up to 3 levels). Costs 20% more and loses 10% of Carries per level."</Text>
+<Text name="SEAOF-BOATTRAIT_UNWIELDY">"Poorly designed, cheap craft. Each level (up to 3) gives -1 SL to Sail and Row Tests. Costs 10% less per level."</Text>
+<Text name="SEAOF-BOATTRAIT_RAM">"Metal ram on the prow: 5 AP against collisions and attacks from the front, and +5 to the Toughness Bonus when it hits head on in a collision."</Text>
+<Text name="SEAOF-BOATTRAIT_SMOOTHING">"Hull smoothed to reduce drag: M +1. Repairs cost 50% more, cheaper repairs lose the benefit."</Text>
+<Text name="SEAOF-BOATTRAIT_SHALLOWDRAUGHT">"Not described in the books available (Sea of Claws and Lustria only name it)."</Text>
+<Text name="SEAOF-BOATTRAIT_DETACHABLERUDDER">"Not described in the books available (Sea of Claws only names it)."</Text>
+<Text name="SEAOF-BOATTRAIT_SLOW">"Not described in the books available (Sea of Claws only names it)."</Text>
 </Label>
 <Label language="FRANCAIS">
 <Text name="SEAOF-BOOK SEA OF CLAWS">"Sea of Claws"</Text>
 <Text name="SEAOF-CLASS_SEAF">"Marins"</Text>
+<Text name="SEAOF-BOATTRAIT_ARMOURED">"Coque renforcee pour le combat. Chaque niveau ajoute 10 a la Endurance (3 niveaux max). Coute 10 % de plus et retire 10 % de Carries par niveau."</Text>
+<Text name="SEAOF-BOATTRAIT_RUGGED">"Conception solide et eprouvee. +2 NR aux tests d equipage Batten Down the Hatches. Coute 10 % de plus."</Text>
+<Text name="SEAOF-BOATTRAIT_STURDY">"Construit pour la guerre. Chaque niveau ajoute 30 % aux Blessures (3 niveaux max). Coute 20 % de plus et retire 10 % de Carries par niveau."</Text>
+<Text name="SEAOF-BOATTRAIT_UNWIELDY">"Bateau mal conçu ou bon marche. Chaque niveau (3 max) donne -1 NR aux tests de voile et de rame. Coute 10 % de moins par niveau."</Text>
+<Text name="SEAOF-BOATTRAIT_RAM">"Belier metallique a la proue : 5 PA contre les collisions et attaques de face, et +5 au Bonus d Endurance en cas de collision frontale."</Text>
+<Text name="SEAOF-BOATTRAIT_SMOOTHING">"Coque lissee pour reduire la traînee : M +1. Les reparations coutent 50 % de plus, une reparation bon marche perd l avantage."</Text>
+<Text name="SEAOF-BOATTRAIT_SHALLOWDRAUGHT">"Non decrit dans les livres disponibles (Sea of Claws et Lustria ne font que le nommer)."</Text>
+<Text name="SEAOF-BOATTRAIT_DETACHABLERUDDER">"Non decrit dans les livres disponibles (Sea of Claws ne fait que le nommer)."</Text>
+<Text name="SEAOF-BOATTRAIT_SLOW">"Non decrit dans les livres disponibles (Sea of Claws ne fait que le nommer)."</Text>
 </Label>
 </DATA_LABEL>
 <DATA_SKILL_SPECIALIZATION>
