@@ -5668,3 +5668,7 @@ Fichiers modifies : pdfpersonnage.pas, CONTEXT.md, Log.txt, A FAIRE.txt.
 pdfpersonnage.pas : NbTotal dans PdfBlocDiversDonnees (ligne ...), filtre niveau en cours sur talents/competences grises, ArmN/EquN/WeaN/SorN a la place de ExtraArm (l Armure ne grossit plus pour les explications).
 Appris : le bloc d explications est a droite d Armure + Equipement, c est l Equipement qui doit prendre sa hauteur. Armure sans ligne vide (pieces + 1).
 Fichiers modifies : pdfpersonnage.pas, CONTEXT.md, Log.txt, A FAIRE.txt.
+
+20/09/2026 - PDF FELDO PAGE 1 : TALENTS PLAFONNES PAR NBLIGNES (LIGNE ...) - COMPILE ET VALIDE PAR NONO
+pdfpersonnage.pas : LimiteLigne dans PdfBlocTalents (talents, regles d appartenance, talents de mutation et d armure), ligne ... si coupure, PdfNbTalentsAcquis en forward.
+Fichiers modifies : pdfpersonnage.pas, CONTEXT.md, Log.txt, A FAIRE.txt.

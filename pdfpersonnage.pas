@@ -423,6 +423,8 @@ Function PdfPreparerRecordSetCompetencesGroupees(Personnage: StructurePersonnage
 
 implementation
 
+Function PdfNbTalentsAcquis(Personnage: StructurePersonnage): Integer; forward;
+
 Procedure PdfPersonnageCompetenceTri(ListPage: TStringList);
   var
     ListComp:    TStringList;
@@ -2806,6 +2808,7 @@ Function PdfBlocTalents(PdfPage: TPDFPage; Personnage: StructurePersonnage; XGau
     PRegle:        StructureCareerBonusSpecialRule;
     PMutationTalent: StructurePersonnageTalent;
     PArmureBonusTalent: StructurePersonnageTalent;
+    LimiteLigne:   Integer;
   begin
     // Dessin cadre
     PdfPage.DrawLine( XGauche,      Y,                     XGauche,      Y - (NbLignes * HauteurLigne), 1);
@@ -2828,6 +2831,11 @@ Function PdfBlocTalents(PdfPage: TPDFPage; Personnage: StructurePersonnage; XGau
     PdfTaillePolice(PdfPage, PdfFontValue, ConstPoliceArial, 9);
     ListeTalent := '';
     NbLigne := 0;
+    // Plafond : NbLignes - 2 lignes de données (2 lignes d'en-tête). Si les talents acquis ne
+    // tiennent pas, la dernière ligne est réservée à "..." (les suivants sont omis à l'affichage).
+    LimiteLigne := NbLignes - 2;
+    if PdfNbTalentsAcquis(Personnage) > LimiteLigne then
+      LimiteLigne := LimiteLigne - 1;
     For IndC := 0 to ListTalent.count - 1 do
       begin
         PTalent := ListTalent[IndC];
@@ -2836,6 +2844,7 @@ Function PdfBlocTalents(PdfPage: TPDFPage; Personnage: StructurePersonnage; XGau
         if TalentDonnee.Total <> 0 then
           begin
             inc(NbLigne);
+            if NbLigne > LimiteLigne then Continue;
             PdfEcrit(PdfPage, XGauche + 2, XGauche + 41, Y - ((NbLigne + 2) * HauteurLigne) + 1, PTalent.Libelle, MinPolice);
             // Virtue of the Quest (CONTEXT.md 2.78) : talent possede mais dont les effets
             // sont en sommeil hors de la carriere+niveau qui l'a accorde - barre plutot
@@ -2882,6 +2891,7 @@ Function PdfBlocTalents(PdfPage: TPDFPage; Personnage: StructurePersonnage; XGau
         begin
           PRegle := ListeRegle[IndC];
           inc(NbLigne);
+          if NbLigne > LimiteLigne then Continue;
           PdfEcrit(PdfPage, XGauche + 2, XGauche + 41, Y - ((NbLigne + 2) * HauteurLigne) + 1, PRegle.Libelle, MinPolice);
           if PRegle.Texte <> '' then
             begin
@@ -2903,6 +2913,7 @@ Function PdfBlocTalents(PdfPage: TPDFPage; Personnage: StructurePersonnage; XGau
       begin
         PTalent := ChercheTalent(PMutationTalent.CodeTalent);
         inc(NbLigne);
+        if NbLigne > LimiteLigne then Continue;
         PdfEcrit(PdfPage, XGauche + 2, XGauche + 41, Y - ((NbLigne + 2) * HauteurLigne) + 1, PTalent.Libelle, MinPolice);
         if PTalent.SousTalent then
           PTalent := ChercheTalent(Copy(PTalent.CodeTalent, 1, Pos('_', PTalent.CodeTalent) - 1)+'_*');
@@ -2923,6 +2934,7 @@ Function PdfBlocTalents(PdfPage: TPDFPage; Personnage: StructurePersonnage; XGau
       begin
         PTalent := ChercheTalent(PArmureBonusTalent.CodeTalent);
         inc(NbLigne);
+        if NbLigne > LimiteLigne then Continue;
         PdfEcrit(PdfPage, XGauche + 2, XGauche + 41, Y - ((NbLigne + 2) * HauteurLigne) + 1, PTalent.Libelle, MinPolice);
         if PTalent.SousTalent then
           PTalent := ChercheTalent(Copy(PTalent.CodeTalent, 1, Pos('_', PTalent.CodeTalent) - 1)+'_*');
@@ -2933,6 +2945,13 @@ Function PdfBlocTalents(PdfPage: TPDFPage; Personnage: StructurePersonnage; XGau
             else
               PdfEcrit(PdfPage, XGauche + 54, XDroite, Y - ((NbLigne + 2) * HauteurLigne) + 1, PTalent.Resume, MinPolice);
           end;
+      end;
+
+    // coupure : la ligne réservée annonce les talents omis
+    if NbLigne > LimiteLigne then
+      begin
+        PdfEcrit(PdfPage, XGauche + 2, XGauche + 41, Y - ((LimiteLigne + 3) * HauteurLigne) + 1, '...', MinPolice);
+        NbLigne := NbLignes;
       end;
 
     // Valeur Talents non acquis
