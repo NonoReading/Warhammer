@@ -29,6 +29,19 @@
 <Hand>"1"</Hand>
 <Ammunition>"0"</Ammunition>
 </Weapon>
+<!-- Incandescent Spear (p.29), arme magique de Litharys. Le livre ne donne NI prix NI disponibilite : Unique (RULES-DISPO_UNIQUE), sans Price. Durable 3 et Fine 3 sont des qualites de FABRICATION (pas de catalogue, meme parti que Dwarf Player's Guide). Main : 2, comme la Spear du Rulebook (le livre ne le dit pas). L eclairage d une lanterne n a pas de champ. -->
+<Weapon id="COTHI-COMB_HAST_01">
+<Description language="ENGLISH">"Incandescent Spear"</Description>
+<Skill>"RULES-COMPCOMB_HAST"</Skill>
+<Damage>"+(BATTR_S)+5"</Damage>
+<Availability>"RULES-DISPO_UNIQUE"</Availability>
+<Reach>"RULES-WEAPR_BIG"</Reach>
+<Encumbrance>"2"</Encumbrance>
+<Quality>"RULES-WEAPB12"</Quality>
+<Hand>"2"</Hand>
+<Ammunition>"0"</Ammunition>
+<Type>"RULES-WTYPE_SPEAR"</Type>
+</Weapon>
 </DATA_WEAPON>
 <!-- Chariots (p.76). Motive Power : A = animaux. Strike = degats de l impact (M = Move). Enc du vehicule dans Encumbrance, Carries dans Carries. -->
 <DATA_TRAPPING>

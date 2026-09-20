@@ -5831,3 +5831,7 @@ Fichiers modifies : BOOK_SEA_WARDENS_OF_COTHIQUE.Xml, CONTEXT.md, A FAIRE.txt, L
 20/09/2026 - SEA WARDENS OF COTHIQUE : SKYCUTTER ET TIDECUTTER - VALIDE PAR NONO
 COTHI-TRAP_12 (Skycutter, 500CO, minimum du livre) et COTHI-TRAP_13 (Tidecutter, 40CO) : comptent comme des Light Chariots (p.79), donc profil 2 A;35;10;M/2, Enc 10, Carries 16. Exotic retenu (choix, le livre ne donne pas de disponibilite). Vol et navigation non modelises (regles de conduite).
 Fichiers modifies : BOOK_SEA_WARDENS_OF_COTHIQUE.Xml, CONTEXT.md, A FAIRE.txt, Log.txt.
+
+20/09/2026 - SEA WARDENS OF COTHIQUE : INCANDESCENT SPEAR - VALIDE PAR NONO
+COTHI-COMB_HAST_01 (p.29) : Melee (Polearm), +SB+5, portee Very long, Enc 2, Impale, 2 mains (comme la Spear du Rulebook), Unique, sans prix (le livre n en donne pas). Durable 3 et Fine 3 sont des qualites de fabrication, non saisies ; l eclairage de lanterne n a pas de champ.
+Fichiers modifies : BOOK_SEA_WARDENS_OF_COTHIQUE.Xml, CONTEXT.md, A FAIRE.txt, Log.txt.
