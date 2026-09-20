@@ -885,6 +885,7 @@ Procedure PdfPersonnageCreation(Personnage: StructurePersonnage; BackGround: Boo
     PArmure:         StructureArmure;
     Deg:             Integer;
     Pourcent:        String;
+    RangeX:          Single;   // debut du texte des portees, cale a droite pour laisser la place aux qualites (20/09/2026)
     EncArme:         Integer;
     EncArmure:       Integer;
     EncDivers:       Integer = 0;
@@ -1804,10 +1805,17 @@ Procedure PdfPersonnageCreation(Personnage: StructurePersonnage; BackGround: Boo
                 ArmureBouclier := StrToInt(copy(PArme.ListeBonus, PosProtection + Length(BonusProtection), 1));
               PdfTaillePolice(PdfPage, PdfFontValue, ConstPoliceArial, 6);
 
+              RangeX := 170;
               if TexteRange1 <> '' then
                 begin
-                  PdfPage.WriteText(170,122.5-(NbArme*5), TexteRange1);
-                  PdfPage.WriteText(170,120.5-(NbArme*5), TexteRange2);
+                  PdfTaillePolice(PdfPage, PdfFontValue, ConstPoliceArial, 5);
+                  // TailleTexte surestime d'environ 30 % la largeur dessinee : 0,77 (mesure Feldo, 20/09/2026).
+                  RangeX := 193.5 - 0.77 * TailleTexte(TexteRange1, 5);
+                  if 193.5 - 0.77 * TailleTexte(TexteRange2, 5) < RangeX then
+                    RangeX := 193.5 - 0.77 * TailleTexte(TexteRange2, 5);
+                  PdfPage.WriteText(RangeX,122.5-(NbArme*5), TexteRange1);
+                  PdfPage.WriteText(RangeX,120.5-(NbArme*5), TexteRange2);
+                  PdfTaillePolice(PdfPage, PdfFontValue, ConstPoliceArial, 6);
                 end;
 
               if PasBonus = false then
@@ -1832,9 +1840,9 @@ Procedure PdfPersonnageCreation(Personnage: StructurePersonnage; BackGround: Boo
                         end;
                     end;
                   FabricationDetail(PersonnageEquipement.QualiteEquipement, LigneBonus, FabricationBonii);
-                  // Arme a distance : la zone Qualities s arrete ou commence le texte des portees (x=170)
+                  // Arme a distance : la zone Qualities s arrete ou commence le texte des portees (RangeX, cale a droite)
                   if TexteRange1 <> '' then
-                    PdfEcrit(PdfPage, 132, 168, 121.5-(NbArme*5), LigneBonus, 5)
+                    PdfEcrit(PdfPage, 132, RangeX - 1, 121.5-(NbArme*5), LigneBonus, 5)
                   else
                     PdfPage.WriteText(132,121-(NbArme*5), LigneBonus);
                 end
@@ -1864,9 +1872,9 @@ Procedure PdfPersonnageCreation(Personnage: StructurePersonnage; BackGround: Boo
                         end;
                     end;
                   FabricationDetail(PersonnageEquipement.QualiteEquipement, ListMalii, FabricationBonii);
-                  // Arme a distance : la zone Qualities s arrete ou commence le texte des portees (x=170)
+                  // Arme a distance : la zone Qualities s arrete ou commence le texte des portees (RangeX, cale a droite)
                   if TexteRange1 <> '' then
-                    PdfEcrit(PdfPage, 132, 168, 121.5-(NbArme*5), ListMalii, 5)
+                    PdfEcrit(PdfPage, 132, RangeX - 1, 121.5-(NbArme*5), ListMalii, 5)
                   else
                     PdfPage.WriteText(132,121-(NbArme*5), ListMalii);
                 end;
@@ -3366,6 +3374,7 @@ Procedure PdfBlocArmesDonnees(PdfPage: TPDFPage; Personnage: StructurePersonnage
     Enc:                   Integer;
     Quality:               String;
     Pourcent:              String;
+    RangeX:                Single;   // debut du texte des portees, cale a droite pour laisser la place aux qualites (20/09/2026)
     PasBonus:              Boolean;
     TexteRange1:           String;
     TexteRange2:           String;
@@ -3487,10 +3496,18 @@ Procedure PdfBlocArmesDonnees(PdfPage: TPDFPage; Personnage: StructurePersonnage
             ArmureBouclier := StrToInt(copy(PArme.ListeBonus, PosProtection + Length(BonusProtection), 1));
           PdfTaillePolice(PdfPage, PdfFontValue, ConstPoliceArial, 6);
 
+          RangeX := XDroite;
           if TexteRange1 <> '' then
             begin
-              PdfEcrit(PdfPage, XGauche + 113 + 40, XDroite, Y - ((NbArme + 2) * HauteurLigne) + 2.3, TexteRange1, MinPolice);
-              PdfEcrit(PdfPage, XGauche + 113 + 40, XDroite, Y - ((NbArme + 2) * HauteurLigne) + 0.3, TexteRange2, MinPolice);
+              // Portees cales a droite : le reste de la colonne revient aux qualites. TailleTexte
+              // surestime la largeur reellement dessinee d'environ 30 % (mesure sur le PDF du
+              // 20/09/2026 : 34 mm estimes pour 25,6 mm reels) : 0,77 la ramene a la realite.
+              // WriteText et non PdfEcrit, qui reduirait la police avec cette meme estimation.
+              RangeX := XDroite - 0.5 - 0.77 * TailleTexte(TexteRange1, 6);
+              if XDroite - 0.5 - 0.77 * TailleTexte(TexteRange2, 6) < RangeX then
+                RangeX := XDroite - 0.5 - 0.77 * TailleTexte(TexteRange2, 6);
+              PdfPage.WriteText(RangeX, Y - ((NbArme + 2) * HauteurLigne) + 2.3, TexteRange1);
+              PdfPage.WriteText(RangeX, Y - ((NbArme + 2) * HauteurLigne) + 0.3, TexteRange2);
             end;
 
           if PasBonus = false then
@@ -3518,7 +3535,7 @@ Procedure PdfBlocArmesDonnees(PdfPage: TPDFPage; Personnage: StructurePersonnage
               if (TexteRange1 = '') then
                 PdfEcrit(PdfPage, XGauche + 113 + 1, XDroite, Y - ((NbArme + 2) * HauteurLigne) + 2.3, LigneBonus, MinPolice)
               else
-                PdfEcrit(PdfPage, XGauche + 113 + 1, XGauche + 113 + 40, Y - ((NbArme + 2) * HauteurLigne) + 2.3, LigneBonus, MinPolice);
+                PdfEcrit(PdfPage, XGauche + 113 + 1, RangeX - 1, Y - ((NbArme + 2) * HauteurLigne) + 2.3, LigneBonus, MinPolice);
             end
           else
             begin
@@ -3550,7 +3567,7 @@ Procedure PdfBlocArmesDonnees(PdfPage: TPDFPage; Personnage: StructurePersonnage
               if (TexteRange1 = '') then
                 PdfEcrit(PdfPage, XGauche + 113 + 1, XDroite, Y - ((NbArme + 2) * HauteurLigne) + 2.3, ListMalii, MinPolice)
               else
-                PdfEcrit(PdfPage, XGauche + 113 + 1, XGauche + 113 + 40, Y - ((NbArme + 2) * HauteurLigne) + 2, ListMalii, MinPolice);
+                PdfEcrit(PdfPage, XGauche + 113 + 1, RangeX - 1, Y - ((NbArme + 2) * HauteurLigne) + 2, ListMalii, MinPolice);
 
             end;
           PdfTaillePolice(PdfPage, PdfFontValue, ConstPoliceArial, 9);
