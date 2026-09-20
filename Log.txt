@@ -5634,3 +5634,7 @@ Fichiers modifies : A FAIRE.txt, Log.txt.
 20/09/2026 - WINPERSONNAGE : BOUTON WORN REMPLACE PAR L ENTREE PORTE DU CLIC DROIT - COMPILE ET VALIDE PAR NONO
 winpersonnage.pas/.lfm : ButtonPorte supprime (ButtonPorteClick devient MenuPorteClick, entree cochee en tete du menu), TLabel LabPorteAide sous le titre Equipement (tableau decale vers le bas) et bulle au survol de la colonne Worn (TabEquipementMouseMove), libelle RULES-LAB_259 (INTERFACE.Xml et _FRANCAIS).
 Fichiers modifies : winpersonnage.pas, winpersonnage.lfm, INTERFACE.Xml, INTERFACE_FRANCAIS.Xml, A FAIRE.txt, Log.txt.
+
+20/09/2026 - PDF FELDO : BLOC MUTATIONS DEPLACE EN PAGE 1 SOUS LES TALENTS - COMPILE ET VALIDE PAR NONO
+pdfpersonnage.pas : DessinNbLigTal 24->21, DessinNbLigComg 26->24, PdfBlocMutations appele apres PdfBlocTalents (meme largeur, 3 lignes, 3mm d ecart), retire de la page 2 ; seuil de retour a la ligne du libelle proportionnel a la largeur du bloc. Bas de page inchange (1,4mm de marge).
+Fichiers modifies : pdfpersonnage.pas, CONTEXT.md, Log.txt, A FAIRE.txt.

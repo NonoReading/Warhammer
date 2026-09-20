@@ -10895,7 +10895,8 @@ pointer `carriedby` vers un identifiant de groupe.
 - **Étape 3 validée par Nono (20/09/2026).** **Étape 4 codée, compilée et VALIDÉE par Nono** (PDF Feldo) : la capacité des montures n'ajoute plus rien à l'Encombrement max ; un objet confié à un animal affiche son encombrement entre parenthèses, même à 0 (idée de Nono), et ne compte pas dans les totaux ; l'animal qui porte quelque chose indique « (Charge N/capacité) ».
 - Code mort des montures retiré (20/09/2026). Restes : le gabarit hors Feldo n'affiche pas les parenthèses pour armes/armures (seuls les totaux sont corrects) ; groupe partagé = chantier à part.
 - **Bouton « Porté » remplacé (20/09/2026, compilé et VALIDÉ par Nono)** : `ButtonPorte` supprimé ; l'entrée « Porté » (cochée, `MenuPorteClick`, `RULES-LAB_180`) ouvre le clic droit de `TabEquipement`. Texte d'aide `LabPorteAide` (`RULES-LAB_259`) sous le titre `LabEquipement`, tableau décalé vers le bas ; même texte en bulle sur la colonne 8 (`TabEquipementMouseMove`). Les mentions de `ButtonPorte` plus haut (2.57, 2.64) sont historiques.
-- **Point de reprise** : chantier clos. Suites dans `A FAIRE.txt` : bloc monture et bloc Mutations sur le PDF Feldo (à concevoir).
+- **Bloc Mutations déplacé en page 1 (20/09/2026, compilé et VALIDÉ par Nono)** : `PdfBlocMutations` est appelé juste après `PdfBlocTalents` (même largeur `DessinDebColD`→`DessinFinColCompD`, 3 lignes, 3 mm d'écart) ; `DessinNbLigTal` 24→21 et `DessinNbLigComg` 26→24. Retiré de la page 2 : la zone à droite d'Armour Points est libre. ⚠️ Les talents du personnage ne sont pas plafonnés par `NbLignes` : au-delà d'environ 19 talents, débordement possible sur Mutations. Les mentions « page 2 » des blocs Mutations en 2.4 et 2.7 sont historiques.
+- **Point de reprise** : chantier clos. Suite dans `A FAIRE.txt` : bloc monture sur la page 2 du PDF Feldo, à droite d'Armour Points (à concevoir : une monture ou plusieurs, contenu, place disponible).
 
 ---
 

@@ -3863,7 +3863,7 @@ Function PdfBlocMutations(PdfPage: TPDFPage; Personnage: StructurePersonnage; XG
         // Libellé (+ astérisque) souvent trop long pour tenir sur une ligne dans cette colonne
         // étroite : PdfEcrit le répartit alors sur 2 lignes - même heuristique de longueur que
         // PdfBlocCorruptionDetail/PdfBlocTalents pour ne pas déborder sous la bordure.
-        if Length(Texte) > 18 then
+        if Length(Texte) > Round((XDroite - XGauche) * 0.3) then
           PdfEcrit(PdfPage, XGauche + 1, XDroite - 1, Y - ((IndM - Debut + 2) * HauteurLigne) + 2,   Texte, MinPolice)
         else
           PdfEcrit(PdfPage, XGauche + 1, XDroite - 1, Y - ((IndM - Debut + 2) * HauteurLigne) + 0.6, Texte, MinPolice);
@@ -4552,12 +4552,16 @@ Procedure PdfPersonnageCreationFeldo2P(Personnage: StructurePersonnage);
         // Compétence Groupée
         DessinDebutHautComg:  Single;
         DessinHauteurComg:    Single  = 4.4;
-        DessinNbLigComg:      Integer = 26;
+        // 26 -> 24 le 20/09/2026 : deux lignes cédées aux Talents (19 -> 21).
+        DessinNbLigComg:      Integer = 24;
         DessinLargeurComg:    Single  = 9;
         // Talents
         DessinDebutHautTal:   Single;
         DessinHauteurTal:     Single  = 4.4;
-        DessinNbLigTal:       Integer = 24;
+        // 24 -> 21 le 20/09/2026 : 3 lignes libérées en bas pour le bloc Mutations sous les
+        // Talents (déplacé depuis la page 2, où la place revient au bloc monture) ; +2 lignes
+        // gagnées sur les Compétences groupées (26 -> 24), qui remontent le tableau.
+        DessinNbLigTal:       Integer = 21;
 
     // Page 2
       // Armure
@@ -4966,6 +4970,12 @@ Procedure PdfPersonnageCreationFeldo2P(Personnage: StructurePersonnage);
     // Bloc Talents (extrait dans PdfBlocTalents, CONTEXT.md §2.4)
     PdfBlocTalents(PdfPage, Personnage, DessinDebColD, DessinFinColCompD, DessinDebutHautTal, DessinHauteurTal, DessinNbLigTal, MinPolice);
 
+    // Table des mutations obtenues (CONTEXT.md §2.7, étape 9) - sous les Talents, même largeur,
+    // même écart de 3mm que partout ailleurs entre deux blocs. Capacité fixe à 3 lignes.
+    // AsterisqueParMutation est encore vivant ici (libéré en fin de page 2).
+    PdfBlocMutations(PdfPage, Personnage, DessinDebColD, DessinFinColCompD,
+      DessinDebutHautTal - (DessinNbLigTal * DessinHauteurTal) - 3, DessinHauteurTal, 3, MinPolice, AsterisqueParMutation);
+
 
    // PAGE 2
      PdfPage         := PDFDoc.Pages.AddPage;
@@ -5030,11 +5040,8 @@ Procedure PdfPersonnageCreationFeldo2P(Personnage: StructurePersonnage);
     DessinHautArmourPoints := DessinDebutHautEnc - ((DessinNbLigEnc + 1) * DessinHauteurEnc) - 3;
     PdfBlocArmourPoints(PdfPage, PdfImgShadow, DessinDebColCompG, DessinHautArmourPoints, ArmureTete, ArmureBras, ArmureCorps, ArmureJambe, ArmureBouclier, AsterisqueArmure);
 
-    // Table des mutations obtenues (CONTEXT.md §2.7, étape 9) - à droite d'Armour Points, même
-    // écart de 3mm que partout ailleurs entre deux blocs de la page ; XDroite réutilise
-    // DessinLargeurArm (bord droit déjà établi pour Armure/Équipement plus haut sur la page)
-    // plutôt qu'une nouvelle largeur arbitraire. Capacité fixe à 3 lignes, demandée par Nono.
-    PdfBlocMutations(PdfPage, Personnage, DessinDebColCompG + 63 + 3, DessinLargeurArm, DessinHautArmourPoints, DessinHauteurEnc, 3, MinPolice, AsterisqueParMutation);
+    // Le bloc Mutations est passé sur la page 1 (sous les Talents, 20/09/2026) : la place à
+    // droite d'Armour Points est libre pour le bloc monture.
     // Dernière utilisation de ListAsterisqueMutation/AsterisqueParMutation sur cette page -
     // libérées ici (même moment que ListAsterisqueArmure/AsterisqueParEquipement, juste avant,
     // après leur dernier usage respectif).
