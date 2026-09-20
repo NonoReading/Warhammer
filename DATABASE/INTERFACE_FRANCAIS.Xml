@@ -315,6 +315,9 @@
 <Text name="RULES-LAB_242">"vs cible plus grande"</Text>
 <Text name="RULES-LAB_243">"vs cible de rancune"</Text>
 <Text name="RULES-LAB_244">"par rune"</Text>
+<Text name="RULES-LAB_245">"en opposition a une attaque de melee"</Text>
+<Text name="RULES-LAB_246">"sur les attaques et sorts contre vous"</Text>
+<Text name="RULES-LAB_247">"DR bonus = PA la plus haute, en charge"</Text>
 </Label>
 </DATA_LABEL>
 </DATA_BOOK>

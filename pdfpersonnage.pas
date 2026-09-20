@@ -287,7 +287,7 @@ Procedure PdfBlocSortsDonnees(PdfPage: TPDFPage; Personnage: StructurePersonnage
 // au-delà de NbLignes lignes (voir le commentaire de PdfBlocEquipement sur la grille
 // doublée — comportement préservé tel quel). Purement local : IndDivers ne sert qu'à
 // positionner les lignes dans cette boucle, personne d'autre ne le lit après.
-Procedure PdfBlocDiversDonnees(PdfPage: TPDFPage; Personnage: StructurePersonnage; XGauche, XDroite, Y, HauteurLigne: Single; NbLignes: Integer; out EncDivers: Integer; MinPolice: Integer; AsterisqueMonture: String);
+Procedure PdfBlocDiversDonnees(PdfPage: TPDFPage; Personnage: StructurePersonnage; XGauche, XDroite, Y, HauteurLigne: Single; NbLignes: Integer; out EncDivers: Integer; MinPolice: Integer; AsterisqueMonture: String; var FabricationBonii: String);
 // Capacite de charge (<Carries>) d'une monture (theme Animals and Vehicles) : 0 pour tout
 // autre objet. La somme s'ajoute a l'Encombrement max, avec une asterisque numerotee.
 Function PdfMontureCapacite(PersonnageEquipement: StructurePersonnageEquipement): Integer;
@@ -2037,8 +2037,8 @@ Procedure PdfPersonnageCreation(Personnage: StructurePersonnage; BackGround: Boo
             PFabrication:= ChercheFabrication(LocData);
             TxtBonus    := PFabrication.Libelle+':'+PFabrication.Resume;
             // Rune a effet conditionnel (Might, Grudge) : l'effet chiffre par rune remplace le resume.
-            if FabricationEffetsConditionnels(PFabrication.CodeFabrication, ConstCibleModifieDegatCC) <> '' then
-              TxtBonus  := FabricationEffetsConditionnels(PFabrication.CodeFabrication, ConstCibleModifieDegatCC) + ' (' + GetTexteLibelle('RULES-LAB_244') + ')';
+            if FabricationEffetsConditionnels(PFabrication.CodeFabrication, '') <> '' then
+              TxtBonus  := FabricationEffetsConditionnels(PFabrication.CodeFabrication, '') + ' (' + GetTexteLibelle('RULES-LAB_244') + ')';
             PdfPage.WriteText(15,133+(NbBonus*2), TxtBonus);
           end;
         Inc(NbBonus);
@@ -3222,12 +3222,13 @@ Procedure PdfDiversAsterisque(PdfPage: TPDFPage; X1, X2, Y: Single; Texte: Strin
     PdfTaillePolice(PdfPage, PdfFontValue, ConstPoliceArial, 9);
   end;
 
-Procedure PdfBlocDiversDonnees(PdfPage: TPDFPage; Personnage: StructurePersonnage; XGauche, XDroite, Y, HauteurLigne: Single; NbLignes: Integer; out EncDivers: Integer; MinPolice: Integer; AsterisqueMonture: String);
+Procedure PdfBlocDiversDonnees(PdfPage: TPDFPage; Personnage: StructurePersonnage; XGauche, XDroite, Y, HauteurLigne: Single; NbLignes: Integer; out EncDivers: Integer; MinPolice: Integer; AsterisqueMonture: String; var FabricationBonii: String);
   var
     PersonnageEquipement: StructurePersonnageEquipement;
     IndDivers:            Integer;
     Enc:                  Integer;
     Libelle:              String;
+    Bidon:                String;
   begin
     IndDivers := 0;
     EncDivers := 0;
@@ -3238,6 +3239,12 @@ Procedure PdfBlocDiversDonnees(PdfPage: TPDFPage; Personnage: StructurePersonnag
           Enc       := PdfDiversEncombrement(PersonnageEquipement);
           EncDivers := EncDivers + Enc;
           Libelle   := PdfDiversLibelle(PersonnageEquipement);
+          // Runes de talisman (Warding...) : leur explication va dans le bloc Crafting Bonus.
+          if PersonnageEquipement.QualiteEquipement <> '' then
+            begin
+              Bidon := '';
+              FabricationDetail(PersonnageEquipement.QualiteEquipement, Bidon, FabricationBonii);
+            end;
           if (IndDivers <= (NbLignes * 2)) then
             begin
               if IndDivers > (NbLignes - 1) then
@@ -3591,7 +3598,12 @@ Procedure PdfBlocArmuresDonnees(PdfPage: TPDFPage; Personnage: StructurePersonna
                 end;
               FabricationDetail(PersonnageEquipement.QualiteEquipement, LigneBonus, FabricationBonii);
               PdfTaillePolice(PdfPage, PdfFontValue, ConstPoliceArial, 6);
-              PdfEcrit(PdfPage, XGauche + 70 +1, XDroite, Y - ((NbArmure + 2) * HauteurLigne) + 0.6, LigneBonus, MinPolice);
+              // Texte trop long pour une ligne : PdfEcrit le coupe en deux, la ligne du bas passait
+              // sous le cadre (runes Force + Resistance). Meme hauteur que le bloc des armes (+2.3).
+              if TailleTexte(LigneBonus, PdfFontTaille) > (XDroite - (XGauche + 71)) * 1.15 then
+                PdfEcrit(PdfPage, XGauche + 70 +1, XDroite, Y - ((NbArmure + 2) * HauteurLigne) + 2.3, LigneBonus, MinPolice)
+              else
+                PdfEcrit(PdfPage, XGauche + 70 +1, XDroite, Y - ((NbArmure + 2) * HauteurLigne) + 0.6, LigneBonus, MinPolice);
               PdfTaillePolice(PdfPage, PdfFontValue, ConstPoliceArial, 9);
             end;
       end;
@@ -3712,8 +3724,8 @@ Procedure PdfBlocDessinExplication(PdfPage: TPDFPage; XGauche, XDroite, YHaut, Y
             PFabrication:= ChercheFabrication(LocData);
             TxtBonus    := PFabrication.Libelle+':'+PFabrication.Resume;
             // Rune a effet conditionnel (Might, Grudge) : l'effet chiffre par rune remplace le resume.
-            if FabricationEffetsConditionnels(PFabrication.CodeFabrication, ConstCibleModifieDegatCC) <> '' then
-              TxtBonus  := FabricationEffetsConditionnels(PFabrication.CodeFabrication, ConstCibleModifieDegatCC) + ' (' + GetTexteLibelle('RULES-LAB_244') + ')';
+            if FabricationEffetsConditionnels(PFabrication.CodeFabrication, '') <> '' then
+              TxtBonus  := FabricationEffetsConditionnels(PFabrication.CodeFabrication, '') + ' (' + GetTexteLibelle('RULES-LAB_244') + ')';
             PdfEcritTient(PdfPage, XGauche + 4, XDroite - 1, YHaut-(NbBonus*HauteurLigne), TxtBonus);
           end;
       end;
@@ -4962,7 +4974,7 @@ Procedure PdfPersonnageCreationFeldo2P(Personnage: StructurePersonnage);
      // Dessin Sorts (extrait dans PdfBlocSortsDonnees, CONTEXT.md §2.4 - remplissage)
      PdfBlocSortsDonnees(PdfPage, Personnage, DessinDebColCompG, DessinDebutHautSor, DessinHauteurSor, MinPolice);
      // Dessin Divers (extrait dans PdfBlocDiversDonnees, CONTEXT.md §2.4 - remplissage)
-     PdfBlocDiversDonnees(PdfPage, Personnage, DessinDebColCompG, DessinLargeurEqu, DessinDebutHautEqu, DessinHauteurEqu, DessinNbLigEqu, EncDivers, MinPolice, AsterisqueMonture);
+     PdfBlocDiversDonnees(PdfPage, Personnage, DessinDebColCompG, DessinLargeurEqu, DessinDebutHautEqu, DessinHauteurEqu, DessinNbLigEqu, EncDivers, MinPolice, AsterisqueMonture, FabricationBonii);
      // Dessin Armes (extrait dans PdfBlocArmesDonnees, CONTEXT.md §2.4 - remplissage)
      PdfBlocArmesDonnees(PdfPage, Personnage, DessinDebColCompG, DessinLargeurWea, DessinDebutHautWea, DessinHauteurWea, BF, TBonusCC, TBonusCT, FabricationBonii, EncArme, ArmeBonii, ArmureBouclier, MinPolice, AsterisqueParMutation);
      // Dessin Armures (extrait dans PdfBlocArmuresDonnees, CONTEXT.md §2.4 - remplissage) -

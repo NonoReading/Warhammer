@@ -5021,6 +5021,7 @@ When you gain the Stunned Condition, you can spend a Fortune point to make an im
 <Short language="ENGLISH">"Armour rune, 14 SLs"</Short>
 <Max>"3"</Max>
 <Applies>Armour</Applies>
+<ModifyDamage name="CC" if="RULES-LAB_247">0</ModifyDamage>
 <Modifier>""</Modifier>
 </Craftsmanship>
 <Craftsmanship id="DWARF-RUNE_19">
@@ -5047,6 +5048,7 @@ When you gain the Stunned Condition, you can spend a Fortune point to make an im
 <Short language="ENGLISH">"Armour rune, 12 SLs"</Short>
 <Max>"3"</Max>
 <Applies>Armour</Applies>
+<ModifySkill name="CC" if="RULES-LAB_245">10</ModifySkill>
 <Modifier>""</Modifier>
 </Craftsmanship>
 <Craftsmanship id="DWARF-RUNE_22">
@@ -5163,6 +5165,7 @@ When you gain the Stunned Condition, you can spend a Fortune point to make an im
 <Short language="ENGLISH">"Talisman rune, 15 SLs"</Short>
 <Max>"3"</Max>
 <Applies>Misc</Applies>
+<ModifySkill name="CC" if="RULES-LAB_246">-10</ModifySkill>
 <Modifier>""</Modifier>
 </Craftsmanship>
 <Craftsmanship id="DWARF-RUNE_36">

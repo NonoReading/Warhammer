@@ -5536,3 +5536,13 @@ PdfBlocDessinExplication : nouvelle PdfEcritTient (pdfpersonnage.pas) reduit la 
 Fichier modifie : pdfpersonnage.pas, Log.txt.
 
 20/09/2026 - RUNES CONDITIONNELLES (MIGHT, GRUDGE) ET DEBORDEMENT DU BLOC EXPLICATION VALIDES PAR NONO
+
+20/09/2026 - RUNES CONDITIONNELLES : RESISTANCE, WARDING, FORCE - NON COMPILE, NON TESTE
+DWARF-RUNE_21 Resistance : ModifySkill CC +10 if=RULES-LAB_245 (opposition en melee). DWARF-RUNE_35 Warding : ModifySkill CC -10 if=RULES-LAB_246 (attaques et sorts contre soi). DWARF-RUNE_18 Force : ModifyDamage CC 0 if=RULES-LAB_247 (valeur 0 : le bonus est la PA la plus haute, non chiffrable ; seul le texte s affiche). FabricationEffetsConditionnels : Cible vide = premiere cible trouvee par rune (les blocs d explication l utilisent, plus de CC en dur). PdfBlocDiversDonnees recoit FabricationBonii (var) et appelle FabricationDetail : les runes de talisman (Misc) apparaissent dans le bloc Crafting Bonus. A tester : armure avec Resistance/Force, talisman Divers avec Warding, lignes du bloc, Might/Grudge inchanges.
+Fichiers modifies : chargefabrication.pas, pdfpersonnage.pas, BOOK_DWARF_PLAYERS_GUIDE.Xml, INTERFACE.Xml, INTERFACE_FRANCAIS.Xml, Log.txt.
+
+20/09/2026 - RUNES CONDITIONNELLES RESISTANCE, WARDING, FORCE VALIDEES PAR NONO (PDF BON)
+
+20/09/2026 - PDF : QUALITES LONGUES DU BLOC ARMOUR SUR DEUX LIGNES SANS DEBORDER - NON COMPILE
+PdfBlocArmuresDonnees : quand le texte de la colonne Qualities depasse la largeur (test TailleTexte, meme formule que PdfEcrit), il est ecrit a y+2.3 (comme les armes) au lieu de y+0.6, pour que la seconde ligne reste dans la case. Texte court : inchange.
+Fichier modifie : pdfpersonnage.pas, Log.txt.

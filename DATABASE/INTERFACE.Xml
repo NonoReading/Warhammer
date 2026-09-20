@@ -389,6 +389,9 @@
 <Text name="RULES-LAB_242">"vs larger target"</Text>
 <Text name="RULES-LAB_243">"vs Grudge target"</Text>
 <Text name="RULES-LAB_244">"per rune"</Text>
+<Text name="RULES-LAB_245">"when opposing a melee attack"</Text>
+<Text name="RULES-LAB_246">"on attacks and spells against you"</Text>
+<Text name="RULES-LAB_247">"bonus DR = highest AP, on a Charge"</Text>
 </Label>
 </DATA_LABEL>
 </DATA_BOOK>

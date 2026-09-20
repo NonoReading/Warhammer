@@ -41,7 +41,7 @@ Function FabricationEncombrement(ListeCode :String; Var Quality: String): Intege
 Function FabricationModificateurQualite(ListeCode, TypeModif, Cible: String): Integer;
 // Effets CONDITIONNELS (attribut if= du XML, stocke dans Filtre) des qualites d'UN objet, pour la
 // cible CC ou CT : "Rune of Might : +3 DR contre une cible de taille superieure / Grudge Rune :
-// +10% +1 DR contre ...". Chaine vide si aucun. Jamais ajoutes aux totaux. 20/09/2026.
+// +10% +1 DR contre ...". Chaine vide si aucun. Cible vide = la premiere cible trouvee par rune. Jamais ajoutes aux totaux. 20/09/2026.
 Function FabricationEffetsConditionnels(ListeCode, Cible: String): String;
 Function FabricationEstBulky(ListeCode :String): Boolean;
 Function FabricationEstPractical(ListeCode :String): Boolean;
@@ -355,6 +355,7 @@ Function FabricationEffetsConditionnels(ListeCode, Cible: String): String;
     Condition:        String;
     Ind, IndModif:    Integer;
     Ligne:            String;
+    CibleRetenue:     String;
   begin
     Result := '';
     if ListeCode = '' then Exit;
@@ -374,11 +375,14 @@ Function FabricationEffetsConditionnels(ListeCode, Cible: String): String;
           Degat     := 0;
           Pourcent  := 0;
           Condition := '';
+          CibleRetenue := '';
           for IndModif := 0 to ListFabricationModificateur.Count - 1 do
             if (ListFabricationModificateur[IndModif].Filtre <> '')
                and CompareRechercheValeur(ListFabricationModificateur[IndModif].CodeSource, Code)
-               and CompareRechercheValeur(ListFabricationModificateur[IndModif].Cible, Cible) then
+               and (((Cible = '') and ((CibleRetenue = '') or (ListFabricationModificateur[IndModif].Cible = CibleRetenue)))
+                    or ((Cible <> '') and CompareRechercheValeur(ListFabricationModificateur[IndModif].Cible, Cible))) then
               begin
+                CibleRetenue := ListFabricationModificateur[IndModif].Cible;
                 Condition := ListFabricationModificateur[IndModif].Filtre;
                 if ListFabricationModificateur[IndModif].TypeModif = ConstXmlModifieDegat then
                   Degat := Degat + ListFabricationModificateur[IndModif].Facteur * Niveau
