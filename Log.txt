@@ -5567,3 +5567,15 @@ PdfPersonnageCreation : pour une arme a distance (TexteRange1 <> ''), les qualit
 Fichiers modifies : pdfpersonnage.pas, Log.txt.
 
 20/09/2026 - QUALITES DES ARMES A DISTANCE (PDF DE CREATION) VALIDEES PAR NONO (BLACK POWDER, LEADBELCHER GUN SUR DEUX LIGNES). Reste anecdotique : la 2e ligne commence par une virgule (logique de PdfEcrit).
+
+20/09/2026 - RUNES NAINES : CHANTIER TERMINE. ECRAN WINPERSONNAGE VOLONTAIREMENT LAISSE TEL QUEL (DECISION NONO : ces informations n y ont pas d interet en soi). Fichiers modifies : A FAIRE.txt, Log.txt.
+
+20/09/2026 - TABLE AUGMENTATION DES TALENTS : LES CHOIX "A / B / C" SUR PLUSIEURS LIGNES (COMME LES FABRICATIONS) - NON COMPILE, NON TESTE
+winpersonnage.pas : le libelle d un talent a choix (ex. Slayer / Mark of the Hound / Mark of the Serpent...) est ecrit un choix par ligne (LineEnding apres chaque " / "), RowHeights de la ligne = nb de choix x 18 ; TabDrawCell aligne a gauche (colonne 3) les cellules multilignes au lieu de les centrer. Competences non touchees (meme cas possible, ligne ~5128). A tester : personnage dont la carriere propose un talent a choix (ecran Talent de l augmentation).
+Fichiers modifies : winpersonnage.pas, Log.txt.
+
+20/09/2026 - AVANCEMENT : UN TALENT DE CARRIERE "A/B" N ETAIT JAMAIS COMPTE (CAS NORSCAN MERCENARY, MARK OF THE EAGLE) - NON COMPILE, NON TESTE
+Cause : le talent de carriere RULES-T0161/NATIO-T0015_* (choix Slayer ou Mark of the Gods) est un code a plusieurs branches ; NiveauMetierTalentMax le comparait en bloc aux talents possedes (et son radical "T0161" ne valait pas "T0015"), donc TabTalent.Cells[2] (niveau) restait vide et CalculAvancement affichait Talent 0/1. Correctif : fonction locale TalentCarriereCorrespond, qui decoupe le code sur SeparateurMulti et teste chaque branche (meme code, ou meme radical). Le "bug des talents a specialisation" de A FAIRE.txt etait donc ce cas. A tester : Norscan Mercenary avec Mark of the Eagle, onglet Advancement (Talent 1/1) ; verifier qu un talent simple et un talent a specialisation restent comptes.
+Fichiers modifies : winpersonnage.pas, Log.txt.
+
+20/09/2026 - TALENTS A CHOIX SUR PLUSIEURS LIGNES ET TALENT DE CARRIERE "A/B" COMPTE DANS L AVANCEMENT - VALIDES PAR NONO (NORSCAN MERCENARY, MARK OF THE EAGLE). Ligne "bug a verifier" retiree de A FAIRE.txt. Reste : memes choix "A / B" sur plusieurs lignes pour la table des competences (winpersonnage.pas ~5128), non fait.

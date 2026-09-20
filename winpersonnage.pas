@@ -3814,6 +3814,35 @@ procedure TWinPersonnages.NiveauMetierTalentMax();
     aRow:            Integer;
     IndAttribut:     Integer;
     PMetierTalent:   StructureMetierTalent;
+
+  // Le talent de carriere peut etre un CHOIX "A/B" (ex. RULES-T0161/NATIO-T0015_* : Slayer ou
+  // Mark of the Gods, Norscan Mercenary). Le code brut ne ressemble alors a aucun talent
+  // possede : on teste chaque branche, avec les deux regles habituelles (meme code, ou meme
+  // radical a la specialisation pres). Sans cela un Mark of the Eagle n'etait jamais compte
+  // dans l'avancement. 20/09/2026.
+  function TalentCarriereCorrespond(CodeCarriere, CodeLigne: String): Boolean;
+    var
+      Branches: TStringList;
+      IndBr:    Integer;
+    begin
+      Result := False;
+      Branches                 := TStringList.Create;
+      try
+        Branches.StrictDelimiter := True;
+        Branches.Delimiter       := SeparateurMulti;
+        Branches.DelimitedText   := CodeCarriere;
+        for IndBr := 0 to Branches.Count - 1 do
+          if CompareRechercheValeur(Branches[IndBr], CodeLigne)
+             or (copy(CodeSansLivre(Branches[IndBr]), 1, 5) = copy(CodeSansLivre(CodeLigne), 1, 5)) then
+            begin
+              Result := True;
+              Break;
+            end;
+      finally
+        Branches.Free;
+      end;
+    end;
+
   begin
     for aRow := 1 to TabTalent.RowCount-1 do
     begin
@@ -3825,8 +3854,7 @@ procedure TWinPersonnages.NiveauMetierTalentMax();
             // Les cinq premiers caracteres sont le radical. On redecoupe les deux codes ici au
             // lieu de relire CodeValeur / CodeRecherche, les globales laissees par l'appel de
             // gauche : meme resultat, mais sans dependre de cet etat partage. CONTEXT.md 2.49.
-            if CompareRechercheValeur(PMetierTalent.CodeTalent, TabTalent.Cells[ColTalCode, ARow])
-               or (copy(CodeSansLivre(PMetierTalent.CodeTalent), 1, 5) = copy(CodeSansLivre(TabTalent.Cells[ColTalCode, ARow]), 1, 5)) then
+            if TalentCarriereCorrespond(PMetierTalent.CodeTalent, TabTalent.Cells[ColTalCode, ARow]) then
               begin
                 TabTalent.Cells[2, Arow] := IntToStr(PMetierTalent.NiveauMetier);
                 Break;
@@ -4434,7 +4462,10 @@ begin
                     BandeTxt := Rect(aRect.Left, TextY + IndLigneTxt * HautLigneTxt, aRect.Right, TextY + (IndLigneTxt + 1) * HautLigneTxt);
                     if BandeTxt.Bottom > aRect.Bottom then BandeTxt.Bottom := aRect.Bottom;
                     if BandeTxt.Top >= BandeTxt.Bottom then Continue;
-                    TextX := aRect.Left + (aRect.Right - aRect.Left - Grid.Canvas.TextWidth(LignesTexte[IndLigneTxt])) div 2;
+                    if aCol = 3 then
+                      TextX := aRect.Left + 5
+                    else
+                      TextX := aRect.Left + (aRect.Right - aRect.Left - Grid.Canvas.TextWidth(LignesTexte[IndLigneTxt])) div 2;
                     Grid.Canvas.TextRect(BandeTxt, TextX, BandeTxt.Top + 1, LignesTexte[IndLigneTxt]);
                   end;
               finally
@@ -5221,10 +5252,14 @@ Procedure TWinPersonnages.ChargeAugmentation();
              ListBranche := ListeTalent(PersonnageTalent.CodeTalent);
              for IndBranche := 0 to ListBranche.Count - 1 do
                begin
+                 // Un choix par ligne (comme les fabrications de TabEquipement) : la liste
+                 // des branches d'un talent "A / B / C..." ne tenait pas sur une ligne.
                  if LibBranche <> '' then
-                   LibBranche := LibBranche + ' ' + SeparateurMulti + ' ';
+                   LibBranche := LibBranche + ' ' + SeparateurMulti + LineEnding;
                  LibBranche := LibBranche + ChercheTalent(ListBranche[IndBranche]).Libelle;
                end;
+             if ListBranche.Count > 1 then
+               TabAugmentationTalent.RowHeights[NbC] := ListBranche.Count * 18;
              ListBranche.Free;
              TabAugmentationTalent.Cells[ColAugmTalLib, NbC] := LibBranche;
            end
