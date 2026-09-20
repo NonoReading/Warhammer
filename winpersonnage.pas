@@ -324,6 +324,7 @@ type
 
   private
     FCurrentTabSheet: TTabSheet;
+    procedure PersonnageVoisinClick(Sender: TObject);
 
   public
 
@@ -2285,6 +2286,8 @@ end;
 procedure TWinPersonnages.FormCreate(Sender: TObject);
   var
     Chemin:    String;
+    I:         Integer;
+    Fleche:    TButton;
   begin
     // Initialisation
     Initialisation();
@@ -2293,7 +2296,50 @@ procedure TWinPersonnages.FormCreate(Sender: TObject);
     Chemin := XmlPersonnageFichierActuel(GetCurrentDir+ConstCheminPersonnage+NomPersonnage);
     XmlChargePersonnage(Chemin);
 
+    // fleches precedent / suivant (pratique pour les tests) : creees ici, sans toucher au .lfm
+    for I := 0 to 1 do
+      begin
+        Fleche         := TButton.Create(Self);
+        Fleche.Parent  := Self;
+        Fleche.SetBounds(4 + I * 34, 4, 30, 24);
+        Fleche.Caption := Copy('<>', I + 1, 1);
+        Fleche.Tag     := I * 2 - 1;
+        Fleche.OnClick := @PersonnageVoisinClick;
+      end;
+
     KeyPreview := true;
+  end;
+
+// Ferme la fiche et rouvre celle du personnage voisin dans l ordre alphabetique des dossiers
+// de SAVED_CARACTERS (meme mecanisme que l Enregistrer : Menu.FormActivate rouvre RecherchePersonnage).
+procedure TWinPersonnages.PersonnageVoisinClick(Sender: TObject);
+  var
+    Noms:  TStringList;
+    Rech:  TSearchRec;
+    Base:  String;
+    Ind:   Integer;
+  begin
+    Base := GetCurrentDir + ConstCheminPersonnage;
+    Noms := TStringList.Create;
+    try
+      if FindFirst(Base + '*', faDirectory, Rech) = 0 then
+        begin
+          repeat
+            if ((Rech.Attr and faDirectory) <> 0) and (Rech.Name <> '.') and (Rech.Name <> '..') then
+              Noms.Add(Rech.Name);
+          until FindNext(Rech) <> 0;
+          FindClose(Rech);
+        end;
+      Noms.Sort;
+      Ind := Noms.IndexOf(NomPersonnage);
+      if (Ind < 0) or (Noms.Count < 2) then
+        Exit;
+      Ind := (Ind + TButton(Sender).Tag + Noms.Count) mod Noms.Count;
+      RecherchePersonnage := Noms[Ind];
+    finally
+      Noms.Free;
+    end;
+    Close;
   end;
 
 // Ancrage des controles (A FAIRE.txt, demande de Nono le 05/09/2026) - premiere etape sur

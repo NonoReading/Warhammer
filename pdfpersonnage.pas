@@ -3280,7 +3280,7 @@ Procedure PdfBlocDiversDonnees(PdfPage: TPDFPage; Personnage: StructurePersonnag
               Bidon := '';
               FabricationDetail(PersonnageEquipement.QualiteEquipement, Bidon, FabricationBonii);
             end;
-          if (IndDivers <= (NbLignes * 2)) then
+          if (IndDivers <= (NbLignes - 1) * 2) then
             begin
               if IndDivers > (NbLignes - 1) then
                 begin
@@ -4807,6 +4807,7 @@ Procedure PdfPersonnageCreationFeldo2P(Personnage: StructurePersonnage);
         PdfPageBlanc: TPDFPage;
         PEquipDry: StructurePersonnageEquipement;
         NbLigExpl, BudgetSorts, BesoinSor, NbSorNouveau, ExtraArm, LibreSor: Integer;
+        NbDivers, NbEquNeeded, BesoinEqu, PrisSor, NbArmPieces, ExtraArmPieces: Integer;
 
     // Page 2
       // Armure
@@ -5288,11 +5289,26 @@ Procedure PdfPersonnageCreationFeldo2P(Personnage: StructurePersonnage);
      for PEquipDry in Personnage.Equipement do
        if PEquipDry.TypeEquipement = TypeEquipSp then
          inc(BesoinSor);
+     // Équipement : les objets Divers/Animaux se répartissent sur deux demi-colonnes de
+     // NbLignes-1 lignes de données chacune ; besoin + lignes vides, jamais sous la taille par défaut.
+     NbDivers := 0;
+     for PEquipDry in Personnage.Equipement do
+       if (PEquipDry.TypeEquipement = TypeEquipDI) or (PEquipDry.TypeEquipement = TypeEquipAN) then
+         inc(NbDivers);
+     // Armure : une ligne par pièce (NbLignes-1 lignes de données), plus une ligne vide
+     NbArmPieces := 0;
+     for PEquipDry in Personnage.Equipement do
+       if ((not ArmureSet) and (PEquipDry.TypeEquipement = TypeEquipAR)) or
+          (ArmureSet and (PEquipDry.TypeEquipement = TypeEquipARS)) then
+         inc(NbArmPieces);
+     ExtraArmPieces := NbArmPieces + 2 - DessinNbLigArm;
+     if ExtraArmPieces < 0 then ExtraArmPieces := 0;
+     NbEquNeeded := (NbDivers + DessinMinLignesVides + 1) div 2 + 1;
      NbSorNouveau := BesoinSor + DessinMinLignesVides;
      if NbSorNouveau < 4 then NbSorNouveau := 4;
      if NbSorNouveau > BudgetSorts then NbSorNouveau := BudgetSorts;
      ExtraArm := NbLigExpl - (DessinNbLigArm + DessinNbLigEqu + 2);
-     if ExtraArm < 0 then ExtraArm := 0;
+     if ExtraArm < ExtraArmPieces then ExtraArm := ExtraArmPieces;
      if ExtraArm > BudgetSorts - NbSorNouveau then
        begin
          NbSorNouveau := BudgetSorts - ExtraArm;
@@ -5304,7 +5320,20 @@ Procedure PdfPersonnageCreationFeldo2P(Personnage: StructurePersonnage);
        end;
      LibreSor := BudgetSorts - NbSorNouveau - ExtraArm;
      DessinNbLigArm := DessinNbLigArm + ExtraArm;
-     DessinNbLigEqu := DessinNbLigEqu + (LibreSor + 1) div 2;
+     // l'Équipement passe avant le partage égal ; s'il manque de la place, les Sorts cèdent
+     // leurs lignes vides (jamais leur besoin + 1)
+     BesoinEqu := NbEquNeeded - DessinNbLigEqu;
+     if BesoinEqu < 0 then BesoinEqu := 0;
+     if BesoinEqu > LibreSor then
+       begin
+         PrisSor := Min(BesoinEqu - LibreSor, NbSorNouveau - Max(BesoinSor + 1, 2));
+         if PrisSor < 0 then PrisSor := 0;
+         NbSorNouveau := NbSorNouveau - PrisSor;
+         LibreSor     := LibreSor + PrisSor;
+       end;
+     PrisSor        := Min(BesoinEqu, LibreSor);
+     LibreSor       := LibreSor - PrisSor;
+     DessinNbLigEqu := DessinNbLigEqu + PrisSor + (LibreSor + 1) div 2;
      DessinNbLigWea := DessinNbLigWea + LibreSor div 2;
      DessinNbLigSor := NbSorNouveau;
      // la passe à blanc a déplacé la police globale : on la rétablit avant le vrai dessin
