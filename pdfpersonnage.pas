@@ -4415,6 +4415,22 @@ Function PdfNbTalentsAcquis(Personnage: StructurePersonnage): Integer;
     Result := Result + Length(PersonnageMutationTalent(Personnage)) + Length(PersonnageArmureBonusTalent(Personnage));
   end;
 
+// PDF "intelligent" page 2 (A FAIRE 20/09/2026) : nombre de lignes qu'occupe le bloc
+// d'explications (PdfBlocDessinExplication), sans le dessiner. Reproduit son compteur NbBonus :
+// une section non vide consomme 3 lignes (blanc, titre, blanc) + 1 ligne par bonus ; le résultat
+// est l'indice de la dernière ligne écrite (le texte de la ligne n est à YHaut - n * HauteurLigne).
+// Chaque chaîne est une liste de codes séparés par des virgules, comme pour le dessin.
+Function PdfNbLignesExplication(ArmureBonii, ArmeBonii, FabricationBonii: String): Integer;
+  begin
+    Result := 0;
+    if ArmureBonii <> '' then
+      Result := Result + 3 + CountOccurrences(ArmureBonii, ',') + 1;
+    if ArmeBonii <> '' then
+      Result := Result + 3 + CountOccurrences(ArmeBonii, ',') + 1;
+    if FabricationBonii <> '' then
+      Result := Result + 3 + CountOccurrences(FabricationBonii, ',') + 1;
+  end;
+
 Procedure PdfPersonnageCreationFeldo2P(Personnage: StructurePersonnage);
   var
     PDFDoc:          TPDFDocument;
@@ -4607,6 +4623,10 @@ Procedure PdfPersonnageCreationFeldo2P(Personnage: StructurePersonnage);
         // Répartition intelligente Compétences groupées / Talents (A FAIRE 20/09/2026)
         DessinMinLignesVides: Integer = 3;
         BudgetDonnees, BesoinComg, BesoinTal, LibreDonnees: Integer;
+        // Passe à blanc + répartition page 2 (A FAIRE 20/09/2026)
+        PdfPageBlanc: TPDFPage;
+        PEquipDry: StructurePersonnageEquipement;
+        NbLigExpl, BudgetSorts, BesoinSor, NbSorNouveau, ExtraArm, LibreSor: Integer;
 
     // Page 2
       // Armure
@@ -5059,6 +5079,56 @@ Procedure PdfPersonnageCreationFeldo2P(Personnage: StructurePersonnage);
      // CONTEXT.md §2.4) - chargée ici comme les autres images (Warhammer/Fantasy/
      // Ubersreik sur la page 1), l'identifiant est passé au bloc qui la dessine
      PdfImgShadow := PdfDoc.Images.AddFromFile(GetCurrentDir+ConstCheminPdfShadow,false);
+     // PASSE A BLANC (PDF "intelligent" page 2, A FAIRE 20/09/2026) : ArmureBonii/ArmeBonii/
+     // FabricationBonii ne se construisent qu'en dessinant les données, or les cadres doivent
+     // être dimensionnés avant. On rejoue donc les 3 blocs de données sur une page jetable :
+     // créée par Pages.AddPage mais jamais ajoutée à PdfSection, elle n'est pas écrite dans le
+     // PDF (fppdf n'écrit que les pages des sections). Ces blocs ne modifient ni Personnage ni
+     // les listes d'astérisques ; leurs sorties (Enc*, Armure*, Bonii) sont remises à zéro par
+     // les vrais appels plus bas, sauf FabricationBonii (cumulatif), remis à '' ci-dessous.
+     PdfPageBlanc := PDFDoc.Pages.AddPage;
+     PdfPageBlanc.PaperType := ptA4;
+     PdfPageBlanc.UnitOfMeasure := uomMillimeters;
+     // une page neuve n'a pas de police : les blocs de données écrivent avant d'en choisir une
+     // (comme la vraie page 2, qui reçoit sa police juste après sa création)
+     PdfTaillePolice(PdfPageBlanc, PdfFontBack, ConstPoliceCarlson+ConstPoliceGras, 10);
+     FabricationBonii := '';
+     PdfBlocDiversDonnees(PdfPageBlanc, Personnage, DessinDebColCompG, DessinLargeurEqu, DessinDebutHautEntete, DessinHauteurEqu, DessinNbLigEqu, EncDivers, MinPolice, FabricationBonii);
+     PdfBlocArmesDonnees(PdfPageBlanc, Personnage, DessinDebColCompG, DessinLargeurWea, DessinDebutHautEntete, DessinHauteurWea, BF, TBonusCC, TBonusCT, FabricationBonii, EncArme, ArmeBonii, ArmureBouclier, MinPolice, AsterisqueParMutation);
+     PdfBlocArmuresDonnees(PdfPageBlanc, Personnage, DessinDebColCompG, DessinLargeurArm, DessinDebutHautEntete, DessinHauteurArm, ArmureSet, FabricationBonii, EncArmure, ArmureBras, ArmureCorps, ArmureJambe, ArmureTete, ArmureBonii, MinPolice, AsterisqueParEquipement);
+     NbLigExpl := PdfNbLignesExplication(ArmureBonii, ArmeBonii, FabricationBonii);
+     FabricationBonii := '';
+     // Répartition des lignes de la colonne gauche (option A, Nono 20/09/2026) : les Sorts sont
+     // l'élément élastique (peu de personnages en ont). Ils gardent leur besoin + le minimum de
+     // lignes vides (au moins 4, au plus leur taille par défaut). Le bloc d'explications, à droite
+     // d'Armure + Équipement, impose une hauteur minimale à ces deux blocs (capacité = leurs lignes
+     // + 2) ; ce qui reste est partagé entre Équipement et Armes.
+     BudgetSorts := DessinNbLigSor;
+     BesoinSor   := 0;
+     for PEquipDry in Personnage.Equipement do
+       if PEquipDry.TypeEquipement = TypeEquipSp then
+         inc(BesoinSor);
+     NbSorNouveau := BesoinSor + DessinMinLignesVides;
+     if NbSorNouveau < 4 then NbSorNouveau := 4;
+     if NbSorNouveau > BudgetSorts then NbSorNouveau := BudgetSorts;
+     ExtraArm := NbLigExpl - (DessinNbLigArm + DessinNbLigEqu + 2);
+     if ExtraArm < 0 then ExtraArm := 0;
+     if ExtraArm > BudgetSorts - NbSorNouveau then
+       begin
+         NbSorNouveau := BudgetSorts - ExtraArm;
+         if NbSorNouveau < 2 then
+           begin
+             NbSorNouveau := 2;
+             ExtraArm     := BudgetSorts - 2;
+           end;
+       end;
+     LibreSor := BudgetSorts - NbSorNouveau - ExtraArm;
+     DessinNbLigArm := DessinNbLigArm + ExtraArm;
+     DessinNbLigEqu := DessinNbLigEqu + (LibreSor + 1) div 2;
+     DessinNbLigWea := DessinNbLigWea + LibreSor div 2;
+     DessinNbLigSor := NbSorNouveau;
+     // la passe à blanc a déplacé la police globale : on la rétablit avant le vrai dessin
+     PdfTaillePolice(PdfPage, PdfFontBack, ConstPoliceCarlson+ConstPoliceGras, 10);
      // Dessin Armures (extrait dans PdfBlocArmures, CONTEXT.md §2.4 - cadre uniquement,
      // le remplissage des lignes reste plus bas, dans la boucle Equipement/Armes/Sorts)
      DessinDebutHautArm := DessinDebutHautEntete;

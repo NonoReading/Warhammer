@@ -5645,3 +5645,8 @@ Fichiers modifies : A FAIRE.txt, Log.txt.
 20/09/2026 - PDF FELDO INTELLIGENT, PAGE 1 : REPARTITION DES LIGNES SELON LE BESOIN - COMPILE ET VALIDE PAR NONO
 pdfpersonnage.pas : PdfNbCompetencesGroupeesPrises, PdfNbTalentsAcquis ; DessinNbLigComg/DessinNbLigTal calcules avant le dessin (budget 41 lignes de donnees inchange, DessinMinLignesVides = 3, reste partage a parts egales).
 Fichiers modifies : pdfpersonnage.pas, CONTEXT.md, Log.txt, A FAIRE.txt.
+
+20/09/2026 - PDF FELDO INTELLIGENT, PAGE 2 : PASSE A BLANC ET REPARTITION DES LIGNES (SORTS ELASTIQUES) - COMPILE ET VALIDE PAR NONO (AVEC ET SANS SORTS)
+pdfpersonnage.pas : PdfNbLignesExplication ; PdfPageBlanc (Pages.AddPage sans PdfSection.AddPage, donc non ecrite) rejoue PdfBloc{Divers,Armes,Armures}Donnees pour obtenir ArmureBonii/ArmeBonii/FabricationBonii avant les cadres ; DessinNbLigSor = besoin + 3 (min 4, max 11), ExtraArm si le texte des explications depasse Arm+Equ+2 lignes, reste partage Equ/Wea. Bug corrige : la page jetable n avait pas de police (EPDF No Font was set) -> PdfTaillePolice juste apres sa creation.
+Appris : fppdf n ecrit que les pages ajoutees a une section.
+Fichiers modifies : pdfpersonnage.pas, CONTEXT.md, Log.txt, A FAIRE.txt.
