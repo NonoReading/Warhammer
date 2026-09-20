@@ -6036,7 +6036,7 @@ automatique contre le XML avec les libellés résolus à travers tous les livres
 les 4 qualités et les 9 miracles sont complets. Seize écarts de carrière corrigés (dont trois
 **interversions de talents entre niveaux voisins**, que seul le diff automatique pouvait voir), trois
 `Spear` rendues à la `Lance`, et l'armure de plates rendue uniforme sur les quatre carrières
-concernées. Décision de Nono (révisée le 20/09/2026, une fois les véhicules saisis) : **l'artillerie du chapitre XI est saisie**, 12 armes p.122 (`UPINA-PROJ_ARB_01`, `_POUDRE_16` à `_20`, `_CATAPULT_01` à `_03`, `_ING_08` à `_10`) avec les défauts `Crewed` (`UPINA-WEAPB35`) et `Salvo` (`UPINA-WEAPB36`), sans mécanique d'équipage.
+concernées. Décision de Nono (révisée le 20/09/2026, une fois les véhicules saisis) : **l'artillerie du chapitre XI est saisie**, 12 armes p.122 (`UPINA-PROJ_ARB_01`, `_POUDRE_16` à `_20`, `_CATAPULT_01` à `_03`, `_ING_08` à `_10`) avec les défauts `Crewed` (`UPINA-WEAPB35`) et `Salvo` (`UPINA-WEAPB36`), sans mécanique d'équipage. Sea of Claws (p.100) a sa propre table, avec ses chiffres : 6 pièces `SEAOF-PROJ_ARB_01`, `_POUDRE_01` à `_05` et 7 munitions `SEAOF-MUNI_01` à `_07` (Crewed et Spread renvoient à Up in Arms, à tester par Nono).
 
 🐛 **Bug signalé, non corrigé, à confirmer par Nono.** Le suffixe de qualité `(Q)` s'écrit de deux
 façons dans `DATABASE` : **40** items le collent au code (`RULES-ARMO_14(Q)`), **42** mettent un
