@@ -5627,3 +5627,6 @@ Fichiers modifies : pdfpersonnage.pas, CONTEXT.md, Log.txt.
 20/09/2026 - CODE MORT DES MONTURES RETIRE (pdfpersonnage.pas) - COMPILE
 Supprimes : PdfMontureCapacite, PdfMontureCapaciteTotale, PdfDiversAsterisque, EncMonture, AsterisqueMonture (variable, bloc "(N)" a cote de l Encombrement max, parametre de PdfBlocDiversDonnees et ses 2 lignes d asterisque). Signature de PdfBlocDiversDonnees changee : un seul appelant (Feldo2P), corrige.
 Fichiers modifies : pdfpersonnage.pas, CONTEXT.md, Log.txt.
+
+20/09/2026 - A FAIRE.TXT : TROIS NOTES AJOUTEES (BOUTON WORN A REMPLACER PAR LE CLIC DROIT + TEXTE, BLOC MONTURE SUR LE PDF FELDO, BLOC MUTATIONS SUR LA PAGE 1 SOUS LES TALENTS). Rien de code.
+Fichiers modifies : A FAIRE.txt, Log.txt.
