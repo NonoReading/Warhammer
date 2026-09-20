@@ -85,6 +85,10 @@ Const
       ConstXmlData                      = 'name';
       ConstXmlEquipementPorte            = 'worn';
       ConstXmlEquipementQuantite         = 'quantite';
+      // Identifiant d'instance d'un animal du personnage (A1, A2...) et animal qui transporte
+      // l'objet (CONTEXT.md 2.84). Ne pas confondre avec 'worn' (ConstXmlEquipementPorte).
+      ConstXmlEquipementId               = 'id';
+      ConstXmlEquipementPortePar         = 'carriedby';
       ConstXmlCodeLivre                 = 'CODE_BOOK';
       ConstXmlLibelleLivre              = 'BOOK';
       ConstXmlVersionLivre              = 'VERSION';

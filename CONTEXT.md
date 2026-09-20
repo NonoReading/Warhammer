@@ -10866,6 +10866,36 @@ figés sur WFRP4\ - chantier séparé", cf. plus haut).
 - Compilé (`lazbuild`, 0 erreur) après chaque lot. Nono va tester en jeu (métiers/niveaux
   WFRP5 tout juste ajoutés) - résultat à consigner ici à la prochaine session.
 
+### 2.84 Montures : rattachement « porté par » — conception arrêtée (option A), rien codé (20/09/2026)
+
+Décision Nono : **option A**, l'animal est celui du personnage (identifiant local). Le groupe
+partagé (XML de groupe) reste un chantier à part ; il se branchera plus tard en faisant
+pointer `carriedby` vers un identifiant de groupe.
+
+- ⚠️ `Porte` (`chargepersonnage.pas:61`, attribut `worn`) = « vêtu / porté sur soi ». Le
+  nouveau champ ne doit PAS s'appeler `Porte` : `PortePar` en Pascal, `carriedby` en XML.
+- **Donnée** : `PortePar: String` sur la ligne d'équipement (armes, armures, sets, divers),
+  attribut `carriedby="<id>"`, absent par défaut (comme `worn` et `qty`). Chaque animal de
+  l'inventaire reçoit un identifiant d'instance stable (`id="A1"`), pas le code du catalogue
+  (deux Riding Horse possibles).
+- **Calcul** : objet confié = encombrement 0 pour le personnage ; somme par animal comparée à
+  `<Carries>` (avertissement, jamais de blocage) ; `carriedby` l'emporte sur `worn` ; animal
+  retiré = `carriedby` effacé sur ses objets.
+- **Interface** : clic droit « Confier à… » / « Reprendre » dans WinPersonnage, indication du
+  porteur dans la liste, « chargé X / capacité Y » dans `winanimal.pas`.
+- **PDF** : le raccourci `PdfMontureCapaciteTotale` (capacité des montures ajoutée à
+  l'Encombrement max, `pdfpersonnage.pas:4824`) disparaît ; chaque animal indique
+  « porte N / capacité ».
+- **Étapes, une à la fois** : (1) champ + attribut + identifiant d'instance ; (2) calcul et
+  avertissement ; (3) interface ; (4) PDF.
+- **Étape 1 codée, compilée et VALIDÉE par Nono (20/09/2026)** : champs `IdInstance`/`PortePar` du record d'équipement, constantes `ConstXmlEquipementId` (`id`) et `ConstXmlEquipementPortePar` (`carriedby`), `XmlAttributEquipementInstance` (écriture des 4 sous-chapitres), `LitEquipementInstance` (lecture), `IdAnimalLibre` (A1, A2...). Un animal sans id en reçoit un au chargement (`chargepersonnage.pas`) et au resync grille (`winpersonnage.pas`, 2 sites). La grille `TabEquipement` passe à 12 colonnes (10 = id, 11 = porteur, cachées).
+- ⚠️ À vérifier avant l'étape 3 : à l'affichage de la grille (`winpersonnage.pas` ~3603), la branche `TypeEquipDi` n'a pas de branche `TypeEquipAN` : un animal rechargé pourrait avoir libellé et qualité vides.
+- **Étape 2 codée et compilée (20/09/2026), NON TESTÉE** : `pdfpersonnage.pas`, les 6 sommes `EncArme`/`EncArmure`/`EncDivers` ignorent une ligne à `PortePar` renseigné ; `PdfAnimalCharge(Personnage, IdAnimal)` (interface) = charge brute d'un animal. L'avertissement de dépassement est reporté à l'étape 3 (interface).
+- **Étape 3 codée et compilée (20/09/2026), NON TESTÉE** : clic droit sur un objet = « Confier à <animal> (A1) » / « Reprendre » (menu créé en code, `TabEquipementPopup`), colonne visible 12 « Porte par », `AttribueIdAnimaux` sur la grille avant chaque copie vers `Personnage.Equipement`, avertissement de surcharge non bloquant (`AvertitSurcharge`), « Charge : X » dans la fiche animal (`AfficheFicheAnimal(PTrapping, Charge)`). Bug `TypeEquipAN` de la grille corrigé au passage. Libellés RULES-LAB_254 à _258.
+- **Étape 3 validée par Nono (20/09/2026).** **Étape 4 codée, compilée et VALIDÉE par Nono** (PDF Feldo) : la capacité des montures n'ajoute plus rien à l'Encombrement max ; un objet confié à un animal affiche son encombrement entre parenthèses, même à 0 (idée de Nono), et ne compte pas dans les totaux ; l'animal qui porte quelque chose indique « (Charge N/capacité) ».
+- Restes : nettoyer le code mort (`PdfMontureCapaciteTotale`, `PdfMontureCapacite`, `AsterisqueMonture`, `EncMonture`) une fois l'étape 4 validée ; le gabarit hors Feldo n'affiche pas les parenthèses pour armes/armures (seuls les totaux sont corrects) ; groupe partagé = chantier à part.
+- **Point de reprise** : test de l'étape 4 (PDF avec une armure dans la sacoche d'une monture : « (N) » dans la colonne Enc, total sans la monture).
+
 ---
 
 ## 3. TODO / Backlog

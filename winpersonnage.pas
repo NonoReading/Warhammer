@@ -6,7 +6,7 @@ interface
 
 uses
   Classes, SysUtils, Forms, Controls, Graphics, Dialogs, ExtCtrls, StdCtrls,
-  Grids, ComCtrls, LCLIntf, Spin, MaskEdit, Math, BGRABitmap, BGRABitmapTypes,
+  Grids, ComCtrls, Menus, LCLIntf, Spin, MaskEdit, Math, BGRABitmap, BGRABitmapTypes,
   BCButton, BCLabel, ChargeConstantes, ChargeRace, ChargeRaceAttribut,
   UnitCalcul, ChargeMetier, ChargeMetierAttribut, ChargeTalent,
   ChargeMetierTalent, ChargeMetierNiveau, ChargeCompetence, ChargeLivre,
@@ -294,6 +294,19 @@ type
   procedure TabEquipementSelectCell({%H-}Sender: TObject; {%H-}aCol, aRow: Integer;
     var {%H-}CanSelect: Boolean);
   procedure TabEquipementDblClick({%H-}Sender: TObject);
+  // Rattachement d'un objet a un animal (CONTEXT.md 2.84, etape 3) : colonnes cachees 10 (id de
+  // l'animal) et 11 (animal porteur), colonne 12 = nom du porteur.
+  procedure TabEquipementMouseDown({%H-}Sender: TObject; Button: TMouseButton; {%H-}Shift: TShiftState; X, Y: Integer);
+  procedure TabEquipementPopup({%H-}Sender: TObject);
+  procedure MenuConfierClick(Sender: TObject);
+  procedure MenuReprendreClick({%H-}Sender: TObject);
+  procedure AttribueIdAnimaux;
+  procedure RafraichitPorteurs;
+  function LigneEstAnimal(Ligne: Integer): Boolean;
+  function EquipementDeLigne(Ligne: Integer): StructurePersonnageEquipement;
+  function ChargeAnimalGrille(IdAnimal: String): Integer;
+  function CapaciteAnimalGrille(IdAnimal: String): Integer;
+  procedure AvertitSurcharge(IdAnimal: String);
   function XpSortCout(CodeSort: String): String;
   function ValeurTarifSort(Expression: String; Defaut: Integer): Integer;
   function TalentSort(CodeSort: String): StructureTalent;
@@ -899,7 +912,12 @@ procedure TWinPersonnages.ButtonPorteClick(Sender: TObject);
       and (TalentSort(TabEquipement.Cells[2, TabEquipement.Row]).CodeTalent = '') then
         begin
           if TabEquipement.Cells[8, TabEquipement.Row] = '' then
-            TabEquipement.Cells[8, TabEquipement.Row] := 'X'
+            begin
+              TabEquipement.Cells[8, TabEquipement.Row]  := 'X';
+              // porte sur soi : ne peut plus etre confie a un animal (carriedby l'emporte sur worn)
+              TabEquipement.Cells[11, TabEquipement.Row] := '';
+              RafraichitPorteurs;
+            end
           else
             TabEquipement.Cells[8, TabEquipement.Row] := '';
         end;
@@ -918,12 +936,18 @@ procedure TWinPersonnages.ButtonDeleteClick(Sender: TObject);
           Reponse := MessageDlg(GetTexteLibelle('RULES-MESS_039'), mtConfirmation, mbYesNo, 0);
           if Reponse = mrYes then
             begin
+              // Un animal retire rend ses objets au personnage.
+              if TabEquipement.Cells[10, TabEquipement.Row] <> '' then
+                for i := 1 to TabEquipement.RowCount - 1 do
+                  if TabEquipement.Cells[11, i] = TabEquipement.Cells[10, TabEquipement.Row] then
+                    TabEquipement.Cells[11, i] := '';
               // Décale les lignes suivantes vers le haut
               for i := TabEquipement.Row to TabEquipement.RowCount - 2 do
                 TabEquipement.Rows[i].Assign(TabEquipement.Rows[i + 1]);
 
               // Supprime la dernière ligne, maintenant en double
               TabEquipement.RowCount := TabEquipement.RowCount - 1;
+              RafraichitPorteurs;
             end
         end;
   end;
@@ -2157,7 +2181,7 @@ begin
   TabEquipement.Options        := TabEquipement.Options + [goEditing, goAlwaysShowEditor];
   TabEquipement.OnSelectEditor := @TabEquipementSelectEditor;
   TabEquipement.OnDblClick     := @TabEquipementDblClick;
-  TabEquipement.ColCount       := 10;
+  TabEquipement.ColCount       := 13;
   TabEquipement.RowCount       := 2;
   TabEquipement.ColWidths[0]   := 20;
   TabEquipement.Cells[1, 0]    := GetTexteLibelle('RULES-LAB_052');
@@ -2178,6 +2202,16 @@ begin
   TabEquipement.ColWidths[8]   := 60;
   TabEquipement.Cells[9, 0]    := GetTexteLibelle('RULES-LAB_203');
   TabEquipement.ColWidths[9]   := 60;
+  // Colonnes cachees : identifiant d'instance de l'animal et animal porteur (CONTEXT.md 2.84).
+  TabEquipement.Cells[10, 0]   := 'Id';
+  TabEquipement.ColWidths[10]  := 0;
+  TabEquipement.Cells[11, 0]   := 'PortePar';
+  TabEquipement.ColWidths[11]  := 0;
+  TabEquipement.Cells[12, 0]   := GetTexteLibelle('RULES-LAB_254');
+  TabEquipement.ColWidths[12]  := 150;
+  TabEquipement.OnMouseDown    := @TabEquipementMouseDown;
+  TabEquipement.PopupMenu      := TPopupMenu.Create(Self);
+  TabEquipement.PopupMenu.OnPopup := @TabEquipementPopup;
 
   // Mise en forme dy tableau de choix des équipement de métier
   TabMetierEquipement.Options          := TabMetierEquipement.Options + [goEditing, goAlwaysShowEditor];
@@ -2694,6 +2728,8 @@ procedure TWinPersonnages.CalculTotaux();
           Personnage.AugmentationTalent  += [PersonnageTalent];
         end;
 
+    // Un animal ajoute depuis le dernier chargement recoit son identifiant avant la copie.
+    AttribueIdAnimaux;
     Personnage.Equipement := [];
     for IndAugm := 1 to TabEquipement.RowCount - 1 do
       begin
@@ -2701,6 +2737,8 @@ procedure TWinPersonnages.CalculTotaux();
         // Colonne 9 = Quantite (vide ou invalide = 1).
         PersonnageEquipement.Quantite       := StrToIntDef(TabEquipement.Cells[9, IndAugm], 1);
         if PersonnageEquipement.Quantite < 1 then PersonnageEquipement.Quantite := 1;
+        PersonnageEquipement.IdInstance     := TabEquipement.Cells[10, IndAugm];
+        PersonnageEquipement.PortePar       := TabEquipement.Cells[11, IndAugm];
         If TalentSort(TabEquipement.Cells[2, IndAugm]).CodeTalent <> ''
            then
           begin
@@ -3576,6 +3614,8 @@ begin
       TabEquipement.Cells[2, NbEquipement]   := PersonnageEquipement.CodeEquipement;
       TabEquipement.Cells[3, NbEquipement]   := TrimRight(PersonnageEquipement.TypeEquipement);
       TabEquipement.Cells[9, NbEquipement]   := IntToStr(PersonnageEquipement.Quantite);
+      TabEquipement.Cells[10, NbEquipement]  := PersonnageEquipement.IdInstance;
+      TabEquipement.Cells[11, NbEquipement]  := PersonnageEquipement.PortePar;
       if TrimRight(PersonnageEquipement.TypeEquipement) = TrimRight(TypeEquipWe) then
           begin
             PArme := chercheArme(PersonnageEquipement.CodeEquipement);
@@ -3600,7 +3640,8 @@ begin
             if PersonnageEquipement.Porte then
               TabEquipement.Cells[8, NbEquipement] := 'X';
           end
-      else if TrimRight(PersonnageEquipement.TypeEquipement) = TrimRight(TypeEquipDi) then
+      else if (TrimRight(PersonnageEquipement.TypeEquipement) = TrimRight(TypeEquipDi))
+              or (TrimRight(PersonnageEquipement.TypeEquipement) = TrimRight(TypeEquipAN)) then
           Begin
             // Cf. ChargerMetierEquipement : un code Divers deja possede par le personnage
             // peut etre un Trapping catalogue (RULES-TRAP_xxx), resolu sans changer sa
@@ -3623,6 +3664,7 @@ begin
             TabEquipement.Cells[5, NbEquipement]   := IntToStr(CalculOptionXpDiv25(PersonnageEquipement.CoutXp));
           end;
     end;
+  RafraichitPorteurs;
 
   // historique de corruption
   StringGridCorruption.RowCount := 1;
@@ -4752,7 +4794,179 @@ procedure TWinPersonnages.TabEquipementDblClick(Sender: TObject);
     if (TabEquipement.Row < 1) or (TabEquipement.Row >= TabEquipement.RowCount) then exit;
     PTrapping := ChercheTrapping(TabEquipement.Cells[2, TabEquipement.Row]);
     if PTrapping.ProfilAnimal <> '' then
-      AfficheFicheAnimal(PTrapping);
+      begin
+        AttribueIdAnimaux;
+        AfficheFicheAnimal(PTrapping, ChargeAnimalGrille(TabEquipement.Cells[10, TabEquipement.Row]));
+      end;
+  end;
+
+function TWinPersonnages.LigneEstAnimal(Ligne: Integer): Boolean;
+  begin
+    Result := (Ligne > 0) and (Ligne < TabEquipement.RowCount)
+      and (ChercheTrapping(TabEquipement.Cells[2, Ligne]).ProfilAnimal <> '');
+  end;
+
+// Identifiant A<N> pour chaque animal de la grille qui n'en a pas encore (meme regle que
+// IdAnimalLibre de ChargePersonnage, mais sur la grille, seule a jour avant la sauvegarde).
+procedure TWinPersonnages.AttribueIdAnimaux;
+  var
+    Ligne, Suivant, Ind: Integer;
+    Id:                  String;
+    Pris:                Boolean;
+  begin
+    for Ligne := 1 to TabEquipement.RowCount - 1 do
+      if LigneEstAnimal(Ligne) and (TabEquipement.Cells[10, Ligne] = '') then
+        begin
+          Suivant := 0;
+          repeat
+            Inc(Suivant);
+            Id   := 'A' + IntToStr(Suivant);
+            Pris := False;
+            for Ind := 1 to TabEquipement.RowCount - 1 do
+              if TabEquipement.Cells[10, Ind] = Id then
+                Pris := True;
+          until not Pris;
+          TabEquipement.Cells[10, Ligne] := Id;
+        end;
+  end;
+
+// Colonne 12 : nom de l'animal porteur. Un porteur disparu (id introuvable) est oublie.
+procedure TWinPersonnages.RafraichitPorteurs;
+  var
+    Ligne, Ind: Integer;
+    Trouve:     Boolean;
+  begin
+    for Ligne := 1 to TabEquipement.RowCount - 1 do
+      begin
+        TabEquipement.Cells[12, Ligne] := '';
+        if TabEquipement.Cells[11, Ligne] = '' then continue;
+        Trouve := False;
+        for Ind := 1 to TabEquipement.RowCount - 1 do
+          if TabEquipement.Cells[10, Ind] = TabEquipement.Cells[11, Ligne] then
+            begin
+              TabEquipement.Cells[12, Ligne] := TabEquipement.Cells[4, Ind] + ' (' + TabEquipement.Cells[10, Ind] + ')';
+              Trouve := True;
+              break;
+            end;
+        if not Trouve then
+          TabEquipement.Cells[11, Ligne] := '';
+      end;
+  end;
+
+function TWinPersonnages.EquipementDeLigne(Ligne: Integer): StructurePersonnageEquipement;
+  var
+    Typ: String;
+  begin
+    Result.CodeEquipement    := TabEquipement.Cells[2, Ligne];
+    Result.QualiteEquipement := TabEquipement.Cells[7, Ligne];
+    Result.Quantite          := StrToIntDef(TabEquipement.Cells[9, Ligne], 1);
+    if Result.Quantite < 1 then Result.Quantite := 1;
+    Typ := TrimRight(TabEquipement.Cells[3, Ligne]);
+    if Typ = TrimRight(TypeEquipWe) then Result.TypeEquipement := TypeEquipWe
+    else if Typ = TrimRight(TypeEquipAr) then Result.TypeEquipement := TypeEquipAr
+    else if Typ = TrimRight(TypeEquipArS) then Result.TypeEquipement := TypeEquipArS
+    else if Typ = TrimRight(TypeEquipAN) then Result.TypeEquipement := TypeEquipAN
+    else Result.TypeEquipement := TypeEquipDI;
+  end;
+
+// Encombrement brut de tout ce qui est confie a l'animal IdAnimal (lu dans la grille).
+function TWinPersonnages.ChargeAnimalGrille(IdAnimal: String): Integer;
+  var
+    Ligne: Integer;
+  begin
+    Result := 0;
+    if IdAnimal = '' then exit;
+    for Ligne := 1 to TabEquipement.RowCount - 1 do
+      if TabEquipement.Cells[11, Ligne] = IdAnimal then
+        Result := Result + PdfEquipementEncombrementBrut(EquipementDeLigne(Ligne));
+  end;
+
+function TWinPersonnages.CapaciteAnimalGrille(IdAnimal: String): Integer;
+  var
+    Ligne: Integer;
+  begin
+    Result := 0;
+    for Ligne := 1 to TabEquipement.RowCount - 1 do
+      if TabEquipement.Cells[10, Ligne] = IdAnimal then
+        Result := ChercheTrapping(TabEquipement.Cells[2, Ligne]).Capacite
+                  * StrToIntDef(TabEquipement.Cells[9, Ligne], 1);
+  end;
+
+// Avertissement (jamais un blocage) quand la charge depasse la capacite <Carries>.
+procedure TWinPersonnages.AvertitSurcharge(IdAnimal: String);
+  var
+    Charge, Capacite, Ligne: Integer;
+  begin
+    Charge   := ChargeAnimalGrille(IdAnimal);
+    Capacite := CapaciteAnimalGrille(IdAnimal);
+    if (Capacite > 0) and (Charge > Capacite) then
+      for Ligne := 1 to TabEquipement.RowCount - 1 do
+        if TabEquipement.Cells[10, Ligne] = IdAnimal then
+          ShowMessage(TabEquipement.Cells[4, Ligne] + ' (' + IdAnimal + ') : '
+            + GetTexteLibelle('RULES-LAB_257') + ' ' + IntToStr(Charge) + ' / ' + IntToStr(Capacite)
+            + ' - ' + GetTexteLibelle('RULES-LAB_258'));
+  end;
+
+// Le clic droit ne deplace pas la ligne courante d'une grille : on la selectionne avant le menu.
+procedure TWinPersonnages.TabEquipementMouseDown(Sender: TObject; Button: TMouseButton; Shift: TShiftState; X, Y: Integer);
+  var
+    Colonne, Ligne: Integer;
+  begin
+    if Button <> mbRight then exit;
+    TabEquipement.MouseToCell(X, Y, Colonne, Ligne);
+    if Ligne > 0 then
+      TabEquipement.Row := Ligne;
+  end;
+
+procedure TWinPersonnages.TabEquipementPopup(Sender: TObject);
+  var
+    Ligne, Ind: Integer;
+    Item:       TMenuItem;
+    MenuPop:    TPopupMenu;
+  begin
+    MenuPop := TabEquipement.PopupMenu;
+    MenuPop.Items.Clear;
+    Ligne := TabEquipement.Row;
+    // ni un sort ni un animal (un animal ne se confie pas a un autre)
+    if (Ligne < 1) or (TalentSort(TabEquipement.Cells[2, Ligne]).CodeTalent <> '') or LigneEstAnimal(Ligne) then exit;
+    AttribueIdAnimaux;
+    for Ind := 1 to TabEquipement.RowCount - 1 do
+      if LigneEstAnimal(Ind) then
+        begin
+          Item         := TMenuItem.Create(MenuPop);
+          Item.Caption := GetTexteLibelle('RULES-LAB_255') + ' ' + TabEquipement.Cells[4, Ind]
+                          + ' (' + TabEquipement.Cells[10, Ind] + ')';
+          Item.Hint    := TabEquipement.Cells[10, Ind];
+          Item.OnClick := @MenuConfierClick;
+          MenuPop.Items.Add(Item);
+        end;
+    if TabEquipement.Cells[11, Ligne] <> '' then
+      begin
+        Item         := TMenuItem.Create(MenuPop);
+        Item.Caption := GetTexteLibelle('RULES-LAB_256');
+        Item.OnClick := @MenuReprendreClick;
+        MenuPop.Items.Add(Item);
+      end;
+  end;
+
+procedure TWinPersonnages.MenuConfierClick(Sender: TObject);
+  var
+    Id: String;
+  begin
+    Id := TMenuItem(Sender).Hint;
+    if (TabEquipement.Row < 1) or (Id = '') then exit;
+    TabEquipement.Cells[11, TabEquipement.Row] := Id;
+    // confie a un animal : plus porte sur soi (carriedby l'emporte sur worn)
+    TabEquipement.Cells[8, TabEquipement.Row]  := '';
+    RafraichitPorteurs;
+    AvertitSurcharge(Id);
+  end;
+
+procedure TWinPersonnages.MenuReprendreClick(Sender: TObject);
+  begin
+    if TabEquipement.Row < 1 then exit;
+    TabEquipement.Cells[11, TabEquipement.Row] := '';
+    RafraichitPorteurs;
   end;
 
 procedure TWinPersonnages.TabEquipementSelectCell(Sender: TObject; aCol,
@@ -5841,6 +6055,7 @@ Procedure TWinPersonnages.MajTables();
         end;
 
     // Maj personnage Equipement
+    AttribueIdAnimaux;
     Personnage.Equipement := [];
     for Ind := 1 to TabEquipement.RowCount - 1 do
       begin
@@ -5848,6 +6063,8 @@ Procedure TWinPersonnages.MajTables();
         // Cf. l'autre point de reconstruction depuis la grille (ci-dessus) : colonne 9.
         PersonnageEquipement.Quantite       := StrToIntDef(TabEquipement.Cells[9, Ind], 1);
         if PersonnageEquipement.Quantite < 1 then PersonnageEquipement.Quantite := 1;
+        PersonnageEquipement.IdInstance     := TabEquipement.Cells[10, Ind];
+        PersonnageEquipement.PortePar       := TabEquipement.Cells[11, Ind];
         If TalentSort(TabEquipement.Cells[2, Ind]).CodeTalent <> ''
            then
           begin

@@ -398,6 +398,11 @@
 <Text name="RULES-LAB_251">"Traits"</Text>
 <Text name="RULES-LAB_252">"Animal"</Text>
 <Text name="RULES-LAB_253">"Sheet"</Text>
+<Text name="RULES-LAB_254">"Carried by"</Text>
+<Text name="RULES-LAB_255">"Entrust to"</Text>
+<Text name="RULES-LAB_256">"Take back"</Text>
+<Text name="RULES-LAB_257">"Load"</Text>
+<Text name="RULES-LAB_258">"Overloaded"</Text>
 </Label>
 </DATA_LABEL>
 </DATA_BOOK>

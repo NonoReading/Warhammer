@@ -5597,3 +5597,29 @@ Fichiers modifies : chargeconstantes.pas, chargetrapping.pas, xmlexportimport.pa
 Double-clic sur un animal de l inventaire (TabEquipementDblClick, winpersonnage.pas) ouvre la fiche. Nouveau type TypeEquipAN (RULES-LAB_252 Animal) pose par +Equipment quand l objet a un profil ; sauvegarde inchangee (sous-chapitre Divers), retypage au chargement par le profil (chargepersonnage.pas, ChargeTrapping ajoute aux uses) ; PDF : Animal traite comme Divers (pdfpersonnage.pas). Libelle du bouton Fiche RULES-LAB_253 (valide) ; winanimal.pas declare dans WarhammerHelp.lpi.
 Appris : RULES-LAB_195 est deja Animals and Vehicles, le melange venait du type d inventaire et non du theme ; verifier le libelle dans INTERFACE.Xml avant de proposer un nouveau theme.
 Fichiers modifies : winpersonnage.pas, winequipement.pas, chargepersonnage.pas, pdfpersonnage.pas, chargeconstantes.pas, warhammersource.pas, WarhammerHelp.lpi, INTERFACE.Xml, INTERFACE_FRANCAIS.Xml, A FAIRE.txt, CONTEXT.md, Log.txt.
+
+20/09/2026 - MONTURES, RATTACHEMENT "PORTE PAR" : CONCEPTION ARRETEE (OPTION A, ANIMAL DU PERSONNAGE), RIEN CODE
+Champ PortePar / attribut carriedby (Porte = worn, deja pris), identifiant d instance des animaux, encombrement 0 pour l objet confie, avertissement sans blocage, interface Confier a, PDF sans PdfMontureCapaciteTotale. Detail et etapes dans CONTEXT.md 2.84.
+Fichiers modifies : CONTEXT.md, Log.txt.
+
+20/09/2026 - MONTURES, PORTE PAR, ETAPE 1 : CHAMPS IdInstance ET PortePar (ATTRIBUTS id ET carriedby) - COMPILE, NON TESTE
+Record d equipement, ecriture/lecture des 4 sous-chapitres, IdAnimalLibre (A1, A2...), grille TabEquipement a 12 colonnes (10 et 11 cachees), id donne aux animaux au chargement et au resync. A tester : sauver puis recharger un personnage avec une monture, verifier id="A1" dans le XML ; un personnage sans monture ne doit rien changer.
+Fichiers modifies : chargeconstantes.pas, chargepersonnage.pas, winpersonnage.pas, CONTEXT.md, Log.txt.
+
+20/09/2026 - MONTURES, PORTE PAR, ETAPE 1 VALIDEE PAR NONO (id="A1" ECRIT SUR ENEMY-TRAP_05). Reste a l etape 2 : calcul et avertissement.
+
+20/09/2026 - MONTURES, PORTE PAR, ETAPE 2 : ENCOMBREMENT (PDF) - COMPILE, NON TESTE
+pdfpersonnage.pas : les 6 sommes EncArme/EncArmure/EncDivers (gabarits Feldo2P et creation) ignorent une ligne dont PortePar est renseigne ; nouvelle PdfAnimalCharge(Personnage, IdAnimal) = encombrement brut (sans reduction Worn Items) des objets confies a un animal. Pas de limite bloquante ; l avertissement se fera avec l interface (etape 3). Rien ne pose encore PortePar : a tester seulement qu un PDF sans monture est inchange.
+Fichiers modifies : pdfpersonnage.pas, CONTEXT.md, Log.txt.
+
+20/09/2026 - MONTURES, PORTE PAR, ETAPE 3 : INTERFACE (CONFIER A / REPRENDRE, COLONNE PORTE PAR, CHARGE DANS LA FICHE, AVERTISSEMENT) - COMPILE, NON TESTE
+winpersonnage.pas : clic droit sur un objet (ni sort ni animal) = menu "Confier a <animal> (A1)" et "Reprendre" ; colonne visible 12 "Porte par" ; confier vide la case Porte, Porte vide le porteur ; avertissement ShowMessage si charge > Carries (jamais bloquant) ; supprimer un animal rend ses objets ; AttribueIdAnimaux sur la grille avant chaque copie vers Personnage.Equipement (remplace l attribution de l etape 1 dans ces 2 sites). Les animaux rechargés passent maintenant par la branche Divers de la grille (libelle et qualite etaient vides). winanimal.pas : parametre Charge, affiche "Charge : X" a cote de la capacite. pdfpersonnage.pas : PdfEquipementEncombrementBrut exposee. Libelles RULES-LAB_254 a _258 (Porte par, Confier a, Reprendre, Charge, Surcharge) dans INTERFACE.Xml et INTERFACE_FRANCAIS.Xml.
+Appris : dans un script de remplacement, "  end;
+" en sous-chaine tombe aussi sur un end; plus indente ; Menu est deja un membre de TWinPersonnages.
+Fichiers modifies : winpersonnage.pas, winanimal.pas, pdfpersonnage.pas, INTERFACE.Xml, INTERFACE_FRANCAIS.Xml, CONTEXT.md, Log.txt.
+
+20/09/2026 - MONTURES, PORTE PAR, ETAPE 4 : PDF FELDO (ENCOMBREMENT ENTRE PARENTHESES, PLUS DE CAPACITE AJOUTEE AU MAX) - COMPILE, NON TESTE
+pdfpersonnage.pas : la capacite des montures n ajoute plus rien a l Encombrement max (EncMonture et AsterisqueMonture restent a 0/vide, code laisse en place) ; un objet confie a un animal (arme, armure, divers) affiche son encombrement entre parentheses meme a 0, et ne compte pas dans les totaux ; la ligne d un animal qui porte quelque chose ajoute "(Charge N/capacite)". Le gabarit hors Feldo (PdfPersonnageCreation) : totaux seulement (etape 2), affichage inchange sauf la colonne Divers (PdfDiversTexteEnc partage). Idee de Nono : parentheses pour montrer ou est l objet.
+Fichiers modifies : pdfpersonnage.pas, CONTEXT.md, Log.txt.
+
+20/09/2026 - MONTURES, PORTE PAR, ETAPES 3 ET 4 VALIDEES PAR NONO. Chantier "porte par" termine (CONTEXT.md 2.84).

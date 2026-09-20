@@ -10,7 +10,8 @@ uses
 
 // Fiche d'un animal ou d'une monture (profil M a W, traits, capacite, prix,
 // disponibilite). Formulaire construit en code : pas de .lfm.
-procedure AfficheFicheAnimal(PTrapping: StructureTrapping);
+// Charge : encombrement deja confie a cet animal (-1 = inconnu, rien d'affiche).
+procedure AfficheFicheAnimal(PTrapping: StructureTrapping; Charge: Integer = -1);
 
 implementation
 
@@ -29,7 +30,7 @@ begin
   Result.Caption    := Texte;
 end;
 
-procedure AfficheFicheAnimal(PTrapping: StructureTrapping);
+procedure AfficheFicheAnimal(PTrapping: StructureTrapping; Charge: Integer);
 var
   Fiche:   TForm;
   Grille:  TStringGrid;
@@ -85,6 +86,8 @@ begin
       Texte := GetTexteLibelle('RULES-LAB_054') + ' : ' + TraduirePrix(PTrapping.Prix) + '     ';
     if PTrapping.Capacite <> 0 then
       Texte := Texte + GetTexteLibelle('RULES-LAB_185') + ' : ' + IntToStr(PTrapping.Capacite) + '     ';
+    if Charge >= 0 then
+      Texte := Texte + GetTexteLibelle('RULES-LAB_257') + ' : ' + IntToStr(Charge) + '     ';
     if PTrapping.Disponibilite <> '' then
       Texte := Texte + GetTexteLibelle('RULES-LAB_056') + ' : ' + ReplaceTexteLibelle(PTrapping.Disponibilite);
     if Texte <> '' then

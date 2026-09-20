@@ -292,6 +292,11 @@ Procedure PdfBlocDiversDonnees(PdfPage: TPDFPage; Personnage: StructurePersonnag
 // autre objet. La somme s'ajoute a l'Encombrement max, avec une asterisque numerotee.
 Function PdfMontureCapacite(PersonnageEquipement: StructurePersonnageEquipement): Integer;
 Function PdfMontureCapaciteTotale(Personnage: StructurePersonnage): Integer;
+// Encombrement total des objets confies a l'animal IdAnimal (PortePar), sans la reduction
+// "Worn Items" : un objet confie n'est pas porte. CONTEXT.md 2.84.
+// Encombrement brut d'UNE ligne (sans reduction Worn Items), utilise pour la charge d'un animal.
+Function PdfEquipementEncombrementBrut(PersonnageEquipement: StructurePersonnageEquipement): Integer;
+Function PdfAnimalCharge(Personnage: StructurePersonnage; IdAnimal: String): Integer;
 // Libelle (catalogue si le code est un Trapping, sinon le code brut) et encombrement total
 // (unitaire x quantite) d'une ligne Divers.
 Function PdfDiversLibelle(PersonnageEquipement: StructurePersonnageEquipement): String;
@@ -1720,7 +1725,8 @@ Procedure PdfPersonnageCreation(Personnage: StructurePersonnage; BackGround: Boo
                   PArme.ListeBonus := PArme.ListeBonus + FabricationQualitesArme(PersonnageEquipement.QualiteEquipement);
                 end;
               Enc        := PArme.Encombrement + FabricationEncombrement(PersonnageEquipement.QualiteEquipement, Quality);
-              EncArme    := EncArme + Enc;
+              if PersonnageEquipement.PortePar = '' then // confie a un animal : compte pour lui
+                EncArme    := EncArme + Enc;
 
               Inc(NbArme);
 
@@ -1869,7 +1875,8 @@ Procedure PdfPersonnageCreation(Personnage: StructurePersonnage; BackGround: Boo
                   if (EncP < 1) and FabricationEstBulky(PersonnageEquipement.QualiteEquipement) then
                     EncP := 1;
                 end;
-              EncArmure := EncArmure + EncP;
+              if PersonnageEquipement.PortePar = '' then
+                EncArmure := EncArmure + EncP;
               NbLoca    := CountOccurrences(PArmure.Emplacement,',') + 1;
               if PersonnageEquipement.TypeEquipement = TypeEquipAR then
                 begin
@@ -1954,7 +1961,8 @@ Procedure PdfPersonnageCreation(Personnage: StructurePersonnage; BackGround: Boo
             begin
               Inc(IndDivers);
               PdfEcrit(PdfPage,18,65,212-(IndDivers*3.5), PdfDiversLibelle(PersonnageEquipement),MinPolice);
-              EncDivers := EncDivers + PdfDiversEncombrement(PersonnageEquipement);
+              if PersonnageEquipement.PortePar = '' then
+                EncDivers := EncDivers + PdfDiversEncombrement(PersonnageEquipement);
               if PdfDiversTexteEnc(PersonnageEquipement) <> '' then
                 PdfCentre(PdfPage,65,73,212-(IndDivers*3.5), PdfDiversTexteEnc(PersonnageEquipement));
             end
@@ -3195,7 +3203,10 @@ Function PdfDiversTexteEnc(PersonnageEquipement: StructurePersonnageEquipement):
   begin
     Enc   := PdfDiversEncombrement(PersonnageEquipement);
     Brut  := PdfDiversEncombrementBrut(PersonnageEquipement);
-    if Brut = 0 then
+    // Confie a un animal : entre parentheses, meme a 0 (CONTEXT.md 2.84).
+    if PersonnageEquipement.PortePar <> '' then
+      Result := '(' + IntToStr(Brut) + ')'
+    else if Brut = 0 then
       Result := ''
     else if Enc <> Brut then
       Result := IntToStr(Enc) + '(' + IntToStr(Brut) + ')'
@@ -3224,6 +3235,36 @@ Function PdfMontureCapaciteTotale(Personnage: StructurePersonnage): Integer;
       Result := Result + PdfMontureCapacite(PersonnageEquipement);
   end;
 
+Function PdfEquipementEncombrementBrut(PersonnageEquipement: StructurePersonnageEquipement): Integer;
+  var
+    Quality: String;
+  begin
+    Result := 0;
+    if PersonnageEquipement.TypeEquipement = TypeEquipWe then
+      Result := ChercheArme(PersonnageEquipement.CodeEquipement).Encombrement
+                + FabricationEncombrement(PersonnageEquipement.QualiteEquipement, Quality)
+    else if PersonnageEquipement.TypeEquipement = TypeEquipAr then
+      Result := ChercheArmure(PersonnageEquipement.CodeEquipement).Encombrement
+                + FabricationEncombrement(PersonnageEquipement.QualiteEquipement, Quality)
+    else if PersonnageEquipement.TypeEquipement = TypeEquipArS then
+      Result := ChercheArmureSimplifiee(PersonnageEquipement.CodeEquipement).Encombrement
+                + FabricationEncombrement(PersonnageEquipement.QualiteEquipement, Quality)
+    else if (PersonnageEquipement.TypeEquipement = TypeEquipDI) or (PersonnageEquipement.TypeEquipement = TypeEquipAN) then
+      Result := PdfDiversEncombrementBrut(PersonnageEquipement);
+  end;
+
+Function PdfAnimalCharge(Personnage: StructurePersonnage; IdAnimal: String): Integer;
+  var
+    PersonnageEquipement: StructurePersonnageEquipement;
+  begin
+    Result := 0;
+    if IdAnimal = '' then
+      exit;
+    for PersonnageEquipement in Personnage.Equipement do
+      if PersonnageEquipement.PortePar = IdAnimal then
+        Result := Result + PdfEquipementEncombrementBrut(PersonnageEquipement);
+  end;
+
 // Asterisque en petite police (4), relevee, comme celles des armures (PdfBlocArmuresDonnees).
 Procedure PdfDiversAsterisque(PdfPage: TPDFPage; X1, X2, Y: Single; Texte: String);
   begin
@@ -3247,8 +3288,14 @@ Procedure PdfBlocDiversDonnees(PdfPage: TPDFPage; Personnage: StructurePersonnag
         begin
           Inc(IndDivers);
           Enc       := PdfDiversEncombrement(PersonnageEquipement);
-          EncDivers := EncDivers + Enc;
+          if PersonnageEquipement.PortePar = '' then
+            EncDivers := EncDivers + Enc;
           Libelle   := PdfDiversLibelle(PersonnageEquipement);
+          // Animal qui porte des objets : charge / capacite <Carries> a la suite du nom.
+          if (PersonnageEquipement.IdInstance <> '') and (PdfAnimalCharge(Personnage, PersonnageEquipement.IdInstance) > 0) then
+            Libelle := Libelle + ' (' + GetTexteLibelle('RULES-LAB_257') + ' '
+                       + IntToStr(PdfAnimalCharge(Personnage, PersonnageEquipement.IdInstance)) + '/'
+                       + IntToStr(ChercheTrapping(PersonnageEquipement.CodeEquipement).Capacite * Max(PersonnageEquipement.Quantite, 1)) + ')';
           // Runes de talisman (Warding...) : leur explication va dans le bloc Crafting Bonus.
           if PersonnageEquipement.QualiteEquipement <> '' then
             begin
@@ -3340,7 +3387,8 @@ Procedure PdfBlocArmesDonnees(PdfPage: TPDFPage; Personnage: StructurePersonnage
               PArme.ListeBonus := PArme.ListeBonus + FabricationQualitesArme(PersonnageEquipement.QualiteEquipement);
             end;
           Enc        := PArme.Encombrement + FabricationEncombrement(PersonnageEquipement.QualiteEquipement, Quality);
-          EncArme    := EncArme + Enc;
+          if PersonnageEquipement.PortePar = '' then // confie a un animal : compte pour lui
+            EncArme    := EncArme + Enc;
 
           Inc(NbArme);
 
@@ -3380,7 +3428,10 @@ Procedure PdfBlocArmesDonnees(PdfPage: TPDFPage; Personnage: StructurePersonnage
           LigneBonus := '';
 
           PdfCentre(PdfPage, XGauche +  45, XGauche + 64, Y - ((NbArme + 2) * HauteurLigne) + 0.6, Pourcent + ' %');
-          if PArme.Encombrement <> 0 then
+          // Confiee a un animal : encombrement entre parentheses, meme a 0, pour montrer ou elle est.
+          if PersonnageEquipement.PortePar <> '' then
+            PdfCentre(PdfPage, XGauche +  64, XGauche + 71, Y - ((NbArme + 2) * HauteurLigne) + 0.6, '(' + IntToStr(Enc) + ')')
+          else if PArme.Encombrement <> 0 then
             PdfCentre(PdfPage, XGauche +  64, XGauche + 71, Y - ((NbArme + 2) * HauteurLigne) + 0.6, IntToStr(Enc));
           PdfCentre(PdfPage, XGauche +  71, XGauche + 96, Y - ((NbArme + 2) * HauteurLigne) + 0.6, GetAllTexteLibelle(Portee));
 
@@ -3525,7 +3576,8 @@ Procedure PdfBlocArmuresDonnees(PdfPage: TPDFPage; Personnage: StructurePersonna
                   if (EncP < 1) and FabricationEstBulky(PersonnageEquipement.QualiteEquipement) then
                     EncP := 1;
                 end;
-              EncArmure := EncArmure + EncP;
+              if PersonnageEquipement.PortePar = '' then
+                EncArmure := EncArmure + EncP;
               if (PersonnageEquipement.TypeEquipement = TypeEquipAR) then
                 begin
                   if PersonnageEquipement.Porte then
@@ -3572,7 +3624,10 @@ Procedure PdfBlocArmuresDonnees(PdfPage: TPDFPage; Personnage: StructurePersonna
                   PdfEcrit(PdfPage, XGauche + 31, XGauche + 34, Y - ((NbArmure + 2) * HauteurLigne) + 2.3, AsterisqueParEquipement.Values[PersonnageEquipement.CodeEquipement], 4);
                   PdfTaillePolice(PdfPage, PdfFontValue, ConstPoliceArial, 9);
                 end;
-              if Enc <> 0 then
+              // Confiee a un animal : encombrement entre parentheses, meme a 0.
+              if PersonnageEquipement.PortePar <> '' then
+                PdfCentre(PdfPage, XGauche + 53, XGauche + 62, Y - ((NbArmure + 2) * HauteurLigne) + 0.6, '(' + IntToStr(Enc) + ')')
+              else if Enc <> 0 then
                 if EncP <> Enc then
                   PdfCentre(PdfPage, XGauche + 53, XGauche + 62, Y - ((NbArmure + 2) * HauteurLigne) + 0.6, IntToStr(EncP)+ '('+IntToStr(Enc)+')')
                 else
@@ -4818,12 +4873,10 @@ Procedure PdfPersonnageCreationFeldo2P(Personnage: StructurePersonnage);
       if Copy(AsterisqueParMutation.Names[Ind], 1, 4) = 'FAB:' then
         AsterisqueParEquipement.Values[Copy(AsterisqueParMutation.Names[Ind], 5, MaxInt)] :=
           AsterisqueParEquipement.Values[Copy(AsterisqueParMutation.Names[Ind], 5, MaxInt)] + AsterisqueParMutation.ValueFromIndex[Ind];
-    // Montures : leur capacite de charge s'ajoute a l'Encombrement max (page 2), reperee par
-    // la suite de la chaine de numeros (apres talents, mutations et armures). Le meme "(N)"
-    // est ecrit a cote du max et a cote de chaque monture de la liste Divers.
-    EncMonture := PdfMontureCapaciteTotale(Personnage);
-    if EncMonture > 0 then
-      AsterisqueMonture := '(' + IntToStr(AsterisqueFinalArmure + 1) + ')';
+    // Montures : la capacite de charge ne s'ajoute plus a l'Encombrement max (CONTEXT.md 2.84,
+    // etape 4). Un objet confie a un animal (PortePar) compte 0 pour le personnage et s'ecrit
+    // entre parentheses dans sa liste ; EncMonture et AsterisqueMonture restent a leur valeur
+    // par defaut (0 et vide).
 
     // Fusionne les annotations de compétence des mutations (CONTEXT.md §2.7, étape 9) dans
     // ListAsterisqueArmure, seule TStringList lue par PdfPreparerRecordSetCompetencesBase/

@@ -324,6 +324,11 @@
 <Text name="RULES-LAB_251">"Traits"</Text>
 <Text name="RULES-LAB_252">"Animal"</Text>
 <Text name="RULES-LAB_253">"Fiche"</Text>
+<Text name="RULES-LAB_254">"Porte par"</Text>
+<Text name="RULES-LAB_255">"Confier a"</Text>
+<Text name="RULES-LAB_256">"Reprendre"</Text>
+<Text name="RULES-LAB_257">"Charge"</Text>
+<Text name="RULES-LAB_258">"Surcharge"</Text>
 </Label>
 </DATA_LABEL>
 </DATA_BOOK>
