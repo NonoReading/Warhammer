@@ -5736,6 +5736,10 @@ winanimal.pas : hauteur des libelles mesuree par AjusteHauteur (DrawText) apres 
 Appris : un tag optionnel absent doit etre remis a zero dans la boucle de lecture, comme Capacite.
 Fichiers modifies : winanimal.pas, xmlexportimport.pas, Log.txt.
 
-20/09/2026 - PORTE PAR ETENDU AUX BATEAUX ET VEHICULES - A COMPILER PAR NONO
+20/09/2026 - PORTE PAR ETENDU AUX BATEAUX ET VEHICULES - COMPILE ET VALIDE PAR NONO
 chargetrapping.pas : TrappingEstPorteur (ProfilAnimal, ProfilBateau ou ProfilVehicule). winpersonnage.pas : LigneEstAnimal l utilise, donc menu "Confier a", identifiant A<N> et avertissement de surcharge valent aussi pour un bateau ou un vehicule. chargepersonnage.pas : id attribue a tout porteur au chargement. pdfpersonnage.pas : PdfLienAnimal ajoute [id] a tout objet ayant un id. Le type reste Divers pour un bateau (pas de fiche monture 12 colonnes sur le PDF), seul l animal reste TypeEquipAN.
 Fichiers modifies : chargetrapping.pas, winpersonnage.pas, chargepersonnage.pas, pdfpersonnage.pas, Log.txt.
+
+20/09/2026 - PDF FELDO : ENCART NAVIRES ET VEHICULES DANS LE BLOC MONTURES - COMPILE ET VALIDE PAR NONO
+pdfpersonnage.pas, PdfBlocMontures : retient tout porteur (TrappingEstPorteur), plus seulement TypeEquipAN. Profil dessine selon la fiche : animal 12 colonnes, navire 7 (Crew, M Sail, M Oar, Man, Size, T, W), vehicule 4 (Motive, T, W, Strike). Traits et "Charge N / capacite" inchanges. Meme zone 50x84 mm, memes repliements (compact puis "...").
+Fichiers modifies : pdfpersonnage.pas, Log.txt.

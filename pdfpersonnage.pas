@@ -3979,8 +3979,14 @@ Procedure PdfBlocMontures(PdfPage: TPDFPage; Personnage: StructurePersonnage; XG
     Ecart      = 2;
     ColonnesProfilPdf: array[0..11] of String =
       ('M', 'WS', 'BS', 'S', 'T', 'I', 'Ag', 'Dex', 'Int', 'WP', 'Fel', 'W');
+    ColonnesBateauPdf: array[0..6] of String =
+      ('Crew', 'M (Sail)', 'M (Oar)', 'Man', 'Size', 'T', 'W');
+    ColonnesVehiculePdf: array[0..3] of String =
+      ('Motive', 'T', 'W', 'Strike');
   var
     Animaux:  array of StructurePersonnageEquipement;
+    Libelles: array of String;
+    NbCol:    Integer;
     PT:       StructureTrapping;
     PEq:      StructurePersonnageEquipement;
     Largeur:  Single;
@@ -4001,7 +4007,7 @@ Procedure PdfBlocMontures(PdfPage: TPDFPage; Personnage: StructurePersonnage; XG
       Lignes: TStringList;
     begin
       Result := HautTitre + 1;
-      if P.ProfilAnimal <> '' then
+      if TrappingEstPorteur(P) then
         Result := Result + 2 * HautLigne;
       if AvecTraits and (P.TraitsAnimal <> '') then
         begin
@@ -4016,7 +4022,7 @@ Procedure PdfBlocMontures(PdfPage: TPDFPage; Personnage: StructurePersonnage; XG
   begin
     SetLength(Animaux, 0);
     for PEq in Personnage.Equipement do
-      if PEq.TypeEquipement = TypeEquipAN then
+      if (PEq.TypeEquipement = TypeEquipAN) or TrappingEstPorteur(ChercheTrapping(PEq.CodeEquipement)) then
         begin
           SetLength(Animaux, Length(Animaux) + 1);
           Animaux[High(Animaux)] := PEq;
@@ -4062,13 +4068,35 @@ Procedure PdfBlocMontures(PdfPage: TPDFPage; Personnage: StructurePersonnage; XG
         PdfTaillePolice(PdfPage, PdfFontValue, ConstPoliceArial, 6);
         YL := Y0 - HautTitre - HautLigne + 0.8;
         // profil : libellés puis valeurs, 12 colonnes
-        if PT.ProfilAnimal <> '' then
+        // (navire : 7 colonnes, vehicule : 4, separees par ';' ; animal : 12, separees par des espaces)
+        if TrappingEstPorteur(PT) then
           begin
-            Valeurs := PT.ProfilAnimal.Split([' ']);
-            ColL    := (Largeur - 2) / 12;
-            for IndC := 0 to 11 do
+            SetLength(Libelles, 0);
+            if PT.ProfilAnimal <> '' then
               begin
-                PdfCentre(PdfPage, XGauche + 1 + IndC * ColL, XGauche + 1 + (IndC + 1) * ColL, YL, ColonnesProfilPdf[IndC]);
+                Valeurs := PT.ProfilAnimal.Split([' ']);
+                NbCol   := 12;
+                SetLength(Libelles, NbCol);
+                for IndC := 0 to NbCol - 1 do Libelles[IndC] := ColonnesProfilPdf[IndC];
+              end
+            else if PT.ProfilBateau <> '' then
+              begin
+                Valeurs := PT.ProfilBateau.Split([';']);
+                NbCol   := 7;
+                SetLength(Libelles, NbCol);
+                for IndC := 0 to NbCol - 1 do Libelles[IndC] := ColonnesBateauPdf[IndC];
+              end
+            else
+              begin
+                Valeurs := PT.ProfilVehicule.Split([';']);
+                NbCol   := 4;
+                SetLength(Libelles, NbCol);
+                for IndC := 0 to NbCol - 1 do Libelles[IndC] := ColonnesVehiculePdf[IndC];
+              end;
+            ColL    := (Largeur - 2) / NbCol;
+            for IndC := 0 to NbCol - 1 do
+              begin
+                PdfCentre(PdfPage, XGauche + 1 + IndC * ColL, XGauche + 1 + (IndC + 1) * ColL, YL, Libelles[IndC]);
                 if IndC <= High(Valeurs) then
                   PdfCentre(PdfPage, XGauche + 1 + IndC * ColL, XGauche + 1 + (IndC + 1) * ColL, YL - HautLigne, Valeurs[IndC]);
               end;
