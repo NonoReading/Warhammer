@@ -6,7 +6,7 @@
 <VERSION>"WFRP4"</VERSION>
 <OFFICIAL>"1"</OFFICIAL>
 <COMPLETE>"0"</COMPLETE>
-<!-- Sea Wardens of Cothique (guide de cadre de campagne). COMPLETE=0 : seuls les chariots de la table Carts, Wagons, and Chariots (p.76) sont saisis. Cart et wagons doublent le Enemy in Shadows Companion (ENEMY-TRAP_13 a _21) et ne sont pas repris. Non saisis : le reste du livre. -->
+<!-- Sea Wardens of Cothique (guide de cadre de campagne). COMPLETE=0 : sont saisis les chariots de la table Carts, Wagons, and Chariots (p.76), les Rending Stars (p.75) et 6 betes (pp.47, 81-84). Cart et wagons doublent le Enemy in Shadows Companion (ENEMY-TRAP_13 a _21) et ne sont pas repris. Non saisis : le reste du livre. -->
 <DATA_LABEL>
 <Label language="ENGLISH">
 <Text name="COTHI-BOOK SEA WARDENS OF COTHIQUE">"Sea Wardens of Cothique"</Text>
@@ -15,6 +15,21 @@
 <Text name="COTHI-BOOK SEA WARDENS OF COTHIQUE">"Sea Wardens of Cothique"</Text>
 </Label>
 </DATA_LABEL>
+<!-- Rending Stars (p.75), objet du Shadowblade. Prix 15/- lu 15PA, portee SB x 4, degats SB + 1, Undamaging (RULES-WEAPB27). -->
+<DATA_WEAPON>
+<Weapon id="COTHI-PROJ_LANC_01">
+<Description language="ENGLISH">"Rending Stars"</Description>
+<Skill>"RULES-COMPPROJ_LANC"</Skill>
+<Damage>"+(BATTR_S)+1"</Damage>
+<Availability>"RULES-DISPO_EXOTIC"</Availability>
+<Reach>"(BATTR_S)X4"</Reach>
+<Price>"15PA"</Price>
+<Encumbrance>"0"</Encumbrance>
+<Quality>"RULES-WEAPB27"</Quality>
+<Hand>"1"</Hand>
+<Ammunition>"0"</Ammunition>
+</Weapon>
+</DATA_WEAPON>
 <!-- Chariots (p.76). Motive Power : A = animaux. Strike = degats de l impact (M = Move). Enc du vehicule dans Encumbrance, Carries dans Carries. -->
 <DATA_TRAPPING>
 <Trapping id="COTHI-TRAP_01">
@@ -61,6 +76,49 @@
 <Encumbrance>"50"</Encumbrance>
 <Carries>"32"</Carries>
 <VehicleProfile>"4 A;50;30;M"</VehicleProfile>
+</Trapping>
+<!-- Betes d Ulthuan (pp.81-84) et Swiftfeather Roc (p.47). Le livre ne donne NI prix NI capacite de charge : laisses sans Price ni Carries (pas de valeur maison sans decision de Nono). Tiret des caracteristiques = 0. Talent Acute Sense (Vision) ajoute en fin de traits. Traits optionnels (Champion, Frenzy, Trained...) non saisis. -->
+<Trapping id="COTHI-TRAP_06">
+<Description language="ENGLISH">"White Lion"</Description>
+<Theme>"RULES-LAB_260"</Theme>
+<AnimalProfile>"8 55 0 52 48 38 42 0 15 50 0 36"</AnimalProfile>
+<AnimalTraits>"Armour 2 (6), Bestial, Bite +9 (Fast, Penetrating), Fury, Grim 2, Night Vision, Size (Large), Skittish, Stealthy, Stride, Tracker, Weapon (Claws) +10 (Fast, Penetrating)"</AnimalTraits>
+<Availability>"RULES-DISPO_EXOTIC"</Availability>
+</Trapping>
+<Trapping id="COTHI-TRAP_07">
+<Description language="ENGLISH">"Great Eagle"</Description>
+<Theme>"RULES-LAB_260"</Theme>
+<AnimalProfile>"3 65 0 44 43 55 52 0 38 43 25 32"</AnimalProfile>
+<AnimalTraits>"Bite +6, Flight 100, Size (Large), Skittish, Territorial, Weapon (Claws) +8, Acute Sense (Vision)"</AnimalTraits>
+<Availability>"RULES-DISPO_EXOTIC"</Availability>
+</Trapping>
+<Trapping id="COTHI-TRAP_08">
+<Description language="ENGLISH">"Kraken"</Description>
+<Theme>"RULES-LAB_260"</Theme>
+<AnimalProfile>"6 45 0 80 75 35 55 35 10 65 0 224"</AnimalProfile>
+<AnimalTraits>"Cold-blooded, Constrictor, Dark Vision, Grim 3, Hungry, Marine Creature, Size (Monstrous), Stealthy, 8 x Tentacles +9, Weapon (Beak) +12"</AnimalTraits>
+<Availability>"RULES-DISPO_EXOTIC"</Availability>
+</Trapping>
+<Trapping id="COTHI-TRAP_09">
+<Description language="ENGLISH">"Flamespyre Phoenix"</Description>
+<Theme>"RULES-LAB_260"</Theme>
+<AnimalProfile>"3 70 0 54 53 55 52 0 40 50 25 40"</AnimalProfile>
+<AnimalTraits>"Attuned to Magic, Bite +7, Flight 100, Magical, Phoenix Reborn, Size (Large), Territorial, Vulnerable to Cold, Wake of Fire, Ward 8+, Weapon (Claws) +9, Acute Sense (Vision)"</AnimalTraits>
+<Availability>"RULES-DISPO_EXOTIC"</Availability>
+</Trapping>
+<Trapping id="COTHI-TRAP_10">
+<Description language="ENGLISH">"Frostheart Phoenix"</Description>
+<Theme>"RULES-LAB_260"</Theme>
+<AnimalProfile>"2 75 0 60 60 40 52 0 40 60 25 48"</AnimalProfile>
+<AnimalTraits>"Armour 2 (8), Attuned to Magic, Bite +8, Flight 80, Freezing Aura, Magical, Size (Large), Territorial, Vulnerable to Heat, Ward 8+, Weapon (Claws) +10, Acute Sense (Vision)"</AnimalTraits>
+<Availability>"RULES-DISPO_EXOTIC"</Availability>
+</Trapping>
+<Trapping id="COTHI-TRAP_11">
+<Description language="ENGLISH">"Swiftfeather Roc"</Description>
+<Theme>"RULES-LAB_260"</Theme>
+<AnimalProfile>"3 45 0 40 40 50 55 0 15 35 0 32"</AnimalProfile>
+<AnimalTraits>"Bestial, Bite +6, Flight 100, Night Vision, Size (Large), Weapon (Talons) +8, Acute Sense (Vision)"</AnimalTraits>
+<Availability>"RULES-DISPO_EXOTIC"</Availability>
 </Trapping>
 </DATA_TRAPPING>
 </DATA_BOOK>

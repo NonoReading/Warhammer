@@ -5823,3 +5823,7 @@ Fichiers modifies : PICTURES/CLASS/PARRA-WORK001_TRANS.PNG, Log.txt.
 20/09/2026 - A FAIRE : PNJ ET TABLES D EVENEMENTS RETIRES (DECISION NONO)
 La mention "RESTE : PNJ et tables d evenements non modelises" est retiree de la ligne Sylvania. Les PNJ et tables d evenements hors creation de personnage ne sont plus a faire. Aucune autre ligne concernee (les mentions de PNJ restantes sont des regles de methode de comptage).
 Fichiers modifies : A FAIRE.txt, Log.txt.
+
+20/09/2026 - SEA WARDENS OF COTHIQUE : 6 BETES ET RENDING STARS - VALIDE PAR NONO
+BOOK_SEA_WARDENS_OF_COTHIQUE.Xml (COMPLETE reste 0) : White Lion, Great Eagle, Kraken, Flamespyre Phoenix, Frostheart Phoenix (pp.81-84) et Swiftfeather Roc (p.47) en montures/animaux (COTHI-TRAP_06 a _11, sans Price ni Carries : le livre n en donne pas), Rending Stars (p.75, COTHI-PROJ_LANC_01, 15PA, SB+1, portee SB x 4, Undamaging). Decision Nono : toutes gardees, meme le Kraken. Non saisis : traits optionnels, effets des phoenix, Skycutter/Tidecutter, objets du Shadowblade, Gifts of Khaine (regles de MJ).
+Fichiers modifies : BOOK_SEA_WARDENS_OF_COTHIQUE.Xml, CONTEXT.md, A FAIRE.txt, Log.txt.
