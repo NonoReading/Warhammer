@@ -1,0 +1,230 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<DATA_BOOK>
+<CODE_BOOK>"SYLVA"</CODE_BOOK>
+<BOOK>"BOOK SYLVANIA THE CURSED COUNTY"</BOOK>
+<language>"ENGLISH"</language>
+<VERSION>"WFRP4"</VERSION>
+<OFFICIAL>"1"</OFFICIAL>
+<COMPLETE>"0"</COMPLETE>
+<!-- Sylvania - The Cursed County (guide de cadre de campagne). COMPLETE=0 : seuls les objets sont saisis (2 armes, auberge sylvanienne, Drakenhof Sundries). Non saisis : bateaux fluviaux p.21, PNJ, tables d evenements. Prix : d = SB, / = PA, GC = CO. "Scare" du livre lu Scarce = LIMITED. -->
+<DATA_LABEL>
+<Label language="ENGLISH">
+<Text name="SYLVA-BOOK SYLVANIA THE CURSED COUNTY">"Sylvania - The Cursed County"</Text>
+</Label>
+<Label language="FRANCAIS">
+<Text name="SYLVA-BOOK SYLVANIA THE CURSED COUNTY">"Sylvania - The Cursed County"</Text>
+</Label>
+</DATA_LABEL>
+<DATA_WEAPON>
+<Weapon id="SYLVA-PROJ_ARB_01">
+<Description language="ENGLISH">"Catechist Heavy Crossbow"</Description>
+<Skill>"RULES-COMPPROJ_ARB"</Skill>
+<Damage>"+9"</Damage>
+<Availability>"RULES-DISPO_EXOTIC"</Availability>
+<Reach>"60"</Reach>
+<Price>"10CO"</Price>
+<Encumbrance>"3"</Encumbrance>
+<Quality>"RULES-WEAPB22,RULES-WEAPB23 2"</Quality>
+<Hand>"2"</Hand>
+<Ammunition>"0"</Ammunition>
+</Weapon>
+<!-- Le livre ecrit "Quarter Weapon" pour la portee et "-" pour les degats. Portee lue "personal" (WEAPR_PERSO), competence Melee (Basic) par defaut, degats "-" comme Starfire Shafts : a verifier par Nono. -->
+<Weapon id="SYLVA-COMB_BASE_01">
+<Description language="ENGLISH">"Catechist Stake"</Description>
+<Skill>"RULES-COMPCOMB_BASE"</Skill>
+<Damage>"-"</Damage>
+<Availability>"RULES-DISPO_COMMON"</Availability>
+<Reach>"RULES-WEAPR_PERSO"</Reach>
+<Price>"2PA"</Price>
+<Encumbrance>"0"</Encumbrance>
+<Quality>"RULES-WEAPB12,RULES-WEAPB10"</Quality>
+<Hand>"1"</Hand>
+<Ammunition>"0"</Ammunition>
+</Weapon>
+</DATA_WEAPON>
+<DATA_TRAPPING>
+<!-- Sylvanian Coaching Inn Costs (p.19) -->
+<Trapping id="SYLVA-TRAP_001">
+<Description language="ENGLISH">"Ale, pint (Sylvania)"</Description>
+<Theme>"RULES-LAB_192"</Theme>
+<Availability>"RULES-DISPO_COMMON"</Availability>
+<Price>"5SB"</Price>
+<Encumbrance>"0"</Encumbrance>
+</Trapping>
+<Trapping id="SYLVA-TRAP_002">
+<Description language="ENGLISH">"Ale, keg (Sylvania)"</Description>
+<Theme>"RULES-LAB_192"</Theme>
+<Availability>"RULES-DISPO_COMMON"</Availability>
+<Price>"5PA"</Price>
+<Encumbrance>"2"</Encumbrance>
+</Trapping>
+<Trapping id="SYLVA-TRAP_003">
+<Description language="ENGLISH">"Meal (Sylvania)"</Description>
+<Theme>"RULES-LAB_192"</Theme>
+<Availability>"RULES-DISPO_COMMON"</Availability>
+<Price>"1PA 6SB"</Price>
+<Encumbrance>"0"</Encumbrance>
+</Trapping>
+<Trapping id="SYLVA-TRAP_004">
+<Description language="ENGLISH">"Rations, 1 day (Sylvania)"</Description>
+<Theme>"RULES-LAB_192"</Theme>
+<Availability>"RULES-DISPO_LIMITED"</Availability>
+<Price>"3PA 1SB"</Price>
+<Encumbrance>"0"</Encumbrance>
+</Trapping>
+<Trapping id="SYLVA-TRAP_005">
+<Description language="ENGLISH">"Room, common/night (Sylvania)"</Description>
+<Theme>"RULES-LAB_192"</Theme>
+<Availability>"RULES-DISPO_COMMON"</Availability>
+<Price>"15SB"</Price>
+<Encumbrance>"0"</Encumbrance>
+</Trapping>
+<Trapping id="SYLVA-TRAP_006">
+<Description language="ENGLISH">"Room, private/night (Sylvania)"</Description>
+<Theme>"RULES-LAB_192"</Theme>
+<Availability>"RULES-DISPO_LIMITED"</Availability>
+<Price>"1PA 10SB"</Price>
+<Encumbrance>"0"</Encumbrance>
+</Trapping>
+<Trapping id="SYLVA-TRAP_007">
+<Description language="ENGLISH">"Spirits, bottle (Sylvania)"</Description>
+<Theme>"RULES-LAB_192"</Theme>
+<Availability>"RULES-DISPO_LIMITED"</Availability>
+<Price>"2PA"</Price>
+<Encumbrance>"0"</Encumbrance>
+</Trapping>
+<Trapping id="SYLVA-TRAP_008">
+<Description language="ENGLISH">"Spirits, drink (Sylvania)"</Description>
+<Theme>"RULES-LAB_192"</Theme>
+<Availability>"RULES-DISPO_COMMON"</Availability>
+<Price>"6SB"</Price>
+<Encumbrance>"0"</Encumbrance>
+</Trapping>
+<Trapping id="SYLVA-TRAP_009">
+<Description language="ENGLISH">"Stables/night (Sylvania)"</Description>
+<Theme>"RULES-LAB_192"</Theme>
+<Availability>"RULES-DISPO_COMMON"</Availability>
+<Price>"1PA 3SB"</Price>
+<Encumbrance>"0"</Encumbrance>
+</Trapping>
+<Trapping id="SYLVA-TRAP_010">
+<Description language="ENGLISH">"Wine, bottle (Sylvania)"</Description>
+<Theme>"RULES-LAB_192"</Theme>
+<Availability>"RULES-DISPO_LIMITED"</Availability>
+<Price>"1PA"</Price>
+<Encumbrance>"0"</Encumbrance>
+</Trapping>
+<Trapping id="SYLVA-TRAP_011">
+<Description language="ENGLISH">"Wine, drink (Sylvania)"</Description>
+<Theme>"RULES-LAB_192"</Theme>
+<Availability>"RULES-DISPO_COMMON"</Availability>
+<Price>"6SB"</Price>
+<Encumbrance>"0"</Encumbrance>
+</Trapping>
+<!-- Drakenhof Sundries (p.33). Effets non modelises, en commentaires. -->
+<!-- Fonctionnellement identique a un Healing Poultice. -->
+<Trapping id="SYLVA-TRAP_012">
+<Description language="ENGLISH">"Fen Moss Poultice"</Description>
+<Theme>"RULES-LAB_198"</Theme>
+<Availability>"RULES-DISPO_LIMITED"</Availability>
+<Price>"10PA"</Price>
+<Encumbrance>"0"</Encumbrance>
+</Trapping>
+<!-- Pour tenir le mal a distance. -->
+<Trapping id="SYLVA-TRAP_013">
+<Description language="ENGLISH">"Garlic Ropes"</Description>
+<Theme>"RULES-LAB_196"</Theme>
+<Availability>"RULES-DISPO_COMMON"</Availability>
+<Price>"2PA"</Price>
+<Encumbrance>"0"</Encumbrance>
+</Trapping>
+<!-- Soigne les Infections causees par les morts-vivants (1d10 par dose, sur 1 : condition Poisoned). -->
+<Trapping id="SYLVA-TRAP_014">
+<Description language="ENGLISH">"Graveroot"</Description>
+<Theme>"RULES-LAB_198"</Theme>
+<Availability>"RULES-DISPO_LIMITED"</Availability>
+<Price>"4PA"</Price>
+<Encumbrance>"0"</Encumbrance>
+</Trapping>
+<!-- Epee de qualite, petite ebrechure sur la lame, pommeau en aigle ; qualites Fine et Practical. Saisie en Trapping (objet unique), pas en arme. -->
+<Trapping id="SYLVA-TRAP_015">
+<Description language="ENGLISH">"High Quality Sword"</Description>
+<Theme>"RULES-LAB_196"</Theme>
+<Availability>"RULES-DISPO_UNIQUE"</Availability>
+<Price>"1CO"</Price>
+<Encumbrance>"1"</Encumbrance>
+</Trapping>
+<!-- Sert a bruler les morts pour qu ils ne se relevent pas ; simple huile de lampe en contenant gothique. -->
+<Trapping id="SYLVA-TRAP_016">
+<Description language="ENGLISH">"Morr Oil"</Description>
+<Theme>"RULES-LAB_196"</Theme>
+<Availability>"RULES-DISPO_LIMITED"</Availability>
+<Price>"1CO"</Price>
+<Encumbrance>"0"</Encumbrance>
+</Trapping>
+<!-- Dit-on, brule bleu quand des morts-vivants sont proches. -->
+<Trapping id="SYLVA-TRAP_017">
+<Description language="ENGLISH">"Nightwatch Candle"</Description>
+<Theme>"RULES-LAB_196"</Theme>
+<Availability>"RULES-DISPO_LIMITED"</Availability>
+<Price>"1PA"</Price>
+<Encumbrance>"0"</Encumbrance>
+</Trapping>
+<!-- Carte seulement en partie exacte. -->
+<Trapping id="SYLVA-TRAP_018">
+<Description language="ENGLISH">"Scroll Case with Map of Drakenhof Castle"</Description>
+<Theme>"RULES-LAB_194"</Theme>
+<Availability>"RULES-DISPO_UNIQUE"</Availability>
+<Price>"2CO"</Price>
+<Encumbrance>"0"</Encumbrance>
+</Trapping>
+<Trapping id="SYLVA-TRAP_019">
+<Description language="ENGLISH">"Sylvanian Panpipes"</Description>
+<Theme>"RULES-LAB_196"</Theme>
+<Availability>"RULES-DISPO_COMMON"</Availability>
+<Price>"1CO"</Price>
+<Encumbrance>"0"</Encumbrance>
+</Trapping>
+<!-- Donne du courage face aux morts-vivants (+20 Cool, +10 Willpower) pendant 1d10 minutes, puis 1d10 Wounds. -->
+<Trapping id="SYLVA-TRAP_020">
+<Description language="ENGLISH">"Stand Draught"</Description>
+<Theme>"RULES-LAB_198"</Theme>
+<Availability>"RULES-DISPO_RARE"</Availability>
+<Price>"1CO"</Price>
+<Encumbrance>"0"</Encumbrance>
+</Trapping>
+<!-- Petit pain noir dur, nourrit pour un jour. Plus de 3 jours de suite : 20% de Galloping Trots (Rulebook). -->
+<Trapping id="SYLVA-TRAP_021">
+<Description language="ENGLISH">"Waldenloaf"</Description>
+<Theme>"RULES-LAB_192"</Theme>
+<Availability>"RULES-DISPO_COMMON"</Availability>
+<Price>"2PA"</Price>
+<Encumbrance>"0"</Encumbrance>
+</Trapping>
+<!-- Sylvanian Riverboats (p.21). Le livre ne donne ni encombrement ni disponibilite : Enc 0, disponibilite absente. Caracteristiques du bateau en commentaire (aucun champ ne les porte). -->
+<!-- Crew 2 ; M voile - ; M rames 3 (1) ; Manoeuvrabilite - ; Taille 12 ; Robustesse 30 ; Blessures 10 ; traits -. -->
+<Trapping id="SYLVA-TRAP_022">
+<Description language="ENGLISH">"Punt"</Description>
+<Theme>"RULES-LAB_195"</Theme>
+<Price>"4CO"</Price>
+<Encumbrance>"0"</Encumbrance>
+<Carries>"40"</Carries>
+</Trapping>
+<!-- Crew 4 ; M voile 3 (3) ; M rames 3 (4) ; Manoeuvrabilite - ; Taille 25 ; Robustesse 45 ; Blessures 75 ; traits -. -->
+<Trapping id="SYLVA-TRAP_023">
+<Description language="ENGLISH">"Flat Bottomed Barge"</Description>
+<Theme>"RULES-LAB_195"</Theme>
+<Price>"335CO"</Price>
+<Encumbrance>"0"</Encumbrance>
+<Carries>"400"</Carries>
+</Trapping>
+<!-- Crew 4 ; M voile 4 (3) ; M rames 4 (4) ; Manoeuvrabilite +2 SL ; Taille 30 ; Robustesse 45 ; Blessures 90 ; trait Smoothing. -->
+<Trapping id="SYLVA-TRAP_024">
+<Description language="ENGLISH">"Strigani Narrowboat"</Description>
+<Theme>"RULES-LAB_195"</Theme>
+<Price>"825CO"</Price>
+<Encumbrance>"0"</Encumbrance>
+<Carries>"500"</Carries>
+</Trapping>
+</DATA_TRAPPING>
+</DATA_BOOK>

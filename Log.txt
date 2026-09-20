@@ -5679,3 +5679,8 @@ Fichiers modifies : A FAIRE.txt, CONTEXT.md, Log.txt.
 20/09/2026 - PDF NORMAL (GABARIT DES AUTEURS) : PLUS DE DEBORDEMENT - COMPILE ET VALIDE PAR NONO (FICHE TRES CHARGEE)
 pdfpersonnage.pas : PdfPersonnageCreation, plafonds groupees 18 / talents 20, page jetable pour Armure 5 / Equipement 21 / Armes 7 / Sorts 7 (totaux d encombrement et PA inchanges).
 Fichiers modifies : pdfpersonnage.pas, CONTEXT.md, Log.txt.
+
+20/09/2026 - LIVRE SYLVANIA THE CURSED COUNTY : 2 ARMES, AUBERGE (11 OBJETS), DRAKENHOF SUNDRIES (10 OBJETS) - PAS ENCORE TESTE PAR NONO
+DATABASE/WFRP4/BOOK_SYLVANIA_THE_CURSED_COUNTY.Xml (code SYLVA), livre ajoute a BOOKWFRP4 dans INI.TXT. Prix : d = SB, / = PA, GC = CO ; Scare = Limited. Catechist Stake : portee lue personal, degats "-" (a verifier). Bateaux, PNJ et tables d evenements non saisis.
+Fichiers modifies : BOOK_SYLVANIA_THE_CURSED_COUNTY.Xml, INI.TXT, Log.txt.
+Ajout : 3 bateaux fluviaux (SYLVA-TRAP_022 a _024, Theme Animals and Vehicles, Price et Carries, stats en commentaire).
