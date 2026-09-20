@@ -3193,6 +3193,17 @@ Function PdfDiversEncombrementBrut(PersonnageEquipement: StructurePersonnageEqui
 
 // Texte de la colonne Enc : "reduit(brut)" pour un objet porte dont l'encombrement change,
 // comme les armures.
+// Lien objet <-> animal (CONTEXT.md 2.84) : ' [A1]' a la suite du nom d'un objet confie a l'animal A1,
+// et du nom de l'animal lui-meme, pour relier les deux a la lecture. Chaine vide sinon.
+Function PdfLienAnimal(PersonnageEquipement: StructurePersonnageEquipement): String;
+  begin
+    Result := '';
+    if PersonnageEquipement.PortePar <> '' then
+      Result := ' [' + PersonnageEquipement.PortePar + ']'
+    else if (PersonnageEquipement.TypeEquipement = TypeEquipAN) and (PersonnageEquipement.IdInstance <> '') then
+      Result := ' [' + PersonnageEquipement.IdInstance + ']';
+  end;
+
 Function PdfDiversTexteEnc(PersonnageEquipement: StructurePersonnageEquipement): String;
   var
     Enc, Brut: Integer;
@@ -3257,7 +3268,7 @@ Procedure PdfBlocDiversDonnees(PdfPage: TPDFPage; Personnage: StructurePersonnag
           Enc       := PdfDiversEncombrement(PersonnageEquipement);
           if PersonnageEquipement.PortePar = '' then
             EncDivers := EncDivers + Enc;
-          Libelle   := PdfDiversLibelle(PersonnageEquipement);
+          Libelle   := PdfDiversLibelle(PersonnageEquipement) + PdfLienAnimal(PersonnageEquipement);
           // Animal qui porte des objets : charge / capacite <Carries> a la suite du nom.
           if (PersonnageEquipement.IdInstance <> '') and (PdfAnimalCharge(Personnage, PersonnageEquipement.IdInstance) > 0) then
             Libelle := Libelle + ' (' + GetTexteLibelle('RULES-LAB_257') + ' '
@@ -3380,13 +3391,13 @@ Procedure PdfBlocArmesDonnees(PdfPage: TPDFPage; Personnage: StructurePersonnage
           // le nom est raccourci d'autant pour ne pas la recouvrir.
           if AsterisqueParPiece.Values['FAB:' + PersonnageEquipement.CodeEquipement] <> '' then
             begin
-              PdfEcrit(PdfPage, XGauche +  1, XGauche + 41, Y - ((NbArme + 2) * HauteurLigne) + 0.6, PArme.Libelle + Quality, MinPolice);
+              PdfEcrit(PdfPage, XGauche +  1, XGauche + 41, Y - ((NbArme + 2) * HauteurLigne) + 0.6, PArme.Libelle + Quality + PdfLienAnimal(PersonnageEquipement), MinPolice);
               PdfTaillePolice(PdfPage, PdfFontValue, ConstPoliceArial, 4);
               PdfEcrit(PdfPage, XGauche + 41, XGauche + 45, Y - ((NbArme + 2) * HauteurLigne) + 2.3, AsterisqueParPiece.Values['FAB:' + PersonnageEquipement.CodeEquipement], 4);
               PdfTaillePolice(PdfPage, PdfFontValue, ConstPoliceArial, 9);
             end
           else
-            PdfEcrit(PdfPage, XGauche +  1, XGauche + 45, Y - ((NbArme + 2) * HauteurLigne) + 0.6, PArme.Libelle + Quality, MinPolice);
+            PdfEcrit(PdfPage, XGauche +  1, XGauche + 45, Y - ((NbArme + 2) * HauteurLigne) + 0.6, PArme.Libelle + Quality + PdfLienAnimal(PersonnageEquipement), MinPolice);
 
           LigneBonus := '';
 
@@ -3573,11 +3584,11 @@ Procedure PdfBlocArmuresDonnees(PdfPage: TPDFPage; Personnage: StructurePersonna
 
               if (PersonnageEquipement.TypeEquipement = TypeEquipAR) then
                 begin
-                  PdfEcrit(PdfPage, XGauche +  1, XGauche + 34, Y - ((NbArmure + 2) * HauteurLigne) + 0.6, Parmure.Libelle + Quality, MinPolice);
+                  PdfEcrit(PdfPage, XGauche +  1, XGauche + 34, Y - ((NbArmure + 2) * HauteurLigne) + 0.6, Parmure.Libelle + Quality + PdfLienAnimal(PersonnageEquipement), MinPolice);
                   PdfEcrit(PdfPage, XGauche + 35, XGauche + 53, Y - ((NbArmure + 2) * HauteurLigne) + 0.6, GetAllTexteLibelle(PArmure.Emplacement), MinPolice);
                 end
               else
-                PdfEcrit(PdfPage, XGauche +  1, XGauche + 34, Y - ((NbArmure + 2) * HauteurLigne) + 0.6, PArmureSimplifiee.Libelle + Quality, MinPolice);
+                PdfEcrit(PdfPage, XGauche +  1, XGauche + 34, Y - ((NbArmure + 2) * HauteurLigne) + 0.6, PArmureSimplifiee.Libelle + Quality + PdfLienAnimal(PersonnageEquipement), MinPolice);
               // Afficher l'astérisque de la pièce (même principe que les talents,
               // PdfPersonnageTalentBonus/PdfBlocTalents) - permet de retrouver quelle pièce
               // cause quel malus affiché sur les Compétences (retour de Nono le 16/08/2026)
@@ -3870,6 +3881,175 @@ Function PdfBlocMutations(PdfPage: TPDFPage; Personnage: StructurePersonnage; XG
       end;
 
     Result := Y - ((NbLignes + 1) * HauteurLigne);
+  end;
+
+// Découpe Texte en au plus MaxLignes lignes de largeur Largeur (mm) à la police courante de taille
+// Taille (glouton, coupe aux espaces). Si le texte ne tient pas, la dernière ligne finit par "...".
+// Le TStringList rendu est à libérer par l'appelant.
+Function PdfDecoupeLignes(Texte: String; Largeur: Single; Taille, MaxLignes: Integer): TStringList;
+  var
+    Mots:    TStringArray;
+    Courant: String;
+    Essai:   String;
+    Ind:     Integer;
+  begin
+    Result  := TStringList.Create;
+    Mots    := Texte.Split([' ']);
+    Courant := '';
+    for Ind := 0 to High(Mots) do
+      begin
+        if Courant = '' then Essai := Mots[Ind] else Essai := Courant + ' ' + Mots[Ind];
+        if (TailleTexte(Essai, Taille) > Largeur) and (Courant <> '') then
+          begin
+            Result.Add(Courant);
+            Courant := Mots[Ind];
+            if Result.Count = MaxLignes then
+              begin
+                Courant := '';
+                Result[MaxLignes - 1] := Result[MaxLignes - 1] + '...';
+                break;
+              end;
+          end
+        else
+          Courant := Essai;
+      end;
+    if (Courant <> '') and (Result.Count < MaxLignes) then
+      Result.Add(Courant);
+  end;
+
+// Fiches des montures/animaux du personnage (page 2 du Feldo, à droite d'Armour Points).
+// Par animal : titre (nom + identifiant), profil sur 12 colonnes, traits, charge/capacité.
+// PDF "intelligent" (A FAIRE 20/09/2026) : fiche complète si tout tient dans HauteurMax, sinon
+// compacte (sans les traits), sinon les dernières fiches sont omises (marque "..."). Un animal
+// sans profil (Chicken, Sheep, Pig) ne prend que le titre et la charge.
+Procedure PdfBlocMontures(PdfPage: TPDFPage; Personnage: StructurePersonnage; XGauche, XDroite, Y, HauteurMax: Single; MinPolice: Integer);
+  const
+    HautTitre  = 4.4;
+    HautLigne  = 3.3;
+    Ecart      = 2;
+    ColonnesProfilPdf: array[0..11] of String =
+      ('M', 'WS', 'BS', 'S', 'T', 'I', 'Ag', 'Dex', 'Int', 'WP', 'Fel', 'W');
+  var
+    Animaux:  array of StructurePersonnageEquipement;
+    PT:       StructureTrapping;
+    PEq:      StructurePersonnageEquipement;
+    Largeur:  Single;
+    Complet:  Boolean;
+    Total:    Single;
+    Haut:     Single;
+    Y0, YL:   Single;
+    IndA, IndC: Integer;
+    Valeurs:  TStringArray;
+    LignesTr: TStringList;
+    Texte:    String;
+    ColL:     Single;
+    Tronque:  Boolean;
+
+  // hauteur de la fiche d'un animal (traits : 2 lignes au plus)
+  function HauteurFiche(P: StructureTrapping; AvecTraits: Boolean): Single;
+    var
+      Lignes: TStringList;
+    begin
+      Result := HautTitre + 1;
+      if P.ProfilAnimal <> '' then
+        Result := Result + 2 * HautLigne;
+      if AvecTraits and (P.TraitsAnimal <> '') then
+        begin
+          Lignes := PdfDecoupeLignes(GetTexteLibelle('RULES-LAB_251') + ' : ' + P.TraitsAnimal, Largeur - 2, 6, 2);
+          Result := Result + Lignes.Count * HautLigne;
+          Lignes.Free;
+        end;
+      if P.Capacite <> 0 then
+        Result := Result + HautLigne;
+    end;
+
+  begin
+    SetLength(Animaux, 0);
+    for PEq in Personnage.Equipement do
+      if PEq.TypeEquipement = TypeEquipAN then
+        begin
+          SetLength(Animaux, Length(Animaux) + 1);
+          Animaux[High(Animaux)] := PEq;
+        end;
+    if Length(Animaux) = 0 then exit;
+
+    Largeur := XDroite - XGauche;
+    PdfTaillePolice(PdfPage, PdfFontValue, ConstPoliceArial, 6);
+
+    // Complet si tout tient ; sinon compact (sans traits) ; puis on omet les fiches en trop.
+    Complet := True;
+    Total   := 0;
+    for IndA := 0 to High(Animaux) do
+      Total := Total + HauteurFiche(ChercheTrapping(Animaux[IndA].CodeEquipement), True) + Ecart;
+    if Total - Ecart > HauteurMax then
+      Complet := False;
+
+    Y0      := Y;
+    Tronque := False;
+    for IndA := 0 to High(Animaux) do
+      begin
+        PT   := ChercheTrapping(Animaux[IndA].CodeEquipement);
+        Haut := HauteurFiche(PT, Complet);
+        // la fiche dépasserait le bas de la zone : les suivantes sont omises
+        if (Y0 - Haut) < (Y - HauteurMax) then
+          begin
+            Tronque := True;
+            break;
+          end;
+        // cadre
+        PdfPage.DrawLine(XGauche,  Y0, XGauche,  Y0 - Haut, 1);
+        PdfPage.DrawLine(XDroite,  Y0, XDroite,  Y0 - Haut, 1);
+        PdfPage.DrawLine(XGauche,  Y0, XDroite,  Y0,        1);
+        PdfPage.DrawLine(XGauche,  Y0 - Haut, XDroite, Y0 - Haut, 1);
+        PdfPage.DrawLine(XGauche,  Y0 - HautTitre, XDroite, Y0 - HautTitre, 1);
+        // titre : nom (+ identifiant d'instance)
+        PdfTaillePolice(PdfPage, PdfFontBack, ConstPoliceCarlson+ConstPoliceGras, 9);
+        Texte := PT.Libelle;
+        if Texte = '' then Texte := Animaux[IndA].CodeEquipement;
+        if Animaux[IndA].IdInstance <> '' then
+          Texte := Texte + ' (' + Animaux[IndA].IdInstance + ')';
+        PdfEcrit(PdfPage, XGauche + 1, XDroite - 1, Y0 - HautTitre + 1, Texte, MinPolice);
+        PdfTaillePolice(PdfPage, PdfFontValue, ConstPoliceArial, 6);
+        YL := Y0 - HautTitre - HautLigne + 0.8;
+        // profil : libellés puis valeurs, 12 colonnes
+        if PT.ProfilAnimal <> '' then
+          begin
+            Valeurs := PT.ProfilAnimal.Split([' ']);
+            ColL    := (Largeur - 2) / 12;
+            for IndC := 0 to 11 do
+              begin
+                PdfCentre(PdfPage, XGauche + 1 + IndC * ColL, XGauche + 1 + (IndC + 1) * ColL, YL, ColonnesProfilPdf[IndC]);
+                if IndC <= High(Valeurs) then
+                  PdfCentre(PdfPage, XGauche + 1 + IndC * ColL, XGauche + 1 + (IndC + 1) * ColL, YL - HautLigne, Valeurs[IndC]);
+              end;
+            YL := YL - 2 * HautLigne;
+          end;
+        // traits (fiche complète)
+        if Complet and (PT.TraitsAnimal <> '') then
+          begin
+            LignesTr := PdfDecoupeLignes(GetTexteLibelle('RULES-LAB_251') + ' : ' + PT.TraitsAnimal, Largeur - 2, 6, 2);
+            for IndC := 0 to LignesTr.Count - 1 do
+              begin
+                PdfPage.WriteText(XGauche + 1, YL, LignesTr[IndC]);
+                YL := YL - HautLigne;
+              end;
+            LignesTr.Free;
+          end;
+        // charge / capacité
+        if PT.Capacite <> 0 then
+          begin
+            Texte := GetTexteLibelle('RULES-LAB_257') + ' : ';
+            if Animaux[IndA].IdInstance <> '' then
+              Texte := Texte + IntToStr(PdfAnimalCharge(Personnage, Animaux[IndA].IdInstance))
+            else
+              Texte := Texte + '0';
+            Texte := Texte + ' / ' + IntToStr(PT.Capacite * Max(Animaux[IndA].Quantite, 1));
+            PdfPage.WriteText(XGauche + 1, YL, Texte);
+          end;
+        Y0 := Y0 - Haut - Ecart;
+      end;
+    if Tronque then
+      PdfPage.WriteText(XGauche + 1, Y0 - 2, '...');
   end;
 
 // Cherche la valeur du champ nommé Champ dans Enr. Renvoie une case vide (Valeur = '') si le
@@ -5183,7 +5363,10 @@ Procedure PdfPersonnageCreationFeldo2P(Personnage: StructurePersonnage);
     PdfBlocArmourPoints(PdfPage, PdfImgShadow, DessinDebColCompG, DessinHautArmourPoints, ArmureTete, ArmureBras, ArmureCorps, ArmureJambe, ArmureBouclier, AsterisqueArmure);
 
     // Le bloc Mutations est passé sur la page 1 (sous les Talents, 20/09/2026) : la place à
-    // droite d'Armour Points est libre pour le bloc monture.
+    // droite d'Armour Points (même bord gauche que l'ancien bloc Mutations, bord droit commun
+    // avec Armure/Équipement, 84mm de haut comme le cadre d'Armour Points) reçoit les fiches
+    // de montures.
+    PdfBlocMontures(PdfPage, Personnage, DessinDebColCompG + 63 + 3, DessinLargeurArm, DessinHautArmourPoints, 84, MinPolice);
     // Dernière utilisation de ListAsterisqueMutation/AsterisqueParMutation sur cette page -
     // libérées ici (même moment que ListAsterisqueArmure/AsterisqueParEquipement, juste avant,
     // après leur dernier usage respectif).

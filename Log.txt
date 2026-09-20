@@ -5650,3 +5650,7 @@ Fichiers modifies : pdfpersonnage.pas, CONTEXT.md, Log.txt, A FAIRE.txt.
 pdfpersonnage.pas : PdfNbLignesExplication ; PdfPageBlanc (Pages.AddPage sans PdfSection.AddPage, donc non ecrite) rejoue PdfBloc{Divers,Armes,Armures}Donnees pour obtenir ArmureBonii/ArmeBonii/FabricationBonii avant les cadres ; DessinNbLigSor = besoin + 3 (min 4, max 11), ExtraArm si le texte des explications depasse Arm+Equ+2 lignes, reste partage Equ/Wea. Bug corrige : la page jetable n avait pas de police (EPDF No Font was set) -> PdfTaillePolice juste apres sa creation.
 Appris : fppdf n ecrit que les pages ajoutees a une section.
 Fichiers modifies : pdfpersonnage.pas, CONTEXT.md, Log.txt, A FAIRE.txt.
+
+20/09/2026 - PDF FELDO : BLOC MONTURE ET LIEN [A1] - COMPILE ET VALIDE PAR NONO
+pdfpersonnage.pas : PdfDecoupeLignes, PdfBlocMontures (une fiche par animal a droite d Armour Points, zone 50x84mm : titre + id, profil M..W sur 12 colonnes, traits sur 2 lignes, Charge/capacite ; complete si tout tient, sinon compacte sans traits, sinon fiches omises avec ...), PdfLienAnimal (suffixe [A1] sur l animal et sur ses objets confies dans Trappings/Armes/Armures).
+Fichiers modifies : pdfpersonnage.pas, CONTEXT.md, Log.txt, A FAIRE.txt.
