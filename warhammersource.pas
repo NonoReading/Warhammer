@@ -1999,7 +1999,11 @@ procedure TMenu.ButtonPdfClick(Sender: TObject);
   begin
     Chemin     := XmlPersonnageFichierActuel(GetCurrentDir+ConstCheminPersonnage+TabPersonnage.Cells[1, TabPersonnage.Row]);
     Personnage := PersonnageXmlChargement(Chemin);
-    PdfPersonnageCreation(Personnage, true);
+    // Meme choix que le bouton PDF de WinPersonnage : l'option PdfFeldo2P de la fiche decide du gabarit.
+    if Pos(AjouteAccolade(ConstXmlOptionFeldo2P), Personnage.Options) > 0 then
+      PdfPersonnageCreationFeldo2P(Personnage)
+    else
+      PdfPersonnageCreation(Personnage, true);
   end;
 
 procedure TMenu.ButtonMetierClick(Sender: TObject);

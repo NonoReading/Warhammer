@@ -5785,3 +5785,7 @@ Fichiers modifies : BOOK_NATIONS_OF_MANKIND.Xml, chargeconstantes.pas, chargefab
 pdfpersonnage.pas, PdfBlocArmesDonnees (Feldo) : le texte des portees (< / >) est cale contre le bord droit du cadre au lieu de commencer a XGauche+153, la zone des qualites s arrete 1 mm avant (RangeX). Un fusil avec Barrel Extension, Bayonet et Telescopic Sight tient sur deux lignes au lieu de trois qui se chevauchaient. Bloc du gabarit normal (PdfPersonnageCreation) : meme calage, portees en 5 pt, a 193,5 ; NON VERIFIE (pas de PDF de ce gabarit), extrapole de la mesure Feldo.
 Appris : TailleTexte (pdfutils.pas) surestime d environ 30 % la largeur reellement dessinee (34 mm estimes pour 25,6 mm reels a 6 pt) ; PdfEcrit compense par son 1.15. Pour caler un texte, multiplier par 0,77 et ecrire avec WriteText, sinon PdfEcrit reduit la police.
 Fichiers modifies : pdfpersonnage.pas, Log.txt.
+
+20/09/2026 - MENU PRINCIPAL : LE BOUTON PDF SUIT LE PARAMETRAGE FELDO DU PERSONNAGE - COMPILE ET VALIDE PAR NONO
+warhammersource.pas, TMenu.ButtonPdfClick : si la fiche porte l option PdfFeldo2P, appelle PdfPersonnageCreationFeldo2P, sinon PdfPersonnageCreation. Meme test que ButtonPdfClick de WinPersonnage.
+Fichiers modifies : warhammersource.pas, Log.txt.
