@@ -42,6 +42,29 @@
 <Ammunition>"0"</Ammunition>
 <Type>"RULES-WTYPE_SPEAR"</Type>
 </Weapon>
+<!-- Blade of Darting Steel (p.45, Dalroth) et Bow of Anirain (p.45, Dannor). Le livre ne donne NI prix NI disponibilite : Unique, sans Price. Durable 3 et Fine 3 = qualites de FABRICATION, non saisies (CONTEXT.md 2.29). Blade : le livre ne donne pas la competence ; Melee (Fencing) retenue (arme Fast et Precise, et Dalroth a Fencing 88), 1 main. Bow : Ranged (Bow), 2 mains comme l Elf Bow du Rulebook. Fast = WEAPB20, Precise = WEAPB14, Damaging = WEAPB10. -->
+<Weapon id="COTHI-COMB_ESCR_01">
+<Description language="ENGLISH">"Blade of Darting Steel"</Description>
+<Skill>"RULES-COMPCOMB_ESCR"</Skill>
+<Damage>"+(BATTR_S)+4"</Damage>
+<Availability>"RULES-DISPO_UNIQUE"</Availability>
+<Reach>"RULES-WEAPR_MID"</Reach>
+<Encumbrance>"1"</Encumbrance>
+<Quality>"RULES-WEAPB20,RULES-WEAPB14"</Quality>
+<Hand>"1"</Hand>
+<Ammunition>"0"</Ammunition>
+</Weapon>
+<Weapon id="COTHI-PROJ_ARC_01">
+<Description language="ENGLISH">"Bow of Anirain"</Description>
+<Skill>"RULES-COMPPROJ_ARC"</Skill>
+<Damage>"+(BATTR_S)+5"</Damage>
+<Availability>"RULES-DISPO_UNIQUE"</Availability>
+<Reach>"150"</Reach>
+<Encumbrance>"1"</Encumbrance>
+<Quality>"RULES-WEAPB10,RULES-WEAPB14"</Quality>
+<Hand>"2"</Hand>
+<Ammunition>"0"</Ammunition>
+</Weapon>
 </DATA_WEAPON>
 <!-- Chariots (p.76). Motive Power : A = animaux. Strike = degats de l impact (M = Move). Enc du vehicule dans Encumbrance, Carries dans Carries. -->
 <DATA_TRAPPING>
