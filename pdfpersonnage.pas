@@ -4802,7 +4802,8 @@ Procedure PdfPersonnageCreationFeldo2P(Personnage: StructurePersonnage);
         DessinNbLigTal:       Integer = 21;
         // Répartition intelligente Compétences groupées / Talents (A FAIRE 20/09/2026)
         DessinMinLignesVides: Integer = 3;
-        BudgetDonnees, BesoinComg, BesoinTal, LibreDonnees: Integer;
+        DessinNbLigMut:       Integer = 3;
+        BudgetDonnees, BesoinComg, BesoinTal, LibreDonnees, BesoinMut: Integer;
         // Passe à blanc + répartition page 2 (A FAIRE 20/09/2026)
         PdfPageBlanc: TPDFPage;
         PEquipDry: StructurePersonnageEquipement;
@@ -5167,7 +5168,15 @@ Procedure PdfPersonnageCreationFeldo2P(Personnage: StructurePersonnage);
     // + Talents, valeurs par défaut 24 + 21) selon le besoin réel du personnage, avec un
     // minimum de lignes vides par tableau pour noter à la main (A FAIRE 20/09/2026). Chaque
     // tableau garde 2 lignes d'en-tête. Le total ne change pas, donc le bas de page non plus.
-    BudgetDonnees := (DessinNbLigComg - 2) + (DessinNbLigTal - 2);
+    // Les Mutations font partie du budget (3 lignes de données par défaut) : besoin + 1 ligne
+    // vide, cédant leurs lignes vides aux deux autres tableaux si besoin.
+    BudgetDonnees := (DessinNbLigComg - 2) + (DessinNbLigTal - 2) + DessinNbLigMut;
+    BesoinMut     := Length(Personnage.Mutations);
+    DessinNbLigMut := BesoinMut + 1;
+    if BudgetDonnees - DessinNbLigMut < PdfNbCompetencesGroupeesPrises(Personnage, ListPris) + PdfNbTalentsAcquis(Personnage) then
+      DessinNbLigMut := Max(BesoinMut, BudgetDonnees - PdfNbCompetencesGroupeesPrises(Personnage, ListPris) - PdfNbTalentsAcquis(Personnage));
+    if DessinNbLigMut < 1 then DessinNbLigMut := 1;
+    BudgetDonnees := BudgetDonnees - DessinNbLigMut;
     BesoinComg    := PdfNbCompetencesGroupeesPrises(Personnage, ListPris);
     BesoinTal     := PdfNbTalentsAcquis(Personnage);
     LibreDonnees  := BudgetDonnees - BesoinComg - BesoinTal;
@@ -5247,7 +5256,7 @@ Procedure PdfPersonnageCreationFeldo2P(Personnage: StructurePersonnage);
     // même écart de 3mm que partout ailleurs entre deux blocs. Capacité fixe à 3 lignes.
     // AsterisqueParMutation est encore vivant ici (libéré en fin de page 2).
     PdfBlocMutations(PdfPage, Personnage, DessinDebColD, DessinFinColCompD,
-      DessinDebutHautTal - (DessinNbLigTal * DessinHauteurTal) - 3, DessinHauteurTal, 3, MinPolice, AsterisqueParMutation);
+      DessinDebutHautTal - (DessinNbLigTal * DessinHauteurTal) - 3, DessinHauteurTal, DessinNbLigMut, MinPolice, AsterisqueParMutation);
 
 
    // PAGE 2

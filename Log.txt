@@ -5659,3 +5659,7 @@ Fichiers modifies : pdfpersonnage.pas, CONTEXT.md, Log.txt, A FAIRE.txt.
 winpersonnage.pas : boutons < et > (FormCreate, PersonnageVoisinClick). pdfpersonnage.pas : NbEquNeeded (deux demi-colonnes), NbArmPieces (pieces + 2), l Equipement passe avant le partage, les Sorts cedent leurs lignes vides ; limite d ecriture des Divers corrigee (NbLignes - 1) * 2.
 Appris : un cadre a NbLignes - 1 lignes de donnees (2 lignes d en-tete). Trop de tout (armures + Trappings + sorts) ne tient pas.
 Fichiers modifies : winpersonnage.pas, pdfpersonnage.pas, CONTEXT.md, Log.txt, A FAIRE.txt.
+
+20/09/2026 - PDF FELDO PAGE 1 : MUTATIONS A LIGNES VARIABLES - COMPILE ET VALIDE PAR NONO
+pdfpersonnage.pas : DessinNbLigMut (mutations + 1, min 1) pris dans le budget commun Competences groupees / Talents / Mutations (44 lignes de donnees, total inchange).
+Fichiers modifies : pdfpersonnage.pas, CONTEXT.md, Log.txt, A FAIRE.txt.
