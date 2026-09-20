@@ -5771,3 +5771,7 @@ Fichiers modifies : BOOK_SEA_OF_CLAWS.Xml, Log.txt.
 20/09/2026 - REGLES DE CONDUITE, DE VOL ET D EQUIPAGE : HORS PROGRAMME (DECISION DE NONO)
 Ce sont des regles de MJ (tests de Handling, Crew Tests, coups et critiques du navire), pas de joueur : WinPersonnage ne les modelise pas. Retirees de A FAIRE.txt (lignes Sylvania, runes de machines, equipements mis de cote) et fermees dans CONTEXT.md. Reste possible sur demande : afficher l effectif Crewed d une arme sur la fiche.
 Fichiers modifies : A FAIRE.txt, CONTEXT.md, Log.txt.
+
+20/09/2026 - SUIVI : LE LOT 3d-3 DE NATIONS OF MANKIND ETAIT DEJA TERMINE
+Les 17 ordres de chevalerie et les 11 Regiments of Renown sont saisis et valides depuis le 10/09/2026 (CONTEXT.md 2.44 et 2.51). Mentions "reste le 3d-3" retirees d A FAIRE.txt (lignes des livres faits et des suites possibles) et du titre du 2.37 de CONTEXT.md.
+Fichiers modifies : A FAIRE.txt, CONTEXT.md, Log.txt.

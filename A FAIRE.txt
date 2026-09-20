@@ -733,9 +733,9 @@ INVENTAIRE A JOUR : CONTEXT.md 2.36 (03/09/2026). Il remplace le tri du 29/08, q
 comptait des marqueurs sans lire leur contexte et se trompait sur plusieurs livres.
 Ne rien relancer ici sans l avoir lu.
 
-FAITS : High Elf Player s Guide (CONTEXT.md 2.25 a 2.29), Wood Elf Wardancer (2.35), Nations of Mankind lots 1 a 3d-2 (2.37, reste le 3d-3), Dwarf Player s Guide, Sylvania (objets et bateaux seulement).
+FAITS : High Elf Player s Guide (CONTEXT.md 2.25 a 2.29), Wood Elf Wardancer (2.35), Nations of Mankind tous les lots, ordres de chevalerie et regiments compris (2.37, 2.44, 2.51), Dwarf Player s Guide, Sylvania (objets et bateaux seulement).
 
-SUITE POSSIBLE (ordre a confirmer avec CONTEXT.md 2.36) : Nations lot 3d-3 ; les Companions de l Enemy Within qui manquent (sorts et carrieres) ; Parravonese/Strigany/Signaller (1 carriere, 2 ethnies, 2 tables de tirage ; tableau d avance VIDE dans l export TXT, lire le PDF) ; Deft Steps Light Fingers ; Unofficial Grimoire (~215 sorts).
+SUITE POSSIBLE (ordre a confirmer avec CONTEXT.md 2.36) : les Companions de l Enemy Within qui manquent (sorts et carrieres) ; Parravonese/Strigany/Signaller (1 carriere, 2 ethnies, 2 tables de tirage ; tableau d avance VIDE dans l export TXT, lire le PDF) ; Deft Steps Light Fingers ; Unofficial Grimoire (~215 sorts).
 
 REGLES DE METHODE QUI RESTENT VRAIES, tirees de l inventaire du 29/08 et de sa correction :
   * La taille d un fichier ne coute rien tant qu on ne le lit pas. Inventaire, recherche

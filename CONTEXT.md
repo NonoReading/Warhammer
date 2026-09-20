@@ -7017,7 +7017,7 @@ le 30/08. Un marqueur compté n'est toujours pas un marqueur lu.
 
 ---
 
-### 2.37 Nations of Mankind — lots 1, 2, 3a, 3b, 3c, 3d-1 et 3d-2 terminés (04/09/2026) ; reste le 3d-3
+### 2.37 Nations of Mankind — tous les lots terminés (3d-3 : 17 ordres de chevalerie validés le 10/09/2026, voir §2.51)
 
 Fichier unique `DATABASE\BOOK_NATIONS_OF_MANKIND.Xml`, 277 Ko, `CODE_BOOK` = `NATIO`,
 `OFFICIAL=2`, `COMPLETE=0`. Aucun fichier existant modifié, donc aucune compilation.
