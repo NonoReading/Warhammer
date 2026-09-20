@@ -10868,7 +10868,7 @@ figés sur WFRP4\ - chantier séparé", cf. plus haut).
 - Compilé (`lazbuild`, 0 erreur) après chaque lot. Nono va tester en jeu (métiers/niveaux
   WFRP5 tout juste ajoutés) - résultat à consigner ici à la prochaine session.
 
-### 2.84 Montures : rattachement « porté par » — conception arrêtée (option A), rien codé (20/09/2026)
+### 2.84 Montures : rattachement « porté par » — terminé, compilé et validé par Nono (20/09/2026)
 
 Décision Nono : **option A**, l'animal est celui du personnage (identifiant local). Le groupe
 partagé (XML de groupe) reste un chantier à part ; il se branchera plus tard en faisant
