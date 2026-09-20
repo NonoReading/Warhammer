@@ -91,6 +91,33 @@ Type
         Texte:          String;
   End;
 
+  // Bloc DATA_CAREER_ADAPTATION : une adaptation = une carriere jouee par une ethnie.
+  // Facultative = 'may choose' du livre (choix du joueur) ; sinon imposee. Standing = bonus
+  // de Standing applique a tous les paliers.
+  StructureCareerAdaptation = Record
+        CodeAdaptation: String;
+        Libelle:        String;
+        CodeMetier:     String;
+        CodeRace:       String;
+        Facultative:    Boolean;
+        Standing:       Integer;
+        Livre:          String;
+  End;
+
+  // Une substitution : au palier N, Retire (vide = simple ajout) est remplace par Ajoute
+  // (vide = simple retrait). Nature = ConstXmlCompetence, ConstXmlTalent ou ConstXmlTrapping.
+  StructureCareerAdaptationLigne = Record
+        CodeAdaptation: String;
+        Niveau:         Integer;
+        Nature:         String;
+        Retire:         String;
+        Ajoute:         String;
+        Livre:          String;
+  End;
+
+  TListCareerAdaptation      = specialize TList<StructureCareerAdaptation>;
+  TListCareerAdaptationLigne = specialize TList<StructureCareerAdaptationLigne>;
+
   TListCareerBonus       = specialize TList<StructureCareerBonus>;
   TListCareerBonusNiveau = specialize TList<StructureCareerBonusNiveau>;
   TListCareerBonusSpecialRule = specialize TList<StructureCareerBonusSpecialRule>;
@@ -104,6 +131,10 @@ var
   NbCareerBonusNiveau:    Integer;
   ListCareerBonusSpecialRule: TListCareerBonusSpecialRule;
   NbCareerBonusSpecialRule:   Integer;
+  ListCareerAdaptation:       TListCareerAdaptation;
+  NbCareerAdaptation:         Integer;
+  ListCareerAdaptationLigne:  TListCareerAdaptationLigne;
+  NbCareerAdaptationLigne:    Integer;
 
 function chercheMetier(CodeMetier :String): StructureMetier;
 Function CheminMetierImage(CodeMetier: String): String;
@@ -120,6 +151,21 @@ Function AppartenancesCandidates(CodeMetier: String; CodeRace: String;
 // ChercheCareerBonus (CompareRechercheValeur, second argument). Chaine vide si
 // Codes est vide ou si aucun code ne resout.
 Function LibelleAppartenances(Codes: String): String;
+// Adaptations de carriere (DATA_CAREER_ADAPTATION, Adapting Careers p.60-62).
+// AdaptationApplicable : l'adaptation vise-t-elle cette carriere ET cette ethnie (ou la
+// Nation de l'ethnie) ? CodeRace peut etre une liste separee par SeparateurMulti.
+// Choix = liste (virgules) des adaptations FACULTATIVES retenues par le joueur ; une
+// adaptation imposee s'applique toujours.
+// AdapterElement : code que le personnage a REELLEMENT a ce palier pour cette Nature
+// (ConstXmlCompetence, ConstXmlTalent ou ConstXmlTrapping). Rend Code inchange si aucune
+// adaptation ne le remplace, l'Ajoute si oui, et une chaine VIDE si la ligne du livre
+// retire simplement l'element.
+// StandingAdaptation : total des bonus de Standing applicables a la carriere.
+Function AdaptationApplicable(PAdapt: StructureCareerAdaptation; CodeMetier: String;
+                              CodeRace: String; Choix: String): Boolean;
+Function AdapterElement(CodeMetier: String; CodeRace: String; Choix: String;
+                        Niveau: Integer; Nature: String; Code: String): String;
+Function StandingAdaptation(CodeMetier: String; CodeRace: String; Choix: String): Integer;
 
 implementation
 
@@ -264,6 +310,75 @@ Begin
   finally
     Acquis.Free;
   end;
+End;
+
+Function AdaptationApplicable(PAdapt: StructureCareerAdaptation; CodeMetier: String;
+                              CodeRace: String; Choix: String): Boolean;
+Var
+  Especes:  TStringList;
+  Retenues: TStringList;
+  Ind:      Integer;
+Begin
+  Result := false;
+  if not CompareRechercheValeur(PAdapt.CodeMetier, CodeMetier) then
+    Exit;
+  Especes := TStringList.Create;
+  try
+    ExtractStrings([SeparateurMulti], [], PChar(PAdapt.CodeRace), Especes);
+    for Ind := 0 to Especes.Count - 1 do
+      if CompareRechercheValeur(Especes[Ind], CodeRace) or
+         CompareRechercheValeur(Especes[Ind], ChercheRace(CodeRace).Nation) then
+        begin
+          Result := true;
+          break;
+        end;
+  finally
+    Especes.Free;
+  end;
+  if Result and PAdapt.Facultative then
+    begin
+      Result   := false;
+      Retenues := TStringList.Create;
+      try
+        ExtractStrings([','], [], PChar(Choix), Retenues);
+        for Ind := 0 to Retenues.Count - 1 do
+          if CompareRechercheValeur(PAdapt.CodeAdaptation, Trim(Retenues[Ind])) then
+            begin
+              Result := true;
+              break;
+            end;
+      finally
+        Retenues.Free;
+      end;
+    end;
+End;
+
+Function AdapterElement(CodeMetier: String; CodeRace: String; Choix: String;
+                        Niveau: Integer; Nature: String; Code: String): String;
+Var
+  PAdapt: StructureCareerAdaptation;
+  PLigne: StructureCareerAdaptationLigne;
+Begin
+  Result := Code;
+  for PAdapt in ListCareerAdaptation do
+    if AdaptationApplicable(PAdapt, CodeMetier, CodeRace, Choix) then
+      for PLigne in ListCareerAdaptationLigne do
+        if (PLigne.CodeAdaptation = PAdapt.CodeAdaptation) and (PLigne.Niveau = Niveau) and
+           (PLigne.Nature = Nature) and (PLigne.Retire = Code) then
+          begin
+            Result := PLigne.Ajoute;
+            Exit;
+          end;
+End;
+
+Function StandingAdaptation(CodeMetier: String; CodeRace: String; Choix: String): Integer;
+Var
+  PAdapt: StructureCareerAdaptation;
+Begin
+  Result := 0;
+  for PAdapt in ListCareerAdaptation do
+    if AdaptationApplicable(PAdapt, CodeMetier, CodeRace, Choix) then
+      Result += PAdapt.Standing;
 End;
 
 Function LibelleAppartenances(Codes: String): String;

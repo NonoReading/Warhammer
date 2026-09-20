@@ -301,6 +301,142 @@ Asur from the Outer Kingdoms and Eataine do not harbour such prejudice."</Explan
        cotes de sa contradiction est le bon. -->
 </Entry>
 </DATA_SPECIE_CAREER_DIRECT>
+<DATA_CAREER_ADAPTATION>
+  <!-- Adapting Careers, p.60-62. Specie = liste d ethnies separees par / ; Optional = "may choose" du livre,
+       sinon la substitution est imposee. Ulthuan = les 10 ethnies hors Sea Elf (le livre dit "on Ulthuan" ou
+       "aboard Elven ships" ; le Seaman du Rulebook reste celui des Sea Elves). Le livre ecrit Etiquette (Guilder)
+       comme une competence : c est le talent du Rulebook (RULES-T0136_*). Pas de talent Feint : RULES-T0055. -->
+  <!-- Pit Fighter p.60 : Feint remplace Dirty Fighting au niveau 1 (au choix) -->
+<Adaptation id="HELFG-ADAPT_001">
+<Description language="ENGLISH">"Pit Fighter (High Elf)"</Description>
+<Career>"RULES-WORK28"</Career>
+<Specie>"HELFG-RACE_CALED/HELFG-RACE_ELLYR/HELFG-RACE_AVELO/HELFG-RACE_SAPHE/HELFG-RACE_EATAI/HELFG-RACE_TIRAN/HELFG-RACE_NAGAR/HELFG-RACE_CHRAC/HELFG-RACE_COTHI/HELFG-RACE_YVRES"</Specie>
+<Optional>"1"</Optional>
+<Level id="1">
+<Order>"1"</Order>
+<Talent>
+<Remove>"RULES-T0026"</Remove>
+<Add>"RULES-T0055"</Add>
+</Talent>
+</Level>
+</Adaptation>
+  <!-- Cavalryman p.60, Ulthuan : Blackpowder -> Track (RULES-COMPPIST), pistolet -> Elf Bow, munitions du pistolet -> 10 Arrows (quantite non portee). Light Cavalry (Up in Arms) : a part -->
+<Adaptation id="HELFG-ADAPT_002">
+<Description language="ENGLISH">"Cavalryman (High Elf)"</Description>
+<Career>"RULES-WORK08"</Career>
+<Specie>"HELFG-RACE_CALED/HELFG-RACE_ELLYR/HELFG-RACE_AVELO/HELFG-RACE_SAPHE/HELFG-RACE_EATAI/HELFG-RACE_TIRAN/HELFG-RACE_NAGAR/HELFG-RACE_CHRAC/HELFG-RACE_COTHI/HELFG-RACE_YVRES"</Specie>
+<Level id="2">
+<Order>"2"</Order>
+<Skill>
+<Remove>"RULES-COMPPROJ_POUDRE"</Remove>
+<Add>"RULES-COMPPIST"</Add>
+</Skill>
+<Trapping>
+<Remove>"RULES-PROJ_POUDRE_04"</Remove>
+<Add>"RULES-PROJ_ARC_02"</Add>
+</Trapping>
+<Trapping>
+<Remove>"RULES-MUNI_06"</Remove>
+<Add>"RULES-MUNI_02"</Add>
+</Trapping>
+</Level>
+</Adaptation>
+  <!-- Artisan p.62 : niveaux 2, 3 et 4 (Exalted Maker au lieu de Guildmaster : intitule non porte) -->
+<Adaptation id="HELFG-ADAPT_003">
+<Description language="ENGLISH">"Artisan (High Elf)"</Description>
+<Career>"RULES-WORK03"</Career>
+<Specie>"HELFG-RACE_CALED/HELFG-RACE_ELLYR/HELFG-RACE_AVELO/HELFG-RACE_SAPHE/HELFG-RACE_EATAI/HELFG-RACE_TIRAN/HELFG-RACE_NAGAR/HELFG-RACE_CHRAC/HELFG-RACE_COTHI/HELFG-RACE_YVRES"</Specie>
+<Level id="2">
+<Order>"2"</Order>
+<Talent>
+<Remove>"RULES-T0136_GUILD"</Remove>
+<Add>"RULES-T0136_NOBLE"</Add>
+</Talent>
+<Trapping>
+<Remove>"RULES-TRAP_096"</Remove>
+<Add>"Highborn Patronage"</Add>
+</Trapping>
+</Level>
+<Level id="3">
+<Order>"3"</Order>
+<Skill>
+<Remove>"RULES-COMPSIGNES_GUILD"</Remove>
+<Add>"RULES-COMPSAVOIR_MAGIE"</Add>
+</Skill>
+</Level>
+<Level id="4">
+<Order>"4"</Order>
+<Trapping>
+<Remove>"guild"</Remove>
+<Add>"Position at Court"</Add>
+</Trapping>
+</Level>
+</Adaptation>
+  <!-- Merchant p.62 : Guild License -> Merchant's Charter au niveau 2 -->
+<Adaptation id="HELFG-ADAPT_004">
+<Description language="ENGLISH">"Merchant (High Elf)"</Description>
+<Career>"RULES-WORK34"</Career>
+<Specie>"HELFG-RACE_CALED/HELFG-RACE_ELLYR/HELFG-RACE_AVELO/HELFG-RACE_SAPHE/HELFG-RACE_EATAI/HELFG-RACE_TIRAN/HELFG-RACE_NAGAR/HELFG-RACE_CHRAC/HELFG-RACE_COTHI/HELFG-RACE_YVRES"</Specie>
+<Level id="2">
+<Order>"2"</Order>
+<Trapping>
+<Remove>"RULES-TRAP_096"</Remove>
+<Add>"Merchant's Charter"</Add>
+</Trapping>
+</Level>
+</Adaptation>
+  <!-- Seaman p.63, navires elfiques (au choix : "you can use") -->
+<Adaptation id="HELFG-ADAPT_005">
+<Description language="ENGLISH">"Seaman (High Elf)"</Description>
+<Career>"RULES-WORK35"</Career>
+<Specie>"HELFG-RACE_CALED/HELFG-RACE_ELLYR/HELFG-RACE_AVELO/HELFG-RACE_SAPHE/HELFG-RACE_EATAI/HELFG-RACE_TIRAN/HELFG-RACE_NAGAR/HELFG-RACE_CHRAC/HELFG-RACE_COTHI/HELFG-RACE_YVRES"</Specie>
+<Optional>"1"</Optional>
+<Level id="1">
+<Order>"1"</Order>
+<Skill>
+<Remove>"RULES-COMPRESALC"</Remove>
+<Add>"RULES-COMPATHL"</Add>
+</Skill>
+<Skill>
+<Remove>"RULES-COMPCOMB_BAGAR"</Remove>
+<Add>"RULES-COMPCOMB_BASE"</Add>
+</Skill>
+</Level>
+<Level id="2">
+<Order>"2"</Order>
+<Skill>
+<Remove>"RULES-COMPATHL"</Remove>
+<Add>"RULES-COMPINTUI"</Add>
+</Skill>
+</Level>
+</Adaptation>
+  <!-- Wizard p.60 : pas de Magical Licence au niveau 2 -->
+<Adaptation id="HELFG-ADAPT_006">
+<Description language="ENGLISH">"Wizard (High Elf)"</Description>
+<Career>"RULES-WORK58"</Career>
+<Specie>"HELFG-RACE_CALED/HELFG-RACE_ELLYR/HELFG-RACE_AVELO/HELFG-RACE_SAPHE/HELFG-RACE_EATAI/HELFG-RACE_TIRAN/HELFG-RACE_NAGAR/HELFG-RACE_CHRAC/HELFG-RACE_COTHI/HELFG-RACE_YVRES"</Specie>
+<Level id="2">
+<Order>"2"</Order>
+<Trapping>
+<Remove>"magic license"</Remove>
+</Trapping>
+</Level>
+</Adaptation>
+  <!-- Warden p.61 : Standing +1 a tous les paliers, Royaumes exterieurs seulement -->
+<Adaptation id="HELFG-ADAPT_007">
+<Description language="ENGLISH">"Warden (Outer Kingdoms)"</Description>
+<Career>"RULES-WORK32"</Career>
+<Specie>"HELFG-RACE_TIRAN/HELFG-RACE_NAGAR/HELFG-RACE_CHRAC/HELFG-RACE_COTHI/HELFG-RACE_YVRES"</Specie>
+<Standing>"1"</Standing>
+</Adaptation>
+  <!-- Entertainer p.62 : Standing +1 a tous les paliers, sur Ulthuan -->
+<Adaptation id="HELFG-ADAPT_008">
+<Description language="ENGLISH">"Entertainer (High Elf)"</Description>
+<Career>"RULES-WORK55"</Career>
+<Specie>"HELFG-RACE_CALED/HELFG-RACE_ELLYR/HELFG-RACE_AVELO/HELFG-RACE_SAPHE/HELFG-RACE_EATAI/HELFG-RACE_TIRAN/HELFG-RACE_NAGAR/HELFG-RACE_CHRAC/HELFG-RACE_COTHI/HELFG-RACE_YVRES"</Specie>
+<Standing>"1"</Standing>
+</Adaptation>
+</DATA_CAREER_ADAPTATION>
 <DATA_SPECIE>
   <!-- Les onze sous-types de Haut Elfe du livre (p.54-57). Ils partagent les
        caracteristiques de RULES-RACE_HELF - le livre dit "Roll Attributes as any Elf" -

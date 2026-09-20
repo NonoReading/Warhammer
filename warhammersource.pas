@@ -1119,6 +1119,8 @@ procedure TMenu.ChargerLivre(ForceMaJ: Boolean; ForceLivre: String);
         NbCareerBonusNiveau         := 0;
         NbCareerBonusModificateur   := 0;
         NbCareerBonusSpecialRule    := 0;
+        NbCareerAdaptation          := 0;
+        NbCareerAdaptationLigne     := 0;
 
         // vider les données
         ListRace.Clear;
@@ -1158,6 +1160,8 @@ procedure TMenu.ChargerLivre(ForceMaJ: Boolean; ForceLivre: String);
         ListCareerBonusNiveau.Clear;
         ListCareerBonusModificateur.Clear;
         ListCareerBonusSpecialRule.Clear;
+        ListCareerAdaptation.Clear;
+        ListCareerAdaptationLigne.Clear;
         ListFabrication.Clear;
         ListFabricationModificateur.Clear;
         ListRaceCreation.Clear;
@@ -1480,6 +1484,8 @@ procedure TMenu.FormCreate(Sender: TObject);
        ListCareerBonusNiveau        := TListCareerBonusNiveau.Create;
        ListCareerBonusModificateur   := TListModificateur.Create;
        ListCareerBonusSpecialRule    := TListCareerBonusSpecialRule.Create;
+       ListCareerAdaptation         := TListCareerAdaptation.Create;
+       ListCareerAdaptationLigne    := TListCareerAdaptationLigne.Create;
        ListFabrication              := TListFabrication.Create;
        ListFabricationModificateur  := TListModificateur.Create;
        ListRaceCreation             := TListRaceCreation.Create;

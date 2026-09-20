@@ -197,6 +197,9 @@ Procedure XmlExportBook(Livre: String; Langue: String);
     PTraitOption:             StructureTraitOption;
     PCareerBonus:             StructureCareerBonus;
     PCareerBonusNiveau:       StructureCareerBonusNiveau;
+    PCareerAdaptation:        StructureCareerAdaptation;
+    PCareerAdaptationLigne:   StructureCareerAdaptationLigne;
+    NodeAdapt:                TDOMNode;
     PMetierSousMetier:        StructureMetierSousMetier;
     PAttribut:                StructureAttribut;
     PAttributAugmentation:    StructureAttributAugmentation;
@@ -1141,11 +1144,16 @@ Procedure XmlImport(FileName: String; OnlyPrimary: Boolean; OnlyCode: Boolean; C
     PTraitOption:             StructureTraitOption;
     PCareerBonus:             StructureCareerBonus;
     PCareerBonusNiveau:       StructureCareerBonusNiveau;
+    PCareerAdaptation:        StructureCareerAdaptation;
+    PCareerAdaptationLigne:   StructureCareerAdaptationLigne;
+    NodeAdapt:                TDOMNode;
     PCareerBonusModificateur:    StructureModificateur;
     TempCareerBonusModificateur: TListModificateur;
     PCareerBonusSpecialRule:    StructureCareerBonusSpecialRule;
     TempCareerBonusSpecialRule: TListCareerBonusSpecialRule;
     IndTempModif:             Integer;
+    TempAdaptationLignes:     TListCareerAdaptationLigne;
+    NivAdapt:                 Integer;
     PFabrication:             StructureFabrication;
     PMetierRaceChoixMetier:   StructureMetierRaceChoixMetier;
     PMetierSousMetier:        StructureMetierSousMetier;
@@ -3048,6 +3056,95 @@ Procedure XmlImport(FileName: String; OnlyPrimary: Boolean; OnlyCode: Boolean; C
                           AddTrad(PTraduction, Langue);
                         end;
 
+                      NodeNv2 := XmlElement(NodeNv2.NextSibling);
+                    end;
+                end;
+
+              // Adaptations de carriere (Adapting Careers, High Elf Player's Guide p.60-62) -
+              // bloc de LIVRE, additif, comme DATA_CAREER_BONUS. Chaque <Level> porte son
+              // <Order> et, par nature (Skill/Talent/Trapping), un <Remove> et/ou un <Add>.
+              NodeNv1 := BookNode.FindNode(ConstXmlDataCareerAdaptation);
+              if Assigned(NodeNv1) then
+                begin
+                  NodeNv2 := XmlElement(NodeNv1.FirstChild);
+                  While Assigned(NodeNv2) do
+                    begin
+                      if NodeNv2.NodeName = ConstXmlCareerAdaptation then
+                        begin
+                          PCareerAdaptation.Livre          := Livre;
+                          PCareerAdaptation.Libelle        := '';
+                          PCareerAdaptation.CodeMetier     := '';
+                          PCareerAdaptation.CodeRace       := '';
+                          PCareerAdaptation.Facultative    := false;
+                          PCareerAdaptation.Standing       := 0;
+                          PCareerAdaptation.CodeAdaptation := RemoveQuotes(UTF8Encode(NodeNv2.Attributes.GetNamedItem(ConstXmlId).NodeValue));
+
+                          NodeNv3 := XmlElement(NodeNv2.FirstChild);
+                          while Assigned(NodeNv3) do
+                            begin
+                              case NodeNv3.NodeName of
+                                ConstXmlDescription:
+                                  PCareerAdaptation.Libelle    := RemoveQuotes(UTF8Encode(NodeNv3.TextContent));
+                                ConstXmlWork:
+                                  PCareerAdaptation.CodeMetier := RemoveQuotes(UTF8Encode(NodeNv3.TextContent));
+                                ConstXmlRace:
+                                  PCareerAdaptation.CodeRace   := RemoveQuotes(UTF8Encode(NodeNv3.TextContent));
+                                ConstXmlOptional:
+                                  PCareerAdaptation.Facultative := RemoveQuotes(UTF8Encode(NodeNv3.TextContent)) = '1';
+                                ConstXmlStanding:
+                                  PCareerAdaptation.Standing   := StrToIntDef(RemoveQuotes(UTF8Encode(NodeNv3.TextContent)), 0);
+                                ConstXmlNiveau:
+                                  begin
+                                    PCareerAdaptationLigne.Livre := Livre;
+                                    PCareerAdaptationLigne.CodeAdaptation := PCareerAdaptation.CodeAdaptation;
+                                    NivAdapt := 0;
+                                    // Le <Order> peut suivre les natures dans le XML : les
+                                    // lignes sont donc accumulees puis posees apres la boucle.
+                                    TempAdaptationLignes := TListCareerAdaptationLigne.Create;
+                                    Node := XmlElement(NodeNv3.FirstChild);
+                                    while Assigned(Node) do
+                                      begin
+                                        if Node.NodeName = ConstXmlOrder then
+                                          NivAdapt := StrToIntDef(RemoveQuotes(UTF8Encode(Node.TextContent)), 0)
+                                        else if (Node.NodeName = ConstXmlCompetence) or (Node.NodeName = ConstXmlTalent)
+                                             or (Node.NodeName = ConstXmlTrapping) then
+                                          begin
+                                            PCareerAdaptationLigne.Nature  := Node.NodeName;
+                                            PCareerAdaptationLigne.Retire  := '';
+                                            PCareerAdaptationLigne.Ajoute  := '';
+                                            NodeAdapt := XmlElement(Node.FirstChild);
+                                            while Assigned(NodeAdapt) do
+                                              begin
+                                                if NodeAdapt.NodeName = ConstXmlRemove then
+                                                  PCareerAdaptationLigne.Retire := RemoveQuotes(UTF8Encode(NodeAdapt.TextContent))
+                                                else if NodeAdapt.NodeName = ConstXmlAdd then
+                                                  PCareerAdaptationLigne.Ajoute := RemoveQuotes(UTF8Encode(NodeAdapt.TextContent));
+                                                NodeAdapt := XmlElement(NodeAdapt.NextSibling);
+                                              end;
+                                            TempAdaptationLignes.Add(PCareerAdaptationLigne);
+                                          end;
+                                        Node := XmlElement(Node.NextSibling);
+                                      end;
+                                    if LangueDef = ConstAnglais then
+                                      for IndTempModif := 0 to TempAdaptationLignes.Count - 1 do
+                                        begin
+                                          PCareerAdaptationLigne        := TempAdaptationLignes[IndTempModif];
+                                          PCareerAdaptationLigne.Niveau := NivAdapt;
+                                          ListCareerAdaptationLigne.add(PCareerAdaptationLigne);
+                                          inc(NbCareerAdaptationLigne);
+                                        end;
+                                    TempAdaptationLignes.Free;
+                                  end;
+                              end;
+                              NodeNv3 := XmlElement(NodeNv3.NextSibling);
+                            end;
+
+                          if LangueDef = ConstAnglais then
+                            begin
+                              ListCareerAdaptation.add(PCareerAdaptation);
+                              inc(NbCareerAdaptation);
+                            end;
+                        end;
                       NodeNv2 := XmlElement(NodeNv2.NextSibling);
                     end;
                 end;

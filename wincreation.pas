@@ -883,7 +883,7 @@ procedure TWinCreations.ChargerImage();
      TabRaceCompetence.Columns[4].Title.Caption      := '3x 3pts';
      TabRaceCompetence.ColWidths[5]     := 90;
      // définir la case à cocher et l'initialiser
-     SetLength(CompetenceRaceStates, 6, NbMaxCompetence);
+     SetLength(CompetenceRaceStates, 6, NbMaxCompetence + 1);
      for I := 4 to 5 do
        for J := 1 to NbMaxCompetence do
          CompetenceRaceStates[I, J] := false;
@@ -1171,10 +1171,17 @@ procedure TWinCreations.PhaseSave(NouvellePhase: Integer);
                Personnage.MetierCompetence             += [PersonnageCompetence];
              end;
 
+           // Adapting Careers (DATA_CAREER_ADAPTATION) : la competence peut etre remplacee
+           // pour l'ethnie du personnage ; vide = simplement retiree. Facultatives : pas
+           // encore branchees (Choix vide).
            for PMetierCompetence in ListMetierCompetence do
              if (PMetierCompetence.CodeMetier = MetierEnCours) and (PMetierCompetence.NiveauMetier <> 1) then
                begin
-                 PersonnageCompetence.CodeCompetence := PMetierCompetence.CodeCompetence;
+                 PersonnageCompetence.CodeCompetence := AdapterElement(MetierEnCours, Personnage.Race, '',
+                                                          PMetierCompetence.NiveauMetier, ConstXmlCompetence,
+                                                          PMetierCompetence.CodeCompetence);
+                 if PersonnageCompetence.CodeCompetence = '' then
+                   continue;
                  PersonnageCompetence.Valeur         := PMetierCompetence.NiveauMetier;
                  Personnage.MetierCompetence         += [PersonnageCompetence];
                end;
@@ -1201,7 +1208,11 @@ procedure TWinCreations.PhaseSave(NouvellePhase: Integer);
            for PMetierTalent in ListMetierTalent do
               if (PMetierTalent.CodeMetier = MetierEnCours) then
                 begin
-                  PersonnageTalent.CodeTalent := PMetierTalent.CodeTalent;
+                  PersonnageTalent.CodeTalent := AdapterElement(MetierEnCours, Personnage.Race, '',
+                                                   PMetierTalent.NiveauMetier, ConstXmlTalent,
+                                                   PMetierTalent.CodeTalent);
+                  if PersonnageTalent.CodeTalent = '' then
+                    continue;
                   PersonnageTalent.Valeur     := PMetierTalent.NiveauMetier;
                   Personnage.MetierTalent     += [PersonnageTalent];
                 end;
@@ -2339,6 +2350,19 @@ begin
     TabRaceCompetence.Columns[3].Title.Caption := Format('%dx %dpts', [PRaceEntete.NbPoint5, PRaceEntete.Point5]);
     TabRaceCompetence.Columns[4].Title.Caption := Format('%dx %dpts', [PRaceEntete.NbPoint3, PRaceEntete.Point3]);
 
+    // Les lignes sont recreees : les cases 5pts/3pts, indexees par numero de ligne, le sont
+    // aussi (remise a zero). Le tableau est REDIMENSIONNE au nombre reel de competences de
+    // race : NbMaxCompetence (12) est plus petit que la liste des Hauts Elfes d'Ellyrion (13),
+    // et la 13e ligne lisait hors du tableau (case cochee au hasard).
+    SetLength(CompetenceRaceStates[4], ListRaceCompetence.Count + 2);
+    SetLength(CompetenceRaceStates[5], ListRaceCompetence.Count + 2);
+    for IndTab := 0 to High(CompetenceRaceStates[4]) do
+      begin
+        CompetenceRaceStates[4, IndTab] := false;
+        CompetenceRaceStates[5, IndTab] := false;
+      end;
+    NbCinq := 0;
+    NbTrois := 0;
     NbRaceCompetenceTab          := 0;
     TabRaceCompetence.RowCount   := 1;
     NbRaceComp                   := 0;

@@ -128,6 +128,14 @@ Const
       // n'a pas a modifier le fichier du livre qui declare la carriere ou l'ethnie.
       // CONTEXT.md 2.44.
       ConstXmlDataCareerBonus           = 'DATA_CAREER_BONUS';
+      // Substitutions de talents/competences/trappings d'une carriere pour une ethnie
+      // (Adapting Careers du High Elf Player's Guide p.60-62). Bloc de LIVRE, additif.
+      ConstXmlDataCareerAdaptation      = 'DATA_CAREER_ADAPTATION';
+      ConstXmlCareerAdaptation          = 'Adaptation';
+      ConstXmlRemove                    = 'Remove';
+      ConstXmlAdd                       = 'Add';
+      ConstXmlOptional                  = 'Optional';
+      ConstXmlStanding                  = 'Standing';
       ConstXmlDataRandomTalent          = 'DATA_RANDOM_TALENT';
       ConstXmlDataSpecieCreation        = 'DATA_RANDOM_SPECIE';
       ConstXmlDataCraftsmanship         = 'DATA_CRAFTMANSHIP';

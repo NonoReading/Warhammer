@@ -5922,7 +5922,13 @@ Procedure TWinPersonnages.MajTables();
               for PMetierCompetence in ListMetierCompetence do
                 if CompareRechercheValeur(PMetierCompetence.CodeMetier, NvMetier) then
                   begin
-                    PersonnageCompetence.CodeCompetence := PMetierCompetence.CodeCompetence;
+                    // Adapting Careers : substitution selon l'ethnie (Choix vide = seules
+                    // les adaptations imposees s'appliquent).
+                    PersonnageCompetence.CodeCompetence := AdapterElement(NvMetier, Personnage.Race, '',
+                                                             PMetierCompetence.NiveauMetier, ConstXmlCompetence,
+                                                             PMetierCompetence.CodeCompetence);
+                    if PersonnageCompetence.CodeCompetence = '' then
+                      continue;
                     PersonnageCompetence.Valeur         := PMetierCompetence.NiveauMetier;
                     Personnage.MetierCompetence         += [PersonnageCompetence];
                   end;
@@ -5931,7 +5937,11 @@ Procedure TWinPersonnages.MajTables();
               for PMetierTalent in ListMetierTalent do
                 if CompareRechercheValeur(PMetierTalent.CodeMetier, NvMetier) then
                   begin
-                    PersonnageTalent.CodeTalent := PMetierTalent.CodeTalent;
+                    PersonnageTalent.CodeTalent := AdapterElement(NvMetier, Personnage.Race, '',
+                                                     PMetierTalent.NiveauMetier, ConstXmlTalent,
+                                                     PMetierTalent.CodeTalent);
+                    if PersonnageTalent.CodeTalent = '' then
+                      continue;
                     PersonnageTalent.Valeur     := PMetierTalent.NiveauMetier;
                     Personnage.MetierTalent     += [PersonnageTalent];
                   end;
