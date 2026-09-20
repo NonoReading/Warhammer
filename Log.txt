@@ -5743,3 +5743,23 @@ Fichiers modifies : chargetrapping.pas, winpersonnage.pas, chargepersonnage.pas,
 20/09/2026 - PDF FELDO : ENCART NAVIRES ET VEHICULES DANS LE BLOC MONTURES - COMPILE ET VALIDE PAR NONO
 pdfpersonnage.pas, PdfBlocMontures : retient tout porteur (TrappingEstPorteur), plus seulement TypeEquipAN. Profil dessine selon la fiche : animal 12 colonnes, navire 7 (Crew, M Sail, M Oar, Man, Size, T, W), vehicule 4 (Motive, T, W, Strike). Traits et "Charge N / capacite" inchanges. Meme zone 50x84 mm, memes repliements (compact puis "...").
 Fichiers modifies : pdfpersonnage.pas, Log.txt.
+
+20/09/2026 - DEFAUT D ARME CREWED DECLARE (UP IN ARMS P.124) - PAS ENCORE TESTE PAR NONO
+BOOK_UP_IN_ARMS.Xml : UPINA-WEAPB35 "Crewed" (DATA_WEAPON_BONUS, Modifier "-"), texte du livre avec la table d equipage (Crew 3/2/1 x Crewed 2/3/4), Short "needs a crew of (Rating)". Sans mecanique (l equipage est fait d autres personnages). Aucune arme ne l utilise encore : les armes de machine (Lustria Eagle Claw, Eagle Eye, Giant Bow... ; Dwarf) restent a saisir. Numero 35 libre entre Trip (34) et Infected (37).
+Fichiers modifies : BOOK_UP_IN_ARMS.Xml, Log.txt.
+
+20/09/2026 - ARTILLERIE D UP IN ARMS (P.122) : 12 ARMES DE GUERRE SAISIES - PAS ENCORE TESTE PAR NONO
+BOOK_UP_IN_ARMS.Xml : Ballista (PROJ_ARB_01), Cannon small/medium/large, Mortar, Swivel Gun (PROJ_POUDRE_16 a _20), Catapult small/medium/large (PROJ_CATAPULT_01 a _03), Volley Gun, Helblaster, Helstorm Rocket Battery (PROJ_ING_08 a _10). Defaut Salvo declare (UPINA-WEAPB36). Disponibilite Scarce du livre = RULES-DISPO_LIMITED, Hand 2, Mortar sans degats propres ("-", ils viennent de la munition). Revient sur la decision du 21/08 de ne pas saisir l artillerie (CONTEXT.md 2.x Up in Arms mis a jour). RESTE : armes de machine de Lustria (Eagle Claw, Eagle Eye, Giant Bow...) et des nains.
+Fichiers modifies : BOOK_UP_IN_ARMS.Xml, CONTEXT.md, Log.txt.
+
+20/09/2026 - MONTURES, BATEAUX ET VEHICULES SCINDES EN TROIS THEMES - A COMPILER PAR NONO
+Le champ Theme (deja lu, deja filtre par la fenetre Animaux et vehicules) porte la scission : RULES-LAB_260 Mounts and animals (35), RULES-LAB_261 Boats (39), RULES-LAB_262 Vehicles (17), en remplacement de RULES-LAB_195 (91 fiches, 8 livres, classees par profil ; Rulebook sans profil : Coracle/River Barge/Row Boat = bateaux, Cart/Coach/Wagon = vehicules, le reste = montures et animaux). RULES-LAB_195 reste le titre de la fenetre et de la ligne du menu. winequipement.pas : EstThemeAnimauxVehicules remplace le test d egalite (Retenu) ; warhammersource.pas : meme test pour le decompte du menu. Le combo Theme de la fenetre propose les trois categories.
+Fichiers modifies : winequipement.pas, warhammersource.pas, INTERFACE.Xml, INTERFACE_FRANCAIS.Xml, 8 BOOK_*.Xml, Log.txt.
+
+20/09/2026 - ARTILLERIE DE LUSTRIA (P.178) : 7 ARMES DE GUERRE - PAS ENCORE TESTE PAR NONO
+BOOK LUSTRIA.xml : Eagle Claw et Eagle Eye (LUSTR-PROJ_ARB_01/02, Crossbow), Giant Blowpipe (PROJ_SARBAC_02), Giant Bow (PROJ_ARC_01), les trois Engines of the Gods / Solar Engine (PROJ_ING_01 a _03, Engineering). Nouveau DATA_WEAPON_BONUS : LUSTR-WEAPB01 Volley, WEAPB02 Magical, WEAPB03 "Accurate or Volley 6" (alternative de l Eagle Claw). Le footnote * du livre (1+SL Ablaze) = RULES-WEAPB29. Pas de prix pour les machines lizardmen ("-", DISPO_UNIQUE). Crewed et Salvo pointent vers UPINA-WEAPB35/36 : Up in Arms doit etre actif. Competences choisies par moi (le livre ne les donne pas) : Eagle = Crossbow, Giant Bow = Bow, Giant Blowpipe = Blowpipe, Engines = Engineering. A verifier en jeu : degats "+1d10" et Salvo "1d10" (texte, pas de precedent de de dans les donnees).
+Fichiers modifies : BOOK LUSTRIA.xml, Log.txt.
+
+20/09/2026 - ARMES DE SIEGE NAINES (DWARF PLAYER'S GUIDE P.99) : 11 ARMES - PAS ENCORE TESTE PAR NONO
+BOOK_DWARF_PLAYERS_GUIDE.Xml : Swivel Gun, Bombard, Dwarf Mortar, Field Cannon (DWARF-PROJ_POUDRE_03 a _06), Grudge Thrower (PROJ_CATAPULT_01), Bolt Thrower (PROJ_ARB_02), Firethrower, Flame Cannon, Dwarf Volley Gun, Organ Gun, Goblin-hewer (PROJ_ING_06 a _10). Defauts declares dans le livre avec son propre texte (p.98) : DWARF-WEAPB02 Crewed (regle naine : Imprecise si 2 hommes en moins, Dangerous si 3), DWARF-WEAPB03 Spread ; Salvo = DWARF-WEAPB01 existant. Firethrower et Flame Cannon : Ablaze (footnote **). Tir indirect (-30), et portee surchargee du Flame Cannon : en commentaire XML, pas de mecanique. Texte du livre extrait du PDF par pdftotext (pas de .txt dans LIVRES).
+Fichiers modifies : BOOK_DWARF_PLAYERS_GUIDE.Xml, Log.txt.
