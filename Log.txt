@@ -5797,3 +5797,11 @@ Fichiers modifies : A FAIRE.txt, CONTEXT.md, Log.txt.
 20/09/2026 - WINFABRICATION : ACCESSOIRES DE NATIONS OF MANKIND RESERVES AUX ARMES (<Applies>Weapon</Applies>)
 Le filtre par type d objet existait deja (winfabrication.pas, 20/09/2026) : la note d A FAIRE.txt "ne filtre pas" etait perimee, reecrite. Barrel Extension, Bayonet et Telescopic Sight portent maintenant <Applies>"Weapon"</Applies> et n apparaissent plus sur une armure ou un objet divers. RESTE : les 9 qualites du Rulebook n ont pas de <Applies>.
 Fichiers modifies : BOOK_NATIONS_OF_MANKIND.Xml, A FAIRE.txt, Log.txt.
+
+20/09/2026 - LES 9 QUALITES DU RULEBOOK : PAS D APPLIES, DECISION APRES LECTURE DU LIVRE (P.292-293)
+Aucune des 8 qualites ni defauts (Lightweight, Practical, Fine, Durable, Shoddy, Ugly, Unreliable, Bulky) n est reservee a un type d objet par le Rulebook ; "Quality to add" est un marqueur interne valable partout. Elles restent donc sans <Applies> et se proposent sur tous les objets. Constate au passage : les Explanation de Practical et de Bulky embarquent des paragraphes etrangers (objets defectueux, encombrement, armes), a nettoyer.
+Fichiers modifies : A FAIRE.txt, Log.txt.
+
+20/09/2026 - RULEBOOK : EXPLANATION DE PRACTICAL ET DE BULKY NETTOYEES
+BOOK_RULESBOOK.Xml : RULES-QUALITY_02 (Practical) et RULES-DEFECT_04 (Bulky) ne gardent que le texte du livre (p.292-293) ; les paragraphes etrangers (objets defectueux, table d encombrement, format des armes) sont retires. BOOK_RULESBOOK_FRANCAIS.Xml etait deja propre. Ces textes s affichent dans "Crafting Bonus Explanations" du PDF.
+Fichiers modifies : BOOK_RULESBOOK.Xml, A FAIRE.txt, Log.txt.

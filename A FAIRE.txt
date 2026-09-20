@@ -245,10 +245,11 @@ meme moment que TalentHaineSacree ne reste pas un cinquieme "presque mort" oubli
 
 [TRANCHE 12/09/2026] Fine/Durable/Shoddy/Ugly restent narratifs (rien a calculer, meme dans la colonne "Avec equipement" du Feldo). Ne plus le ressortir en anomalie.
 
-WINFABRICATION : LE FILTRE PAR TYPE D OBJET EXISTE (<Applies>, FAIT ET VALIDE LE 20/09/2026).
-Applies pose sur les runes des nains et les 3 accessoires de Nations of Mankind (Weapon). RESTE : les 9 qualites
-du Rulebook (Lightweight, Practical, Fine, Durable, Shoddy, Ugly, Unreliable, Bulky, Quality to add) n en ont pas
-et s affichent encore sur tous les objets ; a baliser Weapon/Armour/Misc selon le livre, a valider avec Nono.
+WINFABRICATION : LE FILTRE PAR TYPE D OBJET EXISTE (<Applies>, FAIT ET VALIDE LE 20/09/2026). CLOS.
+Applies pose sur les runes des nains et les 3 accessoires de Nations of Mankind (Weapon). Les 9 qualites du
+Rulebook (p.292-293) restent SANS Applies volontairement : le livre n en reserve aucune a un type d objet
+(seuls Practical, Unreliable, Bulky, Shoddy ont un volet armure en plus), donc proposees partout.
+Explanations de Practical et Bulky nettoyees le 20/09/2026 (la version francaise etait deja propre).
 
 [FAIT LE 05/09/2026 - les collisions et le prefixage sont clos, voir CONTEXT.md 2.49 et Log.txt]
 PREFIXES DE LIVRE : IL RESTE LES ETAPES 3 ET 4. Les 23 references en collision sont corrigees

@@ -18269,9 +18269,7 @@ Certain Miracles may have additional, optional, benefits for additional SL writt
 </Craftsmanship>
 <Craftsmanship id="RULES-QUALITY_02">
 <Description language="ENGLISH">"Practical"</Description>
-<Explanation language="ENGLISH">"Expertly crafted with utility in mind. A failed test using this item receives +1 SL. If the item is a piece of armour, any penalties for wearing it are reduced by one level (for example from −30 to −20).
-A Trapping is called a Flawed Trapping if it has more Item Flaws than Qualities. Each Flaw halves the listed price and improves Availability by one step. Many vendors sell flawed items, but pretend they are anything but. A successful Test with any appropriate skill — such as Evaluate, or Melee for weapons, or Trade for tools — will spot such underhanded activities.
-Note: Exotic items do not have their Availability modified by being Flawed — they are always difficult to find, even shoddy examples."</Explanation>
+<Explanation language="ENGLISH">"Expertly crafted with utility in mind. A failed test using this item receives +1 SL. If the item is a piece of armour, any penalties for wearing it are reduced by one level (for example from −30 to −20)."</Explanation>
 <Short language="ENGLISH">"failed Test +1 SL; armour penalty reduced"</Short>
 <Max>"1"</Max>
 <Modifier>"PRACTICAL"</Modifier>
@@ -18313,19 +18311,7 @@ Note: Exotic items do not have their Availability modified by being Flawed — t
 </Craftsmanship>
 <Craftsmanship id="RULES-DEFECT_04">
 <Description language="ENGLISH">"Bulky"</Description>
-<Explanation language="ENGLISH">"An awkward design crafted clumsily. Increase Encumbrance by +1 (small trinkets cannot normally have this flaw). Bulky clothing and armour are Enc 1 even when worn, and Fatigue penalties for armour are doubled.
-Even the doughtiest Dwarf cannot carry a limitless number of trappings. To help you track how much you are carrying, all items are marked as weighing a number of Encumbrance points (sometimes abbreviated to ‘Enc’), typically from 0–3, where 0 shows a trifling item that’s easily carried, and 3 represents something that’s a struggle to heft.The number of Encumbrance points you can carry without penalty is determined by your Strength Bonus + Toughness Bonus. Thus, average humans begin play able to carry around 6 Encumbrance points.
-Enc Example Trappings 0 Knives, Coins, Jewelry 1 Sword, Mandolin, Sling Bag 2 Greatsword, Tent, Backpack 3 Halberd, Cask, Large Sack Common sense usually dictates the number of smaller items someone can carry before becoming Encumbered. To provide a rough guide, money weighs 1 Encumbrance point per 200 coins.
-Certain large items weigh 4 or more Encumbrance points, such as barrels or saddlebags. You may normally only carry one oversized object, and it likely requires both hands.
-Draft animals ignore the standard Strength Bonus + Toughness Bonus formula for Encumbrance points. Encumbrance points for mules, horses, carts and wagons are listed in their descriptions. Each Human-sized passenger is assumed to weigh around 10 Encumbrance points, modified by the GM as necessary.
-Worn items such as armour, clothing, and jewellery all have their Encumbrance dropped by 1, which often means they count as Encumbrance 0 when worn.
-Characters who exceed their Encumbrance capacity may be slowed, and will become fatigued by travel. Movement reduction and Travel Fatigue incurred from Encumbrance stacks with any Armour penalties. Further, whenever you have to take a Fatigued Condition when Overburdened for a reason other than being Overburdened, gain an extra +1.
-Enc Penalty Up to limit No penalties Up to double –1 Movement (min: 3), –10 Agility, limit +1 Travel Fatigue Up to triple –2 Movement (min: 2), –20 Agility limit (min: 10), +2 Travel Fatigue More than 3× You’re not moving.
-Encumbrance and Attributes Movement penalties for Encumbrance are applied immediately and can only be removed by dropping equipment.
-Encumbrance and Travel Fatigue Fatigued Conditions are accrued at the end of a day’s travel and can only be removed with a long rest.
-Weapons used across the Empire vary according to provincial preference, religious requirement, individual inclination, and trusty old tradition. Here you will find a selection of the most commonly wielded melee and ranged weapons, which are presented using the following format.
-• Weapon Group: Each Weapon is listed by its Weapon Group. If a weapon is two-handed, it is marked (2H) • Price: The price for an average example of the weapon. • Enc: The Encumbrance for the weapon. • Availability: The Availability of the weapon. • Reach/Range: The Weapon’s length, or the range of the weapon in yards. • Damage: The weapon’s Damage, which is added to your SL to hit. • Qualities and Flaws: Any Weapon Qualities or Flaws the weapon possesses.
-Strength Bonus is abbreviated to SB in the weapon tables."</Explanation>
+<Explanation language="ENGLISH">"An awkward design crafted clumsily. Increase Encumbrance by +1 (small trinkets cannot normally have this flaw). Bulky clothing and armour are Enc 1 even when worn, and Fatigue penalties for armour are doubled."</Explanation>
 <Short language="ENGLISH">"Enc +1"</Short>
 <Max>"1"</Max>
 <Encumbrance>"1"</Encumbrance>
