@@ -5793,3 +5793,7 @@ Fichiers modifies : warhammersource.pas, Log.txt.
 20/09/2026 - ACCESSOIRES D ARME : AFFICHAGE DE LA PORTEE DANS WINPERSONNAGE ABANDONNE (DECISION DE NONO)
 Ligne retiree d A FAIRE.txt : les calculs derives (portee, qualites ajoutees) restent seulement sur le PDF. Les accessoires de Nations of Mankind sont consideres comme termines. CONTEXT.md mis a jour.
 Fichiers modifies : A FAIRE.txt, CONTEXT.md, Log.txt.
+
+20/09/2026 - WINFABRICATION : ACCESSOIRES DE NATIONS OF MANKIND RESERVES AUX ARMES (<Applies>Weapon</Applies>)
+Le filtre par type d objet existait deja (winfabrication.pas, 20/09/2026) : la note d A FAIRE.txt "ne filtre pas" etait perimee, reecrite. Barrel Extension, Bayonet et Telescopic Sight portent maintenant <Applies>"Weapon"</Applies> et n apparaissent plus sur une armure ou un objet divers. RESTE : les 9 qualites du Rulebook n ont pas de <Applies>.
+Fichiers modifies : BOOK_NATIONS_OF_MANKIND.Xml, A FAIRE.txt, Log.txt.

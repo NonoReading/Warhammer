@@ -13110,6 +13110,7 @@ Poison: Used to weaken and kill targets, anyone caught in the radius of this gre
 <Explanation language="ENGLISH">"A weapon attachment, fitted to any gun. Adds +20 to the weapon's Range.
 Price 3 GC, Encumbrance 0, Availability Rare."</Explanation>
 <Short language="ENGLISH">"any gun : +20 Range"</Short>
+<Applies>"Weapon"</Applies>
 <RangeBonus>"20"</RangeBonus>
 <Encumbrance>"0"</Encumbrance>
 <Max>"1"</Max>
@@ -13120,6 +13121,7 @@ Price 3 GC, Encumbrance 0, Availability Rare."</Explanation>
 <Explanation language="ENGLISH">"A weapon attachment, fitted to rifles. May function the same as a Spear with a Long Reach and the Impale Quality, requiring the Melee (Polearm) Skill.
 Price 12/-, Encumbrance 0, Availability Common."</Explanation>
 <Short language="ENGLISH">"rifles : also a Spear, Long reach, Impale, Melee (Polearm)"</Short>
+<Applies>"Weapon"</Applies>
 <AlternateWeapon>"RULES-COMB_HAST_03"</AlternateWeapon>
 <Encumbrance>"0"</Encumbrance>
 <Max>"1"</Max>
@@ -13130,6 +13132,7 @@ Price 12/-, Encumbrance 0, Availability Common."</Explanation>
 <Explanation language="ENGLISH">"A weapon attachment, fitted to guns and crossbows. The weapon gains the Accurate and Precise Qualities.
 Price 7 GC, Encumbrance 0, Availability Rare."</Explanation>
 <Short language="ENGLISH">"guns and crossbows : adds Accurate and Precise"</Short>
+<Applies>"Weapon"</Applies>
 <WeaponQuality>"RULES-WEAPB16,RULES-WEAPB14"</WeaponQuality>
 <Encumbrance>"0"</Encumbrance>
 <Max>"1"</Max>
