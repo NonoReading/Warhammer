@@ -5684,3 +5684,7 @@ Fichiers modifies : pdfpersonnage.pas, CONTEXT.md, Log.txt.
 DATABASE/WFRP4/BOOK_SYLVANIA_THE_CURSED_COUNTY.Xml (code SYLVA), livre ajoute a BOOKWFRP4 dans INI.TXT. Prix : d = SB, / = PA, GC = CO ; Scare = Limited. Catechist Stake : portee lue personal, degats "-" (a verifier). Bateaux, PNJ et tables d evenements non saisis.
 Fichiers modifies : BOOK_SYLVANIA_THE_CURSED_COUNTY.Xml, INI.TXT, Log.txt.
 Ajout : 3 bateaux fluviaux (SYLVA-TRAP_022 a _024, Theme Animals and Vehicles, Price et Carries, stats en commentaire).
+
+20/09/2026 - A FAIRE.TXT : PASSE DE NETTOYAGE (1445 -> 1198 LIGNES)
+Retires : blocs clos deja dates dans ce Log (PDF Feldo, runes, montures, equipements, ancrage, AjoutMineur, portes mutation/qualite, Nation, accesseur, Effet, Lightweight/Bulky). HEPG et "livres non integres" remis a jour. Restes vivants gardes en items courts.
+Fichiers modifies : A FAIRE.txt, Log.txt.

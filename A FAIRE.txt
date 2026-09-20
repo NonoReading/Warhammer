@@ -5,47 +5,20 @@
 =========================================================================
 CORRECTIONS COURTES  (une ligne ou deux chacune)
 [AJOUT LE 20/09/2026] SYLVANIA (SYLVA) : armes, auberge, sundries et 3 bateaux FAITS (non testes). A VERIFIER : Catechist Stake (portee, degats). RESTE : bateaux a reprendre avec le chantier vehicules (Crewed, champs Robustesse/Blessures/Equipage) ; PNJ et tables d evenements non modelises.
-[AJOUT LE 20/09/2026] PDF FELDO INTELLIGENT (IDEE NONO), CONCEPTION : le PDF compte les lignes dont le personnage a besoin et repartit un budget fixe. PAGE 1 D ABORD (colonne droite : Competences groupees + Talents = 45 lignes, plus Mutations sous les Talents), PAGE 2 ENSUITE (Armure/Equipement/Armes/Sorts, et bloc monture). ETAPES : (1) separer dans PdfBlocTalents la construction de la liste (talents pris, regles de carriere, talents de mutation, bonus d armure, talents de carriere) du dessin, pour pouvoir compter ; regle aussi le debordement sur Mutations ; (2) compter les lignes de PdfPreparerRecordSetCompetencesGroupees ; (3) repartir les 45 lignes selon le besoin ; (4) Mutations : nombre de lignes variable. A TRANCHER : minimum de lignes vides par tableau (idee : 3, pour noter a la main en cours de partie) ; cas ou tout ne tient pas (reduire hauteur de ligne/police, tronquer avec ..., ou page 3). FAIT ET VALIDE LE 20/09/2026 POUR LA PAGE 1 (etapes 1 a 3 sous forme de deux fonctions de comptage, PdfNbCompetencesGroupeesPrises et PdfNbTalentsAcquis, et repartition des 41 lignes de donnees avec 3 lignes vides minimum). RESTE : Mutations a nombre de lignes variable, cas ou tout ne tient pas, PAGE 2. FAIT ET VALIDE LE 20/09/2026 POUR LA PAGE 2 (option A) : compteur PdfNbLignesExplication, passe a blanc des 3 blocs de donnees sur une page jetable (jamais ajoutee a la section) pour connaitre les bonus avant de dimensionner les cadres, Sorts elastiques (besoin + 3 lignes vides, 4 a 11), reste partage Equipement/Armes, Armure agrandie si le texte des explications deborde. Teste avec et sans sorts. RESTE a tester : beaucoup de bonus (Armure qui s agrandit). FAIT ET VALIDE LE 20/09/2026 : Trappings (2 demi-colonnes) et armures comptes. FAIT ET VALIDE LE 20/09/2026 : Mutations a lignes variables (mutations + 1 dans le budget commun de la page 1). FAIT ET VALIDE LE 20/09/2026 : quand tout deborde, les Trappings sont tronques par ... (ordre de cession Sorts, Armes, Equipement) ; niveaux d avance retires en page 1 ; Armure dimensionnee sur ses pieces. Ce chantier est termine.
-[FAIT ET VALIDE LE 20/09/2026] PDF FELDO : bloc monture (page 2, a droite d Armour Points) = une fiche par animal (titre + id, profil 12 colonnes, traits, Charge N / capacite), complete puis compacte puis tronquee ; lien [A1] a la suite du nom de l animal et des objets qui lui sont confies (Trappings, Armes, Armures). DECISION NONO 20/09/2026 : le gabarit PDF normal reprend le fichier fourni par les auteurs du jeu, on n y ajoute aucune donnee (pas de fiche monture ni de parentheses) : rien a faire.
-[FAIT ET VALIDE LE 20/09/2026] PDF FELDO : bloc Mutations deplace en page 1 sous les Talents (Talents 24->21 lignes, Competences groupees 26->24). La place a droite d Armour Points (page 2) est libre pour le bloc monture. FAIT ET VALIDE LE 20/09/2026 : talents plafonnes par NbLignes (ligne ... si coupure).
-[FAIT ET VALIDE LE 20/09/2026] WINPERSONNAGE : bouton Worn supprime, entree "Porte" (cochee) au clic droit, texte d aide RULES-LAB_259 sous le titre Equipement (tableau decale) et en bulle sur la colonne Worn.
-[AJOUT LE 20/09/2026] RUNES NAINES : FAIT et valide (Stone, Fortitude, Iron, Speed, Cleaving, Striking, voir CONTEXT.md 2.36). FAIT et valide le 20/09/2026 : Might et Grudge (attribut if= sur ModifyDamage/ModifySkill, texte dans le bloc Crafting Bonus du PDF Feldo). FAIT et valide le 20/09/2026 : Resistance, Warding, Force (Force sans chiffre, texte seul). FAIT et valide le 20/09/2026 : Cutting et Shielding (texte seul, comme Force). FAIT et valide le 20/09/2026 : gabarit PDF hors Feldo (PdfEcritTient dans PdfPersonnageCreation). ECRAN WINPERSONNAGE : DECISION NONO 20/09/2026, rien a faire (les infos des runes n y ont pas d interet en soi ; seule la colonne Objet des attributs les montre). Les runes du Dwarf Player's Guide sont donc terminees.
-[AJOUT LE 20/09/2026] RUNES DE MACHINES (Accuracy, Penetrating, Reloading, Seeking...) : classees Misc, sans effet ; a reprendre avec les vehicules (qualite Crewed).
+[DECISION NONO 20/09/2026] Gabarit PDF normal = fichier des auteurs du jeu : aucune donnee ajoutee (pas de fiche monture ni de parentheses). Rien a faire de ce cote.
+[AJOUT LE 20/09/2026] RUNES DE MACHINES (Accuracy, Penetrating, Reloading, Seeking...) : classees Misc, sans effet ; a reprendre avec le chantier VEHICULES (qualite Crewed), comme les bateaux de Sylvania, de Lustria et du Dwarf Player's Guide.
 [AJOUT LE 20/09/2026] FABRICATIONS : pas d asterisque pour les degats (Cleaving) ni la competence (Striking) d une arme, seule l initiative en a une ; a voir si utile.
-[AJOUT LE 19/09/2026] MONTURES ET ANIMAUX : FAIT les 8 montures de Nations of Mankind (NATIO-TRAP_01 a _08). FAIT aussi les 12 animaux d Enemy in Shadows Companion (ENEMY-TRAP_01 a _12, valide ; profils et traits p.22-24 du livre). FAIT aussi la capacite des montures dans l Encombrement max du PDF (asterisque numerotee, valide). FAIT Riding Bull et Estalian War Bull (NATIO-TRAP_09 et _10, VALEURS MAISON : Riding Bull 120CO, Estalian War Bull 400CO, capacite 30, Exotic ; le livre n en donne pas). FAIT le 20/09/2026 (valide) : champs profil et traits (<AnimalProfile>, <AnimalTraits>), saisis sur 10 montures NATIO et 9 animaux ENEMY (Chicken, Sheep, Pig sans profil dans le livre ; traits Optional non saisis), fiche winanimal.pas, bouton Fiche de winequipement. FAIT le 20/09/2026 (valide) : acces a la fiche par double-clic dans WinPersonnage, type d inventaire Animal (RULES-LAB_252), libelle du bouton Fiche (RULES-LAB_253), winanimal.pas dans le .lpi. RESTE : un trait pourrait devenir un talent <Trait>1</Trait> (CONTEXT.md 2.15) ; (4) attacher l animal a un personnage et PDF : conception a faire avant tout code.
+[MONTURES ET ANIMAUX] Catalogue, profils, traits, fiche winanimal, double-clic et type d inventaire Animal FAITS (Log.txt 19-20/09). RESTE : un trait pourrait devenir un talent <Trait>1</Trait> (CONTEXT.md 2.15) ; attacher l animal a un personnage et au PDF (conception ci-dessous).
 [AJOUT LE 19/09/2026] MONTURES, RATTACHEMENT (DECISION NONO) : un objet de l inventaire porte un champ "porte par" = un ANIMAL PRECIS (pas un booleen), car dans un groupe plusieurs personnages posent leurs affaires sur le meme animal. Objet porte = encombrement 0 ; capacite <Carries> de l animal comparee a la somme portee (avertissement, pas de blocage) ; animal retire = objets rendus au personnage. A TRANCHER : animal du groupe (reference inter-personnages, identifiant d instance) ou animal nomme libre. Verifier d abord si le programme lie deja des personnages entre eux. Ordre : profil/traits -> champ porte par -> PDF.
 [AJOUT LE 19/09/2026] MONTURES : ETAT ACTUEL LAISSE TEL QUEL (decision Nono). La capacite des montures s ajoute a l Encombrement max du PDF (asterisque numerotee), raccourci provisoire. A REPENSER de facon plus generale avec le "porte par" (ligne ci-dessus) et le groupe : une monture ne doit plus gonfler l encombrement max du personnage mais recevoir des objets. Profil et traits des animaux : reportes.
 [AJOUT LE 19/09/2026] GROUPE (IDEE NONO, A CONCEVOIR) : pouvoir creer un groupe qui possede les biens partages (animaux, vehicules...) avec des donnees reelles. Un personnage a par defaut son propre XML de groupe (fonctionne en solo : ses animaux = lieu de stockage). Il peut rejoindre une equipe : le contenu de son XML de groupe est alors ajoute a celui de l equipe. Les objets "portes par" (ligne au-dessus) pointent vers un bien du groupe. Questions ouvertes : identifiant stable des biens, quitter une equipe (qui garde quoi), fusion en cas de doublons, format du XML de groupe.
-[AJOUT LE 19/09/2026] PRIX : FAIT (codes CO/PA/SB, affichage traduit, valide). RESTE eventuel : tri de la colonne prix par valeur et calcul de bourse/total supposeraient un parseur (aucun aujourd hui) ; prix "Varies" (RULES-TRAP_025/058, _096/130) laisses en texte.
-[AJOUT LE 19/09/2026] EQUIPEMENTS MIS DE COTE (recolte des livres traites) : (1) FAIT le 19/09/2026 (VALIDE par Nono, visibles dans WinEquipement) : HERBES de Death on the Reik Companion, 21 herbes avec Locality/Season (voir Log.txt, CONTEXT.md). (2) ANIMAUX ET MONTURES : Enemy in Shadows Companion p.24 (Sheep, Pig, Dog, Donkey, Ox, Heavy Draught Horse) et Nations of Mankind "New Mounts" (Bretonnian Destrier, Kislev Light Warhorse, Kislev Trained Bear, Kislev Warbear, Riding Camel, War Camel, War Elephant, Norscan Mammoth) : profils de caracteristiques a decider. (3) WINDS OF MAGIC : bonus des robes (Practical +1 SL, Standard +2, Elaborate +3) non modelises ; Enchanted Staff et objets magiques du chapitre Magical Artefacts pas encore releves. (4) FAIT le 19/09/2026 : Archives I-III et Lustria relus, theme Butin pose sur Lustria (7 objets). RESTENT DES CHANTIERS A PART : bateaux fluviaux de Lustria (cout, mouvement, Robustesse, Blessures, capacite), montures (voir (2)). (6) BALAYAGE COMPLET DES LIVRES FAIT le 19/09/2026. Middenheim : 5 objets magiques ajoutes (MIDDE-TRAP_01 a _05, theme Divers, effets en commentaires). RESTE : mines de Salzenmund (tableau Mining Equipment : Bellows, Caged Canaries, Elevator, Fortification, Guild Membership, Pumps = chantier entreprises) ; Sea Wardens of Cothique et Dwarf Player's Guide (vehicules) ; Deft Steps Light Fingers (tableau d objets, livre non integre, cf. CONTEXT.md 2.36). FAIT le 19/09/2026 (valide) : Dwarf Player's Guide lot 1 (livre DWARF cree : armes, armures, objets p.93-97, voir Log.txt) ; FAIT aussi (valide) : 19 talents, competence Runesmithing et les 10 carrieres exclusives (DWARF-WORK01 a 10). FAIT le 19/09/2026 : variantes de carrieres p.54-61 (15 carrieres DWARF-WORK11 a 25, valide par Nono : niveau 2 et retour au parent au niveau 3). ARMES DE SIEGE ABANDONNEES (decision Nono 19/09/2026). RESTENT vehicules (qualite Crewed), COLONNES DE FORTERESSE DE LA TABLE p.50 FAITES le 19/09/2026 (11 ethnies, VALIDE par Nono ; substitutions Lustria et Sea of Claws faites, dans ces deux livres), sorts, runes. ETHNIES FAITES le 19/09/2026 (11, VALIDE par Nono ; Longbeards p.50 non modelises). (5) Acheteur prefere du butin (multiplicateurs de prix) : FAIT le 19/09/2026 : balise <Buyer> + champ dans WinEquipement (valide par Nono).
-[19/09/2026] PDF : divers avec libelle, encombrement et Porte FAITS (voir Log.txt).
-[AJOUT LE 19/09/2026] WINEQUIPEMENT : AJOUT A UN PERSONNAGE FAIT (19/09/2026, bouton +Equipment). Quantite FAITE (Divers, munitions, armes de lancer d encombrement 0). <Theme> V5 FAIT (32 objets, tous Divers ; RULES-TRAP_033+ de la V5 viennent des metiers, laisses de cote). Ancrage proportionnel de WinEquipement FAIT (19/09/2026).
-[AJOUT LE 19/09/2026] EQUIPEMENTS V4 (BOOK_RULESBOOK.Xml WFRP4) : CATALOGUE DATA_TRAPPING FAIT (175 objets,
-RULES-TRAP_001 a _175), 194 lignes de carriere rattachees sur 582. Reste, a traiter au cas par cas par Nono :
-lignes douteuses (magnifying glass, pen and ink, horse seul, oil lamp, hurricane lamp with oil,
-harness/stagecoach dont le saddle voisin est deja fusionne), variantes "(Q)" (clothes(Q), hat(Q), uniform (Q)...,
-qualite a preserver), "tools of the profession (...)", objets absents du catalogue (rank symbol, sleeping bag,
-leather doublet, cape, handcuffs, livery...). Les non-objets (argent, biens "worth", batiments, reseaux) restent
-en texte comme Hawk Mews en V5. A tester en jeu : chargement V4, "&amp;" (Wine & Spirits, Pestle & Mortar),
-libelle LIMITED affiche "Scarce".
-[19/09/2026] VARIANTES (Q) DES EQUIPEMENTS V4 : 8 lignes rattachees avec le suffixe (Q) colle au code (RULES-TRAP_017/023/029/034 (Q) = Clothing/Hat/Robes/Uniform), comme pour les armes et armures. FAIT le 19/09/2026 (valide) : (Q) = fabrication marqueur RULES-QUALITY_AJOUT, voir Log.txt. FAIT le 19/09/2026 (valide) : PDF, qualite des Divers entre parentheses, (Q) pour le marqueur. RESTE : marqueur encore ecrit "Quality to add" dans le bloc Fabrication des armes/armures, doublon avec le suffixe "de qualite" du catalogue. Ancienne decision : garder (Q) pour l instant, mais A REVOIR pour un systeme different (idee : (Q) = choix de qualite a la creation, remplace par la qualite choisie parmi DATA_CRAFTMANSHIP ; cf. CONTEXT.md 2.77 suite 4, chantier equipement/avancements en pause). Non rattaches : clothes(Q), cape(Q), luxurious costume (Q), elegant clothes (Q)... (a trancher au cas par cas).
+[PRIX] Codes CO/PA/SB faits. RESTE eventuel : tri par valeur et calcul de bourse (il faudrait un parseur) ; prix "Varies" (RULES-TRAP_025/058, _096/130) laisses en texte.
+[EQUIPEMENTS MIS DE COTE] Balayage des livres, herbes, Dwarf Player's Guide, Buyer FAITS (Log.txt 19/09). RESTE : (1) Winds of Magic : bonus des robes (Practical +1 SL, Standard +2, Elaborate +3), Enchanted Staff et objets du chapitre Magical Artefacts non modelises ; (2) mines de Salzenmund (Mining Equipment : Bellows, Caged Canaries, Elevator, Fortification, Guild Membership, Pumps = chantier entreprises) ; (3) VEHICULES (qualite Crewed) : bateaux de Lustria, Sea Wardens of Cothique, Dwarf Player's Guide (armes de siege abandonnees) ; (4) Deft Steps Light Fingers (tableau d objets, livre non integre, CONTEXT.md 2.36) ; (5) Longbeards p.50 non modelises.
+[EQUIPEMENTS V4] Catalogue de 175 objets fait, 194 lignes de carriere rattachees sur 582. Reste, au cas par cas par Nono : lignes douteuses (magnifying glass, pen and ink, horse seul, oil lamp, hurricane lamp with oil, harness/stagecoach), "tools of the profession (...)", objets absents du catalogue (rank symbol, sleeping bag, leather doublet, cape, handcuffs, livery...). Les non-objets (argent, biens "worth", batiments, reseaux) restent en texte. A tester en jeu : chargement V4, "&amp;" (Wine & Spirits, Pestle & Mortar), libelle LIMITED affiche "Scarce".
+[VARIANTES (Q)] Faites et validees (Log.txt 19/09). RESTE : marqueur encore ecrit "Quality to add" dans le bloc Fabrication des armes/armures, doublon avec le suffixe "de qualite" du catalogue ; idee a revoir : (Q) = choix de qualite a la creation parmi DATA_CRAFTMANSHIP (CONTEXT.md 2.77 suite 4, chantier pause). Non rattaches : clothes(Q), cape(Q), luxurious costume (Q), elegant clothes (Q) (au cas par cas).
 
 =========================================================================
-[AJOUT LE 19/09/2026] ANCRAGE PROPORTIONNEL : valide sur les sept fenetres de base de donnees (CONTEXT.md 2.83, unite
-ancrageproportionnel.pas) ; les autres fenetres (WinSpecialisation, WinFabrication, WinMutation, WinLivre,
-WinCreation) jugees valides en l etat par Nono le 19/09/2026, rien a faire pour l instant. WinPersonnage garde son
-propre moteur (CONTEXT.md 2.64), valide par Nono le 19/09/2026 : chantier clos.
 
-
-[CORRIGE LE 18/09/2026, TESTE EN JEU ET VALIDE PAR NONO - VOIR CONTEXT.md 2.82]
-LA VARIABLE AjoutMineur (winpersonnage.pas) N'ETAIT JAMAIS MISE A TRUE, RENDANT INACTIVE LA
-GARDE "SORT A CHOISIR NON RESOLU" SUR VALIDER. Deux tentatives le 18/09/2026 : la premiere
-(activer AjoutMineur tel quel) a bloque Nono sans issue (voir CONTEXT.md 2.82 pour le detail
-de l'impasse - le bouton +Spell ne lit que les talents deja valides). La seconde, retenue :
-nouvelle colonne "Spell" dans le tableau de talents lui-meme (TabAugmentationTalent),
-resolue par double-clic independamment de Valider, comme la colonne Specialisation juste a
-cote. AjoutMineur supprimee, devenue inutile. Teste en jeu par Nono : bloque si spe ou sort
-manquant, ajoute bien le sort si les deux sont donnes.
 
 [TRANCHE LE 15/09/2026 - CONSERVE COMME POINT TRANCHE, NE PLUS LE RESSORTIR EN ANOMALIE]
 LE MATERIAU (TYPE) DES BOUCLIERS/ECUS DU RULEBOOK V5 RESTE NON DEFINI, DECISION DE NONO.
@@ -62,17 +35,6 @@ existe en pic de guerre 2 mains (RULES-COMB_2M_03) ET en outil de fouille (RULES
 Toujours verifier le contexte de la carriere (equipement voisin) avant de rattacher
 automatiquement un nom deja vu ailleurs - ne pas supposer qu'un meme mot anglais designe le
 meme code partout.
-
-[CORRIGE LE 18/09/2026, CONTEXT.md 2.80 SUITE - NOTE CI-DESSOUS OBSOLETE, CONSERVEE POUR MEMOIRE]
-LA SYNTAXE DE CHOIX "RULES-Txxxx/RULES-Tyyyy" (deux talents distincts au choix) N ETAIT PAS LUE
-PAR WINPERSONNAGE.PAS/WINCREATION.PAS. Verifie le 13/09/2026 par grep, mais depeasse depuis par
-le chantier Vertus bretonnes (§2.78) : winpersonnage.pas/wincreation.pas utilisent maintenant
-largement ListeTalent/ChargeSpecialisation, qui decoupent deja '/' et '_*' ensemble (fusion en
-une seule liste dans la fenetre de specialisation). Le vrai bug trouve le 18/09/2026 en testant
-Mark of the Gods (Norscan Mercenary) etait localise et distinct : double-cliquer sur le LIBELLE
-d'une ligne a choix multiple (au lieu de la colonne "choisir spe") plantait (EGridException,
-WinTalent.WinCharger ne trouve aucune entree litterale pour un code "A/B"). Corrige dans
-winpersonnage.pas (TabAugmentationTalentDblClick).
 
 CRAFTSMAN/MASTER TRADESMAN "(as Trade)" (RULEBOOK V5) N'A PAS DE RESOLUTION DYNAMIQUE. Ecrit
 le 14/09/2026 (§2.70) avec l'id generique RULES-T0032_*/RULES-T0086_* et un commentaire XML
@@ -167,15 +129,7 @@ et non sur sa nature : la branche "choix unique" de l arbre de WinRaces, le basc
 ChargeSpecialisation vers le catalogue complet, et le routage par Node.Parent.Text du clic
 de WinRaces. Aucun n avait ete anticipe. A relire avant le prochain ajout du meme genre.
 
-[INVALIDE - CONSTATE LE 18/09/2026 PAR NONO, CORRECTIF RETIRE, NE PLUS LE RESSORTIR]
-"UN TALENT DE BENEDICTION POSE A LA CREATION N ACCORDAIT AUCUN SORT" REPOSAIT SUR UNE
-PREMISSE FAUSSE. Le correctif du 15/09/2026 (octroi direct du sort dans WinCreation, phase 5
-"Talents", pour tout talent ModeSort=AUTO resolu a la creation) partait d'un cas qui ne peut
-pas se produire en jeu : on ne peut pas avoir Bless a la creation, une Benediction ne peut
-venir que par WinPersonnage (avancement de carriere). Code mort retire de wincreation.pas
-(PhaseSave) le 18/09/2026, unite ChargeSort et variable PSort retirees avec lui (plus
-utilisees). Compile (lazbuild --build-all, 0 erreur, memes 64 warnings/443 hints/139 notes
-qu'avant).
+[INVALIDE 18/09/2026] Une benediction ne peut venir que de WinPersonnage : le correctif WinCreation de 15/09 etait faux et son code mort est retire. Ne plus le ressortir.
 
 VERIFIER PoolTalent SUR UN PERSONNAGE PORTANT DEUX DIEUX. Signale par la conception de
 CONTEXT 2.39 et toujours pas eprouve : PoolTalent batit le groupe de comptage XP sur le
@@ -222,13 +176,6 @@ recalcul depuis warhammersource.pas, corrige le 14/09/2026, CONTEXT.md 2.70) - r
 sous-ensemble PDF/attributs, non demande pour l'instant. Meme correctif a appliquer
 (Const -> Var + recalcul depuis ValVersion) le jour ou Nono le demande.
 
-[CORRIGE LE 15/09/2026, TESTE EN JEU ET VALIDE PAR NONO LE 18/09/2026 - NE PLUS LE
-RESSORTIR]
-CHERCHETALENT TESTAIT PTALENT.RESUME AU LIEU DE RESULT.RESUME APRES LA BOUCLE.
-chargetalent.pas l.85 : corrige en Result.Resume (voir chargetalent.pas:78-90 pour le
-raisonnement). Confirme sur WinMetier : selectionner une specialisation affiche desormais
-bien son resume.
-
 LE MEME EMPILEMENT DE "(N) VALEUR%" QUE L'ARMURE (CORRIGE LE 14/09/2026, VOIR PLUS BAS)
 EXISTE PEUT-ETRE AUSSI COTE MUTATIONS. PdfPersonnageMutationAsterisques
 (pdfpersonnage.pas, fonctions ModifieCompetence directe et ModifySkillAttribut) concatene
@@ -243,37 +190,7 @@ plusieurs mutations sur la meme competence teste). A regrouper de la meme facon
 CONCEPTIONS A MENER  (chantiers a part entiere, ne pas les melanger)
 =========================================================================
 
-[PORTE MUTATION FAITE LE 11/09/2026 - voir CONTEXT.md 2.54. Une mutation peut accorder un
-Talent (<Talent> sous <Corruption>) ou une Arme/Armure (<Weapon>/<Armor>), calcule a la volee
-depuis Personnage.Mutations (PersonnageMutationTalent/PersonnageMutationEquipement,
-chargepersonnage.pas) - retrait de la mutation (double-clic sur TabMutation, winpersonnage.pas)
-= cascade automatique et gratuite, rien de stocke a purger. Cas reel : Fleshy Tentacle ->
-PERSO-COMB_TENTACLE (BOOK_PERSO.Xml), teste et valide par Nono, malus "pas de competence"
-contourne pour une arme de mutation (Source <> '').]
-
-[PORTE QUALITE D OBJET FAITE LE 11/09/2026 - voir CONTEXT.md 2.55. Meme principe que la porte
-mutation, transpose a ArmureBonus : <Talent> sous <BonusMalus> (chargearmurebonustalent.pas),
-PersonnageArmureBonusTalent (chargepersonnage.pas) calculee a la volee depuis l'equipement
-porte. Cas reel : NATIO-ARMOB_16 "Fear" (Skull Trophies) accorde RULES-T0049 Frightening,
-teste et valide par Nono a l'ecran (TabTalent, winpersonnage.pas) et au PDF. Les talents de
-mutation ET de qualite d'objet s'affichent maintenant aussi a l'ecran, pas seulement au PDF -
-fusion avec une ligne existante sans toucher ColTalNbAugm/ColTalXp (octroi automatique = pas de
-cout Xp). Au passage : la fonction lisait d'abord PersonnageEquipement.QualiteEquipement
-(qualites de FABRICATION uniquement) au lieu de StructureArmure.ListeBonus (qualite inherente du
-catalogue, celle que "Fear 1" affiche reellement) - corrige, les deux sources sont scannees.]
-
-[REFERME LE 11/09/2026 - LA TROISIEME PORTE (TALENT/SORT), PAS DE CAS REEL POUR L INSTANT.
-Reprise avec Nono apres la fin du chantier "moteur generique de modificateurs" : les deux
-besoins reels identifies sont deja couverts par l existant, pas de nouvelle porte a
-construire. Augmentation generale par talent achete normalement (competences/attributs/
-degats) -> deja le moteur generique (ModifyCarac/ModifySkill/ModifyDamage/...), fonctionne
-quel que soit le talent et sa source (creation/carriere/Xp). Valeur temporaire type armure
-portee/retiree -> deja gere par l equipement normal. Sorts/rituels a effet permanent -
-StructureSort porte bien TypeSort/Duree mais en texte descriptif seul, rien de mecanise ;
-Nono ne connait pas assez les rituels pour trancher une mecanique a l aveugle. A rouvrir
-seulement si un cas reel de rituel a effet permanent se presente. Note gardee pour plus
-tard : l'idee d'un talent "de type trait" non selectionnable existe deja depuis longtemps
-(CONTEXT.md 2.15, ConstXmlTrait/StructureTalent.Trait) si le besoin revient.]
+[TROISIEME PORTE (TALENT/SORT) FERMEE LE 11/09/2026] Pas de cas reel. A rouvrir seulement si un rituel a effet permanent se presente ; l idee du talent "de type trait" existe deja (CONTEXT.md 2.15).
 
 VIRTUE OF THE QUEST (NATIO-T0017) : RETRAIT DEFINITIF A GRAIL KNIGHT PAS ENCORE FAIT. Octroi
 automatique + affichage barre ecrits et compiles le 18/09/2026 (CONTEXT.md 2.78 suite 7,
@@ -284,23 +201,7 @@ supprimer une ligne de TabTalent n'a jamais ete fait dans ce projet, et rouvrira
 genre de piege de comptabilite Xp (NbAugm) que Knightly Virtue (2.78) - a traiter separement,
 teste sans presser.
 
-[FAIT LE 07/09/2026 - mecanisme generique Nation ecrit et compile, voir CONTEXT.md 2.51.]
-
-[FAIT LE 16/09/2026 - Nation NATIO-NATION_BRET (Bretonnia) ajoutee dans
-BOOK_NATIONS_OF_MANKIND.Xml, HBRPA (Peasantry) et HBRNO (Nobility) rattachees via
-<Nationality>. Nation NATIO-NATION_ESTA (Estalia) ajoutee de meme, HESTA rattachee.
-Nation UPINA-NATION_TILE (Tilea) ajoutee dans BOOK_UP_IN_ARMS.Xml, HTIL rattachee.
-Nation SEAOF-NATION_NORS (Norsca) ajoutee dans BOOK_SEA_OF_CLAWS.Xml, les trois ethnies
-humaines HBJOR/HSARL/HSKAE rattachees - SEAOF-RACE_DNORSE (Nains de Norsca) laisse de cote,
-decision de Nono le 16/09/2026 : le regroupement Nation vise avant tout les nations
-humaines, pas a etendre par defaut aux ethnies non-humaines d'un meme territoire. Nation
-NATIO-NATION_ARAB (Araby) ajoutee de meme, HARAB rattachee.]
-
-[TRANCHE LE 16/09/2026 - toutes les nations humaines identifiees (Empire, Bretonnia,
-Estalia, Tilea, Norsca, Araby) ont desormais leur Nation propre (mecanisme CONTEXT.md
-2.51). SEAOF-RACE_DNORSE (Nains de Norsca) volontairement laisse de cote, voir plus haut.
-Prochain regroupement a traiter seulement si un besoin reel se presente (nouveau livre,
-nouvelle condition d'appartenance).]
+[NATIONS TRANCHE 16/09/2026] Toutes les nations humaines ont leur Nation (CONTEXT.md 2.51). SEAOF-RACE_DNORSE (Nains de Norsca) laisse de cote volontairement (decision Nono). A rouvrir seulement pour un nouveau livre ou une nouvelle condition d appartenance.
 
 LES TRAPPINGS DES REGIMENTS OF RENOWN NE SONT PAS MODELISES. Les onze Regiments of Renown
 (p.6-7, saisis et valides le 10/09/2026, CONTEXT.md 2.44) donnent chacun un equipement
@@ -311,15 +212,6 @@ regiment, la regle narrative du livre n'est pas non plus modelisee : au palier 3
 est ramene a "Soldier" au lieu de Sergeant, le Statut Social de rang 3 est conserve, et les
 trappings normaux de rang 3 sont differes jusqu'au rang 4 (Officer). Decision de Nono avant
 saisie : a mener seulement si Nono en a besoin en jeu, pas de chantier dedie pour l'instant.
-
-[FAIT LES 10-11/09/2026 - accesseur unique Attribut/Competence, termine sur son perimetre
-complet et valide par Nono (Gunther Krieg pour les Attributs, un Chevalier a bonus Polearm
-pour les Competences, le talent Big pour le residu Talent/Equipement) : CalculTotaux
-(winpersonnage.pas l.2357) appelle desormais PdfPersonnageAttribut/PdfPersonnageCompetence au
-lieu d additions locales de cellules, avec resync dedie de Personnage.AugmentationAttribut/
-.AugmentationCompetence/.AugmentationTalent/.Equipement en tete de la procedure. L ecran
-reflete maintenant les bonus de CareerBonus (Ordre/Regiment), de talent a bonus direct et d
-arme/armure magique, sans attendre une sauvegarde. Detail CONTEXT.md 2.52, Log.txt.]
 
 PDFPERSONNAGECOMPETENCE/PDFPERSONNAGEATTRIBUT NE PORTENT TOUJOURS PAS CODE/LIBELLE/CARAC
 LIEE DANS LEUR STRUCTUREDONNEE (Base/Augmentation/Total seulement). Pas necessaire pour l
@@ -333,13 +225,6 @@ ligne d arme independamment. Le ModifyWeapon du Reiksguard (ajoute le 07/09 dans
 premier bloc seulement) manquait dans le second - corrige le 08/09/2026 en testant
 NATIO-ORDER_REIKS. Retenir : toute future modification du calcul d une ligne d arme doit
 etre faite AUX DEUX ENDROITS.
-
-[FAIT LE 10/09/2026 - <Effet Cible="..." Forme="..." Facteur="..." Carac="..."/>, generalise
-au dela des neuf cas d origine (n importe quel talent, plus de code de talent en dur), voir
-CONTEXT.md et Log.txt. Restent ouverts, voir plus bas dans ce fichier : la Forme Drapeau et
-trois des six Additif jamais exerces sur un personnage reel ; le mecanisme <Attribut>
-(bonus de test) volontairement laisse hors perimetre ; ListTalentAttributModif/
-ListTalentCompetenceModif et CompAjoutee toujours pas unifies, inchange.]
 
 NON TESTES SUR UN PERSONNAGE REEL : QUATRE DES SIX <Effet> DU 10/09/2026. Seuls Hardy
 (ProportionnelAttribut) et Strike Mighty Blow (Additif) ont ete verifies sur Gunther Krieg.
@@ -359,55 +244,8 @@ TalentObstine) - reste TalentHaineSacree (RULES-T0070) : verifie a cette occasio
 utilisee, pas touchee. Si un jour ce talent est lui aussi generalise en <Effet>, verifier au
 meme moment que TalentHaineSacree ne reste pas un cinquieme "presque mort" oublie.
 
-ANCRAGE DES CONTROLES DANS LES FENETRES - WINPERSONNAGE VALIDE PAR NONO LE 19/09/2026 (CHANTIER CLOS, bloc a distiller au prochain menage) ; ETAIT EN PAUSE DEPUIS LE 12/09/2026, PLUS PROFOND
-QUE PREVU. Demande d origine le 05/09/2026. Commence sur WinPersonnage (voir CONTEXT.md 2.64) :
-OnResize branche sur AjustePositionTables (moteur de positionnement maison deja existant,
-utilise par les cases Xp/Calcul), plus trois bugs trouves et corriges au passage (conflit
-Anchors natif/positionnement en dur sur TabEquipement et 6 boutons, ButtonPorte oublie de la
-cascade, MaxHeight=0 tirant sur Form.Height EN DIRECT pendant le resize). Compile, jamais
-entierement revalide par Nono a l ecran depuis le dernier correctif - etat garde tel quel
-(vrais bugs, utiles meme hors resize), pas de retour arriere.
-SYMPTOME RESIDUEL FERME LE 12/09/2026 (CONTEXT.md 2.64) : CheckBoxQuickArmor et les boutons
-Arme/Armure/Fabrication/Delete/Sort/Porte semblaient sauter puis se repositionner pendant le
-redimensionnement (pas au clic Xp/Calcul). ScaleDpi=false ajoute par precaution sur les 16
-appels d AdjustGridColumnsWidth de AjustePositionTables (meme anti-motif que RafraichirLibellesMenu,
-CONTEXT.md 2.8), garde car legitime mais sans effet sur ce symptome. Diagnostic en direct
-(valeurs affichees dans la barre de titre pendant le drag) : Self.Width est la seule valeur qui
-bouge, TabEquipement/ButtonArme/CheckBoxQuickArmor restent fixes tout du long - le modele est
-donc correct pendant le drag. Conclusion : artefact d affichage Windows (image de la fenetre
-etiree en direct tant que le vrai reaffichage, plus lent avec ~16 grilles a recalculer par
-tick, n a pas rattrape), pas un bug de positionnement. Accepte tel quel par Nono, pas de piste
-simple cote appli (ralentirait le retour a l ecran pendant tout le drag pour le supprimer).
-Point de reprise si ce chantier rouvre un jour : les grilles ne s agrandissent pas encore
-reellement (dimensionnees a leur contenu, seul leur plafond PageExperience.Height peut suivre -
-et PageExperience lui-meme n a pas encore d ancrage/calcul vertical). D autres decrochages du
-meme genre que ceux trouves peuvent rester ailleurs sur la fenetre, non testes. WinLivre/
-WinCreation pas regardes du tout - verifier s ils ont le meme genre de moteur maison avant de
-choisir leur approche. Point d attention non verifie : le grossissement de police cumulatif du
-menu principal (voir plus bas dans ce fichier) pourrait interagir avec l ancrage.
-
-[LIGHTWEIGHT/BULKY BRANCHES LE 12/09/2026 - voir CONTEXT.md 2.58. Les deux seules qualites a
-effet purement numerique dans le modele actuel (Encombrement) sont calculees dans les deux
-gabarits Pdf. Deux bugs prexistants trouves et corriges au passage, sans rapport avec ce
-calcul : les qualites posees n etaient plus retrouvees a la reouverture d un personnage
-(mauvaise colonne dans XmlChargePersonnage, winpersonnage.pas), et l entete Crafting Bonus
-Explanations du Pdf Feldo2P s incrustait dans le tableau Armure (coordonnee X en dur, connue
-depuis le 15/08/2026, cf. CONTEXT.md 0).]
-[MALUS ARMOB RETIRE DU TOTAL AUTOMATIQUE LE 12/09/2026 - voir CONTEXT.md 2.59. Chantier
-Practical/Unreliable commence puis interrompu par Nono en cours de route : le malus ARMOB
-(ex. Mail Chausses, -10 Stealth) dependait de la piece etant PORTEE au moment du jet, un etat
-trop volatile (armure retiree en ville, etc.) pour etre integre silencieusement dans un total
-sauvegarde - retour en arriere sur le §2.50 etape 3 point 5. PersonnageArmureBonusCompetenceModif
-(chargepersonnage.pas) n est plus appelee nulle part (pdfpersonnage.pas) ; le malus redevient
-une simple information affichee (libelle de qualite sur la fiche armure, GetAllArmureBonusLibelle)
-que le joueur applique lui-meme. Practical/Unreliable restent donc a concevoir EN MEME TEMPS que
-la conception ci-dessous, pas separement.]
-[COLONNE "AVEC EQUIPEMENT" BRANCHEE LE 12/09/2026 - voir CONTEXT.md 2.60. Pdf Feldo2P
-uniquement (le gabarit normal est le Pdf officiel, non modifiable) ; Practical/Unreliable
-reintegres dans le meme mouvement. Fine/Durable/Shoddy/Ugly restent narratifs (statut social,
-jet de sauvegarde contre la casse, casse sur double rate, malus Sociabilite conditionnel) :
-rien a calculer, meme dans cette colonne - point tranche, ne plus le ressortir en anomalie.]
-LES 3 ACCESSOIRES NATIONS OF MANKIND : Barrel Extension (+20 portee) et Telescopic Sight (Accurate/Precise) FAITS et VALIDES le 19/09/2026 dans le PDF (RangeBonus/WeaponQuality ; Accurate = +10%). RESTE : Bayonet (devient une Lance, change la competence) et l affichage de la portee dans WinPersonnage.
+[TRANCHE 12/09/2026] Fine/Durable/Shoddy/Ugly restent narratifs (rien a calculer, meme dans la colonne "Avec equipement" du Feldo). Ne plus le ressortir en anomalie.
+ACCESSOIRES NATIONS OF MANKIND : Barrel Extension et Telescopic Sight faits et valides (19/09). RESTE : Bayonet (devient une Lance, change la competence) et l affichage de la portee dans WinPersonnage.
 
 WINFABRICATION NE FILTRE PAS PAR NATURE D OBJET. Rien n empeche de monter une baionnette sur
 une hache ni de poser Durable sur une fleche : la fenetre affiche toute la liste sur n importe
@@ -517,14 +355,7 @@ PDF Personnage (PRIORITAIRE) :
   nettoyage des blocs morts (Blessure, PCM) une fois PdfPersonnageCreationFeldo2P
   entièrement découpée. (ArmureBouclier faisait partie de cette liste ; retiré le
   15/08/2026 lors de l'extraction du remplissage Armes en PdfBlocArmesDonnees.)
-- (idée du 15/08/2026 - FAITE en deux temps, gardée ici pour la trace de ce qui reste)
-  la gestion des sorts liés aux talents ne passe plus par les constantes en dur
-  TalentSortDomaine/Miracle/MagieMineure/Benediction : le mode d'ajout est une donnée du
-  talent (<SpellMode>, CONTEXT 2.18, 23/08) et la recherche des sorts d'un talent est
-  générique (TalentsDuSort, CONTEXT 2.39, 03/09). Les constantes ne subsistent plus qu'en
-  commentaire (chargeconstantes.pas l.~359, winpersonnage.pas l.~1511). RESTE : vérifier
-  que ButtonSortClick (winpersonnage.pas l.1243) a bien suivi les deux chantiers - il n'a
-  été relu ni le 23/08 ni le 03/09.
+- ButtonSortClick (winpersonnage.pas l.1243) : verifier qu il a suivi <SpellMode> (CONTEXT 2.18) et TalentsDuSort (CONTEXT 2.39) ; relu ni le 23/08 ni le 03/09.
 - généraliser `WinLanceDes` (winlancede.pas) : popup "lancer le dé" (SpinEdit 0-100 +
   boutons Lancer/Valider) actuellement câblée uniquement pour le tirage aléatoire de
   Talent (`TalentAleatoire`), avec encore des `GetTexteLibelle('LAB_xxx')`/`'MESS_xxx'`
@@ -888,75 +719,13 @@ contiennent souvent des points encore ouverts.
 =========================================================================
 HIGH ELF PLAYER S GUIDE - CE QUI RESTE
 =========================================================================
-Livre officiel Cubicle 7, 2025. TXT dans LIVRES, PDF aussi depuis le 30/08.
-Lots 1 (5 carrieres) et 3 (11 ethnies) livres et valides. Leur histoire est dans Log.txt.
-
---- LOT 2 : LES QUATRE CARRIERES DE LANCEURS ---
-Mage (niveaux 1 a 5), Smith-priest of Vaul, Storm Weaver et Loremaster of Hoeth
-(niveaux 3 a 5 chacune ; on y entre apres avoir termine le niveau 2 du Mage, p.99).
-BLOQUE PAR LE NIVEAU 5, qui ne peut pas etre contourne par la donnee : les schemas
-d avance des pretres marquent bien les rangs 3, 4 et 5 (verifie sur la bande du
-Smith-priest), et le Mage a cinq niveaux dont on ne peut retirer l Archmage.
-
-  A CREER, 7 talents definis par le livre : Blessed by Isha (p.83, Max 1), High Magic
-    (p.83, voir ci-dessous), Lileath s Blessing (p.83, Max Bonus d Initiative, Tests
-    Channelling (Qhaysh)), Cadai Meditation (p.101), Mind over Body (p.101, Max 3),
-    Eye of the Storm (p.105, Max 3), Sanctuary of the Mind (p.111, Max 3).
-  A CREER, 1 specialisation : Savant (Magic) -> RULES-T0134_MAGIE.
-  DEJA FAIT : la competence Channelling (Qhaysh) = RULES-COMPFOCAL_QHAYSH.
-  RABATTEMENTS VALIDES PAR NONO, a appliquer tels quels :
-    "Arcane Magic (Any Arcane Lore)" -> RULES-T0088_*
-    "Trade (Smith)" -> RULES-COMPMETIER_FORGE       (la base dit Blacksmith)
-    "Craftsman (Smith)" -> RULES-T0092_FORGE
-    "Master Tradesman (Smith)" -> RULES-T0157_FORGE
-  Les 33 autres talents cites se resolvent sans ambiguite.
-  A ARBITRER : le talent High Magic n a PAS de ligne "Max:" - le livre ne l imprime pas,
-    verifie sur le PDF. Son bloc commence meme par une phrase amputee ("Only characters
-    with the" manque). Coquille d edition ; il faut choisir une valeur.
-  SCHEMAS D AVANCE DEJA RELEVES :
-                        WS  BS   S   T   I  Ag Dex Int  WP Fel
-    Mage         p.90    3   0   0   0   5   4   2   1   1   1
-    Smith-priest p.100   3   0   4   0   5   0   3   3   3   3
-    Storm Weaver p.104 et Loremaster p.108 : bandes a demander a Nono.
-  Competence de revenu du Mage : RULES-COMPLANG_MAG Language (Magick).
-
---- LOT 2, SUITE : LES 58 SORTS ---
-Ils dependent des memes talents que les quatre carrieres, donc ils viennent apres.
-  Petty Magic p.80 (6), Elven Arcane p.81-82 (8), Lore of High Magic p.86-89 (15),
-  Magic of Vaul p.102-103 (9), Sea Magic de Mathlann p.106-107 (10), Magic of Hoeth
-  p.110-111 (10). Extraits proprement du TXT par decoupage de colonnes (script split2col).
-  QUATRE QUESTIONS DE MODELISATION A TRANCHER AVANT LA SAISIE :
-   1. Quel TypSpell pour la Haute Magie ? C est une question de CODE et non de donnee :
-      voir le bloc sur l enumeration fermee plus bas. S en tenir a "Domain Magic" ne
-      demande rien, et le livre le justifie a moitie (p.84).
-   2. Les Elven Arcane Spells n ont pas de domaine fixe : ligne "Winds:" citant deux vents
-      au choix du lanceur, alors que le modele n a qu un <Talent>. Declaration combinee
-      avec SeparateurMulti, comme "Channelling (Azyr or Ghur)" ?
-   3. 69 mentions d Overcasting, 13 de "Sacrifice:" et 16 de "Yenlui State must be" n ont
-      pas de champ dedie. Meme traitement que les 17 rituels de Winds, replies dans
-      <Explanation> ?
-   4. L etat YENLUI (p.46), mecanique propre aux Elfes a trois valeurs, n a rien pour le
-      porter. A afficher seulement, comme le CN des rituels, ou a ignorer ?
-
---- CE QUI N EST DANS AUCUN LOT ---
-  * TROU CONNU DANS LES ONZE TABLES DE TIRAGE : la ligne Mage, laissee en commentaire dans
-    chaque <Specie>. C est le Mage du livre p.90 (5 niveaux, lot 2) et NON le Wizard du
-    Rulebook - le livre distingue explicitement les deux p.60. A rebrancher avec la
-    carriere.
-  * "ADAPTING CAREERS" p.60-62 : le livre substitue des talents dans les carrieres du
-    Rulebook jouees par des Hauts Elfes (releve : le Pit Fighter elfe remplace Dirty
-    Fighting par Feint au niveau 1). Meme mecanisme que DATA_SPECIE_CAREER_CHOICE /
-    DATA_CAREER_SUBCHOICE. A inventorier.
-  * Les carrieres marquees d une * dans la table p.59 (Servant, Villager, Huffer,
-    Stevedore) ne sont pas normalement accessibles aux Hauts Elfes : nuance non portee.
-  * DEUX ERRATA DU LIVRE, corriges dans le XML mais ce sont des HYPOTHESES de lecture :
-    colonne Outer Kingdoms, Guard "89-91" et Knight "91-92" se disputent le 91 - lu comme
-    Guard 89-90 ; colonne Avelorn, Scholar "13-19" et Artisan "18-21" se disputent 18 et
-    19 - lu comme Scholar 13-17. Confirmes tels quels sur le PDF.
-  * L armurerie elfique, les tables d objets et d herbes, et la section Sea Elf de la
-    p.56-57 ne sont pas saisies.
-  * DATA_RANDOM_SPECIE n a pas ete touche : les onze ethnies s obtiennent par choix, pas
-    par tirage d espece. A revoir si Nono veut le contraire.
+Lots 1, 2 (carrieres de lanceurs, 59 sorts) et 3 (ethnies), et l armurerie elfique : FAITS (CONTEXT.md 2.25 a 2.29, Log.txt). Restent :
+  * A verifier : le talent High Magic n a pas de ligne Max dans le livre (coquille d edition) ; la valeur retenue est dans CONTEXT.md 2.25.
+  * TROU DANS LES ONZE TABLES DE TIRAGE : la ligne Mage, laissee en commentaire dans chaque <Specie> (Mage p.90, 5 niveaux, et NON le Wizard du Rulebook) ; a rebrancher si pas deja fait (CONTEXT.md 2.25).
+  * "ADAPTING CAREERS" p.60-62 : le livre substitue des talents dans les carrieres du Rulebook jouees par des Hauts Elfes (ex. Pit Fighter elfe : Feint remplace Dirty Fighting au niveau 1). Meme mecanisme que DATA_SPECIE_CAREER_CHOICE / DATA_CAREER_SUBCHOICE. A inventorier.
+  * Carrieres marquees d une * p.59 (Servant, Villager, Huffer, Stevedore) : normalement inaccessibles aux Hauts Elfes, nuance non portee.
+  * Deux errata du livre lus comme hypotheses (Outer Kingdoms : Guard 89-90, Knight 91-92 ; Avelorn : Scholar 13-17, Artisan 18-21), confirmes sur le PDF.
+  * Tables d objets et d herbes et section Sea Elf p.56-57 non saisies. DATA_RANDOM_SPECIE non touche : les onze ethnies s obtiennent par choix.
 
 =========================================================================
 LIVRES NON ENCORE INTEGRES
@@ -965,19 +734,9 @@ INVENTAIRE A JOUR : CONTEXT.md 2.36 (03/09/2026). Il remplace le tri du 29/08, q
 comptait des marqueurs sans lire leur contexte et se trompait sur plusieurs livres.
 Ne rien relancer ici sans l avoir lu.
 
-FAITS : High Elf Player s Guide (CONTEXT.md 2.25 a 2.29), Wood Elf Wardancer (2.35, qui a
-servi a caler la methode), Nations of Mankind lots 1 et 2 (2.37).
+FAITS : High Elf Player s Guide (CONTEXT.md 2.25 a 2.29), Wood Elf Wardancer (2.35), Nations of Mankind lots 1 a 3d-2 (2.37, reste le 3d-3), Dwarf Player s Guide, Sylvania (objets et bateaux seulement).
 
-ORDRE PROPOSE POUR LA SUITE :
-  1. Nations of Mankind, LOT 3 - domaines de magie, eligibilite par espece, creatures,
-     Provinces/Regiments/Knightly Orders. Le livre est deja ouvert, c est le moins cher.
-  2. Les quatre Companions de l Enemy Within - 108 sorts et 4 carrieres qui manquent a des
-     livres DEJA declares en base (XML de 6 a 8 Ko). Meilleur rapport travail/resultat.
-  3. Parravonese/Strigany/Signaller (8 Ko) - 1 carriere + 2 ethnies + 2 tables de tirage de
-     100 lignes. Le premier a exercer DATA_SPECIE et DATA_CAREER_ROLL. Son tableau d avance
-     est VIDE dans l export TXT, le lire sur le PDF.
-  4. Dwarf Player s Guide (officiel, aucune espece a creer), puis Deft Steps Light Fingers
-     (officiel, 9 carrieres et 5 especes), puis Unofficial Grimoire (~215 sorts).
+SUITE POSSIBLE (ordre a confirmer avec CONTEXT.md 2.36) : Nations lot 3d-3 ; les Companions de l Enemy Within qui manquent (sorts et carrieres) ; Parravonese/Strigany/Signaller (1 carriere, 2 ethnies, 2 tables de tirage ; tableau d avance VIDE dans l export TXT, lire le PDF) ; Deft Steps Light Fingers ; Unofficial Grimoire (~215 sorts).
 
 REGLES DE METHODE QUI RESTENT VRAIES, tirees de l inventaire du 29/08 et de sa correction :
   * La taille d un fichier ne coute rien tant qu on ne le lit pas. Inventaire, recherche
@@ -1082,12 +841,6 @@ ARBITRAGES OUVERTS
 =========================================================================
 CHANTIERS DE FOND, PAS ENCORE OUVERTS
 =========================================================================
-1. [SUPPRIME LE 05/09/2026 - FAIT. Le prefixage des <Quality> est termine, les deux fonctions
-   GetAll*BonusLibelle sont reecrites. L affirmation "aucune collision aujourd hui, les 55 codes
-   sont declares chacun par un seul livre" etait FAUSSE des le 04/09 : cinq codes etaient
-   declares par deux livres. Ce qui reste tient dans l entree "PREFIXES DE LIVRE : IL RESTE LES
-   ETAPES 3 ET 4" plus haut.]
-
 2. LA REFERENCE PENDANTE RULES-PROJ_LANC.
 
 
