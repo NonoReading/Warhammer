@@ -5579,3 +5579,9 @@ Cause : le talent de carriere RULES-T0161/NATIO-T0015_* (choix Slayer ou Mark of
 Fichiers modifies : winpersonnage.pas, Log.txt.
 
 20/09/2026 - TALENTS A CHOIX SUR PLUSIEURS LIGNES ET TALENT DE CARRIERE "A/B" COMPTE DANS L AVANCEMENT - VALIDES PAR NONO (NORSCAN MERCENARY, MARK OF THE EAGLE). Ligne "bug a verifier" retiree de A FAIRE.txt. Reste : memes choix "A / B" sur plusieurs lignes pour la table des competences (winpersonnage.pas ~5128), non fait.
+
+20/09/2026 - TABLE AUGMENTATION DES COMPETENCES : CHOIX "A / B / C" SUR PLUSIEURS LIGNES (COMME LES TALENTS) - NON COMPILE, NON TESTE
+winpersonnage.pas (ChargeAugmentation) : LineEnding apres chaque " / " ; les RowHeights sont reposees APRES SortColRow (le tri deplace les textes mais pas les hauteurs) d'apres le nombre de lignes de chaque libelle. L'alignement a gauche de la colonne 3 des cellules multilignes existe deja (TabDrawCell). A tester : personnage dont la carriere propose une competence a choix (ex. Play (Drum or Fife)), onglet Skill de l'augmentation ; les lignes suivantes ne doivent pas etre decalees apres le tri.
+Fichiers modifies : winpersonnage.pas, Log.txt.
+
+20/09/2026 - COMPETENCES A CHOIX SUR PLUSIEURS LIGNES (TABLE AUGMENTATION) VALIDEES PAR NONO. Ligne correspondante retiree de A FAIRE.txt.

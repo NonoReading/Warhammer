@@ -5155,8 +5155,9 @@ Procedure TWinPersonnages.ChargeAugmentation();
                 ListBranche := ListeMetierCompetence(PersonnageCompetence.CodeCompetence);
                 for IndBranche := 0 to ListBranche.Count - 1 do
                   begin
+                    // Un choix par ligne, comme les talents (hauteurs reposees apres le tri).
                     if LibBranche <> '' then
-                      LibBranche := LibBranche + ' ' + SeparateurMulti + ' ';
+                      LibBranche := LibBranche + ' ' + SeparateurMulti + LineEnding;
                     LibBranche := LibBranche + ChercheCompetence(ListBranche[IndBranche]).Libelle;
                   end;
                 ListBranche.Free;
@@ -5227,6 +5228,18 @@ Procedure TWinPersonnages.ChargeAugmentation();
           end;
       end;
     TabAugmentationCompetence.SortColRow(true, ColAugmComptri);
+    // Le tri deplace les textes mais pas les hauteurs de ligne : on les repose d'apres le
+    // nombre de lignes de chaque libelle (choix "A / B / C" ecrits un par ligne).
+    for Ind := 1 to TabAugmentationCompetence.RowCount - 1 do
+      begin
+        NbC := Length(TabAugmentationCompetence.Cells[ColAugmCompLib, Ind])
+               - Length(StringReplace(TabAugmentationCompetence.Cells[ColAugmCompLib, Ind], LineEnding, '', [rfReplaceAll]));
+        NbC := (NbC div Length(LineEnding)) + 1;
+        if NbC > 1 then
+          TabAugmentationCompetence.RowHeights[Ind] := NbC * 18
+        else
+          TabAugmentationCompetence.RowHeights[Ind] := TabAugmentationCompetence.DefaultRowHeight;
+      end;
 
     // Compétence Ajout nouvelle
     AugmentationAjouteXpMj(ConstXmlCompetence);
