@@ -5815,3 +5815,7 @@ Fichiers modifies : BOOK_PARRAVONESE_STRIGANY_SIGNALLER.Xml, INI.TXT, A FAIRE.tx
 20/09/2026 - WINMETIER : UN OBJET DIVERS AVEC (Q) S AFFICHAIT EN CODE BRUT - COMPILE ET VALIDE PAR NONO
 winmetier.pas, branche TypeEquipDI d un objet seul : le suffixe (Q) n etait pas retire avant ChercheTrapping (les branches arme et armure le faisaient), donc "RULES-TRAP_017 (Q)" ne se retrouvait pas au catalogue et s affichait brut (vu sur Artisan niveau 4 et Signaller niveau 4). Corrige : (Q) retire, suffixe "de qualite" ajoute au libelle. Les branches choix et ensemble du meme code retirent deja le (Q) mais n ajoutent pas le suffixe pour un objet divers, laisse tel quel.
 Fichiers modifies : winmetier.pas, Log.txt.
+
+20/09/2026 - IMAGE DU SIGNALLER : TRANSPARENCE REFAITE A LA MAIN (PARRA-WORK001_TRANS.PNG)
+La fonction RemplacerPixelParTransparent efface tout ce qui ressemble au pixel du coin haut gauche : sur un croquis au crayon sur papier clair, elle mangeait aussi les blancs de l interieur du personnage. Le fichier _TRANS n etant refabrique que s il n existe pas, il a ete remplace a la main : remplissage depuis les bords de l image, les traits du crayon (epaissis) servant de barriere, donc seul le papier relie a l exterieur devient transparent, l interieur garde les pixels de l original (verifie). Reglages propres a cette image : la planche du bas (lignes y=405 et y=425, bande claire entre les deux) est verrouillee, les lignes y>=431 sont transparentes. Fonction et code Pascal inchanges.
+Fichiers modifies : PICTURES/CLASS/PARRA-WORK001_TRANS.PNG, Log.txt.
