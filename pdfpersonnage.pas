@@ -946,6 +946,8 @@ Procedure PdfPersonnageCreation(Personnage: StructurePersonnage; BackGround: Boo
     PRegle:               StructureCareerBonusSpecialRule;
     PMutationTalent:      StructurePersonnageTalent;
     PArmureBonusTalent:   StructurePersonnageTalent;
+    PdfPageBlanc:         TPDFPage;
+    PageSauvee:           TPDFPage;
 
   begin
     PdfChemin        := GetCurrentDir+ConstCheminPersonnage+Personnage.NomPersonnage+'\'+Personnage.NomPersonnage+'.PDF';
@@ -1375,7 +1377,8 @@ Procedure PdfPersonnageCreation(Personnage: StructurePersonnage; BackGround: Boo
         if (pos(PCompetence.CodeCompetence, ListPris) = 0) then
           begin
             CompetenceDonnee := PdfPersonnageCompetence(Personnage, PCompetence.CodeCompetence, Bidon);
-            if CompetenceDonnee.Augmentation <> 0 then
+            // gabarit imposé par les auteurs du jeu : 18 lignes, les suivantes ne sont pas écrites
+            if (CompetenceDonnee.Augmentation <> 0) and (NbLigne < 18) then
             begin
               ValBonus := IntToStr(CompetenceDonnee.Augmentation);
               if (StrToIntDef(ValBonus,0) >= 0) and (StrToIntDef(ValBonus,0) < 10) then
@@ -1404,7 +1407,7 @@ Procedure PdfPersonnageCreation(Personnage: StructurePersonnage; BackGround: Boo
       begin
         PTalent := ListTalent[IndC];
         TalentDonnee := PdfPersonnageTalent(Personnage, PTalent.CodeTalent, Bidon);
-        if TalentDonnee.Total <> 0 then
+        if (TalentDonnee.Total <> 0) and (NbLigne < 20) then
         begin
           inc(NbLigne);
           PdfTaillePolice(PdfPage, PdfFontValue, ConstPoliceArial, 7);
@@ -1442,6 +1445,7 @@ Procedure PdfPersonnageCreation(Personnage: StructurePersonnage; BackGround: Boo
         begin
           PRegle := ListeRegle[IndC];
           inc(NbLigne);
+          if NbLigne > 20 then Break;
           PdfTaillePolice(PdfPage, PdfFontValue, ConstPoliceArial, 7);
           PdfEcrit(PdfPage, 16, 49, 92-(NbLigne*3.5), PRegle.Libelle,MinPolice);
           PdfTaillePolice(PdfPage, PdfFontValue, ConstPoliceArial, 9);
@@ -1464,6 +1468,7 @@ Procedure PdfPersonnageCreation(Personnage: StructurePersonnage; BackGround: Boo
       begin
         PTalent := ChercheTalent(PMutationTalent.CodeTalent);
         inc(NbLigne);
+        if NbLigne > 20 then Break;
         PdfTaillePolice(PdfPage, PdfFontValue, ConstPoliceArial, 7);
         PdfEcrit(PdfPage, 16, 49, 92-(NbLigne*3.5), PTalent.Libelle,MinPolice);
         PdfTaillePolice(PdfPage, PdfFontValue, ConstPoliceArial, 9);
@@ -1485,6 +1490,7 @@ Procedure PdfPersonnageCreation(Personnage: StructurePersonnage; BackGround: Boo
       begin
         PTalent := ChercheTalent(PArmureBonusTalent.CodeTalent);
         inc(NbLigne);
+        if NbLigne > 20 then Break;
         PdfTaillePolice(PdfPage, PdfFontValue, ConstPoliceArial, 7);
         PdfEcrit(PdfPage, 16, 49, 92-(NbLigne*3.5), PTalent.Libelle,MinPolice);
         PdfTaillePolice(PdfPage, PdfFontValue, ConstPoliceArial, 9);
@@ -1688,10 +1694,24 @@ Procedure PdfPersonnageCreation(Personnage: StructurePersonnage; BackGround: Boo
     Quality     := '';
     // Inclut les armes accordees par une mutation (ex. Fleshy Tentacle -> Tentacles),
     // calculees a la volee - CONTEXT.md, chantier "traits de creature".
+    // Gabarit imposé par les auteurs du jeu : capacité des cadres Armes (7), Armure (5), Équipement
+    // (21) et Sorts (7). Au-delà, l'objet est traité normalement (encombrement, points d'armure)
+    // mais dessiné sur une page jetable, jamais ajoutée à la section, donc non écrite.
+    PdfPageBlanc := PDFDoc.Pages.AddPage;
+    PdfPageBlanc.PaperType := ptA4;
+    PdfPageBlanc.UnitOfMeasure := uomMillimeters;
+    PdfTaillePolice(PdfPageBlanc, PdfFontBack, ConstPoliceCarlson+ConstPoliceGras, 10);
     for PersonnageEquipement in (Personnage.Equipement + PersonnageMutationEquipement(Personnage)) do
       begin
         Enc := 0;
         EncP:= 0;
+        PageSauvee := PdfPage;
+        if ((PersonnageEquipement.TypeEquipement = TypeEquipWe) and (NbArme >= 7)) or
+           ((((ArmureSet = false) and (PersonnageEquipement.TypeEquipement = TypeEquipAR)) or
+             ((ArmureSet = true)  and (PersonnageEquipement.TypeEquipement = TypeEquipARS))) and (NbArmure >= 5)) or
+           (((PersonnageEquipement.TypeEquipement = TypeEquipDI) or (PersonnageEquipement.TypeEquipement = TypeEquipAN)) and (IndDivers >= 21)) or
+           ((PersonnageEquipement.TypeEquipement = TypeEquipSp) and (NbSort >= 7)) then
+          PdfPage := PdfPageBlanc;
         if PersonnageEquipement.TypeEquipement = TypeEquipWe then
           // gérer les armes
             begin
@@ -1977,6 +1997,7 @@ Procedure PdfPersonnageCreation(Personnage: StructurePersonnage; BackGround: Boo
               PdfCentre(PdfPage,101   ,117  ,71.5-(NbSort*5), PdfPersonnageRemplaceBonus(Personnage, PSort.Duree));
               PdfTaillePolice(PdfPage, PdfFontValue, ConstPoliceArial, 9);
             end;
+        PdfPage := PageSauvee;
       end;
 
     // Effets de mutation sur les Points d'Armure (CORPHY_012/016/017, CONTEXT.md §2.7,
