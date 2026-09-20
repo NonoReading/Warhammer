@@ -5767,3 +5767,7 @@ Fichiers modifies : BOOK_DWARF_PLAYERS_GUIDE.Xml, Log.txt.
 20/09/2026 - ARTILLERIE DE SEA OF CLAWS (P.100) : 6 PIECES ET 7 MUNITIONS - PAS ENCORE TESTE PAR NONO
 BOOK_SEA_OF_CLAWS.Xml : nouvelle section DATA_WEAPON. Ballista, Cannon small/medium/large, Mortar, Swivel Gun (SEAOF-PROJ_ARB_01, PROJ_POUDRE_01 a _05) avec les chiffres du livre, qui different d Up in Arms (ex. Ballista portee 100, Medium Cannon portee 75). Munitions SEAOF-MUNI_01 a _07 (Ballista Bolt, Ball and Powder, Grapeshot, Mortar Bomb, Incendiary, Swivel Bullets, Small Shot). Crewed et Spread pointent vers UPINA-WEAPB35 et UPINA-WEAPB33 : Up in Arms doit etre actif. Prix du livre "4/-" = 4PA, "6/6" = 6PA 6SB. Le Grund A Dum ne porte aucun rattachement en donnee (commentaire XML mis a jour avec les ids) ; les "Norse Dwarf Bolts" ne sont pas definis par le livre, SEAOF-MUNI_01 par defaut. A verifier en jeu : Incendiary (degats "-", 1+SL Ablaze non modelise).
 Fichiers modifies : BOOK_SEA_OF_CLAWS.Xml, Log.txt.
+
+20/09/2026 - REGLES DE CONDUITE, DE VOL ET D EQUIPAGE : HORS PROGRAMME (DECISION DE NONO)
+Ce sont des regles de MJ (tests de Handling, Crew Tests, coups et critiques du navire), pas de joueur : WinPersonnage ne les modelise pas. Retirees de A FAIRE.txt (lignes Sylvania, runes de machines, equipements mis de cote) et fermees dans CONTEXT.md. Reste possible sur demande : afficher l effectif Crewed d une arme sur la fiche.
+Fichiers modifies : A FAIRE.txt, CONTEXT.md, Log.txt.

@@ -10908,7 +10908,7 @@ pointer `carriedby` vers un identifiant de groupe.
 - **Extension aux bateaux et véhicules (20/09/2026, compilée et VALIDÉE par Nono)** : `TrappingEstPorteur` (`chargetrapping.pas`, profil animal, bateau ou véhicule) remplace le test `ProfilAnimal` dans `LigneEstAnimal` (menu « Confier à… », id `A<N>`, surcharge), au chargement (`chargepersonnage.pas`) et dans `PdfLienAnimal`. Un bateau garde le type Divers (seul l'animal est `TypeEquipAN`). `PdfBlocMontures` dessine aussi navires (7 colonnes) et véhicules (4) dans le même encart.
 - **Thèmes (20/09/2026, validé)** : `RULES-LAB_195` scindé en `RULES-LAB_260` montures et animaux, `_261` bateaux, `_262` véhicules (91 fiches) ; `EstThemeAnimauxVehicules` (`winequipement.pas`). `_195` reste le titre de la fenêtre.
 - **Armes de guerre (20/09/2026, à tester par Nono)** : défauts `UPINA-WEAPB35` Crewed et `_36` Salvo, 12 armes d'Up in Arms p.122 ; 7 armes de Lustria p.178 (`LUSTR-WEAPB01` à `_03`, Crewed/Salvo pointent vers Up in Arms, `+1d10` en texte) ; 11 armes de siège naines p.99 (`DWARF-WEAPB02` Crewed, `_03` Spread). Sans mécanique d'équipage.
-- **Point de reprise** : chantier clos, sauf les armes de Sea of Claws (Ballista et 8 Medium Cannon du Grund A Dum, `SEAOF-TRAP_027`) et les règles de vol et de conduite. Suites dans `A FAIRE.txt`.
+- **Point de reprise** : chantier clos. Armes de Sea of Claws faites (20/09/2026). **Décision de Nono (20/09/2026)** : les règles de conduite, de vol et d équipage des véhicules et navires (tests de Handling, Crew Tests, coups et critiques du navire) sont des règles de MJ, hors périmètre de WinPersonnage : ne pas les rouvrir. Seul l effectif Crewed d une arme pourrait s afficher sur la fiche, si Nono le demande. Suites dans `A FAIRE.txt`.
 
 ---
 
