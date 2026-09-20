@@ -4,7 +4,7 @@
 
 =========================================================================
 CORRECTIONS COURTES  (une ligne ou deux chacune)
-[AJOUT LE 20/09/2026] SYLVANIA (SYLVA) : armes, auberge, sundries et 3 bateaux FAITS (non testes). A VERIFIER : Catechist Stake (portee, degats). RESTE : bateaux a reprendre avec le chantier vehicules (Crewed, champs Robustesse/Blessures/Equipage) ; PNJ et tables d evenements non modelises.
+[AJOUT LE 20/09/2026] SYLVANIA (SYLVA) : armes, auberge, sundries et 3 bateaux FAITS et VALIDES par Nono (20/09/2026). RESTE : bateaux a reprendre avec le chantier vehicules (Crewed, champs Robustesse/Blessures/Equipage) ; PNJ et tables d evenements non modelises.
 [DECISION NONO 20/09/2026] Gabarit PDF normal = fichier des auteurs du jeu : aucune donnee ajoutee (pas de fiche monture ni de parentheses). Rien a faire de ce cote.
 [AJOUT LE 20/09/2026] RUNES DE MACHINES (Accuracy, Penetrating, Reloading, Seeking...) : classees Misc, sans effet ; a reprendre avec le chantier VEHICULES (qualite Crewed), comme les bateaux de Sylvania, de Lustria et du Dwarf Player's Guide.
 [AJOUT LE 20/09/2026] FABRICATIONS : pas d asterisque pour les degats (Cleaving) ni la competence (Striking) d une arme, seule l initiative en a une ; a voir si utile.
