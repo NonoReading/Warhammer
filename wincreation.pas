@@ -2297,6 +2297,7 @@ var
   PRaceCompetence:    StructureRaceCompetence;
   PMetierAttribut:    StructureMetierAttribut;
   PMetierCompetence:  StructureMetierCompetence;
+  CodeCompAdapt:      String;
   PMetierEquipement:  StructureMetierEquipement;
   PArme:              StructureArme;
   PArmure:            StructureArmure;
@@ -2389,10 +2390,15 @@ begin
     for PMetierCompetence in ListMetierCompetence do
       if CompareRechercheValeur(PMetierCompetence.CodeMetier, MetierEnCours) and (PMetierCompetence.NiveauMetier = 1) then
         Begin
+             // Adapting Careers : competence de niveau 1 remplacee (ou retiree) pour l'ethnie.
+             CodeCompAdapt := AdapterElement(MetierEnCours, RaceEnCours, '', 1,
+                                                   ConstXmlCompetence, PMetierCompetence.CodeCompetence);
+             if CodeCompAdapt = '' then
+               continue;
              NbMetierCompetenceTab        := NbMetierCompetenceTab + 1;
              TabMetierCompetence.RowCount := NbMetierCompetenceTab + 1;
-             TabMetierCompetence.Cells[1,NbMetierCompetenceTab] := PMetierCompetence.CodeCompetence;
-             PCompetence                  := ChercheCompetence(PMetierCompetence.CodeCompetence);
+             TabMetierCompetence.Cells[1,NbMetierCompetenceTab] := CodeCompAdapt;
+             PCompetence                  := ChercheCompetence(CodeCompAdapt);
              TabMetierCompetence.Cells[3,NbMetierCompetenceTab] := PCompetence.Libelle;
 
              if (Pos(ValeurGenerique, PCompetence.CodeCompetence) > 0) or (pos(SeparateurMulti, PCompetence.CodeCompetence) > 0) then
@@ -2401,7 +2407,7 @@ begin
                  TabMetierCompetence.Cells[6,NbMetierCompetenceTab] := PCompetence.CodeCompetence;
                end;
 
-             PRaceCompetence              := ChercheRaceCompetence(RaceEnCours,PMetierCompetence.CodeCompetence);
+             PRaceCompetence              := ChercheRaceCompetence(RaceEnCours,CodeCompAdapt);
              if PRaceCompetence.CodeCompetence <> '' then
                 TabMetierCompetence.Cells[2,NbMetierCompetenceTab] := IntToStr(PMetierCompetence.NiveauMetier);
          end;

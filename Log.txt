@@ -5880,3 +5880,7 @@ Fichiers modifies : BOOK_HIGH_ELF_PLAYERS_GUIDE.Xml, chargeconstantes.pas, charg
 20/09/2026 - HIGH ELF PLAYER S GUIDE : ADAPTING CAREERS, STANDING +1 - VALIDE PAR NONO SUR WARDEN YVRESSE
 Nouvelle fonction StatutAdapte (chargemetier.pas) : decale le statut (TIERS_BRASS/SILVER/GOLD n) du Standing de l adaptation, bascule au palier superieur au-dela de 5. Appelee dans les deux gabarits PDF de pdfpersonnage.pas. Verifie : Warden Yvresse, Silver 2 (niveau 1), Silver 4 (niveau 2), Gold 2 (niveau 3). Non touches : winmetier.pas et pdfmetier.pas (pas d ethnie), voir le point Affichage.
 Fichiers modifies : chargemetier.pas, pdfpersonnage.pas, CONTEXT.md, A FAIRE.txt, Log.txt.
+
+20/09/2026 - HIGH ELF PLAYER S GUIDE : ADAPTING CAREERS, AFFICHAGE (COLONNE DE NIVEAU, CREATION, WINMETIER) - VALIDE PAR NONO
+Colonne de niveau des talents : le code de carriere passe par AdapterElement avant comparaison (Artisan Caledor : Etiquette Noble niveau 2). Tableau des competences de niveau 1 de la creation adapte (wincreation.pas ; aucun cas de donnees a ce jour, verifie sur Caledor Cavalryman). WinMetier : une branche par adaptation applicable avec le detail des substitutions, libelles d armes/armures/objets resolus (ChargeAdaptationMetier). Decision Nono : carriere de base + note, pas de selecteur d ethnie. Reste : PDF de carriere.
+Fichiers modifies : winpersonnage.pas, wincreation.pas, winmetier.pas, CONTEXT.md, A FAIRE.txt, Log.txt.

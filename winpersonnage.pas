@@ -3929,7 +3929,10 @@ procedure TWinPersonnages.NiveauMetierTalentMax();
             // Les cinq premiers caracteres sont le radical. On redecoupe les deux codes ici au
             // lieu de relire CodeValeur / CodeRecherche, les globales laissees par l'appel de
             // gauche : meme resultat, mais sans dependre de cet etat partage. CONTEXT.md 2.49.
-            if TalentCarriereCorrespond(PMetierTalent.CodeTalent, TabTalent.Cells[ColTalCode, ARow]) then
+            // Adapting Careers : le talent substitue remplace le code brut de la carriere (20/09/2026).
+            if TalentCarriereCorrespond(AdapterElement(MetierEnCours, Personnage.Race, '', PMetierTalent.NiveauMetier,
+                                        ConstXmlTalent, PMetierTalent.CodeTalent),
+                                        TabTalent.Cells[ColTalCode, ARow]) then
               begin
                 TabTalent.Cells[2, Arow] := IntToStr(PMetierTalent.NiveauMetier);
                 Break;

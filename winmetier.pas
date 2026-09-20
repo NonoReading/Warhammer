@@ -73,6 +73,7 @@ type
     Procedure WinCharger();
     Function MetierFiltre(PMEtier: StructureMetier):Boolean;
     procedure ChargeRaceMetier();
+    procedure ChargeAdaptationMetier();
     procedure ChargeMetierAttribut(Niveau: Integer; NodeBase: TTreeNode);
     procedure ChargeMetierNiveau();
     procedure ChargeMetierCompetence(Niveau: Integer; NodeBase: TTreeNode);
@@ -646,6 +647,54 @@ Begin
         end;
 end;
 
+// Adapting Careers : une branche par adaptation applicable a la carriere, avec le detail de
+// chaque substitution (le tableau reste celui de la carriere de base, l'ethnie n'est pas connue
+// ici). 20/09/2026.
+procedure TWinMetiers.ChargeAdaptationMetier();
+  function LibelleElement(Nature, Code: String): String;
+    begin
+      if Code = '' then
+        Exit('-');
+      if Nature = ConstXmlTalent then
+        Result := ChercheTalent(Code).Libelle
+      else if Nature = ConstXmlTrapping then
+        begin
+          // Un trapping de carriere peut etre une arme, une munition, une armure ou un objet.
+          Result := ChercheArme(Code).Libelle;
+          if Result = '' then
+            Result := ChercheArmure(Code).Libelle;
+          if Result = '' then
+            Result := ChercheTrapping(Code).Libelle;
+        end
+      else
+        Result := ChercheCompetence(Code).Libelle;
+      if Result = '' then
+        Result := Code;
+    end;
+Var
+  PAdapt:  StructureCareerAdaptation;
+  PLigne:  StructureCareerAdaptationLigne;
+  NodeAd:  TTreeNode;
+  Titre:   String;
+Begin
+  for PAdapt in ListCareerAdaptation do
+    if CompareRechercheValeur(PAdapt.CodeMetier, MetierEnCours) then
+      begin
+        Titre := PAdapt.Libelle;
+        if PAdapt.Facultative then
+          Titre := Titre + ' *';
+        NodeAd            := TreeViewMetier1.Items.AddChild(Node, Titre);
+        NodeAd.ImageIndex := 0;
+        if PAdapt.Standing <> 0 then
+          TreeViewMetier1.Items.AddChild(NodeAd, 'Standing +' + IntToStr(PAdapt.Standing)).ImageIndex := 0;
+        for PLigne in ListCareerAdaptationLigne do
+          if PLigne.CodeAdaptation = PAdapt.CodeAdaptation then
+            TreeViewMetier1.Items.AddChild(NodeAd, IntToStr(PLigne.Niveau) + '. '
+              + LibelleElement(PLigne.Nature, PLigne.Retire) + ' -> '
+              + LibelleElement(PLigne.Nature, PLigne.Ajoute)).ImageIndex := 0;
+      end;
+End;
+
 // Niveau 2 : charger les attributs
 procedure TWinMetiers.ChargeMetierAttribut(Niveau: Integer; NodeBase: TTreeNode);
 var
@@ -1025,6 +1074,7 @@ procedure TWinMetiers.TabMetierSelection(Sender: TObject; aCol, aRow: Integer);
 
       // charger les éléments
       ChargeRaceMetier();
+      ChargeAdaptationMetier();
       ChargeMetierNiveau();
       TreeViewMetier1.FullExpand;
 
