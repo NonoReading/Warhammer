@@ -6036,8 +6036,7 @@ automatique contre le XML avec les libellés résolus à travers tous les livres
 les 4 qualités et les 9 miracles sont complets. Seize écarts de carrière corrigés (dont trois
 **interversions de talents entre niveaux voisins**, que seul le diff automatique pouvait voir), trois
 `Spear` rendues à la `Lance`, et l'armure de plates rendue uniforme sur les quatre carrières
-concernées. Décision de Nono : **l'artillerie du chapitre XI n'est pas saisie** — un personnage ne se
-déplace pas avec une pièce de siège ; conséquence assumée, `Crewed` et `Salvo` restent non déclarées.
+concernées. Décision de Nono (révisée le 20/09/2026, une fois les véhicules saisis) : **l'artillerie du chapitre XI est saisie**, 12 armes p.122 (`UPINA-PROJ_ARB_01`, `_POUDRE_16` à `_20`, `_CATAPULT_01` à `_03`, `_ING_08` à `_10`) avec les défauts `Crewed` (`UPINA-WEAPB35`) et `Salvo` (`UPINA-WEAPB36`), sans mécanique d'équipage.
 
 🐛 **Bug signalé, non corrigé, à confirmer par Nono.** Le suffixe de qualité `(Q)` s'écrit de deux
 façons dans `DATABASE` : **40** items le collent au code (`RULES-ARMO_14(Q)`), **42** mettent un

@@ -3403,6 +3403,150 @@ Ifthe Character passes the Test, the crew members may then use the Characters Ra
 <Hand>"0"</Hand>
 <Ammunition>"1"</Ammunition>
 </Weapon>
+<Weapon id="UPINA-PROJ_ARB_01">
+<Description language="ENGLISH">"Ballista"</Description>
+<Skill>"RULES-COMPPROJ_ARB"</Skill>
+<Damage>"+12"</Damage>
+<Availability>"RULES-DISPO_LIMITED"</Availability>
+<Reach>"150"</Reach>
+<Price>"30CO"</Price>
+<Encumbrance>"20"</Encumbrance>
+<Quality>"RULES-WEAPB16,RULES-WEAPB23 3,UPINA-WEAPB35 2"</Quality>
+<Hand>"2"</Hand>
+<Ammunition>"0"</Ammunition>
+</Weapon>
+<Weapon id="UPINA-PROJ_POUDRE_16">
+<Description language="ENGLISH">"Cannon (small)"</Description>
+<Skill>"RULES-COMPPROJ_POUDRE"</Skill>
+<Damage>"+10"</Damage>
+<Availability>"RULES-DISPO_LIMITED"</Availability>
+<Reach>"100"</Reach>
+<Price>"40CO"</Price>
+<Encumbrance>"30"</Encumbrance>
+<Quality>"RULES-WEAPB24,RULES-WEAPB23 4,UPINA-WEAPB35 2"</Quality>
+<Hand>"2"</Hand>
+<Ammunition>"0"</Ammunition>
+</Weapon>
+<Weapon id="UPINA-PROJ_POUDRE_17">
+<Description language="ENGLISH">"Cannon (medium)"</Description>
+<Skill>"RULES-COMPPROJ_POUDRE"</Skill>
+<Damage>"+14"</Damage>
+<Availability>"RULES-DISPO_EXOTIC"</Availability>
+<Reach>"125"</Reach>
+<Price>"100CO"</Price>
+<Encumbrance>"50"</Encumbrance>
+<Quality>"RULES-WEAPB24,RULES-WEAPB23 6,UPINA-WEAPB35 3"</Quality>
+<Hand>"2"</Hand>
+<Ammunition>"0"</Ammunition>
+</Weapon>
+<Weapon id="UPINA-PROJ_POUDRE_18">
+<Description language="ENGLISH">"Cannon (large)"</Description>
+<Skill>"RULES-COMPPROJ_POUDRE"</Skill>
+<Damage>"+16"</Damage>
+<Availability>"RULES-DISPO_EXOTIC"</Availability>
+<Reach>"175"</Reach>
+<Price>"250CO"</Price>
+<Encumbrance>"75"</Encumbrance>
+<Quality>"RULES-WEAPB24,RULES-WEAPB23 8,UPINA-WEAPB35 4"</Quality>
+<Hand>"2"</Hand>
+<Ammunition>"0"</Ammunition>
+</Weapon>
+<Weapon id="UPINA-PROJ_POUDRE_19">
+<Description language="ENGLISH">"Mortar"</Description>
+<Skill>"RULES-COMPPROJ_POUDRE"</Skill>
+<Damage>"-"</Damage>
+<Availability>"RULES-DISPO_EXOTIC"</Availability>
+<Reach>"150"</Reach>
+<Price>"50CO"</Price>
+<Encumbrance>"50"</Encumbrance>
+<Quality>"RULES-WEAPB23 4,UPINA-WEAPB35 3"</Quality>
+<Hand>"2"</Hand>
+<Ammunition>"0"</Ammunition>
+</Weapon>
+<Weapon id="UPINA-PROJ_POUDRE_20">
+<Description language="ENGLISH">"Swivel Gun"</Description>
+<Skill>"RULES-COMPPROJ_POUDRE"</Skill>
+<Damage>"+14"</Damage>
+<Availability>"RULES-DISPO_RARE"</Availability>
+<Reach>"30"</Reach>
+<Price>"20CO"</Price>
+<Encumbrance>"5"</Encumbrance>
+<Quality>"RULES-WEAPB24,RULES-WEAPB23 4"</Quality>
+<Hand>"2"</Hand>
+<Ammunition>"0"</Ammunition>
+</Weapon>
+<Weapon id="UPINA-PROJ_CATAPULT_01">
+<Description language="ENGLISH">"Catapult (small)"</Description>
+<Skill>"RULES-COMPPROJ_CATAPULT"</Skill>
+<Damage>"+10"</Damage>
+<Availability>"RULES-DISPO_LIMITED"</Availability>
+<Reach>"75"</Reach>
+<Price>"20CO"</Price>
+<Encumbrance>"25"</Encumbrance>
+<Quality>"RULES-WEAPB26,RULES-WEAPB23 3,UPINA-WEAPB35 2"</Quality>
+<Hand>"2"</Hand>
+<Ammunition>"0"</Ammunition>
+</Weapon>
+<Weapon id="UPINA-PROJ_CATAPULT_02">
+<Description language="ENGLISH">"Catapult (medium)"</Description>
+<Skill>"RULES-COMPPROJ_CATAPULT"</Skill>
+<Damage>"+15"</Damage>
+<Availability>"RULES-DISPO_LIMITED"</Availability>
+<Reach>"100"</Reach>
+<Price>"40CO"</Price>
+<Encumbrance>"40"</Encumbrance>
+<Quality>"RULES-WEAPB26,RULES-WEAPB23 3,UPINA-WEAPB35 3"</Quality>
+<Hand>"2"</Hand>
+<Ammunition>"0"</Ammunition>
+</Weapon>
+<Weapon id="UPINA-PROJ_CATAPULT_03">
+<Description language="ENGLISH">"Catapult (large)"</Description>
+<Skill>"RULES-COMPPROJ_CATAPULT"</Skill>
+<Damage>"+18"</Damage>
+<Availability>"RULES-DISPO_LIMITED"</Availability>
+<Reach>"175"</Reach>
+<Price>"60CO"</Price>
+<Encumbrance>"65"</Encumbrance>
+<Quality>"RULES-WEAPB26,RULES-WEAPB23 4,UPINA-WEAPB35 4"</Quality>
+<Hand>"2"</Hand>
+<Ammunition>"0"</Ammunition>
+</Weapon>
+<Weapon id="UPINA-PROJ_ING_08">
+<Description language="ENGLISH">"Volley Gun"</Description>
+<Skill>"RULES-COMPPROJ_ING"</Skill>
+<Damage>"+9"</Damage>
+<Availability>"RULES-DISPO_EXOTIC"</Availability>
+<Reach>"50"</Reach>
+<Price>"10CO"</Price>
+<Encumbrance>"5"</Encumbrance>
+<Quality>"RULES-WEAPB24,RULES-WEAPB23 4,UPINA-WEAPB36 7"</Quality>
+<Hand>"2"</Hand>
+<Ammunition>"0"</Ammunition>
+</Weapon>
+<Weapon id="UPINA-PROJ_ING_09">
+<Description language="ENGLISH">"Helblaster Volley Gun"</Description>
+<Skill>"RULES-COMPPROJ_ING"</Skill>
+<Damage>"+10"</Damage>
+<Availability>"RULES-DISPO_EXOTIC"</Availability>
+<Reach>"100"</Reach>
+<Price>"500CO"</Price>
+<Encumbrance>"85"</Encumbrance>
+<Quality>"RULES-WEAPB24,RULES-WEAPB23 4,UPINA-WEAPB36 9"</Quality>
+<Hand>"2"</Hand>
+<Ammunition>"0"</Ammunition>
+</Weapon>
+<Weapon id="UPINA-PROJ_ING_10">
+<Description language="ENGLISH">"Helstorm Rocket Battery"</Description>
+<Skill>"RULES-COMPPROJ_ING"</Skill>
+<Damage>"+12"</Damage>
+<Availability>"RULES-DISPO_EXOTIC"</Availability>
+<Reach>"185"</Reach>
+<Price>"500CO"</Price>
+<Encumbrance>"75"</Encumbrance>
+<Quality>"RULES-WEAPB15 5,RULES-WEAPB24,RULES-WEAPB26,RULES-WEAPB23 6,UPINA-WEAPB36 9"</Quality>
+<Hand>"2"</Hand>
+<Ammunition>"0"</Ammunition>
+</Weapon>
 </DATA_WEAPON>
 <DATA_WEAPON_BONUS>
 <BonusMalus id="UPINA-WEAPB31">
@@ -3439,6 +3583,28 @@ After hitting your opponent, you may spend 2 Advantage and make an opposed Stren
 If you win, your opponent gains the Prone Condition (if they are mounted, they suffer a 2-yard fall and then gain the Prone Condition).
 If you lose, nothing happens other than standard effects for losing an Opposed Test in combat."</Explanation>
 <Short language="ENGLISH">"May stend 2 ADV to Str/Ath Test to add Prone"</Short>
+<Modifier>"+"</Modifier>
+</BonusMalus>
+<BonusMalus id="UPINA-WEAPB35">
+<Description language="ENGLISH">"Crewed"</Description>
+<Explanation language="ENGLISH">"A weapon with the Crewed Flaw is so large, heavy and complex that it benefits from being managed by a team rather than a single operator.
+The whole team needs the relevant Ranged skill, but they may nominate one of their number to make the Ranged Test. Most weapons have a crew of 2, 3 or 4 (the Rating). Extra crew members do not improve the weapon. If a weapon with the Crewed Flaw suffers a misfire, all members of the crew are affected.
+A weapon that is not fully crewed is impaired:
+Crew 3 : Crewed 4 doubles the Reload time.
+Crew 2 : Crewed 3 doubles the Reload time, Crewed 4 gains the Imprecise Flaw.
+Crew 1 : Crewed 2 doubles the Reload time, Crewed 3 gains the Imprecise Flaw, Crewed 4 gains the Imprecise and Dangerous Flaws.
+Penalties from reduced crew are cumulative. If the weapon gains a Flaw it already has, impose a further -10 penalty to Ranged Tests made to shoot it.
+When reloading, one of the crew may assist with any Test made to determine how long the reload takes."</Explanation>
+<Short language="ENGLISH">"needs a crew of (Rating), impaired if short-handed"</Short>
+<Modifier>"-"</Modifier>
+</BonusMalus>
+<BonusMalus id="UPINA-WEAPB36">
+<Description language="ENGLISH">"Salvo"</Description>
+<Explanation language="ENGLISH">"A weapon with the Salvo Quality has the potential to let off missiles either one at a time or in batches. The number of times the weapon can be fired is indicated by the Salvo number. Each time the weapon is fired reduce the Salvo number by 1. The weapon does not need to be reloaded until it reaches Salvo 0.
+A Salvo weapon can be fired more than once in a turn, but each time the weapon is fired after the first firing, impose a cumulative penalty of -10 to the Ranged Skill used to shoot with the weapon.
+Reloading a weapon with the Salvo Quality is a laborious process : the Reload number does not fully reload the weapon, but it increases the Salvo number by 1 each time it is achieved.
+If the weapon misfires at any point in the process, work out the effect of the misfire and then roll on the Salvo Artillery Misfire Table."</Explanation>
+<Short language="ENGLISH">"fire several missiles per Reload"</Short>
 <Modifier>"+"</Modifier>
 </BonusMalus>
 <BonusMalus id="UPINA-WEAPB37">
