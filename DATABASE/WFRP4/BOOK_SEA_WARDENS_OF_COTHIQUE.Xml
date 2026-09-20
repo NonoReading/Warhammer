@@ -5,8 +5,8 @@
 <language>"ENGLISH"</language>
 <VERSION>"WFRP4"</VERSION>
 <OFFICIAL>"1"</OFFICIAL>
-<COMPLETE>"0"</COMPLETE>
-<!-- Sea Wardens of Cothique (guide de cadre de campagne). COMPLETE=0 : sont saisis les chariots de la table Carts, Wagons, and Chariots (p.76), les Rending Stars (p.75) et 6 betes (pp.47, 81-84). Cart et wagons doublent le Enemy in Shadows Companion (ENEMY-TRAP_13 a _21) et ne sont pas repris. Non saisis : le reste du livre. -->
+<COMPLETE>"1"</COMPLETE>
+<!-- Sea Wardens of Cothique (guide de cadre de campagne). COMPLETE=1 (20/09/2026, decision Nono) : tout ce qui se saisit est saisi (chariots p.76, Skycutter/Tidecutter, betes, armes et objets magiques, ameliorations de bateau, objets du Shadowblade). Cart et wagons doublent le Enemy in Shadows Companion (ENEMY-TRAP_13 a _21) et ne sont pas repris. Non saisis : PNJ, intrigues, Gifts of Khaine et regles de conduite (regles de MJ). -->
 <DATA_LABEL>
 <Label language="ENGLISH">
 <Text name="COTHI-BOOK SEA WARDENS OF COTHIQUE">"Sea Wardens of Cothique"</Text>

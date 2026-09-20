@@ -5851,3 +5851,7 @@ Fichiers modifies : BOOK_SEA_WARDENS_OF_COTHIQUE.Xml, CONTEXT.md, A FAIRE.txt, L
 20/09/2026 - SEA WARDENS OF COTHIQUE : OBJETS DU SHADOWBLADE - VALIDE PAR NONO
 COTHI-TRAP_19 Potion of Diabolic Strength (Herbs and Draughts), _20 Dark Venom (Drugs and Poisons), _21 Heart of Woe (Curiosities, Unique) : p.75, sans prix ni encombrement (absents du livre, Enc 0), effets non modeles, en commentaire XML. Fioles de Black Lotus Blade Venom non reprises (Black Lotus au Rulebook). Le livre COTHI ne contient plus rien a saisir hors regles de MJ (Gifts of Khaine, conduite des vehicules) et PNJ.
 Fichiers modifies : BOOK_SEA_WARDENS_OF_COTHIQUE.Xml, CONTEXT.md, A FAIRE.txt, Log.txt.
+
+20/09/2026 - SEA WARDENS OF COTHIQUE : COMPLETE PASSE A 1
+Decision Nono : plus rien a saisir hors PNJ, intrigues, Gifts of Khaine et regles de conduite (regles de MJ). Commentaire d en-tete du XML mis a jour.
+Fichiers modifies : BOOK_SEA_WARDENS_OF_COTHIQUE.Xml, CONTEXT.md, Log.txt.
