@@ -17,6 +17,7 @@ Type
     ProfilAnimal:       String;   // 12 valeurs M WS BS S T I Ag Dex Int WP Fel W separees par des espaces (montures, animaux)
     TraitsAnimal:       String;   // traits separes par des virgules, tels qu'imprimes dans le livre (aussi ceux d'un bateau)
     ProfilBateau:       String;   // 7 valeurs Crew;M voile;M rames;Man;Size;T;W separees par des points-virgules (bateaux)
+    ProfilVehicule:     String;   // 4 valeurs Motive Power;T;W;Strike separees par des points-virgules (chars, chariots, vehicules terrestres)
     Disponibilite:      String;
     Theme:              String;
     Acheteur:           String;

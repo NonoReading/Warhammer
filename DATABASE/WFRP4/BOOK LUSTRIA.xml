@@ -417,6 +417,16 @@
 <Encumbrance>"1"</Encumbrance>
 <Buyer>"RULES-LAB_210"</Buyer>
 </Trapping>
+<!-- Hawkship (p.89). Enc 0, disponibilite absente. -->
+<Trapping id="LUSTR-TRAP_08">
+<Description language="ENGLISH">"Hawkship"</Description>
+<Theme>"RULES-LAB_195"</Theme>
+<Price>"300CO"</Price>
+<Encumbrance>"0"</Encumbrance>
+<Carries>"150"</Carries>
+<BoatProfile>"18;9 (5);-;+2 SL;20;45;120"</BoatProfile>
+<AnimalTraits>"Shallow Draught, Smoothing, Sturdy 2"</AnimalTraits>
+</Trapping>
 </DATA_TRAPPING>
 <DATA_CAREER>
 <Career id="LUSTR-WORK123">

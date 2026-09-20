@@ -824,6 +824,8 @@ Procedure XmlExportBook(Livre: String; Langue: String);
                 XmlContent.Add(XmlLigne(ConstXmlTraitsAnimal, PTrapping.TraitsAnimal));
               if PTrapping.ProfilBateau <> '' then
                 XmlContent.Add(XmlLigne(ConstXmlProfilBateau, PTrapping.ProfilBateau));
+              if PTrapping.ProfilVehicule <> '' then
+                XmlContent.Add(XmlLigne(ConstXmlProfilVehicule, PTrapping.ProfilVehicule));
               if PTrapping.Theme <> '' then
                 XmlContent.Add(XmlLigne(ConstXmlTheme, PTrapping.Theme));
               if PTrapping.Acheteur <> '' then
@@ -2525,6 +2527,7 @@ Procedure XmlImport(FileName: String; OnlyPrimary: Boolean; OnlyCode: Boolean; C
                       PTrapping.ProfilAnimal  := '';
                       PTrapping.TraitsAnimal  := '';
                       PTrapping.ProfilBateau  := '';
+                      PTrapping.ProfilVehicule := '';
                       PTrapping.Theme         := '';
                       PTrapping.Acheteur      := '';
                       PTrapping.Localite      := '';
@@ -2553,6 +2556,8 @@ Procedure XmlImport(FileName: String; OnlyPrimary: Boolean; OnlyCode: Boolean; C
                               PTrapping.TraitsAnimal  := RemoveQuotes(UTF8Encode(Node.TextContent));
                             ConstXmlProfilBateau:
                               PTrapping.ProfilBateau  := RemoveQuotes(UTF8Encode(Node.TextContent));
+                            ConstXmlProfilVehicule:
+                              PTrapping.ProfilVehicule := RemoveQuotes(UTF8Encode(Node.TextContent));
                             ConstXmlPrix:
                               PTrapping.Prix          := RemoveQuotes(UTF8Encode(Node.TextContent));
                               ConstXmlTheme:

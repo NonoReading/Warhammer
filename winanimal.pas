@@ -20,6 +20,8 @@ const
     ('M', 'WS', 'BS', 'S', 'T', 'I', 'Ag', 'Dex', 'Int', 'WP', 'Fel', 'W');
   ColonnesBateau: array[0..6] of String =
     ('Crew', 'M (Sail)', 'M (Oar)', 'Man', 'Size', 'T', 'W');
+  ColonnesVehicule: array[0..3] of String =
+    ('Motive Power', 'T', 'W', 'Strike');
 
 function NouvelleEtiquette(Fiche: TForm; Texte: String): TLabel;
 begin
@@ -57,17 +59,22 @@ begin
     Traits := nil;
     Infos  := nil;
 
-    if (PTrapping.ProfilAnimal <> '') or (PTrapping.ProfilBateau <> '') then
+    if (PTrapping.ProfilAnimal <> '') or (PTrapping.ProfilBateau <> '') or (PTrapping.ProfilVehicule <> '') then
       begin
         if PTrapping.ProfilAnimal <> '' then
           begin
             Valeurs := PTrapping.ProfilAnimal.Split([' ']);
             NbCol   := 12;
           end
-        else
+        else if PTrapping.ProfilBateau <> '' then
           begin
             Valeurs := PTrapping.ProfilBateau.Split([';']);
             NbCol   := 7;
+          end
+        else
+          begin
+            Valeurs := PTrapping.ProfilVehicule.Split([';']);
+            NbCol   := 4;
           end;
         Grille  := TStringGrid.Create(Fiche);
         Grille.Parent      := Fiche;
@@ -86,8 +93,10 @@ begin
           begin
             if NbCol = 12 then
               Grille.Cells[Ind, 0] := ColonnesProfil[Ind]
+            else if NbCol = 7 then
+              Grille.Cells[Ind, 0] := ColonnesBateau[Ind]
             else
-              Grille.Cells[Ind, 0] := ColonnesBateau[Ind];
+              Grille.Cells[Ind, 0] := ColonnesVehicule[Ind];
             if Ind <= High(Valeurs) then
               Grille.Cells[Ind, 1] := Valeurs[Ind];
           end;

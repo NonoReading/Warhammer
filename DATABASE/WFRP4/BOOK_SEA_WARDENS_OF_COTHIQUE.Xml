@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<DATA_BOOK>
+<CODE_BOOK>"COTHI"</CODE_BOOK>
+<BOOK>"BOOK SEA WARDENS OF COTHIQUE"</BOOK>
+<language>"ENGLISH"</language>
+<VERSION>"WFRP4"</VERSION>
+<OFFICIAL>"1"</OFFICIAL>
+<COMPLETE>"0"</COMPLETE>
+<!-- Sea Wardens of Cothique (guide de cadre de campagne). COMPLETE=0 : seuls les chariots de la table Carts, Wagons, and Chariots (p.76) sont saisis. Cart et wagons doublent le Enemy in Shadows Companion (ENEMY-TRAP_13 a _21) et ne sont pas repris. Non saisis : le reste du livre. -->
+<DATA_LABEL>
+<Label language="ENGLISH">
+<Text name="COTHI-BOOK SEA WARDENS OF COTHIQUE">"Sea Wardens of Cothique"</Text>
+</Label>
+<Label language="FRANCAIS">
+<Text name="COTHI-BOOK SEA WARDENS OF COTHIQUE">"Sea Wardens of Cothique"</Text>
+</Label>
+</DATA_LABEL>
+<!-- Chariots (p.76). Motive Power : A = animaux. Strike = degats de l impact (M = Move). Enc du vehicule dans Encumbrance, Carries dans Carries. -->
+<DATA_TRAPPING>
+<Trapping id="COTHI-TRAP_01">
+<Description language="ENGLISH">"Light Chariot"</Description>
+<Theme>"RULES-LAB_195"</Theme>
+<Availability>"RULES-DISPO_EXOTIC"</Availability>
+<Price>"80CO"</Price>
+<Encumbrance>"10"</Encumbrance>
+<Carries>"16"</Carries>
+<VehicleProfile>"2 A;35;10;M/2"</VehicleProfile>
+</Trapping>
+<Trapping id="COTHI-TRAP_02">
+<Description language="ENGLISH">"Medium Chariot"</Description>
+<Theme>"RULES-LAB_195"</Theme>
+<Availability>"RULES-DISPO_EXOTIC"</Availability>
+<Price>"110CO"</Price>
+<Encumbrance>"20"</Encumbrance>
+<Carries>"24"</Carries>
+<VehicleProfile>"2-4 A;50;20;M"</VehicleProfile>
+</Trapping>
+<Trapping id="COTHI-TRAP_03">
+<Description language="ENGLISH">"Tiranoc Chariot"</Description>
+<Theme>"RULES-LAB_195"</Theme>
+<Availability>"RULES-DISPO_EXOTIC"</Availability>
+<Price>"440CO"</Price>
+<Encumbrance>"15"</Encumbrance>
+<Carries>"24"</Carries>
+<VehicleProfile>"2 A;50;20;M+1"</VehicleProfile>
+</Trapping>
+<Trapping id="COTHI-TRAP_04">
+<Description language="ENGLISH">"White Lion Chariot"</Description>
+<Theme>"RULES-LAB_195"</Theme>
+<Availability>"RULES-DISPO_EXOTIC"</Availability>
+<Price>"440CO"</Price>
+<Encumbrance>"25"</Encumbrance>
+<Carries>"24"</Carries>
+<VehicleProfile>"2 A;50;20;M+1"</VehicleProfile>
+</Trapping>
+<Trapping id="COTHI-TRAP_05">
+<Description language="ENGLISH">"Heavy Chariot"</Description>
+<Theme>"RULES-LAB_195"</Theme>
+<Availability>"RULES-DISPO_EXOTIC"</Availability>
+<Price>"150CO"</Price>
+<Encumbrance>"50"</Encumbrance>
+<Carries>"32"</Carries>
+<VehicleProfile>"4 A;50;30;M"</VehicleProfile>
+</Trapping>
+</DATA_TRAPPING>
+</DATA_BOOK>

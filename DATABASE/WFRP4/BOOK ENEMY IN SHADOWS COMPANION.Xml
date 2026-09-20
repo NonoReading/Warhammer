@@ -289,6 +289,88 @@ However, their differing visions of the Empire’s fate ensure that for all thei
 <AnimalTraits>"Size (Large), Skittish, Stride, Trained (Broken, Mount, War), Weapon +8"</AnimalTraits>
 <Availability>"RULES-DISPO_LIMITED"</Availability>
 </Trapping>
+<!-- Vehicles of the Empire (p.27). Motive Power : A = animaux, O = operateurs (chaise et litieres portees). Le livre ne donne pas de Strike. Le prix d un coach n a pas de plafond (note 4). -->
+<Trapping id="ENEMY-TRAP_13">
+<Description language="ENGLISH">"Cart"</Description>
+<Theme>"RULES-LAB_195"</Theme>
+<Availability>"RULES-DISPO_COMMON"</Availability>
+<Price>"20CO"</Price>
+<Encumbrance>"10"</Encumbrance>
+<Carries>"25"</Carries>
+<VehicleProfile>"1 A;25;10;-"</VehicleProfile>
+</Trapping>
+<Trapping id="ENEMY-TRAP_14">
+<Description language="ENGLISH">"Chair"</Description>
+<Theme>"RULES-LAB_195"</Theme>
+<Availability>"RULES-DISPO_RARE"</Availability>
+<Price>"25CO"</Price>
+<Encumbrance>"5"</Encumbrance>
+<Carries>"10"</Carries>
+<VehicleProfile>"2 O;20;8;-"</VehicleProfile>
+</Trapping>
+<Trapping id="ENEMY-TRAP_15">
+<Description language="ENGLISH">"Coach"</Description>
+<Theme>"RULES-LAB_195"</Theme>
+<Availability>"RULES-DISPO_RARE"</Availability>
+<Price>"150CO"</Price>
+<Encumbrance>"100"</Encumbrance>
+<Carries>"80"</Carries>
+<VehicleProfile>"2-4 A;45;50;-"</VehicleProfile>
+</Trapping>
+<Trapping id="ENEMY-TRAP_16">
+<Description language="ENGLISH">"Handcart"</Description>
+<Theme>"RULES-LAB_195"</Theme>
+<Availability>"RULES-DISPO_COMMON"</Availability>
+<Price>"10CO"</Price>
+<Encumbrance>"5"</Encumbrance>
+<Carries>"50"</Carries>
+<VehicleProfile>"1-2 O;20;8;-"</VehicleProfile>
+</Trapping>
+<Trapping id="ENEMY-TRAP_17">
+<Description language="ENGLISH">"Small Litter"</Description>
+<Theme>"RULES-LAB_195"</Theme>
+<Availability>"RULES-DISPO_COMMON"</Availability>
+<Price>"30CO"</Price>
+<Encumbrance>"10"</Encumbrance>
+<Carries>"10"</Carries>
+<VehicleProfile>"2 O;30;20;-"</VehicleProfile>
+</Trapping>
+<Trapping id="ENEMY-TRAP_18">
+<Description language="ENGLISH">"Large Litter"</Description>
+<Theme>"RULES-LAB_195"</Theme>
+<Availability>"RULES-DISPO_EXOTIC"</Availability>
+<Price>"45CO"</Price>
+<Encumbrance>"20"</Encumbrance>
+<Carries>"20"</Carries>
+<VehicleProfile>"2-4 O;35;35;-"</VehicleProfile>
+</Trapping>
+<Trapping id="ENEMY-TRAP_19">
+<Description language="ENGLISH">"Light Wagon"</Description>
+<Theme>"RULES-LAB_195"</Theme>
+<Availability>"RULES-DISPO_COMMON"</Availability>
+<Price>"75CO"</Price>
+<Encumbrance>"30"</Encumbrance>
+<Carries>"30"</Carries>
+<VehicleProfile>"2-4 A;50;35;-"</VehicleProfile>
+</Trapping>
+<Trapping id="ENEMY-TRAP_20">
+<Description language="ENGLISH">"Medium Wagon"</Description>
+<Theme>"RULES-LAB_195"</Theme>
+<Availability>"RULES-DISPO_COMMON"</Availability>
+<Price>"100CO"</Price>
+<Encumbrance>"50"</Encumbrance>
+<Carries>"60"</Carries>
+<VehicleProfile>"2-6 A;50;60;-"</VehicleProfile>
+</Trapping>
+<Trapping id="ENEMY-TRAP_21">
+<Description language="ENGLISH">"Heavy Wagon"</Description>
+<Theme>"RULES-LAB_195"</Theme>
+<Availability>"RULES-DISPO_COMMON"</Availability>
+<Price>"125CO"</Price>
+<Encumbrance>"75"</Encumbrance>
+<Carries>"100"</Carries>
+<VehicleProfile>"2-8 A;50;95;-"</VehicleProfile>
+</Trapping>
 </DATA_TRAPPING>
 <DATA_SPECIE_CAREER_DIRECT>
   <!-- Ces métiers étaient déclarés en 'X' dans les <Specie> de BOOK_RULESBOOK.Xml,

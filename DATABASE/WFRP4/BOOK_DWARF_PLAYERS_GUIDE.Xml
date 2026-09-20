@@ -4866,6 +4866,142 @@ When you gain the Stunned Condition, you can spend a Fortune point to make an im
 <Price>"1000CO"</Price>
 <Encumbrance>"20"</Encumbrance>
 </Trapping>
+<!-- Watercraft (p.112). Move de la table dans la colonne M voile, suivi de (vapeur) quand la propulsion est une machine a vapeur ; Crew minimal inconnu. Vehicle Enc -> Encumbrance, Carry Capacity -> Carries, Length -> Size. -->
+<!-- Sail et rames, Move 4 ; Move 6 avec au moins 8 rameurs (grubark). -->
+<Trapping id="DWARF-TRAP_10">
+<Description language="ENGLISH">"Longship"</Description>
+<Theme>"RULES-LAB_195"</Theme>
+<Availability>"RULES-DISPO_RARE"</Availability>
+<Price>"250CO"</Price>
+<Encumbrance>"150"</Encumbrance>
+<Carries>"100"</Carries>
+<BoatProfile>"32;4 (-);6 (8);-;25;50;60"</BoatProfile>
+</Trapping>
+<!-- Machine a vapeur, Move 3. Non arme, non blinde. -->
+<Trapping id="DWARF-TRAP_11">
+<Description language="ENGLISH">"Steam Barge"</Description>
+<Theme>"RULES-LAB_195"</Theme>
+<Availability>"RULES-DISPO_RARE"</Availability>
+<Price>"500CO"</Price>
+<Encumbrance>"200"</Encumbrance>
+<Carries>"600"</Carries>
+<BoatProfile>"4;3 (vapeur);-;-;30;55;90"</BoatProfile>
+</Trapping>
+<!-- Machine a vapeur, Move 4. Belier 5 PA, reste 2 PA. -->
+<Trapping id="DWARF-TRAP_12">
+<Description language="ENGLISH">"Gunboat"</Description>
+<Theme>"RULES-LAB_195"</Theme>
+<Availability>"RULES-DISPO_RARE"</Availability>
+<Price>"750CO"</Price>
+<Encumbrance>"200"</Encumbrance>
+<Carries>"80"</Carries>
+<BoatProfile>"8;4 (vapeur);-;-;25;60;120"</BoatProfile>
+<AnimalTraits>"Ram, Armoured 2"</AnimalTraits>
+</Trapping>
+<!-- Machine a vapeur, Move 6. 2 PA (comme Gunboat), belier, tourelle. -->
+<Trapping id="DWARF-TRAP_13">
+<Description language="ENGLISH">"Monitor"</Description>
+<Theme>"RULES-LAB_195"</Theme>
+<Availability>"RULES-DISPO_EXOTIC"</Availability>
+<Price>"1000CO"</Price>
+<Encumbrance>"350"</Encumbrance>
+<Carries>"150"</Carries>
+<BoatProfile>"20;6 (vapeur);-;-;35;65;150"</BoatProfile>
+<AnimalTraits>"Ram, Armoured 2"</AnimalTraits>
+</Trapping>
+<!-- Machine a vapeur, Move 6. 2 PA partout. -->
+<Trapping id="DWARF-TRAP_14">
+<Description language="ENGLISH">"Ironclad"</Description>
+<Theme>"RULES-LAB_195"</Theme>
+<Availability>"RULES-DISPO_EXOTIC"</Availability>
+<Price>"2000CO"</Price>
+<Encumbrance>"600"</Encumbrance>
+<Carries>"500"</Carries>
+<BoatProfile>"75;6 (vapeur);-;-;50;70;200"</BoatProfile>
+<AnimalTraits>"Armoured 2"</AnimalTraits>
+</Trapping>
+<!-- Machine a vapeur, Move 6. 2 PA partout. -->
+<Trapping id="DWARF-TRAP_15">
+<Description language="ENGLISH">"Dreadnought"</Description>
+<Theme>"RULES-LAB_195"</Theme>
+<Availability>"RULES-DISPO_EXOTIC"</Availability>
+<Price>"5000CO"</Price>
+<Encumbrance>"1000"</Encumbrance>
+<Carries>"1500"</Carries>
+<BoatProfile>"120;6 (vapeur);-;-;70;80;300"</BoatProfile>
+<AnimalTraits>"Armoured 2"</AnimalTraits>
+</Trapping>
+<!-- Machine a vapeur, Move 4. Submersible : plonge a 30 yards pendant 1 heure, Test d Endurance/Toughness toutes les 10 min au-dela. -->
+<Trapping id="DWARF-TRAP_16">
+<Description language="ENGLISH">"Nautilus Submersible"</Description>
+<Theme>"RULES-LAB_195"</Theme>
+<Availability>"RULES-DISPO_EXOTIC"</Availability>
+<Price>"2500CO"</Price>
+<Encumbrance>"450"</Encumbrance>
+<Carries>"150"</Carries>
+<BoatProfile>"20;4 (vapeur);-;-;40;60;120"</BoatProfile>
+</Trapping>
+<!-- Skycraft (p.112). Meme convention que les navires : Move dans la colonne M voile, propulsion entre parentheses. Vehicle Enc -> Encumbrance, Carry Capacity -> Carries, Length -> Size. Disponibilite Exotic. -->
+<!-- Machine a vapeur, Move 20. -->
+<Trapping id="DWARF-TRAP_17">
+<Description language="ENGLISH">"Gyrocopter"</Description>
+<Theme>"RULES-LAB_195"</Theme>
+<Availability>"RULES-DISPO_EXOTIC"</Availability>
+<Price>"250CO"</Price>
+<Encumbrance>"40"</Encumbrance>
+<Carries>"10"</Carries>
+<BoatProfile>"1;20 (vapeur);-;-;5;40;10"</BoatProfile>
+</Trapping>
+<!-- Machine a vapeur, Move 15. -->
+<Trapping id="DWARF-TRAP_18">
+<Description language="ENGLISH">"Gyrobomber"</Description>
+<Theme>"RULES-LAB_195"</Theme>
+<Availability>"RULES-DISPO_EXOTIC"</Availability>
+<Price>"350CO"</Price>
+<Encumbrance>"60"</Encumbrance>
+<Carries>"20"</Carries>
+<BoatProfile>"1;15 (vapeur);-;-;8;45;10"</BoatProfile>
+</Trapping>
+<!-- Machine a vapeur et vent, Move 4. -->
+<Trapping id="DWARF-TRAP_19">
+<Description language="ENGLISH">"War Balloon"</Description>
+<Theme>"RULES-LAB_195"</Theme>
+<Availability>"RULES-DISPO_EXOTIC"</Availability>
+<Price>"800CO"</Price>
+<Encumbrance>"100"</Encumbrance>
+<Carries>"60"</Carries>
+<BoatProfile>"2;4 (vapeur, vent);-;-;15;45;15"</BoatProfile>
+</Trapping>
+<!-- Machine a vapeur et vent, Move 6. -->
+<Trapping id="DWARF-TRAP_20">
+<Description language="ENGLISH">"Airship (Small)"</Description>
+<Theme>"RULES-LAB_195"</Theme>
+<Availability>"RULES-DISPO_EXOTIC"</Availability>
+<Price>"1000CO"</Price>
+<Encumbrance>"120"</Encumbrance>
+<Carries>"60"</Carries>
+<BoatProfile>"2;6 (vapeur, vent);-;-;15;35;15"</BoatProfile>
+</Trapping>
+<!-- Machine a vapeur et vent, Move 6. -->
+<Trapping id="DWARF-TRAP_21">
+<Description language="ENGLISH">"Airship (Medium)"</Description>
+<Theme>"RULES-LAB_195"</Theme>
+<Availability>"RULES-DISPO_EXOTIC"</Availability>
+<Price>"2000CO"</Price>
+<Encumbrance>"180"</Encumbrance>
+<Carries>"120"</Carries>
+<BoatProfile>"3;6 (vapeur, vent);-;-;30;40;20"</BoatProfile>
+</Trapping>
+<!-- Machine a vapeur et vent, Move 6. -->
+<Trapping id="DWARF-TRAP_22">
+<Description language="ENGLISH">"Airship (Large)"</Description>
+<Theme>"RULES-LAB_195"</Theme>
+<Availability>"RULES-DISPO_EXOTIC"</Availability>
+<Price>"5000CO"</Price>
+<Encumbrance>"250"</Encumbrance>
+<Carries>"180"</Carries>
+<BoatProfile>"10;6 (vapeur, vent);-;-;45;50;30"</BoatProfile>
+</Trapping>
 </DATA_TRAPPING>
 <DATA_CRAFTMANSHIP>
   <!-- Runes de la forge naine (p.127-132), saisies comme QUALITES de fabrication (decision Nono 19/09/2026) : posees sur l objet du personnage par +Qualite, sans automatisation. Max 3 = regle de trois ; Max 1 = runes maitresses et runes de Doom. La categorie (arme, armure, talisman, protection, ingenierie) et les SL requis sont dans le libelle court. -->

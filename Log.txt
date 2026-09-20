@@ -5702,3 +5702,23 @@ Fichiers modifies : chargetrapping.pas, chargeconstantes.pas, xmlexportimport.pa
 20/09/2026 - MENU : LIGNE "ANIMALS AND VEHICLES" SEPAREE DE L EQUIPEMENT - COMPILE ET VALIDE PAR NONO
 warhammersource.pas : TabBibliotheque passe a 6 categories (Weapon, Armor, Equipment, Animals and Vehicles, Spell, Mutations), decompte par theme RULES-LAB_195, ouverture au double-clic. winequipement.pas : ModeEquipements (meTout, meHorsVehicules, meVehicules), lu a la creation, filtre lignes et themes. Le bouton +Equipment de WinPersonnage garde meTout.
 Fichiers modifies : warhammersource.pas, winequipement.pas, Log.txt, CONTEXT.md.
+
+20/09/2026 - BATEAUX DU SEA OF CLAWS (18) ET HAWKSHIP DE LUSTRIA : FICHES SAISIES - PAS ENCORE TESTE PAR NONO
+SEAOF-TRAP_009 a _026 (Coracle a Cathayan Gem Ship, tableau p.93) et LUSTR-TRAP_08 (Hawkship, p.89) : Theme RULES-LAB_195, Price, Carries, BoatProfile, traits en AnimalTraits. Enc 0, pas de disponibilite. Coracle, Rowboat, Barge doublent des objets du Rulebook (choix : chaque livre porte ses infos). Grund A Dum (navire nomme) non saisi.
+Fichiers modifies : BOOK_SEA_OF_CLAWS.Xml, BOOK LUSTRIA.xml, Log.txt.
+
+20/09/2026 - NAVIRES NAINS DU DWARF PLAYERS GUIDE (7) : FICHES SAISIES - PAS ENCORE TESTE PAR NONO
+DWARF-TRAP_10 a _16 (Longship, Steam Barge, Gunboat, Monitor, Ironclad, Dreadnought, Nautilus, table p.112) : BoatProfile sans nouveau champ. Le Move va dans la colonne M voile suivi de (vapeur) pour les machines a vapeur (Crew minimal et Man absents du livre). Vehicle Enc en Encumbrance, Carry Capacity en Carries, Length en Size, disponibilite Rare/Exotic. Engins volants (Skycraft) non saisis.
+Fichiers modifies : BOOK_DWARF_PLAYERS_GUIDE.Xml, Log.txt.
+
+20/09/2026 - VEHICULES TERRESTRES : CHAMP <VEHICLEPROFILE> ET 9 VEHICULES DE L EMPIRE - A COMPILER PAR NONO
+chargetrapping.pas : champ ProfilVehicule (Motive Power;T;W;Strike). chargeconstantes.pas : ConstXmlProfilVehicule. xmlexportimport.pas : lecture, remise a zero, ecriture. winanimal.pas : grille a 4 colonnes. winequipement.pas et winpersonnage.pas : bouton Fiche et double-clic. BOOK ENEMY IN SHADOWS COMPANION.Xml : ENEMY-TRAP_13 a _21 (Cart, Chair, Coach, Handcart, litieres, chariots, p.27), Strike absent du livre. Chariots de Cothique non saisis (livre non integre).
+Fichiers modifies : chargetrapping.pas, chargeconstantes.pas, xmlexportimport.pas, winanimal.pas, winequipement.pas, winpersonnage.pas, BOOK ENEMY IN SHADOWS COMPANION.Xml, Log.txt.
+
+20/09/2026 - ENGINS VOLANTS NAINS (6) : FICHES SAISIES - PAS ENCORE TESTE PAR NONO
+DWARF-TRAP_17 a _22 (Gyrocopter, Gyrobomber, War Balloon, Airship petit/moyen/grand, Skycraft p.112) : BoatProfile, meme convention que les navires (Move dans M voile, propulsion entre parentheses), Exotic.
+Fichiers modifies : BOOK_DWARF_PLAYERS_GUIDE.Xml, Log.txt.
+
+20/09/2026 - LIVRE SEA WARDENS OF COTHIQUE : 5 CHARIOTS - PAS ENCORE TESTE PAR NONO
+DATABASE/WFRP4/BOOK_SEA_WARDENS_OF_COTHIQUE.Xml (code COTHI, COMPLETE=0), ajoute a BOOKWFRP4 de INI.TXT. COTHI-TRAP_01 a _05 : Light, Medium, Tiranoc, White Lion et Heavy Chariot (p.76), VehicleProfile avec Strike. Cart et wagons non repris (doublons de ENEMY-TRAP_13 a _21). Reste du livre non saisi.
+Fichiers modifies : BOOK_SEA_WARDENS_OF_COTHIQUE.Xml, INI.TXT, Log.txt.
