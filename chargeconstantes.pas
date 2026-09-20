@@ -772,6 +772,7 @@ Var
   TypeEquipMetierArme:      String;
   TypeEquipWe:              String;
   TypeEquipDI:              String;
+  TypeEquipAN:              String;
   TypeEquipAR:              String;
   TypeEquipARS:             String;
   TypeEquipSp:              String;

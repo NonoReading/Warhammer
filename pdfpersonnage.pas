@@ -1949,7 +1949,7 @@ Procedure PdfPersonnageCreation(Personnage: StructurePersonnage; BackGround: Boo
               PdfTaillePolice(PdfPage, PdfFontValue, ConstPoliceArial, 9);
             end
 
-          else if (PersonnageEquipement.TypeEquipement = TypeEquipDI) then
+          else if (PersonnageEquipement.TypeEquipement = TypeEquipDI) or (PersonnageEquipement.TypeEquipement = TypeEquipAN) then
             // gérer les divers
             begin
               Inc(IndDivers);
@@ -3208,7 +3208,7 @@ Function PdfMontureCapacite(PersonnageEquipement: StructurePersonnageEquipement)
     PTrapping: StructureTrapping;
   begin
     Result := 0;
-    if PersonnageEquipement.TypeEquipement <> TypeEquipDI then
+    if (PersonnageEquipement.TypeEquipement <> TypeEquipDI) and (PersonnageEquipement.TypeEquipement <> TypeEquipAN) then
       exit;
     PTrapping := ChercheTrapping(PersonnageEquipement.CodeEquipement);
     if (PTrapping.CodeTrapping <> '') and (PTrapping.Theme = 'RULES-LAB_195') then
@@ -3243,7 +3243,7 @@ Procedure PdfBlocDiversDonnees(PdfPage: TPDFPage; Personnage: StructurePersonnag
     IndDivers := 0;
     EncDivers := 0;
     for PersonnageEquipement in Personnage.Equipement do
-      if PersonnageEquipement.TypeEquipement = TypeEquipDI then
+      if (PersonnageEquipement.TypeEquipement = TypeEquipDI) or (PersonnageEquipement.TypeEquipement = TypeEquipAN) then
         begin
           Inc(IndDivers);
           Enc       := PdfDiversEncombrement(PersonnageEquipement);

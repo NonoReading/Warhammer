@@ -16,7 +16,7 @@ uses
   ChargeSort, WinSpell, ChargeTexte, winFabrication, ChargeFabrication,
   WinTalent, WinCompetence, WinSpecialisation, ChargePersonnage,
   ChargeMetierCompetence, PdfPersonnage, Types, WinMutation, ChargeCorruptionTable,
-  ChargeRaceMetier, WinChoixCompetenceAppartenance;
+  ChargeRaceMetier, WinChoixCompetenceAppartenance, WinAnimal;
 type
 
   StructureXpEtat = record
@@ -293,6 +293,7 @@ type
     var Editor: TWinControl);
   procedure TabEquipementSelectCell({%H-}Sender: TObject; {%H-}aCol, aRow: Integer;
     var {%H-}CanSelect: Boolean);
+  procedure TabEquipementDblClick({%H-}Sender: TObject);
   function XpSortCout(CodeSort: String): String;
   function ValeurTarifSort(Expression: String; Defaut: Integer): Integer;
   function TalentSort(CodeSort: String): StructureTalent;
@@ -2155,6 +2156,7 @@ begin
   // Mise en forme de la table des Equipements
   TabEquipement.Options        := TabEquipement.Options + [goEditing, goAlwaysShowEditor];
   TabEquipement.OnSelectEditor := @TabEquipementSelectEditor;
+  TabEquipement.OnDblClick     := @TabEquipementDblClick;
   TabEquipement.ColCount       := 10;
   TabEquipement.RowCount       := 2;
   TabEquipement.ColWidths[0]   := 20;
@@ -4740,6 +4742,17 @@ procedure TWinPersonnages.TabEquipementSelectEditor(Sender: TObject; aCol, aRow:
       end;
     if not Editable then
       Editor := nil;
+  end;
+
+// Double-clic sur un animal ou une monture de l'inventaire : ouvre sa fiche.
+procedure TWinPersonnages.TabEquipementDblClick(Sender: TObject);
+  var
+    PTrapping: StructureTrapping;
+  begin
+    if (TabEquipement.Row < 1) or (TabEquipement.Row >= TabEquipement.RowCount) then exit;
+    PTrapping := ChercheTrapping(TabEquipement.Cells[2, TabEquipement.Row]);
+    if PTrapping.ProfilAnimal <> '' then
+      AfficheFicheAnimal(PTrapping);
   end;
 
 procedure TWinPersonnages.TabEquipementSelectCell(Sender: TObject; aCol,

@@ -10,7 +10,7 @@ uses
   Unitcalcul, ChargeRace, ChargeMetier, ChargeAttribut, ChargeCompetence,
   ChargeTalent, ChargeArme, ChargeArmure, ChargeArmureSimplifie,
   ChargeTalentCompetenceModif, ChargeArmureBonusModif,
-  ChargeSort, ChargeCorruptionTable,
+  ChargeSort, ChargeCorruptionTable, ChargeTrapping,
   ChargeCorruptionCompetenceModif, ChargeCorruptionTalent,
   ChargeCorruptionEquipement, ChargeArmureBonusTalent,
   ChargeModificateur, ChargeTalentModificateur, ChargeCareerBonusModificateur,
@@ -737,7 +737,8 @@ begin
           // Divers
           XMLContent.Add(XmlDebut(ConstXmlSousChapitreDivers));
           for PersonnageEquipement in Personnage.Equipement do
-            if TrimRight(PersonnageEquipement.TypeEquipement) = TrimRight(TypeEquipDi) then
+            if (TrimRight(PersonnageEquipement.TypeEquipement) = TrimRight(TypeEquipDi))
+               or (TrimRight(PersonnageEquipement.TypeEquipement) = TrimRight(TypeEquipAN)) then
                XMLContent.Add(XmlLigneDonnee(ConstXmlItem, PersonnageEquipement.CodeEquipement, QualiteSansMarqueur(PersonnageEquipement.QualiteEquipement),
                  XmlAttributEquipementPorte(PersonnageEquipement.Porte)
                  +XmlAttributEquipementQuantite(PersonnageEquipement.Quantite)));
@@ -1243,7 +1244,11 @@ begin
                       if (Node.NodeType = ELEMENT_NODE) then
                         begin
                           PersonnageEquipement.CodeEquipement     := RemoveQuotes(UTF8Encode(Node.Attributes.GetNamedItem(ConstXmlData).NodeValue));
-                          PersonnageEquipement.TypeEquipement     := TrimRight(TypeEquipDi);
+                          // Un animal est range dans Divers a la sauvegarde : retrouve par son profil.
+                          if ChercheTrapping(PersonnageEquipement.CodeEquipement).ProfilAnimal <> '' then
+                            PersonnageEquipement.TypeEquipement   := TrimRight(TypeEquipAN)
+                          else
+                            PersonnageEquipement.TypeEquipement   := TrimRight(TypeEquipDi);
                           PersonnageEquipement.QualiteEquipement  := RemoveQuotes(UTF8Encode(Node.TextContent));
                           PersonnageEquipement.Porte              := Assigned(Node.Attributes.GetNamedItem(ConstXmlEquipementPorte));
                           if Assigned(Node.Attributes.GetNamedItem(ConstXmlEquipementQuantite)) then

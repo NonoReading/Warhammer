@@ -230,6 +230,11 @@
         <UnitName Value="WinEquipement"/>
       </Unit>
       <Unit>
+        <Filename Value="winanimal.pas"/>
+        <IsPartOfProject Value="True"/>
+        <UnitName Value="WinAnimal"/>
+      </Unit>
+      <Unit>
         <Filename Value="chargearmebonus.pas"/>
         <IsPartOfProject Value="True"/>
         <UnitName Value="ChargeArmeBonus"/>

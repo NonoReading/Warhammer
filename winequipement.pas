@@ -75,6 +75,7 @@ begin
   Caption              := GetTexteLibelle('RULES-LAB_202');
   LabTheme.Caption     := GetTexteLibelle('RULES-LAB_201');
   ButtonFiltre.Caption := GetTexteLibelle('RULES-LAB_133');
+  ButtonFiche.Caption  := GetTexteLibelle('RULES-LAB_253');
   LabPrix.Caption      := GetTexteLibelle('RULES-LAB_054');
   LabEnc.Caption       := GetTexteLibelle('RULES-LAB_055');
   LabCap.Caption       := GetTexteLibelle('RULES-LAB_185');

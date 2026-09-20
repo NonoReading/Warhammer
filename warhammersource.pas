@@ -839,6 +839,7 @@ Procedure TMenu.RafraichirLibellesMenu();
     TypeEquipMetierArme := TypeEquipCC+','+TypeEquipCT+','+TypeEquipMU;
     TypeEquipWe         := GetTexteLibelle('RULES-LAB_063');
     TypeEquipDI         := GetTexteLibelle('RULES-LAB_064');
+    TypeEquipAN         := GetTexteLibelle('RULES-LAB_252');
     TypeEquipAR         := GetTexteLibelle('RULES-LAB_065');
     TypeEquipARS        := GetTexteLibelle('RULES-LAB_150');
 
@@ -1542,6 +1543,7 @@ procedure TMenu.FormCreate(Sender: TObject);
        TypeEquipMetierArme := TypeEquipCC+','+TypeEquipCT+','+TypeEquipMU;
        TypeEquipWe         := GetTexteLibelle('RULES-LAB_063');
        TypeEquipDI         := GetTexteLibelle('RULES-LAB_064');
+       TypeEquipAN         := GetTexteLibelle('RULES-LAB_252');
        TypeEquipAR         := GetTexteLibelle('RULES-LAB_065');
        TypeEquipARS        := GetTexteLibelle('RULES-LAB_150');
 
