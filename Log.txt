@@ -5888,3 +5888,7 @@ Fichiers modifies : winpersonnage.pas, wincreation.pas, winmetier.pas, CONTEXT.m
 20/09/2026 - HIGH ELF PLAYER S GUIDE : ADAPTING CAREERS, PDF DE CARRIERE - VALIDE PAR NONO
 pdfmetier.pas : PdfLignesAdaptation ajoute en bas du pave de droite un bloc par adaptation (titre, Standing, substitutions retire -> ajoute), talents et equipement decales vers le haut. Les codes Divers (RULES-TRAP_116, _119) sont resolus en libelle par ChercheTrapping. Gardes FileExists sur l image de metier et l image de classe. Le crash sur chemin d image a disparu de lui-meme (cause non identifiee).
 Fichiers modifies : pdfmetier.pas, CONTEXT.md, A FAIRE.txt, Log.txt.
+
+20/09/2026 - HIGH ELF PLAYER S GUIDE : LIGNE MAGE DES TABLES DE TIRAGE VERIFIEE
+La ligne Mage des onze tables de tirage est en place (HELFG-WORK132), verifiee le 20/09/2026 ; elle n est plus un trou. En-tete COMPLETE=0 du XML remis a jour : il reste Adapting Careers p.60-62 (trappings, facultatives, options Up in Arms) et la table p.59.
+Fichiers modifies : BOOK_HIGH_ELF_PLAYERS_GUIDE.Xml, A FAIRE.txt, Log.txt.
