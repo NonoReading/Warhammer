@@ -7,7 +7,7 @@ interface
 
 uses
   Classes, SysUtils, fpPDF, PdfUtils, ChargeRace, ChargeMetier, ChargeMetierNiveau,
-  ChargeRaceAttribut, ChargeTalent, ChargeCompetence, ChargeArme, ChargeArmure,
+  ChargeRaceAttribut, ChargeRacePhysique, ChargeTalent, ChargeCompetence, ChargeArme, ChargeArmure,
   ChargeArmeBonus, ChargeArmureBonus, ChargeArmureBonusModif, ChargeSort, ChargeAttribut, ChargeFabrication,
   ChargeConstantes, ChargeMetierAttribut, ChargeTexte, ChargeMetierTalent, ChargeTrapping,
   ChargePersonnage, ChargeArmureSimplifie, ChargeAttributAugmentation,
@@ -1278,6 +1278,13 @@ Procedure PdfPersonnageCreation(Personnage: StructurePersonnage; BackGround: Boo
     // sans prefixe le code brut "TIERS_BRASS 2" s'affichait tel quel (meme famille de bug que
     // CONTEXT.md 2.49). Signale par Nono sur les deux PDF.
     PdfPage.WriteText(165, 236, GetTexteLibelle('RULES-' + StatutAdapte(PMetierNiveau.SalaireMetier, PMetier.CodeMetier, Personnage.Race, Personnage.ChoixAdaptation), '', ' '));  // Salaire
+    // Details physiques (WinPhysique) : rien d'ecrit tant qu'ils n'ont pas ete definis
+    if Personnage.Age > 0 then
+      PdfPage.WriteText( 30, 231, IntToStr(Personnage.Age));                                // Age
+    if Personnage.Height > 0 then
+      PdfPage.WriteText( 78, 231, FormateTaille(Personnage.Height));                        // Taille
+    PdfPage.WriteText(118, 231, Personnage.HairColors);                                     // Cheveux
+    PdfPage.WriteText(165, 231, Personnage.EyeColors);                                      // Yeux
 
     // Caractéristiques
     for Ind := 1 to 10 do
@@ -2625,7 +2632,8 @@ Function PdfBlocEntete(PdfPage: TPDFPage; Personnage: StructurePersonnage; PRace
     // commentaire (CONTEXT.md 2.49/2.61).
     PdfEcrit(PdfPage, XValStatut,  XDroite,   Y - (HauteurLigne * 3) + 1, GetTexteLibelle('RULES-' + StatutAdapte(PMetierNiveau.SalaireMetier, PMetier.CodeMetier, Personnage.Race, Personnage.ChoixAdaptation), '', ' '), MinPolice);
     PdfEcrit(PdfPage, XVal1,       XSep1,     Y - (HauteurLigne * 4) + 1, IntToStr(Personnage.Age), MinPolice);
-    PdfEcrit(PdfPage, XValTaille,  XSep2,     Y - (HauteurLigne * 4) + 1, IntToStr(Personnage.Height), MinPolice);
+    if Personnage.Height > 0 then
+      PdfEcrit(PdfPage, XValTaille,  XSep2,     Y - (HauteurLigne * 4) + 1, FormateTaille(Personnage.Height), MinPolice);
     PdfEcrit(PdfPage, XValCheveux, XSep3 - 1, Y - (HauteurLigne * 4) + 1, Personnage.HairColors, MinPolice);
     PdfEcrit(PdfPage, XValYeux,    XDroite,   Y - (HauteurLigne * 4) + 1, Personnage.EyeColors, MinPolice);
 

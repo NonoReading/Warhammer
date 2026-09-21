@@ -1,5 +1,7 @@
 # Warhammer — Contexte projet
 
+**DETAILS PHYSIQUES PAR ETHNIE (21/09/2026, Rulebook termine, compile et valide par Nono)** : voir 2.86 plus bas et `A FAIRE.txt` (3 entrees DETAILS PHYSIQUES : autres ethnies, libelles, points ouverts).
+
 **ADAPTING CAREERS (20/09/2026, compile, substitutions imposees validees par Nono)** : voir 2.85 plus bas et `A FAIRE.txt` (section HIGH ELF, RESTE en 5 points). Standing FAIT et valide (20/09, Warden Yvresse : Silver 2 / 4 / Gold 2). AFFICHAGE FAIT, PDF de carriere compris (pdfmetier.pas : bloc d adaptation en bas du pave de droite, valide 20/09). Point de reprise : les points 3 a 5 de A FAIRE.txt.
 **AUDIT DES TXT (20/09/2026, point de reprise)** : les quatre livres a `COMPLETE=0` sont audites. Sylvania, Nations of Mankind et Dwarf Player s Guide passes a `COMPLETE=1` ; High Elf Player s Guide est passe a `COMPLETE=1` le 20/09 (decision Nono, Adapting Careers termine) ; il a recu 8 navires + Eagle Claw Bolt Thrower (a compiler et valider). Suite : auditer les livres a `COMPLETE=1` un par un ; methode : comparer chaque section du sommaire au XML et verifier par grep avant de dire qu une donnee manque (deux fausses alertes le 20/09 : montures de Nations, herbes de HELFG). Voir `A FAIRE.txt`.
 
@@ -11234,3 +11236,29 @@ ShowMessage(Msg);
 message et l'écran est normal.
 ⚠️ Vérifier que le témoin lit bien la bonne grille (déjà arrivé : lecture de
 `TabCreationChoix` au lieu de `TabCreationHasard`).
+
+
+### 2.86 Details physiques par ethnie (age, taille, yeux, cheveux) — terminé pour le Rulebook, compilé et validé par Nono (21/09/2026)
+
+**Vocabulaire du code (piège)** : `DATA_RACE` porte les ESPECES (`RULES-SPECIE_HUMAN`, `_HELF`...), `DATA_SPECIE` porte les ETHNIES (`RULES-RACE_HUM`, `_DWAR`, `_HALF`, `_HELF`, `_WELF`). Haut-Elfe et Elfe sylvain sont a la fois espece et ethnie : chacun a sa colonne de tables.
+
+**Donnees** : bloc `<SUBCHAPTER_PHYSICAL>` dans chaque `<Specie>` de `BOOK_RULESBOOK.Xml` (Rulebook p.39-40) :
+```
+<Age>"15+d10"</Age>  <Height>"57+2d10"</Height>   (taille en POUCES, 4'9" = 57)
+<HeightExplode>"1"</HeightExplode>                 (Humain seulement)
+<EyeRolls>"2"</EyeRolls>                           (Elfes : 2 tirages, defaut 1)
+<Eye name="Sapphire">"5-7"</Eye> ... <Hair name="Silver">"2"</Hair> ...   (2d10)
+```
+Formules : Humain 15+d10 / 4'9"+2d10 ; Nain 15+10d10 / 4'3"+d10 ; Elfe (les deux) 30+10d10 / 5'11"+d10 ; Halfling 15+5d10 / 3'1"+d10. Tables de couleurs en anglais brut (decision Nono, pas de code de libelle pour l instant). Fidelite au livre : deux lignes « Chestnut » aux yeux de l Elfe sylvain, « Dark brown » en minuscule aux cheveux ; Humain, jet de 2 aux yeux = « Free Choice » (texte tel quel, le joueur le remplace).
+
+**Code** :
+- `chargeracephysique.pas` (nouvelle) : `StructureRacePhysique`, `StructureRaceCouleur`, `ListRacePhysique`, `ListRaceCouleur`, `ChercheRacePhysique`, `LanceFormule(formule, explose)` (explosion = UN de de plus si un de montre son maximum, pas en chaine), `TireCouleur`, `TireDetailsPhysiques` (yeux des Elfes joints par « / »), `FormateTaille(pouces)` -> `5'9"`.
+- `xmlexportimport.pas` : lecture dans la boucle des enfants d une ethnie (branche `ConstXmlSousChapitrePhysique`, langue anglaise seulement) ET ecriture dans l export (sans elle, une regeneration des donnees perdrait le bloc). `warhammersource.pas` : creation, `Clear` et compteurs. Constantes `ConstXmlPhys*` dans `chargeconstantes.pas` ; `Age`/`Height` reutilisent `ConstXmlAge`/`ConstXmlHeight` (celles de la fiche).
+- `winphysique.pas/.lfm` : fenetre a part (age, taille en pouces + pieds/pouces, yeux, cheveux, Roll/Valider/Annuler), pilotee par les variables globales `PhysiqueCodeRace`, `PhysiqueAge`, `PhysiqueTaille`, `PhysiqueYeux`, `PhysiqueCheveux`, `PhysiqueValide`. Tire d elle-meme a l ouverture si age et taille valent 0. Pas de variable globale `WinPhysique` (conflit avec le nom de l unite).
+- `winpersonnage.pas/.lfm` : `ButtonPhysique`, place dans le calcul de mise en page « Ligne 2 » sous les 4 champs ; le resultat est recopie dans `EditAge/EditHeight/EditHairColors/EditEyeColors`, lus a la sauvegarde.
+- `wincreation.pas/.lfm` : `ButtonPhysique` + `LabPhysiqueResume` (TEdit lecture seule) sur `TabSheetNom` (phase 8) ; resultat dans `Personnage.Age/Height/HairColors/EyeColors` ; remise a zero dans `PhaseSave` phase 2 (choix de la race). Tirage NON obligatoire.
+- `pdfpersonnage.pas` : gabarit du livre = 4 valeurs ecrites a x = 30/78/118/165, y = 231 (`WriteText`, sans retrecissement) ; gabarit maison = taille via `FormateTaille`, non ecrite si 0.
+
+**Pieges** : `MiseEnFormeDesChamp` (`globalfonts.pas`) pose un `TShape` alClient sur chaque `TTabSheet` : tout controle non fenetre pose dans un onglet (TBCButton, TLabel) est cache ; `BringToFront` pour un bouton, `TEdit` lecture seule pour un texte (les `TLabel` d onglet sont en plus colories en rouge par cette boucle). Voir §4.
+
+**Reste** (A FAIRE.txt) : Gnome de Rough Nights p.89, Dwarf Player s Guide (tables par region, modificateurs -5/+5, Distinguished Features), autres livres ethniques, codes de libelle (boutons, legendes de WinPhysique, couleurs), tirage obligatoire ou non, anciennes fiches a taille en cm.

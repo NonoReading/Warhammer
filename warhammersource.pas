@@ -11,7 +11,7 @@ uses
   ChargeCompetence, ChargeConstantes, ChargeAttribut, ChargeTalent, WinTalent,
   ChargeMetier, ChargeMetierNiveau, ChargeMetierAttribut,
   ChargeMetierCompetence, ChargeMetierTalent, WinMetier, ChargeRaceMetier,
-  ChargeRace, ChargeEspece, ChargeNation, ChargeRegle, WinRaces, ChargeRaceAttribut, ChargeRaceCompetence,
+  ChargeRace, ChargeEspece, ChargeNation, ChargeRegle, WinRaces, ChargeRaceAttribut, ChargeRacePhysique, ChargeRaceCompetence,
   ChargeRaceTalent, GlobalFonts, WinCreation, ChargeTalentCreation,
   WinPersonnage, ChargeAttributAugmentation, ChargeCompetenceAugmentation,
   ChargeArme, WinWeapon, WinEquipement, ChargeArmeBonus, ChargeMetierEquipement, ChargeArmure,
@@ -1080,6 +1080,8 @@ procedure TMenu.ChargerLivre(ForceMaJ: Boolean; ForceLivre: String);
         NbMetierTalent	            := 0;
         NbRaceMetier	            := 0;
         NbRaceAttribut	            := 0;
+        NbRacePhysique              := 0;
+        NbRaceCouleur               := 0;
         NbRaceCompetence	    := 0;
         NbRaceTalent	            := 0;
         NbTalentCreation	    := 0;
@@ -1137,6 +1139,8 @@ procedure TMenu.ChargerLivre(ForceMaJ: Boolean; ForceLivre: String);
         ListMetierTalent.Clear;
         ListRaceMetier.Clear;
         ListRaceAttribut.Clear;
+        ListRacePhysique.Clear;
+        ListRaceCouleur.Clear;
         ListRaceCompetence.Clear;
         ListRaceTalent.Clear;
         ListTalentCreation.Clear;
@@ -1462,6 +1466,8 @@ procedure TMenu.FormCreate(Sender: TObject);
        ListeAttribut                := TListeAttribut.Create;
        ListRaceMetier               := TListRaceMetier.Create;
        ListRaceAttribut             := TListRaceAttribut.Create;
+       ListRacePhysique             := TListRacePhysique.Create;
+       ListRaceCouleur              := TListRaceCouleur.Create;
        ListRaceCompetence           := TListRaceCompetence.Create;
        ListRaceTalent               := TListRaceTalent.Create;
        ListTalentCreation           := TListTalentCreation.Create;

@@ -15,7 +15,7 @@ uses
   WinMetier, WinRaces, ChargeTexte, WinTalent, WinCompetence, ChargeLivre,
   ChargeMetierSousMetier, ChargeMetierRaceChoixMetier, WinSpecialisation,
   ChargeMetierTalent, ChargePersonnage, BGRABitmap, BGRABitmapTypes, BCButton,
-  BCLabel, WinLanceDe;
+  BCLabel, WinLanceDe, WinPhysique, ChargeRacePhysique;
 
 type
   { TWinCreations }
@@ -41,6 +41,8 @@ type
     EditMetierResultat: TSpinEdit;
     EditMetierSousMetierResultat: TSpinEdit;
     EditNomPersonnag: TEdit;
+    ButtonPhysique: TBCButton;
+    LabPhysiqueResume: TEdit;
     EditRaceResultat: TSpinEdit;
     GroupBoxAttribut: TGroupBox;
     GroupBoxMetier: TGroupBox;
@@ -143,6 +145,7 @@ type
 
     // Phases
     procedure ButtonPhaseSuivanteClick({%H-}Sender: TObject);
+    procedure ButtonPhysiqueClick({%H-}Sender: TObject);
     procedure ChangementPhase(Changement: Integer);
     Function PageEtapesChange(): boolean;
     Procedure PhaseSave(NouvellePhase: Integer);
@@ -442,6 +445,8 @@ procedure TWinCreations.FormCreate(Sender: TObject);
     TabSheetCompMetier.Caption                 := GetTexteLibelle('RULES-LAB_088');
     TabSheetEquipement.Caption                 := GetTexteLibelle('RULES-LAB_013');
     TabSheetNom.Caption                        := GetTexteLibelle('RULES-LAB_014');
+    // Provisoire : pas encore de code de libelle (texte anglais brut, comme les couleurs)
+    ButtonPhysique.Caption                     := 'Roll';
     RadioButtonRaceHasard.Caption              := GetTexteLibelle('RULES-LAB_085')+' (20xp)';
     RadioButtonMetierHasard.Caption            := GetTexteLibelle('RULES-LAB_085')+' (50xp)';
     RadioButtonAttributHasard.Caption          := GetTexteLibelle('RULES-LAB_085')+' (50xp)';
@@ -463,6 +468,9 @@ procedure TWinCreations.FormCreate(Sender: TObject);
 
     ButtonRaceCompetenceHasard.BringToFront;
     ButtonMetierCompetenceHasard.BringToFront;
+    // Le TShape pose par MiseEnFormeDesChamp sur chaque onglet cache les controles non
+    // fenetres (TBCButton) : meme piege que les boutons ci-dessus (CONTEXT.md 4).
+    ButtonPhysique.BringToFront;
 
     KeyPreview := true;
 
@@ -1085,6 +1093,12 @@ procedure TWinCreations.PhaseSave(NouvellePhase: Integer);
            // L'APPARTENANCE (regiment, ordre, culte) est conditionnee par l'ethnie : changer
            // d'ethnie invalide ce qui a pu etre choisi. CONTEXT.md 2.44.
            Personnage.Appartenance                      := '';
+           // Les details physiques (Rulebook p.40) dependent de l'ethnie : on repart de zero
+           Personnage.Age                               := 0;
+           Personnage.Height                            := 0;
+           Personnage.HairColors                        := '';
+           Personnage.EyeColors                         := '';
+           LabPhysiqueResume.Text                       := '';
            ChargeTabMetier();
          end;
 
@@ -1842,6 +1856,35 @@ Function TWinCreations.PageEtapesChange(): boolean;
 procedure TWinCreations.ButtonPhaseSuivanteClick(Sender: TObject);
   begin
     ChangementPhase(ConstSuivant);
+  end;
+
+// Details physiques : meme fenetre que sur la fiche (WinPersonnage). Le resultat va
+// directement dans Personnage, ecrit a la sauvegarde de la phase 9.
+procedure TWinCreations.ButtonPhysiqueClick(Sender: TObject);
+  var
+    FenPhysique: TWinPhysique;
+  begin
+    PhysiqueCodeRace := Personnage.Race;
+    PhysiqueAge      := Personnage.Age;
+    PhysiqueTaille   := Personnage.Height;
+    PhysiqueYeux     := Personnage.EyeColors;
+    PhysiqueCheveux  := Personnage.HairColors;
+    FenPhysique          := TWinPhysique.Create(Application);
+    FenPhysique.Position := poOwnerFormCenter;
+    try
+      FenPhysique.ShowModal;
+    finally
+      FenPhysique.Free;
+    end;
+    if PhysiqueValide then
+      begin
+        Personnage.Age        := PhysiqueAge;
+        Personnage.Height     := PhysiqueTaille;
+        Personnage.EyeColors  := PhysiqueYeux;
+        Personnage.HairColors := PhysiqueCheveux;
+        LabPhysiqueResume.Text := IntToStr(Personnage.Age) + ' - ' + FormateTaille(Personnage.Height)
+                                     + ' - ' + Personnage.HairColors + ' - ' + Personnage.EyeColors;
+      end;
   end;
 
 ////////////////////////////////////////////////////////////////////////////////

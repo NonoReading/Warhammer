@@ -16,7 +16,7 @@ uses
   ChargeSort, WinSpell, ChargeTexte, winFabrication, ChargeFabrication,
   WinTalent, WinCompetence, WinSpecialisation, ChargePersonnage,
   ChargeMetierCompetence, PdfPersonnage, Types, WinMutation, ChargeCorruptionTable,
-  ChargeRaceMetier, WinChoixCompetenceAppartenance, WinAnimal;
+  ChargeRaceMetier, WinChoixCompetenceAppartenance, WinAnimal, WinPhysique;
 type
 
   StructureXpEtat = record
@@ -33,6 +33,7 @@ type
     ButtonCorruptionSupprime: TBCButton;
     ButtonCorruptionMutation: TBCButton;
     ButtonEquipement: TBCButton;
+    ButtonPhysique: TBCButton;
     ComboBoxNvMetier: TComboBox;
     EditHairColors: TEdit;
     EditEyeColors: TEdit;
@@ -146,6 +147,7 @@ type
   procedure ButtonCorruptionAjouteClick({%H-}Sender: TObject);
   procedure ButtonCorruptionSupprimeClick({%H-}Sender: TObject);
   procedure ButtonHistoriqueClick({%H-}Sender: TObject);
+  procedure ButtonPhysiqueClick({%H-}Sender: TObject);
   procedure ButtonQuitterClick({%H-}Sender: TObject);
   procedure ButtonRaceSelectionnerClick({%H-}Sender: TObject);
   procedure ButtonSortClick({%H-}Sender: TObject);
@@ -801,6 +803,34 @@ begin
   EffaceDonnee(TabEquipement, 1);
   AttributInit();
   XmlChargePersonnage(TabHistorique.Cells[2, TabHistorique.Row]);
+end;
+
+// Details physiques : ouvre WinPhysique (tirage Rulebook p.40 ou saisie libre) et recopie le
+// resultat dans les quatre champs de la fiche, lus a la sauvegarde. Age et taille sont
+// vides ou a 0 tant que rien n'a ete saisi : la fenetre tire alors d'elle-meme.
+procedure TWinPersonnages.ButtonPhysiqueClick(Sender: TObject);
+var
+  FenPhysique: TWinPhysique;
+begin
+  PhysiqueCodeRace := Personnage.Race;
+  PhysiqueAge      := StrToIntDef(EditAge.Text, 0);
+  PhysiqueTaille   := StrToIntDef(EditHeight.Text, 0);
+  PhysiqueYeux     := EditEyeColors.Text;
+  PhysiqueCheveux  := EditHairColors.Text;
+  FenPhysique          := TWinPhysique.Create(Application);
+  FenPhysique.Position := poOwnerFormCenter;
+  try
+    FenPhysique.ShowModal;
+  finally
+    FenPhysique.Free;
+  end;
+  if PhysiqueValide then
+    begin
+      EditAge.Text        := IntToStr(PhysiqueAge);
+      EditHeight.Text     := IntToStr(PhysiqueTaille);
+      EditEyeColors.Text  := PhysiqueYeux;
+      EditHairColors.Text := PhysiqueCheveux;
+    end;
 end;
 
 procedure TWinPersonnages.ButtonQuitterClick(Sender: TObject);
@@ -2444,6 +2474,8 @@ Procedure TWinPersonnages.AfficheImageRace();
     LabHeight.Caption                          := GetTexteLibelle('RULES-PDF_MAIN4_HEIGHT');
     LabHairColors.Caption                      := GetTexteLibelle('RULES-PDF_MAIN4_HAIR');
     LabEyeColors.Caption                       := GetTexteLibelle('RULES-PDF_MAIN4_EYES');
+    // Provisoire : pas encore de code de libelle (texte anglais brut, comme les couleurs)
+    ButtonPhysique.Caption                     := 'Roll';
 
     ButtonHistorique.BringToFront;
     StringGridCorruption.BringToFront;
@@ -4659,6 +4691,11 @@ procedure TWinPersonnages.AjustePositionTables();
     EditHeight.left           := EditLeft;
     EditHairColors.left       := EditLeft;
     EditEyeColors.left        := EditLeft;
+
+    // Bouton de tirage des details physiques : sous les quatre champs, sur toute leur largeur
+    ButtonPhysique.Left       := LabTabAttribut.left;
+    ButtonPhysique.Top        := LabEyeColors.Top + LabEyeColors.Height + 3;
+    ButtonPhysique.Width      := EditLeft + EditAge.Width - LabTabAttribut.left;
 
        // Colonne Carrière
     LabTabCarriere.Left       := EditLeft + EditAge.Width + 10;

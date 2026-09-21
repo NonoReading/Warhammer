@@ -8,7 +8,7 @@ interface
 uses
   Classes, SysUtils, ChargeConstantes, ChargeCompetence, ChargeTalent, ChargeRace,
   ChargeEspece, ChargeNation, ChargeRegle,
-  ChargeRaceAttribut, ChargeRaceCompetence, ChargeRaceTalent, ChargeRaceMetier,
+  ChargeRaceAttribut, ChargeRacePhysique, ChargeRaceCompetence, ChargeRaceTalent, ChargeRaceMetier,
   ChargeMetier, ChargeMetierAttribut, ChargeMetierCompetence, ChargeMetierTalent,
   ChargeMetierEquipement, chargeMetierNiveau, ChargeArme, ChargeArmure, ChargeTrapping,
   ChargeTalentCreation, ChargeRaceCreation, ChargeArmeBonus, ChargeArmureBonus,
@@ -173,6 +173,8 @@ Procedure XmlExportBook(Livre: String; Langue: String);
     PNation:                  StructureNation;
     PRace:                    StructureRace;
     PRaceAttribut:            StructureRaceAttribut;
+    PRacePhysique:            StructureRacePhysique;
+    PRaceCouleur:             StructureRaceCouleur;
     PRaceCompetence:          StructureRaceCompetence;
     PRaceTalent:              StructureRaceTalent;
     PRaceMetier:              StructureRaceMetier;
@@ -534,6 +536,24 @@ Procedure XmlExportBook(Livre: String; Langue: String);
                     XmlContent.Add(XmlLigneDonnee(ConstXmlCarac, XmlCreeCodeLivre(PAttribut.Livre, PRaceAttribut.CodeAttribut), PRaceAttribut.CalculRace));
                   end;
               XmlContent.Add(Xmlfin(ConstXmlSousChapitreCarac));
+              // Details physiques (ecrits seulement si l'ethnie en porte)
+              PRacePhysique := ChercheRacePhysique(PRace.CodeRace);
+              if PRacePhysique.CodeRace <> '' then
+                begin
+                  XmlContent.Add(XmlDebut(ConstXmlSousChapitrePhysique));
+                  XmlContent.Add(XmlLigne(ConstXmlAge, PRacePhysique.FormuleAge));
+                  XmlContent.Add(XmlLigne(ConstXmlHeight, PRacePhysique.FormuleTaille));
+                  if PRacePhysique.TailleExplose then
+                    XmlContent.Add(XmlLigne(ConstXmlPhysTailleExplose, ConstVrai));
+                  XmlContent.Add(XmlLigne(ConstXmlPhysNbTirageYeux, IntToStr(PRacePhysique.NbTirageYeux)));
+                  for PRaceCouleur in ListRaceCouleur do
+                    if (PRaceCouleur.CodeRace = PRace.CodeRace) and PRaceCouleur.EstYeux then
+                      XmlContent.Add(XmlLigneDonnee(ConstXmlPhysYeux, PRaceCouleur.Libelle, PRaceCouleur.Plage));
+                  for PRaceCouleur in ListRaceCouleur do
+                    if (PRaceCouleur.CodeRace = PRace.CodeRace) and not PRaceCouleur.EstYeux then
+                      XmlContent.Add(XmlLigneDonnee(ConstXmlPhysCheveux, PRaceCouleur.Libelle, PRaceCouleur.Plage));
+                  XmlContent.Add(Xmlfin(ConstXmlSousChapitrePhysique));
+                end;
               // Compétence
               XmlContent.Add(XmlDebut(ConstXmlSousChapitreCompetence));
               for PRaceCompetence in ListRaceCompetence do
@@ -1119,6 +1139,8 @@ Procedure XmlImport(FileName: String; OnlyPrimary: Boolean; OnlyCode: Boolean; C
     PRegle:                   StructureRegle;
     PRegleMetier:             StructureRegleMetier;
     PRaceAttribut:            StructureRaceAttribut;
+    PRacePhysique:            StructureRacePhysique;
+    PRaceCouleur:             StructureRaceCouleur;
     PRaceCompetence:          StructureRaceCompetence;
     PRaceTalent:              StructureRaceTalent;
     PRaceMetier:              StructureRaceMetier;
@@ -1906,6 +1928,44 @@ Procedure XmlImport(FileName: String; OnlyPrimary: Boolean; OnlyCode: Boolean; C
                                          end;
                                     end;
                                     Node := XmlElement(Node.NextSibling);
+                                  end;
+                              end;
+                            ConstXmlSousChapitrePhysique:
+                              begin
+                                PRacePhysique                := Default(StructureRacePhysique);
+                                PRacePhysique.Livre          := Livre;
+                                PRacePhysique.CodeRace       := PRace.CodeRace;
+                                PRacePhysique.NbTirageYeux   := 1;
+                                Node := XmlElement(NodeNv3.FirstChild);
+                                while Assigned(Node) do
+                                  begin
+                                    case Node.NodeName of
+                                      ConstXmlAge:
+                                        PRacePhysique.FormuleAge     := RemoveQuotes(UTF8Encode(Node.TextContent));
+                                      ConstXmlHeight:
+                                        PRacePhysique.FormuleTaille  := RemoveQuotes(UTF8Encode(Node.TextContent));
+                                      ConstXmlPhysTailleExplose:
+                                        PRacePhysique.TailleExplose  := RemoveQuotes(UTF8Encode(Node.TextContent)) = ConstVrai;
+                                      ConstXmlPhysNbTirageYeux:
+                                        PRacePhysique.NbTirageYeux   := StrToIntDef(RemoveQuotes(UTF8Encode(Node.TextContent)), 1);
+                                      ConstXmlPhysYeux, ConstXmlPhysCheveux:
+                                        if LangueDef = ConstAnglais then
+                                          begin
+                                            PRaceCouleur.Livre    := Livre;
+                                            PRaceCouleur.CodeRace := PRace.CodeRace;
+                                            PRaceCouleur.EstYeux  := Node.NodeName = ConstXmlPhysYeux;
+                                            PRaceCouleur.Libelle  := RemoveQuotes(UTF8Encode(Node.Attributes.GetNamedItem(ConstXmlData).NodeValue));
+                                            PRaceCouleur.Plage    := RemoveQuotes(UTF8Encode(Node.TextContent));
+                                            ListRaceCouleur.Add(PRaceCouleur);
+                                            Inc(NbRaceCouleur);
+                                          end;
+                                    end;
+                                    Node := XmlElement(Node.NextSibling);
+                                  end;
+                                if LangueDef = ConstAnglais then
+                                  begin
+                                    ListRacePhysique.Add(PRacePhysique);
+                                    Inc(NbRacePhysique);
                                   end;
                               end;
                             ConstXmlSousChapitreCompetence:

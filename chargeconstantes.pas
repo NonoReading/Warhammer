@@ -231,6 +231,14 @@ Const
       // Pointeur FACULTATIF pose sur une ethnie vers son code DATA_NATION (vide = aucune
       // nation, cas de la plupart des ethnies non-humaines). CONTEXT.md 2.51.
       ConstXmlNationality               = 'Nationality';
+      // Details physiques d'une ethnie : Age et Height (deja definis plus bas pour la fiche)
+      // servent aussi de balises de formule ; Eye/Hair portent le libelle en name= et la
+      // plage 2d10 en contenu.
+      ConstXmlSousChapitrePhysique      = 'SUBCHAPTER_PHYSICAL';
+      ConstXmlPhysTailleExplose         = 'HeightExplode';
+      ConstXmlPhysNbTirageYeux          = 'EyeRolls';
+      ConstXmlPhysYeux                  = 'Eye';
+      ConstXmlPhysCheveux               = 'Hair';
       // Nombre de competences de race a choisir dans chaque colonne (3 et 3 partout, sauf
       // le Skink de Lustria qui en prend 2 et 2). Absentes = 3. Voir CONTEXT.md 2.15.
       ConstXmlNbSkill5                  = 'Skill5';

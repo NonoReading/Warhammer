@@ -4558,6 +4558,32 @@ See page 190 for Fear rules"</Explanation>
 <Attribut name="RULES-ATTR_Supp">"3"</Attribut>
 <Attribut name="RULES-ATTR_Move">"4"</Attribut>
 </SUBCHAPTER_ATTR>
+<SUBCHAPTER_PHYSICAL>
+<Age>"15+d10"</Age>
+<Height>"57+2d10"</Height>
+<HeightExplode>"1"</HeightExplode>
+<EyeRolls>"1"</EyeRolls>
+<Eye name="Free Choice">"2"</Eye>
+<Eye name="Green">"3"</Eye>
+<Eye name="Pale Blue">"4"</Eye>
+<Eye name="Blue">"5-7"</Eye>
+<Eye name="Pale Grey">"8-11"</Eye>
+<Eye name="Grey">"12-14"</Eye>
+<Eye name="Brown">"15-17"</Eye>
+<Eye name="Hazel">"18"</Eye>
+<Eye name="Dark Brown">"19"</Eye>
+<Eye name="Black">"20"</Eye>
+<Hair name="White Blond">"2"</Hair>
+<Hair name="Golden Blond">"3"</Hair>
+<Hair name="Red Blond">"4"</Hair>
+<Hair name="Golden Brown">"5-7"</Hair>
+<Hair name="Light Brown">"8-11"</Hair>
+<Hair name="Dark Brown">"12-14"</Hair>
+<Hair name="Black">"15-17"</Hair>
+<Hair name="Auburn">"18"</Hair>
+<Hair name="Red">"19"</Hair>
+<Hair name="Grey">"20"</Hair>
+</SUBCHAPTER_PHYSICAL>
 <SUBCHAPTER_SKILL>
 <Skill>"RULES-COMPCALM"</Skill>
   <!-- Cool -->
@@ -4748,6 +4774,31 @@ See page 190 for Fear rules"</Explanation>
 <Attribut name="RULES-ATTR_Supp">"3"</Attribut>
 <Attribut name="RULES-ATTR_Move">"3"</Attribut>
 </SUBCHAPTER_ATTR>
+<SUBCHAPTER_PHYSICAL>
+<Age>"15+5d10"</Age>
+<Height>"37+d10"</Height>
+<EyeRolls>"1"</EyeRolls>
+<Eye name="Light Grey">"2"</Eye>
+<Eye name="Grey">"3"</Eye>
+<Eye name="Pale Blue">"4"</Eye>
+<Eye name="Blue">"5-7"</Eye>
+<Eye name="Green">"8-11"</Eye>
+<Eye name="Hazel">"12-14"</Eye>
+<Eye name="Brown">"15-17"</Eye>
+<Eye name="Copper">"18"</Eye>
+<Eye name="Dark Brown">"19"</Eye>
+<Eye name="Dark Brown">"20"</Eye>
+<Hair name="Grey">"2"</Hair>
+<Hair name="Flaxen">"3"</Hair>
+<Hair name="Russet">"4"</Hair>
+<Hair name="Honey">"5-7"</Hair>
+<Hair name="Chestnut">"8-11"</Hair>
+<Hair name="Ginger">"12-14"</Hair>
+<Hair name="Mustard">"15-17"</Hair>
+<Hair name="Almond">"18"</Hair>
+<Hair name="Chocolate">"19"</Hair>
+<Hair name="Liquorice">"20"</Hair>
+</SUBCHAPTER_PHYSICAL>
 <SUBCHAPTER_SKILL>
 <Skill>"RULES-COMPCHARM"</Skill>
   <!-- Charm -->
@@ -4910,6 +4961,31 @@ See page 190 for Fear rules"</Explanation>
 <Attribut name="RULES-ATTR_Supp">"2"</Attribut>
 <Attribut name="RULES-ATTR_Move">"3"</Attribut>
 </SUBCHAPTER_ATTR>
+<SUBCHAPTER_PHYSICAL>
+<Age>"15+10d10"</Age>
+<Height>"51+d10"</Height>
+<EyeRolls>"1"</EyeRolls>
+<Eye name="Coal">"2"</Eye>
+<Eye name="Lead">"3"</Eye>
+<Eye name="Steel">"4"</Eye>
+<Eye name="Blue">"5-7"</Eye>
+<Eye name="Earth Brown">"8-11"</Eye>
+<Eye name="Dark Brown">"12-14"</Eye>
+<Eye name="Hazel">"15-17"</Eye>
+<Eye name="Green">"18"</Eye>
+<Eye name="Copper">"19"</Eye>
+<Eye name="Gold">"20"</Eye>
+<Hair name="White">"2"</Hair>
+<Hair name="Grey">"3"</Hair>
+<Hair name="Pale Blond">"4"</Hair>
+<Hair name="Golden">"5-7"</Hair>
+<Hair name="Copper">"8-11"</Hair>
+<Hair name="Bronze">"12-14"</Hair>
+<Hair name="Brown">"15-17"</Hair>
+<Hair name="Dark Brown">"18"</Hair>
+<Hair name="Reddish Brown">"19"</Hair>
+<Hair name="Black">"20"</Hair>
+</SUBCHAPTER_PHYSICAL>
 <SUBCHAPTER_SKILL>
 <Skill>"RULES-COMPCALM"</Skill>
   <!-- Cool -->
@@ -5068,6 +5144,31 @@ See page 190 for Fear rules"</Explanation>
 <Attribut name="RULES-ATTR_Supp">"2"</Attribut>
 <Attribut name="RULES-ATTR_Move">"5"</Attribut>
 </SUBCHAPTER_ATTR>
+<SUBCHAPTER_PHYSICAL>
+<Age>"30+10d10"</Age>
+<Height>"71+d10"</Height>
+<EyeRolls>"2"</EyeRolls>
+<Eye name="Jet">"2"</Eye>
+<Eye name="Amethyst">"3"</Eye>
+<Eye name="Aquamarine">"4"</Eye>
+<Eye name="Sapphire">"5-7"</Eye>
+<Eye name="Turquoise">"8-11"</Eye>
+<Eye name="Emerald">"12-14"</Eye>
+<Eye name="Amber">"15-17"</Eye>
+<Eye name="Copper">"18"</Eye>
+<Eye name="Citrine">"19"</Eye>
+<Eye name="Gold">"20"</Eye>
+<Hair name="Silver">"2"</Hair>
+<Hair name="White">"3"</Hair>
+<Hair name="Pale Blond">"4"</Hair>
+<Hair name="Blond">"5-7"</Hair>
+<Hair name="Yellow Blond">"8-11"</Hair>
+<Hair name="Copper Blond">"12-14"</Hair>
+<Hair name="Red Blond">"15-17"</Hair>
+<Hair name="Auburn">"18"</Hair>
+<Hair name="Red">"19"</Hair>
+<Hair name="Black">"20"</Hair>
+</SUBCHAPTER_PHYSICAL>
 <SUBCHAPTER_SKILL>
 <Skill>"RULES-COMPCALM"</Skill>
   <!-- Cool -->
@@ -5202,6 +5303,31 @@ See page 190 for Fear rules"</Explanation>
 <Attribut name="RULES-ATTR_Supp">"2"</Attribut>
 <Attribut name="RULES-ATTR_Move">"5"</Attribut>
 </SUBCHAPTER_ATTR>
+<SUBCHAPTER_PHYSICAL>
+<Age>"30+10d10"</Age>
+<Height>"71+d10"</Height>
+<EyeRolls>"2"</EyeRolls>
+<Eye name="Ivory">"2"</Eye>
+<Eye name="Charcoal">"3"</Eye>
+<Eye name="Ivy Green">"4"</Eye>
+<Eye name="Mossy Green">"5-7"</Eye>
+<Eye name="Chestnut">"8-11"</Eye>
+<Eye name="Chestnut">"12-14"</Eye>
+<Eye name="Dark Brown">"15-17"</Eye>
+<Eye name="Tan">"18"</Eye>
+<Eye name="Sandy Brown">"19"</Eye>
+<Eye name="Violet">"20"</Eye>
+<Hair name="Birch Silver">"2"</Hair>
+<Hair name="Ash Blond">"3"</Hair>
+<Hair name="Rose Gold">"4"</Hair>
+<Hair name="Honey Blond">"5-7"</Hair>
+<Hair name="Brown">"8-11"</Hair>
+<Hair name="Mahogany Brown">"12-14"</Hair>
+<Hair name="Dark brown">"15-17"</Hair>
+<Hair name="Sienna">"18"</Hair>
+<Hair name="Ebony">"19"</Hair>
+<Hair name="Blue-Black">"20"</Hair>
+</SUBCHAPTER_PHYSICAL>
 <SUBCHAPTER_SKILL>
 <Skill>"RULES-COMPATHL"</Skill>
   <!-- Athletics -->
