@@ -46,6 +46,7 @@ Type
     Livre:                      String;
     Sexe:                       String;
     Modele:                     String;
+    Noble:                      Boolean;   // modele reserve aux nobles
   end;
 
   TListRacePhysique = Specialize TList<StructureRacePhysique>;
@@ -74,7 +75,7 @@ function FormateTaille(Valeur: Integer; Unite: String): String;
 function EthnieANoms(CodeRace: String): Boolean;
 function RaceSourceNom(CodeRace, Partie: String): String;
 function RaceANoms(CodeRace: String): Boolean;
-function TireNom(CodeRace, Sexe: String): String;
+function TireNom(CodeRace, Sexe: String; Noble: Boolean = False): String;
 
 implementation
 
@@ -452,17 +453,48 @@ begin
       end;
 end;
 
+// Un modele au hasard parmi ceux de l'ethnie source pour ce sexe et cet etat (Noble) ; a defaut de
+// modele du sexe, un modele sans sexe. '' si aucun.
+function ChoisitModeleNom(Source, Sexe: String; Noble: Boolean): String;
+var
+  PModele:            StructureRaceNomModele;
+  ModeleSexe, ModeleSans: String;
+  NbSexe, NbSans:     Integer;
+begin
+  ModeleSexe := '';
+  ModeleSans := '';
+  NbSexe     := 0;
+  NbSans     := 0;
+  for PModele in ListRaceNomModele do
+    if CompareRechercheValeur(PModele.CodeRace, Source) and (PModele.Noble = Noble) then
+      begin
+        if PModele.Sexe = Sexe then
+          begin
+            Inc(NbSexe);
+            if Random(NbSexe) = 0 then
+              ModeleSexe := PModele.Modele;
+          end
+        else if PModele.Sexe = '' then
+          begin
+            Inc(NbSans);
+            if Random(NbSans) = 0 then
+              ModeleSans := PModele.Modele;
+          end;
+      end;
+  if NbSexe > 0 then
+    Result := ModeleSexe
+  else
+    Result := ModeleSans;
+end;
+
 // Assemble un nom selon le modele de l'ethnie (celui du sexe demande, sinon celui sans sexe).
 // Modele : mots separes par des espaces ; un mot = elements separes par '+' ; un element est une
 // partie ("Forename"), une partie d'un sexe impose ("Forename:M"), un texte fixe ('sson') ou
 // l'un de ces elements suivi de '?' (present une fois sur deux). Un mot dont une partie
 // obligatoire est introuvable (livre absent) est laisse de cote. Sexe vide : tire au hasard.
-function TireNom(CodeRace, Sexe: String): String;
+function TireNom(CodeRace, Sexe: String; Noble: Boolean = False): String;
 var
   Source, Modele, Mot, Element, Partie, SexePartie, Valeur, Morceau: String;
-  ModeleSans: String;
-  NbExact, NbSans: Integer;
-  PModele:    StructureRaceNomModele;
   Mots, Elements: TStringList;
   I, J, Deux: Integer;
   Facultatif, Manque: Boolean;
@@ -474,29 +506,11 @@ begin
   if Sexe = '' then
     Sexe := IfThen(Random(2) = 0, 'M', 'F');
   // Plusieurs modeles possibles (ex. Nains : prenom du livre ou prefixe + suffixe) : un seul est
-  // tire, au hasard, parmi ceux du sexe demande (a defaut, parmi ceux sans sexe).
-  Modele      := '';
-  ModeleSans  := '';
-  NbExact     := 0;
-  NbSans      := 0;
-  for PModele in ListRaceNomModele do
-    if CompareRechercheValeur(PModele.CodeRace, Source) then
-      begin
-        if PModele.Sexe = Sexe then
-          begin
-            Inc(NbExact);
-            if Random(NbExact) = 0 then
-              Modele := PModele.Modele;
-          end
-        else if PModele.Sexe = '' then
-          begin
-            Inc(NbSans);
-            if Random(NbSans) = 0 then
-              ModeleSans := PModele.Modele;
-          end;
-      end;
-  if NbExact = 0 then
-    Modele := ModeleSans;
+  // tire, au hasard, parmi ceux du sexe demande (a defaut, parmi ceux sans sexe). Un noble prend
+  // d'abord les modeles marques noble ; sans eux (ou pour un roturier), les modeles ordinaires.
+  Modele := ChoisitModeleNom(Source, Sexe, Noble);
+  if (Modele = '') and Noble then
+    Modele := ChoisitModeleNom(Source, Sexe, False);
   if Modele = '' then
     Exit;
   Mots     := TStringList.Create;
@@ -518,7 +532,7 @@ begin
             if Facultatif and (Random(2) = 0) then
               Continue;
             if (Length(Element) >= 2) and (Element[1] = '''') then
-              Morceau := Copy(Element, 2, Length(Element) - 2)
+              Morceau := StringReplace(Copy(Element, 2, Length(Element) - 2), '_', ' ', [rfReplaceAll])
             else
               begin
                 Deux       := Pos(':', Element);
@@ -543,8 +557,7 @@ begin
           Continue;
         if Result <> '' then
           Result := Result + ' ';
-        // Les composantes elfiques se soudent : seule la premiere lettre du mot prend la majuscule
-        Result := Result + UpperCase(Copy(Mot, 1, 1)) + Copy(Mot, 2, MaxInt);
+        Result := Result + Mot;
       end;
   finally
     Elements.Free;

@@ -562,7 +562,8 @@ Procedure XmlExportBook(Livre: String; Langue: String);
                   XmlContent.Add(XmlDebut(ConstXmlSousChapitreNoms));
                   for PRaceNomModele in ListRaceNomModele do
                     if PRaceNomModele.CodeRace = PRace.CodeRace then
-                      XmlContent.Add(XmlReplace(XmlDebut(ConstXmlNomModele + IfThen(PRaceNomModele.Sexe <> '', ' ' + ConstXmlNomSexe + '="' + PRaceNomModele.Sexe + '"', ''))
+                      XmlContent.Add(XmlReplace(XmlDebut(ConstXmlNomModele + IfThen(PRaceNomModele.Sexe <> '', ' ' + ConstXmlNomSexe + '="' + PRaceNomModele.Sexe + '"', '')
+                                                                         + IfThen(PRaceNomModele.Noble, ' ' + ConstXmlNomNoble + '="' + ConstVrai + '"', ''))
                                      + '"' + PRaceNomModele.Modele + '"' + XmlFin(ConstXmlNomModele)));
                   for PRaceNom in ListRaceNom do
                     if PRaceNom.CodeRace = PRace.CodeRace then
@@ -2027,6 +2028,8 @@ Procedure XmlImport(FileName: String; OnlyPrimary: Boolean; OnlyCode: Boolean; C
                                           PRaceNomModele.Modele   := RemoveQuotes(UTF8Encode(Node.TextContent));
                                           if Assigned(Node.Attributes.GetNamedItem(ConstXmlNomSexe)) then
                                             PRaceNomModele.Sexe := UTF8Encode(Node.Attributes.GetNamedItem(ConstXmlNomSexe).NodeValue);
+                                          if Assigned(Node.Attributes.GetNamedItem(ConstXmlNomNoble)) then
+                                            PRaceNomModele.Noble := UTF8Encode(Node.Attributes.GetNamedItem(ConstXmlNomNoble).NodeValue) = ConstVrai;
                                           if LangueDef = ConstAnglais then
                                             begin
                                               ListRaceNomModele.Add(PRaceNomModele);

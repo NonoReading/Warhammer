@@ -4587,6 +4587,8 @@ See page 190 for Fear rules"</Explanation>
 <!-- Noms reiklandais : tableaux de prenoms en d1000 (homme / femme) et noms de famille (metiers et traits physiques) du Unofficial Character Pack (livre de fan, p.9-11) ; le Rulebook p.37 ne donne que 30 exemples. Les chevauchements de plages du livre (Hansel 425-430 / Hartwig 426-431, etc.) sont rognes. -->
 <SUBCHAPTER_NAMES>
 <NamePattern>"Forename Surname"</NamePattern>
+<!-- Noblesse (Unofficial Character Pack p.10) : « von » + lieu a la place du nom de famille ; lieux du Reikland cites dans le Rulebook. -->
+<NamePattern noble="1">"Forename 'von_'+Place"</NamePattern>
 <Name part="Forename" sex="M" name="Adam/Adamar/Adhemar">"1-5"</Name>
 <Name part="Forename" sex="M" name="Adelbert">"6-11"</Name>
 <Name part="Forename" sex="M" name="Adolphus">"12-17"</Name>
@@ -4966,6 +4968,20 @@ See page 190 for Fear rules"</Explanation>
 <Name part="Surname" name="Schon">"49"</Name>
 <Name part="Surname" name="Stotter">"50"</Name>
 <Name part="Surname" name="Stark">"51"</Name>
+<Name part="Place" name="Altdorf">"1"</Name>
+<Name part="Place" name="Auerswald">"2"</Name>
+<Name part="Place" name="Bögenhafen">"3"</Name>
+<Name part="Place" name="Carroburg">"4"</Name>
+<Name part="Place" name="Dunkelberg">"5"</Name>
+<Name part="Place" name="Eilhart">"6"</Name>
+<Name part="Place" name="Grünburg">"7"</Name>
+<Name part="Place" name="Helmgart">"8"</Name>
+<Name part="Place" name="Kemperbad">"9"</Name>
+<Name part="Place" name="Schilderheim">"10"</Name>
+<Name part="Place" name="Stimmigen">"11"</Name>
+<Name part="Place" name="Tahme">"12"</Name>
+<Name part="Place" name="Ubersreik">"13"</Name>
+<Name part="Place" name="Weissbruck">"14"</Name>
 </SUBCHAPTER_NAMES>
 <SUBCHAPTER_SKILL>
 <Skill>"RULES-COMPCALM"</Skill>

@@ -2246,6 +2246,28 @@ object WinCreations: TWinCreations
         TabOrder = 3
         Text = 'Male'
       end
+      object CheckBoxNoble: TCheckBox
+        Left = 8
+        Height = 20
+        Top = 220
+        Width = 21
+        TabOrder = 4
+      end
+      object LabNoble: TEdit
+        Left = 40
+        Height = 28
+        Top = 216
+        Width = 148
+        Alignment = taCenter
+        Enabled = False
+        Font.CharSet = ANSI_CHARSET
+        Font.Color = clBlack
+        Font.Pitch = fpVariable
+        Font.Quality = fqDraft
+        ParentFont = False
+        TabOrder = 5
+        Text = 'Noble'
+      end
       object ButtonNom: TBCButton
         Left = 208
         Height = 31

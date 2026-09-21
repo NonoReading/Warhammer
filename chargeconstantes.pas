@@ -246,6 +246,8 @@ Const
       ConstXmlNomModele                 = 'NamePattern';
       ConstXmlNomPartie                 = 'part';
       ConstXmlNomSexe                   = 'sex';
+      // NamePattern noble="1" : modele reserve aux personnages nobles (absent : modele ordinaire)
+      ConstXmlNomNoble                  = 'noble';
       // Nombre de competences de race a choisir dans chaque colonne (3 et 3 partout, sauf
       // le Skink de Lustria qui en prend 2 et 2). Absentes = 3. Voir CONTEXT.md 2.15.
       ConstXmlNbSkill5                  = 'Skill5';

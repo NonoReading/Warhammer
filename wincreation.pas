@@ -44,6 +44,8 @@ type
     ButtonPhysique: TBCButton;
     ButtonNom: TBCButton;
     ComboBoxSexeNom: TComboBox;
+    CheckBoxNoble: TCheckBox;
+    LabNoble: TEdit;
     LabPhysiqueResume: TEdit;
     EditRaceResultat: TSpinEdit;
     GroupBoxAttribut: TGroupBox;
@@ -453,6 +455,7 @@ procedure TWinCreations.FormCreate(Sender: TObject);
     ComboBoxSexeNom.Items[0]                   := GetTexteLibelle('RULES-LAB_268');
     ComboBoxSexeNom.Items[1]                   := GetTexteLibelle('RULES-LAB_269');
     ComboBoxSexeNom.ItemIndex                  := 0;
+    LabNoble.Text                              := GetTexteLibelle('RULES-LAB_271');
     RadioButtonRaceHasard.Caption              := GetTexteLibelle('RULES-LAB_085')+' (20xp)';
     RadioButtonMetierHasard.Caption            := GetTexteLibelle('RULES-LAB_085')+' (50xp)';
     RadioButtonAttributHasard.Caption          := GetTexteLibelle('RULES-LAB_085')+' (50xp)';
@@ -1908,7 +1911,7 @@ procedure TWinCreations.ButtonNomClick(Sender: TObject);
         ShowMessage(GetTexteLibelle('RULES-LAB_270'));
         Exit;
       end;
-    Nom := TireNom(Personnage.Race, IfThen(ComboBoxSexeNom.ItemIndex = 1, 'F', 'M'));
+    Nom := TireNom(Personnage.Race, IfThen(ComboBoxSexeNom.ItemIndex = 1, 'F', 'M'), CheckBoxNoble.Checked);
     if Nom = '' then
       ShowMessage(GetTexteLibelle('RULES-LAB_270'))
     else
