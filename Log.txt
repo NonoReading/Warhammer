@@ -5980,3 +5980,7 @@ Fichiers modifies : BOOK_NATIONS_OF_MANKIND.Xml, chargeracephysique.pas, CONTEXT
 21/09/2026 - NOMS TILEENS (UP IN ARMS P.56) - DONNEES SEULES
 33 prenoms M, 33 F, 33 noms de famille sur UPINA-RACE_HTIL (BOOK_UP_IN_ARMS.Xml). Estaliens demandes : aucune liste de noms dans les livres du projet, rien invente.
 Fichiers modifies : BOOK_UP_IN_ARMS.Xml, CONTEXT.md, A FAIRE.txt, Log.txt.
+
+21/09/2026 - NOMS DU NORD DE L EMPIRE (NORDLAND, OSTLAND) - DONNEES SEULES
+Prenoms wastelanders et d influence norse du Character Pack p.8 (8 M, 8 F) sur MIDDE-RACE_HNORD et NATIO-RACE_HOSTL ; modeles et noms de famille du Reiklandais.
+Fichiers modifies : BOOK_MIDDENHEIM_CITY_OF_THE_WHITE_WOLF.Xml, BOOK_NATIONS_OF_MANKIND.Xml, CONTEXT.md, Log.txt.
