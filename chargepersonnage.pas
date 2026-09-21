@@ -188,6 +188,7 @@ Type
      Options:                    String;
      Age:                        Integer;
      Height:                     Integer;
+     HeightUnit:                 String;    // unite de Height : CM ou INCH (absente = INCH, anciennes fiches)
      HairColors:                 String;
      EyeColors:                  String;
      Asterisque:                 Integer;
@@ -565,6 +566,7 @@ begin
         XMLContent.Add(XmlCommentaire(PRace.Libelle));
         XMLContent.Add(XmlLigne(ConstXmlAge, IntToStr(Personnage.Age)));
         XMLContent.Add(XmlLigne(ConstXmlHeight, IntToStr(Personnage.Height)));
+        XMLContent.Add(XmlLigne(ConstXmlHeightUnit, Personnage.HeightUnit));
         XMLContent.Add(XmlLigne(ConstXmlHairColors, Personnage.HairColors));
         XMLContent.Add(XmlLigne(ConstXmlEyeColors, Personnage.EyeColors));
 
@@ -1041,8 +1043,12 @@ begin
 
       if Assigned(PlayerNode.FindNode(ConstXmlAge)) then
         Personnage.Age                := StrToInt(RemoveQuotes(UTF8Encode(PlayerNode.FindNode(ConstXmlAge).TextContent)));
+      // Fiche sans <HeightUnit> : taille enregistree en pouces (avant l'unite par fiche)
+      Personnage.HeightUnit         := ConstUniteInch;
       if Assigned(PlayerNode.FindNode(ConstXmlHeight)) then
         Personnage.Height             := StrToInt(RemoveQuotes(UTF8Encode(PlayerNode.FindNode(ConstXmlHeight).TextContent)));
+      if Assigned(PlayerNode.FindNode(ConstXmlHeightUnit)) then
+        Personnage.HeightUnit         := RemoveQuotes(UTF8Encode(PlayerNode.FindNode(ConstXmlHeightUnit).TextContent));
       if Assigned(PlayerNode.FindNode(ConstXmlHairColors)) then
         Personnage.HairColors         := RemoveQuotes(UTF8Encode(PlayerNode.FindNode(ConstXmlHairColors).TextContent));
       if Assigned(PlayerNode.FindNode(ConstXmlEyeColors)) then

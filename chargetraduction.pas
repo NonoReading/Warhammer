@@ -5,10 +5,10 @@ unit ChargeTraduction;
 interface
 
 uses
-  Classes, SysUtils, ChargeConstantes, Generics.Collections, LazUTF8,
+  Classes, SysUtils, StrUtils, ChargeConstantes, Generics.Collections, LazUTF8,
   ChargeAttribut, ChargeTexte, ChargeCompetence, ChargeTalent, ChargeRace, ChargeEspece, ChargeRegle,
   ChargeMetier, ChargeArme, ChargeArmeBonus, ChargeArmure, ChargeTrapping, ChargeArmureBonus,
-  ChargeSort, ChargeFabrication, ChargeCorruptionTable, UnitCalcul;
+  ChargeSort, ChargeFabrication, ChargeCorruptionTable, ChargeRacePhysique, UnitCalcul;
 
 Type
   StructureTraduction   = record
@@ -102,6 +102,7 @@ Procedure Traduit(Langue: String; Livre: String);
     PSort:        StructureSort;
     PFabrication: StructureFabrication;
     PCorruptionTable: StructureCorruptionTable;
+    PRaceCouleur: StructureRaceCouleur;
   begin
     // Pas de garde sur Langue = ConstAnglais ici : ListTexte/ListeAttribut/etc. ne sont
     // PAS rechargées avec du texte anglais frais lors d'un changement de livre/langue en
@@ -260,6 +261,18 @@ Procedure Traduit(Langue: String; Livre: String);
                       PCorruptionTable.Libelle := PTraduction.Libelle;
                       PCorruptionTable.Effet   := PTraduction.Description;
                       ListCorruptionTable[Ind] := PCorruptionTable;
+                    end;
+              ConstPRaceCouleur:
+                // Code = "CodeRace Y|H Plage" (Y = yeux, H = cheveux) : la couleur n'a pas de code
+                // propre, la plage de la table 2d10 l'identifie dans son ethnie.
+                for Ind :=0 to ListRaceCouleur.Count - 1 do
+                  if CompareRechercheValeur(PTraduction.Code,
+                       ListRaceCouleur[Ind].CodeRace + ' ' + IfThen(ListRaceCouleur[Ind].EstYeux, 'Y', 'H')
+                       + '|' + ListRaceCouleur[Ind].Plage) then
+                    begin
+                      PRaceCouleur         := ListRaceCouleur[Ind];
+                      PRaceCouleur.Libelle := PTraduction.Libelle;
+                      ListRaceCouleur[Ind] := PRaceCouleur;
                     end;
             end;
 

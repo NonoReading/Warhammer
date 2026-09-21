@@ -35,24 +35,31 @@ object WinPhysique: TWinPhysique
     Height = 20
     Top = 68
     Width = 150
-    Caption = 'Height (inches)'
+    Caption = 'Height'
   end
   object SpinEditTaille: TSpinEdit
     Left = 190
     Height = 28
     Top = 64
     Width = 80
-    MaxValue = 200
+    MaxValue = 300
     MinValue = 1
     TabOrder = 1
     Value = 1
-    OnChange = SpinEditTailleChange
   end
-  object LabelTaillePieds: TLabel
+  object ComboBoxUnite: TComboBox
     Left = 290
-    Height = 20
-    Top = 68
+    Height = 28
+    Top = 64
     Width = 100
+    ItemHeight = 20
+    Items.Strings = (
+      'cm'
+      'in'
+    )
+    OnChange = ComboBoxUniteChange
+    Style = csDropDownList
+    TabOrder = 5
   end
   object LabelYeux: TLabel
     Left = 24

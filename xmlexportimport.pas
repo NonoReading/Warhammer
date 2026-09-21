@@ -6,7 +6,7 @@ unit XmlExportImport;
 interface
 
 uses
-  Classes, SysUtils, ChargeConstantes, ChargeCompetence, ChargeTalent, ChargeRace,
+  Classes, SysUtils, StrUtils, ChargeConstantes, ChargeCompetence, ChargeTalent, ChargeRace,
   ChargeEspece, ChargeNation, ChargeRegle,
   ChargeRaceAttribut, ChargeRacePhysique, ChargeRaceCompetence, ChargeRaceTalent, ChargeRaceMetier,
   ChargeMetier, ChargeMetierAttribut, ChargeMetierCompetence, ChargeMetierTalent,
@@ -22,7 +22,7 @@ uses
   ChargeArmureBonusTalent,
   ChargeModificateur, ChargeTalentModificateur, ChargeCareerBonusModificateur,
   ChargeArmeModificateur, ChargeArmureBonusModificateur, ChargeCorruptionModificateur,
-  XMLRead, DOM, Unitcalcul,  Dialogs, strutils;
+  XMLRead, DOM, Unitcalcul,  Dialogs;
 
 Procedure XmlExportBook(Livre: String; Langue: String);
 Procedure XmlImport(FileName: String; OnlyPrimary: Boolean; OnlyCode: Boolean; CheminComplet: String = '');
@@ -1185,6 +1185,7 @@ Procedure XmlImport(FileName: String; OnlyPrimary: Boolean; OnlyCode: Boolean; C
     PTexte:                   StructureTexte;
     PCompetenceMere:          StructureCompetence;
     PTraduction:              StructureTraduction;
+    PTraductionCouleur:       StructureTraduction;
     PTraductionOption:        StructureTraduction;
     PTraductionNv2:           StructureTraduction;
     PArmureSimplifiee:        StructureArmureSimplifiee;
@@ -1949,16 +1950,24 @@ Procedure XmlImport(FileName: String; OnlyPrimary: Boolean; OnlyCode: Boolean; C
                                       ConstXmlPhysNbTirageYeux:
                                         PRacePhysique.NbTirageYeux   := StrToIntDef(RemoveQuotes(UTF8Encode(Node.TextContent)), 1);
                                       ConstXmlPhysYeux, ConstXmlPhysCheveux:
-                                        if LangueDef = ConstAnglais then
-                                          begin
-                                            PRaceCouleur.Livre    := Livre;
-                                            PRaceCouleur.CodeRace := PRace.CodeRace;
-                                            PRaceCouleur.EstYeux  := Node.NodeName = ConstXmlPhysYeux;
-                                            PRaceCouleur.Libelle  := RemoveQuotes(UTF8Encode(Node.Attributes.GetNamedItem(ConstXmlData).NodeValue));
-                                            PRaceCouleur.Plage    := RemoveQuotes(UTF8Encode(Node.TextContent));
-                                            ListRaceCouleur.Add(PRaceCouleur);
-                                            Inc(NbRaceCouleur);
-                                          end;
+                                        begin
+                                          PRaceCouleur.Livre    := Livre;
+                                          PRaceCouleur.CodeRace := PRace.CodeRace;
+                                          PRaceCouleur.EstYeux  := Node.NodeName = ConstXmlPhysYeux;
+                                          PRaceCouleur.Libelle  := RemoveQuotes(UTF8Encode(Node.Attributes.GetNamedItem(ConstXmlData).NodeValue));
+                                          PRaceCouleur.Plage    := RemoveQuotes(UTF8Encode(Node.TextContent));
+                                          if LangueDef = ConstAnglais then
+                                            begin
+                                              ListRaceCouleur.Add(PRaceCouleur);
+                                              Inc(NbRaceCouleur);
+                                            end;
+                                          // La couleur n'a pas de code : la plage 2d10 l'identifie dans
+                                          // son ethnie (voir Traduit, ConstPRaceCouleur).
+                                          PTraductionCouleur         := InitTrad(ConstPRaceCouleur, PRace.CodeRace,
+                                            IfThen(PRaceCouleur.EstYeux, 'Y', 'H') + '|' + PRaceCouleur.Plage, Livre);
+                                          PTraductionCouleur.Libelle := PRaceCouleur.Libelle;
+                                          AddTrad(PTraductionCouleur, LangueDef);
+                                        end;
                                     end;
                                     Node := XmlElement(Node.NextSibling);
                                   end;

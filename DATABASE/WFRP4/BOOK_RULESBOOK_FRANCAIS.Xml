@@ -4630,6 +4630,28 @@ See page 190 for Fear rules"</Explanation>
 <DATA_SPECIE>
 <Specie id="RULES-RACE_HUM">
 <Description language="FRANCAIS">"Humains (Reikland)"</Description>
+<SUBCHAPTER_PHYSICAL>
+<Eye name="Au choix">"2"</Eye>
+<Eye name="Vert">"3"</Eye>
+<Eye name="Bleu pâle">"4"</Eye>
+<Eye name="Bleu">"5-7"</Eye>
+<Eye name="Gris pâle">"8-11"</Eye>
+<Eye name="Gris">"12-14"</Eye>
+<Eye name="Marron">"15-17"</Eye>
+<Eye name="Noisette">"18"</Eye>
+<Eye name="Marron foncé">"19"</Eye>
+<Eye name="Noir">"20"</Eye>
+<Hair name="Blond blanc">"2"</Hair>
+<Hair name="Blond doré">"3"</Hair>
+<Hair name="Blond roux">"4"</Hair>
+<Hair name="Brun doré">"5-7"</Hair>
+<Hair name="Brun clair">"8-11"</Hair>
+<Hair name="Brun foncé">"12-14"</Hair>
+<Hair name="Noir">"15-17"</Hair>
+<Hair name="Auburn">"18"</Hair>
+<Hair name="Roux">"19"</Hair>
+<Hair name="Gris">"20"</Hair>
+</SUBCHAPTER_PHYSICAL>
 <Explanation language="FRANCAIS">"Les humains constituent la race civilisée la plus répandue du Vieux Monde. Depuis les plaines des Royaumes estaliens aux provinces gelées de Kislev, les humains occupent chaque région du continent, et ils y prospèrent. Le plus grand et le plus puissant royaume humain est l’Empire, une mosaïque de provinces puissantes couvertes de forêts apparemment sans fin. Situé au cœur de l’Empire, le Reikland en est la région la plus riche et la plus cosmopolite."</Explanation>
 <Ethnic>"RULES-SPECIE_HUMAN"</Ethnic>
 <SUBCHAPTER_ATTR>
@@ -4818,6 +4840,28 @@ See page 190 for Fear rules"</Explanation>
 </Specie>
 <Specie id="RULES-RACE_HALF">
 <Description language="FRANCAIS">"Halfling"</Description>
+<SUBCHAPTER_PHYSICAL>
+<Eye name="Gris clair">"2"</Eye>
+<Eye name="Gris">"3"</Eye>
+<Eye name="Bleu pâle">"4"</Eye>
+<Eye name="Bleu">"5-7"</Eye>
+<Eye name="Vert">"8-11"</Eye>
+<Eye name="Noisette">"12-14"</Eye>
+<Eye name="Marron">"15-17"</Eye>
+<Eye name="Cuivre">"18"</Eye>
+<Eye name="Marron foncé">"19"</Eye>
+<Eye name="Marron foncé">"20"</Eye>
+<Hair name="Gris">"2"</Hair>
+<Hair name="Paille">"3"</Hair>
+<Hair name="Roussâtre">"4"</Hair>
+<Hair name="Miel">"5-7"</Hair>
+<Hair name="Châtaigne">"8-11"</Hair>
+<Hair name="Gingembre">"12-14"</Hair>
+<Hair name="Moutarde">"15-17"</Hair>
+<Hair name="Amande">"18"</Hair>
+<Hair name="Chocolat">"19"</Hair>
+<Hair name="Réglisse">"20"</Hair>
+</SUBCHAPTER_PHYSICAL>
 <Explanation language="FRANCAIS">"Les halflings se rencontrent partout à travers le Reikland, travaillant au service des commerces dans toutes les villes. Un quartier entier de la capitale du Reikland, Altdorf, connu sous le nom de Haffenstadt, regroupe même des centaines de familles élargies de halflings venant en aide aux restaurants, aux tavernes, aux échoppes de pipes et à un nombre impressionnant de gargotes ambulantes. Les halflings sont aussi très présents dans beaucoup de villages du Reikland, où ils travaillent souvent en tant qu’employés d’une auberge ou d’une ferme. Ce sont des créatures grégaires, qui préfèrent vivre en groupes"</Explanation>
 <Ethnic>"RULES-SPECIE_HALFLING"</Ethnic>
 <SUBCHAPTER_ATTR>
@@ -4978,6 +5022,28 @@ See page 190 for Fear rules"</Explanation>
 </Specie>
 <Specie id="RULES-RACE_DWAR">
 <Description language="FRANCAIS">"Nains"</Description>
+<SUBCHAPTER_PHYSICAL>
+<Eye name="Houille">"2"</Eye>
+<Eye name="Plomb">"3"</Eye>
+<Eye name="Acier">"4"</Eye>
+<Eye name="Bleu">"5-7"</Eye>
+<Eye name="Brun terre">"8-11"</Eye>
+<Eye name="Marron foncé">"12-14"</Eye>
+<Eye name="Noisette">"15-17"</Eye>
+<Eye name="Vert">"18"</Eye>
+<Eye name="Cuivre">"19"</Eye>
+<Eye name="Or">"20"</Eye>
+<Hair name="Blanc">"2"</Hair>
+<Hair name="Gris">"3"</Hair>
+<Hair name="Blond pâle">"4"</Hair>
+<Hair name="Doré">"5-7"</Hair>
+<Hair name="Cuivre">"8-11"</Hair>
+<Hair name="Bronze">"12-14"</Hair>
+<Hair name="Brun">"15-17"</Hair>
+<Hair name="Brun foncé">"18"</Hair>
+<Hair name="Brun roux">"19"</Hair>
+<Hair name="Noir">"20"</Hair>
+</SUBCHAPTER_PHYSICAL>
 <Explanation language="FRANCAIS">"Les nains, ou Dawi, le nom qu’ils se donnent – sont légendairement bourrus et têtus. Bien que la majorité vive dans de vastes constructions à flanc de montagne, connues sous le nom de « forteresses », la plupart des grandes villes et la capitale du Reikland abritent également des populations naines. Compte tenu de leur nature clanique, les nains ont tendance à se regrouper, formant des enclaves ou des quartiers partout où ils s’installent. Beaucoup de nains vivant dans le Reikland sont les descendants de ceux qui ont été chassés de forteresses tombées il y a plusieurs siècles, mais la plupart se considèrent toujours comme des nains des Montagnes Grises, bien que certains n’aient jamais vu une colline, et encore moins une montagne."</Explanation>
 <Ethnic>"RULES-SPECIE_DWARF"</Ethnic>
 <SUBCHAPTER_ATTR>
@@ -5134,6 +5200,28 @@ See page 190 for Fear rules"</Explanation>
 </Specie>
 <Specie id="RULES-RACE_HELF">
 <Description language="FRANCAIS">"Haut Elfe"</Description>
+<SUBCHAPTER_PHYSICAL>
+<Eye name="Jais">"2"</Eye>
+<Eye name="Améthyste">"3"</Eye>
+<Eye name="Aigue-marine">"4"</Eye>
+<Eye name="Saphir">"5-7"</Eye>
+<Eye name="Turquoise">"8-11"</Eye>
+<Eye name="Émeraude">"12-14"</Eye>
+<Eye name="Ambre">"15-17"</Eye>
+<Eye name="Cuivre">"18"</Eye>
+<Eye name="Citrine">"19"</Eye>
+<Eye name="Or">"20"</Eye>
+<Hair name="Argent">"2"</Hair>
+<Hair name="Blanc">"3"</Hair>
+<Hair name="Blond pâle">"4"</Hair>
+<Hair name="Blond">"5-7"</Hair>
+<Hair name="Blond intense">"8-11"</Hair>
+<Hair name="Blond cuivré">"12-14"</Hair>
+<Hair name="Blond ambré">"15-17"</Hair>
+<Hair name="Auburn">"18"</Hair>
+<Hair name="Roux">"19"</Hair>
+<Hair name="Noir">"20"</Hair>
+</SUBCHAPTER_PHYSICAL>
 <Explanation language="FRANCAIS">"Grands et élancés, avec de délicates oreilles pointues, la plupart des elfes sont dotés de longs cheveux fins et d’une voix mélodieuse. Bien qu’ils puissent sembler fragiles, leur physiologie n’est pas simplement puissante, mais aussi extraordinairement agile et adroite. Il y a peu de dimorphisme sexuel entre les elfes, ce qui provoque souvent de la confusion chez les humains qui interagissent avec eux."</Explanation>
 <Ethnic>"RULES-SPECIE_HELF"</Ethnic>
 <SUBCHAPTER_ATTR>
@@ -5266,6 +5354,28 @@ See page 190 for Fear rules"</Explanation>
 </Specie>
 <Specie id="RULES-RACE_WELF">
 <Description language="FRANCAIS">"Elfe Sylvain"</Description>
+<SUBCHAPTER_PHYSICAL>
+<Eye name="Ivoire">"2"</Eye>
+<Eye name="Anthracite">"3"</Eye>
+<Eye name="Vert lierre">"4"</Eye>
+<Eye name="Vert mousse">"5-7"</Eye>
+<Eye name="Châtaigne">"8-11"</Eye>
+<Eye name="Châtaigne">"12-14"</Eye>
+<Eye name="Marron foncé">"15-17"</Eye>
+<Eye name="Ocre">"18"</Eye>
+<Eye name="Châtain clair">"19"</Eye>
+<Eye name="Violet">"20"</Eye>
+<Hair name="Bouleau argenté">"2"</Hair>
+<Hair name="Blond cendré">"3"</Hair>
+<Hair name="Or rose">"4"</Hair>
+<Hair name="Blond miel">"5-7"</Hair>
+<Hair name="Brun">"8-11"</Hair>
+<Hair name="Brun acajou">"12-14"</Hair>
+<Hair name="Brun foncé">"15-17"</Hair>
+<Hair name="Brun clair">"18"</Hair>
+<Hair name="Ébène">"19"</Hair>
+<Hair name="Noir bleuté">"20"</Hair>
+</SUBCHAPTER_PHYSICAL>
 <Explanation language="FRANCAIS">"Les elfes sylvains sont rares dans le Reikland, et pour une bonne raison. Pendant les derniers jours de la Guerre de la Barbe, beaucoup d’elfes se sont retirés du Vieux Monde. Mais quelques-uns sont restés et se sont retranchés dans les profondeurs des forêts magiques, qu’ils considèrent aujourd’hui comme leur foyer. Plus de trois mille ans d’isolement, de difficultés et de guerres s’ensuivirent, rendant les « elfes sylvains » culturellement très différents de leurs cousins hauts elfes."</Explanation>
 <Ethnic>"RULES-SPECIE_WELF"</Ethnic>
 <SUBCHAPTER_ATTR>

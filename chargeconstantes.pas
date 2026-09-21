@@ -517,6 +517,12 @@ Const
       // Langue de l'interface (RULES-LAB_*/RULES-MESS_*), décorrélée de ConstIniLangue (qui
       // reste la langue des livres/données) - Nono, 13/09/2026, CONTEXT.md §2.70.
       ConstIniLangueInterface           = 'LANGINTERFACE=';
+      // Unite de taille proposee par defaut dans WinPhysique : CM ou INCH (absente : CM si les
+      // livres sont en francais, INCH sinon). Chaque fiche garde l'unite de sa valeur (HeightUnit).
+      ConstIniUniteTaille               = 'HEIGHTUNIT=';
+      ConstUniteCm                      = 'CM';
+      ConstUniteInch                    = 'INCH';
+      ConstXmlHeightUnit                = 'HeightUnit';
       ConstAnglais                      = 'ENGLISH';
 
       // Police
@@ -664,6 +670,7 @@ Const
       ConstPSort                            = 'PSort';
       ConstPFabrication                     = 'PFabrication';
       ConstPCorruptionTable                 = 'PCorruptionTable';
+      ConstPRaceCouleur                     = 'PRaceCouleur';
 
       ConstCEsquive                         = 'RULES-COMPESQU';
       ConstCCalme                           = 'RULES-COMPCALM';
@@ -819,6 +826,7 @@ Var
   ValLangue:               String = ConstAnglais;
   ValVersion:              String = '';
   ValLangueInterface:      String = ConstAnglais;
+  UniteTaille:             String = ConstUniteInch;   // unite par defaut de la taille, lue dans l'INI
 
   // ConstCheminLivre/ConstCheminPersonnage - Var (pas Const) depuis le 13/09/2026
   // (CONTEXT.md §2.70) : doivent changer ensemble avec ValVersion (WFRP4/WFRP5) le jour ou

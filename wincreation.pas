@@ -1095,6 +1095,7 @@ procedure TWinCreations.PhaseSave(NouvellePhase: Integer);
            // Les details physiques (Rulebook p.40) dependent de l'ethnie : on repart de zero
            Personnage.Age                               := 0;
            Personnage.Height                            := 0;
+           Personnage.HeightUnit                        := UniteTaille;
            Personnage.HairColors                        := '';
            Personnage.EyeColors                         := '';
            LabPhysiqueResume.Text                       := '';
@@ -1866,6 +1867,7 @@ procedure TWinCreations.ButtonPhysiqueClick(Sender: TObject);
     PhysiqueCodeRace := Personnage.Race;
     PhysiqueAge      := Personnage.Age;
     PhysiqueTaille   := Personnage.Height;
+    PhysiqueUnite    := Personnage.HeightUnit;
     PhysiqueYeux     := Personnage.EyeColors;
     PhysiqueCheveux  := Personnage.HairColors;
     FenPhysique          := TWinPhysique.Create(Application);
@@ -1879,9 +1881,10 @@ procedure TWinCreations.ButtonPhysiqueClick(Sender: TObject);
       begin
         Personnage.Age        := PhysiqueAge;
         Personnage.Height     := PhysiqueTaille;
+        Personnage.HeightUnit := PhysiqueUnite;
         Personnage.EyeColors  := PhysiqueYeux;
         Personnage.HairColors := PhysiqueCheveux;
-        LabPhysiqueResume.Text := IntToStr(Personnage.Age) + ' - ' + FormateTaille(Personnage.Height)
+        LabPhysiqueResume.Text := IntToStr(Personnage.Age) + ' - ' + FormateTaille(Personnage.Height, Personnage.HeightUnit)
                                      + ' - ' + Personnage.HairColors + ' - ' + Personnage.EyeColors;
       end;
   end;

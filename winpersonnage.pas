@@ -815,6 +815,7 @@ begin
   PhysiqueCodeRace := Personnage.Race;
   PhysiqueAge      := StrToIntDef(EditAge.Text, 0);
   PhysiqueTaille   := StrToIntDef(EditHeight.Text, 0);
+  PhysiqueUnite    := Personnage.HeightUnit;
   PhysiqueYeux     := EditEyeColors.Text;
   PhysiqueCheveux  := EditHairColors.Text;
   FenPhysique          := TWinPhysique.Create(Application);
@@ -828,6 +829,7 @@ begin
     begin
       EditAge.Text        := IntToStr(PhysiqueAge);
       EditHeight.Text     := IntToStr(PhysiqueTaille);
+      Personnage.HeightUnit := PhysiqueUnite;
       EditEyeColors.Text  := PhysiqueYeux;
       EditHairColors.Text := PhysiqueCheveux;
     end;
@@ -3385,6 +3387,7 @@ begin
   // nom du joueur
   PersonnageNom.Caption     := Personnage.NomPersonnage;
   EditAge.Text              := IntToStr(Personnage.Age);
+  // Dans l'unite de la fiche (Personnage.HeightUnit) ; WinPhysique permet d'en changer
   EditHeight.Text           := IntToStr(Personnage.Height);
   EditHairColors.Text       := Personnage.HairColors;
   EditEyeColors.Text        := Personnage.EyeColors;

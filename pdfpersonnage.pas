@@ -1282,7 +1282,7 @@ Procedure PdfPersonnageCreation(Personnage: StructurePersonnage; BackGround: Boo
     if Personnage.Age > 0 then
       PdfPage.WriteText( 30, 231, IntToStr(Personnage.Age));                                // Age
     if Personnage.Height > 0 then
-      PdfPage.WriteText( 78, 231, FormateTaille(Personnage.Height));                        // Taille
+      PdfPage.WriteText( 78, 231, FormateTaille(Personnage.Height, Personnage.HeightUnit));                        // Taille
     PdfPage.WriteText(118, 231, Personnage.HairColors);                                     // Cheveux
     PdfPage.WriteText(165, 231, Personnage.EyeColors);                                      // Yeux
 
@@ -2633,7 +2633,7 @@ Function PdfBlocEntete(PdfPage: TPDFPage; Personnage: StructurePersonnage; PRace
     PdfEcrit(PdfPage, XValStatut,  XDroite,   Y - (HauteurLigne * 3) + 1, GetTexteLibelle('RULES-' + StatutAdapte(PMetierNiveau.SalaireMetier, PMetier.CodeMetier, Personnage.Race, Personnage.ChoixAdaptation), '', ' '), MinPolice);
     PdfEcrit(PdfPage, XVal1,       XSep1,     Y - (HauteurLigne * 4) + 1, IntToStr(Personnage.Age), MinPolice);
     if Personnage.Height > 0 then
-      PdfEcrit(PdfPage, XValTaille,  XSep2,     Y - (HauteurLigne * 4) + 1, FormateTaille(Personnage.Height), MinPolice);
+      PdfEcrit(PdfPage, XValTaille,  XSep2,     Y - (HauteurLigne * 4) + 1, FormateTaille(Personnage.Height, Personnage.HeightUnit), MinPolice);
     PdfEcrit(PdfPage, XValCheveux, XSep3 - 1, Y - (HauteurLigne * 4) + 1, Personnage.HairColors, MinPolice);
     PdfEcrit(PdfPage, XValYeux,    XDroite,   Y - (HauteurLigne * 4) + 1, Personnage.EyeColors, MinPolice);
 

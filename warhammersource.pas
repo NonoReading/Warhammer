@@ -218,6 +218,7 @@ begin
     Writeln(MyFile, ConstIniVersion + ComboBoxVersion.items[ComboBoxVersion.Itemindex]);
   if ComboBoxLangueInterface.Itemindex <> -1 then
     Writeln(MyFile, ConstIniLangueInterface + ComboBoxLangueInterface.items[ComboBoxLangueInterface.Itemindex]);
+  Writeln(MyFile, ConstIniUniteTaille + UniteTaille);
 
   // Sélection de livres cochés, une ligne par édition (CONTEXT.md §2.70) : la table garde
   // en mémoire la sélection de TOUTES les éditions déjà rencontrées - on ne met à jour ici
@@ -966,12 +967,14 @@ Procedure TMenu.ChargeIni();
     LocLangue:     String;
     LocVersion:    String;
     LocLangueInterface: String;
+    LocUniteTaille: String;
     PosEgal:       Integer;
   begin
     // récupérer la langue dans la fichier ini s'il existe
     LocLangue     := ValLangue;
     LocVersion    := '';
     LocLangueInterface := '';
+    LocUniteTaille := '';
     DirectoryPath := GetCurrentDir+ConstFichierIni;
     if FileExists(DirectoryPath) then
       begin
@@ -999,6 +1002,8 @@ Procedure TMenu.ChargeIni();
               LocVersion := ExtractStringAfter(Ligne,ConstIniVersion);
             if pos(ConstIniLangueInterface, Ligne) > 0 then
               LocLangueInterface := ExtractStringAfter(Ligne,ConstIniLangueInterface);
+            if pos(ConstIniUniteTaille, Ligne) = 1 then
+              LocUniteTaille := UpperCase(Trim(ExtractStringAfter(Ligne,ConstIniUniteTaille)));
           end;
         CloseFile(fichier);
       end;
@@ -1011,6 +1016,13 @@ Procedure TMenu.ChargeIni();
     // §2.70) : résolution définitive dans ChargerListeLanguesInterface, appelée plus tard
     // dans FormCreate, une fois ComboBoxLangueInterface peuplé.
     ValLangueInterface := LocLangueInterface;
+    // Unite de taille par defaut : cle absente ou inconnue -> CM si les livres sont en francais
+    if (LocUniteTaille = ConstUniteCm) or (LocUniteTaille = ConstUniteInch) then
+      UniteTaille := LocUniteTaille
+    else if LocLangue = 'FRANCAIS' then
+      UniteTaille := ConstUniteCm
+    else
+      UniteTaille := ConstUniteInch;
 
     // retrouver la langue dans la liste déroulante
     for ind := 0 to ComboBoxLangue.items.count -1 do

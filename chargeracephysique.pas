@@ -5,7 +5,7 @@ unit ChargeRacePhysique;
 interface
 
 uses
-  Classes, SysUtils, ChargeConstantes, Generics.Collections, UnitCalcul;
+  Classes, SysUtils, ChargeConstantes, Generics.Collections, UnitCalcul, ChargeRace;
 
 // Details physiques d'une ethnie (bloc SUBCHAPTER_PHYSICAL de DATA_SPECIE) : formule d'age,
 // formule de taille en POUCES, et tables de couleur des yeux et des cheveux (2d10).
@@ -40,11 +40,13 @@ Var
   NbRaceCouleur:      Integer;
 
 function ChercheRacePhysique(CodeRace: String): StructureRacePhysique;
+function RaceSourcePhysique(CodeRace: String): String;
 function LanceFormule(Formule: String; Explose: Boolean): Integer;
 function TireCouleur(CodeRace: String; Yeux: Boolean; Jet: Integer): String;
 function TireDetailsPhysiques(CodeRace: String; out Age: Integer; out Taille: Integer;
                               out Yeux: String; out Cheveux: String): Boolean;
-function FormateTaille(Pouces: Integer): String;
+function ConvertitTaille(Valeur: Integer; DeUnite, VersUnite: String): Integer;
+function FormateTaille(Valeur: Integer; Unite: String): String;
 
 implementation
 
@@ -60,6 +62,40 @@ begin
         Result := PRacePhysique;
         break;
       end;
+end;
+
+// Code de l'ethnie dont on lit les details physiques : l'ethnie elle-meme si elle en porte,
+// sinon on remonte a la race (Espece) et on emprunte ceux d'une ethnie de la meme race, celle
+// du livre de la race en priorite (meme regle que CheminRaceImage). '' si rien n'est trouve.
+function RaceSourcePhysique(CodeRace: String): String;
+var
+  PRace, PCandidat: StructureRace;
+  Espece:           String;
+begin
+  Result := '';
+  if ChercheRacePhysique(CodeRace).CodeRace <> '' then
+    begin
+      Result := CodeRace;
+      Exit;
+    end;
+  PRace  := ChercheRace(CodeRace);
+  Espece := Trim(PRace.Espece);
+  if Espece = '' then
+    Exit;
+  for PCandidat in ListRace do
+    begin
+      if not CompareRechercheValeur(PCandidat.Espece, Espece) then
+        continue;
+      if ChercheRacePhysique(PCandidat.CodeRace).CodeRace = '' then
+        continue;
+      if Result = '' then
+        Result := PCandidat.CodeRace;
+      if ExtractStringBefore(PCandidat.CodeRace, SeparateurLivre) = ExtractStringBefore(Espece, SeparateurLivre) then
+        begin
+          Result := PCandidat.CodeRace;
+          Exit;
+        end;
+    end;
 end;
 
 // Evalue une formule "15+10d10", "57+2d10", "51+d10" : termes separes par '+', chacun soit
@@ -154,6 +190,7 @@ begin
   Taille  := 0;
   Yeux    := '';
   Cheveux := '';
+  CodeRace      := RaceSourcePhysique(CodeRace);
   PRacePhysique := ChercheRacePhysique(CodeRace);
   Result := PRacePhysique.CodeRace <> '';
   if not Result then
@@ -173,10 +210,29 @@ begin
   Cheveux := TireCouleur(CodeRace, False, LanceFormule('2d10', False));
 end;
 
-// 69 pouces -> 5'9"
-function FormateTaille(Pouces: Integer): String;
+// Passe une taille d'une unite a l'autre (CM / INCH, 1 pouce = 2,54 cm), arrondie a l'entier.
+// Unite vide = pouces (fiches enregistrees avant l'unite par fiche).
+function ConvertitTaille(Valeur: Integer; DeUnite, VersUnite: String): Integer;
 begin
-  Result := IntToStr(Pouces div 12) + '''' + IntToStr(Pouces mod 12) + '"';
+  if DeUnite = '' then
+    DeUnite := ConstUniteInch;
+  if VersUnite = '' then
+    VersUnite := ConstUniteInch;
+  if DeUnite = VersUnite then
+    Result := Valeur
+  else if VersUnite = ConstUniteCm then
+    Result := Round(Valeur * 2.54)
+  else
+    Result := Round(Valeur / 2.54);
+end;
+
+// Taille ecrite dans SON unite : 175 cm -> 175 cm ; 69 pouces -> 5'9"
+function FormateTaille(Valeur: Integer; Unite: String): String;
+begin
+  if Unite = ConstUniteCm then
+    Result := IntToStr(Valeur) + ' cm'
+  else
+    Result := IntToStr(Valeur div 12) + '''' + IntToStr(Valeur mod 12) + '"';
 end;
 
 end.
