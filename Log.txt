@@ -6010,3 +6010,11 @@ Fichiers modifies : winpersonnage.pas, CONTEXT.md, A FAIRE.txt, Log.txt.
 21/09/2026 - SIGNES ASTRAUX : EN-TETE ET ASTERISQUE SUR LE PDF MAISON, CELLULE DES CHEVEUX - COMPILE, A REGARDER PAR NONO
 PdfBlocEntete : 5e ligne « Signe astral » (pleine largeur, sans separateurs verticaux) seulement si le personnage a un signe ; nom, effets et asterisque. PdfSigneAstralAsterisque (modele PdfFabricationAsterisques) : une asterisque par signe qui modifie une caracteristique, « +2 (N) » a cote de chaque caracteristique et « (N) » sous la cle SIGNE. Ligne du signe retiree du bloc Talents du gabarit maison (doublon) ; elle reste sur le gabarit du livre. Cellule des cheveux : la valeur commence a XSep2 + 12 (etait + 21, elle flottait loin du libelle et se reduisait).
 Fichiers modifies : pdfpersonnage.pas, CONTEXT.md, Log.txt.
+
+21/09/2026 - SIGNES ASTRAUX : CHOIX DE LA SPECIALISATION (CRAFTSMAN...) ET BONUS AU RECAP - COMPILE, A TESTER PAR NONO
+Nouveau champ SigneAstralTalent (balise StarSignTalent) ; le talent generique du signe prend la specialisation choisie via un bouton de l onglet Nom (toujours au choix du joueur). Recapitulatif de creation : bonus du signe ajoute. Point A FAIRE � changer le signe apres la creation � retire : les regles (Archives II p.39) ne le prevoient pas.
+Fichiers modifies : chargeconstantes.pas, chargepersonnage.pas, chargesigneastral.pas, wincreation.pas, INTERFACE.Xml, INTERFACE_FRANCAIS.Xml, CONTEXT.md, A FAIRE.txt, Log.txt.
+
+21/09/2026 - SIGNES ASTRAUX : LE TALENT DU SIGNE DEVIENT UN TALENT DE DEPART - COMPILE, A TESTER PAR NONO
+Le talent du signe etait calcule au vol et seulement dans le PDF : il ne comptait ni pour les couts d augmentation, ni pour les prerequis, ni pour les modificateurs de talent. Il est maintenant ecrit dans CreationTalent a la fin de la creation (AjouteTalentSigne), fusionne avec un niveau deja pris. Retire de PersonnageMutationTalent (doublon). Les caracteristiques du signe restent calculees au vol. A retenir : le signe n existe qu a la creation (Archives II p.39), donc l ecrire dans la fiche est coherent avec les regles.
+Fichiers modifies : wincreation.pas, chargepersonnage.pas, CONTEXT.md, A FAIRE.txt, Log.txt.

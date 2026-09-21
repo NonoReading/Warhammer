@@ -260,6 +260,8 @@ Const
       // Fiche de personnage : code du signe (balise StarSign = ConstXmlSigneAstral) et plage de sa variante
       // (sous-tirage du Witchling Star), vide si le signe n'en a pas.
       ConstXmlSigneVariantePerso        = 'StarSignVariant';
+      // Specialisation choisie pour le talent generique du signe (Craftsman, Impassioned Zeal)
+      ConstXmlSigneTalentPerso          = 'StarSignTalent';
       ConstXmlNomPartie                 = 'part';
       ConstXmlNomSexe                   = 'sex';
       // NamePattern noble="1" : modele reserve aux personnages nobles (absent : modele ordinaire)

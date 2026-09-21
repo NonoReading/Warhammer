@@ -5,7 +5,7 @@ unit ChargeSigneAstral;
 interface
 
 uses
-  Classes, SysUtils, StrUtils, Generics.Collections, UnitCalcul, ChargeAttribut, ChargeTalent;
+  Classes, SysUtils, StrUtils, Generics.Collections, UnitCalcul, ChargeConstantes, ChargeAttribut, ChargeTalent;
 
 // Signes astraux (Archives of the Empire II p.39-50) : systeme optionnel de creation. Un signe
 // se tire au d100 et donne des modificateurs de caracteristiques (+2 / -3) ou un talent.
@@ -50,11 +50,25 @@ function SigneAstralPlageContient(Plage: String; Jet: Integer): Boolean;
 function TireSigneAstral(out Jet: Integer): String;
 function SigneAstralAttributModif(CodeSigne, Variante, Attribut: String): Integer;
 function SigneAstralTireVariante(CodeSigne: String): String;
+function SigneAstralTalentGenerique(CodeSigne, Variante: String): String;
 function SigneAstralTexteEffets(CodeSigne, Variante: String): String;
 function SigneAstralTextePdf(CodeSigne, Variante: String): String;
 function ResumeSigneAstral(CodeSigne, Variante: String): String;
 
 implementation
+
+// Code du talent generique (RULES-T0092_*) que le signe accorde, vide si aucun : le joueur en choisit la
+// specialisation a la creation.
+function SigneAstralTalentGenerique(CodeSigne, Variante: String): String;
+  var
+    PEffet: StructureSigneEffet;
+  begin
+    Result := '';
+    for PEffet in ListSigneEffet do
+      if (PEffet.CodeSigne = CodeSigne) and (PEffet.CodeTalent <> '') and (Pos(ValeurGenerique, PEffet.CodeTalent) > 0)
+         and ((PEffet.Variante = '') or (PEffet.Variante = Variante)) then
+        Exit(PEffet.CodeTalent);
+  end;
 
 // "01-05" -> 1 a 5 ; "10" -> 10 ; une borne haute a 0 vaut 100 ("96-00").
 function SigneAstralPlageContient(Plage: String; Jet: Integer): Boolean;

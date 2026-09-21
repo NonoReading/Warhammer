@@ -193,6 +193,7 @@ Type
      EyeColors:                  String;
      SigneAstral:                String;    // code du signe astral (Archives II p.39), vide = aucun
      SigneAstralVariante:        String;    // plage du sous-tirage d10 du Witchling Star, vide sinon
+     SigneAstralTalent:          String;    // specialisation choisie du talent generique du signe (RULES-T0092_MINNER), vide sinon
      Asterisque:                 Integer;
      // Appartenances : les codes des CareerBonus (regiment, ordre de chevalerie, culte)
      // dont ce personnage est membre, separes par des virgules, vide si aucune.
@@ -580,6 +581,8 @@ begin
             XMLContent.Add(XmlLigne(ConstXmlSigneAstral, Personnage.SigneAstral));
             if Personnage.SigneAstralVariante <> '' then
               XMLContent.Add(XmlLigne(ConstXmlSigneVariantePerso, Personnage.SigneAstralVariante));
+            if Personnage.SigneAstralTalent <> '' then
+              XMLContent.Add(XmlLigne(ConstXmlSigneTalentPerso, Personnage.SigneAstralTalent));
           end;
 
         XMLContent.Add(XmlLigne(ConstXmlWork, Personnage.MetierEnCours.CodeMetier));
@@ -1068,10 +1071,13 @@ begin
       // Fiche sans signe astral : aucun
       Personnage.SigneAstral          := '';
       Personnage.SigneAstralVariante  := '';
+      Personnage.SigneAstralTalent    := '';
       if Assigned(PlayerNode.FindNode(ConstXmlSigneAstral)) then
         Personnage.SigneAstral        := RemoveQuotes(UTF8Encode(PlayerNode.FindNode(ConstXmlSigneAstral).TextContent));
       if Assigned(PlayerNode.FindNode(ConstXmlSigneVariantePerso)) then
         Personnage.SigneAstralVariante := RemoveQuotes(UTF8Encode(PlayerNode.FindNode(ConstXmlSigneVariantePerso).TextContent));
+      if Assigned(PlayerNode.FindNode(ConstXmlSigneTalentPerso)) then
+        Personnage.SigneAstralTalent := RemoveQuotes(UTF8Encode(PlayerNode.FindNode(ConstXmlSigneTalentPerso).TextContent));
       Personnage.Asterisque           := 0;
 
       ChapterRaceNode := PlayerNode.FindNode(ConstXmlChapitreCreation);
@@ -2361,7 +2367,6 @@ Function PersonnageMutationTalent(Personnage: StructurePersonnage): TArrayPerson
     PersonnageMutation: StructurePersonnageMutation;
     indiceModif:        Integer;
     PTalent:             StructurePersonnageTalent;
-    PEffetSigne:         StructureSigneEffet;
   begin
     Result := [];
     for PersonnageMutation in Personnage.Mutations do
@@ -2372,19 +2377,6 @@ Function PersonnageMutationTalent(Personnage: StructurePersonnage): TArrayPerson
             PTalent.Valeur     := 1;
             PTalent.Asterisque := 0;
             PTalent.Source     := PersonnageMutation.Code;
-            Result             += [PTalent];
-          end;
-    // Talent gagne par le signe astral (Archives II p.39) : meme mecanisme, meme calcul a la volee.
-    // Un effet de variante (Witchling Star) ne compte que pour le sous-tirage retenu.
-    if Personnage.SigneAstral <> '' then
-      for PEffetSigne in ListSigneEffet do
-        if (PEffetSigne.CodeSigne = Personnage.SigneAstral) and (PEffetSigne.CodeTalent <> '')
-           and ((PEffetSigne.Variante = '') or (PEffetSigne.Variante = Personnage.SigneAstralVariante)) then
-          begin
-            PTalent.CodeTalent := PEffetSigne.CodeTalent;
-            PTalent.Valeur     := 1;
-            PTalent.Asterisque := 0;
-            PTalent.Source     := Personnage.SigneAstral;
             Result             += [PTalent];
           end;
   end;

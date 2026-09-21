@@ -46,6 +46,7 @@ type
     LabSigne: TEdit;
     ComboBoxSigne: TComboBox;
     ButtonSigne: TBCButton;
+    ButtonSigneSpe: TButton;
     MemoSigne: TMemo;
     ComboBoxSexeNom: TComboBox;
     CheckBoxNoble: TCheckBox;
@@ -156,6 +157,9 @@ type
     procedure ButtonPhysiqueClick({%H-}Sender: TObject);
     procedure ButtonNomClick({%H-}Sender: TObject);
     procedure ButtonSigneClick({%H-}Sender: TObject);
+    procedure ButtonSigneSpeClick({%H-}Sender: TObject);
+    procedure MajTexteSigne();
+    procedure AjouteTalentSigne();
     procedure ComboBoxSigneSelect({%H-}Sender: TObject);
     procedure ChargeSignesAstraux();
     procedure AppliqueSigneAstral(Indice: Integer);
@@ -466,6 +470,14 @@ procedure TWinCreations.FormCreate(Sender: TObject);
     ButtonNom.Caption                          := GetTexteLibelle('RULES-LAB_267');
     LabSigne.Text                              := GetTexteLibelle('RULES-LAB_272');
     ButtonSigne.Caption                        := GetTexteLibelle('RULES-LAB_273');
+    // Bouton de specialisation du talent generique du signe (Craftsman...), pose en code sous le memo
+    MemoSigne.Height                           := MemoSigne.Height - 36;
+    ButtonSigneSpe                             := TButton.Create(Self);
+    ButtonSigneSpe.Parent                      := MemoSigne.Parent;
+    ButtonSigneSpe.SetBounds(MemoSigne.Left, MemoSigne.Top + MemoSigne.Height + 4, MemoSigne.Width, 30);
+    ButtonSigneSpe.Caption                     := GetTexteLibelle('RULES-LAB_275');
+    ButtonSigneSpe.Visible                     := False;
+    ButtonSigneSpe.OnClick                     := @ButtonSigneSpeClick;
     ComboBoxSexeNom.Items[0]                   := GetTexteLibelle('RULES-LAB_268');
     ComboBoxSexeNom.Items[1]                   := GetTexteLibelle('RULES-LAB_269');
     ComboBoxSexeNom.ItemIndex                  := 0;
@@ -1128,6 +1140,7 @@ procedure TWinCreations.PhaseSave(NouvellePhase: Integer);
            // Nouvelle creation : pas de signe astral herite d'une creation precedente
            Personnage.SigneAstral                       := '';
            Personnage.SigneAstralVariante               := '';
+           Personnage.SigneAstralTalent                 := '';
            SigneTire                                    := False;
            ChargeTabMetier();
          end;
@@ -1151,7 +1164,8 @@ procedure TWinCreations.PhaseSave(NouvellePhase: Integer);
                    Personnage.CreationAttribut     += [PersonnageAttribut];
                  end;
                if IndTab <= 10 then
-                   RecapAttribut.Cells[IndTab, 1]               := TabAttribut.Cells[6, IndTab];
+                   RecapAttribut.Cells[IndTab, 1]               := IntToStr(StrToIntDef(TabAttribut.Cells[6, IndTab], 0)
+                     + SigneAstralAttributModif(Personnage.SigneAstral, Personnage.SigneAstralVariante, TabAttribut.Cells[7, IndTab]));
              end;
            RecapAttribut.visible := true;
          end;
@@ -1355,6 +1369,7 @@ procedure TWinCreations.PhaseSave(NouvellePhase: Integer);
          end;
 
       9: Begin         // sauvegarde du personnage
+           AjouteTalentSigne();
            Xp := XmlCalculXp();
            Personnage.LivresAcceptes:=LivresPersonnages;
            directoryPath := GetCurrentDir+ConstCheminPersonnage+EditNomPersonnag.text;
@@ -1955,6 +1970,8 @@ procedure TWinCreations.ChargeSignesAstraux();
     ButtonSigne.Visible  := Actif;
     MemoSigne.Visible    := Actif;
     if not Actif then
+      ButtonSigneSpe.Visible := False;
+    if not Actif then
       Exit;
     ComboBoxSigne.Items.Clear;
     ComboBoxSigne.Items.Add(GetTexteLibelle('RULES-LAB_274'));
@@ -1978,6 +1995,7 @@ procedure TWinCreations.AppliqueSigneAstral(Indice: Integer);
         Indice                         := 0;
         Personnage.SigneAstral         := '';
         Personnage.SigneAstralVariante := '';
+        Personnage.SigneAstralTalent   := '';
         SigneTire                      := False;
       end
     else
@@ -1988,9 +2006,87 @@ procedure TWinCreations.AppliqueSigneAstral(Indice: Integer);
           Personnage.SigneAstralVariante := SigneAstralTireVariante(Personnage.SigneAstral);
       end;
     ComboBoxSigne.ItemIndex := Indice;
-    MemoSigne.Text          := ResumeSigneAstral(Personnage.SigneAstral, Personnage.SigneAstralVariante);
+    MajTexteSigne();
+  end;
+
+// Texte du signe retenu, et bouton de specialisation s'il accorde un talent generique
+procedure TWinCreations.MajTexteSigne();
+  var
+    CodeGenerique: String;
+  begin
+    CodeGenerique := SigneAstralTalentGenerique(Personnage.SigneAstral, Personnage.SigneAstralVariante);
+    MemoSigne.Text := ResumeSigneAstral(Personnage.SigneAstral, Personnage.SigneAstralVariante);
+    if CodeGenerique <> '' then
+      begin
+        if Personnage.SigneAstralTalent <> '' then
+          MemoSigne.Text := MemoSigne.Text + LineEnding + ChercheTalent(Personnage.SigneAstralTalent).Libelle
+        else
+          MemoSigne.Text := MemoSigne.Text + LineEnding + GetTexteLibelle('RULES-LAB_276');
+      end;
     if SigneTire and (Personnage.SigneAstral <> '') then
       MemoSigne.Text := MemoSigne.Text + LineEnding + '+25 XP';
+    ButtonSigneSpe.Visible := MemoSigne.Visible and (CodeGenerique <> '');
+  end;
+
+// Le signe n'existe qu'a la creation (Archives II p.39) : son talent est ecrit dans CreationTalent, comme
+// un talent de depart. Un talent deja pris gagne un niveau (une seule ligne). Un talent generique dont
+// la specialisation n'a pas ete choisie n'est pas donne.
+procedure TWinCreations.AjouteTalentSigne();
+  var
+    PEffet:  StructureSigneEffet;
+    PTalent: StructurePersonnageTalent;
+    Code:    String;
+    Ind:     Integer;
+    Trouve:  Boolean;
+  begin
+    if Personnage.SigneAstral = '' then
+      Exit;
+    for PEffet in ListSigneEffet do
+      if (PEffet.CodeSigne = Personnage.SigneAstral) and (PEffet.CodeTalent <> '')
+         and ((PEffet.Variante = '') or (PEffet.Variante = Personnage.SigneAstralVariante)) then
+        begin
+          Code := PEffet.CodeTalent;
+          if Pos(ValeurGenerique, Code) > 0 then
+            Code := Personnage.SigneAstralTalent;
+          if Code = '' then
+            Continue;
+          Trouve := False;
+          for Ind := 0 to High(Personnage.CreationTalent) do
+            if Personnage.CreationTalent[Ind].CodeTalent = Code then
+              begin
+                Personnage.CreationTalent[Ind].Valeur := Personnage.CreationTalent[Ind].Valeur + 1;
+                Trouve := True;
+                Break;
+              end;
+          if not Trouve then
+            begin
+              PTalent.CodeTalent := Code;
+              PTalent.Valeur     := 1;
+              PTalent.Asterisque := 0;
+              PTalent.Source     := '';
+              Personnage.CreationTalent += [PTalent];
+            end;
+        end;
+  end;
+
+// Le joueur choisit toujours la specialisation (Craftsman : le metier ; Impassioned Zeal : l'objet du zele)
+procedure TWinCreations.ButtonSigneSpeClick(Sender: TObject);
+  var
+    CodeGenerique: String;
+  begin
+    CodeGenerique := SigneAstralTalentGenerique(Personnage.SigneAstral, Personnage.SigneAstralVariante);
+    if CodeGenerique = '' then
+      Exit;
+    ChoixWinTypeFichier := ConstXmlSousChapitreTalent;
+    ChoixWinTalent      := CodeGenerique;
+    SelectWinTalent     := '';
+    FenSpecialisation           := TWinSpecialisations.Create(Application);
+    FenSpecialisation.Position  := poOwnerFormCenter;
+    FenSpecialisation.ShowModal;
+    if SelectWinTalent <> '' then
+      Personnage.SigneAstralTalent := SelectWinTalent;
+    SelectWinTalent := '';
+    MajTexteSigne();
   end;
 
 procedure TWinCreations.ButtonSigneClick(Sender: TObject);
@@ -2006,6 +2102,7 @@ procedure TWinCreations.ButtonSigneClick(Sender: TObject);
       if ListSigneAstral[Ind].CodeSigne = Code then
         begin
           Personnage.SigneAstralVariante := '';
+          Personnage.SigneAstralTalent   := '';
           ComboBoxSigne.ItemIndex        := -1;
           SigneTire                      := True;
           AppliqueSigneAstral(Ind + 1);
@@ -2019,6 +2116,7 @@ procedure TWinCreations.ComboBoxSigneSelect(Sender: TObject);
   begin
     Indice                         := ComboBoxSigne.ItemIndex;
     Personnage.SigneAstralVariante := '';
+    Personnage.SigneAstralTalent   := '';
     SigneTire                      := False;
     AppliqueSigneAstral(Indice);
   end;
