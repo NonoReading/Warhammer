@@ -2692,9 +2692,19 @@ Function PdfBlocEntete(PdfPage: TPDFPage; Personnage: StructurePersonnage; PRace
     PdfEcrit(PdfPage, XValYeux,    XDroite,   Y - (HauteurLigne * 4) + 1, Personnage.EyeColors, MinPolice);
     // Signe astral (Archives of the Empire II p.39) : ligne pleine largeur, nom, effets et astérisque
     if (NbLignes >= 5) and (Personnage.SigneAstral <> '') then
-      PdfEcrit(PdfPage, XValChemin + 5, XDroite, Y - (HauteurLigne * 5) + 1,
-        Trim(ChercheSigneAstral(Personnage.SigneAstral).Libelle + ' - '
-             + SigneAstralTextePdf(Personnage.SigneAstral, Personnage.SigneAstralVariante) + ' ' + AnnotSigne), MinPolice);
+      begin
+        // Le texte s'arrete 8 mm avant le bord : l'asterisque "(N)" s'ecrit a droite en petite police
+        // (meme principe que les annotations de talents).
+        PdfEcrit(PdfPage, XValChemin + 5, XDroite - 8, Y - (HauteurLigne * 5) + 1,
+          Trim(ChercheSigneAstral(Personnage.SigneAstral).Libelle + ' - '
+               + SigneAstralTextePdf(Personnage.SigneAstral, Personnage.SigneAstralVariante)), MinPolice);
+        if AnnotSigne <> '' then
+          begin
+            PdfTaillePolice(PdfPage, PdfFontValue, ConstPoliceArial, 5);
+            PdfEcrit(PdfPage, XDroite - 8, XDroite - 1, Y - (HauteurLigne * 5) + 1.5, AnnotSigne, 4);
+            PdfTaillePolice(PdfPage, PdfFontValue, ConstPoliceArial, 9);
+          end;
+      end;
 
     Result := Y - (NbLignes * HauteurLigne);
   end;
