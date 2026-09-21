@@ -5984,3 +5984,7 @@ Fichiers modifies : BOOK_UP_IN_ARMS.Xml, CONTEXT.md, A FAIRE.txt, Log.txt.
 21/09/2026 - NOMS DU NORD DE L EMPIRE (NORDLAND, OSTLAND) - DONNEES SEULES
 Prenoms wastelanders et d influence norse du Character Pack p.8 (8 M, 8 F) sur MIDDE-RACE_HNORD et NATIO-RACE_HOSTL ; modeles et noms de famille du Reiklandais.
 Fichiers modifies : BOOK_MIDDENHEIM_CITY_OF_THE_WHITE_WOLF.Xml, BOOK_NATIONS_OF_MANKIND.Xml, CONTEXT.md, Log.txt.
+
+21/09/2026 - NOMS WASTELANDERS - DONNEES SEULES
+5 prenoms wastelanders du Character Pack p.8 (3 M, 2 F) sur NATIO-RACE_HWEST ; modeles et noms de famille du Reiklandais.
+Fichiers modifies : BOOK_NATIONS_OF_MANKIND.Xml, CONTEXT.md, Log.txt.

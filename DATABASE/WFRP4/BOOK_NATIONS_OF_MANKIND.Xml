@@ -3856,6 +3856,14 @@ Description: You take a –50 penalty to your Weapon Skill characteristic if you
 <Attribut name="RULES-ATTR_Supp">"3"</Attribut>
 <Attribut name="RULES-ATTR_Move">"4"</Attribut>
 </SUBCHAPTER_ATTR>
+<!-- Noms wastelanders (Unofficial Character Pack, livre de fan, p.8, « common in the north-west of the Empire ») : Filip, Anders, Joachim, Astrid, Ingrid ; modeles et noms de famille repris du Reiklandais. -->
+<SUBCHAPTER_NAMES>
+<Name part="Forename" sex="M" name="Filip">"1"</Name>
+<Name part="Forename" sex="M" name="Anders">"2"</Name>
+<Name part="Forename" sex="M" name="Joachim">"3"</Name>
+<Name part="Forename" sex="F" name="Astrid">"1"</Name>
+<Name part="Forename" sex="F" name="Ingrid">"2"</Name>
+</SUBCHAPTER_NAMES>
 <SUBCHAPTER_SKILL>
   <!-- Livre p.3-4, "Humans (Westerland, Marienburg)", les competences dans l ordre du livre. -->
 <Skill>"RULES-COMPSUBOR"</Skill>
