@@ -5908,3 +5908,7 @@ Fichiers modifies : BOOK_HIGH_ELF_PLAYERS_GUIDE.Xml, CONTEXT.md, A FAIRE.txt, Lo
 20/09/2026 - AUDIT DES TXT : HIGH ELF PLAYER S GUIDE PASSE A COMPLETE=1
 Table de tirage p.59 controlee : les onze tables d ethnie couvrent 1 a 100 sans trou ni doublon, ligne Mage comprise ; aucune saisie a faire. Adapting Careers termine (trappings, facultatives, options Up in Arms). Decision Nono : COMPLETE=1, en-tete du XML remis a jour. Non portes faute de mecanisme : restriction Blackpowder du Soldier, intitule Exalted Maker, quantite des 10 Arrows, nuance des carrieres a * p.59. Bilan de l audit : les quatre livres a COMPLETE=0 sont passes a 1.
 Fichiers modifies : BOOK_HIGH_ELF_PLAYERS_GUIDE.Xml, CONTEXT.md, A FAIRE.txt, Log.txt.
+
+20/09/2026 - AUDIT DES TXT : WOOD ELF WARDANCER (COMPLETE=1 CONFIRME)
+Audit du livre de fan Wood Elf Wardancer Career : les 4 niveaux (competences, talents, trappings, Salary), le tableau d avance (WS 1, S 2, I 1, Ag 1, WP 3, Fel 4), les deux talents (Talismanic Tattoos, Shadow Dances of Loec avec les 4 danses) et la carriere sont tous au XML, sans ecart. COMPLETE=1 maintenu, aucun fichier de donnees modifie.
+Fichiers modifies : A FAIRE.txt, Log.txt.
