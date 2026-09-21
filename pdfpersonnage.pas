@@ -185,6 +185,8 @@ Function PdfPersonnageArmureAsterisques(Personnage: StructurePersonnage; Asteris
 // chaque partie de l'armure"). Même numéro que celui déjà utilisé pour la mutation si
 // elle touche aussi un Attribut/une Compétence (AsterisqueMutation partagé par mutation).
 Function PdfPersonnageMutationAsterisques(Personnage: StructurePersonnage; AsterisqueDepart: Integer; out AsterisqueParMutation: TStringList; out AsterisqueArmure: String; out AsterisqueFinal: Integer): TStringList;
+// Asterisque du signe astral (definie plus bas, appelee par PdfPersonnageMutationAsterisques).
+Procedure PdfSigneAstralAsterisque(Personnage: StructurePersonnage; var AsterisqueCourant: Integer; Annotation, ParPiece: TStringList);
 
 // Blocs extraits de PdfPersonnageCreationFeldo2P (CONTEXT.md §2.4) — premier prototype
 // de l'architecture Bloc/Tableau. PdfBlocResilience dessine le cadre partagé
@@ -199,7 +201,7 @@ Procedure PdfBlocDestin(PdfPage: TPDFPage; Personnage: StructurePersonnage; XGau
 // ligne (les séparateurs verticaux internes changent d'une ligne à l'autre) : ce n'est donc
 // pas un TPdfTableau générique, juste un bloc simple comme Résilience/Destin. Renvoie le Y
 // du bas du cadre, comme DessinerTableau (sans le -3 de marge, laissé à l'appelant).
-Function PdfBlocEntete(PdfPage: TPDFPage; Personnage: StructurePersonnage; PRace: StructureRace; PMetier: StructureMetier; PMetierNiveau: StructureMetierNiveau; LocData: String; XGauche, XDroite, Y, HauteurLigne: Single; NbLignes: Integer; MinPolice: Integer): Single;
+Function PdfBlocEntete(PdfPage: TPDFPage; Personnage: StructurePersonnage; PRace: StructureRace; PMetier: StructureMetier; PMetierNiveau: StructureMetierNiveau; LocData: String; XGauche, XDroite, Y, HauteurLigne: Single; NbLignes: Integer; MinPolice: Integer; AnnotSigne: String): Single;
 
 // Bloc Ambitions (panneau fixe : titre + deux lignes "court terme"/"long terme" laissées
 // vides à l'impression pour être remplies à la main — aucune donnée de Personnage,
@@ -2493,7 +2495,40 @@ Function PdfPersonnageMutationAsterisques(Personnage: StructurePersonnage; Aster
     // Runes et autres fabrications portees (Rune of Fortitude, Rune of Stone).
     PdfFabricationAsterisques(Personnage, AsterisqueCourant, Result, AsterisqueParMutation, AsterisqueArmure);
 
+    // Signe astral (Archives of the Empire II p.39).
+    PdfSigneAstralAsterisque(Personnage, AsterisqueCourant, Result, AsterisqueParMutation);
+
     AsterisqueFinal := AsterisqueCourant;
+  end;
+
+// Asterisque du signe astral : une seule, si le signe modifie au moins une caracteristique.
+// " +2 (N)" a cote de chaque caracteristique touchee (Annotation) et "(N)" sous la cle SIGNE de
+// ParPiece, a ecrire a cote du signe dans l'en-tete. Un signe qui ne donne qu'un talent n'en a pas.
+Procedure PdfSigneAstralAsterisque(Personnage: StructurePersonnage; var AsterisqueCourant: Integer; Annotation, ParPiece: TStringList);
+  var
+    PEffet: StructureSigneEffet;
+    Numero: Integer;
+  begin
+    if Personnage.SigneAstral = '' then
+      Exit;
+    Numero := 0;
+    for PEffet in ListSigneEffet do
+      if (PEffet.CodeSigne = Personnage.SigneAstral) and (PEffet.CodeAttribut <> '')
+         and ((PEffet.Variante = '') or (PEffet.Variante = Personnage.SigneAstralVariante)) then
+        begin
+          if Numero = 0 then
+            begin
+              Inc(AsterisqueCourant);
+              Numero := AsterisqueCourant;
+              ParPiece.Values['SIGNE'] := '(' + IntToStr(Numero) + ')';
+            end;
+          if PEffet.Valeur >= 0 then
+            Annotation.Values[PEffet.CodeAttribut] := Annotation.Values[PEffet.CodeAttribut]
+              + ' +' + IntToStr(PEffet.Valeur) + ' (' + IntToStr(Numero) + ')'
+          else
+            Annotation.Values[PEffet.CodeAttribut] := Annotation.Values[PEffet.CodeAttribut]
+              + ' ' + IntToStr(PEffet.Valeur) + ' (' + IntToStr(Numero) + ')';
+        end;
   end;
 
 // Dessine le cadre partagé Résilience/Destin (4 lignes de haut, de X à X+78) et le contenu
@@ -2578,7 +2613,7 @@ Procedure PdfBlocDestin(PdfPage: TPDFPage; Personnage: StructurePersonnage; XGau
 // les mêmes d'une ligne à l'autre (voir les conditions IndC = 4 / IndC <> 3 / IndC <> 2
 // ci-dessous, reprises telles quelles de l'ancien code). XGauche/XDroite sont les bords du
 // cadre, Y son sommet, HauteurLigne la hauteur d'une ligne et NbLignes son nombre de lignes.
-Function PdfBlocEntete(PdfPage: TPDFPage; Personnage: StructurePersonnage; PRace: StructureRace; PMetier: StructureMetier; PMetierNiveau: StructureMetierNiveau; LocData: String; XGauche, XDroite, Y, HauteurLigne: Single; NbLignes: Integer; MinPolice: Integer): Single;
+Function PdfBlocEntete(PdfPage: TPDFPage; Personnage: StructurePersonnage; PRace: StructureRace; PMetier: StructureMetier; PMetierNiveau: StructureMetierNiveau; LocData: String; XGauche, XDroite, Y, HauteurLigne: Single; NbLignes: Integer; MinPolice: Integer; AnnotSigne: String): Single;
   var
     IndC: Integer;
     // Positions des colonnes, declarees une fois : deplacer une separation (XSep2, XSep3)
@@ -2600,7 +2635,7 @@ Function PdfBlocEntete(PdfPage: TPDFPage; Personnage: StructurePersonnage; PRace
     XLib3      := XSep3 + 1;
     XValEspece  := XSep2 + 12;
     XValNiveau  := XSep2 + 18;
-    XValCheveux := XSep2 + 21;
+    XValCheveux := XSep2 + 12;   // etait +21 : la valeur flottait loin du libelle et se reduisait
     XValClasse  := XSep3 + 12;
     XValStatut  := XSep3 + 11;
     XValYeux    := XSep3 + 11;
@@ -2611,7 +2646,7 @@ Function PdfBlocEntete(PdfPage: TPDFPage; Personnage: StructurePersonnage; PRace
     for IndC := 0 to NbLignes do
       begin
         PdfPage.DrawLine(XGauche, Y - (IndC * HauteurLigne), XDroite, Y - (IndC * HauteurLigne), 1);
-        if IndC > 0 then
+        if (IndC > 0) and (IndC <= 4) then
           begin
             if IndC = 4  then PdfPage.DrawLine(XSep1, Y - ((IndC-1) * HauteurLigne), XSep1, Y - (IndC * HauteurLigne), 1);
             if IndC <> 3 then PdfPage.DrawLine(XSep2, Y - ((IndC-1) * HauteurLigne), XSep2, Y - (IndC * HauteurLigne), 1);
@@ -2632,6 +2667,8 @@ Function PdfBlocEntete(PdfPage: TPDFPage; Personnage: StructurePersonnage; PRace
     PdfPage.WriteText(XLibTaille, Y - (HauteurLigne * 4) + 1, GetTexteLibelle('RULES-PDF_MAIN4_HEIGHT'));
     PdfPage.WriteText(XLib2,      Y - (HauteurLigne * 4) + 1, GetTexteLibelle('RULES-PDF_MAIN4_HAIR'));
     PdfPage.WriteText(XLib3,      Y - (HauteurLigne * 4) + 1, GetTexteLibelle('RULES-PDF_MAIN4_EYES'));
+    if NbLignes >= 5 then
+      PdfPage.WriteText(XLib1,    Y - (HauteurLigne * 5) + 1, GetTexteLibelle('RULES-LAB_272'));
 
     // Valeur Entête (chaque valeur s'arrete a la separation suivante, moins 1)
     PdfTaillePolice(PdfPage, PdfFontValue, ConstPoliceArial, 9);
@@ -2653,6 +2690,11 @@ Function PdfBlocEntete(PdfPage: TPDFPage; Personnage: StructurePersonnage; PRace
       PdfEcrit(PdfPage, XValTaille,  XSep2,     Y - (HauteurLigne * 4) + 1, FormateTaille(Personnage.Height, Personnage.HeightUnit), MinPolice);
     PdfEcrit(PdfPage, XValCheveux, XSep3 - 1, Y - (HauteurLigne * 4) + 1, Personnage.HairColors, MinPolice);
     PdfEcrit(PdfPage, XValYeux,    XDroite,   Y - (HauteurLigne * 4) + 1, Personnage.EyeColors, MinPolice);
+    // Signe astral (Archives of the Empire II p.39) : ligne pleine largeur, nom, effets et astérisque
+    if (NbLignes >= 5) and (Personnage.SigneAstral <> '') then
+      PdfEcrit(PdfPage, XValChemin + 5, XDroite, Y - (HauteurLigne * 5) + 1,
+        Trim(ChercheSigneAstral(Personnage.SigneAstral).Libelle + ' - '
+             + SigneAstralTextePdf(Personnage.SigneAstral, Personnage.SigneAstralVariante) + ' ' + AnnotSigne), MinPolice);
 
     Result := Y - (NbLignes * HauteurLigne);
   end;
@@ -2964,18 +3006,6 @@ Function PdfBlocTalents(PdfPage: TPDFPage; Personnage: StructurePersonnage; XGau
     finally
       ListeRegle.Free;
     end;
-
-    // Signe astral (Archives of the Empire II p.39) : une ligne en lecture seule, comme les regles
-    // speciales ci-dessus.
-    if Personnage.SigneAstral <> '' then
-      begin
-        inc(NbLigne);
-        if NbLigne <= LimiteLigne then
-          begin
-            PdfEcrit(PdfPage, XGauche + 2, XGauche + 41, Y - ((NbLigne + 2) * HauteurLigne) + 1, GetTexteLibelle('RULES-LAB_272') + ': ' + ChercheSigneAstral(Personnage.SigneAstral).Libelle, MinPolice);
-            PdfEcrit(PdfPage, XGauche + 54, XDroite, Y - ((NbLigne + 2) * HauteurLigne) + 1, SigneAstralTextePdf(Personnage.SigneAstral, Personnage.SigneAstralVariante), MinPolice);
-          end;
-      end;
 
     // Talents accordes par une mutation (ex. Fleshy Tentacle -> Tentacles), meme bloc, meme
     // mise en forme que les regles speciales d'appartenance juste au-dessus. Calcule a la
@@ -5136,7 +5166,9 @@ Procedure PdfPersonnageCreationFeldo2P(Personnage: StructurePersonnage);
 
     // Bloc Entête (extrait dans PdfBlocEntete, CONTEXT.md §2.4)
     DessinDebutHautCarac := PdfBlocEntete(PdfPage, Personnage, PRace, PMetier, PMetierNiveau, LocData,
-      DessinDebColCompG, DessinFinEntete, DessinDebutHautEntete, DessinHauteurEntete, DessinNbLigEntete, MinPolice) - 3;
+      DessinDebColCompG, DessinFinEntete, DessinDebutHautEntete, DessinHauteurEntete,
+      DessinNbLigEntete + Ord(Personnage.SigneAstral <> ''), MinPolice,
+      AsterisqueParMutation.Values['SIGNE']) - 3;
 
     // Tableau Caractéristiques (extrait dans DessinerTableau / PdfPreparerRecordSetCaracteristiques, CONTEXT.md §2.4)
     TableauCarac.X               := DessinDebColCompG;
