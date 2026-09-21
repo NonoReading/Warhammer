@@ -1940,6 +1940,18 @@ Asur from the Outer Kingdoms and Eataine do not harbour such prejudice."</Explan
 <Attribut name="RULES-ATTR_Supp">"2"</Attribut>
 <Attribut name="RULES-ATTR_Move">"5"</Attribut>
 </SUBCHAPTER_ATTR>
+<!-- Noms des Elfes des mers (High Elf Player s Guide, Names) : prenom du generateur haut elfe du Rulebook p.39 (modele et composantes repris du Haut Elfe du Rulebook), epithete propre : elements naturels et voyage. -->
+<SUBCHAPTER_NAMES>
+<Name part="Epithet" name="Bluestrait">"1"</Name>
+<Name part="Epithet" name="Cloudspear">"2"</Name>
+<Name part="Epithet" name="Farborn">"3"</Name>
+<Name part="Epithet" name="Greenbreeze">"4"</Name>
+<Name part="Epithet" name="Seablade">"5"</Name>
+<Name part="Epithet" name="Starfoam">"6"</Name>
+<Name part="Epithet" name="Starguided">"7"</Name>
+<Name part="Epithet" name="Wavestrider">"8"</Name>
+<Name part="Epithet" name="Whitecrest">"9"</Name>
+</SUBCHAPTER_NAMES>
 <SUBCHAPTER_SKILL>
 <Skill>"RULES-COMPCALM"</Skill>
   <!-- Cool -->

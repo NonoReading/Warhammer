@@ -5960,3 +5960,7 @@ Fichiers modifies : BOOK_RULESBOOK.Xml, chargeracephysique.pas, CONTEXT.md, A FA
 21/09/2026 - NOMS NOBLES (« VON » + LIEU) : CASE NOBLE SUR L ONGLET NOM - COMPILE, A TESTER PAR NONO
 Modele noble="1" sur l humain du Rulebook, 14 lieux du Reikland cites dans le Rulebook, TireNom(..., Noble), CheckBoxNoble + LabNoble dans wincreation, RULES-LAB_271. Decision de Nono : liste courte du Rulebook (pas de gazetteer dans les livres saisis), case a cocher plutot que detection par la carriere.
 Fichiers modifies : BOOK_RULESBOOK.Xml, INTERFACE.Xml, INTERFACE_FRANCAIS.Xml, chargeconstantes.pas, chargeracephysique.pas, xmlexportimport.pas, wincreation.pas et .lfm, CONTEXT.md, A FAIRE.txt, Log.txt.
+
+21/09/2026 - NOMS DES ELFES DES MERS (HIGH ELF PLAYER S GUIDE) - DONNEES SEULES, A TESTER PAR NONO
+Bloc <SUBCHAPTER_NAMES> sur HELFG-RACE_SEAEL : 9 epithetes du guide ; prenom par le generateur haut elfe du Rulebook via le repli d espece. Aucun code modifie.
+Fichiers modifies : BOOK_HIGH_ELF_PLAYERS_GUIDE.Xml, CONTEXT.md, A FAIRE.txt, Log.txt.
