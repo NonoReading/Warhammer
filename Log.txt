@@ -5912,3 +5912,8 @@ Fichiers modifies : BOOK_HIGH_ELF_PLAYERS_GUIDE.Xml, CONTEXT.md, A FAIRE.txt, Lo
 20/09/2026 - AUDIT DES TXT : WOOD ELF WARDANCER (COMPLETE=1 CONFIRME)
 Audit du livre de fan Wood Elf Wardancer Career : les 4 niveaux (competences, talents, trappings, Salary), le tableau d avance (WS 1, S 2, I 1, Ag 1, WP 3, Fel 4), les deux talents (Talismanic Tattoos, Shadow Dances of Loec avec les 4 danses) et la carriere sont tous au XML, sans ecart. COMPLETE=1 maintenu, aucun fichier de donnees modifie.
 Fichiers modifies : A FAIRE.txt, Log.txt.
+
+20/09/2026 - AUDIT DES TXT : ROUGH NIGHTS AND HARD DAYS (COMPLETE=1 CONFIRME) ET CORRECTIF DE LA BALISE COMPLETE DU HIGH ELF PLAYER S GUIDE
+Rough Nights and Hard Days : l aventure n apporte que l Appendice 1 Gnomes (p.86-90) ; attributs, 12 competences, 6 talents (Suffuse With (Ulgu) est celui de Winds of Magic), table de tirage de carriere (100 lignes) et table d especes aleatoires sont tous au XML, sans ecart. Non modeles, sans mecanisme : noms de clans, taille/age/yeux/cheveux (aucune ethnie n a ces tables), dieux gnomes (Evawn, Mabyn, Ringil), restriction des sorciers gnomes (Shadows, Dark, Chaos), jeux de taverne (Appendice 2), profils de PNJ.
+CORRECTIF : le passage du High Elf Player s Guide a COMPLETE=1 (commit cb91e23) n avait modifie que le commentaire d en-tete ; la balise <COMPLETE> restait a 0. Corrigee ligne 8 du XML. Verifie : seul ce fichier n avait pas la balise a 1 (grep -L sur les 21 livres).
+Fichiers modifies : BOOK_HIGH_ELF_PLAYERS_GUIDE.Xml, A FAIRE.txt, Log.txt.
