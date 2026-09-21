@@ -11262,3 +11262,31 @@ Formules : Humain 15+d10 / 4'9"+2d10 ; Nain 15+10d10 / 4'3"+d10 ; Elfe (les deux
 **Pieges** : `MiseEnFormeDesChamp` (`globalfonts.pas`) pose un `TShape` alClient sur chaque `TTabSheet` : tout controle non fenetre pose dans un onglet (TBCButton, TLabel) est cache ; `BringToFront` pour un bouton, `TEdit` lecture seule pour un texte (les `TLabel` d onglet sont en plus colories en rouge par cette boucle). Voir §4.
 
 **Reste** (A FAIRE.txt) : Gnome de Rough Nights p.89, Dwarf Player s Guide (tables par region, modificateurs -5/+5, Distinguished Features), autres livres ethniques, codes de libelle (boutons, legendes de WinPhysique, couleurs), tirage obligatoire ou non. **Fait le 21/09 (compile et valide)** : couleurs en francais (Rulebook FR p.40, `ConstPRaceCouleur` dans `Traduit`), repli sur la race (`RaceSourcePhysique`), unite de taille CM/INCH (cle `HEIGHTUNIT=` de l INI, `Personnage.HeightUnit`, liste cm/in dans WinPhysique ; fiche sans balise = pouces).
+
+### 2.87 Generateur de noms par ethnie (paliers 1 et 2) — compile, A TESTER par Nono (21/09/2026)
+
+**Sources** : Rulebook p.38-39 (generateur de noms elfiques 1d10, suffixes et clans nains), Dwarf Player s Guide p.39 (tableau des prenoms en d1000, homme/femme). Le tableau du DPG est imprime avec une erreur : la ligne « 738-753 » (Morgrim / Nanda) est en realite 738-745 (746-753 = Mundri / Nanna) ; corrige dans le XML.
+
+**Donnees** : bloc `<SUBCHAPTER_NAMES>` dans une `<Specie>` :
+```
+<NamePattern sex="M">"Forename Forename:M+'sson' Clan"</NamePattern>
+<Name part="Forename" sex="M" name="Alaric">"1-9"</Name>     (name = libelle, contenu = plage du de)
+```
+Modele : mots separes par des espaces ; un mot = elements separes par `+` ; element = partie (`First`), partie d un sexe impose (`Forename:M`, le pere pour le suffixe), texte fixe entre apostrophes, ou l un d eux suivi de `?` (present une fois sur deux). Taille du de d une partie = plus haute borne de ses plages. Variantes « Gert(r)a » : la lettre entre parentheses est tiree a pile ou face.
+- `BOOK_RULESBOOK.Xml` : elfes (`RULES-RACE_HELF`, `_WELF` : `First+Second?+End`, terminaison haut elfe / sylvain) et nains (`RULES-RACE_DWAR` : modeles M et F, 12 clans du Reikland et des Grey Mountains).
+- `BOOK_DWARF_PLAYERS_GUIDE.Xml` : prenoms M et F (118 lignes chacun) sur `DWARF-RACE_DIMP` seulement.
+- Chaque PARTIE se cherche separement (`RaceSourceNom`) : l ethnie elle-meme, sinon une ethnie de la meme espece (celle du livre de l espece en priorite). Un nain du DPG prend ainsi modele et clans du Rulebook et les prenoms de `DWARF-RACE_DIMP`. Sans le DPG charge, le mot `Forename` est omis (« Ariksson Ardrungan »).
+
+**Code** : `chargeracephysique.pas` (`StructureRaceNom`, `StructureRaceNomModele`, `ListRaceNom`, `ListRaceNomModele`, `EthnieANoms`, `RaceSourceNom`, `RaceANoms`, `TireNom(CodeRace, Sexe)`) ; lecture (branche `ConstXmlSousChapitreNoms`) et export dans `xmlexportimport.pas` ; init/vidage dans `warhammersource.pas` ; constantes dans `chargeconstantes.pas`. UI : `ButtonNom` + `ComboBoxSexeNom` sur `TabSheetNom` de `wincreation` (le nom du personnage = nom de son dossier, donc pas de bouton sur la fiche) ; libelles `RULES-LAB_267` a `_270`.
+
+**Piege** : `ExtractStrings` traite l apostrophe comme un guillemet : le modele se decoupe avec `Decoupe` (maison).
+
+**Palier 2 (meme jour)** :
+- Humains (`RULES-RACE_HUM`, Rulebook) : prenoms d + homme/femme en d1000 (164 lignes chacun) et noms de famille (30 metiers allemands + 21 traits physiques) du **Unofficial Character Pack** (livre de FAN, `PDF_TEXTE/Other help`, p.9-11), poses dans le XML du Rulebook faute de livre de fan porteur d une ethnie (a deplacer si un livre « Unofficial » est cree). Chevauchements du livre rognes (Hansel 425-430 / Hartwig 426-431, Haletha / Hanna) : la ligne precedente est raccourcie. Toute ethnie humaine sans donnee de noms retombe sur celle-ci.
+- Halflings (Rulebook p.39, texte anglais dans `LIVRES/RULEBOOK.txt`) : 7 prenoms, 6 clans ; les diminutifs ne sont pas tires.
+- Norses (Sea of Claws p.100) : 69 prenoms M, 64 F, suffixe -sson / -sdottir du pere ; liste posee sur les 3 ethnies humaines norses (Bjornling, Sarl, Skaeling) ; `RaceSourceNom` prefere desormais l ethnie du MEME LIVRE que l ethnie demandee avant celle du livre de l espece.
+- Gnomes (Rough Nights p.88-89) : prenoms F = exemples matrilineaires, M = patrilineaux (correspondance a confirmer) ; « clan » = 8 clans de Glimdwarrow + 4 epithetes d exemple (le clan est souvent secret).
+- Elfes du Rulebook : epithete (6 exemples haut elfe / 6 sylvains) ajoutee au modele (`First+Second?+End Epithet`). Elfes noirs (`NAGGA-RACE_DELF`, Lords of Naggaroth, fan) : meme generateur avec les terminaisons noires et 6 noms de puissance.
+- Variantes « Adam/Adamar/Adhemar » : une au hasard (`ResoutVariantes`). Clan nain corrige en « Harrazlings » (texte anglais du Rulebook).
+
+**Reste** (A FAIRE.txt) : generateur prefixe + suffixe des nains du Character Pack (d100 x 2, non saisi) ; noms de famille nobles (« von ») et patronymes humains ; Sea Elf (High Elf Player s Guide : generateur haut elfe + 9 epithetes) ; ethnies sans donnee (Bretonniens, Kislevites...) retombent sur le Reiklandais ; V5 sans bloc de noms.

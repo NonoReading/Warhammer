@@ -4584,6 +4584,389 @@ See page 190 for Fear rules"</Explanation>
 <Hair name="Red">"19"</Hair>
 <Hair name="Grey">"20"</Hair>
 </SUBCHAPTER_PHYSICAL>
+<!-- Noms reiklandais : tableaux de prenoms en d1000 (homme / femme) et noms de famille (metiers et traits physiques) du Unofficial Character Pack (livre de fan, p.9-11) ; le Rulebook p.37 ne donne que 30 exemples. Les chevauchements de plages du livre (Hansel 425-430 / Hartwig 426-431, etc.) sont rognes. -->
+<SUBCHAPTER_NAMES>
+<NamePattern>"Forename Surname"</NamePattern>
+<Name part="Forename" sex="M" name="Adam/Adamar/Adhemar">"1-5"</Name>
+<Name part="Forename" sex="M" name="Adelbert">"6-11"</Name>
+<Name part="Forename" sex="M" name="Adolphus">"12-17"</Name>
+<Name part="Forename" sex="M" name="Adrian/Hadrian">"18-23"</Name>
+<Name part="Forename" sex="M" name="Albrecht/Alberich/Albert">"24-30"</Name>
+<Name part="Forename" sex="M" name="Aldhelm">"31-36"</Name>
+<Name part="Forename" sex="M" name="Alexander">"37-42"</Name>
+<Name part="Forename" sex="M" name="Alexei">"43-47"</Name>
+<Name part="Forename" sex="M" name="Alfred/Alfried">"48-54"</Name>
+<Name part="Forename" sex="M" name="Alphonse">"55-60"</Name>
+<Name part="Forename" sex="M" name="Anders/Andreas/Andrei">"61-65"</Name>
+<Name part="Forename" sex="M" name="Anton/Antoine/Anthony">"66-70"</Name>
+<Name part="Forename" sex="M" name="Artur">"71-75"</Name>
+<Name part="Forename" sex="M" name="Axel">"76-81"</Name>
+<Name part="Forename" sex="M" name="Barthelm/Bartholomew">"82-87"</Name>
+<Name part="Forename" sex="M" name="Bengt">"88-93"</Name>
+<Name part="Forename" sex="M" name="Bernard/Bernhardt">"94-100"</Name>
+<Name part="Forename" sex="M" name="Bertholdt">"101-106"</Name>
+<Name part="Forename" sex="M" name="Boris">"107-112"</Name>
+<Name part="Forename" sex="M" name="Brecht">"113-118"</Name>
+<Name part="Forename" sex="M" name="Brock/Brocks">"119-124"</Name>
+<Name part="Forename" sex="M" name="Bruno">"125-130"</Name>
+<Name part="Forename" sex="M" name="Carolus/Karl/Karlus">"131-136"</Name>
+<Name part="Forename" sex="M" name="Christoph/Krystof">"137-140"</Name>
+<Name part="Forename" sex="M" name="Claus/Klaus">"141-147"</Name>
+<Name part="Forename" sex="M" name="Conrad/Konrad">"148-153"</Name>
+<Name part="Forename" sex="M" name="Detlef">"154-160"</Name>
+<Name part="Forename" sex="M" name="Diebold">"161-166"</Name>
+<Name part="Forename" sex="M" name="Diehl">"167-172"</Name>
+<Name part="Forename" sex="M" name="Dieter/Dietrich">"173-178"</Name>
+<Name part="Forename" sex="M" name="Dimrod">"179-184"</Name>
+<Name part="Forename" sex="M" name="Eberhardt">"185-190"</Name>
+<Name part="Forename" sex="M" name="Eckhardt">"191-196"</Name>
+<Name part="Forename" sex="M" name="Edgar">"197-202"</Name>
+<Name part="Forename" sex="M" name="Edmund">"203-210"</Name>
+<Name part="Forename" sex="M" name="Edvard/Edvart">"211-218"</Name>
+<Name part="Forename" sex="M" name="Edwin">"219-224"</Name>
+<Name part="Forename" sex="M" name="Ehrhardt">"225-230"</Name>
+<Name part="Forename" sex="M" name="Ehrmann">"231-237"</Name>
+<Name part="Forename" sex="M" name="Elmeric/Emmerich">"238-244"</Name>
+<Name part="Forename" sex="M" name="Emil">"245-250"</Name>
+<Name part="Forename" sex="M" name="Emmanuel">"251-255"</Name>
+<Name part="Forename" sex="M" name="Erich/Erik">"256-261"</Name>
+<Name part="Forename" sex="M" name="Ernst">"262-268"</Name>
+<Name part="Forename" sex="M" name="Erwin/Irwin/Irvine">"269-274"</Name>
+<Name part="Forename" sex="M" name="Faustmann">"275-280"</Name>
+<Name part="Forename" sex="M" name="Felix">"281-286"</Name>
+<Name part="Forename" sex="M" name="Ferdinand">"287-293"</Name>
+<Name part="Forename" sex="M" name="Filbert/Fillibert">"294-299"</Name>
+<Name part="Forename" sex="M" name="Filip/Felip/Philip/Phillipe">"300-306"</Name>
+<Name part="Forename" sex="M" name="Florian">"307-311"</Name>
+<Name part="Forename" sex="M" name="Franz">"312-318"</Name>
+<Name part="Forename" sex="M" name="Friedrich/Frederik">"319-325"</Name>
+<Name part="Forename" sex="M" name="Fritz">"326-332"</Name>
+<Name part="Forename" sex="M" name="Gebhardt">"333-339"</Name>
+<Name part="Forename" sex="M" name="Georg/Georges">"340-345"</Name>
+<Name part="Forename" sex="M" name="Geralt/Gerold/Harold">"346-351"</Name>
+<Name part="Forename" sex="M" name="Gerber/Gerner">"352-357"</Name>
+<Name part="Forename" sex="M" name="Gerd/Gurdt">"358-363"</Name>
+<Name part="Forename" sex="M" name="Gerhardt">"364-370"</Name>
+<Name part="Forename" sex="M" name="Gottfried">"371-376"</Name>
+<Name part="Forename" sex="M" name="Gotthardt">"377-382"</Name>
+<Name part="Forename" sex="M" name="Gottlieb">"383-388"</Name>
+<Name part="Forename" sex="M" name="Gregor">"389-394"</Name>
+<Name part="Forename" sex="M" name="Gunnar">"395-400"</Name>
+<Name part="Forename" sex="M" name="Gunter/Gunthar/Gunther">"401-406"</Name>
+<Name part="Forename" sex="M" name="Gustaf/Gustav/Gustavus">"407-412"</Name>
+<Name part="Forename" sex="M" name="Hals/Harold">"413-418"</Name>
+<Name part="Forename" sex="M" name="Hamfried/Humfried">"419-424"</Name>
+<Name part="Forename" sex="M" name="Hansel/Hannes">"425"</Name>
+<Name part="Forename" sex="M" name="Hartwig">"426-431"</Name>
+<Name part="Forename" sex="M" name="Heinrich/Henryk/Henri">"432-437"</Name>
+<Name part="Forename" sex="M" name="Heinz">"438-443"</Name>
+<Name part="Forename" sex="M" name="Heironymus">"444-449"</Name>
+<Name part="Forename" sex="M" name="Helmut">"450-456"</Name>
+<Name part="Forename" sex="M" name="Herbert">"457-462"</Name>
+<Name part="Forename" sex="M" name="Hergard">"463-468"</Name>
+<Name part="Forename" sex="M" name="Herman/Hermann">"469-474"</Name>
+<Name part="Forename" sex="M" name="Herpin">"475-480"</Name>
+<Name part="Forename" sex="M" name="Hildebrandt">"481-486"</Name>
+<Name part="Forename" sex="M" name="Holger">"487-493"</Name>
+<Name part="Forename" sex="M" name="Holst/Horst">"494-500"</Name>
+<Name part="Forename" sex="M" name="Hugo">"501-506"</Name>
+<Name part="Forename" sex="M" name="Hultz">"507-512"</Name>
+<Name part="Forename" sex="M" name="Jakob">"513-520"</Name>
+<Name part="Forename" sex="M" name="Janke/Jannike">"521-526"</Name>
+<Name part="Forename" sex="M" name="Joachim">"527-532"</Name>
+<Name part="Forename" sex="M" name="Johann/Johannes">"533-540"</Name>
+<Name part="Forename" sex="M" name="Josef/Joseph">"541-546"</Name>
+<Name part="Forename" sex="M" name="Julian/Julien">"547-550"</Name>
+<Name part="Forename" sex="M" name="Kaspar">"551-556"</Name>
+<Name part="Forename" sex="M" name="Kaster/Kastor">"557-562"</Name>
+<Name part="Forename" sex="M" name="Knud/Knut">"563-568"</Name>
+<Name part="Forename" sex="M" name="Kruger">"569-574"</Name>
+<Name part="Forename" sex="M" name="Kurt">"575-581"</Name>
+<Name part="Forename" sex="M" name="Lars">"582-588"</Name>
+<Name part="Forename" sex="M" name="Leonhard">"589-595"</Name>
+<Name part="Forename" sex="M" name="Leopold/Liutpold">"596-602"</Name>
+<Name part="Forename" sex="M" name="Lorenz/Lorenzo">"603-608"</Name>
+<Name part="Forename" sex="M" name="Ludovicus/Ludwig">"609-613"</Name>
+<Name part="Forename" sex="M" name="Lukas">"614-619"</Name>
+<Name part="Forename" sex="M" name="Luther/Luger">"620-626"</Name>
+<Name part="Forename" sex="M" name="Magnar/Magnus">"627-632"</Name>
+<Name part="Forename" sex="M" name="Manfred/Mannfried">"633-639"</Name>
+<Name part="Forename" sex="M" name="Marius/Mariusz">"640-645"</Name>
+<Name part="Forename" sex="M" name="Martin/Martyn">"646-651"</Name>
+<Name part="Forename" sex="M" name="Matthias">"652-657"</Name>
+<Name part="Forename" sex="M" name="Maximillian">"658-664"</Name>
+<Name part="Forename" sex="M" name="Maximus">"665-670"</Name>
+<Name part="Forename" sex="M" name="Moritz">"671-676"</Name>
+<Name part="Forename" sex="M" name="Niklaus/Nikolas/Nikolaus">"677-683"</Name>
+<Name part="Forename" sex="M" name="Odmar">"684-688"</Name>
+<Name part="Forename" sex="M" name="Olaf">"689-694"</Name>
+<Name part="Forename" sex="M" name="Ortolf">"695-700"</Name>
+<Name part="Forename" sex="M" name="Oskar">"701-704"</Name>
+<Name part="Forename" sex="M" name="Otto">"705-710"</Name>
+<Name part="Forename" sex="M" name="Parsifal/Parzival">"711-715"</Name>
+<Name part="Forename" sex="M" name="Paul/Paulus/Saul">"716-719"</Name>
+<Name part="Forename" sex="M" name="Peter/Pieter/Pietr">"720-725"</Name>
+<Name part="Forename" sex="M" name="Quintus">"726-730"</Name>
+<Name part="Forename" sex="M" name="Ralf/Rolf">"731-737"</Name>
+<Name part="Forename" sex="M" name="Raynald/Reinwald">"738-744"</Name>
+<Name part="Forename" sex="M" name="Reineke">"745-750"</Name>
+<Name part="Forename" sex="M" name="Reiner">"751-757"</Name>
+<Name part="Forename" sex="M" name="Reinhard/Reinhardt">"758-762"</Name>
+<Name part="Forename" sex="M" name="Reinhold/Reinholt">"763-768"</Name>
+<Name part="Forename" sex="M" name="Rickard/Reikhardt">"769-774"</Name>
+<Name part="Forename" sex="M" name="Roland/Ronald">"775-780"</Name>
+<Name part="Forename" sex="M" name="Rudiger/Rutger">"781-786"</Name>
+<Name part="Forename" sex="M" name="Rudolf/Rudi">"787-792"</Name>
+<Name part="Forename" sex="M" name="Rufus">"793-798"</Name>
+<Name part="Forename" sex="M" name="Ruprecht">"799-804"</Name>
+<Name part="Forename" sex="M" name="Samuel">"805-809"</Name>
+<Name part="Forename" sex="M" name="Sebastien">"810-814"</Name>
+<Name part="Forename" sex="M" name="Siegfried">"815-821"</Name>
+<Name part="Forename" sex="M" name="Sigmund/Sigismund/Siggi">"822-829"</Name>
+<Name part="Forename" sex="M" name="Silvestre/Sylvester">"830-834"</Name>
+<Name part="Forename" sex="M" name="Simon/Symon">"835-840"</Name>
+<Name part="Forename" sex="M" name="Stehmar">"841-845"</Name>
+<Name part="Forename" sex="M" name="Stefan/Stephan/Stephen">"846-852"</Name>
+<Name part="Forename" sex="M" name="Steirlich">"853-858"</Name>
+<Name part="Forename" sex="M" name="Talther">"859-864"</Name>
+<Name part="Forename" sex="M" name="Theodore">"865-871"</Name>
+<Name part="Forename" sex="M" name="Theodosius">"872-878"</Name>
+<Name part="Forename" sex="M" name="Theophilus">"879-885"</Name>
+<Name part="Forename" sex="M" name="Thomas">"886-891"</Name>
+<Name part="Forename" sex="M" name="Thor">"892-897"</Name>
+<Name part="Forename" sex="M" name="Titus">"898-903"</Name>
+<Name part="Forename" sex="M" name="Tobias">"904-910"</Name>
+<Name part="Forename" sex="M" name="Udo">"911-916"</Name>
+<Name part="Forename" sex="M" name="Uhler">"917-922"</Name>
+<Name part="Forename" sex="M" name="Ulrich/Ulrick">"923-929"</Name>
+<Name part="Forename" sex="M" name="Valentin">"930-934"</Name>
+<Name part="Forename" sex="M" name="Viktor">"935-939"</Name>
+<Name part="Forename" sex="M" name="Vorster">"940-944"</Name>
+<Name part="Forename" sex="M" name="Waldemar">"945-951"</Name>
+<Name part="Forename" sex="M" name="Walter/Walther">"952-957"</Name>
+<Name part="Forename" sex="M" name="Werner">"958-963"</Name>
+<Name part="Forename" sex="M" name="Werther">"964-969"</Name>
+<Name part="Forename" sex="M" name="Wilhelm">"970-975"</Name>
+<Name part="Forename" sex="M" name="Willibert">"976-981"</Name>
+<Name part="Forename" sex="M" name="Wilryn">"982-987"</Name>
+<Name part="Forename" sex="M" name="Wolf/Wolfgang">"988-993"</Name>
+<Name part="Forename" sex="M" name="Wolmar">"994-1000"</Name>
+<Name part="Forename" sex="F" name="Adele/Della/Adella">"1-5"</Name>
+<Name part="Forename" sex="F" name="Adolpha">"6-11"</Name>
+<Name part="Forename" sex="F" name="Adriana/Adrienne">"12-17"</Name>
+<Name part="Forename" sex="F" name="Agatha/Agethe">"18-23"</Name>
+<Name part="Forename" sex="F" name="Agnes">"24-30"</Name>
+<Name part="Forename" sex="F" name="Agnetha">"31-36"</Name>
+<Name part="Forename" sex="F" name="Alexa">"37-42"</Name>
+<Name part="Forename" sex="F" name="Alfrida">"43-47"</Name>
+<Name part="Forename" sex="F" name="Alice/Alicia">"48-54"</Name>
+<Name part="Forename" sex="F" name="Amalie/Emilie">"55-60"</Name>
+<Name part="Forename" sex="F" name="Andrea">"61-65"</Name>
+<Name part="Forename" sex="F" name="Angelika">"66-70"</Name>
+<Name part="Forename" sex="F" name="Anika">"71-75"</Name>
+<Name part="Forename" sex="F" name="Anja">"76-81"</Name>
+<Name part="Forename" sex="F" name="Annaliese/Anna">"82-87"</Name>
+<Name part="Forename" sex="F" name="Antonia">"88-93"</Name>
+<Name part="Forename" sex="F" name="Astrid">"94-100"</Name>
+<Name part="Forename" sex="F" name="Barbara">"101-106"</Name>
+<Name part="Forename" sex="F" name="Beatrijs/Beatrix">"107-112"</Name>
+<Name part="Forename" sex="F" name="Berta/Bertha">"113-118"</Name>
+<Name part="Forename" sex="F" name="Berthilda">"119-124"</Name>
+<Name part="Forename" sex="F" name="Betse">"125-130"</Name>
+<Name part="Forename" sex="F" name="Bianka">"131-136"</Name>
+<Name part="Forename" sex="F" name="Birgit/Brigitte/Gitta">"137-140"</Name>
+<Name part="Forename" sex="F" name="Britt/Brita">"141-147"</Name>
+<Name part="Forename" sex="F" name="Brunhilde">"148-153"</Name>
+<Name part="Forename" sex="F" name="Charlotte/Carlotta">"154-160"</Name>
+<Name part="Forename" sex="F" name="Carina">"161-166"</Name>
+<Name part="Forename" sex="F" name="Carmilla">"167-172"</Name>
+<Name part="Forename" sex="F" name="Celestine">"173-178"</Name>
+<Name part="Forename" sex="F" name="Christiane">"179-184"</Name>
+<Name part="Forename" sex="F" name="Claudia">"185-190"</Name>
+<Name part="Forename" sex="F" name="Clementia">"191-196"</Name>
+<Name part="Forename" sex="F" name="Clothilde">"197-202"</Name>
+<Name part="Forename" sex="F" name="Cordelia">"203-210"</Name>
+<Name part="Forename" sex="F" name="Dagmar">"211-218"</Name>
+<Name part="Forename" sex="F" name="Dominique">"219-224"</Name>
+<Name part="Forename" sex="F" name="Edwina">"225-230"</Name>
+<Name part="Forename" sex="F" name="Elene/Elena">"231-237"</Name>
+<Name part="Forename" sex="F" name="Elfrida">"238-244"</Name>
+<Name part="Forename" sex="F" name="Elisa/Elise">"245-250"</Name>
+<Name part="Forename" sex="F" name="Elisabeth">"251-255"</Name>
+<Name part="Forename" sex="F" name="Elodie/Melodie">"256-261"</Name>
+<Name part="Forename" sex="F" name="Elouise/Heloise">"262-268"</Name>
+<Name part="Forename" sex="F" name="Elsa/Elsie">"269-274"</Name>
+<Name part="Forename" sex="F" name="Emmanuelle">"275-280"</Name>
+<Name part="Forename" sex="F" name="Emmeline">"281-286"</Name>
+<Name part="Forename" sex="F" name="Erika">"287-293"</Name>
+<Name part="Forename" sex="F" name="Ermentrude">"294-299"</Name>
+<Name part="Forename" sex="F" name="Esmerelda">"300-306"</Name>
+<Name part="Forename" sex="F" name="Estelle/Stella">"307-311"</Name>
+<Name part="Forename" sex="F" name="Esther">"312-318"</Name>
+<Name part="Forename" sex="F" name="Etelka">"319-325"</Name>
+<Name part="Forename" sex="F" name="Eva">"326-332"</Name>
+<Name part="Forename" sex="F" name="Felda">"333-339"</Name>
+<Name part="Forename" sex="F" name="Femeke">"340-345"</Name>
+<Name part="Forename" sex="F" name="Franka/Franziska">"346-351"</Name>
+<Name part="Forename" sex="F" name="Frauke">"352-357"</Name>
+<Name part="Forename" sex="F" name="Frederika">"358-363"</Name>
+<Name part="Forename" sex="F" name="Frida">"364-370"</Name>
+<Name part="Forename" sex="F" name="Gabrielle/Gabi">"371-376"</Name>
+<Name part="Forename" sex="F" name="Galina">"377-382"</Name>
+<Name part="Forename" sex="F" name="Gerda">"383-388"</Name>
+<Name part="Forename" sex="F" name="Gertraud/Gertrude">"389-394"</Name>
+<Name part="Forename" sex="F" name="Gilda">"395-400"</Name>
+<Name part="Forename" sex="F" name="Giselda/Gisella">"401-406"</Name>
+<Name part="Forename" sex="F" name="Greta/Grette">"407-412"</Name>
+<Name part="Forename" sex="F" name="Gretel">"413-418"</Name>
+<Name part="Forename" sex="F" name="Gretchen">"419-424"</Name>
+<Name part="Forename" sex="F" name="Haletha">"425"</Name>
+<Name part="Forename" sex="F" name="Hanna">"426-431"</Name>
+<Name part="Forename" sex="F" name="Hedwig">"432-437"</Name>
+<Name part="Forename" sex="F" name="Heidi">"438-443"</Name>
+<Name part="Forename" sex="F" name="Helena/Helene">"444-449"</Name>
+<Name part="Forename" sex="F" name="Helga">"450-456"</Name>
+<Name part="Forename" sex="F" name="Hellin/Helmine">"457-462"</Name>
+<Name part="Forename" sex="F" name="Helset/Helisent">"463-468"</Name>
+<Name part="Forename" sex="F" name="Henrietta">"469-474"</Name>
+<Name part="Forename" sex="F" name="Heske/Heska">"475-480"</Name>
+<Name part="Forename" sex="F" name="Hilda">"481-486"</Name>
+<Name part="Forename" sex="F" name="Hildegard">"487-493"</Name>
+<Name part="Forename" sex="F" name="Hunni">"494-500"</Name>
+<Name part="Forename" sex="F" name="Ilsa/Ilse">"501-506"</Name>
+<Name part="Forename" sex="F" name="Inga">"507-512"</Name>
+<Name part="Forename" sex="F" name="Ingrid">"513-520"</Name>
+<Name part="Forename" sex="F" name="Irene/Irina">"521-526"</Name>
+<Name part="Forename" sex="F" name="Irmegard">"527-532"</Name>
+<Name part="Forename" sex="F" name="Irmina">"533-540"</Name>
+<Name part="Forename" sex="F" name="Isolde">"541-546"</Name>
+<Name part="Forename" sex="F" name="Janna/Jana">"547-550"</Name>
+<Name part="Forename" sex="F" name="Jehanne/Johanna">"551-556"</Name>
+<Name part="Forename" sex="F" name="Juliane">"557-562"</Name>
+<Name part="Forename" sex="F" name="Jutta">"563-568"</Name>
+<Name part="Forename" sex="F" name="Karelia">"569-574"</Name>
+<Name part="Forename" sex="F" name="Karin">"575-581"</Name>
+<Name part="Forename" sex="F" name="Karoline">"582-588"</Name>
+<Name part="Forename" sex="F" name="Katharine/Katrina">"589-595"</Name>
+<Name part="Forename" sex="F" name="Katya">"596-602"</Name>
+<Name part="Forename" sex="F" name="Kirsten">"603-608"</Name>
+<Name part="Forename" sex="F" name="Klara">"609-613"</Name>
+<Name part="Forename" sex="F" name="Lena/Leni">"614-619"</Name>
+<Name part="Forename" sex="F" name="Leonore">"620-626"</Name>
+<Name part="Forename" sex="F" name="Leopoldine">"627-632"</Name>
+<Name part="Forename" sex="F" name="Lillian">"633-639"</Name>
+<Name part="Forename" sex="F" name="Lorelay">"640-645"</Name>
+<Name part="Forename" sex="F" name="Ludmilla">"646-651"</Name>
+<Name part="Forename" sex="F" name="Luise/Lise">"652-657"</Name>
+<Name part="Forename" sex="F" name="Magdalene/Magda">"658-664"</Name>
+<Name part="Forename" sex="F" name="Margaritha">"665-670"</Name>
+<Name part="Forename" sex="F" name="Maria/Marie">"671-676"</Name>
+<Name part="Forename" sex="F" name="Marianne">"677-683"</Name>
+<Name part="Forename" sex="F" name="Marieke">"684-688"</Name>
+<Name part="Forename" sex="F" name="Marietta">"689-694"</Name>
+<Name part="Forename" sex="F" name="Marlene">"695-700"</Name>
+<Name part="Forename" sex="F" name="Martha/Marte">"701-704"</Name>
+<Name part="Forename" sex="F" name="Martina">"705-710"</Name>
+<Name part="Forename" sex="F" name="Mathilde/Tilda">"711-715"</Name>
+<Name part="Forename" sex="F" name="Maude">"716-719"</Name>
+<Name part="Forename" sex="F" name="Melanie">"720-725"</Name>
+<Name part="Forename" sex="F" name="Melina">"726-730"</Name>
+<Name part="Forename" sex="F" name="Mitzi">"731-737"</Name>
+<Name part="Forename" sex="F" name="Nastassia/Natasha">"738-744"</Name>
+<Name part="Forename" sex="F" name="Nikola">"745-750"</Name>
+<Name part="Forename" sex="F" name="Odiel">"751-757"</Name>
+<Name part="Forename" sex="F" name="Osanna/Oxana">"758-762"</Name>
+<Name part="Forename" sex="F" name="Ottilia">"763-768"</Name>
+<Name part="Forename" sex="F" name="Pearl/Perle/Perla">"769-774"</Name>
+<Name part="Forename" sex="F" name="Petra">"775-780"</Name>
+<Name part="Forename" sex="F" name="Philline">"781-786"</Name>
+<Name part="Forename" sex="F" name="Regina/Regine/Gina">"787-792"</Name>
+<Name part="Forename" sex="F" name="Renata/Renate">"793-798"</Name>
+<Name part="Forename" sex="F" name="Rosabel">"799-804"</Name>
+<Name part="Forename" sex="F" name="Sabina/Sabrina">"805-809"</Name>
+<Name part="Forename" sex="F" name="Sarah/Sahra">"810-814"</Name>
+<Name part="Forename" sex="F" name="Selena">"815-821"</Name>
+<Name part="Forename" sex="F" name="Sharon">"822-829"</Name>
+<Name part="Forename" sex="F" name="Sigfreda">"830-834"</Name>
+<Name part="Forename" sex="F" name="Sigrid">"835-840"</Name>
+<Name part="Forename" sex="F" name="Sigrun">"841-845"</Name>
+<Name part="Forename" sex="F" name="Silma">"846-852"</Name>
+<Name part="Forename" sex="F" name="Silvie/Sylvia">"853-858"</Name>
+<Name part="Forename" sex="F" name="Simone">"859-864"</Name>
+<Name part="Forename" sex="F" name="Solveig">"865-871"</Name>
+<Name part="Forename" sex="F" name="Sophia">"872-878"</Name>
+<Name part="Forename" sex="F" name="Susanne/Susanna/Susi">"879-885"</Name>
+<Name part="Forename" sex="F" name="Tabetha">"886-891"</Name>
+<Name part="Forename" sex="F" name="Talunda">"892-897"</Name>
+<Name part="Forename" sex="F" name="Theodora/Dora">"898-903"</Name>
+<Name part="Forename" sex="F" name="Theodosia/Theda">"904-910"</Name>
+<Name part="Forename" sex="F" name="Therese">"911-916"</Name>
+<Name part="Forename" sex="F" name="Thylda">"917-922"</Name>
+<Name part="Forename" sex="F" name="Ulla">"923-929"</Name>
+<Name part="Forename" sex="F" name="Ulrika">"930-934"</Name>
+<Name part="Forename" sex="F" name="Ursula">"935-939"</Name>
+<Name part="Forename" sex="F" name="Uschi">"940-944"</Name>
+<Name part="Forename" sex="F" name="Vadoma">"945-951"</Name>
+<Name part="Forename" sex="F" name="Veronica">"952-957"</Name>
+<Name part="Forename" sex="F" name="Viktorina">"958-963"</Name>
+<Name part="Forename" sex="F" name="Violetta/Violette">"964-969"</Name>
+<Name part="Forename" sex="F" name="Wanda">"970-975"</Name>
+<Name part="Forename" sex="F" name="Wendelin">"976-981"</Name>
+<Name part="Forename" sex="F" name="Wertha">"982-987"</Name>
+<Name part="Forename" sex="F" name="Wilhelmina/Mina">"988-993"</Name>
+<Name part="Forename" sex="F" name="Willelma">"994-1000"</Name>
+<Name part="Surname" name="Apotheker">"1"</Name>
+<Name part="Surname" name="Backer">"2"</Name>
+<Name part="Surname" name="Schmidt">"3"</Name>
+<Name part="Surname" name="Bootmann">"4"</Name>
+<Name part="Surname" name="Brauer">"5"</Name>
+<Name part="Surname" name="Baumeister">"6"</Name>
+<Name part="Surname" name="Fleischer">"7"</Name>
+<Name part="Surname" name="Zimmermann">"8"</Name>
+<Name part="Surname" name="Schuster">"9"</Name>
+<Name part="Surname" name="Koch">"10"</Name>
+<Name part="Surname" name="Kufer">"11"</Name>
+<Name part="Surname" name="Graveur">"12"</Name>
+<Name part="Surname" name="Bauer">"13"</Name>
+<Name part="Surname" name="Fischer">"14"</Name>
+<Name part="Surname" name="Gartner">"15"</Name>
+<Name part="Surname" name="Glaser">"16"</Name>
+<Name part="Surname" name="Jager">"17"</Name>
+<Name part="Surname" name="Richter">"18"</Name>
+<Name part="Surname" name="Juwelier">"19"</Name>
+<Name part="Surname" name="Anwalt">"20"</Name>
+<Name part="Surname" name="Handler">"21"</Name>
+<Name part="Surname" name="Hausier">"22"</Name>
+<Name part="Surname" name="Topfer">"23"</Name>
+<Name part="Surname" name="Drucker">"24"</Name>
+<Name part="Surname" name="Schreiber">"25"</Name>
+<Name part="Surname" name="Schiffbauer">"26"</Name>
+<Name part="Surname" name="Soldat">"27"</Name>
+<Name part="Surname" name="Maurer">"28"</Name>
+<Name part="Surname" name="Schneider">"29"</Name>
+<Name part="Surname" name="Gerber">"30"</Name>
+<Name part="Surname" name="Armlos">"31"</Name>
+<Name part="Surname" name="Augenlos">"32"</Name>
+<Name part="Surname" name="Bart">"33"</Name>
+<Name part="Surname" name="Blass">"34"</Name>
+<Name part="Surname" name="Bleich">"35"</Name>
+<Name part="Surname" name="Bucker">"36"</Name>
+<Name part="Surname" name="Dunn">"37"</Name>
+<Name part="Surname" name="Einarm">"38"</Name>
+<Name part="Surname" name="Einauge">"39"</Name>
+<Name part="Surname" name="Grossbart">"40"</Name>
+<Name part="Surname" name="Grosz">"41"</Name>
+<Name part="Surname" name="Haarig">"42"</Name>
+<Name part="Surname" name="Kahl">"43"</Name>
+<Name part="Surname" name="Kurz">"44"</Name>
+<Name part="Surname" name="Lang">"45"</Name>
+<Name part="Surname" name="Laut">"46"</Name>
+<Name part="Surname" name="Narbe">"47"</Name>
+<Name part="Surname" name="Nase">"48"</Name>
+<Name part="Surname" name="Schon">"49"</Name>
+<Name part="Surname" name="Stotter">"50"</Name>
+<Name part="Surname" name="Stark">"51"</Name>
+</SUBCHAPTER_NAMES>
 <SUBCHAPTER_SKILL>
 <Skill>"RULES-COMPCALM"</Skill>
   <!-- Cool -->
@@ -4799,6 +5182,23 @@ See page 190 for Fear rules"</Explanation>
 <Hair name="Chocolate">"19"</Hair>
 <Hair name="Liquorice">"20"</Hair>
 </SUBCHAPTER_PHYSICAL>
+<!-- Noms halflings (Rulebook p.39) : prenom d usage + clan. Exemples du livre (les diminutifs ne sont pas tires). -->
+<SUBCHAPTER_NAMES>
+<NamePattern>"Forename Clan"</NamePattern>
+<Name part="Forename" sex="M" name="Ferdinand">"1"</Name>
+<Name part="Forename" sex="M" name="Heironymus">"2"</Name>
+<Name part="Forename" sex="M" name="Maximilian">"3"</Name>
+<Name part="Forename" sex="M" name="Theodosius">"4"</Name>
+<Name part="Forename" sex="F" name="Antoniella">"1"</Name>
+<Name part="Forename" sex="F" name="Esmerelda">"2"</Name>
+<Name part="Forename" sex="F" name="Thomasina">"3"</Name>
+<Name part="Clan" name="Ashfield">"1"</Name>
+<Name part="Clan" name="Brandysnap">"2"</Name>
+<Name part="Clan" name="Hayfoot">"3"</Name>
+<Name part="Clan" name="Rumster">"4"</Name>
+<Name part="Clan" name="Shortbottom">"5"</Name>
+<Name part="Clan" name="Thorncobble">"6"</Name>
+</SUBCHAPTER_NAMES>
 <SUBCHAPTER_SKILL>
 <Skill>"RULES-COMPCHARM"</Skill>
   <!-- Charm -->
@@ -4986,6 +5386,23 @@ See page 190 for Fear rules"</Explanation>
 <Hair name="Reddish Brown">"19"</Hair>
 <Hair name="Black">"20"</Hair>
 </SUBCHAPTER_PHYSICAL>
+<!-- Noms nains (Rulebook p.38) : prenom + nom du pere avec suffixe + clan. Le tableau des prenoms est dans le Dwarf Player's Guide (Dwarfs Imperial). Clans repandus du Reikland (1-6) et des Grey Mountains (7-12). -->
+<SUBCHAPTER_NAMES>
+<NamePattern sex="M">"Forename Forename:M+'sson' Clan"</NamePattern>
+<NamePattern sex="F">"Forename Forename:M+'sdottir' Clan"</NamePattern>
+<Name part="Clan" name="Ardrungan">"1"</Name>
+<Name part="Clan" name="Bryntok">"2"</Name>
+<Name part="Clan" name="Gazani">"3"</Name>
+<Name part="Clan" name="Gromheld">"4"</Name>
+<Name part="Clan" name="Harrazlings">"5"</Name>
+<Name part="Clan" name="Unboki">"6"</Name>
+<Name part="Clan" name="Dokkintroll">"7"</Name>
+<Name part="Clan" name="Ganvalgger">"8"</Name>
+<Name part="Clan" name="Kvitang">"9"</Name>
+<Name part="Clan" name="Thrungtak">"10"</Name>
+<Name part="Clan" name="Wyrgrinti">"11"</Name>
+<Name part="Clan" name="Zankonk">"12"</Name>
+</SUBCHAPTER_NAMES>
 <SUBCHAPTER_SKILL>
 <Skill>"RULES-COMPCALM"</Skill>
   <!-- Cool -->
@@ -5169,6 +5586,46 @@ See page 190 for Fear rules"</Explanation>
 <Hair name="Red">"19"</Hair>
 <Hair name="Black">"20"</Hair>
 </SUBCHAPTER_PHYSICAL>
+<!-- Generateur de noms elfiques (Rulebook p.39, 1d10) : prenom = premiere composante + seconde composante (facultative) + terminaison haut elfe. -->
+<SUBCHAPTER_NAMES>
+<NamePattern>"First+Second?+End Epithet"</NamePattern>
+<Name part="First" name="Aes">"1"</Name>
+<Name part="First" name="Ath">"2"</Name>
+<Name part="First" name="Dor">"3"</Name>
+<Name part="First" name="Far">"4"</Name>
+<Name part="First" name="Gal">"5"</Name>
+<Name part="First" name="Im">"6"</Name>
+<Name part="First" name="Lin">"7"</Name>
+<Name part="First" name="Mal">"8"</Name>
+<Name part="First" name="Mor">"9"</Name>
+<Name part="First" name="Ullia">"10"</Name>
+<Name part="Second" name="a">"1"</Name>
+<Name part="Second" name="ath">"2"</Name>
+<Name part="Second" name="dia">"3"</Name>
+<Name part="Second" name="en">"4"</Name>
+<Name part="Second" name="for">"5"</Name>
+<Name part="Second" name="lor">"6"</Name>
+<Name part="Second" name="mar">"7"</Name>
+<Name part="Second" name="ol">"8"</Name>
+<Name part="Second" name="sor">"9"</Name>
+<Name part="Second" name="than">"10"</Name>
+<Name part="End" name="andril">"1"</Name>
+<Name part="End" name="anel">"2"</Name>
+<Name part="End" name="ellion">"3"</Name>
+<Name part="End" name="fin">"4"</Name>
+<Name part="End" name="il">"5"</Name>
+<Name part="End" name="irian">"6"</Name>
+<Name part="End" name="mor">"7"</Name>
+<Name part="End" name="nil">"8"</Name>
+<Name part="End" name="ric">"9"</Name>
+<Name part="End" name="wing">"10"</Name>
+<Name part="Epithet" name="Emberfell">"1"</Name>
+<Name part="Epithet" name="Fireborn">"2"</Name>
+<Name part="Epithet" name="Foamheart">"3"</Name>
+<Name part="Epithet" name="Goldenhair">"4"</Name>
+<Name part="Epithet" name="Silverspray">"5"</Name>
+<Name part="Epithet" name="Spellsign">"6"</Name>
+</SUBCHAPTER_NAMES>
 <SUBCHAPTER_SKILL>
 <Skill>"RULES-COMPCALM"</Skill>
   <!-- Cool -->
@@ -5328,6 +5785,46 @@ See page 190 for Fear rules"</Explanation>
 <Hair name="Ebony">"19"</Hair>
 <Hair name="Blue-Black">"20"</Hair>
 </SUBCHAPTER_PHYSICAL>
+<!-- Generateur de noms elfiques (Rulebook p.39, 1d10) : prenom = premiere composante + seconde composante (facultative) + terminaison elfe sylvain. -->
+<SUBCHAPTER_NAMES>
+<NamePattern>"First+Second?+End Epithet"</NamePattern>
+<Name part="First" name="Aes">"1"</Name>
+<Name part="First" name="Ath">"2"</Name>
+<Name part="First" name="Dor">"3"</Name>
+<Name part="First" name="Far">"4"</Name>
+<Name part="First" name="Gal">"5"</Name>
+<Name part="First" name="Im">"6"</Name>
+<Name part="First" name="Lin">"7"</Name>
+<Name part="First" name="Mal">"8"</Name>
+<Name part="First" name="Mor">"9"</Name>
+<Name part="First" name="Ullia">"10"</Name>
+<Name part="Second" name="a">"1"</Name>
+<Name part="Second" name="ath">"2"</Name>
+<Name part="Second" name="dia">"3"</Name>
+<Name part="Second" name="en">"4"</Name>
+<Name part="Second" name="for">"5"</Name>
+<Name part="Second" name="lor">"6"</Name>
+<Name part="Second" name="mar">"7"</Name>
+<Name part="Second" name="ol">"8"</Name>
+<Name part="Second" name="sor">"9"</Name>
+<Name part="Second" name="than">"10"</Name>
+<Name part="End" name="arha">"1"</Name>
+<Name part="End" name="anhu">"2"</Name>
+<Name part="End" name="dda">"3"</Name>
+<Name part="End" name="han">"4"</Name>
+<Name part="End" name="loc">"5"</Name>
+<Name part="End" name="noc">"6"</Name>
+<Name part="End" name="oth">"7"</Name>
+<Name part="End" name="ryn">"8"</Name>
+<Name part="End" name="stra">"9"</Name>
+<Name part="End" name="wyth">"10"</Name>
+<Name part="Epithet" name="Fleetriver">"1"</Name>
+<Name part="Epithet" name="Shadowstalker">"2"</Name>
+<Name part="Epithet" name="Treeshaper">"3"</Name>
+<Name part="Epithet" name="Weavewatcher">"4"</Name>
+<Name part="Epithet" name="Willowlimb">"5"</Name>
+<Name part="Epithet" name="Windrunner">"6"</Name>
+</SUBCHAPTER_NAMES>
 <SUBCHAPTER_SKILL>
 <Skill>"RULES-COMPATHL"</Skill>
   <!-- Athletics -->

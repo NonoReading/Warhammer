@@ -175,6 +175,8 @@ Procedure XmlExportBook(Livre: String; Langue: String);
     PRaceAttribut:            StructureRaceAttribut;
     PRacePhysique:            StructureRacePhysique;
     PRaceCouleur:             StructureRaceCouleur;
+    PRaceNom:                 StructureRaceNom;
+    PRaceNomModele:           StructureRaceNomModele;
     PRaceCompetence:          StructureRaceCompetence;
     PRaceTalent:              StructureRaceTalent;
     PRaceMetier:              StructureRaceMetier;
@@ -553,6 +555,21 @@ Procedure XmlExportBook(Livre: String; Langue: String);
                     if (PRaceCouleur.CodeRace = PRace.CodeRace) and not PRaceCouleur.EstYeux then
                       XmlContent.Add(XmlLigneDonnee(ConstXmlPhysCheveux, PRaceCouleur.Libelle, PRaceCouleur.Plage));
                   XmlContent.Add(Xmlfin(ConstXmlSousChapitrePhysique));
+                end;
+              // Noms (ecrits seulement si l'ethnie en porte)
+              if EthnieANoms(PRace.CodeRace) then
+                begin
+                  XmlContent.Add(XmlDebut(ConstXmlSousChapitreNoms));
+                  for PRaceNomModele in ListRaceNomModele do
+                    if PRaceNomModele.CodeRace = PRace.CodeRace then
+                      XmlContent.Add(XmlReplace(XmlDebut(ConstXmlNomModele + IfThen(PRaceNomModele.Sexe <> '', ' ' + ConstXmlNomSexe + '="' + PRaceNomModele.Sexe + '"', ''))
+                                     + '"' + PRaceNomModele.Modele + '"' + XmlFin(ConstXmlNomModele)));
+                  for PRaceNom in ListRaceNom do
+                    if PRaceNom.CodeRace = PRace.CodeRace then
+                      XmlContent.Add(XmlLigneDonnee(ConstXmlNom, PRaceNom.Libelle, PRaceNom.Plage,
+                                     ' ' + ConstXmlNomPartie + '="' + PRaceNom.Partie + '"'
+                                     + IfThen(PRaceNom.Sexe <> '', ' ' + ConstXmlNomSexe + '="' + PRaceNom.Sexe + '"', '')));
+                  XmlContent.Add(Xmlfin(ConstXmlSousChapitreNoms));
                 end;
               // Compétence
               XmlContent.Add(XmlDebut(ConstXmlSousChapitreCompetence));
@@ -1141,6 +1158,8 @@ Procedure XmlImport(FileName: String; OnlyPrimary: Boolean; OnlyCode: Boolean; C
     PRaceAttribut:            StructureRaceAttribut;
     PRacePhysique:            StructureRacePhysique;
     PRaceCouleur:             StructureRaceCouleur;
+    PRaceNom:                 StructureRaceNom;
+    PRaceNomModele:           StructureRaceNomModele;
     PRaceCompetence:          StructureRaceCompetence;
     PRaceTalent:              StructureRaceTalent;
     PRaceMetier:              StructureRaceMetier;
@@ -1975,6 +1994,47 @@ Procedure XmlImport(FileName: String; OnlyPrimary: Boolean; OnlyCode: Boolean; C
                                   begin
                                     ListRacePhysique.Add(PRacePhysique);
                                     Inc(NbRacePhysique);
+                                  end;
+                              end;
+                            ConstXmlSousChapitreNoms:
+                              begin
+                                Node := XmlElement(NodeNv3.FirstChild);
+                                while Assigned(Node) do
+                                  begin
+                                    case Node.NodeName of
+                                      ConstXmlNom:
+                                        begin
+                                          PRaceNom := Default(StructureRaceNom);
+                                          PRaceNom.Livre    := Livre;
+                                          PRaceNom.CodeRace := PRace.CodeRace;
+                                          PRaceNom.Libelle  := RemoveQuotes(UTF8Encode(Node.Attributes.GetNamedItem(ConstXmlData).NodeValue));
+                                          PRaceNom.Plage    := RemoveQuotes(UTF8Encode(Node.TextContent));
+                                          if Assigned(Node.Attributes.GetNamedItem(ConstXmlNomPartie)) then
+                                            PRaceNom.Partie := UTF8Encode(Node.Attributes.GetNamedItem(ConstXmlNomPartie).NodeValue);
+                                          if Assigned(Node.Attributes.GetNamedItem(ConstXmlNomSexe)) then
+                                            PRaceNom.Sexe := UTF8Encode(Node.Attributes.GetNamedItem(ConstXmlNomSexe).NodeValue);
+                                          if LangueDef = ConstAnglais then
+                                            begin
+                                              ListRaceNom.Add(PRaceNom);
+                                              Inc(NbRaceNom);
+                                            end;
+                                        end;
+                                      ConstXmlNomModele:
+                                        begin
+                                          PRaceNomModele := Default(StructureRaceNomModele);
+                                          PRaceNomModele.Livre    := Livre;
+                                          PRaceNomModele.CodeRace := PRace.CodeRace;
+                                          PRaceNomModele.Modele   := RemoveQuotes(UTF8Encode(Node.TextContent));
+                                          if Assigned(Node.Attributes.GetNamedItem(ConstXmlNomSexe)) then
+                                            PRaceNomModele.Sexe := UTF8Encode(Node.Attributes.GetNamedItem(ConstXmlNomSexe).NodeValue);
+                                          if LangueDef = ConstAnglais then
+                                            begin
+                                              ListRaceNomModele.Add(PRaceNomModele);
+                                              Inc(NbRaceNomModele);
+                                            end;
+                                        end;
+                                    end;
+                                    Node := XmlElement(Node.NextSibling);
                                   end;
                               end;
                             ConstXmlSousChapitreCompetence:

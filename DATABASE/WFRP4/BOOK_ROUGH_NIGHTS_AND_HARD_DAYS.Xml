@@ -69,6 +69,38 @@
 <Hair name="White Blond">"19"</Hair>
 <Hair name="White">"20"</Hair>
 </SUBCHAPTER_PHYSICAL>
+<!-- Noms gnomes (Rough Nights p.88-89) : prenom + nom de clan. Prenoms feminins = exemples matrilineaires, masculins = patrilineaux. Le clan est souvent tenu secret : les epithetes d exemple sont tires avec les 8 clans de Glimdwarrow. -->
+<SUBCHAPTER_NAMES>
+<NamePattern>"Forename Clan"</NamePattern>
+<Name part="Forename" sex="F" name="Elowen">"1"</Name>
+<Name part="Forename" sex="F" name="Ia">"2"</Name>
+<Name part="Forename" sex="F" name="Kerra">"3"</Name>
+<Name part="Forename" sex="F" name="Ladoca">"4"</Name>
+<Name part="Forename" sex="F" name="Metheven">"5"</Name>
+<Name part="Forename" sex="F" name="Morwen">"6"</Name>
+<Name part="Forename" sex="F" name="Steren">"7"</Name>
+<Name part="Forename" sex="F" name="Tryfena">"8"</Name>
+<Name part="Forename" sex="M" name="Breward">"1"</Name>
+<Name part="Forename" sex="M" name="Daveth">"2"</Name>
+<Name part="Forename" sex="M" name="Gwinear">"3"</Name>
+<Name part="Forename" sex="M" name="Mawnan">"4"</Name>
+<Name part="Forename" sex="M" name="Meriasek">"5"</Name>
+<Name part="Forename" sex="M" name="Nivet">"6"</Name>
+<Name part="Forename" sex="M" name="Talan">"7"</Name>
+<Name part="Forename" sex="M" name="Ythel">"8"</Name>
+<Name part="Clan" name="Annearil">"1"</Name>
+<Name part="Clan" name="Frayne">"2"</Name>
+<Name part="Clan" name="Hawken">"3"</Name>
+<Name part="Clan" name="Landweth">"4"</Name>
+<Name part="Clan" name="Peddlar">"5"</Name>
+<Name part="Clan" name="Scantleburn">"6"</Name>
+<Name part="Clan" name="Thorne">"7"</Name>
+<Name part="Clan" name="Trethewey">"8"</Name>
+<Name part="Clan" name="Mudfoot">"9"</Name>
+<Name part="Clan" name="Glittereye">"10"</Name>
+<Name part="Clan" name="Soleheart">"11"</Name>
+<Name part="Clan" name="Patchcloak">"12"</Name>
+</SUBCHAPTER_NAMES>
 <SUBCHAPTER_SKILL>
 <Skill>"RULES-COMPFOCAL_OMBRE"</Skill>
   <!-- Channelling (Ulgu) -->

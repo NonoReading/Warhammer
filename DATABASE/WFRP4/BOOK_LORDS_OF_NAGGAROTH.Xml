@@ -59,6 +59,46 @@ At the cost of one corruption point the Sorceress may add doublle their Willpowe
 <Attribut name="RULES-ATTR_Supp">"2"</Attribut>
 <Attribut name="RULES-ATTR_Move">"5"</Attribut>
 </SUBCHAPTER_ATTR>
+<!-- Noms elfiques noirs (Lords of Naggaroth, livre de fan) : generateur elfique du Rulebook p.39 avec la terminaison des Elfes noirs, puis un nom de puissance. -->
+<SUBCHAPTER_NAMES>
+<NamePattern>"First+Second?+End Epithet"</NamePattern>
+<Name part="First" name="Aes">"1"</Name>
+<Name part="First" name="Ath">"2"</Name>
+<Name part="First" name="Dor">"3"</Name>
+<Name part="First" name="Far">"4"</Name>
+<Name part="First" name="Gal">"5"</Name>
+<Name part="First" name="Im">"6"</Name>
+<Name part="First" name="Lin">"7"</Name>
+<Name part="First" name="Mal">"8"</Name>
+<Name part="First" name="Mor">"9"</Name>
+<Name part="First" name="Ullia">"10"</Name>
+<Name part="Second" name="a">"1"</Name>
+<Name part="Second" name="ath">"2"</Name>
+<Name part="Second" name="dia">"3"</Name>
+<Name part="Second" name="en">"4"</Name>
+<Name part="Second" name="for">"5"</Name>
+<Name part="Second" name="lor">"6"</Name>
+<Name part="Second" name="mar">"7"</Name>
+<Name part="Second" name="ol">"8"</Name>
+<Name part="Second" name="sor">"9"</Name>
+<Name part="Second" name="than">"10"</Name>
+<Name part="End" name="ek">"1"</Name>
+<Name part="End" name="us">"2"</Name>
+<Name part="End" name="arth">"3"</Name>
+<Name part="End" name="kith">"4"</Name>
+<Name part="End" name="khir">"5"</Name>
+<Name part="End" name="ian">"6"</Name>
+<Name part="End" name="athi">"7"</Name>
+<Name part="End" name="iath">"8"</Name>
+<Name part="End" name="clir">"9"</Name>
+<Name part="End" name="aris">"10"</Name>
+<Name part="Epithet" name="Beastbinder">"1"</Name>
+<Name part="Epithet" name="Darkpath">"2"</Name>
+<Name part="Epithet" name="Fangshield">"3"</Name>
+<Name part="Epithet" name="Hydrablood">"4"</Name>
+<Name part="Epithet" name="Spiteheart">"5"</Name>
+<Name part="Epithet" name="Wyrmscale">"6"</Name>
+</SUBCHAPTER_NAMES>
 <SUBCHAPTER_SKILL>
 <Skill>"RULES-COMPATHL"</Skill>
   <!-- Athletics -->

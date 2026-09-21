@@ -239,6 +239,13 @@ Const
       ConstXmlPhysNbTirageYeux          = 'EyeRolls';
       ConstXmlPhysYeux                  = 'Eye';
       ConstXmlPhysCheveux               = 'Hair';
+      // Noms d'une ethnie : bloc de tables (Name : name= libelle, part= partie, sex= M/F facultatif,
+      // contenu = plage du de) et modeles d'assemblage (NamePattern, sex= facultatif).
+      ConstXmlSousChapitreNoms          = 'SUBCHAPTER_NAMES';
+      ConstXmlNom                       = 'Name';
+      ConstXmlNomModele                 = 'NamePattern';
+      ConstXmlNomPartie                 = 'part';
+      ConstXmlNomSexe                   = 'sex';
       // Nombre de competences de race a choisir dans chaque colonne (3 et 3 partout, sauf
       // le Skink de Lustria qui en prend 2 et 2). Absentes = 3. Voir CONTEXT.md 2.15.
       ConstXmlNbSkill5                  = 'Skill5';

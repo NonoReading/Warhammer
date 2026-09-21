@@ -337,6 +337,10 @@
 <Text name="RULES-LAB_264">"Taille"</Text>
 <Text name="RULES-LAB_265">"Aucune donnée physique pour cette ethnie."</Text>
 <Text name="RULES-LAB_266">"Détails physiques"</Text>
+<Text name="RULES-LAB_267">"Lancer un nom"</Text>
+<Text name="RULES-LAB_268">"Homme"</Text>
+<Text name="RULES-LAB_269">"Femme"</Text>
+<Text name="RULES-LAB_270">"Aucun générateur de noms pour cette ethnie."</Text>
 </Label>
 </DATA_LABEL>
 </DATA_BOOK>

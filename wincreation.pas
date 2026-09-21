@@ -5,7 +5,7 @@ unit WinCreation;
 interface
 
 uses
-  Classes, SysUtils, Forms, Controls, Graphics, Dialogs, ExtCtrls, Grids,
+  Classes, SysUtils, StrUtils, Forms, Controls, Graphics, Dialogs, ExtCtrls, Grids,
   ComCtrls, StdCtrls, Spin, Buttons, ChargeConstantes, GlobalFonts, ChargeRace,
   ChargeRegle,
   Types, ChargeMetier, ChargeRaceMetier, ChargeAttribut, ChargeRaceAttribut, ChargeMetierNiveau,
@@ -42,6 +42,8 @@ type
     EditMetierSousMetierResultat: TSpinEdit;
     EditNomPersonnag: TEdit;
     ButtonPhysique: TBCButton;
+    ButtonNom: TBCButton;
+    ComboBoxSexeNom: TComboBox;
     LabPhysiqueResume: TEdit;
     EditRaceResultat: TSpinEdit;
     GroupBoxAttribut: TGroupBox;
@@ -146,6 +148,7 @@ type
     // Phases
     procedure ButtonPhaseSuivanteClick({%H-}Sender: TObject);
     procedure ButtonPhysiqueClick({%H-}Sender: TObject);
+    procedure ButtonNomClick({%H-}Sender: TObject);
     procedure ChangementPhase(Changement: Integer);
     Function PageEtapesChange(): boolean;
     Procedure PhaseSave(NouvellePhase: Integer);
@@ -446,6 +449,10 @@ procedure TWinCreations.FormCreate(Sender: TObject);
     TabSheetEquipement.Caption                 := GetTexteLibelle('RULES-LAB_013');
     TabSheetNom.Caption                        := GetTexteLibelle('RULES-LAB_014');
     ButtonPhysique.Caption                     := GetTexteLibelle('RULES-LAB_263');
+    ButtonNom.Caption                          := GetTexteLibelle('RULES-LAB_267');
+    ComboBoxSexeNom.Items[0]                   := GetTexteLibelle('RULES-LAB_268');
+    ComboBoxSexeNom.Items[1]                   := GetTexteLibelle('RULES-LAB_269');
+    ComboBoxSexeNom.ItemIndex                  := 0;
     RadioButtonRaceHasard.Caption              := GetTexteLibelle('RULES-LAB_085')+' (20xp)';
     RadioButtonMetierHasard.Caption            := GetTexteLibelle('RULES-LAB_085')+' (50xp)';
     RadioButtonAttributHasard.Caption          := GetTexteLibelle('RULES-LAB_085')+' (50xp)';
@@ -470,6 +477,7 @@ procedure TWinCreations.FormCreate(Sender: TObject);
     // Le TShape pose par MiseEnFormeDesChamp sur chaque onglet cache les controles non
     // fenetres (TBCButton) : meme piege que les boutons ci-dessus (CONTEXT.md 4).
     ButtonPhysique.BringToFront;
+    ButtonNom.BringToFront;
 
     KeyPreview := true;
 
@@ -1887,6 +1895,24 @@ procedure TWinCreations.ButtonPhysiqueClick(Sender: TObject);
         LabPhysiqueResume.Text := IntToStr(Personnage.Age) + ' - ' + FormateTaille(Personnage.Height, Personnage.HeightUnit)
                                      + ' - ' + Personnage.HairColors + ' - ' + Personnage.EyeColors;
       end;
+  end;
+
+// Generateur de noms de l'ethnie (Rulebook p.38-39, Dwarf Player's Guide p.39) : le resultat
+// remplace le contenu du champ Nom, que le joueur peut ensuite retoucher.
+procedure TWinCreations.ButtonNomClick(Sender: TObject);
+  var
+    Nom: String;
+  begin
+    if not RaceANoms(Personnage.Race) then
+      begin
+        ShowMessage(GetTexteLibelle('RULES-LAB_270'));
+        Exit;
+      end;
+    Nom := TireNom(Personnage.Race, IfThen(ComboBoxSexeNom.ItemIndex = 1, 'F', 'M'));
+    if Nom = '' then
+      ShowMessage(GetTexteLibelle('RULES-LAB_270'))
+    else
+      EditNomPersonnag.Text := Nom;
   end;
 
 ////////////////////////////////////////////////////////////////////////////////
