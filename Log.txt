@@ -5964,3 +5964,7 @@ Fichiers modifies : BOOK_RULESBOOK.Xml, INTERFACE.Xml, INTERFACE_FRANCAIS.Xml, c
 21/09/2026 - NOMS DES ELFES DES MERS (HIGH ELF PLAYER S GUIDE) - DONNEES SEULES, A TESTER PAR NONO
 Bloc <SUBCHAPTER_NAMES> sur HELFG-RACE_SEAEL : 9 epithetes du guide ; prenom par le generateur haut elfe du Rulebook via le repli d espece. Aucun code modifie.
 Fichiers modifies : BOOK_HIGH_ELF_PLAYERS_GUIDE.Xml, CONTEXT.md, A FAIRE.txt, Log.txt.
+
+21/09/2026 - PATRONYMES HUMAINS (-SSON / -SDOTTIR) - DONNEES SEULES, A TESTER PAR NONO
+Deux modeles ajoutes a l humain du Rulebook (nom du pere + suffixe, Character Pack p.10), un tirage sur deux avec le nom de famille ; le modele Forename Surname est desormais declare pour M et F. Aucun code.
+Fichiers modifies : BOOK_RULESBOOK.Xml, CONTEXT.md, A FAIRE.txt, Log.txt.

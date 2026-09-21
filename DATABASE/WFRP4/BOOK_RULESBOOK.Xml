@@ -4586,7 +4586,11 @@ See page 190 for Fear rules"</Explanation>
 </SUBCHAPTER_PHYSICAL>
 <!-- Noms reiklandais : tableaux de prenoms en d1000 (homme / femme) et noms de famille (metiers et traits physiques) du Unofficial Character Pack (livre de fan, p.9-11) ; le Rulebook p.37 ne donne que 30 exemples. Les chevauchements de plages du livre (Hansel 425-430 / Hartwig 426-431, etc.) sont rognes. -->
 <SUBCHAPTER_NAMES>
-<NamePattern>"Forename Surname"</NamePattern>
+<NamePattern sex="M">"Forename Surname"</NamePattern>
+<NamePattern sex="F">"Forename Surname"</NamePattern>
+<!-- Patronyme (Character Pack p.10) : nom du pere + -sson / -sdottir, courant dans le nord de l Empire ; un tirage sur deux. -->
+<NamePattern sex="M">"Forename Forename:M+'sson'"</NamePattern>
+<NamePattern sex="F">"Forename Forename:M+'sdottir'"</NamePattern>
 <!-- Noblesse (Unofficial Character Pack p.10) : « von » + lieu a la place du nom de famille ; lieux du Reikland cites dans le Rulebook. -->
 <NamePattern noble="1">"Forename 'von_'+Place"</NamePattern>
 <Name part="Forename" sex="M" name="Adam/Adamar/Adhemar">"1-5"</Name>

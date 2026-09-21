@@ -11295,4 +11295,6 @@ Modele : mots separes par des espaces ; un mot = elements separes par `+` ; elem
 
 **Elfes des mers (fait apres)** : `HELFG-RACE_SEAEL` (High Elf Player s Guide, Ethnic `RULES-SPECIE_HELF`) porte seulement 9 `Epithet` (Bluestrait, Cloudspear, Farborn, Greenbreeze, Seablade, Starfoam, Starguided, Wavestrider, Whitecrest) ; modele et composantes du prenom viennent du Haut Elfe du Rulebook par le repli d espece (partie par partie, `RaceSourceNom`). Donnees seules, aucun code. Les autres ethnies haut-elfes du guide retombent sur les 6 epithetes du Rulebook.
 
-**Reste** (A FAIRE.txt) : patronymes humains ; Sea Elf (High Elf Player s Guide : generateur haut elfe + 9 epithetes) ; ethnies sans donnee (Bretonniens, Kislevites...) retombent sur le Reiklandais ; V5 sans bloc de noms.
+**Patronymes humains (fait apres)** : deux modeles de plus sur l humain du Rulebook (`Forename Forename:M+'sson'` / `'sdottir'`, nom du pere tire dans la table masculine) ; les anciens modeles `Forename Surname` deviennent M et F (un modele sans sexe serait ecarte des que des modeles du sexe existent, voir `ChoisitModeleNom`) : un tirage sur deux. Donnees seules.
+
+**Reste** (A FAIRE.txt) : ethnies sans donnee (Bretonniens, Kislevites...) retombent sur le Reiklandais ; V5 sans bloc de noms.
