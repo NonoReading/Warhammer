@@ -5892,3 +5892,15 @@ Fichiers modifies : pdfmetier.pas, CONTEXT.md, A FAIRE.txt, Log.txt.
 20/09/2026 - HIGH ELF PLAYER S GUIDE : LIGNE MAGE DES TABLES DE TIRAGE VERIFIEE
 La ligne Mage des onze tables de tirage est en place (HELFG-WORK132), verifiee le 20/09/2026 ; elle n est plus un trou. En-tete COMPLETE=0 du XML remis a jour : il reste Adapting Careers p.60-62 (trappings, facultatives, options Up in Arms) et la table p.59.
 Fichiers modifies : BOOK_HIGH_ELF_PLAYERS_GUIDE.Xml, A FAIRE.txt, Log.txt.
+
+20/09/2026 - HIGH ELF PLAYER S GUIDE : ADAPTING CAREERS, TRAPPINGS - COMPILE, A VALIDER PAR NONO
+ChargerMetierEquipement (winpersonnage.pas) : le code d equipement passe par AdapterElement (Nature trapping) a l entree en carriere ; le type est recalcule par GetTypeMetierEquipement sur le nouveau code (arme, armure ou Divers), un retrait sans ajout (magic license du Wizard) supprime la ligne. Cas donnees : Cavalryman (pistolet -> Elf Bow, munitions), Artisan (Highborn Patronage, Position at Court), Merchant (Merchant s Charter), Wizard. Non touche : wincreation.pas (aucun trapping adapte au niveau 1). Reste : facultatives, options Up in Arms.
+Fichiers modifies : winpersonnage.pas, CONTEXT.md, A FAIRE.txt, Log.txt.
+
+20/09/2026 - HIGH ELF PLAYER S GUIDE : ADAPTING CAREERS, FACULTATIVES (PIT FIGHTER, SEAMAN) - COMPILE, A VALIDER PAR NONO
+Nouveau champ de fiche ChoixAdaptation (chargepersonnage.pas, balise ADAPTATION_CHOICE, absente des anciennes fiches = vide). DemanderAdaptationsFacultatives (chargemetier.pas) pose une question Oui/Non par adaptation facultative applicable. Creation : ChoixAdaptationCreation (wincreation.pas), question posee une fois par couple carriere/ethnie, avant le tableau des competences de niveau 1, resultat range dans la fiche. Evolution : question a l entree au niveau 1 d une carriere (winpersonnage.pas). Le choix remplace le Choix vide dans tous les appels a AdapterElement et StatutAdapte (winpersonnage, wincreation, pdfpersonnage). Non fait : changer le choix apres coup. Reste : options Up in Arms.
+Fichiers modifies : chargeconstantes.pas, chargepersonnage.pas, chargemetier.pas, wincreation.pas, winpersonnage.pas, pdfpersonnage.pas, CONTEXT.md, A FAIRE.txt, Log.txt.
+
+20/09/2026 - HIGH ELF PLAYER S GUIDE : ADAPTING CAREERS, OPTIONS UP IN ARMS - A TESTER PAR NONO
+Artillerist (UPINA-WORK69) ouvert a RULES-SPECIE_HELF (DATA_SPECIE_CAREER_DIRECT du livre) ; Archer, Camp Follower et Light Cavalry l etaient deja par Up in Arms. HELFG-ADAPT_009 : Light Cavalry niveau 4, Ranged (Blackpowder) -> Secret Signs (Scout), Pistol -> magic weapon (texte libre). Aucun code Pascal. Non porte : restriction Soldier (choix de specialisation, pas une substitution). Adapting Careers termine ; le livre reste a COMPLETE=0 pour la table de tirage p.59.
+Fichiers modifies : BOOK_HIGH_ELF_PLAYERS_GUIDE.Xml, CONTEXT.md, A FAIRE.txt, Log.txt.

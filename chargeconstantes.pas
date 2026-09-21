@@ -100,6 +100,8 @@ Const
       // Appartenances du personnage (regiment, ordre de chevalerie, culte) : les codes
       // des CareerBonus auxquels il adhere. Voir CONTEXT.md 2.44.
       ConstXmlAppartenance              = 'MEMBERSHIP';
+      // Adaptations FACULTATIVES retenues par le joueur (codes separes par des virgules), Adapting Careers.
+      ConstXmlChoixAdaptation           = 'ADAPTATION_CHOICE';
       ConstXmlDataBook                  = 'DATA_BOOK';
       ConstXmlDataAttributCost          = 'DATA_ATTRIBUT_COST';
       ConstXmlDataSkillCost             = 'DATA_SKILL_COST';

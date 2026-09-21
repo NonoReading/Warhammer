@@ -9,8 +9,8 @@
 <DISCLAIMER>"No part of this publication may be reproduced, stored in a retrieval system, or transmitted in any form by any means, electronic, mechanical, photocopying, recording, or otherwise, without the prior permission of the publishers. Warhammer Fantasy Roleplay 4th Edition (c) Copyright Games Workshop Limited 2025. Warhammer Fantasy Roleplay 4th Edition, the Warhammer Fantasy Roleplay 4th Edition logo, GW, Games Workshop, Warhammer, The Game of Fantasy Battles, the twin-tailed comet logo, and all associated logos, illustrations, images, names, creatures, races, vehicles, locations, weapons, characters, and the distinctive likeness thereof, are either (R) or TM, and/or (c) Games Workshop Limited, variably registered around the world, and used under licence. Cubicle 7 Entertainment and the Cubicle 7 Entertainment logo are trademarks of Cubicle 7 Entertainment Limited. All rights reserved."</DISCLAIMER>
   <!-- COMPLETE=0 (audit du 20/09/2026) : carrieres, lanceurs de sorts, 59 sorts, ethnies, armurerie,
        herbes, objets enchantes, 8 navires et Eagle Claw Bolt Thrower sont saisis. Reste : les
-       Adapting Careers p.60-62 (trappings, facultatives, options Up in Arms ; substitutions de
-       competences et talents, Standing et affichage FAITS). Ligne Mage des tables de tirage
+       Adapting Careers p.60-62 (substitutions, trappings, facultatives, Standing, affichage et options
+       Up in Arms FAITS ; non porte : restriction Blackpowder du Soldier, intitule Exalted Maker). Ligne Mage des tables de tirage
        en place (HELFG-WORK132), verifiee le 20/09/2026. Voir A FAIRE.txt. -->
 <DATA_LABEL>
 <Label language="ENGLISH">
@@ -301,6 +301,11 @@ Asur from the Outer Kingdoms and Eataine do not harbour such prejudice."</Explan
        fidelement ce que le livre ecrit plutot que de choisir a sa place lequel des deux
        cotes de sa contradiction est le bon. -->
 </Entry>
+<Entry>
+<Specie>"RULES-SPECIE_HELF"</Specie>
+<Career name="UPINA-WORK69">"X"</Career>
+  <!-- Artillerist (Up in Arms) : Soldier haut-elfe specialise dans les baliste a repetition, p.60 ; Archer, Camp Follower et Light Cavalry sont deja ouverts aux Hauts Elfes par Up in Arms -->
+</Entry>
 </DATA_SPECIE_CAREER_DIRECT>
 <DATA_CAREER_ADAPTATION>
   <!-- Adapting Careers, p.60-62. Specie = liste d ethnies separees par / ; Optional = "may choose" du livre,
@@ -436,6 +441,23 @@ Asur from the Outer Kingdoms and Eataine do not harbour such prejudice."</Explan
 <Career>"RULES-WORK55"</Career>
 <Specie>"HELFG-RACE_CALED/HELFG-RACE_ELLYR/HELFG-RACE_AVELO/HELFG-RACE_SAPHE/HELFG-RACE_EATAI/HELFG-RACE_TIRAN/HELFG-RACE_NAGAR/HELFG-RACE_CHRAC/HELFG-RACE_COTHI/HELFG-RACE_YVRES"</Specie>
 <Standing>"1"</Standing>
+</Adaptation>
+  <!-- Light Cavalry (Up in Arms, UPINA-WORK76) p.60, niveau 4 (Captain) : Ranged (Blackpowder) -> Secret Signs (Scout), Brace of Pistols -> arme magique (texte libre, le livre ne donne pas d arme) ; les munitions du pistolet ne sont pas citees par le livre et restent -->
+<Adaptation id="HELFG-ADAPT_009">
+<Description language="ENGLISH">"Light Cavalry (High Elf)"</Description>
+<Career>"UPINA-WORK76"</Career>
+<Specie>"HELFG-RACE_CALED/HELFG-RACE_ELLYR/HELFG-RACE_AVELO/HELFG-RACE_SAPHE/HELFG-RACE_EATAI/HELFG-RACE_TIRAN/HELFG-RACE_NAGAR/HELFG-RACE_CHRAC/HELFG-RACE_COTHI/HELFG-RACE_YVRES"</Specie>
+<Level id="4">
+<Order>"4"</Order>
+<Skill>
+<Remove>"RULES-COMPPROJ_POUDRE"</Remove>
+<Add>"RULES-COMPSIGNES_SCOUT"</Add>
+</Skill>
+<Trapping>
+<Remove>"UPINA-PROJ_POUDRE_08"</Remove>
+<Add>"magic weapon"</Add>
+</Trapping>
+</Level>
 </Adaptation>
 </DATA_CAREER_ADAPTATION>
 <DATA_SPECIE>

@@ -3930,7 +3930,7 @@ procedure TWinPersonnages.NiveauMetierTalentMax();
             // lieu de relire CodeValeur / CodeRecherche, les globales laissees par l'appel de
             // gauche : meme resultat, mais sans dependre de cet etat partage. CONTEXT.md 2.49.
             // Adapting Careers : le talent substitue remplace le code brut de la carriere (20/09/2026).
-            if TalentCarriereCorrespond(AdapterElement(MetierEnCours, Personnage.Race, '', PMetierTalent.NiveauMetier,
+            if TalentCarriereCorrespond(AdapterElement(MetierEnCours, Personnage.Race, Personnage.ChoixAdaptation, PMetierTalent.NiveauMetier,
                                         ConstXmlTalent, PMetierTalent.CodeTalent),
                                         TabTalent.Cells[ColTalCode, ARow]) then
               begin
@@ -5902,6 +5902,9 @@ Procedure TWinPersonnages.MajTables();
           // carrièrere
           Personnage.MetierEnCours.NiveauMetier        := StrToInt(NvNiveau);
           Personnage.MetierEnCours.CodeMetier          := NvMetier;
+          // Adapting Careers : entree dans un nouveau niveau 1, on redemande les facultatives
+          if StrToInt(NvNiveau) = 1 then
+            Personnage.ChoixAdaptation := DemanderAdaptationsFacultatives(NvMetier, Personnage.Race, Personnage.ChoixAdaptation);
           TabCarriere.Cells[4, TabCarriere.Rowcount-1] := IntToStr(EditNeedRealXp.value);
 
           TabCarriere.RowCount := TabCarriere.RowCount + 1;
@@ -5927,7 +5930,7 @@ Procedure TWinPersonnages.MajTables();
                   begin
                     // Adapting Careers : substitution selon l'ethnie (Choix vide = seules
                     // les adaptations imposees s'appliquent).
-                    PersonnageCompetence.CodeCompetence := AdapterElement(NvMetier, Personnage.Race, '',
+                    PersonnageCompetence.CodeCompetence := AdapterElement(NvMetier, Personnage.Race, Personnage.ChoixAdaptation,
                                                              PMetierCompetence.NiveauMetier, ConstXmlCompetence,
                                                              PMetierCompetence.CodeCompetence);
                     if PersonnageCompetence.CodeCompetence = '' then
@@ -5940,7 +5943,7 @@ Procedure TWinPersonnages.MajTables();
               for PMetierTalent in ListMetierTalent do
                 if CompareRechercheValeur(PMetierTalent.CodeMetier, NvMetier) then
                   begin
-                    PersonnageTalent.CodeTalent := AdapterElement(NvMetier, Personnage.Race, '',
+                    PersonnageTalent.CodeTalent := AdapterElement(NvMetier, Personnage.Race, Personnage.ChoixAdaptation,
                                                      PMetierTalent.NiveauMetier, ConstXmlTalent,
                                                      PMetierTalent.CodeTalent);
                     if PersonnageTalent.CodeTalent = '' then
@@ -6315,6 +6318,8 @@ Procedure TWinPersonnages.ChargerMetierEquipement(CodeMetier: String; NiveauMeti
   var
     NbMetierEquipementTab: Integer;
     PMetierEquipement:     StructureMetierEquipement;
+    PMetierEquipBrut:      StructureMetierEquipement;
+    CodeAdapt:             String;
     ListeCode:             String;
     Typ:                   String;
     Lib:                   String;
@@ -6334,9 +6339,19 @@ Procedure TWinPersonnages.ChargerMetierEquipement(CodeMetier: String; NiveauMeti
    begin
     NbMetierEquipementTab        := 0;
     TabMetierEquipement.RowCount := 1;
-    for PMetierEquipement in ListMetierEquipement do
-      if CompareRechercheValeur(PMetierEquipement.CodeMetier, CodeMetier) and (PMetierEquipement.NiveauMetier = NiveauMetier) then
+    for PMetierEquipBrut in ListMetierEquipement do
+      if CompareRechercheValeur(PMetierEquipBrut.CodeMetier, CodeMetier) and (PMetierEquipBrut.NiveauMetier = NiveauMetier) then
         Begin
+           // Adapting Careers : un trapping remplace (ou retire) selon l ethnie ; le type est recalcule
+           // sur le nouveau code (arme, armure ou Divers). Retrait sans ajout : pas de ligne.
+           PMetierEquipement := PMetierEquipBrut;
+           CodeAdapt := AdapterElement(CodeMetier, Personnage.Race, Personnage.ChoixAdaptation, NiveauMetier, ConstXmlTrapping, PMetierEquipBrut.Equipement);
+           if CodeAdapt <> PMetierEquipBrut.Equipement then
+             begin
+               if CodeAdapt = '' then Continue;
+               PMetierEquipement.Equipement     := CodeAdapt;
+               PMetierEquipement.TypeEquipement := GetTypeMetierEquipement(CodeAdapt);
+             end;
            NbMetierEquipementTab        := NbMetierEquipementTab + 1;
            TabMetierEquipement.RowCount := NbMetierEquipementTab + 1;
            ListeCode                    := GetListeEquipement(PMetierEquipement.Equipement, PMetierEquipement.TypeEquipement);

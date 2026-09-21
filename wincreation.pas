@@ -356,6 +356,27 @@ implementation
 
 {$R *.lfm}
 
+var
+  ChoixAdaptationCle:   String = '';
+  ChoixAdaptationMemo:  String = '';
+
+// Adaptations facultatives (Adapting Careers) du couple carriere/ethnie en cours : demandees
+// une seule fois par couple (l'ecran est reconstruit a chaque affichage), memorisees ensuite.
+function ChoixAdaptationCreation(): String;
+begin
+  if (MetierEnCours = '') or (RaceEnCours = '') then
+    begin
+      Result := '';
+      Exit;
+    end;
+  if ChoixAdaptationCle <> MetierEnCours + '|' + RaceEnCours then
+    begin
+      ChoixAdaptationCle  := MetierEnCours + '|' + RaceEnCours;
+      ChoixAdaptationMemo := DemanderAdaptationsFacultatives(MetierEnCours, RaceEnCours, '');
+    end;
+  Result := ChoixAdaptationMemo;
+end;
+
 { TWinCreations }
 
 ////////////////////////////////////////////////////////////////////////////////
@@ -1072,6 +1093,7 @@ procedure TWinCreations.PhaseSave(NouvellePhase: Integer);
            PersonnageMetier.NiveauMetier := 1;
            PersonnageMetier.CoutXp       := 0;
            Personnage.MetierEnCours      := PersonnageMetier;
+           Personnage.ChoixAdaptation    := ChoixAdaptationCreation();
            Personnage.MetierAncien       += [PersonnageMetier];
          end;
 
@@ -1177,7 +1199,7 @@ procedure TWinCreations.PhaseSave(NouvellePhase: Integer);
            for PMetierCompetence in ListMetierCompetence do
              if (PMetierCompetence.CodeMetier = MetierEnCours) and (PMetierCompetence.NiveauMetier <> 1) then
                begin
-                 PersonnageCompetence.CodeCompetence := AdapterElement(MetierEnCours, Personnage.Race, '',
+                 PersonnageCompetence.CodeCompetence := AdapterElement(MetierEnCours, Personnage.Race, Personnage.ChoixAdaptation,
                                                           PMetierCompetence.NiveauMetier, ConstXmlCompetence,
                                                           PMetierCompetence.CodeCompetence);
                  if PersonnageCompetence.CodeCompetence = '' then
@@ -1208,7 +1230,7 @@ procedure TWinCreations.PhaseSave(NouvellePhase: Integer);
            for PMetierTalent in ListMetierTalent do
               if (PMetierTalent.CodeMetier = MetierEnCours) then
                 begin
-                  PersonnageTalent.CodeTalent := AdapterElement(MetierEnCours, Personnage.Race, '',
+                  PersonnageTalent.CodeTalent := AdapterElement(MetierEnCours, Personnage.Race, Personnage.ChoixAdaptation,
                                                    PMetierTalent.NiveauMetier, ConstXmlTalent,
                                                    PMetierTalent.CodeTalent);
                   if PersonnageTalent.CodeTalent = '' then
@@ -2391,7 +2413,7 @@ begin
       if CompareRechercheValeur(PMetierCompetence.CodeMetier, MetierEnCours) and (PMetierCompetence.NiveauMetier = 1) then
         Begin
              // Adapting Careers : competence de niveau 1 remplacee (ou retiree) pour l'ethnie.
-             CodeCompAdapt := AdapterElement(MetierEnCours, RaceEnCours, '', 1,
+             CodeCompAdapt := AdapterElement(MetierEnCours, RaceEnCours, ChoixAdaptationCreation(), 1,
                                                    ConstXmlCompetence, PMetierCompetence.CodeCompetence);
              if CodeCompAdapt = '' then
                continue;

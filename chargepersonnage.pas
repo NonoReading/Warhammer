@@ -197,6 +197,8 @@ Type
      // livre precise qu'on garde les competences et talents acquis meme apres avoir
      // quitte le regiment ou change de carriere. CONTEXT.md 2.44.
      Appartenance:               String;
+     // Adaptations de carriere FACULTATIVES acceptees (codes, virgules) : le Choix de AdapterElement.
+     ChoixAdaptation:            String;
      // Competences choisies au titre d'un <SkillChoice> d'appartenance (ex. Reiksguard
      // palier 4, "choisis 3 competences raciales, +5 avancees gratuites chacune") - Valeur
      // porte le nombre d'avancees offertes, jamais lu par CalculTableExperience (meme
@@ -915,6 +917,7 @@ begin
 
         // Appartenances - voir CONTEXT.md 2.44.
         XMLContent.Add(XmlLigne(ConstXmlAppartenance, Personnage.Appartenance));
+        XMLContent.Add(XmlLigne(ConstXmlChoixAdaptation, Personnage.ChoixAdaptation));
 
         // Competences choisies au titre d'un <SkillChoice> d'appartenance - champ dedie,
         // voir ChargeConstantes.ConstXmlSousChapitreCompAppartenance et le commentaire sur
@@ -1011,6 +1014,9 @@ begin
       // Balise absente des fiches enregistrees avant le 04/09/2026 : le test Assigned
       // suffit a les charger sans erreur, Appartenance reste vide. CONTEXT.md 2.44.
       Personnage.Appartenance         := '';
+      Personnage.ChoixAdaptation      := '';
+      if Assigned(PlayerNode.FindNode(ConstXmlChoixAdaptation)) then
+        Personnage.ChoixAdaptation    := RemoveQuotes(UTF8Encode(PlayerNode.FindNode(ConstXmlChoixAdaptation).TextContent));
       if Assigned(PlayerNode.FindNode(ConstXmlAppartenance)) then
         Personnage.Appartenance       := RemoveQuotes(UTF8Encode(PlayerNode.FindNode(ConstXmlAppartenance).TextContent));
 

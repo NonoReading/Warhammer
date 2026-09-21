@@ -6,7 +6,7 @@ interface
 
 uses
   Classes, SysUtils, ChargeConstantes, Generics.Collections, ChargeTexte, PdfUtils, FileUtil, Unitcalcul,
-  ChargeRace;
+  ChargeRace, Dialogs, Controls;
 
 Type
   StructureMetier	= Record
@@ -166,6 +166,9 @@ Function AdaptationApplicable(PAdapt: StructureCareerAdaptation; CodeMetier: Str
 Function AdapterElement(CodeMetier: String; CodeRace: String; Choix: String;
                         Niveau: Integer; Nature: String; Code: String): String;
 Function StandingAdaptation(CodeMetier: String; CodeRace: String; Choix: String): Integer;
+// DemanderAdaptationsFacultatives : pour chaque adaptation FACULTATIVE de cette carriere et de
+// cette ethnie, demande au joueur et rend Choix mis a jour (code ajoute si oui, retire si non).
+Function DemanderAdaptationsFacultatives(CodeMetier: String; CodeRace: String; Choix: String): String;
 // StatutAdapte : code de statut (ex. 'TIERS_BRASS 2') decale du Standing de l'adaptation ;
 // au-dela de 5 on passe au palier superieur (Brass 6 = Silver 1).
 Function StatutAdapte(Statut: String; CodeMetier: String; CodeRace: String; Choix: String): String;
@@ -372,6 +375,32 @@ Begin
             Result := PLigne.Ajoute;
             Exit;
           end;
+End;
+
+Function DemanderAdaptationsFacultatives(CodeMetier: String; CodeRace: String; Choix: String): String;
+Var
+  PAdapt:   StructureCareerAdaptation;
+  Retenues: TStringList;
+  Ind:      Integer;
+Begin
+  Retenues := TStringList.Create;
+  try
+    ExtractStrings([','], [], PChar(Choix), Retenues);
+    for PAdapt in ListCareerAdaptation do
+      if PAdapt.Facultative and
+         AdaptationApplicable(PAdapt, CodeMetier, CodeRace, PAdapt.CodeAdaptation) then
+        begin
+          Ind := Retenues.IndexOf(PAdapt.CodeAdaptation);
+          if Ind >= 0 then
+            Retenues.Delete(Ind);
+          if MessageDlg(PAdapt.Libelle, 'Appliquer cette adaptation facultative ?', mtConfirmation,
+                        [mbYes, mbNo], 0) = mrYes then
+            Retenues.Add(PAdapt.CodeAdaptation);
+        end;
+    Result := Retenues.CommaText;
+  finally
+    Retenues.Free;
+  end;
 End;
 
 Function StandingAdaptation(CodeMetier: String; CodeRace: String; Choix: String): Integer;
