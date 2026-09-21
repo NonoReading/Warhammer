@@ -5924,3 +5924,12 @@ Code : nouvelle unite chargeracephysique.pas (ListRacePhysique, ListRaceCouleur,
 Appris : (1) MiseEnFormeDesChamp pose un TShape alClient sur chaque onglet a la creation de la fiche : un TBCButton ou un TLabel pose dans un onglet est cache tant qu on ne fait pas BringToFront (bouton) ou qu on ne le remplace pas par un TEdit lecture seule (label, qui serait de plus colorie en rouge par la boucle) ; (2) une unite et une variable globale ne peuvent pas porter le meme nom (WinPhysique) ; (3) git checkout d un .lfm ou .pas de travail les repasse en CRLF alors que la plupart sont en LF sur le poste : ne pas s en servir pour annuler une edition, refaire l edition depuis la version fraiche.
 Reste : Gnome, Dwarf Player s Guide (tables par region), libelles a coder, voir A FAIRE.txt.
 Fichiers modifies : BOOK_RULESBOOK.Xml, chargeracephysique.pas (nouveau), winphysique.pas et winphysique.lfm (nouveaux), chargeconstantes.pas, xmlexportimport.pas, warhammersource.pas, WarhammerHelp.lpi, winpersonnage.pas et .lfm, wincreation.pas et .lfm, pdfpersonnage.pas, CONTEXT.md, A FAIRE.txt, Log.txt.
+
+21/09/2026 - DETAILS PHYSIQUES : GNOME (ROUGH NIGHTS AND HARD DAYS P.89) - VALIDE PAR NONO
+Bloc <SUBCHAPTER_PHYSICAL> ajoute a ROUGH-RACE_GNOME : age 10d10+20, taille 40+d10 (3 pieds 4 pouces + 1d10, en pouces), une seule tirage yeux (2d10 : Pale Blue a Violet) et cheveux (2d10 : Black a White), sans explosion de taille. Aucun code Pascal (le chargeur et LanceFormule gerent deja 10d10+20). Reste : Dwarf Player s Guide p.40.
+Fichiers modifies : BOOK_ROUGH_NIGHTS_AND_HARD_DAYS.Xml, A FAIRE.txt, Log.txt.
+
+21/09/2026 - DETAILS PHYSIQUES : LIBELLES DE WINPHYSIQUE ET DES BOUTONS ROLL - COMPILE ET VALIDE PAR NONO (creation d un Gnome OK)
+Nouveaux libelles dans INTERFACE.Xml et INTERFACE_FRANCAIS.Xml : RULES-LAB_263 Roll/Lancer, _264 Height (inches)/Taille (pouces), _265 message ethnie sans donnee, _266 titre de la fenetre. Reutilises : PDF_MAIN4_AGE/EYES/HAIR, LAB_086 (Valider), LAB_166 (Annuler). Code : FormCreate de winphysique.pas (unite ChargeTexte ajoutee), ButtonPhysique de winpersonnage.pas et wincreation.pas. Reste : libelles des couleurs des tables.
+Piege : grep -c CR peut mentir sur ce poste ; verifier les fins de ligne en binaire (INTERFACE*.Xml et winphysique.pas sont en CRLF, la plupart des autres fichiers en LF).
+Fichiers modifies : INTERFACE.Xml, INTERFACE_FRANCAIS.Xml, winphysique.pas, winpersonnage.pas, wincreation.pas, A FAIRE.txt, Log.txt.

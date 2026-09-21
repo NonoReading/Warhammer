@@ -333,6 +333,10 @@
 <Text name="RULES-LAB_260">"Montures et animaux"</Text>
 <Text name="RULES-LAB_261">"Bateaux"</Text>
 <Text name="RULES-LAB_262">"Véhicules"</Text>
+<Text name="RULES-LAB_263">"Lancer"</Text>
+<Text name="RULES-LAB_264">"Taille (pouces)"</Text>
+<Text name="RULES-LAB_265">"Aucune donnée physique pour cette ethnie."</Text>
+<Text name="RULES-LAB_266">"Détails physiques"</Text>
 </Label>
 </DATA_LABEL>
 </DATA_BOOK>

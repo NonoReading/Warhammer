@@ -6,7 +6,7 @@ interface
 
 uses
   Classes, SysUtils, Forms, Controls, StdCtrls, Spin, Dialogs, BCButton,
-  GlobalFonts, ChargeConstantes, ChargeRacePhysique, Graphics;
+  GlobalFonts, ChargeConstantes, ChargeRacePhysique, ChargeTexte, Graphics;
 
 type
 
@@ -54,6 +54,14 @@ implementation
 procedure TWinPhysique.FormCreate(Sender: TObject);
   begin
     MiseEnFormeDesChamp(self);
+    Caption                := GetTexteLibelle('RULES-LAB_266');
+    LabelAge.Caption       := GetTexteLibelle('RULES-PDF_MAIN4_AGE');
+    LabelTaille.Caption    := GetTexteLibelle('RULES-LAB_264');
+    LabelYeux.Caption      := GetTexteLibelle('RULES-PDF_MAIN4_EYES');
+    LabelCheveux.Caption   := GetTexteLibelle('RULES-PDF_MAIN4_HAIR');
+    ButtonTirer.Caption    := GetTexteLibelle('RULES-LAB_263');
+    ButtonValider.Caption  := GetTexteLibelle('RULES-LAB_086');
+    ButtonAnnuler.Caption  := GetTexteLibelle('RULES-LAB_166');
     PhysiqueValide := False;
     SpinEditAge.Value    := PhysiqueAge;
     SpinEditTaille.Value := PhysiqueTaille;
@@ -73,7 +81,7 @@ procedure TWinPhysique.Tirer;
   begin
     if not TireDetailsPhysiques(PhysiqueCodeRace, Age, Taille, Yeux, Cheveux) then
       begin
-        ShowMessage('No physical data for this ethnicity.');
+        ShowMessage(GetTexteLibelle('RULES-LAB_265'));
         Exit;
       end;
     SpinEditAge.Value    := Age;

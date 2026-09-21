@@ -44,6 +44,31 @@
 <Attribut name="RULES-ATTR_Supp">"2"</Attribut>
 <Attribut name="RULES-ATTR_Move">"3"</Attribut>
 </SUBCHAPTER_ATTR>
+<SUBCHAPTER_PHYSICAL>
+<Age>"10d10+20"</Age>
+<Height>"40+d10"</Height>
+<EyeRolls>"1"</EyeRolls>
+<Eye name="Pale Blue">"2"</Eye>
+<Eye name="Blue">"3"</Eye>
+<Eye name="Deep Blue">"4"</Eye>
+<Eye name="Turquoise">"5-7"</Eye>
+<Eye name="Pale Green">"8-11"</Eye>
+<Eye name="Hazel">"12-14"</Eye>
+<Eye name="Pale Brown">"15-17"</Eye>
+<Eye name="Brown">"18"</Eye>
+<Eye name="Dark Brown">"19"</Eye>
+<Eye name="Violet">"20"</Eye>
+<Hair name="Black">"2"</Hair>
+<Hair name="Dark Brown">"3"</Hair>
+<Hair name="Auburn">"4"</Hair>
+<Hair name="Brown">"5-7"</Hair>
+<Hair name="Light Brown">"8-11"</Hair>
+<Hair name="Ginger">"12-14"</Hair>
+<Hair name="Red Blond">"15-17"</Hair>
+<Hair name="Golden Blond">"18"</Hair>
+<Hair name="White Blond">"19"</Hair>
+<Hair name="White">"20"</Hair>
+</SUBCHAPTER_PHYSICAL>
 <SUBCHAPTER_SKILL>
 <Skill>"RULES-COMPFOCAL_OMBRE"</Skill>
   <!-- Channelling (Ulgu) -->

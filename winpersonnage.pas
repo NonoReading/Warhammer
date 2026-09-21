@@ -2474,8 +2474,7 @@ Procedure TWinPersonnages.AfficheImageRace();
     LabHeight.Caption                          := GetTexteLibelle('RULES-PDF_MAIN4_HEIGHT');
     LabHairColors.Caption                      := GetTexteLibelle('RULES-PDF_MAIN4_HAIR');
     LabEyeColors.Caption                       := GetTexteLibelle('RULES-PDF_MAIN4_EYES');
-    // Provisoire : pas encore de code de libelle (texte anglais brut, comme les couleurs)
-    ButtonPhysique.Caption                     := 'Roll';
+    ButtonPhysique.Caption                     := GetTexteLibelle('RULES-LAB_263');
 
     ButtonHistorique.BringToFront;
     StringGridCorruption.BringToFront;

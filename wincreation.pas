@@ -445,8 +445,7 @@ procedure TWinCreations.FormCreate(Sender: TObject);
     TabSheetCompMetier.Caption                 := GetTexteLibelle('RULES-LAB_088');
     TabSheetEquipement.Caption                 := GetTexteLibelle('RULES-LAB_013');
     TabSheetNom.Caption                        := GetTexteLibelle('RULES-LAB_014');
-    // Provisoire : pas encore de code de libelle (texte anglais brut, comme les couleurs)
-    ButtonPhysique.Caption                     := 'Roll';
+    ButtonPhysique.Caption                     := GetTexteLibelle('RULES-LAB_263');
     RadioButtonRaceHasard.Caption              := GetTexteLibelle('RULES-LAB_085')+' (20xp)';
     RadioButtonMetierHasard.Caption            := GetTexteLibelle('RULES-LAB_085')+' (50xp)';
     RadioButtonAttributHasard.Caption          := GetTexteLibelle('RULES-LAB_085')+' (50xp)';

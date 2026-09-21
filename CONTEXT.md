@@ -1,6 +1,6 @@
 # Warhammer — Contexte projet
 
-**DETAILS PHYSIQUES PAR ETHNIE (21/09/2026, Rulebook termine, compile et valide par Nono)** : voir 2.86 plus bas et `A FAIRE.txt` (3 entrees DETAILS PHYSIQUES : autres ethnies, libelles, points ouverts).
+**DETAILS PHYSIQUES PAR ETHNIE (21/09/2026, Rulebook termine, compile et valide par Nono)** : voir 2.86 plus bas et `A FAIRE.txt` (3 entrees DETAILS PHYSIQUES : autres ethnies, libelles, points ouverts). Gnome (Rough Nights p.89) et libelles de WinPhysique FAITS et VALIDES le 21/09.
 
 **ADAPTING CAREERS (20/09/2026, compile, substitutions imposees validees par Nono)** : voir 2.85 plus bas et `A FAIRE.txt` (section HIGH ELF, RESTE en 5 points). Standing FAIT et valide (20/09, Warden Yvresse : Silver 2 / 4 / Gold 2). AFFICHAGE FAIT, PDF de carriere compris (pdfmetier.pas : bloc d adaptation en bas du pave de droite, valide 20/09). Point de reprise : les points 3 a 5 de A FAIRE.txt.
 **AUDIT DES TXT (20/09/2026, point de reprise)** : les quatre livres a `COMPLETE=0` sont audites. Sylvania, Nations of Mankind et Dwarf Player s Guide passes a `COMPLETE=1` ; High Elf Player s Guide est passe a `COMPLETE=1` le 20/09 (decision Nono, Adapting Careers termine) ; il a recu 8 navires + Eagle Claw Bolt Thrower (a compiler et valider). Suite : auditer les livres a `COMPLETE=1` un par un ; methode : comparer chaque section du sommaire au XML et verifier par grep avant de dire qu une donnee manque (deux fausses alertes le 20/09 : montures de Nations, herbes de HELFG). Voir `A FAIRE.txt`.
