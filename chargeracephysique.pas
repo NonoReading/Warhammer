@@ -460,6 +460,8 @@ end;
 function TireNom(CodeRace, Sexe: String): String;
 var
   Source, Modele, Mot, Element, Partie, SexePartie, Valeur, Morceau: String;
+  ModeleSans: String;
+  NbExact, NbSans: Integer;
   PModele:    StructureRaceNomModele;
   Mots, Elements: TStringList;
   I, J, Deux: Integer;
@@ -471,18 +473,30 @@ begin
     Exit;
   if Sexe = '' then
     Sexe := IfThen(Random(2) = 0, 'M', 'F');
-  Modele := '';
+  // Plusieurs modeles possibles (ex. Nains : prenom du livre ou prefixe + suffixe) : un seul est
+  // tire, au hasard, parmi ceux du sexe demande (a defaut, parmi ceux sans sexe).
+  Modele      := '';
+  ModeleSans  := '';
+  NbExact     := 0;
+  NbSans      := 0;
   for PModele in ListRaceNomModele do
     if CompareRechercheValeur(PModele.CodeRace, Source) then
       begin
         if PModele.Sexe = Sexe then
           begin
-            Modele := PModele.Modele;
-            Break;
+            Inc(NbExact);
+            if Random(NbExact) = 0 then
+              Modele := PModele.Modele;
+          end
+        else if PModele.Sexe = '' then
+          begin
+            Inc(NbSans);
+            if Random(NbSans) = 0 then
+              ModeleSans := PModele.Modele;
           end;
-        if (PModele.Sexe = '') and (Modele = '') then
-          Modele := PModele.Modele;
       end;
+  if NbExact = 0 then
+    Modele := ModeleSans;
   if Modele = '' then
     Exit;
   Mots     := TStringList.Create;

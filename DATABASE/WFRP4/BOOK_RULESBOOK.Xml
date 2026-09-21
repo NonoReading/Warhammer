@@ -5390,6 +5390,8 @@ See page 190 for Fear rules"</Explanation>
 <SUBCHAPTER_NAMES>
 <NamePattern sex="M">"Forename Forename:M+'sson' Clan"</NamePattern>
 <NamePattern sex="F">"Forename Forename:M+'sdottir' Clan"</NamePattern>
+<NamePattern sex="M">"Prefix+Suffix Prefix+Suffix:M+'sson' Clan"</NamePattern>
+<NamePattern sex="F">"Prefix+Suffix Prefix+Suffix:M+'sdottir' Clan"</NamePattern>
 <Name part="Clan" name="Ardrungan">"1"</Name>
 <Name part="Clan" name="Bryntok">"2"</Name>
 <Name part="Clan" name="Gazani">"3"</Name>
@@ -5402,6 +5404,158 @@ See page 190 for Fear rules"</Explanation>
 <Name part="Clan" name="Thrungtak">"10"</Name>
 <Name part="Clan" name="Wyrgrinti">"11"</Name>
 <Name part="Clan" name="Zankonk">"12"</Name>
+<!-- Generateur prefixe + suffixe des prenoms nains (Unofficial Character Pack, livre de fan, p.11, d100 chacun) : suffixes en a/i selon le sexe ; X/Y = variantes ; (x) = lettre facultative. -->
+<Name part="Prefix" name="Al">"1-2"</Name>
+<Name part="Prefix" name="Bal">"3-4"</Name>
+<Name part="Prefix" name="Bar(a)">"5"</Name>
+<Name part="Prefix" name="Bel">"6"</Name>
+<Name part="Prefix" name="Ber(g)">"7"</Name>
+<Name part="Prefix" name="Bir">"8"</Name>
+<Name part="Prefix" name="Blo">"9"</Name>
+<Name part="Prefix" name="Bor(a)">"10-11"</Name>
+<Name part="Prefix" name="Brag/Brak">"12-13"</Name>
+<Name part="Prefix" name="Bram">"14"</Name>
+<Name part="Prefix" name="Brok(k)">"15"</Name>
+<Name part="Prefix" name="Brond">"16-17"</Name>
+<Name part="Prefix" name="Bur(g)">"18"</Name>
+<Name part="Prefix" name="Car">"19"</Name>
+<Name part="Prefix" name="Den">"20"</Name>
+<Name part="Prefix" name="Dim">"21-22"</Name>
+<Name part="Prefix" name="Do">"23"</Name>
+<Name part="Prefix" name="Drum">"24"</Name>
+<Name part="Prefix" name="Dur">"25-26"</Name>
+<Name part="Prefix" name="Dwin">"27-28"</Name>
+<Name part="Prefix" name="Ed">"29"</Name>
+<Name part="Prefix" name="Fal">"30"</Name>
+<Name part="Prefix" name="Fi">"31"</Name>
+<Name part="Prefix" name="Fen">"32"</Name>
+<Name part="Prefix" name="Fim">"33"</Name>
+<Name part="Prefix" name="Gal">"34"</Name>
+<Name part="Prefix" name="Gar">"35"</Name>
+<Name part="Prefix" name="Glen">"36"</Name>
+<Name part="Prefix" name="Glo">"37"</Name>
+<Name part="Prefix" name="Gnol">"38"</Name>
+<Name part="Prefix" name="God">"39"</Name>
+<Name part="Prefix" name="Gom">"40-41"</Name>
+<Name part="Prefix" name="Gor(m)">"42"</Name>
+<Name part="Prefix" name="Got(t)">"43-44"</Name>
+<Name part="Prefix" name="Gren">"45"</Name>
+<Name part="Prefix" name="Grim">"46-47"</Name>
+<Name part="Prefix" name="Grom">"48-49"</Name>
+<Name part="Prefix" name="Grond">"50"</Name>
+<Name part="Prefix" name="Grun">"51-52"</Name>
+<Name part="Prefix" name="Gud">"53"</Name>
+<Name part="Prefix" name="Gur">"54"</Name>
+<Name part="Prefix" name="Haa/Har">"55"</Name>
+<Name part="Prefix" name="Her">"56"</Name>
+<Name part="Prefix" name="Hor">"57"</Name>
+<Name part="Prefix" name="Im">"58"</Name>
+<Name part="Prefix" name="Jot(r)">"59"</Name>
+<Name part="Prefix" name="Kad(h)">"60"</Name>
+<Name part="Prefix" name="Kar">"61-62"</Name>
+<Name part="Prefix" name="Ket">"63"</Name>
+<Name part="Prefix" name="Ki">"64"</Name>
+<Name part="Prefix" name="Krom">"65"</Name>
+<Name part="Prefix" name="Mag">"66-67"</Name>
+<Name part="Prefix" name="Mor(a)">"68-69"</Name>
+<Name part="Prefix" name="Muir(a)">"70-71"</Name>
+<Name part="Prefix" name="Mun">"72"</Name>
+<Name part="Prefix" name="Naz">"73"</Name>
+<Name part="Prefix" name="No">"74"</Name>
+<Name part="Prefix" name="O(r)">"75"</Name>
+<Name part="Prefix" name="Org">"76"</Name>
+<Name part="Prefix" name="Pet">"77"</Name>
+<Name part="Prefix" name="Rag/Rak">"78-79"</Name>
+<Name part="Prefix" name="Sig">"80-81"</Name>
+<Name part="Prefix" name="Sim/Sin">"82"</Name>
+<Name part="Prefix" name="Sir">"83"</Name>
+<Name part="Prefix" name="Snor">"84-85"</Name>
+<Name part="Prefix" name="Stor">"86-87"</Name>
+<Name part="Prefix" name="Thin">"88-89"</Name>
+<Name part="Prefix" name="Thor(a)">"90-91"</Name>
+<Name part="Prefix" name="Thra">"92"</Name>
+<Name part="Prefix" name="Th(o)ro">"93"</Name>
+<Name part="Prefix" name="Thur">"94-95"</Name>
+<Name part="Prefix" name="Ur">"96-97"</Name>
+<Name part="Prefix" name="Zar">"98"</Name>
+<Name part="Prefix" name="Zim">"99"</Name>
+<Name part="Prefix" name="Zin(d)">"100"</Name>
+<Name part="Suffix" sex="M" name="i">"1-3"</Name>
+<Name part="Suffix" sex="F" name="a">"1-3"</Name>
+<Name part="Suffix" name="adin">"4-5"</Name>
+<Name part="Suffix" name="agaz">"6"</Name>
+<Name part="Suffix" name="ak">"7"</Name>
+<Name part="Suffix" name="azak">"8"</Name>
+<Name part="Suffix" name="azid">"9"</Name>
+<Name part="Suffix" name="azil">"10"</Name>
+<Name part="Suffix" name="bar">"11"</Name>
+<Name part="Suffix" name="bul">"12"</Name>
+<Name part="Suffix" name="bur">"13"</Name>
+<Name part="Suffix" name="del">"14"</Name>
+<Name part="Suffix" name="dok">"15"</Name>
+<Name part="Suffix" name="em">"16"</Name>
+<Name part="Suffix" name="fer">"17"</Name>
+<Name part="Suffix" name="fur">"18"</Name>
+<Name part="Suffix" sex="M" name="di">"19-20"</Name>
+<Name part="Suffix" sex="F" name="da">"19-20"</Name>
+<Name part="Suffix" sex="M" name="d(i)">"21-22"</Name>
+<Name part="Suffix" sex="F" name="d(a)">"21-22"</Name>
+<Name part="Suffix" name="dim/din">"23-24"</Name>
+<Name part="Suffix" sex="M" name="dri">"25-26"</Name>
+<Name part="Suffix" sex="F" name="dra">"25-26"</Name>
+<Name part="Suffix" name="dum">"27-28"</Name>
+<Name part="Suffix" name="dun">"29-30"</Name>
+<Name part="Suffix" sex="M" name="g(i)">"31"</Name>
+<Name part="Suffix" sex="F" name="g(a)">"31"</Name>
+<Name part="Suffix" name="gar">"32"</Name>
+<Name part="Suffix" name="gin">"33-34"</Name>
+<Name part="Suffix" name="(e)gol">"35-36"</Name>
+<Name part="Suffix" name="gond">"37-38"</Name>
+<Name part="Suffix" name="grond">"39-40"</Name>
+<Name part="Suffix" name="grim">"41-42"</Name>
+<Name part="Suffix" sex="M" name="gund(i)">"43-44"</Name>
+<Name part="Suffix" sex="F" name="gund(a)">"43-44"</Name>
+<Name part="Suffix" name="g(r)un">"45"</Name>
+<Name part="Suffix" name="gul">"46-47"</Name>
+<Name part="Suffix" name="il">"48"</Name>
+<Name part="Suffix" name="im">"49"</Name>
+<Name part="Suffix" name="in">"50-51"</Name>
+<Name part="Suffix" name="ir">"52-53"</Name>
+<Name part="Suffix" name="kon">"54"</Name>
+<Name part="Suffix" sex="M" name="kri">"55"</Name>
+<Name part="Suffix" sex="F" name="kra">"55"</Name>
+<Name part="Suffix" sex="M" name="li">"56-57"</Name>
+<Name part="Suffix" sex="F" name="la">"56-57"</Name>
+<Name part="Suffix" name="lin">"58-59"</Name>
+<Name part="Suffix" name="m">"60"</Name>
+<Name part="Suffix" name="mond">"61"</Name>
+<Name part="Suffix" sex="M" name="ni(r)">"62-63"</Name>
+<Name part="Suffix" sex="F" name="na(r)">"62-63"</Name>
+<Name part="Suffix" name="nus">"64-65"</Name>
+<Name part="Suffix" sex="M" name="ri">"66-67"</Name>
+<Name part="Suffix" sex="F" name="ra">"66-67"</Name>
+<Name part="Suffix" name="ri(c)k">"68"</Name>
+<Name part="Suffix" name="(d)ril">"69-70"</Name>
+<Name part="Suffix" name="rim">"71-72"</Name>
+<Name part="Suffix" name="rod">"73-74"</Name>
+<Name part="Suffix" name="ron(d)">"75-76"</Name>
+<Name part="Suffix" name="(d)run">"77-78"</Name>
+<Name part="Suffix" sex="M" name="rund(i)">"79"</Name>
+<Name part="Suffix" sex="F" name="rund(a)">"79"</Name>
+<Name part="Suffix" name="strom">"80"</Name>
+<Name part="Suffix" sex="M" name="ti">"81-82"</Name>
+<Name part="Suffix" sex="F" name="ta">"81-82"</Name>
+<Name part="Suffix" sex="M" name="tri">"83-84"</Name>
+<Name part="Suffix" sex="F" name="tra">"83-84"</Name>
+<Name part="Suffix" name="um">"85-86"</Name>
+<Name part="Suffix" name="un(n)">"87-88"</Name>
+<Name part="Suffix" name="zad">"89-90"</Name>
+<Name part="Suffix" name="zak">"91-92"</Name>
+<Name part="Suffix" name="zan">"93-94"</Name>
+<Name part="Suffix" name="zel">"95"</Name>
+<Name part="Suffix" name="zin">"96-98"</Name>
+<Name part="Suffix" name="zond">"99"</Name>
+<Name part="Suffix" name="zum">"100"</Name>
 </SUBCHAPTER_NAMES>
 <SUBCHAPTER_SKILL>
 <Skill>"RULES-COMPCALM"</Skill>

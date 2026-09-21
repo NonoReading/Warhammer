@@ -5952,3 +5952,7 @@ Donnees : humains reiklandais (prenoms M/F en d1000 et noms de famille, Unoffici
 Code : RaceSourceNom prefere l ethnie du meme livre ; ResoutVariantes gere « a/b/c ». Les plages qui se chevauchent dans les tableaux du Character Pack (deux fois) sont rognees.
 Appris : LIVRES/RULEBOOK.txt est le Rulebook anglais (PDF_TEXTE n a que le francais).
 Fichiers modifies : BOOK_RULESBOOK.Xml, BOOK_SEA_OF_CLAWS.Xml, BOOK_ROUGH_NIGHTS_AND_HARD_DAYS.Xml, BOOK_LORDS_OF_NAGGAROTH.Xml, chargeracephysique.pas, CONTEXT.md, A FAIRE.txt, Log.txt.
+
+21/09/2026 - GENERATEUR DE NOMS NAINS PAR PREFIXE + SUFFIXE (UNOFFICIAL CHARACTER PACK) - COMPILE, A TESTER PAR NONO
+Tables d100 (75 prefixes, 63 suffixes, 13 lignes M/F pour les suffixes en a/i) posees sur le Nain du Rulebook, avec deux modeles supplementaires (M et F). TireNom tire un modele au hasard parmi ceux du sexe demande : un nain a une chance sur deux d avoir un prenom du DPG, sinon prefixe + suffixe. Notations du livre (X/Y, (x), a/i) traduites en variantes a l ecriture des donnees.
+Fichiers modifies : BOOK_RULESBOOK.Xml, chargeracephysique.pas, CONTEXT.md, A FAIRE.txt, Log.txt.
