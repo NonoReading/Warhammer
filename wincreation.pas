@@ -7,7 +7,7 @@ interface
 uses
   Classes, SysUtils, StrUtils, Forms, Controls, Graphics, Dialogs, ExtCtrls, Grids,
   ComCtrls, StdCtrls, Spin, Buttons, ChargeConstantes, GlobalFonts, ChargeRace,
-  ChargeRegle,
+  ChargeRegle, ChargeSigneAstral,
   Types, ChargeMetier, ChargeRaceMetier, ChargeAttribut, ChargeRaceAttribut, ChargeMetierNiveau,
   ChargeMetierAttribut, UnitCalcul, ChargeRaceTalent, ChargeTalent,
   ChargeTalentCreation, ChargeRaceCompetence, ChargeCompetence, ChargeRaceCreation,
@@ -43,6 +43,10 @@ type
     EditNomPersonnag: TEdit;
     ButtonPhysique: TBCButton;
     ButtonNom: TBCButton;
+    LabSigne: TEdit;
+    ComboBoxSigne: TComboBox;
+    ButtonSigne: TBCButton;
+    MemoSigne: TMemo;
     ComboBoxSexeNom: TComboBox;
     CheckBoxNoble: TCheckBox;
     LabNoble: TEdit;
@@ -151,6 +155,10 @@ type
     procedure ButtonPhaseSuivanteClick({%H-}Sender: TObject);
     procedure ButtonPhysiqueClick({%H-}Sender: TObject);
     procedure ButtonNomClick({%H-}Sender: TObject);
+    procedure ButtonSigneClick({%H-}Sender: TObject);
+    procedure ComboBoxSigneSelect({%H-}Sender: TObject);
+    procedure ChargeSignesAstraux();
+    procedure AppliqueSigneAstral(Indice: Integer);
     procedure ChangementPhase(Changement: Integer);
     Function PageEtapesChange(): boolean;
     Procedure PhaseSave(NouvellePhase: Integer);
@@ -266,6 +274,10 @@ var
   // Phases
   PhaseEnCours:                  Integer = 0;
   ListPhase:                     TStringList;
+
+  // Vrai si le signe astral en cours vient du tirage et n'a pas ete change ensuite : +25 XP
+  // (Archives of the Empire II p.39). Un signe choisi a la main ne donne rien.
+  SigneTire:                     Boolean = False;
 
   // Pour les images
   ColorLoc:                      TColor;
@@ -452,6 +464,8 @@ procedure TWinCreations.FormCreate(Sender: TObject);
     TabSheetNom.Caption                        := GetTexteLibelle('RULES-LAB_014');
     ButtonPhysique.Caption                     := GetTexteLibelle('RULES-LAB_263');
     ButtonNom.Caption                          := GetTexteLibelle('RULES-LAB_267');
+    LabSigne.Text                              := GetTexteLibelle('RULES-LAB_272');
+    ButtonSigne.Caption                        := GetTexteLibelle('RULES-LAB_273');
     ComboBoxSexeNom.Items[0]                   := GetTexteLibelle('RULES-LAB_268');
     ComboBoxSexeNom.Items[1]                   := GetTexteLibelle('RULES-LAB_269');
     ComboBoxSexeNom.ItemIndex                  := 0;
@@ -481,6 +495,7 @@ procedure TWinCreations.FormCreate(Sender: TObject);
     // fenetres (TBCButton) : meme piege que les boutons ci-dessus (CONTEXT.md 4).
     ButtonPhysique.BringToFront;
     ButtonNom.BringToFront;
+    ButtonSigne.BringToFront;
 
     KeyPreview := true;
 
@@ -1110,6 +1125,10 @@ procedure TWinCreations.PhaseSave(NouvellePhase: Integer);
            Personnage.HairColors                        := '';
            Personnage.EyeColors                         := '';
            LabPhysiqueResume.Text                       := '';
+           // Nouvelle creation : pas de signe astral herite d'une creation precedente
+           Personnage.SigneAstral                       := '';
+           Personnage.SigneAstralVariante               := '';
+           SigneTire                                    := False;
            ChargeTabMetier();
          end;
 
@@ -1295,6 +1314,7 @@ procedure TWinCreations.PhaseSave(NouvellePhase: Integer);
          end;
 
       8: Begin         // Équipements
+           ChargeSignesAstraux();
            for IndTab := 1 to TabMetierEquipement.RowCount - 1 do
              begin
                if Pos(SeparateurEnsemble, TabMetierEquipement.Cells[1, IndTab]) > 0 then
@@ -1918,6 +1938,91 @@ procedure TWinCreations.ButtonNomClick(Sender: TObject);
       EditNomPersonnag.Text := Nom;
   end;
 
+// Signes astraux (Archives of the Empire II p.39-50) : systeme optionnel apres la determination des
+// caracteristiques. Les effets ne sont pas ecrits dans les valeurs : le signe est memorise sur le
+// personnage (SigneAstral) et calcule au vol (PersonnageMutationTalent, PdfPersonnageAttribut).
+// Remplit la liste des signes (ceux des livres choisis a l'etape 0) ; rien n'est montre si aucun
+// livre charge n'en porte.
+procedure TWinCreations.ChargeSignesAstraux();
+  var
+    Ind:    Integer;
+    IndSel: Integer;
+    Actif:  Boolean;
+  begin
+    Actif                := ListSigneAstral.Count > 0;
+    LabSigne.Visible     := Actif;
+    ComboBoxSigne.Visible:= Actif;
+    ButtonSigne.Visible  := Actif;
+    MemoSigne.Visible    := Actif;
+    if not Actif then
+      Exit;
+    ComboBoxSigne.Items.Clear;
+    ComboBoxSigne.Items.Add(GetTexteLibelle('RULES-LAB_274'));
+    IndSel := 0;
+    for Ind := 0 to ListSigneAstral.Count - 1 do
+      begin
+        ComboBoxSigne.Items.Add(ListSigneAstral[Ind].Libelle);
+        if ListSigneAstral[Ind].CodeSigne = Personnage.SigneAstral then
+          IndSel := Ind + 1;
+      end;
+    ComboBoxSigne.ItemIndex := IndSel;   // sans quoi la variante d'un signe deja retenu serait retiree
+    AppliqueSigneAstral(IndSel);
+  end;
+
+// Indice 0 = aucun signe ; sinon Indice - 1 est le rang dans ListSigneAstral. Un signe a variantes
+// (Witchling Star) tire son sous-tirage d10 a chaque application.
+procedure TWinCreations.AppliqueSigneAstral(Indice: Integer);
+  begin
+    if (Indice <= 0) or (Indice > ListSigneAstral.Count) then
+      begin
+        Indice                         := 0;
+        Personnage.SigneAstral         := '';
+        Personnage.SigneAstralVariante := '';
+        SigneTire                      := False;
+      end
+    else
+      begin
+        Personnage.SigneAstral         := ListSigneAstral[Indice - 1].CodeSigne;
+        // Un signe deja retenu garde sa variante (retour en arriere dans les etapes)
+        if not ((Personnage.SigneAstralVariante <> '') and (ComboBoxSigne.ItemIndex = Indice)) then
+          Personnage.SigneAstralVariante := SigneAstralTireVariante(Personnage.SigneAstral);
+      end;
+    ComboBoxSigne.ItemIndex := Indice;
+    MemoSigne.Text          := ResumeSigneAstral(Personnage.SigneAstral, Personnage.SigneAstralVariante);
+    if SigneTire and (Personnage.SigneAstral <> '') then
+      MemoSigne.Text := MemoSigne.Text + LineEnding + '+25 XP';
+  end;
+
+procedure TWinCreations.ButtonSigneClick(Sender: TObject);
+  var
+    Jet:  Integer;
+    Code: String;
+    Ind:  Integer;
+  begin
+    Code := TireSigneAstral(Jet);
+    if Code = '' then
+      Exit;
+    for Ind := 0 to ListSigneAstral.Count - 1 do
+      if ListSigneAstral[Ind].CodeSigne = Code then
+        begin
+          Personnage.SigneAstralVariante := '';
+          ComboBoxSigne.ItemIndex        := -1;
+          SigneTire                      := True;
+          AppliqueSigneAstral(Ind + 1);
+          Break;
+        end;
+  end;
+
+procedure TWinCreations.ComboBoxSigneSelect(Sender: TObject);
+  var
+    Indice: Integer;
+  begin
+    Indice                         := ComboBoxSigne.ItemIndex;
+    Personnage.SigneAstralVariante := '';
+    SigneTire                      := False;
+    AppliqueSigneAstral(Indice);
+  end;
+
 ////////////////////////////////////////////////////////////////////////////////
 //                                 XML                                        //
 ////////////////////////////////////////////////////////////////////////////////
@@ -1934,6 +2039,8 @@ function TWinCreations.XmlCalculXp(): Integer;
     if RadioButtonAttributHasard.Checked or RadioButtonAttributResultat.checked then
       Total := Total + 50
     else
+      Total := Total + 25;
+    if SigneTire and (Personnage.SigneAstral <> '') then
       Total := Total + 25;
     Result := Total;
   end;

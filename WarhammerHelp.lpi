@@ -171,6 +171,11 @@
         <UnitName Value="ChargeRacePhysique"/>
       </Unit>
       <Unit>
+        <Filename Value="chargesigneastral.pas"/>
+        <IsPartOfProject Value="True"/>
+        <UnitName Value="ChargeSigneAstral"/>
+      </Unit>
+      <Unit>
         <Filename Value="chargeracecompetence.pas"/>
         <IsPartOfProject Value="True"/>
         <UnitName Value="ChargeRaceCompetence"/>

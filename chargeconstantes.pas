@@ -244,6 +244,22 @@ Const
       ConstXmlSousChapitreNoms          = 'SUBCHAPTER_NAMES';
       ConstXmlNom                       = 'Name';
       ConstXmlNomModele                 = 'NamePattern';
+      // Signes astraux (DATA_STARSIGN) : un StarSign par signe, Variant = sous-tirage (Witchling Star),
+      // Modifier name= code de caracteristique, Talent = code de talent. Range, Title... sont propres au bloc.
+      ConstXmlDataSigneAstral           = 'DATA_STARSIGN';
+      ConstXmlSigneAstral               = 'StarSign';
+      ConstXmlSignePlage                = 'Range';
+      ConstXmlSigneTitre                = 'Title';
+      ConstXmlSigneClassique            = 'Classical';
+      ConstXmlSigneAscendant            = 'Ascendant';
+      ConstXmlSigneDates                = 'Dates';
+      ConstXmlSigneDieu                 = 'God';
+      ConstXmlSigneApparence            = 'Appearance';
+      ConstXmlSigneVariante             = 'Variant';
+      ConstXmlSigneModificateur         = 'Modifier';
+      // Fiche de personnage : code du signe (balise StarSign = ConstXmlSigneAstral) et plage de sa variante
+      // (sous-tirage du Witchling Star), vide si le signe n'en a pas.
+      ConstXmlSigneVariantePerso        = 'StarSignVariant';
       ConstXmlNomPartie                 = 'part';
       ConstXmlNomSexe                   = 'sex';
       // NamePattern noble="1" : modele reserve aux personnages nobles (absent : modele ordinaire)

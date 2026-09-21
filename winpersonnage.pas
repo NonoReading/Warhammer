@@ -8,7 +8,7 @@ uses
   Classes, SysUtils, Forms, Controls, Graphics, Dialogs, ExtCtrls, StdCtrls,
   Grids, ComCtrls, Menus, LCLIntf, Spin, MaskEdit, Math, BGRABitmap, BGRABitmapTypes,
   BCButton, BCLabel, ChargeConstantes, ChargeRace, ChargeRaceAttribut,
-  UnitCalcul, ChargeMetier, ChargeMetierAttribut, ChargeTalent,
+  UnitCalcul, ChargeMetier, ChargeMetierAttribut, ChargeTalent, ChargeSigneAstral,
   ChargeMetierTalent, ChargeMetierNiveau, ChargeCompetence, ChargeLivre,
   ChargeAttributAugmentation, ChargeAttribut, ChargeCompetenceAugmentation,
   GlobalFonts, ChargeArme, ChargeArmure, ChargeTrapping, ChargeMetierEquipement,
@@ -37,6 +37,7 @@ type
     ComboBoxNvMetier: TComboBox;
     EditHairColors: TEdit;
     EditEyeColors: TEdit;
+    EditSigne: TEdit;
     EditHeight: TEdit;
     ButtonArme: TBCButton;
     ButtonArmure: TBCButton;
@@ -249,6 +250,7 @@ type
   function  CalculXpEtat(): StructureXpEtat;
   procedure CalculTableExperience();
   procedure CalculTotaux();
+  function AjusteDetailsCalcul(): Boolean;
   procedure CalculXpNecessaire(ChangementClasse: Boolean);
   Function CalculXpMj(TypeDonnee: String; CodeDonnee:String): Integer;
   Function CalculTalComp(Debut: Integer; Fin: Integer; Talent:String): integer;
@@ -355,14 +357,16 @@ var
   LigAttMutation: Integer = 4;
   LigAttCareer:   Integer = 5;
   LigAttObjet:    Integer = 6;
-  LigAttBase:     Integer = 7;
-  LigAttImage:    Integer = 8;
-  LigAttBonus:    Integer = 9;
-  LigAttTotal:    Integer =10;
-  LigAttXp:       Integer =11;
-  LigAttActuel:   Integer =12;
-  LigAttCode:     Integer =13;
-  LigAttAsterisc: Integer =14;
+  // Signe astral (Archives of the Empire II) : ligne de detail propre, comme Career et Objet
+  LigAttSigne:    Integer = 7;
+  LigAttBase:     Integer = 8;
+  LigAttImage:    Integer = 9;
+  LigAttBonus:    Integer =10;
+  LigAttTotal:    Integer =11;
+  LigAttXp:       Integer =12;
+  LigAttActuel:   Integer =13;
+  LigAttCode:     Integer =14;
+  LigAttAsterisc: Integer =15;
   ColAttLib:      Integer = 1;
   ColAttCC:       Integer = 2;
   ColAttCT:       Integer = 3;
@@ -728,19 +732,13 @@ begin
 
   TabTalent.ColWidths[5]               := Largeur;
 
-  TabCompetence.ColWidths[ColComp35]      := Largeur;
-  TabCompetence.ColWidths[ColComp40]      := Largeur;
-  TabCompetence.ColWidths[ColCompWork]    := Largeur;
-  TabCompetence.ColWidths[ColCompMutation]:= Largeur;
-  TabCompetence.ColWidths[ColCompCareer]  := Largeur;
-  TabCompetence.ColWidths[ColCompAppartenance]:= Largeur;
-
+  // Race, Lance et Talent sont toujours renseignes : ils suivent la case. Les lignes et colonnes
+  // dont la source peut manquer (mutation, carriere, objet, signe, avancees...) ne se montrent
+  // que si elles contiennent quelque chose : AjusteDetailsCalcul.
   TabAttribut.RowHeights[LigAttRace]     := Hauteur;
   TabAttribut.RowHeights[LigAttLance]    := Hauteur;
   TabAttribut.RowHeights[LigAttTalent]   := Hauteur;
-  TabAttribut.RowHeights[LigAttMutation] := Hauteur;
-  TabAttribut.RowHeights[LigAttCareer]   := Hauteur;
-  TabAttribut.RowHeights[LigAttObjet]    := Hauteur;
+  AjusteDetailsCalcul();
 
   TabAttribut.ColWidths[ColAttDestin]  := Largeur;
   TabAttribut.ColWidths[ColAttResil]   := Largeur;
@@ -750,6 +748,81 @@ begin
 
   AjustePositionTables();
 end;
+
+// Regle des lignes vides (Nono, 21/09/2026) : les lignes de detail des caracteristiques et les
+// colonnes de detail des competences ne s'affichent que si la case « Calcul » est cochee ET
+// qu'elles contiennent une valeur non nulle. Renvoie vrai si une taille a change (l'appelant doit
+// alors recalculer la mise en page).
+function TWinPersonnages.AjusteDetailsCalcul(): Boolean;
+  var
+    Actif:   Boolean;
+    Change:  Boolean;   // une taille a change (Result n'est pas visible des sous-procedures)
+
+  function LigneNonVide(Lig: Integer): Boolean;
+    var
+      IndCol: Integer;
+    begin
+      Result := False;
+      for IndCol := 2 to TabAttribut.ColCount - 1 do
+        if StrToIntDef(TabAttribut.Cells[IndCol, Lig], 0) <> 0 then
+          Exit(True);
+    end;
+
+  function ColonneNonVide(Col: Integer): Boolean;
+    var
+      IndLig: Integer;
+    begin
+      Result := False;
+      for IndLig := 1 to TabCompetence.RowCount - 1 do
+        if StrToIntDef(TabCompetence.Cells[Col, IndLig], 0) <> 0 then
+          Exit(True);
+    end;
+
+  procedure PoseLigne(Lig: Integer);
+    var
+      Hauteur: Integer;
+    begin
+      if Actif and LigneNonVide(Lig) then
+        Hauteur := TabAttribut.DefaultRowHeight
+      else
+        Hauteur := 1;
+      if TabAttribut.RowHeights[Lig] <> Hauteur then
+        begin
+          TabAttribut.RowHeights[Lig] := Hauteur;
+          Change := True;
+        end;
+    end;
+
+  procedure PoseColonne(Col: Integer);
+    var
+      Largeur: Integer;
+    begin
+      if Actif and ColonneNonVide(Col) then
+        Largeur := 50
+      else
+        Largeur := 0;
+      if TabCompetence.ColWidths[Col] <> Largeur then
+        begin
+          TabCompetence.ColWidths[Col] := Largeur;
+          Change := True;
+        end;
+    end;
+
+  begin
+    Change := False;
+    Actif  := CheckBoxCalcul.Checked;
+    PoseLigne(LigAttMutation);
+    PoseLigne(LigAttCareer);
+    PoseLigne(LigAttObjet);
+    PoseLigne(LigAttSigne);
+    PoseColonne(ColComp35);
+    PoseColonne(ColComp40);
+    PoseColonne(ColCompWork);
+    PoseColonne(ColCompMutation);
+    PoseColonne(ColCompCareer);
+    PoseColonne(ColCompAppartenance);
+    Result := Change;
+  end;
 
 procedure TWinPersonnages.CheckBoxXpChange(Sender: TObject);
   Var
@@ -775,7 +848,7 @@ procedure TWinPersonnages.FormClose(Sender: TObject;
   var CloseAction: TCloseAction);
 begin
   NettoyerElementsFenetre(self);
-  EffaceDonnee(TabAttribut, 15);
+  EffaceDonnee(TabAttribut, 16);   // = RowCount de l'initialisation (LigAttAsterisc + 1)
   EffaceDonnee(TabCompetence, 1);
   EffaceDonnee(TabTalent, 1);
   EffaceDonnee(TabCarriere, 1);
@@ -796,7 +869,7 @@ procedure TWinPersonnages.EffaceDonnee(Tableau: TStringGrid; NbLig: Integer);
 
 procedure TWinPersonnages.ButtonHistoriqueClick(Sender: TObject);
 begin
-  EffaceDonnee(TabAttribut, 15);
+  EffaceDonnee(TabAttribut, 16);   // = RowCount de l'initialisation (LigAttAsterisc + 1)
   EffaceDonnee(TabCompetence, 1);
   EffaceDonnee(TabTalent, 1);
   EffaceDonnee(TabCarriere, 1);
@@ -1879,7 +1952,7 @@ begin
   TabAttribut.Clear;
   TabAttribut.Options          := TabAttribut.Options + [goEditing, goAlwaysShowEditor];
   TabAttribut.ColCount         := 1;
-  TabAttribut.RowCount         := 15;
+  TabAttribut.RowCount         := 16;
   For I := 0 to 13 do
     begin
       if TabAttribut.Columns.Count <= I then
@@ -1905,6 +1978,7 @@ begin
   TabAttribut.Cells[ColAttLib, LigAttMutation]:= GetTexteLibelle('RULES-LAB_172');
   TabAttribut.Cells[ColAttLib, LigAttCareer]  := GetTexteLibelle('RULES-LAB_181');
   TabAttribut.Cells[ColAttLib, LigAttObjet]   := GetTexteLibelle('RULES-LAB_182');
+  TabAttribut.Cells[ColAttLib, LigAttSigne]   := GetTexteLibelle('RULES-LAB_272');
   TabAttribut.Cells[ColAttLib, LigAttBase]    := GetTexteLibelle('RULES-LAB_043');
   TabAttribut.Cells[ColAttLib, LigAttImage]   := GetTexteLibelle('RULES-LAB_019');
   TabAttribut.Cells[ColAttLib, LigAttBonus]   := GetTexteLibelle('RULES-LAB_040');
@@ -1918,6 +1992,7 @@ begin
   TabAttribut.RowHeights[LigAttMutation]:= 1;
   TabAttribut.RowHeights[LigAttCareer]  := 1;
   TabAttribut.RowHeights[LigAttObjet]   := 1;
+  TabAttribut.RowHeights[LigAttSigne]   := 1;
   TabAttribut.RowHeights[LigAttXp]      := 1;
   TabAttribut.RowHeights[LigAttImage]   := 1;
   TabAttribut.RowHeights[LigAttActuel]  := 1;
@@ -2731,6 +2806,7 @@ procedure TWinPersonnages.CalculTotaux();
     NivMetier:           Integer;
     ValCareer:           Integer;
     ValObjet:            Integer;
+    ValSigne:            Integer;
   begin
     // Personnage.AugmentationAttribut n'est normalement resynchronise depuis la grille
     // TabAttribut qu'a l'interieur de CalculTableExperience (juste avant la sauvegarde) -
@@ -2739,7 +2815,9 @@ procedure TWinPersonnages.CalculTotaux();
     // Personnage soit a jour a chaque recalcul d'ecran, pas seulement a la sauvegarde.
     // CONTEXT.md, chantier accesseur unique, pilote Attributs.
     Personnage.AugmentationAttribut := [];
-    For IndAugm := 1 to TabAttribut.Rowcount - 1 do
+    // Les indices sont des COLONNES (une par caracteristique) : ColCount, pas RowCount. Les deux
+    // valaient 15 jusqu'a l'ajout de LigAttSigne, d'ou un decalage qui ne se voyait pas.
+    For IndAugm := 1 to TabAttribut.ColCount - 1 do
       if StrToIntDef(TabAttribut.Cells[IndAugm, LigAttBonus],0) > 0 then
         begin
           PersonnageAttribut.CodeAttribut  := TabAttribut.Cells[IndAugm, LigAttCode];
@@ -2838,13 +2916,18 @@ procedure TWinPersonnages.CalculTotaux();
           TabAttribut.Cells[IndCol, LigAttCareer] := IntToStr(ValCareer);
         if ValObjet <> 0 then
           TabAttribut.Cells[IndCol, LigAttObjet] := IntToStr(ValObjet);
+        // Signe astral : meme raison, sans cette ligne Initial + Augmented <> Current
+        ValSigne  := SigneAstralAttributModif(Personnage.SigneAstral, Personnage.SigneAstralVariante, TabAttribut.Cells[IndCol, LigAttCode]);
+        if ValSigne <> 0 then
+          TabAttribut.Cells[IndCol, LigAttSigne] := IntToStr(ValSigne);
 
         Total  := StrToIntdef(TabAttribut.Cells[IndCol, LigAttRace],0) +
                   StrToIntdef(TabAttribut.Cells[IndCol, LigAttLance],0)+
                   StrToIntdef(TabAttribut.Cells[IndCol, LigAttTalent],0)+
                   StrToIntdef(TabAttribut.Cells[IndCol, LigAttMutation],0)+
                   StrToIntdef(TabAttribut.Cells[IndCol, LigAttCareer],0)+
-                  StrToIntdef(TabAttribut.Cells[IndCol, LigAttObjet],0);
+                  StrToIntdef(TabAttribut.Cells[IndCol, LigAttObjet],0)+
+                  StrToIntdef(TabAttribut.Cells[IndCol, LigAttSigne],0);
         TabAttribut.Cells[IndCol, LigAttBase] := IntToStr(Total);
         // Total toujours calcule par l'accesseur unique PdfPersonnageAttribut (deja utilise
         // par le PDF), qui reste la source de verite - LigAttBase ci-dessus n'est qu'un
@@ -2891,6 +2974,10 @@ procedure TWinPersonnages.CalculTotaux();
         TabCompetence.Cells[ColCompTotal, IndLig] := IntToStr(DonneeCompetence.Total);
       end;
 
+    // Les valeurs viennent d'etre recalculees : une ligne ou colonne de detail peut apparaitre
+    // ou disparaitre (regle des lignes vides).
+    if AjusteDetailsCalcul() then
+      AjustePositionTables();
   end;
 
 procedure TWinPersonnages.TabAttributSelectEditor(Sender: TObject; aCol,
@@ -3391,6 +3478,14 @@ begin
   EditHeight.Text           := IntToStr(Personnage.Height);
   EditHairColors.Text       := Personnage.HairColors;
   EditEyeColors.Text        := Personnage.EyeColors;
+  // Signe astral (Archives of the Empire II) : lecture seule, choisi a la creation.
+  EditSigne.Visible         := Personnage.SigneAstral <> '';
+  if EditSigne.Visible then
+    begin
+      EditSigne.Text        := GetTexteLibelle('RULES-LAB_272') + ' : ' + ChercheSigneAstral(Personnage.SigneAstral).Libelle;
+      EditSigne.Hint        := ResumeSigneAstral(Personnage.SigneAstral, Personnage.SigneAstralVariante);
+      EditSigne.ShowHint    := True;
+    end;
   // Texte brut (IntToStr), pas Format('%.0n',...) : cette case est relue et reparsee par
   // StrToIntDef/comparee en texte a EditTotalXp.Text (winpersonnage.pas, tests de validation
   // de carriere) - un separateur de milliers y faisait echouer StrToIntDef (0 renvoye) et
@@ -4698,6 +4793,10 @@ procedure TWinPersonnages.AjustePositionTables();
     ButtonPhysique.Left       := LabTabAttribut.left;
     ButtonPhysique.Top        := LabEyeColors.Top + LabEyeColors.Height + 3;
     ButtonPhysique.Width      := EditLeft + EditAge.Width - LabTabAttribut.left;
+    // Signe astral : sous le bouton, meme largeur
+    EditSigne.Left            := ButtonPhysique.Left;
+    EditSigne.Top             := ButtonPhysique.Top + ButtonPhysique.Height + 3;
+    EditSigne.Width           := ButtonPhysique.Width;
 
        // Colonne Carrière
     LabTabCarriere.Left       := EditLeft + EditAge.Width + 10;
@@ -4714,6 +4813,13 @@ procedure TWinPersonnages.AjustePositionTables();
     // Ligne 3
        // Colonne Talents
     LabTabTalent.Top          := TabCarriere.Top + Max(TabCarriere.Height, TabExperience.Height) + 15;
+    // La colonne de gauche (details physiques, bouton Roll, signe astral) peut etre plus haute que
+    // les tableaux Carriere/Experience : la ligne des talents passe sous elle, sinon Roll chevauche
+    // le libelle « Talent ».
+    if EditSigne.Visible then
+      LabTabTalent.Top        := Max(LabTabTalent.Top, EditSigne.Top + EditSigne.Height + 15)
+    else
+      LabTabTalent.Top        := Max(LabTabTalent.Top, ButtonPhysique.Top + ButtonPhysique.Height + 15);
     TabTalent.Top             := LabTabTalent.Top + LabTabTalent.Height;// + 20;
     LabTabCompetence.Top      := LabTabTalent.Top;
     TabCompetence.Top         := TabTalent.Top;
@@ -6130,7 +6236,7 @@ Procedure TWinPersonnages.MajTables();
 
     // Maj personnage Attribut
     Personnage.AugmentationAttribut := [];
-    For Ind := 1 to TabAttribut.Rowcount - 1 do
+    For Ind := 1 to TabAttribut.ColCount - 1 do
       if StrToIntDef(TabAttribut.Cells[Ind, LigAttBonus],0) > 0 then
         begin
           PersonnageAttribut.CodeAttribut  := TabAttribut.Cells[Ind, LigAttCode];

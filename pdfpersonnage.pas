@@ -7,7 +7,7 @@ interface
 
 uses
   Classes, SysUtils, fpPDF, PdfUtils, ChargeRace, ChargeMetier, ChargeMetierNiveau,
-  ChargeRaceAttribut, ChargeRacePhysique, ChargeTalent, ChargeCompetence, ChargeArme, ChargeArmure,
+  ChargeRaceAttribut, ChargeRacePhysique, ChargeSigneAstral, ChargeTalent, ChargeCompetence, ChargeArme, ChargeArmure,
   ChargeArmeBonus, ChargeArmureBonus, ChargeArmureBonusModif, ChargeSort, ChargeAttribut, ChargeFabrication,
   ChargeConstantes, ChargeMetierAttribut, ChargeTexte, ChargeMetierTalent, ChargeTrapping,
   ChargePersonnage, ChargeArmureSimplifie, ChargeAttributAugmentation,
@@ -753,6 +753,9 @@ Function PdfPersonnageAttribut(Personnage: StructurePersonnage; Attribut: String
     // Qualites de fabrication (Rune of Fortitude) sur armure portee.
     Res.Base := Res.Base + PersonnageFabricationAttributModif(Personnage, Attribut);
 
+    // Signe astral (Archives of the Empire II p.39) : +2 / -3 en caracteristique, calcule au vol.
+    Res.Base := Res.Base + SigneAstralAttributModif(Personnage.SigneAstral, Personnage.SigneAstralVariante, Attribut);
+
     Res.Total := Res.Base + Res.Augmentation;
     Result := res;
   end;
@@ -1467,6 +1470,20 @@ Procedure PdfPersonnageCreation(Personnage: StructurePersonnage; BackGround: Boo
     finally
       ListeRegle.Free;
     end;
+
+    // Signe astral (Archives of the Empire II p.39) : une ligne en lecture seule, comme les regles
+    // speciales ci-dessus. Le libelle porte le nom du signe, le texte ses modificateurs.
+    if Personnage.SigneAstral <> '' then
+      begin
+        inc(NbLigne);
+        if NbLigne <= 20 then
+          begin
+            PdfTaillePolice(PdfPage, PdfFontValue, ConstPoliceArial, 7);
+            PdfEcrit(PdfPage, 16, 49, 92-(NbLigne*3.5), GetTexteLibelle('RULES-LAB_272') + ': ' + ChercheSigneAstral(Personnage.SigneAstral).Libelle, MinPolice);
+            PdfEcrit(PdfPage, 58, 105, 92-(NbLigne*3.5), SigneAstralTextePdf(Personnage.SigneAstral, Personnage.SigneAstralVariante), MinPolice);
+            PdfTaillePolice(PdfPage, PdfFontValue, ConstPoliceArial, 9);
+          end;
+      end;
 
     // Talents accordes par une mutation (ex. Fleshy Tentacle -> Tentacles), meme bloc, meme
     // mise en forme que les regles speciales d'appartenance juste au-dessus. Calcule a la
@@ -2947,6 +2964,18 @@ Function PdfBlocTalents(PdfPage: TPDFPage; Personnage: StructurePersonnage; XGau
     finally
       ListeRegle.Free;
     end;
+
+    // Signe astral (Archives of the Empire II p.39) : une ligne en lecture seule, comme les regles
+    // speciales ci-dessus.
+    if Personnage.SigneAstral <> '' then
+      begin
+        inc(NbLigne);
+        if NbLigne <= LimiteLigne then
+          begin
+            PdfEcrit(PdfPage, XGauche + 2, XGauche + 41, Y - ((NbLigne + 2) * HauteurLigne) + 1, GetTexteLibelle('RULES-LAB_272') + ': ' + ChercheSigneAstral(Personnage.SigneAstral).Libelle, MinPolice);
+            PdfEcrit(PdfPage, XGauche + 54, XDroite, Y - ((NbLigne + 2) * HauteurLigne) + 1, SigneAstralTextePdf(Personnage.SigneAstral, Personnage.SigneAstralVariante), MinPolice);
+          end;
+      end;
 
     // Talents accordes par une mutation (ex. Fleshy Tentacle -> Tentacles), meme bloc, meme
     // mise en forme que les regles speciales d'appartenance juste au-dessus. Calcule a la
@@ -4709,6 +4738,8 @@ Function PdfNbTalentsAcquis(Personnage: StructurePersonnage): Integer;
       ListeRegle.Free;
     end;
     Result := Result + Length(PersonnageMutationTalent(Personnage)) + Length(PersonnageArmureBonusTalent(Personnage));
+    if Personnage.SigneAstral <> '' then
+      Result := Result + 1;
   end;
 
 // PDF "intelligent" page 2 (A FAIRE 20/09/2026) : nombre de lignes qu'occupe le bloc

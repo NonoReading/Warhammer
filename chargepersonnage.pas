@@ -11,7 +11,7 @@ uses
   ChargeTalent, ChargeArme, ChargeArmure, ChargeArmureSimplifie,
   ChargeTalentCompetenceModif, ChargeArmureBonusModif,
   ChargeSort, ChargeCorruptionTable, ChargeTrapping,
-  ChargeCorruptionCompetenceModif, ChargeCorruptionTalent,
+  ChargeCorruptionCompetenceModif, ChargeCorruptionTalent, ChargeSigneAstral,
   ChargeCorruptionEquipement, ChargeArmureBonusTalent,
   ChargeModificateur, ChargeTalentModificateur, ChargeCareerBonusModificateur,
   ChargeArmeModificateur, ChargeArmureBonusModificateur, ChargeCorruptionModificateur,
@@ -191,6 +191,8 @@ Type
      HeightUnit:                 String;    // unite de Height : CM ou INCH (absente = INCH, anciennes fiches)
      HairColors:                 String;
      EyeColors:                  String;
+     SigneAstral:                String;    // code du signe astral (Archives II p.39), vide = aucun
+     SigneAstralVariante:        String;    // plage du sous-tirage d10 du Witchling Star, vide sinon
      Asterisque:                 Integer;
      // Appartenances : les codes des CareerBonus (regiment, ordre de chevalerie, culte)
      // dont ce personnage est membre, separes par des virgules, vide si aucune.
@@ -253,6 +255,7 @@ Type
   // PersonnageMutationArmureModif juste au-dessus : rien n'est stocke sur la fiche, donc si une
   // mutation disparait un jour de Personnage.Mutations, le talent calcule disparait avec elle
   // sans purge explicite a ecrire. CONTEXT.md, chantier "traits de creature".
+  // Renvoie aussi le talent gagne par le signe astral du personnage (meme principe, memes appelants).
   Function PersonnageMutationTalent(Personnage: StructurePersonnage): TArrayPersonnageTalent;
   // Vrai si CodeTalent a un lien enregistre dans Personnage.TalentCarriereRequise ET que
   // le personnage n'est plus dans la carriere+niveau requis - le talent reste possede
@@ -563,12 +566,21 @@ begin
         XMLContent.Add(XmlLigne(ConstXmlRace, Personnage.Race));
         PRace := ChercheRace(Personnage.Race);
         ListeLivres:= PersonnageLivre(ListeLivres, PRAce.livre);
+        // Le signe astral vient d'un livre : sans lui, ses effets disparaitraient en silence.
+        if Personnage.SigneAstral <> '' then
+          ListeLivres:= PersonnageLivre(ListeLivres, ChercheSigneAstral(Personnage.SigneAstral).Livre);
         XMLContent.Add(XmlCommentaire(PRace.Libelle));
         XMLContent.Add(XmlLigne(ConstXmlAge, IntToStr(Personnage.Age)));
         XMLContent.Add(XmlLigne(ConstXmlHeight, IntToStr(Personnage.Height)));
         XMLContent.Add(XmlLigne(ConstXmlHeightUnit, Personnage.HeightUnit));
         XMLContent.Add(XmlLigne(ConstXmlHairColors, Personnage.HairColors));
         XMLContent.Add(XmlLigne(ConstXmlEyeColors, Personnage.EyeColors));
+        if Personnage.SigneAstral <> '' then
+          begin
+            XMLContent.Add(XmlLigne(ConstXmlSigneAstral, Personnage.SigneAstral));
+            if Personnage.SigneAstralVariante <> '' then
+              XMLContent.Add(XmlLigne(ConstXmlSigneVariantePerso, Personnage.SigneAstralVariante));
+          end;
 
         XMLContent.Add(XmlLigne(ConstXmlWork, Personnage.MetierEnCours.CodeMetier));
         PMetier := chercheMetier(Personnage.MetierEnCours.CodeMetier);
@@ -1053,6 +1065,13 @@ begin
         Personnage.HairColors         := RemoveQuotes(UTF8Encode(PlayerNode.FindNode(ConstXmlHairColors).TextContent));
       if Assigned(PlayerNode.FindNode(ConstXmlEyeColors)) then
         Personnage.EyeColors          := RemoveQuotes(UTF8Encode(PlayerNode.FindNode(ConstXmlEyeColors).TextContent));
+      // Fiche sans signe astral : aucun
+      Personnage.SigneAstral          := '';
+      Personnage.SigneAstralVariante  := '';
+      if Assigned(PlayerNode.FindNode(ConstXmlSigneAstral)) then
+        Personnage.SigneAstral        := RemoveQuotes(UTF8Encode(PlayerNode.FindNode(ConstXmlSigneAstral).TextContent));
+      if Assigned(PlayerNode.FindNode(ConstXmlSigneVariantePerso)) then
+        Personnage.SigneAstralVariante := RemoveQuotes(UTF8Encode(PlayerNode.FindNode(ConstXmlSigneVariantePerso).TextContent));
       Personnage.Asterisque           := 0;
 
       ChapterRaceNode := PlayerNode.FindNode(ConstXmlChapitreCreation);
@@ -2342,6 +2361,7 @@ Function PersonnageMutationTalent(Personnage: StructurePersonnage): TArrayPerson
     PersonnageMutation: StructurePersonnageMutation;
     indiceModif:        Integer;
     PTalent:             StructurePersonnageTalent;
+    PEffetSigne:         StructureSigneEffet;
   begin
     Result := [];
     for PersonnageMutation in Personnage.Mutations do
@@ -2352,6 +2372,19 @@ Function PersonnageMutationTalent(Personnage: StructurePersonnage): TArrayPerson
             PTalent.Valeur     := 1;
             PTalent.Asterisque := 0;
             PTalent.Source     := PersonnageMutation.Code;
+            Result             += [PTalent];
+          end;
+    // Talent gagne par le signe astral (Archives II p.39) : meme mecanisme, meme calcul a la volee.
+    // Un effet de variante (Witchling Star) ne compte que pour le sous-tirage retenu.
+    if Personnage.SigneAstral <> '' then
+      for PEffetSigne in ListSigneEffet do
+        if (PEffetSigne.CodeSigne = Personnage.SigneAstral) and (PEffetSigne.CodeTalent <> '')
+           and ((PEffetSigne.Variante = '') or (PEffetSigne.Variante = Personnage.SigneAstralVariante)) then
+          begin
+            PTalent.CodeTalent := PEffetSigne.CodeTalent;
+            PTalent.Valeur     := 1;
+            PTalent.Asterisque := 0;
+            PTalent.Source     := Personnage.SigneAstral;
             Result             += [PTalent];
           end;
   end;

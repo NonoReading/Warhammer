@@ -8,7 +8,7 @@ interface
 uses
   Classes, SysUtils, StrUtils, ChargeConstantes, ChargeCompetence, ChargeTalent, ChargeRace,
   ChargeEspece, ChargeNation, ChargeRegle,
-  ChargeRaceAttribut, ChargeRacePhysique, ChargeRaceCompetence, ChargeRaceTalent, ChargeRaceMetier,
+  ChargeRaceAttribut, ChargeRacePhysique, ChargeSigneAstral, ChargeRaceCompetence, ChargeRaceTalent, ChargeRaceMetier,
   ChargeMetier, ChargeMetierAttribut, ChargeMetierCompetence, ChargeMetierTalent,
   ChargeMetierEquipement, chargeMetierNiveau, ChargeArme, ChargeArmure, ChargeTrapping,
   ChargeTalentCreation, ChargeRaceCreation, ChargeArmeBonus, ChargeArmureBonus,
@@ -194,6 +194,8 @@ Procedure XmlExportBook(Livre: String; Langue: String);
     PTrapping:                StructureTrapping;
     PArmureBonus:             StructureArmureBonus;
     PFabrication:             StructureFabrication;
+    PSigneAstral:             StructureSigneAstral;
+    PSigneEffet:              StructureSigneEffet;
     PMetierRaceChoixMetier:   StructureMetierRaceChoixMetier;
     PSort:                    StructureSort;
     PSortTalent:              StructureSortTalent;
@@ -212,6 +214,7 @@ Procedure XmlExportBook(Livre: String; Langue: String);
     PArmureSimplifiee:        StructureArmureSimplifiee;
     PLivre:                   StructureLivre;
     Fist:                     Boolean;
+    VarianteEnCours:          String;
     Ind:                      Integer;
     StringEquip:              TStringList;
     StringType:               TStringList;
@@ -1076,6 +1079,52 @@ Procedure XmlExportBook(Livre: String; Langue: String);
         if Fist = false then
            XmlContent.Add(XmlFin(ConstXmlDataCraftsmanship));
 
+        // Signes astraux (Archives of the Empire II) : ecrits seulement dans le fichier anglais
+        if Langue = ConstAnglais then
+          begin
+            Fist := true;
+            for PSigneAstral in ListSigneAstral do
+              if (PSigneAstral.Livre = Livre) then
+                begin
+                  if Fist = true then
+                    begin
+                      XmlContent.Add(XmlDebut(ConstXmlDataSigneAstral));
+                      Fist := false;
+                    end;
+                  XmlContent.Add(XmlDebutCode(ConstXmlSigneAstral, XmlCreeCodeLivre(PSigneAstral.Livre, PSigneAstral.CodeSigne)));
+                  XmlContent.Add(XmlLigne(ConstXmlSignePlage, PSigneAstral.Plage));
+                  XmlContent.Add(XmlLigneLangue(ConstXmlDescription, Langue, PSigneAstral.Libelle));
+                  XmlContent.Add(XmlLigneLangue(ConstXmlSigneTitre, Langue, PSigneAstral.Titre));
+                  XmlContent.Add(XmlLigne(ConstXmlSigneClassique, PSigneAstral.NomClassique));
+                  XmlContent.Add(XmlLigne(ConstXmlSigneAscendant, PSigneAstral.Ascendant));
+                  XmlContent.Add(XmlLigne(ConstXmlSigneDates, PSigneAstral.Dates));
+                  XmlContent.Add(XmlLigne(ConstXmlSigneDieu, PSigneAstral.Dieu));
+                  XmlContent.Add(XmlLigneLangue(ConstXmlSigneApparence, Langue, PSigneAstral.Apparence));
+                  VarianteEnCours := '';
+                  for PSigneEffet in ListSigneEffet do
+                    if (PSigneEffet.CodeSigne = PSigneAstral.CodeSigne) and (PSigneEffet.Livre = PSigneAstral.Livre) then
+                      begin
+                        if PSigneEffet.Variante <> VarianteEnCours then
+                          begin
+                            if VarianteEnCours <> '' then
+                              XmlContent.Add(XmlFin(ConstXmlSigneVariante));
+                            VarianteEnCours := PSigneEffet.Variante;
+                            if VarianteEnCours <> '' then
+                              XmlContent.Add(XmlDebut(ConstXmlSigneVariante + ' range="' + VarianteEnCours + '"'));
+                          end;
+                        if PSigneEffet.CodeAttribut <> '' then
+                          XmlContent.Add(XmlLigneDonnee(ConstXmlSigneModificateur, PSigneEffet.CodeAttribut, IntToStr(PSigneEffet.Valeur)))
+                        else
+                          XmlContent.Add(XmlLigne(ConstXmlTalent, PSigneEffet.CodeTalent));
+                      end;
+                  if VarianteEnCours <> '' then
+                    XmlContent.Add(XmlFin(ConstXmlSigneVariante));
+                  XmlContent.Add(XmlFinCode(ConstXmlSigneAstral));
+                end;
+            if Fist = false then
+              XmlContent.Add(XmlFin(ConstXmlDataSigneAstral));
+          end;
+
         // Metier choix race
         Fist := true;
         for PMetierRaceChoixMetier in ListMetierRaceChoixMetier do
@@ -1131,6 +1180,27 @@ Procedure XmlExportBook(Livre: String; Langue: String);
     finally
       XMLContent.Free;
     end;
+  end;
+
+// Lit un effet de signe astral : <Modifier name="RULES-ATTR_WP">"-3"</Modifier> ou <Talent>"CODE"</Talent>.
+// Variante = plage du sous-tirage (Witchling Star), vide sinon.
+Procedure AjouteEffetSigneAstral(Livre, CodeSigne, Variante: String; Node: TDOMNode);
+  var
+    PEffet: StructureSigneEffet;
+  begin
+    PEffet           := Default(StructureSigneEffet);
+    PEffet.Livre     := Livre;
+    PEffet.CodeSigne := CodeSigne;
+    PEffet.Variante  := Variante;
+    if Node.NodeName = ConstXmlSigneModificateur then
+      begin
+        PEffet.CodeAttribut := RemoveQuotes(UTF8Encode(Node.Attributes.GetNamedItem(ConstXmlData).NodeValue));
+        PEffet.Valeur       := StrToIntDef(RemoveQuotes(UTF8Encode(Node.TextContent)), 0);
+      end
+    else
+      PEffet.CodeTalent     := RemoveQuotes(UTF8Encode(Node.TextContent));
+    ListSigneEffet.Add(PEffet);
+    Inc(NbSigneEffet);
   end;
 
 Procedure XmlImport(FileName: String; OnlyPrimary: Boolean; OnlyCode: Boolean; CheminComplet: String = '');
@@ -1197,6 +1267,8 @@ Procedure XmlImport(FileName: String; OnlyPrimary: Boolean; OnlyCode: Boolean; C
     TempAdaptationLignes:     TListCareerAdaptationLigne;
     NivAdapt:                 Integer;
     PFabrication:             StructureFabrication;
+    PSigneAstral:             StructureSigneAstral;
+    PSigneEffet:              StructureSigneEffet;
     PMetierRaceChoixMetier:   StructureMetierRaceChoixMetier;
     PMetierSousMetier:        StructureMetierSousMetier;
     PAttribut:                StructureAttribut;
@@ -3368,6 +3440,62 @@ Procedure XmlImport(FileName: String; OnlyPrimary: Boolean; OnlyCode: Boolean; C
 
                       AddTrad(PTraduction, Langue);
 
+                      NodeNv2 := XmlElement(NodeNv2.NextSibling);
+                    end;
+                end;
+
+              // Signes astraux (Archives of the Empire II)
+              NodeNv1 := BookNode.FindNode(ConstXmlDataSigneAstral);
+              if Assigned(NodeNv1) then
+                begin
+                  NodeNv2 := XmlElement(NodeNv1.FirstChild);
+                  While Assigned(NodeNv2) do
+                    begin
+                      PSigneAstral           := Default(StructureSigneAstral);
+                      PSigneAstral.Livre     := Livre;
+                      PSigneAstral.CodeSigne := RemoveQuotes(UTF8Encode(NodeNv2.Attributes.GetNamedItem(ConstXmlId).NodeValue));
+                      Node := XmlElement(NodeNv2.FirstChild);
+                      while Assigned(Node) do
+                        begin
+                          case Node.NodeName of
+                            ConstXmlSignePlage:
+                              PSigneAstral.Plage        := RemoveQuotes(UTF8Encode(Node.TextContent));
+                            ConstXmlDescription:
+                              PSigneAstral.Libelle      := RemoveQuotes(UTF8Encode(Node.TextContent));
+                            ConstXmlSigneTitre:
+                              PSigneAstral.Titre        := RemoveQuotes(UTF8Encode(Node.TextContent));
+                            ConstXmlSigneClassique:
+                              PSigneAstral.NomClassique := RemoveQuotes(UTF8Encode(Node.TextContent));
+                            ConstXmlSigneAscendant:
+                              PSigneAstral.Ascendant    := RemoveQuotes(UTF8Encode(Node.TextContent));
+                            ConstXmlSigneDates:
+                              PSigneAstral.Dates        := RemoveQuotes(UTF8Encode(Node.TextContent));
+                            ConstXmlSigneDieu:
+                              PSigneAstral.Dieu         := RemoveQuotes(UTF8Encode(Node.TextContent));
+                            ConstXmlSigneApparence:
+                              PSigneAstral.Apparence    := RemoveQuotes(UTF8Encode(Node.TextContent));
+                            ConstXmlSigneModificateur, ConstXmlTalent:
+                              if LangueDef = ConstAnglais then
+                                AjouteEffetSigneAstral(Livre, PSigneAstral.CodeSigne, '', Node);
+                            ConstXmlSigneVariante:
+                              begin
+                                NodeNv3 := XmlElement(Node.FirstChild);
+                                while Assigned(NodeNv3) do
+                                  begin
+                                    if LangueDef = ConstAnglais then
+                                      AjouteEffetSigneAstral(Livre, PSigneAstral.CodeSigne,
+                                        RemoveQuotes(UTF8Encode(Node.Attributes.GetNamedItem('range').NodeValue)), NodeNv3);
+                                    NodeNv3 := XmlElement(NodeNv3.NextSibling);
+                                  end;
+                              end;
+                          end;
+                          Node := XmlElement(Node.NextSibling);
+                        end;
+                      if LangueDef = ConstAnglais then
+                        begin
+                          ListSigneAstral.Add(PSigneAstral);
+                          Inc(NbSigneAstral);
+                        end;
                       NodeNv2 := XmlElement(NodeNv2.NextSibling);
                     end;
                 end;

@@ -800,4 +800,271 @@ Examples you could take include: Alcohol, Food, Narcotics, Pleasure."</Explanati
 <DATA_CORRUPTION_MENTAL>
 <Specie name="ARCH2-RACE_OGRE">"11-100"</Specie>
 </DATA_CORRUPTION_MENTAL>
+<!-- Signes astraux (Archives II p.39-50), systeme optionnel de creation : 1d100, +2/-3 en caracteristiques ou un niveau de talent. Tableau p.39 suivi quand le texte detaille diverge (Mummit -3 Willpower, Witchling Star avec sous-tirage d10). 25 XP si le signe tire est conserve. Le texte de personnalite de chaque signe n est pas saisi. -->
+<DATA_STARSIGN>
+<StarSign id="ARCH2-STAR01">
+<Range>"01-05"</Range>
+<Description language="ENGLISH">"Wymund the Anchorite"</Description>
+<Title language="ENGLISH">"Sign of Enduring"</Title>
+<Classical>"Wymenos"</Classical>
+<Ascendant>"Midwinter"</Ascendant>
+<Dates>"Vorhexen 12th - Vorhexen 27th"</Dates>
+<God>"Manaan"</God>
+<Appearance language="ENGLISH">"A stern face"</Appearance>
+<Modifier name="RULES-ATTR_Fel">"2"</Modifier>
+<Modifier name="RULES-ATTR_I">"2"</Modifier>
+<Modifier name="RULES-ATTR_Int">"-3"</Modifier>
+</StarSign>
+<StarSign id="ARCH2-STAR02">
+<Range>"06-10"</Range>
+<Description language="ENGLISH">"The Big Cross"</Description>
+<Title language="ENGLISH">"Sign of Clarity"</Title>
+<Classical>"Azurios"</Classical>
+<Ascendant>"Midwinter"</Ascendant>
+<Dates>"Vorhexen 28th - Nachhexen 8th"</Dates>
+<God>"Ulric"</God>
+<Appearance language="ENGLISH">"An X"</Appearance>
+<Modifier name="RULES-ATTR_S">"2"</Modifier>
+<Modifier name="RULES-ATTR_WP">"2"</Modifier>
+<Modifier name="RULES-ATTR_I">"-3"</Modifier>
+</StarSign>
+<StarSign id="ARCH2-STAR03">
+<Range>"11-15"</Range>
+<Description language="ENGLISH">"The Limner's Line"</Description>
+<Title language="ENGLISH">"Sign of Precision"</Title>
+<Classical>"Verros"</Classical>
+<Ascendant>"Late Winter/Early Spring"</Ascendant>
+<Dates>"Nachhexen 9th - Nachhexen 28th"</Dates>
+<God>"Vallich (Smithing and Ship Building (Nordland))"</God>
+<Appearance language="ENGLISH">"An archer with a drawn bow"</Appearance>
+<Modifier name="RULES-ATTR_BS">"2"</Modifier>
+<Modifier name="RULES-ATTR_Ag">"2"</Modifier>
+<Modifier name="RULES-ATTR_WS">"-3"</Modifier>
+</StarSign>
+<StarSign id="ARCH2-STAR04">
+<Range>"16-20"</Range>
+<Description language="ENGLISH">"Gnuthus the Ox"</Description>
+<Title language="ENGLISH">"Sign of Dutiful Service"</Title>
+<Classical>"Nuthlos"</Classical>
+<Ascendant>"Early Spring"</Ascendant>
+<Dates>"Nachhexen 29th - Jahrdrung 16th"</Dates>
+<God>"Guvaur (Bulls (Ostland))"</God>
+<Appearance language="ENGLISH">"An ox"</Appearance>
+<Modifier name="RULES-ATTR_T">"2"</Modifier>
+<Modifier name="RULES-ATTR_WP">"2"</Modifier>
+<Modifier name="RULES-ATTR_Int">"-3"</Modifier>
+</StarSign>
+<StarSign id="ARCH2-STAR05">
+<Range>"21-25"</Range>
+<Description language="ENGLISH">"Dragomas the Drake"</Description>
+<Title language="ENGLISH">"Sign of Courage"</Title>
+<Classical>"Drakonos"</Classical>
+<Ascendant>"Spring"</Ascendant>
+<Dates>"Jahrdrung 17th - Pflugzeit 7th"</Dates>
+<God>"Khaine"</God>
+<Appearance language="ENGLISH">"A rearing dragon"</Appearance>
+<Modifier name="RULES-ATTR_WP">"2"</Modifier>
+<Modifier name="RULES-ATTR_Fel">"2"</Modifier>
+<Modifier name="RULES-ATTR_Dex">"-3"</Modifier>
+</StarSign>
+<StarSign id="ARCH2-STAR06">
+<Range>"26-30"</Range>
+<Description language="ENGLISH">"The Gloaming"</Description>
+<Title language="ENGLISH">"Sign of Illusion and Mystery"</Title>
+<Classical>"Tartotes"</Classical>
+<Ascendant>"Spring"</Ascendant>
+<Dates>"Pflugzeit 8th - Pflugzeit 31st"</Dates>
+<God>"Morr"</God>
+<Appearance language="ENGLISH">"A collection of red and blue stars that appears only at twilight"</Appearance>
+<Modifier name="RULES-ATTR_Int">"2"</Modifier>
+<Modifier name="RULES-ATTR_I">"2"</Modifier>
+<Modifier name="RULES-ATTR_WP">"-3"</Modifier>
+</StarSign>
+<StarSign id="ARCH2-STAR07">
+<Range>"31-35"</Range>
+<Description language="ENGLISH">"Grungni's Baldric"</Description>
+<Title language="ENGLISH">"Sign of Martial Pursuits"</Title>
+<Classical>"Gileon"</Classical>
+<Ascendant>"Late Spring/Early Summer"</Ascendant>
+<Dates>"Pflugzeit 32nd - Sigmarzeit 22nd"</Dates>
+<God>"Grungni (Dwarfs, the Forge (Stirland)), Margileo (Honour (Averland))"</God>
+<Appearance language="ENGLISH">"A dwarf with a baldric"</Appearance>
+<Modifier name="RULES-ATTR_WS">"2"</Modifier>
+<Modifier name="RULES-ATTR_WP">"2"</Modifier>
+<Modifier name="RULES-ATTR_Fel">"-3"</Modifier>
+</StarSign>
+<StarSign id="ARCH2-STAR08">
+<Range>"36-40"</Range>
+<Description language="ENGLISH">"Mammit the Wise"</Description>
+<Title language="ENGLISH">"Sign of Wisdom"</Title>
+<Classical>"Mammius"</Classical>
+<Ascendant>"Early Summer"</Ascendant>
+<Dates>"Sigmarzeit 23rd - Sommerzeit 11th"</Dates>
+<God>"Verena"</God>
+<Appearance language="ENGLISH">"An owl"</Appearance>
+<Modifier name="RULES-ATTR_I">"2"</Modifier>
+<Modifier name="RULES-ATTR_Int">"2"</Modifier>
+<Modifier name="RULES-ATTR_Fel">"-3"</Modifier>
+</StarSign>
+<StarSign id="ARCH2-STAR09">
+<Range>"41-45"</Range>
+<Description language="ENGLISH">"Mummit the Fool"</Description>
+<Title language="ENGLISH">"Sign of the Indistinct"</Title>
+<Classical>"The Fool"</Classical>
+<Ascendant>"Summer"</Ascendant>
+<Dates>"Sommerzeit 12th - Sommerzeit 29th"</Dates>
+<God>"Ranald"</God>
+<Appearance language="ENGLISH">"A smiling face"</Appearance>
+<Modifier name="RULES-ATTR_WP">"-3"</Modifier>
+<Talent>"RULES-T0020"</Talent>
+</StarSign>
+<StarSign id="ARCH2-STAR10">
+<Range>"46-50"</Range>
+<Description language="ENGLISH">"The Two Bullocks"</Description>
+<Title language="ENGLISH">"Sign of Fertility and Craftsmanship"</Title>
+<Classical>"Hashoor"</Classical>
+<Ascendant>"Midsummer"</Ascendant>
+<Dates>"Sommerzeit 30th - Vorgeheim 13th"</Dates>
+<God>"Ahalt (Hunting, Fertility, and Sacrifice (Wissenland))"</God>
+<Appearance language="ENGLISH">"Two oxen"</Appearance>
+<Modifier name="RULES-ATTR_Int">"-3"</Modifier>
+<Talent>"RULES-T0092_*"</Talent>
+</StarSign>
+<StarSign id="ARCH2-STAR11">
+<Range>"51-55"</Range>
+<Description language="ENGLISH">"The Dancer"</Description>
+<Title language="ENGLISH">"Sign of Love and Attraction"</Title>
+<Classical>"Adamnos"</Classical>
+<Ascendant>"Late Summer"</Ascendant>
+<Dates>"Vorgeheim 14th - Nachgeheim 2nd"</Dates>
+<God>"Millavog (Dancing (Wissenland))"</God>
+<Appearance language="ENGLISH">"A whirling dancer"</Appearance>
+<Modifier name="RULES-ATTR_I">"-3"</Modifier>
+<Talent>"RULES-T0056"</Talent>
+</StarSign>
+<StarSign id="ARCH2-STAR12">
+<Range>"56-60"</Range>
+<Description language="ENGLISH">"The Drummer"</Description>
+<Title language="ENGLISH">"Sign of Excess and Hedonism"</Title>
+<Classical>"Lupios"</Classical>
+<Ascendant>"Late Summer/Early Autumn"</Ascendant>
+<Dates>"Nachgeheim 3rd - Nachgeheim 24th"</Dates>
+<God>"Lupos (Predators (Hochland))"</God>
+<Appearance language="ENGLISH">"A drum"</Appearance>
+<Modifier name="RULES-ATTR_WP">"-3"</Modifier>
+<Talent>"RULES-T0104"</Talent>
+</StarSign>
+<StarSign id="ARCH2-STAR13">
+<Range>"61-65"</Range>
+<Description language="ENGLISH">"The Piper"</Description>
+<Title language="ENGLISH">"Sign of the Trickster"</Title>
+<Classical>"Sangist"</Classical>
+<Ascendant>"Autumn"</Ascendant>
+<Dates>"Nachgeheim 25th - Erntezeit 16th"</Dates>
+<God>"Ranald, Katya (Disarming Beauty (Reikland))"</God>
+<Appearance language="ENGLISH">"A capering piper"</Appearance>
+<Modifier name="RULES-ATTR_Fel">"2"</Modifier>
+<Modifier name="RULES-ATTR_Dex">"2"</Modifier>
+<Modifier name="RULES-ATTR_WS">"-3"</Modifier>
+</StarSign>
+<StarSign id="ARCH2-STAR14">
+<Range>"66-70"</Range>
+<Description language="ENGLISH">"Vobist the Faint"</Description>
+<Title language="ENGLISH">"Sign of Darkness and Uncertainty"</Title>
+<Classical>"Vobist"</Classical>
+<Ascendant>"Autumn"</Ascendant>
+<Dates>"Erntezeit 17th - Brauzeit 6th"</Dates>
+<God>"Ranald"</God>
+<Appearance language="ENGLISH">"No stars"</Appearance>
+<Modifier name="RULES-ATTR_I">"-3"</Modifier>
+<Talent>"RULES-T0141"</Talent>
+</StarSign>
+<StarSign id="ARCH2-STAR15">
+<Range>"71-75"</Range>
+<Description language="ENGLISH">"The Broken Cart"</Description>
+<Title language="ENGLISH">"Sign of Pride"</Title>
+<Classical>"Kharnos"</Classical>
+<Ascendant>"Autumn"</Ascendant>
+<Dates>"Brauzeit 7th - Brauzeit 27th"</Dates>
+<God>"Nurgle"</God>
+<Appearance language="ENGLISH">"A cart with a broken wheel"</Appearance>
+<Modifier name="RULES-ATTR_WP">"-3"</Modifier>
+<Talent>"RULES-T0129_MALA"</Talent>
+</StarSign>
+<StarSign id="ARCH2-STAR16">
+<Range>"76-80"</Range>
+<Description language="ENGLISH">"The Greased Goat"</Description>
+<Title language="ENGLISH">"Sign of Denied Passions"</Title>
+<Classical>"Talios"</Classical>
+<Ascendant>"Late Autumn"</Ascendant>
+<Dates>"Brauzeit 28th - Kaldezeit 17th"</Dates>
+<God>"Taal"</God>
+<Appearance language="ENGLISH">"A goat"</Appearance>
+<Modifier name="RULES-ATTR_T">"-3"</Modifier>
+<Talent>"RULES-T0003"</Talent>
+</StarSign>
+<StarSign id="ARCH2-STAR17">
+<Range>"81-85"</Range>
+<Description language="ENGLISH">"Rhya's Cauldron"</Description>
+<Title language="ENGLISH">"Sign of Mercy, Death, and Creation"</Title>
+<Classical>"Rionyes"</Classical>
+<Ascendant>"Early Winter"</Ascendant>
+<Dates>"Kaldezeit 18th - Kaldezeit 33rd"</Dates>
+<God>"Rhya"</God>
+<Appearance language="ENGLISH">"A cauldron"</Appearance>
+<Modifier name="RULES-ATTR_Ag">"-3"</Modifier>
+<Talent>"RULES-T0167"</Talent>
+</StarSign>
+<StarSign id="ARCH2-STAR18">
+<Range>"86-90"</Range>
+<Description language="ENGLISH">"Cackelfax the Cockerel"</Description>
+<Title language="ENGLISH">"Sign of Money and Merchants"</Title>
+<Classical>"Kakeros"</Classical>
+<Ascendant>"Winter"</Ascendant>
+<Dates>"Ulriczeit 1st - Ulriczeit 16th"</Dates>
+<God>"Kakarol (Horses (Ostland))"</God>
+<Appearance language="ENGLISH">"Two coins"</Appearance>
+<Modifier name="RULES-ATTR_Fel">"-3"</Modifier>
+<Talent>"RULES-T0102"</Talent>
+</StarSign>
+<StarSign id="ARCH2-STAR19">
+<Range>"91-95"</Range>
+<Description language="ENGLISH">"The Bonesaw"</Description>
+<Title language="ENGLISH">"Sign of Skill and Learning"</Title>
+<Classical>"Alyoi"</Classical>
+<Ascendant>"Winter"</Ascendant>
+<Dates>"Ulriczeit 17th - Ulriczeit 31st"</Dates>
+<God>"Shallya"</God>
+<Appearance language="ENGLISH">"A knife"</Appearance>
+<Modifier name="RULES-ATTR_Int">"2"</Modifier>
+<Modifier name="RULES-ATTR_Fel">"2"</Modifier>
+<Modifier name="RULES-ATTR_WS">"-3"</Modifier>
+</StarSign>
+<StarSign id="ARCH2-STAR20">
+<Range>"96-00"</Range>
+<Description language="ENGLISH">"The Witchling Star"</Description>
+<Title language="ENGLISH">"Sign of Magic"</Title>
+<Classical>"Solkios"</Classical>
+<Ascendant>"Winter"</Ascendant>
+<Dates>"Ulriczeit 32nd - Vorhexen 11th"</Dates>
+<God>"Soll"</God>
+<Appearance language="ENGLISH">"A single bright star"</Appearance>
+<Variant range="1-3">
+<Talent>"RULES-T0141"</Talent>
+<Modifier name="RULES-ATTR_S">"-3"</Modifier>
+</Variant>
+<Variant range="4-6">
+<Talent>"RULES-T0137"</Talent>
+<Modifier name="RULES-ATTR_S">"-3"</Modifier>
+</Variant>
+<Variant range="7-9">
+<Talent>"RULES-T0089"</Talent>
+<Modifier name="RULES-ATTR_S">"-3"</Modifier>
+</Variant>
+<Variant range="10">
+<Talent>"RULES-T0143"</Talent>
+<Modifier name="RULES-ATTR_S">"-5"</Modifier>
+</Variant>
+</StarSign>
+</DATA_STARSIGN>
 </DATA_BOOK>

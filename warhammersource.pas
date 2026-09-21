@@ -11,7 +11,7 @@ uses
   ChargeCompetence, ChargeConstantes, ChargeAttribut, ChargeTalent, WinTalent,
   ChargeMetier, ChargeMetierNiveau, ChargeMetierAttribut,
   ChargeMetierCompetence, ChargeMetierTalent, WinMetier, ChargeRaceMetier,
-  ChargeRace, ChargeEspece, ChargeNation, ChargeRegle, WinRaces, ChargeRaceAttribut, ChargeRacePhysique, ChargeRaceCompetence,
+  ChargeRace, ChargeEspece, ChargeNation, ChargeRegle, WinRaces, ChargeRaceAttribut, ChargeRacePhysique, ChargeSigneAstral, ChargeRaceCompetence,
   ChargeRaceTalent, GlobalFonts, WinCreation, ChargeTalentCreation,
   WinPersonnage, ChargeAttributAugmentation, ChargeCompetenceAugmentation,
   ChargeArme, WinWeapon, WinEquipement, ChargeArmeBonus, ChargeMetierEquipement, ChargeArmure,
@@ -1109,6 +1109,8 @@ procedure TMenu.ChargerLivre(ForceMaJ: Boolean; ForceLivre: String);
         NbSort	                    := 0;
         NbFabrication	            := 0;
         NbFabricationModificateur   := 0;
+        NbSigneAstral               := 0;
+        NbSigneEffet                := 0;
         NbRaceCreation	            := 0;
         NbMetierSousMetier	    := 0;
         NbMetierRaceChoixMetier	    := 0;
@@ -1183,6 +1185,8 @@ procedure TMenu.ChargerLivre(ForceMaJ: Boolean; ForceLivre: String);
         ListCareerAdaptation.Clear;
         ListCareerAdaptationLigne.Clear;
         ListFabrication.Clear;
+        ListSigneAstral.Clear;
+        ListSigneEffet.Clear;
         ListFabricationModificateur.Clear;
         ListRaceCreation.Clear;
         ListMetierSousMetier.Clear;
@@ -1511,6 +1515,8 @@ procedure TMenu.FormCreate(Sender: TObject);
        ListCareerAdaptation         := TListCareerAdaptation.Create;
        ListCareerAdaptationLigne    := TListCareerAdaptationLigne.Create;
        ListFabrication              := TListFabrication.Create;
+       ListSigneAstral              := TListSigneAstral.Create;
+       ListSigneEffet               := TListSigneEffet.Create;
        ListFabricationModificateur  := TListModificateur.Create;
        ListRaceCreation             := TListRaceCreation.Create;
        ListMetierSousMetier         := TListMetierSousMetier.Create;

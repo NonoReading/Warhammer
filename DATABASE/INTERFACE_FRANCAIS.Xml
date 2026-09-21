@@ -342,6 +342,9 @@
 <Text name="RULES-LAB_269">"Femme"</Text>
 <Text name="RULES-LAB_270">"Aucun générateur de noms pour cette ethnie."</Text>
 <Text name="RULES-LAB_271">"Noble"</Text>
+<Text name="RULES-LAB_272">"Signe astral"</Text>
+<Text name="RULES-LAB_273">"Tirer un signe astral"</Text>
+<Text name="RULES-LAB_274">"Aucun"</Text>
 </Label>
 </DATA_LABEL>
 </DATA_BOOK>

@@ -416,6 +416,9 @@
 <Text name="RULES-LAB_269">"Female"</Text>
 <Text name="RULES-LAB_270">"No name generator for this ethnicity."</Text>
 <Text name="RULES-LAB_271">"Noble"</Text>
+<Text name="RULES-LAB_272">"Star sign"</Text>
+<Text name="RULES-LAB_273">"Roll a star sign"</Text>
+<Text name="RULES-LAB_274">"None"</Text>
 </Label>
 </DATA_LABEL>
 </DATA_BOOK>

@@ -1948,10 +1948,10 @@ object WinPersonnages: TWinPersonnages
     MemoryUsage = bmuHigh
   end
   object LabPorteAide: TLabel
-    Left = 1596
+    Left = 1716
     Height = 20
     Top = 544
-    Width = 300
+    Width = 60
     Anchors = []
     Caption = 'Clic droit'
     Font.CharSet = ANSI_CHARSET
@@ -2454,7 +2454,7 @@ object WinPersonnages: TWinPersonnages
   object LabHeight: TBCLabel
     Left = 256
     Height = 20
-    Top = 325
+    Top = 316
     Width = 34
     Background.Gradient1.StartColor = clWhite
     Background.Gradient1.EndColor = clBlack
@@ -2487,7 +2487,7 @@ object WinPersonnages: TWinPersonnages
   object LabHairColors: TBCLabel
     Left = 256
     Height = 20
-    Top = 370
+    Top = 355
     Width = 55
     Background.Gradient1.StartColor = clWhite
     Background.Gradient1.EndColor = clBlack
@@ -2520,7 +2520,7 @@ object WinPersonnages: TWinPersonnages
   object LabEyeColors: TBCLabel
     Left = 256
     Height = 20
-    Top = 415
+    Top = 395
     Width = 30
     Background.Gradient1.StartColor = clWhite
     Background.Gradient1.EndColor = clBlack
@@ -2562,7 +2562,7 @@ object WinPersonnages: TWinPersonnages
   object EditHeight: TEdit
     Left = 336
     Height = 28
-    Top = 325
+    Top = 315
     Width = 170
     AutoSize = False
     TabOrder = 19
@@ -2571,7 +2571,7 @@ object WinPersonnages: TWinPersonnages
   object EditHairColors: TEdit
     Left = 336
     Height = 28
-    Top = 368
+    Top = 352
     Width = 170
     AutoSize = False
     TabOrder = 20
@@ -2579,15 +2579,25 @@ object WinPersonnages: TWinPersonnages
   object EditEyeColors: TEdit
     Left = 336
     Height = 28
-    Top = 415
+    Top = 389
     Width = 170
     AutoSize = False
     TabOrder = 21
   end
+  object EditSigne: TEdit
+    Left = 256
+    Height = 28
+    Top = 500
+    Width = 250
+    AutoSize = False
+    ReadOnly = True
+    TabOrder = 23
+    Visible = False
+  end
   object ButtonPhysique: TBCButton
     Left = 256
     Height = 31
-    Top = 460
+    Top = 427
     Width = 250
     StateClicked.Background.Gradient1.StartColor = 8404992
     StateClicked.Background.Gradient1.EndColor = 4194304
