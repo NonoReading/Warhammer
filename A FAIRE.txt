@@ -717,7 +717,7 @@ session - en distillant les blocs clos plutot qu en les supprimant en bloc, parc
 contiennent souvent des points encore ouverts.
 
 =========================================================================
-HIGH ELF PLAYER S GUIDE - CE QUI RESTE
+HIGH ELF PLAYER S GUIDE - CE QUI RESTE (livre passe a COMPLETE=1 le 20/09/2026, decision Nono ; il ne reste que des points sans mecanisme et les tests de Nono)
 =========================================================================
 Lots 1, 2 (carrieres de lanceurs, 59 sorts) et 3 (ethnies), et l armurerie elfique : FAITS (CONTEXT.md 2.25 a 2.29, Log.txt). Restent :
   * A verifier : le talent High Magic n a pas de ligne Max dans le livre (coquille d edition) ; la valeur retenue est dans CONTEXT.md 2.25.

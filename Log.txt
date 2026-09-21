@@ -5904,3 +5904,7 @@ Fichiers modifies : chargeconstantes.pas, chargepersonnage.pas, chargemetier.pas
 20/09/2026 - HIGH ELF PLAYER S GUIDE : ADAPTING CAREERS, OPTIONS UP IN ARMS - A TESTER PAR NONO
 Artillerist (UPINA-WORK69) ouvert a RULES-SPECIE_HELF (DATA_SPECIE_CAREER_DIRECT du livre) ; Archer, Camp Follower et Light Cavalry l etaient deja par Up in Arms. HELFG-ADAPT_009 : Light Cavalry niveau 4, Ranged (Blackpowder) -> Secret Signs (Scout), Pistol -> magic weapon (texte libre). Aucun code Pascal. Non porte : restriction Soldier (choix de specialisation, pas une substitution). Adapting Careers termine ; le livre reste a COMPLETE=0 pour la table de tirage p.59.
 Fichiers modifies : BOOK_HIGH_ELF_PLAYERS_GUIDE.Xml, CONTEXT.md, A FAIRE.txt, Log.txt.
+
+20/09/2026 - AUDIT DES TXT : HIGH ELF PLAYER S GUIDE PASSE A COMPLETE=1
+Table de tirage p.59 controlee : les onze tables d ethnie couvrent 1 a 100 sans trou ni doublon, ligne Mage comprise ; aucune saisie a faire. Adapting Careers termine (trappings, facultatives, options Up in Arms). Decision Nono : COMPLETE=1, en-tete du XML remis a jour. Non portes faute de mecanisme : restriction Blackpowder du Soldier, intitule Exalted Maker, quantite des 10 Arrows, nuance des carrieres a * p.59. Bilan de l audit : les quatre livres a COMPLETE=0 sont passes a 1.
+Fichiers modifies : BOOK_HIGH_ELF_PLAYERS_GUIDE.Xml, CONTEXT.md, A FAIRE.txt, Log.txt.
