@@ -153,9 +153,22 @@
         <UnitName Value="WinRaces"/>
       </Unit>
       <Unit>
+        <Filename Value="winphysique.pas"/>
+        <IsPartOfProject Value="True"/>
+        <ComponentName Value="WinPhysique"/>
+        <HasResources Value="True"/>
+        <ResourceBaseClass Value="Form"/>
+        <UnitName Value="WinPhysique"/>
+      </Unit>
+      <Unit>
         <Filename Value="chargeraceattribut.pas"/>
         <IsPartOfProject Value="True"/>
         <UnitName Value="ChargeRaceAttribut"/>
+      </Unit>
+      <Unit>
+        <Filename Value="chargeracephysique.pas"/>
+        <IsPartOfProject Value="True"/>
+        <UnitName Value="ChargeRacePhysique"/>
       </Unit>
       <Unit>
         <Filename Value="chargeracecompetence.pas"/>
@@ -228,6 +241,11 @@
         <HasResources Value="True"/>
         <ResourceBaseClass Value="Form"/>
         <UnitName Value="WinEquipement"/>
+      </Unit>
+      <Unit>
+        <Filename Value="winanimal.pas"/>
+        <IsPartOfProject Value="True"/>
+        <UnitName Value="WinAnimal"/>
       </Unit>
       <Unit>
         <Filename Value="chargearmebonus.pas"/>

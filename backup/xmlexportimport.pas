@@ -6,25 +6,32 @@ unit XmlExportImport;
 interface
 
 uses
-  Classes, SysUtils, ChargeConstantes, ChargeCompetence, ChargeTalent, ChargeRace,
-  ChargeRaceAttribut, ChargeRaceCompetence, ChargeRaceTalent, ChargeRaceMetier,
+  Classes, SysUtils, StrUtils, ChargeConstantes, ChargeCompetence, ChargeTalent, ChargeRace,
+  ChargeEspece, ChargeNation, ChargeRegle,
+  ChargeRaceAttribut, ChargeRacePhysique, ChargeRaceCompetence, ChargeRaceTalent, ChargeRaceMetier,
   ChargeMetier, ChargeMetierAttribut, ChargeMetierCompetence, ChargeMetierTalent,
-  ChargeMetierEquipement, chargeMetierNiveau, ChargeArme, ChargeArmure,
+  ChargeMetierEquipement, chargeMetierNiveau, ChargeArme, ChargeArmure, ChargeTrapping,
   ChargeTalentCreation, ChargeRaceCreation, ChargeArmeBonus, ChargeArmureBonus,
   ChargeFabrication, ChargeSort, ChargeMetierRaceChoixMetier, ChargeAttribut,
   ChargeAttributAugmentation, ChargeCompetenceAugmentation, ChargeTexte,
   ChargeMetierSousMetier, ChargeTraduction, ChargeArmureSimplifie, ChargeLivre,
-  ChargeRaceCorruptionCreation, ChargeTalentAttributModif,
-  ChargeTalentCompetenceModif, ChargeTalentCompetenceAjoute, ChargeRaceOpinion,
+  ChargeRaceCorruptionCreation, ChargeCorruptionTable,
+  ChargeTalentEffet, ChargeTalentCompetenceModif, ChargeTalentCompetenceAjoute, ChargeRaceOpinion,
+  ChargeArmureBonusModif, ChargeCorruptionCompetenceModif,
+  ChargeCorruptionTalent, ChargeCorruptionEquipement,
+  ChargeArmureBonusTalent,
+  ChargeModificateur, ChargeTalentModificateur, ChargeCareerBonusModificateur,
+  ChargeArmeModificateur, ChargeArmureBonusModificateur, ChargeCorruptionModificateur,
   XMLRead, DOM, Unitcalcul,  Dialogs, strutils;
 
 Procedure XmlExportBook(Livre: String; Langue: String);
-Procedure XmlImport(FileName: String; OnlyPrimary: Boolean; OnlyCode: Boolean);
+Procedure XmlImport(FileName: String; OnlyPrimary: Boolean; OnlyCode: Boolean; CheminComplet: String = '');
+Function XmlElement(Node: TDOMNode): TDOMNode;
 Function XmlDebut(TypeDonnee: string): String;
 Function XmlFin(TypeDonnee: string): String;
 Function XmlLigne(TypeDonnee: string; Valeur: String): String;
 Function XmlCommentaire(Valeur: String): String;
-Function XmlLigneDonnee(TypeDonnee: String; Name: String; Valeur: String): String;
+Function XmlLigneDonnee(TypeDonnee: String; Name: String; Valeur: String; Attribut: String = ''): String;
 Function XmlLigneLangue(TypeDonnee: String; Name: String; Valeur: String): String;
 Function xmlDataBase(): String;
 Function XmlDebutCode(TypeDonnee: string; Valeur: String): String;
@@ -32,10 +39,32 @@ Function XmlFinCode(TypeDonnee: String): String;
 Function XmlReplace(Source: String): String;
 Function XmlDebutLangue(TypeDonnee: String; Name: String): String;
 Function XmlLivre(FileName: String): string;
+Function XmlLivreBalise(CheminFichier: String; Balise: String): String;
 Function XmlCodeLivre(Livre: String): String;
 Function XmlCreeCodeLivre(Livre: String; Code: String): String;
 
 implementation
+
+// Renvoie Node s'il est un ELEMENT XML, sinon le premier frere suivant qui en est un.
+//
+// Un commentaire XML et un noeud texte sont des enfants comme les autres : les boucles de
+// lecture ci-dessous parcourent TOUS les enfants d'un bloc, donc sans ce filtre elles les
+// traitent comme des donnees. Deux consequences, rencontrees toutes les deux pour de vrai :
+//   - la boucle lit Node.Attributes, qui vaut nil sur un commentaire -> ACCESS VIOLATION au
+//     chargement (DATA_LABEL, 21/08/2026, plantage au lancement) ;
+//   - la boucle ne lit pas d'attribut mais reutilise l'enregistrement du tour precedent, qui
+//     n'est pas remis a zero -> DOUBLON SILENCIEUX (DATA_CAREER_ROLL, 20/08/2026, un metier
+//     affiche deux fois).
+//
+// Poser la garde ici plutot que dans chacune des 31 boucles evite d'en oublier une, et rend
+// inoffensif le fait de commenter un fichier de donnees - ce qui etait devenu un piege a
+// chaque saisie. Voir CONTEXT.md 2.16.
+Function XmlElement(Node: TDOMNode): TDOMNode;
+begin
+  While Assigned(Node) and (Node.NodeType <> ELEMENT_NODE) do
+    Node := Node.NextSibling;
+  Result := Node;
+end;
 
 Function XmlReplace(Source: String): String;
 begin
@@ -57,9 +86,9 @@ Function XmlCommentaire(Valeur: String): String;
     Result := XmlReplace('  <!-- ' + Valeur + ' -->');
   end;
 
-Function XmlLigneDonnee(TypeDonnee: String; Name: String; Valeur: String): String;
+Function XmlLigneDonnee(TypeDonnee: String; Name: String; Valeur: String; Attribut: String): String;
   begin
-    Result := XmlReplace(XmlDebut(TypeDonnee+' name="'+Name+'"') + '"' + Valeur + '"' + XmlFin(TypeDonnee));
+    Result := XmlReplace(XmlDebut(TypeDonnee+' name="'+Name+'"'+Attribut) + '"' + Valeur + '"' + XmlFin(TypeDonnee));
   end;
 
 Function XmlLigneLangue(TypeDonnee: String; Name: String; Valeur: String): String;
@@ -140,8 +169,12 @@ Procedure XmlExportBook(Livre: String; Langue: String);
     FileName:                 String;
     PCompetence:              StructureCompetence;
     PTalent:                  StructureTalent;
+    PEspece:                  StructureEspece;
+    PNation:                  StructureNation;
     PRace:                    StructureRace;
     PRaceAttribut:            StructureRaceAttribut;
+    PRacePhysique:            StructureRacePhysique;
+    PRaceCouleur:             StructureRaceCouleur;
     PRaceCompetence:          StructureRaceCompetence;
     PRaceTalent:              StructureRaceTalent;
     PRaceMetier:              StructureRaceMetier;
@@ -151,16 +184,24 @@ Procedure XmlExportBook(Livre: String; Langue: String);
     PMetierTalent:            StructureMetierTalent;
     PMetierEquipement:        StructureMetierEquipement;
     PMetierNiveau:            StructureMetierNiveau;
-    PRaceOpinion:             StructureRaceOpinion;  // ✨ NOUVEAU
     PTalentCreation:          StructureTalentCreation;
     PRaceCreation:            StructureRaceCreation;
     PArme:                    StructureArme;
     PArmeBonus:               StructureArmeBonus;
     PArmure:                  StructureArmure;
+    PTrapping:                StructureTrapping;
     PArmureBonus:             StructureArmureBonus;
     PFabrication:             StructureFabrication;
     PMetierRaceChoixMetier:   StructureMetierRaceChoixMetier;
     PSort:                    StructureSort;
+    PSortTalent:              StructureSortTalent;
+    PTrait:                   StructureTrait;
+    PTraitOption:             StructureTraitOption;
+    PCareerBonus:             StructureCareerBonus;
+    PCareerBonusNiveau:       StructureCareerBonusNiveau;
+    PCareerAdaptation:        StructureCareerAdaptation;
+    PCareerAdaptationLigne:   StructureCareerAdaptationLigne;
+    NodeAdapt:                TDOMNode;
     PMetierSousMetier:        StructureMetierSousMetier;
     PAttribut:                StructureAttribut;
     PAttributAugmentation:    StructureAttributAugmentation;
@@ -178,6 +219,7 @@ Procedure XmlExportBook(Livre: String; Langue: String);
     LigneType:                String;
     Qualite:                  String;
     Equipement:               String;
+    QuantiteAttr:             String;
     StringTalent:             TStringList;
     LigneTalent:              String;
     ListeTalent:              String;
@@ -210,6 +252,8 @@ Procedure XmlExportBook(Livre: String; Langue: String);
         XmlContent.Add(XmlLigne(ConstXmlOfficielLivre, IntToStr(PLivre.Officiel)));
         PLivre.Complet  := 1;
         XmlContent.Add(XmlLigne(ConstXmlCompletLivre, IntToStr(PLivre.Complet)));
+        if PLivre.Disclaimer <> '' then
+          XmlContent.Add(XmlLigne(ConstXmlDisclaimerLivre, PLivre.Disclaimer));
 
         // Attribut
         Fist := true;
@@ -311,6 +355,8 @@ Procedure XmlExportBook(Livre: String; Langue: String);
                 end;
               XmlContent.Add(XmlDebutCode(ConstXmlCompetence, XmlCreeCodeLivre(PCompetence.Livre, PCompetence.CodeCompetence)));
               XmlContent.Add(XmlLigneLangue(ConstXmlDescription, Langue, PCompetence.Libelle));
+              if PCompetence.CodeGenerique <> '' then
+                XmlContent.Add(XmlLigne(ConstXmlGenerique, PCompetence.CodeGenerique));
               XmlContent.Add(XmlFinCode(ConstXmlCompetence));
             end;
         if Fist = false then
@@ -340,6 +386,32 @@ Procedure XmlExportBook(Livre: String; Langue: String);
                  XmlContent.Add(XmlLigne(ConstXmlCompetence, ''));
               XmlContent.Add(XmlLigne(ConstXmlMax, PTalent.MaxiTalent));
               XmlContent.Add(XmlLigne(ConstXmlForPdf, PTalent.TalentPdf));
+              // ecrite seulement si vraie : les ~700 talents ordinaires ne portent pas la balise
+              if PTalent.Trait then
+                XmlContent.Add(XmlLigne(ConstXmlTrait, ConstVrai));
+              if PTalent.Magie > 0 then
+                XmlContent.Add(XmlLigne(ConstXmlMagie, IntToStr(PTalent.Magie)));
+              if PTalent.ModeSort <> '' then
+                XmlContent.Add(XmlLigne(ConstXmlModeSort, PTalent.ModeSort));
+              // Tarif des sorts. Le bloc n'est ecrit QUE si au moins un des cinq champs a ete
+              // renseigne : un talent magique sans tarification n'en gagne donc pas a l'export.
+              // C'est voulu - l'absence de tarif EST le tarif des Blessings (multiplicateur 0,
+              // donc sorts gratuits), et ecrire un <XpMultiplier>0</XpMultiplier> partout
+              // reviendrait a declarer gratuits tous les talents qu'on n'a pas encore traites.
+              // A l'interieur du bloc, les deux entiers sont ecrits meme a 0 : 0 y est une
+              // valeur (plancher nul), pas une absence.
+              if (PTalent.XpMultiplicateur <> 0) or (PTalent.XpPlancher <> 0) or
+                 (PTalent.XpDiviseur <> '') or (PTalent.XpOfferts <> '') or (PTalent.XpGroupe <> '') then
+                begin
+                  XmlContent.Add(XmlLigne(ConstXmlXpMultiplicateur, IntToStr(PTalent.XpMultiplicateur)));
+                  XmlContent.Add(XmlLigne(ConstXmlXpPlancher, IntToStr(PTalent.XpPlancher)));
+                  if PTalent.XpDiviseur <> '' then
+                    XmlContent.Add(XmlLigne(ConstXmlXpDiviseur, PTalent.XpDiviseur));
+                  if PTalent.XpOfferts <> '' then
+                    XmlContent.Add(XmlLigne(ConstXmlXpOfferts, PTalent.XpOfferts));
+                  if PTalent.XpGroupe <> '' then
+                    XmlContent.Add(XmlLigne(ConstXmlXpGroupe, PTalent.XpGroupe));
+                end;
               XmlContent.Add(XmlLigneLangue(ConstXmlTest, Langue, PTalent.Tests));
 
               XmlContent.Add(XmlFinCode(ConstXmlTalent));
@@ -359,6 +431,8 @@ Procedure XmlExportBook(Livre: String; Langue: String);
                 end;
               XmlContent.Add(XmlDebutCode(ConstXmlTalent, XmlCreeCodeLivre(PTalent.Livre, PTalent.CodeTalent)));
               XmlContent.Add(XmlLigneLangue(ConstXmlDescription, Langue, PTalent.Libelle));
+              if PTalent.CodeGenerique <> '' then
+                XmlContent.Add(XmlLigne(ConstXmlGenerique, PTalent.CodeGenerique));
               XmlContent.Add(XmlFinCode(ConstXmlTalent));
             end;
         if Fist = false then
@@ -385,6 +459,45 @@ Procedure XmlExportBook(Livre: String; Langue: String);
         if Fist = false then
            XmlContent.Add(XmlFin(ConstXmlDataRandomTalent));
 
+        // Espece (bloc DATA_RACE : la RACE generique qui regroupe les ethnies -
+        // voir ChargeEspece.pas pour le vocabulaire. Etait lue et jamais ecrite.)
+        Fist := true;
+        for PEspece in ListEspece do
+          if PEspece.Livre = Livre then
+            begin
+              if Fist = true then
+                begin
+                  XmlContent.Add(XmlDebut(ConstXmlDataEspece));
+                  Fist := false;
+                end;
+              XmlContent.Add(XmlDebutCode(ConstXmlEspece, XmlCreeCodeLivre(PEspece.Livre, PEspece.CodeEspece)));
+              XmlContent.Add(XmlLigneLangue(ConstXmlDescription, Langue, PEspece.Libelle));
+              // ecrit seulement si la race designe son propre dossier d'icones de niveau
+              if PEspece.DossierNiveau <> '' then
+                XmlContent.Add(XmlLigne(ConstXmlPictureLevel, PEspece.DossierNiveau));
+              XmlContent.Add(XmlFinCode(ConstXmlEspece));
+            end;
+        if Fist = false then
+           XmlContent.Add(XmlFin(ConstXmlDataEspece));
+
+        // Nation (bloc DATA_NATION : regroupement POLITIQUE des ethnies, distinct de
+        // DATA_RACE qui est biologique - voir ChargeNation.pas. CONTEXT.md 2.51.)
+        Fist := true;
+        for PNation in ListNation do
+          if PNation.Livre = Livre then
+            begin
+              if Fist = true then
+                begin
+                  XmlContent.Add(XmlDebut(ConstXmlDataNation));
+                  Fist := false;
+                end;
+              XmlContent.Add(XmlDebutCode(ConstXmlNation, XmlCreeCodeLivre(PNation.Livre, PNation.CodeNation)));
+              XmlContent.Add(XmlLigneLangue(ConstXmlDescription, Langue, PNation.Libelle));
+              XmlContent.Add(XmlFinCode(ConstXmlNation));
+            end;
+        if Fist = false then
+           XmlContent.Add(XmlFin(ConstXmlDataNation));
+
         // race
         Fist := true;
         For PRace In ListRace do
@@ -400,6 +513,20 @@ Procedure XmlExportBook(Livre: String; Langue: String);
               XmlContent.Add(XmlLigneLangue(ConstXmlDescription, Langue, PRace.Libelle));
               XmlContent.Add(XmlLigneLangue(ConstXmlExplanation, Langue, PRace.Description));
               XmlContent.Add(XmlLigne(ConstXmlEthnic, PRace.Espece));
+              // ecrit seulement si l'ethnie appartient a une nation - la plupart n'en ont
+              // aucune (Nains, Elfes, Norses...). CONTEXT.md 2.51.
+              if Trim(PRace.Nation) <> '' then
+                XmlContent.Add(XmlLigne(ConstXmlNationality, PRace.Nation));
+              // ecrites seulement si elles s'ecartent du defaut, pour ne pas alourdir les
+              // dizaines de races qui prennent 3 et 3
+              if PRace.NbPoint5 <> 3 then
+                XmlContent.Add(XmlLigne(ConstXmlNbSkill5, IntToStr(PRace.NbPoint5)));
+              if PRace.NbPoint3 <> 3 then
+                XmlContent.Add(XmlLigne(ConstXmlNbSkill3, IntToStr(PRace.NbPoint3)));
+              // Idem : ecrit seulement si l'ethnie designe son propre dossier d'icones
+              // de niveau, pour ne pas alourdir les dizaines d'ethnies qui prennent NIV.
+              if PRace.DossierNiveau <> '' then
+                XmlContent.Add(XmlLigne(ConstXmlPictureLevel, PRace.DossierNiveau));
               // Attribut de race
               XmlContent.Add(XmlDebut(ConstXmlSousChapitreCarac));
               for PRaceAttribut in ListRaceAttribut do
@@ -409,6 +536,24 @@ Procedure XmlExportBook(Livre: String; Langue: String);
                     XmlContent.Add(XmlLigneDonnee(ConstXmlCarac, XmlCreeCodeLivre(PAttribut.Livre, PRaceAttribut.CodeAttribut), PRaceAttribut.CalculRace));
                   end;
               XmlContent.Add(Xmlfin(ConstXmlSousChapitreCarac));
+              // Details physiques (ecrits seulement si l'ethnie en porte)
+              PRacePhysique := ChercheRacePhysique(PRace.CodeRace);
+              if PRacePhysique.CodeRace <> '' then
+                begin
+                  XmlContent.Add(XmlDebut(ConstXmlSousChapitrePhysique));
+                  XmlContent.Add(XmlLigne(ConstXmlAge, PRacePhysique.FormuleAge));
+                  XmlContent.Add(XmlLigne(ConstXmlHeight, PRacePhysique.FormuleTaille));
+                  if PRacePhysique.TailleExplose then
+                    XmlContent.Add(XmlLigne(ConstXmlPhysTailleExplose, ConstVrai));
+                  XmlContent.Add(XmlLigne(ConstXmlPhysNbTirageYeux, IntToStr(PRacePhysique.NbTirageYeux)));
+                  for PRaceCouleur in ListRaceCouleur do
+                    if (PRaceCouleur.CodeRace = PRace.CodeRace) and PRaceCouleur.EstYeux then
+                      XmlContent.Add(XmlLigneDonnee(ConstXmlPhysYeux, PRaceCouleur.Libelle, PRaceCouleur.Plage));
+                  for PRaceCouleur in ListRaceCouleur do
+                    if (PRaceCouleur.CodeRace = PRace.CodeRace) and not PRaceCouleur.EstYeux then
+                      XmlContent.Add(XmlLigneDonnee(ConstXmlPhysCheveux, PRaceCouleur.Libelle, PRaceCouleur.Plage));
+                  XmlContent.Add(Xmlfin(ConstXmlSousChapitrePhysique));
+                end;
               // Compétence
               XmlContent.Add(XmlDebut(ConstXmlSousChapitreCompetence));
               for PRaceCompetence in ListRaceCompetence do
@@ -478,6 +623,16 @@ Procedure XmlExportBook(Livre: String; Langue: String);
               PCompetence := ChercheCompetence(PMetier.CodeCompetence);
               XmlContent.Add(XmlLigne(ConstXmlCompetence, XmlCreeCodeLivre(PCompetence.Livre, PMetier.CodeCompetence)));
               XmlContent.Add(XmlLigne(ConstXmlClass, PMetier.LibelleGroupe));
+              // Ecrit seulement si le metier designe son propre dossier d'icones de niveau.
+              if PMetier.DossierNiveau <> '' then
+                XmlContent.Add(XmlLigne(ConstXmlPictureLevel, PMetier.DossierNiveau));
+              // Idem pour la carriere parente. Reecrit TEL QUEL, sans passer par
+              // XmlCreeCodeLivre : ce champ peut contenir plusieurs codes separes par
+              // SeparateurMulti, et XmlCreeCodeLivre prefixerait la chaine entiere comme un
+              // code unique. Les codes parents sont de toute facon toujours declares
+              // complets, donc XmlCreeCodeLivre les laisserait intacts.
+              if PMetier.MetierParent <> '' then
+                XmlContent.Add(XmlLigne(ConstXmlMetierParent, PMetier.MetierParent));
 
               // Niveau
               XmlContent.Add(XmlDebut(ConstXmlSousChapitreNiveau));
@@ -549,11 +704,11 @@ Procedure XmlExportBook(Livre: String; Langue: String);
                         if (Pos(EquipementQualite, Equipement) > 0) then
                           begin
                             Qualite    := EquipementQualite;
-                            Equipement := ExtractStringBefore(LigneEquip,EquipementQualite);
+                            Equipement := Trim(ExtractStringBefore(LigneEquip,EquipementQualite));
                           end;
                         LigneType := StringType[LigneIndice];
                         Inc(LigneIndice);
-                        if InList(LigneType,TypeEquipCC+','+TypeEquipCT+','+TypeEquipMU) then
+                        if InList(LigneType,TypeEquipMetierArme) then
                             begin
                               PArme   := ChercheArme(Equipement);
                               LigneEquipement := LigneEquipement + XmlCreeCodeLivre(Parme.livre, Equipement) + Qualite;
@@ -570,7 +725,16 @@ Procedure XmlExportBook(Livre: String; Langue: String);
                         end;
                       StringEquip.free;
                       StringType.Free;
-                      XmlContent.Add(XmlLigneDonnee(ConstXmlEquipement, LigneEquipement, IntToStr(PMetierEquipement.NiveauMetier)));
+                      // Meme principe que Porte/Quantite cote personnage (chargepersonnage.pas
+                      // XmlAttributEquipementQuantite) : attribut absent si Quantite=1, pour que
+                      // les livres deja exportes sans le champ restent lisibles comme "1 exemplaire".
+                      if PMetierEquipement.QuantiteListe <> '' then
+                        QuantiteAttr := ' '+ConstXmlEquipementQuantite+'="'+PMetierEquipement.QuantiteListe+'"'
+                      else if PMetierEquipement.Quantite <> 1 then
+                        QuantiteAttr := ' '+ConstXmlEquipementQuantite+'="'+IntToStr(PMetierEquipement.Quantite)+'"'
+                      else
+                        QuantiteAttr := '';
+                      XmlContent.Add(XmlLigneDonnee(ConstXmlEquipement, LigneEquipement, IntToStr(PMetierEquipement.NiveauMetier), QuantiteAttr));
                       LigneEquipement  := '';
                     end;
 
@@ -606,6 +770,8 @@ Procedure XmlExportBook(Livre: String; Langue: String);
               XmlContent.Add(XmlLigne(ConstXmlQualite, PArme.ListeBonus));
               XmlContent.Add(XmlLigne(ConstXmlMains, IntToStr(PArme.Mains)));
               XmlContent.Add(XmlLigne(ConstXmlMunition, IntToStr(PArme.Munition)));
+              if PArme.TypeArme <> '' then
+                XmlContent.Add(XmlLigne(ConstXmlType, PArme.TypeArme));
 
               XmlContent.Add(XmlFinCode(ConstXmlArme));
             end;
@@ -657,6 +823,45 @@ Procedure XmlExportBook(Livre: String; Langue: String);
             end;
         if Fist = false then
            XmlContent.Add(XmlFin(ConstXmlDataArmor));
+
+        // Trapping (equipement divers, hors armes/armures)
+        Fist := true;
+        for PTrapping in ListTrapping do
+          if (PTrapping.Livre = Livre) then
+            begin
+              if Fist = true then
+                begin
+                  XmlContent.Add(XmlDebut(ConstXmlDataTrapping));
+                  Fist := false;
+                end;
+              XmlContent.Add(XmlDebutCode(ConstXmlTrapping, XmlCreeCodeLivre(PTrapping.Livre, PTrapping.CodeTrapping)));
+              XmlContent.Add(XmlLigneLangue(ConstXmlDescription, Langue, PTrapping.Libelle));
+              XmlContent.Add(XmlLigne(ConstXmlDisponibilite, PTrapping.Disponibilite));
+              XmlContent.Add(XmlLigne(ConstXmlPrix, PTrapping.Prix));
+              XmlContent.Add(XmlLigne(ConstXmlEncombrement, IntToStr(PTrapping.Encombrement)));
+              if PTrapping.Capacite <> 0 then
+                XmlContent.Add(XmlLigne(ConstXmlCapacite, IntToStr(PTrapping.Capacite)));
+              if PTrapping.ProfilAnimal <> '' then
+                XmlContent.Add(XmlLigne(ConstXmlProfilAnimal, PTrapping.ProfilAnimal));
+              if PTrapping.TraitsAnimal <> '' then
+                XmlContent.Add(XmlLigne(ConstXmlTraitsAnimal, PTrapping.TraitsAnimal));
+              if PTrapping.ProfilBateau <> '' then
+                XmlContent.Add(XmlLigne(ConstXmlProfilBateau, PTrapping.ProfilBateau));
+              if PTrapping.ProfilVehicule <> '' then
+                XmlContent.Add(XmlLigne(ConstXmlProfilVehicule, PTrapping.ProfilVehicule));
+              if PTrapping.Theme <> '' then
+                XmlContent.Add(XmlLigne(ConstXmlTheme, PTrapping.Theme));
+              if PTrapping.Acheteur <> '' then
+                XmlContent.Add(XmlLigne(ConstXmlAcheteur, PTrapping.Acheteur));
+              if PTrapping.Localite <> '' then
+                XmlContent.Add(XmlLigne(ConstXmlLocalite, PTrapping.Localite));
+              if PTrapping.Saison <> '' then
+                XmlContent.Add(XmlLigne(ConstXmlSaison, PTrapping.Saison));
+
+              XmlContent.Add(XmlFinCode(ConstXmlTrapping));
+            end;
+        if Fist = false then
+           XmlContent.Add(XmlFin(ConstXmlDataTrapping));
 
         // Armure Simplifiée
         Fist := true;
@@ -737,6 +942,92 @@ Procedure XmlExportBook(Livre: String; Langue: String);
         if Fist = false then
            XmlContent.Add(XmlFin(ConstXmlDataSpell));
 
+        // Acces aux sorts par talent - voir CONTEXT.md 2.39.
+        // Le sort cite ici peut appartenir a un AUTRE livre que celui qu'on exporte :
+        // c'est PSortTalent.Livre, et non le livre du sort, qui decide ou la ligne part.
+        // On n'appelle donc PAS ChercheSort pour reconstruire son prefixe - le code est
+        // deja complet, tel qu'il a ete lu.
+        Fist := true;
+        for PSortTalent in ListSortTalent do
+          if (PSortTalent.Livre = Livre) then
+            begin
+              if Fist = true then
+                begin
+                  XmlContent.Add(XmlDebut(ConstXmlDataSpellTalent));
+                  Fist := false;
+                end;
+              XmlContent.Add(XmlDebutCode(ConstXmlSort, PSortTalent.CodeSort));
+              XmlContent.Add(XmlLigne(ConstXmlTalent, PSortTalent.ListeTalent));
+              XmlContent.Add(XmlFinCode(ConstXmlSort));
+            end;
+        if Fist = false then
+           XmlContent.Add(XmlFin(ConstXmlDataSpellTalent));
+
+        // Traits d'ethnie - voir CONTEXT.md 2.41. Bloc ECRIT des maintenant, meme si
+        // aucun ecran ne le saisit : l'export reconstruit le fichier depuis les listes
+        // en memoire, donc un bloc lu mais non ecrit disparait a la premiere sauvegarde
+        // depuis WinLivre (lecon du 03/09/2026, CONTEXT.md 2.39).
+        Fist := true;
+        for PTrait in ListTrait do
+          if (PTrait.Livre = Livre) then
+            begin
+              if Fist = true then
+                begin
+                  XmlContent.Add(XmlDebut(ConstXmlDataSpecieTrait));
+                  Fist := false;
+                end;
+              XmlContent.Add(XmlDebutCode(ConstXmlSpecieTrait, PTrait.CodeTrait));
+              XmlContent.Add(XmlLigneLangue(ConstXmlDescription, Langue, PTrait.Libelle));
+              for PTraitOption in ListTraitOption do
+                if CompareRechercheValeur(PTraitOption.CodeTrait, PTrait.CodeTrait) then
+                  begin
+                    XmlContent.Add(XmlDebutCode(ConstXmlTraitOption, PTraitOption.CodeOption));
+                    XmlContent.Add(XmlLigneLangue(ConstXmlDescription, Langue, PTraitOption.Libelle));
+                    XmlContent.Add(XmlLigne(ConstXmlTalent, PTraitOption.ListeTalent));
+                    XmlContent.Add(XmlFinCode(ConstXmlTraitOption));
+                  end;
+              XmlContent.Add(XmlFinCode(ConstXmlSpecieTrait));
+            end;
+        if Fist = false then
+           XmlContent.Add(XmlFin(ConstXmlDataSpecieTrait));
+
+        // Appartenances greffees sur une carriere - voir CONTEXT.md 2.44. Bloc ECRIT
+        // des maintenant, meme si aucun ecran ne le saisit : l'export reconstruit le
+        // fichier depuis les listes en memoire, donc un bloc lu mais non ecrit
+        // disparait a la premiere sauvegarde depuis WinLivre (lecon du 03/09/2026,
+        // CONTEXT.md 2.39), et un bloc lu mais jamais exporte est exactement le bug
+        // DATA_RACE du 04/09 (CONTEXT.md 2.42).
+        // Le metier et l'ethnie cites appartiennent le plus souvent a un AUTRE livre
+        // (Soldier et les Reiklander viennent du Rulebook) : c'est PCareerBonus.Livre,
+        // et non le livre du metier, qui decide ou la ligne part. Les codes sont deja
+        // complets, on ne reconstruit donc aucun prefixe.
+        Fist := true;
+        for PCareerBonus in ListCareerBonus do
+          if (PCareerBonus.Livre = Livre) then
+            begin
+              if Fist = true then
+                begin
+                  XmlContent.Add(XmlDebut(ConstXmlDataCareerBonus));
+                  Fist := false;
+                end;
+              XmlContent.Add(XmlDebutCode(ConstXmlCareerBonus, PCareerBonus.CodeBonus));
+              XmlContent.Add(XmlLigneLangue(ConstXmlDescription, Langue, PCareerBonus.Libelle));
+              XmlContent.Add(XmlLigne(ConstXmlWork, PCareerBonus.CodeMetier));
+              XmlContent.Add(XmlLigne(ConstXmlRace, PCareerBonus.CodeRace));
+              for PCareerBonusNiveau in ListCareerBonusNiveau do
+                if CompareRechercheValeur(PCareerBonusNiveau.CodeBonus, PCareerBonus.CodeBonus) then
+                  begin
+                    XmlContent.Add(XmlDebutCode(ConstXmlNiveau, PCareerBonusNiveau.CodeNiveau));
+                    XmlContent.Add(XmlLigne(ConstXmlOrder, IntToStr(PCareerBonusNiveau.Niveau)));
+                    XmlContent.Add(XmlLigne(ConstXmlCompetence, PCareerBonusNiveau.ListeCompetence));
+                    XmlContent.Add(XmlLigne(ConstXmlTalent, PCareerBonusNiveau.ListeTalent));
+                    XmlContent.Add(XmlFinCode(ConstXmlNiveau));
+                  end;
+              XmlContent.Add(XmlFinCode(ConstXmlCareerBonus));
+            end;
+        if Fist = false then
+           XmlContent.Add(XmlFin(ConstXmlDataCareerBonus));
+
         // Fabrication
         Fist := true;
         for PFabrication in ListFabrication do
@@ -752,6 +1043,14 @@ Procedure XmlExportBook(Livre: String; Langue: String);
               XmlContent.Add(XmlLigneLangue(ConstXmlExplanation, Langue, PFabrication.Description));
               XmlContent.Add(XmlLigneLangue(ConstXmlShort, Langue, PFabrication.Resume));
               XmlContent.Add(XmlLigne(ConstXmlMax, PFabrication.Maximum));
+              if PFabrication.PorteeBonus <> 0 then
+                XmlContent.Add(XmlLigne(ConstXmlFabPortee, IntToStr(PFabrication.PorteeBonus)));
+              if PFabrication.QualitesArme <> '' then
+                XmlContent.Add(XmlLigne(ConstXmlFabQualiteArme, PFabrication.QualitesArme));
+              if PFabrication.ArmeAlternative <> '' then
+                XmlContent.Add(XmlLigne(ConstXmlFabArmeAlternative, PFabrication.ArmeAlternative));
+              if PFabrication.Applique <> '' then
+                XmlContent.Add(XmlLigne(ConstXmlFabApplique, PFabrication.Applique));
               XmlContent.Add(XmlLigne(ConstXmlPositifNegatif, PFabrication.TypeQualite));
 
               XmlContent.Add(XmlFinCode(ConstXmlFabrication));
@@ -816,12 +1115,13 @@ Procedure XmlExportBook(Livre: String; Langue: String);
     end;
   end;
 
-Procedure XmlImport(FileName: String; OnlyPrimary: Boolean; OnlyCode: Boolean);
+Procedure XmlImport(FileName: String; OnlyPrimary: Boolean; OnlyCode: Boolean; CheminComplet: String = '');
   var
     XMLDoc:                   TXMLDocument;
     BookNode:                 TDOMNode;
     Livre:                    String;
     CodeLivre:                String;
+    QuantiteAttr:             String;
     NodeNv1:                  TDOMNode;
     NodeNv2:                  TDOMNode;
     NodeNv3:                  TDOMNode;
@@ -832,7 +1132,15 @@ Procedure XmlImport(FileName: String; OnlyPrimary: Boolean; OnlyCode: Boolean);
     PTalent:                  StructureTalent;
     PTalentCreation:          StructureTalentCreation;
     PRace:                    StructureRace;
+    IndRaceExistante:         Integer;
+    IndBoucleRace:            Integer;
+    PEspece:                  StructureEspece;
+    PNation:                  StructureNation;
+    PRegle:                   StructureRegle;
+    PRegleMetier:             StructureRegleMetier;
     PRaceAttribut:            StructureRaceAttribut;
+    PRacePhysique:            StructureRacePhysique;
+    PRaceCouleur:             StructureRaceCouleur;
     PRaceCompetence:          StructureRaceCompetence;
     PRaceTalent:              StructureRaceTalent;
     PRaceMetier:              StructureRaceMetier;
@@ -844,10 +1152,30 @@ Procedure XmlImport(FileName: String; OnlyPrimary: Boolean; OnlyCode: Boolean);
     PMetiercompetence:        StructureMetierCompetence;
     PMetierEquipement:        StructureMetierEquipement;
     PArme:                    StructureArme;
+    PArmeModificateur:        StructureModificateur;
     PArmeBonus:               StructureArmeBonus;
     PArmure:                  StructureArmure;
+    PTrapping:                StructureTrapping;
     PArmureBonus:             StructureArmureBonus;
+    PArmureBonusModificateur: StructureModificateur;
+    PFabricationModificateur: StructureModificateur;
+    PArmureBonusTalent:       StructureArmureBonusTalent;
     PSort:                    StructureSort;
+    PSortTalent:              StructureSortTalent;
+    PTrait:                   StructureTrait;
+    PTraitOption:             StructureTraitOption;
+    PCareerBonus:             StructureCareerBonus;
+    PCareerBonusNiveau:       StructureCareerBonusNiveau;
+    PCareerAdaptation:        StructureCareerAdaptation;
+    PCareerAdaptationLigne:   StructureCareerAdaptationLigne;
+    NodeAdapt:                TDOMNode;
+    PCareerBonusModificateur:    StructureModificateur;
+    TempCareerBonusModificateur: TListModificateur;
+    PCareerBonusSpecialRule:    StructureCareerBonusSpecialRule;
+    TempCareerBonusSpecialRule: TListCareerBonusSpecialRule;
+    IndTempModif:             Integer;
+    TempAdaptationLignes:     TListCareerAdaptationLigne;
+    NivAdapt:                 Integer;
     PFabrication:             StructureFabrication;
     PMetierRaceChoixMetier:   StructureMetierRaceChoixMetier;
     PMetierSousMetier:        StructureMetierSousMetier;
@@ -857,25 +1185,51 @@ Procedure XmlImport(FileName: String; OnlyPrimary: Boolean; OnlyCode: Boolean);
     PTexte:                   StructureTexte;
     PCompetenceMere:          StructureCompetence;
     PTraduction:              StructureTraduction;
+    PTraductionCouleur:       StructureTraduction;
+    PTraductionOption:        StructureTraduction;
     PTraductionNv2:           StructureTraduction;
     PArmureSimplifiee:        StructureArmureSimplifiee;
     PRaceCorruptionCreation:  StructureRaceCorruptionCreation;
-    PTalentAttributModif:     StructureTalentAttributModif;
+    PCorruptionTable:         StructureCorruptionTable;
+    PCorruptionChance:        StructureCorruptionChance;
+    PTalentEffet:             StructureTalentEffet;
     PTalentCompetenceModif:   StructureTalentCompetenceModif;
     PTalentCompetenceAjoute:  StructureTalentCompetenceAjoute;
+    PTalentModificateur:      StructureModificateur;
+    PArmureBonusModif:        StructureArmureBonusModif;
+    PCorruptionModificateur:    StructureModificateur;
+    PCorruptionCompetenceAttributModif: StructureCorruptionCompetenceAttributModif;
+    PCorruptionTalent:         StructureCorruptionTalent;
+    PCorruptionEquipement:     StructureCorruptionEquipement;
     PLivre:                   StructureLivre;
+    PRaceOpinion:             StructureRaceOpinion;  // ✨ NOUVEAU
     Langue:                   String;
     LangueNv2:                String;
     LangueDef:                String;
     Version:                  String;
     Officiel:                 Integer;
     Complet:                  Integer = 1;
+    Disclaimer:               String = '';
   begin
     LivreNbMetier := 0;
     LivreNbRace   := 0;
+    LivreNbCompetence := 0;
+    LivreNbTalent     := 0;
+    LivreNbArme       := 0;
+    LivreNbArmure     := 0;
+    LivreNbTrapping   := 0;
+    LivreNbSort       := 0;
+    LivreNbTrait      := 0;
     XMLDoc   := TXMLDocument.Create;
     try
-      ReadXMLFile(XMLDoc, GetCurrentDir + ConstCheminLivre + FileName + '.xml');
+      // CheminComplet permet de lire un fichier hors de ConstCheminLivre (dossier de
+      // l'edition active) - cas de INTERFACE.Xml/INTERFACE_FRANCAIS.Xml, poses directement
+      // sous DATABASE\ pour ne pas etre dupliques entre WFRP4\ et WFRP5\ (13/09/2026,
+      // CONTEXT.md §2.70). Vide (defaut) : comportement inchange pour tous les autres appels.
+      if CheminComplet <> '' then
+        ReadXMLFile(XMLDoc, CheminComplet)
+      else
+        ReadXMLFile(XMLDoc, GetCurrentDir + ConstCheminLivre + FileName + '.xml');
       BookNode := XMLDoc.DocumentElement;
       if Assigned(BookNode) and (BookNode.NodeName = ConstXmlDataBook) then
         Begin
@@ -892,6 +1246,9 @@ Procedure XmlImport(FileName: String; OnlyPrimary: Boolean; OnlyCode: Boolean);
           NodeCode  := BookNode.FindNode(ConstXmlCompletLivre);
           if Assigned(NodeCode) then
             Complet := StrToInt(RemoveQuotes(UTF8Encode(BookNode.FindNode(ConstXmlCompletLivre).TextContent)));
+          NodeCode  := BookNode.FindNode(ConstXmlDisclaimerLivre);
+          if Assigned(NodeCode) then
+            Disclaimer := RemoveQuotes(UTF8Encode(BookNode.FindNode(ConstXmlDisclaimerLivre).TextContent));
           Node      := BookNode.FindNode(ConstXmlLanguage);
           LangueDef := RemoveQuotes(UTF8Encode(Node.TextContent));
 
@@ -904,6 +1261,7 @@ Procedure XmlImport(FileName: String; OnlyPrimary: Boolean; OnlyCode: Boolean);
               PLivre.Version   := Version;
               PLivre.Officiel  := Officiel;
               PLivre.Complet   := Complet;
+              PLivre.Disclaimer:= Disclaimer;
               ListLivre.add(PLivre);
               inc(NbLivre);
             end;
@@ -913,14 +1271,14 @@ Procedure XmlImport(FileName: String; OnlyPrimary: Boolean; OnlyCode: Boolean);
               NodeNv1 := BookNode.FindNode(ConstXmlDataAttribut);
               if Assigned(NodeNv1) then
                 begin
-                  NodeNv2 := NodeNv1.FirstChild;
+                  NodeNv2 := XmlElement(NodeNv1.FirstChild);
                   While Assigned(NodeNv2) do
                     begin
                       PAttribut.Livre          := Livre;
                       PAttribut.CodeAttribut   := RemoveQuotes(UTF8Encode(NodeNv2.Attributes.GetNamedItem(ConstXmlId).NodeValue));
                       PTraduction              := InitTrad(ConstPAttribut, PAttribut.CodeAttribut, '', PAttribut.Livre);
 
-                      Node := NodeNv2.FirstChild;
+                      Node := XmlElement(NodeNv2.FirstChild);
                       while Assigned(Node) do
                         begin
                           case Node.NodeName of
@@ -946,7 +1304,7 @@ Procedure XmlImport(FileName: String; OnlyPrimary: Boolean; OnlyCode: Boolean);
                               PAttribut.OrdreAttribut   := StrToIntDef(RemoveQuotes(UTF8Encode(Node.TextContent)),0);
                           end;
 
-                          Node := Node.NextSibling;
+                          Node := XmlElement(Node.NextSibling);
                         end;
                         if LangueDef = ConstAnglais then
                           begin
@@ -956,7 +1314,7 @@ Procedure XmlImport(FileName: String; OnlyPrimary: Boolean; OnlyCode: Boolean);
 
                         AddTrad(PTraduction, Langue);
 
-                      NodeNv2 := NodeNv2.NextSibling;
+                      NodeNv2 := XmlElement(NodeNv2.NextSibling);
                     end;
                 end;
 
@@ -964,7 +1322,7 @@ Procedure XmlImport(FileName: String; OnlyPrimary: Boolean; OnlyCode: Boolean);
               NodeNv1 := BookNode.FindNode(ConstXmlDataAttributCost);
               if Assigned(NodeNv1) then
                 begin
-                  NodeNv2 := NodeNv1.FirstChild;
+                  NodeNv2 := XmlElement(NodeNv1.FirstChild);
                   While Assigned(NodeNv2) do
                     begin
                       PAttributAugmentation.Livre  := Livre;
@@ -977,7 +1335,7 @@ Procedure XmlImport(FileName: String; OnlyPrimary: Boolean; OnlyCode: Boolean);
                             inc(NbAttributAugmentation);
                           end;
 
-                      NodeNv2 := NodeNv2.NextSibling;
+                      NodeNv2 := XmlElement(NodeNv2.NextSibling);
                     end;
                 end;
 
@@ -985,7 +1343,7 @@ Procedure XmlImport(FileName: String; OnlyPrimary: Boolean; OnlyCode: Boolean);
               NodeNv1 := BookNode.FindNode(ConstXmlDataSkillCost);
               if Assigned(NodeNv1) then
                 begin
-                  NodeNv2 := NodeNv1.FirstChild;
+                  NodeNv2 := XmlElement(NodeNv1.FirstChild);
                   While Assigned(NodeNv2) do
                     begin
                       PCompetenceAugmentation.Livre          := Livre;
@@ -998,7 +1356,7 @@ Procedure XmlImport(FileName: String; OnlyPrimary: Boolean; OnlyCode: Boolean);
                             inc(NbCompetenceAugmentation);
                           end;
 
-                      NodeNv2 := NodeNv2.NextSibling;
+                      NodeNv2 := XmlElement(NodeNv2.NextSibling);
                     end;
                 end;
 
@@ -1006,11 +1364,11 @@ Procedure XmlImport(FileName: String; OnlyPrimary: Boolean; OnlyCode: Boolean);
               NodeNv1 := BookNode.FindNode(ConstXmlDataLabel);
               if Assigned(NodeNv1) then
                 begin
-                  NodeNv2 := NodeNv1.FirstChild;
+                  NodeNv2 := XmlElement(NodeNv1.FirstChild);
                   While Assigned(NodeNv2) do
                     begin
                       Langue                    := RemoveQuotes(UTF8Encode(NodeNv2.Attributes.GetNamedItem(ConstXmlLanguage).NodeValue));
-                      NodeNv3 := NodeNv2.FirstChild;
+                      NodeNv3 := XmlElement(NodeNv2.FirstChild);
                       While Assigned(NodeNv3) do
                         begin
                           PTexte.Code           := RemoveQuotes(UTF8Encode(NodeNv3.Attributes.GetNamedItem(ConstXmlData).NodeValue));
@@ -1027,10 +1385,10 @@ Procedure XmlImport(FileName: String; OnlyPrimary: Boolean; OnlyCode: Boolean);
 
                           AddTrad(PTraduction, Langue);
 
-                          NodeNv3 := NodeNv3.NextSibling;
+                          NodeNv3 := XmlElement(NodeNv3.NextSibling);
                         end;
 
-                      NodeNv2 := NodeNv2.NextSibling;
+                      NodeNv2 := XmlElement(NodeNv2.NextSibling);
                     end;
                 end;
             end;
@@ -1041,14 +1399,14 @@ Procedure XmlImport(FileName: String; OnlyPrimary: Boolean; OnlyCode: Boolean);
               NodeNv1 := BookNode.FindNode(ConstXmlDataSkill);
               if Assigned(NodeNv1) then
                 begin
-                  NodeNv2 := NodeNv1.FirstChild;
+                  NodeNv2 := XmlElement(NodeNv1.FirstChild);
                   While Assigned(NodeNv2) do
                     begin
                       PCompetence.Livre          := Livre;
                       PCompetence.SousCompetence := False;
                       PCompetence.CodeCompetence := RemoveQuotes(UTF8Encode(NodeNv2.Attributes.GetNamedItem(ConstXmlId).NodeValue));
                       PTraduction                := InitTrad(ConstPCompetence, PCompetence.CodeCompetence, '', PCompetence.Livre);
-                      Node := NodeNv2.FirstChild;
+                      Node := XmlElement(NodeNv2.FirstChild);
                       while Assigned(Node) do
                         begin
                           case Node.NodeName of
@@ -1068,18 +1426,19 @@ Procedure XmlImport(FileName: String; OnlyPrimary: Boolean; OnlyCode: Boolean);
                               end;
                           end;
 
-                          Node := Node.NextSibling;
+                          Node := XmlElement(Node.NextSibling);
                         end;
                      if LangueDef = ConstAnglais then
                        begin
                           ListCompetence.add(PCompetence);
                           inc(NbCompetence);
+                          Inc(LivreNbCompetence);
                           inc(NbCompetenceUnique);
                        end;
 
                       AddTrad(PTraduction, Langue);
 
-                      NodeNv2 := NodeNv2.NextSibling;
+                      NodeNv2 := XmlElement(NodeNv2.NextSibling);
                     end;
                 end;
 
@@ -1087,17 +1446,18 @@ Procedure XmlImport(FileName: String; OnlyPrimary: Boolean; OnlyCode: Boolean);
               NodeNv1 := BookNode.FindNode(ConstXmlDataSkillSpe);
               if Assigned(NodeNv1) then
                 begin
-                  NodeNv2 := NodeNv1.FirstChild;
+                  NodeNv2 := XmlElement(NodeNv1.FirstChild);
                   While Assigned(NodeNv2) do
                     begin
                       PCompetence.Livre          := Livre;
                       PCompetence.SousCompetence := True;
                       PCompetence.Description := '';
                       PCompetence.CodeAttribut   := '';
+                      PCompetence.CodeGenerique  := '';
                       PCompetence.CodeCompetence := RemoveQuotes(UTF8Encode(NodeNv2.Attributes.GetNamedItem(ConstXmlId).NodeValue));
                       PTraduction                := InitTrad(ConstPCompetence, PCompetence.CodeCompetence, '', PCompetence.Livre);
 
-                      Node := NodeNv2.FirstChild;
+                      Node := XmlElement(NodeNv2.FirstChild);
                       while Assigned(Node) do
                         begin
                           case Node.NodeName of
@@ -1107,21 +1467,30 @@ Procedure XmlImport(FileName: String; OnlyPrimary: Boolean; OnlyCode: Boolean);
                                 Langue                  := RemoveQuotes(UTF8Encode(Node.Attributes.GetNamedItem(ConstXmlLanguage).NodeValue));
                                 PTraduction.Libelle     := PCompetence.Libelle;
                               end;
+                            ConstXmlGenerique:
+                              PCompetence.CodeGenerique := RemoveQuotes(UTF8Encode(Node.TextContent));
                           end;
 
-                          Node := Node.NextSibling;
+                          Node := XmlElement(Node.NextSibling);
                         end;
-                      PCompetenceMere := ChercheCompetence(ExtractStringBefore(PCompetence.CodeCompetence,ValeurSousCompetence)+ValeurGenerique);
+                      // Lien explicite (CONTEXT.md 2.67) prioritaire sur la deduction par radical -
+                      // seul repli quand le champ <Generique> n'est pas renseigne (donnee pas encore
+                      // migree, ou specialisation sans generique '_*' identifiee, ex. ids combines).
+                      if PCompetence.CodeGenerique <> '' then
+                        PCompetenceMere := ChercheCompetence(PCompetence.CodeGenerique)
+                      else
+                        PCompetenceMere := ChercheCompetence(ExtractStringBefore(PCompetence.CodeCompetence,ValeurSousCompetence)+ValeurGenerique);
                       PCompetence.CodeAttribut := PCompetenceMere.CodeAttribut;
                        if LangueDef = ConstAnglais then
                          begin
                           ListCompetence.add(PCompetence);
                           inc(NbCompetence);
+                          Inc(LivreNbCompetence);
                          end;
 
                       AddTrad(PTraduction, Langue);
 
-                      NodeNv2 := NodeNv2.NextSibling;
+                      NodeNv2 := XmlElement(NodeNv2.NextSibling);
                     end;
                 end;
 
@@ -1129,15 +1498,26 @@ Procedure XmlImport(FileName: String; OnlyPrimary: Boolean; OnlyCode: Boolean);
               NodeNv1 := BookNode.FindNode(ConstXmlDataTalent);
               if Assigned(NodeNv1) then
                 begin
-                  NodeNv2 := NodeNv1.FirstChild;
+                  NodeNv2 := XmlElement(NodeNv1.FirstChild);
                   While Assigned(NodeNv2) do
                     begin
                       PTalent.Livre          := Livre;
                       PTalent.SousTalent     := false;
+                      PTalent.Trait          := false;
+                      PTalent.Magie          := 0;
+                      PTalent.ModeSort       := '';
+                      // Tarif des sorts : remis a zero comme tout le reste de la structure, qui est
+                      // REUTILISEE d'un talent au suivant. Sans cela un talent de magie transmettrait
+                      // sa tarification a tous les talents ordinaires declares apres lui.
+                      PTalent.XpMultiplicateur := 0;
+                      PTalent.XpPlancher       := 0;
+                      PTalent.XpDiviseur       := '';
+                      PTalent.XpOfferts        := '';
+                      PTalent.XpGroupe         := '';
                       PTalent.CodeTalent     := RemoveQuotes(UTF8Encode(NodeNv2.Attributes.GetNamedItem(ConstXmlId).NodeValue));
                       PTraduction            := InitTrad(ConstPTalent, PTalent.CodeTalent, '', PTalent.Livre);
 
-                      Node := NodeNv2.FirstChild;
+                      Node := XmlElement(NodeNv2.FirstChild);
                       while Assigned(Node) do
                         begin
                           case Node.NodeName of
@@ -1167,22 +1547,64 @@ Procedure XmlImport(FileName: String; OnlyPrimary: Boolean; OnlyCode: Boolean);
                               PTalent.MaxiTalent        := RemoveQuotes(UTF8Encode(Node.TextContent));
                             ConstXmlForPdf:
                               PTalent.TalentPdf         := RemoveQuotes(UTF8Encode(Node.TextContent));
+                            ConstXmlTrait:
+                              PTalent.Trait             := (RemoveQuotes(UTF8Encode(Node.TextContent)) = ConstVrai);
+                            ConstXmlMagie:
+                              PTalent.Magie             := StrToIntDef(RemoveQuotes(UTF8Encode(Node.TextContent)), 0);
+                            ConstXmlModeSort:
+                              PTalent.ModeSort          := RemoveQuotes(UTF8Encode(Node.TextContent));
+                            // Tarif des sorts ouverts par ce talent. Lu seulement sur les talents
+                            // GENERIQUES : les specialisations n'en portent pas et le recuperent par
+                            // l'heritage de ChercheTalent, exactement comme Magie et ModeSort.
+                            ConstXmlXpMultiplicateur:
+                              PTalent.XpMultiplicateur  := StrToIntDef(RemoveQuotes(UTF8Encode(Node.TextContent)), 0);
+                            ConstXmlXpPlancher:
+                              PTalent.XpPlancher        := StrToIntDef(RemoveQuotes(UTF8Encode(Node.TextContent)), 0);
+                            ConstXmlXpDiviseur:
+                              PTalent.XpDiviseur        := RemoveQuotes(UTF8Encode(Node.TextContent));
+                            ConstXmlXpOfferts:
+                              PTalent.XpOfferts         := RemoveQuotes(UTF8Encode(Node.TextContent));
+                            ConstXmlXpGroupe:
+                              PTalent.XpGroupe          := RemoveQuotes(UTF8Encode(Node.TextContent));
                             ConstXmlTest:
                               begin
                                 PTalent.Tests           := RemoveQuotes(UTF8Encode(Node.TextContent));
                                 Langue                  := RemoveQuotes(UTF8Encode(Node.Attributes.GetNamedItem(ConstXmlLanguage).NodeValue));
                                 PTraduction.Tests       := PTalent.Tests;
                               end;
+                            // Moteur generique (ChargeModificateur/ChargeTalentModificateur) depuis
+                            // le 11/09/2026 - meme structure que le <Modificateur> ModifySkill,
+                            // remplace l'ancienne ListTalentAttributModif dediee.
                             ConstXmlModifieAttribut:
                               begin
-                                PTalentAttributModif.Livre        := Livre;
-                                PTalentAttributModif.CodeTalent   := PTalent.CodeTalent;
-                                PTalentAttributModif.CodeAttribut := RemoveQuotes(UTF8Encode(Node.Attributes.GetNamedItem(ConstXmlData).NodeValue));
-                                PTalentAttributModif.ValeurDonnee := RemoveQuotes(UTF8Encode(Node.TextContent));
+                                PTalentModificateur.TypeModif  := ConstXmlModifieAttribut;
+                                PTalentModificateur.Cible      := RemoveQuotes(UTF8Encode(Node.Attributes.GetNamedItem(ConstXmlData).NodeValue));
+                                PTalentModificateur.Filtre     := '';
+                                PTalentModificateur.Forme      := ConstFormeEffetAdditif;
+                                PTalentModificateur.Facteur    := StrToIntDef(RemoveQuotes(UTF8Encode(Node.TextContent)), 0);
+                                PTalentModificateur.CodeSource := PTalent.CodeTalent;
+                                PTalentModificateur.Niveau     := 0;
                                 if LangueDef = ConstAnglais then
                                    begin
-                                    ListTalentAttributModif.add(PTalentAttributModif);
-                                    inc(NbTalentAttributModif);
+                                    ListTalentModificateur.add(PTalentModificateur);
+                                    inc(NbTalentModificateur);
+                                   end;
+                              end;
+                            ConstXmlEffetTalent:
+                              begin
+                                PTalentEffet.Livre      := Livre;
+                                PTalentEffet.CodeTalent := PTalent.CodeTalent;
+                                PTalentEffet.Cible      := RemoveQuotes(UTF8Encode(Node.Attributes.GetNamedItem(ConstXmlEffetCible).NodeValue));
+                                PTalentEffet.Forme      := RemoveQuotes(UTF8Encode(Node.Attributes.GetNamedItem(ConstXmlEffetForme).NodeValue));
+                                PTalentEffet.Facteur    := StrToIntDef(RemoveQuotes(UTF8Encode(Node.Attributes.GetNamedItem(ConstXmlEffetFacteur).NodeValue)), 0);
+                                if Assigned(Node.Attributes) and Assigned(Node.Attributes.GetNamedItem(ConstXmlEffetCarac)) then
+                                  PTalentEffet.Carac    := RemoveQuotes(UTF8Encode(Node.Attributes.GetNamedItem(ConstXmlEffetCarac).NodeValue))
+                                else
+                                  PTalentEffet.Carac    := '';
+                                if LangueDef = ConstAnglais then
+                                   begin
+                                    ListTalentEffet.add(PTalentEffet);
+                                    inc(NbTalentEffet);
                                    end;
                               end;
                             ConstXmlModifieCompetence:
@@ -1195,6 +1617,31 @@ Procedure XmlImport(FileName: String; OnlyPrimary: Boolean; OnlyCode: Boolean);
                                    begin
                                     ListTalentCompetenceModif.add(PTalentCompetenceModif);
                                     inc(NbTalentCompetenceModif);
+                                   end;
+                              end;
+                            ConstXmlModificateur:
+                              begin
+                                // Moteur generique "par source" (chargemodificateur.pas) : Type
+                                // porte le mecanisme vise (ModifySkill, ModifyWeapon...), Filtre
+                                // est optionnel (absent pour un bonus de competence simple).
+                                PTalentModificateur.TypeModif  := RemoveQuotes(UTF8Encode(Node.Attributes.GetNamedItem(ConstXmlType).NodeValue));
+                                PTalentModificateur.Cible      := RemoveQuotes(UTF8Encode(Node.Attributes.GetNamedItem(ConstXmlEffetCible).NodeValue));
+                                if Assigned(Node.Attributes) and Assigned(Node.Attributes.GetNamedItem(ConstXmlModificateurFiltre)) then
+                                  PTalentModificateur.Filtre   := RemoveQuotes(UTF8Encode(Node.Attributes.GetNamedItem(ConstXmlModificateurFiltre).NodeValue))
+                                else
+                                  PTalentModificateur.Filtre   := '';
+                                PTalentModificateur.Forme      := ConstFormeEffetAdditif;
+                                PTalentModificateur.Facteur    := StrToIntDef(RemoveQuotes(UTF8Encode(Node.Attributes.GetNamedItem(ConstXmlEffetFacteur).NodeValue)), 0);
+                                PTalentModificateur.CodeSource := PTalent.CodeTalent;
+                                // Niveau n'a de sens que pour un palier de CareerBonus (voir
+                                // ChargeCareerBonusModificateur) - un Talent l'ignore, mais le
+                                // champ doit etre initialise explicitement (record local,
+                                // sinon valeur residuelle du tour de boucle precedent).
+                                PTalentModificateur.Niveau     := 0;
+                                if LangueDef = ConstAnglais then
+                                   begin
+                                    ListTalentModificateur.add(PTalentModificateur);
+                                    inc(NbTalentModificateur);
                                    end;
                               end;
                             ConstXmlAjouteCompetence:
@@ -1210,18 +1657,19 @@ Procedure XmlImport(FileName: String; OnlyPrimary: Boolean; OnlyCode: Boolean);
                               end;
                           end;
 
-                          Node := Node.NextSibling;
+                          Node := XmlElement(Node.NextSibling);
                         end;
                        if LangueDef = ConstAnglais then
                          begin
                           ListTalent.add(PTalent);
                           inc(NbTalent);
+                          Inc(LivreNbTalent);
                           inc(NbTalentUnique);
                          end;
 
                       AddTrad(PTraduction, Langue);
 
-                      NodeNv2 := NodeNv2.NextSibling;
+                      NodeNv2 := XmlElement(NodeNv2.NextSibling);
                     end;
                 end;
 
@@ -1229,11 +1677,22 @@ Procedure XmlImport(FileName: String; OnlyPrimary: Boolean; OnlyCode: Boolean);
               NodeNv1 := BookNode.FindNode(ConstXmlDataTalentSpe);
               if Assigned(NodeNv1) then
                 begin
-                  NodeNv2 := NodeNv1.FirstChild;
+                  NodeNv2 := XmlElement(NodeNv1.FirstChild);
                   While Assigned(NodeNv2) do
                     begin
                       PTalent.Livre             := Livre;
                       PTalent.SousTalent        := True;
+                      PTalent.Trait             := false;
+                      PTalent.Magie             := 0;
+                      PTalent.ModeSort          := '';
+                      // Une specialisation ne porte jamais de tarif : elle le recupere de sa
+                      // famille generique via ChercheTalent. Remise a zero pour la meme raison
+                      // que Magie et ModeSort juste au-dessus - la structure est reutilisee.
+                      PTalent.XpMultiplicateur  := 0;
+                      PTalent.XpPlancher        := 0;
+                      PTalent.XpDiviseur        := '';
+                      PTalent.XpOfferts         := '';
+                      PTalent.XpGroupe          := '';
                       PTalent.Description       := '';
 
                       PTalent.Attribut          := '';
@@ -1243,10 +1702,11 @@ Procedure XmlImport(FileName: String; OnlyPrimary: Boolean; OnlyCode: Boolean);
                       PTalent.MaxiTalent        := '';
                       PTalent.TalentPdf         := '';
                       PTalent.Tests             := '';
+                      PTalent.CodeGenerique     := '';
                       PTalent.CodeTalent        := RemoveQuotes(UTF8Encode(NodeNv2.Attributes.GetNamedItem(ConstXmlId).NodeValue));
                       PTraduction               := InitTrad(ConstPTalent, PTalent.CodeTalent, '', PTalent.Livre);
 
-                      Node := NodeNv2.FirstChild;
+                      Node := XmlElement(NodeNv2.FirstChild);
                       while Assigned(Node) do
                         begin
                           case Node.NodeName of
@@ -1256,19 +1716,25 @@ Procedure XmlImport(FileName: String; OnlyPrimary: Boolean; OnlyCode: Boolean);
                               Langue              := RemoveQuotes(UTF8Encode(Node.Attributes.GetNamedItem(ConstXmlLanguage).NodeValue));
                               PTraduction.Libelle := PTalent.Libelle;
                               end;
+                            // une specialisation de trait reste un trait (ex. Immunity (Poison))
+                            ConstXmlTrait:
+                              PTalent.Trait       := (RemoveQuotes(UTF8Encode(Node.TextContent)) = ConstVrai);
+                            ConstXmlGenerique:
+                              PTalent.CodeGenerique := RemoveQuotes(UTF8Encode(Node.TextContent));
                           end;
 
-                          Node := Node.NextSibling;
+                          Node := XmlElement(Node.NextSibling);
                         end;
                        if LangueDef = ConstAnglais then
                          begin
                           ListTalent.add(PTalent);
                           inc(NbTalent);
+                          Inc(LivreNbTalent);
                          end;
 
                       AddTrad(PTraduction, Langue);
 
-                      NodeNv2 := NodeNv2.NextSibling;
+                      NodeNv2 := XmlElement(NodeNv2.NextSibling);
                     end;
                 end;
 
@@ -1276,13 +1742,13 @@ Procedure XmlImport(FileName: String; OnlyPrimary: Boolean; OnlyCode: Boolean);
               NodeNv1 := BookNode.FindNode(ConstXmlDataRandomTalent);
               if Assigned(NodeNv1) then
                 begin
-                  NodeNv2 := NodeNv1.FirstChild;
+                  NodeNv2 := XmlElement(NodeNv1.FirstChild);
                   While Assigned(NodeNv2) do
                     begin
                       PTalentCreation.Livre      := Livre;
                       PTalentCreation.CodeTalent := RemoveQuotes(UTF8Encode(NodeNv2.Attributes.GetNamedItem(ConstXmlId).NodeValue));
 
-                      Node := NodeNv2.FirstChild;
+                      Node := XmlElement(NodeNv2.FirstChild);
                       while Assigned(Node) do
                         begin
                           case Node.NodeName of
@@ -1292,7 +1758,7 @@ Procedure XmlImport(FileName: String; OnlyPrimary: Boolean; OnlyCode: Boolean);
                               PTalentCreation.Chance     := RemoveQuotes(UTF8Encode(Node.TextContent));
                           end;
 
-                          Node := Node.NextSibling;
+                          Node := XmlElement(Node.NextSibling);
                         end;
                        if LangueDef = ConstAnglais then
                          begin
@@ -1300,7 +1766,98 @@ Procedure XmlImport(FileName: String; OnlyPrimary: Boolean; OnlyCode: Boolean);
                           inc(NbTalentCreation);
                          end;
 
-                      NodeNv2 := NodeNv2.NextSibling;
+                      NodeNv2 := XmlElement(NodeNv2.NextSibling);
+                    end;
+                end;
+
+              // Espece (RACE générique regroupant plusieurs ethnies - voir ChargeEspece.pas
+              // pour le vocabulaire : ici <Race>, alors que <Specie> plus bas = ethnie)
+              NodeNv1 := BookNode.FindNode(ConstXmlDataEspece);
+              if Assigned(NodeNv1) then
+                begin
+                  NodeNv2 := XmlElement(NodeNv1.FirstChild);
+                  While Assigned(NodeNv2) do
+                    begin
+                      if NodeNv2.NodeName = ConstXmlEspece then
+                       begin
+                      PEspece.Livre      := Livre;
+                      PEspece.Libelle    := '';
+                      // Record local reutilise d'une race a l'autre : sans remise a zero,
+                      // une race sans balise heriterait du dossier de la precedente.
+                      PEspece.DossierNiveau := '';
+                      PEspece.CodeEspece := RemoveQuotes(UTF8Encode(NodeNv2.Attributes.GetNamedItem(ConstXmlId).NodeValue));
+                      PTraduction        := InitTrad(ConstPEspece, PEspece.CodeEspece, '', PEspece.Livre);
+
+                      Node := XmlElement(NodeNv2.FirstChild);
+                      while Assigned(Node) do
+                        begin
+                          case Node.NodeName of
+                            ConstXmlDescription:
+                              begin
+                                PEspece.Libelle     := RemoveQuotes(UTF8Encode(Node.TextContent));
+                                Langue              := RemoveQuotes(UTF8Encode(Node.Attributes.GetNamedItem(ConstXmlLanguage).NodeValue));
+                                PTraduction.Libelle := PEspece.Libelle;
+                              end;
+                            ConstXmlPictureLevel:
+                              PEspece.DossierNiveau := RemoveQuotes(UTF8Encode(Node.TextContent));
+                          end;
+
+                          Node := XmlElement(Node.NextSibling);
+                        end;
+
+                      if LangueDef = ConstAnglais then
+                        begin
+                          ListEspece.add(PEspece);
+                          inc(NbEspece);
+                        end;
+
+                      AddTrad(PTraduction, Langue);
+                       end;
+
+                      NodeNv2 := XmlElement(NodeNv2.NextSibling);
+                    end;
+                end;
+
+              // Nation (bloc DATA_NATION : regroupement POLITIQUE des ethnies, distinct
+              // de DATA_RACE juste au-dessus qui est biologique. CONTEXT.md 2.51.)
+              NodeNv1 := BookNode.FindNode(ConstXmlDataNation);
+              if Assigned(NodeNv1) then
+                begin
+                  NodeNv2 := XmlElement(NodeNv1.FirstChild);
+                  While Assigned(NodeNv2) do
+                    begin
+                      if NodeNv2.NodeName = ConstXmlNation then
+                       begin
+                      PNation.Livre      := Livre;
+                      PNation.Libelle    := '';
+                      PNation.CodeNation := RemoveQuotes(UTF8Encode(NodeNv2.Attributes.GetNamedItem(ConstXmlId).NodeValue));
+                      PTraduction        := InitTrad(ConstPNation, PNation.CodeNation, '', PNation.Livre);
+
+                      Node := XmlElement(NodeNv2.FirstChild);
+                      while Assigned(Node) do
+                        begin
+                          case Node.NodeName of
+                            ConstXmlDescription:
+                              begin
+                                PNation.Libelle     := RemoveQuotes(UTF8Encode(Node.TextContent));
+                                Langue              := RemoveQuotes(UTF8Encode(Node.Attributes.GetNamedItem(ConstXmlLanguage).NodeValue));
+                                PTraduction.Libelle := PNation.Libelle;
+                              end;
+                          end;
+
+                          Node := XmlElement(Node.NextSibling);
+                        end;
+
+                      if LangueDef = ConstAnglais then
+                        begin
+                          ListNation.add(PNation);
+                          inc(NbNation);
+                        end;
+
+                      AddTrad(PTraduction, Langue);
+                       end;
+
+                      NodeNv2 := XmlElement(NodeNv2.NextSibling);
                     end;
                 end;
 
@@ -1308,16 +1865,25 @@ Procedure XmlImport(FileName: String; OnlyPrimary: Boolean; OnlyCode: Boolean);
               NodeNv1 := BookNode.FindNode(ConstXmlDataSpecie);
               if Assigned(NodeNv1) then
                 begin
-                  NodeNv2 := NodeNv1.FirstChild;
+                  NodeNv2 := XmlElement(NodeNv1.FirstChild);
                   While Assigned(NodeNv2) do
                     begin
                       PRace.Livre    := Livre;
                       PRace.CodeRace := RemoveQuotes(UTF8Encode(NodeNv2.Attributes.GetNamedItem(ConstXmlId).NodeValue));
                       PRace.Point3   := 3;
                       PRace.Point5   := 5;
+                      PRace.NbPoint3 := 3;
+                      PRace.NbPoint5 := 3;
+                      // Record local reutilise d'une ethnie a l'autre : sans cette remise
+                      // a zero, une ethnie sans balise <PictureLevel> heriterait du dossier
+                      // de la precedente (meme piege que les fonctions Cherche*, cf 2.17).
+                      PRace.DossierNiveau := '';
+                      // Meme remise a zero pour Nation : balise FACULTATIVE, la plupart des
+                      // ethnies n'en portent aucune. CONTEXT.md 2.51.
+                      PRace.Nation := '';
                       PTraduction    := InitTrad(ConstPRace, PRace.CodeRace, '', PRace.Livre);
 
-                      NodeNv3 := NodeNv2.FirstChild;
+                      NodeNv3 := XmlElement(NodeNv2.FirstChild);
                       while Assigned(NodeNv3) do
                         begin
                           case NodeNv3.NodeName of
@@ -1333,11 +1899,19 @@ Procedure XmlImport(FileName: String; OnlyPrimary: Boolean; OnlyCode: Boolean);
                                 Langue                  := RemoveQuotes(UTF8Encode(NodeNv3.Attributes.GetNamedItem(ConstXmlLanguage).NodeValue));
                                 PTraduction.Description := PRace.Description;
                               end;
+                            ConstXmlNbSkill5:
+                              PRace.NbPoint5 := StrToIntDef(RemoveQuotes(UTF8Encode(NodeNv3.TextContent)), 3);
+                            ConstXmlNbSkill3:
+                              PRace.NbPoint3 := StrToIntDef(RemoveQuotes(UTF8Encode(NodeNv3.TextContent)), 3);
+                            ConstXmlPictureLevel:
+                              PRace.DossierNiveau       := RemoveQuotes(UTF8Encode(NodeNv3.TextContent));
                             ConstXmlEthnic:
                               PRace.Espece              := RemoveQuotes(UTF8Encode(NodeNv3.TextContent));
+                            ConstXmlNationality:
+                              PRace.Nation              := RemoveQuotes(UTF8Encode(NodeNv3.TextContent));
                             ConstXmlSousChapitreCarac:
                               begin
-                                Node := NodeNv3.FirstChild;
+                                Node := XmlElement(NodeNv3.FirstChild);
                                 while Assigned(Node) do
                                   begin
                                     case Node.NodeName of
@@ -1354,12 +1928,58 @@ Procedure XmlImport(FileName: String; OnlyPrimary: Boolean; OnlyCode: Boolean);
                                               end;
                                          end;
                                     end;
-                                    Node := Node.NextSibling;
+                                    Node := XmlElement(Node.NextSibling);
+                                  end;
+                              end;
+                            ConstXmlSousChapitrePhysique:
+                              begin
+                                PRacePhysique                := Default(StructureRacePhysique);
+                                PRacePhysique.Livre          := Livre;
+                                PRacePhysique.CodeRace       := PRace.CodeRace;
+                                PRacePhysique.NbTirageYeux   := 1;
+                                Node := XmlElement(NodeNv3.FirstChild);
+                                while Assigned(Node) do
+                                  begin
+                                    case Node.NodeName of
+                                      ConstXmlAge:
+                                        PRacePhysique.FormuleAge     := RemoveQuotes(UTF8Encode(Node.TextContent));
+                                      ConstXmlHeight:
+                                        PRacePhysique.FormuleTaille  := RemoveQuotes(UTF8Encode(Node.TextContent));
+                                      ConstXmlPhysTailleExplose:
+                                        PRacePhysique.TailleExplose  := RemoveQuotes(UTF8Encode(Node.TextContent)) = ConstVrai;
+                                      ConstXmlPhysNbTirageYeux:
+                                        PRacePhysique.NbTirageYeux   := StrToIntDef(RemoveQuotes(UTF8Encode(Node.TextContent)), 1);
+                                      ConstXmlPhysYeux, ConstXmlPhysCheveux:
+                                        begin
+                                          PRaceCouleur.Livre    := Livre;
+                                          PRaceCouleur.CodeRace := PRace.CodeRace;
+                                          PRaceCouleur.EstYeux  := Node.NodeName = ConstXmlPhysYeux;
+                                          PRaceCouleur.Libelle  := RemoveQuotes(UTF8Encode(Node.Attributes.GetNamedItem(ConstXmlData).NodeValue));
+                                          PRaceCouleur.Plage    := RemoveQuotes(UTF8Encode(Node.TextContent));
+                                          if LangueDef = ConstAnglais then
+                                            begin
+                                              ListRaceCouleur.Add(PRaceCouleur);
+                                              Inc(NbRaceCouleur);
+                                            end;
+                                          // La couleur n'a pas de code : la plage 2d10 l'identifie dans
+                                          // son ethnie (voir Traduit, ConstPRaceCouleur).
+                                          PTraductionCouleur         := InitTrad(ConstPRaceCouleur, PRace.CodeRace,
+                                            IfThen(PRaceCouleur.EstYeux, 'Y', 'H') + '|' + PRaceCouleur.Plage, Livre);
+                                          PTraductionCouleur.Libelle := PRaceCouleur.Libelle;
+                                          AddTrad(PTraductionCouleur, LangueDef);
+                                        end;
+                                    end;
+                                    Node := XmlElement(Node.NextSibling);
+                                  end;
+                                if LangueDef = ConstAnglais then
+                                  begin
+                                    ListRacePhysique.Add(PRacePhysique);
+                                    Inc(NbRacePhysique);
                                   end;
                               end;
                             ConstXmlSousChapitreCompetence:
                               begin
-                                Node := NodeNv3.FirstChild;
+                                Node := XmlElement(NodeNv3.FirstChild);
                                 while Assigned(Node) do
                                   begin
                                     case Node.NodeName of
@@ -1375,12 +1995,12 @@ Procedure XmlImport(FileName: String; OnlyPrimary: Boolean; OnlyCode: Boolean);
                                               end;
                                          end;
                                     end;
-                                    Node := Node.NextSibling;
+                                    Node := XmlElement(Node.NextSibling);
                                   end;
                               end;
                             ConstXmlSousChapitreTalent:
                               begin
-                                Node := NodeNv3.FirstChild;
+                                Node := XmlElement(NodeNv3.FirstChild);
                                 while Assigned(Node) do
                                   begin
                                     case Node.NodeName of
@@ -1396,12 +2016,12 @@ Procedure XmlImport(FileName: String; OnlyPrimary: Boolean; OnlyCode: Boolean);
                                               end;
                                          end;
                                     end;
-                                    Node := Node.NextSibling;
+                                    Node := XmlElement(Node.NextSibling);
                                   end;
                               end;
                             ConstXmlSousChapitreMetier:
                               begin
-                                Node := NodeNv3.FirstChild;
+                                Node := XmlElement(NodeNv3.FirstChild);
                                 while Assigned(Node) do
                                   begin
                                     case Node.NodeName of
@@ -1418,12 +2038,12 @@ Procedure XmlImport(FileName: String; OnlyPrimary: Boolean; OnlyCode: Boolean);
                                               end;
                                          end;
                                     end;
-                                    Node := Node.NextSibling;
+                                    Node := XmlElement(Node.NextSibling);
                                   end;
                               end;
                             ConstXmlOpinions:  // ✨ NOUVEAU - Traiter les opinions
                               begin
-                                Node := NodeNv3.FirstChild;
+                                Node := XmlElement(NodeNv3.FirstChild);
                                 while Assigned(Node) do
                                   begin
                                     case Node.NodeName of
@@ -1441,24 +2061,60 @@ Procedure XmlImport(FileName: String; OnlyPrimary: Boolean; OnlyCode: Boolean);
                                               end;
                                          end;
                                     end;
-                                    Node := Node.NextSibling;
+                                    Node := XmlElement(Node.NextSibling);
                                   end;
                               end;
 
                           end;
 
-                          NodeNv3 := NodeNv3.NextSibling;
+                          NodeNv3 := XmlElement(NodeNv3.NextSibling);
                         end;
                        if LangueDef = ConstAnglais then
                          begin
-                          ListRace.add(PRace);
-                          inc(NbRace);
-                          Inc(LivreNbrace);
+                          // Ne pas recréer une ligne de race si ce CodeRace existe déjà ET
+                          // porte déjà un libellé (cas d'un livre qui ne fait qu'ajouter des
+                          // données - ex. SUBCHAPTER_CAREER - sur une race définie ailleurs,
+                          // sans redéclarer Description/SUBCHAPTER_ATTR/etc.)
+                          //
+                          // L'ordre de chargement des livres n'est PAS garanti (CONTEXT.md
+                          // §2.9) : si le livre qui pose un stub minimal (juste l'id +
+                          // SUBCHAPTER_CAREER, cas ci-dessus) se charge AVANT celui qui
+                          // définit vraiment la race, ChercheRace() trouverait ce stub et la
+                          // vraie définition (Libelle/Description/etc.) serait perdue pour
+                          // toujours si on se contentait de sauter l'ajout. On remplace donc
+                          // un stub (Libelle vide) par la définition complète dès qu'elle
+                          // arrive, quel que soit l'ordre - releve le 14/09/2026 en ajoutant
+                          // le rattachement Norsca/Tilee des carrieres Nations of Mankind.
+                          IndRaceExistante := -1;
+                          For IndBoucleRace := 0 to ListRace.Count - 1 do
+                            if ListRace[IndBoucleRace].CodeRace = PRace.CodeRace then
+                              begin
+                                IndRaceExistante := IndBoucleRace;
+                                break;
+                              end;
+                          if IndRaceExistante < 0 then
+                            begin
+                             ListRace.add(PRace);
+                             inc(NbRace);
+                             Inc(LivreNbrace);
+                            end
+                          else if (ListRace[IndRaceExistante].Libelle = '') and (PRace.Libelle <> '') then
+                            ListRace[IndRaceExistante] := PRace;
                          end;
 
-                      AddTrad(PTraduction, Langue);
+                      // Un stub (juste l'id + SUBCHAPTER_CAREER, race definie dans un
+                      // autre livre) n'a pas de Libelle a traduire : l'enregistrer ici
+                      // ecrirait une entree ListTraduction avec un Libelle vide qui,
+                      // rappliquee au prochain Traduit(ConstAnglais, ...) (ex. retour a
+                      // l'anglais apres un changement de langue), effacerait le vrai
+                      // libelle/description de la race chargee par son livre d'origine -
+                      // CompareRechercheValeur matche sur le seul CodeRace, sans notion
+                      // d'ordre de chargement. Releve le 14/09/2026 avec le rattachement
+                      // Norsca/Tilee des carrieres Nations of Mankind.
+                      if PRace.Libelle <> '' then
+                        AddTrad(PTraduction, Langue);
 
-                      NodeNv2 := NodeNv2.NextSibling;
+                      NodeNv2 := XmlElement(NodeNv2.NextSibling);
                     end;
                 end;
 
@@ -1466,7 +2122,7 @@ Procedure XmlImport(FileName: String; OnlyPrimary: Boolean; OnlyCode: Boolean);
               NodeNv1 := BookNode.FindNode(ConstXmlDataSpecieCreation);
               if Assigned(NodeNv1) then
                 begin
-                  NodeNv2 := NodeNv1.FirstChild;
+                  NodeNv2 := XmlElement(NodeNv1.FirstChild);
                   While Assigned(NodeNv2) do
                     begin
                       PRaceCreation.Livre    := Livre;
@@ -1479,7 +2135,7 @@ Procedure XmlImport(FileName: String; OnlyPrimary: Boolean; OnlyCode: Boolean);
                           inc(NbRaceCreation);
                          end;
 
-                      NodeNv2 := NodeNv2.NextSibling;
+                      NodeNv2 := XmlElement(NodeNv2.NextSibling);
                     end;
                 end;
 
@@ -1487,14 +2143,17 @@ Procedure XmlImport(FileName: String; OnlyPrimary: Boolean; OnlyCode: Boolean);
               NodeNv1 := BookNode.FindNode(ConstXmlDataCareer);
               if Assigned(NodeNv1) then
                 begin
-                  NodeNv2 := NodeNv1.FirstChild;
+                  NodeNv2 := XmlElement(NodeNv1.FirstChild);
                   While Assigned(NodeNv2) do
                     begin
                       PMetier.Livre      := Livre;
+                      // Meme precaution que pour les ethnies et les races.
+                      PMetier.DossierNiveau := '';
+                      PMetier.MetierParent  := '';
                       PMetier.CodeMetier := RemoveQuotes(UTF8Encode(NodeNv2.Attributes.GetNamedItem(ConstXmlId).NodeValue));
                       PTraduction        := InitTrad(ConstPMetier, PMetier.CodeMetier, '', PMetier.Livre);
 
-                      NodeNv3 := NodeNv2.FirstChild;
+                      NodeNv3 := XmlElement(NodeNv2.FirstChild);
                       while Assigned(NodeNv3) do
                         begin
                           case NodeNv3.NodeName of
@@ -1514,9 +2173,13 @@ Procedure XmlImport(FileName: String; OnlyPrimary: Boolean; OnlyCode: Boolean);
                               PMetier.LibelleGroupe := RemoveQuotes(UTF8Encode(NodeNv3.TextContent));
                             ConstXmlCompetence:
                               PMetier.CodeCompetence:= RemoveQuotes(UTF8Encode(NodeNv3.TextContent));
+                            ConstXmlPictureLevel:
+                              PMetier.DossierNiveau := RemoveQuotes(UTF8Encode(NodeNv3.TextContent));
+                            ConstXmlMetierParent:
+                              PMetier.MetierParent  := RemoveQuotes(UTF8Encode(NodeNv3.TextContent));
                             ConstXmlSousChapitreNiveau:
                               begin
-                                NodeNv4 := NodeNv3.FirstChild;
+                                NodeNv4 := XmlElement(NodeNv3.FirstChild);
                                 while Assigned(NodeNv4) do
                                   begin
                                     case NodeNv4.NodeName of
@@ -1526,7 +2189,7 @@ Procedure XmlImport(FileName: String; OnlyPrimary: Boolean; OnlyCode: Boolean);
                                            PMetierNiveau.Livre        := Livre;
                                            PMetierNiveau.CodeMetier   := PMetier.CodeMetier;
                                            PTraductionNv2             := InitTrad(PMetierNiveau.CodeMetier, IntToStr(PMetierNiveau.NiveauMetier), '', PMetierNiveau.Livre);
-                                           Node := NodeNv4.FirstChild;
+                                           Node := XmlElement(NodeNv4.FirstChild);
                                            while Assigned(Node) do
                                              begin
                                                case Node.NodeName of
@@ -1539,7 +2202,7 @@ Procedure XmlImport(FileName: String; OnlyPrimary: Boolean; OnlyCode: Boolean);
                                                   ConstXmlSalaire:
                                                     PMetierNiveau.SalaireMetier := RemoveQuotes(UTF8Encode(Node.TextContent));
                                                end;
-                                               Node := Node.NextSibling;
+                                               Node := XmlElement(Node.NextSibling);
                                              end;
                                             if LangueDef = ConstAnglais then
                                               begin
@@ -1550,12 +2213,12 @@ Procedure XmlImport(FileName: String; OnlyPrimary: Boolean; OnlyCode: Boolean);
                                            AddTrad(PTraductionNv2, LangueNv2);
                                          end;
                                     end;
-                                    NodeNv4 := NodeNv4.NextSibling;
+                                    NodeNv4 := XmlElement(NodeNv4.NextSibling);
                                   end;
                               end;
                             ConstXmlSousChapitreCarac:
                               begin
-                                Node := NodeNv3.FirstChild;
+                                Node := XmlElement(NodeNv3.FirstChild);
                                 while Assigned(Node) do
                                   begin
                                     case Node.NodeName of
@@ -1572,12 +2235,12 @@ Procedure XmlImport(FileName: String; OnlyPrimary: Boolean; OnlyCode: Boolean);
                                               end;
                                          end;
                                     end;
-                                    Node := Node.NextSibling;
+                                    Node := XmlElement(Node.NextSibling);
                                   end;
                               end;
                             ConstXmlSousChapitreCompetence:
                               begin
-                                Node := NodeNv3.FirstChild;
+                                Node := XmlElement(NodeNv3.FirstChild);
                                 while Assigned(Node) do
                                   begin
                                     case Node.NodeName of
@@ -1594,12 +2257,12 @@ Procedure XmlImport(FileName: String; OnlyPrimary: Boolean; OnlyCode: Boolean);
                                               end;
                                          end;
                                     end;
-                                    Node := Node.NextSibling;
+                                    Node := XmlElement(Node.NextSibling);
                                   end;
                               end;
                             ConstXmlSousChapitreTalent:
                               begin
-                                Node := NodeNv3.FirstChild;
+                                Node := XmlElement(NodeNv3.FirstChild);
                                 while Assigned(Node) do
                                   begin
                                     case Node.NodeName of
@@ -1616,12 +2279,12 @@ Procedure XmlImport(FileName: String; OnlyPrimary: Boolean; OnlyCode: Boolean);
                                               end;
                                          end;
                                     end;
-                                    Node := Node.NextSibling;
+                                    Node := XmlElement(Node.NextSibling);
                                   end;
                               end;
                             ConstXmlSousChapitreEquipement:
                               begin
-                                Node := NodeNv3.FirstChild;
+                                Node := XmlElement(NodeNv3.FirstChild);
                                 while Assigned(Node) do
                                   begin
                                     case Node.NodeName of
@@ -1631,6 +2294,18 @@ Procedure XmlImport(FileName: String; OnlyPrimary: Boolean; OnlyCode: Boolean);
                                            PMetierEquipement.CodeMetier     := PMetier.CodeMetier;
                                            PMetierEquipement.Equipement     := RemoveQuotes(UTF8Encode(Node.Attributes.GetNamedItem(ConstXmlData).NodeValue));
                                            PMetierEquipement.NiveauMetier   := StrToIntDef(RemoveQuotes(UTF8Encode(Node.TextContent)),0);
+                                           // Liste "2/1/1" = une quantite par branche du choix, gardee
+                                           // brute ; un nombre seul reste dans Quantite.
+                                           PMetierEquipement.Quantite       := 1;
+                                           PMetierEquipement.QuantiteListe  := '';
+                                           if Assigned(Node.Attributes.GetNamedItem(ConstXmlEquipementQuantite)) then
+                                             begin
+                                               QuantiteAttr := UTF8Encode(Node.Attributes.GetNamedItem(ConstXmlEquipementQuantite).NodeValue);
+                                               if Pos(SeparateurMulti, QuantiteAttr) > 0 then
+                                                 PMetierEquipement.QuantiteListe := QuantiteAttr
+                                               else
+                                                 PMetierEquipement.Quantite      := StrToIntDef(QuantiteAttr, 1);
+                                             end;
 
                                            if LangueDef = ConstAnglais then
                                              begin
@@ -1640,12 +2315,12 @@ Procedure XmlImport(FileName: String; OnlyPrimary: Boolean; OnlyCode: Boolean);
                                              end;
                                          end;
                                     end;
-                                    Node := Node.NextSibling;
+                                    Node := XmlElement(Node.NextSibling);
                                   end;
                               end;
                             ConstXmlSousChapitreRace:
                               begin
-                                Node := NodeNv3.FirstChild;
+                                Node := XmlElement(NodeNv3.FirstChild);
                                 while Assigned(Node) do
                                   begin
                                     case Node.NodeName of
@@ -1663,12 +2338,12 @@ Procedure XmlImport(FileName: String; OnlyPrimary: Boolean; OnlyCode: Boolean);
                                              end;
                                          end;
                                     end;
-                                    Node := Node.NextSibling;
+                                    Node := XmlElement(Node.NextSibling);
                                   end;
                               end;
                           end;
 
-                          NodeNv3 := NodeNv3.NextSibling;
+                          NodeNv3 := XmlElement(NodeNv3.NextSibling);
                         end;
                       if LangueDef = ConstAnglais then
                         begin
@@ -1679,7 +2354,7 @@ Procedure XmlImport(FileName: String; OnlyPrimary: Boolean; OnlyCode: Boolean);
 
                       AddTrad(PTraduction, Langue);
 
-                      NodeNv2 := NodeNv2.NextSibling;
+                      NodeNv2 := XmlElement(NodeNv2.NextSibling);
                     end;
                 end;
 
@@ -1687,14 +2362,14 @@ Procedure XmlImport(FileName: String; OnlyPrimary: Boolean; OnlyCode: Boolean);
               NodeNv1 := BookNode.FindNode(ConstXmlDataWeapon);
               if Assigned(NodeNv1) then
                 begin
-                  NodeNv2 := NodeNv1.FirstChild;
+                  NodeNv2 := XmlElement(NodeNv1.FirstChild);
                   While Assigned(NodeNv2) do
                     begin
                       PArme.Livre    := Livre;
                       PArme.CodeArme := RemoveQuotes(UTF8Encode(NodeNv2.Attributes.GetNamedItem(ConstXmlId).NodeValue));
                       PTraduction    := InitTrad(ConstPArme, PArme.CodeArme, '', PArme.Livre);
 
-                      Node := NodeNv2.FirstChild;
+                      Node := XmlElement(NodeNv2.FirstChild);
                       while Assigned(Node) do
                         begin
                           case Node.NodeName of
@@ -1722,20 +2397,46 @@ Procedure XmlImport(FileName: String; OnlyPrimary: Boolean; OnlyCode: Boolean);
                               PArme.Portee          := RemoveQuotes(UTF8Encode(Node.TextContent));
                             ConstXmlPrix:
                               PArme.Prix            := RemoveQuotes(UTF8Encode(Node.TextContent));
+                            ConstXmlType:
+                              PArme.TypeArme        := RemoveQuotes(UTF8Encode(Node.TextContent));
+                            // <ModifyCarac name="CODE">VALEUR</ModifyCarac> pose directement sur
+                            // l'arme (rare - arme magique bonifiant un Attribut) - CONTEXT.md 2.50
+                            // etape 3. Pas de pendant ModifySkill pour l'instant (voir
+                            // ChargeArmeModificateur). CodeArme deja connu a ce point de la
+                            // boucle, ajout immediat comme pour ListTalentModificateur (pas
+                            // besoin de differer comme pour un palier de CareerBonus). Moteur
+                            // generique depuis le 11/09/2026, remplace l'ancienne
+                            // ListArmeAttributModif dediee.
+                            ConstXmlModifieAttribut:
+                              begin
+                                PArmeModificateur.TypeModif  := ConstXmlModifieAttribut;
+                                PArmeModificateur.Cible      := RemoveQuotes(UTF8Encode(Node.Attributes.GetNamedItem(ConstXmlData).NodeValue));
+                                PArmeModificateur.Filtre     := '';
+                                PArmeModificateur.Forme      := ConstFormeEffetAdditif;
+                                PArmeModificateur.Facteur    := StrToIntDef(RemoveQuotes(UTF8Encode(Node.TextContent)), 0);
+                                PArmeModificateur.CodeSource := PArme.CodeArme;
+                                PArmeModificateur.Niveau     := 0;
+                                if LangueDef = ConstAnglais then
+                                   begin
+                                    ListArmeModificateur.add(PArmeModificateur);
+                                    inc(NbArmeModificateur);
+                                   end;
+                              end;
                           end;
 
-                          Node := Node.NextSibling;
+                          Node := XmlElement(Node.NextSibling);
                         end;
                       if LangueDef = ConstAnglais then
                         begin
                           ListArme.add(PArme);
                           inc(NbArme);
+                          Inc(LivreNbArme);
                           inc(NbArmeUnique);
                         end;
 
                       AddTrad(PTraduction, Langue);
 
-                      NodeNv2 := NodeNv2.NextSibling;
+                      NodeNv2 := XmlElement(NodeNv2.NextSibling);
                     end;
                 end;
 
@@ -1743,14 +2444,14 @@ Procedure XmlImport(FileName: String; OnlyPrimary: Boolean; OnlyCode: Boolean);
               NodeNv1 := BookNode.FindNode(ConstXmlDataWeaponBonus);
               if Assigned(NodeNv1) then
                 begin
-                  NodeNv2 := NodeNv1.FirstChild;
+                  NodeNv2 := XmlElement(NodeNv1.FirstChild);
                   While Assigned(NodeNv2) do
                     begin
                       PArmeBonus.Livre         := Livre;
                       PArmeBonus.CodeArmeBonus := RemoveQuotes(UTF8Encode(NodeNv2.Attributes.GetNamedItem(ConstXmlId).NodeValue));
                       PTraduction              := InitTrad(ConstPArmeBonus, PArmeBonus.CodeArmeBonus, '', PArmeBonus.livre);
 
-                      Node := NodeNv2.FirstChild;
+                      Node := XmlElement(NodeNv2.FirstChild);
                       while Assigned(Node) do
                         begin
                           case Node.NodeName of
@@ -1776,7 +2477,7 @@ Procedure XmlImport(FileName: String; OnlyPrimary: Boolean; OnlyCode: Boolean);
                               end;
                           end;
 
-                          Node := Node.NextSibling;
+                          Node := XmlElement(Node.NextSibling);
                         end;
                       if LangueDef = ConstAnglais then
                         begin
@@ -1786,7 +2487,7 @@ Procedure XmlImport(FileName: String; OnlyPrimary: Boolean; OnlyCode: Boolean);
 
                       AddTrad(PTraduction, Langue);
 
-                      NodeNv2 := NodeNv2.NextSibling;
+                      NodeNv2 := XmlElement(NodeNv2.NextSibling);
                     end;
                 end;
 
@@ -1794,14 +2495,14 @@ Procedure XmlImport(FileName: String; OnlyPrimary: Boolean; OnlyCode: Boolean);
               NodeNv1 := BookNode.FindNode(ConstXmlDataArmorSimplified);
               if Assigned(NodeNv1) then
                 begin
-                  NodeNv2 := NodeNv1.FirstChild;
+                  NodeNv2 := XmlElement(NodeNv1.FirstChild);
                   While Assigned(NodeNv2) do
                     begin
                       PArmureSimplifiee.Livre      := Livre;
                       PArmureSimplifiee.CodeArmure := RemoveQuotes(UTF8Encode(NodeNv2.Attributes.GetNamedItem(ConstXmlId).NodeValue));
                       PTraduction                  := InitTrad(ConstPArmureSimplifiee, PArmureSimplifiee.CodeArmure, '', PArmureSimplifiee.Livre);
 
-                      Node := NodeNv2.FirstChild;
+                      Node := XmlElement(NodeNv2.FirstChild);
                       while Assigned(Node) do
                         begin
                           case Node.NodeName of
@@ -1823,7 +2524,7 @@ Procedure XmlImport(FileName: String; OnlyPrimary: Boolean; OnlyCode: Boolean);
                               PArmureSimplifiee.ListeBonus      := RemoveQuotes(UTF8Encode(Node.TextContent));
                           end;
 
-                          Node := Node.NextSibling;
+                          Node := XmlElement(Node.NextSibling);
                         end;
                       if LangueDef = ConstAnglais then
                         begin
@@ -1833,7 +2534,7 @@ Procedure XmlImport(FileName: String; OnlyPrimary: Boolean; OnlyCode: Boolean);
 
                       AddTrad(PTraduction, Langue);
 
-                      NodeNv2 := NodeNv2.NextSibling;
+                      NodeNv2 := XmlElement(NodeNv2.NextSibling);
                     end;
                 end;
 
@@ -1841,14 +2542,14 @@ Procedure XmlImport(FileName: String; OnlyPrimary: Boolean; OnlyCode: Boolean);
               NodeNv1 := BookNode.FindNode(ConstXmlDataArmor);
               if Assigned(NodeNv1) then
                 begin
-                  NodeNv2 := NodeNv1.FirstChild;
+                  NodeNv2 := XmlElement(NodeNv1.FirstChild);
                   While Assigned(NodeNv2) do
                     begin
                       PArmure.Livre      := Livre;
                       PArmure.CodeArmure := RemoveQuotes(UTF8Encode(NodeNv2.Attributes.GetNamedItem(ConstXmlId).NodeValue));
                       PTraduction        := InitTrad(ConstPArmure, PArmure.CodeArmure, '', PArmure.Livre);
 
-                      Node := NodeNv2.FirstChild;
+                      Node := XmlElement(NodeNv2.FirstChild);
                       while Assigned(Node) do
                         begin
                           case Node.NodeName of
@@ -1874,17 +2575,94 @@ Procedure XmlImport(FileName: String; OnlyPrimary: Boolean; OnlyCode: Boolean);
                               PArmure.ListeBonus      := RemoveQuotes(UTF8Encode(Node.TextContent));
                           end;
 
-                          Node := Node.NextSibling;
+                          Node := XmlElement(Node.NextSibling);
                         end;
                       if LangueDef = ConstAnglais then
                         begin
                           ListArmure.add(PArmure);
                           inc(NbArmure);
+                          Inc(LivreNbArmure);
                         end;
 
                       AddTrad(PTraduction, Langue);
 
-                      NodeNv2 := NodeNv2.NextSibling;
+                      NodeNv2 := XmlElement(NodeNv2.NextSibling);
+                    end;
+                end;
+
+              // Trapping (equipement divers, hors armes/armures)
+              NodeNv1 := BookNode.FindNode(ConstXmlDataTrapping);
+              if Assigned(NodeNv1) then
+                begin
+                  NodeNv2 := XmlElement(NodeNv1.FirstChild);
+                  While Assigned(NodeNv2) do
+                    begin
+                      PTrapping.Livre         := Livre;
+                      PTrapping.CodeTrapping  := RemoveQuotes(UTF8Encode(NodeNv2.Attributes.GetNamedItem(ConstXmlId).NodeValue));
+                      // remis a zero a chaque entree : le tag <Carries> n'existe que sur les
+                      // conteneurs/montures, PTrapping etant reutilise d'un tour de boucle a
+                      // l'autre sans lui la valeur de l'entree precedente resterait collee
+                      PTrapping.Capacite      := 0;
+                      PTrapping.Prix          := '';
+                      PTrapping.Disponibilite := '';
+                      PTrapping.ProfilAnimal  := '';
+                      PTrapping.TraitsAnimal  := '';
+                      PTrapping.ProfilBateau  := '';
+                      PTrapping.ProfilVehicule := '';
+                      PTrapping.Theme         := '';
+                      PTrapping.Acheteur      := '';
+                      PTrapping.Localite      := '';
+                      PTrapping.Saison        := '';
+                      PTraduction             := InitTrad(ConstPTrapping, PTrapping.CodeTrapping, '', PTrapping.Livre);
+
+                      Node := XmlElement(NodeNv2.FirstChild);
+                      while Assigned(Node) do
+                        begin
+                          case Node.NodeName of
+                            ConstXmlDescription:
+                              begin
+                                PTrapping.Libelle     := RemoveQuotes(UTF8Encode(Node.TextContent));
+                                Langue                := RemoveQuotes(UTF8Encode(Node.Attributes.GetNamedItem(ConstXmlLanguage).NodeValue));
+                                PTraduction.Libelle   := PTrapping.Libelle;
+                              end;
+                            ConstXmlDisponibilite:
+                              PTrapping.Disponibilite := RemoveQuotes(UTF8Encode(Node.TextContent));
+                            ConstXmlEncombrement:
+                              PTrapping.Encombrement  := StrToIntDef(RemoveQuotes(UTF8Encode(Node.TextContent)),0);
+                            ConstXmlCapacite:
+                              PTrapping.Capacite      := StrToIntDef(RemoveQuotes(UTF8Encode(Node.TextContent)),0);
+                            ConstXmlProfilAnimal:
+                              PTrapping.ProfilAnimal  := RemoveQuotes(UTF8Encode(Node.TextContent));
+                            ConstXmlTraitsAnimal:
+                              PTrapping.TraitsAnimal  := RemoveQuotes(UTF8Encode(Node.TextContent));
+                            ConstXmlProfilBateau:
+                              PTrapping.ProfilBateau  := RemoveQuotes(UTF8Encode(Node.TextContent));
+                            ConstXmlProfilVehicule:
+                              PTrapping.ProfilVehicule := RemoveQuotes(UTF8Encode(Node.TextContent));
+                            ConstXmlPrix:
+                              PTrapping.Prix          := RemoveQuotes(UTF8Encode(Node.TextContent));
+                              ConstXmlTheme:
+                                PTrapping.Theme         := RemoveQuotes(UTF8Encode(Node.TextContent));
+                            ConstXmlAcheteur:
+                              PTrapping.Acheteur      := RemoveQuotes(UTF8Encode(Node.TextContent));
+                            ConstXmlLocalite:
+                              PTrapping.Localite      := RemoveQuotes(UTF8Encode(Node.TextContent));
+                            ConstXmlSaison:
+                              PTrapping.Saison        := RemoveQuotes(UTF8Encode(Node.TextContent));
+                          end;
+
+                          Node := XmlElement(Node.NextSibling);
+                        end;
+                      if LangueDef = ConstAnglais then
+                        begin
+                          ListTrapping.add(PTrapping);
+                          inc(NbTrapping);
+                          Inc(LivreNbTrapping);
+                        end;
+
+                      AddTrad(PTraduction, Langue);
+
+                      NodeNv2 := XmlElement(NodeNv2.NextSibling);
                     end;
                 end;
 
@@ -1892,14 +2670,20 @@ Procedure XmlImport(FileName: String; OnlyPrimary: Boolean; OnlyCode: Boolean);
               NodeNv1 := BookNode.FindNode(ConstXmlDataArmorBonus);
               if Assigned(NodeNv1) then
                 begin
-                  NodeNv2 := NodeNv1.FirstChild;
+                  NodeNv2 := XmlElement(NodeNv1.FirstChild);
                   While Assigned(NodeNv2) do
                     begin
                       PArmureBonus.Livre           := Livre;
                       PArmureBonus.CodeArmureBonus := RemoveQuotes(UTF8Encode(NodeNv2.Attributes.GetNamedItem(ConstXmlId).NodeValue));
+                      // remis à vide à chaque entrée (corrige le 15/08/2026) : PArmureBonus est
+                      // réutilisée d'un tour de boucle à l'autre, et depuis l'ajout du Modifier
+                      // structuré (name="..."), .Malus n'est plus toujours réécrit par le
+                      // <Modifier> - sans ce reset, une entrée structurée garde le Malus de
+                      // l'entrée précédente lue dans le même livre.
+                      PArmureBonus.Malus            := '';
                       PTraduction                  := InitTrad(ConstPArmureBonus, PArmureBonus.CodeArmureBonus, '', PArmureBonus.Livre);
 
-                      Node := NodeNv2.FirstChild;
+                      Node := XmlElement(NodeNv2.FirstChild);
                       while Assigned(Node) do
                         begin
                           case Node.NodeName of
@@ -1916,10 +2700,63 @@ Procedure XmlImport(FileName: String; OnlyPrimary: Boolean; OnlyCode: Boolean);
                                 PTraduction.Libelle        := PArmureBonus.Libelle;
                               end;
                             ConstXmlPositifNegatif:
-                              PArmureBonus.Malus           := RemoveQuotes(UTF8Encode(Node.TextContent));
+                              begin
+                                if Assigned(Node.Attributes) and Assigned(Node.Attributes.GetNamedItem(ConstXmlData)) then
+                                  begin
+                                    // Modifier structuré, lié à une compétence : <Modifier name="CodeCompetence">Valeur</Modifier>
+                                    // (même convention que <ModifySkill name="..."> pour les talents, voir ConstXmlModifieCompetence)
+                                    PArmureBonusModif.Livre           := Livre;
+                                    PArmureBonusModif.CodeArmureBonus := PArmureBonus.CodeArmureBonus;
+                                    PArmureBonusModif.CodeCompetence  := RemoveQuotes(UTF8Encode(Node.Attributes.GetNamedItem(ConstXmlData).NodeValue));
+                                    PArmureBonusModif.Valeur          := StrToInt(RemoveQuotes(UTF8Encode(Node.TextContent)));
+                                    if LangueDef = ConstAnglais then
+                                       begin
+                                        ListArmureBonusModif.add(PArmureBonusModif);
+                                        inc(NbArmureBonusModif);
+                                       end;
+                                  end
+                                else
+                                  // Modifier texte libre, sans compétence liée (note mécanique type "combinable with Plate") : comportement inchangé
+                                  PArmureBonus.Malus := RemoveQuotes(UTF8Encode(Node.TextContent));
+                              end;
+                            // <ModifyCarac name="CODE">VALEUR</ModifyCarac> - meme convention que
+                            // pour les talents/armes/regiments, distincte du <Modifier name="...">
+                            // historique ci-dessus (qui reste pour la Competence). CONTEXT.md 2.50
+                            // etape 3. Moteur generique depuis le 11/09/2026, remplace l'ancienne
+                            // ListArmureBonusAttributModif dediee.
+                            ConstXmlModifieAttribut:
+                              begin
+                                PArmureBonusModificateur.TypeModif  := ConstXmlModifieAttribut;
+                                PArmureBonusModificateur.Cible      := RemoveQuotes(UTF8Encode(Node.Attributes.GetNamedItem(ConstXmlData).NodeValue));
+                                PArmureBonusModificateur.Filtre     := '';
+                                PArmureBonusModificateur.Forme      := ConstFormeEffetAdditif;
+                                PArmureBonusModificateur.Facteur    := StrToIntDef(RemoveQuotes(UTF8Encode(Node.TextContent)), 0);
+                                PArmureBonusModificateur.CodeSource := PArmureBonus.CodeArmureBonus;
+                                PArmureBonusModificateur.Niveau     := 0;
+                                if LangueDef = ConstAnglais then
+                                   begin
+                                    ListArmureBonusModificateur.add(PArmureBonusModificateur);
+                                    inc(NbArmureBonusModificateur);
+                                   end;
+                              end;
+                            ConstXmlTalent:
+                              begin
+                                // Talent accorde par une qualite d'objet (ex. NATIO-ARMOB_16 "Fear"
+                                // -> RULES-T0049 "Frightening", Skull Trophies), cas par cas dans le
+                                // XML - meme chantier "traits de creature" que ConstXmlTalent sous
+                                // <Corruption> plus haut.
+                                PArmureBonusTalent.Livre           := Livre;
+                                PArmureBonusTalent.CodeArmureBonus := PArmureBonus.CodeArmureBonus;
+                                PArmureBonusTalent.CodeTalent      := RemoveQuotes(UTF8Encode(Node.TextContent));
+                                if LangueDef = ConstAnglais then
+                                   begin
+                                    ListArmureBonusTalent.add(PArmureBonusTalent);
+                                    inc(NbArmureBonusTalent);
+                                   end;
+                              end;
                           end;
 
-                          Node := Node.NextSibling;
+                          Node := XmlElement(Node.NextSibling);
                         end;
                       if LangueDef = ConstAnglais then
                         begin
@@ -1929,7 +2766,7 @@ Procedure XmlImport(FileName: String; OnlyPrimary: Boolean; OnlyCode: Boolean);
 
                       AddTrad(PTraduction, Langue);
 
-                      NodeNv2 := NodeNv2.NextSibling;
+                      NodeNv2 := XmlElement(NodeNv2.NextSibling);
                     end;
                 end;
 
@@ -1937,14 +2774,14 @@ Procedure XmlImport(FileName: String; OnlyPrimary: Boolean; OnlyCode: Boolean);
               NodeNv1 := BookNode.FindNode(ConstXmlDataSpell);
               if Assigned(NodeNv1) then
                 begin
-                  NodeNv2 := NodeNv1.FirstChild;
+                  NodeNv2 := XmlElement(NodeNv1.FirstChild);
                   While Assigned(NodeNv2) do
                     begin
                       PSort.Livre    := Livre;
                       PSort.CodeSort := RemoveQuotes(UTF8Encode(NodeNv2.Attributes.GetNamedItem(ConstXmlId).NodeValue));
                       PTraduction    := InitTrad(ConstPSort, PSort.CodeSort, '', PSort.Livre);
 
-                      Node := NodeNv2.FirstChild;
+                      Node := XmlElement(NodeNv2.FirstChild);
                       while Assigned(Node) do
                         begin
                           case Node.NodeName of
@@ -1974,17 +2811,410 @@ Procedure XmlImport(FileName: String; OnlyPrimary: Boolean; OnlyCode: Boolean);
                               PSort.TypeSort        := RemoveQuotes(UTF8Encode(Node.TextContent));
                           end;
 
-                          Node := Node.NextSibling;
+                          Node := XmlElement(Node.NextSibling);
                         end;
                       if LangueDef = ConstAnglais then
                         begin
                           ListSort.add(PSort);
                           inc(NbSort);
+                          Inc(LivreNbSort);
                         end;
 
                       AddTrad(PTraduction, Langue);
 
-                      NodeNv2 := NodeNv2.NextSibling;
+                      NodeNv2 := XmlElement(NodeNv2.NextSibling);
+                    end;
+                end;
+
+              // Acces aux sorts par talent - bloc ADDITIF, voir CONTEXT.md 2.39.
+              // N'importe quel livre peut porter des lignes pour des sorts d'un AUTRE
+              // livre : c'est tout l'objet du bloc. Rien n'est ecrase, TalentsDuSort
+              // (ChargeSort) concatene ces lignes au champ <Talent> du sort lui-meme.
+              NodeNv1 := BookNode.FindNode(ConstXmlDataSpellTalent);
+              if Assigned(NodeNv1) then
+                begin
+                  NodeNv2 := XmlElement(NodeNv1.FirstChild);
+                  While Assigned(NodeNv2) do
+                    begin
+                      PSortTalent.Livre       := Livre;
+                      PSortTalent.CodeSort    := RemoveQuotes(UTF8Encode(NodeNv2.Attributes.GetNamedItem(ConstXmlId).NodeValue));
+                      PSortTalent.ListeTalent := '';
+
+                      Node := XmlElement(NodeNv2.FirstChild);
+                      while Assigned(Node) do
+                        begin
+                          case Node.NodeName of
+                            ConstXmlTalent:
+                              PSortTalent.ListeTalent := RemoveQuotes(UTF8Encode(Node.TextContent));
+                          end;
+
+                          Node := XmlElement(Node.NextSibling);
+                        end;
+                      if LangueDef = ConstAnglais then
+                        begin
+                          ListSortTalent.add(PSortTalent);
+                          inc(NbSortTalent);
+                        end;
+
+                      NodeNv2 := XmlElement(NodeNv2.NextSibling);
+                    end;
+                end;
+
+              // Traits d'ethnie - bloc de LIVRE, voir CONTEXT.md 2.41. Un Trait porte
+              // N Options, chaque Option porte une liste de talents separee par des
+              // virgules ou les formes A/B et RULES-T* restent valables.
+              NodeNv1 := BookNode.FindNode(ConstXmlDataSpecieTrait);
+              if Assigned(NodeNv1) then
+                begin
+                  NodeNv2 := XmlElement(NodeNv1.FirstChild);
+                  While Assigned(NodeNv2) do
+                    begin
+                      if NodeNv2.NodeName = ConstXmlSpecieTrait then
+                        begin
+                          PTrait.Livre     := Livre;
+                          PTrait.Libelle   := '';
+                          PTrait.CodeTrait := RemoveQuotes(UTF8Encode(NodeNv2.Attributes.GetNamedItem(ConstXmlId).NodeValue));
+                          PTraduction      := InitTrad(ConstPTrait, PTrait.CodeTrait, '', PTrait.Livre);
+
+                          NodeNv3 := XmlElement(NodeNv2.FirstChild);
+                          while Assigned(NodeNv3) do
+                            begin
+                              case NodeNv3.NodeName of
+                                ConstXmlDescription:
+                                  begin
+                                    PTrait.Libelle      := RemoveQuotes(UTF8Encode(NodeNv3.TextContent));
+                                    Langue              := RemoveQuotes(UTF8Encode(NodeNv3.Attributes.GetNamedItem(ConstXmlLanguage).NodeValue));
+                                    PTraduction.Libelle := PTrait.Libelle;
+                                  end;
+                                ConstXmlTraitOption:
+                                  begin
+                                    // Record local reutilise d'une option a l'autre : sans
+                                    // remise a zero, une option sans balise heriterait de
+                                    // la precedente (meme piege que les fonctions Cherche*).
+                                    PTraitOption.Livre       := Livre;
+                                    PTraitOption.CodeTrait   := PTrait.CodeTrait;
+                                    PTraitOption.Libelle     := '';
+                                    PTraitOption.ListeTalent := '';
+                                    PTraitOption.CodeOption  := RemoveQuotes(UTF8Encode(NodeNv3.Attributes.GetNamedItem(ConstXmlId).NodeValue));
+                                    PTraductionOption        := InitTrad(ConstPTraitOption, PTraitOption.CodeOption, '', PTraitOption.Livre);
+
+                                    Node := XmlElement(NodeNv3.FirstChild);
+                                    while Assigned(Node) do
+                                      begin
+                                        case Node.NodeName of
+                                          ConstXmlDescription:
+                                            begin
+                                              PTraitOption.Libelle      := RemoveQuotes(UTF8Encode(Node.TextContent));
+                                              Langue                    := RemoveQuotes(UTF8Encode(Node.Attributes.GetNamedItem(ConstXmlLanguage).NodeValue));
+                                              PTraductionOption.Libelle := PTraitOption.Libelle;
+                                            end;
+                                          ConstXmlTalent:
+                                            PTraitOption.ListeTalent := RemoveQuotes(UTF8Encode(Node.TextContent));
+                                        end;
+
+                                        Node := XmlElement(Node.NextSibling);
+                                      end;
+
+                                    if LangueDef = ConstAnglais then
+                                      begin
+                                        ListTraitOption.add(PTraitOption);
+                                        inc(NbTraitOption);
+                                      end;
+
+                                    AddTrad(PTraductionOption, Langue);
+                                  end;
+                              end;
+
+                              NodeNv3 := XmlElement(NodeNv3.NextSibling);
+                            end;
+
+                          if LangueDef = ConstAnglais then
+                            begin
+                              ListTrait.add(PTrait);
+                              inc(NbTrait);
+                              Inc(LivreNbTrait);
+                            end;
+
+                          AddTrad(PTraduction, Langue);
+                        end;
+
+                      NodeNv2 := XmlElement(NodeNv2.NextSibling);
+                    end;
+                end;
+
+              // Appartenances greffees sur une carriere - bloc de LIVRE, purement
+              // ADDITIF, voir CONTEXT.md 2.44. Un CareerBonus porte N paliers ; chaque
+              // palier porte son numero de niveau et deux listes separees par des
+              // virgules ou la forme A/B reste valable.
+              NodeNv1 := BookNode.FindNode(ConstXmlDataCareerBonus);
+              if Assigned(NodeNv1) then
+                begin
+                  NodeNv2 := XmlElement(NodeNv1.FirstChild);
+                  While Assigned(NodeNv2) do
+                    begin
+                      if NodeNv2.NodeName = ConstXmlCareerBonus then
+                        begin
+                          PCareerBonus.Livre      := Livre;
+                          PCareerBonus.Libelle    := '';
+                          PCareerBonus.CodeMetier := '';
+                          PCareerBonus.CodeRace   := '';
+                          PCareerBonus.CodeBonus  := RemoveQuotes(UTF8Encode(NodeNv2.Attributes.GetNamedItem(ConstXmlId).NodeValue));
+                          PTraduction             := InitTrad(ConstPCareerBonus, PCareerBonus.CodeBonus, '', PCareerBonus.Livre);
+
+                          NodeNv3 := XmlElement(NodeNv2.FirstChild);
+                          while Assigned(NodeNv3) do
+                            begin
+                              case NodeNv3.NodeName of
+                                ConstXmlDescription:
+                                  begin
+                                    PCareerBonus.Libelle := RemoveQuotes(UTF8Encode(NodeNv3.TextContent));
+                                    Langue               := RemoveQuotes(UTF8Encode(NodeNv3.Attributes.GetNamedItem(ConstXmlLanguage).NodeValue));
+                                    PTraduction.Libelle  := PCareerBonus.Libelle;
+                                  end;
+                                ConstXmlWork:
+                                  PCareerBonus.CodeMetier := RemoveQuotes(UTF8Encode(NodeNv3.TextContent));
+                                ConstXmlRace:
+                                  PCareerBonus.CodeRace   := RemoveQuotes(UTF8Encode(NodeNv3.TextContent));
+                                ConstXmlNiveau:
+                                  begin
+                                    // Record local reutilise d'un palier a l'autre : sans
+                                    // remise a zero, un palier sans balise heriterait du
+                                    // precedent (meme piege que les fonctions Cherche*).
+                                    PCareerBonusNiveau.Livre                 := Livre;
+                                    PCareerBonusNiveau.CodeBonus             := PCareerBonus.CodeBonus;
+                                    PCareerBonusNiveau.Niveau                := 0;
+                                    PCareerBonusNiveau.ListeCompetence       := '';
+                                    PCareerBonusNiveau.ListeTalent           := '';
+                                    PCareerBonusNiveau.NbChoixCompetence     := 0;
+                                    PCareerBonusNiveau.ValeurChoixCompetence := 0;
+                                    PCareerBonusNiveau.CodeNiveau      := RemoveQuotes(UTF8Encode(NodeNv3.Attributes.GetNamedItem(ConstXmlId).NodeValue));
+
+                                    // Modificateurs d'Attribut/Competence du palier (ex. Knight
+                                    // of the Inner Circle, +10 Fel/+10 WP) - CONTEXT.md 2.50
+                                    // etape 3. Accumules a part le temps de la boucle : <ModifyCarac>
+                                    // peut arriver avant <Order> dans le XML, et Niveau n'est connu
+                                    // qu'une fois la boucle terminee (meme raison que
+                                    // ListCareerBonusNiveau.add plus bas, deja differe apres la
+                                    // boucle).
+                                    // <ModifySkill> ajoute au 2.44/3d-3 (Knight, "+10 CC avec les
+                                    // lances" represente comme un bonus chiffre sur Melee (Cavalry))
+                                    // - meme mecanisme et meme raison de differer que ModifyCarac.
+                                    // <ModifyWeapon> ajoute le 07/09/2026, meme mecanisme, pour le
+                                    // meme palier Knight mais filtre par TYPE d'arme (name=) et
+                                    // FACULTATIVEMENT par competence (skill=). <ModifyCarac>,
+                                    // <ModifySkill> et <ModifyWeapon> alimentent tous trois
+                                    // ListCareerBonusModificateur - ModifySkill/ModifyWeapon depuis
+                                    // le 11/09/2026 (moteur generique, ChargeModificateur), ModifyCarac
+                                    // depuis le meme jour (migration ModifyCarac d'Attribut, ancienne
+                                    // ListCareerBonusAttributModif supprimee).
+                                    // <SpecialRule> ajoute le 08/09/2026, quatrieme pendant, pour
+                                    // le palier 4 ("Knight of the Inner Circle") de la quasi-
+                                    // totalite des Ordres de Chevalerie, qui n'a le plus souvent
+                                    // aucun equivalent chiffre - voir ChargeMetier,
+                                    // StructureCareerBonusSpecialRule.
+                                    TempCareerBonusModificateur    := TListModificateur.Create;
+                                    TempCareerBonusSpecialRule     := TListCareerBonusSpecialRule.Create;
+
+                                    Node := XmlElement(NodeNv3.FirstChild);
+                                    while Assigned(Node) do
+                                      begin
+                                        case Node.NodeName of
+                                          ConstXmlOrder:
+                                            PCareerBonusNiveau.Niveau          := StrToIntDef(RemoveQuotes(UTF8Encode(Node.TextContent)),0);
+                                          ConstXmlCompetence:
+                                            PCareerBonusNiveau.ListeCompetence := RemoveQuotes(UTF8Encode(Node.TextContent));
+                                          ConstXmlTalent:
+                                            PCareerBonusNiveau.ListeTalent     := RemoveQuotes(UTF8Encode(Node.TextContent));
+                                          // Moteur generique depuis le 11/09/2026 (meme migration
+                                          // que ModifySkill/ModifyWeapon ci-dessous) - Niveau rempli
+                                          // apres la boucle comme les autres modificateurs de palier.
+                                          ConstXmlModifieAttribut:
+                                            begin
+                                              PCareerBonusModificateur.TypeModif  := ConstXmlModifieAttribut;
+                                              PCareerBonusModificateur.Cible      := RemoveQuotes(UTF8Encode(Node.Attributes.GetNamedItem(ConstXmlData).NodeValue));
+                                              PCareerBonusModificateur.Filtre     := '';
+                                              PCareerBonusModificateur.Forme      := ConstFormeEffetAdditif;
+                                              PCareerBonusModificateur.Facteur    := StrToIntDef(RemoveQuotes(UTF8Encode(Node.TextContent)), 0);
+                                              PCareerBonusModificateur.CodeSource := PCareerBonus.CodeBonus;
+                                              TempCareerBonusModificateur.Add(PCareerBonusModificateur);
+                                            end;
+                                          ConstXmlModifieCompetence:
+                                            begin
+                                              // Moteur generique (ChargeModificateur/ChargeCareerBonusModificateur) -
+                                              // meme structure que le <Modificateur> des Talents, Niveau en plus
+                                              // (rempli apres la boucle, comme les autres modificateurs de palier).
+                                              PCareerBonusModificateur.TypeModif  := ConstXmlModifieCompetence;
+                                              PCareerBonusModificateur.Cible      := RemoveQuotes(UTF8Encode(Node.Attributes.GetNamedItem(ConstXmlData).NodeValue));
+                                              PCareerBonusModificateur.Filtre     := '';
+                                              PCareerBonusModificateur.Forme      := ConstFormeEffetAdditif;
+                                              PCareerBonusModificateur.Facteur    := StrToIntDef(RemoveQuotes(UTF8Encode(Node.TextContent)), 0);
+                                              PCareerBonusModificateur.CodeSource := PCareerBonus.CodeBonus;
+                                              TempCareerBonusModificateur.Add(PCareerBonusModificateur);
+                                            end;
+                                          ConstXmlModifieArme:
+                                            begin
+                                              PCareerBonusModificateur.TypeModif  := ConstXmlModifieArme;
+                                              PCareerBonusModificateur.Cible      := RemoveQuotes(UTF8Encode(Node.Attributes.GetNamedItem(ConstXmlData).NodeValue));
+                                              if Assigned(Node.Attributes) and Assigned(Node.Attributes.GetNamedItem(ConstXmlModifieArmeCompetence)) then
+                                                PCareerBonusModificateur.Filtre := RemoveQuotes(UTF8Encode(Node.Attributes.GetNamedItem(ConstXmlModifieArmeCompetence).NodeValue))
+                                              else
+                                                PCareerBonusModificateur.Filtre := '';
+                                              PCareerBonusModificateur.Forme      := ConstFormeEffetAdditif;
+                                              PCareerBonusModificateur.Facteur    := StrToIntDef(RemoveQuotes(UTF8Encode(Node.TextContent)), 0);
+                                              PCareerBonusModificateur.CodeSource := PCareerBonus.CodeBonus;
+                                              TempCareerBonusModificateur.Add(PCareerBonusModificateur);
+                                            end;
+                                          ConstXmlSpecialRule:
+                                            begin
+                                              PCareerBonusSpecialRule.CodeBonus := PCareerBonus.CodeBonus;
+                                              PCareerBonusSpecialRule.Niveau    := 0;
+                                              PCareerBonusSpecialRule.Libelle   := RemoveQuotes(UTF8Encode(Node.Attributes.GetNamedItem(ConstXmlData).NodeValue));
+                                              PCareerBonusSpecialRule.Texte     := RemoveQuotes(UTF8Encode(Node.TextContent));
+                                              TempCareerBonusSpecialRule.Add(PCareerBonusSpecialRule);
+                                            end;
+                                          // <SkillChoice Count="N" Value="V"/> - choix parmi les
+                                          // competences raciales DU PERSONNAGE, pas une liste
+                                          // portee par le livre (ConstXmlSkillChoice,
+                                          // ChargeConstantes). Directement sur PCareerBonusNiveau,
+                                          // pas dans une liste temporaire : un seul choix possible
+                                          // par palier, contrairement aux modificateurs/regles
+                                          // speciales qui peuvent s'accumuler.
+                                          ConstXmlSkillChoice:
+                                            begin
+                                              PCareerBonusNiveau.NbChoixCompetence     := StrToIntDef(RemoveQuotes(UTF8Encode(Node.Attributes.GetNamedItem(ConstXmlSkillChoiceCount).NodeValue)), 0);
+                                              PCareerBonusNiveau.ValeurChoixCompetence := StrToIntDef(RemoveQuotes(UTF8Encode(Node.Attributes.GetNamedItem(ConstXmlSkillChoiceValue).NodeValue)), 0);
+                                            end;
+                                        end;
+
+                                        Node := XmlElement(Node.NextSibling);
+                                      end;
+
+                                    if LangueDef = ConstAnglais then
+                                      begin
+                                        ListCareerBonusNiveau.add(PCareerBonusNiveau);
+                                        inc(NbCareerBonusNiveau);
+                                        for IndTempModif := 0 to TempCareerBonusModificateur.Count - 1 do
+                                          begin
+                                            PCareerBonusModificateur        := TempCareerBonusModificateur[IndTempModif];
+                                            PCareerBonusModificateur.Niveau := PCareerBonusNiveau.Niveau;
+                                            ListCareerBonusModificateur.add(PCareerBonusModificateur);
+                                            inc(NbCareerBonusModificateur);
+                                          end;
+                                        for IndTempModif := 0 to TempCareerBonusSpecialRule.Count - 1 do
+                                          begin
+                                            PCareerBonusSpecialRule        := TempCareerBonusSpecialRule[IndTempModif];
+                                            PCareerBonusSpecialRule.Niveau := PCareerBonusNiveau.Niveau;
+                                            ListCareerBonusSpecialRule.add(PCareerBonusSpecialRule);
+                                            inc(NbCareerBonusSpecialRule);
+                                          end;
+                                      end;
+                                    TempCareerBonusModificateur.Free;
+                                    TempCareerBonusSpecialRule.Free;
+                                  end;
+                              end;
+
+                              NodeNv3 := XmlElement(NodeNv3.NextSibling);
+                            end;
+
+                          if LangueDef = ConstAnglais then
+                            begin
+                              ListCareerBonus.add(PCareerBonus);
+                              inc(NbCareerBonus);
+                            end;
+
+                          AddTrad(PTraduction, Langue);
+                        end;
+
+                      NodeNv2 := XmlElement(NodeNv2.NextSibling);
+                    end;
+                end;
+
+              // Adaptations de carriere (Adapting Careers, High Elf Player's Guide p.60-62) -
+              // bloc de LIVRE, additif, comme DATA_CAREER_BONUS. Chaque <Level> porte son
+              // <Order> et, par nature (Skill/Talent/Trapping), un <Remove> et/ou un <Add>.
+              NodeNv1 := BookNode.FindNode(ConstXmlDataCareerAdaptation);
+              if Assigned(NodeNv1) then
+                begin
+                  NodeNv2 := XmlElement(NodeNv1.FirstChild);
+                  While Assigned(NodeNv2) do
+                    begin
+                      if NodeNv2.NodeName = ConstXmlCareerAdaptation then
+                        begin
+                          PCareerAdaptation.Livre          := Livre;
+                          PCareerAdaptation.Libelle        := '';
+                          PCareerAdaptation.CodeMetier     := '';
+                          PCareerAdaptation.CodeRace       := '';
+                          PCareerAdaptation.Facultative    := false;
+                          PCareerAdaptation.Standing       := 0;
+                          PCareerAdaptation.CodeAdaptation := RemoveQuotes(UTF8Encode(NodeNv2.Attributes.GetNamedItem(ConstXmlId).NodeValue));
+
+                          NodeNv3 := XmlElement(NodeNv2.FirstChild);
+                          while Assigned(NodeNv3) do
+                            begin
+                              case NodeNv3.NodeName of
+                                ConstXmlDescription:
+                                  PCareerAdaptation.Libelle    := RemoveQuotes(UTF8Encode(NodeNv3.TextContent));
+                                ConstXmlWork:
+                                  PCareerAdaptation.CodeMetier := RemoveQuotes(UTF8Encode(NodeNv3.TextContent));
+                                ConstXmlRace:
+                                  PCareerAdaptation.CodeRace   := RemoveQuotes(UTF8Encode(NodeNv3.TextContent));
+                                ConstXmlOptional:
+                                  PCareerAdaptation.Facultative := RemoveQuotes(UTF8Encode(NodeNv3.TextContent)) = '1';
+                                ConstXmlStanding:
+                                  PCareerAdaptation.Standing   := StrToIntDef(RemoveQuotes(UTF8Encode(NodeNv3.TextContent)), 0);
+                                ConstXmlNiveau:
+                                  begin
+                                    PCareerAdaptationLigne.Livre := Livre;
+                                    PCareerAdaptationLigne.CodeAdaptation := PCareerAdaptation.CodeAdaptation;
+                                    NivAdapt := 0;
+                                    // Le <Order> peut suivre les natures dans le XML : les
+                                    // lignes sont donc accumulees puis posees apres la boucle.
+                                    TempAdaptationLignes := TListCareerAdaptationLigne.Create;
+                                    Node := XmlElement(NodeNv3.FirstChild);
+                                    while Assigned(Node) do
+                                      begin
+                                        if Node.NodeName = ConstXmlOrder then
+                                          NivAdapt := StrToIntDef(RemoveQuotes(UTF8Encode(Node.TextContent)), 0)
+                                        else if (Node.NodeName = ConstXmlCompetence) or (Node.NodeName = ConstXmlTalent)
+                                             or (Node.NodeName = ConstXmlTrapping) then
+                                          begin
+                                            PCareerAdaptationLigne.Nature  := Node.NodeName;
+                                            PCareerAdaptationLigne.Retire  := '';
+                                            PCareerAdaptationLigne.Ajoute  := '';
+                                            NodeAdapt := XmlElement(Node.FirstChild);
+                                            while Assigned(NodeAdapt) do
+                                              begin
+                                                if NodeAdapt.NodeName = ConstXmlRemove then
+                                                  PCareerAdaptationLigne.Retire := RemoveQuotes(UTF8Encode(NodeAdapt.TextContent))
+                                                else if NodeAdapt.NodeName = ConstXmlAdd then
+                                                  PCareerAdaptationLigne.Ajoute := RemoveQuotes(UTF8Encode(NodeAdapt.TextContent));
+                                                NodeAdapt := XmlElement(NodeAdapt.NextSibling);
+                                              end;
+                                            TempAdaptationLignes.Add(PCareerAdaptationLigne);
+                                          end;
+                                        Node := XmlElement(Node.NextSibling);
+                                      end;
+                                    if LangueDef = ConstAnglais then
+                                      for IndTempModif := 0 to TempAdaptationLignes.Count - 1 do
+                                        begin
+                                          PCareerAdaptationLigne        := TempAdaptationLignes[IndTempModif];
+                                          PCareerAdaptationLigne.Niveau := NivAdapt;
+                                          ListCareerAdaptationLigne.add(PCareerAdaptationLigne);
+                                          inc(NbCareerAdaptationLigne);
+                                        end;
+                                    TempAdaptationLignes.Free;
+                                  end;
+                              end;
+                              NodeNv3 := XmlElement(NodeNv3.NextSibling);
+                            end;
+
+                          if LangueDef = ConstAnglais then
+                            begin
+                              ListCareerAdaptation.add(PCareerAdaptation);
+                              inc(NbCareerAdaptation);
+                            end;
+                        end;
+                      NodeNv2 := XmlElement(NodeNv2.NextSibling);
                     end;
                 end;
 
@@ -1992,14 +3222,18 @@ Procedure XmlImport(FileName: String; OnlyPrimary: Boolean; OnlyCode: Boolean);
               NodeNv1 := BookNode.FindNode(ConstXmlDataCraftsmanship);
               if Assigned(NodeNv1) then
                 begin
-                  NodeNv2 := NodeNv1.FirstChild;
+                  NodeNv2 := XmlElement(NodeNv1.FirstChild);
                   While Assigned(NodeNv2) do
                     begin
                       PFabrication.Livre           := Livre;
                       PFabrication.CodeFabrication := RemoveQuotes(UTF8Encode(NodeNv2.Attributes.GetNamedItem(ConstXmlId).NodeValue));
                       PTraduction                  := InitTrad(ConstPFabrication, PFabrication.CodeFabrication, '', PFabrication.Livre);
                       PFabrication.Encombrement    := 0;
-                      Node := NodeNv2.FirstChild;
+                      PFabrication.Applique        := '';
+                      PFabrication.PorteeBonus     := 0;
+                      PFabrication.QualitesArme    := '';
+                      PFabrication.ArmeAlternative := '';
+                      Node := XmlElement(NodeNv2.FirstChild);
                       while Assigned(Node) do
                         begin
                           case Node.NodeName of
@@ -2025,10 +3259,43 @@ Procedure XmlImport(FileName: String; OnlyPrimary: Boolean; OnlyCode: Boolean);
                               PFabrication.Encombrement  := StrToIntDef(RemoveQuotes(UTF8Encode(Node.TextContent)),0);
                             ConstXmlMax:
                               PFabrication.Maximum       := RemoveQuotes(UTF8Encode(Node.TextContent));
+                            ConstXmlFabPortee:
+                              PFabrication.PorteeBonus   := StrToIntDef(RemoveQuotes(UTF8Encode(Node.TextContent)),0);
+                            ConstXmlFabApplique:
+                              PFabrication.Applique      := RemoveQuotes(UTF8Encode(Node.TextContent));
+                            ConstXmlFabQualiteArme:
+                              PFabrication.QualitesArme  := RemoveQuotes(UTF8Encode(Node.TextContent));
+                            ConstXmlFabArmeAlternative:
+                              PFabrication.ArmeAlternative := RemoveQuotes(UTF8Encode(Node.TextContent));
                             ConstXmlPositifNegatif:
                               PFabrication.TypeQualite   := RemoveQuotes(UTF8Encode(Node.TextContent));
+                            // <ModifArmour name="CodeLocalisation">n</ModifArmour> : Points d'Armure par
+                            // niveau de la fabrication (Rune of Stone). Meme convention que les qualites
+                            // d'armure. Pilote du 19/09/2026.
+                            // <ModifyCarac name="RULES-ATTR_T">10</ModifyCarac> : bonus de
+                            // caracteristique par niveau (Rune of Fortitude). 20/09/2026.
+                            ConstXmlModifieArmure, ConstXmlModifieAttribut, ConstXmlModifieDegat, ConstXmlModifieCompetence:
+                              begin
+                                PFabricationModificateur.TypeModif  := Node.NodeName;
+                                PFabricationModificateur.Cible      := RemoveQuotes(UTF8Encode(Node.Attributes.GetNamedItem(ConstXmlData).NodeValue));
+                                // if="CodeLibelle" : effet CONDITIONNEL (Rune of Might, Grudge Rune). Le code du
+                                // libelle de la condition est range dans Filtre ; l'effet n'entre plus dans les
+                                // totaux (FabricationModificateurQualite l'ignore) et sort en note. 20/09/2026.
+                                PFabricationModificateur.Filtre     := '';
+                                if Node.Attributes.GetNamedItem('if') <> nil then
+                                  PFabricationModificateur.Filtre   := RemoveQuotes(UTF8Encode(Node.Attributes.GetNamedItem('if').NodeValue));
+                                PFabricationModificateur.Forme      := ConstFormeEffetAdditif;
+                                PFabricationModificateur.Facteur    := StrToIntDef(RemoveQuotes(UTF8Encode(Node.TextContent)), 0);
+                                PFabricationModificateur.CodeSource := PFabrication.CodeFabrication;
+                                PFabricationModificateur.Niveau     := 0;
+                                if LangueDef = ConstAnglais then
+                                  begin
+                                    ListFabricationModificateur.add(PFabricationModificateur);
+                                    inc(NbFabricationModificateur);
+                                  end;
+                              end;
                           end;
-                          Node := Node.NextSibling;
+                          Node := XmlElement(Node.NextSibling);
                         end;
                       if LangueDef = ConstAnglais then
                         begin
@@ -2038,7 +3305,7 @@ Procedure XmlImport(FileName: String; OnlyPrimary: Boolean; OnlyCode: Boolean);
 
                       AddTrad(PTraduction, Langue);
 
-                      NodeNv2 := NodeNv2.NextSibling;
+                      NodeNv2 := XmlElement(NodeNv2.NextSibling);
                     end;
                 end;
 
@@ -2046,12 +3313,12 @@ Procedure XmlImport(FileName: String; OnlyPrimary: Boolean; OnlyCode: Boolean);
               NodeNv1 := BookNode.FindNode(ConstXmlDataSpecieCareerChoix);
               if Assigned(NodeNv1) then
                 begin
-                  NodeNv2 := NodeNv1.FirstChild;
+                  NodeNv2 := XmlElement(NodeNv1.FirstChild);
                   While Assigned(NodeNv2) do
                     begin
                       PMetierRaceChoixMetier.Livre    := Livre;
 
-                      Node := NodeNv2.FirstChild;
+                      Node := XmlElement(NodeNv2.FirstChild);
                       while Assigned(Node) do
                         begin
                           case Node.NodeName of
@@ -2062,7 +3329,7 @@ Procedure XmlImport(FileName: String; OnlyPrimary: Boolean; OnlyCode: Boolean);
                             ConstXmlAlternative:
                               PMetierRaceChoixMetier.CodeSousMetier := RemoveQuotes(UTF8Encode(Node.TextContent));
                           end;
-                          Node := Node.NextSibling;
+                          Node := XmlElement(Node.NextSibling);
                         end;
                       if LangueDef = ConstAnglais then
                         begin
@@ -2070,7 +3337,138 @@ Procedure XmlImport(FileName: String; OnlyPrimary: Boolean; OnlyCode: Boolean);
                           inc(NbMetierRaceChoixMetier);
                         end;
 
-                      NodeNv2 := NodeNv2.NextSibling;
+                      NodeNv2 := XmlElement(NodeNv2.NextSibling);
+                    end;
+                end;
+
+              // Metier choix race direct (ajout d'une race à un métier existant, ou
+              // inversement, sans passer par <Specie>/<Career> - indépendant de l'ordre
+              // de chargement des livres, comme Metier choix race ci-dessus)
+              NodeNv1 := BookNode.FindNode(ConstXmlDataSpecieCareerDirect);
+              if Assigned(NodeNv1) then
+                begin
+                  NodeNv2 := XmlElement(NodeNv1.FirstChild);
+                  While Assigned(NodeNv2) do
+                    begin
+                      if NodeNv2.NodeName = ConstXmlEntry then
+                       begin
+                      PRaceMetier.Livre      := Livre;
+                      PRaceMetier.CodeRace   := '';
+                      PRaceMetier.CodeMetier := '';
+                      PRaceMetier.Chance     := '';
+
+                      Node := XmlElement(NodeNv2.FirstChild);
+                      while Assigned(Node) do
+                        begin
+                          case Node.NodeName of
+                            ConstXmlRace:
+                              PRaceMetier.CodeRace   := RemoveQuotes(UTF8Encode(Node.TextContent));
+                            ConstXmlWork:
+                              begin
+                                PRaceMetier.CodeMetier := RemoveQuotes(UTF8Encode(Node.Attributes.GetNamedItem(ConstXmlData).NodeValue));
+                                PRaceMetier.Chance     := RemoveQuotes(UTF8Encode(Node.TextContent));
+                              end;
+                          end;
+                          Node := XmlElement(Node.NextSibling);
+                        end;
+                      if LangueDef = ConstAnglais then
+                        begin
+                          ListRaceMetier.add(PRaceMetier);
+                          inc(NbRaceMetier);
+                        end;
+                       end;
+
+                      NodeNv2 := XmlElement(NodeNv2.NextSibling);
+                    end;
+                end;
+
+              // Regles de jeu optionnelles apportées par le livre (voir ChargeRegle.pas)
+              NodeNv1 := BookNode.FindNode(ConstXmlDataRegle);
+              if Assigned(NodeNv1) then
+                begin
+                  NodeNv2 := XmlElement(NodeNv1.FirstChild);
+                  While Assigned(NodeNv2) do
+                    begin
+                      if NodeNv2.NodeName = ConstXmlRegleJeu then
+                       begin
+                      PRegle.Livre     := Livre;
+                      PRegle.Libelle   := '';
+                      PRegle.CodeRegle := RemoveQuotes(UTF8Encode(NodeNv2.Attributes.GetNamedItem(ConstXmlId).NodeValue));
+                      PTraduction      := InitTrad(ConstPRegle, PRegle.CodeRegle, '', PRegle.Livre);
+
+                      Node := XmlElement(NodeNv2.FirstChild);
+                      while Assigned(Node) do
+                        begin
+                          case Node.NodeName of
+                            ConstXmlDescription:
+                              begin
+                                PRegle.Libelle      := RemoveQuotes(UTF8Encode(Node.TextContent));
+                                Langue              := RemoveQuotes(UTF8Encode(Node.Attributes.GetNamedItem(ConstXmlLanguage).NodeValue));
+                                PTraduction.Libelle := PRegle.Libelle;
+                              end;
+                          end;
+
+                          Node := XmlElement(Node.NextSibling);
+                        end;
+
+                      if LangueDef = ConstAnglais then
+                        begin
+                          ListRegle.add(PRegle);
+                          inc(NbRegle);
+                        end;
+
+                      AddTrad(PTraduction, Langue);
+                       end;
+
+                      NodeNv2 := XmlElement(NodeNv2.NextSibling);
+                    end;
+                end;
+
+              // Table de tirage des métiers propre à une règle. CodeRace y désigne
+              // indifféremment une ETHNIE ou une RACE (résolution à l'usage, pas au
+              // chargement : l'ordre de lecture des livres n'est pas garanti).
+              NodeNv1 := BookNode.FindNode(ConstXmlDataRegleMetier);
+              if Assigned(NodeNv1) then
+                begin
+                  NodeNv2 := XmlElement(NodeNv1.FirstChild);
+                  While Assigned(NodeNv2) do
+                    begin
+                      // Ne traiter que les vrais <Entry> : un commentaire ou un noeud texte
+                      // entre deux entrées est aussi un enfant, et sans cette garde il
+                      // rejouerait les valeurs de l'entrée précédente (doublon silencieux).
+                      if NodeNv2.NodeName = ConstXmlEntry then
+                       begin
+                      PRegleMetier.Livre      := Livre;
+                      PRegleMetier.CodeRegle  := '';
+                      PRegleMetier.CodeRace   := '';
+                      PRegleMetier.CodeMetier := '';
+                      PRegleMetier.Chance     := '';
+
+                      Node := XmlElement(NodeNv2.FirstChild);
+                      while Assigned(Node) do
+                        begin
+                          case Node.NodeName of
+                            ConstXmlRegleJeu:
+                              PRegleMetier.CodeRegle  := RemoveQuotes(UTF8Encode(Node.TextContent));
+                            ConstXmlRace:
+                              PRegleMetier.CodeRace   := RemoveQuotes(UTF8Encode(Node.TextContent));
+                            ConstXmlWork:
+                              begin
+                                PRegleMetier.CodeMetier := RemoveQuotes(UTF8Encode(Node.Attributes.GetNamedItem(ConstXmlData).NodeValue));
+                                PRegleMetier.Chance     := RemoveQuotes(UTF8Encode(Node.TextContent));
+                              end;
+                          end;
+                          Node := XmlElement(Node.NextSibling);
+                        end;
+
+                      if LangueDef = ConstAnglais then
+                        begin
+                          ListRegleMetier.add(PRegleMetier);
+                          inc(NbRegleMetier);
+                        end;
+                       end;
+
+                      NodeNv2 := XmlElement(NodeNv2.NextSibling);
                     end;
                 end;
 
@@ -2078,12 +3476,12 @@ Procedure XmlImport(FileName: String; OnlyPrimary: Boolean; OnlyCode: Boolean);
               NodeNv1 := BookNode.FindNode(ConstXmlDataCareerSubChoice);
               if Assigned(NodeNv1) then
                 begin
-                  NodeNv2 := NodeNv1.FirstChild;
+                  NodeNv2 := XmlElement(NodeNv1.FirstChild);
                   While Assigned(NodeNv2) do
                     begin
                       PMetierSousMetier.Livre    := Livre;
 
-                      Node := NodeNv2.FirstChild;
+                      Node := XmlElement(NodeNv2.FirstChild);
                       while Assigned(Node) do
                         begin
                           case Node.NodeName of
@@ -2095,7 +3493,7 @@ Procedure XmlImport(FileName: String; OnlyPrimary: Boolean; OnlyCode: Boolean);
                                 PMetierSousMetier.Chance         := RemoveQuotes(UTF8Encode(Node.TextContent));
                               end;
                           end;
-                          Node := Node.NextSibling;
+                          Node := XmlElement(Node.NextSibling);
                         end;
                       if LangueDef = ConstAnglais then
                         begin
@@ -2103,7 +3501,7 @@ Procedure XmlImport(FileName: String; OnlyPrimary: Boolean; OnlyCode: Boolean);
                           inc(NbMetierSousMetier);
                         end;
 
-                      NodeNv2 := NodeNv2.NextSibling;
+                      NodeNv2 := XmlElement(NodeNv2.NextSibling);
                     end;
                 end;
 
@@ -2111,7 +3509,7 @@ Procedure XmlImport(FileName: String; OnlyPrimary: Boolean; OnlyCode: Boolean);
               NodeNv1 := BookNode.FindNode(ConstXmlDataPhysicalCorruption);
               if Assigned(NodeNv1) then
                 begin
-                  NodeNv2 := NodeNv1.FirstChild;
+                  NodeNv2 := XmlElement(NodeNv1.FirstChild);
                   While Assigned(NodeNv2) do
                     begin
                       PRaceCorruptionCreation.Livre          := Livre;
@@ -2125,7 +3523,7 @@ Procedure XmlImport(FileName: String; OnlyPrimary: Boolean; OnlyCode: Boolean);
                           inc(nbRaceCorruptionCreation);
                          end;
 
-                      NodeNv2 := NodeNv2.NextSibling;
+                      NodeNv2 := XmlElement(NodeNv2.NextSibling);
                     end;
                 end;
 
@@ -2133,7 +3531,7 @@ Procedure XmlImport(FileName: String; OnlyPrimary: Boolean; OnlyCode: Boolean);
               NodeNv1 := BookNode.FindNode(ConstXmlDataMentalCorruption);
               if Assigned(NodeNv1) then
                 begin
-                  NodeNv2 := NodeNv1.FirstChild;
+                  NodeNv2 := XmlElement(NodeNv1.FirstChild);
                   While Assigned(NodeNv2) do
                     begin
                       PRaceCorruptionCreation.Livre          := Livre;
@@ -2147,7 +3545,328 @@ Procedure XmlImport(FileName: String; OnlyPrimary: Boolean; OnlyCode: Boolean);
                           inc(nbRaceCorruptionCreation);
                          end;
 
-                      NodeNv2 := NodeNv2.NextSibling;
+                      NodeNv2 := XmlElement(NodeNv2.NextSibling);
+                    end;
+                end;
+
+              // Catalogue de mutation Physique (Physical Corruption Table, CONTEXT.md §2.7).
+              // Balises <Description language="X">/<Explanation language="X"> (renommées le
+              // 17/08/2026 depuis <Libelle>/<Effet>, à la demande de Nono, pour la même
+              // convention que les autres chapitres - Attribut/Compétence/Talent/etc.) restent
+              // lues dans les champs Pascal .Libelle/.Effet existants (noms internes conservés,
+              // choix de Nono). L'attribut language= n'est pas lu (toujours redondant avec le
+              // <language> de tête du livre - LangueDef - même s'il est maintenant présent dans
+              // le XML pour la cohérence visuelle avec les autres chapitres). Code = code stable
+              // du catalogue (ex. "RULES-CORPHY_001"), décorrélé de la plage D100 - voir
+              // DATA_CORRUPTION_PHYSICAL_CHANCE/DATA_CORRUPTION_MENTAL_CHANCE plus bas pour le
+              // tirage (conception revue avec Nono le 17/08/2026).
+              NodeNv1 := BookNode.FindNode(ConstXmlDataCorruptionTablePhys);
+              if Assigned(NodeNv1) then
+                begin
+                  NodeNv2 := XmlElement(NodeNv1.FirstChild);
+                  While Assigned(NodeNv2) do
+                    begin
+                      PCorruptionTable.Livre          := Livre;
+                      PCorruptionTable.TypeCorruption := CorruptionPhysique;
+                      PCorruptionTable.Code           := RemoveQuotes(UTF8Encode(NodeNv2.Attributes.GetNamedItem(ConstXmlData).NodeValue));
+
+                      // Itère les enfants (au lieu de FindNode) pour pouvoir accueillir, en plus de
+                      // Libelle/Effet, zéro ou plusieurs <ModifyCarac name="...">/<ModifySkill name="...">
+                      // optionnels (effets à delta pur, CONTEXT.md §2.7 étape 8) - même mécanisme que
+                      // <Modifier name="..."> sous <BonusMalus> pour les armures.
+                      Node := XmlElement(NodeNv2.FirstChild);
+                      while Assigned(Node) do
+                        begin
+                          case Node.NodeName of
+                            ConstXmlDescription:
+                              PCorruptionTable.Libelle := RemoveQuotes(UTF8Encode(Node.TextContent));
+                            ConstXmlExplanation:
+                              PCorruptionTable.Effet   := RemoveQuotes(UTF8Encode(Node.TextContent));
+                            // Moteur generique depuis le 11/09/2026, remplace l'ancienne
+                            // ListCorruptionAttributModif dediee (meme migration que
+                            // Talent/CareerBonus/Arme/ArmureBonus).
+                            ConstXmlModifieAttribut:
+                              begin
+                                PCorruptionModificateur.TypeModif  := ConstXmlModifieAttribut;
+                                PCorruptionModificateur.Cible      := RemoveQuotes(UTF8Encode(Node.Attributes.GetNamedItem(ConstXmlData).NodeValue));
+                                PCorruptionModificateur.Filtre     := '';
+                                PCorruptionModificateur.Forme      := ConstFormeEffetAdditif;
+                                PCorruptionModificateur.Facteur    := StrToInt(RemoveQuotes(UTF8Encode(Node.TextContent)));
+                                PCorruptionModificateur.CodeSource := PCorruptionTable.Code;
+                                PCorruptionModificateur.Niveau     := 0;
+                                if LangueDef = ConstAnglais then
+                                   begin
+                                    ListCorruptionModificateur.add(PCorruptionModificateur);
+                                    inc(NbCorruptionModificateur);
+                                   end;
+                              end;
+                            // Moteur generique depuis le 11/09/2026, remplace l'ancienne
+                            // ListCorruptionCompetenceModif dediee (meme migration que
+                            // ModifyCarac plus haut). <ModifySkillAttribut> ci-dessous reste a
+                            // part : broadcast par attribut de rattachement, pas un Cible unique.
+                            ConstXmlModifieCompetence:
+                              begin
+                                PCorruptionModificateur.TypeModif  := ConstXmlModifieCompetence;
+                                PCorruptionModificateur.Cible      := RemoveQuotes(UTF8Encode(Node.Attributes.GetNamedItem(ConstXmlData).NodeValue));
+                                PCorruptionModificateur.Filtre     := '';
+                                PCorruptionModificateur.Forme      := ConstFormeEffetAdditif;
+                                PCorruptionModificateur.Facteur    := StrToInt(RemoveQuotes(UTF8Encode(Node.TextContent)));
+                                PCorruptionModificateur.CodeSource := PCorruptionTable.Code;
+                                PCorruptionModificateur.Niveau     := 0;
+                                if LangueDef = ConstAnglais then
+                                   begin
+                                    ListCorruptionModificateur.add(PCorruptionModificateur);
+                                    inc(NbCorruptionModificateur);
+                                   end;
+                              end;
+                            ConstXmlModifieCompetenceAttribut:
+                              begin
+                                PCorruptionCompetenceAttributModif.Livre          := Livre;
+                                PCorruptionCompetenceAttributModif.CodeCorruption := PCorruptionTable.Code;
+                                PCorruptionCompetenceAttributModif.CodeAttribut   := RemoveQuotes(UTF8Encode(Node.Attributes.GetNamedItem(ConstXmlData).NodeValue));
+                                PCorruptionCompetenceAttributModif.Valeur         := StrToInt(RemoveQuotes(UTF8Encode(Node.TextContent)));
+                                if LangueDef = ConstAnglais then
+                                   begin
+                                    ListCorruptionCompetenceAttributModif.add(PCorruptionCompetenceAttributModif);
+                                    inc(NbCorruptionCompetenceAttributModif);
+                                   end;
+                              end;
+                            // Moteur generique depuis le 11/09/2026, remplace l'ancienne
+                            // ListCorruptionArmureModif dediee.
+                            ConstXmlModifieArmure:
+                              begin
+                                PCorruptionModificateur.TypeModif  := ConstXmlModifieArmure;
+                                PCorruptionModificateur.Cible      := RemoveQuotes(UTF8Encode(Node.Attributes.GetNamedItem(ConstXmlData).NodeValue));
+                                PCorruptionModificateur.Filtre     := '';
+                                PCorruptionModificateur.Forme      := ConstFormeEffetAdditif;
+                                PCorruptionModificateur.Facteur    := StrToInt(RemoveQuotes(UTF8Encode(Node.TextContent)));
+                                PCorruptionModificateur.CodeSource := PCorruptionTable.Code;
+                                PCorruptionModificateur.Niveau     := 0;
+                                if LangueDef = ConstAnglais then
+                                   begin
+                                    ListCorruptionModificateur.add(PCorruptionModificateur);
+                                    inc(NbCorruptionModificateur);
+                                   end;
+                              end;
+                            ConstXmlTalent:
+                              begin
+                                // Talent accorde par la mutation (ex. Fleshy Tentacle -> Tentacles),
+                                // cas par cas dans le XML - CONTEXT.md, chantier "traits de creature".
+                                PCorruptionTalent.Livre          := Livre;
+                                PCorruptionTalent.CodeCorruption := PCorruptionTable.Code;
+                                PCorruptionTalent.CodeTalent     := RemoveQuotes(UTF8Encode(Node.TextContent));
+                                if LangueDef = ConstAnglais then
+                                   begin
+                                    ListCorruptionTalent.add(PCorruptionTalent);
+                                    inc(NbCorruptionTalent);
+                                   end;
+                              end;
+                            ConstXmlArme, ConstXmlArmure:
+                              begin
+                                // Arme ou armure accordee par la mutation, cas par cas dans le XML -
+                                // meme chantier que ConstXmlTalent juste au-dessus.
+                                PCorruptionEquipement.Livre          := Livre;
+                                PCorruptionEquipement.CodeCorruption := PCorruptionTable.Code;
+                                PCorruptionEquipement.CodeEquipement := RemoveQuotes(UTF8Encode(Node.TextContent));
+                                PCorruptionEquipement.EstArme        := Node.NodeName = ConstXmlArme;
+                                if LangueDef = ConstAnglais then
+                                   begin
+                                    ListCorruptionEquipement.add(PCorruptionEquipement);
+                                    inc(NbCorruptionEquipement);
+                                   end;
+                              end;
+                          end;
+                          Node := XmlElement(Node.NextSibling);
+                        end;
+
+                      PTraduction              := InitTrad(ConstPCorruptionTable, PCorruptionTable.Code, '', PCorruptionTable.Livre);
+                      PTraduction.Libelle      := PCorruptionTable.Libelle;
+                      PTraduction.Description  := PCorruptionTable.Effet;
+
+                       if LangueDef = ConstAnglais then
+                         begin
+                          ListCorruptionTable.add(PCorruptionTable);
+                          inc(nbCorruptionTable);
+                         end;
+
+                      AddTrad(PTraduction, LangueDef);
+
+                      NodeNv2 := XmlElement(NodeNv2.NextSibling);
+                    end;
+                end;
+
+              // Catalogue de mutation Mentale (Mental Corruption Table, CONTEXT.md §2.7)
+              NodeNv1 := BookNode.FindNode(ConstXmlDataCorruptionTableMent);
+              if Assigned(NodeNv1) then
+                begin
+                  NodeNv2 := XmlElement(NodeNv1.FirstChild);
+                  While Assigned(NodeNv2) do
+                    begin
+                      PCorruptionTable.Livre          := Livre;
+                      PCorruptionTable.TypeCorruption := CorruptionMentale;
+                      PCorruptionTable.Code           := RemoveQuotes(UTF8Encode(NodeNv2.Attributes.GetNamedItem(ConstXmlData).NodeValue));
+
+                      // Même itération que la table Physique ci-dessus (ModifyCarac/ModifySkill optionnels).
+                      Node := XmlElement(NodeNv2.FirstChild);
+                      while Assigned(Node) do
+                        begin
+                          case Node.NodeName of
+                            ConstXmlDescription:
+                              PCorruptionTable.Libelle := RemoveQuotes(UTF8Encode(Node.TextContent));
+                            ConstXmlExplanation:
+                              PCorruptionTable.Effet   := RemoveQuotes(UTF8Encode(Node.TextContent));
+                            // Moteur generique depuis le 11/09/2026, remplace l'ancienne
+                            // ListCorruptionAttributModif dediee (meme migration que
+                            // Talent/CareerBonus/Arme/ArmureBonus).
+                            ConstXmlModifieAttribut:
+                              begin
+                                PCorruptionModificateur.TypeModif  := ConstXmlModifieAttribut;
+                                PCorruptionModificateur.Cible      := RemoveQuotes(UTF8Encode(Node.Attributes.GetNamedItem(ConstXmlData).NodeValue));
+                                PCorruptionModificateur.Filtre     := '';
+                                PCorruptionModificateur.Forme      := ConstFormeEffetAdditif;
+                                PCorruptionModificateur.Facteur    := StrToInt(RemoveQuotes(UTF8Encode(Node.TextContent)));
+                                PCorruptionModificateur.CodeSource := PCorruptionTable.Code;
+                                PCorruptionModificateur.Niveau     := 0;
+                                if LangueDef = ConstAnglais then
+                                   begin
+                                    ListCorruptionModificateur.add(PCorruptionModificateur);
+                                    inc(NbCorruptionModificateur);
+                                   end;
+                              end;
+                            // Moteur generique depuis le 11/09/2026, remplace l'ancienne
+                            // ListCorruptionCompetenceModif dediee (meme migration que
+                            // ModifyCarac plus haut). <ModifySkillAttribut> ci-dessous reste a
+                            // part : broadcast par attribut de rattachement, pas un Cible unique.
+                            ConstXmlModifieCompetence:
+                              begin
+                                PCorruptionModificateur.TypeModif  := ConstXmlModifieCompetence;
+                                PCorruptionModificateur.Cible      := RemoveQuotes(UTF8Encode(Node.Attributes.GetNamedItem(ConstXmlData).NodeValue));
+                                PCorruptionModificateur.Filtre     := '';
+                                PCorruptionModificateur.Forme      := ConstFormeEffetAdditif;
+                                PCorruptionModificateur.Facteur    := StrToInt(RemoveQuotes(UTF8Encode(Node.TextContent)));
+                                PCorruptionModificateur.CodeSource := PCorruptionTable.Code;
+                                PCorruptionModificateur.Niveau     := 0;
+                                if LangueDef = ConstAnglais then
+                                   begin
+                                    ListCorruptionModificateur.add(PCorruptionModificateur);
+                                    inc(NbCorruptionModificateur);
+                                   end;
+                              end;
+                            ConstXmlModifieCompetenceAttribut:
+                              begin
+                                PCorruptionCompetenceAttributModif.Livre          := Livre;
+                                PCorruptionCompetenceAttributModif.CodeCorruption := PCorruptionTable.Code;
+                                PCorruptionCompetenceAttributModif.CodeAttribut   := RemoveQuotes(UTF8Encode(Node.Attributes.GetNamedItem(ConstXmlData).NodeValue));
+                                PCorruptionCompetenceAttributModif.Valeur         := StrToInt(RemoveQuotes(UTF8Encode(Node.TextContent)));
+                                if LangueDef = ConstAnglais then
+                                   begin
+                                    ListCorruptionCompetenceAttributModif.add(PCorruptionCompetenceAttributModif);
+                                    inc(NbCorruptionCompetenceAttributModif);
+                                   end;
+                              end;
+                            // Moteur generique depuis le 11/09/2026, remplace l'ancienne
+                            // ListCorruptionArmureModif dediee.
+                            ConstXmlModifieArmure:
+                              begin
+                                PCorruptionModificateur.TypeModif  := ConstXmlModifieArmure;
+                                PCorruptionModificateur.Cible      := RemoveQuotes(UTF8Encode(Node.Attributes.GetNamedItem(ConstXmlData).NodeValue));
+                                PCorruptionModificateur.Filtre     := '';
+                                PCorruptionModificateur.Forme      := ConstFormeEffetAdditif;
+                                PCorruptionModificateur.Facteur    := StrToInt(RemoveQuotes(UTF8Encode(Node.TextContent)));
+                                PCorruptionModificateur.CodeSource := PCorruptionTable.Code;
+                                PCorruptionModificateur.Niveau     := 0;
+                                if LangueDef = ConstAnglais then
+                                   begin
+                                    ListCorruptionModificateur.add(PCorruptionModificateur);
+                                    inc(NbCorruptionModificateur);
+                                   end;
+                              end;
+                            ConstXmlTalent:
+                              begin
+                                PCorruptionTalent.Livre          := Livre;
+                                PCorruptionTalent.CodeCorruption := PCorruptionTable.Code;
+                                PCorruptionTalent.CodeTalent     := RemoveQuotes(UTF8Encode(Node.TextContent));
+                                if LangueDef = ConstAnglais then
+                                   begin
+                                    ListCorruptionTalent.add(PCorruptionTalent);
+                                    inc(NbCorruptionTalent);
+                                   end;
+                              end;
+                            ConstXmlArme, ConstXmlArmure:
+                              begin
+                                PCorruptionEquipement.Livre          := Livre;
+                                PCorruptionEquipement.CodeCorruption := PCorruptionTable.Code;
+                                PCorruptionEquipement.CodeEquipement := RemoveQuotes(UTF8Encode(Node.TextContent));
+                                PCorruptionEquipement.EstArme        := Node.NodeName = ConstXmlArme;
+                                if LangueDef = ConstAnglais then
+                                   begin
+                                    ListCorruptionEquipement.add(PCorruptionEquipement);
+                                    inc(NbCorruptionEquipement);
+                                   end;
+                              end;
+                          end;
+                          Node := XmlElement(Node.NextSibling);
+                        end;
+
+                      PTraduction              := InitTrad(ConstPCorruptionTable, PCorruptionTable.Code, '', PCorruptionTable.Livre);
+                      PTraduction.Libelle      := PCorruptionTable.Libelle;
+                      PTraduction.Description  := PCorruptionTable.Effet;
+
+                       if LangueDef = ConstAnglais then
+                         begin
+                          ListCorruptionTable.add(PCorruptionTable);
+                          inc(nbCorruptionTable);
+                         end;
+
+                      AddTrad(PTraduction, LangueDef);
+
+                      NodeNv2 := XmlElement(NodeNv2.NextSibling);
+                    end;
+                end;
+
+              // Table de chance Physique (D100 -> Code), CONTEXT.md §2.7 - propre à ce livre,
+              // pas de traduction (juste une plage et un code), chargée une seule fois comme
+              // DATA_CORRUPTION_PHYSICAL/DATA_CORRUPTION_MENTAL plus haut.
+              NodeNv1 := BookNode.FindNode(ConstXmlDataCorruptionPhysChance);
+              if Assigned(NodeNv1) then
+                begin
+                  NodeNv2 := XmlElement(NodeNv1.FirstChild);
+                  While Assigned(NodeNv2) do
+                    begin
+                      PCorruptionChance.Livre          := Livre;
+                      PCorruptionChance.TypeCorruption := CorruptionPhysique;
+                      PCorruptionChance.Chance         := RemoveQuotes(UTF8Encode(NodeNv2.Attributes.GetNamedItem(ConstXmlData).NodeValue));
+                      PCorruptionChance.Code           := RemoveQuotes(UTF8Encode(NodeNv2.TextContent));
+
+                       if LangueDef = ConstAnglais then
+                         begin
+                          ListCorruptionChance.add(PCorruptionChance);
+                          inc(nbCorruptionChance);
+                         end;
+
+                      NodeNv2 := XmlElement(NodeNv2.NextSibling);
+                    end;
+                end;
+
+              // Table de chance Mentale (D100 -> Code), CONTEXT.md §2.7
+              NodeNv1 := BookNode.FindNode(ConstXmlDataCorruptionMentChance);
+              if Assigned(NodeNv1) then
+                begin
+                  NodeNv2 := XmlElement(NodeNv1.FirstChild);
+                  While Assigned(NodeNv2) do
+                    begin
+                      PCorruptionChance.Livre          := Livre;
+                      PCorruptionChance.TypeCorruption := CorruptionMentale;
+                      PCorruptionChance.Chance         := RemoveQuotes(UTF8Encode(NodeNv2.Attributes.GetNamedItem(ConstXmlData).NodeValue));
+                      PCorruptionChance.Code           := RemoveQuotes(UTF8Encode(NodeNv2.TextContent));
+
+                       if LangueDef = ConstAnglais then
+                         begin
+                          ListCorruptionChance.add(PCorruptionChance);
+                          inc(nbCorruptionChance);
+                         end;
+
+                      NodeNv2 := XmlElement(NodeNv2.NextSibling);
                     end;
                 end;
 
@@ -2185,6 +3904,33 @@ Function XmlLivre(FileName: String): string;
       XMLDoc.Free;
     end;
     Result := Livre;
+  end;
+
+Function XmlLivreBalise(CheminFichier: String; Balise: String): String;
+  // Lit une balise a la racine d'un fichier livre XML, sans dependre de ConstCheminLivre
+  // (contrairement a XmlLivre, toujours lu dans le repertoire du livre actif) - utilisee
+  // pour scanner les sous-repertoires DATABASE\<version>\ a la recherche de <OFFICIAL>/
+  // <VERSION> (selecteur de version, TMenu.ChargerListeVersions, warhammersource.pas,
+  // demande de Nono le 13/09/2026).
+  var
+    XMLDoc: TXMLDocument;
+    Racine: TDOMNode;
+    Node:   TDOMNode;
+  begin
+    Result := '';
+    XMLDoc := TXMLDocument.Create;
+    try
+      ReadXMLFile(XMLDoc, CheminFichier);
+      Racine := XMLDoc.DocumentElement;
+      if Assigned(Racine) then
+        begin
+          Node := Racine.FindNode(Balise);
+          if Assigned(Node) then
+            Result := RemoveQuotes(UTF8Encode(Node.TextContent));
+        end;
+    finally
+      XMLDoc.Free;
+    end;
   end;
 
 end.
