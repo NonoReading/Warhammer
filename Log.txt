@@ -5976,3 +5976,7 @@ Fichiers modifies : chargeracephysique.pas, CONTEXT.md, Log.txt.
 21/09/2026 - NOMS BRETONNIENS ET KISLEVITES (LISTES D EXEMPLE DU CHARACTER PACK) - COMPILE, A TESTER PAR NONO
 Prenoms d exemple du Unofficial Character Pack p.8 poses sur les 2 ethnies bretonniennes et les 2 kislevites de Nations of Mankind, avec leurs modeles ; nom de famille repris du Reiklandais. Decision de Nono : listes du livre, sans nom invente. RaceSourceNom : suppression de la preference du meme livre (elle envoyait les autres ethnies de Nations of Mankind vers la liste kislevite).
 Fichiers modifies : BOOK_NATIONS_OF_MANKIND.Xml, chargeracephysique.pas, CONTEXT.md, A FAIRE.txt, Log.txt.
+
+21/09/2026 - NOMS TILEENS (UP IN ARMS P.56) - DONNEES SEULES
+33 prenoms M, 33 F, 33 noms de famille sur UPINA-RACE_HTIL (BOOK_UP_IN_ARMS.Xml). Estaliens demandes : aucune liste de noms dans les livres du projet, rien invente.
+Fichiers modifies : BOOK_UP_IN_ARMS.Xml, CONTEXT.md, A FAIRE.txt, Log.txt.

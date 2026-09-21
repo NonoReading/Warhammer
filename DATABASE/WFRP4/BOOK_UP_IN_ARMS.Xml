@@ -240,6 +240,110 @@ Ifthe Character passes the Test, the crew members may then use the Characters Ra
 <Attribut name="RULES-ATTR_Supp">"3"</Attribut>
 <Attribut name="RULES-ATTR_Move">"4"</Attribut>
 </SUBCHAPTER_ATTR>
+<!-- Noms tileens (Up in Arms p.56) : prenoms feminins et masculins, noms de famille ; tirage uniforme. -->
+<SUBCHAPTER_NAMES>
+<NamePattern sex="M">"Forename Surname"</NamePattern>
+<NamePattern sex="F">"Forename Surname"</NamePattern>
+<Name part="Forename" sex="M" name="Ambrogio">"1"</Name>
+<Name part="Forename" sex="M" name="Antonius">"2"</Name>
+<Name part="Forename" sex="M" name="Balsamo">"3"</Name>
+<Name part="Forename" sex="M" name="Bartolommeo">"4"</Name>
+<Name part="Forename" sex="M" name="Bonanno">"5"</Name>
+<Name part="Forename" sex="M" name="Brancaleone">"6"</Name>
+<Name part="Forename" sex="M" name="Ettore">"7"</Name>
+<Name part="Forename" sex="M" name="Franchino">"8"</Name>
+<Name part="Forename" sex="M" name="Galasso">"9"</Name>
+<Name part="Forename" sex="M" name="Grifo">"10"</Name>
+<Name part="Forename" sex="M" name="Guglielmo">"11"</Name>
+<Name part="Forename" sex="M" name="Jacobello">"12"</Name>
+<Name part="Forename" sex="M" name="Lenuzo">"13"</Name>
+<Name part="Forename" sex="M" name="Luchinus">"14"</Name>
+<Name part="Forename" sex="M" name="Marino">"15"</Name>
+<Name part="Forename" sex="M" name="Melmoth">"16"</Name>
+<Name part="Forename" sex="M" name="Mercuzio">"17"</Name>
+<Name part="Forename" sex="M" name="Montoni">"18"</Name>
+<Name part="Forename" sex="M" name="Oliverotto">"19"</Name>
+<Name part="Forename" sex="M" name="Paganinus">"20"</Name>
+<Name part="Forename" sex="M" name="Pantaleo">"21"</Name>
+<Name part="Forename" sex="M" name="Pintaldi">"22"</Name>
+<Name part="Forename" sex="M" name="Ravaglioli">"23"</Name>
+<Name part="Forename" sex="M" name="Rinaldo">"24"</Name>
+<Name part="Forename" sex="M" name="Saraceno">"25"</Name>
+<Name part="Forename" sex="M" name="Scarletto">"26"</Name>
+<Name part="Forename" sex="M" name="Schedoni">"27"</Name>
+<Name part="Forename" sex="M" name="Smarra">"28"</Name>
+<Name part="Forename" sex="M" name="Torchitorio">"29"</Name>
+<Name part="Forename" sex="M" name="Vatheck">"30"</Name>
+<Name part="Forename" sex="M" name="Ysidro">"31"</Name>
+<Name part="Forename" sex="M" name="Zenobio">"32"</Name>
+<Name part="Forename" sex="M" name="Zschokke">"33"</Name>
+<Name part="Forename" sex="F" name="Agnese">"1"</Name>
+<Name part="Forename" sex="F" name="Agnola">"2"</Name>
+<Name part="Forename" sex="F" name="Altapasqua">"3"</Name>
+<Name part="Forename" sex="F" name="Amellina">"4"</Name>
+<Name part="Forename" sex="F" name="Antonia">"5"</Name>
+<Name part="Forename" sex="F" name="Belcolore">"6"</Name>
+<Name part="Forename" sex="F" name="Bianca">"7"</Name>
+<Name part="Forename" sex="F" name="Cherubina">"8"</Name>
+<Name part="Forename" sex="F" name="Cicilia">"9"</Name>
+<Name part="Forename" sex="F" name="Corelia">"10"</Name>
+<Name part="Forename" sex="F" name="Ermellina">"11"</Name>
+<Name part="Forename" sex="F" name="Flaminea">"12"</Name>
+<Name part="Forename" sex="F" name="Flora">"13"</Name>
+<Name part="Forename" sex="F" name="Foscarina">"14"</Name>
+<Name part="Forename" sex="F" name="Francesca">"15"</Name>
+<Name part="Forename" sex="F" name="Ghisolabella">"16"</Name>
+<Name part="Forename" sex="F" name="Julietta">"17"</Name>
+<Name part="Forename" sex="F" name="Junipera">"18"</Name>
+<Name part="Forename" sex="F" name="Liona">"19"</Name>
+<Name part="Forename" sex="F" name="Lucretia">"20"</Name>
+<Name part="Forename" sex="F" name="Mathilda">"21"</Name>
+<Name part="Forename" sex="F" name="Mira">"22"</Name>
+<Name part="Forename" sex="F" name="Olympia">"23"</Name>
+<Name part="Forename" sex="F" name="Pantasilea">"24"</Name>
+<Name part="Forename" sex="F" name="Pia">"25"</Name>
+<Name part="Forename" sex="F" name="Pomellina">"26"</Name>
+<Name part="Forename" sex="F" name="Rigarda">"27"</Name>
+<Name part="Forename" sex="F" name="Smeralda">"28"</Name>
+<Name part="Forename" sex="F" name="Sofia">"29"</Name>
+<Name part="Forename" sex="F" name="Vannozza">"30"</Name>
+<Name part="Forename" sex="F" name="Vermilia">"31"</Name>
+<Name part="Forename" sex="F" name="Veronica">"32"</Name>
+<Name part="Forename" sex="F" name="Zebaina">"33"</Name>
+<Name part="Surname" name="Acciaioli">"1"</Name>
+<Name part="Surname" name="Acerbi">"2"</Name>
+<Name part="Surname" name="Albano">"3"</Name>
+<Name part="Surname" name="Alberti">"4"</Name>
+<Name part="Surname" name="d’Amoto">"5"</Name>
+<Name part="Surname" name="Barbacia">"6"</Name>
+<Name part="Surname" name="Barbigia">"7"</Name>
+<Name part="Surname" name="Barbolini">"8"</Name>
+<Name part="Surname" name="Bellegno">"9"</Name>
+<Name part="Surname" name="Bianco">"10"</Name>
+<Name part="Surname" name="Boccole">"11"</Name>
+<Name part="Surname" name="Calbo">"12"</Name>
+<Name part="Surname" name="Calcagnini">"13"</Name>
+<Name part="Surname" name="Calvis">"14"</Name>
+<Name part="Surname" name="Capello">"15"</Name>
+<Name part="Surname" name="Corbo">"16"</Name>
+<Name part="Surname" name="Fabbro">"17"</Name>
+<Name part="Surname" name="Figino">"18"</Name>
+<Name part="Surname" name="Filago">"19"</Name>
+<Name part="Surname" name="Filiarchi">"20"</Name>
+<Name part="Surname" name="Fiolo">"21"</Name>
+<Name part="Surname" name="Firavanti">"22"</Name>
+<Name part="Surname" name="Foscari">"23"</Name>
+<Name part="Surname" name="Fulci">"24"</Name>
+<Name part="Surname" name="Guerra">"25"</Name>
+<Name part="Surname" name="Malatesta">"26"</Name>
+<Name part="Surname" name="Marsillach">"27"</Name>
+<Name part="Surname" name="Molino">"28"</Name>
+<Name part="Surname" name="Pentangeli">"29"</Name>
+<Name part="Surname" name="Rosso">"30"</Name>
+<Name part="Surname" name="Udolpho">"31"</Name>
+<Name part="Surname" name="Vitelli">"32"</Name>
+<Name part="Surname" name="Zeluco">"33"</Name>
+</SUBCHAPTER_NAMES>
 <SUBCHAPTER_SKILL>
 <Skill>"RULES-COMPCHARM"</Skill>
   <!-- Charm -->
