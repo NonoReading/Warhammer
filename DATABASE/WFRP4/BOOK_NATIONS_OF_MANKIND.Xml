@@ -3856,13 +3856,24 @@ Description: You take a –50 penalty to your Weapon Skill characteristic if you
 <Attribut name="RULES-ATTR_Supp">"3"</Attribut>
 <Attribut name="RULES-ATTR_Move">"4"</Attribut>
 </SUBCHAPTER_ATTR>
-<!-- Noms wastelanders (Unofficial Character Pack, livre de fan, p.8, « common in the north-west of the Empire ») : Filip, Anders, Joachim, Astrid, Ingrid ; modeles et noms de famille repris du Reiklandais. -->
+<!-- Noms wastelanders (Unofficial Character Pack, livre de fan, p.8) : prenoms wastelanders (Filip, Anders, Joachim, Astrid, Ingrid) et d influence norse (Axel, Bengt, Rolf, Holger, Knud, Frida, Sigrid, Solveig, Erika, Karin, Kirsten) ; modeles et noms de famille repris du Reiklandais. -->
 <SUBCHAPTER_NAMES>
 <Name part="Forename" sex="M" name="Filip">"1"</Name>
 <Name part="Forename" sex="M" name="Anders">"2"</Name>
 <Name part="Forename" sex="M" name="Joachim">"3"</Name>
+<Name part="Forename" sex="M" name="Axel">"4"</Name>
+<Name part="Forename" sex="M" name="Bengt">"5"</Name>
+<Name part="Forename" sex="M" name="Rolf">"6"</Name>
+<Name part="Forename" sex="M" name="Holger">"7"</Name>
+<Name part="Forename" sex="M" name="Knud">"8"</Name>
 <Name part="Forename" sex="F" name="Astrid">"1"</Name>
 <Name part="Forename" sex="F" name="Ingrid">"2"</Name>
+<Name part="Forename" sex="F" name="Frida">"3"</Name>
+<Name part="Forename" sex="F" name="Sigrid">"4"</Name>
+<Name part="Forename" sex="F" name="Solveig">"5"</Name>
+<Name part="Forename" sex="F" name="Erika">"6"</Name>
+<Name part="Forename" sex="F" name="Karin">"7"</Name>
+<Name part="Forename" sex="F" name="Kirsten">"8"</Name>
 </SUBCHAPTER_NAMES>
 <SUBCHAPTER_SKILL>
   <!-- Livre p.3-4, "Humans (Westerland, Marienburg)", les competences dans l ordre du livre. -->

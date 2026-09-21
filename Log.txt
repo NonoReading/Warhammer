@@ -5988,3 +5988,7 @@ Fichiers modifies : BOOK_MIDDENHEIM_CITY_OF_THE_WHITE_WOLF.Xml, BOOK_NATIONS_OF_
 21/09/2026 - NOMS WASTELANDERS - DONNEES SEULES
 5 prenoms wastelanders du Character Pack p.8 (3 M, 2 F) sur NATIO-RACE_HWEST ; modeles et noms de famille du Reiklandais.
 Fichiers modifies : BOOK_NATIONS_OF_MANKIND.Xml, CONTEXT.md, Log.txt.
+
+21/09/2026 - NOMS WASTELANDERS : PRENOMS NORSES AJOUTES
+Les 11 prenoms d influence norse s ajoutent aux 5 wastelanders sur NATIO-RACE_HWEST (16 prenoms, comme Nordland et Ostland), decision de Nono.
+Fichiers modifies : BOOK_NATIONS_OF_MANKIND.Xml, CONTEXT.md, Log.txt.
