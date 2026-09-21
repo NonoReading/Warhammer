@@ -5968,3 +5968,7 @@ Fichiers modifies : BOOK_HIGH_ELF_PLAYERS_GUIDE.Xml, CONTEXT.md, A FAIRE.txt, Lo
 21/09/2026 - PATRONYMES HUMAINS (-SSON / -SDOTTIR) - DONNEES SEULES, A TESTER PAR NONO
 Deux modeles ajoutes a l humain du Rulebook (nom du pere + suffixe, Character Pack p.10), un tirage sur deux avec le nom de famille ; le modele Forename Surname est desormais declare pour M et F. Aucun code.
 Fichiers modifies : BOOK_RULESBOOK.Xml, CONTEXT.md, A FAIRE.txt, Log.txt.
+
+21/09/2026 - LISSAGE DES JONCTIONS DANS LES NOMS (DURRUNDISSON -> DURUNDISSON) - A COMPILER ET TESTER PAR NONO
+TireNom retire la lettre en double a la jonction de deux morceaux de table (prefixe + suffixe nains, composantes elfiques) ; pas pour les textes fixes. Le compilateur accepte l unite, mais le link a echoue (WarhammerHelp.exe verrouille par l appli en cours de test) : fermer l appli avant de recompiler.
+Fichiers modifies : chargeracephysique.pas, CONTEXT.md, Log.txt.

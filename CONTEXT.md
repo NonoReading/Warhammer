@@ -11297,4 +11297,6 @@ Modele : mots separes par des espaces ; un mot = elements separes par `+` ; elem
 
 **Patronymes humains (fait apres)** : deux modeles de plus sur l humain du Rulebook (`Forename Forename:M+'sson'` / `'sdottir'`, nom du pere tire dans la table masculine) ; les anciens modeles `Forename Surname` deviennent M et F (un modele sans sexe serait ecarte des que des modeles du sexe existent, voir `ChoisitModeleNom`) : un tirage sur deux. Donnees seules.
 
+**Lissage des jonctions (fait apres, sur retour de test : « Durrundisson »)** : dans `TireNom`, si deux morceaux de TABLE se suivent dans un mot et que la derniere lettre du premier egale la premiere du second (insensible a la casse), la lettre en double est retiree (Dur + rundi = Durundi ; Ullia + a = Ullia). Les textes fixes (`'sson'`) ne sont pas lisses : Erik + sson reste Eriksson.
+
 **Reste** (A FAIRE.txt) : ethnies sans donnee (Bretonniens, Kislevites...) retombent sur le Reiklandais ; V5 sans bloc de noms.

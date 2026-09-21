@@ -498,6 +498,7 @@ var
   Mots, Elements: TStringList;
   I, J, Deux: Integer;
   Facultatif, Manque: Boolean;
+  EstTable, PrecedentTable: Boolean;
 begin
   Result := '';
   Source := RaceSourceNom(CodeRace, '#');
@@ -521,6 +522,7 @@ begin
       begin
         Mot    := '';
         Manque := False;
+        PrecedentTable := False;
         Elements.Clear;
         Decoupe(Mots[I], '+', Elements);
         for J := 0 to Elements.Count - 1 do
@@ -532,7 +534,10 @@ begin
             if Facultatif and (Random(2) = 0) then
               Continue;
             if (Length(Element) >= 2) and (Element[1] = '''') then
-              Morceau := StringReplace(Copy(Element, 2, Length(Element) - 2), '_', ' ', [rfReplaceAll])
+              begin
+                Morceau  := StringReplace(Copy(Element, 2, Length(Element) - 2), '_', ' ', [rfReplaceAll]);
+                EstTable := False;
+              end
             else
               begin
                 Deux       := Pos(':', Element);
@@ -549,9 +554,16 @@ begin
                     Manque := True;
                     Break;
                   end;
-                Morceau := Valeur;
+                Morceau  := Valeur;
+                EstTable := True;
               end;
+            // Lissage a la jonction de deux morceaux de table (prefixe + suffixe...) : la meme lettre
+            // n'est pas ecrite deux fois (Dur + rundi = Durundi, Ullia + a = Ullia).
+            if EstTable and PrecedentTable and (Mot <> '') and (Morceau <> '')
+               and (LowerCase(Mot[Length(Mot)]) = LowerCase(Morceau[1])) then
+              Delete(Morceau, 1, 1);
             Mot := Mot + Morceau;
+            PrecedentTable := EstTable;
           end;
         if Manque or (Mot = '') then
           Continue;
