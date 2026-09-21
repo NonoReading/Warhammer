@@ -11299,4 +11299,6 @@ Modele : mots separes par des espaces ; un mot = elements separes par `+` ; elem
 
 **Lissage des jonctions (fait apres, sur retour de test : « Durrundisson »)** : dans `TireNom`, si deux morceaux de TABLE se suivent dans un mot et que la derniere lettre du premier egale la premiere du second (insensible a la casse), la lettre en double est retiree (Dur + rundi = Durundi ; Ullia + a = Ullia). Les textes fixes (`'sson'`) ne sont pas lisses : Erik + sson reste Eriksson.
 
-**Reste** (A FAIRE.txt) : ethnies sans donnee (Bretonniens, Kislevites...) retombent sur le Reiklandais ; V5 sans bloc de noms.
+**Bretonniens et Kislevites (fait apres)** : 4 ethnies de `BOOK_NATIONS_OF_MANKIND.Xml` (`NATIO-RACE_HBRPA`, `_HBRNO` ; `_HUNG`, `_HGOSP`) portent les prenoms d exemple du Character Pack p.8 (Bretonniens : 3 M, 5 F ; Kislevites : 3 M, 3 F ; sexe d apres ses tables de prenoms) et leurs propres modeles `Forename Surname` M et F (sinon le repli aurait pris les patronymes -sson du Reiklandais) ; le nom de famille est celui du Reiklandais (aucun dans les livres). **Regle changee** : `RaceSourceNom` ne prefere plus l ethnie du meme livre (une ethnie sans donnee de Nations of Mankind, Estalia par exemple, aurait pioche dans la liste kislevite) : retour a « ethnie elle-meme, sinon livre de l espece » ; une ethnie qui doit avoir SA liste la porte elle-meme (copies : 3 ethnies norses, 2 bretonniennes, 2 kislevites).
+
+**Reste** (A FAIRE.txt) : autres ethnies sans donnee (Estaliens, Arabes...) retombent sur le Reiklandais ; V5 sans bloc de noms.

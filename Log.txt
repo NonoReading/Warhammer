@@ -5972,3 +5972,7 @@ Fichiers modifies : BOOK_RULESBOOK.Xml, CONTEXT.md, A FAIRE.txt, Log.txt.
 21/09/2026 - LISSAGE DES JONCTIONS DANS LES NOMS (DURRUNDISSON -> DURUNDISSON) - A COMPILER ET TESTER PAR NONO
 TireNom retire la lettre en double a la jonction de deux morceaux de table (prefixe + suffixe nains, composantes elfiques) ; pas pour les textes fixes. Le compilateur accepte l unite, mais le link a echoue (WarhammerHelp.exe verrouille par l appli en cours de test) : fermer l appli avant de recompiler.
 Fichiers modifies : chargeracephysique.pas, CONTEXT.md, Log.txt.
+
+21/09/2026 - NOMS BRETONNIENS ET KISLEVITES (LISTES D EXEMPLE DU CHARACTER PACK) - COMPILE, A TESTER PAR NONO
+Prenoms d exemple du Unofficial Character Pack p.8 poses sur les 2 ethnies bretonniennes et les 2 kislevites de Nations of Mankind, avec leurs modeles ; nom de famille repris du Reiklandais. Decision de Nono : listes du livre, sans nom invente. RaceSourceNom : suppression de la preference du meme livre (elle envoyait les autres ethnies de Nations of Mankind vers la liste kislevite).
+Fichiers modifies : BOOK_NATIONS_OF_MANKIND.Xml, chargeracephysique.pas, CONTEXT.md, A FAIRE.txt, Log.txt.

@@ -1775,6 +1775,17 @@ Description: You take a –50 penalty to your Weapon Skill characteristic if you
 <Attribut name="RULES-ATTR_Supp">"3"</Attribut>
 <Attribut name="RULES-ATTR_Move">"4"</Attribut>
 </SUBCHAPTER_ATTR>
+<!-- Noms kislevites : prenoms d exemple du Unofficial Character Pack (livre de fan, p.8), sexe d apres ses tables de prenoms ; aucun nom de famille dans les livres : celui du Reiklandais (Rulebook) est repris. -->
+<SUBCHAPTER_NAMES>
+<NamePattern sex="M">"Forename Surname"</NamePattern>
+<NamePattern sex="F">"Forename Surname"</NamePattern>
+<Name part="Forename" sex="M" name="Alexei">"1"</Name>
+<Name part="Forename" sex="M" name="Gregor">"2"</Name>
+<Name part="Forename" sex="M" name="Viktor">"3"</Name>
+<Name part="Forename" sex="F" name="Nastassia">"1"</Name>
+<Name part="Forename" sex="F" name="Alexa">"2"</Name>
+<Name part="Forename" sex="F" name="Carmilla">"3"</Name>
+</SUBCHAPTER_NAMES>
 <SUBCHAPTER_SKILL>
   <!-- Livre p.3, "Kislev (Ungol)", les 12 competences dans l ordre du livre. -->
 <Skill>"RULES-COMPSOINANI"</Skill>
@@ -2392,6 +2403,19 @@ Description: You take a –50 penalty to your Weapon Skill characteristic if you
 <Attribut name="RULES-ATTR_Supp">"3"</Attribut>
 <Attribut name="RULES-ATTR_Move">"4"</Attribut>
 </SUBCHAPTER_ATTR>
+<!-- Noms bretonniens : prenoms d exemple du Unofficial Character Pack (livre de fan, p.8), sexe d apres ses tables de prenoms ; aucun nom de famille dans les livres : celui du Reiklandais (Rulebook) est repris. -->
+<SUBCHAPTER_NAMES>
+<NamePattern sex="M">"Forename Surname"</NamePattern>
+<NamePattern sex="F">"Forename Surname"</NamePattern>
+<Name part="Forename" sex="M" name="Anton">"1"</Name>
+<Name part="Forename" sex="M" name="Hugo">"2"</Name>
+<Name part="Forename" sex="M" name="Sebastien">"3"</Name>
+<Name part="Forename" sex="F" name="Marie">"1"</Name>
+<Name part="Forename" sex="F" name="Elene">"2"</Name>
+<Name part="Forename" sex="F" name="Helena">"3"</Name>
+<Name part="Forename" sex="F" name="Heloise">"4"</Name>
+<Name part="Forename" sex="F" name="Simone">"5"</Name>
+</SUBCHAPTER_NAMES>
 <SUBCHAPTER_SKILL>
   <!-- Livre p.3-4, "Humans (Bretonnia, Peasantry)", les competences dans l ordre du livre. -->
 <Skill>"RULES-COMPSOINANI"</Skill>
@@ -2591,6 +2615,19 @@ Description: You take a –50 penalty to your Weapon Skill characteristic if you
 <Attribut name="RULES-ATTR_Supp">"3"</Attribut>
 <Attribut name="RULES-ATTR_Move">"4"</Attribut>
 </SUBCHAPTER_ATTR>
+<!-- Noms bretonniens : prenoms d exemple du Unofficial Character Pack (livre de fan, p.8), sexe d apres ses tables de prenoms ; aucun nom de famille dans les livres : celui du Reiklandais (Rulebook) est repris. -->
+<SUBCHAPTER_NAMES>
+<NamePattern sex="M">"Forename Surname"</NamePattern>
+<NamePattern sex="F">"Forename Surname"</NamePattern>
+<Name part="Forename" sex="M" name="Anton">"1"</Name>
+<Name part="Forename" sex="M" name="Hugo">"2"</Name>
+<Name part="Forename" sex="M" name="Sebastien">"3"</Name>
+<Name part="Forename" sex="F" name="Marie">"1"</Name>
+<Name part="Forename" sex="F" name="Elene">"2"</Name>
+<Name part="Forename" sex="F" name="Helena">"3"</Name>
+<Name part="Forename" sex="F" name="Heloise">"4"</Name>
+<Name part="Forename" sex="F" name="Simone">"5"</Name>
+</SUBCHAPTER_NAMES>
 <SUBCHAPTER_SKILL>
   <!-- Livre p.3-4, "Humans (Bretonnia, Nobility)", les competences dans l ordre du livre. -->
 <Skill>"RULES-COMPANIM"</Skill>
@@ -3402,6 +3439,17 @@ Description: You take a –50 penalty to your Weapon Skill characteristic if you
 <Attribut name="RULES-ATTR_Supp">"3"</Attribut>
 <Attribut name="RULES-ATTR_Move">"4"</Attribut>
 </SUBCHAPTER_ATTR>
+<!-- Noms kislevites : prenoms d exemple du Unofficial Character Pack (livre de fan, p.8), sexe d apres ses tables de prenoms ; aucun nom de famille dans les livres : celui du Reiklandais (Rulebook) est repris. -->
+<SUBCHAPTER_NAMES>
+<NamePattern sex="M">"Forename Surname"</NamePattern>
+<NamePattern sex="F">"Forename Surname"</NamePattern>
+<Name part="Forename" sex="M" name="Alexei">"1"</Name>
+<Name part="Forename" sex="M" name="Gregor">"2"</Name>
+<Name part="Forename" sex="M" name="Viktor">"3"</Name>
+<Name part="Forename" sex="F" name="Nastassia">"1"</Name>
+<Name part="Forename" sex="F" name="Alexa">"2"</Name>
+<Name part="Forename" sex="F" name="Carmilla">"3"</Name>
+</SUBCHAPTER_NAMES>
 <SUBCHAPTER_SKILL>
   <!-- Livre p.3-4, "Humans (Kislev, Gospodar)", les competences dans l ordre du livre. -->
 <Skill>"RULES-COMPSOINANI"</Skill>

@@ -297,16 +297,15 @@ begin
 end;
 
 // Ethnie dont on lit la partie de nom : l'ethnie elle-meme si elle la porte, sinon une ethnie de la
-// meme race (Espece), en preferant celle du meme livre que l'ethnie demandee (les trois ethnies
-// norses de Sea of Claws se partagent ainsi une seule liste), puis celle du livre de la race.
+// meme race (Espece), celle du livre de la race en priorite (meme regle que RaceSourcePhysique).
 // Chaque partie se cherche separement : le modele et les clans peuvent venir du Rulebook, les
-// prenoms d'un autre livre. '' si rien n'est trouve.
+// prenoms d'un autre livre. Une ethnie qui doit avoir SA liste (Norses, Bretonniens, Kislevites)
+// la porte elle-meme : un repli par livre ferait piocher les Estaliens dans la liste kislevite.
+// '' si rien n'est trouve.
 function RaceSourceNom(CodeRace, Partie: String): String;
 var
   PRace, PCandidat: StructureRace;
   Espece:           String;
-  LivreEthnie, LivreEspece, LivreCandidat: String;
-  MemeLivreEspece:  String;
 begin
   Result := '';
   if EthnieAPartieNom(CodeRace, Partie) then
@@ -318,28 +317,20 @@ begin
   Espece := Trim(PRace.Espece);
   if Espece = '' then
     Exit;
-  LivreEthnie     := ExtractStringBefore(CodeRace, SeparateurLivre);
-  LivreEspece     := ExtractStringBefore(Espece, SeparateurLivre);
-  MemeLivreEspece := '';
   for PCandidat in ListRace do
     begin
       if not CompareRechercheValeur(PCandidat.Espece, Espece) then
         continue;
       if not EthnieAPartieNom(PCandidat.CodeRace, Partie) then
         continue;
-      LivreCandidat := ExtractStringBefore(PCandidat.CodeRace, SeparateurLivre);
-      if LivreCandidat = LivreEthnie then
+      if Result = '' then
+        Result := PCandidat.CodeRace;
+      if ExtractStringBefore(PCandidat.CodeRace, SeparateurLivre) = ExtractStringBefore(Espece, SeparateurLivre) then
         begin
           Result := PCandidat.CodeRace;
           Exit;
         end;
-      if (LivreCandidat = LivreEspece) and (MemeLivreEspece = '') then
-        MemeLivreEspece := PCandidat.CodeRace;
-      if Result = '' then
-        Result := PCandidat.CodeRace;
     end;
-  if MemeLivreEspece <> '' then
-    Result := MemeLivreEspece;
 end;
 
 function RaceANoms(CodeRace: String): Boolean;
