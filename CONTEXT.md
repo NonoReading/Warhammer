@@ -11261,6 +11261,8 @@ Formules : Humain 15+d10 / 4'9"+2d10 ; Nain 15+10d10 / 4'3"+d10 ; Elfe (les deux
 
 **Pieges** : `MiseEnFormeDesChamp` (`globalfonts.pas`) pose un `TShape` alClient sur chaque `TTabSheet` : tout controle non fenetre pose dans un onglet (TBCButton, TLabel) est cache ; `BringToFront` pour un bouton, `TEdit` lecture seule pour un texte (les `TLabel` d onglet sont en plus colories en rouge par cette boucle). Voir §4.
 
+**Fait le 21/09 (a compiler)** : Ogre (Archives II), Elfe noir (Lords of Naggaroth : age et 2 tirages d yeux supposes comme les elfes du Rulebook), 5 peaux-vertes (Green iz Best : yeux/cheveux en ligne unique, pas de table dans le livre). Donnees seules.
+
 **Reste** (A FAIRE.txt) : Gnome de Rough Nights p.89, Dwarf Player s Guide (tables par region, modificateurs -5/+5, Distinguished Features), autres livres ethniques, codes de libelle (boutons, legendes de WinPhysique, couleurs), tirage obligatoire ou non. **Fait le 21/09 (compile et valide)** : couleurs en francais (Rulebook FR p.40, `ConstPRaceCouleur` dans `Traduit`), repli sur la race (`RaceSourcePhysique`), unite de taille CM/INCH (cle `HEIGHTUNIT=` de l INI, `Personnage.HeightUnit`, liste cm/in dans WinPhysique ; fiche sans balise = pouces).
 
 ### 2.87 Generateur de noms par ethnie (paliers 1 et 2) — compile, A TESTER par Nono (21/09/2026)

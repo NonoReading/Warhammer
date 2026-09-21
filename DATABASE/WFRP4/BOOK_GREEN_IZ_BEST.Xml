@@ -858,6 +858,13 @@
 <Attribut name="RULES-ATTR_Supp">"2"</Attribut>
 <Attribut name="RULES-ATTR_Move">"4"</Attribut>
 </SUBCHAPTER_ATTR>
+<SUBCHAPTER_PHYSICAL>
+<Age>"10+2d10"</Age>
+<Height>"63+2d10"</Height>
+<HeightExplode>"1"</HeightExplode>
+<Eye name="Red">"2-20"</Eye>
+<Hair name="Very dark brown or black">"2-20"</Hair>
+</SUBCHAPTER_PHYSICAL>
 <SUBCHAPTER_SKILL>
 <Skill>"RULES-COMPATHL"</Skill>
   <!-- Athletics -->
@@ -940,6 +947,13 @@
 <Attribut name="RULES-ATTR_Supp">"1"</Attribut>
 <Attribut name="RULES-ATTR_Move">"4"</Attribut>
 </SUBCHAPTER_ATTR>
+<SUBCHAPTER_PHYSICAL>
+<Age>"10+2d10"</Age>
+<Height>"71+2d10"</Height>
+<HeightExplode>"1"</HeightExplode>
+<Eye name="Red">"2-20"</Eye>
+<Hair name="Very dark brown or black">"2-20"</Hair>
+</SUBCHAPTER_PHYSICAL>
 <SUBCHAPTER_SKILL>
 <Skill>"RULES-COMPATHL"</Skill>
   <!-- Athletics -->
@@ -1010,6 +1024,13 @@
 <Attribut name="RULES-ATTR_Supp">"3"</Attribut>
 <Attribut name="RULES-ATTR_Move">"4"</Attribut>
 </SUBCHAPTER_ATTR>
+<SUBCHAPTER_PHYSICAL>
+<Age>"10+d10"</Age>
+<Height>"41+d10"</Height>
+<HeightExplode>"1"</HeightExplode>
+<Eye name="Red">"2-20"</Eye>
+<Hair name="Very dark brown or black">"2-20"</Hair>
+</SUBCHAPTER_PHYSICAL>
 <SUBCHAPTER_SKILL>
 <Skill>"RULES-COMPATHL"</Skill>
   <!-- Athletics -->
@@ -1108,6 +1129,13 @@
 <Attribut name="RULES-ATTR_Supp">"3"</Attribut>
 <Attribut name="RULES-ATTR_Move">"4"</Attribut>
 </SUBCHAPTER_ATTR>
+<SUBCHAPTER_PHYSICAL>
+<Age>"10+d10"</Age>
+<Height>"41+d10"</Height>
+<HeightExplode>"1"</HeightExplode>
+<Eye name="Red">"2-20"</Eye>
+<Hair name="Very dark brown or black">"2-20"</Hair>
+</SUBCHAPTER_PHYSICAL>
 <SUBCHAPTER_SKILL>
 <Skill>"RULES-COMPATHL"</Skill>
   <!-- Athletics -->
@@ -1202,6 +1230,13 @@
 <Attribut name="RULES-ATTR_Supp">"2"</Attribut>
 <Attribut name="RULES-ATTR_Move">"4"</Attribut>
 </SUBCHAPTER_ATTR>
+<SUBCHAPTER_PHYSICAL>
+<Age>"13+d10"</Age>
+<Height>"53+2d10"</Height>
+<HeightExplode>"1"</HeightExplode>
+<Eye name="Red">"2-20"</Eye>
+<Hair name="Very dark brown or black">"2-20"</Hair>
+</SUBCHAPTER_PHYSICAL>
 <SUBCHAPTER_SKILL>
 <Skill>"RULES-COMPATHL"</Skill>
   <!-- Athletics -->

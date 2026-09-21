@@ -5992,3 +5992,7 @@ Fichiers modifies : BOOK_NATIONS_OF_MANKIND.Xml, CONTEXT.md, Log.txt.
 21/09/2026 - NOMS WASTELANDERS : PRENOMS NORSES AJOUTES
 Les 11 prenoms d influence norse s ajoutent aux 5 wastelanders sur NATIO-RACE_HWEST (16 prenoms, comme Nordland et Ostland), decision de Nono.
 Fichiers modifies : BOOK_NATIONS_OF_MANKIND.Xml, CONTEXT.md, Log.txt.
+
+21/09/2026 - DETAILS PHYSIQUES : OGRES, ELFES NOIRS, PEAUX-VERTES - DONNEES SEULES, A COMPILER ET TESTER PAR NONO
+Bloc SUBCHAPTER_PHYSICAL pose sur ARCH2-RACE_OGRE (Archives of the Empire II p.21 : 5d10+15, 7'7"+d10, tables yeux/cheveux), NAGGA-RACE_DELF (Lords of Naggaroth, fan : taille des Hauts Elfes, tables yeux/cheveux ; AGE 30+10d10 et 2 tirages d yeux repris des elfes du Rulebook, le livre ne les donne pas) et les 5 peaux-vertes de Green iz Best (age et taille du livre, explosion du de ; yeux rouges et cheveux sombres en ligne unique, le livre ne donne pas de table). Aucune modification de code. Autres livres ethniques verifies : aucune autre table (Dwarf Player s Guide : table absente du PDF).
+Fichiers modifies : BOOK_ARCHIVES_OF_THE_EMPIRE_II.Xml, BOOK_LORDS_OF_NAGGAROTH.Xml, BOOK_GREEN_IZ_BEST.Xml, Log.txt.

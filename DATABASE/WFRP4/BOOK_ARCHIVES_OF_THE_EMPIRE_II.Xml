@@ -87,6 +87,30 @@ Examples you could take include: Alcohol, Food, Narcotics, Pleasure."</Explanati
 <Attribut name="RULES-ATTR_Supp">"1"</Attribut>
 <Attribut name="RULES-ATTR_Move">"6"</Attribut>
 </SUBCHAPTER_ATTR>
+<SUBCHAPTER_PHYSICAL>
+<Age>"5d10+15"</Age>
+<Height>"91+d10"</Height>
+<Eye name="Grey">"2"</Eye>
+<Eye name="Green">"3"</Eye>
+<Eye name="Amber">"4"</Eye>
+<Eye name="Hazel">"5-7"</Eye>
+<Eye name="Brown">"8-11"</Eye>
+<Eye name="Dark Brown">"12-14"</Eye>
+<Eye name="Sienna">"15-17"</Eye>
+<Eye name="Black">"18"</Eye>
+<Eye name="Purple Black">"19"</Eye>
+<Eye name="Blue Black">"20"</Eye>
+<Hair name="Brown">"2"</Hair>
+<Hair name="Red Brown">"3"</Hair>
+<Hair name="Terracotta">"4"</Hair>
+<Hair name="Sienna">"5-7"</Hair>
+<Hair name="Burgundy">"8-11"</Hair>
+<Hair name="Dark Brown">"12-14"</Hair>
+<Hair name="Black">"15-17"</Hair>
+<Hair name="Charcoal">"18"</Hair>
+<Hair name="Jet Black">"19"</Hair>
+<Hair name="Blue Black">"20"</Hair>
+</SUBCHAPTER_PHYSICAL>
 <SUBCHAPTER_SKILL>
 <Skill>"RULES-COMPATHL"</Skill>
   <!-- Athletics -->

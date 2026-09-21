@@ -59,6 +59,31 @@ At the cost of one corruption point the Sorceress may add doublle their Willpowe
 <Attribut name="RULES-ATTR_Supp">"2"</Attribut>
 <Attribut name="RULES-ATTR_Move">"5"</Attribut>
 </SUBCHAPTER_ATTR>
+<SUBCHAPTER_PHYSICAL>
+<Age>"30+10d10"</Age>
+<Height>"71+d10"</Height>
+<EyeRolls>"2"</EyeRolls>
+<Eye name="Jet">"2"</Eye>
+<Eye name="Onyx">"3"</Eye>
+<Eye name="Turquoise">"4"</Eye>
+<Eye name="Grey agate">"5-7"</Eye>
+<Eye name="Lapis">"8-11"</Eye>
+<Eye name="Sapphire">"12-14"</Eye>
+<Eye name="Amethyst">"15-17"</Eye>
+<Eye name="Silver">"18"</Eye>
+<Eye name="Iron">"19"</Eye>
+<Eye name="Emerald">"20"</Eye>
+<Hair name="Coal black">"2"</Hair>
+<Hair name="Blue black">"3"</Hair>
+<Hair name="Ebony">"4"</Hair>
+<Hair name="Jet black">"5-7"</Hair>
+<Hair name="Raven black">"8-11"</Hair>
+<Hair name="White">"12-14"</Hair>
+<Hair name="Ice white">"15-17"</Hair>
+<Hair name="Silver">"18"</Hair>
+<Hair name="Platinum">"19"</Hair>
+<Hair name="Dyed">"20"</Hair>
+</SUBCHAPTER_PHYSICAL>
 <!-- Noms elfiques noirs (Lords of Naggaroth, livre de fan) : generateur elfique du Rulebook p.39 avec la terminaison des Elfes noirs, puis un nom de puissance. -->
 <SUBCHAPTER_NAMES>
 <NamePattern>"First+Second?+End Epithet"</NamePattern>
