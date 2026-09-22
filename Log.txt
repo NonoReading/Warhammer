@@ -6079,3 +6079,28 @@ Assistant tous fideles au texte. Ecart : "Alternative Channelling / Cants" (p.85
 domaines de magie optionnels avec leurs propres sorts, totalement absent du XML - Nono
 choisit de le mettre de cote pour l instant.
 Fichiers modifies : A FAIRE.txt, Log.txt.
+
+22/09/2026 - TOGGLE .INI PAR LIVRE POUR LES REGLES OPTIONNELLES : CONCU, CODE, TESTE ET VALIDE
+Recensement complet (texte des livres et noms de balises XML) : 3 options reelles trouvees
+(Quick Armour du Rulebook p.301, signes astraux d Archives II, carriere alternative de Sea
+of Claws et Lustria) ; DATA_CAREER_SUBCHOICE (Up in Arms, Winds of Magic) examine et ecarte
+(substitution aleatoire normale, pas un choix facultatif) ; clan Halfling d Archives I note
+comme piste incertaine, statut a part.
+Nouveau bloc XML <DATA_OPTION_RULE> par livre (code, description, explication) et nouvelle
+ligne .INI OPTION<Livre>=<liste> (meme principe que BOOK<version>=). Desactivation REELLE
+au chargement (l option ne rentre pas en memoire), pas un simple filtre d affichage.
+Nouvelle fenetre WinOptionRegle (bouton "Optional rules" dans TMenu), entierement construite
+en code, listant toutes les options de tous les livres charges avec case a cocher et
+explication ; persistance via SauveIniOptions (n ecrit que les lignes OPTION du .INI, evite
+une dependance circulaire vers TMenu). Quatre bugs trouves et corriges en testant : crash au
+demarrage (libelle du bouton lu avant le chargement d INTERFACE.Xml), colonnes de grille en
+trop (garde ColCount<2 jamais declenche), case a cocher inerte (ecrite dans la colonne fixe
+0, non selectionnable), et traduction francaise de Quick Armour qui n aurait jamais ete
+affichee (chargement ne gardait que la passe anglaise).
+Quick Armour traduit en francais (texte maison, original LdB FR non retrouve). Decision de
+Nono : la traduction francaise du projet ne touche jamais les autres livres, seulement
+interface + Rulebook - pas de traduction pour signes astraux/carriere alternative.
+Fichiers modifies : chargeconstantes.pas, chargeoptionregle.pas (nouveau), warhammersource.pas,
+winarmor.pas, winoptionregle.pas (nouveau), xmlexportimport.pas, BOOK_RULESBOOK.Xml,
+BOOK_RULESBOOK_FRANCAIS.Xml, BOOK_ARCHIVES_OF_THE_EMPIRE_II.Xml, BOOK_SEA_OF_CLAWS.Xml,
+BOOK LUSTRIA.xml, INTERFACE.Xml, INTERFACE_FRANCAIS.Xml, CONTEXT.md, A FAIRE.txt, Log.txt.
