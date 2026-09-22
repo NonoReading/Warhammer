@@ -11309,7 +11309,7 @@ Modele : mots separes par des espaces ; un mot = elements separes par `+` ; elem
 
 **Reste** (A FAIRE.txt) : autres ethnies sans donnee (Estaliens, Arabes...) retombent sur le Reiklandais ; V5 sans bloc de noms.
 
-### 2.88 Signes astraux (Archives of the Empire II p.39-50) — compile, A TESTER de bout en bout par Nono (21/09/2026)
+### 2.88 Signes astraux (Archives of the Empire II p.39-50) — terminé, testé et validé par Nono (22/09/2026)
 
 **Regle** : systeme optionnel apres la determination des caracteristiques. 1d100 sur 20 signes ; chaque signe donne +2/+2/-3 en caracteristiques OU un niveau de talent avec un -3 ; 25 XP si le signe tire est conserve, rien s il est choisi. Decisions de Nono : suivre le TABLEAU quand le texte detaille diverge (Mummit -3 Volonte, pas -4 ; Witchling Star avec sous-tirage d10 : Sixth Sense / Second Sight / Petty Magic / Witch! -5 Force), effets calcules au vol, etape de creation.
 

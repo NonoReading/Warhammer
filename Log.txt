@@ -6022,3 +6022,7 @@ Fichiers modifies : wincreation.pas, chargepersonnage.pas, CONTEXT.md, A FAIRE.t
 22/09/2026 - SIGNES ASTRAUX : PLAFOND DU TALENT DU SIGNE AU MAXIMUM (BONUS DE CARACTERISTIQUE) - COMPILE, A TESTER PAR NONO
 La fusion du talent du signe avec un niveau deja pris (AjouteTalentSigne, 21/09) pouvait depasser le maximum du talent quand celui-ci est plafonne au bonus d une caracteristique (MaxiTalent = "(BXX)"). Le livre (Archives II p.39) ne dit pas ce qu il advient du niveau perdu dans ce cas. Choix retenu : ne pas ajouter le niveau au-dela du maximum, comme le fait deja la grille de progression pour une saisie manuelle. Nouvelle fonction TalentMaxCreation (wincreation.pas), meme calcul que TabAugmentationTalentCalcul (winpersonnage.pas) mais lu dans TabAttribut de la creation (colonne totale + modificateur du signe astral, plutot que la grille de progression).
 Fichiers modifies : wincreation.pas, CONTEXT.md, A FAIRE.txt, Log.txt.
+
+22/09/2026 - SIGNES ASTRAUX : TESTE DE BOUT EN BOUT, VALIDE PAR NONO
+Test dans WinCreation (tirage, choix, specialisation du talent generique) et sur le PDF Feldo2P (ligne d information astral n apparait que si le personnage a un signe, deja gere par Ord(Personnage.SigneAstral <> '') dans le calcul de NbLignes de PdfBlocEntete). Aucun code modifie, chantier clos.
+Fichiers modifies : CONTEXT.md, Log.txt.
