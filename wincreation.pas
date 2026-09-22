@@ -159,6 +159,7 @@ type
     procedure ButtonSigneClick({%H-}Sender: TObject);
     procedure ButtonSigneSpeClick({%H-}Sender: TObject);
     procedure MajTexteSigne();
+    Function TalentMaxCreation(CodeTalent: String): Integer;
     procedure AjouteTalentSigne();
     procedure ComboBoxSigneSelect({%H-}Sender: TObject);
     procedure ChargeSignesAstraux();
@@ -2028,16 +2029,49 @@ procedure TWinCreations.MajTexteSigne();
     ButtonSigneSpe.Visible := MemoSigne.Visible and (CodeGenerique <> '');
   end;
 
+// Meme calcul de plafond que TabAugmentationTalentCalcul (winpersonnage.pas) : MaxiTalent est
+// soit un nombre, soit une formule "(BXX)" (bonus de la caracteristique XX). Ici la caracteristique
+// est lue dans TabAttribut (encore chargee a la phase 9) plutot que dans la grille de progression,
+// modificateur du signe astral inclus (meme calcul que RecapAttribut, ligne au-dessus).
+function TWinCreations.TalentMaxCreation(CodeTalent: String): Integer;
+  var
+    PTalent:   StructureTalent;
+    ValeurMax: Integer;
+    Calcul:    String;
+    Carac:     String;
+    IndTab:    Integer;
+    Total:     Integer;
+  begin
+    Result  := 0;
+    PTalent := ChercheTalent(CodeTalent);
+    if PTalent.MaxiTalent = '' then
+      Exit;
+    if TryStrToInt(PTalent.MaxiTalent, ValeurMax) then
+      Exit(ValeurMax);
+    Calcul := PTalent.MaxiTalent;
+    Carac  := StringReplace(ExtractStringAfter(Calcul, '(B'),')','',[rfReplaceAll]);
+    for IndTab := 1 to (TabAttribut.Rowcount-1) do
+      if CodeSansLivre(TabAttribut.Cells[7, IndTab]) = Carac then
+        begin
+          Total  := StrToIntDef(TabAttribut.Cells[6, IndTab], 0)
+                    + SigneAstralAttributModif(Personnage.SigneAstral, Personnage.SigneAstralVariante, TabAttribut.Cells[7, IndTab]);
+          Result := Trunc(Total / 10);
+          Break;
+        end;
+  end;
+
 // Le signe n'existe qu'a la creation (Archives II p.39) : son talent est ecrit dans CreationTalent, comme
-// un talent de depart. Un talent deja pris gagne un niveau (une seule ligne). Un talent generique dont
-// la specialisation n'a pas ete choisie n'est pas donne.
+// un talent de depart. Un talent deja pris gagne un niveau (une seule ligne), plafonne au maximum du
+// talent (bonus de caracteristique) s'il en a un : le livre ne dit pas ce qu'il advient du niveau perdu,
+// choix retenu ici, on ne depasse simplement pas le maximum, comme le fait deja la grille de progression.
 procedure TWinCreations.AjouteTalentSigne();
   var
-    PEffet:  StructureSigneEffet;
-    PTalent: StructurePersonnageTalent;
-    Code:    String;
-    Ind:     Integer;
-    Trouve:  Boolean;
+    PEffet:    StructureSigneEffet;
+    PTalent:   StructurePersonnageTalent;
+    Code:      String;
+    Ind:       Integer;
+    Trouve:    Boolean;
+    ValeurMax: Integer;
   begin
     if Personnage.SigneAstral = '' then
       Exit;
@@ -2054,7 +2088,9 @@ procedure TWinCreations.AjouteTalentSigne();
           for Ind := 0 to High(Personnage.CreationTalent) do
             if Personnage.CreationTalent[Ind].CodeTalent = Code then
               begin
-                Personnage.CreationTalent[Ind].Valeur := Personnage.CreationTalent[Ind].Valeur + 1;
+                ValeurMax := TalentMaxCreation(Code);
+                if (ValeurMax <= 0) or (Personnage.CreationTalent[Ind].Valeur < ValeurMax) then
+                  Personnage.CreationTalent[Ind].Valeur := Personnage.CreationTalent[Ind].Valeur + 1;
                 Trouve := True;
                 Break;
               end;
