@@ -6165,3 +6165,39 @@ ECARTS REELS TROUVES :
 Chantier "AUDIT DES TXT" quasi clos : ne reste que le Rulesbook (FR+EN, ~2600 identifiants
 cote anglais), a traiter a part vu sa taille.
 Fichiers modifies : DATABASE/WFRP4/BOOK_GREEN_IZ_BEST.Xml, CONTEXT.md, A FAIRE.txt, Log.txt.
+
+22/09/2026 - ENEMY IN SHADOWS COMPANION : SORTS DE TZEENTCH SAISIS (CHAPITRE 9, THE PURPLE HAND)
+Reprise du premier ecart de l audit de la veille (sorts/creatures Tzeentch d Enemy in Shadows
+Companion). Source relue directement (PDF_TEXTE/Enemy Within and Companions/Enemy in Shadows
+Companion.txt), decompte verifie page par page via l index du livre (LIVRES/
+Enemy_in_Shadows_Companion.txt, chaque sort y est liste avec sa page) plutot que de se fier a
+l estimation approximative "9+13" de l audit sous-agent de la veille (confirmation chiffree
+seulement, pas une transcription).
+Resultat reel : 23 sorts, pas 22. 10 Chaos Arcane Spells (p.79-81, disponibles a tout sorcier
+du Chaos quelle que soit sa Lore - Blast of Corruption, Bolt of Corruption, Daemonic Mien,
+Foul Messenger, Joyous Aspect, Obsession, Power of Chaos, Rend Aethyr, Slave to Darkness, The
+Purple Hand) + 13 Lore of Tzeentch (p.81-83, specifiques a Tzeentch - Blue Fire of Tzeentch,
+Bolt of Change, Boon of Tzeentch, Curse of Tzeentch, The Flickering Flames of Fickle Fate,
+Master of Fortune, Mindfire, Pink Fire of Tzeentch, Sense the Skein, Transformation of
+Tzeentch, Tzeentch's Firestorm, Tzeentch's Golden Aura, Word of Tzeentch). Distinction
+determinee par la position de chaque sort par rapport a l entete "The Lore of Tzeentch" dans
+le texte (avant = generique, apres = specifique), pas par le nom du sort seul.
+Mecanisme reutilise tel quel (aucun code Pascal touche) : precedent trouve dans
+BOOK_RULESBOOK.Xml (RULES-CHAOS_01/02/03, meme structure <Sort>, Talent RULES-T0172_NURGLE/
+_SLAANESH/_TZEENTCH) et confirmation que RULES-T0172_* (Chaos Magic (Any)) existe deja comme
+talent generique - exactement le role qu il fallait pour les 10 Chaos Arcane Spells. Les
+codes (ATTR_x)/(BATTR_x) dans Portee/Cible/Duree (ex. "(ATTR_WP)m", "(BATTR_Fel) Rounds+")
+sont deja resolus par PdfPersonnageRemplaceBonus (pdfpersonnage.pas:487) pour les 10
+caracteristiques (dont Int et Fel, verifie malgre l absence de precedent XML existant pour
+certaines d entre elles) : saisie XML pure, rien a coder.
+Ajoutes a BOOK ENEMY IN SHADOWS COMPANION.Xml : DATA_SPELL (nouvelle, 23 <Sort>, ENEMY-CHAOS_01
+a _23) et le talent ENEMY-T0182 "Suffused with Magic" (Max 1, +1 SL a tout sort lance a portee
+de Bonus de Force Mentale). La carriere Cult Magus of Tzeentch (ENEMY-WORK106) et le talent
+Tzeentch's Blessing (ENEMY-T0181) existaient deja, rien touche de ce cote.
+Ecarte, decision reprise de la veille (creatures adverses non gerees, CONTEXT.md 19/09/2026) :
+les 3 creatures Daemon du chapitre (Chaos Fury, Pink Horror, Blue Horror, p.84-85) - meme
+categorie que Frostfiend/Djinn, aucun mecanisme de creature adverse dans le programme.
+XML valide (bien forme, 23 Sort + 4 Talent verifies par script). NON COMPILE (aucun .pas
+modifie). Teste et valide par Nono le 22/09/2026 (affichage WinSpell, filtre par livre).
+Fichiers modifies : DATABASE/WFRP4/BOOK ENEMY IN SHADOWS COMPANION.Xml, CONTEXT.md,
+A FAIRE.txt, Log.txt.

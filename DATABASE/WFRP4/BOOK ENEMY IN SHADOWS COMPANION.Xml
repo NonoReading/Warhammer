@@ -56,6 +56,16 @@ However, their differing visions of the Empire’s fate ensure that for all thei
 <PDF>""</PDF>
 <Test language="ENGLISH">""</Test>
 </Talent>
+<Talent id="ENEMY-T0182">
+<Attribut>""</Attribut>
+<Description language="ENGLISH">"Suffused with Magic"</Description>
+<Short language="ENGLISH">""</Short>
+<Explanation language="ENGLISH">"All spells cast within Willpower Bonus yards of you gain +1 SL to cast. This Bonus may only be claimed once per casting, no matter how many Characters with this Talent are in the vicinity."</Explanation>
+<Skill>""</Skill>
+<Max>"1"</Max>
+<PDF>""</PDF>
+<Test language="ENGLISH">""</Test>
+</Talent>
 </DATA_TALENT>
 <DATA_CAREER>
 <Career id="ENEMY-WORK106">
@@ -186,6 +196,243 @@ However, their differing visions of the Empire’s fate ensure that for all thei
 </SUBCHAPTER_ITEM>
 </Career>
 </DATA_CAREER>
+<!-- Chapitre 9 "The Purple Hand" (p.78-85). Chaos Arcane Spells (p.79-81, disponibles a tout
+     sorcier du Chaos quelle que soit sa Lore, Talent RULES-T0172_*) et Lore of Tzeentch
+     (p.81-83, Talent RULES-T0172_TZEENTCH), 10 + 13 sorts. Les 3 Horreurs (Chaos Fury, Pink
+     Horror, Blue Horror, p.84-85) sont des creatures adverses, non saisies (meme decision que
+     Frostfiend/Djinn, CONTEXT.md 19/09/2026 : aucun mecanisme de creature adverse). -->
+<DATA_SPELL>
+<Sort id="ENEMY-CHAOS_01">
+<Description language="ENGLISH">"Blast of Corruption"</Description>
+<Explanation language="ENGLISH">"You channel profane magic into an explosive blast of corruption. This is a magic missile with Damage +5 that targets everyone in the Area of Effect. Everyone affected by the spell must pass a Challenging (+0) Endurance Test, or gain 1 Corruption."</Explanation>
+<Target>"AoE (BATTR_WP)m"</Target>
+<Duration>"Instant"</Duration>
+<Range>"(ATTR_WP)m"</Range>
+<Talent>"RULES-T0172_*"</Talent>
+<Level>"8"</Level>
+<TypSpell>"Chaos Magic"</TypSpell>
+</Sort>
+<Sort id="ENEMY-CHAOS_02">
+<Description language="ENGLISH">"Bolt of Corruption"</Description>
+<Explanation language="ENGLISH">"You channel dark magic into a damaging bolt of corrosive power. This is a magic missile with a Damage of +6. Targets affected by the spell must pass a Challenging (+0) Endurance Test, or gain 1 Corruption."</Explanation>
+<Target>"1"</Target>
+<Duration>"Instant"</Duration>
+<Range>"(ATTR_WP)m"</Range>
+<Talent>"RULES-T0172_*"</Talent>
+<Level>"8"</Level>
+<TypSpell>"Chaos Magic"</TypSpell>
+</Sort>
+<Sort id="ENEMY-CHAOS_03">
+<Description language="ENGLISH">"Daemonic Mien"</Description>
+<Explanation language="ENGLISH">"You channel the transformative power of Chaos into your own flesh, temporarily sacrificing your mortal form on the altar of your god’s will. Your body is warped, assuming aspects of a Daemon loyal to your patron god. Roll 1d10 on the Daemonic Mien Effects Table (p.78) and apply the relevant Trait for the duration of the spell. For every +2 SL you may both extend the duration and roll again on the table. Should you roll the Daemonic Trait and be reduced to 0 Wounds, your soul is sucked into the Realms of Chaos as described in the Creature Traits rules."</Explanation>
+<Target>"You"</Target>
+<Duration>"(BATTR_Fel) Rounds+"</Duration>
+<Range>"You"</Range>
+<Talent>"RULES-T0172_*"</Talent>
+<Level>"8"</Level>
+<TypSpell>"Chaos Magic"</TypSpell>
+</Sort>
+<Sort id="ENEMY-CHAOS_04">
+<Description language="ENGLISH">"Foul Messenger"</Description>
+<Explanation language="ENGLISH">"You conjure forth a swarm of minor daemons shackled to your will. The form of the daemons will vary depending on your deity. The daemons will bear a short message (approximately 25 words) to your target. They travel almost instantaneously, and are invisible (and inaudible) to anyone without the Second Sight Talent even while delivering their message. Anyone with the Talent may make a Hard (–20) Perception Test to notice the swarm, and hear their message. For every +2 SLs, you may double the length of the message."</Explanation>
+<Target>"Special"</Target>
+<Duration>"Instant"</Duration>
+<Range>"(ATTR_Fel) miles"</Range>
+<Talent>"RULES-T0172_*"</Talent>
+<Level>"8"</Level>
+<TypSpell>"Chaos Magic"</TypSpell>
+</Sort>
+<Sort id="ENEMY-CHAOS_05">
+<Description language="ENGLISH">"Joyous Aspect"</Description>
+<Explanation language="ENGLISH">"The caster infuses the target (perhaps themselves) with a corrupted caul of Dhar-infused Ulgu, sheathing them in an aura of concealment. While the spell is in force, the target appears without flaw, or blemish. Scars, deformities and, most crucially, mutations are undetectable, save through Divine means. While obvious deformities are hidden, the targets can appear strange, or outlandish, infused with too much life, or unnaturally alluring. Passing a Hard (–20) Perception Test reveals something is awry, though not precisely what. For Characters with the Second Sight Talent the Test is Challenging (+0), and should they succeed they will become aware that a spell is in place, but not what it hides."</Explanation>
+<Target>"1"</Target>
+<Duration>"(BATTR_Fel) Rounds+"</Duration>
+<Range>"Touch"</Range>
+<Talent>"RULES-T0172_*"</Talent>
+<Level>"4"</Level>
+<TypSpell>"Chaos Magic"</TypSpell>
+</Sort>
+<Sort id="ENEMY-CHAOS_06">
+<Description language="ENGLISH">"Obsession"</Description>
+<Explanation language="ENGLISH">"You must possess a beloved or precious object belonging to the target. You weave magic infused with the raw stuff of Chaos into the object that, in turn, affects the target. They become obsessed with something: the precise nature of the obsession depends on the individual in question, and your Lore. The target must pass an Average (+20) Endurance Test every hour, or succumb to their obsession. On a failure, future tests become Challenging (+0). Subsequent failings make Tests increasingly harder, until they become Very Hard (–30). Should the target ever Fumble one of these Tests (fail while rolling a double), the target becomes completely obsessed. They can do nothing except indulge the obsession, no matter the costs or implications, for d10–Willpower Bonus hours (minimum 1 hour). At the end of the spell’s duration, in addition to any other physical, social, or financial implications, the target must pass a Challenging (+0) Endurance Test or gain +1 Corruption Point. A target may only ever be affected once by this spell for each Lore with which it is cast. Any future attempts on the same target with this spell have no effect."</Explanation>
+<Target>"Special"</Target>
+<Duration>"SL days"</Duration>
+<Range>"(BATTR_I) miles"</Range>
+<Talent>"RULES-T0172_*"</Talent>
+<Level>"8"</Level>
+<TypSpell>"Chaos Magic"</TypSpell>
+</Sort>
+<Sort id="ENEMY-CHAOS_07">
+<Description language="ENGLISH">"Power of Chaos"</Description>
+<Explanation language="ENGLISH">"You call on the Dark Gods of Chaos to aid your efforts by tearing a small rent to the aethyr. Any spells cast within Fellowship Bonus yards of the point targeted by the spell have their CN halved. Anyone within the AoE must pass an Average (+20) Endurance Test at the end of each Round or gain +1 Corruption Point. Anyone casting a spell within the AoE makes their Test at Average (+20) Difficulty."</Explanation>
+<Target>"AoE (BATTR_Fel)m"</Target>
+<Duration>"(BATTR_WP) Rounds"</Duration>
+<Range>"(ATTR_WP)m"</Range>
+<Talent>"RULES-T0172_*"</Talent>
+<Level>"4"</Level>
+<TypSpell>"Chaos Magic"</TypSpell>
+</Sort>
+<Sort id="ENEMY-CHAOS_08">
+<Description language="ENGLISH">"Rend Aethyr"</Description>
+<Explanation language="ENGLISH">"Your foul, profane words tear apart the fabric of reality, ripping a hole in the world, through which the servants of the Dark Gods are free to pour. A ragged portal to the aethyr appears. At the end of every Round, one Lesser Daemon crosses from the Realms of Chaos through the portal. These Daemons are not under your control, but are likely to defend you and attack your enemies, should that be your unholy master’s will. The Daemons summoned depend on your Chaos Lore: Daemonettes of Slaanesh, Plaguebearers of Nurgle, Horrors of Tzeentch, Bloodletters of Khorne, and, for Sorcerers of Chaos Undivided, Furies of Chaos. While the spell is in effect, any Daemons it summons are immune to the Unstable Condition. For every +5 SL Overcast, you may increase the rate the Daemons arrive by +1. Living creatures must pass an Average (+20) Endurance Test at the end of every Round where they can see the tear, or gain +1 Corruption. Any living creature foolish or unlucky enough to enter the rift falls into the Realms of Chaos and is immediately killed, unless a Fate point is spent. In that case, they are spat back into reality, perhaps saved by some power for an as of yet unfulfilled purpose. Should you Fumble the casting of this spell, the Daemons crossing from the Realms of Chaos belong to a rival deity, and may well be immediately hostile to their summoner!"</Explanation>
+<Target>"Special"</Target>
+<Duration>"(BATTR_WP) Rounds+"</Duration>
+<Range>"(ATTR_WP)m"</Range>
+<Talent>"RULES-T0172_*"</Talent>
+<Level>"16"</Level>
+<TypSpell>"Chaos Magic"</TypSpell>
+</Sort>
+<Sort id="ENEMY-CHAOS_09">
+<Description language="ENGLISH">"Slave to Darkness"</Description>
+<Explanation language="ENGLISH">"You implore your patron to take the soul of your target, replacing it with something terrible. Make an Opposed Willpower Test, which you must win by at least 2+ SL. Should you do this, the victim’s soul is sent howling into the Realms of Chaos, and the remaining body is possessed by a Daemon. Unless the target spends a Fate point, control of the Character is passed to the GM. Should you not win the Opposed Test by at least 2+ SL, you instead suffer a Major Miscast, and the spell fails. Should you Fumble the Test, you are punished by your god for your arrogance. Your soul is torn from your body, never to return unless you spend a Fate point to resist this, although your patron is unlikely to be pleased if you flagrantly reject their authority in such a fashion. Given the risks and limitations inherent in this spell, it is generally cast on victims that have been ‘prepared’ for their sacrifice; they have been bound, drugged, and/or otherwise pacified."</Explanation>
+<Target>"1"</Target>
+<Duration>"Special"</Duration>
+<Range>"Touch"</Range>
+<Talent>"RULES-T0172_*"</Talent>
+<Level>"8"</Level>
+<TypSpell>"Chaos Magic"</TypSpell>
+</Sort>
+<Sort id="ENEMY-CHAOS_10">
+<Description language="ENGLISH">"The Purple Hand"</Description>
+<Explanation language="ENGLISH">"This spell is a petty curse used by Purple Hand sorcerers to intimidate and cajole truculent co-conspirators. Of all the non-verbal codes used by the Purple Hand the meaning of this curse is clear: mend your ways immediately or face punishment. In order to cast the spell the sorcerer must first acquire a small amount of matter from their target: a loose hair or toenail clipping will serve. Should this item be acquired and the spell successfully cast, the palms of the target’s hands turn a deep purple. The spell’s effects last for one hour for every level of success scored by the caster while casting the spell."</Explanation>
+<Target>"1"</Target>
+<Duration>"Varies"</Duration>
+<Range>"(ATTR_Int)m"</Range>
+<Talent>"RULES-T0172_*"</Talent>
+<Level>"3"</Level>
+<TypSpell>"Chaos Magic"</TypSpell>
+</Sort>
+<Sort id="ENEMY-CHAOS_11">
+<Description language="ENGLISH">"Blue Fire of Tzeentch"</Description>
+<Explanation language="ENGLISH">"Your words conjure a writhing ball of coruscating blue fire that engulfs your foes. Blue Fire of Tzeentch is a magic missile. Anyone within your Initiative Bonus yards of the target suffers a +3 Damage hit, and gains +1 Ablaze Condition. Should a Character of size small or larger be reduced to 0 Wounds by this spell, or while suffering from an Ablaze Condition from Blue Fire of Tzeentch, roll 1d10. On a roll of 9, two Blue Horrors claw their way out of the Character’s screaming flesh, killing them in the process."</Explanation>
+<Target>"AoE"</Target>
+<Duration>"Instant"</Duration>
+<Range>"(ATTR_Int)m"</Range>
+<Talent>"RULES-T0172_TZEENTCH"</Talent>
+<Level>"6"</Level>
+<TypSpell>"Chaos Magic"</TypSpell>
+</Sort>
+<Sort id="ENEMY-CHAOS_12">
+<Description language="ENGLISH">"Bolt of Change"</Description>
+<Explanation language="ENGLISH">"A pulsating bolt of scintillating Chaotic energy rends the air. Bolt of Change is a magic missile, and targets suffer a +7 Damage hit. Further, targets must make a Challenging (+0) Endurance Test. A target that fails gains +1 Corruption Point. On a fumble, the target immediately rolls for a Mutation, and gains the Chaos Magic (Tzeentch) Talent. A Character affected by this spell may resist a mutation by spending a point of Resolve."</Explanation>
+<Target>"1"</Target>
+<Duration>"Instant"</Duration>
+<Range>"(ATTR_Int)m"</Range>
+<Talent>"RULES-T0172_TZEENTCH"</Talent>
+<Level>"9"</Level>
+<TypSpell>"Chaos Magic"</TypSpell>
+</Sort>
+<Sort id="ENEMY-CHAOS_13">
+<Description language="ENGLISH">"Boon of Tzeentch"</Description>
+<Explanation language="ENGLISH">"Your words, imbued with the labyrinthine prescience of the Changer of the Ways, twist your mind, granting you access to new arcane knowledge. Choose one Spell from any Lore (to ensure swift play, the GM may impose a nine second time limit). While Boon of Tzeentch is in effect, you may cast your new Spell as if you had memorised it, but may not record it in a Grimoire, Scroll, or similar. If you channel to cast the new Spell, you may use either Channelling (Dhar) or the Channelling Skill appropriate to the Lore the spell normally requires, should you possess it. If you suffer a miscast when channelling or casting this new Spell, the Boon of Tzeentch Spell quits your mind in disgust, and also erases itself from your grimoire should it have allowed itself to be recorded there."</Explanation>
+<Target>"You"</Target>
+<Duration>"(BATTR_I) days"</Duration>
+<Range>"You"</Range>
+<Talent>"RULES-T0172_TZEENTCH"</Talent>
+<Level>"9"</Level>
+<TypSpell>"Chaos Magic"</TypSpell>
+</Sort>
+<Sort id="ENEMY-CHAOS_14">
+<Description language="ENGLISH">"Curse of Tzeentch"</Description>
+<Explanation language="ENGLISH">"Tzeentchian Lore has it that all spells ultimately derive from the God’s will, and so belong to him. Using this spell, a Tzeentch sorcerer can cause another wizard to lose the knowledge and ability to cast a spell they previously had mastery of. Should the curse of Tzeentch be successfully cast, the caster must then make an opposed Willpower Test against the target. If the caster wins, the target loses access to a randomly selected spell. The effects of the spell lasts for one day for every level of success scored by the caster during the opposed test."</Explanation>
+<Target>"1"</Target>
+<Duration>"Varies"</Duration>
+<Range>"(ATTR_Int)m"</Range>
+<Talent>"RULES-T0172_TZEENTCH"</Talent>
+<Level>"9"</Level>
+<TypSpell>"Chaos Magic"</TypSpell>
+</Sort>
+<Sort id="ENEMY-CHAOS_15">
+<Description language="ENGLISH">"The Flickering Flames of Fickle Fate"</Description>
+<Explanation language="ENGLISH">"You conjure forth a torrent of magical fire, which spits, crackles and burns without material fuel. The fire has no physical properties and does not burn, damage, or emit heat. All living creatures and Daemons who can see the fire may choose to reroll every Test once, as if they had spent a Fortune Point, even if they passed the Test. Each time they do so, they must then pass a Challenging (+0) Endurance Test or gain +1 Corruption Point. Characters bearing the Mark of Tzeentch are immune to this Corruption. The Test to resist gaining Corruption may not be rerolled using this Spell’s effect."</Explanation>
+<Target>"Special"</Target>
+<Duration>"(BATTR_WP) Rounds+"</Duration>
+<Range>"(ATTR_Int)m"</Range>
+<Talent>"RULES-T0172_TZEENTCH"</Talent>
+<Level>"4"</Level>
+<TypSpell>"Chaos Magic"</TypSpell>
+</Sort>
+<Sort id="ENEMY-CHAOS_16">
+<Description language="ENGLISH">"Master of Fortune"</Description>
+<Explanation language="ENGLISH">"Tzeentch sorcerers often bargain with their master to provide them with insights about their potential fate. Scrying in this manner is dangerous, for Tzeentch is a capricious god, even in the case of his own favoured servants. Once the spell is cast it may not be cast again until its duration has run out. Determine the result of the Language (Magick) Test needed to cast the spell. For every positive SL the caster benefits from a point of Fortune which they can use as normal for the duration of the spell. However, if the spell fails then for every negative level of success the caster receives a point of Corruption as they receive a dizzying array of disturbing future echoes."</Explanation>
+<Target>"You"</Target>
+<Duration>"(BATTR_WP) days"</Duration>
+<Range>"You"</Range>
+<Talent>"RULES-T0172_TZEENTCH"</Talent>
+<Level>"8"</Level>
+<TypSpell>"Chaos Magic"</TypSpell>
+</Sort>
+<Sort id="ENEMY-CHAOS_17">
+<Description language="ENGLISH">"Mindfire"</Description>
+<Explanation language="ENGLISH">"The air warps around your fingertips, forming a bolt of shimmering, hazy magical energy that can be hurled at your target. Anyone affected by Mindfire must make a Challenging (+0) Cool Test, or gain 1 Corruption Point. For every +2 SL, you may make one target gain an additional Corruption Point if the Cool Test is failed. Should a Mutation occur as a result of this Spell, the target automatically rolls on the Mental Mutation table, and gains +1 Ablaze Condition as unnatural fire spills from every orifice in their head."</Explanation>
+<Target>"1"</Target>
+<Duration>"Instant"</Duration>
+<Range>"(ATTR_Int)m"</Range>
+<Talent>"RULES-T0172_TZEENTCH"</Talent>
+<Level>"6"</Level>
+<TypSpell>"Chaos Magic"</TypSpell>
+</Sort>
+<Sort id="ENEMY-CHAOS_18">
+<Description language="ENGLISH">"Pink Fire of Tzeentch"</Description>
+<Explanation language="ENGLISH">"Swirling bolts of pink fire arc from your outstretched fingertips, causing reality to scream in anguish. Pink Fire of Tzeentch is a magic missile. Targets affected suffer a +6 Damage hit, and gain +1 Ablaze Condition. Should a Character of size small or larger be reduced to 0 Wounds by this spell, or while suffering from an Ablaze Condition caused by Pink Fire of Tzeentch, roll a d10. On a roll of 9, a Pink Horror claws its way out of the target’s writhing corpse, killing the individual."</Explanation>
+<Target>"1"</Target>
+<Duration>"Instant"</Duration>
+<Range>"(ATTR_Int)m"</Range>
+<Talent>"RULES-T0172_TZEENTCH"</Talent>
+<Level>"6"</Level>
+<TypSpell>"Chaos Magic"</TypSpell>
+</Sort>
+<Sort id="ENEMY-CHAOS_19">
+<Description language="ENGLISH">"Sense the Skein"</Description>
+<Explanation language="ENGLISH">"Your eyes glow pink and blue as you speak forbidden words of power. The scales fall from your eyes and you see, for a few fleeting moments, the interconnected fate of all things. You may choose one target you can see, and the GM must reveal the target’s Motivation, Short-Term Ambition, and Long-Term Ambition."</Explanation>
+<Target>"You"</Target>
+<Duration>"1 Round"</Duration>
+<Range>"You"</Range>
+<Talent>"RULES-T0172_TZEENTCH"</Talent>
+<Level>"3"</Level>
+<TypSpell>"Chaos Magic"</TypSpell>
+</Sort>
+<Sort id="ENEMY-CHAOS_20">
+<Description language="ENGLISH">"Transformation of Tzeentch"</Description>
+<Explanation language="ENGLISH">"At your command, bonds of aethyric fire coil from the earth, enshrouding your target in a cocoon of magical energy. Targets affected gain the Prone Condition, and are considered Helpless for the duration of the Spell. When Transformation of Tzeentch ends, the target must make a Challenging (+0) Endurance Test, opposed by your Language (Magick) Skill. If they lose, they gain +1 Corruption Point, +1 extra Point for every SL by which they lost."</Explanation>
+<Target>"1"</Target>
+<Duration>"(BATTR_WP) Rounds"</Duration>
+<Range>"(BATTR_I)m"</Range>
+<Talent>"RULES-T0172_TZEENTCH"</Talent>
+<Level>"10"</Level>
+<TypSpell>"Chaos Magic"</TypSpell>
+</Sort>
+<Sort id="ENEMY-CHAOS_21">
+<Description language="ENGLISH">"Tzeentch’s Firestorm"</Description>
+<Explanation language="ENGLISH">"A swirling storm of purple arcane fire bursts forth, summoned by your profane cackling. Tzeentch’s Firestorm is a magic missile. Those struck suffer a +9 Damage hit, and gain +1 Ablaze Condition. Should a Character of size small or larger be reduced to 0 Wounds by this Spell, or while suffering from an Ablaze Condition caused by Tzeentch’s Firestorm, roll a d10. On a roll of 9, two Pink Horrors claw their way out of the target’s magically burning corpse, killing the poor unfortunate."</Explanation>
+<Target>"AoE (BATTR_I)m"</Target>
+<Duration>"(BATTR_WP) Rounds"</Duration>
+<Range>"(ATTR_Int)m"</Range>
+<Talent>"RULES-T0172_TZEENTCH"</Talent>
+<Level>"11"</Level>
+<TypSpell>"Chaos Magic"</TypSpell>
+</Sort>
+<Sort id="ENEMY-CHAOS_22">
+<Description language="ENGLISH">"Tzeentch’s Golden Aura"</Description>
+<Explanation language="ENGLISH">"This is one of the most straightforward and practical spells in a Tzeentch sorcerer’s arsenal. A swirling vortex of yellow fire is summoned out of the aethyr and wraps about the caster’s body, shielding them from incoming blows and missiles. Whilst the spell is in effect, the caster benefits from the Creature Trait Ward 9+."</Explanation>
+<Target>"You"</Target>
+<Duration>"(BATTR_WP) Rounds"</Duration>
+<Range>"You"</Range>
+<Talent>"RULES-T0172_TZEENTCH"</Talent>
+<Level>"7"</Level>
+<TypSpell>"Chaos Magic"</TypSpell>
+</Sort>
+<Sort id="ENEMY-CHAOS_23">
+<Description language="ENGLISH">"Word of Tzeentch"</Description>
+<Explanation language="ENGLISH">"As your tongue forms the twisted sound-patterns of this blasphemous Spell, two voices seem to utter from your throat, in unholy and unnatural harmony with each other. Your words carry extra meaning for those affected by the Spell, though targets can never remember what was said. They are left with a haunting sense of foreboding, as if they have forgotten something very important about their own future. Living targets affected by the Spell must make an Opposed Intelligence Test with you. If the target loses, they gain 1 Stunned Condition, +1 additional Stunned Condition for each SL by which they lost. If they Fumble, they gain the Unconscious Condition, and +1 Corruption. Once all Conditions have been removed, targets affected must pass an Average (+20) Endurance Test, or gain +1 Corruption. Should they Fumble, they immediately gain 1 Mental Mutation, and may not take a Short-term Ambition for the next 1d10 weeks."</Explanation>
+<Target>"1"</Target>
+<Duration>"(BATTR_Int) Rounds"</Duration>
+<Range>"(BATTR_S)m"</Range>
+<Talent>"RULES-T0172_TZEENTCH"</Talent>
+<Level>"7"</Level>
+<TypSpell>"Chaos Magic"</TypSpell>
+</Sort>
+</DATA_SPELL>
 <!-- Animaux, p.24 ("Animal Cost and Availability"). Theme RULES-LAB_195 (Animals and Vehicles), <Carries> = capacite de charge. <AnimalProfile>/<AnimalTraits> : profils et traits p.22-24 (traits Optional non saisis) ; Chicken, Sheep et Pig n'ont pas de profil dans ce livre. Prix des deux chevaux de guerre : le livre precise que le prix peut doubler ou tripler en temps de tension. Scarce = RULES-DISPO_LIMITED. -->
 <DATA_TRAPPING>
 <Trapping id="ENEMY-TRAP_01">
