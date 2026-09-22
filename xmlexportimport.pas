@@ -1282,6 +1282,7 @@ Procedure XmlImport(FileName: String; OnlyPrimary: Boolean; OnlyCode: Boolean; C
     PTraductionNv2:           StructureTraduction;
     PArmureSimplifiee:        StructureArmureSimplifiee;
     POptionRegle:             StructureOptionRegle;
+    IndOptionRegle:           Integer;
     PRaceCorruptionCreation:  StructureRaceCorruptionCreation;
     PCorruptionTable:         StructureCorruptionTable;
     PCorruptionChance:        StructureCorruptionChance;
@@ -2705,15 +2706,21 @@ Procedure XmlImport(FileName: String; OnlyPrimary: Boolean; OnlyCode: Boolean; C
                           Node := XmlElement(Node.NextSibling);
                         end;
 
-                      // Meme convention que les armures simplifiees ci-dessus : une seule
-                      // entree par option (passe anglaise), pas de re-localisation
-                      // dynamique via Traduit() pour l instant (meme limite deja existante
-                      // sur ListArmureSimplifiee - CONTEXT.md 2.89).
-                      if LangueDef = ConstAnglais then
+                      // Contrairement aux armures simplifiees (une seule passe anglaise,
+                      // jamais re-localisee), les regles optionnelles doivent afficher le
+                      // texte de la langue choisie quand le livre a une version traduite
+                      // (Quick Armour/Rulebook) : la 1ere passe rencontree cree l entree
+                      // (base anglaise si elle vient en premier), une 2e passe dans la
+                      // langue ACTIVE (ValLangue) remplace juste le texte au lieu d en
+                      // ajouter une 2e ligne - CONTEXT.md 2.89, 22/09/2026.
+                      IndOptionRegle := IndexOptionRegle(POptionRegle.Livre, POptionRegle.CodeId);
+                      if IndOptionRegle < 0 then
                         begin
                           ListOptionRegle.add(POptionRegle);
                           inc(NbOptionRegle);
-                        end;
+                        end
+                      else if LangueDef = ValLangue then
+                        ListOptionRegle[IndOptionRegle] := POptionRegle;
 
                       NodeNv2 := XmlElement(NodeNv2.NextSibling);
                     end;

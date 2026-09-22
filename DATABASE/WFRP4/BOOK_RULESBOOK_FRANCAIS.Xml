@@ -14796,8 +14796,8 @@ Vous subissez toujours les Blessures normales (et étant donné que vos PA sont 
 <DATA_OPTION_RULE>
 <OptionRule id="RULES-OPTR_01">
 <Code>"QUICKARMOUR"</Code>
-<Description language="FRANCAIS">"Quick Armour"</Description>
-<Explanation language="FRANCAIS">"For those who want fast, simple rules for armour, use the following. Armour is split into three bands: Light, Medium, and Heavy. Those in Light are wearing mostly leathers, those in medium are wearing mostly chain, and those in heavy are wearing mostly plate. (p.301)"</Explanation>
+<Description language="FRANCAIS">"Armure rapide"</Description>
+<Explanation language="FRANCAIS">"Pour ceux qui veulent des regles rapides et simples pour les armures, utilisez ce qui suit. Les armures sont reparties en trois categories : legere, moyenne et lourde. Ceux qui portent une armure legere portent surtout du cuir, ceux qui portent une armure moyenne portent surtout des mailles, et ceux qui portent une armure lourde portent surtout des plates. (p.301)"</Explanation>
 </OptionRule>
 </DATA_OPTION_RULE>
 <DATA_ARMOR_BONUS>
