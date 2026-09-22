@@ -835,6 +835,10 @@ As sailing one ship is not so different to sailing another, having any Sail Spec
 <Description language="ENGLISH">"Language (Magick)"</Description>
 <Generique>"RULES-COMPLANG_*"</Generique>
 </Skill>
+<Skill id="RULES-COMPLANG_MOOT">
+<Description language="ENGLISH">"Language (Mootish)"</Description>
+<Generique>"RULES-COMPLANG_*"</Generique>
+</Skill>
 <Skill id="RULES-COMPLANG_TILE">
 <Description language="ENGLISH">"Language (Tilean)"</Description>
 <Generique>"RULES-COMPLANG_*"</Generique>
@@ -3865,6 +3869,10 @@ See page 190 for Fear rules"</Explanation>
 <Description language="ENGLISH">"Craftsman (Explosives)"</Description>
 <Generique>"RULES-T0092_*"</Generique>
 </Talent>
+<Talent id="RULES-T0092_FERM">
+<Description language="ENGLISH">"Craftsman (Farmer)"</Description>
+<Generique>"RULES-T0092_*"</Generique>
+</Talent>
 <Talent id="RULES-T0092_FORGE">
 <Description language="ENGLISH">"Craftsman (Blacksmith)"</Description>
 <Generique>"RULES-T0092_*"</Generique>
@@ -4103,6 +4111,10 @@ See page 190 for Fear rules"</Explanation>
 </Talent>
 <Talent id="RULES-T0136_BEASTMEN">
 <Description language="ENGLISH">"Etiquette (Beastmen)"</Description>
+<Generique>"RULES-T0136_*"</Generique>
+</Talent>
+<Talent id="RULES-T0136_BOURG">
+<Description language="ENGLISH">"Etiquette (Burghers)"</Description>
 <Generique>"RULES-T0136_*"</Generique>
 </Talent>
 <Talent id="RULES-T0136_CREW">

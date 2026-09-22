@@ -1,5 +1,7 @@
 # Warhammer — Contexte projet
 
+**CLANS HALFLING D'ARCHIVES OF THE EMPIRE I (22/09/2026, compile et valide par Nono)** : voir 2.90 plus bas. Les 12 clans (p.32) sont 12 ethnies (`<Specie>`) dans `BOOK ARCHIVES OF THE EMPIRE I.Xml`, memes principe que les provinces de Nations of Mankind ; le choix de talent (2 ou 3 options par clan) passe par le mecanisme composite `"CODE_A/CODE_B"` deja existant, zero code Pascal ajoute. Chantier "A FAIRE.txt" AUDIT DES TXT ferme sur ce point.
+
 **DETAILS PHYSIQUES PAR ETHNIE (21/09/2026, Rulebook termine, compile et valide par Nono)** : voir 2.86 plus bas et `A FAIRE.txt` (3 entrees DETAILS PHYSIQUES : autres ethnies, libelles, points ouverts). Gnome (Rough Nights p.89) et libelles de WinPhysique FAITS et VALIDES le 21/09.
 
 **ADAPTING CAREERS (20/09/2026, compile, substitutions imposees validees par Nono)** : voir 2.85 plus bas et `A FAIRE.txt` (section HIGH ELF, RESTE en 5 points). Standing FAIT et valide (20/09, Warden Yvresse : Silver 2 / 4 / Gold 2). AFFICHAGE FAIT, PDF de carriere compris (pdfmetier.pas : bloc d adaptation en bas du pave de droite, valide 20/09). Point de reprise : les points 3 a 5 de A FAIRE.txt.
@@ -11368,3 +11370,50 @@ Modele : mots separes par des espaces ; un mot = elements separes par `+` ; elem
 
 **Traduction francaise de Quick Armour (22/09/2026)** : `Description`/`Explanation` de `BOOK_RULESBOOK_FRANCAIS.Xml` traduites (texte officiel du LdB FR non retrouve pour cette section p.301 - traduction maison). Bug corrige au passage dans `xmlexportimport.pas` : le chargement de `DATA_OPTION_RULE` ne gardait QUE la passe anglaise (`LangueDef = ConstAnglais`), la traduction francaise n aurait donc jamais ete affichee meme une fois ecrite dans le XML. Nouvelle fonction `IndexOptionRegle(Livre, CodeId)` (chargeoptionregle.pas) : la 1ere passe rencontree cree l entree, une 2e passe dans la langue ACTIVE (`ValLangue`) remplace son texte au lieu d en creer une 2e ligne.
 [DECISION NONO 22/09/2026] La traduction francaise du projet NE TOUCHE JAMAIS les autres livres (Archives II, Sea of Claws, Lustria...) - seuls l interface et le Rulebook ont une version francaise. Pas d Explanation francaise pour les signes astraux/carriere alternative : rejoint le perimetre deja confirme le 28/08 (voir A FAIRE.txt "PERIMETRE CONFIRME PAR NONO").
+
+### 2.90 Clans Halfling d'Archives of the Empire I — de mecanisme dedie a ethnies natives (22/09/2026)
+
+**L'ecart laisse ouvert par l'audit d'Archives I (2.89 ci-dessus, A FAIRE.txt)** : la table
+"Options: Halfling Clan Skills and Talents" (p.32) — 12 clans, chacun donne 4 competences et
+un choix entre 2 ou 3 talents nommes a la creation.
+
+**Premiere conception (avec Nono), abandonnee** : un mecanisme dedie sur le moule de
+`CareerBonus` — nouvelle unite `chargehalflingclan.pas`, 4e option du toggle `.INI`, deux
+popups `WinSpecialisation` (choix du clan puis du talent), deux champs sur la fiche
+personnage. **Code jusqu'au bout, compile a 0 erreur, fonctionnel.**
+
+**Nono a fait remarquer en relisant que les clans sont des ETHNIES**, pas un mecanisme de
+choix a part — et que je n'avais pas verifie si un mecanisme existant couvrait deja le
+besoin avant d'en concevoir un nouveau (memoire session ajoutee sur ce point). Verification
+faite : le moteur de creation gere DEJA ce cas exact :
+- Les provinces de *Nations of Mankind* sont des `<Specie>` a part entiere (meme `Ethnic`
+  que la race de base, leur propre `SUBCHAPTER_SKILL`/`SUBCHAPTER_TALENT`, attributs et
+  table de carrieres recopies de la race de base) — le clan Halfling est exactement ce cas.
+- Le choix "A ou B" entre deux (ou trois) talents nommes existe DEJA sous la forme d'un id
+  compose `"CODE_A/CODE_B"` dans un `<Talent>` de `SUBCHAPTER_TALENT` — deja utilise par les
+  Ungols de *Nations of Mankind* (`RULES-T0153/RULES-T0067`, "Marksman or Warrior Born").
+  `ListeTalent()` (`chargetalent.pas`) l'aplatit en branches (`SeparateurMulti = '/'`, N
+  branches, pas limite a 2), et `ReconstruitChoixCreation`/`TabCreationChoixDblClick`
+  (`wincreation.pas`) le detecte tout seul (`ListOpt.Count > 1`) et le propose en choix par
+  double-clic dans la grille de creation — **pas de jet de de, pas de nouveau code**.
+
+**Tout le code dedie retire** (chargehalflingclan.pas supprime, les deux popups et le
+4e toggle `.INI` retires de winspecialisation.pas/xmlexportimport.pas/chargeconstantes.pas/
+warhammersource.pas, les deux champs retires de chargepersonnage.pas, wincreation.pas revenu
+a l'identique) — `git status` confirme zero fichier `.pas` modifie apres coup.
+
+**Remplace par 12 `<Specie id="ARCH1-RACE_HALF_XXXX">`** dans
+`BOOK ARCHIVES OF THE EMPIRE I.Xml` : `Ethnic="RULES-SPECIE_HALFLING"`, attributs et
+`SUBCHAPTER_CAREER` recopies tels quels de `RULES-RACE_HALF` (le livre ne varie pas dessus,
+meme decision que pour les provinces humaines), `SUBCHAPTER_SKILL` = 7 competences communes
++ 4 du clan, `SUBCHAPTER_TALENT` = 4 talents communs + le talent compose du clan (2 ou 3
+branches) + 1 Random Talent (`RULES-T*`, inchange). **Zero ligne de Pascal ajoutee au
+final.**
+
+4 codes crees dans `BOOK_RULESBOOK.Xml` (manquaient au catalogue) : `RULES-COMPLANG_MOOT`
+"Language (Mootish)" (11 clans sur 12 la demandent), `RULES-T0136_BOURG` "Etiquette
+(Burghers)", `RULES-T0092_FERM` "Craftsman (Farmer)" ; "Etiquette (Guilders)" reutilise
+`RULES-T0136_GUILD` deja present (le livre l'a au singulier, meme talent).
+
+Compile (`lazbuild -B`, 0 erreur) et XML valide (`xml.etree.ElementTree`), teste et valide
+par Nono le 22/09/2026.

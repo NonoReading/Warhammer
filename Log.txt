@@ -6104,3 +6104,36 @@ Fichiers modifies : chargeconstantes.pas, chargeoptionregle.pas (nouveau), warha
 winarmor.pas, winoptionregle.pas (nouveau), xmlexportimport.pas, BOOK_RULESBOOK.Xml,
 BOOK_RULESBOOK_FRANCAIS.Xml, BOOK_ARCHIVES_OF_THE_EMPIRE_II.Xml, BOOK_SEA_OF_CLAWS.Xml,
 BOOK LUSTRIA.xml, INTERFACE.Xml, INTERFACE_FRANCAIS.Xml, CONTEXT.md, A FAIRE.txt, Log.txt.
+
+22/09/2026 - CLANS HALFLING D ARCHIVES OF THE EMPIRE I : TRANCHE, TESTE ET VALIDE
+Piste laissee ouverte par l audit d Archives I (entree ci-dessus, 20/09/2026) : la table
+"Options: Halfling Clan Skills and Talents" (p.32, 12 clans, chacun donne 4 competences et un
+choix entre 2 ou 3 talents nommes a la creation).
+Premiere conception (avec Nono) : mecanisme dedie sur le moule de CareerBonus - nouvelle
+unite chargehalflingclan.pas, 4e option du toggle .INI (CONTEXT.md 2.89), deux nouveaux
+popups dans WinSpecialisation (choix du clan puis du talent), deux nouveaux champs sur la
+fiche personnage. Code jusqu au bout : compile a 0 erreur, fonctionnel.
+Nono a ensuite fait remarquer, en relisant, que les clans sont en realite des ETHNIES - pas
+un mecanisme de choix a part. Verification faite : le moteur de creation gere DEJA ce cas
+exact nativement (les provinces de Nations of Mankind sont des <Specie> avec leur propre
+SUBCHAPTER_SKILL/TALENT ; le choix "A ou B" entre deux talents nommes existe deja sous forme
+de code compose "CODE_A/CODE_B" dans <Talent>, detecte par ListeTalent() et resolu par
+double-clic dans ReconstruitChoixCreation/TabCreationChoixDblClick, sans jet de de - deja
+utilise par les Ungols de Nations of Mankind, RULES-T0153/RULES-T0067).
+Tout le code dedie (chargehalflingclan.pas, les popups, les champs de fiche, l option .INI)
+a ete retire : `git status` confirme aucun fichier .pas modifie apres coup. Remplace par 12
+entrees <Specie id="ARCH1-RACE_HALF_XXXX"> dans BOOK ARCHIVES OF THE EMPIRE I.Xml (attributs
+et table de carrieres recopies tels quels de RULES-RACE_HALF, meme principe que les
+provinces humaines ; competences = 7 communes + 4 du clan ; talents = 4 communs + le talent
+compose du clan + 1 Random Talent). Zero ligne de Pascal ajoutee au final.
+4 codes crees au passage dans BOOK_RULESBOOK.Xml (n existaient pas) : RULES-COMPLANG_MOOT
+(Language Mootish, demande par les 11 clans sur 12), RULES-T0136_BOURG (Etiquette Burghers),
+RULES-T0092_FERM (Craftsman Farmer) ; Etiquette (Guilder) reutilise RULES-T0136_GUILD deja
+present (pluriel du livre, meme talent).
+Lecon retenue (memoire feedback ajoutee) : verifier si un mecanisme EXISTANT (pas juste le
+plus proche des mecanismes de "choix") represente deja nativement le concept demande, avant
+de concevoir quoi que ce soit de nouveau - ici, "clan" = "ethnie" aurait du sauter aux yeux
+des le debut de la conception.
+Teste et valide par Nono le 22/09/2026 (compilation propre, XML bien forme).
+Fichiers modifies : DATABASE/WFRP4/BOOK ARCHIVES OF THE EMPIRE I.Xml, BOOK_RULESBOOK.Xml,
+CONTEXT.md, A FAIRE.txt, Log.txt.

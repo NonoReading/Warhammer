@@ -821,4 +821,1950 @@ This may be resisted with a Challenging (+0) Endurance Test."</Explanation>
   <!-- Ghost Strider -->
 </Entry>
 </DATA_SPECIE_CAREER_DIRECT>
+<DATA_SPECIE>
+<Specie id="ARCH1-RACE_HALF_ASHFIELD">
+<Description language="ENGLISH">"Halflings (Ashfield)"</Description>
+<!-- Options: Halfling Clan Skills and Talents, Archives of the Empire I p.32 : modifie
+     les competences/talents d'espece standard du Halfling (BOOK_RULESBOOK.Xml) avec les
+     variations du clan Ashfield. Attributs et table de carrieres recopies tels quels de
+     RULES-RACE_HALF (Rulebook) : le livre ne donne aucune variation par clan sur ces
+     deux points, meme principe que les provinces de Nations of Mankind. -->
+<Ethnic>"RULES-SPECIE_HALFLING"</Ethnic>
+<SUBCHAPTER_ATTR>
+<Attribut name="RULES-ATTR_WS">"2d10+10"</Attribut>
+<Attribut name="RULES-ATTR_BS">"2d10+30"</Attribut>
+<Attribut name="RULES-ATTR_S">"2d10+10"</Attribut>
+<Attribut name="RULES-ATTR_T">"2d10+20"</Attribut>
+<Attribut name="RULES-ATTR_I">"2d10+20"</Attribut>
+<Attribut name="RULES-ATTR_Ag">"2d10+20"</Attribut>
+<Attribut name="RULES-ATTR_Dex">"2d10+30"</Attribut>
+<Attribut name="RULES-ATTR_Int">"2d10+20"</Attribut>
+<Attribut name="RULES-ATTR_WP">"2d10+30"</Attribut>
+<Attribut name="RULES-ATTR_Fel">"2d10+30"</Attribut>
+<Attribut name="RULES-ATTR_Fate">"0"</Attribut>
+<Attribut name="RULES-ATTR_Resil">"2"</Attribut>
+<Attribut name="RULES-ATTR_Wound">"0xBATTR_S+2xBATTR_T+1xBATTR_WP"</Attribut>
+<Attribut name="RULES-ATTR_Supp">"3"</Attribut>
+<Attribut name="RULES-ATTR_Move">"3"</Attribut>
+</SUBCHAPTER_ATTR>
+<SUBCHAPTER_SKILL>
+<Skill>"RULES-COMPCHARM"</Skill>
+  <!-- Charm -->
+<Skill>"RULES-COMPRESALC"</Skill>
+  <!-- Consume Alcohol -->
+<Skill>"RULES-COMPSAVOIR_LOCAL"</Skill>
+  <!-- Lore (Reikland) -->
+<Skill>"RULES-COMPPRECEP"</Skill>
+  <!-- Perception -->
+<Skill>"RULES-COMPESCAM"</Skill>
+  <!-- Sleight of Hand -->
+<Skill>"RULES-COMPDISC_*"</Skill>
+  <!-- Stealth (Any) -->
+<Skill>"RULES-COMPMETIER_CUIS"</Skill>
+  <!-- Trade (Cook) -->
+<Skill>"RULES-COMPCALM"</Skill>
+  <!-- Cool -->
+<Skill>"RULES-COMPINTUI"</Skill>
+  <!-- Intuition -->
+<Skill>"RULES-COMPLANG_MOOT"</Skill>
+  <!-- Language (Mootish) -->
+<Skill>"RULES-COMPPROJ_*"</Skill>
+  <!-- Ranged (Any) -->
+</SUBCHAPTER_SKILL>
+<SUBCHAPTER_TALENT>
+<Talent>"RULES-T0170"</Talent>
+  <!-- Small -->
+<Talent>"RULES-T0129_CORR"</Talent>
+  <!-- Resistance (Corruption) -->
+<Talent>"RULES-T0139_GOUT"</Talent>
+  <!-- Acute Sense (Taste) -->
+<Talent>"RULES-T0164"</Talent>
+  <!-- Night Vision -->
+<Talent>"RULES-T0139_VUE/RULES-T0136_SOLD"</Talent>
+  <!-- Acute Sense (Sight) or Etiquette (Soldiers) -->
+<Talent>"RULES-T*"</Talent>
+  <!-- Random Talent -->
+</SUBCHAPTER_TALENT>
+<SUBCHAPTER_CAREER>
+<Career name="RULES-WORK02">"01"</Career>
+  <!-- Apothecary -->
+<Career name="RULES-WORK31">"02"</Career>
+  <!-- Engineer -->
+<Career name="RULES-WORK33">"03-04"</Career>
+  <!-- Lawyer -->
+<Career name="RULES-WORK36">"05-06"</Career>
+  <!-- Physician -->
+<Career name="RULES-WORK23">"07-08"</Career>
+  <!-- Scholar -->
+<Career name="RULES-WORK01">"09-10"</Career>
+  <!-- Agitator -->
+<Career name="RULES-WORK03">"11-15"</Career>
+  <!-- Artisan -->
+<Career name="RULES-WORK37">"16-19"</Career>
+  <!-- Beggar -->
+<Career name="RULES-WORK21">"20-21"</Career>
+  <!-- Inverstigator -->
+<Career name="RULES-WORK34">"22-25"</Career>
+  <!-- Merchant -->
+<Career name="RULES-WORK52">"26-28"</Career>
+  <!-- Rat Catcher -->
+<Career name="RULES-WORK07">"29-31"</Career>
+  <!-- Townsman -->
+<Career name="RULES-WORK39">"32-33"</Career>
+  <!-- Watchman -->
+<Career name="RULES-WORK15">"34"</Career>
+  <!-- Advisor -->
+<Career name="RULES-WORK04">"35-36"</Career>
+  <!-- Artist -->
+<Career name="RULES-WORK20">"37"</Career>
+  <!-- Envoy -->
+<Career name="RULES-WORK56">"38-43"</Career>
+  <!-- Servant -->
+<Career name="RULES-WORK24">"44"</Career>
+  <!-- Spy -->
+<Career name="RULES-WORK32">"45-46"</Career>
+  <!-- Warden -->
+<Career name="RULES-WORK05">"47"</Career>
+  <!-- Bailif -->
+<Career name="RULES-WORK29">"48-50"</Career>
+  <!-- Herbalist -->
+<Career name="RULES-WORK10">"51-52"</Career>
+  <!-- Hunter -->
+<Career name="RULES-WORK40">"53"</Career>
+  <!-- Miner -->
+<Career name="RULES-WORK19">"54"</Career>
+  <!-- Scout -->
+<Career name="RULES-WORK63">"55-57"</Career>
+  <!-- Villager -->
+<Career name="RULES-WORK11">"58"</Career>
+  <!-- Bounty Hunter -->
+<Career name="RULES-WORK13">"59-60"</Career>
+  <!-- Coachman -->
+<Career name="RULES-WORK55">"61-63"</Career>
+  <!-- Entertainer -->
+<Career name="RULES-WORK38">"64-65"</Career>
+  <!-- Messenger -->
+<Career name="RULES-WORK14">"66-67"</Career>
+  <!-- Pedlar -->
+<Career name="RULES-WORK47">"68"</Career>
+  <!-- Road Warden -->
+<Career name="RULES-WORK06">"69"</Career>
+  <!-- Boatman -->
+<Career name="RULES-WORK43">"70"</Career>
+  <!-- Huffer -->
+<Career name="RULES-WORK46">"71"</Career>
+  <!-- Riverwarden -->
+<Career name="RULES-WORK25">"72-74"</Career>
+  <!-- Riverwoman -->
+<Career name="RULES-WORK35">"75"</Career>
+  <!-- Seaman -->
+<Career name="RULES-WORK16">"76-79"</Career>
+  <!-- Smuggler -->
+<Career name="RULES-WORK17">"80-82"</Career>
+  <!-- Stevedor -->
+<Career name="RULES-WORK22">"83-85"</Career>
+  <!-- Bawl -->
+<Career name="RULES-WORK09">"86"</Career>
+  <!-- Charlatan -->
+<Career name="RULES-WORK53">"87"</Career>
+  <!-- Fence -->
+<Career name="RULES-WORK48">"88"</Career>
+  <!-- Grave Robber -->
+<Career name="RULES-WORK30">"89"</Career>
+  <!-- Outlaw -->
+<Career name="RULES-WORK51">"90"</Career>
+  <!-- Racketeer -->
+<Career name="RULES-WORK64">"91-94"</Career>
+  <!-- Thief -->
+<Career name="RULES-WORK27">"95-96"</Career>
+  <!-- Guard -->
+<Career name="RULES-WORK28">"97"</Career>
+  <!-- Pit Fighter -->
+<Career name="RULES-WORK57">"98-100"</Career>
+  <!-- Soldier -->
+</SUBCHAPTER_CAREER>
+</Specie>
+<Specie id="ARCH1-RACE_HALF_BRAMBLEDOWN">
+<Description language="ENGLISH">"Halflings (Brambledown)"</Description>
+<!-- Options: Halfling Clan Skills and Talents, Archives of the Empire I p.32 : modifie
+     les competences/talents d'espece standard du Halfling (BOOK_RULESBOOK.Xml) avec les
+     variations du clan Brambledown. Attributs et table de carrieres recopies tels quels de
+     RULES-RACE_HALF (Rulebook) : le livre ne donne aucune variation par clan sur ces
+     deux points, meme principe que les provinces de Nations of Mankind. -->
+<Ethnic>"RULES-SPECIE_HALFLING"</Ethnic>
+<SUBCHAPTER_ATTR>
+<Attribut name="RULES-ATTR_WS">"2d10+10"</Attribut>
+<Attribut name="RULES-ATTR_BS">"2d10+30"</Attribut>
+<Attribut name="RULES-ATTR_S">"2d10+10"</Attribut>
+<Attribut name="RULES-ATTR_T">"2d10+20"</Attribut>
+<Attribut name="RULES-ATTR_I">"2d10+20"</Attribut>
+<Attribut name="RULES-ATTR_Ag">"2d10+20"</Attribut>
+<Attribut name="RULES-ATTR_Dex">"2d10+30"</Attribut>
+<Attribut name="RULES-ATTR_Int">"2d10+20"</Attribut>
+<Attribut name="RULES-ATTR_WP">"2d10+30"</Attribut>
+<Attribut name="RULES-ATTR_Fel">"2d10+30"</Attribut>
+<Attribut name="RULES-ATTR_Fate">"0"</Attribut>
+<Attribut name="RULES-ATTR_Resil">"2"</Attribut>
+<Attribut name="RULES-ATTR_Wound">"0xBATTR_S+2xBATTR_T+1xBATTR_WP"</Attribut>
+<Attribut name="RULES-ATTR_Supp">"3"</Attribut>
+<Attribut name="RULES-ATTR_Move">"3"</Attribut>
+</SUBCHAPTER_ATTR>
+<SUBCHAPTER_SKILL>
+<Skill>"RULES-COMPCHARM"</Skill>
+  <!-- Charm -->
+<Skill>"RULES-COMPRESALC"</Skill>
+  <!-- Consume Alcohol -->
+<Skill>"RULES-COMPSAVOIR_LOCAL"</Skill>
+  <!-- Lore (Reikland) -->
+<Skill>"RULES-COMPPRECEP"</Skill>
+  <!-- Perception -->
+<Skill>"RULES-COMPESCAM"</Skill>
+  <!-- Sleight of Hand -->
+<Skill>"RULES-COMPDISC_*"</Skill>
+  <!-- Stealth (Any) -->
+<Skill>"RULES-COMPMETIER_CUIS"</Skill>
+  <!-- Trade (Cook) -->
+<Skill>"RULES-COMPLANG_MOOT"</Skill>
+  <!-- Language (Mootish) -->
+<Skill>"RULES-COMPORIENT"</Skill>
+  <!-- Navigation -->
+<Skill>"RULES-COMPSURVEXT"</Skill>
+  <!-- Outdoor Survival -->
+<Skill>"RULES-COMPNATA"</Skill>
+  <!-- Swim -->
+</SUBCHAPTER_SKILL>
+<SUBCHAPTER_TALENT>
+<Talent>"RULES-T0170"</Talent>
+  <!-- Small -->
+<Talent>"RULES-T0129_CORR"</Talent>
+  <!-- Resistance (Corruption) -->
+<Talent>"RULES-T0139_GOUT"</Talent>
+  <!-- Acute Sense (Taste) -->
+<Talent>"RULES-T0164"</Talent>
+  <!-- Night Vision -->
+<Talent>"RULES-T0142/RULES-T0168"</Talent>
+  <!-- Gregarious or Seasoned Traveller -->
+<Talent>"RULES-T*"</Talent>
+  <!-- Random Talent -->
+</SUBCHAPTER_TALENT>
+<SUBCHAPTER_CAREER>
+<Career name="RULES-WORK02">"01"</Career>
+  <!-- Apothecary -->
+<Career name="RULES-WORK31">"02"</Career>
+  <!-- Engineer -->
+<Career name="RULES-WORK33">"03-04"</Career>
+  <!-- Lawyer -->
+<Career name="RULES-WORK36">"05-06"</Career>
+  <!-- Physician -->
+<Career name="RULES-WORK23">"07-08"</Career>
+  <!-- Scholar -->
+<Career name="RULES-WORK01">"09-10"</Career>
+  <!-- Agitator -->
+<Career name="RULES-WORK03">"11-15"</Career>
+  <!-- Artisan -->
+<Career name="RULES-WORK37">"16-19"</Career>
+  <!-- Beggar -->
+<Career name="RULES-WORK21">"20-21"</Career>
+  <!-- Inverstigator -->
+<Career name="RULES-WORK34">"22-25"</Career>
+  <!-- Merchant -->
+<Career name="RULES-WORK52">"26-28"</Career>
+  <!-- Rat Catcher -->
+<Career name="RULES-WORK07">"29-31"</Career>
+  <!-- Townsman -->
+<Career name="RULES-WORK39">"32-33"</Career>
+  <!-- Watchman -->
+<Career name="RULES-WORK15">"34"</Career>
+  <!-- Advisor -->
+<Career name="RULES-WORK04">"35-36"</Career>
+  <!-- Artist -->
+<Career name="RULES-WORK20">"37"</Career>
+  <!-- Envoy -->
+<Career name="RULES-WORK56">"38-43"</Career>
+  <!-- Servant -->
+<Career name="RULES-WORK24">"44"</Career>
+  <!-- Spy -->
+<Career name="RULES-WORK32">"45-46"</Career>
+  <!-- Warden -->
+<Career name="RULES-WORK05">"47"</Career>
+  <!-- Bailif -->
+<Career name="RULES-WORK29">"48-50"</Career>
+  <!-- Herbalist -->
+<Career name="RULES-WORK10">"51-52"</Career>
+  <!-- Hunter -->
+<Career name="RULES-WORK40">"53"</Career>
+  <!-- Miner -->
+<Career name="RULES-WORK19">"54"</Career>
+  <!-- Scout -->
+<Career name="RULES-WORK63">"55-57"</Career>
+  <!-- Villager -->
+<Career name="RULES-WORK11">"58"</Career>
+  <!-- Bounty Hunter -->
+<Career name="RULES-WORK13">"59-60"</Career>
+  <!-- Coachman -->
+<Career name="RULES-WORK55">"61-63"</Career>
+  <!-- Entertainer -->
+<Career name="RULES-WORK38">"64-65"</Career>
+  <!-- Messenger -->
+<Career name="RULES-WORK14">"66-67"</Career>
+  <!-- Pedlar -->
+<Career name="RULES-WORK47">"68"</Career>
+  <!-- Road Warden -->
+<Career name="RULES-WORK06">"69"</Career>
+  <!-- Boatman -->
+<Career name="RULES-WORK43">"70"</Career>
+  <!-- Huffer -->
+<Career name="RULES-WORK46">"71"</Career>
+  <!-- Riverwarden -->
+<Career name="RULES-WORK25">"72-74"</Career>
+  <!-- Riverwoman -->
+<Career name="RULES-WORK35">"75"</Career>
+  <!-- Seaman -->
+<Career name="RULES-WORK16">"76-79"</Career>
+  <!-- Smuggler -->
+<Career name="RULES-WORK17">"80-82"</Career>
+  <!-- Stevedor -->
+<Career name="RULES-WORK22">"83-85"</Career>
+  <!-- Bawl -->
+<Career name="RULES-WORK09">"86"</Career>
+  <!-- Charlatan -->
+<Career name="RULES-WORK53">"87"</Career>
+  <!-- Fence -->
+<Career name="RULES-WORK48">"88"</Career>
+  <!-- Grave Robber -->
+<Career name="RULES-WORK30">"89"</Career>
+  <!-- Outlaw -->
+<Career name="RULES-WORK51">"90"</Career>
+  <!-- Racketeer -->
+<Career name="RULES-WORK64">"91-94"</Career>
+  <!-- Thief -->
+<Career name="RULES-WORK27">"95-96"</Career>
+  <!-- Guard -->
+<Career name="RULES-WORK28">"97"</Career>
+  <!-- Pit Fighter -->
+<Career name="RULES-WORK57">"98-100"</Career>
+  <!-- Soldier -->
+</SUBCHAPTER_CAREER>
+</Specie>
+<Specie id="ARCH1-RACE_HALF_BRANDYSNAP">
+<Description language="ENGLISH">"Halflings (Brandysnap)"</Description>
+<!-- Options: Halfling Clan Skills and Talents, Archives of the Empire I p.32 : modifie
+     les competences/talents d'espece standard du Halfling (BOOK_RULESBOOK.Xml) avec les
+     variations du clan Brandysnap. Attributs et table de carrieres recopies tels quels de
+     RULES-RACE_HALF (Rulebook) : le livre ne donne aucune variation par clan sur ces
+     deux points, meme principe que les provinces de Nations of Mankind. -->
+<Ethnic>"RULES-SPECIE_HALFLING"</Ethnic>
+<SUBCHAPTER_ATTR>
+<Attribut name="RULES-ATTR_WS">"2d10+10"</Attribut>
+<Attribut name="RULES-ATTR_BS">"2d10+30"</Attribut>
+<Attribut name="RULES-ATTR_S">"2d10+10"</Attribut>
+<Attribut name="RULES-ATTR_T">"2d10+20"</Attribut>
+<Attribut name="RULES-ATTR_I">"2d10+20"</Attribut>
+<Attribut name="RULES-ATTR_Ag">"2d10+20"</Attribut>
+<Attribut name="RULES-ATTR_Dex">"2d10+30"</Attribut>
+<Attribut name="RULES-ATTR_Int">"2d10+20"</Attribut>
+<Attribut name="RULES-ATTR_WP">"2d10+30"</Attribut>
+<Attribut name="RULES-ATTR_Fel">"2d10+30"</Attribut>
+<Attribut name="RULES-ATTR_Fate">"0"</Attribut>
+<Attribut name="RULES-ATTR_Resil">"2"</Attribut>
+<Attribut name="RULES-ATTR_Wound">"0xBATTR_S+2xBATTR_T+1xBATTR_WP"</Attribut>
+<Attribut name="RULES-ATTR_Supp">"3"</Attribut>
+<Attribut name="RULES-ATTR_Move">"3"</Attribut>
+</SUBCHAPTER_ATTR>
+<SUBCHAPTER_SKILL>
+<Skill>"RULES-COMPCHARM"</Skill>
+  <!-- Charm -->
+<Skill>"RULES-COMPRESALC"</Skill>
+  <!-- Consume Alcohol -->
+<Skill>"RULES-COMPSAVOIR_LOCAL"</Skill>
+  <!-- Lore (Reikland) -->
+<Skill>"RULES-COMPPRECEP"</Skill>
+  <!-- Perception -->
+<Skill>"RULES-COMPESCAM"</Skill>
+  <!-- Sleight of Hand -->
+<Skill>"RULES-COMPDISC_*"</Skill>
+  <!-- Stealth (Any) -->
+<Skill>"RULES-COMPMETIER_CUIS"</Skill>
+  <!-- Trade (Cook) -->
+<Skill>"RULES-COMPSOINANI"</Skill>
+  <!-- Animal Care -->
+<Skill>"RULES-COMPPARI"</Skill>
+  <!-- Gamble -->
+<Skill>"RULES-COMPLANG_MOOT"</Skill>
+  <!-- Language (Mootish) -->
+<Skill>"RULES-COMPSAVOIR_HERB"</Skill>
+  <!-- Lore (Herbs) -->
+</SUBCHAPTER_SKILL>
+<SUBCHAPTER_TALENT>
+<Talent>"RULES-T0170"</Talent>
+  <!-- Small -->
+<Talent>"RULES-T0129_CORR"</Talent>
+  <!-- Resistance (Corruption) -->
+<Talent>"RULES-T0139_GOUT"</Talent>
+  <!-- Acute Sense (Taste) -->
+<Talent>"RULES-T0164"</Talent>
+  <!-- Night Vision -->
+<Talent>"RULES-T0092_FERM/RULES-T0035"</Talent>
+  <!-- Craftsman (Farmer) or Sturdy -->
+<Talent>"RULES-T*"</Talent>
+  <!-- Random Talent -->
+</SUBCHAPTER_TALENT>
+<SUBCHAPTER_CAREER>
+<Career name="RULES-WORK02">"01"</Career>
+  <!-- Apothecary -->
+<Career name="RULES-WORK31">"02"</Career>
+  <!-- Engineer -->
+<Career name="RULES-WORK33">"03-04"</Career>
+  <!-- Lawyer -->
+<Career name="RULES-WORK36">"05-06"</Career>
+  <!-- Physician -->
+<Career name="RULES-WORK23">"07-08"</Career>
+  <!-- Scholar -->
+<Career name="RULES-WORK01">"09-10"</Career>
+  <!-- Agitator -->
+<Career name="RULES-WORK03">"11-15"</Career>
+  <!-- Artisan -->
+<Career name="RULES-WORK37">"16-19"</Career>
+  <!-- Beggar -->
+<Career name="RULES-WORK21">"20-21"</Career>
+  <!-- Inverstigator -->
+<Career name="RULES-WORK34">"22-25"</Career>
+  <!-- Merchant -->
+<Career name="RULES-WORK52">"26-28"</Career>
+  <!-- Rat Catcher -->
+<Career name="RULES-WORK07">"29-31"</Career>
+  <!-- Townsman -->
+<Career name="RULES-WORK39">"32-33"</Career>
+  <!-- Watchman -->
+<Career name="RULES-WORK15">"34"</Career>
+  <!-- Advisor -->
+<Career name="RULES-WORK04">"35-36"</Career>
+  <!-- Artist -->
+<Career name="RULES-WORK20">"37"</Career>
+  <!-- Envoy -->
+<Career name="RULES-WORK56">"38-43"</Career>
+  <!-- Servant -->
+<Career name="RULES-WORK24">"44"</Career>
+  <!-- Spy -->
+<Career name="RULES-WORK32">"45-46"</Career>
+  <!-- Warden -->
+<Career name="RULES-WORK05">"47"</Career>
+  <!-- Bailif -->
+<Career name="RULES-WORK29">"48-50"</Career>
+  <!-- Herbalist -->
+<Career name="RULES-WORK10">"51-52"</Career>
+  <!-- Hunter -->
+<Career name="RULES-WORK40">"53"</Career>
+  <!-- Miner -->
+<Career name="RULES-WORK19">"54"</Career>
+  <!-- Scout -->
+<Career name="RULES-WORK63">"55-57"</Career>
+  <!-- Villager -->
+<Career name="RULES-WORK11">"58"</Career>
+  <!-- Bounty Hunter -->
+<Career name="RULES-WORK13">"59-60"</Career>
+  <!-- Coachman -->
+<Career name="RULES-WORK55">"61-63"</Career>
+  <!-- Entertainer -->
+<Career name="RULES-WORK38">"64-65"</Career>
+  <!-- Messenger -->
+<Career name="RULES-WORK14">"66-67"</Career>
+  <!-- Pedlar -->
+<Career name="RULES-WORK47">"68"</Career>
+  <!-- Road Warden -->
+<Career name="RULES-WORK06">"69"</Career>
+  <!-- Boatman -->
+<Career name="RULES-WORK43">"70"</Career>
+  <!-- Huffer -->
+<Career name="RULES-WORK46">"71"</Career>
+  <!-- Riverwarden -->
+<Career name="RULES-WORK25">"72-74"</Career>
+  <!-- Riverwoman -->
+<Career name="RULES-WORK35">"75"</Career>
+  <!-- Seaman -->
+<Career name="RULES-WORK16">"76-79"</Career>
+  <!-- Smuggler -->
+<Career name="RULES-WORK17">"80-82"</Career>
+  <!-- Stevedor -->
+<Career name="RULES-WORK22">"83-85"</Career>
+  <!-- Bawl -->
+<Career name="RULES-WORK09">"86"</Career>
+  <!-- Charlatan -->
+<Career name="RULES-WORK53">"87"</Career>
+  <!-- Fence -->
+<Career name="RULES-WORK48">"88"</Career>
+  <!-- Grave Robber -->
+<Career name="RULES-WORK30">"89"</Career>
+  <!-- Outlaw -->
+<Career name="RULES-WORK51">"90"</Career>
+  <!-- Racketeer -->
+<Career name="RULES-WORK64">"91-94"</Career>
+  <!-- Thief -->
+<Career name="RULES-WORK27">"95-96"</Career>
+  <!-- Guard -->
+<Career name="RULES-WORK28">"97"</Career>
+  <!-- Pit Fighter -->
+<Career name="RULES-WORK57">"98-100"</Career>
+  <!-- Soldier -->
+</SUBCHAPTER_CAREER>
+</Specie>
+<Specie id="ARCH1-RACE_HALF_HAYFOOT">
+<Description language="ENGLISH">"Halflings (Hayfoot)"</Description>
+<!-- Options: Halfling Clan Skills and Talents, Archives of the Empire I p.32 : modifie
+     les competences/talents d'espece standard du Halfling (BOOK_RULESBOOK.Xml) avec les
+     variations du clan Hayfoot. Attributs et table de carrieres recopies tels quels de
+     RULES-RACE_HALF (Rulebook) : le livre ne donne aucune variation par clan sur ces
+     deux points, meme principe que les provinces de Nations of Mankind. -->
+<Ethnic>"RULES-SPECIE_HALFLING"</Ethnic>
+<SUBCHAPTER_ATTR>
+<Attribut name="RULES-ATTR_WS">"2d10+10"</Attribut>
+<Attribut name="RULES-ATTR_BS">"2d10+30"</Attribut>
+<Attribut name="RULES-ATTR_S">"2d10+10"</Attribut>
+<Attribut name="RULES-ATTR_T">"2d10+20"</Attribut>
+<Attribut name="RULES-ATTR_I">"2d10+20"</Attribut>
+<Attribut name="RULES-ATTR_Ag">"2d10+20"</Attribut>
+<Attribut name="RULES-ATTR_Dex">"2d10+30"</Attribut>
+<Attribut name="RULES-ATTR_Int">"2d10+20"</Attribut>
+<Attribut name="RULES-ATTR_WP">"2d10+30"</Attribut>
+<Attribut name="RULES-ATTR_Fel">"2d10+30"</Attribut>
+<Attribut name="RULES-ATTR_Fate">"0"</Attribut>
+<Attribut name="RULES-ATTR_Resil">"2"</Attribut>
+<Attribut name="RULES-ATTR_Wound">"0xBATTR_S+2xBATTR_T+1xBATTR_WP"</Attribut>
+<Attribut name="RULES-ATTR_Supp">"3"</Attribut>
+<Attribut name="RULES-ATTR_Move">"3"</Attribut>
+</SUBCHAPTER_ATTR>
+<SUBCHAPTER_SKILL>
+<Skill>"RULES-COMPCHARM"</Skill>
+  <!-- Charm -->
+<Skill>"RULES-COMPRESALC"</Skill>
+  <!-- Consume Alcohol -->
+<Skill>"RULES-COMPSAVOIR_LOCAL"</Skill>
+  <!-- Lore (Reikland) -->
+<Skill>"RULES-COMPPRECEP"</Skill>
+  <!-- Perception -->
+<Skill>"RULES-COMPESCAM"</Skill>
+  <!-- Sleight of Hand -->
+<Skill>"RULES-COMPDISC_*"</Skill>
+  <!-- Stealth (Any) -->
+<Skill>"RULES-COMPMETIER_CUIS"</Skill>
+  <!-- Trade (Cook) -->
+<Skill>"RULES-COMPPARI"</Skill>
+  <!-- Gamble -->
+<Skill>"RULES-COMPMARCH"</Skill>
+  <!-- Haggle -->
+<Skill>"RULES-COMPEVAL"</Skill>
+  <!-- Evaluate -->
+<Skill>"RULES-COMPLANG_MOOT"</Skill>
+  <!-- Language (Mootish) -->
+</SUBCHAPTER_SKILL>
+<SUBCHAPTER_TALENT>
+<Talent>"RULES-T0170"</Talent>
+  <!-- Small -->
+<Talent>"RULES-T0129_CORR"</Talent>
+  <!-- Resistance (Corruption) -->
+<Talent>"RULES-T0139_GOUT"</Talent>
+  <!-- Acute Sense (Taste) -->
+<Talent>"RULES-T0164"</Talent>
+  <!-- Night Vision -->
+<Talent>"RULES-T0102/RULES-T0136_GUILD"</Talent>
+  <!-- Dealmaker or Etiquette (Guilder) -->
+<Talent>"RULES-T*"</Talent>
+  <!-- Random Talent -->
+</SUBCHAPTER_TALENT>
+<SUBCHAPTER_CAREER>
+<Career name="RULES-WORK02">"01"</Career>
+  <!-- Apothecary -->
+<Career name="RULES-WORK31">"02"</Career>
+  <!-- Engineer -->
+<Career name="RULES-WORK33">"03-04"</Career>
+  <!-- Lawyer -->
+<Career name="RULES-WORK36">"05-06"</Career>
+  <!-- Physician -->
+<Career name="RULES-WORK23">"07-08"</Career>
+  <!-- Scholar -->
+<Career name="RULES-WORK01">"09-10"</Career>
+  <!-- Agitator -->
+<Career name="RULES-WORK03">"11-15"</Career>
+  <!-- Artisan -->
+<Career name="RULES-WORK37">"16-19"</Career>
+  <!-- Beggar -->
+<Career name="RULES-WORK21">"20-21"</Career>
+  <!-- Inverstigator -->
+<Career name="RULES-WORK34">"22-25"</Career>
+  <!-- Merchant -->
+<Career name="RULES-WORK52">"26-28"</Career>
+  <!-- Rat Catcher -->
+<Career name="RULES-WORK07">"29-31"</Career>
+  <!-- Townsman -->
+<Career name="RULES-WORK39">"32-33"</Career>
+  <!-- Watchman -->
+<Career name="RULES-WORK15">"34"</Career>
+  <!-- Advisor -->
+<Career name="RULES-WORK04">"35-36"</Career>
+  <!-- Artist -->
+<Career name="RULES-WORK20">"37"</Career>
+  <!-- Envoy -->
+<Career name="RULES-WORK56">"38-43"</Career>
+  <!-- Servant -->
+<Career name="RULES-WORK24">"44"</Career>
+  <!-- Spy -->
+<Career name="RULES-WORK32">"45-46"</Career>
+  <!-- Warden -->
+<Career name="RULES-WORK05">"47"</Career>
+  <!-- Bailif -->
+<Career name="RULES-WORK29">"48-50"</Career>
+  <!-- Herbalist -->
+<Career name="RULES-WORK10">"51-52"</Career>
+  <!-- Hunter -->
+<Career name="RULES-WORK40">"53"</Career>
+  <!-- Miner -->
+<Career name="RULES-WORK19">"54"</Career>
+  <!-- Scout -->
+<Career name="RULES-WORK63">"55-57"</Career>
+  <!-- Villager -->
+<Career name="RULES-WORK11">"58"</Career>
+  <!-- Bounty Hunter -->
+<Career name="RULES-WORK13">"59-60"</Career>
+  <!-- Coachman -->
+<Career name="RULES-WORK55">"61-63"</Career>
+  <!-- Entertainer -->
+<Career name="RULES-WORK38">"64-65"</Career>
+  <!-- Messenger -->
+<Career name="RULES-WORK14">"66-67"</Career>
+  <!-- Pedlar -->
+<Career name="RULES-WORK47">"68"</Career>
+  <!-- Road Warden -->
+<Career name="RULES-WORK06">"69"</Career>
+  <!-- Boatman -->
+<Career name="RULES-WORK43">"70"</Career>
+  <!-- Huffer -->
+<Career name="RULES-WORK46">"71"</Career>
+  <!-- Riverwarden -->
+<Career name="RULES-WORK25">"72-74"</Career>
+  <!-- Riverwoman -->
+<Career name="RULES-WORK35">"75"</Career>
+  <!-- Seaman -->
+<Career name="RULES-WORK16">"76-79"</Career>
+  <!-- Smuggler -->
+<Career name="RULES-WORK17">"80-82"</Career>
+  <!-- Stevedor -->
+<Career name="RULES-WORK22">"83-85"</Career>
+  <!-- Bawl -->
+<Career name="RULES-WORK09">"86"</Career>
+  <!-- Charlatan -->
+<Career name="RULES-WORK53">"87"</Career>
+  <!-- Fence -->
+<Career name="RULES-WORK48">"88"</Career>
+  <!-- Grave Robber -->
+<Career name="RULES-WORK30">"89"</Career>
+  <!-- Outlaw -->
+<Career name="RULES-WORK51">"90"</Career>
+  <!-- Racketeer -->
+<Career name="RULES-WORK64">"91-94"</Career>
+  <!-- Thief -->
+<Career name="RULES-WORK27">"95-96"</Career>
+  <!-- Guard -->
+<Career name="RULES-WORK28">"97"</Career>
+  <!-- Pit Fighter -->
+<Career name="RULES-WORK57">"98-100"</Career>
+  <!-- Soldier -->
+</SUBCHAPTER_CAREER>
+</Specie>
+<Specie id="ARCH1-RACE_HALF_HOLLYFOOT">
+<Description language="ENGLISH">"Halflings (Hollyfoot)"</Description>
+<!-- Options: Halfling Clan Skills and Talents, Archives of the Empire I p.32 : modifie
+     les competences/talents d'espece standard du Halfling (BOOK_RULESBOOK.Xml) avec les
+     variations du clan Hollyfoot. Attributs et table de carrieres recopies tels quels de
+     RULES-RACE_HALF (Rulebook) : le livre ne donne aucune variation par clan sur ces
+     deux points, meme principe que les provinces de Nations of Mankind. -->
+<Ethnic>"RULES-SPECIE_HALFLING"</Ethnic>
+<SUBCHAPTER_ATTR>
+<Attribut name="RULES-ATTR_WS">"2d10+10"</Attribut>
+<Attribut name="RULES-ATTR_BS">"2d10+30"</Attribut>
+<Attribut name="RULES-ATTR_S">"2d10+10"</Attribut>
+<Attribut name="RULES-ATTR_T">"2d10+20"</Attribut>
+<Attribut name="RULES-ATTR_I">"2d10+20"</Attribut>
+<Attribut name="RULES-ATTR_Ag">"2d10+20"</Attribut>
+<Attribut name="RULES-ATTR_Dex">"2d10+30"</Attribut>
+<Attribut name="RULES-ATTR_Int">"2d10+20"</Attribut>
+<Attribut name="RULES-ATTR_WP">"2d10+30"</Attribut>
+<Attribut name="RULES-ATTR_Fel">"2d10+30"</Attribut>
+<Attribut name="RULES-ATTR_Fate">"0"</Attribut>
+<Attribut name="RULES-ATTR_Resil">"2"</Attribut>
+<Attribut name="RULES-ATTR_Wound">"0xBATTR_S+2xBATTR_T+1xBATTR_WP"</Attribut>
+<Attribut name="RULES-ATTR_Supp">"3"</Attribut>
+<Attribut name="RULES-ATTR_Move">"3"</Attribut>
+</SUBCHAPTER_ATTR>
+<SUBCHAPTER_SKILL>
+<Skill>"RULES-COMPCHARM"</Skill>
+  <!-- Charm -->
+<Skill>"RULES-COMPRESALC"</Skill>
+  <!-- Consume Alcohol -->
+<Skill>"RULES-COMPSAVOIR_LOCAL"</Skill>
+  <!-- Lore (Reikland) -->
+<Skill>"RULES-COMPPRECEP"</Skill>
+  <!-- Perception -->
+<Skill>"RULES-COMPESCAM"</Skill>
+  <!-- Sleight of Hand -->
+<Skill>"RULES-COMPDISC_*"</Skill>
+  <!-- Stealth (Any) -->
+<Skill>"RULES-COMPMETIER_CUIS"</Skill>
+  <!-- Trade (Cook) -->
+<Skill>"RULES-COMPEVAL"</Skill>
+  <!-- Evaluate -->
+<Skill>"RULES-COMPMARCH"</Skill>
+  <!-- Haggle -->
+<Skill>"RULES-COMPLANG_MOOT"</Skill>
+  <!-- Language (Mootish) -->
+<Skill>"RULES-COMPMETIER_*"</Skill>
+  <!-- Trade (Any) -->
+</SUBCHAPTER_SKILL>
+<SUBCHAPTER_TALENT>
+<Talent>"RULES-T0170"</Talent>
+  <!-- Small -->
+<Talent>"RULES-T0129_CORR"</Talent>
+  <!-- Resistance (Corruption) -->
+<Talent>"RULES-T0139_GOUT"</Talent>
+  <!-- Acute Sense (Taste) -->
+<Talent>"RULES-T0164"</Talent>
+  <!-- Night Vision -->
+<Talent>"RULES-T0092_*/RULES-T0045"</Talent>
+  <!-- Craftsman (Any) or Nimble Fingered -->
+<Talent>"RULES-T*"</Talent>
+  <!-- Random Talent -->
+</SUBCHAPTER_TALENT>
+<SUBCHAPTER_CAREER>
+<Career name="RULES-WORK02">"01"</Career>
+  <!-- Apothecary -->
+<Career name="RULES-WORK31">"02"</Career>
+  <!-- Engineer -->
+<Career name="RULES-WORK33">"03-04"</Career>
+  <!-- Lawyer -->
+<Career name="RULES-WORK36">"05-06"</Career>
+  <!-- Physician -->
+<Career name="RULES-WORK23">"07-08"</Career>
+  <!-- Scholar -->
+<Career name="RULES-WORK01">"09-10"</Career>
+  <!-- Agitator -->
+<Career name="RULES-WORK03">"11-15"</Career>
+  <!-- Artisan -->
+<Career name="RULES-WORK37">"16-19"</Career>
+  <!-- Beggar -->
+<Career name="RULES-WORK21">"20-21"</Career>
+  <!-- Inverstigator -->
+<Career name="RULES-WORK34">"22-25"</Career>
+  <!-- Merchant -->
+<Career name="RULES-WORK52">"26-28"</Career>
+  <!-- Rat Catcher -->
+<Career name="RULES-WORK07">"29-31"</Career>
+  <!-- Townsman -->
+<Career name="RULES-WORK39">"32-33"</Career>
+  <!-- Watchman -->
+<Career name="RULES-WORK15">"34"</Career>
+  <!-- Advisor -->
+<Career name="RULES-WORK04">"35-36"</Career>
+  <!-- Artist -->
+<Career name="RULES-WORK20">"37"</Career>
+  <!-- Envoy -->
+<Career name="RULES-WORK56">"38-43"</Career>
+  <!-- Servant -->
+<Career name="RULES-WORK24">"44"</Career>
+  <!-- Spy -->
+<Career name="RULES-WORK32">"45-46"</Career>
+  <!-- Warden -->
+<Career name="RULES-WORK05">"47"</Career>
+  <!-- Bailif -->
+<Career name="RULES-WORK29">"48-50"</Career>
+  <!-- Herbalist -->
+<Career name="RULES-WORK10">"51-52"</Career>
+  <!-- Hunter -->
+<Career name="RULES-WORK40">"53"</Career>
+  <!-- Miner -->
+<Career name="RULES-WORK19">"54"</Career>
+  <!-- Scout -->
+<Career name="RULES-WORK63">"55-57"</Career>
+  <!-- Villager -->
+<Career name="RULES-WORK11">"58"</Career>
+  <!-- Bounty Hunter -->
+<Career name="RULES-WORK13">"59-60"</Career>
+  <!-- Coachman -->
+<Career name="RULES-WORK55">"61-63"</Career>
+  <!-- Entertainer -->
+<Career name="RULES-WORK38">"64-65"</Career>
+  <!-- Messenger -->
+<Career name="RULES-WORK14">"66-67"</Career>
+  <!-- Pedlar -->
+<Career name="RULES-WORK47">"68"</Career>
+  <!-- Road Warden -->
+<Career name="RULES-WORK06">"69"</Career>
+  <!-- Boatman -->
+<Career name="RULES-WORK43">"70"</Career>
+  <!-- Huffer -->
+<Career name="RULES-WORK46">"71"</Career>
+  <!-- Riverwarden -->
+<Career name="RULES-WORK25">"72-74"</Career>
+  <!-- Riverwoman -->
+<Career name="RULES-WORK35">"75"</Career>
+  <!-- Seaman -->
+<Career name="RULES-WORK16">"76-79"</Career>
+  <!-- Smuggler -->
+<Career name="RULES-WORK17">"80-82"</Career>
+  <!-- Stevedor -->
+<Career name="RULES-WORK22">"83-85"</Career>
+  <!-- Bawl -->
+<Career name="RULES-WORK09">"86"</Career>
+  <!-- Charlatan -->
+<Career name="RULES-WORK53">"87"</Career>
+  <!-- Fence -->
+<Career name="RULES-WORK48">"88"</Career>
+  <!-- Grave Robber -->
+<Career name="RULES-WORK30">"89"</Career>
+  <!-- Outlaw -->
+<Career name="RULES-WORK51">"90"</Career>
+  <!-- Racketeer -->
+<Career name="RULES-WORK64">"91-94"</Career>
+  <!-- Thief -->
+<Career name="RULES-WORK27">"95-96"</Career>
+  <!-- Guard -->
+<Career name="RULES-WORK28">"97"</Career>
+  <!-- Pit Fighter -->
+<Career name="RULES-WORK57">"98-100"</Career>
+  <!-- Soldier -->
+</SUBCHAPTER_CAREER>
+</Specie>
+<Specie id="ARCH1-RACE_HALF_HAYFOOTHOLLYFOOT">
+<Description language="ENGLISH">"Halflings (Hayfoot-Hollyfoot)"</Description>
+<!-- Options: Halfling Clan Skills and Talents, Archives of the Empire I p.32 : modifie
+     les competences/talents d'espece standard du Halfling (BOOK_RULESBOOK.Xml) avec les
+     variations du clan Hayfoot-Hollyfoot. Attributs et table de carrieres recopies tels quels de
+     RULES-RACE_HALF (Rulebook) : le livre ne donne aucune variation par clan sur ces
+     deux points, meme principe que les provinces de Nations of Mankind. -->
+<Ethnic>"RULES-SPECIE_HALFLING"</Ethnic>
+<SUBCHAPTER_ATTR>
+<Attribut name="RULES-ATTR_WS">"2d10+10"</Attribut>
+<Attribut name="RULES-ATTR_BS">"2d10+30"</Attribut>
+<Attribut name="RULES-ATTR_S">"2d10+10"</Attribut>
+<Attribut name="RULES-ATTR_T">"2d10+20"</Attribut>
+<Attribut name="RULES-ATTR_I">"2d10+20"</Attribut>
+<Attribut name="RULES-ATTR_Ag">"2d10+20"</Attribut>
+<Attribut name="RULES-ATTR_Dex">"2d10+30"</Attribut>
+<Attribut name="RULES-ATTR_Int">"2d10+20"</Attribut>
+<Attribut name="RULES-ATTR_WP">"2d10+30"</Attribut>
+<Attribut name="RULES-ATTR_Fel">"2d10+30"</Attribut>
+<Attribut name="RULES-ATTR_Fate">"0"</Attribut>
+<Attribut name="RULES-ATTR_Resil">"2"</Attribut>
+<Attribut name="RULES-ATTR_Wound">"0xBATTR_S+2xBATTR_T+1xBATTR_WP"</Attribut>
+<Attribut name="RULES-ATTR_Supp">"3"</Attribut>
+<Attribut name="RULES-ATTR_Move">"3"</Attribut>
+</SUBCHAPTER_ATTR>
+<SUBCHAPTER_SKILL>
+<Skill>"RULES-COMPCHARM"</Skill>
+  <!-- Charm -->
+<Skill>"RULES-COMPRESALC"</Skill>
+  <!-- Consume Alcohol -->
+<Skill>"RULES-COMPSAVOIR_LOCAL"</Skill>
+  <!-- Lore (Reikland) -->
+<Skill>"RULES-COMPPRECEP"</Skill>
+  <!-- Perception -->
+<Skill>"RULES-COMPESCAM"</Skill>
+  <!-- Sleight of Hand -->
+<Skill>"RULES-COMPDISC_*"</Skill>
+  <!-- Stealth (Any) -->
+<Skill>"RULES-COMPMETIER_CUIS"</Skill>
+  <!-- Trade (Cook) -->
+<Skill>"RULES-COMPSUBOR"</Skill>
+  <!-- Bribery -->
+<Skill>"RULES-COMPMARCH"</Skill>
+  <!-- Haggle -->
+<Skill>"RULES-COMPRAGOT"</Skill>
+  <!-- Gossip -->
+<Skill>"RULES-COMPLANG_MOOT"</Skill>
+  <!-- Language (Mootish) -->
+</SUBCHAPTER_SKILL>
+<SUBCHAPTER_TALENT>
+<Talent>"RULES-T0170"</Talent>
+  <!-- Small -->
+<Talent>"RULES-T0129_CORR"</Talent>
+  <!-- Resistance (Corruption) -->
+<Talent>"RULES-T0139_GOUT"</Talent>
+  <!-- Acute Sense (Taste) -->
+<Talent>"RULES-T0164"</Talent>
+  <!-- Night Vision -->
+<Talent>"RULES-T0051/RULES-T0106"</Talent>
+  <!-- Argumentative or Numismatics -->
+<Talent>"RULES-T*"</Talent>
+  <!-- Random Talent -->
+</SUBCHAPTER_TALENT>
+<SUBCHAPTER_CAREER>
+<Career name="RULES-WORK02">"01"</Career>
+  <!-- Apothecary -->
+<Career name="RULES-WORK31">"02"</Career>
+  <!-- Engineer -->
+<Career name="RULES-WORK33">"03-04"</Career>
+  <!-- Lawyer -->
+<Career name="RULES-WORK36">"05-06"</Career>
+  <!-- Physician -->
+<Career name="RULES-WORK23">"07-08"</Career>
+  <!-- Scholar -->
+<Career name="RULES-WORK01">"09-10"</Career>
+  <!-- Agitator -->
+<Career name="RULES-WORK03">"11-15"</Career>
+  <!-- Artisan -->
+<Career name="RULES-WORK37">"16-19"</Career>
+  <!-- Beggar -->
+<Career name="RULES-WORK21">"20-21"</Career>
+  <!-- Inverstigator -->
+<Career name="RULES-WORK34">"22-25"</Career>
+  <!-- Merchant -->
+<Career name="RULES-WORK52">"26-28"</Career>
+  <!-- Rat Catcher -->
+<Career name="RULES-WORK07">"29-31"</Career>
+  <!-- Townsman -->
+<Career name="RULES-WORK39">"32-33"</Career>
+  <!-- Watchman -->
+<Career name="RULES-WORK15">"34"</Career>
+  <!-- Advisor -->
+<Career name="RULES-WORK04">"35-36"</Career>
+  <!-- Artist -->
+<Career name="RULES-WORK20">"37"</Career>
+  <!-- Envoy -->
+<Career name="RULES-WORK56">"38-43"</Career>
+  <!-- Servant -->
+<Career name="RULES-WORK24">"44"</Career>
+  <!-- Spy -->
+<Career name="RULES-WORK32">"45-46"</Career>
+  <!-- Warden -->
+<Career name="RULES-WORK05">"47"</Career>
+  <!-- Bailif -->
+<Career name="RULES-WORK29">"48-50"</Career>
+  <!-- Herbalist -->
+<Career name="RULES-WORK10">"51-52"</Career>
+  <!-- Hunter -->
+<Career name="RULES-WORK40">"53"</Career>
+  <!-- Miner -->
+<Career name="RULES-WORK19">"54"</Career>
+  <!-- Scout -->
+<Career name="RULES-WORK63">"55-57"</Career>
+  <!-- Villager -->
+<Career name="RULES-WORK11">"58"</Career>
+  <!-- Bounty Hunter -->
+<Career name="RULES-WORK13">"59-60"</Career>
+  <!-- Coachman -->
+<Career name="RULES-WORK55">"61-63"</Career>
+  <!-- Entertainer -->
+<Career name="RULES-WORK38">"64-65"</Career>
+  <!-- Messenger -->
+<Career name="RULES-WORK14">"66-67"</Career>
+  <!-- Pedlar -->
+<Career name="RULES-WORK47">"68"</Career>
+  <!-- Road Warden -->
+<Career name="RULES-WORK06">"69"</Career>
+  <!-- Boatman -->
+<Career name="RULES-WORK43">"70"</Career>
+  <!-- Huffer -->
+<Career name="RULES-WORK46">"71"</Career>
+  <!-- Riverwarden -->
+<Career name="RULES-WORK25">"72-74"</Career>
+  <!-- Riverwoman -->
+<Career name="RULES-WORK35">"75"</Career>
+  <!-- Seaman -->
+<Career name="RULES-WORK16">"76-79"</Career>
+  <!-- Smuggler -->
+<Career name="RULES-WORK17">"80-82"</Career>
+  <!-- Stevedor -->
+<Career name="RULES-WORK22">"83-85"</Career>
+  <!-- Bawl -->
+<Career name="RULES-WORK09">"86"</Career>
+  <!-- Charlatan -->
+<Career name="RULES-WORK53">"87"</Career>
+  <!-- Fence -->
+<Career name="RULES-WORK48">"88"</Career>
+  <!-- Grave Robber -->
+<Career name="RULES-WORK30">"89"</Career>
+  <!-- Outlaw -->
+<Career name="RULES-WORK51">"90"</Career>
+  <!-- Racketeer -->
+<Career name="RULES-WORK64">"91-94"</Career>
+  <!-- Thief -->
+<Career name="RULES-WORK27">"95-96"</Career>
+  <!-- Guard -->
+<Career name="RULES-WORK28">"97"</Career>
+  <!-- Pit Fighter -->
+<Career name="RULES-WORK57">"98-100"</Career>
+  <!-- Soldier -->
+</SUBCHAPTER_CAREER>
+</Specie>
+<Specie id="ARCH1-RACE_HALF_LOSTPOCKETS">
+<Description language="ENGLISH">"Halflings (Lostpockets)"</Description>
+<!-- Options: Halfling Clan Skills and Talents, Archives of the Empire I p.32 : modifie
+     les competences/talents d'espece standard du Halfling (BOOK_RULESBOOK.Xml) avec les
+     variations du clan Lostpockets. Attributs et table de carrieres recopies tels quels de
+     RULES-RACE_HALF (Rulebook) : le livre ne donne aucune variation par clan sur ces
+     deux points, meme principe que les provinces de Nations of Mankind. -->
+<Ethnic>"RULES-SPECIE_HALFLING"</Ethnic>
+<SUBCHAPTER_ATTR>
+<Attribut name="RULES-ATTR_WS">"2d10+10"</Attribut>
+<Attribut name="RULES-ATTR_BS">"2d10+30"</Attribut>
+<Attribut name="RULES-ATTR_S">"2d10+10"</Attribut>
+<Attribut name="RULES-ATTR_T">"2d10+20"</Attribut>
+<Attribut name="RULES-ATTR_I">"2d10+20"</Attribut>
+<Attribut name="RULES-ATTR_Ag">"2d10+20"</Attribut>
+<Attribut name="RULES-ATTR_Dex">"2d10+30"</Attribut>
+<Attribut name="RULES-ATTR_Int">"2d10+20"</Attribut>
+<Attribut name="RULES-ATTR_WP">"2d10+30"</Attribut>
+<Attribut name="RULES-ATTR_Fel">"2d10+30"</Attribut>
+<Attribut name="RULES-ATTR_Fate">"0"</Attribut>
+<Attribut name="RULES-ATTR_Resil">"2"</Attribut>
+<Attribut name="RULES-ATTR_Wound">"0xBATTR_S+2xBATTR_T+1xBATTR_WP"</Attribut>
+<Attribut name="RULES-ATTR_Supp">"3"</Attribut>
+<Attribut name="RULES-ATTR_Move">"3"</Attribut>
+</SUBCHAPTER_ATTR>
+<SUBCHAPTER_SKILL>
+<Skill>"RULES-COMPCHARM"</Skill>
+  <!-- Charm -->
+<Skill>"RULES-COMPRESALC"</Skill>
+  <!-- Consume Alcohol -->
+<Skill>"RULES-COMPSAVOIR_LOCAL"</Skill>
+  <!-- Lore (Reikland) -->
+<Skill>"RULES-COMPPRECEP"</Skill>
+  <!-- Perception -->
+<Skill>"RULES-COMPESCAM"</Skill>
+  <!-- Sleight of Hand -->
+<Skill>"RULES-COMPDISC_*"</Skill>
+  <!-- Stealth (Any) -->
+<Skill>"RULES-COMPMETIER_CUIS"</Skill>
+  <!-- Trade (Cook) -->
+<Skill>"RULES-COMPRESIST"</Skill>
+  <!-- Endurance -->
+<Skill>"RULES-COMPPARI"</Skill>
+  <!-- Gamble -->
+<Skill>"RULES-COMPRAGOT"</Skill>
+  <!-- Gossip -->
+<Skill>"RULES-COMPINTUI"</Skill>
+  <!-- Intuition -->
+</SUBCHAPTER_SKILL>
+<SUBCHAPTER_TALENT>
+<Talent>"RULES-T0170"</Talent>
+  <!-- Small -->
+<Talent>"RULES-T0129_CORR"</Talent>
+  <!-- Resistance (Corruption) -->
+<Talent>"RULES-T0139_GOUT"</Talent>
+  <!-- Acute Sense (Taste) -->
+<Talent>"RULES-T0164"</Talent>
+  <!-- Night Vision -->
+<Talent>"RULES-T0047/RULES-T0016"</Talent>
+  <!-- Hardy or Stone Soup -->
+<Talent>"RULES-T*"</Talent>
+  <!-- Random Talent -->
+</SUBCHAPTER_TALENT>
+<SUBCHAPTER_CAREER>
+<Career name="RULES-WORK02">"01"</Career>
+  <!-- Apothecary -->
+<Career name="RULES-WORK31">"02"</Career>
+  <!-- Engineer -->
+<Career name="RULES-WORK33">"03-04"</Career>
+  <!-- Lawyer -->
+<Career name="RULES-WORK36">"05-06"</Career>
+  <!-- Physician -->
+<Career name="RULES-WORK23">"07-08"</Career>
+  <!-- Scholar -->
+<Career name="RULES-WORK01">"09-10"</Career>
+  <!-- Agitator -->
+<Career name="RULES-WORK03">"11-15"</Career>
+  <!-- Artisan -->
+<Career name="RULES-WORK37">"16-19"</Career>
+  <!-- Beggar -->
+<Career name="RULES-WORK21">"20-21"</Career>
+  <!-- Inverstigator -->
+<Career name="RULES-WORK34">"22-25"</Career>
+  <!-- Merchant -->
+<Career name="RULES-WORK52">"26-28"</Career>
+  <!-- Rat Catcher -->
+<Career name="RULES-WORK07">"29-31"</Career>
+  <!-- Townsman -->
+<Career name="RULES-WORK39">"32-33"</Career>
+  <!-- Watchman -->
+<Career name="RULES-WORK15">"34"</Career>
+  <!-- Advisor -->
+<Career name="RULES-WORK04">"35-36"</Career>
+  <!-- Artist -->
+<Career name="RULES-WORK20">"37"</Career>
+  <!-- Envoy -->
+<Career name="RULES-WORK56">"38-43"</Career>
+  <!-- Servant -->
+<Career name="RULES-WORK24">"44"</Career>
+  <!-- Spy -->
+<Career name="RULES-WORK32">"45-46"</Career>
+  <!-- Warden -->
+<Career name="RULES-WORK05">"47"</Career>
+  <!-- Bailif -->
+<Career name="RULES-WORK29">"48-50"</Career>
+  <!-- Herbalist -->
+<Career name="RULES-WORK10">"51-52"</Career>
+  <!-- Hunter -->
+<Career name="RULES-WORK40">"53"</Career>
+  <!-- Miner -->
+<Career name="RULES-WORK19">"54"</Career>
+  <!-- Scout -->
+<Career name="RULES-WORK63">"55-57"</Career>
+  <!-- Villager -->
+<Career name="RULES-WORK11">"58"</Career>
+  <!-- Bounty Hunter -->
+<Career name="RULES-WORK13">"59-60"</Career>
+  <!-- Coachman -->
+<Career name="RULES-WORK55">"61-63"</Career>
+  <!-- Entertainer -->
+<Career name="RULES-WORK38">"64-65"</Career>
+  <!-- Messenger -->
+<Career name="RULES-WORK14">"66-67"</Career>
+  <!-- Pedlar -->
+<Career name="RULES-WORK47">"68"</Career>
+  <!-- Road Warden -->
+<Career name="RULES-WORK06">"69"</Career>
+  <!-- Boatman -->
+<Career name="RULES-WORK43">"70"</Career>
+  <!-- Huffer -->
+<Career name="RULES-WORK46">"71"</Career>
+  <!-- Riverwarden -->
+<Career name="RULES-WORK25">"72-74"</Career>
+  <!-- Riverwoman -->
+<Career name="RULES-WORK35">"75"</Career>
+  <!-- Seaman -->
+<Career name="RULES-WORK16">"76-79"</Career>
+  <!-- Smuggler -->
+<Career name="RULES-WORK17">"80-82"</Career>
+  <!-- Stevedor -->
+<Career name="RULES-WORK22">"83-85"</Career>
+  <!-- Bawl -->
+<Career name="RULES-WORK09">"86"</Career>
+  <!-- Charlatan -->
+<Career name="RULES-WORK53">"87"</Career>
+  <!-- Fence -->
+<Career name="RULES-WORK48">"88"</Career>
+  <!-- Grave Robber -->
+<Career name="RULES-WORK30">"89"</Career>
+  <!-- Outlaw -->
+<Career name="RULES-WORK51">"90"</Career>
+  <!-- Racketeer -->
+<Career name="RULES-WORK64">"91-94"</Career>
+  <!-- Thief -->
+<Career name="RULES-WORK27">"95-96"</Career>
+  <!-- Guard -->
+<Career name="RULES-WORK28">"97"</Career>
+  <!-- Pit Fighter -->
+<Career name="RULES-WORK57">"98-100"</Career>
+  <!-- Soldier -->
+</SUBCHAPTER_CAREER>
+</Specie>
+<Specie id="ARCH1-RACE_HALF_LOWHAVEN">
+<Description language="ENGLISH">"Halflings (Lowhaven)"</Description>
+<!-- Options: Halfling Clan Skills and Talents, Archives of the Empire I p.32 : modifie
+     les competences/talents d'espece standard du Halfling (BOOK_RULESBOOK.Xml) avec les
+     variations du clan Lowhaven. Attributs et table de carrieres recopies tels quels de
+     RULES-RACE_HALF (Rulebook) : le livre ne donne aucune variation par clan sur ces
+     deux points, meme principe que les provinces de Nations of Mankind. -->
+<Ethnic>"RULES-SPECIE_HALFLING"</Ethnic>
+<SUBCHAPTER_ATTR>
+<Attribut name="RULES-ATTR_WS">"2d10+10"</Attribut>
+<Attribut name="RULES-ATTR_BS">"2d10+30"</Attribut>
+<Attribut name="RULES-ATTR_S">"2d10+10"</Attribut>
+<Attribut name="RULES-ATTR_T">"2d10+20"</Attribut>
+<Attribut name="RULES-ATTR_I">"2d10+20"</Attribut>
+<Attribut name="RULES-ATTR_Ag">"2d10+20"</Attribut>
+<Attribut name="RULES-ATTR_Dex">"2d10+30"</Attribut>
+<Attribut name="RULES-ATTR_Int">"2d10+20"</Attribut>
+<Attribut name="RULES-ATTR_WP">"2d10+30"</Attribut>
+<Attribut name="RULES-ATTR_Fel">"2d10+30"</Attribut>
+<Attribut name="RULES-ATTR_Fate">"0"</Attribut>
+<Attribut name="RULES-ATTR_Resil">"2"</Attribut>
+<Attribut name="RULES-ATTR_Wound">"0xBATTR_S+2xBATTR_T+1xBATTR_WP"</Attribut>
+<Attribut name="RULES-ATTR_Supp">"3"</Attribut>
+<Attribut name="RULES-ATTR_Move">"3"</Attribut>
+</SUBCHAPTER_ATTR>
+<SUBCHAPTER_SKILL>
+<Skill>"RULES-COMPCHARM"</Skill>
+  <!-- Charm -->
+<Skill>"RULES-COMPRESALC"</Skill>
+  <!-- Consume Alcohol -->
+<Skill>"RULES-COMPSAVOIR_LOCAL"</Skill>
+  <!-- Lore (Reikland) -->
+<Skill>"RULES-COMPPRECEP"</Skill>
+  <!-- Perception -->
+<Skill>"RULES-COMPESCAM"</Skill>
+  <!-- Sleight of Hand -->
+<Skill>"RULES-COMPDISC_*"</Skill>
+  <!-- Stealth (Any) -->
+<Skill>"RULES-COMPMETIER_CUIS"</Skill>
+  <!-- Trade (Cook) -->
+<Skill>"RULES-COMPSUBOR"</Skill>
+  <!-- Bribery -->
+<Skill>"RULES-COMPMARCH"</Skill>
+  <!-- Haggle -->
+<Skill>"RULES-COMPINTIM"</Skill>
+  <!-- Intimidate -->
+<Skill>"RULES-COMPLANG_MOOT"</Skill>
+  <!-- Language (Mootish) -->
+</SUBCHAPTER_SKILL>
+<SUBCHAPTER_TALENT>
+<Talent>"RULES-T0170"</Talent>
+  <!-- Small -->
+<Talent>"RULES-T0129_CORR"</Talent>
+  <!-- Resistance (Corruption) -->
+<Talent>"RULES-T0139_GOUT"</Talent>
+  <!-- Acute Sense (Taste) -->
+<Talent>"RULES-T0164"</Talent>
+  <!-- Night Vision -->
+<Talent>"RULES-T0038/RULES-T0136_CRIM/RULES-T0136_GUILD"</Talent>
+  <!-- Criminal or Etiquette (Criminals) or Etiquette (Guilder) -->
+<Talent>"RULES-T*"</Talent>
+  <!-- Random Talent -->
+</SUBCHAPTER_TALENT>
+<SUBCHAPTER_CAREER>
+<Career name="RULES-WORK02">"01"</Career>
+  <!-- Apothecary -->
+<Career name="RULES-WORK31">"02"</Career>
+  <!-- Engineer -->
+<Career name="RULES-WORK33">"03-04"</Career>
+  <!-- Lawyer -->
+<Career name="RULES-WORK36">"05-06"</Career>
+  <!-- Physician -->
+<Career name="RULES-WORK23">"07-08"</Career>
+  <!-- Scholar -->
+<Career name="RULES-WORK01">"09-10"</Career>
+  <!-- Agitator -->
+<Career name="RULES-WORK03">"11-15"</Career>
+  <!-- Artisan -->
+<Career name="RULES-WORK37">"16-19"</Career>
+  <!-- Beggar -->
+<Career name="RULES-WORK21">"20-21"</Career>
+  <!-- Inverstigator -->
+<Career name="RULES-WORK34">"22-25"</Career>
+  <!-- Merchant -->
+<Career name="RULES-WORK52">"26-28"</Career>
+  <!-- Rat Catcher -->
+<Career name="RULES-WORK07">"29-31"</Career>
+  <!-- Townsman -->
+<Career name="RULES-WORK39">"32-33"</Career>
+  <!-- Watchman -->
+<Career name="RULES-WORK15">"34"</Career>
+  <!-- Advisor -->
+<Career name="RULES-WORK04">"35-36"</Career>
+  <!-- Artist -->
+<Career name="RULES-WORK20">"37"</Career>
+  <!-- Envoy -->
+<Career name="RULES-WORK56">"38-43"</Career>
+  <!-- Servant -->
+<Career name="RULES-WORK24">"44"</Career>
+  <!-- Spy -->
+<Career name="RULES-WORK32">"45-46"</Career>
+  <!-- Warden -->
+<Career name="RULES-WORK05">"47"</Career>
+  <!-- Bailif -->
+<Career name="RULES-WORK29">"48-50"</Career>
+  <!-- Herbalist -->
+<Career name="RULES-WORK10">"51-52"</Career>
+  <!-- Hunter -->
+<Career name="RULES-WORK40">"53"</Career>
+  <!-- Miner -->
+<Career name="RULES-WORK19">"54"</Career>
+  <!-- Scout -->
+<Career name="RULES-WORK63">"55-57"</Career>
+  <!-- Villager -->
+<Career name="RULES-WORK11">"58"</Career>
+  <!-- Bounty Hunter -->
+<Career name="RULES-WORK13">"59-60"</Career>
+  <!-- Coachman -->
+<Career name="RULES-WORK55">"61-63"</Career>
+  <!-- Entertainer -->
+<Career name="RULES-WORK38">"64-65"</Career>
+  <!-- Messenger -->
+<Career name="RULES-WORK14">"66-67"</Career>
+  <!-- Pedlar -->
+<Career name="RULES-WORK47">"68"</Career>
+  <!-- Road Warden -->
+<Career name="RULES-WORK06">"69"</Career>
+  <!-- Boatman -->
+<Career name="RULES-WORK43">"70"</Career>
+  <!-- Huffer -->
+<Career name="RULES-WORK46">"71"</Career>
+  <!-- Riverwarden -->
+<Career name="RULES-WORK25">"72-74"</Career>
+  <!-- Riverwoman -->
+<Career name="RULES-WORK35">"75"</Career>
+  <!-- Seaman -->
+<Career name="RULES-WORK16">"76-79"</Career>
+  <!-- Smuggler -->
+<Career name="RULES-WORK17">"80-82"</Career>
+  <!-- Stevedor -->
+<Career name="RULES-WORK22">"83-85"</Career>
+  <!-- Bawl -->
+<Career name="RULES-WORK09">"86"</Career>
+  <!-- Charlatan -->
+<Career name="RULES-WORK53">"87"</Career>
+  <!-- Fence -->
+<Career name="RULES-WORK48">"88"</Career>
+  <!-- Grave Robber -->
+<Career name="RULES-WORK30">"89"</Career>
+  <!-- Outlaw -->
+<Career name="RULES-WORK51">"90"</Career>
+  <!-- Racketeer -->
+<Career name="RULES-WORK64">"91-94"</Career>
+  <!-- Thief -->
+<Career name="RULES-WORK27">"95-96"</Career>
+  <!-- Guard -->
+<Career name="RULES-WORK28">"97"</Career>
+  <!-- Pit Fighter -->
+<Career name="RULES-WORK57">"98-100"</Career>
+  <!-- Soldier -->
+</SUBCHAPTER_CAREER>
+</Specie>
+<Specie id="ARCH1-RACE_HALF_RUMSTER">
+<Description language="ENGLISH">"Halflings (Rumster)"</Description>
+<!-- Options: Halfling Clan Skills and Talents, Archives of the Empire I p.32 : modifie
+     les competences/talents d'espece standard du Halfling (BOOK_RULESBOOK.Xml) avec les
+     variations du clan Rumster. Attributs et table de carrieres recopies tels quels de
+     RULES-RACE_HALF (Rulebook) : le livre ne donne aucune variation par clan sur ces
+     deux points, meme principe que les provinces de Nations of Mankind. -->
+<Ethnic>"RULES-SPECIE_HALFLING"</Ethnic>
+<SUBCHAPTER_ATTR>
+<Attribut name="RULES-ATTR_WS">"2d10+10"</Attribut>
+<Attribut name="RULES-ATTR_BS">"2d10+30"</Attribut>
+<Attribut name="RULES-ATTR_S">"2d10+10"</Attribut>
+<Attribut name="RULES-ATTR_T">"2d10+20"</Attribut>
+<Attribut name="RULES-ATTR_I">"2d10+20"</Attribut>
+<Attribut name="RULES-ATTR_Ag">"2d10+20"</Attribut>
+<Attribut name="RULES-ATTR_Dex">"2d10+30"</Attribut>
+<Attribut name="RULES-ATTR_Int">"2d10+20"</Attribut>
+<Attribut name="RULES-ATTR_WP">"2d10+30"</Attribut>
+<Attribut name="RULES-ATTR_Fel">"2d10+30"</Attribut>
+<Attribut name="RULES-ATTR_Fate">"0"</Attribut>
+<Attribut name="RULES-ATTR_Resil">"2"</Attribut>
+<Attribut name="RULES-ATTR_Wound">"0xBATTR_S+2xBATTR_T+1xBATTR_WP"</Attribut>
+<Attribut name="RULES-ATTR_Supp">"3"</Attribut>
+<Attribut name="RULES-ATTR_Move">"3"</Attribut>
+</SUBCHAPTER_ATTR>
+<SUBCHAPTER_SKILL>
+<Skill>"RULES-COMPCHARM"</Skill>
+  <!-- Charm -->
+<Skill>"RULES-COMPRESALC"</Skill>
+  <!-- Consume Alcohol -->
+<Skill>"RULES-COMPSAVOIR_LOCAL"</Skill>
+  <!-- Lore (Reikland) -->
+<Skill>"RULES-COMPPRECEP"</Skill>
+  <!-- Perception -->
+<Skill>"RULES-COMPESCAM"</Skill>
+  <!-- Sleight of Hand -->
+<Skill>"RULES-COMPDISC_*"</Skill>
+  <!-- Stealth (Any) -->
+<Skill>"RULES-COMPMETIER_CUIS"</Skill>
+  <!-- Trade (Cook) -->
+<Skill>"RULES-COMPRESIST"</Skill>
+  <!-- Endurance -->
+<Skill>"RULES-COMPRAGOT"</Skill>
+  <!-- Gossip -->
+<Skill>"RULES-COMPMARCH"</Skill>
+  <!-- Haggle -->
+<Skill>"RULES-COMPLANG_MOOT"</Skill>
+  <!-- Language (Mootish) -->
+</SUBCHAPTER_SKILL>
+<SUBCHAPTER_TALENT>
+<Talent>"RULES-T0170"</Talent>
+  <!-- Small -->
+<Talent>"RULES-T0129_CORR"</Talent>
+  <!-- Resistance (Corruption) -->
+<Talent>"RULES-T0139_GOUT"</Talent>
+  <!-- Acute Sense (Taste) -->
+<Talent>"RULES-T0164"</Talent>
+  <!-- Night Vision -->
+<Talent>"RULES-T0092_CUIS/RULES-T0102"</Talent>
+  <!-- Craftsman (Cook) or Dealmaker -->
+<Talent>"RULES-T*"</Talent>
+  <!-- Random Talent -->
+</SUBCHAPTER_TALENT>
+<SUBCHAPTER_CAREER>
+<Career name="RULES-WORK02">"01"</Career>
+  <!-- Apothecary -->
+<Career name="RULES-WORK31">"02"</Career>
+  <!-- Engineer -->
+<Career name="RULES-WORK33">"03-04"</Career>
+  <!-- Lawyer -->
+<Career name="RULES-WORK36">"05-06"</Career>
+  <!-- Physician -->
+<Career name="RULES-WORK23">"07-08"</Career>
+  <!-- Scholar -->
+<Career name="RULES-WORK01">"09-10"</Career>
+  <!-- Agitator -->
+<Career name="RULES-WORK03">"11-15"</Career>
+  <!-- Artisan -->
+<Career name="RULES-WORK37">"16-19"</Career>
+  <!-- Beggar -->
+<Career name="RULES-WORK21">"20-21"</Career>
+  <!-- Inverstigator -->
+<Career name="RULES-WORK34">"22-25"</Career>
+  <!-- Merchant -->
+<Career name="RULES-WORK52">"26-28"</Career>
+  <!-- Rat Catcher -->
+<Career name="RULES-WORK07">"29-31"</Career>
+  <!-- Townsman -->
+<Career name="RULES-WORK39">"32-33"</Career>
+  <!-- Watchman -->
+<Career name="RULES-WORK15">"34"</Career>
+  <!-- Advisor -->
+<Career name="RULES-WORK04">"35-36"</Career>
+  <!-- Artist -->
+<Career name="RULES-WORK20">"37"</Career>
+  <!-- Envoy -->
+<Career name="RULES-WORK56">"38-43"</Career>
+  <!-- Servant -->
+<Career name="RULES-WORK24">"44"</Career>
+  <!-- Spy -->
+<Career name="RULES-WORK32">"45-46"</Career>
+  <!-- Warden -->
+<Career name="RULES-WORK05">"47"</Career>
+  <!-- Bailif -->
+<Career name="RULES-WORK29">"48-50"</Career>
+  <!-- Herbalist -->
+<Career name="RULES-WORK10">"51-52"</Career>
+  <!-- Hunter -->
+<Career name="RULES-WORK40">"53"</Career>
+  <!-- Miner -->
+<Career name="RULES-WORK19">"54"</Career>
+  <!-- Scout -->
+<Career name="RULES-WORK63">"55-57"</Career>
+  <!-- Villager -->
+<Career name="RULES-WORK11">"58"</Career>
+  <!-- Bounty Hunter -->
+<Career name="RULES-WORK13">"59-60"</Career>
+  <!-- Coachman -->
+<Career name="RULES-WORK55">"61-63"</Career>
+  <!-- Entertainer -->
+<Career name="RULES-WORK38">"64-65"</Career>
+  <!-- Messenger -->
+<Career name="RULES-WORK14">"66-67"</Career>
+  <!-- Pedlar -->
+<Career name="RULES-WORK47">"68"</Career>
+  <!-- Road Warden -->
+<Career name="RULES-WORK06">"69"</Career>
+  <!-- Boatman -->
+<Career name="RULES-WORK43">"70"</Career>
+  <!-- Huffer -->
+<Career name="RULES-WORK46">"71"</Career>
+  <!-- Riverwarden -->
+<Career name="RULES-WORK25">"72-74"</Career>
+  <!-- Riverwoman -->
+<Career name="RULES-WORK35">"75"</Career>
+  <!-- Seaman -->
+<Career name="RULES-WORK16">"76-79"</Career>
+  <!-- Smuggler -->
+<Career name="RULES-WORK17">"80-82"</Career>
+  <!-- Stevedor -->
+<Career name="RULES-WORK22">"83-85"</Career>
+  <!-- Bawl -->
+<Career name="RULES-WORK09">"86"</Career>
+  <!-- Charlatan -->
+<Career name="RULES-WORK53">"87"</Career>
+  <!-- Fence -->
+<Career name="RULES-WORK48">"88"</Career>
+  <!-- Grave Robber -->
+<Career name="RULES-WORK30">"89"</Career>
+  <!-- Outlaw -->
+<Career name="RULES-WORK51">"90"</Career>
+  <!-- Racketeer -->
+<Career name="RULES-WORK64">"91-94"</Career>
+  <!-- Thief -->
+<Career name="RULES-WORK27">"95-96"</Career>
+  <!-- Guard -->
+<Career name="RULES-WORK28">"97"</Career>
+  <!-- Pit Fighter -->
+<Career name="RULES-WORK57">"98-100"</Career>
+  <!-- Soldier -->
+</SUBCHAPTER_CAREER>
+</Specie>
+<Specie id="ARCH1-RACE_HALF_SKELFSIDER">
+<Description language="ENGLISH">"Halflings (Skelfsider)"</Description>
+<!-- Options: Halfling Clan Skills and Talents, Archives of the Empire I p.32 : modifie
+     les competences/talents d'espece standard du Halfling (BOOK_RULESBOOK.Xml) avec les
+     variations du clan Skelfsider. Attributs et table de carrieres recopies tels quels de
+     RULES-RACE_HALF (Rulebook) : le livre ne donne aucune variation par clan sur ces
+     deux points, meme principe que les provinces de Nations of Mankind. -->
+<Ethnic>"RULES-SPECIE_HALFLING"</Ethnic>
+<SUBCHAPTER_ATTR>
+<Attribut name="RULES-ATTR_WS">"2d10+10"</Attribut>
+<Attribut name="RULES-ATTR_BS">"2d10+30"</Attribut>
+<Attribut name="RULES-ATTR_S">"2d10+10"</Attribut>
+<Attribut name="RULES-ATTR_T">"2d10+20"</Attribut>
+<Attribut name="RULES-ATTR_I">"2d10+20"</Attribut>
+<Attribut name="RULES-ATTR_Ag">"2d10+20"</Attribut>
+<Attribut name="RULES-ATTR_Dex">"2d10+30"</Attribut>
+<Attribut name="RULES-ATTR_Int">"2d10+20"</Attribut>
+<Attribut name="RULES-ATTR_WP">"2d10+30"</Attribut>
+<Attribut name="RULES-ATTR_Fel">"2d10+30"</Attribut>
+<Attribut name="RULES-ATTR_Fate">"0"</Attribut>
+<Attribut name="RULES-ATTR_Resil">"2"</Attribut>
+<Attribut name="RULES-ATTR_Wound">"0xBATTR_S+2xBATTR_T+1xBATTR_WP"</Attribut>
+<Attribut name="RULES-ATTR_Supp">"3"</Attribut>
+<Attribut name="RULES-ATTR_Move">"3"</Attribut>
+</SUBCHAPTER_ATTR>
+<SUBCHAPTER_SKILL>
+<Skill>"RULES-COMPCHARM"</Skill>
+  <!-- Charm -->
+<Skill>"RULES-COMPRESALC"</Skill>
+  <!-- Consume Alcohol -->
+<Skill>"RULES-COMPSAVOIR_LOCAL"</Skill>
+  <!-- Lore (Reikland) -->
+<Skill>"RULES-COMPPRECEP"</Skill>
+  <!-- Perception -->
+<Skill>"RULES-COMPESCAM"</Skill>
+  <!-- Sleight of Hand -->
+<Skill>"RULES-COMPDISC_*"</Skill>
+  <!-- Stealth (Any) -->
+<Skill>"RULES-COMPMETIER_CUIS"</Skill>
+  <!-- Trade (Cook) -->
+<Skill>"RULES-COMPRESIST"</Skill>
+  <!-- Endurance -->
+<Skill>"RULES-COMPPARI"</Skill>
+  <!-- Gamble -->
+<Skill>"RULES-COMPRAGOT"</Skill>
+  <!-- Gossip -->
+<Skill>"RULES-COMPLANG_MOOT"</Skill>
+  <!-- Language (Mootish) -->
+</SUBCHAPTER_SKILL>
+<SUBCHAPTER_TALENT>
+<Talent>"RULES-T0170"</Talent>
+  <!-- Small -->
+<Talent>"RULES-T0129_CORR"</Talent>
+  <!-- Resistance (Corruption) -->
+<Talent>"RULES-T0139_GOUT"</Talent>
+  <!-- Acute Sense (Taste) -->
+<Talent>"RULES-T0164"</Talent>
+  <!-- Night Vision -->
+<Talent>"RULES-T0078/RULES-T0136_SERV"</Talent>
+  <!-- Beneath Notice or Etiquette (Servants) -->
+<Talent>"RULES-T*"</Talent>
+  <!-- Random Talent -->
+</SUBCHAPTER_TALENT>
+<SUBCHAPTER_CAREER>
+<Career name="RULES-WORK02">"01"</Career>
+  <!-- Apothecary -->
+<Career name="RULES-WORK31">"02"</Career>
+  <!-- Engineer -->
+<Career name="RULES-WORK33">"03-04"</Career>
+  <!-- Lawyer -->
+<Career name="RULES-WORK36">"05-06"</Career>
+  <!-- Physician -->
+<Career name="RULES-WORK23">"07-08"</Career>
+  <!-- Scholar -->
+<Career name="RULES-WORK01">"09-10"</Career>
+  <!-- Agitator -->
+<Career name="RULES-WORK03">"11-15"</Career>
+  <!-- Artisan -->
+<Career name="RULES-WORK37">"16-19"</Career>
+  <!-- Beggar -->
+<Career name="RULES-WORK21">"20-21"</Career>
+  <!-- Inverstigator -->
+<Career name="RULES-WORK34">"22-25"</Career>
+  <!-- Merchant -->
+<Career name="RULES-WORK52">"26-28"</Career>
+  <!-- Rat Catcher -->
+<Career name="RULES-WORK07">"29-31"</Career>
+  <!-- Townsman -->
+<Career name="RULES-WORK39">"32-33"</Career>
+  <!-- Watchman -->
+<Career name="RULES-WORK15">"34"</Career>
+  <!-- Advisor -->
+<Career name="RULES-WORK04">"35-36"</Career>
+  <!-- Artist -->
+<Career name="RULES-WORK20">"37"</Career>
+  <!-- Envoy -->
+<Career name="RULES-WORK56">"38-43"</Career>
+  <!-- Servant -->
+<Career name="RULES-WORK24">"44"</Career>
+  <!-- Spy -->
+<Career name="RULES-WORK32">"45-46"</Career>
+  <!-- Warden -->
+<Career name="RULES-WORK05">"47"</Career>
+  <!-- Bailif -->
+<Career name="RULES-WORK29">"48-50"</Career>
+  <!-- Herbalist -->
+<Career name="RULES-WORK10">"51-52"</Career>
+  <!-- Hunter -->
+<Career name="RULES-WORK40">"53"</Career>
+  <!-- Miner -->
+<Career name="RULES-WORK19">"54"</Career>
+  <!-- Scout -->
+<Career name="RULES-WORK63">"55-57"</Career>
+  <!-- Villager -->
+<Career name="RULES-WORK11">"58"</Career>
+  <!-- Bounty Hunter -->
+<Career name="RULES-WORK13">"59-60"</Career>
+  <!-- Coachman -->
+<Career name="RULES-WORK55">"61-63"</Career>
+  <!-- Entertainer -->
+<Career name="RULES-WORK38">"64-65"</Career>
+  <!-- Messenger -->
+<Career name="RULES-WORK14">"66-67"</Career>
+  <!-- Pedlar -->
+<Career name="RULES-WORK47">"68"</Career>
+  <!-- Road Warden -->
+<Career name="RULES-WORK06">"69"</Career>
+  <!-- Boatman -->
+<Career name="RULES-WORK43">"70"</Career>
+  <!-- Huffer -->
+<Career name="RULES-WORK46">"71"</Career>
+  <!-- Riverwarden -->
+<Career name="RULES-WORK25">"72-74"</Career>
+  <!-- Riverwoman -->
+<Career name="RULES-WORK35">"75"</Career>
+  <!-- Seaman -->
+<Career name="RULES-WORK16">"76-79"</Career>
+  <!-- Smuggler -->
+<Career name="RULES-WORK17">"80-82"</Career>
+  <!-- Stevedor -->
+<Career name="RULES-WORK22">"83-85"</Career>
+  <!-- Bawl -->
+<Career name="RULES-WORK09">"86"</Career>
+  <!-- Charlatan -->
+<Career name="RULES-WORK53">"87"</Career>
+  <!-- Fence -->
+<Career name="RULES-WORK48">"88"</Career>
+  <!-- Grave Robber -->
+<Career name="RULES-WORK30">"89"</Career>
+  <!-- Outlaw -->
+<Career name="RULES-WORK51">"90"</Career>
+  <!-- Racketeer -->
+<Career name="RULES-WORK64">"91-94"</Career>
+  <!-- Thief -->
+<Career name="RULES-WORK27">"95-96"</Career>
+  <!-- Guard -->
+<Career name="RULES-WORK28">"97"</Career>
+  <!-- Pit Fighter -->
+<Career name="RULES-WORK57">"98-100"</Career>
+  <!-- Soldier -->
+</SUBCHAPTER_CAREER>
+</Specie>
+<Specie id="ARCH1-RACE_HALF_THORNCOBBLE">
+<Description language="ENGLISH">"Halflings (Thorncobble)"</Description>
+<!-- Options: Halfling Clan Skills and Talents, Archives of the Empire I p.32 : modifie
+     les competences/talents d'espece standard du Halfling (BOOK_RULESBOOK.Xml) avec les
+     variations du clan Thorncobble. Attributs et table de carrieres recopies tels quels de
+     RULES-RACE_HALF (Rulebook) : le livre ne donne aucune variation par clan sur ces
+     deux points, meme principe que les provinces de Nations of Mankind. -->
+<Ethnic>"RULES-SPECIE_HALFLING"</Ethnic>
+<SUBCHAPTER_ATTR>
+<Attribut name="RULES-ATTR_WS">"2d10+10"</Attribut>
+<Attribut name="RULES-ATTR_BS">"2d10+30"</Attribut>
+<Attribut name="RULES-ATTR_S">"2d10+10"</Attribut>
+<Attribut name="RULES-ATTR_T">"2d10+20"</Attribut>
+<Attribut name="RULES-ATTR_I">"2d10+20"</Attribut>
+<Attribut name="RULES-ATTR_Ag">"2d10+20"</Attribut>
+<Attribut name="RULES-ATTR_Dex">"2d10+30"</Attribut>
+<Attribut name="RULES-ATTR_Int">"2d10+20"</Attribut>
+<Attribut name="RULES-ATTR_WP">"2d10+30"</Attribut>
+<Attribut name="RULES-ATTR_Fel">"2d10+30"</Attribut>
+<Attribut name="RULES-ATTR_Fate">"0"</Attribut>
+<Attribut name="RULES-ATTR_Resil">"2"</Attribut>
+<Attribut name="RULES-ATTR_Wound">"0xBATTR_S+2xBATTR_T+1xBATTR_WP"</Attribut>
+<Attribut name="RULES-ATTR_Supp">"3"</Attribut>
+<Attribut name="RULES-ATTR_Move">"3"</Attribut>
+</SUBCHAPTER_ATTR>
+<SUBCHAPTER_SKILL>
+<Skill>"RULES-COMPCHARM"</Skill>
+  <!-- Charm -->
+<Skill>"RULES-COMPRESALC"</Skill>
+  <!-- Consume Alcohol -->
+<Skill>"RULES-COMPSAVOIR_LOCAL"</Skill>
+  <!-- Lore (Reikland) -->
+<Skill>"RULES-COMPPRECEP"</Skill>
+  <!-- Perception -->
+<Skill>"RULES-COMPESCAM"</Skill>
+  <!-- Sleight of Hand -->
+<Skill>"RULES-COMPDISC_*"</Skill>
+  <!-- Stealth (Any) -->
+<Skill>"RULES-COMPMETIER_CUIS"</Skill>
+  <!-- Trade (Cook) -->
+<Skill>"RULES-COMPRAGOT"</Skill>
+  <!-- Gossip -->
+<Skill>"RULES-COMPCOMM"</Skill>
+  <!-- Leadership -->
+<Skill>"RULES-COMPSAVOIR_HERAL"</Skill>
+  <!-- Lore (Heraldry) -->
+<Skill>"RULES-COMPLANG_MOOT"</Skill>
+  <!-- Language (Mootish) -->
+</SUBCHAPTER_SKILL>
+<SUBCHAPTER_TALENT>
+<Talent>"RULES-T0170"</Talent>
+  <!-- Small -->
+<Talent>"RULES-T0129_CORR"</Talent>
+  <!-- Resistance (Corruption) -->
+<Talent>"RULES-T0139_GOUT"</Talent>
+  <!-- Acute Sense (Taste) -->
+<Talent>"RULES-T0164"</Talent>
+  <!-- Night Vision -->
+<Talent>"RULES-T0136_NOBLE/RULES-T0136_ERUD/RULES-T0084"</Talent>
+  <!-- Etiquette (Nobles) or Etiquette (Scholars) or Read/Write -->
+<Talent>"RULES-T*"</Talent>
+  <!-- Random Talent -->
+</SUBCHAPTER_TALENT>
+<SUBCHAPTER_CAREER>
+<Career name="RULES-WORK02">"01"</Career>
+  <!-- Apothecary -->
+<Career name="RULES-WORK31">"02"</Career>
+  <!-- Engineer -->
+<Career name="RULES-WORK33">"03-04"</Career>
+  <!-- Lawyer -->
+<Career name="RULES-WORK36">"05-06"</Career>
+  <!-- Physician -->
+<Career name="RULES-WORK23">"07-08"</Career>
+  <!-- Scholar -->
+<Career name="RULES-WORK01">"09-10"</Career>
+  <!-- Agitator -->
+<Career name="RULES-WORK03">"11-15"</Career>
+  <!-- Artisan -->
+<Career name="RULES-WORK37">"16-19"</Career>
+  <!-- Beggar -->
+<Career name="RULES-WORK21">"20-21"</Career>
+  <!-- Inverstigator -->
+<Career name="RULES-WORK34">"22-25"</Career>
+  <!-- Merchant -->
+<Career name="RULES-WORK52">"26-28"</Career>
+  <!-- Rat Catcher -->
+<Career name="RULES-WORK07">"29-31"</Career>
+  <!-- Townsman -->
+<Career name="RULES-WORK39">"32-33"</Career>
+  <!-- Watchman -->
+<Career name="RULES-WORK15">"34"</Career>
+  <!-- Advisor -->
+<Career name="RULES-WORK04">"35-36"</Career>
+  <!-- Artist -->
+<Career name="RULES-WORK20">"37"</Career>
+  <!-- Envoy -->
+<Career name="RULES-WORK56">"38-43"</Career>
+  <!-- Servant -->
+<Career name="RULES-WORK24">"44"</Career>
+  <!-- Spy -->
+<Career name="RULES-WORK32">"45-46"</Career>
+  <!-- Warden -->
+<Career name="RULES-WORK05">"47"</Career>
+  <!-- Bailif -->
+<Career name="RULES-WORK29">"48-50"</Career>
+  <!-- Herbalist -->
+<Career name="RULES-WORK10">"51-52"</Career>
+  <!-- Hunter -->
+<Career name="RULES-WORK40">"53"</Career>
+  <!-- Miner -->
+<Career name="RULES-WORK19">"54"</Career>
+  <!-- Scout -->
+<Career name="RULES-WORK63">"55-57"</Career>
+  <!-- Villager -->
+<Career name="RULES-WORK11">"58"</Career>
+  <!-- Bounty Hunter -->
+<Career name="RULES-WORK13">"59-60"</Career>
+  <!-- Coachman -->
+<Career name="RULES-WORK55">"61-63"</Career>
+  <!-- Entertainer -->
+<Career name="RULES-WORK38">"64-65"</Career>
+  <!-- Messenger -->
+<Career name="RULES-WORK14">"66-67"</Career>
+  <!-- Pedlar -->
+<Career name="RULES-WORK47">"68"</Career>
+  <!-- Road Warden -->
+<Career name="RULES-WORK06">"69"</Career>
+  <!-- Boatman -->
+<Career name="RULES-WORK43">"70"</Career>
+  <!-- Huffer -->
+<Career name="RULES-WORK46">"71"</Career>
+  <!-- Riverwarden -->
+<Career name="RULES-WORK25">"72-74"</Career>
+  <!-- Riverwoman -->
+<Career name="RULES-WORK35">"75"</Career>
+  <!-- Seaman -->
+<Career name="RULES-WORK16">"76-79"</Career>
+  <!-- Smuggler -->
+<Career name="RULES-WORK17">"80-82"</Career>
+  <!-- Stevedor -->
+<Career name="RULES-WORK22">"83-85"</Career>
+  <!-- Bawl -->
+<Career name="RULES-WORK09">"86"</Career>
+  <!-- Charlatan -->
+<Career name="RULES-WORK53">"87"</Career>
+  <!-- Fence -->
+<Career name="RULES-WORK48">"88"</Career>
+  <!-- Grave Robber -->
+<Career name="RULES-WORK30">"89"</Career>
+  <!-- Outlaw -->
+<Career name="RULES-WORK51">"90"</Career>
+  <!-- Racketeer -->
+<Career name="RULES-WORK64">"91-94"</Career>
+  <!-- Thief -->
+<Career name="RULES-WORK27">"95-96"</Career>
+  <!-- Guard -->
+<Career name="RULES-WORK28">"97"</Career>
+  <!-- Pit Fighter -->
+<Career name="RULES-WORK57">"98-100"</Career>
+  <!-- Soldier -->
+</SUBCHAPTER_CAREER>
+</Specie>
+<Specie id="ARCH1-RACE_HALF_TUMBLEBERRY">
+<Description language="ENGLISH">"Halflings (Tumbleberry)"</Description>
+<!-- Options: Halfling Clan Skills and Talents, Archives of the Empire I p.32 : modifie
+     les competences/talents d'espece standard du Halfling (BOOK_RULESBOOK.Xml) avec les
+     variations du clan Tumbleberry. Attributs et table de carrieres recopies tels quels de
+     RULES-RACE_HALF (Rulebook) : le livre ne donne aucune variation par clan sur ces
+     deux points, meme principe que les provinces de Nations of Mankind. -->
+<Ethnic>"RULES-SPECIE_HALFLING"</Ethnic>
+<SUBCHAPTER_ATTR>
+<Attribut name="RULES-ATTR_WS">"2d10+10"</Attribut>
+<Attribut name="RULES-ATTR_BS">"2d10+30"</Attribut>
+<Attribut name="RULES-ATTR_S">"2d10+10"</Attribut>
+<Attribut name="RULES-ATTR_T">"2d10+20"</Attribut>
+<Attribut name="RULES-ATTR_I">"2d10+20"</Attribut>
+<Attribut name="RULES-ATTR_Ag">"2d10+20"</Attribut>
+<Attribut name="RULES-ATTR_Dex">"2d10+30"</Attribut>
+<Attribut name="RULES-ATTR_Int">"2d10+20"</Attribut>
+<Attribut name="RULES-ATTR_WP">"2d10+30"</Attribut>
+<Attribut name="RULES-ATTR_Fel">"2d10+30"</Attribut>
+<Attribut name="RULES-ATTR_Fate">"0"</Attribut>
+<Attribut name="RULES-ATTR_Resil">"2"</Attribut>
+<Attribut name="RULES-ATTR_Wound">"0xBATTR_S+2xBATTR_T+1xBATTR_WP"</Attribut>
+<Attribut name="RULES-ATTR_Supp">"3"</Attribut>
+<Attribut name="RULES-ATTR_Move">"3"</Attribut>
+</SUBCHAPTER_ATTR>
+<SUBCHAPTER_SKILL>
+<Skill>"RULES-COMPCHARM"</Skill>
+  <!-- Charm -->
+<Skill>"RULES-COMPRESALC"</Skill>
+  <!-- Consume Alcohol -->
+<Skill>"RULES-COMPSAVOIR_LOCAL"</Skill>
+  <!-- Lore (Reikland) -->
+<Skill>"RULES-COMPPRECEP"</Skill>
+  <!-- Perception -->
+<Skill>"RULES-COMPESCAM"</Skill>
+  <!-- Sleight of Hand -->
+<Skill>"RULES-COMPDISC_*"</Skill>
+  <!-- Stealth (Any) -->
+<Skill>"RULES-COMPMETIER_CUIS"</Skill>
+  <!-- Trade (Cook) -->
+<Skill>"RULES-COMPRAGOT"</Skill>
+  <!-- Gossip -->
+<Skill>"RULES-COMPMARCH"</Skill>
+  <!-- Haggle -->
+<Skill>"RULES-COMPSAVOIR_*"</Skill>
+  <!-- Lore (Any) -->
+<Skill>"RULES-COMPLANG_MOOT"</Skill>
+  <!-- Language (Mootish) -->
+</SUBCHAPTER_SKILL>
+<SUBCHAPTER_TALENT>
+<Talent>"RULES-T0170"</Talent>
+  <!-- Small -->
+<Talent>"RULES-T0129_CORR"</Talent>
+  <!-- Resistance (Corruption) -->
+<Talent>"RULES-T0139_GOUT"</Talent>
+  <!-- Acute Sense (Taste) -->
+<Talent>"RULES-T0164"</Talent>
+  <!-- Night Vision -->
+<Talent>"RULES-T0136_BOURG/RULES-T0136_GUILD/RULES-T0084"</Talent>
+  <!-- Etiquette (Burghers) or Etiquette (Guilder) or Read/Write -->
+<Talent>"RULES-T*"</Talent>
+  <!-- Random Talent -->
+</SUBCHAPTER_TALENT>
+<SUBCHAPTER_CAREER>
+<Career name="RULES-WORK02">"01"</Career>
+  <!-- Apothecary -->
+<Career name="RULES-WORK31">"02"</Career>
+  <!-- Engineer -->
+<Career name="RULES-WORK33">"03-04"</Career>
+  <!-- Lawyer -->
+<Career name="RULES-WORK36">"05-06"</Career>
+  <!-- Physician -->
+<Career name="RULES-WORK23">"07-08"</Career>
+  <!-- Scholar -->
+<Career name="RULES-WORK01">"09-10"</Career>
+  <!-- Agitator -->
+<Career name="RULES-WORK03">"11-15"</Career>
+  <!-- Artisan -->
+<Career name="RULES-WORK37">"16-19"</Career>
+  <!-- Beggar -->
+<Career name="RULES-WORK21">"20-21"</Career>
+  <!-- Inverstigator -->
+<Career name="RULES-WORK34">"22-25"</Career>
+  <!-- Merchant -->
+<Career name="RULES-WORK52">"26-28"</Career>
+  <!-- Rat Catcher -->
+<Career name="RULES-WORK07">"29-31"</Career>
+  <!-- Townsman -->
+<Career name="RULES-WORK39">"32-33"</Career>
+  <!-- Watchman -->
+<Career name="RULES-WORK15">"34"</Career>
+  <!-- Advisor -->
+<Career name="RULES-WORK04">"35-36"</Career>
+  <!-- Artist -->
+<Career name="RULES-WORK20">"37"</Career>
+  <!-- Envoy -->
+<Career name="RULES-WORK56">"38-43"</Career>
+  <!-- Servant -->
+<Career name="RULES-WORK24">"44"</Career>
+  <!-- Spy -->
+<Career name="RULES-WORK32">"45-46"</Career>
+  <!-- Warden -->
+<Career name="RULES-WORK05">"47"</Career>
+  <!-- Bailif -->
+<Career name="RULES-WORK29">"48-50"</Career>
+  <!-- Herbalist -->
+<Career name="RULES-WORK10">"51-52"</Career>
+  <!-- Hunter -->
+<Career name="RULES-WORK40">"53"</Career>
+  <!-- Miner -->
+<Career name="RULES-WORK19">"54"</Career>
+  <!-- Scout -->
+<Career name="RULES-WORK63">"55-57"</Career>
+  <!-- Villager -->
+<Career name="RULES-WORK11">"58"</Career>
+  <!-- Bounty Hunter -->
+<Career name="RULES-WORK13">"59-60"</Career>
+  <!-- Coachman -->
+<Career name="RULES-WORK55">"61-63"</Career>
+  <!-- Entertainer -->
+<Career name="RULES-WORK38">"64-65"</Career>
+  <!-- Messenger -->
+<Career name="RULES-WORK14">"66-67"</Career>
+  <!-- Pedlar -->
+<Career name="RULES-WORK47">"68"</Career>
+  <!-- Road Warden -->
+<Career name="RULES-WORK06">"69"</Career>
+  <!-- Boatman -->
+<Career name="RULES-WORK43">"70"</Career>
+  <!-- Huffer -->
+<Career name="RULES-WORK46">"71"</Career>
+  <!-- Riverwarden -->
+<Career name="RULES-WORK25">"72-74"</Career>
+  <!-- Riverwoman -->
+<Career name="RULES-WORK35">"75"</Career>
+  <!-- Seaman -->
+<Career name="RULES-WORK16">"76-79"</Career>
+  <!-- Smuggler -->
+<Career name="RULES-WORK17">"80-82"</Career>
+  <!-- Stevedor -->
+<Career name="RULES-WORK22">"83-85"</Career>
+  <!-- Bawl -->
+<Career name="RULES-WORK09">"86"</Career>
+  <!-- Charlatan -->
+<Career name="RULES-WORK53">"87"</Career>
+  <!-- Fence -->
+<Career name="RULES-WORK48">"88"</Career>
+  <!-- Grave Robber -->
+<Career name="RULES-WORK30">"89"</Career>
+  <!-- Outlaw -->
+<Career name="RULES-WORK51">"90"</Career>
+  <!-- Racketeer -->
+<Career name="RULES-WORK64">"91-94"</Career>
+  <!-- Thief -->
+<Career name="RULES-WORK27">"95-96"</Career>
+  <!-- Guard -->
+<Career name="RULES-WORK28">"97"</Career>
+  <!-- Pit Fighter -->
+<Career name="RULES-WORK57">"98-100"</Career>
+  <!-- Soldier -->
+</SUBCHAPTER_CAREER>
+</Specie>
+</DATA_SPECIE>
 </DATA_BOOK>
