@@ -1288,8 +1288,8 @@ Procedure PdfPersonnageCreation(Personnage: StructurePersonnage; BackGround: Boo
       PdfPage.WriteText( 30, 231, IntToStr(Personnage.Age));                                // Age
     if Personnage.Height > 0 then
       PdfPage.WriteText( 78, 231, FormateTaille(Personnage.Height, Personnage.HeightUnit));                        // Taille
-    PdfPage.WriteText(118, 231, Personnage.HairColors);                                     // Cheveux
-    PdfPage.WriteText(165, 231, Personnage.EyeColors);                                      // Yeux
+    PdfEcrit(PdfPage, 118, 164, 231, Personnage.HairColors, MinPolice);                       // Cheveux
+    PdfEcrit(PdfPage, 165, 195, 231, Personnage.EyeColors, MinPolice);                        // Yeux
 
     // Caractéristiques
     for Ind := 1 to 10 do

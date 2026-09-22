@@ -6047,3 +6047,11 @@ Fichiers modifies : BOOK_NATIONS_OF_MANKIND.Xml, CONTEXT.md, Log.txt.
 Test dans WinCreation sur Ogre, Elfe noir et peaux-vertes (Dark Orcs). Aucun code modifie,
 chantier clos ; reste le Dwarf Player s Guide p.42 sans table exploitable dans le PDF.
 Fichiers modifies : CONTEXT.md, A FAIRE.txt, Log.txt.
+
+22/09/2026 - DETAILS PHYSIQUES, POINTS OUVERTS : TRANCHES
+(1) Tirage non obligatoire a la creation et (2) ligne Free Choice des yeux humains laissee
+au joueur : Nono confirme que c est voulu, rien a coder. (3) Gabarit PDF du livre : les
+cheveux/yeux passent de WriteText a PdfEcrit (retrecissement automatique, pdfpersonnage.pas
+l.1291-1292, colonnes 118-164/165-195) - corrige un debordement sur un nom de couleur long.
+Teste par Nono (elfe, nom de cheveux a rallonge et deux couleurs d yeux).
+Fichiers modifies : pdfpersonnage.pas, CONTEXT.md, A FAIRE.txt, Log.txt.

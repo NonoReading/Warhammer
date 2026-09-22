@@ -11263,7 +11263,9 @@ Formules : Humain 15+d10 / 4'9"+2d10 ; Nain 15+10d10 / 4'3"+d10 ; Elfe (les deux
 - `winphysique.pas/.lfm` : fenetre a part (age, taille en pouces + pieds/pouces, yeux, cheveux, Roll/Valider/Annuler), pilotee par les variables globales `PhysiqueCodeRace`, `PhysiqueAge`, `PhysiqueTaille`, `PhysiqueYeux`, `PhysiqueCheveux`, `PhysiqueValide`. Tire d elle-meme a l ouverture si age et taille valent 0. Pas de variable globale `WinPhysique` (conflit avec le nom de l unite).
 - `winpersonnage.pas/.lfm` : `ButtonPhysique`, place dans le calcul de mise en page « Ligne 2 » sous les 4 champs ; le resultat est recopie dans `EditAge/EditHeight/EditHairColors/EditEyeColors`, lus a la sauvegarde.
 - `wincreation.pas/.lfm` : `ButtonPhysique` + `LabPhysiqueResume` (TEdit lecture seule) sur `TabSheetNom` (phase 8) ; resultat dans `Personnage.Age/Height/HairColors/EyeColors` ; remise a zero dans `PhaseSave` phase 2 (choix de la race). Tirage NON obligatoire.
-- `pdfpersonnage.pas` : gabarit du livre = 4 valeurs ecrites a x = 30/78/118/165, y = 231 (`WriteText`, sans retrecissement) ; gabarit maison = taille via `FormateTaille`, non ecrite si 0.
+- `pdfpersonnage.pas` : gabarit du livre = 4 valeurs a x = 30/78/118/165, y = 231 ; Age/Taille en `WriteText` (rien si 0), Cheveux/Yeux en `PdfEcrit` (retrecissement automatique, colonnes 118-164/165-195 - corrige le 22/09/2026, testait en `WriteText` et debordait sur un nom de couleur long) ; gabarit maison = taille via `FormateTaille`, non ecrite si 0.
+
+**Points ouverts tranches le 22/09/2026** : tirage non obligatoire a la creation et ligne Free Choice des yeux humains laissee au joueur = decisions de Nono, ne pas ressortir en anomalie.
 
 **Pieges** : `MiseEnFormeDesChamp` (`globalfonts.pas`) pose un `TShape` alClient sur chaque `TTabSheet` : tout controle non fenetre pose dans un onglet (TBCButton, TLabel) est cache ; `BringToFront` pour un bouton, `TEdit` lecture seule pour un texte (les `TLabel` d onglet sont en plus colories en rouge par cette boucle). Voir §4.
 
