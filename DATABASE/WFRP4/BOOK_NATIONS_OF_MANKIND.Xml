@@ -12430,7 +12430,7 @@ Poison: Used to weaken and kill targets, anyone caught in the radius of this gre
 <CareerBonus id="NATIO-RENOWN_KLUMPF">
 <Description language="ENGLISH">"Van Klumpf's Buccaneers"</Description>
 <Career>"RULES-WORK57"</Career>
-<Specie>""</Specie>
+<Specie>"NATIO-RACE_HWEST"</Specie>
 <Level id="NATIO-RENOWN_KLUMPF_3">
 <Order>"3"</Order>
 <Skill>""</Skill>

@@ -9124,8 +9124,14 @@ Nation/ModifyWeapon/ModifyCarac fonctionne intégralement, y compris en gabarit 
    - **Huit régiments à province unique saisis en lot** sur le même moule (palier
      unique Order="3") : Fireloques of Ferlangen, Grundel's Defenders, Helhunten's
      Redeemers, Sterntower Marksmen, The Death's Heads, The Swords of Ulric, Van
-     Klumpf's Buccaneers (Marienburg, `Specie=""`, ouvert à tous comme son régiment
-     provincial), Von Kragsburg Guard — compilés et confirmés par Nono.
+     Klumpf's Buccaneers, Von Kragsburg Guard — compilés et confirmés par Nono.
+   - **Revenu sur Van Klumpf's Buccaneers (22/09/2026)** : `Specie=""` (ouvert à tous
+     comme Marienburg City Watch) faisait proposer ce régiment à un Dark Orc Soldier -
+     repéré par Nono en testant. Marienburg City Watch a une exception explicite dans
+     le livre ("who hires anyone", `PDF_TEXTE/Nations of Mankind.txt` l.371) ; aucune
+     exception de ce genre pour Van Klumpf's, et tous les autres Regiments of Renown
+     portent une ethnie humaine précise. `Specie` corrigé à `NATIO-RACE_HWEST`
+     (Westerland/Marienburg, même province) dans `BOOK_NATIONS_OF_MANKIND.Xml`.
    - **Extension `<Specie>` à liste (10/09/2026)** : deux régiments recrutent sur DEUX
      provinces (Carroburg Great Swords : Middenland/Reikland ; Altdorf Company of
      Honor : Altdorf/Reikland). `AppartenancesCandidates` (`chargemetier.pas` ~l.234)

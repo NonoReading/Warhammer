@@ -6030,3 +6030,15 @@ Fichiers modifies : CONTEXT.md, Log.txt.
 22/09/2026 - GENERATEUR DE NOMS : TESTE ET VALIDE PAR NONO
 Test dans WinCreation sur plusieurs ethnies (gnomes, nains, elfes, humains...). Aucun code modifie, chantier clos.
 Fichiers modifies : CONTEXT.md, A FAIRE.txt, Log.txt.
+
+22/09/2026 - APPARTENANCE VAN KLUMPF'S BUCCANEERS OUVERTE A TOUTES LES RACES, CORRIGE
+Trouve par Nono en testant un Dark Orc Soldat (BOOK_GREEN_IZ_BEST.Xml) : la fenetre de
+specialisation lui proposait Marienburg City Watch ET Van Klumpf's Buccaneers, deux
+"appartenances" (CareerBonus, Nations of Mankind) de la carriere Soldier. <Specie> vide =
+ouvert a toutes les races (AppartenancesCandidates, chargemetier.pas) ; voulu pour Marienburg
+City Watch (le livre dit explicitement "exception of Marienburg who hires anyone",
+PDF_TEXTE/Nations of Mankind.txt l.371), mais Van Klumpf's Buccaneers n'a aucune exception de
+ce genre dans le texte et toutes les autres Regiments of Renown portent une ethnie humaine
+precise. <Specie> de NATIO-RENOWN_KLUMPF pose a NATIO-RACE_HWEST (Westerland/Marienburg,
+meme province que le regiment) dans BOOK_NATIONS_OF_MANKIND.Xml.
+Fichiers modifies : BOOK_NATIONS_OF_MANKIND.Xml, CONTEXT.md, Log.txt.
