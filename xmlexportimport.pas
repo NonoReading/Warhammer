@@ -2661,7 +2661,11 @@ Procedure XmlImport(FileName: String; OnlyPrimary: Boolean; OnlyCode: Boolean; C
 
                           Node := XmlElement(Node.NextSibling);
                         end;
-                      if LangueDef = ConstAnglais then
+                      // Option Quick Armour (Rulebook p.301) desactivable via le .INI
+                      // (A FAIRE.txt "TOGGLE .INI PAR LIVRE", 22/09/2026) : si desactivee,
+                      // l'armure simplifiee n'est pas chargee du tout - vraie desactivation
+                      // au chargement, pas un simple filtre d'affichage.
+                      if (LangueDef = ConstAnglais) and not OptionDesactivee(Livre, ConstOptionQuickArmour) then
                         begin
                           ListArmureSimplifiee.add(PArmureSimplifiee);
                           inc(NbArmureSimplifiee);

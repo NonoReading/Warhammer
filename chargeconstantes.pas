@@ -540,6 +540,13 @@ Const
       // ex. 'BOOKWFRP4=', 'BOOKWFRP5=' (ChargeIni/SauveIni, warhammersource.pas, CONTEXT.md
       // §2.70).
       ConstIniLivre                     = 'BOOK';
+      // Préfixe seul (pas de '='), même principe que ConstIniLivre : une ligne par livre
+      // dans le .INI, ex. 'OPTIONRULEBOOK=QUICKARMOUR' (ChargeIni/SauveIni,
+      // warhammersource.pas, A FAIRE.txt "TOGGLE .INI PAR LIVRE", 22/09/2026).
+      ConstIniOption                    = 'OPTION';
+      // Code de l'option Quick Armour (Rulebook p.301, les 3 <ArmorSimp>) - premier cas
+      // du chantier toggle .INI.
+      ConstOptionQuickArmour            = 'QUICKARMOUR';
       ConstIniVersion                   = 'VERSION=';
       // Langue de l'interface (RULES-LAB_*/RULES-MESS_*), décorrélée de ConstIniLangue (qui
       // reste la langue des livres/données) - Nono, 13/09/2026, CONTEXT.md §2.70.
@@ -787,6 +794,11 @@ Var
   // PeuplerTabLivre/WinFiltre, inchangés) - synchronisée depuis cette table à chaque
   // changement de version (ChargeIni/ComboBoxVersionSelect, warhammersource.pas).
   ListeLivreParVersion: TStringList;
+  // Options desactivees par livre (toggle .INI, A FAIRE.txt "TOGGLE .INI PAR LIVRE",
+  // 22/09/2026) : Names = code Livre, Values = liste des codes d'option desactivees
+  // separes par virgule (ex. 'QUICKARMOUR'). Une option absente de la liste reste
+  // active par defaut - meme principe que ListeLivreParVersion ci-dessus.
+  ListeOptionDesactiveeParLivre: TStringList;
   WinFiltreAppelant:   String = '';
   SelectWinGroupe:     String = '';
   ChoixWinGroupe:      String = '';
@@ -966,6 +978,7 @@ Function EnleveAccolade(Filtre: String): String;
 Function VerifieFiltre(Valeur: String; Liste: String): Boolean;
 Function ReplaceTilde(Ligne: String): String;
 Function LivreOrdre(Livre: String): String;
+Function OptionDesactivee(Livre, CodeOption: String): Boolean;
 Function CheminFichier(TypeDonnee: String; Livre: String): String;
 function extractnumbers(line: string): String;
 function VerifieRecherche():Boolean;
@@ -1314,6 +1327,20 @@ Function VerifieFiltre(Valeur: String; Liste: String): Boolean;
         Strings.free;
       end;
     Result := Res;
+  end;
+
+Function OptionDesactivee(Livre, CodeOption: String): Boolean;
+  Var
+    Liste: TStringList;
+  begin
+    Result := false;
+    Liste  := TStringList.Create;
+    try
+      Liste.CommaText := ListeOptionDesactiveeParLivre.Values[Livre];
+      Result := Liste.IndexOf(CodeOption) >= 0;
+    finally
+      Liste.Free;
+    end;
   end;
 
 Function LivreOrdre(Livre: String): String;

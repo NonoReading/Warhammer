@@ -238,6 +238,13 @@ begin
     if ListeLivreParVersion.Names[Ind] <> '' then
       Writeln(MyFile, ConstIniLivre + ListeLivreParVersion.Names[Ind] + '=' + ListeLivreParVersion.ValueFromIndex[Ind]);
 
+  // Options desactivees par livre (pas encore d'interface pour les modifier - la table
+  // n'est aujourd'hui peuplee que par lecture du .INI existant - mais on la reecrit pour
+  // ne pas perdre une ligne posee a la main, meme principe que ListeLivreParVersion).
+  for Ind := 0 to ListeOptionDesactiveeParLivre.Count - 1 do
+    if ListeOptionDesactiveeParLivre.Names[Ind] <> '' then
+      Writeln(MyFile, ConstIniOption + ListeOptionDesactiveeParLivre.Names[Ind] + '=' + ListeOptionDesactiveeParLivre.ValueFromIndex[Ind]);
+
   // Fermeture du fichier
   CloseFile(MyFile);
 
@@ -998,6 +1005,16 @@ Procedure TMenu.ChargeIni();
                   ListeLivreParVersion.Values[Copy(Ligne, Length(ConstIniLivre)+1, PosEgal-Length(ConstIniLivre)-1)]
                     := Copy(Ligne, PosEgal+1, MaxInt);
               end;
+            // OPTION<Livre>=<liste des codes d'option desactivees, separes par virgule>
+            // (A FAIRE.txt "TOGGLE .INI PAR LIVRE", 22/09/2026) - meme principe que BOOK<version>=
+            // ci-dessus.
+            if pos(ConstIniOption, Ligne) = 1 then
+              begin
+                PosEgal := Pos('=', Ligne);
+                if PosEgal > Length(ConstIniOption) then
+                  ListeOptionDesactiveeParLivre.Values[Copy(Ligne, Length(ConstIniOption)+1, PosEgal-Length(ConstIniOption)-1)]
+                    := Copy(Ligne, PosEgal+1, MaxInt);
+              end;
             if pos(ConstIniVersion, Ligne) > 0 then
               LocVersion := ExtractStringAfter(Ligne,ConstIniVersion);
             if pos(ConstIniLangueInterface, Ligne) > 0 then
@@ -1438,6 +1455,7 @@ procedure TMenu.FormCreate(Sender: TObject);
        // Sélection de livres cochés, une par édition (Nono, 13/09/2026, CONTEXT.md §2.70) -
        // créée AVANT ChargeIni() qui la peuple depuis le .INI.
        ListeLivreParVersion := TStringList.Create;
+       ListeOptionDesactiveeParLivre := TStringList.Create;
 
        // Charger Les données
        ChargeIni();

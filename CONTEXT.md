@@ -11338,3 +11338,14 @@ Modele : mots separes par des espaces ; un mot = elements separes par `+` ; elem
 **Plafond du talent du signe (22/09, compile, a tester)** : `TalentMaxCreation` (wincreation.pas) calcule le meme plafond que `TabAugmentationTalentCalcul` (winpersonnage.pas, §2.x) — `MaxiTalent` soit un nombre, soit une formule `(BXX)` lue dans `TabAttribut` (colonne totale, modificateur du signe astral inclus via `SigneAstralAttributModif`, meme calcul que le recap). `AjouteTalentSigne` n incremente plus au-dela de ce plafond quand le talent gagne un niveau par fusion. Choix retenu faute de regle du livre (Archives II p.39 ne dit pas ce qu il advient du niveau perdu) : le niveau surnumeraire n est simplement pas ajoute, comme le fait deja la grille de progression pour une saisie manuelle au-dela du maximum.
 
 **Reste** : voir A FAIRE.txt (texte de personnalite, etapes optionnelles p.50, autres livres).
+
+### 2.89 Toggle .INI par livre pour les regles optionnelles — infrastructure codee, pas encore d interface (22/09/2026)
+
+**Idee** : chaque livre a son entree .INI, et a l interieur la liste de SES options desactivables (meme le Rulebook en a, ex. Quick Armour p.301). But : une VRAIE desactivation au chargement XML (l option ne rentre pas en memoire), pas un simple filtre d affichage comme les mecanismes existants (signes astraux, carriere alternative). Recensement complet dans A FAIRE.txt (candidats ecartes, piste incertaine du clan Halfling d Archives I).
+
+**Fait (22/09, compile, PAS ENCORE TESTE PAR NONO)** : infrastructure generique + premier cas (Quick Armour) :
+- `chargeconstantes.pas` : `ConstIniOption = 'OPTION'` (prefixe, meme principe que `ConstIniLivre = 'BOOK'`), `ConstOptionQuickArmour = 'QUICKARMOUR'`, variable globale `ListeOptionDesactiveeParLivre: TStringList` (Names = Livre, Values = CSV des codes d option desactivees), fonction `OptionDesactivee(Livre, CodeOption): Boolean`.
+- `warhammersource.pas` : `ChargeIni` lit les lignes `OPTION<Livre>=<liste>` (meme boucle que `BOOK<version>=`) ; `SauveIni` les reecrit ; `ListeOptionDesactiveeParLivre` cree dans `FormCreate` avant `ChargeIni()`.
+- `xmlexportimport.pas` : au chargement de `<DataArmorSimplified>`, `ListArmureSimplifiee.add` est saute si `OptionDesactivee(Livre, ConstOptionQuickArmour)` — l armure simplifiee n est alors jamais chargee.
+
+**Reste** : aucune interface pour cocher/decocher une option (aujourd hui, modifier `INI.TXT` a la main, ligne `OPTIONRULEBOOK=QUICKARMOUR` pour desactiver Quick Armour) ; Nono n a pas encore teste. Structure des lignes .INI et mecanisme valides par les decisions de Nono du 22/09 (bloc par livre, vraie desactivation) — reste a etendre aux 2 autres options connues (signes astraux, carriere alternative) si le chantier avance, et a decider de l interface (case a cocher ou l ecran des livres ?).
