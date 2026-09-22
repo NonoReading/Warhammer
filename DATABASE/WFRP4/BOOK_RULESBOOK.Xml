@@ -15469,6 +15469,13 @@ Armour is generally damaged in one of two ways:
 <ArmorPoint>"3"</ArmorPoint>
 </ArmorSimp>
 </DATA_ARMOR_SIMP>
+<DATA_OPTION_RULE>
+<OptionRule id="RULES-OPTR_01">
+<Code>"QUICKARMOUR"</Code>
+<Description language="ENGLISH">"Quick Armour"</Description>
+<Explanation language="ENGLISH">"For those who want fast, simple rules for armour, use the following. Armour is split into three bands: Light, Medium, and Heavy. Those in Light are wearing mostly leathers, those in medium are wearing mostly chain, and those in heavy are wearing mostly plate. (p.301)"</Explanation>
+</OptionRule>
+</DATA_OPTION_RULE>
 <DATA_ARMOR_BONUS>
 <BonusMalus id="RULES-ARMOB_01">
 <Description language="ENGLISH">"Flexible"</Description>

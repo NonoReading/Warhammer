@@ -347,6 +347,10 @@
 <Text name="RULES-LAB_274">"Aucun"</Text>
 <Text name="RULES-LAB_275">"Choisir la spécialisation"</Text>
 <Text name="RULES-LAB_276">"Spécialisation à choisir"</Text>
+<Text name="RULES-LAB_277">"Règles optionnelles"</Text>
+<Text name="RULES-LAB_278">"Active"</Text>
+<Text name="RULES-LAB_279">"Explication"</Text>
+<Text name="RULES-LAB_280">"Fermer"</Text>
 </Label>
 </DATA_LABEL>
 </DATA_BOOK>

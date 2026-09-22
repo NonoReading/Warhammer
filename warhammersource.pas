@@ -18,7 +18,7 @@ uses
   ChargeArmureBonus, ChargeArmureBonusTalent, WinArmor, ChargeTrapping, ChargeSort, WinSpell, ChargeTexte,
   ChargeFabrication, WinMutationCatalogue, Unitcalcul, ChargeMetierSousMetier,
   ChargeMetierRaceChoixMetier, ChargePersonnage, ChargeRaceCreation,
-  ChargeTraduction, ChargeArmureSimplifie, ChargeLivre,
+  ChargeTraduction, ChargeArmureSimplifie, ChargeOptionRegle, WinOptionRegle, ChargeLivre,
   ChargeTalentEffet, ChargeTalentCompetenceModif,
   ChargeTalentCompetenceAjoute, ChargeRaceCorruptionCreation,
   ChargeCorruptionTable, ChargeRaceOpinion, ChargeArmureBonusModif,
@@ -116,11 +116,13 @@ type
     procedure ChargerListeLanguesInterface();
     procedure PeuplerTabLivre();
     procedure AjustePositionFenetre();
+    procedure ButtonOptionRegleClick(Sender: TObject);
   private
     FenetreInitialisee:       Boolean;
     LargeurFenetreBase:       Integer;
     LargeurTabLivreBase:      Integer;
     LargeurTabPersonnageBase: Integer;
+    ButtonOptionRegle:        TButton;
   public
   end;
 
@@ -899,6 +901,7 @@ Procedure TMenu.RafraichirLibellesMenu();
 
     Label4.Caption              := GetTexteLibelle('RULES-LAB_183');
     Label5.Caption              := GetTexteLibelle('RULES-LAB_184');
+    ButtonOptionRegle.Caption   := GetTexteLibelle('RULES-LAB_277');
 
     // Remettre les colonnes auto-dimensionnées à leur largeur de départ (celle donnée à
     // GridAjouteColonne dans FormCreate) avant de rappeler AdjustGridColumnsWidth : sa
@@ -1187,6 +1190,7 @@ procedure TMenu.ChargerLivre(ForceMaJ: Boolean; ForceLivre: String);
         // ou de langue) rajoutait donc leur contenu par-dessus l'ancien. Visible sur le PDF
         // de personnage : l'annotation d'armure s'affichait deux fois, "(4) -10% (4) -10%".
         ListArmureSimplifiee.Clear;
+        ListOptionRegle.Clear;
         ListArmeBonus.Clear;
         ListMetierEquipement.Clear;
         ListArmureBonus.Clear;
@@ -1452,6 +1456,19 @@ procedure TMenu.FormCreate(Sender: TObject);
        ChargerImage();
        Randomize;
 
+       // Bouton d'ouverture de la fenetre des regles optionnelles (toggle .INI,
+       // A FAIRE.txt "TOGGLE .INI PAR LIVRE", CONTEXT.md 2.89, 22/09/2026) - cree en
+       // code (pas dans le .lfm) sous Panel3 (Interface), zone fixe jamais reancree
+       // par AjustePositionFenetre. Le Caption (GetTexteLibelle) est pose PLUS BAS,
+       // apres le chargement d'INTERFACE.Xml (ListTexte cree ligne ~1559, rempli par
+       // XmlImport ligne ~1619) - appeler GetTexteLibelle ici plantait (ListTexte pas
+       // encore cree), crash "ACCESS VIOLATION generics.collections.pas" trouve par
+       // Nono en lancant depuis l IDE, 22/09/2026.
+       ButtonOptionRegle          := TButton.Create(Self);
+       ButtonOptionRegle.Parent   := Self;
+       ButtonOptionRegle.SetBounds(Panel3.Left, Panel3.Top + Panel3.Height + 8, Panel3.Width, 30);
+       ButtonOptionRegle.OnClick  := @ButtonOptionRegleClick;
+
        // Sélection de livres cochés, une par édition (Nono, 13/09/2026, CONTEXT.md §2.70) -
        // créée AVANT ChargeIni() qui la peuple depuis le .INI.
        ListeLivreParVersion := TStringList.Create;
@@ -1518,6 +1535,7 @@ procedure TMenu.FormCreate(Sender: TObject);
        ListArmure                   := TListArmure.Create;
        ListTrapping                 := TListTrapping.Create;
        ListArmureSimplifiee         := TListArmureSimplifiee.Create;
+       ListOptionRegle               := TListOptionRegle.Create;
        ListArmeBonus                := TListArmeBonus.Create;
        ListMetierEquipement         := TListMetierEquipement.Create;
        ListArmureBonus              := TListArmureBonus.Create;
@@ -1741,6 +1759,7 @@ procedure TMenu.FormCreate(Sender: TObject);
 
        Label4.Caption              := GetTexteLibelle('RULES-LAB_183');
        Label5.Caption              := GetTexteLibelle('RULES-LAB_184');
+       ButtonOptionRegle.Caption   := GetTexteLibelle('RULES-LAB_277');
 
        AdjustGridColumnsWidth(TabLivre, Self.Height, true, true, True, 0, 10);
        AdjustGridColumnsWidth(TabPersonnage, Self.Height, true, true, True, 0, 10);
@@ -1968,6 +1987,13 @@ begin
   FenArmure          := TWinArmors.Create(Application);
   FenArmure.Position := poOwnerFormCenter;
   FenArmure.Show;
+end;
+
+procedure TMenu.ButtonOptionRegleClick(Sender: TObject);
+begin
+  WinOptionRegles          := TWinOptionRegle.Create(Application);
+  WinOptionRegles.Position := poOwnerFormCenter;
+  WinOptionRegles.ShowModal;
 end;
 
 procedure TMenu.ButtonModificationClick(Sender: TObject);

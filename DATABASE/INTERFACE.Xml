@@ -421,6 +421,10 @@
 <Text name="RULES-LAB_274">"None"</Text>
 <Text name="RULES-LAB_275">"Choose the specialisation"</Text>
 <Text name="RULES-LAB_276">"Specialisation to choose"</Text>
+<Text name="RULES-LAB_277">"Optional rules"</Text>
+<Text name="RULES-LAB_278">"Active"</Text>
+<Text name="RULES-LAB_279">"Explanation"</Text>
+<Text name="RULES-LAB_280">"Close"</Text>
 </Label>
 </DATA_LABEL>
 </DATA_BOOK>

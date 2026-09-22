@@ -118,6 +118,11 @@ Const
       ConstXmlDataArmor                 = 'DATA_ARMOR';
       ConstXmlDataArmorSimplified       = 'DATA_ARMOR_SIMP';
       ConstXmlDataArmorBonus            = 'DATA_ARMOR_BONUS';
+      // Regles optionnelles activables/desactivables par livre via le toggle .INI
+      // (A FAIRE.txt "TOGGLE .INI PAR LIVRE", CONTEXT.md 2.89, 22/09/2026).
+      ConstXmlDataOptionRule             = 'DATA_OPTION_RULE';
+      ConstXmlOptionRule                 = 'OptionRule';
+      ConstXmlCode                       = 'Code';
       ConstXmlDataTrapping              = 'DATA_TRAPPING';
       ConstXmlDataSpell                 = 'DATA_SPELL';
       ConstXmlDataSpellTalent           = 'DATA_SPELL_TALENT';
@@ -979,6 +984,7 @@ Function VerifieFiltre(Valeur: String; Liste: String): Boolean;
 Function ReplaceTilde(Ligne: String): String;
 Function LivreOrdre(Livre: String): String;
 Function OptionDesactivee(Livre, CodeOption: String): Boolean;
+Procedure SauveIniOptions();
 Function CheminFichier(TypeDonnee: String; Livre: String): String;
 function extractnumbers(line: string): String;
 function VerifieRecherche():Boolean;
@@ -1340,6 +1346,34 @@ Function OptionDesactivee(Livre, CodeOption: String): Boolean;
       Result := Liste.IndexOf(CodeOption) >= 0;
     finally
       Liste.Free;
+    end;
+  end;
+
+// Reecrit uniquement les lignes OPTION<Livre>=... du .INI, en preservant tout le
+// reste tel quel (langue, version, selection de livres...) - permet a une fenetre
+// qui n'a pas acces a TMenu (WinOptionRegle, pas de dependance circulaire vers
+// warhammersource.pas) de persister le toggle immediatement, meme principe que
+// TMenu.SauveIni pour le reste (A FAIRE.txt "TOGGLE .INI PAR LIVRE", 22/09/2026).
+Procedure SauveIniOptions();
+  Var
+    FilePathLoc: String;
+    Lignes:      TStringList;
+    Ind:         Integer;
+  begin
+    FilePathLoc := GetCurrentDir + ConstFichierIni;
+    Lignes       := TStringList.Create;
+    try
+      if FileExists(FilePathLoc) then
+        Lignes.LoadFromFile(FilePathLoc);
+      for Ind := Lignes.Count - 1 downto 0 do
+        if Pos(ConstIniOption, Lignes[Ind]) = 1 then
+          Lignes.Delete(Ind);
+      for Ind := 0 to ListeOptionDesactiveeParLivre.Count - 1 do
+        if ListeOptionDesactiveeParLivre.Names[Ind] <> '' then
+          Lignes.Add(ConstIniOption + ListeOptionDesactiveeParLivre.Names[Ind] + '=' + ListeOptionDesactiveeParLivre.ValueFromIndex[Ind]);
+      Lignes.SaveToFile(FilePathLoc);
+    finally
+      Lignes.Free;
     end;
   end;
 

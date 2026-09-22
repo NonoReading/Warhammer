@@ -10,7 +10,7 @@ uses
   ChargeEspece, ChargeNation, ChargeRegle,
   ChargeRaceAttribut, ChargeRacePhysique, ChargeSigneAstral, ChargeRaceCompetence, ChargeRaceTalent, ChargeRaceMetier,
   ChargeMetier, ChargeMetierAttribut, ChargeMetierCompetence, ChargeMetierTalent,
-  ChargeMetierEquipement, chargeMetierNiveau, ChargeArme, ChargeArmure, ChargeTrapping,
+  ChargeMetierEquipement, chargeMetierNiveau, ChargeArme, ChargeArmure, ChargeTrapping, ChargeOptionRegle,
   ChargeTalentCreation, ChargeRaceCreation, ChargeArmeBonus, ChargeArmureBonus,
   ChargeFabrication, ChargeSort, ChargeMetierRaceChoixMetier, ChargeAttribut,
   ChargeAttributAugmentation, ChargeCompetenceAugmentation, ChargeTexte,
@@ -1281,6 +1281,7 @@ Procedure XmlImport(FileName: String; OnlyPrimary: Boolean; OnlyCode: Boolean; C
     PTraductionOption:        StructureTraduction;
     PTraductionNv2:           StructureTraduction;
     PArmureSimplifiee:        StructureArmureSimplifiee;
+    POptionRegle:             StructureOptionRegle;
     PRaceCorruptionCreation:  StructureRaceCorruptionCreation;
     PCorruptionTable:         StructureCorruptionTable;
     PCorruptionChance:        StructureCorruptionChance;
@@ -2672,6 +2673,47 @@ Procedure XmlImport(FileName: String; OnlyPrimary: Boolean; OnlyCode: Boolean; C
                         end;
 
                       AddTrad(PTraduction, Langue);
+
+                      NodeNv2 := XmlElement(NodeNv2.NextSibling);
+                    end;
+                end;
+
+              // Regles optionnelles du livre (toggle .INI, A FAIRE.txt "TOGGLE .INI PAR
+              // LIVRE", CONTEXT.md 2.89, 22/09/2026) - toujours chargees (definitions),
+              // seul leur EFFET (ci-dessus pour Quick Armour) est conditionne au .INI.
+              NodeNv1 := BookNode.FindNode(ConstXmlDataOptionRule);
+              if Assigned(NodeNv1) then
+                begin
+                  NodeNv2 := XmlElement(NodeNv1.FirstChild);
+                  While Assigned(NodeNv2) do
+                    begin
+                      POptionRegle.Livre := Livre;
+                      POptionRegle.CodeId := RemoveQuotes(UTF8Encode(NodeNv2.Attributes.GetNamedItem(ConstXmlId).NodeValue));
+
+                      Node := XmlElement(NodeNv2.FirstChild);
+                      while Assigned(Node) do
+                        begin
+                          case Node.NodeName of
+                            ConstXmlCode:
+                              POptionRegle.CodeOption := RemoveQuotes(UTF8Encode(Node.TextContent));
+                            ConstXmlDescription:
+                              POptionRegle.Libelle := RemoveQuotes(UTF8Encode(Node.TextContent));
+                            ConstXmlExplanation:
+                              POptionRegle.Explication := RemoveQuotes(UTF8Encode(Node.TextContent));
+                          end;
+
+                          Node := XmlElement(Node.NextSibling);
+                        end;
+
+                      // Meme convention que les armures simplifiees ci-dessus : une seule
+                      // entree par option (passe anglaise), pas de re-localisation
+                      // dynamique via Traduit() pour l instant (meme limite deja existante
+                      // sur ListArmureSimplifiee - CONTEXT.md 2.89).
+                      if LangueDef = ConstAnglais then
+                        begin
+                          ListOptionRegle.add(POptionRegle);
+                          inc(NbOptionRegle);
+                        end;
 
                       NodeNv2 := XmlElement(NodeNv2.NextSibling);
                     end;
