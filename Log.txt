@@ -6042,3 +6042,8 @@ ce genre dans le texte et toutes les autres Regiments of Renown portent une ethn
 precise. <Specie> de NATIO-RENOWN_KLUMPF pose a NATIO-RACE_HWEST (Westerland/Marienburg,
 meme province que le regiment) dans BOOK_NATIONS_OF_MANKIND.Xml.
 Fichiers modifies : BOOK_NATIONS_OF_MANKIND.Xml, CONTEXT.md, Log.txt.
+
+22/09/2026 - DETAILS PHYSIQUES, AUTRES ETHNIES : TESTE ET VALIDE PAR NONO
+Test dans WinCreation sur Ogre, Elfe noir et peaux-vertes (Dark Orcs). Aucun code modifie,
+chantier clos ; reste le Dwarf Player s Guide p.42 sans table exploitable dans le PDF.
+Fichiers modifies : CONTEXT.md, A FAIRE.txt, Log.txt.
