@@ -6055,3 +6055,27 @@ cheveux/yeux passent de WriteText a PdfEcrit (retrecissement automatique, pdfper
 l.1291-1292, colonnes 118-164/165-195) - corrige un debordement sur un nom de couleur long.
 Teste par Nono (elfe, nom de cheveux a rallonge et deux couleurs d yeux).
 Fichiers modifies : pdfpersonnage.pas, CONTEXT.md, A FAIRE.txt, Log.txt.
+
+22/09/2026 - AUDIT ARCHIVES OF THE EMPIRE I : AUCUN ECART DE FOND
+Sous-agent : sommaire compare section par section au XML. Carrieres (Ghost Strider,
+Fieldwarden, Karak Ranger, Badger Rider) et armes (Appendix I et III) integralement et
+correctement saisies. Le reste du livre (provinces, clans halfling, Karak Azgaraz,
+Laurelorn) est du lore, hors-programme. Un point releve et mis de cote par Nono : la table
+"Options: Halfling Clan Skills and Talents" (p.32) n a pas d equivalent XML - ressemble au
+mecanisme CareerBonus mais sans carriere associee, a concevoir separement si repris.
+Fichiers modifies : A FAIRE.txt, Log.txt.
+
+22/09/2026 - AUDIT ARCHIVES OF THE EMPIRE II : AUCUN ECART
+Sous-agent : sommaire compare section par section au XML. Race Ogre, 3 carrieres
+(Maneater, Rhinox Herder, Ogre Butcher), armes/armure, 7 sorts du Great Maw et signes
+astraux tous fideles au texte. Seul point note pour memoire (meme famille que les clans
+halfling d Archives I) : "Ogre Titles and Clan Names" (p.23), laisse de cote.
+Fichiers modifies : A FAIRE.txt, Log.txt.
+
+22/09/2026 - AUDIT ARCHIVES OF THE EMPIRE III : UN ECART TROUVE, MIS DE COTE
+Sous-agent : sommaire compare section par section au XML. Armures, 3 carrieres de pretres
+(Handrich, Solkan, Rhya) avec leurs 18 Miracles, 9 sorts Hedgecraft, talent Animal
+Assistant tous fideles au texte. Ecart : "Alternative Channelling / Cants" (p.85-88), 8
+domaines de magie optionnels avec leurs propres sorts, totalement absent du XML - Nono
+choisit de le mettre de cote pour l instant.
+Fichiers modifies : A FAIRE.txt, Log.txt.
