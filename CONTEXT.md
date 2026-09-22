@@ -11364,6 +11364,6 @@ Modele : mots separes par des espaces ; un mot = elements separes par `+` ; elem
 - Carriere alternative (`ConstOptionCareerAlt = 'CAREERALT'`) : `BOOK_SEA_OF_CLAWS.Xml` (`SEAOF-OPTR_01`, "The Seafarer Class") et `BOOK LUSTRIA.xml` (`LUSTR-OPTR_01`, "Lustrian Class and Career Table") - CHAQUE livre a sa propre entree (deux regles distinctes, meme code d option) ; garde ajoutee sur `ListRegle.add` (la regle elle-meme) ET `ListRegleMetier.add` (sa table de tirage) - les deux dependent du meme flag, la table seule n a pas de sens sans la regle.
 - Les menus existants qui affichaient ces options (`ChargeComboRegle`/`ChargeSignesAstraux`, `wincreation.pas`) n ont PAS ete touches : ils bouclent sur `ListRegle`/`ListSigneAstral`, qui ne contiennent plus l entree desactivee - la desactivation est donc deja reelle (au chargement), pas juste un filtre d affichage en plus.
 - Explications copiees du texte anglais des livres (Archives II p.39, Sea of Claws, Lustria p.191) - PAS de version francaise (aucun de ces 3 livres n a de fichier `_FRANCAIS.Xml`).
-- PAS ENCORE COMPILE NI TESTE PAR NONO (a faire avant de considerer ce point clos).
+- Compile, teste et valide par Nono le 22/09/2026 (les 3 lignes - Quick Armour, Star Signs, carriere alternative x2 - s affichent et se cochent/decochent correctement dans WinOptionRegle).
 
 **Reste** : traduire l Explanation de Quick Armour en francais (texte du LdB officiel non retrouve, texte anglais copie tel quel pour l instant).
