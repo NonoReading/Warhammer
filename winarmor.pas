@@ -227,8 +227,14 @@ var
     LabLivre.Caption          := GetTexteLibelle('RULES-LAB_128');
     LabQuickArmor.Caption     := GetTexteLibelle('RULES-LAB_149');
 
-    TabArmor.Row := 1;
-    TabArmorSelection(TabArmor, 1, 1);
+    // Liste vide possible depuis le toggle .INI par livre (Quick Armour desactive,
+    // A FAIRE.txt "TOGGLE .INI PAR LIVRE", 22/09/2026) : RowCount = 1 (en-tete seule),
+    // la ligne 1 n'existe pas - sans ce garde, range-check error au premier affichage.
+    if TabArmor.RowCount > 1 then
+      begin
+        TabArmor.Row := 1;
+        TabArmorSelection(TabArmor, 1, 1);
+      end;
 
     KeyPreview := true;
   end;

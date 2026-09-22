@@ -11339,13 +11339,16 @@ Modele : mots separes par des espaces ; un mot = elements separes par `+` ; elem
 
 **Reste** : voir A FAIRE.txt (texte de personnalite, etapes optionnelles p.50, autres livres).
 
-### 2.89 Toggle .INI par livre pour les regles optionnelles — infrastructure codee, pas encore d interface (22/09/2026)
+### 2.89 Toggle .INI par livre pour les regles optionnelles — premier cas (Quick Armour) teste et valide par Nono (22/09/2026)
 
 **Idee** : chaque livre a son entree .INI, et a l interieur la liste de SES options desactivables (meme le Rulebook en a, ex. Quick Armour p.301). But : une VRAIE desactivation au chargement XML (l option ne rentre pas en memoire), pas un simple filtre d affichage comme les mecanismes existants (signes astraux, carriere alternative). Recensement complet dans A FAIRE.txt (candidats ecartes, piste incertaine du clan Halfling d Archives I).
 
-**Fait (22/09, compile, PAS ENCORE TESTE PAR NONO)** : infrastructure generique + premier cas (Quick Armour) :
+**Fait (22/09, compile, teste et valide par Nono)** : infrastructure generique + premier cas (Quick Armour) :
 - `chargeconstantes.pas` : `ConstIniOption = 'OPTION'` (prefixe, meme principe que `ConstIniLivre = 'BOOK'`), `ConstOptionQuickArmour = 'QUICKARMOUR'`, variable globale `ListeOptionDesactiveeParLivre: TStringList` (Names = Livre, Values = CSV des codes d option desactivees), fonction `OptionDesactivee(Livre, CodeOption): Boolean`.
 - `warhammersource.pas` : `ChargeIni` lit les lignes `OPTION<Livre>=<liste>` (meme boucle que `BOOK<version>=`) ; `SauveIni` les reecrit ; `ListeOptionDesactiveeParLivre` cree dans `FormCreate` avant `ChargeIni()`.
 - `xmlexportimport.pas` : au chargement de `<DataArmorSimplified>`, `ListArmureSimplifiee.add` est saute si `OptionDesactivee(Livre, ConstOptionQuickArmour)` — l armure simplifiee n est alors jamais chargee.
+- Ligne .INI testee : `OPTIONBOOK RULESBOOK=QUICKARMOUR` (le code du Rulebook est `BOOK RULESBOOK`, AVEC l espace - a bien respecter dans la cle, piege trouve en testant : `OPTIONRULEBOOK=...` sans l espace ne matche rien).
 
-**Reste** : aucune interface pour cocher/decocher une option (aujourd hui, modifier `INI.TXT` a la main, ligne `OPTIONRULEBOOK=QUICKARMOUR` pour desactiver Quick Armour) ; Nono n a pas encore teste. Structure des lignes .INI et mecanisme valides par les decisions de Nono du 22/09 (bloc par livre, vraie desactivation) — reste a etendre aux 2 autres options connues (signes astraux, carriere alternative) si le chantier avance, et a decider de l interface (case a cocher ou l ecran des livres ?).
+**Bug trouve et corrige en testant (22/09)** : `winarmor.pas` (`WinCharger`, `TabArmor.Row := 1` + `TabArmorSelection(TabArmor, 1, 1)` juste apres) supposait toujours au moins une ligne de donnees ; avec Quick Armour desactive, `ListArmureSimplifiee` peut etre vide pour le livre filtre -> `TabArmor.RowCount` reste a 1 (en-tete seule) -> range-check error a l ouverture de la fenetre (ouverte depuis `WinPersonnage`, bouton Armure avec la case Quick Armor cochee). Corrige par un garde `if TabArmor.RowCount > 1 then`.
+
+**Reste** : aucune interface pour cocher/decocher une option (aujourd hui, modifier `INI.TXT` a la main) ; etendre aux 2 autres options connues (signes astraux, carriere alternative) si le chantier avance, et decider de l interface (case a cocher ou l ecran des livres ?).
