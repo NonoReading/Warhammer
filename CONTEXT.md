@@ -11265,7 +11265,7 @@ Formules : Humain 15+d10 / 4'9"+2d10 ; Nain 15+10d10 / 4'3"+d10 ; Elfe (les deux
 
 **Reste** (A FAIRE.txt) : Gnome de Rough Nights p.89, Dwarf Player s Guide (tables par region, modificateurs -5/+5, Distinguished Features), autres livres ethniques, codes de libelle (boutons, legendes de WinPhysique, couleurs), tirage obligatoire ou non. **Fait le 21/09 (compile et valide)** : couleurs en francais (Rulebook FR p.40, `ConstPRaceCouleur` dans `Traduit`), repli sur la race (`RaceSourcePhysique`), unite de taille CM/INCH (cle `HEIGHTUNIT=` de l INI, `Personnage.HeightUnit`, liste cm/in dans WinPhysique ; fiche sans balise = pouces).
 
-### 2.87 Generateur de noms par ethnie (paliers 1 et 2) — compile, A TESTER par Nono (21/09/2026)
+### 2.87 Generateur de noms par ethnie (paliers 1 et 2) — teste (gnomes, nains, elfes, humains...) et valide par Nono (22/09/2026)
 
 **Sources** : Rulebook p.38-39 (generateur de noms elfiques 1d10, suffixes et clans nains), Dwarf Player s Guide p.39 (tableau des prenoms en d1000, homme/femme). Le tableau du DPG est imprime avec une erreur : la ligne « 738-753 » (Morgrim / Nanda) est en realite 738-745 (746-753 = Mundri / Nanna) ; corrige dans le XML.
 
