@@ -552,6 +552,11 @@ Const
       // Code de l'option Quick Armour (Rulebook p.301, les 3 <ArmorSimp>) - premier cas
       // du chantier toggle .INI.
       ConstOptionQuickArmour            = 'QUICKARMOUR';
+      // Signes astraux (DATA_STARSIGN, Archives of the Empire II p.39) et carriere
+      // alternative (DATA_RULE/DATA_CAREER_ROLL, Sea of Claws et Lustria) - etendus au
+      // toggle .INI le 22/09/2026 (CONTEXT.md 2.89).
+      ConstOptionStarSign               = 'STARSIGN';
+      ConstOptionCareerAlt              = 'CAREERALT';
       ConstIniVersion                   = 'VERSION=';
       // Langue de l'interface (RULES-LAB_*/RULES-MESS_*), décorrélée de ConstIniLangue (qui
       // reste la langue des livres/données) - Nono, 13/09/2026, CONTEXT.md §2.70.

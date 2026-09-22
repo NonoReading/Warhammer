@@ -3466,4 +3466,11 @@
   <!-- Soldier -->
 </Entry>
 </DATA_CAREER_ROLL>
+<DATA_OPTION_RULE>
+<OptionRule id="LUSTR-OPTR_01">
+<Code>"CAREERALT"</Code>
+<Description language="ENGLISH">"Lustrian Class and Career Table"</Description>
+<Explanation language="ENGLISH">"Players randomly generating their Character's Class and Career for a game set in Lustria should use the table provided, instead of the table on WFRP pages 30-31. This includes options for the new Careers listed in this chapter, and reflects the fact that demand for certain Careers is much higher or lower in Lustria than back in the Old World. Note that this table assumes that the Characters have been resident in Lustria for some time and have adapted accordingly. GMs may rule that for campaigns that begin with Characters as new or unprepared arrivals in Lustria, the usual Class and Career Table is more appropriate."</Explanation>
+</OptionRule>
+</DATA_OPTION_RULE>
 </DATA_BOOK>

@@ -274,6 +274,13 @@
   <!-- Wrecker -->
 </Entry>
 </DATA_CAREER_ROLL>
+<DATA_OPTION_RULE>
+<OptionRule id="SEAOF-OPTR_01">
+<Code>"CAREERALT"</Code>
+<Description language="ENGLISH">"The Seafarer Class"</Description>
+<Explanation language="ENGLISH">"The Seafarer Class is a new Class for use in Warhammer Fantasy Roleplay, representing Careers pursued by people who live around the coasts of the Old World. There is much in common between the Seafarer Class and the Riverfolk Class, and certain Careers belong to both Classes, such as Huffer, Seaman, and Wrecker. The table on this page is designed to replace the Riverfolk section of the Random Class and Career Table on page 30 and 31 of the WFRP Core Rulebook."</Explanation>
+</OptionRule>
+</DATA_OPTION_RULE>
 <DATA_SPECIE_CAREER_DIRECT>
   <!-- Ces métiers étaient déclarés en 'X' dans les <Specie> de BOOK_RULESBOOK.Xml,
        alors qu'ils appartiennent à ce livre : un joueur n'ayant pas activé Sea of Claws

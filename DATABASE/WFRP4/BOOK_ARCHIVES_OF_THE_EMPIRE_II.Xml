@@ -1067,4 +1067,11 @@ Examples you could take include: Alcohol, Food, Narcotics, Pleasure."</Explanati
 </Variant>
 </StarSign>
 </DATA_STARSIGN>
+<DATA_OPTION_RULE>
+<OptionRule id="ARCH2-OPTR_01">
+<Code>"STARSIGN"</Code>
+<Description language="ENGLISH">"Star Signs"</Description>
+<Explanation language="ENGLISH">"The following is an optional system for determining a character's star chart at character creation. If you wish, you may ignore this section entirely - some people create their own destiny or, perhaps more accurately, have their fate influenced by forces other than the stars above. For some individuals, however, the position of the stars at the moment of their birth leaves a lasting impression. (p.39)"</Explanation>
+</OptionRule>
+</DATA_OPTION_RULE>
 </DATA_BOOK>

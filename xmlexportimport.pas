@@ -3537,7 +3537,10 @@ Procedure XmlImport(FileName: String; OnlyPrimary: Boolean; OnlyCode: Boolean; C
                           end;
                           Node := XmlElement(Node.NextSibling);
                         end;
-                      if LangueDef = ConstAnglais then
+                      // Toggle .INI par livre (A FAIRE.txt "TOGGLE .INI PAR LIVRE",
+                      // CONTEXT.md 2.89, 22/09/2026) : si l option signes astraux est
+                      // desactivee pour ce livre, le signe n est jamais charge.
+                      if (LangueDef = ConstAnglais) and not OptionDesactivee(Livre, ConstOptionStarSign) then
                         begin
                           ListSigneAstral.Add(PSigneAstral);
                           Inc(NbSigneAstral);
@@ -3648,7 +3651,12 @@ Procedure XmlImport(FileName: String; OnlyPrimary: Boolean; OnlyCode: Boolean; C
                           Node := XmlElement(Node.NextSibling);
                         end;
 
-                      if LangueDef = ConstAnglais then
+                      // Toggle .INI par livre (A FAIRE.txt "TOGGLE .INI PAR LIVRE",
+                      // CONTEXT.md 2.89, 22/09/2026) : si l option carriere alternative
+                      // est desactivee pour ce livre, la regle n est jamais chargee (la
+                      // table de tirage associee, ci-dessous, reste alors orpheline mais
+                      // inoffensive - rien ne la referencera plus).
+                      if (LangueDef = ConstAnglais) and not OptionDesactivee(Livre, ConstOptionCareerAlt) then
                         begin
                           ListRegle.add(PRegle);
                           inc(NbRegle);
@@ -3698,7 +3706,10 @@ Procedure XmlImport(FileName: String; OnlyPrimary: Boolean; OnlyCode: Boolean; C
                           Node := XmlElement(Node.NextSibling);
                         end;
 
-                      if LangueDef = ConstAnglais then
+                      // Meme toggle que la regle elle-meme ci-dessus (ConstOptionCareerAlt) :
+                      // pas la peine de charger une table de tirage rattachee a une regle
+                      // desactivee.
+                      if (LangueDef = ConstAnglais) and not OptionDesactivee(Livre, ConstOptionCareerAlt) then
                         begin
                           ListRegleMetier.add(PRegleMetier);
                           inc(NbRegleMetier);
