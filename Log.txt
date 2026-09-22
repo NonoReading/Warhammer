@@ -6137,3 +6137,31 @@ des le debut de la conception.
 Teste et valide par Nono le 22/09/2026 (compilation propre, XML bien forme).
 Fichiers modifies : DATABASE/WFRP4/BOOK ARCHIVES OF THE EMPIRE I.Xml, BOOK_RULESBOOK.Xml,
 CONTEXT.md, A FAIRE.txt, Log.txt.
+
+22/09/2026 - AUDIT DES 11 DERNIERS LIVRES SUPPLEMENTAIRES : 7 SANS ECART, 4 AVEC ECARTS REELS
+Sous-agents (un par livre), meme methode que les Archives of the Empire : sommaire compare
+section par section au XML, chaque ecart verifie par grep avant d etre signale.
+AUCUN ECART : Parravonese/Strigany/Signaller (deja clos §2.85, confirme), Lords of Naggaroth,
+Middenheim, Salzenmund (seul point deja connu : mines p.123-124), Sea of Claws (seul point
+deja connu : ameliorations de bateau p.97-99), Up in Arms, Winds of Magic (seuls les 3 points
+deja connus : robes, chapitre Magical Artefacts, DATA_CAREER_SUBCHOICE).
+ECARTS REELS TROUVES :
+- Enemy in Shadows Companion : chapitre 9 "The Purple Hand" (p.78-85), ~22 sorts du culte de
+  Tzeentch, le talent Suffused with Magic et 3 creatures Daemon, absents du XML. Deja note
+  dans CONTEXT.md, confirmation chiffree seulement.
+- The Horned Rat Companion : Skaven Armoury (p.32-40), Skaven Magic (p.42-49), Skaven
+  Bestiary (p.50-52) et 3 creatures de montagne (p.72-73) absents. La carriere Ironbreaker
+  reste conforme (deja reauditee le 29/08).
+- Death on the Reik Companion : 12 sorts du Lore of Tzeentch (p.98-99, deja pressenti) et,
+  NOUVEAU, la table Boat-Mounted Weapons (8 armes montees sur bateau, p.68), jamais reperee
+  jusqu ici.
+- Green iz Best : UN BUG TROUVE ET CORRIGE - formule de Blessures du Goblin commun cassee
+  dans BOOK_GREEN_IZ_BEST.Xml ("0xBATTR_Sx1xBATTR_T+1xBATTR_WP", "+" manquant et coefficient
+  T=1 au lieu de 2), reperee par comparaison directe avec le Gobelin nocturne du meme fichier
+  qui porte la bonne formule ("0xBATTR_S+2xBATTR_T+1xBATTR_WP" = (2xTB)+WPB, conforme au
+  livre p.216). Corrigee. Restent : armes orques/gobelines (p.352-382) jamais saisies, et
+  generateur de noms (p.273-285) pas encore etendu a ce livre (limite generale du chantier
+  §2.87, pas specifique).
+Chantier "AUDIT DES TXT" quasi clos : ne reste que le Rulesbook (FR+EN, ~2600 identifiants
+cote anglais), a traiter a part vu sa taille.
+Fichiers modifies : DATABASE/WFRP4/BOOK_GREEN_IZ_BEST.Xml, CONTEXT.md, A FAIRE.txt, Log.txt.

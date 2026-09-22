@@ -1020,7 +1020,7 @@
 <Attribut name="RULES-ATTR_Fel">"2d10+10"</Attribut>
 <Attribut name="RULES-ATTR_Fate">"1"</Attribut>
 <Attribut name="RULES-ATTR_Resil">"1"</Attribut>
-<Attribut name="RULES-ATTR_Wound">"0xBATTR_Sx1xBATTR_T+1xBATTR_WP"</Attribut>
+<Attribut name="RULES-ATTR_Wound">"0xBATTR_S+2xBATTR_T+1xBATTR_WP"</Attribut>
 <Attribut name="RULES-ATTR_Supp">"3"</Attribut>
 <Attribut name="RULES-ATTR_Move">"4"</Attribut>
 </SUBCHAPTER_ATTR>
