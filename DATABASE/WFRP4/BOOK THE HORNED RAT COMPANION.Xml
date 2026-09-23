@@ -29,6 +29,40 @@
 <PDF>""</PDF>
 <Test language="ENGLISH">"Any Melee Test involving a Tail weapon"</Test>
 </Talent>
+<!-- Skaven Magic, ch.4 (p.41-49) : trois lores propres, memes conventions que RULES-T0172_* (Enemy in Shadows Companion) - talent generique, Generique vers RULES-T0088_*, TypSpell "Domain Magic" sur les sorts. -->
+<Talent id="HORNE-T0197">
+<Attribut>""</Attribut>
+<Description language="ENGLISH">"Arcane Magic (Ruin)"</Description>
+<Short language="ENGLISH">""</Short>
+<Explanation language="ENGLISH">"The Lore of Ruin channels the terrible power of Warpstone to lash out at targets, often incinerating them whole. It is focused on destruction and disintegration, and is feared throughout Skavendom and beyond. Whenever you successfully cast a spell from the Lore of Ruin, you may add +1 SL to any Initiative- or Agility-based Tests for the next 1d10 rounds."</Explanation>
+<Skill>""</Skill>
+<Max>"1"</Max>
+<PDF>""</PDF>
+<Test language="ENGLISH">""</Test>
+<Generique>"RULES-T0088_*"</Generique>
+</Talent>
+<Talent id="HORNE-T0198">
+<Attribut>""</Attribut>
+<Description language="ENGLISH">"Arcane Magic (Plague)"</Description>
+<Short language="ENGLISH">""</Short>
+<Explanation language="ENGLISH">"The Lore of Plague draws its power from rot and decay, focusing raw Dhar into more refined forms of disease and corruption. Its spells corrupt all that they touch. Whenever you successfully cast a spell from the Lore of Plague, you may gain the Distracting Creature Trait for the next 1d10 rounds."</Explanation>
+<Skill>""</Skill>
+<Max>"1"</Max>
+<PDF>""</PDF>
+<Test language="ENGLISH">""</Test>
+<Generique>"RULES-T0088_*"</Generique>
+</Talent>
+<Talent id="HORNE-T0199">
+<Attribut>""</Attribut>
+<Description language="ENGLISH">"Arcane Magic (Stealth)"</Description>
+<Short language="ENGLISH">""</Short>
+<Explanation language="ENGLISH">"The Lore of Stealth draws on the power of Dhar, infused with a particularly large portion of Ulgu, to confuse and conceal, specialising in concealing the sorcerer from prying eyes. Whenever you successfully cast a spell from the Lore of Stealth, you gain the Stealthy Creature Trait for 1d10 rounds."</Explanation>
+<Skill>""</Skill>
+<Max>"1"</Max>
+<PDF>""</PDF>
+<Test language="ENGLISH">""</Test>
+<Generique>"RULES-T0088_*"</Generique>
+</Talent>
 </DATA_TALENT>
 <DATA_CAREER>
 <Career id="HORNE-WORK117">
@@ -165,6 +199,374 @@
 </SUBCHAPTER_ITEM>
 </Career>
 </DATA_CAREER>
+<DATA_SPELL>
+<!-- Skaven Magic, ch.4 (p.41-49). Petty Magic (RULES-T0089) : 4 sorts. Trois Lores propres
+     (Ruin/Plague/Stealth, talents HORNE-T0197/198/199) : 13+10+9 sorts, TypSpell "Domain Magic",
+     meme convention que RULES-T0088_TZEENTCH (Death on the Reik Companion). Skaven Bestiary
+     (p.49-52, creatures adverses) et Lore of Ruin/Stealth restants laisses de cote pour l'instant :
+     seule la Lore of Plague etait demandee, mais Ruin et Stealth sont saisis dans le meme mouvement
+     car sur les memes pages avec la meme structure. -->
+<Sort id="HORNE-PETTY_01">
+<Description language="ENGLISH">"Favour of the Horned Rat"</Description>
+<Explanation language="ENGLISH">"You gain an additional Fortune Point for the duration of the spell. You may only benefit from this spell once for every 13 hour period. Attempting to use this spell again before the full 13 hours have passed draws the disfavour of the Horned Rat - the effects of this remain up to the GM."</Explanation>
+<Target>"You"</Target>
+<Duration>"13 hours"</Duration>
+<Range>"You"</Range>
+<Talent>"RULES-T0089"</Talent>
+<Level>"0"</Level>
+<TypSpell>"Minor Magic"</TypSpell>
+</Sort>
+<Sort id="HORNE-PETTY_02">
+<Description language="ENGLISH">"Ghostly Flame"</Description>
+<Explanation language="ENGLISH">"You conjure a small blob of glowing green fire out of thin air, dripping viscous fluid as it burns. On subsequent turns, you may end this spell by using your action to hurl the fiery mess at an opponent. Use Ranged (Throwing) and treat the projectile as having Damage equal to your Strength Bonus plus Willpower Bonus. Otherwise, this petty spell generates light equivalent to a torch and remains for one hour before sputtering out."</Explanation>
+<Target>"1"</Target>
+<Duration>"1 hour or Instant (see desc)"</Duration>
+<Range>"(ATTR_WP)m"</Range>
+<Talent>"RULES-T0089"</Talent>
+<Level>"0"</Level>
+<TypSpell>"Minor Magic"</TypSpell>
+</Sort>
+<Sort id="HORNE-PETTY_03">
+<Description language="ENGLISH">"Mark of the Horned Rat"</Description>
+<Explanation language="ENGLISH">"The target must succeed on a Challenging (+0) Cool Test or gain an unsightly, weeping sore on their forehead or the back of their hand. The blemish remains for 1d10 hours and imposes a -10 penalty on all Fellowship Tests for the duration. Grey Seers use this spell to mark their messengers. Despite the Fellowship penalty, those Skaven bearing it are usually allowed to pass relatively freely through Skaven tunnels and settlements."</Explanation>
+<Target>"1"</Target>
+<Duration>"1d10 hours"</Duration>
+<Range>"(BATTR_WP)m"</Range>
+<Talent>"RULES-T0089"</Talent>
+<Level>"0"</Level>
+<TypSpell>"Minor Magic"</TypSpell>
+</Sort>
+<Sort id="HORNE-PETTY_04">
+<Description language="ENGLISH">"Rat Thrall"</Description>
+<Explanation language="ENGLISH">"You summon an ordinary brown rat. For the next 1d10 hours, you may communicate with the rat as if you shared a common language, and it must obey all of your commands even if they would cause its own death. Rat thralls can fetch small objects, gnaw through ropes, and other simple tasks that an ordinary rat could perform, but such requests are limited by the rat's animal intelligence."</Explanation>
+<Target>"1 (see desc)"</Target>
+<Duration>"1d10 hours"</Duration>
+<Range>"(ATTR_WP)m"</Range>
+<Talent>"RULES-T0089"</Talent>
+<Level>"0"</Level>
+<TypSpell>"Minor Magic"</TypSpell>
+</Sort>
+<Sort id="HORNE-RUIN_01">
+<Description language="ENGLISH">"Vector"</Description>
+<Explanation language="ENGLISH">"The target must succeed on a Challenging (+0) Endurance Test or suffer a -20 penalty to all Tests made to resist disease for 24 hours. Targets with Resistance (Disease) may use that Talent to resist this spell."</Explanation>
+<Target>"1"</Target>
+<Duration>"24 hours"</Duration>
+<Range>"(BATTR_WP)m"</Range>
+<Talent>"HORNE-T0197"</Talent>
+<Level>"0"</Level>
+<TypSpell>"Domain Magic"</TypSpell>
+</Sort>
+<Sort id="HORNE-RUIN_02">
+<Description language="ENGLISH">"Wrack"</Description>
+<Explanation language="ENGLISH">"You cause a spark of warp-energy to fly from your outstretched fingers, striking a single target with a jolt of searing pain. The target must make a Challenging (+0) Endurance Test or gain one Stunned Condition."</Explanation>
+<Target>"1"</Target>
+<Duration>"Instant"</Duration>
+<Range>"(BATTR_WP)m"</Range>
+<Talent>"HORNE-T0197"</Talent>
+<Level>"0"</Level>
+<TypSpell>"Domain Magic"</TypSpell>
+</Sort>
+<Sort id="HORNE-RUIN_03">
+<Description language="ENGLISH">"Death Frenzy"</Description>
+<Explanation language="ENGLISH">"You fill a Skaven with a horrible ravenous hunger, causing foam to fleck their mouth and their eyes to roll madly in their head. Your target becomes subject to Frenzy for the duration of the spell. Unwilling targets may attempt to resist these effects by making a Challenging (+0) Cool Test. Those that succeed suffer 1 Wound as they gnaw on their own extremities to distract from the spell's call to violence."</Explanation>
+<Target>"1"</Target>
+<Duration>"(BATTR_WP) Rounds+"</Duration>
+<Range>"Touch"</Range>
+<Talent>"HORNE-T0197"</Talent>
+<Level>"5"</Level>
+<TypSpell>"Domain Magic"</TypSpell>
+</Sort>
+<Sort id="HORNE-RUIN_04">
+<Description language="ENGLISH">"Musk of Terror"</Description>
+<Explanation language="ENGLISH">"You summon a large cloud of choking musk. Any creature within the cloud is exposed to a Terror (1) effect, or Terror (2) for Skaven, as the deadly musk fills their minds with thoughts of fear. Victims perceive the caster as the source of this Terror."</Explanation>
+<Target>"AoE (BATTR_WP)m"</Target>
+<Duration>"(BATTR_WP) Rounds+"</Duration>
+<Range>"(ATTR_WP)m"</Range>
+<Talent>"HORNE-T0197"</Talent>
+<Level>"9"</Level>
+<TypSpell>"Domain Magic"</TypSpell>
+</Sort>
+<Sort id="HORNE-RUIN_05">
+<Description language="ENGLISH">"Skitterleap"</Description>
+<Explanation language="ENGLISH">"With a sound of inrushing air and a puff of brimstone-scented smoke, you teleport yourself or one ally you can touch to any location within Willpower yards. If targeting an unwilling target, resolve the touch attempt using the rules for casting a touch spell in combat, and the victim may make a Difficult (-10) Cool Test to change their destination by +SL yards. The target must be Average size or smaller. You must be able to see the destination, and this location must be free of objects and creatures or the spell fails."</Explanation>
+<Target>"1"</Target>
+<Duration>"Instant"</Duration>
+<Range>"Touch"</Range>
+<Talent>"HORNE-T0197"</Talent>
+<Level>"6"</Level>
+<TypSpell>"Domain Magic"</TypSpell>
+</Sort>
+<Sort id="HORNE-RUIN_06">
+<Description language="ENGLISH">"Crack's Call"</Description>
+<Explanation language="ENGLISH">"With an arcane incantation, you stamp your paw and the very ground splits asunder. A 1-yard-wide crack appears at your feet and runs a number of yards equal to your Willpower in a straight line in any direction within your line of sight. Any creatures of size Average or smaller in its path must make an Average (+20) Dodge Test to leap out of the way. Those who fail fall a number of yards equal to your Willpower Bonus plus the SL of your Casting Test, and can do nothing except try to climb out. Targets who fall into the crack are Prone. Walls undermined by this spell likely collapse, and unfortified buildings are damaged severely. If you score +4 SL or higher, you may increase the width of the crack to 2 yards. Large creatures can now fall into the crack, even the sturdiest walls collapse, unfortified buildings tumble down, and fortified structures are severely damaged."</Explanation>
+<Target>"AoE (ATTR_WP)m"</Target>
+<Duration>"Instant"</Duration>
+<Range>"You"</Range>
+<Talent>"HORNE-T0197"</Talent>
+<Level>"11"</Level>
+<TypSpell>"Domain Magic"</TypSpell>
+</Sort>
+<Sort id="HORNE-RUIN_07">
+<Description language="ENGLISH">"Crackling Doom"</Description>
+<Explanation language="ENGLISH">"You send a single crackling arc of green energy at the target. Crackling Doom is a magic missile with a Damage of +4. In addition, anyone damaged by this spell must make a successful Challenging (+0) Endurance Test or gain one Stunned Condition for every SL on the Casting Test."</Explanation>
+<Target>"1"</Target>
+<Duration>"Instant"</Duration>
+<Range>"(BATTR_WP)m"</Range>
+<Talent>"HORNE-T0197"</Talent>
+<Level>"5"</Level>
+<TypSpell>"Domain Magic"</TypSpell>
+</Sort>
+<Sort id="HORNE-RUIN_08">
+<Description language="ENGLISH">"Flensing Ruin"</Description>
+<Explanation language="ENGLISH">"Green ribbons of warp-energy tear the flesh from the target's bones. This is a magic missile with a Damage of +4 which ignores both armour and Toughness Bonus."</Explanation>
+<Target>"1"</Target>
+<Duration>"Instant"</Duration>
+<Range>"(BATTR_WP)m"</Range>
+<Talent>"HORNE-T0197"</Talent>
+<Level>"6"</Level>
+<TypSpell>"Domain Magic"</TypSpell>
+</Sort>
+<Sort id="HORNE-RUIN_09">
+<Description language="ENGLISH">"Howling Warpgale"</Description>
+<Explanation language="ENGLISH">"You gesture twitchingly to the skies and fierce hurricane gales begin to swirl around you, filling a radius equal to your Willpower in yards. Enemies cannot fly in the howling winds, and ranged attacks into or out of the affected area suffer a -10 penalty. Your allies are unaffected by either effect as you divert the unnatural winds around them."</Explanation>
+<Target>"AoE (ATTR_WP)m"</Target>
+<Duration>"(BATTR_WP) Rounds+"</Duration>
+<Range>"You"</Range>
+<Talent>"HORNE-T0197"</Talent>
+<Level>"7"</Level>
+<TypSpell>"Domain Magic"</TypSpell>
+</Sort>
+<Sort id="HORNE-RUIN_10">
+<Description language="ENGLISH">"Scorch"</Description>
+<Explanation language="ENGLISH">"You thrust your paws into the ground while chittering the necessary incantations, and a gout of green flame bursts out of the earth at a spot you designate. This is a magic missile with a Damage of +10. Anyone damaged by the flame suffers one Ablaze Condition. Being set ablaze by the hideous Warpfire is a Minor Exposure to Corruption."</Explanation>
+<Target>"AoE (BATTR_WP)m"</Target>
+<Duration>"Instant"</Duration>
+<Range>"(ATTR_WP)m"</Range>
+<Talent>"HORNE-T0197"</Talent>
+<Level>"8"</Level>
+<TypSpell>"Domain Magic"</TypSpell>
+</Sort>
+<Sort id="HORNE-RUIN_11">
+<Description language="ENGLISH">"Warp Lightning"</Description>
+<Explanation language="ENGLISH">"You send a powerful, sizzling bolt of Warp lightning at a foe. This is a magic missile with a Damage of +11. If the target hit location was covered in metal armour, ignore the armour's AP and instead add it to the damage inflicted. If you roll a Critical Success on your Casting Test, the Warp-energy overpowers you briefly. In addition to any other effects of the critical casting, you suffer a Damage +1 hit."</Explanation>
+<Target>"1"</Target>
+<Duration>"Instant"</Duration>
+<Range>"(ATTR_WP)m"</Range>
+<Talent>"HORNE-T0197"</Talent>
+<Level>"7"</Level>
+<TypSpell>"Domain Magic"</TypSpell>
+</Sort>
+<Sort id="HORNE-RUIN_12">
+<Description language="ENGLISH">"Warp Shield"</Description>
+<Explanation language="ENGLISH">"You summon a flare of Warp-energy, shaping it around yourself as a protective shield. While the spell is in effect, all hit locations gain +5 AP. In addition, any creature that touches you - including successfully attacking you with their bare hands or with a hand-held weapon made of metal - takes a hit with Damage equal to 5 + your Willpower Bonus. This hit strikes whichever limb was used to attack you and ignores AP from metal armour."</Explanation>
+<Target>"You"</Target>
+<Duration>"(BATTR_WP) Rounds+"</Duration>
+<Range>"You"</Range>
+<Talent>"HORNE-T0197"</Talent>
+<Level>"6"</Level>
+<TypSpell>"Domain Magic"</TypSpell>
+</Sort>
+<Sort id="HORNE-RUIN_13">
+<Description language="ENGLISH">"Warp Storm"</Description>
+<Explanation language="ENGLISH">"You summon a storm of Warp lightning covering a radius equal to your Willpower Bonus in yards. Each round while the spell is in effect, all creatures within the storm suffer a Damage +10 hit to the highest point of their body (usually their head) that ignores AP from metal armour. If the caster wishes, they may use their action to move the ongoing storm to any location within Willpower yards."</Explanation>
+<Target>"AoE (BATTR_WP)m"</Target>
+<Duration>"(BATTR_WP) Rounds"</Duration>
+<Range>"(ATTR_WP)m"</Range>
+<Talent>"HORNE-T0197"</Talent>
+<Level>"12"</Level>
+<TypSpell>"Domain Magic"</TypSpell>
+</Sort>
+<Sort id="HORNE-PLAGUE_01">
+<Description language="ENGLISH">"Pestilent Breath"</Description>
+<Explanation language="ENGLISH">"You exhale a pestilent, poisonous cloud in a line 2 yards wide up to the range of the spell. Anyone within the noxious fumes' reach must succeed at a Difficult (-10) Endurance Test or suffer a hit with Damage equal to your Willpower Bonus, which ignores armour and Toughness Bonus. For each additional +2 SL, you may extend the width of the line by 1 yard."</Explanation>
+<Target>"AoE (2-yard-wide line)"</Target>
+<Duration>"Instant"</Duration>
+<Range>"(BATTR_WP)m"</Range>
+<Talent>"HORNE-T0198"</Talent>
+<Level>"8"</Level>
+<TypSpell>"Domain Magic"</TypSpell>
+</Sort>
+<Sort id="HORNE-PLAGUE_02">
+<Description language="ENGLISH">"Poisonous Pustule"</Description>
+<Explanation language="ENGLISH">"You create a pulsing, seeping pustule on one of your extremities. When lanced and drained (which inflicts 1 Wound upon you, regardless of Toughness Bonus and armour), you can spread the pus on to a melee weapon. If a weapon coated with this toxic secretion inflicts at least 1 Wound, it deals an additional number of Wounds equal to your Willpower Bonus unless the target succeeds at a Hard (-20) Endurance Test. The pustule forms in a matter of seconds, and may be left in place for any length of time before it is drained. Once drained, the duration indicates how long the toxic pus remains effective. You may have a number of active pustules equal to your Toughness Bonus."</Explanation>
+<Target>"You"</Target>
+<Duration>"(BATTR_WP) hours"</Duration>
+<Range>"You"</Range>
+<Talent>"HORNE-T0198"</Talent>
+<Level>"5"</Level>
+<TypSpell>"Domain Magic"</TypSpell>
+</Sort>
+<Sort id="HORNE-PLAGUE_03">
+<Description language="ENGLISH">"Bless with Filth"</Description>
+<Explanation language="ENGLISH">"A foul mist wraps around one melee weapon you touch, or up to three items of ammunition for ranged or throwing weapons. The infused objects immediately begin to drip with toxic fluid. While the spell is in effect, all damaging hits with the weapon cause a Poisoned Condition in addition to normal damage."</Explanation>
+<Target>"1"</Target>
+<Duration>"(BATTR_WP) minutes+"</Duration>
+<Range>"Touch"</Range>
+<Talent>"HORNE-T0198"</Talent>
+<Level>"6"</Level>
+<TypSpell>"Domain Magic"</TypSpell>
+</Sort>
+<Sort id="HORNE-PLAGUE_04">
+<Description language="ENGLISH">"Cloud of Corruption"</Description>
+<Explanation language="ENGLISH">"You release a stinking blast of diseased fury. Every creature within 5 yards of you must make a Challenging (+0) Endurance Test or gain 1 Poisoned Condition. In addition, each attack you make for the next Willpower Bonus rounds gains the Infected Trait."</Explanation>
+<Target>"AoE (5-yard radius)"</Target>
+<Duration>"Instant"</Duration>
+<Range>"You"</Range>
+<Talent>"HORNE-T0198"</Talent>
+<Level>"7"</Level>
+<TypSpell>"Domain Magic"</TypSpell>
+</Sort>
+<Sort id="HORNE-PLAGUE_05">
+<Description language="ENGLISH">"Mantle of Contagion"</Description>
+<Explanation language="ENGLISH">"You taint a piece of food or clothing with the Black Plague, which remains infectious for the duration of the spell. Anyone who consumes the tainted food or wears the piece of clothing for a minute or more is exposed to the disease."</Explanation>
+<Target>"1"</Target>
+<Duration>"(BATTR_WP) days"</Duration>
+<Range>"Touch"</Range>
+<Talent>"HORNE-T0198"</Talent>
+<Level>"4"</Level>
+<TypSpell>"Domain Magic"</TypSpell>
+</Sort>
+<Sort id="HORNE-PLAGUE_06">
+<Description language="ENGLISH">"Putrefy"</Description>
+<Explanation language="ENGLISH">"With a flourish and a curse, you cause all food within the area of effect to rot and decay, rendering it totally inedible. Any creature that eats the infected food is automatically exposed to the Galloping Trots. This spell has been used with great effect to induce famine in surface populations."</Explanation>
+<Target>"AoE (BATTR_WP)m"</Target>
+<Duration>"Instant"</Duration>
+<Range>"(ATTR_WP)m"</Range>
+<Talent>"HORNE-T0198"</Talent>
+<Level>"8"</Level>
+<TypSpell>"Domain Magic"</TypSpell>
+</Sort>
+<Sort id="HORNE-PLAGUE_07">
+<Description language="ENGLISH">"Toxic Rain"</Description>
+<Explanation language="ENGLISH">"You conjure a poisonous cloud of toxic smoke and moisture. It drifts a dozen feet or more above the ground. On the round after the spell is cast, the cloud rains a lethal downpour. All creatures in the area of effect must succeed on a Difficult (-10) Toughness Test each round or loose 3 Wounds, ignoring armour and Toughness Bonus. If a Character loses 6 or more Wounds to this spell in a single encounter, they also gain an Unconscious Condition. As an action, the caster may move the area of effect of this spell to any point within Willpower yards of their location."</Explanation>
+<Target>"AoE (BATTR_WP)m"</Target>
+<Duration>"(BATTR_WP) Rounds+"</Duration>
+<Range>"(ATTR_WP)m"</Range>
+<Talent>"HORNE-T0198"</Talent>
+<Level>"10"</Level>
+<TypSpell>"Domain Magic"</TypSpell>
+</Sort>
+<Sort id="HORNE-PLAGUE_08">
+<Description language="ENGLISH">"Veil of Flies"</Description>
+<Explanation language="ENGLISH">"With a curse and a flailing of your arms, you summon a cloud of gnats and biting flies. They swarm about you, filling the air in every direction for a distance equal to your Willpower Bonus in yards. The swarm moves with you for as long as the spell is in effect. Creatures other than yourself within the swarm suffer a -20 penalty to all Tests from the distraction. In addition, the cloud makes it hard for enemies to see you, imposing a further -20 penalty to all ranged attacks against you."</Explanation>
+<Target>"AoE (BATTR_WP)m"</Target>
+<Duration>"(BATTR_WP) Rounds+"</Duration>
+<Range>"You"</Range>
+<Talent>"HORNE-T0198"</Talent>
+<Level>"6"</Level>
+<TypSpell>"Domain Magic"</TypSpell>
+</Sort>
+<Sort id="HORNE-PLAGUE_09">
+<Description language="ENGLISH">"Weeping Wound"</Description>
+<Explanation language="ENGLISH">"While the spell is in effect, every Wound suffered by the target counts as a Minor Infection. All Endurance Tests to avoid Festering Wounds suffer a -10 penalty for each SL on your Casting Test. Additionally, if the target would gain a Bleeding Condition, they gain two instead."</Explanation>
+<Target>"1"</Target>
+<Duration>"(BATTR_WP) Rounds"</Duration>
+<Range>"(ATTR_WP)m"</Range>
+<Talent>"HORNE-T0198"</Talent>
+<Level>"9"</Level>
+<TypSpell>"Domain Magic"</TypSpell>
+</Sort>
+<Sort id="HORNE-PLAGUE_10">
+<Description language="ENGLISH">"Wither"</Description>
+<Explanation language="ENGLISH">"Chanting passages from the Liber Bubonicus, you point a scabrous paw at the target, who must make a successful Challenging (+0) Endurance Test or lose 1 point of Toughness for each SL on your Casting Test. Creatures whose Toughness is reduced to 0 are killed. Characters can spend a Fate Point to be reduced to 1 Toughness and 0 Wounds instead. Characters who lose enough Toughness for their Toughness Bonus to drop must reduce their Wounds total appropriately. Victims who survive regain 1 point of Toughness per day of complete rest. If treated with any form of healing capable of removing a Critical Wound, the victim recovers another 1d10 lost Toughness."</Explanation>
+<Target>"1"</Target>
+<Duration>"Instant"</Duration>
+<Range>"(ATTR_WP)m"</Range>
+<Talent>"HORNE-T0198"</Talent>
+<Level>"6"</Level>
+<TypSpell>"Domain Magic"</TypSpell>
+</Sort>
+<Sort id="HORNE-STEALTH_01">
+<Description language="ENGLISH">"Swiftscamper"</Description>
+<Explanation language="ENGLISH">"You increase your Movement Characteristic by an amount equal to your Willpower Bonus. For every +2 SL, you may increase your Movement Characteristic by an additional point."</Explanation>
+<Target>"You"</Target>
+<Duration>"(BATTR_WP) + SL Rounds"</Duration>
+<Range>"You"</Range>
+<Talent>"HORNE-T0199"</Talent>
+<Level>"4"</Level>
+<TypSpell>"Domain Magic"</TypSpell>
+</Sort>
+<Sort id="HORNE-STEALTH_02">
+<Description language="ENGLISH">"Armour of Darkness"</Description>
+<Explanation language="ENGLISH">"You solidify the shadows around your body. In addition to making you harder to see in low-light conditions, this shadow armour also protects you from harm. You gain an additional 1 AP to each location, and a +20 bonus to any Stealth Tests you make in dim light."</Explanation>
+<Target>"You"</Target>
+<Duration>"(BATTR_WP) minutes"</Duration>
+<Range>"You"</Range>
+<Talent>"HORNE-T0199"</Talent>
+<Level>"6"</Level>
+<TypSpell>"Domain Magic"</TypSpell>
+</Sort>
+<Sort id="HORNE-STEALTH_03">
+<Description language="ENGLISH">"Black Whirlwind"</Description>
+<Explanation language="ENGLISH">"You summon a putrid whirlwind of vile smoke and stinging ash. The whirlwind moves up to 10 yards per round in any direction you wish. This does not require any action on your part beyond a few whispered squeals. Those affected by the whirlwind must succeed on a Challenging (+0) Endurance Test or suffer a -20 penalty on all Weapon Skill, Ballistic Skill, and Agility Tests, and to any Perception Tests involving sight, for the next 1d10 minutes."</Explanation>
+<Target>"AoE (BATTR_WP)m"</Target>
+<Duration>"(BATTR_WP) Rounds+"</Duration>
+<Range>"(ATTR_WP)m"</Range>
+<Talent>"HORNE-T0199"</Talent>
+<Level>"12"</Level>
+<TypSpell>"Domain Magic"</TypSpell>
+</Sort>
+<Sort id="HORNE-STEALTH_04">
+<Description language="ENGLISH">"Buoyant Passage"</Description>
+<Explanation language="ENGLISH">"You become as buoyant as a piece of balsa wood, allowing you to tread over liquid surfaces like water, sewage, or oil as if they were solid ground. This spell also prevents tracks from forming in soft earth, snow, mud, or similar and any attempt to track you using such signs automatically fails."</Explanation>
+<Target>"You"</Target>
+<Duration>"(BATTR_WP) minutes"</Duration>
+<Range>"You"</Range>
+<Talent>"HORNE-T0199"</Talent>
+<Level>"6"</Level>
+<TypSpell>"Domain Magic"</TypSpell>
+</Sort>
+<Sort id="HORNE-STEALTH_05">
+<Description language="ENGLISH">"Flash-Bang"</Description>
+<Explanation language="ENGLISH">"You gesture with one paw and create a bright, loud explosion. Every creature (not including yourself) within the area of effect must make a successful Challenging (+0) Endurance Test or gain one Blinded and one Stunned Condition for each level of failure. On a Critical failure, the victim gains one additional Stunned Condition. This spell does not affect anyone with the Arcane Magic (Stealth) Talent."</Explanation>
+<Target>"AoE (BATTR_WP)m"</Target>
+<Duration>"Instant"</Duration>
+<Range>"You"</Range>
+<Talent>"HORNE-T0199"</Talent>
+<Level>"6"</Level>
+<TypSpell>"Domain Magic"</TypSpell>
+</Sort>
+<Sort id="HORNE-STEALTH_06">
+<Description language="ENGLISH">"Pelt of the Assassin"</Description>
+<Explanation language="ENGLISH">"By mimicking the ever-changing nature of raw Warpstone, you alter the structure of your fur so that it changes colour to match your surroundings. When perfectly still, you gain a +40 bonus to all Stealth Tests."</Explanation>
+<Target>"You"</Target>
+<Duration>"(BATTR_WP) minutes+"</Duration>
+<Range>"You"</Range>
+<Talent>"HORNE-T0199"</Talent>
+<Level>"8"</Level>
+<TypSpell>"Domain Magic"</TypSpell>
+</Sort>
+<Sort id="HORNE-STEALTH_07">
+<Description language="ENGLISH">"Stickypaws"</Description>
+<Explanation language="ENGLISH">"You gain the Wallcrawler Trait for the duration of the spell. Objects you carry or wear are still affected by gravity and fall to the ground if dropped."</Explanation>
+<Target>"You"</Target>
+<Duration>"(BATTR_WP) minutes"</Duration>
+<Range>"You"</Range>
+<Talent>"HORNE-T0199"</Talent>
+<Level>"8"</Level>
+<TypSpell>"Domain Magic"</TypSpell>
+</Sort>
+<Sort id="HORNE-STEALTH_08">
+<Description language="ENGLISH">"Traceless Demise"</Description>
+<Explanation language="ENGLISH">"The body of any creature that dies while under the effects of this spell dissolves instantly into a foul-smelling black slime. The slime is briefly highly acidic, and most equipment is rendered barely recognisable as well. Eshin Sorcerers commonly cast Traceless Demise upon assassins before they embark on a mission, ensuring that no Skaven corpses are left behind. Limbs struck from a body before death do not dissolve, even if the victim ultimately dies while under the effects of this spell. Decapitation typically destroys the body but leaves the head intact."</Explanation>
+<Target>"Up to (BATTR_WP) targets"</Target>
+<Duration>"(BATTR_WP) days"</Duration>
+<Range>"(BATTR_WP)m"</Range>
+<Talent>"HORNE-T0199"</Talent>
+<Level>"11"</Level>
+<TypSpell>"Domain Magic"</TypSpell>
+</Sort>
+<Sort id="HORNE-STEALTH_09">
+<Description language="ENGLISH">"Warp Star Infusion"</Description>
+<Explanation language="ENGLISH">"You enchant a number of Throwing Stars equal to your Willpower Bonus, imbuing them with the foul essence of the warp. A target wounded by one of these Stars must make a Hard (-20) Toughness Test or suffer additional Wounds equal to your Willpower Bonus, ignoring armour and Toughness Bonus."</Explanation>
+<Target>"Special"</Target>
+<Duration>"(BATTR_WP) Rounds+"</Duration>
+<Range>"You"</Range>
+<Talent>"HORNE-T0199"</Talent>
+<Level>"8"</Level>
+<TypSpell>"Domain Magic"</TypSpell>
+</Sort>
+</DATA_SPELL>
 <DATA_WEAPON>
 <!-- Skaven Armoury (ch.3, p.32-39). Pas de prix au livre (comme les armes de Cothique) ;
      la table donne "<Clan> only" en guise de disponibilite : RULES-DISPO_EXOTIC pour toutes,

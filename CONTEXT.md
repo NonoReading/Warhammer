@@ -11423,3 +11423,33 @@ final.**
 
 Compile (`lazbuild -B`, 0 erreur) et XML valide (`xml.etree.ElementTree`), teste et valide
 par Nono le 22/09/2026.
+
+### 2.91 The Horned Rat Companion clos : Skaven Magic saisi (ch.4, p.41-49) — terminé (23/09/2026)
+
+Suite et clôture du chantier AUDIT DES TXT sur ce livre (Skaven Armoury déjà saisie plus tôt
+le 23/09, voir Log.txt). Source lue directement dans `LIVRES/The_Horned_Rat_Companion.txt`
+(règle du 03/09/2026 : TXT avant PDF).
+
+36 sorts saisis dans un nouveau `DATA_SPELL` : 4 **Petty Magic** (`HORNE-PETTY_01` à `_04`,
+Talent `RULES-T0089` déjà existant, `TypSpell` "Minor Magic"), **Lore of Ruin** (13 sorts,
+`HORNE-RUIN_01` à `_13`), **Lore of Plague** (10 sorts, `HORNE-PLAGUE_01` à `_10`), **Lore
+of Stealth** (9 sorts, `HORNE-STEALTH_01` à `_09`).
+
+Les trois lores n'avaient pas de talent dans la base : créés `HORNE-T0197` "Arcane Magic
+(Ruin)", `HORNE-T0198` "Arcane Magic (Plague)", `HORNE-T0199` "Arcane Magic (Stealth)" dans
+`DATA_TALENT` du même livre, chacun avec `<Generique>"RULES-T0088_*"</Generique>` — même
+mécanisme que `RULES-T0172_TZEENTCH` créé dans Enemy in Shadows Companion pour la Lore of
+Tzeentch (§2.7x, voir Log.txt 22/09). `TypSpell` "Domain Magic" sur les 32 sorts de lore
+(précédent : `RULES-T0088_FEU` dans `BOOK_RULESBOOK.Xml`).
+
+Conversion des unités du texte anglais vers la convention du projet : "Willpower yards" →
+`(ATTR_WP)m`, "Willpower Bonus yards" → `(BATTR_WP)m`, "Willpower Bonus rounds(+)" →
+`(BATTR_WP) Rounds(+)`. Les durées en heures/jours non basées sur une caractéristique
+restent en texte libre ("13 hours", "24 hours", "1d10 hours").
+
+Écarté, décision reprise de Frostfiend/Djinn (§2.x, 19/09/2026) : Skaven Bestiary
+(5 créatures, p.50-52) et les 3 créatures de montagne (Cliff Spider, Mountain Cat, Great
+Eagle, p.72-73) — aucune créature adverse n'est modélisée dans le programme.
+
+XML pur, aucun code Pascal touché. Compilé, testé dans WinSpell (filtre par livre) et validé
+par Nono le 23/09/2026. **The Horned Rat Companion est clos.**

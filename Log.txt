@@ -6227,3 +6227,27 @@ texte libre pour GetAllArmeBonusLibelle ; Hand n est lu que pour l affichage (Ha
 risque pour une arme de queue).
 Fichiers modifies : DATABASE/WFRP4/BOOK_DEATH_ON_THE_REIK_COMPANION.Xml, DATABASE/WFRP4/BOOK
 THE HORNED RAT COMPANION.Xml, CONTEXT.md, A FAIRE.txt, Log.txt.
+
+23/09/2026 - THE HORNED RAT COMPANION CLOS : SKAVEN MAGIC (CH.4, P.41-49)
+Suite et fin du chantier AUDIT DES TXT sur ce livre (Skaven Armoury deja saisie le 23/09).
+Source relue dans LIVRES/The_Horned_Rat_Companion.txt (regle du 03/09/2026 : TXT avant PDF).
+36 sorts au total : 4 Petty Magic (Favour of the Horned Rat, Ghostly Flame, Mark of the
+Horned Rat, Rat Thrall - HORNE-PETTY_01 a _04, Talent RULES-T0089 deja existant, TypSpell
+"Minor Magic"), Lore of Ruin (13 sorts, HORNE-RUIN_01 a _13), Lore of Plague (10 sorts,
+HORNE-PLAGUE_01 a _10), Lore of Stealth (9 sorts, HORNE-STEALTH_01 a _09).
+Les trois lores n avaient pas de talent existant dans la base : crees HORNE-T0197 "Arcane
+Magic (Ruin)", HORNE-T0198 "Arcane Magic (Plague)", HORNE-T0199 "Arcane Magic (Stealth)",
+chacun avec <Generique>"RULES-T0088_*"</Generique> - meme mecanisme que RULES-T0172_TZEENTCH
+cree dans Enemy in Shadows Companion pour la Lore of Tzeentch. TypSpell "Domain Magic" sur
+les 32 sorts de lore (precedent : RULES-T0088_FEU dans BOOK_RULESBOOK.Xml).
+Conversion des unites du texte anglais vers la convention du projet : "Willpower yards" ->
+"(ATTR_WP)m", "Willpower Bonus yards" -> "(BATTR_WP)m", "Willpower Bonus rounds(+)" ->
+"(BATTR_WP) Rounds(+)". Les durees en heures/jours non basees sur une caracteristique restent
+en texte libre quand elles ne le sont pas ("13 hours", "24 hours", "1d10 hours").
+Ecarte, decision reprise de Frostfiend/Djinn (CONTEXT.md 19/09/2026) : Skaven Bestiary
+(5 creatures, p.50-52) et les 3 creatures de montagne (Cliff Spider, Mountain Cat, Great
+Eagle, p.72-73) - aucune creature adverse n est modelisee dans le programme.
+XML pur, aucun code Pascal touche. Compile, teste dans WinSpell (filtre par livre) et valide
+par Nono le 23/09/2026.
+Fichiers modifies : DATABASE/WFRP4/BOOK THE HORNED RAT COMPANION.Xml, CONTEXT.md,
+A FAIRE.txt, Log.txt.
