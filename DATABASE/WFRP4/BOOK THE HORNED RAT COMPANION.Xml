@@ -17,6 +17,19 @@
 <Text name="HORNE-BOOK THE HORNED RAT COMPANION">"The Horned Rat Companion"</Text>
 </Label>
 </DATA_LABEL>
+<DATA_TALENT>
+<!-- Skaven Armoury (p.34), encadre "New Talent: Tail Fighting". -->
+<Talent id="HORNE-T0196">
+<Attribut>""</Attribut>
+<Description language="ENGLISH">"Tail Fighting"</Description>
+<Short language="ENGLISH">""</Short>
+<Explanation language="ENGLISH">"You possess a tail, and are adept at using it for fine manipulation. You may use your tail for any task that would normally require a hand. Additionally, you may make one additional attack with a suitably designed Tail Weapon on your turn."</Explanation>
+<Skill>""</Skill>
+<Max>"1"</Max>
+<PDF>""</PDF>
+<Test language="ENGLISH">"Any Melee Test involving a Tail weapon"</Test>
+</Talent>
+</DATA_TALENT>
 <DATA_CAREER>
 <Career id="HORNE-WORK117">
 <Description language="ENGLISH">"Ironbreaker"</Description>
@@ -152,6 +165,490 @@
 </SUBCHAPTER_ITEM>
 </Career>
 </DATA_CAREER>
+<DATA_WEAPON>
+<!-- Skaven Armoury (ch.3, p.32-39). Pas de prix au livre (comme les armes de Cothique) ;
+     la table donne "<Clan> only" en guise de disponibilite : RULES-DISPO_EXOTIC pour toutes,
+     la restriction de clan en commentaire (decision Nono 23/09/2026). Nouvelles qualites
+     ZZAP! (HORNE-WEAPB44), Warpstone (_45) et Timer (_46), numerotees apres les plus hauts
+     codes existants pour n entrer en collision avec aucun livre.
+     Regle generale du chapitre, sans champ : toute arme skaven contenant de la Warpstone
+     (arme, munition ou carburant) compte comme une Minor Exposure to Corruption par jour
+     portee hors d un coffre double de plomb. -->
+<!-- MELEE (p.32-34). Portees : Very Short = CLOSE, Short = SHORT, Long = LONG. -->
+<!-- Eshin only. -->
+<Weapon id="HORNE-COMB_BASE_01">
+<Description language="ENGLISH">"Punch Dagger"</Description>
+<Skill>"RULES-COMPCOMB_BASE"</Skill>
+<Damage>"+(BATTR_S)+1"</Damage>
+<Availability>"RULES-DISPO_EXOTIC"</Availability>
+<Reach>"RULES-WEAPR_CLOSE"</Reach>
+<Encumbrance>"0"</Encumbrance>
+<Quality>"RULES-WEAPB08,RULES-WEAPB20"</Quality>
+<Hand>"1"</Hand>
+<Ammunition>"0"</Ammunition>
+</Weapon>
+<!-- Eshin only. Donne aussi +10 a tous les Climb Tests. -->
+<Weapon id="HORNE-COMB_BASE_02">
+<Description language="ENGLISH">"Rat Claws"</Description>
+<Skill>"RULES-COMPCOMB_BASE"</Skill>
+<Damage>"+(BATTR_S)+2"</Damage>
+<Availability>"RULES-DISPO_EXOTIC"</Availability>
+<Reach>"RULES-WEAPR_CLOSE"</Reach>
+<Encumbrance>"0"</Encumbrance>
+<Quality>"RULES-WEAPB08,RULES-WEAPB20"</Quality>
+<Hand>"1"</Hand>
+<Ammunition>"0"</Ammunition>
+</Weapon>
+<!-- Skaven only. Utilisable avec le talent Tail Fighting (HORNE-T0196) : une attaque supplementaire par round. Ne tient pas de main : Hand 0. -->
+<Weapon id="HORNE-COMB_BASE_03">
+<Description language="ENGLISH">"Tail Weapon"</Description>
+<Skill>"RULES-COMPCOMB_BASE"</Skill>
+<Damage>"+(BATTR_S)+1"</Damage>
+<Availability>"RULES-DISPO_EXOTIC"</Availability>
+<Reach>"RULES-WEAPR_SHORT"</Reach>
+<Encumbrance>"0"</Encumbrance>
+<Quality>"RULES-WEAPB09,RULES-WEAPB26"</Quality>
+<Hand>"0"</Hand>
+<Ammunition>"0"</Ammunition>
+</Weapon>
+<!-- Pestilens only. Exposition a la Corruption autour de l encensoir allume : 2 yards Major, 4 Moderate, 8 Minor. Nombre de mains non precise par le livre ("large flail") : 2, comme le Military Flail. -->
+<Weapon id="HORNE-COMB_FLEAU_01">
+<Description language="ENGLISH">"Plague Censer"</Description>
+<Skill>"RULES-COMPCOMB_FLEAU"</Skill>
+<Damage>"+(BATTR_S)+4"</Damage>
+<Availability>"RULES-DISPO_EXOTIC"</Availability>
+<Reach>"RULES-WEAPR_LONG"</Reach>
+<Encumbrance>"3"</Encumbrance>
+<Quality>"RULES-WEAPB09,RULES-WEAPB21,RULES-WEAPB26,RULES-WEAPB25,HORNE-WEAPB45"</Quality>
+<Hand>"2"</Hand>
+<Ammunition>"0"</Ammunition>
+</Weapon>
+<!-- Moulder only. Deux mains, degats de hallebarde, ignore toute armure. -->
+<Weapon id="HORNE-COMB_HAST_01">
+<Description language="ENGLISH">"Beast-Prod"</Description>
+<Skill>"RULES-COMPCOMB_HAST"</Skill>
+<Damage>"+(BATTR_S)+4"</Damage>
+<Availability>"RULES-DISPO_EXOTIC"</Availability>
+<Reach>"RULES-WEAPR_LONG"</Reach>
+<Encumbrance>"3"</Encumbrance>
+<Quality>"HORNE-WEAPB44"</Quality>
+<Hand>"2"</Hand>
+<Ammunition>"0"</Ammunition>
+</Weapon>
+<!-- Skaven only (surtout Moulder). Polearm a deux mains. -->
+<Weapon id="HORNE-COMB_HAST_02">
+<Description language="ENGLISH">"Things-Catcher"</Description>
+<Skill>"RULES-COMPCOMB_HAST"</Skill>
+<Damage>"+(BATTR_S)+2"</Damage>
+<Availability>"RULES-DISPO_EXOTIC"</Availability>
+<Reach>"RULES-WEAPR_LONG"</Reach>
+<Encumbrance>"3"</Encumbrance>
+<Quality>"RULES-WEAPB17"</Quality>
+<Hand>"2"</Hand>
+<Ammunition>"0"</Ammunition>
+</Weapon>
+<!-- Blade of Corruption (p.33, Skaven Blades) : artefact unique de Clan Pestilens, compte comme une Hand Weapon. Blesse : Difficult (-10) Toughness Test ou +3 Damage et 1 Poisoned. Porte par un non-Skaven : Difficult (-10) Toughness Test a chaque combat, chaque echec retire definitivement 1d10 Toughness ; a 0, le porteur se dissout. -->
+<Weapon id="HORNE-COMB_BASE_04">
+<Description language="ENGLISH">"Blade of Corruption"</Description>
+<Skill>"RULES-COMPCOMB_BASE"</Skill>
+<Damage>"+(BATTR_S)+4"</Damage>
+<Availability>"RULES-DISPO_UNIQUE"</Availability>
+<Reach>"RULES-WEAPR_MID"</Reach>
+<Encumbrance>"1"</Encumbrance>
+<Quality>"-"</Quality>
+<Hand>"1"</Hand>
+<Ammunition>"0"</Ammunition>
+</Weapon>
+<!-- A DISTANCE (p.34-38). Portees "SB" ecrites (BATTR_S), comme au Rulebook. -->
+<!-- Moulder only. -->
+<Weapon id="HORNE-ENTRA_01">
+<Description language="ENGLISH">"Electro-Whip"</Description>
+<Skill>"RULES-COMPPROJ_ENTRAV"</Skill>
+<Damage>"+(BATTR_S)+2"</Damage>
+<Availability>"RULES-DISPO_EXOTIC"</Availability>
+<Reach>"6"</Reach>
+<Encumbrance>"0"</Encumbrance>
+<Quality>"HORNE-WEAPB44,RULES-WEAPB17"</Quality>
+<Hand>"1"</Hand>
+<Ammunition>"0"</Ammunition>
+</Weapon>
+<!-- Eshin only. Inflige deux fois plus d Entangled Conditions. -->
+<Weapon id="HORNE-ENTRA_02">
+<Description language="ENGLISH">"Snare-Net"</Description>
+<Skill>"RULES-COMPPROJ_ENTRAV"</Skill>
+<Damage>"0"</Damage>
+<Availability>"RULES-DISPO_EXOTIC"</Availability>
+<Reach>"4"</Reach>
+<Encumbrance>"0"</Encumbrance>
+<Quality>"RULES-WEAPB17"</Quality>
+<Hand>"1"</Hand>
+<Ammunition>"0"</Ammunition>
+</Weapon>
+<!-- Skryre only. Fumble : table Doomrocket (01-33 Dud, +6 Damage sans Blast ; 34-89 Off Course, 2d10 yards a cote ; 90-100 Explosion, 2d10+5 Damage a 5 yards du tireur). -->
+<Weapon id="HORNE-PROJ_ING_01">
+<Description language="ENGLISH">"Doomrocket"</Description>
+<Skill>"RULES-COMPPROJ_ING"</Skill>
+<Damage>"+12"</Damage>
+<Availability>"RULES-DISPO_EXOTIC"</Availability>
+<Reach>"50"</Reach>
+<Encumbrance>"4"</Encumbrance>
+<Quality>"RULES-WEAPB24,RULES-WEAPB21"</Quality>
+<Hand>"2"</Hand>
+<Ammunition>"0"</Ammunition>
+</Weapon>
+<!-- Skryre only. Equipage de deux (Bombardier + Crewvermin) ; Enc 3 pour le tireur seul. Portee minimum 20. Degats et qualites : ceux du Poisoned Wind Globe ou du Death Globe tire. -->
+<Weapon id="HORNE-PROJ_ING_02">
+<Description language="ENGLISH">"Poisoned Wind Mortar"</Description>
+<Skill>"RULES-COMPPROJ_ING"</Skill>
+<Damage>"-"</Damage>
+<Availability>"RULES-DISPO_EXOTIC"</Availability>
+<Reach>"100"</Reach>
+<Encumbrance>"3"</Encumbrance>
+<Quality>"-"</Quality>
+<Hand>"2"</Hand>
+<Ammunition>"0"</Ammunition>
+</Weapon>
+<!-- Skryre only. Equipage de deux ; Enc 3 pour le tireur seul. -->
+<Weapon id="HORNE-PROJ_ING_03">
+<Description language="ENGLISH">"Ratling Gun"</Description>
+<Skill>"RULES-COMPPROJ_ING"</Skill>
+<Damage>"+9"</Damage>
+<Availability>"RULES-DISPO_EXOTIC"</Availability>
+<Reach>"20"</Reach>
+<Encumbrance>"3"</Encumbrance>
+<Quality>"RULES-WEAPB24,RULES-WEAPB23 4"</Quality>
+<Hand>"2"</Hand>
+<Ammunition>"0"</Ammunition>
+</Weapon>
+<!-- Skryre only. Equipage de deux ; Enc 2 pour le tireur seul. Fumble 1d10 : 1 Whompf! (2d10+5 Damage a 5 yards) ; 2-9 Fuel Leak (2 Ablaze a 3 yards, 1 Ablaze a 3-6 yards) ; 10 Phut! (ne tire pas ce round). Touche : Challenging (+0) Endurance Test ou Ablaze. -->
+<Weapon id="HORNE-PROJ_ING_04">
+<Description language="ENGLISH">"Warpfire Thrower"</Description>
+<Skill>"RULES-COMPPROJ_ING"</Skill>
+<Damage>"+12"</Damage>
+<Availability>"RULES-DISPO_EXOTIC"</Availability>
+<Reach>"30"</Reach>
+<Encumbrance>"2"</Encumbrance>
+<Quality>"RULES-WEAPB24,HORNE-WEAPB45"</Quality>
+<Hand>"2"</Hand>
+<Ammunition>"0"</Ammunition>
+</Weapon>
+<!-- Skryre only. Outil de creusement (tunnel de 5 ft a Movement 2), Major Corrupting Influence. Equipage de deux, Enc partagee ; Enc 2 pour le porteur du baton. -->
+<Weapon id="HORNE-PROJ_ING_05">
+<Description language="ENGLISH">"Warp-grinder"</Description>
+<Skill>"RULES-COMPPROJ_ING"</Skill>
+<Damage>"+12"</Damage>
+<Availability>"RULES-DISPO_EXOTIC"</Availability>
+<Reach>"5"</Reach>
+<Encumbrance>"2"</Encumbrance>
+<Quality>"RULES-WEAPB22,RULES-WEAPB28,RULES-WEAPB25,HORNE-WEAPB45"</Quality>
+<Hand>"2"</Hand>
+<Ammunition>"0"</Ammunition>
+</Weapon>
+<!-- Skryre only. Avec poudre et balles ordinaires : portee 72, Damage +5. Fumble 1d10 : 1, l arme explose (Blast 1, degats d un tir reussi) ; 2-10, table Oops! (WFRP p.160). -->
+<Weapon id="HORNE-PROJ_POUDRE_01">
+<Description language="ENGLISH">"Warplock Jezzail"</Description>
+<Skill>"RULES-COMPPROJ_POUDRE"</Skill>
+<Damage>"+9"</Damage>
+<Availability>"RULES-DISPO_EXOTIC"</Availability>
+<Reach>"100"</Reach>
+<Encumbrance>"4"</Encumbrance>
+<Quality>"RULES-WEAPB16,RULES-WEAPB24,RULES-WEAPB14,RULES-WEAPB23 4"</Quality>
+<Hand>"2"</Hand>
+<Ammunition>"0"</Ammunition>
+</Weapon>
+<!-- Skryre only (la table ; le texte ne restreint pas). Fumble : comme le Jezzail. -->
+<Weapon id="HORNE-PROJ_POUDRE_02">
+<Description language="ENGLISH">"Warplock Pistol"</Description>
+<Skill>"RULES-COMPPROJ_POUDRE"</Skill>
+<Damage>"+8"</Damage>
+<Availability>"RULES-DISPO_EXOTIC"</Availability>
+<Reach>"20"</Reach>
+<Encumbrance>"1"</Encumbrance>
+<Quality>"RULES-WEAPB24,RULES-WEAPB13"</Quality>
+<Hand>"1"</Hand>
+<Ammunition>"0"</Ammunition>
+</Weapon>
+<!-- Skryre only. Charge Warpstone Bullet ou Warpstone Buckshot. Fumble : comme le Jezzail. -->
+<Weapon id="HORNE-PROJ_POUDRE_03">
+<Description language="ENGLISH">"Warpmusket"</Description>
+<Skill>"RULES-COMPPROJ_POUDRE"</Skill>
+<Damage>"+8"</Damage>
+<Availability>"RULES-DISPO_EXOTIC"</Availability>
+<Reach>"40"</Reach>
+<Encumbrance>"2"</Encumbrance>
+<Quality>"RULES-WEAPB24,RULES-WEAPB23 2"</Quality>
+<Hand>"2"</Hand>
+<Ammunition>"0"</Ammunition>
+</Weapon>
+<!-- Skryre only. Comme le Poisoned Wind Globe, mais nuage deux fois plus grand, Hard (-20) Toughness Test, et 1d10 Wounds perdues (moins Toughness Bonus, armure ignoree). -->
+<Weapon id="HORNE-PROJ_LANC_01">
+<Description language="ENGLISH">"Death Globe"</Description>
+<Skill>"RULES-COMPPROJ_LANC"</Skill>
+<Damage>"-"</Damage>
+<Availability>"RULES-DISPO_EXOTIC"</Availability>
+<Reach>"(BATTR_S)X2"</Reach>
+<Encumbrance>"1"</Encumbrance>
+<Quality>"-"</Quality>
+<Hand>"1"</Hand>
+<Ammunition>"0"</Ammunition>
+</Weapon>
+<!-- Eshin only. Timer : detonation retardee jusqu a 10 rounds. -->
+<Weapon id="HORNE-PROJ_LANC_02">
+<Description language="ENGLISH">"Infernal Bomb"</Description>
+<Skill>"RULES-COMPPROJ_LANC"</Skill>
+<Damage>"+12"</Damage>
+<Availability>"RULES-DISPO_EXOTIC"</Availability>
+<Reach>"(BATTR_S)"</Reach>
+<Encumbrance>"0"</Encumbrance>
+<Quality>"RULES-WEAPB15 5,RULES-WEAPB24,RULES-WEAPB21,HORNE-WEAPB46"</Quality>
+<Hand>"1"</Hand>
+<Ammunition>"0"</Ammunition>
+</Weapon>
+<!-- Skryre only. Nuage de 3 yards (1d10-1 rounds) : Challenging (+0) Toughness Test par round ou +4 Damage ignorant armure et Toughness. Rate : 1d10, 1 tombe sans casser, 2-9 tombe 1d10 yards trop court, 10 casse aux pieds du lanceur. Piege a fil : Challenging (+0) Perception Test. -->
+<Weapon id="HORNE-PROJ_LANC_03">
+<Description language="ENGLISH">"Poisoned Wind Globe"</Description>
+<Skill>"RULES-COMPPROJ_LANC"</Skill>
+<Damage>"-"</Damage>
+<Availability>"RULES-DISPO_EXOTIC"</Availability>
+<Reach>"(BATTR_S)X3"</Reach>
+<Encumbrance>"0"</Encumbrance>
+<Quality>"-"</Quality>
+<Hand>"1"</Hand>
+<Ammunition>"0"</Ammunition>
+</Weapon>
+<!-- Eshin only. Nuage de 2 yards de rayon, 1d10 rounds (moitie par vent fort), bloque la vue et les tirs. -->
+<Weapon id="HORNE-PROJ_LANC_04">
+<Description language="ENGLISH">"Smoke Bomb"</Description>
+<Skill>"RULES-COMPPROJ_LANC"</Skill>
+<Damage>"-"</Damage>
+<Availability>"RULES-DISPO_EXOTIC"</Availability>
+<Reach>"(BATTR_S)X3"</Reach>
+<Encumbrance>"0"</Encumbrance>
+<Quality>"-"</Quality>
+<Hand>"1"</Hand>
+<Ammunition>"0"</Ammunition>
+</Weapon>
+<!-- Eshin only. Certaines sont des Weeping weapons (fabrication HORNE-QUALITY_02). -->
+<Weapon id="HORNE-PROJ_LANC_05">
+<Description language="ENGLISH">"Warpstone Star"</Description>
+<Skill>"RULES-COMPPROJ_LANC"</Skill>
+<Damage>"+(BATTR_S)+3"</Damage>
+<Availability>"RULES-DISPO_EXOTIC"</Availability>
+<Reach>"(BATTR_S)X2"</Reach>
+<Encumbrance>"0"</Encumbrance>
+<Quality>"RULES-WEAPB10,HORNE-WEAPB45"</Quality>
+<Hand>"1"</Hand>
+<Ammunition>"0"</Ammunition>
+</Weapon>
+<!-- MUNITIONS (p.39). Le nombre entre parentheses du livre va dans Ammunition. -->
+<Weapon id="HORNE-MUNI_01">
+<Description language="ENGLISH">"Jezzail Bullet and Powder"</Description>
+<Skill>"RULES-COMPPROJ_POUDRE"</Skill>
+<Damage>"+2"</Damage>
+<Availability>"RULES-DISPO_EXOTIC"</Availability>
+<Reach>"+20"</Reach>
+<Encumbrance>"0"</Encumbrance>
+<Quality>"RULES-WEAPB12,RULES-WEAPB22,HORNE-WEAPB45"</Quality>
+<Hand>"0"</Hand>
+<Ammunition>"12"</Ammunition>
+</Weapon>
+<Weapon id="HORNE-MUNI_02">
+<Description language="ENGLISH">"Warpstone Bullet and Powder"</Description>
+<Skill>"RULES-COMPPROJ_POUDRE"</Skill>
+<Damage>"+0"</Damage>
+<Availability>"RULES-DISPO_EXOTIC"</Availability>
+<Reach>"+10"</Reach>
+<Encumbrance>"0"</Encumbrance>
+<Quality>"RULES-WEAPB10,RULES-WEAPB22,HORNE-WEAPB45"</Quality>
+<Hand>"0"</Hand>
+<Ammunition>"1"</Ammunition>
+</Weapon>
+<Weapon id="HORNE-MUNI_03">
+<Description language="ENGLISH">"Warpstone Buckshot"</Description>
+<Skill>"RULES-COMPPROJ_POUDRE"</Skill>
+<Damage>"+0"</Damage>
+<Availability>"RULES-DISPO_EXOTIC"</Availability>
+<Reach>"+0"</Reach>
+<Encumbrance>"0"</Encumbrance>
+<Quality>"RULES-WEAPB15 +1,HORNE-WEAPB45"</Quality>
+<Hand>"0"</Hand>
+<Ammunition>"1"</Ammunition>
+</Weapon>
+<!-- Enc des munitions d ingenierie : charge portee par le second servant. -->
+<Weapon id="HORNE-MUNI_04">
+<Description language="ENGLISH">"Doomrocket"</Description>
+<Skill>"RULES-COMPPROJ_ING"</Skill>
+<Damage>"+0"</Damage>
+<Availability>"RULES-DISPO_EXOTIC"</Availability>
+<Reach>"+0"</Reach>
+<Encumbrance>"1"</Encumbrance>
+<Quality>"RULES-WEAPB15 5"</Quality>
+<Hand>"0"</Hand>
+<Ammunition>"1"</Ammunition>
+</Weapon>
+<!-- Blast 2* : touche = Challenging (+0) Endurance Test ou Ablaze. -->
+<Weapon id="HORNE-MUNI_05">
+<Description language="ENGLISH">"Warpfire Fuel Vat"</Description>
+<Skill>"RULES-COMPPROJ_ING"</Skill>
+<Damage>"+0"</Damage>
+<Availability>"RULES-DISPO_EXOTIC"</Availability>
+<Reach>"+0"</Reach>
+<Encumbrance>"2"</Encumbrance>
+<Quality>"RULES-WEAPB15 2,HORNE-WEAPB45"</Quality>
+<Hand>"0"</Hand>
+<Ammunition>"1"</Ammunition>
+</Weapon>
+<!-- Repeater 1d10 : tire au premier tir apres rechargement. -->
+<Weapon id="HORNE-MUNI_06">
+<Description language="ENGLISH">"Ratling Gun Belt"</Description>
+<Skill>"RULES-COMPPROJ_ING"</Skill>
+<Damage>"+0"</Damage>
+<Availability>"RULES-DISPO_EXOTIC"</Availability>
+<Reach>"+0"</Reach>
+<Encumbrance>"2"</Encumbrance>
+<Quality>"RULES-WEAPB03 1d10,HORNE-WEAPB45"</Quality>
+<Hand>"0"</Hand>
+<Ammunition>"4"</Ammunition>
+</Weapon>
+</DATA_WEAPON>
+<DATA_WEAPON_BONUS>
+<!-- Encadre "New Weapon Qualities" (p.32), plus Timer (renvoi ** de la table p.38). -->
+<BonusMalus id="HORNE-WEAPB44">
+<Description language="ENGLISH">"ZZAP!"</Description>
+<Explanation language="ENGLISH">"These weapons release a burst of electrical or arcane energy. ZZAP! weapons reduce AP by 1 and ignore all APs from metal armour."</Explanation>
+<Short language="ENGLISH">"AP -1, ignores metal armour"</Short>
+<Modifier>"+"</Modifier>
+</BonusMalus>
+<BonusMalus id="HORNE-WEAPB45">
+<Description language="ENGLISH">"Warpstone"</Description>
+<Explanation language="ENGLISH">"Warpstone weapons are used almost exclusively by the Skaven. In addition to normal damage, any attack that inflicts a Critical Wound also causes a Minor Exposure to Corruption (WFRP, p. 182)."</Explanation>
+<Short language="ENGLISH">"Critical Wound = Minor Exposure to Corruption"</Short>
+<Modifier>"+"</Modifier>
+</BonusMalus>
+<BonusMalus id="HORNE-WEAPB46">
+<Description language="ENGLISH">"Timer"</Description>
+<Explanation language="ENGLISH">"Detonation can be delayed by up to 10 rounds after the device is dropped or thrown."</Explanation>
+<Short language="ENGLISH">"detonation delayed up to 10 rounds"</Short>
+<Modifier>"+"</Modifier>
+</BonusMalus>
+</DATA_WEAPON_BONUS>
+<DATA_CRAFTMANSHIP>
+<!-- Skaven Blades (p.33) : "Altered weapons retain all the Qualities, Flaws, and statistics
+     of their base form, and gain additional properties" : des fabrications, posees sur l arme
+     du personnage par +Qualite (decision Nono 23/09/2026), comme les accessoires de Nations of
+     Mankind. Warlock Optics (p.40, "when fitted to a ranged weapon") suit le meme principe.
+     Blade of Corruption est un artefact, pas une alteration : arme a part (HORNE-COMB_BASE_04). -->
+<Craftsmanship id="HORNE-QUALITY_01">
+<Description language="ENGLISH">"Warpforged"</Description>
+<Explanation language="ENGLISH">"Warpforged weapons are created from steel that has been infused with powdered Warpstone, and have the Penetrating Quality even if weapons of their type normally don't. If the weapon already has the Penetrating Quality, a Warpforged version ignores the first 2 AP of metal armour, and all AP from non-metal armours."</Explanation>
+<Short language="ENGLISH">"gains Penetrating (or ignores 2 metal AP, all non-metal AP)"</Short>
+<Applies>"Weapon"</Applies>
+<WeaponQuality>"RULES-WEAPB22"</WeaponQuality>
+<Max>"1"</Max>
+<Modifier>""</Modifier>
+</Craftsmanship>
+<Craftsmanship id="HORNE-QUALITY_02">
+<Description language="ENGLISH">"Weeping Weapon"</Description>
+<Explanation language="ENGLISH">"(Eshin and allied clans only) During their manufacture, a small amount of Warpstone is incorporated into the metal of the blade, accompanied by secret spells known only to the clan's Sorcerers. A Weeping Blade constantly sweats a powerful, Warpstone-tainted venom. Victims who suffer at least one Wound from the weapon immediately take 2 Poisoned Conditions per SL on the attack Test. Most of these weapons take the form of Knives or Swords, but other weapons with the same deadly properties have been seen, including throwing stars."</Explanation>
+<Short language="ENGLISH">"Wound = 2 Poisoned per SL"</Short>
+<Applies>"Weapon"</Applies>
+<Max>"1"</Max>
+<Modifier>""</Modifier>
+</Craftsmanship>
+<Craftsmanship id="HORNE-QUALITY_03">
+<Description language="ENGLISH">"Blade of Nurglitch"</Description>
+<Explanation language="ENGLISH">"(Pestilens and allied clans only) This Hand Weapon is blessed by the special ointments of the Plaguelords. These filth-encrusted blades carry a stronger version of the Infected monster trait (WFRP, page 340). In order to avoid a Festering Wound, any creature wounded by one of these blades must pass a Difficult (-10) Endurance Test."</Explanation>
+<Short language="ENGLISH">"Hand Weapon : Wound = Difficult (-10) Endurance or Festering Wound"</Short>
+<Applies>"Weapon"</Applies>
+<Max>"1"</Max>
+<Modifier>""</Modifier>
+</Craftsmanship>
+<Craftsmanship id="HORNE-QUALITY_04">
+<Description language="ENGLISH">"Warp-blade"</Description>
+<Explanation language="ENGLISH">"(Skryre and allied clans only) Warp-blades are commonly attached to poles, creating halberd-like weapons, or are directly implanted into the arms of Warlock Engineers. A tangle of wires feeds the blades, which hum with barely contained Warp energy. When used in hand-to-hand combat, Warp-blades are treated as either Halberds (in the case of those mounted on poles), or Hand Weapons (when they are implanted into a Warlock's arms), both with a +1 bonus to Damage and the ZZAP! Quality. A Warp Energy Condenser adds a further +1 Damage."</Explanation>
+<Short language="ENGLISH">"Halberd or Hand Weapon : +1 Damage, ZZAP!"</Short>
+<Applies>"Weapon"</Applies>
+<ModifyDamage name="CC">1</ModifyDamage>
+<WeaponQuality>"HORNE-WEAPB44"</WeaponQuality>
+<Max>"1"</Max>
+<Modifier>""</Modifier>
+</Craftsmanship>
+<Craftsmanship id="HORNE-QUALITY_05">
+<Description language="ENGLISH">"Warlock Optics"</Description>
+<Explanation language="ENGLISH">"(Skryre and allied clans only) This Warp-enhanced optical device allows a Warlock Engineer to focus on a foe clearly, even those partially hidden in cover. When fitted to a ranged weapon, it negates all difficulty modifiers for shooting at a target in cover."</Explanation>
+<Short language="ENGLISH">"ranged weapon : ignores cover modifiers"</Short>
+<Applies>"Weapon"</Applies>
+<Max>"1"</Max>
+<Modifier>""</Modifier>
+</Craftsmanship>
+</DATA_CRAFTMANSHIP>
+<DATA_TRAPPING>
+<!-- Objets de l armurerie skaven (p.32, 39-40), sans prix au livre. Un objet ne porte pas
+     d explication : leurs regles restent ici. Encombrement non donne = 0, sauf la Pavise (4). -->
+<!-- Pavise : grand bouclier des servants. Au lieu d agir comme un Shield, rend Hard (-20) tout tir visant l equipage. -->
+<Trapping id="HORNE-TRAP_01">
+<Description language="ENGLISH">"Pavise"</Description>
+<Theme>"RULES-LAB_196"</Theme>
+<Availability>"RULES-DISPO_EXOTIC"</Availability>
+<Encumbrance>"4"</Encumbrance>
+</Trapping>
+<!-- Skryre only. +40 aux Endurance Tests contre poisons et gaz inhales ; concu pour les seuls Skaven. -->
+<Trapping id="HORNE-TRAP_02">
+<Description language="ENGLISH">"Gas Mask"</Description>
+<Theme>"RULES-LAB_191"</Theme>
+<Availability>"RULES-DISPO_EXOTIC"</Availability>
+<Encumbrance>"0"</Encumbrance>
+</Trapping>
+<!-- Pestilens only. Un Plague Priest ou Plague Lord y lit tout sort du Lore of Plague (p.48) comme d un Warp Scroll, une fois par jour chacun. Le perdre : jet sur Wrath of the Gods (WFRP p.218) chaque jour jusqu a sa recuperation. -->
+<Trapping id="HORNE-TRAP_03">
+<Description language="ENGLISH">"Liber Bubonicus"</Description>
+<Theme>"RULES-LAB_194"</Theme>
+<Availability>"RULES-DISPO_EXOTIC"</Availability>
+<Encumbrance>"0"</Encumbrance>
+</Trapping>
+<!-- Soigne 1d10+1 Wounds par application ; chaque usage = Moderate Exposure to Corruption. -->
+<Trapping id="HORNE-TRAP_04">
+<Description language="ENGLISH">"Skalm"</Description>
+<Theme>"RULES-LAB_198"</Theme>
+<Availability>"RULES-DISPO_EXOTIC"</Availability>
+<Encumbrance>"0"</Encumbrance>
+</Trapping>
+<!-- Effet 2d10 - Toughness Bonus rounds (minimum 1). Table d100 : 01-29 Gone Bad (2 Poisoned) ou aucun effet ; 30-59 Hatred de tous les ennemis ; 60-89 Frenzy ; 90-100 Rabid (Frenzy, +2 au SB pour les degats, 1 Wound automatique par round). Non-Skaven : a la fin, Challenging (+0) Endurance Test ou 1 Poisoned et 1 Bleeding, plus 1 Ablaze sur -6 SL. -->
+<Trapping id="HORNE-TRAP_05">
+<Description language="ENGLISH">"Skavenbrew"</Description>
+<Theme>"RULES-LAB_197"</Theme>
+<Availability>"RULES-DISPO_EXOTIC"</Availability>
+<Encumbrance>"0"</Encumbrance>
+</Trapping>
+<!-- Pestilens only. Un sort du Lore of Plague (p.48), lance une fois a voix haute, sans Casting Test, sans miscast ni critique. -->
+<Trapping id="HORNE-TRAP_06">
+<Description language="ENGLISH">"Warp Scroll"</Description>
+<Theme>"RULES-LAB_194"</Theme>
+<Availability>"RULES-DISPO_EXOTIC"</Availability>
+<Encumbrance>"0"</Encumbrance>
+</Trapping>
+<!-- Skryre only. Avec une Warp-blade (fabrication HORNE-QUALITY_04) : +1 Damage. -->
+<Trapping id="HORNE-TRAP_07">
+<Description language="ENGLISH">"Warp Energy Condenser"</Description>
+<Theme>"RULES-LAB_199"</Theme>
+<Availability>"RULES-DISPO_EXOTIC"</Availability>
+<Encumbrance>"0"</Encumbrance>
+</Trapping>
+<!-- Skryre only. Warp Lightning : on peut inverser les des du Casting Test. Sur miscast, surcharge : Hard (-30) Dexterity Test au tour suivant pour le couper, sinon explosion 3d10 Damage (moins TB et armure) a 3 yards et Moderate Exposure a 5 yards. -->
+<Trapping id="HORNE-TRAP_08">
+<Description language="ENGLISH">"Warp-Power Accumulator"</Description>
+<Theme>"RULES-LAB_199"</Theme>
+<Availability>"RULES-DISPO_EXOTIC"</Availability>
+<Encumbrance>"0"</Encumbrance>
+</Trapping>
+<!-- Monnaie et carburant skaven : Warpstone pour tout non-Skaven. Addiction : Difficult (-10) Willpower Test a chaque jeton mange ; un accro doit en consommer un par jour ou -10 cumulatif a tous les Tests. -->
+<Trapping id="HORNE-TRAP_09">
+<Description language="ENGLISH">"Warpstone Tokens"</Description>
+<Theme>"RULES-LAB_205"</Theme>
+<Availability>"RULES-DISPO_EXOTIC"</Availability>
+<Encumbrance>"0"</Encumbrance>
+</Trapping>
+</DATA_TRAPPING>
 <DATA_SPECIE_CAREER_DIRECT>
   <!-- Ces métiers étaient déclarés en 'X' dans les <Specie> de BOOK_RULESBOOK.Xml,
        alors qu'ils appartiennent à ce livre : un joueur ne l'ayant pas activé les voyait

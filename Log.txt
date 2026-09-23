@@ -6201,3 +6201,29 @@ XML valide (bien forme, 23 Sort + 4 Talent verifies par script). NON COMPILE (au
 modifie). Teste et valide par Nono le 22/09/2026 (affichage WinSpell, filtre par livre).
 Fichiers modifies : DATABASE/WFRP4/BOOK ENEMY IN SHADOWS COMPANION.Xml, CONTEXT.md,
 A FAIRE.txt, Log.txt.
+
+23/09/2026 - DEATH ON THE REIK COMPANION CLOS, ARMURERIE SKAVEN DU HORNED RAT COMPANION SAISIE
+Suite du chantier AUDIT DES TXT, trois livraisons XML, chacune testee et validee par Nono.
+Death on the Reik Companion, Lore of Tzeentch (p.98-100) : 12 sorts, pas 12 "de lore" : 3
+Petty Spells of Tzeentch (DEATH-PETTY_01 a _03, Talent RULES-T0089, Minor Magic) et 9 Arcane
+Spells of Tzeentch (DEATH-TZEEN_01 a _09). Ces derniers vont sur RULES-T0088_TZEENTCH (Arcane
+Magic (Tzeentch)), le talent de la carriere Warrior of Tzeentch du meme livre, et non sur
+RULES-T0172_TZEENTCH (Chaos Magic) des sorts d Enemy in Shadows. TypSpell Domain Magic : au
+Rulebook, les sorts propres a une lore T0088_x sont en Domain, "Arcane Magic" est reserve aux
+sorts communs a toutes les lores (T0088_*). Erratum "Bension" conserve.
+Death on the Reik Companion, Boat-Mounted Weapons (p.68) : 8 armes DEATH-PROJ_ING_01 a _08.
+Chiffres propres au livre (differents d Up in Arms et Sea of Claws), competence Engineering
+(ecrit par le livre), Blackpowder deduit de la note "Ballista and Catapults don't have the
+Blackpowder quality", pas de Crewed donc pas de dependance a Up in Arms. Amenagements de bateau
+du meme chapitre non saisis (A FAIRE.txt).
+The Horned Rat Companion, Skaven Armoury (p.32-40) : talent Tail Fighting HORNE-T0196, 22 armes
+et 6 munitions, qualites ZZAP!/Warpstone/Timer (HORNE-WEAPB44 a _46, numeros libres partout),
+5 fabrications HORNE-QUALITY_01 a _05, 9 objets. Decisions Nono : sans prix, Exotic, clan en
+commentaire ; Skaven Blades = fabrications (DATA_CRAFTMANSHIP, ModifyDamage + WeaponQuality
+deja lus par chargefabrication.pas) ; Blade of Corruption arme a part Unique.
+Appris : Weapon et Trapping n ont pas de champ d explication, les regles speciales vont en
+commentaire XML ; le suffixe d une qualite ("RULES-WEAPB03 1d10", "RULES-WEAPB15 +1") est du
+texte libre pour GetAllArmeBonusLibelle ; Hand n est lu que pour l affichage (Hand 0 sans
+risque pour une arme de queue).
+Fichiers modifies : DATABASE/WFRP4/BOOK_DEATH_ON_THE_REIK_COMPANION.Xml, DATABASE/WFRP4/BOOK
+THE HORNED RAT COMPANION.Xml, CONTEXT.md, A FAIRE.txt, Log.txt.
