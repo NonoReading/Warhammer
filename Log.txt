@@ -1,3 +1,5 @@
+23/09/2026 - AUDIT DES RULEBOOK CLOS : TOUS LES CHAPITRES AUDITES (I-IX), TOUS LES ECARTS PERTINENTS SAISIS. COMPANIONS DE L ENEMY WITHIN TOUS CLOS (ENEMY IN SHADOWS LE 22/09, DEATH ON THE REIK + HORNED RAT LE 23/09).
+
 04/08/2023 : gestion des qualités d'armes (bonus / malus)
 06/08/2023 : problèmes des panels qui se multipliaient
 06/08/2023 : mise en place de l'interception de ESC (compétence, talent, métier) depuis Personnage
