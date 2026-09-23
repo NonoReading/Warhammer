@@ -6251,3 +6251,18 @@ XML pur, aucun code Pascal touche. Compile, teste dans WinSpell (filtre par livr
 par Nono le 23/09/2026.
 Fichiers modifies : DATABASE/WFRP4/BOOK THE HORNED RAT COMPANION.Xml, CONTEXT.md,
 A FAIRE.txt, Log.txt.
+
+23/09/2026 - GREEN IZ BEST : ARMES ORQUES SAISIES (P.352)
+Dernier ecart connu du chantier AUDIT DES TXT sur ce livre (source relue dans
+LIVRES/Green_iz_Best.txt lignes 352-382). 3 armes de la table "Greenskin Equipment" :
+Choppa (GREEN-COMB_BASE_01, Basic, +SB+4, Damaging/Tiring/Orcish*), Hobgoblin Scimitar
+(GREEN-COMB_BASE_02, Basic, +SB+4, Impale), Squig Prod (GREEN-COMB_HAST_01, Polearm,
++SB+3, Undamaging/Prod**). Deux qualites custom creees, meme principe que les
+HORNE-WEAPB44+ (prefixe de livre GREEN-WEAPB01/_02, pas de collision possible avec
+un autre livre) : Orcish (perd toute qualite et gagne Slow si porte par un non-Orc),
+Prod (+2 SL Animal Care/Animal Training). Conversions : Reach "Average" ->
+RULES-WEAPR_MID, Scarce -> RULES-DISPO_LIMITED, prix "x/" -> PA.
+XML pur, aucun code Pascal touche. Compile, teste dans WinWeapon (filtre par livre) et
+valide par Nono le 23/09/2026.
+Fichiers modifies : DATABASE/WFRP4/BOOK_GREEN_IZ_BEST.Xml, CONTEXT.md, A FAIRE.txt,
+Log.txt.

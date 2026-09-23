@@ -836,6 +836,60 @@
 <Text name="GREEN-BOOK GREEN IZ BEST">"Green iz Best"</Text>
 </Label>
 </DATA_LABEL>
+<DATA_WEAPON>
+<!-- Greenskin Equipment (p.352). Reach "Average" -> RULES-WEAPR_MID, Scarce ->
+     RULES-DISPO_LIMITED, Price "x/" -> PA. -->
+<Weapon id="GREEN-COMB_BASE_01">
+<Description language="ENGLISH">"Choppa"</Description>
+<Skill>"RULES-COMPCOMB_BASE"</Skill>
+<Damage>"+(BATTR_S)+4"</Damage>
+<Availability>"RULES-DISPO_COMMON"</Availability>
+<Reach>"RULES-WEAPR_MID"</Reach>
+<Price>"6PA"</Price>
+<Encumbrance>"1"</Encumbrance>
+<Quality>"RULES-WEAPB10,RULES-WEAPB25,GREEN-WEAPB01"</Quality>
+<Hand>"1"</Hand>
+<Ammunition>"0"</Ammunition>
+</Weapon>
+<Weapon id="GREEN-COMB_BASE_02">
+<Description language="ENGLISH">"Hobgoblin Scimitar"</Description>
+<Skill>"RULES-COMPCOMB_BASE"</Skill>
+<Damage>"+(BATTR_S)+4"</Damage>
+<Availability>"RULES-DISPO_LIMITED"</Availability>
+<Reach>"RULES-WEAPR_MID"</Reach>
+<Price>"19PA"</Price>
+<Encumbrance>"1"</Encumbrance>
+<Quality>"RULES-WEAPB12"</Quality>
+<Hand>"1"</Hand>
+<Ammunition>"0"</Ammunition>
+</Weapon>
+<Weapon id="GREEN-COMB_HAST_01">
+<Description language="ENGLISH">"Squig Prod"</Description>
+<Skill>"RULES-COMPCOMB_HAST"</Skill>
+<Damage>"+(BATTR_S)+3"</Damage>
+<Availability>"RULES-DISPO_LIMITED"</Availability>
+<Reach>"RULES-WEAPR_LONG"</Reach>
+<Price>"15PA"</Price>
+<Encumbrance>"2"</Encumbrance>
+<Quality>"RULES-WEAPB27,GREEN-WEAPB02"</Quality>
+<Hand>"2"</Hand>
+<Ammunition>"0"</Ammunition>
+</Weapon>
+</DATA_WEAPON>
+<DATA_WEAPON_BONUS>
+<BonusMalus id="GREEN-WEAPB01">
+<Description language="ENGLISH">"Orcish"</Description>
+<Explanation language="ENGLISH">"This weapon is oversized and awkward to use in non-Orc hands. If it is wielded by a non-Orc, this weapon loses all qualities and gains Slow."</Explanation>
+<Short language="ENGLISH">"non-Orc wielder: loses all qualities, gains Slow"</Short>
+<Modifier>"+"</Modifier>
+</BonusMalus>
+<BonusMalus id="GREEN-WEAPB02">
+<Description language="ENGLISH">"Prod"</Description>
+<Explanation language="ENGLISH">"This weapon is used to control animals and grants +2 SL to Animal Care or Animal Training tests."</Explanation>
+<Short language="ENGLISH">"+2 SL to Animal Care/Animal Training"</Short>
+<Modifier>"+"</Modifier>
+</BonusMalus>
+</DATA_WEAPON_BONUS>
 <DATA_SPECIE>
 <Specie id="GREEN-RACE_CORC">
 <Description language="ENGLISH">"Common Orcs"</Description>
