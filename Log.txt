@@ -6304,3 +6304,61 @@ DATABASE/WFRP4/BOOK_HIGH_ELF_PLAYERS_GUIDE.Xml, DATABASE/WFRP4/BOOK_LORDS_OF_NAG
 DATABASE/WFRP4/BOOK_MIDDENHEIM_CITY_OF_THE_WHITE_WOLF.Xml, DATABASE/WFRP4/BOOK_NATIONS_OF_MANKIND.Xml,
 DATABASE/WFRP4/BOOK_SALZENMUND_CITY_OF_SALT_AND_SILVER.Xml, DATABASE/WFRP4/BOOK_SEA_OF_CLAWS.Xml,
 CONTEXT.md, A FAIRE.txt, Log.txt.
+
+23/09/2026 - CATALOGUE DES MALADIES (CHAPITRE V DU RULEBOOK)
+Suite de l'audit du Rulebook (chapitres I-II/V/VI/IX par 4 sous-agents en parallele) :
+I-II, VI, IX RAS. Ecart trouve au chapitre V : les 9 maladies de "The Litany of
+Pestilence" (p.186-188) n'etaient saisies nulle part (aucun DATA_DISEASE, aucune
+structure Pascal). Un second ecart trouve au chapitre II (Class Trappings, p.37,
+equipement de depart par Classe) reste a faire, voir A FAIRE.txt.
+Catalogue des maladies saisi : RULES-DISEASE_001 a _009 (Blood Rot, The Bloody Flux,
+The Black Plague, Festering Wound, Galloping Trots, Itching Pox, Minor Infection,
+Packer's Pox, Ratte Fever) dans BOOK_RULESBOOK.Xml/_FRANCAIS, nouvelle balise
+DATA_DISEASE (Description/Contraction/Incubation/Duration/Symptoms en texte libre,
+aucun effet mecanise - meme principe que le catalogue de mutations qui a servi de
+modele). Piege rencontre : le fichier texte source (LIVRES/RULEBOOK.txt) melange les
+deux colonnes de la page en un seul flux lineaire, ce qui associait par erreur le bloc
+Contraction/Incubation/Duration/Symptoms d'une maladie a la mauvaise entete. Resolu en
+rendant les pages 186-188 en image (poppler pdftoppm) pour lire la mise en page reelle
+avant de saisir quoi que ce soit - a refaire pour toute autre page a mise en page
+complexe (colonnes, encarts) plutot que de faire confiance a l'extraction texte brute.
+Nouvelle unite chargedisease.pas (StructureDisease/ListDisease), calquee sur
+chargecorruptiontable.pas mais sans modificateur ni table de chance D100 (pas de tirage,
+juste une consultation). Fenetre windiseasecatalogue.pas (sans .lfm), calquee sur
+winmutationcatalogue.pas, ouverte depuis la 7e ligne de TabBibliotheque (menu principal).
+Traduction FR : StructureTraduction (chargetraduction.pas) gagne 3 champs
+(Contraction/Incubation/Duration ; Symptoms reutilise Description), nouveau cas
+ConstPDisease dans Traduit. Labels RULES-LAB_281 a _285 ajoutes aux deux INTERFACE.
+Compile (lazbuild --build-all, 0 erreur) et teste par Nono le 23/09/2026 (fenetre
+catalogue, 9 lignes, compteur a jour, bascule EN/FR).
+Fichiers modifies : chargedisease.pas (nouveau), windiseasecatalogue.pas (nouveau),
+chargeconstantes.pas, chargetraduction.pas, xmlexportimport.pas, warhammersource.pas,
+DATABASE/INTERFACE.Xml, DATABASE/INTERFACE_FRANCAIS.Xml,
+DATABASE/WFRP4/BOOK_RULESBOOK.Xml, DATABASE/WFRP4/BOOK_RULESBOOK_FRANCAIS.Xml,
+CONTEXT.md, A FAIRE.txt, Log.txt.
+
+23/09/2026 - CLASS TRAPPINGS (CHAPITRE II DU RULEBOOK), CHANTIER AUDIT DES TXT CLOS
+Dernier ecart du chantier "AUDIT DES TXT" sur le Rulebook : equipement de depart par
+Classe (p.37, 8 classes Academics/Burghers/Courtiers/Peasants/Rangers/Riverfolk/Rogues/
+Warriors), distinct de l'equipement par Carriere. Le champ <Class> existait deja sur
+chaque carriere (charge dans StructureMetier.LibelleGroupe) mais n'etait lu par aucun
+.pas. Nouvelle unite chargeclassequipement.pas (StructureClassEquipement/
+ListClassEquipement, memes champs que StructureMetierEquipement moins le niveau).
+Nouvelle balise DATA_CLASS_ITEM dans BOOK_RULESBOOK.Xml (EN seul, aucun texte a
+traduire), meme format SUBCHAPTER_ITEM/Item que l'equipement de carriere, memes
+mecanismes "+"(ensemble) et quantite= deja existants - zero nouveau mecanisme XML.
+Codes catalogue retrouves pour la plupart des objets ; objets sans code catalogue
+laisses en texte libre (Fine Clothing, Lunch, Parchment 1d10 sheets, Matches 1d10),
+meme convention que Winds of Magic (deja en texte libre pour "Fine Clothing").
+Cablage dans wincreation.pas (AfficheImageMetier) : seconde boucle apres l'equipement
+de Carriere niveau 1, filtree par la Classe de la carriere en cours, ajoutee aux memes
+lignes de TabMetierEquipement - code duplique volontairement (pas de fonction commune)
+pour rester au plus pres du pattern Arme/Armure/Divers deja en place plutot que
+refactorer une logique de branchement complexe pour un seul appelant de plus.
+Compile (lazbuild --build-all, 0 erreur) et teste par Nono le 23/09/2026 (Villager/
+Peasants, objets de classe bien ajoutes en plus de ceux de la carriere).
+Chantier "AUDIT DES TXT" du Rulebook desormais clos entierement (chapitres I-II, III,
+IV, V, VI, VII, VIII, IX, XI tous audites, tous les ecarts trouves sont saisis).
+Fichiers modifies : chargeclassequipement.pas (nouveau), xmlexportimport.pas,
+warhammersource.pas, wincreation.pas, DATABASE/WFRP4/BOOK_RULESBOOK.Xml,
+CONTEXT.md, A FAIRE.txt, Log.txt.

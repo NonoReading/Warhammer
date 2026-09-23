@@ -16,7 +16,7 @@ uses
   WinPersonnage, ChargeAttributAugmentation, ChargeCompetenceAugmentation,
   ChargeArme, WinWeapon, WinEquipement, ChargeArmeBonus, ChargeMetierEquipement, ChargeArmure,
   ChargeArmureBonus, ChargeArmureBonusTalent, WinArmor, ChargeTrapping, ChargeSort, WinSpell, ChargeTexte,
-  ChargeFabrication, WinMutationCatalogue, Unitcalcul, ChargeMetierSousMetier,
+  ChargeFabrication, WinMutationCatalogue, ChargeDisease, WinDiseaseCatalogue, ChargeClassEquipement, Unitcalcul, ChargeMetierSousMetier,
   ChargeMetierRaceChoixMetier, ChargePersonnage, ChargeRaceCreation,
   ChargeTraduction, ChargeArmureSimplifie, ChargeOptionRegle, WinOptionRegle, ChargeLivre,
   ChargeTalentEffet, ChargeTalentCompetenceModif,
@@ -1141,6 +1141,8 @@ procedure TMenu.ChargerLivre(ForceMaJ: Boolean; ForceLivre: String);
         NbRaceCorruptionCreation    := 0;
         nbCorruptionTable           := 0;
         nbCorruptionChance          := 0;
+        nbDisease                   := 0;
+        NbClassEquipement           := 0;
         NbTalentEffet                := 0;
         NbTalentCompetenceModif     := 0;
         NbTalentCompetenceAjoute    := 0;
@@ -1215,6 +1217,8 @@ procedure TMenu.ChargerLivre(ForceMaJ: Boolean; ForceLivre: String);
         ListRaceCorruptionCreation.Clear;
         ListCorruptionTable.Clear;
         ListCorruptionChance.Clear;
+        ListDisease.Clear;
+        ListClassEquipement.Clear;
         ListTalentEffet.Clear;
         ListTalentCompetenceModif.Clear;
         ListTalentCompetenceAjoute.Clear;
@@ -1349,7 +1353,7 @@ procedure TMenu.RemplirTabBibliotheque();
 begin
   if TabBibliotheque = nil then
     exit;
-  TabBibliotheque.RowCount := 7;
+  TabBibliotheque.RowCount := 8;
   TabBibliotheque.Cells[0, 0] := GetTexteLibelle('RULES-LAB_014');
   TabBibliotheque.Cells[1, 0] := GetTexteLibelle('RULES-LAB_021');
   Ligne(1, GetTexteLibelle('RULES-LAB_063'), NbArme);
@@ -1363,6 +1367,7 @@ begin
   Ligne(4, GetTexteLibelle(ThemeAnimauxVehicules), NbVehicule);
   Ligne(5, GetTexteLibelle('RULES-LAB_083'), NbSort);
   Ligne(6, GetTexteLibelle('RULES-LAB_172'), ListCorruptionTable.Count);
+  Ligne(7, GetTexteLibelle('RULES-LAB_281'), ListDisease.Count);
 end;
 
 procedure TMenu.TabBibliothequeDblClick(Sender: TObject);
@@ -1383,6 +1388,11 @@ begin
          WinMutationCat          := TWinMutationCatalogue.Create(Application);
          WinMutationCat.Position := poOwnerFormCenter;
          WinMutationCat.Show;
+       end;
+    7: begin
+         WinDiseaseCat           := TWinDiseaseCatalogue.Create(Application);
+         WinDiseaseCat.Position  := poOwnerFormCenter;
+         WinDiseaseCat.Show;
        end;
   end;
 end;
@@ -1564,6 +1574,8 @@ procedure TMenu.FormCreate(Sender: TObject);
        ListRaceCorruptionCreation   := TListRaceCorruptionCreation.Create;
        ListCorruptionTable          := TListCorruptionTable.Create;
        ListCorruptionChance         := TListCorruptionChance.Create;
+       ListDisease                  := TListDisease.Create;
+       ListClassEquipement          := TListClassEquipement.Create;
        ListTalentEffet               := TListTalentEffet.Create;
        ListTalentCompetenceModif    := TListTalentCompetenceModif.Create;
        ListTalentCompetenceAjoute   := TListTalentCompetenceAjoute.Create;

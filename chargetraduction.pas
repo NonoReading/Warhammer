@@ -8,7 +8,7 @@ uses
   Classes, SysUtils, StrUtils, ChargeConstantes, Generics.Collections, LazUTF8,
   ChargeAttribut, ChargeTexte, ChargeCompetence, ChargeTalent, ChargeRace, ChargeEspece, ChargeRegle,
   ChargeMetier, ChargeArme, ChargeArmeBonus, ChargeArmure, ChargeTrapping, ChargeArmureBonus,
-  ChargeSort, ChargeFabrication, ChargeCorruptionTable, ChargeRacePhysique, UnitCalcul;
+  ChargeSort, ChargeFabrication, ChargeCorruptionTable, ChargeRacePhysique, ChargeDisease, UnitCalcul;
 
 Type
   StructureTraduction   = record
@@ -20,6 +20,10 @@ Type
     Tests:       string;
     Resume:      string;
     Livre:       String;
+    // Champs propres au catalogue des maladies (ConstPDisease) - Description porte Symptoms.
+    Contraction: string;
+    Incubation:  string;
+    Duration:    string;
   end;
 
   StructureLivreTraduit = record
@@ -56,6 +60,9 @@ Function InitTrad(TypeDonnee: String; Code: String; Code2: String; Livre: String
     PTraduction.Tests        := '';
     PTraduction.Resume       := '';
     PTraduction.Livre        := Livre;
+    PTraduction.Contraction  := '';
+    PTraduction.Incubation   := '';
+    PTraduction.Duration     := '';
 
     result := PTraduction;
   end;
@@ -103,6 +110,7 @@ Procedure Traduit(Langue: String; Livre: String);
     PFabrication: StructureFabrication;
     PCorruptionTable: StructureCorruptionTable;
     PRaceCouleur: StructureRaceCouleur;
+    PDisease:     StructureDisease;
   begin
     // Pas de garde sur Langue = ConstAnglais ici : ListTexte/ListeAttribut/etc. ne sont
     // PAS rechargées avec du texte anglais frais lors d'un changement de livre/langue en
@@ -261,6 +269,18 @@ Procedure Traduit(Langue: String; Livre: String);
                       PCorruptionTable.Libelle := PTraduction.Libelle;
                       PCorruptionTable.Effet   := PTraduction.Description;
                       ListCorruptionTable[Ind] := PCorruptionTable;
+                    end;
+              ConstPDisease:
+                for Ind :=0 to ListDisease.Count - 1 do
+                  if CompareRechercheValeur(PTraduction.Code, ListDisease[Ind].Code) then
+                    begin
+                      PDisease             := ListDisease[Ind];
+                      PDisease.Libelle     := PTraduction.Libelle;
+                      PDisease.Symptoms    := PTraduction.Description;
+                      PDisease.Contraction := PTraduction.Contraction;
+                      PDisease.Incubation  := PTraduction.Incubation;
+                      PDisease.Duration    := PTraduction.Duration;
+                      ListDisease[Ind]     := PDisease;
                     end;
               ConstPRaceCouleur:
                 // Code = "CodeRace Y|H Plage" (Y = yeux, H = cheveux) : la couleur n'a pas de code

@@ -22,6 +22,7 @@ uses
   ChargeArmureBonusTalent,
   ChargeModificateur, ChargeTalentModificateur, ChargeCareerBonusModificateur,
   ChargeArmeModificateur, ChargeArmureBonusModificateur, ChargeCorruptionModificateur,
+  ChargeDisease, ChargeClassEquipement,
   XMLRead, DOM, Unitcalcul,  Dialogs;
 
 Procedure XmlExportBook(Livre: String; Langue: String);
@@ -1286,6 +1287,9 @@ Procedure XmlImport(FileName: String; OnlyPrimary: Boolean; OnlyCode: Boolean; C
     PRaceCorruptionCreation:  StructureRaceCorruptionCreation;
     PCorruptionTable:         StructureCorruptionTable;
     PCorruptionChance:        StructureCorruptionChance;
+    PDisease:                 StructureDisease;
+    PClassEquipement:         StructureClassEquipement;
+    CodeClasseCourante:       String;
     PTalentEffet:             StructureTalentEffet;
     PTalentCompetenceModif:   StructureTalentCompetenceModif;
     PTalentCompetenceAjoute:  StructureTalentCompetenceAjoute;
@@ -4075,6 +4079,107 @@ Procedure XmlImport(FileName: String; OnlyPrimary: Boolean; OnlyCode: Boolean; C
 
                       AddTrad(PTraduction, LangueDef);
 
+                      NodeNv2 := XmlElement(NodeNv2.NextSibling);
+                    end;
+                end;
+
+              // Catalogue des maladies (The Litany of Pestilence, Rulebook p.186-188), audit du
+              // 23/09/2026. Consultation seule, meme principe que le catalogue de mutations
+              // ci-dessus mais sans modificateur ni table de chance (pas de tirage D100).
+              NodeNv1 := BookNode.FindNode(ConstXmlDataDisease);
+              if Assigned(NodeNv1) then
+                begin
+                  NodeNv2 := XmlElement(NodeNv1.FirstChild);
+                  While Assigned(NodeNv2) do
+                    begin
+                      PDisease.Livre := Livre;
+                      PDisease.Code  := RemoveQuotes(UTF8Encode(NodeNv2.Attributes.GetNamedItem(ConstXmlData).NodeValue));
+                      PDisease.Libelle     := '';
+                      PDisease.Contraction := '';
+                      PDisease.Incubation  := '';
+                      PDisease.Duration    := '';
+                      PDisease.Symptoms    := '';
+
+                      Node := XmlElement(NodeNv2.FirstChild);
+                      while Assigned(Node) do
+                        begin
+                          case Node.NodeName of
+                            ConstXmlDescription: PDisease.Libelle     := RemoveQuotes(UTF8Encode(Node.TextContent));
+                            ConstXmlContraction: PDisease.Contraction := RemoveQuotes(UTF8Encode(Node.TextContent));
+                            ConstXmlIncubation:  PDisease.Incubation  := RemoveQuotes(UTF8Encode(Node.TextContent));
+                            ConstXmlDuration:    PDisease.Duration    := RemoveQuotes(UTF8Encode(Node.TextContent));
+                            ConstXmlSymptoms:    PDisease.Symptoms    := RemoveQuotes(UTF8Encode(Node.TextContent));
+                          end;
+                          Node := XmlElement(Node.NextSibling);
+                        end;
+
+                      PTraduction              := InitTrad(ConstPDisease, PDisease.Code, '', PDisease.Livre);
+                      PTraduction.Libelle      := PDisease.Libelle;
+                      PTraduction.Description  := PDisease.Symptoms;
+                      PTraduction.Contraction  := PDisease.Contraction;
+                      PTraduction.Incubation   := PDisease.Incubation;
+                      PTraduction.Duration     := PDisease.Duration;
+
+                      if LangueDef = ConstAnglais then
+                        begin
+                          ListDisease.add(PDisease);
+                          inc(nbDisease);
+                        end;
+
+                      AddTrad(PTraduction, LangueDef);
+
+                      NodeNv2 := XmlElement(NodeNv2.NextSibling);
+                    end;
+                end;
+
+              // Equipement de depart par Classe (Rulebook p.37, "Class Trappings"), audit du
+              // 23/09/2026. Meme format que l'equipement de Carriere (SUBCHAPTER_ITEM/Item),
+              // mais un seul niveau par Classe (pas de DATA_CAREER_LEVEL) : ajoute a la
+              // creation en plus de l'equipement de la Carriere choisie (wincreation.pas, via
+              // <Class> deja charge dans StructureMetier.LibelleGroupe).
+              NodeNv1 := BookNode.FindNode(ConstXmlDataClassItem);
+              if Assigned(NodeNv1) then
+                begin
+                  NodeNv2 := XmlElement(NodeNv1.FirstChild);
+                  While Assigned(NodeNv2) do
+                    begin
+                      CodeClasseCourante := RemoveQuotes(UTF8Encode(NodeNv2.Attributes.GetNamedItem(ConstXmlData).NodeValue));
+                      NodeNv3 := XmlElement(NodeNv2.FirstChild);
+                      while Assigned(NodeNv3) do
+                        begin
+                          if NodeNv3.NodeName = ConstXmlSousChapitreEquipement then
+                            begin
+                              Node := XmlElement(NodeNv3.FirstChild);
+                              while Assigned(Node) do
+                                begin
+                                  if Node.NodeName = ConstXmlEquipement then
+                                    begin
+                                      PClassEquipement.Livre          := Livre;
+                                      PClassEquipement.CodeClasse     := CodeClasseCourante;
+                                      PClassEquipement.Equipement     := RemoveQuotes(UTF8Encode(Node.Attributes.GetNamedItem(ConstXmlData).NodeValue));
+                                      PClassEquipement.Quantite       := 1;
+                                      PClassEquipement.QuantiteListe  := '';
+                                      if Assigned(Node.Attributes.GetNamedItem(ConstXmlEquipementQuantite)) then
+                                        begin
+                                          QuantiteAttr := UTF8Encode(Node.Attributes.GetNamedItem(ConstXmlEquipementQuantite).NodeValue);
+                                          if Pos(SeparateurMulti, QuantiteAttr) > 0 then
+                                            PClassEquipement.QuantiteListe := QuantiteAttr
+                                          else
+                                            PClassEquipement.Quantite      := StrToIntDef(QuantiteAttr, 1);
+                                        end;
+
+                                      if LangueDef = ConstAnglais then
+                                        begin
+                                          PClassEquipement.TypeEquipement := GetTypeMetierEquipement(PClassEquipement.Equipement);
+                                          ListClassEquipement.add(PClassEquipement);
+                                          inc(NbClassEquipement);
+                                        end;
+                                    end;
+                                  Node := XmlElement(Node.NextSibling);
+                                end;
+                            end;
+                          NodeNv3 := XmlElement(NodeNv3.NextSibling);
+                        end;
                       NodeNv2 := XmlElement(NodeNv2.NextSibling);
                     end;
                 end;

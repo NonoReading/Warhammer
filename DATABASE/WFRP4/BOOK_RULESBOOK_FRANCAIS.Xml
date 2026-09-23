@@ -17402,4 +17402,69 @@ Si votre adversaire possède une arme avec l’Atout Empaleuse et obtient un Cri
 <Chance name="91-95">"RULES-CORMEN_019"</Chance>
 <Chance name="96-00">"RULES-CORMEN_020"</Chance>
 </DATA_CORRUPTION_MENTAL_CHANCE>
+<DATA_DISEASE>
+<Disease name="RULES-DISEASE_001">
+<Description language="FRANCAIS">"Putréfaction du Sang"</Description>
+<Contraction language="FRANCAIS">"Développement d’une autre maladie ou d’une Blessure Critique."</Contraction>
+<Incubation language="FRANCAIS">"Instantanée"</Incubation>
+<Duration language="FRANCAIS">"1d10 jours"</Duration>
+<Symptoms language="FRANCAIS">"Fléau, Fièvre (Sévère), Malaise"</Symptoms>
+</Disease>
+<Disease name="RULES-DISEASE_002">
+<Description language="FRANCAIS">"Le Flux Sanglant"</Description>
+<Contraction language="FRANCAIS">"En cas d’échec à un Test d’Endurance Facile (+40) après qu’une source infectée soit entrée dans la bouche."</Contraction>
+<Incubation language="FRANCAIS">"2d10 jours"</Incubation>
+<Duration language="FRANCAIS">"1d10 jours"</Duration>
+<Symptoms language="FRANCAIS">"Flux (Sévère), Persistant (Intermédiaire), Fièvre, Malaise, Nausée"</Symptoms>
+</Disease>
+<Disease name="RULES-DISEASE_003">
+<Description language="FRANCAIS">"La Peste Noire"</Description>
+<Contraction language="FRANCAIS">"Effectuez un Test de Résistance Accessible (+20) pour chaque heure, ou fraction d’heure, passée dans une zone infestée de puces infectées, ou en cas d’exposition à des fluides infectés."</Contraction>
+<Incubation language="FRANCAIS">"1d10 minutes"</Incubation>
+<Duration language="FRANCAIS">"3d10 jours"</Duration>
+<Symptoms language="FRANCAIS">"Bubons, Fléau (Modéré), Fièvre, Gangrène, Malaise"</Symptoms>
+</Disease>
+<Disease name="RULES-DISEASE_004">
+<Description language="FRANCAIS">"Plaie Purulente"</Description>
+<Contraction language="FRANCAIS">"En cas d’échec à un Test de Résistance Facile (+40) après un combat contre une créature possédant la Marque Infecté. Vous pouvez également développer une Plaie Purulente à partir d’une Infection Mineure."</Contraction>
+<Incubation language="FRANCAIS">"1d10 jours, ou instantanée si elle se développe à partir d’un autre symptôme"</Incubation>
+<Duration language="FRANCAIS">"1d10 jours"</Duration>
+<Symptoms language="FRANCAIS">"Fièvre, Persistant (Intermédiaire), Malaise, Blessure"</Symptoms>
+</Disease>
+<Disease name="RULES-DISEASE_005">
+<Description language="FRANCAIS">"Diarrhée Galopante"</Description>
+<Contraction language="FRANCAIS">"En cas d’échec à un Test d’Endurance Facile (+40) après qu’une source infectée soit entrée dans la bouche."</Contraction>
+<Incubation language="FRANCAIS">"1d10 heures"</Incubation>
+<Duration language="FRANCAIS">"1d10 jours"</Duration>
+<Symptoms language="FRANCAIS">"Flux (Modéré), Malaise, Nausée"</Symptoms>
+</Disease>
+<Disease name="RULES-DISEASE_006">
+<Description language="FRANCAIS">"Vérole Prurigineuse"</Description>
+<Contraction language="FRANCAIS">"En cas d’échec à un Test de Résistance Accessible (+20) au contact d’un individu infecté, ou en cas d’échec au même Test quand un individu infecté tousse ou éternue à votre proximité immédiate (à raison d’environ un Test par heure d’exposition)."</Contraction>
+<Incubation language="FRANCAIS">"1d10 jours"</Incubation>
+<Duration language="FRANCAIS">"1d10+7 jours"</Duration>
+<Symptoms language="FRANCAIS">"Toux et Éternuements, Vérole. Permanent : une fois la maladie contractée, vous devenez immunisé contre une nouvelle contamination."</Symptoms>
+</Disease>
+<Disease name="RULES-DISEASE_007">
+<Description language="FRANCAIS">"Infection Mineure"</Description>
+<Contraction language="FRANCAIS">"En cas d’échec à un Test de Résistance Très facile (+60) après un combat où vous avez subi une Blessure Critique."</Contraction>
+<Incubation language="FRANCAIS">"1d10 jours"</Incubation>
+<Duration language="FRANCAIS">"1d10 jours"</Duration>
+<Symptoms language="FRANCAIS">"Persistant (Facile), Malaise, Blessure"</Symptoms>
+</Disease>
+<Disease name="RULES-DISEASE_008">
+<Description language="FRANCAIS">"Vérole des Peaussiers"</Description>
+<Contraction language="FRANCAIS">"En cas d’échec à un Test de Résistance Facile (+40) après tout contact avec des animaux, peaux ou cadavres infectés."</Contraction>
+<Incubation language="FRANCAIS">"1d10 jours"</Incubation>
+<Duration language="FRANCAIS">"5d10 jours"</Duration>
+<Symptoms language="FRANCAIS">"Persistant (Intermédiaire), Vérole"</Symptoms>
+</Disease>
+<Disease name="RULES-DISEASE_009">
+<Description language="FRANCAIS">"Fièvre des Rats"</Description>
+<Contraction language="FRANCAIS">"En cas d’échec à un Test de Résistance Accessible (+20) après un combat où vous avez été blessé par des rongeurs (y compris des Skavens) possédant la Marque Infecté, ou en cas d’échec à un Test de Résistance Facile (+40) après qu’une source infectée soit entrée dans votre bouche."</Contraction>
+<Incubation language="FRANCAIS">"3d10+5 jours"</Incubation>
+<Duration language="FRANCAIS">"3d10+10 jours"</Duration>
+<Symptoms language="FRANCAIS">"Convulsions, Fièvre, Persistant (Accessible), Malaise, Vérole, Blessure"</Symptoms>
+</Disease>
+</DATA_DISEASE>
 </DATA_BOOK>

@@ -425,6 +425,11 @@
 <Text name="RULES-LAB_278">"Active"</Text>
 <Text name="RULES-LAB_279">"Explanation"</Text>
 <Text name="RULES-LAB_280">"Close"</Text>
+<Text name="RULES-LAB_281">"Diseases"</Text>
+<Text name="RULES-LAB_282">"Contraction"</Text>
+<Text name="RULES-LAB_283">"Incubation"</Text>
+<Text name="RULES-LAB_284">"Duration"</Text>
+<Text name="RULES-LAB_285">"Symptoms"</Text>
 </Label>
 </DATA_LABEL>
 </DATA_BOOK>

@@ -19434,4 +19434,153 @@ Certain Miracles may have additional, optional, benefits for additional SL writt
 <Chance name="91-95">"RULES-CORMEN_019"</Chance>
 <Chance name="96-00">"RULES-CORMEN_020"</Chance>
 </DATA_CORRUPTION_MENTAL_CHANCE>
+<DATA_DISEASE>
+<Disease name="RULES-DISEASE_001">
+<Description language="ENGLISH">"Blood Rot"</Description>
+<Contraction language="ENGLISH">"As a development of another disease or a Critical Wound."</Contraction>
+<Incubation language="ENGLISH">"Instant"</Incubation>
+<Duration language="ENGLISH">"1d10 days"</Duration>
+<Symptoms language="ENGLISH">"Blight, Fever (Severe), Malaise"</Symptoms>
+</Disease>
+<Disease name="RULES-DISEASE_002">
+<Description language="ENGLISH">"The Bloody Flux"</Description>
+<Contraction language="ENGLISH">"If you fail an Easy (+40) Toughness Test after an infected source enters the mouth."</Contraction>
+<Incubation language="ENGLISH">"2d10 days"</Incubation>
+<Duration language="ENGLISH">"1d10 days"</Duration>
+<Symptoms language="ENGLISH">"Flux (Severe), Lingering (Challenging), Fever, Malaise, Nausea"</Symptoms>
+</Disease>
+<Disease name="RULES-DISEASE_003">
+<Description language="ENGLISH">"The Black Plague"</Description>
+<Contraction language="ENGLISH">"Enact an Average (+20) Endurance Test for each hour, or part thereof, spent in an area infested with infected fleas, or when exposed to infected fluids."</Contraction>
+<Incubation language="ENGLISH">"1d10 minutes"</Incubation>
+<Duration language="ENGLISH">"3d10 days"</Duration>
+<Symptoms language="ENGLISH">"Buboes, Blight (Moderate), Fever, Gangrene, Malaise"</Symptoms>
+</Disease>
+<Disease name="RULES-DISEASE_004">
+<Description language="ENGLISH">"Festering Wound"</Description>
+<Contraction language="ENGLISH">"If you fail an Easy (+40) Endurance Test after a combat with a creature with the Infected trait. You can also develop a Festering Wound from a Minor Infection."</Contraction>
+<Incubation language="ENGLISH">"1d10 days, or instantly if developed from another symptom"</Incubation>
+<Duration language="ENGLISH">"1d10 days"</Duration>
+<Symptoms language="ENGLISH">"Fever, Lingering (Challenging), Malaise, Wounded"</Symptoms>
+</Disease>
+<Disease name="RULES-DISEASE_005">
+<Description language="ENGLISH">"Galloping Trots"</Description>
+<Contraction language="ENGLISH">"If you fail an Easy (+40) Toughness Test after an infected source enters the mouth."</Contraction>
+<Incubation language="ENGLISH">"1d10 hours"</Incubation>
+<Duration language="ENGLISH">"1d10 days"</Duration>
+<Symptoms language="ENGLISH">"Flux (Moderate), Malaise, Nausea"</Symptoms>
+</Disease>
+<Disease name="RULES-DISEASE_006">
+<Description language="ENGLISH">"Itching Pox"</Description>
+<Contraction language="ENGLISH">"If you fail an Average (+20) Endurance Test when contact is made with an infected individual or fail the same Test when an infected individual coughs or sneezes in your immediate vicinity (at a rate of about one Test per hour of exposure)."</Contraction>
+<Incubation language="ENGLISH">"1d10 days"</Incubation>
+<Duration language="ENGLISH">"1d10+7 days"</Duration>
+<Symptoms language="ENGLISH">"Coughs and Sneezes, Pox. Permanent: Once the disease is contracted, you become immune to catching it again."</Symptoms>
+</Disease>
+<Disease name="RULES-DISEASE_007">
+<Description language="ENGLISH">"Minor Infection"</Description>
+<Contraction language="ENGLISH">"If you fail a Very Easy (+60) Endurance Test after a combat where you suffered a Critical Wound."</Contraction>
+<Incubation language="ENGLISH">"1d10 days"</Incubation>
+<Duration language="ENGLISH">"1d10 days"</Duration>
+<Symptoms language="ENGLISH">"Lingering (Easy), Malaise, Wounded"</Symptoms>
+</Disease>
+<Disease name="RULES-DISEASE_008">
+<Description language="ENGLISH">"Packer's Pox"</Description>
+<Contraction language="ENGLISH">"If you fail an Easy (+40) Endurance Test after any contact with infected animals, hides, or bodies."</Contraction>
+<Incubation language="ENGLISH">"1d10 days"</Incubation>
+<Duration language="ENGLISH">"5d10 days"</Duration>
+<Symptoms language="ENGLISH">"Lingering (Challenging), Pox"</Symptoms>
+</Disease>
+<Disease name="RULES-DISEASE_009">
+<Description language="ENGLISH">"Ratte Fever"</Description>
+<Contraction language="ENGLISH">"If you fail an Average (+20) Endurance Test after any combat when wounded by rodents (including Skaven) with the Infected Trait, or you fail an Easy (+40) Endurance Test after an infected source enters your mouth."</Contraction>
+<Incubation language="ENGLISH">"3d10+5 days"</Incubation>
+<Duration language="ENGLISH">"3d10+10 days"</Duration>
+<Symptoms language="ENGLISH">"Convulsions, Fever, Lingering (Average), Malaise, Pox, Wounded"</Symptoms>
+</Disease>
+</DATA_DISEASE>
+<DATA_CLASS_ITEM>
+<Class name="RULES-CLASS_ACAD">
+<SUBCHAPTER_ITEM>
+<Item name="RULES-TRAP_017">"1"</Item>
+<Item name="RULES-COMB_BASE_10">"1"</Item>
+<Item name="RULES-TRAP_007">"1"</Item>
+<Item name="RULES-TRAP_011">"1"</Item>
+<Item name="RULES-TRAP_087">"1"</Item>
+<Item name="Parchment, 1d10 sheets">"1"</Item>
+</SUBCHAPTER_ITEM>
+</Class>
+<Class name="RULES-CLASS_BURG">
+<SUBCHAPTER_ITEM>
+<Item name="RULES-TRAP_016">"1"</Item>
+<Item name="RULES-TRAP_017">"1"</Item>
+<Item name="RULES-COMB_BASE_10">"1"</Item>
+<Item name="RULES-TRAP_023">"1"</Item>
+<Item name="RULES-TRAP_007">"1"</Item>
+<Item name="RULES-TRAP_011">"1"</Item>
+<Item name="Lunch">"1"</Item>
+</SUBCHAPTER_ITEM>
+</Class>
+<Class name="RULES-CLASS_COUR">
+<SUBCHAPTER_ITEM>
+<Item name="RULES-COMB_BASE_10">"1"</Item>
+<Item name="Fine Clothing">"1"</Item>
+<Item name="RULES-TRAP_007">"1"</Item>
+<Item name="RULES-TRAP_086">"1"</Item>
+<Item name="RULES-TRAP_059">"1"</Item>
+<Item name="RULES-TRAP_055">"1"</Item>
+</SUBCHAPTER_ITEM>
+</Class>
+<Class name="RULES-CLASS_PEAS">
+<SUBCHAPTER_ITEM>
+<Item name="RULES-TRAP_016">"1"</Item>
+<Item name="RULES-TRAP_017">"1"</Item>
+<Item name="RULES-COMB_BASE_10">"1"</Item>
+<Item name="RULES-TRAP_007">"1"</Item>
+<Item name="RULES-TRAP_011">"1"</Item>
+<Item name="RULES-TRAP_041">"1"</Item>
+</SUBCHAPTER_ITEM>
+</Class>
+<Class name="RULES-CLASS_RANG">
+<SUBCHAPTER_ITEM>
+<Item name="RULES-TRAP_016">"1"</Item>
+<Item name="RULES-TRAP_017">"1"</Item>
+<Item name="RULES-COMB_BASE_10">"1"</Item>
+<Item name="RULES-TRAP_007">"1"</Item>
+<Item name="RULES-TRAP_001">"1"</Item>
+<Item name="RULES-TRAP_152">"1"</Item>
+<Item name="RULES-TRAP_126">"1"</Item>
+<Item name="RULES-TRAP_041">"1"</Item>
+</SUBCHAPTER_ITEM>
+</Class>
+<Class name="RULES-CLASS_RIVE">
+<SUBCHAPTER_ITEM>
+<Item name="RULES-TRAP_016">"1"</Item>
+<Item name="RULES-TRAP_017">"1"</Item>
+<Item name="RULES-COMB_BASE_10">"1"</Item>
+<Item name="RULES-TRAP_007">"1"</Item>
+<Item name="RULES-TRAP_011">"1"</Item>
+<Item name="RULES-TRAP_004+RULES-TRAP_044">"1"</Item>
+</SUBCHAPTER_ITEM>
+</Class>
+<Class name="RULES-CLASS_ROGU">
+<SUBCHAPTER_ITEM>
+<Item name="RULES-TRAP_017">"1"</Item>
+<Item name="RULES-COMB_BASE_10">"1"</Item>
+<Item name="RULES-TRAP_007">"1"</Item>
+<Item name="RULES-TRAP_011">"1"</Item>
+<Item name="Candles" quantite="2">"1"</Item>
+<Item name="Matches, 1d10">"1"</Item>
+<Item name="RULES-TRAP_024">"1"</Item>
+</SUBCHAPTER_ITEM>
+</Class>
+<Class name="RULES-CLASS_WARR">
+<SUBCHAPTER_ITEM>
+<Item name="RULES-TRAP_017">"1"</Item>
+<Item name="RULES-COMB_BASE_*">"1"</Item>
+<Item name="RULES-COMB_BASE_10">"1"</Item>
+<Item name="RULES-TRAP_007">"1"</Item>
+</SUBCHAPTER_ITEM>
+</Class>
+</DATA_CLASS_ITEM>
 </DATA_BOOK>

@@ -11,7 +11,7 @@ uses
   Types, ChargeMetier, ChargeRaceMetier, ChargeAttribut, ChargeRaceAttribut, ChargeMetierNiveau,
   ChargeMetierAttribut, UnitCalcul, ChargeRaceTalent, ChargeTalent,
   ChargeTalentCreation, ChargeRaceCompetence, ChargeCompetence, ChargeRaceCreation,
-  ChargeMetierCompetence, ChargeArme, ChargeArmure, ChargeTrapping, ChargeMetierEquipement, ChargeFabrication,
+  ChargeMetierCompetence, ChargeArme, ChargeArmure, ChargeTrapping, ChargeMetierEquipement, ChargeClassEquipement, ChargeFabrication,
   WinMetier, WinRaces, ChargeTexte, WinTalent, WinCompetence, ChargeLivre,
   ChargeMetierSousMetier, ChargeMetierRaceChoixMetier, WinSpecialisation,
   ChargeMetierTalent, ChargePersonnage, BGRABitmap, BGRABitmapTypes, BCButton,
@@ -2636,6 +2636,8 @@ var
   PMetierCompetence:  StructureMetierCompetence;
   CodeCompAdapt:      String;
   PMetierEquipement:  StructureMetierEquipement;
+  PMetierClasse:      StructureMetier;
+  PClassEquipement:   StructureClassEquipement;
   PArme:              StructureArme;
   PArmure:            StructureArmure;
   PTrapping:          StructureTrapping;
@@ -2862,6 +2864,98 @@ begin
              end;
 
         end;
+
+    // Equipement de Classe (Rulebook p.37, "Class Trappings", CONTEXT.md chantier "AUDIT DES
+    // TXT" Rulebook) : donne une fois en plus de l'equipement de la Carriere choisie (pas de
+    // niveau, pas de choix "/" ni de doublon de logique - meme boucle que ci-dessus, juste une
+    // source differente). <Class> de la Carriere deja charge dans StructureMetier.LibelleGroupe.
+    PMetierClasse := ChercheMetier(MetierEnCours);
+    if PMetierClasse.LibelleGroupe <> '' then
+      For PClassEquipement in ListClassEquipement do
+        if CompareRechercheValeur(PClassEquipement.CodeClasse, PMetierClasse.LibelleGroupe) then
+          Begin
+             NbMetierEquipementTab        := NbMetierEquipementTab + 1;
+             TabMetierEquipement.RowCount := NbMetierEquipementTab + 1;
+             if Pos(SeparateurEnsemble, PClassEquipement.Equipement) > 0 then
+               begin
+                 // ensemble : memes commentaires que la boucle Carriere ci-dessus.
+                 StringsCodeEns := TStringList.Create;
+                 StringsTypeEns := TStringList.Create;
+                 ExtractStrings([SeparateurEnsemble], [], PChar(PClassEquipement.Equipement), StringsCodeEns);
+                 ExtractStrings([SeparateurEnsemble], [], PChar(PClassEquipement.TypeEquipement), StringsTypeEns);
+                 LibEns  := '';
+                 CodeEns := '';
+                 TypEns  := '';
+                 For IndEns := 0 to StringsCodeEns.Count - 1 do
+                   begin
+                     CodeUnit := StringsCodeEns[IndEns];
+                     if InList(StringsTypeEns[IndEns],TypeEquipMetierArme) then
+                         begin
+                           PArme    := ChercheArme(CodeUnit);
+                           LibUnit  := PArme.Libelle;
+                           TypUnit  := TypeEquipWe;
+                         end
+                       else if StringsTypeEns[IndEns] = TypeEquipAR then
+                         begin
+                           PArmure  := ChercheArmure(CodeUnit);
+                           LibUnit  := PArmure.Libelle;
+                           TypUnit  := TypeEquipAr;
+                         end
+                       else if StringsTypeEns[IndEns] = TypeEquipDI then
+                         begin
+                           PTrapping := ChercheTrapping(CodeUnit);
+                           if PTrapping.CodeTrapping <> '' then
+                             LibUnit := PTrapping.Libelle
+                           else
+                             LibUnit := CodeUnit;
+                           TypUnit  := TypeEquipDi;
+                         end;
+                     if LibEns  <> '' then LibEns  := LibEns  + ' + ';
+                     LibEns  := LibEns  + LibUnit;
+                     if CodeEns <> '' then CodeEns := CodeEns + SeparateurEnsemble;
+                     CodeEns := CodeEns + CodeUnit;
+                     if TypEns  <> '' then TypEns  := TypEns  + SeparateurEnsemble;
+                     TypEns  := TypEns  + TypUnit;
+                   end;
+                 StringsCodeEns.Free;
+                 StringsTypeEns.Free;
+                 TabMetierEquipement.Cells[1, NbMetierEquipementTab] := CodeEns;
+                 TabMetierEquipement.Cells[2, NbMetierEquipementTab] := LibEns + QuantiteSuffixe(PClassEquipement.Quantite);
+                 TabMetierEquipement.Cells[5, NbMetierEquipementTab] := IntToStr(PClassEquipement.Quantite);
+                 TabMetierEquipement.Cells[6, NbMetierEquipementTab] := TypEns;
+               end
+             else
+               begin
+                 Code := PClassEquipement.Equipement;
+                 if InList(PClassEquipement.TypeEquipement,TypeEquipMetierArme) then
+                     begin
+                       PArme   := ChercheArme(Code);
+                       Lib     := PArme.Libelle;
+                       Typ     := TypeEquipWe;
+                     end
+                   else if PClassEquipement.TypeEquipement = TypeEquipAR then
+                     begin
+                       PArmure := ChercheArmure(Code);
+                       Lib     := PArmure.Libelle;
+                       Typ     := TypeEquipAr;
+                     end
+                   else if PClassEquipement.TypeEquipement = TypeEquipDI then
+                     begin
+                       PTrapping := ChercheTrapping(Code);
+                       if PTrapping.CodeTrapping <> '' then
+                         Lib := PTrapping.Libelle
+                       else
+                         Lib := Code;
+                       Typ     := TypeEquipDi;
+                     end;
+                 Lib := Lib + QuantiteSuffixe(PClassEquipement.Quantite);
+                 TabMetierEquipement.Cells[1, NbMetierEquipementTab] := Code;
+                 TabMetierEquipement.Cells[2, NbMetierEquipementTab] := Lib;
+                 TabMetierEquipement.Cells[5, NbMetierEquipementTab] := IntToStr(PClassEquipement.Quantite);
+                 TabMetierEquipement.Cells[6, NbMetierEquipementTab] := Typ;
+               end;
+          end;
+
     AdjustGridColumnsWidth(TabMetierEquipement, PageEtapes.Height, false, true, true, 10);
    end;
 end;

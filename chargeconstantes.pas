@@ -164,6 +164,12 @@ Const
       ConstXmlDataCorruptionTableMent   = 'DATA_CORRUPTION_TABLE_MENTAL';
       ConstXmlDataCorruptionPhysChance  = 'DATA_CORRUPTION_PHYSICAL_CHANCE';
       ConstXmlDataCorruptionMentChance  = 'DATA_CORRUPTION_MENTAL_CHANCE';
+      ConstXmlDataDisease               = 'DATA_DISEASE';
+      ConstXmlDataClassItem             = 'DATA_CLASS_ITEM';
+      ConstXmlContraction               = 'Contraction';
+      ConstXmlIncubation                = 'Incubation';
+      ConstXmlDuration                  = 'Duration';
+      ConstXmlSymptoms                  = 'Symptoms';
       ConstXmlChance                    = 'Chance';
       ConstXmlLibelle                   = 'Libelle';
       ConstXmlEffet                     = 'Effet';
@@ -715,6 +721,7 @@ Const
       ConstPFabrication                     = 'PFabrication';
       ConstPCorruptionTable                 = 'PCorruptionTable';
       ConstPRaceCouleur                     = 'PRaceCouleur';
+      ConstPDisease                          = 'PDisease';
 
       ConstCEsquive                         = 'RULES-COMPESQU';
       ConstCCalme                           = 'RULES-COMPCALM';
