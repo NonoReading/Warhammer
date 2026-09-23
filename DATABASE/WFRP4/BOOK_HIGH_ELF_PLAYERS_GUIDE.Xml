@@ -3894,10 +3894,11 @@ You invoke a mystical prime language that existed before the arrival of the Old 
        ARMOB_03,ARMOB_05,ARMOB_06 - les memes combinaisons sont reprises ici a l'identique.
        Le -10 Furtivite de la note de bas de table (toutes les pieces d'Ithilmar et de Dragon)
        est porte par ARMOB_05, "Not discreet".
-       DURABLE ET FINE NE SONT PAS ICI, et ce n'est pas un oubli : ce sont des qualites de
-       FABRICATION (DATA_CRAFTMANSHIP), posees par la fenetre Fabrication sur l'objet que
-       possede un personnage, jamais sur une entree de catalogue. Aucun <Quality> du corpus
-       ne contient de code QUALITY_. -->
+       DURABLE ET FINE : SAISIES le 23/09/2026 dans <InherentCraftsmanship> de chaque piece,
+       recopiees automatiquement sur l'objet du personnage a l'acquisition (winpersonnage.pas
+       ButtonArmureClick, chargefabrication.pas FabricationDuCatalogue) - jamais dans <Quality>
+       ci-dessus, qui reste reserve aux vraies qualites d'armure. Chantier "objets a fabrication
+       integree", CONTEXT.md 2.29. -->
 <Armor id="HELFG-ARMO_01">
 <Description language="ENGLISH">"Ithilmar Breastplate"</Description>
 <Availability>"RULES-DISPO_UNIQUE"</Availability>
@@ -3907,6 +3908,7 @@ You invoke a mystical prime language that existed before the arrival of the Old 
 <Location>"RULES-ARMOL_BODY"</Location>
 <ArmorPoint>"2"</ArmorPoint>
 <Type>"RULES-ARMOT_PLATE"</Type>
+<InherentCraftsmanship>"RULES-QUALITY_04 2,RULES-QUALITY_03 2"</InherentCraftsmanship>
 </Armor>
 <Armor id="HELFG-ARMO_02">
 <Description language="ENGLISH">"Ithilmar Open Helm"</Description>
@@ -3917,6 +3919,7 @@ You invoke a mystical prime language that existed before the arrival of the Old 
 <Location>"RULES-ARMOL_HEAD"</Location>
 <ArmorPoint>"2"</ArmorPoint>
 <Type>"RULES-ARMOT_PLATE"</Type>
+<InherentCraftsmanship>"RULES-QUALITY_04 2,RULES-QUALITY_03 2"</InherentCraftsmanship>
 </Armor>
 <Armor id="HELFG-ARMO_03">
 <Description language="ENGLISH">"Ithilmar Bracers"</Description>
@@ -3927,6 +3930,7 @@ You invoke a mystical prime language that existed before the arrival of the Old 
 <Location>"RULES-ARMOL_ARM"</Location>
 <ArmorPoint>"2"</ArmorPoint>
 <Type>"RULES-ARMOT_PLATE"</Type>
+<InherentCraftsmanship>"RULES-QUALITY_04 2,RULES-QUALITY_03 2"</InherentCraftsmanship>
 </Armor>
 <Armor id="HELFG-ARMO_04">
 <Description language="ENGLISH">"Ithilmar Plate Leggings"</Description>
@@ -3937,6 +3941,7 @@ You invoke a mystical prime language that existed before the arrival of the Old 
 <Location>"RULES-ARMOL_LEG"</Location>
 <ArmorPoint>"2"</ArmorPoint>
 <Type>"RULES-ARMOT_PLATE"</Type>
+<InherentCraftsmanship>"RULES-QUALITY_04 2,RULES-QUALITY_03 2"</InherentCraftsmanship>
 </Armor>
 <Armor id="HELFG-ARMO_05">
 <Description language="ENGLISH">"Ithilmar Helm"</Description>
@@ -3947,6 +3952,7 @@ You invoke a mystical prime language that existed before the arrival of the Old 
 <Location>"RULES-ARMOL_HEAD"</Location>
 <ArmorPoint>"2"</ArmorPoint>
 <Type>"RULES-ARMOT_PLATE"</Type>
+<InherentCraftsmanship>"RULES-QUALITY_04 2,RULES-QUALITY_03 2"</InherentCraftsmanship>
 </Armor>
   <!-- ERRATUM DU LIVRE : la case AP de cette ligne est VIDE p.34 - verifie sur l image de la
        page, ce n est pas un defaut d extraction. Toutes les autres pieces valent 2, et le
@@ -3961,6 +3967,7 @@ You invoke a mystical prime language that existed before the arrival of the Old 
 <Location>"RULES-ARMOL_HEAD"</Location>
 <ArmorPoint>"2"</ArmorPoint>
 <Type>"RULES-ARMOT_PLATE"</Type>
+<InherentCraftsmanship>"RULES-QUALITY_04 2,RULES-QUALITY_03 4"</InherentCraftsmanship>
 </Armor>
 <Armor id="HELFG-ARMO_07">
 <Description language="ENGLISH">"Dragon Armour Breastplate"</Description>
@@ -3971,6 +3978,7 @@ You invoke a mystical prime language that existed before the arrival of the Old 
 <Location>"RULES-ARMOL_BODY"</Location>
 <ArmorPoint>"2"</ArmorPoint>
 <Type>"RULES-ARMOT_PLATE"</Type>
+<InherentCraftsmanship>"RULES-QUALITY_04 3,RULES-QUALITY_03 2"</InherentCraftsmanship>
 </Armor>
 <Armor id="HELFG-ARMO_08">
 <Description language="ENGLISH">"Dragon Armour Open Helm"</Description>
@@ -3981,6 +3989,7 @@ You invoke a mystical prime language that existed before the arrival of the Old 
 <Location>"RULES-ARMOL_HEAD"</Location>
 <ArmorPoint>"2"</ArmorPoint>
 <Type>"RULES-ARMOT_PLATE"</Type>
+<InherentCraftsmanship>"RULES-QUALITY_04 3,RULES-QUALITY_03 2"</InherentCraftsmanship>
 </Armor>
 <Armor id="HELFG-ARMO_09">
 <Description language="ENGLISH">"Dragon Armour Bracers"</Description>
@@ -3991,6 +4000,7 @@ You invoke a mystical prime language that existed before the arrival of the Old 
 <Location>"RULES-ARMOL_ARM"</Location>
 <ArmorPoint>"2"</ArmorPoint>
 <Type>"RULES-ARMOT_PLATE"</Type>
+<InherentCraftsmanship>"RULES-QUALITY_04 3,RULES-QUALITY_03 2"</InherentCraftsmanship>
 </Armor>
 <Armor id="HELFG-ARMO_10">
 <Description language="ENGLISH">"Dragon Armour Plate Leggings"</Description>
@@ -4001,6 +4011,7 @@ You invoke a mystical prime language that existed before the arrival of the Old 
 <Location>"RULES-ARMOL_LEG"</Location>
 <ArmorPoint>"2"</ArmorPoint>
 <Type>"RULES-ARMOT_PLATE"</Type>
+<InherentCraftsmanship>"RULES-QUALITY_04 3,RULES-QUALITY_03 2"</InherentCraftsmanship>
 </Armor>
 <Armor id="HELFG-ARMO_11">
 <Description language="ENGLISH">"Dragon Armour Helm"</Description>
@@ -4011,6 +4022,7 @@ You invoke a mystical prime language that existed before the arrival of the Old 
 <Location>"RULES-ARMOL_HEAD"</Location>
 <ArmorPoint>"2"</ArmorPoint>
 <Type>"RULES-ARMOT_PLATE"</Type>
+<InherentCraftsmanship>"RULES-QUALITY_04 3,RULES-QUALITY_03 2"</InherentCraftsmanship>
 </Armor>
   <!-- Le livre ne lui donne aucune penalite de Furtivite : pas de ARMOB_05, contrairement aux
        pieces d Ithilmar et de Dragon. Type cuir souple, faute de categorie 'peau'. -->
@@ -4023,16 +4035,25 @@ You invoke a mystical prime language that existed before the arrival of the Old 
 <Location>"RULES-ARMOL_BODY"</Location>
 <ArmorPoint>"2"</ArmorPoint>
 <Type>"RULES-ARMOT_SOFTLEATHER"</Type>
+<InherentCraftsmanship>"RULES-QUALITY_03 2"</InherentCraftsmanship>
 </Armor>
 </DATA_ARMOR>
 <DATA_WEAPON>
-  <!-- Le Greatsword of Hoeth (p.33). Seule arme du chapitre qui soit une nouveaute : les
-       sept autres sont les armes courantes du Rulebook vendues au marche elfique, et ce que
-       le marche leur ajoute - "at least one level each of the Durable and Fine Qualities",
-       p.32 - est une regle de marche que la fenetre Fabrication porte deja. Les modeliser
-       aurait cree des doublons ne differant que par leur prix.
+  <!-- Le Greatsword of Hoeth (p.33), Durable 3/Fine 3 SAISI le 23/09/2026 dans
+       <InherentCraftsmanship> (chantier "objets a fabrication integree", CONTEXT.md 2.29).
        Portee Long = WEAPR_LONG, comme la Grande Hache et l'Epee Batarde du Rulebook, qui ont
-       la meme portee et les memes degats. -->
+       la meme portee et les memes degats.
+       Les sept armes elfiques courantes (Sword, Dagger, Shield, Lance, Halberd, Spear, Great
+       Axe, p.32) SONT saisies ci-dessous (HELFG-COMB_BASE_01/02/03, HELFG-COMB_CAVAL_01,
+       HELFG-COMB_HAST_01/02, HELFG-COMB_2M_02) : ce ne sont pas de nouvelles armes, mais le
+       livre leur donne une fabrication FIXE (Durable 1/Fine 1) propre au marche elfique,
+       differente du "at least one level" laisse au choix du joueur ailleurs - assez pour
+       justifier des entrees dediees plutot que de renvoyer aux armes du Rulebook. SAISIES le
+       23/09/2026, memes competence/degats/portee/qualites REELLES que leurs equivalents du
+       Rulebook (RULES-COMB_BASE_04/10/07, RULES-COMB_CAVAL_02, RULES-COMB_HAST_02/03,
+       RULES-COMB_2M_02), prefixees HELFG pour eviter tout doublon de nom. Le Shield du Rulebook
+       porte aussi Undamaging (RULES-WEAPB27) ; la table de ce livre ne l'imprime pas parmi les
+       qualites du sien - non ajoute, fidelite au texte plutot que deduction. -->
 <Weapon id="HELFG-COMB_2M_01">
 <Description language="ENGLISH">"Greatsword of Hoeth"</Description>
 <Skill>"RULES-COMPCOMB_2M"</Skill>
@@ -4044,10 +4065,114 @@ You invoke a mystical prime language that existed before the arrival of the Old 
 <Quality>"RULES-WEAPB10,RULES-WEAPB30"</Quality>
 <Hand>"2"</Hand>
 <Ammunition>"0"</Ammunition>
+<InherentCraftsmanship>"RULES-QUALITY_04 3,RULES-QUALITY_03 3"</InherentCraftsmanship>
 </Weapon>
   <!-- Requise par le sword-dancing : le talent HELFG-T0187, ecrit au lot 1, exige cette
        arme, qui n'existait pas jusqu'ici. Le livre le dit p.33 : "they are, however,
        required in order to use sword-dancing techniques". -->
+<Weapon id="HELFG-COMB_BASE_01">
+<Description language="ENGLISH">"Sword"</Description>
+<Skill>"RULES-COMPCOMB_BASE"</Skill>
+<Damage>"+(BATTR_S)+4"</Damage>
+<Availability>"RULES-DISPO_COMMON"</Availability>
+<Reach>"RULES-WEAPR_MID"</Reach>
+<Price>"4CO"</Price>
+<Encumbrance>"1"</Encumbrance>
+<Quality>"-"</Quality>
+<Hand>"1"</Hand>
+<Ammunition>"0"</Ammunition>
+<Type>"RULES-WTYPE_SWORD"</Type>
+<InherentCraftsmanship>"RULES-QUALITY_04 1,RULES-QUALITY_03 1"</InherentCraftsmanship>
+</Weapon>
+  <!-- Prix imprime "3 GC 4/-" : le second nombre ne se laisse pas resoudre proprement (pas de
+       Munition sur une Dagger), retenu comme 3CO, la seule partie sans ambiguite - deduction,
+       pas une lecture. -->
+<Weapon id="HELFG-COMB_BASE_02">
+<Description language="ENGLISH">"Dagger"</Description>
+<Skill>"RULES-COMPCOMB_BASE"</Skill>
+<Damage>"+(BATTR_S)+2"</Damage>
+<Availability>"RULES-DISPO_COMMON"</Availability>
+<Reach>"RULES-WEAPR_CLOSE"</Reach>
+<Price>"3CO"</Price>
+<Encumbrance>"0"</Encumbrance>
+<Quality>"-"</Quality>
+<Hand>"1"</Hand>
+<Ammunition>"0"</Ammunition>
+<InherentCraftsmanship>"RULES-QUALITY_04 1,RULES-QUALITY_03 1"</InherentCraftsmanship>
+</Weapon>
+<Weapon id="HELFG-COMB_BASE_03">
+<Description language="ENGLISH">"Shield"</Description>
+<Skill>"RULES-COMPCOMB_BASE"</Skill>
+<Damage>"+(BATTR_S)+2"</Damage>
+<Availability>"RULES-DISPO_COMMON"</Availability>
+<Reach>"RULES-WEAPR_CLOSE"</Reach>
+<Price>"8CO"</Price>
+<Encumbrance>"1"</Encumbrance>
+<Quality>"RULES-WEAPB18 2,RULES-WEAPB08"</Quality>
+<Hand>"1"</Hand>
+<Ammunition>"0"</Ammunition>
+<Type>"RULES-WTYPE_SHIELD"</Type>
+<InherentCraftsmanship>"RULES-QUALITY_04 1,RULES-QUALITY_03 1"</InherentCraftsmanship>
+</Weapon>
+  <!-- "*Lances count as Improvised Weapons if used on a Turn where you have not Charged" (note
+       de bas de table, p.32) : regle de jeu, pas une donnee de catalogue - non modelisee, meme
+       parti que les autres notes de bas de tableau du corpus. -->
+<Weapon id="HELFG-COMB_CAVAL_01">
+<Description language="ENGLISH">"Lance"</Description>
+<Skill>"RULES-COMPCOMB_CAVAL"</Skill>
+<Damage>"+(BATTR_S)+6"</Damage>
+<Availability>"RULES-DISPO_RARE"</Availability>
+<Reach>"RULES-WEAPR_BIG"</Reach>
+<Price>"4CO"</Price>
+<Encumbrance>"3"</Encumbrance>
+<Quality>"RULES-WEAPB21,RULES-WEAPB12"</Quality>
+<Hand>"1"</Hand>
+<Ammunition>"0"</Ammunition>
+<Type>"RULES-WTYPE_LANCE"</Type>
+<InherentCraftsmanship>"RULES-QUALITY_04 1,RULES-QUALITY_03 1"</InherentCraftsmanship>
+</Weapon>
+<Weapon id="HELFG-COMB_HAST_01">
+<Description language="ENGLISH">"Halberd"</Description>
+<Skill>"RULES-COMPCOMB_HAST"</Skill>
+<Damage>"+(BATTR_S)+4"</Damage>
+<Availability>"RULES-DISPO_COMMON"</Availability>
+<Reach>"RULES-WEAPR_LONG"</Reach>
+<Price>"8CO"</Price>
+<Encumbrance>"3"</Encumbrance>
+<Quality>"RULES-WEAPB08,RULES-WEAPB30,RULES-WEAPB12"</Quality>
+<Hand>"2"</Hand>
+<Ammunition>"0"</Ammunition>
+<Type>"RULES-WTYPE_HALBERD"</Type>
+<InherentCraftsmanship>"RULES-QUALITY_04 1,RULES-QUALITY_03 1"</InherentCraftsmanship>
+</Weapon>
+<Weapon id="HELFG-COMB_HAST_02">
+<Description language="ENGLISH">"Spear"</Description>
+<Skill>"RULES-COMPCOMB_HAST"</Skill>
+<Damage>"+(BATTR_S)+4"</Damage>
+<Availability>"RULES-DISPO_COMMON"</Availability>
+<Reach>"RULES-WEAPR_BIG"</Reach>
+<Price>"3CO"</Price>
+<Encumbrance>"2"</Encumbrance>
+<Quality>"RULES-WEAPB12"</Quality>
+<Hand>"2"</Hand>
+<Ammunition>"0"</Ammunition>
+<Type>"RULES-WTYPE_SPEAR"</Type>
+<InherentCraftsmanship>"RULES-QUALITY_04 1,RULES-QUALITY_03 1"</InherentCraftsmanship>
+</Weapon>
+<Weapon id="HELFG-COMB_2M_02">
+<Description language="ENGLISH">"(2H) Great Axe"</Description>
+<Skill>"RULES-COMPCOMB_2M"</Skill>
+<Damage>"+(BATTR_S)+6"</Damage>
+<Availability>"RULES-DISPO_LIMITED"</Availability>
+<Reach>"RULES-WEAPR_LONG"</Reach>
+<Price>"16CO"</Price>
+<Encumbrance>"3"</Encumbrance>
+<Quality>"RULES-WEAPB30,RULES-WEAPB21,RULES-WEAPB25"</Quality>
+<Hand>"2"</Hand>
+<Ammunition>"0"</Ammunition>
+<Type>"RULES-WTYPE_AXE"</Type>
+<InherentCraftsmanship>"RULES-QUALITY_04 1,RULES-QUALITY_03 1"</InherentCraftsmanship>
+</Weapon>
 <!-- Eagle Claw Bolt Thrower (p.39) : arme de machine des navires elfiques, plus puissante que la Ballista de Sea of Claws p.100. Portee 150, +13, Accurate, Crewed 2, Reload 3. Le livre ecrit "Accurate or Volley 6" : la qualite Volley n existe pas au catalogue, seule Accurate est saisie. Ni prix, ni disponibilite, ni encombrement dans le livre (Enc 0). -->
 <Weapon id="HELFG-PROJ_ARB_01">
 <Description language="ENGLISH">"Eagle Claw Bolt Thrower"</Description>

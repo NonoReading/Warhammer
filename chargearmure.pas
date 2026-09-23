@@ -19,6 +19,10 @@ Type
     Protection:         Integer;
     ListeBonus:         String;
     Livre:              String;
+    // Fabrication D'ORIGINE ("CODE val,CODE val", meme format que QualiteEquipement) : '' pour
+    // la quasi-totalite des armures. Copiee automatiquement sur l'objet du personnage a
+    // l'acquisition (winpersonnage.pas ButtonArmureClick, wincreation.pas). CONTEXT.md 2.29.
+    Fabrication:        String;
 
 end;
 

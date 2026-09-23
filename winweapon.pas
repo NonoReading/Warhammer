@@ -7,7 +7,8 @@ interface
 uses
   Classes, SysUtils, Forms, Controls, Graphics, Dialogs, Grids, StdCtrls,
   ExtCtrls, BCButton, ChargeArme, GlobalFonts, ChargeConstantes,
-  ChargeCompetence, UnitCalcul, ChargeArmeBonus, ChargeTexte, WinFiltre, AncrageProportionnel;
+  ChargeCompetence, UnitCalcul, ChargeArmeBonus, ChargeTexte, WinFiltre,
+  AncrageProportionnel, ChargeFabrication;
 
 type
 
@@ -42,7 +43,9 @@ type
     LabCompetence: TLabel;
     LabLib: TLabel;
     LabEncombrement: TLabel;
+    LabFabIntegree: TLabel;
     TabBonus: TStringGrid;
+    TabFabIntegree: TStringGrid;
     TabWeapon: TStringGrid;
     procedure ButtonFiltreClick({%H-}Sender: TObject);
     procedure FormCreate({%H-}Sender: TObject);
@@ -50,6 +53,7 @@ type
     procedure FormResize({%H-}Sender: TObject);
     procedure CheckCompetenceChange({%H-}Sender: TObject);
     procedure TabBonusSelection({%H-}Sender: TObject; {%H-}aCol, aRow: Integer);
+    procedure TabFabIntegreeSelection({%H-}Sender: TObject; {%H-}aCol, aRow: Integer);
     procedure TabWeaponAfterSelection({%H-}Sender: TObject; {%H-}aCol, aRow: Integer);
     procedure TabWeaponDblClick({%H-}Sender: TObject);
     procedure WinCharger();
@@ -108,6 +112,9 @@ begin
         GridAjouteColonne(TabWeapon,GetTexteLibelle('RULES-LAB_128'),100);
         GridAjouteColonne(TabWeapon,GetTexteLibelle('RULES-LAB_001'),180);
         GridAjouteColonne(TabWeapon,GetTexteLibelle('RULES-LAB_009'),100);
+        // Colonne 16, cachee : fabrication D'ORIGINE (PArme.Fabrication), lue par
+        // TabWeaponAfterSelection pour remplir TabFabIntegree ci-dessous.
+        GridAjouteColonne(TabWeapon,'',0);
       end;
     TabWeapon.ColWidths[0]  := 20;
 
@@ -120,6 +127,22 @@ begin
         GridAjouteColonne(TabBonus,GetTexteLibelle('RULES-LAB_002'),100);
         GridAjouteColonne(TabBonus,GetTexteLibelle('RULES-LAB_072'));
         GridAjouteColonne(TabBonus,GetTexteLibelle('RULES-LAB_073'),380);
+      end;
+
+        // Fabrication D'ORIGINE (chantier "objets a fabrication integree", CONTEXT.md 2.29) :
+        // meme moule que TabBonus ci-dessus, mais lit PArme.Fabrication au lieu de ListeBonus.
+    TabFabIntegree.RowCount := 7;
+    If TabFabIntegree.ColCount < 2 then
+      begin
+        TabFabIntegree.ColCount      := 1;
+        TabFabIntegree.ColWidths[0]  := 20;
+        GridAjouteColonne(TabFabIntegree,GetTexteLibelle('RULES-LAB_002'),100);
+        // Colonne cachee (largeur 0, meme moule que TabBonus/LAB_072 ci-dessus) : le texte
+        // COMPLET (long), affiche seulement dans AffDescription au clic sur la ligne. C'est
+        // l'avoir mis ici, en clair, dans une colonne VISIBLE qui faisait deborder le tableau
+        // de la fenetre - corrige le 23/09/2026.
+        GridAjouteColonne(TabFabIntegree,GetTexteLibelle('RULES-LAB_072'));
+        GridAjouteColonne(TabFabIntegree,GetTexteLibelle('RULES-LAB_073'),380);
       end;
 
     IndTab := 0;
@@ -155,6 +178,7 @@ begin
             TabWeapon.Cells[12,IndTab]   := IntToStr(PArme.Munition);
             TabWeapon.Cells[13,IndTab]   := GetTexteLibelle(PArme.Livre,'','',true);
             TabWeapon.Cells[14,IndTab]   := PArme.CodeArme;
+            TabWeapon.Cells[16,IndTab]   := PArme.Fabrication;
             Code := PArme.CodeCompetence;
             if CountOccurrences(Code,SeparateurMulti) = 1 then
               begin
@@ -176,6 +200,7 @@ begin
     TabWeapon.SortColRow(true,2);
     AdjustGridColumnsWidth(TabWeapon, self.Height, false, true);
     AdjustGridColumnsWidth(TabBonus, self.Height, false, false);
+    AdjustGridColumnsWidth(TabFabIntegree, self.Height, false, false);
 
     if FileExists(GetCurrentDir+ConstCheminLogo1) then
       ImageWar.Picture.LoadFromFile(GetCurrentDir+ConstCheminLogo1);
@@ -294,6 +319,8 @@ begin
     Ancrage.Ajouter(TabBonus, 0.5, 0);
     Ancrage.Ajouter(AffDescription, 0.5, 0.5);
     Ancrage.Ajouter(LabBonus, 0.5, 0);
+    Ancrage.Ajouter(TabFabIntegree, 0.5, 0);
+    Ancrage.Ajouter(LabFabIntegree, 0.5, 0);
     Ancrage.Ajouter(LabLivre, 1, 0);
     Ancrage.Ajouter(AffLivre, 1, 0);
     Ancrage.Ajouter(Image2, 1, 0);
@@ -336,6 +363,15 @@ begin
       AffDescription.Visible := true;
 end;
 
+procedure TWinWeapons.TabFabIntegreeSelection(Sender: TObject; aCol, aRow: Integer);
+begin
+    AffDescription.Text := TabFabIntegree.Cells[2, aRow];
+    if AffDescription.Text = '' then
+      AffDescription.Visible := false
+    else
+      AffDescription.Visible := true;
+end;
+
 procedure TWinWeapons.TabWeaponAfterSelection(Sender: TObject; aCol,
   aRow: Integer);
 var
@@ -347,6 +383,12 @@ var
   Bonus:        String;
   CheminImage1: String;
   CheminImage2: String;
+  ListeFabIntegree: String;
+  NbFabIntegree:    Integer;
+  Fab:              String;
+  CodeFab:          String;
+  NiveauFab:        String;
+  PFabrication:     StructureFabrication;
 begin
     // renseigner les données
     AffCode.Text             := TabWeapon.Cells[ 1,aRow];
@@ -361,6 +403,7 @@ begin
     ListeBonus               := TabWeapon.Cells[11,aRow];
     AffMunition.Text         := TabWeapon.Cells[12,aRow];
     AffLivre.Text            := TabWeapon.Cells[13,aRow];
+    ListeFabIntegree         := TabWeapon.Cells[16,aRow];
 
     if (ListeBonus <> '') and (ListeBonus <> '-') then
       NbBonus                := CountOccurrences(ListeBonus,',')+1
@@ -392,6 +435,38 @@ begin
         TabBonus.Cells[2, Ind+1] := PArmeBonus.Description;
         TabBonus.Cells[3, Ind+1] := PArmeBonus.Resume;
       end;
+
+    // Fabrication D'ORIGINE (Durable/Fine imprimes sur l objet lui-meme, chantier "objets a
+    // fabrication integree", CONTEXT.md 2.29) : meme moule que TabBonus ci-dessus, colonne 16
+    // cachee de TabWeapon au lieu de la colonne 11 (ListeBonus).
+    if (ListeFabIntegree <> '') and (ListeFabIntegree <> '-') then
+      NbFabIntegree           := CountOccurrences(ListeFabIntegree,',')+1
+    else
+      NbFabIntegree           := 0;
+
+    if TabFabIntegree.RowCount <= NbFabIntegree then
+      TabFabIntegree.RowCount := NbFabIntegree + 1;
+
+    For I := 1 to TabFabIntegree.ColCount -1 do
+      for J := 1 to TabFabIntegree.RowCount -1 do
+        TabFabIntegree.Cells[I, J] := '';
+
+    For ind := 0 to NbFabIntegree - 1 do
+      begin
+        Fab       := Trim(ExtractChaine(',', ListeFabIntegree, Ind+1));
+        CodeFab   := Trim(ExtractStringBefore(Fab, ' '));
+        NiveauFab := Trim(ExtractStringAfter(Fab, ' '));
+        PFabrication := ChercheFabrication(CodeFab);
+        if PFabrication.Maximum = '1' then
+          TabFabIntegree.Cells[1, Ind+1] := PFabrication.Libelle
+        else
+          TabFabIntegree.Cells[1, Ind+1] := PFabrication.Libelle + ' ' + NiveauFab;
+        // Col 2 cachee : texte complet, pour AffDescription au clic (TabFabIntegreeSelection).
+        // Col 3 visible : le resume court, seul a tenir dans la largeur du tableau.
+        TabFabIntegree.Cells[2, Ind+1] := PFabrication.Description;
+        TabFabIntegree.Cells[3, Ind+1] := PFabrication.Resume;
+      end;
+
     AffDescription.Text := '';
 
 
@@ -439,6 +514,17 @@ begin
         TabBonus.Visible      := true;
       end;
 
+    if NbFabIntegree = 0 then
+      begin
+        LabFabIntegree.Visible := false;
+        TabFabIntegree.Visible := false;
+      end
+    else
+      begin
+        LabFabIntegree.Visible := true;
+        TabFabIntegree.Visible := true;
+      end;
+
     CheminImage1       := CheminArmeImage(TabWeapon.Cells[3,aRow],'2');
     CheminImage2       := CheminArmeImage(TabWeapon.Cells[3,aRow],'1');
     if FileExists(CheminImage1) then
@@ -453,6 +539,10 @@ begin
 
     AffDescription.Visible := false;
     AdjustGridColumnsWidth(TabBonus, self.Height, false, false);
+    // MaxWidth=false, MEME REGLAGE QUE TabBonus (pas true : bug corrige le 23/09/2026 - avec
+    // true, le tableau reste coince a la taille minuscule de son tout premier calcul, fait par
+    // WinCharger avant tout chargement de donnees, et ne regrandit plus jamais).
+    AdjustGridColumnsWidth(TabFabIntegree, self.Height, false, false);
 
 end;
 

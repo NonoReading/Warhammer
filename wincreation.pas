@@ -1346,6 +1346,10 @@ procedure TWinCreations.PhaseSave(NouvellePhase: Integer);
                        PersonnageEquipement.CodeEquipement    := StringsCodeEns[IndEns];
                        PersonnageEquipement.QualiteEquipement := QualiteDepuisCode(PersonnageEquipement.CodeEquipement);
                        PersonnageEquipement.TypeEquipement    := StringsTypeEns[IndEns];
+                       // Fabrication D'ORIGINE (gromril, Jade Longsword...) : posee seulement si
+                       // le joueur n'a pas deja un (Q) a choisir. CONTEXT.md 2.29.
+                       if PersonnageEquipement.QualiteEquipement = '' then
+                         PersonnageEquipement.QualiteEquipement := FabricationDuCatalogue(PersonnageEquipement.CodeEquipement, PersonnageEquipement.TypeEquipement);
                        PersonnageEquipement.Porte             := False;
                        PersonnageEquipement.Quantite          := StrToIntDef(TabMetierEquipement.Cells[5, IndTab], 1);
                        Personnage.Equipement                  += [PersonnageEquipement];
@@ -1358,6 +1362,10 @@ procedure TWinCreations.PhaseSave(NouvellePhase: Integer);
                    PersonnageEquipement.CodeEquipement          := TabMetierEquipement.Cells[1, IndTab];
                    PersonnageEquipement.QualiteEquipement       := QualiteDepuisCode(PersonnageEquipement.CodeEquipement);
                    PersonnageEquipement.TypeEquipement          := TabMetierEquipement.Cells[6, IndTab];
+                   // Fabrication D'ORIGINE (gromril, Jade Longsword...) : posee seulement si le
+                   // joueur n'a pas deja un (Q) a choisir. CONTEXT.md 2.29.
+                   if PersonnageEquipement.QualiteEquipement = '' then
+                     PersonnageEquipement.QualiteEquipement := FabricationDuCatalogue(PersonnageEquipement.CodeEquipement, PersonnageEquipement.TypeEquipement);
                    // Comme un achat en jeu (winpersonnage.pas) : l'equipement de depart arrive
                    // non porte, a cocher explicitement ensuite.
                    PersonnageEquipement.Porte                   := False;

@@ -794,6 +794,8 @@ Procedure XmlExportBook(Livre: String; Langue: String);
               XmlContent.Add(XmlLigne(ConstXmlMunition, IntToStr(PArme.Munition)));
               if PArme.TypeArme <> '' then
                 XmlContent.Add(XmlLigne(ConstXmlType, PArme.TypeArme));
+              if PArme.Fabrication <> '' then
+                XmlContent.Add(XmlLigne(ConstXmlFabIntegree, PArme.Fabrication));
 
               XmlContent.Add(XmlFinCode(ConstXmlArme));
             end;
@@ -840,6 +842,8 @@ Procedure XmlExportBook(Livre: String; Langue: String);
               XmlContent.Add(XmlLigne(ConstXmlEmplacement, PArmure.Emplacement));
               XmlContent.Add(XmlLigne(ConstXmlProtection, IntToStr(PArmure.Protection)));
               XmlContent.Add(XmlLigne(ConstXmlType, PArmure.TypeMateriel));
+              if PArmure.Fabrication <> '' then
+                XmlContent.Add(XmlLigne(ConstXmlFabIntegree, PArmure.Fabrication));
 
               XmlContent.Add(XmlFinCode(ConstXmlArmure));
             end;
@@ -2507,6 +2511,11 @@ Procedure XmlImport(FileName: String; OnlyPrimary: Boolean; OnlyCode: Boolean; C
                   While Assigned(NodeNv2) do
                     begin
                       PArme.Livre    := Livre;
+                      // Remis a vide a chaque entree : <BuiltInCraftsmanship> n'existe que sur
+                      // de rares armes (Jade Longsword...), PArme etant reutilise d'un tour de
+                      // boucle a l'autre sans cela la valeur de l'entree precedente resterait
+                      // collee - meme piege que PTrapping.Capacite (CONTEXT.md 2.17).
+                      PArme.Fabrication := '';
                       PArme.CodeArme := RemoveQuotes(UTF8Encode(NodeNv2.Attributes.GetNamedItem(ConstXmlId).NodeValue));
                       PTraduction    := InitTrad(ConstPArme, PArme.CodeArme, '', PArme.Livre);
 
@@ -2540,6 +2549,8 @@ Procedure XmlImport(FileName: String; OnlyPrimary: Boolean; OnlyCode: Boolean; C
                               PArme.Prix            := RemoveQuotes(UTF8Encode(Node.TextContent));
                             ConstXmlType:
                               PArme.TypeArme        := RemoveQuotes(UTF8Encode(Node.TextContent));
+                            ConstXmlFabIntegree:
+                              PArme.Fabrication     := RemoveQuotes(UTF8Encode(Node.TextContent));
                             // <ModifyCarac name="CODE">VALEUR</ModifyCarac> pose directement sur
                             // l'arme (rare - arme magique bonifiant un Attribut) - CONTEXT.md 2.50
                             // etape 3. Pas de pendant ModifySkill pour l'instant (voir
@@ -2738,6 +2749,8 @@ Procedure XmlImport(FileName: String; OnlyPrimary: Boolean; OnlyCode: Boolean; C
                   While Assigned(NodeNv2) do
                     begin
                       PArmure.Livre      := Livre;
+                      // Remis a vide a chaque entree, meme raison que PArme.Fabrication ci-dessus.
+                      PArmure.Fabrication := '';
                       PArmure.CodeArmure := RemoveQuotes(UTF8Encode(NodeNv2.Attributes.GetNamedItem(ConstXmlId).NodeValue));
                       PTraduction        := InitTrad(ConstPArmure, PArmure.CodeArmure, '', PArmure.Livre);
 
@@ -2765,6 +2778,8 @@ Procedure XmlImport(FileName: String; OnlyPrimary: Boolean; OnlyCode: Boolean; C
                               PArmure.Emplacement     := RemoveQuotes(UTF8Encode(Node.TextContent));
                             ConstXmlQualite:
                               PArmure.ListeBonus      := RemoveQuotes(UTF8Encode(Node.TextContent));
+                            ConstXmlFabIntegree:
+                              PArmure.Fabrication     := RemoveQuotes(UTF8Encode(Node.TextContent));
                           end;
 
                           Node := XmlElement(Node.NextSibling);

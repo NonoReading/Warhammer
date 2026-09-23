@@ -8,7 +8,8 @@ uses
   Classes, SysUtils, Forms, Controls, Graphics, Dialogs, Grids, StdCtrls,
   ExtCtrls, BCButton, ChargeArmure, GlobalFonts, ChargeConstantes,
   UnitCalcul, ChargeArmureBonus, ChargeArmureBonusModif, ChargeCompetence,
-  ChargeTexte, WinFiltre, ChargeArmureSimplifie, AncrageProportionnel;
+  ChargeTexte, WinFiltre, ChargeArmureSimplifie, AncrageProportionnel,
+  ChargeFabrication;
 
 type
 
@@ -42,7 +43,9 @@ type
     LabType: TLabel;
     LabLib: TLabel;
     LabEncombrement: TLabel;
+    LabFabIntegree: TLabel;
     TabBonus: TStringGrid;
+    TabFabIntegree: TStringGrid;
     TabArmor: TStringGrid;
     procedure ButtonFiltreClick({%H-}Sender: TObject);
     procedure CheckBoxSimplifiedClick(Sender: TObject);
@@ -52,6 +55,7 @@ type
     procedure TabArmorDblClick({%H-}Sender: TObject);
     procedure TabArmorSelection({%H-}Sender: TObject; {%H-}aCol, aRow: Integer);
     procedure TabBonusSelection({%H-}Sender: TObject; {%H-}aCol, {%H-}aRow: Integer);
+    procedure TabFabIntegreeSelection({%H-}Sender: TObject; {%H-}aCol, {%H-}aRow: Integer);
     procedure WinCharger();
     procedure WinVider();
   private
@@ -105,6 +109,8 @@ procedure TWinArmors.FormCreate(Sender: TObject);
     Ancrage.Ajouter(AffEmplacement, 0.5, 0);
     Ancrage.Ajouter(TabBonus, 0.5, 0);
     Ancrage.Ajouter(LabBonus, 0.5, 0);
+    Ancrage.Ajouter(TabFabIntegree, 0.5, 0);
+    Ancrage.Ajouter(LabFabIntegree, 0.5, 0);
     Ancrage.Ajouter(AffDescription, 0.5, 0.5);
     Ancrage.Ajouter(LabLivre, 0.5, 0);
     Ancrage.Ajouter(AffLivre, 0.5, 0);
@@ -141,6 +147,9 @@ var
         GridAjouteColonne(TabArmor,GetTexteLibelle('RULES-LAB_059'));
         GridAjouteColonne(TabArmor,GetTexteLibelle('RULES-LAB_128'),100);
         GridAjouteColonne(TabArmor,GetTexteLibelle('RULES-LAB_001'),100);
+        // Colonne 12, cachee : fabrication D'ORIGINE (PArmure.Fabrication), lue par
+        // TabArmorSelection pour remplir TabFabIntegree ci-dessous.
+        GridAjouteColonne(TabArmor,'',0);
       end;
     TabArmor.ColWidths[0]  := 20;
 
@@ -153,6 +162,23 @@ var
         GridAjouteColonne(TabBonus,GetTexteLibelle('RULES-LAB_002'),120);
         GridAjouteColonne(TabBonus,GetTexteLibelle('RULES-LAB_072'));
         GridAjouteColonne(TabBonus,GetTexteLibelle('RULES-LAB_077'),300);
+      end;
+
+        // Fabrication D'ORIGINE (Durable/Fine imprimes dans le livre sur certains objets,
+        // chantier "objets a fabrication integree", CONTEXT.md 2.29) : meme moule que TabBonus
+        // ci-dessus, mais lit PArmure.Fabrication au lieu de ListeBonus.
+    TabFabIntegree.RowCount := 7;
+    if TabFabIntegree.ColCount < 2 then
+      begin
+        TabFabIntegree.ColCount      := 1;
+        TabFabIntegree.ColWidths[0]  := 20;
+        GridAjouteColonne(TabFabIntegree,GetTexteLibelle('RULES-LAB_002'),120);
+        // Colonne cachee (largeur 0, meme moule que TabBonus/LAB_072 ci-dessus) : le texte
+        // COMPLET (long), affiche seulement dans AffDescription au clic sur la ligne. C'est
+        // l'avoir mis ici, en clair, dans une colonne VISIBLE qui faisait deborder le tableau
+        // hors de la fenetre - corrige le 23/09/2026.
+        GridAjouteColonne(TabFabIntegree,GetTexteLibelle('RULES-LAB_072'));
+        GridAjouteColonne(TabFabIntegree,GetTexteLibelle('RULES-LAB_077'),300);
       end;
 
     IndTab := 0;
@@ -177,6 +203,7 @@ var
               TabArmor.Cells[ 9,NbWeap+1]  := PArmure.ListeBonus;
               TabArmor.Cells[10,NbWeap+1]  := GetTexteLibelle(PArmure.Livre,'','',true);
               TabArmor.Cells[11,NbWeap+1]  := PArmure.CodeArmure;
+              TabArmor.Cells[12,NbWeap+1]  := PArmure.Fabrication;
               Inc(NbWeap);
            end;
         end
@@ -210,6 +237,7 @@ var
       TabArmor.SortColRow(true,1);
     AdjustGridColumnsWidth(TabArmor, self.Height, false, true);
     AdjustGridColumnsWidth(TabBonus, self.Height, false, true);
+    AdjustGridColumnsWidth(TabFabIntegree, self.Height, false, true);
 
     if FileExists(GetCurrentDir+ConstCheminLogo1) then
       ImageWar.Picture.LoadFromFile(GetCurrentDir+ConstCheminLogo1);
@@ -287,6 +315,12 @@ var
   CheminImage1: String;
   CheminImage2: String;
   CheminImage3: String;
+  ListeFabIntegree: String;
+  NbFabIntegree:    Integer;
+  Fab:              String;
+  CodeFab:          String;
+  NiveauFab:        String;
+  PFabrication:     StructureFabrication;
 begin
     // renseigner les données
     AffCode.Text             := TabArmor.Cells[ 1,aRow];
@@ -299,6 +333,7 @@ begin
     AffProtection.Text       := TabArmor.Cells[ 8,aRow];
     ListeBonus               := TabArmor.Cells[ 9,aRow];
     AffLivre.Text            := TabArmor.Cells[10,aRow];
+    ListeFabIntegree         := TabArmor.Cells[12,aRow];
 
     if (ListeBonus <> '') and (ListeBonus <> '-') then
       NbBonus                := CountOccurrences(ListeBonus,',')+1
@@ -342,6 +377,34 @@ begin
               end;
       end;
 
+    // Fabrication D'ORIGINE (Durable/Fine imprimes sur l objet lui-meme, chantier "objets a
+    // fabrication integree", CONTEXT.md 2.29) : meme moule que TabBonus ci-dessus, colonne 12
+    // cachee de TabArmor au lieu de la colonne 9 (ListeBonus).
+    if (ListeFabIntegree <> '') and (ListeFabIntegree <> '-') then
+      NbFabIntegree           := CountOccurrences(ListeFabIntegree,',')+1
+    else
+      NbFabIntegree           := 0;
+
+    For I := 1 to TabFabIntegree.ColCount -1 do
+      for J := 1 to TabFabIntegree.RowCount -1 do
+        TabFabIntegree.Cells[I, J] := '';
+
+    For ind := 0 to NbFabIntegree - 1 do
+      begin
+        Fab       := Trim(ExtractChaine(',', ListeFabIntegree, Ind+1));
+        CodeFab   := Trim(ExtractStringBefore(Fab, ' '));
+        NiveauFab := Trim(ExtractStringAfter(Fab, ' '));
+        PFabrication := ChercheFabrication(CodeFab);
+        if PFabrication.Maximum = '1' then
+          TabFabIntegree.Cells[1, Ind+1] := PFabrication.Libelle
+        else
+          TabFabIntegree.Cells[1, Ind+1] := PFabrication.Libelle + ' ' + NiveauFab;
+        // Col 2 cachee : texte complet, pour AffDescription au clic (TabFabIntegreeSelection).
+        // Col 3 visible : le resume court, seul a tenir dans la largeur du tableau.
+        TabFabIntegree.Cells[2, Ind+1] := PFabrication.Description;
+        TabFabIntegree.Cells[3, Ind+1] := PFabrication.Resume;
+      end;
+
     if AffEncombrement.Text = '0' then
       begin
         LabEncombrement.Visible:= false;
@@ -364,6 +427,17 @@ begin
         TabBonus.Visible      := true;
       end;
 
+    if NbFabIntegree = 0 then
+      begin
+        LabFabIntegree.Visible := false;
+        TabFabIntegree.Visible := false;
+      end
+    else
+      begin
+        LabFabIntegree.Visible := true;
+        TabFabIntegree.Visible := true;
+      end;
+
     CheminImage1       := CheminArmureImage('1');
     CheminImage2       := CheminArmureImage('2');
     CheminImage3       := CheminArmureImage('3');
@@ -383,12 +457,28 @@ begin
     AffDescription.text := '';
     AffDescription.visible := false;
     AdjustGridColumnsWidth(TabBonus, self.Height, false, false);
+    // MaxWidth=false, MEME REGLAGE QUE TabBonus juste au-dessus (pas true : bug corrige le
+    // 23/09/2026, retrouve en testant - MaxWidth=true empeche le tableau de REGRANDIR apres son
+    // tout premier calcul, fait par WinCharger sur un tableau encore vide avant tout chargement
+    // de donnees ; il restait coince minuscule pour le reste de la session). Le resume etant
+    // court (colonne cachee ci-dessus pour le texte complet), il n'y a plus de risque de
+    // debordement sur les images a corriger par ce biais.
+    AdjustGridColumnsWidth(TabFabIntegree, self.Height, false, false);
 
 end;
 
 procedure TWinArmors.TabBonusSelection(Sender: TObject; aCol, aRow: Integer);
 begin
   AffDescription.Text := TabBonus.Cells[2, TabBonus.Row];
+  if AffDescription.Text <> '' then
+    AffDescription.visible := true
+  else
+    AffDescription.visible := false;
+end;
+
+procedure TWinArmors.TabFabIntegreeSelection(Sender: TObject; aCol, aRow: Integer);
+begin
+  AffDescription.Text := TabFabIntegree.Cells[2, TabFabIntegree.Row];
   if AffDescription.Text <> '' then
     AffDescription.visible := true
   else

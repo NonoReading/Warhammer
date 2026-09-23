@@ -942,6 +942,9 @@ procedure TWinPersonnages.ButtonArmeClick(Sender: TObject);
         TabEquipement.Cells[2, TabEquipement.RowCount-1]:= PArme.CodeArme;
         TabEquipement.Cells[3, TabEquipement.RowCount-1]:= TypeEquipWe;
         TabEquipement.Cells[4, TabEquipement.RowCount-1]:= PArme.Libelle;
+        // Fabrication D'ORIGINE de l'arme (Jade Longsword...) : posee automatiquement, comme au
+        // livre. CONTEXT.md 2.29, chantier "objets a fabrication integree".
+        TabEquipement.Cells[7, TabEquipement.RowCount-1]:= PArme.Fabrication;
         AdjustGridColumnsWidth(TabEquipement, 0, false, false);
       end;
     SelectWinArme  := '';
@@ -1207,6 +1210,9 @@ procedure TWinPersonnages.ButtonArmureClick(Sender: TObject);
             TabEquipement.Cells[2, TabEquipement.RowCount-1]:= PArmure.CodeArmure;
             TabEquipement.Cells[3, TabEquipement.RowCount-1]:= TypeEquipAr;
             TabEquipement.Cells[4, TabEquipement.RowCount-1]:= PArmure.Libelle;
+            // Fabrication D'ORIGINE de l'armure (gromril, Ithilmar/Dragon...) : posee
+            // automatiquement, comme au livre. CONTEXT.md 2.29.
+            TabEquipement.Cells[7, TabEquipement.RowCount-1]:= PArmure.Fabrication;
           end;
         AdjustGridColumnsWidth(TabEquipement, 0, false, false);
       end;

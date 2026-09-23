@@ -6691,11 +6691,36 @@ la page 57 — les douze compétences, les six talents dont les deux choix combi
 
 Durable, Fine, Practical, Ugly, Bulky... imprimés dans la colonne des qualités d'un livre sont des 
 qualités de FABRICATION : le joueur les pose via la fenêtre Fabrication, jamais sur l'entrée de 
-catalogue. Appliqué aux armures de Nations of Mankind, à la Jade Longsword, au gromril du Dwarf 
-Player's Guide, et à l'Incandescent Spear de Sea Wardens of Cothique (Durable 3, Fine 3 non saisis, 
-décision Nono du 20/09/2026 : la lance reste sans). Seule exception : Ugly de Skull Trophies 
-(`NATIO-ARMOB_15`), imprimé parmi les vraies qualités d'armure. Un objet du livre qui porte une 
-fabrication d'origine se signale en commentaire XML, pas dans la donnée. **Chantier à part à mener** (avis de Nono, 20/09/2026) : prendre en compte ces articles à qualités intégrées ; item capturé dans `A FAIRE.txt`.
+catalogue. Seule exception : Ugly de Skull Trophies (`NATIO-ARMOB_15`), imprimé parmi les vraies 
+qualités d'armure - décision Nono du 11/09/2026, non remise en cause. L'Incandescent Spear et la 
+Blade of Sea Gold de Sea Wardens of Cothique (Durable 3, Fine 3) restent volontairement SANS 
+fabrication saisie : ce sont des objets nommés d'un PNJ précis, pas des entrées de catalogue joueur 
+(décision Nono du 20/09/2026, confirmée le 23/09/2026 en faisant l'inventaire du chantier ci-dessous).
+
+**Chantier "objets à fabrication intégrée" — mécanisme et saisie faits le 23/09/2026.**
+Nouvelle balise `<InherentCraftsmanship>` (même format "CODE niveau,..." que `QualiteEquipement`)
+sur une entrée `DATA_WEAPON`/`DATA_ARMOR`, nouveau champ `Fabrication` sur `StructureArme`/
+`StructureArmure` (`chargearme.pas`/`chargearmure.pas`), lue/écrite dans `xmlexportimport.pas`
+(avec remise à vide à chaque entrée, même piège que `PTrapping.Capacite`, CONTEXT.md 2.17).
+Recopiée automatiquement sur l'objet du personnage à l'acquisition, via
+`ChargeFabrication.FabricationDuCatalogue` : à l'achat direct dans WinPersonnage
+(`ButtonArmeClick`/`ButtonArmureClick`) et à l'équipement de carrière (`wincreation.pas`, après
+le marqueur `(Q)` existant s'il y en a un - priorité au choix du joueur).
+
+Inventaire complet (croisement CONTEXT.md/XML + relecture des PDF_TEXTE des livres du périmètre,
+tout le reste audité sans trouver d'autre occurrence) et saisie :
+- **High Elf Player's Guide** : les 7 armes elfiques courantes (p.32), jusque-là non écrites du
+  tout faute de mécanisme, créées (`HELFG-COMB_BASE_01/02/03`, `HELFG-COMB_CAVAL_01`,
+  `HELFG-COMB_HAST_01/02`, `HELFG-COMB_2M_02`), Durable 1/Fine 1 chacune. Les 12 armures
+  Ithilmar/Dragon/White Lion Hide Cloak (`HELFG-ARMO_01` à `_12`) et le Greatsword of Hoeth
+  (`HELFG-COMB_2M_01`, Durable 3/Fine 3) complétés avec leur fabrication déjà documentée en
+  2.29 mais non saisie jusqu'ici.
+- **Nations of Mankind** : 17 des 28 pièces d'armure p.60 (`NATIO-ARMO_01` à `_08`, `_13` à
+  `_17`, `_19` à `_21`, `_28`) et la Jade Longsword (`NATIO-COMB_2M_08`, Fine 1). Les 11 autres
+  pièces (Chaos Plate, Lamellar, Kabuto, auxiliaire) n'ont aucune fabrication imprimée - vérifié
+  sur le texte, pas une omission.
+- **Dwarf Player's Guide** : les 5 pièces du Gromril Suit (`DWARF-ARMO_01` à `_05`), Durable 4/
+  Fine 1 chacune.
 
 ### 2.30 Les cinq bugs signalés — corrigés (01/09/2026)
 

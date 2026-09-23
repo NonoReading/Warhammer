@@ -187,6 +187,11 @@ Const
       ConstXmlFabQualiteArme            = 'WeaponQuality';
       ConstXmlFabArmeAlternative        = 'AlternateWeapon';
       ConstXmlFabApplique               = 'Applies';
+      // Fabrication D'ORIGINE d'une entree DATA_WEAPON/DATA_ARMOR (Incandescent Spear Durable
+      // 3/Fine 3, gromril Durable 4/Fine 1...) : meme format "CODE val,CODE val" que
+      // PersonnageEquipement.QualiteEquipement, copie automatiquement dessus a l acquisition
+      // (chantier "objets a fabrication integree", A FAIRE.txt).
+      ConstXmlFabIntegree               = 'InherentCraftsmanship';
       ConstXmlForPdf                    = 'PDF';
       ConstXmlTest                      = 'Test';
       // Marque un talent comme TRAIT DE CREATURE (Rulebook p.338-341) : acquis a la naissance

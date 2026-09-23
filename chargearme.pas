@@ -33,6 +33,10 @@ Type
     // usage interne au filtrage, rien a afficher tant qu'aucun ecran n'en a besoin.
     TypeArme:       String;
     Livre:          String;
+    // Fabrication D'ORIGINE ("CODE val,CODE val", meme format que QualiteEquipement) : '' pour
+    // la quasi-totalite des armes. Copiee automatiquement sur l'objet du personnage a
+    // l'acquisition (winpersonnage.pas ButtonArmeClick, wincreation.pas). CONTEXT.md 2.29.
+    Fabrication:    String;
 end;
 
   TListArme =  Specialize TList<StructureArme>;

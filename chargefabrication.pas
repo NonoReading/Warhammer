@@ -5,7 +5,8 @@ unit ChargeFabrication;
 interface
 
 uses
-  Classes, SysUtils, StrUtils, ChargeConstantes, ChargeTexte, UnitCalcul, Generics.Collections, ChargeModificateur;
+  Classes, SysUtils, StrUtils, ChargeConstantes, ChargeTexte, UnitCalcul, Generics.Collections,
+  ChargeModificateur, ChargeArme, ChargeArmure;
 
 Type
   StructureFabrication     = record
@@ -54,6 +55,10 @@ Function FabricationArmesAlternatives(ListeCode :String): String;
 procedure FabricationDetail(ListeCode :String; var BonusItem :String; var ListeBonus :String);
 function QualiteDepuisCode(var CodeEquipement: String): String;
 function QualiteSansMarqueur(ListeCode: String): String;
+// Fabrication D'ORIGINE d'une entree du catalogue arme/armure (Incandescent Spear, gromril...),
+// a poser telle quelle sur l'objet du personnage a l'acquisition. '' pour les objets ordinaires
+// et pour tout ce qui n'est ni une arme ni une armure (Divers, sort...). CONTEXT.md 2.29.
+function FabricationDuCatalogue(CodeEquipement, TypeEquipement: String): String;
 
 implementation
 
@@ -433,6 +438,15 @@ Function FabricationEffetsConditionnels(ListeCode, Cible: String): String;
     finally
       Liste.Free;
     end;
+  end;
+
+function FabricationDuCatalogue(CodeEquipement, TypeEquipement: String): String;
+  begin
+    Result := '';
+    if TrimRight(TypeEquipement) = TrimRight(TypeEquipWe) then
+      Result := ChercheArme(CodeEquipement).Fabrication
+    else if TrimRight(TypeEquipement) = TrimRight(TypeEquipAr) then
+      Result := ChercheArmure(CodeEquipement).Fabrication;
   end;
 
 end.

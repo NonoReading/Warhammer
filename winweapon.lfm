@@ -272,13 +272,35 @@ object WinWeapons: TWinWeapons
   end
   object TabBonus: TStringGrid
     Left = 616
-    Height = 310
-    Top = 544
+    Height = 150
+    Top = 531
     Width = 465
-    Anchors = [akTop, akLeft, akBottom]
     ColCount = 1
     TabOrder = 11
     OnSelection = TabBonusSelection
+  end
+  object TabFabIntegree: TStringGrid
+    Left = 616
+    Height = 140
+    Top = 714
+    Width = 465
+    Anchors = [akTop, akLeft, akBottom]
+    ColCount = 1
+    TabOrder = 14
+    OnSelection = TabFabIntegreeSelection
+  end
+  object LabFabIntegree: TLabel
+    Left = 616
+    Height = 20
+    Top = 691
+    Width = 79
+    Caption = 'Fabrication'
+    Font.CharSet = ANSI_CHARSET
+    Font.Color = clWhite
+    Font.Pitch = fpVariable
+    Font.Quality = fqDraft
+    ParentColor = False
+    ParentFont = False
   end
   object AffDescription: TMemo
     Left = 1096

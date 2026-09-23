@@ -15,8 +15,11 @@
        RULES-DISPO_UNIQUE, comme HELFG ; 1/- = 1PA, 1/6 = 1PA 6SB, GC = CO ; Average = WEAPR_MID ;
        "Dwarf X (DPG)" = arme deja presente dans ARCH1 avec un AUTRE profil, suffixe pour que
        WinWeapon ne montre pas deux lignes identiques quand les deux livres sont choisis ;
-       Durable 4 et Fine 1 du gromril sont des qualites de FABRICATION, pas de catalogue (meme
-       parti que HELFG) ; penalites : -10% Perception = ARMOB_06, -20% = ARMOB_07, -10 Stealth =
+       Durable 4 et Fine 1 du gromril sont des qualites de FABRICATION : SAISIES le 23/09/2026
+       dans <InherentCraftsmanship> des 5 pieces DWARF-ARMO_01 a _05, recopiees automatiquement
+       sur l objet du personnage a l acquisition (chargefabrication.pas FabricationDuCatalogue,
+       chantier "objets a fabrication integree") - jamais dans <Quality>, meme parti que HELFG ;
+       penalites : -10% Perception = ARMOB_06, -20% = ARMOB_07, -10 Stealth =
        ARMOB_05 ; les degats "+SB+n" prennent BATTR_S ; ** Ablaze = WEAPB29.
        DEJA AU CATALOGUE, NON REDECLARES : Candle (dozen) RULES-TRAP_127, Lantern RULES-TRAP_141,
        Storm Lantern RULES-TRAP_142 (la portee d eclairage du livre n a pas de champ), Trade Tools
@@ -5128,6 +5131,7 @@ Extreme Range: As for Short to Long Range but reduce the weapon's Damage by (Rat
 <Location>"RULES-ARMOL_BODY"</Location>
 <ArmorPoint>"3"</ArmorPoint>
 <Type>"RULES-ARMOT_PLATE"</Type>
+<InherentCraftsmanship>"RULES-QUALITY_04 4,RULES-QUALITY_03 1"</InherentCraftsmanship>
 </Armor>
 <Armor id="DWARF-ARMO_02">
 <Description language="ENGLISH">"Gromril Open Helm"</Description>
@@ -5138,6 +5142,7 @@ Extreme Range: As for Short to Long Range but reduce the weapon's Damage by (Rat
 <Location>"RULES-ARMOL_HEAD"</Location>
 <ArmorPoint>"3"</ArmorPoint>
 <Type>"RULES-ARMOT_PLATE"</Type>
+<InherentCraftsmanship>"RULES-QUALITY_04 4,RULES-QUALITY_03 1"</InherentCraftsmanship>
 </Armor>
 <Armor id="DWARF-ARMO_03">
 <Description language="ENGLISH">"Gromril Bracers"</Description>
@@ -5148,6 +5153,7 @@ Extreme Range: As for Short to Long Range but reduce the weapon's Damage by (Rat
 <Location>"RULES-ARMOL_ARM"</Location>
 <ArmorPoint>"3"</ArmorPoint>
 <Type>"RULES-ARMOT_PLATE"</Type>
+<InherentCraftsmanship>"RULES-QUALITY_04 4,RULES-QUALITY_03 1"</InherentCraftsmanship>
 </Armor>
 <Armor id="DWARF-ARMO_04">
 <Description language="ENGLISH">"Gromril Plate Leggings"</Description>
@@ -5158,6 +5164,7 @@ Extreme Range: As for Short to Long Range but reduce the weapon's Damage by (Rat
 <Location>"RULES-ARMOL_LEG"</Location>
 <ArmorPoint>"3"</ArmorPoint>
 <Type>"RULES-ARMOT_PLATE"</Type>
+<InherentCraftsmanship>"RULES-QUALITY_04 4,RULES-QUALITY_03 1"</InherentCraftsmanship>
 </Armor>
 <Armor id="DWARF-ARMO_05">
 <Description language="ENGLISH">"Gromril Helm"</Description>
@@ -5168,6 +5175,7 @@ Extreme Range: As for Short to Long Range but reduce the weapon's Damage by (Rat
 <Location>"RULES-ARMOL_HEAD"</Location>
 <ArmorPoint>"3"</ArmorPoint>
 <Type>"RULES-ARMOT_PLATE"</Type>
+<InherentCraftsmanship>"RULES-QUALITY_04 4,RULES-QUALITY_03 1"</InherentCraftsmanship>
 </Armor>
 <Armor id="DWARF-ARMO_06">
 <Description language="ENGLISH">"Mail Skirt"</Description>
