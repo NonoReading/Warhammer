@@ -3592,5 +3592,211 @@ The spell creates an area of Gentle Rotation, but SL can be spent on making the 
 <BoatProfile>"50;10 (25);6 (10);-;50;65;200"</BoatProfile>
 <AnimalTraits>"Ram, Sturdy"</AnimalTraits>
 </Trapping>
+<!-- Ameliorations de bateau, chapitre XII "Boats and Boat Building" (p.96-99), meme famille et meme convention que Death on the Reik Companion (une entree par taille de bateau, Theme Miscellaneous Trappings). Rattachement a un bateau via le mecanisme "Confier a..." deja existant (CONTEXT.md 2.84), pas de nouvel element. Ship's Boat (p.98) non saisi : ce n'est pas un objet propre, juste un second bateau du catalogue embarque sur le premier. Anchor : le livre donne une frontiere de cout (Small/Average vs plus grand) differente de sa frontiere de poids (Tiny/Average vs plus grand) - alignees ici sur les memes deux paliers, hypothese assumee. Armour Plating et Smoothing sont un TARIF (prix par 5 yards de Size du navire), pas un prix d objet unique : Price porte le taux, a multiplier a la main selon la Size du bateau concerne, meme principe que les prix "Varies" deja laisses en texte ailleurs. -->
+<Trapping id="SEAOF-TRAP_028">
+<Description language="ENGLISH">"Anchor (Small to Average Boats)"</Description>
+<Theme>"RULES-LAB_196"</Theme>
+<Price>"10CO"</Price>
+<Encumbrance>"50"</Encumbrance>
+</Trapping>
+<Trapping id="SEAOF-TRAP_029">
+<Description language="ENGLISH">"Anchor (Larger Boats)"</Description>
+<Theme>"RULES-LAB_196"</Theme>
+<Price>"20CO"</Price>
+<Encumbrance>"75"</Encumbrance>
+</Trapping>
+<Trapping id="SEAOF-TRAP_030">
+<Description language="ENGLISH">"Armour Plating, Bronze (Small to Average Ships, per 5 yards of Size)"</Description>
+<Theme>"RULES-LAB_196"</Theme>
+<Price>"250CO / 5 yards"</Price>
+<Encumbrance>"175"</Encumbrance>
+</Trapping>
+<Trapping id="SEAOF-TRAP_031">
+<Description language="ENGLISH">"Armour Plating, Iron (Small to Average Ships, per 5 yards of Size)"</Description>
+<Theme>"RULES-LAB_196"</Theme>
+<Price>"330CO / 5 yards"</Price>
+<Encumbrance>"160"</Encumbrance>
+</Trapping>
+<Trapping id="SEAOF-TRAP_032">
+<Description language="ENGLISH">"Armour Plating, Bronze (Larger Ships, per 5 yards of Size)"</Description>
+<Theme>"RULES-LAB_196"</Theme>
+<Price>"500CO / 5 yards"</Price>
+<Encumbrance>"175"</Encumbrance>
+</Trapping>
+<Trapping id="SEAOF-TRAP_033">
+<Description language="ENGLISH">"Armour Plating, Iron (Larger Ships, per 5 yards of Size)"</Description>
+<Theme>"RULES-LAB_196"</Theme>
+<Price>"560CO / 5 yards"</Price>
+<Encumbrance>"160"</Encumbrance>
+</Trapping>
+<Trapping id="SEAOF-TRAP_034">
+<Description language="ENGLISH">"Crow's Nest (Small to Average Boats)"</Description>
+<Theme>"RULES-LAB_196"</Theme>
+<Price>"5CO"</Price>
+<Encumbrance>"5"</Encumbrance>
+</Trapping>
+<Trapping id="SEAOF-TRAP_035">
+<Description language="ENGLISH">"Crow's Nest (Large to Monstrous Boats)"</Description>
+<Theme>"RULES-LAB_196"</Theme>
+<Price>"20CO"</Price>
+<Encumbrance>"20"</Encumbrance>
+</Trapping>
+<Trapping id="SEAOF-TRAP_036">
+<Description language="ENGLISH">"Figurehead"</Description>
+<Theme>"RULES-LAB_196"</Theme>
+<Price>"2CO"</Price>
+<Encumbrance>"10"</Encumbrance>
+</Trapping>
+<Trapping id="SEAOF-TRAP_037">
+<Description language="ENGLISH">"Flying Jib (Tiny Boats)"</Description>
+<Theme>"RULES-LAB_196"</Theme>
+<Price>"5CO"</Price>
+<Encumbrance>"5"</Encumbrance>
+</Trapping>
+<Trapping id="SEAOF-TRAP_038">
+<Description language="ENGLISH">"Flying Jib (Little Boats)"</Description>
+<Theme>"RULES-LAB_196"</Theme>
+<Price>"20CO"</Price>
+<Encumbrance>"25"</Encumbrance>
+</Trapping>
+<Trapping id="SEAOF-TRAP_039">
+<Description language="ENGLISH">"Flying Jib (Small Boats)"</Description>
+<Theme>"RULES-LAB_196"</Theme>
+<Price>"40CO"</Price>
+<Encumbrance>"45"</Encumbrance>
+</Trapping>
+<Trapping id="SEAOF-TRAP_040">
+<Description language="ENGLISH">"Flying Jib (Average Boats)"</Description>
+<Theme>"RULES-LAB_196"</Theme>
+<Price>"80CO"</Price>
+<Encumbrance>"70"</Encumbrance>
+</Trapping>
+<Trapping id="SEAOF-TRAP_041">
+<Description language="ENGLISH">"Flying Jib (Large Boats)"</Description>
+<Theme>"RULES-LAB_196"</Theme>
+<Price>"160CO"</Price>
+<Encumbrance>"135"</Encumbrance>
+</Trapping>
+<Trapping id="SEAOF-TRAP_042">
+<Description language="ENGLISH">"Flying Jib (Enormous Boats)"</Description>
+<Theme>"RULES-LAB_196"</Theme>
+<Price>"320CO"</Price>
+<Encumbrance>"240"</Encumbrance>
+</Trapping>
+<Trapping id="SEAOF-TRAP_043">
+<Description language="ENGLISH">"Flying Jib (Monstrous Boats)"</Description>
+<Theme>"RULES-LAB_196"</Theme>
+<Price>"600CO"</Price>
+<Encumbrance>"430"</Encumbrance>
+</Trapping>
+<Trapping id="SEAOF-TRAP_044">
+<Description language="ENGLISH">"Gun Ports (Tiny to Average Boats)"</Description>
+<Theme>"RULES-LAB_196"</Theme>
+<Price>"15CO"</Price>
+<Encumbrance>"0"</Encumbrance>
+</Trapping>
+<Trapping id="SEAOF-TRAP_045">
+<Description language="ENGLISH">"Gun Ports (Larger Boats)"</Description>
+<Theme>"RULES-LAB_196"</Theme>
+<Price>"85CO"</Price>
+<Encumbrance>"0"</Encumbrance>
+</Trapping>
+<Trapping id="SEAOF-TRAP_046">
+<Description language="ENGLISH">"Luxury Cabins (per cabin)"</Description>
+<Theme>"RULES-LAB_196"</Theme>
+<Price>"155CO"</Price>
+<Encumbrance>"40"</Encumbrance>
+</Trapping>
+<Trapping id="SEAOF-TRAP_047">
+<Description language="ENGLISH">"Ram (Tiny and Little Boats)"</Description>
+<Theme>"RULES-LAB_196"</Theme>
+<Price>"15CO"</Price>
+<Encumbrance>"30"</Encumbrance>
+</Trapping>
+<Trapping id="SEAOF-TRAP_048">
+<Description language="ENGLISH">"Ram (Small and Average Boats)"</Description>
+<Theme>"RULES-LAB_196"</Theme>
+<Price>"30CO"</Price>
+<Encumbrance>"60"</Encumbrance>
+</Trapping>
+<Trapping id="SEAOF-TRAP_049">
+<Description language="ENGLISH">"Ram (Large Boats)"</Description>
+<Theme>"RULES-LAB_196"</Theme>
+<Price>"60CO"</Price>
+<Encumbrance>"120"</Encumbrance>
+</Trapping>
+<Trapping id="SEAOF-TRAP_050">
+<Description language="ENGLISH">"Ram (Enormous Boats)"</Description>
+<Theme>"RULES-LAB_196"</Theme>
+<Price>"120CO"</Price>
+<Encumbrance>"240"</Encumbrance>
+</Trapping>
+<Trapping id="SEAOF-TRAP_051">
+<Description language="ENGLISH">"Ram (Monstrous Boats)"</Description>
+<Theme>"RULES-LAB_196"</Theme>
+<Price>"240CO"</Price>
+<Encumbrance>"480"</Encumbrance>
+</Trapping>
+<Trapping id="SEAOF-TRAP_052">
+<Description language="ENGLISH">"Smoothing (Tiny to Average Ships, per 5 yards of Size)"</Description>
+<Theme>"RULES-LAB_196"</Theme>
+<Price>"66CO / 5 yards"</Price>
+<Encumbrance>"0"</Encumbrance>
+</Trapping>
+<Trapping id="SEAOF-TRAP_053">
+<Description language="ENGLISH">"Smoothing (Larger Ships, per 5 yards of Size)"</Description>
+<Theme>"RULES-LAB_196"</Theme>
+<Price>"132CO / 5 yards"</Price>
+<Encumbrance>"0"</Encumbrance>
+</Trapping>
+<Trapping id="SEAOF-TRAP_054">
+<Description language="ENGLISH">"Water Brakes (Tiny Boats)"</Description>
+<Theme>"RULES-LAB_196"</Theme>
+<Price>"10CO"</Price>
+<Encumbrance>"15"</Encumbrance>
+</Trapping>
+<Trapping id="SEAOF-TRAP_055">
+<Description language="ENGLISH">"Water Brakes (Little Boats)"</Description>
+<Theme>"RULES-LAB_196"</Theme>
+<Price>"45CO"</Price>
+<Encumbrance>"40"</Encumbrance>
+</Trapping>
+<Trapping id="SEAOF-TRAP_056">
+<Description language="ENGLISH">"Water Brakes (Small Boats)"</Description>
+<Theme>"RULES-LAB_196"</Theme>
+<Price>"75CO"</Price>
+<Encumbrance>"50"</Encumbrance>
+</Trapping>
+<Trapping id="SEAOF-TRAP_057">
+<Description language="ENGLISH">"Water Brakes (Average Boats)"</Description>
+<Theme>"RULES-LAB_196"</Theme>
+<Price>"140CO"</Price>
+<Encumbrance>"110"</Encumbrance>
+</Trapping>
+<Trapping id="SEAOF-TRAP_058">
+<Description language="ENGLISH">"Water Brakes (Large Boats)"</Description>
+<Theme>"RULES-LAB_196"</Theme>
+<Price>"200CO"</Price>
+<Encumbrance>"150"</Encumbrance>
+</Trapping>
+<Trapping id="SEAOF-TRAP_059">
+<Description language="ENGLISH">"Water Brakes (Enormous Boats)"</Description>
+<Theme>"RULES-LAB_196"</Theme>
+<Price>"350CO"</Price>
+<Encumbrance>"300"</Encumbrance>
+</Trapping>
+<Trapping id="SEAOF-TRAP_060">
+<Description language="ENGLISH">"Water Brakes (Monstrous Boats)"</Description>
+<Theme>"RULES-LAB_196"</Theme>
+<Price>"500CO"</Price>
+<Encumbrance>"550"</Encumbrance>
+</Trapping>
+<!-- Steam Engine (p.98-99) : taille et poids uniques (pas de variante par taille de bateau dans le livre), meme objet que Death on the Reik Companion. Table "Steam Malfunction" (d100, p.99) laissee hors perimetre, meme decision que pour Death on the Reik. -->
+<Trapping id="SEAOF-TRAP_061">
+<Description language="ENGLISH">"Steam Engine"</Description>
+<Theme>"RULES-LAB_196"</Theme>
+<Price>"500CO"</Price>
+<Encumbrance>"200"</Encumbrance>
+</Trapping>
 </DATA_TRAPPING>
 </DATA_BOOK>

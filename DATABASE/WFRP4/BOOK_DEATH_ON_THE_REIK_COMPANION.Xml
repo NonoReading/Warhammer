@@ -617,6 +617,262 @@ Skills: gain Beast Tongue but lose the ability to speak intelligibly in any othe
 <Locality>"RULES-LAB_232"</Locality>
 <Season>"RULES-LAB_227,RULES-LAB_228"</Season>
 </Trapping>
+<!-- Amenagements de bateau, chapitre 10 "Deck It Out" (p.64-69). Livre sans Disponibilite pour ces objets (comme les bateaux de Sea of Claws) : balise omise. Une entree par taille de bateau, comme decide par Nono. Effets mecaniques (bonus de test, AP, Mouvement...) laisses en texte descriptif, meme convention que les qualites narratives (Fine/Durable...). Theme = Miscellaneous Trappings (RULES-LAB_196), deja utilise pour Ship Parts (Sea of Claws). -->
+<Trapping id="DEATH-TRAP_22">
+<Description language="ENGLISH">"Broad Rudder (Row Boat)"</Description>
+<Theme>"RULES-LAB_196"</Theme>
+<Price>"5CO"</Price>
+<Encumbrance>"5"</Encumbrance>
+</Trapping>
+<Trapping id="DEATH-TRAP_23">
+<Description language="ENGLISH">"Broad Rudder (Fishing Skiff)"</Description>
+<Theme>"RULES-LAB_196"</Theme>
+<Price>"25CO"</Price>
+<Encumbrance>"20"</Encumbrance>
+</Trapping>
+<Trapping id="DEATH-TRAP_24">
+<Description language="ENGLISH">"Broad Rudder (Typical Barge or Patrol Boat)"</Description>
+<Theme>"RULES-LAB_196"</Theme>
+<Price>"50CO"</Price>
+<Encumbrance>"40"</Encumbrance>
+</Trapping>
+<Trapping id="DEATH-TRAP_25">
+<Description language="ENGLISH">"Broad Rudder (Large Barge)"</Description>
+<Theme>"RULES-LAB_196"</Theme>
+<Price>"120CO"</Price>
+<Encumbrance>"80"</Encumbrance>
+</Trapping>
+<!-- Fore-and-Aft Rudder : le livre donne 4 paliers de prix mais seulement 3 paliers de poids ("small fishing boat/small river boat" ; "medium river boat" ; "large river boat"), sans faire correspondre "row boat" a une categorie de poids propre. Row Boat et Fishing Skiff se voient donc attribuer le meme poids (35), hypothese assumee faute de mieux. -->
+<Trapping id="DEATH-TRAP_26">
+<Description language="ENGLISH">"Fore-and-Aft Rudder (Row Boat)"</Description>
+<Theme>"RULES-LAB_196"</Theme>
+<Price>"8CO"</Price>
+<Encumbrance>"35"</Encumbrance>
+</Trapping>
+<Trapping id="DEATH-TRAP_27">
+<Description language="ENGLISH">"Fore-and-Aft Rudder (Fishing Skiff)"</Description>
+<Theme>"RULES-LAB_196"</Theme>
+<Price>"30CO"</Price>
+<Encumbrance>"35"</Encumbrance>
+</Trapping>
+<Trapping id="DEATH-TRAP_28">
+<Description language="ENGLISH">"Fore-and-Aft Rudder (Typical Barge or Patrol Boat)"</Description>
+<Theme>"RULES-LAB_196"</Theme>
+<Price>"60CO"</Price>
+<Encumbrance>"55"</Encumbrance>
+</Trapping>
+<Trapping id="DEATH-TRAP_29">
+<Description language="ENGLISH">"Fore-and-Aft Rudder (Large Barge)"</Description>
+<Theme>"RULES-LAB_196"</Theme>
+<Price>"120CO"</Price>
+<Encumbrance>"95"</Encumbrance>
+</Trapping>
+<Trapping id="DEATH-TRAP_30">
+<Description language="ENGLISH">"Water Brakes (Row Boat)"</Description>
+<Theme>"RULES-LAB_196"</Theme>
+<Price>"10CO"</Price>
+<Encumbrance>"15"</Encumbrance>
+</Trapping>
+<Trapping id="DEATH-TRAP_31">
+<Description language="ENGLISH">"Water Brakes (Fishing Skiff)"</Description>
+<Theme>"RULES-LAB_196"</Theme>
+<Price>"45CO"</Price>
+<Encumbrance>"40"</Encumbrance>
+</Trapping>
+<Trapping id="DEATH-TRAP_32">
+<Description language="ENGLISH">"Water Brakes (Typical Barge or Patrol Boat)"</Description>
+<Theme>"RULES-LAB_196"</Theme>
+<Price>"75CO"</Price>
+<Encumbrance>"50"</Encumbrance>
+</Trapping>
+<Trapping id="DEATH-TRAP_33">
+<Description language="ENGLISH">"Water Brakes (Large Barge)"</Description>
+<Theme>"RULES-LAB_196"</Theme>
+<Price>"140CO"</Price>
+<Encumbrance>"110"</Encumbrance>
+</Trapping>
+<Trapping id="DEATH-TRAP_34">
+<Description language="ENGLISH">"Armoured Walls (Row Boat)"</Description>
+<Theme>"RULES-LAB_196"</Theme>
+<Price>"15CO"</Price>
+<Encumbrance>"15"</Encumbrance>
+</Trapping>
+<Trapping id="DEATH-TRAP_35">
+<Description language="ENGLISH">"Armoured Walls (Fishing Skiff)"</Description>
+<Theme>"RULES-LAB_196"</Theme>
+<Price>"60CO"</Price>
+<Encumbrance>"40"</Encumbrance>
+</Trapping>
+<Trapping id="DEATH-TRAP_36">
+<Description language="ENGLISH">"Armoured Walls (Typical Barge or Patrol Boat)"</Description>
+<Theme>"RULES-LAB_196"</Theme>
+<Price>"120CO"</Price>
+<Encumbrance>"80"</Encumbrance>
+</Trapping>
+<Trapping id="DEATH-TRAP_37">
+<Description language="ENGLISH">"Armoured Walls (Large Barge)"</Description>
+<Theme>"RULES-LAB_196"</Theme>
+<Price>"300CO"</Price>
+<Encumbrance>"160"</Encumbrance>
+</Trapping>
+<Trapping id="DEATH-TRAP_38">
+<Description language="ENGLISH">"Gun Ports (Small)"</Description>
+<Theme>"RULES-LAB_196"</Theme>
+<Price>"15CO"</Price>
+<Encumbrance>"0"</Encumbrance>
+</Trapping>
+<Trapping id="DEATH-TRAP_39">
+<Description language="ENGLISH">"Gun Ports (Large)"</Description>
+<Theme>"RULES-LAB_196"</Theme>
+<Price>"85CO"</Price>
+<Encumbrance>"0"</Encumbrance>
+</Trapping>
+<Trapping id="DEATH-TRAP_40">
+<Description language="ENGLISH">"Luxury Cabins (per cabin)"</Description>
+<Theme>"RULES-LAB_196"</Theme>
+<Price>"155CO"</Price>
+<Encumbrance>"40"</Encumbrance>
+</Trapping>
+<Trapping id="DEATH-TRAP_41">
+<Description language="ENGLISH">"Raised Gunwales (Row Boat)"</Description>
+<Theme>"RULES-LAB_196"</Theme>
+<Price>"5CO"</Price>
+<Encumbrance>"5"</Encumbrance>
+</Trapping>
+<Trapping id="DEATH-TRAP_42">
+<Description language="ENGLISH">"Raised Gunwales (Fishing Skiff)"</Description>
+<Theme>"RULES-LAB_196"</Theme>
+<Price>"15CO"</Price>
+<Encumbrance>"20"</Encumbrance>
+</Trapping>
+<Trapping id="DEATH-TRAP_43">
+<Description language="ENGLISH">"Raised Gunwales (Typical Barge or Patrol Boat)"</Description>
+<Theme>"RULES-LAB_196"</Theme>
+<Price>"30CO"</Price>
+<Encumbrance>"35"</Encumbrance>
+</Trapping>
+<Trapping id="DEATH-TRAP_44">
+<Description language="ENGLISH">"Raised Gunwales (Large Barge)"</Description>
+<Theme>"RULES-LAB_196"</Theme>
+<Price>"45CO"</Price>
+<Encumbrance>"60"</Encumbrance>
+</Trapping>
+<!-- Stripped : encombrement negatif (allege le bateau), StrToIntDef gere le signe. Pas de precedent dans la base, premiere occurrence. -->
+<Trapping id="DEATH-TRAP_45">
+<Description language="ENGLISH">"Stripped (Row Boat)"</Description>
+<Theme>"RULES-LAB_196"</Theme>
+<Price>"20CO"</Price>
+<Encumbrance>"-10"</Encumbrance>
+</Trapping>
+<Trapping id="DEATH-TRAP_46">
+<Description language="ENGLISH">"Stripped (Fishing Skiff)"</Description>
+<Theme>"RULES-LAB_196"</Theme>
+<Price>"50CO"</Price>
+<Encumbrance>"-15"</Encumbrance>
+</Trapping>
+<Trapping id="DEATH-TRAP_47">
+<Description language="ENGLISH">"Stripped (Typical Barge or Patrol Boat)"</Description>
+<Theme>"RULES-LAB_196"</Theme>
+<Price>"150CO"</Price>
+<Encumbrance>"-45"</Encumbrance>
+</Trapping>
+<Trapping id="DEATH-TRAP_48">
+<Description language="ENGLISH">"Stripped (Large Barge)"</Description>
+<Theme>"RULES-LAB_196"</Theme>
+<Price>"250CO"</Price>
+<Encumbrance>"-80"</Encumbrance>
+</Trapping>
+<Trapping id="DEATH-TRAP_49">
+<Description language="ENGLISH">"Flying Jib (Row Boat)"</Description>
+<Theme>"RULES-LAB_196"</Theme>
+<Price>"5CO"</Price>
+<Encumbrance>"5"</Encumbrance>
+</Trapping>
+<Trapping id="DEATH-TRAP_50">
+<Description language="ENGLISH">"Flying Jib (Fishing Skiff)"</Description>
+<Theme>"RULES-LAB_196"</Theme>
+<Price>"20CO"</Price>
+<Encumbrance>"25"</Encumbrance>
+</Trapping>
+<Trapping id="DEATH-TRAP_51">
+<Description language="ENGLISH">"Flying Jib (Typical Barge or Patrol Boat)"</Description>
+<Theme>"RULES-LAB_196"</Theme>
+<Price>"40CO"</Price>
+<Encumbrance>"45"</Encumbrance>
+</Trapping>
+<Trapping id="DEATH-TRAP_52">
+<Description language="ENGLISH">"Flying Jib (Large Barge)"</Description>
+<Theme>"RULES-LAB_196"</Theme>
+<Price>"80CO"</Price>
+<Encumbrance>"70"</Encumbrance>
+</Trapping>
+<Trapping id="DEATH-TRAP_53">
+<Description language="ENGLISH">"Racing Rig (Row Boat)"</Description>
+<Theme>"RULES-LAB_196"</Theme>
+<Price>"8CO"</Price>
+<Encumbrance>"5"</Encumbrance>
+</Trapping>
+<Trapping id="DEATH-TRAP_54">
+<Description language="ENGLISH">"Racing Rig (Fishing Skiff)"</Description>
+<Theme>"RULES-LAB_196"</Theme>
+<Price>"30CO"</Price>
+<Encumbrance>"15"</Encumbrance>
+</Trapping>
+<Trapping id="DEATH-TRAP_55">
+<Description language="ENGLISH">"Racing Rig (Typical Barge or Patrol Boat)"</Description>
+<Theme>"RULES-LAB_196"</Theme>
+<Price>"60CO"</Price>
+<Encumbrance>"25"</Encumbrance>
+</Trapping>
+<Trapping id="DEATH-TRAP_56">
+<Description language="ENGLISH">"Racing Rig (Large Barge)"</Description>
+<Theme>"RULES-LAB_196"</Theme>
+<Price>"120CO"</Price>
+<Encumbrance>"50"</Encumbrance>
+</Trapping>
+<Trapping id="DEATH-TRAP_57">
+<Description language="ENGLISH">"Closed Rowlocks (each)"</Description>
+<Theme>"RULES-LAB_196"</Theme>
+<Price>"5CO"</Price>
+<Encumbrance>"5"</Encumbrance>
+</Trapping>
+<Trapping id="DEATH-TRAP_58">
+<Description language="ENGLISH">"Spoons (each)"</Description>
+<Theme>"RULES-LAB_196"</Theme>
+<Price>"5CO"</Price>
+<Encumbrance>"0"</Encumbrance>
+</Trapping>
+<Trapping id="DEATH-TRAP_59">
+<Description language="ENGLISH">"Musket Rests (each)"</Description>
+<Theme>"RULES-LAB_196"</Theme>
+<Price>"1CO"</Price>
+<Encumbrance>"1"</Encumbrance>
+</Trapping>
+<Trapping id="DEATH-TRAP_60">
+<Description language="ENGLISH">"Ram (Small River Boat)"</Description>
+<Theme>"RULES-LAB_196"</Theme>
+<Price>"15CO"</Price>
+<Encumbrance>"30"</Encumbrance>
+</Trapping>
+<Trapping id="DEATH-TRAP_61">
+<Description language="ENGLISH">"Ram (Medium River Boat)"</Description>
+<Theme>"RULES-LAB_196"</Theme>
+<Price>"30CO"</Price>
+<Encumbrance>"60"</Encumbrance>
+</Trapping>
+<Trapping id="DEATH-TRAP_62">
+<Description language="ENGLISH">"Ram (Large River Boat)"</Description>
+<Theme>"RULES-LAB_196"</Theme>
+<Price>"60CO"</Price>
+<Encumbrance>"120"</Encumbrance>
+</Trapping>
+<!-- Steam (propulsion, p.68-69) : moteur a vapeur, taille et poids uniques (pas de variante par taille de bateau dans le livre). Table "Steam Engine Malfunctions" (d100, p.69) laissee hors perimetre, meme famille que les autres tables d'alea de campagne (Travel Events...). -->
+<Trapping id="DEATH-TRAP_63">
+<Description language="ENGLISH">"Steam"</Description>
+<Theme>"RULES-LAB_196"</Theme>
+<Price>"500CO"</Price>
+<Encumbrance>"200"</Encumbrance>
+</Trapping>
 </DATA_TRAPPING>
 <DATA_SPECIE_CAREER_DIRECT>
   <!-- Ces métiers étaient déclarés en 'X' dans les <Specie> de BOOK_RULESBOOK.Xml,

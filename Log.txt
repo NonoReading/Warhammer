@@ -2,6 +2,8 @@
 
 23/09/2026 - AUDIT DES RULEBOOK CLOS : TOUS LES CHAPITRES AUDITES (I-IX), TOUS LES ECARTS PERTINENTS SAISIS. COMPANIONS DE L ENEMY WITHIN TOUS CLOS (ENEMY IN SHADOWS LE 22/09, DEATH ON THE REIK + HORNED RAT LE 23/09).
 
+23/09/2026 - AMENAGEMENTS DE BATEAU (Death on the Reik Companion ch.10 "Deck It Out" p.64-69 ET Sea of Claws ch.XII "Boats and Boat Building" p.96-99) : 76 entrees DATA_TRAPPING saisies (42 DEATH-TRAP_22 a _63, 34 SEAOF-TRAP_028 a _061), Theme Miscellaneous Trappings (RULES-LAB_196), une entree par taille de bateau (decision de Nono). Rattachement a un bateau via le mecanisme "Confier a..." deja existant (CONTEXT.md 2.84) : aucun code ajoute, uniquement des donnees. Deux prix laisses en tarif texte plutot qu en montant fixe (Armour Plating et Smoothing de Sea of Claws, "X CO / 5 yards of Size", a multiplier a la main). Steam Engine Malfunctions/Steam Malfunction (tables d100) et Ship's Boat laisses hors perimetre (meme decision que les autres tables d alea de campagne et que les doublons d objets deja catalogues). TESTE ET VALIDE PAR NONO LE 23/09/2026. CHANTIER CLOS. Voir A FAIRE.txt.
+
 04/08/2023 : gestion des qualités d'armes (bonus / malus)
 06/08/2023 : problèmes des panels qui se multipliaient
 06/08/2023 : mise en place de l'interception de ESC (compétence, talent, métier) depuis Personnage
