@@ -567,9 +567,9 @@ A successful Bribery Test tells you if a target may be bribed. If so, your GM wi
 When camping, make an Outdoor Survival Test, modified by the harshness of conditions — for instance, a Test is Challenging (+0) if it is raining, Hard (–20) in a storm. A successful Test indicates you can provide yourself sustenance and shelter for the night. Each SL allows you to provide for one more character. If the Test is failed, you must make a Challenging (+0) Endurance Test or receive the Fatigued Condition. If you suffer an Astounding Failure, something untoward has happened, as determined by the GM; perhaps your camp is attacked in the night?
 When fighting in the wilderness, you may make an Outdoor Survival Test to receive +1 Advantage, in the same way as Intuition, to a maximum number of Advantage equal to your Intelligence Bonus, as you spy out treacherous and advantageous terrain that you can best use to your advantage."</Explanation>
 </Skill>
-<Skill id="RULES-COMPVOILE">
+<Skill id="RULES-COMPVOILE_*">
 <Attribut>"RULES-ATTR_Ag"</Attribut>
-<Description language="ENGLISH">"Sail"</Description>
+<Description language="ENGLISH">"Sail (Any)"</Description>
 <Explanation language="ENGLISH">"Your ability to operate and manoeuvre a sailing vessel — including knotwork, steering, gauging the wind, and more. Assuming you have enough trained crew for your vessel, you only use the Sail Skill when you must push your vessel to perform, either by racing, navigating particularly dangerous shoals, struggling against bad weather, or similar difficulties. Simply sailing with a gentle wind, or guiding a ship downriver, doesn’t require a Test for those with Sail. The skill can also be used for sailing-related activities like tying knots, or tying others up in knots.
 As sailing one ship is not so different to sailing another, having any Sail Speciality makes all other Sail Specialities Basic Skills for you."</Explanation>
 </Skill>
@@ -1559,6 +1559,26 @@ As sailing one ship is not so different to sailing another, having any Sail Spec
 <Description language="ENGLISH">"Lore (Vampires)"</Description>
 <Generique>"RULES-COMPSAVOIR_*"</Generique>
 </Skill>
+<Skill id="RULES-COMPVOILE_BARGE">
+<Description language="ENGLISH">"Sail (Barge)"</Description>
+<Generique>"RULES-COMPVOILE_*"</Generique>
+</Skill>
+<Skill id="RULES-COMPVOILE_CARAVEL">
+<Description language="ENGLISH">"Sail (Caravel)"</Description>
+<Generique>"RULES-COMPVOILE_*"</Generique>
+</Skill>
+<Skill id="RULES-COMPVOILE_COG">
+<Description language="ENGLISH">"Sail (Cog)"</Description>
+<Generique>"RULES-COMPVOILE_*"</Generique>
+</Skill>
+<Skill id="RULES-COMPVOILE_FREGATE">
+<Description language="ENGLISH">"Sail (Frigate)"</Description>
+<Generique>"RULES-COMPVOILE_*"</Generique>
+</Skill>
+<Skill id="RULES-COMPVOILE_WOLFSHIP">
+<Description language="ENGLISH">"Sail (Wolfship)"</Description>
+<Generique>"RULES-COMPVOILE_*"</Generique>
+</Skill>
 </DATA_SKILL_SPECIALIZATION>
 <DATA_TALENT>
 <Talent id="RULES-T*">
@@ -2450,7 +2470,7 @@ The Frenzy Talent is added to the Talent list of any career you are in. Should y
 </Talent>
 <Talent id="RULES-T0085">
 <Attribut>""</Attribut>
-<ModifySkill name="RULES-COMPVOILE">"Bonus"</ModifySkill>
+<ModifySkill name="RULES-COMPVOILE_*">"Bonus"</ModifySkill>
 <Description language="ENGLISH">"Old Salt"</Description>
 <Short language="ENGLISH">""</Short>
 <Explanation language="ENGLISH">"You are an experienced seaman, and are very used to sea life. You can ignore all negative modifiers to Tests at sea derived from poor weather, rolling ships, and similar. Further, you count as two seamen towards the minimum number of crew to pilot a sea-going vessel."</Explanation>
@@ -2595,7 +2615,7 @@ Further, attempts to use Melee (Brawling) to simply touch an opponent gain a bon
 </Talent>
 <Talent id="RULES-T0097">
 <Attribut>""</Attribut>
-<ModifySkill name="RULES-COMPVOILE">"Bonus"</ModifySkill>
+<ModifySkill name="RULES-COMPVOILE_*">"Bonus"</ModifySkill>
 <Description language="ENGLISH">"Waterman"</Description>
 <Short language="ENGLISH">""</Short>
 <Explanation language="ENGLISH">"You are an experienced freshwater sailor and are well-versed with river vessels. You can ignore all negatives to your Tests when onboard a barge derived from rolling waters, swaying vessels, unsure footing, and similar. Further, you count as two boatmen towards the minimum number of crew to pilot a river vessel."</Explanation>
@@ -2831,7 +2851,7 @@ Talent Taken Number influenced 1 As normal × 5 2 As normal × 10 3 As normal ×
 </Talent>
 <Talent id="RULES-T0120">
 <Attribut>""</Attribut>
-<ModifySkill name="RULES-COMPVOILE">"ChooseDice"</ModifySkill>
+<ModifySkill name="RULES-COMPVOILE_*">"ChooseDice"</ModifySkill>
 <ModifySkill name="RULES-COMPRAMER">"ChooseDice"</ModifySkill>
 <Description language="ENGLISH">"Pilot"</Description>
 <Short language="ENGLISH">""</Short>
@@ -5835,7 +5855,7 @@ See page 190 for Fear rules"</Explanation>
   <!-- Perception  -->
 <Skill>"RULES-COMPPROJ_ARC"</Skill>
   <!-- Ranged (Bow) -->
-<Skill>"RULES-COMPVOILE"</Skill>
+<Skill>"RULES-COMPVOILE_*"</Skill>
   <!-- Sail -->
 </SUBCHAPTER_SKILL>
 <SUBCHAPTER_TALENT>
@@ -6739,7 +6759,7 @@ Some magistrates are lay-members of the cult of Verena, seeking guidance and wis
 <Description language="ENGLISH">"Boatman"</Description>
 <Explanation language="ENGLISH">"You ply the dangerous waters of the Old World, transporting people, goods, and the latest news.
 Boats and barges travel the Empire’s waterways, bringing goods from the remotest corners of the provinces to the greatest cities. These shallow-drafted vessels can travel much further upriver than larger ships, and a comprehensive network of canals adds to their reach. Barge Masters are expert river sailors and have an exhaustive knowledge of their rivers. A Boat-hand is the dogsbody, but will learn the ropes swiftly. Boatmen crew merchant barges carrying cargo to and from markets, either working for themselves or for a larger Merchant House. Many Boatmen are also ferrymen, taking passengers across rivers, or to and from towns. In large towns, some also crew rivertaxis, sail pleasure vessels, or otherwise pilot boats on the behalf of others."</Explanation>
-<Skill>"RULES-COMPVOILE"</Skill>
+<Skill>"RULES-COMPVOILE_*"</Skill>
 <Class>"RULES-CLASS_RIVE"</Class>
 <SUBCHAPTER_LEVEL>
 <Level id="1">
@@ -6786,7 +6806,7 @@ Boats and barges travel the Empire’s waterways, bringing goods from the remote
   <!-- Row -->
 <Skill name="RULES-COMPRESALC">"1"</Skill>
   <!-- Consume Alcohol -->
-<Skill name="RULES-COMPVOILE">"1"</Skill>
+<Skill name="RULES-COMPVOILE_*">"1"</Skill>
   <!-- Sail -->
 <Skill name="RULES-COMPATHL">"2"</Skill>
   <!-- Athletics -->
@@ -8079,7 +8099,7 @@ Smugglers come in many forms, perhaps transporting tiny, high- value goods for n
   <!-- Consume Alcohol -->
 <Skill name="RULES-COMPSUBOR">"1"</Skill>
   <!-- Bribery -->
-<Skill name="RULES-COMPVOILE">"1"</Skill>
+<Skill name="RULES-COMPVOILE_*">"1"</Skill>
   <!-- Sail -->
 <Skill name="RULES-COMPCOMB_BASE">"2"</Skill>
   <!-- Melee (Basic) -->
@@ -10450,7 +10470,7 @@ Traders can join guilds by apprenticing under Master Merchants as junior busines
 <Explanation language="ENGLISH">"A life on the ocean waves calls to you, though many Reiklander Seamen never see the sea…
 Seamen sail the high seas in the Imperial Navy or for one of the Merchant houses. The Reikland may have no coast, but the River Reik from the Wasteland to Altdorf is miles wide and full of ocean-going vessels. The Imperial First Fleet that patrols these waters rarely sees the open sea, because the taxes to pass warships through Marienburg are exorbitantly high.
 Seamen can always find work, whether as cabin staff on an Imperial battleship or on the crew of a small trading sloop. Some Seamen travel the world by working to pay their passage. The Reik also houses many ‘Missions’, buildings provided by the Imperial Navy for their staff, many of which employ Seamen."</Explanation>
-<Skill>"RULES-COMPVOILE"</Skill>
+<Skill>"RULES-COMPVOILE_*"</Skill>
 <Class>"RULES-CLASS_RIVE"</Class>
 <SUBCHAPTER_LEVEL>
 <Level id="1">
@@ -10497,7 +10517,7 @@ Seamen can always find work, whether as cabin staff on an Imperial battleship or
   <!-- Consume Alcohol -->
 <Skill name="RULES-COMPRAGOT">"1"</Skill>
   <!-- Gossip -->
-<Skill name="RULES-COMPVOILE">"1"</Skill>
+<Skill name="RULES-COMPVOILE_*">"1"</Skill>
   <!-- Sail -->
 <Skill name="RULES-COMPATHL">"2"</Skill>
   <!-- Athletics -->
@@ -11531,7 +11551,7 @@ Many Huffers specialise in a single, notorious stretch of water, while others ma
   <!-- Lore (Wrecks) -->
 <Skill name="RULES-COMPCOMM">"4"</Skill>
   <!-- Leadership -->
-<Skill name="RULES-COMPVOILE">"4"</Skill>
+<Skill name="RULES-COMPVOILE_*">"4"</Skill>
   <!-- Sail -->
 </SUBCHAPTER_SKILL>
 <SUBCHAPTER_TALENT>
@@ -11894,7 +11914,7 @@ Some Riverwardens rarely see the water, instead manning remote outposts overlook
   <!-- Row -->
 <Skill name="RULES-COMPRESIST">"1"</Skill>
   <!-- Endurance -->
-<Skill name="RULES-COMPVOILE">"1"</Skill>
+<Skill name="RULES-COMPVOILE_*">"1"</Skill>
   <!-- Sail -->
 <Skill name="RULES-COMPCHARM">"2"</Skill>
   <!-- Charm -->

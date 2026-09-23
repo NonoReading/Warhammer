@@ -6266,3 +6266,41 @@ XML pur, aucun code Pascal touche. Compile, teste dans WinWeapon (filtre par liv
 valide par Nono le 23/09/2026.
 Fichiers modifies : DATABASE/WFRP4/BOOK_GREEN_IZ_BEST.Xml, CONTEXT.md, A FAIRE.txt,
 Log.txt.
+
+23/09/2026 - RULEBOOK : AUDIT PAR SOUS-AGENTS, UN ECART (SAIL)
+Debut du chantier AUDIT DES TXT sur le livre de base (~2600 identifiants EN). Methode :
+5 sous-agents en parallele, un par chapitre riche en catalogue (Class and Careers,
+Skills and Talents, Religion and Belief, Magic, The Consumers' Guide), comparaison
+texte/XML sans modification. Resultat : RAS sur les 64 carrieres, les Blessings/Miracles
+des 10 cultes, les 8 lores de Colour Magic + Witch/Dark/Chaos Magic, et tout le Guide du
+Consommateur (armes, armures, ~180 trappings). Un seul ecart reel trouve : la
+competence groupee Sail (RULES-COMPVOILE) n'avait aucune specialisation saisie
+(RULEBOOK.txt p.129 : Barge, Caravel, Cog, Frigate, Wolfship).
+Corrige en 3 temps (les 2 premiers passages etaient incomplets, remarques de Nono) : (1) 5 entrees
+DATA_SKILL_SPECIALIZATION ajoutees (RULES-COMPVOILE_BARGE/_CARAVEL/_COG/_FREGATE/_WOLFSHIP) ;
+(2) le skill de base a du etre RENOMME RULES-COMPVOILE -> RULES-COMPVOILE_* (et toutes ses
+17 references en EN / 9 en FR corrigees : carrieres, ModifySkill, Career.Skill), Description
+"Sail" -> "Sail (Any)" (FR "Voile" -> "Voile (au choix)") : wincompetence.pas l.287 n'affiche
+la table de specialites que si le code contient _*, sans quoi Sail semblait une competence
+normale sans choix - meme convention que Ride (RULES-COMPCHEV_*) et Language
+(RULES-COMPLANG_*), qui n'ont eux non plus de variante "bare". Generique des 5 specialisations
+pointe sur RULES-COMPVOILE_*. Specialisations traduites en FR (Voile (Peniche/Caravelle/
+Cogue/Fregate/Wolfship)). Codes PDF "COMPVOILE" (3 occurrences, champ de formulaire) laisses
+tels quels, sans rapport avec l id catalogue. (3) RULES-COMPVOILE etait aussi reference
+par 8 autres livres (Nono a repere l'oubli) : BOOK LUSTRIA, BOOK_DWARF_PLAYERS_GUIDE,
+BOOK_HIGH_ELF_PLAYERS_GUIDE, BOOK_LORDS_OF_NAGGAROTH,
+BOOK_MIDDENHEIM_CITY_OF_THE_WHITE_WOLF, BOOK_NATIONS_OF_MANKIND,
+BOOK_SALZENMUND_CITY_OF_SALT_AND_SILVER, BOOK_SEA_OF_CLAWS (equipement de carriere
+"Skill"), tous corriges en RULES-COMPVOILE_*. DATABASE/WFRP5/BOOK_RULESBOOK.Xml a aussi
+un RULES-COMPVOILE mais c'est une base independante (V5, hors perimetre) : non touche.
+XML pur, aucun code Pascal touche. Compile, teste dans WinCompetence (double-clic sur Sail :
+les 5 specialites apparaissent dans TabSpe) et valide par Nono le 23/09/2026.
+Chapitres restants a auditer : Introduction/Character (I-II), Rules hors combat de base
+(V), Between Adventures (VI), The GameMaster (IX). Glorious Reikland (X) et Bestiary (XII)
+largement hors-perimetre (lore/PNJ/creatures adverses).
+Fichiers modifies : DATABASE/WFRP4/BOOK_RULESBOOK.Xml, DATABASE/WFRP4/BOOK_RULESBOOK_FRANCAIS.Xml,
+DATABASE/WFRP4/BOOK LUSTRIA.xml, DATABASE/WFRP4/BOOK_DWARF_PLAYERS_GUIDE.Xml,
+DATABASE/WFRP4/BOOK_HIGH_ELF_PLAYERS_GUIDE.Xml, DATABASE/WFRP4/BOOK_LORDS_OF_NAGGAROTH.Xml,
+DATABASE/WFRP4/BOOK_MIDDENHEIM_CITY_OF_THE_WHITE_WOLF.Xml, DATABASE/WFRP4/BOOK_NATIONS_OF_MANKIND.Xml,
+DATABASE/WFRP4/BOOK_SALZENMUND_CITY_OF_SALT_AND_SILVER.Xml, DATABASE/WFRP4/BOOK_SEA_OF_CLAWS.Xml,
+CONTEXT.md, A FAIRE.txt, Log.txt.

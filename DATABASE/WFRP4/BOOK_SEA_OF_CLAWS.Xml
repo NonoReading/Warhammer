@@ -1115,7 +1115,7 @@
   <!-- Melee (Basic) -->
 <Skill>"RULES-COMPRAMER"</Skill>
   <!-- Row -->
-<Skill>"RULES-COMPVOILE"</Skill>
+<Skill>"RULES-COMPVOILE_*"</Skill>
   <!-- Sail -->
 <Skill>"RULES-COMPNATA"</Skill>
   <!-- Swim -->
@@ -1377,7 +1377,7 @@
   <!-- Ride (Any) -->
 <Skill>"RULES-COMPRAMER"</Skill>
   <!-- Row -->
-<Skill>"RULES-COMPVOILE"</Skill>
+<Skill>"RULES-COMPVOILE_*"</Skill>
   <!-- Sail -->
 <Skill>"RULES-COMPNATA"</Skill>
   <!-- Swim -->
@@ -1643,7 +1643,7 @@
   <!-- Melee (Two-Handed) -->
 <Skill>"RULES-COMPRAMER"</Skill>
   <!-- Row -->
-<Skill>"RULES-COMPVOILE"</Skill>
+<Skill>"RULES-COMPVOILE_*"</Skill>
   <!-- Sail -->
 <Skill>"RULES-COMPNATA"</Skill>
   <!-- Swim -->
@@ -1771,7 +1771,7 @@
   <!-- Lore (Dwarfs) -->
 <Skill>"RULES-COMPCOMB_BASE"</Skill>
   <!-- Melee (Basic) -->
-<Skill>"RULES-COMPVOILE"</Skill>
+<Skill>"RULES-COMPVOILE_*"</Skill>
   <!-- Sail -->
 <Skill>"RULES-COMPMETIER_*"</Skill>
   <!-- Trade (Any) -->
@@ -1907,7 +1907,7 @@ This bonus applies to Crew Tests as well as individual Leadership Tests."</Expla
   <!-- Evaluate -->
 <Skill name="RULES-COMPPARI">"3"</Skill>
   <!-- Gamble -->
-<Skill name="RULES-COMPVOILE">"3"</Skill>
+<Skill name="RULES-COMPVOILE_*">"3"</Skill>
   <!-- Sail -->
 <Skill name="RULES-COMPCOMM">"4"</Skill>
   <!-- Leadership -->
@@ -2012,7 +2012,7 @@ This bonus applies to Crew Tests as well as individual Leadership Tests."</Expla
   <!-- Play (Any) -->
 <Skill name="RULES-COMPRAMER">"1"</Skill>
   <!-- Row -->
-<Skill name="RULES-COMPVOILE">"1"</Skill>
+<Skill name="RULES-COMPVOILE_*">"1"</Skill>
   <!-- Sail -->
 <Skill name="RULES-COMPNATA">"1"</Skill>
   <!-- Swim -->
@@ -2161,7 +2161,7 @@ This bonus applies to Crew Tests as well as individual Leadership Tests."</Expla
   <!-- Lore (Wrecks) -->
 <Skill name="RULES-COMPCOMM">"4"</Skill>
   <!-- Leadership -->
-<Skill name="RULES-COMPVOILE">"4"</Skill>
+<Skill name="RULES-COMPVOILE_*">"4"</Skill>
   <!-- Sail -->
 </SUBCHAPTER_SKILL>
 <SUBCHAPTER_TALENT>
@@ -2262,7 +2262,7 @@ This bonus applies to Crew Tests as well as individual Leadership Tests."</Expla
   <!-- Perception  -->
 <Skill name="RULES-COMPRAMER">"1"</Skill>
   <!-- Row -->
-<Skill name="RULES-COMPVOILE">"1"</Skill>
+<Skill name="RULES-COMPVOILE_*">"1"</Skill>
   <!-- Sail -->
 <Skill name="RULES-COMPNATA">"1"</Skill>
   <!-- Swim -->
@@ -2339,7 +2339,7 @@ This bonus applies to Crew Tests as well as individual Leadership Tests."</Expla
 <Career id="SEAOF-WORK113">
 <Description language="ENGLISH">"Sailor"</Description>
 <Explanation language="ENGLISH">"You work on board a ship, keeping the decks clean and the sails suitably trimmed. Humans of the Old World had to learn the skills of sailing for themselves, for the Dwarfs were never a great maritime civilisation, and the Elves had no desire to encourage Human exploration of the wider world. Human civilisation before the age of Sigmar rarely ventured upon the waves. Even the mighty Khemrians built few vessels capable of ocean travel."</Explanation>
-<Skill>"RULES-COMPVOILE"</Skill>
+<Skill>"RULES-COMPVOILE_*"</Skill>
 <Class>"SEAOF-CLASS_SEAF"</Class>
 <SUBCHAPTER_LEVEL>
 <Level id="1">
@@ -2388,7 +2388,7 @@ This bonus applies to Crew Tests as well as individual Leadership Tests."</Expla
   <!-- Play (Pennywhistle) -->
 <Skill name="RULES-COMPRAMER">"1"</Skill>
   <!-- Row -->
-<Skill name="RULES-COMPVOILE">"1"</Skill>
+<Skill name="RULES-COMPVOILE_*">"1"</Skill>
   <!-- Sail -->
 <Skill name="RULES-COMPNATA">"1"</Skill>
   <!-- Swim -->
@@ -2516,7 +2516,7 @@ This bonus applies to Crew Tests as well as individual Leadership Tests."</Expla
   <!-- Pray -->
 <Skill name="RULES-COMPRAMER">"1"</Skill>
   <!-- Row -->
-<Skill name="RULES-COMPVOILE">"1"</Skill>
+<Skill name="RULES-COMPVOILE_*">"1"</Skill>
   <!-- Sail -->
 <Skill name="RULES-COMPNATA">"1"</Skill>
   <!-- Swim -->
@@ -2659,7 +2659,7 @@ This bonus applies to Crew Tests as well as individual Leadership Tests."</Expla
   <!-- Gossip -->
 <Skill name="RULES-COMPCOMB_BASE">"2"</Skill>
   <!-- Melee (Basic) -->
-<Skill name="RULES-COMPVOILE">"2"</Skill>
+<Skill name="RULES-COMPVOILE_*">"2"</Skill>
   <!-- Sail -->
 <Skill name="RULES-COMPCOMM">"3"</Skill>
   <!-- Leadership -->
@@ -2772,7 +2772,7 @@ This bonus applies to Crew Tests as well as individual Leadership Tests."</Expla
   <!-- Ranged (Sling) -->
 <Skill name="RULES-COMPRAMER">"1"</Skill>
   <!-- Row -->
-<Skill name="RULES-COMPVOILE">"1"</Skill>
+<Skill name="RULES-COMPVOILE_*">"1"</Skill>
   <!-- Sail -->
 <Skill name="RULES-COMPNATA">"1"</Skill>
   <!-- Swim -->
@@ -2905,7 +2905,7 @@ This bonus applies to Crew Tests as well as individual Leadership Tests."</Expla
   <!-- Pray -->
 <Skill name="RULES-COMPRAMER">"1"</Skill>
   <!-- Row -->
-<Skill name="RULES-COMPVOILE">"1"</Skill>
+<Skill name="RULES-COMPVOILE_*">"1"</Skill>
   <!-- Sail -->
 <Skill name="RULES-COMPNATA">"1"</Skill>
   <!-- Swim -->

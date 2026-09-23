@@ -1077,7 +1077,7 @@ Asur from the Outer Kingdoms and Eataine do not harbour such prejudice."</Explan
   <!-- Melee (Basic) -->
 <Skill>"RULES-COMPPRECEP"</Skill>
   <!-- Perception -->
-<Skill>"RULES-COMPVOILE"</Skill>
+<Skill>"RULES-COMPVOILE_*"</Skill>
   <!-- Sail -->
 <Skill>"RULES-COMPNATA"</Skill>
   <!-- Swim -->
@@ -1663,7 +1663,7 @@ Asur from the Outer Kingdoms and Eataine do not harbour such prejudice."</Explan
   <!-- Perception -->
 <Skill>"RULES-COMPPROJ_ARC"</Skill>
   <!-- Ranged (Bow) -->
-<Skill>"RULES-COMPVOILE"</Skill>
+<Skill>"RULES-COMPVOILE_*"</Skill>
   <!-- Sail -->
 <Skill>"RULES-COMPNATA"</Skill>
   <!-- Swim -->
@@ -1973,7 +1973,7 @@ Asur from the Outer Kingdoms and Eataine do not harbour such prejudice."</Explan
   <!-- Melee (Basic) -->
 <Skill>"RULES-COMPORIENT"</Skill>
   <!-- Navigation -->
-<Skill>"RULES-COMPVOILE"</Skill>
+<Skill>"RULES-COMPVOILE_*"</Skill>
   <!-- Sail -->
 <Skill>"RULES-COMPNATA"</Skill>
   <!-- Swim -->
@@ -2131,7 +2131,7 @@ The Sea Guard are among the oldest military traditions, formed when the Elves fi
   <!-- Ranged (Bow) -->
 <Skill name="RULES-COMPPROJ_ARB">"1"</Skill>
   <!-- Ranged (Crossbow) -->
-<Skill name="RULES-COMPVOILE">"1"</Skill>
+<Skill name="RULES-COMPVOILE_*">"1"</Skill>
   <!-- Sail (Bloodhawk, Falconship, Hawkship, or Dragonship) -->
 <Skill name="RULES-COMPNATA">"1"</Skill>
   <!-- Swim -->
@@ -2145,7 +2145,7 @@ The Sea Guard are among the oldest military traditions, formed when the Elves fi
   <!-- Gamble -->
 <Skill name="RULES-COMPSURVEXT">"2"</Skill>
   <!-- Outdoor Survival -->
-<Skill name="RULES-COMPVOILE">"2"</Skill>
+<Skill name="RULES-COMPVOILE_*">"2"</Skill>
   <!-- Sail (Bloodhawk, Falconship, Hawkship, or Dragonship) -->
 <Skill name="RULES-COMPCOMM">"3"</Skill>
   <!-- Leadership -->
@@ -2153,7 +2153,7 @@ The Sea Guard are among the oldest military traditions, formed when the Elves fi
   <!-- Navigation -->
 <Skill name="RULES-COMPPRECEP">"3"</Skill>
   <!-- Perception -->
-<Skill name="RULES-COMPVOILE">"3"</Skill>
+<Skill name="RULES-COMPVOILE_*">"3"</Skill>
   <!-- Sail (Bloodhawk, Falconship, Hawkship, or Dragonship) -->
 <Skill name="RULES-COMPCOND">"4"</Skill>
   <!-- Drive (Skycutter) -->
@@ -2484,7 +2484,7 @@ Shadow Warriors are trained in the art of subterfuge and guerilla warfare, makin
 <Description language="ENGLISH">"Merchant Adventurer"</Description>
 <Explanation language="ENGLISH">"You are filled with a desire to travel the world, seeking fortune and glory, plundering the seas, and trading its goods.
 The role of Merchant Adventurer goes back thousands of years to when Elves first explored the world. They are restless souls, filled with a desire to live on the seas, funding their explorations by taking what they can to sell at ports."</Explanation>
-<Skill>"RULES-COMPVOILE"</Skill>
+<Skill>"RULES-COMPVOILE_*"</Skill>
   <!-- competence de revenu : relevee par Nono sur le PDF le 30/08. Le livre la met
        en ITALIQUE dans la ligne Skills du niveau 1, et l italique ne survit pas a
        pdftotext - elle ne pouvait donc pas etre deduite du TXT. -->
@@ -2537,7 +2537,7 @@ The role of Merchant Adventurer goes back thousands of years to when Elves first
   <!-- Navigation -->
 <Skill name="RULES-COMPPROJ_ARC">"1"</Skill>
   <!-- Ranged (Bow) -->
-<Skill name="RULES-COMPVOILE">"1"</Skill>
+<Skill name="RULES-COMPVOILE_*">"1"</Skill>
   <!-- Sail (Any) -->
 <Skill name="RULES-COMPNATA">"1"</Skill>
   <!-- Swim -->
@@ -2995,7 +2995,7 @@ Smith-priests of Vaul forge powerful magical weapons and armour for the Elves. T
 <Description language="ENGLISH">"Storm Weaver"</Description>
 <Explanation language="ENGLISH">"You command Mathlann's realm, assisting ships and sailors through your mastery of Elven sea magics.
 Storm Weavers often serve as senior chaplains for Ulthuan's navies, most often aboard ships from Lothern and Cothique. Elves from the other kingdoms pay tribute to Mathlann, but they tend to fear the mercurial Storm Weavers for their ability to summon his wrath at their whim. Though Mathlann is considered a Cadai god, He is also a child of Ellinill, the Lord of Destruction, and his dark moods and oft-callous nature reflect that ancestry."</Explanation>
-<Skill>"RULES-COMPVOILE"</Skill>
+<Skill>"RULES-COMPVOILE_*"</Skill>
 <Class>"RULES-CLASS_ACAD"</Class>
 <Parent>"HELFG-WORK132"</Parent>
   <!-- CARRIERE AVANCEE : on n y entre pas, on y arrive en montant de niveau
@@ -3034,7 +3034,7 @@ Storm Weavers often serve as senior chaplains for Ulthuan's navies, most often a
   <!-- Channelling (Qhaysh) -->
 <Skill name="RULES-COMPRAMER">"3"</Skill>
   <!-- Row -->
-<Skill name="RULES-COMPVOILE">"3"</Skill>
+<Skill name="RULES-COMPVOILE_*">"3"</Skill>
   <!-- Sail (Any) -->
 <Skill name="RULES-COMPNATA">"3"</Skill>
   <!-- Swim -->

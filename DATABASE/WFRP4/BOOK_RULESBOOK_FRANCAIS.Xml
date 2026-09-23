@@ -884,9 +884,9 @@ Permet de nourrir le même nombre de personnes que Chasser et pêcher.
 Savoir (Herbes) : si vous préférez cueillir des herbes en utilisant Savoir (Herbes), un succès permet de ramasser une dose de l’herbe recherchée (voir page 307), et chaque DR ajoute une dose supplémentaire.
 Les Tests de cueillette sont modifiés en fonction de la Disponibilité des herbes : Commune (0), Limitée (-10), Rare (-20) ou Exotique (-30)."</Explanation>
 </Skill>
-<Skill id="RULES-COMPVOILE">
+<Skill id="RULES-COMPVOILE_*">
 <Attribut>"RULES-ATTR_Ag"</Attribut>
-<Description language="FRANCAIS">"Voile"</Description>
+<Description language="FRANCAIS">"Voile (au choix)"</Description>
 <Explanation language="FRANCAIS">"C’est votre capacité à piloter et manœuvrer un voilier – y compris gérer les nœuds, le gouvernail, la mesure du vent, etc.
 En partant du principe que vous disposez d’un équipage suffisamment entraîné sur votre vaisseau, vous utilisez uniquement la Compétence Voile quand vous devez pousser votre vaisseau pour effectuer une course-poursuite, naviguer sur des hauts-fonds particulièrement dangereux, lutter contre de mauvaises conditions météo, ou lors de difficultés similaires.
 Naviguer simplement par vent calme ou guider un bateau dans le sens du courant ne nécessite pas de Test pour ceux qui possèdent Voile.
@@ -1629,6 +1629,21 @@ Comme tous les bateaux à voile sont peu ou prou identiques à diriger, posséde
 </Skill>
 <Skill id="RULES-COMPSAVOIR_VAMPIRE">
 <Description language="FRANCAIS">"Lore (Vampires)"</Description>
+</Skill>
+<Skill id="RULES-COMPVOILE_BARGE">
+<Description language="FRANCAIS">"Voile (Peniche)"</Description>
+</Skill>
+<Skill id="RULES-COMPVOILE_CARAVEL">
+<Description language="FRANCAIS">"Voile (Caravelle)"</Description>
+</Skill>
+<Skill id="RULES-COMPVOILE_COG">
+<Description language="FRANCAIS">"Voile (Cogue)"</Description>
+</Skill>
+<Skill id="RULES-COMPVOILE_FREGATE">
+<Description language="FRANCAIS">"Voile (Fregate)"</Description>
+</Skill>
+<Skill id="RULES-COMPVOILE_WOLFSHIP">
+<Description language="FRANCAIS">"Voile (Wolfship)"</Description>
 </Skill>
 </DATA_SKILL_SPECIALIZATION>
 <DATA_TALENT>
@@ -5264,7 +5279,7 @@ See page 190 for Fear rules"</Explanation>
   <!-- Perception  -->
 <Skill>"RULES-COMPPROJ_ARC"</Skill>
   <!-- Projectiles (Arc) -->
-<Skill>"RULES-COMPVOILE"</Skill>
+<Skill>"RULES-COMPVOILE_*"</Skill>
   <!-- Voile -->
 </SUBCHAPTER_SKILL>
 <SUBCHAPTER_TALENT>
@@ -6112,7 +6127,7 @@ See page 190 for Fear rules"</Explanation>
 <Career id="RULES-WORK06">
 <Description language="FRANCAIS">"Batelier "</Description>
 <Explanation language="FRANCAIS">"Vous naviguez sur les eaux dangereuses du Vieux Monde, transportant tour à tour des passagers ou des marchandises, tout en relayant les dernières nouvelles.  « Attention à l’embranchement. C’est le Conducteur de barges qui a de la bouteille qui vous dit ça. Si vous approchez d’un rocher ou d’un autre danger, suivez la direction des étoiles et assurez-vous de rester dans cette direction, ou prenez la direction de la forêt et faites attention de bien maintenir le cap. Sinon, vous risquez de dériver et de couler. Et personne n’a envie de perdre sa barge. » – Jacob Walles, Conducteur de barges ayant coulé la sienne à un embranchement  De très nombreux bateaux et barges parcourent les voies navigables de l’Empire, transportant des biens provenant des coins les plus reculés des provinces vers les plus grandes villes. Ces navires à fond plat sont en mesure de naviguer bien plus facilement à contre-courant que les autres, et un important réseau de canaux leur permet d’atteindre les endroits les plus reculés. Les Capitaines sont des marins aguerris qui connaissent parfaitement les rivières qu’ils empruntent. Un Canotier n’est encore qu’un larbin, mais il ne faudra pas bien longtemps avant qu’il n’apprenne les ficelles. Les Bateliers pilotent des navires marchands chargés de marchandises vers, et depuis, les marchés, et sont soit à leur propre compte ou travaillent pour une chambre de commerce plus importante. De nombreux Bateliers sont également passeurs, faisant traverser les rivières à leurs passagers vers, ou depuis, les villes. Dans les cités les plus importantes, certains pilotent également des taxis de rivière, sont à la tête de bateaux de plaisance ou encore convoient des navires au nom d’un tiers. Un Batelier n’aura pas besoin d’aller au-devant de l’aventure, car c’est elle qui ne manquera pas de se présenter à lui. Tout le monde a besoin des bateaux, surtout ceux qui partent à l’aventure. De plus, ces esquifs constituent une excellente base d’opérations. Le Batelier n’aura même pas à savoir si les objectifs de l’aventure vont nécessiter de quitter les berges de la rivière ou pas. Et même si c’était temporairement le cas, les aventuriers pourraient facilement permettre à un Batelier talentueux de s’occuper des leurs affaires pendant qu’ils font une pause au cours de leur expédition fluviale."</Explanation>
-<Skill>"RULES-COMPVOILE"</Skill>
+<Skill>"RULES-COMPVOILE_*"</Skill>
 <Class>"RULES-CLASS_RIVE"</Class>
 <SUBCHAPTER_LEVEL>
 <Level id="1">
@@ -6159,7 +6174,7 @@ See page 190 for Fear rules"</Explanation>
   <!-- Ramer  -->
 <Skill name="RULES-COMPRESALC">"1"</Skill>
   <!-- Résistance à l’alcool  -->
-<Skill name="RULES-COMPVOILE">"1"</Skill>
+<Skill name="RULES-COMPVOILE_*">"1"</Skill>
   <!-- Voile -->
 <Skill name="RULES-COMPATHL">"2"</Skill>
   <!-- Athlétisme -->
@@ -7442,7 +7457,7 @@ See page 190 for Fear rules"</Explanation>
   <!-- Résistance à l’alcool  -->
 <Skill name="RULES-COMPSUBOR">"1"</Skill>
   <!-- Subornation  -->
-<Skill name="RULES-COMPVOILE">"1"</Skill>
+<Skill name="RULES-COMPVOILE_*">"1"</Skill>
   <!-- Voile -->
 <Skill name="RULES-COMPCOMB_BASE">"2"</Skill>
   <!-- Corps à corps (Base) -->
@@ -9784,7 +9799,7 @@ See page 190 for Fear rules"</Explanation>
 <Career id="RULES-WORK35">
 <Description language="FRANCAIS">"Marin "</Description>
 <Explanation language="FRANCAIS">"« Ouaip, j’ai navigué vers Marienburg. Ces maudits Wastelanders ont fait tout leur possible pour nous empêcher de prendre la haute mer. J’te jure, le Nautonier a dû faire trois fois le tour des îles avant qu’on sente enfin l’odeur de l’eau salée. Et ils nous ont taxés double sur tout. Même le chat de l’équipage y a eu droit. Honnêtement, je suis content d’être rentré à la maison. » – Thom Wesserbrug, Maître d’équipage  L’appel du large et une vie passée à parcourir les mers résonnent en vous, même si de nombreux Marins du Reikland n’ont jamais vu la mer. Les Marins parcourent la haute mer dans la Marine impériale, ou se mettent au service de Marchands. Même si le Reikland ne possède aucune côte, le Reik, entre le Wasteland et Altdorf, est large de plusieurs kilomètres et emprunté par de nombreux navires de grande taille. La Première Flotte impériale, qui patrouille ces eaux, ne voit que très rarement la haute mer, en grande partie à cause du fait que les taxes à payer pour faire passer un navire de guerre par Marienburg sont exorbitantes.  Une fois Marienburg franchie, c’est le monde entier qui attend le Marin : la dangereuse Mer des griffes, le Grand Océan aux profondeurs insondables, les Îles aux sirènes et leur exotisme, les Mers du Sud et le Golfe noir. Et même sur le Reik, un Marin peut passer sa vie entière à en parcourir les eaux sans jamais vivre la même journée.  Un Marin parvient toujours à trouver du travail, que ce soit comme membre d’équipage sur un vaisseau de combat de l’Empire ou comme simple équipier sur un sloop de commerce. Certains Marins parcourent le monde et paient leur transport en travaillant. Le Reik possède également de nombreuses « Missions », ces bâtiments fournis par la Marine impériale, et qui emploient de nombreux Marins. "</Explanation>
-<Skill>"RULES-COMPVOILE"</Skill>
+<Skill>"RULES-COMPVOILE_*"</Skill>
 <Class>"RULES-CLASS_RIVE"</Class>
 <SUBCHAPTER_LEVEL>
 <Level id="1">
@@ -9831,7 +9846,7 @@ See page 190 for Fear rules"</Explanation>
   <!-- Résistance à l’alcool  -->
 <Skill name="RULES-COMPRAGOT">"1"</Skill>
   <!-- Ragot  -->
-<Skill name="RULES-COMPVOILE">"1"</Skill>
+<Skill name="RULES-COMPVOILE_*">"1"</Skill>
   <!-- Voile -->
 <Skill name="RULES-COMPATHL">"2"</Skill>
   <!-- Athlétisme -->
@@ -10853,7 +10868,7 @@ See page 190 for Fear rules"</Explanation>
   <!-- Savoir (Épaves)  -->
 <Skill name="RULES-COMPCOMM">"4"</Skill>
   <!-- Commandement  -->
-<Skill name="RULES-COMPVOILE">"4"</Skill>
+<Skill name="RULES-COMPVOILE_*">"4"</Skill>
   <!-- Voile -->
 </SUBCHAPTER_SKILL>
 <SUBCHAPTER_TALENT>
@@ -11210,7 +11225,7 @@ See page 190 for Fear rules"</Explanation>
   <!-- Ramer  -->
 <Skill name="RULES-COMPRESIST">"1"</Skill>
   <!-- Résistance  -->
-<Skill name="RULES-COMPVOILE">"1"</Skill>
+<Skill name="RULES-COMPVOILE_*">"1"</Skill>
   <!-- Voile -->
 <Skill name="RULES-COMPCHARM">"2"</Skill>
   <!-- Charme  -->

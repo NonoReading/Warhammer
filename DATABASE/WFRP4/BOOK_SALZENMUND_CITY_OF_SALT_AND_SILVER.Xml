@@ -350,7 +350,7 @@
   <!-- Lore (Dwarfs) -->
 <Skill>"RULES-COMPCOMB_BASE"</Skill>
   <!-- Melee (Basic) -->
-<Skill>"RULES-COMPVOILE"</Skill>
+<Skill>"RULES-COMPVOILE_*"</Skill>
   <!-- Sail -->
 <Skill>"RULES-COMPMETIER_*"</Skill>
   <!-- Trade (Any) -->

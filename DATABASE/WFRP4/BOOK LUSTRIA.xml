@@ -970,7 +970,7 @@
   <!-- Perception -->
 <Skill name="RULES-COMPRAMER">"1"</Skill>
   <!-- Row -->
-<Skill name="RULES-COMPVOILE">"1"</Skill>
+<Skill name="RULES-COMPVOILE_*">"1"</Skill>
   <!-- Sail (Any) -->
 <Skill name="RULES-COMPNATA">"1"</Skill>
   <!-- Swim -->

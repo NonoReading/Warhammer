@@ -309,7 +309,7 @@
   <!-- Melee (Basic) -->
 <Skill>"RULES-COMPORIENT"</Skill>
   <!-- Navigation -->
-<Skill>"RULES-COMPVOILE"</Skill>
+<Skill>"RULES-COMPVOILE_*"</Skill>
   <!-- Sail -->
 <Skill>"RULES-COMPMETIER_*"</Skill>
   <!-- Trade (Any One) -->
@@ -1685,7 +1685,7 @@
   <!-- Lore (Dwarfs) -->
 <Skill>"RULES-COMPCOMB_BASE"</Skill>
   <!-- Melee (Basic) -->
-<Skill>"RULES-COMPVOILE"</Skill>
+<Skill>"RULES-COMPVOILE_*"</Skill>
   <!-- Sail -->
 <Skill>"RULES-COMPMETIER_*"</Skill>
   <!-- Trade (Any One) -->
@@ -3969,7 +3969,7 @@ When you gain the Stunned Condition, you can spend a Fortune point to make an im
   <!-- Navigation -->
 <Skill name="RULES-COMPSURVEXT">"3"</Skill>
   <!-- Outdoor Survival -->
-<Skill name="RULES-COMPVOILE">"3"</Skill>
+<Skill name="RULES-COMPVOILE_*">"3"</Skill>
   <!-- Sail (Skycraft) -->
 </SUBCHAPTER_SKILL>
 <SUBCHAPTER_TALENT>

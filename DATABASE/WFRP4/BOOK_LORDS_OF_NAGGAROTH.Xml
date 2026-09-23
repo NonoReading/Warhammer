@@ -145,7 +145,7 @@ At the cost of one corruption point the Sorceress may add doublle their Willpowe
   <!-- Gamble -->
 <Skill>"RULES-COMPPROJ_ARB"</Skill>
   <!-- Ranged (Crossbow) -->
-<Skill>"RULES-COMPVOILE"</Skill>
+<Skill>"RULES-COMPVOILE_*"</Skill>
   <!-- Sail -->
 <Skill>"RULES-COMPNATA"</Skill>
   <!-- Swim -->
@@ -268,7 +268,7 @@ At the cost of one corruption point the Sorceress may add doublle their Willpowe
   <!-- Row -->
 <Skill name="RULES-COMPCOMB_BASE">"1"</Skill>
   <!-- Melee (Basic) -->
-<Skill name="RULES-COMPVOILE">"1"</Skill>
+<Skill name="RULES-COMPVOILE_*">"1"</Skill>
   <!-- Sail -->
 <Skill name="RULES-COMPNATA">"1"</Skill>
   <!-- Swim -->

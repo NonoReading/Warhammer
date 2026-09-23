@@ -431,7 +431,7 @@
   <!-- Melee (Basic) -->
 <Skill>"RULES-COMPPROJ_ARC"</Skill>
   <!-- Ranged (Bow) -->
-<Skill>"RULES-COMPVOILE"</Skill>
+<Skill>"RULES-COMPVOILE_*"</Skill>
   <!-- Sail -->
 <Skill>"RULES-COMPNATA"</Skill>
   <!-- Swim -->

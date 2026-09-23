@@ -2218,7 +2218,7 @@ Description: You take a –50 penalty to your Weapon Skill characteristic if you
   <!-- Pray -->
 <Skill>"RULES-COMPCHEV_CHAMEAU/RULES-COMPCHEV_CHEVAL"</Skill>
   <!-- Ride (Camel or Horse) -->
-<Skill>"RULES-COMPVOILE"</Skill>
+<Skill>"RULES-COMPVOILE_*"</Skill>
   <!-- Sail -->
 </SUBCHAPTER_SKILL>
 <SUBCHAPTER_TALENT>
@@ -3674,7 +3674,7 @@ Description: You take a –50 penalty to your Weapon Skill characteristic if you
   <!-- Melee (Basic) -->
 <Skill>"RULES-COMPPROJ_ARC"</Skill>
   <!-- Ranged (Bow) -->
-<Skill>"RULES-COMPVOILE"</Skill>
+<Skill>"RULES-COMPVOILE_*"</Skill>
   <!-- Sail -->
 <Skill>"RULES-COMPNATA"</Skill>
   <!-- Swim -->
@@ -3897,7 +3897,7 @@ Description: You take a –50 penalty to your Weapon Skill characteristic if you
   <!-- Language (Estalian or Tilean) -->
 <Skill>"RULES-COMPSAVOIR_WESTERLAND"</Skill>
   <!-- Lore (Westerland) -->
-<Skill>"RULES-COMPVOILE"</Skill>
+<Skill>"RULES-COMPVOILE_*"</Skill>
   <!-- Sail -->
 <Skill>"RULES-COMPMETIER_*"</Skill>
   <!-- Trade (Any) -->
@@ -4711,7 +4711,7 @@ Description: You take a –50 penalty to your Weapon Skill characteristic if you
   <!-- Navigation -->
 <Skill>"RULES-COMPSURVEXT"</Skill>
   <!-- Outdoor Survival -->
-<Skill>"RULES-COMPVOILE"</Skill>
+<Skill>"RULES-COMPVOILE_*"</Skill>
   <!-- Sail -->
 <Skill>"RULES-COMPNATA"</Skill>
   <!-- Swim -->
@@ -6196,7 +6196,7 @@ Ruinous Powers is simply false. The Norsemen see themselves as honorable, strong
   <!-- Outdoor Survival -->
 <Skill name="RULES-COMPPROJ_LANC">"2"</Skill>
   <!-- Ranged (Throwing) -->
-<Skill name="RULES-COMPVOILE">"2"</Skill>
+<Skill name="RULES-COMPVOILE_*">"2"</Skill>
   <!-- Sail -->
 <Skill name="RULES-COMPCOMM">"3"</Skill>
   <!-- Leadership -->
@@ -6346,7 +6346,7 @@ Captain"</Explanation>
   <!-- Outdoor Survival -->
 <Skill name="RULES-COMPRAMER">"2"</Skill>
   <!-- Row -->
-<Skill name="RULES-COMPVOILE">"2"</Skill>
+<Skill name="RULES-COMPVOILE_*">"2"</Skill>
   <!-- Sail -->
 <Skill name="RULES-COMPNATA">"2"</Skill>
   <!-- Swim -->
@@ -6578,7 +6578,7 @@ Arab slave market, amnesty from the state for their acts of piracy and allies wi
 “I miss the old days, before I was called the ‘King of Sartosa’. I
 miss the thrill of hopping on to a ship to plunder and challenging the crew to a duel for their freedoms! …Now, they simply run and hide, and I grow bored…”—Abd Al Wazaq, Legendary
 Corsair and Pirate King of Sartosa in the 16 th Century IC"</Explanation>
-<Skill>"RULES-COMPVOILE"</Skill>
+<Skill>"RULES-COMPVOILE_*"</Skill>
   <!-- competence de tete de carriere : Sail - donnee par l italique de la liste de competences du niveau 1 (PDF, signale par Nono le 03/09/2026). L export texte perd l italique, seul pdftohtml le conserve. -->
 <Class>"RULES-CLASS_RIVE"</Class>
   <!-- espece : Human Arab -->
@@ -6625,7 +6625,7 @@ Corsair and Pirate King of Sartosa in the 16 th Century IC"</Explanation>
   <!-- Melee (Basic) -->
 <Skill name="RULES-COMPRAMER">"1"</Skill>
   <!-- Row -->
-<Skill name="RULES-COMPVOILE">"1"</Skill>
+<Skill name="RULES-COMPVOILE_*">"1"</Skill>
   <!-- Sail -->
 <Skill name="RULES-COMPNATA">"1"</Skill>
   <!-- Swim -->
@@ -9532,7 +9532,7 @@ While most pirates work with a crew, it’s not uncommon to see many of them str
 &quot;As soon as their jolly boat touched the sand they roared ashore, charging the waiting Goblins. It was a short fight. Within moments the Greenskins were running for their lives and the pirates were rewarding themselves with a swift tot of rum!&quot;
 —Von Mirrenburg, accounting the tale of the infamous Long
 Drong and his Slayer pirates."</Explanation>
-<Skill>"RULES-COMPVOILE"</Skill>
+<Skill>"RULES-COMPVOILE_*"</Skill>
   <!-- competence de tete de carriere : Sail - donnee par l italique de la liste de competences du niveau 1 (PDF, signale par Nono le 03/09/2026). L export texte perd l italique, seul pdftohtml le conserve. -->
 <Class>"RULES-CLASS_RIVE"</Class>
   <!-- espece : Dwarf, Gnome, Halfling, Human -->
@@ -9579,7 +9579,7 @@ Drong and his Slayer pirates."</Explanation>
   <!-- Melee (Brawling) -->
 <Skill name="RULES-COMPRAMER">"1"</Skill>
   <!-- Row -->
-<Skill name="RULES-COMPVOILE">"1"</Skill>
+<Skill name="RULES-COMPVOILE_*">"1"</Skill>
   <!-- Sail -->
 <Skill name="RULES-COMPNATA">"1"</Skill>
   <!-- Swim -->
