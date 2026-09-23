@@ -3533,15 +3533,20 @@ dérivé une fois jusqu'à 2302 lignes :
   équivalent daté dans `Log.txt`. Une conception arrêtée mais non appliquée n'a pas sa
   place ici non plus : elle va dans `CONTEXT.md`.
 
-**Quand Nono dit qu'il va committer (règle du 30/08/2026, précisée le 10/09/2026)** — lui
-proposer **le récapitulatif de ce qui part dans ce commit**, sans qu'il ait à le demander : la
-liste des fichiers modifiés **depuis son dernier commit**, groupés par nature (données / code /
-fichiers de suivi), avec une phrase par groupe sur ce qui a changé, et une proposition de
-message de commit. Cela suppose de tenir le compte, au fil de la session, de ce qui a été
-livré depuis le dernier « j'ai commit » — c'est à moi de le suivre, pas à lui de s'en souvenir.
-**C'est toujours Nono qui exécute le commit lui-même** — je fournis le récapitulatif et le
-message proposé, jamais `git commit` à sa place, même quand rien ne l'empêcherait techniquement
-(dépôt accessible, rien en attente de confirmation).
+**Quand Nono dit qu'il va committer (règle du 30/08/2026, précisée le 10/09/2026, revue le
+23/09/2026)** — lui proposer **le récapitulatif de ce qui part dans ce commit**, sans qu'il
+ait à le demander : la liste des fichiers modifiés **depuis son dernier commit**, groupés par
+nature (données / code / fichiers de suivi), avec une phrase par groupe sur ce qui a changé,
+et une proposition de message de commit. Cela suppose de tenir le compte, au fil de la
+session, de ce qui a été livré depuis le dernier « j'ai commit » — c'est à moi de le suivre,
+pas à lui de s'en souvenir.
+**Depuis le 23/09/2026, je committe et pousse directement** (`git add` sur les fichiers
+livrés, `git commit` avec le message proposé, `git push`) dès que Nono dit qu'il commit ou
+valide le message proposé — il n'a plus besoin de le faire lui-même. Changement de règle :
+Nono travaille avec TortoiseGit, pas la ligne de commande, ce qui rendait l'ancienne règle
+(« c'est toujours Nono qui exécute ») contraignante sans raison en pratique. Je continue de
+lui présenter le récapitulatif et le message **avant** de committer, et je ne committe/pousse
+jamais sans qu'il ait dit de le faire dans cette session.
 
 **Règle de scission des ethnies (Nono, 30/08/2026)** — « ce qu'il faut éviter, c'est le
 bête doublon dont juste le nom de l'ethnie change ; si au moins une donnée de création
