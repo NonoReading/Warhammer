@@ -351,11 +351,14 @@ entre deux versions" plus haut correspondent au chantier détaillé dans CONTEXT
 (versionning des éléments entre livres/suppléments, conception arrêtée le 10/08, non
 démarré) — pas dupliqué ici, juste ce renvoi.
 
-PDF Personnage (PRIORITAIRE) :
-- refonte de pdfpersonnage.pas en blocs/tableaux réutilisables (architecture Bloc/Tableau,
-  positionnement relatif) - conception arrêtée le 14/08/2026, voir CONTEXT.md §2.4.
-  Commencer par PdfPersonnageCreationFeldo2P, prototype sur le bloc Résilience puis le
-  tableau des 9 caractéristiques.
+PDF Personnage :
+[FAIT ET VALIDE PAR NONO LE 15/08/2026 - CLOS] Refonte de PdfPersonnageCreationFeldo2P en
+blocs/tableaux réutilisables (architecture Bloc/Tableau, positionnement relatif, CONTEXT.md
+§2.4) : 5 blocs cadre (Armures/Équipement/Armes/Sorts/Encombrement), 4 boucles de remplissage
+(Sorts/Divers/Armes/Armures), 2 blocs cadre+contenu (DessinExplication, Armour Points).
+RESTE (non prioritaire, au choix de Nono) : (1) appliquer la même approche à l'ancien
+PdfPersonnageCreation (gabarit page 1, pas encore touché) ; (2) bloc Blessure actif et bloc
+Compétence de combat de la page 2 (candidats pour une brique ultérieure, non demandés).
 - nettoyer les variables locales jamais utilisées dans PdfPersonnageCreationFeldo2P
   (relevé Lazarus du 15/08/2026, pré-existantes, pas liées au découpage en cours) :
   PMetierAttribut, Comp, ValStat, ValBonus, ValTotal,
