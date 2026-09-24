@@ -1195,6 +1195,10 @@ As sailing one ship is not so different to sailing another, having any Sail Spec
 <Description language="ENGLISH">"Lore (Sigmar)"</Description>
 <Generique>"RULES-COMPSAVOIR_*"</Generique>
 </Skill>
+<Skill id="RULES-COMPSAVOIR_RANALD">
+<Description language="ENGLISH">"Lore (Ranald)"</Description>
+<Generique>"RULES-COMPSAVOIR_*"</Generique>
+</Skill>
 <Skill id="RULES-COMPSAVOIR_SORC">
 <Description language="ENGLISH">"Lore (Witches)"</Description>
 <Generique>"RULES-COMPSAVOIR_*"</Generique>
@@ -3724,6 +3728,22 @@ See page 190 for Fear rules"</Explanation>
 <Description language="ENGLISH">"Invoke (Ranald)"</Description>
 <Generique>"RULES-T0080_*"</Generique>
 </Talent>
+<Talent id="RULES-T0080_DECEIVER">
+<Description language="ENGLISH">"Invoke (The Deceiver)"</Description>
+<Generique>"RULES-T0080_*"</Generique>
+</Talent>
+<Talent id="RULES-T0080_GAMESTER">
+<Description language="ENGLISH">"Invoke (The Gamester)"</Description>
+<Generique>"RULES-T0080_*"</Generique>
+</Talent>
+<Talent id="RULES-T0080_NIGHTPROWLER">
+<Description language="ENGLISH">"Invoke (The Night Prowler)"</Description>
+<Generique>"RULES-T0080_*"</Generique>
+</Talent>
+<Talent id="RULES-T0080_PROTECTOR">
+<Description language="ENGLISH">"Invoke (The Protector)"</Description>
+<Generique>"RULES-T0080_*"</Generique>
+</Talent>
 <Talent id="RULES-T0080_RHYA">
 <Description language="ENGLISH">"Invoke (Rhya)"</Description>
 <Generique>"RULES-T0080_*"</Generique>
@@ -4173,6 +4193,10 @@ See page 190 for Fear rules"</Explanation>
 <Description language="ENGLISH">"Etiquette (Nobles)"</Description>
 <Generique>"RULES-T0136_*"</Generique>
 </Talent>
+<Talent id="RULES-T0136_RANALD">
+<Description language="ENGLISH">"Etiquette (Ranaldans)"</Description>
+<Generique>"RULES-T0136_*"</Generique>
+</Talent>
 <Talent id="RULES-T0136_SERV">
 <Description language="ENGLISH">"Etiquette (Servants)"</Description>
 <Generique>"RULES-T0136_*"</Generique>
@@ -4183,6 +4207,10 @@ See page 190 for Fear rules"</Explanation>
 </Talent>
 <Talent id="RULES-T0136_SOLD">
 <Description language="ENGLISH">"Etiquette (Soldiers)"</Description>
+<Generique>"RULES-T0136_*"</Generique>
+</Talent>
+<Talent id="RULES-T0136_TAAL">
+<Description language="ENGLISH">"Etiquette (Taal)"</Description>
 <Generique>"RULES-T0136_*"</Generique>
 </Talent>
 <Talent id="RULES-T0139_GOUT">

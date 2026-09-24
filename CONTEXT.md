@@ -11501,3 +11501,49 @@ Eagle, p.72-73) — aucune créature adverse n'est modélisée dans le programme
 
 XML pur, aucun code Pascal touché. Compilé, testé dans WinSpell (filtre par livre) et validé
 par Nono le 23/09/2026. **The Horned Rat Companion est clos.**
+
+### 2.92 Deft Steps, Light Fingers : 9 carrières saisies, codes Lore/Etiquette/Invoke de Ranald créés (24/09/2026)
+
+Reprise de `BOOK_DEFT_STEPS_LIGHT_FINGERS.Xml` (`CODE_BOOK` "DEFT"), livre partiel saisi par
+un agent précédent : 9 carrières (`DEFT-WORK001` à `009` : Thief-Priest, Gambler-Priest,
+Trickster-Priest, Liberator-Priest, Forger, Ranger-Priest of Taal, Muleskinner, Gamekeeper,
+Poacher). 13 lignes de compétences/talents avaient été laissées sans code, faute d'entrée
+correspondante dans `BOOK_RULESBOOK.Xml`. Décisions de Nono, toutes appliquées :
+
+Créés dans `BOOK_RULESBOOK.Xml`, sur le modèle exact des familles Lore/Etiquette/Invoke par
+dieu déjà existantes (`RULES-COMPSAVOIR_SIGMAR`, `RULES-T0136_EMP/_FIDEL`,
+`RULES-T0080_SIGMAR/_TAAL`) :
+- `RULES-COMPSAVOIR_RANALD` (DATA_SKILL, "Lore (Ranald)")
+- `RULES-T0136_RANALD` (DATA_TALENT, "Etiquette (Ranaldans)") — un seul code pour les deux
+  formulations rencontrées dans le livre ("Etiquette (Ranaldans)" et "Etiquette (Ranald)")
+- `RULES-T0136_TAAL` (DATA_TALENT, "Etiquette (Taal)")
+- `RULES-T0080_NIGHTPROWLER`, `RULES-T0080_GAMESTER`, `RULES-T0080_DECEIVER`,
+  `RULES-T0080_PROTECTOR` (DATA_TALENT, un Invoke par aspect de Ranald, à la suite de
+  `RULES-T0080_RANALD`) — talent d'accès seul, comme les autres Invoke ; les listes de
+  Miracles propres à chaque aspect ne sont PAS intégrées (hors périmètre, voir A FAIRE.txt).
+
+Lignes complétées dans `BOOK_DEFT_STEPS_LIGHT_FINGERS.Xml` avec ces codes, palier par palier,
+vérifié contre `PDF_TEXTE/Deft Steps Light Fingers.txt` : Lore (Ranald) niveau 1 sur
+Thief-Priest/Gambler-Priest/Trickster-Priest ; Etiquette (Ranald) niveau 2 sur ces trois plus
+Liberator-Priest ; Invoke d'aspect niveau 2 assorti à chaque carrière (Night Prowler/
+Gamester/Deceiver/Protector) ; Etiquette (Taal) niveau 2 sur Ranger-Priest of Taal, à côté de
+l'Invoke (Taal) déjà présent.
+
+`Trade (Artist or Smith)` du Forger (niveau 1) résolu par le mécanisme de choix combiné déjà
+en place dans le projet (barre oblique entre codes, même principe que
+`RULES-COMPMETIER_FORGE/RULES-COMPMETIER_GOLDSMITH/RULES-COMPMETIER_ING`) :
+`RULES-COMPMETIER_MATART/RULES-COMPMETIER_FORGE`.
+
+Deux coquilles du livre repérées et écartées sur décision de Nono : "Perform (Acting)" au
+niveau 3 du Trickster-Priest (Entertain (Acting) déjà présent au niveau 2, suffit) et
+"Public Speaking" en Skill au niveau 2 du Liberator-Priest (le Talent `RULES-T0109` est déjà
+correctement présent au niveau 3). Les mappings `Secret Signs (Thieves/Thief)` ->
+`RULES-COMPSIGNES_VOL` et `Language (Thieve's Tongue)` -> `RULES-COMPLANG_VOL` étaient déjà
+présents et cohérents, rien touché.
+
+XML pur (`BOOK_RULESBOOK.Xml` + `BOOK_DEFT_STEPS_LIGHT_FINGERS.Xml`), aucun code Pascal.
+Bien formé vérifié (parse XML sans erreur). Non compilé/non testé à l'écran dans ce tour — à
+la charge de Nono avant commit. RESTE hors périmètre : les 4 listes de Miracles des aspects
+de Ranald (Night Prowler/Gamester/Deceiver/Protector), et tout le contenu narratif du livre
+(cultes, règles de prison/hors-la-loi, contacts criminels, tables) — voir le commentaire en
+tête du fichier XML.

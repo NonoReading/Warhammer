@@ -6505,3 +6505,47 @@ Compile (lazbuild --build-all, 0 erreur) et valide par Nono. Chantier "VARIANTES
 entierement clos.
 Fichiers modifies : DATABASE/WFRP4/BOOK_RULESBOOK_FRANCAIS.Xml, CONTEXT.md, Log.txt,
 A FAIRE.txt.
+
+24/09/2026 - DEFT STEPS, LIGHT FINGERS : 9 CARRIERES SAISIES, CODES MANQUANTS CREES
+Reprise du livre partiel BOOK_DEFT_STEPS_LIGHT_FINGERS.Xml (CODE_BOOK "DEFT", 9 carrieres
+DEFT-WORK001 a 009 : Thief/Gambler/Trickster/Liberator-Priest, Forger, Ranger-Priest of
+Taal, Muleskinner, Gamekeeper, Poacher) deja saisi par un agent precedent, qui avait laisse
+13 lignes de competences/talents sans code faute d'entree correspondante dans
+BOOK_RULESBOOK.Xml. Decisions tranchees par Nono et appliquees :
+- Crees dans BOOK_RULESBOOK.Xml (memes familles que Lore/Etiquette/Invoke par dieu deja
+  existantes) : RULES-COMPSAVOIR_RANALD (Lore Ranald, DATA_SKILL), RULES-T0136_RANALD
+  (Etiquette Ranaldans/Ranald - un seul code pour les deux formulations du livre),
+  RULES-T0136_TAAL (Etiquette Taal), RULES-T0080_NIGHTPROWLER/_GAMESTER/_DECEIVER/
+  _PROTECTOR (Invoke, un par aspect de Ranald - talent d'acces seul, listes de Miracles
+  des aspects non integrees, hors perimetre).
+- Lignes completees dans BOOK_DEFT_STEPS_LIGHT_FINGERS.Xml avec ces codes, palier par
+  palier (Lore Ranald niv1 Thief/Gambler/Trickster-Priest ; Etiquette Ranald niv2
+  Thief/Gambler/Trickster/Liberator-Priest ; Invoke d'aspect niv2 assorti a chaque
+  carriere ; Etiquette Taal niv2 Ranger-Priest of Taal).
+- Trade (Artist or Smith) du Forger (niv1) resolu par le mecanisme de choix combine deja
+  existant (barre oblique) : RULES-COMPMETIER_MATART/RULES-COMPMETIER_FORGE.
+- Deux coquilles du livre ecartees sur decision de Nono : "Perform (Acting)" au niveau 3
+  du Trickster-Priest (Entertain (Acting) deja present niv2, suffit) et "Public Speaking"
+  en Skill au niveau 2 du Liberator-Priest (le Talent RULES-T0109 est deja correctement
+  present au niveau 3).
+- Secret Signs (Thieves/Thief) -> RULES-COMPSIGNES_VOL et Language (Thieve's Tongue) ->
+  RULES-COMPLANG_VOL verifies deja presents et coherents, rien touche.
+XML pur, aucun code Pascal. RESTE (hors perimetre de ce chantier) : les 4 listes de
+Miracles des aspects de Ranald (Night Prowler/Gamester/Deceiver/Protector) ne sont pas
+saisies. Reste egalement hors perimetre tout le contenu narratif du livre (cultes,
+regles de prison/hors-la-loi, contacts criminels, tables).
+Fichiers modifies : DATABASE/WFRP4/BOOK_RULESBOOK.Xml,
+DATABASE/WFRP4/BOOK_DEFT_STEPS_LIGHT_FINGERS.Xml, CONTEXT.md, Log.txt, A FAIRE.txt.
+
+RELECTURE DE NONO LE 24/09/2026 : les 9 blocs SUBCHAPTER_ATTR de BOOK_DEFT_STEPS_
+LIGHT_FINGERS.Xml etaient faux. L'agent avait code une presence 0/1 par attribut, alors
+que la table "ADVANCE SCHEME" du livre marque le PALIER (1 a 4) auquel l'attribut se
+debloque via une icone differente par niveau (croix=1, marteau=2, crane=3, bouclier=4,
+memes icones que la colonne "Career Path") - exactement comme le fait deja le reste de
+la base (ex. ARCH1-WORK95, valeurs 3/1/4/0/0/1/2/1/0/0). L'export pdftotext reduit les
+4 icones a un seul caractere "h", ce qui a fait perdre cette distinction a l'agent (une
+simple presence au lieu du numero de palier). Corrige a la main : les 9 pages ADVANCE
+SCHEME rendues en image (pdftoppm, LIVRES/Deft Steps Light Fingers.pdf) et comparees aux
+icones de chaque Career Path pour retrouver le vrai palier par attribut. Liberator-
+Priest et Muleskinner avaient en plus un attribut ENTIER manquant (WS pour les deux).
+Compile et teste a l'ecran par Nono le 24/09/2026 : CHANTIER CLOS, pret a committer.

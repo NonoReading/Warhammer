@@ -1,0 +1,1153 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<DATA_BOOK>
+<CODE_BOOK>"DEFT"</CODE_BOOK>
+<BOOK>"BOOK DEFT STEPS LIGHT FINGERS"</BOOK>
+<language>"ENGLISH"</language>
+<VERSION>"WFRP4"</VERSION>
+<OFFICIAL>"1"</OFFICIAL>
+<COMPLETE>"0"</COMPLETE>
+<DISCLAIMER>"No part of this publication may be reproduced, stored in a retrieval system, or transmitted in any form by any means, electronic, mechanical, photocopying, recording, or otherwise without the prior permission of the publishers. Warhammer Fantasy Roleplay 4th Edition (c) Copyright Games Workshop Limited 2022. Warhammer Fantasy Roleplay 4th Edition, the Warhammer Fantasy Roleplay 4th Edition logo, GW, Games Workshop, Warhammer, The Game of Fantasy Battles, the twin-tailed comet logo, and all associated logos, illustrations, images, names, creatures, races, vehicles, locations, weapons, characters, and the distinctive likeness thereof, are either (R) or TM, and/or (c) Games Workshop Limited, variably registered around the world, and used under licence. Cubicle 7 Entertainment and the Cubicle 7 Entertainment logo are trademarks of Cubicle 7 Entertainment Limited. All rights reserved."</DISCLAIMER>
+<!-- Livre partiel : seules les 9 carrieres inedites (Thief/Gambler/Trickster/Liberator-Priest,
+     Forger, Ranger-Priest of Taal, Muleskinner, Gamekeeper, Poacher) ont ete saisies.
+     Le reste du contenu (cultes de Ranald, regles de prison/hors-la-loi, contacts
+     criminels, tables narratives, etc.) est hors perimetre. -->
+<DATA_LABEL>
+<Label language="ENGLISH">
+<Text name="DEFT-BOOK DEFT STEPS LIGHT FINGERS">"Deft Steps, Light Fingers"</Text>
+</Label>
+<Label language="FRANCAIS">
+<Text name="DEFT-BOOK DEFT STEPS LIGHT FINGERS">"Deft Steps, Light Fingers"</Text>
+</Label>
+</DATA_LABEL>
+<DATA_CAREER>
+<Career id="DEFT-WORK001">
+<Description language="ENGLISH">"Thief-Priest"</Description>
+<Explanation language="ENGLISH">"Thievery is a crime, but it can also be an art form. With the right combination of skill and cunning, stealing from others is an act of devotion to Ranald the Night Prowler. Thief-Priests dedicate themselves to the fine art of appropriating others' property. They pride themselves on committing crimes with flair and panache, involving intricate planning, daring escapes, and acts of legendary bravado. The more accomplished the crime, the more they venerate their god, emulating his boldest exploits and inspiring others to do the same."</Explanation>
+<Skill>"RULES-COMPESCAM"</Skill>
+<Class>"RULES-CLASS_ACAD"</Class>
+<SUBCHAPTER_LEVEL>
+<Level id="1">
+<Description language="ENGLISH">"Initiate"</Description>
+<Salary>"TIERS_BRASS 1"</Salary>
+</Level>
+<Level id="2">
+<Description language="ENGLISH">"Thief-Priest"</Description>
+<Salary>"TIERS_BRASS 4"</Salary>
+</Level>
+<Level id="3">
+<Description language="ENGLISH">"High Priest"</Description>
+<Salary>"TIERS_SILVER 1"</Salary>
+</Level>
+<Level id="4">
+<Description language="ENGLISH">"Shadow Prowler"</Description>
+<Salary>"TIERS_SILVER 3"</Salary>
+</Level>
+</SUBCHAPTER_LEVEL>
+<SUBCHAPTER_ATTR>
+<Attribut name="RULES-ATTR_WS">"0"</Attribut>
+<Attribut name="RULES-ATTR_BS">"0"</Attribut>
+<Attribut name="RULES-ATTR_S">"0"</Attribut>
+<Attribut name="RULES-ATTR_T">"0"</Attribut>
+<Attribut name="RULES-ATTR_I">"1"</Attribut>
+<Attribut name="RULES-ATTR_Ag">"1"</Attribut>
+<Attribut name="RULES-ATTR_Dex">"3"</Attribut>
+<Attribut name="RULES-ATTR_Int">"4"</Attribut>
+<Attribut name="RULES-ATTR_WP">"1"</Attribut>
+<Attribut name="RULES-ATTR_Fel">"2"</Attribut>
+</SUBCHAPTER_ATTR>
+<SUBCHAPTER_SKILL>
+<Skill name="RULES-COMPATHL">"1"</Skill>
+  <!-- Athletics -->
+<Skill name="RULES-COMPESCAL">"1"</Skill>
+  <!-- Climb -->
+<Skill name="RULES-COMPESQU">"1"</Skill>
+  <!-- Dodge -->
+<Skill name="RULES-COMPINTUI">"1"</Skill>
+  <!-- Intuition -->
+<Skill name="RULES-COMPSAVOIR_RANALD">"1"</Skill>
+  <!-- Lore (Ranald) -->
+<Skill name="RULES-COMPPRECEP">"1"</Skill>
+  <!-- Perception -->
+<Skill name="RULES-COMPCROCH">"1"</Skill>
+  <!-- Pick Lock -->
+<Skill name="RULES-COMPPRIERE">"1"</Skill>
+  <!-- Pray -->
+<Skill name="RULES-COMPESCAM">"1"</Skill>
+  <!-- Sleight of Hand -->
+<Skill name="RULES-COMPDISC_URB">"1"</Skill>
+  <!-- Stealth (Urban) -->
+<Skill name="RULES-COMPCHARM">"2"</Skill>
+  <!-- Charm -->
+<Skill name="RULES-COMPRESIST">"2"</Skill>
+  <!-- Endurance -->
+<Skill name="RULES-COMPDIVERT_NARRA">"2"</Skill>
+  <!-- Entertain (Storytelling) -->
+<Skill name="RULES-COMPLANG_VOL">"2"</Skill>
+  <!-- Language (Thieve's Tongue) -->
+<Skill name="RULES-COMPSIGNES_VOL">"2"</Skill>
+  <!-- Secret Signs (Thief) -->
+<Skill name="RULES-COMPSUBOR">"3"</Skill>
+  <!-- Bribery -->
+<Skill name="RULES-COMPCALM">"3"</Skill>
+  <!-- Cool -->
+<Skill name="RULES-COMPEVAL">"3"</Skill>
+  <!-- Evaluate -->
+<Skill name="RULES-COMPRAGOT">"3"</Skill>
+  <!-- Gossip -->
+<Skill name="RULES-COMPCOMM">"4"</Skill>
+  <!-- Leadership -->
+<Skill name="RULES-COMPINTIM">"4"</Skill>
+  <!-- Intimidate -->
+</SUBCHAPTER_SKILL>
+<SUBCHAPTER_TALENT>
+<Talent name="RULES-T0012_RANALD">"1"</Talent>
+  <!-- Bless (Ranald) -->
+<Talent name="RULES-T0064">"1"</Talent>
+  <!-- Flee! -->
+<Talent name="RULES-T0165">"1"</Talent>
+  <!-- Holy Visions -->
+<Talent name="RULES-T0002">"1"</Talent>
+  <!-- Suave -->
+<Talent name="RULES-T0072">"2"</Talent>
+  <!-- Secret Identity -->
+<Talent name="RULES-T0136_RANALD">"2"</Talent>
+  <!-- Etiquette (Ranaldans) -->
+<Talent name="RULES-T0080_NIGHTPROWLER">"2"</Talent>
+  <!-- Invoke (The Night Prowler) -->
+<Talent name="RULES-T0020">"2"</Talent>
+  <!-- Luck -->
+<Talent name="RULES-T0022">"3"</Talent>
+  <!-- Alley Cat -->
+<Talent name="RULES-T0136_CRIM">"3"</Talent>
+  <!-- Etiquette (Criminals) -->
+<Talent name="RULES-T0045">"3"</Talent>
+  <!-- Nimble Fingered -->
+<Talent name="RULES-T0058">"3"</Talent>
+  <!-- Nose for Trouble -->
+<Talent name="RULES-T0038">"4"</Talent>
+  <!-- Criminal -->
+<Talent name="RULES-T0164">"4"</Talent>
+  <!-- Night Vision -->
+<Talent name="RULES-T0005">"4"</Talent>
+  <!-- Pure Soul -->
+<Talent name="RULES-T0043">"4"</Talent>
+  <!-- Shadow -->
+</SUBCHAPTER_TALENT>
+<SUBCHAPTER_ITEM>
+<Item name="Discrete Symbol of Ranald">"1"</Item>
+<Item name="RULES-ARMO_03">"1"</Item>
+<Item name="RULES-TRAP_008">"1"</Item>
+<Item name="RULES-TRAP_101 (Thief)">"2"</Item>
+<Item name="Rope">"2"</Item>
+<Item name="Book (Ranald)">"2"</Item>
+<Item name="Initiate Apprentice/Lookout">"3"</Item>
+<Item name="Shrine of the Night Prowler">"3"</Item>
+<Item name="Quality Dark Clothing">"3"</Item>
+<Item name="Mask">"4"</Item>
+<Item name="Subordinate Thief-Priests">"4"</Item>
+</SUBCHAPTER_ITEM>
+</Career>
+<Career id="DEFT-WORK002">
+<Description language="ENGLISH">"Gambler-Priest"</Description>
+<Explanation language="ENGLISH">"A Gambler-Priest exalts Ranald the Gamester, the aspect which embodies the role of chance in every outcome. They revel in wagers and games of luck and skill, seeing every turning point in life as a moment where chance could take them in a different direction. A Gambler-Priest is more than just a player of games, they have devoted themselves to living by the luck granted to them by Ranald."</Explanation>
+<Skill>"RULES-COMPPARI"</Skill>
+<Class>"RULES-CLASS_ACAD"</Class>
+<SUBCHAPTER_LEVEL>
+<Level id="1">
+<Description language="ENGLISH">"Initiate"</Description>
+<Salary>"TIERS_BRASS 1"</Salary>
+</Level>
+<Level id="2">
+<Description language="ENGLISH">"Gambler-Priest"</Description>
+<Salary>"TIERS_SILVER 1"</Salary>
+</Level>
+<Level id="3">
+<Description language="ENGLISH">"High Priest"</Description>
+<Salary>"TIERS_SILVER 3"</Salary>
+</Level>
+<Level id="4">
+<Description language="ENGLISH">"Master of Chance"</Description>
+<Salary>"TIERS_SILVER 5"</Salary>
+</Level>
+</SUBCHAPTER_LEVEL>
+<SUBCHAPTER_ATTR>
+<Attribut name="RULES-ATTR_WS">"0"</Attribut>
+<Attribut name="RULES-ATTR_BS">"0"</Attribut>
+<Attribut name="RULES-ATTR_S">"0"</Attribut>
+<Attribut name="RULES-ATTR_T">"0"</Attribut>
+<Attribut name="RULES-ATTR_I">"1"</Attribut>
+<Attribut name="RULES-ATTR_Ag">"4"</Attribut>
+<Attribut name="RULES-ATTR_Dex">"1"</Attribut>
+<Attribut name="RULES-ATTR_Int">"3"</Attribut>
+<Attribut name="RULES-ATTR_WP">"2"</Attribut>
+<Attribut name="RULES-ATTR_Fel">"1"</Attribut>
+</SUBCHAPTER_ATTR>
+<SUBCHAPTER_SKILL>
+<Skill name="RULES-COMPCHARM">"1"</Skill>
+  <!-- Charm -->
+<Skill name="RULES-COMPRESALC">"1"</Skill>
+  <!-- Consume Alcohol -->
+<Skill name="RULES-COMPCALM">"1"</Skill>
+  <!-- Cool -->
+<Skill name="RULES-COMPPARI">"1"</Skill>
+  <!-- Gamble -->
+<Skill name="RULES-COMPRAGOT">"1"</Skill>
+  <!-- Gossip -->
+<Skill name="RULES-COMPINTUI">"1"</Skill>
+  <!-- Intuition -->
+<Skill name="RULES-COMPSAVOIR_RANALD">"1"</Skill>
+  <!-- Lore (Ranald) -->
+<Skill name="RULES-COMPPRECEP">"1"</Skill>
+  <!-- Perception -->
+<Skill name="RULES-COMPPRIERE">"1"</Skill>
+  <!-- Pray -->
+<Skill name="RULES-COMPESCAM">"1"</Skill>
+  <!-- Sleight of Hand -->
+<Skill name="RULES-COMPESQU">"2"</Skill>
+  <!-- Dodge -->
+<Skill name="RULES-COMPDIVERT_NARRA">"2"</Skill>
+  <!-- Entertain (Storytelling) -->
+<Skill name="RULES-COMPEVAL">"2"</Skill>
+  <!-- Evaluate -->
+<Skill name="RULES-COMPMARCH">"2"</Skill>
+  <!-- Haggle -->
+<Skill name="RULES-COMPINTIM">"2"</Skill>
+  <!-- Intimidate -->
+<Skill name="RULES-COMPCOMB_BASE">"2"</Skill>
+  <!-- Melee (Basic) -->
+<Skill name="RULES-COMPSUBOR">"3"</Skill>
+  <!-- Bribery -->
+<Skill name="RULES-COMPLANG_*">"3"</Skill>
+  <!-- Language (Any) -->
+<Skill name="RULES-COMPCOMM">"4"</Skill>
+  <!-- Leadership -->
+</SUBCHAPTER_SKILL>
+<SUBCHAPTER_TALENT>
+<Talent name="RULES-T0012_RANALD">"1"</Talent>
+  <!-- Bless (Ranald) -->
+<Talent name="RULES-T0020">"1"</Talent>
+  <!-- Luck -->
+<Talent name="RULES-T0165">"1"</Talent>
+  <!-- Holy Visions -->
+<Talent name="RULES-T0002">"1"</Talent>
+  <!-- Suave -->
+<Talent name="RULES-T0160">"2"</Talent>
+  <!-- Cardsharp -->
+<Talent name="RULES-T0094">"2"</Talent>
+  <!-- Diceman -->
+<Talent name="RULES-T0136_RANALD">"2"</Talent>
+  <!-- Etiquette (Ranaldans) -->
+<Talent name="RULES-T0080_GAMESTER">"2"</Talent>
+  <!-- Invoke (The Gamester) -->
+<Talent name="RULES-T0139_*">"3"</Talent>
+  <!-- Acute Senses (Any) -->
+<Talent name="RULES-T0084">"3"</Talent>
+  <!-- Read/Write -->
+<Talent name="RULES-T0091">"3"</Talent>
+  <!-- Fast Hands -->
+<Talent name="RULES-T0046">"3"</Talent>
+  <!-- Super Numerate -->
+<Talent name="RULES-T0058">"4"</Talent>
+  <!-- Nose For Trouble -->
+<Talent name="RULES-T0005">"4"</Talent>
+  <!-- Pure Soul -->
+<Talent name="RULES-T0117">"4"</Talent>
+  <!-- Savvy -->
+<Talent name="RULES-T0079">"4"</Talent>
+  <!-- Schemer -->
+<Talent name="RULES-T0072">"4"</Talent>
+  <!-- Secret Identity -->
+</SUBCHAPTER_TALENT>
+<SUBCHAPTER_ITEM>
+<Item name="Discrete Symbol of Ranald">"1"</Item>
+<Item name="Deck of Cards">"1"</Item>
+<Item name="RULES-TRAP_136">"1"</Item>
+<Item name="Hand Weapon">"2"</Item>
+<Item name="Quality Clothing">"2"</Item>
+<Item name="Lucky Charm">"2"</Item>
+<Item name="Initiate Apprentice">"3"</Item>
+<Item name="Shrine of Ranald (Portable or Fixed)">"3"</Item>
+<Item name="Subordinate Priests">"4"</Item>
+<Item name="Best Quality Clothes">"4"</Item>
+</SUBCHAPTER_ITEM>
+</Career>
+<Career id="DEFT-WORK003">
+<Description language="ENGLISH">"Trickster-Priest"</Description>
+<Explanation language="ENGLISH">"Ranald's Trickster-Priests dance through life spinning a web of falsehoods, hiding the truth behind layers of deceit, and playing elaborate tricks on the unwary. This is not merely to bamboozle or con others — it should entertain, bring a smile to those around them, and show them that nothing should be taken at face value."</Explanation>
+<Skill>"RULES-COMPESCAM"</Skill>
+<Class>"RULES-CLASS_ACAD"</Class>
+<SUBCHAPTER_LEVEL>
+<Level id="1">
+<Description language="ENGLISH">"Initiate"</Description>
+<Salary>"TIERS_BRASS 1"</Salary>
+</Level>
+<Level id="2">
+<Description language="ENGLISH">"Trickster-Priest"</Description>
+<Salary>"TIERS_SILVER 1"</Salary>
+</Level>
+<Level id="3">
+<Description language="ENGLISH">"High Priest"</Description>
+<Salary>"TIERS_SILVER 3"</Salary>
+</Level>
+<Level id="4">
+<Description language="ENGLISH">"Lord of Misrule"</Description>
+<Salary>"TIERS_GOLD 1"</Salary>
+</Level>
+</SUBCHAPTER_LEVEL>
+<SUBCHAPTER_ATTR>
+<Attribut name="RULES-ATTR_WS">"0"</Attribut>
+<Attribut name="RULES-ATTR_BS">"0"</Attribut>
+<Attribut name="RULES-ATTR_S">"0"</Attribut>
+<Attribut name="RULES-ATTR_T">"0"</Attribut>
+<Attribut name="RULES-ATTR_I">"1"</Attribut>
+<Attribut name="RULES-ATTR_Ag">"3"</Attribut>
+<Attribut name="RULES-ATTR_Dex">"2"</Attribut>
+<Attribut name="RULES-ATTR_Int">"4"</Attribut>
+<Attribut name="RULES-ATTR_WP">"1"</Attribut>
+<Attribut name="RULES-ATTR_Fel">"1"</Attribut>
+</SUBCHAPTER_ATTR>
+<SUBCHAPTER_SKILL>
+<Skill name="RULES-COMPSUBOR">"1"</Skill>
+  <!-- Bribery -->
+<Skill name="RULES-COMPCHARM">"1"</Skill>
+  <!-- Charm -->
+<Skill name="RULES-COMPCALM">"1"</Skill>
+  <!-- Cool -->
+<Skill name="RULES-COMPINTUI">"1"</Skill>
+  <!-- Intuition -->
+<Skill name="RULES-COMPDIVERT_NARRA">"1"</Skill>
+  <!-- Entertain (Storytelling) -->
+<Skill name="RULES-COMPRAGOT">"1"</Skill>
+  <!-- Gossip -->
+<Skill name="RULES-COMPSAVOIR_RANALD">"1"</Skill>
+  <!-- Lore (Ranald) -->
+<Skill name="RULES-COMPPRECEP">"1"</Skill>
+  <!-- Perception -->
+<Skill name="RULES-COMPPRIERE">"1"</Skill>
+  <!-- Pray -->
+<Skill name="RULES-COMPESCAM">"1"</Skill>
+  <!-- Sleight of Hand -->
+<Skill name="RULES-COMPATHL">"2"</Skill>
+  <!-- Athletics -->
+<Skill name="RULES-COMPDIVERT_INTERP">"2"</Skill>
+  <!-- Entertain (Acting) -->
+<Skill name="RULES-COMPINTIM">"2"</Skill>
+  <!-- Intimidate -->
+<Skill name="RULES-COMPLANG_*">"2"</Skill>
+  <!-- Language (Any) -->
+<Skill name="RULES-COMPCOMB_BASE">"2"</Skill>
+  <!-- Melee (Basic) -->
+<Skill name="RULES-COMPDISC_*">"2"</Skill>
+  <!-- Stealth -->
+<Skill name="RULES-COMPART_*">"3"</Skill>
+  <!-- Art -->
+<Skill name="RULES-COMPESQU">"3"</Skill>
+  <!-- Dodge -->
+<Skill name="RULES-COMPSIGNES_VOL">"3"</Skill>
+  <!-- Secret Signs (Thieves) -->
+<Skill name="RULES-COMPCOMM">"4"</Skill>
+  <!-- Leadership -->
+<Skill name="RULES-COMPRESALC">"4"</Skill>
+  <!-- Consume Alcohol -->
+</SUBCHAPTER_SKILL>
+<SUBCHAPTER_TALENT>
+<Talent name="RULES-T0012_RANALD">"1"</Talent>
+  <!-- Bless (Ranald) -->
+<Talent name="RULES-T0099">"1"</Talent>
+  <!-- Cat-tongued -->
+<Talent name="RULES-T0020">"1"</Talent>
+  <!-- Luck -->
+<Talent name="RULES-T0002">"1"</Talent>
+  <!-- Suave -->
+<Talent name="RULES-T0165">"2"</Talent>
+  <!-- Holy Visions -->
+<Talent name="RULES-T0072">"2"</Talent>
+  <!-- Secret Identity -->
+<Talent name="RULES-T0136_RANALD">"2"</Talent>
+  <!-- Etiquette (Ranald) -->
+<Talent name="RULES-T0080_DECEIVER">"2"</Talent>
+  <!-- Invoke (The Deceiver) -->
+<Talent name="RULES-T0010">"3"</Talent>
+  <!-- Blather -->
+<Talent name="RULES-T0091">"3"</Talent>
+  <!-- Fast Hands -->
+<Talent name="RULES-T0093">"3"</Talent>
+  <!-- Master of Disguise -->
+<Talent name="RULES-T0073">"3"</Talent>
+  <!-- Mimic -->
+<Talent name="RULES-T0058">"4"</Talent>
+  <!-- Nose for Trouble -->
+<Talent name="RULES-T0109">"4"</Talent>
+  <!-- Public Speaking -->
+<Talent name="RULES-T0005">"4"</Talent>
+  <!-- Pure Soul -->
+<Talent name="RULES-T0117">"4"</Talent>
+  <!-- Savvy -->
+</SUBCHAPTER_TALENT>
+<SUBCHAPTER_ITEM>
+<Item name="Discrete Symbol of Ranald">"1"</Item>
+<Item name="2 Sets of Clothing">"1"</Item>
+<Item name="RULES-TRAP_058">"2"</Item>
+<Item name="Hand Weapon">"2"</Item>
+<Item name="Book (Ranald)">"2"</Item>
+<Item name="Initiate Apprentice">"3"</Item>
+<Item name="Cloak or Coat with Hidden Pockets">"3"</Item>
+<Item name="Subordinate Priests">"4"</Item>
+<Item name="RULES-TRAP_101 (Any)">"4"</Item>
+</SUBCHAPTER_ITEM>
+</Career>
+<Career id="DEFT-WORK004">
+<Description language="ENGLISH">"Liberator-Priest"</Description>
+<Explanation language="ENGLISH">"Liberator-Priests are inspired to fight against authority when it is used to crush and oppress those who can't fight for themselves. While they have earnest aims, Ranald the Protector does not expect his priests to abandon his favoured tools of ridicule, thievery, deception, and trickery, nor does he want his priests to elevate themselves to positions of authority over others. Of all Ranald's priests, the Liberator-Priests are the most integrated into society, whether in a city's slums or amongst an outlaw band in the countryside."</Explanation>
+<Skill>"RULES-COMPCHARM"</Skill>
+<Class>"RULES-CLASS_ACAD"</Class>
+<SUBCHAPTER_LEVEL>
+<Level id="1">
+<Description language="ENGLISH">"Initiate"</Description>
+<Salary>"TIERS_BRASS 1"</Salary>
+</Level>
+<Level id="2">
+<Description language="ENGLISH">"Liberator-Priest"</Description>
+<Salary>"TIERS_BRASS 4"</Salary>
+</Level>
+<Level id="3">
+<Description language="ENGLISH">"High Priest"</Description>
+<Salary>"TIERS_SILVER 1"</Salary>
+</Level>
+<Level id="4">
+<Description language="ENGLISH">"People's Champion"</Description>
+<Salary>"TIERS_SILVER 3"</Salary>
+</Level>
+</SUBCHAPTER_LEVEL>
+<SUBCHAPTER_ATTR>
+<Attribut name="RULES-ATTR_WS">"4"</Attribut>
+<Attribut name="RULES-ATTR_BS">"0"</Attribut>
+<Attribut name="RULES-ATTR_S">"0"</Attribut>
+<Attribut name="RULES-ATTR_T">"0"</Attribut>
+<Attribut name="RULES-ATTR_I">"3"</Attribut>
+<Attribut name="RULES-ATTR_Ag">"1"</Attribut>
+<Attribut name="RULES-ATTR_Dex">"0"</Attribut>
+<Attribut name="RULES-ATTR_Int">"2"</Attribut>
+<Attribut name="RULES-ATTR_WP">"1"</Attribut>
+<Attribut name="RULES-ATTR_Fel">"1"</Attribut>
+</SUBCHAPTER_ATTR>
+<SUBCHAPTER_SKILL>
+<Skill name="RULES-COMPSUBOR">"1"</Skill>
+  <!-- Bribery -->
+<Skill name="RULES-COMPCHARM">"1"</Skill>
+  <!-- Charm -->
+<Skill name="RULES-COMPCALM">"1"</Skill>
+  <!-- Cool -->
+<Skill name="RULES-COMPDIVERT_NARRA">"1"</Skill>
+  <!-- Entertain (Storytelling) -->
+<Skill name="RULES-COMPRAGOT">"1"</Skill>
+  <!-- Gossip -->
+<Skill name="RULES-COMPMARCH">"1"</Skill>
+  <!-- Haggle -->
+<Skill name="RULES-COMPINTUI">"1"</Skill>
+  <!-- Intuition -->
+<Skill name="RULES-COMPSAVOIR_POLIT">"1"</Skill>
+  <!-- Lore (Politics) -->
+<Skill name="RULES-COMPPRECEP">"1"</Skill>
+  <!-- Perception -->
+<Skill name="RULES-COMPPRIERE">"1"</Skill>
+  <!-- Pray -->
+<Skill name="RULES-COMPATHL">"2"</Skill>
+  <!-- Athletics -->
+<Skill name="RULES-COMPESQU">"2"</Skill>
+  <!-- Dodge -->
+<Skill name="RULES-COMPINTIM">"2"</Skill>
+  <!-- Intimidate -->
+<Skill name="RULES-COMPCOMB_BASE">"2"</Skill>
+  <!-- Melee (Basic) -->
+<Skill name="RULES-COMPEVAL">"3"</Skill>
+  <!-- Evaluate -->
+<Skill name="RULES-COMPLANG_VOL">"3"</Skill>
+  <!-- Language (Thieve's Tongue) -->
+<Skill name="RULES-COMPCOMM">"3"</Skill>
+  <!-- Leadership -->
+<Skill name="RULES-COMPSAVOIR_LOCAL">"3"</Skill>
+  <!-- Lore (Local) -->
+<Skill name="RULES-COMPLANG_*">"4"</Skill>
+  <!-- Language (Any) -->
+<Skill name="RULES-COMPDISC_URB">"4"</Skill>
+  <!-- Stealth (Urban) -->
+</SUBCHAPTER_SKILL>
+<SUBCHAPTER_TALENT>
+<Talent name="RULES-T0051">"1"</Talent>
+  <!-- Argumentative -->
+<Talent name="RULES-T0012_RANALD">"1"</Talent>
+  <!-- Bless (Ranald) -->
+<Talent name="RULES-T0165">"1"</Talent>
+  <!-- Holy Visions -->
+<Talent name="RULES-T0020">"1"</Talent>
+  <!-- Luck -->
+<Talent name="RULES-T0099">"2"</Talent>
+  <!-- Cat-tongued -->
+<Talent name="RULES-T0084">"2"</Talent>
+  <!-- Read/Write -->
+<Talent name="RULES-T0136_RANALD">"2"</Talent>
+  <!-- Etiquette (Ranald) -->
+<Talent name="RULES-T0080_PROTECTOR">"2"</Talent>
+  <!-- Invoke (The Protector) -->
+<Talent name="RULES-T0056">"3"</Talent>
+  <!-- Impassioned Zeal -->
+<Talent name="RULES-T0109">"3"</Talent>
+  <!-- Public Speaking -->
+<Talent name="RULES-T0079">"3"</Talent>
+  <!-- Schemer -->
+<Talent name="RULES-T0072">"3"</Talent>
+  <!-- Secret Identity -->
+<Talent name="RULES-T0039">"4"</Talent>
+  <!-- Disarm -->
+<Talent name="RULES-T0142">"4"</Talent>
+  <!-- Gregarious -->
+<Talent name="RULES-T0065">"4"</Talent>
+  <!-- Master Orator -->
+<Talent name="RULES-T0005">"4"</Talent>
+  <!-- Pure Soul -->
+</SUBCHAPTER_TALENT>
+<SUBCHAPTER_ITEM>
+<Item name="Discrete Symbol of Ranald">"1"</Item>
+<Item name="RULES-ARMO_04">"1"</Item>
+<Item name="Hand Weapon">"2"</Item>
+<Item name="Holy Book (Ranald)">"2"</Item>
+<Item name="Initiate Apprentice">"3"</Item>
+<Item name="Shrine of Ranald">"3"</Item>
+<Item name="Street Urchin Band">"3"</Item>
+<Item name="Grateful Local Common Folk">"4"</Item>
+<Item name="Subordinate Priests">"4"</Item>
+</SUBCHAPTER_ITEM>
+</Career>
+<Career id="DEFT-WORK005">
+<Description language="ENGLISH">"Forger"</Description>
+<Explanation language="ENGLISH">"Forgers are craftsmen who use their skills to create fakes. Many view themselves as artists, not limited to any single form. Painting, sculpting, and calligraphy are all useful in selling deceptions. Most begin small, such as clipping coins to mint their own. From there, they move to impersonating the handwriting of a Marienburg merchant, or the seal of an Elector Count. It's dangerous work, which can leave a paper trail, but accomplished Forgers walk a fine line to riches."</Explanation>
+<Skill>"RULES-COMPART_*"</Skill>
+<Class>"RULES-CLASS_ROGU"</Class>
+<SUBCHAPTER_LEVEL>
+<Level id="1">
+<Description language="ENGLISH">"Fraudster"</Description>
+<Salary>"TIERS_BRASS 2"</Salary>
+</Level>
+<Level id="2">
+<Description language="ENGLISH">"Forger"</Description>
+<Salary>"TIERS_SILVER 1"</Salary>
+</Level>
+<Level id="3">
+<Description language="ENGLISH">"Counterfeiter"</Description>
+<Salary>"TIERS_SILVER 4"</Salary>
+</Level>
+<Level id="4">
+<Description language="ENGLISH">"Master Counterfeiter"</Description>
+<Salary>"TIERS_GOLD 2"</Salary>
+</Level>
+</SUBCHAPTER_LEVEL>
+<SUBCHAPTER_ATTR>
+<Attribut name="RULES-ATTR_WS">"0"</Attribut>
+<Attribut name="RULES-ATTR_BS">"0"</Attribut>
+<Attribut name="RULES-ATTR_S">"0"</Attribut>
+<Attribut name="RULES-ATTR_T">"1"</Attribut>
+<Attribut name="RULES-ATTR_I">"1"</Attribut>
+<Attribut name="RULES-ATTR_Ag">"0"</Attribut>
+<Attribut name="RULES-ATTR_Dex">"2"</Attribut>
+<Attribut name="RULES-ATTR_Int">"3"</Attribut>
+<Attribut name="RULES-ATTR_WP">"4"</Attribut>
+<Attribut name="RULES-ATTR_Fel">"0"</Attribut>
+</SUBCHAPTER_ATTR>
+<SUBCHAPTER_SKILL>
+<Skill name="RULES-COMPART_*">"1"</Skill>
+  <!-- Art (Any One) -->
+<Skill name="RULES-COMPCALM">"1"</Skill>
+  <!-- Cool -->
+<Skill name="RULES-COMPRESALC">"1"</Skill>
+  <!-- Consume Alcohol -->
+<Skill name="RULES-COMPRAGOT">"1"</Skill>
+  <!-- Gossip -->
+<Skill name="RULES-COMPMARCH">"1"</Skill>
+  <!-- Haggle -->
+<Skill name="RULES-COMPINTUI">"1"</Skill>
+  <!-- Intuition -->
+<Skill name="RULES-COMPPRECEP">"1"</Skill>
+  <!-- Perception -->
+<Skill name="RULES-COMPESCAM">"1"</Skill>
+  <!-- Sleight of Hand -->
+<Skill name="RULES-COMPDISC_URB">"1"</Skill>
+  <!-- Stealth (Urban) -->
+<Skill name="RULES-COMPMETIER_MATART/RULES-COMPMETIER_FORGE">"1"</Skill>
+  <!-- Trade (Artist or Smith) -->
+<Skill name="RULES-COMPSUBOR">"2"</Skill>
+  <!-- Bribery -->
+<Skill name="RULES-COMPCHARM">"2"</Skill>
+  <!-- Charm -->
+<Skill name="RULES-COMPEVAL">"2"</Skill>
+  <!-- Evaluate -->
+<Skill name="RULES-COMPPARI">"2"</Skill>
+  <!-- Gamble -->
+<Skill name="RULES-COMPSIGNES_VOL">"2"</Skill>
+  <!-- Secret Signs (Thief) -->
+<Skill name="RULES-COMPSAVOIR_ART">"3"</Skill>
+  <!-- Lore (Art) -->
+<Skill name="RULES-COMPSAVOIR_HERAL">"3"</Skill>
+  <!-- Lore (Heraldry) -->
+<Skill name="RULES-COMPRECH">"3"</Skill>
+  <!-- Research -->
+<Skill name="RULES-COMPMETIER_*">"3"</Skill>
+  <!-- Trade (Any One) -->
+<Skill name="RULES-COMPCOMM">"4"</Skill>
+  <!-- Leadership -->
+<Skill name="RULES-COMPSAVOIR_HIST">"4"</Skill>
+  <!-- Lore (History) -->
+</SUBCHAPTER_SKILL>
+<SUBCHAPTER_TALENT>
+<Talent name="RULES-T0007">"1"</Talent>
+  <!-- Artistic -->
+<Talent name="RULES-T0092_*">"1"</Talent>
+  <!-- Craftsman (Trade) -->
+<Talent name="RULES-T0038">"1"</Talent>
+  <!-- Criminal -->
+<Talent name="RULES-T0106">"1"</Talent>
+  <!-- Numismatics -->
+<Talent name="RULES-T0147">"2"</Talent>
+  <!-- Briber -->
+<Talent name="RULES-T0045">"2"</Talent>
+  <!-- Nimble Fingered -->
+<Talent name="RULES-T0084">"2"</Talent>
+  <!-- Read/Write -->
+<Talent name="RULES-T0015">"2"</Talent>
+  <!-- Tinker -->
+<Talent name="RULES-T0139_*">"3"</Talent>
+  <!-- Acute Sense (Any) -->
+<Talent name="RULES-T0102">"3"</Talent>
+  <!-- Dealmaker -->
+<Talent name="RULES-T0117">"3"</Talent>
+  <!-- Savvy -->
+<Talent name="RULES-T0046">"3"</Talent>
+  <!-- Super Numerate -->
+<Talent name="RULES-T0017">"4"</Talent>
+  <!-- Kingpin -->
+<Talent name="RULES-T0090">"4"</Talent>
+  <!-- Magnum Opus -->
+<Talent name="RULES-T0157_*">"4"</Talent>
+  <!-- Master Tradesman (Any) -->
+<Talent name="RULES-T0079">"4"</Talent>
+  <!-- Schemer -->
+</SUBCHAPTER_TALENT>
+<SUBCHAPTER_ITEM>
+<Item name="Coin Mould (any currency)">"1"</Item>
+<Item name="RULES-TRAP_101">"1"</Item>
+<Item name="Calligrapher's Tools">"2"</Item>
+<Item name="Artist's Tools">"3"</Item>
+<Item name="Workshop">"3"</Item>
+<Item name="Charlatan Contact">"3"</Item>
+<Item name="2 Charlatan Subordinates">"4"</Item>
+<Item name="Forged Guild Licence">"4"</Item>
+<Item name="Quality Clothing">"4"</Item>
+</SUBCHAPTER_ITEM>
+</Career>
+<Career id="DEFT-WORK006">
+<Description language="ENGLISH">"Ranger-Priest of Taal"</Description>
+<Explanation language="ENGLISH">"The Ranger-Priests of Taal are men and women who eschew civilisation to devote their lives to serving their god in his own domain. They live amongst nature, roaming the land, performing rites, and keeping it free from corruption. You stalk the wilds, bringing the blessings of Taal to those who seek his favour and his judgement to those who abuse or corrupt the natural world."</Explanation>
+<Skill>"RULES-COMPPROJ_ARC"</Skill>
+<Class>"RULES-CLASS_ACAD"</Class>
+<SUBCHAPTER_LEVEL>
+<Level id="1">
+<Description language="ENGLISH">"Initiate"</Description>
+<Salary>"TIERS_BRASS 2"</Salary>
+</Level>
+<Level id="2">
+<Description language="ENGLISH">"Ranger-Priest"</Description>
+<Salary>"TIERS_BRASS 5"</Salary>
+</Level>
+<Level id="3">
+<Description language="ENGLISH">"High Priest"</Description>
+<Salary>"TIERS_SILVER 4"</Salary>
+</Level>
+<Level id="4">
+<Description language="ENGLISH">"Vice-Heirarch"</Description>
+<Salary>"TIERS_GOLD 1"</Salary>
+</Level>
+</SUBCHAPTER_LEVEL>
+<SUBCHAPTER_ATTR>
+<Attribut name="RULES-ATTR_WS">"0"</Attribut>
+<Attribut name="RULES-ATTR_BS">"0"</Attribut>
+<Attribut name="RULES-ATTR_S">"0"</Attribut>
+<Attribut name="RULES-ATTR_T">"1"</Attribut>
+<Attribut name="RULES-ATTR_I">"3"</Attribut>
+<Attribut name="RULES-ATTR_Ag">"1"</Attribut>
+<Attribut name="RULES-ATTR_Dex">"0"</Attribut>
+<Attribut name="RULES-ATTR_Int">"4"</Attribut>
+<Attribut name="RULES-ATTR_WP">"1"</Attribut>
+<Attribut name="RULES-ATTR_Fel">"2"</Attribut>
+</SUBCHAPTER_ATTR>
+<SUBCHAPTER_SKILL>
+<Skill name="RULES-COMPATHL">"1"</Skill>
+  <!-- Athletics -->
+<Skill name="RULES-COMPANIM">"1"</Skill>
+  <!-- Charm Animal -->
+<Skill name="RULES-COMPCALM">"1"</Skill>
+  <!-- Cool -->
+<Skill name="RULES-COMPRESIST">"1"</Skill>
+  <!-- Endurance -->
+<Skill name="RULES-COMPINTUI">"1"</Skill>
+  <!-- Intuition -->
+<Skill name="RULES-COMPSAVOIR_THEO">"1"</Skill>
+  <!-- Lore (Theology) -->
+<Skill name="RULES-COMPSURVEXT">"1"</Skill>
+  <!-- Outdoor Survival -->
+<Skill name="RULES-COMPPRECEP">"1"</Skill>
+  <!-- Perception -->
+<Skill name="RULES-COMPPRIERE">"1"</Skill>
+  <!-- Pray -->
+<Skill name="RULES-COMPPROJ_ARC">"1"</Skill>
+  <!-- Ranged (Bow) -->
+<Skill name="RULES-COMPGUERI">"2"</Skill>
+  <!-- Heal -->
+<Skill name="RULES-COMPINTIM">"2"</Skill>
+  <!-- Intimidate -->
+<Skill name="RULES-COMPCOMB_BASE">"2"</Skill>
+  <!-- Melee (Basic) -->
+<Skill name="RULES-COMPORIENT">"2"</Skill>
+  <!-- Navigation -->
+<Skill name="RULES-COMPDISC_RURAL">"2"</Skill>
+  <!-- Stealth (Rural) -->
+<Skill name="RULES-COMPPIST">"2"</Skill>
+  <!-- Track -->
+<Skill name="RULES-COMPDRESS_*">"3"</Skill>
+  <!-- Animal Training (Any) -->
+<Skill name="RULES-COMPLANG_*">"3"</Skill>
+  <!-- Language (Any) -->
+<Skill name="RULES-COMPDISC_URB">"4"</Skill>
+  <!-- Stealth (Urban) -->
+</SUBCHAPTER_SKILL>
+<SUBCHAPTER_TALENT>
+<Talent name="RULES-T0012_TAAL">"1"</Talent>
+  <!-- Bless (Taal) -->
+<Talent name="RULES-T0165">"1"</Talent>
+  <!-- Holy Visions -->
+<Talent name="RULES-T0140">"1"</Talent>
+  <!-- Orientation -->
+<Talent name="RULES-T0105">"1"</Talent>
+  <!-- Rover -->
+<Talent name="RULES-T0080_TAAL">"2"</Talent>
+  <!-- Invoke (Taal) -->
+<Talent name="RULES-T0136_TAAL">"2"</Talent>
+  <!-- Etiquette (Taal) -->
+<Talent name="RULES-T0013_*">"2"</Talent>
+  <!-- Strider (Any) -->
+<Talent name="RULES-T0047">"3"</Talent>
+  <!-- Hardy -->
+<Talent name="RULES-T0005">"3"</Talent>
+  <!-- Pure Soul -->
+<Talent name="RULES-T0129_*">"3"</Talent>
+  <!-- Resistance (Any) -->
+<Talent name="RULES-T0151">"3"</Talent>
+  <!-- Sure Shot -->
+<Talent name="RULES-T0039">"4"</Talent>
+  <!-- Disarm -->
+<Talent name="RULES-T0142">"4"</Talent>
+  <!-- Gregarious -->
+<Talent name="RULES-T0065">"4"</Talent>
+  <!-- Master Orator -->
+</SUBCHAPTER_TALENT>
+<SUBCHAPTER_ITEM>
+<Item name="RULES-PROJ_ARC_01">"1"</Item>
+<Item name="RULES-TRAP_016">"1"</Item>
+<Item name="RULES-TRAP_028 (Taal)">"1"</Item>
+<Item name="Sturdy Boots">"1"</Item>
+<Item name="RULES-TRAP_001">"2"</Item>
+<Item name="RULES-TRAP_125">"2"</Item>
+<Item name="Book (Taal)">"2"</Item>
+<Item name="Hand Weapon">"2"</Item>
+<Item name="Initiate Follower">"3"</Item>
+<Item name="Religious Relic">"3"</Item>
+<Item name="Animal Companion">"4"</Item>
+<Item name="Subordinate Priests">"4"</Item>
+</SUBCHAPTER_ITEM>
+</Career>
+<Career id="DEFT-WORK007">
+<Description language="ENGLISH">"Muleskinner"</Description>
+<Explanation language="ENGLISH">"Using your way with animals and knowledge of the terrain, you are responsible for getting your cargo safely delivered while keeping your animals fit and healthy. The land trade routes of the Empire could not function nearly so well, or even at all, without the presence of the muleskinners. They get their name from their ability to cajole those famously stubborn beasts of burden, but muleskinners are just as likely to work with horses, donkeys, oxen, and more exotic animals."</Explanation>
+<Skill>"RULES-COMPANIM"</Skill>
+<Class>"RULES-CLASS_RANG"</Class>
+<SUBCHAPTER_LEVEL>
+<Level id="1">
+<Description language="ENGLISH">"Driver"</Description>
+<Salary>"TIERS_BRASS 4"</Salary>
+</Level>
+<Level id="2">
+<Description language="ENGLISH">"Muleskinner"</Description>
+<Salary>"TIERS_SILVER 2"</Salary>
+</Level>
+<Level id="3">
+<Description language="ENGLISH">"Caravan Guide"</Description>
+<Salary>"TIERS_SILVER 4"</Salary>
+</Level>
+<Level id="4">
+<Description language="ENGLISH">"Caravan Master"</Description>
+<Salary>"TIERS_GOLD 1"</Salary>
+</Level>
+</SUBCHAPTER_LEVEL>
+<SUBCHAPTER_ATTR>
+<Attribut name="RULES-ATTR_WS">"1"</Attribut>
+<Attribut name="RULES-ATTR_BS">"0"</Attribut>
+<Attribut name="RULES-ATTR_S">"0"</Attribut>
+<Attribut name="RULES-ATTR_T">"4"</Attribut>
+<Attribut name="RULES-ATTR_I">"3"</Attribut>
+<Attribut name="RULES-ATTR_Ag">"1"</Attribut>
+<Attribut name="RULES-ATTR_Dex">"0"</Attribut>
+<Attribut name="RULES-ATTR_Int">"2"</Attribut>
+<Attribut name="RULES-ATTR_WP">"1"</Attribut>
+<Attribut name="RULES-ATTR_Fel">"0"</Attribut>
+</SUBCHAPTER_ATTR>
+<SUBCHAPTER_SKILL>
+<Skill name="RULES-COMPSOINANI">"1"</Skill>
+  <!-- Animal Care -->
+<Skill name="RULES-COMPANIM">"1"</Skill>
+  <!-- Charm Animal -->
+<Skill name="RULES-COMPCOND">"1"</Skill>
+  <!-- Drive -->
+<Skill name="RULES-COMPRESIST">"1"</Skill>
+  <!-- Endurance -->
+<Skill name="RULES-COMPRAGOT">"1"</Skill>
+  <!-- Gossip -->
+<Skill name="RULES-COMPSAVOIR_LOCAL">"1"</Skill>
+  <!-- Lore (Local) -->
+<Skill name="RULES-COMPCOMB_BASE">"1"</Skill>
+  <!-- Melee (Basic) -->
+<Skill name="RULES-COMPPRECEP">"1"</Skill>
+  <!-- Perception -->
+<Skill name="RULES-COMPPROJ_ENTRAV">"1"</Skill>
+  <!-- Ranged (Entangling) -->
+<Skill name="RULES-COMPCHEV_CHEVAL">"1"</Skill>
+  <!-- Ride (Horse) -->
+<Skill name="RULES-COMPDRESS_*">"2"</Skill>
+  <!-- Animal Training (Any) -->
+<Skill name="RULES-COMPESQU">"2"</Skill>
+  <!-- Dodge -->
+<Skill name="RULES-COMPLANG_*">"2"</Skill>
+  <!-- Language (Any) -->
+<Skill name="RULES-COMPORIENT">"2"</Skill>
+  <!-- Navigation -->
+<Skill name="RULES-COMPSURVEXT">"2"</Skill>
+  <!-- Outdoor Survival -->
+<Skill name="RULES-COMPPROJ_ARC">"2"</Skill>
+  <!-- Ranged (Bow) -->
+<Skill name="RULES-COMPCALM">"3"</Skill>
+  <!-- Cool -->
+<Skill name="RULES-COMPINTUI">"3"</Skill>
+  <!-- Intuition -->
+<Skill name="RULES-COMPMETIER_CHARP">"3"</Skill>
+  <!-- Trade (Carpenter) -->
+<Skill name="RULES-COMPDISC_RURAL">"3"</Skill>
+  <!-- Stealth (Rural) -->
+<Skill name="RULES-COMPMARCH">"4"</Skill>
+  <!-- Haggle -->
+<Skill name="RULES-COMPCOMM">"4"</Skill>
+  <!-- Leadership -->
+</SUBCHAPTER_SKILL>
+<SUBCHAPTER_TALENT>
+<Talent name="RULES-T0003">"1"</Talent>
+  <!-- Animal Affinity -->
+<Talent name="RULES-T0024">"1"</Talent>
+  <!-- Crack the Whip -->
+<Talent name="RULES-T0140">"1"</Talent>
+  <!-- Orientation -->
+<Talent name="RULES-T0116">"1"</Talent>
+  <!-- Tenacious -->
+<Talent name="RULES-T0074">"2"</Talent>
+  <!-- Coolheaded -->
+<Talent name="RULES-T0168">"2"</Talent>
+  <!-- Seasoned Traveller -->
+<Talent name="RULES-T0132_*">"2"</Talent>
+  <!-- Fearless (Any) -->
+<Talent name="RULES-T0013_*">"2"</Talent>
+  <!-- Strider (Any) -->
+<Talent name="RULES-T0136_GUILD">"3"</Talent>
+  <!-- Etiquette (Guilder) -->
+<Talent name="RULES-T0058">"3"</Talent>
+  <!-- Nose for Trouble -->
+<Talent name="RULES-T0025">"3"</Talent>
+  <!-- Stout-hearted -->
+<Talent name="RULES-T0001">"3"</Talent>
+  <!-- Trick-Riding -->
+<Talent name="RULES-T0102">"4"</Talent>
+  <!-- Dealmaker -->
+<Talent name="RULES-T0053">"4"</Talent>
+  <!-- Inspiring -->
+<Talent name="RULES-T0106">"4"</Talent>
+  <!-- Numismatics -->
+<Talent name="RULES-T0084">"4"</Talent>
+  <!-- Read/Write -->
+</SUBCHAPTER_TALENT>
+<SUBCHAPTER_ITEM>
+<Item name="RULES-TRAP_022">"1"</Item>
+<Item name="RULES-TRAP_023">"1"</Item>
+<Item name="Travel Clothes">"1"</Item>
+<Item name="RULES-COMB_ENTRA_01">"1"</Item>
+<Item name="RULES-TRAP_151">"2"</Item>
+<Item name="RULES-TRAP_023 (Q)">"2"</Item>
+<Item name="Map">"3"</Item>
+<Item name="Pack Animal">"3"</Item>
+<Item name="Quality Travel Clothes">"3"</Item>
+<Item name="RULES-TRAP_116">"3"</Item>
+<Item name="Caravan">"4"</Item>
+<Item name="Stable of Pack Animals">"4"</Item>
+</SUBCHAPTER_ITEM>
+</Career>
+<Career id="DEFT-WORK008">
+<Description language="ENGLISH">"Gamekeeper"</Description>
+<Explanation language="ENGLISH">"Gamekeepers are charged by their noble masters to look after their estates and the beasts upon it, and to prepare them for the hunt. As well as managing the land to make it attractive for potential quarry, they must also guard that land from poachers. Though Gamekeepers are likely to be from the same community as poachers, and perhaps sympathetic to their needs, woe betide if their master has a poor hunt."</Explanation>
+<Skill>"RULES-COMPPROJ_ARC"</Skill>
+<Class>"RULES-CLASS_RANG"</Class>
+<SUBCHAPTER_LEVEL>
+<Level id="1">
+<Description language="ENGLISH">"Underkeeper"</Description>
+<Salary>"TIERS_BRASS 4"</Salary>
+</Level>
+<Level id="2">
+<Description language="ENGLISH">"Gamekeeper"</Description>
+<Salary>"TIERS_SILVER 1"</Salary>
+</Level>
+<Level id="3">
+<Description language="ENGLISH">"Head Gamekeeper"</Description>
+<Salary>"TIERS_SILVER 2"</Salary>
+</Level>
+<Level id="4">
+<Description language="ENGLISH">"Master Gamekeeper"</Description>
+<Salary>"TIERS_SILVER 4"</Salary>
+</Level>
+</SUBCHAPTER_LEVEL>
+<SUBCHAPTER_ATTR>
+<Attribut name="RULES-ATTR_WS">"2"</Attribut>
+<Attribut name="RULES-ATTR_BS">"1"</Attribut>
+<Attribut name="RULES-ATTR_S">"0"</Attribut>
+<Attribut name="RULES-ATTR_T">"0"</Attribut>
+<Attribut name="RULES-ATTR_I">"1"</Attribut>
+<Attribut name="RULES-ATTR_Ag">"3"</Attribut>
+<Attribut name="RULES-ATTR_Dex">"0"</Attribut>
+<Attribut name="RULES-ATTR_Int">"1"</Attribut>
+<Attribut name="RULES-ATTR_WP">"4"</Attribut>
+<Attribut name="RULES-ATTR_Fel">"0"</Attribut>
+</SUBCHAPTER_ATTR>
+<SUBCHAPTER_SKILL>
+<Skill name="RULES-COMPSOINANI">"1"</Skill>
+  <!-- Animal Care -->
+<Skill name="RULES-COMPESCAL">"1"</Skill>
+  <!-- Climb -->
+<Skill name="RULES-COMPRAGOT">"1"</Skill>
+  <!-- Gossip -->
+<Skill name="RULES-COMPSAVOIR_BETE">"1"</Skill>
+  <!-- Lore (Beasts) -->
+<Skill name="RULES-COMPCOMB_BASE">"1"</Skill>
+  <!-- Melee (Basic) -->
+<Skill name="RULES-COMPSURVEXT">"1"</Skill>
+  <!-- Outdoor Survival -->
+<Skill name="RULES-COMPPRECEP">"1"</Skill>
+  <!-- Perception -->
+<Skill name="RULES-COMPPROJ_ARC">"1"</Skill>
+  <!-- Ranged (Bow) -->
+<Skill name="RULES-COMPPIEG">"1"</Skill>
+  <!-- Set Trap -->
+<Skill name="RULES-COMPDISC_RURAL">"1"</Skill>
+  <!-- Stealth (Rural) -->
+<Skill name="RULES-COMPATHL">"2"</Skill>
+  <!-- Athletics -->
+<Skill name="RULES-COMPCALM">"2"</Skill>
+  <!-- Cool -->
+<Skill name="RULES-COMPRESIST">"2"</Skill>
+  <!-- Endurance -->
+<Skill name="RULES-COMPINTUI">"2"</Skill>
+  <!-- Intuition -->
+<Skill name="RULES-COMPSAVOIR_LOCAL">"2"</Skill>
+  <!-- Lore (Local) -->
+<Skill name="RULES-COMPPIST">"2"</Skill>
+  <!-- Track -->
+<Skill name="RULES-COMPDRESS_*">"3"</Skill>
+  <!-- Animal Training (Any) -->
+<Skill name="RULES-COMPORIENT">"3"</Skill>
+  <!-- Navigation -->
+<Skill name="RULES-COMPPROJ_POUDRE">"3"</Skill>
+  <!-- Ranged (Blackpowder) -->
+<Skill name="RULES-COMPCHEV_CHEVAL">"3"</Skill>
+  <!-- Ride (Horse) -->
+<Skill name="RULES-COMPCOMM">"4"</Skill>
+  <!-- Leadership -->
+<Skill name="RULES-COMPSAVOIR_LOI">"4"</Skill>
+  <!-- Lore (Law) -->
+</SUBCHAPTER_SKILL>
+<SUBCHAPTER_TALENT>
+<Talent name="RULES-T0153">"1"</Talent>
+  <!-- Marksman -->
+<Talent name="RULES-T0105">"1"</Talent>
+  <!-- Rover -->
+<Talent name="RULES-T0013_*">"1"</Talent>
+  <!-- Strider (Any) -->
+<Talent name="RULES-T0156">"1"</Talent>
+  <!-- Trapper -->
+<Talent name="RULES-T0108">"2"</Talent>
+  <!-- Hunter's Eye -->
+<Talent name="RULES-T0098">"2"</Talent>
+  <!-- Menacing -->
+<Talent name="RULES-T0152">"2"</Talent>
+  <!-- Sharpshooter -->
+<Talent name="RULES-T0059">"2"</Talent>
+  <!-- Strike to Stun -->
+<Talent name="RULES-T0149">"3"</Talent>
+  <!-- Accurate Shot -->
+<Talent name="RULES-T0139_*">"3"</Talent>
+  <!-- Acute Sense (Any) -->
+<Talent name="RULES-T0140">"3"</Talent>
+  <!-- Orientation -->
+<Talent name="RULES-T0150">"3"</Talent>
+  <!-- Fast Shot -->
+<Talent name="RULES-T0102">"4"</Talent>
+  <!-- Dealmaker -->
+<Talent name="RULES-T0122">"4"</Talent>
+  <!-- Commanding Presence -->
+<Talent name="RULES-T0136_SERV">"4"</Talent>
+  <!-- Etiquette (Servants) -->
+<Talent name="RULES-T0084">"4"</Talent>
+  <!-- Read/Write -->
+</SUBCHAPTER_TALENT>
+<SUBCHAPTER_ITEM>
+<Item name="RULES-TRAP_023">"1"</Item>
+<Item name="Bow and Arrow (12)">"1"</Item>
+<Item name="Hand Weapon">"1"</Item>
+<Item name="RULES-TRAP_023 (Q)">"2"</Item>
+<Item name="Hunting Suit">"2"</Item>
+<Item name="RULES-PROJ_POUDRE_03">"3"</Item>
+<Item name="RULES-TRAP_116">"3"</Item>
+<Item name="Estate Cottage">"4"</Item>
+<Item name="Quality Clothing">"4"</Item>
+</SUBCHAPTER_ITEM>
+</Career>
+<Career id="DEFT-WORK009">
+<Description language="ENGLISH">"Poacher"</Description>
+<Explanation language="ENGLISH">"You hunt and trap for food in a battle of wits against your quarry and the powers that be. Many common folk in the Old World believe that beasts and birds are sent by Taal to feed any with the wherewithal to catch them. In the Empire however, whoever owns the land claims to own the animals that walk upon it, and even the birds that fly above it. From a poacher's point of view this is not how things should be and it is certainly not what the gods intended."</Explanation>
+<Skill>"RULES-COMPPIEG"</Skill>
+<Class>"RULES-CLASS_ROGU"</Class>
+<SUBCHAPTER_LEVEL>
+<Level id="1">
+<Description language="ENGLISH">"Scrumper"</Description>
+<Salary>"TIERS_BRASS 2"</Salary>
+</Level>
+<Level id="2">
+<Description language="ENGLISH">"Poacher"</Description>
+<Salary>"TIERS_BRASS 4"</Salary>
+</Level>
+<Level id="3">
+<Description language="ENGLISH">"Master Poacher"</Description>
+<Salary>"TIERS_SILVER 1"</Salary>
+</Level>
+<Level id="4">
+<Description language="ENGLISH">"Champion Poacher"</Description>
+<Salary>"TIERS_SILVER 4"</Salary>
+</Level>
+</SUBCHAPTER_LEVEL>
+<SUBCHAPTER_ATTR>
+<Attribut name="RULES-ATTR_WS">"3"</Attribut>
+<Attribut name="RULES-ATTR_BS">"1"</Attribut>
+<Attribut name="RULES-ATTR_S">"0"</Attribut>
+<Attribut name="RULES-ATTR_T">"0"</Attribut>
+<Attribut name="RULES-ATTR_I">"4"</Attribut>
+<Attribut name="RULES-ATTR_Ag">"1"</Attribut>
+<Attribut name="RULES-ATTR_Dex">"1"</Attribut>
+<Attribut name="RULES-ATTR_Int">"2"</Attribut>
+<Attribut name="RULES-ATTR_WP">"0"</Attribut>
+<Attribut name="RULES-ATTR_Fel">"0"</Attribut>
+</SUBCHAPTER_ATTR>
+<SUBCHAPTER_SKILL>
+<Skill name="RULES-COMPSUBOR">"1"</Skill>
+  <!-- Bribery -->
+<Skill name="RULES-COMPESCAL">"1"</Skill>
+  <!-- Climb -->
+<Skill name="RULES-COMPESQU">"1"</Skill>
+  <!-- Dodge -->
+<Skill name="RULES-COMPMARCH">"1"</Skill>
+  <!-- Haggle -->
+<Skill name="RULES-COMPSAVOIR_BETE">"1"</Skill>
+  <!-- Lore (Beasts) -->
+<Skill name="RULES-COMPSURVEXT">"1"</Skill>
+  <!-- Outdoor Survival -->
+<Skill name="RULES-COMPPRECEP">"1"</Skill>
+  <!-- Perception -->
+<Skill name="RULES-COMPPROJ_FROND">"1"</Skill>
+  <!-- Ranged (Sling) -->
+<Skill name="RULES-COMPPIEG">"1"</Skill>
+  <!-- Set Trap -->
+<Skill name="RULES-COMPDISC_RURAL">"1"</Skill>
+  <!-- Stealth (Rural) -->
+<Skill name="RULES-COMPATHL">"2"</Skill>
+  <!-- Athletics -->
+<Skill name="RULES-COMPCALM">"2"</Skill>
+  <!-- Cool -->
+<Skill name="RULES-COMPRESIST">"2"</Skill>
+  <!-- Endurance -->
+<Skill name="RULES-COMPCOMB_BASE">"2"</Skill>
+  <!-- Melee (Basic) -->
+<Skill name="RULES-COMPPROJ_ARC">"2"</Skill>
+  <!-- Ranged (Bow) -->
+<Skill name="RULES-COMPPIST">"2"</Skill>
+  <!-- Track -->
+<Skill name="RULES-COMPSOINANI">"3"</Skill>
+  <!-- Animal Care -->
+<Skill name="RULES-COMPDRESS_*">"3"</Skill>
+  <!-- Animal Training (Any) -->
+<Skill name="RULES-COMPORIENT">"3"</Skill>
+  <!-- Navigation -->
+<Skill name="RULES-COMPCHEV_CHEVAL">"3"</Skill>
+  <!-- Ride (Horse) -->
+<Skill name="RULES-COMPINTIM">"4"</Skill>
+  <!-- Intimidate -->
+<Skill name="RULES-COMPSAVOIR_LOI">"4"</Skill>
+  <!-- Lore (Law) -->
+</SUBCHAPTER_SKILL>
+<SUBCHAPTER_TALENT>
+<Talent name="RULES-T0113">"1"</Talent>
+  <!-- Fisherman -->
+<Talent name="RULES-T0064">"1"</Talent>
+  <!-- Flee! -->
+<Talent name="RULES-T0013_*">"1"</Talent>
+  <!-- Strider (Any) -->
+<Talent name="RULES-T0156">"1"</Talent>
+  <!-- Trapper -->
+<Talent name="RULES-T0108">"2"</Talent>
+  <!-- Hunter's Eye -->
+<Talent name="RULES-T0153">"2"</Talent>
+  <!-- Marksman -->
+<Talent name="RULES-T0105">"2"</Talent>
+  <!-- Rover -->
+<Talent name="RULES-T0152">"2"</Talent>
+  <!-- Sharpshooter -->
+<Talent name="RULES-T0149">"3"</Talent>
+  <!-- Accurate Shot -->
+<Talent name="RULES-T0139_*">"3"</Talent>
+  <!-- Acute Sense (Any) -->
+<Talent name="RULES-T0038">"3"</Talent>
+  <!-- Criminal -->
+<Talent name="RULES-T0150">"3"</Talent>
+  <!-- Fast Shot -->
+<Talent name="RULES-T0147">"4"</Talent>
+  <!-- Briber -->
+<Talent name="RULES-T0102">"4"</Talent>
+  <!-- Dealmaker -->
+<Talent name="RULES-T0017">"4"</Talent>
+  <!-- Kingpin -->
+<Talent name="RULES-T0098">"4"</Talent>
+  <!-- Menacing -->
+</SUBCHAPTER_TALENT>
+<SUBCHAPTER_ITEM>
+<Item name="RULES-TRAP_016">"1"</Item>
+<Item name="Rod and Line">"1"</Item>
+<Item name="Selection of Animal Traps">"1"</Item>
+<Item name="RULES-PROJ_FROND_01">"1"</Item>
+<Item name="RULES-TRAP_125">"2"</Item>
+<Item name="RULES-PROJ_ARC_01">"2"</Item>
+<Item name="RULES-TRAP_151">"2"</Item>
+<Item name="Hunting Hound or Hawk">"3"</Item>
+<Item name="Quality Weapon">"3"</Item>
+<Item name="RULES-TRAP_116">"4"</Item>
+</SUBCHAPTER_ITEM>
+</Career>
+</DATA_CAREER>
+</DATA_BOOK>
