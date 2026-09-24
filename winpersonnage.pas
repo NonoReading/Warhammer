@@ -117,6 +117,8 @@ type
     TabSheetLivre: TPage;
     TabSort: TStringGrid;
     TabEquipement: TStringGrid;
+    ListBoxEquipementCategorie: TListBox;
+    TabEquipementAffichage: TStringGrid;
     TabHistorique: TStringGrid;
     TabAugmentationTalent: TStringGrid;
     TabAugmentationCompetence: TStringGrid;
@@ -304,6 +306,14 @@ type
   procedure TabEquipementMouseMove({%H-}Sender: TObject; {%H-}Shift: TShiftState; X, Y: Integer);
   procedure TabEquipementMouseDown({%H-}Sender: TObject; Button: TMouseButton; {%H-}Shift: TShiftState; X, Y: Integer);
   procedure TabEquipementPopup({%H-}Sender: TObject);
+  // Scission de l'affichage par categorie (CONTEXT.md, etape 2) : TabEquipement reste la grille
+  // complete de sauvegarde (masquee), TabEquipementAffichage montre seulement la categorie
+  // choisie dans ListBoxEquipementCategorie.
+  procedure ListBoxEquipementCategorieClick({%H-}Sender: TObject);
+  procedure RafraichitTabEquipementAffichage();
+  function CategorieEquipementLigne(Ligne: Integer): Integer;
+  function LigneEquipementReelle(Ligne: Integer): Integer;
+  procedure TabEquipementAffichageSetEditText({%H-}Sender: TObject; ACol, ARow: Integer; const Value: string);
   procedure MenuConfierClick(Sender: TObject);
   procedure MenuPorteClick({%H-}Sender: TObject);
   procedure MenuReprendreClick({%H-}Sender: TObject);
@@ -949,6 +959,7 @@ procedure TWinPersonnages.ButtonArmeClick(Sender: TObject);
         // livre. CONTEXT.md 2.29, chantier "objets a fabrication integree".
         TabEquipement.Cells[7, TabEquipement.RowCount-1]:= PArme.Fabrication;
         AdjustGridColumnsWidth(TabEquipement, 0, false, false);
+        RafraichitTabEquipementAffichage();
       end;
     SelectWinArme  := '';
     SelectWinArmeCompetences := '';
@@ -979,6 +990,7 @@ procedure TWinPersonnages.ButtonEquipementClick(Sender: TObject);
         TabEquipement.Cells[4, TabEquipement.RowCount-1]:= PTrapping.Libelle;
         TabEquipement.Cells[9, TabEquipement.RowCount-1]:= '1';
         AdjustGridColumnsWidth(TabEquipement, 0, false, false);
+        RafraichitTabEquipementAffichage();
       end;
     SelectWinTrapping := '';
     SelectWinLivre    := '';
@@ -1015,6 +1027,7 @@ procedure TWinPersonnages.ButtonFabricationClick(Sender: TObject);
           SelectWinFabricationType := '';
           ChoixWinFabrication := '';
           AfficheFabrication();
+          RafraichitTabEquipementAffichage();
         end;
   end;
 
@@ -1218,6 +1231,7 @@ procedure TWinPersonnages.ButtonArmureClick(Sender: TObject);
             TabEquipement.Cells[7, TabEquipement.RowCount-1]:= PArmure.Fabrication;
           end;
         AdjustGridColumnsWidth(TabEquipement, 0, false, false);
+        RafraichitTabEquipementAffichage();
       end;
     SelectWinArmure := '';
     SelectWinLivre  := '';
@@ -1586,6 +1600,7 @@ procedure TWinPersonnages.ButtonSortClick(Sender: TObject);
               TabEquipement.Cells[4, TabEquipement.RowCount-1]:= PSort.Libelle;
               TabEquipement.Cells[5, TabEquipement.RowCount-1]:= XpSortCout(PSort.CodeSort);
               AdjustGridColumnsWidth(TabEquipement, 0, false, false);
+              RafraichitTabEquipementAffichage();
               CalculTableExperience();
             end
           else
@@ -2277,10 +2292,12 @@ begin
   TabMutation.ColWidths[3]   := 0;
   MemoMutationEffet.ReadOnly := True;
 
-  // Mise en forme de la table des Equipements
+  // Mise en forme de la table des Equipements. TabEquipement reste la grille complete de
+  // sauvegarde (masquee, CONTEXT.md etape 2) : toute la mise en forme des colonnes et les
+  // procedures existantes (ajout, suppression, Confier a...) continuent d'operer dessus sans
+  // changement. Seuls les evenements d'interaction utilisateur sont branches sur
+  // TabEquipementAffichage, la grille visible et filtree par ListBoxEquipementCategorie.
   TabEquipement.Options        := TabEquipement.Options + [goEditing, goAlwaysShowEditor];
-  TabEquipement.OnSelectEditor := @TabEquipementSelectEditor;
-  TabEquipement.OnDblClick     := @TabEquipementDblClick;
   TabEquipement.ColCount       := 13;
   TabEquipement.RowCount       := 2;
   TabEquipement.ColWidths[0]   := 20;
@@ -2309,11 +2326,30 @@ begin
   TabEquipement.ColWidths[11]  := 0;
   TabEquipement.Cells[12, 0]   := GetTexteLibelle('RULES-LAB_254');
   TabEquipement.ColWidths[12]  := 150;
-  TabEquipement.OnMouseDown    := @TabEquipementMouseDown;
-  TabEquipement.OnMouseMove    := @TabEquipementMouseMove;
-  TabEquipement.ShowHint       := True;
-  TabEquipement.PopupMenu      := TPopupMenu.Create(Self);
-  TabEquipement.PopupMenu.OnPopup := @TabEquipementPopup;
+
+  // Grille d'affichage (visible) et liste de categories, memes evenements que TabEquipement
+  // avant la scission (branches ici et non plus sur TabEquipement, cf. commentaire ci-dessus).
+  TabEquipementAffichage.Options          := TabEquipementAffichage.Options + [goEditing, goAlwaysShowEditor];
+  TabEquipementAffichage.OnDrawCell       := @TabDrawCell;
+  TabEquipementAffichage.OnSelectEditor   := @TabEquipementSelectEditor;
+  TabEquipementAffichage.OnSelectCell     := @TabEquipementSelectCell;
+  TabEquipementAffichage.OnDblClick       := @TabEquipementDblClick;
+  TabEquipementAffichage.OnMouseDown      := @TabEquipementMouseDown;
+  TabEquipementAffichage.OnMouseMove      := @TabEquipementMouseMove;
+  TabEquipementAffichage.OnSetEditText    := @TabEquipementAffichageSetEditText;
+  TabEquipementAffichage.ShowHint         := True;
+  TabEquipementAffichage.PopupMenu        := TPopupMenu.Create(Self);
+  TabEquipementAffichage.PopupMenu.OnPopup := @TabEquipementPopup;
+
+  // Ordre = valeur renvoyee par CategorieEquipementLigne (0 a 4).
+  ListBoxEquipementCategorie.Items.Clear;
+  ListBoxEquipementCategorie.Items.Add(GetTexteLibelle('RULES-LAB_286'));
+  ListBoxEquipementCategorie.Items.Add(GetTexteLibelle('RULES-LAB_063'));
+  ListBoxEquipementCategorie.Items.Add(GetTexteLibelle('RULES-LAB_065'));
+  ListBoxEquipementCategorie.Items.Add(GetTexteLibelle('RULES-LAB_064'));
+  ListBoxEquipementCategorie.Items.Add(GetTexteLibelle('RULES-LAB_083'));
+  ListBoxEquipementCategorie.ItemIndex := 3;
+  RafraichitTabEquipementAffichage();
 
   // Mise en forme dy tableau de choix des équipement de métier
   TabMetierEquipement.Options          := TabMetierEquipement.Options + [goEditing, goAlwaysShowEditor];
@@ -4402,6 +4438,7 @@ procedure TWinPersonnages.AjouteEquipementNiveau();
           TabEquipement.Cells[9, TabEquipement.RowCount-1]:= IntToStr(StrToIntDef(TabMetierEquipement.Cells[6, Ind], 1));
           TabMetierEquipement.Cells[0, Ind]               := CaseVide;
         end;
+    RafraichitTabEquipementAffichage();
   end;
 
 procedure TWinPersonnages.TabMetierEquipementDblClick(Sender: TObject);
@@ -4906,7 +4943,20 @@ procedure TWinPersonnages.AjustePositionTables();
     TabEquipement.Left        := PageExperience.left;
     TabEquipement.Top         := LabEquipement.top + LabEquipement.Height + 5 + LabPorteAide.Height + 5;
 
-    ButtonArme.left           := TabEquipement.left + TabEquipement.Width + 10;
+    // Liste de categories + grille d'affichage filtree (CONTEXT.md etape 2) : meme agencement
+    // que ListBoxExperience/PageExperience, a l'emplacement de l'ancien TabEquipement (desormais
+    // masque, cf. commentaire a son affectation OnSelectEditor plus haut).
+    ListBoxEquipementCategorie.Left    := TabEquipement.Left;
+    ListBoxEquipementCategorie.Top     := TabEquipement.Top;
+    ListBoxEquipementCategorie.Width   := 130;
+    ListBoxEquipementCategorie.Height  := TabEquipement.Height;
+
+    TabEquipementAffichage.Left   := ListBoxEquipementCategorie.Left + ListBoxEquipementCategorie.Width + 8;
+    TabEquipementAffichage.Top    := TabEquipement.Top;
+    TabEquipementAffichage.Width  := TabEquipement.Width - ListBoxEquipementCategorie.Width - 8;
+    TabEquipementAffichage.Height := TabEquipement.Height;
+
+    ButtonArme.left           := TabEquipementAffichage.left + TabEquipementAffichage.Width + 10;
     ButtonArmure.left         := ButtonArme.left;
     ButtonFabrication.left    := ButtonArme.left;
     ButtonDelete.left         := ButtonArme.left;
@@ -5022,10 +5072,10 @@ procedure TWinPersonnages.TabEquipementSelectEditor(Sender: TObject; aCol, aRow:
     Editable := false;
     if (aCol = 9) and (aRow > 0) then
       begin
-        Code := TabEquipement.Cells[2, aRow];
-        Editable := (TrimRight(TabEquipement.Cells[3, aRow]) = TrimRight(TypeEquipDI))
+        Code := TabEquipementAffichage.Cells[2, aRow];
+        Editable := (TrimRight(TabEquipementAffichage.Cells[3, aRow]) = TrimRight(TypeEquipDI))
                     or (Pos(EquipementMU, Code) > 0);
-        if (not Editable) and (TrimRight(TabEquipement.Cells[3, aRow]) = TrimRight(TypeEquipWe)) then
+        if (not Editable) and (TrimRight(TabEquipementAffichage.Cells[3, aRow]) = TrimRight(TypeEquipWe)) then
           begin
             PArme    := ChercheArme(Code);
             Editable := (Pos('COMPPROJ_LANC', PArme.CodeCompetence) > 0) and (PArme.Encombrement = 0);
@@ -5060,6 +5110,86 @@ function TWinPersonnages.LigneEstAnimal(Ligne: Integer): Boolean;
   begin
     Result := (Ligne > 0) and (Ligne < TabEquipement.RowCount)
       and TrappingEstPorteur(ChercheTrapping(TabEquipement.Cells[2, Ligne]));
+  end;
+
+// Categorie d'une ligne de TabEquipement pour ListBoxEquipementCategorie (CONTEXT.md etape 2) :
+// 0 Montures/Navires/Vehicules, 1 Armes, 2 Armures, 3 Divers, 4 Sorts. Un bateau/vehicule garde
+// le type Divers (colonne 3) - LigneEstAnimal (profil animal/bateau/vehicule) est donc teste en
+// premier. Un sort n'a pas de TypeEquip fixe (TypeSort est un libelle libre, ex. "Petty Magic") :
+// identifie comme ButtonFabricationClick/TabEquipementSelectCell, par TalentSort.
+function TWinPersonnages.CategorieEquipementLigne(Ligne: Integer): Integer;
+  var
+    Typ: String;
+  begin
+    if LigneEstAnimal(Ligne) then
+      Result := 0
+    else if TalentSort(TabEquipement.Cells[2, Ligne]).CodeTalent <> '' then
+      Result := 4
+    else
+      begin
+        Typ := TrimRight(TabEquipement.Cells[3, Ligne]);
+        if Typ = TrimRight(TypeEquipWe) then
+          Result := 1
+        else if (Typ = TrimRight(TypeEquipAr)) or (Typ = TrimRight(TypeEquipArS)) then
+          Result := 2
+        else
+          Result := 3;
+      end;
+  end;
+
+// Ligne reelle dans TabEquipement (grille complete de sauvegarde) correspondant a la ligne
+// Ligne de TabEquipementAffichage (grille visible, filtree par categorie) : retrouvee par le
+// Code (colonne 2), copie a l'identique entre les deux grilles.
+function TWinPersonnages.LigneEquipementReelle(Ligne: Integer): Integer;
+  begin
+    if (Ligne < 1) or (Ligne >= TabEquipementAffichage.RowCount) then
+      Result := -1
+    else
+      Result := RechercherDansColonne(TabEquipement, TabEquipementAffichage.Cells[2, Ligne], 2);
+  end;
+
+// Categorie choisie dans ListBoxEquipementCategorie (CategorieEquipementLigne) : reconstruit
+// TabEquipementAffichage a partir de TabEquipement, qui reste toujours complet (source de la
+// sauvegarde, CONTEXT.md etape 2).
+procedure TWinPersonnages.RafraichitTabEquipementAffichage();
+  var
+    Ligne, IndAffiche, Col, Categorie: Integer;
+  begin
+    Categorie := ListBoxEquipementCategorie.ItemIndex;
+
+    TabEquipementAffichage.RowCount := 1;
+    TabEquipementAffichage.ColCount := TabEquipement.ColCount;
+    for Col := 0 to TabEquipement.ColCount - 1 do
+      begin
+        TabEquipementAffichage.ColWidths[Col] := TabEquipement.ColWidths[Col];
+        TabEquipementAffichage.Cells[Col, 0]  := TabEquipement.Cells[Col, 0];
+      end;
+
+    IndAffiche := 0;
+    for Ligne := 1 to TabEquipement.RowCount - 1 do
+      if CategorieEquipementLigne(Ligne) = Categorie then
+        begin
+          Inc(IndAffiche);
+          TabEquipementAffichage.RowCount := IndAffiche + 1;
+          TabEquipementAffichage.Rows[IndAffiche].Assign(TabEquipement.Rows[Ligne]);
+        end;
+  end;
+
+procedure TWinPersonnages.ListBoxEquipementCategorieClick(Sender: TObject);
+  begin
+    RafraichitTabEquipementAffichage();
+  end;
+
+// Propage vers TabEquipement (grille de sauvegarde) une edition faite directement dans
+// TabEquipementAffichage : seule la colonne Quantite (9) est editable en place, cf.
+// TabEquipementSelectEditor.
+procedure TWinPersonnages.TabEquipementAffichageSetEditText(Sender: TObject; ACol, ARow: Integer; const Value: string);
+  var
+    LigneReelle: Integer;
+  begin
+    LigneReelle := LigneEquipementReelle(ARow);
+    if LigneReelle > 0 then
+      TabEquipement.Cells[ACol, LigneReelle] := Value;
   end;
 
 // Identifiant A<N> pour chaque animal de la grille qui n'en a pas encore (meme regle que
@@ -5107,6 +5237,7 @@ procedure TWinPersonnages.RafraichitPorteurs;
         if not Trouve then
           TabEquipement.Cells[11, Ligne] := '';
       end;
+    RafraichitTabEquipementAffichage();
   end;
 
 function TWinPersonnages.EquipementDeLigne(Ligne: Integer): StructurePersonnageEquipement;
@@ -5189,23 +5320,31 @@ procedure TWinPersonnages.TabEquipementMouseMove(Sender: TObject; Shift: TShiftS
     Colonne, Ligne: Integer;
     Aide:           String;
   begin
-    TabEquipement.MouseToCell(X, Y, Colonne, Ligne);
+    TabEquipementAffichage.MouseToCell(X, Y, Colonne, Ligne);
     if Colonne = 8 then Aide := GetTexteLibelle('RULES-LAB_259') else Aide := '';
-    if TabEquipement.Hint <> Aide then
+    if TabEquipementAffichage.Hint <> Aide then
       begin
-        TabEquipement.Hint := Aide;
+        TabEquipementAffichage.Hint := Aide;
         Application.CancelHint;
       end;
   end;
 
+// Le clic (gauche ou droit) se fait sur la grille d'affichage (filtree) : on retrouve la
+// ligne correspondante dans TabEquipement (grille complete de sauvegarde) par son Code
+// (colonne 2, identique dans les deux grilles) avant tout traitement base sur TabEquipement.Row.
 procedure TWinPersonnages.TabEquipementMouseDown(Sender: TObject; Button: TMouseButton; Shift: TShiftState; X, Y: Integer);
   var
-    Colonne, Ligne: Integer;
+    Colonne, Ligne, LigneReelle: Integer;
   begin
     if Button <> mbRight then exit;
-    TabEquipement.MouseToCell(X, Y, Colonne, Ligne);
+    TabEquipementAffichage.MouseToCell(X, Y, Colonne, Ligne);
     if Ligne > 0 then
-      TabEquipement.Row := Ligne;
+      begin
+        TabEquipementAffichage.Row := Ligne;
+        LigneReelle := LigneEquipementReelle(Ligne);
+        if LigneReelle > 0 then
+          TabEquipement.Row := LigneReelle;
+      end;
   end;
 
 procedure TWinPersonnages.TabEquipementPopup(Sender: TObject);
@@ -5214,7 +5353,7 @@ procedure TWinPersonnages.TabEquipementPopup(Sender: TObject);
     Item:       TMenuItem;
     MenuPop:    TPopupMenu;
   begin
-    MenuPop := TabEquipement.PopupMenu;
+    MenuPop := TabEquipementAffichage.PopupMenu;
     MenuPop.Items.Clear;
     Ligne := TabEquipement.Row;
     // ni un sort ni un animal (un animal ne se confie pas a un autre)
@@ -5270,6 +5409,7 @@ procedure TWinPersonnages.MenuPorteClick(Sender: TObject);
       end
     else
       TabEquipement.Cells[8, TabEquipement.Row] := '';
+    RafraichitTabEquipementAffichage();
   end;
 
 procedure TWinPersonnages.MenuReprendreClick(Sender: TObject);
@@ -5282,11 +5422,18 @@ procedure TWinPersonnages.MenuReprendreClick(Sender: TObject);
 procedure TWinPersonnages.TabEquipementSelectCell(Sender: TObject; aCol,
   aRow: Integer; var CanSelect: Boolean);
   var
-    EstSort: Boolean;
+    EstSort:     Boolean;
+    LigneReelle: Integer;
   begin
+    // Selection dans la grille d'affichage (filtree) : on garde TabEquipement.Row synchronise
+    // sur la ligne reelle correspondante, pour que ButtonFabricationClick/ButtonDeleteClick et
+    // le menu contextuel (bases sur TabEquipement.Row) agissent sur le bon objet.
+    LigneReelle := LigneEquipementReelle(aRow);
+    if LigneReelle > 0 then
+      TabEquipement.Row := LigneReelle;
     // Meme test que ButtonFabricationClick/ButtonDeleteClick : une ligne qui cite un
     // talent est un sort, ni fabrication ni suppression ne s'y appliquent.
-    EstSort := (aRow > 0) and (TalentSort(TabEquipement.Cells[2, aRow]).CodeTalent <> '');
+    EstSort := (aRow > 0) and (TalentSort(TabEquipementAffichage.Cells[2, aRow]).CodeTalent <> '');
     ButtonFabrication.Enabled := not EstSort;
     ButtonDelete.Enabled      := not EstSort;
   end;
@@ -6131,6 +6278,7 @@ Procedure TWinPersonnages.MajTables();
           TabEquipement.Cells[4, TabEquipement.RowCount-1] := PSort.Libelle;
           TabEquipement.Cells[5, TabEquipement.RowCount-1] := '0';
         end;
+    RafraichitTabEquipementAffichage();
     TabAugmentationTalent.enabled := false;
 
     // Expérience

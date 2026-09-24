@@ -24,43 +24,6 @@ CORRECTIONS COURTES  (une ligne ou deux chacune)
 [PRIX] Codes CO/PA/SB faits. RESTE eventuel : tri par valeur et calcul de bourse (il faudrait un parseur) ; prix "Varies" (RULES-TRAP_025/058, _096/130) laisses en texte.
 [EQUIPEMENTS MIS DE COTE] Balayage des livres, herbes, Dwarf Player's Guide, Buyer FAITS (Log.txt 19/09). RESTE : (1) Winds of Magic : bonus des robes (Practical +1 SL, Standard +2, Elaborate +3), Enchanted Staff et objets du chapitre Magical Artefacts non modelises ; (2) mines de Salzenmund (Mining Equipment : Bellows, Caged Canaries, Elevator, Fortification, Guild Membership, Pumps = chantier entreprises) ; (3) VEHICULES : fiches saisies le 20/09 (bateaux, navires nains, engins volants, chars, chariots de Cothique), regles de vol, de conduite et d equipage = regles de MJ, hors programme (decision de Nono 20/09/2026) ; (4) Deft Steps Light Fingers (tableau d objets, livre non integre, CONTEXT.md 2.36) ; (5) Longbeards p.50 non modelises.
 [EQUIPEMENTS V4] Catalogue de 175 objets fait, 194 lignes de carriere rattachees sur 582. Reste, au cas par cas par Nono : lignes douteuses (magnifying glass, pen and ink, horse seul, oil lamp, hurricane lamp with oil, harness/stagecoach), "tools of the profession (...)", objets absents du catalogue (rank symbol, sleeping bag, leather doublet, cape, handcuffs, livery...). Les non-objets (argent, biens "worth", batiments, reseaux) restent en texte. A tester en jeu : chargement V4, "&amp;" (Wine & Spirits, Pestle & Mortar), libelle LIMITED affiche "Scarce".
-[AJOUT LE 24/09/2026, A CONCEVOIR CE SOIR AVEC NONO] SCISSION DE L'EQUIPEMENT PAR CATEGORIE
-(WinPersonnage) : nait de la remarque de Nono en voulant restreindre les amenagements de bateau
-a la bonne taille de navire. TabEquipement est aujourd'hui un tableau UNIQUE et plat (pas dans un
-onglet) qui melange Armes/Armures/Divers/Sorts/Montures/Navires/Vehicules via une colonne Type
-cachee - un vrai fourre-tout. Nono veut a terme un onglet par categorie, sur le modele du
-TPageControl deja utilise par PageExperience (Attribut/Competence/Talent/XP/Evolution/
-Historique/Livre/MjCost/Corruption/Mutation) - mais PageExperience a lui-meme deja trop d'onglets
-("cela devient complique", Nono 24/09/2026) : a resoudre AVANT de dupliquer ce modele sur
-l'Equipement, sinon meme probleme en pire (plus de categories a scinder qu'en Experience).
-A concevoir ensemble : (1) solution au trop-plein d'onglets de PageExperience (groupement en
-sous-onglets ? barre laterale/liste au lieu d'onglets horizontaux ? autre ?) ; (2) une fois
-choisie, meme solution appliquee a l'Equipement, mecanisme de filtrage par Type reutilisable
-(pas un TPageControl a onglets codes en dur par categorie) pour que Montures/Navires soit la
-premiere categorie scindee, puis Armes/Armures/Divers plus tard sans tout refaire ; (3) le
-"Confier a..."/double-clic Fiche/etc. doivent continuer a fonctionner entre deux grilles
-separees (un Divers confie a une monture qui n'est plus dans le meme tableau).
-[ETAPE 1 FAITE ET VALIDEE PAR NONO LE 24/09/2026 AU SOIR - PageExperience] Remplacement de
-PageExperience (TPageControl a 10 onglets) par un TNotebook pilote par une TListBox laterale
-(ListBoxExperience) : la liste choisit la page (Attribut/Competence/Talents/XP/Evolution/
-Historique/Livre/MjCost/Corruption/Mutation). TNotebook n'a NI ShowTabs NI OnPageChanged
-publies dans cette LCL (verifie dans C:\lazarus\lcl\extctrls.pp) - proprietes retirees du
-.lfm par Nono pour compiler (avec Caption/ClientHeight/ClientWidth des pages, non necessaires :
-Caption est reaffecte par code dans AfficheImageRace, ClientHeight/Width sont geres par
-TNotebook). Symptome bloquant rencontre puis RESOLU PAR NONO : texte des controles (ex.
-RadioButtonRAS/Suivant/Changer) invisible sur fond noir - fausses pistes explorees sans succes
-(repaint force/Invalidate, cablage direct de l'evenement de changement de page). Cause reelle,
-bien plus simple : couleur de fond de ListBoxExperience (le "selecteur") a regler explicitement
-(Color, mis par Nono via l'IDE - proche de clNone/couleur du theme, valeur numerique
-15266032 dans le .lfm) plutot que de laisser le noir de fond du Form (Color = clBlack)
-transparaitre. Lecon retenue : verifier la couleur d'abord, avant de partir sur des pistes
-d'evenements/repaint. Chantier "scission de l'equipement par categorie" : ETAPE 1 (desencombrer
-PageExperience) close. RESTE ETAPE 2 : meme mecanisme liste+panneau, generalise avec un filtre
-par Type (pas un TPageControl/TNotebook a categories codees en dur), applique a TabEquipement
-pour scinder Montures/Navires du reste (Armes/Armures/Divers/Sorts/Vehicules) - voir
-CONTEXT.md. Le "Confier a..."/double-clic Fiche doivent continuer a fonctionner entre grilles
-separees.
-
 [VARIANTES (Q)] Faites et validees (Log.txt 19/09). RESTE : marqueur encore ecrit "Quality to add" dans le bloc Fabrication des armes/armures, doublon avec le suffixe "de qualite" du catalogue ; idee a revoir : (Q) = choix de qualite a la creation parmi DATA_CRAFTMANSHIP (CONTEXT.md 2.77 suite 4, chantier pause). Non rattaches : clothes(Q), cape(Q), luxurious costume (Q), elegant clothes (Q) (au cas par cas).
 
 =========================================================================

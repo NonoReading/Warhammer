@@ -1,3 +1,27 @@
+25/09/2026 - SCISSION DE L EQUIPEMENT PAR CATEGORIE, ETAPE 2 (TabEquipement), CHANTIER CLOS.
+TabEquipement reste l unique grille de sauvegarde (toujours complete) mais devient masquee
+(Visible = False) : aucune des procedures existantes qui la lisent/l ecrivent (ajout, suppression,
+Confier a..., double-clic Fiche, synchronisation vers Personnage.Equipement dans CalculTotaux/
+MajTables) n a change. Deux controles visibles ajoutes a la place : ListBoxEquipementCategorie
+(5 categories : Montures/Navires/Vehicules, Arme, Armure, Divers, Sort) et TabEquipementAffichage
+(grille filtree, seule visible). CategorieEquipementLigne classe chaque ligne : LigneEstAnimal
+(profil animal/bateau/vehicule) teste en premier car un bateau garde le type Divers en colonne 3 ;
+un sort est identifie par TalentSort(Code), pas par un TypeEquip fixe (TypeSort est un libelle
+libre du livre). RafraichitTabEquipementAffichage reconstruit la grille filtree depuis
+TabEquipement a chaque clic sur la liste et apres toute modification (centralise dans
+RafraichitPorteurs, deja appelee par Confier a/Porte/Reprendre/suppression/chargement, plus
+appels explicites apres chaque ajout Arme/Armure/Divers/Sort/Fabrication). LigneEquipementReelle
+retrouve la ligne reelle par le Code (colonne 2, identique dans les deux grilles) pour garder
+TabEquipement.Row synchronise avant tout bouton/menu qui agit dessus. Edition en place de la
+Quantite propagee par TabEquipementAffichageSetEditText (OnSetEditText). Avant de coder,
+cartographie complete des usages de TabEquipement par un sous-agent (~20 procedures dans
+winpersonnage.pas, aucune autre unite n y touche directement) : a permis de choisir cette
+architecture a risque minimal (grille de sauvegarde inchangee) plutot que de reecrire tous les
+handlers. Compile (lazbuild --build-all, 0 erreur) et teste a l ecran par Nono le 25/09/2026 :
+les 5 categories filtrent bien, Confier a.../Fiche/suppression/ajout fonctionnent entre les
+deux grilles. Nouveaux libelles RULES-LAB_286/287 (INTERFACE, INTERFACE_FRANCAIS), les 4 autres
+categories reutilisent RULES-LAB_063/065/064/083 deja existants.
+
 24/09/2026 - SCISSION DE L EQUIPEMENT PAR CATEGORIE, ETAPE 1 (PageExperience). PageExperience
 (10 onglets) convertie de TPageControl a TNotebook pilote par une TListBox laterale
 (ListBoxExperience). TNotebook n a ni ShowTabs ni OnPageChanged publies dans la LCL installee

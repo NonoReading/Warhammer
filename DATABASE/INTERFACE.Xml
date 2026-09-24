@@ -430,6 +430,8 @@
 <Text name="RULES-LAB_283">"Incubation"</Text>
 <Text name="RULES-LAB_284">"Duration"</Text>
 <Text name="RULES-LAB_285">"Symptoms"</Text>
+<Text name="RULES-LAB_286">"Mounts, boats and vehicles"</Text>
+<Text name="RULES-LAB_287">"Other equipment"</Text>
 </Label>
 </DATA_LABEL>
 </DATA_BOOK>

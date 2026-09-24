@@ -1202,9 +1202,32 @@ object WinPersonnages: TWinPersonnages
     ParentFont = False
     RowCount = 1
     TabOrder = 15
-    OnDrawCell = TabDrawCell
-    OnSelectEditor = TabAttributSelectEditor
-    OnSelectCell = TabEquipementSelectCell
+    Visible = False
+  end
+  object ListBoxEquipementCategorie: TListBox
+    Left = 1052
+    Height = 317
+    Top = 649
+    Width = 130
+    Anchors = [akTop, akLeft, akBottom]
+    Color = 15266032
+    ItemHeight = 20
+    TabOrder = 25
+    OnClick = ListBoxEquipementCategorieClick
+  end
+  object TabEquipementAffichage: TStringGrid
+    Left = 1190
+    Height = 317
+    Top = 649
+    Width = 396
+    Anchors = [akTop, akLeft, akBottom]
+    ColCount = 1
+    Font.CharSet = ANSI_CHARSET
+    Font.Pitch = fpVariable
+    Font.Quality = fqDraft
+    ParentFont = False
+    RowCount = 1
+    TabOrder = 26
   end
   object ButtonPdf: TBCButton
     Left = 904
