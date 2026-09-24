@@ -6489,3 +6489,19 @@ si la categorie Montures/Navires/Vehicules est active, meHorsVehicules sinon (Di
 Compile (lazbuild --build-all, 0 erreur) et teste a l'ecran par Nono. Chantier "scission de
 l'equipement par categorie" (etapes 1 a 4) entierement clos.
 Fichiers modifies : winpersonnage.pas, CONTEXT.md, Log.txt.
+
+25/09/2026 - MARQUEUR (Q) "QUALITE A CHOISIR" TRADUIT EN FRANCAIS
+Dernier point ouvert de A FAIRE.txt "VARIANTES (Q)". Decision de Nono avant de coder : le
+marqueur RULES-QUALITY_AJOUT (pose quand un objet de carriere note (Q) est acquis) reste
+volontairement differe - pas de popup de choix de qualite force, ni a la creation ni a
+l'acquisition en jeu : c'est au MJ de decider quand le joueur doit choisir (il peut acheter
+une arme sans pouvoir encore en choisir la qualite). L'idee "choix immediat parmi
+DATA_CRAFTMANSHIP" (chantier 2.77 suite 4) est donc tranchee : ne pas la faire.
+Seul point reellement corrige : ce marqueur n'avait aucune traduction dans
+BOOK_RULESBOOK_FRANCAIS.Xml (WFRP4), s'affichait donc en anglais brut ("Quality to add")
+dans la colonne Fabrication de WinPersonnage meme en interface francaise. Entree
+Craftsmanship RULES-QUALITY_AJOUT ajoutee (Description "Qualite a choisir"). XML seul.
+Compile (lazbuild --build-all, 0 erreur) et valide par Nono. Chantier "VARIANTES (Q)"
+entierement clos.
+Fichiers modifies : DATABASE/WFRP4/BOOK_RULESBOOK_FRANCAIS.Xml, CONTEXT.md, Log.txt,
+A FAIRE.txt.

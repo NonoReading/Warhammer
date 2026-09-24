@@ -17130,6 +17130,13 @@ Si votre adversaire possède une arme avec l’Atout Empaleuse et obtient un Cri
 <Max>"1"</Max>
 <Modifier>""</Modifier>
 </Craftsmanship>
+<Craftsmanship id="RULES-QUALITY_AJOUT">
+<Description language="FRANCAIS">"Qualité à choisir"</Description>
+<Explanation language="FRANCAIS">"Marqueur posé sur un objet acheté ou reçu « de qualité » (équipement de carrière noté (Q)) : le joueur doit encore choisir la Qualité réelle. Il disparaît dès qu’une vraie Fabrication est ajoutée."</Explanation>
+<Short language="FRANCAIS">"qualité à choisir"</Short>
+<Max>"1"</Max>
+<Modifier>""</Modifier>
+</Craftsmanship>
 </DATA_CRAFTMANSHIP>
 <DATA_CORRUPTION_PHYSICAL>
 <Specie name="RULES-RACE_HUM">"01-50"</Specie>
