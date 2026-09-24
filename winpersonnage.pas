@@ -94,7 +94,8 @@ type
     LabTabNiveau: TBCLabel;
     LabTabTalent: TBCLabel;
     MemoMutationEffet: TMemo;
-    PageExperience: TPageControl;
+    PageExperience: TNotebook;
+    ListBoxExperience: TListBox;
     LabelAppartenance: TBCLabel;
     LibAppartenance: TEdit;
     LibMetier: TEdit;
@@ -110,10 +111,10 @@ type
     TabAugmentationMjXp: TStringGrid;
     TabLivre: TStringGrid;
     TabMJXp: TStringGrid;
-    TabSheetMutation: TTabSheet;
-    TabSheetCorruption: TTabSheet;
-    TabSheetMjCost: TTabSheet;
-    TabSheetLivre: TTabSheet;
+    TabSheetMutation: TPage;
+    TabSheetCorruption: TPage;
+    TabSheetMjCost: TPage;
+    TabSheetLivre: TPage;
     TabSort: TStringGrid;
     TabEquipement: TStringGrid;
     TabHistorique: TStringGrid;
@@ -126,12 +127,12 @@ type
     TabCompetence: TStringGrid;
     TabMetierEquipement: TStringGrid;
     TabNiveau: TStringGrid;
-    TabSheetAttribut: TTabSheet;
-    TabSheetCompetence: TTabSheet;
-    TabSheetTalent: TTabSheet;
-    TabSheetXP: TTabSheet;
-    TabSheetEvolution: TTabSheet;
-    TabSheetHistorique: TTabSheet;
+    TabSheetAttribut: TPage;
+    TabSheetCompetence: TPage;
+    TabSheetTalent: TPage;
+    TabSheetXP: TPage;
+    TabSheetEvolution: TPage;
+    TabSheetHistorique: TPage;
     TabTalent: TStringGrid;
     TabAttribut: TStringGrid;
     ToggleBoxGauche: TToggleBox;
@@ -168,6 +169,7 @@ type
   procedure EditHeightKeyPress(Sender: TObject; var Key: char);
   procedure Label1Click(Sender: TObject);
   procedure PageExperienceChange({%H-}Sender: TObject);
+  procedure ListBoxExperienceClick({%H-}Sender: TObject);
   procedure RadioButtonRASChange({%H-}Sender: TObject);
   procedure RadioButtonSuivantChange({%H-}Sender: TObject);
   procedure StaticTextPersonnageClick(Sender: TObject);
@@ -328,7 +330,7 @@ type
   procedure AfficheMutations();
 
   private
-    FCurrentTabSheet: TTabSheet;
+    FCurrentTabSheet: TPage;
     procedure PersonnageVoisinClick(Sender: TObject);
 
   public
@@ -705,7 +707,7 @@ end;
 procedure TWinPersonnages.TabTalentDblClick(Sender: TObject);
 begin
   // ouvrir les Talents
-  FCurrentTabSheet    := PageExperience.ActivePage;
+  FCurrentTabSheet    := TPage(PageExperience.Page[PageExperience.PageIndex]);
   SelectWinTalent     := TabTalent.Cells[ColTalCode, TabTalent.Row];
   FenTalent           := TWintTalent.Create(Application);
   FenTalent.Position  := poOwnerFormCenter;
@@ -2422,6 +2424,11 @@ procedure TWinPersonnages.FormCreate(Sender: TObject);
       end;
 
     KeyPreview := true;
+
+    // PageIndex de depart (5, fixe dans le .lfm) ne declenche pas OnPageChanged tout
+    // seul : synchronise la liste laterale et force le premier repaint de la page
+    // active (meme raison que dans PageExperienceChange).
+    PageExperienceChange(nil);
   end;
 
 // Ferme la fiche et rouvre celle du personnage voisin dans l ordre alphabetique des dossiers
@@ -2472,6 +2479,7 @@ Procedure TWinPersonnages.AfficheImageRace();
     CheminImage1:   String;
     CheminImage2:   String;
     IndTabAttribut: Integer;
+    IndSauve:       Integer;
     PRaceAttribut:  StructureRaceAttribut;
   begin
 
@@ -2553,6 +2561,23 @@ Procedure TWinPersonnages.AfficheImageRace();
     LabelNeedRealXp.Caption                    := GetTexteLibelle('RULES-LAB_132');
     TabSheetLivre.Caption                      := GetTexteLibelle('RULES-LAB_128');
     TabSheetMjCost.Caption                     := GetTexteLibelle('RULES-LAB_140');
+    // ListBoxExperience remplace la bande d'onglets de PageExperience (scission de
+    // l'equipement, 24/09/2026) : reconstruit dans le meme ordre que les pages du
+    // TNotebook (voir winpersonnage.lfm), ItemIndex preserve pour ne pas changer de
+    // page en changeant de langue.
+    IndSauve := ListBoxExperience.ItemIndex;
+    ListBoxExperience.Items.Clear;
+    ListBoxExperience.Items.Add(TabSheetAttribut.Caption);
+    ListBoxExperience.Items.Add(TabSheetCompetence.Caption);
+    ListBoxExperience.Items.Add(TabSheetTalent.Caption);
+    ListBoxExperience.Items.Add(TabSheetXP.Caption);
+    ListBoxExperience.Items.Add(TabSheetEvolution.Caption);
+    ListBoxExperience.Items.Add(TabSheetHistorique.Caption);
+    ListBoxExperience.Items.Add(TabSheetLivre.Caption);
+    ListBoxExperience.Items.Add(TabSheetMjCost.Caption);
+    ListBoxExperience.Items.Add(TabSheetCorruption.Caption);
+    ListBoxExperience.Items.Add(TabSheetMutation.Caption);
+    ListBoxExperience.ItemIndex                := IndSauve;
     LabQuickArmor.Caption                      := GetTexteLibelle('RULES-LAB_149');
     LabAge.Caption                             := GetTexteLibelle('RULES-PDF_MAIN4_AGE');
     LabHeight.Caption                          := GetTexteLibelle('RULES-PDF_MAIN4_HEIGHT');
@@ -4840,7 +4865,11 @@ procedure TWinPersonnages.AjustePositionTables();
     else
       StartTB                 := TabAttribut.left + TabAttribut.Width;
     ToggleBoxDroite.Left      := StartTB + 10;
-    PageExperience.left       := ToggleBoxDroite.Left + 20;
+    ListBoxExperience.Left    := ToggleBoxDroite.Left + 20;
+    // ListBoxExperience remplace la bande d'onglets de PageExperience (scission de
+    // l'equipement, 24/09/2026) : largeur fixe, PageExperience demarre juste apres.
+    ListBoxExperience.Width   := 130;
+    PageExperience.left       := ListBoxExperience.Left + ListBoxExperience.Width + 8;
     // La Largeur doit suivre le Left, sinon le bord droit part hors fenetre quand
     // ToggleBoxDroite.Left grandit (cases de detail Xp/Calcul, Nono le 12/09/2026) -
     // PageExperience garde 20 de marge avec le bord droit du client, comme les autres
@@ -4856,6 +4885,8 @@ procedure TWinPersonnages.AjustePositionTables();
     ButtonSauvegarde.Top      := ButtonAugmentation.Top;
 
     PageExperience.Top        := ButtonAugmentation.Top + ButtonAugmentation.Height + 10;
+    ListBoxExperience.Top     := PageExperience.Top;
+    ListBoxExperience.Height  := PageExperience.Height;
 
     // colonne 4
 
@@ -4924,9 +4955,43 @@ var
   J: Integer;
 begin
   for I := 0 to PageExperience.PageCount  -1 do
-    For J := TTabSheet(PageExperience.PAge[I]).ControlCount - 1 downto 0 do
-      if TTabSheet(PageExperience.Page[I]).Controls[J] is TPanel then
-        TPanel(TTabSheet(PageExperience.Page[I]).Controls[J]).SendToBack;
+    For J := TPage(PageExperience.Page[I]).ControlCount - 1 downto 0 do
+      if TPage(PageExperience.Page[I]).Controls[J] is TPanel then
+        TPanel(TPage(PageExperience.Page[I]).Controls[J]).SendToBack;
+  // Synchronise la liste laterale sur la page reellement active (PageIndex change
+  // aussi par du code, pas seulement par clic dans la liste - CodesFittingGrille etc.
+  // n'existent pas ici, mais d'autres ecrans font PageExperience.PageIndex := ... direct).
+  if ListBoxExperience.ItemIndex <> PageExperience.PageIndex then
+    ListBoxExperience.ItemIndex := PageExperience.PageIndex;
+  // TNotebook (contrairement a TPageControl) est un TCustomControl "fait main" qui
+  // bascule Visible sur ses pages au lieu d'un vrai controle a onglets Windows - les
+  // controles natifs (RadioButton...) de la page qui redevient visible ratent parfois
+  // leur premier repaint (texte absent jusqu'a un redessin force). Invalidation forcee
+  // de la page active et de ses enfants pour eviter d'avoir a "refaire l'affichage"
+  // a la main (24/09/2026, scission de l'equipement par categorie).
+  // ECHEC : n'a pas resolu le texte invisible (RadioButtonRAS/Suivant/Changer,
+  // page Evolution) - teste par Nono le 24/09/2026 au soir, symptome inchange.
+  if (PageExperience.PageIndex >= 0) and (PageExperience.PageIndex < PageExperience.PageCount) then
+    begin
+      for J := TPage(PageExperience.Page[PageExperience.PageIndex]).ControlCount - 1 downto 0 do
+        if TPage(PageExperience.Page[PageExperience.PageIndex]).Controls[J] is TControl then
+          TControl(TPage(PageExperience.Page[PageExperience.PageIndex]).Controls[J]).Invalidate;
+      TPage(PageExperience.Page[PageExperience.PageIndex]).Invalidate;
+    end;
+end;
+
+procedure TWinPersonnages.ListBoxExperienceClick(Sender: TObject);
+begin
+  // TNotebook n'a pas d'evenement OnPageChanged publie dans cette LCL (OnChange y est
+  // commente dans extctrls.pp) : PageExperienceChange ne se declenche pas tout seul au
+  // changement de PageIndex, contrairement a TPageControl.OnChange - appel direct,
+  // necessaire pour la synchro de la liste ET le repaint force (24/09/2026).
+  // ECHEC egalement (voir PageExperienceChange ci-dessus) : symptome inchange.
+  if (ListBoxExperience.ItemIndex >= 0) and (ListBoxExperience.ItemIndex <> PageExperience.PageIndex) then
+    begin
+      PageExperience.PageIndex := ListBoxExperience.ItemIndex;
+      PageExperienceChange(Self);
+    end;
 end;
 
 procedure TWinPersonnages.RadioButtonRASChange(Sender: TObject);

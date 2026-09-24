@@ -40,6 +40,26 @@ choisie, meme solution appliquee a l'Equipement, mecanisme de filtrage par Type 
 premiere categorie scindee, puis Armes/Armures/Divers plus tard sans tout refaire ; (3) le
 "Confier a..."/double-clic Fiche/etc. doivent continuer a fonctionner entre deux grilles
 separees (un Divers confie a une monture qui n'est plus dans le meme tableau).
+[ETAPE 1 FAITE ET VALIDEE PAR NONO LE 24/09/2026 AU SOIR - PageExperience] Remplacement de
+PageExperience (TPageControl a 10 onglets) par un TNotebook pilote par une TListBox laterale
+(ListBoxExperience) : la liste choisit la page (Attribut/Competence/Talents/XP/Evolution/
+Historique/Livre/MjCost/Corruption/Mutation). TNotebook n'a NI ShowTabs NI OnPageChanged
+publies dans cette LCL (verifie dans C:\lazarus\lcl\extctrls.pp) - proprietes retirees du
+.lfm par Nono pour compiler (avec Caption/ClientHeight/ClientWidth des pages, non necessaires :
+Caption est reaffecte par code dans AfficheImageRace, ClientHeight/Width sont geres par
+TNotebook). Symptome bloquant rencontre puis RESOLU PAR NONO : texte des controles (ex.
+RadioButtonRAS/Suivant/Changer) invisible sur fond noir - fausses pistes explorees sans succes
+(repaint force/Invalidate, cablage direct de l'evenement de changement de page). Cause reelle,
+bien plus simple : couleur de fond de ListBoxExperience (le "selecteur") a regler explicitement
+(Color, mis par Nono via l'IDE - proche de clNone/couleur du theme, valeur numerique
+15266032 dans le .lfm) plutot que de laisser le noir de fond du Form (Color = clBlack)
+transparaitre. Lecon retenue : verifier la couleur d'abord, avant de partir sur des pistes
+d'evenements/repaint. Chantier "scission de l'equipement par categorie" : ETAPE 1 (desencombrer
+PageExperience) close. RESTE ETAPE 2 : meme mecanisme liste+panneau, generalise avec un filtre
+par Type (pas un TPageControl/TNotebook a categories codees en dur), applique a TabEquipement
+pour scinder Montures/Navires du reste (Armes/Armures/Divers/Sorts/Vehicules) - voir
+CONTEXT.md. Le "Confier a..."/double-clic Fiche doivent continuer a fonctionner entre grilles
+separees.
 
 [VARIANTES (Q)] Faites et validees (Log.txt 19/09). RESTE : marqueur encore ecrit "Quality to add" dans le bloc Fabrication des armes/armures, doublon avec le suffixe "de qualite" du catalogue ; idee a revoir : (Q) = choix de qualite a la creation parmi DATA_CRAFTMANSHIP (CONTEXT.md 2.77 suite 4, chantier pause). Non rattaches : clothes(Q), cape(Q), luxurious costume (Q), elegant clothes (Q) (au cas par cas).
 

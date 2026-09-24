@@ -1,3 +1,14 @@
+24/09/2026 - SCISSION DE L EQUIPEMENT PAR CATEGORIE, ETAPE 1 (PageExperience). PageExperience
+(10 onglets) convertie de TPageControl a TNotebook pilote par une TListBox laterale
+(ListBoxExperience). TNotebook n a ni ShowTabs ni OnPageChanged publies dans la LCL installee
+(verifie dans le source C:\lazarus\lcl\extctrls.pp) : proprietes retirees du .lfm pour
+compiler, ainsi que Caption/ClientHeight/ClientWidth des pages (non necessaires, geres par
+ailleurs). Texte de certains controles enfants invisible sur fond noir en test : deux fausses
+pistes (repaint force, cablage direct de l evenement de page) avant que Nono trouve la vraie
+cause, plus simple - couleur de fond de ListBoxExperience a regler explicitement. Resolu et
+valide par Nono. Etape 2 (meme mecanisme sur TabEquipement, filtre par Type) reste a faire,
+voir A FAIRE.txt et CONTEXT.md.
+
 24/09/2026 - AMENAGEMENTS DE BATEAU, CALCUL DE L EFFET SUR LE PROFIL - CHANTIER CLOS. Les 4
 deltas codes (Fore-and-Aft Rudder deja valide, puis Smoothing et Armoured/Sturdy) testes et
 valides par Nono sur un bateau du catalogue (M/T/W corrects sur la fiche). Water Brakes et

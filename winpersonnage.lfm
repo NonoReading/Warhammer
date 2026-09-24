@@ -282,20 +282,38 @@ object WinPersonnages: TWinPersonnages
     ParentColor = False
     ParentFont = False
   end
-  object PageExperience: TPageControl
+  object ListBoxExperience: TListBox
     Left = 1072
     Height = 368
     Top = 128
-    Width = 665
-    ActivePage = TabSheetHistorique
+    Width = 130
     Anchors = [akTop, akLeft, akRight]
-    TabIndex = 5
+    Color = 15266032
+    Items.Strings = (
+      'Attribut'
+      'Compétence'
+      'Talents'
+      'Total expérience'
+      'Evolution'
+      'Historique'
+      'Livre'
+      'Xp MJ'
+      'Corruption'
+      'Mutation'
+    )
+    ItemHeight = 20
+    TabOrder = 24
+    OnClick = ListBoxExperienceClick
+  end
+  object PageExperience: TNotebook
+    Left = 1210
+    Height = 368
+    Top = 128
+    Width = 665
+    PageIndex = 4
+    Anchors = [akTop, akLeft, akRight]
     TabOrder = 10
-    OnChange = PageExperienceChange
-    object TabSheetAttribut: TTabSheet
-      Caption = 'Attribut'
-      ClientHeight = 335
-      ClientWidth = 657
+    object TabSheetAttribut: TPage
       object TabAugmentationAttribut: TStringGrid
         Left = 16
         Height = 308
@@ -314,10 +332,7 @@ object WinPersonnages: TWinPersonnages
         OnSelectCell = TabAugmentationAttributSelectCell
       end
     end
-    object TabSheetCompetence: TTabSheet
-      Caption = 'Compétence'
-      ClientHeight = 335
-      ClientWidth = 657
+    object TabSheetCompetence: TPage
       object TabAugmentationCompetence: TStringGrid
         Left = 16
         Height = 272
@@ -337,10 +352,7 @@ object WinPersonnages: TWinPersonnages
         OnSelectCell = TabAugmentationCompetenceSelectCell
       end
     end
-    object TabSheetTalent: TTabSheet
-      Caption = 'Talents'
-      ClientHeight = 335
-      ClientWidth = 657
+    object TabSheetTalent: TPage
       object TabAugmentationTalent: TStringGrid
         Left = 16
         Height = 152
@@ -370,10 +382,7 @@ object WinPersonnages: TWinPersonnages
         OnSelectEditor = TabAttributSelectEditor
       end
     end
-    object TabSheetXP: TTabSheet
-      Caption = 'Total expérience'
-      ClientHeight = 335
-      ClientWidth = 657
+    object TabSheetXP: TPage
       object CheckBoxXpDiv25: TCheckBox
         Left = 8
         Height = 20
@@ -418,10 +427,7 @@ object WinPersonnages: TWinPersonnages
         OnKeyUp = EditTotalXpKeyUp
       end
     end
-    object TabSheetEvolution: TTabSheet
-      Caption = 'Evolution'
-      ClientHeight = 335
-      ClientWidth = 657
+    object TabSheetEvolution: TPage
       object RadioGroupEvolution: TRadioGroup
         Left = 8
         Height = 88
@@ -438,7 +444,9 @@ object WinPersonnages: TWinPersonnages
         ChildSizing.ControlsPerLine = 1
         ClientHeight = 63
         ClientWidth = 227
+        Color = 15266032
         ParentBackground = False
+        ParentColor = False
         TabOrder = 0
         object RadioButtonRAS: TRadioButton
           Left = 6
@@ -471,7 +479,7 @@ object WinPersonnages: TWinPersonnages
       object TabMetierEquipement: TStringGrid
         Left = 16
         Height = 172
-        Top = 160
+        Top = 200
         Width = 180
         Anchors = [akTop, akLeft, akRight]
         ColCount = 1
@@ -662,7 +670,7 @@ object WinPersonnages: TWinPersonnages
       object TabAvancement: TStringGrid
         Left = 328
         Height = 200
-        Top = 128
+        Top = 160
         Width = 200
         AutoEdit = False
         ColCount = 1
@@ -674,7 +682,7 @@ object WinPersonnages: TWinPersonnages
       object ComboBoxNvMetier: TComboBox
         Left = 8
         Height = 28
-        Top = 104
+        Top = 160
         Width = 256
         ItemHeight = 20
         Style = csDropDownList
@@ -683,10 +691,7 @@ object WinPersonnages: TWinPersonnages
         OnChange = ComboBoxNvMetierChange
       end
     end
-    object TabSheetHistorique: TTabSheet
-      Caption = 'Historique'
-      ClientHeight = 335
-      ClientWidth = 657
+    object TabSheetHistorique: TPage
       object TabHistorique: TStringGrid
         Left = 16
         Height = 296
@@ -790,10 +795,7 @@ object WinPersonnages: TWinPersonnages
         MemoryUsage = bmuHigh
       end
     end
-    object TabSheetLivre: TTabSheet
-      Caption = 'Livre'
-      ClientHeight = 335
-      ClientWidth = 657
+    object TabSheetLivre: TPage
       object TabLivre: TStringGrid
         Left = 16
         Height = 300
@@ -810,10 +812,7 @@ object WinPersonnages: TWinPersonnages
         OnDblClick = TabLivreDblClick
       end
     end
-    object TabSheetMjCost: TTabSheet
-      Caption = 'Xp MJ'
-      ClientHeight = 335
-      ClientWidth = 657
+    object TabSheetMjCost: TPage
       OnContextPopup = TabSheetMjCostContextPopup
       object TabAugmentationMjXp: TStringGrid
         Left = 16
@@ -830,10 +829,7 @@ object WinPersonnages: TWinPersonnages
         TabOrder = 0
       end
     end
-    object TabSheetCorruption: TTabSheet
-      Caption = 'Corruption'
-      ClientHeight = 335
-      ClientWidth = 657
+    object TabSheetCorruption: TPage
       object StringGridCorruption: TStringGrid
         Left = 16
         Height = 270
@@ -1126,10 +1122,7 @@ object WinPersonnages: TWinPersonnages
         MemoryUsage = bmuHigh
       end
     end
-    object TabSheetMutation: TTabSheet
-      Caption = 'TabSheetMutation'
-      ClientHeight = 335
-      ClientWidth = 657
+    object TabSheetMutation: TPage
       object TabMutation: TStringGrid
         Left = 16
         Height = 144
