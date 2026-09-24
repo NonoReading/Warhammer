@@ -302,19 +302,19 @@ Rulebook V5 donne un petit equipement de depart par Classe (Burgher, Warrior...)
 celui du metier - rien dans DATA_CAREER ne porte ca aujourd'hui (Class n'est qu'un filtre).
 A voir si on l'ajoute quand on peuplera le catalogue V5, sinon negligeable.
 
-[AJOUT LE 23/09/2026, FORE-AND-AFT RUDDER TESTE ET VALIDE PAR NONO LE 24/09/2026 - SMOOTHING/
-ARMOURED/STURDY RESTENT A TESTER] AMENAGEMENTS DE BATEAU : CALCUL DE L'EFFET SUR LE NAVIRE.
-Bug corrige en cours de test (24/09/2026) : les colonnes du profil de bateau ne sont PAS de
-simples entiers ("12 (30)", "-", "4 (vapeur)"...) - StrToIntDef transformait a tort un "-" (pas
-de voile sur un bateau a rames) en 0, donnant un M errone apres le malus du Fore-and-Aft Rudder
-sur un Fishing Skiff. Corrige (chargetrapping.pas, AjusteValeurEnTete/AjusteValeurProportionnelle
-: n'ajustent que le nombre en tete, preservent tout suffixe, ignorent les colonnes non-numeriques)
-et la cible du modificateur simplifiee a une seule "M" (au lieu de "MSAIL"/"MOAR" separees, le
-livre ne precisant pas laquelle : applique aux deux colonnes, sans effet sur celle qui vaut "-").
-Fore-and-Aft Rudder sur Fishing Skiff (M Sail "4(-)", M Oar "6(8)") reteste par Nono apres
-correction : -1 sur les deux -> "3(-)"/"5(8)", VALIDE. RESTE A TESTER : Smoothing (M+1 sur un
-bateau a voile ET a rames), et Armoured/Sturdy sur un bateau du catalogue qui les porte deja
-(Wolfship, Greatship de Sea of Claws).
+[AJOUT LE 23/09/2026, FAIT ET VALIDE PAR NONO LE 24/09/2026 - CHANTIER CLOS] AMENAGEMENTS DE
+BATEAU : CALCUL DE L'EFFET SUR LE NAVIRE. Bug corrige en cours de test (24/09/2026) : les
+colonnes du profil de bateau ne sont PAS de simples entiers ("12 (30)", "-", "4 (vapeur)"...) -
+StrToIntDef transformait a tort un "-" (pas de voile sur un bateau a rames) en 0, donnant un M
+errone apres le malus du Fore-and-Aft Rudder sur un Fishing Skiff. Corrige (chargetrapping.pas,
+AjusteValeurEnTete/AjusteValeurProportionnelle : n'ajustent que le nombre en tete, preservent
+tout suffixe, ignorent les colonnes non-numeriques) et la cible du modificateur simplifiee a une
+seule "M" (au lieu de "MSAIL"/"MOAR" separees, le livre ne precisant pas laquelle : applique aux
+deux colonnes, sans effet sur celle qui vaut "-"). Fore-and-Aft Rudder sur Fishing Skiff (M Sail
+"4(-)", M Oar "6(8)") reteste par Nono apres correction : -1 sur les deux -> "3(-)"/"5(8)",
+VALIDE. Smoothing (M+1 sur un bateau a voile ET a rames) et Armoured/Sturdy (T/W sur un bateau
+du catalogue qui les porte deja) TESTES ET VALIDES PAR NONO le 24/09/2026. Les 4 deltas codes
+sont donc tous testes.
 Audit des deux livres
 (sous-agent, 24/09/2026) : sur les 76 entrees + traits deja catalogues, SEULEMENT 7 sont un vrai
 delta chiffrable de profil (Crew/M/Man/Size/T/W) - tout le reste (Broad Rudder, Armoured Walls,
@@ -347,9 +347,9 @@ BoatProfilCalcule (chargetrapping.pas) : part du ProfilBateau de base, ajoute Ar
 dans TraitsAnimal, ajoute les ModifBoat des amenagements confies. Nouvelle fonction
 CodesFittingGrille (winpersonnage.pas), calquee sur ChargeAnimalGrille. winanimal.pas affiche le
 profil CALCULE (BoatProfilCalcule) au lieu du profil brut, sur la fiche bateau (bouton Fiche de
-WinEquipement, double-clic de WinPersonnage). A TESTER PAR NONO : attacher un Fore-and-Aft
-Rudder ou une Smoothing a un bateau, verifier le M affiche sur la fiche ; verifier T/W d'un
-bateau du catalogue portant Armoured/Sturdy (ex. le Wolfship ou un Greatship de Sea of Claws).
+WinEquipement, double-clic de WinPersonnage). TESTE ET VALIDE PAR NONO le 24/09/2026 : Fore-and-
+Aft Rudder, Smoothing et Armoured/Sturdy tous verifies sur la fiche (M/T/W corrects). CHANTIER
+CLOS.
 
 =========================================================================
 EN VRAC  (ancien, non trie)

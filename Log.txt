@@ -1,3 +1,9 @@
+24/09/2026 - AMENAGEMENTS DE BATEAU, CALCUL DE L EFFET SUR LE PROFIL - CHANTIER CLOS. Les 4
+deltas codes (Fore-and-Aft Rudder deja valide, puis Smoothing et Armoured/Sturdy) testes et
+valides par Nono sur un bateau du catalogue (M/T/W corrects sur la fiche). Water Brakes et
+Steam/Steam Engine restent hors moteur (decision deja actee, effet non chiffrable en delta
+fixe). Rien de plus a coder sur ce chantier.
+
 24/09/2026 - AMENAGEMENTS DE BATEAU, CALCUL DE L EFFET SUR LE PROFIL (COMPILE, A TESTER PAR
 NONO). Audit par sous-agent des deux livres (Death on the Reik Companion + Sea of Claws) :
 seuls 7 aupres des 76 amenagements/traits sont un vrai delta chiffrable de profil (Crew/M/Man/
