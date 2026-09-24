@@ -514,6 +514,12 @@ var
 
   FabAjoute:    Boolean = false;
 
+  // Fiche affichee = version courante du personnage (true) ou un instantane de l'historique,
+  // en lecture seule (false, TabHistorique.Cells[0,1] <> ConstSelectionne). Lu par
+  // RafraichitTabEquipementAffichage pour ne pas reafficher les boutons d'ajout/action sur un
+  // instantane, en plus du filtre par categorie (25/09/2026).
+  EquipementModifiable: Boolean = true;
+
   Personnage:                 StructurePersonnage;
   PersonnageMetier:           StructurePersonnageMetier;
   PersonnageAttribut:         StructurePersonnageAttribut;
@@ -3981,22 +3987,11 @@ begin
       TabHistorique.Cells[0, Ind] := ConstSelectionne
     else
       TabHistorique.Cells[0, Ind] := '';
-  if TabHistorique.Cells[0, 1] = ConstSelectionne then
-    begin
-      ButtonAugmentation.Visible := true;
-      ButtonArme.Visible := true;
-      ButtonArmure.Visible := true;
-      ButtonSort.Visible := true;
-      ButtonEquipement.Visible := true;
-    end
-  else
-    begin
-      ButtonAugmentation.Visible := false;
-      ButtonArme.Visible := false;
-      ButtonArmure.Visible := false;
-      ButtonSort.Visible := false;
-      ButtonEquipement.Visible := false;
-    end;
+  ButtonAugmentation.Visible := (TabHistorique.Cells[0, 1] = ConstSelectionne);
+  // Boutons d'ajout/action d'equipement : combine ce meme critere (lecture seule sur un
+  // instantane de l'historique) avec le filtre par categorie de ListBoxEquipementCategorie.
+  EquipementModifiable := (TabHistorique.Cells[0, 1] = ConstSelectionne);
+  RafraichitTabEquipementAffichage();
   ToggleBoxGauche.left := ToggleBoxGauche.left + 1;
   AjustePositionTables();
   AfficheFabrication();
@@ -4946,7 +4941,7 @@ procedure TWinPersonnages.AjustePositionTables();
     // Liste de categories + grille d'affichage filtree (CONTEXT.md etape 2) : meme agencement
     // que ListBoxExperience/PageExperience, a l'emplacement de l'ancien TabEquipement (desormais
     // masque, cf. commentaire a son affectation OnSelectEditor plus haut).
-    ListBoxEquipementCategorie.Left    := TabEquipement.Left;
+    ListBoxEquipementCategorie.Left    := ListBoxExperience.Left;
     ListBoxEquipementCategorie.Top     := TabEquipement.Top;
     ListBoxEquipementCategorie.Width   := 130;
     ListBoxEquipementCategorie.Height  := TabEquipement.Height;
@@ -5173,6 +5168,31 @@ procedure TWinPersonnages.RafraichitTabEquipementAffichage();
           TabEquipementAffichage.RowCount := IndAffiche + 1;
           TabEquipementAffichage.Rows[IndAffiche].Assign(TabEquipement.Rows[Ligne]);
         end;
+
+    // Largeur des colonnes ajustee au contenu REELLEMENT affiche (la categorie filtree),
+    // pas a TabEquipement (masque, toujours complet : ses largeurs, recalculees par
+    // AdjustGridColumnsWidth a chaque ajout/suppression, ne correspondent plus a ce qui est
+    // visible depuis la scission par categorie du 25/09/2026 - copiees telles quelles ci-dessus,
+    // elles restent celles du dernier ajout, pas celles de la categorie choisie). AutoSizeColumn
+    // ne touche que la largeur de la colonne, jamais celle de la grille (contrainte par
+    // l'ancrage proportionnel, ancrageproportionnel.pas) - colonnes cachees (largeur 0,
+    // Code/Fabrication/Id/PortePar) inchangees.
+    for Col := 1 to TabEquipementAffichage.ColCount - 1 do
+      if TabEquipementAffichage.ColWidths[Col] <> 0 then
+        TabEquipementAffichage.AutoSizeColumn(Col);
+
+    // Boutons d'ajout/action visibles seulement s'ils ont une utilite dans la categorie
+    // affichee (meme decoupage que CategorieEquipementLigne). ButtonEquipement (+Equipment,
+    // catalogue DATA_TRAPPING) sert aussi bien aux Divers qu'aux Montures/Navires/Vehicules,
+    // qui s'ajoutent par ce meme bouton (ils sont retypes AN au chargement, cf. CONTEXT.md).
+    ButtonArme.Visible        := EquipementModifiable and (Categorie = 1);
+    ButtonArmure.Visible      := EquipementModifiable and (Categorie = 2);
+    ButtonEquipement.Visible  := EquipementModifiable and ((Categorie = 0) or (Categorie = 3));
+    ButtonSort.Visible        := EquipementModifiable and (Categorie = 4);
+    // Fabrication et Suppression ne s'appliquent jamais a un sort (ButtonFabricationClick/
+    // ButtonDeleteClick le refusent deja par le test TalentSort).
+    ButtonFabrication.Visible := EquipementModifiable and (Categorie <> 4);
+    ButtonDelete.Visible      := EquipementModifiable and (Categorie <> 4);
   end;
 
 procedure TWinPersonnages.ListBoxEquipementCategorieClick(Sender: TObject);

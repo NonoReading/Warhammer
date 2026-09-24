@@ -6457,3 +6457,22 @@ IV, V, VI, VII, VIII, IX, XI tous audites, tous les ecarts trouves sont saisis).
 Fichiers modifies : chargeclassequipement.pas (nouveau), xmlexportimport.pas,
 warhammersource.pas, wincreation.pas, DATABASE/WFRP4/BOOK_RULESBOOK.Xml,
 CONTEXT.md, A FAIRE.txt, Log.txt.
+
+25/09/2026 - SCISSION DE L'EQUIPEMENT PAR CATEGORIE, ETAPE 3 - BOUTONS CONTEXTUELS ET
+LARGEUR DES COLONNES
+Suite de l'etape 2 (WinPersonnage, grille d'equipement filtree par ListBoxEquipementCategorie).
+Deux finitions demandees par Nono, testees et validees a l'ecran :
+(1) Boutons ButtonArme/ButtonArmure/ButtonEquipement/ButtonSort (ajout) et
+ButtonFabrication/ButtonDelete (action) masques quand ils n'ont pas de sens dans la
+categorie affichee. Piege trouve en testant l'ouverture de la fenetre : un bloc de la
+fonction de chargement du personnage (affichage d'un instantane d'historique en lecture
+seule) reecrivait Visible en bloc par-dessus, sans notion de categorie - remplace par un
+flag global EquipementModifiable, croise avec le filtre de categorie.
+(2) Largeur des colonnes de TabEquipementAffichage (grille visible) : copiee telle quelle
+depuis TabEquipement (grille masquee, toujours complete), qui n'est jamais dimensionnee
+pour la seule categorie filtree - colonnes figees sur le dernier calcul, sans rapport avec
+le contenu reellement affiche. Corrige par un appel direct a AutoSizeColumn sur chaque
+colonne visible de TabEquipementAffichage, apres remplissage des lignes filtrees.
+Compile (lazbuild --build-all, 0 erreur). Chantier "scission de l'equipement par categorie"
+entierement clos.
+Fichiers modifies : winpersonnage.pas, CONTEXT.md, Log.txt.
