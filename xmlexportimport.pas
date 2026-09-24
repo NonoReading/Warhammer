@@ -2856,6 +2856,25 @@ Procedure XmlImport(FileName: String; OnlyPrimary: Boolean; OnlyCode: Boolean; C
                               PTrapping.Localite      := RemoveQuotes(UTF8Encode(Node.TextContent));
                             ConstXmlSaison:
                               PTrapping.Saison        := RemoveQuotes(UTF8Encode(Node.TextContent));
+                            // <ModifBoat name="MSAIL">-1</ModifBoat> : effet chiffrable d'un
+                            // amenagement de bateau sur le profil (Fore-and-Aft Rudder,
+                            // Smoothing...). Meme moule que ModifArmour/ModifyCarac (fabrication).
+                            // 24/09/2026, chantier "AMENAGEMENTS DE BATEAU".
+                            ConstXmlModifieBateau:
+                              begin
+                                PFabricationModificateur.TypeModif  := Node.NodeName;
+                                PFabricationModificateur.Cible      := RemoveQuotes(UTF8Encode(Node.Attributes.GetNamedItem(ConstXmlData).NodeValue));
+                                PFabricationModificateur.Filtre     := '';
+                                PFabricationModificateur.Forme      := ConstFormeEffetAdditif;
+                                PFabricationModificateur.Facteur    := StrToIntDef(RemoveQuotes(UTF8Encode(Node.TextContent)), 0);
+                                PFabricationModificateur.CodeSource := PTrapping.CodeTrapping;
+                                PFabricationModificateur.Niveau     := 0;
+                                if LangueDef = ConstAnglais then
+                                  begin
+                                    ListFabricationModificateur.add(PFabricationModificateur);
+                                    inc(NbFabricationModificateur);
+                                  end;
+                              end;
                           end;
 
                           Node := XmlElement(Node.NextSibling);

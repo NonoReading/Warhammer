@@ -11,7 +11,10 @@ uses
 // Fiche d'un animal, d'une monture ou d'un bateau (profil M a W, ou Crew a W pour un
 // bateau, traits, capacite, prix, disponibilite). Formulaire construit en code : pas de .lfm.
 // Charge : encombrement deja confie a cet animal (-1 = inconnu, rien d'affiche).
-procedure AfficheFicheAnimal(PTrapping: StructureTrapping; Charge: Integer = -1);
+// ListeFittings (bateau uniquement) : codes des amenagements confies, format
+// "CODE niveau,CODE niveau" (ChercheFabrication) - le profil affiche est alors calcule
+// (BoatProfilCalcule), pas le profil brut du catalogue. 24/09/2026.
+procedure AfficheFicheAnimal(PTrapping: StructureTrapping; Charge: Integer = -1; ListeFittings: String = '');
 
 implementation
 
@@ -75,7 +78,7 @@ begin
     end;
 end;
 
-procedure AfficheFicheAnimal(PTrapping: StructureTrapping; Charge: Integer);
+procedure AfficheFicheAnimal(PTrapping: StructureTrapping; Charge: Integer; ListeFittings: String);
 var
   Fiche:   TForm;
   Grille:  TStringGrid;
@@ -112,7 +115,7 @@ begin
           end
         else if PTrapping.ProfilBateau <> '' then
           begin
-            Valeurs := PTrapping.ProfilBateau.Split([';']);
+            Valeurs := BoatProfilCalcule(PTrapping, ListeFittings).Split([';']);
             NbCol   := 7;
           end
         else

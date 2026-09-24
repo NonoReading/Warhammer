@@ -648,24 +648,28 @@ Skills: gain Beast Tongue but lose the ability to speak intelligibly in any othe
 <Theme>"RULES-LAB_196"</Theme>
 <Price>"8CO"</Price>
 <Encumbrance>"35"</Encumbrance>
+<ModifBoat name="M">-1</ModifBoat>
 </Trapping>
 <Trapping id="DEATH-TRAP_27">
 <Description language="ENGLISH">"Fore-and-Aft Rudder (Fishing Skiff)"</Description>
 <Theme>"RULES-LAB_196"</Theme>
 <Price>"30CO"</Price>
 <Encumbrance>"35"</Encumbrance>
+<ModifBoat name="M">-1</ModifBoat>
 </Trapping>
 <Trapping id="DEATH-TRAP_28">
 <Description language="ENGLISH">"Fore-and-Aft Rudder (Typical Barge or Patrol Boat)"</Description>
 <Theme>"RULES-LAB_196"</Theme>
 <Price>"60CO"</Price>
 <Encumbrance>"55"</Encumbrance>
+<ModifBoat name="M">-1</ModifBoat>
 </Trapping>
 <Trapping id="DEATH-TRAP_29">
 <Description language="ENGLISH">"Fore-and-Aft Rudder (Large Barge)"</Description>
 <Theme>"RULES-LAB_196"</Theme>
 <Price>"120CO"</Price>
 <Encumbrance>"95"</Encumbrance>
+<ModifBoat name="M">-1</ModifBoat>
 </Trapping>
 <Trapping id="DEATH-TRAP_30">
 <Description language="ENGLISH">"Water Brakes (Row Boat)"</Description>

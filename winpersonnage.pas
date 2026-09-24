@@ -310,6 +310,7 @@ type
   function LigneEstAnimal(Ligne: Integer): Boolean;
   function EquipementDeLigne(Ligne: Integer): StructurePersonnageEquipement;
   function ChargeAnimalGrille(IdAnimal: String): Integer;
+  function CodesFittingGrille(IdAnimal: String): String;
   function CapaciteAnimalGrille(IdAnimal: String): Integer;
   procedure AvertitSurcharge(IdAnimal: String);
   function XpSortCout(CodeSort: String): String;
@@ -4981,7 +4982,12 @@ procedure TWinPersonnages.TabEquipementDblClick(Sender: TObject);
         AttribueIdAnimaux;
         AfficheFicheAnimal(PTrapping, ChargeAnimalGrille(TabEquipement.Cells[10, TabEquipement.Row]));
       end
-    else if (PTrapping.ProfilBateau <> '') or (PTrapping.ProfilVehicule <> '') then
+    else if PTrapping.ProfilBateau <> '' then
+      begin
+        AttribueIdAnimaux;
+        AfficheFicheAnimal(PTrapping, -1, CodesFittingGrille(TabEquipement.Cells[10, TabEquipement.Row]));
+      end
+    else if PTrapping.ProfilVehicule <> '' then
       AfficheFicheAnimal(PTrapping);
   end;
 
@@ -5064,6 +5070,25 @@ function TWinPersonnages.ChargeAnimalGrille(IdAnimal: String): Integer;
     for Ligne := 1 to TabEquipement.RowCount - 1 do
       if TabEquipement.Cells[11, Ligne] = IdAnimal then
         Result := Result + PdfEquipementEncombrementBrut(EquipementDeLigne(Ligne));
+  end;
+
+// Codes des amenagements confies au bateau IdAnimal (lus dans la grille), format
+// "CODE niveau,CODE niveau" attendu par FabricationModificateurQualite. Niveau force a 1
+// (present/absent) quelle que soit la quantite achetee : Smoothing se paie "par 5 yards
+// de Size" (plusieurs unites pour couvrir tout le bateau) mais son effet (M+1) ne se
+// cumule pas avec le nombre d'unites - meme logique pour tout autre amenagement. 24/09/2026.
+function TWinPersonnages.CodesFittingGrille(IdAnimal: String): String;
+  var
+    Ligne: Integer;
+  begin
+    Result := '';
+    if IdAnimal = '' then exit;
+    for Ligne := 1 to TabEquipement.RowCount - 1 do
+      if TabEquipement.Cells[11, Ligne] = IdAnimal then
+        begin
+          if Result <> '' then Result := Result + ',';
+          Result := Result + TabEquipement.Cells[2, Ligne] + ' 1';
+        end;
   end;
 
 function TWinPersonnages.CapaciteAnimalGrille(IdAnimal: String): Integer;

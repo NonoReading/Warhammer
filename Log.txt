@@ -1,3 +1,46 @@
+24/09/2026 - AMENAGEMENTS DE BATEAU, CALCUL DE L EFFET SUR LE PROFIL (COMPILE, A TESTER PAR
+NONO). Audit par sous-agent des deux livres (Death on the Reik Companion + Sea of Claws) :
+seuls 7 aupres des 76 amenagements/traits sont un vrai delta chiffrable de profil (Crew/M/Man/
+Size/T/W), le reste (bonus de test, couverture, AP de coque) reste hors perimetre par decision
+de Nono (24/09, meme logique que le 20/09). Sur ces 7, 4 codes : Fore-and-Aft Rudder (M -1,
+DEATH-TRAP_26 a _29), Smoothing (M +1 voile et rames, SEAOF-TRAP_052/_053), Armoured (T +10 par
+niveau, trait deja catalogue) et Sturdy (W +30% par niveau, trait deja catalogue). Water Brakes
+(effet temporaire a l usage, pas un delta permanent) et Steam/Steam Engine (incoherent entre les
+deux livres, l un sans wind a simuler, l autre en valeur absolue) laisses de cote.
+Nouveau TypeModif ModifBoat (chargeconstantes.pas), meme moule que ModifArmour/ModifyCarac
+(ChargeModificateur) : parse sur DATA_TRAPPING (xmlexportimport.pas), somme via
+FabricationModificateurQualite (chargefabrication.pas) deja existant - aucun nouveau moteur de
+calcul, juste une nouvelle cible sur le moteur generique. Nouvelle fonction BoatProfilCalcule
+(chargetrapping.pas) : ProfilBateau de base + Armoured/Sturdy lus dans TraitsAnimal + ModifBoat
+des amenagements confies au bateau. Nouvelle fonction CodesFittingGrille (winpersonnage.pas),
+calquee sur ChargeAnimalGrille - niveau force a 1 (present/absent) quelle que soit la quantite
+achetee, Smoothing se vendant "par 5 yards de Size" sans cumul d effet. winanimal.pas affiche
+desormais le profil CALCULE, plus le profil brut du catalogue.
+Compile (lazbuild --build-all, 0 erreur).
+BUG TROUVE ET CORRIGE EN TESTANT (24/09/2026) : les colonnes du profil de bateau ne sont pas de
+simples entiers ("12 (30)", "-", "4 (vapeur)"), StrToIntDef transformait a tort un "-" (bateau
+sans voile) en 0 - le Fore-and-Aft Rudder sur un Fishing Skiff (M Sail "4(-)") donnait "-1" au
+lieu de laisser "-" inchange. Corrige : deux nouvelles fonctions AjusteValeurEnTete/
+AjusteValeurProportionnelle (chargetrapping.pas) qui n'ajustent que le nombre en tete de chaque
+colonne et preservent tout suffixe ; cible du modificateur simplifiee a une seule "M" (au lieu de
+MSAIL/MOAR separees, le livre ne precisant pas laquelle) appliquee aux deux colonnes M voile/M
+rames, sans effet sur celle qui vaut "-".
+FORE-AND-AFT RUDDER RETESTE ET VALIDE PAR NONO LE 24/09/2026 (Fishing Skiff, M Sail "4(-)"/M Oar
+"6(8)" -> "3(-)"/"5(8)" apres attache). RESTE A TESTER : Smoothing (M+1), Armoured/Sturdy (trait
+deja catalogue sur Wolfship/Greatship de Sea of Claws). Voir A FAIRE.txt.
+
+24/09/2026 - SCISSION DE L'EQUIPEMENT PAR CATEGORIE (WinPersonnage), CHANTIER OUVERT, A
+CONCEVOIR CE SOIR. En testant les amenagements de bateau, Nono releve que rien n'empeche de
+confier un amenagement taille pour un grand bateau a un petit (TabEquipement ne connait que le
+poids, pas la compatibilite de taille). En creusant la solution, constat plus large : Equipement
+est un tableau UNIQUE et plat melangeant Armes/Armures/Divers/Sorts/Montures/Navires/Vehicules
+(colonne Type cachee) - un fourre-tout. Nono veut le scinder en onglets (modele PageExperience,
+deja un TPageControl a 10 onglets), mais PageExperience lui-meme a deja trop d'onglets ("cela
+devient complique") : a resoudre d'abord, puis appliquer la meme solution a l'Equipement de
+facon generique (pas un TPageControl fige par categorie) pour que Montures/Navires soit la
+premiere categorie scindee sans tout refaire pour Armes/Armures ensuite. Rien code, conception
+a mener avec Nono. Voir A FAIRE.txt.
+
 23/09/2026 - OBJETS A FABRICATION INTEGREE : mecanisme cree (balise <InherentCraftsmanship> sur DATA_WEAPON/DATA_ARMOR, champ Fabrication sur StructureArme/StructureArmure, recopie automatique sur l objet du personnage a l acquisition - achat direct WinPersonnage et equipement de carriere a la creation). Saisi : High Elf Player s Guide (7 armes elfiques courantes creees + 12 armures + Greatsword of Hoeth), Nations of Mankind (17/28 armures p.60 + Jade Longsword), Dwarf Player s Guide (Gromril Suit). AFFICHAGE AJOUTE DANS WinArmor ET WinWeapon (demande de Nono en testant WinArmor sans rien voir) : nouveau tableau TabFabIntegree, jumeau de TabBonus. DEUX BUGS D AFFICHAGE CORRIGES LE MEME JOUR (Nono a compile et teste a chaque fois) : (1) le texte COMPLET (Explanation) etait pose dans la colonne visible au lieu du resume court - corrige en ajoutant la colonne cachee manquante, meme moule que TabBonus (Description cachee pour AffDescription au clic / Resume visible) ; (2) premier correctif errone (MaxWidth=true) : le tableau restait coince a la taille minuscule de son tout premier calcul (fait par WinCharger AVANT tout chargement de donnees, un TStringGrid vide s'autosize a presque rien) et ne regrandissait plus jamais - revenu a MaxWidth=false, meme reglage que TabBonus, qui recalcule sa taille a chaque fois. TESTE ET VALIDE PAR NONO LE 23/09/2026, DE BOUT EN BOUT : WinArmor/WinWeapon, acquisition sur un personnage, et rendu PDF Feldo2P. CHANTIER CLOS. Voir CONTEXT.md 2.29, A FAIRE.txt.
 
 23/09/2026 - AUDIT DES RULEBOOK CLOS : TOUS LES CHAPITRES AUDITES (I-IX), TOUS LES ECARTS PERTINENTS SAISIS. COMPANIONS DE L ENEMY WITHIN TOUS CLOS (ENEMY IN SHADOWS LE 22/09, DEATH ON THE REIK + HORNED RAT LE 23/09).

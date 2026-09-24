@@ -383,6 +383,11 @@ Const
       // ConstCibleModifieDegatCC/CT ci-dessous - ces deux talents bonifient TOUTES les
       // armes de contact/a distance, pas une famille en particulier.
       ConstXmlModifieDegat              = 'ModifyDamage';
+      // Cinquieme pendant du meme moule, cote bateau : <ModifBoat name="MSAIL">-1</ModifBoat>
+      // sur un DATA_TRAPPING d'amenagement (Fore-and-Aft Rudder, Smoothing...). Cible =
+      // colonne du profil (CREW/MSAIL/MOAR/MAN/SIZE/T/W). 24/09/2026, chantier "AMENAGEMENTS
+      // DE BATEAU : CALCUL DE L'EFFET SUR LE NAVIRE".
+      ConstXmlModifieBateau             = 'ModifBoat';
       // Quatrieme pendant du meme moule que ModifyCarac/ModifySkill/ModifyWeapon, pour les
       // paliers de CareerBonus qui n'ont AUCUN equivalent chiffre (palier 4 "Knight of the
       // Inner Circle" de la quasi-totalite des Ordres de Chevalerie - trait automatique

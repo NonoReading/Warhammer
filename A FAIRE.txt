@@ -24,6 +24,23 @@ CORRECTIONS COURTES  (une ligne ou deux chacune)
 [PRIX] Codes CO/PA/SB faits. RESTE eventuel : tri par valeur et calcul de bourse (il faudrait un parseur) ; prix "Varies" (RULES-TRAP_025/058, _096/130) laisses en texte.
 [EQUIPEMENTS MIS DE COTE] Balayage des livres, herbes, Dwarf Player's Guide, Buyer FAITS (Log.txt 19/09). RESTE : (1) Winds of Magic : bonus des robes (Practical +1 SL, Standard +2, Elaborate +3), Enchanted Staff et objets du chapitre Magical Artefacts non modelises ; (2) mines de Salzenmund (Mining Equipment : Bellows, Caged Canaries, Elevator, Fortification, Guild Membership, Pumps = chantier entreprises) ; (3) VEHICULES : fiches saisies le 20/09 (bateaux, navires nains, engins volants, chars, chariots de Cothique), regles de vol, de conduite et d equipage = regles de MJ, hors programme (decision de Nono 20/09/2026) ; (4) Deft Steps Light Fingers (tableau d objets, livre non integre, CONTEXT.md 2.36) ; (5) Longbeards p.50 non modelises.
 [EQUIPEMENTS V4] Catalogue de 175 objets fait, 194 lignes de carriere rattachees sur 582. Reste, au cas par cas par Nono : lignes douteuses (magnifying glass, pen and ink, horse seul, oil lamp, hurricane lamp with oil, harness/stagecoach), "tools of the profession (...)", objets absents du catalogue (rank symbol, sleeping bag, leather doublet, cape, handcuffs, livery...). Les non-objets (argent, biens "worth", batiments, reseaux) restent en texte. A tester en jeu : chargement V4, "&amp;" (Wine & Spirits, Pestle & Mortar), libelle LIMITED affiche "Scarce".
+[AJOUT LE 24/09/2026, A CONCEVOIR CE SOIR AVEC NONO] SCISSION DE L'EQUIPEMENT PAR CATEGORIE
+(WinPersonnage) : nait de la remarque de Nono en voulant restreindre les amenagements de bateau
+a la bonne taille de navire. TabEquipement est aujourd'hui un tableau UNIQUE et plat (pas dans un
+onglet) qui melange Armes/Armures/Divers/Sorts/Montures/Navires/Vehicules via une colonne Type
+cachee - un vrai fourre-tout. Nono veut a terme un onglet par categorie, sur le modele du
+TPageControl deja utilise par PageExperience (Attribut/Competence/Talent/XP/Evolution/
+Historique/Livre/MjCost/Corruption/Mutation) - mais PageExperience a lui-meme deja trop d'onglets
+("cela devient complique", Nono 24/09/2026) : a resoudre AVANT de dupliquer ce modele sur
+l'Equipement, sinon meme probleme en pire (plus de categories a scinder qu'en Experience).
+A concevoir ensemble : (1) solution au trop-plein d'onglets de PageExperience (groupement en
+sous-onglets ? barre laterale/liste au lieu d'onglets horizontaux ? autre ?) ; (2) une fois
+choisie, meme solution appliquee a l'Equipement, mecanisme de filtrage par Type reutilisable
+(pas un TPageControl a onglets codes en dur par categorie) pour que Montures/Navires soit la
+premiere categorie scindee, puis Armes/Armures/Divers plus tard sans tout refaire ; (3) le
+"Confier a..."/double-clic Fiche/etc. doivent continuer a fonctionner entre deux grilles
+separees (un Divers confie a une monture qui n'est plus dans le meme tableau).
+
 [VARIANTES (Q)] Faites et validees (Log.txt 19/09). RESTE : marqueur encore ecrit "Quality to add" dans le bloc Fabrication des armes/armures, doublon avec le suffixe "de qualite" du catalogue ; idee a revoir : (Q) = choix de qualite a la creation parmi DATA_CRAFTMANSHIP (CONTEXT.md 2.77 suite 4, chantier pause). Non rattaches : clothes(Q), cape(Q), luxurious costume (Q), elegant clothes (Q) (au cas par cas).
 
 =========================================================================
@@ -285,30 +302,54 @@ Rulebook V5 donne un petit equipement de depart par Classe (Burgher, Warrior...)
 celui du metier - rien dans DATA_CAREER ne porte ca aujourd'hui (Class n'est qu'un filtre).
 A voir si on l'ajoute quand on peuplera le catalogue V5, sinon negligeable.
 
-[AJOUT LE 23/09/2026, DECISION DE NONO : NE PAS CODER MAINTENANT] AMENAGEMENTS DE BATEAU :
-CALCUL DE L'EFFET SUR LE NAVIRE. Les 76 entrees saisies le 23/09/2026 (Death on the Reik
-Companion + Sea of Claws, voir section "CORRECTIONS COURTES" ci-dessus) ne sont aujourd'hui
-que des Trapping ordinaires (nom/prix/encombrement) : achetees et "Confiees" a un bateau, elles
-n'ont aucun effet sur son profil. Nono veut qu'elles se comportent comme une arme ou une armure
-sur un personnage : un objet installe doit reellement modifier le bateau (PA, Mouvement, bonus
-de test de Manoeuvre/Perception/Fellowship...), pas juste peser dans l'inventaire.
-
-Ampleur du chantier, releve le 23/09/2026 : UN BATEAU N'A AUJOURD'HUI AUCUN CALCUL. Contrairement
-au personnage (ArmureBonii/ArmeBonii/FabricationBonii, chargefabrication.pas), le champ
-BoatProfile (Crew;M voile;M rames;Man;Size;T;W) est du texte fige, simplement affiche
-(winanimal.pas, DescriptionTraitsBateau). Meme les traits deja en catalogue (Ram, Sturdy,
-Armoured...) ne sont que du texte traduit et affiche, rien n'est calcule dessus - donc "faire
-comme pour une armure" ne consiste pas a ajouter un champ, mais a inventer un moteur de calcul
-de profil de bateau qui n'existe pas du tout, puis y brancher ces objets. Ca recoupe aussi la
-decision du 20/09/2026 ("regles de conduite/vol/equipage = regles de MJ, hors perimetre") :
-c'est justement ce calcul qu'il faudrait construire.
-
-A discuter avant de coder : nouvelle table DATA_BOATFITTING ou champ special sur DATA_TRAPPING
-(sur le modele d'<InherentCraftsmanship>/<Applies>) ; structure de calcul de profil de bateau
-(un StructureBoatProfile calcule, comme StructureArme/StructureArmure) ; portee exacte (PA et
-Mouvement seulement, ou aussi les bonus de test type Boat Handling/Perception/Fellowship que le
-20/09/2026 avait classes hors perimetre cote regles de conduite). Chantier a part entiere, pas
-une modification a la volee - conception a mener avec Nono avant tout code.
+[AJOUT LE 23/09/2026, FORE-AND-AFT RUDDER TESTE ET VALIDE PAR NONO LE 24/09/2026 - SMOOTHING/
+ARMOURED/STURDY RESTENT A TESTER] AMENAGEMENTS DE BATEAU : CALCUL DE L'EFFET SUR LE NAVIRE.
+Bug corrige en cours de test (24/09/2026) : les colonnes du profil de bateau ne sont PAS de
+simples entiers ("12 (30)", "-", "4 (vapeur)"...) - StrToIntDef transformait a tort un "-" (pas
+de voile sur un bateau a rames) en 0, donnant un M errone apres le malus du Fore-and-Aft Rudder
+sur un Fishing Skiff. Corrige (chargetrapping.pas, AjusteValeurEnTete/AjusteValeurProportionnelle
+: n'ajustent que le nombre en tete, preservent tout suffixe, ignorent les colonnes non-numeriques)
+et la cible du modificateur simplifiee a une seule "M" (au lieu de "MSAIL"/"MOAR" separees, le
+livre ne precisant pas laquelle : applique aux deux colonnes, sans effet sur celle qui vaut "-").
+Fore-and-Aft Rudder sur Fishing Skiff (M Sail "4(-)", M Oar "6(8)") reteste par Nono apres
+correction : -1 sur les deux -> "3(-)"/"5(8)", VALIDE. RESTE A TESTER : Smoothing (M+1 sur un
+bateau a voile ET a rames), et Armoured/Sturdy sur un bateau du catalogue qui les porte deja
+(Wolfship, Greatship de Sea of Claws).
+Audit des deux livres
+(sous-agent, 24/09/2026) : sur les 76 entrees + traits deja catalogues, SEULEMENT 7 sont un vrai
+delta chiffrable de profil (Crew/M/Man/Size/T/W) - tout le reste (Broad Rudder, Armoured Walls,
+Gun Ports, Luxury Cabins, Raised Gunwales, Stripped, Flying Jib, Racing Rig, Closed Rowlocks,
+Spoons, Musket Rests, Anchor, Armour Plating, Crow's Nest, Figurehead, Ram, Rugged, Unwieldy...)
+donne des bonus/malus de test (SL, +10/-10), de la couverture au tir ou de l'AP de coque - hors
+perimetre par decision de Nono (24/09/2026, meme logique que le 20/09 : regles de conduite/
+equipage = MJ). Decision de Nono (24/09/2026) : commencer par les deltas de profil chiffrables,
+voir ensuite pour le reste.
+Sur les 7 releves, 4 CODES ET VALIDES CHIFFRABLES SANS AMBIGUITE (les 3 autres laisses de cote,
+voir plus bas) :
+- Fore-and-Aft Rudder (DEATH-TRAP_26 a _29) : M -1 (fixe). Code sur les 4 tailles.
+- Smoothing (SEAOF-TRAP_052/_053) : M +1 (voile ET rames). Vendu "par 5 yards de Size" (plusieurs
+  unites pour couvrir tout le bateau) mais l'effet ne se cumule pas avec le nombre d'unites -
+  d'ou le choix technique de compter un amenagement confie comme "present" (niveau 1) et non
+  par sa quantite achetee (CodesFittingGrille, winpersonnage.pas).
+- Armoured (trait deja au catalogue, ex. SEAOF-TRAP_020+, AnimalTraits "Armoured 2") : +10
+  Toughness par niveau. Pas un objet a acheter separement, deja dans le profil du bateau choisi.
+- Sturdy (idem) : +30% Wounds par niveau.
+LAISSES DE COTE (effet reel mais non chiffrable proprement en delta fixe, a rediscuter si
+besoin) : Water Brakes (M -1/-2 seulement TEMPORAIREMENT, a l'usage en remontant le courant,
+pas un delta permanent) ; Steam/Steam Engine (DotR : "maintient le M standard quel que soit le
+vent" - sans simulation de vent, aucun delta a appliquer ; Sea of Claws : M fixe absolu a 4, pas
+additif, incoherent avec la version DotR).
+Implementation (24/09/2026, compile 0 erreur) : nouveau TypeModif `ModifBoat` (meme moule que
+ModifArmour/ModifyCarac, ChargeModificateur), parse sur DATA_TRAPPING (xmlexportimport.pas) et
+reutilise via FabricationModificateurQualite (chargefabrication.pas) - aucun nouveau moteur,
+juste le moteur generique existant branche sur une nouvelle cible. Nouvelle fonction
+BoatProfilCalcule (chargetrapping.pas) : part du ProfilBateau de base, ajoute Armoured/Sturdy lus
+dans TraitsAnimal, ajoute les ModifBoat des amenagements confies. Nouvelle fonction
+CodesFittingGrille (winpersonnage.pas), calquee sur ChargeAnimalGrille. winanimal.pas affiche le
+profil CALCULE (BoatProfilCalcule) au lieu du profil brut, sur la fiche bateau (bouton Fiche de
+WinEquipement, double-clic de WinPersonnage). A TESTER PAR NONO : attacher un Fore-and-Aft
+Rudder ou une Smoothing a un bateau, verifier le M affiche sur la fiche ; verifier T/W d'un
+bateau du catalogue portant Armoured/Sturdy (ex. le Wolfship ou un Greatship de Sea of Claws).
 
 =========================================================================
 EN VRAC  (ancien, non trie)
