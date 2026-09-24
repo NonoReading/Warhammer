@@ -981,7 +981,16 @@ procedure TWinPersonnages.ButtonEquipementClick(Sender: TObject);
   begin
     SelectWinTrapping := ConstSelectionne;
     SelectWinLivre    := Personnage.LivresAcceptes;
+    // Catalogue filtre sur le meme theme Montures/Navires/Vehicules que la categorie choisie
+    // dans ListBoxEquipementCategorie (0) - sinon tous les Divers s'y melangent, gene relevee
+    // par Nono sur les vehicules. Categorie 3 (Divers) : l'inverse, memes mecanisme et valeurs
+    // que TMenu.TabBibliothequeDblClick/ButtonEquipementClick (warhammersource.pas).
+    if ListBoxEquipementCategorie.ItemIndex = 0 then
+      ModeEquipements := meVehicules
+    else
+      ModeEquipements := meHorsVehicules;
     FenEquipement     := TWinEquipements.Create(Application);
+    ModeEquipements   := meTout;
     FenEquipement.Position := poOwnerFormCenter;
     FenEquipement.ShowModal;
 

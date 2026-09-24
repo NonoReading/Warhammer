@@ -6476,3 +6476,16 @@ colonne visible de TabEquipementAffichage, apres remplissage des lignes filtrees
 Compile (lazbuild --build-all, 0 erreur). Chantier "scission de l'equipement par categorie"
 entierement clos.
 Fichiers modifies : winpersonnage.pas, CONTEXT.md, Log.txt.
+
+25/09/2026 - SCISSION DE L'EQUIPEMENT PAR CATEGORIE, ETAPE 4 - CATALOGUE +EQUIPMENT
+FILTRE PAR CATEGORIE
+Nono releve que +Equipment (ButtonEquipement, catalogue DATA_TRAPPING) affichait tout le
+catalogue (montures/bateaux/vehicules ET divers melanges) quelle que soit la categorie
+choisie dans ListBoxEquipementCategorie. Corrige en reutilisant un mecanisme deja existant
+et non un nouveau filtre : ModeEquipements (winequipement.pas), deja utilise par le menu
+principal (TMenu.TabBibliothequeDblClick/ButtonEquipementClick) pour la meme distinction -
+pose dans winpersonnage.pas (ButtonEquipementClick) avant TWinEquipements.Create : meVehicules
+si la categorie Montures/Navires/Vehicules est active, meHorsVehicules sinon (Divers).
+Compile (lazbuild --build-all, 0 erreur) et teste a l'ecran par Nono. Chantier "scission de
+l'equipement par categorie" (etapes 1 a 4) entierement clos.
+Fichiers modifies : winpersonnage.pas, CONTEXT.md, Log.txt.
