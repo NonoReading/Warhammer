@@ -59,8 +59,24 @@ function QualiteSansMarqueur(ListeCode: String): String;
 // a poser telle quelle sur l'objet du personnage a l'acquisition. '' pour les objets ordinaires
 // et pour tout ce qui n'est ni une arme ni une armure (Divers, sort...). CONTEXT.md 2.29.
 function FabricationDuCatalogue(CodeEquipement, TypeEquipement: String): String;
+// Theme d'une fabrication ("RUNE", "QUALITY", "DEFECT"...), deduit du code (LIVRE-THEME_suffixe),
+// pour regrouper l'ecran de choix (WinFabrication) sans champ XML supplementaire. 25/09/2026.
+function FabricationTheme(CodeFabrication: String): String;
 
 implementation
+
+function FabricationTheme(CodeFabrication: String): String;
+var
+  Reste: String;
+  PosSep: Integer;
+begin
+  Reste  := ExtractStringAfter(CodeFabrication, SeparateurLivre);
+  PosSep := LastDelimiter('_', Reste);
+  if PosSep > 0 then
+    Result := Copy(Reste, 1, PosSep - 1)
+  else
+    Result := Reste;
+end;
 
 function ChercheFabrication(CodeFabrication :String): StructureFabrication;
 var

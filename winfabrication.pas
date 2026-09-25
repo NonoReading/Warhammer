@@ -46,11 +46,12 @@ procedure TWinFabrications.FormCreate(Sender: TObject);
     strings:      TStringList;
     Code:         String;
     Qte:          String;
+    Tri:          TStringList;
   begin
      MiseEnFormeDesChamp(self);
        // Mise en forme dy tableau de choix des Compétences de race
      TabFabrication.Options          := TabFabrication.Options + [goEditing, goAlwaysShowEditor];
-     TabFabrication.ColCount         := 7;
+     TabFabrication.ColCount         := 8;
      TabFabrication.RowCount         := NbFabrication + 1;
      TabFabrication.ColWidths[0]     := 30;
      TabFabrication.Cells[1, 0]      := GetTexteLibelle('RULES-LAB_001');
@@ -65,21 +66,45 @@ procedure TWinFabrications.FormCreate(Sender: TObject);
      TabFabrication.ColWidths[5]     := 70;
      TabFabrication.Cells[6, 0]      := GetTexteLibelle('RULES-LAB_073');
      TabFabrication.ColWidths[6]     := 500;
+     TabFabrication.Cells[7, 0]      := GetTexteLibelle('RULES-LAB_289');
+     TabFabrication.ColWidths[7]     := 90;
 
-     For PFabrication in ListFabrication do
-       // Seules les fabrications applicables au type de l objet (Applique), plus celles deja
-       // posees sur lui pour ne pas les perdre a la validation. 20/09/2026.
-       if (PFabrication.Applique = '') or (SelectWinFabricationType = '')
-          or (Pos(SelectWinFabricationType, PFabrication.Applique) > 0)
-          or (Pos(PFabrication.CodeFabrication + ' ', SelectWinFabrication + ',') > 0) then
+     // Regroupe par theme (RUNE, QUALITY, DEFECT...) deduit du code, plutot que par ordre de
+     // chargement des livres : sinon les 71 runes naines se melent aux qualites du Rulebook des
+     // qu'un personnage a plusieurs livres actifs, illisible. CONTEXT.md 1.1, 25/09/2026.
+     // Tri : cle "theme|libelle" associee a l'index dans ListFabrication (stocke comme objet),
+     // pour retrouver l'entree d'origine sans la rechercher a nouveau et sans risque de collision
+     // entre deux entrees de meme theme/libelle (chacune garde son propre index).
+     Tri := TStringList.Create;
+     try
+       Tri.Sorted := True;
+       Tri.Duplicates := dupAccept;
+       for J := 0 to ListFabrication.Count - 1 do
        begin
+         PFabrication := ListFabrication[J];
+         // Seules les fabrications applicables au type de l objet (Applique), plus celles deja
+         // posees sur lui pour ne pas les perdre a la validation. 20/09/2026.
+         if (PFabrication.Applique = '') or (SelectWinFabricationType = '')
+            or (Pos(SelectWinFabricationType, PFabrication.Applique) > 0)
+            or (Pos(PFabrication.CodeFabrication + ' ', SelectWinFabrication + ',') > 0) then
+           Tri.AddObject(FabricationTheme(PFabrication.CodeFabrication) + '|' + PFabrication.Libelle,
+                          TObject(PtrInt(J)));
+       end;
+
+       for I := 0 to Tri.Count - 1 do
+       begin
+         PFabrication := ListFabrication[PtrInt(Tri.Objects[I])];
          inc(IndTab);
          TabFabrication.Cells[1, IndTab] := PFabrication.CodeFabrication;
          TabFabrication.Cells[2, IndTab] := PFabrication.Libelle;
          TabFabrication.Cells[4, IndTab] := PFabrication.Maximum;
          TabFabrication.Cells[5, IndTab] := PFabrication.TypeQualite;
          TabFabrication.Cells[6, IndTab] := PFabrication.Resume;
+         TabFabrication.Cells[7, IndTab] := FabricationTheme(PFabrication.CodeFabrication);
        end;
+     finally
+       Tri.Free;
+     end;
 
      TabFabrication.RowCount := IndTab + 1;
 

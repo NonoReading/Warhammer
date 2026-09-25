@@ -1,3 +1,16 @@
+25/09/2026 - FABRICATIONS REGROUPEES PAR THEME DANS WINFABRICATION, COMPILE, A TESTER.
+Nono trouve l'ecran de choix des fabrications illisible des que plusieurs livres sont actifs
+(Rulebook + Dwarf Player's Guide : 4 qualites, 4 defauts et 71 runes naines a plat, meme ordre).
+Theme deduit du CODE (LIVRE-THEME_suffixe, deja respecte partout : DWARF-RUNE_01, RULES-QUALITY_01,
+RULES-DEFECT_01) plutot qu'un champ XML a saisir a la main - nouvelle fonction FabricationTheme
+(chargefabrication.pas). winfabrication.pas : colonne Theme ajoutee (RULES-LAB_289, nouveau dans
+INTERFACE.Xml/INTERFACE_FRANCAIS.Xml), liste triee par "theme|libelle" avant remplissage de la
+grille. Ajoute au passage : CONTEXT.md 1.1, un index des mecanismes "objet special" du projet par
+theme (fabrication generique, runes, qualite magique d'arme/armure/bouclier, materiau) pour
+retrouver l'existant avant d'en concevoir un nouveau - piege note au passage : xmlexportimport.pas
+lit DATA_WEAPON_BONUS/DATA_ARMOR_BONUS par FindNode, un seul bloc par livre, jamais plusieurs
+scindes par theme dans le meme fichier.
+
 25/09/2026 - OBJETS MAGIQUES ARCHIVES II : QUALITES D'ARME/ARMURE/BOUCLIER SAISIES, COMPILE, A TESTER.
 Chapitre "Magical Items and Artifice" (p.51-66) : le tirage/fabrication aleatoire (p.51-56) est
 HORS PERIMETRE (decision Nono, outil de MJ/campagne) ; seuls les EFFETS rattachables a une arme/
