@@ -4217,7 +4217,7 @@ See page 190 for Fear rules"</Explanation>
 <Description language="ENGLISH">"Acute Sense (Taste)"</Description>
 <Generique>"RULES-T0139_*"</Generique>
 </Talent>
-<Talent id="RULES-T0139_GOUT/RULES-T0139_VUE">
+<Talent id="RULES-T0139_GOUT/RULES-T0139_TOUCH">
 <Description language="ENGLISH">"Acute Sense (Taste or Touch)"</Description>
 <Generique>"RULES-T0139_*"</Generique>
 </Talent>
@@ -6509,7 +6509,7 @@ Artisans work at all levels of society not just producing goods, but also repair
   <!-- Read/Write -->
 <Talent name="RULES-T0157_*">"3"</Talent>
   <!-- Master Tradesman (Any) -->
-<Talent name="RULES-T0139_GOUT/RULES-T0139_VUE">"3"</Talent>
+<Talent name="RULES-T0139_GOUT/RULES-T0139_TOUCH">"3"</Talent>
   <!-- Acute Sense (Taste or Touch) -->
 <Talent name="RULES-T0079">"4"</Talent>
   <!-- Schemer -->

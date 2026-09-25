@@ -1,3 +1,19 @@
+25/09/2026 - NETTOYAGE DES CORRECTIONS COURTES DE A FAIRE.txt, COMPILE ET TESTE PAR NONO.
+Cinq points repris, deux deja resolus entre-temps (verifies avant de coder, rien a faire de plus) :
+placeholders LAB_xxx de wincreation.pas/winlancede.pas introuvables (code deja nettoye depuis le
+22/08), et la reference morte RULES-COMPSAVOIR_REG absente de SAVED_CARACTERS (plus aucun des 9
+personnages ne la porte). Trois corrections reellement appliquees :
+- INTERFACE_FRANCAIS.Xml, RULES-LAB_130 : coquille "Spécilation choisie" -> "Spécialisation choisie".
+- BOOK_RULESBOOK.Xml + BOOK_RULESBOOK_FRANCAIS.Xml : le talent combine libelle "Acute Sense (Taste
+  or Touch)"/"Sens aiguise (Gout ou Toucher)" portait le code RULES-T0139_GOUT/RULES-T0139_VUE (VUE
+  = Sight) au lieu de RULES-T0139_GOUT/RULES-T0139_TOUCH (Touch existe deja comme talent separe) -
+  identifiant corrige aux 2 endroits qui le portaient dans chaque fichier (definition du talent
+  combine + reference de carriere au palier 3), rien d autre dans le corpus ne le referencait.
+- winpersonnage.pas (l.6618-6621) : garde-fou ajoute sur la boucle qui ecrit Personnage.LivresAcceptes
+  a la sauvegarde (if TabLivre.Cells[3, Ind] <> '' en plus du filtre Selectionne existant), pour ne
+  plus pouvoir inscrire un livre vide dans l enregistrement - piste du bug rapporte par Nono le
+  21/08/2026, jamais valide depuis. Compile et teste a l'ecran par Nono le 25/09/2026.
+
 25/09/2026 - DEFT STEPS, LIGHT FINGERS : TABLEAUX D OBJETS SAISIS, COMPILES ET TESTES PAR NONO.
 Les deux tables du livre hors carrieres, saisies en DATA_TRAPPING (BOOK_DEFT_STEPS_LIGHT_FINGERS.Xml,
 DEFT-TRAP_01 a _15). Tools of the Trade (p.31-32, 9 objets de cambrioleur) sous un nouveau theme

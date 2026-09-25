@@ -4309,7 +4309,7 @@ See page 190 for Fear rules"</Explanation>
 <Talent id="RULES-T0139_GOUT">
 <Description language="FRANCAIS">"Sens aiguisé (Goût)"</Description>
 </Talent>
-<Talent id="RULES-T0139_GOUT/RULES-T0139_VUE">
+<Talent id="RULES-T0139_GOUT/RULES-T0139_TOUCH">
 <Description language="FRANCAIS">"Sens aiguisé (Goût ou Toucher)"</Description>
 </Talent>
 <Talent id="RULES-T0139_ODORA">
@@ -5853,7 +5853,7 @@ See page 190 for Fear rules"</Explanation>
   <!-- Lire/Écrire -->
 <Talent name="RULES-T0157_*">"3"</Talent>
   <!-- Travailleur qualifié (au choix) -->
-<Talent name="RULES-T0139_GOUT/RULES-T0139_VUE">"3"</Talent>
+<Talent name="RULES-T0139_GOUT/RULES-T0139_TOUCH">"3"</Talent>
   <!-- Sens aiguisé (Goût ou Toucher) -->
 <Talent name="RULES-T0079">"4"</Talent>
   <!-- Intrigant -->

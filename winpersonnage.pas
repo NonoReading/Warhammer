@@ -6617,7 +6617,7 @@ Procedure TWinPersonnages.MajTables();
     // Livre
     Personnage.LivresAcceptes := '';
     for Ind := 1 to TabLivre.RowCount - 1 do
-      if TabLivre.Cells[1, Ind] = ConstSelectionne then
+      if (TabLivre.Cells[1, Ind] = ConstSelectionne) and (TabLivre.Cells[3, Ind] <> '') then
         Personnage.LivresAcceptes += AjouteAccolade(TabLivre.Cells[3, ind]);
 
     // Options
