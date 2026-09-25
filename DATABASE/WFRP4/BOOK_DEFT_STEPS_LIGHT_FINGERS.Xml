@@ -1144,10 +1144,140 @@
 <Item name="RULES-TRAP_125">"2"</Item>
 <Item name="RULES-PROJ_ARC_01">"2"</Item>
 <Item name="RULES-TRAP_151">"2"</Item>
-<Item name="Hunting Hound or Hawk">"3"</Item>
+<Item name="DEFT-TRAP_11/DEFT-TRAP_12/DEFT-TRAP_13/DEFT-TRAP_14/DEFT-TRAP_15">"3"</Item>
 <Item name="Quality Weapon">"3"</Item>
 <Item name="RULES-TRAP_116">"4"</Item>
 </SUBCHAPTER_ITEM>
 </Career>
 </DATA_CAREER>
+<!-- Tools of the Trade (p.31-32) : la table du livre nomme "Thin Jimmy" et "Telescopic
+     Pole", mais la prose qui decrit leur effet les appelle respectivement "Steel Mummit"
+     et "Telescopic Stick" - coquille du livre (table et texte divergent), noms de la table
+     conserves en Description, effet complet reporte en commentaire (DATA_TRAPPING ne porte
+     pas de champ Explanation, cf. tous les autres livres). -->
+<DATA_TRAPPING>
+<Trapping id="DEFT-TRAP_01">
+<Description language="ENGLISH">"Bag of Tarrabeth Seed"</Description>
+<Theme>"RULES-LAB_288"</Theme>
+<Availability>"RULES-DISPO_LIMITED"</Availability>
+<Price>"6SB"</Price>
+<Encumbrance>"0"</Encumbrance>
+<!-- Used to distract tracking dogs: a dog within 5 yards must pass an Average (+20) Willpower Test or spend D10 rounds investigating it. -->
+</Trapping>
+<Trapping id="DEFT-TRAP_02">
+<Description language="ENGLISH">"Bag of Soot"</Description>
+<Theme>"RULES-LAB_288"</Theme>
+<Availability>"RULES-DISPO_COMMON"</Availability>
+<Price>"2SB"</Price>
+<Encumbrance>"0"</Encumbrance>
+<!-- Stains clothes/equipment/skin dark: anyone covered in soot gives -1 SL to sight-based Perception Tests made to spot or identify them in the dark. -->
+</Trapping>
+<Trapping id="DEFT-TRAP_03">
+<Description language="ENGLISH">"Caltrops (12)"</Description>
+<Theme>"RULES-LAB_288"</Theme>
+<Availability>"RULES-DISPO_RARE"</Availability>
+<Price>"2PA"</Price>
+<Encumbrance>"0"</Encumbrance>
+<!-- Scattered to create a 2-yard hazardous area: anyone entering must pass a Hard (-20) Athletics Test (Average +20 if aware and walking) or take a Damage D10 hit to a random leg and be Surprised. -->
+</Trapping>
+<Trapping id="DEFT-TRAP_04">
+<Description language="ENGLISH">"Crampons (2)"</Description>
+<Theme>"RULES-LAB_288"</Theme>
+<Availability>"RULES-DISPO_EXOTIC"</Availability>
+<Price>"1CO"</Price>
+<Encumbrance>"1"</Encumbrance>
+<!-- Worn: +2 SL to Climb Tests on rock/wood, +1 SL to Climb Tests on rope, -1 SL to Athletics/Agility Tests outside climbing, -2 SL to Stealth Tests outside climbing, -2 SL to any other movement Test outside climbing. -->
+</Trapping>
+<Trapping id="DEFT-TRAP_05">
+<Description language="ENGLISH">"Glass Cutter"</Description>
+<Theme>"RULES-LAB_288"</Theme>
+<Availability>"RULES-DISPO_EXOTIC"</Availability>
+<Price>"1CO"</Price>
+<Encumbrance>"0"</Encumbrance>
+<!-- Bores a hole or cuts a panel from a glass pane with an Average (+20) Art (Engraving) Test; own Glass Cutting Success Table (p.32) resolves noise and a possible Damage 3 hit to the hand on a poor roll. -->
+</Trapping>
+<Trapping id="DEFT-TRAP_06">
+<Description language="ENGLISH">"Periscope"</Description>
+<Theme>"RULES-LAB_288"</Theme>
+<Availability>"RULES-DISPO_EXOTIC"</Availability>
+<Price>"2CO"</Price>
+<Encumbrance>"1"</Encumbrance>
+<!-- Lets the Character make sight-based Perception Tests while keeping their body hidden or within cover. -->
+</Trapping>
+<Trapping id="DEFT-TRAP_07">
+<Description language="ENGLISH">"Smoke Bomb"</Description>
+<Theme>"RULES-LAB_288"</Theme>
+<Availability>"RULES-DISPO_EXOTIC"</Availability>
+<Price>"1CO"</Price>
+<Encumbrance>"0"</Encumbrance>
+<!-- Thrown like an incendiary: fills a 10-yard area (or an enclosed space) with unbreathable smoke for 2D10 Rounds (doubled if enclosed); vision limited to 1 yard inside the cloud, risk of Suffocation. -->
+</Trapping>
+<Trapping id="DEFT-TRAP_08">
+<Description language="ENGLISH">"Telescopic Pole"</Description>
+<Theme>"RULES-LAB_288"</Theme>
+<Availability>"RULES-DISPO_EXOTIC"</Availability>
+<Price>"3CO"</Price>
+<Encumbrance>"1"</Encumbrance>
+<!-- Called "Telescopic Stick" in the book's own text: extends to 12 feet to manipulate objects up to 4 yards away (Dexterity Tests, -2 SL as it is unwieldy). -->
+</Trapping>
+<Trapping id="DEFT-TRAP_09">
+<Description language="ENGLISH">"Thin Jimmy"</Description>
+<Theme>"RULES-LAB_288"</Theme>
+<Availability>"RULES-DISPO_EXOTIC"</Availability>
+<Price>"2CO"</Price>
+<Encumbrance>"0"</Encumbrance>
+<!-- Called "Steel Mummit" in the book's own text: jiggles a lock/bolt loose without picking it, Hard (-20) Sleight of Hand Test; own Steel Mummit Success Table (p.32) resolves whether the lock/bolt is left undamaged, ruined, or the attempt is noisily failed. -->
+</Trapping>
+<!-- Animals and Equipment (p.132). -->
+<Trapping id="DEFT-TRAP_10">
+<Description language="ENGLISH">"Hunter's Garb"</Description>
+<Theme>"RULES-LAB_191"</Theme>
+<Availability>"RULES-DISPO_RARE"</Availability>
+<Price>"15PA"</Price>
+<Encumbrance>"2"</Encumbrance>
+<!-- Clothing resembling local flora: +2 SL to Stealth Tests made in the appropriate terrain. -->
+</Trapping>
+<Trapping id="DEFT-TRAP_11">
+<Description language="ENGLISH">"Hochland Lockhund"</Description>
+<Theme>"RULES-LAB_260"</Theme>
+<AnimalProfile>"4 30 0 20 30 35 25 0 15 10 15 5"</AnimalProfile>
+<AnimalTraits>"Bestial, Night Vision, Skittish, Size (Small), Stride, Tracker, Weapon +5, Trained (Broken, Dig, Entertain, Fetch, Guard, Heel, Hunt, Magic, Point, Round, Track, War)"</AnimalTraits>
+<Availability>"RULES-DISPO_COMMON"</Availability>
+<Price>"2CO"</Price>
+</Trapping>
+<Trapping id="DEFT-TRAP_12">
+<Description language="ENGLISH">"Nordlander Bamse"</Description>
+<Theme>"RULES-LAB_260"</Theme>
+<AnimalProfile>"5 25 0 20 20 30 20 0 12 10 20 6"</AnimalProfile>
+<AnimalTraits>"Bestial, Night Vision, Skittish, Size (Small), Stride, Tracker, Weapon +5, Trained (Broken, Dig, Entertain, Fetch, Guard, Heel, Hunt, Magic, Point, Round, Track, War)"</AnimalTraits>
+<Availability>"RULES-DISPO_LIMITED"</Availability>
+<Price>"4CO"</Price>
+</Trapping>
+<Trapping id="DEFT-TRAP_13">
+<Description language="ENGLISH">"Grootscher Marsh Hound"</Description>
+<Theme>"RULES-LAB_260"</Theme>
+<AnimalProfile>"4 30 0 30 30 35 15 0 15 10 15 10"</AnimalProfile>
+<AnimalTraits>"Bestial, Night Vision, Skittish, Size (Average), Stride, Tracker, Weapon +6, Trained (Broken, Dig, Entertain, Fetch, Guard, Heel, Hunt, Magic, Point, Round, Track, War)"</AnimalTraits>
+<Availability>"RULES-DISPO_LIMITED"</Availability>
+<Price>"5CO"</Price>
+</Trapping>
+<Trapping id="DEFT-TRAP_14">
+<Description language="ENGLISH">"Dove Hawk"</Description>
+<Theme>"RULES-LAB_260"</Theme>
+<AnimalProfile>"2 35 0 15 25 25 35 0 10 20 5 6"</AnimalProfile>
+<AnimalTraits>"Bestial, Fly 100, Night Vision, Size (Small), Skittish, Weapon +4, Trained (Broken, Circle, Hunt, Return)"</AnimalTraits>
+<Availability>"RULES-DISPO_RARE"</Availability>
+<Price>"10CO"</Price>
+<Encumbrance>"1"</Encumbrance>
+</Trapping>
+<Trapping id="DEFT-TRAP_15">
+<Description language="ENGLISH">"Arabyan Redhawk"</Description>
+<Theme>"RULES-LAB_260"</Theme>
+<AnimalProfile>"2 40 0 22 35 30 30 0 12 30 5 8"</AnimalProfile>
+<AnimalTraits>"Bestial, Fly 80, Night Vision, Size (Small), Skittish, Weapon +5, Trained (Broken, Circle, Hunt, Return)"</AnimalTraits>
+<Availability>"RULES-DISPO_EXOTIC"</Availability>
+<Price>"25CO"</Price>
+<Encumbrance>"1"</Encumbrance>
+</Trapping>
+</DATA_TRAPPING>
 </DATA_BOOK>

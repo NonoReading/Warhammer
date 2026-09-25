@@ -1,3 +1,18 @@
+25/09/2026 - DEFT STEPS, LIGHT FINGERS : TABLEAUX D OBJETS SAISIS, COMPILES ET TESTES PAR NONO.
+Les deux tables du livre hors carrieres, saisies en DATA_TRAPPING (BOOK_DEFT_STEPS_LIGHT_FINGERS.Xml,
+DEFT-TRAP_01 a _15). Tools of the Trade (p.31-32, 9 objets de cambrioleur) sous un nouveau theme
+RULES-LAB_288 "Thieves' Tools"/"Outils de voleur" ajoute dans INTERFACE.Xml/INTERFACE_FRANCAIS.Xml ;
+effets mecaniques non modelises (hors moteur <Effet>), texte complet en commentaire XML car
+DATA_TRAPPING n a pas de champ Explanation (verifie : aucun livre du projet n en porte). Deux
+coquilles du livre relevees : la table nomme "Thin Jimmy"/"Telescopic Pole", la prose qui decrit
+leur effet les appelle "Steel Mummit"/"Telescopic Stick" - nom de la table conserve en Description.
+Animals and Equipment (p.132) : Hunter's Garb (theme RULES-LAB_191) + 5 animaux de chasse
+(Hochland Lockhund, Nordlander Bamse, Grootscher Marsh Hound, Dove Hawk, Arabyan Redhawk, theme
+RULES-LAB_260, profil et Traits complets, Trained inclus dans AnimalTraits comme les autres livres).
+La ligne "Hunting Hound or Hawk" du niveau 3 Gamekeeper (texte libre) rattachee aux 5 codes animaux
+via le mecanisme de choix multiple deja existant ("/"). XML pur, aucun code Pascal touche.
+Compile et teste a l'ecran par Nono le 25/09/2026. Chantier clos.
+
 25/09/2026 - SCISSION DE L EQUIPEMENT PAR CATEGORIE, ETAPE 2 (TabEquipement), CHANTIER CLOS.
 TabEquipement reste l unique grille de sauvegarde (toujours complete) mais devient masquee
 (Visible = False) : aucune des procedures existantes qui la lisent/l ecrivent (ajout, suppression,
