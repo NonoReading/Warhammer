@@ -3611,12 +3611,21 @@ nouveau pour un objet spécial, vérifier lequel de ceux-ci couvre déjà le bes
   filtrées par `<Applies>` (Weapon/Armour/Misc ; vide = partout) ; voir §2.36 (chantier runes
   terminé) pour le moteur d'effets (`ModifArmour`, `ModifyCarac`, `ModifyDamage`, `ModifySkill`,
   effets conditionnels via `if=`).
-- **Qualité magique d'arme/armure/bouclier** (ex. objets magiques Archives of the Empire II) →
-  `DATA_WEAPON_BONUS`/`DATA_ARMOR_BONUS` (un bouclier est une `DATA_WEAPON`, donc ses qualités
-  vont dans `DATA_WEAPON_BONUS`) ; voir §2.94. **Piège moteur** : `xmlexportimport.pas` lit ces
-  chapitres avec `BookNode.FindNode(...)`, qui ne prend que le **premier** bloc du tag dans le
-  fichier — un livre ne peut avoir qu'un seul `<DATA_WEAPON_BONUS>` et un seul
-  `<DATA_ARMOR_BONUS>`, jamais plusieurs blocs séparés par thème dans le même fichier.
+- **Qualité magique d'arme/armure/bouclier attachable librement** (ex. objets magiques Archives
+  of the Empire II, un bouclier étant une `DATA_WEAPON`) → `DATA_CRAFTMANSHIP` (catalogue
+  Fabrication, `Applies=Weapon`/`Armour`), rattachable depuis `WinFabrication` à n'importe quelle
+  arme/armure du catalogue, PAS `DATA_WEAPON_BONUS`/`DATA_ARMOR_BONUS` — principe de Nono
+  (25/09/2026, §2.94, suite) : *"on doit pouvoir recréer ces armes avec Fabrication"*. Le moteur
+  Fabrication sait déjà octroyer un Talent (`<Talent>` sous `<Craftsmanship>`, réutilise
+  `ListArmureBonusTalent`/`ListArmeBonusTalent`) et un bonus chiffré (`ModifyCarac`/`ModifySkill`/
+  `ModifyWeapon`/`ModifArmour`/`ModifyDamage`).
+- **Qualité magique figée sur une entrée précise du catalogue** (ex. `NATIO-ARMOB_16` Fear sur
+  Skull Trophies, Nations of Mankind) → `DATA_WEAPON_BONUS`/`DATA_ARMOR_BONUS`, réservé aux cas
+  où le livre attache réellement la qualité à un objet nommé précis (pas un choix libre du
+  joueur). **Piège moteur** : `xmlexportimport.pas` lit ces chapitres avec `BookNode.FindNode(...)`,
+  qui ne prend que le **premier** bloc du tag dans le fichier — un livre ne peut avoir qu'un seul
+  `<DATA_WEAPON_BONUS>` et un seul `<DATA_ARMOR_BONUS>`, jamais plusieurs blocs séparés par thème
+  dans le même fichier.
 - **Matériau** (Gromril/Ithilmar/Gifted...) → `<InherentCraftsmanship>` sur la Fabrication,
   pas une qualité magique à part ; voir §2.29 (Gromril Suit du Dwarf Player's Guide).
 - **Objet sans catalogue arme/armure dédié** (anneaux, amulettes, bâtons...) → piste envisagée :
@@ -11662,3 +11671,40 @@ saisir.
 magiques de plusieurs livres), prévoir de scinder la saisie par thème (livre/type d'objet)
 plutôt que tout accumuler au même endroit, sous peine de devenir illisible — à appliquer dès le
 prochain ajout (Rings/Talismans/Oddities).
+
+**Correction le 25/09/2026, même jour** : le mécanisme ci-dessus (`DATA_WEAPON_BONUS`/
+`DATA_ARMOR_BONUS`, qualité figée en XML sur une entrée précise du catalogue) était une erreur
+d'architecture — signalée par Nono dès qu'il a cherché à l'utiliser. Le tirage aléatoire du livre
+étant hors périmètre, coder la qualité en dur sur une arme du catalogue était le SEUL point
+d'entrée restant, ce qui rendait le mécanisme inutilisable en pratique. Principe de Nono : on doit
+pouvoir **recréer ces armes avec Fabrication**. Les 39 entrées (`ARCH2-WEAPB_01` à `_31`,
+`ARCH2-ARMOB_01` à `_08`) sont donc resaisies en `DATA_CRAFTMANSHIP` (`<Craftsmanship>`,
+`Applies=Weapon`/`Armour`), rattachables librement à n'importe quelle arme/armure du catalogue
+depuis `WinFabrication`, comme les runes naines ou Durable/Fine du Rulebook.
+
+L'octroi de Talent (nouveau `<Talent>` sous `<Craftsmanship>`, `xmlexportimport.pas`) réutilise
+TEL QUEL les listes `ListArmureBonusTalent`/`ListArmeBonusTalent`
+(`chargearmurebonustalent.pas`/`chargearmebonustalent.pas`) : ces listes scannaient déjà les
+qualités posées par Fabrication (`PersonnageEquipement.QualiteEquipement`) en plus de celles du
+catalogue — anticipé par un commentaire du 25/09 dans `chargepersonnage.pas`
+(`PersonnageArmureBonusTalent`) : *"les deux sont scannees, au cas ou une qualite de fabrication
+accorderait un jour un talent elle aussi"*. Aucun nouveau moteur de résolution à écrire. Le bonus
+d'Attribut (`ModifyCarac`, ex. +20 WS) était déjà couvert par le moteur Fabrication générique
+existant (`FabricationModificateurQualite`/`PersonnageFabricationAttributModif`,
+`chargefabrication.pas`/`chargepersonnage.pas`), déjà branché sur arme ET armure
+(`PersonnageFabricationModificateur` scanne `TypeEquipWe` autant que `TypeEquipAR`/`ARS`).
+
+**Retiré en conséquence**, génuinement mort (aucun livre n'utilisait `<Talent>`/`<ModifyCarac>`
+sous `DATA_WEAPON_BONUS`) : `chargearmebonusmodificateur.pas` (fichier supprimé),
+`PersonnageArmeQualites`/`PersonnageArmeBonusModificateur`/`PersonnageArmeBonusAttributModif`
+(`chargepersonnage.pas`), les deux branches d'import correspondantes dans `xmlexportimport.pas`
+(cas `ConstXmlTalent`/`ConstXmlModifieAttribut` sous la boucle `ArmeBonus`), leurs appels dans
+`pdfpersonnage.pas`/`winpersonnage.pas`. Côté ARMURE, le mécanisme équivalent
+(`chargearmurebonustalent.pas`/`chargearmurebonusmodificateur.pas`) reste intact : il sert déjà à
+de vraies données antérieures à cette session (`NATIO-ARMOB_16` Fear → Frightening, Nations of
+Mankind) — pas la même erreur, une qualité d'armure standard du catalogue reste un point d'entrée
+légitime.
+
+Compilé (`lazbuild --build-all`, 0 erreur, même profil warnings/hints/notes qu'avant). **Reste à
+Nono** : poser une de ces fabrications sur une arme/armure de test via WinFabrication/
+WinPersonnage et vérifier le Talent/bonus d'Attribut sur la fiche et le PDF Feldo2P.

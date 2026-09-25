@@ -752,12 +752,11 @@ Function PdfPersonnageAttribut(Personnage: StructurePersonnage; Attribut: String
     // ci-dessus (les dix attributs classiques passés par ici).
     Res.Base := Res.Base + PersonnageArmureBonusAttributModif(Personnage, Attribut);
 
-    // Qualité d'arme bonifiant un Attribut (ex. capacité d'arme magique Archives II
-    // "+20 WS or BS") dont le personnage possède un exemplaire - même mécanisme que la
-    // qualité d'armure ci-dessus, côté arme. Chantier "objets magiques Archives II".
-    Res.Base := Res.Base + PersonnageArmeBonusAttributModif(Personnage, Attribut);
-
-    // Qualites de fabrication (Rune of Fortitude) sur armure portee.
+    // Qualites de fabrication (Rune of Fortitude, capacite d'arme/armure magique Archives II
+    // "+20 WS or BS"...) sur une arme OU une armure portee - PersonnageFabricationModificateur
+    // (chargepersonnage.pas) scanne les deux, donc pas de mecanisme separe cote arme. 25/09/2026,
+    // Nono : ces qualites doivent etre recreables via Fabrication, pas figees en XML sur une
+    // entree de catalogue - l'ancien mecanisme dedie (PersonnageArmeBonusAttributModif) est retire.
     Res.Base := Res.Base + PersonnageFabricationAttributModif(Personnage, Attribut);
 
     // Signe astral (Archives of the Empire II p.39) : +2 / -3 en caracteristique, calcule au vol.

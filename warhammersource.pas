@@ -15,7 +15,7 @@ uses
   ChargeRaceTalent, GlobalFonts, WinCreation, ChargeTalentCreation,
   WinPersonnage, ChargeAttributAugmentation, ChargeCompetenceAugmentation,
   ChargeArme, WinWeapon, WinEquipement, ChargeArmeBonus, ChargeMetierEquipement, ChargeArmure,
-  ChargeArmureBonus, ChargeArmureBonusTalent, ChargeArmeBonusTalent, ChargeArmeBonusModificateur, WinArmor, ChargeTrapping, ChargeSort, WinSpell, ChargeTexte,
+  ChargeArmureBonus, ChargeArmureBonusTalent, ChargeArmeBonusTalent, WinArmor, ChargeTrapping, ChargeSort, WinSpell, ChargeTexte,
   ChargeFabrication, WinMutationCatalogue, ChargeDisease, WinDiseaseCatalogue, ChargeClassEquipement, Unitcalcul, ChargeMetierSousMetier,
   ChargeMetierRaceChoixMetier, ChargePersonnage, ChargeRaceCreation,
   ChargeTraduction, ChargeArmureSimplifie, ChargeOptionRegle, WinOptionRegle, ChargeLivre,
@@ -1228,7 +1228,6 @@ procedure TMenu.ChargerLivre(ForceMaJ: Boolean; ForceLivre: String);
         ListCorruptionEquipement.Clear;
         ListArmureBonusTalent.Clear;
         ListArmeBonusTalent.Clear;
-        ListArmeBonusModificateur.Clear;
         ListTalentModificateur.Clear;
         // ListArmeModificateur/ListArmureBonusModificateur n'avaient pas d'equivalent .Clear
         // avant leur creation (migration ModifyCarac, 11/09/2026) : rattrapage au passage,
@@ -1589,7 +1588,6 @@ procedure TMenu.FormCreate(Sender: TObject);
        ListCorruptionEquipement     := TListCorruptionEquipement.Create;
        ListArmureBonusTalent        := TListArmureBonusTalent.Create;
        ListArmeBonusTalent          := TListArmeBonusTalent.Create;
-       ListArmeBonusModificateur    := TListModificateur.Create;
        ListTalentModificateur       := TListModificateur.Create;
 
        // chercher les livres

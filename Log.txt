@@ -1,3 +1,29 @@
+25/09/2026 - OBJETS MAGIQUES ARCHIVES II REBASCULES SUR FABRICATION, COMPILE, A TESTER.
+Erreur signalee par Nono le jour meme sur la premiere saisie (chantier ci-dessous, "OBJETS
+MAGIQUES ARCHIVES II" du 25/09) : les qualites magiques d'arme/armure/bouclier avaient ete
+codees dans DATA_WEAPON_BONUS/DATA_ARMOR_BONUS, figees sur une entree precise du catalogue -
+avec le tirage aleatoire du livre exclu (decision Nono), c'etait le seul point d'entree, rendant
+le mecanisme inutilisable : Nono veut pouvoir RECREER CES ARMES AVEC FABRICATION. Resaisi le
+meme jour : les 39 entrees (ARCH2-WEAPB_01-31, ARCH2-ARMOB_01-08) sont maintenant des
+<Craftsmanship> dans DATA_CRAFTMANSHIP (Applies=Weapon/Armour), attachables depuis WinFabrication
+comme n'importe quelle rune/qualite. Octroi de Talent (nouveau <Talent> sous <Craftsmanship>,
+xmlexportimport.pas) alimente les listes DEJA EXISTANTES ListArmureBonusTalent/ListArmeBonusTalent
+(chargearmurebonustalent.pas/chargearmebonustalent.pas) - ces listes scannaient deja les qualites
+posees par Fabrication (PersonnageEquipement.QualiteEquipement) en plus de celles du catalogue,
+anticipe par un commentaire du 25/09 ("au cas ou une qualite de fabrication accorderait un jour
+un talent elle aussi") : aucun nouveau moteur de resolution de Talent a ecrire. Le bonus
+d'Attribut (ModifyCarac, ex. +20 WS) etait deja couvert par le moteur Fabrication generique
+(FabricationModificateurQualite/PersonnageFabricationAttributModif, chargefabrication.pas/
+chargepersonnage.pas), deja branche sur arme ET armure. Retire en consequence, genuinement mort
+(aucun livre n'utilisait <Talent>/<ModifyCarac> sous DATA_WEAPON_BONUS) : chargearmebonusmodificateur.pas
+(fichier supprime), PersonnageArmeQualites/PersonnageArmeBonusModificateur/PersonnageArmeBonusAttributModif
+(chargepersonnage.pas), les deux branches d'import correspondantes dans xmlexportimport.pas, leurs
+appels dans pdfpersonnage.pas/winpersonnage.pas. Cote ARMURE, le mecanisme equivalent
+(chargearmurebonustalent.pas/chargearmurebonusmodificateur.pas) reste intact : il sert deja pour
+de vraies donnees anterieures a cette session (NATIO-ARMOB_16 Fear -> Frightening, Nations of
+Mankind). Compile (lazbuild --build-all, 0 erreur, meme profil warnings/hints/notes qu'avant).
+A FAIRE.txt et CONTEXT.md 2.94 mis a jour.
+
 25/09/2026 - FABRICATIONS REGROUPEES PAR THEME DANS WINFABRICATION + FILTRE DEROULANT, COMPILE, A TESTER.
 Nono trouve l'ecran de choix des fabrications illisible des que plusieurs livres sont actifs
 (Rulebook + Dwarf Player's Guide : 4 qualites, 4 defauts et 71 runes naines a plat, meme ordre).

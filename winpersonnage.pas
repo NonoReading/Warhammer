@@ -2994,7 +2994,6 @@ procedure TWinPersonnages.CalculTotaux();
         ValCareer := PersonnageCareerBonusAttributModif(Personnage, TabAttribut.Cells[IndCol, LigAttCode]);
         ValObjet  := PersonnageArmeAttributModif(Personnage, TabAttribut.Cells[IndCol, LigAttCode])
                      + PersonnageArmureBonusAttributModif(Personnage, TabAttribut.Cells[IndCol, LigAttCode])
-                     + PersonnageArmeBonusAttributModif(Personnage, TabAttribut.Cells[IndCol, LigAttCode])
                      + PersonnageFabricationAttributModif(Personnage, TabAttribut.Cells[IndCol, LigAttCode]);
         if ValCareer <> 0 then
           TabAttribut.Cells[IndCol, LigAttCareer] := IntToStr(ValCareer);

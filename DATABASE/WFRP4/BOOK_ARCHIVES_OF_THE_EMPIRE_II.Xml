@@ -710,244 +710,6 @@ Examples you could take include: Alcohol, Food, Narcotics, Pleasure."</Explanati
 <Ammunition>"0"</Ammunition>
 </Weapon>
 </DATA_WEAPON>
-<DATA_WEAPON_BONUS>
-  <!-- Magical Weapon Qualities (p.57-59), chantier "objets magiques Archives II". Seules les
-       capacites du d100 de tirage MJ sont saisies (le tirage/fabrication lui-meme p.51-56,
-       hors perimetre, decision Nono 25/09/2026) - ce sont les EFFETS que ces objets peuvent
-       porter, rattachables a une arme precise du catalogue via son champ <Quality>, comme
-       n'importe quelle qualite d'arme standard. Quand l'effet du livre octroie deja une
-       Qualite d'arme standard existante (Fast, Precise, Impale, Penetrating, Damaging, Hack,
-       Pummel, Unbreakable), ce n'est PAS redit ici comme un bonus a part : l'Explanation
-       indique d'ajouter le code standard correspondant en plus sur l'arme concernee. Seules
-       les capacites reellement magiques et propres a cette table recoivent une entree.
-       Certaines capacites dependent du type d'arme (melee/distance : "Strike Mighty Blow"
-       vs "Fast Shot", "WS" vs "BS") - separees en deux entrees _A (melee) / _B (distance),
-       a choisir par Nono selon l'arme saisie, jamais resolues automatiquement.
-       "Legendary Weapon" (resultat 00) n'a pas d'entree : c'est une instruction de tirage
-       (retirer deux fois de plus), pas une capacite en soi - hors perimetre avec le reste du
-       systeme de generation aleatoire. -->
-<BonusMalus id="ARCH2-WEAPB_01">
-<Description language="ENGLISH">"Touched by the Winds"</Description>
-<Explanation language="ENGLISH">"The weapon has petty enchantments cast upon it. Beyond damaging creatures that are immune to non-magical attacks (already true of any magical weapon) it has no particular ability. If the weapon is a ranged item, this ability is conferred to its ammunition."</Explanation>
-<Short language="ENGLISH">"no particular ability beyond damaging creatures immune to non-magical attacks"</Short>
-<Modifier>"+"</Modifier>
-</BonusMalus>
-<BonusMalus id="ARCH2-WEAPB_02">
-<Description language="ENGLISH">"Wreathed in Shadow"</Description>
-<Explanation language="ENGLISH">"The blade of a melee weapon seems insubstantial and ghostly, while the same effect lingers on the string of a bow or crossbow, and is conferred to any ammunition the weapon fires. Any target hit by the weapon receives no benefit from non-magical armour."</Explanation>
-<Short language="ENGLISH">"target gets no benefit from non-magical armour"</Short>
-<Modifier>"+"</Modifier>
-</BonusMalus>
-<BonusMalus id="ARCH2-WEAPB_03">
-<Description language="ENGLISH">"Alight with Flame"</Description>
-<Explanation language="ENGLISH">"Once drawn the weapon bursts into searing flame, but does not harm the wielder or any possessions they carry. If the wielder hits a flammable target with the weapon, the target suffers one Ablaze Condition."</Explanation>
-<Short language="ENGLISH">"flammable target hit: one Ablaze Condition"</Short>
-<Modifier>"+"</Modifier>
-</BonusMalus>
-<BonusMalus id="ARCH2-WEAPB_04">
-<Description language="ENGLISH">"Dolorous"</Description>
-<Explanation language="ENGLISH">"Death magic permeates the weapon, filling foes with fright. The wielder counts as causing Fear (1)."</Explanation>
-<Short language="ENGLISH">"wielder causes Fear (1)"</Short>
-<Modifier>"+"</Modifier>
-</BonusMalus>
-<BonusMalus id="ARCH2-WEAPB_05A">
-<Description language="ENGLISH">"Of Leaping Silver Wroth (Melee)"</Description>
-<Explanation language="ENGLISH">"Alloys used in constructing this weapon lend it expert balance and surprising lightness. A melee weapon of Leaping Silver has the Fast Quality - add RULES-WEAPB20 (Fast) to this weapon's Quality."</Explanation>
-<Short language="ENGLISH">"melee: add the Fast Quality (RULES-WEAPB20) on the weapon"</Short>
-<Modifier>"+"</Modifier>
-</BonusMalus>
-<BonusMalus id="ARCH2-WEAPB_05B">
-<Description language="ENGLISH">"Of Leaping Silver Wroth (Ranged)"</Description>
-<Explanation language="ENGLISH">"A ranged weapon with this enchantment bears the silver alloy in fine filigree about it, granting a wielder +10 Initiative in combat."</Explanation>
-<Short language="ENGLISH">"ranged: wielder +10 Initiative"</Short>
-<Modifier>"+"</Modifier>
-<ModifyCarac name="RULES-ATTR_I">+10</ModifyCarac>
-</BonusMalus>
-<BonusMalus id="ARCH2-WEAPB_06">
-<Description language="ENGLISH">"Carved of Rage"</Description>
-<Explanation language="ENGLISH">"Often created by the shamans of the Amber Order, animalistic fury and instinct fill the mind of the wielder whenever this weapon is drawn in anger. Once drawn, the wielder of this weapon becomes subject to Frenzy."</Explanation>
-<Short language="ENGLISH">"wielder subject to Frenzy once drawn"</Short>
-<Modifier>"+"</Modifier>
-<Talent>"RULES-T0063"</Talent>
-</BonusMalus>
-<BonusMalus id="ARCH2-WEAPB_07">
-<Description language="ENGLISH">"Envigoured"</Description>
-<Explanation language="ENGLISH">"The life-giving wind of Ghyran courses through the weapon. The wielder ignores Fatigue Conditions whilst fighting with the weapon. The blade also has the Unbreakable Quality - add RULES-WEAPB19 (Unbreakable) to this weapon's Quality."</Explanation>
-<Short language="ENGLISH">"wielder ignores Fatigue while fighting with it; add the Unbreakable Quality (RULES-WEAPB19) on the weapon"</Short>
-<Modifier>"+"</Modifier>
-</BonusMalus>
-<BonusMalus id="ARCH2-WEAPB_08">
-<Description language="ENGLISH">"Entwined with Fate"</Description>
-<Explanation language="ENGLISH">"Celestial magics have imbued the weapon with subtle prognosticative abilities. At the start of each round of combat, the weapon imbues the wielder with one Advantage."</Explanation>
-<Short language="ENGLISH">"start of each round: wielder gains one Advantage"</Short>
-<Modifier>"+"</Modifier>
-</BonusMalus>
-<BonusMalus id="ARCH2-WEAPB_09A">
-<Description language="ENGLISH">"Of Rigor Wroth (Melee)"</Description>
-<Explanation language="ENGLISH">"Light magic makes a paragon of this weapon's wielder. The wielder of such a melee weapon benefits from the following Talents: Strike Mighty Blow, Strike to Injure, and Strike to Stun."</Explanation>
-<Short language="ENGLISH">"melee: wielder gains Strike Mighty Blow, Strike to Injure, Strike to Stun"</Short>
-<Modifier>"+"</Modifier>
-<Talent>"RULES-T0037"</Talent>
-<Talent>"RULES-T0060"</Talent>
-<Talent>"RULES-T0059"</Talent>
-</BonusMalus>
-<BonusMalus id="ARCH2-WEAPB_09B">
-<Description language="ENGLISH">"Of Rigor Wroth (Ranged)"</Description>
-<Explanation language="ENGLISH">"Light magic makes a paragon of this weapon's wielder. The wielder of a ranged weapon gains the benefit of the following Talents: Fast Shot, Sharpshooter, and Sniper."</Explanation>
-<Short language="ENGLISH">"ranged: wielder gains Fast Shot, Sharpshooter, Sniper"</Short>
-<Modifier>"+"</Modifier>
-<Talent>"RULES-T0150"</Talent>
-<Talent>"RULES-T0152"</Talent>
-<Talent>"RULES-T0154"</Talent>
-</BonusMalus>
-<BonusMalus id="ARCH2-WEAPB_10">
-<Description language="ENGLISH">"Of Stalwart Sorcery"</Description>
-<Explanation language="ENGLISH">"These weapons strike true as Verena. The weapon has the Precise Quality - add RULES-WEAPB14 (Precise) to this weapon's Quality."</Explanation>
-<Short language="ENGLISH">"add the Precise Quality (RULES-WEAPB14) on the weapon"</Short>
-<Modifier>"+"</Modifier>
-</BonusMalus>
-<BonusMalus id="ARCH2-WEAPB_11">
-<Description language="ENGLISH">"Bewildering"</Description>
-<Explanation language="ENGLISH">"Powerful enchantments of bemusement and misdirection are woven into the weapon. Anyone wounded by the weapon gains the Surprised Condition."</Explanation>
-<Short language="ENGLISH">"wounded target gains the Surprised Condition"</Short>
-<Modifier>"+"</Modifier>
-</BonusMalus>
-<BonusMalus id="ARCH2-WEAPB_12">
-<Description language="ENGLISH">"Of Bold Brass"</Description>
-<Explanation language="ENGLISH">"This weapon's bearer is filled with a sense of vim, is immune to the effects of Fear, and enjoys a +2 SL bonus to resist Terror."</Explanation>
-<Short language="ENGLISH">"bearer immune to Fear, +2 SL to resist Terror"</Short>
-<Modifier>"+"</Modifier>
-</BonusMalus>
-<BonusMalus id="ARCH2-WEAPB_13">
-<Description language="ENGLISH">"Of the Wolf's Wide Jaws"</Description>
-<Explanation language="ENGLISH">"The most favoured Ulrican warriors wield these weapons with wolf's head pommels and other lupine motifs. The weapon has the Damaging Quality - add RULES-WEAPB10 (Damaging) to this weapon's Quality."</Explanation>
-<Short language="ENGLISH">"add the Damaging Quality (RULES-WEAPB10) on the weapon"</Short>
-<Modifier>"+"</Modifier>
-</BonusMalus>
-<BonusMalus id="ARCH2-WEAPB_14A">
-<Description language="ENGLISH">"Of Deft and Cunning (Melee)"</Description>
-<Explanation language="ENGLISH">"Often created with the aid of Myrmidian experts, these deft weapons handle with exquisite precision. The wielder of a melee weapon benefits from +20 WS."</Explanation>
-<Short language="ENGLISH">"melee: wielder +20 WS"</Short>
-<Modifier>"+"</Modifier>
-<ModifyCarac name="RULES-ATTR_WS">+20</ModifyCarac>
-</BonusMalus>
-<BonusMalus id="ARCH2-WEAPB_14B">
-<Description language="ENGLISH">"Of Deft and Cunning (Ranged)"</Description>
-<Explanation language="ENGLISH">"Often created with the aid of Myrmidian experts, these deft weapons handle with exquisite precision. The wielder of a ranged weapon benefits from +20 BS."</Explanation>
-<Short language="ENGLISH">"ranged: wielder +20 BS"</Short>
-<Modifier>"+"</Modifier>
-<ModifyCarac name="RULES-ATTR_BS">+20</ModifyCarac>
-</BonusMalus>
-<BonusMalus id="ARCH2-WEAPB_15">
-<Description language="ENGLISH">"Of Salt and Brine"</Description>
-<Explanation language="ENGLISH">"The priests of Manann lend their knowledge to artificers seeking to create weapons that guard against unexpected raiders. The bearer of this weapon may make a free Action in the first Round of any combat. The weapon also has the Fast Quality - add RULES-WEAPB20 (Fast) to this weapon's Quality."</Explanation>
-<Short language="ENGLISH">"bearer: free Action in the first Round of combat; add the Fast Quality (RULES-WEAPB20) on the weapon"</Short>
-<Modifier>"+"</Modifier>
-</BonusMalus>
-<BonusMalus id="ARCH2-WEAPB_16">
-<Description language="ENGLISH">"Of Grisly Wounds"</Description>
-<Explanation language="ENGLISH">"Deathly enchantments ensure that wounds caused by this weapon are severe. The weapon has the Damaging Quality - add RULES-WEAPB10 (Damaging) to this weapon's Quality."</Explanation>
-<Short language="ENGLISH">"add the Damaging Quality (RULES-WEAPB10) on the weapon"</Short>
-<Modifier>"+"</Modifier>
-</BonusMalus>
-<BonusMalus id="ARCH2-WEAPB_17">
-<Description language="ENGLISH">"Of Tooth and Claw"</Description>
-<Explanation language="ENGLISH">"Creatures with the Bestial Creature Trait recognise something of themselves in this weapon. They must pass a Difficult (-10) Willpower Test before attacking the wielder."</Explanation>
-<Short language="ENGLISH">"Bestial creatures: Difficult (-10) Willpower Test before attacking the wielder"</Short>
-<Modifier>"+"</Modifier>
-</BonusMalus>
-<BonusMalus id="ARCH2-WEAPB_18">
-<Description language="ENGLISH">"Of Deepest Banishing"</Description>
-<Explanation language="ENGLISH">"The energies given off by this weapon are anathema to Daemons and Ethereal Undead. The wielder always counts as having three additional points of Advantage when determining effects of the Unstable Trait."</Explanation>
-<Short language="ENGLISH">"vs Daemons/Ethereal Undead: wielder +3 Advantage for the Unstable Trait"</Short>
-<Modifier>"+"</Modifier>
-</BonusMalus>
-<BonusMalus id="ARCH2-WEAPB_19">
-<Description language="ENGLISH">"Of Undue Substance"</Description>
-<Explanation language="ENGLISH">"A master of Chamon has imbued this weapon with strange properties of density and mass. The weapon has the Pummel and Hack Qualities - add RULES-WEAPB04 (Pummel) and RULES-WEAPB30 (Hack) to this weapon's Quality."</Explanation>
-<Short language="ENGLISH">"add the Pummel (RULES-WEAPB04) and Hack (RULES-WEAPB30) Qualities on the weapon"</Short>
-<Modifier>"+"</Modifier>
-</BonusMalus>
-<BonusMalus id="ARCH2-WEAPB_20">
-<Description language="ENGLISH">"Of Languishing Death"</Description>
-<Explanation language="ENGLISH">"Morr calls earnestly to those wounded by this weapon. All Wounds the weapon inflicts are Festering Wounds."</Explanation>
-<Short language="ENGLISH">"all Wounds inflicted are Festering Wounds"</Short>
-<Modifier>"+"</Modifier>
-</BonusMalus>
-<BonusMalus id="ARCH2-WEAPB_21">
-<Description language="ENGLISH">"Of Keenest Edge"</Description>
-<Explanation language="ENGLISH">"The tip and edges of this weapon are kept magically keen, or any ammunition it fires becomes so. The weapon has the following Qualities: Hack, Impale, and Penetrating - add RULES-WEAPB30 (Hack), RULES-WEAPB12 (Impale) and RULES-WEAPB22 (Penetrating) to this weapon's Quality."</Explanation>
-<Short language="ENGLISH">"add the Hack (RULES-WEAPB30), Impale (RULES-WEAPB12) and Penetrating (RULES-WEAPB22) Qualities on the weapon"</Short>
-<Modifier>"+"</Modifier>
-</BonusMalus>
-<BonusMalus id="ARCH2-WEAPB_22">
-<Description language="ENGLISH">"Of Bane"</Description>
-<Explanation language="ENGLISH">"The weapon was made with enchantments that increase its deadliness to a given enemy. If it deals damage to a particular type of creature (chosen at creation, GM's discretion), it inflicts twice the number of Wounds."</Explanation>
-<Short language="ENGLISH">"vs chosen creature type: double Wounds inflicted"</Short>
-<Modifier>"+"</Modifier>
-</BonusMalus>
-<BonusMalus id="ARCH2-WEAPB_23">
-<Description language="ENGLISH">"Of Ceaseless Cleaving"</Description>
-<Explanation language="ENGLISH">"Powerful enchantments guide the weapon easily through flesh and bone. If a hit from the weapon deals Damage, it inflicts an additional two Wounds."</Explanation>
-<Short language="ENGLISH">"hit dealing Damage: +2 additional Wounds"</Short>
-<Modifier>"+"</Modifier>
-</BonusMalus>
-<BonusMalus id="ARCH2-WEAPB_24">
-<Description language="ENGLISH">"Of Leaping Gold"</Description>
-<Explanation language="ENGLISH">"This stunning weapon handles like a feather, but lands like a block of lead. The weapon has the following Qualities: Fast, Penetrating, and Precise - add RULES-WEAPB20 (Fast), RULES-WEAPB22 (Penetrating) and RULES-WEAPB14 (Precise) to this weapon's Quality."</Explanation>
-<Short language="ENGLISH">"add the Fast (RULES-WEAPB20), Penetrating (RULES-WEAPB22) and Precise (RULES-WEAPB14) Qualities on the weapon"</Short>
-<Modifier>"+"</Modifier>
-</BonusMalus>
-<BonusMalus id="ARCH2-WEAPB_25">
-<Description language="ENGLISH">"Of Grievous Injury"</Description>
-<Explanation language="ENGLISH">"The injuries inflicted by this weapon are cruel and severe. Whenever the wielder rolls on the Critical Injuries Chart they can reverse the numbers of the roll and apply whichever is the most damaging result."</Explanation>
-<Short language="ENGLISH">"Critical Injuries roll: wielder may reverse the digits, keep the worst result"</Short>
-<Modifier>"+"</Modifier>
-</BonusMalus>
-<BonusMalus id="ARCH2-WEAPB_26">
-<Description language="ENGLISH">"Of Form Mercurial"</Description>
-<Explanation language="ENGLISH">"A master of Chamon has created this weapon, allowing it to morph according to the wielder's movements. Each round the wielder may choose from the following Qualities: Fast, Hack, Impale, Penetrating, and Precise."</Explanation>
-<Short language="ENGLISH">"each round: wielder chooses one of Fast/Hack/Impale/Penetrating/Precise"</Short>
-<Modifier>"+"</Modifier>
-</BonusMalus>
-<BonusMalus id="ARCH2-WEAPB_27">
-<Description language="ENGLISH">"Hoarfrost Blade"</Description>
-<Explanation language="ENGLISH">"These rare and powerful weapons are sometimes created through painstaking rites undergone by the Ice Witches of Kislev. So much as a nick from one of these blades can prove fatal. If a hit from the weapon deals Damage, it inflicts double the number of Wounds, plus four additional Wounds. There is no way to create ranged weapons that imbue their ammunition with this quality (a roll of 1d10 pieces of ammunition instead, GM's discretion)."</Explanation>
-<Short language="ENGLISH">"hit dealing Damage: double Wounds inflicted, plus four additional Wounds"</Short>
-<Modifier>"+"</Modifier>
-</BonusMalus>
-  <!-- Magical Shield Qualities (p.64) : les boucliers sont des DATA_WEAPON (Type SHIELD),
-       memes entrees DATA_WEAPON_BONUS que ci-dessus. Ithilmar Shield (-1 Encombrement) et
-       Gromril Shield (+1 au chiffre de la Qualite Shield existante, ex. RULES-WEAPB18)
-       ecartees : ce sont des ajustements de MATERIAU/valeur sur le champ Quality de
-       l'exemplaire precis, pas une qualite magique distincte a octroyer - a faire au cas
-       par cas par Nono en saisissant le bouclier concerne, comme Gromril/Ithilmar armure
-       ci-dessus. -->
-<BonusMalus id="ARCH2-WEAPB_28">
-<Description language="ENGLISH">"Magical Shield"</Description>
-<Explanation language="ENGLISH">"The shield is magical, but has no further ability beyond the universal magical shield benefit (protects against attacks that ignore non-magical armour)."</Explanation>
-<Short language="ENGLISH">"no further ability beyond protecting against attacks that ignore non-magical armour"</Short>
-<Modifier>"+"</Modifier>
-</BonusMalus>
-<BonusMalus id="ARCH2-WEAPB_29">
-<Description language="ENGLISH">"Shield of Ptolos"</Description>
-<Explanation language="ENGLISH">"Enchantments on the shield misdirect projectiles. Shields of Ptolos provide +2 to the Shield Quality when defending against a missile weapon."</Explanation>
-<Short language="ENGLISH">"+2 to the Shield Quality when defending against a missile weapon"</Short>
-<Modifier>"+"</Modifier>
-</BonusMalus>
-<BonusMalus id="ARCH2-WEAPB_30">
-<Description language="ENGLISH">"Spell Shield"</Description>
-<Explanation language="ENGLISH">"These shields are enchanted to deflect magic missiles. The bearer may make an attempt to dispel any magic missile spell that targets them. The user has a Language (Magick) Skill of 30 for the purposes of the dispel Test."</Explanation>
-<Short language="ENGLISH">"bearer may dispel a magic missile spell targeting them, Language (Magick) 30"</Short>
-<Modifier>"+"</Modifier>
-</BonusMalus>
-<BonusMalus id="ARCH2-WEAPB_31">
-<Description language="ENGLISH">"Charmed Shield"</Description>
-<Explanation language="ENGLISH">"Enchantments imbue this shield with an enhanced ability to deflect incoming attacks. The Defensive Quality of a Charmed Shield is enhanced so that the bearer benefits from +3 SL to Melee Tests they make when opposing incoming attacks."</Explanation>
-<Short language="ENGLISH">"bearer +3 SL to Melee Tests opposing incoming attacks"</Short>
-<Modifier>"+"</Modifier>
-</BonusMalus>
-</DATA_WEAPON_BONUS>
 <DATA_ARMOR>
 <Armor id="ARCH2-ARMO_15">
 <Description language="ENGLISH">"Ogre Gutplate"</Description>
@@ -960,63 +722,368 @@ Examples you could take include: Alcohol, Food, Narcotics, Pleasure."</Explanati
 <Type>"RULES-ARMOT_PLATE"</Type>
 </Armor>
 </DATA_ARMOR>
-<DATA_ARMOR_BONUS>
-  <!-- Magical Armour Qualities (p.62-63), meme chantier "objets magiques Archives II" que
-       DATA_WEAPON_BONUS ci-dessus. Gromril/Ithilmar/Gifted Armour ecartees : ce sont des
-       MATERIAUX (deja modelisables via <InherentCraftsmanship>/Fabrication, CONTEXT.md 2.29,
-       comme le Gromril Suit du Dwarf Player's Guide), pas des qualites magiques a saisir ici.
-       "Legendary Armour" (tirage 00) ecartee pour la meme raison que "Legendary Weapon" :
-       instruction de tirage, pas une capacite. -->
-<BonusMalus id="ARCH2-ARMOB_01">
+<DATA_CRAFTMANSHIP>
+  <!-- Objets magiques Archives II (p.51-66), chantier "objets magiques Archives II" -
+       PRINCIPE CORRIGE PAR NONO LE 25/09/2026 : ces qualites doivent etre RECREABLES VIA
+       FABRICATION (rattachables librement a n'importe quelle arme/armure/bouclier du
+       catalogue depuis l'ecran WinFabrication), pas figees en XML sur une entree precise -
+       d'ou leur place ici (DATA_CRAFTMANSHIP) et non dans DATA_WEAPON_BONUS/DATA_ARMOR_BONUS
+       (premiere saisie du 25/09/2026, corrigee le jour meme). Seules les capacites reellement
+       magiques et propres a ces tables recoivent une entree - quand l'effet octroie deja une
+       Qualite d'arme/armure STANDARD existante (Fast, Precise, Impale...), ce n'est pas
+       redouble ici : l'Explanation indique le code standard a ajouter en plus sur l'arme/
+       armure concernee. Le tirage/fabrication aleatoire du livre (p.51-56) reste hors
+       perimetre (decision Nono), seuls les EFFETS sont saisis. Boucliers = DATA_WEAPON dans
+       le moteur (Applies=Weapon). Gromril/Ithilmar/Legendary ecartes (materiau ou instruction
+       de tirage, pas une qualite ; materiau -> InherentCraftsmanship, CONTEXT.md 2.29). -->
+<Craftsmanship id="ARCH2-WEAPB_01">
+<Description language="ENGLISH">"Touched by the Winds"</Description>
+<Explanation language="ENGLISH">"The weapon has petty enchantments cast upon it. Beyond damaging creatures that are immune to non-magical attacks (already true of any magical weapon) it has no particular ability. If the weapon is a ranged item, this ability is conferred to its ammunition."</Explanation>
+<Short language="ENGLISH">"no particular ability beyond damaging creatures immune to non-magical attacks"</Short>
+<Max>"1"</Max>
+<Applies>Weapon</Applies>
+<Modifier>""</Modifier>
+</Craftsmanship>
+<Craftsmanship id="ARCH2-WEAPB_02">
+<Description language="ENGLISH">"Wreathed in Shadow"</Description>
+<Explanation language="ENGLISH">"The blade of a melee weapon seems insubstantial and ghostly, while the same effect lingers on the string of a bow or crossbow, and is conferred to any ammunition the weapon fires. Any target hit by the weapon receives no benefit from non-magical armour."</Explanation>
+<Short language="ENGLISH">"target gets no benefit from non-magical armour"</Short>
+<Max>"1"</Max>
+<Applies>Weapon</Applies>
+<Modifier>""</Modifier>
+</Craftsmanship>
+<Craftsmanship id="ARCH2-WEAPB_03">
+<Description language="ENGLISH">"Alight with Flame"</Description>
+<Explanation language="ENGLISH">"Once drawn the weapon bursts into searing flame, but does not harm the wielder or any possessions they carry. If the wielder hits a flammable target with the weapon, the target suffers one Ablaze Condition."</Explanation>
+<Short language="ENGLISH">"flammable target hit: one Ablaze Condition"</Short>
+<Max>"1"</Max>
+<Applies>Weapon</Applies>
+<Modifier>""</Modifier>
+</Craftsmanship>
+<Craftsmanship id="ARCH2-WEAPB_04">
+<Description language="ENGLISH">"Dolorous"</Description>
+<Explanation language="ENGLISH">"Death magic permeates the weapon, filling foes with fright. The wielder counts as causing Fear (1)."</Explanation>
+<Short language="ENGLISH">"wielder causes Fear (1)"</Short>
+<Max>"1"</Max>
+<Applies>Weapon</Applies>
+<Modifier>""</Modifier>
+</Craftsmanship>
+<Craftsmanship id="ARCH2-WEAPB_05A">
+<Description language="ENGLISH">"Of Leaping Silver Wroth (Melee)"</Description>
+<Explanation language="ENGLISH">"Alloys used in constructing this weapon lend it expert balance and surprising lightness. A melee weapon of Leaping Silver has the Fast Quality - add RULES-WEAPB20 (Fast) to this weapon's Quality."</Explanation>
+<Short language="ENGLISH">"melee: add the Fast Quality (RULES-WEAPB20) on the weapon"</Short>
+<Max>"1"</Max>
+<Applies>Weapon</Applies>
+<Modifier>""</Modifier>
+</Craftsmanship>
+<Craftsmanship id="ARCH2-WEAPB_05B">
+<Description language="ENGLISH">"Of Leaping Silver Wroth (Ranged)"</Description>
+<Explanation language="ENGLISH">"A ranged weapon with this enchantment bears the silver alloy in fine filigree about it, granting a wielder +10 Initiative in combat."</Explanation>
+<Short language="ENGLISH">"ranged: wielder +10 Initiative"</Short>
+<Max>"1"</Max>
+<Applies>Weapon</Applies>
+<ModifyCarac name="RULES-ATTR_I">+10</ModifyCarac>
+<Modifier>""</Modifier>
+</Craftsmanship>
+<Craftsmanship id="ARCH2-WEAPB_06">
+<Description language="ENGLISH">"Carved of Rage"</Description>
+<Explanation language="ENGLISH">"Often created by the shamans of the Amber Order, animalistic fury and instinct fill the mind of the wielder whenever this weapon is drawn in anger. Once drawn, the wielder of this weapon becomes subject to Frenzy."</Explanation>
+<Short language="ENGLISH">"wielder subject to Frenzy once drawn"</Short>
+<Max>"1"</Max>
+<Applies>Weapon</Applies>
+<Talent>"RULES-T0063"</Talent>
+<Modifier>""</Modifier>
+</Craftsmanship>
+<Craftsmanship id="ARCH2-WEAPB_07">
+<Description language="ENGLISH">"Envigoured"</Description>
+<Explanation language="ENGLISH">"The life-giving wind of Ghyran courses through the weapon. The wielder ignores Fatigue Conditions whilst fighting with the weapon. The blade also has the Unbreakable Quality - add RULES-WEAPB19 (Unbreakable) to this weapon's Quality."</Explanation>
+<Short language="ENGLISH">"wielder ignores Fatigue while fighting with it; add the Unbreakable Quality (RULES-WEAPB19) on the weapon"</Short>
+<Max>"1"</Max>
+<Applies>Weapon</Applies>
+<Modifier>""</Modifier>
+</Craftsmanship>
+<Craftsmanship id="ARCH2-WEAPB_08">
+<Description language="ENGLISH">"Entwined with Fate"</Description>
+<Explanation language="ENGLISH">"Celestial magics have imbued the weapon with subtle prognosticative abilities. At the start of each round of combat, the weapon imbues the wielder with one Advantage."</Explanation>
+<Short language="ENGLISH">"start of each round: wielder gains one Advantage"</Short>
+<Max>"1"</Max>
+<Applies>Weapon</Applies>
+<Modifier>""</Modifier>
+</Craftsmanship>
+<Craftsmanship id="ARCH2-WEAPB_09A">
+<Description language="ENGLISH">"Of Rigor Wroth (Melee)"</Description>
+<Explanation language="ENGLISH">"Light magic makes a paragon of this weapon's wielder. The wielder of such a melee weapon benefits from the following Talents: Strike Mighty Blow, Strike to Injure, and Strike to Stun."</Explanation>
+<Short language="ENGLISH">"melee: wielder gains Strike Mighty Blow, Strike to Injure, Strike to Stun"</Short>
+<Max>"1"</Max>
+<Applies>Weapon</Applies>
+<Talent>"RULES-T0037"</Talent>
+<Talent>"RULES-T0060"</Talent>
+<Talent>"RULES-T0059"</Talent>
+<Modifier>""</Modifier>
+</Craftsmanship>
+<Craftsmanship id="ARCH2-WEAPB_09B">
+<Description language="ENGLISH">"Of Rigor Wroth (Ranged)"</Description>
+<Explanation language="ENGLISH">"Light magic makes a paragon of this weapon's wielder. The wielder of a ranged weapon gains the benefit of the following Talents: Fast Shot, Sharpshooter, and Sniper."</Explanation>
+<Short language="ENGLISH">"ranged: wielder gains Fast Shot, Sharpshooter, Sniper"</Short>
+<Max>"1"</Max>
+<Applies>Weapon</Applies>
+<Talent>"RULES-T0150"</Talent>
+<Talent>"RULES-T0152"</Talent>
+<Talent>"RULES-T0154"</Talent>
+<Modifier>""</Modifier>
+</Craftsmanship>
+<Craftsmanship id="ARCH2-WEAPB_10">
+<Description language="ENGLISH">"Of Stalwart Sorcery"</Description>
+<Explanation language="ENGLISH">"These weapons strike true as Verena. The weapon has the Precise Quality - add RULES-WEAPB14 (Precise) to this weapon's Quality."</Explanation>
+<Short language="ENGLISH">"add the Precise Quality (RULES-WEAPB14) on the weapon"</Short>
+<Max>"1"</Max>
+<Applies>Weapon</Applies>
+<Modifier>""</Modifier>
+</Craftsmanship>
+<Craftsmanship id="ARCH2-WEAPB_11">
+<Description language="ENGLISH">"Bewildering"</Description>
+<Explanation language="ENGLISH">"Powerful enchantments of bemusement and misdirection are woven into the weapon. Anyone wounded by the weapon gains the Surprised Condition."</Explanation>
+<Short language="ENGLISH">"wounded target gains the Surprised Condition"</Short>
+<Max>"1"</Max>
+<Applies>Weapon</Applies>
+<Modifier>""</Modifier>
+</Craftsmanship>
+<Craftsmanship id="ARCH2-WEAPB_12">
+<Description language="ENGLISH">"Of Bold Brass"</Description>
+<Explanation language="ENGLISH">"This weapon's bearer is filled with a sense of vim, is immune to the effects of Fear, and enjoys a +2 SL bonus to resist Terror."</Explanation>
+<Short language="ENGLISH">"bearer immune to Fear, +2 SL to resist Terror"</Short>
+<Max>"1"</Max>
+<Applies>Weapon</Applies>
+<Modifier>""</Modifier>
+</Craftsmanship>
+<Craftsmanship id="ARCH2-WEAPB_13">
+<Description language="ENGLISH">"Of the Wolf's Wide Jaws"</Description>
+<Explanation language="ENGLISH">"The most favoured Ulrican warriors wield these weapons with wolf's head pommels and other lupine motifs. The weapon has the Damaging Quality - add RULES-WEAPB10 (Damaging) to this weapon's Quality."</Explanation>
+<Short language="ENGLISH">"add the Damaging Quality (RULES-WEAPB10) on the weapon"</Short>
+<Max>"1"</Max>
+<Applies>Weapon</Applies>
+<Modifier>""</Modifier>
+</Craftsmanship>
+<Craftsmanship id="ARCH2-WEAPB_14A">
+<Description language="ENGLISH">"Of Deft and Cunning (Melee)"</Description>
+<Explanation language="ENGLISH">"Often created with the aid of Myrmidian experts, these deft weapons handle with exquisite precision. The wielder of a melee weapon benefits from +20 WS."</Explanation>
+<Short language="ENGLISH">"melee: wielder +20 WS"</Short>
+<Max>"1"</Max>
+<Applies>Weapon</Applies>
+<ModifyCarac name="RULES-ATTR_WS">+20</ModifyCarac>
+<Modifier>""</Modifier>
+</Craftsmanship>
+<Craftsmanship id="ARCH2-WEAPB_14B">
+<Description language="ENGLISH">"Of Deft and Cunning (Ranged)"</Description>
+<Explanation language="ENGLISH">"Often created with the aid of Myrmidian experts, these deft weapons handle with exquisite precision. The wielder of a ranged weapon benefits from +20 BS."</Explanation>
+<Short language="ENGLISH">"ranged: wielder +20 BS"</Short>
+<Max>"1"</Max>
+<Applies>Weapon</Applies>
+<ModifyCarac name="RULES-ATTR_BS">+20</ModifyCarac>
+<Modifier>""</Modifier>
+</Craftsmanship>
+<Craftsmanship id="ARCH2-WEAPB_15">
+<Description language="ENGLISH">"Of Salt and Brine"</Description>
+<Explanation language="ENGLISH">"The priests of Manann lend their knowledge to artificers seeking to create weapons that guard against unexpected raiders. The bearer of this weapon may make a free Action in the first Round of any combat. The weapon also has the Fast Quality - add RULES-WEAPB20 (Fast) to this weapon's Quality."</Explanation>
+<Short language="ENGLISH">"bearer: free Action in the first Round of combat; add the Fast Quality (RULES-WEAPB20) on the weapon"</Short>
+<Max>"1"</Max>
+<Applies>Weapon</Applies>
+<Modifier>""</Modifier>
+</Craftsmanship>
+<Craftsmanship id="ARCH2-WEAPB_16">
+<Description language="ENGLISH">"Of Grisly Wounds"</Description>
+<Explanation language="ENGLISH">"Deathly enchantments ensure that wounds caused by this weapon are severe. The weapon has the Damaging Quality - add RULES-WEAPB10 (Damaging) to this weapon's Quality."</Explanation>
+<Short language="ENGLISH">"add the Damaging Quality (RULES-WEAPB10) on the weapon"</Short>
+<Max>"1"</Max>
+<Applies>Weapon</Applies>
+<Modifier>""</Modifier>
+</Craftsmanship>
+<Craftsmanship id="ARCH2-WEAPB_17">
+<Description language="ENGLISH">"Of Tooth and Claw"</Description>
+<Explanation language="ENGLISH">"Creatures with the Bestial Creature Trait recognise something of themselves in this weapon. They must pass a Difficult (-10) Willpower Test before attacking the wielder."</Explanation>
+<Short language="ENGLISH">"Bestial creatures: Difficult (-10) Willpower Test before attacking the wielder"</Short>
+<Max>"1"</Max>
+<Applies>Weapon</Applies>
+<Modifier>""</Modifier>
+</Craftsmanship>
+<Craftsmanship id="ARCH2-WEAPB_18">
+<Description language="ENGLISH">"Of Deepest Banishing"</Description>
+<Explanation language="ENGLISH">"The energies given off by this weapon are anathema to Daemons and Ethereal Undead. The wielder always counts as having three additional points of Advantage when determining effects of the Unstable Trait."</Explanation>
+<Short language="ENGLISH">"vs Daemons/Ethereal Undead: wielder +3 Advantage for the Unstable Trait"</Short>
+<Max>"1"</Max>
+<Applies>Weapon</Applies>
+<Modifier>""</Modifier>
+</Craftsmanship>
+<Craftsmanship id="ARCH2-WEAPB_19">
+<Description language="ENGLISH">"Of Undue Substance"</Description>
+<Explanation language="ENGLISH">"A master of Chamon has imbued this weapon with strange properties of density and mass. The weapon has the Pummel and Hack Qualities - add RULES-WEAPB04 (Pummel) and RULES-WEAPB30 (Hack) to this weapon's Quality."</Explanation>
+<Short language="ENGLISH">"add the Pummel (RULES-WEAPB04) and Hack (RULES-WEAPB30) Qualities on the weapon"</Short>
+<Max>"1"</Max>
+<Applies>Weapon</Applies>
+<Modifier>""</Modifier>
+</Craftsmanship>
+<Craftsmanship id="ARCH2-WEAPB_20">
+<Description language="ENGLISH">"Of Languishing Death"</Description>
+<Explanation language="ENGLISH">"Morr calls earnestly to those wounded by this weapon. All Wounds the weapon inflicts are Festering Wounds."</Explanation>
+<Short language="ENGLISH">"all Wounds inflicted are Festering Wounds"</Short>
+<Max>"1"</Max>
+<Applies>Weapon</Applies>
+<Modifier>""</Modifier>
+</Craftsmanship>
+<Craftsmanship id="ARCH2-WEAPB_21">
+<Description language="ENGLISH">"Of Keenest Edge"</Description>
+<Explanation language="ENGLISH">"The tip and edges of this weapon are kept magically keen, or any ammunition it fires becomes so. The weapon has the following Qualities: Hack, Impale, and Penetrating - add RULES-WEAPB30 (Hack), RULES-WEAPB12 (Impale) and RULES-WEAPB22 (Penetrating) to this weapon's Quality."</Explanation>
+<Short language="ENGLISH">"add the Hack (RULES-WEAPB30), Impale (RULES-WEAPB12) and Penetrating (RULES-WEAPB22) Qualities on the weapon"</Short>
+<Max>"1"</Max>
+<Applies>Weapon</Applies>
+<Modifier>""</Modifier>
+</Craftsmanship>
+<Craftsmanship id="ARCH2-WEAPB_22">
+<Description language="ENGLISH">"Of Bane"</Description>
+<Explanation language="ENGLISH">"The weapon was made with enchantments that increase its deadliness to a given enemy. If it deals damage to a particular type of creature (chosen at creation, GM's discretion), it inflicts twice the number of Wounds."</Explanation>
+<Short language="ENGLISH">"vs chosen creature type: double Wounds inflicted"</Short>
+<Max>"1"</Max>
+<Applies>Weapon</Applies>
+<Modifier>""</Modifier>
+</Craftsmanship>
+<Craftsmanship id="ARCH2-WEAPB_23">
+<Description language="ENGLISH">"Of Ceaseless Cleaving"</Description>
+<Explanation language="ENGLISH">"Powerful enchantments guide the weapon easily through flesh and bone. If a hit from the weapon deals Damage, it inflicts an additional two Wounds."</Explanation>
+<Short language="ENGLISH">"hit dealing Damage: +2 additional Wounds"</Short>
+<Max>"1"</Max>
+<Applies>Weapon</Applies>
+<Modifier>""</Modifier>
+</Craftsmanship>
+<Craftsmanship id="ARCH2-WEAPB_24">
+<Description language="ENGLISH">"Of Leaping Gold"</Description>
+<Explanation language="ENGLISH">"This stunning weapon handles like a feather, but lands like a block of lead. The weapon has the following Qualities: Fast, Penetrating, and Precise - add RULES-WEAPB20 (Fast), RULES-WEAPB22 (Penetrating) and RULES-WEAPB14 (Precise) to this weapon's Quality."</Explanation>
+<Short language="ENGLISH">"add the Fast (RULES-WEAPB20), Penetrating (RULES-WEAPB22) and Precise (RULES-WEAPB14) Qualities on the weapon"</Short>
+<Max>"1"</Max>
+<Applies>Weapon</Applies>
+<Modifier>""</Modifier>
+</Craftsmanship>
+<Craftsmanship id="ARCH2-WEAPB_25">
+<Description language="ENGLISH">"Of Grievous Injury"</Description>
+<Explanation language="ENGLISH">"The injuries inflicted by this weapon are cruel and severe. Whenever the wielder rolls on the Critical Injuries Chart they can reverse the numbers of the roll and apply whichever is the most damaging result."</Explanation>
+<Short language="ENGLISH">"Critical Injuries roll: wielder may reverse the digits, keep the worst result"</Short>
+<Max>"1"</Max>
+<Applies>Weapon</Applies>
+<Modifier>""</Modifier>
+</Craftsmanship>
+<Craftsmanship id="ARCH2-WEAPB_26">
+<Description language="ENGLISH">"Of Form Mercurial"</Description>
+<Explanation language="ENGLISH">"A master of Chamon has created this weapon, allowing it to morph according to the wielder's movements. Each round the wielder may choose from the following Qualities: Fast, Hack, Impale, Penetrating, and Precise."</Explanation>
+<Short language="ENGLISH">"each round: wielder chooses one of Fast/Hack/Impale/Penetrating/Precise"</Short>
+<Max>"1"</Max>
+<Applies>Weapon</Applies>
+<Modifier>""</Modifier>
+</Craftsmanship>
+<Craftsmanship id="ARCH2-WEAPB_27">
+<Description language="ENGLISH">"Hoarfrost Blade"</Description>
+<Explanation language="ENGLISH">"These rare and powerful weapons are sometimes created through painstaking rites undergone by the Ice Witches of Kislev. So much as a nick from one of these blades can prove fatal. If a hit from the weapon deals Damage, it inflicts double the number of Wounds, plus four additional Wounds. There is no way to create ranged weapons that imbue their ammunition with this quality (a roll of 1d10 pieces of ammunition instead, GM's discretion)."</Explanation>
+<Short language="ENGLISH">"hit dealing Damage: double Wounds inflicted, plus four additional Wounds"</Short>
+<Max>"1"</Max>
+<Applies>Weapon</Applies>
+<Modifier>""</Modifier>
+</Craftsmanship>
+<Craftsmanship id="ARCH2-WEAPB_28">
+<Description language="ENGLISH">"Magical Shield"</Description>
+<Explanation language="ENGLISH">"The shield is magical, but has no further ability beyond the universal magical shield benefit (protects against attacks that ignore non-magical armour)."</Explanation>
+<Short language="ENGLISH">"no further ability beyond protecting against attacks that ignore non-magical armour"</Short>
+<Max>"1"</Max>
+<Applies>Weapon</Applies>
+<Modifier>""</Modifier>
+</Craftsmanship>
+<Craftsmanship id="ARCH2-WEAPB_29">
+<Description language="ENGLISH">"Shield of Ptolos"</Description>
+<Explanation language="ENGLISH">"Enchantments on the shield misdirect projectiles. Shields of Ptolos provide +2 to the Shield Quality when defending against a missile weapon."</Explanation>
+<Short language="ENGLISH">"+2 to the Shield Quality when defending against a missile weapon"</Short>
+<Max>"1"</Max>
+<Applies>Weapon</Applies>
+<Modifier>""</Modifier>
+</Craftsmanship>
+<Craftsmanship id="ARCH2-WEAPB_30">
+<Description language="ENGLISH">"Spell Shield"</Description>
+<Explanation language="ENGLISH">"These shields are enchanted to deflect magic missiles. The bearer may make an attempt to dispel any magic missile spell that targets them. The user has a Language (Magick) Skill of 30 for the purposes of the dispel Test."</Explanation>
+<Short language="ENGLISH">"bearer may dispel a magic missile spell targeting them, Language (Magick) 30"</Short>
+<Max>"1"</Max>
+<Applies>Weapon</Applies>
+<Modifier>""</Modifier>
+</Craftsmanship>
+<Craftsmanship id="ARCH2-WEAPB_31">
+<Description language="ENGLISH">"Charmed Shield"</Description>
+<Explanation language="ENGLISH">"Enchantments imbue this shield with an enhanced ability to deflect incoming attacks. The Defensive Quality of a Charmed Shield is enhanced so that the bearer benefits from +3 SL to Melee Tests they make when opposing incoming attacks."</Explanation>
+<Short language="ENGLISH">"bearer +3 SL to Melee Tests opposing incoming attacks"</Short>
+<Max>"1"</Max>
+<Applies>Weapon</Applies>
+<Modifier>""</Modifier>
+</Craftsmanship>
+<Craftsmanship id="ARCH2-ARMOB_01">
 <Description language="ENGLISH">"Magical Armour"</Description>
 <Explanation language="ENGLISH">"The armour is enchanted, but has no unusual ability beyond the universal magical armour benefits (resistant to the first damage each day, protects against attacks that ignore non-magical armour)."</Explanation>
 <Short language="ENGLISH">"no unusual ability beyond the universal magical armour benefits"</Short>
-<Modifier>"+"</Modifier>
-</BonusMalus>
-<BonusMalus id="ARCH2-ARMOB_02">
+<Max>"1"</Max>
+<Applies>Armour</Applies>
+<Modifier>""</Modifier>
+</Craftsmanship>
+<Craftsmanship id="ARCH2-ARMOB_02">
 <Description language="ENGLISH">"Alleviating Armour"</Description>
 <Explanation language="ENGLISH">"This armour is suffused with healing energies. Whenever the wearer suffers a Critical Wound, the attacker must roll twice on the appropriate Critical Wounds table and apply the lower result."</Explanation>
 <Short language="ENGLISH">"wearer suffers a Critical Wound: attacker rolls twice, applies the lower result"</Short>
-<Modifier>"+"</Modifier>
-</BonusMalus>
-<BonusMalus id="ARCH2-ARMOB_03">
+<Max>"1"</Max>
+<Applies>Armour</Applies>
+<Modifier>""</Modifier>
+</Craftsmanship>
+<Craftsmanship id="ARCH2-ARMOB_03">
 <Description language="ENGLISH">"Seamless Armour"</Description>
 <Explanation language="ENGLISH">"Such is the skill of this armour's forging that even slender blades cannot find a weakpoint. If the armour is mail, it gains the Impenetrable Quality - add RULES-ARMOB_02 (Impenetrable) to this armour's Quality. If it is plate, it loses the Weakpoints Flaw - remove RULES-ARMOB_04 (Weakpoints) if present. Full suit required."</Explanation>
 <Short language="ENGLISH">"mail: add the Impenetrable Quality (RULES-ARMOB_02); plate: remove the Weakpoints Flaw (RULES-ARMOB_04) - full suit required"</Short>
-<Modifier>"+"</Modifier>
-</BonusMalus>
-<BonusMalus id="ARCH2-ARMOB_04">
+<Max>"1"</Max>
+<Applies>Armour</Applies>
+<Modifier>""</Modifier>
+</Craftsmanship>
+<Craftsmanship id="ARCH2-ARMOB_04">
 <Description language="ENGLISH">"Dragon Scale Armour"</Description>
 <Explanation language="ENGLISH">"This armour was made in part from the scales of dragons, and it is remarkable in its ability to withstand heat. If an attack that deals Damage through flames or heat hits an area protected by this armour, reduce the Damage of that attack by 2. If an attack that would inflict the Ablaze Condition hits an area protected by this armour, the wearer ignores the Condition."</Explanation>
 <Short language="ENGLISH">"fire/heat Damage to a protected area: -2 Damage; ignores the Ablaze Condition on a protected hit"</Short>
-<Modifier>"+"</Modifier>
-</BonusMalus>
-<BonusMalus id="ARCH2-ARMOB_05">
+<Max>"1"</Max>
+<Applies>Armour</Applies>
+<Modifier>""</Modifier>
+</Craftsmanship>
+<Craftsmanship id="ARCH2-ARMOB_05">
 <Description language="ENGLISH">"Armour of Glittering Silver"</Description>
 <Explanation language="ENGLISH">"Such is the bright lustre of this armour that it can dazzle enemies. If fighting in sunlight (or near another source of strong light), opponents in melee with the wearer must pass an Average (+20) Agility Test at the start of each Round or suffer one Blinded Condition. Full suit required."</Explanation>
 <Short language="ENGLISH">"in strong light: melee opponents fail Average (+20) Agility Test -> one Blinded Condition - full suit required"</Short>
-<Modifier>"+"</Modifier>
-</BonusMalus>
-<BonusMalus id="ARCH2-ARMOB_06">
+<Max>"1"</Max>
+<Applies>Armour</Applies>
+<Modifier>""</Modifier>
+</Craftsmanship>
+<Craftsmanship id="ARCH2-ARMOB_06">
 <Description language="ENGLISH">"Trickster's Armour"</Description>
 <Explanation language="ENGLISH">"It is said that the artificers of this armour consulted with followers of Ranald to imbue the armour with protective wards. If an attack hits an area protected by this armour, roll 1d10. On a roll of a 10, the wearer ignores the hit."</Explanation>
 <Short language="ENGLISH">"protected hit: roll 1d10, on a 10 the wearer ignores the hit"</Short>
-<Modifier>"+"</Modifier>
-</BonusMalus>
-<BonusMalus id="ARCH2-ARMOB_07">
+<Max>"1"</Max>
+<Applies>Armour</Applies>
+<Modifier>""</Modifier>
+</Craftsmanship>
+<Craftsmanship id="ARCH2-ARMOB_07">
 <Description language="ENGLISH">"Armour of Resilience"</Description>
 <Explanation language="ENGLISH">"Powerful enchantments known to practitioners of Chamon ensure that the living flesh of the wearer is as strong as steel. The wearer benefits from +5 Toughness. Full suit required."</Explanation>
 <Short language="ENGLISH">"wearer +5 Toughness - full suit required"</Short>
-<Modifier>"+"</Modifier>
+<Max>"1"</Max>
+<Applies>Armour</Applies>
 <ModifyCarac name="RULES-ATTR_T">+5</ModifyCarac>
-</BonusMalus>
-<BonusMalus id="ARCH2-ARMOB_08">
+<Modifier>""</Modifier>
+</Craftsmanship>
+<Craftsmanship id="ARCH2-ARMOB_08">
 <Description language="ENGLISH">"Armour of Fortune"</Description>
 <Explanation language="ENGLISH">"The Armour of Fortune does not so much protect the wearer directly but misdirects blows that would otherwise land. If an attack hits an area protected by this armour, roll 1d10. On a roll of a 9 or 10, the wearer ignores the hit."</Explanation>
 <Short language="ENGLISH">"protected hit: roll 1d10, on a 9 or 10 the wearer ignores the hit"</Short>
-<Modifier>"+"</Modifier>
-</BonusMalus>
-</DATA_ARMOR_BONUS>
+<Max>"1"</Max>
+<Applies>Armour</Applies>
+<Modifier>""</Modifier>
+</Craftsmanship>
+</DATA_CRAFTMANSHIP>
 <DATA_SPELL>
 <Sort id="ARCH2-COLOR_277">
 <Description language="ENGLISH">"Bonecrusher"</Description>
