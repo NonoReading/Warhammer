@@ -62,6 +62,10 @@ function FabricationDuCatalogue(CodeEquipement, TypeEquipement: String): String;
 // Theme d'une fabrication ("RUNE", "QUALITY", "DEFECT"...), deduit du code (LIVRE-THEME_suffixe),
 // pour regrouper l'ecran de choix (WinFabrication) sans champ XML supplementaire. 25/09/2026.
 function FabricationTheme(CodeFabrication: String): String;
+// Libelle traduit (RULES-LAB_290 a 294) du theme d'une fabrication, pour l'affichage dans
+// WinFabrication (colonne Theme, menu CombTheme). FabricationTheme() reste la cle brute utilisee
+// pour le tri. 25/09/2026.
+function FabricationThemeLibelle(CodeFabrication: String): String;
 
 implementation
 
@@ -76,6 +80,19 @@ begin
     Result := Copy(Reste, 1, PosSep - 1)
   else
     Result := Reste;
+end;
+
+function FabricationThemeLibelle(CodeFabrication: String): String;
+begin
+  case FabricationTheme(CodeFabrication) of
+    'ARMOB':   Result := GetTexteLibelle('RULES-LAB_290');
+    'DEFECT':  Result := GetTexteLibelle('RULES-LAB_291');
+    'QUALITY': Result := GetTexteLibelle('RULES-LAB_292');
+    'RUNE':    Result := GetTexteLibelle('RULES-LAB_293');
+    'WEAPB':   Result := GetTexteLibelle('RULES-LAB_294');
+  else
+    Result := FabricationTheme(CodeFabrication);
+  end;
 end;
 
 function ChercheFabrication(CodeFabrication :String): StructureFabrication;

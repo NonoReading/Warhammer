@@ -1,3 +1,12 @@
+25/09/2026 - WINFABRICATION : THEME TRADUIT EN FRANCAIS, TESTE ET VALIDE PAR NONO.
+La colonne Theme et le menu deroulant CombTheme de WinFabrication (ajoutes le meme jour, voir
+entree ci-dessous) affichaient le code brut du theme (ARMOB/DEFECT/QUALITY/RUNE/WEAPB) au lieu
+d'un libelle traduit. Nouvelle fonction FabricationThemeLibelle (chargefabrication.pas), qui
+mappe ces 5 codes (seuls themes existants a ce jour) vers RULES-LAB_290 a 294 (nouvelles entrees
+INTERFACE.Xml/INTERFACE_FRANCAIS.Xml). winfabrication.pas utilise ce libelle pour l'affichage ;
+le tri interne garde le code brut. Compile (lazbuild --build-all, 0 erreur), teste et valide par
+Nono a l'ecran. Un theme non prevu retombe sur le code brut (a completer quand il apparaitra).
+
 25/09/2026 - OBJETS MAGIQUES ARCHIVES II REBASCULES SUR FABRICATION, TESTE ET VALIDE PAR NONO.
 Erreur signalee par Nono le jour meme sur la premiere saisie (chantier ci-dessous, "OBJETS
 MAGIQUES ARCHIVES II" du 25/09) : les qualites magiques d'arme/armure/bouclier avaient ete

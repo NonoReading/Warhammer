@@ -360,6 +360,11 @@
 <Text name="RULES-LAB_287">"Autre équipement"</Text>
 <Text name="RULES-LAB_288">"Outils de voleur"</Text>
 <Text name="RULES-LAB_289">"Thème"</Text>
+<Text name="RULES-LAB_290">"Bonus d'armure"</Text>
+<Text name="RULES-LAB_291">"Défaut"</Text>
+<Text name="RULES-LAB_292">"Qualité"</Text>
+<Text name="RULES-LAB_293">"Rune"</Text>
+<Text name="RULES-LAB_294">"Bonus d'arme"</Text>
 </Label>
 </DATA_LABEL>
 </DATA_BOOK>

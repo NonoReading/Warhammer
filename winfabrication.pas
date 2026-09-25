@@ -107,7 +107,7 @@ procedure TWinFabrications.FormCreate(Sender: TObject);
          TabFabrication.Cells[4, IndTab] := PFabrication.Maximum;
          TabFabrication.Cells[5, IndTab] := PFabrication.TypeQualite;
          TabFabrication.Cells[6, IndTab] := PFabrication.Resume;
-         TabFabrication.Cells[7, IndTab] := FabricationTheme(PFabrication.CodeFabrication);
+         TabFabrication.Cells[7, IndTab] := FabricationThemeLibelle(PFabrication.CodeFabrication);
        end;
      finally
        Tri.Free;
