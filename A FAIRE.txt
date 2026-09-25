@@ -838,24 +838,19 @@ TROIS POINTS TRANCHES - NE PLUS LES RESSORTIR EN ANOMALIE :
 =========================================================================
 ARBITRAGES OUVERTS
 =========================================================================
-1. FAMILLE RULES-T0088_* : les livres hesitent entre Beasts/Beast, Shadows/Shadow,
-   Witchery/Witchcraft. A trancher pour toute la famille. (Demonology -> Daemonology, lui, est
-   fait le 26/08.)
-
-2. [TRANCHE 29/08 - RIEN A FAIRE] "Arcane Magic (X)" contre "Arcane Lore (X)". La note etait
-   mal posee : ce ne sont pas deux noms du meme talent. Le Rulebook emploie les deux termes
-   pour des choses DIFFERENTES - "Arcane Magic (X)" est le nom du TALENT, "Arcane Lore" designe
-   le DOMAINE de magie, et il ecrit meme "Arcane Magic (Any Arcane Lore)" a la carriere Wizard.
-   Les 17 libelles RULES-T0088_* de la base disent deja tous "Arcane Magic (X)" : conforme.
-   Winds of Magic et Enemy in Shadows sont les divergents, pas la base.
-   Reste cote francais, voir section GELE - LE FRANCAIS plus bas.
-
-3. TIN WHISTLE / PENNYWHISTLE (Sea of Claws). Le choix du Chantyman pointe aujourd'hui sur
-   RULES-COMPMUSIC_PENNYW pour son troisieme instrument, plutot que de creer une specialisation
-   "Tin Whistle" : c'est le meme instrument sous deux noms, et Sea of Claws emploie les deux
-   (Pennywhistle au Sailor p.72, Tin Whistle au Chantyman p.66 ; Archives III ecrit aussi
-   "Play (Tin Whistle)"). Creer les deux referait un doublon d'identifiant. A confirmer ou a
-   changer - c'est une ligne.
+[TRANCHE 25/09/2026 - RIEN A FAIRE, NE PLUS LES RESSORTIR EN ANOMALIE]
+1. FAMILLE RULES-T0088_* (Beasts/Beast, Shadows/Shadow, Witchery/Witchcraft) : verifie, les
+   21 libelles <Description> de la famille (tous livres confondus) emploient deja tous la forme
+   singuliere de la base (Beast, Shadow, Witchcraft...), conforme au Rulebook. Seules les
+   <Explanation> (transcription fidele du texte des livres) portent encore les formes plurielles
+   du texte original - normal, ce n'est pas notre libelle a corriger.
+2. "Arcane Magic (X)" contre "Arcane Lore (X)" : deja tranche le 29/08, rien a faire (note mal
+   posee, ce sont deux noms de choses differentes). Reste cote francais, voir GELE - LE FRANCAIS.
+3. TIN WHISTLE / PENNYWHISTLE (Sea of Claws) confirme : on garde RULES-COMPMUSIC_PENNYW pour
+   le troisieme instrument du Chantyman, pas de specialisation separee.
+5. CUMUL D'UNE REGLE PARTIELLE AVEC LA TABLE DE BASE : rien a bloquer aujourd'hui (une seule
+   regle partielle existe, le mecanisme distingue deja partiel/complet) - a preciser seulement
+   si une deuxieme regle partielle apparait un jour.
 
 4. NAGGAROTH - LA CARRIERE DE BETE, classee HORS PERIMETRE le 26/08 mais reouvrable : le livre
    donne quatre niveaux (Trainee, Beast, Trained Beast, Veteran Beast) sous le titre "Henchman
@@ -878,11 +873,6 @@ ARBITRAGES OUVERTS
    par sort - le tarif est porte par le TALENT depuis le 02/09. Conception a mener avant toute
    saisie ; deux points a trancher : ou vit la valeur, et comment le sort sort du comptage.
    Le tarif reduit conditionnel de Cursecraft n est pas modelisable en l etat.
-
-5. CUMUL D'UNE REGLE PARTIELLE AVEC LA TABLE DE BASE. Le Seafarer est la seule regle partielle
-   aujourd'hui, et une seule regle s'applique a la fois, donc rien ne bloque. Le mecanisme
-   distingue deja partiel et complet, deduit de la couverture (ChargeTabMetier) : on pourra dire
-   plus tard qu'une regle complete remplace et qu'une partielle se cumule, sans rien casser.
 
 
 =========================================================================

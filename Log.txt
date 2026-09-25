@@ -1,3 +1,14 @@
+25/09/2026 - ARBITRAGES OUVERTS DE A FAIRE.txt, QUATRE TRANCHES PAR NONO.
+Famille RULES-T0088_* (Beasts/Beast, Shadows/Shadow, Witchery/Witchcraft) : verifie, les 21
+libelles <Description> de tous les livres emploient deja la forme singuliere de la base -
+seules les <Explanation> (transcription fidele du texte original) gardent le pluriel du livre,
+normal, rien a corriger. Tin Whistle/Pennywhistle (Sea of Claws) : confirme, on garde
+RULES-COMPMUSIC_PENNYW sans specialisation separee. Cumul d'une regle partielle avec la table
+de base : confirme, rien a faire tant qu'une seule regle partielle existe. Naggaroth (carriere
+de Bete/systeme Henchman) et cout d'apprentissage des rituels de Winds of Magic : laisses
+ouverts, chantiers de conception a part entiere, pas commences. Aucun fichier de donnees/code
+touche, uniquement du tri dans A FAIRE.txt.
+
 25/09/2026 - NETTOYAGE DES CORRECTIONS COURTES DE A FAIRE.txt, COMPILE ET TESTE PAR NONO.
 Cinq points repris, deux deja resolus entre-temps (verifies avant de coder, rien a faire de plus) :
 placeholders LAB_xxx de wincreation.pas/winlancede.pas introuvables (code deja nettoye depuis le
